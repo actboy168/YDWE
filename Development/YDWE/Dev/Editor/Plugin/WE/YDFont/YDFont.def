@@ -1,0 +1,3 @@
+LIBRARY "YDFont"
+EXPORTS
+	PluginName

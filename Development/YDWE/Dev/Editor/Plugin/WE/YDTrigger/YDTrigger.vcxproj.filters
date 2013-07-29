@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{B9427600-BDD0-11E1-9F27-29C4C3850877}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{B9460790-BDD0-11E1-8140-C577E5BB2695}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{B9460C90-BDD0-11E1-AC76-D5F2066D06AF}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Storm">
+      <UniqueIdentifier>{82dc53e4-0145-4172-a42b-7b2bc6cf0c51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HashTable">
+      <UniqueIdentifier>{25e3dc12-6189-499c-8e10-5d6e04f0ba3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{6348ed94-a21c-470e-be80-b8c87102863e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConvertString">
+      <UniqueIdentifier>{1076fe86-466a-4e7c-ba82-7a5b7e3c18a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Detours">
+      <UniqueIdentifier>{2faddd93-b08f-418d-8b92-fb15d5a55acc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DllMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CC_Main_Hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeGUIType_Hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvertTriggerName_Hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateYDTriggerImportFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetGlobalVarName_Hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetGUI_Hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SetGUIId_Hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowError.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerParameterDialog_FuncList_Hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerParameterDialog_Type_Hook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Storm\StringHash.cpp">
+      <Filter>Storm</Filter>
+    </ClCompile>
+    <ClCompile Include="Hashtable\GUIID_Table.cpp">
+      <Filter>HashTable</Filter>
+    </ClCompile>
+    <ClCompile Include="Hashtable\Hashtable.cpp">
+      <Filter>HashTable</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_CountBlock.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutActionEx_Hook.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutBlock_Action.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutBlock_Condition.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutBlock_Event.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutBlock_TimerParameters.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutConditionEx.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutEventRegisterEx.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutExternFuncEx.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutLocal.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutTrigger_Hook.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutVar_Code.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutVar_Other_Hook.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_Put_endglobalsHook.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_Put_globalsHook.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_Put_TriggerLocalVar.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_SP_UserData.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_VarType.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GetVarType.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\SaveLoadCheck.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvertString\ConvertString.cpp">
+      <Filter>ConvertString</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvertString\gb2py.cpp">
+      <Filter>ConvertString</Filter>
+    </ClCompile>
+    <ClCompile Include="Detours\detoured.cpp">
+      <Filter>Detours</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="YDTrigger.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Storm\StormAdapter.h">
+      <Filter>Storm</Filter>
+    </ClInclude>
+    <ClInclude Include="Hashtable\GUIID_Table.h">
+      <Filter>HashTable</Filter>
+    </ClInclude>
+    <ClInclude Include="Hashtable\Hashtable.h">
+      <Filter>HashTable</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CC_GUIID.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CC_Include.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CC_Put.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CC_Put_TriggerLocalVar.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CC_SP_UserData.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\CC_VarType.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvertString\ConvertString.h">
+      <Filter>ConvertString</Filter>
+    </ClInclude>
+    <ClInclude Include="Detours\detoured.h">
+      <Filter>Detours</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="YDTrigger.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

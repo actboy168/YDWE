@@ -1,0 +1,4 @@
+LIBRARY "yd_jass_api"
+EXPORTS
+	PluginName
+	Initialize

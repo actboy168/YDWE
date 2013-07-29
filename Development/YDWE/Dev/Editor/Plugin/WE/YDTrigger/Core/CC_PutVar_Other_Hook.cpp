@@ -1,0 +1,61 @@
+#include "CC_Include.h"
+
+extern int g_mother_id;
+extern BOOL g_bYDWEEnumUnitsInRangeMultipleFlag;
+
+void _fastcall 
+CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD index, DWORD type)
+{
+  char buff[260];
+  char NewName[260];
+  DWORD nItemClass = *(DWORD*)(This+0x178);
+
+  if ((0 != nItemClass) && (2 == *(DWORD*)(This+0x08)))
+  {
+    switch (*(DWORD*)(nItemClass+0x138))
+    {
+    case CC_GUIID_GetEnumUnit:
+        if (g_bYDWEEnumUnitsInRangeMultipleFlag)
+        {
+            PUT_CONST(STRING_YDWE_LOCAL"unit", 0);
+        }
+        else
+        {
+            PUT_CONST("GetEnumUnit()", 0);
+        }
+        return;
+    case CC_GUIID_YDWECustomScriptCode:
+      BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index+1);
+      CC_PutVar(nItemClass, EDX, OutClass, NewName, 0, type, 1);
+      return;
+    case CC_GUIID_YDWEGetAnyTypeLocalVariable:
+      if (g_mother_id == CC_GUIID_YDWETimerStartMultiple)
+      {
+        CC_Put_GetTimerParameters(nItemClass, OutClass, (char*)(This+0x0C), "GetExpiredTimer()");
+      }
+	  else if (g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
+	  {
+		  CC_Put_GetTimerParameters(nItemClass, OutClass, (char*)(This+0x0C), "GetTriggeringTrigger()");
+	  }
+      else
+      {
+        CC_Put_TriggerLocalVar_Get(nItemClass, OutClass, (char*)(This+0x0C));
+      }
+      return;
+    case CC_GUIID_YDWELoadAnyTypeDataByUserData:
+      CC_Put_YDWELoadAnyTypeDataByUserData(nItemClass, OutClass, name, (char*)(This+0x0C));
+      return;
+    case CC_GUIID_YDWEHaveSavedAnyTypeDataByUserData:
+      CC_Put_YDWEHaveSavedAnyTypeDataByUserData(nItemClass, OutClass, name);
+      return;
+    case CC_GUIID_YDWEForLoopLocVarIndex:
+      ConvertString((char*)&GetGUIVar_Value(nItemClass, 0), NewName, 260);
+      BLZSStrPrintf(buff, 260, STRING_YDWE_LOCAL"%s", NewName);
+      PUT_CONST(buff, 0);
+      return;
+    default:
+      break;      
+    }
+  }
+  CC_PutVar_Other(This, EDX, OutClass, name, index, type);
+}

@@ -1,0 +1,10 @@
+LIBRARY "YDJAPIFramework"
+EXPORTS
+	InitJAPIFramework
+	RegisterJAPICallback
+	RegisterJAPINative
+	GetStringFromNativeParameter
+	MapStringToInternalObject
+	JAPILog
+	InstallInlineHook
+	UninstallInlineHook

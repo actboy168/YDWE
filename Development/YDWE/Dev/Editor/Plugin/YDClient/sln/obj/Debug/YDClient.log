@@ -1,0 +1,31 @@
+﻿生成启动时间为 2011-12-13 13:36:38。
+     1>项目“D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\YDClient.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\YDClient.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         所有输出均为最新。
+         所有输出均为最新。
+         D:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\..\..\..\..\..\..\OpenSource\Boost\Current" /I"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\..\..\..\..\..\..\OpenSource\DLib\Current" /I"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\..\..\..\..\..\..\OpenSource\StlSoft\Current\include" /I"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\..\..\..\..\..\..\OpenSource\CImg\Current" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D YDCLIENT_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\YDClient.pch" /Fo"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\\" /Fd"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\dllmain.cpp
+         dllmain.cpp
+       ManifestResourceCompile:
+         所有输出均为最新。
+       Link:
+         D:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\output\Debug\YDClient.dll" /INCREMENTAL /NOLOGO /LIBPATH:"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\..\..\..\..\..\..\OpenSource\Boost\Current\stage\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\YDClient.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\output\Debug\YDClient.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\output\Debug\YDClient.lib" /MACHINE:X86 /DLL "D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\YDClient.dll.embed.manifest.res"
+         "D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\CSocket.obj"
+         "D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\dllmain.obj"
+         "D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\stdafx.obj"
+         "D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\YDClient.obj"
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\YDClient.dll.embed.manifest" /manifest "D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\YDClient.dll.intermediate.manifest"
+         所有输出均为最新。
+       LinkEmbedManifest:
+         所有输出均为最新。
+         YDClient.vcxproj -> D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\output\Debug\YDClient.dll
+       FinalizeBuildStatus:
+         正在删除文件“D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\YDClient.unsuccessfulbuild”。
+         正在对“D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\\..\obj\Debug\YDClient.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\YDWE Workspaes\actboy_ZHENGWEIJIAN_6286\Development\YDWE\Dev\Editor\Plugin\YDClient\sln\YDClient.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.59

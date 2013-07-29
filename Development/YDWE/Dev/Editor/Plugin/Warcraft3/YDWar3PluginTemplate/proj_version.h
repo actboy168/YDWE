@@ -1,0 +1,7 @@
+#ifndef PROJ_VERSION_H_INCLUDED
+#define PROJ_VERSION_H_INCLUDED
+
+#define YDWE_VERSION_FILEDESCRIPTION   ""
+#define YDWE_VERSION_ORIGUINALFILENAME "<?php echo $argv[1]; ?>.dll"
+
+#endif

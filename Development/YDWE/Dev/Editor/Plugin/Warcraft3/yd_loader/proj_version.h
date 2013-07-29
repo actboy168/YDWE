@@ -1,0 +1,7 @@
+#ifndef PROJ_VERSION_H_INCLUDED
+#define PROJ_VERSION_H_INCLUDED
+
+#define YDWE_VERSION_FILEDESCRIPTION   "»ù´¡Òýµ¼"
+#define YDWE_VERSION_ORIGUINALFILENAME "yd_loader.dll"
+
+#endif

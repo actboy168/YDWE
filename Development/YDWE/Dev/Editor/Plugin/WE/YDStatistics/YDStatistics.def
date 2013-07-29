@@ -1,0 +1,5 @@
+LIBRARY "YDStatistics"
+EXPORTS
+	PluginName
+	Post
+	PostConfig

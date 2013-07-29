@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YDFont", "YDFont.vcxproj", "{2AB650F0-F9BE-11E1-A868-43D82C9D5051}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2AB650F0-F9BE-11E1-A868-43D82C9D5051}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2AB650F0-F9BE-11E1-A868-43D82C9D5051}.Debug|Win32.Build.0 = Debug|Win32
+		{2AB650F0-F9BE-11E1-A868-43D82C9D5051}.Release|Win32.ActiveCfg = Release|Win32
+		{2AB650F0-F9BE-11E1-A868-43D82C9D5051}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

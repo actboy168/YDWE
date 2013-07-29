@@ -1,0 +1,13 @@
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Debug\plugin\YDColorizer\YDColorizer.dll.config
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Debug\plugin\YDColorizer\YDColorizer.dll
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Debug\plugin\YDColorizer\YDColorizer.pdb
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\x86\Debug\YDColorizer.ColorPicker.resources
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\x86\Debug\YDColorizer.EditDialogBox.resources
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\x86\Debug\YDColorizer.GetScreenColorForm.resources
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\x86\Debug\YDColorizer.Properties.Resources.resources
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\x86\Debug\GenerateResource-ResGen.read.4.tlog
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\x86\Debug\YDColorizer.dll
+D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\x86\Debug\YDColorizer.pdb
