@@ -1,0 +1,1382 @@
+----------------------------------------------------------------------------------------
+
+
+ CHANGES.txt : List the changes made between consecutive versions of The CImg Library
+
+
+-----------------------------------------------------------------------------------------
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.4.2 to 1.4.3
+*-----------------------------
+*-----------------------------
+
+* New features :
+
+
+* Optimizations/modifications :
+
+  - 2010/09/24 : CImg<T>::save_tiff(), Added option to specify compression type when saving tiff files.
+
+* Bug corrections :
+
+  - 2010/09/23 : CImg<T>::draw_text(), Corrected bounding box approximation with large fonts.
+
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.3.9 to 1.4.0
+*-----------------------------
+*-----------------------------
+
+* New features :
+
+  - 2010/09/01 : Added functions 'CImg<T>::load_camera()' to get images from cameras (uses OpenCV, new macro 'cimg_use_opencv'
+                 must be defined, and openCV libraries must be linked).
+
+* Optimizations/modifications :
+
+  - 2010/08/05 : Renamed function 'cimg::tac()' to 'cimg::toc()'.
+  - 2010/08/13 : Expressions in mathematical parser can now end with a ';' without being invalid.
+  - 2010/08/13 : Added command '-trisolve' in G'MIC in order to solve tridiagonal systems.
+  - 2010/08/25 : Removed hard values cut in 'CImg<T>::resize()' and 'CImg<T>::rotate()' when using
+                 bicubic or lanczos interpolations. You may have to check then that resulting values
+                 are not out of your desired value range with these interpolations.
+  - 2010/08/31 : Suppressed light buffer copy when possible, in 'CImg<T>::draw_object3d()', speeding up
+                 the rendering a little bit for phong-shaded rendering with custom light source.
+  - 2010/08/31 : Various small improvements and bug corrections specific to the G'MIC interpreter.
+
+* Bug corrections :
+
+  - 2010/08/10 : Small improvement in 'CImg<T>::blur_bilateral()', suggested by Jakob Schluttig.
+  - 2010/08/13 : Small bug corrected in 'CImg<T>::draw_object3d()', avoiding wrong memory access when drawing
+    a 3d object with colors having less components than the rendering image spectrum.
+  - 2010/08/24 : Forced stdin/stdout streams to be in binary mode when loading/saving images (fix a bug on Windows).
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.3.8 to 1.3.9
+*-----------------------------
+*-----------------------------
+
+* New features :
+
+  - 2010/07/23 : Added functions 'cimg::tic()' and 'cimg::tac()', useful to display elapsed times (Thanks to Jérome Boulanger
+    for his suggestion and his piece of code).
+
+* Bug corrections :
+
+  - 2010/07/27 : Corrected bug in 'cimg::round()', so that '-round(x)==round(-x)' is verified.
+  - 2010/07/27 : Corrected bug in 'CImg<T>::draw_text()' occuring when trying to draw text on images with more than 4 channels.
+  - 2010/07/28 : Corrected bug in 'CImg<T>::symmetric_eigen()', when sorting eigenvectors.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.3.7 to 1.3.8
+*-----------------------------
+*-----------------------------
+
+* Optimizations / Modifications :
+
+  - 2010/07/20 : Added valid expression 'value%' in internal math parser, to be equivalent to 'value/100'.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.3.6 to 1.3.7
+*-----------------------------
+*-----------------------------
+
+* New features :
+
+* Optimizations / Modifications :
+
+  - 2010/07/06 : Improved sliders steps in G'MIC plug-in for GIMP. New G'MIC commands filters have been also added.
+
+* Bug corrections :
+
+  - 2010/07/07 : Corrected bug in one variant of 'CImg<T>::draw_ellipse()'.
+  - 2010/07/04 : Corrected 'CImg<T>::display_object3d()', now works when displaying empty 3d objects.
+
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.3.5 to 1.3.6
+*-----------------------------
+*-----------------------------
+
+ This is mainly a released based on bug-corrections, to get something stable before the
+ summer holidays :
+
+* Optimizations / Modifications :
+
+  - Improved the 'gmic' tool a lot (a kind of command line version of CImg, see
+    http://gmic.sourceforge.net).
+
+* Bug corrections :
+
+  - Corrected priority operator bug in math parser (operator-).
+  - Corrected drawing bug in 'CImg<T>::draw_spline()' functions.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.3.4 to 1.3.5
+*-----------------------------
+*-----------------------------
+
+* New features :
+
+  - 2010/04/22 : The 'gmic' program has now a new embedded 'shell' mode.
+
+* Optimizations / Modifications :
+
+  - 2010/04/19 : 'CImg<T>::sort()' can now sort 'along an axis', which means only the first line of the specified axis is sorted, and
+    the other lines are permuted the same way. It may be used to avoid managing an image of permutations.
+  - 2010/04/19 : It is now possible to specify a z-buffer of any datatype when drawing 3d objects. The 'CImg<T>::display_object3d()' function
+    now uses double-valued z-buffers to get more precision when drawing 3d objects, if the specified input 3d vertices are double-valued.
+  - 2010/04/19 : 'CImg<T>::display_object3d()' : better management of the zoom in/out when focale is not set to default value.
+    Optimized memory ressources required by this function. Improved the way the pose matrix is handled.
+  - 2010/04/22 : The traits 'cimg::type<T>' have now a 'id()' method which returns an unique integer that identifies the datatype.
+
+* Bug corrections :
+
+  - 2010/05/19 : Replaced unsecure string functions by their secure versions, to avoid memory buffer overflow.
+  - 2010/05/14 : 'CImg<T>::draw_line()' : Corrected clipping bug when passing very big integers.
+  - 2010/04/09 : 'CImg<T>::{load,save}_graphicsmagick()' : Added explicit calls to the GraphicsMagick initialization/destroy function
+     for better memory management.
+  - 2010/04/09 : 'CImg<T>::load_jpeg()' : Better handling of jpeg library errors (patch submitted by Martin Petricek).
+  - 2010/04/23 : 'CImg<T>::display_object3d()' : Corrected bug when light texture were switched on/off in multiple calls.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.3.3 to 1.3.4
+*-----------------------------
+*-----------------------------
+
+* New features :
+
+  - Added functions 'CImg<T>::object3dtoCImg3d()' and 'CImg<T>::object3dtoCImg3d()'. They can transform a 3d object
+    into a single column vector. It supports all 3d features of CImg, including textures and opacities. So, now,
+    3d objects can be saved as regular images, or even gathered into lists of 3d objects.
+  - Added function 'CImg<T>::watershed()' able to compute the watershed transform from an image of labels and a priority map.
+
+* Optimizations / Modifications :
+
+  - 'CImg[List]<T>::{save,load}()' can now save and load empty images in .cimg[z] format.
+  - 'CImg<T>::load_bmp()' and 'CImg<T>::{save,load}_jpeg()' have been modified to reduce memory usage.
+  - Added variants of 'CImg<T>::cubic_at*()' that can cut the interpolated value between specified bounds.
+  - Modified the way colored sphere primitives are considered in 3d objects. Now, a sphere primitive takes two vertex
+    indices defining the sphere diameter.
+  - Remove the support of the Carbon library for MacOSX. The code used were old and not fully functional. Use the
+    X11 implementation of the CImgDisplay class instead on MacOSX (without the XShm extension, which is not fully supported yet).
+  - Modified the way the light texture is specified for phong-based 3d rendering. Now, the light must have as much channels as
+    the spectrum of the image on which the object is drawn. Then, we can do now custom colored lights in phong-shaded 3d mode.
+  - Modified functions 'CImg<T>::{load,save}_ffmpeg()' so it can compile with different API versions of the ffmpeg library.
+
+* Bug corrections :
+
+  - 'CImg<T>::get_streamline()' : Corrected problem occuring when streamline went out of the image range.
+  - 'CImg<T>::save_off()' : 3d objects with incomplete color data may result in wrong memory access.
+  - 'CImg<T>::save_off()' : 3d objects with sphere primitives were incorrectly saved.
+  - 'CImgList<T>::insert()' : Shared insertion of an image already present in the instance list was incorrectly done.
+  - Corrected small bug in math parser concerning the use of the '~' and '!' operators.
+  - and many other small bug corrections...
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.3.2 to 1.3.3
+*-----------------------------
+*-----------------------------
+
+* New features :
+     - Added arithmetic functions 'CImg<T>::[get_]sign()' to compute the sign of image values.
+     - Added arithmetic functions 'CImg<T>::[get_]sinc()' to compute the sinc() function of image values.
+     - Added functions 'sinc(),rol(),ror(),isval(),isint(),isnan(),isinf() and isbool()' inside the mathematical parser.
+     - Added function 'CImg<T>::cubic_atXYZ()' to access 3D voxel with a bicubic interpolator.
+     - Added functions 'CImg<T>::load_pfm()' and 'CImg<T>::save_pfm()' to add native support of PFM files.
+
+* Optimizations / Modifications :
+     - Updated G'MIC core and plug-in with various improvements.
+     - Slight optimizations and corrections of the internal math parser.
+     - Recoded most of the 'CImg<T>::resize()' function, with faster interpolations,
+       better bicubic, and new Lanczos5 interpolation.
+     - Update 'CImg<T>::load_png()' to fit with libpng14 API.
+     - Modified 'CImg<T>::get_projections2d()' to get the minimal value instead of 0 as the intensity of
+       the bottom right area.
+     - Modified 'CImg<T>::draw_text()' to get more flexibility in the font size. Fonts are interpolated
+       when custom size is requested.
+     - Removed useless font data. 4 fonts with different sizes remains now in CImg. Other sizes
+       are interpolated from these basis fonts. This reduces the header file size a lot.
+     - CImg exception classes know derives from std::exception, and the 'message()' method has been
+       renamed to the more standard 'what()'.
+     - Exception messages have been improved in all CImg functions and methods.
+
+* Bug corrections :
+     - Key repetition bug corrected in 'CImg<T>::display_plot()'.
+     - Small bug corrected in arithmetic operators using math expression strings with references to current image.
+     - Improved robustness of preview window in 'gmic_gimp' plug-in for GIMP.
+     - Corrected bugs in 'CImg<T>::draw_polygon()', corresponding to singular cases.
+     - And as always, a lot of various bugs corrections and improvements in library and example files.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.3.1 to 1.3.2
+*-----------------------------
+*-----------------------------
+
+* New features :
+
+     - Added functions 'CImg<T>::load_exr()' and 'CImg<T>::save_exr()' that handle input/ouput
+       of .exr files, using the OpenEXR library (http://www.openexr.com). Many thanks to
+       Michael Holroyd (http://www.cs.virginia.edu/~mjh7v) for his inspiring piece of code !
+       The OpenEXR library is used when macro 'cimg_use_openexr' is defined.
+     - Added functions 'CImg<T>::streamline()' and 'CImg<T>::get_streamline()' that return
+       streamlines of vector fields, using various integration techniques.
+     - Added new code example 'examples/spherical_function3d.cpp' that shows how to create
+       custom 3D objects in CImg.
+
+* Optimizations / Modifications :
+
+     - Ended support for Visual C++ 6.0. This compiler was a pure shit and gave me a lot of headaches
+       to ensure the compatibility of CImg. I tried to support it anyway until the end, but I reached
+       a state where each file compilation gives me an 'Internal Compiler Error', so I really guess this
+       is time to abandon this compiler now (CImg 1 - VC++ 0 )
+     - Added 'explicit' keyword for constructor 'CImg(const char *)'
+       so that implicit conversions from char* to CImg<T> is not done anymore.
+     - Added variants of arithmetic and assignement operators that takes a string as an input.
+       The string is auto-detected to be one of these three types : formula, values list or filename.
+     - Re-organized and modified operators of all classes for easier use and better coherence.
+     - Removed most of the arithmetic operators in 'CImgList<T>'. The preferred way to apply
+       operators on list should be via 'cimglist_apply()'.
+     - Reduced the number of function prototypes for displaying 3D objects. Now, 3D vertices must
+       be defined as 'CImg<T>' only.
+     - Some important API changes for 'CImgList<T>'. Particularly, the 'size' member is renamed 'width',
+       and the 'size()' function appears. It eases the coding of template functions that can take 'CImg<T>'
+       or 'CImgList<T>' as parameters.
+     - Improved documentation.
+     - 3D object display function now activates the Z-buffer by default (you can deactivate it with CTRL+Z).
+       New keyboard shortcuts have been added : CTRL+A (show/hide 3D axes), and CTRL+F1-F7 (change rendering mode).
+     - Updated code for using the Board library. Works now with the latest available version (0.8.6b).
+     - Renamed functions 'CImg[List]<T>::transfer_to()' to 'CImg[List]<T>::move_to()'.
+     - Allow .cimg file to have commentaries, before the header starts. Comment lines start with '#'.
+     - Added type parameter to macros 'cimg_forNxN()' and 'cimg_getNxN()' to allow working with neighborhood
+       that have a type different from the image they are read from.
+     - 'CImg<T>::blur_anisotropic()' has been optimized. Gives same results but slightly more quickly.
+     - Removed plugin 'plugins/integral_line.h', because streamline computation is now integrated into CImg library core.
+     - Removed plugin 'plugins/noise_analysis.h', since function 'CImg<T>::variance_noise()' has been recoded in
+       the library core.
+     - Added optimized versions of 'CImg<T>::erode()' and 'dilate()' for rectangular masks. Thanks a lot to
+       Antonio Albiol for his inspiring piece of code !
+     - Changed the range of CMY and CMYK colorbases to [0,255] instead of [0,1].
+     - Added variable assignment operator in the CImg math parser.
+     - Added parameters to set light position in 'CImg<T>::display_object3d()'.
+     - Updated code requiring FFMPEG libraries. Compiles now with the latest API from the FFMPEG SVN. Thanks to
+       Guillaume Nee who made it possible !
+
+* Bug corrections :
+
+     - Corrected function 'CImg<T>::save_magick()' to fit with the latest Magick++ API.
+     - Corrected function 'CImg<T>::load_dlm()' to avoid infinite loops with invalid files.
+     - Small bugs corrections and improvements in various files.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.3.0 to 1.3.1
+*-----------------------------
+*-----------------------------
+
+* New features :
+      - Added configuration macro 'cimg_file_separator' that takes value "/" or "\"
+      	depending on which OS is running. This macro is used in load/save functions
+      	for better portability.
+      - New example file 'examples/gaussian_fit.cpp' which demonstrates how to apply the
+        Levenberg-Marquardt algorithm to fit a 3-parameter gaussian on a set of sample points.
+      - Added function 'CImg[{Display,List}]::empty()' that returns a reference to an empty object
+        (can be used to pass empty images as default values of function parameters).
+      - Added variant of the function 'CImg<T>::draw_triangle()' to draw triangle with linearly
+        interpolated colors defined at each triangle vertex.
+      - Added a formula parser in CImg<T>, so that many arithmetic operators can use it to
+        evaluate expressions (given as a C-string).
+      - Added example file 'examples/plotter.cpp' that plots a mathematical function on an interactive window.
+      - Added functions 'CImg<T>::index()' and 'CImg<T>::map()' that can index an image with a multi-spectral
+        palette, or map a multi-spectral palette on an image.
+
+* Optimizations / Modifications :
+      - Added parameter 'bytes_per_pixel' to force the use of 8 or 16 bits modes in functions
+        'CImg<T>::save_magick()', 'CImg<T>::save_pnm()' and 'CImg<T>::save_png()'. Thanks to Julien Morat
+        for pointing this out to me.
+       - Added parameter 'backward' to 'CImg<T>::displacement_field()', allowing to select between
+         forward of backward estimation procedure.
+       - Parameters 'ru,rv' in 'CImg<T>::draw_ellipses()' have been replaced by parameter 'angle'.
+       - Function 'CImg[List<T>]::get_split()' is now able to split an image into bloc of given pixel size.
+       - Changed 'zbuffer' parameter type to 'CImg<float>' in 'CImg<T>::draw_*' functions.
+       - Remove 'GREYCstoration' specific code. The GREYCstoration algorithm is now a part of the G'MIC framework.
+         Note that the two functions 'CImg<T>::blur_anisotropic()' and 'CImg<T>::blur_patch()' are still here to
+         smooth an image anisotropically (are the core algorithm of the former GREYCstoration).
+
+* Bug corrections :
+      - Corrected 'CImg<T>::translate()' : function parameters were the opposite of the real translation done.
+      - Modifications on CImg.h to be more compatible with the old VC++6 compiler.
+      - Corrected 'CImg<T>::get_histogram()'.
+      - Corrected 'CImg<T>::load_ascii()'.
+      - And lot of small bugs corrections.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.2.9 to 1.3.0
+*-----------------------------
+*-----------------------------
+
+The 1.3.0 version of the CImg Library is a major release, and will probably break the
+compatibility with your existing code. Anyway, the overall philosophy is the same so
+converting your code should not require lot of work fortunately.
+
+* New features :
+      - Added function 'CImg<T>::[get_]distance()' that compute the Euler unsigned distance map
+        from a shape of specified isovalue in an image, using a fast linear algorithm.
+      - Added functions 'CImg<>::set_linear_at{X,Y,Z}()' allowing to set pixel values using
+        float-valued coordinates, with linear interpolation.
+      - Added z-buffering capabilities in some drawing functions, so that displaying a
+        3D object with 'CImg<T>::draw_object3d()' now takes care of eventual crossing primitives.
+        (added shortcut CTRL+Z to enable/disable zbuffering in 'CImg<T>::display_object3d()'.
+      - Added functions 'CImgList<T>::is_same*()' to check dimensions of image lists.
+      - Added plugin 'plugins/skeleton.h', as well as example of use 'examples/skeletonize.cpp' that
+        computes the skeleton of a shape (binary image). Thanks to F-X Dupé for this nice contrib !
+      - Added function 'CImg<T>::get_elevation3d()' that constructs a 3D object by 'elevating'
+        an instance image.
+      - In function 'CImg<T>::sharpen()', two sharpening methods are now implemented : shock filters
+        and inverse diffusion.
+      - Added function 'CImg[List]<T>::save_ffmpeg()', allowing to save an image sequence, directly
+        as a movie file, using the FFMPEG library. Thanks to David. G. Starweather for this very nice
+        contribution !
+      - Added function 'CImg<T>::[get_]warp()' that can warp an image using a deformation field.
+      - Added function 'CImg<T>::[get_]solve_tridiagonal()' that can quickly solve a tridiagonal linear
+        system of equations (use the Thomas Algorithm).
+      - Added function 'CImg<T>::[get_]load_dcraw_external()' that allows to read RAW digital camera files,
+        using the open-source external tool 'dcraw'.
+      - Added file 'examples/CMakeLists.txt' to generate makefile using the 'cmake' tool (thanks to
+        Baptiste Mougel for this nice contribution).
+      - Added functions 'CImg<T>::display_graph()' and 'CImg<T>::select_graph()' that can be used
+        to display a graph plot or crop a sub-graph.
+      - Added function 'CImg<T>::[get_]autocrop()' that can autocrop an image regarding to a background
+        value or color.
+      - Added new demo 'Word Puzzle' in file 'examples/CImg_demo.cpp'.
+      - Added new plugin 'plugins/cimgIPL.h', as well as example file 'examples/use_cimgIPL.h' that shows
+        how to convert between CImg and IplImage structures (used in OpenCV). Thanks to  Haibo Zheng for
+        this nice contribution !
+      - Function 'CImg<T>::load_ffmpeg()' is now able to return information on the main video stream, without
+        having to load frames.
+      - New function 'CImg[List]<T>::valuestring()' returns a C-string containing values of the image pixels.
+      - Added file 'examples/gmic4gimp.cpp' which implements a G'MIC plug-in for GIMP.
+      - Added file 'resources/cimg_buildpackage' which is a bash script that generates package files for CImg.
+      - Added function 'cimg::prand()' which returns a random variable following a Poisson distribution.
+
+* Optimizations / Modifications :
+      - The API of the library has been quite largely modified. It means that the 1.3.0 release is
+        not meant to be fully compatible with previous versions. This is the beginning of a new
+        important branch.
+      - Functions 'CImg[List]<T>::load()' can now check for magick numbers for determining file format
+        (instead of using only their filename extension).
+      - Cleaned lot of code in 'CImg<T>::draw_*()' functions. Few of them have now different signatures,
+        particularly 'CImg<T>::draw_text()', 'CImg<T>::draw_spline()' and 'CImg<T>::draw_image()'.
+      - Improved warning removal when compiling on Microsoft Visual C++ compiler. It is now very rare
+        to get warnings when compiling CImg-based files !
+      - Plugin 'plugins/distance_saito.h' has been removed, since a new and clean implementation of
+        the distance function is now available in the 'CImg.h' file.
+      - Function 'CImg<T>::equalize_histogram()' has been renamed to 'CImg<T>::equalize()'.
+      - Functions 'CImg<T>::get_gradient()', 'CImg<T>::get_structure_tensor()' and 'CImg<T>::get_hessian()'
+        now replaces the old versions.
+      - Provided example file 'examples/inrcast.cpp' has been renamed and recoded as 'examples/gmic.cpp'.
+        G'MIC is now an independant project, having its own web page : http://gmic.sourceforge.net/.
+      - Plugin 'plugins/cimgmatlab.h' has been updated.
+      - Added pipe support (for POSIX systems) in load/save functions using external tools, so that
+        a temporary file is not necessary to read/write.
+      - Function 'CImg<T>::load_analyze()' can now read niftii files directly using a FILE* argument.
+      - Improved global structure of the CImg package.
+      - Silent output for 'CImg<T>::{load_save}_ffmpeg_external()' on Windows.
+      - Better zoom-in procedure in 'CImg<T>::display()'.
+      - Function 'CImg<T>::get_hessian()' now allows to specify the set of desired axes.
+      - Macros 'cimg_*_path' do not exist anymore. Instead, the user can dynamically change these paths used
+        by CImg, by using functions' cimg::*_path()'.
+      - Code corrections in order to compile without warnings on g++ 4.3 version.
+      - Added 'windows' targets in the 'examples/Makefile', so compiling examples under MinGW is straightforward.
+      - Added soft thresholding capability to 'CImg<T>::threshold()'.
+
+* Bug corrections :
+      - Corrected bug related to X11 events on some Windows Managers, thanks to Rainer Steffens
+        for his nice patch !
+      - Corrected normalization bug that occured when doing inverse FFT of images, using libfftw3.
+      - Corrected endianness problem when reading 16 bits PNM files.
+      - Corrected small bug in 'CImg<T>::display()' : drawn coordinates were wrong when
+        user had selected a region to zoom in.
+      - Extension 'tiff' is now recognized in 'CImg<T>::load()'.
+      - Corrected computation of variance (=0) when image has only one element.
+      - Corrected y-range bug in 'CImg<T>::draw_ellipse()'.
+      - Corrected bug in 'CImg<T>::save_pandore()' when saving int images on 64bits systems.
+      - And many small bug corrections...
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.2.8 to 1.2.9
+*-----------------------------
+*-----------------------------
+
+* New features :
+      - Added new example file 'examples/captcha.cpp', which can be used to draw captcha images. This is a very
+        short and simple code, so it can be interesting for a first approach of CImg.
+      - Added functions 'CImg<T>::scale_2x()' and 'CImg<T>::scale_3x()' allowing to upscale an image
+        with a edge-directed algorithm (see 'http://scale2x.sourceforge.net/')
+      - Added function 'CImg<T>::save_cpp()' allowing to save an image directly as a
+        C/C++ source code.
+      - Added function 'CImg<T>::draw_mandelbrot()' allowing to draw quadratic mandelbrot fractal set on images.
+      - Added a new demo effect 'Fish-Eye Magnification' in file 'examples/CImg_demo.cpp'.
+      - Added new fields in CImgDisplay for an easy test of keys pressing. Very useful for testing complicated combinations.
+      - Added functions to read/save gzipped files.
+      - Added compression option for .cimg files (requires the use of the 'zlib' library).
+      - Added color conversions for CMY and CMYK color bases.
+
+* Optimizations / Modifications :
+      - Big code cleaning and re-organization in file 'CImg.h', making the things more clear.
+      - Function 'CImg<T>::load_ascii()' has been modified to allow comments before specifying image
+        dimensions.
+      - Functions 'CImg[List]::print()' have been slightly modified to be more precise and clear. Also used
+        in functions 'CImg[List]::display()'.
+      - Improved functionalities of the image processing tool 'inrcast.cpp'.
+      - Improved 'CImg[List]<T>::display()' function allowing easy navigation and zooming in images.
+      - Add native use of ffmpeg libraries to load video sequences (Thanks to David Starkweather for his nice contribution !)
+      - Optimized function 'CImg<T>::permute_axes' for common used cases (planar to interleaved RGB and RGBA).
+      - Added parameter 'step_frame' in functions that can load video sequences,
+        i.e. CImg[List]<T>::load_yuv(), CImg[List]<T>::load_tiff(), CImg[List]<T>::load_ffmpeg(), so that frames
+        can be skipped when loading the video files.
+      - Removed parameter 'events_type' in CImgDisplay functions. By default, a display is always catching all user
+        events. Having different choices made slight problems between different architectures (and was not really
+	useful).
+      - Removed plugin 'plugins/toolbox3d.h'. Functions of the plug-ins are now natively integrated into the CImg.h file,
+        as well as the LibBoard library support.
+      - Renamed functions 'CImg<>::*pix?d()' to 'CImg<>::*at?()'.
+
+* Bug corrections :
+      - Small bug in functions 'CImg[List]::contains()' were corrected.
+      - Bug correction in function 'CImg<T>::[get_]stats()' : offset of min and max values were sometimes incorrect.
+      - Bug correction in CImgDisplay events for Windows-based OS. When mouse leaved a window, coordinates
+        didn't reset to -1 sometimes.
+      - Small non-computational bug correction in 'CImg<T>::symmetric_eigen()'.
+      - Removed g++ warning that occured when using 'libpng' ('warning: argument 'xxx' might be clobbered by 'longjmp' or 'vfork').
+      - Corrected small illumination bug with double sided 3D objects in CImg<T>::draw_object3d().
+      - And a lot of other small improvements and bug corrections...
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.2.7 to 1.2.8
+*-----------------------------
+*-----------------------------
+
+* New features :
+      - Added native Carbon support in CImgDisplay. Allows to run CImg on MacOSX without installing X11.
+        This is a beta support, so not activated by default. Define 'cimg_use_carbon' to enable it.
+        Many Thanks to Adrien Reboisson, Romain Blei and Jean-Marie Favreau for this nice contribution.
+        Any comments and contributions are welcome.
+      - Added variant of 'CImgList<T>::remove()' that can remove several images from a CImgList<T> list
+        at the same time.
+      - Added new numbered macros 'cimg_plugin1...8', for easy inclusion of multiple CImg plug-ins.
+      - Added plugin 'plugins/distance_saito.h' that implements the Saito's distance transform.
+      - Added function 'CImg<T>::blur_patch()' that performs a patch-based Tikhonov flow on the image.
+        Allows to denoise and regularize image quite well (is time-consuming anyway).
+      - Functions 'CImg<T>::load_tiff()', 'CImgList<T>::load_tiff()', 'CImg<T>::save_tiff()' and
+        'CImgList<T>::save_tiff()' has been (re)-coded. It is now possible to read/save multi-pages tif
+        image files worriless.
+      - Native support for 'icc' compiler (Intel C++ compiler) added in the Makefile.
+        Just type 'make CC=icc olinux' to compile using icc (offers nice performances in code optimization).
+      - Started support of OpenMP directives, to allow parallelization of CImg functions in order to
+        improve performances. Not few used, by this could change in the future.
+      - Added functions to load/save video sequences using the external tool FFMPEG (http://http://ffmpeg.mplayerhq.hu/).
+        'inrcast' is now able to read video sequences using FFMPEG.
+      - Added new color basis conversions : RGBtoHSI(), HSItoRGB(), HSLtoRGB() (Thanks to Cesar Martinez for his
+        contribution).
+      - Added example file 'examples/radon_transform.cpp', provided by David G. Starkweather (Thanks guy!).
+
+* Optimizations / Modifications :
+      - The main library file 'CImg.h' is now distributed under dual license CeCILL or CeCILL-C.
+      - Patched function 'CImg<T>::load_tiff()' for a better support of float-valued tiff images.
+      - Renamed 'CImg<T>::inverse()' as 'CImg<T>::invert()' and 'CImg<>::pseudoinverse()' as 'CImg<T>::pseudoinvert()'.
+      - Function 'CImg<T>::displacement_field()' has been modified to consider a multi-valued geometry
+        for motion detection (so color images are naturally taken into account now).
+      - Optimized functions 'CImg<T>::dilate()' and 'CImg<T>::erode()'
+      - Slightly optimized pixel access and display rendering functions.
+      - Used native mutex mechanism of X11 instead of the pthread library.
+      - Removed deprecated example file 'examples/pslider.cpp'.
+      - Renamed 'cimg::PI' to 'cimg::valuePI' to avoid compilation problems with some C++ compilers that define
+        the PI macro.
+      - Added specular type lightning in routines that draw 3D objects. Parameters 'specular_light' and
+        'specular_shine' replace the old 'ambient_light' parameter.
+
+* Bug corrections :
+     - Bug corrected in 'CImg<T>::draw_polygon()' : wrong scanlines were drawn with some complex polygons.
+     - Bug corrected in 'CImg<T>::convolve()' and 'CImg<T>::correlate()'. Happened when dealing with non square
+       masks with even dimensions.
+     - Bug corrected in 'CImg<T>::save_png()' and 'CImg<T>::load_png()' when dealing with 16 bits
+       images in little-endian proc.
+     - Bug corrected in 'CImg<T>::get_coordinates()' when dealing with 2-channels images.
+     - Bug corrected, 2-channels images were not correctly displayed (blue channel was used instead of being 0).
+     - And a lot of other small bug corrections...
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.2.6 to 1.2.7
+*-----------------------------
+*-----------------------------
+
+* New features :
+     - Added functions 'CImg<T>::get_haar()', 'CImg<T>::haar()' allowing to compute the direct and
+     inverse Haar multiscale transform on 2D or 3D images.
+     - Added function 'CImg<T>::get_hessianXY()' and 'CImg<T>::get_hessianXYZ()' that compute
+     the components of the hessian matrix of a 2D or 3D image.
+     - Added function 'CImg<T>::variancemean()' able to compute the variance and mean value of
+     an image at the same time.
+     - Added new macros for 'cimg_for_out*' and 'cimg_for_in*' families, all combinations are
+     now fully handled.
+
+* Optimizations / Modifications :
+     - Modified 'CImg<T>::get_resize()'. Moving average is now defined to be interp=2. Additional
+     parameter 'center' has been added so that centering image is possible when upsizing with interp=0.
+
+* Bug corrections :
+     - Critical bug correction has been made for non-const functions taking a const T& or const t& argument.
+     'const T&' arguments have mainly been replaced by 'const T' arguments, in order to avoid wrong references
+     problems. Thanks to Jinwei Gu who pointed this out to me.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.2.5 to 1.2.6
+*-----------------------------
+*-----------------------------
+
+* New features :
+     - Added functions 'CImg<T>::fillV(), CImg<T>::fillZV() and CImg<T>::fillYZV()' allowing to set image values
+     at a specified pixel and along specified axes.
+     - Added variant of 'CImg<T>::get_dijkstra()' allowing to use any function/class for definition of weights.
+     - Added new interpolation technique (moving average) in 'CImg<T>::resize()' allows very precise image downsizing.
+       (Thanks to François Lauze who provided me with some of its code).
+     - Added lot of new and useful neighborhood loop macros.
+       A new executable 'examples/generate_loop_macros.cpp' allows to generate
+       2D loops for arbitrary neighborhood size. A new plugin 'plugins/loop_macros.h' has been created, containing
+       all loops NxN (until N=32) and NxNxN (until N=8).
+     - Added separate component and YCbCr color base processing in options of 'examples/greycstoration.cpp'
+     - Added macros 'cimg_argument?()' allowing to retrieve command lines that are not options (not beginning with a '-').
+     - Added shortcut 'CTRL+O' in 'CImg<T>::get_coordinates()' allowing to save visualized instance image into a .cimg file.
+
+* Optimizations / Modifications :
+     - Macros with neighborhood loops have been extended and simplified. Some of the previous ones have been deleted,
+       others have appeared. Basically, no functionnalities have been removed.
+     - Macro 'cimg_version' is now 126 instead of 1.26, allowing easy comparison with integer values.
+     - Changed traits name in cimg:: for more coherence.
+     - New design of the website and new sexy flyer available (Thanks to Sebastien Hanel).
+
+* Bug corrections :
+     - Corrected function 'CImg<T>::cubic_pix[1,2]d()'.
+     - Corrected bug in 'CImg<T>::blur_median()'.
+     - Corrected bug with temporary random filenames when using multi-threading.
+     - Corrected small bug in 'CImg<T>::draw_point()'.
+     - Corrected name 'CImg<T>::dijkstra()' instead of 'CImg<T>::djikstra()'.
+     - Corrected compilation bug in some plug-ins.
+     - And other small bug corrections...
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.2.4 to 1.2.5
+*-----------------------------
+*-----------------------------
+
+* New features :
+     - Added function 'CImg<T>::label_regions()' that can label deconnected regions.
+     - Added overload of function 'CImg<T>::draw_point()' that is able to draw point clouds.
+     - Added function 'CImg<T>::get_blur_bilateral()' that implements bilateral filtering.
+     - Added functions 'CImg<T>::get_RGBtoBayer()' and 'CImg<T>::get_BayertoRGB()' that converts between
+       RGB and Bayer-coded representation of an image.
+     - Added functions CImg[List]<T>::min(), max(), mean(), variance(), get_stats(), and contains()
+       to deal easily with image statistics (class CImgStats is now obsolete and has been moved to
+       plugin 'plugins/deprecated.h').
+     - Added versions of 'CImg[List]<T>::get_*()' as external functions,
+       so writting 'res=cos(img)*5;' is valid.
+     - Added postfix versions 'CImg[List]<T>::operator++(int)' and 'CImg[List]<T>::operator--(int)'.
+     - Added function 'CImg<T>::djikstra()' that can compute a minimal path in a graph.
+     - Added new constructor able to construct a new image from the dimensions of another one.
+
+* Optimizations / Modifications :
+     - Recoded 'CImg<T>::save_magick()' to improve performances when saving images using Magick++ API.
+     - Recoded 'CImg<T>::draw_fill()' to avoid crashes on large (volumetric) images due to stack overflow.
+       Also added parameters to choose between 4 or 8 connexity for 2D images.
+     - Added simple point representation in 'CImg<T>::draw_graph()'.
+      -> Note that the gtype variable values have been redefined as well !!! <-
+     - Added parameter 'CImg<T>::quantize()' that allows possible value renormalization.
+     - Improved documentation.
+     - Drawing functions accept now templated color pointer, as well as templated image containing color data.
+     - Recoded Deriche filter. More fast and precise, some cases were buggy.
+     - Removed class CImgStats (moved to plugin 'plugins/deprecated.h').
+     - Removed unuseful image copies in some functions.
+     - Cleaning the code.
+
+* Bug corrections :
+     - Corrected bug in 'CImg<T>::pseudoinverse()' concerning pseudo-inversion of non-inversible matrices.
+     - Corrected return value in 'CImg<T>::get_RGBtoHSV()'.
+     - Corrected value range bug in 'CImg<T>::quantize()'.
+     - And other small bug corrections...
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.2.3 to 1.2.4
+*-----------------------------
+*-----------------------------
+
+* New features :
+     - Added macro 'cimg_for_lineXY(x,y,x0,y0,x1,y1)' that loops over an image segment (x0,y0)-(x1,y1).
+     - Added function 'CImg<T>::draw_polygon()' that draws a filled polygon of any shape in the instance image.
+     - Added macros 'cimg_load_plugin', 'cimg_save_plugin', 'cimglist_load_plugin' and 'cimglist_save_plugin'
+       allowing to easily add file support for your own data format.
+     - Added plugin 'plugins/add_fileformat.h' to show how to use these new macros to register a new
+       image format in CImg.
+     - Added version of 'CImg[List]<T>::{load,save}_cimg()' that is able to read/write only sub-images of
+       data stored in a (big) .cimg file.
+     - Added an online chat on the CImg website, so that users can interact freely.
+
+* Optimizations / Modifications :
+     - Added functions 'CImg[List]<T>::save_empty_cimg()' that can be used to work with very large images.
+       You can now create first an empty (big) image, then load/save sub-images into this big .cimg file,
+       without needing much memory.
+     - Slightly modified the header of .cimg files, so little/big endian info is stored.
+     - Reorganized some 'CImg[List]<T>::load_*()' functions, trying to avoid unnecessary memory usage.
+     - Recoded versions of CImg<T>::draw_triangle() that now use the Bresenham's algorithm for interpolation
+      (more precise, while using only integer calculus).
+     - Added versions of 'CImg<T>::draw_triangle()' and 'CImg<T>::draw_line()' that are able to map textures
+      while correctly handling the perspective correction, so that 3D mapped triangles look correct now.
+
+* Bug corrections :
+     - Corrected a small bug in get_coordinates() : channels of hyperspectral images with (dim>3) where
+       subsampled instead of cropped for image visualization.
+     - And many small bug corrections...
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.2.2 to 1.2.3
+*-----------------------------
+*-----------------------------
+
+* New features :
+     - Added file 'example/tron.cpp', implementing a very simple version of the
+     famous 'Tron' game (2 players).
+     - Added constructor that create a CImg<T> from the content of a CImgDisplay window.
+     - Added support of the 'Board' library in plugin 'plugins/toolbox3d.h', allowing
+     the saving of 3D objects snapshots in SVG, EPS or FIG vector-graphics formats.
+     - Added function 'CImgList<T>::[get]_split()' that can split all image of an
+     an image list into a specified axis.
+     - Added sphere primitive in 'CImg<T>::draw_object3d()'.
+     - Added function 'CImg<T>::ellipsoid()' in 'plugins/toolbox3d.h'.
+     - Added useful new constructors 'CImg<T>()' and 'CImgList<T>()' with variable
+     numbers of parameters that can define images or image lists initialized with
+     user-specified values. Example :
+     CImg<float> img(3,2,1,1, 1,2,3, 4,5,6); defines image [ 1,2,3; 4,5,6 ].
+     CImgList<unsigned char> list(3,1,3,1,1, 1,0,0, 0,1,0, 0,0,1); defines
+     list of three vectors { [1;0;0], [0;1;0], [0;0;1] }.
+     - Added poly-bezier curve drawing, with 'CImg<T>::draw_spline()' overload.
+     - Added file 'examples/jawbreaker.cpp', implementing a very funny games featuring
+     small colored balls.
+     - Added demo '3D Reflection' in 'examples/CImg_test.cpp' showing some tricky uses
+     with the 3D capabilities of CImg.
+     - Added 'CImg<T>::draw_spline()' for drawing 2D cubic Bezier curves.
+     - Added plugin 'plugins/jpeg_buffer.h', allowing to read/write directly image data
+     from/to jpeg-coded memory buffers (Many thanks to Paolo Prete who made it possible !).
+     - Added optional support of the LAPACK library for matrix computation.
+     Define macro 'cimg_use_lapack' and link your code with LAPACK to enable it
+     (LAPACK routines are slightly faster routines than native CImg ones).
+     - Added function 'CImg<T>::get_constrast_LUT8()' function which returns a 256 colors
+     palette that has nice properties of being well contrasted when color indices are
+     close to eachothers.
+     - Added function 'CImg<T>::get_rainbow_LUT8()' that returns a rainbow-type palette.
+     - Added shortcuts CTRL+PAGE[UP,DOWN] in 'CImg<T>::display_object3d()' to brighten or
+     darken the 3D object.
+
+* Optimizations / Modifications :
+     - In 'CImg<T>::HSVtoRGB()' and 'CImg<T>::RGBtoHSV()', the H components is now expressed in degree.
+     - Improved multi-key testing with CImgDisplay.
+     - Added and modified some 'operator<<()' and 'operator>>()' in 'CImg<T>' and 'CImgList<T>'.
+     - Renamed 'plugins/primitives3d.h' to 'plugins/toolbox3d.h', and added a new example
+     'examples/toolbox3d.cpp' that shows how to use it.
+     - Renamed 'plugins/alias.h' to 'plugins/deprecated.h'.
+     - Moved function 'CImg<T>::resize_object3d()' to 'plugins/toolbox3d.h'.
+     - Simplified 'CImgList<T>::insert()' procedures, and removed functions 'CImgList<T>::insert_shared()'.
+     - Added functions parameters for almost all drawing functions, allowing the correct use of
+     patterns in line drawing (beware, some functions signatures have been slightly modified).
+     - Renamed 'CImg<T>::feature_selection()' as 'CImg<T>::get_coordinates()'
+     (for better coherence with overall function names). Include 'plugins/deprecated.h' for backward
+     compatibility.
+     - Optimized function 'CImg<T>::draw_line()'.
+     - Recoded function 'CImg<T>::draw_circle()', uses now the more precise Bresenham's circle
+     algorithm.
+     - Improved function 'CImg<T>::sphere()', in plugin 'toolbox3d.h', reducing drastically
+     the number of created points in the 3D mesh.
+
+* Bug corrections :
+     - Corrected some small bugs in CImg.h to allow the compilation with the Intel C++ Compiler (icc & icl).
+     - Corrected bug in copy constructor of CImgList<> that didn't make shared copy of images.
+     - Fixed bug in 'CImg<T>::symmetric_eigen()' : some negative eigenvalues where miscalculated when
+     their absolute values was also an eigenvalue of the considered matrix.
+     - And many small bug corrections...
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.2.1 to 1.2.2
+*-----------------------------
+*-----------------------------
+
+* New features :
+     - Added 'CImg<T>::distance_function()' that can compute distance function to the 0-isophote.
+     - Added curve editor example in 'examples/curve_editor.cpp'.
+
+* Bug corrections :
+     - Corrected small bug when trying to found pathname under Windows.
+     - Corrected bug when using XSHM extension on Mac OS X.
+     - Corrected/Improved platforms detection by testing the right predefined BSD macros + extra architectures
+      (Thanks to Marc Espie).
+     - And many small bug corrections...
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.2.0 to 1.2.1
+*-----------------------------
+*-----------------------------
+
+* New features :
+     - Added macro 'cimg_for_spiralXY', allowing to loop over an image using a spiral-shaped trajectory.
+     - Added shortcut 'CTRL+O' to save object as .off file in 'CImg<T>::display_object3d()'.
+     - Added operator bool() in CImg, CImgList, CImgStats, CImgDisplay to get
+     more concise code when testing if an object is empty or not.
+     - Added empty state for CImgDisplay, can be tested with 'CImgDisplay::is_empty()'.
+     - Added '.off' file support in 'inrcast'.
+
+* Optimizations / Modifications :
+     - Removed all the obsolete #define to ensure compatibility with really older versions of CImg.
+       You can now include the file 'plugins/alias.h' to get these #define back.
+     - Added functionalities and debugged 'CImg<T>::save_off()' and 'CImg<T>::load_off()'.
+
+* Bug corrections :
+     - Corrected illumination bug in 'CImg<T>::draw_object3d()'.
+     - Corrected bug in 'CImg<T>::crop()' family functions.
+     - Corrected small bugs in 'CImgList<T>' (insertion functions)
+     - Corrected 'CImg<T>::load_tiff()' function.
+     - And many small bug corrections...
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.1.9 to 1.2.0
+*-----------------------------
+*-----------------------------
+
+* New features :
+     - Added function 'CImg<T>::draw_grid()' that draws a grid on the instance image
+     (useful when combined with CImg<T>::draw_axis and CImg<T>::draw_graph).
+     - Added multi-threading support in GREYCstoration plugin and command line version.
+     - Added support for GraphicsMagick conversion tools (http://www.graphicsmagick.org).
+     - Added plugin 'integral_line.h' that define functions to track integral lines in images.
+     - Added CTRL+key combinations in 'CImg<T>::display_object3d' and 'CImg<T>::feature_selection()' :
+        - CTRL+S : Save snapshot.
+        - CTRL+D : Double window resolution.
+        - CTRL+C : Divide window resolution.
+        - CTRL+F : Fullscreen mode.
+     - Added new normalization mode=3, now set by default when using CImgDisplay. Try to adapt
+     the display normalization to the image type.
+     - Added new example 'edge_explorer.cpp' (thanks to Orges Leka).
+     - Added new example 'greycstoration4gimp.cpp' (which is a GREYCstoration plugin for the Gimp, thanks
+     to Grzegorz Szwoch)
+     - Added functions 'CImg<T>::[get]_round()' that round values of an image.
+     - Added function 'CImg<T>::draw_line()' able to draw joined set of segments.
+     - Added interpolation_type=-1 for 'CImg<T>::resize()' corresponding to raw memory resizing, without
+     interpolation.
+     - Added function 'CImg<T>::permute_axes()' that can be used to swap order of image axes
+     (useful for converting ...RRRRRRGGGGGBBBBB... to ...RGBRGBRGBRGB....)
+     - Added support for NIFTI files (extension '.nii') added in 'CImg<T>::load_analyze()'.
+     - Added function 'CImg<T>::[get_]displacement_field()' that can estimate displacement field between two images.
+     - Added default constructor for the 'CImgDisplay' class, which creates a window initially in the 'closed' state.
+     - Added directory 'compilation/unix_debian_package' for easy construction of .deb package for CImg.
+     - Added new search parth to find 'medcon' on Windows.
+     - Added Debian package configuration files to generate .deb file from the CImg directory
+     (a .deb file is now available from the CImg website).
+
+* Optimizations / Modifications :
+     - Renamed all '*_convert' functions to '*_imagemagick'.
+     - Fonction CImg<T>::draw_object3d() has been slightly optimized (light computation for
+     outside primitives is not done anymore).
+     - Small changes in cimg:: traits.
+     - Removed 'precision' arguments in 'CImg<T>::draw_axis()'.
+     - The use of non in-place arithmetical operators is now possible in plug-ins.
+     - Optimized the search of different pathes on Windows, thanks to Martin Petricek.
+     - Cleaned some portions of the code.
+
+* Bug corrections :
+     - CImg<T>::save_off() has been debugged.
+     - Versions of 'CImg<T>::load_tiff()' and 'CImg<T>::save_tiff()' that use libtiff has been
+     debugged and improved.
+     - fread() and fwrite() has been recoded to handle the Windows file size limit of 64Mb over network
+     (this is a Windows bug !).
+     - GREYCstoration plugin has been modified to better deal with 16 and 32bits images.
+     - And many other small bug corrections....
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.1.8 to 1.1.9
+*-----------------------------
+*-----------------------------
+
+* New features :
+     - Added Rice noise distribution in 'CImg<T>::noise()' (thanks to H.E Assemlal).
+     - Added functions 'CImg<T>::sharpen()' and 'CImg<T>::get_sharpen()' that can enhance contrast in images,
+     using nonlinear 2D/3D multi-valued shock filters.
+     - Added function 'CImgStats::is_empty()' to check is a stat object has been initialized or not.
+     - Added function 'CImg<T>::contains()' and 'CImgList<T>::contains()' that can test if a pixel is
+     present in an image.
+     - Added new demo 'CImg-breakout' in 'examples/CImg_demo.cpp' (Arkanoid-style game in 64 lines of code!).
+     - Functions 'CImgDisplay::hide_mouse()' and 'CImgDisplay::show_mouse()' have been added, allowing to
+       hide/show the cursor when it is over a display window.
+     - Functions 'CImg<T>::[get_]structure_tensorXY[Z]()' have been added, allowing to compute the 2D or
+     3D structure tensor field from an image.
+     - Function 'CImgDisplay::set_mouse()' is now working on Windows.
+     - Added load/save functions to deal directly with std::FILE structures.
+     - Added members 'CImgDisplay::keys[256]' and 'CImgDisplay::buttons[256]' allowing to get the latest 256 keys
+     or mouse buttons modifications done on the display window.
+     - Added function 'CImgDisplay::is_typed()' to test if a certain combination of key has been typed
+     on the display window.
+     - Added keyboard shortcut 'CTRL+S' in 'CImg<T>::display_object3d()' to be able to save snapshot of current 3d view.
+
+* Optimizations / Modifications :
+     - Recoded the greycstoration plug-in as the file 'plugins/greycstoration.h'. The command line version
+     'examples/greycstoration.cpp' has been greatly improved, including tiled-mode and less memory consumption.
+      The use of GREYCstoration is now more easy, the code is more factorized.
+     - File extension '.txt' is now considered as '.dlm' (ascii file).
+
+* Bug corrections :
+     - Plugin 'plugins/cimgmatlab.h' has been corrected.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.1.7 to 1.1.8
+*-----------------------------
+*-----------------------------
+
+* New features :
+    - Added conditional use of the FFTW3 library (http://www.fftw.org) allowing more flexibility and speed
+      on DFT computation, when used.
+    - Added new macro 'cimg_help()', displays arbitrary user-defined messages when program is invoked
+    with the option '-h' or '--help'.
+    - Added new macro 'cimglist_apply()' allowing to apply a single function to all members of a list :
+    Ex: cimglist_apply(list,blur)(3.0f);
+    - Added functions 'CImg<T>::resize_object3d()', 'CImgList<T>::resize_object3d()',
+    'CImg<T>::get_resize_object3d()' and 'CImgList<T>::get_resize_object3d()' to ease resizing and
+    centering 3d objects.
+    - Added function 'CImgDisplay::set_mouse()' to set the mouse pointer coordinates (X11 only).
+    - Added functions 'CImg<T>::atan()', 'CImg<T>::acos()', 'CImg<T>::asin()' and their get_* counterparts.
+
+* Optimizations / Modifications :
+    - 'cimg_debug' has new value signification. Can now choose between displaying error message on the console
+    or on modal windows, even when 'cimg_display_type' is not 0.
+    - Updated CImg presentation slides in 'documentation/slides_cimg.pdf', more complete now.
+    - Added new directories in path search for 'convert' and 'medcon' and 'temporary path'.
+    'convert' or 'medcon' found in the current directory './' now override the default ones.
+    - Added safer support for Windows 64bits.
+    - Improved version of 'cimg::info()' for debugging facilities. Now displays almost every
+    important library variables and parameters.
+    - Static version of CImg<T>::sequence() now return a column vector instead of a line.
+    - Slightly changed the tracking algorithm and few other things in 'examples/dtmri_view.cpp',
+      allowing more precision in the fiber computation.
+    - Modified the 'CImg<T>::feature_selection()' function : replaced the moving hatch by a static
+    one, less fun but also less time consuming. One small selection bug for 3D volumes has been
+    also corrected.
+    - Corrected line routine for 64bits architectures.
+    - Replaced 'CImg<T>::scroll()' by 'CImg<T>::translate()'.
+    - Replaced all 'cimg_map' by more coherent names based on 'cimg_for_*'. Same for 'cimglist_map'.
+      Compatibility with previous versions of CImg is ensured if 'cimg_strict' is not defined.
+    - Recoded functions to retrieve parts of the images : get_channel(), get_slice(), ...
+    - Improved the cimg::system() function.
+    - Added some tests and display extra warnings when saving images with wrong formats.
+
+* Bug corrections :
+    - Corrected small bug in 'CImg<>::blur_anisotropic()', 'examples/greycstoration.cpp' and 'plugins/greycstoration4integration.h'.
+    - And lot of minor bug corrections and optimizations .....
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.1.6 to 1.1.7
+*-----------------------------
+*-----------------------------
+
+* New features :
+    - Added 'operator<<()' and 'operator>>()' for bit shift operations on all images pixels.
+    - Added most of mathematical operators in the 'CImgList' class.
+    - Added new demo 'Image Waves' in 'examples/CImg_demo.cpp'.
+    - Added mouse wheel support on Windows (incomplete!)
+
+* Optimizations / Modifications :
+    - Renamed class 'CImgl' into 'CImgList', also renamed macro 'cimgl_map' to 'cimglist_map'.
+      Backward compatibility is assured in 1.1.7 version, but think about replacing the old names
+      by the new ones for future CImg versions.
+    - Removed 'operator<<()' which appended an image to another one
+    - Recoded lot of non in-place mathematical operators to avoid numerical truncations.
+    It may have a great influence on your code. For instance writting '0.5+img' will result in a CImg<double>
+    image, even if 'img' was a CImg<float>.
+    - Recoded most of 'CImg<T>::get_resize()' function : linear interpolation performs now really faster, and
+    an additional parameter allows to select between different conditions for border values.
+    - Recoded 'CImg<T>::draw_line()' so that it now uses a classical Bresenham algorithm, avoiding rounding errors.
+    - Renamed 'CImg<T>::draw_axe' as 'CImg<T>::draw_axis'.
+
+* Bug corrections :
+    - Corrected some functions that did not performed correctly on shared images.
+    - Corrected small bug in 'plugins/primitives3d.h' in function 'CImg<T>::sphere()'.
+    - Corrected 'CImg<T>::feature_selection()' when displaying 'CImg<bool>' images.
+    - Corrected 'CImg<T>::load_cimg()' : is now able to load bool images.
+    - And lot of minor bug corrections and optimizations .....
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.1.5 to 1.1.6
+*-----------------------------
+*-----------------------------
+
+* New features :
+    - Added DTMRI volumetric file viewer, in 'examples/dtmri_view.cpp'.
+    - Added 3D sprite display support in 'CImg<T>::draw_object3d()'.
+
+* Optimizations / Modifications :
+    - Rewritten a lot of constructor/assignments functions for CImg<T> and CImgl<T>.
+     Removed shared capabilities of CImgl<T>, but improved these ones for CImg<T>.
+
+* Bug corrections :
+    - And lot of minor bug corrections and optimizations .....
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.1.4 to 1.1.5
+*-----------------------------
+*-----------------------------
+
+* New features :
+    - Added plugin 'CImg/primitives3d.h', adding functions that can generate
+      basic 3D triangulated primitives.
+    - Added Poisson noise capability in CImg<T>::noise() (This patch has been proposed by Jerome Boulanger)
+    - Added wheel mouse support in 'CImgDisplay', now used in 'CImg<>::feature_selection()' to go through slices of
+      3D volumes (unfortunately for X11 systems only).
+    - Added function 'CImgDisplay::toggle_fullscreen()' to allow easy and dynamic fullscreen switching of a display.
+    - Added screen resolution switching capabilities when using the Xrandr extension, under X11 (#define cimg_use_xrandr).
+    - Added support for ImageMagick++ built-in library (parts of the patch proposed by Christoph Hormann).
+    - And lot of small functions to ease the life...
+
+* Optimizations / Modifications :
+    - CeCiLL-C license now applies for the file 'CImg.h'. This license (close to the LGPL one) is more adapted
+      for library components as CImg. The examples stay in previous CeCiLL license (close to the GPL one).
+    - Recoded 'CImg<T>::draw_axe?()' (where ? can be 'X','Y' or 'XY') so that it can now be used to draw non-linear values along axes
+      (for instance logarithmic-varying labels).
+    - Attribute 'force' have been removed in 'CImgDisplay::resize()'.
+    - Recoded most constructors and assign functions in CImg<T> and CImgl<T>.
+    - Recoded most of the CImgDisplay class to allow more flexibility and refreshing speed.
+    - Renamed 'CImgDisplay::title()' to 'CImgDisplay::set_title()'. 'CImgDisplay::title' is now a class variable
+      that stores the current title of the display window.
+    - 'CImgDisplay::closed', 'CImgDisplay::resized', 'CImgDisplay::fullscreen' and 'CImgDisplay::moved' have been
+      renamed to 'CImgDisplay::is_closed', 'CImgDisplay::is_resized', 'CImgDisplay::is_fullscreen' and
+      'CImgDisplay::is_moved', for more coherent variable names.
+    - 'CImg<T>::display_object3d()' : can now specify an input pose matrix, as well as get the output pose matrix,
+      after the user rotated the object. Also, this function has been optimized.
+
+* Bug corrections :
+    - Corrected sorting bug in 'CImg<T>::symmetric_eigen()' and 'CImg<T>::SVD()'
+    - When using shared memory images, some 'CImg<T>::get_*()' methods returned a shared memory image too.
+    - And lot of minor bug corrections and optimizations .....
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.1.3 to 1.1.4
+*-----------------------------
+*-----------------------------
+
+* New features :
+    - Added fullscreen mode support on X11-based systems.
+    - Added CImg<>::save_dicom(), allowing to save DICOM files, via XMedcon.
+    - Added phong-like rendering capabilities in 'CImg<T>::draw_triangle()' and 'CImg<T>::draw_object3d()'.
+    - Added a directory 'plugins/' that contains some useful CImg plugins, developed by third parties.
+    - Added bicubic interpolation option in functions 'CImg<T>::get_rotate()'
+    - Added new example 'Fireworks' in 'examples/CImg_demo.cpp'.
+    - Added new fonts with increasing sizes that can be used in 'CImg<T>::draw_text()'.
+      Also simplified function 'CImg<T>::get_font()', and added size parameter in 'CImg<T>::draw_text()'.
+
+* Optimizations / Modifications :
+    - Optimized 'CImg<T>::get_resize()'.
+    - Allows the use of the MIT-XSHM extension for X11-based display, allowing to speed up CImgDisplay rendering
+    (roughly a factor of 3 when using this extension).
+    - Optimized CImgDisplay::render() for X11-based systems. Image display is now faster (roughly a factor of 2.5).
+    - Modified CImg<>::display_object3d() : keyboard is now not handled, added translation using 3rd mouse button.
+      Added small axes at the bottom left to see object orientation.
+    - Removed some unuseful 'const' keywords in some function return values, removing warnings
+      when compiling with icc or icl.
+    - Renamed 'CImg<T>::RGBtoYCbCr8()' to 'CImg<T>::RGBtoYCbCr()' (and derived functions).
+    - Gathered 'CImg<T>::dirichlet_pix?d()' and 'CImg<T>::neumann_pix?d()' in a single function 'CImg<T>::pix?d()'.
+    - Renamed 'CImg_test.cpp' to 'CImg_demo.cpp'
+
+* Bug corrections :
+    - Corrected bug with X11 displays : sometimes, black images were displayed, needing an explicit refresh.
+    - Corrected bug with X11 displays related to ClientMessage. Windows are not closed when other applications are opened.
+    - Corrected 'CImgl<T>::remove()' : Wrong memory deallocation could happen sometimes.
+    - And lot of minor bug corrections and optimizations .....
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.1.2 to 1.1.3
+*-----------------------------
+*-----------------------------
+
+* New features :
+    - Added a new example source file 'examples/image_surface.cpp', that renders an image as a surface in a 3D space.
+    - Added a new example source file 'examples/mcf_levelsets3D.cpp', that performs Mean Curvature Flow of a 2D surface, using level sets.
+    - Added a version of 'CImg<T>::draw_triangle()' that can draw Gouraud-shaded triangles (flat and textured versions).
+    - Added 'CImg<T>::get_rotation_matrix()' that returns a 3x3 rotation matrix from a quaternion or a rotation vector.
+    - Added 'CImg<T>::draw_object3d()' that can draw a colored/textured 3d object on images.
+    - Added 'CImgDisplay::display_object3d()' and 'CImg<T>::display_object3d()' which run a high-level interface that
+      can view a user-defined 3d object.
+    - Added two 3D rendering examples in 'examples/CImg_test.cpp', that shows how to use 3D rendering capabilities of CImg in few lines.
+    - Added 'CImg<T>::marching_cubes()' and 'CImg<T>::marching_squares' that can be used to triangularize an implicit 2D or 3D
+      curve or surface from an image or a function.
+    - Added 'CImg<T>::get_load_off()' and 'CImg<T>::save_off()' that manages OFF files
+      (files describing 3D object, GeomView format, see 'http://www.geomview.org/').
+
+* Optimizations / Modifications :
+    - Removed the 'multiplexed' variable in one of the CImg constructor. This feature as not generic enough to be integrated
+      in a constructor, and is so simple to code (one line).. This has been replaced by the new 'shared' capabilities of CImg.
+    - Added a 'shared' variable in CImg<T> and CImgl<T>. This allows to completely remove CImgSubset<T> and CImglSubset<T>, and
+      allows more flexibility for using shared memory. A lot of functions relative to shared-memory images have been added also.
+      Please look closely to the online reference.
+    - Added a fast approximation method in 'examples/greycstoration.cpp' (set by default) allowing to speed up the
+      restoration process almost by a factor x3.
+    - Recoded 'CImg<T>::get_dilate()' and 'CImg<T>::get_erode()' : it is now possible to specify a structuring element.
+    - Due to high difficulty in maintaing all project files in the 'compilation/' directory, I removed most of them except one
+      template file for each different C++ IDE. Just replace the default source file 'CImg_test.cpp' in the project file by the one
+      you want, to compile you desired example.
+    - Renamed 'CImg<T>::get_2dprojections()' to 'CImg<T>::get_projections2d()'.
+    - Removed 'examples/render3d.cpp'. As CImg has now built-in functions for 3D rendering, this example was obsolete.
+      Look at the new example appearing in 'examples/CImg_test.cpp' to see how to do easy 3D rendering with CImg.
+
+* Bug corrections :
+    - Corrected 'CImg<T>::cubic_pix1d()' and 'CImg<T>::cubic_pix2d()', used for cubic and bicubic interpolations.
+    - Corrected 'cimg_map2x2()' and 'cimg_map4x4()' to avoid warning when compiling with g++.
+    - Added a simple trick to ease the use of libjpeg and libpng on Windows (thanks to bugzhao).
+    - Corrected 'CImg<T>::load_jpeg()' and 'CImg<T>::save_jpeg()' to handle all possible color spaces used in JPEG files.
+    - Corrected 'CImg<T>::get_split()' to avoid bug with very large images.
+    - Corrected 'CImg<T>::load_dicom()' and 'cimg::medcon_path()' to ease the loading of medcon files on Windows.
+    - And lot of minor bug corrections....
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.1.1 to 1.1.2
+*-----------------------------
+*-----------------------------
+
+* Bug corrections :
+    - Bug corrected in 'CImg<T>::load_ppm()' and 'CImg<T>::save_ppm()' : 16 bits PPM images were not correctly stored.
+    - (Stupid) bug corrected in 'CImg<T>::get_sort()' : Return value was a reference to a temporary object.
+    - Bug corrected in 'CImg<T>::resize_halfXY()' that caused a possible segmentation fault.
+    - Bug corrected in 'CImg<T>::move()' : Moving an hidden window (on X11) is now working.
+    - Handling pixel access to const images : writing pixel values in const images is now forbidden.
+    - 'CImg<T>::det()' : Determinant of general matrices can now be computed.
+    - 'CImgDisplay' : Added some changes in Microsoft-specific function call to be able to compile with Visual Studio 2005. This compiler seems to be 'buggy', I had very strange behaviors at run-time with it (changing an 'int' to 'const int' declaration solves a 'problem' in CImg<>::draw_ellipse() that was present only with this compiler...)
+    - 'CImg<>::load_dlm()' : small bug corrected. Can now read DLM files with no CR at the last line.
+    - And other small corrections....
+
+* Optimizations / Modifications :
+    - In 'CImg<T>::save_convert()', the temporary file is now saved in PNM format, instead of RGBA as before. This has been done
+      because of a strange bug in ImageMagick's convert, refusing to read some RGBA files.
+    - CImgDisplay::move() now shows automatically the display when it is in a closed state.
+    - Moved the trait cimg_library::largest<T,t> in cimg_library::cimg::largest<T,t>.
+    - Renamed 'CImg<T>::quicksort()' to 'CImg<T>::sort()'.
+    - Renamed 'CImg<T>::create()' and 'CImg<T>::copy()' to 'CImg<T>::assign()'.
+    - 'CImg<T>::inverse()' can now uses the LU matrix decomposition (or the SVD one as before).
+    - Optimized memory handling when playing with lists of images CImgl<>.
+    - Optimized some CImg<T> constructors.
+
+* New features :
+    - Added a new demo : 'Blobs Editor' in CImg_test.cpp.
+    - Added types 'CImg<T>::iterator', 'CImg<T>::const_iterator', 'CImgl<T>::iterator' and 'CImgl<T>::const_iterator' to allow
+      the easy use of STL algorithms on CImg and CImgl structures.
+    - Added several functions that acts like in STL vectors and lists in CImg<T> and CImgl<T> :
+      CImg<T>::assign(), CImg<T>::clear(), CImg<T>::at(), CImg<T>::back(), CImg<T>::front(), CImg<T>::begin(), CImg<T>::end(),
+      CImgl<T>::assign(), CImgl<T>::clear(), CImgl<T>::at(), CImgl<T>::back(), CImgl<T>::front(),
+      CImgl<T>::begin(), CImgl<T>::end(), CImgl<T>::push_back(), CImgl<T>::push_front(), CImgl<T>::pop_back(), CImgl<T>::pop_front().
+    - Added 'CImg<T>::MSE()' and 'CImg<T>::PSNR()' that compute the MSE (Mean Squared Error) and PSNR
+      (Peak Signal to Noise Ratio) between two images.
+    - Added 'CImg<T>::solve()' and 'CImg<T>::get_solve()', allowing to solve linear systems.
+    - Added 'CImg<T>::pseudoinverse()' and 'CImg<T>::get_pseudoinverse()' allowing to compute the Moore-Penrose
+      matrix inverse (useful for computing solutions to the least-square problem).
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.1.0 to 1.1.1
+*-----------------------------
+*-----------------------------
+
+* Bug corrections :
+    - in 'CImgl<T>::insert()' : Insertion at non-last position was bugged.
+    - in 'greycstoration.cpp' : Corrected some bugs in the algorithm and improved user interface.
+    - in 'CImg<T>::blur_anisotropic()' : Abusive vector normalization was done before. Now it is corrected.
+    - And many other bugs...
+
+* Optimizations / Modifications :
+    - Removed macros 'cimg_test*()' and modified argument checking in most of the functions, so that trying to act
+    on an empty image does nothing instead of an error.
+    - Renamed all static methods CImg<T>::load*() into CImg<T>::get_load*(). This has been done to be coherent with
+    the naming convention of other CImg methods. Also, added new functions CImg<T>::load*() (non static) that corresponds
+    to in-place image loading.
+    - Renamed CImg RAW extension from .raw to .cimg. .raw files are not considered as real raw data without
+    header. New functions 'CImg<T>::load_get_raw()' and 'CImg<T>::save_raw()' have been added to load and save .raw files.
+    - In 'greycstoration.cpp' : improved algorithm and parameters. Also add improved visualization tool at the end
+      of the image regularization.
+    - Replaced some cimg:: static functions to inlined one, to prevent compiler bug on VS7.1, when trying
+      to link multiple CImg-based modules.
+    - Replaced parameter 'linear' to 'scheme' in 'CImg<T>::blur_anisotropic()', allowing the use of 2nd order
+      Runge-Kutta integration, instead of just nearest-neighbor or linear ones.
+
+* New features :
+    - Introduced a trait 'cimg::largest' that allows to find the largest data type between two types. CImg functions
+    use it for instance to return a CImg<float>, when trying to compute the gradient of an CImg<unsigned char>.
+    It was not the case before, needing an explicit case, as in 'CImg<float>(img).get_gradientXY()'.
+    - Added 'CImg<T>::operator<<', 'CImgl<T>::operator<<' and 'CImgl<T>::operator>>' that allows to
+    insert images in list or append an image to another one.
+    - New project file for using with X-Code (on Mac OS X) has been added to the 'compilation/' directory.
+     Thanks to Werner Jainek who made it possible.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.0.9 to 1.1.0
+*-----------------------------
+*-----------------------------
+
+* Bug corrections :
+    - in 'CImg<T>::load_raw()' : possible buffer overflow corrected.
+    - in 'CImg<T>::load_dlm()' : the use of std::rewind() didn't work when reading the standart input. Function has been
+      recoded so it reads the file in one pass.
+    - Corrected 'CImg<T>::anisotropic_blur()'.
+    - Corrected 'CImg<T>::symeigen()' : corrected computation bugs.
+    - Corrected 'CImg<T>::get_resize()' : linear and bicubic interpolations were not correctly handled (minor).
+    - Corrected 'CImgDisplay' to avoid malloc/dealloc problem with newer versions of X11.
+    - Corrected 'CImgDisplay' to handle better thread termination under X11 (Unix and MacOSX).
+    - Corrected 'greycstoration.cpp' (small bug in inpainting and non-curvature scheme).
+
+* Optimizations / Modifications :
+    - Updated documentation.
+    - Modified Makefile for direct compilation of executables under Linux (ex : make CImg_test).
+    - Modified Exceptions error messages for more simplicity and clarity.
+    - Removed parameter 'alpha' in 'CImg<T>::get_gradientXY()' and 'CImg<T>::get_gradientXYZ()'.
+    - Renamed 'CImg<T>::flip()' to 'CImg<T>::mirror()'.
+    - Renamed 'CImg<T>::get_3dplanes()' to 'CImg<T>::get_2dprojections()'.
+    - Renamed 'CImgROI<T>' to 'CImgSubset<T>'. Also removed functions 'CImg<T>::ref_*' and replaced it by
+    'CImg<T>::pointset()', 'CImg<T>::lineset', 'CImg<T>::planeset' and 'CImg<T>::channelset'.
+
+* New features :
+    - Added 'CImg<T>::RGBtoLUT()' and 'CImg<T>::LUTtoRGB()' that convert an RGB image to an indexed image (using a palette).
+    - Added 8 bits display mode support in CImgDisplay.
+    - Added 'CImg<T>::RGBtoHSV()' and 'CImg<T>::HSVtoRGB()' that handle the conversion from and to HSV color space.
+    - Added 'CImg<T>::kth_smallest()' and 'CImg<T>::median()' that find respectively the kth smallest
+      element and the median of values in a CImg<T> instance.
+    - Added 'CImg<T>::blur_median()' and 'CImg<T>::get_blur_median()' that apply a median filter on an image.
+    - Added 'CImg<T>::load_parrec()' able to read PAR-REC (Philips) image file formats.
+    - Added 'CImgDisplay::title()' that can be used to change the display window title.
+    - Added 'CImg<T>::RGBtoYUV()' and 'CImg<T>::YUVtoRGB()' that convert between RGB and YUV color spaces.
+    - Added 'CImg<T>::RGBtoYCbCr8()' and 'CImg<T>::YCbCr8toRGB()' that convert between RGB and YCbCr color spaces (for unsigned char
+    pixels).
+    - Added 'CImg<T>::has_same*()' where * can be 'X','Y','Z','XY','XYZ','XYZV' to compare image dimensions.
+    - Added 'CImg<T>::is_empty()' that returns 'true' is the image is empty.
+    - Added 'CImg<T>::load_dicom()' that loads an image in Dicom file format. This function uses the tool 'medcon' that
+    has to be installed (http://xmedcon.sourceforge.net/).
+    - Added 'CImg<T>::load_yuv()', 'CImgl<T>::load_yuv()' and 'CImg<T>::save_yuv()', 'CImgk<T>::save_yuv()'
+     that load and save respectively one frame or the entire movie from a .yuv file.
+    - Added 'CImglSubset<T>' which is a class that sub-references an image list 'CImgl<T>'.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.0.8 to 1.0.9
+*-----------------------------
+*-----------------------------
+
+* Bug corrections :
+    - Memory leak corrected in 'CImg<T>::load_bmp()'.
+    - CImg now supports the MIPS compiler on SGI (Thanks to Matt Hanson who made it possible).
+    - Corrected non-global X11 variables in multi-module projects using CImg.h (thanks also to Matt Hanson for
+    his precise bug report).
+    - In CImg<T>::load_convert() and save_convert(), random filenames are now tested before read/write.
+    - Removed unuseful template in 1D CImg<T>::draw_gaussian() function.
+    - Recoded CImgDisplay::render() with XPutPixel() again for maximum compability between X11-based architectures.
+    - In CImgStats, the variance field was computed actually as the standart deviation. This is now corrected, and the variance
+    is really the variance !
+
+* Optimizations / Modifications :
+    - CImgDisplay fields mousex and mousey changed to fields mouse_x and mouse_y. This is done to be more coherent
+    with other CImgDisplay fields. The inconvenience should be minor, just replace the fields by the right names.
+    - CImgDisplay functions window_posx() and window_posy() changed to fields window_x and window_y.
+    - Eigenvalue computation with CImg<T>::eigen() and symeigen() sorts the eigenvalues in inverse order from now on.
+    The eigenvector matrix is also transposed, to be more close to the standart functions in eigenvalue computation.
+    - Renamed macro variable 'cimg_lapack' in 'cimg_use_lapack'.
+    - CImg<T>::save() can now handle alpha channel in PNG images (with 4-channels images).
+    - Recoded CImg<T>::noise() to handle numerical limits in template types (esp. for unsigned char and char).
+    - Recoded CImg<T>::pow() to be faster with usual int powers (0,1,2,3,4).
+    - Added conversions functions for all color spaces (R,G,B), (X,Y,Z), (x,y,Y) and (L,a,b).
+    - Added a 'pattern' parameter in 'CImg<T>::draw_ellipse()' and 'CImg<T>::draw_circle()', so that
+    only the outline of the ellipse/circle can be drawn.
+    - Added an ellipse-based selection in CImg<T>::feature_selection(), when parameter 'feature_type' is set to 3.
+
+* New features/functions :
+    - Added an 'Image Zoomer' demo in 'CImg_test.cpp'.
+    - Added 'CImg<T>::load_jpeg()' and 'CImg<T>::save_jpeg()' to deal natively with JPEG files, through
+      the libjpeg library. You don't need ImageMagick's convert anymore to read and save JPEG files.
+      Just define the macro 'cimg_use_jpeg before including 'CImg.h', and link your code with the 'jpeg' lib,
+       and it should work fine.
+    - Added 'CImg<T>::quicksort()' allowing to sort values inside vectors, and getting corresponding permutations.
+    - CImgDisplay::move() is now working well on Windows and Unix.
+    - Added 'CImg<T>::SVD()' to compute the SVD of general matrices. The inverse function as well
+    as the eigenvalue computation (of symmetric matrices) now uses the SVD. It means that LAPACK is
+    not necessary anymore in CImg !
+    - Added 'CImgDisplay::screen_dimx()' and 'CImgDisplay::screen_dimy()' to get the resolution of the
+    current (full) screen.
+    - Added a new 10x13 font, and recoded the functions 'CImgl<T>::get_font();'
+    - Added 'cimg::dialog()' that allows to open a simple dialog box with a maximum of 6 choices.
+    - Added CImgROI<T>::operator=(), so that one can now affect a channel or plane to an image :
+    img.ref_plane(2) = img_plane; Very useful !
+    - Added CImg<T>::load_png() and save_png() to deal natively with PNG files, through
+     the zlib and libpng libraries. You don't need ImageMagick's convert anymore
+      to read and save PNG files. Just define the macro 'cimg_use_png' before including
+      'CImg.h', and link your code with the 'zlib' and the 'png' lib, and it should work fine.
+       Many thanks to Eric Fausett, for this nice piece of code.
+    - Added CImg<T>::load_rgb(), load_rgba(), save_rgb() and save_rgba() that can load and save
+      Raw color image data (w/ or wo/ alpha channel).
+    - Added CImg<T>::blur_anisotropic() that allows to denoise image by anisotropic filtering.
+      Smoothing behavior can be even user-defined.
+       Look at  " http://www.greyc.ensicaen.fr/~dtschump/greycstoration/ "
+      to learn more about the image regularization technique implemented by this function.
+
+   - ... an tons of minor corrections !
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.0.7 to 1.0.8
+*-----------------------------
+*-----------------------------
+
+ * Bug corrections :
+    - Removed useless button/keyboard reinitialization in CImgDisplay events
+    - Corrected bug in CImg<T>::load_dlm() and load_ascii() functions.
+    - Corrected compile bug in CImg<T>::resize_halfXY() and CImg<T>::get_resize_halfXY().
+    - Corrected and optimized CImg<T>::get_resize().
+
+ * Optimizations / Modifications :
+    - Recoded CImg<T>::fill() for faster value filling.
+    - Recoded CImg<T>::draw_graph(). IMPORTANT NOTE : ymin and ymax are now directed up to down, instead
+      of down to up, in order to be more coherent with the draw_axeXY() function. This means you will
+      probably have to swap the values of these two parameters in the function call, to get similar results
+      to CImg 1.0.7 !!
+    - Recoded CImg<T>::draw_gaussian() using tensors (parameters changed).
+    - CImg is now successfully compiled using the option '-pedantic' with g++. Makefile has been modified.
+    - CImg compiles with the DJGPP compiler (tested without display capabilities).
+    - Added load/save support for 16bits PNM binary images.
+    - Added interleaved mode support and template in constructor :
+      template<typename t> CImg(const t *const data_buffer,dx,dy,dz,dv,bool interlaced)
+    - Recoded parts of CImg<T>::eigen().
+    - Optimized buffer copy in XImage, for faster image display under X11 (minor improvements).
+    - Added fields in CImgStats, allowing to get the coordinates of the min/max pixels.
+
+ * New features/functions :
+    - Added CImg<T>::load_bmp() and save_bmp() to deal with uncompressed BMP formats, without using ImageMagick.
+    - Added CImg<T>::vector(), CImg<T>::matrix() and CImg<T>::tensor().
+    - Added CImg<T>::scroll() and CImg<T>::get_scroll to be able to scroll images.
+    - Added functions CImg<T>::get_FFT() and CImgl<T>::FFT() for Fast Fourier Transform.
+    - Added CImgDisplay::move() to be able to move display windows at specific locations.
+    - Added several region split in CImg<T>::get_split().
+    - Added 'examples/mcf_levelsets.cpp' : Mean curvature flow of a 2D curve, using level sets.
+    - Added 'examples/greycstoration.cpp' : New algorithm for image denoising, inpainting and resizing.
+      (see http://www.greyc.ensicaen.fr/~dtschump/greycstoration)
+    - Added 'examples/wavelet_atrous.cpp' (by R. Peteri) : Wavelet decomposition of a image.
+    - Added a Fourier-based filtering demo in 'CImg_test.cpp', allowing interactive frequency filter creation.
+    - Added an Image to ASCII converter, based on simple correlation measure. File : 'examples/image2ascii.cpp'.
+
+ * Abandonned features :
+    - Removed bump mapped version of the CImg<T>::draw_triangle() function.
+    - Removed 'examples/inpainter.cpp' which is a little bit buggy (problem with multiscale).
+    - Removed 'CImg<T>::new_display()' and 'CImgl<T>::new_display', which are confusing and useless. Use
+      'new CImgDisplay(img)' and 'new CImgDisplay(list)' instead.
+    - Removed 'CImg<T>::get_stats()' and 'CImgl<T>::get_stats', which are useless. Use 'CImgStats(img)'
+      and 'CImgStats(list)'.
+
+*-----------------------------
+*-----------------------------
+* Changes from 1.0.6 to 1.0.7
+*-----------------------------
+*-----------------------------
+
+ - New License : CImg is now distributed under the CeCiLL License, a free software GPL-like, more adapted
+   to French laws. Don't be disturbed by this new License, CImg is still an open source free software !
+ - Encapsulation of all CImg classes and functions in the 'cimg_library::' namespace. It avoids eventual
+   class names collisions with other libraries. For compatility with your old code, you should
+   insert 'using namespace cimg_library;', just after the '#include "CImg.h"' line, in your source code.
+ - Removed global typedefs for uchar,uint,ushort,ulong. If you used them before, you'll have to redefine them :
+   typedef unsigned char uchar;
+   typedef unsigned short ushort;
+   typedef unsigned int uint;
+   typedef unsigned long ulong;
+ - Corrected window resize bug on X11 displays.
+ - Added PANDORE-4 file format support, with functions 'CImg::load_pandore()' and 'CImg::save_pandore()' (file extension : .pan)
+   (PANDORE is a C++ toolkit for image processing, see http://www.greyc.ensicaen.fr/~regis/Pandore (in French))
+ - Added macros CImg_3x3_ref(), CImg_5x5_ref(), .. allowing to use special loops cimg_map3x3,.. with references to C arrays and images.
+ - Removed 'normalize' parameter in 'CImg::save()'. Saving normalized images can be still performed
+   with 'img.normalize(0,255).save("normalized_image.jpg");'. This clarifies the code and doesn't add so much work at all.
+ - Renamed 'CImg::get_sprite()' and 'CImg::sprite()' to 'CImg::get_crop()' and 'CImg::crop()'.
+ - Changed 'draw_triangle' function with two textures, so that it corresponds to displacement mapping
+   (aka 'bump mapping'), instead of two textures drawn with transparencies
+   (which can be still made by two successive calls to single-textured 'draw_triangle' functions,
+   with correct opacities).
+ - Negative opacity parameter in drawing functions is now supported. It allows to ADD shapes colors to the current
+   image pixels (see the new 'ShadeBobs demo in the CImg_test.cpp file to see the concept).
+ - Added functions 'CImg::draw_axeX', 'CImg::draw_axeY' and 'CImg::draw_axeXY', allowing to trace labelled axes on images.
+ - Slightly changes in CImgDisplay : field 'attributes' has been removed, and replaced by more
+   comprehensive field names : events, normalize, fullscreen. Resizing capabilities is now removed
+   since all windows can be resized by default.
+ - 'CImg<>::load_convert()' and 'CImg<>::save_convert()' do not popup a console window anymore on Windows-based OS,
+   when creating code with a WinMain() entry.
+ - RGB<->BGR Color inversion problem on some old Unix displays has been corrected.
+ - Makefile for compilation on Solaris has been updated.
+ - Package structure has been slightly modified for more clarity. Renamed also the CVS module to 'CImg' instead of 'CImg_'
+ - Added different compilers projects to ease the compilation of the CImg examples, including
+   Visual C++ 6.0, Visual.NET2003, Borland Bcc 5.6, Digital Mars Compiler, Dev-Cpp, Intel ICL.
+ - Removed the use of TrackMouseEvent mechanism on Windows, removing compilation bugs with VC++6.0 when trying to create an MDI application.
+ - Improved keycode detection under X11. Keycodes should now work for any X11-based system.
+ - Support for FreeBSD added (thanks to Thierry Thomas).
+ - Corrected bug in matrix multiplication.
+ - Corrected bugs in CImg<T>::erode() and CImg<T>::dilate() functions (name inversion).
+ - Corrected bug in 'CImg<T>::load_convert()' and 'CImg<T>::save_convert()' when trying to load/save images with pathnames containing spaces.
+ - Recoded 'inrcast.cpp', and suppressed 'inrcrop.cpp' in the 'examples/' directory (functionnalities of 'inrcrop' are now included in 'inrcast').
+ - And some corrections of minor bugs to improve library stability...
+ - Improved error messages to ease program debug.
+ - Documentation of the API is much more complete and detailled (still in progress...)
+
+*------------------------------
+*------------------------------
+* Changes from 1.0.5 to 1.0.6 :
+*------------------------------
+*------------------------------
+
+ - Drawing functions improved and optimized : Added transparency level to all drawing functions.
+ - Added function 'draw_arrow()'
+ - Added missing boolean operators.
+ - Added CImgDisplay resize event, allowing to create flexible resizing windows.
+ - Added 'CImg::draw_gaussian()' functions allowing to draw 1d,2d or 3d gaussians on images.
+ - Added 'Oriented convolutions' demos in CImg_test.cpp
+ - Recoded pde_TschumperleDeriche2D and 3D.
+ - Bugs corrected in arithmetics operators.
+ - Optimized image display.
+ - Recoded 'CImg::feature_selection()'.
+ - Recoded 'CImg::get_rotate()'
+ - Renamed 'draw_plot()' to 'draw_graph()', and added cubic drawing style.
+ - Renamed 'wait_sync()' to 'wait()'.
+ - Renamed 'get_correl' to 'get_correlate' (idem for 'convolve')
+ - Removed 'get_correl3x3,5x5,...'. Optimization is now a part of the 'get_correlate' function. (idem for 'convolve').
+ - Removed 'get_rotate90,180,270'. Optimization is now a part of the 'get_rotate' function.
+ - Compilation supported by gcc.3.4.1 (released july 2004).

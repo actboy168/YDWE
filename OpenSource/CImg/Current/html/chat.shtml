@@ -1,0 +1,7 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<frameset rows="300,80%">
+<frame src="header.html" name="up">
+<frame src="http://wbe01.mibbit.com/?nick=Nickname&server=irc.gimp.org&channel=%23cimgmic" name="down">
+</frameset>
