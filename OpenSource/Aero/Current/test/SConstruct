@@ -1,0 +1,1 @@
+Program("aero_test", Glob("*.cpp"), CCFLAGS = "/EHsc /O2 /GL /MD /DWIN32 /D_CONSOLE", CPPPATH = [r"..\include", ".", "..\Boost\Current"], LINKFLAGS = "/LTCG /OPT:REF /OPT:ICF /LTCG /DYNAMICBASE /NXCOMPAT /MACHINE:X86 /SUBSYSTEM:CONSOLE", LIBPATH = [".", r"..\Boost\Current\stage\lib\Win32"])
