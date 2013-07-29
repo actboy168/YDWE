@@ -1,7 +1,0 @@
-D:\YDWE Workspaes\actboy168\Development\YDWERel\1.25\Editor\Build\bin\Release\plugin\YDColorizer\WinApi.dll
-D:\YDWE Workspaes\actboy168\Development\YDWERel\1.25\Editor\Build\bin\Release\plugin\YDColorizer\WinApi.pdb
-D:\YDWE Workspaes\actboy168\Development\YDWERel\1.25\Editor\Plugin\YDColorizer\WinApi\obj\Release\ResolveAssemblyReference.cache
-D:\YDWE Workspaes\actboy168\Development\YDWERel\1.25\Editor\Plugin\YDColorizer\WinApi\obj\Release\WinApi.dll
-D:\YDWE Workspaes\actboy168\Development\YDWERel\1.25\Editor\Plugin\YDColorizer\WinApi\obj\Release\WinApi.pdb
-D:\YDWE Workspaes\actboy168\Development\YDWERel\1.25\Editor\Build\bin\Debug\plugin\YDColorizer\WinApi.dll
-D:\YDWE Workspaes\actboy168\Development\YDWERel\1.25\Editor\Build\bin\Debug\plugin\YDColorizer\WinApi.pdb
