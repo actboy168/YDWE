@@ -1,0 +1,52 @@
+The Horus project changelog
+
+0.4.6.T
+	— Extra build for usage with TESH.
+
+0.4.6
+	— Fixed folding on loop.
+	— Reverted folding on else to the beginning. Say no to code monkeys.
+
+0.4.5
+	— Fixed stack corruption issues.
+	— Added folding on library_once and textmacro_once.
+	— Added folding on phrases with four meaning words.
+
+0.4.4
+	— Finally fixed folding on else.
+	— Added folding on private modules.
+
+0.4.3
+	— Added folding on novjass and inject.
+	— Fixed not recognizing .0, 0x0, $0 -like numbers.
+	— Fixed bug with numbers being recognized as values.
+
+0.4.2
+	— Fixed user-defined functions from 'includes' folder not being recognized.
+	— Added folding of textmacro and preprocessor directives.
+	— Fixed folding on else when the closing brace was on previous line.
+    
+0.4.1
+	— Fixed folding bugs with interface.
+
+0.4
+	— Migrated to Scintilla 2.01
+	— Rewrote code folding logic from scratch.
+	— Correct highlighting of nested comments.
+    
+0.3.1
+	— Fixed last word highlighting.
+
+0.3
+	— Rewrote code highlighting logic from scratch.
+	— Completely migrated to Unicode build.
+	— Enabled Unicode input support.
+	— Disabled LMB+Scroll zoom bug.
+
+0.2
+	— Added delimeted comments highlighting.
+	— Added folding on all cJass keywords.
+	
+0.1
+	— First version, based on SFilip's old lexer source.
+	— Using Scintilla 1.77

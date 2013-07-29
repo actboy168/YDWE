@@ -1,0 +1,6 @@
+[Info]
+PluginName = Tesh
+[Load]
+Enable = 1
+Loader = Tesh.lua
+Dll    = Tesh.dll

@@ -1,0 +1,35 @@
+//***************************************************************************
+//*
+//*     <lib> Allocate v1    by AppleSheep
+//*
+//***************************************************************************
+
+#guard AS_Allocate
+
+    private static integer Allocate_Index = 0
+    private static integer Allocate_Line  = 0
+    private static integer Allocate_List  []
+
+    static thistype create () {
+        thistype this = .Allocate_Line
+            if this == 0
+                this = ++.Allocate_Index
+            else
+                .Allocate_Line = .Allocate_List[this]
+            endif
+            // other
+            .Allocate_List[this] = -1
+        return this
+    }
+
+    nothing destroy () {
+        if this == null then
+            return
+        endif
+        // other
+        if .Allocate_List[this] == -1
+            set .Allocate_List[this] = .Allocate_Line
+            set .Allocate_Line = this
+        endif
+    }
+

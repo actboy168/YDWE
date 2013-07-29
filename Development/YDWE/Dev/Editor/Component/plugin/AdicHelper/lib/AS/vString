@@ -1,0 +1,81 @@
+//***************************************************************************
+//*
+//*     <lib> vString v1    by AppleSheep
+//*
+//***************************************************************************
+
+#guard AS_vString
+
+library_once LibASvString initializer Lib_AS_vString_Init
+
+    #define {
+        AS_vString_type_sys   = "^sys^=# |c00FFFF00<$>|r"
+        AS_vString_type_v     = "^c^=$"
+        AS_vString_type_i     = "^i^=<I2S($)>"
+        AS_vString_type_r     = "^r^=<R2S($)>"
+        AS_vString_type_b     = "^b^=<AS_vString_b2s($)>"
+        AS_vString_type_s     = "^s^=<$>"
+        AS_vString_type_h     = "^h^=<I2S(GetHandleId($))>"
+        AS_vString_type_pc    = "^pc^=<AS_vString_pc[GetPlayerId($)]>"
+        AS_vString_type_p     = "^p^=<GetPlayerName($)>"
+        AS_vString_type_ipc   = "^ipc^=<AS_vString_pc[$]>"
+        AS_vString_type_ip    = "^ip^=<GetPlayerName(Player($))>"
+        AS_vString_type_igold = "^igold^=|cffffdc00<I2S($)>|r"
+        AS_vString_type_ilumb = "^ilumb^=|cff00c850<I2S($)>|r"
+        AS_vString_type_uo    = "^uo^=<OrderId2String($)>"
+        AS_vString_type_ui    = "^ui^=<UnitId2String($)>"
+
+        AS_vString_type_all = AS_vString_type_v ## AS_vString_type_sys ## AS_vString_type_i ## AS_vString_type_r ## AS_vString_type_b ## AS_vString_type_s ## AS_vString_type_h \
+						## AS_vString_type_pc ## AS_vString_type_p ## AS_vString_type_ipc ## AS_vString_type_ip ## AS_vString_type_igold ## AS_vString_type_ilumb \
+						## AS_vString_type_uo ## AS_vString_type_ui
+
+        vString() = ""
+        vString(str) = !@@s ## str !@@a ## AS_vString_type_all ## !@@e
+        vString(str,v0) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 !@@e
+        vString(str,v0,v1) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 !@@e
+        vString(str,v0,v1,v2) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 !@@e
+        vString(str,v0,v1,v2,v3) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 !@@e
+        vString(str,v0,v1,v2,v3,v4) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 !@@e
+        vString(str,v0,v1,v2,v3,v4,v5) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 !@@e
+        vString(str,v0,v1,v2,v3,v4,v5,v6) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 !@@e
+        vString(str,v0,v1,v2,v3,v4,v5,v6,v7) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 !@@e
+        vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 !@@e
+        vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 !@@e
+        vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va !@@e
+        vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va,vb) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va ## @vb !@@e
+        vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va,vb,vc) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va ## @vb ## @vc !@@e
+        vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va,vb,vc,vd) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va ## @vb ## @vc ## @vd !@@e
+        vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va,vb,vc,vd,ve) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va ## @vb ## @vc ## @vd ## @ve !@@e
+        vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va,vb,vc,vd,ve,vf) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va ## @vb ## @vc ## @vd ## @ve ## @vf !@@e
+    }
+
+    string AS_vString_b2s (boolean b) {
+        if b
+            return "true"
+        endif
+        return "false"
+    }
+
+    string array AS_vString_pc
+
+    nothing Lib_AS_vString_Init () {
+        AS_vString_pc[0x00] = "|cffff0303"
+        AS_vString_pc[0x01] = "|cff0042ff"
+        AS_vString_pc[0x02] = "|cff1ce6b9"
+        AS_vString_pc[0x03] = "|cff540081"
+        AS_vString_pc[0x04] = "|cffffff01"
+        AS_vString_pc[0x05] = "|cfffe8a0e"
+        AS_vString_pc[0x06] = "|cff20c000"
+        AS_vString_pc[0x07] = "|cffe55bb0"
+        AS_vString_pc[0x08] = "|cff959697"
+        AS_vString_pc[0x09] = "|cff7ebff1"
+        AS_vString_pc[0x0a] = "|cff106246"
+        AS_vString_pc[0x0b] = "|cff4e2a04"
+        AS_vString_pc[0x0c] = "|cff282828"
+        AS_vString_pc[0x0d] = "|cff282828"
+        AS_vString_pc[0x0e] = "|cff282828"
+        AS_vString_pc[0x0f] = "|cff282828"
+    }
+
+endlibrary
+

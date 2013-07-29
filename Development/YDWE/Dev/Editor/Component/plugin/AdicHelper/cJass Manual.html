@@ -1,0 +1,652 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+            "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>cJass 1.4.0.2
+</TITLE>
+
+<META http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<META name="GENERATOR" content="hevea 1.10">
+<STYLE type="text/css">
+.li-itemize{margin:1ex 0ex;}
+.li-enumerate{margin:1ex 0ex;}
+.dd-description{margin:0ex 0ex 1ex 4ex;}
+.dt-description{margin:0ex;}
+.toc{list-style:none;}
+.thefootnotes{text-align:left;margin:0ex;}
+.dt-thefootnotes{margin:0em;}
+.dd-thefootnotes{margin:0em 0em 0em 2em;}
+.footnoterule{margin:1em auto 1em 0px;width:50%;}
+.caption{padding-left:2ex; padding-right:2ex; margin-left:auto; margin-right:auto}
+.title{margin:2ex auto;text-align:center}
+.center{text-align:center;margin-left:auto;margin-right:auto;}
+.flushleft{text-align:left;margin-left:0ex;margin-right:auto;}
+.flushright{text-align:right;margin-left:auto;margin-right:0ex;}
+DIV TABLE{margin-left:inherit;margin-right:inherit;}
+PRE{text-align:left;margin-left:0ex;margin-right:auto;}
+BLOCKQUOTE{margin-left:4ex;margin-right:4ex;text-align:left;}
+TD P{margin:0px;}
+.boxed{border:1px solid black}
+.textboxed{border:1px solid black}
+.vbar{border:none;width:2px;background-color:black;}
+.hbar{border:none;height:2px;width:100%;background-color:black;}
+.hfill{border:none;height:1px;width:200%;background-color:black;}
+.vdisplay{border-collapse:separate;border-spacing:2px;width:auto; empty-cells:show; border:2px solid red;}
+.vdcell{white-space:nowrap;padding:0px;width:auto; border:2px solid green;}
+.display{border-collapse:separate;border-spacing:2px;width:auto; border:none;}
+.dcell{white-space:nowrap;padding:0px;width:auto; border:none;}
+.dcenter{margin:0ex auto;}
+.vdcenter{border:solid #FF8000 2px; margin:0ex auto;}
+.minipage{text-align:left; margin-left:0em; margin-right:auto;}
+.marginpar{border:solid thin black; width:20%; text-align:left;}
+.marginparleft{float:left; margin-left:0ex; margin-right:1ex;}
+.marginparright{float:right; margin-left:1ex; margin-right:0ex;}
+.theorem{text-align:left;margin:1ex auto 1ex 0ex;}
+.part{margin:2ex auto;text-align:center}
+.lstlisting{font-family:monospace;white-space:pre;margin-right:auto;margin-left:0pt;text-align:left}
+</STYLE>
+</HEAD>
+<BODY >
+<!--HEVEA command line is: c:\hevea\hevea -exec xxdate.exe manual-en -->
+<!--CUT DEF section 1 --><TABLE CLASS="title"><TR><TD><H1 CLASS="titlemain">cJass 1.4.0.2</H1></TD></TR>
+</TABLE><!--TOC section Contents-->
+<H2 CLASS="section"><!--SEC ANCHOR -->Contents</H2><!--SEC END --><UL CLASS="toc"><LI CLASS="li-toc">
+<A HREF="#htoc1">1  Usage</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc2">2  Syntax innovations</A>
+<UL CLASS="toc"><LI CLASS="li-toc">
+<A HREF="#htoc3">2.1  Clarity</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc4">2.2  Variables declaration</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc5">2.3  Operators</A>
+<UL CLASS="toc"><LI CLASS="li-toc">
+<A HREF="#htoc6">2.3.1  Increment and decrement</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc7">2.3.2  Assignment operators</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc8">2.3.3  Logical operations</A>
+</LI></UL>
+</LI><LI CLASS="li-toc"><A HREF="#htoc9">2.4  Blocks</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc10">2.5  Loops</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc11">2.6  Simplified function declaration</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc12">2.7  Endline manipulation</A>
+</LI></UL>
+</LI><LI CLASS="li-toc"><A HREF="#htoc13">3  Macrodefinitions</A>
+<UL CLASS="toc"><LI CLASS="li-toc">
+<A HREF="#htoc14">3.1  General</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc15">3.2  Visibility scopes</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc16">3.3  setdef and undef directives</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc17">3.4  Defines with arguments</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc18">3.5  Define overloading</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc19">3.6  Some constructs, used in defines</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc20">3.7  Predefined macros</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc21">3.8  Define usage examples</A>
+<UL CLASS="toc"><LI CLASS="li-toc">
+<A HREF="#htoc22">3.8.1  Function hooks</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc23">3.8.2  Default arguments emulation</A>
+</LI></UL>
+</LI></UL>
+</LI><LI CLASS="li-toc"><A HREF="#htoc24">4  Preprocessor</A>
+<UL CLASS="toc"><LI CLASS="li-toc">
+<A HREF="#htoc25">4.1  Including external files</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc26">4.2  Conditional compilation</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc27">4.3  Other directives</A>
+</LI></UL>
+</LI><LI CLASS="li-toc"><A HREF="#htoc28">5  Other elements</A>
+<UL CLASS="toc"><LI CLASS="li-toc">
+<A HREF="#htoc29">5.1  Enumerations</A>
+</LI></UL>
+</LI><LI CLASS="li-toc"><A HREF="#htoc30">6  Standard libraries</A>
+<UL CLASS="toc"><LI CLASS="li-toc">
+<A HREF="#htoc31">6.1  cj_types and cj_typesEx</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc32">6.2  cj_order and cj_antibj_base</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc33">6.3  cj_print</A>
+<UL CLASS="toc"><LI CLASS="li-toc">
+<A HREF="#htoc34">6.3.1  Function list</A>
+</LI><LI CLASS="li-toc"><A HREF="#htoc35">6.3.2  Format string</A>
+</LI></UL>
+</LI></UL>
+</LI><LI CLASS="li-toc"><A HREF="#htoc36">7  Credits and thanks</A>
+</LI></UL><!--TOC section Usage-->
+<H2 CLASS="section"><!--SEC ANCHOR --><A NAME="htoc1">1</A>  Usage</H2><!--SEC END --><P>
+The easiest way to start using the cJass parser is to download and install <A HREF="files/?cJassSetup.exe">distribution</A>. Please note, that you will need <A HREF="http://www.wc3c.net/showthread.php?t=90999">Jass New Gen Pack</A> for correct installation of cJass. During the installation process, all required changes in NewGen files will be made automatically. All that you need to do after installation is to run World Editor and start getting benefits from using cJass syntax.</P><!--TOC section Syntax innovations-->
+<H2 CLASS="section"><!--SEC ANCHOR --><A NAME="htoc2">2</A>  Syntax innovations</H2><!--SEC END --><!--TOC subsection Clarity-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc3">2.1</A>  Clarity</H3><!--SEC END --><P>
+As you know, JASS2 scripting language was created by Blizzard Entertainment for usage in Warcraft III. Its syntax looks alo like Turing and is neither short nor laconic. You must use <CODE><B>call</B></CODE> keyword for function calls, <CODE><B>set</B></CODE> for variable setting and <CODE><B>local</B></CODE> to declare local variables. You also have to isolate global variables to stand-alone block:
+</P><DIV CLASS="lstlisting">  <B>globals</B>
+      <FONT COLOR="#0054A8">integer</FONT> f = 12
+  <B>endglobals</B>
+  
+  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> i
+      <B>call</B> <FONT COLOR="red">DoNothing</FONT>()
+      <B>set</B> i = f + 3
+  <B>endfunction</B></DIV><P>While using cJass, parser automatically determines the meaning of an expression depending on the context, so we can easily omit all these keywords to reach better code readability:
+</P><DIV CLASS="lstlisting">  <FONT COLOR="#0054A8">integer</FONT> f = 12
+  
+  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <FONT COLOR="#0054A8">integer</FONT> i
+      <FONT COLOR="red">DoNothing</FONT>()
+      i = f + 3
+  <B>endfunction</B></DIV><!--TOC subsection Variables declaration-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc4">2.2</A>  Variables declaration</H3><!--SEC END --><P>
+In JASS2 all local variables have to be declared at the beginning of the function. While using cJass, you can declare local variables anywhere inside the function.
+</P><DIV CLASS="lstlisting">  <B>function</B> onKill <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <FONT COLOR="#0054A8">unit</FONT> u = <FONT COLOR="#7F007F">GetTriggerUnit</FONT>()
+      <B>if</B> (<FONT COLOR="#7F007F">GetUnitTypeId</FONT>(u) == <B><EM>'hfoo'</EM></B>) <B>then</B>
+          <FONT COLOR="#7F007F">ReviveUnit</FONT>(u)
+      <B>else</B>
+          <FONT COLOR="#0054A8">effect</FONT> sfx = <FONT COLOR="#7F007F">AddSpecialEffect</FONT>(<FONT COLOR="#0000AA"><EM>"deatheffect.mdx"</EM></FONT>, <FONT COLOR="#7F007F">GetUnitX</FONT>(u), <FONT COLOR="#7F007F">GetUnitY</FONT>(u))
+          Sleep(1)
+          <FONT COLOR="#7F007F">DestroyEffect</FONT>(sfx)
+      <B>endif</B>
+  <B>endfunction</B></DIV><P>The parser will move all local variable declarations to the beginning of the function. As in JASS2 variables can be initialized inside the declaration, cJass will also move the initialization if the variable is initialized with exact value:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <FONT COLOR="red">DoNothing</FONT>()
+      <FONT COLOR="#0054A8">integer</FONT> i = 0                       <FONT COLOR="#008700"><EM>// declaration will be moved completels,</EM></FONT>
+      <FONT COLOR="#0054A8">location</FONT> l = <FONT COLOR="#7F007F">Location</FONT>(0,0)      <FONT COLOR="#008700"><EM>// this variable will be initialized here</EM></FONT>
+  <B>endfunction</B></DIV><P>After compilation it will become:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> i = 0
+      <B>local</B> <FONT COLOR="#0054A8">location</FONT> l
+      <B>call</B> <FONT COLOR="red">DoNothing</FONT>()
+      <B>set</B> l = <FONT COLOR="#7F007F">Location</FONT>(0,0)
+  <B>endfunction</B></DIV><P>cJass syntax also lets you declare variables of the same type on the same line, separating them by commas. These variables can also be initialized here:
+</P><DIV CLASS="lstlisting">      <FONT COLOR="#0054A8">integer</FONT> i = 7, j, k</DIV><!--TOC subsection Operators-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc5">2.3</A>  Operators</H3><!--SEC END --><P>
+cJass syntax introduces new operators to make the life of programmers easier and to increase code readability.</P><!--TOC subsubsection Increment and decrement-->
+<H4 CLASS="subsubsection"><!--SEC ANCHOR --><A NAME="htoc6">2.3.1</A>  Increment and decrement</H4><!--SEC END --><P>
+Increment <CODE>++</CODE> (increasing by 1) and decrement <CODE>--</CODE> (decreasing by 1) operators are unary (they have only one operand). They can be used alone on the line or be part of complex expression:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <FONT COLOR="#0054A8">integer</FONT> a = 7
+      a++                     <FONT COLOR="#008700"><EM>// now, a = 8</EM></FONT>
+      <FONT COLOR="#0054A8">integer</FONT> b; b = 3 + a--  <FONT COLOR="#008700"><EM>// now, a = 7, b = 11</EM></FONT>
+      b--                     <FONT COLOR="#008700"><EM>// now, b = 10</EM></FONT>
+  <B>endfunction</B></DIV><P>which will become:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> a = 7
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> b
+      <B>set</B> a = a + 1
+      <B>set</B> b = 3 + a
+      <B>set</B> a = a - 1
+      <B>set</B> b = b - 1
+  <B>endfunction</B></DIV><P>These operators can be written either in prefix (when operator is before variable) or in postfix (when operator is after variable) notation. While using them alone, it doesn’t really matter, but they will behave differently as part of complex expression. Prefix operator changes the variable and then its new value is passed to the expression, postfix operator passes the value to the expression and then changes the variable.
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <FONT COLOR="#0054A8">integer</FONT> a = 7
+      <FONT COLOR="#0054A8">integer</FONT> b = ++a     <FONT COLOR="#008700"><EM>// now, a = 8,  b = 8</EM></FONT>
+      <FONT COLOR="#0054A8">integer</FONT> c = a + b-- <FONT COLOR="#008700"><EM>// now, a = 8,  b = 7, c = 16</EM></FONT>
+  <B>endfunction</B></DIV><P>which will be compiled as the following:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> a = 7
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> b
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> c
+      <B>set</B> a = a + 1
+      <B>set</B> b = a
+      <B>set</B> c = a + b
+      <B>set</B> b = b - 1
+  <B>endfunction</B></DIV><!--TOC subsubsection Assignment operators-->
+<H4 CLASS="subsubsection"><!--SEC ANCHOR --><A NAME="htoc7">2.3.2</A>  Assignment operators</H4><!--SEC END --><P>
+cJass syntax implements different assignment operators, which can help shorten code. For example,
+</P><DIV CLASS="lstlisting">  a = a + 2</DIV><P>can be shortened using <EM>the compound summation operator</EM> <CODE>+=</CODE>:
+</P><DIV CLASS="lstlisting">  a += 2</DIV><P>Operator <CODE>+=</CODE> adds the expression to the right to operand on the left. The same principle is used to form other compound operators: <CODE>-=</CODE>, <CODE>*=</CODE> and <CODE>/=</CODE>. 
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <FONT COLOR="#0054A8">integer</FONT> a = 3, b = 5, c = 4, d = 6
+      a += 7  <FONT COLOR="#008700"><EM>// as a result, a = 10</EM></FONT>
+      b -= 4  <FONT COLOR="#008700"><EM>// as a result, b = 1</EM></FONT>
+      c *= 5  <FONT COLOR="#008700"><EM>// as a result, c = 20</EM></FONT>
+      d /= 3  <FONT COLOR="#008700"><EM>// as a result, d = 2</EM></FONT>
+  <B>endfunction</B></DIV><P>is compiled as:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> a = 3
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> b = 5
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> c = 4
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> d = 6
+      <B>set</B> a = a + 7
+      <B>set</B> b = b - 4
+      <B>set</B> c = c * 5
+      <B>set</B> d = d / 3
+  <B>endfunction</B></DIV><!--TOC subsubsection Logical operations-->
+<H4 CLASS="subsubsection"><!--SEC ANCHOR --><A NAME="htoc8">2.3.3</A>  Logical operations</H4><!--SEC END --><P>
+While using cJass syntax, all logical operators can be written in simplified way. You can either use it, or use default implementation - whatever you favor.</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">boolean</FONT> a, <FONT COLOR="#0054A8">boolean</FONT> b <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <FONT COLOR="#0054A8">boolean</FONT> c
+      <B>if</B> (a &amp;&amp; b) <B>then</B>        <FONT COLOR="#008700"><EM>// a and b</EM></FONT>
+          c = !b              <FONT COLOR="#008700"><EM>// not b</EM></FONT>
+      <B>else</B>
+          c = b || a          <FONT COLOR="#008700"><EM>// b or a</EM></FONT>
+      <B>endif</B>
+  <B>endfunction</B></DIV><!--TOC subsection Blocks-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc9">2.4</A>  Blocks</H3><!--SEC END --><P>
+JASS2 syntax is rather verbose and uses block limiting using keywords. cJass introduces ligthweight block declaraions using curly brackets: now you can simply specify block name and surround its contents with curly brackets.
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <FONT COLOR="#0054A8">integer</FONT> i = 0
+      <B>loop</B> {
+          <B>exitwhen</B> i &gt; 5
+          i++
+      }
+  <B>endfunction</B></DIV><P>Such notation can be used with all JASS2 blocks (<CODE><B>loop</B></CODE>, <CODE><B>if</B></CODE>, <CODE><B>else</B></CODE> and <CODE><B>elseif</B></CODE>) and vJass extension blocks (<CODE><B>library</B></CODE>, <CODE><B>scope</B></CODE>, <CODE><B>struct</B></CODE>, <CODE><B>interface</B></CODE> and <CODE><B>module</B></CODE>). While using short notation in <CODE><B>if</B></CODE> and <CODE><B>elseif</B></CODE> blocks, the following <CODE><B>then</B></CODE> keyord can be omited:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">integer</FONT> i <B>returns</B> <FONT COLOR="#0054A8">integer</FONT>
+      <B>if</B> (i &gt; 3) {
+          <B>return</B> --i
+      } <B>else</B> {
+          <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"i &lt;= 3"</EM></FONT>)
+      }
+      <B>return</B> i
+  <B>endfunction</B></DIV><P>which in plain jass will be:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">integer</FONT> i <B>returns</B> <FONT COLOR="#0054A8">integer</FONT>
+      <B>if</B> (i &gt; 3) <B>then</B>
+          <B>set</B> i = i - 1
+          <B>return</B> i
+      <B>else</B>
+          <B>call</B> <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"i &lt;= 3"</EM></FONT>)
+      <B>endif</B>
+      <B>return</B> i
+  <B>endfunction</B></DIV><P><B>Notice:</B> this block syntax isn’t mandatory, so you can easily use default notation.</P><!--TOC subsection Loops-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc10">2.5</A>  Loops</H3><!--SEC END --><P>
+In cJass syntax, <CODE><B>whilenot</B></CODE> loop is introduced as an analog of widely used loop with pre-condition. The way of using this loop is identical to the default one: after <CODE><B>whilenot</B></CODE> operator the loop-ending condition is specified:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">integer</FONT> num, <FONT COLOR="#0054A8">integer</FONT> pow <B>returns</B> <FONT COLOR="#0054A8">integer</FONT>
+      <FONT COLOR="#0054A8">integer</FONT> res = 1, i = 0
+      <B>whilenot</B> (i++ &gt;= pow) {
+          res *= num
+      }
+      <B>return</B> res
+  <B>endfunction</B></DIV><P>is same as the following:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">integer</FONT> num, <FONT COLOR="#0054A8">integer</FONT> pow <B>returns</B> <FONT COLOR="#0054A8">integer</FONT>
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> res = 1
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> i = 0
+      <B>loop</B>
+          <B>exitwhen</B> (i &gt;= pow)
+          <B>set</B> i = i + 1
+          <B>set</B> res = res * num
+      <B>endloop</B>
+      <B>return</B> res
+  <B>endfunction</B></DIV><P>There also is the form of this loop, that places the loop-ending condition afther the loop’s body:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">integer</FONT> num, <FONT COLOR="#0054A8">integer</FONT> pow <B>returns</B> <FONT COLOR="#0054A8">integer</FONT>
+      <FONT COLOR="#0054A8">integer</FONT> res = 1, i = 0
+      do {
+          res *= num
+      } <B>whilenot</B> (i++ &gt;= pow)
+      <B>return</B> res
+  <B>endfunction</B></DIV><P>will be compiled to:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">integer</FONT> num, <FONT COLOR="#0054A8">integer</FONT> pow <B>returns</B> <FONT COLOR="#0054A8">integer</FONT>
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> res = 1
+      <B>local</B> <FONT COLOR="#0054A8">integer</FONT> i = 0
+      <B>loop</B>
+          <B>set</B> res = res * num
+          <B>exitwhen</B> (i &gt;= pow)
+          <B>set</B> i = i + 1
+      <B>endloop</B>
+      <B>return</B> res
+  <B>endfunction</B></DIV><P>You can also use <CODE>do</CODE> keyword as a synonim to <CODE><B>loop</B></CODE>.</P><!--TOC subsection Simplified function declaration-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc11">2.6</A>  Simplified function declaration</H3><!--SEC END --><P>
+For increased usability and code clarity, cJass syntax implements simplified notation of functions and vJass methods. In general, it looks like
+</P><DIV CLASS="lstlisting">  <FONT COLOR="#0054A8">nothing</FONT> test(<FONT COLOR="#0054A8">integer</FONT> x) {
+      <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#7F007F">I2S</FONT>(x))
+  }</DIV><P>Now let’s see, what all this means. At first, you have to indicate the return value type (in the above example it’s <CODE><FONT COLOR="#0054A8">nothing</FONT></CODE> because the function returns nothing), which is followed by function name and arguments (please note, that the arguments should be enclosed in round braces, if a function takes nothing, these braces can be empty), and in the end goes the function body, enclosed in curly brackets. For example, here is the above code after compilation:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">integer</FONT> x <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <B>call</B> <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#7F007F">I2S</FONT>(x))
+  <B>endfunction</B></DIV><P>This notation also applies to vJass methods, the parser will determine if the declaration should become function or method.</P><P><A NAME="endl"></A></P><!--TOC subsection Endline manipulation-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc12">2.7</A>  Endline manipulation</H3><!--SEC END --><P>
+cJass gives you the ability to freely manipulate line endings in your code. These symbols allow you to split one declaration into maly lines or write more than one command on a single line:
+</P><DIV CLASS="lstlisting">  <FONT COLOR="#0054A8">nothing</FONT> RandomUnit(<FONT COLOR="#0054A8">integer</FONT> pIndex) {
+      Sleep(1)
+      <FONT COLOR="#0054A8">unit</FONT> u; u = <FONT COLOR="#7F007F">CreateUnit</FONT>( <FONT COLOR="#7F007F">Player</FONT>(pIndex),  \
+                  <FONT COLOR="#7F007F">GetRandomInt</FONT>(<B><EM>'H000'</EM></B>, <B><EM>'H009'</EM></B>),\
+                  <FONT COLOR="#7F007F">GetRandomReal</FONT>(-100, 100),    \
+                  <FONT COLOR="#7F007F">GetRandomReal</FONT>(-100, 100),    \
+                  <FONT COLOR="#7F007F">GetRandomReal</FONT>(0, 360))
+      Sleep(2)
+      <FONT COLOR="#7F007F">RemoveUnit</FONT>(u)
+  }</DIV><P>The <CODE>;</CODE> symbol will be replaced to the linebreak and <CODE>\ </CODE> symbol merges the lines.</P><!--TOC section Macrodefinitions-->
+<H2 CLASS="section"><!--SEC ANCHOR --><A NAME="htoc13">3</A>  Macrodefinitions</H2><!--SEC END --><P>
+<EM>Defines</EM> are one of the key cJass benefits. Macro processing is done completely on code parsing (on map save), which allows you to achieve high code readability and flexibility without its overcomplication.</P><!--TOC subsection General-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc14">3.1</A>  General</H3><!--SEC END --><P>
+At first look, you can imagine the processing of defines as a simple replace of macro names with their values (as if you used a Search’n’Replace in your favorite text editor).</P><P>Keyword <CODE><B>define</B></CODE> is used when defining macros:
+</P><DIV CLASS="lstlisting">  #<B>define</B> FOOTMAN = <B><EM>'hfoo'</EM></B></DIV><P>hereby <CODE>FOOTMAN</CODE> is macro’s name, which you can use later in your code, and <CODE><B><EM><CODE>'hfoo'</CODE></EM></B></CODE> is the value, to which all references will be replaced. For example,
+</P><DIV CLASS="lstlisting">  #<B>define</B> FOOTMAN = <B><EM>'hfoo'</EM></B>
+  
+  <FONT COLOR="#0054A8">nothing</FONT> test() {
+      <FONT COLOR="#7F007F">CreateUnit</FONT>(<FONT COLOR="#7F007F">GetLocalPlayer</FONT>(), FOOTMAN, 0, 0, 0)
+  }</DIV><P>will compile to the following:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <FONT COLOR="#7F007F">CreateUnit</FONT>(<FONT COLOR="#7F007F">GetLocalPlayer</FONT>(), <B><EM>'hfoo'</EM></B>, 0, 0, 0)
+  <B>endfunction</B></DIV><P>You can write multiple defines using <CODE><B>define</B></CODE> and enclosing the block in curly brackets:
+</P><DIV CLASS="lstlisting">  <B>define</B> {
+      FOOTMAN = <B><EM>'hfoo'</EM></B>
+      MAGE = <B><EM>'Hblm'</EM></B>
+  }</DIV><P>You can use either <CODE><B>define</B></CODE>, or <CODE>#</CODE><CODE><B>define</B></CODE> notation - it doesn’t matter.</P><P>For those, who prefer classic JASS2 syntax, there is another macro definition style:
+</P><DIV CLASS="lstlisting">  <B>define</B>
+      FOOTMAN = <B><EM>'hfoo'</EM></B>
+      MAGE = <B><EM>'Hblm'</EM></B>
+  <B>enddefine</B></DIV><P>Usually, macro names contain only letters, numbers and underscores. However, what should you do if you need to have some kinds of special symbols in the define’s name? In such cases you can use inequality signs:
+</P><DIV CLASS="lstlisting">  <B>define</B> &lt;GetPlayableMapRect()&gt; = bj_mapInitialPlayableArea</DIV><P>If you need a multiline define, then simply enclose its body in curly brackets:
+</P><DIV CLASS="lstlisting">  <B>define</B> msg = {
+                  <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"one!"</EM></FONT>)
+                  <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"two!"</EM></FONT>)
+               }</DIV><!--TOC subsection Visibility scopes-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc15">3.2</A>  Visibility scopes</H3><!--SEC END --><P>
+Macros can be defined as private inside of scopes, libraries, structs and modules using <CODE><B>private</B></CODE> keyword:
+</P><DIV CLASS="lstlisting">  <B>scope</B> test {
+      #<B>define</B> <B>private</B> FOOT = <B><EM>'HBlm'</EM></B>
+  }</DIV><P>In this case private defines will not conflict with other defines with same names in global scope of visibility:
+</P><DIV CLASS="lstlisting">  #<B>define</B> msg = <FONT COLOR="#0000AA"><EM>"X"</EM></FONT>
+  
+  <FONT COLOR="#0054A8">nothing</FONT> test () {
+      <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"Global = "</EM></FONT> + msg)
+  }
+  
+  <B>library</B> A {
+      #<B>define</B> <B>private</B> msg = <FONT COLOR="#0000AA"><EM>"A"</EM></FONT>
+  
+      <FONT COLOR="#0054A8">nothing</FONT> testA () {
+          <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"Library A = "</EM></FONT> + msg)
+      }
+  }
+  
+  <B>scope</B> B {
+      #<B>define</B> <B>private</B> msg = <FONT COLOR="#0000AA"><EM>"B"</EM></FONT>
+  
+      <FONT COLOR="#0054A8">nothing</FONT> testB () {
+          <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"Scope B = "</EM></FONT> + msg)
+      }
+  }</DIV><P>After compilation we get:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <B>call</B> <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"Global = "</EM></FONT> + <FONT COLOR="#0000AA"><EM>"X"</EM></FONT>)
+  <B>endfunction</B>
+  
+  <B>library</B> A
+      <B>function</B> testA <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+          <B>call</B> <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"Library A = "</EM></FONT> + <FONT COLOR="#0000AA"><EM>"A"</EM></FONT>)
+      <B>endfunction</B>
+  <B>endlibrary</B>
+  
+  <B>scope</B> B
+      <B>function</B> testB <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+          <B>call</B> <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"Scope B = "</EM></FONT> + <FONT COLOR="#0000AA"><EM>"B"</EM></FONT>)
+      <B>endfunction</B>
+  <B>endscope</B></DIV><!--TOC subsection setdef and undef directives-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc16">3.3</A>  setdef and undef directives</H3><!--SEC END --><P>
+If you define a macro with the name which is already used by another macro (this doesn’t apply to private defines in nested elements), cJass will show an error and stop compilation. If you want to change the value of an existing macrodefinition, you should use <CODE><B>setdef</B></CODE> directive. To undo macro definitions, you can use the <CODE><B>undef</B></CODE> directive, after which the macro will be undefined. 
+</P><DIV CLASS="lstlisting">  <FONT COLOR="#0054A8">nothing</FONT> test1 () {
+      #<B>define</B> msg = <FONT COLOR="#0000AA"><EM>"text"</EM></FONT>
+  
+      <FONT COLOR="red">BJDebugMsg</FONT>(msg) <FONT COLOR="#008700"><EM>// will print "text"</EM></FONT>
+  
+      #<B>setdef</B> msg = <FONT COLOR="#0000AA"><EM>"other text"</EM></FONT>
+  
+      <FONT COLOR="red">BJDebugMsg</FONT>(msg) <FONT COLOR="#008700"><EM>// will print "other text"</EM></FONT>
+  
+      #<B>undef</B> msg
+  
+      <FONT COLOR="red">BJDebugMsg</FONT>(msg) <FONT COLOR="#008700"><EM>// won't be replaced</EM></FONT>
+  }</DIV><!--TOC subsection Defines with arguments-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc17">3.4</A>  Defines with arguments</H3><!--SEC END --><P>
+To widen the range of possible macrodefinition usages, defines, which take arguments were implemented. A macro can take arbitary number of arguments, which can be used in the macro’s body similiar to how the function’s arguments are used. The arguments can be of any type? parser does no type checks, so you should call macros with care, always checking the value types.
+</P><DIV CLASS="lstlisting">  <B>define</B> msg(playerid,text) = <FONT COLOR="#7F007F">DisplayTextToPlayer</FONT>(<FONT COLOR="#7F007F">Player</FONT>(playerid), text, 0, 0)</DIV><P><B><FONT COLOR="red"> Attention!</FONT></B> As parser doesn’t perform typechecks, all typesafety should be controlled by the coder.</P><!--TOC subsection Define overloading-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc18">3.5</A>  Define overloading</H3><!--SEC END --><P>
+You can define more than one macro with same names as soon as they take different number of arguments: such defines are called overloaded. Depending on the number of arguments passed, parder decides what macro to call.
+</P><DIV CLASS="lstlisting">  <B>define</B> {
+      msg(text)              = <FONT COLOR="#7F007F">DisplayTextToPlayer</FONT>(<FONT COLOR="#7F007F">GetLocalPlayer</FONT>(), text, 0, 0)
+      msg(text,playerid)     = <FONT COLOR="#7F007F">DisplayTextToPlayer</FONT>(<FONT COLOR="#7F007F">Player</FONT>(playerid), text, 0, 0)
+      msg(text,playerid,x,y) = <FONT COLOR="#7F007F">DisplayTextToPlayer</FONT>(<FONT COLOR="#7F007F">Player</FONT>(playerid), text, x, y)
+  }
+  
+  <FONT COLOR="#0054A8">nothing</FONT> test() {
+      msg(<FONT COLOR="#0000AA"><EM>"test 1"</EM></FONT>)
+      msg(<FONT COLOR="#0000AA"><EM>"test 2"</EM></FONT>, 1)
+      msg(<FONT COLOR="#0000AA"><EM>"test 3"</EM></FONT>, 2, 0.1, 0.1)
+  }</DIV><P>will be compiled to the following:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <B>call</B> <FONT COLOR="#7F007F">DisplayTextToPlayer</FONT>(<FONT COLOR="#7F007F">GetLocalPlayer</FONT>(), <FONT COLOR="#0000AA"><EM>"test 1"</EM></FONT>, 0, 0)
+      <B>call</B> <FONT COLOR="#7F007F">DisplayTextToPlayer</FONT>(<FONT COLOR="#7F007F">Player</FONT>(1), <FONT COLOR="#0000AA"><EM>"test 2"</EM></FONT>, 0, 0)
+      <B>call</B> <FONT COLOR="#7F007F">DisplayTextToPlayer</FONT>(<FONT COLOR="#7F007F">Player</FONT>(2), <FONT COLOR="#0000AA"><EM>"test 3"</EM></FONT>, 0.1, 0.1)
+  <B>endfunction</B></DIV><P><B><FONT COLOR="red"> Attention!</FONT></B> If the group of overloaded defines has the one with no arguments, it should always be followed by empty parenthesis.</P><!--TOC subsection Some constructs, used in defines-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc19">3.6</A>  Some constructs, used in defines</H3><!--SEC END --><P>
+Sometimes you need to output one of the macro’s arguments as text (please note: not the argument’s value - if the argument is a variable, its name will be the result). For such cases there is <CODE>``</CODE> instruction, which represents its argument as string. You can also use concatenation operator <CODE>##</CODE>, which merges expressions on both sides of it (unlike the previous one, this operator can be used anytime, not only in defines).
+</P><DIV CLASS="lstlisting">  #<B>define</B> register_func(type) = {
+                                <FONT COLOR="#0054A8">nothing</FONT> func_##type (type t) {
+                                    <FONT COLOR="red">BJDebugMsg</FONT>(`type`)
+                                }
+                               }
+  
+  register_func(<FONT COLOR="#0054A8">real</FONT>)</DIV><P>which will become:
+</P><DIV CLASS="lstlisting">  <B>function</B> func_real <B>takes</B> <FONT COLOR="#0054A8">real</FONT> t <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <B>call</B> <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"real"</EM></FONT>)
+  <B>endfunction</B></DIV><!--TOC subsection Predefined macros-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc20">3.7</A>  Predefined macros</H3><!--SEC END --><P>
+cJass introduces some predefined macros for usage by coders. All of them are replaced to their values at the compilation stage.</P><P><CODE>DATE</CODE> — returns current date in yyyy.mm.dd format.</P><P><CODE>TIME</CODE> — returns current time in hh:mm:ss format.</P><P><CODE>COUNTER</CODE> — returns integer starting from 0, every use increases this number by 1. Here’s an example of usage:
+</P><DIV CLASS="lstlisting">  <B>define</B> unique_name = func_##COUNTER
+  
+  <FONT COLOR="#0054A8">void</FONT> unique_name () {}   <FONT COLOR="#008700"><EM>// void func_0 () {}</EM></FONT>
+  <FONT COLOR="#0054A8">void</FONT> unique_name () {}   <FONT COLOR="#008700"><EM>// void func_1 () {}</EM></FONT>
+  <FONT COLOR="#0054A8">void</FONT> unique_name () {}   <FONT COLOR="#008700"><EM>// void func_2 () {}</EM></FONT></DIV><P><CODE>DEBUG</CODE> — returns 1 if "Debug mode" checkbox is checked, else returns 0. Is used in conditional compilation (see <A HREF="#cond">4.1</A>) to add sets of actions, which exist only in debug mode.</P><P><CODE>FUNCNAME</CODE> — returns the name of the function, where it’s used.</P><P><CODE>WAR3VER</CODE> — returns <CODE>WAR3VER_23</CODE> or <CODE>WAR3VER_24</CODE> depending on the position of the version switch in cJass menu. Can be used in conditional compilation blocks (see <A HREF="#cond">4.1</A>) to maintain two map versions: 1.23- and 1.24+ compatible. For example:
+</P><DIV CLASS="lstlisting">  #<B>define</B> H2I(h) = GetHandleId(h)
+  
+  #<B>if</B> WAR3VER == WAR3VER_23
+      #<B>undef</B> H2I
+      <FONT COLOR="#0054A8">integer</FONT> H2I (<FONT COLOR="#0054A8">handle</FONT> h) { <B>return</B> h; <B>return</B> 0 }
+  #<B>endif</B></DIV><P>All predefined macros return <EM>non-string</EM> value. To represent them as string, you can use either stringizing operator or formatted output (see <A HREF="#print">6.2</A>)</P><!--TOC subsection Define usage examples-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc21">3.8</A>  Define usage examples</H3><!--SEC END --><P>
+In this section there are some examples of macro usage for solving of non-trivial tasks.
+</P><!--TOC subsubsection Function hooks-->
+<H4 CLASS="subsubsection"><!--SEC ANCHOR --><A NAME="htoc22">3.8.1</A>  Function hooks</H4><!--SEC END --><P>
+The need to do some set of actions when calling native functions pops out sometimes. In such cases people create some wrapper functions and call them instead. Using cJass macrodefinitions, you can easily replace the calls of some function to the call to your own wrapper function, or to a set of actions.
+</P><DIV CLASS="lstlisting">  <B>define</B> {
+      <FONT COLOR="#7F007F">SetUnitPosition</FONT> = SetUnitPosition_hook
+  
+      <FONT COLOR="#7F007F">RemoveUnit</FONT>(u) = {
+          <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"A unit is being removed!"</EM></FONT>)
+          Remove##Unit(u)
+      }
+  }
+  
+  <FONT COLOR="#0054A8">boolean</FONT> SetUnitPosition_hook (<FONT COLOR="#0054A8">unit</FONT> u, <FONT COLOR="#0054A8">real</FONT> x, <FONT COLOR="#0054A8">real</FONT> y) {
+      <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"We're moving the unit to ("</EM></FONT> + <FONT COLOR="#7F007F">R2S</FONT>(x) + <FONT COLOR="#0000AA"><EM>","</EM></FONT> + <FONT COLOR="#7F007F">R2S</FONT>(y) + <FONT COLOR="#0000AA"><EM>")"</EM></FONT>)
+      SetUnit##Position(u, x, y)
+      <B>return</B> (<FONT COLOR="#7F007F">GetUnitX</FONT>(u) == x) &amp;&amp; (<FONT COLOR="#7F007F">GetUnitY</FONT>(u) == y)
+  }
+  
+  <FONT COLOR="#0054A8">nothing</FONT> test() {
+      <FONT COLOR="#0054A8">unit</FONT> u = <FONT COLOR="#7F007F">CreateUnit</FONT>(<FONT COLOR="#7F007F">Player</FONT>(0), <B><EM>'hfoo'</EM></B>, 0, 0, 0)
+      <B>if</B> (<FONT COLOR="#7F007F">SetUnitPosition</FONT>(u, 100, 300)) { <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"Landed successfully!"</EM></FONT>) }
+      <FONT COLOR="#7F007F">RemoveUnit</FONT>(u)
+  }</DIV><P>which will be compiled to the following:
+</P><DIV CLASS="lstlisting">  <B>function</B> SetUnitPosition_hook <B>takes</B> <FONT COLOR="#0054A8">unit</FONT> u, <FONT COLOR="#0054A8">real</FONT> x, <FONT COLOR="#0054A8">real</FONT> y <B>returns</B> <FONT COLOR="#0054A8">boolean</FONT>
+      <B>call</B> <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"We're moving the unit to ("</EM></FONT> + <FONT COLOR="#7F007F">R2S</FONT>(x) + <FONT COLOR="#0000AA"><EM>","</EM></FONT> + <FONT COLOR="#7F007F">R2S</FONT>(y) + <FONT COLOR="#0000AA"><EM>")"</EM></FONT>)
+      <B>call</B> <FONT COLOR="#7F007F">SetUnitPosition</FONT>(u, x, y)
+      <B>return</B> (<FONT COLOR="#7F007F">GetUnitX</FONT>(u) == x) and (<FONT COLOR="#7F007F">GetUnitY</FONT>(u) == y)
+  <B>endfunction</B>
+  
+  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <B>local</B> <FONT COLOR="#0054A8">unit</FONT> u = <FONT COLOR="#7F007F">CreateUnit</FONT>(<FONT COLOR="#7F007F">Player</FONT>(0), <B><EM>'hfoo'</EM></B>, 0, 0, 0)
+      <B>if</B> (SetUnitPosition_hook(u, 100, 300)) <B>then</B>
+          <B>call</B> <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"Landed successfully!"</EM></FONT>)
+      <B>endif</B>
+      <B>call</B> <FONT COLOR="red">BJDebugMsg</FONT>(<FONT COLOR="#0000AA"><EM>"A unit is being removed!"</EM></FONT>)
+      <B>call</B> <FONT COLOR="#7F007F">RemoveUnit</FONT>(u)
+  <B>endfunction</B></DIV><P>Now it’s time for some explanations. To replace the <CODE><FONT COLOR="#7F007F">RemoveUnit</FONT></CODE> function to the set of actions, we simply define a macro with the same name, so all the calls to this function will be replaced to this macro’s contents. Please note that inside of this macro the name of hooked function is written using the concatenation operator. This is done to prevent the parser from trying to replace it to this macro’s contents as it has this name too. To replace the calls to <CODE><FONT COLOR="#7F007F">SetUnitPosition</FONT></CODE> to our wrapper, we simply declare the wrapper function and replace all calls to the native with the calls to our wrapper.</P><!--TOC subsubsection Default arguments emulation-->
+<H4 CLASS="subsubsection"><!--SEC ANCHOR --><A NAME="htoc23">3.8.2</A>  Default arguments emulation</H4><!--SEC END --><P>
+Many programming languages allow you to assign default values to function’s arguments. In such cases these arguments can be easily omitted if you’re ok with their default values. Such behaviour can be emulated in cJass using overloaded macrodefinitions and concatenation operator.
+</P><DIV CLASS="lstlisting">  <B>define</B> {
+      <FONT COLOR="#7F007F">CreateUnit</FONT>(p, id) = Create##Unit(p, id, 0, 0, 0)
+      <FONT COLOR="#7F007F">CreateUnit</FONT>(p, id, x, y) = Create##Unit(p, id, x, y, 0)
+      <FONT COLOR="#7F007F">CreateUnit</FONT>(p, id, x, y, f) = Create##Unit(p, id, x, y, f)
+  }
+  
+  <FONT COLOR="#0054A8">nothing</FONT> test() {
+      <FONT COLOR="#7F007F">CreateUnit</FONT>(<FONT COLOR="#7F007F">Player</FONT>(0), <B><EM>'hfoo'</EM></B>)
+      <FONT COLOR="#7F007F">CreateUnit</FONT>(<FONT COLOR="#7F007F">Player</FONT>(1), <B><EM>'Hblm'</EM></B>, 100, 231)
+      <FONT COLOR="#7F007F">CreateUnit</FONT>(<FONT COLOR="#7F007F">Player</FONT>(2), <B><EM>'Ewar'</EM></B>, 382, 16, 42)
+  }</DIV><P>I think, you already know, what you’ll see now:
+</P><DIV CLASS="lstlisting">  <B>function</B> test <B>takes</B> <FONT COLOR="#0054A8">nothing</FONT> <B>returns</B> <FONT COLOR="#0054A8">nothing</FONT>
+      <B>call</B> <FONT COLOR="#7F007F">CreateUnit</FONT>(<FONT COLOR="#7F007F">Player</FONT>(0), <B><EM>'hfoo'</EM></B>, 0, 0, 0)
+      <B>call</B> <FONT COLOR="#7F007F">CreateUnit</FONT>(<FONT COLOR="#7F007F">Player</FONT>(1), <B><EM>'Hblm'</EM></B>, 100, 231, 0)
+      <B>call</B> <FONT COLOR="#7F007F">CreateUnit</FONT>(<FONT COLOR="#7F007F">Player</FONT>(2), <B><EM>'Ewar'</EM></B>, 382, 16, 42)
+  <B>endfunction</B></DIV><!--TOC section Preprocessor-->
+<H2 CLASS="section"><!--SEC ANCHOR --><A NAME="htoc24">4</A>  Preprocessor</H2><!--SEC END --><P>
+<EM>Preprocessor</EM> directives are first to be parsed during map code processing. Because of this, you can use them to do some interesting things.</P><!--TOC subsection Including external files-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc25">4.1</A>  Including external files</H3><!--SEC END --><P>
+Sometimes it’s comfortable to keep parts of code (e.g. libraries, systems, spells, etc. which you use often) in external files. To include code from external files there’s <CODE><B>include</B></CODE> directive, which should be followed by string with file name you want to include. If files are in the <CODE><FONT COLOR="#0000AA"><EM><CODE>"..\AdicHelper\lib\"</CODE></EM></FONT></CODE> subfolder or in the map folder, you can write file name without a path to it. Also it’s possible to include files from other folders, but you should write full path to it.
+</P><DIV CLASS="lstlisting">  #<B>include</B> <FONT COLOR="#0000AA"><EM>"myClasses.j"</EM></FONT>  <FONT COLOR="#008700"><EM>// "(newgen path)\AdicHelper\lib\myClasses.j" or "(map path)\myClasses.j" will be included</EM></FONT>
+  <B>include</B> <FONT COLOR="#0000AA"><EM>"D:\\dev\\Warcraft 3\\my_mega_system.j"</EM></FONT></DIV><P>The code within included files can be written using both cJass and vJass syntax.</P><P><B><FONT COLOR="red"> Attention!</FONT></B> Don’t forget about double backslash in file path: <CODE>\\</CODE></P><P>Sometimes, things happen that one external file is included to the map several times (for example, by different libraries). In such cases inevitable errors happen because of code duplication, which we’d like to avoid. For such cases, cJass introduces the <CODE>#</CODE><CODE>guard</CODE><CODE> </CODE><CODE>ID</CODE> directive, which prevents files with same IDs to be included more than once. ID can be any word, composed from letters, numbers and underscores, but it’s good to use the file name with all extra symbols replaced to underscores. For example in <CODE><FONT COLOR="#0000AA"><EM><CODE>"my-system.j"</CODE></EM></FONT></CODE> external file the ID can be <CODE>#</CODE><CODE>guard</CODE><CODE> </CODE><CODE>my_system_j</CODE>.</P><P><B><FONT COLOR="red"> Attention!</FONT></B> The <CODE>#</CODE><CODE>guard</CODE> directive has to be the written on the first line of external file.</P><P><A NAME="cond"></A></P><!--TOC subsection Conditional compilation-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc26">4.2</A>  Conditional compilation</H3><!--SEC END --><P>
+cJass syntax introduces useful conditional compilation commands. Using them you can include or exclude specified blocks of code during map parsing. Controlling elements of this construct can be values, defines or enums (see <A HREF="#enum">5</A>). Their syntax is the following:
+</P><DIV CLASS="lstlisting">  #<B>define</B> CONTROL = 3
+  
+  #<B>if</B> CONTROL == 3
+      <FONT COLOR="#008700"><EM>// code</EM></FONT>
+  #<B>elseif</B> CONTROL == 1
+      <FONT COLOR="#008700"><EM>// alternative code</EM></FONT>
+  #<B>else</B>
+      <FONT COLOR="#008700"><EM>// more other code</EM></FONT>
+  #<B>endif</B></DIV><P>Currently, only <CODE>==</CODE> and <CODE>!=</CODE> comparison operations are supported.</P><P>In such conditional blocks you can write any code with one limitation: they shouldn’t contain identical define declarations:
+</P><DIV CLASS="lstlisting">  #<B>if</B> 1 != 0
+      #<B>define</B> msg = <FONT COLOR="#0000AA"><EM>"hello!"</EM></FONT>
+  #<B>else</B>
+      #<B>define</B> msg = <FONT COLOR="#0000AA"><EM>"good bye!"</EM></FONT>
+  #<B>endif</B></DIV><P>If you try to save this code, parser will throw the define redeclaration error. If you want to use code, similar to above, you should declare the macrodefinition before conditional translation blocks and set its value in those blocks with <CODE><B>setdef</B></CODE> directive:
+</P><DIV CLASS="lstlisting">  #<B>define</B> msg
+  
+  #<B>if</B> 1 != 0
+      #<B>setdef</B> msg = <FONT COLOR="#0000AA"><EM>"hello!"</EM></FONT>
+  #<B>else</B>
+      #<B>setdef</B> msg = <FONT COLOR="#0000AA"><EM>"good bye!"</EM></FONT>
+  #<B>endif</B></DIV><P>Condiitonal compilation directives can also be triggered by a state of flag - macrodefinition with a special value.
+</P><DIV CLASS="lstlisting">  #<B>define</B> MY_FLAG = true
+  
+  #<B>if</B> MY_FLAG
+      <FONT COLOR="#008700"><EM>// code</EM></FONT>
+  #<B>else</B>
+      <FONT COLOR="#008700"><EM>// alternative code</EM></FONT>
+  #<B>endif</B></DIV><P>The <CODE>#</CODE><CODE><B>if</B></CODE><CODE> </CODE><CODE>value</CODE> directive will work only if the compared macrodefinition has a value of <CODE>true</CODE> or 1. You can use the <CODE>DEBUG</CODE> predefined macro to write code, which is compiled only in debug mode.</P><!--TOC subsection Other directives-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc27">4.3</A>  Other directives</H3><!--SEC END --><P>
+Sometimes you need to stop compilation if some requirements are not met. In such cases the <CODE>#</CODE><CODE>error</CODE><CODE> </CODE><CODE><FONT COLOR="#0000AA"><EM><CODE>"MESSAGE"</CODE></EM></FONT></CODE> directive will help you. It stops the compilation, showing the defined message. Best used inside of conditional compilation blocks.</P><!--TOC section Other elements-->
+<H2 CLASS="section"><!--SEC ANCHOR --><A NAME="htoc28">5</A>  Other elements</H2><!--SEC END --><P>
+This chapter describes some syntax constructions, that were not mentioned above, although not less important.</P><P><A NAME="enum"></A></P><!--TOC subsection Enumerations-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc29">5.1</A>  Enumerations</H3><!--SEC END --><P>
+<EM>Enumeration</EM> is a type, that can contain values specified by coder. Integer constants can be declared as enumeration members. E.g.:
+</P><DIV CLASS="lstlisting">  <B>enum</B> { RED, GREEN, BLUE }</DIV><P>declares three named integer constants and sets values to them. Values are assigned atomatically starting from 0, in other words, enumeration is similar to the following:
+</P><DIV CLASS="lstlisting">  <B>define</B> {
+      RED = 0
+      GREEN = 1
+      BLUE = 2
+  }</DIV><P>Enumerations can also be named:
+</P><DIV CLASS="lstlisting">  <B>enum</B> (color) { RED, GREEN, BLUE }</DIV><P>Named enumerations have their own internal counter - value of their elements will start from zero. Using several unnamed enumerations will continue the numeration of their values:
+</P><DIV CLASS="lstlisting">  <B>enum</B> { FOOTMAN, MAGE }            <FONT COLOR="#008700"><EM>// FOOTMAN == 0, MAGE == 1</EM></FONT>
+  <B>enum</B> (color) { RED, GREEN, BLUE } <FONT COLOR="#008700"><EM>// RED == 0, GREEN == 1, BLUE == 2</EM></FONT>
+  <B>enum</B> { WARDEN, ARCHER}            <FONT COLOR="#008700"><EM>// WARDEN == 2, ARCHER == 3</EM></FONT></DIV><P>Enumerations also support default JASS2 syntax:
+</P><DIV CLASS="lstlisting">  <B>enum</B> (color)
+      RED
+      GREEN
+      BLUE
+  <B>endenum</B></DIV><P>Enumerations can be used in conditional translation blocks:
+</P><DIV CLASS="lstlisting">  <B>library</B> SomeLib {
+  
+      <B>enum</B> (LIB_SPACE) { STD_SPACE, ALT_SPACE, DEBUG_SPACE }
+  
+      <FONT COLOR="#008700"><EM>// choose your namespace !</EM></FONT>
+      <B>define</B> <B>private</B> SOMELIB_SPACE = STD_SPACE <FONT COLOR="#008700"><EM>// what space to use </EM></FONT>
+  
+      #<B>if</B> SOMELIB_SPACE == STD_SPACE
+          <FONT COLOR="#0054A8">void</FONT> SomeFunc(<FONT COLOR="#0054A8">int</FONT> a) {
+              <FONT COLOR="#008700"><EM>// base</EM></FONT>
+          }
+      #<B>elseif</B> SOMELIB_SPACE == ALT_SPACE
+          <FONT COLOR="#0054A8">void</FONT> SomeFunc(<FONT COLOR="#0054A8">int</FONT> a) {
+              <FONT COLOR="#008700"><EM>// alt</EM></FONT>
+          }
+      #<B>elseif</B> SOMELIB_SPACE == DEBUG_SPACE
+          <FONT COLOR="#0054A8">void</FONT> SomeFunc(<FONT COLOR="#0054A8">int</FONT> a) {
+              <FONT COLOR="#008700"><EM>// debug</EM></FONT>
+          }
+      #<B>endif</B>
+  
+  }</DIV><P>Or instead of named integer constants as markers for some actions:
+</P><DIV CLASS="lstlisting">  <B>enum</B> (moves) { MOVING_ANIM_STATE_WALK, MOVING_ANIM_STATE_WALKBACK, MOVING_ANIM_STATE_STOP }
+  
+  <FONT COLOR="#0054A8">void</FONT> MovingAnimationControl (<FONT COLOR="#0054A8">unit</FONT> u, <FONT COLOR="#0054A8">integer</FONT> state) {
+      <B>if</B> (state == MOVING_ANIM_STATE_WALK) {
+          SetUnitTimeScale(u, 1)
+          SetUnitAnimationByIndex(u, <FONT COLOR="#0000AA"><EM>"Walk"</EM></FONT> )
+      } <B>elseif</B> (state == MOVING_ANIM_STATE_WALKBACK) {
+          SetUnitTimeScale(u, -1)
+          SetUnitAnimationByIndex(u, <FONT COLOR="#0000AA"><EM>"Walk"</EM></FONT> )
+      } <B>elseif</B> (state == MOVING_ANIM_STATE_STOP) {
+          SetUnitAnimation(u,<FONT COLOR="#0000AA"><EM>"Stand"</EM></FONT>)
+          SetUnitTimeScale(u, 1)
+      }
+  }</DIV><!--TOC section Standard libraries-->
+<H2 CLASS="section"><!--SEC ANCHOR --><A NAME="htoc30">6</A>  Standard libraries</H2><!--SEC END --><P>
+The cJass default package includes standard libraries, which can be used in your maps because they will definitely be on target computer if cJass is installed there. You can find them in <EM>"lib"</EM> subfolder of your <EM>"AdicHelper"</EM> directory. These files were created specially for ease of coding and some light optimizations. You simply <CODE><B>include</B></CODE> the ones you need in your map. All standard included files have <EM>"cj_"</EM> prefix and <EM>".j"</EM> extension.</P><!--TOC subsection cj_types and cj_typesEx-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc31">6.1</A>  cj_types and cj_typesEx</H3><!--SEC END --><DIV CLASS="lstlisting">  <B>include</B> <FONT COLOR="#0000AA"><EM>"cj_types.j"</EM></FONT>
+  <B>include</B> <FONT COLOR="#0000AA"><EM>"cj_typesEx.j"</EM></FONT>
+  <B>include</B> <FONT COLOR="#0000AA"><EM>"cj_types_priv.j"</EM></FONT>
+  <B>include</B> <FONT COLOR="#0000AA"><EM>"cj_typesEx_priv.j"</EM></FONT></DIV><P>These libraries contain macrodefinitions, aimed to make JASS2 type usage closer to C++. In the first one, aliases for main types and keywords are defined:
+</P><DIV CLASS="lstlisting">  <B>define</B> {
+      <FONT COLOR="#0054A8">int</FONT>   = <FONT COLOR="#0054A8">integer</FONT>
+      <FONT COLOR="#0054A8">bool</FONT>  = <FONT COLOR="#0054A8">boolean</FONT>
+      <FONT COLOR="#0054A8">void</FONT>  = <FONT COLOR="#0054A8">nothing</FONT>
+      <FONT COLOR="#0054A8">float</FONT> = <FONT COLOR="#0054A8">real</FONT>
+      while = <B>whilenot</B> not
+      break = <B>exitwhen</B> true
+  }</DIV><P>In the second, constructs like <CODE>new</CODE><CODE> &lt;</CODE><CODE>type</CODE><CODE>&gt;</CODE> are defined for main handle types:
+</P><DIV CLASS="lstlisting">  <B>define</B> &lt;new timer&gt; = <FONT COLOR="#7F007F">CreateTimer</FONT>()</DIV><P>You can read the full list by opening <EM>"cj_typesEx.j"</EM> in any text editor.</P><P>There also are versions of these files for usage inside of libraries, where all defines are private so they won’t affect anything outside you library. They have <EM>"_priv"</EM> suffix in the filename.</P><!--TOC subsection cj_order and cj_antibj_base-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc32">6.2</A>  cj_order and cj_antibj_base</H3><!--SEC END --><DIV CLASS="lstlisting">  <B>include</B> <FONT COLOR="#0000AA"><EM>"cj_order.j"</EM></FONT>
+  <B>include</B> <FONT COLOR="#0000AA"><EM>"cj_antibj_base.j"</EM></FONT></DIV><P>These libraries aim for ease usage and slight map optimization on save.</P><P>First of them replaces all calls to order conversion functions like <CODE><FONT COLOR="#7F007F">OrderId</FONT></CODE><CODE>(</CODE><CODE><FONT COLOR="#0000AA"><EM><CODE>"smart"</CODE></EM></FONT></CODE><CODE>)</CODE> to corresponding integer values and implements defines like <CODE>order_smart</CODE> for integer values of all existing orders. </P><P>The other one performs light optimization when functions and constants from <EM>"Blizzard.j"</EM> are used in the map. Constants are replaced to their values and many functions are replaced to their analogs from <EM>"common.j"</EM>. Please note, that these optimizations also work for GUI triggers of your map.</P><P><A NAME="print"></A></P><!--TOC subsection cj_print-->
+<H3 CLASS="subsection"><!--SEC ANCHOR --><A NAME="htoc33">6.3</A>  cj_print</H3><!--SEC END --><DIV CLASS="lstlisting">  <B>include</B> <FONT COLOR="#0000AA"><EM>"cj_print.j"</EM></FONT></DIV><P>By including this file, you gain access to output formatting functions. The templates, used for formatting, are defined by specially formatted string (format string). Arguments, passed to formatting functions, should follow the foemat string in exact order, stated in format string.
+</P><!--TOC subsubsection Function list-->
+<H4 CLASS="subsubsection"><!--SEC ANCHOR --><A NAME="htoc34">6.3.1</A>  Function list</H4><!--SEC END --><P>
+In function descriptions format string is declared as <CODE><FONT COLOR="#0054A8">string</FONT></CODE><CODE> </CODE><CODE>format</CODE> and arguments are <CODE>...</CODE> These functions can be used without arguments, in this case they will simply use given string as input.</P><P>The <CODE>sprintf</CODE> function formats a string and returns it as a result. It’s compiled to a simple statement, not a function call.</P><P>The <CODE>printf</CODE> function outputs the formatted string to local player. The output is done using <CODE><FONT COLOR="#7F007F">DisplayTimedTextToPlayer</FONT></CODE> function.</P><P>The following function do same things, as their standard analogs, but take a format string and arguments list instead of their default string argument.
+</P><DIV CLASS="lstlisting">  <FONT COLOR="#0054A8">void</FONT>     sBJDebugMsg                 (<FONT COLOR="#0054A8">string</FONT> format, ...)
+  <FONT COLOR="#0054A8">void</FONT>     sDisplayTextToPlayer        (<FONT COLOR="#0054A8">player</FONT> p, <FONT COLOR="#0054A8">real</FONT> x, <FONT COLOR="#0054A8">real</FONT> y, <FONT COLOR="#0054A8">string</FONT> format, ...)
+  <FONT COLOR="#0054A8">void</FONT>     sDisplayTimedTextToPlayer   (<FONT COLOR="#0054A8">player</FONT> p, <FONT COLOR="#0054A8">real</FONT> x, <FONT COLOR="#0054A8">real</FONT> y, <FONT COLOR="#0054A8">real</FONT> time, <FONT COLOR="#0054A8">string</FONT> format, ...)
+  <FONT COLOR="#0054A8">void</FONT>     sDisplayTimedTextFromPlayer (<FONT COLOR="#0054A8">player</FONT> p, <FONT COLOR="#0054A8">real</FONT> x, <FONT COLOR="#0054A8">real</FONT> y, <FONT COLOR="#0054A8">real</FONT> time, <FONT COLOR="#0054A8">string</FONT> format, ...)
+  <FONT COLOR="#0054A8">void</FONT>     sSetTextTagText             (<FONT COLOR="#0054A8">texttag</FONT> t, <FONT COLOR="#0054A8">string</FONT> format, ..., <FONT COLOR="#0054A8">real</FONT> h)
+  <FONT COLOR="#0054A8">void</FONT>     sQuestSetTitle              (<FONT COLOR="#0054A8">quest</FONT> q, <FONT COLOR="#0054A8">string</FONT> format, ...)
+  <FONT COLOR="#0054A8">void</FONT>     sQuestSetDescription        (<FONT COLOR="#0054A8">quest</FONT> q, <FONT COLOR="#0054A8">string</FONT> format, ...)
+  <FONT COLOR="#0054A8">void</FONT>     sQuestItemSetDescription    (<FONT COLOR="#0054A8">questitem</FONT> q, <FONT COLOR="#0054A8">string</FONT> format, ...)
+  <FONT COLOR="#0054A8">void</FONT>     sMultiboardSetTitleText     (<FONT COLOR="#0054A8">multiboard</FONT> m, <FONT COLOR="#0054A8">string</FONT> format, ...)
+  <FONT COLOR="#0054A8">void</FONT>     sMultiboardSetItemsValue    (<FONT COLOR="#0054A8">multiboard</FONT> m, <FONT COLOR="#0054A8">string</FONT> format, ...)
+  <FONT COLOR="#0054A8">void</FONT>     sMultiboardSetItemValue     (<FONT COLOR="#0054A8">multiboarditem</FONT> m, <FONT COLOR="#0054A8">string</FONT> format, ...)
+  <FONT COLOR="#0054A8">void</FONT>     sDialogSetMessage           (<FONT COLOR="#0054A8">dialog</FONT> d, <FONT COLOR="#0054A8">string</FONT> format, ...)
+  <FONT COLOR="#0054A8">button</FONT>   sDialogAddButton            (<FONT COLOR="#0054A8">dialog</FONT> d, <FONT COLOR="#0054A8">string</FONT> format, ..., <FONT COLOR="#0054A8">int</FONT> hotkey)
+  <FONT COLOR="#0054A8">button</FONT>   sDialogAddQuitButton        (<FONT COLOR="#0054A8">dialog</FONT> d, <FONT COLOR="#0054A8">bool</FONT> b, <FONT COLOR="#0054A8">string</FONT> format, ..., <FONT COLOR="#0054A8">int</FONT> hotkey)
+  <FONT COLOR="#0054A8">void</FONT>     sLeaderboardAddItem         (<FONT COLOR="#0054A8">leaderboard</FONT> l, <FONT COLOR="#0054A8">string</FONT> format, ..., <FONT COLOR="#0054A8">player</FONT> p)</DIV><!--TOC subsubsection Format string-->
+<H4 CLASS="subsubsection"><!--SEC ANCHOR --><A NAME="htoc35">6.3.2</A>  Format string</H4><!--SEC END --><P>
+The formatting string is a template for arguments substitution. All the characters of this string excluding control sequences are copied to the resulting string without changes. Usually, control sequences start with <CODE>%</CODE> symbol (to output the percent sign, you have to escape it using backslash symbol <CODE>\%</CODE>). Control sequences also contain name of the type of substituted variable. By default, the following types are defined:
+</P><DIV CLASS="lstlisting">  %p     - <FONT COLOR="#0054A8">player</FONT> name, <B>takes</B> <FONT COLOR="#0054A8">player</FONT> variable
+  %pc    - colored <FONT COLOR="#0054A8">player</FONT> name, <B>takes</B> <FONT COLOR="#0054A8">player</FONT> variable
+  %i     - decimal number, <B>takes</B> <FONT COLOR="#0054A8">integer</FONT>
+  %igold - decimal number, gold-colored, <B>takes</B> <FONT COLOR="#0054A8">integer</FONT>
+  %ilumb - decimal number, lumber-colored, <B>takes</B> <FONT COLOR="#0054A8">integer</FONT>
+  %ip    - <FONT COLOR="#0054A8">player</FONT> name, <B>takes</B> <FONT COLOR="#0054A8">integer</FONT> (<FONT COLOR="#0054A8">player</FONT> id)
+  %ipc   - colored <FONT COLOR="#0054A8">player</FONT> name, <B>takes</B> <FONT COLOR="#0054A8">integer</FONT> (<FONT COLOR="#0054A8">player</FONT> id)
+  %b     - <FONT COLOR="#0054A8">boolean</FONT>, prints <FONT COLOR="#0000AA"><EM>"true"</EM></FONT> or <FONT COLOR="#0000AA"><EM>"false"</EM></FONT>
+  %r     - floating number without extra formatting, <B>takes</B> <FONT COLOR="#0054A8">real</FONT>
+  %s     - <FONT COLOR="#0054A8">string</FONT>, <B>if</B> a direct value is passed, it will be cleanly merged
+  %v     - variable, an argument is directly copied to output
+  %h     - decimal number, descriptor id is passed as an argument</DIV><P>Furthermore, the user can define his own markup for any additional argument types. To do this, you have to redefine the <CODE>cj_sprintf_argTyp_User</CODE> macro.
+</P><DIV CLASS="lstlisting">  <FONT COLOR="#008700"><EM>// here we define our own type handlers</EM></FONT>
+  <B>setdef</B> cj_sprintf_argTyp_User = <FONT COLOR="#008700"><EM>/* markup */</EM></FONT>
+  
+  <FONT COLOR="#008700"><EM>// here we use prints with our markup, eg. in our library</EM></FONT>
+  
+  <FONT COLOR="#008700"><EM>// then we roll back our markup not to mess with other libraries etc.</EM></FONT>
+  <B>setdef</B> cj_sprintf_argTyp_User =</DIV><P>Let’s look into the type definition syntax by the exaple of <CODE>%</CODE><CODE>i</CODE> type:</P><P><IMG SRC="http://cjass.xgm.ru/files/format-en.png"> </P><P><B><FONT COLOR="red"> Attention!</FONT></B> The <CODE>%</CODE> symbol will lead the World Editor to strange behaviour if used in the Custom Script section. To use string formatting functions there, you should use the <CODE>^</CODE> symbol as a control sequence start marker.</P><!--TOC section Credits and thanks-->
+<H2 CLASS="section"><!--SEC ANCHOR --><A NAME="htoc36">7</A>  Credits and thanks</H2><!--SEC END --><UL CLASS="itemize"><LI CLASS="li-itemize">
+ADOLF — created AdicHelper in pure asm. He has tons of patience to fix bugs and to implement more crazy features.
+</LI><LI CLASS="li-itemize">Van Damm — just passed by. Created updater and wrote this manual.
+</LI><LI CLASS="li-itemize">Dark Dragon — our most faithful tester. Caught dozens of bugs and made lots of syntax suggestions.
+</LI><LI CLASS="li-itemize">Vexorian – made JassHelper and refused to add some features to it.
+</LI><LI CLASS="li-itemize">Toadcop — caught bugs, made suggestions and created TCXAOS.
+</LI><LI CLASS="li-itemize">ShadoW DaemoN — donated cj_order and caught some lame updater bugs. Also translated sections 4-5 and spellchecked this manual.
+</LI><LI CLASS="li-itemize">Artte — a faithful tester.
+</LI><LI CLASS="li-itemize">Hellfim — found some updater bugs and manual typos.
+</LI><LI CLASS="li-itemize">zibada — hosted us and created XGM.
+</LI><LI CLASS="li-itemize">Crock — helped us understand Warcraft VM’s internal logic.
+</LI><LI CLASS="li-itemize">L<sup>A</sup>T<sub>E</sub>X, HeVeA и LEd — I used them to create this manual.
+</LI><LI CLASS="li-itemize">Assembly — the best programming language. Ever.
+</LI><LI CLASS="li-itemize">Hutch — he keeps masm alive.
+</LI><LI CLASS="li-itemize">Oleh Yuschuk — created OllyDbg, the best tiny debugger.
+</LI></UL><!--CUT END -->
+<!--HTMLFOOT-->
+<!--ENDHTML-->
+<!--FOOTER-->
+<HR SIZE=2><BLOCKQUOTE CLASS="quote"><EM>This document was translated from L<sup>A</sup>T<sub>E</sub>X by
+</EM><A HREF="http://hevea.inria.fr/index.html"><EM>H</EM><EM><FONT SIZE=2><sup>E</sup></FONT></EM><EM>V</EM><EM><FONT SIZE=2><sup>E</sup></FONT></EM><EM>A</EM></A><EM>.</EM></BLOCKQUOTE></BODY>
+</HTML>

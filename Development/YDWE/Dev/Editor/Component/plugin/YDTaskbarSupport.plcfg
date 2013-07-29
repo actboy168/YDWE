@@ -1,0 +1,6 @@
+[Info]
+PluginName = YDTaskbarSupport
+[Load]
+Enable = 1
+Loader = YDTaskbarSupport.lua
+Dll    = YDTaskbarSupport.dll

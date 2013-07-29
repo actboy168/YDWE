@@ -1,0 +1,6 @@
+[Info]
+PluginName = YDTrigger
+[Load]
+Enable = 1
+Loader = YDTrigger.lua
+Dll    = YDTrigger.dll

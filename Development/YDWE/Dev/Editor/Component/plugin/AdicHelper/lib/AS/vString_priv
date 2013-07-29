@@ -1,0 +1,91 @@
+//***************************************************************************
+//*
+//*     <lib> vString(priv) v1    by AppleSheep
+//*
+//***************************************************************************
+
+    #define {
+        private AS_vString_type_sys   = "^sys^=# |c00FFFF00<$>|r"
+        private AS_vString_type_v     = "^c^=$"
+        private AS_vString_type_i     = "^i^=<I2S($)>"
+        private AS_vString_type_r     = "^r^=<R2S($)>"
+        private AS_vString_type_b     = "^b^=<AS_vString_b2s($)>"
+        private AS_vString_type_s     = "^s^=<$>"
+        private AS_vString_type_h     = "^h^=<I2S(GetHandleId($))>"
+        private AS_vString_type_pc    = "^pc^=<AS_vString_GetPC(GetPlayerId($))>"
+        private AS_vString_type_p     = "^p^=<GetPlayerName($)>"
+        private AS_vString_type_ipc   = "^ipc^=<AS_vString_GetPC($)>"
+        private AS_vString_type_ip    = "^ip^=<GetPlayerName(Player($))>"
+        private AS_vString_type_igold = "^igold^=|cffffdc00<I2S($)>|r"
+        private AS_vString_type_ilumb = "^ilumb^=|cff00c850<I2S($)>|r"
+        private AS_vString_type_uo    = "^uo^=<OrderId2String($)>"
+        private AS_vString_type_ui    = "^ui^=<UnitId2String($)>"
+
+        private AS_vString_type_all = AS_vString_type_v ## AS_vString_type_sys ## AS_vString_type_i ## AS_vString_type_r ## AS_vString_type_b ## AS_vString_type_s ## AS_vString_type_h \
+							## AS_vString_type_pc ## AS_vString_type_p ## AS_vString_type_ipc ## AS_vString_type_ip ## AS_vString_type_igold ## AS_vString_type_ilumb \
+							## AS_vString_type_uo ## AS_vString_type_ui
+
+        private vString() = ""
+        private vString(str) = !@@s ## str !@@a ## AS_vString_type_all ## !@@e
+        private vString(str,v0) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 !@@e
+        private vString(str,v0,v1) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 !@@e
+        private vString(str,v0,v1,v2) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 !@@e
+        private vString(str,v0,v1,v2,v3) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 !@@e
+        private vString(str,v0,v1,v2,v3,v4) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 !@@e
+        private vString(str,v0,v1,v2,v3,v4,v5) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 !@@e
+        private vString(str,v0,v1,v2,v3,v4,v5,v6) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 !@@e
+        private vString(str,v0,v1,v2,v3,v4,v5,v6,v7) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 !@@e
+        private vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 !@@e
+        private vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 !@@e
+        private vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va !@@e
+        private vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va,vb) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va ## @vb !@@e
+        private vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va,vb,vc) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va ## @vb ## @vc !@@e
+        private vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va,vb,vc,vd) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va ## @vb ## @vc ## @vd !@@e
+        private vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va,vb,vc,vd,ve) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va ## @vb ## @vc ## @vd ## @ve !@@e
+        private vString(str,v0,v1,v2,v3,v4,v5,v6,v7,v8,v9,va,vb,vc,vd,ve,vf) = !@@s ## str !@@a ## AS_vString_type_all ## @v0 ## @v1 ## @v2 ## @v3 ## @v4 ## @v5 ## @v6 ## @v7 ## @v8 ## @v9 ## @va ## @vb ## @vc ## @vd ## @ve ## @vf !@@e
+    }
+
+    private string AS_vString_b2s (boolean b) {
+        if b
+            return "true"
+        endif
+        return "false"
+    }
+
+    private string AS_vString_GetPC (integer k) {
+        if     k == 0x00
+            return "|cffff0303"
+        elseif k == 0x01
+            return "|cff0042ff"
+        elseif k == 0x02
+            return "|cff1ce6b9"
+        elseif k == 0x03
+            return "|cff540081"
+        elseif k == 0x04
+            return "|cffffff01"
+        elseif k == 0x05
+            return "|cfffe8a0e"
+        elseif k == 0x06
+            return "|cff20c000"
+        elseif k == 0x07
+            return "|cffe55bb0"
+        elseif k == 0x08
+            return "|cff959697"
+        elseif k == 0x09
+            return "|cff7ebff1"
+        elseif k == 0x0a
+            return "|cff106246"
+        elseif k == 0x0b
+            return "|cff4e2a04"
+        elseif k == 0x0c
+            return "|cff282828"
+        elseif k == 0x0d
+            return "|cff282828"
+        elseif k == 0x0e
+            return "|cff282828"
+        elseif k == 0x0f
+            return "|cff282828"
+        endif
+        return ""
+    }
+
