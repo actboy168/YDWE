@@ -1,0 +1,91 @@
+//***************************************************************************
+[TriggerCategories]
+// Defines categories for organizing trigger functions
+// Key: Arbitrary category identifier
+
+// Value 0: Display text
+// Value 1: Icon image file
+// Value 2: Optional flag (defaults to 0) indicating to disable display of category name
+//
+
+TC_ARITHMETIC=WESTRING_TRIGCAT_ARITHMETIC,ReplaceableTextures\WorldEditUI\Actions-AI,1
+TC_NOTHING=WESTRING_TRIGCAT_NOTHING,ReplaceableTextures\CommandButtons\BTNPillage.blp,1
+TC_COMMENT=WESTRING_TRIGCAT_COMMENT,ReplaceableTextures\WorldEditUI\Actions-Comment,1
+TC_CUSTOM=WESTRING_TRIGCAT_CUSTOM,ReplaceableTextures\CommandButtons\BTNSpellSteal.blp,1
+TC_CONDITION=WESTRING_TRIGCAT_CONDITION,ReplaceableTextures\WorldEditUI\Actions-Logical,1
+TC_WAIT=WESTRING_TRIGCAT_WAIT,ReplaceableTextures\WorldEditUI\Actions-Wait,1
+TC_SETVARIABLE=WESTRING_TRIGCAT_SETVARIABLE,ReplaceableTextures\WorldEditUI\Actions-SetVariables,1
+TC_SKIPACTIONS=WESTRING_TRIGCAT_SKIPACTIONS,ReplaceableTextures\CommandButtons\BTNTemp.blp,1
+TC_LOGIC=WESTRING_TRIGCAT_LOGIC,ReplaceableTextures\WorldEditUI\Actions-Logical,1
+TC_FORLOOP=WESTRING_TRIGCAT_FORLOOP,ReplaceableTextures\WorldEditUI\Actions-Logical,1
+TC_LAST=WESTRING_TRIGCAT_LAST,ReplaceableTextures\WorldEditUI\Actions-SetVariables,1
+TC_YDAB=技能[YDWE],ReplaceableTextures\CommandButtons\BTNImmolationOn.blp
+TC_YDST=系统[YDWE],ReplaceableTextures\CommandButtons\BTNMetamorphosis.blp
+TC_YDFC=函数[YDWE],ReplaceableTextures\CommandButtons\BTNEvasion.blp
+TC_YDLD=存储[YDWE],ReplaceableTextures\CommandButtons\BTNLoad.blp
+TC_YDSE=特效[YDWE],ReplaceableTextures\PassiveButtons\PASBTNFeedBack.blp
+#ifndef DISABLE_YDTRIGGER
+TC_YDLC=变量[YDWE],ReplaceableTextures\WorldEditUI\Editor-ScriptVariable.blp,1
+#else
+TC_YDLC=变量[YDWE],ReplaceableTextures\WorldEditUI\Editor-ScriptVariable.blp
+#endif
+TC_YDAI=AI[YDWE],ReplaceableTextures\CommandButtons\BTNHeroTinker.blp
+TC_YDET=事件[YDWE],UI\Widgets\ToolTips\Human\ToolTipStonesIcon.blp
+TC_YDBF=逆天[YDWE],ReplaceableTextures\CommandButtons\BTNInfernal.blp
+TC_YDSL=存档[YDWE],ReplaceableTextures\CommandButtons\BTNTome.blp
+TC_SCRIPTSET=电影<Script System>,ReplaceableTextures\WorldEditUI\Doodad-Cinematic.blp
+TC_AI=WESTRING_TRIGCAT_AI,ReplaceableTextures\WorldEditUI\Actions-AI
+TC_TRIGGER=WESTRING_TRIGCAT_TRIGGER,ReplaceableTextures\CommandButtons\BTNEngineeringUpgrade.blp
+TC_UNIT=WESTRING_TRIGCAT_UNIT,ReplaceableTextures\WorldEditUI\Actions-Unit
+TC_UNITPOOL=单位池,ReplaceableTextures\WorldEditUI\Actions-Unit
+TC_UNITGROUP=WESTRING_TRIGCAT_UNITGROUP,ReplaceableTextures\WorldEditUI\Actions-UnitGroup
+TC_UBERSPLAT=WESTRING_TRIGCAT_UBERSPLAT,ReplaceableTextures\CommandButtons\BTNEarthquake.blp
+TC_LOCATION=点,ReplaceableTextures\CommandButtons\BTNStun.blp
+TC_CINEMATIC=WESTRING_TRIGCAT_CINEMATIC,ReplaceableTextures\WorldEditUI\Actions-Camera
+TC_ANIMATION=WESTRING_TRIGCAT_ANIMATION,ReplaceableTextures\WorldEditUI\Actions-Animation
+TC_DIALOG=WESTRING_TRIGCAT_DIALOG,ReplaceableTextures\WorldEditUI\Actions-Dialog
+TC_MELEE=WESTRING_TRIGCAT_MELEE,ReplaceableTextures\WorldEditUI\Actions-Melee
+TC_MULTIBOARD=WESTRING_TRIGCAT_MULTIBOARD,ReplaceableTextures\WorldEditUI\Actions-Quest
+TC_ENVIRONMENT=WESTRING_TRIGCAT_ENVIRONMENT,ReplaceableTextures\WorldEditUI\Actions-Environment
+TC_CAMERA=WESTRING_TRIGCAT_CAMERA,ReplaceableTextures\WorldEditUI\Actions-Camera
+TC_TIMER=WESTRING_TRIGCAT_TIMER,ReplaceableTextures\WorldEditUI\Events-Time
+TC_VISIBILITY=WESTRING_TRIGCAT_VISIBILITY,ReplaceableTextures\WorldEditUI\Actions-Visibility
+TC_DESTRUCT=WESTRING_TRIGCAT_DESTRUCT,ReplaceableTextures\WorldEditUI\Actions-Destructibles
+TC_TRACKABLE=可追踪物,ReplaceableTextures\WorldEditUI\Actions-Game
+TC_LEADERBOARD=WESTRING_TRIGCAT_LEADERBOARD,ReplaceableTextures\WorldEditUI\Actions-Quest
+TC_TEXTTAG=WESTRING_TRIGCAT_TEXTTAG,ReplaceableTextures\CommandButtons\BTNSpy.blp
+TC_REGION=区域(不规则),ReplaceableTextures\WorldEditUI\Actions-Region
+TC_RECT=区域(矩形),ReplaceableTextures\WorldEditUI\Actions-Region
+TC_YDID=获取整数,ReplaceableTextures\CommandButtons\BTNSelectHeroOn.blp
+TC_QUEST=WESTRING_TRIGCAT_QUEST,ReplaceableTextures\WorldEditUI\Actions-Quest
+TC_LIGHTNING=WESTRING_TRIGCAT_LIGHTNING,ReplaceableTextures\CommandButtons\BTNChainLightning.blp
+TC_EVENTRESPONSE=WESTRING_TRIGCAT_EVENTRESPONSE,ReplaceableTextures\CommandButtons\BTNBerserkForTrolls.blp
+TC_SOUND=WESTRING_TRIGCAT_SOUND,ReplaceableTextures\WorldEditUI\Actions-Sound
+TC_TIME=WESTRING_TRIGCAT_TIME,ReplaceableTextures\WorldEditUI\Events-Time
+TC_MATH=WESTRING_TRIGCAT_MATH,ReplaceableTextures\WorldEditUI\Actions-Logical
+TC_SPECIALEFFECT=WESTRING_TRIGCAT_SPECIALEFFECT,ReplaceableTextures\WorldEditUI\Actions-Animation
+TC_IMAGE=WESTRING_TRIGCAT_IMAGE,ReplaceableTextures\CommandButtons\BTNStaffOfPreservation.blp
+TC_PLAYER=WESTRING_TRIGCAT_PLAYER,ReplaceableTextures\WorldEditUI\Actions-Player
+TC_PLAYERGROUP=WESTRING_TRIGCAT_PLAYERGROUP,ReplaceableTextures\WorldEditUI\Actions-PlayerGroup
+TC_ITEM=WESTRING_TRIGCAT_ITEM,ReplaceableTextures\WorldEditUI\Actions-Item
+TC_ITEMPOOL=物品池,ReplaceableTextures\WorldEditUI\Actions-Item
+TC_UNITSEL=WESTRING_TRIGCAT_UNITSEL,ReplaceableTextures\WorldEditUI\Actions-UnitSelection
+TC_HERO=WESTRING_TRIGCAT_HERO,ReplaceableTextures\WorldEditUI\Actions-Hero
+TC_GAME=WESTRING_TRIGCAT_GAME,ReplaceableTextures\WorldEditUI\Actions-Game
+TC_GAMECACHE=WESTRING_TRIGCAT_GAMECACHE,ReplaceableTextures\WorldEditUI\Actions-SetVariables
+TC_NEUTRALBUILDING=WESTRING_TRIGCAT_NEUTRALBUILDING,ReplaceableTextures\WorldEditUI\Actions-Goldmine
+TC_CONVERSION=WESTRING_TRIGCAT_CONVERSION,ReplaceableTextures\WorldEditUI\Actions-AI
+TC_HASHTABLE=WESTRING_TRIGCAT_HASHTABLE,ReplaceableTextures\WorldEditUI\Editor-Toolbar-SaveMap
+//%%% DEBUG - Remove for retail
+TC_OBSOLETE=WESTRING_TRIGCAT_OBSOLETE,ReplaceableTextures\WorldEditUI\Editor-TriggerFunction
+TC_DEBUG=WESTRING_TRIGCAT_DEBUG,ReplaceableTextures\WorldEditUI\Editor-TriggerFunction
+TC_YDHIDE=不推荐使用,ReplaceableTextures\CommandButtons\BTNCancel.blp
+
+// AI Editor only
+TC_AI_TOWN=WESTRING_TRIGCAT_AI_TOWN,none
+TC_AI_HERO=WESTRING_TRIGCAT_AI_HERO,none
+TC_AI_RESOURCES=WESTRING_TRIGCAT_AI_RESOURCES,none
+TC_AI_MISC=WESTRING_TRIGCAT_AI_MISC,none
+TC_AI_UNIT=WESTRING_TRIGCAT_AI_UNIT,none
+TC_AI_UPGRADE=WESTRING_TRIGCAT_AI_UPGRADE,none
+TC_AI_COMMAND=WESTRING_TRIGCAT_AI_COMMAND,none

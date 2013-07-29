@@ -1,0 +1,162 @@
+//***************************************************************************
+[TriggerConditionStrings]
+
+             ="自定义代码 [C]"
+             ="代码: ",~Jass代码
+             Hint="条件内不可输入局部变量,如有必要,可用全局变量或GetTriggerUnit()之类的代替"
+
+OperatorCompareBoolean="布尔表达式"
+OperatorCompareBoolean=~表达式A," ",~Operator," ",~表达式B
+OperatorCompareBooleanHint=
+
+OperatorCompareAbilityId="技能"
+OperatorCompareAbilityId=~Value," ",~Operator," ",~Value
+OperatorCompareAbilityIdHint=
+
+OperatorCompareBuffId="魔法效果"
+OperatorCompareBuffId=~魔法效果," ",~Operator," ",~魔法效果
+OperatorCompareBuffIdHint=
+
+OperatorCompareDestructible="可破坏物"
+OperatorCompareDestructible=~可破坏物," ",~Operator," ",~可破坏物
+OperatorCompareDestructibleHint=
+
+OperatorCompareDestructableCode="可破坏物类型"
+OperatorCompareDestructableCode=~Value," ",~Operator," ",~Value
+OperatorCompareDestructableCodeHint=
+
+OperatorCompareDialog="对话框 [R]"
+OperatorCompareDialog=~对话框," ",~Operator," ",~对话框
+OperatorCompareDialogHint=
+
+OperatorCompareButton="对话框按钮"
+OperatorCompareButton=~对话框按钮," ",~Operator," ",~对话框按钮
+OperatorCompareButtonHint=
+
+OperatorCompareGameDifficulty="游戏难度"
+OperatorCompareGameDifficulty=~Value," ",~Operator," ",~Value
+OperatorCompareGameDifficultyHint=
+
+OperatorCompareGameSpeed="游戏速度"
+OperatorCompareGameSpeed=~Value," ",~Operator," ",~Value
+OperatorCompareGameSpeedHint=
+
+OperatorCompareHeroSkill="学习技能"
+OperatorCompareHeroSkill=~Value," ",~Operator," ",~Value
+OperatorCompareHeroSkillHint=
+
+OperatorCompareInteger="整数"
+OperatorCompareInteger=~Value," ",~Operator," ",~Value
+OperatorCompareIntegerHint=
+
+OperatorCompareItem="物品"
+OperatorCompareItem=~物品," ",~Operator," ",~物品
+OperatorCompareItemHint=
+
+OperatorCompareItemType="物品分类"
+OperatorCompareItemType=~Value," ",~Operator," ",~Value
+OperatorCompareItemTypeHint=
+
+OperatorCompareItemCode="物品类型"
+OperatorCompareItemCode=~Value," ",~Operator," ",~Value
+OperatorCompareItemCodeHint=
+
+OperatorCompareMeleeDifficulty="对战AI难度"
+OperatorCompareMeleeDifficulty=~Value," ",~Operator," ",~Value
+OperatorCompareMeleeDifficultyHint=
+
+OperatorCompareOrderCode="命令ID"
+OperatorCompareOrderCode=~Value," ",~Operator," ",~Value
+OperatorCompareOrderCodeHint=
+
+OperatorComparePlayer="玩家"
+OperatorComparePlayer=~Value," ",~Operator," ",~Value
+OperatorComparePlayerHint=
+
+OperatorComparePlayerColor="玩家颜色"
+OperatorComparePlayerColor=~Value," ",~Operator," ",~Value
+OperatorComparePlayerColorHint=
+
+OperatorComparePlayerControl="玩家控制者"
+OperatorComparePlayerControl=~Value," ",~Operator," ",~Value
+OperatorComparePlayerControlHint=
+
+OperatorComparePlayerSlotStatus="玩家游戏状态"
+OperatorComparePlayerSlotStatus=~Value," ",~Operator," ",~Value
+OperatorComparePlayerSlotStatusHint=
+
+OperatorComparePoint="点 [R]"
+OperatorComparePoint=~Value," ",~Operator," ",~Value
+OperatorComparePointHint=
+
+OperatorCompareRace="种族"
+OperatorCompareRace=~Value," ",~Operator," ",~Value
+OperatorCompareRaceHint=
+
+OperatorCompareReal="实数"
+OperatorCompareReal=~Value," ",~Operator," ",~Value
+OperatorCompareRealHint=
+
+OperatorCompareDegree="角度"
+OperatorCompareDegree=~Value," ",~Operator," ",~Value
+OperatorCompareDegreeHint=
+
+OperatorCompareRadian="弧度"
+OperatorCompareRadian=~Value," ",~Operator," ",~Value
+OperatorCompareRadianHint=
+
+OperatorCompareRegion="区域(矩形) [R]"
+OperatorCompareRegion=~Value," ",~Operator," ",~Value
+OperatorCompareRegionHint=
+
+OperatorCompareRegionR="区域(不规则) [R]"
+OperatorCompareRegionR=~Value," ",~Operator," ",~Value
+OperatorCompareRegionRHint=
+
+OperatorCompareString="字符串"
+OperatorCompareString=~Value," ",~Operator," ",~字符串
+OperatorCompareStringHint=
+
+OperatorCompareTechCode="科技研究"
+OperatorCompareTechCode=~Value," ",~Operator," ",~科技
+OperatorCompareTechCodeHint=
+
+OperatorCompareTrigger="触发"
+OperatorCompareTrigger=~触发," ",~Operator," ",~触发
+OperatorCompareTriggerHint=
+
+OperatorCompareUnit="单位"
+OperatorCompareUnit=~Value," ",~Operator," ",~单位
+OperatorCompareUnitHint=
+
+OperatorCompareUnitCode="单位类型"
+OperatorCompareUnitCode=~Value," ",~Operator," ",~Value
+OperatorCompareUnitCodeHint=
+
+OperatorCompareTerrainType="地形"
+OperatorCompareTerrainType=~Value," ",~Operator," ",~Value
+OperatorCompareTerrainTypeHint=
+
+OperatorCompareTrackable="可追踪物 [R]"
+OperatorCompareTrackable=~值," ",~Operator," ",~值
+OperatorCompareTrackableHint=
+
+OperatorCompareTimer="计时器 [R]"
+OperatorCompareTimer=~计时器," ",~Operator," ",~计时器
+OperatorCompareTimerHint=
+
+GetBooleanAnd="And"
+GetBooleanAnd=~条件 1," 且 ",~条件 2
+GetBooleanAndHint="条件1 和条件2 均成立."
+
+GetBooleanOr="Or"
+GetBooleanOr=~条件 1," or ",~条件 2
+GetBooleanOrHint="条件1 和条件2 任意成立."
+
+AndMultiple="And, 多项条件"
+AndMultiple="And - 所有条件成立"
+AndMultipleHint="用该功能添加的条件必须为主体之下."
+
+OrMultiple="Or, 多项条件"
+OrMultiple="Or - 任意条件成立"
+OrMultipleHint="用该功能添加的条件必须为主体之下."

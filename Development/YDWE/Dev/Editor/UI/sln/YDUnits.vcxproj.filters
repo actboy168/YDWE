@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ui">
+      <UniqueIdentifier>{d62b1e83-bc8d-4536-b5e2-d651372772c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="units">
+      <UniqueIdentifier>{90501d54-a80d-4e77-8805-23198228e1a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="doodads">
+      <UniqueIdentifier>{c582ecf4-ed6e-4c68-a7c0-8810a9cb90d0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\Units\units\abilitybuffdata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\abilitybuffmetadata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\abilitydata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\abilitymetadata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\campaignabilitystrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\commonabilitystrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\destructablemetadata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\humanabilitystrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\itemabilitystrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\miscmetadata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\neutralabilitystrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\neutralunitstrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\nightelfabilitystrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\orcabilitystrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\undeadabilitystrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\unitmetadata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\upgradeeffectmetadata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\upgrademetadata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\ui\loading-yuexie.blp">
+      <Filter>ui</Filter>
+    </None>
+    <None Include="..\src\Units\ui\miscdata.txt">
+      <Filter>ui</Filter>
+    </None>
+    <None Include="..\src\Units\ui\worldeditdata.txt">
+      <Filter>ui</Filter>
+    </None>
+    <None Include="..\src\Units\units\miscgame.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\miscdata.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\ui\uniteditordata.txt">
+      <Filter>ui</Filter>
+    </None>
+    <None Include="..\src\Units\units\campaignabilityfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\campaignunitfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\campaignunitstrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\commandstrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\commonabilityfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\destructabledata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\humanabilityfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\humanunitfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\humanunitstrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\humanupgradefunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\humanupgradestrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\itemabilityfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\itemdata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\itemfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\itemstrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\miscmetadata.slk.bak">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\neutralabilityfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\neutralunitfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\nightelfabilityfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\nightelfunitfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\nightelfunitstrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\orcabilityfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\orcunitfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\orcunitstrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\orcupgradefunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\undeadabilityfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\undeadunitfunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\undeadunitstrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\undeadupgradefunc.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\undeadupgradestrings.txt">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\unitabilities.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\unitbalance.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\unitdata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\unitui.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\unitweapons.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\units\upgradedata.slk">
+      <Filter>units</Filter>
+    </None>
+    <None Include="..\src\Units\doodads\doodadmetadata.slk">
+      <Filter>doodads</Filter>
+    </None>
+    <None Include="..\src\Units\doodads\doodads.slk">
+      <Filter>doodads</Filter>
+    </None>
+  </ItemGroup>
+</Project>

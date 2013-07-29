@@ -1,0 +1,3447 @@
+
+
+
+//***************************************************************************
+[TriggerCallStrings]
+
+// YD Beyond Fate
+#ifndef DISABLE_YDTRIGGER
+YDWECustomScriptCode="自定义代码[YDWE]"
+YDWECustomScriptCode=~Jass 代码
+YDWECustomScriptCodeHint="可以在任何有返回值的地方输入一行代码. 比如: 杀死(自定义代码：GetTriggerUnit())。"
+
+YDWEGetAnyTypeLocalVariable="获取局部变量[YDWE]"
+YDWEGetAnyTypeLocalVariable="loc_",~变量名
+YDWEGetAnyTypeLocalVariableHint="可以获取到任意类型的局部变量。"
+
+YDWEForLoopLocVarIndex="获取局部变量循环数[YDWE]"
+YDWEForLoopLocVarIndex="loop_",~变量名
+YDWEForLoopLocVarIndexHint="用来获取当前循环中的循环数，是个真正的Jass局部变量。"  
+
+YDWELoadAnyTypeDataByUserData="获取 自定义值[YDWE]"
+YDWELoadAnyTypeDataByUserData="获取 [",~类型,"] ",~null," 的 ",~属性
+YDWELoadAnyTypeDataByUserDataHint="从某个数据上获取自定义值，如获取[单位] 恶魔猎手 的 命中率 。"    
+
+YDWEHaveSavedAnyTypeDataByUserData="是否存有自定义值[YDWE]"
+YDWEHaveSavedAnyTypeDataByUserData="[",~类型,"] ",~null," 拥有 [",~类型,"] "~属性
+YDWEHaveSavedAnyTypeDataByUserDataHint="判断某个数据的自定义值是否存在，如[单位] 恶魔猎手 拥有[物品] 圣剑。"
+#endif
+
+//returns id string
+YDWEI2UnitId="转换整数为单位Id [YDWE]"
+YDWEI2UnitId="转换 ",~整数," 为单位Id"
+YDWEI2UnitIdHint="将一个整数转换成单位ID，如输入1751543663，将转成步兵的ID。" 
+
+YDWEI2ItemId="转换整数为物品Id [YDWE]"
+YDWEI2ItemId="转换 ",~整数," 为物品Id"
+YDWEI2ItemIdHint="将一个整数转换成物品ID，如输入1936749416，将转成魔法护盾的ID。" 
+
+YDWES2Id="转换字符串为Id [YDWE]"
+YDWES2Id="需要转换成ID的字符串为：",~字符窜
+YDWES2IdHint="将一个字符串转换成单位、物品等目标的ID；如spsh转换后为'spsh'，届时可以通过聊天输入字符串来创建单位或物品。" 
+
+YDWES2UnitId="转换字符串为单位Id [YDWE]"
+YDWES2UnitId="需要转换成单位Id的字符窜为：",~字符窜
+YDWES2UnitIdHint="将一个字符窜转换成单位ID，如输入hfoo，将转成步兵的ID。" 
+
+YDWES2ItemId="转换字符串为物品Id [YDWE]"
+YDWES2ItemId="需要转换成物品Id的字符串为：",~字符窜
+YDWES2ItemIdHint="将一个字符串转换成物品ID，如输入spsh，将转成魔法护盾的ID。" 
+
+// returns Map x y
+YDWECoordinateX="修正X坐标 [YDWE]"
+YDWECoordinateX="需要修正的X坐标为：",~实数
+YDWECoordinateXHint="设修正X坐标，强制它大于地图边界最小值，小于地图边界最大值，避免弹出游戏错误。" 
+
+YDWECoordinateY="修正Y坐标 [YDWE]"
+YDWECoordinateY="需要修正的Y坐标为：",~实数
+YDWECoordinateYHint="设修正Y坐标，强制它大于地图边界最小值，小于地图边界最大值，避免弹出游戏错误。" 
+
+// returns distance
+YDWEDistanceBetweenUnits="两个单位之间的距离 [YDWE]"
+YDWEDistanceBetweenUnits="从",~单位,"到",~单位,"的距离" 
+YDWEDistanceBetweenUnitsHint="获取两个单位之间的距离。"
+
+// returns angle
+YDWEAngleBetweenUnits="两个单位之间的角度 [YDWE]"
+YDWEAngleBetweenUnits="从",~单位,"到",~单位,"的角度" 
+YDWEAngleBetweenUnitsHint="获取两个单位之间的角度。"
+
+// returns armor
+YDWEGetUnitArmor="获取单位护甲<Rising_Dusk制作>"
+YDWEGetUnitArmor="获取 ",~单位," 的护甲值，关联技能为 ",~辅助技能 
+YDWEGetUnitArmorHint="可以获取单位的护甲值；需要保证混乱攻击对所有护甲均为100%伤害。关联技能的设置请参考example文件夹下的辅助地图。"
+
+// returns ElapsedTime
+YDWE_TP_GetElapsedTime="获取中心计时器逝去时间<Fetrix_sai制作>"
+YDWE_TP_GetElapsedTime="获取运行索引为 ",~计时器运行索引," 的计时器逝去时间"
+YDWE_TP_GetElapsedTimeHint=""
+
+// returns RemainingTime 
+YDWE_TP_GetRemainingTime="获取中心计时器剩余时间<Fetrix_sai制作>"
+YDWE_TP_GetRemainingTime="获取运行索引为 ",~计时器运行索引," 的计时器剩余时间"
+YDWE_TP_GetRemainingTimeHint=""
+
+// returns Timeout 
+YDWE_TP_GetTimeout="获取中心计时器刷新周期<Fetrix_sai制作>"
+YDWE_TP_GetTimeout="获取运行索引为 ",~计时器运行索引," 的计时器刷新周期"
+YDWE_TP_GetTimeoutHint=""
+
+//夜天UI
+  ="自定义代码 [C]"
+  ="代码: ",~Jass代码
+  Hint="输入一行Jass代码"
+  
+YDWEIsTriggerEventId="判断触发的事件 [YDWE]"
+YDWEIsTriggerEventId="当前触发的事件为 ",~事件
+YDWEIsTriggerEventIdHint="任意单位事件 等于 玩家单位事件，指定单位事件 等于 单位事件"
+
+ UnitAddAbility="添加技能 [C]"
+ UnitAddAbility="为 ",~单位," 添加 ",~技能
+ UnitAddAbilityHint="添加成功返回true."
+
+ UnitRemoveAbility="删除技能 [C]"
+ UnitRemoveAbility="为 ",~单位," 删除 ",~技能
+ UnitRemoveAbilityHint="删除成功返回true." 
+
+// returns boolean
+
+YDWEGetLocalVariableBoolean="局部变量"
+YDWEGetLocalVariableBoolean="local_",~bl
+YDWEGetLocalVariableBooleanHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableBooleanArray="局部变量数组"
+YDWEGetLocalVariableBooleanArray="local_",~bl,"[",~index,"]" 
+YDWEGetLocalVariableBooleanArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+YDWEGetBooleanByInteger="获取 真值 (整数路径)[YDWE]"
+YDWEGetBooleanByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取真值"
+YDWEGetBooleanByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取真值数据。" 
+
+YDWEGetBooleanByString="获取 真值 (字符串路径)[YDWE]"
+YDWEGetBooleanByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取真值"
+YDWEGetBooleanByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取真值数据。" 
+
+YDWEIsItemSwitch="单位切换背包[YDWE]"
+YDWEIsItemSwitch=~单位," 正在切换背包"
+YDWEIsItemSwitchHint="判断单位是否在切换背包，避免单位切换背包时触发获得和掉落物品事件。" 
+
+YDWEPlatformIsInPlatform="地图在11平台上 [JAPI]"
+YDWEPlatformIsInPlatform="目前地图正在11平台上运行"
+YDWEPlatformIsInPlatformHint="判断地图是否在11平台上；此功能可以根据地图所在平台做出差异化操作。特别注意：此操作内含有等待。" 
+
+//YDWEPlatformIsInRoom="地图在特殊房间中 [JAPI]"
+//YDWEPlatformIsInRoom="目前地图在11平台的特殊房间中"
+//YDWEPlatformIsInRoomHint="判断地图是否在11平台的特殊房间中；此功能是为了一些测试地图准备，让地图只能在某个房间建立。特别注意：此操作内含有等待。" 
+
+IsDestructableAliveBJ="可破坏物存活"
+IsDestructableAliveBJ=~可破坏物," 是存活的"
+IsDestructableAliveBJHint=""
+
+IsDestructableDeadBJ="可破坏物死亡"
+IsDestructableDeadBJ=~可破坏物," 是死亡的"
+IsDestructableDeadBJHint=""
+
+IsDestructableInvulnerableBJ="物件无敌"
+IsDestructableInvulnerableBJ=~物件," 是无敌的"
+IsDestructableInvulnerableBJHint=
+
+IsPointBlighted="坐标点被荒芜地表覆盖 [R]"
+IsPointBlighted="坐标点(",~X,",",~Y,")被荒芜地表覆盖"
+IsPointBlightedHint=
+
+IsPointBlightedBJ="点被荒芜地表覆盖"
+IsPointBlightedBJ=~指定点," 被荒芜地表覆盖"
+IsPointBlightedBJHint=
+
+IsTerrainPathable="地形通行状态关闭(指定坐标) [R]"
+IsTerrainPathable="坐标(",~X,",",~Y,")处的 ",~Pathing Type," 通行状态为关闭"
+IsTerrainPathableHint="指定类型单位不能通行即通行状态为关闭. 如该点不能造建筑就是'建造'通行状态为关闭. 可使用'环境 - 设置地形通行状态'来改变通行状态."
+
+IsTerrainPathableBJ="地形通行状态关闭(指定点)"
+IsTerrainPathableBJ=~指定点," 处的 ",~Pathing Type," 通行状态为关闭"
+IsTerrainPathableBJHint="指定类型单位不能通行即通行状态为关闭. 如该点不能造建筑就是'建造'通行状态为关闭. 可使用'环境 - 设置地形通行状态'来改变通行状态."
+
+IsMapFlagSet="地图参数设置"
+IsMapFlagSet=~Map Flag," 已设置"
+IsMapFlagSetHint=
+
+IsCustomCampaignButtonVisibile="自定义战役按钮可见"
+IsCustomCampaignButtonVisibile="自定义战役按钮# ",~Number," 可见"
+IsCustomCampaignButtonVisibileHint=
+
+GetCreepCampFilterState="小地图中立生物显示开启"
+GetCreepCampFilterState="小地图中立生物显示开启"
+GetCreepCampFilterStateHint=
+
+SaveGameExists="游戏存档存在"
+SaveGameExists=~存档文件," 已存在"
+SaveGameExistsHint=
+
+IsNoVictoryCheat="无法胜利 [R]"
+IsNoVictoryCheat="玩家开启作弊模式: 无法胜利"
+IsNoVictoryCheatHint="单机作弊码开启的模式."
+
+IsNoDefeatCheat="无法失败 [R]"
+IsNoDefeatCheat="玩家开启作弊模式: 无法失败"
+IsNoDefeatCheatHint="单机作弊码开启的模式."
+
+GetStoredBoolean="读取布尔值[R]"
+GetStoredBoolean="从",~Game Cache,"中读取布尔值,类别: ",~Category,",名称: ",~文字
+GetStoredBooleanHint="如果该值不存在则返回false."
+
+HaveStoredValue="缓存项存在"
+HaveStoredValue="名称为 "~文字," 的 ",~Type," 类缓存项被保存在类别: ",~Category," 缓存: ",~Game Cache
+HaveStoredValueHint=
+
+HaveSavedValue="<1.24> 哈希项存在"
+HaveSavedValue="子索引为 ",~Value," 的 ",~Type," 类数据被保存在主索引为 ",~Value," 的 ",~Hashtable," 中"
+HaveSavedValueHint=
+
+UnitHasItem="持有物品"
+UnitHasItem=~Hero," 拥有 ",~物品
+UnitHasItemHint=
+
+UnitHasItemOfTypeBJ="持有物品(指定类型)"
+UnitHasItemOfTypeBJ=~Hero," 拥有 ",~物品类型
+UnitHasItemOfTypeBJHint=
+
+IsSuspendedXP="经验不可获得"
+IsSuspendedXP=~Hero," 不可获得经验"
+IsSuspendedXPHint="可使用'英雄 - 允许/禁止经验获取'来设置该项."
+
+CheckItemStatus="物品状态检查"
+CheckItemStatus=~物品," 是 ",~Status," 的"
+CheckItemStatusHint=
+
+CheckItemcodeStatus="物品类型状态检查"
+CheckItemcodeStatus=~物品类型," 是 ",~Status," 的"
+CheckItemcodeStatusHint=
+
+IsItemVisible="物品可见 [R]"
+IsItemVisible=~物品," 是可见的"
+IsItemVisibleHint="物品不被隐藏且不被单位持有时即为可见的."
+
+IsItemHiddenBJ="物品隐藏"
+IsItemHiddenBJ=~物品," 是隐藏的"
+IsItemHiddenBJHint="单位持有的物品也被认为是隐藏的. 建议使用物品可见=False来作判断."
+
+IsItemOwned="物品被持有"
+IsItemOwned=~物品," 是被持有的"
+IsItemOwnedHint="在物品栏中的物品都是被持有的. 就算单位正处于死亡状态."
+
+IsItemPowerup="物品是拾取时自动使用的 [R]"
+IsItemPowerup=~物品," 是拾取时自动使用类物品"
+IsItemPowerupHint=
+
+IsItemSellable="物品可被市场随机出售 [R]"
+IsItemSellable=~物品," 可被市场随机出售"
+IsItemSellableHint=
+
+IsItemPawnable="物品可被抵押 [R]"
+IsItemPawnable=~物品," 可被抵押"
+IsItemPawnableHint=
+
+RectContainsItem="物品在矩形区域"
+RectContainsItem=~物品," 在 ",~矩形区域
+RectContainsItemHint="单位持有的物品不会被计算在内."
+
+IsItemInvulnerable="物品无敌"
+IsItemInvulnerable=~物品," 是无敌的"
+IsItemInvulnerableHint=
+
+LeaderboardHasPlayerItemBJ="玩家在排行榜"
+LeaderboardHasPlayerItemBJ=~Leaderboard," 中包含 ",~Player
+LeaderboardHasPlayerItemBJHint=
+
+IsMultiboardDisplayed="多面板显示"
+IsMultiboardDisplayed=~Multiboard," 是显示的"
+IsMultiboardDisplayedHint=
+
+IsMultiboardMinimized="多面板最小化"
+IsMultiboardMinimized=~Multiboard," 是最小化的"
+IsMultiboardMinimizedHint=
+
+WaygateIsActiveBJ="传送门激活"
+WaygateIsActiveBJ=~传送门," 处于激活状态"
+WaygateIsActiveBJHint=
+
+IsPlayerFlagSetBJ="玩家参数开启"
+IsPlayerFlagSetBJ=~Player Flag," 为允许,对 ",~Player
+IsPlayerFlagSetBJHint=
+
+IsPlayerAlly="是玩家的盟友"
+IsPlayerAlly=~Player," 是 ",~Player," 的盟友"
+IsPlayerAllyHint="包括中立状态. 单向判断玩家A对玩家B联盟不侵犯,即表示玩家A是玩家B的盟友."
+
+IsPlayerEnemy="是玩家的敌人"
+IsPlayerEnemy=~Player," 是 ",~Player," 的敌人"
+IsPlayerEnemyHint="不包括中立状态. 单向判断玩家A对玩家B敌对侵犯,即表示玩家A是玩家B的盟友."
+
+IsPlayerObserver="玩家是裁判或观察者 [R]"
+IsPlayerObserver=~Player,"是裁判或观察者"
+IsPlayerObserverHint=
+
+IsPlayerRacePrefSet="玩家的种族选择"
+IsPlayerRacePrefSet=~Player," 选择了 ",~RacePreference
+IsPlayerRacePrefSetHint=
+
+GetPlayerAlliance="联盟状态设置"
+GetPlayerAlliance=~Player," 对 ",~Player," 开启 ",~Alliance Type
+GetPlayerAllianceHint=
+
+IsPlayerInForce="在玩家组"
+IsPlayerInForce=~Player," 在 ",~玩家组," 中"
+IsPlayerInForceHint=
+
+IsQuestItemCompleted="任务项目完成"
+IsQuestItemCompleted=~Quest Requirement," 已完成"
+IsQuestItemCompletedHint=
+
+IsQuestEnabled="任务激活"
+IsQuestEnabled=~Quest," 已激活"
+IsQuestEnabledHint=
+
+IsQuestCompleted="任务完成"
+IsQuestCompleted=~Quest," 已完成"
+IsQuestCompletedHint=
+
+IsQuestFailed="任务失败"
+IsQuestFailed=~Quest," 失败"
+IsQuestFailedHint=
+
+IsQuestDiscovered="任务被发现"
+IsQuestDiscovered=~Quest," 已被发现"
+IsQuestDiscoveredHint=
+
+IsQuestRequired="是主要任务"
+IsQuestRequired=~Quest," 是主要任务"
+IsQuestRequiredHint=
+
+RectContainsLoc="包含点"
+RectContainsLoc=~矩形区域," 内包含 ",~点
+RectContainsLocHint=
+
+IsPointInRegion="包含坐标"
+IsPointInRegion=~不规则区域," 内包含坐标(",~X,",",~Y,")"
+IsPointInRegionHint=TC_REGION
+
+IsLocationInRegion="包含点"
+IsLocationInRegion=~不规则区域," 内包含点: ",~点
+IsLocationInRegionHint=TC_REGION
+
+IsTriggerEnabled="触发开启"
+IsTriggerEnabled=~触发," 处于开启状态"
+IsTriggerEnabledHint=
+
+TriggerEvaluate="触发条件成立"
+TriggerEvaluate=~触发," 的条件成立"
+TriggerEvaluateHint=
+
+IsTriggerQueuedBJ="触发在队列中"
+IsTriggerQueuedBJ=~触发," 在队列中"
+IsTriggerQueuedBJHint="可使用'触发器 - 添加到队列'和'触发器 - 移出队列'动作来操作触发队列."
+
+IsTriggerQueueEmptyBJ="触发队列为空"
+IsTriggerQueueEmptyBJ="触发队列为空"
+IsTriggerQueueEmptyBJHint="可使用'触发器 - 添加到队列'和'触发器 - 移出队列'动作来操作触发队列."
+
+IsUnit="单位检查"
+IsUnit=~单位," 与 ",~单位,"相同" 
+IsUnitHint="用来判断两个单位是否相等。"
+
+IsUnitDetected="被检测到"
+IsUnitDetected=~单位," 处在 ",~玩家," 的真实视野范围内" 
+IsUnitDetectedHint="用来判断单位在这个玩家反隐形范围内，注：不包含该玩家同盟的反隐范围。"
+
+IsUnitType="单位类别检查"
+IsUnitType=~单位," 是 ",~Type
+IsUnitTypeHint=
+
+IsUnitRace="单位种族检查"
+IsUnitRace=~单位," 是 ",~Race
+IsUnitRaceHint=
+
+IsUnitIdType="单位类别检查(指定单位类型)"
+IsUnitIdType=~单位类型," 是 ",~Type
+IsUnitIdTypeHint=
+
+IsHeroUnitId="单位类型是英雄单位"
+IsHeroUnitId=~UnitType," 是英雄单位"
+
+IsUnitInGroup="在单位组"
+IsUnitInGroup=~单位," 在 ",~单位组," 中"
+IsUnitInGroupHint=
+
+IsUnitInRange="在指定单位范围内 [R]"
+IsUnitInRange=~单位," 在距离 ",~指定单位," ",~范围," 范围内"
+IsUnitInRangeHint=
+
+IsUnitInRangeXY="在指定坐标范围内 [R]"
+IsUnitInRangeXY=~单位," 在距离坐标(",~X,",",~Y,") ",~范围," 范围内"
+IsUnitInRangeXYHint=
+
+IsUnitInRangeLoc="在指定点范围内 [R]"
+IsUnitInRangeLoc=~单位," 在距离 ",~指定点," ",~范围," 范围内"
+IsUnitInRangeLocHint=
+
+RectContainsUnit="在矩形区域内"
+RectContainsUnit=~矩形区域," 内存在 ",~单位
+RectContainsUnitHint=
+
+IsUnitInRegion="在不规则区域内 [R]"
+IsUnitInRegion=~不规则区域," 内存在 ",~单位
+IsUnitInRegionHint=
+
+IsUnitAliveBJ="单位存活"
+IsUnitAliveBJ=~单位," 是存活的"
+IsUnitAliveBJHint="实际上该函数是判断单位血量是否>0."
+
+IsUnitDeadBJ="单位死亡"
+IsUnitDeadBJ=~单位," 处于死亡状态"
+IsUnitDeadBJHint="实际上该函数是判断单位血量是否<=0."
+
+IsUnitPausedBJ="单位暂停"
+IsUnitPausedBJ=~单位," 处于暂停状态"
+IsUnitPausedBJHint=
+
+IsUnitHiddenBJ="单位隐藏"
+IsUnitHiddenBJ=~单位," 处于隐藏状态"
+IsUnitHiddenBJHint="可通过'单位 - 隐藏'动作来析藏单位. 运输机,灵魂之球,祭坛中的单位都被认为是隐藏状态."
+
+IsUnitIllusionBJ="单位是镜像"
+IsUnitIllusionBJ=~单位," 是镜像单位"
+IsUnitIllusionBJHint=
+
+UnitCanSleepPerm="允许控制睡眠状态"
+UnitCanSleepPerm="允许控制 "~单位," 的睡眠状态"
+UnitCanSleepPermHint="即该单位拥有'一直睡眠'技能."
+
+UnitCanSleepBJ="允许夜晚睡眠"
+UnitCanSleepBJ=~单位," 会在夜晚进入睡眠"
+UnitCanSleepBJHint="中立生物才会睡眠."
+
+UnitIsSleepingBJ="正在睡眠"
+UnitIsSleepingBJ=~单位," 正在睡眠"
+UnitIsSleepingBJHint="中立生物才会睡眠. 不包括催眠魔法."
+
+DoesUnitGenerateAlarms="开启警报"
+DoesUnitGenerateAlarms=~单位," 处于开启警报状态"
+DoesUnitGenerateAlarmsHint=
+
+IsUnitLoadedBJ="被装载"
+IsUnitLoadedBJ=~单位," 被装载中"
+IsUnitLoadedBJHint="被飞艇,船等有运输功能的单位装载."
+
+IsUnitInTransportBJ="被指定单位装载"
+IsUnitInTransportBJ=~单位," 被 ",~运输机," 装载中"
+IsUnitInTransportBJHint=
+
+IsUnitSelected="被玩家选择"
+IsUnitSelected=~单位," 被 ",~Player," 选择"
+IsUnitSelectedHint=
+
+IsUnitAlly="是玩家的同盟单位"
+IsUnitAlly=~单位," 是 ",~Player," 的同盟单位"
+IsUnitAllyHint="包括中立状态. 单向判断玩家对单位是否为不侵犯状态."
+
+IsUnitEnemy="是玩家的敌对单位"
+IsUnitEnemy=~单位," 是 ",~Player," 的敌对单位"
+IsUnitEnemyHint="不包括中立状态. 单向判断玩家对单位是否为敌对侵犯."
+
+IsUnitOwnedByPlayer="是玩家的单位"
+IsUnitOwnedByPlayer=~单位," 属于 ",~Player
+IsUnitOwnedByPlayerHint="判断单位是否属于这个玩家。"
+
+IsUnitInForce="是玩家组里玩家的单位"
+IsUnitInForce=~单位," 属于 ",~玩家组," 里的玩家"
+IsUnitInForceHint="判断单位是否属于这个玩家组里的玩家。"
+
+UnitHasBuffBJ="拥有魔法效果"
+UnitHasBuffBJ=~单位," 拥有 ",~魔法效果
+UnitHasBuffBJHint=
+
+IsUnitGroupEmptyBJ="单位组为空"
+IsUnitGroupEmptyBJ=~单位组," 为空"
+IsUnitGroupEmptyBJHint=
+
+IsUnitGroupInRectBJ="单位组中单位在矩形区域内"
+IsUnitGroupInRectBJ=~单位组," 中所有单位在 ",~矩形区域," 内"
+IsUnitGroupInRectBJHint=
+
+IsUnitGroupDeadBJ="单位组中所有单位死亡"
+IsUnitGroupDeadBJ=~单位组," 中所有单位死亡"
+IsUnitGroupDeadBJHint=
+
+IsFogEnabled="战争迷雾开启"
+IsFogEnabled="战争迷雾开启"
+IsFogEnabledHint=
+
+IsFogMaskEnabled="黑色阴影开启"
+IsFogMaskEnabled="黑色阴影开启"
+IsFogMaskEnabledHint=
+
+IsUnitVisible="单位可见"
+IsUnitVisible=~单位," 对 ",~Player," 可见"
+IsUnitVisibleHint=
+
+IsUnitInvisible="单位不可见"
+IsUnitInvisible=~单位," 对 ",~Player," 不可见"
+IsUnitInvisibleHint=
+
+IsUnitFogged="单位在迷雾中"
+IsUnitFogged=~单位," 在 ",~Player," 的迷雾范围内"
+IsUnitFoggedHint="黑色阴影内的单位不被计算在内."
+
+IsUnitMasked="单位在黑色阴影中"
+IsUnitMasked=~单位," 在 ",~Player," 的黑色阴影内"
+IsUnitMaskedHint=
+
+IsLocationVisibleToPlayer="点可见"
+IsLocationVisibleToPlayer=~指定点,"对 ",~Player," 可见"
+IsLocationVisibleToPlayerHint=
+
+IsVisibleToPlayer="坐标可见"
+IsVisibleToPlayer="坐标(",~x,",",~y,") 对 ",~玩家," 可见"
+IsVisibleToPlayerHint="" 
+
+IsLocationFoggedToPlayer="点在迷雾中"
+IsLocationFoggedToPlayer=~指定点," 在 ",~Player," 的迷雾范围内"
+IsLocationFoggedToPlayerHint="黑色阴影内的点不被计算在内."
+
+IsFoggedToPlayer="坐标在迷雾中"
+IsFoggedToPlayer="坐标(",~x,",",~y,") 在 ",~玩家," 的迷雾范围内"
+IsFoggedToPlayerHint="黑色阴影内的坐标不被计算在内。"
+
+IsLocationMaskedToPlayer="点在黑色阴影中"
+IsLocationMaskedToPlayer=~指定点," 在 ",~Player," 的黑色阴影内"
+IsLocationMaskedToPlayerHint=
+
+IsMaskedToPlayer="坐标在黑色阴影中"
+IsMaskedToPlayer="坐标(",~x,",",~y,") 在 ",~玩家," 的黑色阴影内"
+IsMaskedToPlayerHint=""
+
+OperatorDegreeAdd="加 < ﹢ >"
+OperatorDegreeAdd=~角度," + ",~角度
+OperatorDegreeAddHint=
+
+OperatorDegreeSubtract="减 < ﹣ >"
+OperatorDegreeSubtract=~角度," - ",~角度
+OperatorDegreeSubtractHint=
+
+OperatorDegreeMultiply="乘 < × >"
+OperatorDegreeMultiply=~角度," × ",~实数
+OperatorDegreeMultiplyHint=
+
+OperatorDegreeDivide="除 < ÷ >"
+OperatorDegreeDivide=~角度," ÷ ",~实数
+OperatorDegreeDivideHint=
+
+OperatorRadianAdd="加 < ﹢ >"
+OperatorRadianAdd=~弧度," ﹢ ",~弧度
+OperatorRadianAddHint=
+
+OperatorRadianSubtract="减 < ﹣ >"
+OperatorRadianSubtract=~弧度," ﹣ ",~弧度
+OperatorRadianSubtractHint=
+
+OperatorRadianMultiply="乘 < × >"
+OperatorRadianMultiply=~弧度," × ",~实数
+OperatorRadianMultiplyHint=
+
+OperatorRadianDivide="除 < ÷ >"
+OperatorRadianDivide=~弧度," ÷ ",~实数
+OperatorRadianDivideHint=
+
+// returns integer
+OperatorInt="算术运算"
+OperatorInt=~数值," ",~运算符," ",~数值
+OperatorIntHint=
+
+GetForLoopIndexA="循环整数A"
+GetForLoopIndexA="循环整数A"
+GetForLoopIndexAHint=
+
+GetForLoopIndexB="循环整数B"
+GetForLoopIndexB="循环整数B"
+GetForLoopIndexBHint=
+
+StringLength="字符串长度"
+StringLength=~String,的长度
+StringLengthHint=
+
+ ="其它格式整数 [R]"
+ ="其它格式整数: ",~整数
+ Hint="可以在这使用如0x1ab3和'A001'之类的整数形式,或是直接写算术表达式. "
+
+R2I="转换实数为整数"
+R2I="转换 ",~Real," 为整数"
+R2RHint="舍弃小数部分."
+
+S2I="转换字符串为整数"
+S2I="转换 ",~String," 为整数"
+S2IHint=
+      
+StringHash="获取字符串的哈希值"
+StringHash="(",~String,")的哈希值"
+StringHashHint="获取一个对应该字符串的密钥，不同的字符串的密钥基本不可能相同，也很难找到两个不同的字符串他们有着相同的密钥。可以用于制作密码等功能。"
+
+YDWE_PreloadSL_Get="获取存档数据 [YDWE]"
+YDWE_PreloadSL_Get="从",~玩家,"获取 ※",~数据注释,"，","从","当","前","存","档","[",~数据项索引,"]","上","获","取"
+YDWE_PreloadSL_GetHint="从玩家本地存档上获取数据，需要填入正确的数据项索引，标签即该项数据的注释。"
+
+YDWERecordGetI="获取存档数据 [JAPI]"
+YDWERecordGetI="从",~玩家,"的服务器存档中读出〖",~数据名,"〗"
+YDWERecordGetIHint="从玩家服务器存档上获取数据，需要填入正确的数据名。"
+
+YDWEGetLocalVariableInteger="局部变量"
+YDWEGetLocalVariableInteger="local_",~i
+YDWEGetLocalVariableIntegerHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableIntegerArray="局部变量数组"
+YDWEGetLocalVariableIntegerArray="local_",~i,"[",~index,"]" 
+YDWEGetLocalVariableIntegerArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+YDWEGeneralBounsSystemUnitGetBonus="万能属性系统-获取属性<茄子制作>"
+YDWEGeneralBounsSystemUnitGetBonus="获取 ",~单位," 附加 ",~属性 
+YDWEGeneralBounsSystemUnitGetBonusHint=
+
+GetHandleIdBJ="<1.24> 获取对象的h2i值"
+GetHandleIdBJ="转换 ",~Handle," 为整数"
+GetHandleIdBJHint="创建一个对应该handle的临时密钥,可以在哈希表中作为索引号使用.当该handle被彻底销毁时,密钥会被回收."
+
+GetHandleId="<1.24> 获取对象的h2i值 [C]"
+GetHandleId="转换 ",~Handle," 为整数"
+GetHandleIdHint="创建一个对应该handle的临时密钥,可以在哈希表中作为索引号使用.当该handle被彻底销毁时,密钥会被回收."
+
+StringHashBJ="<1.24> 获取字符串的哈希值"
+StringHashBJ="转换 ",~String," 为整数"
+StringHashBJHint="创建一个对应该字符串的永久密钥,可以在哈希表中作为索引号使用"
+
+YDWE_TP_NewTimerPeriodic="新中心计时器-开启新的运行索引<Fetrix_sai制作>"
+YDWE_TP_NewTimerPeriodic="开启中心计时器一个新的运行索引，时间间隔为 ",~时间," 秒，是否循环 ",~真值,"，运行触发器 ",~触发器 
+YDWE_TP_NewTimerPeriodicHint="当中心计时器运行某个触发器时，会生成一个运行索引；本条API会按设置的参数来运行触发器，并返回一个运行索引。"  
+
+YDWE_TP_GetExpiredTimerIndex="新中心计时器-获取当前到期计时器运行索引<Fetrix_sai制作>"
+YDWE_TP_GetExpiredTimerIndex="获取当前到期计时器运行索引"
+YDWE_TP_GetExpiredTimerIndexHint="当中心计时器运行某个触发器时，会生成一个运行索引；可以通过本条API来获取当前到期的计时器运行索引。"  
+
+YDWEGetGameCurrentTime="计时器系统-获取游戏当前时间[YDWE]"
+YDWEGetGameCurrentTime="获取游戏当前时间"
+YDWEGetGameCurrentTimeHint="获得从游戏开始到目前流逝的时间，以秒为单位。" 
+
+YDWETimerSystemGetRunIndex="计时器系统-获取中心计时器当前执行索引[YDWE]"
+YDWETimerSystemGetRunIndex="获取中心计时器当前执行索引"
+YDWETimerSystemGetRunIndexHint="获得中心计时器运行触发器或函数目前为止的执行次数。" 
+
+YDWEGetUnitItemSoftId="物品在物品栏中的位置[YDWE]"
+YDWEGetUnitItemSoftId="获取 ",~单位," 物品栏中 ",~物品," 的位置" 
+YDWEGetUnitItemSoftIdHint="返回物品所在单位物品栏中的位置，为1-6之间的某个值；若单位身上不存在该物品，则返回0。" 
+
+YDWEConverUnitcodeToInt="显示单位类型为整数[YDWE]"
+YDWEConverUnitcodeToInt="显示<",~单位类型,">为整数"
+YDWEConverUnitcodeToIntHint="单位类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。" 
+
+YDWEConverItemcodeToInt="显示物品类型为整数[YDWE]"
+YDWEConverItemcodeToInt="显示<",~物品类型,">为整数"
+YDWEConverItemcodeToIntHint="物品类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。" 
+
+YDWEConverAbilcodeToInt="显示技能类型为整数[YDWE]"
+YDWEConverAbilcodeToInt="显示<",~技能类型,">为整数"
+YDWEConverAbilcodeToIntHint="技能类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。" 
+
+YDWEConverOrdercodeToInt="显示命令ID为整数[YDWE]"
+YDWEConverOrdercodeToInt="显示<",~命令ID,">为整数"
+YDWEConverOrdercodeToIntHint="命令ID本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
+
+YDWEGetIntegerByInteger="获取 整数 (整数路径)[YDWE]"
+YDWEGetIntegerByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取整数"
+YDWEGetIntegerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取整数数据。" 
+
+YDWEGetIntegerByString="获取 整数 (字符串路径)[YDWE]"
+YDWEGetIntegerByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取整数"
+YDWEGetIntegerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取整数数据。" 
+
+YDWEGetUnitGoldCost="获取 黄金消耗 (单位类型)[YDWE]"
+YDWEGetUnitGoldCost="获取 ",~单位," 建造时消耗的黄金" 
+YDWEGetUnitGoldCostHint="本触发只能获取普通单位建造时消耗的黄金，若填入英雄单位，将会获得固定值425" 
+
+YDWEGetUnitWoodCost="获取 木头消耗 (单位类型)[YDWE]"
+YDWEGetUnitWoodCost="获取 ",~单位," 建造时消耗的木头" 
+YDWEGetUnitWoodCostHint="本触发只能获取普通单位建造时消耗的木头，若填入英雄单位，将会获得固定值100" 
+
+YDWEGetUnitBuildTime="获取 建造时间 (单位类型)[YDWE]"
+YDWEGetUnitBuildTime="获取 ",~单位," 建造时需要的时间" 
+YDWEGetUnitBuildTimeHint="本触发只能获取普通单位建造时需要的时间，若填入英雄单位，将会获得固定值55" 
+
+YDWEGetUnitFoodUsed="获取 消耗人口 (单位)[YDWE]"
+YDWEGetUnitFoodUsed="获取 ",~单位," 建造时消耗的人口" 
+YDWEGetUnitFoodUsedHint="本触发只能获取普通单位建造时消耗的人口，若填入英雄单位，将会获得固定值5" 
+
+YDWEGetUnitFoodMade="获取 提供人口 (单位)[YDWE]"
+YDWEGetUnitFoodMade="获取 ",~单位," 建造后提供的人口" 
+YDWEGetUnitFoodMadeHint="本触发只能获取普通单位建造后提供的人口，若填入英雄单位，将会获得固定值0" 
+
+GetElevatorHeight="升降机高度"
+GetElevatorHeight=~升降机," 的高度"
+GetElevatorHeightHint="可以使用'可破坏物 - 设置升降机高度'来设置升降机高度."
+
+GetTerrainCliffLevel="地形悬崖高度(指定坐标) [R]"
+GetTerrainCliffLevel="坐标(",~X,",",~Y,")处的地形悬崖高度"
+GetTerrainCliffLevelHint="悬崖高度:深水区为0, 浅水区为1, 平原为2, 之后每层+1."
+
+GetTerrainCliffLevelBJ="地形悬崖高度(指定点)"
+GetTerrainCliffLevelBJ=~指定点," 处的地形悬崖高度"
+GetTerrainCliffLevelBJHint="悬崖高度:深水区为0, 浅水区为1, 平原为2, 之后每层+1."
+
+GetTerrainVariance="地形样式(指定坐标) [R]"
+GetTerrainVariance="坐标(",~X,",",~Y,")处的地形样式"
+GetTerrainVarianceHint=
+
+GetTerrainVarianceBJ="地形样式(指定点)"
+GetTerrainVarianceBJ=~指定点," 处的地形样式"
+GetTerrainVarianceBJHint=
+
+GetLearnedSkillLevel="学习技能等级"
+GetLearnedSkillLevel="学习技能等级"
+GetLearnedSkillLevelHint="响应'学习技能'单位事件,指代被学习技能的等级. 注意,该值为学习后的等级."
+
+GetPlayers="玩家数量"
+GetPlayers="玩家数量"
+GetPlayersHint="地图编辑器中开启的玩家数量(1-12)."
+
+GetTeams="队伍数量"
+GetTeams="队伍数量"
+GetTeamsHint=
+
+GetAllyColorFilterState="联盟颜色显示设置"
+GetAllyColorFilterState="联盟颜色显示设置"
+GetAllyColorFilterStateHint="0为不开启. 1为小地图显示. 2为小地图和游戏都显示."
+
+GetTournamentFinishNowRule="比赛结束规则"
+GetTournamentFinishNowRule="比赛结束规则"
+GetTournamentFinishNowRuleHint="1表示游戏开始时间已经超过限定时,无法以平局结束. 其他值表示游戏还在初期阶段,此时退出游戏将以平局结束.."
+
+GetTournamentScore="对战比赛得分"
+GetTournamentScore=~Player," 的当前对战比赛得分"
+GetTournamentScoreHint="对战游戏时如果游戏时间过长,系统将以该值来决定胜负."
+
+GetStoredInteger="缓存读取整数 [C]"
+GetStoredInteger="从",~Game Cache,"中读取整数值,类别: ",~Category,",名称: ",~文字
+GetStoredIntegerHint="如果该值不存在则返回0."
+
+GetHeroLevel="英雄等级"
+GetHeroLevel=~英雄," 的英雄等级"
+GetHeroLevelHint=
+
+GetHeroXP="英雄经验值"
+GetHeroXP=~英雄," 的经验值"
+GetHeroXPHint=
+
+GetHeroStr="英雄力量 [R]"
+GetHeroStr=~英雄," 的力量值(",~Include/Exclude," 加成)"
+GetHeroStrHint=
+
+GetHeroAgi="英雄敏捷 [R]"
+GetHeroAgi=~英雄," 的敏捷值(",~Include/Exclude," 加成)"
+GetHeroAgiHint=
+
+GetHeroInt="英雄智力 [R]"
+GetHeroInt=~英雄," 的智力值(",~Include/Exclude," 加成)"
+GetHeroIntHint=
+
+GetHeroStatBJ="英雄属性"
+GetHeroStatBJ=~Attribute," 对 ",~英雄," (",~Include/Exclude," 加成)"
+GetHeroStatBJHint=
+
+GetHeroSkillPoints="未分配技能点数"
+GetHeroSkillPoints=~英雄," 的未分配技能点数"
+GetHeroSkillPointsHint=
+
+GetInventoryIndexOfItemTypeBJ="物品在物品栏的序号 [C]"
+GetInventoryIndexOfItemTypeBJ=~单位," 所持有的 ",~物品类型," 的物品栏序号"
+GetInventoryIndexOfItemTypeBJHint="如果单位没有该类型的物品则返回0"
+
+GetItemLevel="物品等级"
+GetItemLevel=~物品," 的物品等级"
+GetItemLevelHint=
+
+GetItemCharges="使用次数"
+GetItemCharges=~物品," 的使用次数"
+GetItemChargesHint="无限使用物品将返回0."
+
+GetItemUserData="物品自定义值"
+GetItemUserData=~物品," 的自定义值"
+GetItemUserDataHint="可以使用'物品 - 设置自定义值'来设置该值."
+
+LeaderboardGetPlayerIndexBJ="排行榜位置"
+LeaderboardGetPlayerIndexBJ=~Player," 在 ",~Leaderboard," 的排名"
+LeaderboardGetPlayerIndexBJHint=
+
+LeaderboardGetItemCount="行数"
+LeaderboardGetItemCount=~Leaderboard," 的行数"
+LeaderboardGetItemCountHint=
+
+GetRandomInt="随机整数"
+GetRandomInt="随机整数,最小值: ",~Minimum," 最大值: ",~Maximum
+GetRandomIntHint=
+
+IMinBJ="取较小值"
+IMinBJ="取(",~整数1,", ",~整数2,")中较小值"
+IMinBJHint=
+
+IMaxBJ="取较大值"
+IMaxBJ="取(",~整数1,", ",~整数2,")中较大值"
+IMaxBJHint=
+
+IAbsBJ="绝对值"
+IAbsBJ=~整数," 的绝对值"
+IAbsBJHint=
+
+ISignBJ="符号标志"
+ISignBJ=~整数," 的符号标志"
+ISignBJHint="负数为-1. 非负数为1."
+
+ModuloInteger="模"
+ModuloInteger=~被除数," mod ",~除数
+ModuloIntegerHint="取模计算,例: 13 mod 5 = 3."
+
+MultiboardGetRowCount="行数"
+MultiboardGetRowCount=~Multiboard," 的行数"
+MultiboardGetRowCountHint=
+
+MultiboardGetColumnCount="列数"
+MultiboardGetColumnCount=~Multiboard," 的列数"
+MultiboardGetColumnCountHint=
+
+GetResourceAmount="储金量"
+GetResourceAmount=~金矿," 的储金量"
+GetResourceAmountHint="只对金矿有效."
+
+GetPlayerState="玩家属性"
+GetPlayerState=~Player," ",~Property
+GetPlayerStateHint=
+
+GetPlayerTaxRate="玩家税率 [R]"
+GetPlayerTaxRate=~Player," 需要交纳给 ",~Player," 的 ",~Resource," 所得税
+GetPlayerTaxRateHint="所得税取值范围0-100."
+
+GetPlayerTaxRateBJ="玩家税率"
+GetPlayerTaxRateBJ=~Resource," 所得税, ",~Player," 交纳给 ",~Player
+GetPlayerTaxRateBJHint="所得税取值范围0-100."
+
+GetPlayerScore="玩家得分"
+GetPlayerScore=~Player," ",~Score
+GetPlayerScoreHint=
+
+GetConvertedPlayerId="玩家索引"
+GetConvertedPlayerId=~Player," 的玩家索引号"
+GetConvertedPlayerIdHint="玩家索引取值1-16."
+
+GetPlayerId="玩家索引 [R]"
+GetPlayerId=~Player," 的玩家索引号"
+GetPlayerIdHint="玩家索引取值0-15，玩家一的索引号为0"
+
+GetPlayerStructureCount="建筑数量"
+GetPlayerStructureCount=~Player," 拥有的建筑数量(",~Include/Exclude," 未完成的)"
+GetPlayerStructureCountHint=
+
+GetPlayerUnitCount="非建筑单位数量"
+GetPlayerUnitCount=~Player," 拥有的非建筑单位数量(",~Include/Exclude," 未完成的)"
+GetPlayerUnitCountHint=
+
+GetPlayerTechCountSimple="当前科技等级"
+GetPlayerTechCountSimple=~科技," 的当前等级对 ",~Player
+GetPlayerTechCountSimpleHint=
+
+GetPlayerTechMaxAllowedSwap="最大科技等级"
+GetPlayerTechMaxAllowedSwap=~科技," 的最大等级对 ",~Player
+GetPlayerTechMaxAllowedSwapHint=
+
+GetPlayerTeam="玩家队伍"
+GetPlayerTeam=~Player," 所属队伍编号"
+GetPlayerTeamHint=
+
+CountPlayersInForceBJ="玩家组中玩家数量"
+CountPlayersInForceBJ=~玩家组," 中的玩家数量"
+CountPlayersInForceBJHint=
+
+CountUnitsInGroup="单位组中单位数量"
+CountUnitsInGroup=~单位组," 中的单位数量"
+CountUnitsInGroupHint=
+
+CountLivingPlayerUnitsOfTypeId="玩家拥有单位数量"
+CountLivingPlayerUnitsOfTypeId=~单位类型," 的数量对 ",~Player
+CountLivingPlayerUnitsOfTypeIdHint=
+
+GetUnitFoodUsed="单位使用人口数量"
+GetUnitFoodUsed=~单位," 使用的人口数量"
+GetUnitFoodUsedHint=
+
+GetUnitFoodMade="单位提供人口数量"
+GetUnitFoodMade=~单位," 提供的人口数量"
+GetUnitFoodMadeHint=
+
+GetFoodUsed="单位使用人口数量(指定单位类型)"
+GetFoodUsed=~单位类型," 使用的人口数量"
+GetFoodUsedHint=
+
+GetFoodMade="单位提供人口数量(指定单位类型)"
+GetFoodMade=~单位类型," 提供的人口数量"
+GetFoodMadeHint=
+
+GetUnitPointValue="单位附加值"
+GetUnitPointValue=~单位," 的附加值"
+GetUnitPointValueHint="单位附加值不可改变. 可以做一些特殊用途. 比如TD地图中的建筑贩卖价格."
+
+GetUnitPointValueByType="单位附加值(指定单位类型)"
+GetUnitPointValueByType=~单位类型," 的附加值"
+GetUnitPointValueByTypeHint=单位附加值不可改变. 可以做一些特殊用途. 比如TD地图中的建筑贩卖价格.
+
+GetUnitUserData="单位自定义值"
+GetUnitUserData=~单位," 的自定义值"
+GetUnitUserDataHint="可使用'单位 - 设置自定义值'来设置该值."
+
+GetUnitLevel="单位等级"
+GetUnitLevel=~单位," 的等级"
+GetUnitLevelHint="对于英雄则会返回其英雄等级."
+
+GetUnitAbilityLevel="单位技能等级 [R]"
+GetUnitAbilityLevel=~单位," 的 ",~技能," 技能等级"
+GetUnitAbilityLevelHint="如果单位没有该技能,则返回0."
+
+GetUnitAbilityLevelSwapped="单位技能等级"
+GetUnitAbilityLevelSwapped=~技能," 的等级对 ",~单位
+GetUnitAbilityLevelSwappedHint="如果单位没有该技能,则返回0."
+
+UnitInventoryCount="持有物品数量"
+UnitInventoryCount=~单位," 所持有的物品数量"
+UnitInventoryCountHint=
+
+UnitInventorySizeBJ="物品栏格数"
+UnitInventorySizeBJ=~单位," 的物品栏格数"
+UnitInventorySizeBJHint=
+
+UnitCountBuffsEx="拥有Buff数量 [R]"
+UnitCountBuffsEx=~单位," 的附带Buff数量,(",~Include/Exclude," 正面Buff, ",~Include/Exclude," 负面Buff",~Include/Exclude," 魔法Buff, ",~Include/Exclude," 物理Buff",~Include/Exclude," 生命周期, ",~Include/Exclude," 光环效果",~Include/Exclude," 不可驱散Buff)"
+UnitCountBuffsExHint=
+
+UnitCountBuffsExBJ="拥有Buff数量"
+UnitCountBuffsExBJ=~Buff Type," ",~Buff Resist," Buff数量在 ",~单位," 身上(",~Include/Exclude," 生命周期, ",~Include/Exclude," 光环)"
+UnitCountBuffsExBJHint=
+
+GetTriggerEvalCount="触发条件判断次数"
+GetTriggerEvalCount=~Trigger," 的触发条件判断次数"
+GetTriggerEvalCountHint=
+
+GetTriggerExecCount="触发动作运行次数"
+GetTriggerExecCount=~Trigger," 的触发动作运行次数"
+GetTriggerExecCountHint=
+
+QueuedTriggerCountBJ="队列中触发数量"
+QueuedTriggerCountBJ="触发队列中的触发数量"
+QueuedTriggerCountBJHint="可使用'触发器 - 添加到队列'和'触发器 - 移出队列'动作来操作触发队列."
+
+
+// returns real  
+OperatorReal="算术运算"
+OperatorReal=~Value," ",~Operator," ",~Value
+OperatorRealHint=
+
+   ="自定义代码 [C]"
+   ="代码: ",~Jass代码
+   Hint="输入一行Jass代码"                
+
+YDWEGetLocalVariableReal="局部变量"
+YDWEGetLocalVariableReal="local_",~R
+YDWEGetLocalVariableRealHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableRealArray="局部变量数组"
+YDWEGetLocalVariableRealArray="local_",~R,"[",~index,"]" 
+YDWEGetLocalVariableRealArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+YDWEGetRealByInteger="获取 实数 (整数路径)[YDWE]"
+YDWEGetRealByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取实数"
+YDWEGetRealByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取实数数据。" 
+
+YDWEGetRealByString="获取 实数 (字符串路径)[YDWE]"
+YDWEGetRealByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取实数"
+YDWEGetRealByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取实数数据。" 
+
+GetLocationX="点的X轴坐标"
+GetLocationX=~点," 的X轴坐标"
+GetLocationXHint=
+
+GetLocationY="点的Y轴坐标"
+GetLocationY=~点," 的Y轴坐标"
+GetLocationYHint=
+
+GetLocationZ="点的Z轴高度 [R]"
+GetLocationZ=~点," 的Z轴高度"
+GetLocationZHint=
+
+CameraSetupGetField="镜头属性(指定镜头) [R]"
+CameraSetupGetField=~镜头," 的 ",~Camera Field
+CameraSetupGetFieldHint=
+
+CameraSetupGetFieldSwap="镜头属性(指定镜头)"
+CameraSetupGetFieldSwap=~Camera Field," 对 ",~镜头
+CameraSetupGetFieldSwapHint=
+
+GetCameraField="镜头属性(当前镜头)"
+GetCameraField="当前镜头的 ",~Camera Field
+GetCameraFieldHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraTargetPositionX="当前镜头目标X坐标"
+GetCameraTargetPositionX="当前镜头目标X坐标"
+GetCameraTargetPositionXHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraTargetPositionY="当前镜头目标Y坐标"
+GetCameraTargetPositionY="当前镜头目标Y坐标"
+GetCameraTargetPositionYHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraTargetPositionZ="当前镜头目标Z坐标"
+GetCameraTargetPositionZ="当前镜头目标Z坐标"
+GetCameraTargetPositionZHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraEyePositionX="当前镜头源X坐标"
+GetCameraEyePositionX="当前镜头源X坐标"
+GetCameraEyePositionXHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraEyePositionY="当前镜头源Y坐标"
+GetCameraEyePositionY="当前镜头源Y坐标"
+GetCameraEyePositionYHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraEyePositionZ="当前镜头源Z坐标"
+GetCameraEyePositionZ="当前镜头源Z坐标"
+GetCameraEyePositionZHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraBoundMinX="当前可用镜头区域最小X坐标 [R]"
+GetCameraBoundMinX="当前可用镜头区域最小X坐标"
+GetCameraBoundMinXHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraBoundMinY="当前可用镜头区域最小Y坐标 [R]"
+GetCameraBoundMinY="当前可用镜头区域最小Y坐标"
+GetCameraBoundMinYHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraBoundMaxX="当前可用镜头区域最大X坐标 [R]"
+GetCameraBoundMaxX="当前可用镜头区域最大X坐标"
+GetCameraBoundMaxXHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraBoundMaxY="当前可用镜头区域最大Y坐标 [R]"
+GetCameraBoundMaxY="当前可用镜头区域最大Y坐标"
+GetCameraBoundMaxYHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetLastTransmissionDurationBJ="最后发言长度"
+GetLastTransmissionDurationBJ="最后发言长度"
+GetLastTransmissionDurationBJHint="最后一次使用'电影 - 播送单位消息'动作的单位发言时间."
+
+I2R="转换整数为实数"
+I2R="转换 ",~Integer," 为实数"
+I2RHint=
+
+S2R="转换字符串为实数"
+S2R="转换 ",~String," 为实数"
+S2RHint=
+
+Deg2Rad="转换角度为弧度"
+Deg2Rad="转换角度 ",~Degrees," 为弧度"
+Deg2RadHint=
+
+Rad2Deg="转换弧度为角度"
+Rad2Deg="转换弧度 ",~Radians," 为角度"
+Rad2DegHint=
+
+YDWEDeg2R="转换角度为实数"
+YDWEDeg2R="转换角度 ",~Degrees," 为实数"
+YDWEDeg2RHint=
+
+YDWERad2R="转换弧度为实数"
+YDWERad2R="转换弧度 ",~Radians," 为实数"
+YDWERad2RHint=
+
+YDWER2Deg="转换实数为角度"
+YDWER2Deg="转换实数 ",~Real," 为角度"
+YDWER2DegHint=
+
+YDWER2Rad="转换实数为弧度"
+YDWER2Rad="转换实数 ",~Real," 为弧度"
+YDWER2RadHint= 
+
+TimerGetElapsed="逝去时间"
+TimerGetElapsed=~计时器," 的逝去时间"
+TimerGetElapsedHint=
+
+TimerGetRemaining="剩余时间"
+TimerGetRemaining=~计时器," 的剩余时间"
+TimerGetRemainingHint=
+
+TimerGetTimeout="设置时间"
+TimerGetTimeout=~计时器," 设置的时间"
+TimerGetTimeoutHint=
+
+GetDestructableLife="生命值"
+GetDestructableLife=~可破坏物," 的当前生命值"
+GetDestructableLifeHint=
+
+GetDestructableMaxLife="最大生命值"
+GetDestructableMaxLife=~可破坏物," 的最大生命值"
+GetDestructableMaxLifeHint=
+
+GetDestructableOccluderHeight="闭塞高度"
+GetDestructableOccluderHeight=~可破坏物," 的闭塞高度"
+GetDestructableOccluderHeightHint=
+
+GetDestructableX="可破坏物所在X轴坐标 [R]"
+GetDestructableX=~可破坏物," 所在X轴坐标"
+GetDestructableXHint=
+
+GetDestructableY="可破坏物所在Y轴坐标 [R]"
+GetDestructableY=~可破坏物," 所在Y轴坐标"
+GetDestructableYHint
+
+YDWEIsEventPhysicalDamage="是物理伤害 [JAPI]"
+YDWEIsEventPhysicalDamage="单位所受伤害是物理伤害"
+YDWEIsEventPhysicalDamageHint="响应'受到伤害'单位事件,不能用在等待之后"
+
+YDWEIsEventAttackDamage="是攻击伤害 [JAPI]"
+YDWEIsEventAttackDamage="单位所受伤害是攻击伤害"
+YDWEIsEventAttackDamageHint="响应'受到伤害'单位事件,不能用在等待之后"
+
+YDWEIsEventRangedDamage="是远程伤害 [JAPI]"
+YDWEIsEventRangedDamage="单位所受伤害是远程伤害"
+YDWEIsEventRangedDamageHint="响应'受到伤害'单位事件,不能用在等待之后"
+
+YDWEIsEventDamageType="伤害类型 [JAPI]"
+YDWEIsEventDamageType="单位所受伤害的伤害类型是 ",~伤害类型
+YDWEIsEventDamageTypeHint="响应'受到伤害'单位事件,不能用在等待之后"
+
+YDWEIsEventWeaponType="武器类型 [JAPI]"
+YDWEIsEventWeaponType="单位所受伤害的武器类型是 ",~武器类型
+YDWEIsEventWeaponTypeHint="响应'受到伤害'单位事件,不能用在等待之后"
+
+YDWEIsEventAttackType="攻击类型 [JAPI]"
+YDWEIsEventAttackType="单位所受伤害的攻击类型是 ",~攻击类型
+YDWEIsEventAttackTypeHint="响应'受到伤害'单位事件,不能用在等待之后"
+
+GetEventDamage="伤害值"
+GetEventDamage="单位所受伤害"
+GetEventDamageHint="响应'受到伤害'单位事件,指代单位所受伤害."
+
+GetOrderPointX="命令发布点X坐标 [R]"
+GetOrderPointX="命令发布点X坐标"
+GetOrderPointXHint="用坐标代替点可以省去创建、删除点的麻烦."
+
+GetOrderPointY="命令发布点Y坐标 [R]"
+GetOrderPointY="命令发布点Y坐标"
+GetOrderPointYHint="用坐标代替点可以省去创建、删除点的麻烦."
+
+GetSpellTargetX="技能施放点X坐标 [YDWE]"
+GetSpellTargetX="获取技能目标点的X坐标"
+GetSpellTargetXHint="这是1.24的函数，但已加入函数库，在1.20也可以使用。"
+
+GetSpellTargetY="技能施放点Y坐标 [YDWE]"
+GetSpellTargetY="获取技能目标点的Y坐标"
+GetSpellTargetYHint="这是1.24的函数，但已加入函数库，在1.20也可以使用。"   
+
+GetTournamentFinishSoonTimeRemaining="比赛剩余时间"
+GetTournamentFinishSoonTimeRemaining="比赛剩余时间"
+GetTournamentFinishSoonTimeRemainingHint="响应'比赛事件'游戏将要结束. 单位为秒."
+
+GetTimeOfDay="游戏时间"
+GetTimeOfDay="游戏时间"
+GetTimeOfDayHint="游戏中的昼夜时间."
+
+GetTimeOfDayScalePercentBJ="昼夜时间流逝速度"
+GetTimeOfDayScalePercentBJ="昼夜时间流逝速度"
+GetTimeOfDayScalePercentBJHint="百分比数值, 100为默认值."
+
+GetStoredReal="缓存读取实数 [C]"
+GetStoredReal="从 ",~Game Cache," 中读取实数,类别: ",~Category," 名称: ",~文字
+GetStoredRealHint="如果该值不存在则返回0."
+
+GetItemLifeBJ="生命值"
+GetItemLifeBJ=~物品," 的当前生命值"
+GetItemLifeBJHint=
+
+GetItemX="物品的X轴坐标 [R]"
+GetItemX=~物品," 的X轴坐标"
+GetItemXHint=
+
+GetItemY="物品的Y轴坐标 [R]"
+GetItemY=~物品," 的Y轴坐标"
+GetItemYHint=
+
+GetLightningColorRBJ="红颜色值"
+GetLightningColorRBJ=~Lightning," 的红颜色值"
+GetLightningColorRBJHint="取值范围0-1. 可使用'闪电效果 - 改变颜色'动作来改变颜色值."
+
+GetLightningColorGBJ="绿颜色值"
+GetLightningColorGBJ=~Lightning," 的绿颜色值"
+GetLightningColorGBJHint="取值范围0-1. 可使用'闪电效果 - 改变颜色'动作来改变颜色值."
+
+GetLightningColorBBJ="蓝颜色值"
+GetLightningColorBBJ=~Lightning," 的蓝颜色值"
+GetLightningColorBBJHint="取值范围0-1. 可使用'闪电效果 - 改变颜色'动作来改变颜色值."
+
+GetLightningColorABJ="Alpha通道值"
+GetLightningColorABJ=~Lightning," 的Alpha通道值"
+GetLightningColorABJHint="取值范围0-1. Alpha通道值为0是完全透明的. 可使用'闪电效果 - 改变颜色'动作来改变Alpha通道值."
+
+GetRandomReal="随机实数"
+GetRandomReal="随机实数,最小值: ",~Minimum," 最大值: ",~Maximum
+GetRandomRealHint=
+
+GetRandomDirectionDeg="随机角度"
+GetRandomDirectionDeg="随机角度"
+GetRandomDirectionDegHint="0-360的随机实数. 建议直接用随即实数来做."
+
+GetRandomPercentageBJ="随机百分数"
+GetRandomPercentageBJ="随机百分数"
+GetRandomPercentageBJHint="0-100的随机实数. 建议直接用随即实数来做."
+
+DistanceBetweenPoints="两点间距"
+DistanceBetweenPoints=~点," 和 ",~点," 之间的距离"
+DistanceBetweenPointsHint=
+
+AngleBetweenPoints="两点间方向"
+AngleBetweenPoints=~点," 到 ",~点," 的角度"
+AngleBetweenPointsHint="取值-180 - 180."
+
+RMinBJ="取较小值"
+RMinBJ="取(",~实数1,", ",~实数2,")中较小值"
+RMinBJHint=
+
+RMaxBJ="取较大值"
+RMaxBJ="取(",~实数1,", ",~实数2,")中较大值"
+RMaxBJHint=
+
+RAbsBJ="绝对值"
+RAbsBJ=~实数," 的绝对值"
+RAbsBJHint=
+
+RSignBJ="符号标志"
+RSignBJ=~实数," 的符号标志"
+RSignBJHint="负数为-1. 非负数为1."
+
+ModuloReal="模"
+ModuloReal=~被除数," mod ",~除数
+ModuloRealHint="取模计算,例: 9.0 mod 2.5 = 1.5."
+
+Pow="幂运算"
+Pow=~实数," 的 ",~实数," 次幂"
+PowHint=
+
+SquareRoot="平方根"
+SquareRoot=~实数," 的平方根"
+SquareRootHint=
+
+Sin="正弦(弧度) [R]"
+Sin="Sin(",~Angle,")"
+SinHint="采用弧度制计算. native函数,效率高于角度制函数."
+
+SinBJ="正弦(角度)"
+SinBJ="Sin(",~Angle,")"
+SinBJHint="采用角度制计算."
+
+Cos="余弦(弧度) [R]"
+Cos="Cos(",~Angle,")"
+CosHint="采用弧度制计算. native函数,效率高于角度制函数."
+
+CosBJ="余弦(角度)"
+CosBJ="Cos(",~Angle,")"
+CosBJHint="采用角度制计算."
+
+Tan="正切(弧度) [R]"
+Tan="Tan(",~Angle,")"
+TanHint="采用弧度制计算. native函数,效率高于角度制函数."
+
+TanBJ="正切(角度)"
+TanBJ="Tan(",~Angle,")"
+TanBJHint="采用角度制计算."
+
+Asin="反正弦(弧度) [R]"
+Asin="Asin(",~数值,")"
+AsinHint="采用弧度制计算. 返回弧度取值-π/2 — π/2. native函数,效率高于角度制函数."
+
+AsinBJ="反正弦(角度)"
+AsinBJ="Asin(",~数值,")"
+AsinBJHint="采用角度制计算. 返回角度取值-90 — 90."
+
+Acos="反余弦(弧度) [R]"
+Acos="Acos(",~数值,")"
+AcosHint="采用弧度制计算. 返回弧度取值0 — π. native函数,效率高于角度制函数."
+
+AcosBJ="反余弦(角度)"
+AcosBJ="Acos(",~数值,")"
+AcosBJHint="采用角度制计算. 返回角度取值0 — 180."
+
+Atan="反正切(弧度) [R]"
+Atan="Atan(",~数值,")"
+AtanHint="采用弧度制计算. 返回弧度取值-π/2 — π/2. native函数,效率高于角度制函数."
+
+AtanBJ="反正切(角度)"
+AtanBJ="Atan(",~数值,")"
+AtanBJHint="采用角度制计算. 返回角度取值-90 — 90."
+
+Atan2="反正切(Y:X)(弧度) [R]"
+Atan2="Atan(",~Y," : ",~X,")"
+Atan2Hint="采用弧度制计算. 返回弧度取值-π/2 — π/2. native函数,效率高于角度制反余弦函数."
+
+Atan2BJ="反正切(角度)(Y:X)"
+Atan2BJ="Atan(",~Y," : ",~X,")"
+Atan2BJHint="采用角度制计算. 返回角度取值-90 — 90."
+
+YDWELogarithmLg="对数函数(10为底)<c kuhn制作>"
+YDWELogarithmLg="Lg(",~x,")"
+YDWELogarithmLgHint="10^n=x，那么lg(x)=n，如lg(100)=2；鸣谢zyl910"
+
+YDWELogarithmLn="对数函数(e为底)<c kuhn制作>"
+YDWELogarithmLn="Ln(",~x,")"
+YDWELogarithmLnHint="e^n=x，那么ln(x)=n，e即自然对数，约等于2.718281828；鸣谢zyl910"
+
+YDWELogarithmLog="对数函数(任意底)<c kuhn制作>"
+YDWELogarithmLog="Log(",~a,")(",~b,")"
+YDWELogarithmLogHint="a^n=b，那么log(a)(b)=n，如log(2)(4)=2；鸣谢zyl910"
+
+GetPlayerHandicapXPBJ="经验增长率"
+GetPlayerHandicapXPBJ=~Player," 的经验增长率"
+GetPlayerHandicapXPBJHint="百分比数值, 默认值为100."
+
+GetPlayerHandicapBJ="生命障碍"
+GetPlayerHandicapBJ=~Player," 的生命障碍"
+GetPlayerHandicapBJHint="百分比数值, 默认值为100."
+
+GetRectCenterX="中心X坐标"
+GetRectCenterX=~矩形区域," 的中心X坐标"
+GetRectCenterXHint=
+
+GetRectCenterY="中心Y坐标"
+GetRectCenterY=~矩形区域," 的中心Y坐标"
+GetRectCenterYHint=
+
+GetRectMinX="左下角X坐标"
+GetRectMinX=~矩形区域," 的左下角X坐标"
+GetRectMinXHint=
+
+GetRectMinY="左下角Y坐标"
+GetRectMinY=~矩形区域," 的左下角Y坐标"
+GetRectMinYHint=
+
+GetRectMaxX="右上角X坐标"
+GetRectMaxX=~矩形区域," 的右上角X坐标"
+GetRectMaxXHint=
+
+GetRectMaxY="右上角Y坐标"
+GetRectMaxY=~矩形区域," 的右上角Y坐标"
+GetRectMaxYHint=
+
+GetRectWidthBJ="宽度"
+GetRectWidthBJ=~矩形区域," 的宽度"
+GetRectWidthBJHint=
+
+GetRectHeightBJ="高度"
+GetRectHeightBJ=~矩形区域," 的高度"
+GetRectHeightBJHint=
+
+GetSoundDurationBJ="音效长度"
+GetSoundDurationBJ=~音效," 的长度"
+GetSoundDurationBJHint="单位为秒."
+
+GetSoundFileDurationBJ="音乐长度"
+GetSoundFileDurationBJ=~音乐," 的长度"
+GetSoundFileDurationBJHint="单位为秒."
+
+WaygateGetDestinationX="传送门目的地X坐标"
+WaygateGetDestinationX=~传送门," 的目的地X坐标"
+WaygateGetDestinationXHint="" 
+
+WaygateGetDestinationY="传送门目的地Y坐标"
+WaygateGetDestinationY=~传送门," 的目的地Y坐标"
+WaygateGetDestinationYHint="" 
+
+GetUnitState="属性 [R]"
+GetUnitState=~单位," 的 ",~Property
+GetUnitStateHint=
+
+GetUnitStateSwap="属性"
+GetUnitStateSwap=~Property," 对于 ",~单位
+GetUnitStateSwapHint=
+
+GetUnitLifePercent="生命百分比"
+GetUnitLifePercent=~单位," 的生命百分比"
+GetUnitLifePercentHint=
+
+GetUnitManaPercent="魔法百分比"
+GetUnitManaPercent=~单位," 的魔法百分比"
+GetUnitManaPercentHint=
+
+GetUnitX="单位所在X轴坐标 [R]"
+GetUnitX=~单位," 所在X轴坐标"
+GetUnitXHint=
+
+GetUnitY="单位所在Y轴坐标 [R]"
+GetUnitY=~单位," 所在Y轴坐标"
+GetUnitYHint=
+
+GetUnitFacing="面向角度"
+GetUnitFacing=~单位," 的面向角度"
+GetUnitFacingHint="采用角度制. 0度为正东方向, 90度为正北方向."
+
+GetUnitMoveSpeed="当前移动速度"
+GetUnitMoveSpeed=~单位," 的当前移动速度"
+GetUnitMoveSpeedHint=
+
+GetUnitDefaultMoveSpeed="默认移动速度"
+GetUnitDefaultMoveSpeed=~单位," 的默认移动速度"
+GetUnitDefaultMoveSpeedHint=
+
+GetUnitAcquireRange="当前主动攻击范围"
+GetUnitAcquireRange=~单位," 的当前主动攻击范围"
+GetUnitAcquireRangeHint=
+
+GetUnitDefaultAcquireRange="默认主动攻击范围"
+GetUnitDefaultAcquireRange=~单位," 的默认主动攻击范围"
+GetUnitDefaultAcquireRangeHint=
+
+GetUnitTurnSpeed="当前转身速度"
+GetUnitTurnSpeed=~单位," 的当前转身速度"
+GetUnitTurnSpeedHint="转身速度表示单位改变面向方向时的速度. 数值越小表示转身越慢."
+
+GetUnitDefaultTurnSpeed="默认转身速度"
+GetUnitDefaultTurnSpeed=~单位," 的默认转身速度"
+GetUnitDefaultTurnSpeedHint="转身速度表示单位改变面向方向时的速度. 数值越小表示转身越慢."
+
+GetUnitPropWindow="当前转向角度(弧度制) [R]"
+GetUnitPropWindow=~单位," 的当前转向角度(弧度制)"
+GetUnitPropWindowHint="单位转身时的转向角度. 数值越大转向幅度越大. 效率高于角度制函数."
+
+GetUnitPropWindowBJ="当前转向角度(角度制)"
+GetUnitPropWindowBJ=~单位," 的当前转向角度"
+GetUnitPropWindowBJHint="单位转身时的转向角度. 数值越大转向幅度越大."
+
+GetUnitDefaultPropWindowBJ="默认转向角度"
+GetUnitDefaultPropWindowBJ=~单位," 的默认转向角度"
+GetUnitDefaultPropWindowBJHint="单位转身时的转向角度. 数值越大转向幅度越大."
+
+GetUnitFlyHeight="当前飞行高度"
+GetUnitFlyHeight=~单位," 的当前飞行高度"
+GetUnitFlyHeightHint="飞行单位可以直接改变飞行高度. 其他单位通过添加/删除 替换为飞行单位的变身技能(如乌鸦形态)之后,也能改变飞行高度."
+
+GetUnitDefaultFlyHeight="默认飞行高度"
+GetUnitDefaultFlyHeight=~单位," 的默认飞行高度"
+GetUnitDefaultFlyHeightHint="飞行单位可以直接改变飞行高度. 其他单位通过添加/删除 替换为飞行单位的变身技能(如乌鸦形态)之后,也能改变飞行高度."
+
+YDWEGetUnitAbilityState="技能属性 [JAPI]"
+YDWEGetUnitAbilityState=~单位," 的 ",~技能," 的 ",~状态
+YDWEGetUnitAbilityStateHint=""
+
+YDWEGetUnitAbilityDataInteger="技能数据 (整数) [JAPI]"
+YDWEGetUnitAbilityDataInteger=~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据
+YDWEGetUnitAbilityDataIntegerHint=""
+
+YDWEGetUnitAbilityDataReal="技能数据 (实数) [JAPI]"
+YDWEGetUnitAbilityDataReal=~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据
+YDWEGetUnitAbilityDataRealHint="数据A~数据I也就是物体编辑器里按Ctrl+D后看到的DataA~DataI"
+
+YDWEGetUnitAbilityDataString="技能数据 (字符串) [JAPI]"
+YDWEGetUnitAbilityDataString=~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据
+YDWEGetUnitAbilityDataStringHint=""
+
+// returns hashtable
+LoadIntegerBJ="<1.24> 从哈希表提取整数"
+LoadIntegerBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取整数"
+LoadIntegerBJHint="如果不存在则返回0"
+
+LoadInteger="<1.24> 从哈希表提取整数 [C]"
+LoadInteger="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取整数"
+LoadIntegerHint="如果不存在则返回0"
+
+LoadRealBJ="<1.24> 从哈希表提取实数"
+LoadRealBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取实数"
+LoadRealBJHint="如果不存在则返回0.00"
+
+LoadReal="<1.24> 从哈希表提取实数 [C]"
+LoadReal="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取实数"
+LoadRealHint="如果不存在则返回0.00"
+
+LoadStringBJ="<1.24> 从哈希表提取字符串"
+LoadStringBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取字符串"
+LoadStringBJHint="如果不存在则返回空字符串"
+
+LoadStr="<1.24> 从哈希表提取字符串 [C]"
+LoadStr="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取字符串"
+LoadStrHint="如果不存在则返回空"
+
+LoadBooleanBJ="<1.24> 从哈希表提取布尔"
+LoadBooleanBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取布尔"
+LoadBooleanBJHint="如果不存在则返回False"
+
+LoadBoolean="<1.24> 从哈希表提取布尔 [C]"
+LoadBoolean="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取布尔"
+LoadBooleanHint="如果不存在则返回False"
+
+LoadPlayerHandleBJ="<1.24> 从哈希表提取玩家"
+LoadPlayerHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取玩家"
+LoadPlayerHandleBJHint="如果不存在则返回空"
+
+LoadPlayerHandle="<1.24> 从哈希表提取玩家 [C]"
+LoadPlayerHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取玩家"
+LoadPlayerHandleHint="如果不存在则返回空"
+
+LoadWidgetHandleBJ="<1.24> 从哈希表提取物体"
+LoadWidgetHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取物体"
+LoadWidgetHandleBJHint="如果不存在则返回空"
+
+LoadWidgetHandle="<1.24> 从哈希表提取物体 [C]"
+LoadWidgetHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取物体"
+LoadWidgetHandleHint="如果不存在则返回空"
+
+LoadDestructableHandleBJ="<1.24> 从哈希表提取可破坏物"
+LoadDestructableHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取可破坏物"
+LoadDestructableHandleBJHint="如果不存在则返回空"
+
+LoadDestructableHandle="<1.24> 从哈希表提取可破坏物 [C]"
+LoadDestructableHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取可破坏物"
+LoadDestructableHandleHint="如果不存在则返回空"
+
+LoadItemHandleBJ="<1.24> 从哈希表提取物品"
+LoadItemHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取物品"
+LoadItemHandleBJHint="如果不存在则返回空"
+
+LoadItemHandle="<1.24> 从哈希表提取物品 [C]"
+LoadItemHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取物品"
+LoadItemHandleHint="如果不存在则返回空"
+
+LoadUnitHandleBJ="<1.24> 从哈希表提取单位"
+LoadUnitHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取单位"
+LoadUnitHandleBJHint="如果不存在则返回空"
+
+LoadUnitHandle="<1.24> 从哈希表提取单位 [C]"
+LoadUnitHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取单位"
+LoadUnitHandleHint="如果不存在则返回空"
+
+LoadAbilityHandleBJ="<1.24> 从哈希表提取技能"
+LoadAbilityHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取技能"
+LoadAbilityHandleBJHint="如果不存在则返回空" 
+
+LoadAbilityHandle="<1.24> 从哈希表提取技能 [C]"
+LoadAbilityHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取技能"
+LoadAbilityHandleHint="如果不存在则返回空"
+
+YDWELoadAbilityHandleBJ="<1.24> 从哈希表提取技能"
+YDWELoadAbilityHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取技能"
+YDWELoadAbilityHandleBJHint="如果不存在则返回空" 
+
+YDWELoadAbilityHandle="<1.24> 从哈希表提取技能 [C]"
+YDWELoadAbilityHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取技能"
+YDWELoadAbilityHandleHint="如果不存在则返回空"
+
+LoadTimerHandleBJ="<1.24> 从哈希表提取计时器"
+LoadTimerHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取计时器"
+LoadTimerHandleBJHint="如果不存在则返回空"
+
+LoadTimerHandle="<1.24> 从哈希表提取计时器 [C]"
+LoadTimerHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取计时器"
+LoadTimerHandleHint="如果不存在则返回空"
+
+///LoadTriggerRegionHandleBJ="<1.24> 从哈希表提取 Region Handle"
+///LoadTriggerRegionHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取"
+///LoadTriggerRegionHandleBJHint="如果不存在则返回空"
+
+LoadTriggerHandleBJ="<1.24> 从哈希表提取触发器"
+LoadTriggerHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取触发器"
+LoadTriggerHandleBJHint="如果不存在则返回空"
+
+LoadTriggerHandle="<1.24> 从哈希表提取触发器 [C]"
+LoadTriggerHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取触发器"
+LoadTriggerHandleHint="如果不存在则返回空"
+
+LoadTriggerConditionHandleBJ="<1.24> 从哈希表提取触发条件"
+LoadTriggerConditionHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取触发条件"
+LoadTriggerConditionHandleBJHint="如果不存在则返回空"
+
+LoadTriggerConditionHandle="<1.24> 从哈希表提取触发条件 [C]"
+LoadTriggerConditionHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取触发条件"
+LoadTriggerConditionHandleHint="如果不存在则返回空"
+
+LoadTriggerActionHandleBJ="<1.24> 从哈希表提取触发动作"
+LoadTriggerActionHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取触发动作"
+LoadTriggerActionHandleBJHint="如果不存在则返回空"
+
+LoadTriggerActionHandle="<1.24> 从哈希表提取触发动作 [C]"
+LoadTriggerActionHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取触发动作"
+LoadTriggerActionHandleHint="如果不存在则返回空"
+
+LoadTriggerEventHandleBJ="<1.24> 从哈希表提取触发事件"
+LoadTriggerEventHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取触发事件"
+LoadTriggerEventHandleBJHint="如果不存在则返回空"
+
+LoadTriggerEventHandle="<1.24> 从哈希表提取触发事件 [C]"
+LoadTriggerEventHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取触发事件"
+LoadTriggerEventHandleHint="如果不存在则返回空"
+
+LoadForceHandleBJ="<1.24> 从哈希表提取玩家组"
+LoadForceHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取玩家组"
+LoadForceHandleBJHint="如果不存在则返回空"
+
+LoadForceHandle="<1.24> 从哈希表提取玩家组 [C]"
+LoadForceHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取玩家组"
+LoadForceHandleHint="如果不存在则返回空"
+
+LoadGroupHandleBJ="<1.24> 从哈希表提取单位组"
+LoadGroupHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取单位组"
+LoadGroupHandleBJHint="如果不存在则返回空"
+
+LoadGroupHandle="<1.24> 从哈希表提取单位组 [C]"
+LoadGroupHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取单位组"
+LoadGroupHandleHint="如果不存在则返回空"
+
+LoadLocationHandleBJ="<1.24> 从哈希表提取点"
+LoadLocationHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取点"
+LoadLocationHandleBJHint="如果不存在则返回空"
+
+LoadLocationHandle="<1.24> 从哈希表提取点 [C]"
+LoadLocationHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取点"
+LoadLocationHandleHint="如果不存在则返回空"
+
+LoadRegionHandleBJ="<1.24> 从哈希表提取区域(不规则)"
+LoadRegionHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取区域(不规则)"
+LoadRegionHandleBJHint="如果不存在则返回空"
+
+LoadRegionHandle="<1.24> 从哈希表提取区域(不规则) [C]"
+LoadRegionHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取区域(不规则)"
+LoadRegionHandleHint="如果不存在则返回空"
+
+LoadRectHandleBJ="<1.24> 从哈希表提取区域(矩型)"
+LoadRectHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取区域(矩型)"
+LoadRectHandleBJHint="如果不存在则返回空"
+
+LoadRectHandle="<1.24> 从哈希表提取区域(矩型) [C]"
+LoadRectHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取区域(矩型)"
+LoadRectHandleHint="如果不存在则返回空"
+
+LoadBooleanExprHandleBJ="<1.24> 从哈希表提取布尔表达式"
+LoadBooleanExprHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取布尔表达式"
+LoadBooleanExprHandleBJHint="如果不存在则返回空"
+
+LoadBooleanExprHandle="<1.24> 从哈希表提取布尔表达式 [C]"
+LoadBooleanExprHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取布尔表达式"
+LoadBooleanExprHandleHint="如果不存在则返回空"
+
+//LoadConditionFuncHandleBJ="<1.24> 从哈希表提取 Conditionfunc Handle"
+//LoadConditionFuncHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取"
+//LoadConditionFuncHandleBJHint="如果不存在则返回空"
+
+//LoadFilterFuncHandleBJ="<1.24> 从哈希表提取 Filterfunc Handle"
+//LoadFilterFuncHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取"
+//LoadFilterFuncHandleBJHint="如果不存在则返回空"
+
+LoadSoundHandleBJ="<1.24> 从哈希表提取音效"
+LoadSoundHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取音效"
+LoadSoundHandleBJHint="如果不存在则返回空"
+
+LoadSoundHandle="<1.24> 从哈希表提取音效 [C]"
+LoadSoundHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取音效"
+LoadSoundHandleHint="如果不存在则返回空"
+
+//LoadRaceHandleBJ="<1.24> 从哈希表提取 Race Handle"
+//LoadRaceHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取"
+//LoadRaceHandleBJHint="如果不存在则返回空"
+
+LoadEffectHandleBJ="<1.24> 从哈希表提取特效"
+LoadEffectHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取特效"
+LoadEffectHandleBJHint="如果不存在则返回空"
+
+LoadEffectHandle="<1.24> 从哈希表提取特效 [C]"
+LoadEffectHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取特效"
+LoadEffectHandleHint="如果不存在则返回空"
+
+LoadUnitPoolHandleBJ="<1.24> 从哈希表提取单位池"
+LoadUnitPoolHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取单位池"
+LoadUnitPoolHandleBJHint="如果不存在则返回空"
+
+LoadUnitPoolHandle="<1.24> 从哈希表提取单位池 [C]"
+LoadUnitPoolHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取单位池"
+LoadUnitPoolHandleHint="如果不存在则返回空"
+
+LoadItemPoolHandleBJ="<1.24> 从哈希表提取物品池"
+LoadItemPoolHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取物品池"
+LoadItemPoolHandleBJHint="如果不存在则返回空"
+
+LoadItemPoolHandle="<1.24> 从哈希表提取物品池 [C]"
+LoadItemPoolHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取物品池"
+LoadItemPoolHandleHint="如果不存在则返回空"
+
+LoadQuestHandleBJ="<1.24> 从哈希表提取任务"
+LoadQuestHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取任务"
+LoadQuestHandleBJHint="如果不存在则返回空"
+
+LoadQuestHandle="<1.24> 从哈希表提取任务 [C]"
+LoadQuestHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取任务"
+LoadQuestHandleHint="如果不存在则返回空"
+
+LoadQuestItemHandleBJ="<1.24> 从哈希表提取任务要求"
+LoadQuestItemHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取任务要求"
+LoadQuestItemHandleBJHint="如果不存在则返回空"
+
+LoadQuestItemHandle="<1.24> 从哈希表提取任务要求 [C]"
+LoadQuestItemHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取任务要求"
+LoadQuestItemHandleHint="如果不存在则返回空"
+
+LoadDefeatConditionHandleBJ="<1.24> 从哈希表提取失败条件"
+LoadDefeatConditionHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取失败条件"
+LoadDefeatConditionHandleBJHint="如果不存在则返回空"
+
+LoadDefeatConditionHandle="<1.24> 从哈希表提取失败条件 [C]"
+LoadDefeatConditionHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取失败条件"
+LoadDefeatConditionHandleHint="如果不存在则返回空"
+
+LoadTimerDialogHandleBJ="<1.24> 从哈希表提取计时器窗口"
+LoadTimerDialogHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取计时器窗口"
+LoadTimerDialogHandleBJHint="如果不存在则返回空"
+
+LoadTimerDialogHandle="<1.24> 从哈希表提取计时器窗口 [C]"
+LoadTimerDialogHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取计时器窗口"
+LoadTimerDialogHandleHint="如果不存在则返回空"
+
+LoadLeaderboardHandleBJ="<1.24> 从哈希表提取排行榜"
+LoadLeaderboardHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取排行榜"
+LoadLeaderboardHandleBJHint="如果不存在则返回空"
+
+LoadLeaderboardHandle="<1.24> 从哈希表提取排行榜 [C]"
+LoadLeaderboardHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取排行榜"
+LoadLeaderboardHandleHint="如果不存在则返回空"
+
+LoadMultiboardHandleBJ="<1.24> 从哈希表提取多面板"
+LoadMultiboardHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取多面板"
+LoadMultiboardHandleBJHint="如果不存在则返回空"
+
+LoadMultiboardHandle="<1.24> 从哈希表提取多面板 [C]"
+LoadMultiboardHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取多面板"
+LoadMultiboardHandleHint="如果不存在则返回空"
+
+LoadMultiboardItemHandleBJ="<1.24> 从哈希表提取多面板项目"
+LoadMultiboardItemHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取多面板项目"
+LoadMultiboardItemHandleBJHint="如果不存在则返回空"
+
+LoadMultiboardItemHandle="<1.24> 从哈希表提取多面板项目 [C]"
+LoadMultiboardItemHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取多面板项目"
+LoadMultiboardItemHandleHint="如果不存在则返回空"
+
+LoadTrackableHandleBJ="<1.24> 从哈希表提取可追踪物"
+LoadTrackableHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取可追踪物"
+LoadTrackableHandleBJHint="如果不存在则返回空"
+
+LoadTrackableHandle="<1.24> 从哈希表提取可追踪物 [C]"
+LoadTrackableHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取可追踪物"
+LoadTrackableHandleHint="如果不存在则返回空"
+
+LoadDialogHandleBJ="<1.24> 从哈希表提取对话框"
+LoadDialogHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取对话框"
+LoadDialogHandleBJHint="如果不存在则返回空"
+
+LoadDialogHandle="<1.24> 从哈希表提取对话框 [C]"
+LoadDialogHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取对话框"
+LoadDialogHandleHint="如果不存在则返回空"
+
+LoadButtonHandleBJ="<1.24> 从哈希表提取对话框按钮"
+LoadButtonHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取对话框按钮"
+LoadButtonHandleBJHint="如果不存在则返回空"
+
+LoadButtonHandle="<1.24> 从哈希表提取对话框按钮 [C]"
+LoadButtonHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取对话框按钮"
+LoadButtonHandleHint="如果不存在则返回空"
+
+//LoadVersionHandleBJ="<1.24> 从哈希表提取 Version Handle"
+//LoadVersionHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取"
+//LoadVersionHandleBJHint="如果不存在则返回空"
+
+//LoadItemTypeHandleBJ="<1.24> 从哈希表提取 Itemtype Handle"
+//LoadItemTypeHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取"
+//LoadItemTypeHandleBJHint="如果不存在则返回空"
+
+LoadTextTagHandleBJ="<1.24> 从哈希表提取漂浮文字"
+LoadTextTagHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取漂浮文字"
+LoadTextTagHandleBJ="如果不存在则返回空"
+
+LoadTextTagHandle="<1.24> 从哈希表提取漂浮文字 [C]"
+LoadTextTagHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取漂浮文字"
+LoadTextTagHandle="如果不存在则返回空"
+
+LoadLightningHandleBJ="<1.24> 从哈希表提取闪电效果"
+LoadLightningHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取闪电效果"
+LoadLightningHandleBJHint="如果不存在则返回空"
+
+LoadLightningHandle="<1.24> 从哈希表提取闪电效果 [C]"
+LoadLightningHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取闪电效果"
+LoadLightningHandleHint="如果不存在则返回空"
+
+LoadImageHandleBJ="<1.24> 从哈希表提取图象"
+LoadImageHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取图象"
+LoadImageHandleBJHint="如果不存在则返回空"
+
+LoadImageHandle="<1.24> 从哈希表提取图象 [C]"
+LoadImageHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取图象"
+LoadImageHandleHint="如果不存在则返回空"
+
+LoadUbersplatHandleBJ="<1.24> 从哈希表提取地面纹理变化"
+LoadUbersplatHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取地面纹理变化"
+LoadUbersplatHandleBJHint="如果不存在则返回空"
+
+LoadUbersplatHandle="<1.24> 从哈希表提取地面纹理变化 [C]"
+LoadUbersplatHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取地面纹理变化"
+LoadUbersplatHandleHint="如果不存在则返回空"
+
+LoadFogStateHandleBJ="<1.24> 从哈希表提取迷雾状态"
+LoadFogStateHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取迷雾状态"
+LoadFogStateHandleBJHint="如果不存在则返回空"
+
+LoadFogStateHandle="<1.24> 从哈希表提取迷雾状态 [C]"
+LoadFogStateHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取迷雾状态"
+LoadFogStateHandleHint="如果不存在则返回空"
+
+LoadFogModifierHandleBJ="<1.24> 从哈希表提取可见度修正器"
+LoadFogModifierHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取可见度修正器"
+LoadFogModifierHandleBJHint="如果不存在则返回空"
+
+LoadFogModifierHandle="<1.24> 从哈希表提取可见度修正器 [C]"
+LoadFogModifierHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取可见度修正器"
+LoadFogModifierHandleHint="如果不存在则返回空"
+
+LoadHashtableHandle="<1.24> 从哈希表提取哈希表 [C]"
+LoadHashtableHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取哈希表"
+LoadHashtableHandleHint="如果不存在则返回空"
+
+// returns string
+
+OperatorString="连接字符串"
+OperatorString=~字符串1," + ",~字符串2
+OperatorStringHint=    
+
+    ="自定义代码 [C]"
+    ="代码: ",~Jass代码
+    Hint="输入一行Jass代码"
+
+GetObjectName="物体名称 [C]"
+GetObjectName=~物体ID," 的名称"
+GetObjectNameHint="如'A01Z',物体编辑器中物体的名字"                 
+
+SubStringBJ="截取字符串"
+SubStringBJ="截取 ",~字符串," 的 ",~Start," - ",~End," 字节部分"
+SubStringBJHint="例: 截取''Grunts stink''的2 - 4字节部分 = ''run''."
+
+SubString="截取字符串 [R]"
+SubString="截取 ",~字符串," 的 ",~Start," - ",~End," 字节部分(不包括首字节)"
+SubStringHint="例: 截取''Grunts stink''的2 - 4字节部分 = ''un''."
+
+YDWEId2S="转换Id为字符串 [YDWE]"
+YDWEId2S="需要转换的Id为：",~整数
+YDWEId2SHint="将一个单位、物品等目标的Id转换成字符串；如'spsh'转换后为spsh。"     
+
+I2S="转换整数为字符串"
+I2S="转换 ",~Integer," 为字符串"
+I2SHint=
+
+R2S="转换实数为字符串"
+R2S="转换 ",~Real," 为字符串"
+R2SHint=
+
+YDWE_PreloadSL_GetFile="获取存档名(存档名单)[YDWE]"
+YDWE_PreloadSL_GetFile="为",~玩家,"在","『",~目录名,"』","下","，","获","取","索","引","为","[",~整数,"]","的","存","档","名"
+YDWE_PreloadSL_GetFileHint="高级功能，获取指定目录下某个玩家存档文件的名字，填写正确的索引，即可获得对应存档名。"
+
+YDWEGetLocalVariableString="局部变量"
+YDWEGetLocalVariableString="local_",~str
+YDWEGetLocalVariableStringHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableStringArray="局部变量数组"
+YDWEGetLocalVariableStringArray="local_",~str,"[",~index,"]" 
+YDWEGetLocalVariableStringArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+YDWEGetStringByInteger="获取 字符串 (整数路径)[YDWE]"
+YDWEGetStringByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取字符串"
+YDWEGetStringByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取字符串数据。" 
+
+YDWEGetStringByString="获取 字符串 (字符串路径)[YDWE]"
+YDWEGetStringByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取字符串"
+YDWEGetStringByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取字符串数据。" 
+
+R2SW="格式转换实数为字符串"
+R2SW="转换 ",~Real," 为字符串,最小宽度: ",~Width," ,小数位数: ",~Precision
+R2SWHint="如: 转换(1.234, 7, 2)后为''   1.23''. 转换(1.234, 2, 5)后为''1.23400''."
+
+OrderId2StringBJ="转换命令ID为字符串"
+OrderId2StringBJ="转换 ",~Order," 为命令字符串"
+OrderId2StringBJHint="如''harvest'', ''move'', ''smart'', ''attack''都是命令字符串."
+
+UnitId2StringBJ="转换单位类型为字符串"
+UnitId2StringBJ="转换 ",~单位类型," 为字符串"
+UnitId2StringBJHint=
+
+GetLocalizedString="本地字符串 [R]"
+GetLocalizedString="本地字符串: ",~文字
+GetLocalizedStringHint="获取ui\framedef\globalstrings.fdf中定义的字符串."
+
+StringIdentity="本地字符串"
+StringIdentity="本地字符串: ",~文字
+StringIdentityHint="获取ui\framedef\globalstrings.fdf中定义的字符串."
+
+GetLocalizedHotkey="本地热键 "
+GetLocalizedHotkey="本地热键: ",~文字
+GetLocalizedHotkeyHint="获取ui\miscui.txt中定义的热键."
+
+StringCase="大小写转换"
+StringCase="转换 ",~字符串," 为 ",~Lower/Upper Case," 形式"
+StringCaseHint=
+
+GetDestructableName="物件名字"
+GetDestructableName=~物件," 的名字"
+GetDestructableNameHint=
+
+GetEventPlayerChatString="输入的聊天信息"
+GetEventPlayerChatString="输入的聊天信息"
+GetEventPlayerChatStringHint=
+
+GetEventPlayerChatStringMatched="匹配的聊天信息"
+GetEventPlayerChatStringMatched="匹配的聊天信息"
+GetEventPlayerChatStringMatchedHint=
+
+GetSaveBasicFilename="存档文件名"
+GetSaveBasicFilename="存档文件名"
+GetSaveBasicFilenameHint="响应'游戏 - 保存进度'事件."
+
+GetAbilityName="技能名称"
+GetAbilityName=~技能," 的名称"
+GetAbilityNameHint=
+
+GetAbilityEffectBJ="技能效果路径名"
+GetAbilityEffectBJ=~技能," 的 ",~EffectType," 路径名(序号: ",~Index,")"
+GetAbilityEffectBJHint="返回技能效果的模型路径,不管该效果是否存在.实际上就是技能编辑器中按Ctrl+D看到的文本内容. 该效果有多个模型时,序号表示取哪一个模型,如果该序号对应的文本内容不存在则返回上一序号."
+
+GetAbilitySoundBJ="技能音效名"
+GetAbilitySoundBJ=~技能," 的 ",~SoundType," 名字"
+GetAbilitySoundBJHint="同样,实际上就是技能编辑器中按Ctrl+D看到的文本内容."
+
+GetStoredString="读取字符串 [C]"
+GetStoredString="从 ",~Game Cache," 中读取字符串,类别: ",~Category," 名称: ",~文字
+GetStoredStringHint="如果该值不存在,则返回空字符串. 注意,空字符串不等于null"
+
+GetHeroProperName="英雄称谓"
+GetHeroProperName=~Hero," 的称谓"
+GetHeroProperNameHint="如圣骑士会返回'无惧的布赞恩'而不是'圣骑士'."
+
+MultiboardGetTitleText="多面板标题"
+MultiboardGetTitleText=~Multiboard," 的标题"
+MultiboardGetTitleTextHint=
+
+GetPlayerName="玩家名字"
+GetPlayerName=~Player," 的名字"
+GetPlayerNameHint=
+
+GetTriggerName="触发名字"
+GetTriggerName="当前触发的名字"
+GetTriggerNameHint=
+
+GetUnitName="单位名字"
+GetUnitName=~单位," 的名字"
+GetUnitNameHint=
+
+GetItemName="物品名字"
+GetItemName=~物品," 的名字"
+GetItemNameHint=
+
+// returns location
+
+     ="自定义代码 [C]"
+     ="代码: ",~Jass代码
+     Hint="输入一行Jass代码"
+
+GetRectCenter="矩形区域中心"
+GetRectCenter=~矩形区域," 的中心点"
+GetRectCenterHint="会创建点."
+
+GetRandomLocInRect="矩形区域内随机点"
+GetRandomLocInRect=~矩形区域," 内的随机点"
+GetRandomLocInRectHint="会创建点."
+
+YDWEGetLocalVariableLocation="局部变量"
+YDWEGetLocalVariableLocation="local_",~point
+YDWEGetLocalVariableLocationHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableLocationArray="局部变量数组"
+YDWEGetLocalVariableLocationArray="local_",~point,"[",~index,"]" 
+YDWEGetLocalVariableLocationArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocationByInteger="获取 点 (整数路径)[YDWE]"
+YDWEGetLocationByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取点" 
+YDWEGetLocationByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取点数据。" 
+
+YDWEGetLocationByString="获取 点 (字符串路径)[YDWE]"
+YDWEGetLocationByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取点" 
+YDWEGetLocationByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取点数据。" 
+
+OffsetLocation="坐标位移点"
+OffsetLocation=~指定点," 坐标位移 (",~X,", ",~Y,")处"
+OffsetLocationHint="会创建点."
+
+PolarProjectionBJ="极坐标位移点"
+PolarProjectionBJ="从 "~指定点," 开始,距离 ",~Distance," ,方向为 ",~Angle," 度的位移处"
+PolarProjectionBJHint="会创建点."
+
+CameraSetupGetDestPositionLoc="镜头目标点"
+CameraSetupGetDestPositionLoc=~镜头," 的目标点"
+CameraSetupGetDestPositionLocHint="会创建点."
+
+GetCameraTargetPositionLoc="当前镜头目标点"
+GetCameraTargetPositionLoc="当前镜头目标点"
+GetCameraTargetPositionLocHint="会创建点. 注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraEyePositionLoc="当前镜头源位置"
+GetCameraEyePositionLoc="当前镜头源位置"
+GetCameraEyePositionLocHint="会创建点. 注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+Location="坐标点"
+Location="坐标(",~X,", ",~Y,")"
+LocationHint="会创建点."
+
+GetDestructableLoc="可破坏物位置"
+GetDestructableLoc=~可破坏物," 的位置"
+GetDestructableLocHint="会创建点."
+
+GetOrderPointLoc="命令发布点"
+GetOrderPointLoc="命令发布点"
+GetOrderPointLocHint="响应'发布指定点目标命令'单位事件. 会创建点."
+
+GetSpellTargetLoc="技能施放点"
+GetSpellTargetLoc="技能施放点"
+GetSpellTargetLocHint="响应'技能施放'单位事件. 注意技能施放结束将无法捕获该点. 会创建点."
+
+GetItemLoc="物品位置"
+GetItemLoc=~物品," 的位置"
+GetItemLocHint="会创建点."
+
+WaygateGetDestinationLocBJ="传送门目的地"
+WaygateGetDestinationLocBJ=~传送门," 的目的地"
+WaygateGetDestinationLocBJHint="会创建点."
+
+GetPlayerStartLocationLoc="玩家开始位置"
+GetPlayerStartLocationLoc=~Player," 的游戏开始位置"
+GetPlayerStartLocationLocHint="会创建点."
+
+GetUnitLoc="单位位置"
+GetUnitLoc=~单位," 的位置"
+GetUnitLocHint="会创建点."
+
+GetUnitRallyPoint="单位集结点"
+GetUnitRallyPoint=~单位," 的集结点位置"
+GetUnitRallyPointHint="如果单位没有设置集结点,则返回null. 设置自己为集结点可取消集结点设置. 会创建点."
+
+// returns region
+CreateRegion="新建区域 [R]"
+CreateRegion="新建区域"
+CreateRegionHint="会创建一个新的不规则区域,如果不往该区域添加点或地区,则该区域无效果."
+
+GetTriggeringRegion="触发区域 [R]"
+GetTriggeringRegion="触发区域"
+GetTriggeringRegionHint="响应单位进入/离开不规则区域事件."
+
+YDWEGetRegionByInteger="获取 区域 (整数路径)[YDWE]"
+YDWEGetRegionByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取区域" 
+YDWEGetRegionByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取区域数据。" 
+
+YDWEGetRegionByString="获取 区域 (字符串路径)[YDWE]"
+YDWEGetRegionByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取区域" 
+YDWEGetRegionByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取区域数据。" 
+
+// returns rect
+GetCurrentCameraBoundsMapRectBJ="当前可用镜头范围"
+GetCurrentCameraBoundsMapRectBJ="当前可用镜头范围"
+GetCurrentCameraBoundsMapRectBJHint="会创建矩形区域. 注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线."
+
+GetCameraBoundsMapRect="初始可用镜头范围"
+GetCameraBoundsMapRect="初始可用镜头范围"
+GetCameraBoundsMapRectHint="在地图编辑器的地图属性中设置."
+
+GetPlayableMapRect="可用地图区域"
+GetPlayableMapRect="可用地图区域"
+GetPlayableMapRectHint="在地图编辑器的地图属性中设置."
+
+GetEntireMapRect="完整地图区域"
+GetEntireMapRect="完整地图区域"
+GetEntireMapRectHint="在地图编辑器的地图属性中设置. 会创建矩形区域."
+
+OffsetRectBJ="位移创建矩形区域
+OffsetRectBJ="与 ",~矩形区域," 位移 (",~X,", ",~Y,") 坐标之后等价的矩形区域"
+OffsetRectBJHint="会创建矩形区域."
+
+YDWEGetLocalVariableRect="局部变量"
+YDWEGetLocalVariableRect="local_",~rt
+YDWEGetLocalVariableRectpHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableRectArray="局部变量数组"
+YDWEGetLocalVariableRectArray="local_",~rt,"[",~index,"]" 
+YDWEGetLocalVariableRectArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+YDWEGetRectByInteger="获取 地区 (整数路径)[YDWE]"
+YDWEGetRectByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取地区" 
+YDWEGetRectByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取地区数据。" 
+
+YDWEGetRectByString="获取 区域 (字符串路径)[YDWE]"
+YDWEGetRectByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取地区" 
+YDWEGetRectByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取地区数据。" 
+
+YDWEGetRect="新建矩形区域(指定中心坐标)[YDWE]"
+YDWEGetRect="以坐标(",~x,",",~y,")为中心，创建长",~实数,"，宽",~实数,"的矩形区域。"
+YDWEGetRectHint="会创建矩形区域"
+
+RectFromCenterSizeBJ="新建矩形区域(指定中心点)"
+RectFromCenterSizeBJ="以 ",~指定点," 为中心,宽 ",~数值," ,高 ",~数值," 的矩形区域"
+RectFromCenterSizeBJHint="会创建矩形区域."
+
+Rect="新建矩形区域(指定边角坐标)"
+Rect="左下角为(",~X1,", ",~Y1,"),右上角为(",~X2,", ",~Y2,")的矩形区域"
+RectHint="会创建矩形区域."
+
+RectFromLoc="新建矩形区域(指定边角点)"
+RectFromLoc="左下角为 ",~点1," ,右上角为 ",~点2," 的矩形区域"
+RectFromLocHint="会创建矩形区域."
+
+// returns unit
+CreateUnit="新建单位(指定坐标) [R]"
+CreateUnit="新建 ",~玩家," 的 ",~单位," 在(",~X,",",~Y,"),面向角度:",~Face," 度"
+CreateUnitHint="在坐标创建单位，不能被'最后创建的单位'获得。"
+
+CreateUnitAtLoc="新建单位(指定点) [R]"
+CreateUnitAtLoc="新建 ",~玩家," 的 ",~单位," 在 ",~点," 面向角度:",~Face," 度"
+CreateUnitAtLocHint=
+
+CreateCorpse="新建尸体 [R]"
+CreateCorpse="新建 ",~玩家," 的 ",~单位," 的尸体在(",~X,",",~Y,"),面向角度:",~Face," 度"
+CreateCorpseHint=
+
+CreateBlightedGoldmine="新建不死族金矿 [R]"
+CreateBlightedGoldmine="新建 ",~玩家," 的不死族金矿在(",~X,",",~Y,"),面向角度:",~Face," 度"
+CreateBlightedGoldmineHint=
+
+GetLastCreatedUnit="最后创建的单位"
+GetLastCreatedUnit="最后创建的单位"
+GetLastCreatedUnitHint="最后一个使用'单位 - 创建'动作创建的单位."
+
+GetLastRestoredUnitBJ="最后读取的单位"
+GetLastRestoredUnitBJ="最后读取的单位"
+GetLastRestoredUnitBJHint="最后一个使用'游戏缓存 - 读取单位'动作创建的单位."
+
+GetLastReplacedUnitBJ="最后替换的单位"
+GetLastReplacedUnitBJ="最后替换的单位"
+GetLastReplacedUnitBJHint="最后一个使用'单位 - 替换'替换的单位."
+
+GetLastHauntedGoldMine="最后创建的不死族金矿"
+GetLastHauntedGoldMine="最后创建的不死族金矿"
+GetLastHauntedGoldMineHint="最后一个使用'中立建筑 - 创建不死族金矿'创建的不死族金矿."
+
+GetEnumUnit="选取单位"
+GetEnumUnit="选取单位"
+GetEnumUnitHint="使用'选取单位做动作'时, 指代相应的单位."
+
+GetFilterUnit="匹配单位"
+GetFilterUnit="匹配单位"
+GetFilterUnitHint="在'选取单位满足条件'之类功能的条件中,指代被判断单位."
+
+FirstOfGroup="单位组中第一个单位"
+FirstOfGroup=~单位组," 中第一个单位"
+
+      ="自定义代码 [C]"
+      ="代码: ",~Jass代码
+      Hint="输入一行Jass代码"
+      
+YDWEGetLocalVariableUnit="局部变量"
+YDWEGetLocalVariableUnit="local_",~u
+YDWEGetLocalVariableUnitHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableUnitArray="局部变量数组"
+YDWEGetLocalVariableUnitArray="local_",~u,"[",~index,"]" 
+YDWEGetLocalVariableUnitArrayHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+      
+YDWEGetUnitByInteger="获取 单位 (整数路径)[YDWE]"
+YDWEGetUnitByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取单位" 
+YDWEGetUnitByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位数据。" 
+
+YDWEGetUnitByString="获取 单位 (字符串路径)[YDWE]"
+YDWEGetUnitByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取单位" 
+YDWEGetUnitByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位数据。"    
+
+GetLastAbilityCastingUnit="获取最后结束施放特殊技能的单位"
+GetLastAbilityCastingUnit="获取最后结束施放特殊技能的单位" 
+GetLastAbilityCastingUnitHint="响应单位释放特殊技能事件，当技能释放完毕后，可以获取最后施放特殊技能的单位。"
+
+GetLastAbilityTargetUnit="获取最后被特殊技能命中的单位"
+GetLastAbilityTargetUnit="获取最后被特殊技能命中的单位" 
+GetLastAbilityTargetUnitHint="响应单位释放可以命中目标的特殊技能事件，如钩子、月神箭；当技能命中目标后，可以获取最后被特殊技能命中的单位。"     
+
+GroupPickRandomUnit="单位组中随机单位"
+GroupPickRandomUnit=~单位组," 中随机选取的一个单位"
+GroupPickRandomUnitHint=
+
+GetAttackedUnitBJ="被攻击单位"
+GetAttackedUnitBJ="被攻击单位"
+GetAttackedUnitBJHint="响应'被攻击'单位事件."
+
+GetAttacker="攻击单位"
+GetAttacker="攻击单位"
+GetAttackerHint="响应'被攻击'单位事件."
+
+GetBuyingUnit="购买者"
+GetBuyingUnit="购买者"
+GetBuyingUnitHint="响应'出售单位','出售物品'或'抵押物品'单位事件."
+
+GetCancelledStructure="被取消的建筑"
+GetCancelledStructure="被取消的建筑"
+GetCancelledStructureHint="响应'取消建造建筑'单位事件."
+
+GetSpellAbilityUnit="施法单位"
+GetSpellAbilityUnit="施法单位"
+GetSpellAbilityUnitHint="响应'施放技能'单位事件."
+
+GetConstructedStructure="完成的建筑"
+GetConstructedStructure="完成的建筑"
+GetConstructedStructureHint="响应'完成建造建筑'单位事件."
+
+GetConstructingStructure="正在建造的建筑"
+GetConstructingStructure="正在建造的建筑"
+GetConstructingStructureHint="响应'开始建造建筑'单位事件."
+
+GetEventDamageSource="伤害来源"
+GetEventDamageSource="伤害来源"
+GetEventDamageSourceHint="响应'受到伤害'单位事件."
+
+GetDecayingUnit="腐化的单位"
+GetDecayingUnit="腐化的单位"
+GetDecayingUnitHint="响应'开始腐化'单位事件."
+
+GetDyingUnit="死亡单位"
+GetDyingUnit="死亡单位"
+GetDyingUnitHint="响应'死亡'单位事件."
+
+GetEnteringUnit="进入的单位"
+GetEnteringUnit="进入的单位"
+GetEnteringUnitHint="响应'单位进入区域'单位事件."
+
+GetManipulatingUnit="操作物品的单位"
+GetManipulatingUnit="操作物品的单位"
+GetManipulatingUnitHint="响应'使用/获得/丢失物品'单位事件."
+
+GetKillingUnitBJ="凶手单位"
+GetKillingUnitBJ="凶手单位"
+GetKillingUnitBJHint="响应'死亡'单位事件. 如果不是被单位所杀(比如负数邪恶光环)则返回null."
+
+GetLearningUnit="学习技能的英雄"
+GetLearningUnit="学习技能的英雄"
+GetLearningUnitHint="响应'学习技能'单位事件."
+
+GetLeavingUnit="离开的单位"
+GetLeavingUnit="离开的单位"
+GetLeavingUnitHint="响应'单位离开区域'单位事件."
+
+GetLevelingUnit="升级的英雄"
+GetLevelingUnit="升级的英雄"
+GetLevelingUnitHint="响应'提升等级'单位事件."
+
+GetLoadedUnitBJ="被装载单位"
+GetLoadedUnitBJ="被装载单位"
+GetLoadedUnitBJHint="响应'被装载'单位事件."
+
+GetOrderedUnit="发布命令的单位"
+GetOrderedUnit="发布命令的单位"
+GetOrderedUnitHint="响应'发布命令'单位事件."
+
+GetChangingUnit="被改变所有者的单位"
+GetChangingUnit="被改变所有者的单位"
+GetChangingUnitHint="响应'改变所有者'单位事件."
+
+GetResearchingUnit="研究科技的单位"
+GetResearchingUnit="研究科技的单位"
+GetResearchingUnitHint="响应'开始/取消/完成科技研究'单位事件."
+
+GetRevivableUnit="可复活英雄"
+GetRevivableUnit="可复活英雄"
+GetRevivableUnitHint="响应'变为可复活的'单位事件."
+
+GetRevivingUnit="复活英雄"
+GetRevivingUnit="复活英雄"
+GetRevivingUnitHint="响应'开始/取消/完成复活'单位事件."
+
+GetSellingUnit="贩卖者"
+GetSellingUnit="贩卖者"
+GetSellingUnitHint="响应'出售单位','出售物品'或'抵押物品'单位事件."
+
+GetSoldUnit="被贩卖单位"
+GetSoldUnit="被贩卖单位"
+GetSoldUnitHint="响应'出售单位'单位事件."
+
+GetSummonedUnit="召唤单位"
+GetSummonedUnit="召唤单位"
+GetSummonedUnitHint="响应'召唤单位'单位事件,指代被召唤单位."
+
+GetSummoningUnit="召唤者"
+GetSummoningUnit="召唤者"
+GetSummoningUnitHint="响应'召唤单位'单位事件."
+
+GetOrderTargetUnit="命令发布目标"
+GetOrderTargetUnit="命令发布目标"
+GetOrderTargetUnitHint="响应'发布指定物体目标命令'单位事件并以单位为目标时."
+
+GetSpellTargetUnit="技能施放目标"
+GetSpellTargetUnit="技能施放目标"
+GetSpellTargetUnitHint="响应'施放技能'单位事件并以单位为目标时. 注意: 技能施放结束将无法捕获施放目标."
+
+GetEventTargetUnit="事件目标单位"
+GetEventTargetUnit="事件目标单位"
+GetEventTargetUnitHint="响应'注意到/获取攻击目标'单位事件,指代目标单位."
+
+GetTrainedUnit="训练单位"
+GetTrainedUnit="训练单位"
+GetTrainedUnitHint="响应'完成训练单位'单位事件,指代被训练单位."
+
+GetTransportUnitBJ="运输单位"
+GetTransportUnitBJ="运输单位"
+GetTransportUnitBJHint="响应'被装载'单位事件.指代作为载体的单位."
+
+GetTriggerUnit="触发单位"
+GetTriggerUnit="触发单位"
+GetTriggerUnitHint=
+
+YDWECinSActor="演员单位[YDWE]"
+YDWECinSActor="电影系统里编号为(",~整数,")的演员"
+YDWECinSActorHint="获取Script System电影系统中的演员单位。"
+
+YDWEGetLastPoolAbstractedUnit="最后从单位池里取出的单位[YDWE]"
+YDWEGetLastPoolAbstractedUnit="最后从单位池里取出的单位"
+YDWEGetLastPoolAbstractedUnitHint="该单位必须是由YDWE提供的<选择放置单位>动作生成，不然无法获取。"
+
+GetUnitRallyUnit="单位集结点目标"
+GetUnitRallyUnit=~单位," 的集结点目标"
+GetUnitRallyUnitHint="如果指定单位没有设置集结点到单位目标,则返回null."
+
+PlaceRandomUnit="选择放置单位 [R]"
+PlaceRandomUnit="从 ",~单位池," 中为 ",~玩家," 任意选择一个单位并放置到点( ",~X," , ",~Y," )"," 面向 ",~度
+PlaceRandomUnitHint="从单位池中随机选取一个单位类型."
+
+// returns unitpool
+CreateUnitPool="新建单位池 [R]"
+CreateUnitPool="新建的空单位池"
+CreateUnitPoolHint="会创建单位池。" 
+
+YDWEGetLastUnitPool="最后创建的单位池 [YDWE]"
+YDWEGetLastUnitPool="最后创建的单位池"
+YDWEGetLastUnitPoolHint="该单位池必须是由YDWE提供的<创建单位池>动作生成，不然无法获取。" 
+
+// returns unitcode
+
+       ="自定义代码 [C]"
+       ="代码: ",~Jass代码
+       Hint="输入一行Jass代码"
+       
+GetUnitTypeId="指定单位的类型"
+GetUnitTypeId=~单位," 的类型"
+GetUnitTypeIdHint=
+
+YDWEGetLocalVariableUnitID="局部变量"
+YDWEGetLocalVariableUnitID="local_",~uid
+YDWEGetLocalVariableUnitIDHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableUnitIDArray="局部变量数组"
+YDWEGetLocalVariableUnitIDArray="local_",~uid,"[",~index,"]" 
+YDWEGetLocalVariableUnitIDArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+YDWEGetUnitIDByInteger="获取 单位类型 (整数路径)[YDWE]"
+YDWEGetUnitIDByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取单位类型" 
+YDWEGetUnitIDByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位类型数据。" 
+
+YDWEGetUnitIDByString="获取 单位类型 (字符串路径)[YDWE]"
+YDWEGetUnitIDByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取单位类型" 
+YDWEGetUnitIDByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位类型数据。" 
+
+ChooseRandomCreepBJ="随机中立单位类型"
+ChooseRandomCreepBJ="一个等级 ",~Level," 的随机中立单位类型"
+ChooseRandomCreepBJHint="-1代表所有等级."
+
+ChooseRandomNPBuildingBJ="随机中立建筑类型"
+ChooseRandomNPBuildingBJ="随机中立建筑类型"
+ChooseRandomNPBuildingBJHint=
+
+String2UnitIdBJ="转换字符串为单位类型"
+String2UnitIdBJ="转换 ",~字符串," 为单位类型"
+String2UnitIdBJHint=
+
+GetTrainedUnitType="训练单位类型"
+GetTrainedUnitType="训练单位类型"
+GetTrainedUnitTypeHint="响应'开始/取消/完成训练单位'单位事件, 指代所训练的单位类型."
+
+
+// returns ordercode
+String2OrderIdBJ="转换命令字符串为命令ID"
+String2OrderIdBJ="转换 ",~字符串," 为命令ID"
+String2OrderIdBJHint="如''harvest'', ''move'', ''smart'', ''attack''都是命令字符串."
+
+UnitId2OrderIdBJ="转换单位类型为命令ID"
+UnitId2OrderIdBJ="转换 ",~单位类型," 为命令ID"
+UnitId2OrderIdBJHint=
+
+GetIssuedOrderIdBJ="发布的命令ID"
+GetIssuedOrderIdBJ="发布的命令ID"
+GetIssuedOrderIdBJHint="响应'发布命令'单位事件."
+
+GetUnitCurrentOrder="当前命令ID"
+GetUnitCurrentOrder=~单位," 的当前命令ID."
+GetUnitCurrentOrderHint=
+
+
+// returns destructable
+GetLastCreatedDestructable="最后创建的可破坏物"
+GetLastCreatedDestructable="最后创建的可破坏物"
+GetLastCreatedDestructableHint="最后一个使用 '可破坏物 - 创建'动作创建的可破坏物."
+
+
+CreateDestructableZ="新建可破坏物 [R]"
+CreateDestructableZ="新建的 ",~可破坏物类型," 在(",~X,",",~Y,",",~Z,"),面向角度: ",~Direction," 尺寸缩放: ",~Scale," 样式: ",~Variation
+CreateDestructableZHint="坐标为(X,Y,Z)格式. 面向角度采用角度制,0度为正东方向,90度为正北方向."
+
+CreateDeadDestructableZ="新建可破坏物(死亡的) [R]"
+CreateDeadDestructableZ="新建死亡的 ",~可破坏物类型," 在(",~X,",",~Y,",",~Z"),面向角度: ",~Direction," 尺寸缩放: ",~Scale," 样式: ",~Variation
+CreateDeadDestructableZHint="坐标为(X,Y,Z)格式. 面向角度采用角度制,0度为正东方向,90度为正北方向."
+
+RandomDestructableInRectSimpleBJ="矩形区域内的随机可破坏物"
+RandomDestructableInRectSimpleBJ=~矩形区域," 内随机选取一个可破坏物"
+RandomDestructableInRectSimpleBJHint=
+
+RandomDestructableInRectBJ="矩形区域内的随机可破坏物(指定条件)"
+RandomDestructableInRectBJ=~矩形区域," 内满足 ",~条件," 的一个随机可破坏物"
+RandomDestructableInRectBJHint="使用'匹配的可破坏物'来指代条件中用于比较的可破坏物."
+
+GetEnumDestructable="选取的可破坏物"
+GetEnumDestructable="选取的可破坏物"
+GetEnumDestructableHint="使用'选取可破坏物做动作'时, 指代相应的可破坏物."
+
+GetFilterDestructable="匹配的可破坏物"
+GetFilterDestructable="匹配的可破坏物"
+GetFilterDestructableHint="在'选取可破坏物满足条件'之类功能的条件中,指代被判断的可破坏物."
+
+GetDyingDestructable="死亡的可破坏物"
+GetDyingDestructable="死亡的可破坏物"
+GetDyingDestructableHint="响应'可破坏物死亡'事件."
+
+GetOrderTargetDestructable="命令发布目标(可破坏物)"
+GetOrderTargetDestructable="命令发布目标"
+GetOrderTargetDestructableHint="响应'发布指定物体目标命令'单位事件并以可破坏物为目标时."
+
+GetSpellTargetDestructable="技能施放目标(可破坏物)"
+GetSpellTargetDestructable="技能施放目标"
+GetSpellTargetDestructableHint="响应'施放技能'单位事件并以可破坏物为目标时. 注意: 技能施放结束将无法捕获施放目标."
+
+GetUnitRallyDestructable="单位集结点目标"
+GetUnitRallyDestructable=~单位," 的集结点目标"
+GetUnitRallyDestructableHint="如果指定单位没有设置集结点到可破坏物上,则返回null."
+
+YDWEGetDestructableByInteger="获取 可破坏物 (整数路径)[YDWE]"
+YDWEGetDestructableByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取可破坏物" 
+YDWEGetDestructableByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可破坏物数据。" 
+
+YDWEGetDestructableByString="获取 可破坏物 (字符串路径)[YDWE]"
+YDWEGetDestructableByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取可破坏物" 
+YDWEGetDestructableByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可破坏物数据。" 
+
+
+// returns destructablecode
+GetDestructableTypeId="指定可破坏物的类型"
+GetDestructableTypeId=~可破坏物," 的类型"
+GetDestructableTypeIdHint=
+
+
+// returns item
+CreateItem="新建物品 [R]"
+CreateItem="新建 ",~物品," 在(",~X,",",~Y,")"
+CreateItemHint=
+
+GetLastCreatedItem="最后创建的物品"
+GetLastCreatedItem="最后创建的物品"
+GetLastCreatedItemHint="最后一个使用'物品 - 创建'或'英雄 - 创建物品给英雄'动作创建的物品."
+
+GetLastRemovedItem="最后丢弃的物品"
+GetLastRemovedItem="最后丢弃的物品"
+GetLastRemovedItemHint="最后一个使用'英雄 - 丢弃物品'动作丢弃的物品."
+
+GetLastMovedItemInItemSlot="最后在物品栏中移动的物品 [YDWE]"
+GetLastMovedItemInItemSlot="最后在物品栏中移动的物品"
+GetLastMovedItemInItemSlotHint="最后一个单位在物品栏中移动的物品"
+
+GetLastCombinedItem="最后被合成的物品 [YDWE]"
+GetLastCombinedItem="最后被合成的物品"
+GetLastCombinedItemHint="最后由物品合成系统合成的物品"
+
+UnitDropItem="单位掉落的物品"
+UnitDropItem="让 ",~单位," 掉落一件 ",~物品 
+UnitDropItemHint="在单位所在区域(32x32)内的随机点创建一个物品，注意当单位站在不可通行路径旁边时，该物品可能掉落其中而无法拾取。"
+
+YDWEGetLocalVariableItem="局部变量"
+YDWEGetLocalVariableItem="local_",~it
+YDWEGetLocalVariableItemHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableItemArray="局部变量数组"
+YDWEGetLocalVariableItemArray="local_",~it,"[",~index,"]" 
+YDWEGetLocalVariableItemArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+YDWEGetItemByInteger="获取 物品 (整数路径)[YDWE]"
+YDWEGetItemByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取物品" 
+YDWEGetItemByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品数据。" 
+
+YDWEGetItemByString="获取 物品 (字符串路径)[YDWE]"
+YDWEGetItemByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取物品" 
+YDWEGetItemByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品数据。" 
+
+RandomItemInRectSimpleBJ="矩形区域内随机物品"
+RandomItemInRectSimpleBJ=~矩形区域," 内随机选取的一个物品"
+RandomItemInRectSimpleBJHint=
+
+RandomItemInRectBJ="矩形区域内随机物品(指定条件)"
+RandomItemInRectBJ=~矩形区域," 内满足 ",~条件," 的一个随机物品"
+RandomItemInRectBJHint="使用'匹配物品'来指代条件中用于比较的物品."
+
+GetEnumItem="选取物品"
+GetEnumItem="选取物品"
+GetEnumItemHint="使用'选取物品做动作'时, 指代相应的物品."
+
+GetFilterItem="匹配物品"
+GetFilterItem="匹配物品"
+GetFilterItemHint="在'选取物品满足条件'之类功能的条件中,指代被判断单位."
+
+UnitItemInSlot="单位持有物品"
+UnitItemInSlot=~单位," 物品栏第 ",~Index," 格的物品"
+UnitItemInSlotHint="第一个单位格的位置为0."
+
+UnitItemInSlotBJ="单位持有物品"
+UnitItemInSlotBJ=~单位," 物品栏第 ",~Index," 格的物品"
+UnitItemInSlotBJHint="第一个单位格的位置为1."
+
+GetItemOfTypeFromUnitBJ="单位持有物品(指定类型)"
+GetItemOfTypeFromUnitBJ=~单位," 所持有的 ",~物品类型
+GetItemOfTypeFromUnitBJHint="注意：有多个相同物品时，只能获取第一个物品。"
+
+GetManipulatedItem="被操作物品"
+GetManipulatedItem="被操作物品"
+GetManipulatedItemHint="响应'使用/得到/丢弃物品'单位事件."
+
+GetSoldItem="被售出物品"
+GetSoldItem="被售出物品"
+GetSoldItemHint="响应'出售物品'或'抵押物品'单位事件."
+
+GetOrderTargetItem="命令发布目标"
+GetOrderTargetItem="命令发布目标"
+GetOrderTargetItemHint="响应'发布指定物体目标命令'单位事件并以物品为目标时."
+
+GetSpellTargetItem="技能施放目标"
+GetSpellTargetItem="技能施放目标"
+GetSpellTargetItemHint="响应施放技能单位事件并以物品为目标时. 注意: 技能施放结束将无法捕获施放目标."
+
+PlaceRandomItem="选择放置物品 [R]"
+PlaceRandomItem="从 ",~物品池," 中任意选择一个物品并放置到( ",~X," , ",~Y," )点"
+PlaceRandomItemHint=
+
+YDWEGetLastPoolAbstractedItem="最后从物品池里取出的物品[YDWE]"
+YDWEGetLastPoolAbstractedItem="最后从物品池里取出的物品"
+YDWEGetLastPoolAbstractedItemHint="该物品必须是由YDWE提供的<选择放置物品>动作生成，不然无法获取。"
+
+// returns itemtype
+GetItemType="指定物品的分类"
+GetItemType=~物品," 的分类"
+GetItemTypeHint=
+
+
+// returns itemcode
+
+        ="自定义代码 [C]"
+        ="代码: ",~Jass代码
+        Hint="输入一行Jass代码"
+        
+GetItemTypeId="指定物品的类型"
+GetItemTypeId=~物品," 的类型"
+GetItemTypeIdHint=
+
+YDWEGetLocalVariableItemID="局部变量"
+YDWEGetLocalVariableItemID="local_",~itid
+YDWEGetLocalVariableItemIDHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableItemIDArray="局部变量数组"
+YDWEGetLocalVariableItemIDArray="local_",~itid,"[",~index,"]" 
+YDWEGetLocalVariableItemIDArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+YDWEGetItemIDByInteger="获取 物品类型 (整数路径)[YDWE]"
+YDWEGetItemIDByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取物品类型" 
+YDWEGetItemIDByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品类型数据。" 
+
+YDWEGetItemIDByString="获取 物品类型 (字符串路径)[YDWE]"
+YDWEGetItemIDByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取物品类型" 
+YDWEGetItemIDByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品类型数据。" 
+
+ChooseRandomItemExBJ="随机物品类型(指定分类)"
+ChooseRandomItemExBJ="等级 ",~Level," 的随机 ",~Class," 物品类型"
+ChooseRandomItemExBJHint="该功能为新版函数,使用新版等级作为参照对象. -1表示任何等级."
+
+ChooseRandomItemBJ="随机物品类型"
+ChooseRandomItemBJ="等级 ",~Level," 的随机物品类型"
+ChooseRandomItemBJHint="该功能为ROC版函数,使用旧版等级作为参照对象. -1表示任何等级."
+
+// returns itempool
+CreateItemPool="新建物品池 [R]"
+CreateItemPool="新建的空物品池"
+CreateItemPoolHint=会创建物品池.
+
+YDWEGetLastItemPool="最后创建的物品池 [YDWE]"
+YDWEGetLastItemPool="最后创建的物品池"
+YDWEGetLastItemPoolHint="该物品池必须是由YDWE提供的<创建物品池>动作生成，不然无法获取。"
+
+// returns techcode
+GetResearched="被研究科技"
+GetResearched="被研究科技"
+GetResearchedHint="响应'开始/取消/完成科技研究'单位事件."
+
+
+// returns abilcode
+
+         ="自定义代码 [C]"
+         ="代码: ",~Jass代码
+         Hint="输入一行Jass代码"
+         
+GetSpellAbilityId="施放技能"
+GetSpellAbilityId="施放技能"
+GetSpellAbilityIdHint="响应施放技能单位事件, 指代被施放的技能."
+
+GetLearnedSkill="学习技能 [R]"
+GetLearnedSkill="学习技能"
+GetLearnedSkillHint="响应'学习技能'单位事件, 指代被学习的技能."
+
+YDWEGetAbilityIDByInteger="获取 技能 (整数路径)[YDWE]"
+YDWEGetAbilityIDByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取技能" 
+YDWEGetAbilityIDByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取技能数据。" 
+
+YDWEGetAbilityIDByString="获取 技能 (字符串路径)[YDWE]"
+YDWEGetAbilityIDByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取技能" 
+YDWEGetAbilityIDByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取技能数据。"  
+
+YDWEGetLocalVariableAbilityID="局部变量"
+YDWEGetLocalVariableAbilityID="local_",~abid
+YDWEGetLocalVariableAbilityIDHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableAbilityIDArray="局部变量数组"
+YDWEGetLocalVariableAbilityIDArray="local_",~abid,"[",~index,"]" 
+YDWEGetLocalVariableAbilityIDArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+// returns heroskillcode
+GetLearnedSkillBJ="学习技能"
+GetLearnedSkillBJ="学习技能"
+GetLearnedSkillBJHint="响应'学习技能'单位事件, 指代被学习的技能. 新函数在'技能'类别中."
+
+
+// returns player
+GetEnumPlayer="选取玩家"
+GetEnumPlayer="选取玩家"
+GetEnumPlayerHint="使用'选取玩家做动作'时, 指代相应的玩家."
+
+GetFilterPlayer="匹配玩家"
+GetFilterPlayer="匹配玩家"
+GetFilterPlayerHint="在'选取玩家满足条件'之类功能的条件中,指代被判断玩家."
+
+GetOwningPlayer="单位所有者"
+GetOwningPlayer=~单位," 的所有者"
+GetOwningPlayerHint=
+
+YDWEGetPlayerByInteger="获取 玩家 (整数路径)[YDWE]"
+YDWEGetPlayerByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取玩家"
+YDWEGetPlayerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取玩家数据。" 
+
+YDWEGetPlayerByString="获取 玩家 (字符串路径)[YDWE]"
+YDWEGetPlayerByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取玩家"
+YDWEGetPlayerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取玩家数据。" 
+
+GetItemPlayer="物品所属玩家"
+GetItemPlayer=~物品," 的所属玩家"
+GetItemPlayerHint="与持有者无关,默认为中立被动玩家."
+
+ForcePickRandomPlayer="玩家组中随机玩家"
+ForcePickRandomPlayer=~玩家组," 中随机抽取的一名玩家."
+ForcePickRandomPlayerHint=
+
+GetLocalPlayer="本地玩家 [R]"
+GetLocalPlayer="本地玩家"
+GetLocalPlayerHint="指代玩家自己,所以对每个玩家返回值都不一样. 如果不清楚该函数的话千万别用,因为很可能因为不同步而导致掉线."
+
+ConvertedPlayer="转换玩家索引号为玩家"
+ConvertedPlayer="玩家 ",~Player Index
+ConvertedPlayerHint="玩家索引号取值1-16."
+
+GetChangingUnitPrevOwner="原所有者"
+GetChangingUnitPrevOwner="原所有者"
+GetChangingUnitPrevOwnerHint="响应'改变所有者'单位事件,指代单位原来的所有者."
+
+GetTriggerPlayer="触发玩家"
+GetTriggerPlayer="触发玩家"
+GetTriggerPlayerHint=
+
+LeaderboardGetIndexedPlayerBJ="玩家所在排行榜位置"
+LeaderboardGetIndexedPlayerBJ="第 ",~Position," 位玩家在 ",~Leaderboard," 中"
+LeaderboardGetIndexedPlayerBJHint=
+
+          ="自定义代码 [C]"
+          ="代码: ",~Jass代码
+          Hint="输入一行Jass代码"
+
+
+// returns group
+           ="自定义代码 [C]"
+           ="代码: ",~Jass代码
+           Hint="输入一行Jass代码"
+
+ CreateNUnitsAtLoc="创建单位(面向角度) [C]"
+ CreateNUnitsAtLoc="创建 ",~Number," 个 ",~单位," 给 ",~Player," 在 ",~指定点," ,面向角度为 ",~Direction," 度"
+ CreateNUnitsAtLocHint="面向角度采用角度制,0度为正东方向,90度为正北方向. 使用'最后创建的单位组'来获取创建的所有单位. 使用'最后创建的单位'来获取创建的单个单位."
+
+CreateGroup="新建的单位组 [R]"
+CreateGroup="新建的空单位组"
+CreateGroupHint="会创建单位组."
+
+GetLastCreatedGroup="最后创建的单位组"
+GetLastCreatedGroup="最后创建的单位组"
+GetLastCreatedGroupHint="最后一批通过'单位 - 创建'动作创建的单位."
+
+YDWEGetLocalVariableGroup="局部变量"
+YDWEGetLocalVariableGroup="local_",~g
+YDWEGetLocalVariableGroupHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableGroupArray="局部变量数组"
+YDWEGetLocalVariableGroupArray="local_",~g,"[",~index,"]" 
+YDWEGetLocalVariableGroupArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+YDWEGetGroupByInteger="获取 单位组 (整数路径)[YDWE]"
+YDWEGetGroupByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取单位组" 
+YDWEGetGroupByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位组数据。" 
+
+YDWEGetGroupByString="获取 单位组 (字符串路径)[YDWE]"
+YDWEGetGroupByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取单位组" 
+YDWEGetGroupByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位组数据。" 
+
+GetRandomSubGroup="单位组中随机单位"
+GetRandomSubGroup="随机获取 ",~Count," 个单位从 ",~单位组
+GetRandomSubGroupHint="会创建单位组.该函数不能使用设置 bj_wantDestroyGroup=true来清除group,会导致该动作无效."
+
+GetUnitsInRectAll="矩形区域内的单位"
+GetUnitsInRectAll=~矩形区域," 内的所有单位"
+GetUnitsInRectAllHint="会创建单位组."
+
+GetUnitsInRectOfPlayer="矩形区域内的玩家单位"
+GetUnitsInRectOfPlayer=~矩形区域," 内属于 ",~Player," 的所有单位"
+GetUnitsInRectOfPlayerHint="会创建单位组."
+
+GetUnitsInRectMatching="矩形区域内的单位(指定条件)"
+GetUnitsInRectMatching=~矩形区域," 内满足 ",~条件," 的所有单位"
+GetUnitsInRectMatchingHint="使用'匹配单位'指代条件中用于比较的单位. 会创建单位组."
+
+GetUnitsInRangeOfLocAll="圆范围内单位"
+GetUnitsInRangeOfLocAll="半径为 ",~Radius," 圆心为 ",~指定点," 的圆范围内所有单位"
+GetUnitsInRangeOfLocAllHint="会创建单位组."
+
+GetUnitsInRangeOfLocMatching="圆范围内单位(指定条件)"
+GetUnitsInRangeOfLocMatching="半径为 ",~Radius," 圆心为 ",~指定点," 且满足 ",~条件," 的所有单位"
+GetUnitsInRangeOfLocMatchingHint="使用'匹配单位'指代条件中用于比较的单位. 会创建单位组."
+
+GetUnitsOfPlayerAll="玩家单位"
+GetUnitsOfPlayerAll="属于 ",~Player," 的所有单位"
+GetUnitsOfPlayerAllHint="会创建单位组."
+
+GetUnitsOfPlayerAndTypeId="玩家单位(指定单位类型)"
+GetUnitsOfPlayerAndTypeId="属于 ",~Player," 的所有 ",~单位类型
+GetUnitsOfPlayerAndTypeIdHint="会创建单位组."
+
+GetUnitsOfPlayerMatching="玩家单位(指定条件)"
+GetUnitsOfPlayerMatching="属于 ",~Player," 并满足 ",~条件," 的所有单位"
+GetUnitsOfPlayerMatchingHint="使用'匹配单位'指代条件中用于比较的单位. 会创建单位组."
+
+GetUnitsOfTypeIdAll="所有指定类型单位"
+GetUnitsOfTypeIdAll="所有 ",~单位类型
+GetUnitsOfTypeIdAllHint="会创建单位组."
+
+GetUnitsSelectedAll="玩家选择单位"
+GetUnitsSelectedAll=~Player," 选择的所有单位"
+GetUnitsSelectedAllHint="不能用于触发条件. 会创建单位组."
+
+
+// returns force
+CreateForce="新建玩家组 [R]"
+CreateForce="新建空玩家组"
+CreateForceHint="会创建玩家组."
+
+GetPlayersAll="所有玩家"
+GetPlayersAll="所有玩家"
+GetPlayersAllHint="包括未使用玩家和中立玩家."
+
+GetPlayersByMapControl="所有指定控制者的玩家"
+GetPlayersByMapControl="所有 ",~Control Type," 控制的玩家"
+GetPlayersByMapControlHint="会创建玩家组."
+
+GetPlayersMatching="所有符合条件的玩家"
+GetPlayersMatching="所有符合 ",~条件," 的玩家"
+GetPlayersMatchingHint="使用'匹配玩家'指代条件中用于比较的玩家,包括未使用玩家和中立玩家. 会创建玩家组."
+
+GetPlayersAllies="玩家的盟友"
+GetPlayersAllies="所有 ",~Player," 的联盟玩家"
+GetPlayersAlliesHint="需要双方互为联盟状态,包括自己,不包括中立玩家. 会创建玩家组."
+
+GetPlayersEnemies="玩家的敌人"
+GetPlayersEnemies="所有 ",~Player," 的敌对玩家"
+GetPlayersEnemiesHint="对其敌对的所有玩家,不包括中立玩家. 会创建玩家组."
+
+GetForceOfPlayer="转换玩家为玩家组"
+GetForceOfPlayer="转换 ",~Player," 为玩家组"
+GetForceOfPlayerHint="会创建玩家组."
+
+// returns race
+GetPlayerRace="玩家的种族"
+GetPlayerRace=~Player," 的种族"
+GetPlayerRaceHint=
+
+GetUnitRace="单位种族"
+GetUnitRace=~单位," 所属种族"
+GetUnitRaceHint="物体编辑器中设置的单位所属种族."
+
+
+// returns camerasetup
+GetCurrentCameraSetup="玩家当前镜头"
+GetCurrentCameraSetup="玩家当前镜头"
+GetCurrentCameraSetupHint="注意:该函数对各玩家返回值不同,请确定你知道自己在做什么,否则很容易引起掉线. 会创建镜头对象,但每个玩家只会有一个当前镜头."
+
+
+// returns fogmodifier
+ConvertFogModifier="转换整数地址为可见度修正器"
+ConvertFogModifier="转换可见度修正器( ",~整数地址,")"
+ConvertFogModifierHint="用于取得该整数地址所表示的可见度修正器.如果没有可见度修正器,则无效."
+
+CreateFogModifierRect="新建可见度修正器(矩形区域) [R]"
+CreateFogModifierRect="新建的 ",~玩家," 可见度修正器. 可见度: ",~FogStateVisible," 影响区域: ",~矩形区域," (对盟友 ",~共享," 视野, ",~覆盖," 单位视野)"
+CreateFogModifierRectHint="会创建可见度修正器."
+
+CreateFogModifierRadius="新建可见度修正器(圆范围) [R]"
+CreateFogModifierRadius="新建的 ",~玩家," 可见度修正器. 可见度: ",~FogStateVisible," 圆心坐标:(",~X,",",~Y,") 半径: ",~数值," (对盟友 ",~共享," 视野, ",~覆盖," 单位视野)"
+CreateFogModifierRadiusHint="会创建可见度修正器."
+
+GetLastCreatedFogModifier="最后创建的可见度修正器"
+GetLastCreatedFogModifier="最后创建的可见度修正器"
+GetLastCreatedFogModifierHint="最后一个由'可见度 - 创建可见度修正器'动作创建的可见度修正器."
+
+// returns trigger
+CreateTrigger="新建触发 [R]"
+CreateTrigger="新建触发"
+CreateTriggerHint="会创建一个新的触发器,如果对该功能不熟悉请慎用."
+
+GetTriggeringTrigger="当前触发"
+GetTriggeringTrigger="当前触发"
+GetTriggeringTriggerHint="当前所运行的触发器."
+
+YDWEGetTriggerByInteger="获取 触发器 (整数路径)[YDWE]"
+YDWEGetTriggerByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取触发器"
+YDWEGetTriggerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器数据。" 
+
+YDWEGetTriggerByString="获取 触发器 (字符串路径)[YDWE]"
+YDWEGetTriggerByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取触发器"
+YDWEGetTriggerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器数据。" 
+
+// returns triggercondition
+YDWEGetTriggerConditionByInteger="获取 触发器条件 (整数路径)[YDWE]"
+YDWEGetTriggerConditionByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取触发器条件"
+YDWEGetTriggerConditionByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器条件数据。" 
+
+YDWEGetTriggerConditionByString="获取 触发器条件 (字符串路径)[YDWE]"
+YDWEGetTriggerConditionByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取触发器条件"
+YDWEGetTriggerConditionByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器条件数据。" 
+
+// returns triggeraction
+YDWEGetTriggerActionByInteger="获取 触发器动作 (整数路径)[YDWE]"
+YDWEGetTriggerActionByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取触发器动作"
+YDWEGetTriggerActionByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器动作数据。" 
+
+YDWEGetTriggerActionByString="获取 触发器动作 (字符串路径)[YDWE]"
+YDWEGetTriggerActionByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取触发器动作"
+YDWEGetTriggerActionByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器动作数据。" 
+
+// returns event
+YDWEGetTriggerEventByInteger="获取 事件 (整数路径)[YDWE]"
+YDWEGetTriggerEventByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取事件"
+YDWEGetTriggerEventByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取事件数据。" 
+
+YDWEGetTriggerEventByString="获取 事件 (字符串路径)[YDWE]"
+YDWEGetTriggerEventByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取事件"
+YDWEGetTriggerEventByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取事件数据。" 
+
+// returns force
+YDWEGetForceByInteger="获取 势力 (整数路径)[YDWE]"
+YDWEGetForceByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取势力"
+YDWEGetForceByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取势力数据。" 
+
+YDWEGetForceByString="获取 势力 (字符串路径)[YDWE]"
+YDWEGetForceByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取势力"
+YDWEGetForceByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取势力数据。" 
+
+// returns boolexpr
+YDWEGetBoolexprByInteger="获取 布尔表达式 (整数路径)[YDWE]"
+YDWEGetBoolexprByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取布尔表达式"
+YDWEGetBoolexprByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取布尔表达式数据。" 
+
+YDWEGetBoolexprByString="获取 布尔表达式 (字符串路径)[YDWE]"
+YDWEGetBoolexprByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取布尔表达式"
+YDWEGetBoolexprByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取布尔表达式数据。" 
+
+// returns gamedifficulty
+GetGameDifficulty="当前游戏难度"
+GetGameDifficulty="当前游戏难度"
+GetGameDifficultyHint=
+
+
+// returns aidifficulty
+GetAIDifficulty="玩家的AI难度"
+GetAIDifficulty=~Player," 的对战AI难度"
+GetAIDifficultyHint="对非AI玩家返回普通难度."
+
+
+// returns gamespeed
+GetGameSpeed="当前游戏速度"
+GetGameSpeed="当前游戏速度"
+GetGameSpeedHint=
+
+
+// returns mapcontrol
+GetPlayerController="玩家控制者"
+GetPlayerController=~Player," 的控制者"
+GetPlayerControllerHint=
+
+
+// returns playercolor
+GetPlayerColor="玩家颜色"
+GetPlayerColor=~Player," 的颜色"
+GetPlayerColorHint=
+
+
+// returns playerslotstate
+GetPlayerSlotState="玩家游戏状态"
+GetPlayerSlotState=~Player," 的游戏状态"
+GetPlayerSlotStateHint=  
+
+// returns effect
+
+
+AddSpecialEffect="新建特效(创建到坐标) [R]"
+AddSpecialEffect="新建特效 ",~Model File," 在(",~X,",",~Y,")处"
+AddSpecialEffectHint=会创建特效.
+
+AddSpecialEffectLoc="新建特效(创建到点) [R]"
+AddSpecialEffectLoc="新建特效 ",~Model File," 在 ",~指定点," 处"
+AddSpecialEffectLocHint=会创建特效.
+
+AddSpecialEffectTarget="新建特效(创建到单位) [R]"
+AddSpecialEffectTarget="新建特效 ",~Model File," 并绑定到 ",~单位," 的 ",~Attachment Point," 附加点上"
+AddSpecialEffectTargetHint=会创建特效.
+
+//AddSpellEffect
+//AddSpellEffectLoc
+//AddSpellEffectTarget
+
+AddSpellEffectById="新建特效(指定技能，创建到坐标) [R]"
+AddSpellEffectById=~技能," 的 ",~EffectType," , 创建到坐标(",~X,",",~Y,")"
+AddSpellEffectByIdHint=会创建特效.
+
+AddSpellEffectByIdLoc="新建特效(指定技能，创建到点) [R]"
+AddSpellEffectByIdLoc=~技能," 的 ",~EffectType," , 创建到 ",~指定点
+AddSpellEffectByIdLocHint=会创建特效.
+
+AddSpellEffectTargetById="新建特效(指定技能，创建到单位) [R]"
+AddSpellEffectTargetById=~技能," 的 ",~EffectType," , 绑定到 ",~单位," 的 ",~String," 附加点"
+AddSpellEffectTargetByIdHint=会创建特效.
+
+GetLastCreatedEffectBJ="最后创建的特效"
+GetLastCreatedEffectBJ="最后创建的特效"
+GetLastCreatedEffectBJHint="最后一个使用'特殊效果 - 创建特效'动作创建的效果."
+
+YDWEGetLocalVariableEffect="局部变量"
+YDWEGetLocalVariableEffect="local_",~e
+YDWEGetLocalVariableEffectpHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
+
+YDWEGetLocalVariableEffectArray="局部变量数组"
+YDWEGetLocalVariableEffectArray="local_",~e,"[",~index,"]" 
+YDWEGetLocalVariableEffectArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
+
+YDWEGetEffectByInteger="获取 特效 (整数路径)[YDWE]"
+YDWEGetEffectByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取特效" 
+YDWEGetEffectByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取特效数据。" 
+
+YDWEGetEffectByString="获取 特效 (字符串路径)[YDWE]"
+YDWEGetEffectByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取特效" 
+YDWEGetEffectByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取特效数据。" 
+
+// returns lightning
+//AddLightning
+
+AddLightning="新建闪电效果 [R]"
+AddLightning="新建闪电效果: ",~闪电效果," (",~Boolean,"检查可见性) 起始点:("~X,",",~Y,") 终结点:(",~X,",",~Y,")"
+AddLightningHint="会创建闪电效果. 允许检查可见性则在起始点和终结点都不可见时将不创建闪电效果."
+
+AddLightningEx="新建闪电效果(指定Z轴) [R]"
+AddLightningEx="新建闪电效果: ",~闪电效果," (",~Boolean,"检查可见性) 起始点:("~X,",",~Y,",",~Z,") 终结点:(",~X,",",~Y,",",~Z,")"
+AddLightningExHint="会创建闪电效果. 允许检查可见性则在起始点和终结点都不可见时将不创建闪电效果."
+
+GetLastCreatedLightningBJ="最后创建的闪电效果"
+GetLastCreatedLightningBJ="最后创建的闪电效果"
+GetLastCreatedLightningBJHint="最后一个使用'闪电效果 - 创建'动作创建的闪电效果."
+
+YDWEGetLightningByInteger="获取 闪电 (整数路径)[YDWE]"
+YDWEGetLightningByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取闪电" 
+YDWEGetLightningByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取闪电数据。" 
+
+YDWEGetLightningByString="获取 闪电 (字符串路径)[YDWE]"
+YDWEGetLightningByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取闪电" 
+YDWEGetLightningByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取闪电数据。" 
+
+// returns image
+GetLastCreatedImage="最后创建的图像"
+GetLastCreatedImage="最后创建的图像"
+GetLastCreatedImageHint="最后一个使用'图像 - 创建'动作创建的图像."
+
+CreateImage="新建图像 [R]"
+CreateImage="新建图像: ",~Image," 大小:(",~X,",",~Y,",",~Z,") 创建点:(",~X,",",~Y,",",~Z,") 原点坐标:(",~X,",",~Y,",",~Z,") 图像类型: ",~Type
+CreateImageHint="使用'图像 - 设置永久渲染状态'动作才能显示图像. 大小、创建点和原点格式为(X,Y,Z). 创建点作为图像的左下角位置. 会创建图像."
+
+// returns ubersplat
+CreateUbersplat="新建地面纹理变化 [R]"
+CreateUbersplat="新建的地面纹理变化在点(",~X,",",~Y,"),使用图像: ",~Type," 颜色值为(",~Red,",",~Green,",",~Blue,") Alpha值为",~Transparency," (",~Enable/Disable," 暂停状态, ",~Enble/Disable," 跳过出生动画)"
+CreateUbersplatHint="颜色值和Alpha值取值范围0-255. 使用'地面纹理变化 - 设置永久渲染状态' 来显示创建的纹理变化. 暂停状态表示动画播放完毕后是否继续保留该纹理变化. 会创建纹理变化."
+
+GetLastCreatedUbersplat="最后创建的地面纹理变化"
+GetLastCreatedUbersplat="最后创建的地面纹理变化"
+GetLastCreatedUbersplatHint="最后一个使用'地面纹理 - 创建'动作创建的纹理变化."
+
+// returns weathereffect
+AddWeatherEffect="新建天气效果 [R]"
+AddWeatherEffect="新建的在 ",~矩形区域," 的天气效果: ",~WeatherId
+AddWeatherEffectHint="会创建天气效果."
+
+GetLastCreatedWeatherEffect="最后创建的天气效果"
+GetLastCreatedWeatherEffect="最后创建的天气效果"
+GetLastCreatedWeatherEffectHint="最后一个使用'环境 - 创建天气效果'动作创建的天气效果."
+
+// returns terraindeformation
+ConvertTerrainde="转换整数地址为地形变化"
+ConvertTerrainde="转换地形变化( ",~整数地址,")"
+ConvertTerraindeHint="用于取得该整数地址所表示的天气效果.如果没有地形变化,则无效."
+
+TerrainDeformCrater="新建地形变化:弹坑 [R]"
+TerrainDeformCrater="新建的弹坑变形. 中心坐标:(",~X,",",~Y,") 半径: ",~Radius," 深度: ",~Depth," 持续时间: ",~Duration," 毫秒, 变化类型: ",~Type
+TerrainDeformCraterHint="深度可取负数. 永久地形变化在保存游戏时不会被记录.
+
+TerrainDeformRipple="新建地形变化:波纹 [R]"
+TerrainDeformRipple="新建的波纹变形. 中心坐标:(",~X,",",~Y,") 最终半径: ",~Radius," 深度: ",~Depth," 持续时间: ",~Duration," 毫秒, 变化次数: ",~Count," 面波数: ",~SpaceWave," 总波数: ",~TimeWave," 初始半径率: ",~数值," 变化类型: ",~Type
+TerrainDeformRipple="初始半径率=初始半径/最终半径."
+
+TerrainDeformWave="新建地形变化:冲击波 [R]"
+TerrainDeformWave="新建的冲击波变形. 起始坐标:(",~X,",",~Y,") 波方向:(",~X,",",~Y,") 波距离: ",~distance," 波速度: ",~speed," 波半径: ",~radius," 深度: ",~Depth," 变形效果持续时间: ",~Delay," 毫秒, 变化次数: ",~Count
+TerrainDeformWaveHint="深度可取负数. 方向以(X,Y)坐标形式表示,如(1,1)表示45度."
+
+TerrainDeformRandom="新建地形变化:随机 [R]"
+TerrainDeformRandom="新建的随机变形. 中心坐标:(",~X,",",~Y,") 半径: ",~Radius," 最小高度变化: ",~Depth," 最大高度变化: ",~Depth," 持续时间: ",~Duration," 毫秒, 变化周期: ",~Duration," 毫秒"
+TerrainDeformRandomHint=
+
+GetLastCreatedTerrainDeformation="最后创建的地形变化"
+GetLastCreatedTerrainDeformation="最后创建的地形变化"
+GetLastCreatedTerrainDeformationHint="最后一个由'环境 - 创建地形变化'动作创建的地形变化."
+
+// returns terraintype
+GetTerrainType="指定坐标地形 [R]"
+GetTerrainType="坐标(",~X,",",~Y,")处的地形"
+GetTerrainTypeHint=
+
+GetTerrainTypeBJ="指定点地形"
+GetTerrainTypeBJ=~指定点," 处的地形"
+GetTerrainTypeBJHint=
+
+
+// returns sound
+GetLastPlayedSound="最后播放的音效"
+GetLastPlayedSound="最后播放的音效"
+GetLastPlayedSoundHint="最后一个由'声音 - 播放音效'或'电影 - 播放单位消息'动作播放的音效."
+
+YDWEGetSoundByInteger="获取 音效 (整数路径)[YDWE]"
+YDWEGetSoundByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取音效"
+YDWEGetSoundByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取音效数据。" 
+
+YDWEGetSoundByString="获取 音效 (字符串路径)[YDWE]"
+YDWEGetSoundByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取音效"
+YDWEGetSoundByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取音效数据。"    
+
+// returns music
+GetLastPlayedMusic="最后播放的音乐"
+GetLastPlayedMusic="最后播放的音乐"
+GetLastPlayedMusicHint="最后一个由'声音 - 播放音乐'动作播放的音乐."
+
+// returns quest
+CreateQuest="新建任务 [R]"
+CreateQuest="新建任务 "
+CreateQuestHint="新建一个任务.注：这条毫无用处，别用——everguo"
+
+YDWECreateQuest="新建任务[YDWE]"
+YDWECreateQuest="新建一个 ",~Quest Type," 任务,标题: ",~文字," 任务说明: ",~文字," 任务图标: ",~Icon Path
+YDWECreateQuestHint="新建一个任务；YDWE新增。" 
+
+GetLastCreatedQuestBJ="最后创建的任务"
+GetLastCreatedQuestBJ="最后创建的任务"
+GetLastCreatedQuestBJHint="最后一个由'任务 - 创建任务'动作创建的任务."
+
+YDWEGetQuestByInteger="获取 任务 (整数路径)[YDWE]"
+YDWEGetQuestByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取任务" 
+YDWEGetQuestByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务数据。" 
+
+YDWEGetQuestByString="获取 任务 (字符串路径)[YDWE]"
+YDWEGetQuestByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取任务" 
+YDWEGetQuestByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务数据。" 
+
+// returns questitem
+
+YDWECreateQuestItem="创建任务目标项[YDWE]"
+YDWECreateQuestItem="为 ",~Quest," 创建一个任务目标项: ",~文字
+YDWECreateQuestItemHint="新建一个任务目标项；YDWE新增功能。"
+
+GetLastCreatedQuestItemBJ="最后创建的任务项目"
+GetLastCreatedQuestItemBJ="最后创建的任务项目"
+GetLastCreatedQuestItemBJHint="最后一个由'任务 - 创建任务项目'动作创建的任务项目."
+
+YDWEGetQuestItemByInteger="获取 任务目标项 (整数路径)[YDWE]"
+YDWEGetQuestItemByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取任务目标项" 
+YDWEGetQuestItemByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务目标项数据。" 
+
+YDWEGetQuestItemByString="获取 任务目标项 (字符串路径)[YDWE]"
+YDWEGetQuestItemByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取任务目标项" 
+YDWEGetQuestItemByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务目标项数据。" 
+
+// returns defeatcondition
+
+GetLastCreatedDefeatConditionBJ="最后创建的失败条件"
+GetLastCreatedDefeatConditionBJ="最后创建的失败条件"
+GetLastCreatedDefeatConditionBJHint="最后一个由'任务 - 创建失败条件'动作创建的失败条件."
+
+
+// returns dialog
+
+GetClickedDialogBJ="点击的对话框"
+GetClickedDialogBJ="点击的对话框"
+GetClickedDialogBJHint="响应'对话框 - 点击对话框/按钮'事件."
+
+DialogCreate="新建对话框 [R]"
+DialogCreate="新建对话框"
+DialogCreateHint="创建新的对话框."
+
+YDWEGetDialogByInteger="获取 对话框 (整数路径)[YDWE]"
+YDWEGetDialogByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取对话框"
+YDWEGetDialogByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框数据。" 
+
+YDWEGetDialogByString="获取 对话框 (字符串路径)[YDWE]"
+YDWEGetDialogByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取对话框"
+YDWEGetDialogByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框数据。" 
+
+// returns button
+DialogAddButton="添加对话框按钮 [R]"
+DialogAddButton="给 ",~对话框," 添加按钮, 使用标题: ",~文字," 快捷键: ",~HotKey
+DialogAddButtonHint="会创建对话框按钮."
+
+YDWEGetButtonByInteger="获取 对话框按钮 (整数路径)[YDWE]"
+YDWEGetButtonByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取对话框按钮"
+YDWEGetButtonByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框按钮数据。" 
+
+YDWEGetButtonByString="获取 对话框按钮 (字符串路径)[YDWE]"
+YDWEGetButtonByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取对话框按钮"
+YDWEGetButtonByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框按钮数据。" 
+
+GetLastCreatedButtonBJ="最后创建的对话框按钮"
+GetLastCreatedButtonBJ="最后创建的对话框按钮"
+GetLastCreatedButtonBJHint="最后一个由'对话框 - 创建对话框按钮'动作创建的对话框按钮."
+
+GetClickedButtonBJ="点击的对话框按钮"
+GetClickedButtonBJ="点击的对话框按钮"
+GetClickedButtonBJHint="响应'对话框 - 点击对话框/按钮'事件."
+
+
+// returns leaderboard
+CreateLeaderboard="新建排行榜 [R]"
+CreateLeaderboard="新建的空排行榜"
+CreateLeaderboardHint="会创建排行榜."
+
+GetLastCreatedLeaderboard="最后创建的排行榜"
+GetLastCreatedLeaderboard="最后创建的排行榜"
+GetLastCreatedLeaderboardHint="最后一个由'排行榜 - 创建排行榜'动作创建的排行榜."
+
+PlayerGetLeaderboardBJ="玩家使用的排行榜"
+PlayerGetLeaderboardBJ=~Player," 使用的排行榜"
+PlayerGetLeaderboardBJHint="每个玩家只能使用1个排行榜."
+
+YDWEGetLeaderboardByInteger="获取 排行榜 (整数路径)[YDWE]"
+YDWEGetLeaderboardByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取排行榜" 
+YDWEGetLeaderboardByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取排行榜数据。" 
+
+YDWEGetLeaderboardByString="获取 排行榜 (字符串路径)[YDWE]"
+YDWEGetLeaderboardByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取排行榜" 
+YDWEGetLeaderboardByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取排行榜数据。" 
+
+// returns multiboard
+CreateMultiboard="新建多面板 [R]"
+CreateMultiboard="新建的空多面板"
+CreateMultiboardHint="会创建多面板."
+
+GetLastCreatedMultiboard="最后创建的多面板"
+GetLastCreatedMultiboard="最后创建的多面板"
+GetLastCreatedMultiboardHint="最后一个由'多面板 - 创建多面板'动作创建的多面板."
+
+YDWEGetMultiBoardByInteger="获取 多面板 (整数路径)[YDWE]"
+YDWEGetMultiBoardByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取多面板" 
+YDWEGetMultiBoardByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板数据。" 
+
+YDWEGetMultiBoardByString="获取 多面板 (字符串路径)[YDWE]"
+YDWEGetMultiBoardByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取多面板" 
+YDWEGetMultiBoardByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板数据。" 
+
+// returns multiboarditem
+
+MultiboardGetItem="多面板项目 [R]"
+MultiboardGetItem=~多面板," 的第 ",~X," 行,第 ",~Y," 列项"
+MultiboardGetItemHint="(0,0)作为多面板首项,会创建多面板项目."
+
+YDWEGetMultiBoardItemByInteger="获取 多面板项目 (整数路径)[YDWE]"
+YDWEGetMultiBoardItemByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取多面板项目" 
+YDWEGetMultiBoardItemByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板项目数据。" 
+
+YDWEGetMultiBoardItemByString="获取 多面板项目 (字符串路径)[YDWE]"
+YDWEGetMultiBoardItemByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取多面板项目" 
+YDWEGetMultiBoardItemByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板项目数据。" 
+
+// returns timer
+CreateTimer="新建计时器 [R]"
+CreateTimer="新建的计时器"
+CreateTimerHint="会创建计时器."
+
+GetLastCreatedTimerBJ="最后启用的计时器"
+GetLastCreatedTimerBJ="最后启用的计时器"
+GetLastCreatedTimerBJHint="最后一个由'计时器 - 启用计时器'动作启用的计时器."
+
+GetExpiredTimer="到期的计时器"
+GetExpiredTimer="到期的计时器"
+GetExpiredTimerHint="响应'时间 - 计时器到期'事件."
+
+YDWEGetTimerByInteger="获取 计时器 (整数路径)[YDWE]"
+YDWEGetTimerByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取计时器" 
+YDWEGetTimerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器数据。" 
+
+YDWEGetTimerByString="获取 计时器 (字符串路径)[YDWE]"
+YDWEGetTimerByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取计时器" 
+YDWEGetTimerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器数据。" 
+
+YDWERemoveAttackWaveReturnTimer="最后创建的刷兵计时器[YDWE]"
+YDWERemoveAttackWaveReturnTimer="最后创建的刷兵计时器"
+YDWERemoveAttackWaveReturnTimerHint="响应刷兵系统"
+
+
+            ="自定义代码 [C]"
+            ="代码: ",~Jass代码
+            Hint="输入一行Jass代码"
+       
+
+// returns timerdialog
+CreateTimerDialog="新建计时器窗口 [R]"
+CreateTimerDialog="为 ",~计时器," 新建计时窗口"
+CreateTimerDialogHint="为一个计时器创建一个新建计时器窗口."
+
+GetLastCreatedTimerDialogBJ="最后创建的计时器窗口"
+GetLastCreatedTimerDialogBJ="最后创建的计时器窗口"
+GetLastCreatedTimerDialogBJHint="最后一个由'计时器 - 创建计时器窗口'动作创建的计时器窗口."
+
+YDWEGetTimerDialogByInteger="获取 计时器窗口 (整数路径)[YDWE]"
+YDWEGetTimerDialogByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取计时器窗口" 
+YDWEGetTimerDialogByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器窗口数据。" 
+
+YDWEGetTimerDialogByString="获取 计时器窗口 (字符串路径)[YDWE]"
+YDWEGetTimerDialogByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取计时器窗口" 
+YDWEGetTimerDialogByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器窗口数据。" 
+
+// returns gamecache
+InitGameCache="新建游戏缓存 [R]"
+InitGameCache="新建游戏缓存: ",~缓存名
+InitGameCacheHint="创建一个新的游戏缓存,一个地图最多只有有256个游戏缓存."
+
+GetLastCreatedGameCacheBJ="最后创建的游戏缓存"
+GetLastCreatedGameCacheBJ="最后创建的游戏缓存"
+GetLastCreatedGameCacheBJHint="最后一个由'游戏缓存 - 创建缓存'动作创建的缓存."
+
+// returns hashtable
+
+              ="自定义代码 [C]"
+              ="代码: ",~Jass代码
+              Hint="输入一行Jass代码"
+
+YDWEInitHashtable="新建哈希表(YDWE)"
+YDWEInitHashtable="新建哈希表"
+YDWEInitHashtableHint="获得一个新哈希表。"
+
+GetLastCreatedHashtableBJ="最后创建的哈希表"
+GetLastCreatedHashtableBJ="最后创建的哈希表"
+GetLastCreatedHashtableBJHint="能得到通过 '哈希表 - 新建哈希表' 最后一次创建的哈希表"
+
+// returns Trackable
+CreateTrackable="新建可追踪物 [R]"
+CreateTrackable="新建的可追踪物, 使用模型: ",~模型名字," 所在位置: ( ",~X轴," , ",~Y轴," ) 面向角度: ",~数值," 度"
+CreateTrackableHint="可用来响应鼠标的移动和点击. 会创建可追踪物."
+
+GetTriggeringTrackable="事件响应 - 触发可追踪物 [R]"
+GetTriggeringTrackable="事件响应 - 触发可追踪物"
+GetTriggeringTrackableHint=
+
+YDWEGetTrackableByInteger="获取 可追踪物 (整数路径)[YDWE]"
+YDWEGetTrackableByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取可追踪物"
+YDWEGetTrackableByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可追踪物数据。" 
+
+YDWEGetTrackableByString="获取 可追踪物 (字符串路径)[YDWE]"
+YDWEGetTrackableByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取可追踪物"
+YDWEGetTrackableByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可追踪物数据。" 
+
+// returns texttag
+CreateTextTag="新建漂浮文字 [R]"
+CreateTextTag="新建的空漂浮文字"
+CreateTextTagHint="会创建漂浮文字."
+
+GetLastCreatedTextTag="最后创建的漂浮文字"
+GetLastCreatedTextTag="最后创建的漂浮文字"
+GetLastCreatedTextTagHint="最后一个由'漂浮文字 - 创建漂浮文字'动作创建的漂浮文字."
+
+YDWEGetTextTagByInteger="获取 漂浮文字 (整数路径)[YDWE]"
+YDWEGetTextTagByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取漂浮文字"
+YDWEGetTextTagByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取漂浮文字数据。" 
+
+YDWEGetTextTagByString="获取 漂浮文字 (字符串路径)[YDWE]"
+YDWEGetTextTagByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取漂浮文字"
+YDWEGetTextTagByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取漂浮文字数据。" 
+
+
+//H2I
+YDWEGetUnitID="获取 单位 的整数地址 [YDWE]"
+YDWEGetUnitID="获取 ",~单位," 的整数地址"
+YDWEGetUnitIDHint="可以把一个单位转成整数，方便存入缓存或Hash表。" 
+
+YDWEGetPlayerID="获取 玩家 的整数地址 [YDWE]"
+YDWEGetPlayerID="获取 ",~玩家," 的整数地址"
+YDWEGetPlayerIDHint="可以把一个玩家转成整数，方便存入缓存或Hash表。" 
+
+YDWEGetItemID="获取 物品 的整数地址 [YDWE]"
+YDWEGetItemID="获取 ",~物品," 的整数地址"
+YDWEGetItemIDHint="可以把一个物品转成整数，方便存入缓存或Hash表。" 
+
+YDWEGetTimerID="获取 计时器 的整数地址 [YDWE]"
+YDWEGetTimerID="获取 ",~计时器," 的整数地址"
+YDWEGetTimerIDHint="可以把一个计时器转成整数，方便存入缓存或Hash表。" 
+
+YDWEGetTriggerID="获取 触发器 的整数地址 [YDWE]"
+YDWEGetTriggerID="获取 ",~触发器," 的整数地址"
+YDWEGetTriggerIDHint="可以把一个触发器转成整数，方便存入缓存或Hash表。" 
+
+YDWEGetGroupID="获取 单位组 的整数地址 [YDWE]"
+YDWEGetGroupID="获取 ",~单位组," 的整数地址"
+YDWEGetGroupIDHint="可以把一个单位组转成整数，方便存入缓存或Hash表。"
+
+YDWEGetLocationID="获取 点 的整数地址 [YDWE]"
+YDWEGetLocationID="获取 ",~点," 的整数地址"
+YDWEGetLocationIDHint="可以把一个点转成整数，方便存入缓存或Hash表。"
+
+YDWEGetUnitTypeID="获取 单位类型 的整数地址 [YDWE]"
+YDWEGetUnitTypeID="获取 ",~单位类型," 的整数地址"
+YDWEGetUnitTypeIDHint="可以把一个单位类型转成整数，方便存入缓存或Hash表。"
+
+YDWEGetAbilityTypeID="获取 技能类型 的整数地址 [YDWE]"
+YDWEGetAbilityTypeID="获取 ",~技能类型," 的整数地址"
+YDWEGetAbilityTypeIDHint="可以把一个技能类型转成整数，方便存入缓存或Hash表。"
+
+YDWEGetItemTypeID="获取 物品类型 的整数地址 [YDWE]"
+YDWEGetItemTypeID="获取 ",~物品类型," 的整数地址"
+YDWEGetItemTypeIDHint="可以把一个物品类型转成整数，方便存入缓存或Hash表。"
+
+YDWEGetMultiboardID="获取 多面板 的整数地址 [YDWE]"
+YDWEGetMultiboardID="获取 ",~多面板," 的整数地址"
+YDWEGetMultiboardIDHint="可以把一个多面板转成整数，方便存入缓存或Hash表。"
+
+YDWEGetMultiboardItemID="获取 多面板项目 的整数地址 [YDWE]"
+YDWEGetMultiboardItemID="获取 ",~多面板项目," 的整数地址"
+YDWEGetMultiboardItemIDHint="可以把一个多面板项目转成整数，方便存入缓存或Hash表。"
+
+YDWEGetTextTagID="获取 漂浮文字 的整数地址 [YDWE]"
+YDWEGetTextTagID="获取 ",~漂浮文字," 的整数地址"
+YDWEGetTextTagIDHint="可以把一个漂浮文字转成整数，方便存入缓存或Hash表。"
+
+YDWEGetLightningID="获取 闪电 的整数地址 [YDWE]"
+YDWEGetLightningID="获取 ",~闪电," 的整数地址"
+YDWEGetLightningIDHint="可以把一个闪电成转整数，方便存入缓存或Hash表。"
+
+YDWEGetRegionID="获取 区域 的整数地址 [YDWE]"
+YDWEGetRegionID="获取 ",~区域," 的整数地址"
+YDWEGetRegionIDHint="可以把一个区域转成整数，方便存入缓存或Hash表。"
+
+YDWEGetRectID="获取 地区 的整数地址 [YDWE]"
+YDWEGetRectID="获取 ",~地区," 的整数地址"
+YDWEGetRectIDHint="可以把一个地区转成整数，方便存入缓存或Hash表。"
+
+YDWEGetLeaderboardID="获取 排行榜 的整数地址 [YDWE]"
+YDWEGetLeaderboardID="获取 ",~排行榜," 的整数地址"
+YDWEGetLeaderboardIDHint="可以把一个排行榜转成整数，方便存入缓存或Hash表。"
+
+YDWEGetEffectID="获取 特效 的整数地址 [YDWE]"
+YDWEGetEffectID="获取 ",~特效," 的整数地址"
+YDWEGetEffectIDHint="可以把一个特效转成整数，方便存入缓存或Hash表。"
+
+YDWEGetDestructableID="获取 可破坏物 的整数地址 [YDWE]"
+YDWEGetDestructableID="获取 ",~可破坏物," 的整数地址"
+YDWEGetDestructableIDHint="可以把一个可破坏物转成整数，方便存入缓存或Hash表。"
+
+YDWEGetTriggerConditionID="获取 触发器条件 的整数地址 [YDWE]"
+YDWEGetTriggerConditionID="获取 ",~触发器条件," 的整数地址"
+YDWEGetTriggerConditionIDHint="可以把一个触发器条件转成整数，方便存入缓存或Hash表。"
+
+YDWEGetTriggerActionID="获取 触发器动作 的整数地址 [YDWE]"
+YDWEGetTriggerActionID="获取 ",~触发器动作," 的整数地址"
+YDWEGetTriggerActionIDHint="可以把一个触发器动作转成整数，方便存入缓存或Hash表。"
+
+YDWEGetTriggerEventID="获取 事件 的整数地址 [YDWE]"
+YDWEGetTriggerEventID="获取 ",~事件," 的整数地址"
+YDWEGetTriggerEventIDHint="可以把一个事件转成整数，方便存入缓存或Hash表。"
+
+YDWEGetForceID="获取 势力 的整数地址 [YDWE]"
+YDWEGetForceID="获取 ",~势力," 的整数地址"
+YDWEGetForceIDHint="可以把一个势力转成整数，方便存入缓存或Hash表。"
+
+YDWEGetBoolexprID="获取 布尔表达式 的整数地址 [YDWE]"
+YDWEGetBoolexprID="获取 ",~布尔表达式," 的整数地址"
+YDWEGetBoolexprIDHint="可以把一个布尔表达式转成整数，方便存入缓存或Hash表。"
+
+#include "../Other/detail/OrderString.ui"
+
+GetStoredBooleanBJ="读取布尔值"
+GetStoredBooleanBJ="从游戏缓存读取布尔值,名称: ",~文字," 类别: ",~Category," 缓存: ",~Game Cache
+GetStoredBooleanBJHint=YDHIDE_HINT_1
+
+GetStoredIntegerBJ="缓存读取整数"
+GetStoredIntegerBJ="从游戏缓存读取整数,名称: ",~文字," 类别: ",~Category," 缓存: ",~Game Cache
+GetStoredIntegerBJHint=YDHIDE_HINT_1
+
+GetStoredRealBJ="缓存读取实数"
+GetStoredRealBJ="从游戏缓存读取实数,名称: ",~文字," 类别: ",~Category," 缓存: ",~Game Cache
+GetStoredRealBJHint=YDHIDE_HINT_1
+
+GetStoredStringBJ="读取字符串"
+GetStoredStringBJ="从游戏缓存读取字符串,名称: ",~文字," 类别: ",~Category," 缓存: ",~Game Cache
+GetStoredStringBJHint=YDHIDE_HINT_1

@@ -1,6 +1,8 @@
-*.pdb
-*.ilk
-*.suo
 *.exp
+*.ilk
+*.lastbuildstate
+*.pdb
+*.pyc
+*.suo
 *.user
 Thumbs.db

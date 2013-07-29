@@ -1,0 +1,12 @@
+#include "Include.h"
+
+#include "Other/TriggerCategories.ui"
+#include "Other/TriggerTypes.ui"
+#include "Other/TriggerTypeDefaults.ui"
+#include "Other/TriggerParams.ui"
+#include "Data/TriggerEvents.ui"
+#include "Data/TriggerConditions.ui"
+#include "Data/TriggerActions.ui"
+#include "Data/TriggerCalls.ui"
+#include "Other/DefaultTriggerCategories.ui"       
+#include "Other/DefaultTriggers.ui"

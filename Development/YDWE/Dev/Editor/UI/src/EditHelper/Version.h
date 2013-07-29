@@ -1,0 +1,3 @@
+#include <YDWEVersion.h>
+
+#define YDWE_UI_VERSION  YDWE_VERSION_MAJOR ## . ## YDWE_VERSION_MINOR ## . ## YDWE_VERSION_REVISED

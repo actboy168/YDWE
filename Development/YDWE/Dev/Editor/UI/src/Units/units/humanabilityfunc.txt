@@ -1,0 +1,640 @@
+// Aerial Shackles
+[Amls]
+Art=ReplaceableTextures\CommandButtons\BTNMagicLariet.blp
+Buttonpos=0,2
+Order=magicleash
+Animnames=spell,looping
+LightningEffect=LEAS
+
+// Aerial Shackles Caster
+[Bmlc]
+Effectsoundlooped=AerialShacklesLoop
+
+// Aerial Shackles Target
+[Bmlt]
+Buffart=ReplaceableTextures\CommandButtons\BTNMagicLariet.blp
+Targetart=Abilities\Spells\Human\AerialShackles\AerialShacklesTarget.mdl
+Targetattach=chest,mount
+
+// area of effect detection (scry)
+[AHta]
+Requires=Rhse
+Art=ReplaceableTextures\CommandButtons\BTNReveal.blp
+ButtonPos=0,2
+Casterart=Abilities\Spells\Items\AIta\CrystalBallCaster.mdl
+Casterattach=overhead
+
+// Feedback
+[Afbk]
+Art=ReplaceableTextures\PassiveButtons\PASBTNFeedBack.blp
+Specialart=Abilities\Spells\Human\Feedback\SpellBreakerAttack.mdl
+Buttonpos=3,2
+
+// Feedback
+[Afbt]
+Art=ReplaceableTextures\PassiveButtons\PASBTNFeedBack.blp
+Specialart=Abilities\Spells\Human\Feedback\ArcaneTowerAttack.mdl
+Buttonpos=3,2
+
+
+// Control Magic
+[Acmg]
+Requires=Rhss
+Art=ReplaceableTextures\CommandButtons\BTNControlMagic.blp
+Buttonpos=1,2
+Targetart=Abilities\Spells\Human\ControlMagic\ControlMagicTarget.mdl
+Targetattach=overhead
+Order=controlmagic
+
+[Bcmg]
+Buffart=ReplaceableTextures\CommandButtons\BTNControlMagic.blp
+Effectart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+
+// Siphon Mana
+[AHdr]
+Art=ReplaceableTextures\CommandButtons\BTNManaDrain.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNManaDrain.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+Effectsoundlooped=SiphonManaLoop
+LightningEffect=DRAB,DRAL,DRAM
+
+[Bdbb]
+Buffart=ReplaceableTextures\CommandButtons\BTNLifeDrain.blp
+
+[Bdbl]
+Buffart=ReplaceableTextures\CommandButtons\BTNLifeDrain.blp
+
+[Bdbm]
+Buffart=ReplaceableTextures\CommandButtons\BTNManaDrain.blp
+
+// Drain Life & Mana (Caster)
+// This buff isn't ever visible on the info card.
+[Bdcb]
+//Buffart=
+Targetart=Abilities\Spells\Other\Drain\DrainCaster.mdl
+Targetattach=chest
+
+// Drain Life (Caster)
+// This buff isn't ever visible on the info card.
+[Bdcl]
+//Buffart=
+Targetart=Abilities\Spells\Other\Drain\DrainCaster.mdl
+Targetattach=chest
+
+// Drain Mana (Caster)
+// This buff isn't ever visible on the info card.
+[Bdcm]
+//Buffart=
+Targetart=Abilities\Spells\Other\Drain\ManaDrainCaster.mdl
+Targetattach=chest
+
+// Drain Life & Mana (Target)
+// This buff isn't ever visible on the info card.
+[Bdtb]
+//Buffart=
+Targetart=Abilities\Spells\Other\Drain\DrainTarget.mdl
+Targetattach=chest
+
+// Drain Life (Target)
+// This buff isn't ever visible on the info card.
+[Bdtl]
+//Buffart=
+Targetart=Abilities\Spells\Other\Drain\DrainTarget.mdl
+Targetattach=chest
+
+// Drain Mana (Target)
+// This buff isn't ever visible on the info card.
+[Bdtm]
+//Buffart=
+Targetart=Abilities\Spells\Other\Drain\ManaDrainTarget.mdl
+Targetattach=chest
+
+// Flak Cannons
+[Aflk]
+Art=ReplaceableTextures\PassiveButtons\PASBTNFlakCannons.blp
+Buttonpos=2,2
+Requires=Rhfc
+Targetart=Abilities\Spells\Human\FlakCannons\FlakTarget.mdl
+Targetattach=chest
+Specialart=Abilities\Spells\Human\FlakCannons\FlakTarget.mdl
+Specialattach=chest
+
+// Frag Shards
+[Afsh]
+Art=ReplaceableTextures\PassiveButtons\PASBTNFragmentationBombs.blp
+Buttonpos=1,2
+Requires=Rhfs
+//Missileart=Abilities\Spells\Human\FragmentationShards\FragMissile.mdl
+Targetart=Abilities\Weapons\FlyingMachine\FlyingMachineImpact.mdl
+Targetattach=chest
+//Specialart=Abilities\Spells\Human\Thunderclap\ThunderClapCaster.mdl
+
+// Rocket Attack
+[Aroc]
+Requires=Rhrt
+Art=ReplaceableTextures\PassiveButtons\PASBTNScatterRockets.blp
+Buttonpos=0,2
+Missileart=Abilities\Weapons\RocketMissile\RocketMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+
+// Magic Defense
+[Amdf]
+Art=ReplaceableTextures\CommandButtons\BTNSpellBreakerMagicDefend.blp
+Unart=ReplaceableTextures\CommandButtons\BTNSpellBreakerMagicUnDefend.blp
+Buttonpos=1,2
+Unbuttonpos=1,2
+Casterart=Abilities\Spells\Human\Defend\DefendCaster.mdl
+Order=magicdefense
+Unorder=magicundefense
+
+// Human Build
+[AHbu]
+Art=ReplaceableTextures\CommandButtons\BTNHumanBuild.blp
+Buttonpos=0,2
+Order=humanbuild
+
+// Sphere
+[Asph]
+Targetart=Units\Human\HeroBloodElf\BloodElfBall.mdl
+Targetattachcount=3
+Targetattach=sprite,first
+Targetattach1=sprite,second
+Targetattach2=sprite,third
+Missileart=Units\Human\HeroBloodElf\BloodElfBall.mdl
+Missilearc=0.05
+Missilespeed=1400
+
+// Spell Steal
+[Asps]
+Art=ReplaceableTextures\CommandButtons\BTNSpellStealOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNSpellStealOff.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Order=spellsteal
+Orderon=spellstealon
+Orderoff=spellstealoff
+Targetart=Abilities\Spells\Human\SpellSteal\SpellStealTarget.mdl
+Targetattach=overhead
+Missileart=Abilities\Spells\Human\SpellSteal\SpellStealMissile.mdl
+Missilearc=0.15
+Missilespeed=1000
+MissileHoming=1
+
+// Cloud of Fog
+[Aclf]
+Art=ReplaceableTextures\CommandButtons\BTNCloudOfFog.blp
+Requires=Rhcd
+Buttonpos=1,2
+Order=cloudoffog
+Animnames=stand,channel
+
+[Bclf]
+Buffart=ReplaceableTextures\CommandButtons\BTNCloudOfFog.blp
+Targetart=
+
+[Xclf]
+Effectart=Abilities\Spells\Human\CloudOfFog\CloudOfFog.mdl
+Effectsoundlooped=CloudOfFogLoop
+
+// Flame Strike
+[AHfs]
+Art=ReplaceableTextures\CommandButtons\BTNWallOfFire.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNWallOfFire.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Order=flamestrike
+// Beware art
+Effectart=Abilities\Spells\Human\FlameStrike\FlameStrikeTarget.mdl
+// Impact art
+Specialart=Abilities\Spells\Human\FlameStrike\FlameStrike1.mdl,Abilities\Spells\Human\FlameStrike\FlameStrike2.mdl,Abilities\Spells\Human\FlameStrike\FlameStrike.mdl
+Animnames=spell,channel
+
+[BHfs]
+// Burning art
+Buffart=ReplaceableTextures\CommandButtons\BTNWallOfFire.blp
+Targetart=Abilities\Spells\Human\FlameStrike\FlameStrikeDamageTarget.mdl
+
+[XHfs]
+// AOE Burn art
+Effectart=Abilities\Spells\Human\FlameStrike\FlameStrikeEmbers.mdl
+Effectsoundlooped=HumanFireLarge
+
+// Banish
+[AHbn]
+Art=ReplaceableTextures\CommandButtons\BTNBanish.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNBanish.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Effectsound=BanishCaster
+Order=banish
+
+[BHbn]
+Buffart=ReplaceableTextures\CommandButtons\BTNBanish.blp
+Targetart=Abilities\Spells\Human\Banish\BanishTarget.mdl
+Effectsoundlooped=BanishLoop
+
+// Summon Phoenix
+[AHpx]
+Art=ReplaceableTextures\CommandButtons\BTNMarkOfFire.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNMarkOfFire.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Specialart=Abilities\Spells\Human\MarkOfChaos\MarkOfChaosTarget.mdl
+Order=summonphoenix
+
+// Phoenix (morph)
+[Aphx]
+
+// Phoenix (progress bar)
+[Bphx]
+
+// Phoenix Fire
+[Apxf]
+Art=ReplaceableTextures\CommandButtons\BTNMarkOfFire.blp
+Buttonpos=0,2
+Missileart=Abilities\Weapons\PhoenixMissile\Phoenix_Missile_mini.mdl
+Missilespeed=900
+MissileHoming=1
+
+// Phoenix Fire
+[Bpxf]
+Buffart=ReplaceableTextures\CommandButtons\BTNMarkOfFire.blp
+Targetart=Abilities\Spells\Other\BreathOfFire\BreathOfFireDamage.mdl
+
+// Flying Machine Bombs
+[Agyb]
+Requires=Rhgb
+Art=ReplaceableTextures\PassiveButtons\PASBTNHumanArtilleryUpOne.blp
+Buttonpos=1,2
+
+// Storm Hammers
+[Asth]
+Requires=Rhhb
+Art=ReplaceableTextures\PassiveButtons\PASBTNStormHammer.blp
+Buttonpos=0,2
+
+// flying machine detection
+[Agyv]
+Art=ReplaceableTextures\PassiveButtons\PASBTNFlyingMachineTrueSight.blp
+Buttonpos=0,2
+
+// Defend
+[Adef]
+Art=ReplaceableTextures\CommandButtons\BTNDefend.blp
+Unart=ReplaceableTextures\CommandButtons\BTNDefendStop.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Casterart=Abilities\Spells\Human\Defend\DefendCaster.mdl
+Requires=Rhde
+Order=defend
+Unorder=undefend
+
+// Flare
+[Afla]
+Art=ReplaceableTextures\CommandButtons\BTNFlare.blp
+Buttonpos=0,2
+Requires=Rhfl
+Order=flare
+Casterart=Abilities\Spells\Human\Flare\FlareCaster.mdl
+Animnames=spell,attack
+
+[Xfla]
+Effectart=Abilities\Spells\Human\Flare\FlareTarget.mdl
+
+// Magic Sentry (passive)
+[Adts]
+Art=ReplaceableTextures\PassiveButtons\PASBTNMagicalSentry.blp
+Buttonpos=2,1
+Requires=Rhse
+Casterart=Abilities\Spells\Human\MagicSentry\MagicSentryCaster.mdl
+Casterattach=overhead
+
+// Inner Fire
+[Ainf]
+Art=ReplaceableTextures\CommandButtons\BTNInnerFireOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNInnerFireOff.blp
+Buttonpos=2,2
+Unbuttonpos=2,2
+Casterart=
+Requires=Rhpt
+Requiresamount=2
+Effectsound=InnerFireCast
+Order=innerfire
+Orderon=innerfireon
+Orderoff=innerfireoff
+
+// example of multiple attachment
+[Binf]
+Spelldetail=1
+Buffart=ReplaceableTextures\CommandButtons\BTNInnerFire.blp
+Targetart=Abilities\Spells\Human\InnerFire\InnerFireTarget.mdl
+Targetattachcount=1
+Targetattach=overhead
+//Targetattach1=hand,left
+//Targetattach2=hand,right
+
+// Dispel Magic
+[Adis]
+Art=ReplaceableTextures\CommandButtons\BTNDispelMagic.blp
+Buttonpos=1,2
+Casterart=
+Targetart=Abilities\Spells\Human\DispelMagic\DispelMagicTarget.mdl
+Specialart=Abilities\Spells\Human\DispelMagic\DispelMagicTarget.mdl
+Requires=Rhpt
+Order=dispel
+
+// Heal
+[Ahea]
+Art=ReplaceableTextures\CommandButtons\BTNHealOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNHealOff.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Casterart=
+Targetart=Abilities\Spells\Human\Heal\HealTarget.mdl
+Order=heal
+Orderon=healon
+Orderoff=healoff
+
+[Bhea]
+Spelldetail=1
+Buffart=ReplaceableTextures\CommandButtons\BTNHeal.blp
+
+[BNhe]
+Spelldetail=1
+Buffart=ReplaceableTextures\CommandButtons\BTNSlow.blp
+
+// Slow
+[Aslo]
+Art=ReplaceableTextures\CommandButtons\BTNSlowOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNSlowOff.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Casterart=Abilities\Spells\Human\Slow\SlowCaster.mdl
+Order=slow
+Orderon=slowon
+Orderoff=slowoff
+
+[Bslo]
+Spelldetail=1
+Buffart=ReplaceableTextures\CommandButtons\BTNSlow.blp
+Targetart=Abilities\Spells\Human\slow\slowtarget.mdl
+
+// Invisibility
+[Aivs]
+Art=ReplaceableTextures\CommandButtons\BTNInvisibility.blp
+Buttonpos=1,2
+Targetart=Abilities\Spells\Human\Invisibility\InvisibilityTarget.mdl
+Targetattach=chest
+Requires=Rhst
+Order=invisibility
+
+[Binv]
+Buffart=ReplaceableTextures\CommandButtons\BTNInvisibility.blp
+
+// Polymorph art notes:
+// - When Polymorph is cast on an air unit, the "poof" [Aply] Specialart
+//   is played on the targeted unit, and the "falling sheep" [Aply] Effectart
+//   is played on ground under the targeted unit.
+// - When cast on a ground unit, [Bply] Specialart is played on the ground
+//   under the unit when it turns into a sheep, and [Bply] Effectart is played
+//   on the ground under the unit when it turns back into the original unit.
+
+[Aply]
+Art=ReplaceableTextures\CommandButtons\BTNPolymorph.blp
+Buttonpos=2,2
+Casterart=
+Specialart=Abilities\Spells\Human\Polymorph\PolyMorphTarget.mdl
+Effectart=Abilities\Spells\Human\Polymorph\PolyMorphFallingSheepArt.mdl
+Requires=Rhst
+Requiresamount=2
+Order=polymorph
+
+[Bply]
+Buffart=ReplaceableTextures\CommandButtons\BTNPolymorph.blp
+Specialart=
+Effectart=Abilities\Spells\Human\Polymorph\PolyMorphDoneGround.mdl
+
+// Blizzard
+[AHbz]
+Art=ReplaceableTextures\CommandButtons\BTNBlizzard.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNBlizzard.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Casterart=
+Order=blizzard
+Animnames=stand,channel
+
+[BHbd]
+Buffart=ReplaceableTextures\CommandButtons\BTNBlizzard.blp
+Targetart=Abilities\Spells\Other\FrostDamage\FrostDamage.mdl
+
+[XHbz]
+Effectart=Abilities\Spells\Human\Blizzard\BlizzardTarget.mdl
+Effectsoundlooped=BlizzardLoop
+Effectsound=BlizzardWave
+
+// Summon Water Elemental
+[AHwe]
+Art=ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Order=waterelemental
+
+[BHwe]
+Buffart=ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.blp
+
+// Brilliance Aura
+[AHab]
+Art=ReplaceableTextures\PassiveButtons\PASBTNBrilliance.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNBrilliance.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+Targetart=Abilities\Spells\Human\Brilliance\Brilliance.mdl
+Targetattach=origin
+
+[BHab]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNBrilliance.blp
+Targetart=Abilities\Spells\Other\GeneralAuraTarget\GeneralAuraTarget.mdl
+Targetattach=origin
+
+// Mass Teleport
+[AHmt]
+Art=ReplaceableTextures\CommandButtons\BTNMassTeleport.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNMassTeleport.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+// Shouldn't show art at targeted coordinate, so don't use Effectart.
+Areaeffectart=Abilities\Spells\Human\MassTeleport\MassTeleportTo.mdl
+Casterart=Abilities\Spells\Human\MassTeleport\MassTeleportCaster.mdl
+// The targeted unit shouldn't show an effect, so there is no Targetart.
+Specialart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+Order=massteleport
+
+// Storm Bolt
+[AHtb]
+Art=ReplaceableTextures\CommandButtons\BTNStormBolt.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNStormBolt.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Missileart=Abilities\Spells\Human\StormBolt\StormBoltMissile.mdl
+Missilespeed=1000
+MissileHoming=1
+Order=thunderbolt
+Animnames=spell,throw
+
+[BHtb]
+Buffart=ReplaceableTextures\CommandButtons\BTNStormBolt.blp
+Targetart=Abilities\Spells\Human\StormBolt\StormBoltTarget.mdl
+Targetattach=overhead
+
+// Thunder Clap
+[AHtc]
+Art=ReplaceableTextures\CommandButtons\BTNThunderclap.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNThunderclap.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Casterart=Abilities\Spells\Human\Thunderclap\ThunderClapCaster.mdl
+Casterattach=origin
+Effectart=
+Order=thunderclap
+Animnames=spell,slam
+
+[BHtc]
+Buffart=ReplaceableTextures\CommandButtons\BTNThunderclap.blp
+Targetart=Abilities\Spells\Orc\StasisTrap\StasisTotemTarget.mdl
+Targetattach=overhead
+
+// Bash
+[AHbh]
+Art=ReplaceableTextures\PassiveButtons\PASBTNBash.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNBash.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+Order=bash
+
+[BHbh]
+Buffart=ReplaceableTextures\CommandButtons\BTNBash.blp
+Targetart=Abilities\Spells\Human\Thunderclap\ThunderclapTarget.mdl
+Targetattach=overhead
+
+// Avatar
+[AHav]
+Art=ReplaceableTextures\CommandButtons\BTNAvatarOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNAvatarOff.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNAvatar.blp
+Buttonpos=3,2
+Unbuttonpos=3,2
+Researchbuttonpos=3,0
+Casterart=Abilities\Spells\Human\Avatar\AvatarCaster.mdl
+Order=avatar
+
+[BHav]
+Buffart=ReplaceableTextures\CommandButtons\BTNAvatar.blp
+Targetart=
+
+// Holy Light
+[AHhb]
+Art=ReplaceableTextures\CommandButtons\BTNHolyBolt.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNHolyBolt.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Targetart=Abilities\Spells\Human\HolyBolt\HolyBoltSpecialArt.mdl
+Order=holybolt
+
+// Divine Shield
+[AHds]
+Art=ReplaceableTextures\CommandButtons\BTNDivineIntervention.blp
+Unart=ReplaceableTextures\CommandButtons\BTNDivineShieldOff.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNDivineIntervention.blp
+Buttonpos=1,2
+Unbuttonpos=1,2
+Researchbuttonpos=1,0
+Order=divineshield
+Unorder=undivineshield
+
+[BHds]
+Buffart=ReplaceableTextures\CommandButtons\BTNDivineIntervention.blp
+Targetart=Abilities\Spells\Human\DivineShield\DivineShieldTarget.mdl
+Targetattach=origin
+
+// Devotion Aura
+[AHad]
+Art=ReplaceableTextures\PassiveButtons\PASBTNDevotion.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNDevotion.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+Targetart=Abilities\Spells\Human\DevotionAura\DevotionAura.mdl
+Targetattach=origin
+
+[BHad]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNDevotion.blp
+Targetart=Abilities\Spells\Other\GeneralAuraTarget\GeneralAuraTarget.mdl
+Targetattach=origin
+
+// Resurrection
+[AHre]
+Art=ReplaceableTextures\CommandButtons\BTNResurrection.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNResurrection.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Casterart=Abilities\Spells\Human\Resurrect\ResurrectCaster.mdl
+Targetart=Abilities\Spells\Human\Resurrect\ResurrectTarget.mdl
+Order=resurrection
+
+// Militia
+[Amil]
+Art=ReplaceableTextures\CommandButtons\BTNCallToArms.blp
+Unart=ReplaceableTextures\CommandButtons\BTNBacktoWork.blp
+Buttonpos=1,2
+Unbuttonpos=2,2
+Order=militia
+Unorder=militiaoff
+
+[Bmil]
+Buffart=ReplaceableTextures\CommandButtons\BTNCallToArms.blp
+
+// Militia Conversion
+[Amic]
+Art=ReplaceableTextures\CommandButtons\BTNCallToArms.blp
+Unart=ReplaceableTextures\CommandButtons\BTNBacktoWork.blp
+Buttonpos=1,2
+Unbuttonpos=2,2
+Effectsound=TownHallCallToArms
+Order=townbellon
+Unorder=townbelloff
+
+// 'damaged' attachment effect, small
+[Xfhs]
+TargetArt=Environment\SmallBuildingFire\SmallBuildingFire2.mdl,Environment\SmallBuildingFire\SmallBuildingFire1.mdl
+Targetattachcount=2
+Targetattach=sprite,first
+Targetattach1=sprite,fourth
+Effectsoundlooped=HumanFireSmall
+
+// medium
+[Xfhm]
+TargetArt=Environment\LargeBuildingFire\LargeBuildingFire2.mdl,Environment\SmallBuildingFire\SmallBuildingFire1.mdl,Environment\LargeBuildingFire\LargeBuildingFire0.mdl,Environment\SmallBuildingFire\SmallBuildingFire2.mdl
+Targetattachcount=4
+Targetattach=sprite,first
+Targetattach1=sprite,second
+Targetattach2=sprite,fourth
+Targetattach3=sprite,fifth
+Effectsoundlooped=HumanFireMedium
+
+// large
+[Xfhl]
+TargetArt=Environment\LargeBuildingFire\LargeBuildingFire1.mdl,Environment\LargeBuildingFire\LargeBuildingFire0.mdl,Environment\LargeBuildingFire\LargeBuildingFire0.mdl,Environment\SmallBuildingFire\SmallBuildingFire1.mdl,Environment\LargeBuildingFire\LargeBuildingFire1.mdl,Environment\SmallBuildingFire\SmallBuildingFire0.mdl
+Targetattachcount=6
+Targetattach=sprite,first
+Targetattach1=sprite,second
+Targetattach2=sprite,fifth
+Targetattach3=sprite,third
+Targetattach4=sprite,fourth
+Targetattach5=sprite,sixth
+Effectsoundlooped=HumanFireLarge

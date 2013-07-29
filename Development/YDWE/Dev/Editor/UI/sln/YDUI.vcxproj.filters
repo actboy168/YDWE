@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src\EditHelper\TriggerStrings.c">
+      <Filter>EditHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EditHelper\TriggerData.c">
+      <Filter>EditHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TriggerStrings.ui" />
+    <ClCompile Include="..\src\TriggerData.ui" />
+    <ClCompile Include="..\src\EditHelper\WorldEditStrings.c">
+      <Filter>EditHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WorldEditStrings.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\String\TriggerEventStrings.ui">
+      <Filter>String</Filter>
+    </None>
+    <None Include="..\src\String\TriggerConditionStrings.ui">
+      <Filter>String</Filter>
+    </None>
+    <None Include="..\src\String\TriggerActionStrings.ui">
+      <Filter>String</Filter>
+    </None>
+    <None Include="..\src\String\AIFunctionStrings.ui">
+      <Filter>String</Filter>
+    </None>
+    <None Include="..\src\Data\TriggerActions.ui">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\src\Data\TriggerEvents.ui">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\src\Data\TriggerConditions.ui">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\src\Data\TriggerCalls.ui">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\src\EditHelper\build.py">
+      <Filter>EditHelper</Filter>
+    </None>
+    <None Include="..\src\Other\DefaultTriggerCategories.ui">
+      <Filter>Other</Filter>
+    </None>
+    <None Include="..\src\Other\DefaultTriggers.ui">
+      <Filter>Other</Filter>
+    </None>
+    <None Include="..\src\String\TriggerCallStrings.ui">
+      <Filter>String</Filter>
+    </None>
+    <None Include="..\src\Other\TriggerCategories.ui">
+      <Filter>Other</Filter>
+    </None>
+    <None Include="..\src\Other\TriggerParams.ui">
+      <Filter>Other</Filter>
+    </None>
+    <None Include="..\src\Other\TriggerTypeDefaults.ui">
+      <Filter>Other</Filter>
+    </None>
+    <None Include="..\src\Other\TriggerTypes.ui">
+      <Filter>Other</Filter>
+    </None>
+    <None Include="..\src\Other\detail\EventId.ui">
+      <Filter>Other\detail</Filter>
+    </None>
+    <None Include="..\src\Other\detail\OrderData.ui">
+      <Filter>Other\detail</Filter>
+    </None>
+    <None Include="..\src\Other\detail\OrderString.ui">
+      <Filter>Other\detail</Filter>
+    </None>
+    <None Include="..\src\EditHelper\StormLib.dll">
+      <Filter>EditHelper</Filter>
+    </None>
+    <None Include="..\src\EditHelper\StormLib.py">
+      <Filter>EditHelper</Filter>
+    </None>
+    <None Include="..\src\EditHelper\build_units.py">
+      <Filter>EditHelper</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="String">
+      <UniqueIdentifier>{fc6223fb-7fa1-4214-b2ed-b2cd26695ed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{6e9b98ab-8e5f-4a44-811d-f7fdb2f95f33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{2f160e51-97f2-4c9e-887c-b109d0054e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EditHelper">
+      <UniqueIdentifier>{858fe288-e0a5-4302-b24b-a0449831ef55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Other\detail">
+      <UniqueIdentifier>{2b2f338b-936d-4262-9a37-d7ee3f66729c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Include.h" />
+    <ClInclude Include="..\src\EditHelper\Version.h">
+      <Filter>EditHelper</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
