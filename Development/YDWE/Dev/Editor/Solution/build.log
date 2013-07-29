@@ -1,0 +1,2354 @@
+"建立日期 2013-07-12 星期五"
+"清理bin目录" 
+"清理obj目录" 
+"清理lib目录" 
+"清理publish目录" 
+"正在重新构建YDWE：Release|Win32" 
+1>------ 已启动全部重新生成: 项目: YDWEBase, 配置: Release Win32 ------
+2>------ 已启动全部重新生成: 项目: YDWECommon, 配置: Release Win32 ------
+3>------ 已启动全部重新生成: 项目: YDDllFixer, 配置: Release Win32 ------
+1>生成启动时间为 2013-7-12 21:35:54。
+2>生成启动时间为 2013-7-12 21:35:54。
+3>生成启动时间为 2013-7-12 21:35:54。
+3>_PrepareForClean:
+3>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDDllFixer\..\..\Build\obj\Win32\YDDllFixer\Release\YDDllFixer.lastbuildstate”。
+3>PrepareForBuild:
+3>  正在创建目录“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDDllFixer\..\..\Build\bin\Release\plugin\”。
+3>InitializeBuildStatus:
+3>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDDllFixer\..\..\Build\obj\Win32\YDDllFixer\Release\YDDllFixer.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+2>_PrepareForClean:
+2>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWECommon\..\..\Build\obj\Win32\YDWECommon\Release\YDWECommon.lastbuildstate”。
+2>InitializeBuildStatus:
+2>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWECommon\..\..\Build\obj\Win32\YDWECommon\Release\YDWECommon.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+1>_PrepareForClean:
+1>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEBase\..\..\Build\obj\Win32\YDWEBase\Release\YDWEBase.lastbuildstate”。
+1>PrepareForBuild:
+1>  正在创建目录“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEBase\..\..\Build\bin\Release\bin\”。
+1>InitializeBuildStatus:
+1>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEBase\..\..\Build\obj\Win32\YDWEBase\Release\YDWEBase.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+1>ClCompile:
+2>ClCompile:
+2>  FileResource.cpp
+3>ClCompile:
+3>  DllMain.cpp
+1>  DllMain.cpp
+1>  basic_exception.cpp
+1>  windows_error_string.cpp
+1>  seh_exception.cpp
+1>  windows_exception.cpp
+1>  file_handle.cpp
+1>  file_mapping_handle.cpp
+1>  memory_mapped_file.cpp
+1>  steam.cpp
+2>  InlineHook.cpp
+3>Link:
+3>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDDllFixer\..\..\Build\bin\Release\plugin\YDDllFixer.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDDllFixer\..\..\Build\bin\Release\plugin\YDDllFixer.exp
+3>  正在生成代码
+1>  disassembly.cpp
+3>  已完成代码的生成
+1>  import_address_table.cpp
+2>  Localization.cpp
+1>  inject_dll.cpp
+2>  MemoryPatch.cpp
+1>  memory_protect.cpp
+3>  YDDllFixer.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDDllFixer\..\..\Build\bin\Release\plugin\YDDllFixer.dll
+3>FinalizeBuildStatus:
+3>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDDllFixer\..\..\Build\obj\Win32\YDDllFixer\Release\YDDllFixer.unsuccessfulbuild”。
+2>  MemoryPatternSearch.cpp
+3>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDDllFixer\..\..\Build\obj\Win32\YDDllFixer\Release\YDDllFixer.lastbuildstate”执行 Touch 任务。
+3>
+3>生成成功。
+3>
+1>  replace_pointer.cpp
+3>已用时间 00:00:11.46
+1>  export_address_table.cpp
+4>------ 已启动全部重新生成: 项目: YDTrigger, 配置: Release Win32 ------
+4>生成启动时间为 2013-7-12 21:36:06。
+4>_PrepareForClean:
+4>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTrigger\..\..\Build\obj\Win32\YDTrigger\Release\YDTrigger.lastbuildstate”。
+1>  eat.cpp
+4>InitializeBuildStatus:
+4>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTrigger\..\..\Build\obj\Win32\YDTrigger\Release\YDTrigger.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+4>ClCompile:
+4>  CC_Main_Hook.cpp
+1>  iat.cpp
+2>  PEIATHook.cpp
+4>  ChangeGUIType_Hook.cpp
+1>  iat_manager.cpp
+4>  Common.cpp
+4>  ConvertString.cpp
+1>  inline.cpp
+4>  gb2py.cpp
+1>  filesystem_helper.cpp
+4>  ConvertTriggerName_Hook.cpp
+4>  CC_CountBlock.cpp
+4>  CC_PutActionEx_Hook.cpp
+4>  CC_PutBlock_Action.cpp
+1>  正在编译...
+1>  service.cpp
+4>  CC_PutBlock_Condition.cpp
+4>  CC_PutBlock_Event.cpp
+4>  CC_PutBlock_TimerParameters.cpp
+4>  CC_PutConditionEx.cpp
+1>  console.cpp
+4>  CC_PutEventRegisterEx.cpp
+1>  ansi_codecvt_facet.cpp
+4>  CC_PutExternFuncEx.cpp
+1>  codecvt.cpp
+4>  CC_PutLocal.cpp
+2>  PEMemoryFileInfo.cpp
+4>  CC_PutTrigger_Hook.cpp
+1>  unicode.cpp
+4>  CC_PutVar_Code.cpp
+1>  memory_search.cpp
+1>  string_hash.cpp
+1>  basic_searcher.cpp
+4>  CC_PutVar_Other_Hook.cpp
+1>  hashtable.cpp
+4>  CC_Put_endglobalsHook.cpp
+1>  jass.cpp
+4>  正在编译...
+4>  CC_Put_globalsHook.cpp
+2>  StormLibUtil.cpp
+4>  CC_Put_TriggerLocalVar.cpp
+1>  native_function.cpp
+4>  CC_SP_UserData.cpp
+4>  CC_VarType.cpp
+4>  GetVarType.cpp
+1>  war3_searcher.cpp
+4>  SaveLoadCheck.cpp
+1>  env_variable.cpp
+2>Lib:
+2>  YDWECommon.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWECommon\..\..\Build\lib\Release\YDWECommon.lib
+2>FinalizeBuildStatus:
+2>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWECommon\..\..\Build\obj\Win32\YDWECommon\Release\YDWECommon.unsuccessfulbuild”。
+2>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWECommon\..\..\Build\obj\Win32\YDWECommon\Release\YDWECommon.lastbuildstate”执行 Touch 任务。
+2>
+2>生成成功。
+2>
+2>已用时间 00:00:31.85
+5>------ 已启动全部重新生成: 项目: DuiLib, 配置: Release Win32 ------
+5>生成启动时间为 2013-7-12 21:36:27。
+5>_PrepareForClean:
+4>  CreateYDTriggerImportFile.cpp
+1>  file_version.cpp
+5>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\DuiLib\..\..\Build\obj\Win32\DuiLib\Release\DuiLib.lastbuildstate”。
+4>  detoured.cpp
+5>InitializeBuildStatus:
+5>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\DuiLib\..\..\Build\obj\Win32\DuiLib\Release\DuiLib.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+5>CustomBuild:
+5>  Packaging resources...
+4>  DllMain.cpp
+4>  GetGlobalVarName_Hook.cpp
+4>  GUIID_Table.cpp
+4>  Hashtable.cpp
+1>  pe_reader.cpp
+4>  Hook.cpp
+1>  process.cpp
+4>  locale_compare.cpp
+4>  ReadUI.cpp
+4>  SetGUIId_Hook.cpp
+4>  SetGUI_Hook.cpp
+1>  version.cpp
+4>  ShowError.cpp
+4>  StringHash.cpp
+4>  TriggerParameterDialog_FuncList_Hook.cpp
+4>  正在编译...
+4>  TriggerParameterDialog_Type_Hook.cpp
+1>  convert_real.cpp
+5>  Packaging zip file: D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Release\bin\skin.zip
+5>  Source directory: D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\DuiLib\Resources
+5>    Adding: DialogConfig.xml
+5>    Adding: DialogImportManager.xml
+5>    Adding: scrollbar.xml
+5>    Adding: styles.xml
+5>    Adding: Common\button.png
+5>    Adding: Common\CheckBox.png
+5>    Adding: Common\RadioButton.png
+5>    Adding: Common\scrollbar.png
+5>    Filtering: Common\Thumbs.db
+5>    Adding: Common\CheckButton\checkbox_highlight.png
+5>    Adding: Common\CheckButton\checkbox_normal.png
+5>    Adding: Common\CheckButton\checkbox_pushed.png
+5>    Adding: Common\CheckButton\checkbox_tick_highlight.png
+5>    Adding: Common\CheckButton\checkbox_tick_normal.png
+5>    Adding: Common\CheckButton\checkbox_tick_pushed.png
+5>    Adding: Common\RadioButton\radiobtn_highlight.png
+5>    Adding: Common\RadioButton\radiobtn_normal.png
+5>    Adding: Common\RadioButton\radiobtn_pushed.png
+5>    Adding: Common\RadioButton\radiobtn_tick_highlight.png
+5>    Adding: Common\RadioButton\radiobtn_tick_normal.png
+5>    Adding: Common\RadioButton\radiobtn_tick_pushed.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowdown_down.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowdown_highlight.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowdown_normal.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowleft_down.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowleft_highlight.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowleft_normal.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowright_down.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowright_highlight.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowright_normal.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowup_down.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowup_highlight.png
+5>    Adding: Common\ScrollBar\scrollbar_arrowup_normal.png
+5>    Adding: Common\ScrollBar\scrollbar_bar_down.png
+5>    Adding: Common\ScrollBar\scrollbar_bar_highlight.png
+5>    Adding: Common\ScrollBar\scrollbar_bar_normal.png
+5>    Adding: Common\ScrollBar\scrollbar_bkg.png
+5>    Adding: Common\ScrollBar\scrollbar_horzbar_down.png
+5>    Adding: Common\ScrollBar\scrollbar_horzbar_highlight.png
+5>    Adding: Common\ScrollBar\scrollbar_horzbar_normal.png
+5>    Adding: Common\ScrollBar\scrollbar_horz_bkg.png
+5>    Adding: Icon\file_blue_0.png
+5>    Adding: Icon\file_blue_1.png
+5>    Adding: Icon\file_default.png
+5>    Adding: Icon\file_green_0.png
+5>    Adding: Icon\file_green_1.png
+5>    Adding: Icon\folder_blue_close.png
+5>    Adding: Icon\folder_blue_open.png
+5>    Adding: Icon\folder_red_close.png
+5>    Adding: Icon\folder_red_open.png
+5>    Filtering: Icon\Thumbs.db
+5>  Package completed.
+1>Link:
+1>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEBase\..\..\Build\bin\Release\bin\YDWEBase.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEBase\..\..\Build\bin\Release\bin\YDWEBase.exp
+1>  正在生成代码
+5>ClCompile:
+5>  StdAfx.cpp
+4>Link:
+4>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTrigger\..\..\Build\bin\Release\plugin\YDTrigger.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTrigger\..\..\Build\bin\Release\plugin\YDTrigger.exp
+4>  正在生成代码
+4>  已完成代码的生成
+4>Detours.lib(detours.obj) : warning LNK4099: 未找到 PDB“vc100.pdb”(使用“Detours.lib(detours.obj)”或在“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Release\plugin\vc100.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+4>Detours.lib(disasm.obj) : warning LNK4099: 未找到 PDB“vc100.pdb”(使用“Detours.lib(disasm.obj)”或在“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Release\plugin\vc100.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+4>  YDTrigger.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTrigger\..\..\Build\bin\Release\plugin\YDTrigger.dll
+4>FinalizeBuildStatus:
+4>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTrigger\..\..\Build\obj\Win32\YDTrigger\Release\YDTrigger.unsuccessfulbuild”。
+4>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTrigger\..\..\Build\obj\Win32\YDTrigger\Release\YDTrigger.lastbuildstate”执行 Touch 任务。
+4>
+4>生成成功。
+4>
+4>已用时间 00:00:33.34
+6>------ 已启动全部重新生成: 项目: YDClient, 配置: Release Win32 ------
+6>生成启动时间为 2013-7-12 21:36:40。
+6>_PrepareForClean:
+6>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDClient\..\..\Build\obj\Win32\YDClient\Release\YDClient.lastbuildstate”。
+1>  已完成代码的生成
+6>InitializeBuildStatus:
+6>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDClient\..\..\Build\obj\Win32\YDClient\Release\YDClient.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+6>ClCompile:
+6>  stdafx.cpp
+1>detours.lib(detours.obj) : warning LNK4099: 未找到 PDB“vc100.pdb”(使用“detours.lib(detours.obj)”或在“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Release\bin\vc100.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+1>detours.lib(creatwth.obj) : warning LNK4099: 未找到 PDB“vc100.pdb”(使用“detours.lib(creatwth.obj)”或在“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Release\bin\vc100.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+1>detours.lib(disasm.obj) : warning LNK4099: 未找到 PDB“vc100.pdb”(使用“detours.lib(disasm.obj)”或在“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Release\bin\vc100.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+1>detours.lib(modules.obj) : warning LNK4099: 未找到 PDB“vc100.pdb”(使用“detours.lib(modules.obj)”或在“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Release\bin\vc100.pdb”中寻找)；正在链接对象，如同没有调试信息一样
+1>  YDWEBase.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEBase\..\..\Build\bin\Release\bin\YDWEBase.dll
+1>FinalizeBuildStatus:
+1>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEBase\..\..\Build\obj\Win32\YDWEBase\Release\YDWEBase.unsuccessfulbuild”。
+1>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEBase\..\..\Build\obj\Win32\YDWEBase\Release\YDWEBase.lastbuildstate”执行 Touch 任务。
+1>
+1>生成成功。
+1>
+1>已用时间 00:00:49.03
+6>  CSocket.cpp
+6>  DllMain.cpp
+7>------ 已启动全部重新生成: 项目: SlkLib, 配置: Release Win32 ------
+6>  YDClient.cpp
+7>生成启动时间为 2013-7-12 21:36:43。
+7>_PrepareForClean:
+7>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\SlkLib\..\..\Build\obj\Win32\SlkLib\Release\SlkLib.lastbuildstate”。
+6>Link:
+6>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDClient\..\..\Build\bin\Release\plugin\YDClient.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDClient\..\..\Build\bin\Release\plugin\YDClient.exp
+6>  正在生成代码
+6>  已完成代码的生成
+7>InitializeBuildStatus:
+7>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\SlkLib\..\..\Build\obj\Win32\SlkLib\Release\SlkLib.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+6>  YDClient.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDClient\..\..\Build\bin\Release\plugin\YDClient.dll
+7>ClCompile:
+7>  Attribute.cpp
+6>FinalizeBuildStatus:
+6>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDClient\..\..\Build\obj\Win32\YDClient\Release\YDClient.unsuccessfulbuild”。
+6>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDClient\..\..\Build\obj\Win32\YDClient\Release\YDClient.lastbuildstate”执行 Touch 任务。
+6>
+6>生成成功。
+6>
+6>已用时间 00:00:03.67
+8>------ 已启动全部重新生成: 项目: YDWEInject, 配置: Release Win32 ------
+8>生成启动时间为 2013-7-12 21:36:44。
+8>_PrepareForClean:
+8>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\..\..\Build\obj\Win32\YDWEInject\Release\YDWEInject.lastbuildstate”。
+8>InitializeBuildStatus:
+8>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\..\..\Build\obj\Win32\YDWEInject\Release\YDWEInject.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+8>ClCompile:
+8>  DllMain.cpp
+7>  BaseAbilityList.cpp
+7>  ConvertTable.cpp
+7>  DllMain.cpp
+7>  IniReader.cpp
+7>  MetaReader.cpp
+7>  MetaTable.cpp
+7>  ObjectManager.cpp
+7>  ObjReader.cpp
+8>  YDWEEditorNativeFunction.cpp
+7>  SlkReader.cpp
+7>  TxtReader.cpp
+7>  VariableData.cpp
+8>  YDWEEvent.cpp
+7>  WesReader.cpp
+7>  WtsReader.cpp
+7>Link:
+7>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\SlkLib\..\..\Build\bin\Release\bin\SlkLib.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\SlkLib\..\..\Build\bin\Release\bin\SlkLib.exp
+7>  正在生成代码
+8>  YDWEHook.cpp
+7>  已完成代码的生成
+7>  SlkLib.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\SlkLib\..\..\Build\bin\Release\bin\SlkLib.dll
+7>FinalizeBuildStatus:
+7>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\SlkLib\..\..\Build\obj\Win32\SlkLib\Release\SlkLib.unsuccessfulbuild”。
+7>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\SlkLib\..\..\Build\obj\Win32\SlkLib\Release\SlkLib.lastbuildstate”执行 Touch 任务。
+7>
+7>生成成功。
+7>
+7>已用时间 00:00:28.57
+9>------ 已启动全部重新生成: 项目: yd_leak_monitor, 配置: Release Win32 ------
+9>生成启动时间为 2013-7-12 21:37:12。
+9>_PrepareForClean:
+9>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_leak_monitor\..\..\..\Build\obj\Win32\yd_leak_monitor\Release\yd_leak_monitor.lastbuildstate”。
+9>PrepareForBuild:
+9>  正在创建目录“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_leak_monitor\..\..\..\Build\bin\Release\plugin\warcraft3\”。
+9>InitializeBuildStatus:
+9>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_leak_monitor\..\..\..\Build\obj\Win32\yd_leak_monitor\Release\yd_leak_monitor.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+9>ClCompile:
+9>  DllMain.cpp
+9>Link:
+9>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_leak_monitor\..\..\..\Build\bin\Release\plugin\warcraft3\yd_leak_monitor.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_leak_monitor\..\..\..\Build\bin\Release\plugin\warcraft3\yd_leak_monitor.exp
+9>  正在生成代码
+9>  已完成代码的生成
+9>  yd_leak_monitor.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_leak_monitor\..\..\..\Build\bin\Release\plugin\warcraft3\yd_leak_monitor.dll
+9>FinalizeBuildStatus:
+9>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_leak_monitor\..\..\..\Build\obj\Win32\yd_leak_monitor\Release\yd_leak_monitor.unsuccessfulbuild”。
+9>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_leak_monitor\..\..\..\Build\obj\Win32\yd_leak_monitor\Release\yd_leak_monitor.lastbuildstate”执行 Touch 任务。
+9>
+9>生成成功。
+9>
+9>已用时间 00:00:01.90
+10>------ 已启动全部重新生成: 项目: yd_jass_api, 配置: Release Win32 ------
+10>生成启动时间为 2013-7-12 21:37:14。
+10>_PrepareForClean:
+10>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_jass_api\..\..\..\Build\obj\Win32\yd_jass_api\Release\yd_jass_api.lastbuildstate”。
+10>InitializeBuildStatus:
+10>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_jass_api\..\..\..\Build\obj\Win32\yd_jass_api\Release\yd_jass_api.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+10>ClCompile:
+10>  AbilityState.cpp
+10>  DllMain.cpp
+10>  EventDamageData.cpp
+10>  UnitState.cpp
+8>  YDWELogger.cpp
+10>  DisplayChat.cpp
+10>Link:
+10>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_jass_api\..\..\..\Build\bin\Release\plugin\warcraft3\yd_jass_api.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_jass_api\..\..\..\Build\bin\Release\plugin\warcraft3\yd_jass_api.exp
+10>  正在生成代码
+10>  已完成代码的生成
+10>  yd_jass_api.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_jass_api\..\..\..\Build\bin\Release\plugin\warcraft3\yd_jass_api.dll
+10>FinalizeBuildStatus:
+10>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_jass_api\..\..\..\Build\obj\Win32\yd_jass_api\Release\yd_jass_api.unsuccessfulbuild”。
+10>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_jass_api\..\..\..\Build\obj\Win32\yd_jass_api\Release\yd_jass_api.lastbuildstate”执行 Touch 任务。
+10>
+10>生成成功。
+10>
+10>已用时间 00:00:04.90
+11>------ 已启动全部重新生成: 项目: yd_mutil_warcraft3, 配置: Release Win32 ------
+11>生成启动时间为 2013-7-12 21:37:19。
+11>_PrepareForClean:
+11>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_mutil_warcraft3\..\..\..\Build\obj\Win32\yd_mutil_warcraft3\Release\yd_mutil_warcraft3.lastbuildstate”。
+11>InitializeBuildStatus:
+11>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_mutil_warcraft3\..\..\..\Build\obj\Win32\yd_mutil_warcraft3\Release\yd_mutil_warcraft3.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+11>ClCompile:
+11>  DllMain.cpp
+11>  MultiWar3.cpp
+8>  YDWEScript.cpp
+11>Link:
+11>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_mutil_warcraft3\..\..\..\Build\bin\Release\plugin\warcraft3\yd_mutil_warcraft3.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_mutil_warcraft3\..\..\..\Build\bin\Release\plugin\warcraft3\yd_mutil_warcraft3.exp
+11>  正在生成代码
+8>YDWEScript.cpp(164): warning C4244: “=”: 从“lua_Number”转换到“int”，可能丢失数据
+11>  已完成代码的生成
+11>  yd_mutil_warcraft3.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_mutil_warcraft3\..\..\..\Build\bin\Release\plugin\warcraft3\yd_mutil_warcraft3.dll
+11>FinalizeBuildStatus:
+11>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_mutil_warcraft3\..\..\..\Build\obj\Win32\yd_mutil_warcraft3\Release\yd_mutil_warcraft3.unsuccessfulbuild”。
+11>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_mutil_warcraft3\..\..\..\Build\obj\Win32\yd_mutil_warcraft3\Release\yd_mutil_warcraft3.lastbuildstate”执行 Touch 任务。
+11>
+11>生成成功。
+11>
+11>已用时间 00:00:12.64
+12>------ 已启动全部重新生成: 项目: yd_loader, 配置: Release Win32 ------
+12>生成启动时间为 2013-7-12 21:37:32。
+12>_PrepareForClean:
+12>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_loader\..\..\..\Build\obj\Win32\yd_loader\Release\yd_loader.lastbuildstate”。
+5>  ioapi.c
+12>InitializeBuildStatus:
+12>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_loader\..\..\..\Build\obj\Win32\yd_loader\Release\yd_loader.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+12>ClCompile:
+12>  FullWindowedMode.cpp
+5>  iowin32.c
+5>  mztools.c
+5>  unzip.c
+5>  zip.c
+5>  UICheckBox.cpp
+5>  UIImage.cpp
+5>  UIImageInfo.cpp
+5>  UITooltip.cpp
+5>  UIlib.cpp
+5>  FrameWindow.cpp
+5>  UIFile.cpp
+5>  WinImplBase.cpp
+5>  UIDelegate.cpp
+5>  Utils.cpp
+5>  UIBase.cpp
+5>  UIContainer.cpp
+5>  UIControl.cpp
+5>  UIDlgBuilder.cpp
+8>Link:
+8>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\..\..\Build\bin\Release\bin\YDWEInject.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\..\..\Build\bin\Release\bin\YDWEInject.exp
+8>  正在生成代码
+5>  UIManager.cpp
+5>  UIMarkup.cpp
+5>  UIRender.cpp
+5>  UIChildLayout.cpp
+5>  UIHorizontalLayout.cpp
+5>  UITabLayout.cpp
+5>  正在编译...
+5>  UITileLayout.cpp
+5>  UIVerticalLayout.cpp
+5>  UIActiveX.cpp
+5>  UIButton.cpp
+5>  UIRadioButton.cpp
+5>  UICombo.cpp
+5>  UIComboBox.cpp
+5>  UIDateTime.cpp
+5>  UIEdit.cpp
+5>  UILabel.cpp
+5>  UIList.cpp
+5>  UIProgress.cpp
+5>  UIRichEdit.cpp
+5>  UIScrollBar.cpp
+5>  UISlider.cpp
+5>  UIText.cpp
+5>  UITreeView.cpp
+5>  UIWebBrowser.cpp
+12>  LockingMouse.cpp
+8>  已完成代码的生成
+5>  stb_image.c
+8>  YDWEInject.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\..\..\Build\bin\Release\bin\YDWEInject.dll
+8>PostBuildEvent:
+8>  Description: Copy dependencies...
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\Boost\1.53\stage\lib\Win32\boost_system-vc100-mt-1_53.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\Boost\1.53\stage\lib\Win32\boost_filesystem-vc100-mt-1_53.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\Boost\1.53\stage\lib\Win32\boost_date_time-vc100-mt-1_53.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\Boost\1.53\stage\lib\Win32\boost_thread-vc100-mt-1_53.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\LibIconv\Current\bin\Win32\DebugRelease\cygiconv-2.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\GetText\Current\bin\Win32\DebugRelease\cygintl-8.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\APR\Current\bin\Win32\Release\libapr-1.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\APR-Util\Current\bin\Win32\Release\libaprutil-1.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\Log4CXX\Current\bin\Win32\Release\log4cxx.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\Zlib\Current\bin\Win32\Release\zlib1.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\Lua\Current\bin\Win32\Release\luacore.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\LuaBind\Current\bin\Win32\Release\luabind.dll
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\LuaDotNet\Current\bin\Win32\Release\luadotnet.dll
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\..\..\..\..\..\OpenSource\LuaDotNet\Current\bin\Win32\Release\LuaInterface.dll
+8>  复制了 2 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\Script\YDLogger.cfg
+8>  复制了 1 个文件
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\Script\YDWE.lua
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\Script\ydwe_on_menu.lua
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\Script\ydwe_on_save.lua
+8>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\\..\Script\ydwe_on_startup.lua
+8>  复制了 4 个文件
+8>FinalizeBuildStatus:
+8>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\..\..\Build\obj\Win32\YDWEInject\Release\YDWEInject.unsuccessfulbuild”。
+8>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEInject\..\..\Build\obj\Win32\YDWEInject\Release\YDWEInject.lastbuildstate”执行 Touch 任务。
+8>
+8>生成成功。
+8>
+8>已用时间 00:00:59.43
+5>  zip_internal.cpp
+12>  ParseCommandLine.cpp
+13>------ 已启动全部重新生成: 项目: yd_lua_engine, 配置: Release Win32 ------
+13>生成启动时间为 2013-7-12 21:37:44。
+13>_PrepareForClean:
+13>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_lua_engine\..\..\..\Build\obj\Win32\yd_lua_engine\Release\yd_lua_engine.lastbuildstate”。
+13>InitializeBuildStatus:
+13>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_lua_engine\..\..\..\Build\obj\Win32\yd_lua_engine\Release\yd_lua_engine.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+12>  DllMain.cpp
+5>  zip_reader.cpp
+13>ClCompile:
+13>  lapi.c
+13>  lauxlib.c
+13>  lbaselib.c
+13>  lbitlib.c
+13>  lcode.c
+13>  lcorolib.c
+13>  lctype.c
+13>  ldblib.c
+13>  ldebug.c
+13>  ldo.c
+13>  ldump.c
+13>  lfunc.c
+13>  lgc.c
+13>  linit.c
+13>  liolib.c
+13>  llex.c
+13>  lmathlib.c
+13>  lmem.c
+13>  loadlib.c
+13>  lobject.c
+13>  正在编译...
+13>  lopcodes.c
+13>  loslib.c
+13>  lparser.c
+13>  lstate.c
+13>  lstring.c
+13>  lstrlib.c
+13>  ltable.c
+13>  ltablib.c
+13>  ltm.c
+13>  lundump.c
+13>  lvm.c
+13>  lzio.c
+13>  DllMain.cpp
+12>  DllModule.cpp
+13>  helper.cpp
+13>  jassbind.cpp
+13>  callback.cpp
+13>  jump_func.cpp
+13>  libs_japi.cpp
+13>  libs_jass.cpp
+13>  libs_jass_ext.cpp
+13>  lua_loader.cpp
+13>  opcode.cpp
+13>  storm.cpp
+5>Link:
+5>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\DuiLib\..\..\Build\bin\Release\bin\DuiLib.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\DuiLib\..\..\Build\bin\Release\bin\DuiLib.exp
+5>  正在生成代码
+12>Link:
+12>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_loader\..\..\..\Build\bin\Release\plugin\warcraft3\yd_loader.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_loader\..\..\..\Build\bin\Release\plugin\warcraft3\yd_loader.exp
+12>  正在生成代码
+12>  已完成代码的生成
+12>  yd_loader.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_loader\..\..\..\Build\bin\Release\plugin\warcraft3\yd_loader.dll
+12>FinalizeBuildStatus:
+12>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_loader\..\..\..\Build\obj\Win32\yd_loader\Release\yd_loader.unsuccessfulbuild”。
+12>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_loader\..\..\..\Build\obj\Win32\yd_loader\Release\yd_loader.lastbuildstate”执行 Touch 任务。
+12>
+12>生成成功。
+12>
+12>已用时间 00:00:27.92
+14>------ 已启动全部重新生成: 项目: mapanalyzer, 配置: Release Win32 ------
+14>生成启动时间为 2013-7-12 21:38:00。
+14>_PrepareForClean:
+14>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\mapanalyzer\..\..\..\Build\obj\Win32\mapanalyzer\Release\mapanalyzer.lastbuildstate”。
+14>InitializeBuildStatus:
+14>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\mapanalyzer\..\..\..\Build\obj\Win32\mapanalyzer\Release\mapanalyzer.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+14>ClCompile:
+14>  DllMain.cpp
+14>  luaopen_mapanalyzer.cpp
+5>  已完成代码的生成
+13>Link:
+13>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_lua_engine\..\..\..\Build\bin\Release\plugin\warcraft3\yd_lua_engine.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_lua_engine\..\..\..\Build\bin\Release\plugin\warcraft3\yd_lua_engine.exp
+13>  正在生成代码
+13>  已完成代码的生成
+5>  DuiLib.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\DuiLib\..\..\Build\bin\Release\bin\DuiLib.dll
+5>FinalizeBuildStatus:
+5>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\DuiLib\..\..\Build\obj\Win32\DuiLib\Release\DuiLib.unsuccessfulbuild”。
+5>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\DuiLib\..\..\Build\obj\Win32\DuiLib\Release\DuiLib.lastbuildstate”执行 Touch 任务。
+5>
+5>生成成功。
+5>
+5>已用时间 00:01:39.06
+13>  yd_lua_engine.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_lua_engine\..\..\..\Build\bin\Release\plugin\warcraft3\yd_lua_engine.dll
+13>FinalizeBuildStatus:
+13>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_lua_engine\..\..\..\Build\obj\Win32\yd_lua_engine\Release\yd_lua_engine.unsuccessfulbuild”。
+13>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\Warcraft3\yd_lua_engine\..\..\..\Build\obj\Win32\yd_lua_engine\Release\yd_lua_engine.lastbuildstate”执行 Touch 任务。
+13>
+13>生成成功。
+13>
+13>已用时间 00:00:22.25
+15>------ 已启动全部重新生成: 项目: YDTaskbarSupport, 配置: Release Win32 ------
+15>生成启动时间为 2013-7-12 21:38:07。
+15>_PrepareForClean:
+15>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTaskbarSupport\..\..\Build\obj\Win32\YDTaskbarSupport\Release\YDTaskbarSupport.lastbuildstate”。
+15>InitializeBuildStatus:
+15>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTaskbarSupport\..\..\Build\obj\Win32\YDTaskbarSupport\Release\YDTaskbarSupport.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+15>ClCompile:
+15>  DllMain.cpp
+16>------ 已启动全部重新生成: 项目: sys, 配置: Release Win32 ------
+16>生成启动时间为 2013-7-12 21:38:07。
+16>_PrepareForClean:
+16>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\sys\..\..\..\Build\obj\Win32\sys\Release\sys.lastbuildstate”。
+16>InitializeBuildStatus:
+16>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\sys\..\..\..\Build\obj\Win32\sys\Release\sys.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+16>ClCompile:
+16>  DllMain.cpp
+14>Link:
+14>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\mapanalyzer\..\..\..\Build\bin\Release\bin\modules\mapanalyzer.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\mapanalyzer\..\..\..\Build\bin\Release\bin\modules\mapanalyzer.exp
+14>  正在生成代码
+15>  JumpList.cpp
+14>  已完成代码的生成
+14>  mapanalyzer.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\mapanalyzer\..\..\..\Build\bin\Release\bin\modules\mapanalyzer.dll
+14>FinalizeBuildStatus:
+14>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\mapanalyzer\..\..\..\Build\obj\Win32\mapanalyzer\Release\mapanalyzer.unsuccessfulbuild”。
+14>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\mapanalyzer\..\..\..\Build\obj\Win32\mapanalyzer\Release\mapanalyzer.lastbuildstate”执行 Touch 任务。
+14>
+14>生成成功。
+14>
+14>已用时间 00:00:11.59
+17>------ 已启动全部重新生成: 项目: filesystem, 配置: Release Win32 ------
+17>生成启动时间为 2013-7-12 21:38:12。
+17>_PrepareForClean:
+17>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\filesystem\..\..\..\Build\obj\Win32\filesystem\Release\filesystem.lastbuildstate”。
+17>InitializeBuildStatus:
+17>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\filesystem\..\..\..\Build\obj\Win32\filesystem\Release\filesystem.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+17>ClCompile:
+17>  DllMain.cpp
+15>  Windows7.cpp
+16>  luaopen_sys.cpp
+17>  luaopen_filesystem.cpp
+16>Link:
+16>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\sys\..\..\..\Build\bin\Release\bin\modules\sys.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\sys\..\..\..\Build\bin\Release\bin\modules\sys.exp
+16>  正在生成代码
+15>Link:
+15>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTaskbarSupport\..\..\Build\bin\Release\plugin\YDTaskbarSupport.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTaskbarSupport\..\..\Build\bin\Release\plugin\YDTaskbarSupport.exp
+15>  正在生成代码
+15>  已完成代码的生成
+17>Link:
+17>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\filesystem\..\..\..\Build\bin\Release\bin\modules\filesystem.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\filesystem\..\..\..\Build\bin\Release\bin\modules\filesystem.exp
+17>  正在生成代码
+17>  已完成代码的生成
+15>  YDTaskbarSupport.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTaskbarSupport\..\..\Build\bin\Release\plugin\YDTaskbarSupport.dll
+15>FinalizeBuildStatus:
+15>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTaskbarSupport\..\..\Build\obj\Win32\YDTaskbarSupport\Release\YDTaskbarSupport.unsuccessfulbuild”。
+15>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTaskbarSupport\..\..\Build\obj\Win32\YDTaskbarSupport\Release\YDTaskbarSupport.lastbuildstate”执行 Touch 任务。
+15>
+15>生成成功。
+15>
+15>已用时间 00:00:24.50
+17>  filesystem.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\filesystem\..\..\..\Build\bin\Release\bin\modules\filesystem.dll
+18>------ 已启动全部重新生成: 项目: ar_stormlib, 配置: Release Win32 ------
+18>生成启动时间为 2013-7-12 21:38:31。
+18>_PrepareForClean:
+18>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\ar_stormlib\..\..\..\Build\obj\Win32\ar_stormlib\Release\ar_stormlib.lastbuildstate”。
+17>FinalizeBuildStatus:
+17>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\filesystem\..\..\..\Build\obj\Win32\filesystem\Release\filesystem.unsuccessfulbuild”。
+17>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\filesystem\..\..\..\Build\obj\Win32\filesystem\Release\filesystem.lastbuildstate”执行 Touch 任务。
+17>
+17>生成成功。
+17>
+17>已用时间 00:00:19.04
+18>InitializeBuildStatus:
+18>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\ar_stormlib\..\..\..\Build\obj\Win32\ar_stormlib\Release\ar_stormlib.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+18>ClCompile:
+18>  DllMain.cpp
+16>  已完成代码的生成
+19>------ 已启动全部重新生成: 项目: YDWEConfig, 配置: Release Win32 ------
+19>生成启动时间为 2013-7-12 21:38:32。
+19>_PrepareForClean:
+19>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEConfig\..\..\Build\obj\Win32\YDWEConfig\Release\YDWEConfig.lastbuildstate”。
+19>InitializeBuildStatus:
+19>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEConfig\..\..\Build\obj\Win32\YDWEConfig\Release\YDWEConfig.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+19>ClCompile:
+19>  Main.cpp
+19>  MainWindow.cpp
+18>  luaopen_ar_stormlib.cpp
+19>  Regedit.cpp
+19>  Shortcuts.cpp
+19>  Warcraft3Directory.cpp
+18>Link:
+18>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\ar_stormlib\..\..\..\Build\bin\Release\bin\modules\ar_stormlib.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\ar_stormlib\..\..\..\Build\bin\Release\bin\modules\ar_stormlib.exp
+18>  正在生成代码
+18>  已完成代码的生成
+18>  ar_stormlib.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\ar_stormlib\..\..\..\Build\bin\Release\bin\modules\ar_stormlib.dll
+18>FinalizeBuildStatus:
+18>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\ar_stormlib\..\..\..\Build\obj\Win32\ar_stormlib\Release\ar_stormlib.unsuccessfulbuild”。
+18>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\ar_stormlib\..\..\..\Build\obj\Win32\ar_stormlib\Release\ar_stormlib.lastbuildstate”执行 Touch 任务。
+18>
+18>生成成功。
+18>
+18>已用时间 00:00:33.17
+20>------ 已启动全部重新生成: 项目: YDCustomObjectId, 配置: Release Win32 ------
+20>生成启动时间为 2013-7-12 21:39:05。
+20>_PrepareForClean:
+20>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDCustomObjectId\..\..\Build\obj\Win32\YDCustomObjectId\Release\YDCustomObjectId.lastbuildstate”。
+20>InitializeBuildStatus:
+20>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDCustomObjectId\..\..\Build\obj\Win32\YDCustomObjectId\Release\YDCustomObjectId.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+20>ClCompile:
+20>  CustomObjectIdHook.cpp
+19>  LaunchWarcraft3.cpp
+16>  sys.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\sys\..\..\..\Build\bin\Release\bin\modules\sys.dll
+16>FinalizeBuildStatus:
+16>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\sys\..\..\..\Build\obj\Win32\sys\Release\sys.unsuccessfulbuild”。
+16>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELuaModule\sys\..\..\..\Build\obj\Win32\sys\Release\sys.lastbuildstate”执行 Touch 任务。
+16>
+16>生成成功。
+16>
+16>已用时间 00:01:10.39
+21>------ 已启动全部重新生成: 项目: YDFont, 配置: Release Win32 ------
+21>生成启动时间为 2013-7-12 21:39:19。
+21>_PrepareForClean:
+21>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFont\..\..\Build\obj\Win32\YDFont\Release\YDFont.lastbuildstate”。
+19>Link:
+19>  正在生成代码
+21>PrepareForBuild:
+21>  正在创建目录“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFont\..\..\Build\bin\Release\plugin\YDFont\”。
+21>InitializeBuildStatus:
+21>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFont\..\..\Build\obj\Win32\YDFont\Release\YDFont.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+21>ClCompile:
+21>  FontManager.cpp
+19>  已完成代码的生成
+19>  YDWEConfig.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEConfig\..\..\Build\bin\Release\bin\YDWEConfig.exe
+19>FinalizeBuildStatus:
+19>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEConfig\..\..\Build\obj\Win32\YDWEConfig\Release\YDWEConfig.unsuccessfulbuild”。
+19>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEConfig\..\..\Build\obj\Win32\YDWEConfig\Release\YDWEConfig.lastbuildstate”执行 Touch 任务。
+19>
+19>生成成功。
+19>
+19>已用时间 00:00:56.87
+22>------ 已启动全部重新生成: 项目: YDTileLimitBreaker, 配置: Release Win32 ------
+22>生成启动时间为 2013-7-12 21:39:29。
+22>_PrepareForClean:
+22>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTileLimitBreaker\..\..\Build\obj\Win32\YDTileLimitBreaker\Release\YDTileLimitBreaker.lastbuildstate”。
+21>  DllMain.cpp
+22>InitializeBuildStatus:
+22>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTileLimitBreaker\..\..\Build\obj\Win32\YDTileLimitBreaker\Release\YDTileLimitBreaker.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+22>ClCompile:
+22>  DllMain.cpp
+20>  DllMain.cpp
+21>  XFont.cpp
+20>Link:
+20>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDCustomObjectId\..\..\Build\bin\Release\plugin\YDCustomObjectId.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDCustomObjectId\..\..\Build\bin\Release\plugin\YDCustomObjectId.exp
+20>  正在生成代码
+20>  已完成代码的生成
+22>  YDTileLimitBreakerThread.cpp
+20>  YDCustomObjectId.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDCustomObjectId\..\..\Build\bin\Release\plugin\YDCustomObjectId.dll
+20>FinalizeBuildStatus:
+20>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDCustomObjectId\..\..\Build\obj\Win32\YDCustomObjectId\Release\YDCustomObjectId.unsuccessfulbuild”。
+20>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDCustomObjectId\..\..\Build\obj\Win32\YDCustomObjectId\Release\YDCustomObjectId.lastbuildstate”执行 Touch 任务。
+20>
+20>生成成功。
+20>
+20>已用时间 00:00:37.35
+23>------ 已启动全部重新生成: 项目: YDFirewall, 配置: Release Win32 ------
+23>生成启动时间为 2013-7-12 21:39:43。
+23>_PrepareForClean:
+23>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFirewall\..\..\Build\obj\Win32\YDFirewall\Release\YDFirewall.lastbuildstate”。
+23>InitializeBuildStatus:
+23>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFirewall\..\..\Build\obj\Win32\YDFirewall\Release\YDFirewall.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+23>ClCompile:
+23>  FireWall.cpp
+21>Link:
+21>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFont\..\..\Build\bin\Release\plugin\YDFont\YDFont.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFont\..\..\Build\bin\Release\plugin\YDFont\YDFont.exp
+21>  正在生成代码
+21>  已完成代码的生成
+21>  YDFont.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFont\..\..\Build\bin\Release\plugin\YDFont\YDFont.dll
+21>FinalizeBuildStatus:
+21>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFont\..\..\Build\obj\Win32\YDFont\Release\YDFont.unsuccessfulbuild”。
+21>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFont\..\..\Build\obj\Win32\YDFont\Release\YDFont.lastbuildstate”执行 Touch 任务。
+21>
+21>生成成功。
+21>
+21>已用时间 00:00:28.35
+24>------ 已启动全部重新生成: 项目: YDInternalIDShow, 配置: Release Win32 ------
+24>生成启动时间为 2013-7-12 21:39:49。
+24>_PrepareForClean:
+24>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDInternalIDShow\..\..\Build\obj\Win32\YDInternalIDShow\Release\YDInternalIDShow.lastbuildstate”。
+23>  Main.cpp
+24>InitializeBuildStatus:
+24>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDInternalIDShow\..\..\Build\obj\Win32\YDInternalIDShow\Release\YDInternalIDShow.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+24>ClCompile:
+24>  DllMain.cpp
+24>Link:
+24>  正在生成代码
+24>  已完成代码的生成
+24>  YDInternalIDShow.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDInternalIDShow\..\..\Build\bin\Release\plugin\YDInternalIDShow.dll
+24>FinalizeBuildStatus:
+24>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDInternalIDShow\..\..\Build\obj\Win32\YDInternalIDShow\Release\YDInternalIDShow.unsuccessfulbuild”。
+24>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDInternalIDShow\..\..\Build\obj\Win32\YDInternalIDShow\Release\YDInternalIDShow.lastbuildstate”执行 Touch 任务。
+24>
+24>生成成功。
+24>
+24>已用时间 00:00:18.60
+25>------ 已启动全部重新生成: 项目: YDWELua, 配置: Release Win32 ------
+25>生成启动时间为 2013-7-12 21:40:07。
+25>_PrepareForClean:
+25>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELua\..\..\Build\obj\Win32\YDWELua\Release\YDWELua.lastbuildstate”。
+25>InitializeBuildStatus:
+25>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELua\..\..\Build\obj\Win32\YDWELua\Release\YDWELua.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+25>ClCompile:
+25>  DllMain.cpp
+23>  Win7FireWall.cpp
+23>  WinXPSP2FireWall.cpp
+23>Link:
+23>  正在生成代码
+23>  已完成代码的生成
+23>  YDFirewall.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFirewall\..\..\Build\bin\Release\bin\YDFirewall.exe
+23>FinalizeBuildStatus:
+23>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFirewall\..\..\Build\obj\Win32\YDFirewall\Release\YDFirewall.unsuccessfulbuild”。
+23>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDFirewall\..\..\Build\obj\Win32\YDFirewall\Release\YDFirewall.lastbuildstate”执行 Touch 任务。
+23>
+23>生成成功。
+23>
+23>已用时间 00:00:45.15
+26>------ 已启动全部重新生成: 项目: YDWEStartup, 配置: Release Win32 ------
+26>生成启动时间为 2013-7-12 21:40:29。
+26>_PrepareForClean:
+26>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEStartup\..\..\Build\obj\Win32\YDWEStartup\Release\YDWEStartup.lastbuildstate”。
+26>InitializeBuildStatus:
+26>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEStartup\..\..\Build\obj\Win32\YDWEStartup\Release\YDWEStartup.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+26>ClCompile:
+26>  DllMain.cpp
+25>  MSVCRTFunction.cpp
+25>  YDWELuaLibrary.cpp
+26>  FileCheck.cpp
+25>  YDWELuaLibraryIconv.cpp
+25>YDWELuaLibraryIconv.cpp(183): warning C4018: “<”: 有符号/无符号不匹配
+26>  md5.cpp
+22>Link:
+22>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTileLimitBreaker\..\..\Build\bin\Release\plugin\YDTileLimitBreaker.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTileLimitBreaker\..\..\Build\bin\Release\plugin\YDTileLimitBreaker.exp
+22>  正在生成代码
+22>  已完成代码的生成
+26>Link:
+26>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEStartup\..\..\Build\bin\Release\bin\YDWEStartup.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEStartup\..\..\Build\bin\Release\bin\YDWEStartup.exp
+26>  正在生成代码
+25>Link:
+25>     正在创建库 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELua\..\..\Build\bin\Release\bin\modules\YDWELua.lib 和对象 D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELua\..\..\Build\bin\Release\bin\modules\YDWELua.exp
+25>  正在生成代码
+25>  已完成代码的生成
+22>  YDTileLimitBreaker.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTileLimitBreaker\..\..\Build\bin\Release\plugin\YDTileLimitBreaker.dll
+25>  YDWELua.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELua\..\..\Build\bin\Release\bin\modules\YDWELua.dll
+25>PostBuildEvent:
+25>  Description: Copy dependencies...
+25>  复制了 0 个文件
+25>  复制了 0 个文件
+25>  复制了 0 个文件
+25>  复制了 0 个文件
+25>  复制了 0 个文件
+25>  复制了 0 个文件
+25>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELua\\..\..\..\..\..\..\OpenSource\StormLib\Current\bin\Win32\Release\StormLib.dll
+25>  复制了 1 个文件
+25>FinalizeBuildStatus:
+25>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELua\..\..\Build\obj\Win32\YDWELua\Release\YDWELua.unsuccessfulbuild”。
+25>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWELua\..\..\Build\obj\Win32\YDWELua\Release\YDWELua.lastbuildstate”执行 Touch 任务。
+25>
+25>生成成功。
+25>
+25>已用时间 00:01:19.28
+22>FinalizeBuildStatus:
+22>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTileLimitBreaker\..\..\Build\obj\Win32\YDTileLimitBreaker\Release\YDTileLimitBreaker.unsuccessfulbuild”。
+22>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDTileLimitBreaker\..\..\Build\obj\Win32\YDTileLimitBreaker\Release\YDTileLimitBreaker.lastbuildstate”执行 Touch 任务。
+22>
+22>生成成功。
+22>
+22>已用时间 00:01:57.47
+27>------ 已启动全部重新生成: 项目: YDWE, 配置: Release Win32 ------
+27>生成启动时间为 2013-7-12 21:41:27。
+27>_PrepareForClean:
+27>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\..\..\Build\obj\Win32\YDWE\Release\YDWE.lastbuildstate”。
+27>InitializeBuildStatus:
+27>  正在创建“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\..\..\Build\obj\Win32\YDWE\Release\YDWE.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+27>ClCompile:
+27>  Main.cpp
+27>Link:
+27>  正在生成代码
+27>  已完成代码的生成
+27>  YDWE.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\..\..\Build\bin\Release\YDWE.exe
+27>PostBuildEvent:
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\建议、BUG反馈.url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\bin\CJassHelper.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\bin\logo.ico
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\bin\sfmpq.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\bin\splash.bmp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\bin\worldedit.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\bin\modules\ffi.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\综合——UI测试地图1.19.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\说明.txt
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\AI\AI——RPG佣兵AI.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\AI\AI——自动学习技能.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\JAPI\伤害属性.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\JAPI\技能属性.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\JAPI\获取攻击和护甲.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\事件\事件——任意单位伤害事件-显示伤害.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\其他\Lua版-计时器-圣光.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\其他\ScriptSystem-获得WC3大奖的电影系统(By YDWE).w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\其他\新增的魔兽隐藏资源.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\函数\函数——获取护甲.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\存储\存储系统-CD中物品不能丢弃(新增局部变量).w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\存储\禁止移动物品.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\存档\演示-存档系统(复杂版).w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\存档\演示-存档系统(简化版).w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\存档\演示-网游（服务器存档）.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\存档\註冊.reg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\存档\说明.txt
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\技能\技能——[Demo] Around - 单位环绕模板 [技能召集].w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\技能\技能——[Demo] Around - 经典单位环绕演示 [Fetrix_sai].w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\技能\技能——月神箭、跳劈、冲锋(Warft_TigerCN原作，fetrix_sai修正版) v1.3.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\技能\技能——跳跃（空格键释放技能）.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\技能\技能——钩子.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\物体编辑器\第一课-简单的演示.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\物体编辑器\第三课-物体编辑器数据的读取.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\物体编辑器\第二课-lua模版基础.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\物体编辑器\第四课-完整的演示.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\物体编辑器\第零课-说明.txt
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\特效\特效——单位环绕.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\系统\[Demo]新中心计时器-YDWE储存系统应用-复活系统 [Fetrix_sai].w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\系统\中心计时器-单位头上飘字.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\系统\中心计时器-单位环绕(全局变量版).w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\系统\新中心计时器 - 野蛮冲撞 [Fetrix_sai]_YDWE.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\系统\新中心计时器-单位环绕[Fetrix_sai].w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\系统\系统——3C刷兵.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\系统\系统——万能属性系统.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\系统\系统——泄漏检测.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\系统\系统——翻页保留属性的多重物品栏.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\系统\系统——通用物品合成 v1.03[Fetrix_sai].w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\逆天\演示-新局部变量.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\逆天\逆天-计时器-英雄复活.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\逆天\逆天功能-CD中物品不能丢弃(新增局部变量).w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\逆天\逆天功能-动态注册触发器.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\逆天\逆天功能-局部变量循环-不冲突的计数.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\逆天\逆天功能-按Esc生成随机数.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\逆天\逆天功能-触发器休眠.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\逆天\逆天功能-计时器-圣光.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\逆天\逆天功能-计时器-投射物.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\example(演示地图)\逆天\选取单位做动作.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\AutocastBorder.tga
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\AutocastCorners.tga
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\ConstantMerger.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\DisabledBorder.tga
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\FileExporter.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\FileImporter.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\grimex.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\GrimexManual.html
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\InfocardBorder.tga
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\InfocardCorners.tga
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\InfocardLevelBorder.tga
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\InfocardLevelCorners.tga
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\NormalBorder.tga
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\NormalCorners.tga
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\ObjectMerger.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\PassiveBorder.tga
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\PassiveCorners.tga
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\PatchGenerator.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\PathMapper.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\TileSetter.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\TriggerMerger.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\img\contextmenu.gif
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\img\mapsizehack.gif
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\img\minus.gif
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\img\oehack.gif
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\img\plus.gif
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\img\testmap.gif
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\img\tilepicker.gif
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\samples\cmtest.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\samples\fetest.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\samples\fitest.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\samples\log.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\samples\omtest.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\samples\pmtest.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\samples\tmtest.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\grimext\samples\tstest.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEAddAIOrder.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEAddAIOrder.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEAdvancedUnitDataSystem.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEAdvancedUnitDataSystem.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEAroundSystem.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEAroundSystem.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEAttackWaveTimer.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEAttackWaveTimer.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEBase.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEBase.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWECinematicSystem.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWECinematicSystem.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWECreateEwsp.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWECreateEwsp.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWECreateLine.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWECreateLine.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEDoubleItemSlotByItem.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEDoubleItemSlotByItem.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEEventDamageData.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEEventDamageData.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEGeneralBounsSystem.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEGeneralBounsSystem.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEGetGameTime.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEGetGameTime.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEHeroLearnSkillAI.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEHeroLearnSkillAI.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEItemAbilityStorage.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEItemAbilityStorage.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEJumpTimer.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEJumpTimer.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWELocalVariable.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWELocalVariable.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWELogarithm.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWELogarithm.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEMeatHook.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEMeatHook.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEMemoryLeakHelper.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEMemoryLeakHelper.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWENewItemsFormula.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWENewItemsFormula.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWERecordSystem.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWERecordSystem.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEReplayHelper.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEReplayHelper.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWESetGuard.cfg
+26>  已完成代码的生成
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWESetGuard.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEStringHash.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWEStringHash.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWETimerPattern.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWETimerPattern.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWETimerSystem.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWETimerSystem.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWETPNewTimerPeriodic.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWETPNewTimerPeriodic.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWETriggerEvent.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\YDWETriggerEvent.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\Base\YDWEBase_common.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\Base\YDWEBase_hashtable.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\Base\YDWEBase_returnbug.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\japi\YDWEAbilityState.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\japi\YDWEAbilityState.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\japi\YDWEEventDamageData.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\japi\YDWEEventDamageData.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\japi\YDWEJapiOther.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\japi\YDWEJapiOther.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\PreloadSL\YDWE_PreloadSL.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\PreloadSL\YDWE_PreloadSL.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\PreloadSL\YDWE_PreloadSL_Code.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\PreloadSL\YDWE_PreloadSL_Manager.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\PreloadSL\YDWE_PreloadSL_Pre.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\system\ht\blizzard.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\system\ht\common.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\system\rb\blizzard.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\system\rb\common.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\Util\charlist.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\Util\YDWEBitwise.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\Util\YDWEChar.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\Util\YDWECharEx.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\jass\Util\YDWESync.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\DefaultPluginLoader.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDClient.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDClient.plcfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDCustomObjectId.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDCustomObjectId.plcfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDInternalIdShow.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDInternalIdShow.plcfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTaskbarSupport.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTaskbarSupport.plcfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTileLimitBreaker.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTileLimitBreaker.plcfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger.ini
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger.plcfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\AdicHelper.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\changelog.txt
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\cJass Manual.html
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\cjcv.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\SFmpq.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\update.ini
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\Examples\Matrix3 v1.0 - [by Warft_TigerCN & Cjass].w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\Examples\[cJass]_Fireball_v2.5.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\Examples\[cJass]_Stomp_Spell_v2.5.w3x
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cJass.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_antibj_base.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_array.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_branch.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_color.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_function.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_grouputils.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_math.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_matrix.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_order.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_point.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_pointer.j
+26>  YDWEStartup.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEStartup\..\..\Build\bin\Release\bin\YDWEStartup.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_print.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_stdio.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_timerutils.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_types.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_typesEX.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_typesEX_priv.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_types_priv.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_vector.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_xebasic.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\cj_xefx.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\AS\Allocate
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\AS\HandleUtils
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\AS\Hash_priv
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\AS\vString
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\lib\AS\vString_priv
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\Source_MASM\AdicHelper.asm
+26>PostBuildEvent:
+26>  Description: Copy dependencies...
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\Source_MASM\main.ico
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\Source_MASM\make.bat
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\Source_MASM\rsrc.rc
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\Source_MASM\SFmpq.lib
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\AdicHelper\Source_MASM\x.cur
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\jasshelper\clijasshelper.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\jasshelper\jasshelper.conf
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\jasshelper\jasshelper.exe
+26>  复制了 0 个文件
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\jasshelper\pjass.exe
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\jasshelper\sfmpq.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\Changelog - Horus.txt
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\Changelog - TESH.txt
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\Changelog.txt
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\funclist.db
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\horus.dll
+26>  复制了 0 个文件
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\SciLexer.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\Styles.ini
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\TESH.conf
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\tesh.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\TESH.ini
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\Tesh.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\tesh\Tesh.plcfg
+26>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEStartup\\..\..\..\..\..\..\OpenSource\OpenSSL\Current\bin\Win32\Release\libeay32.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\Wave.exe
+26>  复制了 1 个文件
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\WaveForce.i
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\YDWE_Base.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\arithmetic.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\assert_msg.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\cat.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\comma.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\comma_if.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\comparison.hpp
+26>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEStartup\\..\..\..\..\..\..\ThirdParty\Microsoft\CRT\Win32\Microsoft.VC100.CRT\msvcp100.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\control.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\debug.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\dec.hpp
+26>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEStartup\\..\..\..\..\..\..\ThirdParty\Microsoft\CRT\Win32\Microsoft.VC100.CRT\msvcr100.dll
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\empty.hpp
+26>  复制了 2 个文件
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\enum.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\enum_params.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\enum_params_with_a_default.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\enum_params_with_defaults.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\enum_shifted.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\enum_shifted_params.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\expand.hpp
+26>FinalizeBuildStatus:
+26>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEStartup\..\..\Build\obj\Win32\YDWEStartup\Release\YDWEStartup.unsuccessfulbuild”。
+26>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWEStartup\..\..\Build\obj\Win32\YDWEStartup\Release\YDWEStartup.lastbuildstate”执行 Touch 任务。
+26>
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\expr_if.hpp
+26>生成成功。
+26>
+26>已用时间 00:01:13.84
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\facilities.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\for.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\identity.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\if.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\inc.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iterate.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\library.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\limits.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\max.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\min.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\punctuation.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repeat.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repeat_2nd.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repeat_3rd.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repeat_from_to.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repeat_from_to_2nd.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repeat_from_to_3rd.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\selection.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\slot.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\stringize.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\tuple.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\while.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\wstringize.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\arithmetic\add.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\arithmetic\dec.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\arithmetic\div.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\arithmetic\inc.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\arithmetic\mod.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\arithmetic\mul.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\arithmetic\sub.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\arithmetic\detail\div_base.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array\data.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array\elem.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array\insert.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array\pop_back.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array\pop_front.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array\push_back.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array\push_front.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array\remove.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array\replace.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array\reverse.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\array\size.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\comparison\equal.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\comparison\greater.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\comparison\greater_equal.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\comparison\less.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\comparison\less_equal.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\comparison\not_equal.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\config\config.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\config\limits.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\control\deduce_d.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\control\expr_if.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\control\expr_iif.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\control\if.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\control\iif.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\control\while.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\control\detail\while.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\control\detail\dmc\while.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\control\detail\edg\while.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\control\detail\msvc\while.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\debug\assert.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\debug\error.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\debug\line.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\detail\auto_rec.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\detail\check.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\detail\is_binary.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\detail\is_nullary.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\detail\is_unary.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\detail\null.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\detail\split.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\detail\dmc\auto_rec.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\facilities\apply.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\facilities\empty.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\facilities\expand.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\facilities\identity.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\facilities\intercept.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\facilities\is_1.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\facilities\is_empty.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\facilities\is_empty_or_1.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\iterate.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\local.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\self.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\finish.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\local.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\rlocal.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\self.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\start.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\lower1.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\lower2.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\lower3.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\lower4.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\lower5.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\upper1.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\upper2.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\upper3.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\upper4.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\upper5.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\iter\forward1.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\iter\forward2.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\iter\forward3.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\iter\forward4.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\iter\forward5.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\iter\reverse1.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\iter\reverse2.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\iter\reverse3.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\iter\reverse4.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\iteration\detail\iter\reverse5.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\adt.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\append.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\at.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\cat.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\enum.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\filter.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\first_n.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\fold_left.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\fold_right.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\for_each.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\for_each_i.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\for_each_product.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\rest_n.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\reverse.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\size.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\to_tuple.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\transform.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\detail\fold_left.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\detail\fold_right.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\detail\dmc\fold_left.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\detail\edg\fold_left.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\list\detail\edg\fold_right.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical\and.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical\bitand.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical\bitnor.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical\bitor.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical\bitxor.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical\bool.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical\compl.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical\nor.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical\not.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical\or.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\logical\xor.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\punctuation\comma.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\punctuation\comma_if.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\punctuation\paren.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\punctuation\paren_if.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\deduce_r.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\deduce_z.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\enum.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\enum_binary_params.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\enum_params.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\enum_params_with_a_default.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\enum_params_with_defaults.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\enum_shifted.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\enum_shifted_binary_params.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\enum_shifted_params.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\enum_trailing.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\enum_trailing_binary_params.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\enum_trailing_params.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\for.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\repeat.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\repeat_from_to.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\detail\for.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\detail\dmc\for.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\detail\edg\for.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\repetition\detail\msvc\for.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\selection\max.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\selection\min.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\cat.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\elem.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\enum.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\filter.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\first_n.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\fold_left.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\fold_right.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\for_each.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\for_each_i.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\for_each_product.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\insert.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\pop_back.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\pop_front.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\push_back.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\push_front.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\remove.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\replace.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\rest_n.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\reverse.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\seq.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\size.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\subseq.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\to_array.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\to_tuple.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\transform.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\seq\detail\split.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\slot\counter.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\slot\slot.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\slot\detail\counter.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\slot\detail\def.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\slot\detail\shared.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\slot\detail\slot1.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\slot\detail\slot2.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\slot\detail\slot3.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\slot\detail\slot4.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\slot\detail\slot5.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\tuple\eat.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\tuple\elem.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\tuple\rem.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\tuple\reverse.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\tuple\to_list.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\wave\include\boost\preprocessor\tuple\to_seq.hpp
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDColorizer\YDColorizer.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDColorizer\YDColorizer.plcfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDColorizer\YDColorizerConfig.cfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDFont\consolas.ttf
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDFont\font.ini
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDFont\YDFont.plcfg
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\Function.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\Globals.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\Import.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\ImportSaveLoadSystem.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\Timer.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\YDTrigger.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Animation.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Camera.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Destructable.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Environment.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\General.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Group.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Hero.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Math.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Pro_WidgetLift.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Quest.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Sound.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Trigger.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\Unit.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\UnitPro.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\TriggerRegisterPlayerKeyEventBJ.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\TriggerRegisterPlayerSelectionEventBJ.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\UnitBuffsCheck.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\UnitCountBuffsEx.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\UnitRemoveBuffs.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\UnitRemoveBuffsEx.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\Hero\CheckItemcodeStatus.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\Hero\CheckItemStatus.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\Hero\GetHeroStatBJ.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\Hero\HeroStatCheck.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\Trigger\TriggerRegisterPlayerKeyEventBJ.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\Trigger\TriggerRegisterPlayerSelectionEventBJ.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\Unit\UnitBuffsCheck.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\Unit\UnitCountBuffsEx.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\Unit\UnitRemoveBuffs.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\BJOptimization\detail\Unit\UnitRemoveBuffsEx.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\Common\if.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\Common\loop.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\Common\switch.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\Common\bool\or.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\SaveLoadSystem\Any2I.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\SaveLoadSystem\GCSet_Get.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\SaveLoadSystem\GCSystem.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\SaveLoadSystem\GCSystem.j
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\SaveLoadSystem\Has_Clear.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\SaveLoadSystem\HTSet_Get.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\plugin\YDTrigger\SaveLoadSystem\HTSystem.h
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\locale\zh_CN\LC_MESSAGES\MainScript.mo
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\locale\zh_CN\LC_MESSAGES\MainScript.po
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\locale\zh_CN\LC_MESSAGES\YDWEStartup.mo
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\locale\zh_CN\LC_MESSAGES\YDWEStartup.po
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\locale\zh_TW\LC_MESSAGES\MainScript.mo
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\locale\zh_TW\LC_MESSAGES\MainScript.po
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\locale\zh_TW\LC_MESSAGES\YDWEStartup.mo
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\locale\zh_TW\LC_MESSAGES\YDWEStartup.po
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\script\lua\ar_sfmpq.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\script\lua\dotnet.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\script\lua\registry.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\script\lua\slk.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\script\lua\template.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\share\script\lua\util.lua
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\1.20转1.24——论坛活动\YDWE论坛活动——1.20转1.24.url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\1.20转1.24——论坛活动\说明.txt
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\CJass教程\CJASS系列经典教程(By Warft_TigerCN ).url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\Jass教程\Jass培训班教程.url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\VJass教程\Visual Jass(vJass)教学 by AppleSheep.url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\VJass教程\VJass教程(aeris版与Warft_TigerCN版).url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\YDWE官方更新\YDWE官方更新(推荐).url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\YDWE教程——使用手册\YDWEQ来A去.url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\YDWE教程——使用手册\YDWE结构说明.doc
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\YDWE教程——存储系统的使用\YDWE存储系统——T化的Return bug+GC和哈希表.url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\YDWE教程——新手教程\YDWE新手教程(Ver0_2) By h82258652.mht
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\YDWE自测题\YDWE自测题第一期——中心计时器之一.url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\YDWE自测题\YDWE自测题第一期——存储系统之一.url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\YDWE自测题\说明.txt
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\调教中立玩家——论坛活动\YDWE论坛活动——调教中立玩家.url
+27>  D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\\..\..\Component\附录(新手必看)\调教中立玩家——论坛活动\说明.txt
+27>  复制了 564 个文件
+27>FinalizeBuildStatus:
+27>  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\..\..\Build\obj\Win32\YDWE\Release\YDWE.unsuccessfulbuild”。
+27>  正在对“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Core\YDWE\..\..\Build\obj\Win32\YDWE\Release\YDWE.lastbuildstate”执行 Touch 任务。
+27>
+27>生成成功。
+27>
+27>已用时间 00:00:21.75
+========== 全部重新生成: 成功 27 个，失败 0 个，跳过 0 个 ==========
+
+"正在重新构建YDColorizer：Release|Any CPU" 
+------ 已启动全部重新生成: 项目: WinApi, 配置: Release Any CPU ------
+生成启动时间为 2013-7-12 21:42:30。
+CoreClean:
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\WinApi\obj\Release\WinApi.dll”。
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\WinApi\obj\Release\WinApi.pdb”。
+CoreCompile:
+  C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\Csc.exe /noconfig /nowarn:1701,1702 /nostdlib+ /errorreport:prompt /warn:4 /define:TRACE /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\mscorlib.dll /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll /debug:pdbonly /filealign:512 /optimize+ /out:obj\Release\WinApi.dll /target:library Button.cs Ini.cs KeyBoard.cs Label.cs ListBox.cs ListView.cs Mouse.cs Properties\AssemblyInfo.cs Screen.cs TextBox.cs Window.cs
+CopyFilesToOutputDirectory:
+  正在将文件从“obj\Release\WinApi.dll”复制到“..\..\..\Build\bin\Release\plugin\YDColorizer\WinApi.dll”。
+  WinApi -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Release\plugin\YDColorizer\WinApi.dll
+  正在将文件从“obj\Release\WinApi.pdb”复制到“..\..\..\Build\bin\Release\plugin\YDColorizer\WinApi.pdb”。
+
+生成成功。
+
+已用时间 00:00:01.92
+------ 已启动全部重新生成: 项目: YDColorizer, 配置: Release Any CPU ------
+生成启动时间为 2013-7-12 21:42:32。
+CoreClean:
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\Release\ResolveAssemblyReference.cache”。
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\Release\YDColorizer.ColorPicker.resources”。
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\Release\YDColorizer.EditDialogBox.resources”。
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\Release\YDColorizer.GetScreenColorForm.resources”。
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\Release\YDColorizer.Properties.Resources.resources”。
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\Release\GenerateResource-ResGen.read.1.tlog”。
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\Release\GenerateResource-ResGen.read.4.tlog”。
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\Release\GenerateResource-ResGen.write.1.tlog”。
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\Release\YDColorizer.dll”。
+  正在删除文件“D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Plugin\YDColorizer\YDColorizer\obj\Release\YDColorizer.pdb”。
+CoreResGen:
+  C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\ResGen.exe /useSourcePath /r:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\mscorlib.dll /r:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll /r:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Deployment.dll /r:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll /r:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll /r:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll /r:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll /r:"D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Release\plugin\YDColorizer\WinApi.dll" /compile ColorPicker.resx,obj\Release\YDColorizer.ColorPicker.resources EditDialogBox.resx,obj\Release\YDColorizer.EditDialogBox.resources GetScreenColorForm.resx,obj\Release\YDColorizer.GetScreenColorForm.resources Properties\Resources.resx,obj\Release\YDColorizer.Properties.Resources.resources 
+CoreCompile:
+  C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\Csc.exe /noconfig /nowarn:1701,1702 /nostdlib+ /platform:AnyCPU /errorreport:prompt /define:TRACE /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\mscorlib.dll /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Deployment.dll /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll /reference:C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll /reference:"D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Release\plugin\YDColorizer\WinApi.dll" /debug:pdbonly /filealign:512 /optimize+ /out:obj\Release\YDColorizer.dll /resource:obj\Release\YDColorizer.ColorPicker.resources /resource:obj\Release\YDColorizer.EditDialogBox.resources /resource:obj\Release\YDColorizer.GetScreenColorForm.resources /resource:obj\Release\YDColorizer.Properties.Resources.resources /resource:Resources\icoRedo.png,YDColorizer.Resources.icoRedo.png /resource:Resources\icoUndo.png,YDColorizer.Resources.icoUndo.png /resource:Resources\icoSetColor.png,YDColorizer.Resources.icoSetColor.png /resource:Resources\icoCustomColor.png,YDColorizer.Resources.icoCustomColor.png /resource:Resources\icoGetColorFromScreen.png,YDColorizer.Resources.icoGetColorFromScreen.png /resource:Resources\icoGradualColor.png,YDColorizer.Resources.icoGradualColor.png /resource:Resources\icoYDColorizerRuning.ico,YDColorizer.Resources.icoYDColorizerRuning.ico /resource:Resources\icoYDColorizerStop.ico,YDColorizer.Resources.icoYDColorizerStop.ico /target:library AboutConfig.cs AboutProcess.cs ColorPicker.cs ColorPicker.Designer.cs Config.cs EditDialogBox.cs EditDialogBox.Designer.cs GetScreenColorForm.cs GetScreenColorForm.Designer.cs Ini.cs Log.cs MyRichTextBox.cs MyTextBox.cs Program.cs Properties\AssemblyInfo.cs TextConvert.cs UserColor.cs UserCustomColor.cs WEInit.cs Properties\Resources.Designer.cs Properties\Settings.Designer.cs
+_CopyAppConfigFile:
+  正在将文件从“app.config”复制到“..\..\..\Build\bin\Release\plugin\YDColorizer\YDColorizer.dll.config”。
+CopyFilesToOutputDirectory:
+  正在将文件从“obj\Release\YDColorizer.dll”复制到“..\..\..\Build\bin\Release\plugin\YDColorizer\YDColorizer.dll”。
+  YDColorizer -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\Build\bin\Release\plugin\YDColorizer\YDColorizer.dll
+  正在将文件从“obj\Release\YDColorizer.pdb”复制到“..\..\..\Build\bin\Release\plugin\YDColorizer\YDColorizer.pdb”。
+
+生成成功。
+
+已用时间 00:00:06.45
+========== 全部重新生成: 成功 2 个，失败 0 个，跳过 0 个 ==========
+
+"正在重新构建YDUI：YDWE|Win32" 
+1>------ 已启动全部重新生成: 项目: YDUnits, 配置: YDWE Win32 ------
+1>生成启动时间为 2013-7-12 21:42:50。
+1>_PrepareForClean:
+1>  正在删除文件“..\out\YDWE\YDUnits.lastbuildstate”。
+1>InitializeBuildStatus:
+1>  正在创建“..\out\YDWE\YDUnits.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+1>FinalizeBuildStatus:
+1>  正在删除文件“..\out\YDWE\YDUnits.unsuccessfulbuild”。
+1>  正在对“..\out\YDWE\YDUnits.lastbuildstate”执行 Touch 任务。
+1>
+1>生成成功。
+1>
+1>已用时间 00:00:00.45
+2>------ 已启动全部重新生成: 项目: YDUI, 配置: YDWE Win32 ------
+2>生成启动时间为 2013-7-12 21:42:51。
+2>_PrepareForClean:
+2>  正在删除文件“..\out\YDWE\YDUI.lastbuildstate”。
+2>InitializeBuildStatus:
+2>  正在创建“..\out\YDWE\YDUI.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+2>ClCompile:
+2>  TriggerData.ui
+2>  TriggerStrings.ui
+2>  WorldEditStrings.ui
+2>  WorldEditStrings.c
+2>  TriggerStrings.c
+2>  TriggerData.c
+2>  正在生成代码...
+2>..\out\YDWE\TriggerData.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+2>..\out\YDWE\TriggerStrings.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+2>..\out\YDWE\WorldEditStrings.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+2>  YDUI.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\UI\sln\YDWE\YDUI.lib
+2>PostBuildEvent:
+2>  Description: python run...
+2>FinalizeBuildStatus:
+2>  正在删除文件“..\out\YDWE\YDUI.unsuccessfulbuild”。
+2>  正在对“..\out\YDWE\YDUI.lastbuildstate”执行 Touch 任务。
+2>
+2>生成成功。
+2>
+2>已用时间 00:00:36.26
+========== 全部重新生成: 成功 2 个，失败 0 个，跳过 0 个 ==========
+
+"正在重新构建YDUI：YDTrigger|Win32" 
+1>------ 已启动全部重新生成: 项目: YDUnits, 配置: YDTrigger Win32 ------
+1>生成启动时间为 2013-7-12 21:43:36。
+1>_PrepareForClean:
+1>  正在删除文件“..\out\YDTrigger\YDUnits.lastbuildstate”。
+1>InitializeBuildStatus:
+1>  正在创建“..\out\YDTrigger\YDUnits.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+1>PostBuildEvent:
+1>  Description: python run...
+1>FinalizeBuildStatus:
+1>  正在删除文件“..\out\YDTrigger\YDUnits.unsuccessfulbuild”。
+1>  正在对“..\out\YDTrigger\YDUnits.lastbuildstate”执行 Touch 任务。
+1>
+1>生成成功。
+1>
+1>已用时间 00:00:03.57
+2>------ 已启动全部重新生成: 项目: YDUI, 配置: YDTrigger Win32 ------
+2>生成启动时间为 2013-7-12 21:43:39。
+2>_PrepareForClean:
+2>  正在删除文件“..\out\YDTrigger\YDUI.lastbuildstate”。
+2>InitializeBuildStatus:
+2>  正在创建“..\out\YDTrigger\YDUI.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+2>ClCompile:
+2>  TriggerData.ui
+2>  TriggerStrings.ui
+2>  WorldEditStrings.ui
+2>  WorldEditStrings.c
+2>  TriggerStrings.c
+2>  TriggerData.c
+2>  正在生成代码...
+2>..\out\YDTrigger\TriggerData.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+2>..\out\YDTrigger\TriggerStrings.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+2>..\out\YDTrigger\WorldEditStrings.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+2>  YDUI.vcxproj -> D:\YDWE Workspaes\actboy168\Development\YDWE\Dev\Editor\UI\sln\YDTrigger\YDUI.lib
+2>PostBuildEvent:
+2>  Description: python run...
+2>FinalizeBuildStatus:
+2>  正在删除文件“..\out\YDTrigger\YDUI.unsuccessfulbuild”。
+2>  正在对“..\out\YDTrigger\YDUI.lastbuildstate”执行 Touch 任务。
+2>
+2>生成成功。
+2>
+2>已用时间 00:00:29.60
+========== 全部重新生成: 成功 2 个，失败 0 个，跳过 0 个 ==========
+
+"拷贝UI到bin目录" 
+..\..\UI\bin\units.mpq
+..\..\UI\bin\YDTrigger.mpq
+..\..\UI\bin\YDWE.mpq
+复制了 3 个文件
+"生成部分函数库代码" 
+"拷贝到publish目录" 
+..\..\Build\bin\Release\YDWE.exe
+..\..\Build\bin\Release\建议、BUG反馈.url
+..\..\Build\bin\Release\bin\boost_date_time-vc100-mt-1_53.dll
+..\..\Build\bin\Release\bin\boost_filesystem-vc100-mt-1_53.dll
+..\..\Build\bin\Release\bin\boost_system-vc100-mt-1_53.dll
+..\..\Build\bin\Release\bin\boost_thread-vc100-mt-1_53.dll
+..\..\Build\bin\Release\bin\CJassHelper.exe
+..\..\Build\bin\Release\bin\cygiconv-2.dll
+..\..\Build\bin\Release\bin\cygintl-8.dll
+..\..\Build\bin\Release\bin\DuiLib.dll
+..\..\Build\bin\Release\bin\libapr-1.dll
+..\..\Build\bin\Release\bin\libaprutil-1.dll
+..\..\Build\bin\Release\bin\libeay32.dll
+..\..\Build\bin\Release\bin\log4cxx.dll
+..\..\Build\bin\Release\bin\logo.ico
+..\..\Build\bin\Release\bin\luabind.dll
+..\..\Build\bin\Release\bin\luacore.dll
+..\..\Build\bin\Release\bin\msvcp100.dll
+..\..\Build\bin\Release\bin\msvcr100.dll
+..\..\Build\bin\Release\bin\sfmpq.dll
+..\..\Build\bin\Release\bin\skin.zip
+..\..\Build\bin\Release\bin\SlkLib.dll
+..\..\Build\bin\Release\bin\splash.bmp
+..\..\Build\bin\Release\bin\StormLib.dll
+..\..\Build\bin\Release\bin\worldedit.exe
+..\..\Build\bin\Release\bin\YDFirewall.exe
+..\..\Build\bin\Release\bin\YDWEBase.dll
+..\..\Build\bin\Release\bin\YDWEConfig.exe
+..\..\Build\bin\Release\bin\YDWEInject.dll
+..\..\Build\bin\Release\bin\YDWEStartup.dll
+..\..\Build\bin\Release\bin\zlib1.dll
+..\..\Build\bin\Release\bin\modules\ar_stormlib.dll
+..\..\Build\bin\Release\bin\modules\ffi.dll
+..\..\Build\bin\Release\bin\modules\filesystem.dll
+..\..\Build\bin\Release\bin\modules\luadotnet.dll
+..\..\Build\bin\Release\bin\modules\LuaInterface.dll
+..\..\Build\bin\Release\bin\modules\mapanalyzer.dll
+..\..\Build\bin\Release\bin\modules\sys.dll
+..\..\Build\bin\Release\bin\modules\YDWELua.dll
+..\..\Build\bin\Release\example(演示地图)\综合——UI测试地图1.19.w3x
+..\..\Build\bin\Release\example(演示地图)\说明.txt
+..\..\Build\bin\Release\example(演示地图)\AI\AI——RPG佣兵AI.w3x
+..\..\Build\bin\Release\example(演示地图)\AI\AI——自动学习技能.w3x
+..\..\Build\bin\Release\example(演示地图)\JAPI\伤害属性.w3x
+..\..\Build\bin\Release\example(演示地图)\JAPI\技能属性.w3x
+..\..\Build\bin\Release\example(演示地图)\JAPI\获取攻击和护甲.w3x
+..\..\Build\bin\Release\example(演示地图)\事件\事件——任意单位伤害事件-显示伤害.w3x
+..\..\Build\bin\Release\example(演示地图)\其他\Lua版-计时器-圣光.w3x
+..\..\Build\bin\Release\example(演示地图)\其他\ScriptSystem-获得WC3大奖的电影系统(By YDWE).w3x
+..\..\Build\bin\Release\example(演示地图)\其他\新增的魔兽隐藏资源.w3x
+..\..\Build\bin\Release\example(演示地图)\函数\函数——获取护甲.w3x
+..\..\Build\bin\Release\example(演示地图)\存储\存储系统-CD中物品不能丢弃(新增局部变量).w3x
+..\..\Build\bin\Release\example(演示地图)\存储\禁止移动物品.w3x
+..\..\Build\bin\Release\example(演示地图)\存档\演示-存档系统(复杂版).w3x
+..\..\Build\bin\Release\example(演示地图)\存档\演示-存档系统(简化版).w3x
+..\..\Build\bin\Release\example(演示地图)\存档\演示-网游（服务器存档）.w3x
+..\..\Build\bin\Release\example(演示地图)\存档\註冊.reg
+..\..\Build\bin\Release\example(演示地图)\存档\说明.txt
+..\..\Build\bin\Release\example(演示地图)\技能\技能——[Demo] Around - 单位环绕模板 [技能召集].w3x
+..\..\Build\bin\Release\example(演示地图)\技能\技能——[Demo] Around - 经典单位环绕演示 [Fetrix_sai].w3x
+..\..\Build\bin\Release\example(演示地图)\技能\技能——月神箭、跳劈、冲锋(Warft_TigerCN原作，fetrix_sai修正版) v1.3.w3x
+..\..\Build\bin\Release\example(演示地图)\技能\技能——跳跃（空格键释放技能）.w3x
+..\..\Build\bin\Release\example(演示地图)\技能\技能——钩子.w3x
+..\..\Build\bin\Release\example(演示地图)\物体编辑器\第一课-简单的演示.w3x
+..\..\Build\bin\Release\example(演示地图)\物体编辑器\第三课-物体编辑器数据的读取.w3x
+..\..\Build\bin\Release\example(演示地图)\物体编辑器\第二课-lua模版基础.w3x
+..\..\Build\bin\Release\example(演示地图)\物体编辑器\第四课-完整的演示.w3x
+..\..\Build\bin\Release\example(演示地图)\物体编辑器\第零课-说明.txt
+..\..\Build\bin\Release\example(演示地图)\特效\特效——单位环绕.w3x
+..\..\Build\bin\Release\example(演示地图)\系统\[Demo]新中心计时器-YDWE储存系统应用-复活系统 [Fetrix_sai].w3x
+..\..\Build\bin\Release\example(演示地图)\系统\中心计时器-单位头上飘字.w3x
+..\..\Build\bin\Release\example(演示地图)\系统\中心计时器-单位环绕(全局变量版).w3x
+..\..\Build\bin\Release\example(演示地图)\系统\新中心计时器 - 野蛮冲撞 [Fetrix_sai]_YDWE.w3x
+..\..\Build\bin\Release\example(演示地图)\系统\新中心计时器-单位环绕[Fetrix_sai].w3x
+..\..\Build\bin\Release\example(演示地图)\系统\系统——3C刷兵.w3x
+..\..\Build\bin\Release\example(演示地图)\系统\系统——万能属性系统.w3x
+..\..\Build\bin\Release\example(演示地图)\系统\系统——泄漏检测.w3x
+..\..\Build\bin\Release\example(演示地图)\系统\系统——翻页保留属性的多重物品栏.w3x
+..\..\Build\bin\Release\example(演示地图)\系统\系统——通用物品合成 v1.03[Fetrix_sai].w3x
+..\..\Build\bin\Release\example(演示地图)\逆天\演示-新局部变量.w3x
+..\..\Build\bin\Release\example(演示地图)\逆天\逆天-计时器-英雄复活.w3x
+..\..\Build\bin\Release\example(演示地图)\逆天\逆天功能-CD中物品不能丢弃(新增局部变量).w3x
+..\..\Build\bin\Release\example(演示地图)\逆天\逆天功能-动态注册触发器.w3x
+..\..\Build\bin\Release\example(演示地图)\逆天\逆天功能-局部变量循环-不冲突的计数.w3x
+..\..\Build\bin\Release\example(演示地图)\逆天\逆天功能-按Esc生成随机数.w3x
+..\..\Build\bin\Release\example(演示地图)\逆天\逆天功能-触发器休眠.w3x
+..\..\Build\bin\Release\example(演示地图)\逆天\逆天功能-计时器-圣光.w3x
+..\..\Build\bin\Release\example(演示地图)\逆天\逆天功能-计时器-投射物.w3x
+..\..\Build\bin\Release\example(演示地图)\逆天\选取单位做动作.w3x
+..\..\Build\bin\Release\grimext\AutocastBorder.tga
+..\..\Build\bin\Release\grimext\AutocastCorners.tga
+..\..\Build\bin\Release\grimext\ConstantMerger.exe
+..\..\Build\bin\Release\grimext\DisabledBorder.tga
+..\..\Build\bin\Release\grimext\FileExporter.exe
+..\..\Build\bin\Release\grimext\FileImporter.exe
+..\..\Build\bin\Release\grimext\grimex.dll
+..\..\Build\bin\Release\grimext\GrimexManual.html
+..\..\Build\bin\Release\grimext\InfocardBorder.tga
+..\..\Build\bin\Release\grimext\InfocardCorners.tga
+..\..\Build\bin\Release\grimext\InfocardLevelBorder.tga
+..\..\Build\bin\Release\grimext\InfocardLevelCorners.tga
+..\..\Build\bin\Release\grimext\NormalBorder.tga
+..\..\Build\bin\Release\grimext\NormalCorners.tga
+..\..\Build\bin\Release\grimext\ObjectMerger.exe
+..\..\Build\bin\Release\grimext\PassiveBorder.tga
+..\..\Build\bin\Release\grimext\PassiveCorners.tga
+..\..\Build\bin\Release\grimext\PatchGenerator.exe
+..\..\Build\bin\Release\grimext\PathMapper.exe
+..\..\Build\bin\Release\grimext\TileSetter.exe
+..\..\Build\bin\Release\grimext\TriggerMerger.exe
+..\..\Build\bin\Release\grimext\img\contextmenu.gif
+..\..\Build\bin\Release\grimext\img\mapsizehack.gif
+..\..\Build\bin\Release\grimext\img\minus.gif
+..\..\Build\bin\Release\grimext\img\oehack.gif
+..\..\Build\bin\Release\grimext\img\plus.gif
+..\..\Build\bin\Release\grimext\img\testmap.gif
+..\..\Build\bin\Release\grimext\img\tilepicker.gif
+..\..\Build\bin\Release\grimext\samples\cmtest.lua
+..\..\Build\bin\Release\grimext\samples\fetest.lua
+..\..\Build\bin\Release\grimext\samples\fitest.lua
+..\..\Build\bin\Release\grimext\samples\log.lua
+..\..\Build\bin\Release\grimext\samples\omtest.lua
+..\..\Build\bin\Release\grimext\samples\pmtest.lua
+..\..\Build\bin\Release\grimext\samples\tmtest.lua
+..\..\Build\bin\Release\grimext\samples\tstest.lua
+..\..\Build\bin\Release\jass\YDWEAddAIOrder.cfg
+..\..\Build\bin\Release\jass\YDWEAddAIOrder.j
+..\..\Build\bin\Release\jass\YDWEAdvancedUnitDataSystem.cfg
+..\..\Build\bin\Release\jass\YDWEAdvancedUnitDataSystem.j
+..\..\Build\bin\Release\jass\YDWEAroundSystem.cfg
+..\..\Build\bin\Release\jass\YDWEAroundSystem.j
+..\..\Build\bin\Release\jass\YDWEAttackWaveTimer.cfg
+..\..\Build\bin\Release\jass\YDWEAttackWaveTimer.j
+..\..\Build\bin\Release\jass\YDWEBase.cfg
+..\..\Build\bin\Release\jass\YDWEBase.j
+..\..\Build\bin\Release\jass\YDWECinematicSystem.cfg
+..\..\Build\bin\Release\jass\YDWECinematicSystem.j
+..\..\Build\bin\Release\jass\YDWECreateEwsp.cfg
+..\..\Build\bin\Release\jass\YDWECreateEwsp.j
+..\..\Build\bin\Release\jass\YDWECreateLine.cfg
+..\..\Build\bin\Release\jass\YDWECreateLine.j
+..\..\Build\bin\Release\jass\YDWEDoubleItemSlotByItem.cfg
+..\..\Build\bin\Release\jass\YDWEDoubleItemSlotByItem.j
+..\..\Build\bin\Release\jass\YDWEEventDamageData.cfg
+..\..\Build\bin\Release\jass\YDWEEventDamageData.j
+..\..\Build\bin\Release\jass\YDWEGeneralBounsSystem.cfg
+..\..\Build\bin\Release\jass\YDWEGeneralBounsSystem.j
+..\..\Build\bin\Release\jass\YDWEGetGameTime.cfg
+..\..\Build\bin\Release\jass\YDWEGetGameTime.j
+..\..\Build\bin\Release\jass\YDWEHeroLearnSkillAI.cfg
+..\..\Build\bin\Release\jass\YDWEHeroLearnSkillAI.j
+..\..\Build\bin\Release\jass\YDWEItemAbilityStorage.cfg
+..\..\Build\bin\Release\jass\YDWEItemAbilityStorage.j
+..\..\Build\bin\Release\jass\YDWEJumpTimer.cfg
+..\..\Build\bin\Release\jass\YDWEJumpTimer.j
+..\..\Build\bin\Release\jass\YDWELocalVariable.cfg
+..\..\Build\bin\Release\jass\YDWELocalVariable.j
+..\..\Build\bin\Release\jass\YDWELogarithm.cfg
+..\..\Build\bin\Release\jass\YDWELogarithm.j
+..\..\Build\bin\Release\jass\YDWEMeatHook.cfg
+..\..\Build\bin\Release\jass\YDWEMeatHook.j
+..\..\Build\bin\Release\jass\YDWEMemoryLeakHelper.cfg
+..\..\Build\bin\Release\jass\YDWEMemoryLeakHelper.j
+..\..\Build\bin\Release\jass\YDWENewItemsFormula.cfg
+..\..\Build\bin\Release\jass\YDWENewItemsFormula.j
+..\..\Build\bin\Release\jass\YDWERecordSystem.cfg
+..\..\Build\bin\Release\jass\YDWERecordSystem.j
+..\..\Build\bin\Release\jass\YDWEReplayHelper.cfg
+..\..\Build\bin\Release\jass\YDWEReplayHelper.j
+..\..\Build\bin\Release\jass\YDWESetGuard.cfg
+..\..\Build\bin\Release\jass\YDWESetGuard.j
+..\..\Build\bin\Release\jass\YDWEStringHash.cfg
+..\..\Build\bin\Release\jass\YDWEStringHash.j
+..\..\Build\bin\Release\jass\YDWETimerPattern.cfg
+..\..\Build\bin\Release\jass\YDWETimerPattern.j
+..\..\Build\bin\Release\jass\YDWETimerSystem.cfg
+..\..\Build\bin\Release\jass\YDWETimerSystem.j
+..\..\Build\bin\Release\jass\YDWETPNewTimerPeriodic.cfg
+..\..\Build\bin\Release\jass\YDWETPNewTimerPeriodic.j
+..\..\Build\bin\Release\jass\YDWETriggerEvent.cfg
+..\..\Build\bin\Release\jass\YDWETriggerEvent.j
+..\..\Build\bin\Release\jass\AntiBJLeak\MainMacro.h
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\BlightGoldMineForPlayer.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\BlightGoldMineForPlayer.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\BlightGoldMineForPlayerBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\BlightGoldMineForPlayerBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\ChangeElevatorWallBlocker.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\ChangeElevatorWallBlocker.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\ChangeElevatorWalls.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\ChangeElevatorWalls.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\CountLivingPlayerUnitsOfTypeId.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\CountLivingPlayerUnitsOfTypeId.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\DelayedSuspendDecay.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\DelayedSuspendDecay.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\DelayedSuspendDecayBoneEnum.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\DelayedSuspendDecayBoneEnum.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\DelayedSuspendDecayFleshEnum.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\DelayedSuspendDecayFleshEnum.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\DelayedSuspendDecayStopAnimEnum.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\DelayedSuspendDecayStopAnimEnum.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\EnableCreepSleepBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\EnableCreepSleepBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\EnumDestructablesInCircleBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\EnumDestructablesInCircleBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\EnumDestructablesInCircleBJFilter.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\EnumDestructablesInCircleBJFilter.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\EnumUnitsSelected.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\EnumUnitsSelected.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetCurrentCameraSetup.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetCurrentCameraSetup.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetForceOfPlayer.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetForceOfPlayer.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetInventoryIndexOfItemTypeBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetInventoryIndexOfItemTypeBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetItemOfTypeFromUnitBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetItemOfTypeFromUnitBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetPlayersAllies.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetPlayersAllies.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetPlayersByMapControl.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetPlayersByMapControl.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetPlayersEnemies.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetPlayersEnemies.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetPlayersMatching.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetPlayersMatching.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetRandomSubGroup.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetRandomSubGroup.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetRandomSubGroupEnum.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetRandomSubGroupEnum.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsInRangeOfLocAll.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsInRangeOfLocAll.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsInRangeOfLocMatching.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsInRangeOfLocMatching.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsInRectAll.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsInRectAll.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsInRectMatching.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsInRectMatching.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsInRectOfPlayer.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsInRectOfPlayer.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsOfPlayerAll.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsOfPlayerAll.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsOfPlayerAndTypeId.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsOfPlayerAndTypeId.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsOfPlayerMatching.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsOfPlayerMatching.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsOfTypeIdAll.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsOfTypeIdAll.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsSelectedAll.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\GetUnitsSelectedAll.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\InitRescuableBehaviorBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\InitRescuableBehaviorBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\IssueBuildOrderByIdLocBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\IssueBuildOrderByIdLocBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\IssueHauntOrderAtLocBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\IssueHauntOrderAtLocBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MakeUnitRescuableToForceBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MakeUnitRescuableToForceBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MakeUnitRescuableToForceBJEnum.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MakeUnitRescuableToForceBJEnum.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MakeUnitsPassiveForPlayer.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MakeUnitsPassiveForPlayer.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MakeUnitsPassiveForTeam.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MakeUnitsPassiveForTeam.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MultiboardSetItemColorBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MultiboardSetItemColorBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MultiboardSetItemIconBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MultiboardSetItemIconBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MultiboardSetItemStyleBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MultiboardSetItemStyleBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MultiboardSetItemValueBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MultiboardSetItemValueBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MultiboardSetItemWidthBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\MultiboardSetItemWidthBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\NearbyElevatorExists.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\NearbyElevatorExists.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\NearbyElevatorExistsEnum.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\NearbyElevatorExistsEnum.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\NudgeItemsInRectEnum.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\NudgeItemsInRectEnum.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\NudgeObjectsInRect.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\NudgeObjectsInRect.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\NudgeUnitsInRectEnum.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\NudgeUnitsInRectEnum.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\PauseAllUnitsBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\PauseAllUnitsBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\PlaySound.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\PlaySound.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\PolledWait.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\PolledWait.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\ReplaceUnitBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\ReplaceUnitBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\SetPlayerColorBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\SetPlayerColorBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\SetUnitFacingToFaceLocTimed.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\SetUnitFacingToFaceLocTimed.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\SetUnitFacingToFaceUnitTimed.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\SetUnitFacingToFaceUnitTimed.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\SmartCameraPanBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\SmartCameraPanBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\TriggerActionUnitRescuedBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\TriggerActionUnitRescuedBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\TriggerRegisterEnterRectSimple.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\TriggerRegisterEnterRectSimple.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\TriggerRegisterLeaveRectSimple.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\TriggerRegisterLeaveRectSimple.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\TryInitRescuableTriggersBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\TryInitRescuableTriggersBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\UnitHasItemOfTypeBJ.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\UnitHasItemOfTypeBJ.j
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\WakePlayerUnits.cfg
+..\..\Build\bin\Release\jass\AntiBJLeak\detail\WakePlayerUnits.j
+..\..\Build\bin\Release\jass\Base\YDWEBase_common.j
+..\..\Build\bin\Release\jass\Base\YDWEBase_hashtable.j
+..\..\Build\bin\Release\jass\Base\YDWEBase_returnbug.j
+..\..\Build\bin\Release\jass\japi\YDWEAbilityState.cfg
+..\..\Build\bin\Release\jass\japi\YDWEAbilityState.j
+..\..\Build\bin\Release\jass\japi\YDWEEventDamageData.cfg
+..\..\Build\bin\Release\jass\japi\YDWEEventDamageData.j
+..\..\Build\bin\Release\jass\japi\YDWEJapiOther.cfg
+..\..\Build\bin\Release\jass\japi\YDWEJapiOther.j
+..\..\Build\bin\Release\jass\PreloadSL\YDWE_PreloadSL.cfg
+..\..\Build\bin\Release\jass\PreloadSL\YDWE_PreloadSL.j
+..\..\Build\bin\Release\jass\PreloadSL\YDWE_PreloadSL_Code.j
+..\..\Build\bin\Release\jass\PreloadSL\YDWE_PreloadSL_Manager.j
+..\..\Build\bin\Release\jass\PreloadSL\YDWE_PreloadSL_Pre.j
+..\..\Build\bin\Release\jass\system\ht\blizzard.j
+..\..\Build\bin\Release\jass\system\ht\common.j
+..\..\Build\bin\Release\jass\system\rb\blizzard.j
+..\..\Build\bin\Release\jass\system\rb\common.j
+..\..\Build\bin\Release\jass\Util\charlist.h
+..\..\Build\bin\Release\jass\Util\YDWEBitwise.j
+..\..\Build\bin\Release\jass\Util\YDWEChar.j
+..\..\Build\bin\Release\jass\Util\YDWECharEx.j
+..\..\Build\bin\Release\jass\Util\YDWESync.j
+..\..\Build\bin\Release\logs\YDLogger.cfg
+..\..\Build\bin\Release\plugin\DefaultPluginLoader.lua
+..\..\Build\bin\Release\plugin\YDClient.dll
+..\..\Build\bin\Release\plugin\YDClient.lua
+..\..\Build\bin\Release\plugin\YDClient.plcfg
+..\..\Build\bin\Release\plugin\YDCustomObjectId.dll
+..\..\Build\bin\Release\plugin\YDCustomObjectId.lua
+..\..\Build\bin\Release\plugin\YDCustomObjectId.plcfg
+..\..\Build\bin\Release\plugin\YDDllFixer.dll
+..\..\Build\bin\Release\plugin\YDInternalIDShow.dll
+..\..\Build\bin\Release\plugin\YDInternalIdShow.lua
+..\..\Build\bin\Release\plugin\YDInternalIdShow.plcfg
+..\..\Build\bin\Release\plugin\YDTaskbarSupport.dll
+..\..\Build\bin\Release\plugin\YDTaskbarSupport.lua
+..\..\Build\bin\Release\plugin\YDTaskbarSupport.plcfg
+..\..\Build\bin\Release\plugin\YDTileLimitBreaker.dll
+..\..\Build\bin\Release\plugin\YDTileLimitBreaker.lua
+..\..\Build\bin\Release\plugin\YDTileLimitBreaker.plcfg
+..\..\Build\bin\Release\plugin\YDTrigger.dll
+..\..\Build\bin\Release\plugin\YDTrigger.ini
+..\..\Build\bin\Release\plugin\YDTrigger.lua
+..\..\Build\bin\Release\plugin\YDTrigger.plcfg
+..\..\Build\bin\Release\plugin\AdicHelper\AdicHelper.exe
+..\..\Build\bin\Release\plugin\AdicHelper\changelog.txt
+..\..\Build\bin\Release\plugin\AdicHelper\cJass Manual.html
+..\..\Build\bin\Release\plugin\AdicHelper\cjcv.dll
+..\..\Build\bin\Release\plugin\AdicHelper\SFmpq.dll
+..\..\Build\bin\Release\plugin\AdicHelper\update.ini
+..\..\Build\bin\Release\plugin\AdicHelper\Examples\Matrix3 v1.0 - [by Warft_TigerCN & Cjass].w3x
+..\..\Build\bin\Release\plugin\AdicHelper\Examples\[cJass]_Fireball_v2.5.w3x
+..\..\Build\bin\Release\plugin\AdicHelper\Examples\[cJass]_Stomp_Spell_v2.5.w3x
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cJass.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_antibj_base.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_array.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_branch.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_color.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_function.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_grouputils.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_math.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_matrix.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_order.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_point.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_pointer.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_print.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_stdio.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_timerutils.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_types.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_typesEX.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_typesEX_priv.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_types_priv.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_vector.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_xebasic.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\cj_xefx.j
+..\..\Build\bin\Release\plugin\AdicHelper\lib\AS\Allocate
+..\..\Build\bin\Release\plugin\AdicHelper\lib\AS\HandleUtils
+..\..\Build\bin\Release\plugin\AdicHelper\lib\AS\Hash_priv
+..\..\Build\bin\Release\plugin\AdicHelper\lib\AS\vString
+..\..\Build\bin\Release\plugin\AdicHelper\lib\AS\vString_priv
+..\..\Build\bin\Release\plugin\AdicHelper\Source_MASM\AdicHelper.asm
+..\..\Build\bin\Release\plugin\AdicHelper\Source_MASM\main.ico
+..\..\Build\bin\Release\plugin\AdicHelper\Source_MASM\make.bat
+..\..\Build\bin\Release\plugin\AdicHelper\Source_MASM\rsrc.rc
+..\..\Build\bin\Release\plugin\AdicHelper\Source_MASM\x.cur
+..\..\Build\bin\Release\plugin\jasshelper\clijasshelper.exe
+..\..\Build\bin\Release\plugin\jasshelper\jasshelper.conf
+..\..\Build\bin\Release\plugin\jasshelper\jasshelper.exe
+..\..\Build\bin\Release\plugin\jasshelper\pjass.exe
+..\..\Build\bin\Release\plugin\jasshelper\sfmpq.dll
+..\..\Build\bin\Release\plugin\tesh\Changelog - Horus.txt
+..\..\Build\bin\Release\plugin\tesh\Changelog - TESH.txt
+..\..\Build\bin\Release\plugin\tesh\Changelog.txt
+..\..\Build\bin\Release\plugin\tesh\funclist.db
+..\..\Build\bin\Release\plugin\tesh\horus.dll
+..\..\Build\bin\Release\plugin\tesh\SciLexer.dll
+..\..\Build\bin\Release\plugin\tesh\Styles.ini
+..\..\Build\bin\Release\plugin\tesh\TESH.conf
+..\..\Build\bin\Release\plugin\tesh\tesh.dll
+..\..\Build\bin\Release\plugin\tesh\TESH.ini
+..\..\Build\bin\Release\plugin\tesh\Tesh.lua
+..\..\Build\bin\Release\plugin\tesh\Tesh.plcfg
+..\..\Build\bin\Release\plugin\warcraft3\yd_jass_api.dll
+..\..\Build\bin\Release\plugin\warcraft3\yd_leak_monitor.dll
+..\..\Build\bin\Release\plugin\warcraft3\yd_loader.dll
+..\..\Build\bin\Release\plugin\warcraft3\yd_lua_engine.dll
+..\..\Build\bin\Release\plugin\warcraft3\yd_mutil_warcraft3.dll
+..\..\Build\bin\Release\plugin\wave\Wave.exe
+..\..\Build\bin\Release\plugin\wave\include\WaveForce.i
+..\..\Build\bin\Release\plugin\wave\include\YDWE_Base.h
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\arithmetic.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\assert_msg.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\cat.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\comma.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\comma_if.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\comparison.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\control.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\debug.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\dec.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\empty.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\enum.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\enum_params.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\enum_params_with_a_default.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\enum_params_with_defaults.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\enum_shifted.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\enum_shifted_params.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\expand.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\expr_if.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\facilities.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\for.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\identity.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\if.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\inc.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iterate.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\library.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\limits.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\max.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\min.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\punctuation.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repeat.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repeat_2nd.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repeat_3rd.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repeat_from_to.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repeat_from_to_2nd.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repeat_from_to_3rd.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\selection.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\slot.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\stringize.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\tuple.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\while.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\wstringize.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\arithmetic\add.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\arithmetic\dec.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\arithmetic\div.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\arithmetic\inc.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\arithmetic\mod.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\arithmetic\mul.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\arithmetic\sub.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\arithmetic\detail\div_base.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array\data.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array\elem.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array\insert.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array\pop_back.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array\pop_front.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array\push_back.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array\push_front.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array\remove.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array\replace.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array\reverse.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\array\size.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\comparison\equal.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\comparison\greater.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\comparison\greater_equal.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\comparison\less.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\comparison\less_equal.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\comparison\not_equal.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\config\config.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\config\limits.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\control\deduce_d.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\control\expr_if.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\control\expr_iif.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\control\if.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\control\iif.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\control\while.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\control\detail\while.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\control\detail\dmc\while.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\control\detail\edg\while.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\control\detail\msvc\while.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\debug\assert.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\debug\error.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\debug\line.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\detail\auto_rec.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\detail\check.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\detail\is_binary.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\detail\is_nullary.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\detail\is_unary.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\detail\null.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\detail\split.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\detail\dmc\auto_rec.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\facilities\apply.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\facilities\empty.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\facilities\expand.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\facilities\identity.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\facilities\intercept.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\facilities\is_1.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\facilities\is_empty.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\facilities\is_empty_or_1.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\iterate.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\local.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\self.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\finish.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\local.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\rlocal.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\self.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\start.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\lower1.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\lower2.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\lower3.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\lower4.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\lower5.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\upper1.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\upper2.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\upper3.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\upper4.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\bounds\upper5.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\iter\forward1.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\iter\forward2.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\iter\forward3.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\iter\forward4.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\iter\forward5.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\iter\reverse1.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\iter\reverse2.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\iter\reverse3.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\iter\reverse4.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\iteration\detail\iter\reverse5.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\adt.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\append.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\at.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\cat.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\enum.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\filter.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\first_n.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\fold_left.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\fold_right.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\for_each.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\for_each_i.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\for_each_product.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\rest_n.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\reverse.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\size.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\to_tuple.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\transform.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\detail\fold_left.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\detail\fold_right.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\detail\dmc\fold_left.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\detail\edg\fold_left.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\list\detail\edg\fold_right.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical\and.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical\bitand.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical\bitnor.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical\bitor.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical\bitxor.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical\bool.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical\compl.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical\nor.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical\not.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical\or.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\logical\xor.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\punctuation\comma.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\punctuation\comma_if.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\punctuation\paren.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\punctuation\paren_if.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\deduce_r.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\deduce_z.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\enum.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\enum_binary_params.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\enum_params.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\enum_params_with_a_default.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\enum_params_with_defaults.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\enum_shifted.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\enum_shifted_binary_params.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\enum_shifted_params.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\enum_trailing.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\enum_trailing_binary_params.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\enum_trailing_params.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\for.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\repeat.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\repeat_from_to.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\detail\for.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\detail\dmc\for.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\detail\edg\for.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\repetition\detail\msvc\for.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\selection\max.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\selection\min.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\cat.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\elem.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\enum.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\filter.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\first_n.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\fold_left.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\fold_right.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\for_each.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\for_each_i.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\for_each_product.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\insert.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\pop_back.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\pop_front.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\push_back.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\push_front.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\remove.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\replace.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\rest_n.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\reverse.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\seq.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\size.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\subseq.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\to_array.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\to_tuple.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\transform.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\seq\detail\split.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\slot\counter.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\slot\slot.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\slot\detail\counter.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\slot\detail\def.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\slot\detail\shared.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\slot\detail\slot1.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\slot\detail\slot2.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\slot\detail\slot3.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\slot\detail\slot4.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\slot\detail\slot5.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\tuple\eat.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\tuple\elem.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\tuple\rem.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\tuple\reverse.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\tuple\to_list.hpp
+..\..\Build\bin\Release\plugin\wave\include\boost\preprocessor\tuple\to_seq.hpp
+..\..\Build\bin\Release\plugin\YDColorizer\WinApi.dll
+..\..\Build\bin\Release\plugin\YDColorizer\YDColorizer.dll
+..\..\Build\bin\Release\plugin\YDColorizer\YDColorizer.dll.config
+..\..\Build\bin\Release\plugin\YDColorizer\YDColorizer.lua
+..\..\Build\bin\Release\plugin\YDColorizer\YDColorizer.plcfg
+..\..\Build\bin\Release\plugin\YDColorizer\YDColorizerConfig.cfg
+..\..\Build\bin\Release\plugin\YDFont\consolas.ttf
+..\..\Build\bin\Release\plugin\YDFont\font.ini
+..\..\Build\bin\Release\plugin\YDFont\YDFont.dll
+..\..\Build\bin\Release\plugin\YDFont\YDFont.plcfg
+..\..\Build\bin\Release\plugin\YDTrigger\Function.h
+..\..\Build\bin\Release\plugin\YDTrigger\Globals.h
+..\..\Build\bin\Release\plugin\YDTrigger\Import.h
+..\..\Build\bin\Release\plugin\YDTrigger\ImportSaveLoadSystem.h
+..\..\Build\bin\Release\plugin\YDTrigger\Timer.h
+..\..\Build\bin\Release\plugin\YDTrigger\YDTrigger.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Animation.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Camera.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Destructable.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Environment.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\General.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Group.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Hero.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Math.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Pro_WidgetLift.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Quest.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Sound.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Trigger.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\Unit.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\UnitPro.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\TriggerRegisterPlayerKeyEventBJ.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\TriggerRegisterPlayerSelectionEventBJ.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\UnitBuffsCheck.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\UnitCountBuffsEx.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\UnitRemoveBuffs.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\UnitRemoveBuffsEx.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\Hero\CheckItemcodeStatus.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\Hero\CheckItemStatus.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\Hero\GetHeroStatBJ.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\Hero\HeroStatCheck.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\Trigger\TriggerRegisterPlayerKeyEventBJ.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\Trigger\TriggerRegisterPlayerSelectionEventBJ.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\Unit\UnitBuffsCheck.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\Unit\UnitCountBuffsEx.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\Unit\UnitRemoveBuffs.h
+..\..\Build\bin\Release\plugin\YDTrigger\BJOptimization\detail\Unit\UnitRemoveBuffsEx.h
+..\..\Build\bin\Release\plugin\YDTrigger\Common\if.h
+..\..\Build\bin\Release\plugin\YDTrigger\Common\loop.h
+..\..\Build\bin\Release\plugin\YDTrigger\Common\switch.h
+..\..\Build\bin\Release\plugin\YDTrigger\Common\bool\or.h
+..\..\Build\bin\Release\plugin\YDTrigger\SaveLoadSystem\Any2I.h
+..\..\Build\bin\Release\plugin\YDTrigger\SaveLoadSystem\GCSet_Get.h
+..\..\Build\bin\Release\plugin\YDTrigger\SaveLoadSystem\GCSystem.h
+..\..\Build\bin\Release\plugin\YDTrigger\SaveLoadSystem\GCSystem.j
+..\..\Build\bin\Release\plugin\YDTrigger\SaveLoadSystem\Has_Clear.h
+..\..\Build\bin\Release\plugin\YDTrigger\SaveLoadSystem\HTSet_Get.h
+..\..\Build\bin\Release\plugin\YDTrigger\SaveLoadSystem\HTSystem.h
+..\..\Build\bin\Release\share\locale\zh_CN\LC_MESSAGES\MainScript.mo
+..\..\Build\bin\Release\share\locale\zh_CN\LC_MESSAGES\MainScript.po
+..\..\Build\bin\Release\share\locale\zh_CN\LC_MESSAGES\YDWEStartup.mo
+..\..\Build\bin\Release\share\locale\zh_CN\LC_MESSAGES\YDWEStartup.po
+..\..\Build\bin\Release\share\locale\zh_TW\LC_MESSAGES\MainScript.mo
+..\..\Build\bin\Release\share\locale\zh_TW\LC_MESSAGES\MainScript.po
+..\..\Build\bin\Release\share\locale\zh_TW\LC_MESSAGES\YDWEStartup.mo
+..\..\Build\bin\Release\share\locale\zh_TW\LC_MESSAGES\YDWEStartup.po
+..\..\Build\bin\Release\share\mpq\units.mpq
+..\..\Build\bin\Release\share\mpq\YDTrigger.mpq
+..\..\Build\bin\Release\share\mpq\YDWE.mpq
+..\..\Build\bin\Release\share\script\YDWE.lua
+..\..\Build\bin\Release\share\script\ydwe_on_menu.lua
+..\..\Build\bin\Release\share\script\ydwe_on_save.lua
+..\..\Build\bin\Release\share\script\ydwe_on_startup.lua
+..\..\Build\bin\Release\share\script\lua\ar_sfmpq.lua
+..\..\Build\bin\Release\share\script\lua\dotnet.lua
+..\..\Build\bin\Release\share\script\lua\registry.lua
+..\..\Build\bin\Release\share\script\lua\slk.lua
+..\..\Build\bin\Release\share\script\lua\template.lua
+..\..\Build\bin\Release\share\script\lua\util.lua
+..\..\Build\bin\Release\附录(新手必看)\1.20转1.24——论坛活动\YDWE论坛活动——1.20转1.24.url
+..\..\Build\bin\Release\附录(新手必看)\1.20转1.24——论坛活动\说明.txt
+..\..\Build\bin\Release\附录(新手必看)\CJass教程\CJASS系列经典教程(By Warft_TigerCN ).url
+..\..\Build\bin\Release\附录(新手必看)\Jass教程\Jass培训班教程.url
+..\..\Build\bin\Release\附录(新手必看)\VJass教程\Visual Jass(vJass)教学 by AppleSheep.url
+..\..\Build\bin\Release\附录(新手必看)\VJass教程\VJass教程(aeris版与Warft_TigerCN版).url
+..\..\Build\bin\Release\附录(新手必看)\YDWE官方更新\YDWE官方更新(推荐).url
+..\..\Build\bin\Release\附录(新手必看)\YDWE教程——使用手册\YDWEQ来A去.url
+..\..\Build\bin\Release\附录(新手必看)\YDWE教程——使用手册\YDWE结构说明.doc
+..\..\Build\bin\Release\附录(新手必看)\YDWE教程——存储系统的使用\YDWE存储系统——T化的Return bug+GC和哈希表.url
+..\..\Build\bin\Release\附录(新手必看)\YDWE教程——新手教程\YDWE新手教程(Ver0_2) By h82258652.mht
+..\..\Build\bin\Release\附录(新手必看)\YDWE自测题\YDWE自测题第一期——中心计时器之一.url
+..\..\Build\bin\Release\附录(新手必看)\YDWE自测题\YDWE自测题第一期——存储系统之一.url
+..\..\Build\bin\Release\附录(新手必看)\YDWE自测题\说明.txt
+..\..\Build\bin\Release\附录(新手必看)\调教中立玩家——论坛活动\YDWE论坛活动——调教中立玩家.url
+..\..\Build\bin\Release\附录(新手必看)\调教中立玩家——论坛活动\说明.txt
+复制了 748 个文件
+"编译用时 635 s." 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Styles>
+  <Include source="scrollbar.xml" />
+  <Class name="Button" font="1" textcolor="#000000" hottextcolor="#FFFFFF" focusedtextcolor="#000000" pushedtextcolor="#77A8DE"
+		normalimage   = "file='Common/Button.png' corner='5,11,5,11' source='0, 0,96,24'"
+		hotimage      = "file='Common/Button.png' corner='5,11,5,11' source='0,24,96,48'"
+		pushedimage   = "file='Common/Button.png' corner='5,11,5,11' source='0,48,96,72'"
+		disabledimage = "file='Common/Button.png' corner='5,11,5,11' source='0,72,96,96'"
+	/>
+  <Class name="NormalRadioButton" font="2" textcolor="#FF666666" hottextcolor="#FF000000" selectedtextcolor="#FF000000" disabledtextcolor="#FF666666" textpadding="20,-2,0,0" align="left"         
+		normalimage           = "file='Common/RadioButton/radiobtn_normal.png'         dest='0,5,15,20'"
+		hotimage              = "file='Common/RadioButton/radiobtn_highlight.png'      dest='0,5,15,20'"
+		pushedimage           = "file='Common/RadioButton/radiobtn_pushed.png'         dest='0,5,15,20'"
+		disabledimage         = "file='Common/RadioButton/radiobtn_normal.png'         dest='0,5,15,20' fade='128'"
+		selectedimage         = "file='Common/RadioButton/radiobtn_tick_normal.png'    dest='0,5,15,20'"
+		selectedhotimage      = "file='Common/RadioButton/radiobtn_tick_highlight.png' dest='0,5,15,20'"
+		selectedpushedimage   = "file='Common/RadioButton/radiobtn_tick_pushed.png'    dest='0,5,15,20'"
+		selecteddisabledimage = "file='Common/RadioButton/radiobtn_tick_normal.png'    dest='0,5,15,20' fade='128'"
+	/>
+  <Class name="CheckBox" font="2" textcolor="#FF666666" hottextcolor="#FF000000" selectedtextcolor="#FF000000" disabledtextcolor="#FF666666" textpadding="20,-2,0,0" align="left"
+		normalimage           = "file='Common/CheckButton/checkbox_normal.png'         dest='0,5,15,20'"
+		hotimage              = "file='Common/CheckButton/checkbox_highlight.png'      dest='0,5,15,20'"
+		pushedimage           = "file='Common/CheckButton/checkbox_pushed.png'         dest='0,5,15,20'"
+		disabledimage         = "file='Common/CheckButton/checkbox_normal.png'         dest='0,5,15,20' fade='128'"
+		selectedimage         = "file='Common/CheckButton/checkbox_tick_normal.png'    dest='0,5,15,20'"
+		selectedhotimage      = "file='Common/CheckButton/checkbox_tick_highlight.png' dest='0,5,15,20'"
+		selectedpushedimage   = "file='Common/CheckButton/checkbox_tick_pushed.png'    dest='0,5,15,20'"
+		selecteddisabledimage = "file='Common/CheckButton/checkbox_tick_normal.png'    dest='0,5,15,20' fade='128'"
+         
+	/>
+  <Class name="Label" height="20" textpadding="2,-4,2,-4" textcolor="#FFFFFFFF" disabledtextcolor="#FFA7A6AA" font="1" align="wrap" />
+</Styles>

@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{75B04C07-94D9-41E7-BBFD-E67F79BFF41A}</ProjectGuid>
+    <RootNamespace>YDWEBase</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfAtl>false</UseOfAtl>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Editor\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Editor\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateManifest>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level4</WarningLevel>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <Optimization>MaxSpeed</Optimization>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+    </ClCompile>
+    <Link>
+      <BaseAddress>
+      </BaseAddress>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+    </ClCompile>
+    <Link />
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <BaseAddress>
+      </BaseAddress>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="ydwe\exception\detail\windows_error_string.cpp" />
+    <ClCompile Include="ydwe\exception\exception.cpp" />
+    <ClCompile Include="ydwe\exception\seh_exception.cpp" />
+    <ClCompile Include="ydwe\exception\windows_exception.cpp" />
+    <ClCompile Include="ydwe\file\file_handle.cpp" />
+    <ClCompile Include="ydwe\file\file_mapping_handle.cpp" />
+    <ClCompile Include="ydwe\file\memory_mapped_file.cpp" />
+    <ClCompile Include="ydwe\file\steam.cpp" />
+    <ClCompile Include="ydwe\hook\detail\disassembly.cpp" />
+    <ClCompile Include="ydwe\hook\detail\import_address_table.cpp" />
+    <ClCompile Include="ydwe\hook\detail\inject_dll.cpp" />
+    <ClCompile Include="ydwe\hook\detail\memory_protect.cpp" />
+    <ClCompile Include="ydwe\hook\detail\replace_pointer.cpp" />
+    <ClCompile Include="ydwe\hook\detail\export_address_table.cpp" />
+    <ClCompile Include="ydwe\hook\eat.cpp" />
+    <ClCompile Include="ydwe\hook\iat.cpp" />
+    <ClCompile Include="ydwe\hook\iat_manager.cpp" />
+    <ClCompile Include="ydwe\hook\inline.cpp" />
+    <ClCompile Include="ydwe\i18n\libintl.cpp" />
+    <ClCompile Include="ydwe\i18n\mofile.cpp" />
+    <ClCompile Include="ydwe\path\detail\get_path.cpp" />
+    <ClCompile Include="ydwe\path\filesystem_helper.cpp" />
+    <ClCompile Include="ydwe\path\service.cpp" />
+    <ClCompile Include="ydwe\util\console.cpp" />
+    <ClCompile Include="ydwe\util\detail\ansi_codecvt_facet.cpp" />
+    <ClCompile Include="ydwe\util\detail\codecvt.cpp" />
+    <ClCompile Include="ydwe\util\is_utf8.cpp" />
+    <ClCompile Include="ydwe\util\unicode.cpp" />
+    <ClCompile Include="ydwe\warcraft3\detail\convert_real.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Strict</FloatingPointModel>
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Strict</FloatingPointModel>
+    </ClCompile>
+    <ClCompile Include="ydwe\warcraft3\detail\memory_search.cpp" />
+    <ClCompile Include="ydwe\warcraft3\detail\string_hash.cpp" />
+    <ClCompile Include="ydwe\warcraft3\basic_searcher.cpp" />
+    <ClCompile Include="ydwe\warcraft3\hashtable.cpp" />
+    <ClCompile Include="ydwe\warcraft3\jass.cpp" />
+    <ClCompile Include="ydwe\warcraft3\jass\trampoline.cpp" />
+    <ClCompile Include="ydwe\warcraft3\native_function.cpp" />
+    <ClCompile Include="ydwe\warcraft3\war3_searcher.cpp" />
+    <ClCompile Include="ydwe\win\env_variable.cpp" />
+    <ClCompile Include="ydwe\win\file_version.cpp" />
+    <ClCompile Include="ydwe\win\pe_reader.cpp" />
+    <ClCompile Include="ydwe\win\process.cpp" />
+    <ClCompile Include="ydwe\win\version.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ydwe\com\guard.h" />
+    <ClInclude Include="ydwe\com\unique_ptr.h" />
+    <ClInclude Include="ydwe\config.h" />
+    <ClInclude Include="ydwe\exception\detail\windows_error_string.h" />
+    <ClInclude Include="ydwe\exception\exception.h" />
+    <ClInclude Include="ydwe\exception\seh_exception.h" />
+    <ClInclude Include="ydwe\exception\windows_exception.h" />
+    <ClInclude Include="ydwe\file\memory_mapped_file.h" />
+    <ClInclude Include="ydwe\file\file_handle.h" />
+    <ClInclude Include="ydwe\file\file_mapping_handle.h" />
+    <ClInclude Include="ydwe\file\steam.h" />
+    <ClInclude Include="ydwe\hook\assembler\writer.h" />
+    <ClInclude Include="ydwe\hook\assembler\register.h" />
+    <ClInclude Include="ydwe\hook\detail\disassembly.h" />
+    <ClInclude Include="ydwe\hook\detail\import_address_table.h" />
+    <ClInclude Include="ydwe\hook\detail\inject_dll.h" />
+    <ClInclude Include="ydwe\hook\detail\memory_protect.h" />
+    <ClInclude Include="ydwe\hook\detail\replace_pointer.h" />
+    <ClInclude Include="ydwe\hook\detail\export_address_table.h" />
+    <ClInclude Include="ydwe\hook\eat.h" />
+    <ClInclude Include="ydwe\hook\iat.h" />
+    <ClInclude Include="ydwe\hook\iat_manager.h" />
+    <ClInclude Include="ydwe\hook\inline.h" />
+    <ClInclude Include="ydwe\i18n\libintl.h" />
+    <ClInclude Include="ydwe\i18n\mofile.h" />
+    <ClInclude Include="ydwe\lua\luabind.h" />
+    <ClInclude Include="ydwe\lua\luabind\converter_pvoid.h" />
+    <ClInclude Include="ydwe\lua\luabind\converter_std_wstring.h" />
+    <ClInclude Include="ydwe\lua\state.h" />
+    <ClInclude Include="ydwe\path\detail\get_path.h" />
+    <ClInclude Include="ydwe\path\filesystem_helper.h" />
+    <ClInclude Include="ydwe\path\self.h" />
+    <ClInclude Include="ydwe\path\service.h" />
+    <ClInclude Include="ydwe\util\buffer.h" />
+    <ClInclude Include="ydwe\util\console.h" />
+    <ClInclude Include="ydwe\util\detail\ansi_codecvt_facet.h" />
+    <ClInclude Include="ydwe\util\detail\codecvt.h" />
+    <ClInclude Include="ydwe\util\detail\utf8_codecvt_facet.h" />
+    <ClInclude Include="ydwe\util\foreach.h" />
+    <ClInclude Include="ydwe\util\singleton.h" />
+    <ClInclude Include="ydwe\util\unicode.h" />
+    <ClInclude Include="ydwe\util\noncopyable.h" />
+    <ClInclude Include="ydwe\warcraft3\detail\memory_search.h" />
+    <ClInclude Include="ydwe\warcraft3\detail\string_hash.h" />
+    <ClInclude Include="ydwe\warcraft3\hashtable.h" />
+    <ClInclude Include="ydwe\warcraft3\basic_searcher.h" />
+    <ClInclude Include="ydwe\warcraft3\jass.h" />
+    <ClInclude Include="ydwe\warcraft3\jass\opcode.h" />
+    <ClInclude Include="ydwe\warcraft3\jass\trampoline.h" />
+    <ClInclude Include="ydwe\warcraft3\native_function.h" />
+    <ClInclude Include="ydwe\warcraft3\version.h" />
+    <ClInclude Include="ydwe\warcraft3\war3_searcher.h" />
+    <ClInclude Include="ydwe\win\env_variable.h" />
+    <ClInclude Include="ydwe\win\file_version.h" />
+    <ClInclude Include="ydwe\win\pe_reader.h" />
+    <ClInclude Include="ydwe\win\process.h" />
+    <ClInclude Include="ydwe\win\scoped_handle.h" />
+    <ClInclude Include="ydwe\win\version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\YDWEVersion\common.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,3 @@
+LIBRARY "YDWEStartup"
+EXPORTS
+	YDWEStartup

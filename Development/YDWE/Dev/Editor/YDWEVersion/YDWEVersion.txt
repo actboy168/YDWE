@@ -1,0 +1,74 @@
+#include <YDWEVersion.h>
+#include <windows.h>
+
+#ifndef YDWE_VERSION_COMMENTS
+#define YDWE_VERSION_COMMENTS          ""
+#endif
+
+#ifndef YDWE_VERSION_COMPANYNAME
+#define YDWE_VERSION_COMPANYNAME       "www.ydwe.net"
+#endif
+
+#ifndef YDWE_VERSION_FILEDESCRIPTION
+#define YDWE_VERSION_FILEDESCRIPTION   ""
+#endif
+
+#ifndef YDWE_VERSION_INTERNALNAME
+#define YDWE_VERSION_INTERNALNAME      "YDWE"
+#endif
+
+#ifndef YDWE_VERSION_LEGALCOPYRIGHT
+#define YDWE_VERSION_LEGALCOPYRIGHT    "Copyright (C) 2009~2013, Aeris, Actboy168"
+#endif
+
+#ifndef YDWE_VERSION_ORIGUINALFILENAME
+#define YDWE_VERSION_ORIGUINALFILENAME ""
+#endif
+
+#ifndef YDWE_VERSION_PRODUCTNAME
+#define YDWE_VERSION_PRODUCTNAME       "YDWE"
+#endif
+
+#define VERSION_STR1(a,b,c,d)      #a ", " #b ", " #c ", " #d
+#define VERSION_STR2(a,b,c,d)      VERSION_STR1(a,b,c,d)
+#define YDWE_VERSION_NUMBER        YDWE_VERSION_MAJOR,YDWE_VERSION_MINOR,YDWE_VERSION_REVISED,YDWE_VERSION_BUILD
+#define YDWE_VERSION_NUMBER_STRING VERSION_STR2(YDWE_VERSION_MAJOR,YDWE_VERSION_MINOR,YDWE_VERSION_REVISED,YDWE_VERSION_BUILD)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION YDWE_VERSION_NUMBER
+ PRODUCTVERSION YDWE_VERSION_NUMBER
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE VFT_DLL
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "Comments", YDWE_VERSION_COMMENTS
+            VALUE "CompanyName", YDWE_VERSION_COMPANYNAME
+            VALUE "FileDescription", YDWE_VERSION_FILEDESCRIPTION
+            VALUE "FileVersion", YDWE_VERSION_NUMBER_STRING
+            VALUE "InternalName", YDWE_VERSION_INTERNALNAME
+            VALUE "LegalCopyright", YDWE_VERSION_LEGALCOPYRIGHT
+            VALUE "OriginalFilename", YDWE_VERSION_ORIGUINALFILENAME
+            VALUE "ProductName", YDWE_VERSION_PRODUCTNAME
+            VALUE "ProductVersion", YDWE_VERSION_NUMBER_STRING
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
