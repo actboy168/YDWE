@@ -1,0 +1,3 @@
+LIBRARY "mapanalyzer"
+EXPORTS
+	luaopen_mapanalyzer

@@ -1,0 +1,3 @@
+LIBRARY "filesystem"
+EXPORTS
+	luaopen_filesystem

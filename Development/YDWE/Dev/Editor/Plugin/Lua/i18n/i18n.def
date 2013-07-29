@@ -1,0 +1,3 @@
+LIBRARY "i18n"
+EXPORTS
+	luaopen_i18n

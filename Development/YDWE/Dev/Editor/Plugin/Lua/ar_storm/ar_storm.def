@@ -1,0 +1,3 @@
+LIBRARY "ar_storm"
+EXPORTS
+	luaopen_ar_storm

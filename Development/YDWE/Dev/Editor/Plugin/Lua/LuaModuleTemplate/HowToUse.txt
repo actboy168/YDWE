@@ -1,0 +1,2 @@
+1. 双击Generate.bat，输入工程文件名回车，工程即生成
+2. Checkout YDWE.sln（位置在Development\YDWE\Dev\Editor\Core\Solution），并添加新生成的工程文件

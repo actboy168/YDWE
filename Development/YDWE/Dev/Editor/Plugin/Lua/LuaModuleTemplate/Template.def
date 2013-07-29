@@ -1,0 +1,3 @@
+LIBRARY "<?php echo $argv[1]; ?>"
+EXPORTS
+	luaopen_<?php echo $argv[1]; ?>
