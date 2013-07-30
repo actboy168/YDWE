@@ -104,7 +104,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='YDTrigger|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
     <CustomBuildAfterTargets>
     </CustomBuildAfterTargets>
     <PreLinkEventUseInBuild>true</PreLinkEventUseInBuild>
@@ -115,7 +114,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='YDWE|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
     <CustomBuildAfterTargets />
     <IntDir>$(UIObj)</IntDir>
     <OutDir>$(UIObj)</OutDir>
@@ -145,10 +143,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>"$(OpenSource)\Python\3.2.2\python.exe" "$(YDWE)\Editor\UI\src\EditHelper\build_units.py" "$(YDWE)\Editor\UI"</Command>
-      <Message>python run...</Message>
-    </PostBuildEvent>
+    <PostBuildEvent />
     <Lib />
     <BuildLog />
     <PreLinkEvent>
@@ -159,9 +154,7 @@
       <Command>
       </Command>
     </CustomBuildStep>
-    <BuildLog>
-      <Path>$(OutDir)\$(MSBuildProjectName).log</Path>
-    </BuildLog>
+    <BuildLog />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='YDWE|Win32'">
     <ClCompile>
@@ -184,9 +177,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>"$(OpenSource)\Python\3.2.2\python.exe" "$(YDWE)\Editor\UI\src\EditHelper\build_units.py" "$(YDWE)\Editor\UI"</Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
     <Lib />
     <BuildLog />
     <PreLinkEvent>
@@ -197,9 +188,7 @@
       <Command>
       </Command>
     </CustomBuildStep>
-    <BuildLog>
-      <Path>$(OutDir)\$(MSBuildProjectName).log</Path>
-    </BuildLog>
+    <BuildLog />
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

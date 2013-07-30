@@ -61,39 +61,8 @@
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy "$(OpenSource)\Boost\1.53\stage\lib\$(PlatformName)\boost_system-vc100-mt-1_53.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Boost\1.53\stage\lib\$(PlatformName)\boost_filesystem-vc100-mt-1_53.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Boost\1.53\stage\lib\$(PlatformName)\boost_date_time-vc100-mt-1_53.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Boost\1.53\stage\lib\$(PlatformName)\boost_thread-vc100-mt-1_53.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\APR\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\APR-Util\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Log4CXX\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Zlib\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Lua\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\LuaBind\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\StormLib\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(YDWE)\Editor\Core\Script\YDLogger.cfg" "$(TargetDir)\..\logs\" /d /y
-xcopy "$(YDWE)\Editor\Core\Script\lua\*.lua" "$(TargetDir)\..\share\script\" /d /y
-
-xcopy "$(YDWE)\Editor\Core\Script\lua\compile\*.lua" "$(TargetDir)\..\share\script\compile\" /d /y
-
-</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Copy dependencies...</Message>
-    </PostBuildEvent>
+    <PostBuildEvent />
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -120,39 +89,8 @@ xcopy "$(YDWE)\Editor\Core\Script\lua\compile\*.lua" "$(TargetDir)\..\share\scri
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy "$(OpenSource)\Boost\1.53\stage\lib\$(PlatformName)\boost_system-vc100-mt-1_53.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Boost\1.53\stage\lib\$(PlatformName)\boost_filesystem-vc100-mt-1_53.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Boost\1.53\stage\lib\$(PlatformName)\boost_date_time-vc100-mt-1_53.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Boost\1.53\stage\lib\$(PlatformName)\boost_thread-vc100-mt-1_53.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\APR\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\APR-Util\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Log4CXX\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Zlib\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\Lua\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\LuaBind\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(OpenSource)\StormLib\Current\bin\$(PlatformName)\$(ConfigurationName)\*.dll" "$(TargetDir)" /d /y
-
-xcopy "$(YDWE)\Editor\Core\Script\YDLogger.cfg" "$(TargetDir)\..\logs\" /d /y
-xcopy "$(YDWE)\Editor\Core\Script\lua\*.lua" "$(TargetDir)\..\share\script\" /d /y
-
-xcopy "$(YDWE)\Editor\Core\Script\lua\compile\*.lua" "$(TargetDir)\..\share\script\compile\" /d /y
-
-</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Copy dependencies...</Message>
-    </PostBuildEvent>
+    <PostBuildEvent />
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
