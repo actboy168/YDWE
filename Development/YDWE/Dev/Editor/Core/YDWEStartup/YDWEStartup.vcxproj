@@ -60,13 +60,8 @@
       <ModuleDefinitionFile>YDWEStartup.def</ModuleDefinitionFile>
       <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy "$(VS100COMNTOOLS)\..\..\VC\redist\Debug_NonRedist\x86\Microsoft.VC100.DebugCRT\*.dll" "$(TargetDir)" /d /y
-</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Copy dependencies...</Message>
-    </PostBuildEvent>
+    <PostBuildEvent />
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -87,12 +82,8 @@
       <ModuleDefinitionFile>YDWEStartup.def</ModuleDefinitionFile>
       <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy "$(ThirdParty)\Microsoft\CRT\$(PlatformName)\Microsoft.VC100.CRT\*.dll" "$(TargetDir)" /d /y</Command>
-    </PostBuildEvent>
-    <PostBuildEvent>
-      <Message>Copy dependencies...</Message>
-    </PostBuildEvent>
+    <PostBuildEvent />
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
