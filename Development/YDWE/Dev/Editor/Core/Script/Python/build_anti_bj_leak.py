@@ -3,6 +3,9 @@
 import sys
 import os
 import re
+import util.path
+
+path = util.path.path
 
 ###############################################################
 def write_header(f):
@@ -181,13 +184,15 @@ def parse_file(filename, outputpath):
   except IOError:
     pass
 ###############################################################
+def build_anti_bj_leak(configuration):
+  util.path.ResetPath(configuration)
+  parse_file(str(path['CoreRoot'] / 'Script' / 'Python' / 'bj_script.j'), str(path['Result'] / 'jass' / 'AntiBJLeak'))
+
+def Configuration():
+    if len(sys.argv) > 1:
+        return sys.argv[1]
+    return 'Debug'  
+###############################################################
 if __name__ == "__main__":
-  if len(sys.argv) >= 3:
-    outputpath = sys.argv[2]
-  else:
-    outputpath = './'
-  if len(sys.argv) >= 2: 
-    inputpath = sys.argv[1]
-  else:
-    inputpath = './bj_script.j'
-  parse_file(inputpath, outputpath)
+  build_anti_bj_leak(Configuration())
+
