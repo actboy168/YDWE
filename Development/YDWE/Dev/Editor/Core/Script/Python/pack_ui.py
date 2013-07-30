@@ -43,6 +43,7 @@ def Configuration():
     return 'Debug'
 
 if __name__ == '__main__':
+    print('pack_ui')
     util.path.ResetPath(Configuration())
     pack_ui('ydtrigger')
     pack_ui('ydwe')

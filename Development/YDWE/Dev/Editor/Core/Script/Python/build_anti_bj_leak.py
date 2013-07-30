@@ -184,8 +184,7 @@ def parse_file(filename, outputpath):
   except IOError:
     pass
 ###############################################################
-def build_anti_bj_leak(configuration):
-  util.path.ResetPath(configuration)
+def build_anti_bj_leak():
   parse_file(str(path['CoreRoot'] / 'Script' / 'Python' / 'bj_script.j'), str(path['Result'] / 'jass' / 'AntiBJLeak'))
 
 def Configuration():
@@ -194,5 +193,7 @@ def Configuration():
     return 'Debug'  
 ###############################################################
 if __name__ == "__main__":
-  build_anti_bj_leak(Configuration())
+  print('build_anti_bj_leak')
+  util.path.ResetPath(Configuration())
+  build_anti_bj_leak()
 

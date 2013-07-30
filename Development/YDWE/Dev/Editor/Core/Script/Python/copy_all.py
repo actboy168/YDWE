@@ -27,7 +27,6 @@ def copy_component():
     fs.copy_directory(path['BuildRoot'] / 'Editor' / 'Component', path['Result'])
 
 def copy_all(configuration):
-    util.path.ResetPath(configuration)
     if configuration == 'Release':
         copy_crt_dll()
     copy_boost_dll('system')
@@ -51,6 +50,8 @@ def Configuration():
         return sys.argv[1]
     return 'Debug'
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
+    print('copy_all')
+    util.path.ResetPath(Configuration())
     copy_all(Configuration())
 

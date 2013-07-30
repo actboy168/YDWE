@@ -6,8 +6,7 @@ import util.zip_package as zip
 
 path = util.path.path
 
-def pack_skin(configuration):
-    util.path.ResetPath(configuration)
+def pack_skin():
     zip.zip_folder(str(path['CoreRoot'] / 'DuiLib' / 'Resources'), str(path['ResultCore'] / 'skin.zip'), zip.FileNameRegexNegtiveFilter('thumbs\.db'))
 
 def Configuration():
@@ -15,5 +14,7 @@ def Configuration():
         return sys.argv[1]
     return 'Debug'
 
-if __name__ == '__main__':    
-    pack_skin(Configuration())
+if __name__ == '__main__':
+    print('pack_skin')
+    util.path.ResetPath(Configuration())
+    pack_skin()

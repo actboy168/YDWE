@@ -19,5 +19,6 @@ def Configuration():
     return 'Debug'
 
 if __name__ == '__main__':
+    print('pack_units')
     util.path.ResetPath(Configuration())
     pack_units()
