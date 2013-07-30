@@ -246,56 +246,6 @@
     <ClInclude Include="Utils\zip_reader.h" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\Script\zip_package.py">
-      <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(OpenSource)\Python\3.2.2\python.exe" "$(YDWE)\Editor\Core\Script\zip_package.py" -s "$(ProjectDir)Resources" -d "$(TargetDir)skin.zip" -f "thumbs\.db"</Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Packaging resources...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(TargetDir)skin.zip</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(OpenSource)\Python\3.2.2\python.exe" "$(YDWE)\Editor\Core\Script\zip_package.py" -s "$(ProjectDir)Resources" -d "$(TargetDir)skin.zip" -f "thumbs\.db"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(TargetDir)skin.zip</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Packaging resources...</Message>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)Resources\DialogConfig.xml;$(ProjectDir)Resources\DialogImportManager.xml;$(ProjectDir)Resources\scrollbar.xml;$(ProjectDir)Resources\styles.xml;%(AdditionalInputs)</AdditionalInputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Resources\DialogConfig.xml;$(ProjectDir)Resources\DialogImportManager.xml;$(ProjectDir)Resources\scrollbar.xml;$(ProjectDir)Resources\styles.xml;%(AdditionalInputs)</AdditionalInputs>
-    </CustomBuild>
-    <None Include="Resources\Common\button.png" />
-    <None Include="Resources\Common\CheckButton\checkbox_highlight.png" />
-    <None Include="Resources\Common\CheckButton\checkbox_normal.png" />
-    <None Include="Resources\Common\CheckButton\checkbox_pushed.png" />
-    <None Include="Resources\Common\CheckButton\checkbox_tick_highlight.png" />
-    <None Include="Resources\Common\CheckButton\checkbox_tick_normal.png" />
-    <None Include="Resources\Common\CheckButton\checkbox_tick_pushed.png" />
-    <None Include="Resources\Common\RadioButton\radiobtn_highlight.png" />
-    <None Include="Resources\Common\RadioButton\radiobtn_normal.png" />
-    <None Include="Resources\Common\RadioButton\radiobtn_pushed.png" />
-    <None Include="Resources\Common\RadioButton\radiobtn_tick_highlight.png" />
-    <None Include="Resources\Common\RadioButton\radiobtn_tick_normal.png" />
-    <None Include="Resources\Common\RadioButton\radiobtn_tick_pushed.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowdown_down.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowdown_highlight.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowdown_normal.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowleft_down.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowleft_highlight.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowleft_normal.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowright_down.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowright_highlight.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowright_normal.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowup_down.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowup_highlight.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowup_normal.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_bar_down.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_bar_highlight.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_bar_normal.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_bkg.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_horzbar_down.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_horzbar_highlight.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_horzbar_normal.png" />
-    <None Include="Resources\Common\ScrollBar\scrollbar_horz_bkg.png" />
-    <None Include="Resources\scrollbar.xml" />
-    <None Include="Resources\DialogConfig.xml" />
-    <None Include="Resources\DialogImportManager.xml" />
-    <None Include="Resources\styles.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="..\YDWEVersion\common.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

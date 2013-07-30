@@ -4,12 +4,7 @@ import sys
 import util.path
 import util.filesystem as fs
 
-path = {}
-path['BuildRoot']    = util.path.BuildRoot()
-path['ProjectRoot']  = path['BuildRoot'].parent_path().remove_filename().remove_filename()
-path['OpenSource']   = path['ProjectRoot'] / 'OpenSource'
-path['ThirdParty']   = path['ProjectRoot'] / 'ThirdParty'
-path['ResultRoot']   = path['BuildRoot'] / 'Editor' / 'Build'
+path = util.path.path
     
 def copy_crt_dll():
     fs.copy_directory(path['ThirdParty'] / 'Microsoft' / 'CRT' / 'Win32' / 'Microsoft.VC100.CRT', path['ResultCore'], ['.dll'])
@@ -32,8 +27,7 @@ def copy_component():
     fs.copy_directory(path['BuildRoot'] / 'Editor' / 'Component', path['Result'])
 
 def copy_all(configuration):
-    path['Result']       = path['ResultRoot'] / 'bin' / configuration
-    path['ResultCore']   = path['Result'] / 'bin'
+    util.path.ResetPath(configuration)
     if configuration == 'Release':
         copy_crt_dll()
     copy_boost_dll('system')

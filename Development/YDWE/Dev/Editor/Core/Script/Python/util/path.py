@@ -20,6 +20,14 @@ def BuildRoot():
         raise Exception, 'not found build.root.'
     return ret
 
+path = {}
+path['BuildRoot']    = BuildRoot()
+path['ProjectRoot']  = path['BuildRoot'].parent_path().remove_filename().remove_filename()
+path['OpenSource']   = path['ProjectRoot'] / 'OpenSource'
+path['ThirdParty']   = path['ProjectRoot'] / 'ThirdParty'
+path['CoreRoot']     = path['BuildRoot'] / 'Editor' / 'Core'
+path['ResultRoot']   = path['BuildRoot'] / 'Editor' / 'Build'
 
-
-
+def ResetPath(configuration):    
+    path['Result']       = path['ResultRoot'] / 'bin' / configuration
+    path['ResultCore']   = path['Result'] / 'bin'

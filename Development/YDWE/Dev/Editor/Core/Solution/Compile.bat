@@ -24,4 +24,5 @@ xcopy ..\..\UI\bin ..\..\Build\bin\%1\share\mpq\ /d /y /e >> %2
 @echo "生成部分函数库代码" >> %2
 "..\..\..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\anti_bj_leak_make.py" ..\Script\bj_script.j ..\..\Build\bin\%1\jass\AntiBJLeak\
 
-"..\..\..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\copy_all.py" %1
+"..\..\..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\copy_all.py"  %1
+"..\..\..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\pack_skin.py" %1

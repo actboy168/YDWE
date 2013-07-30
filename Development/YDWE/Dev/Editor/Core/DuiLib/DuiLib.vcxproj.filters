@@ -37,18 +37,6 @@
       <UniqueIdentifier>{38c49da3-b1a5-4e9f-a1c4-3468d0853336}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="Resource Files\Resources">
-      <UniqueIdentifier>{6dc1a09f-aa86-46f1-91ca-bbb7ce2640a9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Resources\Common">
-      <UniqueIdentifier>{470e76fd-d945-4588-b6ec-38cc70650814}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Resources\Common\CheckButton">
-      <UniqueIdentifier>{09b11c0c-a020-407d-a08e-27ec7d006359}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Resources\Common\RadioButton">
-      <UniqueIdentifier>{69773d5d-b384-46d9-b116-c228f42f4514}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Utils\zip">
       <UniqueIdentifier>{266a8911-9b58-406c-a5c7-85da5f46f0b2}</UniqueIdentifier>
     </Filter>
@@ -60,9 +48,6 @@
     </Filter>
     <Filter Include="Source Files\Utils\minizip">
       <UniqueIdentifier>{af1041dc-760d-4ecf-8f92-34e010a05274}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Resources\Common\Scrollbar">
-      <UniqueIdentifier>{fb7ad793-b7a8-4bc9-8029-377aeb8a215f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -371,124 +356,6 @@
     <ClInclude Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zlib.h">
       <Filter>Header Files\Utils\minizip</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\styles.xml">
-      <Filter>Resource Files\Resources</Filter>
-    </None>
-    <None Include="Resources\Common\button.png">
-      <Filter>Resource Files\Resources\Common</Filter>
-    </None>
-    <None Include="Resources\scrollbar.xml">
-      <Filter>Resource Files\Resources</Filter>
-    </None>
-    <None Include="Resources\DialogConfig.xml">
-      <Filter>Resource Files\Resources</Filter>
-    </None>
-    <None Include="Resources\DialogImportManager.xml">
-      <Filter>Resource Files\Resources</Filter>
-    </None>
-    <None Include="Resources\Common\CheckButton\checkbox_normal.png">
-      <Filter>Resource Files\Resources\Common\CheckButton</Filter>
-    </None>
-    <None Include="Resources\Common\CheckButton\checkbox_pushed.png">
-      <Filter>Resource Files\Resources\Common\CheckButton</Filter>
-    </None>
-    <None Include="Resources\Common\CheckButton\checkbox_tick_highlight.png">
-      <Filter>Resource Files\Resources\Common\CheckButton</Filter>
-    </None>
-    <None Include="Resources\Common\CheckButton\checkbox_tick_normal.png">
-      <Filter>Resource Files\Resources\Common\CheckButton</Filter>
-    </None>
-    <None Include="Resources\Common\CheckButton\checkbox_tick_pushed.png">
-      <Filter>Resource Files\Resources\Common\CheckButton</Filter>
-    </None>
-    <None Include="Resources\Common\RadioButton\radiobtn_highlight.png">
-      <Filter>Resource Files\Resources\Common\RadioButton</Filter>
-    </None>
-    <None Include="Resources\Common\RadioButton\radiobtn_normal.png">
-      <Filter>Resource Files\Resources\Common\RadioButton</Filter>
-    </None>
-    <None Include="Resources\Common\RadioButton\radiobtn_pushed.png">
-      <Filter>Resource Files\Resources\Common\RadioButton</Filter>
-    </None>
-    <None Include="Resources\Common\RadioButton\radiobtn_tick_highlight.png">
-      <Filter>Resource Files\Resources\Common\RadioButton</Filter>
-    </None>
-    <None Include="Resources\Common\RadioButton\radiobtn_tick_normal.png">
-      <Filter>Resource Files\Resources\Common\RadioButton</Filter>
-    </None>
-    <None Include="Resources\Common\RadioButton\radiobtn_tick_pushed.png">
-      <Filter>Resource Files\Resources\Common\RadioButton</Filter>
-    </None>
-    <None Include="Resources\Common\CheckButton\checkbox_highlight.png">
-      <Filter>Resource Files\Resources\Common\CheckButton</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowdown_down.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowdown_highlight.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowdown_normal.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowleft_down.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowleft_highlight.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowleft_normal.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowright_down.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowright_highlight.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowright_normal.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowup_down.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowup_highlight.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_arrowup_normal.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_bar_down.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_bar_highlight.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_bar_normal.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_bkg.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_horz_bkg.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_horzbar_down.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_horzbar_highlight.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-    <None Include="Resources\Common\ScrollBar\scrollbar_horzbar_normal.png">
-      <Filter>Resource Files\Resources\Common\Scrollbar</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="..\Script\zip_package.py">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\YDWEVersion\common.rc">
