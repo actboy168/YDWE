@@ -22,6 +22,10 @@ def copy_lua_script():
 def copy_log_script():
     fs.create_directories(path['Result'] / 'logs')
     fs.copy_file(path['BuildRoot'] / 'Editor' / 'Core' / 'Script' / 'YDLogger.cfg', path['Result'] / 'logs' / 'YDLogger.cfg')
+
+def copy_boost_preprocessor():
+    fs.copy_directory(path['OpenSource'] / 'Boost' / '1.53' / 'boost' / 'preprocessor', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor')
+    fs.copy_file(path['OpenSource'] / 'Boost' / '1.53' / 'boost' / 'preprocessor.hpp',  path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor.hpp')
     
 def copy_component():
     fs.copy_directory(path['BuildRoot'] / 'Editor' / 'Component', path['Result'])
@@ -43,6 +47,7 @@ def copy_all(configuration):
     copy_lib_dll('Zlib',     configuration)
     copy_lua_script()
     copy_log_script()
+    copy_boost_preprocessor()
     copy_component()
 
 def Configuration():
