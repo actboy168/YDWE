@@ -1,5 +1,0 @@
-LIBRARY "yd_net_proxy"
-EXPORTS
-	PluginName
-	Initialize
-
