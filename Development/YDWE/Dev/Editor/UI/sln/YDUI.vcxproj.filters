@@ -39,9 +39,6 @@
     <None Include="..\src\Data\TriggerCalls.ui">
       <Filter>Data</Filter>
     </None>
-    <None Include="..\src\EditHelper\build.py">
-      <Filter>EditHelper</Filter>
-    </None>
     <None Include="..\src\Other\DefaultTriggerCategories.ui">
       <Filter>Other</Filter>
     </None>
@@ -71,15 +68,6 @@
     </None>
     <None Include="..\src\Other\detail\OrderString.ui">
       <Filter>Other\detail</Filter>
-    </None>
-    <None Include="..\src\EditHelper\StormLib.dll">
-      <Filter>EditHelper</Filter>
-    </None>
-    <None Include="..\src\EditHelper\StormLib.py">
-      <Filter>EditHelper</Filter>
-    </None>
-    <None Include="..\src\EditHelper\build_units.py">
-      <Filter>EditHelper</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

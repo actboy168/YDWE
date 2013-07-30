@@ -35,10 +35,26 @@ class path:
     
     def extension(self):
         return path(os.path.splitext(self.str)[1])
+
+    def replace_extension(self, p):
+        self.str = os.path.splitext(self.str)[0] + _to_string(p)
+        return self
     
 def exists(p):
     return os.path.exists(_to_string(p))
 
+def remove(p):    
+    try:
+        os.remove(_to_string(p)) 
+    except:
+        pass
+    
+def remove_all(p):    
+    try:
+        shutil.rmtree(_to_string(p)) 
+    except:
+        pass
+    
 def create_directories(p):
     try:
         os.makedirs(_to_string(p))
@@ -46,7 +62,10 @@ def create_directories(p):
         pass
     
 def create_directory(p):
-    create_directories(p)
+    try:
+        os.makedir(_to_string(p))
+    except WindowsError:
+        pass
     
 def is_directory(p):
     return os.path.isdir(_to_string(p))

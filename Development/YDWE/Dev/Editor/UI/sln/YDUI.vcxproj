@@ -81,11 +81,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>"$(OpenSource)\Python\3.2.2\python.exe" "$(YDWE)\Editor\UI\src\EditHelper\build.py" -s "$(UIObj)\" -d "$(YDWE)\Editor\UI" -n $(Configuration)
-</Command>
-      <Message>python run...</Message>
-    </PostBuildEvent>
+    <PostBuildEvent />
     <Lib />
     <BuildLog />
     <PreLinkEvent>
@@ -121,10 +117,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>"$(OpenSource)\Python\3.2.2\python.exe" "$(YDWE)\Editor\UI\src\EditHelper\build.py" -s "$(UIObj)\" -d "$(YDWE)\Editor\UI" -n $(Configuration)</Command>
-      <Message>python run...</Message>
-    </PostBuildEvent>
+    <PostBuildEvent />
     <Lib />
     <BuildLog />
     <PreLinkEvent>
@@ -144,10 +137,6 @@
     <None Include="..\src\Data\TriggerCalls.ui" />
     <None Include="..\src\Data\TriggerConditions.ui" />
     <None Include="..\src\Data\TriggerEvents.ui" />
-    <None Include="..\src\EditHelper\build.py" />
-    <None Include="..\src\EditHelper\build_units.py" />
-    <None Include="..\src\EditHelper\StormLib.dll" />
-    <None Include="..\src\EditHelper\StormLib.py" />
     <None Include="..\src\Other\DefaultTriggerCategories.ui" />
     <None Include="..\src\Other\DefaultTriggers.ui" />
     <None Include="..\src\Other\detail\EventId.ui" />

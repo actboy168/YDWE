@@ -13,7 +13,7 @@ MPQ_COMPRESSION_ADPCM_STEREO = 0x80
 
 class _MODULE:
     def __init__(self, path):
-        self.module = ctypes.windll.LoadLibrary(path)        
+        self.module = ctypes.windll.LoadLibrary(path)      
         self.SFileCreateArchive  = self.module['SFileCreateArchive']
         self.SFileOpenArchive    = self.module['SFileOpenArchive']
         self.SFileCloseArchive   = self.module['SFileCloseArchive']
