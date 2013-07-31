@@ -89,6 +89,6 @@ def copy_directory(from_p, to_p, ext_filter = None, flag = True):
         else:
             if ext_filter is not None:
                 ext = str(from_file.extension()).lower()
-                if not (flag ^ (ext in ext_filter)):
+                if flag ^ (ext in ext_filter):
                     continue
             copy_file(from_file, to_file)

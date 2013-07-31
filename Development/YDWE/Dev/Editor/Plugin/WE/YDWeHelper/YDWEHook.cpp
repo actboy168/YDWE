@@ -262,19 +262,54 @@ int __fastcall DetourWeStringCompare(const char* a, const char* b, bool ignore_c
 	return aero::fast_call<bool>(pgTrueWeStringCompare, a, b, ignore_case);
 }
 
+template <typename charT>
+HGLOBAL CreateGlobalData(const std::basic_string<charT>& str)
+{
+	HGLOBAL data = ::GlobalAlloc(GMEM_MOVEABLE, ((str.size() + 1) * sizeof(charT)));
+	if (data) 
+	{
+		charT* raw_data = static_cast<charT*>(::GlobalLock(data));
+		memcpy(raw_data, str.data(), str.size() * sizeof(charT));
+		raw_data[str.size()] = '\0';
+		::GlobalUnlock(data);
+	}
+	return data;
+}
+
+bool WriteText(std::wstring const& str) 
+{
+	bool result = false;
+	HGLOBAL glob = CreateGlobalData(str);
+	if (::OpenClipboard(::GetActiveWindow()))
+	{
+		if (::EmptyClipboard())
+		{
+			if (glob && !::SetClipboardData(CF_UNICODETEXT, glob)) 
+			{
+				result = (ERROR_CLIPBOARD_NOT_OPEN != ::GetLastError());
+			}
+		}
+		::CloseClipboard();
+	}
+	::GlobalFree(glob);
+
+	return result;
+}
+
 static uintptr_t pgTrueWeTriggerEditorEditboxCopy;
 static bool isWeTriggerEditorEditboxCopyHookInstalled;
 BOOL __fastcall DetourWeTriggerEditorEditboxCopy(const char *source)
 {
 	if (source)
 	{
-		std::string ansi_str = ydwe::util::u2a(source);
-		return aero::fast_call<BOOL>(pgTrueWeTriggerEditorEditboxCopy, ansi_str.c_str());
+		try {
+			return WriteText(ydwe::util::u2w(source));
+		}
+		catch (...) {			
+		}
 	}
-	else
-	{
-		return aero::fast_call<BOOL>(pgTrueWeTriggerEditorEditboxCopy, source);
-	}
+
+	return aero::fast_call<BOOL>(pgTrueWeTriggerEditorEditboxCopy, source);
 }
 
 
