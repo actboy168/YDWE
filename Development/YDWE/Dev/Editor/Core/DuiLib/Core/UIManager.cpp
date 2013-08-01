@@ -49,7 +49,6 @@ std::wstring CPaintManagerUI::m_pStrDefaultFontName;//added by cddjr at 05/18/20
 fs::path CPaintManagerUI::m_pStrResourcePath;
 fs::path CPaintManagerUI::m_pStrResourceZip;
 CStdPtrArray CPaintManagerUI::m_aPreMessages;
-CStdPtrArray CPaintManagerUI::m_aPlugins;
 
 
 CPaintManagerUI::CPaintManagerUI() :
@@ -167,14 +166,6 @@ fs::path CPaintManagerUI::GetInstancePath()
 	return std::move(fs::path(buffer).parent_path());
 }
 
-fs::path CPaintManagerUI::GetCurrentPath()
-{
-	wchar_t buffer[MAX_PATH];
-	DWORD er = ::GetCurrentDirectoryW(sizeof(buffer) / sizeof(buffer[0]), buffer);
-	ASSERT(er != 0);
-	return std::move(fs::path(buffer));
-}
-
 const fs::path& CPaintManagerUI::GetResourcePath()
 {
     return m_pStrResourcePath;
@@ -188,11 +179,6 @@ const fs::path& CPaintManagerUI::GetResourceZip()
 void CPaintManagerUI::SetInstance(HINSTANCE hInst)
 {
     m_hInstance = hInst;
-}
-
-void CPaintManagerUI::SetCurrentPath(fs::path const& pStrPath)
-{
-    ::SetCurrentDirectory(pStrPath.c_str());
 }
 
 void CPaintManagerUI::SetResourcePath(fs::path const& pStrPath)
@@ -213,27 +199,6 @@ void CPaintManagerUI::ReloadSkin()
         CPaintManagerUI* pManager = static_cast<CPaintManagerUI*>(m_aPreMessages[i]);
         pManager->ReloadAllImages();
     }
-}
-
-bool CPaintManagerUI::LoadPlugin(LPCTSTR pstrModuleName)
-{
-    ASSERT( !::IsBadStringPtr(pstrModuleName,-1) || pstrModuleName == NULL );
-    if( pstrModuleName == NULL ) return false;
-    HMODULE hModule = ::LoadLibrary(pstrModuleName);
-    if( hModule != NULL ) {
-        LPCREATECONTROL lpCreateControl = (LPCREATECONTROL)::GetProcAddress(hModule, "CreateControl");
-        if( lpCreateControl != NULL ) {
-            if( m_aPlugins.Find(lpCreateControl) >= 0 ) return true;
-            m_aPlugins.Add(lpCreateControl);
-            return true;
-        }
-    }
-    return false;
-}
-
-CStdPtrArray* CPaintManagerUI::GetPlugins()
-{
-    return &m_aPlugins;
 }
 
 HWND CPaintManagerUI::GetPaintWindow() const

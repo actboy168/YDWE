@@ -384,18 +384,6 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
                 if( _tcscmp(pstrClass, DUI_CTR_LISTCONTAINERELEMENT) == 0 )   { pControl = new CListContainerElementUI; break; }
                 break;
             }
-            // User-supplied control factory
-            if( pControl == NULL ) {
-                CStdPtrArray* pPlugins = CPaintManagerUI::GetPlugins();
-                LPCREATECONTROL lpCreateControl = NULL;
-                for( int i = 0; i < pPlugins->GetSize(); ++i ) {
-                    lpCreateControl = (LPCREATECONTROL)pPlugins->GetAt(i);
-                    if( lpCreateControl != NULL ) {
-                        pControl = lpCreateControl(pstrClass);
-                        if( pControl != NULL ) break;
-                    }
-                }
-            }
             if( pControl == NULL && m_pCallback != NULL ) {
                 pControl = m_pCallback->CreateControl(pstrClass);
             }

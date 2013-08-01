@@ -180,16 +180,12 @@ public:
 
 	static HINSTANCE GetInstance();
     static fs::path GetInstancePath();
-    static fs::path GetCurrentPath();
     static const fs::path& GetResourcePath();
     static const fs::path& GetResourceZip();
 	static void SetInstance(HINSTANCE hInst);
-    static void SetCurrentPath(fs::path const& pStrPath);
     static void SetResourcePath(fs::path const& pStrPath);
     static void SetResourceZip(fs::path const& pstrZip);
     static void ReloadSkin();
-    static bool LoadPlugin(LPCTSTR pstrModuleName);
-    static CStdPtrArray* GetPlugins();
 
     bool UseParentResource(CPaintManagerUI* pm);
     CPaintManagerUI* GetParentResource() const;
@@ -370,7 +366,6 @@ private:
     static fs::path m_pStrResourceZip;
     static HANDLE m_hResourceZip;
     static CStdPtrArray m_aPreMessages;
-    static CStdPtrArray m_aPlugins;
 
 public:
 #pragma warning(push)
