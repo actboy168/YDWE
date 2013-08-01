@@ -179,11 +179,8 @@ public:
     void SetShowUpdateRect(bool show);
 
 	static HINSTANCE GetInstance();
-    static fs::path GetInstancePath();
-    static const fs::path& GetResourcePath();
     static const fs::path& GetResourceZip();
 	static void SetInstance(HINSTANCE hInst);
-    static void SetResourcePath(fs::path const& pStrPath);
     static void SetResourceZip(fs::path const& pstrZip);
     static void ReloadSkin();
 
@@ -362,7 +359,6 @@ private:
 	CStdStringPtrMap<CAttributesList> m_DefaultAttrHash;
     //
     static HINSTANCE m_hInstance;
-    static fs::path m_pStrResourcePath;
     static fs::path m_pStrResourceZip;
     static HANDLE m_hResourceZip;
     static CStdPtrArray m_aPreMessages;

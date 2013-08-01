@@ -340,14 +340,7 @@ bool CMarkup::LoadFromFile(LPCTSTR pstrFilename, int encoding)
     Release();
 	CUIBuffer buf;
 
-    if (CPaintManagerUI::GetResourceZip().empty()) 
-	{
-		buf = CUIFile::LoadFile(CPaintManagerUI::GetResourcePath() / pstrFilename);
-	}
-    else 
-	{
-		buf = CUIFile::LoadZip(pstrFilename);
-	}
+	buf = CUIFile::LoadZip(pstrFilename);
 
 	if (!buf)
 	{

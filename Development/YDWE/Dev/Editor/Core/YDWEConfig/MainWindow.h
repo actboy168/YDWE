@@ -12,7 +12,7 @@ public:
 	void OnFinalMessage(HWND /*hWnd*/);
 
 	void InitWindow();
-	const wchar_t* GetSkinZip() const { return L"skin.zip"; };
+	fs::path GetSkinZip() const;
 	const wchar_t* GetSkinXml() const { return L"DialogConfig.xml"; };
 
 	void ContrlSelected(std::string const& name, bool bSelect);

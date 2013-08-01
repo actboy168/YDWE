@@ -46,7 +46,6 @@ typedef struct tagTIMERINFO
 HPEN m_hUpdateRectPen = NULL;
 HINSTANCE CPaintManagerUI::m_hInstance = NULL;
 std::wstring CPaintManagerUI::m_pStrDefaultFontName;//added by cddjr at 05/18/2012
-fs::path CPaintManagerUI::m_pStrResourcePath;
 fs::path CPaintManagerUI::m_pStrResourceZip;
 CStdPtrArray CPaintManagerUI::m_aPreMessages;
 
@@ -155,22 +154,6 @@ HINSTANCE CPaintManagerUI::GetInstance()
     return m_hInstance;
 }
 
-
-fs::path CPaintManagerUI::GetInstancePath()
-{
-	wchar_t buffer[MAX_PATH];
-
-	DWORD er = ::GetModuleFileNameW(m_hInstance, buffer, sizeof(buffer) / sizeof(buffer[0]));
-	ASSERT(er != 0);
-
-	return std::move(fs::path(buffer).parent_path());
-}
-
-const fs::path& CPaintManagerUI::GetResourcePath()
-{
-    return m_pStrResourcePath;
-}
-
 const fs::path& CPaintManagerUI::GetResourceZip()
 {
     return m_pStrResourceZip;
@@ -179,11 +162,6 @@ const fs::path& CPaintManagerUI::GetResourceZip()
 void CPaintManagerUI::SetInstance(HINSTANCE hInst)
 {
     m_hInstance = hInst;
-}
-
-void CPaintManagerUI::SetResourcePath(fs::path const& pStrPath)
-{
-    m_pStrResourcePath = pStrPath;
 }
 
 void CPaintManagerUI::SetResourceZip(fs::path const& pStrPath)

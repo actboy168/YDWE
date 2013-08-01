@@ -6,6 +6,7 @@
 #include "Shortcuts.h"
 #include "Warcraft3Directory.h"
 #include <ydwe/file/steam.h>
+#include <ydwe/path/self.h>
 #include <ydwe/path/service.h>
 #include <ydwe/path/filesystem_helper.h>
 #include <ydwe/util/unicode.h>
@@ -75,6 +76,11 @@ LPCTSTR CMainWindow::GetWindowClassName() const
 void CMainWindow::OnFinalMessage(HWND /*hWnd*/) 
 { 
 	delete this; 
+}
+
+fs::path CMainWindow::GetSkinZip() const 
+{
+	return std::move(ydwe::path::self().remove_filename() / L"skin.zip"); 
 }
 
 void CMainWindow::ContrlSelected(std::string const& name, bool bSelect)
@@ -152,7 +158,7 @@ bool CMainWindow::LoadConfig(slk::IniTable& table)
 	try
 	{
 		ResetConfig(table);
-		slk::IniReader::Read(ydwe::file::read_steam(DuiLib::CPaintManagerUI::GetInstancePath() / L"EverConfig.cfg").read<slk::buffer>(), table);
+		slk::IniReader::Read(ydwe::file::read_steam(ydwe::path::self().remove_filename() / L"EverConfig.cfg").read<slk::buffer>(), table);
 	}
 	catch (...)
 	{
@@ -166,7 +172,7 @@ bool CMainWindow::SaveConfig(slk::IniTable const& table)
 {
 	try
 	{
-		ydwe::file::write_steam(DuiLib::CPaintManagerUI::GetInstancePath() / L"EverConfig.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
+		ydwe::file::write_steam(ydwe::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
 	}
 	catch (...)
 	{

@@ -14,7 +14,7 @@ namespace DuiLib
 		void OnFinalMessage(HWND /*hWnd*/);
 
 		virtual void InitWindow() = 0;
-		virtual LPCTSTR GetSkinZip() const = 0;
+		virtual fs::path GetSkinZip() const = 0;
 		virtual LPCTSTR GetSkinXml() const = 0;
 
 	private:

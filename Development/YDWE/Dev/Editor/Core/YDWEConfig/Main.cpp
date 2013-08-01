@@ -17,7 +17,6 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR l
 		ydwe::com::guard com;
 
 		DuiLib::CPaintManagerUI::SetInstance(hInstance);
-		DuiLib::CPaintManagerUI::SetResourcePath(DuiLib::CPaintManagerUI::GetInstancePath());
 
 		CMainWindow* pFrame = new CMainWindow();
 		pFrame->Create(NULL, _T("YDWE≈‰÷√≥Ã–Ú"), UI_WNDSTYLE_DIALOG, 0);

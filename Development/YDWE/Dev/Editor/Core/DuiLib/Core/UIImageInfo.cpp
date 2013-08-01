@@ -12,15 +12,7 @@ namespace DuiLib
 	{
 		CUIBuffer buf;
 
-		if (CPaintManagerUI::GetResourceZip().empty()) 
-		{
-			buf = CUIFile::LoadFile(CPaintManagerUI::GetResourcePath() / bitmap.m_lpstr);
-		}
-		else 
-		{
-			buf = CUIFile::LoadZip(bitmap.m_lpstr);
-		}
-		
+		buf = CUIFile::LoadZip(bitmap.m_lpstr);
 
 		if (!buf)
 		{

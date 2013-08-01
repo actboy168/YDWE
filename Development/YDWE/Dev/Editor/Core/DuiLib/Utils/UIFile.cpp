@@ -44,7 +44,7 @@ namespace DuiLib
 
 	CUIBuffer CUIFile::LoadZip(fs::path const& name)
 	{
-		fs::path zip_file = CPaintManagerUI::GetResourcePath() / CPaintManagerUI::GetResourceZip();
+		fs::path zip_file = CPaintManagerUI::GetResourceZip();
 
 		zip::ZipReader reader;
 		if (reader.Open(zip_file)) 

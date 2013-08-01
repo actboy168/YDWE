@@ -17,7 +17,7 @@ namespace DuiLib
 
 		// ¼ÓÔØÆ¤·ô°ü
 		m_pm.Init(m_hWnd);
-		m_pm.SetResourceZip(fs::path(GetSkinZip()));
+		m_pm.SetResourceZip(GetSkinZip());
 
 		CDialogBuilder builder;
 		CControlUI* pRoot = builder.Create(GetSkinXml(), NULL, &m_pm);
