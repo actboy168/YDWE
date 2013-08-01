@@ -57,9 +57,6 @@
     <ClCompile Include="UIlib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\WinImplBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Utils\stb_image.c">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -322,9 +319,6 @@
     </ClInclude>
     <ClInclude Include="Utils\format.h">
       <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils\WinImplBase.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Utils\zip_internal.h">
       <Filter>Header Files\Utils\zip</Filter>

@@ -143,7 +143,6 @@
     <ClCompile Include="UIlib.cpp" />
     <ClCompile Include="Utils\FrameWindow.cpp" />
     <ClCompile Include="Utils\UIFile.cpp" />
-    <ClCompile Include="Utils\WinImplBase.cpp" />
     <ClCompile Include="Utils\stb_image.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -212,7 +211,6 @@
     <ClInclude Include="Utils\UIFile.h" />
     <ClInclude Include="Utils\Utils.h" />
     <ClInclude Include="Utils\WebBrowserEventHandler.h" />
-    <ClInclude Include="Utils\WinImplBase.h" />
     <ClInclude Include="Core\UIBase.h" />
     <ClInclude Include="Core\UIContainer.h" />
     <ClInclude Include="Core\UIControl.h" />

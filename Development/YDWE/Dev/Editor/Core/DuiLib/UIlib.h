@@ -77,7 +77,6 @@ namespace fs = boost::filesystem;
 #include "Core/UIDlgBuilder.h"
 #include "Core/UIRender.h"
 #include "Utils/FrameWindow.h"
-#include "Utils/WinImplBase.h"
 
 #include "Layout/UIVerticalLayout.h"
 #include "Layout/UIHorizontalLayout.h"
