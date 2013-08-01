@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include <cstdint>
 
-namespace ydwe { namespace hook { namespace detail {
+_BASE_BEGIN namespace hook { namespace detail {
 	class import_address_table
 	{
 	public:

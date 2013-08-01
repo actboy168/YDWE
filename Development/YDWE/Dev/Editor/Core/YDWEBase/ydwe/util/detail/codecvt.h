@@ -1,9 +1,11 @@
 #pragma once
 
+#include <ydwe/config.h>
 #include <locale>
 #include <string>
 
-namespace ydwe { namespace util { namespace detail {
+_BASE_BEGIN 
+namespace util { namespace detail {
 	typedef std::codecvt<wchar_t, char, std::mbstate_t> codecvt_type;
 
 	void convert(const char* from, const char* from_end, std::wstring& to, const codecvt_type& cvt);
@@ -19,4 +21,5 @@ namespace ydwe { namespace util { namespace detail {
 		}
 		return std::move(to);
 	}
-}}}
+}}
+_BASE_END

@@ -4,7 +4,7 @@
 #include <detours.h>
 #pragma comment(lib, "detours.lib")
 
-namespace ydwe { namespace hook {
+_BASE_BEGIN namespace hook {
 	bool inline_install(uintptr_t* pointer_ptr, uintptr_t detour)
 	{
 		LONG status;

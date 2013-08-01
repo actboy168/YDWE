@@ -1,7 +1,7 @@
 #include <ydwe/hook/detail/import_address_table.h>
 #include <cassert>
 
-namespace ydwe { namespace hook { namespace detail {
+_BASE_BEGIN namespace hook { namespace detail {
 
 	import_address_table::import_address_table()
 		: image_()

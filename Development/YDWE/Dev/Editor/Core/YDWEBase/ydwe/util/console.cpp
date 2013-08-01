@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <cstdio>
 
-namespace ydwe { namespace util {
+_BASE_BEGIN namespace util {
 
 	void console::enable()
 	{

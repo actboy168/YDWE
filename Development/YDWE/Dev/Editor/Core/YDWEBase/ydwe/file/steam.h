@@ -5,9 +5,9 @@
 #include <ydwe/util/noncopyable.h>
 #include <fstream>
 
-namespace ydwe { namespace file {
+_BASE_BEGIN namespace file {
 
-	class YDWE_BASE_API steam: public util::noncopyable
+	class _BASE_API steam: public util::noncopyable
 	{
 	public:
 		steam(const char* filename, std::ios_base::openmode mode);
@@ -36,7 +36,7 @@ namespace ydwe { namespace file {
 #pragma warning(pop)
 	};
 
-	class YDWE_BASE_API write_steam
+	class _BASE_API write_steam
 	{
 	public:
 		write_steam(const char* filename);
@@ -55,7 +55,7 @@ namespace ydwe { namespace file {
 		steam file_;
 	};
 
-	class YDWE_BASE_API read_steam
+	class _BASE_API read_steam
 	{
 	public:
 		read_steam(const char* filename);

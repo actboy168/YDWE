@@ -3,7 +3,7 @@
 #include <ydwe/warcraft3/version.h>
 #include <cstring>
 
-namespace ydwe { namespace warcraft3 {
+_BASE_BEGIN namespace warcraft3 {
 
 	uintptr_t get_jass_virtual_machine()
 	{

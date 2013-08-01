@@ -1,6 +1,6 @@
 #include <ydwe/util/unicode.h>
 
-namespace ydwe { namespace util {
+_BASE_BEGIN namespace util {
 
 	static const char g_trailing_bytes_for_utf8[] = {
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 

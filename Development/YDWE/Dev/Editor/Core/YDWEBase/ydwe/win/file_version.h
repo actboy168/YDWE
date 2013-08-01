@@ -9,7 +9,7 @@
 #pragma warning(pop)
 
 namespace ydwe { namespace win {
-	class YDWE_BASE_API file_version
+	class _BASE_API file_version
 	{
 		const static WORD ansi_code_page = 1252;
 	public:
@@ -37,7 +37,7 @@ namespace ydwe { namespace win {
 		bool vaild_;
 	};
 
-	class YDWE_BASE_API simple_file_version
+	class _BASE_API simple_file_version
 	{
 	public:
 		simple_file_version();

@@ -2,7 +2,7 @@
 #include <ydwe/hook/detail/import_address_table.h>
 #include <ydwe/hook/detail/replace_pointer.h>
 
-namespace ydwe { namespace hook {
+_BASE_BEGIN namespace hook {
 	uintptr_t iat(HMODULE module_handle, const char* dll_name, const char* api_name, uintptr_t new_function)
 	{
 		detail::import_address_table iat;

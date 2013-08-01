@@ -4,9 +4,11 @@
 #include <boost/filesystem.hpp>
 #include <Windows.h>
 
-namespace ydwe { namespace win {
+_BASE_BEGIN
 
-	class YDWE_BASE_API process
+namespace win {
+
+	class _BASE_API process
 	{
 	public:
 		enum STATUE
@@ -35,11 +37,13 @@ namespace ydwe { namespace win {
 		PROCESS_INFORMATION     pi_;
 	};
 
-	YDWE_BASE_API bool create_process(
+	_BASE_API bool create_process(
 		const boost::filesystem::path& application, 
 		const std::wstring&            command_line, 
 		const boost::filesystem::path& current_directory, 
 		const boost::filesystem::path& inject_dll, 
 		PROCESS_INFORMATION*           pi_ptr = nullptr
 	);
-}}
+}
+
+_BASE_END

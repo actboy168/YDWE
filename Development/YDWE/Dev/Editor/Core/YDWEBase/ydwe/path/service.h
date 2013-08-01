@@ -3,7 +3,7 @@
 #include <ydwe/config.h>
 #include <boost/filesystem.hpp>
 
-namespace ydwe { namespace path {
+_BASE_BEGIN namespace path {
 	enum PATH_TYPE
 	{
 		DIR_EXE = 0,
@@ -30,5 +30,5 @@ namespace ydwe { namespace path {
 		DIR_TASKBAR_PINS,
 	};
 
-	YDWE_BASE_API boost::filesystem::path get(PATH_TYPE type);
+	_BASE_API boost::filesystem::path get(PATH_TYPE type);
 }}

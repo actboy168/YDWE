@@ -1,7 +1,7 @@
 #include <ydwe/warcraft3/basic_searcher.h>
 #include <ydwe/warcraft3/detail/memory_search.h>
 
-namespace ydwe { namespace warcraft3 {
+_BASE_BEGIN namespace warcraft3 {
 
 	basic_searcher::basic_searcher(HMODULE hModule)
 		: module_(hModule)

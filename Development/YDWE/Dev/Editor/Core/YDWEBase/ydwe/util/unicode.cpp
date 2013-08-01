@@ -3,7 +3,7 @@
 #include <ydwe/util/detail/utf8_codecvt_facet.h>
 #include <ydwe/util/detail/codecvt.h>
 
-namespace ydwe { namespace util {
+_BASE_BEGIN namespace util {
 	std::locale utf8_locale(std::locale(), new detail::utf8_codecvt_facet);
 	const detail::codecvt_type* utf8_codecvt_facet_ptr(&std::use_facet<detail::codecvt_type>(utf8_locale));
 

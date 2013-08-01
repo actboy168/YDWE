@@ -2,8 +2,8 @@
 
 #include <ydwe/config.h>
 
-namespace ydwe { namespace util {
-	class YDWE_BASE_API console
+_BASE_BEGIN namespace util {
+	class _BASE_API console
 	{
 	public:
 		static void enable();

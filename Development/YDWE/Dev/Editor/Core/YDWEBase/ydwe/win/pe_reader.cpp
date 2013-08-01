@@ -1,6 +1,6 @@
 #include <ydwe/win/pe_reader.h>
 
-namespace ydwe { namespace win {
+_BASE_BEGIN namespace win {
 
 	pe_reader::pe_reader() 
 		: module_(0) 

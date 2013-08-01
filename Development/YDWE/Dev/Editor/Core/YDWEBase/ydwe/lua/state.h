@@ -1,8 +1,10 @@
 #pragma once
 
+#include <ydwe/config.h>
 #include <lua.hpp>
 
-namespace ydwe { namespace lua {
+_BASE_BEGIN 
+namespace lua {
 
 	struct state
 	{
@@ -378,4 +380,5 @@ namespace ydwe { namespace lua {
 			return pcallk(nargs, nresults, errfunc, 0, NULL);
 		}
 	};
-}}
+}
+_BASE_END

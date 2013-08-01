@@ -8,7 +8,7 @@
 
 #pragma comment(lib, "version.lib")
 
-namespace ydwe { namespace win {
+_BASE_BEGIN namespace win {
 
 	file_version::file_version() 
 		: fixed_file_info_(nullptr)

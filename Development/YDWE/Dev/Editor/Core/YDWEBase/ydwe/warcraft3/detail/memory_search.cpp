@@ -2,7 +2,7 @@
 #include <ydwe/hook/detail/disassembly.h>
 #include <cstring>
 
-namespace ydwe { namespace warcraft3 { namespace detail {
+_BASE_BEGIN namespace warcraft3 { namespace detail {
 
 	uintptr_t search_str_no_zero(uintptr_t beg, uintptr_t end, const char* str, uintptr_t len)
 	{

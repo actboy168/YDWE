@@ -1,6 +1,6 @@
 #include <ydwe/path/filesystem_helper.h>
 
-namespace ydwe { namespace path {
+_BASE_BEGIN namespace path {
 
 	bool equal(boost::filesystem::path const& lhs, boost::filesystem::path const& rhs)
 	{

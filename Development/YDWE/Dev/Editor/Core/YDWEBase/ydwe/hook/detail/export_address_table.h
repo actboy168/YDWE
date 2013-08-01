@@ -3,7 +3,7 @@
 #include <ydwe/win/pe_reader.h>
 #include <Windows.h>
 
-namespace ydwe { namespace hook { namespace detail {
+_BASE_BEGIN namespace hook { namespace detail {
 	class export_address_table
 	{
 	public:

@@ -6,7 +6,7 @@
 
 #define ENSURE(cond) if (FAILED(cond)) throw windows_exception(L ## #cond L" failed.");
 
-namespace ydwe { namespace path { namespace detail {
+_BASE_BEGIN namespace path { namespace detail {
 	boost::filesystem::path GetQuickLaunchPath(bool default_user) 
 	{
 		if (default_user) 

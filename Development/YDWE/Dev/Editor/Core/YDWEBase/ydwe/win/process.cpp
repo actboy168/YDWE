@@ -7,7 +7,9 @@
 #include <detours.h>
 #pragma comment(lib, "detours.lib")
 
-namespace ydwe { namespace win {
+_BASE_BEGIN
+
+namespace win {
 
 	namespace detail 
 	{
@@ -359,4 +361,6 @@ namespace ydwe { namespace win {
 
 		return false;
 	}
-}}
+}
+
+_BASE_END

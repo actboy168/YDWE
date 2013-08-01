@@ -6,7 +6,7 @@
 
 namespace ydwe {
 
-	class YDWE_BASE_API seh_exception : public windows_exception
+	class _BASE_API seh_exception : public windows_exception
 	{
 	public:
 		seh_exception(const PEXCEPTION_POINTERS exp_ptr);

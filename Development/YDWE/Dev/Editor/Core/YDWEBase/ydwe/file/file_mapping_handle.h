@@ -4,7 +4,7 @@
 #include <ydwe/file/file_handle.h>
 #include <Windows.h>
 
-namespace ydwe { namespace file {
+_BASE_BEGIN namespace file {
 
 	class file_mapping_handle : public win::scoped_handle<NULL>
 	{

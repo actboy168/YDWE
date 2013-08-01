@@ -4,8 +4,10 @@
 #include <Windows.h>
 #include <cstdint>
 
-namespace ydwe { namespace win {
-	class YDWE_BASE_API pe_reader
+_BASE_BEGIN
+namespace win {
+
+	class _BASE_API pe_reader
 	{	
 	public:
 		pe_reader();
@@ -23,4 +25,6 @@ namespace ydwe { namespace win {
 	private:
 		uintptr_t module_;
 	};
-}}
+}
+
+_BASE_END

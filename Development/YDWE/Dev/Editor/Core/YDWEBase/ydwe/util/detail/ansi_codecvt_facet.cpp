@@ -2,7 +2,8 @@
 #include <cwchar>
 #include <windows.h>
 
-namespace ydwe { namespace util { namespace detail {
+_BASE_BEGIN 
+namespace util { namespace detail {
 
 std::codecvt_base::result ansi_codecvt_facet::do_in(std::mbstate_t &, const char* from, const char* from_end, const char*& from_next, wchar_t* to, wchar_t* to_end, wchar_t*& to_next) const
 {
@@ -32,4 +33,5 @@ std::codecvt_base::result ansi_codecvt_facet::do_out(std::mbstate_t &, const wch
 	return ok;
 }
 
-}}}
+}}
+_BASE_END

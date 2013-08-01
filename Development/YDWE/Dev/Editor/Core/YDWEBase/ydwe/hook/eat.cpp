@@ -4,7 +4,7 @@
 
 #include <Windows.h>
 
-namespace ydwe { namespace hook {
+_BASE_BEGIN namespace hook {
 
 	uintptr_t eat(HMODULE module_handle, const char* api_name, uintptr_t new_function)
 	{

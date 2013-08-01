@@ -1,8 +1,10 @@
 #pragma once
 
+#include <ydwe/config.h>
 #include <Windows.h>
 
-namespace ydwe { namespace hook { namespace detail {
+_BASE_BEGIN 
+namespace hook { namespace detail {
 	class memory_protect
 	{
 	public:
@@ -15,4 +17,5 @@ namespace ydwe { namespace hook { namespace detail {
 		MEMORY_BASIC_INFORMATION mbi_;
 		DWORD access_;
 	};
-}}}
+}}
+_BASE_END

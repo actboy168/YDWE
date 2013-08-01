@@ -4,7 +4,7 @@
 #include <memory>
 #include <Shlobj.h>
 
-namespace ydwe { namespace com { namespace detail {
+_BASE_BEGIN namespace com { namespace detail {
 	template<class _Ty>
 	struct unique_ptr_delete
 	{

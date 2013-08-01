@@ -5,7 +5,7 @@
 #include <ydwe/warcraft3/detail/string_hash.h>
 #include <cstring>
 
-namespace ydwe { namespace warcraft3 {
+_BASE_BEGIN namespace warcraft3 {
 
 	namespace hashtable
 	{
@@ -184,10 +184,10 @@ namespace ydwe { namespace warcraft3 {
 		};
 	}
 
-	YDWE_BASE_API uintptr_t                     get_jass_virtual_machine();
-	YDWE_BASE_API hashtable::native_func_table* get_native_function_hashtable();
-	YDWE_BASE_API hashtable::variable_table*    get_variable_hashtable();
-	YDWE_BASE_API hashtable::reverse_table*     get_string_hashtable();
-	YDWE_BASE_API uintptr_t                     get_code_table();
-	YDWE_BASE_API hashtable::string_fasttable*  get_string_fasttable();
+	_BASE_API uintptr_t                     get_jass_virtual_machine();
+	_BASE_API hashtable::native_func_table* get_native_function_hashtable();
+	_BASE_API hashtable::variable_table*    get_variable_hashtable();
+	_BASE_API hashtable::reverse_table*     get_string_hashtable();
+	_BASE_API uintptr_t                     get_code_table();
+	_BASE_API hashtable::string_fasttable*  get_string_fasttable();
 }}

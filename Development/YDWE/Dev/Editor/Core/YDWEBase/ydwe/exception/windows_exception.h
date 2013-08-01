@@ -6,7 +6,7 @@
 #include <cstdint>
 
 namespace ydwe {
-	class YDWE_BASE_API windows_exception : public exception
+	class _BASE_API windows_exception : public exception
 	{
 	public:
 		windows_exception(const wchar_t* reason = L"windows exception", uint32_t error_code = ::GetLastError());

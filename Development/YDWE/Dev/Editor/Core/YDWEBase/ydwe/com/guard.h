@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <ydwe/exception/windows_exception.h>
 
-namespace ydwe { namespace com {
+_BASE_BEGIN namespace com {
 	class guard
 	{
 	public:

@@ -1,8 +1,10 @@
 #pragma once
 
+#include <ydwe/config.h>
 #include <locale>  
 
-namespace ydwe { namespace util { namespace detail {
+_BASE_BEGIN 
+namespace util { namespace detail {
 
 class ansi_codecvt_facet : public std::codecvt<wchar_t, char, std::mbstate_t>  
 {
@@ -21,4 +23,5 @@ protected:
 	virtual int do_max_length() const throw () { return 0; }
 };
 
-}}}
+}}
+_BASE_END

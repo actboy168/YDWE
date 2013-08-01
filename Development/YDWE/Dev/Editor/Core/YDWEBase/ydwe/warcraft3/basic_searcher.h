@@ -3,9 +3,9 @@
 #include <ydwe/config.h>
 #include <ydwe/win/pe_reader.h>
 
-namespace ydwe { namespace warcraft3 {
+_BASE_BEGIN namespace warcraft3 {
 
-	class YDWE_BASE_API basic_searcher
+	class _BASE_API basic_searcher
 	{
 	public:
 		basic_searcher(HMODULE hModule);

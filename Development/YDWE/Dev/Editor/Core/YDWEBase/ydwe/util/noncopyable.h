@@ -2,8 +2,8 @@
 
 #include <ydwe/config.h>
 
-namespace ydwe { namespace util {
-	class YDWE_BASE_API noncopyable
+_BASE_BEGIN namespace util {
+	class _BASE_API noncopyable
 	{
 	protected:
 		noncopyable() {}

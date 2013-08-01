@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <cassert>
 
-namespace ydwe { namespace hook { namespace assembler {
+_BASE_BEGIN namespace hook { namespace assembler {
 	struct reg
 	{
 		static const int c_num_registers = 8;

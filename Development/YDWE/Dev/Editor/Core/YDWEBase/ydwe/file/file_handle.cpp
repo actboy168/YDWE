@@ -1,7 +1,7 @@
 #include <ydwe/file/file_handle.h>
 #include <ydwe/exception/windows_exception.h>
 
-namespace ydwe { namespace file {
+_BASE_BEGIN namespace file {
 
 	file_handle::file_handle(LPCWSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
 		: _Mybase(::CreateFileW(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile))

@@ -4,7 +4,7 @@
 #include <ydwe/warcraft3/native_function.h>
 #include <memory>
 
-namespace ydwe { namespace warcraft3 { namespace jass {
+_BASE_BEGIN namespace warcraft3 { namespace jass {
 
 	string_fake::string_fake() 
 	{

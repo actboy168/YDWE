@@ -1,11 +1,14 @@
 #pragma once
 
 #if defined(YDWE_BASE_INLINE)
-#	define YDWE_BASE_API
+#	define _BASE_API
 #else
 #	if defined(YDWE_BASE_EXPORTS)
-#		define YDWE_BASE_API __declspec(dllexport)
+#		define _BASE_API __declspec(dllexport)
 #	else
-#		define YDWE_BASE_API __declspec(dllimport)
+#		define _BASE_API __declspec(dllimport)
 #	endif
 #endif
+
+#define _BASE_BEGIN namespace ydwe {
+#define _BASE_END   }

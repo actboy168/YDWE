@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace ydwe { namespace util {
+_BASE_BEGIN namespace util {
 
 	class buffer
 	{

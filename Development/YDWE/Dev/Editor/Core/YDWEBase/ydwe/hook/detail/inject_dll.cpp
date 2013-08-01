@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <strsafe.h>
 
-namespace ydwe { namespace hook { namespace detail {
+_BASE_BEGIN namespace hook { namespace detail {
 	bool inject_dll(HANDLE process_handle, HANDLE thread_handle, const wchar_t* dll_name)
 	{
 		struct Code : public assembler::writer<128>

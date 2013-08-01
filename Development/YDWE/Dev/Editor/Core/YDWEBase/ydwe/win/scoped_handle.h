@@ -1,9 +1,12 @@
 #pragma once
 
+#include <ydwe/config.h>
 #include <ydwe/util/noncopyable.h>
 #include <Windows.h>
 
-namespace ydwe { namespace win {
+_BASE_BEGIN
+
+namespace win {
 
 	template <HANDLE NullHandle>
 	class scoped_handle : public util::noncopyable
@@ -39,4 +42,6 @@ namespace ydwe { namespace win {
 	protected:
 		HANDLE handle_;
 	};
-}}
+}
+
+_BASE_END

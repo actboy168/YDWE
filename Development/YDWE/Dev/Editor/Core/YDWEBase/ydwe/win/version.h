@@ -2,7 +2,8 @@
 
 #include <ydwe/config.h>
 
-namespace ydwe { namespace win {
+_BASE_BEGIN
+namespace win {
 	enum Version 
 	{
 		VERSION_PRE_XP = 0,
@@ -14,5 +15,6 @@ namespace ydwe { namespace win {
 		VERSION_WIN_LAST,
 	};
 
-	Version YDWE_BASE_API version();
-}}
+	Version _BASE_API version();
+}
+_BASE_END

@@ -2,7 +2,7 @@
 #include <ydwe/hook/detail/memory_protect.h>
 #include <Windows.h>
 
-namespace ydwe { namespace hook { namespace detail {
+_BASE_BEGIN namespace hook { namespace detail {
 	uintptr_t replace_pointer(uintptr_t address, uintptr_t new_value)
 	{
 		uintptr_t old_value = 0;

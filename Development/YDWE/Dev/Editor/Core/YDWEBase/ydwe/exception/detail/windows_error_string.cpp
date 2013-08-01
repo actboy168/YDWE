@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <cstdio>
 
-namespace ydwe { namespace exception_detail {
+_BASE_BEGIN namespace exception_detail {
 
 	const wchar_t* windows_error_string::default_error_string_fmt = L"error code(%08X)";
 

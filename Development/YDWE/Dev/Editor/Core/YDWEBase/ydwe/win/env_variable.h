@@ -3,9 +3,9 @@
 #include <ydwe/config.h>
 #include <string>
 
-namespace ydwe { namespace win {
+_BASE_BEGIN namespace win {
 
-	class YDWE_BASE_API env_variable
+	class _BASE_API env_variable
 	{
 	public:
 		env_variable(const wchar_t* name);

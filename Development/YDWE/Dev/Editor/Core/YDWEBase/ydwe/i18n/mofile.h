@@ -8,7 +8,7 @@
 #include <ydwe/util/noncopyable.h>
 #include <boost/filesystem.hpp>
 
-namespace ydwe { namespace i18n {
+_BASE_BEGIN namespace i18n {
 
 	class mofile : public util::noncopyable
 	{

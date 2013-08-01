@@ -1,7 +1,7 @@
 #include <ydwe/file/steam.h>
 #include <ydwe/exception/exception.h>
 
-namespace ydwe { namespace file {
+_BASE_BEGIN namespace file {
 
 	steam::steam(const char* filename, std::ios_base::openmode mode)
 	{

@@ -1,7 +1,7 @@
 #include <ydwe/i18n/mofile.h>
 #include <ydwe/file/steam.h>
 
-namespace ydwe { namespace i18n {
+_BASE_BEGIN namespace i18n {
 
 	namespace detail
 	{

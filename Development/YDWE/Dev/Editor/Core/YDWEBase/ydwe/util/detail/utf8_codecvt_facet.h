@@ -2,8 +2,8 @@
 
 #include <boost/version.hpp>
 
-#define BOOST_UTF8_BEGIN_NAMESPACE namespace ydwe { namespace util { namespace detail {
-#define BOOST_UTF8_END_NAMESPACE   }}}
+#define BOOST_UTF8_BEGIN_NAMESPACE _BASE_BEGIN namespace util { namespace detail {
+#define BOOST_UTF8_END_NAMESPACE   }} _BASE_END
 #define BOOST_UTF8_DECL 
 #if BOOST_VERSION  > 104900
 #include <boost/detail/utf8_codecvt_facet.ipp>

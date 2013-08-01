@@ -3,7 +3,7 @@
 #include <memory>
 #include <ydwe/exception/windows_exception.h>
 
-namespace ydwe { namespace util { namespace detail {
+_BASE_BEGIN namespace util { namespace detail {
 	const std::size_t default_codecvt_buf_size = 256;
 
 	void convert_aux(const char* from, const char* from_end, wchar_t* to, wchar_t* to_end, std::wstring& target, const codecvt_type& cvt)

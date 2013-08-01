@@ -4,7 +4,7 @@
 #include <array>
 #include <cassert>
 
-namespace ydwe { namespace hook { namespace assembler {
+_BASE_BEGIN namespace hook { namespace assembler {
 	template <size_t BufSizeT = 256>
 	class writer : public std::array<uint8_t, BufSizeT>
 	{

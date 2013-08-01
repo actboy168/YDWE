@@ -11,7 +11,7 @@
 #include <map>
 #include <string>
 
-namespace ydwe { namespace warcraft3 { namespace native_function {
+_BASE_BEGIN namespace warcraft3 { namespace native_function {
 
 	bool table_hook     (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
 	{

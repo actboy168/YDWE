@@ -3,9 +3,9 @@
 #include <ydwe/config.h>
 #include <ydwe/warcraft3/basic_searcher.h>
 
-namespace ydwe { namespace warcraft3 {
+_BASE_BEGIN namespace warcraft3 {
 
-	class YDWE_BASE_API war3_searcher : public basic_searcher
+	class _BASE_API war3_searcher : public basic_searcher
 	{
 		typedef basic_searcher _Mybase;
 	public:
@@ -31,5 +31,5 @@ namespace ydwe { namespace warcraft3 {
 		uintptr_t unit_handle_to_object_;
 	};
 
-	YDWE_BASE_API war3_searcher& get_war3_searcher();
+	_BASE_API war3_searcher& get_war3_searcher();
 }}

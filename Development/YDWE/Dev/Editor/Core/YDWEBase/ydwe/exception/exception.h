@@ -5,7 +5,7 @@
 #include <exception>
 
 namespace ydwe {
-	class YDWE_BASE_API exception : public std::exception
+	class _BASE_API exception : public std::exception
 	{
 	public:
 		exception();

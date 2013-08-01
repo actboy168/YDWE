@@ -3,7 +3,7 @@
 #include <ydwe/hook/detail/replace_pointer.h>
 #include <cassert>
 
-namespace ydwe { namespace hook {
+_BASE_BEGIN namespace hook {
 	iat_manager::iat_manager()
 		: iat_ptr_(new detail::import_address_table())
 	{ }

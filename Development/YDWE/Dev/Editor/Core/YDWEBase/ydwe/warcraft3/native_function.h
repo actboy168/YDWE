@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace ydwe { namespace warcraft3 { namespace native_function {
+_BASE_BEGIN namespace warcraft3 { namespace native_function {
 
 	enum variable_type
 	{
@@ -18,7 +18,7 @@ namespace ydwe { namespace warcraft3 { namespace native_function {
 		TYPE_NOTHING = 'V',
 	};
 
-	class YDWE_BASE_API native_function
+	class _BASE_API native_function
 	{
 	public:
 		native_function();
@@ -48,16 +48,16 @@ namespace ydwe { namespace warcraft3 { namespace native_function {
 		uintptr_t                  address_;
 	};
 
-	YDWE_BASE_API bool table_hook     (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
-	YDWE_BASE_API bool table_unhook   (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
-	YDWE_BASE_API bool register_hook  (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
-	YDWE_BASE_API bool register_unhook(const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
-	YDWE_BASE_API bool hook           (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
-	YDWE_BASE_API bool unhook         (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
-	YDWE_BASE_API void async_add      (uintptr_t func, const char* name, const char* param);
-	YDWE_BASE_API void async_hook     (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
-	YDWE_BASE_API void japi_add       (uintptr_t func, const char* name, const char* param);
-	YDWE_BASE_API void japi_hook      (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
-	YDWE_BASE_API native_function const* jass_func(const char* proc_name);
-	YDWE_BASE_API native_function const* japi_func(const char* proc_name);
+	_BASE_API bool table_hook     (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
+	_BASE_API bool table_unhook   (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
+	_BASE_API bool register_hook  (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
+	_BASE_API bool register_unhook(const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
+	_BASE_API bool hook           (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
+	_BASE_API bool unhook         (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
+	_BASE_API void async_add      (uintptr_t func, const char* name, const char* param);
+	_BASE_API void async_hook     (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
+	_BASE_API void japi_add       (uintptr_t func, const char* name, const char* param);
+	_BASE_API void japi_hook      (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
+	_BASE_API native_function const* jass_func(const char* proc_name);
+	_BASE_API native_function const* japi_func(const char* proc_name);
 }}}

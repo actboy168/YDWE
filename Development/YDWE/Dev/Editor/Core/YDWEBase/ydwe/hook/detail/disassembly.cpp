@@ -1,6 +1,6 @@
 #include <ydwe/hook/detail/disassembly.h>
 
-namespace ydwe { namespace hook { namespace detail {
+_BASE_BEGIN namespace hook { namespace detail {
 
 	enum OP_FLAG
 	{

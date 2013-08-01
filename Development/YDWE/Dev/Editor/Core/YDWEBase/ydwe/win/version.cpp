@@ -1,7 +1,8 @@
 #include <ydwe/win/version.h>
 #include <Windows.h>
 
-namespace ydwe { namespace win {
+_BASE_BEGIN
+namespace win {
 
 	Version version()
 	{
@@ -34,4 +35,5 @@ namespace ydwe { namespace win {
 
 		return version_;
 	}
-}}
+}
+_BASE_END

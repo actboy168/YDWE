@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include <cstdint>
 
-namespace ydwe { namespace file {
+_BASE_BEGIN namespace file {
 
 	class file_handle : public win::scoped_handle<INVALID_HANDLE_VALUE>
 	{

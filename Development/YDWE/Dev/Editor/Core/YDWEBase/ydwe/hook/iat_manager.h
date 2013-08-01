@@ -4,13 +4,13 @@
 #include <Windows.h>
 #include <list>
 
-namespace ydwe { namespace hook {
+_BASE_BEGIN namespace hook {
 	namespace detail
 	{
 		class import_address_table;
 	}
 
-	class YDWE_BASE_API iat_manager
+	class _BASE_API iat_manager
 	{
 	protected:
 		struct hook_info

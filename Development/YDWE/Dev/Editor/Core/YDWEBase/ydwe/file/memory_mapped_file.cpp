@@ -3,7 +3,7 @@
 #include <ydwe/file/file_mapping_handle.h>
 #include <ydwe/exception/windows_exception.h>
 
-namespace ydwe { namespace file {
+_BASE_BEGIN namespace file {
 
 	memory_mapped_file::memory_mapped_file(const wchar_t* file_name)
 		: cb_(0)

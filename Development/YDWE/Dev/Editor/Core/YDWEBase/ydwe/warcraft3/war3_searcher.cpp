@@ -3,7 +3,7 @@
 #include <ydwe/warcraft3/version.h>
 #include <ydwe/util/singleton.h>
 
-namespace ydwe { namespace warcraft3 {
+_BASE_BEGIN namespace warcraft3 {
 
 	war3_searcher::war3_searcher()
 		: _Mybase(::GetModuleHandleW(L"Game.dll"))

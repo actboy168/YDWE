@@ -1,6 +1,6 @@
 #include <ydwe/hook/detail/memory_protect.h>
 
-namespace ydwe { namespace hook { namespace detail {
+_BASE_BEGIN namespace hook { namespace detail {
 
 	memory_protect::memory_protect(uintptr_t address)
 		: success_(false)

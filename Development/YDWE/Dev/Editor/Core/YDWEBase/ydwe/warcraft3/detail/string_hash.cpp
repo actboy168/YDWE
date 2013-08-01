@@ -1,6 +1,6 @@
 #include <ydwe/warcraft3/detail/string_hash.h>
 
-namespace ydwe { namespace warcraft3 { namespace detail {
+_BASE_BEGIN namespace warcraft3 { namespace detail {
 
 #define STRING_TO_LONG(s) (*((s) + 0) + ((*((s) + 1) + ((*((s) + 2) + (*((s) + 3) << 8)) << 8)) << 8))
 

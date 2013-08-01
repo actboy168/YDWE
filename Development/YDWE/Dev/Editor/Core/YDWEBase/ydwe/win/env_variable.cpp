@@ -3,7 +3,9 @@
 #include <Windows.h>
 #include <array>
 
-namespace ydwe { namespace win {
+_BASE_BEGIN 
+
+namespace win {
 
 	env_variable::env_variable(const wchar_t* name)
 		: name_(name)
@@ -44,4 +46,6 @@ namespace ydwe { namespace win {
 	{
 		return FALSE != ::SetEnvironmentVariableW(name_.c_str(), NULL);
 	}
-}}
+}
+
+_BASE_END

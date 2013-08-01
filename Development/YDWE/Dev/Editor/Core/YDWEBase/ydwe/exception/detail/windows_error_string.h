@@ -1,8 +1,11 @@
 #pragma once
 
+#include <ydwe/config.h>
 #include <cstdint>
 
-namespace ydwe { namespace exception_detail {
+_BASE_BEGIN 
+
+namespace exception_detail {
 
 	struct windows_error_string
 	{
@@ -15,4 +18,6 @@ namespace ydwe { namespace exception_detail {
 		static uint32_t system_error_string(uint32_t error_code, wchar_t** buffer_ptr);
 		static uint32_t default_error_string(uint32_t error_code, wchar_t** buffer_ptr);
 	};
-}}
+}
+
+_BASE_END

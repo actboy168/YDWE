@@ -2,7 +2,7 @@
 
 #include <ydwe/util/noncopyable.h>
 
-namespace ydwe { namespace util {
+_BASE_BEGIN namespace util {
 	template <typename object_type>
 	struct singleton_nonthreadsafe : public noncopyable
 	{

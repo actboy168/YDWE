@@ -4,9 +4,9 @@
 #include <ydwe/util/noncopyable.h>
 #include <cstdint>
 
-namespace ydwe { namespace file {
+_BASE_BEGIN namespace file {
 
-	class YDWE_BASE_API memory_mapped_file : public util::noncopyable
+	class _BASE_API memory_mapped_file : public util::noncopyable
 	{
 	public:
 		memory_mapped_file(const wchar_t* file_name);
