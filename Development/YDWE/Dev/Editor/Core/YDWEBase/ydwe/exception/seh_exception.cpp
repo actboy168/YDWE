@@ -1,7 +1,7 @@
 #include <ydwe/exception/seh_exception.h>
 #include <ydwe/exception/windows_exception.h>
 
-namespace ydwe {
+_BASE_BEGIN
 
 	seh_exception::seh_exception(const PEXCEPTION_POINTERS exp_ptr)
 		: windows_exception(L"seh exception", exp_ptr->ExceptionRecord->ExceptionCode)
@@ -31,4 +31,4 @@ namespace ydwe {
 		_set_se_translator(trans_func);
 #pragma warning(pop)
 	}
-}
+_BASE_END

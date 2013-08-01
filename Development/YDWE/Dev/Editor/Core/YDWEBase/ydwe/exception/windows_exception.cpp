@@ -1,7 +1,8 @@
 #include <ydwe/exception/windows_exception.h>
 #include <ydwe/exception/detail/windows_error_string.h>
 
-namespace ydwe {
+
+_BASE_BEGIN
 
 	windows_exception::windows_exception(const wchar_t* reason, uint32_t error_code)
 		: exception(L"%s : %s", reason, error_string_ = exception_detail::windows_error_string::create(error_code))
@@ -17,4 +18,5 @@ namespace ydwe {
 	{
 		return error_code_;
 	}
-}
+
+_BASE_END

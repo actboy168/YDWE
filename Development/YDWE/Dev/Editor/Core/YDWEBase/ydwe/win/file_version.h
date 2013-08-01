@@ -8,7 +8,8 @@
 #include <memory>
 #pragma warning(pop)
 
-namespace ydwe { namespace win {
+_BASE_BEGIN
+namespace win {
 	class _BASE_API file_version
 	{
 		const static WORD ansi_code_page = 1252;
@@ -48,4 +49,5 @@ namespace ydwe { namespace win {
 		uint32_t revision;
 		uint32_t build;
 	};
-}}
+}
+_BASE_END

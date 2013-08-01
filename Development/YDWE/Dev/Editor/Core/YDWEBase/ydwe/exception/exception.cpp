@@ -5,7 +5,7 @@
 #include <cassert>
 #include <cstdint>
 
-namespace ydwe {
+_BASE_BEGIN 
 
 	exception::exception()
 		: what_(nullptr)
@@ -67,4 +67,5 @@ namespace ydwe {
 	{
 		return what_ ? what_ : L"unknown ydwe::exception";
 	}
-}
+
+_BASE_END

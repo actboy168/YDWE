@@ -2,7 +2,8 @@
 #include <Windows.h>
 #include <cstdio>
 
-_BASE_BEGIN namespace exception_detail {
+_BASE_BEGIN 
+namespace exception_detail {
 
 	const wchar_t* windows_error_string::default_error_string_fmt = L"error code(%08X)";
 
@@ -70,4 +71,6 @@ _BASE_BEGIN namespace exception_detail {
 		*buffer_ptr = buffer;
 		return n;
 	}
-}}
+}
+
+_BASE_END

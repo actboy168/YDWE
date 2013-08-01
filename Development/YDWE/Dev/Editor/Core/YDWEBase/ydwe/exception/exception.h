@@ -4,7 +4,8 @@
 #include <cstdarg>
 #include <exception>
 
-namespace ydwe {
+_BASE_BEGIN 
+
 	class _BASE_API exception : public std::exception
 	{
 	public:
@@ -18,4 +19,5 @@ namespace ydwe {
 		wchar_t* get_format_string(const wchar_t* fmt, va_list argsList) const;
 		wchar_t* what_;
 	};
-}
+
+_BASE_END
