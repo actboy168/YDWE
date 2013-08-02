@@ -323,8 +323,6 @@ static void DoTask()
 		BOOST_THROW_EXCEPTION(std::domain_error(_("Cannot find main executable file of world editor in YDWE/bin directory.")));
 	}
 
-	// Show splash screen
-	ShowSplash(ydwe_path);
 
 	ydwe::win::process worldedit_process;
 	bool result = worldedit_process.create(worldeditPreferredPath, std::wstring(::GetCommandLineW()));
@@ -335,6 +333,8 @@ static void DoTask()
 			_("Failed to launch world editor. Error: %1%")
 			) % ::GetLastError()).str().c_str()));
 	}
+
+	ShowSplash(ydwe_path);
 }
 
 INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine, INT showType)
