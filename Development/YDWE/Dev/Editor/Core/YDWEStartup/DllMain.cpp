@@ -1,7 +1,6 @@
 #include <list>
 #include <utility>
 #include <locale>
-#include <WinSock2.h>
 #include <windows.h>
 #include <stlsoft/stlsoft.h>
 #include <winstl/winstl.h>
@@ -19,10 +18,9 @@
 #include <ydwe/path/service.h>
 #include <ydwe/util/unicode.h>
 #include <ydwe/win/file_version.h>
+#include <ydwe/win/process.h>
 #include "FileCheck.h"
 
-
-using namespace std;
 namespace fs = boost::filesystem;
 
 #define _(str) ydwe::util::u2a(ydwe::i18n::gettext(str)).c_str()
@@ -342,34 +340,14 @@ static void DoTask()
 	// Show splash screen
 	ShowSplash(ydwe_path);
 
-	// Start it!
-	PROCESS_INFORMATION processInformation;
-	STARTUPINFOW startupInfo;
-	GetStartupInfoW(&startupInfo);
-
-	// Command line buffer
-	wchar_t buffer[1024 * 128];
-
-	// Prepare command line
-	wcscpy_s(buffer, GetCommandLineW());
-
-	BOOL result = CreateProcessW(
-		worldeditPreferredPath.c_str(), buffer,
-		NULL, NULL,
-		FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL,
-		&startupInfo, &processInformation
-		);
+	ydwe::win::process worldedit_process;
+	bool result = worldedit_process.create(worldeditPreferredPath, std::wstring(::GetCommandLineW()));
 
 	if (!result)
 	{
 		BOOST_THROW_EXCEPTION(std::domain_error((boost::format(
 			_("Failed to launch world editor. Error: %1%")
-			) % GetLastError()).str().c_str()));
-	}
-	else
-	{
-		CloseHandle(processInformation.hThread);
-		CloseHandle(processInformation.hProcess);
+			) % ::GetLastError()).str().c_str()));
 	}
 }
 
