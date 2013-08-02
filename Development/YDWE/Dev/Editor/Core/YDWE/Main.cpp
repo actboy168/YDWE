@@ -19,8 +19,6 @@ INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR 
 {
 	INT exitCode = -1;
 
-	std::locale::global(std::locale("", LC_CTYPE));
-
 	/* 获得几个要加到Path的文件夹路径 */
 	wchar_t binaryPath[MAX_PATH];
 	wchar_t pathEnvironmentVariable[32767 /* http://msdn.microsoft.com/en-us/library/windows/desktop/ms683188.aspx */ ];
@@ -64,54 +62,26 @@ INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR 
 	// 设置环境变量
 	SetEnvironmentVariableW(L"PATH", pathEnvironmentVariable);
 
-#ifdef _DEBUG
 	/* 载入CRT的Dll，防止Dll冲突 */
 
 	// 再次得到bin文件夹路径
 	PathRemoveFileSpecW(binaryPath);
 	PathAppendW(binaryPath, L"bin");
 
-	// msvcr100.dll
+#ifdef _DEBUG
 	PathAppendW(binaryPath, L"msvcr100d.dll");
 	HMODULE msvcr100 = LoadLibraryW(binaryPath);
 
-	// msvcp100.dll
 	PathRemoveFileSpecW(binaryPath);
 	PathAppendW(binaryPath, L"msvcp100d.dll");
 	HMODULE msvcp100 = LoadLibraryW(binaryPath);
-
-	/* 载入其他几个dll */
-	PathRemoveFileSpecW(binaryPath);
-	PathAppendW(binaryPath, L"cygiconv-2.dll");
-	HMODULE cygiconv = LoadLibraryW(binaryPath);
-
-	PathRemoveFileSpecW(binaryPath);
-	PathAppendW(binaryPath, L"cygintl-8.dll");
-	HMODULE cygintl = LoadLibraryW(binaryPath);
 #else
-	/* 载入CRT的Dll，防止Dll冲突 */
-
-	// 再次得到bin文件夹路径
-	PathRemoveFileSpecW(binaryPath);
-	PathAppendW(binaryPath, L"bin");
-
-	// msvcr100.dll
 	PathAppendW(binaryPath, L"msvcr100.dll");
 	HMODULE msvcr100 = LoadLibraryW(binaryPath);
 
-	// msvcp100.dll
 	PathRemoveFileSpecW(binaryPath);
 	PathAppendW(binaryPath, L"msvcp100.dll");
 	HMODULE msvcp100 = LoadLibraryW(binaryPath);
-
-	/* 载入其他几个dll */
-	PathRemoveFileSpecW(binaryPath);
-	PathAppendW(binaryPath, L"cygiconv-2.dll");
-	HMODULE cygiconv = LoadLibraryW(binaryPath);
-
-	PathRemoveFileSpecW(binaryPath);
-	PathAppendW(binaryPath, L"cygintl-8.dll");
-	HMODULE cygintl = LoadLibraryW(binaryPath);
 #endif
 
 	// 尝试载入YDWEStartup.dll
@@ -124,11 +94,6 @@ INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR 
 
 		FreeLibrary(startupModule);
 	}
-
-	if (cygintl)
-		FreeLibrary(cygintl);
-	if (cygiconv)
-		FreeLibrary(cygiconv);
 
 	if (msvcp100)
 		FreeLibrary(msvcp100);

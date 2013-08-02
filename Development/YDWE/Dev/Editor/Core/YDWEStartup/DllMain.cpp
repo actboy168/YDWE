@@ -26,9 +26,7 @@ namespace fs = boost::filesystem;
 #define _(str) ydwe::util::u2a(ydwe::i18n::gettext(str)).c_str()
 #define __(str) ydwe::util::u2w(ydwe::i18n::gettext(str)).c_str()
 
-/// Self directory
 static fs::path gExecutableDirectory;
-/// Warcraft directory
 static fs::path gWarcraftDirectory;
 
 static bool RunOpenFileDialog(LPCWSTR title, LPCWSTR filter, HWND owner, std::wstring* path) 
@@ -155,13 +153,6 @@ static bool ValidateWarcraftDirectory(const fs::path &warcraftDirectory)
 	return true;
 }
 
-/** \brief Searches warcraft directory
-* 
-* Search the warcraft directory
-*
-* \return The warcraft directory
-* \exception std::domain_error If cannot found
-*/
 static fs::path FindWarcraftDirectory()
 {
 	fs::path result;
@@ -197,11 +188,6 @@ static fs::path FindWarcraftDirectory()
 	return std::move(result);
 }
 
-
-/** \brief Show splash screen
-*
-* Show splash screen
-*/
 static void ShowSplash(fs::path const& ydwe_path)
 {
 	ydwe::win::simple_file_version fv(ydwe_path.c_str());
@@ -351,10 +337,6 @@ static void DoTask()
 	}
 }
 
-/** \brief Main
-*
-* Main
-*/
 INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine, INT showType)
 {
 	INT exitCode = -1;

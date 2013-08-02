@@ -88,7 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="YDWE.ico" />
-    <None Include="YDWEVersion.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="YDWE.rc" />
