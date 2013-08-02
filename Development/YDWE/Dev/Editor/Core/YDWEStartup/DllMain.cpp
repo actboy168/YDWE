@@ -15,7 +15,6 @@
 #include <boost/foreach.hpp>
 #include <boost/exception/all.hpp>
 #include <CImg.h>
-#include <shlwapi.h>
 #include <ydwe/i18n/libintl.h>
 #include <ydwe/path/service.h>
 #include <ydwe/util/unicode.h>
@@ -33,25 +32,6 @@ namespace fs = boost::filesystem;
 static fs::path gExecutableDirectory;
 /// Warcraft directory
 static fs::path gWarcraftDirectory;
-
-/** \brief Searches executable path
-* 
-* Search the main executable path
-*
-* \return The executable path
-* \exception std::domain_error If cannot found
-*/
-static fs::path FindExecutablePath()
-{
-	wchar_t buffer[MAX_PATH];
-
-	if (GetModuleFileNameW(NULL, buffer, sizeof(buffer) / sizeof(buffer[0])) == 0)
-	{
-		BOOST_THROW_EXCEPTION(std::domain_error(_("Cannot find YDWE directory.")));
-	}
-
-	return std::move(fs::path(buffer));
-}
 
 static bool RunOpenFileDialog(LPCWSTR title, LPCWSTR filter, HWND owner, std::wstring* path) 
 {
@@ -224,9 +204,9 @@ static fs::path FindWarcraftDirectory()
 *
 * Show splash screen
 */
-static void ShowSplash(fs::path const& executablePath)
+static void ShowSplash(fs::path const& ydwe_path)
 {
-	ydwe::win::simple_file_version fv(executablePath.c_str());
+	ydwe::win::simple_file_version fv(ydwe_path.c_str());
 
 	// Get image path
 	fs::path splashPath = gExecutableDirectory / L"bin" / L"splash.bmp";
@@ -257,22 +237,20 @@ static void ShowSplash(fs::path const& executablePath)
 static void CheckedCopyFile(const fs::path &source, const fs::path &destination)
 {
 	if (!fs::exists(source))
-		goto LReturn;
+	{
+		return;
+	}
 
-	if (!fs::exists(destination))
-		goto LCopy;
+	if (fs::exists(destination))
+	{
+		if (fs::file_size(source) == fs::file_size(destination))
+		{
+			if (NYDWE::FileContentEqual(source, destination))
+				return;
+		}
+	}
 
-	auto correctSize = fs::file_size(source), currentSize = fs::file_size(destination);
-
-	// If the same, do not copy
-	if (currentSize == correctSize && NYDWE::FileContentEqual(source, destination))
-		goto LReturn;
-
-LCopy:
 	fs::copy_file(source, destination, fs::copy_option::overwrite_if_exists);
-
-LReturn:
-	return;
 }
 
 const wchar_t* szSystemDllList[] = {
@@ -309,35 +287,25 @@ static void MoveDetouredSystemDll(const fs::path &war3Directory)
 	}
 }
 
-/** \brief Do task
-*
-* Do actual task
-*
-* \exception Any exception if something goes wrong
-*/
 static void DoTask()
 {
-	// Initialize path
-	fs::path executablePath = FindExecutablePath();
+	fs::path ydwe_path = ydwe::path::get(ydwe::path::DIR_EXE);
+	gExecutableDirectory = ydwe_path.parent_path();
 
-	if (executablePath != fs::path(executablePath.string()))
+	ydwe::i18n::textdomain("YDWEStartup");
+	ydwe::i18n::bindtextdomain("YDWEStartup", gExecutableDirectory / L"share" / L"locale");
+
+	if (ydwe_path != fs::path(ydwe_path.string()))
 	{
 		BOOST_THROW_EXCEPTION(std::domain_error(_("Error YDWE directory.")));
 	}
 
-	gExecutableDirectory = executablePath.parent_path();
 	gWarcraftDirectory = FindWarcraftDirectory();
 
 	MoveDetouredSystemDll(gWarcraftDirectory);
 
 	// Set current directory
 	SetCurrentDirectoryW(gExecutableDirectory.c_str());
-
-	// Verify self
-	if (!fs::exists(gExecutableDirectory / L"bin" / L"YDWEInject.dll"))
-	{
-		BOOST_THROW_EXCEPTION(std::domain_error(_("Cannot find YDWEInject.dll in YDWE/bin directory.")));
-	}
 
 	if (fs::exists(gWarcraftDirectory / L"YDDllFixer.dll"))
 	{
@@ -372,7 +340,7 @@ static void DoTask()
 	}
 
 	// Show splash screen
-	ShowSplash(executablePath);
+	ShowSplash(ydwe_path);
 
 	// Start it!
 	PROCESS_INFORMATION processInformation;
@@ -405,13 +373,6 @@ static void DoTask()
 	}
 }
 
-static void InitI18N()
-{
-	fs::path warcraft3_path = ydwe::path::get(ydwe::path::DIR_EXE).remove_filename();
-	ydwe::i18n::textdomain("YDWEStartup");
-	ydwe::i18n::bindtextdomain("YDWEStartup", warcraft3_path / L"share" / L"locale");
-}
-
 /** \brief Main
 *
 * Main
@@ -421,8 +382,7 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 	INT exitCode = -1;
 
 	try
-	{	
-		InitI18N();
+	{
 		DoTask();
 		exitCode = 0;
 	}
