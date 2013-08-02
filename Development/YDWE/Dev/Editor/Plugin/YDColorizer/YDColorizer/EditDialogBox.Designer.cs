@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditDialogBox));
             this.lblStatic = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.txtEdit = new YDColorizer.MyTextBox();
+            this.txtPreview = new YDColorizer.MyRichTextBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btn1stColor = new System.Windows.Forms.Button();
@@ -42,8 +44,6 @@
             this.btnSetColor = new System.Windows.Forms.Button();
             this.btnGradual = new System.Windows.Forms.Button();
             this.btnSetting = new System.Windows.Forms.Button();
-            this.txtEdit = new YDColorizer.MyTextBox();
-            this.txtPreview = new YDColorizer.MyRichTextBox();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -79,6 +79,36 @@
             this.splitContainer.SplitterDistance = 97;
             this.splitContainer.TabIndex = 1;
             this.splitContainer.TabStop = false;
+            // 
+            // txtEdit
+            // 
+            this.txtEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtEdit.Location = new System.Drawing.Point(0, 0);
+            this.txtEdit.Multiline = true;
+            this.txtEdit.Name = "txtEdit";
+            this.txtEdit.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtEdit.Size = new System.Drawing.Size(410, 97);
+            this.txtEdit.TabIndex = 0;
+            this.txtEdit.TextChanged += new System.EventHandler(this.txtEdit_TextChanged);
+            this.txtEdit.Enter += new System.EventHandler(this.txtEdit_Enter);
+            this.txtEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+            // 
+            // txtPreview
+            // 
+            this.txtPreview.BackColor = System.Drawing.Color.Black;
+            this.txtPreview.DetectUrls = false;
+            this.txtPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtPreview.ForeColor = System.Drawing.Color.White;
+            this.txtPreview.Location = new System.Drawing.Point(0, 0);
+            this.txtPreview.Name = "txtPreview";
+            this.txtPreview.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.txtPreview.Size = new System.Drawing.Size(410, 91);
+            this.txtPreview.TabIndex = 1;
+            this.txtPreview.Text = "";
+            this.txtPreview.TextChanged += new System.EventHandler(this.txtPreview_TextChanged);
+            this.txtPreview.Enter += new System.EventHandler(this.txtPreview_Enter);
+            this.txtPreview.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+            this.txtPreview.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtPreview_MouseDown);
             // 
             // btnOk
             // 
@@ -221,35 +251,6 @@
             this.btnSetting.TabIndex = 5;
             this.btnSetting.UseVisualStyleBackColor = false;
             this.btnSetting.Click += new System.EventHandler(this.btnSetting_Click);
-            // 
-            // txtEdit
-            // 
-            this.txtEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtEdit.Location = new System.Drawing.Point(0, 0);
-            this.txtEdit.Multiline = true;
-            this.txtEdit.Name = "txtEdit";
-            this.txtEdit.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtEdit.Size = new System.Drawing.Size(410, 97);
-            this.txtEdit.TabIndex = 0;
-            this.txtEdit.TextChanged += new System.EventHandler(this.txtEdit_TextChanged);
-            this.txtEdit.Enter += new System.EventHandler(this.txtEdit_Enter);
-            this.txtEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
-            // 
-            // txtPreview
-            // 
-            this.txtPreview.BackColor = System.Drawing.Color.Black;
-            this.txtPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtPreview.ForeColor = System.Drawing.Color.White;
-            this.txtPreview.Location = new System.Drawing.Point(0, 0);
-            this.txtPreview.Name = "txtPreview";
-            this.txtPreview.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.txtPreview.Size = new System.Drawing.Size(410, 91);
-            this.txtPreview.TabIndex = 1;
-            this.txtPreview.Text = "";
-            this.txtPreview.TextChanged += new System.EventHandler(this.txtPreview_TextChanged);
-            this.txtPreview.Enter += new System.EventHandler(this.txtPreview_Enter);
-            this.txtPreview.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
-            this.txtPreview.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtPreview_MouseDown);
             // 
             // EditDialogBox
             // 
