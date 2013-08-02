@@ -275,21 +275,6 @@ LReturn:
 	return;
 }
 
-#ifdef NDEBUG
-/// Copy CRT to Warcraft directoryto prevent CRT dll confliction
-static void CopyCRTToWarcraft()
-{
-	fs::path source = gExecutableDirectory / L"bin" / L"msvcr100.dll";
-	fs::path desination = gWarcraftDirectory / L"msvcr100.dll";
-	CheckedCopyFile(source, desination);
-
-	source = gExecutableDirectory / L"bin" / L"msvcp100.dll";
-	desination = gWarcraftDirectory / L"msvcp100.dll";
-	CheckedCopyFile(source, desination);
-}
-#endif
-
-
 const wchar_t* szSystemDllList[] = {
 	L"version.dll",
 	L"winmm.dll",
