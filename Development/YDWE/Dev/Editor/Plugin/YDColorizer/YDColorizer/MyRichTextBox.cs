@@ -7,6 +7,13 @@ namespace YDColorizer
 {
     class MyRichTextBox : RichTextBox
     {
+        private const int WM_PAINT = 0x000F;
+
+        /// <summary>
+        /// 是否忽略控件重绘
+        /// </summary>
+        public bool ignoreRefresh = false;
+
         /// <summary>
         /// 是否锁定TextChange事件
         /// </summary>
@@ -24,6 +31,15 @@ namespace YDColorizer
         public MyRichTextBox()
         {
             this.LanguageOption = RichTextBoxLanguageOptions.AutoFont;
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_PAINT && ignoreRefresh == true)
+            {
+                return;
+            }
+            base.WndProc(ref m);
         }
     }
 }

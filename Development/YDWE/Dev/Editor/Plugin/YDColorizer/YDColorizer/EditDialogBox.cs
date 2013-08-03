@@ -302,8 +302,7 @@ namespace YDColorizer
 
         private void txtPreview_TextChanged(object sender, EventArgs e)
         {
-            TextConvert.ConvertToEditTextBoxEx(txtPreview, txtEdit);
-            //            TextConvert.ConvertToEditTextBox(txtPreview, txtEdit);
+            TextConvert.ConvertToEditTextBox(txtPreview, txtEdit);
         }
 
         /// <summary>
