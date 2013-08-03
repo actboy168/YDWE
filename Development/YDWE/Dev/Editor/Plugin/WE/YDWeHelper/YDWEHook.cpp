@@ -80,15 +80,6 @@ static void *pgWeDataSectionBase;
 /// WE .text section length
 static uintptr_t gWeDataSectionLength;
 
-/// Storm.dll .text section start address
-static void *pgStormDllTextSectionBase;
-/// Storm.dll .text section length
-static uintptr_t gStormDllTextSectionLength;
-/// Storm.dll .data section start address
-static void *pgStormDllDataSectionBase;
-/// Storm.dll .text section length
-static uintptr_t gStormDllDataSectionLength;
-
 /**
  * Initialize section infomation
  */
@@ -120,34 +111,6 @@ static void InitSectionInfo()
 	else
 	{
 		LOG4CXX_ERROR(NYDWE::gInjectLogger, "Cannot get .data section info of WE.");
-	}
-
-	// Do storm.dll
-	pm.swap(CPEMemoryFileInfo(reinterpret_cast<HMODULE>(pgStormDllBase)));
-	result = pm.querySection(".text");
-	if (result)
-	{
-		pgStormDllTextSectionBase = (void *)result->get<0>();
-		gStormDllTextSectionLength = result->get<1>();
-
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Storm.dll .text section start address: 0x%1$08X. length 0x%2$08X") % pgStormDllTextSectionBase % gStormDllTextSectionLength);
-	}
-	else
-	{
-		LOG4CXX_ERROR(NYDWE::gInjectLogger, "Cannot get .text section info of Storm.dll.");
-	}
-
-	result = pm.querySection(".data");
-	if (result)
-	{
-		pgStormDllDataSectionBase = (void *)result->get<0>();
-		gStormDllDataSectionLength = result->get<1>();
-
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Storm.dll .data section start address: 0x%1$08X. length 0x%2$08X") % pgStormDllDataSectionBase % gStormDllDataSectionLength);
-	}
-	else
-	{
-		LOG4CXX_ERROR(NYDWE::gInjectLogger, "Cannot get .data section info of Storm.dll.");
 	}
 }
 
@@ -1186,8 +1149,6 @@ static void InitPatches()
 
 void InstallHooks()
 {
-	pgStormDllBase = GetModuleHandleW(L"storm.dll");
-
 	// Init section information
 	NGameHook::InitSectionInfo();
 
@@ -1205,8 +1166,4 @@ void UninstallHooks()
 	NGameHook::UninstallIATHook();
 	NGameHook::UninstallInlineHook();
 }
-
-/// Storm.dll base address
-HMODULE pgStormDllBase;
-
 } // namespace NYDWE

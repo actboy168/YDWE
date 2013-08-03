@@ -13,9 +13,6 @@
 
 namespace NYDWE
 {
-/// Storm.dll module handle
-extern HMODULE pgStormDllBase;
-
 /** \brief Initialize hooks
  *
  * Initialize and install hooks 
