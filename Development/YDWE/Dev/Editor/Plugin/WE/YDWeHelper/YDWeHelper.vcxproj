@@ -105,6 +105,7 @@
     <ClInclude Include="PEMemoryFileInfo.h" />
     <ClInclude Include="YDWEEditorNativeFunction.h" />
     <ClInclude Include="YDWEHook.h" />
+    <ClInclude Include="YDWEHookPattern.h" />
     <ClInclude Include="YDWELogger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

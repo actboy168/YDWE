@@ -53,6 +53,9 @@
     <ClInclude Include="YDWEEditorNativeFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="YDWEHookPattern.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="YDWeHelper.def">
