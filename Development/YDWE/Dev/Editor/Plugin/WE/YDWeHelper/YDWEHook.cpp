@@ -179,25 +179,24 @@ BOOL __fastcall DetourWeSetWindowCaption(HWND hWnd, LPCSTR lpString)
 	}
 }
 
-static uintptr_t pgTrueWeUtf8ToAnsi;
-static bool isWeUtf8ToAnsiHookInstalled;
-BOOL __fastcall DetourWeUtf8ToAnsi(LPCSTR lpString)
+static uintptr_t pgTrueWeSetMenuItem;
+static bool isWeSetMenuItemHookInstalled;
+uint32_t __fastcall DetourWeSetMenuItem(uint32_t this_, uint32_t edx_, uint32_t item, const char* str, uint32_t hotkey[2])
 {
 	try
 	{
-		if ((lpString) && !ydwe::util::is_utf8(lpString))
+		if ((str) && !ydwe::util::is_utf8(str))
 		{
-			std::string tmp = ydwe::util::a2u(lpString);
-			return aero::fast_call<BOOL>(pgTrueWeUtf8ToAnsi, tmp.c_str());
+			std::string tmp = ydwe::util::a2u(str);
+			return aero::this_call<uint32_t>(pgTrueWeSetMenuItem, this_, item, tmp.c_str(), hotkey);
 		}
 	}
 	catch (...)
 	{
 	}
 
-	return aero::fast_call<BOOL>(pgTrueWeUtf8ToAnsi, lpString);
+	return aero::this_call<uint32_t>(pgTrueWeSetMenuItem, this_, item, str, hotkey);
 }
-
 
 template<class CharT>
 class locale_helper
@@ -780,13 +779,13 @@ static void InitInlineHook()
 	pgWeTriggerNameInputCharCheckPatcher->patch();
 	INSTALL_INLINE_HOOK(WeTriggerNameInputCharCheck)
 
-	//pgTrueWeSetWindowCaption = (uintptr_t)0x00433A00;//MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, &weSetWindowCaptionPattern[0], sizeof(weSetWindowCaptionPattern));
-	//LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Found WeSetWindowCaption at 0x%1$08X.") % pgTrueWeSetWindowCaption);
-	//INSTALL_INLINE_HOOK(WeSetWindowCaption)
-
-	pgTrueWeUtf8ToAnsi = (uintptr_t)0x00429CD0;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Found WeUtf8ToAnsi at 0x%1$08X.") % pgTrueWeUtf8ToAnsi);
-	INSTALL_INLINE_HOOK(WeUtf8ToAnsi)
+	pgTrueWeSetWindowCaption = (uintptr_t)0x00433A00;//MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, &weSetWindowCaptionPattern[0], sizeof(weSetWindowCaptionPattern));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Found WeSetWindowCaption at 0x%1$08X.") % pgTrueWeSetWindowCaption);
+	INSTALL_INLINE_HOOK(WeSetWindowCaption)
+	
+	pgTrueWeSetMenuItem = (uintptr_t)0x0042AA10;
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Found WeSetMenuItem at 0x%1$08X.") % pgTrueWeSetMenuItem);
+	INSTALL_INLINE_HOOK(WeSetMenuItem)
 
 	pgTrueWeStringCompare = (uintptr_t)0x004D2D90;
 	LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Found WeStringCompare at 0x%1$08X.") % pgTrueWeStringCompare);
