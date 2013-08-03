@@ -92,6 +92,7 @@
     <Compile Include="GetScreenColorForm.Designer.cs">
       <DependentUpon>GetScreenColorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalException.cs" />
     <Compile Include="Ini.cs" />
     <Compile Include="MyRichTextBox.cs">
       <SubType>Component</SubType>

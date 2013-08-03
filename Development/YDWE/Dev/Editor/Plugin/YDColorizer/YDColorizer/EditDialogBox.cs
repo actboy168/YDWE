@@ -31,9 +31,17 @@ namespace YDColorizer
         private IntPtr hBtnOk;
         private IntPtr hBtnCancel;
 
-        public EditDialogBox()
+        public EditDialogBox(IntPtr hWnd)
         {
             InitializeComponent();
+            this.hWnd = hWnd;
+            WEInit.WindowsManager[this.hWnd] = this;
+        }
+        
+        ~EditDialogBox()
+        {
+            new WinApi.Window(this.hWnd).Show();
+            WEInit.WindowsManager.Remove(this.hWnd);
         }
 
         /// <summary>
@@ -117,7 +125,7 @@ namespace YDColorizer
             //}
 
             this.Text = window.Text;// 从原窗口获取标题并设置到模拟窗口
-            window.Hide();// 隐藏原窗口
+            //window.Hide();// 隐藏原窗口
             #endregion
 
             #region 初始化用户使用的颜色
