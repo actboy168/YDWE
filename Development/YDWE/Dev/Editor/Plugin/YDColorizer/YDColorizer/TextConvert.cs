@@ -288,25 +288,134 @@ namespace YDColorizer
 
         public static void SetTxtEditGradual(MyTextBox txtEdit, Color startColor, Color endColor)
         {
-            int selectLength = txtEdit.SelectionLength;// 需要处理的长度
-            if (selectLength > 1)
+            int processLength = 0;// 去除控制字符外的字符长度
+            string selectedText = txtEdit.SelectedText;// 选择的文本
+            for (int i = 0; i < selectedText.Length; i++)
+            {
+                if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == '|')
+                {
+                    processLength++;
+                    i++;
+                    continue;
+                }
+                if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'n')
+                {
+                    i++;
+                    continue;
+                }
+                if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'r')
+                {
+                    i++;
+                    continue;
+                }
+                if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'c')
+                {
+                    if (i + 9 < selectedText.Length)
+                    {
+                        string strColor = selectedText[i + 2].ToString() + selectedText[i + 3].ToString()// A
+                                        + selectedText[i + 4].ToString() + selectedText[i + 5].ToString()// R
+                                        + selectedText[i + 6].ToString() + selectedText[i + 7].ToString()// G
+                                        + selectedText[i + 8].ToString() + selectedText[i + 9].ToString()// B
+                                        ;
+                        if (IsColor(strColor) == true)
+                        {
+                            i += 9;
+                            continue;
+                        }
+                    }
+                }
+                processLength++;
+            }
+            if (processLength > 1)
             {
                 txtEdit.lockTextChange = true;
-                for (int i = 0; i < selectLength; i++)
+                int j = 0;
+                for (int i = 0; i < selectedText.Length; i++)
                 {
-                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R) * i / (selectLength - 1), startColor.G + (endColor.G - startColor.G) * i / (selectLength - 1), startColor.B + (endColor.B - startColor.B) * i / (selectLength - 1));// 计算当前字的颜色
+                    int r, g, b;
+                    Color tempColor;
+                    if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == '|')
+                    {
+                        r = startColor.R + (endColor.R - startColor.R) * j / (processLength - 1);
+                        g = startColor.G + (endColor.G - startColor.G) * j / (processLength - 1);
+                        b = startColor.B + (endColor.B - startColor.B) * j / (processLength - 1);
+                        tempColor = Color.FromArgb(r, g, b);
+                        j++;
+
+                        txtEdit.SelectionLength = 0;
+                        txtEdit.SelectedText = "|c" + ColorToHex(tempColor);
+                        txtEdit.SelectionStart += 2;
+                        txtEdit.SelectedText = "|r";
+                        i++;
+                        continue;
+                    }
+                    if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'n')
+                    {
+                        txtEdit.SelectionStart += 2;
+                        i++;
+                        continue;
+                    }
+                    if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'r')
+                    {
+                        txtEdit.SelectionStart += 2;
+                        i++;
+                        continue;
+                    }
+                    if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'c')
+                    {
+                        if (i + 9 < selectedText.Length)
+                        {
+                            string strColor = selectedText[i + 2].ToString() + selectedText[i + 3].ToString()// A
+                                            + selectedText[i + 4].ToString() + selectedText[i + 5].ToString()// R
+                                            + selectedText[i + 6].ToString() + selectedText[i + 7].ToString()// G
+                                            + selectedText[i + 8].ToString() + selectedText[i + 9].ToString()// B
+                                            ;
+                            if (IsColor(strColor) == true)
+                            {
+                                txtEdit.SelectionStart += 9;
+                                i += 9;
+                                continue;
+                            }
+                        }
+                    }
+                    r = startColor.R + (endColor.R - startColor.R) * j / (processLength - 1);
+                    g = startColor.G + (endColor.G - startColor.G) * j / (processLength - 1);
+                    b = startColor.B + (endColor.B - startColor.B) * j / (processLength - 1);
+                    tempColor = Color.FromArgb(r, g, b);
+                    j++;
+
                     txtEdit.SelectionLength = 0;
                     txtEdit.SelectedText = "|c" + ColorToHex(tempColor);
                     txtEdit.SelectionStart++;
                     txtEdit.SelectedText = "|r";
-                    txtEdit.Select();// 激活控件
                 }
                 txtEdit.lockTextChange = false;
+                txtEdit.Select();// 激活控件
             }
             else
             {
                 SetTxtEditSingleColor(txtEdit, startColor);
             }
+
+            //int selectLength = txtEdit.SelectionLength;// 需要处理的长度
+            //if (selectLength > 1)
+            //{
+            //    txtEdit.lockTextChange = true;
+            //    for (int i = 0; i < selectLength; i++)
+            //    {
+            //        Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R) * i / (selectLength - 1), startColor.G + (endColor.G - startColor.G) * i / (selectLength - 1), startColor.B + (endColor.B - startColor.B) * i / (selectLength - 1));// 计算当前字的颜色
+            //        txtEdit.SelectionLength = 0;
+            //        txtEdit.SelectedText = "|c" + ColorToHex(tempColor);
+            //        txtEdit.SelectionStart++;
+            //        txtEdit.SelectedText = "|r";
+            //        txtEdit.Select();// 激活控件
+            //    }
+            //    txtEdit.lockTextChange = false;
+            //}
+            //else
+            //{
+            //    SetTxtEditSingleColor(txtEdit, startColor);
+            //}
         }
 
         public static void SetTxtPreviewGradual(MyRichTextBox txtPreview, Color startColor, Color endColor)
