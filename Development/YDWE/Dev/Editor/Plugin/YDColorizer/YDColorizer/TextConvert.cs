@@ -141,6 +141,14 @@ namespace YDColorizer
                     continue;
                 }
                 #endregion
+                #region 将|转为||
+                else if (txtPreviewClone.SelectedText == "|")
+                {
+                    sb.Append("||");
+                    txtPreviewClone.SelectionStart++;
+                    continue;
+                }
+                #endregion
                 sb.Append(txtPreviewClone.SelectedText);
                 txtPreviewClone.SelectionStart++;
             }
