@@ -67,6 +67,10 @@ namespace YDColorizer
         {
             if (e.Control == true)// 按下Ctrl键
             {
+                if (e.KeyCode == Keys.A)// 按下A键
+                {
+                    this.SelectAll();
+                }
                 if (e.KeyCode == Keys.Z)// 按下Z键
                 {
                     //this.Undo();
