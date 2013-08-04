@@ -400,7 +400,7 @@ namespace YDColorizer
             }
         }
 
-        private void EditDialogBox_KeyDown(object sender, KeyEventArgs e)
+        private void EditDialogBox_KeyDown(object sender, KeyEventArgs e)// 为撤销和重做按钮添加快捷键
         {
             if (e.Control == true)// 按下Ctrl键
             {
