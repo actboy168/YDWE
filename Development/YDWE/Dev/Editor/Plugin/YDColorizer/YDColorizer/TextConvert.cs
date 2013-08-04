@@ -433,6 +433,7 @@ namespace YDColorizer
                     txtPreview.SelectionStart++;
                 }
                 txtPreview.lockTextChange = false;
+                txtPreview.Select();// 激活控件
             }
             else
             {
