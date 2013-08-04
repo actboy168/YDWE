@@ -37,7 +37,7 @@ namespace YDColorizer
             this.hWnd = hWnd;
             WEInit.WindowsManager[this.hWnd] = this;
         }
-        
+
         ~EditDialogBox()
         {
             new WinApi.Window(this.hWnd).Show();
@@ -205,7 +205,19 @@ namespace YDColorizer
             WinApi.TextBox txtEdit = new WinApi.TextBox(hEdit);
             txtEdit.Text = this.txtEdit.Text;// 写回文本
             WinApi.Button btnOk = new WinApi.Button(hBtnOk);
-            btnOk.Click();// 点击确定按钮
+
+            try
+            {
+                btnOk.Click();// 点击确定按钮
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("发生异常，请截图并发至ydwe论坛：" + Environment.NewLine
+                    + "原文本框句柄：" + hEdit.ToString() + Environment.NewLine
+                    + "确认按钮句柄：" + hBtnOk.ToString() + Environment.NewLine
+                    + "取消按钮句柄：" + hBtnCancel.ToString() + Environment.NewLine
+                    + "异常信息：" + ex.ToString());
+            }
 
             Config.SaveColor(btn1stColor);
             Config.SaveColor(btn2ndColor);
@@ -220,7 +232,19 @@ namespace YDColorizer
         private void btnCancel_Click(object sender, EventArgs e)
         {
             WinApi.Button btnCancel = new WinApi.Button(hBtnCancel);
-            btnCancel.Click();// 点击取消按钮
+
+            try
+            {
+                btnCancel.Click();// 点击取消按钮
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("发生异常，请截图并发至ydwe论坛：" + Environment.NewLine
+                    + "原文本框句柄：" + hEdit.ToString() + Environment.NewLine
+                    + "确认按钮句柄：" + hBtnOk.ToString() + Environment.NewLine
+                    + "取消按钮句柄：" + hBtnCancel.ToString() + Environment.NewLine
+                    + "异常信息：" + ex.ToString());
+            }
 
             Config.SaveColor(btn1stColor);
             Config.SaveColor(btn2ndColor);
