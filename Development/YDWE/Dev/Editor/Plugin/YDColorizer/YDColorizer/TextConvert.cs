@@ -283,6 +283,7 @@ namespace YDColorizer
             int selectLength = txtPreview.SelectionLength;// 保存处理字符串的长度
             txtPreview.SelectionColor = color;// 设置颜色
             txtPreview.SelectionStart = cursorLocation + selectLength;// 移动光标
+            txtPreview.SelectionLength = 0;// 清空选择
             txtPreview.lockTextChange = false;
             txtPreview.Select();// 激活控件
         }
