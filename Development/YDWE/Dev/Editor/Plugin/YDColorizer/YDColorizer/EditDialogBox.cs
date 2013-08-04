@@ -399,5 +399,20 @@ namespace YDColorizer
                 this.TopMost = true;
             }
         }
+
+        private void EditDialogBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control == true)// 按下Ctrl键
+            {
+                if (e.KeyCode == Keys.Z)// 按下Z键
+                {
+                    btnUndo.PerformClick();
+                }
+                if (e.KeyCode == Keys.Y)// 按下Y键
+                {
+                    btnRedo.PerformClick();
+                }
+            }
+        }
     }
 }
