@@ -22,7 +22,7 @@ namespace YDColorizer
             txtEdit.lockTextChange = true;
             txtPreview.lockTextChange = true;
 
-            MyRichTextBox txtPreviewClone = new MyRichTextBox() 
+            MyRichTextBox txtPreviewClone = new MyRichTextBox()
             {
                 BackColor = txtPreview.BackColor,
                 ForeColor = txtPreview.ForeColor,
@@ -39,6 +39,12 @@ namespace YDColorizer
             {
                 if (charArray[i] == '|')// 转义字符
                 {
+                    if ((i + 1) < charArray.Length && charArray[i + 1] == '|')// 字符'|'
+                    {
+                        buffer.Append('|');// 将字符'|'输入到缓冲区
+                        i++;
+                        continue;
+                    }
                     if (((i + 1) < charArray.Length) && ((charArray[i + 1] == 'n') || (charArray[i + 1] == 'N')))// 换行
                     {
                         Color currentColor = txtPreviewClone.SelectionColor;// 保存当前颜色
@@ -280,7 +286,7 @@ namespace YDColorizer
                 txtEdit.lockTextChange = true;
                 for (int i = 0; i < selectLength; i++)
                 {
-                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R)*i / (selectLength - 1), startColor.G + (endColor.G - startColor.G)*i / (selectLength - 1) , startColor.B + (endColor.B - startColor.B)*i / (selectLength - 1));// 计算当前字的颜色
+                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R) * i / (selectLength - 1), startColor.G + (endColor.G - startColor.G) * i / (selectLength - 1), startColor.B + (endColor.B - startColor.B) * i / (selectLength - 1));// 计算当前字的颜色
                     txtEdit.SelectionLength = 0;
                     txtEdit.SelectedText = "|c" + ColorToHex(tempColor);
                     txtEdit.SelectionStart++;
@@ -304,7 +310,7 @@ namespace YDColorizer
                 for (int i = 0; i < selectLength; i++)
                 {
                     txtPreview.SelectionLength = 1;
-                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R)*i / (selectLength - 1) , startColor.G + (endColor.G - startColor.G)*i / (selectLength - 1), startColor.B + (endColor.B - startColor.B)*i / (selectLength - 1) );// 计算当前字的颜色
+                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R) * i / (selectLength - 1), startColor.G + (endColor.G - startColor.G) * i / (selectLength - 1), startColor.B + (endColor.B - startColor.B) * i / (selectLength - 1));// 计算当前字的颜色
                     txtPreview.SelectionColor = tempColor;
                     txtPreview.SelectionLength = 0;
                     txtPreview.SelectionStart++;
