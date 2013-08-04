@@ -386,9 +386,6 @@ static void DoTask()
 		BOOST_THROW_EXCEPTION(std::domain_error(_("Cannot find main executable file of world editor in YDWE/bin directory.")));
 	}
 
-	// Show splash screen
-	ShowSplash(executablePath);
-
 	// Start it!
 	PROCESS_INFORMATION processInformation;
 	STARTUPINFOW startupInfo;
@@ -418,6 +415,9 @@ static void DoTask()
 		CloseHandle(processInformation.hThread);
 		CloseHandle(processInformation.hProcess);
 	}
+
+	// Show splash screen
+	ShowSplash(executablePath);
 }
 
 static void InitI18N()
