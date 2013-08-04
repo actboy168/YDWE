@@ -272,8 +272,8 @@ namespace YDColorizer
         {
             txtEdit.lockTextChange = true;
             txtEdit.SelectedText = "|c" + ColorToHex(color) + txtEdit.SelectedText + "|r";
-            txtEdit.Select();// 激活控件
             txtEdit.lockTextChange = false;
+            txtEdit.Select();// 激活控件
         }
 
         public static void SetTxtPreviewSingleColor(MyRichTextBox txtPreview, Color color)
@@ -284,6 +284,7 @@ namespace YDColorizer
             txtPreview.SelectionColor = color;// 设置颜色
             txtPreview.SelectionStart = cursorLocation + selectLength;// 移动光标
             txtPreview.lockTextChange = false;
+            txtPreview.Select();// 激活控件
         }
 
         public static void SetTxtEditGradual(MyTextBox txtEdit, Color startColor, Color endColor)
