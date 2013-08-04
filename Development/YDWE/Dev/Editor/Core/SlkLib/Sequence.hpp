@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cctype>
-#include <locale>
 #include "Util.hpp"
 
 namespace slk
@@ -33,24 +31,6 @@ namespace slk
 
 			return InBegin;
 		}
-
-		template<class CharT>
-		struct ctype_facet_ptr
-		{
-			std::locale locale_;
-			const std::ctype<CharT>* facet_ptr_;
-
-			ctype_facet_ptr()
-				: locale_()
-				, facet_ptr_(&std::use_facet<std::ctype<CharT>>(locale_))
-			{ }
-
-			const std::ctype<CharT>* operator->() const
-			{
-				return facet_ptr_;
-			}
-		};
-
 	}
 
 	namespace ctype
@@ -58,10 +38,7 @@ namespace slk
 		struct is_space
 		{
 			template<class CharT>
-			bool operator()(CharT Ch) const
-			{
-				return Singleton<detail::ctype_facet_ptr<CharT>>::instance()->is(std::ctype_base::space, Ch);
-			}
+			bool operator()(CharT Ch) const;
 		};
 	}
 

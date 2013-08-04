@@ -75,33 +75,6 @@ namespace slk
 		return detail::basic_list_of<std::pair<P1, P2>>(val1, val2);
 	}
 
-	template <typename _Ty>
-	struct Singleton
-	{
-	private:
-		struct object_creator
-		{
-			object_creator() { Singleton<_Ty>::instance(); }
-			inline void do_nothing() const { }
-		};
-		static object_creator create_object;
-		Singleton();
-		Singleton(const Singleton&);
-		Singleton& operator=(const Singleton&);
-
-	public:
-		typedef _Ty object_type;
-		static object_type& instance()
-		{
-			static object_type obj;
-			create_object.do_nothing();
-			return obj;
-		}
-	};
-
-	template <typename _Ty>
-	typename Singleton<_Ty>::object_creator Singleton<_Ty>::create_object;
-
 	class SLKLIB_API noncopyable
 	{
 	protected:
