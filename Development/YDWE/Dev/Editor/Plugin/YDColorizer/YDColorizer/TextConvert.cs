@@ -280,7 +280,7 @@ namespace YDColorizer
                 txtEdit.lockTextChange = true;
                 for (int i = 0; i < selectLength; i++)
                 {
-                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R) / (selectLength - 1) * i, startColor.G + (endColor.G - startColor.G) / (selectLength - 1) * i, startColor.B + (endColor.B - startColor.B) / (selectLength - 1) * i);// 计算当前字的颜色
+                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R)*i / (selectLength - 1), startColor.G + (endColor.G - startColor.G)*i / (selectLength - 1) , startColor.B + (endColor.B - startColor.B)*i / (selectLength - 1));// 计算当前字的颜色
                     txtEdit.SelectionLength = 0;
                     txtEdit.SelectedText = "|c" + ColorToHex(tempColor);
                     txtEdit.SelectionStart++;
@@ -304,7 +304,7 @@ namespace YDColorizer
                 for (int i = 0; i < selectLength; i++)
                 {
                     txtPreview.SelectionLength = 1;
-                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R) / (selectLength - 1) * i, startColor.G + (endColor.G - startColor.G) / (selectLength - 1) * i, startColor.B + (endColor.B - startColor.B) / (selectLength - 1) * i);// 计算当前字的颜色
+                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R)*i / (selectLength - 1) , startColor.G + (endColor.G - startColor.G)*i / (selectLength - 1), startColor.B + (endColor.B - startColor.B)*i / (selectLength - 1) );// 计算当前字的颜色
                     txtPreview.SelectionColor = tempColor;
                     txtPreview.SelectionLength = 0;
                     txtPreview.SelectionStart++;
