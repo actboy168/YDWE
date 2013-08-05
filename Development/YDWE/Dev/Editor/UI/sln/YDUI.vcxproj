@@ -40,7 +40,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='YDTrigger|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
     <CustomBuildAfterTargets>
     </CustomBuildAfterTargets>
     <PreLinkEventUseInBuild>true</PreLinkEventUseInBuild>
@@ -51,7 +50,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='YDWE|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
     <CustomBuildAfterTargets />
     <IntDir>$(UIObj)</IntDir>
     <OutDir>$(UIObj)</OutDir>
@@ -92,9 +90,7 @@
       <Command>
       </Command>
     </CustomBuildStep>
-    <BuildLog>
-      <Path>$(OutDir)\$(MSBuildProjectName).log</Path>
-    </BuildLog>
+    <BuildLog />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='YDWE|Win32'">
     <ClCompile>
@@ -128,9 +124,7 @@
       <Command>
       </Command>
     </CustomBuildStep>
-    <BuildLog>
-      <Path>$(OutDir)\$(MSBuildProjectName).log</Path>
-    </BuildLog>
+    <BuildLog />
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\src\Data\TriggerActions.ui" />
