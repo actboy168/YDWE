@@ -36,6 +36,12 @@ namespace YDColorizer
             InitializeComponent();
             WEInit.WindowsManager[this.hWnd] = this;
         }
+        
+        private void EditDialogBox_Load(object sender, EventArgs e)
+        {
+            this.txtEdit.undoStackChange += new EventHandler((object undoCount, EventArgs empty) => { if ((int)undoCount == 0) { this.btnUndo.Enabled = false; } else if ((int)undoCount > 0) { this.btnUndo.Enabled = true; } });// 根据文本框可撤销数量设置撤销按钮是否可用
+            this.txtEdit.redoStackChange += new EventHandler((object redoCount, EventArgs empty) => { if ((int)redoCount == 0) { this.btnRedo.Enabled = false; } else if ((int)redoCount > 0) { this.btnRedo.Enabled = true; } });// 根据文本框可重做数量设置重做按钮是否可用
+        }
 
         public void ResetAllInformation(IntPtr hWnd)
         {
@@ -64,8 +70,6 @@ namespace YDColorizer
             this.lastFocus = this.txtEdit;// 设置最后焦点在基础文本框
             this.txtEdit.lockTextChange = false;// 离开代码修改模式
             this.txtEdit.SelectAll();// 选取所有文本
-            this.txtEdit.undoStackChange += new EventHandler((object undoCount, EventArgs empty) => { if ((int)undoCount == 0) { this.btnUndo.Enabled = false; } else if ((int)undoCount > 0) { this.btnUndo.Enabled = true; } });// 根据文本框可撤销数量设置撤销按钮是否可用
-            this.txtEdit.redoStackChange += new EventHandler((object redoCount, EventArgs empty) => { if ((int)redoCount == 0) { this.btnRedo.Enabled = false; } else if ((int)redoCount > 0) { this.btnRedo.Enabled = true; } });// 根据文本框可重做数量设置重做按钮是否可用
             #endregion
 
             #region 初始化确定按钮
