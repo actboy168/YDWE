@@ -10,7 +10,6 @@ public class WEInit
     /// 搜索的窗口的类名
     /// </summary>
     private const string DialogBoxClassName = "#32770";
-    public static Dictionary<IntPtr, EditDialogBox> WindowsManager = new Dictionary<IntPtr,EditDialogBox>();
 
     [MTAThread]
     public static void begin()
@@ -93,19 +92,17 @@ public class WEInit
         {
             try
             {
-                foreach (var title in dialogBoxTitles)// 遍历标题数组寻找对话框
+                if (edb.hWnd == IntPtr.Zero)
                 {
-                    WinApi.Window dialogBox = new WinApi.Window(DialogBoxClassName, title);// 搜索we物体编辑器的文本编辑框
-                    if (dialogBox.Handle != IntPtr.Zero)// 找到
+                    foreach (var title in dialogBoxTitles)// 遍历标题数组寻找对话框
                     {
-                        int thisProcessId = System.Diagnostics.Process.GetCurrentProcess().Id;
-                        int targetProcessId = AboutProcess.GetProcessId(dialogBox.Handle);
-                        if (thisProcessId == targetProcessId)// 搜索的对话框与该ydwe插件同进程
+                        WinApi.Window dialogBox = new WinApi.Window(DialogBoxClassName, title);// 搜索we物体编辑器的文本编辑框
+                        if (dialogBox.Handle != IntPtr.Zero)// 找到
                         {
-                            EditDialogBox dummy;
-                            if (!WindowsManager.TryGetValue(dialogBox.Handle, out dummy))
+                            int thisProcessId = System.Diagnostics.Process.GetCurrentProcess().Id;
+                            int targetProcessId = AboutProcess.GetProcessId(dialogBox.Handle);
+                            if (thisProcessId == targetProcessId)// 搜索的对话框与该ydwe插件同进程
                             {
-                                WindowsManager[dialogBox.Handle] = null;
                                 edb.AttachDiglog(dialogBox.Handle);// 重建模拟窗口
                                 break;
                             }

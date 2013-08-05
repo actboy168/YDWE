@@ -25,7 +25,7 @@ namespace YDColorizer
         /// </summary>
         private const string ButtonClassName = "Button";
 
-        private IntPtr hWnd;
+        public  IntPtr hWnd = IntPtr.Zero;
         private IntPtr hStatic;
         private IntPtr hEdit;
         private IntPtr hBtnOk;
@@ -34,9 +34,13 @@ namespace YDColorizer
         public EditDialogBox()
         {
             InitializeComponent();
-            WEInit.WindowsManager[this.hWnd] = this;
         }
-        
+
+        ~EditDialogBox()
+        {
+            new WinApi.Window(this.hWnd).Show();
+        }
+
         private void EditDialogBox_Load(object sender, EventArgs e)
         {
             this.txtEdit.undoStackChange += new EventHandler((object undoCount, EventArgs empty) => { if ((int)undoCount == 0) { this.btnUndo.Enabled = false; } else if ((int)undoCount > 0) { this.btnUndo.Enabled = true; } });// 根据文本框可撤销数量设置撤销按钮是否可用
@@ -79,6 +83,7 @@ namespace YDColorizer
 
             this.Hide();// 隐藏模拟窗口
             //this.Dispose();// 销毁模拟窗口
+            this.hWnd = IntPtr.Zero;
         }
 
         public void ReLoad()
@@ -166,12 +171,6 @@ namespace YDColorizer
             #endregion
 
             //this.Activate();// 激活当前窗口
-        }
-
-        ~EditDialogBox()
-        {
-            new WinApi.Window(this.hWnd).Show();
-            WEInit.WindowsManager.Remove(this.hWnd);
         }
 
         private void btnOk_Click(object sender, EventArgs e)
