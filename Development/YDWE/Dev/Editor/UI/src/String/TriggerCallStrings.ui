@@ -1194,11 +1194,11 @@ GetRandomRealHint=
 
 GetRandomDirectionDeg="Ëæ»ú½Ç¶È"
 GetRandomDirectionDeg="Ëæ»ú½Ç¶È"
-GetRandomDirectionDegHint="0-360µÄËæ»úÊµÊı. ½¨ÒéÖ±½ÓÓÃËæ¼´ÊµÊıÀ´×ö."
+GetRandomDirectionDegHint="0-360µÄËæ»ú½Ç¶È."
 
 GetRandomPercentageBJ="Ëæ»ú°Ù·ÖÊı"
 GetRandomPercentageBJ="Ëæ»ú°Ù·ÖÊı"
-GetRandomPercentageBJHint="0-100µÄËæ»úÊµÊı. ½¨ÒéÖ±½ÓÓÃËæ¼´ÊµÊıÀ´×ö."
+GetRandomPercentageBJHint="0-100µÄËæ»úÊµÊı."
 
 DistanceBetweenPoints="Á½µã¼ä¾à"
 DistanceBetweenPoints=~µã," ºÍ ",~µã," Ö®¼äµÄ¾àÀë"
@@ -1238,7 +1238,7 @@ SquareRootHint=
 
 Sin="ÕıÏÒ(»¡¶È) [R]"
 Sin="Sin(",~Angle,")"
-SinHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. nativeº¯Êı,Ğ§ÂÊ¸ßÓÚ½Ç¶ÈÖÆº¯Êı."
+SinHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. "
 
 SinBJ="ÕıÏÒ(½Ç¶È)"
 SinBJ="Sin(",~Angle,")"
@@ -1246,7 +1246,7 @@ SinBJHint="²ÉÓÃ½Ç¶ÈÖÆ¼ÆËã."
 
 Cos="ÓàÏÒ(»¡¶È) [R]"
 Cos="Cos(",~Angle,")"
-CosHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. nativeº¯Êı,Ğ§ÂÊ¸ßÓÚ½Ç¶ÈÖÆº¯Êı."
+CosHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. "
 
 CosBJ="ÓàÏÒ(½Ç¶È)"
 CosBJ="Cos(",~Angle,")"
@@ -1254,7 +1254,7 @@ CosBJHint="²ÉÓÃ½Ç¶ÈÖÆ¼ÆËã."
 
 Tan="ÕıÇĞ(»¡¶È) [R]"
 Tan="Tan(",~Angle,")"
-TanHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. nativeº¯Êı,Ğ§ÂÊ¸ßÓÚ½Ç¶ÈÖÆº¯Êı."
+TanHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. "
 
 TanBJ="ÕıÇĞ(½Ç¶È)"
 TanBJ="Tan(",~Angle,")"
@@ -1262,7 +1262,7 @@ TanBJHint="²ÉÓÃ½Ç¶ÈÖÆ¼ÆËã."
 
 Asin="·´ÕıÏÒ(»¡¶È) [R]"
 Asin="Asin(",~ÊıÖµ,")"
-AsinHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. ·µ»Ø»¡¶ÈÈ¡Öµ-¦Ğ/2 ¡ª ¦Ğ/2. nativeº¯Êı,Ğ§ÂÊ¸ßÓÚ½Ç¶ÈÖÆº¯Êı."
+AsinHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. ·µ»Ø»¡¶ÈÈ¡Öµ-¦Ğ/2 ¡ª ¦Ğ/2. "
 
 AsinBJ="·´ÕıÏÒ(½Ç¶È)"
 AsinBJ="Asin(",~ÊıÖµ,")"
@@ -1270,7 +1270,7 @@ AsinBJHint="²ÉÓÃ½Ç¶ÈÖÆ¼ÆËã. ·µ»Ø½Ç¶ÈÈ¡Öµ-90 ¡ª 90."
 
 Acos="·´ÓàÏÒ(»¡¶È) [R]"
 Acos="Acos(",~ÊıÖµ,")"
-AcosHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. ·µ»Ø»¡¶ÈÈ¡Öµ0 ¡ª ¦Ğ. nativeº¯Êı,Ğ§ÂÊ¸ßÓÚ½Ç¶ÈÖÆº¯Êı."
+AcosHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. ·µ»Ø»¡¶ÈÈ¡Öµ0 ¡ª ¦Ğ. "
 
 AcosBJ="·´ÓàÏÒ(½Ç¶È)"
 AcosBJ="Acos(",~ÊıÖµ,")"
@@ -1278,7 +1278,7 @@ AcosBJHint="²ÉÓÃ½Ç¶ÈÖÆ¼ÆËã. ·µ»Ø½Ç¶ÈÈ¡Öµ0 ¡ª 180."
 
 Atan="·´ÕıÇĞ(»¡¶È) [R]"
 Atan="Atan(",~ÊıÖµ,")"
-AtanHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. ·µ»Ø»¡¶ÈÈ¡Öµ-¦Ğ/2 ¡ª ¦Ğ/2. nativeº¯Êı,Ğ§ÂÊ¸ßÓÚ½Ç¶ÈÖÆº¯Êı."
+AtanHint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. ·µ»Ø»¡¶ÈÈ¡Öµ-¦Ğ/2 ¡ª ¦Ğ/2. "
 
 AtanBJ="·´ÕıÇĞ(½Ç¶È)"
 AtanBJ="Atan(",~ÊıÖµ,")"
@@ -1286,7 +1286,7 @@ AtanBJHint="²ÉÓÃ½Ç¶ÈÖÆ¼ÆËã. ·µ»Ø½Ç¶ÈÈ¡Öµ-90 ¡ª 90."
 
 Atan2="·´ÕıÇĞ(Y:X)(»¡¶È) [R]"
 Atan2="Atan(",~Y," : ",~X,")"
-Atan2Hint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. ·µ»Ø»¡¶ÈÈ¡Öµ-¦Ğ/2 ¡ª ¦Ğ/2. nativeº¯Êı,Ğ§ÂÊ¸ßÓÚ½Ç¶ÈÖÆ·´ÓàÏÒº¯Êı."
+Atan2Hint="²ÉÓÃ»¡¶ÈÖÆ¼ÆËã. ·µ»Ø»¡¶ÈÈ¡Öµ-¦Ğ/2 ¡ª ¦Ğ/2. nativeº¯Êı."
 
 Atan2BJ="·´ÕıÇĞ(½Ç¶È)(Y:X)"
 Atan2BJ="Atan(",~Y," : ",~X,")"
@@ -1414,7 +1414,7 @@ GetUnitDefaultTurnSpeedHint="×ªÉíËÙ¶È±íÊ¾µ¥Î»¸Ä±äÃæÏò·½ÏòÊ±µÄËÙ¶È. ÊıÖµÔ½Ğ¡±íÊ¾×
 
 GetUnitPropWindow="µ±Ç°×ªÏò½Ç¶È(»¡¶ÈÖÆ) [R]"
 GetUnitPropWindow=~µ¥Î»," µÄµ±Ç°×ªÏò½Ç¶È(»¡¶ÈÖÆ)"
-GetUnitPropWindowHint="µ¥Î»×ªÉíÊ±µÄ×ªÏò½Ç¶È. ÊıÖµÔ½´ó×ªÏò·ù¶ÈÔ½´ó. Ğ§ÂÊ¸ßÓÚ½Ç¶ÈÖÆº¯Êı."
+GetUnitPropWindowHint="µ¥Î»×ªÉíÊ±µÄ×ªÏò½Ç¶È. ÊıÖµÔ½´ó×ªÏò·ù¶ÈÔ½´ó. "
 
 GetUnitPropWindowBJ="µ±Ç°×ªÏò½Ç¶È(½Ç¶ÈÖÆ)"
 GetUnitPropWindowBJ=~µ¥Î»," µÄµ±Ç°×ªÏò½Ç¶È"
