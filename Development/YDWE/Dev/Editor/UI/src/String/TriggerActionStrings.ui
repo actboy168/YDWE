@@ -298,11 +298,11 @@ SetUnitPositionLocFacingLocBJHint="建议使用'移动单位'+'设置面向角度'动作."
 
 SetUnitX="设置X坐标 [R]"
 SetUnitX="设置 ",~单位," 的X坐标为 ",~X
-SetUnitXHint="使用该函数的效率至少是同类函数的20倍以上.但要注意如果坐标超出地图边界是会出错的."
+SetUnitXHint="注意如果坐标超出地图边界是会出错的."
 
 SetUnitY="设置Y坐标 [R]"
 SetUnitY="设置 ",~单位," 的Y坐标为 ",~Y
-SetUnitYHint="使用该函数的效率至少是同类函数的20倍以上.但要注意如果坐标超出地图边界是会出错的."
+SetUnitYHint="注意如果坐标超出地图边界是会出错的."
 
 SetUnitRallyPoint="设置集结点(指定点)"
 SetUnitRallyPoint="设置 ",~单位," 的集结点到 ",~指定点
@@ -940,7 +940,7 @@ SetUnitFlyHeightBJHint="飞行单位可以直接改变飞行高度. 其他单位通过添加/删除 替换
 
 SetUnitPropWindow="改变单位转向角度(弧度制) [R]"
 SetUnitPropWindow="改变 ",~单位," 的转向角度为 ",~数值," (弧度制)"
-SetUnitPropWindowHint="设置单位转身时的转向角度. 数值越大转向幅度越大. 效率高于角度制函数."
+SetUnitPropWindowHint="设置单位转身时的转向角度. 数值越大转向幅度越大. "
 
 SetUnitPropWindowBJ="改变单位转向角度(角度制)"
 SetUnitPropWindowBJ="改变 ",~单位," 的转向角度为 ",~数值," 度"
@@ -3225,11 +3225,11 @@ SelectUnitRemoveHint=
 // Hashtable actions
 InitHashtableBJ="<1.24> 新建哈希表"
 InitHashtableBJ="创建一个新的哈希表"
-InitHashtableBJHint="您可以使用哈希表来储存临时数据，比缓存的效率要高"
+InitHashtableBJHint="您可以使用哈希表来储存临时数据"
 
 InitHashtable="<1.24> 新建哈希表 [C]"
 InitHashtable="创建一个新的哈希表"
-InitHashtableHint="您可以使用哈希表来储存临时数据，比缓存的效率要高"
+InitHashtableHint="您可以使用哈希表来储存临时数据"
 
 SaveRealBJ="<1.24> 保存实数"
 SaveRealBJ="保存实数 ",~Value," 在子索引 ",~Value," 主索引 ",~Value," 位于 ",~Hashtable," 之内"
