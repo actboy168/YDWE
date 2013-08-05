@@ -125,7 +125,7 @@ namespace YDColorizer
             //}
 
             this.Text = window.Text;// 从原窗口获取标题并设置到模拟窗口
-            //window.Hide();// 隐藏原窗口
+            window.Hide();// 隐藏原窗口
             #endregion
 
             #region 初始化用户使用的颜色
