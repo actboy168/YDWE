@@ -31,10 +31,13 @@ namespace WinApi
         private static extern int SendMessage(IntPtr hWnd, int wMsg, int wParam, StringBuilder lParam);
 
         [DllImport("user32.dll", EntryPoint = "GetClientRect", SetLastError = true)]
-        private static extern bool GetClientRect(IntPtr hwnd, out LPRECT lpRect);
+        private static extern bool GetClientRect(IntPtr hWnd, out LPRECT lpRect);
 
         [DllImport("user32.dll", EntryPoint = "ScreenToClient", SetLastError = true)]
-        private static extern int ScreenToClient(IntPtr hwnd, ref Point lpPoint);
+        private static extern int ScreenToClient(IntPtr hWnd, ref Point lpPoint);
+
+        [DllImport("user32.dll", EntryPoint = "PostMessage", SetLastError = true)]
+        private static extern int PostMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private const int BM_CLICK = 245;
         private const int WM_GETTEXT = 13;
@@ -231,8 +234,15 @@ namespace WinApi
         /// </summary>
         public void Click()
         {
-            Message ms = Message.Create(Handle, BM_CLICK, IntPtr.Zero, IntPtr.Zero);
-            //SendMessage(this.Handle, BM_CLICK, 0, 0);
+            SendMessage(this.Handle, BM_CLICK, 0, 0);
+        }
+
+        /// <summary>
+        /// 异步点击按钮
+        /// </summary>
+        public void ClickAsync()
+        {
+            PostMessage(this.Handle, BM_CLICK, 0, 0);
         }
     }
 }

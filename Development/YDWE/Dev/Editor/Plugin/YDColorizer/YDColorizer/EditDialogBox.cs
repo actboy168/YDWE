@@ -283,7 +283,7 @@ namespace YDColorizer
 
             try
             {
-                btnOk.Click();// 点击确定按钮
+                btnOk.ClickAsync();// 点击确定按钮
             }
             catch (Exception ex)
             {
@@ -314,7 +314,7 @@ namespace YDColorizer
 
             try
             {
-                btnCancel.Click();// 点击取消按钮
+                btnCancel.ClickAsync();// 点击取消按钮
             }
             catch (Exception ex)
             {
