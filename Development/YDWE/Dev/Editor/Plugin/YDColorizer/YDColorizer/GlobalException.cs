@@ -8,7 +8,7 @@ namespace YDColorizer
 {
     class GlobalException
     {
-        static void CatchException(Exception e, string default_msg)
+        public static void CatchException(Exception e, string default_msg)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("***************************************************************");

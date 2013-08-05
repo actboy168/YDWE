@@ -15,9 +15,9 @@ public class WEInit
     [MTAThread]
     public static void begin()
     {
-        Timer timer = new Timer();
-
         YDColorizer.GlobalException.Initialize();
+
+        Timer timer = new Timer();
 
         #region 配置文件不存在，创建默认配置文件
         if (Config.IsConfigExists() == false)
@@ -118,7 +118,7 @@ public class WEInit
             catch (Exception e)
             {
                 timer.Stop();
-                throw e;
+                GlobalException.CatchException(e, e.ToString());
             }
         });
 
