@@ -280,7 +280,6 @@
             this.ShowInTaskbar = false;
             this.Text = "EditDialogBox";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.EditDialogBox_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditDialogBox_KeyDown);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel1.PerformLayout();

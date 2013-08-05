@@ -86,6 +86,9 @@ public class WEInit
         #endregion
 
         timer.Interval = 100;// 设置搜索间隔为100毫秒
+
+        EditDialogBox edb=new EditDialogBox();
+
         timer.Tick += new EventHandler((object object_sender, EventArgs EventArgs_e) =>
         {
             try
@@ -103,8 +106,9 @@ public class WEInit
                             if (!WindowsManager.TryGetValue(dialogBox.Handle, out dummy))
                             {
                                 WindowsManager[dialogBox.Handle] = null;
-                                EditDialogBox edb = new EditDialogBox(dialogBox.Handle);// 创建模拟窗口
-                                edb.Show();// 显示模拟窗口
+                                edb.ResetAllInformation(dialogBox.Handle);// 重建模拟窗口
+                                //EditDialogBox edb = new EditDialogBox(dialogBox.Handle);// 创建模拟窗口
+                                //edb.Show();// 显示模拟窗口
                                 break;
                             }
                         }
