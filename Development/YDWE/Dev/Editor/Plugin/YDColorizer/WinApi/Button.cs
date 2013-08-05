@@ -3,6 +3,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace WinApi
 {
@@ -230,7 +231,8 @@ namespace WinApi
         /// </summary>
         public void Click()
         {
-            SendMessage(this.Handle, BM_CLICK, 0, 0);
+            Message ms = Message.Create(Handle, BM_CLICK, IntPtr.Zero, IntPtr.Zero);
+            //SendMessage(this.Handle, BM_CLICK, 0, 0);
         }
     }
 }
