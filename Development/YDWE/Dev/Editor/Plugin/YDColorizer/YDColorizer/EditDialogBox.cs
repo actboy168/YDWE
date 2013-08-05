@@ -47,7 +47,7 @@ namespace YDColorizer
             this.txtEdit.redoStackChange += new EventHandler((object redoCount, EventArgs empty) => { if ((int)redoCount == 0) { this.btnRedo.Enabled = false; } else if ((int)redoCount > 0) { this.btnRedo.Enabled = true; } });// 根据文本框可重做数量设置重做按钮是否可用
         }
 
-        public void AttachDiglog(IntPtr hWnd)
+        public void AttachDialog(IntPtr hWnd)
         {
             this.hWnd = hWnd;// 保存原窗体句柄
             this.ReLoad();// 重新加载控件内容
@@ -56,7 +56,7 @@ namespace YDColorizer
             this.txtEdit.Select();// 激活编辑框
         }
 
-        public void DetachDiglog(WinApi.Button btn)
+        public void DetachDialog(WinApi.Button btn)
         {  
             try
             {
@@ -203,13 +203,13 @@ namespace YDColorizer
             WinApi.TextBox txtEdit = new WinApi.TextBox(hEdit);
             txtEdit.Text = this.txtEdit.Text;// 写回文本
             WinApi.Button btnOk = new WinApi.Button(hBtnOk);
-            DetachDiglog(btnOk);
+            DetachDialog(btnOk);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             WinApi.Button btnCancel = new WinApi.Button(hBtnCancel);
-            DetachDiglog(btnCancel);
+            DetachDialog(btnCancel);
         }
 
 

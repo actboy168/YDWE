@@ -103,7 +103,7 @@ public class WEInit
                             int targetProcessId = AboutProcess.GetProcessId(dialogBox.Handle);
                             if (thisProcessId == targetProcessId)// 搜索的对话框与该ydwe插件同进程
                             {
-                                edb.AttachDiglog(dialogBox.Handle);// 重建模拟窗口
+                                edb.AttachDialog(dialogBox.Handle);// 重建模拟窗口
                                 break;
                             }
                         }
