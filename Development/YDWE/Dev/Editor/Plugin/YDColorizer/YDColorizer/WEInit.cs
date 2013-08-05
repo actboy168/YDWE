@@ -106,9 +106,7 @@ public class WEInit
                             if (!WindowsManager.TryGetValue(dialogBox.Handle, out dummy))
                             {
                                 WindowsManager[dialogBox.Handle] = null;
-                                edb.ResetAllInformation(dialogBox.Handle);// 重建模拟窗口
-                                //EditDialogBox edb = new EditDialogBox(dialogBox.Handle);// 创建模拟窗口
-                                //edb.Show();// 显示模拟窗口
+                                edb.AttachDiglog(dialogBox.Handle);// 重建模拟窗口
                                 break;
                             }
                         }
