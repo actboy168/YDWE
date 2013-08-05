@@ -32,10 +32,6 @@ namespace YDColorizer
         {
             if (e.Control == true)// 按下Ctrl键
             {
-                if (e.Shift == true)// Ctrl+Shift切换输入法
-                {
-                    return;
-                }
                 if (e.KeyCode == Keys.Z)// 按下Z键
                 {
                     return;
