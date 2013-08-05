@@ -301,6 +301,9 @@ namespace YDColorizer
 
             Config.SaveDialogSize(this);
 
+            this.txtEdit.undoStack.Clear();// 清空撤销信息
+            this.txtEdit.redoStack.Clear();// 清空重做信息
+
             this.Hide();// 隐藏模拟窗口
             //this.Dispose();// 销毁模拟窗口
         }
@@ -328,6 +331,9 @@ namespace YDColorizer
             Config.SaveColor(btn4thColor);
 
             Config.SaveDialogSize(this);
+
+            this.txtEdit.undoStack.Clear();// 清空撤销信息
+            this.txtEdit.redoStack.Clear();// 清空重做信息
 
             this.Hide();// 隐藏模拟窗口
             //this.Dispose();
