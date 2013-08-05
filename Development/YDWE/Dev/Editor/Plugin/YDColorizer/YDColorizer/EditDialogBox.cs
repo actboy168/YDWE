@@ -97,48 +97,15 @@ namespace YDColorizer
                 this.Height = window.Height * 2;
             }
 
-            //if (WinApi.Ini.GetInt(AboutConfig.GetConfigPath(), "Application", "RememberSize") == 0)
-            //{
-            //    this.Width = window.Width;
-            //    this.Height = window.Height * 2;
-            //}
-            //else
-            //{
-            //    int width = WinApi.Ini.GetInt(AboutConfig.GetConfigPath(), "Application", "Width");
-            //    if (width > 0)
-            //    {
-            //        this.Width = width;
-            //    }
-            //    else
-            //    {
-            //        this.Width = window.Width;
-            //    }
-            //    int height = WinApi.Ini.GetInt(AboutConfig.GetConfigPath(), "Application", "Height");
-            //    if (height > 0)
-            //    {
-            //        this.Height = height;
-            //    }
-            //    else
-            //    {
-            //        this.Height = window.Height * 2;
-            //    }
-            //}
-
             this.Text = window.Text;// 从原窗口获取标题并设置到模拟窗口
             window.Hide();// 隐藏原窗口
             #endregion
 
             #region 初始化用户使用的颜色
-
             Config.LoadColor(btn1stColor);
             Config.LoadColor(btn2ndColor);
             Config.LoadColor(btn3rdColor);
             Config.LoadColor(btn4thColor);
-
-            //UserCustomColor.Load(btn1stColor);
-            //UserCustomColor.Load(btn2ndColor);
-            //UserCustomColor.Load(btn3rdColor);
-            //UserCustomColor.Load(btn4thColor);
             #endregion
 
             #region 初始化提示
