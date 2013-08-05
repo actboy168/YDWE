@@ -87,7 +87,7 @@ public class WEInit
 
         timer.Interval = 100;// 设置搜索间隔为100毫秒
 
-        EditDialogBox edb=new EditDialogBox();
+        EditDialogBox edb = new EditDialogBox();
 
         timer.Tick += new EventHandler((object object_sender, EventArgs EventArgs_e) =>
         {
