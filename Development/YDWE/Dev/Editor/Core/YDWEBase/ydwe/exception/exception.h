@@ -10,8 +10,8 @@ _BASE_BEGIN
 	{
 	public:
 		exception();
-		exception(const char* format, ...);
-		exception(const wchar_t* format, ...);
+		exception(const char* fmt, ...);
+		exception(const wchar_t* fmt, ...);
 		virtual ~exception();
 		virtual const char* what() const;
 

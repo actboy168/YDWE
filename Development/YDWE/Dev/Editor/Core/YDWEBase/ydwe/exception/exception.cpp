@@ -7,25 +7,20 @@
 
 _BASE_BEGIN 
 
+#define YD_VA_START(v)  ((va_list)_ADDRESSOF(v) + _INTSIZEOF(v))
+
 	exception::exception()
 		: what_(nullptr)
 	{ }
 
-	exception::exception(const char* format, ...)
-		: what_(nullptr)
-	{
-		va_list ap;
-		va_start(ap, format);
-		what_ = get_format_string(format, ap);
-		va_end(ap);
-	}
+	exception::exception(const char* fmt, ...)
+		: what_(get_format_string(fmt, YD_VA_START(fmt)))
+	{ }
 
-	exception::exception(const wchar_t* format, ...)
+	exception::exception(const wchar_t* fmt, ...)
 		: what_(nullptr)
 	{
-		va_list ap;
-		va_start(ap, format);
-		wchar_t* what = get_format_string(format, ap);
+		wchar_t* what = get_format_string(fmt, YD_VA_START(fmt));
 		if (what)
 		{
 			static std::string temp_string;
@@ -39,7 +34,6 @@ _BASE_BEGIN
 				what_ = buffer;
 			}
 		}
-		va_end(ap);
 	}
 
 	exception::~exception()
@@ -53,13 +47,7 @@ _BASE_BEGIN
 
 	char* exception::get_format_string(const char* fmt, ...) const
 	{
-		char* result = nullptr;
-		va_list ap;
-		va_start(ap, fmt);
-		result = get_format_string(fmt, ap);
-		va_end(ap);
-
-		return result;
+		return get_format_string(fmt,  YD_VA_START(fmt));
 	}
 
 	char* exception::get_format_string(const char* fmt, va_list argsList) const
@@ -82,13 +70,7 @@ _BASE_BEGIN
 
 	wchar_t* exception::get_format_string(const wchar_t* fmt, ...) const
 	{
-		wchar_t* result = nullptr;
-		va_list ap;
-		va_start(ap, fmt);
-		result = get_format_string(fmt, ap);
-		va_end(ap);
-
-		return result;
+		return get_format_string(fmt,  YD_VA_START(fmt));
 	}
 
 	wchar_t* exception::get_format_string(const wchar_t* fmt, va_list argsList) const
@@ -113,5 +95,7 @@ _BASE_BEGIN
 	{
 		return what_ ? what_ : "unknown ydwe::exception";
 	}
+
+#undef YD_VA_START
 
 _BASE_END
