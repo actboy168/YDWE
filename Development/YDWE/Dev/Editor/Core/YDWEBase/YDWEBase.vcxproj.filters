@@ -197,6 +197,9 @@
     <ClCompile Include="ydwe\exception\detail\error_code.cpp">
       <Filter>ydwe\exception\detail</Filter>
     </ClCompile>
+    <ClCompile Include="ydwe\warcraft3\jass\global_variable.cpp">
+      <Filter>ydwe\warcraft3\jass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ydwe\util\detail\ansi_codecvt_facet.h">
@@ -375,6 +378,9 @@
     </ClInclude>
     <ClInclude Include="ydwe\exception\detail\error_code.h">
       <Filter>ydwe\exception\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\warcraft3\jass\global_variable.h">
+      <Filter>ydwe\warcraft3\jass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

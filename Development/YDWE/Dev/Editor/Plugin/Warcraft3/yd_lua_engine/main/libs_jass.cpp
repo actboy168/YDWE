@@ -5,6 +5,7 @@
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <ydwe/warcraft3/native_function.h>
 #include <ydwe/warcraft3/jass.h>
+#include <ydwe/warcraft3/jass/global_variable.h>
 #include <ydwe/util/singleton.h>
 
 namespace ydwe { namespace warcraft3 { namespace lua_engine {
@@ -122,10 +123,10 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
-		hashtable::variable_node* node_ptr = get_variable_hashtable()->get(name);
-		if (node_ptr)
+		jass::global_variable gv(name);
+		if (gv)
 		{
-			switch (node_ptr->type_)
+			switch (gv.type())
 			{
 			case jass::OPCODE_VARIABLE_NOTHING:
 			case jass::OPCODE_VARIABLE_UNKNOWN:
@@ -133,22 +134,22 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 				lj->pushnil();
 				return 1;
 			case jass::OPCODE_VARIABLE_CODE:
-				lj->push_code(node_ptr->value_);
+				lj->push_code(gv);
 				return 1;
 			case jass::OPCODE_VARIABLE_INTEGER:
-				lj->push_integer(node_ptr->value_);
+				lj->push_integer(gv);
 				return 1;
 			case jass::OPCODE_VARIABLE_REAL:
-				lj->push_real(node_ptr->value_);
+				lj->push_real(gv);
 				return 1;
 			case jass::OPCODE_VARIABLE_STRING:
-				lj->push_string(node_ptr->value_);
+				lj->push_string(gv);
 				return 1;
 			case jass::OPCODE_VARIABLE_HANDLE:
-				lj->push_handle(node_ptr->value_);
+				lj->push_handle(gv);
 				return 1;
 			case jass::OPCODE_VARIABLE_BOOLEAN:
-				lj->push_boolean(node_ptr->value_);
+				lj->push_boolean(gv);
 				return 1;
 			case jass::OPCODE_VARIABLE_INTEGER_ARRAY:
 			case jass::OPCODE_VARIABLE_REAL_ARRAY:
@@ -179,10 +180,10 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		}
 
 		const char* name = lj->tostring(2);
-		hashtable::variable_node* ptr = get_variable_hashtable()->get(name);
-		if (ptr)
+		jass::global_variable gv(name);
+		if (gv)
 		{
-			switch (ptr->type_)
+			switch (gv.type())
 			{
 			case jass::OPCODE_VARIABLE_NOTHING:
 			case jass::OPCODE_VARIABLE_UNKNOWN:
@@ -194,10 +195,10 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 				//
 				break;
 			case jass::OPCODE_VARIABLE_INTEGER:
-				ptr->value_ = lj->read_integer(3);
+				gv = lj->read_integer(3);
 				break;
 			case jass::OPCODE_VARIABLE_REAL:
-				ptr->value_ = lj->read_real(3);
+				gv = lj->read_real(3);
 				break;
 			case jass::OPCODE_VARIABLE_STRING:
 				//
@@ -205,11 +206,10 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 				//
 				break;
 			case jass::OPCODE_VARIABLE_HANDLE:
-				ptr->value_ = lj->read_handle(3);
+				gv = lj->read_handle(3);
 				break;
 			case jass::OPCODE_VARIABLE_BOOLEAN:
-				ptr->value_ = lj->read_boolean(3);
-				break;
+				gv = lj->read_boolean(3);
 				break;
 			case jass::OPCODE_VARIABLE_INTEGER_ARRAY:
 			case jass::OPCODE_VARIABLE_REAL_ARRAY:
