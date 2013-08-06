@@ -2,6 +2,8 @@
 #include <windows.h>
 #include "MainWindow.h"
 #include <ydwe/com/guard.h>
+#include <ydwe/util/unicode.h>
+
 
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR lpCmdLine, int nCmdShow)
 {
@@ -24,9 +26,9 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR l
 		pFrame->ShowWindow(true);
 		DuiLib::CPaintManagerUI::MessageLoop();
 	}
-	catch (ydwe::exception const& e)
+	catch (std::exception const& e)
 	{
-		::MessageBoxA(NULL, e.what(), "ERROR", MB_ICONERROR | MB_OK);
+		::MessageBoxW(NULL, ydwe::util::u2w(e.what(), ydwe::util::conv_method::replace | '?').c_str(), L"ERROR", MB_ICONERROR | MB_OK);
 	}
 	catch (...)
 	{
