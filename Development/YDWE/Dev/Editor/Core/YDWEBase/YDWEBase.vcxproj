@@ -137,6 +137,7 @@
     <ClCompile Include="ydwe\util\console.cpp" />
     <ClCompile Include="ydwe\util\detail\ansi_codecvt_facet.cpp" />
     <ClCompile Include="ydwe\util\detail\codecvt.cpp" />
+    <ClCompile Include="ydwe\util\detail\utf8_codecvt_facet.cpp" />
     <ClCompile Include="ydwe\util\is_utf8.cpp" />
     <ClCompile Include="ydwe\util\unicode.cpp" />
     <ClCompile Include="ydwe\warcraft3\detail\convert_real.cpp">

@@ -191,6 +191,9 @@
     <ClCompile Include="ydwe\exception\exception.cpp">
       <Filter>ydwe\exception</Filter>
     </ClCompile>
+    <ClCompile Include="ydwe\util\detail\utf8_codecvt_facet.cpp">
+      <Filter>ydwe\util\detail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ydwe\util\detail\ansi_codecvt_facet.h">
