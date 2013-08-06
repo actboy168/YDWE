@@ -16,7 +16,7 @@ _BASE_BEGIN namespace com {
 			{
 				if (FAILED(com_init_))
 				{
-					throw windows_exception(L"com initialize failed", com_init_);
+					throw windows_exception("com initialize failed", com_init_);
 				}
 			}
 		}

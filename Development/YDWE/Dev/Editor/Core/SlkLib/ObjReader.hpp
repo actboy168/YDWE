@@ -39,7 +39,7 @@ namespace slk
 
 				if (NewObjectId != 0)
 				{
-					throw ydwe::exception(L"Object in original table has incorrect id(Not 0).");
+					throw ydwe::exception("Object in original table has incorrect id(Not 0).");
 				}
 
 				ObjSingle<ObjTableT::table_type>& obj = table[OriginalObjectId];

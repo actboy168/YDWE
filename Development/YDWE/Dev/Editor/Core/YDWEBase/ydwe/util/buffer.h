@@ -106,7 +106,7 @@ _BASE_BEGIN namespace util {
 		{
 			if (end_ - cur_ <  static_cast<buffer_type::difference_type>(n))
 			{
-				throw exception(L"buffer overflow.");
+				throw exception("buffer overflow.");
 			}
 
 			value_type* ret = &*cur_;
@@ -162,7 +162,7 @@ _BASE_BEGIN namespace util {
 				{
 					if (end_ - buf_.begin() < static_cast<buffer_type::difference_type>(offset))
 					{
-						throw exception(L"buffer overflow.");
+						throw exception("buffer overflow.");
 					}
 					cur_ = buf_.begin() + offset;
 				}
@@ -171,7 +171,7 @@ _BASE_BEGIN namespace util {
 				{
 					if (end_ - cur_ < static_cast<buffer_type::difference_type>(offset))
 					{
-						throw exception(L"buffer overflow.");
+						throw exception("buffer overflow.");
 					}
 					cur_ = cur_ + offset;
 				}
@@ -180,7 +180,7 @@ _BASE_BEGIN namespace util {
 				{
 					if (end_ - buf_.begin() < static_cast<buffer_type::difference_type>(offset))
 					{
-						throw exception(L"buffer overflow.");
+						throw exception("buffer overflow.");
 					}
 					cur_ = buf_.begin() + (end_ - buf_.begin() - offset);
 				}

@@ -32,7 +32,7 @@ _BASE_BEGIN namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception(L"Can not open the file %s.", filename);
+			throw exception("Can not open the file %s.", filename);
 		}
 	}
 
@@ -41,7 +41,7 @@ _BASE_BEGIN namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception(L"Can not open the file %s.", filename.c_str());
+			throw exception("Can not open the file %s.", filename.c_str());
 		}
 	}
 
@@ -77,7 +77,7 @@ _BASE_BEGIN namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception(L"Can not open the file %s.", filename);
+			throw exception("Can not open the file %s.", filename);
 		}
 	}
 
@@ -86,7 +86,7 @@ _BASE_BEGIN namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception(L"Can not open the file %s.", filename.c_str());
+			throw exception("Can not open the file %s.", filename.c_str());
 		}
 	}
 

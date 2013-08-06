@@ -60,7 +60,7 @@ namespace slk
 			if (TypeIt == slkSingle.end())
 			{
 				assert(false);
-				throw ydwe::exception(L"meta slk file miss 'type'.");
+				throw ydwe::exception("meta slk file miss 'type'.");
 			}
 			std::string const& TypeStr = TypeIt->second.to_string();
 			val.type = ConvertVariableDataType(TypeStr);
@@ -70,7 +70,7 @@ namespace slk
 			if (IndexIt == slkSingle.end())
 			{
 				assert(false);
-				throw ydwe::exception(L"meta slk file miss 'index'.");
+				throw ydwe::exception("meta slk file miss 'index'.");
 			}
 			val.index = std::stol(IndexIt->second.to_string());
 
@@ -79,7 +79,7 @@ namespace slk
 			if (StringExtIt == slkSingle.end())
 			{
 				assert(false);
-				throw ydwe::exception(L"meta slk file miss 'stringExt'.");
+				throw ydwe::exception("meta slk file miss 'stringExt'.");
 			}
 			val.stringExt = std::stol(StringExtIt->second.to_string());
 
@@ -88,7 +88,7 @@ namespace slk
 			if (FieldIt == slkSingle.end())
 			{
 				assert(false);
-				throw ydwe::exception(L"meta slk file miss 'field'.");
+				throw ydwe::exception("meta slk file miss 'field'.");
 			}
 			if (FieldIt->second.to_string() == "Data")
 			{
@@ -96,14 +96,14 @@ namespace slk
 				if (DataIt == slkSingle.end())
 				{
 					assert(false);
-					throw ydwe::exception(L"meta slk file miss 'data'.");
+					throw ydwe::exception("meta slk file miss 'data'.");
 				}
 
 				std::string const& Data = DataIt->second.to_string();
 				if (Data.size() <= 0)
 				{
 					assert(false);
-					throw ydwe::exception(L"meta slk file miss 'data'.");
+					throw ydwe::exception("meta slk file miss 'data'.");
 				}
 
 				val.field = "Data"+ std::string(1, static_cast<char>('A'+Data[0]-'0'-1));

@@ -108,7 +108,7 @@ namespace slk
 		{
 			if (end_ - cur_ < static_cast<buffer_type::difference_type>(sizeof(_Ty)))
 			{
-				throw ydwe::exception(L"buffer overflow.");
+				throw ydwe::exception("buffer overflow.");
 			}
 
 			_Ty* pRet = reinterpret_cast<_Ty*>(&*cur_);
