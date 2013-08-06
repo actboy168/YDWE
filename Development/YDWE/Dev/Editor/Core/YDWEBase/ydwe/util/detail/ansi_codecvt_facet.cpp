@@ -51,7 +51,7 @@ int ansi_codecvt_facet::do_length(std::mbstate_t&, const char* from, const char*
 		from += len;
 		char_count++;
 	}
-	return static_cast<int>(char_count);
+	return static_cast<int>(len);
 }
 
 int ansi_codecvt_facet::do_max_length() const throw ()
