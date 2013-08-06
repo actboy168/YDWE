@@ -156,11 +156,6 @@ bool LuaEngineImpl::Initialize(boost::filesystem::path const& log_config)
 		vaild_ = true;
 		return true;
 	}
-	catch (ydwe::exception const& e)
-	{
-		LOG4CXX_ERROR(logger_, L"exception: " << e.c_str());
-		return false;
-	}
 	catch (std::exception const& e)
 	{
 		LOG4CXX_ERROR(logger_, "exception: " << e.what());
@@ -207,10 +202,6 @@ bool LuaEngineImpl::LoadFile(boost::filesystem::path const& file_path)
 		std::vector<char> buffer = ydwe::file::read_steam(file_path).read<std::vector<char>>();
 		LuaDoString(state_, buffer.data(), buffer.size(), name.c_str());
 		return true;
-	}
-	catch (ydwe::exception const& e)
-	{
-		LOG4CXX_ERROR(logger_, L"exception: " << e.c_str());
 	}
 	catch (luabind::error const& e)
 	{

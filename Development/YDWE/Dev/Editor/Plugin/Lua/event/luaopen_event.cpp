@@ -105,9 +105,6 @@ namespace NYDWE {
 			catch (luabind::error const& e) {
 				LOG4CXX_ERROR(NYDWE::gInjectLogger, "exception: \"" << e.what() << "\" " << lua_tostring(e.state(), -1));
 			}
-			catch (ydwe::exception const& e) {
-				LOG4CXX_ERROR(NYDWE::gInjectLogger, L"exception: \"" << e.c_str() << L"\"");
-			}
 			catch (std::exception const& e) {
 				LOG4CXX_ERROR(NYDWE::gInjectLogger, "exception: \"" << e.what() << "\"");
 			}

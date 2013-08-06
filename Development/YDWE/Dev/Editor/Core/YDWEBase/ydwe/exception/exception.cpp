@@ -11,12 +11,34 @@ _BASE_BEGIN
 		: what_(nullptr)
 	{ }
 
-	exception::exception(const wchar_t* format, ...)
+	exception::exception(const char* format, ...)
 		: what_(nullptr)
 	{
 		va_list ap;
 		va_start(ap, format);
 		what_ = get_format_string(format, ap);
+		va_end(ap);
+	}
+
+	exception::exception(const wchar_t* format, ...)
+		: what_(nullptr)
+	{
+		va_list ap;
+		va_start(ap, format);
+		wchar_t* what = get_format_string(format, ap);
+		if (what)
+		{
+			static std::string temp_string;
+			temp_string = util::w2u(what, util::conv_method::replace | '?');
+			::LocalFree(reinterpret_cast<HLOCAL>(what));
+
+			char* buffer = static_cast<char*>(::LocalAlloc(0, (temp_string.size() + 1) * sizeof (char)));
+			if (buffer)
+			{
+				strcpy_s(buffer, temp_string.size() + 1, temp_string.c_str());
+				what_ = buffer;
+			}
+		}
 		va_end(ap);
 	}
 
@@ -29,6 +51,24 @@ _BASE_BEGIN
 		}
 	}
 
+	char* exception::get_format_string(const char* fmt, va_list argsList) const
+	{
+		size_t buffer_size = ::_vscprintf(fmt, argsList) + 1;
+
+		char* buffer = static_cast<char*>(::LocalAlloc(0, buffer_size * sizeof (char)));
+
+		if (buffer)
+		{
+			int n = ::_vsnprintf_s(buffer, buffer_size, buffer_size, fmt, argsList);
+			if (n > 0)
+			{
+				return buffer;
+			}
+		}
+
+		return nullptr;
+	}
+
 	wchar_t* exception::get_format_string(const wchar_t* fmt, va_list argsList) const
 	{
 		size_t buffer_size = ::_vscwprintf(fmt, argsList) + 1;
@@ -37,11 +77,7 @@ _BASE_BEGIN
 
 		if (buffer)
 		{
-#ifdef _MSC_VER
 			int n = ::_vsnwprintf_s(buffer, buffer_size, buffer_size, fmt, argsList);
-#else
-			int n = ::_vsnwprintf(buffer, buffer_size, fmt, argsList);
-#endif
 			if (n > 0)
 			{
 				return buffer;
@@ -53,19 +89,7 @@ _BASE_BEGIN
 
 	const char* exception::what() const
 	{
-		if (!what_)
-		{
-			return "unknown ydwe::exception";
-		}
-
-		static std::string temp_string;
-		temp_string = util::w2u(what_);
-		return temp_string.c_str();
-	}
-
-	const wchar_t* exception::c_str() const
-	{
-		return what_ ? what_ : L"unknown ydwe::exception";
+		return what_ ? what_ : "unknown ydwe::exception";
 	}
 
 _BASE_END
