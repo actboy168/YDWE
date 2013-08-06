@@ -2,19 +2,13 @@
 #include "../lua/helper.h"
 #include "../main/lua_loader.h"
 #include "../misc/storm.h"
+#include "../main/open_lua_engine.h"
 #include <ydwe/lua/state.h>
 #include <ydwe/warcraft3/native_function.h>
 #include <ydwe/util/singleton.h>
 #include <aero/function/fp_call.hpp>
 
 namespace ydwe { namespace warcraft3 { namespace lua_engine {
-
-	uintptr_t lua_loader::RealCheat = 0;
-
-	void lua_loader::initialize()
-	{
-		native_function::async_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
-	}
 
 	int open_libs(lua::state* ls)
 	{
@@ -29,21 +23,12 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	int open_jass(lua::state* ls);
-	int open_japi(lua::state* ls);
-	int open_jass_ext(lua::state* ls);
-
-	int open_lua_engine(lua::state* ls)
+	lua::state* initialize_lua()
 	{
-		if (!lua::instance())
-		{
-			lua::instance() = ls;
-			open_jass(ls);
-			open_japi(ls);
-			open_jass_ext(ls);
-			lua::insert_searchers_table(ls);
-		}
-		return 1;
+		lua::state* ls = (lua::state*)luaL_newstate();
+		open_libs(ls);
+		lua::clear_searchers_table(ls);
+		return ls;
 	}
 
 	void __cdecl lua_loader::FakeCheat(jass::jstring_t cheat_str)
@@ -59,15 +44,9 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		std::string cheat_s = cheat;
 		if (cheat_s.compare(0, 4, "run ") == 0)
 		{
-			lua::state*& ls = lua::instance();
-			if (!ls)
+			if (!lua::instance())
 			{
-				ls = (lua::state*)luaL_newstate();
-				open_libs(ls);
-				open_jass(ls);
-				open_japi(ls);
-				open_jass_ext(ls);
-				lua::replace_searchers_table(ls);
+				open_lua_engine(initialize_lua());
 			}
 
 			cheat_s = cheat_s.substr(4);
@@ -83,5 +62,11 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		}
 
 		aero::c_call<uint32_t>(RealCheat, cheat_str);
+	}
+
+	uintptr_t lua_loader::RealCheat = 0;
+	void lua_loader::initialize()
+	{
+		native_function::async_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
 	}
 }}}

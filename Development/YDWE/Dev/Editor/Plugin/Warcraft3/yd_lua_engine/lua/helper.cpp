@@ -74,7 +74,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 		return 1;
 	}
 
-	bool replace_searchers_table(lua::state* ls)
+	bool clear_searchers_table(lua::state* ls)
 	{
 		findtable(ls, LUA_REGISTRYINDEX, "_LOADED", 1); 
 		ls->getfield(-1, LUA_LOADLIBNAME);
@@ -86,10 +86,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 			ls->pushvalue(-2);
 			ls->pushcclosure(searcher_preload, 1);
 			ls->rawseti(-2, 1);
-
-			ls->pushvalue(-2);
-			ls->pushcclosure(searcher_storm, 1);
-			ls->rawseti(-2, 2);
 
 			ls->setfield(-2, "searchers");
 

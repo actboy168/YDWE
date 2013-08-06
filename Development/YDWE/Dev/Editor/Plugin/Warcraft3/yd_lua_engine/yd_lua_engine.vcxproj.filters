@@ -152,6 +152,9 @@
     <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lzio.c">
       <Filter>lua\c</Filter>
     </ClCompile>
+    <ClCompile Include="main\open_lua_engine.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua\callback.h">
@@ -246,6 +249,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\include\lualib.h">
       <Filter>lua\h</Filter>
+    </ClInclude>
+    <ClInclude Include="main\open_lua_engine.h">
+      <Filter>bind\main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

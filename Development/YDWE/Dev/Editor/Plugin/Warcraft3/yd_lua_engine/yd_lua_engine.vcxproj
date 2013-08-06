@@ -125,6 +125,7 @@
     <ClCompile Include="main\libs_jass.cpp" />
     <ClCompile Include="main\libs_jass_ext.cpp" />
     <ClCompile Include="main\lua_loader.cpp" />
+    <ClCompile Include="main\open_lua_engine.cpp" />
     <ClCompile Include="misc\storm.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="lua\callback.h" />
     <ClInclude Include="main\jump_func.h" />
     <ClInclude Include="main\lua_loader.h" />
+    <ClInclude Include="main\open_lua_engine.h" />
     <ClInclude Include="misc\storm.h" />
   </ItemGroup>
   <ItemGroup>
