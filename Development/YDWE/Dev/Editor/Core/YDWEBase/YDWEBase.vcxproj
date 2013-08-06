@@ -111,6 +111,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="ydwe\exception\detail\error_code.cpp" />
     <ClCompile Include="ydwe\exception\detail\windows_category.cpp" />
     <ClCompile Include="ydwe\exception\exception.cpp" />
     <ClCompile Include="ydwe\exception\seh_exception.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="ydwe\com\guard.h" />
     <ClInclude Include="ydwe\com\unique_ptr.h" />
     <ClInclude Include="ydwe\config.h" />
+    <ClInclude Include="ydwe\exception\detail\error_code.h" />
     <ClInclude Include="ydwe\exception\detail\windows_category.h" />
     <ClInclude Include="ydwe\exception\exception.h" />
     <ClInclude Include="ydwe\exception\seh_exception.h" />

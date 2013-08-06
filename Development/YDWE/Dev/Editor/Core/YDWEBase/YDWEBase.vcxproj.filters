@@ -194,6 +194,9 @@
     <ClCompile Include="ydwe\exception\detail\windows_category.cpp">
       <Filter>ydwe\exception\detail</Filter>
     </ClCompile>
+    <ClCompile Include="ydwe\exception\detail\error_code.cpp">
+      <Filter>ydwe\exception\detail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ydwe\util\detail\ansi_codecvt_facet.h">
@@ -368,6 +371,9 @@
       <Filter>ydwe\exception</Filter>
     </ClInclude>
     <ClInclude Include="ydwe\exception\detail\windows_category.h">
+      <Filter>ydwe\exception\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\exception\detail\error_code.h">
       <Filter>ydwe\exception\detail</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,14 +1,16 @@
 #include <ydwe/exception/windows_exception.h>
-#include <ydwe/exception/detail/windows_category.h>
+#include <ydwe/exception/detail/error_code.h>
 
 _BASE_BEGIN
 
-windows_exception::windows_exception(const char* reason, uint32_t error_code)
-	: exception("%s : %s", reason, exception_detail::windows_category().message(error_code).c_str())
-	, error_code_(error_code)
-{ }
+windows_exception::windows_exception(const char* reason, unsigned long error_code)
+	: exception()
+	, error_code_(exception_detail::create_error_code(error_code))
+{
+	what_ = get_format_string("%s : %s", reason, error_code_.message().c_str());
+}
 
-uint32_t windows_exception::error_code() const
+const std::error_code& windows_exception::error_code() const
 {
 	return error_code_;
 }

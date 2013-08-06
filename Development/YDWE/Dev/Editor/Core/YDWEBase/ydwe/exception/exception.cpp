@@ -51,6 +51,17 @@ _BASE_BEGIN
 		}
 	}
 
+	char* exception::get_format_string(const char* fmt, ...) const
+	{
+		char* result = nullptr;
+		va_list ap;
+		va_start(ap, fmt);
+		result = get_format_string(fmt, ap);
+		va_end(ap);
+
+		return result;
+	}
+
 	char* exception::get_format_string(const char* fmt, va_list argsList) const
 	{
 		size_t buffer_size = ::_vscprintf(fmt, argsList) + 1;
@@ -67,6 +78,17 @@ _BASE_BEGIN
 		}
 
 		return nullptr;
+	}
+
+	wchar_t* exception::get_format_string(const wchar_t* fmt, ...) const
+	{
+		wchar_t* result = nullptr;
+		va_list ap;
+		va_start(ap, fmt);
+		result = get_format_string(fmt, ap);
+		va_end(ap);
+
+		return result;
 	}
 
 	wchar_t* exception::get_format_string(const wchar_t* fmt, va_list argsList) const
