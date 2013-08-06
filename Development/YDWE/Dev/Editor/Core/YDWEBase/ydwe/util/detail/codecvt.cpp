@@ -3,40 +3,104 @@
 #include <memory>
 #include <ydwe/exception/windows_exception.h>
 
-_BASE_BEGIN namespace util { namespace detail {
+_BASE_BEGIN 
+namespace util { namespace detail {
 	const std::size_t default_codecvt_buf_size = 256;
 
-	void convert_aux(const char* from, const char* from_end, wchar_t* to, wchar_t* to_end, std::wstring& target, const codecvt_type& cvt)
+	void convert_aux(const char* from, const char* from_end, wchar_t* to, wchar_t* to_end, std::wstring& target, const codecvt_type& cvt, conv_method how)
 	{
 		std::mbstate_t state  = std::mbstate_t();
 		const char* from_next;
 		wchar_t* to_next;
-
-		std::codecvt_base::result res;
-
-		if ((res = cvt.in(state, from, from_end, from_next, to, to_end, to_next)) != std::codecvt_base::ok)
+	
+		::SetLastError(ERROR_SUCCESS);
+		if (cvt.in(state, from, from_end, from_next, to, to_end, to_next) == std::codecvt_base::ok)
+		{
+			target.append(to, to_next);
+			return ;
+		}
+	
+		if (how.type() == conv_method::stop)
 		{
 			throw windows_exception(L"character conversion failed");
 		}
-		target.append(to, to_next); 
+
+		from_next = from;
+		while (from_next != from_end)
+		{
+			wchar_t to_buf[4];
+			int len = cvt.length(state, from_next, from_end, 1);
+			if (len <= 0)
+				return;
+
+			const char* from_mid;
+			if (cvt.in(state, from_next, from_next + len, from_mid, to_buf, to_buf + _countof(to_buf), to_next) == std::codecvt_base::ok)
+			{
+				assert(from_next + len == from_mid);
+				target.append(to_buf, to_next);
+				from_next += len;
+			}
+			else
+			{
+				if (how.type() == conv_method::replace)
+				{
+					target.push_back(static_cast<wchar_t>(how.default_char()));
+					from_next += 1;
+				}
+				else
+				{
+					from_next += len;
+				}
+			}
+		}
 	}
 
-	void convert_aux(const wchar_t* from, const wchar_t* from_end, char* to, char* to_end, std::string& target, const codecvt_type& cvt)
+	void convert_aux(const wchar_t* from, const wchar_t* from_end, char* to, char* to_end, std::string& target, const codecvt_type& cvt, conv_method how)
 	{
 		std::mbstate_t state  = std::mbstate_t();
 		const wchar_t* from_next;
 		char* to_next;
 
-		std::codecvt_base::result res;
-
-		if ((res = cvt.out(state, from, from_end, from_next, to, to_end, to_next)) != std::codecvt_base::ok)
+		::SetLastError(ERROR_SUCCESS);
+		if (cvt.out(state, from, from_end, from_next, to, to_end, to_next) == std::codecvt_base::ok)
+		{
+			target.append(to, to_next);
+			return ;
+		}
+		
+		if (how.type() == conv_method::stop)
 		{
 			throw windows_exception(L"character conversion failed");
 		}
-		target.append(to, to_next); 
+
+		from_next = from;
+		while (from_next != from_end)
+		{
+			char to_buf[4];
+
+			const wchar_t* from_mid;
+			if (cvt.out(state, from_next, from_next + 1, from_mid, to_buf, to_buf + _countof(to_buf), to_next) == std::codecvt_base::ok)
+			{
+				assert(from_next + 1 == from_mid);
+				target.append(to_buf, to_next);
+				from_next += 1;
+			}
+			else
+			{
+				if (how.type() == conv_method::replace)
+				{
+					target.push_back(static_cast<char>(how.default_char()));
+					from_next += 1;
+				}
+				else
+				{
+					from_next += 1;
+				}
+			}
+		}
 	}
 
-	void convert(const char* from, const char* from_end, std::wstring& to, const codecvt_type& cvt)
+	void convert(const char* from, const char* from_end, std::wstring& to, const codecvt_type& cvt, conv_method how)
 	{
 		assert(from);
 
@@ -52,16 +116,16 @@ _BASE_BEGIN namespace util { namespace detail {
 		if (buf_size > default_codecvt_buf_size)
 		{
 			std::unique_ptr<wchar_t[]> buf(new wchar_t[buf_size]);
-			convert_aux(from, from_end, buf.get(), buf.get()+buf_size, to, cvt);
+			convert_aux(from, from_end, buf.get(), buf.get()+buf_size, to, cvt, how);
 		}
 		else
 		{
 			wchar_t buf[default_codecvt_buf_size];
-			convert_aux(from, from_end, buf, buf+default_codecvt_buf_size, to, cvt);
+			convert_aux(from, from_end, buf, buf+default_codecvt_buf_size, to, cvt, how);
 		}
 	}
 
-	void convert(const wchar_t* from, const wchar_t* from_end, std::string& to, const codecvt_type& cvt)
+	void convert(const wchar_t* from, const wchar_t* from_end, std::string& to, const codecvt_type& cvt, conv_method how)
 	{
 		assert(from);
 
@@ -79,12 +143,12 @@ _BASE_BEGIN namespace util { namespace detail {
 		if (buf_size > default_codecvt_buf_size)
 		{
 			std::unique_ptr<char[]> buf(new char[buf_size]);
-			convert_aux(from, from_end, buf.get(), buf.get()+buf_size, to, cvt);
+			convert_aux(from, from_end, buf.get(), buf.get()+buf_size, to, cvt, how);
 		}
 		else
 		{
 			char buf[default_codecvt_buf_size];
-			convert_aux(from, from_end, buf, buf+default_codecvt_buf_size, to, cvt);
+			convert_aux(from, from_end, buf, buf+default_codecvt_buf_size, to, cvt, how);
 		}
 	}
 }}}

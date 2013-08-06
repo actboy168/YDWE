@@ -34,34 +34,34 @@ _BASE_BEGIN namespace util {
 		codecvt<detail::ansi_codecvt_facet> ansi_codecvt;
 	}
 
-	std::wstring u2w(std::string const& from)
+	std::wstring u2w(std::string const& from, conv_method how)
 	{
-		return std::move(detail::convert<char, wchar_t>(from, utf8_codecvt()));
+		return std::move(detail::convert<char, wchar_t>(from, utf8_codecvt(), how));
 	}
 
-	std::string w2u(std::wstring const& from)
+	std::string w2u(std::wstring const& from, conv_method how)
 	{
-		return std::move(detail::convert<wchar_t, char>(from, utf8_codecvt()));
+		return std::move(detail::convert<wchar_t, char>(from, utf8_codecvt(), how));
 	}
 
-	std::wstring a2w(std::string const& from)
+	std::wstring a2w(std::string const& from, conv_method how)
 	{
-		return std::move(detail::convert<char, wchar_t>(from, ansi_codecvt()));
+		return std::move(detail::convert<char, wchar_t>(from, ansi_codecvt(), how));
 	}
 
-	std::string w2a(std::wstring const& from)
+	std::string w2a(std::wstring const& from, conv_method how)
 	{
-		return std::move(detail::convert<wchar_t, char>(from, ansi_codecvt()));
+		return std::move(detail::convert<wchar_t, char>(from, ansi_codecvt(), how));
 	}
 
-	std::string u2a(std::string  const& from) 
+	std::string u2a(std::string  const& from, conv_method how) 
 	{
-		return std::move(w2a(u2w(from)));
+		return std::move(w2a(u2w(from, how), how));
 	}
 
-	std::string a2u(std::string  const& from) 
+	std::string a2u(std::string  const& from, conv_method how) 
 	{
-		return std::move(w2u(a2w(from)));
+		return std::move(w2u(a2w(from, how), how));
 	}
 
 }}
