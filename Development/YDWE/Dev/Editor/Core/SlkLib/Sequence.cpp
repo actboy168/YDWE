@@ -55,7 +55,7 @@ namespace slk
 
 		}
 
-		template<>
+		template<> SLKLIB_API
 		bool is_space::operator()<char>(char Ch) const
 		{
 			return detail::singleton<detail::ctype_facet_ptr<char>>::instance()->is(std::ctype_base::space, Ch);

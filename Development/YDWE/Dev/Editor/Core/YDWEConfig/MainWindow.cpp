@@ -1,6 +1,7 @@
 ﻿#include "MainWindow.h"
 #include <SlkLib/IniReader.hpp>
 #include <SlkLib/IniReader.cpp>
+#include <SlkLib/Sequence.cpp>
 #include <SlkLib/IniWriter.hpp>
 #include "Regedit.h"
 #include "Shortcuts.h"

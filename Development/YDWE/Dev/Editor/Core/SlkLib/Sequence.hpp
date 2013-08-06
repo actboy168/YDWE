@@ -35,7 +35,7 @@ namespace slk
 
 	namespace ctype
 	{
-		struct is_space
+		struct SLKLIB_API is_space
 		{
 			template<class CharT>
 			bool operator()(CharT Ch) const;

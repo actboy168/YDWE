@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -14,7 +15,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SlkLib</RootNamespace>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -26,25 +27,23 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
-    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"/>
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Editor\Core\Solution\ydwe_build.props"/></ImportGroup>
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Editor\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
-    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"/>
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Editor\Core\Solution\ydwe_build.props"/></ImportGroup>
-  <PropertyGroup Label="UserMacros"/>
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Editor\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    
-    
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    
-    
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -53,12 +52,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>SLKLIB_EXPORTS;WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;SLKLIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
     </Link>
@@ -72,75 +69,74 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>SLKLIB_EXPORTS;WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;SLKLIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Attribute.cpp"/>
-    <ClCompile Include="BaseAbilityList.cpp"/>
-    <ClCompile Include="ConvertTable.cpp"/>
-    <ClCompile Include="DllMain.cpp"/>
-    <ClCompile Include="IniReader.cpp"/>
-    <ClCompile Include="MetaReader.cpp"/>
-    <ClCompile Include="MetaTable.cpp"/>
-    <ClCompile Include="ObjectManager.cpp"/>
-    <ClCompile Include="ObjReader.cpp"/>
-    <ClCompile Include="SlkReader.cpp"/>
-    <ClCompile Include="TxtReader.cpp"/>
-    <ClCompile Include="VariableData.cpp"/>
-    <ClCompile Include="WesReader.cpp"/>
-    <ClCompile Include="WtsReader.cpp"/>
+    <ClCompile Include="Attribute.cpp" />
+    <ClCompile Include="BaseAbilityList.cpp" />
+    <ClCompile Include="ConvertTable.cpp" />
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="IniReader.cpp" />
+    <ClCompile Include="MetaReader.cpp" />
+    <ClCompile Include="MetaTable.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="ObjReader.cpp" />
+    <ClCompile Include="Sequence.cpp" />
+    <ClCompile Include="SlkReader.cpp" />
+    <ClCompile Include="TxtReader.cpp" />
+    <ClCompile Include="VariableData.cpp" />
+    <ClCompile Include="WesReader.cpp" />
+    <ClCompile Include="WtsReader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Attribute.hpp"/>
-    <ClInclude Include="BaseTable.hpp"/>
-    <ClInclude Include="Buffer.hpp"/>
-    <ClInclude Include="Converter.hpp"/>
-    <ClInclude Include="ConvertTable.hpp"/>
-    <ClInclude Include="IniBaseReader.hpp"/>
-    <ClInclude Include="IniReader.hpp"/>
-    <ClInclude Include="IniTable.hpp"/>
-    <ClInclude Include="IniWriter.hpp"/>
-    <ClInclude Include="InterfaceStorm.hpp"/>
-    <ClInclude Include="MetaReader.hpp"/>
-    <ClInclude Include="MetaTable.hpp"/>
-    <ClInclude Include="ObjectId.hpp"/>
-    <ClInclude Include="ObjectManager.hpp"/>
-    <ClInclude Include="ObjReader.hpp"/>
-    <ClInclude Include="ObjTable.hpp"/>
-    <ClInclude Include="ObjWriter.hpp"/>
-    <ClInclude Include="port\config.h"/>
-    <ClInclude Include="port\port_gcc.h"/>
-    <ClInclude Include="port\port_msvc.h"/>
-    <ClInclude Include="Sequence.hpp"/>
-    <ClInclude Include="SlkReader.hpp"/>
-    <ClInclude Include="SlkTable.hpp"/>
-    <ClInclude Include="SlkWriter.hpp"/>
-    <ClInclude Include="TextReader.hpp"/>
-    <ClInclude Include="TxtReader.hpp"/>
-    <ClInclude Include="TxtWriter.hpp"/>
-    <ClInclude Include="Util.hpp"/>
-    <ClInclude Include="VariableData.hpp"/>
-    <ClInclude Include="WesReader.hpp"/>
-    <ClInclude Include="WesTable.hpp"/>
-    <ClInclude Include="WtsReader.hpp"/>
-    <ClInclude Include="WtsTable.hpp"/>
+    <ClInclude Include="Attribute.hpp" />
+    <ClInclude Include="BaseTable.hpp" />
+    <ClInclude Include="Buffer.hpp" />
+    <ClInclude Include="Converter.hpp" />
+    <ClInclude Include="ConvertTable.hpp" />
+    <ClInclude Include="IniBaseReader.hpp" />
+    <ClInclude Include="IniReader.hpp" />
+    <ClInclude Include="IniTable.hpp" />
+    <ClInclude Include="IniWriter.hpp" />
+    <ClInclude Include="InterfaceStorm.hpp" />
+    <ClInclude Include="MetaReader.hpp" />
+    <ClInclude Include="MetaTable.hpp" />
+    <ClInclude Include="ObjectId.hpp" />
+    <ClInclude Include="ObjectManager.hpp" />
+    <ClInclude Include="ObjReader.hpp" />
+    <ClInclude Include="ObjTable.hpp" />
+    <ClInclude Include="ObjWriter.hpp" />
+    <ClInclude Include="port\config.h" />
+    <ClInclude Include="port\port_gcc.h" />
+    <ClInclude Include="port\port_msvc.h" />
+    <ClInclude Include="Sequence.hpp" />
+    <ClInclude Include="SlkReader.hpp" />
+    <ClInclude Include="SlkTable.hpp" />
+    <ClInclude Include="SlkWriter.hpp" />
+    <ClInclude Include="TextReader.hpp" />
+    <ClInclude Include="TxtReader.hpp" />
+    <ClInclude Include="TxtWriter.hpp" />
+    <ClInclude Include="Util.hpp" />
+    <ClInclude Include="VariableData.hpp" />
+    <ClInclude Include="WesReader.hpp" />
+    <ClInclude Include="WesTable.hpp" />
+    <ClInclude Include="WtsReader.hpp" />
+    <ClInclude Include="WtsTable.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YDWEBase\YDWEBase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
