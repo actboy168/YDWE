@@ -4,7 +4,7 @@
 _BASE_BEGIN
 
 	seh_exception::seh_exception(const PEXCEPTION_POINTERS exp_ptr)
-		: windows_exception(L"seh exception", exp_ptr->ExceptionRecord->ExceptionCode)
+		: windows_exception("seh exception", exp_ptr->ExceptionRecord->ExceptionCode)
 		, exception_record_(*exp_ptr->ExceptionRecord)
 		, context_record_(*exp_ptr->ContextRecord)
 	{ }

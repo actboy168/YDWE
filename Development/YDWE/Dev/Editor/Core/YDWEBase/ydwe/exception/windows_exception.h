@@ -10,12 +10,10 @@ _BASE_BEGIN
 class _BASE_API windows_exception : public exception
 {
 public:
-	windows_exception(const wchar_t* reason = L"windows exception", uint32_t error_code = ::GetLastError());
-	virtual ~windows_exception();
+	windows_exception(const char* reason = "windows exception", uint32_t error_code = ::GetLastError());
 	uint32_t error_code() const;
 
 protected:
-	wchar_t* error_string_;
 	uint32_t error_code_;
 };
 

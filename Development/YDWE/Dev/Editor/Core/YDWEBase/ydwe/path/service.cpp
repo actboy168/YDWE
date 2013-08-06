@@ -8,7 +8,7 @@
 // http://blogs.msdn.com/oldnewthing/archive/2004/10/25/247180.aspx
 extern "C" IMAGE_DOS_HEADER __ImageBase;
 
-#define ENSURE(cond) if (FAILED(cond)) throw windows_exception(L ## #cond L" failed.");
+#define ENSURE(cond) if (FAILED(cond)) throw windows_exception(#cond " failed.");
 
 _BASE_BEGIN namespace path {
 

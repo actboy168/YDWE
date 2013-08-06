@@ -2,6 +2,7 @@
 #include <cassert>
 #include <memory>
 #include <ydwe/exception/windows_exception.h>
+#include <Windows.h>
 
 _BASE_BEGIN 
 namespace util { namespace detail {
@@ -22,7 +23,7 @@ namespace util { namespace detail {
 	
 		if (how.type() == conv_method::stop)
 		{
-			throw windows_exception(L"character conversion failed");
+			throw windows_exception("character conversion failed");
 		}
 
 		from_next = from;
@@ -70,7 +71,7 @@ namespace util { namespace detail {
 		
 		if (how.type() == conv_method::stop)
 		{
-			throw windows_exception(L"character conversion failed");
+			throw windows_exception("character conversion failed");
 		}
 
 		from_next = from;

@@ -8,7 +8,7 @@ _BASE_BEGIN namespace file {
 	{
 		if (!_Mybase::operator bool())
 		{
-			throw windows_exception(L"failed to open file mapping");
+			throw windows_exception("failed to open file mapping");
 		}
 	}
 
@@ -18,7 +18,7 @@ _BASE_BEGIN namespace file {
 
 		if (nullptr == memory_view)
 		{
-			throw windows_exception(L"failed to map view of file");
+			throw windows_exception("failed to map view of file");
 		}
 
 		return memory_view;

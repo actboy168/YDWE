@@ -48,14 +48,14 @@ _BASE_BEGIN namespace file {
 
 		if (map_size < offset)
 		{
-			throw windows_exception(L"requested region exceeds the available address space", ERROR_INVALID_PARAMETER);
+			throw windows_exception("requested region exceeds the available address space", ERROR_INVALID_PARAMETER);
 		}
 
 		if (offset > file_size)
 		{
 			if(0 == request_size)
 			{
-				throw windows_exception(L"region out of range", ERROR_INVALID_PARAMETER);
+				throw windows_exception("region out of range", ERROR_INVALID_PARAMETER);
 			}
 		}
 		else if(0 == request_size)
@@ -66,7 +66,7 @@ _BASE_BEGIN namespace file {
 			uint64_t request_size2 = file_size - offset;
 			if (request_size2 > static_cast<uint64_t>(0xFFFFFFFF))
 			{
-				throw windows_exception(L"region size too large", ERROR_NOT_ENOUGH_MEMORY);
+				throw windows_exception("region size too large", ERROR_NOT_ENOUGH_MEMORY);
 			}
 			request_size =   static_cast<size_t>(request_size2);
 #endif

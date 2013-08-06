@@ -116,9 +116,6 @@
     <ClCompile Include="ydwe\hook\detail\inject_dll.cpp">
       <Filter>ydwe\hook\detail</Filter>
     </ClCompile>
-    <ClCompile Include="ydwe\exception\detail\windows_error_string.cpp">
-      <Filter>ydwe\exception\detail</Filter>
-    </ClCompile>
     <ClCompile Include="ydwe\exception\windows_exception.cpp">
       <Filter>ydwe\exception</Filter>
     </ClCompile>
@@ -194,6 +191,9 @@
     <ClCompile Include="ydwe\util\detail\utf8_codecvt_facet.cpp">
       <Filter>ydwe\util\detail</Filter>
     </ClCompile>
+    <ClCompile Include="ydwe\exception\detail\windows_category.cpp">
+      <Filter>ydwe\exception\detail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ydwe\util\detail\ansi_codecvt_facet.h">
@@ -267,9 +267,6 @@
     </ClInclude>
     <ClInclude Include="ydwe\hook\detail\inject_dll.h">
       <Filter>ydwe\hook\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="ydwe\exception\detail\windows_error_string.h">
-      <Filter>ydwe\exception\detail</Filter>
     </ClInclude>
     <ClInclude Include="ydwe\exception\windows_exception.h">
       <Filter>ydwe\exception</Filter>
@@ -369,6 +366,9 @@
     </ClInclude>
     <ClInclude Include="ydwe\exception\exception.h">
       <Filter>ydwe\exception</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\exception\detail\windows_category.h">
+      <Filter>ydwe\exception\detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

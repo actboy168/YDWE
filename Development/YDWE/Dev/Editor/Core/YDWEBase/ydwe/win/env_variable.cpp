@@ -31,7 +31,7 @@ namespace win {
 		DWORD retval = ::GetEnvironmentVariableW(name_.c_str(), buffer.data(), buffer.size());
 		if (retval == 0 || retval > buffer.size())
 		{
-			throw windows_exception(L"GetEnvironmentVariable failed.");
+			throw windows_exception("GetEnvironmentVariable failed.");
 		}
 
 		return std::move(std::wstring(buffer.begin(), buffer.end()));

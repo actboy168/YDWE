@@ -4,7 +4,7 @@
 #include <Shlobj.h>
 #include <ydwe/exception/windows_exception.h>
 
-#define ENSURE(cond) if (FAILED(cond)) throw windows_exception(L ## #cond L" failed.");
+#define ENSURE(cond) if (FAILED(cond)) throw windows_exception(#cond " failed.");
 
 _BASE_BEGIN namespace path { namespace detail {
 	boost::filesystem::path GetQuickLaunchPath(bool default_user) 
@@ -32,7 +32,7 @@ _BASE_BEGIN namespace path { namespace detail {
 		wchar_t buffer[MAX_PATH + 1];
 		DWORD path_len = ::GetTempPathW(MAX_PATH, buffer);
 		if (path_len >= MAX_PATH || path_len <= 0)
-			throw windows_exception(L"::GetTempPathW(MAX_PATH, buffer) failed.");
+			throw windows_exception("::GetTempPathW(MAX_PATH, buffer) failed.");
 
 		return std::move(boost::filesystem::path(buffer));
 	}
@@ -43,7 +43,7 @@ _BASE_BEGIN namespace path { namespace detail {
 		DWORD path_len = ::GetWindowsDirectoryW(buffer, _countof(buffer));
 		if (path_len == 0)
 		{
-			throw windows_exception(L"::GetWindowsDirectoryW failed.");
+			throw windows_exception("::GetWindowsDirectoryW failed.");
 		}
 
 		if (path_len <= _countof(buffer))
@@ -55,7 +55,7 @@ _BASE_BEGIN namespace path { namespace detail {
 		path_len = ::GetWindowsDirectoryW(buf.get(), path_len);
 		if (path_len == 0 || path_len > _countof(buffer))
 		{
-			throw windows_exception(L"::GetWindowsDirectoryW failed.");
+			throw windows_exception("::GetWindowsDirectoryW failed.");
 		}
 		return std::move(boost::filesystem::path(buf.get(), buf.get() + path_len));
 	}
@@ -66,7 +66,7 @@ _BASE_BEGIN namespace path { namespace detail {
 		DWORD path_len = ::GetSystemDirectoryW(buffer, _countof(buffer));
 		if (path_len == 0)
 		{
-			throw windows_exception(L"::GetSystemDirectoryW failed.");
+			throw windows_exception("::GetSystemDirectoryW failed.");
 		}
 
 		if (path_len <= _countof(buffer))
@@ -78,7 +78,7 @@ _BASE_BEGIN namespace path { namespace detail {
 		path_len = ::GetWindowsDirectoryW(buf.get(), path_len);
 		if (path_len == 0 || path_len > _countof(buffer))
 		{
-			throw windows_exception(L"::GetSystemDirectoryW failed.");
+			throw windows_exception("::GetSystemDirectoryW failed.");
 		}
 		return std::move(boost::filesystem::path(buf.get(), buf.get() + path_len));
 	}
@@ -89,7 +89,7 @@ _BASE_BEGIN namespace path { namespace detail {
 		DWORD path_len = ::GetModuleFileNameW(module_handle, buffer, _countof(buffer));
 		if (path_len == 0)
 		{
-			throw windows_exception(L"::GetModuleFileNameW failed.");
+			throw windows_exception("::GetModuleFileNameW failed.");
 		}
 
 		if (path_len < _countof(buffer))
@@ -103,7 +103,7 @@ _BASE_BEGIN namespace path { namespace detail {
 			DWORD path_len = ::GetModuleFileNameW(module_handle, buf.get(), buf_len);		
 			if (path_len == 0)
 			{
-				throw windows_exception(L"::GetModuleFileNameW failed.");
+				throw windows_exception("::GetModuleFileNameW failed.");
 			}
 
 			if (path_len < _countof(buffer))
@@ -112,6 +112,6 @@ _BASE_BEGIN namespace path { namespace detail {
 			}
 		}
 
-		throw windows_exception(L"::GetModuleFileNameW failed.");
+		throw windows_exception("::GetModuleFileNameW failed.");
 	}
 }}}

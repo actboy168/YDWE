@@ -8,7 +8,7 @@ _BASE_BEGIN namespace file {
 	{
 		if (!_Mybase::operator bool())
 		{
-			throw windows_exception(L"failed to open file");
+			throw windows_exception("failed to open file");
 		}
 	}
 
@@ -20,7 +20,7 @@ _BASE_BEGIN namespace file {
 
 		if (INVALID_FILE_SIZE == size_low && ERROR_SUCCESS != error_code)
 		{
-			throw windows_exception(L"failed to determine file size", error_code);
+			throw windows_exception("failed to determine file size", error_code);
 		}
 
 		return (static_cast<uint64_t>(size_high) << 32) | size_low;
