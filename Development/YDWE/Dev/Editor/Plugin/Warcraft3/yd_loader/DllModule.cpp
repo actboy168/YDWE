@@ -11,6 +11,7 @@
 #include <ydwe/win/pe_reader.h>
 #include <SlkLib/IniReader.hpp>
 #include <SlkLib/IniReader.cpp>
+#include <SlkLib/Sequence.cpp>
 
 uintptr_t RealLoadLibraryA  = 0;
 uintptr_t RealCreateWindowExA = 0;

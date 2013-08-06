@@ -26,7 +26,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR l
 	}
 	catch (ydwe::exception const& e)
 	{
-		::MessageBoxW(NULL, e.c_str(), L"ERROR", MB_ICONERROR | MB_OK);
+		::MessageBoxA(NULL, e.what(), "ERROR", MB_ICONERROR | MB_OK);
 	}
 	catch (...)
 	{

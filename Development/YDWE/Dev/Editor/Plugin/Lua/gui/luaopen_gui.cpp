@@ -184,7 +184,7 @@ namespace NLuaAPI { namespace NGUI {
 		if ((intptr_t)pInputInfo == -1)
 		{
 			ydwe::windows_exception e;
-			luaL_error(pState, ydwe::util::w2a(e.c_str()).c_str());
+			luaL_error(pState, e.what());
 		}
 		else
 		{
