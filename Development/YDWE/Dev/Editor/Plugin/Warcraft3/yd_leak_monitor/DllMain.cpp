@@ -194,7 +194,7 @@ void Initialize()
 	ydwe::warcraft3::native_function::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
 }
 
-BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
+BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID /*pReserved*/)
 {
 	if (reason == DLL_PROCESS_ATTACH)
 	{

@@ -166,17 +166,6 @@ uint32_t __cdecl EXGetEventDamageData(uint32_t type)
 	return 0;
 }
 
-uint32_t __cdecl EXGetEventDamage(uint32_t type)
-{
-	if (g_edd.empty())
-	{
-		return jass::to_real(0.f);
-	}
-
-	uint32_t retval = 0;
-	return jass::to_real((float)retval);
-}
-
 bool __cdecl EXSetEventDamage(uint32_t value)
 {
 	if (g_edd.empty())

@@ -96,8 +96,6 @@ int __stdcall fake_bind(SOCKET s, const struct sockaddr FAR* name, int namelen)
 
 					((struct sockaddr_in*)name)->sin_port = ::htons(++udp_port);
 				}
-
-				return SOCKET_ERROR;
 			}
 		}
 		else if (optVal == SOCK_STREAM)
@@ -118,8 +116,6 @@ int __stdcall fake_bind(SOCKET s, const struct sockaddr FAR* name, int namelen)
 
 				((struct sockaddr_in*)name)->sin_port = ::htons(++port);
 			}
-
-			return SOCKET_ERROR;
 		}
     }
 

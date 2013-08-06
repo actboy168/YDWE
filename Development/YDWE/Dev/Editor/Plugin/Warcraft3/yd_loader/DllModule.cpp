@@ -66,7 +66,7 @@ void DaemonThreadProc()
 {
 	try
 	{
-		while (true)
+		for (;;)
 		{
 			boost::this_thread::sleep(boost::posix_time::milliseconds(10));
 

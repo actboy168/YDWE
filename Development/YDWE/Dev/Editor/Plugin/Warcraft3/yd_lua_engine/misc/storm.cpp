@@ -21,8 +21,8 @@ namespace ydwe { namespace warcraft3 {
 	bool storm::load()
 	{
 		if (!mod_) return false;
-		if (!(fn_sfile_load_file_   = get_proc(281))) return false; 
-		if (!(fn_sfile_unload_file_ = get_proc(280))) return false; 
+		fn_sfile_load_file_   = get_proc(281); if (!(fn_sfile_load_file_)) return false; 
+		fn_sfile_unload_file_ = get_proc(280); if (!(fn_sfile_unload_file_)) return false; 
 
 		return true;
 	}

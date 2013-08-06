@@ -3,7 +3,7 @@
 
 DllModule g_DllMod;
 
-BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
+BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID /*pReserved*/)
 {
 	if (reason == DLL_PROCESS_ATTACH)
 	{

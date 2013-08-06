@@ -3,7 +3,9 @@
 #include <windows.h>
 
 #include <boost/filesystem.hpp>
+#pragma warning(push, 3)
 #include <boost/thread.hpp>
+#pragma warning(pop)
 #include <boost/shared_ptr.hpp>
 namespace fs = boost::filesystem;
 
