@@ -43,15 +43,16 @@ std::codecvt_base::result ansi_codecvt_facet::do_unshift(std::mbstate_t&, char* 
 int ansi_codecvt_facet::do_length(std::mbstate_t&, const char* from, const char* from_end, std::size_t max_limit) const
 {
 	std::size_t char_count = 0;
-	while ((from != from_end) && (char_count < max_limit))
+	const char* from_next = from;
+	while ((from_next != from_end) && (char_count < max_limit))
 	{
-		int len = ::IsDBCSLeadByteEx(CP_ACP, *from) ? 2 : 1;
-		if ((len == 2) && (from + 1 == from_end))
+		int len = ::IsDBCSLeadByteEx(CP_ACP, *from_next) ? 2 : 1;
+		if ((len == 2) && (from_next + 1 == from_end))
 			break;
-		from += len;
-		char_count++;
+		from_next += len;
+		++char_count;
 	}
-	return static_cast<int>(len);
+	return static_cast<int>(from_next - from);
 }
 
 int ansi_codecvt_facet::do_max_length() const throw ()
