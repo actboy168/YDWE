@@ -13,15 +13,22 @@ namespace slk
 	public:
 		BaseConverter(InterfaceStorm& storm)
 			: storm_(storm)
-			, is_initialized(false)
+			, initialized_(false)
 		{ }
+
+		BaseConverter<Table, Reader>& operator =(BaseConverter<Table, Reader>& that)
+		{
+			storm_       = that.storm_;
+			initialized_ = that.initialized_;			
+			return *this;
+		}
 
 	protected:
 		void initialize(const char Filename[])
 		{
-			if (!is_initialized)
+			if (!initialized_)
 			{
-				is_initialized = true;
+				initialized_ = true;
 
 				InterfaceStorm::error_code ec = 0;
 				buffer buf(storm_.load(Filename, ec));
@@ -34,7 +41,7 @@ namespace slk
 
 		Table  table_;
 		InterfaceStorm& storm_;
-		bool   is_initialized;
+		bool   initialized_;
 	};
 
 	class SLKLIB_API WtsConverter : public BaseConverter<WtsTable, WtsReader>

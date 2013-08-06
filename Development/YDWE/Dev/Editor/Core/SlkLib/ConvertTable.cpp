@@ -125,14 +125,14 @@ namespace slk
 	}
 
 	template <>
-	void SlkTableToObjTable(ObjTable<ObjectWithoutOptinal>& objTable, SlkTable const& slkTable, MetaTable const& metaTable)
+	void SlkTableToObjTable(ObjTable<ObjectWithoutOptinal>& /*objTable*/, SlkTable const& /*slkTable*/, MetaTable const& /*metaTable*/)
 	{
 		// Fixed me
 		return ;
 	}
 
 	template <>
-	void SlkTableToObjTable(ObjTable<ObjectWithOptinal>& objTable, SlkTable const& slkTable, MetaTable const& metaTable)
+	void SlkTableToObjTable(ObjTable<ObjectWithOptinal>& /*objTable*/, SlkTable const& /*slkTable*/, MetaTable const& /*metaTable*/)
 	{
 		// Fixed me
 		return ;
