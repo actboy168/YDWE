@@ -34,4 +34,5 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 	_BASE_API const char* from_trigstring(const char* val);
 
 	_BASE_API uintptr_t   call           (const char* name, ...);
+	_BASE_API uintptr_t   call           (uintptr_t func_address, uintptr_t param_list[], size_t param_list_size);
 }}}

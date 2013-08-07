@@ -200,9 +200,6 @@
     <ClCompile Include="ydwe\warcraft3\jass\global_variable.cpp">
       <Filter>ydwe\warcraft3\jass</Filter>
     </ClCompile>
-    <ClCompile Include="ydwe\exception\detail\error_msg.cpp">
-      <Filter>ydwe\exception\detail</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ydwe\util\detail\ansi_codecvt_facet.h">

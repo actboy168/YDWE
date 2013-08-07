@@ -153,22 +153,27 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 	uintptr_t  call(const char* name, ...)
 	{
 		native_function::native_function const* nf = native_function::jass_func(name);
-		if (!nf) return 0;
 
-		uintptr_t func_address = nf->get_address();
-		size_t    param_size   = nf->get_param().size() * sizeof uintptr_t;
+		if (!nf) 
+		{
+			return 0;
+		}
+
+		return call(nf->get_address(), (uintptr_t*)((va_list)_ADDRESSOF(name) + _INTSIZEOF(name)), nf->get_param().size() * sizeof uintptr_t);
+	}
+
+	uintptr_t call(uintptr_t func_address, uintptr_t param_list[], size_t param_list_size)
+	{
 		uintptr_t retval;
 		uintptr_t esp_ptr;
-
-		va_list ap;
-		va_start(ap, name);
+		size_t  param_size = param_list_size * sizeof uintptr_t;
 
 		_asm
 		{
 			sub  esp, param_size
 			mov  esp_ptr, esp
 		}
-		memcpy((void*)esp_ptr, ap, param_size);
+		memcpy((void*)esp_ptr, param_list, param_size);
 		_asm
 		{
 			call [func_address]
@@ -176,8 +181,6 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 			add  esp, param_size
 			mov  retval, eax
 		}
-
-		va_end(ap);
 
 		return retval;
 	}

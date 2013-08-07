@@ -15,18 +15,8 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		return get_war3_searcher().is_gaming();
 	}
 
-	int jass_call_closure(lua_State* L)
+	int jass_call_native_function(lua::jassbind* lj, native_function::native_function* nf, uintptr_t func_address = 0, uint32_t offset = 0)
 	{
-		lua::jassbind* lj = (lua::jassbind*)L;
-
-		if (!is_gaming())
-		{
-			lj->pushnil();
-			return 1;
-		}
-
-		native_function::native_function* nf = (native_function::native_function*)lj->tounsigned(lua_upvalueindex(1));
-
 		size_t param = nf->get_param().size();
 
 		if ((int)param > lj->gettop())
@@ -39,7 +29,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		std::vector<jass::jreal_t>                      real_buffer(param);
 		std::vector<std::unique_ptr<jass::string_fake>> string_buffer(param);
 
-		for (size_t i = 0; i < param; ++i)
+		for (size_t i = offset; i < param + offset; ++i)
 		{
 			native_function::variable_type vt = nf->get_param()[i];
 			switch (vt)
@@ -71,7 +61,8 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 			}
 		}
 
-		uintptr_t retval = nf->call(buffer.get());
+		if (func_address == 0) func_address = nf->get_address();
+		uintptr_t retval = jass::call(func_address, buffer.get(), param);
 
 		switch (nf->get_return())
 		{
@@ -103,6 +94,19 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
+	int jass_call_closure(lua_State* L)
+	{
+		lua::jassbind* lj = (lua::jassbind*)L;
+
+		if (!is_gaming())
+		{
+			lj->pushnil();
+			return 1;
+		}
+
+		return jass_call_native_function(lj, (native_function::native_function*)lj->tounsigned(lua_upvalueindex(1)));
+	}
+
 	int jass_get(lua_State* L)
 	{
 		lua::jassbind* lj = (lua::jassbind*)L;
@@ -110,7 +114,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		const char* name = lj->tostring(2);
 
 		native_function::native_function const* nf = native_function::jass_func(name);
-		if (nf)
+		if (nf && nf->is_valid())
 		{
 			lj->pushunsigned((uint32_t)(uintptr_t)nf);
 			lj->pushcclosure((lua::state::cfunction)jass_call_closure, 1);

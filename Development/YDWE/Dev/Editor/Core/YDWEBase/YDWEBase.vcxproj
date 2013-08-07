@@ -112,7 +112,6 @@
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="ydwe\exception\detail\error_code.cpp" />
-    <ClCompile Include="ydwe\exception\detail\error_msg.cpp" />
     <ClCompile Include="ydwe\exception\detail\windows_category.cpp" />
     <ClCompile Include="ydwe\exception\exception.cpp" />
     <ClCompile Include="ydwe\exception\seh_exception.cpp" />

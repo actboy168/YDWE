@@ -1,6 +1,7 @@
 #include <ydwe/warcraft3/native_function.h>
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <ydwe/warcraft3/hashtable.h>
+#include <ydwe/warcraft3/jass.h>
 #include <ydwe/warcraft3/detail/memory_search.h>
 #include <ydwe/warcraft3/version.h>
 #include <ydwe/hook/detail/replace_pointer.h>
@@ -434,26 +435,7 @@ _BASE_BEGIN namespace warcraft3 { namespace native_function {
 
 	uintptr_t native_function::call(uintptr_t param_list[]) const
 	{
-		uintptr_t func_address = address_;
-		uintptr_t retval;
-		uintptr_t esp_ptr;
-		size_t  param_size = param_.size() * sizeof uintptr_t;
-
-		_asm
-		{
-			sub  esp, param_size
-			mov  esp_ptr, esp
-		}
-		memcpy((void*)esp_ptr, param_list, param_size);
-		_asm
-		{
-			call [func_address]
-			mov  esp, esp_ptr
-			add  esp, param_size
-			mov  retval, eax
-		}
-
-		return retval;
+		return jass::call(address_, param_list, param_.size());
 	}
 
 	class mapping : public std::map<std::string, native_function>
