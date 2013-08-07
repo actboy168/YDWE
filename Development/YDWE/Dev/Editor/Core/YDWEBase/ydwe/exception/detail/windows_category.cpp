@@ -1,4 +1,5 @@
 #include <ydwe/exception/detail/windows_category.h>
+#include <ydwe/exception/detail/error_msg.h>
 #include <ydwe/util/unicode.h>
 #include <Windows.h>
 #include <sstream>
@@ -14,13 +15,13 @@ namespace exception_detail
 
 	std::string windows_category_impl::message(int error_code) const
 	{
-		wchar_t* buffer = nullptr;
+		error_msg<wchar_t> buffer;
 		unsigned long result = ::FormatMessageW(
 			FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_IGNORE_INSERTS,
 			NULL,
 			error_code,
 			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),  
-			reinterpret_cast<LPWSTR>(&buffer), 
+			reinterpret_cast<LPWSTR>(buffer.get()), 
 			0,
 			NULL);
 
@@ -31,9 +32,7 @@ namespace exception_detail
 			return os.str();
 		}
 
-		std::string result_str = util::w2u(buffer, util::conv_method::replace | '?');
-		::LocalFree(reinterpret_cast<HLOCAL>(buffer));
-		return std::move(result_str);
+		return std::move(util::w2u(buffer.c_str(), util::conv_method::replace | '?'));
 	}
 
 	std::error_condition windows_category_impl::default_error_condition(int error_code) const
