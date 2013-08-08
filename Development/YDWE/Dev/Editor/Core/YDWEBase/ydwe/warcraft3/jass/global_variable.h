@@ -14,7 +14,7 @@ namespace warcraft3 { namespace jass {
 		global_variable(const char* name);
 		OPCODE_VARIABLE_TYPE type() const;
 		bool                 is_array() const;
-		operator bool              () const;
+		bool                 is_vaild() const;
 		operator uint32_t&         ();
 		operator uint32_t const&   () const;
 		global_variable& operator =(uint32_t v);

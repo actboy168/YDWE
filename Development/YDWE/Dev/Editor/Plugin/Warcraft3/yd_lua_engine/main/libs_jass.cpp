@@ -20,7 +20,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		switch (vt)
 		{
 		case native_function::TYPE_NOTHING:
-			assert(false);
 			return false;
 		case native_function::TYPE_BOOLEAN:
 			lj->push_boolean(value);
@@ -42,7 +41,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 			return true;
 		default:
 			assert(false);
-			break;
+			return false;
 		}
 	}
 
@@ -127,7 +126,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		}
 
 		jass::global_variable gv(name);
-		if (gv)
+		if (gv.is_vaild())
 		{
 			switch (gv.type())
 			{
@@ -184,7 +183,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 
 		const char* name = lj->tostring(2);
 		jass::global_variable gv(name);
-		if (gv)
+		if (gv.is_vaild())
 		{
 			switch (gv.type())
 			{

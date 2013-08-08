@@ -9,7 +9,7 @@ namespace warcraft3 { namespace jass {
 	
 	OPCODE_VARIABLE_TYPE global_variable::type() const
 	{
-		assert(ptr_);
+		assert(is_vaild());
 		return static_cast<OPCODE_VARIABLE_TYPE>(ptr_->type_);
 	}
 	
@@ -30,28 +30,28 @@ namespace warcraft3 { namespace jass {
 		return false;
 	}
 
-	global_variable::operator bool () const
+	bool global_variable::is_vaild() const
 	{
 		return !!ptr_;
 	}
 
 	global_variable::operator uint32_t& ()
 	{
-		assert(ptr_);
+		assert(is_vaild());
 		assert(!is_array());
 		return ptr_->value_;
 	}
 
 	global_variable::operator uint32_t const&   () const
 	{
-		assert(ptr_);
+		assert(is_vaild());
 		assert(!is_array());
 		return ptr_->value_; 
 	}
 
 	global_variable& global_variable::operator =(uint32_t v)
 	{
-		assert(ptr_);
+		assert(is_vaild());
 		assert(!is_array());
 		ptr_->value_ = v;
 		return *this;
