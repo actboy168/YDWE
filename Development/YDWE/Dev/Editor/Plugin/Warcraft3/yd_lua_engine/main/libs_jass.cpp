@@ -45,7 +45,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
-	int jass_call_native_function(lua::jassbind* lj, native_function::native_function* nf, uintptr_t func_address = 0, uint32_t offset = 0)
+	int jass_call_native_function(lua::jassbind* lj, const native_function::native_function* nf, uintptr_t func_address = 0)
 	{
 		size_t param_size = nf->get_param().size();
 
@@ -63,22 +63,22 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 			switch (vt)
 			{
 			case native_function::TYPE_BOOLEAN:
-				param.push(i, lj->read_boolean(i+offset+1));
+				param.push(i, lj->read_boolean(i+1));
 				break;
 			case native_function::TYPE_CODE:
-				param.push(i, (jass::jcode_t)util::singleton_nonthreadsafe<jump_func>::instance().create(lua::callback(lj, i+offset+1), 'YDWE'));
+				param.push(i, (jass::jcode_t)util::singleton_nonthreadsafe<jump_func>::instance().create(lua::callback(lj, i+1), 'YDWE'));
 				break;
 			case native_function::TYPE_HANDLE:
-				param.push(i, lj->read_handle(i+offset+1));
+				param.push(i, lj->read_handle(i+1));
 				break;
 			case native_function::TYPE_INTEGER:
-				param.push(i, lj->read_integer(i+offset+1));
+				param.push(i, lj->read_integer(i+1));
 				break;
 			case native_function::TYPE_REAL:
-				param.push(i, (float)lj->tonumber(i+offset+1));
+				param.push(i, (float)lj->tonumber(i+1));
 				break;
 			case native_function::TYPE_STRING:				
-				param.push(i, lj->tostring(i+offset+1));
+				param.push(i, lj->tostring(i+1));
 				break;
 			default:
 				param.push(i, 0);
@@ -88,6 +88,11 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 
 		if (func_address == 0) func_address = nf->get_address();
 		uintptr_t retval = jass::call(func_address, param.data(), param_size);
+
+		if (nf->get_return() == native_function::TYPE_STRING)
+		{
+			retval = get_string_fasttable()->get(retval);
+		}
 
 		return jass_push(lj, nf->get_return(), retval) ? 1: 0;
 	}
@@ -102,7 +107,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
-		return jass_call_native_function(lj, (native_function::native_function*)lj->tounsigned(lua_upvalueindex(1)));
+		return jass_call_native_function(lj, (const native_function::native_function*)lj->tounsigned(lua_upvalueindex(1)));
 	}
 
 	int jass_get(lua_State* L)

@@ -10,6 +10,11 @@ namespace hook { namespace assembler {
 	class operand
 	{
 	public:
+		explicit operand(reg r) 
+		{
+			set_modrm(3, r);
+		}
+
 		explicit operand(reg base, int8_t disp)
 		{
 			if (disp == 0 && !base.is(ebp))

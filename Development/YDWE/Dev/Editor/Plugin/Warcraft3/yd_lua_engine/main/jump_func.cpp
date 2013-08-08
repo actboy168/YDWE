@@ -25,8 +25,12 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		{
 			if (player == 'YDWE')
 			{
-				uint32_t retval = lua::callback(pref).call();
-				return (0 != retval) ? 1: 0;
+				lua::callback lc(pref);
+				if (!lc.call_pre())
+				{
+					return 0;
+				}
+				return (0 != lc.call(0, true)) ? 1: 0;
 			}
 			else if (player == 'W3SH')
 			{

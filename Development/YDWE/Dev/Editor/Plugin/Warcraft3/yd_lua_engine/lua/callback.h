@@ -19,7 +19,8 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 		callback(uint32_t ref);
 		operator uint32_t();
 		int      create(lua::state* ls, uint32_t index);
-		uint32_t call() const;
+		bool     call_pre() const;
+		uint32_t call(int nargs, bool result = true) const;
 
 	private:
 		uint32_t ref_;

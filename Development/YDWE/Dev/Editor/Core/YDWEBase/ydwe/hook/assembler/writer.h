@@ -52,6 +52,12 @@ namespace hook { namespace assembler {
 			emit_operand(dst, src);
 		}
 
+		void mov(reg dst, reg src)
+		{
+			emit<uint8_t>(0x89);
+			emit<uint8_t>(0xC0 | src.code() << 3 | dst.code());
+		}
+
 		void push(uint32_t imm32)
 		{
 			emit<uint8_t>(0x68);
@@ -66,6 +72,13 @@ namespace hook { namespace assembler {
 		void pop(reg dst) 
 		{
 			emit<uint8_t>(0x58 | dst.code());
+		}
+
+		void add(const operand& dst, uint8_t imm8)
+		{
+			emit<uint8_t>(0x83);
+			emit_operand(eax, dst);
+			emit<uint8_t>(imm8);
 		}
 
 		void jmp(uintptr_t jmp_dst, uintptr_t jmp_src) 

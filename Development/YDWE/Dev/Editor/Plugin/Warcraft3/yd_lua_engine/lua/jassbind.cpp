@@ -42,7 +42,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 
 	void             jassbind::push_string (jass::jstring_t value)
 	{
-		mybase::pushstring(jass::from_string(get_string_fasttable()->get(value)));
+		mybase::pushstring(jass::from_trigstring(jass::from_string(value)));
 	}
 
 	jass::jboolean_t jassbind::read_boolean(int index) 

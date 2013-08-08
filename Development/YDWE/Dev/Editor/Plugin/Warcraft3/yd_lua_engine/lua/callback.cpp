@@ -67,7 +67,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 		return luaL_ref(ls->self(), LUA_REGISTRYINDEX);
 	}
 
-	uint32_t callback::call() const
+	bool callback::call_pre() const
 	{
 		state*& ls = instance();
 
@@ -76,31 +76,42 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 		{
 			printf("callback::call() attempt to call (not a function)\n");
 			ls->pop(1);
-			return 0;
+			return false;
 		}
 
-		if (safe_pcall(ls->self(), 0, 1) != LUA_OK)
+		return true;
+	}
+
+	uint32_t callback::call(int nargs, bool result) const
+	{
+		state*& ls = instance();
+
+		if (safe_pcall(ls->self(), nargs, result? 1: 0) != LUA_OK)
 		{
+			ls->pop(1);
 			ls->pop(1);
 			return 0;
 		}
 
 		uint32_t retval = 0;
 
-		if (!ls->isnil(-1))
+		if (result)
 		{
-			if (ls->isnumber(-1))
+			if (!ls->isnil(-1))
 			{
-				retval = (uint32_t)ls->tonumber(-1);
-			}
+				if (ls->isnumber(-1))
+				{
+					retval = (uint32_t)ls->tonumber(-1);
+				}
 
-			if (ls->isboolean(-1))
-			{
-				retval = ls->toboolean(-1) ? 1 : 0;
+				if (ls->isboolean(-1))
+				{
+					retval = ls->toboolean(-1) ? 1 : 0;
+				}
 			}
+			ls->pop(1);
 		}
 
-		ls->pop(1);
 		ls->pop(1);
 		return retval;
 	}
