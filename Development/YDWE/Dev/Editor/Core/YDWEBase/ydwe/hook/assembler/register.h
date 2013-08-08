@@ -1,9 +1,11 @@
 #pragma once
 
+#include <ydwe/config.h>
 #include <cstdint>
 #include <cassert>
 
-_BASE_BEGIN namespace hook { namespace assembler {
+_BASE_BEGIN 
+namespace hook { namespace assembler {
 	struct reg
 	{
 		static const int c_num_registers = 8;
@@ -51,4 +53,5 @@ _BASE_BEGIN namespace hook { namespace assembler {
 	const reg esi    = { c_register_esi_code };
 	const reg edi    = { c_register_edi_code };
 	const reg no_reg = { c_register_no_reg_code };
-}}}
+}}
+_BASE_END

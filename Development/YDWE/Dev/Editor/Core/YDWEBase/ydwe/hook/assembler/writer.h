@@ -4,6 +4,7 @@
 #include <ydwe/hook/assembler/operand.h>
 #include <array>
 #include <cassert>
+#include <Windows.h>
 
 _BASE_BEGIN 
 namespace hook { namespace assembler {
@@ -41,42 +42,72 @@ namespace hook { namespace assembler {
 
 		void mov(reg dst, uint32_t imm32) 
 		{
-			emit((uint8_t)(0xB8 | dst.code()));
+			emit<uint8_t>(0xB8 | dst.code());
 			emit(imm32);
 		}
 
 		void mov(reg dst, const operand& src) 
 		{
-			emit(0x8B);
+			emit<uint8_t>(0x8B);
 			emit_operand(dst, src);
 		}
 
 		void push(uint32_t imm32)
 		{
-			emit((uint8_t)0x68);
-			emit(imm32);
+			emit<uint8_t>(0x68);
+			emit<uint32_t>(imm32);
 		}
 
 		void push(reg src) 
 		{
-			emit(0x50 | src.code());
+			emit<uint8_t>(0x50 | src.code());
 		}
 
 		void jmp(uintptr_t jmp_dst, uintptr_t jmp_src) 
 		{
-			emit((uint8_t)0xE9);
-			emit((uint32_t)(jmp_dst - (jmp_src + 5)));
+			emit<uint8_t>(0xE9);
+			emit<uint32_t>(jmp_dst - (jmp_src + 5));
 		}
 
 		void call(uintptr_t call_dst, uintptr_t call_src) 
 		{
-			emit((uint8_t)0xE8);
-			emit((uint32_t)(call_dst) - (call_src + 5));
+			emit<uint8_t>((uint8_t)0xE8);
+			emit<uint32_t>((call_dst) - (call_src + 5));
+		}
+
+		void ret(uint16_t imm16 = 0) 
+		{
+			if (imm16 == 0) 
+			{
+				emit<uint8_t>(0xC3);
+			} 
+			else 
+			{
+				emit<uint8_t>(0xC2);
+				emit<uint8_t>(imm16 & 0xFF);
+				emit<uint8_t>((imm16 >> 8) & 0xFF);
+			}
 		}
 
 		size_t size() const
 		{
 			return cur_ - mybase::data();
+		}
+
+		bool executable()
+		{
+			DWORD protect = 0;
+			if (!::VirtualProtectEx(::GetCurrentProcess(), (void*)this, sizeof mybase, PAGE_EXECUTE_READWRITE, &protect)) 
+			{
+				return false;
+			}
+
+			if (!::FlushInstructionCache(::GetCurrentProcess(), (void*)this, sizeof mybase)) 
+			{
+				return false;
+			}
+
+			return true;
 		}
 
 	private:
