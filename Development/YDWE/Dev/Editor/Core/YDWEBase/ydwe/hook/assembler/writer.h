@@ -1,17 +1,20 @@
 #pragma once
 
 #include <ydwe/hook/assembler/register.h>
+#include <ydwe/hook/assembler/operand.h>
 #include <array>
 #include <cassert>
 
-_BASE_BEGIN namespace hook { namespace assembler {
+_BASE_BEGIN 
+namespace hook { namespace assembler {
+
 	template <size_t BufSizeT = 256>
 	class writer : public std::array<uint8_t, BufSizeT>
 	{
-		typedef std::array<uint8_t, BufSizeT> _Mybase;
+		typedef std::array<uint8_t, BufSizeT> mybase;
 	public:
 		writer()
-			: cur_(_Mybase::data())
+			: cur_(mybase::data())
 		{ }
 
 		template <class T>
@@ -24,10 +27,28 @@ _BASE_BEGIN namespace hook { namespace assembler {
 			cur_ += sizeof T;
 		}
 
+		void emit_operand(reg r, const operand& adr) 
+		{
+			assert(adr.len_ > 0);
+
+			emit<uint8_t>((adr.buf_[0] & ~0x38) | (r.code() << 3));
+
+			for (size_t i = 1; i < adr.len_; i++)
+			{
+				emit<uint8_t>(adr.buf_[i]);
+			}
+		}
+
 		void mov(reg dst, uint32_t imm32) 
 		{
 			emit((uint8_t)(0xB8 | dst.code()));
 			emit(imm32);
+		}
+
+		void mov(reg dst, const operand& src) 
+		{
+			emit(0x8B);
+			emit_operand(dst, src);
 		}
 
 		void push(uint32_t imm32)
@@ -55,10 +76,11 @@ _BASE_BEGIN namespace hook { namespace assembler {
 
 		size_t size() const
 		{
-			return cur_ - _Mybase::data();
+			return cur_ - mybase::data();
 		}
 
 	private:
 		uint8_t* cur_;
 	};
-}}}
+}}
+_BASE_END

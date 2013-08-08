@@ -385,6 +385,9 @@
     <ClInclude Include="ydwe\exception\detail\error_msg.h">
       <Filter>ydwe\exception\detail</Filter>
     </ClInclude>
+    <ClInclude Include="ydwe\hook\assembler\operand.h">
+      <Filter>ydwe\hook\assembler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\YDWEVersion\common.rc">

@@ -20,6 +20,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		switch (vt)
 		{
 		case native_function::TYPE_NOTHING:
+			assert(false);
 			return false;
 		case native_function::TYPE_BOOLEAN:
 			lj->push_boolean(value);
@@ -43,8 +44,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 			assert(false);
 			break;
 		}
-
-		return false;
 	}
 
 	int jass_call_native_function(lua::jassbind* lj, native_function::native_function* nf, uintptr_t func_address = 0, uint32_t offset = 0)
