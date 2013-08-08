@@ -15,83 +15,83 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		return get_war3_searcher().is_gaming();
 	}
 
-	int jass_call_native_function(lua::jassbind* lj, native_function::native_function* nf, uintptr_t func_address = 0, uint32_t offset = 0)
+	bool jass_push(lua::jassbind* lj, native_function::variable_type vt, uint32_t value)
 	{
-		size_t param = nf->get_param().size();
-
-		if ((int)param > lj->gettop())
-		{
-			lj->pushnil();
-			return 1;
-		}
-
-		std::unique_ptr<uintptr_t[]>                    buffer(new uintptr_t[param]);
-		std::vector<jass::jreal_t>                      real_buffer(param);
-		std::vector<std::unique_ptr<jass::string_fake>> string_buffer(param);
-
-		for (size_t i = offset; i < param + offset; ++i)
-		{
-			native_function::variable_type vt = nf->get_param()[i];
-			switch (vt)
-			{
-			case native_function::TYPE_BOOLEAN:
-				buffer[i] = lj->read_boolean(i+1);
-				break;
-			case native_function::TYPE_CODE:
-				buffer[i] = (jass::jcode_t)util::singleton_nonthreadsafe<jump_func>::instance().create(lua::callback(lj, i+1), 'YDWE');
-				break;
-			case native_function::TYPE_HANDLE:
-				buffer[i] = lj->read_handle(i+1);
-				break;
-			case native_function::TYPE_INTEGER:
-				buffer[i] = lj->read_integer(i+1);
-				break;
-			case native_function::TYPE_REAL:
-				real_buffer[i] = lj->read_real(i+1);
-				buffer[i] = (uintptr_t)&real_buffer[i];
-				break;
-			case native_function::TYPE_STRING:				
-				string_buffer[i].reset(new jass::string_fake(lj->tostring(i+1)));
-				buffer[i] = (jass::jstring_t)*string_buffer[i];
-				break;
-			default:
-				assert(false);
-				buffer[i] = 0;
-				break;
-			}
-		}
-
-		if (func_address == 0) func_address = nf->get_address();
-		uintptr_t retval = jass::call(func_address, buffer.get(), param);
-
-		switch (nf->get_return())
+		switch (vt)
 		{
 		case native_function::TYPE_NOTHING:
-			return 0;
+			return false;
 		case native_function::TYPE_BOOLEAN:
-			lj->push_boolean(retval);
-			return 1;
+			lj->push_boolean(value);
+			return true;
 		case native_function::TYPE_CODE:
-			lj->push_code(retval);
-			return 1;
+			lj->push_code(value);
+			return true;
 		case native_function::TYPE_HANDLE:
-			lj->push_handle(retval);
-			return 1;
+			lj->push_handle(value);
+			return true;
 		case native_function::TYPE_INTEGER:
-			lj->push_integer(retval);
-			return 1;
+			lj->push_integer(value);
+			return true;
 		case native_function::TYPE_REAL:
-			lj->push_real(retval);
-			return 1;
+			lj->push_real(value);
+			return true;
 		case native_function::TYPE_STRING:
-			lj->push_string(retval);
-			return 1;
+			lj->push_string(value);
+			return true;
 		default:
 			assert(false);
 			break;
 		}
 
-		return 0;
+		return false;
+	}
+
+	int jass_call_native_function(lua::jassbind* lj, native_function::native_function* nf, uintptr_t func_address = 0, uint32_t offset = 0)
+	{
+		size_t param_size = nf->get_param().size();
+
+		if ((int)param_size > lj->gettop())
+		{
+			lj->pushnil();
+			return 1;
+		}
+
+		jass::call_param param(param_size);
+
+		for (size_t i = 0; i < param_size; ++i)
+		{
+			native_function::variable_type vt = nf->get_param()[i];
+			switch (vt)
+			{
+			case native_function::TYPE_BOOLEAN:
+				param.push(i, lj->read_boolean(i+offset+1));
+				break;
+			case native_function::TYPE_CODE:
+				param.push(i, (jass::jcode_t)util::singleton_nonthreadsafe<jump_func>::instance().create(lua::callback(lj, i+offset+1), 'YDWE'));
+				break;
+			case native_function::TYPE_HANDLE:
+				param.push(i, lj->read_handle(i+offset+1));
+				break;
+			case native_function::TYPE_INTEGER:
+				param.push(i, lj->read_integer(i+offset+1));
+				break;
+			case native_function::TYPE_REAL:
+				param.push(i, (float)lj->tonumber(i+offset+1));
+				break;
+			case native_function::TYPE_STRING:				
+				param.push(i, lj->tostring(i+offset+1));
+				break;
+			default:
+				param.push(i, 0);
+				break;
+			}
+		}
+
+		if (func_address == 0) func_address = nf->get_address();
+		uintptr_t retval = jass::call(func_address, param.data(), param_size);
+
+		return jass_push(lj, nf->get_return(), retval) ? 1: 0;
 	}
 
 	int jass_call_closure(lua_State* L)

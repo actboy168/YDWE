@@ -2,6 +2,7 @@
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <ydwe/warcraft3/detail/memory_search.h>
 #include <ydwe/warcraft3/native_function.h>
+#include <cassert>
 #include <memory>
 
 _BASE_BEGIN namespace warcraft3 { namespace jass {
@@ -150,6 +151,47 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 		return val;
 	}
 
+	call_param::call_param(size_t n)
+		: param_buffer_(n)
+		, real_buffer_(n)
+		, string_buffer_(n)
+	{ }
+
+	template <> _BASE_API
+	void call_param::push<uintptr_t>(size_t i, uintptr_t value)
+	{
+		assert(i < param_buffer_.size());
+		param_buffer_[i] = value;
+	}
+
+	template <> _BASE_API
+	void call_param::push<intptr_t>(size_t i, intptr_t value)
+	{
+		assert(i < param_buffer_.size());
+		param_buffer_[i] = *(uintptr_t*)&value;
+	}
+
+	template <> _BASE_API
+	void call_param::push<float>(size_t i, float value)
+	{
+		assert(i < param_buffer_.size());
+		real_buffer_[i] = to_real(value);
+		param_buffer_[i] = (uintptr_t)&real_buffer_[i];
+	}
+
+	template <> _BASE_API
+	void call_param::push<const char*>(size_t i, const char* value)
+	{
+		assert(i < param_buffer_.size());
+		string_buffer_[i] = string_fake(value);
+		param_buffer_[i] = (jstring_t)string_buffer_[i];
+	}
+
+	const uintptr_t* call_param::data() const 
+	{
+		return param_buffer_.data();
+	}
+
 	uintptr_t  call(const char* name, ...)
 	{
 		native_function::native_function const* nf = native_function::jass_func(name);
@@ -159,10 +201,10 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 			return 0;
 		}
 
-		return call(nf->get_address(), (uintptr_t*)((va_list)_ADDRESSOF(name) + _INTSIZEOF(name)), nf->get_param().size() * sizeof uintptr_t);
+		return call(nf->get_address(), (const uintptr_t*)((va_list)_ADDRESSOF(name) + _INTSIZEOF(name)), nf->get_param().size() * sizeof uintptr_t);
 	}
 
-	uintptr_t call(uintptr_t func_address, uintptr_t param_list[], size_t param_list_size)
+	uintptr_t call(uintptr_t func_address, const uintptr_t* param_list, size_t param_list_size)
 	{
 		uintptr_t retval;
 		uintptr_t esp_ptr;

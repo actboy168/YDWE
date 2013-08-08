@@ -2,6 +2,7 @@
 
 #include <ydwe/config.h>
 #include <cstdint>
+#include <vector>
 
 _BASE_BEGIN namespace warcraft3 { namespace jass {
 
@@ -26,6 +27,22 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 		uint32_t memory_[8];
 	};
 
+	class _BASE_API call_param
+	{
+	public:
+		call_param(size_t n);
+		template <class T> void push(size_t i, T value);
+		const uintptr_t* data() const;
+
+	private:
+#pragma warning(push)
+#pragma warning(disable: 4251)
+		std::vector<uintptr_t>   param_buffer_;
+		std::vector<jreal_t>     real_buffer_;
+		std::vector<string_fake> string_buffer_;
+#pragma warning(pop)
+	};
+
 	_BASE_API float       from_real      (jreal_t val);
 	_BASE_API jreal_t     to_real        (float val);
 	_BASE_API const char* from_string    (jstring_t val);
@@ -34,5 +51,5 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 	_BASE_API const char* from_trigstring(const char* val);
 
 	_BASE_API uintptr_t   call           (const char* name, ...);
-	_BASE_API uintptr_t   call           (uintptr_t func_address, uintptr_t param_list[], size_t param_list_size);
+	_BASE_API uintptr_t   call           (uintptr_t func_address, const uintptr_t* param_list, size_t param_list_size);
 }}}
