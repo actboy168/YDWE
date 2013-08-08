@@ -20,8 +20,12 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 		string_fake();
 		string_fake(const char* str);
 		string_fake(const string_fake& that);
+		string_fake(string_fake&& that);
 		~string_fake();
 		operator jstring_t () const;
+		string_fake& operator =(const char* str);
+		string_fake& operator =(const string_fake& that);
+		string_fake& operator =(string_fake&& that);
 
 	private:
 		uint32_t memory_[8];
