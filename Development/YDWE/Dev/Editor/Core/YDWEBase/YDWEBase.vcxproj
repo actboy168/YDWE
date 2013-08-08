@@ -203,6 +203,7 @@
     <ClInclude Include="ydwe\util\detail\codecvt.h" />
     <ClInclude Include="ydwe\util\detail\utf8_codecvt_facet.h" />
     <ClInclude Include="ydwe\util\foreach.h" />
+    <ClInclude Include="ydwe\util\horrible_cast.h" />
     <ClInclude Include="ydwe\util\singleton.h" />
     <ClInclude Include="ydwe\util\unicode.h" />
     <ClInclude Include="ydwe\util\noncopyable.h" />

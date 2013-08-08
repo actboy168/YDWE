@@ -388,6 +388,9 @@
     <ClInclude Include="ydwe\hook\assembler\operand.h">
       <Filter>ydwe\hook\assembler</Filter>
     </ClInclude>
+    <ClInclude Include="ydwe\util\horrible_cast.h">
+      <Filter>ydwe\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\YDWEVersion\common.rc">
