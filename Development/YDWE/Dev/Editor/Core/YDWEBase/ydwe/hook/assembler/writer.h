@@ -63,6 +63,11 @@ namespace hook { namespace assembler {
 			emit<uint8_t>(0x50 | src.code());
 		}
 
+		void pop(reg dst) 
+		{
+			emit<uint8_t>(0x58 | dst.code());
+		}
+
 		void jmp(uintptr_t jmp_dst, uintptr_t jmp_src) 
 		{
 			emit<uint8_t>(0xE9);
