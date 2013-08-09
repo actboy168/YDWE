@@ -1,5 +1,5 @@
 #include <ydwe/exception/windows_exception.h>
-#include <ydwe/exception/detail/error_code.h>
+#include <ydwe/exception/detail/windows_category.h>
 
 _BASE_BEGIN
 

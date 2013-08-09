@@ -111,7 +111,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="ydwe\exception\detail\error_code.cpp" />
     <ClCompile Include="ydwe\exception\detail\windows_category.cpp" />
     <ClCompile Include="ydwe\exception\exception.cpp" />
     <ClCompile Include="ydwe\exception\seh_exception.cpp" />
@@ -136,9 +135,9 @@
     <ClCompile Include="ydwe\path\filesystem_helper.cpp" />
     <ClCompile Include="ydwe\path\service.cpp" />
     <ClCompile Include="ydwe\util\console.cpp" />
-    <ClCompile Include="ydwe\util\detail\ansi_codecvt_facet.cpp" />
+    <ClCompile Include="ydwe\util\detail\ansi_codecvt.cpp" />
     <ClCompile Include="ydwe\util\detail\codecvt.cpp" />
-    <ClCompile Include="ydwe\util\detail\utf8_codecvt_facet.cpp" />
+    <ClCompile Include="ydwe\util\detail\utf8_codecvt.cpp" />
     <ClCompile Include="ydwe\util\is_utf8.cpp" />
     <ClCompile Include="ydwe\util\unicode.cpp" />
     <ClCompile Include="ydwe\warcraft3\detail\convert_real.cpp">
@@ -164,7 +163,6 @@
     <ClInclude Include="ydwe\com\guard.h" />
     <ClInclude Include="ydwe\com\unique_ptr.h" />
     <ClInclude Include="ydwe\config.h" />
-    <ClInclude Include="ydwe\exception\detail\error_code.h" />
     <ClInclude Include="ydwe\exception\detail\error_msg.h" />
     <ClInclude Include="ydwe\exception\detail\windows_category.h" />
     <ClInclude Include="ydwe\exception\exception.h" />
@@ -199,9 +197,9 @@
     <ClInclude Include="ydwe\path\service.h" />
     <ClInclude Include="ydwe\util\buffer.h" />
     <ClInclude Include="ydwe\util\console.h" />
-    <ClInclude Include="ydwe\util\detail\ansi_codecvt_facet.h" />
+    <ClInclude Include="ydwe\util\detail\ansi_codecvt.h" />
     <ClInclude Include="ydwe\util\detail\codecvt.h" />
-    <ClInclude Include="ydwe\util\detail\utf8_codecvt_facet.h" />
+    <ClInclude Include="ydwe\util\detail\utf8_codecvt.h" />
     <ClInclude Include="ydwe\util\foreach.h" />
     <ClInclude Include="ydwe\util\horrible_cast.h" />
     <ClInclude Include="ydwe\util\singleton.h" />

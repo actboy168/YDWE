@@ -65,9 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="ydwe\util\detail\ansi_codecvt_facet.cpp">
-      <Filter>ydwe\util\detail</Filter>
-    </ClCompile>
     <ClCompile Include="ydwe\util\detail\codecvt.cpp">
       <Filter>ydwe\util\detail</Filter>
     </ClCompile>
@@ -188,27 +185,21 @@
     <ClCompile Include="ydwe\exception\exception.cpp">
       <Filter>ydwe\exception</Filter>
     </ClCompile>
-    <ClCompile Include="ydwe\util\detail\utf8_codecvt_facet.cpp">
-      <Filter>ydwe\util\detail</Filter>
-    </ClCompile>
     <ClCompile Include="ydwe\exception\detail\windows_category.cpp">
-      <Filter>ydwe\exception\detail</Filter>
-    </ClCompile>
-    <ClCompile Include="ydwe\exception\detail\error_code.cpp">
       <Filter>ydwe\exception\detail</Filter>
     </ClCompile>
     <ClCompile Include="ydwe\warcraft3\jass\global_variable.cpp">
       <Filter>ydwe\warcraft3\jass</Filter>
     </ClCompile>
+    <ClCompile Include="ydwe\util\detail\ansi_codecvt.cpp">
+      <Filter>ydwe\util\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="ydwe\util\detail\utf8_codecvt.cpp">
+      <Filter>ydwe\util\detail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ydwe\util\detail\ansi_codecvt_facet.h">
-      <Filter>ydwe\util\detail</Filter>
-    </ClInclude>
     <ClInclude Include="ydwe\util\detail\codecvt.h">
-      <Filter>ydwe\util\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="ydwe\util\detail\utf8_codecvt_facet.h">
       <Filter>ydwe\util\detail</Filter>
     </ClInclude>
     <ClInclude Include="ydwe\util\unicode.h">
@@ -376,9 +367,6 @@
     <ClInclude Include="ydwe\exception\detail\windows_category.h">
       <Filter>ydwe\exception\detail</Filter>
     </ClInclude>
-    <ClInclude Include="ydwe\exception\detail\error_code.h">
-      <Filter>ydwe\exception\detail</Filter>
-    </ClInclude>
     <ClInclude Include="ydwe\warcraft3\jass\global_variable.h">
       <Filter>ydwe\warcraft3\jass</Filter>
     </ClInclude>
@@ -390,6 +378,12 @@
     </ClInclude>
     <ClInclude Include="ydwe\util\horrible_cast.h">
       <Filter>ydwe\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\util\detail\ansi_codecvt.h">
+      <Filter>ydwe\util\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\util\detail\utf8_codecvt.h">
+      <Filter>ydwe\util\detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
