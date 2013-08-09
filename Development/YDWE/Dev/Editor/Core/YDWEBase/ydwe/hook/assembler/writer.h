@@ -107,6 +107,11 @@ namespace hook { namespace assembler {
 			}
 		}
 
+		void clear()
+		{
+			cur_ = mybase::data();
+		}
+
 		size_t size() const
 		{
 			return cur_ - mybase::data();
