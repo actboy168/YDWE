@@ -2,21 +2,24 @@
 #include "../lua/callback.h"
 #include "../lua/helper.h"
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 	int open_jass(lua::state* ls);
 	int open_japi(lua::state* ls);
 	int open_jass_ext(lua::state* ls);
 
 	int open_lua_engine(lua::state* ls)
 	{
-		if (!lua::instance())
+		if (!instance())
 		{
-			lua::instance() = ls;
+			instance() = ls;
 			open_jass(ls);
 			open_japi(ls);
 			open_jass_ext(ls);
-			lua::insert_searchers_table(ls);
+			insert_searchers_table(ls);
 		}
 		return 1;
 	}
-}}}
+}}
+
+_BASE_END

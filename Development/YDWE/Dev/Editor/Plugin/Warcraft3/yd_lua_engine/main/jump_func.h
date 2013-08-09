@@ -3,7 +3,8 @@
 #include <map>
 #include <ydwe/warcraft3/jass/trampoline.h>
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
 	class jump_func
 	{
@@ -15,4 +16,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 	private:
 		std::map<uint32_t, jass::trampoline> mapping_;
 	};
-}}}
+}}
+
+_BASE_END

@@ -2,7 +2,8 @@
 #include <ydwe/warcraft3/hashtable.h>
 #include <cstdint>
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
 	jass::jinteger_t jassbind::read_integer(int index) 
 	{
@@ -84,4 +85,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 			mybase::pushnil();
 	}
 
-}}}}
+}}
+
+_BASE_END

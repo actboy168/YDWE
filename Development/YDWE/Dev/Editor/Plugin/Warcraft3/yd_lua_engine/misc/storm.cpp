@@ -1,8 +1,8 @@
 #include "storm.h"
 #include <aero/function/fp_call.hpp>
 
-
-namespace ydwe { namespace warcraft3 {
+_BASE_BEGIN
+namespace warcraft3 {
 
 	storm::storm() 
 		: mod_(::LoadLibraryW(L"Storm.dll"))
@@ -53,4 +53,6 @@ namespace ydwe { namespace warcraft3 {
 	{
 		return (uintptr_t)::GetProcAddress(mod_, (const char*)ord);
 	}
-}}
+}
+
+_BASE_END

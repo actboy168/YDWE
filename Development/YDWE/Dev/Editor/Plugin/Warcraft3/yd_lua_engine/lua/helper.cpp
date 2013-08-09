@@ -3,7 +3,8 @@
 #include <cstring>
 #include <ydwe/util/singleton.h>
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
 	const char* findtable(lua::state* ls, int idx, const char *fname, int szhint) 
 	{
@@ -125,4 +126,5 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 		return false;
 	}
 
-}}}}
+}}
+_BASE_END

@@ -4,12 +4,11 @@
 #include <lua.hpp>
 #include <cstdint>
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
-	using namespace ydwe::lua;
-
-	state*& instance();	
-	void    do_buffer(const char* name, const char* buffer, size_t size);
+	lua::state*& instance();	
+	void         do_buffer(const char* name, const char* buffer, size_t size);
 
 	struct callback
 	{
@@ -27,4 +26,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 	};
 
 
-}}}}
+}}
+
+_BASE_END

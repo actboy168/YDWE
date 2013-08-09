@@ -3,13 +3,12 @@
 #include <ydwe/lua/state.h>
 #include <ydwe/warcraft3/jass.h>
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
-	using namespace ydwe::lua;
-
-	struct jassbind : public state
+	struct jassbind : public lua::state
 	{
-		typedef state mybase;
+		typedef lua::state mybase;
 
 		jass::jinteger_t read_integer(int index);
 		void             push_integer(jass::jinteger_t value);
@@ -24,4 +23,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 		jass::jhandle_t  read_handle (int index);
 		void             push_handle (jass::jhandle_t value);
 	};
-}}}}
+}}
+
+_BASE_END

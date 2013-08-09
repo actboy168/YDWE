@@ -1,7 +1,8 @@
 #include "../lua/helper.h"
 #include <ydwe/util/console.h>
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
 	int jass_enable_console(lua_State* /*L*/)
 	{
@@ -22,4 +23,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		ls->setglobal("jass_ext");
 		return 1;
 	}
-}}}
+}}
+
+_BASE_END

@@ -8,7 +8,8 @@
 #include <ydwe/util/singleton.h>
 #include <aero/function/fp_call.hpp>
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
 	int open_libs(lua::state* ls)
 	{
@@ -27,7 +28,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 	{
 		lua::state* ls = (lua::state*)luaL_newstate();
 		open_libs(ls);
-		lua::clear_searchers_table(ls);
+		clear_searchers_table(ls);
 		return ls;
 	}
 
@@ -44,7 +45,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		std::string cheat_s = cheat;
 		if (cheat_s.compare(0, 4, "run ") == 0)
 		{
-			if (!lua::instance())
+			if (!instance())
 			{
 				open_lua_engine(initialize_lua());
 			}
@@ -56,7 +57,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 			storm& s = util::singleton_nonthreadsafe<storm>::instance();
 			if (s.load_file(cheat_s.c_str(), (const void**)&buffer, &size))
 			{
-				lua::do_buffer(cheat_s.c_str(), buffer, size);
+				do_buffer(cheat_s.c_str(), buffer, size);
 				s.unload_file(buffer);
 			}
 		}
@@ -69,4 +70,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 	{
 		native_function::async_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
 	}
-}}}
+}}
+
+_BASE_END

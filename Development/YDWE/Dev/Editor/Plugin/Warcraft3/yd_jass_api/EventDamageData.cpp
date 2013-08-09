@@ -7,7 +7,8 @@
 #include <aero/function/fp_call.hpp>
 #include <deque>
 
-namespace ydwe { namespace warcraft3 { namespace japi {
+_BASE_BEGIN
+namespace warcraft3 { namespace japi {
 
 uintptr_t searchUnitDamageFunc()
 {
@@ -186,4 +187,6 @@ void InitializeEventDamageData()
 	native_function::japi_add((uintptr_t)EXGetEventDamageData, "EXGetEventDamageData", "(I)I");
 	native_function::japi_add((uintptr_t)EXSetEventDamage,     "EXSetEventDamage",     "(R)B");
 }
-}}}
+}}
+
+_BASE_END

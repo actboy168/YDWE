@@ -5,13 +5,14 @@
 #include <map>
 #include <string>
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
 	int  jass_call_closure(lua_State* L);
 
 	int japi_get(lua_State* L)
 	{
-		lua::jassbind* lj = (lua::jassbind*)L;
+		jassbind* lj = (jassbind*)L;
 
 		const char* name = lj->tostring(2);
 
@@ -42,4 +43,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		ls->setglobal("japi");
 		return 1;
 	}
-}}}
+}}
+
+_BASE_END

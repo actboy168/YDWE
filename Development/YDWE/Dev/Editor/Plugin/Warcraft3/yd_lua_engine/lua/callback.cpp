@@ -1,10 +1,11 @@
 #include "../lua/callback.h"
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
-	state*& instance()
+	lua::state*& instance()
 	{
-		static state* s_state = nullptr;
+		static lua::state* s_state = nullptr;
 		return s_state;
 	}
 
@@ -30,7 +31,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 
 	void do_buffer(const char* name, const char* buffer, size_t size)
 	{
-		state*& ls = instance();
+		lua::state*& ls = instance();
 		if (luaL_loadbuffer(ls->self(), buffer, size, name) != LUA_OK)
 		{
 			printf("%s\n", ls->tostring(-1));
@@ -69,7 +70,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 
 	bool callback::call_pre() const
 	{
-		state*& ls = instance();
+		lua::state*& ls = instance();
 
 		ls->rawgeti(LUA_REGISTRYINDEX, ref_);
 		if (!ls->isfunction(-1))
@@ -84,7 +85,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 
 	uint32_t callback::call(int nargs, bool result) const
 	{
-		state*& ls = instance();
+		lua::state*& ls = instance();
 
 		if (safe_pcall(ls->self(), nargs, result? 1: 0) != LUA_OK)
 		{
@@ -116,4 +117,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 		return retval;
 	}
 
-}}}}
+}}
+
+_BASE_END

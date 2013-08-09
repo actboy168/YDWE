@@ -8,14 +8,15 @@
 #include <ydwe/warcraft3/jass/global_variable.h>
 #include <ydwe/util/singleton.h>
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
 	bool is_gaming()
 	{
 		return get_war3_searcher().is_gaming();
 	}
 
-	bool jass_push(lua::jassbind* lj, native_function::variable_type vt, uint32_t value)
+	bool jass_push(jassbind* lj, native_function::variable_type vt, uint32_t value)
 	{
 		switch (vt)
 		{
@@ -45,7 +46,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
-	int jass_call_native_function(lua::jassbind* lj, const native_function::native_function* nf, uintptr_t func_address = 0)
+	int jass_call_native_function(jassbind* lj, const native_function::native_function* nf, uintptr_t func_address = 0)
 	{
 		size_t param_size = nf->get_param().size();
 
@@ -66,7 +67,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 				param.push(i, lj->read_boolean(i+1));
 				break;
 			case native_function::TYPE_CODE:
-				param.push(i, (jass::jcode_t)util::singleton_nonthreadsafe<jump_func>::instance().create(lua::callback(lj, i+1), 'YDWE'));
+				param.push(i, (jass::jcode_t)util::singleton_nonthreadsafe<jump_func>::instance().create(callback(lj, i+1), 'YDWE'));
 				break;
 			case native_function::TYPE_HANDLE:
 				param.push(i, lj->read_handle(i+1));
@@ -99,7 +100,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 
 	int jass_call_closure(lua_State* L)
 	{
-		lua::jassbind* lj = (lua::jassbind*)L;
+		jassbind* lj = (jassbind*)L;
 
 		if (!is_gaming())
 		{
@@ -112,7 +113,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 
 	int jass_get(lua_State* L)
 	{
-		lua::jassbind* lj = (lua::jassbind*)L;
+		jassbind* lj = (jassbind*)L;
 
 		const char* name = lj->tostring(2);
 
@@ -179,7 +180,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 
 	int jass_set(lua_State* L)
 	{
-		lua::jassbind* lj = (lua::jassbind*)L;
+		jassbind* lj = (jassbind*)L;
 
 		if (!is_gaming())
 		{
@@ -252,4 +253,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 
 		return 1;
 	}
-}}}
+}}
+
+_BASE_END

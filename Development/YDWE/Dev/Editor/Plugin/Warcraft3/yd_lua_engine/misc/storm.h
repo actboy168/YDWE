@@ -2,8 +2,10 @@
 
 #include <Windows.h>
 #include <cstdint>
+#include <ydwe/config.h>
 
-namespace ydwe { namespace warcraft3 {
+_BASE_BEGIN
+namespace warcraft3 {
 
 	class storm
 	{
@@ -25,4 +27,6 @@ namespace ydwe { namespace warcraft3 {
 		uintptr_t fn_sfile_load_file_;
 		uintptr_t fn_sfile_unload_file_;
 	};
-}}
+}
+
+_BASE_END

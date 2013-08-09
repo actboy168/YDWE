@@ -6,7 +6,8 @@
 #include <ydwe/util/singleton.h>
 #include <aero/function/fp_call.hpp>
 
-namespace ydwe { namespace warcraft3 { namespace lua_engine {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
 	class native_jump_func
 	{
@@ -25,7 +26,7 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		{
 			if (player == 'YDWE')
 			{
-				lua::callback lc(pref);
+				callback lc(pref);
 				if (!lc.call_pre())
 				{
 					return 0;
@@ -67,4 +68,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		
 		return op.code();
 	}
-}}}
+}}
+
+_BASE_END

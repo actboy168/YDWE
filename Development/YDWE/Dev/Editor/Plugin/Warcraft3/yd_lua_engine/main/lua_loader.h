@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <ydwe/warcraft3/jass.h>
 
-
-namespace ydwe { namespace warcraft3 { namespace lua_engine {
+_BASE_BEGIN
+namespace warcraft3 { namespace lua_engine {
 
 	class lua_loader
 	{
@@ -15,4 +15,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		static uintptr_t RealCheat;
 		static void __cdecl FakeCheat(jass::jstring_t cheat_str);
 	};
-}}}
+}}
+
+_BASE_END

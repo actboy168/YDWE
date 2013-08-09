@@ -5,7 +5,9 @@
 #include <ydwe/warcraft3/version.h>
 #include <ydwe/warcraft3/jass.h>
 
-namespace ydwe { namespace warcraft3 { namespace japi {
+_BASE_BEGIN
+
+namespace warcraft3 { namespace japi {
 
 enum UNIT_STATE
 {
@@ -173,4 +175,6 @@ void InitializeUnitState()
 	//native_function::async_add((uintptr_t)EXGetUnitObject, "EXGetUnitObject", "(Hunit;)I");
 }
 
-}}}
+}}
+
+_BASE_END

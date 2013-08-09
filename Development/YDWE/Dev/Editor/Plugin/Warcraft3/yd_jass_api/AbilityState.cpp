@@ -8,7 +8,8 @@
 #include <ydwe/hook/inline.h>
 #include <array>
 
-namespace ydwe { namespace warcraft3 { namespace japi {
+_BASE_BEGIN
+namespace warcraft3 { namespace japi {
 
 	uint32_t  __cdecl EXGetUnitObject(uint32_t unit_handle);
 
@@ -647,4 +648,5 @@ namespace ydwe { namespace warcraft3 { namespace japi {
 		native_function::japi_add((uintptr_t)EXGetAbilityDataString,  "EXGetAbilityDataString",  "(Hability;II)S");
 		native_function::japi_add((uintptr_t)EXSetAbilityDataString,  "EXSetAbilityDataString",  "(Hability;IIS)B");
 	}
-}}}
+}}
+_BASE_END

@@ -4,7 +4,8 @@
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <aero/function/fp_call.hpp>
 
-namespace ydwe { namespace warcraft3 { namespace japi {
+_BASE_BEGIN
+namespace warcraft3 { namespace japi {
 
 
 uintptr_t searchInGameChatWhat()
@@ -49,4 +50,6 @@ void InitializeDisplayChat()
 {
 	native_function::japi_add((uintptr_t)EXDisplayChat, "EXDisplayChat", "(Hplayer;IS)V");
 }
-}}}
+}}
+
+_BASE_END
