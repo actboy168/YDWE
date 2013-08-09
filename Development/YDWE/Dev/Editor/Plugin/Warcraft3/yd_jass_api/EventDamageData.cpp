@@ -113,7 +113,7 @@ uint32_t __fastcall FakeUnitDamageFunc(uint32_t _this, uint32_t _edx, uint32_t a
 {
 	if ((uintptr_t)FakeUnitDamageDoneFunc != *(uintptr_t*)(*(uint32_t*)_this + 296))
 	{
-		RealUnitDamageDoneFunc = ydwe::hook::replace_pointer(*(uint32_t*)_this + 296, (uintptr_t)FakeUnitDamageDoneFunc);
+		RealUnitDamageDoneFunc = hook::replace_pointer(*(uint32_t*)_this + 296, (uintptr_t)FakeUnitDamageDoneFunc);
 	}
 
 	g_edd.push_back(event_damage_data(is_physical, ptr));
@@ -182,7 +182,7 @@ bool __cdecl EXSetEventDamage(uint32_t value)
 
 void InitializeEventDamageData()
 {
-	RealUnitDamageFunc = ydwe::hook::replace_pointer(searchUnitDamageFunc(), (uintptr_t)FakeUnitDamageFunc);
+	RealUnitDamageFunc = hook::replace_pointer(searchUnitDamageFunc(), (uintptr_t)FakeUnitDamageFunc);
 	native_function::japi_hook("GetEventDamage", &RealGetEventDamage, (uintptr_t)FakeGetEventDamage);
 	native_function::japi_add((uintptr_t)EXGetEventDamageData, "EXGetEventDamageData", "(I)I");
 	native_function::japi_add((uintptr_t)EXSetEventDamage,     "EXSetEventDamage",     "(R)B");
