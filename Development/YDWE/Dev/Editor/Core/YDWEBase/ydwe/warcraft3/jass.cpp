@@ -242,16 +242,16 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 
 		_asm
 		{
-			sub  esp, param_size
-			mov  esp_ptr, esp
+			sub  esp, param_size;
+			mov  esp_ptr, esp;
 		}
 		memcpy((void*)esp_ptr, param_list, param_size);
 		_asm
 		{
-			call [func_address]
-			mov  esp, esp_ptr
-			add  esp, param_size
-			mov  retval, eax
+			call [func_address];
+			mov  esp, esp_ptr;
+			add  esp, param_size;
+			mov  retval, eax;
 		}
 
 		return retval;
