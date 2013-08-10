@@ -7,7 +7,7 @@
 _BASE_BEGIN 
 namespace warcraft3 { namespace jass {
 
-	uintptr_t _BASE_API trampoline_create(uintptr_t param_,  uintptr_t callback_);
+	_BASE_API uintptr_t trampoline_create(uintptr_t param_,  uintptr_t callback_);
 
 	template <class C>
 	inline uintptr_t trampoline_create(C* this_,  uint32_t (C::*callback_)())

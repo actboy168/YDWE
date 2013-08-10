@@ -3,6 +3,7 @@
 #include <ydwe/warcraft3/hashtable.h>
 #include <ydwe/warcraft3/jass.h>
 #include <ydwe/warcraft3/detail/memory_search.h>
+#include <ydwe/warcraft3/detail/nf_register.h>
 #include <ydwe/warcraft3/version.h>
 #include <ydwe/hook/detail/replace_pointer.h>
 #include <ydwe/hook/iat.h>
@@ -97,227 +98,87 @@ _BASE_BEGIN namespace warcraft3 { namespace native_function {
 
 	namespace detail {
 
-		class nf_register
+		struct register_info
 		{
-		public:
-			static void initialize()
-			{
-				static bool s_first = true;
-				if (s_first)
-				{
-					s_first = false;
+			uintptr_t   func;
+			std::string name; 
+			std::string param;
 
-					register_func = search_register_func();
-					
-					if (get_war3_searcher().get_version() > version_123)
-					{
-						real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc);
-						real_tls_get_value = hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
-					}
-					else if (get_war3_searcher().get_version() > version_121b)
-					{
-						real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_122);
-						real_tls_get_value = hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
-					}
-					else
-					{
-						real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_120);
-						real_tls_get_value = hook::iat(L"War3.exe", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
-					}
-				}
-			}
-
-			static void add(uintptr_t func, const char* name, const char* param)
-			{
-				register_info_list.push_back(register_info(func, name, param));
-			}
-
-			static void hook(const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
-			{
-				hook_info_list.push_back(hook_info(proc_name, old_proc_ptr, new_proc));
-			}
-
-		private:
-			static uintptr_t search_register_func()
-			{
-				uintptr_t ptr = get_war3_searcher().search_string("StringCase");
-				ptr += 9;
-				return warcraft3::detail::convert_function(ptr);
-			}
-
-			static void register_native_function()
-			{
-				foreach (register_info const& it, register_info_list)
-				{
-					aero::fast_call<void>(register_func, it.func, it.name.c_str(), it.param.c_str());
-				}
-			}
-
-			static void hook_native_function()
-			{
-				foreach (hook_info const& it, hook_info_list)
-				{
-					table_hook(it.proc_name.c_str(), it.old_proc_ptr, it.new_proc);
-				}
-			}
-
-			static uintptr_t __stdcall fake_storm_alloc(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
-			{
-				if ((amount == 176) 
-					&& (log_line == 668)
-					&& (default_value == 0)
-					&& (strcmp(log_filename, ".\\Jass.cpp") == 0))
-				{
-					stat = 1;
-					thread_id = ::GetCurrentThreadId();
-				}
-				else if (stat == 3)
-				{
-					if (thread_id == ::GetCurrentThreadId())
-					{
-						if ((amount == 140) 
-							&& (log_line == 90)
-							&& (default_value == 0)
-							&& (strcmp(log_filename, ".\\Agile.cpp") == 0))
-						{
-							stat = 0;
-							hook_native_function();
-						}
-					}
-				}
-
-				return aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
-			}
-
-			static uintptr_t __stdcall fake_storm_alloc_122(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
-			{
-				if ((amount == 176) 
-					&& (log_line == 667)
-					&& (default_value == 0)
-					&& (strcmp(log_filename, ".\\Jass.cpp") == 0))
-				{
-					stat = 1;
-					thread_id = ::GetCurrentThreadId();
-				}
-				else if (stat == 3)
-				{
-					if (thread_id == ::GetCurrentThreadId())
-					{
-						if ((amount == 140) 
-							&& (log_line == 90)
-							&& (default_value == 0)
-							&& (strcmp(log_filename, ".\\Agile.cpp") == 0))
-						{
-							stat = 0;
-							hook_native_function();
-						}
-					}
-				}
-
-				return aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
-			}
-
-			static uintptr_t __stdcall fake_storm_alloc_120(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
-			{
-				if ((amount == 176) 
-					&& (log_line == 667)
-					&& (default_value == 0)
-					&& (strcmp(log_filename, "E:\\Drive1\\temp\\buildwar3x\\engine\\source\\Jass2\\Jass.cpp") == 0))
-				{
-					stat = 1;
-					thread_id = ::GetCurrentThreadId();
-				}
-				else if (stat == 3)
-				{
-					if (thread_id == ::GetCurrentThreadId())
-					{
-						if ((amount == 140) 
-							&& (log_line == 90)
-							&& (default_value == 0)
-							&& (strcmp(log_filename, "E:\\Drive1\\temp\\buildwar3x\\engine\\Source\\Agile\\Agile.cpp") == 0))
-						{
-							stat = 0;
-							hook_native_function();
-						}
-					}
-				}
-
-				return aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
-			}
-
-			static uintptr_t __stdcall fake_tls_get_value(uint32_t tls_index)
-			{
-				if ((stat != 0) && (thread_id == ::GetCurrentThreadId()))
-				{
-					if (stat == 1)
-					{
-						stat = 2;
-					}
-					else if (stat == 2)
-					{
-						stat = 3;
-						register_native_function();
-					}
-				}
-
-				return aero::std_call<uintptr_t>(real_tls_get_value, tls_index);
-			}
-
-		private:
-			struct register_info
-			{
-				uintptr_t   func;
-				std::string name; 
-				std::string param;
-
-				register_info(uintptr_t f, const char* n, const char* p)
-					: func(f)
-					, name(n)
-					, param(p)
-				{ }
-			};
-
-			struct hook_info
-			{
-				std::string proc_name;
-				uintptr_t*  old_proc_ptr;
-				uintptr_t   new_proc;
-
-				hook_info(const char* p, uintptr_t* o, uintptr_t n)
-					: proc_name(p)
-					, old_proc_ptr(o)
-					, new_proc(n)
-				{ }
-			};
-
-			static uintptr_t                  thread_id;
-			static uintptr_t                  stat;
-			static uintptr_t                  real_storm_alloc;
-			static uintptr_t                  real_tls_get_value;
-			static uintptr_t                  register_func;
-			static std::vector<register_info> register_info_list;
-			static std::vector<hook_info>     hook_info_list;
+			register_info(uintptr_t f, const char* n, const char* p)
+				: func(f)
+				, name(n)
+				, param(p)
+			{ }
 		};
 
-		uintptr_t                               nf_register::thread_id          = 0;
-		uintptr_t                               nf_register::stat               = 0;
-		uintptr_t                               nf_register::real_storm_alloc   = 0;
-		uintptr_t                               nf_register::real_tls_get_value = 0;
-		uintptr_t                               nf_register::register_func      = 0;
-		std::vector<nf_register::register_info> nf_register::register_info_list;
-		std::vector<nf_register::hook_info>     nf_register::hook_info_list;
+		struct hook_info
+		{
+			std::string proc_name;
+			uintptr_t*  old_proc_ptr;
+			uintptr_t   new_proc;
+
+			hook_info(const char* p, uintptr_t* o, uintptr_t n)
+				: proc_name(p)
+				, old_proc_ptr(o)
+				, new_proc(n)
+			{ }
+		};
+
+		std::vector<register_info> register_info_list;
+		std::vector<hook_info>     hook_info_list;
+
+		uintptr_t search_register_func()
+		{
+			uintptr_t ptr = get_war3_searcher().search_string("StringCase");
+			ptr += 9;
+			return warcraft3::detail::convert_function(ptr);
+		}
+
+		void async_add(uintptr_t func, const char* name, const char* param)
+		{
+			register_info_list.push_back(register_info(func, name, param));
+		}
+
+		void async_hook(const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
+		{
+			hook_info_list.push_back(hook_info(proc_name, old_proc_ptr, new_proc));
+		}
+
+		void async_initialize()
+		{
+			if (nf_register::initialize())
+			{
+				nf_register::event_add.connect([&]()
+				{
+					static uintptr_t register_func = search_register_func();
+
+					foreach (register_info const& it, register_info_list)
+					{
+						aero::fast_call<void>(register_func, it.func, it.name.c_str(), it.param.c_str());
+					}
+				});
+
+				nf_register::event_hook.connect([&]()
+				{
+					foreach (hook_info const& it, hook_info_list)
+					{
+						table_hook(it.proc_name.c_str(), it.old_proc_ptr, it.new_proc);
+					}
+				});
+			}
+		}
 	}
 
 	void async_add            (uintptr_t func, const char* name, const char* param)
 	{
-		detail::nf_register::initialize();
-		detail::nf_register::add(func, name, param);
+		detail::async_initialize();
+		detail::async_add(func, name, param);
 	}
 
 	void async_hook           (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
 	{
-		detail::nf_register::initialize();
-		detail::nf_register::hook(proc_name, old_proc_ptr, new_proc);
+		detail::async_initialize();
+		detail::async_hook(proc_name, old_proc_ptr, new_proc);
 	}
 
 	namespace detail {

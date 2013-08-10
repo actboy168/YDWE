@@ -145,6 +145,7 @@
       <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Strict</FloatingPointModel>
     </ClCompile>
     <ClCompile Include="ydwe\warcraft3\detail\memory_search.cpp" />
+    <ClCompile Include="ydwe\warcraft3\detail\nf_register.cpp" />
     <ClCompile Include="ydwe\warcraft3\detail\string_hash.cpp" />
     <ClCompile Include="ydwe\warcraft3\basic_searcher.cpp" />
     <ClCompile Include="ydwe\warcraft3\hashtable.cpp" />
@@ -203,10 +204,12 @@
     <ClInclude Include="ydwe\util\detail\utf8_codecvt.h" />
     <ClInclude Include="ydwe\util\foreach.h" />
     <ClInclude Include="ydwe\util\horrible_cast.h" />
+    <ClInclude Include="ydwe\util\signal.h" />
     <ClInclude Include="ydwe\util\singleton.h" />
     <ClInclude Include="ydwe\util\unicode.h" />
     <ClInclude Include="ydwe\util\noncopyable.h" />
     <ClInclude Include="ydwe\warcraft3\detail\memory_search.h" />
+    <ClInclude Include="ydwe\warcraft3\detail\nf_register.h" />
     <ClInclude Include="ydwe\warcraft3\detail\string_hash.h" />
     <ClInclude Include="ydwe\warcraft3\hashtable.h" />
     <ClInclude Include="ydwe\warcraft3\basic_searcher.h" />

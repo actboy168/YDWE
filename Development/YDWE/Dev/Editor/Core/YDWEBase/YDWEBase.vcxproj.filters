@@ -200,6 +200,9 @@
     <ClCompile Include="ydwe\warcraft3\jass\trampoline_function.cpp">
       <Filter>ydwe\warcraft3\jass</Filter>
     </ClCompile>
+    <ClCompile Include="ydwe\warcraft3\detail\nf_register.cpp">
+      <Filter>ydwe\warcraft3\detail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ydwe\util\detail\codecvt.h">
@@ -390,6 +393,12 @@
     </ClInclude>
     <ClInclude Include="ydwe\warcraft3\jass\trampoline_function.h">
       <Filter>ydwe\warcraft3\jass</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\util\signal.h">
+      <Filter>ydwe\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\warcraft3\detail\nf_register.h">
+      <Filter>ydwe\warcraft3\detail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
