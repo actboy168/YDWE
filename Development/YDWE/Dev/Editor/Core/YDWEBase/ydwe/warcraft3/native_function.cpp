@@ -7,6 +7,7 @@
 #include <ydwe/warcraft3/version.h>
 #include <ydwe/hook/detail/replace_pointer.h>
 #include <ydwe/hook/iat.h>
+#include <ydwe/util/do_once.h>
 #include <ydwe/util/foreach.h>
 #include <aero/function/fp_call.hpp>
 #include <vector>
@@ -146,7 +147,9 @@ _BASE_BEGIN namespace warcraft3 { namespace native_function {
 
 		void async_initialize()
 		{
-			if (nf_register::initialize())
+			nf_register::initialize();
+
+			DO_ONCE_NOTHREADSAFE()
 			{
 				nf_register::event_add.connect([&]()
 				{

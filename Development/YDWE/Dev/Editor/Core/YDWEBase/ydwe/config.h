@@ -10,5 +10,6 @@
 #	endif
 #endif
 
-#define _BASE_BEGIN namespace ydwe {
+#define _BASE       ydwe
+#define _BASE_BEGIN namespace _BASE {
 #define _BASE_END   }

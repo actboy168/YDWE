@@ -1,6 +1,7 @@
 #include <ydwe/warcraft3/detail/nf_register.h>
 #include <ydwe/hook/iat.h>
 #include <ydwe/util/foreach.h>
+#include <ydwe/util/do_once.h>
 #include <ydwe/warcraft3/detail/memory_search.h>
 #include <ydwe/warcraft3/native_function.h>
 #include <ydwe/warcraft3/version.h>
@@ -122,31 +123,27 @@ namespace warcraft3 { namespace native_function { namespace nf_register {
 
 	bool initialize()
 	{
-		static bool s_first = true;
-		if (!s_first)
+		DO_ONCE_NOTHREADSAFE()
 		{
-			return false;
+			if (get_war3_searcher().get_version() > version_123)
+			{
+				real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc);
+				real_tls_get_value = hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
+			}
+			else if (get_war3_searcher().get_version() > version_121b)
+			{
+				real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_122);
+				real_tls_get_value = hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
+			}
+			else
+			{
+				real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_120);
+				real_tls_get_value = hook::iat(L"War3.exe", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
+			}
+			return true;
 		}
 
-		s_first = false;
-
-		if (get_war3_searcher().get_version() > version_123)
-		{
-			real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc);
-			real_tls_get_value = hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
-		}
-		else if (get_war3_searcher().get_version() > version_121b)
-		{
-			real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_122);
-			real_tls_get_value = hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
-		}
-		else
-		{
-			real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_120);
-			real_tls_get_value = hook::iat(L"War3.exe", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
-		}
-
-		return true;
+		return false;
 	}
 
 }}}

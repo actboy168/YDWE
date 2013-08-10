@@ -400,6 +400,9 @@
     <ClInclude Include="ydwe\warcraft3\detail\nf_register.h">
       <Filter>ydwe\warcraft3\detail</Filter>
     </ClInclude>
+    <ClInclude Include="ydwe\util\do_once.h">
+      <Filter>ydwe\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\YDWEVersion\common.rc">
