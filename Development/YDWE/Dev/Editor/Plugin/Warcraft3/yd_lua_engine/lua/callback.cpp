@@ -1,4 +1,6 @@
 #include "../lua/callback.h"
+#include <ydwe/warcraft3/jass/trampoline_function.h>
+#include <Windows.h>
 
 _BASE_BEGIN
 namespace warcraft3 { namespace lua_engine {
@@ -50,23 +52,15 @@ namespace warcraft3 { namespace lua_engine {
 	{ }
 
 	callback::callback(lua::state* ls, uint32_t index)
-		: ref_(create(ls, index))
-	{ }
+		: ref_(0)
+	{ 
+		ls->pushvalue(index);
+		ref_ = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
+	}
 
 	callback::callback(uint32_t ref)
 		: ref_(ref)
 	{ }
-
-	callback::operator uint32_t()
-	{
-		return ref_;
-	}
-
-	int callback::create(lua::state* ls, uint32_t index)
-	{
-		ls->pushvalue(index);
-		return luaL_ref(ls->self(), LUA_REGISTRYINDEX);
-	}
 
 	bool callback::call_pre() const
 	{
@@ -117,6 +111,21 @@ namespace warcraft3 { namespace lua_engine {
 		return retval;
 	}
 
+	uint32_t __fastcall jass_callback(uint32_t param)
+	{
+		callback that(param);
+		if (!that.call_pre())
+		{
+			return 0;
+		}
+		return (0 != that.call(0, true)) ? 1: 0;
+	}
+
+	uint32_t cfunction_to_code(lua::state* ls, uint32_t index)
+	{
+		ls->pushvalue(index);
+		return jass::trampoline_create(jass_callback, (uintptr_t)luaL_ref(ls->self(), LUA_REGISTRYINDEX));
+	}
 }}
 
 _BASE_END

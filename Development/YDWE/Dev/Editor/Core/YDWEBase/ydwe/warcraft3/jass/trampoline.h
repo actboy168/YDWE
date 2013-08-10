@@ -3,9 +3,10 @@
 #include <ydwe/config.h>
 #include <ydwe/warcraft3/jass/opcode.h>
 
-_BASE_BEGIN namespace warcraft3 { namespace jass {
+_BASE_BEGIN 
+namespace warcraft3 { namespace jass {
 
-	struct _BASE_API trampoline : public opcode_writer<16>
+	struct trampoline : public opcode_writer<16>
 	{
 		typedef opcode_writer<16> mybase;
 
@@ -18,4 +19,5 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 		uint64_t                trampoline_;
 		uintptr_t               code_;
 	};
-}}}
+}}
+_BASE_END

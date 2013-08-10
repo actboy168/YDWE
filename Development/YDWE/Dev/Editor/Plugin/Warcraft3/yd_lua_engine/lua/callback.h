@@ -7,8 +7,10 @@
 _BASE_BEGIN
 namespace warcraft3 { namespace lua_engine {
 
-	lua::state*& instance();	
-	void         do_buffer(const char* name, const char* buffer, size_t size);
+	lua::state*&        instance();	
+	void                do_buffer(const char* name, const char* buffer, size_t size);
+	uint32_t __fastcall jass_callback(uint32_t param);
+	uint32_t            cfunction_to_code(lua::state* ls, uint32_t index);
 
 	struct callback
 	{
@@ -16,8 +18,6 @@ namespace warcraft3 { namespace lua_engine {
 		callback();
 		callback(lua::state* ls, uint32_t index);
 		callback(uint32_t ref);
-		operator uint32_t();
-		int      create(lua::state* ls, uint32_t index);
 		bool     call_pre() const;
 		uint32_t call(int nargs, bool result = true) const;
 

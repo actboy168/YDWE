@@ -1,6 +1,5 @@
 #include "../lua/jassbind.h"
 #include "../lua/callback.h"
-#include "../main/jump_func.h"
 #include <ydwe/warcraft3/hashtable.h>
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <ydwe/warcraft3/native_function.h>
@@ -67,7 +66,7 @@ namespace warcraft3 { namespace lua_engine {
 				param.push(i, lj->read_boolean(i+1));
 				break;
 			case native_function::TYPE_CODE:
-				param.push(i, (jass::jcode_t)util::singleton_nonthreadsafe<jump_func>::instance().create(callback(lj, i+1), 'YDWE'));
+				param.push(i, (jass::jcode_t)cfunction_to_code(lj, i+1));
 				break;
 			case native_function::TYPE_HANDLE:
 				param.push(i, lj->read_handle(i+1));

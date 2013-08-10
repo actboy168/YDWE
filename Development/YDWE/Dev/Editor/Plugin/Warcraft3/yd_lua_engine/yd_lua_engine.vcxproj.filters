@@ -41,9 +41,6 @@
     <ClCompile Include="misc\storm.cpp">
       <Filter>bind\misc</Filter>
     </ClCompile>
-    <ClCompile Include="main\jump_func.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
     <ClCompile Include="main\libs_jass.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
@@ -168,9 +165,6 @@
     </ClInclude>
     <ClInclude Include="misc\storm.h">
       <Filter>bind\misc</Filter>
-    </ClInclude>
-    <ClInclude Include="main\jump_func.h">
-      <Filter>bind\main</Filter>
     </ClInclude>
     <ClInclude Include="main\lua_loader.h">
       <Filter>bind\main</Filter>

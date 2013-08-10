@@ -197,6 +197,9 @@
     <ClCompile Include="ydwe\util\detail\utf8_codecvt.cpp">
       <Filter>ydwe\util\detail</Filter>
     </ClCompile>
+    <ClCompile Include="ydwe\warcraft3\jass\trampoline_function.cpp">
+      <Filter>ydwe\warcraft3\jass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ydwe\util\detail\codecvt.h">
@@ -384,6 +387,9 @@
     </ClInclude>
     <ClInclude Include="ydwe\util\detail\utf8_codecvt.h">
       <Filter>ydwe\util\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\warcraft3\jass\trampoline_function.h">
+      <Filter>ydwe\warcraft3\jass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

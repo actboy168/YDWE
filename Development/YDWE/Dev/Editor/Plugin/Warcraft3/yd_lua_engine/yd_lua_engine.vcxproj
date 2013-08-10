@@ -216,7 +216,6 @@
     <ClCompile Include="lua\helper.cpp" />
     <ClCompile Include="lua\jassbind.cpp" />
     <ClCompile Include="lua\callback.cpp" />
-    <ClCompile Include="main\jump_func.cpp" />
     <ClCompile Include="main\libs_japi.cpp" />
     <ClCompile Include="main\libs_jass.cpp" />
     <ClCompile Include="main\libs_jass_ext.cpp" />
@@ -256,7 +255,6 @@
     <ClInclude Include="lua\helper.h" />
     <ClInclude Include="lua\jassbind.h" />
     <ClInclude Include="lua\callback.h" />
-    <ClInclude Include="main\jump_func.h" />
     <ClInclude Include="main\lua_loader.h" />
     <ClInclude Include="main\open_lua_engine.h" />
     <ClInclude Include="misc\storm.h" />
