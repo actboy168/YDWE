@@ -404,7 +404,7 @@
       <Filter>ydwe\util</Filter>
     </ClInclude>
     <ClInclude Include="ydwe\util\string_ref.h">
-      <Filter>ydwe\win</Filter>
+      <Filter>ydwe\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
