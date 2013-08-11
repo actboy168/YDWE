@@ -207,6 +207,7 @@
     <ClInclude Include="ydwe\util\do_once.h" />
     <ClInclude Include="ydwe\util\signal.h" />
     <ClInclude Include="ydwe\util\singleton.h" />
+    <ClInclude Include="ydwe\util\string_ref.h" />
     <ClInclude Include="ydwe\util\unicode.h" />
     <ClInclude Include="ydwe\util\noncopyable.h" />
     <ClInclude Include="ydwe\warcraft3\detail\memory_search.h" />

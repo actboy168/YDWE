@@ -403,6 +403,9 @@
     <ClInclude Include="ydwe\util\do_once.h">
       <Filter>ydwe\util</Filter>
     </ClInclude>
+    <ClInclude Include="ydwe\util\string_ref.h">
+      <Filter>ydwe\win</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\YDWEVersion\common.rc">
