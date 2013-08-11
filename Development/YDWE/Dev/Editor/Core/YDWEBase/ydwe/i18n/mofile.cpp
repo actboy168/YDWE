@@ -1,11 +1,12 @@
 #include <ydwe/i18n/mofile.h>
 #include <ydwe/file/steam.h>
 
-_BASE_BEGIN namespace i18n {
+_BASE_BEGIN 
+namespace i18n {
 
 	namespace detail
 	{
-		bool mofile_read_strings_array(util::buffer& buf, uint32_t number_of_strings, uint32_t offset, std::string* result)
+		bool mofile_read_strings_array(util::buffer& buf, uint32_t number_of_strings, uint32_t offset, boost::string_ref* result)
 		{
 			buf.seek(offset, std::ios::beg);
 
@@ -39,59 +40,69 @@ _BASE_BEGIN namespace i18n {
 
 			buf.seek(first_offset, std::ios::beg);
 
-			std::unique_ptr<char []> string_array(new char[string_array_size]);
-			memcpy(string_array.get(), buf.reads_ptr(string_array_size), string_array_size);
+			boost::string_ref string_array(buf.reads_ptr(string_array_size), string_array_size);
 
-			const char* iter = string_array.get();
+			boost::string_ref::iterator iter = string_array.begin();
 			for (uint32_t i = 0; i < number_of_strings; i++)
 			{
-				const char* end_iter = iter + strings_lengths[i] + 1;
-				result[i] = std::string(iter, end_iter);
-				iter = end_iter;
+				size_t len = strings_lengths[i] + 1;
+				result[i] = boost::string_ref(iter, len);
+				iter += len;
 			}
 
 			return true;
 		}
 	}
 
-	mofile* mofile::read(util::buffer& buf)
+	void mofile::reset(uint32_t number_of_strings)
 	{
-		uint32_t magic_number = buf.read<uint32_t>();
+		number_of_strings_ = number_of_strings;
+		sorted_orig_strings_.reset(new boost::string_ref[number_of_strings_]);
+		translated_strings_.reset(new boost::string_ref[number_of_strings_]);
+	}
+
+	bool mofile::read()
+	{
+		uint32_t magic_number = buffer().read<uint32_t>();
 		if ((magic_number != 0x950412DE) && (magic_number != 0xDE120495))
-			return nullptr;
+			return false;
 
-		uint32_t file_format_revision = buf.read<uint32_t>();
+		uint32_t file_format_revision = buffer().read<uint32_t>();
 		if (file_format_revision != 0)
-			return nullptr;
+			return false;
 
-		std::unique_ptr<mofile> mf(new mofile(buf.read<uint32_t>()));
+		reset(buffer().read<uint32_t>());
 
-		if (mf->number_of_strings_ == 0)
+		if (this->number_of_strings_ == 0)
 		{
-			return nullptr;
+			return false;
 		}
 
-		uint32_t offset_orig_table  = buf.read<uint32_t>();
-		uint32_t offset_trans_table = buf.read<uint32_t>();
+		uint32_t offset_orig_table  = buffer().read<uint32_t>();
+		uint32_t offset_trans_table = buffer().read<uint32_t>();
 
-		if (!detail::mofile_read_strings_array(buf, mf->number_of_strings_, offset_orig_table, mf->sorted_orig_strings_.get()))
+		if (!detail::mofile_read_strings_array(buffer(), this->number_of_strings_, offset_orig_table, this->sorted_orig_strings_.get()))
 		{
-			return nullptr;
+			return false;
 		}
 
-		if (!detail::mofile_read_strings_array(buf, mf->number_of_strings_, offset_trans_table, mf->translated_strings_.get()))
+		if (!detail::mofile_read_strings_array(buffer(), this->number_of_strings_, offset_trans_table, this->translated_strings_.get()))
 		{
-			return nullptr;
+			return false;
 		}
 
-		return mf.release();
+		return true;
 	}
 
 	mofile* mofile::read(boost::filesystem::path const& filename)
 	{
 		try {
-			util::buffer buf = file::read_steam(filename).read<util::buffer>();
-			return read(buf);
+			std::unique_ptr<mofile> mf(new mofile());
+			mf->buffer() = file::read_steam(filename).read<util::buffer>();
+			if (mf->read())
+			{
+				return mf.release();
+			}
 		}
 		catch (...) {
 		}
@@ -102,8 +113,12 @@ _BASE_BEGIN namespace i18n {
 	mofile* mofile::read(const char* filename)
 	{
 		try {
-			util::buffer buf = file::read_steam(filename).read<util::buffer>();
-			return read(buf);
+			std::unique_ptr<mofile> mf(new mofile());
+			mf->buffer() = file::read_steam(filename).read<util::buffer>();
+			if (mf->read())
+			{
+				return mf.release();
+			}
 		}
 		catch (...) {
 		}
@@ -111,10 +126,10 @@ _BASE_BEGIN namespace i18n {
 		return nullptr;
 	}
 
-	const std::string* mofile::get_translated_string(const std::string& orig) const
+	const boost::string_ref* mofile::get_translated_string(const boost::string_ref& orig) const
 	{
-		const std::string* end_iter = sorted_orig_strings_.get() + number_of_strings_;
-		const std::string* orig_str_ptr = std::lower_bound((const std::string*)sorted_orig_strings_.get(), end_iter, orig);
+		const boost::string_ref* end_iter = sorted_orig_strings_.get() + number_of_strings_;
+		const boost::string_ref* orig_str_ptr = std::lower_bound((const boost::string_ref*)sorted_orig_strings_.get(), end_iter, orig);
 		if (!orig_str_ptr || (orig_str_ptr == end_iter))
 		{
 			return nullptr;
@@ -124,4 +139,6 @@ _BASE_BEGIN namespace i18n {
 			return &translated_strings_[orig_str_ptr - sorted_orig_strings_.get()];
 		}
 	}
-}}
+}
+
+_BASE_END

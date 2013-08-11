@@ -134,12 +134,13 @@ _BASE_BEGIN namespace i18n {
 			return orig_str;
 		}
 
-		const std::string* result = mf->get_translated_string(orig_str);
+		const boost::string_ref* result = mf->get_translated_string(orig_str);
 		if (!result)
 		{
 			return orig_str;
 		}
 
-		return result->c_str();
+		static std::string s_dummy(result->begin(), result->end());
+		return s_dummy.c_str();
 	}
 }}

@@ -63,6 +63,30 @@ _BASE_BEGIN namespace util {
 		~buffer()
 		{ }
 
+		buffer& operator=(const buffer& source)
+		{
+			if (this != &source)
+			{
+				buf_ = source.buf_;
+				cur_ = buf_.begin();
+				end_ = buf_.end();
+			}
+
+			return *this;
+		}
+
+		buffer& operator=(buffer&& source)
+		{
+			if (this != &source)
+			{
+				buf_ = std::move(source.buf_);
+				cur_ = buf_.begin();
+				end_ = buf_.end();
+			}
+
+			return *this;
+		}
+
 		void reset()
 		{
 			cur_ = buf_.begin();
