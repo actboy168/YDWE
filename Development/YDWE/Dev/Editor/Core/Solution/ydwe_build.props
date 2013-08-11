@@ -6,17 +6,17 @@
     <OpenSource>$(YDWE)\..\..\..\OpenSource\</OpenSource>
     <ThirdParty>$(YDWE)\..\..\..\ThirdParty\</ThirdParty>
     <BuildDir>$(YDWE)\Editor\Build\</BuildDir>
-    <BuildObjDir>$(BuildDir)\obj\$(Configuration)\</BuildObjDir>
-    <BuildBinDir>$(BuildDir)\bin\$(Configuration)\</BuildBinDir>
-    <CoreBin>$(BuildBinDir)\bin\</CoreBin>
-    <CoreObj>$(BuildObjDir)\Core\$(ProjectName)\</CoreObj>
-    <LuaPluginBin>$(BuildBinDir)\bin\modules\</LuaPluginBin>
-    <LuaPluginObj>$(BuildObjDir)\Lua\$(ProjectName)\</LuaPluginObj>
-    <Warcraft3PluginBin>$(BuildBinDir)\plugin\warcraft3\</Warcraft3PluginBin>
-    <Warcraft3PluginObj>$(BuildObjDir)\Warcraft3\$(ProjectName)\</Warcraft3PluginObj>
-    <WEPluginBin>$(BuildBinDir)\plugin\</WEPluginBin>
-    <WEPluginObj>$(BuildObjDir)\WE\$(ProjectName)\</WEPluginObj>
-    <UIObj>$(BuildDir)\obj\UI\$(ProjectName)\$(Configuration)\</UIObj>
+    <BuildObjDir>$(BuildDir)obj\$(Configuration)\</BuildObjDir>
+    <BuildBinDir>$(BuildDir)bin\$(Configuration)\</BuildBinDir>
+    <CoreBin>$(BuildBinDir)bin\</CoreBin>
+    <CoreObj>$(BuildObjDir)Core\$(ProjectName)\</CoreObj>
+    <LuaPluginBin>$(BuildBinDir)bin\modules\</LuaPluginBin>
+    <LuaPluginObj>$(BuildObjDir)Lua\$(ProjectName)\</LuaPluginObj>
+    <Warcraft3PluginBin>$(BuildBinDir)plugin\warcraft3\</Warcraft3PluginBin>
+    <Warcraft3PluginObj>$(BuildObjDir)Warcraft3\$(ProjectName)\</Warcraft3PluginObj>
+    <WEPluginBin>$(BuildBinDir)plugin\</WEPluginBin>
+    <WEPluginObj>$(BuildObjDir)WE\$(ProjectName)\</WEPluginObj>
+    <UIObj>$(BuildDir)obj\UI\$(ProjectName)\$(Configuration)\</UIObj>
   </PropertyGroup>
   <PropertyGroup>
     <OutDir>$(CoreBin)</OutDir>
