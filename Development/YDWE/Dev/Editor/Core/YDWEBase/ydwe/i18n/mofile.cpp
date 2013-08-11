@@ -6,7 +6,7 @@ namespace i18n {
 
 	namespace detail
 	{
-		bool mofile_read_strings_array(util::buffer_reader<>& reader, uint32_t number_of_strings, uint32_t offset, boost::string_ref* result)
+		bool mofile_read_strings_array(util::buffer_reader& reader, uint32_t number_of_strings, uint32_t offset, boost::string_ref* result)
 		{
 			reader.seek(offset, std::ios::beg);
 
@@ -63,7 +63,7 @@ namespace i18n {
 
 	bool mofile::read()
 	{
-		util::buffer_reader<> reader(this->buffer_);
+		util::buffer_reader reader(this->buffer_);
 
 		uint32_t magic_number = reader.read<uint32_t>();
 		if ((magic_number != 0x950412DE) && (magic_number != 0xDE120495))

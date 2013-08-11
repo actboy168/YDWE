@@ -68,9 +68,9 @@ namespace util {
 		}
 	};
 
-	template <class BufferT = buffer>
 	class buffer_reader
 	{
+		typedef buffer BufferT;
 	public:
 		enum status
 		{
@@ -78,10 +78,10 @@ namespace util {
 			stream_eof,
 		};
 
-		typedef typename BufferT::buffer_type    buffer_type;
-		typedef typename BufferT::iterator       iterator;
-		typedef typename BufferT::const_iterator const_iterator;
-		typedef typename BufferT::value_type     value_type;
+		typedef BufferT::buffer_type    buffer_type;
+		typedef BufferT::iterator       iterator;
+		typedef BufferT::const_iterator const_iterator;
+		typedef BufferT::value_type     value_type;
 
 		buffer_reader(const BufferT& b)
 			: beg_(b.begin())
@@ -186,7 +186,7 @@ namespace util {
 		template <>
 		std::string read<std::string>(status& ec)
 		{
-			iterator start = cur_;
+			const_iterator start = cur_;
 			value_type c = get(ec);
 			while (ec != stream_eof && c != '\0') { c = get(ec); }
 			return std::move(std::string(start, cur_));
