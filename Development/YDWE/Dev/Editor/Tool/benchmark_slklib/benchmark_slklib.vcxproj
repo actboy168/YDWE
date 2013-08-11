@@ -86,11 +86,12 @@ xcopy "$(CoreBin)SlkLib.lib" "$(OutDir)SlkLib.lib" /d /y /e
 xcopy "$(CoreBin)YDWEBase.dll" "$(OutDir)YDWEBase.dll" /d /y /e
 xcopy "$(CoreBin)YDWEBase.pdb" "$(OutDir)YDWEBase.pdb" /d /y /e
 xcopy "$(CoreBin)YDWEBase.lib" "$(OutDir)YDWEBase.lib" /d /y /e
-xcopy "$(OpenSource)StormLib\Current\bin\$(PlatformName)\$(ConfigurationName)\StormLib.dll" "$(OutDir)StormLib.dll" /d /y /e
-xcopy "$(OpenSource)StormLib\Current\lib\$(PlatformName)\$(ConfigurationName)\StormLib_dll.lib" "$(OutDir)StormLib_dll.lib" /d /y /e
-xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_filesystem-vc100-mt-gd-1_53.dll" "$(OutDir)boost_filesystem-vc100-mt-gd-1_53.dll" /d /y /e
-xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_system-vc100-mt-gd-1_53.dll" "$(OutDir)boost_system-vc100-mt-gd-1_53.dll" /d /y /e
-xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_timer-vc100-mt-gd-1_53.dll" "$(OutDir)boost_timer-vc100-mt-gd-1_53.dll" /d /y /e
+echo "F" | xcopy "$(OpenSource)StormLib\Current\bin\$(PlatformName)\$(ConfigurationName)\StormLib.dll" "$(OutDir)StormLib.dll" /d /y /e
+echo "F" | xcopy "$(OpenSource)StormLib\Current\lib\$(PlatformName)\$(ConfigurationName)\StormLib_dll.lib" "$(OutDir)StormLib_dll.lib" /d /y /e
+echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_filesystem-vc100-mt-gd-1_53.dll" "$(OutDir)boost_filesystem-vc100-mt-gd-1_53.dll" /d /y /e
+echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_system-vc100-mt-gd-1_53.dll" "$(OutDir)boost_system-vc100-mt-gd-1_53.dll" /d /y /e
+echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_timer-vc100-mt-gd-1_53.dll" "$(OutDir)boost_timer-vc100-mt-gd-1_53.dll" /d /y /e
+echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_chrono-vc100-mt-gd-1_53.dll" "$(OutDir)boost_chrono-vc100-mt-gd-1_53.dll" /d /y /e
 
 
 </Command>

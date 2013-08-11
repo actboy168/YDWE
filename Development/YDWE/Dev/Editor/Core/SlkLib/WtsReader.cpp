@@ -22,7 +22,7 @@ namespace slk
 		std::string value;
 
 		TextReader::RemoveBom(reader);
-		TextReader::EachLine<std::string>(reader, [&](std::string& line)
+		TextReader::EachLine(reader, [&](std::string& line)
 		{
 			switch (state)
 			{

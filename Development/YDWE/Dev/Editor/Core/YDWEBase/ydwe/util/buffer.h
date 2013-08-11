@@ -118,19 +118,6 @@ namespace util {
 			cur_ = beg_;
 		}
 
-		value_type get(status& ec)
-		{
-			if (!(cur_ != end_))
-			{
-				ec = stream_eof;
-				return 0;
-			}
-
-			value_type c = *cur_;
-			++cur_;
-			return static_cast<value_type>(c);
-		}
-
 		const value_type* reads_ptr(size_t n)
 		{
 			if (end_ - cur_ <  static_cast<buffer_type::difference_type>(n))
@@ -187,8 +174,8 @@ namespace util {
 		std::string read<std::string>(status& ec)
 		{
 			const_iterator start = cur_;
-			value_type c = get(ec);
-			while (ec != stream_eof && c != '\0') { c = get(ec); }
+			value_type c = read<value_type>(ec);
+			while (ec != stream_eof && c != '\0') { c = read<value_type>(ec); }
 			return std::move(std::string(start, cur_));
 		}
 

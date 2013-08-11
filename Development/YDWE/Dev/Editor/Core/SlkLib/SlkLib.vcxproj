@@ -91,6 +91,7 @@
     <ClCompile Include="ObjReader.cpp" />
     <ClCompile Include="Sequence.cpp" />
     <ClCompile Include="SlkReader.cpp" />
+    <ClCompile Include="TextReader.cpp" />
     <ClCompile Include="TxtReader.cpp" />
     <ClCompile Include="VariableData.cpp" />
     <ClCompile Include="WesReader.cpp" />

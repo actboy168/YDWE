@@ -253,7 +253,7 @@ namespace slk
 			void read(buffer_reader& reader)
 			{
 				bool is_found_b = false;
-				TextReader::EachLine<std::string>(reader, [&](std::string& line)
+				TextReader::EachLine(reader, [&](std::string& line)
 				{
 					uint8_t type = read_type(line);
 					if (!is_found_b)

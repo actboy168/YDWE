@@ -19,7 +19,7 @@ namespace slk
 		{
 			typename TableT::mapped_type* object = nullptr;
 			TextReader::RemoveBom(reader);
-			TextReader::EachLine<std::string>(reader, [&](std::string& line)
+			TextReader::EachLine(reader, [&](std::string& line)
 			{
 				size_t pos = line.find("//");
 				if (pos != std::string::npos)
