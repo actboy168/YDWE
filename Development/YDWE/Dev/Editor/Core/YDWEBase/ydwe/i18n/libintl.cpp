@@ -105,12 +105,12 @@ _BASE_BEGIN namespace i18n {
 		return manager_s::instance().set_default(domain);
 	}
 
-	const char* gettext(const char* orig_str)
+	boost::string_ref gettext(const char* orig_str)
 	{
 		return dgettext(nullptr, orig_str);
 	}
 
-	const char* dgettext(const char* domain, const char* orig_str)
+	boost::string_ref dgettext(const char* domain, const char* orig_str)
 	{
 		if (!orig_str)
 		{
@@ -140,7 +140,6 @@ _BASE_BEGIN namespace i18n {
 			return orig_str;
 		}
 
-		static std::string s_dummy(result->begin(), result->end());
-		return s_dummy.c_str();
+		return *result;
 	}
 }}
