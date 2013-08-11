@@ -25,20 +25,11 @@ namespace i18n {
 		std::unique_ptr<boost::string_ref []> translated_strings_;
 
 	private:
-		mofile()
+		mofile(util::buffer&& b)
+			: buffer_(std::move(b))
 		{ }
 
-		util::buffer& buffer()
-		{
-			return buffer_;
-		}
-
-		util::buffer const& buffer() const
-		{
-			return buffer_;
-		}
-
-		void reset(uint32_t number_of_strings);
+		void initialize(uint32_t number_of_strings);
 		bool read();
 
 	public:

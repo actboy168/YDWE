@@ -54,7 +54,7 @@ namespace i18n {
 		}
 	}
 
-	void mofile::reset(uint32_t number_of_strings)
+	void mofile::initialize(uint32_t number_of_strings)
 	{
 		number_of_strings_ = number_of_strings;
 		sorted_orig_strings_.reset(new boost::string_ref[number_of_strings_]);
@@ -63,7 +63,7 @@ namespace i18n {
 
 	bool mofile::read()
 	{
-		util::buffer_reader<> reader(buffer());
+		util::buffer_reader<> reader(this->buffer_);
 
 		uint32_t magic_number = reader.read<uint32_t>();
 		if ((magic_number != 0x950412DE) && (magic_number != 0xDE120495))
@@ -73,7 +73,7 @@ namespace i18n {
 		if (file_format_revision != 0)
 			return false;
 
-		reset(reader.read<uint32_t>());
+		initialize(reader.read<uint32_t>());
 
 		if (this->number_of_strings_ == 0)
 		{
@@ -99,8 +99,7 @@ namespace i18n {
 	mofile* mofile::read(boost::filesystem::path const& filename)
 	{
 		try {
-			std::unique_ptr<mofile> mf(new mofile());
-			mf->buffer() = file::read_steam(filename).read<util::buffer>();
+			std::unique_ptr<mofile> mf(new mofile(file::read_steam(filename).read<util::buffer>()));
 			if (mf->read())
 			{
 				return mf.release();
@@ -115,8 +114,7 @@ namespace i18n {
 	mofile* mofile::read(const char* filename)
 	{
 		try {
-			std::unique_ptr<mofile> mf(new mofile());
-			mf->buffer() = file::read_steam(filename).read<util::buffer>();
+			std::unique_ptr<mofile> mf(new mofile(file::read_steam(filename).read<util::buffer>()));
 			if (mf->read())
 			{
 				return mf.release();
