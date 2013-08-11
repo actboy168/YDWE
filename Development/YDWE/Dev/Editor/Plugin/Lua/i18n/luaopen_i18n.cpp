@@ -11,6 +11,9 @@ int luaopen_i18n(lua_State *pState)
 
 	module(pState, "i18n")
 	[
+		class_<ydwe::util::conv_method>("conv_method")
+			.def(constructor<uint32_t>())
+			,
 		def("gettext",        &ydwe::i18n::gettext),
 		def("dgettext",       &ydwe::i18n::dgettext),
 		def("textdomain",     &ydwe::i18n::textdomain),
