@@ -6,9 +6,9 @@ namespace i18n {
 
 	namespace detail
 	{
-		bool mofile_read_strings_array(util::buffer& buf, uint32_t number_of_strings, uint32_t offset, boost::string_ref* result)
+		bool mofile_read_strings_array(util::buffer_reader<>& reader, uint32_t number_of_strings, uint32_t offset, boost::string_ref* result)
 		{
-			buf.seek(offset, std::ios::beg);
+			reader.seek(offset, std::ios::beg);
 
 			std::unique_ptr<uint32_t []> strings_lengths(new uint32_t[number_of_strings]);
 
@@ -16,8 +16,8 @@ namespace i18n {
 			uint32_t last_offset  = 0;
 			for (uint32_t i = 0; i < number_of_strings; i++)
 			{
-				uint32_t current_length = buf.read<uint32_t>();
-				uint32_t current_offset = buf.read<uint32_t>();
+				uint32_t current_length = reader.read<uint32_t>();
+				uint32_t current_offset = reader.read<uint32_t>();
 
 				strings_lengths[i] = current_length;
 
@@ -38,9 +38,9 @@ namespace i18n {
 				return false;
 			}
 
-			buf.seek(first_offset, std::ios::beg);
+			reader.seek(first_offset, std::ios::beg);
 
-			boost::string_ref string_array(buf.reads_ptr(string_array_size), string_array_size);
+			boost::string_ref string_array(reader.reads_ptr(string_array_size), string_array_size);
 
 			boost::string_ref::iterator iter = string_array.begin();
 			for (uint32_t i = 0; i < number_of_strings; i++)
@@ -63,30 +63,32 @@ namespace i18n {
 
 	bool mofile::read()
 	{
-		uint32_t magic_number = buffer().read<uint32_t>();
+		util::buffer_reader<> reader(buffer());
+
+		uint32_t magic_number = reader.read<uint32_t>();
 		if ((magic_number != 0x950412DE) && (magic_number != 0xDE120495))
 			return false;
 
-		uint32_t file_format_revision = buffer().read<uint32_t>();
+		uint32_t file_format_revision = reader.read<uint32_t>();
 		if (file_format_revision != 0)
 			return false;
 
-		reset(buffer().read<uint32_t>());
+		reset(reader.read<uint32_t>());
 
 		if (this->number_of_strings_ == 0)
 		{
 			return false;
 		}
 
-		uint32_t offset_orig_table  = buffer().read<uint32_t>();
-		uint32_t offset_trans_table = buffer().read<uint32_t>();
+		uint32_t offset_orig_table  = reader.read<uint32_t>();
+		uint32_t offset_trans_table = reader.read<uint32_t>();
 
-		if (!detail::mofile_read_strings_array(buffer(), this->number_of_strings_, offset_orig_table, this->sorted_orig_strings_.get()))
+		if (!detail::mofile_read_strings_array(reader, this->number_of_strings_, offset_orig_table, this->sorted_orig_strings_.get()))
 		{
 			return false;
 		}
 
-		if (!detail::mofile_read_strings_array(buffer(), this->number_of_strings_, offset_trans_table, this->translated_strings_.get()))
+		if (!detail::mofile_read_strings_array(reader, this->number_of_strings_, offset_trans_table, this->translated_strings_.get()))
 		{
 			return false;
 		}

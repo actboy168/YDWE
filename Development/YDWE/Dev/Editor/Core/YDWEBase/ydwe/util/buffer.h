@@ -4,16 +4,12 @@
 #include <string>
 #include <vector>
 
-_BASE_BEGIN namespace util {
+_BASE_BEGIN 
+namespace util {
 
 	class buffer
 	{
 	public:
-		enum status
-		{
-			normal = 0,
-			stream_eof,
-		};
 		typedef std::vector<char>           buffer_type;
 		typedef buffer_type::iterator       iterator;
 		typedef buffer_type::const_iterator const_iterator;
@@ -23,75 +19,33 @@ _BASE_BEGIN namespace util {
 
 	protected:
 		buffer_type buf_;
-		iterator    cur_;
-		iterator    end_;
 
 	public:
 		buffer()
 			: buf_()
-			, cur_(buf_.begin())
-			, end_(buf_.end())
 		{ }
 
 		buffer(buffer&& source)
 			: buf_(std::move(source.buf_))
-			, cur_(buf_.begin())
-			, end_(buf_.end())
 		{ }
 
 		template <class Source>
 		buffer(Source const& source)
 			: buf_(source.begin(), source.end())
-			, cur_(buf_.begin())
-			, end_(buf_.end())
 		{ }
 
 		template <class InputIterator>
 		buffer(InputIterator begin, InputIterator end)
 			: buf_(begin, end)
-			, cur_(buf_.begin())
-			, end_(buf_.end())
 		{ }
 
 		template <class Elem>
 		buffer(Elem const* from, size_t length)
 			: buf_(static_cast<value_type const*>(from), static_cast<value_type const*>(from)+length)
-			, cur_(buf_.begin())
-			, end_(buf_.end())
 		{ }
 
 		~buffer()
 		{ }
-
-		buffer& operator=(const buffer& source)
-		{
-			if (this != &source)
-			{
-				buf_ = source.buf_;
-				cur_ = buf_.begin();
-				end_ = buf_.end();
-			}
-
-			return *this;
-		}
-
-		buffer& operator=(buffer&& source)
-		{
-			if (this != &source)
-			{
-				buf_ = std::move(source.buf_);
-				cur_ = buf_.begin();
-				end_ = buf_.end();
-			}
-
-			return *this;
-		}
-
-		void reset()
-		{
-			cur_ = buf_.begin();
-			end_ = buf_.end();
-		}
 
 		iterator begin()
 		{
@@ -112,6 +66,57 @@ _BASE_BEGIN namespace util {
 		{
 			return buf_.end();
 		}
+	};
+
+	template <class BufferT = buffer>
+	class buffer_reader
+	{
+	public:
+		enum status
+		{
+			normal = 0,
+			stream_eof,
+		};
+
+		typedef typename BufferT::buffer_type    buffer_type;
+		typedef typename BufferT::iterator       iterator;
+		typedef typename BufferT::const_iterator const_iterator;
+		typedef typename BufferT::value_type     value_type;
+
+		buffer_reader(const BufferT& b)
+			: beg_(b.begin())
+			, end_(b.end())
+			, cur_(beg_)
+		{ }
+
+		buffer_reader& operator=(const buffer_reader& source)
+		{
+			if (this != &source)
+			{
+				beg_ = source.beg_;
+				cur_ = source.cur_;
+				end_ = source.end_;
+			}
+
+			return *this;
+		}
+
+		buffer_reader& operator=(buffer_reader&& source)
+		{
+			if (this != &source)
+			{
+				beg_ = source.beg_;
+				cur_ = source.cur_;
+				end_ = source.end_;
+			}
+
+			return *this;
+		}
+
+		void reset()
+		{
+			cur_ = beg_;
+		}
 
 		value_type get(status& ec)
 		{
@@ -126,23 +131,23 @@ _BASE_BEGIN namespace util {
 			return static_cast<value_type>(c);
 		}
 
-		value_type* reads_ptr(size_t n)
+		const value_type* reads_ptr(size_t n)
 		{
 			if (end_ - cur_ <  static_cast<buffer_type::difference_type>(n))
 			{
 				throw exception("buffer overflow.");
 			}
 
-			value_type* ret = &*cur_;
+			const value_type* ret = &*cur_;
 			cur_ += n;
 
 			return ret;
 		}
 
 		template <class _Ty>
-		_Ty* read_ptr()
+		const _Ty* read_ptr()
 		{
-			return reinterpret_cast<_Ty*>(reads_ptr(sizeof(_Ty)));
+			return reinterpret_cast<const _Ty*>(reads_ptr(sizeof(_Ty)));
 		}
 
 		template <class _Ty>
@@ -151,7 +156,7 @@ _BASE_BEGIN namespace util {
 			return * read_ptr<_Ty>();
 		}
 
-		value_type* reads_ptr(size_t n, status& ec)
+		const value_type* reads_ptr(size_t n, status& ec)
 		{
 			if (end_ - cur_ <  static_cast<buffer_type::difference_type>(n))
 			{
@@ -159,23 +164,39 @@ _BASE_BEGIN namespace util {
 				return nullptr;
 			}
 
-			value_type* ret = &*cur_;
+			const value_type* ret = &*cur_;
 			cur_ += n;
 
 			return ret;
 		}
 
 		template <class _Ty>
-		_Ty* read_ptr(status& ec)
+		const _Ty* read_ptr(status& ec)
 		{
-			return reinterpret_cast<_Ty*>(reads_ptr(sizeof(_Ty), ec));
+			return reinterpret_cast<const _Ty*>(reads_ptr(sizeof(_Ty), ec));
 		}
 
 		template <class _Ty>
 		_Ty read(status& ec)
 		{
-			_Ty* p = read_ptr<_Ty>(ec);
+			const _Ty* p = read_ptr<_Ty>(ec);
 			return p ? *p : _Ty();
+		}
+
+		template <>
+		std::string read<std::string>(status& ec)
+		{
+			iterator start = cur_;
+			value_type c = get(ec);
+			while (ec != stream_eof && c != '\0') { c = get(ec); }
+			return std::move(std::string(start, cur_));
+		}
+
+		template <>
+		std::string read<std::string>()
+		{
+			status ec = normal;
+			return std::move(read<std::string>(ec));
 		}
 
 		void seek(size_t offset, std::ios::seek_dir dir)
@@ -184,11 +205,11 @@ _BASE_BEGIN namespace util {
 			{
 			case  std::ios::beg:
 				{
-					if (end_ - buf_.begin() < static_cast<buffer_type::difference_type>(offset))
+					if (end_ - beg_ < static_cast<buffer_type::difference_type>(offset))
 					{
 						throw exception("buffer overflow.");
 					}
-					cur_ = buf_.begin() + offset;
+					cur_ = beg_ + offset;
 				}
 				break;
 			case  std::ios::cur:
@@ -202,30 +223,21 @@ _BASE_BEGIN namespace util {
 				break;
 			case  std::ios::end:
 				{
-					if (end_ - buf_.begin() < static_cast<buffer_type::difference_type>(offset))
+					if (end_ - beg_ < static_cast<buffer_type::difference_type>(offset))
 					{
 						throw exception("buffer overflow.");
 					}
-					cur_ = buf_.begin() + (end_ - buf_.begin() - offset);
+					cur_ = beg_ + (end_ - beg_ - offset);
 				}
 				break;
 			}
 		}
+
+	private:
+		const_iterator beg_;
+		const_iterator end_;
+		const_iterator cur_;
 	};
 
-	template <>
-	inline std::string buffer::read<std::string>(buffer::status& ec)
-	{
-		iterator start = cur_;
-		value_type c = get(ec);
-		while (ec != stream_eof && c != '\0') { c = get(ec); }
-		return std::move(std::string(start, cur_));
-	}
-
-	template <>
-	inline std::string buffer::read<std::string>()
-	{
-		status ec = normal;
-		return std::move(read<std::string>(ec));
-	}
-}}
+}
+_BASE_END
