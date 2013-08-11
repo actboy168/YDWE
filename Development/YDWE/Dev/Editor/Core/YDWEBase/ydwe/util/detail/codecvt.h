@@ -2,6 +2,7 @@
 
 #include <ydwe/config.h>
 #include <ydwe/util/unicode.h>
+#include <ydwe/util/string_ref.h>
 #include <locale>
 #include <string>
 
@@ -14,6 +15,17 @@ namespace util { namespace detail {
 
 	template<class FromChar, class ToChar> 
 	std::basic_string<ToChar> convert(std::basic_string<FromChar> const& from, const codecvt_type& cvt, conv_method how)
+	{
+		std::basic_string<ToChar> to;
+		if (from.size())
+		{
+			convert(&*from.begin(), &*from.begin() + from.size(), to, cvt, how);
+		}
+		return std::move(to);
+	}
+
+	template<class FromChar, class ToChar> 
+	std::basic_string<ToChar> convert(boost::basic_string_ref<FromChar> const& from, const codecvt_type& cvt, conv_method how)
 	{
 		std::basic_string<ToChar> to;
 		if (from.size())

@@ -23,20 +23,9 @@
 
 namespace fs = boost::filesystem;
 
-template <class Source> 
-inline std::string create_string(Source&& str)
-{
-	return std::move(std::string(str.begin(), str.end()));
-}
 
-template <class Source> 
-inline std::string create_string(const Source& str)
-{
-	return std::move(std::string(str.begin(), str.end()));
-}
-
-#define _(str) ydwe::util::u2a(create_string(ydwe::i18n::gettext(str))).c_str()
-#define __(str) ydwe::util::u2w(create_string(ydwe::i18n::gettext(str))).c_str()
+#define _(str) ydwe::util::u2a_ref(ydwe::i18n::gettext(str)).c_str()
+#define __(str) ydwe::util::u2w_ref(ydwe::i18n::gettext(str)).c_str()
 
 static fs::path gExecutableDirectory;
 static fs::path gWarcraftDirectory;
