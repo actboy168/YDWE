@@ -55,7 +55,7 @@ namespace slk
 					}
 					else
 					{
-						while ((*value.rbegin() == '\n') || (*value.rbegin() == '\r'))
+						while ((!value.empty()) && ((*value.rbegin() == '\n') || (*value.rbegin() == '\r')))
 						{
 							value.pop_back();
 						}
