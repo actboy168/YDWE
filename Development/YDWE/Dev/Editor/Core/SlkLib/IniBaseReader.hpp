@@ -15,11 +15,11 @@ namespace slk
 		}
 
 		template <class TableT>
-		void Read(buffer&& buf, TableT& table)
+		void Read(buffer_reader& reader, TableT& table)
 		{
 			typename TableT::mapped_type* object = nullptr;
-			TextReader::RemoveBom(buf);
-			TextReader::EachLine<std::string>(buf, [&](std::string& line)
+			TextReader::RemoveBom(reader);
+			TextReader::EachLine<std::string>(reader, [&](std::string& line)
 			{
 				size_t pos = line.find("//");
 				if (pos != std::string::npos)

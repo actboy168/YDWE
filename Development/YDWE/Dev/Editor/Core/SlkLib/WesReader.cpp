@@ -5,11 +5,11 @@
 
 namespace slk
 {
-	void WesReader::Read(buffer&& buf, WesTable& table)
+	void WesReader::Read(buffer_reader& reader, WesTable& table)
 	{
 		bool is_WorldEditStrings = false;
-		TextReader::RemoveBom(buf);
-		TextReader::EachLine<std::string>(buf, [&](std::string& line)
+		TextReader::RemoveBom(reader);
+		TextReader::EachLine<std::string>(reader, [&](std::string& line)
 		{
 			size_t pos = line.find("//");
 			if (pos != std::string::npos)

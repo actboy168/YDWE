@@ -4,8 +4,8 @@
 
 namespace slk
 {
-	void IniReader::Read(buffer&& buf, IniTable& table)
+	void IniReader::Read(buffer_reader& reader, IniTable& table)
 	{
-		IniBaseReader::Read(std::forward<buffer>(buf), table);
+		IniBaseReader::Read(reader, table);
 	}
 }

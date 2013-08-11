@@ -528,7 +528,9 @@ namespace slk
 	bool ObjectManager::load(const char* filename, IniTable& table)
 	{
 		try {
-			IniReader::Read(load_file(filename), table);		
+			buffer b = load_file(filename);
+			buffer_reader reader(b);
+			IniReader::Read(reader, table);		
 		}
 		catch (ydwe::exception const&) {
 			return false;
@@ -540,7 +542,7 @@ namespace slk
 	bool ObjectManager::load(const char* filename, SlkTable& table)
 	{
 		try {
-			SlkReader::Read(load_file(filename), table);		
+			table.Read<SlkReader>(load_file(filename));		
 		}
 		catch (ydwe::exception const&) {
 			return false;

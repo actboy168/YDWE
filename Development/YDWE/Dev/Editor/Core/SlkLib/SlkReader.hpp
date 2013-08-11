@@ -7,6 +7,6 @@ namespace slk
 {
 	struct SLKLIB_API SlkReader
 	{
-		static void Read(buffer&& buf, SlkTable& table);
+		static void Read(buffer_reader& reader, SlkTable& table);
 	};
 }

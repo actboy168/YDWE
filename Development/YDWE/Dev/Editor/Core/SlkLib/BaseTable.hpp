@@ -161,7 +161,8 @@ namespace slk
 		template <class _Reader>
 		void Read(buffer&& buf)
 		{
-			_Reader::Read(std::forward<buffer>(buf), *static_cast<T*>(this));
+			buffer_reader reader(buf);
+			_Reader::Read(reader, *static_cast<T*>(this));
 		}
 
 		bool getValueById(ObjectId const& id, _Value const** ppval) const

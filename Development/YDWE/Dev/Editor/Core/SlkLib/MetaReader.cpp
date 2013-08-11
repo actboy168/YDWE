@@ -120,10 +120,10 @@ namespace slk
 		}
 	}
 
-	void MetaReader::Read(buffer&& buf, MetaTable& table)
+	void MetaReader::Read(buffer_reader& reader, MetaTable& table)
 	{
 		SlkTable slkTable;
-		SlkReader::Read(std::forward<buffer>(buf), slkTable);
+		SlkReader::Read(reader, slkTable);
 
 		foreach(auto const& It, slkTable)
 		{

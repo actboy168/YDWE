@@ -27,23 +27,23 @@ namespace slk
 		this->_type = type;
 	}
 
-	void VariableData::LoadData(buffer& buf)
+	void VariableData::LoadData(buffer_reader& reader)
 	{
 		// Get data
 		switch (_type)
 		{
 		case OBJTYPE_INTEGER:
-			_i = buf.read<uint32_t>();
+			_i = reader.read<uint32_t>();
 			break;
 		case OBJTYPE_REAL:
 		case OBJTYPE_UNREAL:
-			_f = buf.read<float>();
+			_f = reader.read<float>();
 			break;
 		case OBJTYPE_STRING:
 			{
-				buffer::status ec = buffer::normal;
-				_s = buf.read<std::string>(ec);
-				if (ec ==  buffer::normal) _s.pop_back();
+				buffer_reader::status ec = buffer_reader::normal;
+				_s = reader.read<std::string>(ec);
+				if (ec ==  buffer_reader::normal) _s.pop_back();
 			}
 			break;
 		default:

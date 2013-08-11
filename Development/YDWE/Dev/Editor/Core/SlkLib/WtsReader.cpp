@@ -15,14 +15,14 @@ namespace slk
 		};
 	}
 
-	void WtsReader::Read(buffer&& buf, WtsTable& table)
+	void WtsReader::Read(buffer_reader& reader, WtsTable& table)
 	{
 		WST_READER_STATE::STATE state = WST_READER_STATE::STATE_HEADER;
 		uint32_t key = 0;
 		std::string value;
 
-		TextReader::RemoveBom(buf);
-		TextReader::EachLine<std::string>(buf, [&](std::string& line)
+		TextReader::RemoveBom(reader);
+		TextReader::EachLine<std::string>(reader, [&](std::string& line)
 		{
 			switch (state)
 			{

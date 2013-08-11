@@ -1,5 +1,6 @@
 #pragma once
 
+#include "port/config.h"
 #include <string>
 #include "Buffer.hpp"
 
@@ -28,7 +29,7 @@ namespace slk
  		VariableData(VariableData const& that);
 		Type GetType() const;
 		void SetType(const Type& type);
-		void LoadData(buffer& buf);
+		void LoadData(buffer_reader& reader);
 		std::string ToString() const;
 		void FromString(std::string const& str, Type type);
 

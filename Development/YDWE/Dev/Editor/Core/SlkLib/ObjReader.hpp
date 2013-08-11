@@ -10,11 +10,11 @@ namespace slk
 	{
 	public:
 		template <class ObjTableT>
-		static void Read(buffer&& buf, ObjTableT& table)
+		static void Read(buffer_reader& reader, ObjTableT& table)
 		{
-			buf.read<W3OHeader>();
-			ReadOriginalTable(buf, table);
-			ReadCustomTable(buf, table);
+			reader.read<W3OHeader>();
+			ReadOriginalTable(reader, table);
+			ReadCustomTable(reader, table);
 		}
 
 	private:
@@ -24,16 +24,16 @@ namespace slk
 		};
 
 		template <class ObjTableT>
-		static void ReadOriginalTable(buffer& buf, ObjTableT& table)
+		static void ReadOriginalTable(buffer_reader& reader, ObjTableT& table)
 		{
 			// Original objects table
-			uint32_t nOriginalTableCount = buf.read<uint32_t>();
+			uint32_t nOriginalTableCount = reader.read<uint32_t>();
 			for (uint32_t i = 0; i < nOriginalTableCount; ++i)
 			{
 				// Original Id
-				ObjectId OriginalObjectId(buf.read<uint32_t>(), ObjectId::not_swap_t());
+				ObjectId OriginalObjectId(reader.read<uint32_t>(), ObjectId::not_swap_t());
 				// New id, always be 0
-				ObjectId NewObjectId(buf.read<uint32_t>(), ObjectId::not_swap_t());
+				ObjectId NewObjectId(reader.read<uint32_t>(), ObjectId::not_swap_t());
 
 				assert (OriginalObjectId.vaild());
 
@@ -46,21 +46,21 @@ namespace slk
 				obj.SetId(OriginalObjectId);
 				obj.SetBaseId(OriginalObjectId);
 
-				ReadModData<ObjTableT::table_type>(buf, obj);
+				ReadModData<ObjTableT::table_type>(reader, obj);
 			}
 		}
 
 		template <class ObjTableT>
-		static void ReadCustomTable(buffer& buf, ObjTableT& table)
+		static void ReadCustomTable(buffer_reader& reader, ObjTableT& table)
 		{
 			// Custom objects table
-			uint32_t nCustomTableCount = buf.read<uint32_t>();
+			uint32_t nCustomTableCount = reader.read<uint32_t>();
 			for (uint32_t i = 0; i < nCustomTableCount; ++i)
 			{
 				// Original Id
-				ObjectId OriginalObjectId(buf.read<uint32_t>(), ObjectId::not_swap_t());
+				ObjectId OriginalObjectId(reader.read<uint32_t>(), ObjectId::not_swap_t());
 				// New id
-				ObjectId NewObjectId(buf.read<uint32_t>(), ObjectId::not_swap_t());
+				ObjectId NewObjectId(reader.read<uint32_t>(), ObjectId::not_swap_t());
 
 				assert (OriginalObjectId.vaild());
 				assert (NewObjectId.vaild());
@@ -69,12 +69,12 @@ namespace slk
 				obj.SetId(NewObjectId);
 				obj.SetBaseId(OriginalObjectId);
 
-				ReadModData<ObjTableT::table_type>(buf, obj);
+				ReadModData<ObjTableT::table_type>(reader, obj);
 			}
 		}
 
 		template <OBJECT_PARSER_OPTION Option>
-		static void ReadModData(buffer& buf, ObjSingle<Option>& obj);
+		static void ReadModData(buffer_reader& reader, ObjSingle<Option>& obj);
 	};
 
 }

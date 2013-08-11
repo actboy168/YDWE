@@ -3,30 +3,30 @@
 namespace slk
 {
 	template <>
-	void ObjReader::ReadModData<ObjectWithOptinal>(buffer& buf, ObjSingle<ObjectWithOptinal>& obj)
+	void ObjReader::ReadModData<ObjectWithOptinal>(buffer_reader& reader, ObjSingle<ObjectWithOptinal>& obj)
 	{
-		uint32_t nModCount = buf.read<uint32_t>();
+		uint32_t nModCount = reader.read<uint32_t>();
 		for (uint32_t i = 0; i < nModCount; ++i)
 		{
 			// Mod id
-			ObjectId modid(buf.read<uint32_t>(), ObjectId::not_swap_t());
+			ObjectId modid(reader.read<uint32_t>(), ObjectId::not_swap_t());
 			assert (modid.vaild());
 
 			// Type
 			VariableData data;
-			data.SetType(buf.read<VariableData::Type>());
+			data.SetType(reader.read<VariableData::Type>());
 
 			// Level/variation
-			uint32_t level = buf.read<uint32_t>();
+			uint32_t level = reader.read<uint32_t>();
 
 			// data indicator
-			uint32_t dataIndicator = buf.read<uint32_t>();
+			uint32_t dataIndicator = reader.read<uint32_t>();
 
 			// Get data
-			data.LoadData(buf);
+			data.LoadData(reader);
 
 			// CheckId
-			buf.read_ptr<uint32_t>();
+			reader.read_ptr<uint32_t>();
 
 			// Add attribute
 			Attribute<ObjectWithOptinal> attr;
@@ -40,23 +40,23 @@ namespace slk
 	}
 
 	template <>
-	void ObjReader::ReadModData<ObjectWithoutOptinal>(buffer& buf, ObjSingle<ObjectWithoutOptinal>& obj)
+	void ObjReader::ReadModData<ObjectWithoutOptinal>(buffer_reader& reader, ObjSingle<ObjectWithoutOptinal>& obj)
 	{
-		uint32_t nModCount = buf.read<uint32_t>();
+		uint32_t nModCount = reader.read<uint32_t>();
 		for (uint32_t i = 0; i < nModCount; ++i)
 		{
 			// Mod id
-			ObjectId modid(buf.read<uint32_t>(), ObjectId::not_swap_t());
+			ObjectId modid(reader.read<uint32_t>(), ObjectId::not_swap_t());
 
 			// Type
 			VariableData data;
-			data.SetType(buf.read<VariableData::Type>());
+			data.SetType(reader.read<VariableData::Type>());
 
 			// Get data
-			data.LoadData(buf);
+			data.LoadData(reader);
 
 			// CheckId
-			buf.read_ptr<uint32_t>();
+			reader.read_ptr<uint32_t>();
 
 			// Add attribute
 			Attribute<ObjectWithoutOptinal> attr;

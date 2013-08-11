@@ -13,7 +13,7 @@ namespace slk
 		{
 			char szMagic[11]; //"ID;PWXL;N;E"
 
-			bool IsValid()
+			bool IsValid() const
 			{
 				return 0 == memcmp("ID;PWXL;N;E", szMagic, sizeof(szMagic)/sizeof(szMagic[0]));
 			}
@@ -26,9 +26,9 @@ namespace slk
 		public:
 			typedef std::vector<std::vector<std::string>> _Mybase;
 
-			SlkDataArray(buffer& buf)
+			SlkDataArray(buffer_reader& reader)
 			{
-				read(buf);
+				read(reader);
 			}
 
 			void convert(SlkTable& table)
@@ -250,10 +250,10 @@ namespace slk
 				return key.front();
 			}
 
-			void read(buffer& buf)
+			void read(buffer_reader& reader)
 			{
 				bool is_found_b = false;
-				TextReader::EachLine<std::string>(buf, [&](std::string& line)
+				TextReader::EachLine<std::string>(reader, [&](std::string& line)
 				{
 					uint8_t type = read_type(line);
 					if (!is_found_b)
@@ -289,13 +289,13 @@ namespace slk
 
 	}
 
-	void SlkReader::Read(buffer&& buf, SlkTable& table)
+	void SlkReader::Read(buffer_reader& reader, SlkTable& table)
 	{
-		if (!buf.read_ptr<SLK_HEADER>()->IsValid())
+		if (!reader.read_ptr<SLK_HEADER>()->IsValid())
 		{
 			throw ydwe::exception("slk data corrupted.") ;
 		}
 
-		SlkDataArray(buf).convert(table);
+		SlkDataArray(reader).convert(table);
 	}
 }

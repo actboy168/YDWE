@@ -34,7 +34,8 @@ namespace slk
 				buffer buf(storm_.load(Filename, ec));
 				if (ec == 0)
 				{
-					Reader::Read(std::move(buf), table_);
+					buffer_reader reader(buf);
+					Reader::Read(reader, table_);
 				}
 			}
 		}
