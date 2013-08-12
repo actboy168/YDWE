@@ -60,4 +60,26 @@ _BASE_BEGIN namespace warcraft3 { namespace detail {
 
 		return address;
 	}
+
+	uintptr_t next_opcode(uintptr_t address, uint8_t opcode[], size_t n)
+	{
+		size_t size = 0;
+		do
+		{
+			uint8_t* op = nullptr;
+			size = hook::detail::next_opcode(address, &op);
+
+			for (size_t i = 0; i < n; ++i)
+			{
+				if (op[0] == opcode[i])
+				{
+					return address;
+				}
+			}
+
+			address += size;
+		} while (size);
+
+		return address;
+	}
 }}}
