@@ -172,7 +172,7 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 
 	const char* from_trigstring(const char* val)
 	{
-		if (0 == strncmp(val, "TRIGSTR_", _countof("TRIGSTR_")-1))
+		if (val && (0 == strncmp(val, "TRIGSTR_", _countof("TRIGSTR_")-1)))
 		{
 			uint32_t index = detail::str_to_uint(&(val[_countof("TRIGSTR_")-1]));
 			return detail::trigstring_table::get()->find(index, val);
