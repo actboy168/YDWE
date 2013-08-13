@@ -2,7 +2,6 @@
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <ydwe/warcraft3/hashtable.h>
 #include <ydwe/warcraft3/jass.h>
-#include <ydwe/warcraft3/detail/memory_search.h>
 #include <ydwe/warcraft3/detail/nf_register.h>
 #include <ydwe/warcraft3/version.h>
 #include <ydwe/hook/detail/replace_pointer.h>
@@ -132,7 +131,7 @@ _BASE_BEGIN namespace warcraft3 { namespace native_function {
 		{
 			uintptr_t ptr = get_war3_searcher().search_string("StringCase");
 			ptr += 9;
-			return warcraft3::detail::convert_function(ptr);
+			return convert_function(ptr);
 		}
 
 		void async_add(uintptr_t func, const char* name, const char* param)

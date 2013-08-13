@@ -1,4 +1,3 @@
-#include <ydwe/warcraft3/detail/memory_search.h>
 #include <ydwe/warcraft3/jass.h>
 #include <ydwe/warcraft3/native_function.h>
 #include <ydwe/warcraft3/war3_searcher.h>
@@ -29,10 +28,10 @@ uintptr_t searchInGameChatWhat()
 	//=========================================
 	uintptr_t ptr = get_war3_searcher().search_string("InGameChatWhat");
 	ptr += 0x04;
-	ptr = detail::next_opcode(ptr, 0xE8, 5);
+	ptr = next_opcode(ptr, 0xE8, 5);
 	ptr += 0x05;
-	ptr = detail::next_opcode(ptr, 0xE8, 5);
-	return detail::convert_function(ptr);
+	ptr = next_opcode(ptr, 0xE8, 5);
+	return convert_function(ptr);
 }
 
 void __cdecl EXDisplayChat(uint32_t player_handle, uint32_t chat_recipient, uint32_t message)

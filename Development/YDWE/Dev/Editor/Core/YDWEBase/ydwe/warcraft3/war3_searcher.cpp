@@ -1,5 +1,4 @@
 #include <ydwe/warcraft3/war3_searcher.h>
-#include <ydwe/warcraft3/detail/memory_search.h>
 #include <ydwe/warcraft3/version.h>
 #include <ydwe/util/singleton.h>
 
@@ -82,8 +81,8 @@ _BASE_BEGIN namespace warcraft3 {
 		get_instance = search_string("config");
 		get_instance += sizeof uintptr_t;
 
-		get_instance = detail::next_opcode(get_instance, 0xE8, 5);
-		get_instance = detail::convert_function(get_instance);
+		get_instance = next_opcode(get_instance, 0xE8, 5);
+		get_instance = convert_function(get_instance);
 		//=========================================
 		//  (2)
 		//
@@ -92,15 +91,15 @@ _BASE_BEGIN namespace warcraft3 {
 		//    mov     esi, edx
 		//    call    jGetVMInstance <---
 		//=========================================
-		get_instance = detail::next_opcode(get_instance, 0xE8, 5);
-		get_instance = detail::convert_function(get_instance);
+		get_instance = next_opcode(get_instance, 0xE8, 5);
+		get_instance = convert_function(get_instance);
 		//=========================================
 		//  (3)
 		//
 		//  jGetVMInstance:
 		//    jmp    jGetVMInstance2 <----
 		//=========================================
-		get_instance = detail::convert_function(get_instance);
+		get_instance = convert_function(get_instance);
 		//=========================================
 		//  (4)
 		//
@@ -115,8 +114,8 @@ _BASE_BEGIN namespace warcraft3 {
 		//    pop     esi
 		//    retn
 		//=========================================
-		get_instance = detail::next_opcode(get_instance, 0xE8, 5);
-		get_instance = detail::convert_function(get_instance);
+		get_instance = next_opcode(get_instance, 0xE8, 5);
+		get_instance = convert_function(get_instance);
 		return get_instance;
 	}
 
@@ -154,8 +153,8 @@ _BASE_BEGIN namespace warcraft3 {
 		//  to_retn:
 		//    retn
 		//=========================================
-		get_gameui = detail::next_opcode(get_gameui, 0xE8, 5);
-		get_gameui = detail::convert_function(get_gameui);
+		get_gameui = next_opcode(get_gameui, 0xE8, 5);
+		get_gameui = convert_function(get_gameui);
 
 		return get_gameui;
 	}
@@ -207,8 +206,8 @@ _BASE_BEGIN namespace warcraft3 {
 			//    ...
 			//    ...
 			//=========================================
-			unit_handle_to_object = detail::next_opcode(unit_handle_to_object, 0xE8, 5);
-			unit_handle_to_object = detail::convert_function(unit_handle_to_object);
+			unit_handle_to_object = next_opcode(unit_handle_to_object, 0xE8, 5);
+			unit_handle_to_object = convert_function(unit_handle_to_object);
 
 			return unit_handle_to_object;
 		}
@@ -227,16 +226,15 @@ _BASE_BEGIN namespace warcraft3 {
 			//    mov     [ebp+var_4], ebx
 			//    call    sub_6F29B2E0
 			//=========================================
-			unit_handle_to_object = detail::next_opcode(unit_handle_to_object, 0x8B, 6);
+			unit_handle_to_object = next_opcode(unit_handle_to_object, 0x8B, 6);
 			detail::unit_handle_table    = *(uintptr_t*)(unit_handle_to_object+2);
 
-			unit_handle_to_object = detail::next_opcode(unit_handle_to_object, 0xE8, 5);
-			detail::get_unit_handle_table = detail::convert_function(unit_handle_to_object);
+			unit_handle_to_object = next_opcode(unit_handle_to_object, 0xE8, 5);
+			detail::get_unit_handle_table = convert_function(unit_handle_to_object);
 
 			return (uintptr_t)detail::unit_handle_to_object_120;
 		}
 	}
-
 
 	war3_searcher& get_war3_searcher()
 	{

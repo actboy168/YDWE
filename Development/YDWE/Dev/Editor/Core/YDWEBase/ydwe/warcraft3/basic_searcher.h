@@ -34,4 +34,9 @@ _BASE_BEGIN namespace warcraft3 {
 		uintptr_t text_beg_;
 		uintptr_t text_end_;
 	};
+
+	_BASE_API uintptr_t convert_function(uintptr_t address);
+	_BASE_API uintptr_t next_opcode(uintptr_t address);
+	_BASE_API uintptr_t next_opcode(uintptr_t address, uint8_t opcode, size_t length);
+	_BASE_API uintptr_t next_opcode(uintptr_t address, uint8_t opcode[], size_t n);
 }}
