@@ -4,8 +4,6 @@ using System.Text;
 using YDColorizer;
 using System.Windows.Forms;
 
-// test
-
 public class WEInit
 {
     /// <summary>
@@ -16,6 +14,10 @@ public class WEInit
     [MTAThread]
     public static void begin()
     {
+        YDColorizer.GlobalException.Initialize();
+
+        Timer timer = new Timer();
+
         #region 配置文件不存在，创建默认配置文件
         if (Config.IsConfigExists() == false)
         {
@@ -27,10 +29,8 @@ public class WEInit
 
         List<string> dialogBoxTitles = AboutConfig.LoadSearchTitles();
 
-        Timer timer = new Timer();
-
         #region 托盘图标
-        if (/*AboutConfig.NotifyIconVisible() == true*/ Config.IsNotifyIconVisible()==true)
+        if (Config.IsNotifyIconVisible() == true)
         {
             NotifyIcon notifyIcon = new NotifyIcon();
             notifyIcon.Icon = YDColorizer.Properties.Resources.icoYDColorizerRuning;
@@ -85,27 +85,35 @@ public class WEInit
         #endregion
 
         timer.Interval = 100;// 设置搜索间隔为100毫秒
+
+        EditDialogBox edb = new EditDialogBox();
+
         timer.Tick += new EventHandler((object object_sender, EventArgs EventArgs_e) =>
         {
-            foreach (var title in dialogBoxTitles)// 遍历标题数组寻找对话框
+            try
             {
-                WinApi.Window dialogBox = new WinApi.Window(DialogBoxClassName, title);// 搜索we物体编辑器的文本编辑框
-                if (dialogBox.Handle != IntPtr.Zero)// 找到
+                if (edb.hWnd == IntPtr.Zero)
                 {
-                    int thisProcessId = System.Diagnostics.Process.GetCurrentProcess().Id;
-                    int targetProcessId = AboutProcess.GetProcessId(dialogBox.Handle);
-                    if (thisProcessId == targetProcessId)// 搜索的对话框与该ydwe插件同进程
+                    foreach (var title in dialogBoxTitles)// 遍历标题数组寻找对话框
                     {
-                        if (dialogBox.Visible == true)// 非处理中
+                        WinApi.Window dialogBox = new WinApi.Window(DialogBoxClassName, title);// 搜索we物体编辑器的文本编辑框
+                        if (dialogBox.Handle != IntPtr.Zero)// 找到
                         {
-                            EditDialogBox edb = new EditDialogBox();// 创建模拟窗口
-                            edb.SaveSourceWindowHandle(dialogBox.Handle);// 保存原窗口句柄
-                            edb.Show();// 显示模拟窗口
-                            dialogBox.Hide();// 隐藏原窗口
-                            break;
+                            int thisProcessId = System.Diagnostics.Process.GetCurrentProcess().Id;
+                            int targetProcessId = AboutProcess.GetProcessId(dialogBox.Handle);
+                            if (thisProcessId == targetProcessId)// 搜索的对话框与该ydwe插件同进程
+                            {
+                                edb.AttachDialog(dialogBox.Handle);// 重建模拟窗口
+                                break;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                timer.Stop();
+                GlobalException.CatchException(e, e.ToString());
             }
         });
 

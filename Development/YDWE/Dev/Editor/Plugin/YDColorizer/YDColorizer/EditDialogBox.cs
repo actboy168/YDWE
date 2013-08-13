@@ -25,7 +25,7 @@ namespace YDColorizer
         /// </summary>
         private const string ButtonClassName = "Button";
 
-        private IntPtr hWnd;
+        public  IntPtr hWnd = IntPtr.Zero;
         private IntPtr hStatic;
         private IntPtr hEdit;
         private IntPtr hBtnOk;
@@ -36,17 +36,58 @@ namespace YDColorizer
             InitializeComponent();
         }
 
-        /// <summary>
-        /// 保存原窗体句柄
-        /// </summary>
-        /// <param name="hWnd"></param>
-        public void SaveSourceWindowHandle(IntPtr hWnd)
+        ~EditDialogBox()
         {
-            this.hWnd = hWnd;
+            new WinApi.Window(this.hWnd).Show();
         }
 
         private void EditDialogBox_Load(object sender, EventArgs e)
         {
+            this.txtEdit.undoStackChange += new EventHandler((object undoCount, EventArgs empty) => { if ((int)undoCount == 0) { this.btnUndo.Enabled = false; } else if ((int)undoCount > 0) { this.btnUndo.Enabled = true; } });// 根据文本框可撤销数量设置撤销按钮是否可用
+            this.txtEdit.redoStackChange += new EventHandler((object redoCount, EventArgs empty) => { if ((int)redoCount == 0) { this.btnRedo.Enabled = false; } else if ((int)redoCount > 0) { this.btnRedo.Enabled = true; } });// 根据文本框可重做数量设置重做按钮是否可用
+        }
+
+        public void AttachDialog(IntPtr hWnd)
+        {
+            this.hWnd = hWnd;// 保存原窗体句柄
+            this.ReLoad();// 重新加载控件内容
+            this.Show();// 显示模拟窗口
+            this.Activate();// 激活模拟窗口
+            this.txtEdit.Select();// 激活编辑框
+        }
+
+        public void DetachDialog(WinApi.Button btn)
+        {  
+            try
+            {
+                btn.ClickAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("发生异常，请截图并发至ydwe论坛：" + Environment.NewLine
+                    + "原文本框句柄：" + hEdit.ToString() + Environment.NewLine
+                    + "确认按钮句柄：" + hBtnOk.ToString() + Environment.NewLine
+                    + "取消按钮句柄：" + hBtnCancel.ToString() + Environment.NewLine
+                    + "异常信息：" + ex.ToString());
+            }
+
+            Config.SaveColor(btn1stColor);
+            Config.SaveColor(btn2ndColor);
+            Config.SaveColor(btn3rdColor);
+            Config.SaveColor(btn4thColor);
+
+            Config.SaveDialogSize(this);
+
+            this.txtEdit.undoStack.Clear();// 清空撤销信息
+            this.txtEdit.redoStack.Clear();// 清空重做信息
+
+            this.Hide();// 隐藏模拟窗口
+            //this.Dispose();// 销毁模拟窗口
+            this.hWnd = IntPtr.Zero;
+        }
+
+        public void ReLoad()
+        { 
             #region 初始化标签
             WinApi.Label lblStatic = new WinApi.Label(this.hWnd, IntPtr.Zero, StaticClassName, null);// 搜索原窗口中的标签
             this.hStatic = lblStatic.Handle;// 保存标签句柄
@@ -63,8 +104,6 @@ namespace YDColorizer
             this.lastFocus = this.txtEdit;// 设置最后焦点在基础文本框
             this.txtEdit.lockTextChange = false;// 离开代码修改模式
             this.txtEdit.SelectAll();// 选取所有文本
-            this.txtEdit.undoStackChange += new EventHandler((object undoCount, EventArgs empty) => { if ((int)undoCount == 0) { this.btnUndo.Enabled = false; } else if ((int)undoCount > 0) { this.btnUndo.Enabled = true; } });// 根据文本框可撤销数量设置撤销按钮是否可用
-            this.txtEdit.redoStackChange += new EventHandler((object redoCount, EventArgs empty) => { if ((int)redoCount == 0) { this.btnRedo.Enabled = false; } else if ((int)redoCount > 0) { this.btnRedo.Enabled = true; } });// 根据文本框可重做数量设置重做按钮是否可用
             #endregion
 
             #region 初始化确定按钮
@@ -89,48 +128,15 @@ namespace YDColorizer
                 this.Height = window.Height * 2;
             }
 
-            //if (WinApi.Ini.GetInt(AboutConfig.GetConfigPath(), "Application", "RememberSize") == 0)
-            //{
-            //    this.Width = window.Width;
-            //    this.Height = window.Height * 2;
-            //}
-            //else
-            //{
-            //    int width = WinApi.Ini.GetInt(AboutConfig.GetConfigPath(), "Application", "Width");
-            //    if (width > 0)
-            //    {
-            //        this.Width = width;
-            //    }
-            //    else
-            //    {
-            //        this.Width = window.Width;
-            //    }
-            //    int height = WinApi.Ini.GetInt(AboutConfig.GetConfigPath(), "Application", "Height");
-            //    if (height > 0)
-            //    {
-            //        this.Height = height;
-            //    }
-            //    else
-            //    {
-            //        this.Height = window.Height * 2;
-            //    }
-            //}
-
             this.Text = window.Text;// 从原窗口获取标题并设置到模拟窗口
             window.Hide();// 隐藏原窗口
             #endregion
 
             #region 初始化用户使用的颜色
-
             Config.LoadColor(btn1stColor);
             Config.LoadColor(btn2ndColor);
             Config.LoadColor(btn3rdColor);
             Config.LoadColor(btn4thColor);
-
-            //UserCustomColor.Load(btn1stColor);
-            //UserCustomColor.Load(btn2ndColor);
-            //UserCustomColor.Load(btn3rdColor);
-            //UserCustomColor.Load(btn4thColor);
             #endregion
 
             #region 初始化提示
@@ -164,7 +170,7 @@ namespace YDColorizer
             }
             #endregion
 
-            this.Activate();// 激活当前窗口
+            //this.Activate();// 激活当前窗口
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -197,31 +203,13 @@ namespace YDColorizer
             WinApi.TextBox txtEdit = new WinApi.TextBox(hEdit);
             txtEdit.Text = this.txtEdit.Text;// 写回文本
             WinApi.Button btnOk = new WinApi.Button(hBtnOk);
-            btnOk.Click();// 点击确定按钮
-
-            Config.SaveColor(btn1stColor);
-            Config.SaveColor(btn2ndColor);
-            Config.SaveColor(btn3rdColor);
-            Config.SaveColor(btn4thColor);
-
-            Config.SaveDialogSize(this);
-
-            this.Dispose();// 销毁模拟窗口
+            DetachDialog(btnOk);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             WinApi.Button btnCancel = new WinApi.Button(hBtnCancel);
-            btnCancel.Click();// 点击取消按钮
-
-            Config.SaveColor(btn1stColor);
-            Config.SaveColor(btn2ndColor);
-            Config.SaveColor(btn3rdColor);
-            Config.SaveColor(btn4thColor);
-
-            Config.SaveDialogSize(this);
-
-            this.Dispose();
+            DetachDialog(btnCancel);
         }
 
 
@@ -302,8 +290,7 @@ namespace YDColorizer
 
         private void txtPreview_TextChanged(object sender, EventArgs e)
         {
-            TextConvert.ConvertToEditTextBoxEx(txtPreview, txtEdit);
-            //            TextConvert.ConvertToEditTextBox(txtPreview, txtEdit);
+            TextConvert.ConvertToEditTextBox(txtPreview, txtEdit);
         }
 
         /// <summary>
@@ -390,6 +377,21 @@ namespace YDColorizer
                 this.TopMost = false;
                 sf.ShowDialog();
                 this.TopMost = true;
+            }
+        }
+
+        private void EditDialogBox_KeyDown(object sender, KeyEventArgs e)// 为撤销和重做按钮添加快捷键
+        {
+            if (e.Control == true)// 按下Ctrl键
+            {
+                if (e.KeyCode == Keys.Z)// 按下Z键
+                {
+                    btnUndo.PerformClick();
+                }
+                if (e.KeyCode == Keys.Y)// 按下Y键
+                {
+                    btnRedo.PerformClick();
+                }
             }
         }
     }
