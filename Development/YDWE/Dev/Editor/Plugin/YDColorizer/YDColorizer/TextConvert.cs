@@ -22,7 +22,12 @@ namespace YDColorizer
             txtEdit.lockTextChange = true;
             txtPreview.lockTextChange = true;
 
-            MyRichTextBox txtPreviewClone = new MyRichTextBox() { BackColor = txtPreview.BackColor, ForeColor = txtPreview.ForeColor };
+            MyRichTextBox txtPreviewClone = new MyRichTextBox()
+            {
+                BackColor = txtPreview.BackColor,
+                ForeColor = txtPreview.ForeColor,
+                ignoreRefresh = true// 忽略控件自身的重绘，提高响应速度
+            };
 
             int cursorLocation = txtEdit.SelectionStart;
             txtEdit.Text = txtEdit.Text.Replace(Environment.NewLine, "|n");// 转换回车换行为|n
@@ -34,6 +39,12 @@ namespace YDColorizer
             {
                 if (charArray[i] == '|')// 转义字符
                 {
+                    if ((i + 1) < charArray.Length && charArray[i + 1] == '|')// 字符'|'
+                    {
+                        buffer.Append('|');// 将字符'|'输入到缓冲区
+                        i++;
+                        continue;
+                    }
                     if (((i + 1) < charArray.Length) && ((charArray[i + 1] == 'n') || (charArray[i + 1] == 'N')))// 换行
                     {
                         Color currentColor = txtPreviewClone.SelectionColor;// 保存当前颜色
@@ -87,7 +98,8 @@ namespace YDColorizer
             {
                 Rtf = txtPreview.Rtf,
                 SelectionStart = 0,// 从开头开始处理
-                SelectionLength = 1// 每次的处理长度
+                SelectionLength = 1,// 每次的处理长度
+                ignoreRefresh = true// 忽略控件自身的重绘，提高响应速度
             };
             #endregion
 
@@ -129,6 +141,14 @@ namespace YDColorizer
                     continue;
                 }
                 #endregion
+                #region 将|转为||
+                else if (txtPreviewClone.SelectedText == "|")
+                {
+                    sb.Append("||");
+                    txtPreviewClone.SelectionStart++;
+                    continue;
+                }
+                #endregion
                 sb.Append(txtPreviewClone.SelectedText);
                 txtPreviewClone.SelectionStart++;
             }
@@ -144,82 +164,87 @@ namespace YDColorizer
             txtEdit.lockTextChange = false;
         }
 
-        public static void ConvertToEditTextBoxEx(MyRichTextBox txtPreview, MyTextBox txtEdit)
-        {
-            txtEdit.lockTextChange = true;
+        //public static void ConvertToEditTextBoxEx(MyRichTextBox txtPreview, MyTextBox txtEdit)
+        //{
+        //    txtEdit.lockTextChange = true;
 
-            string rtf = txtPreview.Rtf;
+        //    string rtf = txtPreview.Rtf;
 
-            int colorTableStart = rtf.IndexOf(@"\colortbl");// 颜色表开始位置
-            int colorTableEnd = rtf.IndexOf('}', colorTableStart);// 颜色表结束位置
-            string[] colorTable = rtf.Substring(colorTableStart, colorTableEnd - colorTableStart).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);// 获取颜色表子串并分割
+        //    int colorTableStart = rtf.IndexOf(@"\colortbl");// 颜色表开始位置
+        //    int colorTableEnd = rtf.IndexOf('}', colorTableStart);// 颜色表结束位置
+        //    string[] colorTable = rtf.Substring(colorTableStart, colorTableEnd - colorTableStart).Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);// 获取颜色表子串并分割
 
-            List<Color> colors = new List<Color>();// 存储rtf所用到的所有颜色
-            for (int i = 1; i < colorTable.Length; i++)
-            {
-                string[] color = colorTable[i].Replace("red", string.Empty).Replace("green", string.Empty).Replace("blue", string.Empty).Split(new char[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);// 获取颜色字符串的RGB值
-                colors.Add(Color.FromArgb(int.Parse(color[0]), int.Parse(color[1]), int.Parse(color[2])));// 将颜色存入集合
-            }
+        //    List<Color> colors = new List<Color>();// 存储rtf所用到的所有颜色
+        //    for (int i = 1; i < colorTable.Length; i++)
+        //    {
+        //        string[] color = colorTable[i].Replace("red", string.Empty).Replace("green", string.Empty).Replace("blue", string.Empty).Split(new char[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);// 获取颜色字符串的RGB值
+        //        colors.Add(Color.FromArgb(int.Parse(color[0]), int.Parse(color[1]), int.Parse(color[2])));// 将颜色存入集合
+        //    }
 
-            string processStr = rtf.Substring(rtf.IndexOf(@"\fs18") + @"\fs18".Length).Replace(Environment.NewLine, string.Empty);// 截取处理字符串并去除换行符
-            processStr = processStr.Substring(0, processStr.LastIndexOf(@"\par"));// 去除结尾的\par
+        //    string processStr = rtf.Substring(rtf.IndexOf(@"\fs18") + @"\fs18".Length).Replace(Environment.NewLine, string.Empty);// 截取处理字符串并去除换行符
+        //    processStr = processStr.Substring(0, processStr.LastIndexOf(@"\par"));// 去除结尾的\par
 
-            StringBuilder finishStr = new StringBuilder();// 处理完成字符串            
-            for (int i = 0; i < processStr.Length; i++)
-            {
-                if (processStr[i] == '\\')
-                {
-                    if (i + 1 < processStr.Length && processStr[i + 1] == '\\')// '\'
-                    {
-                        finishStr.Append('\\');
-                        i++;
-                    }
-                    else if (i + 7 < processStr.Length && processStr[i + 1] == '\'' && processStr[i + 4] == '\\' && processStr[i + 5] == '\'')// 中文等非ASCII字符
-                    {
-                        finishStr.Append(Encoding.GetEncoding(936).GetString(new byte[] { (byte)EncodingConvert(processStr[i + 2], processStr[i + 3]), (byte)EncodingConvert(processStr[i + 6], processStr[i + 7]) }));
-                        i += 7;
-                    }
-                    else if (i + 3 < processStr.Length && processStr[i + 1] == 'c' && processStr[i + 2] == 'f' && processStr[i + 3] >= '0' && processStr[i + 3] <= '9')// 颜色
-                    {
-                        int j = i + 3;
-                        string num = string.Empty;
-                        while (j < processStr.Length && processStr[j] >= '0' && processStr[j] <= '9')
-                        {
-                            num += processStr[j];
-                            j++;
-                        }
-                        i = j - 1;
-                        if (j < processStr.Length && processStr[j] == ' ')
-                        {
-                            i++;
-                        }
-                        int colorIndex = int.Parse(num) - 1;
-                        if (colors[colorIndex].R == 255 && colors[colorIndex].G == 255 && colors[colorIndex].B == 255)
-                        {
-                            finishStr.Append("|r");
-                        }
-                        else
-                        {
-                            finishStr.Append("|c" + ColorToHex(colors[colorIndex]));
-                        }
-                    }
-                    else if (i + 3 < processStr.Length && processStr[i + 1] == 'p' && processStr[i + 2] == 'a' && processStr[i + 3] == 'r')// 换行
-                    {
-                        finishStr.Append("|n");
-                        i += 3;
-                    }
-                }
-                else
-                {
-                    finishStr.Append(processStr[i]);
-                }
-            }
+        //    if (processStr.StartsWith(" ") == true)// 非汉字开头
+        //    {
+        //        processStr = processStr.Substring(1);
+        //    }
 
-            txtEdit.Text = finishStr.ToString();
-            txtEdit.AddToUndoStack(finishStr.ToString());
+        //    StringBuilder finishStr = new StringBuilder();// 处理完成字符串            
+        //    for (int i = 0; i < processStr.Length; i++)
+        //    {
+        //        if (processStr[i] == '\\')
+        //        {
+        //            if (i + 1 < processStr.Length && processStr[i + 1] == '\\')// '\'
+        //            {
+        //                finishStr.Append('\\');
+        //                i++;
+        //            }
+        //            else if (i + 7 < processStr.Length && processStr[i + 1] == '\'' && processStr[i + 4] == '\\' && processStr[i + 5] == '\'')// 中文等非ASCII字符
+        //            {
+        //                finishStr.Append(Encoding.GetEncoding(936).GetString(new byte[] { (byte)EncodingConvert(processStr[i + 2], processStr[i + 3]), (byte)EncodingConvert(processStr[i + 6], processStr[i + 7]) }));
+        //                i += 7;
+        //            }
+        //            else if (i + 3 < processStr.Length && processStr[i + 1] == 'c' && processStr[i + 2] == 'f' && processStr[i + 3] >= '0' && processStr[i + 3] <= '9')// 颜色
+        //            {
+        //                int j = i + 3;
+        //                string num = string.Empty;
+        //                while (j < processStr.Length && processStr[j] >= '0' && processStr[j] <= '9')
+        //                {
+        //                    num += processStr[j];
+        //                    j++;
+        //                }
+        //                i = j - 1;
+        //                if (j < processStr.Length && processStr[j] == ' ')
+        //                {
+        //                    i++;
+        //                }
+        //                int colorIndex = int.Parse(num) - 1;
+        //                if (colors[colorIndex].R == 255 && colors[colorIndex].G == 255 && colors[colorIndex].B == 255)
+        //                {
+        //                    finishStr.Append("|r");
+        //                }
+        //                else
+        //                {
+        //                    finishStr.Append("|c" + ColorToHex(colors[colorIndex]));
+        //                }
+        //            }
+        //            else if (i + 3 < processStr.Length && processStr[i + 1] == 'p' && processStr[i + 2] == 'a' && processStr[i + 3] == 'r')// 换行
+        //            {
+        //                finishStr.Append("|n");
+        //                i += 3;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            finishStr.Append(processStr[i]);
+        //        }
+        //    }
 
-            txtEdit.lockTextChange = false;
-        }
+        //    txtEdit.Text = finishStr.ToString();
+        //    txtEdit.AddToUndoStack(finishStr.ToString());
+
+        //    txtEdit.lockTextChange = false;
+        //}
 
         private static int EncodingConvert(char char1, char char2)
         {
@@ -247,8 +272,8 @@ namespace YDColorizer
         {
             txtEdit.lockTextChange = true;
             txtEdit.SelectedText = "|c" + ColorToHex(color) + txtEdit.SelectedText + "|r";
-            txtEdit.Select();// 激活控件
             txtEdit.lockTextChange = false;
+            txtEdit.Select();// 激活控件
         }
 
         public static void SetTxtPreviewSingleColor(MyRichTextBox txtPreview, Color color)
@@ -258,30 +283,141 @@ namespace YDColorizer
             int selectLength = txtPreview.SelectionLength;// 保存处理字符串的长度
             txtPreview.SelectionColor = color;// 设置颜色
             txtPreview.SelectionStart = cursorLocation + selectLength;// 移动光标
+            txtPreview.SelectionLength = 0;// 清空选择
             txtPreview.lockTextChange = false;
+            txtPreview.Select();// 激活控件
         }
 
         public static void SetTxtEditGradual(MyTextBox txtEdit, Color startColor, Color endColor)
         {
-            int selectLength = txtEdit.SelectionLength;// 需要处理的长度
-            if (selectLength > 1)
+            int processLength = 0;// 去除控制字符外的字符长度
+            string selectedText = txtEdit.SelectedText;// 选择的文本
+            for (int i = 0; i < selectedText.Length; i++)
+            {
+                if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == '|')
+                {
+                    processLength++;
+                    i++;
+                    continue;
+                }
+                if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'n')
+                {
+                    i++;
+                    continue;
+                }
+                if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'r')
+                {
+                    i++;
+                    continue;
+                }
+                if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'c')
+                {
+                    if (i + 9 < selectedText.Length)
+                    {
+                        string strColor = selectedText[i + 2].ToString() + selectedText[i + 3].ToString()// A
+                                        + selectedText[i + 4].ToString() + selectedText[i + 5].ToString()// R
+                                        + selectedText[i + 6].ToString() + selectedText[i + 7].ToString()// G
+                                        + selectedText[i + 8].ToString() + selectedText[i + 9].ToString()// B
+                                        ;
+                        if (IsColor(strColor) == true)
+                        {
+                            i += 9;
+                            continue;
+                        }
+                    }
+                }
+                processLength++;
+            }
+            if (processLength > 1)
             {
                 txtEdit.lockTextChange = true;
-                for (int i = 0; i < selectLength; i++)
+                int j = 0;
+                for (int i = 0; i < selectedText.Length; i++)
                 {
-                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R) / (selectLength - 1) * i, startColor.G + (endColor.G - startColor.G) / (selectLength - 1) * i, startColor.B + (endColor.B - startColor.B) / (selectLength - 1) * i);// 计算当前字的颜色
+                    int r, g, b;
+                    Color tempColor;
+                    if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == '|')
+                    {
+                        r = startColor.R + (endColor.R - startColor.R) * j / (processLength - 1);
+                        g = startColor.G + (endColor.G - startColor.G) * j / (processLength - 1);
+                        b = startColor.B + (endColor.B - startColor.B) * j / (processLength - 1);
+                        tempColor = Color.FromArgb(r, g, b);
+                        j++;
+
+                        txtEdit.SelectionLength = 0;
+                        txtEdit.SelectedText = "|c" + ColorToHex(tempColor);
+                        txtEdit.SelectionStart += 2;
+                        txtEdit.SelectedText = "|r";
+                        i++;
+                        continue;
+                    }
+                    if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'n')
+                    {
+                        txtEdit.SelectionStart += 2;
+                        i++;
+                        continue;
+                    }
+                    if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'r')
+                    {
+                        txtEdit.SelectionStart += 2;
+                        i++;
+                        continue;
+                    }
+                    if (i + 1 < selectedText.Length && selectedText[i] == '|' && selectedText[i + 1] == 'c')
+                    {
+                        if (i + 9 < selectedText.Length)
+                        {
+                            string strColor = selectedText[i + 2].ToString() + selectedText[i + 3].ToString()// A
+                                            + selectedText[i + 4].ToString() + selectedText[i + 5].ToString()// R
+                                            + selectedText[i + 6].ToString() + selectedText[i + 7].ToString()// G
+                                            + selectedText[i + 8].ToString() + selectedText[i + 9].ToString()// B
+                                            ;
+                            if (IsColor(strColor) == true)
+                            {
+                                txtEdit.SelectionStart += 9;
+                                i += 9;
+                                continue;
+                            }
+                        }
+                    }
+                    r = startColor.R + (endColor.R - startColor.R) * j / (processLength - 1);
+                    g = startColor.G + (endColor.G - startColor.G) * j / (processLength - 1);
+                    b = startColor.B + (endColor.B - startColor.B) * j / (processLength - 1);
+                    tempColor = Color.FromArgb(r, g, b);
+                    j++;
+
                     txtEdit.SelectionLength = 0;
                     txtEdit.SelectedText = "|c" + ColorToHex(tempColor);
                     txtEdit.SelectionStart++;
                     txtEdit.SelectedText = "|r";
-                    txtEdit.Select();// 激活控件
                 }
                 txtEdit.lockTextChange = false;
+                txtEdit.Select();// 激活控件
             }
             else
             {
                 SetTxtEditSingleColor(txtEdit, startColor);
             }
+
+            //int selectLength = txtEdit.SelectionLength;// 需要处理的长度
+            //if (selectLength > 1)
+            //{
+            //    txtEdit.lockTextChange = true;
+            //    for (int i = 0; i < selectLength; i++)
+            //    {
+            //        Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R) * i / (selectLength - 1), startColor.G + (endColor.G - startColor.G) * i / (selectLength - 1), startColor.B + (endColor.B - startColor.B) * i / (selectLength - 1));// 计算当前字的颜色
+            //        txtEdit.SelectionLength = 0;
+            //        txtEdit.SelectedText = "|c" + ColorToHex(tempColor);
+            //        txtEdit.SelectionStart++;
+            //        txtEdit.SelectedText = "|r";
+            //        txtEdit.Select();// 激活控件
+            //    }
+            //    txtEdit.lockTextChange = false;
+            //}
+            //else
+            //{
+            //    SetTxtEditSingleColor(txtEdit, startColor);
+            //}
         }
 
         public static void SetTxtPreviewGradual(MyRichTextBox txtPreview, Color startColor, Color endColor)
@@ -293,12 +429,13 @@ namespace YDColorizer
                 for (int i = 0; i < selectLength; i++)
                 {
                     txtPreview.SelectionLength = 1;
-                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R) / (selectLength - 1) * i, startColor.G + (endColor.G - startColor.G) / (selectLength - 1) * i, startColor.B + (endColor.B - startColor.B) / (selectLength - 1) * i);// 计算当前字的颜色
+                    Color tempColor = Color.FromArgb(startColor.R + (endColor.R - startColor.R) * i / (selectLength - 1), startColor.G + (endColor.G - startColor.G) * i / (selectLength - 1), startColor.B + (endColor.B - startColor.B) * i / (selectLength - 1));// 计算当前字的颜色
                     txtPreview.SelectionColor = tempColor;
                     txtPreview.SelectionLength = 0;
                     txtPreview.SelectionStart++;
                 }
                 txtPreview.lockTextChange = false;
+                txtPreview.Select();// 激活控件
             }
             else
             {

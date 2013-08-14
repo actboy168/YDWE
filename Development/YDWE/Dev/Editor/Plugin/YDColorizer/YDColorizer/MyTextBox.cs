@@ -65,18 +65,22 @@ namespace YDColorizer
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            base.OnKeyDown(e);
             if (e.Control == true)// 按下Ctrl键
             {
                 if (e.KeyCode == Keys.Z)// 按下Z键
                 {
-                    this.Undo();
+                    return;
                 }
                 if (e.KeyCode == Keys.Y)// 按下Y键
                 {
-                    this.Redo();
+                    return;
+                }
+                if (e.KeyCode == Keys.A)// 按下A键
+                {
+                    this.SelectAll();
                 }
             }
+            base.OnKeyDown(e);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
