@@ -225,8 +225,66 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
+	int handle_eq(lua_State *L)
+	{
+		lua::jassbind* lj = (lua::jassbind*)L;
+		jass::jhandle_t a = lj->read_handle(1);
+		jass::jhandle_t b = lj->read_handle(2);
+		lj->pushboolean(a == b);
+		return 1;
+	}
+
+	int handle_tostring(lua_State *L)
+	{
+		static char hex[] = "0123456789ABCDEF";
+
+		lua::jassbind* lj = (lua::jassbind*)L;
+		jass::jhandle_t h = lj->read_handle(1);
+
+		luaL_Buffer b;
+		luaL_buffinitsize(L , &b , 28);
+		luaL_addstring(&b, "handle: 0x");
+
+		bool strip = true;
+		for (int i = 7; i >= 0; i--) 
+		{
+			int c = (h >> (i*4)) & 0xF;
+			if (strip && c == 0) 
+			{
+				continue;
+			}
+			strip = false;
+			luaL_addchar(&b, hex[c]);
+		}
+
+		if (strip)
+		{
+			luaL_addchar(&b , '0');
+		}
+
+		luaL_pushresult(&b);
+
+		return 1;
+	}
+
+	void handle_make_mt(lua::state* ls)
+	{
+		luaL_Reg lib[] = {
+			{ "__eq",       handle_eq },
+			{ "__tostring", handle_tostring },
+			{ NULL, NULL },
+		};
+
+		ls->pushlightuserdata(NULL);
+		luaL_newlib(ls->self(), lib);
+		ls->setmetatable(-2);
+		ls->pop(1);
+	}
+
 	int open_jass(lua::state* ls)
 	{
+		handle_make_mt(ls);
+		
 		ls->newtable();
 		{
 			ls->newtable();
