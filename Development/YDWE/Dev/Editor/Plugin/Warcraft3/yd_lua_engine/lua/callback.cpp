@@ -101,7 +101,6 @@ namespace ydwe { namespace warcraft3 { namespace lua_engine { namespace lua {
 		}
 
 		ls->pop(1);
-		ls->pop(1);
 		return retval;
 	}
 
