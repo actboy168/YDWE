@@ -90,7 +90,9 @@ namespace warcraft3 { namespace lua_engine {
 			return 0;
 		}
 		
-		return jass_read((jassbind*)ls, result_vt, 0);
+		uintptr_t ret = jass_read((jassbind*)ls, result_vt, -1);
+		ls->pop(1);
+		return ret;
 	}
 
 	uint32_t __fastcall jass_callback(uint32_t param)

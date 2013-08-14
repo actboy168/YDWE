@@ -45,7 +45,7 @@ namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
-	uintptr_t jass_read(jassbind* lj, native_function::variable_type opt, int idx = 0)
+	uintptr_t jass_read(jassbind* lj, native_function::variable_type opt, int idx)
 	{
 		switch (opt)
 		{
@@ -55,21 +55,20 @@ namespace warcraft3 { namespace lua_engine {
 			//
 			// Fixed me
 			//
-			break;
+			return 0;
 		case native_function::TYPE_INTEGER:
 			return lj->read_integer(idx);
-			break;
 		case native_function::TYPE_REAL:
 			return lj->read_real(idx);
 		case native_function::TYPE_STRING:
 			//
 			// Fixed me
 			//
-			break;
+			return 0;
 		case native_function::TYPE_HANDLE:
-			return lj->read_handle(3);
+			return lj->read_handle(idx);
 		case native_function::TYPE_BOOLEAN:
-			return lj->read_boolean(3);
+			return lj->read_boolean(idx);
 		default:
 			assert(false);
 			return 0;
