@@ -90,6 +90,11 @@ namespace warcraft3 { namespace lua_engine {
 			return 0;
 		}
 		
+		if (result_vt == native_function::TYPE_NOTHING)
+		{
+			return 0;
+		}
+
 		uintptr_t ret = jass_read((jassbind*)ls, result_vt, -1);
 		ls->pop(1);
 		return ret;
