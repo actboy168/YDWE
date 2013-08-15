@@ -3,6 +3,7 @@
 #include <ydwe/path/service.h>
 #include <Shlobj.h>
 #include <ydwe/exception/windows_exception.h>
+#include <ydwe/util/dynarray.h>
 
 #define ENSURE(cond) if (FAILED(cond)) throw windows_exception(#cond " failed.");
 
@@ -51,13 +52,13 @@ _BASE_BEGIN namespace path { namespace detail {
 			return std::move(boost::filesystem::path(buffer, buffer + path_len));
 		}
 
-		std::unique_ptr<wchar_t[]> buf(new wchar_t[path_len]);
-		path_len = ::GetWindowsDirectoryW(buf.get(), path_len);
+		std::dynarray<wchar_t> buf(path_len);
+		path_len = ::GetWindowsDirectoryW(buf.data(), buf.size());
 		if (path_len == 0 || path_len > _countof(buffer))
 		{
 			throw windows_exception("::GetWindowsDirectoryW failed.");
 		}
-		return std::move(boost::filesystem::path(buf.get(), buf.get() + path_len));
+		return std::move(boost::filesystem::path(buf.begin(), buf.end()));
 	}
 
 	boost::filesystem::path GetSystemPath() 
@@ -74,13 +75,13 @@ _BASE_BEGIN namespace path { namespace detail {
 			return std::move(boost::filesystem::path(buffer, buffer + path_len));
 		}
 
-		std::unique_ptr<wchar_t[]> buf(new wchar_t[path_len]);
-		path_len = ::GetWindowsDirectoryW(buf.get(), path_len);
+		std::dynarray<wchar_t> buf(path_len);
+		path_len = ::GetWindowsDirectoryW(buf.data(), buf.size());
 		if (path_len == 0 || path_len > _countof(buffer))
 		{
 			throw windows_exception("::GetSystemDirectoryW failed.");
 		}
-		return std::move(boost::filesystem::path(buf.get(), buf.get() + path_len));
+		return std::move(boost::filesystem::path(buf.begin(), buf.end()));
 	}
 
 	boost::filesystem::path GetModulePath(HMODULE module_handle)
@@ -99,8 +100,8 @@ _BASE_BEGIN namespace path { namespace detail {
 
 		for (size_t buf_len = 0x200; buf_len <= 0x10000; buf_len <<= 1)
 		{
-			std::unique_ptr<wchar_t[]> buf(new wchar_t[buf_len]);
-			DWORD path_len = ::GetModuleFileNameW(module_handle, buf.get(), buf_len);		
+			std::dynarray<wchar_t> buf(path_len);
+			DWORD path_len = ::GetModuleFileNameW(module_handle, buf.data(), buf.size());		
 			if (path_len == 0)
 			{
 				throw windows_exception("::GetModuleFileNameW failed.");
@@ -108,7 +109,7 @@ _BASE_BEGIN namespace path { namespace detail {
 
 			if (path_len < _countof(buffer))
 			{
-				return std::move(boost::filesystem::path(buf.get(), buf.get() + path_len));
+				return std::move(boost::filesystem::path(buf.begin(), buf.end()));
 			}
 		}
 

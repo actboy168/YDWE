@@ -1,5 +1,6 @@
 #include <ydwe/win/process.h>
 #include <ydwe/hook/detail/inject_dll.h>
+#include <ydwe/util/dynarray.h>
 #include <Windows.h>
 #include <memory>
 #include <strsafe.h>
@@ -160,12 +161,12 @@ namespace win {
 			}
 			else
 			{
-				std::unique_ptr<wchar_t[]> command_line_buffer(new wchar_t[command_line.size()+1]);
-				wcscpy_s(command_line_buffer.get(), command_line.size()+1, command_line.c_str());
+				std::dynarray<wchar_t> command_line_buffer(command_line.size()+1);
+				wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
 
 				if (!detail::create_process(
 						boost::filesystem::exists(application) ? application.c_str(): nullptr, 
-						command_line_buffer.get(), 
+						command_line_buffer.data(), 
 						NORMAL_PRIORITY_CLASS, 
 						boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
 						&si_, &pi_, inject_dll_
@@ -201,12 +202,12 @@ namespace win {
 			}
 			else
 			{
-				std::unique_ptr<wchar_t[]> command_line_buffer(new wchar_t[command_line.size()+1]);
-				wcscpy_s(command_line_buffer.get(), command_line.size()+1, command_line.c_str());
+				std::dynarray<wchar_t> command_line_buffer(command_line.size()+1);
+				wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
 
 				if (!detail::create_process(
 					boost::filesystem::exists(application) ? application.c_str(): nullptr, 
-					command_line_buffer.get(), 
+					command_line_buffer.data(), 
 					NORMAL_PRIORITY_CLASS, 
 					nullptr, 
 					&si_, &pi_, inject_dll_
@@ -242,12 +243,12 @@ namespace win {
 			}
 			else
 			{
-				std::unique_ptr<wchar_t[]> command_line_buffer(new wchar_t[command_line.size()+1]);
-				wcscpy_s(command_line_buffer.get(), command_line.size()+1, command_line.c_str());
+				std::dynarray<wchar_t> command_line_buffer(command_line.size()+1);
+				wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
 
 				if (!detail::create_process(
 					nullptr, 
-					command_line_buffer.get(), 
+					command_line_buffer.data(), 
 					NORMAL_PRIORITY_CLASS, 
 					boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
 					&si_, &pi_, inject_dll_
@@ -283,12 +284,12 @@ namespace win {
 			}
 			else
 			{
-				std::unique_ptr<wchar_t[]> command_line_buffer(new wchar_t[command_line.size()+1]);
-				wcscpy_s(command_line_buffer.get(), command_line.size()+1, command_line.c_str());
+				std::dynarray<wchar_t> command_line_buffer(command_line.size()+1);
+				wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
 
 				if (!detail::create_process(
 					nullptr, 
-					command_line_buffer.get(), 
+					command_line_buffer.data(), 
 					NORMAL_PRIORITY_CLASS, 
 					nullptr, 
 					&si_, &pi_, inject_dll_

@@ -2,6 +2,7 @@
 #include <cassert>
 #include <memory>
 #include <ydwe/exception/windows_exception.h>
+#include <ydwe/util/dynarray.h>
 #include <Windows.h>
 
 _BASE_BEGIN 
@@ -116,8 +117,8 @@ namespace util { namespace detail {
 
 		if (buf_size > default_codecvt_buf_size)
 		{
-			std::unique_ptr<wchar_t[]> buf(new wchar_t[buf_size]);
-			convert_aux(from, from_end, buf.get(), buf.get()+buf_size, to, cvt, how);
+			std::dynarray<wchar_t> buf(buf_size);
+			convert_aux(from, from_end, buf.begin(), buf.end(), to, cvt, how);
 		}
 		else
 		{
@@ -143,8 +144,8 @@ namespace util { namespace detail {
 
 		if (buf_size > default_codecvt_buf_size)
 		{
-			std::unique_ptr<char[]> buf(new char[buf_size]);
-			convert_aux(from, from_end, buf.get(), buf.get()+buf_size, to, cvt, how);
+			std::dynarray<char> buf(buf_size);
+			convert_aux(from, from_end, buf.begin(), buf.end(), to, cvt, how);
 		}
 		else
 		{
