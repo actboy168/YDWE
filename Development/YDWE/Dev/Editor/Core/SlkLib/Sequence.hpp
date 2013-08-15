@@ -178,7 +178,7 @@ namespace slk
 			{
 				if (IsFound(*It))
 				{
-					Result.push_back(SequenceT(InCur, It));
+					Result.push_back(ResultT::value_type(InCur, It));
 					break;
 				}
 			}
@@ -190,7 +190,7 @@ namespace slk
 		}
 		if (InCur != InEnd)
 		{
-			Result.push_back(SequenceT(InCur, InEnd));
+			Result.push_back(ResultT::value_type(InCur, InEnd));
 		}
 
 		return Result;
