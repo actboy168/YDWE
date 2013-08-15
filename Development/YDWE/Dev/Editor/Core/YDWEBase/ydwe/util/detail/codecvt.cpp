@@ -1,4 +1,5 @@
 #include <ydwe/util/detail/codecvt.h>
+#include <array>
 #include <cassert>
 #include <memory>
 #include <ydwe/exception/windows_exception.h>
@@ -122,8 +123,8 @@ namespace util { namespace detail {
 		}
 		else
 		{
-			wchar_t buf[default_codecvt_buf_size];
-			convert_aux(from, from_end, buf, buf+default_codecvt_buf_size, to, cvt, how);
+			std::array<wchar_t, default_codecvt_buf_size> buf;
+			convert_aux(from, from_end, &*buf.begin(), &*buf.begin() + buf.size(), to, cvt, how);
 		}
 	}
 
@@ -149,8 +150,8 @@ namespace util { namespace detail {
 		}
 		else
 		{
-			char buf[default_codecvt_buf_size];
-			convert_aux(from, from_end, buf, buf+default_codecvt_buf_size, to, cvt, how);
+			std::array<char, default_codecvt_buf_size> buf;
+			convert_aux(from, from_end, &*buf.begin(), &*buf.begin() + buf.size(), to, cvt, how);
 		}
 	}
 }}}
