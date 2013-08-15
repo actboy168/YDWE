@@ -2,7 +2,6 @@
 #include <ydwe/hook/iat.h>
 #include <ydwe/util/foreach.h>
 #include <ydwe/util/do_once.h>
-#include <ydwe/warcraft3/detail/memory_search.h>
 #include <ydwe/warcraft3/native_function.h>
 #include <ydwe/warcraft3/version.h>
 #include <ydwe/warcraft3/war3_searcher.h>

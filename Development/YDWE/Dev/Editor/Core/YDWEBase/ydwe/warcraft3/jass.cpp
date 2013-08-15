@@ -1,6 +1,5 @@
 #include <ydwe/warcraft3/jass.h>
 #include <ydwe/warcraft3/war3_searcher.h>
-#include <ydwe/warcraft3/detail/memory_search.h>
 #include <ydwe/warcraft3/native_function.h>
 #include <cassert>
 #include <memory>
@@ -91,10 +90,10 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 	{
 		uintptr_t ptr = get_war3_searcher().search_string("I2S");
 		ptr = *(uintptr_t*)(ptr + 0x05);
-		ptr = detail::next_opcode(ptr, 0xE8, 5);
+		ptr = next_opcode(ptr, 0xE8, 5);
 		ptr += 0x05;
-		ptr = detail::next_opcode(ptr, 0xE8, 5);
-		return detail::convert_function(ptr);
+		ptr = next_opcode(ptr, 0xE8, 5);
+		return convert_function(ptr);
 	}
 
 	uintptr_t create_string(const char* val)

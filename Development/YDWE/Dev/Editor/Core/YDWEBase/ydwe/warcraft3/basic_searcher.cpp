@@ -1,5 +1,6 @@
 #include <ydwe/warcraft3/basic_searcher.h>
 #include <ydwe/warcraft3/detail/memory_search.h>
+#include <ydwe/hook/detail/disassembly.h>
 
 _BASE_BEGIN namespace warcraft3 {
 
@@ -91,5 +92,51 @@ _BASE_BEGIN namespace warcraft3 {
 	uintptr_t basic_searcher::search_int_in_data(uint32_t value, uintptr_t beg) const
 	{
 		return detail::search_int(beg, data_end_, (uint32_t)value);
+	}
+
+	uintptr_t convert_function(uintptr_t address)
+	{
+		return address + *(uintptr_t*) (address+1) + 5;
+	}
+
+	uintptr_t next_opcode(uintptr_t address)
+	{
+		return address + hook::detail::next_opcode(address, nullptr);;
+	}
+
+	uintptr_t next_opcode(uintptr_t address, uint8_t opcode, size_t length)
+	{
+		size_t size = 0;
+		do
+		{
+			uint8_t* op = nullptr;
+			size = hook::detail::next_opcode(address, &op);
+			if ((size == length) && (op[0] == opcode)) break;
+			address += size;
+		} while (size);
+
+		return address;
+	}
+
+	uintptr_t next_opcode(uintptr_t address, uint8_t opcode[], size_t n)
+	{
+		size_t size = 0;
+		do
+		{
+			uint8_t* op = nullptr;
+			size = hook::detail::next_opcode(address, &op);
+
+			for (size_t i = 0; i < n; ++i)
+			{
+				if (op[0] == opcode[i])
+				{
+					return address;
+				}
+			}
+
+			address += size;
+		} while (size);
+
+		return address;
 	}
 }}

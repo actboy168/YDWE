@@ -409,6 +409,9 @@
     <ClInclude Include="ydwe\lua\luabind\converter_boost_string_ref.h">
       <Filter>ydwe\lua\luabind</Filter>
     </ClInclude>
+    <ClInclude Include="ydwe\util\dynarray.h">
+      <Filter>ydwe\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\YDWEVersion\common.rc">

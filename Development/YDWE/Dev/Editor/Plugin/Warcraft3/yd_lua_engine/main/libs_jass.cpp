@@ -45,6 +45,36 @@ namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
+	uintptr_t jass_read(jassbind* lj, native_function::variable_type opt, int idx)
+	{
+		switch (opt)
+		{
+		case native_function::TYPE_NOTHING:
+			return 0;
+		case native_function::TYPE_CODE:
+			//
+			// Fixed me
+			//
+			return 0;
+		case native_function::TYPE_INTEGER:
+			return lj->read_integer(idx);
+		case native_function::TYPE_REAL:
+			return lj->read_real(idx);
+		case native_function::TYPE_STRING:
+			//
+			// Fixed me
+			//
+			return 0;
+		case native_function::TYPE_HANDLE:
+			return lj->read_handle(idx);
+		case native_function::TYPE_BOOLEAN:
+			return lj->read_boolean(idx);
+		default:
+			assert(false);
+			return 0;
+		}
+	}
+
 	int jass_call_native_function(jassbind* lj, const native_function::native_function* nf, uintptr_t func_address = 0)
 	{
 		size_t param_size = nf->get_param().size();
@@ -190,50 +220,89 @@ namespace warcraft3 { namespace lua_engine {
 		jass::global_variable gv(name);
 		if (gv.is_vaild())
 		{
-			switch (gv.type())
+			if (!gv.is_array())
 			{
-			case jass::OPCODE_VARIABLE_NOTHING:
-			case jass::OPCODE_VARIABLE_UNKNOWN:
-			case jass::OPCODE_VARIABLE_NULL:
-				break;
-			case jass::OPCODE_VARIABLE_CODE:
-				//
-				// Fixed me
-				//
-				break;
-			case jass::OPCODE_VARIABLE_INTEGER:
-				gv = lj->read_integer(3);
-				break;
-			case jass::OPCODE_VARIABLE_REAL:
-				gv = lj->read_real(3);
-				break;
-			case jass::OPCODE_VARIABLE_STRING:
-				//
-				// Fixed me
-				//
-				break;
-			case jass::OPCODE_VARIABLE_HANDLE:
-				gv = lj->read_handle(3);
-				break;
-			case jass::OPCODE_VARIABLE_BOOLEAN:
-				gv = lj->read_boolean(3);
-				break;
-			case jass::OPCODE_VARIABLE_INTEGER_ARRAY:
-			case jass::OPCODE_VARIABLE_REAL_ARRAY:
-			case jass::OPCODE_VARIABLE_STRING_ARRAY:
-			case jass::OPCODE_VARIABLE_HANDLE_ARRAY:
-			case jass::OPCODE_VARIABLE_BOOLEAN_ARRAY:
-				break;
-			default:
-				break;
+				gv = jass_read(lj, jass::opcode_type_to_var_type(gv.type()), 3);
+			}
+			else
+			{
+				switch (gv.type())
+				{
+				case jass::OPCODE_VARIABLE_INTEGER_ARRAY:
+				case jass::OPCODE_VARIABLE_REAL_ARRAY:
+				case jass::OPCODE_VARIABLE_STRING_ARRAY:
+				case jass::OPCODE_VARIABLE_HANDLE_ARRAY:
+				case jass::OPCODE_VARIABLE_BOOLEAN_ARRAY:
+					break;
+				default:
+					break;
+				}
 			}
 		}
 
 		return 0;
 	}
 
+	int handle_eq(lua_State *L)
+	{
+		jassbind* lj = (jassbind*)L;
+		jass::jhandle_t a = lj->read_handle(1);
+		jass::jhandle_t b = lj->read_handle(2);
+		lj->pushboolean(a == b);
+		return 1;
+	}
+
+	int handle_tostring(lua_State *L)
+	{
+		static char hex[] = "0123456789ABCDEF";
+
+		jassbind* lj = (jassbind*)L;
+		jass::jhandle_t h = lj->read_handle(1);
+
+		luaL_Buffer b;
+		luaL_buffinitsize(L , &b , 28);
+		luaL_addstring(&b, "handle: 0x");
+
+		bool strip = true;
+		for (int i = 7; i >= 0; i--) 
+		{
+			int c = (h >> (i*4)) & 0xF;
+			if (strip && c == 0) 
+			{
+				continue;
+			}
+			strip = false;
+			luaL_addchar(&b, hex[c]);
+		}
+
+		if (strip)
+		{
+			luaL_addchar(&b , '0');
+		}
+
+		luaL_pushresult(&b);
+
+		return 1;
+	}
+
+	void handle_make_mt(lua::state* ls)
+	{
+		luaL_Reg lib[] = {
+			{ "__eq",       handle_eq },
+			{ "__tostring", handle_tostring },
+			{ NULL, NULL },
+		};
+
+		ls->pushlightuserdata(NULL);
+		luaL_newlib(ls->self(), lib);
+		ls->setmetatable(-2);
+		ls->pop(1);
+	}
+
 	int open_jass(lua::state* ls)
 	{
+		handle_make_mt(ls);
+		
 		ls->newtable();
 		{
 			ls->newtable();

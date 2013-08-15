@@ -225,6 +225,7 @@
             // txtEdit
             // 
             this.txtEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtEdit.HideSelection = false;
             this.txtEdit.Location = new System.Drawing.Point(0, 0);
             this.txtEdit.Multiline = true;
             this.txtEdit.Name = "txtEdit";
@@ -238,8 +239,10 @@
             // txtPreview
             // 
             this.txtPreview.BackColor = System.Drawing.Color.Black;
+            this.txtPreview.DetectUrls = false;
             this.txtPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtPreview.ForeColor = System.Drawing.Color.White;
+            this.txtPreview.HideSelection = false;
             this.txtPreview.Location = new System.Drawing.Point(0, 0);
             this.txtPreview.Name = "txtPreview";
             this.txtPreview.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
@@ -271,12 +274,15 @@
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.lblStatic);
             this.DoubleBuffered = true;
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(370, 200);
             this.Name = "EditDialogBox";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "EditDialogBox";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.EditDialogBox_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EditDialogBox_KeyDown);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel1.PerformLayout();
             this.splitContainer.Panel2.ResumeLayout(false);

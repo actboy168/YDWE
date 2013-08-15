@@ -203,6 +203,7 @@
     <ClInclude Include="ydwe\util\detail\ansi_codecvt.h" />
     <ClInclude Include="ydwe\util\detail\codecvt.h" />
     <ClInclude Include="ydwe\util\detail\utf8_codecvt.h" />
+    <ClInclude Include="ydwe\util\dynarray.h" />
     <ClInclude Include="ydwe\util\foreach.h" />
     <ClInclude Include="ydwe\util\horrible_cast.h" />
     <ClInclude Include="ydwe\util\do_once.h" />

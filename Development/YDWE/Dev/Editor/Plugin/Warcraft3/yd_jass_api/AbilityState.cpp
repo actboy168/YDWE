@@ -2,7 +2,6 @@
 #include <ydwe/hook/iat.h>
 #include <ydwe/warcraft3/native_function.h>
 #include <ydwe/warcraft3/war3_searcher.h>
-#include <ydwe/warcraft3/detail/memory_search.h>
 #include <ydwe/warcraft3/version.h>
 #include <ydwe/warcraft3/jass.h>
 #include <ydwe/hook/inline.h>
@@ -220,11 +219,11 @@ namespace warcraft3 { namespace japi {
 		}
 
 		ptr += 0x04;
-		ptr = detail::next_opcode(ptr, 0xE8, 5);
+		ptr = next_opcode(ptr, 0xE8, 5);
 		ptr += 0x05;
-		ptr = detail::next_opcode(ptr, 0xE8, 5);
-		ptr = detail::convert_function(ptr);
-		ptr = detail::next_opcode(ptr, 0x89, 6);
+		ptr = next_opcode(ptr, 0xE8, 5);
+		ptr = convert_function(ptr);
+		ptr = next_opcode(ptr, 0x89, 6);
 		ptr = *(uintptr_t*)(ptr + 0x02);
 		return (mapping_ability*)*(uintptr_t*)(ptr);		
 	}

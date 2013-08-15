@@ -1,5 +1,6 @@
 #include <ydwe/i18n/mofile.h>
 #include <ydwe/file/steam.h>
+#include <ydwe/util/dynarray.h>
 
 _BASE_BEGIN 
 namespace i18n {
@@ -10,7 +11,7 @@ namespace i18n {
 		{
 			reader.seek(offset, std::ios::beg);
 
-			std::unique_ptr<uint32_t []> strings_lengths(new uint32_t[number_of_strings]);
+			std::dynarray<uint32_t> strings_lengths(number_of_strings);
 
 			uint32_t first_offset = 0;
 			uint32_t last_offset  = 0;
@@ -32,7 +33,7 @@ namespace i18n {
 				}
 			}
 
-			uint32_t string_array_size = last_offset + strings_lengths[number_of_strings - 1] + 1 - first_offset;
+			uint32_t string_array_size = last_offset + strings_lengths.back() + 1 - first_offset;
 			if (string_array_size == 0)
 			{
 				return false;
