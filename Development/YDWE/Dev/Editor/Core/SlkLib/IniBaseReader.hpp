@@ -22,7 +22,7 @@ namespace slk
 			TextReader::EachLine(reader, [&](boost::string_ref& line)
 			{
 				size_t pos = line.find("//");
-				if (pos != std::string::npos)
+				if (pos != boost::string_ref::npos)
 				{
 					line.remove_prefix(pos);
 				}
