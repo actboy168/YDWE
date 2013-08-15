@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Util.hpp"
+#include <ydwe/util/string_ref.h>
 
 namespace slk
 {
@@ -15,7 +16,7 @@ namespace slk
 					return It;
 			}
 
-			return InBegin;
+			return InEnd;
 		}
 
 		template <typename ForwardIteratorT, typename PredicateT>
@@ -79,6 +80,20 @@ namespace slk
 		Input.erase(TrimEnd, Input.end());
 	}
 
+	template <typename PredicateT>
+	inline void trim_left(boost::string_ref& Input, PredicateT IsFound)
+	{
+		boost::string_ref::iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
+		Input.remove_prefix(std::distance(Input.begin(), TrimBegin));
+	}
+
+	template <typename PredicateT>
+	inline void trim_right(boost::string_ref& Input, PredicateT IsFound)
+	{
+		boost::string_ref::iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
+		Input.remove_suffix(std::distance(TrimEnd, Input.end()));
+	}
+
 	template <typename SequenceT, typename PredicateT>
 	inline void trim(SequenceT& Input, PredicateT IsFound)
 	{
@@ -115,7 +130,7 @@ namespace slk
 	inline SequenceT trim_copy(typename SequenceT::const_iterator ItBegin, typename SequenceT::const_iterator ItEnd, PredicateT IsFound)
 	{
 		typename SequenceT::const_iterator TrimEnd = detail::find_end(ItBegin, ItEnd, IsFound);
-		typename SequenceT::const_iterator TrimBegin = detail::find_begin(ItBegin, ItEnd, IsFound);
+		typename SequenceT::const_iterator TrimBegin = detail::find_begin(ItBegin, TrimEnd, IsFound);
 		return std::move(SequenceT(TrimBegin, TrimEnd));
 	}
 

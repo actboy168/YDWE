@@ -69,33 +69,31 @@ namespace slk
 				cur_y_ = y;
 			}
 
-			void set_k(std::string&& val)
+			void set_k(boost::string_ref&& val)
 			{
 				if (cur_y_ == 1)
 				{
 					if (val.size() >= 2 && val[0] == '"' && val[val.size()-1] == '"')
 					{
-						tag_[cur_x_-1].assign(val, 1, val.size()-2);
+						val.remove_prefix(1);
+						val.remove_suffix(1);
 					}
-					else
-					{
-						tag_[cur_x_-1].assign(val);
-					}
+
+					tag_[cur_x_-1] = val.to_string();
 				}
 				else if (cur_x_ == 1)
 				{
 					if (val.size() >= 2 && val[0] == '"' && val[val.size()-1] == '"')
 					{
-						id_[cur_y_-1] = ObjectId(std::string(val, 1, val.size()-2));
+						val.remove_prefix(1);
+						val.remove_suffix(1);
 					}
-					else
-					{
-						id_[cur_y_-1] = ObjectId(val);
-					}
+
+					id_[cur_y_-1] = ObjectId(val);
 				}
 				else
 				{
-					(*this)[cur_x_-1][cur_y_-1] = std::move(val);
+					(*this)[cur_x_-1][cur_y_-1] = val.to_string();
 				}
 			}
 
@@ -152,23 +150,23 @@ namespace slk
 				}
 			}
 
-			void read_line_b(std::string& line)
+			void read_line_b(boost::string_ref& line)
 			{
 				size_t x = 0, y = 0;
 
 				split_callback(line,
-					[&](std::string::const_iterator const& beg, std::string::const_iterator const& end)
+					[&](boost::string_ref::const_iterator const& beg, boost::string_ref::const_iterator const& end)
 				{
 					switch (*beg)
 					{
 					case 'X':
 						{
-							x = Str2UInt(trim_copy<std::string>(beg+1, end, ctype::is_space()));
+							x = Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space()));
 						}
 						break;
 					case 'Y':
 						{
-							y = Str2UInt(trim_copy<std::string>(beg+1, end, ctype::is_space()));
+							y = Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space()));
 						}
 						break;
 					default:
@@ -184,26 +182,26 @@ namespace slk
 				this->assign(x, y);
 			}
 
-			void read_line_c(std::string& line)
+			void read_line_c(boost::string_ref& line)
 			{
 				split_callback(line,
-					[&](std::string::const_iterator const& beg, std::string::const_iterator const& end)
+					[&](boost::string_ref::const_iterator const& beg, boost::string_ref::const_iterator const& end)
 				{
 					switch (*beg)
 					{
 					case 'X':
 						{
-							this->set_x(Str2UInt(trim_copy<std::string>(beg+1, end, ctype::is_space())));
+							this->set_x(Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space())));
 						}
 						break;
 					case 'Y':
 						{
-							this->set_y(Str2UInt(trim_copy<std::string>(beg+1, end, ctype::is_space())));
+							this->set_y(Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space())));
 						}
 						break;
 					case 'K':
 						{
-							this->set_k(trim_copy<std::string>(beg+1, end, ctype::is_space()));
+							this->set_k(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space()));
 						}
 						break;
 					default:
@@ -212,21 +210,21 @@ namespace slk
 				});
 			}
 
-			void read_line_f(std::string& line)
+			void read_line_f(boost::string_ref& line)
 			{
 				split_callback(line,
-					[&](std::string::const_iterator const& beg, std::string::const_iterator const& end)
+					[&](boost::string_ref::const_iterator const& beg, boost::string_ref::const_iterator const& end)
 				{
 					switch (*beg)
 					{
 					case 'X':
 						{
-							this->set_x(Str2UInt(trim_copy<std::string>(beg+1, end, ctype::is_space())));
+							this->set_x(Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space())));
 						}
 						break;
 					case 'Y':
 						{
-							this->set_y(Str2UInt(trim_copy<std::string>(beg+1, end, ctype::is_space())));
+							this->set_y(Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space())));
 						}
 						break;
 					default:
@@ -235,7 +233,7 @@ namespace slk
 				});
 			}
 
-			uint8_t read_type(std::string& line)
+			uint8_t read_type(boost::string_ref& line)
 			{
 				auto It = find_begin(line, char_equal(';'));
 
@@ -244,16 +242,16 @@ namespace slk
 					return 0;
 				}
 
-				std::string key = trim_copy<std::string>(line.begin(), It, ctype::is_space());
+				boost::string_ref key = trim_copy<boost::string_ref>(line.begin(), It, ctype::is_space());
 
-				line.erase(line.begin(), ++It);
+				line.remove_prefix(It - line.begin() + 1);
 				return key.front();
 			}
 
 			void read(buffer_reader& reader)
 			{
 				bool is_found_b = false;
-				TextReader::EachLine(reader, [&](std::string& line)
+				TextReader::EachLine(reader, [&](boost::string_ref& line)
 				{
 					uint8_t type = read_type(line);
 					if (!is_found_b)

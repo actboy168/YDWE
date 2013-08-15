@@ -9,12 +9,12 @@ namespace slk
 	{
 		bool is_WorldEditStrings = false;
 		TextReader::RemoveBom(reader);
-		TextReader::EachLine(reader, [&](std::string& line)
+		TextReader::EachLine(reader, [&](boost::string_ref& line)
 		{
 			size_t pos = line.find("//");
 			if (pos != std::string::npos)
 			{
-				line.erase(pos);
+				line.remove_prefix(pos);
 			}
 
 			trim_left(line, ctype::is_space());
@@ -24,7 +24,7 @@ namespace slk
 				auto ItBeg = find_begin(line, char_equal(']'));
 				if (ItBeg != line.end())
 				{
-					is_WorldEditStrings = "WorldEditStrings" == IniBaseReader::String<std::string>(line.begin()+1, ItBeg);
+					is_WorldEditStrings = "WorldEditStrings" == IniBaseReader::String<boost::string_ref>(line.begin()+1, ItBeg);
 				}
 			}
 			else
@@ -35,11 +35,11 @@ namespace slk
 
 					if (ItBeg != line.end())
 					{
-						std::string key = IniBaseReader::String<std::string>(line.begin(), ItBeg);
-						std::string val = IniBaseReader::String<std::string>(ItBeg+1, line.end());
+						boost::string_ref key = IniBaseReader::String<boost::string_ref>(line.begin(), ItBeg);
+						boost::string_ref val = IniBaseReader::String<boost::string_ref>(ItBeg+1, line.end());
 						if (!val.empty() && !key.empty())
 						{
-							table[key] = val;
+							table[key.to_string()] = val.to_string();
 						}
 					}
 				}

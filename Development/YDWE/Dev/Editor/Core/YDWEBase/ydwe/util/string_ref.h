@@ -81,7 +81,18 @@ namespace boost {
             }
 
         basic_string_ref(const charT* str)
-            : ptr_(str), len_(traits::length(str)) {}
+			: ptr_(str), len_(traits::length(str)) {}
+
+		template <class Source>
+		basic_string_ref(Source first, Source last)
+			: ptr_(NULL), len_(0) 
+		{
+			if (first < last)
+			{
+				ptr_ = first;
+				len_ = std::distance(first, last);
+			}			
+		}
 
         template<typename Allocator>
         basic_string_ref(const std::basic_string<charT, traits, Allocator>& str)
@@ -89,13 +100,6 @@ namespace boost {
 
         BOOST_CONSTEXPR basic_string_ref(const charT* str, size_type len)
             : ptr_(str), len_(len) {}
-
-#ifndef BOOST_NO_CXX11_EXPLICIT_CONVERSION_OPERATORS
-        template<typename Allocator>
-        explicit operator std::basic_string<charT, traits, Allocator>() const {
-            return std::basic_string<charT, traits, Allocator> ( ptr_, len_ );
-            }
-#endif
 
         std::basic_string<charT, traits> to_string () const {
             return std::basic_string<charT, traits> ( ptr_, len_ );

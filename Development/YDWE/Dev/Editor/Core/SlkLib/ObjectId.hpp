@@ -3,6 +3,7 @@
 #include "port/config.h"
 #include <string>
 #include <memory.h>
+#include <ydwe/util/string_ref.h>
 
 namespace slk
 {
@@ -20,6 +21,19 @@ namespace slk
 		{ }
 
 		ObjectId(const std::string& id)
+		{
+			if (id.size() >= 4)
+			{
+				memcpy(&_c[0], &*id.begin(), 4*sizeof(char));
+			}
+			else
+			{
+				_v = 0;
+				memcpy(&_c[0], &*id.begin(), id.size()*sizeof(char));
+			}
+		}
+
+		ObjectId(const boost::string_ref& id)
 		{
 			if (id.size() >= 4)
 			{

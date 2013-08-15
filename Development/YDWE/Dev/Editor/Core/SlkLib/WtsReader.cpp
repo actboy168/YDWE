@@ -22,16 +22,16 @@ namespace slk
 		std::string value;
 
 		TextReader::RemoveBom(reader);
-		TextReader::EachLine(reader, [&](std::string& line)
+		TextReader::EachLine(reader, [&](boost::string_ref& line)
 		{
 			switch (state)
 			{
 			case WST_READER_STATE::STATE_HEADER:
 				{
 					trim_left(line, ctype::is_space());
-					if (0 == line.compare(0, 6, "STRING"))
+					if (line.substr(0, 6) == "STRING")
 					{
-						line.erase(0, 6);
+						line.remove_prefix(6);
 						trim(line, ctype::is_space());
 						key = Str2UInt(line);
 						state = WST_READER_STATE::STATE_BEGIN;
@@ -41,7 +41,7 @@ namespace slk
 			case WST_READER_STATE::STATE_BEGIN:
 				{
 					trim_left(line, ctype::is_space());
-					if ('{' == line[0])
+					if (!line.empty() && '{' == line[0])
 					{
 						state = WST_READER_STATE::STATE_BODY;
 					}
@@ -49,9 +49,10 @@ namespace slk
 				break;
 			case WST_READER_STATE::STATE_BODY:
 				{
-					if ('}' != trim_left_copy(line, ctype::is_space())[0])
+					boost::string_ref new_line = trim_left_copy(line, ctype::is_space());
+					if (new_line.empty() || ('}' != new_line[0]))
 					{
-						value.append(line);
+						value.append(line.begin(), line.end());
 					}
 					else
 					{

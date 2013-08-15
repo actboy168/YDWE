@@ -19,7 +19,7 @@ namespace slk
 		}
 	}
 
-	void TextReader::EachLine(buffer_reader& reader, std::function<void(std::string&)> callback)
+	void TextReader::EachLine(buffer_reader& reader, std::function<void(boost::string_ref&)> callback)
 	{
 		buffer_reader::status ec = buffer_reader::normal;
 		while (ec != buffer_reader::stream_eof)
@@ -33,7 +33,7 @@ namespace slk
 
 			if (len != 0)
 			{
-				std::string value(ptr, ptr+len);
+				boost::string_ref value(ptr, ptr+len);
 				callback(value);
 			}
 		}

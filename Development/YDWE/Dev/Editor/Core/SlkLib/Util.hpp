@@ -116,7 +116,8 @@ namespace slk
 		return std::move(std::string(str_buf.begin() + offset, str_buf.end()));
 	}
 
-	inline unsigned int Str2UInt(std::string const& str)
+	template <class Sequence>
+	inline unsigned int Str2UInt(Sequence const& str)
 	{
 		unsigned int sum = 0;
 		foreach(char c, str)

@@ -19,12 +19,12 @@ namespace slk
 		{
 			typename TableT::mapped_type* object = nullptr;
 			TextReader::RemoveBom(reader);
-			TextReader::EachLine(reader, [&](std::string& line)
+			TextReader::EachLine(reader, [&](boost::string_ref& line)
 			{
 				size_t pos = line.find("//");
 				if (pos != std::string::npos)
 				{
-					line.erase(pos);
+					line.remove_prefix(pos);
 				}
 
 				trim_left(line, ctype::is_space());
@@ -34,7 +34,7 @@ namespace slk
 					auto ItBeg = find_begin(line, char_equal(']'));
 					if (ItBeg != line.end())
 					{
-						object = &table[String<std::string>(line.begin()+1, ItBeg)];
+						object = &table[String<boost::string_ref>(line.begin()+1, ItBeg).to_string()];
 					}
 				}
 				else
@@ -45,11 +45,11 @@ namespace slk
 
 						if (ItBeg != line.end())
 						{
-							std::string key = String<std::string>(line.begin(), ItBeg);
-							std::string val = String<std::string>(ItBeg+1, line.end());
+							boost::string_ref key = String<boost::string_ref>(line.begin(), ItBeg);
+							boost::string_ref val = String<boost::string_ref>(ItBeg+1, line.end());
 							if (!val.empty() && !key.empty())
 							{
-								(*object)[key] = val;
+								(*object)[key.to_string()] = val.to_string();
 							}
 						}
 					}
