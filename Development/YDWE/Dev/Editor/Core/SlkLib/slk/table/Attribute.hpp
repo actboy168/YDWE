@@ -1,12 +1,8 @@
 #pragma once
 
-#include <string>
-#include <sstream>
-#include <iomanip>
 #include <slk/table/BaseTable.hpp>
 #include <slk/utility/object_id.h>
 #include <slk/table/VariableData.hpp>
-#include <slk/table/SlkTable.hpp>
 
 namespace slk
 {

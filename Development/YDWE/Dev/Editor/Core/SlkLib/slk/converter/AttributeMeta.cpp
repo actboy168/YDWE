@@ -1,4 +1,3 @@
-
 #include <slk/converter/AttributeMeta.hpp>
 
 namespace slk

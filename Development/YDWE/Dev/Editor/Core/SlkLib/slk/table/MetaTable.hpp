@@ -1,10 +1,8 @@
 #pragma once
 
 #include <string>
-#include <set>
 #include <slk/utility/object_id.h>
 #include <slk/table/BaseTable.hpp>
-#include <slk/table/SlkTable.hpp>
 #include <slk/table/VariableData.hpp>
 
 namespace slk

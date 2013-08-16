@@ -2,7 +2,6 @@
 
 #include <string>
 #include <slk/table/BaseTable.hpp>
-#include <slk/table/VariableData.hpp>
 
 namespace slk
 {

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <slk/utility/util.h>
 #include <slk/utility/buffer.h>
 #include <slk/table/IniTable.hpp>
 
