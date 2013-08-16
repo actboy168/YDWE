@@ -54,9 +54,7 @@ namespace slk
 
 		ObjectId(const uint32_t& id, not_swap_t const&)
 			: _v(id)
-		{
-
-		}
+		{ }
 
 		bool operator < (const ObjectId& that) const
 		{

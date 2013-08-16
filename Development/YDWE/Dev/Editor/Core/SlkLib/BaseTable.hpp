@@ -1,6 +1,5 @@
 #pragma once
 
-#include <map>
 #include <unordered_map>
 #include "ObjectId.hpp"
 #include "Buffer.hpp"
@@ -148,69 +147,17 @@ namespace slk
 		};
 	}
 
-	enum HASH_TABLE_TYPE
-	{
-		MAP,
-		UNORDERED_MAP,
-	};
-
-	template <class _Key, class _Value, HASH_TABLE_TYPE _Type = UNORDERED_MAP>
-	struct HashTable;
-
 	template <class _Key, class _Value>
-	struct HashTable<_Key, _Value, MAP>
-	{
-		typedef std::map<_Key, _Value>                          Type;
-		typedef std::map<_Key, _Value, ignore_case::less<_Key>> IType;
-	};
-
-	template <class _Key, class _Value>
-	struct HashTable<_Key, _Value, UNORDERED_MAP>
+	struct HashTable
 	{
 		typedef std::unordered_map<_Key, _Value, detail::hash<_Key>>                                   Type;
 		typedef std::unordered_map<_Key, _Value, ignore_case::hash<_Key>, ignore_case::equal_to<_Key>> IType;
 	};
 
-	template <class T, class _Value>
-	class BaseTable: public HashTable<ObjectId, _Value>::Type
+	template <class _Reader, class _Table>
+	void TableRead(_Table& table, buffer&& buf)
 	{
-	typedef typename HashTable<ObjectId, _Value>::Type _Base;
-	public:
-		_Value& operator[](const std::string& object_id)
-		{
-			return _Base::operator[](ObjectId(object_id));
-		}
-		_Value& operator[](const uint32_t& object_id)
-		{
-			return _Base::operator[](ObjectId(object_id));
-		}
-		_Value& operator[](const ObjectId& object_id)
-		{
-			return _Base::operator[](object_id);
-		}
-
-		template <class _Reader>
-		void Read(buffer&& buf)
-		{
-			buffer_reader reader(buf);
-			_Reader::Read(reader, *static_cast<T*>(this));
-		}
-
-		bool getValueById(ObjectId const& id, _Value const** ppval) const
-		{
-			if (!ppval)
-			{
-				return false;
-			}
-
-			auto const& It = find(id);
-			if (It == end())
-			{
-				return false;
-			}
-
-			*ppval = &It->second;
-			return true;
-		}
-	};
+		buffer_reader reader(buf);
+		_Reader::Read(reader, table);
+	}
 }

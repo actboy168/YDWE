@@ -18,7 +18,7 @@ namespace slk
 		std::string        slk;
 	};
 
-	class SLKLIB_API MetaTable : public BaseTable<MetaTable, MetaSingle>
+	class SLKLIB_API MetaTable : public HashTable<ObjectId, MetaSingle>::Type
 	{
 	};
 }

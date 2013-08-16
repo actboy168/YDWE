@@ -68,7 +68,7 @@ namespace slk
 	};
 
 	template <OBJECT_PARSER_OPTION Option>
-	struct ObjTable : public BaseTable<ObjTable<Option>, ObjSingle<Option>>
+	struct ObjTable : public HashTable<ObjectId, ObjSingle<Option>>::Type
 	{
 		const static OBJECT_PARSER_OPTION table_type = Option;
 	};

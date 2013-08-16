@@ -150,7 +150,7 @@ namespace slk
 			case OBJ_TYPE::ITEM:
 			case OBJ_TYPE::DESTRUCTABLE:
 			case OBJ_TYPE::BUFF:
-				table.Read<ObjReader>(load_file(detail::FileList(type)));
+				TableRead<ObjReader>(table, load_file(detail::FileList(type)));
 				break;
 			default:
 				throw ydwe::exception("Unknown object type %d.", type);
@@ -174,7 +174,7 @@ namespace slk
 			case OBJ_TYPE::DOODAD:
 			case OBJ_TYPE::ABILITY:
 			case OBJ_TYPE::UPGRADE:
-				table.Read<ObjReader>(load_file(detail::FileList(type)));
+				TableRead<ObjReader>(table, load_file(detail::FileList(type)));
 				break;
 			default:
 				throw ydwe::exception("Unknown object type %d.", type);
@@ -206,7 +206,7 @@ namespace slk
 			case SLK_TYPE::UNIT_ABILITIES:
 			case SLK_TYPE::UNIT_WEAPONS:
 			case SLK_TYPE::ITEM_DATA:
-				table.Read<SlkReader>(load_file(detail::FileList(type)));
+				TableRead<SlkReader>(table, load_file(detail::FileList(type)));
 				break;
 			default:
 				throw ydwe::exception("Unknown slk type %d.", type);
@@ -269,7 +269,7 @@ namespace slk
 			case TXT_TYPE::UPGRADE_NEUTRAL_FUNC:
 			case TXT_TYPE::ITEM_STRINGS:
 			case TXT_TYPE::ITEM_FUNC:
-				table.Read<TxtReader>(load_file(detail::FileList(type)));
+				TableRead<TxtReader>(table, load_file(detail::FileList(type)));
 				break;
 			default:
 				throw ydwe::exception("Unknown txt type %d.", type);
@@ -297,7 +297,7 @@ namespace slk
 			case META_SLK_TYPE::UPGRADE:
 			case META_SLK_TYPE::DOODAD:
 			case META_SLK_TYPE::DESTRUCTABLE:
-				table.Read<MetaReader>(load_file(detail::FileList(type)));
+				TableRead<MetaReader>(table, load_file(detail::FileList(type)));
 				break;
 			default:
 				throw ydwe::exception("Unknown MetaSlk type %d.", type);
@@ -542,7 +542,7 @@ namespace slk
 	bool ObjectManager::load(const char* filename, SlkTable& table)
 	{
 		try {
-			table.Read<SlkReader>(load_file(filename));		
+			TableRead<SlkReader>(table, load_file(filename));	
 		}
 		catch (ydwe::exception const&) {
 			return false;

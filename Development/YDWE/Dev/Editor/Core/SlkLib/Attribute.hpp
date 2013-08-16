@@ -108,10 +108,10 @@ namespace slk
 	class AttributeTable;
 
 	template <>
-	class AttributeTable<ObjectWithOptinal> : public BaseTable<AttributeTable<ObjectWithOptinal>, AttributeCatalog> { };
+	class AttributeTable<ObjectWithOptinal> : public HashTable<ObjectId, AttributeCatalog>::Type { };
 
 	template <>
-	class AttributeTable<ObjectWithoutOptinal> : public BaseTable<AttributeTable<ObjectWithoutOptinal>, Attribute<ObjectWithoutOptinal>> { };
+	class AttributeTable<ObjectWithoutOptinal> : public HashTable<ObjectId, Attribute<ObjectWithoutOptinal>>::Type { };
 
 	template <OBJECT_PARSER_OPTION Option>
 	class AttributeMeta
@@ -138,10 +138,28 @@ namespace slk
 		valid_ = Init(that, metaTable, converter);
 	}
 
+	template <class _Table, class _Value>
+	bool TableGetValueById(_Table const& table, ObjectId const& id, _Value const** ppval)
+	{
+		if (!ppval)
+		{
+			return false;
+		}
+
+		auto const& It = table.find(id);
+		if (It == table.end())
+		{
+			return false;
+		}
+
+		*ppval = &It->second;
+		return true;
+	}
+
 	template <OBJECT_PARSER_OPTION Option>
 	bool AttributeMeta<Option>::Init(Attribute<Option> const& that, MetaTable const& metaTable, Converter& converter)
 	{
-		if (!metaTable.getValueById(that.GetId(), &meta_))
+		if (!TableGetValueById(metaTable, that.GetId(), &meta_))
 		{
 			return false;
 		}
