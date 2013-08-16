@@ -17,7 +17,7 @@ namespace slk
 					return It;
 			}
 
-			return InBegin;
+			return InEnd;
 		}
 
 		template <typename ForwardIteratorT, typename PredicateT>
@@ -130,7 +130,7 @@ namespace slk
 	inline SequenceT trim_copy(const SequenceT& Input, PredicateT IsFound)
 	{
 		typename SequenceT::const_iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
-		typename SequenceT::const_iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
+		typename SequenceT::const_iterator TrimBegin = detail::find_begin(Input.begin(), TrimEnd, IsFound);
 		return std::move(SequenceT(TrimBegin, TrimEnd));
 	}
 

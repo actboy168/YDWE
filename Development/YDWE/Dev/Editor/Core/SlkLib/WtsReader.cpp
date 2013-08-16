@@ -41,7 +41,7 @@ namespace slk
 			case WST_READER_STATE::STATE_BEGIN:
 				{
 					trim_left(line, ctype::is_space());
-					if ('{' == line[0])
+					if (line.size() > 0  && '{' == line[0])
 					{
 						state = WST_READER_STATE::STATE_BODY;
 					}
@@ -49,7 +49,8 @@ namespace slk
 				break;
 			case WST_READER_STATE::STATE_BODY:
 				{
-					if ('}' != trim_left_copy(line, ctype::is_space())[0])
+					std::string new_line = trim_left_copy(line, ctype::is_space());
+					if (new_line.size() == 0 || '}' != new_line[0])
 					{
 						value.append(line);
 					}
