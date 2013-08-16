@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include <ydwe/exception/exception.h>
-#include <SlkLib/ObjectManager.hpp>
+#include <slk/ObjectManager.hpp>
 #include <slk/utility/sequence.h>
 #include "InterfaceStormLib.h"
 
