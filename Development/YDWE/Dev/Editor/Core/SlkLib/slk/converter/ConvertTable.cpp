@@ -1,5 +1,6 @@
 
 #include <slk/converter/ConvertTable.hpp>
+#include <slk/converter/AttributeMeta.hpp>
 #include <slk/utility/sequence.h>
 #include <algorithm>
 

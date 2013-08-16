@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="slk\BaseAbilityList.cpp" />
+    <ClCompile Include="slk\converter\AttributeMeta.cpp" />
     <ClCompile Include="slk\converter\ConvertTable.cpp" />
     <ClCompile Include="slk\ObjectManager.cpp" />
     <ClCompile Include="slk\reader\IniReader.cpp" />
@@ -92,12 +93,12 @@
     <ClCompile Include="slk\reader\TxtReader.cpp" />
     <ClCompile Include="slk\reader\WesReader.cpp" />
     <ClCompile Include="slk\reader\WtsReader.cpp" />
-    <ClCompile Include="slk\table\Attribute.cpp" />
     <ClCompile Include="slk\table\VariableData.cpp" />
     <ClCompile Include="slk\utility\sequence.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="slk\Converter.hpp" />
+    <ClInclude Include="slk\converter\AttributeMeta.hpp" />
     <ClInclude Include="slk\converter\ConvertTable.hpp" />
     <ClInclude Include="slk\InterfaceStorm.hpp" />
     <ClInclude Include="slk\ObjectManager.hpp" />

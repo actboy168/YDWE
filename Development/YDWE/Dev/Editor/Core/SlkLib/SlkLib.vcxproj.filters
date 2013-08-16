@@ -43,9 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="slk\table\Attribute.cpp">
-      <Filter>slk\inc\table</Filter>
-    </ClCompile>
     <ClCompile Include="slk\reader\WtsReader.cpp">
       <Filter>slk\src\reader</Filter>
     </ClCompile>
@@ -84,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="slk\ObjectManager.cpp">
       <Filter>slk\src</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\converter\AttributeMeta.cpp">
+      <Filter>slk\src\converter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +188,9 @@
     </ClInclude>
     <ClInclude Include="slk\table\IniTable.hpp">
       <Filter>slk\inc\table</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\converter\AttributeMeta.hpp">
+      <Filter>slk\inc\converter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

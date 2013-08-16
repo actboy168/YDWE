@@ -3,6 +3,7 @@
 #include <slk/table/SlkTable.hpp>
 #include <slk/table/ObjTable.hpp>
 #include <slk/table/MetaTable.hpp>
+#include <slk/Converter.hpp>
 
 namespace slk
 {

@@ -1,10 +1,10 @@
 
-#include <slk/table/Attribute.hpp>
+#include <slk/converter/AttributeMeta.hpp>
 
 namespace slk
 {
 	template <> SLKLIB_API
-	std::string AttributeMeta<ObjectWithOptinal>::ToSlkName(Attribute<ObjectWithOptinal> const& that) const
+		std::string AttributeMeta<ObjectWithOptinal>::ToSlkName(Attribute<ObjectWithOptinal> const& that) const
 	{
 		if (that.GetLevel() > 0)
 		{
@@ -25,7 +25,7 @@ namespace slk
 	}
 
 	template <> SLKLIB_API
-	std::string AttributeMeta<ObjectWithoutOptinal>::ToSlkName(Attribute<ObjectWithoutOptinal> const& /*that*/) const
+		std::string AttributeMeta<ObjectWithoutOptinal>::ToSlkName(Attribute<ObjectWithoutOptinal> const& /*that*/) const
 	{
 		return meta_->field;
 	}

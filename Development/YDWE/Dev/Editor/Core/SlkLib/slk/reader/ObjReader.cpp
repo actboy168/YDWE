@@ -1,4 +1,5 @@
 #include <slk/reader/ObjReader.hpp>
+#include <cassert>
 
 namespace slk
 {
