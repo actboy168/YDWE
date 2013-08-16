@@ -4,7 +4,7 @@
 #include <ydwe/path/service.h>
 #include <ydwe/win/env_variable.h>
 #include <ydwe/win/process.h>
-#include <SlkLib/IniReader.hpp>
+#include <slk/reader/IniReader.hpp>
 #include "Warcraft3Directory.h"
 
 bool launch_warcraft3()
@@ -30,7 +30,8 @@ bool launch_warcraft3()
 		table["MapTest"]["LaunchOpenGL"]   = "0";
 		table["MapTest"]["LaunchWindowed"] = "1";
 		try {
-			slk::IniReader::Read(ydwe::file::read_steam(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>(), table);
+			slk::buffer_reader reader(ydwe::file::read_steam(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>());
+			slk::IniReader::Read(reader, table);
 		} 
 		catch (...) {
 		}

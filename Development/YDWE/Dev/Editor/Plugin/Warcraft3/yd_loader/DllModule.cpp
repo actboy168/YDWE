@@ -9,9 +9,10 @@
 #include <ydwe/util/unicode.h>
 #include <ydwe/win/file_version.h>
 #include <ydwe/win/pe_reader.h>
-#include <SlkLib/IniReader.hpp>
-#include <SlkLib/IniReader.cpp>
-#include <SlkLib/Sequence.cpp>
+#include <slk/reader/IniReader.hpp>
+#include <slk/reader/IniReader.cpp>
+#include <slk/utility/sequence.cpp>
+#include <slk/reader/TextReader.cpp>
 
 uintptr_t RealLoadLibraryA  = 0;
 uintptr_t RealCreateWindowExA = 0;
@@ -153,7 +154,8 @@ void DllModule::LoadPlugins()
 
 		slk::IniTable table;
 		try {
-			slk::IniReader::Read(ydwe::file::read_steam(plugin_path / L"config.cfg").read<slk::buffer>(), table);
+			slk::buffer_reader reader(ydwe::file::read_steam(plugin_path / L"config.cfg").read<slk::buffer>());
+			slk::IniReader::Read(reader, table);
 		}
 		catch(...) {
 		}
@@ -280,7 +282,8 @@ void DllModule::Attach()
 		ResetConfig(table);
 
 		try {
-			slk::IniReader::Read(ydwe::file::read_steam(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>(), table);
+			slk::buffer_reader reader(ydwe::file::read_steam(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>());
+			slk::IniReader::Read(reader, table);
 		} 
 		catch (...) {
 		}

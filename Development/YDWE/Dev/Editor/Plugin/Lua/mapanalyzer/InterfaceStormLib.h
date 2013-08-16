@@ -4,7 +4,7 @@
 #include <vector>
 #define __STORMLIB_NO_AUTO_LINKING__
 #include <StormLib.h>
-#include <SlkLib/InterfaceStorm.hpp>
+#include <slk/InterfaceStorm.hpp>
 
 class MPQ
 {

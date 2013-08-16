@@ -1,8 +1,10 @@
 ﻿#include "MainWindow.h"
-#include <SlkLib/IniReader.hpp>
-#include <SlkLib/IniReader.cpp>
-#include <SlkLib/Sequence.cpp>
-#include <SlkLib/IniWriter.hpp>
+#include <slk/reader/IniReader.hpp>
+#include <slk/utility/list_of.h>
+#include <slk/writer/IniWriter.hpp>
+#include <slk/reader/IniReader.cpp>
+#include <slk/utility/sequence.cpp>
+#include <slk/reader/TextReader.cpp>
 #include "Regedit.h"
 #include "Shortcuts.h"
 #include "Warcraft3Directory.h"
@@ -159,7 +161,8 @@ bool CMainWindow::LoadConfig(slk::IniTable& table)
 	try
 	{
 		ResetConfig(table);
-		slk::IniReader::Read(ydwe::file::read_steam(ydwe::path::self().remove_filename() / L"EverConfig.cfg").read<slk::buffer>(), table);
+		slk::buffer_reader reader(ydwe::file::read_steam(ydwe::path::self().remove_filename() / L"EverConfig.cfg").read<slk::buffer>());
+		slk::IniReader::Read(reader, table);
 	}
 	catch (...)
 	{
@@ -387,7 +390,8 @@ void CMainWindow::InitPluginUI()
 
 		slk::IniTable table;
 		try {
-			slk::IniReader::Read(ydwe::file::read_steam(plugin_path / L"config.cfg").read<slk::buffer>(), table);		
+			slk::buffer_reader reader(ydwe::file::read_steam(plugin_path / L"config.cfg").read<slk::buffer>());
+			slk::IniReader::Read(reader, table);	
 		}
 		catch(...) {
 		}

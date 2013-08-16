@@ -4,12 +4,12 @@
 #include <luabind/luabind.hpp>
 #include <ydwe/lua/luabind.h>
 #pragma warning(pop)
-#include <SlkLib/ObjectManager.hpp>
-#include <SlkLib/SlkTable.hpp>
-#include <SlkLib/SlkReader.hpp>
-#include <SlkLib/TxtReader.hpp>
-#include <SlkLib/IniTable.hpp>
-#include <SlkLib/IniReader.hpp>
+#include <slk/ObjectManager.hpp>
+#include <slk/table/SlkTable.hpp>
+#include <slk/table/IniTable.hpp>
+#include <slk/reader/SlkReader.hpp>
+#include <slk/reader/TxtReader.hpp>
+#include <slk/reader/IniReader.hpp>
 #include "InterfaceStormLib.h"
 
 namespace NLua { namespace TableWrap {
