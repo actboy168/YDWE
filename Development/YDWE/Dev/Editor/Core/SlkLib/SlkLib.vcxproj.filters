@@ -52,9 +52,6 @@
     <ClCompile Include="slk\reader\TxtReader.cpp">
       <Filter>slk\src\reader</Filter>
     </ClCompile>
-    <ClCompile Include="slk\reader\TextReader.cpp">
-      <Filter>slk\src\reader</Filter>
-    </ClCompile>
     <ClCompile Include="slk\reader\ObjReader.cpp">
       <Filter>slk\src\reader</Filter>
     </ClCompile>
@@ -84,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="slk\converter\AttributeMeta.cpp">
       <Filter>slk\src\converter</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\reader\CommonReader.cpp">
+      <Filter>slk\src\reader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,9 +150,6 @@
     <ClInclude Include="slk\writer\TxtWriter.hpp">
       <Filter>slk\inc\writer</Filter>
     </ClInclude>
-    <ClInclude Include="slk\reader\IniBaseReader.hpp">
-      <Filter>slk\inc\reader</Filter>
-    </ClInclude>
     <ClInclude Include="slk\reader\IniReader.hpp">
       <Filter>slk\inc\reader</Filter>
     </ClInclude>
@@ -163,9 +160,6 @@
       <Filter>slk\inc\reader</Filter>
     </ClInclude>
     <ClInclude Include="slk\reader\SlkReader.hpp">
-      <Filter>slk\inc\reader</Filter>
-    </ClInclude>
-    <ClInclude Include="slk\reader\TextReader.hpp">
       <Filter>slk\inc\reader</Filter>
     </ClInclude>
     <ClInclude Include="slk\reader\TxtReader.hpp">
@@ -191,6 +185,9 @@
     </ClInclude>
     <ClInclude Include="slk\converter\AttributeMeta.hpp">
       <Filter>slk\inc\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\reader\CommonReader.hpp">
+      <Filter>slk\inc\reader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

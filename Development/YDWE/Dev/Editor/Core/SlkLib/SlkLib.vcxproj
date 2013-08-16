@@ -85,11 +85,11 @@
     <ClCompile Include="slk\converter\AttributeMeta.cpp" />
     <ClCompile Include="slk\converter\ConvertTable.cpp" />
     <ClCompile Include="slk\ObjectManager.cpp" />
+    <ClCompile Include="slk\reader\CommonReader.cpp" />
     <ClCompile Include="slk\reader\IniReader.cpp" />
     <ClCompile Include="slk\reader\MetaReader.cpp" />
     <ClCompile Include="slk\reader\ObjReader.cpp" />
     <ClCompile Include="slk\reader\SlkReader.cpp" />
-    <ClCompile Include="slk\reader\TextReader.cpp" />
     <ClCompile Include="slk\reader\TxtReader.cpp" />
     <ClCompile Include="slk\reader\WesReader.cpp" />
     <ClCompile Include="slk\reader\WtsReader.cpp" />
@@ -105,12 +105,11 @@
     <ClInclude Include="slk\port\config.h" />
     <ClInclude Include="slk\port\port_gcc.h" />
     <ClInclude Include="slk\port\port_msvc.h" />
-    <ClInclude Include="slk\reader\IniBaseReader.hpp" />
+    <ClInclude Include="slk\reader\CommonReader.hpp" />
     <ClInclude Include="slk\reader\IniReader.hpp" />
     <ClInclude Include="slk\reader\MetaReader.hpp" />
     <ClInclude Include="slk\reader\ObjReader.hpp" />
     <ClInclude Include="slk\reader\SlkReader.hpp" />
-    <ClInclude Include="slk\reader\TextReader.hpp" />
     <ClInclude Include="slk\reader\TxtReader.hpp" />
     <ClInclude Include="slk\reader\WesReader.hpp" />
     <ClInclude Include="slk\reader\WtsReader.hpp" />

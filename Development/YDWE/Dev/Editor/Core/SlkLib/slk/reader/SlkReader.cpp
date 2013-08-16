@@ -3,7 +3,7 @@
 #include <slk/utility/sequence.h>
 #include <slk/utility/convert.h>
 #include <slk/reader/SlkReader.hpp>
-#include <slk/reader/TextReader.hpp>
+#include <slk/reader/CommonReader.hpp>
 
 namespace slk
 {
@@ -162,12 +162,12 @@ namespace slk
 					{
 					case 'X':
 						{
-							x = Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space()));
+							x = Str2UInt(trim_copy<boost::string_ref>(beg+1, end));
 						}
 						break;
 					case 'Y':
 						{
-							y = Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space()));
+							y = Str2UInt(trim_copy<boost::string_ref>(beg+1, end));
 						}
 						break;
 					default:
@@ -192,17 +192,17 @@ namespace slk
 					{
 					case 'X':
 						{
-							this->set_x(Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space())));
+							this->set_x(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
 						}
 						break;
 					case 'Y':
 						{
-							this->set_y(Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space())));
+							this->set_y(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
 						}
 						break;
 					case 'K':
 						{
-							this->set_k(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space()));
+							this->set_k(trim_copy<boost::string_ref>(beg+1, end));
 						}
 						break;
 					default:
@@ -220,12 +220,12 @@ namespace slk
 					{
 					case 'X':
 						{
-							this->set_x(Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space())));
+							this->set_x(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
 						}
 						break;
 					case 'Y':
 						{
-							this->set_y(Str2UInt(trim_copy<boost::string_ref>(beg+1, end, ctype::is_space())));
+							this->set_y(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
 						}
 						break;
 					default:
@@ -243,7 +243,7 @@ namespace slk
 					return 0;
 				}
 
-				boost::string_ref key = trim_copy<boost::string_ref>(line.begin(), It, ctype::is_space());
+				boost::string_ref key = trim_copy<boost::string_ref>(line.begin(), It);
 
 				line.remove_prefix(It - line.begin() + 1);
 				return key.front();
@@ -252,7 +252,7 @@ namespace slk
 			void read(buffer_reader& reader)
 			{
 				bool is_found_b = false;
-				TextReader::EachLine(reader, [&](boost::string_ref& line)
+				reader::utility::each_line(reader, [&](boost::string_ref& line)
 				{
 					uint8_t type = read_type(line);
 					if (!is_found_b)

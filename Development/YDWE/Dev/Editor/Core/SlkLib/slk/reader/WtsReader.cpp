@@ -1,6 +1,6 @@
 
 #include <slk/reader/WtsReader.hpp>
-#include <slk/reader/TextReader.hpp>
+#include <slk/reader/CommonReader.hpp>
 #include <slk/utility/sequence.h>
 #include <slk/utility/convert.h>
 
@@ -22,8 +22,8 @@ namespace slk
 		uint32_t key = 0;
 		std::string value;
 
-		TextReader::RemoveBom(reader);
-		TextReader::EachLine(reader, [&](boost::string_ref& line)
+		reader::utility::remove_bom(reader);
+		reader::utility::each_line(reader, [&](boost::string_ref& line)
 		{
 			switch (state)
 			{

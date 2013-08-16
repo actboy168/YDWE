@@ -1,11 +1,11 @@
-#include <slk/reader/TextReader.hpp>
+#include <slk/reader/CommonReader.hpp>
 #include <slk/utility/buffer.h>
 #include <functional>
 #include <cstdint>
 
-namespace slk
-{
-	void TextReader::RemoveBom(buffer_reader& reader)
+namespace slk { namespace reader { namespace utility {
+
+	void remove_bom(buffer_reader& reader)
 	{
 		buffer_reader::status ec = buffer_reader::normal;
 		if ((0xEF == reader.read<uint8_t>(ec))
@@ -19,7 +19,7 @@ namespace slk
 		}
 	}
 
-	void TextReader::EachLine(buffer_reader& reader, std::function<void(boost::string_ref&)> callback)
+	void each_line(buffer_reader& reader, std::function<void(boost::string_ref&)> callback)
 	{
 		buffer_reader::status ec = buffer_reader::normal;
 		while (ec != buffer_reader::stream_eof)
@@ -38,4 +38,4 @@ namespace slk
 			}
 		}
 	}
-}
+}}}
