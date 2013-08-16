@@ -24,13 +24,13 @@ void benchmark_2()
 			throw ydwe::exception("Can't open DotA v6.77.w3x.");
 		}
 
-		mgr.load_singleton<slk::ROBJECT_TYPE, slk::SlkTable>(slk::ROBJECT_ABILITY);
-		mgr.load_singleton<slk::ROBJECT_TYPE, slk::SlkTable>(slk::ROBJECT_BUFF);
-		mgr.load_singleton<slk::ROBJECT_TYPE, slk::SlkTable>(slk::ROBJECT_DESTRUCTABLE);
-		mgr.load_singleton<slk::ROBJECT_TYPE, slk::SlkTable>(slk::ROBJECT_DOODAD);
-		mgr.load_singleton<slk::ROBJECT_TYPE, slk::SlkTable>(slk::ROBJECT_ITEM);
-		mgr.load_singleton<slk::ROBJECT_TYPE, slk::SlkTable>(slk::ROBJECT_UNIT);
-		mgr.load_singleton<slk::ROBJECT_TYPE, slk::SlkTable>(slk::ROBJECT_UPGRADE);
+		mgr.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(slk::ROBJECT_TYPE::ABILITY);
+		mgr.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(slk::ROBJECT_TYPE::BUFF);
+		mgr.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(slk::ROBJECT_TYPE::DESTRUCTABLE);
+		mgr.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(slk::ROBJECT_TYPE::DOODAD);
+		mgr.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(slk::ROBJECT_TYPE::ITEM);
+		mgr.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(slk::ROBJECT_TYPE::UNIT);
+		mgr.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(slk::ROBJECT_TYPE::UPGRADE);
 	}
 	catch (std::exception const& e)
 	{

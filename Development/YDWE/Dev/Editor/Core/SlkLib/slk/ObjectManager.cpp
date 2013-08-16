@@ -417,29 +417,29 @@ namespace slk
 		return true;
 	}
 
-	bool ObjectManager::load_base(ROBJECT_TYPE type, SlkTable& table)
+	bool ObjectManager::load_base(ROBJECT_TYPE::ENUM type, SlkTable& table)
 	{
 		switch (type)
 		{
-		case ROBJECT_UNIT:
+		case ROBJECT_TYPE::UNIT:
 			load_unit(table);
 			break;
-		case ROBJECT_ITEM:
+		case ROBJECT_TYPE::ITEM:
 			load_item(table);
 			break;
-		case ROBJECT_DESTRUCTABLE:
+		case ROBJECT_TYPE::DESTRUCTABLE:
 			load_destructable(table);
 			break;
-		case ROBJECT_BUFF:
+		case ROBJECT_TYPE::BUFF:
 			load_buff(table);
 			break;
-		case ROBJECT_DOODAD:
+		case ROBJECT_TYPE::DOODAD:
 			load_doodad(table);
 			break;
-		case ROBJECT_ABILITY:
+		case ROBJECT_TYPE::ABILITY:
 			load_ability(table);
 			break;
-		case ROBJECT_UPGRADE:
+		case ROBJECT_TYPE::UPGRADE:
 			load_upgrde(table);
 			break;
 		default:
@@ -453,7 +453,7 @@ namespace slk
 	namespace detail
 	{
 		template <OBJECT_PARSER_OPTION Option>
-		bool ObjectManagerLoadObjectTable(ObjectManager& mgr, ROBJECT_TYPE type, SlkTable& table)
+		bool ObjectManagerLoadObjectTable(ObjectManager& mgr, ROBJECT_TYPE::ENUM type, SlkTable& table)
 		{
 			try
 			{
@@ -484,7 +484,7 @@ namespace slk
 		}
 
 		template <OBJECT_PARSER_OPTION Option>
-		bool ObjectManagerLoadObjectTable(ObjectManager& mgr, WOBJECT_TYPE type, SlkTable& table)
+		bool ObjectManagerLoadObjectTable(ObjectManager& mgr, WOBJECT_TYPE::ENUM type, SlkTable& table)
 		{
 			try
 			{
@@ -507,7 +507,7 @@ namespace slk
 		}
 
 		template <OBJECT_PARSER_OPTION Option>
-		bool ObjectManagerSaveObjectTable(ObjectManager& mgr, WOBJECT_TYPE type, SlkTable const& table)
+		bool ObjectManagerSaveObjectTable(ObjectManager& mgr, WOBJECT_TYPE::ENUM type, SlkTable const& table)
 		{
 			try
 			{
@@ -551,18 +551,18 @@ namespace slk
 	}
 
 	template <> SLKLIB_API 
-	bool ObjectManager::load(ROBJECT_TYPE type, SlkTable& table)
+	bool ObjectManager::load(ROBJECT_TYPE::ENUM type, SlkTable& table)
 	{
 		switch (type)
 		{
-		case ROBJECT_UNIT:
-		case ROBJECT_ITEM:
-		case ROBJECT_DESTRUCTABLE:
-		case ROBJECT_BUFF:
+		case ROBJECT_TYPE::UNIT:
+		case ROBJECT_TYPE::ITEM:
+		case ROBJECT_TYPE::DESTRUCTABLE:
+		case ROBJECT_TYPE::BUFF:
 			return detail::ObjectManagerLoadObjectTable<ObjectWithoutOptinal>(*this, type, table);
-		case ROBJECT_DOODAD:
-		case ROBJECT_ABILITY:
-		case ROBJECT_UPGRADE:
+		case ROBJECT_TYPE::DOODAD:
+		case ROBJECT_TYPE::ABILITY:
+		case ROBJECT_TYPE::UPGRADE:
 			return detail::ObjectManagerLoadObjectTable<ObjectWithOptinal>(*this, type, table);
 		default:
 			assert(false);
@@ -571,18 +571,18 @@ namespace slk
 	}
 
 	template <>
-	bool ObjectManager::load(WOBJECT_TYPE type, SlkTable& table)
+	bool ObjectManager::load(WOBJECT_TYPE::ENUM type, SlkTable& table)
 	{
 		switch (type)
 		{
-		case WOBJECT_UNIT:
-		case WOBJECT_ITEM:
-		case WOBJECT_DESTRUCTABLE:
-		case WOBJECT_BUFF:
+		case WOBJECT_TYPE::UNIT:
+		case WOBJECT_TYPE::ITEM:
+		case WOBJECT_TYPE::DESTRUCTABLE:
+		case WOBJECT_TYPE::BUFF:
 			return detail::ObjectManagerLoadObjectTable<ObjectWithoutOptinal>(*this, type, table);
-		case WOBJECT_DOODAD:
-		case WOBJECT_ABILITY:
-		case WOBJECT_UPGRADE:
+		case WOBJECT_TYPE::DOODAD:
+		case WOBJECT_TYPE::ABILITY:
+		case WOBJECT_TYPE::UPGRADE:
 			return detail::ObjectManagerLoadObjectTable<ObjectWithOptinal>(*this, type, table);
 		default:
 			assert(false);
@@ -636,18 +636,18 @@ namespace slk
 	}
 
 	template <>
-	bool ObjectManager::save(WOBJECT_TYPE type, SlkTable const& table)
+	bool ObjectManager::save(WOBJECT_TYPE::ENUM type, SlkTable const& table)
 	{
 		switch (type)
 		{
-		case WOBJECT_UNIT:
-		case WOBJECT_ITEM:
-		case WOBJECT_DESTRUCTABLE:
-		case WOBJECT_BUFF:
+		case WOBJECT_TYPE::UNIT:
+		case WOBJECT_TYPE::ITEM:
+		case WOBJECT_TYPE::DESTRUCTABLE:
+		case WOBJECT_TYPE::BUFF:
 			return detail::ObjectManagerSaveObjectTable<ObjectWithoutOptinal>(*this, type, table);
-		case WOBJECT_DOODAD:
-		case WOBJECT_ABILITY:
-		case WOBJECT_UPGRADE:
+		case WOBJECT_TYPE::DOODAD:
+		case WOBJECT_TYPE::ABILITY:
+		case WOBJECT_TYPE::UPGRADE:
 			return detail::ObjectManagerSaveObjectTable<ObjectWithOptinal>(*this, type, table);
 		default:
 			assert(false);
@@ -656,15 +656,15 @@ namespace slk
 	}
 
 	template <> SLKLIB_API
-	ObjectManager::TableMap<ROBJECT_TYPE, SlkTable>&
-		ObjectManager::get_table_map<ROBJECT_TYPE, SlkTable>() 
+	ObjectManager::TableMap<ROBJECT_TYPE::ENUM, SlkTable>&
+		ObjectManager::get_table_map<ROBJECT_TYPE::ENUM, SlkTable>() 
 	{ 
 		return robject_map_; 
 	}
 
 	template <> 
-	ObjectManager::TableMap<WOBJECT_TYPE, SlkTable>&
-		ObjectManager::get_table_map<WOBJECT_TYPE, SlkTable>() 
+	ObjectManager::TableMap<WOBJECT_TYPE::ENUM, SlkTable>&
+		ObjectManager::get_table_map<WOBJECT_TYPE::ENUM, SlkTable>() 
 	{ 
 		return wobject_map_; 
 	}

@@ -9,27 +9,35 @@
 
 namespace slk
 {
-	enum ROBJECT_TYPE
+	namespace ROBJECT_TYPE
 	{
-		ROBJECT_ABILITY = 0,
-		ROBJECT_BUFF,
-		ROBJECT_UNIT,
-		ROBJECT_ITEM,
-		ROBJECT_UPGRADE,
-		ROBJECT_DOODAD,
-		ROBJECT_DESTRUCTABLE,
-	};
+		enum ENUM
+		{
+			ABILITY = 0,
+			BUFF,
+			UNIT,
+			ITEM,
+			UPGRADE,
+			DOODAD,
+			DESTRUCTABLE,
+			MAXIMUM,
+		};
+	}
 
-	enum WOBJECT_TYPE
+	namespace WOBJECT_TYPE
 	{
-		WOBJECT_ABILITY = 0,
-		WOBJECT_BUFF,
-		WOBJECT_UNIT,
-		WOBJECT_ITEM,
-		WOBJECT_UPGRADE,
-		WOBJECT_DOODAD,
-		WOBJECT_DESTRUCTABLE,
-	};
+		enum ENUM
+		{
+			ABILITY = 0,
+			BUFF,
+			UNIT,
+			ITEM,
+			UPGRADE,
+			DOODAD,
+			DESTRUCTABLE,
+			MAXIMUM,
+		};
+	}
 
 	namespace META_SLK_TYPE
 	{
@@ -42,6 +50,7 @@ namespace slk
 			UPGRADE,
 			DOODAD,
 			DESTRUCTABLE,
+			MAXIMUM,
 		};
 	}
 
@@ -60,6 +69,7 @@ namespace slk
 			UNIT_ABILITIES,
 			UNIT_WEAPONS,
 			ITEM_DATA,
+			MAXIMUM,
 		};
 	}
 
@@ -109,6 +119,7 @@ namespace slk
 			UPGRADE_NEUTRAL_FUNC,
 			ITEM_STRINGS,
 			ITEM_FUNC,
+			MAXIMUM,
 		};
 	}
 
@@ -123,6 +134,7 @@ namespace slk
 			UPGRADE,
 			DOODAD,
 			DESTRUCTABLE,
+			MAXIMUM,
 		};
 	}
 
@@ -140,7 +152,7 @@ namespace slk
 		bool load_upgrde(SlkTable& table);
 		bool load_doodad(SlkTable& table);
 		bool load_destructable(SlkTable& table);
-		bool load_base(ROBJECT_TYPE type, SlkTable& table);
+		bool load_base(ROBJECT_TYPE::ENUM type, SlkTable& table);
 		std::string const& convert_string(std::string const& str);
 		Converter& get_converter();
 
@@ -160,37 +172,36 @@ namespace slk
 
 		template <class Enum, class Table> Table& load_singleton(Enum type)
 		{
-			auto const& It = get_table_map<Enum, Table>().find(type);
-			if (It == get_table_map<Enum, Table>().end())
+			auto& ptr = get_table_map<Enum, Table>()[type];
+			if (ptr)
 			{
-				Table& table = get_table_map<Enum, Table>()[type];
-				load<Enum, Table>(type, table);
-				return table;
+				return *ptr;
 			}
-			else
-			{
-				return It->second;
-			}
+
+			ptr.reset(new Table);
+			load<Enum, Table>(type, *ptr);
+			return *ptr;
 		}
 
 		template <class Enum, class Table> bool save_singleton(Enum type)
 		{
-			auto const& It = get_table_map<Enum, Table>().find(type);
-			if (It == get_table_map<Enum, Table>().end())
+			auto& ptr = get_table_map<Enum, Table>()[type];
+			if (!ptr)
 			{
 				return false;
 			}
 
-			return save<Enum, Table>(type, It->second);
+			return save<Enum, Table>(type, *ptr);
 		}
 
 	private:
-		template <class Enum, class Table> struct TableMap : public HashTable<Enum, Table>::Type { };
+#pragma warning(suppress:4482)
+		template <class Enum, class Table> struct TableMap : public std::array<std::unique_ptr<Table>, Enum::MAXIMUM> { };
 		template <class Enum, class Table> TableMap<Enum, Table>& get_table_map();
 
 		InterfaceStorm&                              storm_;
-		TableMap<ROBJECT_TYPE, SlkTable>             robject_map_;
-		TableMap<WOBJECT_TYPE, SlkTable>             wobject_map_;
+		TableMap<ROBJECT_TYPE::ENUM, SlkTable>       robject_map_;
+		TableMap<WOBJECT_TYPE::ENUM, SlkTable>       wobject_map_;
 		TableMap<META_SLK_TYPE::ENUM, MetaTable>     meta_map_;
 		Converter                                    converter_;
 	};

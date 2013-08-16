@@ -163,11 +163,11 @@ void benchmark_1()
 		}
 
 		slk::SlkTable ItemTable;
-		mgr.load(slk::ROBJECT_ITEM, ItemTable);
+		mgr.load(slk::ROBJECT_TYPE::ITEM, ItemTable);
 		Item(ItemTable);
 
 		slk::SlkTable UnitTable;
-		mgr.load(slk::ROBJECT_UNIT, UnitTable);
+		mgr.load(slk::ROBJECT_TYPE::UNIT, UnitTable);
 		Hero(UnitTable);
 	}
 	catch (std::exception const& e)
