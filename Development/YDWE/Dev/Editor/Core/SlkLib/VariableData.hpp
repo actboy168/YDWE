@@ -1,8 +1,8 @@
 #pragma once
 
-#include "port/config.h"
+#include <slk/port/config.h>
 #include <string>
-#include "Buffer.hpp"
+#include <slk/utility/buffer.h>
 
 namespace slk
 {

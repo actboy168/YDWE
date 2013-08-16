@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Buffer.hpp"
-#include "ObjectId.hpp"
+#include <slk/utility/buffer.h>
+#include <slk/utility/object_id.h>
 #include "ObjTable.hpp"
 
 namespace slk
@@ -31,9 +31,9 @@ namespace slk
 			for (uint32_t i = 0; i < nOriginalTableCount; ++i)
 			{
 				// Original Id
-				ObjectId OriginalObjectId(reader.read<uint32_t>(), ObjectId::not_swap_t());
+				object_id OriginalObjectId(reader.read<uint32_t>(), object_id::not_swap_t());
 				// New id, always be 0
-				ObjectId NewObjectId(reader.read<uint32_t>(), ObjectId::not_swap_t());
+				object_id NewObjectId(reader.read<uint32_t>(), object_id::not_swap_t());
 
 				assert (OriginalObjectId.vaild());
 
@@ -58,9 +58,9 @@ namespace slk
 			for (uint32_t i = 0; i < nCustomTableCount; ++i)
 			{
 				// Original Id
-				ObjectId OriginalObjectId(reader.read<uint32_t>(), ObjectId::not_swap_t());
+				object_id OriginalObjectId(reader.read<uint32_t>(), object_id::not_swap_t());
 				// New id
-				ObjectId NewObjectId(reader.read<uint32_t>(), ObjectId::not_swap_t());
+				object_id NewObjectId(reader.read<uint32_t>(), object_id::not_swap_t());
 
 				assert (OriginalObjectId.vaild());
 				assert (NewObjectId.vaild());

@@ -3,7 +3,8 @@
 #include "WtsReader.hpp"
 #include "WesReader.hpp"
 #include "InterfaceStorm.hpp"
-#include "Sequence.hpp"
+#include <slk/utility/sequence.h>
+#include <slk/utility/convert.h>
 
 namespace slk
 {

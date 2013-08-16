@@ -6,7 +6,7 @@
 
 #include <ydwe/exception/exception.h>
 #include <SlkLib/ObjectManager.hpp>
-#include <SlkLib/Sequence.hpp>
+#include <slk/utility/sequence.h>
 #include "InterfaceStormLib.h"
 
 void benchmark_2()

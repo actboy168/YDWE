@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Buffer.hpp"
-#include "Util.hpp"
+#include <slk/utility/buffer.h>
 #include <functional>
 #include <ydwe/util/string_ref.h>
 

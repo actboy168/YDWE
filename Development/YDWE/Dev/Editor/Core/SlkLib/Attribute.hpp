@@ -4,10 +4,9 @@
 #include <sstream>
 #include <iomanip>
 #include "BaseTable.hpp"
-#include "ObjectId.hpp"
+#include <slk/utility/object_id.h>
 #include "VariableData.hpp"
 #include "SlkTable.hpp"
-#include "Util.hpp"
 #include "MetaTable.hpp"
 #include "Converter.hpp"
 
@@ -26,12 +25,12 @@ namespace slk
 	class Attribute<ObjectWithOptinal>
 	{
 	public:
-		ObjectId GetId() const
+		object_id GetId() const
 		{
 			return _id;
 		}
 
-		void SetId(const ObjectId& id)
+		void SetId(const object_id& id)
 		{
 			this->_id = id;
 		}
@@ -67,7 +66,7 @@ namespace slk
 		}
 
 	protected:
-		ObjectId         _id;
+		object_id         _id;
 		uint32_t         _level;
 		uint32_t         _dataIndicator;
 		VariableData     _data;
@@ -77,12 +76,12 @@ namespace slk
 	class Attribute<ObjectWithoutOptinal>
 	{
 	public:
-		ObjectId GetId() const
+		object_id GetId() const
 		{
 			return _id;
 		}
 
-		void SetId(const ObjectId& id)
+		void SetId(const object_id& id)
 		{
 			this->_id = id;
 		}
@@ -98,7 +97,7 @@ namespace slk
 		}	
 
 	protected:
-		ObjectId         _id;
+		object_id         _id;
 		VariableData     _data;
 	};
 
@@ -108,10 +107,10 @@ namespace slk
 	class AttributeTable;
 
 	template <>
-	class AttributeTable<ObjectWithOptinal> : public HashTable<ObjectId, AttributeCatalog>::Type { };
+	class AttributeTable<ObjectWithOptinal> : public HashTable<object_id, AttributeCatalog>::Type { };
 
 	template <>
-	class AttributeTable<ObjectWithoutOptinal> : public HashTable<ObjectId, Attribute<ObjectWithoutOptinal>>::Type { };
+	class AttributeTable<ObjectWithoutOptinal> : public HashTable<object_id, Attribute<ObjectWithoutOptinal>>::Type { };
 
 	template <OBJECT_PARSER_OPTION Option>
 	class AttributeMeta
@@ -139,7 +138,7 @@ namespace slk
 	}
 
 	template <class _Table, class _Value>
-	bool TableGetValueById(_Table const& table, ObjectId const& id, _Value const** ppval)
+	bool TableGetValueById(_Table const& table, object_id const& id, _Value const** ppval)
 	{
 		if (!ppval)
 		{

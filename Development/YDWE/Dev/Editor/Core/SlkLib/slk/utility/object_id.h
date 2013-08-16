@@ -1,26 +1,26 @@
 #pragma once
 
-#include "port/config.h"
+#include <slk/port/config.h>
 #include <string>
 #include <memory.h>
 #include <ydwe/util/string_ref.h>
 
 namespace slk
 {
-	class ObjectId
+	class object_id
 	{
 	public:
 		struct not_swap_t {};
 
-		ObjectId()
+		object_id()
 			: _v(0)
 		{ }
 
-		ObjectId(const ObjectId& that)
+		object_id(const object_id& that)
 			: _v(that._v)
 		{ }
 
-		ObjectId(const std::string& id)
+		object_id(const std::string& id)
 		{
 			if (id.size() >= 4)
 			{
@@ -33,7 +33,7 @@ namespace slk
 			}
 		}
 
-		ObjectId(const boost::string_ref& id)
+		object_id(const boost::string_ref& id)
 		{
 			if (id.size() >= 4)
 			{
@@ -46,17 +46,17 @@ namespace slk
 			}
 		}
 
-		ObjectId(const uint32_t& id)
+		object_id(const uint32_t& id)
 			: _v(id)
 		{
 			swap();
 		}
 
-		ObjectId(const uint32_t& id, not_swap_t const&)
+		object_id(const uint32_t& id, not_swap_t const&)
 			: _v(id)
 		{ }
 
-		bool operator < (const ObjectId& that) const
+		bool operator < (const object_id& that) const
 		{
 			return _v < that._v;
 		}

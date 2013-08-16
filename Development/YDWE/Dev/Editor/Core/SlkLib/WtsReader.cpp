@@ -1,7 +1,8 @@
 
 #include "WtsReader.hpp"
 #include "TextReader.hpp"
-#include "Sequence.hpp"
+#include <slk/utility/sequence.h>
+#include <slk/utility/convert.h>
 
 namespace slk
 {

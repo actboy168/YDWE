@@ -9,7 +9,7 @@ namespace slk
 		for (uint32_t i = 0; i < nModCount; ++i)
 		{
 			// Mod id
-			ObjectId modid(reader.read<uint32_t>(), ObjectId::not_swap_t());
+			object_id modid(reader.read<uint32_t>(), object_id::not_swap_t());
 			assert (modid.vaild());
 
 			// Type
@@ -46,7 +46,7 @@ namespace slk
 		for (uint32_t i = 0; i < nModCount; ++i)
 		{
 			// Mod id
-			ObjectId modid(reader.read<uint32_t>(), ObjectId::not_swap_t());
+			object_id modid(reader.read<uint32_t>(), object_id::not_swap_t());
 
 			// Type
 			VariableData data;

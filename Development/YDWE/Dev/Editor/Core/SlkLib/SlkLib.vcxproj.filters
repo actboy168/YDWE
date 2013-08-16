@@ -9,8 +9,11 @@
       <UniqueIdentifier>{4AF4BFC0-639D-11E2-ADAD-CB1CF2DDEA68}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Port">
+    <Filter Include="port">
       <UniqueIdentifier>{f55be4dc-9827-44aa-a70c-e0faf26a36dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{072967a5-ebe6-4899-b215-929a1a2a8ec1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,23 +57,14 @@
     <ClCompile Include="MetaReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sequence.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TextReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="slk\utility\sequence.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="port\config.h">
-      <Filter>Port</Filter>
-    </ClInclude>
-    <ClInclude Include="port\port_gcc.h">
-      <Filter>Port</Filter>
-    </ClInclude>
-    <ClInclude Include="port\port_msvc.h">
-      <Filter>Port</Filter>
-    </ClInclude>
     <ClInclude Include="Attribute.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -101,9 +95,6 @@
     <ClInclude Include="MetaTable.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectId.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -114,9 +105,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ObjWriter.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sequence.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SlkReader.hpp">
@@ -132,9 +120,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TxtReader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VariableData.hpp">
@@ -158,8 +143,29 @@
     <ClInclude Include="TxtWriter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Buffer.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="slk\utility\buffer.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\port\config.h">
+      <Filter>port</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\port\port_gcc.h">
+      <Filter>port</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\port\port_msvc.h">
+      <Filter>port</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\utility\sequence.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\utility\object_id.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\utility\convert.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\utility\list_of.h">
+      <Filter>utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Util.hpp"
-#include "Buffer.hpp"
+#include <slk/utility/buffer.h>
 #include "ObjTable.hpp"
 
 namespace slk
@@ -16,7 +15,7 @@ namespace slk
 		}
 
 		template <typename SequenceT>
-		static SequenceT WriteAttributeTable(ObjectId const& ObjId, AttributeTable<ObjectWithOptinal> const& attributes)
+		static SequenceT WriteAttributeTable(object_id const& ObjId, AttributeTable<ObjectWithOptinal> const& attributes)
 		{
 			SequenceT output;
 			uint32_t nCount = 0;
@@ -45,7 +44,7 @@ namespace slk
 		}
 
 		template <typename SequenceT>
-		static SequenceT WriteAttributeTable(ObjectId const& ObjId, AttributeTable<ObjectWithoutOptinal> const& attributes)
+		static SequenceT WriteAttributeTable(object_id const& ObjId, AttributeTable<ObjectWithoutOptinal> const& attributes)
 		{
 			SequenceT output;
 			uint32_t nCount = 0;

@@ -1,90 +1,12 @@
 #pragma once
 
-#include "port/config.h"
-#include <cassert>
-#include <cctype>
-#include <deque>
+#include <slk/port/config.h>
 #include <array>
+#include <string>
+#include <cassert>
 
 namespace slk
 {
-	namespace detail
-	{
-		template <typename _Ty>
-		class basic_list_of : public std::deque<_Ty>
-		{
-		public:
-			typedef basic_list_of<_Ty> _Myt;
-			typedef std::deque<_Ty>    _Mybase;
-
-			basic_list_of()
-				: _Mybase()
-			{ }
-
-			template <typename P1>
-			basic_list_of(P1 val)
-				: _Mybase()
-			{
-				this->operator () (val);
-			}
-
-			template <typename P1, typename P2>
-			basic_list_of(P1 val1, P2 val2)
-				: _Mybase()
-			{
-				this->operator () (val1, val2);
-			}
-
-			template <typename P1>
-			_Myt& operator () ()
-			{
-				this->push_back(P1());
-				return *this;
-			}
-
-			template <typename P1>
-			_Myt& operator () (P1 val)
-			{
-				this->push_back(val);
-				return *this;
-			}
-
-			template <typename P1, typename P2>
-			_Myt& operator () (P1 val1, P2 val2)
-			{
-				return this->operator () (std::make_pair(val1, val2));
-			}
-
-			template <class Container>
-			operator Container() const
-			{
-				return Container(this->begin(), this->end());
-			}
-		};
-	}
-
-	template <typename P1>
-	detail::basic_list_of<P1> list_of(P1 val)
-	{
-		return detail::basic_list_of<P1>(val);
-	}
-
-	template <typename P1, typename P2>
-	detail::basic_list_of<std::pair<P1, P2>> list_of(P1 val1, P2 val2)
-	{
-		return detail::basic_list_of<std::pair<P1, P2>>(val1, val2);
-	}
-
-	class SLKLIB_API noncopyable
-	{
-	protected:
-		noncopyable() { }
-		~noncopyable() { }
-	private:
-		noncopyable(const noncopyable&);
-		const noncopyable& operator=(const noncopyable&);
-	};
-
 	template <size_t n, size_t m>
 	struct integral_log
 	{
@@ -112,12 +34,12 @@ namespace slk
 			str_buf[--offset] = n % 10 + '0';
 			n /= 10;
 		} while (n != 0);
-		
+
 		return std::move(std::string(str_buf.begin() + offset, str_buf.end()));
 	}
 
-	template <class Sequence>
-	inline unsigned int Str2UInt(Sequence const& str)
+	template <class SequenceT>
+	inline unsigned int Str2UInt(SequenceT const& str)
 	{
 		unsigned int sum = 0;
 		foreach(char c, str)
@@ -188,5 +110,5 @@ namespace slk
 		{
 			return Str2UFloat(str);
 		}
-	}		
+	}
 }

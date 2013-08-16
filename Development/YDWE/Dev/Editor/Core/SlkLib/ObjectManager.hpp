@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Util.hpp"
-#include "Buffer.hpp"
+#include <ydwe/util/noncopyable.h>
+#include <slk/utility/buffer.h>
 #include "SlkTable.hpp"
 #include "MetaTable.hpp"
 #include "Converter.hpp"
@@ -126,7 +126,7 @@ namespace slk
 		};
 	}
 
-	class SLKLIB_API ObjectManager : public noncopyable
+	class SLKLIB_API ObjectManager : public ydwe::util::noncopyable
 	{
 	public:
 		ObjectManager(InterfaceStorm& that);

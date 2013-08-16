@@ -1,7 +1,7 @@
 #include "VariableData.hpp"
 #include <string>
-#include "Util.hpp"
-#include "Buffer.hpp"
+#include <slk/utility/buffer.h>
+#include <slk/utility/convert.h>
 #include <ydwe/exception/exception.h>
 
 namespace slk

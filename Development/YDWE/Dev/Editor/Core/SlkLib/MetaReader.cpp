@@ -1,6 +1,6 @@
 #include "MetaReader.hpp"
 #include "SlkReader.hpp"
-#include "Buffer.hpp"
+#include <slk/utility/buffer.h>
 #include "MetaTable.hpp"
 #include <cassert>
 

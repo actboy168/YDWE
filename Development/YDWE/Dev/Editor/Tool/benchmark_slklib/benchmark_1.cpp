@@ -1,12 +1,13 @@
 
-#include <fstream>
 #include <algorithm>
-#include <string>
+#include <fstream>
 #include <iostream>
+#include <map>
+#include <string>
 
 #include <ydwe/exception/exception.h>
 #include <SlkLib/ObjectManager.hpp>
-#include <SlkLib/Sequence.hpp>
+#include <slk/utility/sequence.h>
 #include "InterfaceStormLib.h"
 
 void Item(slk::SlkTable& dota_slk)
@@ -16,7 +17,7 @@ void Item(slk::SlkTable& dota_slk)
 
 	foreach(auto& it, dota_slk)
 	{
-		slk::ObjectId const& id = it.first;
+		slk::object_id const& id = it.first;
 		slk::SlkSingle const& obj = it.second;
 		auto name = obj.find("name");
 		auto goldcost = obj.find("goldcost");
@@ -99,7 +100,7 @@ void Hero(slk::SlkTable const& dota_slk)
 	os << "char* hero_info[] = {" << std::endl;
 	foreach(auto& it, dota_slk)
 	{
-		slk::ObjectId const& id = it.first;
+		slk::object_id const& id = it.first;
 		slk::SlkSingle const& obj = it.second;
 
 		if (id.is_hero())
@@ -111,8 +112,8 @@ void Hero(slk::SlkTable const& dota_slk)
 					auto hero = heromap.find(name->second.to_string());
 					if (hero != heromap.end())
 					{
-						slk::ObjectId newHeroId(id);
-						slk::ObjectId oldHeroId(hero->second["typeid"].to_string());
+						slk::object_id newHeroId(id);
+						slk::object_id oldHeroId(hero->second["typeid"].to_string());
 
 						os << "  \"" << newHeroId.to_string()
 							<< "\", \"" << oldHeroId.to_string()
@@ -129,8 +130,8 @@ void Hero(slk::SlkTable const& dota_slk)
 					auto hero = heromap.find(name->second.to_string());
 					if (hero != heromap.end())
 					{
-						slk::ObjectId newHeroId(id);
-						slk::ObjectId oldHeroId(hero->second["typeid"].to_string());
+						slk::object_id newHeroId(id);
+						slk::object_id oldHeroId(hero->second["typeid"].to_string());
 
 						os << "  \"" << newHeroId.to_string()
 							<< "\", \"" << oldHeroId.to_string()

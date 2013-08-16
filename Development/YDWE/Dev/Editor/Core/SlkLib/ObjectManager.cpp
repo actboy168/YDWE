@@ -1,6 +1,6 @@
 
 #include "ObjectManager.hpp"
-#include "Buffer.hpp"
+#include <slk/utility/buffer.h>
 #include "ObjReader.hpp"
 #include "ObjWriter.hpp"
 #include "TxtReader.hpp"

@@ -1,7 +1,7 @@
 #include "TextReader.hpp"
-#include "Buffer.hpp"
-#include "Util.hpp"
+#include <slk/utility/buffer.h>
 #include <functional>
+#include <cstdint>
 
 namespace slk
 {

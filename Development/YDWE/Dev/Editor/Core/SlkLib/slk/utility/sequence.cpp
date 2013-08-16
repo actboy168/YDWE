@@ -1,4 +1,4 @@
-#include "Sequence.hpp"
+#include <slk/utility/sequence.h>
 #include <cctype>
 #include <locale>
 

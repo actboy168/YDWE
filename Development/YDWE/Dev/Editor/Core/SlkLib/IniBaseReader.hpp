@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Sequence.hpp"
-#include "Buffer.hpp"
+#include <slk/utility/sequence.h>
+#include <slk/utility/buffer.h>
 #include "TextReader.hpp"
 
 namespace slk

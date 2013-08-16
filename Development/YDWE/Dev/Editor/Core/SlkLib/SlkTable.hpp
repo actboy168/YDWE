@@ -58,7 +58,7 @@ namespace slk
 	{
 	};
 
-	class SLKLIB_API SlkTable : public HashTable<ObjectId, SlkSingle>::Type
+	class SLKLIB_API SlkTable : public HashTable<object_id, SlkSingle>::Type
 	{
 	};
 }

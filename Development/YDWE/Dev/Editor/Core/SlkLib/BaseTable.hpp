@@ -1,8 +1,8 @@
 #pragma once
 
 #include <unordered_map>
-#include "ObjectId.hpp"
-#include "Buffer.hpp"
+#include <slk/utility/object_id.h>
+#include <slk/utility/buffer.h>
 
 namespace slk
 {

@@ -39,20 +39,20 @@ namespace slk
 			}
 		}
 
-		ObjectId GetId() const
+		object_id GetId() const
 		{
 			return _id;
 		}
-		void SetId(const ObjectId& id)
+		void SetId(const object_id& id)
 		{
 			this->_id = id;
 		}
 
-		ObjectId GetBaseId() const
+		object_id GetBaseId() const
 		{
 			return _baseid;
 		}
-		void SetBaseId(const ObjectId& id)
+		void SetBaseId(const object_id& id)
 		{
 			this->_baseid = id;
 		}
@@ -62,13 +62,13 @@ namespace slk
 			return _attributes;
 		}
 	private:
-		ObjectId _id;
-		ObjectId _baseid;
+		object_id _id;
+		object_id _baseid;
 		AttributeTable<Option> _attributes;
 	};
 
 	template <OBJECT_PARSER_OPTION Option>
-	struct ObjTable : public HashTable<ObjectId, ObjSingle<Option>>::Type
+	struct ObjTable : public HashTable<object_id, ObjSingle<Option>>::Type
 	{
 		const static OBJECT_PARSER_OPTION table_type = Option;
 	};

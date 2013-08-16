@@ -1,7 +1,6 @@
 
 #include "ConvertTable.hpp"
-#include "Util.hpp"
-#include "Sequence.hpp"
+#include <slk/utility/sequence.h>
 #include <algorithm>
 
 namespace slk

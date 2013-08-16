@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Util.hpp"
-#include "Buffer.hpp"
+#include <slk/utility/util.h>
+#include <slk/utility/buffer.h>
 #include "IniTable.hpp"
 
 namespace slk

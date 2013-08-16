@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Buffer.hpp"
+#include <slk/utility/buffer.h>
 #include "WesTable.hpp"
 
 namespace slk

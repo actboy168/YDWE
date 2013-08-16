@@ -2,7 +2,7 @@
 
 #include <string>
 #include <set>
-#include "ObjectId.hpp"
+#include <slk/utility/object_id.h>
 #include "BaseTable.hpp"
 #include "SlkTable.hpp"
 #include "VariableData.hpp"
@@ -18,7 +18,7 @@ namespace slk
 		std::string        slk;
 	};
 
-	class SLKLIB_API MetaTable : public HashTable<ObjectId, MetaSingle>::Type
+	class SLKLIB_API MetaTable : public HashTable<object_id, MetaSingle>::Type
 	{
 	};
 }

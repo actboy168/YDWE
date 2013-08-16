@@ -1,7 +1,8 @@
 
-#include "port/config.h"
+#include <slk/port/config.h>
+#include <slk/utility/sequence.h>
+#include <slk/utility/convert.h>
 #include "SlkReader.hpp"
-#include "Sequence.hpp"
 #include "TextReader.hpp"
 
 namespace slk
@@ -89,7 +90,7 @@ namespace slk
 						val.remove_suffix(1);
 					}
 
-					id_[cur_y_-1] = ObjectId(val);
+					id_[cur_y_-1] = object_id(val);
 				}
 				else
 				{
@@ -281,7 +282,7 @@ namespace slk
 			size_t max_y_;
 			size_t cur_x_;
 			size_t cur_y_;
-			std::vector<ObjectId>    id_;
+			std::vector<object_id>    id_;
 			std::vector<std::string> tag_;
 		};
 

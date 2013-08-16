@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Util.hpp"
-#include "Buffer.hpp"
+#include <slk/utility/util.h>
+#include <slk/utility/buffer.h>
 #include "SlkTable.hpp"
 
 namespace slk
@@ -18,7 +18,7 @@ namespace slk
 
 			foreach (auto const& ObjectIt, table)
 			{
-				ObjectId const& Id = ObjectIt.first;
+				object_id const& Id = ObjectIt.first;
 				SlkSingle const& Object = ObjectIt.second;
 
 				body += "C;X1;Y" + Int2Str(cur_y++) + ";K\"" + Id.to_string() + "\"\n";
