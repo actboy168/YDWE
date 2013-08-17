@@ -12,7 +12,7 @@
 #include <slk/reader/IniReader.hpp>
 #include <slk/reader/IniReader.cpp>
 #include <slk/utility/sequence.cpp>
-#include <slk/reader/TextReader.cpp>
+#include <slk/reader/CommonReader.cpp>
 
 uintptr_t RealLoadLibraryA  = 0;
 uintptr_t RealCreateWindowExA = 0;
