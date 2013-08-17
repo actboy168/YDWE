@@ -133,4 +133,24 @@ namespace warcraft3_directory
 
 		return false;
 	}
+
+
+	bool get(const wchar_t* title, boost::filesystem::path& war3_path)
+	{
+		while (!warcraft3_directory::read(war3_path))
+		{
+			boost::filesystem::path result;
+			if (!warcraft3_directory::choose(title, result))
+			{
+				return false;
+			}
+
+			if (warcraft3_directory::validate(result))
+			{
+				warcraft3_directory::write(result);
+			}
+		}
+
+		return true;
+	}
 }

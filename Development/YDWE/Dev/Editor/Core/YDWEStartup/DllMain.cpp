@@ -20,6 +20,8 @@
 #include <ydwe/win/file_version.h>
 #include <ydwe/win/process.h>
 #include "FileCheck.h"
+#include <YDWEConfig/Warcraft3Directory.h>
+#include <YDWEConfig/Warcraft3Directory.cpp>
 
 namespace fs = boost::filesystem;
 
@@ -29,165 +31,6 @@ namespace fs = boost::filesystem;
 
 static fs::path gExecutableDirectory;
 static fs::path gWarcraftDirectory;
-
-static bool RunOpenFileDialog(LPCWSTR title, LPCWSTR filter, HWND owner, std::wstring* path) 
-{
-	OPENFILENAMEW ofn;
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = owner;
-	wchar_t filename[MAX_PATH];
-	filename[0] = 0;
-	ofn.lpstrFile = filename;
-	ofn.nMaxFile = _countof(filename);
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR | OFN_HIDEREADONLY;
-	if (title) ofn.lpstrTitle = title;
-	if (filter) ofn.lpstrFilter = filter;
-
-	if (!GetOpenFileNameW(&ofn))
-	{
-		return false;
-	}
-
-	*path = std::wstring(filename);
-	return true;
-}
-
-static bool ChooseWarcraftDirectory()
-{
-	typedef winstl::basic_reg_key<wchar_t> TRegKey;
-
-	std::wstring retval;
-	if (!RunOpenFileDialog(__("Please choose your Warcraft 3 installation directory"), L"war3.exe\0war3.exe\0", NULL, &retval))
-	{
-		return false;
-	}
-
-	bool success;
-	try
-	{
-		TRegKey warReg = TRegKey::create_key(HKEY_CURRENT_USER, L"Software\\Blizzard Entertainment\\Warcraft III");
-		warReg.set_value(L"InstallPath", fs::path(retval).parent_path().c_str());
-		success = true;
-	}
-	catch (...)
-	{
-		success = false;
-	}
-
-	return success;
-}
-
-static bool ReadWarcraftDirectory(fs::path& result)
-{
-	typedef winstl::basic_reg_key<wchar_t> TRegKey;
-	typedef winstl::basic_reg_value<wchar_t> TRegValue;
-
-	bool success;
-
-	try
-	{
-		TRegKey warReg = TRegKey(HKEY_CURRENT_USER, L"Software\\Blizzard Entertainment\\Warcraft III");
-		TRegValue regValue = warReg.get_value(L"InstallPath");
-		result = regValue.value_sz().c_str();
-
-		success = true;
-	}
-	catch (...)
-	{
-		success = false;
-	}
-
-	if (!success || !fs::exists(result))
-	{
-		success = false;
-	}
-
-	return success;
-}
-
-// War3 1.26会自动将自身路径写入注册表，但写入的位置是HKEY_LOCAL_MACHINE
-static bool ReadWarcraftDirectoryAllUser(fs::path& result)
-{
-	typedef winstl::basic_reg_key<wchar_t> TRegKey;
-	typedef winstl::basic_reg_value<wchar_t> TRegValue;
-
-	bool success;
-
-	try
-	{
-		TRegKey warReg = TRegKey(HKEY_LOCAL_MACHINE, L"Software\\Blizzard Entertainment\\Warcraft III", KEY_READ);
-		TRegValue regValue = warReg.get_value(L"InstallPath");
-		result = regValue.value_sz().c_str();
-
-		success = true;
-	}
-	catch (...)
-	{
-		success = false;
-	}
-
-	if (!success || !fs::exists(result))
-	{
-		success = false;
-	}
-
-	return success;
-}
-
-static bool ValidateWarcraftDirectory(const fs::path &warcraftDirectory)
-{
-	using namespace boost::assign; // bring '+=' into scope
-
-	static const std::list<std::wstring> fileList
-		= list_of(L"war3.exe")(L"game.dll")(L"war3.mpq")(L"war3patch.mpq")(L"storm.dll");
-
-	BOOST_FOREACH(const std::wstring &fileName, fileList)
-	{
-		fs::path fileToCheck = warcraftDirectory / fileName;
-		if (!fs::exists(fileToCheck))
-		{
-			return false;
-		}
-	}
-
-	return true;
-}
-
-static fs::path FindWarcraftDirectory()
-{
-	fs::path result;
-	if (ReadWarcraftDirectory(result))
-	{
-		bool success = ValidateWarcraftDirectory(result);
-		if (success)
-			return std::move(result);
-	}
-
-	if (ReadWarcraftDirectoryAllUser(result))
-	{
-		bool success = ValidateWarcraftDirectory(result);
-		if (success)
-			return std::move(result);
-	}
-
-	if (ChooseWarcraftDirectory())
-	{
-		if (ReadWarcraftDirectory(result))
-		{
-			bool success = ValidateWarcraftDirectory(result);
-
-			if (!success)
-				BOOST_THROW_EXCEPTION(std::domain_error(_("Cannot find some important files(war3.exe, game.dll, etc.) in your Warcraft 3 directory. Please make sure you have copied the fixer to you Warcraft 3 directory and run it."))
-					);
-			return std::move(result);
-		}
-	}
-
-	BOOST_THROW_EXCEPTION(std::domain_error(_("Cannot find Warcraft 3 installation path. Please check if your registry contains enough information about your Warcraft 3. Use registry fixer if needed.")));
-
-	return std::move(result);
-}
 
 static void ShowSplash(fs::path const& ydwe_path)
 {
@@ -285,7 +128,10 @@ static void DoTask()
 		BOOST_THROW_EXCEPTION(std::domain_error(_("Error YDWE directory.")));
 	}
 
-	gWarcraftDirectory = FindWarcraftDirectory();
+	if (!warcraft3_directory::get(__("Please choose your Warcraft 3 installation directory"), gWarcraftDirectory))
+	{
+		return ;
+	}
 
 	MoveDetouredSystemDll(gWarcraftDirectory);
 

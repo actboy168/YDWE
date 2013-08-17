@@ -11,4 +11,5 @@ namespace warcraft3_directory
 	bool read(boost::filesystem::path& result);
 	bool choose(const wchar_t* title, boost::filesystem::path& result);
 	bool choose(const wchar_t* title);
+	bool get(const wchar_t* title, boost::filesystem::path& war3_path);
 }

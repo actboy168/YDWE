@@ -18,18 +18,9 @@ bool launch_warcraft3()
 		ev.set(p + ev.get());
 
 		boost::filesystem::path war3_path;
-		while (!warcraft3_directory::read(war3_path))
+		if (!warcraft3_directory::get(nullptr, war3_path))
 		{
-			boost::filesystem::path result;
-			if (!warcraft3_directory::choose(nullptr, result))
-			{
-				return false;
-			}
-
-			if (warcraft3_directory::validate(result))
-			{
-				warcraft3_directory::write(result);
-			}
+			return false;
 		}
 
 		boost::filesystem::path inject_dll = ydwe_path / L"plugin" / L"warcraft3" / L"yd_loader.dll";
