@@ -9,6 +9,6 @@ namespace warcraft3_directory
 	bool validate(boost::filesystem::path const& p);
 	bool write(boost::filesystem::path const& p);
 	bool read(boost::filesystem::path& result);
-	bool choose(boost::filesystem::path& result);
-	bool choose();
+	bool choose(const wchar_t* title, boost::filesystem::path& result);
+	bool choose(const wchar_t* title);
 }

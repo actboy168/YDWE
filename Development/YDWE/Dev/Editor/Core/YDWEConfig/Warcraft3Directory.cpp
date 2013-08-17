@@ -111,10 +111,10 @@ namespace warcraft3_directory
 		return true;
 	}
 
-	bool choose(boost::filesystem::path& result)
+	bool choose(const wchar_t* title, boost::filesystem::path& result)
 	{
 		std::wstring retval;
-		if (!open_file_dialog(NULL, L"war3.exe\0war3.exe\0", NULL, &retval))
+		if (!open_file_dialog(title, L"war3.exe\0war3.exe\0", NULL, &retval))
 		{
 			return false;
 		}
@@ -123,10 +123,10 @@ namespace warcraft3_directory
 		return true;
 	}
 
-	bool choose()
+	bool choose(const wchar_t* title)
 	{
 		boost::filesystem::path retval;
-		if (choose(retval) && validate(retval))
+		if (choose(title, retval) && validate(retval))
 		{
 			return write(retval);
 		}
