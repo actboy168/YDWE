@@ -161,7 +161,8 @@ bool CMainWindow::LoadConfig(slk::IniTable& table)
 	try
 	{
 		ResetConfig(table);
-		slk::buffer_reader reader(ydwe::file::read_steam(ydwe::path::self().remove_filename() / L"EverConfig.cfg").read<slk::buffer>());
+		slk::buffer buf = ydwe::file::read_steam(ydwe::path::self().remove_filename() / L"EverConfig.cfg").read<slk::buffer>();
+		slk::buffer_reader reader(buf);
 		slk::IniReader::Read(reader, table);
 	}
 	catch (...)
@@ -390,7 +391,8 @@ void CMainWindow::InitPluginUI()
 
 		slk::IniTable table;
 		try {
-			slk::buffer_reader reader(ydwe::file::read_steam(plugin_path / L"config.cfg").read<slk::buffer>());
+			slk::buffer buf = ydwe::file::read_steam(plugin_path / L"config.cfg").read<slk::buffer>();
+			slk::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);	
 		}
 		catch(...) {
