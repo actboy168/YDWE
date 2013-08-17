@@ -3,6 +3,7 @@
 #include <map>
 #include <set>
 #include <string>
+#include <functional>
 
 extern BOOL g_bDisableSaveLoadSystem;
 extern BOOL g_local_in_mainproc;
@@ -17,11 +18,12 @@ namespace locvar
 
 	state global;
 
-	guard::guard(const char* name, int id)
+	guard::guard(int id, const char* name, const char* handle_string)
 		: old_(global)
 	{ 
-		current().mother_id = id;
-		current().name      = name;
+		current().mother_id     = id;
+		current().name          = name;
+		current().handle_string = handle_string;
 	}
 
 	guard::~guard()
@@ -81,7 +83,7 @@ namespace locvar
 
 		if (global.mother_id == CC_GUIID_YDWETimerStartMultiple)
 		{
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, "GetExpiredTimer()", SStrHash(var_name));
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, global.handle_string, SStrHash(var_name));
 		}
 		else if (global.mother_id == (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple))
 		{
@@ -90,7 +92,7 @@ namespace locvar
 		}
 		else if (global.mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
 		{
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, "GetTriggeringTrigger()", SStrHash(var_name));
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, global.handle_string, SStrHash(var_name));
 		}
 		else
 		{
@@ -235,8 +237,7 @@ namespace locvar
 	void params(DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string)
 	{
 		{
-			locvar::guard _tmp_guard_(name, (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple));
-			_tmp_guard_.current().handle_string = handle_string;
+			locvar::guard _tmp_guard_((0x8000 | (int)CC_GUIID_YDWETimerStartMultiple), name, handle_string);
 
 			DWORD nItemCount, i;
 			DWORD nItemClass;
@@ -273,11 +274,15 @@ namespace locvar
 			}
 		}
 
-		for each (auto it in register_var[name])
 		{
-			locvar::do_set(OutClass, it.second.c_str(), it.first.c_str(), [&](){ locvar::do_get(OutClass, it.second.c_str(), it.first.c_str()); });
-		}
+			locvar::guard _tmp_guard_(global.mother_id, name, handle_string);
 
-		register_var.erase(name);
+			for each (auto it in register_var[name])
+			{
+				locvar::do_set(OutClass, it.second.c_str(), it.first.c_str(), [&](){ locvar::do_get(OutClass, it.second.c_str(), it.first.c_str()); });
+			}
+
+			register_var.erase(name);
+		}
 	}
 }

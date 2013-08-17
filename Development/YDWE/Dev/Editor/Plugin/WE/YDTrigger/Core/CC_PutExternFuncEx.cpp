@@ -140,7 +140,7 @@ void _fastcall CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name)
 	{
 	case CC_GUIID_YDWETimerStartMultiple:
 		{
-			locvar::guard _tmp_guard_(name, CC_GUIID_YDWETimerStartMultiple);
+			locvar::guard _tmp_guard_(CC_GUIID_YDWETimerStartMultiple, name, "GetExpiredTimer()");
 
 			char buff[260];
 			BLZSStrPrintf(buff, 260, "function %sT takes nothing returns nothing", name);
@@ -156,7 +156,7 @@ void _fastcall CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name)
 		break;
 	case CC_GUIID_YDWERegisterTriggerMultiple:
 		{
-			locvar::guard _tmp_guard_(name, CC_GUIID_YDWERegisterTriggerMultiple);
+			locvar::guard _tmp_guard_(CC_GUIID_YDWERegisterTriggerMultiple, name, "GetTriggeringTrigger()");
 
 			char buff[260];
 			BLZSStrPrintf(buff, 260, "function %sConditions takes nothing returns nothing", name);

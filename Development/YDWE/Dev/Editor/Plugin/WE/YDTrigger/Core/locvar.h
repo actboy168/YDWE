@@ -8,6 +8,7 @@ namespace locvar
 	{
 		state()
 			: mother_id(0)
+			, name(nullptr)
 			, handle_string(nullptr)
 		{ }
 
@@ -19,7 +20,7 @@ namespace locvar
 	class guard
 	{
 	public:
-		guard(const char* name, int id);
+		guard(int id, const char* name, const char* handle_string);
 		~guard();
 		state& current();
 
