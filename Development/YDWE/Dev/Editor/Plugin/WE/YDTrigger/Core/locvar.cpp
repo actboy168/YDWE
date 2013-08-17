@@ -18,17 +18,18 @@ namespace locvar
 
 		char buff[260];
 
+		LPCSTR lpszKey = (LPCSTR)&GetGUIVar_Value(This, 0);
+
 		if (g_mother_id == CC_GUIID_YDWETimerStartMultiple)
 		{
-			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetExpiredTimer()", SStrHash((char*)&GetGUIVar_Value(This, 0)));
+			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetExpiredTimer()", SStrHash(lpszKey));
 		}
 		else if (g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
 		{
-			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetTriggeringTrigger()", SStrHash((char*)&GetGUIVar_Value(This, 0)));
+			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetTriggeringTrigger()", SStrHash(lpszKey));
 		}
 		else
 		{
-			LPCSTR lpszKey = (LPCSTR)&GetGUIVar_Value(This, 0);
 			if (!SaveLoadCheck_Set(lpszKey, (LPCSTR)type_name)) 
 			{
 				char tmp[260];
@@ -55,6 +56,7 @@ namespace locvar
 
 		char buff[260];
 		int var_type = GetVarType(This, 0);
+		LPCSTR lpszKey = (LPCSTR)&GetGUIVar_Value(This, 1);
 
 		if ((CC_TYPE__begin < var_type) && (var_type < CC_TYPE__end))
 		{
@@ -62,19 +64,18 @@ namespace locvar
 
 			if (g_mother_id == CC_GUIID_YDWETimerStartMultiple)
 			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], "GetExpiredTimer()", SStrHash((char*)&GetGUIVar_Value(This, 1)));
+				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], "GetExpiredTimer()", SStrHash(lpszKey));
 			}
 			else if (g_mother_id == (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple))
 			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], g_handle_string, SStrHash((char*)&GetGUIVar_Value(This, 1)));
+				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], g_handle_string, SStrHash(lpszKey));
 			}
 			else if (g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
 			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], "GetTriggeringTrigger()", SStrHash((char*)&GetGUIVar_Value(This, 1)));
+				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], "GetTriggeringTrigger()", SStrHash(lpszKey));
 			}
 			else
 			{
-				LPCSTR lpszKey = (LPCSTR)&GetGUIVar_Value(This, 1);
 				if (!SaveLoadCheck_Set(lpszKey, TypeName[var_type]))
 				{
 					char tmp[260];

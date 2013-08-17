@@ -36,6 +36,7 @@ void _fastcall
 				case CC_GUIID_YDWETimerStartMultiple:
 				case CC_GUIID_YDWERegisterTriggerMultiple:
 					ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ILLEGAL_PARAMETER");
+					break;
 				default:
 					{
 						CC_PutAction(nItemClass, OutClass, name, i, 0);
