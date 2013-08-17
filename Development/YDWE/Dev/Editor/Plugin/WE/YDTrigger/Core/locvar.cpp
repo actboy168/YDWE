@@ -1,5 +1,8 @@
 #include "CC_Include.h"
 #include "locvar.h"
+#include <map>
+#include <set>
+#include <string>
 
 extern BOOL g_bDisableSaveLoadSystem;
 extern BOOL g_local_in_mainproc;
@@ -10,6 +13,8 @@ int _fastcall Utf8toAscii(char src[], char dst[], unsigned int limit);
 
 namespace locvar
 {
+	std::map<std::string, std::map<std::string, std::string>> register_var;
+
 	state global;
 
 	guard::guard(const char* name, int id)
@@ -29,92 +34,103 @@ namespace locvar
 		return global;
 	}
 
-	void get(DWORD This, DWORD OutClass, char* type_name)
+	void do_get(DWORD OutClass, const char* type_name, const char* var_name)
 	{
 		g_bDisableSaveLoadSystem = FALSE;
 
 		char buff[260];
 
-		LPCSTR lpszKey = (LPCSTR)&GetGUIVar_Value(This, 0);
-
 		if (global.mother_id == CC_GUIID_YDWETimerStartMultiple)
 		{
-			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetExpiredTimer()", SStrHash(lpszKey));
+			register_var[global.name][var_name] = type_name;
+			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetExpiredTimer()", SStrHash(var_name));
 		}
 		else if (global.mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
 		{
-			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetTriggeringTrigger()", SStrHash(lpszKey));
+			register_var[global.name][var_name] = type_name;
+			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetTriggeringTrigger()", SStrHash(var_name));
 		}
 		else
 		{
-			if (!SaveLoadCheck_Set(lpszKey, (LPCSTR)type_name)) 
+			if (!SaveLoadCheck_Set(var_name, (LPCSTR)type_name)) 
 			{
 				char tmp[260];
-				Utf8toAscii((char*)lpszKey, tmp, 260);
-				ShowErrorN(OutClass, "WESTRING_ERROR_YDTRIGGER_LOCVAR", tmp, (LPCSTR)type_name, tmp, SaveLoadCheck_Get(lpszKey));
+				Utf8toAscii((char*)var_name, tmp, 260);
+				ShowErrorN(OutClass, "WESTRING_ERROR_YDTRIGGER_LOCVAR", tmp, (LPCSTR)type_name, tmp, SaveLoadCheck_Get(var_name));
 			}
 
 			if (g_local_in_mainproc)
 			{
-				BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*"YDL_LOCALVAR_STEPS", 0x%08X)", type_name, SStrHash(lpszKey));
+				BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*"YDL_LOCALVAR_STEPS", 0x%08X)", type_name, SStrHash(var_name));
 			}
 			else
 			{
-				BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X)", type_name, SStrHash("TriggerRunSteps"), SStrHash(lpszKey));
+				BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X)", type_name, SStrHash("TriggerRunSteps"), SStrHash(var_name));
 			}
 		}
 
 		PUT_CONST(buff, 0);
 	}
 
-	void set(DWORD This, DWORD OutClass, char* name)
+	void do_set(DWORD OutClass, const char* type_name, const char* var_name, std::function<void(void)> func)
 	{
+		g_bDisableSaveLoadSystem = FALSE;
+		char buff[260];
+
 		CC_PutBegin();
 
-		char buff[260];
-		int var_type = GetVarType(This, 0);
-		LPCSTR lpszKey = (LPCSTR)&GetGUIVar_Value(This, 1);
-
-		if ((CC_TYPE__begin < var_type) && (var_type < CC_TYPE__end))
+		if (global.mother_id == CC_GUIID_YDWETimerStartMultiple)
 		{
-			g_bDisableSaveLoadSystem = FALSE;
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, "GetExpiredTimer()", SStrHash(var_name));
+		}
+		else if (global.mother_id == (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple))
+		{
+			register_var[global.name].erase(var_name);
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, global.handle_string, SStrHash(var_name));
+		}
+		else if (global.mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
+		{
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, "GetTriggeringTrigger()", SStrHash(var_name));
+		}
+		else
+		{
+			if (!SaveLoadCheck_Set(var_name, type_name))
+			{
+				char tmp[260];
+				Utf8toAscii((char*)var_name, tmp, 260);
+				ShowErrorN(OutClass, "WESTRING_ERROR_YDTRIGGER_LOCVAR", tmp, type_name, tmp, SaveLoadCheck_Get(var_name));
+			}
 
-			if (global.mother_id == CC_GUIID_YDWETimerStartMultiple)
+			if (g_local_in_mainproc)
 			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], "GetExpiredTimer()", SStrHash(lpszKey));
-			}
-			else if (global.mother_id == (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple))
-			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], global.handle_string, SStrHash(lpszKey));
-			}
-			else if (global.mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
-			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], "GetTriggeringTrigger()", SStrHash(lpszKey));
+				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*"YDL_LOCALVAR_STEPS", 0x%08X, ", type_name, SStrHash(var_name));
 			}
 			else
 			{
-				if (!SaveLoadCheck_Set(lpszKey, TypeName[var_type]))
-				{
-					char tmp[260];
-					Utf8toAscii((char*)lpszKey, tmp, 260);
-					ShowErrorN(OutClass, "WESTRING_ERROR_YDTRIGGER_LOCVAR", tmp, TypeName[var_type], tmp, SaveLoadCheck_Get(lpszKey));
-				}
-
-				if (g_local_in_mainproc)
-				{
-					BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*"YDL_LOCALVAR_STEPS", 0x%08X, ", TypeName[var_type], SStrHash(lpszKey));
-				}
-				else
-				{
-					BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X, ", TypeName[var_type], SStrHash("TriggerRunSteps"), SStrHash(lpszKey));
-				}
+				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X, ", type_name, SStrHash("TriggerRunSteps"), SStrHash(var_name));
 			}
-
-			PUT_CONST(buff, 0);
-			PUT_VAR(This, 2);
-			PUT_CONST(")", 1);
 		}
+
+		PUT_CONST(buff, 0);
+		func();
+		PUT_CONST(")", 1);
+
 		CC_PutEnd();
+	}
+
+	void get(DWORD This, DWORD OutClass, char* type_name)
+	{
+		do_get(OutClass, type_name, (LPCSTR)&GetGUIVar_Value(This, 0));
+	}
+
+	void set(DWORD This, DWORD OutClass, char* name)
+	{
+		int var_type = GetVarType(This, 0);
+
+		if ((CC_TYPE__begin < var_type) && (var_type < CC_TYPE__end))
+		{
+			do_set(OutClass, TypeName[var_type], (LPCSTR)&GetGUIVar_Value(This, 1), [&](){ PUT_VAR(This, 2); } );
+		}
 	}
 
 	void flush_in_timer(DWORD This, DWORD OutClass)
@@ -213,5 +229,55 @@ namespace locvar
 			PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetTriggeringTrigger())*"YDL_LOCALVAR_STEPS")", 1);
 			CC_PutEnd();
 		}
+	}
+
+
+	void params(DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string)
+	{
+		{
+			locvar::guard _tmp_guard_(name, (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple));
+			_tmp_guard_.current().handle_string = handle_string;
+
+			DWORD nItemCount, i;
+			DWORD nItemClass;
+			char NewName[260];
+			nItemCount = *(DWORD*)(This+0xC);
+
+			for (i = 0; i < nItemCount; i++)
+			{
+				nItemClass = ((DWORD*)(*(DWORD*)(This+0x10)))[i];
+				if (*(DWORD*)(nItemClass+0x13C) != 0)
+				{
+					if ((index) == -1 || (*(DWORD*)(nItemClass+0x154) == index))
+					{  
+						switch (*(DWORD*)(nItemClass+0x138))
+						{
+						case CC_GUIID_YDWESetAnyTypeLocalVariable:
+							{
+								BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, i+1);
+								locvar::set(nItemClass, OutClass, NewName);
+								break;  
+							}
+						case CC_GUIID_YDWETimerStartMultiple:
+						case CC_GUIID_YDWERegisterTriggerMultiple:
+							ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ILLEGAL_PARAMETER");
+							break;
+						default:
+							{
+								CC_PutAction(nItemClass, OutClass, name, i, 0);
+							}
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		for each (auto it in register_var[name])
+		{
+			locvar::do_set(OutClass, it.second.c_str(), it.first.c_str(), [&](){ locvar::do_get(OutClass, it.second.c_str(), it.first.c_str()); });
+		}
+
+		register_var.erase(name);
 	}
 }
