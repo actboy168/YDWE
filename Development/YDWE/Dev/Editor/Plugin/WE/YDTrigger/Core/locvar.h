@@ -35,4 +35,5 @@ namespace locvar
 	void return_before    (DWORD This, DWORD OutClass);
 	void construct        (DWORD OutClass);
 	void destroy          (DWORD OutClass);
+	void params           (DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string);
 }

@@ -213,7 +213,7 @@ void _fastcall
 			PUT_CONST("", 1);
 			CC_PutEnd();
 
-			CC_PutBlock_TimerParameters(This, OutClass, name, 0, YDL_TIMER);
+			locvar::params(This, OutClass, name, 0, YDL_TIMER);
 
 			CC_PutBegin();
 			PUT_CONST("call TimerStart("YDL_TIMER", ", 0);
@@ -253,7 +253,7 @@ void _fastcall
 			PUT_CONST("", 1);
 			CC_PutEnd();
 
-			CC_PutBlock_TimerParameters(This, OutClass, name, 1, YDL_TRIGGER);
+			locvar::params(This, OutClass, name, 1, YDL_TRIGGER);
 
 			// Event  
 			CC_PutBlock_Event(This, OutClass, name, 0, YDL_TRIGGER);

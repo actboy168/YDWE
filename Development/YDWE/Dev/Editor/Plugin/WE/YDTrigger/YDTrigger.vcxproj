@@ -95,7 +95,6 @@
     <ClCompile Include="Core\CC_PutBlock_Action.cpp" />
     <ClCompile Include="Core\CC_PutBlock_Condition.cpp" />
     <ClCompile Include="Core\CC_PutBlock_Event.cpp" />
-    <ClCompile Include="Core\CC_PutBlock_TimerParameters.cpp" />
     <ClCompile Include="Core\CC_PutConditionEx.cpp" />
     <ClCompile Include="Core\CC_PutEventRegisterEx.cpp" />
     <ClCompile Include="Core\CC_PutExternFuncEx.cpp" />

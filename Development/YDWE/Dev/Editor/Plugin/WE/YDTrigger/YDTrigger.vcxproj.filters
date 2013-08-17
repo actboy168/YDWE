@@ -93,9 +93,6 @@
     <ClCompile Include="Core\CC_PutBlock_Event.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Core\CC_PutBlock_TimerParameters.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\CC_PutConditionEx.cpp">
       <Filter>Core</Filter>
     </ClCompile>

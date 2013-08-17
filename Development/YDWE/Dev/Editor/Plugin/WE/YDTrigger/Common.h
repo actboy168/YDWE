@@ -4,7 +4,7 @@
 #include <windows.h>
 
 typedef int  (_fastcall* CC_VoidProc)(void);
-typedef int  (_fastcall* CC_PutConstProc)(DWORD OutClass, char* string, DWORD Endl);
+typedef int  (_fastcall* CC_PutConstProc)(DWORD OutClass, const char* string, DWORD Endl);
 typedef int  (_fastcall* CC_PutStringProc)(DWORD OutClass, DWORD EDX, char* string, DWORD Endl);
 typedef int  (_fastcall* CC_PutVarProc)(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Index, DWORD Type, DWORD Endl);
 typedef int  (_fastcall* CC_PutEventRegisterProc)(DWORD This, DWORD EDX, DWORD OutClass, char* triggername, char* name, DWORD index);
