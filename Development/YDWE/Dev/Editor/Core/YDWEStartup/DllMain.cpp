@@ -2,12 +2,6 @@
 #include <utility>
 #include <locale>
 #include <windows.h>
-#include <stlsoft/stlsoft.h>
-#include <winstl/winstl.h>
-#include <winstl/registry/registry.hpp>
-#include <winstl/registry/reg_key.hpp>
-#include <winstl/registry/reg_value.hpp> 
-#include <winstl/error/error_desc.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/format.hpp>
 #include <boost/assign.hpp>
@@ -19,9 +13,9 @@
 #include <ydwe/util/unicode.h>
 #include <ydwe/win/file_version.h>
 #include <ydwe/win/process.h>
-#include "FileCheck.h"
 #include <YDWEConfig/Warcraft3Directory.h>
 #include <YDWEConfig/Warcraft3Directory.cpp>
+#include "FileCheck.h"
 
 namespace fs = boost::filesystem;
 
