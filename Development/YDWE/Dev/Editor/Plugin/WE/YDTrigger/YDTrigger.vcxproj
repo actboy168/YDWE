@@ -109,6 +109,7 @@
     <ClCompile Include="Core\CC_SP_UserData.cpp" />
     <ClCompile Include="Core\CC_VarType.cpp" />
     <ClCompile Include="Core\GetVarType.cpp" />
+    <ClCompile Include="Core\locvar.cpp" />
     <ClCompile Include="Core\SaveLoadCheck.cpp" />
     <ClCompile Include="CreateYDTriggerImportFile.cpp" />
     <ClCompile Include="Detours\detoured.cpp" />
@@ -130,6 +131,7 @@
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="ConvertString\ConvertString.h" />
+    <ClInclude Include="Core\locvar.h" />
     <ClInclude Include="Core\CC_GUIID.h" />
     <ClInclude Include="Core\CC_Include.h" />
     <ClInclude Include="Core\CC_Put.h" />

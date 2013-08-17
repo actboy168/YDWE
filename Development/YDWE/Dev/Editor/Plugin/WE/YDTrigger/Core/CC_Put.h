@@ -6,8 +6,6 @@
 
 void _fastcall CC_PutLocal_Begin(DWORD This, DWORD OutClass, DWORD isTimer, DWORD isSearchHashLocal);
 void _fastcall CC_PutLocal_End(DWORD This, DWORD OutClass, DWORD isTimer, DWORD isEnd);
-void _fastcall CC_Put_SetTimerParameters(DWORD This, DWORD OutClass, char* name, char* handle_string);
-void _fastcall CC_Put_GetTimerParameters(DWORD This, DWORD OutClass, char* type_name, char* handle_string);
 void _fastcall CC_PutBlock_TimerParameters(DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string);
 void _fastcall CC_PutAction(DWORD This, DWORD OutClass, char* name, DWORD index, DWORD Endl);
 void _fastcall CC_PutConditionEx(DWORD This, DWORD OutClass, char* name);

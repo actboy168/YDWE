@@ -17,7 +17,6 @@ CC_Put_TriggerLocalVar_Begin(DWORD OutClass)
 {
   char buff[260];
 
-
   if (g_local_in_mainproc)
   {
     g_bDisableSaveLoadSystem = FALSE;
@@ -32,7 +31,6 @@ CC_Put_TriggerLocalVar_Begin(DWORD OutClass)
     PUT_CONST(buff, 1);
     CC_PutEnd();
   }
-
 }
 
 //
@@ -46,76 +44,6 @@ CC_Put_TriggerLocalVar_End(DWORD OutClass)
     CC_PutBegin();
     PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetTriggeringTrigger())*"YDL_LOCALVAR_STEPS")", 1);
     CC_PutEnd();
-  }
-}
-
-int _fastcall Utf8toAscii(char src[], char dst[], unsigned int limit);
-
-//
-//  YDWEGetTypenameByInteger(YDWEH2I(GetTriggeringTrigger())*YDWEGetIntegerByInteger(YDWEH2I(GetTriggeringTrigger()), StringHash("TriggerRunSteps")), name)
-//  YDWEGetTypenameByInteger(YDWEH2I(GetTriggeringTrigger())*ydl_localvar_step, name)
-//
-void _fastcall 
-CC_Put_TriggerLocalVar_Get(DWORD This, DWORD OutClass, char* type_name)
-{
-  char buff[260];
-  LPCSTR lpszKey;
-
-  g_bDisableSaveLoadSystem = FALSE;
-
-  lpszKey = (LPCSTR)&GetGUIVar_Value(This, 0);
-  if (!SaveLoadCheck_Set(lpszKey, (LPCSTR)type_name)) 
-  {
-	  char tmp[260];
-	  Utf8toAscii((char*)lpszKey, tmp, 260);
-	  ShowErrorN(OutClass, "WESTRING_ERROR_YDTRIGGER_LOCVAR", tmp, (LPCSTR)type_name, tmp, SaveLoadCheck_Get(lpszKey));
-  }
-
-  if (g_local_in_mainproc)
-  {
-    BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*"YDL_LOCALVAR_STEPS", 0x%08X)", type_name, SStrHash(lpszKey));
-  }
-  else
-  {
-    BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X)", type_name, SStrHash("TriggerRunSteps"), SStrHash(lpszKey));
-  }
-  PUT_CONST(buff, 0);
-}
-
-//
-//  call YDWESaveTypenameByInteger(YDWEH2I(GetTriggeringTrigger())*YDWEGetIntegerByInteger(YDWEH2I(GetTriggeringTrigger()), StringHash("TriggerRunSteps")), name, value)   
-//  call YDWESaveTypenameByInteger(YDWEH2I(GetTriggeringTrigger())*ydl_localvar_step, name, value)
-//
-void _fastcall
-CC_Put_TriggerLocalVar_Set(DWORD This, DWORD OutClass, char* name)
-{
-  char buff[260];
-  int var_type = GetVarType(This, 0);
-  LPCSTR lpszKey;
-
-  if ((CC_TYPE__begin < var_type) && (var_type < CC_TYPE__end))
-  {
-    g_bDisableSaveLoadSystem = FALSE;
-
-	lpszKey = (LPCSTR)&GetGUIVar_Value(This, 1);
-	if (!SaveLoadCheck_Set(lpszKey, TypeName[var_type]))
-	{
-		char tmp[260];
-		Utf8toAscii((char*)lpszKey, tmp, 260);
-		ShowErrorN(OutClass, "WESTRING_ERROR_YDTRIGGER_LOCVAR", tmp, TypeName[var_type], tmp, SaveLoadCheck_Get(lpszKey));
-	}
-
-    if (g_local_in_mainproc)
-    {
-      BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*"YDL_LOCALVAR_STEPS", 0x%08X, ", TypeName[var_type], SStrHash(lpszKey));
-    }
-    else
-    {
-      BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X, ", TypeName[var_type], SStrHash("TriggerRunSteps"), SStrHash(lpszKey));
-    }
-    PUT_CONST(buff, 0);
-    PUT_VAR(This, 2);
-    PUT_CONST(")", 1);
   }
 }
 

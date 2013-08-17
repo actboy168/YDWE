@@ -1,4 +1,5 @@
 #include "CC_Include.h"
+#include "locvar.h"
 
 extern int g_mother_id;
 extern char* g_handle_string;
@@ -213,26 +214,8 @@ void _fastcall
             break;
         }
     case CC_GUIID_YDWESetAnyTypeLocalVariable:
-        {
-            CC_PutBegin();
-
-            if (g_mother_id == CC_GUIID_YDWETimerStartMultiple)
-            {
-                CC_Put_SetTimerParameters(This, OutClass, name, "GetExpiredTimer()");
-			}
-			else if (g_mother_id == (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple))
-			{
-				CC_Put_SetTimerParameters(This, OutClass, name, g_handle_string);
-			}
-			else if (g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
-			{
-				CC_Put_SetTimerParameters(This, OutClass, name, "GetTriggeringTrigger()");
-			}
-            else
-            {
-                CC_Put_TriggerLocalVar_Set(This, OutClass, name);
-            }
-            CC_PutEnd();
+		{
+			locvar::set(This, OutClass, name);
             break;  
         }
     case CC_GUIID_YDWETimerStartMultiple:

@@ -147,6 +147,9 @@
     <ClCompile Include="Detours\detoured.cpp">
       <Filter>Detours</Filter>
     </ClCompile>
+    <ClCompile Include="Core\locvar.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="Detours\detoured.h">
       <Filter>Detours</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\locvar.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
 #include "CC_Include.h"
+#include "locvar.h"
 
 extern int g_mother_id;
 extern BOOL g_bYDWEEnumUnitsInRangeMultipleFlag;
@@ -29,19 +30,8 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
       CC_PutVar(nItemClass, EDX, OutClass, NewName, 0, type, 1);
       return;
     case CC_GUIID_YDWEGetAnyTypeLocalVariable:
-      if (g_mother_id == CC_GUIID_YDWETimerStartMultiple)
-      {
-        CC_Put_GetTimerParameters(nItemClass, OutClass, (char*)(This+0x0C), "GetExpiredTimer()");
-      }
-	  else if (g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
-	  {
-		  CC_Put_GetTimerParameters(nItemClass, OutClass, (char*)(This+0x0C), "GetTriggeringTrigger()");
-	  }
-      else
-      {
-        CC_Put_TriggerLocalVar_Get(nItemClass, OutClass, (char*)(This+0x0C));
-      }
-      return;
+		locvar::get(nItemClass, OutClass, (char*)(This+0x0C));
+		return;
     case CC_GUIID_YDWELoadAnyTypeDataByUserData:
       CC_Put_YDWELoadAnyTypeDataByUserData(nItemClass, OutClass, name, (char*)(This+0x0C));
       return;
