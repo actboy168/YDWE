@@ -54,9 +54,6 @@
     <ClCompile Include="Hook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReadUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SetGUI_Hook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -72,11 +72,6 @@ extern CC_MainProc                 CC_Main;
 void All_Hook();
 void All_Unhook();
 
-#ifdef CONFIG_TestMode
-void ReadUIHook();
-void ReadUIUnhook();
-#endif
-
 #define WE_ADDRESS(addr) ((DWORD)(addr)-0x00400000+g_nWEBase)
 extern DWORD g_nWEBase;
 
