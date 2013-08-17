@@ -37,6 +37,20 @@ namespace win {
 		return std::move(std::wstring(buffer.begin(), buffer.end()));
 	}
 
+	boost::optional<std::wstring> env_variable::get_nothrow() throw()
+	{
+		std::array<wchar_t, 32767> buffer;
+		buffer[0] = L'\0';
+
+		DWORD retval = ::GetEnvironmentVariableW(name_.c_str(), buffer.data(), buffer.size());
+		if (retval == 0 || retval > buffer.size())
+		{
+			return std::move(boost::optional<std::wstring>());
+		}
+
+		return std::move(boost::optional<std::wstring>(std::wstring(buffer.begin(), buffer.end())));
+	}
+
 	bool env_variable::set(std::wstring const& value)
 	{
 		return FALSE != ::SetEnvironmentVariableW(name_.c_str(), value.c_str());

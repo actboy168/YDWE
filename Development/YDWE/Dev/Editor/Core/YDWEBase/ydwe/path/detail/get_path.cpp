@@ -4,6 +4,7 @@
 #include <Shlobj.h>
 #include <ydwe/exception/windows_exception.h>
 #include <ydwe/util/dynarray.h>
+#include <ydwe/win/env_variable.h>
 
 #define ENSURE(cond) if (FAILED(cond)) throw windows_exception(#cond " failed.");
 
@@ -28,12 +29,31 @@ _BASE_BEGIN namespace path { namespace detail {
 		}
 	}
 
+	// 
+	// https://blogs.msdn.com/b/larryosterman/archive/2010/10/19/because-if-you-do_2c00_-stuff-doesn_2700_t-work-the-way-you-intended_2e00_.aspx
+	// http://msdn.microsoft.com/en-us/library/windows/desktop/aa364992%28v=vs.85%29.aspx
+	//
 	boost::filesystem::path GetTempPath() 
 	{
+		boost::optional<std::wstring> result;
+		result = win::env_variable(L"TMP").get_nothrow();
+		if (result && !result->empty())
+		{
+			return std::move(boost::filesystem::path(result.get()));
+		}
+
+		result = win::env_variable(L"TEMP").get_nothrow();
+		if (result && !result->empty())
+		{
+			return std::move(boost::filesystem::path(result.get()));
+		}
+
 		wchar_t buffer[MAX_PATH + 1];
 		DWORD path_len = ::GetTempPathW(MAX_PATH, buffer);
 		if (path_len >= MAX_PATH || path_len <= 0)
+		{
 			throw windows_exception("::GetTempPathW(MAX_PATH, buffer) failed.");
+		}
 
 		return std::move(boost::filesystem::path(buffer));
 	}

@@ -30,7 +30,8 @@ bool launch_warcraft3()
 		table["MapTest"]["LaunchOpenGL"]   = "0";
 		table["MapTest"]["LaunchWindowed"] = "1";
 		try {
-			slk::buffer_reader reader(ydwe::file::read_steam(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>());
+			slk::buffer buf = ydwe::file::read_steam(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
+			slk::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		} 
 		catch (...) {
