@@ -123,9 +123,6 @@
     <ClCompile Include="Core\CC_Put_globalsHook.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Core\CC_Put_TriggerLocalVar.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\CC_SP_UserData.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -174,9 +171,6 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Core\CC_Put.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\CC_Put_TriggerLocalVar.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Core\CC_SP_UserData.h">

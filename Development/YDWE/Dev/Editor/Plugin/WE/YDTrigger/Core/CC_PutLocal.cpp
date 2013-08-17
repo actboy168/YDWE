@@ -1,4 +1,5 @@
 #include "CC_Include.h"
+#include "locvar.h"
 
 typedef struct _tag_LocalVarList
 {
@@ -152,7 +153,7 @@ CC_PutLocal_Begin(DWORD This, DWORD OutClass, DWORD isTimer, DWORD isSearchHashL
 
   if (!isTimer && isSearchHashLocal)
   {
-    CC_Put_TriggerLocalVar_Begin(OutClass);
+	  locvar::construct(OutClass);
   }
 }
 
@@ -165,7 +166,7 @@ CC_PutLocal_End(DWORD This, DWORD OutClass, DWORD isTimer, DWORD isEnd)
   
   if (!isTimer)
   {
-    CC_Put_TriggerLocalVar_End(OutClass);
+	  locvar::destroy(OutClass);
   } 
 
   for (i = 0; i < g_local_var_list_top; i++)

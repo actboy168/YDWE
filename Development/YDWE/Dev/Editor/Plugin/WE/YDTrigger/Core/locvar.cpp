@@ -187,5 +187,35 @@ namespace locvar
 		{
 			CC_PutLocal_End(This, OutClass, FALSE, FALSE);
 		}
-	}	
+	}
+
+	void construct(DWORD OutClass)
+	{
+		char buff[260];
+
+		if (g_local_in_mainproc)
+		{
+			g_bDisableSaveLoadSystem = FALSE;
+
+			CC_PutBegin();
+			BLZSStrPrintf(buff, 260, "local integer "YDL_LOCALVAR_STEPS" = YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X)", SStrHash("GlobalsTriggerRunSteps"));
+			PUT_CONST(buff, 1);
+			PUT_CONST("set "YDL_LOCALVAR_STEPS" = "YDL_LOCALVAR_STEPS" + 3", 1);
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, "YDL_LOCALVAR_STEPS")", SStrHash("GlobalsTriggerRunSteps"));
+			PUT_CONST(buff, 1);
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, "YDL_LOCALVAR_STEPS")", SStrHash("TriggerRunSteps"));
+			PUT_CONST(buff, 1);
+			CC_PutEnd();
+		}
+	}
+
+	void destroy(DWORD OutClass)
+	{
+		if (g_local_in_mainproc)
+		{
+			CC_PutBegin();
+			PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetTriggeringTrigger())*"YDL_LOCALVAR_STEPS")", 1);
+			CC_PutEnd();
+		}
+	}
 }
