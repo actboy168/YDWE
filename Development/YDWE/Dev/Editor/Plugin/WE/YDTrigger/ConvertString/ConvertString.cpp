@@ -57,9 +57,5 @@ ConvertString_Default(char* src, char* dst, unsigned int limit)
 void _fastcall
 ConvertString(char* src, char* dst, unsigned int limit)
 {
-#ifdef CONFIG_ConvertToPY
-  ToPY_utf8(src, dst, limit);
-#else
   ConvertString_Default(src, dst, limit);
-#endif
 }
