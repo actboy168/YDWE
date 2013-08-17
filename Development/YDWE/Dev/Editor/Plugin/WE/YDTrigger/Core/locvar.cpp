@@ -99,4 +99,72 @@ namespace locvar
 		}
 		CC_PutEnd();
 	}
+
+	void flush_in_timer(DWORD This, DWORD OutClass)
+	{
+		if (g_mother_id == CC_GUIID_YDWETimerStartMultiple)
+		{
+			g_bDisableSaveLoadSystem = FALSE;
+
+			CC_PutBegin();
+			PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetExpiredTimer()))", 1);
+			PUT_CONST("call DestroyTimer(GetExpiredTimer())", 1);
+			CC_PutEnd();
+		}
+		else
+		{
+			ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_TIMER_FLUSH");
+		}
+	}
+
+	void flush_in_trigger(DWORD This, DWORD OutClass)
+	{
+		if (g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
+		{
+			g_bDisableSaveLoadSystem = FALSE;
+
+			CC_PutBegin();
+			PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetTriggeringTrigger()))", 1);
+			PUT_CONST("call DestroyTrigger(GetTriggeringTrigger())", 1);
+			CC_PutEnd();
+		}
+		else
+		{
+			ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_TRIGGER_FLUSH");
+		}
+	}
+
+
+	void sleep_after(DWORD This, DWORD OutClass)
+	{
+		if (g_mother_id != CC_GUIID_YDWETimerStartMultiple
+			&& g_mother_id != CC_GUIID_YDWERegisterTriggerMultiple)
+		{
+			char buff[260];
+
+			if (g_local_in_mainproc)
+			{
+				g_bDisableSaveLoadSystem = FALSE;
+				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, "YDL_LOCALVAR_STEPS")", SStrHash("TriggerRunSteps"));
+				PUT_CONST(buff, 1);
+			}
+		}
+		else
+		{
+			ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ILLEGAL_WAIT");
+		}
+	}
+
+	void return_before(DWORD This, DWORD OutClass)
+	{
+		if (g_mother_id == CC_GUIID_YDWETimerStartMultiple
+			|| g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
+		{
+			CC_PutLocal_End(This, OutClass, TRUE, FALSE);
+		}
+		else
+		{
+			CC_PutLocal_End(This, OutClass, FALSE, FALSE);
+		}
+	}	
 }

@@ -46,21 +46,3 @@ CC_Put_TriggerLocalVar_End(DWORD OutClass)
     CC_PutEnd();
   }
 }
-
-//
-//  call YDWESaveIntegerByInteger(YDWEH2I(GetTriggeringTrigger()), StringHash("TriggerRunSteps"), ydl_localvar_step)
-//
-void _fastcall
-CC_Put_TriggerLocalVar_Sleep_End(DWORD OutClass)
-{
-  char buff[260];
-
-
-  if (g_local_in_mainproc)
-  {
-    g_bDisableSaveLoadSystem = FALSE;
-
-    BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, "YDL_LOCALVAR_STEPS")", SStrHash("TriggerRunSteps"));
-    PUT_CONST(buff, 1);
-  }
-}

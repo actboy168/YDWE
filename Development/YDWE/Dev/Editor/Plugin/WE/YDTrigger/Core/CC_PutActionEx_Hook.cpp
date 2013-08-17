@@ -198,16 +198,7 @@ void _fastcall
         }
     case CC_GUIID_ReturnAction:
         {
-            if (g_mother_id == CC_GUIID_YDWETimerStartMultiple
-				|| g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
-            {
-                CC_PutLocal_End(This, OutClass, TRUE, FALSE);
-            }
-            else
-            {
-                CC_PutLocal_End(This, OutClass, FALSE, FALSE);
-            }
-
+			locvar::return_before(This, OutClass);
             CC_PutBegin();
             PUT_CONST("return", 1);
             CC_PutEnd();
@@ -240,50 +231,22 @@ void _fastcall
             break;
         }
 	case CC_GUIID_YDWETimerStartFlush:
-		if (g_mother_id == CC_GUIID_YDWETimerStartMultiple)
-		{
-			g_bDisableSaveLoadSystem = FALSE;
-
-			CC_PutBegin();
-			PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetExpiredTimer()))", 1);
-			PUT_CONST("call DestroyTimer(GetExpiredTimer())", 1);
-			CC_PutEnd();
-		}
-		else
-		{
-			ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_TIMER_FLUSH");
-		}
+		locvar::flush_in_timer(This, OutClass);
 		break;
     case CC_GUIID_TriggerSleepAction:
         CC_PutBegin();
         PUT_CONST("call TriggerSleepAction(", 0);
         PUT_VAR(This, 0);
         PUT_CONST(")", 1);
-        if (g_mother_id != CC_GUIID_YDWETimerStartMultiple
-			&& g_mother_id != CC_GUIID_YDWERegisterTriggerMultiple)
-        {
-            CC_Put_TriggerLocalVar_Sleep_End(OutClass);
-		}
-		else
-		{
-			ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ILLEGAL_WAIT");
-		}
+		locvar::sleep_after(This, OutClass);
         CC_PutEnd();
         break;
     case CC_GUIID_PolledWait:
         CC_PutBegin();
         PUT_CONST("call PolledWait(", 0);
         PUT_VAR(This, 0);
-        PUT_CONST(")", 1);
-		if (g_mother_id != CC_GUIID_YDWETimerStartMultiple
-			&& g_mother_id != CC_GUIID_YDWERegisterTriggerMultiple)
-        {
-            CC_Put_TriggerLocalVar_Sleep_End(OutClass);
-        }
-		else
-		{
-			ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ILLEGAL_WAIT");
-		}
+		PUT_CONST(")", 1);
+		locvar::sleep_after(This, OutClass);
         CC_PutEnd();
         break;
     case CC_GUIID_YDWERegisterTriggerMultiple:
@@ -307,19 +270,7 @@ void _fastcall
             break;
         }
 	case CC_GUIID_YDWERegisterTriggerFlush:
-		if (g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
-		{
-			g_bDisableSaveLoadSystem = FALSE;
-
-			CC_PutBegin();
-			PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetTriggeringTrigger()))", 1);
-			PUT_CONST("call DestroyTrigger(GetTriggeringTrigger())", 1);
-			CC_PutEnd();
-		}
-		else
-		{
-			ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_TRIGGER_FLUSH");
-		}
+		locvar::flush_in_trigger(This, OutClass);
 		break;
     case CC_GUIID_YDWESaveAnyTypeDataByUserData:
         {
