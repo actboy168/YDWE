@@ -1,10 +1,6 @@
 #include "CC_Include.h"
 #include "locvar.h"
 
-extern int g_mother_id;
-extern char* g_handle_string;
-
-extern BOOL g_bDisableSaveLoadSystem;
 BOOL g_bYDWEEnumUnitsInRangeMultipleFlag = FALSE;
 
 BOOL _fastcall  CC_PutAction_SearchVar(DWORD This, DWORD OutClass);
@@ -233,7 +229,7 @@ void _fastcall
 	case CC_GUIID_YDWETimerStartFlush:
 		locvar::flush_in_timer(This, OutClass);
 		break;
-    case CC_GUIID_TriggerSleepAction:
+	case CC_GUIID_TriggerSleepAction:
         CC_PutBegin();
         PUT_CONST("call TriggerSleepAction(", 0);
         PUT_VAR(This, 0);

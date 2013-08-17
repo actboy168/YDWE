@@ -1,7 +1,6 @@
 #include "CC_Include.h"
 #include "locvar.h"
 
-extern int g_mother_id;
 extern BOOL g_bYDWEEnumUnitsInRangeMultipleFlag;
 
 void _fastcall 

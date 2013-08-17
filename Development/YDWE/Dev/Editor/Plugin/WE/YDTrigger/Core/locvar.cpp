@@ -1,10 +1,8 @@
 #include "CC_Include.h"
 #include "locvar.h"
 
-extern int g_mother_id;
 extern BOOL g_bDisableSaveLoadSystem;
 extern BOOL g_local_in_mainproc;
-extern char* g_handle_string;
 
 int _fastcall Utf8toAscii(char src[], char dst[], unsigned int limit);
 
@@ -12,6 +10,29 @@ int _fastcall Utf8toAscii(char src[], char dst[], unsigned int limit);
 
 namespace locvar
 {
+	namespace global
+	{
+		int         mother_id = 0;
+		const char* handle_string = NULL;
+	}
+
+	guard::guard(int id)
+		: old_(global::mother_id)
+	{ 
+		global::mother_id = id;
+	}
+
+	guard::~guard()
+	{
+		global::mother_id = old_;
+		global::handle_string = NULL;
+	}
+
+	void guard::set_handle(const char* handle_name)
+	{
+		global::handle_string = handle_name;
+	}
+
 	void get(DWORD This, DWORD OutClass, char* type_name)
 	{
 		g_bDisableSaveLoadSystem = FALSE;
@@ -20,11 +41,11 @@ namespace locvar
 
 		LPCSTR lpszKey = (LPCSTR)&GetGUIVar_Value(This, 0);
 
-		if (g_mother_id == CC_GUIID_YDWETimerStartMultiple)
+		if (global::mother_id == CC_GUIID_YDWETimerStartMultiple)
 		{
 			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetExpiredTimer()", SStrHash(lpszKey));
 		}
-		else if (g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
+		else if (global::mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
 		{
 			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetTriggeringTrigger()", SStrHash(lpszKey));
 		}
@@ -62,15 +83,15 @@ namespace locvar
 		{
 			g_bDisableSaveLoadSystem = FALSE;
 
-			if (g_mother_id == CC_GUIID_YDWETimerStartMultiple)
+			if (global::mother_id == CC_GUIID_YDWETimerStartMultiple)
 			{
 				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], "GetExpiredTimer()", SStrHash(lpszKey));
 			}
-			else if (g_mother_id == (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple))
+			else if (global::mother_id == (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple))
 			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], g_handle_string, SStrHash(lpszKey));
+				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], global::handle_string, SStrHash(lpszKey));
 			}
-			else if (g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
+			else if (global::mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
 			{
 				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", TypeName[var_type], "GetTriggeringTrigger()", SStrHash(lpszKey));
 			}
@@ -102,7 +123,7 @@ namespace locvar
 
 	void flush_in_timer(DWORD This, DWORD OutClass)
 	{
-		if (g_mother_id == CC_GUIID_YDWETimerStartMultiple)
+		if (global::mother_id == CC_GUIID_YDWETimerStartMultiple)
 		{
 			g_bDisableSaveLoadSystem = FALSE;
 
@@ -119,7 +140,7 @@ namespace locvar
 
 	void flush_in_trigger(DWORD This, DWORD OutClass)
 	{
-		if (g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
+		if (global::mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
 		{
 			g_bDisableSaveLoadSystem = FALSE;
 
@@ -137,8 +158,8 @@ namespace locvar
 
 	void sleep_after(DWORD This, DWORD OutClass)
 	{
-		if (g_mother_id != CC_GUIID_YDWETimerStartMultiple
-			&& g_mother_id != CC_GUIID_YDWERegisterTriggerMultiple)
+		if (global::mother_id != CC_GUIID_YDWETimerStartMultiple
+			&& global::mother_id != CC_GUIID_YDWERegisterTriggerMultiple)
 		{
 			char buff[260];
 
@@ -157,8 +178,8 @@ namespace locvar
 
 	void return_before(DWORD This, DWORD OutClass)
 	{
-		if (g_mother_id == CC_GUIID_YDWETimerStartMultiple
-			|| g_mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
+		if (global::mother_id == CC_GUIID_YDWETimerStartMultiple
+			|| global::mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
 		{
 			CC_PutLocal_End(This, OutClass, TRUE, FALSE);
 		}

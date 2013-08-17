@@ -1,11 +1,6 @@
 #include "CC_Include.h"
 #include "locvar.h"
 
-extern BOOL g_local_in_mainproc;
-extern BOOL g_bDisableSaveLoadSystem;
-extern int  g_mother_id;
-char* g_handle_string = NULL;
-
 void _fastcall
 	CC_PutBlock_TimerParameters(DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string)
 {
@@ -14,9 +9,8 @@ void _fastcall
 	char NewName[260];
 	nItemCount = *(DWORD*)(This+0xC);
 
-	int old_mother_id = g_mother_id;
-	g_mother_id = (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple);
-	g_handle_string = handle_string;
+	locvar::guard _tmp_guard_((0x8000 | (int)CC_GUIID_YDWETimerStartMultiple));
+	_tmp_guard_.set_handle(handle_string);
 
 	for (i = 0; i < nItemCount; i++)
 	{
@@ -46,7 +40,4 @@ void _fastcall
 			}
 		}
 	}
-
-	g_mother_id = old_mother_id;
-	g_handle_string = NULL;
 }

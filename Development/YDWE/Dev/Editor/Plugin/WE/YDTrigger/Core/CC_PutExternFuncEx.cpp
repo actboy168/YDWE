@@ -1,9 +1,8 @@
 #include "CC_Include.h"
+#include "locvar.h"
 
 void _fastcall CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name);
 void _fastcall CC_PutActionEx_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl);
-
-int g_mother_id = 0;
 
 void _fastcall
 CC_PutExternFunc(DWORD This, DWORD OutClass, char* name, DWORD index)
@@ -140,13 +139,8 @@ void _fastcall
 CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name)
 {
   char buff[260];
-  int old_mother_id = g_mother_id;
-     
-  if (CC_GUIID_YDWETimerStartMultiple == *(DWORD*)(This+0x138)
-	  || CC_GUIID_YDWERegisterTriggerMultiple == *(DWORD*)(This+0x138))
-  {
-    g_mother_id = *(DWORD*)(This+0x138);
-  }
+
+  locvar::guard _tmp_guard_(*(DWORD*)(This+0x138));
   
   CC_PutExternFuncEx_TopDown(This, OutClass, name);
 
@@ -180,13 +174,5 @@ CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name)
 		  break;
 	  }
   }
-  
-  if (CC_GUIID_YDWETimerStartMultiple == *(DWORD*)(This+0x138)
-	   || CC_GUIID_YDWERegisterTriggerMultiple == *(DWORD*)(This+0x138))
-  {
-    g_mother_id = old_mother_id;
-  }
-  
-  return;
 }
 

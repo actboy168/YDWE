@@ -4,6 +4,17 @@
 
 namespace locvar
 {
+	class guard
+	{
+	public:
+		guard(int id);
+		~guard();
+		void set_handle(const char* handle_name);
+
+	private:
+		int old_;
+	};
+
 	void get              (DWORD This, DWORD OutClass, char* type_name);
 	void set              (DWORD This, DWORD OutClass, char* name);
 	void flush_in_timer   (DWORD This, DWORD OutClass);
