@@ -142,10 +142,9 @@
     <ClInclude Include="Hashtable\Hashtable.h" />
     <ClInclude Include="Hook.h" />
     <ClInclude Include="Storm\StormAdapter.h" />
-    <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="YDTrigger.rc" />
+    <ResourceCompile Include="..\..\..\Core\YDWEVersion\common.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

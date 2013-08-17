@@ -157,9 +157,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="version.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -201,7 +198,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="YDTrigger.rc">
+    <ResourceCompile Include="..\..\..\Core\YDWEVersion\common.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
