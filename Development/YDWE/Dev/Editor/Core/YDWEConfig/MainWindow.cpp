@@ -586,7 +586,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 			}
 			else if (name == _T("choose_war3_dir"))
 			{
-				if (warcraft3_directory::choose())
+				if (warcraft3_directory::choose(nullptr))
 				{
 					UpdateWarcraft3Directory();
 				}

@@ -21,7 +21,7 @@ bool launch_warcraft3()
 		while (!warcraft3_directory::read(war3_path))
 		{
 			boost::filesystem::path result;
-			if (!warcraft3_directory::choose(result))
+			if (!warcraft3_directory::choose(nullptr, result))
 			{
 				return false;
 			}
