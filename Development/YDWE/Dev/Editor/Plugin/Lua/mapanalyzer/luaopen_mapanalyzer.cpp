@@ -189,9 +189,9 @@ struct SlkManager
 		return storm_.attach_archive(hArchive);
 	}
 
-	slk::SlkTable& load(slk::ROBJECT_TYPE type)
+	slk::SlkTable& load(slk::ROBJECT_TYPE::ENUM type)
 	{
-		return mgr_.load_singleton<slk::ROBJECT_TYPE, slk::SlkTable>(type);
+		return mgr_.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(type);
 	}
 
 	bool load_file(const char* filename, slk::IniTable& table)
@@ -222,16 +222,16 @@ int luaopen_mapanalyzer(lua_State *pState)
 			.def("load",       &slk::InterfaceStorm::load)
 		,
 
-		class_<slk::ROBJECT_TYPE>("OBJECT_TYPE")
+		class_<slk::ROBJECT_TYPE::ENUM>("OBJECT_TYPE")
 			.enum_("constants")
 			[
-				value("UNIT",         slk::ROBJECT_UNIT),
-				value("ITEM",         slk::ROBJECT_ITEM),
-				value("DESTRUCTABLE", slk::ROBJECT_DESTRUCTABLE),
-				value("BUFF",         slk::ROBJECT_BUFF),
-				value("DOODAD",       slk::ROBJECT_DOODAD),
-				value("ABILITY",      slk::ROBJECT_ABILITY),
-				value("UPGRADE",      slk::ROBJECT_UPGRADE)
+				value("UNIT",         slk::ROBJECT_TYPE::UNIT),
+				value("ITEM",         slk::ROBJECT_TYPE::ITEM),
+				value("DESTRUCTABLE", slk::ROBJECT_TYPE::DESTRUCTABLE),
+				value("BUFF",         slk::ROBJECT_TYPE::BUFF),
+				value("DOODAD",       slk::ROBJECT_TYPE::DOODAD),
+				value("ABILITY",      slk::ROBJECT_TYPE::ABILITY),
+				value("UPGRADE",      slk::ROBJECT_TYPE::UPGRADE)
 			]
 		,
 
@@ -298,7 +298,7 @@ int luaopen_mapanalyzer(lua_State *pState)
 
 		class_<slk::ObjectManager>("manager2")
 			.def(constructor<slk::InterfaceStorm&>())
-			.def("load",      &slk::ObjectManager::load_singleton<slk::ROBJECT_TYPE, slk::SlkTable>)
+			.def("load",      &slk::ObjectManager::load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>)
 			.def("load_file", &slk::ObjectManager::load<slk::IniTable>)
 			.def("convert",   &slk::ObjectManager::convert_string)
 	];
