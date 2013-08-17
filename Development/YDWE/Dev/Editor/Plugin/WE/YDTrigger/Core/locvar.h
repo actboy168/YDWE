@@ -4,15 +4,27 @@
 
 namespace locvar
 {
+	struct state
+	{
+		state()
+			: mother_id(0)
+			, handle_string(nullptr)
+		{ }
+
+		int         mother_id;
+		const char* name;
+		const char* handle_string;
+	};
+
 	class guard
 	{
 	public:
-		guard(int id);
+		guard(const char* name, int id);
 		~guard();
-		void set_handle(const char* handle_name);
+		state& current();
 
 	private:
-		int old_;
+		state old_;
 	};
 
 	void get              (DWORD This, DWORD OutClass, char* type_name);

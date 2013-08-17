@@ -9,8 +9,8 @@ void _fastcall
 	char NewName[260];
 	nItemCount = *(DWORD*)(This+0xC);
 
-	locvar::guard _tmp_guard_((0x8000 | (int)CC_GUIID_YDWETimerStartMultiple));
-	_tmp_guard_.set_handle(handle_string);
+	locvar::guard _tmp_guard_(name, (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple));
+	_tmp_guard_.current().handle_string = handle_string;
 
 	for (i = 0; i < nItemCount; i++)
 	{

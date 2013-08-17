@@ -140,7 +140,7 @@ CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name)
 {
   char buff[260];
 
-  locvar::guard _tmp_guard_(*(DWORD*)(This+0x138));
+  locvar::guard _tmp_guard_(name, *(DWORD*)(This+0x138));
   
   CC_PutExternFuncEx_TopDown(This, OutClass, name);
 
