@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ydwe/config.h>
+#include <boost/optional.hpp>
 #include <string>
 
 _BASE_BEGIN namespace win {
@@ -11,9 +12,10 @@ _BASE_BEGIN namespace win {
 		env_variable(const wchar_t* name);
 		env_variable(std::wstring const& name);
 		env_variable(std::wstring&& name);
-		std::wstring get();
-		bool set(std::wstring const& value);
-		bool del();
+		std::wstring                  get();
+		boost::optional<std::wstring> get_nothrow() throw();
+		bool                          set(std::wstring const& value);
+		bool                          del();
 
 	private:
 #pragma warning(push)
