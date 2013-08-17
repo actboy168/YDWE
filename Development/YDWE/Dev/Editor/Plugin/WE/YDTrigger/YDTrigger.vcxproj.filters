@@ -149,11 +149,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="YDTrigger.def">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -198,5 +193,10 @@
     <ResourceCompile Include="..\..\..\Core\YDWEVersion\common.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="YDTrigger.def">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -65,9 +65,6 @@ private:
 CSaveLoadCheck g_SaveLoadCheck;
 
 #include <windows.h>
-extern "C" {
-#include "../Storm/StormAdapter.h"
-};
 
 void SaveLoadCheck_Reset() {
 	g_SaveLoadCheck.Reset();
