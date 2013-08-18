@@ -9,7 +9,7 @@
 #include <aero/function/fp_call.hpp>
 
 _BASE_BEGIN
-namespace warcraft3 { namespace lua_engine {
+namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 
 	int open_libs(lua::state* ls)
 	{
@@ -32,7 +32,8 @@ namespace warcraft3 { namespace lua_engine {
 		return ls;
 	}
 
-	void __cdecl lua_loader::FakeCheat(jass::jstring_t cheat_str)
+	uintptr_t RealCheat = 0;
+	void __cdecl FakeCheat(jass::jstring_t cheat_str)
 	{
 		const char* cheat = jass::from_string(cheat_str);
 
@@ -65,11 +66,10 @@ namespace warcraft3 { namespace lua_engine {
 		aero::c_call<uint32_t>(RealCheat, cheat_str);
 	}
 
-	uintptr_t lua_loader::RealCheat = 0;
-	void lua_loader::initialize()
+	void initialize()
 	{
 		native_function::async_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
 	}
-}}
+}}}
 
 _BASE_END
