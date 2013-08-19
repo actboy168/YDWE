@@ -97,10 +97,10 @@ uint32_t __fastcall FakeUnitDamageDoneFunc(uint32_t _this, uint32_t _edx, uint32
 		event_damage_data& edd = g_edd.back();
 		if (edd.change)
 		{
+			edd.change = false;
 			float d = jass::from_real(edd.data->amount);
 			uint32_t new_damage1 = jass::to_real(d);
 			uint32_t new_damage2 = jass::to_real(-d);
-
 			return aero::fast_call<uint32_t>(RealUnitDamageDoneFunc, _this, _edx, &new_damage1, &new_damage2);
 		}
 	}
