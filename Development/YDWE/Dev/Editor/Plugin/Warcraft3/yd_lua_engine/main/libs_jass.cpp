@@ -180,7 +180,7 @@ namespace warcraft3 { namespace lua_engine {
 				lj->push_real(gv);
 				return 1;
 			case jass::OPCODE_VARIABLE_STRING:
-				lj->push_string(gv);
+				lj->push_string(get_string_fasttable()->get(gv));
 				return 1;
 			case jass::OPCODE_VARIABLE_HANDLE:
 				lj->push_handle(gv);
