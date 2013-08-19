@@ -13,6 +13,12 @@ namespace locvar
 			, handle_string(nullptr)
 		{ }
 
+		state(uint32_t m, const char* n, const char* h)
+			: mother_id(m)
+			, name(n)
+			, handle_string(h)
+		{ }
+
 		uint32_t    mother_id;
 		const char* name;
 		const char* handle_string;
