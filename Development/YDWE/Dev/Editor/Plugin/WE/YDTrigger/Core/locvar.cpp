@@ -36,21 +36,16 @@ namespace locvar
 		return global;
 	}
 
-	void do_get(DWORD OutClass, const char* type_name, const char* var_name)
+	void do_get(DWORD OutClass, const char* type_name, const char* var_name, uint32_t mother_id, const char* handle_string, const char* name)
 	{
 		g_bDisableSaveLoadSystem = FALSE;
 
 		char buff[260];
 
-		if (global.mother_id == CC_GUIID_YDWETimerStartMultiple)
+		if (mother_id == CC_GUIID_YDWETimerStartMultiple || mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
 		{
-			register_var[global.name][var_name] = type_name;
-			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetExpiredTimer()", SStrHash(var_name));
-		}
-		else if (global.mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
-		{
-			register_var[global.name][var_name] = type_name;
-			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, "GetTriggeringTrigger()", SStrHash(var_name));
+			register_var[name][var_name] = type_name;
+			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, handle_string, SStrHash(var_name));
 		}
 		else
 		{
@@ -74,25 +69,21 @@ namespace locvar
 		PUT_CONST(buff, 0);
 	}
 
-	void do_set(DWORD OutClass, const char* type_name, const char* var_name, std::function<void(void)> func)
+	void do_set(DWORD OutClass, const char* type_name, const char* var_name, uint32_t mother_id, const char* handle_string, const char* name, std::function<void(void)> func)
 	{
 		g_bDisableSaveLoadSystem = FALSE;
 		char buff[260];
 
 		CC_PutBegin();
 
-		if (global.mother_id == CC_GUIID_YDWETimerStartMultiple)
+		if (mother_id == (0x10000 | CC_GUIID_YDWETimerStartMultiple))
 		{
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, global.handle_string, SStrHash(var_name));
+			register_var[name].erase(var_name);
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, handle_string, SStrHash(var_name));
 		}
-		else if (global.mother_id == (0x8000 | (int)CC_GUIID_YDWETimerStartMultiple))
+		else if (mother_id == CC_GUIID_YDWETimerStartMultiple || mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
 		{
-			register_var[global.name].erase(var_name);
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, global.handle_string, SStrHash(var_name));
-		}
-		else if (global.mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
-		{
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, global.handle_string, SStrHash(var_name));
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, handle_string, SStrHash(var_name));
 		}
 		else
 		{
@@ -122,7 +113,7 @@ namespace locvar
 
 	void get(DWORD This, DWORD OutClass, char* type_name)
 	{
-		do_get(OutClass, type_name, (LPCSTR)&GetGUIVar_Value(This, 0));
+		do_get(OutClass, type_name, (LPCSTR)&GetGUIVar_Value(This, 0), global.mother_id, global.handle_string, global.name);
 	}
 
 	void set(DWORD This, DWORD OutClass, char* name)
@@ -131,7 +122,7 @@ namespace locvar
 
 		if ((CC_TYPE__begin < var_type) && (var_type < CC_TYPE__end))
 		{
-			do_set(OutClass, TypeName[var_type], (LPCSTR)&GetGUIVar_Value(This, 1), [&](){ PUT_VAR(This, 2); } );
+			do_set(OutClass, TypeName[var_type], (LPCSTR)&GetGUIVar_Value(This, 1), global.mother_id, global.handle_string, global.name, [&](){ PUT_VAR(This, 2); } );
 		}
 	}
 
@@ -237,7 +228,7 @@ namespace locvar
 	void params(DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string)
 	{
 		{
-			locvar::guard _tmp_guard_((0x8000 | (int)CC_GUIID_YDWETimerStartMultiple), name, handle_string);
+			locvar::guard _tmp_guard_((0x10000 | (int)CC_GUIID_YDWETimerStartMultiple), name, handle_string);
 
 			DWORD nItemCount, i;
 			DWORD nItemClass;
@@ -257,7 +248,7 @@ namespace locvar
 							{
 								BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, i+1);
 								locvar::set(nItemClass, OutClass, NewName);
-								break;  
+								break; 
 							}
 						case CC_GUIID_YDWETimerStartMultiple:
 						case CC_GUIID_YDWERegisterTriggerMultiple:
@@ -274,15 +265,13 @@ namespace locvar
 			}
 		}
 
+		for each (auto it in register_var[name])
 		{
-			locvar::guard _tmp_guard_(global.mother_id, name, handle_string);
-
-			for each (auto it in register_var[name])
-			{
-				locvar::do_set(OutClass, it.second.c_str(), it.first.c_str(), [&](){ locvar::do_get(OutClass, it.second.c_str(), it.first.c_str()); });
-			}
-
-			register_var.erase(name);
+			locvar::do_set(OutClass, it.second.c_str(), it.first.c_str(), CC_GUIID_YDWETimerStartMultiple, handle_string, name, [&]()
+			{ 
+				locvar::do_get(OutClass, it.second.c_str(), it.first.c_str(), global.mother_id, global.handle_string, global.name); 
+			});
 		}
+		register_var.erase(name);
 	}
 }

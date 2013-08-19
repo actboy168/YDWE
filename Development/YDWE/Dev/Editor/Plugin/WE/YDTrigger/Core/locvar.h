@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Windows.h>
+#include <cstdint>
 
 namespace locvar
 {
@@ -12,7 +13,7 @@ namespace locvar
 			, handle_string(nullptr)
 		{ }
 
-		int         mother_id;
+		uint32_t    mother_id;
 		const char* name;
 		const char* handle_string;
 	};
