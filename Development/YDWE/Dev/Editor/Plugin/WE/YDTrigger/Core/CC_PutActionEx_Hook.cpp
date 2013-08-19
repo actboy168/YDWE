@@ -345,12 +345,12 @@ void _fastcall
 		}
 		break;
     default:
-        {
-            if (CC_PutAction_SearchVar(This, OutClass))
-            {
+		{
+			if (CC_PutAction_SearchVar(This, OutClass))
+			{
 				ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ANYPLAYER");
-            }
-            CC_PutActionEx(This, EDX, OutClass, name, Type, Endl);
+			}
+			CC_PutActionEx(This, EDX, OutClass, name, Type, Endl);
         }
         break;
     }

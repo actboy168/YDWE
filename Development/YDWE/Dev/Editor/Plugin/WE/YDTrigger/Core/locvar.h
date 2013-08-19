@@ -44,4 +44,5 @@ namespace locvar
 	void construct        (DWORD OutClass);
 	void destroy          (DWORD OutClass);
 	void params           (DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string);
+	bool trigger_data     (DWORD This, DWORD OutClass, const char* name);
 }

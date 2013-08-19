@@ -43,6 +43,14 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
       PUT_CONST(buff, 0);
       return;
     default:
+		{
+			char szName[260];
+			CC_GetGUIName(nItemClass, 0, szName, 260);
+			if (locvar::trigger_data(nItemClass, OutClass, szName))
+			{
+				return;
+			}
+		}
       break;      
     }
   }

@@ -268,7 +268,7 @@ namespace locvar
 		for each (auto it in register_var[name])
 		{
 			locvar::do_set(OutClass, it.second.c_str(), it.first.c_str()
-				, state(CC_GUIID_YDWETimerStartMultiple, handle_string, name)
+				, state(CC_GUIID_YDWETimerStartMultiple, name, handle_string)
 				, [&]()
 				{ 
 					locvar::do_get(OutClass, it.second.c_str(), it.first.c_str(), global); 
@@ -276,5 +276,21 @@ namespace locvar
 			);
 		}
 		register_var.erase(name);
+	}
+
+	bool trigger_data(DWORD This, DWORD OutClass, const char* name)
+	{
+		if (global.mother_id != CC_GUIID_YDWETimerStartMultiple)
+		{
+			return false;
+		}
+
+		if (strcmp(name, "GetSpellTargetUnit") == 0)
+		{
+			locvar::do_get(OutClass, "unit", "GetSpellTargetUnit", global);
+			return true;
+		}
+		
+		return false;
 	}
 }
