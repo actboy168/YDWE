@@ -95,7 +95,6 @@
     <ClCompile Include="Core\CC_PutBlock_Action.cpp" />
     <ClCompile Include="Core\CC_PutBlock_Condition.cpp" />
     <ClCompile Include="Core\CC_PutBlock_Event.cpp" />
-    <ClCompile Include="Core\CC_PutBlock_TimerParameters.cpp" />
     <ClCompile Include="Core\CC_PutConditionEx.cpp" />
     <ClCompile Include="Core\CC_PutEventRegisterEx.cpp" />
     <ClCompile Include="Core\CC_PutExternFuncEx.cpp" />
@@ -105,10 +104,10 @@
     <ClCompile Include="Core\CC_PutVar_Other_Hook.cpp" />
     <ClCompile Include="Core\CC_Put_endglobalsHook.cpp" />
     <ClCompile Include="Core\CC_Put_globalsHook.cpp" />
-    <ClCompile Include="Core\CC_Put_TriggerLocalVar.cpp" />
     <ClCompile Include="Core\CC_SP_UserData.cpp" />
     <ClCompile Include="Core\CC_VarType.cpp" />
     <ClCompile Include="Core\GetVarType.cpp" />
+    <ClCompile Include="Core\locvar.cpp" />
     <ClCompile Include="Core\SaveLoadCheck.cpp" />
     <ClCompile Include="CreateYDTriggerImportFile.cpp" />
     <ClCompile Include="Detours\detoured.cpp" />
@@ -117,7 +116,6 @@
     <ClCompile Include="Hashtable\GUIID_Table.cpp" />
     <ClCompile Include="Hashtable\Hashtable.cpp" />
     <ClCompile Include="Hook.cpp" />
-    <ClCompile Include="ReadUI.cpp" />
     <ClCompile Include="SetGUIId_Hook.cpp" />
     <ClCompile Include="SetGUI_Hook.cpp" />
     <ClCompile Include="ShowError.cpp" />
@@ -131,10 +129,10 @@
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="ConvertString\ConvertString.h" />
+    <ClInclude Include="Core\locvar.h" />
     <ClInclude Include="Core\CC_GUIID.h" />
     <ClInclude Include="Core\CC_Include.h" />
     <ClInclude Include="Core\CC_Put.h" />
-    <ClInclude Include="Core\CC_Put_TriggerLocalVar.h" />
     <ClInclude Include="Core\CC_SP_UserData.h" />
     <ClInclude Include="Core\CC_VarType.h" />
     <ClInclude Include="Detours\detoured.h" />
@@ -142,10 +140,9 @@
     <ClInclude Include="Hashtable\Hashtable.h" />
     <ClInclude Include="Hook.h" />
     <ClInclude Include="Storm\StormAdapter.h" />
-    <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="YDTrigger.rc" />
+    <ResourceCompile Include="..\..\..\Core\YDWEVersion\common.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

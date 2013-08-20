@@ -59,12 +59,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
       GUIID_Table_Create();
       GUIID_Table_Init();
       All_Hook();
-#ifdef CONFIG_TestMode
-      ReadUIHook();
-#endif
-#ifdef CONFIG_ConvertToPY
-      gbk2py_open();
-#endif
     }
     break;
   case DLL_PROCESS_DETACH:
@@ -72,12 +66,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
     {
       All_Unhook();  
       GUIID_Table_Destory();
-#ifdef CONFIG_TestMode
-      ReadUIUnhook();
-#endif
-#ifdef CONFIG_ConvertToPY
-      gbk2py_close();
-#endif
     }
     break;
   }

@@ -4,7 +4,7 @@
 #include <windows.h>
 
 typedef int  (_fastcall* CC_VoidProc)(void);
-typedef int  (_fastcall* CC_PutConstProc)(DWORD OutClass, char* string, DWORD Endl);
+typedef int  (_fastcall* CC_PutConstProc)(DWORD OutClass, const char* string, DWORD Endl);
 typedef int  (_fastcall* CC_PutStringProc)(DWORD OutClass, DWORD EDX, char* string, DWORD Endl);
 typedef int  (_fastcall* CC_PutVarProc)(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Index, DWORD Type, DWORD Endl);
 typedef int  (_fastcall* CC_PutEventRegisterProc)(DWORD This, DWORD EDX, DWORD OutClass, char* triggername, char* name, DWORD index);
@@ -71,11 +71,6 @@ extern CC_MainProc                 CC_Main;
 
 void All_Hook();
 void All_Unhook();
-
-#ifdef CONFIG_TestMode
-void ReadUIHook();
-void ReadUIUnhook();
-#endif
 
 #define WE_ADDRESS(addr) ((DWORD)(addr)-0x00400000+g_nWEBase)
 extern DWORD g_nWEBase;

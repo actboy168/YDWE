@@ -54,9 +54,6 @@
     <ClCompile Include="Hook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReadUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SetGUI_Hook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -96,9 +93,6 @@
     <ClCompile Include="Core\CC_PutBlock_Event.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Core\CC_PutBlock_TimerParameters.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\CC_PutConditionEx.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -126,9 +120,6 @@
     <ClCompile Include="Core\CC_Put_globalsHook.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Core\CC_Put_TriggerLocalVar.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\CC_SP_UserData.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -150,16 +141,11 @@
     <ClCompile Include="Detours\detoured.cpp">
       <Filter>Detours</Filter>
     </ClCompile>
+    <ClCompile Include="Core\locvar.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="YDTrigger.def">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="version.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -184,9 +170,6 @@
     <ClInclude Include="Core\CC_Put.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Core\CC_Put_TriggerLocalVar.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Core\CC_SP_UserData.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -199,10 +182,18 @@
     <ClInclude Include="Detours\detoured.h">
       <Filter>Detours</Filter>
     </ClInclude>
+    <ClInclude Include="Core\locvar.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="YDTrigger.rc">
+    <ResourceCompile Include="..\..\..\Core\YDWEVersion\common.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="YDTrigger.def">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
