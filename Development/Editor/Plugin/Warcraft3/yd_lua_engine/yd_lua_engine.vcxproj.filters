@@ -53,100 +53,100 @@
     <ClCompile Include="main\libs_japi.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lapi.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lapi.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lauxlib.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lauxlib.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lbaselib.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lbaselib.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lbitlib.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lbitlib.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lcode.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lcode.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lcorolib.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lcorolib.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lctype.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lctype.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldblib.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldblib.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldebug.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldebug.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldo.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldo.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldump.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldump.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lfunc.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lfunc.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lgc.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lgc.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\linit.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\linit.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\liolib.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\liolib.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\llex.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\llex.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lmathlib.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lmathlib.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lmem.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lmem.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\loadlib.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\loadlib.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lobject.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lobject.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lopcodes.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lopcodes.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\loslib.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\loslib.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lparser.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lparser.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstate.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstate.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstring.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstring.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstrlib.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstrlib.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltable.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltable.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltablib.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltablib.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltm.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltm.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lundump.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lundump.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lvm.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lvm.c">
       <Filter>lua\c</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lzio.c">
+    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lzio.c">
       <Filter>lua\c</Filter>
     </ClCompile>
     <ClCompile Include="main\open_lua_engine.cpp">
@@ -169,79 +169,79 @@
     <ClInclude Include="main\lua_loader.h">
       <Filter>bind\main</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lzio.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lzio.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lvm.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lvm.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lundump.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lundump.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltm.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltm.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltable.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltable.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstring.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstring.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstate.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstate.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lparser.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lparser.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lopcodes.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lopcodes.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lfunc.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lfunc.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldebug.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldebug.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldo.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldo.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lctype.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lctype.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lcode.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lcode.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\llex.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\llex.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lgc.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lgc.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\llimits.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\llimits.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lmem.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lmem.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lobject.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lobject.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\src\lapi.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lapi.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\include\lauxlib.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\include\lauxlib.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\include\lua.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\include\lua.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\include\lua.hpp">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\include\lua.hpp">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\include\luaconf.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\include\luaconf.h">
       <Filter>lua\h</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\OpenSource\Lua\5.2.2\include\lualib.h">
+    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\include\lualib.h">
       <Filter>lua\h</Filter>
     </ClInclude>
     <ClInclude Include="main\open_lua_engine.h">

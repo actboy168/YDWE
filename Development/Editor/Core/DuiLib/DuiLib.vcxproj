@@ -112,23 +112,23 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\ioapi.c">
+    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\ioapi.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\iowin32.c">
+    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\iowin32.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\mztools.c">
+    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\mztools.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\unzip.c">
+    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\unzip.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zip.c">
+    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zip.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -189,14 +189,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\crypt.h" />
-    <ClInclude Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\ioapi.h" />
-    <ClInclude Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\iowin32.h" />
-    <ClInclude Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\mztools.h" />
-    <ClInclude Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\unzip.h" />
-    <ClInclude Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zconf.h" />
-    <ClInclude Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zip.h" />
-    <ClInclude Include="..\..\..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zlib.h" />
+    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\crypt.h" />
+    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\ioapi.h" />
+    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\iowin32.h" />
+    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\mztools.h" />
+    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\unzip.h" />
+    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zconf.h" />
+    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zip.h" />
+    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zlib.h" />
     <ClInclude Include="Control\UICheckBox.h" />
     <ClInclude Include="Core\UIImage.h" />
     <ClInclude Include="Core\UIImageInfo.h" />

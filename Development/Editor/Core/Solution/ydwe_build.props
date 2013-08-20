@@ -3,8 +3,8 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
     <YDWE>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))</YDWE>
-    <OpenSource>$(YDWE)\..\..\..\OpenSource\</OpenSource>
-    <ThirdParty>$(YDWE)\..\..\..\ThirdParty\</ThirdParty>
+    <OpenSource>$(YDWE)\..\OpenSource\</OpenSource>
+    <ThirdParty>$(YDWE)\..\ThirdParty\</ThirdParty>
     <BuildDir>$(YDWE)\Editor\Build\</BuildDir>
     <BuildObjDir>$(BuildDir)obj\$(Configuration)\</BuildObjDir>
     <BuildBinDir>$(BuildDir)bin\$(Configuration)\</BuildBinDir>
