@@ -57,7 +57,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="YDWEVersion.txt" />
     <None Include="YDWEConfig.ico">
       <Filter>Resource Files</Filter>
     </None>

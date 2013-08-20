@@ -103,7 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="YDWEConfig.ico" />
-    <None Include="YDWEVersion.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
