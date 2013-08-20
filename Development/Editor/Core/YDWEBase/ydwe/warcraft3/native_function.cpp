@@ -255,7 +255,7 @@ _BASE_BEGIN namespace warcraft3 { namespace native_function {
 			{
 				is_end = true;
 			}
-			else if (isupper(*it))
+			else if (isupper(static_cast<unsigned char>(*it)))
 			{
 				if (is_end)
 				{

@@ -1,10 +1,13 @@
 
 #include <ydwe/path/detail/get_path.h>
 #include <ydwe/path/service.h>
-#include <Shlobj.h>
 #include <ydwe/exception/windows_exception.h>
 #include <ydwe/util/dynarray.h>
 #include <ydwe/win/env_variable.h>
+#pragma warning(push)
+#pragma warning(disable:6387)
+#include <Shlobj.h>
+#pragma warning(pop)
 
 #define ENSURE(cond) if (FAILED(cond)) throw windows_exception(#cond " failed.");
 
@@ -121,7 +124,7 @@ _BASE_BEGIN namespace path { namespace detail {
 		for (size_t buf_len = 0x200; buf_len <= 0x10000; buf_len <<= 1)
 		{
 			std::dynarray<wchar_t> buf(path_len);
-			DWORD path_len = ::GetModuleFileNameW(module_handle, buf.data(), buf.size());		
+			path_len = ::GetModuleFileNameW(module_handle, buf.data(), buf.size());		
 			if (path_len == 0)
 			{
 				throw windows_exception("::GetModuleFileNameW failed.");

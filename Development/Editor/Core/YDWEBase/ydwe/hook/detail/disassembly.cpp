@@ -587,7 +587,7 @@ _BASE_BEGIN namespace hook { namespace detail {
 			if ((opcode == 0xF6) && !ireg) flags |= OP_DATA_I8;
 			if ((opcode == 0xF7) && !ireg) flags |= OP_DATA_PRE66_67;
 
-			sib_present = !pfx67 & (irm == 4);
+			sib_present = (!pfx67) & (irm == 4);
 			switch (imod)
 			{
 			case 0:

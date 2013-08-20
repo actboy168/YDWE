@@ -2,7 +2,10 @@
 
 #include <functional>
 #include <memory>
+#pragma warning(push)
+#pragma warning(disable:6387)
 #include <Shlobj.h>
+#pragma warning(pop)
 
 _BASE_BEGIN namespace com { namespace detail {
 	template<class _Ty>

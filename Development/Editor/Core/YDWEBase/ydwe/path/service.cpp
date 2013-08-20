@@ -1,9 +1,12 @@
 #include <ydwe/path/service.h>
 
 #include <windows.h>
-#include <Shlobj.h>
 #include <ydwe/exception/windows_exception.h>
 #include <ydwe/path/detail/get_path.h>
+#pragma warning(push)
+#pragma warning(disable:6387)
+#include <Shlobj.h>
+#pragma warning(pop)
 
 // http://blogs.msdn.com/oldnewthing/archive/2004/10/25/247180.aspx
 extern "C" IMAGE_DOS_HEADER __ImageBase;
