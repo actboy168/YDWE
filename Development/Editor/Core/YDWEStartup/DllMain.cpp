@@ -19,7 +19,7 @@
 
 namespace fs = boost::filesystem;
 
-#define _(str) ydwe::util::u2a_ref(ydwe::i18n::gettext(str)).c_str()
+#define _(str)  ydwe::i18n::gettext(str).to_string().c_str()
 #define __(str) ydwe::util::u2w_ref(ydwe::i18n::gettext(str)).c_str()
 
 static void ShowSplash(fs::path const& ydwe_path)
@@ -185,15 +185,15 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 	}
 	catch (std::domain_error &e)
 	{
-		MessageBoxA(NULL, e.what(), _("Error"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, ydwe::util::u2w_ref(e.what()).c_str(), __("Error"), MB_OK | MB_ICONERROR);
 	}
 	catch (std::exception &e)
 	{
-		MessageBoxA(NULL, e.what(), _("Error"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, ydwe::util::u2w_ref(e.what()).c_str(), __("Error"), MB_OK | MB_ICONERROR);
 	}
 	catch (...)
 	{
-		MessageBoxA(NULL, _("Unknown error"), _("Error"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, __("Unknown error"), __("Error"), MB_OK | MB_ICONERROR);
 	}
 
 	return exitCode;
