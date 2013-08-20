@@ -19,19 +19,15 @@
 
 namespace fs = boost::filesystem;
 
-
 #define _(str) ydwe::util::u2a_ref(ydwe::i18n::gettext(str)).c_str()
 #define __(str) ydwe::util::u2w_ref(ydwe::i18n::gettext(str)).c_str()
 
-static fs::path gExecutableDirectory;
-static fs::path gWarcraftDirectory;
-
 static void ShowSplash(fs::path const& ydwe_path)
 {
-	ydwe::win::simple_file_version fv(ydwe_path.c_str());
+	ydwe::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
 
 	// Get image path
-	fs::path splashPath = gExecutableDirectory / L"bin" / L"splash.bmp";
+	fs::path splashPath = ydwe_path / L"bin" / L"splash.bmp";
 	if (fs::exists(splashPath))
 	{
 		FILE* f = _wfopen(splashPath.c_str(), L"rb");
@@ -111,17 +107,17 @@ static void MoveDetouredSystemDll(const fs::path &war3Directory)
 
 static void DoTask()
 {
-	fs::path ydwe_path = ydwe::path::get(ydwe::path::DIR_EXE);
-	gExecutableDirectory = ydwe_path.parent_path();
+	fs::path gExecutableDirectory = ydwe::path::get(ydwe::path::DIR_EXE).remove_filename();
 
 	ydwe::i18n::textdomain("YDWEStartup");
 	ydwe::i18n::bindtextdomain("YDWEStartup", gExecutableDirectory / L"share" / L"locale");
 
-	if (ydwe_path != fs::path(ydwe_path.string()))
+	if (gExecutableDirectory != fs::path(gExecutableDirectory.string()))
 	{
 		BOOST_THROW_EXCEPTION(std::domain_error(_("Error YDWE directory.")));
 	}
 
+	fs::path gWarcraftDirectory;
 	if (!warcraft3_directory::get(__("Please choose your Warcraft 3 installation directory"), gWarcraftDirectory))
 	{
 		return ;
@@ -175,7 +171,7 @@ static void DoTask()
 			) % ::GetLastError()).str().c_str()));
 	}
 
-	ShowSplash(ydwe_path);
+	ShowSplash(gExecutableDirectory);
 }
 
 INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine, INT showType)
