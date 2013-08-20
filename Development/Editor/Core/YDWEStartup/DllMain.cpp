@@ -8,6 +8,7 @@
 #include <boost/foreach.hpp>
 #include <boost/exception/all.hpp>
 #include <CImg.h>
+#include <ydwe/file/memory_mapped_file.h>
 #include <ydwe/i18n/libintl.h>
 #include <ydwe/path/service.h>
 #include <ydwe/util/unicode.h>
@@ -15,12 +16,32 @@
 #include <ydwe/win/process.h>
 #include <YDWEConfig/Warcraft3Directory.h>
 #include <YDWEConfig/Warcraft3Directory.cpp>
-#include "FileCheck.h"
 
 namespace fs = boost::filesystem;
 
 #define _(str)  ydwe::i18n::gettext(str).to_string().c_str()
 #define __(str) ydwe::util::u2w_ref(ydwe::i18n::gettext(str)).c_str()
+
+static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boost::filesystem::path &fileSecond, boost::system::error_code *pErrorCode = nullptr)
+{
+	try
+	{
+		if (pErrorCode)
+			pErrorCode->assign(boost::system::errc::success, boost::system::generic_category());
+
+		ydwe::file::memory_mapped_file mapperFirst(fileFirst.c_str());
+		ydwe::file::memory_mapped_file mapperSecond(fileSecond.c_str());
+
+		size_t size;
+		return (size = mapperFirst.size()) == mapperSecond.size() && memcmp(mapperFirst.memory(), mapperSecond.memory(), size) == 0;
+	}
+	catch (boost::system::system_error &e)
+	{
+		if (pErrorCode)
+			*pErrorCode = e.code();
+		return false;
+	}
+}
 
 static void ShowSplash(fs::path const& ydwe_path)
 {
@@ -63,7 +84,7 @@ static void CheckedCopyFile(const fs::path &source, const fs::path &destination)
 	{
 		if (fs::file_size(source) == fs::file_size(destination))
 		{
-			if (NYDWE::FileContentEqual(source, destination))
+			if (FileContentEqual(source, destination))
 				return;
 		}
 	}

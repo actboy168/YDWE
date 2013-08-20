@@ -85,13 +85,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="FileCheck.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="YDWEStartup.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileCheck.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
