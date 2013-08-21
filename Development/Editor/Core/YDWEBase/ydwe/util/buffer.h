@@ -18,6 +18,8 @@ namespace util {
 		typedef buffer_type::const_iterator const_iterator;
 		typedef buffer_type::value_type     value_type;
 		typedef buffer_type::size_type      size_type;
+		typedef buffer_type::pointer        pointer;
+		typedef buffer_type::const_pointer  const_pointer;
 
 		static_assert(sizeof(value_type) == 1, "buffer::value_type's size must be 1.");
 
@@ -85,6 +87,8 @@ namespace util {
 		typedef buffer_type::const_iterator const_iterator;
 		typedef buffer_type::value_type     value_type;
 		typedef buffer_type::size_type      size_type;
+		typedef buffer_type::pointer        pointer;
+		typedef buffer_type::const_pointer  const_pointer;
 
 		enum
 		{
@@ -93,18 +97,18 @@ namespace util {
 		};
 
 		buffer_reader(const buffer& b)
-			: beg_(b.begin())
-			, end_(b.end())
-			, cur_(beg_)
+			: first_(&*b.begin())
+			, last_(&*b.begin() + b.size())
+			, next_(first_)
 		{ }
 
 		buffer_reader& operator=(const buffer_reader& source)
 		{
 			if (this != &source)
 			{
-				beg_ = source.beg_;
-				cur_ = source.cur_;
-				end_ = source.end_;
+				first_ = source.first_;
+				next_ = source.next_;
+				last_ = source.last_;
 			}
 
 			return *this;
@@ -114,9 +118,9 @@ namespace util {
 		{
 			if (this != &source)
 			{
-				beg_ = source.beg_;
-				cur_ = source.cur_;
-				end_ = source.end_;
+				first_ = source.first_;
+				next_ = source.next_;
+				last_ = source.last_;
 			}
 
 			return *this;
@@ -124,68 +128,68 @@ namespace util {
 
 		void reset()
 		{
-			cur_ = beg_;
+			next_ = first_;
 		}
 
 		const value_type* reads_ptr(size_t n)
 		{
-			if (static_cast<size_type>(end_ - cur_) < n)
+			if (static_cast<size_type>(last_ - next_) < n)
 			{
 				throw exception("buffer overflow.");
 			}
 
-			const value_type* ret = &*cur_;
-			cur_ += n;
+			const value_type* ret = &*next_;
+			next_ += n;
 
 			return ret;
 		}
 
-		template <class _Ty>
-		const _Ty* read_ptr()
+		template <class T>
+		const T* read_ptr()
 		{
-			return reinterpret_cast<const _Ty*>(reads_ptr(sizeof(_Ty)));
+			return reinterpret_cast<const T*>(reads_ptr(sizeof(T)));
 		}
 
-		template <class _Ty>
-		_Ty read()
+		template <class T>
+		T read()
 		{
-			return * read_ptr<_Ty>();
+			return * read_ptr<T>();
 		}
 
 		const value_type* reads_ptr(size_t n, std::error_code& ec)
 		{
-			if (end_ - cur_ <  static_cast<buffer_type::difference_type>(n))
+			if (last_ - next_ <  static_cast<buffer_type::difference_type>(n))
 			{
 				ec.assign(stream_eof, std::generic_category());
 				return nullptr;
 			}
 
-			const value_type* ret = &*cur_;
-			cur_ += n;
+			const value_type* ret = &*next_;
+			next_ += n;
 
 			return ret;
 		}
 
-		template <class _Ty>
-		const _Ty* read_ptr(std::error_code& ec)
+		template <class T>
+		const T* read_ptr(std::error_code& ec)
 		{
-			return reinterpret_cast<const _Ty*>(reads_ptr(sizeof(_Ty), ec));
+			return reinterpret_cast<const T*>(reads_ptr(sizeof(T), ec));
 		}
 
-		template <class _Ty>
-		_Ty read(std::error_code& ec)
+		template <class T>
+		T read(std::error_code& ec)
 		{
-			const _Ty* p = read_ptr<_Ty>(ec);
-			return p ? *p : _Ty();
+			const T* p = read_ptr<T>(ec);
+			return p ? *p : T();
 		}
 
 		template <>
 		std::string read<std::string>(std::error_code& ec)
 		{
-			const_iterator start = cur_;
+			const_pointer start = next_;
 			value_type c = read<value_type>(ec);
 			while (!ec && c != '\0') { c = read<value_type>(ec); }
-			return std::move(std::string(start, cur_));
+			return std::move(std::string(start, next_));
 		}
 
 		template <>
@@ -205,16 +209,16 @@ namespace util {
 					{
 						throw exception("buffer overflow.");
 					}
-					cur_ = beg_ + offset;
+					next_ = first_ + offset;
 				}
 				break;
 			case  std::ios::cur:
 				{
-					if (static_cast<size_type>(end_ - cur_) < offset)
+					if (static_cast<size_type>(last_ - next_) < offset)
 					{
 						throw exception("buffer overflow.");
 					}
-					cur_ = cur_ + offset;
+					next_ = next_ + offset;
 				}
 				break;
 			case  std::ios::end:
@@ -223,7 +227,7 @@ namespace util {
 					{
 						throw exception("buffer overflow.");
 					}
-					cur_ = beg_ + (size() - offset);
+					next_ = first_ + (size() - offset);
 				}
 				break;
 			}
@@ -231,13 +235,13 @@ namespace util {
 
 		size_type size() const
 		{
-			return static_cast<size_type>(end_ - beg_);
+			return static_cast<size_type>(last_ - first_);
 		}
 
 	private:
-		const_iterator beg_;
-		const_iterator end_;
-		const_iterator cur_;
+		const_pointer first_;
+		const_pointer last_;
+		const_pointer next_;
 	};
 
 	class buffer_stearmbuf 
