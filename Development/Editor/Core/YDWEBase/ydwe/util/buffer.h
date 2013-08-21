@@ -90,12 +90,6 @@ namespace util {
 		typedef buffer_type::pointer        pointer;
 		typedef buffer_type::const_pointer  const_pointer;
 
-		enum
-		{
-			normal = 0,
-			stream_eof,
-		};
-
 		buffer_reader(buffer& b)
 			: first_(&*b.begin())
 			, next_(first_)
@@ -138,7 +132,7 @@ namespace util {
 		{
 			if (size_ < n)
 			{
-				ec.assign(stream_eof, std::generic_category());
+				ec.assign(ENOMEM, std::generic_category());
 				return nullptr;
 			}
 
