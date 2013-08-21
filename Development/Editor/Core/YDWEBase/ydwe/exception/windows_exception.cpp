@@ -12,15 +12,7 @@ namespace exception_detail {
 }
 
 windows_exception::windows_exception(const char* reason, int error_code)
-	: exception()
-	, error_code_(error_code, exception_detail::windows_category())
-{
-	what_ = get_format_string("%s : %s", reason? reason: error_code_.category().name(), error_code_.message().c_str());
-}
-
-const std::error_code& windows_exception::error_code() const
-{
-	return error_code_;
-}
+	: system_exception(std::error_code(error_code, exception_detail::windows_category()), reason)
+{ }
 
 _BASE_END

@@ -203,6 +203,9 @@
     <ClCompile Include="ydwe\warcraft3\detail\nf_register.cpp">
       <Filter>ydwe\warcraft3\detail</Filter>
     </ClCompile>
+    <ClCompile Include="ydwe\exception\system_exception.cpp">
+      <Filter>ydwe\exception</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ydwe\util\detail\codecvt.h">
@@ -411,6 +414,9 @@
     </ClInclude>
     <ClInclude Include="ydwe\util\dynarray.h">
       <Filter>ydwe\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\exception\system_exception.h">
+      <Filter>ydwe\exception</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

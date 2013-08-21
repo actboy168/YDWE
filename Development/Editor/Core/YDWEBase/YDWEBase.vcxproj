@@ -114,6 +114,7 @@
     <ClCompile Include="ydwe\exception\detail\windows_category.cpp" />
     <ClCompile Include="ydwe\exception\exception.cpp" />
     <ClCompile Include="ydwe\exception\seh_exception.cpp" />
+    <ClCompile Include="ydwe\exception\system_exception.cpp" />
     <ClCompile Include="ydwe\exception\windows_exception.cpp" />
     <ClCompile Include="ydwe\file\file_handle.cpp" />
     <ClCompile Include="ydwe\file\file_mapping_handle.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="ydwe\exception\detail\windows_category.h" />
     <ClInclude Include="ydwe\exception\exception.h" />
     <ClInclude Include="ydwe\exception\seh_exception.h" />
+    <ClInclude Include="ydwe\exception\system_exception.h" />
     <ClInclude Include="ydwe\exception\windows_exception.h" />
     <ClInclude Include="ydwe\file\memory_mapped_file.h" />
     <ClInclude Include="ydwe\file\file_handle.h" />
