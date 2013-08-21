@@ -46,17 +46,6 @@ namespace exception_detail
 
 		return std::error_condition(error_code, *this);
 	}
-
-	const std::error_category& __cdecl windows_category()
-	{
-		static windows_category_impl instance;
-		return instance;
-	}
-
-	std::error_code __cdecl create_error_code(unsigned long error_code)
-	{
-		return std::error_code((int)error_code, windows_category());
-	}
 }
 
 _BASE_END

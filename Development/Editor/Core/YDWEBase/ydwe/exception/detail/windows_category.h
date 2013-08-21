@@ -14,8 +14,6 @@ namespace exception_detail
 		virtual std::string message(int error_code) const;
 		virtual std::error_condition default_error_condition(int error_code) const;
 	};
-	const std::error_category& __cdecl windows_category();
-	std::error_code __cdecl create_error_code(unsigned long error_code);;
 }
 
 _BASE_END

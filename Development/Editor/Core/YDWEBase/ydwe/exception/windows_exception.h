@@ -10,7 +10,7 @@ _BASE_BEGIN
 class _BASE_API windows_exception : public exception
 {
 public:
-	windows_exception(const char* reason = "windows exception", unsigned long error_code = ::GetLastError());
+	windows_exception(const char* reason = nullptr, int error_code = ::GetLastError());
 	const std::error_code& error_code() const;
 
 protected:
