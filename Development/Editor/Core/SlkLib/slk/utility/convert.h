@@ -30,7 +30,7 @@ namespace slk
 
 		do
 		{
-			assert(offset >= 0);
+			assert(offset > 0);
 			str_buf[--offset] = n % 10 + '0';
 			n /= 10;
 		} while (n != 0);
