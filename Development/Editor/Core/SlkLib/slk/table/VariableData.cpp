@@ -41,9 +41,9 @@ namespace slk
 			break;
 		case OBJTYPE_STRING:
 			{
-				buffer_reader::status ec = buffer_reader::normal;
+				std::error_code ec;
 				_s = reader.read<std::string>(ec);
-				if (ec ==  buffer_reader::normal) _s.pop_back();
+				if (ec) _s.pop_back();
 			}
 			break;
 		default:

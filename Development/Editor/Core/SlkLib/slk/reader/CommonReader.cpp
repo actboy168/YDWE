@@ -7,7 +7,7 @@ namespace slk { namespace reader { namespace utility {
 
 	void remove_bom(buffer_reader& reader)
 	{
-		buffer_reader::status ec = buffer_reader::normal;
+		std::error_code ec;
 		if ((0xEF == reader.read<uint8_t>(ec))
 			&& (0xBB == reader.read<uint8_t>(ec))
 			&& (0xBF == reader.read<uint8_t>(ec)))
@@ -21,13 +21,13 @@ namespace slk { namespace reader { namespace utility {
 
 	void each_line(buffer_reader& reader, std::function<void(boost::string_ref&)> callback)
 	{
-		buffer_reader::status ec = buffer_reader::normal;
-		while (ec != buffer_reader::stream_eof)
+		std::error_code ec;
+		while (ec)
 		{
 			const char* ptr = reader.read_ptr<char>(ec);
 			size_t len = 0;
 			for (const char* next = ptr
-				; ec != buffer_reader::stream_eof && *next != '\n'
+				; ec && *next != '\n'
 				; next = reader.read_ptr<char>(ec), ++len)
 				;
 

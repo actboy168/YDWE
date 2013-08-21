@@ -3,6 +3,7 @@
 #include <ydwe/exception/exception.h>
 #include <ydwe/util/noncopyable.h>
 #include <string>
+#include <system_error>
 #include <vector>
 #include <streambuf>
 
@@ -16,6 +17,7 @@ namespace util {
 		typedef buffer_type::iterator       iterator;
 		typedef buffer_type::const_iterator const_iterator;
 		typedef buffer_type::value_type     value_type;
+		typedef buffer_type::size_type      size_type;
 
 		static_assert(sizeof(value_type) == 1, "buffer::value_type's size must be 1.");
 
@@ -68,24 +70,29 @@ namespace util {
 		{
 			return buf_.end();
 		}
+
+		size_type size() const
+		{
+			return buf_.size();
+		}
 	};
 
 	class buffer_reader
 	{
-		typedef buffer BufferT;
 	public:
-		enum status
+		typedef buffer::buffer_type         buffer_type;
+		typedef buffer_type::iterator       iterator;
+		typedef buffer_type::const_iterator const_iterator;
+		typedef buffer_type::value_type     value_type;
+		typedef buffer_type::size_type      size_type;
+
+		enum
 		{
 			normal = 0,
 			stream_eof,
 		};
 
-		typedef BufferT::buffer_type    buffer_type;
-		typedef BufferT::iterator       iterator;
-		typedef BufferT::const_iterator const_iterator;
-		typedef BufferT::value_type     value_type;
-
-		buffer_reader(const BufferT& b)
+		buffer_reader(const buffer& b)
 			: beg_(b.begin())
 			, end_(b.end())
 			, cur_(beg_)
@@ -122,7 +129,7 @@ namespace util {
 
 		const value_type* reads_ptr(size_t n)
 		{
-			if (end_ - cur_ <  static_cast<buffer_type::difference_type>(n))
+			if (static_cast<size_type>(end_ - cur_) < n)
 			{
 				throw exception("buffer overflow.");
 			}
@@ -145,11 +152,11 @@ namespace util {
 			return * read_ptr<_Ty>();
 		}
 
-		const value_type* reads_ptr(size_t n, status& ec)
+		const value_type* reads_ptr(size_t n, std::error_code& ec)
 		{
 			if (end_ - cur_ <  static_cast<buffer_type::difference_type>(n))
 			{
-				ec = stream_eof;
+				ec.assign(stream_eof, std::system_category());
 				return nullptr;
 			}
 
@@ -160,31 +167,31 @@ namespace util {
 		}
 
 		template <class _Ty>
-		const _Ty* read_ptr(status& ec)
+		const _Ty* read_ptr(std::error_code& ec)
 		{
 			return reinterpret_cast<const _Ty*>(reads_ptr(sizeof(_Ty), ec));
 		}
 
 		template <class _Ty>
-		_Ty read(status& ec)
+		_Ty read(std::error_code& ec)
 		{
 			const _Ty* p = read_ptr<_Ty>(ec);
 			return p ? *p : _Ty();
 		}
 
 		template <>
-		std::string read<std::string>(status& ec)
+		std::string read<std::string>(std::error_code& ec)
 		{
 			const_iterator start = cur_;
 			value_type c = read<value_type>(ec);
-			while (ec != stream_eof && c != '\0') { c = read<value_type>(ec); }
+			while (!ec && c != '\0') { c = read<value_type>(ec); }
 			return std::move(std::string(start, cur_));
 		}
 
 		template <>
 		std::string read<std::string>()
 		{
-			status ec = normal;
+			std::error_code ec;
 			return std::move(read<std::string>(ec));
 		}
 
@@ -194,7 +201,7 @@ namespace util {
 			{
 			case  std::ios::beg:
 				{
-					if (end_ - beg_ < static_cast<buffer_type::difference_type>(offset))
+					if (size() < offset)
 					{
 						throw exception("buffer overflow.");
 					}
@@ -203,7 +210,7 @@ namespace util {
 				break;
 			case  std::ios::cur:
 				{
-					if (end_ - cur_ < static_cast<buffer_type::difference_type>(offset))
+					if (static_cast<size_type>(end_ - cur_) < offset)
 					{
 						throw exception("buffer overflow.");
 					}
@@ -212,14 +219,19 @@ namespace util {
 				break;
 			case  std::ios::end:
 				{
-					if (end_ - beg_ < static_cast<buffer_type::difference_type>(offset))
+					if (size() < offset)
 					{
 						throw exception("buffer overflow.");
 					}
-					cur_ = beg_ + (end_ - beg_ - offset);
+					cur_ = beg_ + (size() - offset);
 				}
 				break;
 			}
+		}
+
+		size_type size() const
+		{
+			return static_cast<size_type>(end_ - beg_);
 		}
 
 	private:
@@ -233,7 +245,7 @@ namespace util {
 		, public util::noncopyable
 	{
 	public:
-		buffer_stearmbuf(const buffer& b)
+		buffer_stearmbuf(buffer& b)
 		{
 			setg(&*b.begin(), &*b.begin(), &*b.begin() + b.size());
 		}
