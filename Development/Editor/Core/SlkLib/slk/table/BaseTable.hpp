@@ -2,7 +2,6 @@
 
 #include <unordered_map>
 #include <slk/utility/object_id.h>
-#include <slk/utility/buffer.h>
 
 namespace slk
 {
@@ -153,11 +152,4 @@ namespace slk
 		typedef std::unordered_map<_Key, _Value, detail::hash<_Key>>                                   Type;
 		typedef std::unordered_map<_Key, _Value, ignore_case::hash<_Key>, ignore_case::equal_to<_Key>> IType;
 	};
-
-	template <class _Reader, class _Table>
-	void TableRead(_Table& table, buffer&& buf)
-	{
-		buffer_reader reader(buf);
-		_Reader::Read(reader, table);
-	}
 }

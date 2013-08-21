@@ -117,6 +117,13 @@ namespace slk
 		}
 	}
 
+	template <class _Reader, class _Table>
+	void TableRead(_Table& table, buffer&& buf)
+	{
+		buffer_reader reader(buf);
+		_Reader::Read(reader, table);
+	}
+
 	ObjectManager::ObjectManager(InterfaceStorm& that)
 		: storm_(that)
 		, converter_(storm_)
