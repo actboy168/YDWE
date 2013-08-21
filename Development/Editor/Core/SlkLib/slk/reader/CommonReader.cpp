@@ -22,12 +22,12 @@ namespace slk { namespace reader { namespace utility {
 	void each_line(buffer_reader& reader, std::function<void(boost::string_ref&)> callback)
 	{
 		std::error_code ec;
-		while (ec)
+		while (!ec)
 		{
 			const char* ptr = reader.read_ptr<char>(ec);
 			size_t len = 0;
 			for (const char* next = ptr
-				; ec && *next != '\n'
+				; !ec && *next != '\n'
 				; next = reader.read_ptr<char>(ec), ++len)
 				;
 

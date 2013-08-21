@@ -43,7 +43,7 @@ namespace slk
 			{
 				std::error_code ec;
 				_s = reader.read<std::string>(ec);
-				if (ec) _s.pop_back();
+				if (!ec) _s.pop_back();
 			}
 			break;
 		default:
