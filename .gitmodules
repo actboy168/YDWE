@@ -1,3 +1,6 @@
 [submodule "Python"]
 	path = OpenSource/Python/2.7.2
 	url = http://github.com/actboy168/Python.git
+[submodule "Boost"]
+	path = OpenSource/Boost/1.53
+	url = http://github.com/actboy168/Boost.git
