@@ -11,6 +11,7 @@ _BASE_BEGIN
 namespace util {
 
 	class buffer
+		: public noncopyable
 	{
 	public:
 		typedef std::vector<char>           buffer_type;
@@ -80,6 +81,7 @@ namespace util {
 	};
 
 	class buffer_reader
+		: public noncopyable
 	{
 	public:
 		typedef buffer::buffer_type         buffer_type;
@@ -101,30 +103,6 @@ namespace util {
 			, last_(&*b.begin() + b.size())
 			, next_(first_)
 		{ }
-
-		buffer_reader& operator=(const buffer_reader& source)
-		{
-			if (this != &source)
-			{
-				first_ = source.first_;
-				next_ = source.next_;
-				last_ = source.last_;
-			}
-
-			return *this;
-		}
-
-		buffer_reader& operator=(buffer_reader&& source)
-		{
-			if (this != &source)
-			{
-				first_ = source.first_;
-				next_ = source.next_;
-				last_ = source.last_;
-			}
-
-			return *this;
-		}
 
 		void reset()
 		{
@@ -246,7 +224,7 @@ namespace util {
 
 	class buffer_stearmbuf 
 		: public std::streambuf 
-		, public util::noncopyable
+		, public noncopyable
 	{
 	public:
 		buffer_stearmbuf(buffer& b)
