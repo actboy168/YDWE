@@ -156,7 +156,7 @@ namespace util {
 		{
 			if (end_ - cur_ <  static_cast<buffer_type::difference_type>(n))
 			{
-				ec.assign(stream_eof, std::system_category());
+				ec.assign(stream_eof, std::generic_category());
 				return nullptr;
 			}
 
