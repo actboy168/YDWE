@@ -28,6 +28,10 @@ namespace slk
 			typedef std::vector<std::vector<std::string>> _Mybase;
 
 			SlkDataArray(buffer_reader& reader)
+				: max_x_(0)
+				, max_y_(0)
+				, cur_x_(0)
+				, cur_y_(0)
 			{
 				read(reader);
 			}
