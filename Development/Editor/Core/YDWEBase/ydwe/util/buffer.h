@@ -47,8 +47,8 @@ namespace util {
 		{ }
 
 		template <class Elem>
-		buffer(Elem const* from, size_t length)
-			: buf_(static_cast<value_type const*>(from), static_cast<value_type const*>(from)+length)
+		buffer(Elem const* from, size_t from_size)
+			: buf_(static_cast<const value_type*>(from), static_cast<const value_type*>(from)+from_size)
 		{ }
 
 		~buffer()
@@ -85,8 +85,6 @@ namespace util {
 	{
 	public:
 		typedef buffer::buffer_type         buffer_type;
-		typedef buffer_type::iterator       iterator;
-		typedef buffer_type::const_iterator const_iterator;
 		typedef buffer_type::value_type     value_type;
 		typedef buffer_type::size_type      size_type;
 		typedef buffer_type::pointer        pointer;
@@ -98,10 +96,11 @@ namespace util {
 			stream_eof,
 		};
 
-		buffer_reader(const buffer& b)
+		buffer_reader(buffer& b)
 			: first_(&*b.begin())
-			, last_(&*b.begin() + b.size())
 			, next_(first_)
+			, max_size_(b.size())
+			, size_(max_size_)
 		{ }
 
 		void reset()
@@ -109,15 +108,16 @@ namespace util {
 			next_ = first_;
 		}
 
-		const value_type* reads_ptr(size_t n)
+		const value_type* reads_ptr(size_type n)
 		{
-			if (static_cast<size_type>(last_ - next_) < n)
+			if (size_ < n)
 			{
 				throw exception("buffer overflow.");
 			}
 
 			const value_type* ret = &*next_;
 			next_ += n;
+			size_ -= n;
 
 			return ret;
 		}
@@ -134,9 +134,9 @@ namespace util {
 			return * read_ptr<T>();
 		}
 
-		const value_type* reads_ptr(size_t n, std::error_code& ec)
+		const value_type* reads_ptr(size_type n, std::error_code& ec)
 		{
-			if (last_ - next_ <  static_cast<buffer_type::difference_type>(n))
+			if (size_ < n)
 			{
 				ec.assign(stream_eof, std::generic_category());
 				return nullptr;
@@ -144,6 +144,7 @@ namespace util {
 
 			const value_type* ret = &*next_;
 			next_ += n;
+			size_ -= n;
 
 			return ret;
 		}
@@ -183,7 +184,7 @@ namespace util {
 			{
 			case  std::ios::beg:
 				{
-					if (size() < offset)
+					if (max_size_ < offset)
 					{
 						throw exception("buffer overflow.");
 					}
@@ -192,7 +193,7 @@ namespace util {
 				break;
 			case  std::ios::cur:
 				{
-					if (static_cast<size_type>(last_ - next_) < offset)
+					if (size_ < offset)
 					{
 						throw exception("buffer overflow.");
 					}
@@ -201,25 +202,21 @@ namespace util {
 				break;
 			case  std::ios::end:
 				{
-					if (size() < offset)
+					if (max_size_ < offset)
 					{
 						throw exception("buffer overflow.");
 					}
-					next_ = first_ + (size() - offset);
+					next_ = first_ + (max_size_ - offset);
 				}
 				break;
 			}
 		}
 
-		size_type size() const
-		{
-			return static_cast<size_type>(last_ - first_);
-		}
-
 	private:
 		const_pointer first_;
-		const_pointer last_;
 		const_pointer next_;
+		size_type     max_size_;
+		size_type     size_;
 	};
 
 	class buffer_stearmbuf 
