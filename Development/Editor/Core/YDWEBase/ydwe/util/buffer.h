@@ -1,8 +1,10 @@
 #pragma once
 
 #include <ydwe/exception/exception.h>
+#include <ydwe/util/noncopyable.h>
 #include <string>
 #include <vector>
+#include <streambuf>
 
 _BASE_BEGIN 
 namespace util {
@@ -226,5 +228,25 @@ namespace util {
 		const_iterator cur_;
 	};
 
+	class buffer_stearmbuf 
+		: public std::streambuf 
+		, public util::noncopyable
+	{
+	public:
+		buffer_stearmbuf(const buffer& b)
+		{
+			setg(&*b.begin(), &*b.begin(), &*b.begin() + b.size());
+		}
+
+		virtual std::streambuf::int_type underflow() 
+		{
+			if (gptr() < egptr())
+			{
+				return traits_type::to_int_type(*gptr());
+			}
+
+			return traits_type::eof(); 
+		}
+	};
 }
 _BASE_END
