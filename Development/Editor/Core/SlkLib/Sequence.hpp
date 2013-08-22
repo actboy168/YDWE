@@ -125,22 +125,20 @@ namespace slk
 		return std::move(SequenceT(TrimBegin, TrimEnd));
 	}
 
-
-	template <typename SequenceT, typename PredicateT>
-	inline SequenceT trim_copy(const SequenceT& Input, PredicateT IsFound)
-	{
-		typename SequenceT::const_iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
-		typename SequenceT::const_iterator TrimBegin = detail::find_begin(Input.begin(), TrimEnd, IsFound);
-		return std::move(SequenceT(TrimBegin, TrimEnd));
-	}
-
 	template <typename SequenceT, typename PredicateT>
 	inline SequenceT trim_copy(typename SequenceT::const_iterator ItBegin, typename SequenceT::const_iterator ItEnd, PredicateT IsFound)
 	{
 		typename SequenceT::const_iterator TrimEnd = detail::find_end(ItBegin, ItEnd, IsFound);
-		typename SequenceT::const_iterator TrimBegin = detail::find_begin(ItBegin, ItEnd, IsFound);
+		typename SequenceT::const_iterator TrimBegin = detail::find_begin(ItBegin, TrimEnd, IsFound);
 		return std::move(SequenceT(TrimBegin, TrimEnd));
 	}
+
+	template <typename SequenceT, typename PredicateT>
+	inline SequenceT trim_copy(const SequenceT& Input, PredicateT IsFound)
+	{
+		return std::move(trim_copy<SequenceT, PredicateT>(Input.cbegin(), Input.cend(), IsFound));
+	}
+
 
 	template <typename SequenceT, typename PredicateT>
 	typename SequenceT::iterator find_begin(SequenceT& Input, PredicateT IsFound)
