@@ -43,7 +43,7 @@ static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boo
 	{
 		if (pErrorCode)
 		{
-			*pErrorCode = e.error_code();
+			*pErrorCode = e.code();
 		}
 
 		return false;
