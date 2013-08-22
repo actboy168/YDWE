@@ -9,6 +9,8 @@
 #include <boost/exception/all.hpp>
 #include <CImg.h>
 #include <ydwe/file/memory_mapped_file.h>
+#include <ydwe/exception/system_exception.h>
+#include <ydwe/exception/windows_exception.h>
 #include <ydwe/i18n/libintl.h>
 #include <ydwe/path/service.h>
 #include <ydwe/util/unicode.h>
@@ -22,12 +24,14 @@ namespace fs = boost::filesystem;
 #define _(str)  ydwe::i18n::gettext(str).to_string().c_str()
 #define __(str) ydwe::util::u2w_ref(ydwe::i18n::gettext(str)).c_str()
 
-static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boost::filesystem::path &fileSecond, boost::system::error_code *pErrorCode = nullptr)
+static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boost::filesystem::path &fileSecond, std::error_code *pErrorCode = nullptr)
 {
 	try
 	{
 		if (pErrorCode)
-			pErrorCode->assign(boost::system::errc::success, boost::system::generic_category());
+		{
+			pErrorCode->assign(boost::system::errc::success, std::generic_category());
+		}
 
 		ydwe::file::memory_mapped_file mapperFirst(fileFirst.c_str());
 		ydwe::file::memory_mapped_file mapperSecond(fileSecond.c_str());
@@ -35,10 +39,13 @@ static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boo
 		size_t size;
 		return (size = mapperFirst.size()) == mapperSecond.size() && memcmp(mapperFirst.memory(), mapperSecond.memory(), size) == 0;
 	}
-	catch (boost::system::system_error &e)
+	catch (ydwe::system_exception const& e)
 	{
 		if (pErrorCode)
-			*pErrorCode = e.code();
+		{
+			*pErrorCode = e.error_code();
+		}
+
 		return false;
 	}
 }
@@ -187,9 +194,7 @@ static void DoTask()
 
 	if (!result)
 	{
-		BOOST_THROW_EXCEPTION(std::domain_error((boost::format(
-			_("Failed to launch world editor. Error: %1%")
-			) % ::GetLastError()).str().c_str()));
+		throw ydwe::windows_exception(_("Failed to launch world editor."));
 	}
 
 	ShowSplash(gExecutableDirectory);
@@ -204,11 +209,7 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 		DoTask();
 		exitCode = 0;
 	}
-	catch (std::domain_error &e)
-	{
-		MessageBoxW(NULL, ydwe::util::u2w_ref(e.what()).c_str(), __("Error"), MB_OK | MB_ICONERROR);
-	}
-	catch (std::exception &e)
+	catch (std::exception const& e)
 	{
 		MessageBoxW(NULL, ydwe::util::u2w_ref(e.what()).c_str(), __("Error"), MB_OK | MB_ICONERROR);
 	}
