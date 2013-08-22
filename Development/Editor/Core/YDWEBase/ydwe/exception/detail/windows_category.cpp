@@ -1,5 +1,6 @@
 #include <ydwe/exception/detail/windows_category.h>
 #include <ydwe/exception/detail/error_msg.h>
+#include <ydwe/util/string_ref.h>
 #include <ydwe/util/unicode.h>
 #include <Windows.h>
 #include <sstream>
@@ -32,7 +33,13 @@ namespace exception_detail
 			return os.str();
 		}
 
-		return std::move(util::w2u(buffer.c_str(), util::conv_method::replace | '?'));
+		boost::wstring_ref str(buffer.c_str());
+		while (str.size() && ((str.back() == L'\n') || (str.back() == L'\r')))
+		{
+			str.remove_suffix(1);
+		}
+
+		return std::move(util::w2u_ref(str, util::conv_method::replace | '?'));
 	}
 
 	std::error_condition windows_category_impl::default_error_condition(int error_code) const
