@@ -8,4 +8,30 @@
       <UniqueIdentifier>{8ca01ca1-e3de-44ff-b686-bf4958f2b252}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\adler32.c" />
+    <ClCompile Include="..\src\compress.c" />
+    <ClCompile Include="..\src\crc32.c" />
+    <ClCompile Include="..\src\deflate.c" />
+    <ClCompile Include="..\src\infback.c" />
+    <ClCompile Include="..\src\inffast.c" />
+    <ClCompile Include="..\src\inflate.c" />
+    <ClCompile Include="..\src\inftrees.c" />
+    <ClCompile Include="..\src\trees.c" />
+    <ClCompile Include="..\src\uncompr.c" />
+    <ClCompile Include="..\src\zutil.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\crc32.h" />
+    <ClInclude Include="..\include\deflate.h" />
+    <ClInclude Include="..\include\gzguts.h" />
+    <ClInclude Include="..\include\inffast.h" />
+    <ClInclude Include="..\include\inffixed.h" />
+    <ClInclude Include="..\include\inflate.h" />
+    <ClInclude Include="..\include\inftrees.h" />
+    <ClInclude Include="..\include\trees.h" />
+    <ClInclude Include="..\include\zconf.h" />
+    <ClInclude Include="..\include\zlib.h" />
+    <ClInclude Include="..\include\zutil.h" />
+  </ItemGroup>
 </Project>
