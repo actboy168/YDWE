@@ -119,7 +119,7 @@
     <ClCompile Include="ydwe\file\file_handle.cpp" />
     <ClCompile Include="ydwe\file\file_mapping_handle.cpp" />
     <ClCompile Include="ydwe\file\memory_mapped_file.cpp" />
-    <ClCompile Include="ydwe\file\steam.cpp" />
+    <ClCompile Include="ydwe\file\stream.cpp" />
     <ClCompile Include="ydwe\hook\detail\disassembly.cpp" />
     <ClCompile Include="ydwe\hook\detail\import_address_table.cpp" />
     <ClCompile Include="ydwe\hook\detail\inject_dll.cpp" />
@@ -175,7 +175,7 @@
     <ClInclude Include="ydwe\file\memory_mapped_file.h" />
     <ClInclude Include="ydwe\file\file_handle.h" />
     <ClInclude Include="ydwe\file\file_mapping_handle.h" />
-    <ClInclude Include="ydwe\file\steam.h" />
+    <ClInclude Include="ydwe\file\stream.h" />
     <ClInclude Include="ydwe\hook\assembler\operand.h" />
     <ClInclude Include="ydwe\hook\assembler\writer.h" />
     <ClInclude Include="ydwe\hook\assembler\register.h" />

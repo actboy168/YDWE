@@ -213,12 +213,12 @@ namespace util {
 		size_type     size_;
 	};
 
-	class buffer_stearmbuf 
+	class buffer_streambuf 
 		: public std::streambuf 
 		, public noncopyable
 	{
 	public:
-		buffer_stearmbuf(buffer& b)
+		buffer_streambuf(buffer& b)
 		{
 			setg(&*b.begin(), &*b.begin(), &*b.begin() + b.size());
 		}

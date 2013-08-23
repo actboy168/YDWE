@@ -5,14 +5,15 @@
 #include <ydwe/util/noncopyable.h>
 #include <fstream>
 
-_BASE_BEGIN namespace file {
+_BASE_BEGIN 
+namespace file {
 
-	class _BASE_API steam: public util::noncopyable
+	class _BASE_API stream: public util::noncopyable
 	{
 	public:
-		steam(const char* filename, std::ios_base::openmode mode);
-		steam(const wchar_t* filename, std::ios_base::openmode mode);
-		~steam();
+		stream(const char* filename, std::ios_base::openmode mode);
+		stream(const wchar_t* filename, std::ios_base::openmode mode);
+		~stream();
 		bool is_open() const;
 
 		template <class SequenceT>
@@ -28,7 +29,7 @@ _BASE_BEGIN namespace file {
 		}
 
 	private:
-		steam();
+		stream();
 
 #pragma warning(push)
 #pragma warning(disable:4251)
@@ -36,14 +37,14 @@ _BASE_BEGIN namespace file {
 #pragma warning(pop)
 	};
 
-	class _BASE_API write_steam
+	class _BASE_API write_stream
 	{
 	public:
-		write_steam(const char* filename);
-		write_steam(const std::string& filename);
-		write_steam(const wchar_t* filename);
-		write_steam(const std::wstring& filename);
-		write_steam(const boost::filesystem::path& filename);
+		write_stream(const char* filename);
+		write_stream(const std::string& filename);
+		write_stream(const wchar_t* filename);
+		write_stream(const std::wstring& filename);
+		write_stream(const boost::filesystem::path& filename);
 		
 		template <class SequenceT>
 		void write(SequenceT buf)
@@ -52,17 +53,17 @@ _BASE_BEGIN namespace file {
 		}
 
 	private:
-		steam file_;
+		stream file_;
 	};
 
-	class _BASE_API read_steam
+	class _BASE_API read_stream
 	{
 	public:
-		read_steam(const char* filename);
-		read_steam(const std::string& filename);
-		read_steam(const wchar_t* filename);
-		read_steam(const std::wstring& filename);
-		read_steam(const boost::filesystem::path& filename);
+		read_stream(const char* filename);
+		read_stream(const std::string& filename);
+		read_stream(const wchar_t* filename);
+		read_stream(const std::wstring& filename);
+		read_stream(const boost::filesystem::path& filename);
 
 		template <class SequenceT>
 		SequenceT read()
@@ -71,6 +72,7 @@ _BASE_BEGIN namespace file {
 		}
 
 	private:
-		steam file_;
+		stream file_;
 	};
-}}
+}
+_BASE_END

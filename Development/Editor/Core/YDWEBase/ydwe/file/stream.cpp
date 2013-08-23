@@ -1,14 +1,15 @@
-#include <ydwe/file/steam.h>
+#include <ydwe/file/stream.h>
 #include <ydwe/exception/exception.h>
 
-_BASE_BEGIN namespace file {
+_BASE_BEGIN 
+namespace file {
 
-	steam::steam(const char* filename, std::ios_base::openmode mode)
+	stream::stream(const char* filename, std::ios_base::openmode mode)
 	{
 		file_.open(filename, std::ios::binary | mode);
 	}
 
-	steam::steam(const wchar_t* filename, std::ios_base::openmode mode)
+	stream::stream(const wchar_t* filename, std::ios_base::openmode mode)
 	{
 #if defined(_MSC_VER)
 		file_.open(filename, std::ios::binary | mode);
@@ -17,17 +18,17 @@ _BASE_BEGIN namespace file {
 #endif
 	}
 
-	steam::~steam()
+	stream::~stream()
 	{
 		file_.close();
 	}
 
-	bool steam::is_open() const
+	bool stream::is_open() const
 	{
 		return !!file_;
 	}
 
-	write_steam::write_steam(const char* filename)
+	write_stream::write_stream(const char* filename)
 		: file_(filename, std::ios_base::out)
 	{
 		if (!file_.is_open())
@@ -36,7 +37,7 @@ _BASE_BEGIN namespace file {
 		}
 	}
 
-	write_steam::write_steam(const std::string& filename)
+	write_stream::write_stream(const std::string& filename)
 		: file_(filename.c_str(), std::ios_base::out)
 	{
 		if (!file_.is_open())
@@ -45,7 +46,7 @@ _BASE_BEGIN namespace file {
 		}
 	}
 
-	write_steam::write_steam(const wchar_t* filename)
+	write_stream::write_stream(const wchar_t* filename)
 		: file_(filename, std::ios_base::out)
 	{
 		if (!file_.is_open())
@@ -54,7 +55,7 @@ _BASE_BEGIN namespace file {
 		}
 	}
 
-	write_steam::write_steam(const std::wstring& filename)
+	write_stream::write_stream(const std::wstring& filename)
 		: file_(filename.c_str(), std::ios_base::out)
 	{
 		if (!file_.is_open())
@@ -63,7 +64,7 @@ _BASE_BEGIN namespace file {
 		}
 	}
 
-	write_steam::write_steam(const boost::filesystem::path& filename)
+	write_stream::write_stream(const boost::filesystem::path& filename)
 		: file_(filename.c_str(), std::ios_base::out)
 	{
 		if (!file_.is_open())
@@ -72,7 +73,7 @@ _BASE_BEGIN namespace file {
 		}
 	}
 
-	read_steam::read_steam(const char* filename)
+	read_stream::read_stream(const char* filename)
 		: file_(filename, std::ios_base::in)
 	{
 		if (!file_.is_open())
@@ -81,7 +82,7 @@ _BASE_BEGIN namespace file {
 		}
 	}
 
-	read_steam::read_steam(const std::string& filename)
+	read_stream::read_stream(const std::string& filename)
 		: file_(filename.c_str(), std::ios_base::in)
 	{
 		if (!file_.is_open())
@@ -90,7 +91,7 @@ _BASE_BEGIN namespace file {
 		}
 	}
 
-	read_steam::read_steam(const wchar_t* filename)
+	read_stream::read_stream(const wchar_t* filename)
 		: file_(filename, std::ios_base::in)
 	{
 		if (!file_.is_open())
@@ -99,7 +100,7 @@ _BASE_BEGIN namespace file {
 		}
 	}
 
-	read_steam::read_steam(const std::wstring& filename)
+	read_stream::read_stream(const std::wstring& filename)
 		: file_(filename.c_str(), std::ios_base::in)
 	{
 		if (!file_.is_open())
@@ -108,7 +109,7 @@ _BASE_BEGIN namespace file {
 		}
 	}
 
-	read_steam::read_steam(const boost::filesystem::path& filename)
+	read_stream::read_stream(const boost::filesystem::path& filename)
 		: file_(filename.c_str(), std::ios_base::in)
 	{
 		if (!file_.is_open())
@@ -116,4 +117,6 @@ _BASE_BEGIN namespace file {
 			throw exception(L"Can not open the file %s.", filename.c_str());
 		}
 	}
-}}
+}
+
+_BASE_END

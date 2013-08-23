@@ -161,9 +161,6 @@
     <ClCompile Include="ydwe\warcraft3\detail\convert_real.cpp">
       <Filter>ydwe\warcraft3\detail</Filter>
     </ClCompile>
-    <ClCompile Include="ydwe\file\steam.cpp">
-      <Filter>ydwe\file</Filter>
-    </ClCompile>
     <ClCompile Include="ydwe\win\process.cpp">
       <Filter>ydwe\win</Filter>
     </ClCompile>
@@ -205,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="ydwe\exception\system_exception.cpp">
       <Filter>ydwe\exception</Filter>
+    </ClCompile>
+    <ClCompile Include="ydwe\file\stream.cpp">
+      <Filter>ydwe\file</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -334,9 +334,6 @@
     <ClInclude Include="ydwe\lua\state.h">
       <Filter>ydwe\lua</Filter>
     </ClInclude>
-    <ClInclude Include="ydwe\file\steam.h">
-      <Filter>ydwe\file</Filter>
-    </ClInclude>
     <ClInclude Include="ydwe\win\process.h">
       <Filter>ydwe\win</Filter>
     </ClInclude>
@@ -417,6 +414,9 @@
     </ClInclude>
     <ClInclude Include="ydwe\exception\system_exception.h">
       <Filter>ydwe\exception</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\file\stream.h">
+      <Filter>ydwe\file</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@
 #include <slk/reader/MetaReader.hpp>
 #include <slk/writer/ObjWriter.hpp>
 #include <slk/converter/ConvertTable.hpp>
-#include <ydwe/file/steam.h>
+#include <ydwe/file/stream.h>
 
 namespace slk
 {
@@ -142,7 +142,7 @@ namespace slk
 
 	bool ObjectManager::save_file(const char* szFilename, buffer&& buf)
 	{
-		ydwe::file::write_steam(szFilename).write(std::forward<buffer>(buf));
+		ydwe::file::write_stream(szFilename).write(std::forward<buffer>(buf));
 		return false;
 	}
 	

@@ -1,5 +1,5 @@
 #include <ydwe/i18n/mofile.h>
-#include <ydwe/file/steam.h>
+#include <ydwe/file/stream.h>
 #include <ydwe/util/dynarray.h>
 
 _BASE_BEGIN 
@@ -100,7 +100,7 @@ namespace i18n {
 	mofile* mofile::read(boost::filesystem::path const& filename)
 	{
 		try {
-			std::unique_ptr<mofile> mf(new mofile(file::read_steam(filename).read<util::buffer>()));
+			std::unique_ptr<mofile> mf(new mofile(file::read_stream(filename).read<util::buffer>()));
 			if (mf->read())
 			{
 				return mf.release();
@@ -115,7 +115,7 @@ namespace i18n {
 	mofile* mofile::read(const char* filename)
 	{
 		try {
-			std::unique_ptr<mofile> mf(new mofile(file::read_steam(filename).read<util::buffer>()));
+			std::unique_ptr<mofile> mf(new mofile(file::read_stream(filename).read<util::buffer>()));
 			if (mf->read())
 			{
 				return mf.release();
