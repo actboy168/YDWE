@@ -214,7 +214,7 @@ namespace util {
 	};
 
 	class buffer_streambuf 
-		: public std::streambuf 
+		: public std::streambuf
 		, public noncopyable
 	{
 	public:
@@ -231,6 +231,21 @@ namespace util {
 			}
 
 			return traits_type::eof(); 
+		}
+	};
+
+	class buffer_stream 
+		: public std::iostream 
+		, public noncopyable
+	{
+	public:
+		buffer_stream(buffer& b) 
+			: std::iostream(new buffer_streambuf(b)) 
+		{ }
+
+		~buffer_stream() 
+		{
+			delete rdbuf();
 		}
 	};
 }
