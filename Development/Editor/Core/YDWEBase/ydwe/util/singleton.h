@@ -4,7 +4,8 @@
 
 _BASE_BEGIN namespace util {
 	template <typename object_type>
-	struct singleton_nonthreadsafe : public noncopyable
+	struct singleton_nonthreadsafe 
+		: private noncopyable
 	{
 	private:
 		singleton_nonthreadsafe();

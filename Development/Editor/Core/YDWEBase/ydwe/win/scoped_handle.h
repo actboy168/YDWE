@@ -9,7 +9,8 @@ _BASE_BEGIN
 namespace win {
 
 	template <HANDLE NullHandle>
-	class scoped_handle : public util::noncopyable
+	class scoped_handle 
+		: private util::noncopyable
 	{
 	public:
 		scoped_handle()

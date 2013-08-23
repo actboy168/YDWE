@@ -11,7 +11,7 @@ _BASE_BEGIN
 namespace util {
 
 	class buffer
-		: public noncopyable
+		: private noncopyable
 	{
 	public:
 		typedef std::vector<char>           buffer_type;
@@ -81,7 +81,7 @@ namespace util {
 	};
 
 	class buffer_reader
-		: public noncopyable
+		: private noncopyable
 	{
 	public:
 		typedef buffer::buffer_type         buffer_type;
@@ -215,7 +215,7 @@ namespace util {
 
 	class buffer_streambuf 
 		: public std::streambuf
-		, public noncopyable
+		, private noncopyable
 	{
 	public:
 		buffer_streambuf(buffer& b)
@@ -241,7 +241,7 @@ namespace util {
 
 	class buffer_stream 
 		: public std::iostream 
-		, public noncopyable
+		, private noncopyable
 	{
 	public:
 		buffer_stream(buffer& b) 

@@ -4,9 +4,13 @@
 #include <ydwe/util/noncopyable.h>
 #include <cstdint>
 
-_BASE_BEGIN namespace file {
+_BASE_BEGIN 
+namespace file {
 
-	class _BASE_API memory_mapped_file : public util::noncopyable
+#pragma warning(push)
+#pragma warning(disable:4275)
+	class _BASE_API memory_mapped_file 
+		: private util::noncopyable
 	{
 	public:
 		memory_mapped_file(const wchar_t* file_name);
@@ -22,4 +26,6 @@ _BASE_BEGIN namespace file {
 		size_t           cb_;
 		void*            memory_;
 	};
-}}
+#pragma warning(pop)
+}
+_BASE_END

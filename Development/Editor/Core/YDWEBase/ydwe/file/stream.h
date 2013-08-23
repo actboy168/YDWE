@@ -8,7 +8,11 @@
 _BASE_BEGIN 
 namespace file {
 
-	class _BASE_API stream: public util::noncopyable
+#pragma warning(push)
+#pragma warning(disable:4275)
+
+	class _BASE_API stream
+		: private util::noncopyable
 	{
 	public:
 		stream(const char* filename, std::ios_base::openmode mode);
@@ -38,6 +42,7 @@ namespace file {
 	};
 
 	class _BASE_API write_stream
+		: private util::noncopyable
 	{
 	public:
 		write_stream(const char* filename);
@@ -57,6 +62,7 @@ namespace file {
 	};
 
 	class _BASE_API read_stream
+		: private util::noncopyable
 	{
 	public:
 		read_stream(const char* filename);
@@ -74,5 +80,8 @@ namespace file {
 	private:
 		stream file_;
 	};
+
+#pragma warning(pop)
+#pragma warning(disable:4275)
 }
 _BASE_END
