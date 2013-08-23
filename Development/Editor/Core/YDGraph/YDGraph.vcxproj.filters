@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="graph">
+      <UniqueIdentifier>{ce3db547-4141-4ca7-997d-0ca3b8323291}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ydwe\graph\graph.cpp">
+      <Filter>graph</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ydwe\graph\graph.h">
+      <Filter>graph</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\graph\config.h">
+      <Filter>graph</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
