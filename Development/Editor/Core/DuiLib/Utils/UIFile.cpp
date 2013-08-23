@@ -61,8 +61,10 @@ namespace DuiLib
 				{
 					CUIBuffer buf;
 					buf.reset((size_t)current_entry_info->original_size());
-					reader.ExtractCurrentEntryToBuffer(buf.ptrData.get(), (size_t)current_entry_info->original_size());
-					return std::move(buf);
+					if (reader.ExtractCurrentEntryToBuffer(buf.ptrData.get(), (size_t)current_entry_info->original_size()))
+					{
+						return std::move(buf);
+					}
 				}
 			}
 		}
