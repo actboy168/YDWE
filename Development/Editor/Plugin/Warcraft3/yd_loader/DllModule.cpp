@@ -2,7 +2,7 @@
 #include "ParseCommandLine.h"
 #include "FullWindowedMode.h"
 #include <aero/function/fp_call.hpp>
-#include <ydwe/file/steam.h>
+#include <ydwe/file/stream.h>
 #include <ydwe/hook/iat.h>
 #include <ydwe/path/filesystem_helper.h>
 #include <ydwe/path/service.h>
@@ -154,7 +154,7 @@ void DllModule::LoadPlugins()
 
 		slk::IniTable table;
 		try {
-			slk::buffer buf = ydwe::file::read_steam(plugin_path / L"config.cfg").read<slk::buffer>();
+			slk::buffer buf = ydwe::file::read_stream(plugin_path / L"config.cfg").read<slk::buffer>();
 			slk::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		}
@@ -283,7 +283,7 @@ void DllModule::Attach()
 		ResetConfig(table);
 
 		try {
-			slk::buffer buf = ydwe::file::read_steam(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
+			slk::buffer buf = ydwe::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
 			slk::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		} 

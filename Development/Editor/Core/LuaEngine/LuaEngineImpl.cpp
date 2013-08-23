@@ -10,7 +10,7 @@
 #include <ydwe/path/service.h>
 #include <ydwe/path/self.h>
 #include <ydwe/win/file_version.h>
-#include <ydwe/file/steam.h>
+#include <ydwe/file/stream.h>
 
 #pragma warning(push)
 #pragma warning(disable: 4231)
@@ -199,7 +199,7 @@ bool LuaEngineImpl::LoadFile(boost::filesystem::path const& file_path)
 
 	try
 	{
-		std::vector<char> buffer = ydwe::file::read_steam(file_path).read<std::vector<char>>();
+		std::vector<char> buffer = ydwe::file::read_stream(file_path).read<std::vector<char>>();
 		LuaDoString(state_, buffer.data(), buffer.size(), name.c_str());
 		return true;
 	}

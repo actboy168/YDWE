@@ -137,7 +137,10 @@ namespace slk
 		};
 	}
 
-	class SLKLIB_API ObjectManager : public ydwe::util::noncopyable
+#pragma warning(push)
+#pragma warning(disable:4275)
+	class SLKLIB_API ObjectManager 
+		: private ydwe::util::noncopyable
 	{
 	public:
 		ObjectManager(InterfaceStorm& that);
@@ -204,4 +207,5 @@ namespace slk
 		TableMap<META_SLK_TYPE::ENUM, MetaTable>     meta_map_;
 		Converter                                    converter_;
 	};
+#pragma warning(pop)
 }
