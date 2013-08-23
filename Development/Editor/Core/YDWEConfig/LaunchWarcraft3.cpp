@@ -1,6 +1,6 @@
 
 #include <boost/filesystem.hpp>
-#include <ydwe/file/steam.h>
+#include <ydwe/file/stream.h>
 #include <ydwe/path/service.h>
 #include <ydwe/win/env_variable.h>
 #include <ydwe/win/process.h>
@@ -30,7 +30,7 @@ bool launch_warcraft3()
 		table["MapTest"]["LaunchOpenGL"]   = "0";
 		table["MapTest"]["LaunchWindowed"] = "1";
 		try {
-			slk::buffer buf = ydwe::file::read_steam(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
+			slk::buffer buf = ydwe::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
 			slk::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		} 

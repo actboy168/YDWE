@@ -8,7 +8,7 @@
 #include "Regedit.h"
 #include "Shortcuts.h"
 #include "Warcraft3Directory.h"
-#include <ydwe/file/steam.h>
+#include <ydwe/file/stream.h>
 #include <ydwe/path/self.h>
 #include <ydwe/path/service.h>
 #include <ydwe/path/filesystem_helper.h>
@@ -161,7 +161,7 @@ bool CMainWindow::LoadConfig(slk::IniTable& table)
 	try
 	{
 		ResetConfig(table);
-		slk::buffer buf = ydwe::file::read_steam(ydwe::path::self().remove_filename() / L"EverConfig.cfg").read<slk::buffer>();
+		slk::buffer buf = ydwe::file::read_stream(ydwe::path::self().remove_filename() / L"EverConfig.cfg").read<slk::buffer>();
 		slk::buffer_reader reader(buf);
 		slk::IniReader::Read(reader, table);
 	}
@@ -177,7 +177,7 @@ bool CMainWindow::SaveConfig(slk::IniTable const& table)
 {
 	try
 	{
-		ydwe::file::write_steam(ydwe::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
+		ydwe::file::write_stream(ydwe::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
 	}
 	catch (...)
 	{
@@ -391,7 +391,7 @@ void CMainWindow::InitPluginUI()
 
 		slk::IniTable table;
 		try {
-			slk::buffer buf = ydwe::file::read_steam(plugin_path / L"config.cfg").read<slk::buffer>();
+			slk::buffer buf = ydwe::file::read_stream(plugin_path / L"config.cfg").read<slk::buffer>();
 			slk::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);	
 		}
@@ -447,7 +447,7 @@ void CMainWindow::DonePluginUI()
 		}
 
 		fs::path plugin_path = m_ydwe_path.parent_path() / L"plugin" / L"warcraft3";
-		ydwe::file::write_steam(plugin_path/ L"config.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
+		ydwe::file::write_stream(plugin_path/ L"config.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
 	}
 	catch (...) {
 	}
