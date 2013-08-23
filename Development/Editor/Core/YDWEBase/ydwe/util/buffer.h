@@ -223,6 +223,11 @@ namespace util {
 			setg(&*b.begin(), &*b.begin(), &*b.begin() + b.size());
 		}
 
+		buffer_streambuf(char* first, char* last)
+		{ 
+			setg(first, first, last);
+		}
+
 		virtual std::streambuf::int_type underflow() 
 		{
 			if (gptr() < egptr())
@@ -241,6 +246,10 @@ namespace util {
 	public:
 		buffer_stream(buffer& b) 
 			: std::iostream(new buffer_streambuf(b)) 
+		{ }
+
+		buffer_stream(char* first, char* last) 
+			: std::iostream(new buffer_streambuf(first, last)) 
 		{ }
 
 		~buffer_stream() 
