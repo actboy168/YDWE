@@ -1,3 +1,4 @@
+*.bsc
 *.exp
 *.ilk
 *.lastbuildstate
@@ -5,4 +6,6 @@
 *.pyc
 *.suo
 *.user
+*.sdf
+*.opensdf
 Thumbs.db
