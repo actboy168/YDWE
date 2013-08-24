@@ -8,4 +8,5 @@
 *.user
 *.sdf
 *.opensdf
+*.ipch
 Thumbs.db
