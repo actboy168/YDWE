@@ -58,8 +58,6 @@ public:
     void SetItemTextStyle(UINT uStyle);
 	RECT GetItemTextPadding() const;
     void SetItemTextPadding(RECT rc);
-    bool IsItemShowHtml();
-    void SetItemShowHtml(bool bShowHtml = true);
 
     SIZE EstimateSize(SIZE szAvailable);
     void SetPos(RECT rc);

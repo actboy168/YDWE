@@ -100,13 +100,7 @@ namespace DuiLib
 		RECT rcText = { 0, 0, MAX(szAvailable.cx, m_cxyFixed.cx), 9999 };
 		rcText.left += m_rcTextPadding.left;
 		rcText.right -= m_rcTextPadding.right;
-		if( m_bShowHtml ) {   
-			int nLinks = 0;
-			CRenderEngine::DrawHtmlText(m_pManager->GetPaintDC(), m_pManager, rcText, GetText().c_str(), m_dwTextColor, NULL, NULL, nLinks, DT_CALCRECT | m_uTextStyle);
-		}
-		else {
-			CRenderEngine::DrawText(m_pManager->GetPaintDC(), m_pManager, rcText, GetText().c_str(), m_dwTextColor, m_iFont, DT_CALCRECT | m_uTextStyle);
-		}
+		CRenderEngine::DrawText(m_pManager->GetPaintDC(), m_pManager, rcText, GetText().c_str(), m_dwTextColor, m_iFont, DT_CALCRECT | m_uTextStyle);
 		SIZE cXY = {rcText.right - rcText.left + m_rcTextPadding.left + m_rcTextPadding.right,
 			rcText.bottom - rcText.top + m_rcTextPadding.top + m_rcTextPadding.bottom};
 
@@ -132,21 +126,11 @@ namespace DuiLib
 		rc.right -= m_rcTextPadding.right;
 		rc.top += m_rcTextPadding.top;
 		rc.bottom -= m_rcTextPadding.bottom;
-		if( IsEnabled() ) {
-			if( m_bShowHtml )
-				CRenderEngine::DrawHtmlText(hDC, m_pManager, rc, GetText().c_str(), m_dwTextColor, \
-				m_rcLinks, m_sLinks, m_nLinks, m_uTextStyle);
-			else
-				CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), m_dwTextColor, \
-				m_iFont, m_uTextStyle);
+		if( IsEnabled() ) { 
+			CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), m_dwTextColor, m_iFont, m_uTextStyle);
 		}
 		else {
-			if( m_bShowHtml )
-				CRenderEngine::DrawHtmlText(hDC, m_pManager, rc, GetText().c_str(), m_dwDisabledTextColor, \
-				m_rcLinks, m_sLinks, m_nLinks, m_uTextStyle);
-			else
-				CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), m_dwDisabledTextColor, \
-				m_iFont, m_uTextStyle);
+			CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), m_dwDisabledTextColor, m_iFont, m_uTextStyle);
 		}
 	}
 }

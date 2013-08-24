@@ -4,7 +4,7 @@
 namespace DuiLib
 {
 	CLabelUI::CLabelUI() : m_uTextStyle(DT_VCENTER), m_dwTextColor(0), 
-		m_dwDisabledTextColor(0), m_iFont(-1), m_bShowHtml(false)
+		m_dwDisabledTextColor(0), m_iFont(-1)
 	{
 		::ZeroMemory(&m_rcTextPadding, sizeof(m_rcTextPadding));
 	}
@@ -77,19 +77,6 @@ namespace DuiLib
 	void CLabelUI::SetTextPadding(RECT rc)
 	{
 		m_rcTextPadding = rc;
-		Invalidate();
-	}
-
-	bool CLabelUI::IsShowHtml()
-	{
-		return m_bShowHtml;
-	}
-
-	void CLabelUI::SetShowHtml(bool bShowHtml)
-	{
-		if( m_bShowHtml == bShowHtml ) return;
-
-		m_bShowHtml = bShowHtml;
 		Invalidate();
 	}
 
@@ -177,7 +164,6 @@ namespace DuiLib
 			rcTextPadding.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
 			SetTextPadding(rcTextPadding);
 		}
-		else if( _tcscmp(pstrName, _T("showhtml")) == 0 ) SetShowHtml(_tcscmp(pstrValue, _T("true")) == 0);
 		else CControlUI::SetAttribute(pstrName, pstrValue);
 	}
 
@@ -194,20 +180,10 @@ namespace DuiLib
 		rc.top += m_rcTextPadding.top;
 		rc.bottom -= m_rcTextPadding.bottom;
 		if( IsEnabled() ) {
-			if( m_bShowHtml )
-				CRenderEngine::DrawHtmlText(hDC, m_pManager, rc, GetText().c_str(), m_dwTextColor, \
-				NULL, NULL, nLinks, DT_SINGLELINE | m_uTextStyle);
-			else
-				CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), m_dwTextColor, \
-				m_iFont, DT_SINGLELINE | m_uTextStyle);
+			CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), m_dwTextColor, m_iFont, DT_SINGLELINE | m_uTextStyle);
 		}
 		else {
-			if( m_bShowHtml )
-				CRenderEngine::DrawHtmlText(hDC, m_pManager, rc, GetText().c_str(), m_dwDisabledTextColor, \
-				NULL, NULL, nLinks, DT_SINGLELINE | m_uTextStyle);
-			else
-				CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), m_dwDisabledTextColor, \
-				m_iFont, DT_SINGLELINE | m_uTextStyle);
+			CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), m_dwDisabledTextColor, m_iFont, DT_SINGLELINE | m_uTextStyle);
 		}
 	}
 }

@@ -192,12 +192,7 @@ namespace DuiLib
 		else if( ((m_uButtonState & UISTATE_FOCUSED) != 0) && (m_dwFocusedTextColor != 0) )
 			clrColor = m_dwFocusedTextColor;
 
-		if( m_bShowHtml )
-			CRenderEngine::DrawHtmlText(hDC, m_pManager, rc, GetText().c_str(), clrColor, \
-			NULL, NULL, nLinks, m_uTextStyle);
-		else
-			CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), clrColor, \
-			m_iFont, m_uTextStyle);
+		CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), clrColor, m_iFont, m_uTextStyle);
 	}
 
 	void CButtonUI::PaintStatusImage(HDC hDC)

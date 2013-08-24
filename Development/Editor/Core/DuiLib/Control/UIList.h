@@ -19,7 +19,6 @@ public:
     int nColumns;
     RECT rcColumn[UILIST_MAX_COLUMNS];
 	int nFont;
-	bool bShowHtml;
     UINT uTextStyle;
     RECT rcTextPadding;
 	bool bMultiExpandable;
@@ -162,8 +161,6 @@ public:
     void SetItemFont(int index);
     void SetItemTextStyle(UINT uStyle);
     void SetItemTextPadding(RECT rc);
-    bool IsItemShowHtml();
-    void SetItemShowHtml(bool bShowHtml = true);
 	RECT GetItemTextPadding() const;
 
     void SetMultiExpanding(bool bMultiExpandable); 
@@ -262,8 +259,6 @@ public:
 	void SetTextPadding(RECT rc);
 	RECT GetTextPadding() const;
     void SetFont(int index);
-    bool IsShowHtml();
-    void SetShowHtml(bool bShowHtml = true);
 
     void DoEvent(TEventUI& event);
     SIZE EstimateSize(SIZE szAvailable);
@@ -281,7 +276,6 @@ protected:
     DWORD m_dwTextColor;
     int m_iFont;
     UINT m_uTextStyle;
-    bool m_bShowHtml;
 	RECT m_rcTextPadding;
 
 #pragma warning(push)

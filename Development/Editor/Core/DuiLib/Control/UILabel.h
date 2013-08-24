@@ -25,9 +25,7 @@ namespace DuiLib
 		void SetFont(int index);
 		int  GetFont() const;
 		RECT GetTextPadding() const;
-		void SetTextPadding(RECT rc);
-		bool IsShowHtml();
-		void SetShowHtml(bool bShowHtml = true);
+		void SetTextPadding(RECT rc);;
 
 		SIZE EstimateSize(SIZE szAvailable);
 		void DoEvent(TEventUI& event);
@@ -45,7 +43,6 @@ namespace DuiLib
 		int   m_iFont;
 		UINT  m_uTextStyle;
 		RECT  m_rcTextPadding;
-		bool  m_bShowHtml;
 	};
 }
 

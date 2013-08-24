@@ -219,7 +219,6 @@ CComboUI::CComboUI() : m_pWindow(NULL), m_iCurSel(-1), m_uButtonState(0)
     m_ListInfo.SetDisabledTextColor(0xFFCCCCCC);
     m_ListInfo.SetDisabledBkColor(0xFFFFFFFF);
     m_ListInfo.SetLineColor(0);
-    m_ListInfo.bShowHtml = false;
     m_ListInfo.bMultiExpandable = false;
     ::ZeroMemory(&m_ListInfo.rcTextPadding, sizeof(m_ListInfo.rcTextPadding));
     ::ZeroMemory(&m_ListInfo.rcColumn, sizeof(m_ListInfo.rcColumn));
@@ -616,19 +615,6 @@ void CComboUI::SetItemTextPadding(RECT rc)
     Invalidate();
 }
 
-bool CComboUI::IsItemShowHtml()
-{
-    return m_ListInfo.bShowHtml;
-}
-
-void CComboUI::SetItemShowHtml(bool bShowHtml)
-{
-    if( m_ListInfo.bShowHtml == bShowHtml ) return;
-
-    m_ListInfo.bShowHtml = bShowHtml;
-    Invalidate();
-}
-
 void CComboUI::SetPos(RECT rc)
 {
     // Put all elements out of sight
@@ -746,7 +732,6 @@ void CComboUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetLineColor(clrColor);
     }
-    else if( _tcscmp(pstrName, _T("itemshowhtml")) == 0 ) SetItemShowHtml(_tcscmp(pstrValue, _T("true")) == 0);
     else CContainerUI::SetAttribute(pstrName, pstrValue);
 }
 

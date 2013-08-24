@@ -145,10 +145,7 @@ Label_ForeImage:
 			if( ((m_uButtonState & UISTATE_PUSHED) != 0) && (m_dwSelectedPushedTextColor != 0) )
 				clrColor = m_dwSelectedPushedTextColor;
 
-			if( m_bShowHtml )
-				CRenderEngine::DrawHtmlText(hDC, m_pManager, rc, GetText().c_str(), clrColor, NULL, NULL, nLinks, m_uTextStyle);
-			else
-				CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), clrColor, m_iFont, m_uTextStyle);
+			CRenderEngine::DrawText(hDC, m_pManager, rc, GetText().c_str(), clrColor, m_iFont, m_uTextStyle);
 
 			m_dwTextColor = oldTextColor;
 		}

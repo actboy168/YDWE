@@ -148,7 +148,6 @@ CListUI::CListUI() : m_pCallback(NULL), m_bScrollSelect(false), m_iCurSel(-1), m
     m_ListInfo.SetDisabledTextColor(0xFFCCCCCC);
     m_ListInfo.SetDisabledBkColor(0xFFFFFFFF);
     m_ListInfo.SetLineColor(0);
-    m_ListInfo.bShowHtml = false;
     m_ListInfo.bMultiExpandable = false;
     ::ZeroMemory(&m_ListInfo.rcTextPadding, sizeof(m_ListInfo.rcTextPadding));
     ::ZeroMemory(&m_ListInfo.rcColumn, sizeof(m_ListInfo.rcColumn));
@@ -531,19 +530,6 @@ RECT CListUI::GetItemTextPadding() const
 	return m_ListInfo.rcTextPadding;
 }
 
-bool CListUI::IsItemShowHtml()
-{
-    return m_ListInfo.bShowHtml;
-}
-
-void CListUI::SetItemShowHtml(bool bShowHtml)
-{
-    if( m_ListInfo.bShowHtml == bShowHtml ) return;
-
-    m_ListInfo.bShowHtml = bShowHtml;
-    NeedUpdate();
-}
-
 void CListUI::SetMultiExpanding(bool bMultiExpandable)
 {
     m_ListInfo.bMultiExpandable = bMultiExpandable;
@@ -701,7 +687,6 @@ void CListUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetLineColor(clrColor);
     }
-    else if( _tcscmp(pstrName, _T("itemshowhtml")) == 0 ) SetItemShowHtml(_tcscmp(pstrValue, _T("true")) == 0);
     else CVerticalLayoutUI::SetAttribute(pstrName, pstrValue);
 }
 
@@ -1060,7 +1045,7 @@ SIZE CListHeaderUI::EstimateSize(SIZE szAvailable)
 //
 
 CListHeaderItemUI::CListHeaderItemUI() : m_bDragable(true), m_uButtonState(0), m_iSepWidth(4),
-m_uTextStyle(DT_VCENTER | DT_CENTER | DT_SINGLELINE), m_dwTextColor(0), m_iFont(-1), m_bShowHtml(false)
+m_uTextStyle(DT_VCENTER | DT_CENTER | DT_SINGLELINE), m_dwTextColor(0), m_iFont(-1)
 {
 	SetTextPadding(CDuiRect(2, 0, 2, 0));
     ptLastMouse.x = ptLastMouse.y = 0;
@@ -1145,19 +1130,6 @@ void CListHeaderItemUI::SetFont(int index)
     m_iFont = index;
 }
 
-bool CListHeaderItemUI::IsShowHtml()
-{
-    return m_bShowHtml;
-}
-
-void CListHeaderItemUI::SetShowHtml(bool bShowHtml)
-{
-    if( m_bShowHtml == bShowHtml ) return;
-
-    m_bShowHtml = bShowHtml;
-    Invalidate();
-}
-
 void CListHeaderItemUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 {
     if( _tcscmp(pstrName, _T("dragable")) == 0 ) SetDragable(_tcscmp(pstrValue, _T("true")) == 0);
@@ -1196,7 +1168,6 @@ void CListHeaderItemUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 		rcTextPadding.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
 		SetTextPadding(rcTextPadding);
 	}
-    else if( _tcscmp(pstrName, _T("showhtml")) == 0 ) SetShowHtml(_tcscmp(pstrValue, _T("true")) == 0);
     else if( _tcscmp(pstrName, _T("normalimage")) == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
     else if( _tcscmp(pstrName, _T("hotimage")) == 0 ) m_sHotImage.reset(new CImage(pstrValue));
     else if( _tcscmp(pstrName, _T("pushedimage")) == 0 ) m_sPushedImage.reset(new CImage(pstrValue));
@@ -1368,12 +1339,7 @@ void CListHeaderItemUI::PaintText(HDC hDC)
 
     if (GetText().empty()) return;
     int nLinks = 0;
-    if( m_bShowHtml )
-        CRenderEngine::DrawHtmlText(hDC, m_pManager, rcText, GetText().c_str(), m_dwTextColor, \
-        NULL, NULL, nLinks, DT_SINGLELINE | m_uTextStyle);
-    else
-        CRenderEngine::DrawText(hDC, m_pManager, rcText, GetText().c_str(), m_dwTextColor, \
-        m_iFont, DT_SINGLELINE | m_uTextStyle);
+    CRenderEngine::DrawText(hDC, m_pManager, rcText, GetText().c_str(), m_dwTextColor,  m_iFont, DT_SINGLELINE | m_uTextStyle);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -1682,13 +1648,7 @@ SIZE CListLabelElementUI::EstimateSize(SIZE szAvailable)
 
     if( cXY.cx == 0 && m_pManager != NULL ) {
         RECT rcText = { 0, 0, 9999, cXY.cy };
-        if( pInfo->bShowHtml ) {
-            int nLinks = 0;
-            CRenderEngine::DrawHtmlText(m_pManager->GetPaintDC(), m_pManager, rcText, GetText().c_str(), 0, NULL, NULL, nLinks, DT_SINGLELINE | DT_CALCRECT | pInfo->uTextStyle & ~DT_RIGHT & ~DT_CENTER);
-        }
-        else {
-            CRenderEngine::DrawText(m_pManager->GetPaintDC(), m_pManager, rcText, GetText().c_str(), 0, pInfo->nFont, DT_SINGLELINE | DT_CALCRECT | pInfo->uTextStyle & ~DT_RIGHT & ~DT_CENTER);
-        }
+        CRenderEngine::DrawText(m_pManager->GetPaintDC(), m_pManager, rcText, GetText().c_str(), 0, pInfo->nFont, DT_SINGLELINE | DT_CALCRECT | pInfo->uTextStyle & ~DT_RIGHT & ~DT_CENTER);
         cXY.cx = rcText.right - rcText.left + pInfo->rcTextPadding.left + pInfo->rcTextPadding.right;        
     }
 
@@ -1724,13 +1684,7 @@ void CListLabelElementUI::DrawItemText(HDC hDC, const RECT& rcItem)
     rcText.right -= pInfo->rcTextPadding.right;
     rcText.top += pInfo->rcTextPadding.top;
     rcText.bottom -= pInfo->rcTextPadding.bottom;
-
-    if( pInfo->bShowHtml )
-        CRenderEngine::DrawHtmlText(hDC, m_pManager, rcText, GetText().c_str(), iTextColor, \
-        NULL, NULL, nLinks, DT_SINGLELINE | pInfo->uTextStyle);
-    else
-        CRenderEngine::DrawText(hDC, m_pManager, rcText, GetText().c_str(), iTextColor, \
-        pInfo->nFont, DT_SINGLELINE | pInfo->uTextStyle);
+    CRenderEngine::DrawText(hDC, m_pManager, rcText, GetText().c_str(), iTextColor, pInfo->nFont, DT_SINGLELINE | pInfo->uTextStyle);
 }
 
 
@@ -1893,12 +1847,7 @@ void CListTextElementUI::DrawItemText(HDC hDC, const RECT& rcItem)
         CDuiString strText;//不使用LPCTSTR，否则限制太多 by cddjr 2011/10/20
         if( pCallback ) strText = pCallback->GetItemText(this, m_iIndex, i);
         else strText.Assign(GetText(i));
-        if( pInfo->bShowHtml )
-            CRenderEngine::DrawHtmlText(hDC, m_pManager, rcItem, strText.GetData(), iTextColor, \
-                &m_rcLinks[m_nLinks], &m_sLinks[m_nLinks], nLinks, DT_SINGLELINE | pInfo->uTextStyle);
-        else
-            CRenderEngine::DrawText(hDC, m_pManager, rcItem, strText.GetData(), iTextColor, \
-            pInfo->nFont, DT_SINGLELINE | pInfo->uTextStyle);
+        CRenderEngine::DrawText(hDC, m_pManager, rcItem, strText.GetData(), iTextColor, pInfo->nFont, DT_SINGLELINE | pInfo->uTextStyle);
 
         m_nLinks += nLinks;
         nLinks = lengthof(m_rcLinks) - m_nLinks; 
