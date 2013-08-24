@@ -158,7 +158,6 @@
     <ClCompile Include="Layout\UITabLayout.cpp" />
     <ClCompile Include="Layout\UITileLayout.cpp" />
     <ClCompile Include="Layout\UIVerticalLayout.cpp" />
-    <ClCompile Include="Control\UIActiveX.cpp" />
     <ClCompile Include="Control\UIButton.cpp" />
     <ClCompile Include="Control\UIRadioButton.cpp" />
     <ClCompile Include="Control\UICombo.cpp" />
@@ -173,7 +172,6 @@
     <ClCompile Include="Control\UISlider.cpp" />
     <ClCompile Include="Control\UIText.cpp" />
     <ClCompile Include="Control\UITreeView.cpp" />
-    <ClCompile Include="Control\UIWebBrowser.cpp" />
     <ClCompile Include="Utils\zip_internal.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -199,13 +197,11 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="UIlib.h" />
-    <ClInclude Include="Utils\downloadmgr.h" />
     <ClInclude Include="Utils\format.h" />
     <ClInclude Include="Utils\FrameWindow.h" />
     <ClInclude Include="Utils\UIDelegate.h" />
     <ClInclude Include="Utils\UIFile.h" />
     <ClInclude Include="Utils\Utils.h" />
-    <ClInclude Include="Utils\WebBrowserEventHandler.h" />
     <ClInclude Include="Core\UIBase.h" />
     <ClInclude Include="Core\UIContainer.h" />
     <ClInclude Include="Core\UIControl.h" />
@@ -219,7 +215,6 @@
     <ClInclude Include="Layout\UITabLayout.h" />
     <ClInclude Include="Layout\UITileLayout.h" />
     <ClInclude Include="Layout\UIVerticalLayout.h" />
-    <ClInclude Include="Control\UIActiveX.h" />
     <ClInclude Include="Control\UIButton.h" />
     <ClInclude Include="Control\UIRadioButton.h" />
     <ClInclude Include="Control\UICombo.h" />
@@ -234,7 +229,6 @@
     <ClInclude Include="Control\UISlider.h" />
     <ClInclude Include="Control\UIText.h" />
     <ClInclude Include="Control\UITreeView.h" />
-    <ClInclude Include="Control\UIWebBrowser.h" />
     <ClInclude Include="Utils\zip_internal.h" />
     <ClInclude Include="Utils\zip_reader.h" />
   </ItemGroup>

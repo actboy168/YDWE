@@ -99,9 +99,6 @@
     <ClCompile Include="Layout\UIVerticalLayout.cpp">
       <Filter>Source Files\Layout</Filter>
     </ClCompile>
-    <ClCompile Include="Control\UIActiveX.cpp">
-      <Filter>Source Files\Control</Filter>
-    </ClCompile>
     <ClCompile Include="Control\UIButton.cpp">
       <Filter>Source Files\Control</Filter>
     </ClCompile>
@@ -139,9 +136,6 @@
       <Filter>Source Files\Control</Filter>
     </ClCompile>
     <ClCompile Include="Control\UITreeView.cpp">
-      <Filter>Source Files\Control</Filter>
-    </ClCompile>
-    <ClCompile Include="Control\UIWebBrowser.cpp">
       <Filter>Source Files\Control</Filter>
     </ClCompile>
     <ClCompile Include="Control\UICheckBox.cpp">
@@ -194,16 +188,10 @@
     <ClInclude Include="UIlib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\downloadmgr.h">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Utils\UIDelegate.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Utils\Utils.h">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils\WebBrowserEventHandler.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Core\UIBase.h">
@@ -245,9 +233,6 @@
     <ClInclude Include="Layout\UIVerticalLayout.h">
       <Filter>Header Files\Layout</Filter>
     </ClInclude>
-    <ClInclude Include="Control\UIActiveX.h">
-      <Filter>Header Files\Control</Filter>
-    </ClInclude>
     <ClInclude Include="Control\UIButton.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
@@ -285,9 +270,6 @@
       <Filter>Header Files\Control</Filter>
     </ClInclude>
     <ClInclude Include="Control\UITreeView.h">
-      <Filter>Header Files\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Control\UIWebBrowser.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
     <ClInclude Include="Control\UICheckBox.h">

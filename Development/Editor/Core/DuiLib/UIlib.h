@@ -105,7 +105,4 @@ namespace fs = boost::filesystem;
 #include "Control/UIRichEdit.h"
 #include "Control/UIDateTime.h"
 
-#include "Control/UIActiveX.h"
-#include "Control/UIWebBrowser.h"
-
 #endif

@@ -263,7 +263,6 @@ protected:                                                                \
 
 #define  DUI_CTR_LISTCONTAINERELEMENT            (_T("ListContainerElement"))
 
-//#define DUI_USE_ACTIVEX
 //#define DUI_USE_COMBOBOX
 //#define DUI_USE_DATETIME
 //#define DUI_USE_EDIT
@@ -271,17 +270,10 @@ protected:                                                                \
 //#define DUI_USE_RICHEDIT
 //#define DUI_USE_SLIDER
 //#define DUI_USE_TEXT
-//#define DUI_USE_WEBBROWSER
 
 #ifdef DUI_USE_SLIDER
 #	ifndef DUI_USE_PROGRESS
 #		define DUI_USE_PROGRESS
-#	endif
-#endif
-
-#ifdef DUI_USE_WEBBROWSER
-#	ifndef DUI_USE_ACTIVEX
-#		define DUI_USE_ACTIVEX
 #	endif
 #endif
 

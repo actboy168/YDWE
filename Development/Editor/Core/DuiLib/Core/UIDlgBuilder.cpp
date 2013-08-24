@@ -332,9 +332,6 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
                 break;
             case 7:		
 				if( _tcscmp(pstrClass, DUI_CTR_CONTROL) == 0 )                { pControl = new CControlUI; break; }
-#ifdef DUI_USE_ACTIVEX
-				if( _tcscmp(pstrClass, DUI_CTR_ACTIVEX) == 0 )                { pControl = new CActiveXUI; break; }
-#endif
 				if( _tcscmp(pstrClass, DUI_CTR_CHECKBOX) == 0 )               { pControl = new CCheckBoxUI; break; }
                 break;
 			case 8:		
@@ -361,9 +358,6 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
             case 10:
                 if( _tcscmp(pstrClass, DUI_CTR_LISTHEADER) == 0 )             { pControl = new CListHeaderUI; break; }
                 if( _tcscmp(pstrClass, DUI_CTR_TILELAYOUT) == 0 )             { pControl = new CTileLayoutUI; break; }
-#ifdef DUI_USE_WEBBROWSER
-				if( _tcscmp(pstrClass, DUI_CTR_WEBBROWSER) == 0 )             { pControl = new CWebBrowserUI; break; }
-#endif
                 break;	
 			case 11:	
 				if (_tcscmp(pstrClass, DUI_CTR_CHILDLAYOUT) == 0)			  { pControl = new CChildLayoutUI; break; }
