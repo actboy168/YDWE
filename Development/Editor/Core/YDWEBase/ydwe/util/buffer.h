@@ -238,6 +238,9 @@ namespace util {
 			return traits_type::eof(); 
 		}
 	};
+	  	   
+#pragma warning(push)
+#pragma warning(disable: 4250)
 
 	class buffer_stream 
 		: public std::iostream 
@@ -256,6 +259,7 @@ namespace util {
 		{
 			delete rdbuf();
 		}
-	};
+	};		 
+#pragma warning(pop)
 }
 _BASE_END

@@ -3,6 +3,7 @@
 #include <ydwe/config.h>
 #include <Windows.h>
 #include <list>
+#include <memory>
 
 _BASE_BEGIN namespace hook {
 	namespace detail
