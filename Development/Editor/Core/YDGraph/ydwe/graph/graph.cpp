@@ -62,9 +62,8 @@ namespace ydwe { namespace graph {
 						{
 							p = zero_pixel;
 							alpha_channel = true;
-						} 
-
-						if (p[3] < 255)
+						}
+						else if (p[3] < 255)
 						{
 							p[0] = p[0] * p[3] / 255;
 							p[1] = p[1] * p[3] / 255;
