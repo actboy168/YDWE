@@ -4,11 +4,11 @@
  * Purpose:     Root header for the STLSoft implementation of RangeLib.
  *
  * Created:     12th October 2004
- * Updated:     10th August 2009
+ * Updated:     2nd March 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2004-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2004-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,9 +43,9 @@
 
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define RANGELIB_VER_RANGELIB_HPP_RANGELIB_MAJOR    1
-# define RANGELIB_VER_RANGELIB_HPP_RANGELIB_MINOR    3
-# define RANGELIB_VER_RANGELIB_HPP_RANGELIB_REVISION 3
-# define RANGELIB_VER_RANGELIB_HPP_RANGELIB_EDIT     28
+# define RANGELIB_VER_RANGELIB_HPP_RANGELIB_MINOR    4
+# define RANGELIB_VER_RANGELIB_HPP_RANGELIB_REVISION 1
+# define RANGELIB_VER_RANGELIB_HPP_RANGELIB_EDIT     29
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /** \file rangelib/rangelib.hpp
@@ -118,12 +118,13 @@
 # define _RANGELIB_VER_1_0_4    0x00010004  /*!< Version 1.0.4 */
 # define _RANGELIB_VER_1_1_1    0x00010101  /*!< Version 1.1.1 (with STLSoft 1.9.1) */
 # define _RANGELIB_VER_1_1_2    0x00010102  /*!< Version 1.1.2 (with STLSoft 1.9.25) */
+# define _RANGELIB_VER_1_1_3    0x010103ff  /*!< Version 1.1.3 (with STLSoft 1.9.113) */
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 #define _RANGELIB_VER_MAJOR     1
 #define _RANGELIB_VER_MINOR     1
-#define _RANGELIB_VER_REVISION  2
-#define _RANGELIB_VER           _RANGELIB_VER_1_1_2
+#define _RANGELIB_VER_REVISION  3
+#define _RANGELIB_VER           _RANGELIB_VER_1_1_3
 
 /* /////////////////////////////////////////////////////////////////////////
  * Auto-generation and compatibility
@@ -147,9 +148,9 @@ STLSOFT_COMPILER_IS_MSVC:     _MSC_VER < 1200
  * STLSoft version compatibility
  */
 
-#if !defined(_STLSOFT_VER_1_9_1_B41) || \
-    _STLSOFT_VER < _STLSOFT_VER_1_9_1_B41
-# error RangeLib is only compatible with STLSoft version 1.9.1 beta 41, or later
+#if !defined(_STLSOFT_VER) || \
+    _STLSOFT_VER < 0x010971ff
+# error RangeLib is only compatible with STLSoft version 1.9.113, or later
 #endif /* _STLSOFT_VER */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -170,9 +171,9 @@ STLSOFT_COMPILER_IS_MSVC:     _MSC_VER < 1200
 # if __BORLANDC__ < 0x0560
 #  error Versions of Borland C++ prior to 5.6 are not supported by the RangeLib libraries
 # elif __BORLANDC__ <= 0x0564
-#  if defined(_STLSOFT_COMPILE_VERBOSE)
+#  if defined(STLSOFT_COMPILE_VERBOSE)
 #   pragma message("RangeLib is only partially supported on Borland C/C++ versions 5.6 and 5.6.4")
-#  endif /* _STLSOFT_COMPILE_VERBOSE */
+#  endif /* STLSOFT_COMPILE_VERBOSE */
 # endif /* __BORLANDC__ */
 
 #elif defined(STLSOFT_COMPILER_IS_COMO)
@@ -212,18 +213,18 @@ STLSOFT_COMPILER_IS_MSVC:     _MSC_VER < 1200
 # if _MSC_VER < 1200
 #  error Versions of Visual C++ prior to 5.0 are not supported by the RangeLib libraries
 # elif _MSC_VER < 1310
-#  if defined(_STLSOFT_COMPILE_VERBOSE)
+#  if defined(STLSOFT_COMPILE_VERBOSE)
 #   pragma message("RangeLib is only partially supported on Visual C++ versions 6.0 and 7.0")
-#  endif /* _STLSOFT_COMPILE_VERBOSE */
+#  endif /* STLSOFT_COMPILE_VERBOSE */
 # endif /* _MSC_VER */
 
 #else /* ? compiler */
 /* No recognised compiler */
 # ifdef _STLSOFT_FORCE_ANY_COMPILER
 #  define _RANGELIB_COMPILER_IS_UNKNOWN
-#  ifdef _STLSOFT_COMPILE_VERBOSE
+#  ifdef STLSOFT_COMPILE_VERBOSE
 #   pragma message("Compiler is unknown to RangeLib")
-#  endif /* _STLSOFT_COMPILE_VERBOSE */
+#  endif /* STLSOFT_COMPILE_VERBOSE */
 # else /* ? _STLSOFT_FORCE_ANY_COMPILER */
 #  error Currently only Borland C++, Digital Mars C/C++, Intel C/C++, Metrowerks CodeWarrior and Visual C++ compilers are supported by the RangeLib libraries
 # endif /* _STLSOFT_FORCE_ANY_COMPILER */

@@ -2,7 +2,7 @@
 STLSoft - Changes
 
 ; Created:  29th March 2002
-; Updated:  7th February 2012
+; Updated:  16th February 2013
 
 ============================================================================
 
@@ -15,6 +15,282 @@ STLSoft - Changes
    *   *  means a general bullet-point  *
    *                                    *
    **************************************
+
+============================================================================
+
+Changes for 1.9.117 (16th February 2013)
+
+Summary:
+========
+
+ * added Visual C++ 11 compatibility
+ * various minor changes
+
+Changes:
+========
+
+ STLSoft:
+ ========
+
+ ~ stlsoft/stlsoft.h:
+ ~ stlsoft/util/std/iterator_helper.hpp:
+ ~ stlsoft/util/std/library_discriminator.hpp:
+    + added Visual C++ 11 compatibility
+
+ ~ stlsoft/string/char_traits.hpp:
+    ~ defect fix
+
+ WinSTL:
+ =======
+
+ ~ winstl/error/error_desc.hpp:
+    ~ trivial correction
+
+ ~ winstl/filesystem/directory_functions.hpp:
+    ~ propagates failed sub-directory removal up to caller
+    ~ fixing up of documentation of callback function semantics
+
+ ~ winstl/system/console_functions.h:
+    ~ fixing doc
+
+ ~ winstl/system/environment_variable.hpp:
+    ~ trivial tightening of pointer null
+
+
+============================================================================
+
+Changes for 1.9.116 (19th August 2012)
+
+Summary:
+========
+
+ * fixed defect in winstl::pipe::close_write()
+ * various other minor warning suppression and reformatting
+
+Changes:
+========
+
+ STLSoft:
+ ========
+
+ ~ stlsoft/util/sign_traits.hpp:
+    ~ VC++ 6 compatibility (with short)
+
+ UNIXSTL:
+ ========
+
+ ~ unixstl/filesystem/readdir_sequence.hpp:
+    ~ semantically-meaningless reformatting (to ease diffs with STLSoft 1.10 version)
+
+ WinSTL:
+ =======
+
+ ~ winstl/filesystem/pipe.hpp:
+    ~ fixed defective close_write()
+
+ ~ winstl/time/format_functions.hpp:
+    ~ avoid truncation warning
+
+
+============================================================================
+
+Changes for 1.9.115 (31st July 2012)
+
+Summary:
+========
+
+ * stlsoft::integer_to_string() new overloads with out-parameter as pointer; deprecated overloads with out-parameter as reference
+ * winstl::integral_printf_traits added octal_format_a/w(), hexadecimal_format_a/w(), decimal_format_a/w(); deprecated format_a/w() and hex_format_a/w() methods, and size_min, size_max, and size member constants
+ * Windows 7-compatibility for winstl::drophandle_sequence
+ * winstl::spin_mutex now uses SwitchToThread if _WIN32_WINNT >= 0x0400
+ * added winstl::added GetTimeFormat_msExA/W() by which custom time markers can be specified
+
+Changes:
+========
+
+ STLSoft:
+ ========
+
+ ~ stlsoft/conversion/integer_to_string.hpp:
+    + added overloads taking pointer out-parameter (for retrieval of written length)
+    ~ deprecated overloads taking reference out-parameter (for retrieval of written length)
+    ~ preparation for fwd-compatible changes
+
+ ~ stlsoft/internal/cccap/msvc.h:
+    + support for static_assert (VC++ 10+)
+    + added STLSOFT_MSVC_VER
+    ~ recognition of 'long long' support for VC++8+
+
+ + stlsoft/internal/head_version.h:
+ + stlsoft/internal/lead_version.h:
+    + added head and lead version for STLSoft 1.9
+
+ ~ stlsoft/stlsoft.h:
+    + added remove_const_ptr()
+    + added apply_const_ptr()
+    + added inclusions for stlsoft/internal/head_version.h, which defines STLSOFT_HEAD_VER
+    + added inclusions for stlsoft/internal/lead_version.h, which defines STLSOFT_LEAD_VER
+    ~ now uses static_assert (in STLSOFT_STATIC_ASSERT()), when supported
+
+ ~ stlsoft/string/split_functions.hpp:
+    ~ moved worker functions into nested namespace stlsoft::ximpl_split_functions
+
+ ~ stlsoft/string/view_slice_functions.hpp:
+    ~ GCC compatibility (because of duff shims/template handling)
+
+ ~ stlsoft/util/integral_printf_traits.hpp:
+    ~ size_min, size_max, and size member constants are now deprecated
+    ~ moved integral_printf_traits_base into internal namespace ximpl_integral_printf_traits
+    + added octal_format_a()
+    + added octal_format_w()
+    + added hexadecimal_format_a()
+    + added hexadecimal_format_w()
+    ~ deprecated hex_format_a()
+    ~ deprecated hex_format_w()
+    + added decimal_format_a()
+    + added decimal_format_w()
+    ~ deprecated format_a()
+    ~ deprecated format_w()
+
+ WinSTL:
+ =======
+
+ ~ winstl/conversion/char_conversions.hpp:
+    ~ workaround for compatibility with ATL::CComBSTR (and other types that do not precisely convert to C const*)
+
+ ~ winstl/shell/drophandle_sequence.hpp:
+    ~ changed to be compatible (and work!) with Windows 7(+)
+    ~ corrected formerly impotent contract enforcement
+
+ ~ winstl/synch/spin_mutex.hpp:
+    ~ now yields via SwitchToThread() if _WIN32_WINNT >= 0x0400
+
+ ~ winstl/time/format_functions.hpp:
+    + added GetTimeFormat_msExA/W() by which custom time markers can be specified
+    ~ forward compatibility with STLSoft 1.10+ integer to string conversions
+
+
+
+============================================================================
+
+Changes for 1.9.114 (4th June 2012)
+
+Summary:
+========
+
+ * added unixstl::filesystem_traits::is_socket(char_type const*) method
+ * added unixstl::filesystem_traits::is_link(char_type const*) method
+ * added unixstl::filesystem_traits::is_socket(stat_data_type const*) method
+ * added unixstl::filesystem_traits::find_next_path_name_separator() method
+ * added unixstl::filesystem_traits::find_last_path_name_separator() method
+ * unixstl::filesystem_traits::get_full_path_name() now canonicalises '.'/'..'-trailing paths
+ * unixstl::readdir_sequence.hpp now includes directory name in thrown exception
+
+Changes:
+========
+
+ UNIXSTL:
+ ========
+
+ ~ unixstl/filesystem/filesystem_traits.hpp:
+    ~ canonicalised '.' and '..'-trailing paths
+    ~ refactored get_full_path defect() logic
+    ~ fixed defect whereby too much of a source string was being copied over into buffer (leading to a seg-fault on UNIX)
+    + added is_socket(char_type const*)
+    + added is_link(char_type const*)
+    + added is_socket(stat_data_type const*)
+    + added find_next_path_name_separator()
+    + added find_last_path_name_separator()
+
+ ~ unixstl/filesystem/glob_sequence.hpp:
+    ~ refactored way in which patterns and directories are pre-parsed
+
+ ~ unixstl/filesystem/readdir_sequence.hpp:
+    + readdir_sequence_exception now has a Directory property
+    + now includes directory name in thrown exception
+    ~ minor compatibility fixes
+
+
+============================================================================
+
+Changes for 1.9.113 (4th June 2012)
+
+Summary:
+========
+
+ * Intel C/C++ 12 support
+ * support for STLSOFT_COMPILE_VERBOSE; deprecation of _STLSOFT_COMPILE_VERBOSE
+ * fixed unixstl::filesystem_traits::broken get_current_directory()
+ * fixed unixstl::filesystem_traits::broken invalid_file_handle_value()
+ * fixed unixstl::filesystem_traits::is_file() / is_directory() / is_link()
+ * numerous improvements to unixstl::filesystem_traits::glob_sequence
+ * unixstl::readdir_sequence correction to elide sockets from search results
+ * winstl/time/conversion_functions.h renaming (and deprecation) of non-standard C function names
+    
+Changes:
+========
+
+
+ STLSoft:
+ ========
+
+ ~ stlsoft/internal/cccap/gcc.h:
+    + added STLSOFT_GCC_VER
+
+ ~ stlsoft/shims/access/string/std/exception.hpp:
+    ~ strengthened contract of implementation function
+
+ ~ stlsoft/stlsoft.h:
+    + Intel C/C++ 12 support
+    ~ reworking of use of STLSOFT_COMPILE_VERBOSE; deprecation of _STLSOFT_COMPILE_VERBOSE
+
+ ~ stlsoft/string/special_string_instance.hpp:
+    ~ trivial change
+
+ ~ stlsoft/util/std/library_discriminator.hpp:
+    ~ reworking of use of STLSOFT_COMPILE_VERBOSE; deprecation of _STLSOFT_COMPILE_VERBOSE
+
+ UNIXSTL:
+ ========
+
+ ~ unixstl/filesystem/filesystem_traits.hpp:
+    ~ fixed broken get_current_directory()
+    ~ corrected return value of invalid_file_handle_value() : now returns -1, rather than 0
+    ~ corrected inappropriate flag testing to identify files/directories/links
+
+ ~ unixstl/filesystem/glob_sequence.hpp:
+    ~ correct elision (or not) of dots directories, based on whether pattern contains wildcards and on whether matchPeriod is specified
+    ~ fixed defect
+    ~ simplified implementation, and now elides non-directory, non-file types (e.g. sockets)
+    ~ no longer specifies noSort by default
+    - removed some dead code
+    ~ clarified user-definable feature selection instructions
+    ~ correct handling of UNIXSTL_GLOB_SEQUENCE_DONT_TRUST_MARK
+    ~ changed internal API
+    ~ corrected rarely encountered defect in eliding dots directories
+    ~ fixed erroneous 1-param ctor
+    ~ minor refactoring
+    ~ corrected inappropriate flag testing to identify files/directories/links
+
+ ~ unixstl/filesystem/readdir_sequence.hpp:
+    ~ forward compatibility
+    ~ correction for presence of sockets (non-Windows only)
+
+ WinSTL:
+ =======
+
+ ~ winstl/registry/reg_key.hpp:
+    ~ const-correctness on REG_MULTI_SZ values
+
+ ~ winstl/time/conversion_functions.h:
+    ~ conversion of deprecated winstl__??? form to winstl_C_??? form
+    ~ trivial formatting changes
+    + added documentation markup
+
+ ~ winstl/winstl.h:
+    ~ Intel C/C++ 12 compatibility
+
+
 
 ============================================================================
 

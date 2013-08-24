@@ -4,11 +4,11 @@
  * Purpose:     Very efficient integer to string conversion functions.
  *
  * Created:     7th April 2002
- * Updated:     10th August 2009
+ * Updated:     17th July 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2002-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2002-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,9 +49,9 @@
 
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define STLSOFT_VER_STLSOFT_CONVERSION_HPP_INTEGER_TO_STRING_MAJOR     4
-# define STLSOFT_VER_STLSOFT_CONVERSION_HPP_INTEGER_TO_STRING_MINOR     1
-# define STLSOFT_VER_STLSOFT_CONVERSION_HPP_INTEGER_TO_STRING_REVISION  2
-# define STLSOFT_VER_STLSOFT_CONVERSION_HPP_INTEGER_TO_STRING_EDIT      79
+# define STLSOFT_VER_STLSOFT_CONVERSION_HPP_INTEGER_TO_STRING_MINOR     2
+# define STLSOFT_VER_STLSOFT_CONVERSION_HPP_INTEGER_TO_STRING_REVISION  1
+# define STLSOFT_VER_STLSOFT_CONVERSION_HPP_INTEGER_TO_STRING_EDIT      83
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -123,10 +123,12 @@ namespace constants
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
+inline
+C const*
 #ifdef STLSOFT_CF_TEMPLATE_TYPE_REQUIRED_IN_ARGS
-inline C const* get_digit_character(C * )
+get_digit_character(C*)
 #else /* ? STLSOFT_CF_TEMPLATE_TYPE_REQUIRED_IN_ARGS */
-inline C const* get_digit_character()
+get_digit_character()
 #endif /* STLSOFT_CF_TEMPLATE_TYPE_REQUIRED_IN_ARGS */
 {
     static C const  s_characters[19] =
@@ -185,9 +187,11 @@ inline C const* get_digit_character()
 template<   ss_typename_param_k C
         ,   ss_typename_param_k I
         >
-inline C const* unsigned_integer_to_string(C *buf, ss_size_t cchBuf, I i)
+inline
+C const*
+unsigned_integer_to_string(C* buf, ss_size_t cchBuf, I i)
 {
-    C   *psz    =   buf + cchBuf - 1;  // Set pointer to last character.
+    C* psz = buf + cchBuf - 1;  // Set pointer to last character.
 
     *psz = 0;   // Set the terminating null character.
 
@@ -199,7 +203,7 @@ inline C const* unsigned_integer_to_string(C *buf, ss_size_t cchBuf, I i)
         typedef ss_uint_t   rem_t;
 #endif /* compiler */
 
-        rem_t   lsd = static_cast<rem_t>(i % 10);   // Determine the least significant digit.
+        rem_t lsd = static_cast<rem_t>(i % 10);   // Determine the least significant digit.
 
         i = static_cast<I>(i / 10);                 // Deal with next most significant.
 
@@ -237,11 +241,15 @@ inline C const* unsigned_integer_to_string(C *buf, ss_size_t cchBuf, I i)
 template<   ss_typename_param_k C
         ,   ss_typename_param_k I
         >
-inline C const* unsigned_integer_to_string(C* buf, ss_size_t cchBuf, I i, ss_size_t& cchRes)
+inline
+C const*
+unsigned_integer_to_string(C* buf, ss_size_t cchBuf, I i, ss_size_t* cchRes)
 {
+	STLSOFT_ASSERT(NULL != cchRes);
+
     C const* psz = unsigned_integer_to_string<C, I>(buf, cchBuf, i);
 
-    cchRes = cchBuf - (psz - (buf - 1));
+    *cchRes = cchBuf - (psz - (buf - 1));
 
     return psz;
 }
@@ -264,7 +272,9 @@ inline C const* unsigned_integer_to_string(C* buf, ss_size_t cchBuf, I i, ss_siz
 template<   ss_typename_param_k C
         ,   ss_typename_param_k I
         >
-inline C const* signed_integer_to_string(C *buf, ss_size_t cchBuf, I i)
+inline
+C const*
+signed_integer_to_string(C* buf, ss_size_t cchBuf, I i)
 {
 #ifndef STLSOFT_CF_NEGATIVE_MODULUS_POSITIVE_GIVES_NEGATIVE_RESULT
 // If the compiler does not evaluate -9 % 10 to equal -9, then we need to work
@@ -319,7 +329,7 @@ inline C const* signed_integer_to_string(C *buf, ss_size_t cchBuf, I i)
     typedef ss_sint_t   rem_t;
 #endif /* compiler */
 
-    C   *psz    =   buf + cchBuf - 1;  // Set pointer to last character.
+    C* psz = buf + cchBuf - 1;  // Set pointer to last character.
 
     *psz = 0;   // Set the terminating null character.
 
@@ -327,7 +337,7 @@ inline C const* signed_integer_to_string(C *buf, ss_size_t cchBuf, I i)
     {
         do
         {
-            rem_t   lsd = static_cast<rem_t>(i % 10);   // Determine the least significant digit.
+            rem_t lsd = static_cast<rem_t>(i % 10);   // Determine the least significant digit.
 
             i = static_cast<I>(i / 10);                 // Deal with next most significant.
 
@@ -386,11 +396,15 @@ inline C const* signed_integer_to_string(C *buf, ss_size_t cchBuf, I i)
 template<   ss_typename_param_k C
         ,   ss_typename_param_k I
         >
-inline C const* signed_integer_to_string(C* buf, ss_size_t cchBuf, I i, ss_size_t& cchRes)
+inline
+C const*
+signed_integer_to_string(C* buf, ss_size_t cchBuf, I i, ss_size_t* cchRes)
 {
+	STLSOFT_ASSERT(NULL != cchRes);
+
     C const* psz = signed_integer_to_string<C, I>(buf, cchBuf, i);
 
-    cchRes = cchBuf - (psz - (buf - 1));
+    *cchRes = cchBuf - (psz - (buf - 1));
 
     return psz;
 }
@@ -402,7 +416,9 @@ inline C const* signed_integer_to_string(C* buf, ss_size_t cchBuf, I i, ss_size_
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint8_t i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint8_t i)
 {
     return signed_integer_to_string(buf, cchBuf, i);
 }
@@ -412,7 +428,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint8_t i)
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint8_t i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint8_t i)
 {
     return unsigned_integer_to_string(buf, cchBuf, i);
 }
@@ -422,7 +440,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint8_t i)
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint16_t i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint16_t i)
 {
     return signed_integer_to_string(buf, cchBuf, i);
 }
@@ -432,7 +452,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint16_t i)
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint16_t i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint16_t i)
 {
     return unsigned_integer_to_string(buf, cchBuf, i);
 }
@@ -442,7 +464,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint16_t i)
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint32_t i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint32_t i)
 {
     return signed_integer_to_string(buf, cchBuf, i);
 }
@@ -452,7 +476,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint32_t i)
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint32_t i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint32_t i)
 {
     return unsigned_integer_to_string(buf, cchBuf, i);
 }
@@ -463,7 +489,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint32_t i)
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint64_t const& i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint64_t const& i)
 {
 #ifdef STLSOFT_INTEGER_TO_STRING_OPTIMISE_64BIT
     if(i < 0x80000000)
@@ -480,7 +508,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint64_t const& i
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint64_t const& i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint64_t const& i)
 {
 #ifdef STLSOFT_INTEGER_TO_STRING_OPTIMISE_64BIT
     if(i < 0x80000000)
@@ -499,7 +529,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint64_t const& i
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, int i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, int i)
 {
     return signed_integer_to_string(buf, cchBuf, i);
 }
@@ -509,7 +541,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, int i)
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, unsigned int i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, unsigned int i)
 {
     return unsigned_integer_to_string(buf, cchBuf, i);
 }
@@ -522,7 +556,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, unsigned int i)
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, long i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, long i)
 {
     return signed_integer_to_string(buf, cchBuf, i);
 }
@@ -532,7 +568,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, long i)
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, unsigned long i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, unsigned long i)
 {
     return unsigned_integer_to_string(buf, cchBuf, i);
 }
@@ -548,7 +586,9 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, unsigned long i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], ss_sint8_t i)
+inline
+C const*
+integer_to_string(C (&buf)[N], ss_sint8_t i)
 {
     STLSOFT_STATIC_ASSERT(!(N < 5));
 
@@ -562,7 +602,9 @@ inline C const* integer_to_string(C (&buf)[N], ss_sint8_t i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], ss_uint8_t i)
+inline
+C const*
+integer_to_string(C (&buf)[N], ss_uint8_t i)
 {
     STLSOFT_STATIC_ASSERT(!(N < 4));
 
@@ -576,7 +618,9 @@ inline C const* integer_to_string(C (&buf)[N], ss_uint8_t i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], ss_sint16_t i)
+inline
+C const*
+integer_to_string(C (&buf)[N], ss_sint16_t i)
 {
     STLSOFT_STATIC_ASSERT(!(N < 7));
 
@@ -590,7 +634,9 @@ inline C const* integer_to_string(C (&buf)[N], ss_sint16_t i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], ss_uint16_t i)
+inline
+C const*
+integer_to_string(C (&buf)[N], ss_uint16_t i)
 {
     STLSOFT_STATIC_ASSERT(!(N < 6));
 
@@ -604,7 +650,9 @@ inline C const* integer_to_string(C (&buf)[N], ss_uint16_t i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], ss_sint32_t i)
+inline
+C const*
+integer_to_string(C (&buf)[N], ss_sint32_t i)
 {
     STLSOFT_STATIC_ASSERT(!(N < 12));
 
@@ -618,7 +666,9 @@ inline C const* integer_to_string(C (&buf)[N], ss_sint32_t i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], ss_uint32_t i)
+inline
+C const*
+integer_to_string(C (&buf)[N], ss_uint32_t i)
 {
     STLSOFT_STATIC_ASSERT(!(N < 11));
 
@@ -633,7 +683,9 @@ inline C const* integer_to_string(C (&buf)[N], ss_uint32_t i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], ss_sint64_t const& i)
+inline
+C const*
+integer_to_string(C (&buf)[N], ss_sint64_t const& i)
 {
     STLSOFT_STATIC_ASSERT(!(N < 21));
 
@@ -654,7 +706,9 @@ inline C const* integer_to_string(C (&buf)[N], ss_sint64_t const& i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], ss_uint64_t const& i)
+inline
+C const*
+integer_to_string(C (&buf)[N], ss_uint64_t const& i)
 {
     STLSOFT_STATIC_ASSERT(!(N < 21));
 
@@ -677,7 +731,9 @@ inline C const* integer_to_string(C (&buf)[N], ss_uint64_t const& i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], int i)
+inline
+C const*
+integer_to_string(C (&buf)[N], int i)
 {
     return signed_integer_to_string(buf, N, i);
 }
@@ -689,7 +745,9 @@ inline C const* integer_to_string(C (&buf)[N], int i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], unsigned int i)
+inline
+C const*
+integer_to_string(C (&buf)[N], unsigned int i)
 {
     return signed_integer_to_string(buf, N, i);
 }
@@ -703,7 +761,9 @@ inline C const* integer_to_string(C (&buf)[N], unsigned int i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], long i)
+inline
+C const*
+integer_to_string(C (&buf)[N], long i)
 {
     return signed_integer_to_string(buf, N, i);
 }
@@ -715,7 +775,9 @@ inline C const* integer_to_string(C (&buf)[N], long i)
 template< ss_typename_param_k C
         , ss_size_t           N
         >
-inline C const* integer_to_string(C (&buf)[N], unsigned long i)
+inline
+C const*
+integer_to_string(C (&buf)[N], unsigned long i)
 {
     return signed_integer_to_string(buf, N, i);
 }
@@ -725,25 +787,35 @@ inline C const* integer_to_string(C (&buf)[N], unsigned long i)
 
 #if 0
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_int_t i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_int_t i)
 {
     return signed_integer_to_string(buf, cchBuf, i);
 }
 
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint_t i)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint_t i)
 {
     return unsigned_integer_to_string(buf, cchBuf, i);
 }
 
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_bool_t i);
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_bool_t i);
 
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_char_a_t i);
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_char_a_t i);
 
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_char_w_t i);
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_char_w_t i);
 #endif /* 0 */
 
 
@@ -753,9 +825,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_char_w_t i);
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint8_t i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint8_t i, ss_size_t* pcchRes)
 {
-    return signed_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return signed_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint8_t i, ss_size_t& cchRes)
+{
+    return signed_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 
 /** \brief Highly efficient conversion of integer to string.
@@ -763,9 +848,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint8_t i, ss_siz
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint8_t i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint8_t i, ss_size_t* pcchRes)
 {
-    return unsigned_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return unsigned_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint8_t i, ss_size_t& cchRes)
+{
+    return unsigned_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 
 /** \brief Highly efficient conversion of integer to string.
@@ -773,9 +871,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint8_t i, ss_siz
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint16_t i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint16_t i, ss_size_t* pcchRes)
 {
-    return signed_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return signed_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint16_t i, ss_size_t& cchRes)
+{
+    return signed_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 
 /** \brief Highly efficient conversion of integer to string.
@@ -783,9 +894,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint16_t i, ss_si
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint16_t i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint16_t i, ss_size_t* pcchRes)
 {
-    return unsigned_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return unsigned_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint16_t i, ss_size_t& cchRes)
+{
+    return unsigned_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 
 /** \brief Highly efficient conversion of integer to string.
@@ -793,9 +917,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint16_t i, ss_si
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint32_t i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint32_t i, ss_size_t* pcchRes)
 {
-    return signed_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return signed_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint32_t i, ss_size_t& cchRes)
+{
+    return signed_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 
 /** \brief Highly efficient conversion of integer to string.
@@ -803,9 +940,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint32_t i, ss_si
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint32_t i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint32_t i, ss_size_t* pcchRes)
 {
-    return unsigned_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return unsigned_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint32_t i, ss_size_t& cchRes)
+{
+    return unsigned_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 
 #ifdef STLSOFT_CF_64BIT_INT_SUPPORT
@@ -814,9 +964,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint32_t i, ss_si
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint64_t const& i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint64_t const& i, ss_size_t* pcchRes)
 {
-    return signed_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return signed_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_sint64_t const& i, ss_size_t& cchRes)
+{
+    return signed_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 
 /** \brief Highly efficient conversion of integer to string.
@@ -824,9 +987,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_sint64_t const& i
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint64_t const& i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint64_t const& i, ss_size_t* pcchRes)
 {
-    return unsigned_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return unsigned_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, ss_uint64_t const& i, ss_size_t& cchRes)
+{
+    return unsigned_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 #endif /* STLSOFT_CF_64BIT_INT_SUPPORT */
 
@@ -836,9 +1012,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, ss_uint64_t const& i
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, int i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, int i, ss_size_t* pcchRes)
 {
-    return signed_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return signed_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, int i, ss_size_t& cchRes)
+{
+    return signed_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 
 /** \brief Highly efficient conversion of integer to string.
@@ -846,9 +1035,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, int i, ss_size_t &cc
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, unsigned int i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, unsigned int i, ss_size_t* pcchRes)
 {
-    return unsigned_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return unsigned_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, unsigned int i, ss_size_t& cchRes)
+{
+    return unsigned_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 #endif /* !STLSOFT_CF_INT_DISTINCT_INT_TYPE */
 
@@ -858,9 +1060,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, unsigned int i, ss_s
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, long i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, long i, ss_size_t* pcchRes)
 {
-    return signed_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return signed_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, long i, ss_size_t& cchRes)
+{
+    return signed_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 
 /** \brief Highly efficient conversion of integer to string.
@@ -868,9 +1083,22 @@ inline C const* integer_to_string(C *buf, ss_size_t cchBuf, long i, ss_size_t &c
  * \ingroup group__library__conversion
  */
 template <ss_typename_param_k C>
-inline C const* integer_to_string(C *buf, ss_size_t cchBuf, unsigned long i, ss_size_t &cchRes)
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, unsigned long i, ss_size_t* pcchRes)
 {
-    return unsigned_integer_to_string(buf, cchBuf, i, cchRes);
+	STLSOFT_ASSERT(NULL != pcchRes);
+
+    return unsigned_integer_to_string(buf, cchBuf, i, pcchRes);
+}
+
+template <ss_typename_param_k C>
+STLSOFT_DECLARE_DEPRECATION_MESSAGE("The overloads of integer_to_string() that use a reference out-parameter to receive the written length are deprecated and will be removed in a future version of STLSoft; use the new pointer out-parameter overloads instead")
+inline
+C const*
+integer_to_string(C* buf, ss_size_t cchBuf, unsigned long i, ss_size_t& cchRes)
+{
+    return unsigned_integer_to_string(buf, cchBuf, i, &cchRes);
 }
 #endif /* !STLSOFT_CF_LONG_DISTINCT_INT_TYPE */
 

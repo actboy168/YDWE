@@ -5,11 +5,11 @@
  *              and platform discriminations, and definitions of types.
  *
  * Created:     12th May 2003
- * Updated:     10th August 2009
+ * Updated:     2nd March 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2003-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2003-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,9 +46,9 @@
 /* File version */
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define DOTNETSTL_VER_DOTNETSTL_HPP_DOTNETSTL_MAJOR    3
-# define DOTNETSTL_VER_DOTNETSTL_HPP_DOTNETSTL_MINOR    4
-# define DOTNETSTL_VER_DOTNETSTL_HPP_DOTNETSTL_REVISION 2
-# define DOTNETSTL_VER_DOTNETSTL_HPP_DOTNETSTL_EDIT     50
+# define DOTNETSTL_VER_DOTNETSTL_HPP_DOTNETSTL_MINOR    5
+# define DOTNETSTL_VER_DOTNETSTL_HPP_DOTNETSTL_REVISION 1
+# define DOTNETSTL_VER_DOTNETSTL_HPP_DOTNETSTL_EDIT     51
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /** \file dotnetstl/dotnetstl.hpp
@@ -115,12 +115,13 @@
 # define DOTNETSTL_VER_1_2_3      0x00010203  /*!< Version 1.2.3 */
 # define DOTNETSTL_VER_1_3_1      0x00010301  /*!< Version 1.3.1 (with STLSoft 1.9.1) */
 # define DOTNETSTL_VER_1_3_2      0x00010302  /*!< Version 1.3.2 (with STLSoft 1.9.25) */
+# define DOTNETSTL_VER_1_3_3      0x010303ff  /*!< Version 1.3.3 (with STLSoft 1.9.113) */
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 #define DOTNETSTL_VER_MAJOR       1
 #define DOTNETSTL_VER_MINOR       3
-#define DOTNETSTL_VER_REVISION    2
-#define DOTNETSTL_VER             DOTNETSTL_VER_1_3_2
+#define DOTNETSTL_VER_REVISION    3
+#define DOTNETSTL_VER             DOTNETSTL_VER_1_3_3
 
 /* /////////////////////////////////////////////////////////////////////////
  * Includes
@@ -134,9 +135,9 @@
  * STLSoft version compatibility
  */
 
-#if !defined(_STLSOFT_VER_1_9_1_B41) || \
-    _STLSOFT_VER < _STLSOFT_VER_1_9_1_B41
-# error This version of the .netSTL libraries requires STLSoft version 1.9.1 beta 41, or later
+#if !defined(_STLSOFT_VER) || \
+    _STLSOFT_VER < 0x010971ff
+# error This version of the .netSTL libraries requires STLSoft version 1.9.113, or later
 #endif /* _STLSOFT_VER */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -161,9 +162,9 @@
 /* No recognised compiler */
 # ifdef _STLSOFT_FORCE_ANY_COMPILER
 #  define DOTNETSTL_COMPILER_IS_UNKNOWN
-#  ifdef _STLSOFT_COMPILE_VERBOSE
+#  ifdef STLSOFT_COMPILE_VERBOSE
 #   pragma message("Compiler is unknown to .netSTL")
-#  endif /* _STLSOFT_COMPILE_VERBOSE */
+#  endif /* STLSOFT_COMPILE_VERBOSE */
 # else /* ? _STLSOFT_FORCE_ANY_COMPILER */
 #  error Currently only Visual C++ compilers are supported by the .netSTL libraries
 # endif /* _STLSOFT_FORCE_ANY_COMPILER */

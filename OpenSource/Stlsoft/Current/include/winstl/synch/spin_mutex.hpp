@@ -4,14 +4,14 @@
  * Purpose:     Intra-process mutex, based on spin waits.
  *
  * Created:     27th August 1997
- * Updated:     29th April 2010
+ * Updated:     14th June 2012
  *
  * Thanks:      To Rupert Kittinger, for pointing out that prior
  *              implementation that always yielded was not really "spinning".
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 1997-2010, Matthew Wilson and Synesis Software
+ * Copyright (c) 1997-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -53,8 +53,8 @@
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define WINSTL_VER_WINSTL_SYNCH_HPP_SPIN_MUTEX_MAJOR       4
 # define WINSTL_VER_WINSTL_SYNCH_HPP_SPIN_MUTEX_MINOR       1
-# define WINSTL_VER_WINSTL_SYNCH_HPP_SPIN_MUTEX_REVISION    3
-# define WINSTL_VER_WINSTL_SYNCH_HPP_SPIN_MUTEX_EDIT        56
+# define WINSTL_VER_WINSTL_SYNCH_HPP_SPIN_MUTEX_REVISION    4
+# define WINSTL_VER_WINSTL_SYNCH_HPP_SPIN_MUTEX_EDIT        57
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -156,7 +156,7 @@ public:
     ///  which case an internal member is used for the counter variable.
     ///
     /// \note
-    ss_explicit_k spin_mutex_base(atomic_int_type *p = NULL) stlsoft_throw_0()
+    ss_explicit_k spin_mutex_base(atomic_int_type* p = NULL) stlsoft_throw_0()
         : m_spinCount((NULL != p) ? p : &m_internalCount)
         , m_internalCount(0)
 #ifdef STLSOFT_SPINMUTEX_COUNT_LOCKS
@@ -170,7 +170,7 @@ public:
     /// \param p Pointer to an external counter variable. May be NULL, in
     ///  which case an internal member is used for the counter variable.
     /// \param bYieldOnSpin
-    spin_mutex_base(atomic_int_type *p, bool_type bYieldOnSpin) stlsoft_throw_0()
+    spin_mutex_base(atomic_int_type* p, bool_type bYieldOnSpin) stlsoft_throw_0()
         : m_spinCount((NULL != p) ? p : &m_internalCount)
         , m_internalCount(0)
 #ifdef STLSOFT_SPINMUTEX_COUNT_LOCKS
@@ -213,7 +213,11 @@ public:
         {
             if(m_bYieldOnSpin)
             {
+#if _WIN32_WINNT >= 0x0400
+                ::SwitchToThread();
+#else /* ? _WIN32_WINNT */
                 ::Sleep(1);
+#endif /* _WIN32_WINNT */
             }
         }
 
@@ -257,13 +261,13 @@ public:
 /// \name Members
 /// @{
 private:
-    atomic_int_type *m_spinCount;
-    atomic_int_type m_internalCount;
+    atomic_int_type*    m_spinCount;
+    atomic_int_type     m_internalCount;
 #ifdef STLSOFT_SPINMUTEX_COUNT_LOCKS
-    count_type      m_cLocks;       // Used as check on matched Lock/Unlock calls
+    count_type          m_cLocks;       // Used as check on matched Lock/Unlock calls
 #endif // STLSOFT_SPINMUTEX_COUNT_LOCKS
-    count_type      m_spunCount;
-    const bool_type m_bYieldOnSpin;
+    count_type          m_spunCount;
+    bool_type const     m_bYieldOnSpin;
 /// @}
 
 /// \name Not to be implemented

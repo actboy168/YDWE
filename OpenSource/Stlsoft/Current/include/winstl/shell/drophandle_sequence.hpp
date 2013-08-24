@@ -5,11 +5,11 @@
  *              and Unicode specialisations thereof.
  *
  * Created:     13th November 2002
- * Updated:     19th May 2010
+ * Updated:     26th July 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2002-2010, Matthew Wilson and Synesis Software
+ * Copyright (c) 2002-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,8 +52,8 @@
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define WINSTL_VER_WINSTL_SHELL_HPP_DROPHANDLE_SEQUENCE_MAJOR      4
 # define WINSTL_VER_WINSTL_SHELL_HPP_DROPHANDLE_SEQUENCE_MINOR      1
-# define WINSTL_VER_WINSTL_SHELL_HPP_DROPHANDLE_SEQUENCE_REVISION   3
-# define WINSTL_VER_WINSTL_SHELL_HPP_DROPHANDLE_SEQUENCE_EDIT       95
+# define WINSTL_VER_WINSTL_SHELL_HPP_DROPHANDLE_SEQUENCE_REVISION   5
+# define WINSTL_VER_WINSTL_SHELL_HPP_DROPHANDLE_SEQUENCE_EDIT       97
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -162,7 +162,7 @@ struct drophandle_sequence_traits
     /// \param index The index of the requested item
     /// \param buffer The buffer within which to write the results
     /// \param cchBuffer The size of \c buffer in characters
-    static ws_uint_t drag_query_file(HDROP hdrop, ws_uint_t index, C *buffer, ws_uint_t cchBuffer);
+    static ws_uint_t drag_query_file(HDROP hdrop, ws_uint_t index, C* buffer, ws_uint_t cchBuffer);
 };
 
 #else
@@ -174,7 +174,7 @@ STLSOFT_TEMPLATE_SPECIALISATION
 
 struct drophandle_sequence_traits<ws_char_a_t>
 {
-    static ws_uint_t drag_query_file(HDROP hdrop, ws_uint_t index, ws_char_a_t *buffer, ws_uint_t cchBuffer)
+    static ws_uint_t drag_query_file(HDROP hdrop, ws_uint_t index, ws_char_a_t* buffer, ws_uint_t cchBuffer)
     {
         return DragQueryFileA(hdrop, index, buffer, cchBuffer);
     }
@@ -183,7 +183,7 @@ struct drophandle_sequence_traits<ws_char_a_t>
 STLSOFT_TEMPLATE_SPECIALISATION
 struct drophandle_sequence_traits<ws_char_w_t>
 {
-    static ws_uint_t drag_query_file(HDROP hdrop, ws_uint_t index, ws_char_w_t *buffer, ws_uint_t cchBuffer)
+    static ws_uint_t drag_query_file(HDROP hdrop, ws_uint_t index, ws_char_w_t* buffer, ws_uint_t cchBuffer)
     {
         return DragQueryFileW(hdrop, index, buffer, cchBuffer);
     }
@@ -467,8 +467,7 @@ inline ss_typename_type_ret_k basic_drophandle_sequence_const_iterator<C, T>::cl
 {
     WINSTL_MESSAGE_ASSERT("Incrementing the end iterator", m_index != sentinel_());
 
-    char_type   ch;
-    ws_uint_t   res =   traits_type::drag_query_file(m_hdrop, static_cast<ws_uint_t>(m_index + 1), &ch, 1);
+    ws_uint_t const res = traits_type::drag_query_file(m_hdrop, static_cast<ws_uint_t>(m_index + 1), NULL, 0);
 
     if(res == 0)
     {
@@ -493,7 +492,7 @@ inline ss_typename_type_ret_k basic_drophandle_sequence_const_iterator<C, T>::cl
     if(m_index == sentinel_())
     {
         // ... then determine the new end ...
-        m_index = static_cast<index_type>(traits_type::drag_query_file(m_hdrop, 0xFFFFFFFF, NULL, 0));
+        m_index = static_cast<index_type>(traits_type::drag_query_file(m_hdrop, static_cast<ws_uint_t>(0xFFFFFFFF), NULL, 0));
 
         if(m_index == 0xFFFFFFFF)
         {
@@ -563,7 +562,7 @@ template<   ss_typename_param_k C
         >
 inline ws_bool_t basic_drophandle_sequence_const_iterator<C, T>::equal(ss_typename_type_k basic_drophandle_sequence_const_iterator<C, T>::class_type const& rhs) const
 {
-    WINSTL_MESSAGE_ASSERT("Comparing iterators from different sequences", (m_hdrop == NULL || rhs.m_hdrop == NULL || rhs.m_hdrop));
+    WINSTL_MESSAGE_ASSERT("Comparing iterators from different sequences", (m_hdrop == NULL || rhs.m_hdrop == NULL || m_hdrop == rhs.m_hdrop));
 
     return m_index == rhs.m_index;
 }
@@ -588,7 +587,7 @@ inline basic_drophandle_sequence<C, T>::~basic_drophandle_sequence() stlsoft_thr
 template <ss_typename_param_k C, ss_typename_param_k T>
 inline ws_size_t basic_drophandle_sequence<C, T>::size() const
 {
-    return traits_type::drag_query_file(m_hdrop, static_cast<ws_uint_t>(-1), 0, 0);
+    return traits_type::drag_query_file(m_hdrop, static_cast<ws_uint_t>(0xFFFFFFFF), NULL, 0);
 }
 
 template <ss_typename_param_k C, ss_typename_param_k T>
@@ -600,8 +599,7 @@ inline ws_bool_t basic_drophandle_sequence<C, T>::empty() const
 template <ss_typename_param_k C, ss_typename_param_k T>
 inline ss_typename_type_ret_k basic_drophandle_sequence<C, T>::const_iterator basic_drophandle_sequence<C, T>::begin() const
 {
-    char_type   ch;
-    ws_uint_t   res =   traits_type::drag_query_file(m_hdrop, 0, &ch, 1);
+    ws_uint_t const res = traits_type::drag_query_file(m_hdrop, 0, NULL, 0);
 
     return const_iterator(m_hdrop, (res == 0) ? const_iterator::sentinel_() : 0);
 }

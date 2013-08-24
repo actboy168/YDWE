@@ -5,11 +5,11 @@
  *              through multiple IDispatch interfaces visible to script clients.
  *
  * Created:     15th May 2006
- * Updated:     10th August 2009
+ * Updated:     18th June 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2007-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2007-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,7 +54,7 @@
 # define ATLSTL_VER_ATLSTL_AUTOMATION_HPP_MULTIPLE_DISPATCH_MAJOR      2
 # define ATLSTL_VER_ATLSTL_AUTOMATION_HPP_MULTIPLE_DISPATCH_MINOR      1
 # define ATLSTL_VER_ATLSTL_AUTOMATION_HPP_MULTIPLE_DISPATCH_REVISION   2
-# define ATLSTL_VER_ATLSTL_AUTOMATION_HPP_MULTIPLE_DISPATCH_EDIT       16
+# define ATLSTL_VER_ATLSTL_AUTOMATION_HPP_MULTIPLE_DISPATCH_EDIT       17
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -183,10 +183,10 @@ namespace atlstl_project
  */
 // [[synesis:class: atlstl::IDispatchImpl2<T<I0>, IID const*, T<I1>, IID const*, GUID const*>]]
 template<   ss_typename_param_k I0
-        ,   IID const           *IID0
+        ,   IID const*          IID0
         ,   ss_typename_param_k I1
-        ,   IID const           *IID1
-        ,   GUID const          *LibID
+        ,   IID const*          IID1
+        ,   GUID const*         LibID
         >
 class IDispatchImpl2
     : public IDispatchImpl<I0, IID0, LibID>
@@ -223,10 +223,10 @@ protected:
      *  successfully called in Invoke(), in its post-stripe processing.
      */
     STDMETHOD(GetIDsOfNames)(   REFIID      riid
-                            ,   LPOLESTR    *rgszNames
+                            ,   LPOLESTR*   rgszNames
                             ,   UINT        cNames
                             ,   LCID        lcid
-                            ,   DISPID      *rgdispid)
+                            ,   DISPID*     rgdispid)
     {
         unsigned    index   =   1;
         HRESULT     hr      =   dispatch_parent_0_type::GetIDsOfNames(riid, rgszNames, cNames, lcid, rgdispid);
@@ -284,10 +284,10 @@ protected:
                     ,   REFIID      riid
                     ,   LCID        lcid
                     ,   WORD        wFlags
-                    ,   DISPPARAMS  *pdispparams
-                    ,   VARIANT     *pvarResult
-                    ,   EXCEPINFO   *pexcepinfo
-                    ,   UINT        *puArgErr)
+                    ,   DISPPARAMS* pdispparams
+                    ,   VARIANT*    pvarResult
+                    ,   EXCEPINFO*  pexcepinfo
+                    ,   UINT*       puArgErr)
     {
         if(dispidMember >= 0)
         {
@@ -330,12 +330,12 @@ protected:
  */
 // [[synesis:class: atlstl::IDispatchImpl2<T<I0>, IID const*, T<I1>, IID const*, T<I2>, IID const*, GUID const*>]]
 template<   ss_typename_param_k I0
-        ,   IID const           *IID0
+        ,   IID const*          IID0
         ,   ss_typename_param_k I1
-        ,   IID const           *IID1
+        ,   IID const*          IID1
         ,   ss_typename_param_k I2
-        ,   IID const           *IID2
-        ,   GUID const          *LibID
+        ,   IID const*          IID2
+        ,   GUID const*         LibID
         >
 class IDispatchImpl3
     : public IDispatchImpl<I0, IID0, LibID>
@@ -374,10 +374,10 @@ protected:
      *  successfully called in Invoke(), in its post-stripe processing.
      */
     STDMETHOD(GetIDsOfNames)(   REFIID      riid
-                            ,   LPOLESTR    *rgszNames
+                            ,   LPOLESTR*   rgszNames
                             ,   UINT        cNames
                             ,   LCID        lcid
-                            ,   DISPID      *rgdispid)
+                            ,   DISPID*     rgdispid)
     {
         unsigned    index   =   1;
         HRESULT     hr      =   dispatch_parent_0_type::GetIDsOfNames(riid, rgszNames, cNames, lcid, rgdispid);
@@ -443,10 +443,10 @@ protected:
                     ,   REFIID      riid
                     ,   LCID        lcid
                     ,   WORD        wFlags
-                    ,   DISPPARAMS  *pdispparams
-                    ,   VARIANT     *pvarResult
-                    ,   EXCEPINFO   *pexcepinfo
-                    ,   UINT        *puArgErr)
+                    ,   DISPPARAMS* pdispparams
+                    ,   VARIANT*    pvarResult
+                    ,   EXCEPINFO*  pexcepinfo
+                    ,   UINT*       puArgErr)
     {
         if(dispidMember >= 0)
         {
@@ -501,14 +501,14 @@ protected:
  */
 // [[synesis:class: atlstl::IDispatchImpl2<T<I0>, IID const*, T<I1>, IID const*, T<I2>, IID const*, T<I3>, IID const*, GUID const*>]]
 template<   ss_typename_param_k I0
-        ,   IID const           *IID0
+        ,   IID const*          IID0
         ,   ss_typename_param_k I1
-        ,   IID const           *IID1
+        ,   IID const*          IID1
         ,   ss_typename_param_k I2
-        ,   IID const           *IID2
+        ,   IID const*          IID2
         ,   ss_typename_param_k I3
-        ,   IID const           *IID3
-        ,   GUID const          *LibID
+        ,   IID const*          IID3
+        ,   GUID const*         LibID
         >
 class IDispatchImpl4
     : public IDispatchImpl<I0, IID0, LibID>
@@ -549,10 +549,10 @@ protected:
      *  successfully called in Invoke(), in its post-stripe processing.
      */
     STDMETHOD(GetIDsOfNames)(   REFIID      riid
-                            ,   LPOLESTR    *rgszNames
+                            ,   LPOLESTR*   rgszNames
                             ,   UINT        cNames
                             ,   LCID        lcid
-                            ,   DISPID      *rgdispid)
+                            ,   DISPID*     rgdispid)
     {
         unsigned    index   =   1;
         HRESULT     hr      =   dispatch_parent_0_type::GetIDsOfNames(riid, rgszNames, cNames, lcid, rgdispid);
@@ -626,10 +626,10 @@ protected:
                     ,   REFIID      riid
                     ,   LCID        lcid
                     ,   WORD        wFlags
-                    ,   DISPPARAMS  *pdispparams
-                    ,   VARIANT     *pvarResult
-                    ,   EXCEPINFO   *pexcepinfo
-                    ,   UINT        *puArgErr)
+                    ,   DISPPARAMS* pdispparams
+                    ,   VARIANT*    pvarResult
+                    ,   EXCEPINFO*  pexcepinfo
+                    ,   UINT*       puArgErr)
     {
         if(dispidMember >= 0)
         {

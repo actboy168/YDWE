@@ -4,11 +4,11 @@
  * Purpose:     Helper functions for file handling
  *
  * Created:     1st January 2005
- * Updated:     10th August 2009
+ * Updated:     4th July 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2005-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2005-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,7 +51,7 @@
 # define WINSTL_VER_WINSTL_FILESYSTEM_HPP_FILE_FUNCTIONS_MAJOR      2
 # define WINSTL_VER_WINSTL_FILESYSTEM_HPP_FILE_FUNCTIONS_MINOR      3
 # define WINSTL_VER_WINSTL_FILESYSTEM_HPP_FILE_FUNCTIONS_REVISION   8
-# define WINSTL_VER_WINSTL_FILESYSTEM_HPP_FILE_FUNCTIONS_EDIT       52
+# define WINSTL_VER_WINSTL_FILESYSTEM_HPP_FILE_FUNCTIONS_EDIT       54
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -106,7 +106,6 @@ namespace winstl
 
 namespace stlsoft
 {
-
 namespace winstl_project
 {
 
@@ -121,7 +120,12 @@ namespace winstl_project
 template<   ss_typename_param_k S1
         ,   ss_typename_param_k S2
         >
-inline ws_uint64_t load_text_file_impl(S1 const& fileName, S2 &contents);
+inline
+ws_uint64_t
+load_text_file_impl(
+    S1 const&   fileName
+,   S2&         contents
+);
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /** \brief Loads a text file into a string
@@ -167,7 +171,12 @@ winstl::uint64_t  numBytes = winstl::load_text_file("mytextfile.ext", contents);
 template<   ss_typename_param_k S1
         ,   ss_typename_param_k S2
         >
-inline ws_uint64_t load_text_file(S1 const& fileName, S2 &contents)
+inline
+ws_uint64_t
+load_text_file(
+    S1 const&   fileName
+,   S2&         contents
+)
 {
     return load_text_file_impl<S1, S2>(fileName, contents);
 }
@@ -176,7 +185,12 @@ inline ws_uint64_t load_text_file(S1 const& fileName, S2 &contents)
 template<   ss_typename_param_k S1
         ,   ss_typename_param_k S2
         >
-inline ws_uint64_t load_text_file_impl(S1 const& fileName, S2 &contents)
+inline
+ws_uint64_t
+load_text_file_impl(
+    S1 const&   fileName
+,   S2&         contents
+)
 {
     typedef string_traits<S1>                               string_traits_t;
 
@@ -257,14 +271,24 @@ inline ws_uint64_t load_text_file_impl(S1 const& fileName, S2 &contents)
 
 template<   ss_typename_param_k S2
         >
-inline ws_uint64_t load_text_file(ws_char_a_t const* fileName, S2 &contents)
+inline
+ws_uint64_t
+load_text_file(
+    ws_char_a_t const*  fileName
+,   S2&                 contents
+)
 {
     return load_text_file_impl<ws_char_a_t const*, S2>(fileName, contents);
 }
 
 template<   ss_typename_param_k S2
         >
-inline ws_uint64_t load_text_file(ws_char_w_t const* fileName, S2 &contents)
+inline
+ws_uint64_t
+load_text_file(
+    ws_char_w_t const*  fileName
+,   S2&                 contents
+)
 {
     return load_text_file_impl<ws_char_w_t const*, S2>(fileName, contents);
 }
@@ -272,14 +296,24 @@ inline ws_uint64_t load_text_file(ws_char_w_t const* fileName, S2 &contents)
 #if 0
 template<   ss_typename_param_k S2
         >
-inline ws_uint64_t load_text_file(char fileName[], S2 &contents)
+inline
+ws_uint64_t
+load_text_file(
+    char const          fileName[]
+,   S2&                 contents
+)
 {
     return load_text_file_impl<ws_char_a_t const*, S2>(fileName, contents);
 }
 
 template<   ss_typename_param_k S2
         >
-inline ws_uint64_t load_text_file(ws_char_w_t *fileName, S2 &contents)
+inline
+ws_uint64_t
+load_text_file(
+    ws_char_w_t*        fileName
+,   S2&                 contents
+)
 {
     return load_text_file_impl<ws_char_w_t const*, S2>(fileName, contents);
 }
@@ -304,6 +338,7 @@ inline ws_uint64_t load_text_file(ws_char_w_t *fileName, S2 &contents)
 
 
 
+#ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 
 #if 0
 template<   ss_typename_param_k S
@@ -355,6 +390,8 @@ void readlines_impl(CH const* p, ss_size_t len, C &container)
     }
 }
 
+#endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
+
 /** \brief Reads the lines of a text-file into a sequence container
  *
  * \ingroup group__library__filesystem
@@ -402,7 +439,11 @@ winstl::readlines("mytextfile.ext", lines);
 template<   ss_typename_param_k S
         ,   ss_typename_param_k C
         >
-C &readlines(S const& fileName, C &container)
+C&
+readlines(
+    S const&    fileName
+,   C&          container
+)
 {
     S   contents;
     S   delim;

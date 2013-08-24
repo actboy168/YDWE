@@ -5,11 +5,11 @@
  *              and platform discriminations, and definitions of types.
  *
  * Created:     15th January 2002
- * Updated:     2nd March 2011
+ * Updated:     20th March 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2002-2011, Matthew Wilson and Synesis Software
+ * Copyright (c) 2002-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,9 +47,9 @@
 /* File version */
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define WINSTL_VER_WINSTL_H_WINSTL_MAJOR       3
-# define WINSTL_VER_WINSTL_H_WINSTL_MINOR       12
-# define WINSTL_VER_WINSTL_H_WINSTL_REVISION    7
-# define WINSTL_VER_WINSTL_H_WINSTL_EDIT        188
+# define WINSTL_VER_WINSTL_H_WINSTL_MINOR       14
+# define WINSTL_VER_WINSTL_H_WINSTL_REVISION    1
+# define WINSTL_VER_WINSTL_H_WINSTL_EDIT        190
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /** \file winstl/winstl.h
@@ -150,12 +150,13 @@
 # define _WINSTL_VER_1_11_5     0x010b05ff  /*!< Version 1.11.5 (with STLSoft 1.9.107) */
 # define _WINSTL_VER_1_11_6     0x010b06ff  /*!< Version 1.11.6 (with STLSoft 1.9.108) */
 # define _WINSTL_VER_1_11_7     0x010b07ff  /*!< Version 1.11.7 (with STLSoft 1.9.109) */
+# define _WINSTL_VER_1_11_8     0x010b08ff  /*!< Version 1.11.8 (with STLSoft 1.9.113) */
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 #define _WINSTL_VER_MAJOR       1
 #define _WINSTL_VER_MINOR       11
-#define _WINSTL_VER_REVISION    7
-#define _WINSTL_VER             _WINSTL_VER_1_11_7
+#define _WINSTL_VER_REVISION    8
+#define _WINSTL_VER             _WINSTL_VER_1_11_8
 
 /* /////////////////////////////////////////////////////////////////////////
  * Includes
@@ -226,8 +227,8 @@
  */
 
 #if !defined(_STLSOFT_VER) || \
-    _STLSOFT_VER < 0x01096cff
-# error This version of the WinSTL libraries requires STLSoft version 1.9.108, or later
+    _STLSOFT_VER < 0x010971ff
+# error This version of the WinSTL libraries requires STLSoft version 1.9.113, or later
 #endif /* _STLSOFT_VER */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -245,9 +246,9 @@
 #if defined(WIN64) || \
     defined(_WIN64)
 # if !defined(WIN64)
-#  ifdef _STLSOFT_COMPILE_VERBOSE
+#  ifdef STLSOFT_COMPILE_VERBOSE
 #   pragma message("Win64 platform targeted, as indicated by definition of _WIN64, but WIN64 is not defined: adjust your project/make settings to define WIN64")
-#  endif /* _STLSOFT_COMPILE_VERBOSE */
+#  endif /* STLSOFT_COMPILE_VERBOSE */
 # endif /* !WIN64 */
 # define WINSTL_OS_IS_WIN64
 # if !defined(_WIN64)
@@ -297,7 +298,7 @@
  *  avoid C-style cast warnings.
  */
 # if defined(STLSOFT_COMPILER_IS_INTEL)
-#  define   INVALID_HANDLE_VALUE        stlsoft_ns_qual(union_cast)<HANDLE>(-1)
+#  define   INVALID_HANDLE_VALUE        stlsoft_ns_qual(union_cast)<HANDLE>(winstl_ns_qual(ws_sptrint_t)(-1))
 # else /* ? compiler */
 #  define   INVALID_HANDLE_VALUE        reinterpret_cast<HANDLE>(-1)
 # endif /* compiler */
@@ -456,9 +457,9 @@
 /* No recognised compiler */
 # ifdef _STLSOFT_FORCE_ANY_COMPILER
 #  define _WINSTL_COMPILER_IS_UNKNOWN
-#  ifdef _STLSOFT_COMPILE_VERBOSE
+#  ifdef STLSOFT_COMPILE_VERBOSE
 #   pragma message("Compiler is unknown to WinSTL")
-#  endif /* _STLSOFT_COMPILE_VERBOSE */
+#  endif /* STLSOFT_COMPILE_VERBOSE */
 # else
 #  error Currently only Borland C++, Comeau, Digital Mars C/C++, GNU C++, Intel C/C++, Metrowerks CodeWarrior, Visual C++ and Watcom compilers are supported by the WinSTL libraries
 # endif /* _STLSOFT_FORCE_ANY_COMPILER */

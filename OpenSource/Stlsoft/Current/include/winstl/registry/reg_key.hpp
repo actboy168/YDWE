@@ -5,14 +5,14 @@
  *              and Unicode specialisations thereof.
  *
  * Created:     19th January 2002
- * Updated:     22nd March 2010
+ * Updated:     21st February 2012
  *
  * Thanks:      To Sam Fisher for spotting the defect in the set_value_()
  *              overload for REG_MULTI_SZ values (widestring only).
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2002-2010, Matthew Wilson and Synesis Software
+ * Copyright (c) 2002-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,8 +54,8 @@
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define WINSTL_VER_WINSTL_REGISTRY_HPP_REG_KEY_MAJOR       3
 # define WINSTL_VER_WINSTL_REGISTRY_HPP_REG_KEY_MINOR       9
-# define WINSTL_VER_WINSTL_REGISTRY_HPP_REG_KEY_REVISION    8
-# define WINSTL_VER_WINSTL_REGISTRY_HPP_REG_KEY_EDIT        135
+# define WINSTL_VER_WINSTL_REGISTRY_HPP_REG_KEY_REVISION    9
+# define WINSTL_VER_WINSTL_REGISTRY_HPP_REG_KEY_EDIT        136
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -585,7 +585,7 @@ public:
      *  an instance of \link winstl::registry_exception registry_exception\endlink
      *  will be thrown if the value cannot be set.
      */
-    bool_type   set_value(char_type const* valueName, char_type const** values, size_type numValues);
+    bool_type   set_value(char_type const* valueName, char_type const* const* values, size_type numValues);
     /** Sets the named value to the given binary value.
      *
      * \exception winstl::registry_exception If \ref page__exception_agnostic "exception handling is enabled",
@@ -651,7 +651,7 @@ public:
      *  will be thrown if the value cannot be set.
      */
     template <ss_typename_param_k S>
-    bool_type   set_value(S const& valueName, char_type const** values, size_type numValues)
+    bool_type   set_value(S const& valueName, char_type const* const* values, size_type numValues)
     {
         return set_value_(stlsoft_ns_qual(c_str_ptr)(valueName), values, numValues);
     }
@@ -786,7 +786,7 @@ private:
     bool_type   set_value_(char_type const* valueName, ws_uint64_t value);
 #  endif /* STLSOFT_CF_64BIT_INT_SUPPORT */
     bool_type   set_value_(char_type const* valueName, char_type const* value, ws_uint_t type);
-    bool_type   set_value_(char_type const* valueName, char_type const** values, size_type numValues);
+    bool_type   set_value_(char_type const* valueName, char_type const* const* values, size_type numValues);
     bool_type   set_value_(char_type const* valueName, void const* value, size_type cbValue);
     bool_type   set_value_(char_type const* valueName, int value);
 
@@ -1291,7 +1291,7 @@ inline ss_typename_type_ret_k basic_reg_key<C, T, A>::bool_type basic_reg_key<C,
 }
 
 template <ss_typename_param_k C, ss_typename_param_k T, ss_typename_param_k A>
-inline ss_typename_type_ret_k basic_reg_key<C, T, A>::bool_type basic_reg_key<C, T, A>::set_value(ss_typename_type_k basic_reg_key<C, T, A>::char_type const* valueName, ss_typename_type_k basic_reg_key<C, T, A>::char_type const** values, ss_typename_type_k basic_reg_key<C, T, A>::size_type numValues)
+inline ss_typename_type_ret_k basic_reg_key<C, T, A>::bool_type basic_reg_key<C, T, A>::set_value(ss_typename_type_k basic_reg_key<C, T, A>::char_type const* valueName, ss_typename_type_k basic_reg_key<C, T, A>::char_type const* const* values, ss_typename_type_k basic_reg_key<C, T, A>::size_type numValues)
 {
     return set_value_(valueName, values, numValues);
 }
@@ -1359,7 +1359,7 @@ inline ss_typename_type_ret_k basic_reg_key<C, T, A>::bool_type basic_reg_key<C,
 }
 
 template <ss_typename_param_k C, ss_typename_param_k T, ss_typename_param_k A>
-inline ss_typename_type_ret_k basic_reg_key<C, T, A>::bool_type basic_reg_key<C, T, A>::set_value_(ss_typename_type_k basic_reg_key<C, T, A>::char_type const* valueName, ss_typename_type_k basic_reg_key<C, T, A>::char_type const** values, ss_typename_type_k basic_reg_key<C, T, A>::size_type numValues)
+inline ss_typename_type_ret_k basic_reg_key<C, T, A>::bool_type basic_reg_key<C, T, A>::set_value_(ss_typename_type_k basic_reg_key<C, T, A>::char_type const* valueName, ss_typename_type_k basic_reg_key<C, T, A>::char_type const* const* values, ss_typename_type_k basic_reg_key<C, T, A>::size_type numValues)
 {
     // Evaluate the total length of the source values
     const size_type totalLen = winstl_ns_qual_std(accumulate)(  stlsoft_ns_qual(transformer)(values, std::ptr_fun(traits_type::str_len))
@@ -1381,8 +1381,8 @@ inline ss_typename_type_ret_k basic_reg_key<C, T, A>::bool_type basic_reg_key<C,
 
     { for(size_type i = 0; i != numValues; ++i)
     {
-        char_type const*    s   =   values[i];
-        const size_type     len =   traits_type::str_len(s);
+        char_type const* const  s   =   values[i];
+        const size_type         len =   traits_type::str_len(s);
 
         ::memcpy(p, s, sizeof(char_type) * len);
         p += len;

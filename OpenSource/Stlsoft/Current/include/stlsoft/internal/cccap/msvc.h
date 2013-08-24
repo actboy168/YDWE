@@ -4,7 +4,7 @@
  * Purpose:     Compiler feature discrimination for Visual C++.
  *
  * Created:     7th February 2003
- * Updated:     3rd February 2012
+ * Updated:     30th July 2012
  *
  * Thanks:      To Cláudio Albuquerque for working on the
  *              Win64-compatibility.
@@ -63,9 +63,9 @@
 
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define STLSOFT_VER_H_STLSOFT_CCCAP_MSVC_MAJOR     3
-# define STLSOFT_VER_H_STLSOFT_CCCAP_MSVC_MINOR     22
-# define STLSOFT_VER_H_STLSOFT_CCCAP_MSVC_REVISION  2
-# define STLSOFT_VER_H_STLSOFT_CCCAP_MSVC_EDIT      118
+# define STLSOFT_VER_H_STLSOFT_CCCAP_MSVC_MINOR     25
+# define STLSOFT_VER_H_STLSOFT_CCCAP_MSVC_REVISION  1
+# define STLSOFT_VER_H_STLSOFT_CCCAP_MSVC_EDIT      121
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -97,6 +97,27 @@
 [<[STLSOFT-AUTO:NO-DOCFILELABEL]>]
 [<[STLSOFT-AUTO:NO-UNITTEST]>]
 */
+
+/* /////////////////////////////////////////////////////////////////////////
+ * Custom macros
+ */
+
+/*
+ * _MSC_FULL_VER is _MSC_VER * multiplying_factor + build-number
+ *
+ * For _MSC_VER >= 1400, the multiplying_factor is 100000; for earlier
+ * versions (1200 - 1310) it's 10000. For 1100-, it is not defined.
+ */
+
+#ifdef _MSC_FULL_VER
+# define STLSOFT_MSVC_VER                   _MSC_FULL_VER
+#else /* ? __GNUC_PATCHLEVEL__ */
+# if _MSC_VER < 1200
+#  define STLSOFT_MSVC_VER                  (_MSC_VER * 10000)
+# else
+#  define STLSOFT_MSVC_VER                  (_MSC_VER * 100000)
+# endif
+#endif /* __GNUC_PATCHLEVEL__ */
 
 /* /////////////////////////////////////////////////////////////////////////
  * Preprocessor features
@@ -161,6 +182,10 @@
 # define STLSOFT_CF_BUILTIN___int64_SUPPORT
 #endif /* compiler */
 
+#if _MSC_VER >= 1400
+# define STLSOFT_CF_BUILTIN_long_long_SUPPORT
+#endif /* compiler */
+
 /* /////////////////////////////////////////////////////////////////////////
  * Built-in type characteristics
  *
@@ -182,11 +207,30 @@
 /* /////////////////////////////////////////////////////////////////////////
  * Support for C/C++ language features
  *
- * - nullptr (C++0x)
+ * - nullptr (C++11)
  * - return void
  * - static assertions
  * - anonymous unions
  * - -ve % +ve => -ve result
+ *
+ * nullptr (C++11)
+ * ---------------
+ *
+ * nullptr keyword is recognised, represented by definition of the
+ * preprocessor symbol STLSOFT_CF_BUILTIN_nullptr_SUPPORT
+ *
+ *
+ * static assertions
+ * -----------------
+ *
+ * Two questions:
+ *
+ * 1. Are STLSoft-style static assertions (see stlsoft/stlsoft.h)
+ * supported by the compiler? This is indicated by the definition of the
+ * preprocessor symbol STLSOFT_CF_STATIC_ASSERT_SUPPORT
+ *
+ * 2. Is the C++11 static_assert keyword supported? This is indicated by the
+ * definition of the preprocessor symbol STLSOFT_CF_static_assert_SUPPORT
  */
 
 #if _MSC_VER >= 1600
@@ -198,6 +242,10 @@
 #endif /* compiler */
 
 #define STLSOFT_CF_STATIC_ASSERT_SUPPORT
+
+#if _MSC_VER >= 1600
+# define STLSOFT_CF_static_assert_SUPPORT
+#endif /* compiler */
 
 #define STLSOFT_CF_ANONYMOUS_UNION_SUPPORT
 
@@ -507,6 +555,9 @@
 #define _STLSOFT_SIZEOF_SHORT           (2)
 #define _STLSOFT_SIZEOF_INT             (4)
 #define _STLSOFT_SIZEOF_LONG            (4)
+#if _MSC_VER >= 1400
+# define _STLSOFT_SIZEOF_LONG_LONG      (8)
+#endif /* compiler */
 
 /* /////////////////////////////////////////////////////////////////////////
  * Size-specific integer types

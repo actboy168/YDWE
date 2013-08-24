@@ -4,11 +4,11 @@
  * Purpose:     sign_traits classes.
  *
  * Created:     16th January 2002
- * Updated:     10th August 2009
+ * Updated:     31st July 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2002-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2002-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,8 +50,8 @@
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define STLSOFT_VER_STLSOFT_UTIL_HPP_SIGN_TRAITS_MAJOR      4
 # define STLSOFT_VER_STLSOFT_UTIL_HPP_SIGN_TRAITS_MINOR      1
-# define STLSOFT_VER_STLSOFT_UTIL_HPP_SIGN_TRAITS_REVISION   2
-# define STLSOFT_VER_STLSOFT_UTIL_HPP_SIGN_TRAITS_EDIT       46
+# define STLSOFT_VER_STLSOFT_UTIL_HPP_SIGN_TRAITS_REVISION   3
+# define STLSOFT_VER_STLSOFT_UTIL_HPP_SIGN_TRAITS_EDIT       47
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -247,6 +247,34 @@ struct sign_traits<ss_uint64_t>
     typedef ss_sint64_t alt_sign_type;
 };
 #endif /* !STLSOFT_CF_64BIT_INT_SUPPORT */
+
+#ifdef STLSOFT_CF_SHORT_DISTINCT_INT_TYPE
+
+STLSOFT_TEMPLATE_SPECIALISATION
+struct sign_traits<signed short>
+{
+    enum { bytes    =   sizeof(signed short)    };
+    enum { bits     =   8 * bytes               };
+
+    typedef signed short    type;
+    typedef signed short    signed_type;
+    typedef unsigned short  unsigned_type;
+    typedef unsigned short  alt_sign_type;
+};
+
+STLSOFT_TEMPLATE_SPECIALISATION
+struct sign_traits<unsigned short>
+{
+    enum { bytes    =   sizeof(unsigned short)  };
+    enum { bits     =   8 * bytes               };
+
+    typedef unsigned short  type;
+    typedef signed short    signed_type;
+    typedef unsigned short  unsigned_type;
+    typedef signed short    alt_sign_type;
+};
+
+#endif /* !STLSOFT_CF_SHORT_DISTINCT_INT_TYPE */
 
 #ifdef STLSOFT_CF_INT_DISTINCT_INT_TYPE
 

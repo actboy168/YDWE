@@ -4,7 +4,7 @@
  * Purpose:     Compiler feature discrimination for GNU C/C++.
  *
  * Created:     7th February 2003
- * Updated:     5th February 2012
+ * Updated:     14th March 2012
  *
  * Thanks:      To Sergey Nikulov, for PowerPC (BSD) compatibility fixes
  *
@@ -58,9 +58,9 @@
 
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define STLSOFT_VER_H_STLSOFT_CCCAP_GCC_MAJOR      3
-# define STLSOFT_VER_H_STLSOFT_CCCAP_GCC_MINOR      20
+# define STLSOFT_VER_H_STLSOFT_CCCAP_GCC_MINOR      21
 # define STLSOFT_VER_H_STLSOFT_CCCAP_GCC_REVISION   1
-# define STLSOFT_VER_H_STLSOFT_CCCAP_GCC_EDIT       85
+# define STLSOFT_VER_H_STLSOFT_CCCAP_GCC_EDIT       86
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -92,6 +92,23 @@
 [<[STLSOFT-AUTO:NO-DOCFILELABEL]>]
 [<[STLSOFT-AUTO:NO-UNITTEST]>]
 */
+
+/* /////////////////////////////////////////////////////////////////////////
+ * Custom macros
+ */
+
+#ifdef __GNUC_PATCHLEVEL__
+# define STLSOFT_INTERNAL_GCC_PATCHLEVEL_   __GNUC_PATCHLEVEL__
+#else /* ? __GNUC_PATCHLEVEL__ */
+# define STLSOFT_INTERNAL_GCC_PATCHLEVEL_   (0)
+#endif /* __GNUC_PATCHLEVEL__ */
+
+#define STLSOFT_GCC_VER                                             \
+                                            ((__GNUC__ * 10000)     \
+                                            +                       \
+                                            (__GNUC_MINOR__ * 100)  \
+                                            +                       \
+                                            (STLSOFT_INTERNAL_GCC_PATCHLEVEL_ * 1))
 
 /* /////////////////////////////////////////////////////////////////////////
  * Preprocessor features

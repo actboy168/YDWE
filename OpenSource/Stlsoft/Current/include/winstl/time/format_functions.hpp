@@ -4,14 +4,14 @@
  * Purpose:     Comparison functions for Windows time structures.
  *
  * Created:     21st November 2003
- * Updated:     10th August 2009
+ * Updated:     7th August 2012
  *
  * Thanks to:   Mikael Pahmp, for spotting the failure to handle 24-hour
  *              time pictures.
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2003-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2003-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,9 +52,9 @@
 
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define WINSTL_VER_WINSTL_TIME_HPP_FORMAT_FUNCTIONS_MAJOR      5
-# define WINSTL_VER_WINSTL_TIME_HPP_FORMAT_FUNCTIONS_MINOR      0
-# define WINSTL_VER_WINSTL_TIME_HPP_FORMAT_FUNCTIONS_REVISION   4
-# define WINSTL_VER_WINSTL_TIME_HPP_FORMAT_FUNCTIONS_EDIT       58
+# define WINSTL_VER_WINSTL_TIME_HPP_FORMAT_FUNCTIONS_MINOR      1
+# define WINSTL_VER_WINSTL_TIME_HPP_FORMAT_FUNCTIONS_REVISION   2
+# define WINSTL_VER_WINSTL_TIME_HPP_FORMAT_FUNCTIONS_EDIT       62
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -113,11 +113,11 @@ struct time_format_functions_traits<ws_char_a_t>
 {
     typedef ws_char_a_t char_type;
 
-    static int GetTimeFormat(LCID Locale, DWORD dwFlags, SYSTEMTIME const* lpTime, char_type const* lpFormat, char_type *lpTimeStr, int cchTime)
+    static int GetTimeFormat(LCID Locale, DWORD dwFlags, SYSTEMTIME const* lpTime, char_type const* lpFormat, char_type* lpTimeStr, int cchTime)
     {
         return ::GetTimeFormatA(Locale, dwFlags, lpTime, lpFormat, lpTimeStr, cchTime);
     }
-    static int GetLocaleInfo(LCID Locale, LCTYPE LCType, char_type *lpLCData, int cchData)
+    static int GetLocaleInfo(LCID Locale, LCTYPE LCType, char_type* lpLCData, int cchData)
     {
         return ::GetLocaleInfoA(Locale, LCType, lpLCData, cchData);
     }
@@ -125,7 +125,7 @@ struct time_format_functions_traits<ws_char_a_t>
     {
         return static_cast<ss_size_t>(::lstrlenA(s));
     }
-    static char_type *lstrcpy(char_type *dest, char_type const* src)
+    static char_type* lstrcpy(char_type* dest, char_type const* src)
     {
         return ::lstrcpyA(dest, src);
     }
@@ -136,11 +136,11 @@ struct time_format_functions_traits<ws_char_w_t>
 {
     typedef ws_char_w_t char_type;
 
-    static int GetTimeFormat(LCID Locale, DWORD dwFlags, SYSTEMTIME const* lpTime, char_type const* lpFormat, char_type *lpTimeStr, int cchTime)
+    static int GetTimeFormat(LCID Locale, DWORD dwFlags, SYSTEMTIME const* lpTime, char_type const* lpFormat, char_type* lpTimeStr, int cchTime)
     {
         return ::GetTimeFormatW(Locale, dwFlags, lpTime, lpFormat, lpTimeStr, cchTime);
     }
-    static int GetLocaleInfo(LCID Locale, LCTYPE LCType, char_type *lpLCData, int cchData)
+    static int GetLocaleInfo(LCID Locale, LCTYPE LCType, char_type* lpLCData, int cchData)
     {
         return ::GetLocaleInfoW(Locale, LCType, lpLCData, cchData);
     }
@@ -148,7 +148,7 @@ struct time_format_functions_traits<ws_char_w_t>
     {
         return static_cast<ss_size_t>(::lstrlenW(s));
     }
-    static char_type *lstrcpy(char_type *dest, char_type const* src)
+    static char_type* lstrcpy(char_type* dest, char_type const* src)
     {
         return ::lstrcpyW(dest, src);
     }
@@ -161,18 +161,24 @@ struct time_format_functions_traits<ws_char_w_t>
  */
 
 template <ss_typename_param_k C>
-inline int STLSOFT_STDCALL GetTimeFormat_ms_(   LCID                locale      // locale
-                                            ,   DWORD               dwFlags     // options
-                                            ,   CONST SYSTEMTIME    *lpTime     // time
-                                            ,   C const             *lpFormat   // time format string
-                                            ,   C                   *lpTimeStr  // formatted string buffer
-                                            ,   const int           cchTime)    // size of string buffer
+inline
+int
+STLSOFT_STDCALL GetTimeFormat_ms_(
+    LCID                locale      // locale
+,   DWORD               dwFlags     // options
+,   CONST SYSTEMTIME*   lpTime      // time
+,   C const*            lpFormat    // time format string
+,   C const* const*     timeMarkers // pointer to array of two pointers to time markers
+,   C*                  lpTimeStr   // formatted string buffer
+,   int const           cchTime     // size of string buffer
+)
 {
-    typedef C                                                               char_t;
-    typedef time_format_functions_traits<char_t>                            traits_t;
-    typedef stlsoft_ns_qual(auto_buffer_old)<   char_t
-                                            ,   processheap_allocator<char_t>
-                                            >                               buffer_t;
+    typedef C                                       char_t;
+    typedef time_format_functions_traits<char_t>    traits_t;
+    typedef stlsoft_ns_qual(auto_buffer_old)<
+        char_t
+    ,   processheap_allocator<char_t>
+    >                                               buffer_t;
 
     if(dwFlags & (TIME_NOMINUTESORSECONDS | TIME_NOSECONDS))
     {
@@ -196,104 +202,141 @@ inline int STLSOFT_STDCALL GetTimeFormat_ms_(   LCID                locale      
         }
     }
 
-    const ss_size_t     cchPicture  =   1 + traits_t::lstrlen(lpFormat);
+    ss_size_t const cchPicture  =   1 + traits_t::lstrlen(lpFormat);
 
-    char_t         hours12_[]  =   { '0', '0', '\0' };                      // "00"
-    char_t         hours24_[]  =   { '0', '0', '\0' };                      // "00"
-    char_t         minutes_[]  =   { '0', '0', '\0' };                      // "00"
-    char_t         seconds_[]  =   { '0', '0', '.', '0', '0', '0', '\0' };  // "00.000"
+    // Following need to be front-padded to be forward compatible with STLSoft 1.10 (which uses
+    // 'safer' i2s functions
 
-    char_t const   *hours12    =   stlsoft_ns_qual(integer_to_string)(&hours12_[0], STLSOFT_NUM_ELEMENTS(hours12_), (lpTime->wHour > 12) ? (lpTime->wHour - 12) : lpTime->wHour);
-    char_t const   *hours24    =   stlsoft_ns_qual(integer_to_string)(&hours24_[0], STLSOFT_NUM_ELEMENTS(hours24_), lpTime->wHour);
-    char_t const   *minutes    =   stlsoft_ns_qual(integer_to_string)(&minutes_[0], STLSOFT_NUM_ELEMENTS(minutes_), lpTime->wMinute);
-                                   stlsoft_ns_qual(integer_to_string)(&seconds_[3], 4, lpTime->wMilliseconds);
-    char_t const   *seconds    =   stlsoft_ns_qual(integer_to_string)(&seconds_[0], 3, lpTime->wSecond);
+    char_t          hours12_[]  =   { '\0', '\0', '\0', '0', '0', '\0' };                       // "...00"
+    char_t          hours24_[]  =   { '\0', '\0', '\0', '0', '0', '\0' };                       // "...00"
+    char_t          minutes_[]  =   { '\0', '\0', '\0', '0', '0', '\0' };                       // "...00"
+    char_t          seconds_[]  =   { '\0', '\0', '\0', '0', '0', '.', '0', '0', '0', '\0' };   // "...00.000"
 
-    seconds_[2] = '.';
+    uint16_t const  hour12      =   (lpTime->wHour > 12) ? uint16_t(lpTime->wHour - 12) : lpTime->wHour;
+
+#if defined(STLSOFT_CF_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT)
+    char_t const*   hours12    =   stlsoft_ns_qual(integer_to_string)(hours12_, hour12);
+    char_t const*   hours24    =   stlsoft_ns_qual(integer_to_string)(hours24_, lpTime->wHour);
+    char_t const*   minutes    =   stlsoft_ns_qual(integer_to_string)(minutes_, lpTime->wMinute);
+#else /* ? STLSOFT_CF_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT */
+    char_t const*   hours12    =   stlsoft_ns_qual(integer_to_string)(&hours12_[0], STLSOFT_NUM_ELEMENTS(hours12_), hour12);
+    char_t const*   hours24    =   stlsoft_ns_qual(integer_to_string)(&hours24_[0], STLSOFT_NUM_ELEMENTS(hours24_), lpTime->wHour);
+    char_t const*   minutes    =   stlsoft_ns_qual(integer_to_string)(&minutes_[0], STLSOFT_NUM_ELEMENTS(minutes_), lpTime->wMinute);
+#endif /* STLSOFT_CF_STATIC_ARRAY_SIZE_DETERMINATION_SUPPORT */
+                                   stlsoft_ns_qual(integer_to_string)(&seconds_[3], STLSOFT_NUM_ELEMENTS(seconds_) - 3, lpTime->wMilliseconds);
+    char_t const*   seconds    =   stlsoft_ns_qual(integer_to_string)(&seconds_[0], 6, lpTime->wSecond);
+
+    seconds_[5] = '.';
 
     // Get the time markers
-    HKEY        hkey;
-    LONG        res =   ::RegOpenKeyA(HKEY_CURRENT_USER, "Control Panel\\International", &hkey);
-    buffer_t    am(0);
-    buffer_t    pm(0);
+    char_t const*   amMarker    =   (NULL != timeMarkers && NULL != timeMarkers[0]) ? timeMarkers[0] : NULL;
+    char_t const*   pmMarker    =   (NULL != timeMarkers && NULL != timeMarkers[1]) ? timeMarkers[1] : NULL;
+    buffer_t        am(0);
+    buffer_t        pm(0);
 
-    if(ERROR_SUCCESS == res)
+    if( NULL == amMarker ||
+        NULL == pmMarker)
     {
-        static const char_t s1159[] =   { 's', '1', '1', '5', '9', '\0' };
-        static const char_t s2359[] =   { 's', '2', '3', '5', '9', '\0' };
-        ws_size_t           cchAM   =   0;
-        ws_size_t           cchPM   =   0;
-        LONG                r;
+        HKEY    hkey;
+        LONG    res =   ::RegOpenKeyA(HKEY_CURRENT_USER, "Control Panel\\International", &hkey);
 
-        if( ERROR_SUCCESS != (r = reg_get_string_value(hkey, s1159, static_cast<char_t*>(NULL), cchAM)) ||
-            ERROR_SUCCESS != (r = (am.resize(cchAM), cchAM = am.size(), reg_get_string_value(hkey, s1159, &am[0], cchAM))))
+        if(ERROR_SUCCESS == res)
         {
-            res = r;
-        }
-        else if(ERROR_SUCCESS != (r = reg_get_string_value(hkey, s2359, static_cast<char_t*>(NULL), cchPM)) ||
-                ERROR_SUCCESS != (r = (pm.resize(cchPM), cchPM = pm.size(), reg_get_string_value(hkey, s2359, &pm[0], cchPM))))
-        {
-            res = r;
+            static char_t const s1159[] =   { 's', '1', '1', '5', '9', '\0' };
+            static char_t const s2359[] =   { 's', '2', '3', '5', '9', '\0' };
+            ws_size_t           cchAM   =   0;
+            ws_size_t           cchPM   =   0;
+            LONG                r;
+
+            if( ERROR_SUCCESS != (r = reg_get_string_value(hkey, s1159, static_cast<char_t*>(NULL), cchAM)) ||
+                ERROR_SUCCESS != (r = (am.resize(cchAM), cchAM = am.size(), reg_get_string_value(hkey, s1159, &am[0], cchAM))))
+            {
+                res = r;
+            }
+            else if(ERROR_SUCCESS != (r = reg_get_string_value(hkey, s2359, static_cast<char_t*>(NULL), cchPM)) ||
+                    ERROR_SUCCESS != (r = (pm.resize(cchPM), cchPM = pm.size(), reg_get_string_value(hkey, s2359, &pm[0], cchPM))))
+            {
+                res = r;
+            }
+
+            ::RegCloseKey(hkey);
         }
 
-        ::RegCloseKey(hkey);
+        if(ERROR_SUCCESS == res)
+        {
+            if(NULL == amMarker)
+            {
+                amMarker = &am[0];
+            }
+            if(NULL == pmMarker)
+            {
+                pmMarker = &pm[0];
+            }
+        }
     }
 
-    if(ERROR_SUCCESS != res)
+    if(NULL == amMarker)
     {
-        static const char_t AM[]    =   { 'A', 'M', '\0' };
-        static const char_t PM[]    =   { 'P', 'M', '\0' };
+        static char_t const AM[]    =   { 'A', 'M', '\0' };
 
         am.resize(3);
+
+        amMarker = traits_t::lstrcpy(&am[0], AM);
+    }
+    if(NULL == pmMarker)
+    {
+        static char_t const PM[]    =   { 'P', 'M', '\0' };
+
         pm.resize(3);
 
-        traits_t::lstrcpy(&am[0], AM);
-        traits_t::lstrcpy(&pm[0], PM);
+        pmMarker = traits_t::lstrcpy(&pm[0], PM);
     }
 
-    char_t const    *timeMarker =   (lpTime->wHour < 12) ? &am[0] : &pm[0];
-    const ws_size_t cchMarker   =   (am.size() < pm.size()) ? pm.size() : am.size();
-    const ws_size_t cchTimeMax  =   (cchPicture - 1) + (2 - 1) + (2 - 1) + (6 - 1) + 1 + cchMarker;
+    ws_size_t const cchAmMarker =   traits_t::lstrlen(amMarker);
+    ws_size_t const cchPmMarker =   traits_t::lstrlen(pmMarker);
+    char_t const*   timeMarker  =   (lpTime->wHour < 12) ? amMarker : pmMarker;
+    ws_size_t const cchMarker   =   (cchAmMarker < cchPmMarker) ? cchPmMarker : cchAmMarker;
+    ws_size_t const cchTimeMax  =   (cchPicture - 1) + (2 - 1) + (2 - 1) + (6 - 1) + 1 + (1 + cchMarker);
     buffer_t        buffer(1 + cchTimeMax);
     ws_size_t       len         =   0;
 
     if(!buffer.empty())
     {
-        char_t const    *r;
-        char_t          *w          =   &buffer[0];
+        char_t const*   r;
+        char_t*         w          =   &buffer[0];
         char_t          prev        =   '\0';
         ws_bool_t       bMarker1    =   true;
 
         for(r = lpFormat; r != lpFormat + cchPicture; ++r)
         {
-            const char_t    ch  =   *r;
+            char_t const ch = *r;
 
             switch(ch)
             {
                 case    'h':
                     if( 'h' == prev &&
-                        hours12 != &hours12_[0])
+                        '\0' == *(hours12 + 1))
                     {
                         --hours12;
                     }
                     break;
                 case    'H':
                     if( 'H' == prev &&
-                        hours24 != &hours24_[0])
+                        '\0' == *(hours24 + 1))
                     {
                         --hours24;
                     }
                     break;
                 case    'm':
                     if( 'm' == prev &&
-                        minutes != &minutes_[0])
+                        '\0' == *(minutes + 1))
                     {
                         --minutes;
                     }
                     break;
                 case    's':
                     if( 's' == prev &&
-                        seconds != &seconds_[0])
+                        '.' == *(seconds + 1))
                     {
                         --seconds;
                     }
@@ -306,8 +349,8 @@ inline int STLSOFT_STDCALL GetTimeFormat_ms_(   LCID                locale      
                     break;
                 default:
                     {
-                        static const char_t s_emptyString[] = { '\0' };
-                        char_t const        *p;
+                        static char_t const s_emptyString[] = { '\0' };
+                        char_t const*       p;
 
                         switch(prev)
                         {
@@ -385,29 +428,72 @@ inline int STLSOFT_STDCALL GetTimeFormat_ms_(   LCID                locale      
  *    (if <code>0 != cchTime</code>), or required
  *    (if <code>0 == cchTime</code>).
  */
-inline int STLSOFT_STDCALL GetTimeFormat_msA(   LCID                locale      // locale
-                                            ,   DWORD               dwFlags     // options
-                                            ,   CONST SYSTEMTIME    *lpTime     // time
-                                            ,   ws_char_a_t const   *lpFormat   // time format string
-                                            ,   ws_char_a_t         *lpTimeStr  // formatted string buffer
-                                            ,   int                 cchTime)    // size of string buffer
+inline
+int
+STLSOFT_STDCALL GetTimeFormat_msA(
+    LCID                locale      // locale
+,   DWORD               dwFlags     // options
+,   CONST SYSTEMTIME*   lpTime      // time
+,   ws_char_a_t const*  lpFormat    // time format string
+,   ws_char_a_t*        lpTimeStr   // formatted string buffer
+,   int                 cchTime     // size of string buffer
+)
 {
     WINSTL_ASSERT(0 == cchTime || NULL != lpTimeStr);
 
-    return GetTimeFormat_ms_<ws_char_a_t>(locale, dwFlags, lpTime, lpFormat, lpTimeStr, cchTime);
+    return GetTimeFormat_ms_<ws_char_a_t>(locale, dwFlags, lpTime, lpFormat, NULL, lpTimeStr, cchTime);
 }
 
-inline int STLSOFT_STDCALL GetTimeFormat_msW(   LCID                locale      // locale
-                                            ,   DWORD               dwFlags     // options
-                                            ,   CONST SYSTEMTIME    *lpTime     // time
-                                            ,   ws_char_w_t const   *lpFormat   // time format string
-                                            ,   ws_char_w_t         *lpTimeStr  // formatted string buffer
-                                            ,   int                 cchTime)    // size of string buffer
+inline
+int
+STLSOFT_STDCALL GetTimeFormat_msW(
+    LCID                locale      // locale
+,   DWORD               dwFlags     // options
+,   CONST SYSTEMTIME*   lpTime      // time
+,   ws_char_w_t const*  lpFormat    // time format string
+,   ws_char_w_t*        lpTimeStr   // formatted string buffer
+,   int                 cchTime     // size of string buffer
+)
 {
     WINSTL_ASSERT(0 == cchTime || NULL != lpTimeStr);
 
-    return GetTimeFormat_ms_<ws_char_w_t>(locale, dwFlags, lpTime, lpFormat, lpTimeStr, cchTime);
+    return GetTimeFormat_ms_<ws_char_w_t>(locale, dwFlags, lpTime, lpFormat, NULL, lpTimeStr, cchTime);
 }
+
+inline
+int
+STLSOFT_STDCALL GetTimeFormat_msExA(
+    LCID                locale      // locale
+,   DWORD               dwFlags     // options
+,   CONST SYSTEMTIME*   lpTime      // time
+,   ws_char_a_t const*  lpFormat    // time format string
+,   ws_char_a_t const*  (*timeMarkers)[2]
+,   ws_char_a_t*        lpTimeStr   // formatted string buffer
+,   int                 cchTime     // size of string buffer
+)
+{
+    WINSTL_ASSERT(0 == cchTime || NULL != lpTimeStr);
+
+    return GetTimeFormat_ms_<ws_char_a_t>(locale, dwFlags, lpTime, lpFormat, *timeMarkers, lpTimeStr, cchTime);
+}
+
+inline
+int
+STLSOFT_STDCALL GetTimeFormat_msExW(
+    LCID                locale      // locale
+,   DWORD               dwFlags     // options
+,   CONST SYSTEMTIME*   lpTime      // time
+,   ws_char_w_t const*  lpFormat    // time format string
+,   ws_char_w_t const*  (*timeMarkers)[2]
+,   ws_char_w_t*        lpTimeStr   // formatted string buffer
+,   int                 cchTime     // size of string buffer
+)
+{
+    WINSTL_ASSERT(0 == cchTime || NULL != lpTimeStr);
+
+    return GetTimeFormat_ms_<ws_char_w_t>(locale, dwFlags, lpTime, lpFormat, *timeMarkers, lpTimeStr, cchTime);
+}
+
 
 ////////////////////////////////////////////////////////////////////////////
 // Unit-testing

@@ -4,11 +4,11 @@
  * Purpose:     Functions for manipulating directories.
  *
  * Created:     7th February 2002
- * Updated:     26th February 2011
+ * Updated:     1st February 2013
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2002-2011, Matthew Wilson and Synesis Software
+ * Copyright (c) 2002-2013, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,8 +50,8 @@
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define WINSTL_VER_WINSTL_FILESYSTEM_HPP_DIRECTORY_FUNCTIONS_MAJOR     5
 # define WINSTL_VER_WINSTL_FILESYSTEM_HPP_DIRECTORY_FUNCTIONS_MINOR     0
-# define WINSTL_VER_WINSTL_FILESYSTEM_HPP_DIRECTORY_FUNCTIONS_REVISION  4
-# define WINSTL_VER_WINSTL_FILESYSTEM_HPP_DIRECTORY_FUNCTIONS_EDIT      49
+# define WINSTL_VER_WINSTL_FILESYSTEM_HPP_DIRECTORY_FUNCTIONS_REVISION  6
+# define WINSTL_VER_WINSTL_FILESYSTEM_HPP_DIRECTORY_FUNCTIONS_EDIT      51
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -255,7 +255,7 @@ inline
 ws_dword_t
 remove_directory_recurse_impl(
     C const*    dir
-,   ws_int_t (*pfn)(void* param, C const* subDir, FD const* st, DWORD err)
+,   ws_int_t  (*pfn)(void* param, C const* subDir, FD const* st, DWORD err)
 ,   void*       param
 )
 {
@@ -444,6 +444,11 @@ remove_directory_recurse_impl(
                                             if(r > 0)
                                             {
                                                 dwRet = remove_directory_recurse_impl(sz.c_str(), pfn, param);
+
+                                                if(ERROR_SUCCESS != dwRet)
+                                                {
+                                                    break;
+                                                }
                                             }
                                         }
                                     }
@@ -557,7 +562,7 @@ inline ws_bool_t create_directory_recurse(S const& dir, LPSECURITY_ATTRIBUTES lp
  *   specifies the stat information for the entry to be deleted. Return true
  *   to enable removal of this entry, or false to prevent removal (and
  *   cancel the overall operation). All other params are unspecified (except
- *   \c param). The return value is ignored.
+ *   \c param).
  * \li If the err param is any other value, and the \c st param is NULL,
  *   then the \c dir param specifies the name of a directory that could not
  *   be deleted and err specifies the errno value associated with the
@@ -574,7 +579,7 @@ inline
 ws_bool_t
 remove_directory_recurse(
     ws_char_a_t const*  dir
-,   ws_int_t            (*pfn)(void* param, ws_char_a_t const* subDir, WIN32_FIND_DATAA const* st, DWORD err)
+,   ws_int_t          (*pfn)(void* param, ws_char_a_t const* subDir, WIN32_FIND_DATAA const* st, DWORD err)
 ,   void*               param
 )
 {
@@ -602,7 +607,7 @@ inline ws_bool_t remove_directory_recurse(ws_char_a_t const* dir)
  */
 inline ws_bool_t remove_directory_recurse(
     ws_char_w_t const*  dir
-,   ws_int_t            (*pfn)(void* param, ws_char_w_t const* subDir, WIN32_FIND_DATAW const* st, DWORD err)
+,   ws_int_t          (*pfn)(void* param, ws_char_w_t const* subDir, WIN32_FIND_DATAW const* st, DWORD err)
 ,   void*               param
 )
 {

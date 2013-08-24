@@ -4,14 +4,14 @@
  * Purpose:     Special string instance class template.
  *
  * Created:     3rd June 2006
- * Updated:     12th August 2010
+ * Updated:     19th May 2012
  *
  * Thanks to:   Pablo Aguilar for spotting my omission of string access shims
  *              for special_string_instance_1.
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2006-2010, Matthew Wilson and Synesis Software
+ * Copyright (c) 2006-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,8 +55,8 @@
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define STLSOFT_VER_STLSOFT_STRING_HPP_SPECIAL_STRING_INSTANCE_MAJOR       1
 # define STLSOFT_VER_STLSOFT_STRING_HPP_SPECIAL_STRING_INSTANCE_MINOR       3
-# define STLSOFT_VER_STLSOFT_STRING_HPP_SPECIAL_STRING_INSTANCE_REVISION    1
-# define STLSOFT_VER_STLSOFT_STRING_HPP_SPECIAL_STRING_INSTANCE_EDIT        22
+# define STLSOFT_VER_STLSOFT_STRING_HPP_SPECIAL_STRING_INSTANCE_REVISION    2
+# define STLSOFT_VER_STLSOFT_STRING_HPP_SPECIAL_STRING_INSTANCE_EDIT        23
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -873,7 +873,7 @@ inline ss_size_t c_str_len_a(stlsoft_ns_qual(special_string_instance_0)<P> const
     // If this fires, you're trying to invoke c_str_len_w() on an SSI
     // whose policy defines the character type to be something other
     // than char.
-    ss_char_a_t const   *special_string_instance_must_use_narrow_character  =   ssi.c_str_a();
+    ss_char_a_t const* const special_string_instance_must_use_narrow_character = ssi.c_str_a();
 
     STLSOFT_SUPPRESS_UNUSED(special_string_instance_must_use_narrow_character);
 
@@ -885,7 +885,7 @@ inline ss_size_t c_str_len_w(stlsoft_ns_qual(special_string_instance_0)<P> const
     // If this fires, you're trying to invoke c_str_len_w() on an SSI
     // whose policy defines the character type to be something other
     // than wchar_t.
-    ss_char_w_t const   *special_string_instance_must_use_wide_character    =   ssi.c_str_w();
+    ss_char_w_t const* const special_string_instance_must_use_wide_character = ssi.c_str_w();
 
     STLSOFT_SUPPRESS_UNUSED(special_string_instance_must_use_wide_character);
 
@@ -975,7 +975,7 @@ inline ss_size_t c_str_len_a(stlsoft_ns_qual(special_string_instance_1)<P> const
     // If this fires, you're trying to invoke c_str_len_w() on an SSI
     // whose policy defines the character type to be something other
     // than char.
-    ss_char_a_t const   *special_string_instance_must_use_narrow_character  =   ssi.c_str_a();
+    ss_char_a_t const* const special_string_instance_must_use_narrow_character = ssi.c_str_a();
 
     STLSOFT_SUPPRESS_UNUSED(special_string_instance_must_use_narrow_character);
 
@@ -987,7 +987,7 @@ inline ss_size_t c_str_len_w(stlsoft_ns_qual(special_string_instance_1)<P> const
     // If this fires, you're trying to invoke c_str_len_w() on an SSI
     // whose policy defines the character type to be something other
     // than wchar_t.
-    ss_char_w_t const   *special_string_instance_must_use_wide_character    =   ssi.c_str_w();
+    ss_char_w_t const* const special_string_instance_must_use_wide_character = ssi.c_str_w();
 
     STLSOFT_SUPPRESS_UNUSED(special_string_instance_must_use_wide_character);
 

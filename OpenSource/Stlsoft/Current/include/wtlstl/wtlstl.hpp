@@ -5,11 +5,11 @@
  *              and platform discriminations, and definitions of types.
  *
  * Created:     12th May 2003
- * Updated:     10th August 2009
+ * Updated:     2nd March 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2003-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2003-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,8 +47,8 @@
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define _WTLSTL_VER_WTLSTL_HPP_WTLSTL_MAJOR    2
 # define _WTLSTL_VER_WTLSTL_HPP_WTLSTL_MINOR    3
-# define _WTLSTL_VER_WTLSTL_HPP_WTLSTL_REVISION 4
-# define _WTLSTL_VER_WTLSTL_HPP_WTLSTL_EDIT     42
+# define _WTLSTL_VER_WTLSTL_HPP_WTLSTL_REVISION 5
+# define _WTLSTL_VER_WTLSTL_HPP_WTLSTL_EDIT     43
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /** \file wtlstl/wtlstl.hpp
@@ -180,9 +180,9 @@
  * STLSoft version compatibility
  */
 
-#if !defined(_STLSOFT_VER_1_9_1_B41) || \
-    _STLSOFT_VER < _STLSOFT_VER_1_9_1_B41
-# error This version of the WTLSTL libraries requires STLSoft version 1.9.1 beta 41, or later
+#if !defined(_STLSOFT_VER) || \
+    _STLSOFT_VER < 0x010971ff
+# error This version of the WTLSTL libraries requires STLSoft version 1.9.113, or later
 #endif /* _STLSOFT_VER */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -231,9 +231,9 @@
 /* No recognised compiler */
 # ifdef _STLSOFT_FORCE_ANY_COMPILER
 #  define _WTLSTL_COMPILER_IS_UNKNOWN
-#  ifdef _STLSOFT_COMPILE_VERBOSE
+#  ifdef STLSOFT_COMPILE_VERBOSE
 #   pragma message("Compiler is unknown to WTLSTL")
-#  endif /* _STLSOFT_COMPILE_VERBOSE */
+#  endif /* STLSOFT_COMPILE_VERBOSE */
 # else /* ? _STLSOFT_FORCE_ANY_COMPILER */
 #  error Currently only Borland C++, Digital Mars C/C++, Intel C/C++, Metrowerks CodeWarrior and Visual C++ compilers are supported by the WTLSTL libraries
 # endif /* _STLSOFT_FORCE_ANY_COMPILER */

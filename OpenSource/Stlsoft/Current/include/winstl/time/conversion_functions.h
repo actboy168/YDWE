@@ -4,11 +4,11 @@
  * Purpose:     Comparison functions for Windows time structures.
  *
  * Created:     21st November 2003
- * Updated:     10th August 2009
+ * Updated:     17th March 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2003-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2003-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,9 +49,9 @@
 
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define WINSTL_VER_WINSTL_TIME_H_CONVERSION_FUNCTIONS_MAJOR    4
-# define WINSTL_VER_WINSTL_TIME_H_CONVERSION_FUNCTIONS_MINOR    0
-# define WINSTL_VER_WINSTL_TIME_H_CONVERSION_FUNCTIONS_REVISION 5
-# define WINSTL_VER_WINSTL_TIME_H_CONVERSION_FUNCTIONS_EDIT     49
+# define WINSTL_VER_WINSTL_TIME_H_CONVERSION_FUNCTIONS_MINOR    1
+# define WINSTL_VER_WINSTL_TIME_H_CONVERSION_FUNCTIONS_REVISION 1
+# define WINSTL_VER_WINSTL_TIME_H_CONVERSION_FUNCTIONS_EDIT     53
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -101,10 +101,17 @@ namespace winstl_project
  * \ingroup group__library__time
  *
  * \note This follows the algorithm provided in MSDN Q167296
+ *
+ * \pre (NULL != ft)
  */
-STLSOFT_INLINE void winstl__UNIXTimeToFILETIME(time_t t, FILETIME *ft)
+STLSOFT_INLINE
+void
+winstl_C_UNIXTimeToFILETIME(
+    time_t      t
+,   FILETIME*   ft
+)
 {
-    const ws_uint64_t i = UInt32x32To64(t, 10000000) + STLSOFT_GEN_UINT64_SUFFIX(116444736000000000);
+    ws_uint64_t const i = UInt32x32To64(t, 10000000) + STLSOFT_GEN_UINT64_SUFFIX(116444736000000000);
 
     WINSTL_ASSERT(NULL != ft);
 
@@ -112,9 +119,23 @@ STLSOFT_INLINE void winstl__UNIXTimeToFILETIME(time_t t, FILETIME *ft)
     ft->dwHighDateTime = (DWORD)(i >> 32);
 }
 
-STLSOFT_INLINE void winstl__UNIXTimeToFILETIME_us(time_t t, ws_sint32_t usec, FILETIME *ft)
+/** Converts a time_t and a microseconds value into a FILETIME
+ *
+ * \ingroup group__library__time
+ *
+ * \note This follows the algorithm provided in MSDN Q167296
+ *
+ * \pre (NULL != ft)
+ */
+STLSOFT_INLINE
+void
+winstl_C_UNIXTimeToFILETIME_us(
+    time_t      t
+,   ws_sint32_t usec
+,   FILETIME*   ft
+)
 {
-    ws_uint64_t i = UInt32x32To64(t, 10000000) + Int32x32To64(usec, 10) + STLSOFT_GEN_UINT64_SUFFIX(116444736000000000);
+    ws_uint64_t const i = UInt32x32To64(t, 10000000) + Int32x32To64(usec, 10) + STLSOFT_GEN_UINT64_SUFFIX(116444736000000000);
 
     WINSTL_ASSERT(NULL != ft);
 
@@ -122,7 +143,21 @@ STLSOFT_INLINE void winstl__UNIXTimeToFILETIME_us(time_t t, ws_sint32_t usec, FI
     ft->dwHighDateTime = (DWORD)(i >> 32);
 }
 
-STLSOFT_INLINE time_t winstl__FILETIMEToUNIXTime(FILETIME const* ft, ws_sint32_t *microseconds)
+/** Converts a FILETIME into a time_t
+ *
+ * \ingroup group__library__time
+ *
+ * \note This follows the algorithm provided in MSDN Q167296
+ *
+ * \pre (NULL != ft)
+ * \pre (NULL != microseconds)
+ */
+STLSOFT_INLINE
+time_t
+winstl_C_FILETIMEToUNIXTime(
+    FILETIME const* ft
+,   ws_sint32_t*    microseconds
+)
 {
     ws_sint64_t i;
 
@@ -141,6 +176,38 @@ STLSOFT_INLINE time_t winstl__FILETIMEToUNIXTime(FILETIME const* ft, ws_sint32_t
 
     return stlsoft_static_cast(time_t, i);
 }
+
+/* /////////////////////////////////////////////////////////////////////////
+ * Obsolete symbols
+ *
+ * NOTE: these are only defined if:
+ *
+ * - we're generating documentation, or
+ * - STLSOFT_OBSOLETE is specified, or
+ * - it's STLSoft 1.9 (or earlier)
+ */
+
+#if defined(STLSOFT_DOCUMENTATION_SKIP_SECTION) || \
+    defined(STLSOFT_OBSOLETE) || \
+    _STLSOFT_VER < 0x010a0000
+
+/** \def winstl__UNIXTimeToFILETIME
+ *
+ * \deprecated Use winstl_C_UNIXTimeToFILETIME
+ */
+# define winstl__UNIXTimeToFILETIME                 winstl_C_UNIXTimeToFILETIME
+/** \def winstl__UNIXTimeToFILETIME_us
+ *
+ * \deprecated Use winstl_C_UNIXTimeToFILETIME_us
+ */
+# define winstl__UNIXTimeToFILETIME_us              winstl_C_UNIXTimeToFILETIME_us
+/** \def winstl__FILETIMEToUNIXTime
+ *
+ * \deprecated Use winstl_C_FILETIMEToUNIXTime
+ */
+# define winstl__FILETIMEToUNIXTime                 winstl_C_FILETIMEToUNIXTime
+
+#endif /* obsolete || 1.9 */
 
 /* /////////////////////////////////////////////////////////////////////////
  * Namespace
@@ -165,9 +232,14 @@ namespace winstl
  *
  * \note This follows the algorithm provided in MSDN Q167296
  */
-inline void UNIXTimeToFILETIME(time_t t, FILETIME &ft)
+inline
+void
+UNIXTimeToFILETIME(
+    time_t      t
+,   FILETIME&   ft
+)
 {
-    winstl__UNIXTimeToFILETIME(t, &ft);
+    winstl_C_UNIXTimeToFILETIME(t, &ft);
 }
 
 /** \brief Converts a time_t into a FILETIME
@@ -176,11 +248,15 @@ inline void UNIXTimeToFILETIME(time_t t, FILETIME &ft)
  *
  * \note This follows the algorithm provided in MSDN Q167296
  */
-inline FILETIME UNIXTimeToFILETIME(time_t t)
+inline
+FILETIME
+UNIXTimeToFILETIME(
+    time_t  t
+)
 {
-    FILETIME    ft;
+    FILETIME ft;
 
-    winstl__UNIXTimeToFILETIME(t, &ft);
+    winstl_C_UNIXTimeToFILETIME(t, &ft);
 
     return ft;
 }
@@ -191,9 +267,15 @@ inline FILETIME UNIXTimeToFILETIME(time_t t)
  *
  * \note This follows the algorithm provided in MSDN Q167296
  */
-inline void UNIXTimeToFILETIME(time_t t, ws_sint32_t usec, FILETIME &ft)
+inline
+void
+UNIXTimeToFILETIME(
+    time_t      t
+,   ws_sint32_t usec
+,   FILETIME&   ft
+)
 {
-    winstl__UNIXTimeToFILETIME_us(t, usec, &ft);
+    winstl_C_UNIXTimeToFILETIME_us(t, usec, &ft);
 }
 
 /** \brief Converts a time_t + microseconds into a FILETIME
@@ -202,11 +284,16 @@ inline void UNIXTimeToFILETIME(time_t t, ws_sint32_t usec, FILETIME &ft)
  *
  * \note This follows the algorithm provided in MSDN Q167296
  */
-inline FILETIME UNIXTimeToFILETIME(time_t t, ws_sint32_t usec)
+inline
+FILETIME
+UNIXTimeToFILETIME(
+    time_t      t
+,   ws_sint32_t usec
+)
 {
-    FILETIME    ft;
+    FILETIME ft;
 
-    winstl__UNIXTimeToFILETIME_us(t, usec, &ft);
+    winstl_C_UNIXTimeToFILETIME_us(t, usec, &ft);
 
     return ft;
 }
@@ -215,27 +302,43 @@ inline FILETIME UNIXTimeToFILETIME(time_t t, ws_sint32_t usec)
  *
  * \ingroup group__library__time
  */
-inline time_t FILETIMEToUNIXTime(FILETIME const& ft, ws_sint32_t *microseconds = NULL)
+inline
+time_t
+FILETIMEToUNIXTime(
+    FILETIME const& ft
+,   ws_sint32_t*    microseconds = NULL
+)
 {
-    return winstl__FILETIMEToUNIXTime(&ft, microseconds);
+    return winstl_C_FILETIMEToUNIXTime(&ft, microseconds);
 }
 
 /** \brief Converts a FILETIME into a time_t
  *
  * \ingroup group__library__time
  */
-inline void FILETIMEToUNIXTime(FILETIME const& ft, time_t &t)
+inline
+void
+FILETIMEToUNIXTime(
+    FILETIME const& ft
+,   time_t&         t
+)
 {
-    t = winstl__FILETIMEToUNIXTime(&ft, NULL);
+    t = winstl_C_FILETIMEToUNIXTime(&ft, NULL);
 }
 
 /** \brief Converts a FILETIME into a time_t
  *
  * \ingroup group__library__time
  */
-inline void FILETIMEToUNIXTime(FILETIME const& ft, time_t &t, ws_sint32_t &microseconds)
+inline
+void
+FILETIMEToUNIXTime(
+    FILETIME const& ft
+,   time_t&         t
+,   ws_sint32_t&    microseconds
+)
 {
-    t = winstl__FILETIMEToUNIXTime(&ft, &microseconds);
+    t = winstl_C_FILETIMEToUNIXTime(&ft, &microseconds);
 }
 
 # endif /* STLSOFT_CF_64BIT_INT_SUPPORT */

@@ -5,11 +5,11 @@
  *              and platform discriminations, and definitions of types.
  *
  * Created:     15th January 2002
- * Updated:     10th August 2009
+ * Updated:     2nd March 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2002-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2002-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,9 +46,9 @@
 /* File version */
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define ATLSTL_VER_ATLSTL_HPP_ATLSTL_MAJOR     3
-# define ATLSTL_VER_ATLSTL_HPP_ATLSTL_MINOR     4
-# define ATLSTL_VER_ATLSTL_HPP_ATLSTL_REVISION  3
-# define ATLSTL_VER_ATLSTL_HPP_ATLSTL_EDIT      105
+# define ATLSTL_VER_ATLSTL_HPP_ATLSTL_MINOR     5
+# define ATLSTL_VER_ATLSTL_HPP_ATLSTL_REVISION  1
+# define ATLSTL_VER_ATLSTL_HPP_ATLSTL_EDIT      106
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /** \file atlstl/atlstl.hpp
@@ -126,12 +126,13 @@
 # define _ATLSTL_VER_1_5_2      0x00010502  /*!< Version 1.5.2 */
 # define _ATLSTL_VER_1_6_1      0x00010601  /*!< Version 1.6.1 (with STLSoft 1.9.1) */
 # define _ATLSTL_VER_1_6_2      0x00010602  /*!< Version 1.6.2 (with STLSoft 1.9.25) */
+# define _ATLSTL_VER_1_6_3      0x010603ff  /*!< Version 1.6.3 (with STLSoft 1.9.113) */
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 #define _ATLSTL_VER_MAJOR       1
 #define _ATLSTL_VER_MINOR       6
-#define _ATLSTL_VER_REVISION    2
-#define _ATLSTL_VER             _ATLSTL_VER_1_6_2
+#define _ATLSTL_VER_REVISION    3
+#define _ATLSTL_VER             _ATLSTL_VER_1_6_3
 
 /* /////////////////////////////////////////////////////////////////////////
  * Includes
@@ -166,9 +167,9 @@ extern CComModule _Module;
  * STLSoft version compatibility
  */
 
-#if !defined(_STLSOFT_VER_1_9_1_B41) || \
-    _STLSOFT_VER < _STLSOFT_VER_1_9_1_B41
-# error This version of the ATLSTL libraries requires STLSoft version 1.9.1 beta 41, or later
+#if !defined(_STLSOFT_VER) || \
+    _STLSOFT_VER < 0x010971ff
+# error This version of the ATLSTL libraries requires STLSoft version 1.9.113, or later
 #endif /* _STLSOFT_VER */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -217,9 +218,9 @@ extern CComModule _Module;
 /* No recognised compiler */
 # ifdef _STLSOFT_FORCE_ANY_COMPILER
 #  define _ATLSTL_COMPILER_IS_UNKNOWN
-#  ifdef _STLSOFT_COMPILE_VERBOSE
+#  ifdef STLSOFT_COMPILE_VERBOSE
 #   pragma message("Compiler is unknown to ATLSTL")
-#  endif /* _STLSOFT_COMPILE_VERBOSE */
+#  endif /* STLSOFT_COMPILE_VERBOSE */
 # else /* ? _STLSOFT_FORCE_ANY_COMPILER */
 #  error Currently only Borland C++, Digital Mars C/C++, Intel C/C++, Metrowerks CodeWarrior and Visual C++ compilers are supported by the ATLSTL libraries
 # endif /* _STLSOFT_FORCE_ANY_COMPILER */

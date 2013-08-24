@@ -2,9 +2,58 @@
 STLSoft - History
 
 ; Created:  29th March 2002
-; Updated:  7th February 2012
+; Updated:  16th February 2013
 
 ============================================================================
+
+
+16th February 2013 - 1.9.117 released
+-------------------------------------
+
+ * added Visual C++ 11 compatibility
+ * various minor changes
+
+
+19th August 2012 - 1.9.116 released
+-----------------------------------
+
+ * fixed defect in winstl::pipe::close_write()
+ * various other minor warning suppression and reformatting
+
+
+31st July 2012 - 1.9.115 released
+---------------------------------
+
+ * stlsoft::integer_to_string() new overloads with out-parameter as pointer; deprecated overloads with out-parameter as reference
+ * winstl::integral_printf_traits added octal_format_a/w(), hexadecimal_format_a/w(), decimal_format_a/w(); deprecated format_a/w() and hex_format_a/w() methods, and size_min, size_max, and size member constants
+ * Windows 7-compatibility for winstl::drophandle_sequence
+ * winstl::spin_mutex now uses SwitchToThread if _WIN32_WINNT >= 0x0400
+ * added winstl::added GetTimeFormat_msExA/W() by which custom time markers can be specified
+
+
+4th June 2012 - 1.9.114 released
+--------------------------------
+
+ * added unixstl::filesystem_traits::is_socket(char_type const*) method
+ * added unixstl::filesystem_traits::is_link(char_type const*) method
+ * added unixstl::filesystem_traits::is_socket(stat_data_type const*) method
+ * added unixstl::filesystem_traits::find_next_path_name_separator() method
+ * added unixstl::filesystem_traits::find_last_path_name_separator() method
+ * unixstl::filesystem_traits::get_full_path_name() now canonicalises '.'/'..'-trailing paths
+ * unixstl::readdir_sequence.hpp now includes directory name in thrown exception
+
+
+4th June 2012 - 1.9.113 released
+--------------------------------
+
+ * Intel C/C++ 12 support
+ * support for STLSOFT_COMPILE_VERBOSE; deprecation of _STLSOFT_COMPILE_VERBOSE
+ * fixed unixstl::filesystem_traits::broken get_current_directory()
+ * fixed unixstl::filesystem_traits::broken invalid_file_handle_value()
+ * fixed unixstl::filesystem_traits::is_file() / is_directory() / is_link()
+ * numerous improvements to unixstl::filesystem_traits::glob_sequence
+ * unixstl::readdir_sequence correction to elide sockets from search results
+ * winstl/time/conversion_functions.h renaming (and deprecation) of non-standard C function names
 
 
 7th February 2012 - 1.9.112 released

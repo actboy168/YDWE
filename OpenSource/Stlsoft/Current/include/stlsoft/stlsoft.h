@@ -6,7 +6,7 @@
  *              types.
  *
  * Created:     15th January 2002
- * Updated:     7th February 2012
+ * Updated:     12th December 2012
  *
  * Home:        http://stlsoft.org/
  *
@@ -53,9 +53,9 @@
 /* File version */
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define STLSOFT_VER_STLSOFT_H_STLSOFT_MAJOR    3
-# define STLSOFT_VER_STLSOFT_H_STLSOFT_MINOR    24
-# define STLSOFT_VER_STLSOFT_H_STLSOFT_REVISION 4
-# define STLSOFT_VER_STLSOFT_H_STLSOFT_EDIT     423
+# define STLSOFT_VER_STLSOFT_H_STLSOFT_MINOR    29
+# define STLSOFT_VER_STLSOFT_H_STLSOFT_REVISION 2
+# define STLSOFT_VER_STLSOFT_H_STLSOFT_EDIT     433
 #else /* ? STLSOFT_DOCUMENTATION_SKIP_SECTION */
 /* # include "./internal/doxygen_defs.h" */
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
@@ -275,12 +275,31 @@
 # define _STLSOFT_VER_1_9_110   0x01096eff  /*!< Version 1.9.110 (25th November 2011) */
 # define _STLSOFT_VER_1_9_111   0x01096fff  /*!< Version 1.9.111 (30th November 2011) */
 # define _STLSOFT_VER_1_9_112   0x010970ff  /*!< Version 1.9.112 (7th February 2012) */
+# define _STLSOFT_VER_1_9_113   0x010971ff  /*!< Version 1.9.113 (4th June 2012) */
+# define _STLSOFT_VER_1_9_114   0x010972ff  /*!< Version 1.9.114 (4th June 2012) */
+# define _STLSOFT_VER_1_9_115   0x010973ff  /*!< Version 1.9.115 (30th July 2012) */
+# define _STLSOFT_VER_1_9_116   0x010974ff  /*!< Version 1.9.116 (18th August 2012) */
+# define _STLSOFT_VER_1_9_117   0x010975ff  /*!< Version 1.9.117 (12th December 2012) */
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 #define _STLSOFT_VER_MAJOR      1
 #define _STLSOFT_VER_MINOR      9
-#define _STLSOFT_VER_REVISION   112
-#define _STLSOFT_VER            _STLSOFT_VER_1_9_112
+#define _STLSOFT_VER_REVISION   117
+#define _STLSOFT_VER            _STLSOFT_VER_1_9_117
+
+/* /////////////////////////////////////
+ * Underlying version detection
+ */
+
+/* defines STLSOFT_HEAD_VER, which specifies the current version of the 
+ * main (HEAD) library. Will never be greater than STLSOFT_LEAD_VER.
+ */
+#include <stlsoft/internal/head_version.h>
+
+/* defines STLSOFT_LEAD_VER, which specifies the current version of any
+ * alpha (LEAD) library. Will never be less than STLSOFT_HEAD_VER.
+ */
+#include <stlsoft/internal/lead_version.h>
 
 /* /////////////////////////////////////////////////////////////////////////
  * Basic macros
@@ -289,7 +308,7 @@
 /* Compilation messages
  *
  * To see certain informational messages during compilation define the
- * preprocessor symbol _STLSOFT_COMPILE_VERBOSE
+ * preprocessor symbol STLSOFT_COMPILE_VERBOSE
  */
 
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
@@ -534,8 +553,10 @@
 #  define STLSOFT_COMPILER_VERSION_STRING       "Intel C/C++ 10.0"
 # elif (__INTEL_COMPILER == 1100)
 #  define STLSOFT_COMPILER_VERSION_STRING       "Intel C/C++ 11.0"
+# elif (__INTEL_COMPILER >= 1200) && (__INTEL_COMPILER < 1300)
+#  define STLSOFT_COMPILER_VERSION_STRING       "Intel C/C++ 12.x"
 # else /* ? __INTEL_COMPILER */
-#  error Only Intel C++ Compiler versions 6.0, 7.0(/7.1), 8.0, 9.0, 10.0 and 11.0 currently supported by the STLSoft libraries
+#  error Only Intel C++ Compiler versions 6.0, 7.0(/7.1), 8.0, 9.0, 10.0, 11.0 and 12.x currently supported by the STLSoft libraries
 # endif /* __INTEL_COMPILER */
 
 #elif defined(__MWERKS__)
@@ -644,8 +665,10 @@
 #  define STLSOFT_COMPILER_VERSION_STRING       "Visual C++ 9.0"
 # elif (_MSC_VER == 1600)
 #  define STLSOFT_COMPILER_VERSION_STRING       "Visual C++ 10.0"
+# elif (_MSC_VER == 1700)
+#  define STLSOFT_COMPILER_VERSION_STRING       "Visual C++ 11.0"
 # else /* ? _MSC_VER */
-#  error Currently only versions 5.0, 6.0, 7.0, 7.1, 8.0, 9.0 and 10.0 of the Visual C++ compiler are supported by the STLSoft libraries
+#  error Currently only versions 5.0, 6.0, 7.0, 7.1, 8.0, 9.0, 10.0, and 11.0 of the Visual C++ compiler are supported by the STLSoft libraries
 # endif /* _MSC_VER */
 
 #else /* ? compiler */
@@ -734,19 +757,51 @@
 # error Compiler not correctly discriminated
 #endif /* compiler */
 
+/* pragma message support */
+
+/* backwards-compatibility : _STLSOFT_COMPILE_VERBOSE => STLSOFT_COMPILE_VERBOSE */
+
 #if defined(_STLSOFT_COMPILE_VERBOSE) && \
-    !defined(STLSOFT_CF_PRAGMA_MESSAGE_SUPPORT)
-# undef _STLSOFT_COMPILE_VERBOSE
-#endif /* !STLSOFT_CF_PRAGMA_MESSAGE_SUPPORT && _STLSOFT_COMPILE_VERBOSE */
+    !defined(STLSOFT_COMPILE_VERBOSE)
+# define STLSOFT_COMPILE_VERBOSE
+#endif
+
+/* backwards-compatibility : STLSOFT_CF_PRAGMA_MESSAGE_SUPPORT => STLSOFT_PPF_pragma_message_SUPPORT */
+#if defined(STLSOFT_CF_PRAGMA_MESSAGE_SUPPORT) && \
+    !defined(STLSOFT_PPF_pragma_message_SUPPORT)
+# define STLSOFT_PPF_pragma_message_SUPPORT
+#endif
+
+#if defined(STLSOFT_COMPILE_VERBOSE) && \
+    !defined(STLSOFT_PPF_pragma_message_SUPPORT)
+# undef STLSOFT_COMPILE_VERBOSE
+#endif /* !STLSOFT_PPF_pragma_message_SUPPORT && STLSOFT_COMPILE_VERBOSE */
 
 #if defined(STLSOFT_NO_COMPILE_VERBOSE) && \
-    defined(_STLSOFT_COMPILE_VERBOSE)
-# undef _STLSOFT_COMPILE_VERBOSE
-#endif /* STLSOFT_NO_COMPILE_VERBOSE && _STLSOFT_COMPILE_VERBOSE */
+    defined(STLSOFT_COMPILE_VERBOSE)
+# undef STLSOFT_COMPILE_VERBOSE
+#endif /* STLSOFT_NO_COMPILE_VERBOSE && STLSOFT_COMPILE_VERBOSE */
 
-#ifdef _STLSOFT_COMPILE_VERBOSE
+#ifdef STLSOFT_COMPILE_VERBOSE
 # pragma message(STLSOFT_COMPILER_VERSION_STRING)
-#endif /* STLSOFT_CF_PRAGMA_MESSAGE_SUPPORT */
+#endif /* STLSOFT_COMPILE_VERBOSE */
+
+
+/* backwards-compatibility : STLSOFT_COMPILE_VERBOSE => _STLSOFT_COMPILE_VERBOSE */
+
+#if defined(STLSOFT_COMPILE_VERBOSE)
+# if defined(_STLSOFT_COMPILE_VERBOSE)
+#  if defined(STLSOFT_PPF_pragma_message_SUPPORT)
+#   pragma message("You have defined _STLSOFT_COMPILE_VERBOSE. This symbol is now deprecated, and may be ignored by a future release : instead define STLSOFT_COMPILE_VERBOSE")
+#  endif
+# else /* ? _STLSOFT_COMPILE_VERBOSE */
+   /* Must define it here, for backwards-compatibility with client code that uses it */
+#  define _STLSOFT_COMPILE_VERBOSE
+# endif /* _STLSOFT_COMPILE_VERBOSE */
+#endif /* STLSOFT_COMPILE_VERBOSE */
+
+
+
 
 
 /* __FUNCTION__ support */
@@ -1044,7 +1099,7 @@
  */
 
 /** \def STLSOFT_CC_COMBINED_VALUE
- * 
+ *
  * Combination of STLSOFT_CC_CDECL_VALUE, STLSOFT_CC_FASTCALL_VALUE
  * and STLSOFT_CC_STDCALL_VALUE.
  */
@@ -1052,21 +1107,21 @@
 #if defined(STLSOFT_CF_CDECL_SUPPORTED)
 # define STLSOFT_CDECL_VALUE            (1)     /*!< \deprecated This symbol is deprecated, and will be removed from a future version */
 # define STLSOFT_CC_CDECL_VALUE         (0x01)
-#else                                   
+#else
 # define STLSOFT_CC_CDECL_VALUE         (0)
 #endif /* STLSOFT_CF_CDECL_SUPPORTED */
 
 #if defined(STLSOFT_CF_FASTCALL_SUPPORTED)
 # define STLSOFT_FASTCALL_VALUE         (2)     /*!< \deprecated This symbol is deprecated, and will be removed from a future version */
 # define STLSOFT_CC_FASTCALL_VALUE      (0x02)
-#else                                   
+#else
 # define STLSOFT_CC_FASTCALL_VALUE      (0)
 #endif /* STLSOFT_CF_FASTCALL_SUPPORTED */
 
 #if defined(STLSOFT_CF_STDCALL_SUPPORTED)
 # define STLSOFT_STDCALL_VALUE          (3)     /*!< \deprecated This symbol is deprecated, and will be removed from a future version */
 # define STLSOFT_CC_STDCALL_VALUE       (0x04)
-#else                                   
+#else
 # define STLSOFT_CC_STDCALL_VALUE       (0)
 #endif /* STLSOFT_CF_STDCALL_SUPPORTED */
 
@@ -1138,9 +1193,9 @@
 # ifdef STLSOFT_STRICT
 #  error You are using an old version of one or more of ATLSTL, COMSTL, MFCSTL, UNIXSTL and WinSTL. Please upgrade all dependent projects in line with the STLSoft version you are using
 # else /* ? STLSOFT_STRICT */
-#  ifdef STLSOFT_CF_PRAGMA_MESSAGE_SUPPORT
+#  ifdef STLSOFT_COMPILE_VERBOSE
 #   pragma message("You are using an old version of one or more of ATLSTL, COMSTL, MFCSTL, UNIXSTL and WinSTL. _STLSOFT_INCLUDE_OBSOLETE will be defined (but is not guaranteed to work!)")
-#  endif /* STLSOFT_CF_PRAGMA_MESSAGE_SUPPORT */
+#  endif /* STLSOFT_COMPILE_VERBOSE */
 #  ifndef _STLSOFT_INCLUDE_OBSOLETE
 #   define _STLSOFT_INCLUDE_OBSOLETE
 #  endif /* !_STLSOFT_INCLUDE_OBSOLETE */
@@ -1284,6 +1339,9 @@
  */
 #define stlsoft_message_assert(msg, ex)         STLSOFT_MESSAGE_ASSERT(msg, ex)
 
+/*
+ * TODO: decide on a form of static_assert with message (as the C++11 static_assert does)
+ */
 
 /** \def STLSOFT_STATIC_ASSERT(ex)
  *
@@ -1291,12 +1349,14 @@
  *
  * \param ex A compile-time evaluatable condition that must be non-zero, or compilation will fail.
  */
-#if defined(STLSOFT_CF_STATIC_ASSERT_SUPPORT)
+#if defined(STLSOFT_CF_static_assert_SUPPORT)
+# define STLSOFT_STATIC_ASSERT(ex)          static_assert((ex), #ex)
+#elif defined(STLSOFT_CF_STATIC_ASSERT_SUPPORT)
 # if defined(STLSOFT_COMPILER_IS_GCC) || \
-     defined(STLSOFT_COMPILER_IS_INTEL)
-#   define STLSOFT_STATIC_ASSERT(ex)        do { typedef int ai[(ex) ? 1 : -1]; } while(0)
-#  else /* ? compiler */
-#   define STLSOFT_STATIC_ASSERT(ex)        do { typedef int ai[(ex) ? 1 : 0]; } while(0)
+      defined(STLSOFT_COMPILER_IS_INTEL)
+#  define STLSOFT_STATIC_ASSERT(ex)         do { typedef int ai[(ex) ? 1 : -1]; } while(0)
+# else /* ? compiler */
+#  define STLSOFT_STATIC_ASSERT(ex)         do { typedef int ai[(ex) ? 1 : 0]; } while(0)
 # endif /* compiler */
 #else /* ? STLSOFT_CF_STATIC_ASSERT_SUPPORT */
 # define STLSOFT_STATIC_ASSERT(ex)          STLSOFT_MESSAGE_ASSERT("Static assertion failed: ", (ex))
@@ -1420,10 +1480,7 @@
  */
 
 #if defined(STLSOFT_COMPILER_IS_MSVC) && \
-    (   _MSC_VER >= 1500 || \
-        (   _MSC_VER >= 1400 && \
-            defined(_MSC_FULL_VER) && \
-            _MSC_FULL_VER >= 140050320))
+    STLSOFT_MSVC_VER >= 140050320
 
 # define STLSOFT_DECLARE_DEPRECATION()                                      \
                                                                             \
@@ -1747,7 +1804,7 @@ typedef ss_uint8_t                      ss_byte_t;          /*!< Byte           
 # ifdef STLSOFT_CF_NATIVE_BOOL_SUPPORT
 typedef bool                            ss_bool_t;          /*!< Boolean type               */
 # else /* ? STLSOFT_CF_NATIVE_BOOL_SUPPORT */
-typedef unsigned int                ss_bool_t;
+typedef unsigned int                    ss_bool_t;
 # endif /* STLSOFT_CF_NATIVE_BOOL_SUPPORT */
 #endif /* __cplusplus */
 #ifndef _STLSOFT_NO_STD_INCLUDES
@@ -1783,9 +1840,9 @@ typedef ss_sint_t STLSOFT_WARN_64   sint_t;             /*!< signed integer     
 typedef ss_uint_t STLSOFT_WARN_64   uint_t;             /*!< unsigned integer           */
 typedef ss_long_t STLSOFT_WARN_64   long_t;             /*!< long integer               */
 typedef ss_byte_t                   byte_t;             /*!< Byte                       */
-#if defined(__cplusplus)
+# if defined(__cplusplus)
 typedef ss_bool_t                   bool_t;             /*!< bool                       */
-#endif /* __cplusplus */
+# endif /* __cplusplus */
 # if !defined(STLSOFT_COMPILER_IS_DMC)
 typedef ss_streampos_t              streampos_t;        /*!< streampos                  */
 typedef ss_streamoff_t              streamoff_t;        /*!< streamoff                  */
@@ -2116,7 +2173,11 @@ private:
 # if defined(STLSOFT_COMPILER_IS_BORLAND)
 
 template <ss_typename_param_k X>
-inline void throw_x(X const& x) /* throw(X) */
+inline
+void
+throw_x(
+    X const& x
+) /* throw(X) */
 {
     X   x2(x);
 
@@ -2128,19 +2189,21 @@ inline void throw_x(X const& x) /* throw(X) */
 # else
 
 template <ss_typename_param_k X>
-inline void throw_x(X const& x)
+inline
+void
+throw_x(
+    X const& x
+)
+{
 #  if   defined(STLSOFT_COMPILER_IS_MSVC) && \
         _MSC_VER < 1200
-{
     X const* px =   &x;
 
     throw *px;
-}
 #  else /* ? compiler */
-{
     throw x;
-}
 #  endif /* compiler */
+}
 
 #  define STLSOFT_THROW_X(x)    stlsoft_ns_qual(throw_x)(x)
 
@@ -2390,7 +2453,11 @@ ss_array_size_struct<N> const& ss_static_array_size(T const (&)[N]);
 
 # ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 template <ss_typename_param_k T>
-inline void stlsoft_destroy_instance_fn(T *p)
+inline
+void
+stlsoft_destroy_instance_fn(
+    T *p
+)
 {
     p->~T();
 
@@ -2782,7 +2849,13 @@ STLSOFT_INLINE void _stlsoft_internal_verify_integral_type_sizes(void)
 #if defined(__cplusplus)
 
 template <ss_typename_param_k T>
-inline void const* ptr_byte_offset(T const p, ss_ptrdiff_t n)
+inline
+void
+const*
+ptr_byte_offset(
+    T const         p
+,   ss_ptrdiff_t    n
+)
 {
 # if 0
 # if !defined(STLSOFT_COMPILER_IS_BORLAND) && \
@@ -2829,23 +2902,44 @@ inline void const* ptr_byte_offset(T const p, ss_ptrdiff_t n)
  * \result \c p offset by \c elements
  */
 template <ss_typename_param_k T>
-inline T const* ptr_offset(T const* p, ss_ptrdiff_t n)
+inline
+T const*
+ptr_offset(
+    T const*        p
+,   ss_ptrdiff_t    n
+)
 {
     return p + n;
 }
 
 /** \brief Get the difference in bytes between two pointers
  */
-template <ss_typename_param_k T1, ss_typename_param_k T2>
-inline ss_ptrdiff_t ptr_byte_diff(T1 const* p1, T2 const* p2)
+template<
+    ss_typename_param_k T1
+,   ss_typename_param_k T2
+>
+inline
+ss_ptrdiff_t
+ptr_byte_diff(
+    T1 const*   p1
+,   T2 const*   p2
+)
 {
     return static_cast<ss_byte_t const*>(static_cast<void const*>(p1)) - static_cast<ss_byte_t const*>(static_cast<void const*>(p2));
 }
 
 /** \brief Get the difference in elements between two pointers
  */
-template <ss_typename_param_k T1, ss_typename_param_k T2>
-inline ss_ptrdiff_t ptr_diff(T1 const* p1, T2 const* p2)
+template<
+    ss_typename_param_k T1
+,   ss_typename_param_k T2
+>
+inline
+ss_ptrdiff_t
+ptr_diff(
+    T1 const*   p1
+,   T2 const*   p2
+)
 {
     return p1 - p2;
 }
@@ -2868,22 +2962,50 @@ inline ss_ptrdiff_t ptr_diff(T1 const* p1, T2 const* p2)
 
 /** \brief Remove const-qualifier from an instance.
  *
- * \warning Using this function can result in undefined behaviour. As such, the
- * advice is: <b>Use With Care!</b>
+ * \warning Using this function can result in undefined behaviour. As such,
+ * the advice is: <b>Use With Care!</b>
  */
 template <ss_typename_param_k T>
-inline T& remove_const(T const& t)
+inline
+T&
+remove_const(T const& t)
 {
     return const_cast<T&>(t);
+}
+
+/** \brief Remove const-qualifier from an instance.
+ *
+ * \warning Using this function can result in undefined behaviour. As such,
+ * the advice is: <b>Use With Care!</b>
+ */
+template <ss_typename_param_k T>
+inline
+T*
+remove_const_ptr(T const* t)
+{
+    return const_cast<T*>(t);
 }
 
 /** \brief Adds const-qualifier to an instance.
  */
 template <ss_typename_param_k T>
-inline T const& apply_const(T& t)
+inline
+T const&
+apply_const(T& t)
 {
     return t;
 }
+
+/** \brief Adds const-qualifier to an instance.
+ */
+template <ss_typename_param_k T>
+inline
+T const*
+apply_const_ptr(T* t)
+{
+    return t;
+}
+
 
 /* Mutable support */
 # ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
@@ -2965,7 +3087,12 @@ inline T const* address(T const& t)
         __DMC__ < 0x0833) || \
       ( defined(STLSOFT_COMPILER_IS_MSVC) && \
         _MSC_VER < 1300)
-inline void *operator new(ss_size_t /* si */, void *pv)
+inline
+void*
+operator new(
+    ss_size_t   /* si */
+,   void*       pv
+)
 {
     return pv;
 }

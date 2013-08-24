@@ -4,11 +4,11 @@
  * Purpose:     Simple utility class for creating (constant) C-strings.
  *
  * Created:     14th May 2004
- * Updated:     10th August 2009
+ * Updated:     17th April 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2004-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2004-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,7 +51,7 @@
 # define STLSOFT_VER_STLSOFT_STRING_HPP_CSTRING_MAKER_MAJOR    4
 # define STLSOFT_VER_STLSOFT_STRING_HPP_CSTRING_MAKER_MINOR    0
 # define STLSOFT_VER_STLSOFT_STRING_HPP_CSTRING_MAKER_REVISION 2
-# define STLSOFT_VER_STLSOFT_STRING_HPP_CSTRING_MAKER_EDIT     45
+# define STLSOFT_VER_STLSOFT_STRING_HPP_CSTRING_MAKER_EDIT     46
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -155,7 +155,7 @@ public:
     /// \note Includes space for a nul-terminator character
     ///
     /// \param cch The number of characters to allocate
-    static char_type *alloc(size_type cch)
+    static char_type* alloc(size_type cch)
     {
 #if defined(WIN32) || \
     defined(_WIN32)
@@ -191,7 +191,7 @@ public:
     /// \note Includes nul-terminator character
     ///
     /// \param s The string to copy. Cannot be null pointer
-    static char_type *dup(char_type const* s)
+    static char_type* dup(char_type const* s)
     {
         STLSOFT_ASSERT(NULL != s);
 
@@ -210,14 +210,14 @@ public:
     /// \note Includes nul-terminator character
     ///
     /// \param s The string to copy. Can be null pointer, in which case NULL is returned
-    static char_type *dup_null(char_type const* s)
+    static char_type* dup_null(char_type const* s)
     {
         return (NULL == s) ? NULL : dup(s);
     }
     /// Releases the storage associated with the string
     ///
     /// \param s The string to free
-    static void free(char_type *s)
+    static void free(char_type* s)
     {
 #ifdef STLSOFT_LF_ALLOCATOR_REBIND_SUPPORT
         ss_typename_type_k allocator_type::ss_template_qual_k rebind<ss_byte_t>::other  byte_ator;
@@ -258,19 +258,19 @@ public:
     typedef cstring_maker<char_type>                        class_type;
 
 public:
-    static char_type *alloc(size_type cch)
+    static char_type* alloc(size_type cch)
     {
         return static_cast<char_type*>(malloc((1 + cch) * sizeof(char_type)));
     }
-    static char_type *dup(char_type const* s)
+    static char_type* dup(char_type const* s)
     {
         return strdup(s);
     }
-    static char_type *dup_null(char_type const* s)
+    static char_type* dup_null(char_type const* s)
     {
         return (NULL == s) ? NULL : dup(s);
     }
-    static void free(char_type *s)
+    static void free(char_type* s)
     {
         ::free(s);
     }
@@ -290,19 +290,19 @@ public:
     typedef cstring_maker<char_type>                        class_type;
 
 public:
-    static char_type *alloc(size_type cch)
+    static char_type* alloc(size_type cch)
     {
         return static_cast<char_type*>(malloc((1 + cch) * sizeof(char_type)));
     }
-    static char_type *dup(char_type const* s)
+    static char_type* dup(char_type const* s)
     {
         return _wcsdup(s);
     }
-    static char_type *dup_null(char_type const* s)
+    static char_type* dup_null(char_type const* s)
     {
         return (NULL == s) ? NULL : dup(s);
     }
-    static void free(char_type *s)
+    static void free(char_type* s)
     {
         ::free(s);
     }

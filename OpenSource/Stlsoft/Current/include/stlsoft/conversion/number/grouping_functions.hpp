@@ -4,11 +4,11 @@
  * Purpose:     Number formatting functions.
  *
  * Created:     28th August 2005
- * Updated:     10th August 2009
+ * Updated:     30th July 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2005-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2005-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,7 +52,7 @@
 # define STLSOFT_VER_STLSOFT_CONVERSION_NUMBER_HPP_GROUPING_FUNCTIONS_MAJOR     1
 # define STLSOFT_VER_STLSOFT_CONVERSION_NUMBER_HPP_GROUPING_FUNCTIONS_MINOR     0
 # define STLSOFT_VER_STLSOFT_CONVERSION_NUMBER_HPP_GROUPING_FUNCTIONS_REVISION  5
-# define STLSOFT_VER_STLSOFT_CONVERSION_NUMBER_HPP_GROUPING_FUNCTIONS_EDIT      12
+# define STLSOFT_VER_STLSOFT_CONVERSION_NUMBER_HPP_GROUPING_FUNCTIONS_EDIT      13
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -97,20 +97,22 @@ namespace stlsoft
  * \param outputSep The separator in the output.
  */
 template <ss_typename_param_k C>
-inline ss_size_t translate_thousands(   C           *dest
-                                    ,   ss_size_t   cchDest
-                                    ,   C const     *picture
-                                    ,   C const     *rawNumber
-                                    ,   C           fmtSep
-                                    ,   C           outputSep
-                                    )
+inline
+ss_size_t
+translate_thousands(
+    C*          dest
+,   ss_size_t   cchDest
+,   C const*    picture
+,   C const*    rawNumber
+,   C           fmtSep
+,   C           outputSep
+)
 {
     typedef char_traits<C>  traits_t;
 
     const ss_size_t cchRawNumber    =   traits_t::length(rawNumber);
     auto_buffer<C>  res(1 + 2 * cchRawNumber);
-    C const         *pic_next;
-//    bool            bRepeat         =   false;
+    C const*        pic_next;
 
     for(pic_next = picture; fmtSep == *pic_next; ++pic_next)
     {}
@@ -120,11 +122,10 @@ inline ss_size_t translate_thousands(   C           *dest
     C const*        raw_end     =   rawNumber + cchRawNumber;
     C const* const  raw_begin   =   rawNumber;
     C*              res_end     =   &*(res.end() - 1);
-//    C       *const  res_begin   =   &*(res.begin());
     ss_size_t       num         =   static_cast<ss_size_t>(*pic_next - '0');    // Derive the first
     ss_size_t       n           =   num;
 
-    *res_end    =   '\0';
+    *res_end = '\0';
     for(--raw_end, --res_end; raw_end != raw_begin; --raw_end, --res_end)
     {
         *res_end = *raw_end;
@@ -170,7 +171,7 @@ inline ss_size_t translate_thousands(   C           *dest
     }
     *res_end = *raw_end;
 
-    ss_size_t   cch =   static_cast<ss_size_t>(res.end() - res_end);
+    ss_size_t cch = static_cast<ss_size_t>(res.end() - res_end);
 
     if(NULL != dest)
     {
@@ -199,16 +200,19 @@ inline ss_size_t translate_thousands(   C           *dest
 template<   ss_typename_param_k C
         ,   ss_typename_param_k I
         >
-inline ss_size_t format_thousands(  C           *dest
-                                ,   ss_size_t   cchDest
-                                ,   C const     *picture
-                                ,   I const     &number
-                                ,   C           fmtSep
-                                ,   C           outputSep
-                                )
+inline
+ss_size_t
+format_thousands(
+    C*          dest
+,   ss_size_t   cchDest
+,   C const*    picture
+,   I const&    number
+,   C           fmtSep
+,   C           outputSep
+)
 {
-    C       szRawNumber[21];    // 21 is large enough for any 64-bit number (signed or unsigned)
-    C const* rawNumber  =   integer_to_string(szRawNumber, STLSOFT_NUM_ELEMENTS(szRawNumber), static_cast<unsigned int>(number));
+    C           szRawNumber[21];    // 21 is large enough for any 64-bit number (signed or unsigned)
+    C const*    rawNumber = integer_to_string(szRawNumber, STLSOFT_NUM_ELEMENTS(szRawNumber), static_cast<unsigned int>(number));
 
     STLSOFT_STATIC_ASSERT(sizeof(C) <= 8);
 
@@ -227,11 +231,14 @@ inline ss_size_t format_thousands(  C           *dest
 template<   ss_typename_param_k C
         ,   ss_typename_param_k I
         >
-inline ss_size_t format_thousands(  C           *dest
-                                ,   ss_size_t   cchDest
-                                ,   C const     *picture
-                                ,   I const     &number
-                                )
+inline
+ss_size_t
+format_thousands(
+    C*          dest
+,   ss_size_t   cchDest
+,   C const*    picture
+,   I const&    number
+)
 {
     return format_thousands<C, I>(dest, cchDest, picture, number, ';', ',');
 }

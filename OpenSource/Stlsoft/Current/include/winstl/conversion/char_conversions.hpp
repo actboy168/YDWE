@@ -4,11 +4,11 @@
  * Purpose:     Type conversions for Windows.
  *
  * Created:     31st May 2003
- * Updated:     29th January 2011
+ * Updated:     14th June 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2003-2011, Matthew Wilson and Synesis Software
+ * Copyright (c) 2003-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,9 +51,9 @@
 
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define WINSTL_VER_WINSTL_CONVERSION_HPP_CHAR_CONVERSIONS_MAJOR    5
-# define WINSTL_VER_WINSTL_CONVERSION_HPP_CHAR_CONVERSIONS_MINOR    3
-# define WINSTL_VER_WINSTL_CONVERSION_HPP_CHAR_CONVERSIONS_REVISION 3
-# define WINSTL_VER_WINSTL_CONVERSION_HPP_CHAR_CONVERSIONS_EDIT     91
+# define WINSTL_VER_WINSTL_CONVERSION_HPP_CHAR_CONVERSIONS_MINOR    4
+# define WINSTL_VER_WINSTL_CONVERSION_HPP_CHAR_CONVERSIONS_REVISION 1
+# define WINSTL_VER_WINSTL_CONVERSION_HPP_CHAR_CONVERSIONS_EDIT     92
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -435,6 +435,31 @@ private:
 };
 
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
+
+template<	ss_typename_param_k S
+		,	ss_typename_param_k C
+		>
+struct encoding2encoding_traits
+{
+	static C const* elicit_ccs(S const& s)
+	{
+		return s.c_str();
+	}
+};
+
+#ifdef __ATLBASE_H__
+
+STLSOFT_TEMPLATE_SPECIALISATION
+inline
+wchar_t const*
+encoding2encoding_traits< ::ATL::CComBSTR, wchar_t>::elicit_ccs( ::ATL::CComBSTR const& s)
+{
+	return s.m_str;
+}
+#endif /* __ATLBASE_H__ */
+
+
+
 template <ss_typename_param_k C>
 class encoding2encoding
 {
@@ -447,7 +472,7 @@ public:
     {}
     template <ss_typename_param_k S>
     encoding2encoding(S const& s)
-        : m_s(s.c_str())
+		: m_s(encoding2encoding_traits<S, C>::elicit_ccs(s))
     {}
 
 public:

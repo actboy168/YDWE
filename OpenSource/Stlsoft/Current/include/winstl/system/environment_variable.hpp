@@ -4,13 +4,13 @@
  * Purpose:     Simple class that provides access to an environment variable.
  *
  * Created:     20th December 2002
- * Updated:     11th August 2010
+ * Updated:     29th January 2013
  *
  * Thanks to:   Pablo Aguilar for requesting size() and empty().
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2002-2010, Matthew Wilson and Synesis Software
+ * Copyright (c) 2002-2013, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -53,8 +53,8 @@
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define WINSTL_VER_WINSTL_SYSTEM_HPP_ENVIRONMENT_VARIABLE_MAJOR    4
 # define WINSTL_VER_WINSTL_SYSTEM_HPP_ENVIRONMENT_VARIABLE_MINOR    3
-# define WINSTL_VER_WINSTL_SYSTEM_HPP_ENVIRONMENT_VARIABLE_REVISION 1
-# define WINSTL_VER_WINSTL_SYSTEM_HPP_ENVIRONMENT_VARIABLE_EDIT     65
+# define WINSTL_VER_WINSTL_SYSTEM_HPP_ENVIRONMENT_VARIABLE_REVISION 2
+# define WINSTL_VER_WINSTL_SYSTEM_HPP_ENVIRONMENT_VARIABLE_EDIT     66
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -156,7 +156,7 @@ public:
 public:
     /// Create an instance representing the given environment variable
     ss_explicit_k basic_environment_variable(char_type const* name)
-        : m_buffer(1 + traits_type::get_environment_variable(name, 0, 0))
+        : m_buffer(1 + traits_type::get_environment_variable(name, NULL, 0))
     {
         if( 0 == traits_type::get_environment_variable(name, &m_buffer[0], m_buffer.size()) &&
             0 != m_buffer.size())
@@ -174,7 +174,7 @@ public:
     /// Create an instance representing the given environment variable
     template<ss_typename_param_k S>
     ss_explicit_k basic_environment_variable(S const& name)
-        : m_buffer(1 + traits_type::get_environment_variable(stlsoft_ns_qual(c_str_ptr)(name), 0, 0))
+        : m_buffer(1 + traits_type::get_environment_variable(stlsoft_ns_qual(c_str_ptr)(name), NULL, 0))
     {
         if( 0 == traits_type::get_environment_variable(stlsoft_ns_qual(c_str_ptr)(name), &m_buffer[0], m_buffer.size()) &&
             0 != m_buffer.size())

@@ -5,11 +5,11 @@
  *              and platform discriminations, and definitions of types.
  *
  * Created:     15th January 2002
- * Updated:     31st January 2011
+ * Updated:     2nd March 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2002-2011, Matthew Wilson and Synesis Software
+ * Copyright (c) 2002-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,9 +46,9 @@
 /* File version */
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define UNIXSTL_VER_UNIXSTL_H_UNIXSTL_MAJOR    3
-# define UNIXSTL_VER_UNIXSTL_H_UNIXSTL_MINOR    7
-# define UNIXSTL_VER_UNIXSTL_H_UNIXSTL_REVISION 3
-# define UNIXSTL_VER_UNIXSTL_H_UNIXSTL_EDIT     90
+# define UNIXSTL_VER_UNIXSTL_H_UNIXSTL_MINOR    8
+# define UNIXSTL_VER_UNIXSTL_H_UNIXSTL_REVISION 1
+# define UNIXSTL_VER_UNIXSTL_H_UNIXSTL_EDIT     91
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /** \file unixstl/unixstl.h \brief [C, C++] The root header for the \ref group__project__unixstl "UNIXSTL" project. */
@@ -126,12 +126,13 @@
 # define _UNIXSTL_VER_1_7_2     0x010702ff  /*!< Version 1.7.2 (with STLSoft 1.9.37) */
 # define _UNIXSTL_VER_1_7_3     0x010703ff  /*!< Version 1.7.3 (with STLSoft 1.9.92) */
 # define _UNIXSTL_VER_1_7_4     0x010704ff  /*!< Version 1.7.4 (with STLSoft 1.9.108) */
+# define _UNIXSTL_VER_1_7_5     0x010705ff  /*!< Version 1.7.5 (with STLSoft 1.9.113) */
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 #define _UNIXSTL_VER_MAJOR      1
 #define _UNIXSTL_VER_MINOR      7
-#define _UNIXSTL_VER_REVISION   4
-#define _UNIXSTL_VER            _UNIXSTL_VER_1_7_4
+#define _UNIXSTL_VER_REVISION   5
+#define _UNIXSTL_VER            _UNIXSTL_VER_1_7_5
 
 /* /////////////////////////////////////////////////////////////////////////
  * Includes
@@ -146,8 +147,8 @@
  */
 
 #if !defined(_STLSOFT_VER) || \
-    _STLSOFT_VER < 0x01096cff
-# error This version of the UNIXSTL libraries requires STLSoft version 1.9.108, or later
+    _STLSOFT_VER < 0x010971ff
+# error This version of the UNIXSTL libraries requires STLSoft version 1.9.113, or later
 #endif /* _STLSOFT_VER */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -196,9 +197,9 @@
 /* No recognised compiler */
 # ifdef _STLSOFT_FORCE_ANY_COMPILER
 #  define _UNIXSTL_COMPILER_IS_UNKNOWN
-#  ifdef _STLSOFT_COMPILE_VERBOSE
+#  ifdef STLSOFT_COMPILE_VERBOSE
 #   pragma message("Compiler is unknown to UNIXSTL")
-#  endif /* _STLSOFT_COMPILE_VERBOSE */
+#  endif /* STLSOFT_COMPILE_VERBOSE */
 # else
 #  error Currently only the Comeau, GCC, Intel and Sun Pro C/C++ compilers are supported by the UNIXSTL libraries. To use other, possibly untested, compilers, define _STLSOFT_FORCE_ANY_COMPILER
 # endif /* _STLSOFT_FORCE_ANY_COMPILER */

@@ -4,11 +4,11 @@
  * Purpose:     integral_printf_traits classes.
  *
  * Created:     16th January 2002
- * Updated:     10th August 2009
+ * Updated:     10th July 2012
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2002-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2002-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,9 +51,9 @@
 
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define STLSOFT_VER_STLSOFT_UTIL_HPP_INTEGRAL_PRINTF_TRAITS_MAJOR      5
-# define STLSOFT_VER_STLSOFT_UTIL_HPP_INTEGRAL_PRINTF_TRAITS_MINOR      1
-# define STLSOFT_VER_STLSOFT_UTIL_HPP_INTEGRAL_PRINTF_TRAITS_REVISION   6
-# define STLSOFT_VER_STLSOFT_UTIL_HPP_INTEGRAL_PRINTF_TRAITS_EDIT       66
+# define STLSOFT_VER_STLSOFT_UTIL_HPP_INTEGRAL_PRINTF_TRAITS_MINOR      2
+# define STLSOFT_VER_STLSOFT_UTIL_HPP_INTEGRAL_PRINTF_TRAITS_REVISION   3
+# define STLSOFT_VER_STLSOFT_UTIL_HPP_INTEGRAL_PRINTF_TRAITS_EDIT       70
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -256,7 +256,8 @@ namespace stlsoft
      (  defined(WIN32) && \
         (   defined(STLSOFT_COMPILER_IS_GCC)) || \
             defined(STLSOFT_COMPILER_IS_INTEL)) || \
-     defined(STLSOFT_COMPILER_IS_MSVC) || \
+     (  defined(STLSOFT_COMPILER_IS_MSVC) /* && \
+        _MSC_VER < 1400 */) || \
      defined(STLSOFT_COMPILER_IS_VECTORC) || \
      defined(STLSOFT_COMPILER_IS_WATCOM)
 #  define STLSOFT_CF_64_BIT_PRINTF_USES_I64
@@ -264,7 +265,8 @@ namespace stlsoft
        defined(STLSOFT_COMPILER_IS_DMC) || \
        defined(STLSOFT_COMPILER_IS_GCC) || \
        defined(STLSOFT_COMPILER_IS_INTEL) || \
-       defined(STLSOFT_COMPILER_IS_MSVC) || \
+       (    defined(STLSOFT_COMPILER_IS_MSVC) && \
+            _MSC_VER >= 1400) || \
        defined(STLSOFT_COMPILER_IS_MWERKS) || \
        defined(STLSOFT_COMPILER_IS_SUNPRO)
 #  define STLSOFT_CF_64_BIT_PRINTF_USES_LL
@@ -306,19 +308,61 @@ struct integral_printf_traits
 {
     enum
     {
-            size_min    //!< The number of characters (& null) in the minimum value
-        ,   size_max    //!< The number of characters (& null) in the maximum value
-        ,   size        //!< The maximum of \c size_min and \c size_max
+            /// [DEPRECATED] The number of decimal characters (+ null) in
+            /// the minimum decimal value
+            ///
+            /// \deprecated This member constant is deprecated, and will be
+            ///   removed in a future version of STLSoft
+            size_min
+            /// [DEPRECATED] The number of decimal characters (+ null) in
+            /// the maximum decimal value
+            ///
+            /// \deprecated This member constant is deprecated, and will be
+            ///   removed in a future version of STLSoft
+        ,   size_max
+            /// [DEPRECATED] The maximum of \c size_min and \c size_max
+            ///
+            /// \deprecated This member constant is deprecated, and will be
+            ///   removed in a future version of STLSoft
+        ,   size
     };
 
+    /// Returns the appropriate decimal integral printf format for the type
+    static ss_char_a_t const* decimal_format_a();
+    /// Returns the appropriate decimal integral wprintf format for the type
+    static ss_char_w_t const* decimal_format_w();
+
+    /// Returns the appropriate hexadecimal integral printf format for the type
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase);
+    /// Returns the appropriate hexadecimal integral wprintf format for the type
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase);
+
+    /// Returns the appropriate octal integral printf format for the type
+    static ss_char_a_t const* octal_format_a();
+    /// Returns the appropriate octal integral wprintf format for the type
+    static ss_char_w_t const* octal_format_w();
+
+
     /// Returns the appropriate integral printf format for the type
+    ///
+    /// \deprecated This method is deprecated, and may be removed in a
+    ///   future version; use decimal_format_a().
     static ss_char_a_t const* format_a();
     /// Returns the appropriate integral wprintf format for the type
+    ///
+    /// \deprecated This method is deprecated, and may be removed in a
+    ///   future version; use decimal_format_w().
     static ss_char_w_t const* format_w();
 
     /// Returns the appropriate hexadecimal printf format for the type
+    ///
+    /// \deprecated This method is deprecated, and may be removed in a
+    ///   future version; use hexadecimal_format_a(false).
     static ss_char_a_t const* hex_format_a();
     /// Returns the appropriate hexadecimal wprintf format for the type
+    ///
+    /// \deprecated This method is deprecated, and may be removed in a
+    ///   future version; use hexadecimal_format_w(false).
     static ss_char_w_t const* hex_format_w();
 };
 
@@ -327,11 +371,107 @@ struct integral_printf_traits
 template <ss_typename_param_k T>
 struct integral_printf_traits;
 
+STLSOFT_OPEN_WORKER_NS_(ximpl_integral_printf_traits)
+
 template <ss_typename_param_k T>
 struct integral_printf_traits_base;
 
 
  /* char */
+
+STLSOFT_TEMPLATE_SPECIALISATION
+struct integral_printf_traits_base<void>
+{
+	static ss_char_a_t const* get_hexadecimal_format_pcx_a_(int upperCase)
+	{
+		static ss_char_a_t const* const s_strings[] =
+		{
+				"%x"
+			,	"%X"
+		};
+
+		return s_strings[0 != upperCase];
+	}
+
+	static ss_char_w_t const* get_hexadecimal_format_pcx_w_(int upperCase)
+	{
+		static ss_char_w_t const* const s_strings[] =
+		{
+				L"%x"
+			,	L"%X"
+		};
+
+		return s_strings[0 != upperCase];
+	}
+
+	static ss_char_a_t const* get_hexadecimal_format_pclx_a_(int upperCase)
+	{
+		static ss_char_a_t const* const s_strings[] =
+		{
+				"%lx"
+			,	"%lX"
+		};
+
+		return s_strings[0 != upperCase];
+	}
+
+	static ss_char_w_t const* get_hexadecimal_format_pclx_w_(int upperCase)
+	{
+		static ss_char_w_t const* const s_strings[] =
+		{
+				L"%lx"
+			,	L"%lX"
+		};
+
+		return s_strings[0 != upperCase];
+	}
+
+	static ss_char_a_t const* get_hexadecimal_format_pci64x_a_(int upperCase)
+	{
+		static ss_char_a_t const* const s_strings[] =
+		{
+				"%I64x"
+			,	"%I64X"
+		};
+
+		return s_strings[0 != upperCase];
+	}
+
+	static ss_char_w_t const* get_hexadecimal_format_pci64x_w_(int upperCase)
+	{
+		static ss_char_w_t const* const s_strings[] =
+		{
+				L"%I64x"
+			,	L"%I64X"
+		};
+
+		return s_strings[0 != upperCase];
+	}
+
+	static ss_char_a_t const* get_hexadecimal_format_pcllx_a_(int upperCase)
+	{
+		static ss_char_a_t const* const s_strings[] =
+		{
+				"%llx"
+			,	"%llX"
+		};
+
+		return s_strings[0 != upperCase];
+	}
+
+	static ss_char_w_t const* get_hexadecimal_format_pcllx_w_(int upperCase)
+	{
+		static ss_char_w_t const* const s_strings[] =
+		{
+				L"%llx"
+			,	L"%llX"
+		};
+
+		return s_strings[0 != upperCase];
+	}
+
+};
+
 
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits_base<char>
@@ -343,7 +483,12 @@ struct integral_printf_traits_base<char>
         ,   size = (size_min < size_max) ? size_max : size_min
     };
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_a, decimal_format_a)
     static ss_char_a_t const* format_a()
+    {
+        return decimal_format_a();
+    }
+    static ss_char_a_t const* decimal_format_a()
     {
 #  ifdef STLSOFT_CF_CHAR_IS_UNSIGNED
         return  "%u";
@@ -351,7 +496,12 @@ struct integral_printf_traits_base<char>
         return  "%d";
 #  endif /* STLSOFT_CF_CHAR_IS_UNSIGNED */
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_w, decimal_format_w)
     static ss_char_w_t const* format_w()
+    {
+        return decimal_format_w();
+    }
+    static ss_char_w_t const* decimal_format_w()
     {
 #  ifdef STLSOFT_CF_CHAR_IS_UNSIGNED
         return L"%u";
@@ -360,13 +510,32 @@ struct integral_printf_traits_base<char>
 #  endif /* STLSOFT_CF_CHAR_IS_UNSIGNED */
     }
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_a, hexadecimal_format_a)
     static ss_char_a_t const* hex_format_a()
     {
-        return  "%x";
+        return hexadecimal_format_a(false);
     }
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_a_(upperCase);
+    }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_w, hexadecimal_format_w)
     static ss_char_w_t const* hex_format_w()
     {
-        return L"%x";
+        return hexadecimal_format_w(false);
+    }
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_w_(upperCase);
+    }
+
+    static ss_char_a_t const* octal_format_a()
+    {
+        return "%o";
+    }
+    static ss_char_w_t const* octal_format_w()
+    {
+        return L"%o";
     }
 };
 
@@ -380,22 +549,51 @@ struct integral_printf_traits_base<unsigned char>
         ,   size = (size_min < size_max) ? size_max : size_min
     };
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_a, decimal_format_a)
     static ss_char_a_t const* format_a()
+    {
+        return decimal_format_a();
+    }
+    static ss_char_a_t const* decimal_format_a()
     {
         return  "%u";
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_w, decimal_format_w)
     static ss_char_w_t const* format_w()
+    {
+        return decimal_format_w();
+    }
+    static ss_char_w_t const* decimal_format_w()
     {
         return L"%u";
     }
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_a, hexadecimal_format_a)
     static ss_char_a_t const* hex_format_a()
     {
-        return  "%x";
+        return hexadecimal_format_a(false);
     }
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_a_(upperCase);
+    }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_w, hexadecimal_format_w)
     static ss_char_w_t const* hex_format_w()
     {
-        return L"%x";
+        return hexadecimal_format_w(false);
+    }
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_w_(upperCase);
+    }
+
+    static ss_char_a_t const* octal_format_a()
+    {
+        return "%o";
+    }
+    static ss_char_w_t const* octal_format_w()
+    {
+        return L"%o";
     }
 };
 
@@ -409,22 +607,51 @@ struct integral_printf_traits_base<signed char>
         ,   size = (size_min < size_max) ? size_max : size_min
     };
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_a, decimal_format_a)
     static ss_char_a_t const* format_a()
+    {
+        return decimal_format_a();
+    }
+    static ss_char_a_t const* decimal_format_a()
     {
         return  "%d";
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_w, decimal_format_w)
     static ss_char_w_t const* format_w()
+    {
+        return decimal_format_w();
+    }
+    static ss_char_w_t const* decimal_format_w()
     {
         return L"%d";
     }
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_a, hexadecimal_format_a)
     static ss_char_a_t const* hex_format_a()
     {
-        return  "%x";
+        return hexadecimal_format_a(false);
     }
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_a_(upperCase);
+    }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_w, hexadecimal_format_w)
     static ss_char_w_t const* hex_format_w()
     {
-        return L"%x";
+        return hexadecimal_format_w(false);
+    }
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_w_(upperCase);
+    }
+
+    static ss_char_a_t const* octal_format_a()
+    {
+        return "%o";
+    }
+    static ss_char_w_t const* octal_format_w()
+    {
+        return L"%o";
     }
 };
 
@@ -441,22 +668,51 @@ struct integral_printf_traits_base<short>
         ,   size = (size_min < size_max) ? size_max : size_min
     };
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_a, decimal_format_a)
     static ss_char_a_t const* format_a()
+    {
+        return decimal_format_a();
+    }
+    static ss_char_a_t const* decimal_format_a()
     {
         return  "%d";
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_w, decimal_format_w)
     static ss_char_w_t const* format_w()
+    {
+        return decimal_format_w();
+    }
+    static ss_char_w_t const* decimal_format_w()
     {
         return L"%d";
     }
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_a, hexadecimal_format_a)
     static ss_char_a_t const* hex_format_a()
     {
-        return  "%x";
+        return hexadecimal_format_a(false);
     }
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_a_(upperCase);
+    }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_w, hexadecimal_format_w)
     static ss_char_w_t const* hex_format_w()
     {
-        return L"%x";
+        return hexadecimal_format_w(false);
+    }
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_w_(upperCase);
+    }
+
+    static ss_char_a_t const* octal_format_a()
+    {
+        return "%o";
+    }
+    static ss_char_w_t const* octal_format_w()
+    {
+        return L"%o";
     }
 };
 
@@ -470,22 +726,51 @@ struct integral_printf_traits_base<unsigned short>
         ,   size = (size_min < size_max) ? size_max : size_min
     };
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_a, decimal_format_a)
     static ss_char_a_t const* format_a()
+    {
+        return decimal_format_a();
+    }
+    static ss_char_a_t const* decimal_format_a()
     {
         return  "%u";
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_w, decimal_format_w)
     static ss_char_w_t const* format_w()
+    {
+        return decimal_format_w();
+    }
+    static ss_char_w_t const* decimal_format_w()
     {
         return L"%u";
     }
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_a, hexadecimal_format_a)
     static ss_char_a_t const* hex_format_a()
     {
-        return  "%x";
+        return hexadecimal_format_a(false);
     }
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_a_(upperCase);
+    }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_w, hexadecimal_format_w)
     static ss_char_w_t const* hex_format_w()
     {
-        return L"%x";
+        return hexadecimal_format_w(false);
+    }
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_w_(upperCase);
+    }
+
+    static ss_char_a_t const* octal_format_a()
+    {
+        return "%o";
+    }
+    static ss_char_w_t const* octal_format_w()
+    {
+        return L"%o";
     }
 };
 
@@ -502,22 +787,51 @@ struct integral_printf_traits_base<int>
         ,   size = (size_min < size_max) ? size_max : size_min
     };
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_a, decimal_format_a)
     static ss_char_a_t const* format_a()
+    {
+        return decimal_format_a();
+    }
+    static ss_char_a_t const* decimal_format_a()
     {
         return  "%d";
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_w, decimal_format_w)
     static ss_char_w_t const* format_w()
+    {
+        return decimal_format_w();
+    }
+    static ss_char_w_t const* decimal_format_w()
     {
         return L"%d";
     }
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_a, hexadecimal_format_a)
     static ss_char_a_t const* hex_format_a()
     {
-        return  "%x";
+        return hexadecimal_format_a(false);
     }
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_a_(upperCase);
+    }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_w, hexadecimal_format_w)
     static ss_char_w_t const* hex_format_w()
     {
-        return L"%x";
+        return hexadecimal_format_w(false);
+    }
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_w_(upperCase);
+    }
+
+    static ss_char_a_t const* octal_format_a()
+    {
+        return "%o";
+    }
+    static ss_char_w_t const* octal_format_w()
+    {
+        return L"%o";
     }
 };
 
@@ -531,22 +845,51 @@ struct integral_printf_traits_base<unsigned int>
         ,   size = (size_min < size_max) ? size_max : size_min
     };
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_a, decimal_format_a)
     static ss_char_a_t const* format_a()
+    {
+        return decimal_format_a();
+    }
+    static ss_char_a_t const* decimal_format_a()
     {
         return  "%u";
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_w, decimal_format_w)
     static ss_char_w_t const* format_w()
+    {
+        return decimal_format_w();
+    }
+    static ss_char_w_t const* decimal_format_w()
     {
         return L"%u";
     }
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_a, hexadecimal_format_a)
     static ss_char_a_t const* hex_format_a()
     {
-        return  "%x";
+        return hexadecimal_format_a(false);
     }
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_a_(upperCase);
+    }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_w, hexadecimal_format_w)
     static ss_char_w_t const* hex_format_w()
     {
-        return L"%x";
+        return hexadecimal_format_w(false);
+    }
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcx_w_(upperCase);
+    }
+
+    static ss_char_a_t const* octal_format_a()
+    {
+        return "%o";
+    }
+    static ss_char_w_t const* octal_format_w()
+    {
+        return L"%o";
     }
 };
 
@@ -563,22 +906,51 @@ struct integral_printf_traits_base<long>
         ,   size = (size_min < size_max) ? size_max : size_min
     };
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_a, decimal_format_a)
     static ss_char_a_t const* format_a()
+    {
+        return decimal_format_a();
+    }
+    static ss_char_a_t const* decimal_format_a()
     {
         return  "%ld";
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_w, decimal_format_w)
     static ss_char_w_t const* format_w()
+    {
+        return decimal_format_w();
+    }
+    static ss_char_w_t const* decimal_format_w()
     {
         return L"%ld";
     }
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_a, hexadecimal_format_a)
     static ss_char_a_t const* hex_format_a()
     {
-        return  "%lx";
+        return hexadecimal_format_a(false);
     }
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pclx_a_(upperCase);
+    }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_w, hexadecimal_format_w)
     static ss_char_w_t const* hex_format_w()
     {
-        return L"%lx";
+        return hexadecimal_format_w(false);
+    }
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pclx_w_(upperCase);
+    }
+
+    static ss_char_a_t const* octal_format_a()
+    {
+        return "%lo";
+    }
+    static ss_char_w_t const* octal_format_w()
+    {
+        return L"%lo";
     }
 };
 
@@ -592,22 +964,51 @@ struct integral_printf_traits_base<unsigned long>
         ,   size = (size_min < size_max) ? size_max : size_min
     };
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_a, decimal_format_a)
     static ss_char_a_t const* format_a()
+    {
+        return decimal_format_a();
+    }
+    static ss_char_a_t const* decimal_format_a()
     {
         return  "%lu";
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_w, decimal_format_w)
     static ss_char_w_t const* format_w()
+    {
+        return decimal_format_w();
+    }
+    static ss_char_w_t const* decimal_format_w()
     {
         return L"%lu";
     }
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_a, hexadecimal_format_a)
     static ss_char_a_t const* hex_format_a()
     {
-        return  "%lx";
+        return hexadecimal_format_a(false);
     }
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pclx_a_(upperCase);
+    }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_w, hexadecimal_format_w)
     static ss_char_w_t const* hex_format_w()
     {
-        return L"%lx";
+        return hexadecimal_format_w(false);
+    }
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase)
+    {
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pclx_w_(upperCase);
+    }
+
+    static ss_char_a_t const* octal_format_a()
+    {
+        return "%lo";
+    }
+    static ss_char_w_t const* octal_format_w()
+    {
+        return L"%lo";
     }
 };
 
@@ -626,7 +1027,12 @@ struct integral_printf_traits_base<ss_sint64_t>
         ,   size = (size_min < size_max) ? size_max : size_min
     };
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_a, decimal_format_a)
     static ss_char_a_t const* format_a()
+    {
+        return decimal_format_a();
+    }
+    static ss_char_a_t const* decimal_format_a()
     {
 #if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
         return  "%I64d";
@@ -636,7 +1042,12 @@ struct integral_printf_traits_base<ss_sint64_t>
 # error Further compiler discrimination is required
 #endif /* printf-64 */
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_w, decimal_format_w)
     static ss_char_w_t const* format_w()
+    {
+        return decimal_format_w();
+    }
+    static ss_char_w_t const* decimal_format_w()
     {
 #if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
         return L"%I64d";
@@ -647,22 +1058,53 @@ struct integral_printf_traits_base<ss_sint64_t>
 #endif /* printf-64 */
     }
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_a, hexadecimal_format_a)
     static ss_char_a_t const* hex_format_a()
     {
+        return hexadecimal_format_a(false);
+    }
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase)
+    {
 #if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
-        return  "%I64x";
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pci64x_a_(upperCase);
 #elif defined(STLSOFT_CF_64_BIT_PRINTF_USES_LL)
-        return  "%llx";
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcllx_a_(upperCase);
 #else
 # error Further compiler discrimination is required
 #endif /* printf-64 */
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_w, hexadecimal_format_w)
     static ss_char_w_t const* hex_format_w()
     {
+        return hexadecimal_format_w(false);
+    }
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase)
+    {
 #if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
-        return L"%I64x";
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pci64x_w_(upperCase);
 #elif defined(STLSOFT_CF_64_BIT_PRINTF_USES_LL)
-        return L"%llx";
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcllx_w_(upperCase);
+#else
+# error Further compiler discrimination is required
+#endif /* printf-64 */
+    }
+
+    static ss_char_a_t const* octal_format_a()
+    {
+#if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
+        return "%I64o";
+#elif defined(STLSOFT_CF_64_BIT_PRINTF_USES_LL)
+        return "%llo";
+#else
+# error Further compiler discrimination is required
+#endif /* printf-64 */
+    }
+    static ss_char_w_t const* octal_format_w()
+    {
+#if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
+        return L"%I64o";
+#elif defined(STLSOFT_CF_64_BIT_PRINTF_USES_LL)
+        return L"%llo";
 #else
 # error Further compiler discrimination is required
 #endif /* printf-64 */
@@ -679,7 +1121,12 @@ struct integral_printf_traits_base<ss_uint64_t>
         ,   size = (size_min < size_max) ? size_max : size_min
     };
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_a, decimal_format_a)
     static ss_char_a_t const* format_a()
+    {
+        return decimal_format_a();
+    }
+    static ss_char_a_t const* decimal_format_a()
     {
 #if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
         return  "%I64u";
@@ -689,7 +1136,12 @@ struct integral_printf_traits_base<ss_uint64_t>
 # error Further compiler discrimination is required
 #endif /* printf-64 */
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(format_w, decimal_format_w)
     static ss_char_w_t const* format_w()
+    {
+        return decimal_format_w();
+    }
+    static ss_char_w_t const* decimal_format_w()
     {
 #if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
         return L"%I64u";
@@ -700,22 +1152,53 @@ struct integral_printf_traits_base<ss_uint64_t>
 #endif /* printf-64 */
     }
 
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_a, hexadecimal_format_a)
     static ss_char_a_t const* hex_format_a()
     {
+        return hexadecimal_format_a(false);
+    }
+    static ss_char_a_t const* hexadecimal_format_a(bool upperCase)
+    {
 #if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
-        return  "%I64x";
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pci64x_a_(upperCase);
 #elif defined(STLSOFT_CF_64_BIT_PRINTF_USES_LL)
-        return  "%llx";
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcllx_a_(upperCase);
 #else
 # error Further compiler discrimination is required
 #endif /* printf-64 */
     }
+    STLSOFT_DECLARE_FUNCTION_DEPRECATION_IN_FAVOUR_OF(hex_format_w, hexadecimal_format_w)
     static ss_char_w_t const* hex_format_w()
     {
+        return hexadecimal_format_w(false);
+    }
+    static ss_char_w_t const* hexadecimal_format_w(bool upperCase)
+    {
 #if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
-        return L"%I64x";
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pci64x_w_(upperCase);
 #elif defined(STLSOFT_CF_64_BIT_PRINTF_USES_LL)
-        return L"%llx";
+        return integral_printf_traits_base<void>::get_hexadecimal_format_pcllx_w_(upperCase);
+#else
+# error Further compiler discrimination is required
+#endif /* printf-64 */
+    }
+
+    static ss_char_a_t const* octal_format_a()
+    {
+#if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
+        return "%I64o";
+#elif defined(STLSOFT_CF_64_BIT_PRINTF_USES_LL)
+        return "%llo";
+#else
+# error Further compiler discrimination is required
+#endif /* printf-64 */
+    }
+    static ss_char_w_t const* octal_format_w()
+    {
+#if defined(STLSOFT_CF_64_BIT_PRINTF_USES_I64)
+        return L"%I64o";
+#elif defined(STLSOFT_CF_64_BIT_PRINTF_USES_LL)
+        return L"%llo";
 #else
 # error Further compiler discrimination is required
 #endif /* printf-64 */
@@ -725,55 +1208,56 @@ struct integral_printf_traits_base<ss_uint64_t>
 
 #endif /* STLSOFT_CF_64BIT_INT_SUPPORT */
 
+STLSOFT_CLOSE_WORKER_NS_(ximpl_integral_printf_traits)
 
 
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<char>
-    : public integral_printf_traits_base<char>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<char>
 {};
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<signed char>
-    : public integral_printf_traits_base<signed char>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<signed char>
 {};
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<unsigned char>
-    : public integral_printf_traits_base<unsigned char>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<unsigned char>
 {};
 
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<short>
-    : public integral_printf_traits_base<short>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<short>
 {};
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<unsigned short>
-    : public integral_printf_traits_base<unsigned short>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<unsigned short>
 {};
 
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<int>
-    : public integral_printf_traits_base<int>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<int>
 {};
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<unsigned int>
-    : public integral_printf_traits_base<unsigned int>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<unsigned int>
 {};
 
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<long>
-    : public integral_printf_traits_base<long>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<long>
 {};
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<unsigned long>
-    : public integral_printf_traits_base<unsigned long>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<unsigned long>
 {};
 
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<ss_sint64_t>
-    : public integral_printf_traits_base<ss_sint64_t>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<ss_sint64_t>
 {};
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<ss_uint64_t>
-    : public integral_printf_traits_base<ss_uint64_t>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<ss_uint64_t>
 {};
 
 
@@ -781,11 +1265,11 @@ struct integral_printf_traits<ss_uint64_t>
 # if _STLSOFT_SIZEOF_CHAR == 1
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<ss_sint8_t>
-    : public integral_printf_traits_base<signed char>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<signed char>
 {};
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<ss_uint8_t>
-    : public integral_printf_traits_base<unsigned char>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<unsigned char>
 {};
 # endif /* _STLSOFT_SIZEOF_CHAR == 1 */
 #endif /* STLSOFT_CF_CHAR_DISTINCT_INT_TYPE */
@@ -794,11 +1278,11 @@ struct integral_printf_traits<ss_uint8_t>
 # if _STLSOFT_SIZEOF_SHORT == 2
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<ss_sint16_t>
-    : public integral_printf_traits_base<short>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<short>
 {};
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<ss_uint16_t>
-    : public integral_printf_traits_base<unsigned short>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<unsigned short>
 {};
 # endif /* _STLSOFT_SIZEOF_SHORT == 2 */
 #endif /* STLSOFT_CF_SHORT_DISTINCT_INT_TYPE */
@@ -807,11 +1291,11 @@ struct integral_printf_traits<ss_uint16_t>
 # if _STLSOFT_SIZEOF_INT == 4
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<ss_sint32_t>
-    : public integral_printf_traits_base<int>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<int>
 {};
 STLSOFT_TEMPLATE_SPECIALISATION
 struct integral_printf_traits<ss_uint32_t>
-    : public integral_printf_traits_base<unsigned int>
+    : public STLSOFT_WORKER_NS_QUAL_(ximpl_integral_printf_traits, integral_printf_traits_base)<unsigned int>
 {};
 # endif /* _STLSOFT_SIZEOF_INT == 4 */
 #endif /* STLSOFT_CF_INT_DISTINCT_INT_TYPE */

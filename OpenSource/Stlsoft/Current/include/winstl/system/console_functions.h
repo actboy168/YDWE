@@ -1,14 +1,14 @@
 /* /////////////////////////////////////////////////////////////////////////
  * File:        winstl/system/console_functions.h
  *
- * Purpose:     Console functions.
+ * Purpose:     Windows console functions.
  *
  * Created:     3rd December 2005
- * Updated:     9th September 2010
+ * Updated:     29th January 2013
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2005-2010, Matthew Wilson and Synesis Software
+ * Copyright (c) 2005-2013, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,8 +40,7 @@
 
 /** \file winstl/system/console_functions.h
  *
- * \brief [C++ only] Definition of the winstl::basic_environment_block class
- *  template
+ * \brief [C, C++] Windows console functions.
  *   (\ref group__library__system "System" Library).
  */
 
@@ -52,7 +51,7 @@
 # define WINSTL_VER_WINSTL_SYSTEM_H_CONSOLE_FUNCTIONS_MAJOR     2
 # define WINSTL_VER_WINSTL_SYSTEM_H_CONSOLE_FUNCTIONS_MINOR     2
 # define WINSTL_VER_WINSTL_SYSTEM_H_CONSOLE_FUNCTIONS_REVISION  2
-# define WINSTL_VER_WINSTL_SYSTEM_H_CONSOLE_FUNCTIONS_EDIT      19
+# define WINSTL_VER_WINSTL_SYSTEM_H_CONSOLE_FUNCTIONS_EDIT      20
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /* /////////////////////////////////////////////////////////////////////////

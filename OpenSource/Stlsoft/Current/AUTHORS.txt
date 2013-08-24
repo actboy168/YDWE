@@ -2,7 +2,7 @@
 STLSoft - Authors
 
 ; Created:  29th March 2002
-; Updated:  25th November 2011
+; Updated:  16th February 2013
 
 ============================================================================
 
@@ -42,7 +42,9 @@ Bug reports, fixes and suggestions (for which we are very grateful):
     Greg Peet
     HeartIcy
     Kevlin Henney
+    iceboy
     Ilya Minkov
+    jesusmalo
     Javier Estrada
     John Abney
     Jon Papaioannou
@@ -86,6 +88,7 @@ Bug reports, fixes and suggestions (for which we are very grateful):
     Vivi Orunitia
     Victor Gaydov
     Victor T
+    Vinson Lee
     Volker Lukas
     W³odzimierz Skiba
     Yakov Markovitch

@@ -6,14 +6,14 @@
  *              types.
  *
  * Created:     15th January 2002
- * Updated:     10th August 2009
+ * Updated:     2nd March 2012
  *
  * Thanks:      To Cl�udio Albuquerque for suggesting the inclusion of
  *              atlstr.h.
  *
  * Home:        http://stlsoft.org/
  *
- * Copyright (c) 2002-2009, Matthew Wilson and Synesis Software
+ * Copyright (c) 2002-2012, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,9 +50,9 @@
 /* File version */
 #ifndef STLSOFT_DOCUMENTATION_SKIP_SECTION
 # define MFCSTL_VER_MFCSTL_HPP_MFCSTL_MAJOR     3
-# define MFCSTL_VER_MFCSTL_HPP_MFCSTL_MINOR     4
-# define MFCSTL_VER_MFCSTL_HPP_MFCSTL_REVISION  3
-# define MFCSTL_VER_MFCSTL_HPP_MFCSTL_EDIT      92
+# define MFCSTL_VER_MFCSTL_HPP_MFCSTL_MINOR     5
+# define MFCSTL_VER_MFCSTL_HPP_MFCSTL_REVISION  1
+# define MFCSTL_VER_MFCSTL_HPP_MFCSTL_EDIT      93
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 /** \file mfcstl/mfcstl.hpp
@@ -127,12 +127,13 @@
 # define _MFCSTL_VER_1_5_1      0x00010501  /*!< Version 1.5.1 (with STLSoft 1.9.1) */
 # define _MFCSTL_VER_1_5_2      0x00010502  /*!< Version 1.5.2 (with STLSoft 1.9.10) */
 # define _MFCSTL_VER_1_5_3      0x00010503  /*!< Version 1.5.3 (with STLSoft 1.9.25) */
+# define _MFCSTL_VER_1_5_4      0x010504ff  /*!< Version 1.5.4 (with STLSoft 1.9.113) */
 #endif /* !STLSOFT_DOCUMENTATION_SKIP_SECTION */
 
 #define _MFCSTL_VER_MAJOR       1
 #define _MFCSTL_VER_MINOR       5
-#define _MFCSTL_VER_REVISION    3
-#define _MFCSTL_VER             _MFCSTL_VER_1_5_3
+#define _MFCSTL_VER_REVISION    4
+#define _MFCSTL_VER             _MFCSTL_VER_1_5_4
 
 /* /////////////////////////////////////////////////////////////////////////
  * Includes
@@ -165,9 +166,9 @@
  * STLSoft version compatibility
  */
 
-#if !defined(_STLSOFT_VER_1_9_1_B41) || \
-    _STLSOFT_VER < _STLSOFT_VER_1_9_1_B41
-# error This version of the MFCSTL libraries requires STLSoft version 1.9.1 beta 41, or later
+#if !defined(_STLSOFT_VER) || \
+    _STLSOFT_VER < 0x010971ff
+# error This version of the MFCSTL libraries requires STLSoft version 1.9.113, or later
 #endif /* _STLSOFT_VER */
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -216,9 +217,9 @@
 /* No recognised compiler */
 # ifdef _STLSOFT_FORCE_ANY_COMPILER
 #  define _MFCSTL_COMPILER_IS_UNKNOWN
-#  ifdef _STLSOFT_COMPILE_VERBOSE
+#  ifdef STLSOFT_COMPILE_VERBOSE
 #   pragma message("Compiler is unknown to MFCSTL")
-#  endif /* _STLSOFT_COMPILE_VERBOSE */
+#  endif /* STLSOFT_COMPILE_VERBOSE */
 # else /* ? _STLSOFT_FORCE_ANY_COMPILER */
 #  error Currently only Borland C++, Digital Mars C/C++, Intel C/C++, Metrowerks CodeWarrior and Visual C++ compilers are supported by the MFCSTL libraries
 # endif /* _STLSOFT_FORCE_ANY_COMPILER */
