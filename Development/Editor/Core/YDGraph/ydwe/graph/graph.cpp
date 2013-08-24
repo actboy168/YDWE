@@ -21,8 +21,8 @@ namespace ydwe { namespace graph {
 	
 			return std::move(img);
 		}
-	
-		HBITMAP to_bitmap(const image_t::view_t& v, HDC hdc)
+
+		std::pair<HBITMAP, bool> to_bitmap(const image_t::view_t& v, HDC hdc, uint32_t mask)
 		{
 			BITMAPINFO bmi = {0};
 			bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
@@ -32,9 +32,11 @@ namespace ydwe { namespace graph {
 			bmi.bmiHeader.biBitCount = 32;
 			bmi.bmiHeader.biCompression = BI_RGB;
 			bmi.bmiHeader.biSizeImage = v.size();
-	
+
 			void* bits;
 			HBITMAP bmp = ::CreateDIBSection(hdc, &bmi, DIB_RGB_COLORS, &bits, NULL, 0x0);
+			bool alpha_channel = false;
+
 			if (bmp) 
 			{
 				boost::gil::bgra8_view_t dst = boost::gil::interleaved_view(
@@ -42,13 +44,40 @@ namespace ydwe { namespace graph {
 					v.height(),
 					(boost::gil::bgra8_ptr_t)bits,
 					v.width() * sizeof(boost::gil::bgra8_pixel_t));
-	
+
 				boost::gil::copy_pixels(boost::gil::flipped_up_down_view(boost::gil::color_converted_view<boost::gil::bgra8_pixel_t>(v)), dst);
+
+				boost::gil::bgra8_pixel_t zero_pixel(0, 0, 0, 0);
+				boost::gil::bgra8_pixel_t mask_pixel(
+					  ((unsigned char*)&mask)[0]
+					, ((unsigned char*)&mask)[1]
+					, ((unsigned char*)&mask)[2]
+					, ((unsigned char*)&mask)[3]);
+
+				for (std::ptrdiff_t y = 0; y < dst.height(); ++y)
+				{
+					std::for_each(dst.row_begin(y), dst.row_end(y), [&](boost::gil::bgra8_pixel_t& p)
+					{
+						if (p == mask_pixel) 
+						{
+							p = zero_pixel;
+							alpha_channel = true;
+						} 
+
+						if (p[3] < 255)
+						{
+							p[0] = p[0] * p[3] / 255;
+							p[1] = p[1] * p[3] / 255;
+							p[2] = p[2] * p[3] / 255;
+							alpha_channel = true;
+						}
+					});
+				}
 			}
-	
-			return bmp;
+
+			return std::make_pair(bmp, alpha_channel);
 		}
-	};
+	}
 	
 	image_t from_png(char* ptr, size_t size)
 	{
@@ -67,9 +96,9 @@ namespace ydwe { namespace graph {
 	{
 		return std::move(detail::from_memory<image_t>(ptr, size, boost::gil::bmp_tag()));
 	}
-	
-	HBITMAP to_bitmap(image_t& img, HDC hdc)
+
+	std::pair<HBITMAP, bool> to_bitmap(image_t& img, HDC hdc, uint32_t mask)
 	{
-		return detail::to_bitmap(boost::gil::view(img), hdc);
+		return detail::to_bitmap(boost::gil::view(img), hdc, mask);
 	}
 }}

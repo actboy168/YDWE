@@ -24,7 +24,8 @@ namespace DuiLib
 		try {
 			using namespace ydwe;
 			graph::image_t img = graph::from_png((char*)buf.ptrData.get(), buf.nSize);
-			return new CImageInfo(graph::to_bitmap(img, NULL), img.width(), img.height(), true);
+			std::pair<HBITMAP, bool> result = graph::to_bitmap(img, NULL, mask);
+			return new CImageInfo(result.first, img.width(), img.height(), result.second);
 		}
 		catch (...) {
 		}
