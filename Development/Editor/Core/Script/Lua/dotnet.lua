@@ -60,6 +60,10 @@ function dotnet:initialize ()
 	log.debug(".net component loaded successfully.")
 
 	self.default_appdomain = clr.appdomain()
+	if not self.default_appdomain:vaild() then
+		log.error("Failed to create appdomain")
+		return false
+	end
 
 	return true
 end

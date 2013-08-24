@@ -10,9 +10,19 @@ loader.load = function(path)
 	if not obj then
 		return false, 'load failed'
 	end
+	if obj:error_code() ~= 0 then
+		return false, string.format('load failed(%08X)',  obj:error_code())
+	end
 	
-	if not obj:call('begin') then
-		return false, 'call failed'
+	local result, msg = obj:call('begin')
+	if result == nil then
+		if msg then
+			return false, 'call failed(' .. msg .. ')'
+		else
+			return false, 'call failed(unknown)'
+		end
+	elseif result ~= 0 then
+		return false, string.format('call failed(%08X)',  result)
 	end
 	
 	return true

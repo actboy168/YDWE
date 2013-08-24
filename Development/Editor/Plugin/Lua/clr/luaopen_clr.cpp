@@ -252,8 +252,9 @@ namespace clr_helper { namespace runtime {
 			, object_()
 			, type_()
 			, vaild_(false)
+			, last_code_(S_OK)
 		{
-			create(appdomain, assembly, type);
+			last_code_ = create(appdomain, assembly, type);
 		}
 
 		HRESULT create(mscorlib::_AppDomain* appdomain, const wchar_t* assembly, const wchar_t* type)
@@ -318,12 +319,18 @@ namespace clr_helper { namespace runtime {
 			return hr;
 		}
 
+		uint32_t error_code() const
+		{
+			return last_code_;
+		}
+
 	private:
 		variant_t                        vt_;
 		CComPtr<mscorlib::_ObjectHandle> handle_;
 		CComPtr<mscorlib::_Object>       object_;
 		CComPtr<mscorlib::_Type>         type_;
 		bool                             vaild_;
+		HRESULT                          last_code_;
 	};
 }
 
@@ -350,6 +357,11 @@ namespace NLua { namespace CLR {
 			return ptr_;
 		}
 
+		bool vaild() const
+		{
+			return !!ptr_;
+		}
+
 	private:
 		CComPtr<mscorlib::_AppDomain> ptr_;
 	};
@@ -365,9 +377,14 @@ namespace NLua { namespace CLR {
 			: object_(appdomain.get(), assembly.c_str(), type.c_str())
 		{ }
 
-		bool call(std::wstring const& name)
+		uint32_t call(std::wstring const& name)
 		{
-			return SUCCEEDED(object_.call(name.c_str()));
+			return (uint32_t)(object_.call(name.c_str()));
+		}
+
+		uint32_t error_code() const
+		{
+			return object_.error_code();
 		}
 
 	private:
@@ -384,11 +401,13 @@ int luaopen_clr(lua_State *pState)
 		class_<NLua::CLR::AppDomain>("appdomain")
 			.def(constructor<>())
 			.def(constructor<const std::wstring&>())
+			.def("vaild", &NLua::CLR::AppDomain::vaild)
 		,
 		class_<NLua::CLR::Object>("object")
 			.def(constructor<NLua::CLR::AppDomain&, std::wstring const&, std::wstring const&>())
 			.def(constructor<NLua::CLR::AppDomain&, boost::filesystem::path const&, std::wstring const&>())
-			.def("call", &NLua::CLR::Object::call)
+			.def("call",       &NLua::CLR::Object::call)
+			.def("error_code", &NLua::CLR::Object::error_code)
 	];
 
 	return 0;
