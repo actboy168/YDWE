@@ -52,9 +52,6 @@ static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boo
 
 static void ShowSplash(fs::path const& ydwe_path)
 {
-	ydwe::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
-
-	// Get image path
 	fs::path splashPath = ydwe_path / L"bin" / L"splash.bmp";
 	if (fs::exists(splashPath))
 	{
@@ -62,6 +59,7 @@ static void ShowSplash(fs::path const& ydwe_path)
 		if (f)
 		{
 			try {
+				ydwe::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
 				cimg_library::CImg<boost::uint8_t> splashImage = cimg_library::CImg<boost::uint8_t>::get_load_bmp(f);
 				boost::uint8_t color[] = { 255, 255, 255 };
 				splashImage.draw_text(10, 10, (boost::format("YDWE %1$d.%2$d.%3$d.%4$d") % fv.major % fv.minor % fv.revision % fv.build).str().c_str(), color, 0, 1, 20);
