@@ -22,7 +22,7 @@ def BuildRoot():
 
 path = {}
 path['BuildRoot']    = BuildRoot()
-path['ProjectRoot']  = path['BuildRoot'].parent_path().remove_filename().remove_filename()
+path['ProjectRoot']  = path['BuildRoot'].parent_path()
 path['OpenSource']   = path['ProjectRoot'] / 'OpenSource'
 path['ThirdParty']   = path['ProjectRoot'] / 'ThirdParty'
 path['CoreRoot']     = path['BuildRoot'] / 'Editor' / 'Core'
