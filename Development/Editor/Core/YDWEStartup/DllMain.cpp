@@ -16,6 +16,7 @@
 #include <boost/exception/all.hpp>
 #include <CImg.h>
 #include <shlwapi.h>
+#include <ydwe/file/steam.h>
 #include <ydwe/i18n/libintl.h>
 #include <ydwe/path/service.h>
 #include <ydwe/util/unicode.h>
@@ -324,12 +325,28 @@ static void MoveDetouredSystemDll(const fs::path &war3Directory)
 	}
 }
 
-/** \brief Do task
-*
-* Do actual task
-*
-* \exception Any exception if something goes wrong
-*/
+//
+// see http://blogs.msdn.com/b/shawnfa/archive/2009/06/08/more-implicit-uses-of-cas-policy-loadfromremotesources.aspx
+//
+static bool CreateDotNetConfig(fs::path const& config_path)
+{
+	try {
+		ydwe::file::write_steam(config_path).write(std::string(
+			"<?xml version=\"1.0\"?>"						    "\n"
+			"<configuration>"								    "\n"
+			"	<runtime>"									    "\n"
+			"		<loadFromRemoteSources enabled=\"true\" />" "\n"
+			"	</runtime>"									    "\n"
+			"</configuration>"								    "\n"
+			));
+		return true;
+	}
+	catch (...) {
+	}
+
+	return false;
+}
+
 static void DoTask()
 {
 	// Initialize path
@@ -385,6 +402,8 @@ static void DoTask()
 	{
 		BOOST_THROW_EXCEPTION(std::domain_error(_("Cannot find main executable file of world editor in YDWE/bin directory.")));
 	}
+	
+	CreateDotNetConfig(gWarcraftDirectory / L"worldeditydwe.exe.config");
 
 	// Start it!
 	PROCESS_INFORMATION processInformation;
