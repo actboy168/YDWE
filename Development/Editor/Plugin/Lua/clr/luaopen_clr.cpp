@@ -7,10 +7,10 @@
 
 #include <windows.h>
 #include <mscoree.h>
-#include <metahost.h> 
-#import "mscorlib.tlb" raw_interfaces_only, rename("ReportEvent","ReportCLREvent")  
-
+#include <metahost.h>
+#import "mscorlib.tlb" raw_interfaces_only, rename("ReportEvent","ReportCLREvent")
 #include <atlcomcli.h>
+#pragma comment(lib, "atlsd.lib")
 
 namespace clr_helper { namespace runtime {
 
@@ -211,6 +211,21 @@ namespace clr_helper { namespace runtime {
 		return E_FAIL;
 	}
 
+	mscorlib::_AppDomain* default_domain(CComPtr<ICorRuntimeHost>& host)
+	{
+		CComPtr<IUnknown> unknown_appdomain;
+		CComPtr<mscorlib::_AppDomain> appdomain;
+		if (!SUCCEEDED(host->GetDefaultDomain(&unknown_appdomain)))
+		{
+			return nullptr;
+		}
+		if (!SUCCEEDED(unknown_appdomain.QueryInterface(&appdomain)))
+		{
+			return nullptr;
+		}
+		return appdomain.Detach();
+	}
+
 	mscorlib::_AppDomain* create_appdomain(const wchar_t* version)
 	{
 		CComPtr<ICorRuntimeHost> host;
@@ -225,21 +240,7 @@ namespace clr_helper { namespace runtime {
 			return nullptr;
 		}
 
-		CComPtr<IUnknown> unknown;
-		hr = host->GetDefaultDomain(&unknown);
-		if (!SUCCEEDED(hr))
-		{
-			return nullptr;
-		}
-
-		CComPtr<mscorlib::_AppDomain> appdomain;
-		hr = unknown.QueryInterface(&appdomain);
-		if (!SUCCEEDED(hr))
-		{
-			return nullptr;
-		}
-
-		return appdomain.Detach();
+		return default_domain(host);
 	}
 }
 
