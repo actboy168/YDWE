@@ -11,6 +11,7 @@
 #include <ydwe/file/memory_mapped_file.h>
 #include <ydwe/exception/system_exception.h>
 #include <ydwe/exception/windows_exception.h>
+#include <ydwe/file/stream.h>
 #include <ydwe/i18n/libintl.h>
 #include <ydwe/path/service.h>
 #include <ydwe/util/unicode.h>
@@ -131,6 +132,28 @@ static void MoveDetouredSystemDll(const fs::path &war3Directory)
 	}
 }
 
+//
+// see http://blogs.msdn.com/b/shawnfa/archive/2009/06/08/more-implicit-uses-of-cas-policy-loadfromremotesources.aspx
+//
+static bool CreateDotNetConfig(fs::path const& config_path)
+{
+	try {
+		ydwe::file::write_stream(config_path).write(std::string(
+			"<?xml version=\"1.0\"?>"						    "\n"
+			"<configuration>"								    "\n"
+			"	<runtime>"									    "\n"
+			"		<loadFromRemoteSources enabled=\"true\" />" "\n"
+			"	</runtime>"									    "\n"
+			"</configuration>"								    "\n"
+			));
+		return true;
+	}
+	catch (...) {
+	}
+
+	return false;
+}
+
 static void DoTask()
 {
 	fs::path gExecutableDirectory = ydwe::path::get(ydwe::path::DIR_EXE).remove_filename();
@@ -186,6 +209,7 @@ static void DoTask()
 		BOOST_THROW_EXCEPTION(std::domain_error(_("Cannot find main executable file of world editor in YDWE/bin directory.")));
 	}
 
+	CreateDotNetConfig(gWarcraftDirectory / L"worldeditydwe.exe.config");
 
 	ydwe::win::process worldedit_process;
 	bool result = worldedit_process.create(worldeditPreferredPath, std::wstring(::GetCommandLineW()));
