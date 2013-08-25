@@ -18,8 +18,8 @@ devenv ../../UI/sln/YDUI.sln /Rebuild "YDTrigger|Win32" /out %2
 
 @echo "执行脚本"
 @echo "执行脚本" >> %2
-"..\..\..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\build_anti_bj_leak.py" %1
-"..\..\..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\copy_all.py"  %1
-"..\..\..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\pack_skin.py" %1
-"..\..\..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\pack_ui.py" %1
-"..\..\..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\pack_units.py" %1
+"..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\build_anti_bj_leak.py" %1
+"..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\copy_all.py"  %1
+"..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\pack_skin.py" %1
+"..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\pack_ui.py" %1
+"..\..\..\..\OpenSource\Python\2.7.2\python.exe" "..\Script\Python\pack_units.py" %1

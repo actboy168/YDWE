@@ -43,7 +43,6 @@ def copy_all(configuration):
     copy_lib_dll('Lua',          configuration)
     copy_lib_dll('LuaBind',      configuration)
     copy_lib_dll('StormLib',     configuration)
-    copy_lib_dll('Zlib',         configuration)
     copy_lua_script()
     copy_log_script()
     copy_component()
