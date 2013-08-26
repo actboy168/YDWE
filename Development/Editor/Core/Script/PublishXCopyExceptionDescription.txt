@@ -1,5 +1,0 @@
-.pdb
-.exp
-.ilk
-.aps
-.lib

@@ -5,6 +5,14 @@ import stat
 import shutil
 import types
 
+def _handle_on_error(func, path, exc_info):
+    import stat
+    if not os.access(path, os.W_OK):
+        os.chmod(path, stat.S_IWUSR)
+        func(path)
+    else:
+        raise
+        
 def _to_string(p):
     if type(p) is types.StringType:
         return p
@@ -51,7 +59,7 @@ def remove(p):
     
 def remove_all(p):    
     try:
-        shutil.rmtree(_to_string(p)) 
+        shutil.rmtree(_to_string(p), onerror=_handle_on_error) 
     except:
         pass
     
@@ -69,7 +77,7 @@ def create_directory(p):
     
 def is_directory(p):
     return os.path.isdir(_to_string(p))
-
+        
 def copy_file(from_p, to_p):
     from_s = _to_string(from_p)
     to_s   = _to_string(to_p)

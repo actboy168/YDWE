@@ -8,6 +8,7 @@ import util.path
 path = util.path.path
 
 def pack_units():
+    print('pack_units')
     stormlib_path = path['OpenSource'] / 'StormLib' / 'Current' / 'bin' / 'Win32' / 'Release' / 'StormLib.dll'
     from_path     = path['BuildRoot']  / 'Editor' / 'UI' / 'src' / 'Units'
     to_path       = path['Result']     / 'share' / 'mpq' / 'units.mpq'
@@ -19,6 +20,5 @@ def Configuration():
     return 'Debug'
 
 if __name__ == '__main__':
-    print('pack_units')
     util.path.ResetPath(Configuration())
     pack_units()
