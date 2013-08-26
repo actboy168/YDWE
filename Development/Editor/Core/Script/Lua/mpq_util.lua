@@ -12,26 +12,28 @@ mpq_util = {}
 -- 返回值：true表示成功，false表示失败
 function mpq_util.insert_file(self, map_path, file_path, path_in_archive)
 	log.trace("mpq_util.insert_file.")
-	map_path = (type(map_path) == "userdata") and map_path:string() or map_path
 	-- 结果
 	local result = false
 
 	-- 打开MPQ（地图）
-	local mpq_handle = sfmpq.MpqOpenArchiveForUpdate(map_path, 4, 0)
-	if mpq_handle ~= 0 then
-		if 0 ~= sfmpq.MpqAddFileToArchiveEx(
+	local mpq_handle = stormlib.open_archive(map_path, 0, 0)
+	if mpq_handle then
+		if stormlib.add_file_ex(
 			mpq_handle,
-			file_path:string(),
+			file_path,
 			path_in_archive,
-			0x00201,
+			0x01000201,
 			2,
-			9
+			2
 		) then
 			result = true
+			log.error("insert_file .")
+		else
+			log.error("insert_file " .. map_path:string() .. " faild. ")
 		end
 
 		-- 关闭地图
-		sfmpq.MpqCloseUpdatedArchive(mpq_handle, 0)
+		stormlib.close_archive(mpq_handle)
 	else
 		log.error("Cannot open map archive " .. map_path)
 	end

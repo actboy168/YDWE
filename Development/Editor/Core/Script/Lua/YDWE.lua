@@ -24,7 +24,6 @@ require "gui"
 require "util"
 require "event"
 require "ar_stormlib"
-require "ar_sfmpq"
 require "ar_storm"
 
 require "registry"

@@ -7,7 +7,6 @@ require "mpq_util"
 
 local storm    = ar.storm
 local stormlib = ar.stormlib
-local sfmpq    = ar.sfmpq
 
 -- 确定应当把地图保存为适合老版本（< 1.24）还是新版本（>= 1.24）的
 -- 对于保存为双份，按照当前魔兽版本处理
