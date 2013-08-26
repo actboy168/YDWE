@@ -26,6 +26,7 @@ def convert_file(from_ptah, to_path, file_name):
 
 
 def pack_ui(name):
+    print('pack_ui ' + name)
     stormlib_path = path['OpenSource'] / 'StormLib' / 'Current' / 'bin' / 'Win32' / 'Release' / 'StormLib.dll'
     from_path     = path['BuildRoot']  / 'Editor' / 'UI' / 'txt' / name
     to_path       = path['Result']     / 'share' / 'mpq' / (name + '.mpq')
@@ -43,7 +44,6 @@ def Configuration():
     return 'Debug'
 
 if __name__ == '__main__':
-    print('pack_ui')
     util.path.ResetPath(Configuration())
     pack_ui('ydtrigger')
     pack_ui('ydwe')

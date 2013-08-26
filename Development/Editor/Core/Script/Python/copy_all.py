@@ -26,10 +26,15 @@ def copy_log_script():
     fs.create_directories(path['Result'] / 'logs')
     fs.copy_file(path['BuildRoot'] / 'Editor' / 'Core' / 'Script' / 'YDLogger.cfg', path['Result'] / 'logs' / 'YDLogger.cfg')
 
+def copy_boost_preprocessor():
+    fs.copy_directory(path['OpenSource'] / 'Boost' / '1.53' / 'boost' / 'preprocessor', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor')
+    fs.copy_file(path['OpenSource'] / 'Boost' / '1.53' / 'boost' / 'preprocessor.hpp', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor.hpp')
+    
 def copy_component():
     fs.copy_directory(path['BuildRoot'] / 'Editor' / 'Component', path['Result'])
 
 def copy_all(configuration):
+    print('copy_all')
     if configuration == 'Release':
         copy_crt_dll()
     copy_boost_dll('system',     configuration)
@@ -39,12 +44,12 @@ def copy_all(configuration):
     copy_lib_dll('APR',          configuration)
     copy_lib_dll('APR-Util',     configuration)
     copy_lib_dll('Log4CXX',      configuration)
-    copy_lib_dll('Zlib',         configuration)
     copy_lib_dll('Lua',          configuration)
     copy_lib_dll('LuaBind',      configuration)
     copy_lib_dll('StormLib',     configuration)
     copy_lua_script()
     copy_log_script()
+    copy_boost_preprocessor()
     copy_component()
 
 def Configuration():
@@ -53,7 +58,6 @@ def Configuration():
     return 'Debug'
 
 if __name__ == '__main__':
-    print('copy_all')
     util.path.ResetPath(Configuration())
     copy_all(Configuration())
 
