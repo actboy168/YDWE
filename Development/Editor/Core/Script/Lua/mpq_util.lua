@@ -5,17 +5,17 @@ local sfmpq    = ar.sfmpq
 
 mpq_util = {}
 
--- Ìí¼ÓÎÄ¼ş¸øµØÍ¼
--- map_path - µØÍ¼Â·¾¶£¬fs.path
--- file_path - ĞèÒª¼ÓÈëµÄÎÄ¼şµÄÂ·¾¶£¬fs.path
--- path_in_archive - µØÍ¼Ñ¹Ëõ°üÖĞµÄÂ·¾¶£¬string
--- ·µ»ØÖµ£ºtrue±íÊ¾³É¹¦£¬false±íÊ¾Ê§°Ü
+-- æ·»åŠ æ–‡ä»¶ç»™åœ°å›¾
+-- map_path - åœ°å›¾è·¯å¾„ï¼Œfs.path
+-- file_path - éœ€è¦åŠ å…¥çš„æ–‡ä»¶çš„è·¯å¾„ï¼Œfs.path
+-- path_in_archive - åœ°å›¾å‹ç¼©åŒ…ä¸­çš„è·¯å¾„ï¼Œstring
+-- è¿”å›å€¼ï¼štrueè¡¨ç¤ºæˆåŠŸï¼Œfalseè¡¨ç¤ºå¤±è´¥
 function mpq_util.insert_file(self, map_path, file_path, path_in_archive)
 	log.trace("mpq_util.insert_file.")
-	-- ½á¹û
+	-- ç»“æœ
 	local result = false
 
-	-- ´ò¿ªMPQ£¨µØÍ¼£©
+	-- æ‰“å¼€MPQï¼ˆåœ°å›¾ï¼‰
 	local mpq_handle = stormlib.open_archive(map_path, 0, 0)
 	if mpq_handle then
 		if stormlib.add_file_ex(
@@ -32,7 +32,7 @@ function mpq_util.insert_file(self, map_path, file_path, path_in_archive)
 			log.error("insert_file " .. map_path:string() .. " faild. ")
 		end
 
-		-- ¹Ø±ÕµØÍ¼
+		-- å…³é—­åœ°å›¾
 		stormlib.close_archive(mpq_handle)
 	else
 		log.error("Cannot open map archive " .. map_path)
@@ -41,10 +41,10 @@ function mpq_util.insert_file(self, map_path, file_path, path_in_archive)
 	return result
 end
 
--- Ìí¼ÓÎÄ¼ş¸øµØÍ¼
--- map_path - µØÍ¼Â·¾¶£¬fs.path
--- path_in_archive - µØÍ¼Ñ¹Ëõ°üÖĞµÄÂ·¾¶£¬string
--- ·µ»ØÖµ£ºtrue±íÊ¾³É¹¦£¬false±íÊ¾Ê§°Ü
+-- æ·»åŠ æ–‡ä»¶ç»™åœ°å›¾
+-- map_path - åœ°å›¾è·¯å¾„ï¼Œfs.path
+-- path_in_archive - åœ°å›¾å‹ç¼©åŒ…ä¸­çš„è·¯å¾„ï¼Œstring
+-- è¿”å›å€¼ï¼štrueè¡¨ç¤ºæˆåŠŸï¼Œfalseè¡¨ç¤ºå¤±è´¥
 function mpq_util.insert_file_form_ydwe(self, map_path, path_in_archive)
 	log.trace("mpq_util.insert_file_form_ydwe.")
 	local result = false
@@ -53,7 +53,7 @@ function mpq_util.insert_file_form_ydwe(self, map_path, path_in_archive)
 	if storm.extract_file(extract_file_path, path_in_archive) then
 		result = self:insert_file(map_path, extract_file_path, path_in_archive)
 
-		-- É¾³ıÁÙÊ±ÎÄ¼ş
+		-- åˆ é™¤ä¸´æ—¶æ–‡ä»¶
 		pcall(fs.remove_all, extract_file_path)
 	else
 		log.error("Cannot extract " .. path_in_archive)
@@ -61,35 +61,35 @@ function mpq_util.insert_file_form_ydwe(self, map_path, path_in_archive)
 	return result
 end
 
--- ´ÓµØÍ¼ÖĞ½âÑ¹³öÎÄ¼şÀ´È»ºóµ÷ÓÃ»Øµ÷º¯Êı¸üĞÂ
--- map_path - µØÍ¼Â·¾¶£¬fs.path
--- path_in_archive - µØÍ¼Ñ¹Ëõ°üÖĞµÄÂ·¾¶£¬string
--- process_function - º¯Êı£¬±ØĞë½ÓÊÕÒ»¸öfs.path¶ÔÏó£¬·µ»ØÒ»¸öfs.path¶ÔÏó
--- ĞÎÈç function (in_path) return out_path end
--- ·µ»ØÖµ£ºtrue±íÊ¾³É¹¦£¬false±íÊ¾Ê§°Ü
+-- ä»åœ°å›¾ä¸­è§£å‹å‡ºæ–‡ä»¶æ¥ç„¶åè°ƒç”¨å›è°ƒå‡½æ•°æ›´æ–°
+-- map_path - åœ°å›¾è·¯å¾„ï¼Œfs.path
+-- path_in_archive - åœ°å›¾å‹ç¼©åŒ…ä¸­çš„è·¯å¾„ï¼Œstring
+-- process_function - å‡½æ•°ï¼Œå¿…é¡»æ¥æ”¶ä¸€ä¸ªfs.pathå¯¹è±¡ï¼Œè¿”å›ä¸€ä¸ªfs.pathå¯¹è±¡
+-- å½¢å¦‚ function (in_path) return out_path end
+-- è¿”å›å€¼ï¼štrueè¡¨ç¤ºæˆåŠŸï¼Œfalseè¡¨ç¤ºå¤±è´¥
 function mpq_util.update_file(self, map_path, path_in_archive, process_function)
-	-- ½á¹û
+	-- ç»“æœ
 	local result = false
 	log.trace("mpq_util.update_file.")
 
-	-- ´ò¿ªMPQ£¨µØÍ¼£©
+	-- æ‰“å¼€MPQï¼ˆåœ°å›¾ï¼‰
 	local mpq_handle = stormlib.open_archive(map_path, 0, 0)
 	if mpq_handle then
-		-- È·¶¨½âÑ¹Â·¾¶
+		-- ç¡®å®šè§£å‹è·¯å¾„
 		local extract_file_path = fs.ydwe_path() / "logs" / "file.out"
-		-- ½«ÎÄ¼ş½âÑ¹
+		-- å°†æ–‡ä»¶è§£å‹
 		if stormlib.has_file(mpq_handle, path_in_archive) and
 			stormlib.extract_file(mpq_handle, extract_file_path, path_in_archive)
 		then
 			log.trace(path_in_archive .. " has been extracted from " .. map_path:filename():string())
 
-			-- µ÷ÓÃ´¦Àíº¯Êı´¦Àí
+			-- è°ƒç”¨å¤„ç†å‡½æ•°å¤„ç†
 			local success, out_file_path = pcall(process_function, mpq_handle, extract_file_path)
-			-- Èç¹ûº¯ÊıÕı³£½áÊø£¨Ã»ÓĞ³ö´í£©
+			-- å¦‚æœå‡½æ•°æ­£å¸¸ç»“æŸï¼ˆæ²¡æœ‰å‡ºé”™ï¼‰
 			if success then
-				-- Èç¹ûº¯Êı³É¹¦Íê³ÉÈÎÎñ
+				-- å¦‚æœå‡½æ•°æˆåŠŸå®Œæˆä»»åŠ¡
 				if out_file_path then
-					-- Ìæ»»ÎÄ¼ş
+					-- æ›¿æ¢æ–‡ä»¶
 					if stormlib.add_or_replace_file(
 						mpq_handle,
 						out_file_path,
@@ -102,21 +102,21 @@ function mpq_util.update_file(self, map_path, path_in_archive, process_function)
 						log.error("Error occurred when write back")
 					end
 				else
-					-- ³öÏÖÁË´íÎó--
+					-- å‡ºç°äº†é”™è¯¯--
 					log.error("Processor function cannot complete its task.")
 				end
 			else
-				-- ¼ÇÂ¼³ö´íÔ­Òò
+				-- è®°å½•å‡ºé”™åŸå› 
 				log.error(out_file_path)
 			end
 
-			-- É¾³ıÁÙÊ±ÎÄ¼ş
+			-- åˆ é™¤ä¸´æ—¶æ–‡ä»¶
 			--pcall(fs.remove_all, extract_file_path)
 		else
 			log.error("Cannot extract " .. path_in_archive)
 		end
 
-		-- ¹Ø±ÕµØÍ¼
+		-- å…³é—­åœ°å›¾
 		stormlib.close_archive(mpq_handle)
 	else
 		log.error("Cannot open map archive" .. map_path:string())
@@ -125,14 +125,14 @@ function mpq_util.update_file(self, map_path, path_in_archive, process_function)
 	return result
 end
 
--- ´ÓÖ÷³ÌĞòµÄmpqÄ¿Â¼ÏÂÔØÈëMPQ
--- mpqname - MPQµÄÎÄ¼şÃû
--- ·µ»ØÖµ£ºMPQ¾ä±ú
+-- ä»ä¸»ç¨‹åºçš„mpqç›®å½•ä¸‹è½½å…¥MPQ
+-- mpqname - MPQçš„æ–‡ä»¶å
+-- è¿”å›å€¼ï¼šMPQå¥æŸ„
 function mpq_util.load_mpq(self, mpqname)
 	local result = 0
 	local mpq = fs.ydwe_path() / "share" / "mpq" / mpqname
 
-	-- ÎÄ¼ş´æÔÚ·ñ£¿
+	-- æ–‡ä»¶å­˜åœ¨å¦ï¼Ÿ
 	if fs.exists(mpq) then
 		result = storm.open_archive(mpq, 14)
 		if result then
