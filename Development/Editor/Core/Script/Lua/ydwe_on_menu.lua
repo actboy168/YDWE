@@ -60,7 +60,7 @@ local function file_export()
 	)
 
 	if ok then
-		if storm.generic_file_exists(file_path_string) then
+		if storm.has_file(file_path_string) then
 			-- 弹出选择保存文件对话框
 			local ok, file = gui.choose_save_file(
 				main_window_handle, 														-- HWND
@@ -71,7 +71,7 @@ local function file_export()
 			)
 			if ok then
 				-- 解压文件
-				storm.generic_extract_file(fs.path(file), file_path_string)
+				storm.extract_file(fs.path(file), file_path_string)
 			end
 		else
 			gui.message_dialog(
