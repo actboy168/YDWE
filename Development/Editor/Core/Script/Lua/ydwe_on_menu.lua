@@ -60,7 +60,7 @@ local function file_export()
 	)
 
 	if ok then
-		if storm.generic_file_exists(file_path_string) then
+		if storm.has_file(file_path_string) then
 			-- 弹出选择保存文件对话框
 			local ok, file = gui.choose_save_file(
 				main_window_handle, 														-- HWND
@@ -71,7 +71,7 @@ local function file_export()
 			)
 			if ok then
 				-- 解压文件
-				storm.generic_extract_file(fs.path(file), file_path_string)
+				storm.extract_file(fs.path(file), file_path_string)
 			end
 		else
 			gui.message_dialog(
@@ -204,7 +204,7 @@ end)
 -- event_data - 事件参数，table，包含以下值
 --	handle, message, wparam, lparam，具体不解释
 -- 返回非负数会调用原窗口函数。返回负数则直接吃掉消息
-event.register(event.EVENT_WINDOW_MESSAGE, true,  function (event_data)
+event.register(event.EVENT_WINDOW_MESSAGE, false,  function (event_data)
 	-- 只处理菜单信息
 	if event_data.message == gui.WM_COMMAND then
 		-- 菜单ID（低16位）
