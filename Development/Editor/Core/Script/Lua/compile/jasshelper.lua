@@ -13,9 +13,9 @@ jasshelper.path     = fs.ydwe_path() / "plugin" / "jasshelper"
 jasshelper.exe_path = jasshelper.path / "jasshelper.exe"
 
 
--- ¸ù¾İ°æ±¾»ñÈ¡YDWE×Ô´øµÄJass¿âº¯Êı£¨bjºÍcj£©Â·¾¶
--- version - Ä§ÊŞ°æ±¾£¬Êı
--- ·µ»Ø£ºcjÂ·¾¶£¬bjÂ·¾¶£¬¶¼ÊÇfs.path
+-- æ ¹æ®ç‰ˆæœ¬è·å–YDWEè‡ªå¸¦çš„Jassåº“å‡½æ•°ï¼ˆbjå’Œcjï¼‰è·¯å¾„
+-- version - é­”å…½ç‰ˆæœ¬ï¼Œæ•°
+-- è¿”å›ï¼šcjè·¯å¾„ï¼Œbjè·¯å¾„ï¼Œéƒ½æ˜¯fs.path
 function jasshelper.default_jass_libs(self, version)
 	if version:is_new() then
 		return (fs.ydwe_path() / "jass" / "system" / "ht" / "common.j"),
@@ -26,20 +26,20 @@ function jasshelper.default_jass_libs(self, version)
 	end
 end
 
--- ×¼±¸Ä§ÊŞÕù°Ô3µÄJass¿âº¯Êı£¨common.jºÍblizzard.j£©¹©Óï·¨¼ì²éÓÃ
--- Èç¹ûµØÍ¼ÖĞÓĞ£¬ÔòÓÅÏÈÊ¹ÓÃµØÍ¼µÄ£¬·ñÔòÊ¹ÓÃ×Ô´øµÄ
--- map_path - µØÍ¼Â·¾¶£¬fs.path¶ÔÏó
--- ·µ»Ø2¸öÖµ£ºcjÂ·¾¶£¬bjÂ·¾¶£¬¶¼ÊÇfs.path¡£
+-- å‡†å¤‡é­”å…½äº‰éœ¸3çš„Jassåº“å‡½æ•°ï¼ˆcommon.jå’Œblizzard.jï¼‰ä¾›è¯­æ³•æ£€æŸ¥ç”¨
+-- å¦‚æœåœ°å›¾ä¸­æœ‰ï¼Œåˆ™ä¼˜å…ˆä½¿ç”¨åœ°å›¾çš„ï¼Œå¦åˆ™ä½¿ç”¨è‡ªå¸¦çš„
+-- map_path - åœ°å›¾è·¯å¾„ï¼Œfs.pathå¯¹è±¡
+-- è¿”å›2ä¸ªå€¼ï¼šcjè·¯å¾„ï¼Œbjè·¯å¾„ï¼Œéƒ½æ˜¯fs.pathã€‚
 function jasshelper.prepare_jass_libs(self, map_path, version)
 	local common_j_path = self.path / "common.j"
 	local blizzard_j_path = self.path / "blizzard.j"
 	local map_has_cj = false
 	local map_has_bj = false
 	
-	-- ´ÓµØÍ¼ÖĞ½âÑ¹ËõÁ½¸öÖØÒªÎÄ¼şµ½jasshelperÄ¿Â¼£¨¹©Óï·¨¼ì²éÓÃ£©
-	local mpq_handle = stormlib.open_archive(map_path, 0, 0)
+	-- ä»åœ°å›¾ä¸­è§£å‹ç¼©ä¸¤ä¸ªé‡è¦æ–‡ä»¶åˆ°jasshelperç›®å½•ï¼ˆä¾›è¯­æ³•æ£€æŸ¥ç”¨ï¼‰
+	local mpq_handle = stormlib.open_archive(map_path, 0, stormlib.MPQ_OPEN_READ_ONLY)
 	if mpq_handle then
-		-- Èç¹ûµØÍ¼ÖĞµ¼ÈëÁË£¬ÓÅÏÈÊ¹ÓÃµØÍ¼µÄ
+		-- å¦‚æœåœ°å›¾ä¸­å¯¼å…¥äº†ï¼Œä¼˜å…ˆä½¿ç”¨åœ°å›¾çš„
 		if stormlib.has_file(mpq_handle, "common.j") then
 			stormlib.extract_file(mpq_handle, common_j_path, "common.j")
 			map_has_cj = true
@@ -60,7 +60,7 @@ function jasshelper.prepare_jass_libs(self, map_path, version)
 		log.warn("Cannot open map archive, using default bj and cj instead.")
 	end
 
-	-- ÊÇ·ñºÍµ±Ç°°æ±¾Ò»ÖÂ£¿
+	-- æ˜¯å¦å’Œå½“å‰ç‰ˆæœ¬ä¸€è‡´ï¼Ÿ
 	local use_default = (war3_version:is_new() == version:is_new())
 	local default_common_j_path, default_blizzard_j_path = self:default_jass_libs(version)
 	if not map_has_cj then
@@ -94,34 +94,34 @@ function jasshelper.prepare_jass_libs(self, map_path, version)
 end
 
 
--- Ê¹ÓÃJassHelper±àÒëµØÍ¼
--- map_path - µØÍ¼Â·¾¶£¬fs.path¶ÔÏó
--- common_j_path - common.jÂ·¾¶£¬fs.path¶ÔÏó
--- blizzard_j_path - blizzard.jÂ·¾¶£¬fs.path¶ÔÏó
--- option - ±àÒëÑ¡Ïî, table£¬Ä¿Ç°Ö§³Ö²ÎÊı£º
--- 	enable_jasshelper - ÆôÓÃJassHelper£¬true/false
---	enable_jasshelper_debug - ÆôÓÃJassHelperµÄDebug£¬true/false
---	enable_jasshelper_optimization - ÆôÓÃÓÅ»¯£¬true/false
--- ·µ»Ø£ºtrue±àÒë³É¹¦£¬false±àÒëÊ§°Ü
+-- ä½¿ç”¨JassHelperç¼–è¯‘åœ°å›¾
+-- map_path - åœ°å›¾è·¯å¾„ï¼Œfs.pathå¯¹è±¡
+-- common_j_path - common.jè·¯å¾„ï¼Œfs.pathå¯¹è±¡
+-- blizzard_j_path - blizzard.jè·¯å¾„ï¼Œfs.pathå¯¹è±¡
+-- option - ç¼–è¯‘é€‰é¡¹, tableï¼Œç›®å‰æ”¯æŒå‚æ•°ï¼š
+-- 	enable_jasshelper - å¯ç”¨JassHelperï¼Œtrue/false
+--	enable_jasshelper_debug - å¯ç”¨JassHelperçš„Debugï¼Œtrue/false
+--	enable_jasshelper_optimization - å¯ç”¨ä¼˜åŒ–ï¼Œtrue/false
+-- è¿”å›ï¼štrueç¼–è¯‘æˆåŠŸï¼Œfalseç¼–è¯‘å¤±è´¥
 function jasshelper.do_compile(self, map_path, common_j_path, blizzard_j_path, option)
 	local parameter = ""
 
-	-- ĞèÒª×övJass±àÒë£¿
+	-- éœ€è¦åšvJassç¼–è¯‘ï¼Ÿ
 	if option.enable_jasshelper then
-		-- debugÑ¡Ïî£¨--debug£©
+		-- debugé€‰é¡¹ï¼ˆ--debugï¼‰
 		if option.enable_jasshelper_debug then
 			parameter = parameter .. " --debug"
 		end
-		-- £¨¹Ø±Õ£©ÓÅ»¯Ñ¡Ïî£¨--nooptimize£©
+		-- ï¼ˆå…³é—­ï¼‰ä¼˜åŒ–é€‰é¡¹ï¼ˆ--nooptimizeï¼‰
 		if not option.enable_jasshelper_optimization then
 			parameter = parameter .. " --nooptimize"
 		end
 	else
-		-- ²»±àÒëvJassÑ¡Ïî£¨--nopreprocessor£©
+		-- ä¸ç¼–è¯‘vJassé€‰é¡¹ï¼ˆ--nopreprocessorï¼‰
 		parameter = parameter .. " --nopreprocessor"
 	end
 
-	-- Éú³ÉÃüÁîĞĞ
+	-- ç”Ÿæˆå‘½ä»¤è¡Œ
 	local command_line = string.format('"%s"%s "%s" "%s" "%s"',
 		self.exe_path:string(),
 		parameter,
@@ -130,7 +130,7 @@ function jasshelper.do_compile(self, map_path, common_j_path, blizzard_j_path, o
 		map_path:string()
 	)
 
-	-- Ö´ĞĞ²¢»ñÈ¡½á¹û
+	-- æ‰§è¡Œå¹¶è·å–ç»“æœ
 	return sys.spawn(command_line, fs.ydwe_path(), true)
 end
 

@@ -1,4 +1,4 @@
-#define __STORMLIB_NO_AUTO_LINKING__
+#define __STORMLIB_SELF__
 #include <StormLib.h>
 #pragma warning(push, 3)
 #include <lua.hpp>
@@ -182,7 +182,7 @@ namespace NLuaAPI { namespace NMPQ {
 			lua_pushnil(pState);
 	}
 
-	static bool LuaMpqStormLibAddOrReplaceFile(void *mpqHandle, const fs::path &srcPath, const std::string &pathInMpq, boost::uint32_t flags)
+	static bool LuaMpqStormLibAddFile(void *mpqHandle, const fs::path &srcPath, const std::string &pathInMpq, boost::uint32_t flags)
 	{
 		return SFileAddFile(
 			reinterpret_cast<HANDLE>(mpqHandle),
@@ -192,7 +192,7 @@ namespace NLuaAPI { namespace NMPQ {
 			);
 	}
 
-	static bool LuaMpqStormLibAddOrReplaceWave(void *mpqHandle, const fs::path &srcPath, const std::string &pathInMpq, boost::uint32_t flags, boost::uint32_t quality)
+	static bool LuaMpqStormLibAddWave(void *mpqHandle, const fs::path &srcPath, const std::string &pathInMpq, boost::uint32_t flags, boost::uint32_t quality)
 	{
 		return SFileAddWave(
 			reinterpret_cast<HANDLE>(mpqHandle),
@@ -292,7 +292,8 @@ namespace NLuaAPI { namespace NMPQ {
 		return SFileExtractFile(
 			reinterpret_cast<HANDLE>(mpqHandle),
 			pathInMpq.c_str(),
-			filePath.string().c_str()
+			filePath.string().c_str(),
+			SFILE_OPEN_FROM_MPQ 
 			);
 	}
 
@@ -359,10 +360,10 @@ namespace NLuaAPI { namespace NMPQ {
 
 			if (ret)
 			{
-				size_t fileSize = SFileGetFileSize(fileHandle);
+				size_t fileSize = SFileGetFileSize(fileHandle, NULL);
 				boost::scoped_array<char> buffer(new char[fileSize]);
 
-				ret = SFileReadFile(fileHandle, buffer.get(), fileSize);
+				ret = SFileReadFile(fileHandle, buffer.get(), fileSize, (LPDWORD)&fileSize, NULL);
 				if (ret)
 				{
 					luabind::object(pState, true).push(pState);
@@ -406,8 +407,8 @@ int luaopen_ar_stormlib(lua_State *pState)
 			def("close_file",             &NLuaAPI::NMPQ::LuaMpqStormLibCloseFile),
 			def("get_file_name",          &NLuaAPI::NMPQ::LuaMpqStormLibGetFileName),
 			def("remove_file",            &NLuaAPI::NMPQ::LuaMpqStormLibRemoveFile),
-			def("add_or_replace_file",    &NLuaAPI::NMPQ::LuaMpqStormLibAddOrReplaceFile),
-			def("add_or_replace_wave",    &NLuaAPI::NMPQ::LuaMpqStormLibAddOrReplaceWave),
+			def("add_file",               &NLuaAPI::NMPQ::LuaMpqStormLibAddOrReplaceFile),
+			def("add_wave",               &NLuaAPI::NMPQ::LuaMpqStormLibAddOrReplaceWave),
 			def("add_file_ex",            &NLuaAPI::NMPQ::LuaMpqStormLibAddFileEx),
 			//def("create_file",            &NLuaAPI::NMPQ::LuaMpqStormLibCreateFile),
 			def("write_file",             &NLuaAPI::NMPQ::LuaMpqStormLibWriteFile),
@@ -446,12 +447,13 @@ int luaopen_ar_stormlib(lua_State *pState)
 	LUA_AREA_CONSTANT(HASH_STATE_SIZE);
 	LUA_AREA_CONSTANT(MPQ_PATCH_PREFIX_LEN);
 	LUA_AREA_CONSTANT(STREAM_FLAG_READ_ONLY);
-	LUA_AREA_CONSTANT(STREAM_FLAG_PART_FILE);
-	LUA_AREA_CONSTANT(STREAM_FLAG_ENCRYPTED_FILE);
+	LUA_AREA_CONSTANT(STREAM_FLAG_WRITE_SHARE);
+	LUA_AREA_CONSTANT(STREAM_FLAG_MASK);
+	LUA_AREA_CONSTANT(STREAM_OPTIONS_MASK);
 	LUA_AREA_CONSTANT(SFILE_OPEN_HARD_DISK_FILE);
 	LUA_AREA_CONSTANT(SFILE_OPEN_CDROM_FILE);
 	LUA_AREA_CONSTANT(SFILE_OPEN_FROM_MPQ);
-	LUA_AREA_CONSTANT(SFILE_OPEN_PATCHED_FILE);
+	LUA_AREA_CONSTANT(SFILE_OPEN_BASE_FILE);
 	LUA_AREA_CONSTANT(SFILE_OPEN_ANY_LOCALE);
 	LUA_AREA_CONSTANT(SFILE_OPEN_LOCAL_FILE);
 	LUA_AREA_CONSTANT(MPQ_FLAG_READ_ONLY);
@@ -481,8 +483,6 @@ int luaopen_ar_stormlib(lua_State *pState)
 	LUA_AREA_CONSTANT(MPQ_COMPRESSION_SPARSE);
 	LUA_AREA_CONSTANT(MPQ_COMPRESSION_ADPCM_MONO);
 	LUA_AREA_CONSTANT(MPQ_COMPRESSION_ADPCM_STEREO);
-	LUA_AREA_CONSTANT(MPQ_COMPRESSION_WAVE_MONO);
-	LUA_AREA_CONSTANT(MPQ_COMPRESSION_WAVE_STEREO);
 	LUA_AREA_CONSTANT(MPQ_COMPRESSION_LZMA);
 	LUA_AREA_CONSTANT(MPQ_WAVE_QUALITY_HIGH);
 	LUA_AREA_CONSTANT(MPQ_WAVE_QUALITY_MEDIUM);

@@ -1,7 +1,6 @@
 
 local storm    = ar.storm
 local stormlib = ar.stormlib
-local sfmpq    = ar.sfmpq
 
 mpq_util = {}
 
@@ -22,9 +21,9 @@ function mpq_util.insert_file(self, map_path, file_path, path_in_archive)
 			mpq_handle,
 			file_path,
 			path_in_archive,
-			0x01000201,
-			2,
-			2
+			bit.bor(bit.bor(stormlib.MPQ_FILE_SINGLE_UNIT, stormlib.MPQ_FILE_COMPRESS), stormlib.MPQ_FILE_REPLACEEXISTING)
+			stormlib.MPQ_COMPRESSION_ZLIB,
+			stormlib.MPQ_COMPRESSION_ZLIB
 		) then
 			result = true
 			log.error("insert_file .")
@@ -90,11 +89,13 @@ function mpq_util.update_file(self, map_path, path_in_archive, process_function)
 				-- 如果函数成功完成任务
 				if out_file_path then
 					-- 替换文件
-					if stormlib.add_or_replace_file(
+					if stormlib.add_file_ex(
 						mpq_handle,
 						out_file_path,
 						path_in_archive,
-						stormlib.MPQ_FILE_REPLACEEXISTING
+						bit.bor(bit.bor(stormlib.MPQ_FILE_SINGLE_UNIT, stormlib.MPQ_FILE_COMPRESS), stormlib.MPQ_FILE_REPLACEEXISTING)
+						stormlib.MPQ_COMPRESSION_ZLIB,
+						stormlib.MPQ_COMPRESSION_ZLIB
 					) then
 						log.trace("Archive update succeeded.")
 						result = true

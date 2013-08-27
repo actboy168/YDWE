@@ -4,6 +4,7 @@ local setfenv=setfenv
 local loadstring=loadstring
 local string=string
 local table=table
+local stormlib = ar.stormlib
 
 local function result(...)
 	return select("#",...), select(1,...)
@@ -48,11 +49,13 @@ local function map_file_import(filename)
 		local temp_file_path = fs.ydwe_path() / "logs" / "import" / filename
 		fs.create_directories(temp_file_path:parent_path())
 		if io.save(temp_file_path, buf) then
-			if ar.stormlib.add_or_replace_file(
+			if stormlib.add_file_ex(
 				__map_handle__,
 				temp_file_path,
 				filename,
-				ar.stormlib.MPQ_FILE_REPLACEEXISTING
+				bit.bor(bit.bor(stormlib.MPQ_FILE_SINGLE_UNIT, stormlib.MPQ_FILE_COMPRESS), stormlib.MPQ_FILE_REPLACEEXISTING)
+				stormlib.MPQ_COMPRESSION_ZLIB,
+				stormlib.MPQ_COMPRESSION_ZLIB
 			) then
 				log.trace("import file succeeded.")
 				return

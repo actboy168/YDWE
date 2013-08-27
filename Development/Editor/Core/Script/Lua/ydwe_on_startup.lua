@@ -79,7 +79,7 @@ end
 local function get_war3_version_from_script()
 	local err = "Cannot extract file from warcraft"
 	local common_j_path = fs.ydwe_path() / "logs" / "common.j"
-	local mpq_handle = stormlib.open_archive(fs.war3_path() / 'War3Patch.mpq', 0, 0)
+	local mpq_handle = stormlib.open_archive(fs.war3_path() / 'War3Patch.mpq', 0, ar.stormlib.MPQ_OPEN_READ_ONLY)
 	if mpq_handle then
 		if stormlib.has_file(mpq_handle, "common.j") then
 			stormlib.extract_file(mpq_handle, common_j_path, "common.j")
