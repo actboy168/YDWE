@@ -50,7 +50,7 @@ namespace
 		std::wstring filename16 = fs::path(filename, fs::detail::utf8_codecvt_facet()).wstring();
 		if ((filename != NULL) && (desired_access != 0)) 
 		{
-			file = CreateFile(filename16.c_str(), desired_access, share_mode,
+			file = ::CreateFileW(filename16.c_str(), desired_access, share_mode,
 				NULL, creation_disposition, flags_and_attributes, NULL);
 		}
 
