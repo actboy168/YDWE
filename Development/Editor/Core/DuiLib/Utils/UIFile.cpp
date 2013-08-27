@@ -1,5 +1,5 @@
 #include "StdAfx.h"
-#include "zip_reader.h"
+#include <zip_reader.h>
 
 namespace DuiLib
 {

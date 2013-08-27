@@ -47,11 +47,11 @@ namespace zip {
 		Close();
 	}
 
-	bool ZipReader::Open(const fs::path& zip_file_path) 
+	bool ZipReader::Open(const boost::filesystem::path& zip_file_path) 
 	{
 		// Use of "Unsafe" function does not look good, but there is no way to do
 		// this safely on Linux. See file_util.h for details.
-		zip_file_ = internal::OpenForUnzipping(zip_file_path.string(fs::detail::utf8_codecvt_facet()));
+		zip_file_ = internal::OpenForUnzipping(zip_file_path.string(boost::filesystem::detail::utf8_codecvt_facet()));
 		if (!zip_file_)
 		{
 			return false;
@@ -129,12 +129,12 @@ namespace zip {
 		return true;
 	}
 
-	bool ZipReader::LocateAndOpenEntry(const fs::path& path_in_zip) 
+	bool ZipReader::LocateAndOpenEntry(const boost::filesystem::path& path_in_zip) 
 	{
 		current_entry_info_.reset();
 		reached_end_ = false;
 		const int kDefaultCaseSensivityOfOS = 0;
-		const int result = unzLocateFile(zip_file_, path_in_zip.string(fs::detail::utf8_codecvt_facet()).c_str(), kDefaultCaseSensivityOfOS);
+		const int result = unzLocateFile(zip_file_, path_in_zip.string(boost::filesystem::detail::utf8_codecvt_facet()).c_str(), kDefaultCaseSensivityOfOS);
 		if (result != UNZ_OK)
 			return false;
 
@@ -142,11 +142,11 @@ namespace zip {
 		return OpenCurrentEntryInZip();
 	}
 
-	bool ZipReader::ExtractCurrentEntryToFilePath(const fs::path& output_file_path) 
+	bool ZipReader::ExtractCurrentEntryToFilePath(const boost::filesystem::path& output_file_path) 
 	{
 		// If this is a directory, just create it and return.
 		if (current_entry_info()->is_directory())
-			return fs::create_directories(output_file_path);
+			return boost::filesystem::create_directories(output_file_path);
 
 		const int open_result = unzOpenCurrentFile(zip_file_);
 		if (open_result != UNZ_OK)
@@ -154,8 +154,8 @@ namespace zip {
 
 		// We can't rely on parent directory entries being specified in the
 		// zip, so we make sure they are created.
-		fs::path output_dir_path = output_file_path.parent_path();
-		if (!fs::create_directories(output_dir_path))
+		boost::filesystem::path output_dir_path = output_file_path.parent_path();
+		if (!boost::filesystem::create_directories(output_dir_path))
 			return false;
 
 		std::fstream stream(output_file_path.wstring(), std::ios::binary | std::ios_base::out);
@@ -194,9 +194,9 @@ namespace zip {
 		return success;
 	}
 
-	bool ZipReader::ExtractCurrentEntryIntoDirectory(const fs::path& output_directory_path) 
+	bool ZipReader::ExtractCurrentEntryIntoDirectory(const boost::filesystem::path& output_directory_path) 
 	{
-		fs::path output_file_path = output_directory_path / current_entry_info()->file_path();
+		boost::filesystem::path output_file_path = output_directory_path / current_entry_info()->file_path();
 		return ExtractCurrentEntryToFilePath(output_file_path);
 	}
 

@@ -37,18 +37,6 @@
       <UniqueIdentifier>{38c49da3-b1a5-4e9f-a1c4-3468d0853336}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="Source Files\Utils\zip">
-      <UniqueIdentifier>{266a8911-9b58-406c-a5c7-85da5f46f0b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Utils\minizip">
-      <UniqueIdentifier>{0819f6b5-f2be-42ac-959e-662fa6b0ec84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Utils\zip">
-      <UniqueIdentifier>{fa09b743-9dc9-41e1-95e6-c4e749c6094c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Utils\minizip">
-      <UniqueIdentifier>{af1041dc-760d-4ecf-8f92-34e010a05274}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StdAfx.cpp">
@@ -158,27 +146,6 @@
     </ClCompile>
     <ClCompile Include="Utils\FrameWindow.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\ioapi.c">
-      <Filter>Source Files\Utils\minizip</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\iowin32.c">
-      <Filter>Source Files\Utils\minizip</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\mztools.c">
-      <Filter>Source Files\Utils\minizip</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\unzip.c">
-      <Filter>Source Files\Utils\minizip</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zip.c">
-      <Filter>Source Files\Utils\minizip</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils\zip_internal.cpp">
-      <Filter>Source Files\Utils\zip</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils\zip_reader.cpp">
-      <Filter>Source Files\Utils\zip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -298,36 +265,6 @@
     </ClInclude>
     <ClInclude Include="Utils\format.h">
       <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils\zip_internal.h">
-      <Filter>Header Files\Utils\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils\zip_reader.h">
-      <Filter>Header Files\Utils\zip</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\crypt.h">
-      <Filter>Header Files\Utils\minizip</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\ioapi.h">
-      <Filter>Header Files\Utils\minizip</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\iowin32.h">
-      <Filter>Header Files\Utils\minizip</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\mztools.h">
-      <Filter>Header Files\Utils\minizip</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\unzip.h">
-      <Filter>Header Files\Utils\minizip</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zconf.h">
-      <Filter>Header Files\Utils\minizip</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zip.h">
-      <Filter>Header Files\Utils\minizip</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zlib.h">
-      <Filter>Header Files\Utils\minizip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="minizip\ioapi.c">
+      <Filter>minizip\src</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\iowin32.c">
+      <Filter>minizip\src</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\mztools.c">
+      <Filter>minizip\src</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\unzip.c">
+      <Filter>minizip\src</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\zip.c">
+      <Filter>minizip\src</Filter>
+    </ClCompile>
+    <ClCompile Include="zip_internal.cpp" />
+    <ClCompile Include="zip_reader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="minizip">
+      <UniqueIdentifier>{e2544b8f-094a-47c9-8cc4-abc03c02686a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="minizip\inc">
+      <UniqueIdentifier>{11f135b0-89e9-4622-889a-9d6f5216022e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="minizip\src">
+      <UniqueIdentifier>{7cd8aa85-cae2-4ed2-aab0-15c692848a3d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="minizip\crypt.h">
+      <Filter>minizip\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\zlib.h">
+      <Filter>minizip\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\ioapi.h">
+      <Filter>minizip\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\iowin32.h">
+      <Filter>minizip\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\mztools.h">
+      <Filter>minizip\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\unzip.h">
+      <Filter>minizip\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\zconf.h">
+      <Filter>minizip\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\zip.h">
+      <Filter>minizip\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="zip_internal.h" />
+    <ClInclude Include="zip_reader.h" />
+  </ItemGroup>
+</Project>

@@ -60,7 +60,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <Optimization>MinSpace</Optimization>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(YDWE)\Editor\Core\YDGraph;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(YDWE)\Editor\Core\YDGraph;$(YDWE)\Editor\Core\ydzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <BaseAddress>
@@ -69,7 +69,6 @@
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalDependencies>$(OpenSource)\ZLib\lib\zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -92,7 +91,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(YDWE)\Editor\Core\YDGraph;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(YDWE)\Editor\Core\YDGraph;$(YDWE)\Editor\Core\ydzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
     <Bscmake>
@@ -113,26 +112,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\ioapi.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\iowin32.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\mztools.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\unzip.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zip.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="Control\UICheckBox.cpp" />
     <ClCompile Include="Core\UIImage.cpp" />
     <ClCompile Include="Core\UIImageInfo.cpp" />
@@ -172,24 +151,8 @@
     <ClCompile Include="Control\UISlider.cpp" />
     <ClCompile Include="Control\UIText.cpp" />
     <ClCompile Include="Control\UITreeView.cpp" />
-    <ClCompile Include="Utils\zip_internal.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Utils\zip_reader.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\crypt.h" />
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\ioapi.h" />
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\iowin32.h" />
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\mztools.h" />
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\unzip.h" />
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zconf.h" />
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zip.h" />
-    <ClInclude Include="..\..\..\..\OpenSource\MiniZip\Current\include\minizip\zlib.h" />
     <ClInclude Include="Control\UICheckBox.h" />
     <ClInclude Include="Core\UIImage.h" />
     <ClInclude Include="Core\UIImageInfo.h" />
@@ -229,8 +192,6 @@
     <ClInclude Include="Control\UISlider.h" />
     <ClInclude Include="Control\UIText.h" />
     <ClInclude Include="Control\UITreeView.h" />
-    <ClInclude Include="Utils\zip_internal.h" />
-    <ClInclude Include="Utils\zip_reader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\YDWEVersion\common.rc" />
@@ -238,6 +199,9 @@
   <ItemGroup>
     <ProjectReference Include="..\YDGraph\YDGraph.vcxproj">
       <Project>{c371743b-ad12-4a31-82df-5a058083773f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ydzip\ydzip.vcxproj">
+      <Project>{51369253-a42c-455d-8ade-48d1c3c14663}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
