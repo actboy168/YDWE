@@ -197,7 +197,7 @@
     <ResourceCompile Include="..\YDWEVersion\common.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\YDGraph\YDGraph.vcxproj">
+    <ProjectReference Include="..\ydgraph\ydgraph.vcxproj">
       <Project>{c371743b-ad12-4a31-82df-5a058083773f}</Project>
     </ProjectReference>
     <ProjectReference Include="..\ydzip\ydzip.vcxproj">
