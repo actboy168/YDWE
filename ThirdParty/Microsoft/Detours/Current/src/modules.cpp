@@ -2,7 +2,7 @@
 //
 //  Module Enumeration Functions (modules.cpp of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_308.
+//  Microsoft Research Detours Package, Version 3.0 Build_316.
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -18,6 +18,9 @@
 //#define DETOUR_DEBUG 1
 #define DETOURS_INTERNAL
 #include "detours.h"
+
+#define CLR_DIRECTORY OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR]
+#define IAT_DIRECTORY OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IAT]
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -112,6 +115,10 @@ static inline HRESULT StringCchCatA(char* pszDest, size_t cchDest, const char* p
 const GUID DETOUR_EXE_RESTORE_GUID = {
     0x2ed7a3ff, 0x3339, 0x4a8d,
     { 0x80, 0x5c, 0xd4, 0x98, 0x15, 0x3f, 0xc2, 0x8f }};
+
+const GUID DETOUR_EXE_HELPER_GUID = { /* ea0251b9-5cde-41b5-98d0-2af4a26b0fee */
+    0xea0251b9, 0x5cde, 0x41b5,
+    { 0x98, 0xd0, 0x2a, 0xf4, 0xa2, 0x6b, 0x0f, 0xee }};
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -304,16 +311,20 @@ PVOID WINAPI DetourFindFunction(PCSTR pszModule, PCSTR pszFunction)
         return NULL;
     }
 
-#ifdef DETOURS_IA64
-#error Feature not supported in this release.
+#if defined(DETOURS_IA64)
+    // On the IA64, we get a raw code pointer from the symbol engine
+    // and have to convert it to a wrapped [code pointer, global pointer].
+    //
+    PPLABEL_DESCRIPTOR pldEntry = (PPLABEL_DESCRIPTOR)DetourGetEntryPoint(hModule);
+    PPLABEL_DESCRIPTOR pldSymbol = new PLABEL_DESCRIPTOR;
 
-
-
-
-
-
-
-
+    pldSymbol->EntryPoint = symbol.Address;
+    pldSymbol->GlobalPointer = pldEntry->GlobalPointer;
+    return (PBYTE)pldSymbol;
+#elif defined(DETOURS_ARM)
+    // On the ARM, we get a raw code pointer, which we must convert into a
+    // valied Thumb2 function pointer.
+    return DETOURS_PBYTE_TO_PFUNC(symbol.Address);
 #else
     return (PBYTE)symbol.Address;
 #endif
@@ -397,23 +408,39 @@ PVOID WINAPI DetourGetEntryPoint(HMODULE hModule)
             return NULL;
         }
 
-        if (pNtHeader->OptionalHeader.AddressOfEntryPoint != 0) {
-            SetLastError(NO_ERROR);
-            return ((PBYTE)pDosHeader) +
-                pNtHeader->OptionalHeader.AddressOfEntryPoint;
+        PDETOUR_CLR_HEADER pClrHeader = NULL;
+        if (pNtHeader->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR32_MAGIC) {
+            if (((PIMAGE_NT_HEADERS32)pNtHeader)->CLR_DIRECTORY.VirtualAddress != 0 &&
+                ((PIMAGE_NT_HEADERS32)pNtHeader)->CLR_DIRECTORY.Size != 0) {
+                pClrHeader = (PDETOUR_CLR_HEADER)
+                    (((PBYTE)pDosHeader)
+                     + ((PIMAGE_NT_HEADERS32)pNtHeader)->CLR_DIRECTORY.VirtualAddress);
+            }
         }
-        else {
-            // The AddressOfEntryPoint is 0.  This indicates that the EXE is
-            // managed, and the CLR has validated it and deliberately zeroed
-            // out the entrypoint.
+        else if (pNtHeader->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR64_MAGIC) {
+            if (((PIMAGE_NT_HEADERS64)pNtHeader)->CLR_DIRECTORY.VirtualAddress != 0 &&
+                ((PIMAGE_NT_HEADERS64)pNtHeader)->CLR_DIRECTORY.Size != 0) {
+                pClrHeader = (PDETOUR_CLR_HEADER)
+                    (((PBYTE)pDosHeader)
+                     + ((PIMAGE_NT_HEADERS64)pNtHeader)->CLR_DIRECTORY.VirtualAddress);
+            }
+        }
+
+        if (pClrHeader != NULL) {
+            // For MSIL assemblies, we want to use the _Cor entry points.
 
             HMODULE hClr = GetModuleHandleW(L"MSCOREE.DLL");
             if (hClr == NULL) {
                 return NULL;
             }
 
+            SetLastError(NO_ERROR);
             return GetProcAddress(hClr, "_CorExeMain");
         }
+
+        SetLastError(NO_ERROR);
+        return ((PBYTE)pDosHeader) +
+            pNtHeader->OptionalHeader.AddressOfEntryPoint;
     }
     __except(EXCEPTION_EXECUTE_HANDLER) {
         SetLastError(ERROR_EXE_MARKED_INVALID);

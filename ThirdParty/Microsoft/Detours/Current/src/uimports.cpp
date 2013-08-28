@@ -2,7 +2,7 @@
 //
 //  Add DLLs to a module import table (uimports.cpp of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_308.
+//  Microsoft Research Detours Package, Version 3.0 Build_316.
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -146,12 +146,14 @@ static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
     DWORD dwProtect = 0;
     if (inh.IMPORT_DIRECTORY.VirtualAddress != 0) {
         // Read the old import directory if it exists.
+#if 0
         if (!VirtualProtectEx(hProcess,
                               pbModule + inh.IMPORT_DIRECTORY.VirtualAddress,
                               inh.IMPORT_DIRECTORY.Size, PAGE_EXECUTE_READWRITE, &dwProtect)) {
             DETOUR_TRACE(("VirtualProtectEx(import) write failed: %d\n", GetLastError()));
             goto finish;
         }
+#endif
         DETOUR_TRACE(("IMPORT_DIRECTORY perms=%x\n", dwProtect));
 
         if (!ReadProcessMemory(hProcess,
@@ -168,9 +170,17 @@ static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
 
     for (n = 0; n < nDlls; n++) {
         HRESULT hrRet = StringCchCopyA((char*)pbNew + obStr, cbNew - obStr, plpDlls[n]);
-        if (FAILED(hrRet))
-        {
+        if (FAILED(hrRet)) {
             DETOUR_TRACE(("StringCchCopyA failed: %d\n", GetLastError()));
+            goto finish;
+        }
+
+        // After copying the string, we patch up the size "??" bits if any.
+        hrRet = ReplaceOptionalSizeA((char*)pbNew + obStr,
+                                     cbNew - obStr,
+                                     DETOURS_STRINGIFY(DETOURS_BITS_XX));
+        if (FAILED(hrRet)) {
+            DETOUR_TRACE(("ReplaceOptionalSizeA failed: %d\n", GetLastError()));
             goto finish;
         }
 

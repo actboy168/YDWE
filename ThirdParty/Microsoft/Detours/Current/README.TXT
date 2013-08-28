@@ -1,5 +1,5 @@
 Microsoft Research Detours Package
-Express Version 3.0 Build_308
+Express Version 3.0 Build_316
 
 DISCLAIMER AND LICENSE:
 =======================
@@ -11,7 +11,7 @@ Usage of the Detours package is covered under the End User License Agreement.
 Your usage of Detours implies your acceptance of the End User License Agreement.
 
 Detours 3.0 Professional, which includes rights to use Detours in commerical
-products and production use is available throught on online Microsoft Store:
+products and production use is available through the online Microsoft Store:
 http://www.microsoftstore.com/store/msstore/en_US/pd/productID.216531800
 
 
@@ -48,22 +48,36 @@ to that contained in the file samples\slept\NORMAL.TXT.
 4. CHANGES IN VERSION 3.0:
 ==========================
 The following major changes were made in Detours 3.0 from Detours 2.x:
- * Support for ARM processors.
- * Removal of the detoured.dll market binary.
+ * Support for mixing 32-bit and 64-bit processes.
+ * Support for ARM processors (in addition to support for X86, X64, and IA64).
+ * Removal of the detoured.dll marker binary.
  * Compatibility improvements, especially on x64 processors.
  * Addition of APIs to enumerate PE binary Imports and to determine the
    module referenced by a function pointer.
  * Improved support for highly-optimized code on X64 processors.
+ * Improved support for detouring hot-patchable binaries.
  * Improved algorithm for allocation of trampolines.
 
 
-4.1. ARM SUPPORT:
-=============================
+4.1. SUPPORT FOR MIXING 32-BIT AND 64-BIT PROCESSES:
+====================================================
+Previous version of Detours only supported pure 64-bit or pure 32-bit
+environments.  Detours 3.0 includes support for creating parallel 32-bit
+and 64-bit DLLs that can be loaded dynamically into target processes with
+Detours automatically selecting the correct architectur DLL. The
+DetourCreateProcessWithDllEx function selects the correct DLL based on
+the word size (32-bit or 64-bit) of the target process.  For more
+information see the "Detouring 32-bit and 64-bit Processes" section of
+the Detours documentation (Detours.chm).
+
+
+4.2. ARM SUPPORT:
+=================
 Detours 3.0 includes support for detouring functions on ARM processors
 using the Thumb-2 instruction set.
 
 
-4.2. REMOVAL OF DETOURED.DLL:
+4.3. REMOVAL OF DETOURED.DLL:
 =============================
 Products shipping with Detours 3.0 no longer need to include detoured.dll
 in their dependencies.  Prior to Detours 3.0, Detours loaded the detoured.dll
@@ -81,22 +95,22 @@ provided as an argument to DetourCreateProcessWithDll, reducing it's argument
 count by one.
 
 
-4.3. COMPATIBILITY IMPROVEMENTS:
+4.4. COMPATIBILITY IMPROVEMENTS:
 ================================
 Fixes have been made in Detours 3.0 to improve support for target binaries
-containing no DLL imports, DLL binaries compiled for online-patching, and
-64-bit PE binaries containing managed code.
+containing no DLL imports, DLL binaries compiled for online-patching,
+binaries generated with hot-patching support, and 64-bit PE binaries
+containing managed code.
 
 
-4.4. APIS TO ENUMERATE PE BINARY IMPORTS
-========================================
+4.5. APIS TO ENUMERATE PE BINARY IMPORTS:
+=========================================
 Added DetourEnumerateImports API to enumerate the functions imported by a
 EXE or DLL.  Given a pointer to a function, the DetourGetContainingModule
 API will return the HMODULE of the binary within which it resides.
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-4.5. TRANSACTIONAL MODEL AND THREAD UPDATE:
+4.6. TRANSACTIONAL MODEL AND THREAD UPDATE:
 ===========================================
 Typically, a developer uses the Detours package to detour a family of
 functions.  Race conditions can be introduced into the detour code as the
@@ -124,17 +138,14 @@ of all threads marks marked for update, the entire transaction is atomic,
 either all threads and functions are modified, or none are modified.
 
 
-4.6. 64-BIT SUPPORT:
+4.7. 64-BIT SUPPORT:
 ====================
 Detours includes support for 64-bit execution on X64 and IA64 processors.
 Detours understands the new 64-bit instructions of the X64 and IA64 and can
-detour 64-bit code when used in a 64-bit process.  However, Detours does not
-support cross-compatibility between 32-bit and 64-bit code.  For example,
-32-bit detours can be applied only to 32-bit code, and 64-bit detours can be
-applied only to 64-bit code.
+detour 64-bit code when used in a 64-bit process.
 
 
-4.7. ALLOCATION OF TRAMPOLINES:
+4.8. ALLOCATION OF TRAMPOLINES:
 ===============================
 To intercept calls, Detours copies the first few instructions of the target
 function into a block of memory called a trampoline.  In previous versions
@@ -248,9 +259,23 @@ DetourBinaryBind()          - Binds the DLL imports for a named binary file.
 ============================================
 DetourCreateProcessWithDll() - Creates a new process with the specified
                                DLL inserted into it.
-DetourRestoreAfterWith()     - Restores the contents in memory import table
-                               after a process was started with
+
+DetourCreateProcessWithDllEx() - Creates a new process with a DLL inserted,
+                                 selecting a 32-bit DLL for a 32-bit target
+                                 process or a 64-bit DLL for a 64-bit target
+                                 process.
+
+DetourRestoreAfterWith()     - Restores the contents of the in memory import
+                               table after a process was started with
                                DetourCreateProcessWithDll.
+
+DetourIsHelperProcess()      - Determines if a DLL is being loaded by rundll32
+                               in a helper process in order to make the
+                               transition from a 32-bit process to a 64-bit
+                               process or from a 64-bit process to a 32-bit
+                               process.
+
+DetourFinishHelperProcess()  - Completes the operations of a helper process.
 
 
 6. COMPATIBILITY:

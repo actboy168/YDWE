@@ -1,0 +1,47 @@
+==============================================================================
+The following individuals have helped identify specific bugs and improvements
+in Detours.  The entire Detours community has benefited from their help.
+==============================================================================
+
+* Nick Wood:          Identified bug in DetourFindFunction on ARM.
+                      (Build_314)
+
+* Mark Russinovich:   Helped debug DetourCreateProcessWithDllEx.
+                      (Build_314)
+
+* John Lin:           Implementation idea for DetoursCreateProcessWithDllEx.
+                      (Build_314)
+
+* Tony Martin:        Identified security weakness in Detours 2.1, but fixed
+                      in subsequent Detours releases.
+                      (Build_223)
+
+* Nightxie:           Identified bug in detour_alloc_round_up_to_region.
+                      (Build_310)
+
+* Diana Milirud:      Identified bug in B* instructions on ARM.
+                      (Build_309)
+
+* Juan Carlos         Identified correct MSIL entry point for unsigned MSIL.
+  Luciani:            (Build_308)
+
+* Lee Hunt            Suggested improvements in algorithm for allocation of
+  Lawrence Landauer   trampoline regions on x64 to avoid collisions with
+  Joe Laughlin:       system DLLs.
+                      (Build_307)
+
+* Tyler Sims          Identified bug in handling of "anycpu" MSIL binaries
+  Darren Kennedy:     on x64.
+                      (Build_307)
+
+* Andrew Vachon:      Help with optimized binaries.
+                      (Build 301)
+
+* Chris Mann:         Identified fix not forward ported from 2.2 to 3.0.
+                      (Build_301)
+
+* Mark Irving:        Identified bug with EXEs missing second import table.
+                      (Build_300)
+
+* Ben Schwarz:        Identified bug in handling of multi-byte NOPs.
+                      (Build_300)
