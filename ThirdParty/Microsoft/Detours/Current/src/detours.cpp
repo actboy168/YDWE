@@ -2,7 +2,7 @@
 //
 //  Core Detours Functionality (detours.cpp of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_308.
+//  Microsoft Research Detours Package, Version 3.0 Build_316.
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -148,8 +148,18 @@ inline PBYTE detour_skip_jmp(PBYTE pbCode, PVOID *ppGlobals)
         DETOUR_TRACE(("%p->%p: skipped over short jump.\n", pbCode, pbNew));
         pbCode = pbNew;
 
+        // First, skip over the import vector if there is one.
+        if (pbCode[0] == 0xff && pbCode[1] == 0x25) {   // jmp [imm32]
+            // Looks like an import alias jump, then get the code it points to.
+            PBYTE pbTarget = *(PBYTE *)&pbCode[2];
+            if (detour_is_imported(pbCode, pbTarget)) {
+                PBYTE pbNew = *(PBYTE *)pbTarget;
+                DETOUR_TRACE(("%p->%p: skipped over import table.\n", pbCode, pbNew));
+                pbCode = pbNew;
+            }
+        }
         // Finally, skip over a long jump if it is the target of the patch jump.
-        if (pbCode[0] == 0xe9) {   // jmp +imm32
+        else if (pbCode[0] == 0xe9) {   // jmp +imm32
             PBYTE pbNew = pbCode + 5 + *(INT32 *)&pbCode[1];
             DETOUR_TRACE(("%p->%p: skipped over long jump.\n", pbCode, pbNew));
             pbCode = pbNew;
@@ -198,6 +208,16 @@ inline ULONG detour_is_code_filler(PBYTE pbCode)
 //
 #ifdef DETOURS_X64
 #error Feature not supported in this release.
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -622,9 +642,6 @@ inline ULONG detour_is_code_filler(PBYTE pbCode)
 
 
 
-
-
-
 #endif // DETOURS_ARM
 
 //////////////////////////////////////////////// Trampoline Memory Management.
@@ -681,7 +698,7 @@ static PBYTE detour_alloc_round_up_to_region(PBYTE pbTry)
     ULONG_PTR extra = ((ULONG_PTR)pbTry) & (DETOUR_REGION_SIZE - 1);
     if (extra != 0) {
         ULONG_PTR adjust = DETOUR_REGION_SIZE - extra;
-        pbTry -= adjust;
+        pbTry += adjust;
     }
     return pbTry;
 }
@@ -831,25 +848,27 @@ static PDETOUR_TRAMPOLINE detour_alloc_trampoline(PBYTE pbTarget)
 
     PVOID pbTry = NULL;
 
-    // First, we try looking 1GB below.
+    // Try looking 1GB below or lower.
+    if (pbTry == NULL && pbTarget > (PBYTE)0x40000000) {
+        pbTry = detour_alloc_region_from_hi((PBYTE)pLo, pbTarget - 0x40000000);
+    }
+    // Try looking 1GB above or higher.
+    if (pbTry == NULL && pbTarget < (PBYTE)0xffffffff40000000) {
+        pbTry = detour_alloc_region_from_lo(pbTarget + 0x40000000, (PBYTE)pHi);
+    }
+    // Try looking 1GB below or higher.
     if (pbTry == NULL && pbTarget > (PBYTE)0x40000000) {
         pbTry = detour_alloc_region_from_lo(pbTarget - 0x40000000, pbTarget);
-        if (pbTry == NULL) {
-            pbTry = detour_alloc_region_from_hi((PBYTE)pLo, pbTarget - 0x40000000);
-        }
     }
-    // Then, we try looking 1GB above.
+    // Try looking 1GB above or lower.
     if (pbTry == NULL && pbTarget < (PBYTE)0xffffffff40000000) {
         pbTry = detour_alloc_region_from_hi(pbTarget, pbTarget + 0x40000000);
-        if (pbTry == NULL) {
-            pbTry = detour_alloc_region_from_lo(pbTarget + 0x40000000, (PBYTE)pHi);
-        }
     }
-    // Then, we try anything below.
+    // Try anything below.
     if (pbTry == NULL) {
         pbTry = detour_alloc_region_from_hi((PBYTE)pLo, pbTarget);
     }
-    // Then, we try anything above.
+    // try anything above.
     if (pbTry == NULL) {
         pbTry = detour_alloc_region_from_lo(pbTarget, (PBYTE)pHi);
     }

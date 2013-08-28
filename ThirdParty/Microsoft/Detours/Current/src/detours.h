@@ -2,7 +2,7 @@
 //
 //  Core Detours Functionality (detours.h of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_308.
+//  Microsoft Research Detours Package, Version 3.0 Build_316.
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -73,6 +73,7 @@ extern "C" {
 #define DETOUR_SECTION_HEADER_SIGNATURE         0x00727444   // "Dtr\0"
 
 extern const GUID DETOUR_EXE_RESTORE_GUID;
+extern const GUID DETOUR_EXE_HELPER_GUID;
 
 #define DETOUR_TRAMPOLINE_SIGNATURE             0x21727444  // Dtr!
 typedef struct _DETOUR_TRAMPOLINE DETOUR_TRAMPOLINE, *PDETOUR_TRAMPOLINE;
@@ -149,6 +150,14 @@ typedef struct _DETOUR_EXE_RESTORE
 
 } DETOUR_EXE_RESTORE, *PDETOUR_EXE_RESTORE;
 
+typedef struct _DETOUR_EXE_HELPER
+{
+    DWORD               cb;
+    DWORD               pid;
+    CHAR                DllName[MAX_PATH];
+
+} DETOUR_EXE_HELPER, *PDETOUR_EXE_HELPER;
+
 #pragma pack(pop)
 
 #define DETOUR_SECTION_HEADER_DECLARE(cbSectionSize) \
@@ -168,6 +177,11 @@ typedef struct _DETOUR_EXE_RESTORE
       0,\
       0,\
 }
+
+/////////////////////////////////////////////////////////////// Helper Macros.
+//
+#define DETOURS_STRINGIFY(x)    DETOURS_STRINGIFY_(x)
+#define DETOURS_STRINGIFY_(x)    #x
 
 ///////////////////////////////////////////////////////////// Binary Typedefs.
 //
@@ -209,9 +223,9 @@ typedef VOID * PDETOUR_LOADED_BINARY;
 
 //////////////////////////////////////////////////////////// Transaction APIs.
 //
-LONG WINAPI DetourTransactionBegin();
-LONG WINAPI DetourTransactionAbort();
-LONG WINAPI DetourTransactionCommit();
+LONG WINAPI DetourTransactionBegin(VOID);
+LONG WINAPI DetourTransactionAbort(VOID);
+LONG WINAPI DetourTransactionCommit(VOID);
 LONG WINAPI DetourTransactionCommitEx(PVOID **pppFailedPointer);
 
 LONG WINAPI DetourUpdateThread(HANDLE hThread);
@@ -341,11 +355,61 @@ BOOL WINAPI DetourCreateProcessWithDllW(LPCWSTR lpApplicationName,
                                         pfCreateProcessW);
 
 #ifdef UNICODE
-#define DetourCreateProcessWithDll  DetourCreateProcessWithDllW
-#define PDETOUR_CREATE_PROCESS_ROUTINE     PDETOUR_CREATE_PROCESS_ROUTINEW
+#define DetourCreateProcessWithDll      DetourCreateProcessWithDllW
+#define PDETOUR_CREATE_PROCESS_ROUTINE  PDETOUR_CREATE_PROCESS_ROUTINEW
 #else
-#define DetourCreateProcessWithDll  DetourCreateProcessWithDllA
-#define PDETOUR_CREATE_PROCESS_ROUTINE     PDETOUR_CREATE_PROCESS_ROUTINEA
+#define DetourCreateProcessWithDll      DetourCreateProcessWithDllA
+#define PDETOUR_CREATE_PROCESS_ROUTINE  PDETOUR_CREATE_PROCESS_ROUTINEA
+#endif // !UNICODE
+
+BOOL WINAPI DetourCreateProcessWithDllExA(LPCSTR lpApplicationName,
+                                          __in_z LPSTR lpCommandLine,
+                                          LPSECURITY_ATTRIBUTES lpProcessAttributes,
+                                          LPSECURITY_ATTRIBUTES lpThreadAttributes,
+                                          BOOL bInheritHandles,
+                                          DWORD dwCreationFlags,
+                                          LPVOID lpEnvironment,
+                                          LPCSTR lpCurrentDirectory,
+                                          LPSTARTUPINFOA lpStartupInfo,
+                                          LPPROCESS_INFORMATION lpProcessInformation,
+                                          LPCSTR lpDllName,
+                                          PDETOUR_CREATE_PROCESS_ROUTINEA
+                                          pfCreateProcessA);
+
+BOOL WINAPI DetourCreateProcessWithDllExW(LPCWSTR lpApplicationName,
+                                          __in_z LPWSTR lpCommandLine,
+                                          LPSECURITY_ATTRIBUTES lpProcessAttributes,
+                                          LPSECURITY_ATTRIBUTES lpThreadAttributes,
+                                          BOOL bInheritHandles,
+                                          DWORD dwCreationFlags,
+                                          LPVOID lpEnvironment,
+                                          LPCWSTR lpCurrentDirectory,
+                                          LPSTARTUPINFOW lpStartupInfo,
+                                          LPPROCESS_INFORMATION lpProcessInformation,
+                                          LPCSTR lpDllName,
+                                          PDETOUR_CREATE_PROCESS_ROUTINEW
+                                          pfCreateProcessW);
+
+#ifdef UNICODE
+#define DetourCreateProcessWithDllEx    DetourCreateProcessWithDllExW
+#define PDETOUR_CREATE_PROCESS_ROUTINE  PDETOUR_CREATE_PROCESS_ROUTINEW
+#else
+#define DetourCreateProcessWithDllEx    DetourCreateProcessWithDllExA
+#define PDETOUR_CREATE_PROCESS_ROUTINE  PDETOUR_CREATE_PROCESS_ROUTINEA
+#endif // !UNICODE
+
+BOOL WINAPI DetourProcessViaHelperA(DWORD dwTargetPid,
+                                    LPCSTR lpDllName,
+                                    PDETOUR_CREATE_PROCESS_ROUTINEA pfCreateProcessA);
+
+BOOL WINAPI DetourProcessViaHelperW(DWORD dwTargetPid,
+                                    LPCSTR lpDllName,
+                                    PDETOUR_CREATE_PROCESS_ROUTINEW pfCreateProcessW);
+
+#ifdef UNICODE
+#define DetourProcessViaHelper          DetourProcessViaHelperW
+#else
+#define DetourProcessViaHelper          DetourProcessViaHelperA
 #endif // !UNICODE
 
 BOOL WINAPI DetourUpdateProcessWithDll(HANDLE hProcess,
@@ -356,8 +420,10 @@ BOOL WINAPI DetourCopyPayloadToProcess(HANDLE hProcess,
                                        REFGUID rguid,
                                        PVOID pvData,
                                        DWORD cbData);
-BOOL WINAPI DetourRestoreAfterWith();
+BOOL WINAPI DetourRestoreAfterWith(VOID);
 BOOL WINAPI DetourRestoreAfterWithEx(PVOID pvData, DWORD cbData);
+BOOL WINAPI DetourIsHelperProcess(VOID);
+VOID CALLBACK DetourFinishHelperProcess(HWND, HINSTANCE, LPSTR, INT);
 
 //
 //////////////////////////////////////////////////////////////////////////////
@@ -542,6 +608,13 @@ PDETOUR_SYM_INFO DetourLoadDbgHelp(VOID);
 
 
 #endif // DETOURS_IA64
+
+#ifdef DETOURS_ARM
+#error Feature not supported in this release.
+
+
+
+#endif // DETOURS_ARM
 
 //////////////////////////////////////////////////////////////////////////////
 

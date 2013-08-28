@@ -2,7 +2,7 @@
 ##
 ##  Makefile for Detours.
 ##
-##  Microsoft Research Detours Package, Version 3.0 Build_308.
+##  Microsoft Research Detours Package, Version 3.0 Build_316.
 ##
 ##  Copyright (c) Microsoft Corporation.  All rights reserved.
 ##
@@ -16,7 +16,7 @@ DETOURS_SOURCE_BROWSING = 0
 
 #######################/#######################################################
 ##
-CFLAGS=/W4 /WX /Zi /MTd /Gy /Gm- /Zl /Od
+CFLAGS=/W4 /WX /Zi /MTd /Gy /Gm- /Zl /Od /DDETOURS_BITS=$(DETOURS_BITS)
 !IF $(DETOURS_SOURCE_BROWSING)==1
 CFLAGS=$(CFLAGS) /FR
 !ELSE
@@ -58,6 +58,10 @@ LINKFLAGS=$(LINKFLAGS) /machine:arm
 
 !ENDIF
 
+!IF "$(DETOURS_OPTION_BITS)" != ""
+CFLAGS=$(CFLAGS) /DDETOURS_OPTION_BITS=$(DETOURS_OPTION_BITS)
+!ENDIF
+
 OBJS = \
     $(OBJD)\detours.obj     \
     $(OBJD)\modules.obj     \
@@ -95,10 +99,10 @@ realclean: clean
 ##############################################################################
 
 dirs:
-    if not exist "$(INCD)" mkdir "$(INCD)"
-    if not exist "$(LIBD)" mkdir "$(LIBD)"
-    if not exist "$(BIND)" mkdir "$(BIND)"
-    if not exist "$(OBJD)" mkdir "$(OBJD)"
+    @if not exist "$(INCD)" mkdir "$(INCD)" && echo.   Created $(INCD)
+    @if not exist "$(LIBD)" mkdir "$(LIBD)" && echo.   Created $(LIBD)
+    @if not exist "$(BIND)" mkdir "$(BIND)" && echo.   Created $(BIND)
+    @if not exist "$(OBJD)" mkdir "$(OBJD)" && echo.   Created $(OBJD)
 
 $(OBJD)\detours.bsc : $(OBJS)
     bscmake /v /n /o $@ $(OBJS:.obj=.sbr)
