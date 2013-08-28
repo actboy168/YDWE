@@ -47,10 +47,9 @@ namespace
 			creation_disposition = CREATE_ALWAYS;
 		}
 
-		std::wstring filename16 = fs::path(filename, fs::detail::utf8_codecvt_facet()).wstring();
 		if ((filename != NULL) && (desired_access != 0)) 
 		{
-			file = ::CreateFileW(filename16.c_str(), desired_access, share_mode,
+			file = ::CreateFileW(fs::path(filename, fs::detail::utf8_codecvt_facet()).c_str(), desired_access, share_mode,
 				NULL, creation_disposition, flags_and_attributes, NULL);
 		}
 
@@ -64,7 +63,7 @@ namespace
 			file_ret.error = 0;
 			ret = malloc(sizeof(WIN32FILE_IOWIN));
 			if (ret == NULL)
-				CloseHandle(file);
+				::CloseHandle(file);
 			else
 				*(static_cast<WIN32FILE_IOWIN*>(ret)) = file_ret;
 		}

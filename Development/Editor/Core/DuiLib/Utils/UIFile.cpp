@@ -49,19 +49,14 @@ namespace DuiLib
 		zip::ZipReader reader;
 		if (reader.Open(zip_file)) 
 		{
-			for (; reader.HasMore(); reader.AdvanceToNextEntry()) 
+			for (auto it = reader.begin(); it != reader.end(); ++it) 
 			{
-				if (!reader.OpenCurrentEntryInZip())
-				{
-					continue;
-				}
-
-				zip::ZipReader::EntryInfo const* current_entry_info = reader.current_entry_info();
-				if (!current_entry_info->is_directory() &&  wcsicmp(current_entry_info->file_path().c_str(), name.c_str()) == 0)
+				zip::ZipReader::entry& current_entry_info = *it;
+				if (!current_entry_info.is_directory() &&  wcsicmp(current_entry_info.file_path().c_str(), name.c_str()) == 0)
 				{
 					CUIBuffer buf;
-					buf.reset((size_t)current_entry_info->original_size());
-					if (reader.ExtractCurrentEntryToBuffer(buf.ptrData.get(), (size_t)current_entry_info->original_size()))
+					buf.reset((size_t)current_entry_info.original_size());
+					if (current_entry_info.extract_to_buffer(buf.ptrData.get(), (size_t)current_entry_info.original_size()))
 					{
 						return std::move(buf);
 					}
