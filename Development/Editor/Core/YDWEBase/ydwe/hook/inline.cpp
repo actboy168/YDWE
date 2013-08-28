@@ -2,9 +2,9 @@
 #include <ydwe/hook/detail/replace_pointer.h>
 #include <Windows.h>
 #include <detours.h>
-#pragma comment(lib, "detours.lib")
 
-_BASE_BEGIN namespace hook {
+_BASE_BEGIN 
+namespace hook {
 	bool inline_install(uintptr_t* pointer_ptr, uintptr_t detour)
 	{
 		LONG status;
@@ -52,4 +52,5 @@ _BASE_BEGIN namespace hook {
 	{
 		return detail::replace_pointer(address, new_value);
 	}
-}}
+}
+_BASE_END

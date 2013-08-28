@@ -6,7 +6,6 @@
 #include <strsafe.h>
 #include <cassert>
 #include <detours.h>
-#pragma comment(lib, "detours.lib")
 
 _BASE_BEGIN
 
