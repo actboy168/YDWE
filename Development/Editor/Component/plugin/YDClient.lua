@@ -6,7 +6,8 @@ loader.load = function(path)
 	local s, r = pcall(ffi.load, path:string())
 			
 	if not s then
-		return false, r
+		log.error('failed: ' .. r)
+		return false
 	end
 	loader.dll = r
 	
@@ -15,7 +16,8 @@ loader.load = function(path)
 	]]
 	
 	if 0 == loader.dll.Start(ydwe_version.minor, ydwe_version.revision) then
-		return  false, 'failed in YDClient.dll!Start'
+		log.error('failed: in YDClient.dll!Start')
+		return  false
 	end
 	return true
 end

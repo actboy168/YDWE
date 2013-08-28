@@ -59,7 +59,7 @@ function plugin.load (self, plugin_config_path)
 		return
 	end
 	
-	s, r, msg = pcall(self.loaders[plugin_name].load, plugin_dll_path)
+	s, r = pcall(self.loaders[plugin_name].load, plugin_dll_path)
 		
 	if not s then
 		log.error("Error in load " .. plugin_name .. ": ".. r)
@@ -68,11 +68,6 @@ function plugin.load (self, plugin_config_path)
 	end
 	
 	if not r then
-		if msg then
-			log.error(plugin_name .. " loading failed: " .. msg ..".")
-		else
-			log.error(plugin_name .. " loading failed.")
-		end
 		self.loaders[plugin_name] = nil
 		return
 	end

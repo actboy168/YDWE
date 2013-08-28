@@ -5,7 +5,8 @@ local loader = {}
 loader.load = function(path)
 	local s, r = pcall(ffi.load, path:string())
 	if not s then
-		return false, r
+		log.error('failed: ' .. r)
+		return false
 	end
 	loader.dll = r	
 	ffi.cdef[[   
