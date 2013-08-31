@@ -49,7 +49,7 @@ namespace zip
 		entry& assign(const std::string& filename_in_zip, const unz_file_info& raw_file_info);
 
 		bool is_vaild() const { return !file_path_.empty(); }
-		const unzFile& zip_file() const { assert(is_vaild()); assert(zf_ptr_ != nullptr); return *zf_ptr_; }
+		const unzFile& zip_file() const { assert(zf_ptr_ != nullptr); return *zf_ptr_; }
 		const boost::filesystem::path& file_path() const { assert(is_vaild()); return file_path_; }
 		uint64_t original_size() const { assert(is_vaild()); return original_size_; }
 		bool is_directory() const { assert(is_vaild()); return is_directory_; }
