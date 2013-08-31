@@ -1,8 +1,8 @@
 #include <ydwe/warcraft3/jass/trampoline_function.h>
-#include <ydwe/warcraft3/detail/nf_register.h>
+#include <ydwe/warcraft3/jass/nf_register.h>
 #include <ydwe/warcraft3/hashtable.h>
 #include <ydwe/warcraft3/jass/trampoline.h>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/hook.h>
 #include <ydwe/util/singleton.h>
 #include <aero/function/fp_call.hpp>
 #include <map>
