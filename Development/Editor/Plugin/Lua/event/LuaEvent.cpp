@@ -118,7 +118,7 @@ namespace NYDWE {
 
 				const std::vector<int> &results = event_array[EVENT_SAVE_MAP](eventData);
 				gIsInCompileProcess = false;
-				if (std::find_if(results.begin(), results.end(), YDWE_EVENT_FAILED(boost::lambda::_1)) != results.end())
+				if (results_is_failed(results))
 				{
 					LOG4CXX_TRACE(NYDWE::gInjectLogger, "Save failed. Abort testing.");
 					memset(lpProcessInformation, 0, sizeof(PROCESS_INFORMATION));
@@ -138,7 +138,7 @@ namespace NYDWE {
 				eventData.setEventData("command_line", std::string(lpCommandLine));
 
 			const std::vector<int> &results = event_array[EVENT_TEST_MAP](eventData);
-			return std::find_if(results.begin(), results.end(), YDWE_EVENT_FAILED(boost::lambda::_1)) == results.end();
+			return (!results_is_failed(results));
 		}
 		else
 		{
@@ -169,7 +169,7 @@ namespace NYDWE {
 		eventData.setEventData("lparam", lParam);
 
 		const std::vector<int> &results = event_array[EVENT_WINDOW_MESSAGE](eventData);
-		if (std::find_if(results.begin(), results.end(), YDWE_EVENT_FAILED(boost::lambda::_1)) == results.end())
+		if (!results_is_failed(results))
 		{
 			// All allowed
 			return aero::std_call<LRESULT>(pgTrueWeWindowProc, windowHandle, message, wParam, lParam);
@@ -242,7 +242,7 @@ namespace NYDWE {
 				eventData.setEventData("lparam", std::string((const char*)lParam));
 				const std::vector<int> &results = event_array[EVENT_DIALOG_MESSAGE](eventData);
 
-				if (std::find_if(results.begin(), results.end(), YDWE_EVENT_FAILED(boost::lambda::_1)) != results.end())
+				if (results_is_failed(results))
 				{
 					return 0;
 				}
@@ -257,7 +257,7 @@ namespace NYDWE {
 			eventData.setEventData("lparam", lParam);
 			const std::vector<int> &results = event_array[EVENT_DIALOG_MESSAGE](eventData);
 
-			if (std::find_if(results.begin(), results.end(), YDWE_EVENT_FAILED(boost::lambda::_1)) != results.end())
+			if (results_is_failed(results))
 			{
 				return 0;
 			}
@@ -289,6 +289,12 @@ namespace NYDWE {
 		eventData.setEventData("object_type", object_type);
 		eventData.setEventData("default_id", default_id);
 		const std::vector<int> &results = event_array[EVENT_NEW_OBJECT_ID](eventData);
+
+		if (results_is_failed(results))
+		{
+			return default_id;
+		}
+
 		return results.size() > 0 ? results[0] : default_id;
 	}
 
@@ -323,7 +329,7 @@ namespace NYDWE {
 		const std::vector<int> &results = event_array[EVENT_MSS_LOAD](eventData);
 
 		// If all of the results are allowed, load it
-		if (std::find_if(results.begin(), results.end(), YDWE_EVENT_FAILED(boost::lambda::_1)) == results.end())
+		if (!results_is_failed(results))
 			return aero::std_call<HPROVIDER>(pgTrueMssRIBLoadProviderLibrary, fileName);
 		else
 			return 0;
