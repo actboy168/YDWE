@@ -3,6 +3,7 @@ import ctypes
 MPQ_CREATE_ARCHIVE_V1    = 0x00000000
 MPQ_FILE_COMPRESS        = 0x00000200
 MPQ_FILE_ENCRYPTED       = 0x00010000
+MPQ_FILE_SINGLE_UNIT     = 0x01000000
 MPQ_FILE_REPLACEEXISTING = 0x80000000
 MPQ_COMPRESSION_HUFFMANN     = 0x01
 MPQ_COMPRESSION_ZLIB         = 0x02
@@ -58,7 +59,7 @@ class _MPQ:
     def AddFile(self, path, name, flags = MPQ_FILE_REPLACEEXISTING):
         return self.__module.AddFile(self.__mpq, path, name, flags)
     
-    def AddFileEx(self, path, name, flags = MPQ_FILE_REPLACEEXISTING | MPQ_FILE_ENCRYPTED| MPQ_FILE_COMPRESS):
+    def AddFileEx(self, path, name, flags = MPQ_FILE_REPLACEEXISTING | MPQ_FILE_SINGLE_UNIT | MPQ_FILE_COMPRESS):
         return self.__module.AddFileEx(self.__mpq, path, name, flags, MPQ_COMPRESSION_ZLIB, MPQ_COMPRESSION_ZLIB)
 
     def Compact(self):
