@@ -164,7 +164,13 @@ namespace slk
 			if (It == get_table_map<Enum, Table>().end())
 			{
 				Table& table = get_table_map<Enum, Table>()[type];
-				load<Enum, Table>(type, table);
+				try {
+					load<Enum, Table>(type, table);
+				}
+				catch (...) {
+					table.clear();
+					throw;
+				}
 				return table;
 			}
 			else
