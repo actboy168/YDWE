@@ -289,6 +289,12 @@ namespace NYDWE {
 		eventData.setEventData("object_type", object_type);
 		eventData.setEventData("default_id", default_id);
 		const std::vector<int> &results = event_array[EVENT_NEW_OBJECT_ID](eventData);
+
+		if (results_is_failed(results))
+		{
+			return default_id;
+		}
+
 		return results.size() > 0 ? results[0] : default_id;
 	}
 
