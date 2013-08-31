@@ -2,7 +2,7 @@
 #include "../lua/callback.h"
 #include <ydwe/warcraft3/hashtable.h>
 #include <ydwe/warcraft3/war3_searcher.h>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/func_value.h>
 #include <ydwe/warcraft3/jass.h>
 #include <ydwe/warcraft3/jass/global_variable.h>
 #include <ydwe/util/singleton.h>

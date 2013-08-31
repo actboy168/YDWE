@@ -152,9 +152,6 @@
     <ClCompile Include="ydwe\exception\seh_exception.cpp">
       <Filter>ydwe\exception</Filter>
     </ClCompile>
-    <ClCompile Include="ydwe\warcraft3\native_function.cpp">
-      <Filter>ydwe\warcraft3</Filter>
-    </ClCompile>
     <ClCompile Include="ydwe\warcraft3\jass.cpp">
       <Filter>ydwe\warcraft3</Filter>
     </ClCompile>
@@ -197,14 +194,20 @@
     <ClCompile Include="ydwe\warcraft3\jass\trampoline_function.cpp">
       <Filter>ydwe\warcraft3\jass</Filter>
     </ClCompile>
-    <ClCompile Include="ydwe\warcraft3\detail\nf_register.cpp">
-      <Filter>ydwe\warcraft3\detail</Filter>
-    </ClCompile>
     <ClCompile Include="ydwe\exception\system_exception.cpp">
       <Filter>ydwe\exception</Filter>
     </ClCompile>
     <ClCompile Include="ydwe\file\stream.cpp">
       <Filter>ydwe\file</Filter>
+    </ClCompile>
+    <ClCompile Include="ydwe\warcraft3\jass\nf_register.cpp">
+      <Filter>ydwe\warcraft3\jass</Filter>
+    </ClCompile>
+    <ClCompile Include="ydwe\warcraft3\jass\hook.cpp">
+      <Filter>ydwe\warcraft3\jass</Filter>
+    </ClCompile>
+    <ClCompile Include="ydwe\warcraft3\jass\func_value.cpp">
+      <Filter>ydwe\warcraft3\jass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -322,9 +325,6 @@
     <ClInclude Include="ydwe\exception\seh_exception.h">
       <Filter>ydwe\exception</Filter>
     </ClInclude>
-    <ClInclude Include="ydwe\warcraft3\native_function.h">
-      <Filter>ydwe\warcraft3</Filter>
-    </ClInclude>
     <ClInclude Include="ydwe\warcraft3\version.h">
       <Filter>ydwe\warcraft3</Filter>
     </ClInclude>
@@ -397,9 +397,6 @@
     <ClInclude Include="ydwe\util\signal.h">
       <Filter>ydwe\util</Filter>
     </ClInclude>
-    <ClInclude Include="ydwe\warcraft3\detail\nf_register.h">
-      <Filter>ydwe\warcraft3\detail</Filter>
-    </ClInclude>
     <ClInclude Include="ydwe\util\do_once.h">
       <Filter>ydwe\util</Filter>
     </ClInclude>
@@ -417,6 +414,15 @@
     </ClInclude>
     <ClInclude Include="ydwe\file\stream.h">
       <Filter>ydwe\file</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\warcraft3\jass\nf_register.h">
+      <Filter>ydwe\warcraft3\jass</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\warcraft3\jass\hook.h">
+      <Filter>ydwe\warcraft3\jass</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\warcraft3\jass\func_value.h">
+      <Filter>ydwe\warcraft3\jass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

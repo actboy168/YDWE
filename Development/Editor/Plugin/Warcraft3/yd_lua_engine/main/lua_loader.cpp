@@ -4,7 +4,8 @@
 #include "../misc/storm.h"
 #include "../main/open_lua_engine.h"
 #include <ydwe/lua/state.h>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/func_value.h>
+#include <ydwe/warcraft3/jass/hook.h>
 #include <ydwe/util/singleton.h>
 #include <aero/function/fp_call.hpp>
 

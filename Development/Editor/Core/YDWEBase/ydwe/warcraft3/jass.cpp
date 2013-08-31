@@ -1,6 +1,6 @@
 #include <ydwe/warcraft3/jass.h>
 #include <ydwe/warcraft3/war3_searcher.h>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/func_value.h>
 #include <cassert>
 #include <memory>
 
