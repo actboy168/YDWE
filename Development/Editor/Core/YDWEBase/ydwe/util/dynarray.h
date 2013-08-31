@@ -4,7 +4,7 @@
 #include <exception>
 #include <limits>
 #include <iterator>
-#include <vector>
+
 namespace std {
 
 	class bad_array_length : public std::bad_alloc

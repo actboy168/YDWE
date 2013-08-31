@@ -2,14 +2,6 @@
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <ydwe/warcraft3/hashtable.h>
 #include <ydwe/warcraft3/jass.h>
-#include <ydwe/warcraft3/jass/nf_register.h>
-#include <ydwe/warcraft3/version.h>
-#include <ydwe/hook/detail/replace_pointer.h>
-#include <ydwe/hook/iat.h>
-#include <ydwe/util/do_once.h>
-#include <ydwe/util/foreach.h>
-#include <aero/function/fp_call.hpp>
-#include <vector>
 #include <map>
 #include <string>
 

@@ -1,12 +1,9 @@
-#include <ydwe/warcraft3/detail/nf_register.h>
+#include <ydwe/warcraft3/jass/nf_register.h>
 #include <ydwe/hook/iat.h>
-#include <ydwe/util/foreach.h>
 #include <ydwe/util/do_once.h>
-#include <ydwe/warcraft3/native_function.h>
 #include <ydwe/warcraft3/version.h>
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <aero/function/fp_call.hpp>
-#include <vector>
 
 _BASE_BEGIN 
 namespace warcraft3 { namespace jass { namespace nf_register {

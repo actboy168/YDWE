@@ -10,7 +10,6 @@
 #include <ydwe/util/do_once.h>
 #include <ydwe/util/foreach.h>
 #include <aero/function/fp_call.hpp>
-#include <vector>
 #include <map>
 #include <string>
 
