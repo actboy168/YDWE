@@ -194,7 +194,7 @@
     <ClInclude Include="Control\UITreeView.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\YDWEVersion\common.rc" />
+    <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ydgraph\ydgraph.vcxproj">

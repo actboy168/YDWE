@@ -99,7 +99,7 @@
     <ClInclude Include="Warcraft3Directory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="YDWEConfig.rc" />
+    <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="YDWEConfig.ico" />

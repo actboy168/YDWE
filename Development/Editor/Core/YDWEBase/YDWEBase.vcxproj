@@ -239,7 +239,7 @@
     <ClInclude Include="ydwe\win\version.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\YDWEVersion\common.rc" />
+    <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
