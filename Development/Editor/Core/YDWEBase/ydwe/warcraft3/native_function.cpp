@@ -13,10 +13,14 @@
 #include <map>
 #include <string>
 
-_BASE_BEGIN namespace warcraft3 { namespace native_function {
+_BASE_BEGIN 
+namespace warcraft3 { namespace native_function {
 
 	bool table_hook     (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
 	{
+		if (!get_war3_searcher().get_instance(5))
+			return false;
+
 		if (!old_proc_ptr)
 			return false;
 
@@ -74,26 +78,6 @@ _BASE_BEGIN namespace warcraft3 { namespace native_function {
 
 		hook::detail::replace_pointer(hook_address + 0x05, *old_proc_ptr);
 		return true;
-	}
-
-	bool hook           (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
-	{
-		if (register_hook(proc_name, old_proc_ptr, new_proc))
-		{
-			if (table_hook(proc_name, old_proc_ptr, new_proc))
-			{
-				return true;
-			}
-			register_unhook(proc_name, old_proc_ptr, new_proc);
-		}
-		return false;
-	}
-
-	bool unhook         (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
-	{
-		bool b1 = register_unhook(proc_name, old_proc_ptr, new_proc);
-		bool b2 = table_unhook   (proc_name, old_proc_ptr, new_proc);
-		return b1 && b2;
 	}
 
 	namespace detail {
@@ -169,21 +153,7 @@ _BASE_BEGIN namespace warcraft3 { namespace native_function {
 				});
 			}
 		}
-	}
 
-	void async_add            (uintptr_t func, const char* name, const char* param)
-	{
-		detail::async_initialize();
-		detail::async_add(func, name, param);
-	}
-
-	void async_hook           (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
-	{
-		detail::async_initialize();
-		detail::async_hook(proc_name, old_proc_ptr, new_proc);
-	}
-
-	namespace detail {
 #pragma pack(push)
 #pragma pack(1)
 		struct asm_opcode_5
@@ -350,19 +320,115 @@ _BASE_BEGIN namespace warcraft3 { namespace native_function {
 		return nullptr;
 	}
 
-	void japi_add            (uintptr_t func, const char* name, const char* param)
+	bool async_hook           (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
+	{
+		detail::async_initialize();
+		detail::async_hook(proc_name, old_proc_ptr, new_proc);
+		return true;
+	}
+
+	bool japi_hook           (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
+	{
+		uint32_t flag  = HOOK_MEMORY_REGISTER | HOOK_AS_JAPI;
+		uint32_t result = hook(proc_name, old_proc_ptr, new_proc, flag);
+		return flag == result;
+	}
+
+	uint32_t hook           (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc, uint32_t flag)
+	{
+		uint32_t result = 0;
+
+		if (flag & HOOK_MEMORY_TABLE)
+		{
+			if (table_hook(proc_name, old_proc_ptr, new_proc))
+			{
+				result |= HOOK_MEMORY_TABLE;
+			}
+		}
+
+		if (flag & HOOK_MEMORY_REGISTER)
+		{
+			if (async_hook(proc_name, old_proc_ptr, new_proc))
+			{
+				result |= HOOK_MEMORY_TABLE;
+			}
+		}
+
+		if (flag & HOOK_CODE_REGISTER)
+		{
+			if (register_hook(proc_name, old_proc_ptr, new_proc))
+			{
+				result |= HOOK_MEMORY_TABLE;
+			}
+		}
+
+		if (flag & HOOK_AS_JAPI)
+		{
+			native_function const* nf = jass_func(proc_name);
+			if (nf)
+			{
+				japi_mapping.insert(std::make_pair(proc_name, native_function(*nf, new_proc)));
+				result |= HOOK_AS_JAPI;
+			}
+		}
+
+		return result;
+	}
+
+	uint32_t unhook         (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc, hook_type flag)
+	{
+		uint32_t result = 0;
+
+		if (flag & HOOK_MEMORY_TABLE)
+		{
+			if (table_unhook(proc_name, old_proc_ptr, new_proc))
+			{
+				result |= HOOK_MEMORY_TABLE;
+			}
+		}
+
+		if (flag & HOOK_MEMORY_REGISTER)
+		{
+			// FIXME
+			//if (async_unhook(proc_name, old_proc_ptr, new_proc))
+			{
+				result |= HOOK_MEMORY_TABLE;
+			}
+		}
+
+		if (flag & HOOK_CODE_REGISTER)
+		{
+			if (register_unhook(proc_name, old_proc_ptr, new_proc))
+			{
+				result |= HOOK_MEMORY_TABLE;
+			}
+		}
+
+		if (flag & HOOK_AS_JAPI)
+		{
+			auto it = japi_mapping.find(proc_name);
+			if (it != japi_mapping.end())
+			{
+				japi_mapping.erase(it);
+				result |= HOOK_AS_JAPI;
+			}
+		}
+
+		return result;
+	}
+
+	bool async_add            (uintptr_t func, const char* name, const char* param)
+	{
+		detail::async_initialize();
+		detail::async_add(func, name, param);
+		return true;
+	}
+
+	bool japi_add            (uintptr_t func, const char* name, const char* param)
 	{
 		async_add(func, name, param);
 		japi_mapping.insert(std::make_pair(name, native_function(param, func)));
+		return true;
 	}
-
-	void japi_hook           (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
-	{
-		async_hook(proc_name, old_proc_ptr, new_proc);
-		native_function const* nf = jass_func(proc_name);
-		if (nf)
-		{
-			japi_mapping.insert(std::make_pair(proc_name, native_function(*nf, new_proc)));
-		}
-	}
-}}}
+}}
+_BASE_END
