@@ -181,7 +181,13 @@ namespace slk
 			}
 
 			ptr.reset(new Table);
-			load<Enum, Table>(type, *ptr);
+			try {
+				load<Enum, Table>(type, *ptr);
+			}
+			catch (...) {
+				ptr->clear();
+				throw;
+			}
 			return *ptr;
 		}
 
