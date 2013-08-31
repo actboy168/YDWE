@@ -14,7 +14,7 @@
 #include <string>
 
 _BASE_BEGIN 
-namespace warcraft3 { namespace native_function {
+namespace warcraft3 { namespace jass {
 
 	bool table_hook     (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
 	{
@@ -201,13 +201,13 @@ namespace warcraft3 { namespace native_function {
 #pragma pack(pop)
 	}
 
-	native_function::native_function()
+	func_value::func_value()
 		: return_(TYPE_NONE)
 		, param_()
 		, address_(0)
 	{ }
 
-	native_function::native_function(const char* param, uintptr_t address)
+	func_value::func_value(const char* param, uintptr_t address)
 		: return_(TYPE_NONE)
 		, param_()
 		, address_(address)
@@ -240,38 +240,38 @@ namespace warcraft3 { namespace native_function {
 		}
 	}
 
-	native_function::native_function(native_function const& that, uintptr_t address)
+	func_value::func_value(func_value const& that, uintptr_t address)
 		: return_(that.return_)
 		, param_(that.param_)
 		, address_(address)
 	{ }
 
-	bool native_function::is_valid() const
+	bool func_value::is_valid() const
 	{
 		return return_ != TYPE_NONE;
 	}
 
-	std::vector<variable_type> const& native_function::get_param() const
+	std::vector<variable_type> const& func_value::get_param() const
 	{
 		return param_;
 	}
 
-	variable_type const& native_function::get_return() const
+	variable_type const& func_value::get_return() const
 	{
 		return return_;
 	}
 
-	uintptr_t native_function::get_address() const
+	uintptr_t func_value::get_address() const
 	{
 		return address_;
 	}
 
-	uintptr_t native_function::call(uintptr_t param_list[]) const
+	uintptr_t func_value::call(uintptr_t param_list[]) const
 	{
 		return jass::call(address_, param_list, param_.size());
 	}
 
-	class mapping : public std::map<std::string, native_function>
+	class mapping : public std::map<std::string, func_value>
 	{
 	public:
 		mapping()
@@ -286,7 +286,7 @@ namespace warcraft3 { namespace native_function {
 			{
 				for (detail::asm_register_native_function* ptr = (detail::asm_register_native_function*)(ptr_Deg2Rad - 6); ptr->verify(); ++ptr)
 				{
-					m.insert(std::make_pair(ptr->get_name(), native_function(ptr->get_param(), ptr->get_address())));
+					m.insert(std::make_pair(ptr->get_name(), func_value(ptr->get_param(), ptr->get_address())));
 				}
 			}
 
@@ -294,7 +294,7 @@ namespace warcraft3 { namespace native_function {
 		}
 	};
 
-	native_function const* jass_func(const char* proc_name)
+	func_value const* jass_func(const char* proc_name)
 	{
 		static mapping m = mapping::initialize_from_register();
 
@@ -309,7 +309,7 @@ namespace warcraft3 { namespace native_function {
 
 	static mapping japi_mapping;
 
-	native_function const* japi_func(const char* proc_name)
+	func_value const* japi_func(const char* proc_name)
 	{
 		auto it = japi_mapping.find(proc_name);
 		if (it != japi_mapping.end() && it->second.is_valid())
@@ -364,10 +364,10 @@ namespace warcraft3 { namespace native_function {
 
 		if (flag & HOOK_AS_JAPI)
 		{
-			native_function const* nf = jass_func(proc_name);
+			func_value const* nf = jass_func(proc_name);
 			if (nf)
 			{
-				japi_mapping.insert(std::make_pair(proc_name, native_function(*nf, new_proc)));
+				japi_mapping.insert(std::make_pair(proc_name, func_value(*nf, new_proc)));
 				result |= HOOK_AS_JAPI;
 			}
 		}
@@ -427,7 +427,7 @@ namespace warcraft3 { namespace native_function {
 	bool japi_add            (uintptr_t func, const char* name, const char* param)
 	{
 		async_add(func, name, param);
-		japi_mapping.insert(std::make_pair(name, native_function(param, func)));
+		japi_mapping.insert(std::make_pair(name, func_value(param, func)));
 		return true;
 	}
 }}

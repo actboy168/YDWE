@@ -223,7 +223,7 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 
 	uintptr_t  call(const char* name, ...)
 	{
-		native_function::native_function const* nf = native_function::jass_func(name);
+		native_function::func_value const* nf = native_function::jass_func(name);
 
 		if (!nf) 
 		{

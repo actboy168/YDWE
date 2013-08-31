@@ -26,12 +26,12 @@ _BASE_BEGIN namespace warcraft3 { namespace native_function {
 		HOOK_AS_JAPI         = 0x00000100,
 	};
 
-	class _BASE_API native_function
+	class _BASE_API func_value
 	{
 	public:
-		native_function();
-		native_function(const char* param, uintptr_t address);
-		native_function(native_function const& that, uintptr_t address);
+		func_value();
+		func_value(const char* param, uintptr_t address);
+		func_value(func_value const& that, uintptr_t address);
 		bool                              is_valid()    const;
 		std::vector<variable_type> const& get_param()   const;
 		variable_type const&              get_return()  const;
@@ -66,6 +66,6 @@ _BASE_BEGIN namespace warcraft3 { namespace native_function {
 	_BASE_API bool japi_hook      (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc);
 	_BASE_API uint32_t hook       (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc, uint32_t flag);
 	_BASE_API uint32_t unhook     (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc, uint32_t flag);
-	_BASE_API native_function const* jass_func(const char* proc_name);
-	_BASE_API native_function const* japi_func(const char* proc_name);
+	_BASE_API func_value const* jass_func(const char* proc_name);
+	_BASE_API func_value const* japi_func(const char* proc_name);
 }}}

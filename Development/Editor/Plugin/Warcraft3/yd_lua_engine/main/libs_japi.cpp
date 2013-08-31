@@ -16,7 +16,7 @@ namespace warcraft3 { namespace lua_engine {
 
 		const char* name = lj->tostring(2);
 
-		native_function::native_function const* nf = native_function::japi_func(name);
+		native_function::func_value const* nf = native_function::japi_func(name);
 		if (nf)
 		{
 			lj->pushunsigned((uint32_t)(uintptr_t)nf);

@@ -75,7 +75,7 @@ namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
-	int jass_call_native_function(jassbind* lj, const native_function::native_function* nf, uintptr_t func_address = 0)
+	int jass_call_native_function(jassbind* lj, const native_function::func_value* nf, uintptr_t func_address = 0)
 	{
 		size_t param_size = nf->get_param().size();
 
@@ -137,7 +137,7 @@ namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
-		return jass_call_native_function(lj, (const native_function::native_function*)lj->tounsigned(lua_upvalueindex(1)));
+		return jass_call_native_function(lj, (const native_function::func_value*)lj->tounsigned(lua_upvalueindex(1)));
 	}
 
 	int jass_get(lua_State* L)
@@ -146,7 +146,7 @@ namespace warcraft3 { namespace lua_engine {
 
 		const char* name = lj->tostring(2);
 
-		native_function::native_function const* nf = native_function::jass_func(name);
+		native_function::func_value const* nf = native_function::jass_func(name);
 		if (nf && nf->is_valid())
 		{
 			lj->pushunsigned((uint32_t)(uintptr_t)nf);
