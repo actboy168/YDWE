@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include <zip_reader.h>
+#include <ydwe/path/filesystem_helper.h>
 
 namespace DuiLib
 {
@@ -46,13 +47,15 @@ namespace DuiLib
 	{
 		fs::path zip_file = CPaintManagerUI::GetResourceZip();
 
-		zip::ZipReader reader;
-		if (reader.Open(zip_file)) 
+		zip::reader r;
+		if (r.Open(zip_file)) 
 		{
-			for (auto it = reader.begin(); it != reader.end(); ++it) 
+			for (auto it = r.begin(); it != r.end(); ++it) 
 			{
-				zip::ZipReader::entry& current_entry_info = *it;
-				if (!current_entry_info.is_directory() &&  wcsicmp(current_entry_info.file_path().c_str(), name.c_str()) == 0)
+				zip::reader::entry& current_entry_info = *it;
+				if (current_entry_info.is_vaild()
+					&& (!current_entry_info.is_directory())
+					&& (ydwe::path::equal(current_entry_info.file_path(), name)))
 				{
 					CUIBuffer buf;
 					buf.reset((size_t)current_entry_info.original_size());

@@ -16,16 +16,15 @@
 
 namespace zip 
 {
-	class _ZIP_API ZipReader 
+	class _ZIP_API reader 
 	{
 	public:
-		ZipReader();
-		~ZipReader();
+		reader();
+		~reader();
 
 		bool Open(const boost::filesystem::path& zip_file_path);
 		bool OpenFromString(const std::string& data);
 		void Close();
-		bool LocateAndOpenEntry(const boost::filesystem::path& path_in_zip);
 
 		class entry;
 		class iterator;
@@ -34,26 +33,27 @@ namespace zip
 		iterator end() const;
 
 	private:
-		bool OpenInternal();
 		void Reset();
 
 		unzFile zip_file_;
 
-		ZipReader(const ZipReader&);
-		void operator=(const ZipReader&);
+		reader(const reader&);
+		void operator=(const reader&);
 	};
 
-	class _ZIP_API ZipReader::entry
+	class _ZIP_API reader::entry
 	{
 	public:
 		entry(const unzFile* zf_ptr);
+		entry& assign();
 		entry& assign(const std::string& filename_in_zip, const unz_file_info& raw_file_info);
 
-		const unzFile& zip_file() const { assert(zf_ptr_ != nullptr); return *zf_ptr_; }
-		const boost::filesystem::path& file_path() const { return file_path_; }
-		uint64_t original_size() const { return original_size_; }
-		bool is_directory() const { return is_directory_; }
-		bool is_unsafe() const { return is_unsafe_; }
+		bool is_vaild() const { return !file_path_.empty(); }
+		const unzFile& zip_file() const { assert(is_vaild()); assert(zf_ptr_ != nullptr); return *zf_ptr_; }
+		const boost::filesystem::path& file_path() const { assert(is_vaild()); return file_path_; }
+		uint64_t original_size() const { assert(is_vaild()); return original_size_; }
+		bool is_directory() const { assert(is_vaild()); return is_directory_; }
+		bool is_unsafe() const { assert(is_vaild()); return is_unsafe_; }
 		bool extract_to_buffer(void* buf, size_t len);
 
 	private:
@@ -69,12 +69,12 @@ namespace zip
 
 	namespace detail
 	{
-		_ZIP_API void zip_reader_iterator_construct(ZipReader::iterator& it, const unzFile* zf_ptr, std::error_code* ec);
-		_ZIP_API void zip_reader_iterator_increment(ZipReader::iterator& it);
-		_ZIP_API ZipReader::entry& zip_reader_iterator_dereference(const ZipReader::iterator& it, std::error_code* ec);
+		_ZIP_API void zip_reader_iterator_construct(reader::iterator& it, const unzFile* zf_ptr, std::error_code* ec);
+		_ZIP_API void zip_reader_iterator_increment(reader::iterator& it);
+		_ZIP_API reader::entry& zip_reader_iterator_dereference(const reader::iterator& it);
 	}
 
-	class ZipReader::iterator
+	class reader::iterator
 		: public boost::iterator_facade<iterator, entry, boost::single_pass_traversal_tag>
 	{
 	public:
@@ -101,7 +101,7 @@ namespace zip
 		friend class boost::iterator_core_access;
 		friend void detail::zip_reader_iterator_construct(iterator& it, const unzFile* zf_ptr, std::error_code* ec);
 		friend void detail::zip_reader_iterator_increment(iterator& it);
-		friend entry& detail::zip_reader_iterator_dereference(const iterator& it, std::error_code* ec);
+		friend entry& detail::zip_reader_iterator_dereference(const iterator& it);
 
 		void   increment() 
 		{
@@ -115,7 +115,7 @@ namespace zip
 
 		entry& dereference() const
 		{
-			return detail::zip_reader_iterator_dereference(*this, 0);
+			return detail::zip_reader_iterator_dereference(*this);
 		}
 
 		struct iterator_impl

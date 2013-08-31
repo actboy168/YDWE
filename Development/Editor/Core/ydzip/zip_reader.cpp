@@ -11,7 +11,7 @@ namespace zip {
 
 	namespace detail
 	{
-		void zip_reader_iterator_construct(ZipReader::iterator& it, const unzFile* zf_ptr, std::error_code* ec)
+		void zip_reader_iterator_construct(reader::iterator& it, const unzFile* zf_ptr, std::error_code* ec)
 		{
 			if (unzGoToFirstFile(*zf_ptr) != UNZ_OK)
 			{
@@ -28,7 +28,7 @@ namespace zip {
 			}
 		}
 
-		void zip_reader_iterator_increment(ZipReader::iterator& it)
+		void zip_reader_iterator_increment(reader::iterator& it)
 		{
 			assert(it.impl_.get());
 
@@ -38,7 +38,7 @@ namespace zip {
 			}
 		}
 
-		ZipReader::entry& zip_reader_iterator_dereference(const ZipReader::iterator& it, std::error_code* ec)
+		reader::entry& zip_reader_iterator_dereference(const reader::iterator& it)
 		{
 			assert(it.impl_.get());
 
@@ -53,22 +53,33 @@ namespace zip {
 				NULL,  // szComment.
 				0);  // commentBufferSize.
 			if (result != UNZ_OK)
-				throw false;
+			{
+				return it.impl_->entry_.assign();
+			}
+
 			if (raw_file_name_in_zip[0] == '\0')
-				throw false;
+			{
+				return it.impl_->entry_.assign();
+			}
 
 			return it.impl_->entry_.assign(raw_file_name_in_zip, raw_file_info);
 		}
 	}
 
-	ZipReader::entry::entry(const unzFile* zf_ptr)
+	reader::entry::entry(const unzFile* zf_ptr)
 		: zf_ptr_(zf_ptr)
 	{ }
+
+	reader::entry& reader::entry::assign()
+	{
+		file_path_.clear();
+		return *this;
+	}
 
 	// TODO(satorux): The implementation assumes that file names in zip files
 	// are encoded in UTF-8. This is true for zip files created by Zip()
 	// function in zip.h, but not true for user-supplied random zip files.
-	ZipReader::entry& ZipReader::entry::assign(const std::string& file_name_in_zip, const unz_file_info& raw_file_info)
+	reader::entry& reader::entry::assign(const std::string& file_name_in_zip, const unz_file_info& raw_file_info)
 	{
 		file_path_ = file_name_in_zip;
 		is_directory_ = false;
@@ -96,8 +107,10 @@ namespace zip {
 		return *this;
 	}
 
-	bool ZipReader::entry::extract_to_buffer(void* buf, size_t len) 
+	bool reader::entry::extract_to_buffer(void* buf, size_t len) 
 	{
+		assert(is_vaild());
+
 		if (is_directory())
 			return false;
 
@@ -122,17 +135,17 @@ namespace zip {
 		return success;
 	}
 
-	ZipReader::ZipReader() 
+	reader::reader() 
 	{
 		Reset();
 	}
 
-	ZipReader::~ZipReader() 
+	reader::~reader() 
 	{
 		Close();
 	}
 
-	bool ZipReader::Open(const boost::filesystem::path& zip_file_path) 
+	bool reader::Open(const boost::filesystem::path& zip_file_path) 
 	{
 		// Use of "Unsafe" function does not look good, but there is no way to do
 		// this safely on Linux. See file_util.h for details.
@@ -142,10 +155,10 @@ namespace zip {
 			return false;
 		}
 
-		return OpenInternal();
+		return true;
 	}
 
-	bool ZipReader::OpenFromString(const std::string& data)
+	bool reader::OpenFromString(const std::string& data)
 	{
 		zip_file_ = internal::PreprareMemoryForUnzipping(data);
 		if (!zip_file_)
@@ -153,10 +166,10 @@ namespace zip {
 			return false;
 		}
 
-		return OpenInternal();
+		return true;
 	}
 
-	void ZipReader::Close() 
+	void reader::Close() 
 	{
 		if (zip_file_) 
 		{
@@ -165,39 +178,17 @@ namespace zip {
 		Reset();
 	}
 
-	bool ZipReader::LocateAndOpenEntry(const boost::filesystem::path& path_in_zip) 
-	{
-		const int kDefaultCaseSensivityOfOS = 0;
-		const int result = unzLocateFile(zip_file_, path_in_zip.string(boost::filesystem::detail::utf8_codecvt_facet()).c_str(), kDefaultCaseSensivityOfOS);
-		if (result != UNZ_OK)
-			return false;
-
-		// Then Open the entry.
-		//return OpenCurrentEntryInZip();
-		return false;
-	}
-
-	bool ZipReader::OpenInternal() 
-	{
-		unz_global_info zip_info = {};  // Zero-clear.
-		if (unzGetGlobalInfo(zip_file_, &zip_info) != UNZ_OK) 
-		{
-			return false;
-		}
-		return true;
-	}
-
-	void ZipReader::Reset() 
+	void reader::Reset() 
 	{
 		zip_file_ = NULL;
 	}
 
-	ZipReader::iterator ZipReader::begin() const
+	reader::iterator reader::begin() const
 	{
 		return iterator(&zip_file_);
 	}
 
-	ZipReader::iterator ZipReader::end() const
+	reader::iterator reader::end() const
 	{
 		return iterator();
 	}

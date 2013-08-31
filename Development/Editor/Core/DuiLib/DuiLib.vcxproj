@@ -200,6 +200,9 @@
     <ProjectReference Include="..\ydgraph\ydgraph.vcxproj">
       <Project>{c371743b-ad12-4a31-82df-5a058083773f}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\YDWEBase\YDWEBase.vcxproj">
+      <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\ydzip\ydzip.vcxproj">
       <Project>{51369253-a42c-455d-8ade-48d1c3c14663}</Project>
     </ProjectReference>
