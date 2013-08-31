@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <aero/function/fp_call.hpp>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/hook.h>
 #include <ydwe/warcraft3/jass.h>
 #include <boost/preprocessor/repetition.hpp>
 #include <boost/preprocessor/punctuation/comma_if.hpp>
@@ -82,7 +82,7 @@ namespace monitor
 	public: \
 		static void initialize() \
 		{ \
-			ydwe::warcraft3::native_function::async_hook(porc_name, &real_proc, (uintptr_t)fake_proc); \
+			ydwe::warcraft3::jass::async_hook(porc_name, &real_proc, (uintptr_t)fake_proc); \
 		} \
 	private: \
 		static uintptr_t real_proc; \
@@ -103,7 +103,7 @@ namespace monitor
 	public:
 		static void initialize()
 		{
-			ydwe::warcraft3::native_function::async_hook(porc_name, &real_proc, (uintptr_t)fake_proc);
+			ydwe::warcraft3::jass::async_hook(porc_name, &real_proc, (uintptr_t)fake_proc);
 		}
 
 	private:
@@ -191,7 +191,7 @@ void Initialize()
 	monitor::creater  <commonj::force,    0, commonj::CreateForce>::initialize();
 	monitor::destroyer<commonj::force, commonj::DestroyForce>::initialize();
 
-	ydwe::warcraft3::native_function::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
+	ydwe::warcraft3::jass::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID /*pReserved*/)

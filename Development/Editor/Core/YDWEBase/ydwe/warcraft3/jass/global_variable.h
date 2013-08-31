@@ -4,7 +4,7 @@
 #include <ydwe/warcraft3/jass.h>
 #include <ydwe/warcraft3/jass/opcode.h>
 #include <ydwe/warcraft3/hashtable.h>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/func_value.h>
 
 _BASE_BEGIN 
 namespace warcraft3 { namespace jass {
