@@ -183,9 +183,9 @@ bool __cdecl EXSetEventDamage(uint32_t value)
 void InitializeEventDamageData()
 {
 	RealUnitDamageFunc = hook::replace_pointer(searchUnitDamageFunc(), (uintptr_t)FakeUnitDamageFunc);
-	native_function::japi_hook("GetEventDamage", &RealGetEventDamage, (uintptr_t)FakeGetEventDamage);
-	native_function::japi_add((uintptr_t)EXGetEventDamageData, "EXGetEventDamageData", "(I)I");
-	native_function::japi_add((uintptr_t)EXSetEventDamage,     "EXSetEventDamage",     "(R)B");
+	jass::japi_hook("GetEventDamage", &RealGetEventDamage, (uintptr_t)FakeGetEventDamage);
+	jass::japi_add((uintptr_t)EXGetEventDamageData, "EXGetEventDamageData", "(I)I");
+	jass::japi_add((uintptr_t)EXSetEventDamage,     "EXSetEventDamage",     "(R)B");
 }
 }}
 

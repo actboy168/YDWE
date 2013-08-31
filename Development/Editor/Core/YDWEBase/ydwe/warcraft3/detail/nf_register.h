@@ -5,7 +5,7 @@
 #include <cstdint>
 
 _BASE_BEGIN 
-namespace warcraft3 { namespace native_function { namespace nf_register {
+namespace warcraft3 { namespace jass { namespace nf_register {
 	extern util::signal<void, void> event_hook;
 	extern util::signal<void, void> event_add;
 	bool initialize();

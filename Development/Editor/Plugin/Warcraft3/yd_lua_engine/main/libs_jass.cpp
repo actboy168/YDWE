@@ -15,28 +15,28 @@ namespace warcraft3 { namespace lua_engine {
 		return get_war3_searcher().is_gaming();
 	}
 
-	bool jass_push(jassbind* lj, native_function::variable_type vt, uint32_t value)
+	bool jass_push(jassbind* lj, jass::variable_type vt, uint32_t value)
 	{
 		switch (vt)
 		{
-		case native_function::TYPE_NOTHING:
+		case jass::TYPE_NOTHING:
 			return false;
-		case native_function::TYPE_BOOLEAN:
+		case jass::TYPE_BOOLEAN:
 			lj->push_boolean(value);
 			return true;
-		case native_function::TYPE_CODE:
+		case jass::TYPE_CODE:
 			lj->push_code(value);
 			return true;
-		case native_function::TYPE_HANDLE:
+		case jass::TYPE_HANDLE:
 			lj->push_handle(value);
 			return true;
-		case native_function::TYPE_INTEGER:
+		case jass::TYPE_INTEGER:
 			lj->push_integer(value);
 			return true;
-		case native_function::TYPE_REAL:
+		case jass::TYPE_REAL:
 			lj->push_real(value);
 			return true;
-		case native_function::TYPE_STRING:
+		case jass::TYPE_STRING:
 			lj->push_string(value);
 			return true;
 		default:
@@ -45,29 +45,29 @@ namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
-	uintptr_t jass_read(jassbind* lj, native_function::variable_type opt, int idx)
+	uintptr_t jass_read(jassbind* lj, jass::variable_type opt, int idx)
 	{
 		switch (opt)
 		{
-		case native_function::TYPE_NOTHING:
+		case jass::TYPE_NOTHING:
 			return 0;
-		case native_function::TYPE_CODE:
+		case jass::TYPE_CODE:
 			//
 			// Fixed me
 			//
 			return 0;
-		case native_function::TYPE_INTEGER:
+		case jass::TYPE_INTEGER:
 			return lj->read_integer(idx);
-		case native_function::TYPE_REAL:
+		case jass::TYPE_REAL:
 			return lj->read_real(idx);
-		case native_function::TYPE_STRING:
+		case jass::TYPE_STRING:
 			//
 			// Fixed me
 			//
 			return 0;
-		case native_function::TYPE_HANDLE:
+		case jass::TYPE_HANDLE:
 			return lj->read_handle(idx);
-		case native_function::TYPE_BOOLEAN:
+		case jass::TYPE_BOOLEAN:
 			return lj->read_boolean(idx);
 		default:
 			assert(false);
@@ -75,7 +75,7 @@ namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
-	int jass_call_native_function(jassbind* lj, const native_function::func_value* nf, uintptr_t func_address = 0)
+	int jass_call_native_function(jassbind* lj, const jass::func_value* nf, uintptr_t func_address = 0)
 	{
 		size_t param_size = nf->get_param().size();
 
@@ -89,25 +89,25 @@ namespace warcraft3 { namespace lua_engine {
 
 		for (size_t i = 0; i < param_size; ++i)
 		{
-			native_function::variable_type vt = nf->get_param()[i];
+			jass::variable_type vt = nf->get_param()[i];
 			switch (vt)
 			{
-			case native_function::TYPE_BOOLEAN:
+			case jass::TYPE_BOOLEAN:
 				param.push(i, lj->read_boolean(i+1));
 				break;
-			case native_function::TYPE_CODE:
+			case jass::TYPE_CODE:
 				param.push(i, (jass::jcode_t)cfunction_to_code(lj, i+1));
 				break;
-			case native_function::TYPE_HANDLE:
+			case jass::TYPE_HANDLE:
 				param.push(i, lj->read_handle(i+1));
 				break;
-			case native_function::TYPE_INTEGER:
+			case jass::TYPE_INTEGER:
 				param.push(i, lj->read_integer(i+1));
 				break;
-			case native_function::TYPE_REAL:
+			case jass::TYPE_REAL:
 				param.push(i, (float)lj->tonumber(i+1));
 				break;
-			case native_function::TYPE_STRING:				
+			case jass::TYPE_STRING:				
 				param.push(i, lj->tostring(i+1));
 				break;
 			default:
@@ -119,7 +119,7 @@ namespace warcraft3 { namespace lua_engine {
 		if (func_address == 0) func_address = nf->get_address();
 		uintptr_t retval = jass::call(func_address, param.data(), param_size);
 
-		if (nf->get_return() == native_function::TYPE_STRING)
+		if (nf->get_return() == jass::TYPE_STRING)
 		{
 			retval = get_string_fasttable()->get(retval);
 		}
@@ -137,7 +137,7 @@ namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
-		return jass_call_native_function(lj, (const native_function::func_value*)lj->tounsigned(lua_upvalueindex(1)));
+		return jass_call_native_function(lj, (const jass::func_value*)lj->tounsigned(lua_upvalueindex(1)));
 	}
 
 	int jass_get(lua_State* L)
@@ -146,7 +146,7 @@ namespace warcraft3 { namespace lua_engine {
 
 		const char* name = lj->tostring(2);
 
-		native_function::func_value const* nf = native_function::jass_func(name);
+		jass::func_value const* nf = jass::jass_func(name);
 		if (nf && nf->is_valid())
 		{
 			lj->pushunsigned((uint32_t)(uintptr_t)nf);

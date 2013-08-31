@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <vector>
 
-_BASE_BEGIN namespace warcraft3 { namespace native_function {
+_BASE_BEGIN namespace warcraft3 { namespace jass {
 
 	enum variable_type
 	{

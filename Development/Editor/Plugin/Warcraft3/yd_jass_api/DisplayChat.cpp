@@ -47,7 +47,7 @@ void __cdecl EXDisplayChat(uint32_t player_handle, uint32_t chat_recipient, uint
 
 void InitializeDisplayChat()
 {
-	native_function::japi_add((uintptr_t)EXDisplayChat, "EXDisplayChat", "(Hplayer;IS)V");
+	jass::japi_add((uintptr_t)EXDisplayChat, "EXDisplayChat", "(Hplayer;IS)V");
 }
 }}
 

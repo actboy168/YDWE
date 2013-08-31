@@ -9,7 +9,7 @@
 #include <vector>
 
 _BASE_BEGIN 
-namespace warcraft3 { namespace native_function { namespace nf_register {
+namespace warcraft3 { namespace jass { namespace nf_register {
 
 	util::signal<void, void> event_hook;
 	util::signal<void, void> event_add;

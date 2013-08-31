@@ -170,9 +170,9 @@ uint32_t _cdecl EXGetUnitObject(uint32_t unit_handle)
 
 void InitializeUnitState()
 {
-	native_function::japi_hook("GetUnitState", &RealGetUnitState, (uintptr_t)FakeGetUnitState);
-	native_function::japi_hook("SetUnitState", &RealSetUnitState, (uintptr_t)FakeSetUnitState);
-	//native_function::async_add((uintptr_t)EXGetUnitObject, "EXGetUnitObject", "(Hunit;)I");
+	jass::japi_hook("GetUnitState", &RealGetUnitState, (uintptr_t)FakeGetUnitState);
+	jass::japi_hook("SetUnitState", &RealSetUnitState, (uintptr_t)FakeSetUnitState);
+	//jass::async_add((uintptr_t)EXGetUnitObject, "EXGetUnitObject", "(Hunit;)I");
 }
 
 }}

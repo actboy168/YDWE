@@ -68,7 +68,7 @@ namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 
 	void initialize()
 	{
-		native_function::async_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
+		jass::async_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
 	}
 }}}
 

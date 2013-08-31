@@ -9,34 +9,34 @@
 _BASE_BEGIN 
 namespace warcraft3 { namespace jass {
 
-	inline native_function::variable_type opcode_type_to_var_type(jass::OPCODE_VARIABLE_TYPE opt)
+	inline variable_type opcode_type_to_var_type(OPCODE_VARIABLE_TYPE opt)
 	{
 		switch (opt)
 		{
-		case jass::OPCODE_VARIABLE_NOTHING:
-		case jass::OPCODE_VARIABLE_UNKNOWN:
-		case jass::OPCODE_VARIABLE_NULL:
-			return native_function::TYPE_NOTHING;
-		case jass::OPCODE_VARIABLE_CODE:
-			return native_function::TYPE_CODE;
-		case jass::OPCODE_VARIABLE_INTEGER:
-			return native_function::TYPE_INTEGER;
-		case jass::OPCODE_VARIABLE_REAL:
-			return native_function::TYPE_REAL;
-		case jass::OPCODE_VARIABLE_STRING:
-			return native_function::TYPE_STRING;
-		case jass::OPCODE_VARIABLE_HANDLE:
-			return native_function::TYPE_HANDLE;
-		case jass::OPCODE_VARIABLE_BOOLEAN:
-			return native_function::TYPE_BOOLEAN;
-		case jass::OPCODE_VARIABLE_INTEGER_ARRAY:
-		case jass::OPCODE_VARIABLE_REAL_ARRAY:
-		case jass::OPCODE_VARIABLE_STRING_ARRAY:
-		case jass::OPCODE_VARIABLE_HANDLE_ARRAY:
-		case jass::OPCODE_VARIABLE_BOOLEAN_ARRAY:
-			return native_function::TYPE_NOTHING;
+		case OPCODE_VARIABLE_NOTHING:
+		case OPCODE_VARIABLE_UNKNOWN:
+		case OPCODE_VARIABLE_NULL:
+			return TYPE_NOTHING;
+		case OPCODE_VARIABLE_CODE:
+			return TYPE_CODE;
+		case OPCODE_VARIABLE_INTEGER:
+			return TYPE_INTEGER;
+		case OPCODE_VARIABLE_REAL:
+			return TYPE_REAL;
+		case OPCODE_VARIABLE_STRING:
+			return TYPE_STRING;
+		case OPCODE_VARIABLE_HANDLE:
+			return TYPE_HANDLE;
+		case OPCODE_VARIABLE_BOOLEAN:
+			return TYPE_BOOLEAN;
+		case OPCODE_VARIABLE_INTEGER_ARRAY:
+		case OPCODE_VARIABLE_REAL_ARRAY:
+		case OPCODE_VARIABLE_STRING_ARRAY:
+		case OPCODE_VARIABLE_HANDLE_ARRAY:
+		case OPCODE_VARIABLE_BOOLEAN_ARRAY:
+			return TYPE_NOTHING;
 		default:
-			return native_function::TYPE_NOTHING;
+			return TYPE_NOTHING;
 		}
 	}
 
