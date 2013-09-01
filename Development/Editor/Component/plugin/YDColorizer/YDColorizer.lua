@@ -6,6 +6,10 @@ loader.load = function(path)
 	end
 	
 	require "dotnet"
+	if not dotnet.initialized then
+		return false, 'not support'
+	end
+	
 	local obj = dotnet:load(path, 'WEInit')
 	if not obj then
 		return false, 'load failed'

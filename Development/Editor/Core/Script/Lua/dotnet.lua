@@ -30,6 +30,10 @@ function dotnet:load (path, entry)
 end
 
 function dotnet:call (obj, name)
+	if not self.initialized then
+		return nil
+	end
+	
     local suc, res = pcall(
 		function()
 			return obj:call(name)
@@ -42,29 +46,28 @@ function dotnet:call (obj, name)
     end
 end
 
-function dotnet:initialize ()
-	local dotnet_support = is_dotnet_installed()
-		--and is_dotnet_version_35_installed()
-		--and is_dotnet_version_20_installed()
+function dotnet:initialize ()	
+	if not self.initialized then
+		if not is_dotnet_installed() then
+			log.error("Current platform does not support .net")
+			return false
+		end
 		
-	if not dotnet_support then
-		log.error("Current platform does not support .net")
-		return false
-	end
+		local success, err = pcall(require, "clr")
+		if not success then
+			log.error("Failed to load .net components")
+			return false
+		end
+		log.debug(".net component loaded successfully.")
 	
-	local success, err = pcall(require, "clr")
-	if not success then
-		log.error("Failed to load .net components")
-		return false
+		self.default_appdomain = clr.appdomain()
+		if not self.default_appdomain:vaild() then
+			log.error("Failed to create appdomain")
+			return false
+		end
+		
+		self.initialized = true
 	end
-	log.debug(".net component loaded successfully.")
-
-	self.default_appdomain = clr.appdomain()
-	if not self.default_appdomain:vaild() then
-		log.error("Failed to create appdomain")
-		return false
-	end
-
 	return true
 end
 
