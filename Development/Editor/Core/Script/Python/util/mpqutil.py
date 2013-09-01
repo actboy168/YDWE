@@ -24,5 +24,7 @@ def create(stormlib_path, from_path, to_path):
     if mpq is None:
         raise Exception('Can\'t open mpq ' + str(to_path))
     add_directory(mpq, from_path)
-    mpq.Compact()
+    if not mpq.Compact():
+        raise Exception('Mpq compact failed.')
+        
     del mpq
