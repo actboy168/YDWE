@@ -418,6 +418,12 @@
     <ClInclude Include="ydwe\file\stream.h">
       <Filter>ydwe\file</Filter>
     </ClInclude>
+    <ClInclude Include="ydwe\util\hybrid_array.h">
+      <Filter>ydwe\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\util\format.h">
+      <Filter>ydwe\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\YDWEVersion\common.rc">
