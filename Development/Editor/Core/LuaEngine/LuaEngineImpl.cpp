@@ -3,7 +3,6 @@
 #include <cstdint>
 #include <aero/function/fp_call.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/format.hpp>
 #include <ydwe/exception/exception.h>
 #include <ydwe/hook/inline.h>
 #include <ydwe/lua/luabind.h>
@@ -11,6 +10,7 @@
 #include <ydwe/path/self.h>
 #include <ydwe/win/file_version.h>
 #include <ydwe/file/stream.h>
+#include <ydwe/util/format.h>
 
 #pragma warning(push)
 #pragma warning(disable: 4231)
@@ -104,9 +104,9 @@ bool LuaEngineImpl::InitializeInfo()
 	OSVERSIONINFOW osvi = { sizeof OSVERSIONINFOW };
 	::GetVersionExW(&osvi);
 
-	LOG4CXX_INFO(logger_, (boost::wformat(L"YDWE Script engine %1% started.") % ydwe::win::file_version(ydwe::path::self().c_str())[L"FileVersion"]).str());
+	LOG4CXX_INFO(logger_, ydwe::util::format(L"YDWE Script engine %s started.", ydwe::win::file_version(ydwe::path::self().c_str())[L"FileVersion"]));
 	LOG4CXX_INFO(logger_, "Compiled at " __TIME__ ", " __DATE__);
-	LOG4CXX_INFO(logger_,  boost::format("Windows version: %1%.%2%.%3%") % osvi.dwMajorVersion % osvi.dwMinorVersion % osvi.dwBuildNumber);
+	LOG4CXX_INFO(logger_, ydwe::util::format("Windows version: %d.%d.%d", osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber));
 
 	return true;
 }

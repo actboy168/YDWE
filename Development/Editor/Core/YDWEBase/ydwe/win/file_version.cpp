@@ -1,10 +1,8 @@
 #include <ydwe/win/file_version.h>
 
 #include <boost/algorithm/string.hpp>
-#pragma warning(push)
-#pragma warning(disable: 4819)
-#include <boost/format.hpp>
-#pragma warning(pop)
+#include <ydwe/util/format.h>
+#include <vector>
 
 #pragma comment(lib, "version.lib")
 
@@ -95,7 +93,7 @@ _BASE_BEGIN namespace win {
 	{
 		assert(value_ptr);
 		UINT size;
-		std::wstring query = (boost::wformat(L"\\StringFileInfo\\%1$04x%2$04x\\%3$s") % language % code_page % key).str();
+		std::wstring query = util::format(L"\\StringFileInfo\\%04x%04x\\%s", language, code_page, key);
 		return (!!::VerQueryValueW(version_info_.get(), (LPWSTR)(LPCWSTR)query.c_str(), (LPVOID*)value_ptr, &size));
 	}
 

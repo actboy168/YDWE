@@ -1,6 +1,5 @@
 #include <utility>
 #include <boost/swap.hpp>
-#include <boost/format.hpp>
 #include <aero/aero.hpp>
 
 #include "PEMemoryFileInfo.h"

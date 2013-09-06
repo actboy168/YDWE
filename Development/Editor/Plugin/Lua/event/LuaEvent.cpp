@@ -5,7 +5,6 @@
 #include <functional>
 #include <regex>
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/scope_exit.hpp>
 #include <aero/aero.hpp>
@@ -107,7 +106,7 @@ namespace NYDWE {
 		if (lpCommandLine && std::regex_match(lpCommandLine, matcher, gRegexCommandLine))
 		{
 			std::string currentWarcraftMap = (ydwe::path::get(ydwe::path::DIR_EXE).remove_filename() / matcher.str(1)).string();
-			LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Executing map %1%") % currentWarcraftMap);
+			LOG4CXX_TRACE(NYDWE::gInjectLogger, "Executing map " + currentWarcraftMap);
 
 			CYDWEEventData eventData;
 			if (gIsInCompileProcess)

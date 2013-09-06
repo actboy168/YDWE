@@ -3,7 +3,6 @@
 #include <locale>
 #include <windows.h>
 #include <boost/filesystem.hpp>
-#include <boost/format.hpp>
 #include <boost/assign.hpp>
 #include <boost/foreach.hpp>
 #include <boost/exception/all.hpp>
@@ -19,6 +18,7 @@
 #include <ydwe/win/process.h>
 #include <YDWEConfig/Warcraft3Directory.h>
 #include <YDWEConfig/Warcraft3Directory.cpp>
+#include <ydwe/util/format.h>
 
 namespace fs = boost::filesystem;
 
@@ -63,7 +63,7 @@ static void ShowSplash(fs::path const& ydwe_path)
 				ydwe::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
 				cimg_library::CImg<boost::uint8_t> splashImage = cimg_library::CImg<boost::uint8_t>::get_load_bmp(f);
 				boost::uint8_t color[] = { 255, 255, 255 };
-				splashImage.draw_text(10, 10, (boost::format("YDWE %1$d.%2$d.%3$d.%4$d") % fv.major % fv.minor % fv.revision % fv.build).str().c_str(), color, 0, 1, 20);
+				splashImage.draw_text(10, 10, ydwe::util::format("YDWE %d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), color, 0, 1, 20);
 				cimg_library::CImgDisplay display(splashImage, "YDWE", 3, false, true);
 				display.move(
 					(cimg_library::CImgDisplay::screen_width() - display.width()) / 2,
