@@ -533,8 +533,8 @@ private:
 	char_t                    ch_;
 };
 
-std::ostream& standard_output(const char*) { return std::cout; }
-std::wostream& standard_output(const wchar_t*) { return std::wcout; }
+inline std::ostream& standard_output(const char*) { return std::cout; }
+inline std::wostream& standard_output(const wchar_t*) { return std::wcout; }
 }
 
 #include <boost/preprocessor/repetition.hpp>
