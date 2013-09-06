@@ -415,13 +415,12 @@
     <ClInclude Include="ydwe\file\stream.h">
       <Filter>ydwe\file</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="ydwe\util\hybrid_array.h">
       <Filter>ydwe\util</Filter>
     </ClInclude>
     <ClInclude Include="ydwe\util\format.h">
       <Filter>ydwe\util</Filter>
-=======
+    </ClInclude>
     <ClInclude Include="ydwe\warcraft3\jass\nf_register.h">
       <Filter>ydwe\warcraft3\jass</Filter>
     </ClInclude>
@@ -430,7 +429,6 @@
     </ClInclude>
     <ClInclude Include="ydwe\warcraft3\jass\func_value.h">
       <Filter>ydwe\warcraft3\jass</Filter>
->>>>>>> e01a5c09420b71f4196a04cc3dcd371d74ec14be
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
