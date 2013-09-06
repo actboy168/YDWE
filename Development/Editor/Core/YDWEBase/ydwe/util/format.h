@@ -7,6 +7,9 @@
 #include <type_traits>
 #include <ydwe/util/hybrid_array.h>
 
+#pragma warning(push)
+#pragma warning(disable:4702)
+
 _BASE_BEGIN
 namespace util { namespace format_detail {
 
@@ -18,6 +21,20 @@ struct default_report_error
 		throw std::exception(reason);
 	}
 };
+
+template <class T>
+inline int crt_snprintf(char* buf, size_t buf_size, const char* fmt, const T& value)
+{
+#pragma warning(suppress:4996)
+	return _snprintf(&*buffer_.begin() + len, offset, format_.data(), value);
+}
+
+template <class T>
+inline int crt_snprintf(wchar_t* buf, size_t buf_size, const wchar_t* fmt, const T& value)
+{
+#pragma warning(suppress:4996)
+	return _snwprintf(buf, buf_size, fmt, value);
+}
 
 template <class CharT, class ReportErrorT = default_report_error>
 class format_analyzer
@@ -219,22 +236,22 @@ private:
 	}
 
 	template <class T>
-	void format_cast_char(const T& value
-		, typename std::enable_if<!std::is_convertible<T, char>::value>::type* v = 0)
+	void format_cast_char(const T& /*value*/
+		, typename std::enable_if<!std::is_convertible<T, char>::value>::type* = 0)
 	{
 		ReportErrorT("format: Cannot convert from argument type to char.");
 	}
 
 	template <class T>
 	void format_cast_char(const T& value
-		, typename std::enable_if<std::is_convertible<T, char>::value>::type* v = 0)
+		, typename std::enable_if<std::is_convertible<T, char>::value>::type* = 0)
 	{
 		format_value(reinterpret_cast<const char_t*>(&value), 1);
 	}
 
 	template <class T>
-	uint64_t convert_to_integer(const T& value
-		, typename std::enable_if<!std::is_convertible<T, uint64_t>::value && !std::is_convertible<T, void*>::value>::type* v = 0) 
+	uint64_t convert_to_integer(const T& /*value*/
+		, typename std::enable_if<!std::is_convertible<T, uint64_t>::value && !std::is_convertible<T, void*>::value>::type* = 0) 
 	{
 		ReportErrorT("format: Cannot convert from argument type to integer.");
 		return 0;
@@ -242,7 +259,7 @@ private:
 
 	template <class T>
 	uint64_t convert_to_integer(const T& value
-		, typename std::enable_if<std::is_convertible<T, uint64_t>::value>::type* v = 0)
+		, typename std::enable_if<std::is_convertible<T, uint64_t>::value>::type* = 0)
 	{
 		uint64_t number = 0;
 		if (flags_ & FL_SIGNED)
@@ -268,14 +285,14 @@ private:
 
 	template <class T>
 	uint64_t convert_to_integer(const T& value
-		, typename std::enable_if<std::is_convertible<T, void*>::value>::type* v = 0)
+		, typename std::enable_if<std::is_convertible<T, void*>::value>::type* = 0)
 	{
 		return convert_to_integer(reinterpret_cast<uintptr_t>(value));
 	}
 
 	template <class T>
-	double convert_to_float(const T& value
-		, typename std::enable_if<!std::is_floating_point<T>::value>::type* v = 0)
+	double convert_to_float(const T& /*value*/
+		, typename std::enable_if<!std::is_floating_point<T>::value>::type* = 0)
 	{
 		ReportErrorT("format: Cannot convert from argument type to float.");
 		return 0.;
@@ -283,7 +300,7 @@ private:
 
 	template <class T>
 	double convert_to_float(const T& value
-		, typename std::enable_if<std::is_floating_point<T>::value>::type* v = 0)
+		, typename std::enable_if<std::is_floating_point<T>::value>::type* = 0)
 	{
 		return static_cast<double>(value);
 	}
@@ -327,7 +344,7 @@ private:
 		{
 			buffer_.resize(len + offset);
 
-			int ret = _snprintf(&*buffer_.begin() + len, offset, format_.data(), value);
+			int ret = crt_snprintf(&*buffer_.begin() + len, offset, format_.data(), value);
 
 			if (ret > 0)
 			{
@@ -355,7 +372,7 @@ private:
 	const char_t* print_string_literal(const char_t* fmt)
 	{
 		const char_t* c = fmt;
-		for(; true; ++c)
+		for(;; ++c)
 		{
 			switch (*c)
 			{
@@ -513,7 +530,7 @@ private:
 	std::size_t               flags_;
 	std::ptrdiff_t            width_;
 	std::ptrdiff_t            precision_;
-	std::ptrdiff_t            ch_;
+	char_t                    ch_;
 };
 
 std::ostream& standard_output(const char*) { return std::cout; }
@@ -552,5 +569,7 @@ BOOST_PP_REPEAT(16, DEFINE_FORMAT_CREATER, ~)
 #undef DEFINE_FORMAT_CREATER
 
 }
+
+#pragma warning(pop)
 
 _BASE_END
