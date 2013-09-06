@@ -1,7 +1,7 @@
 
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <ydwe/warcraft3/version.h>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/hook.h>
 #include <ydwe/warcraft3/jass.h>
 #include <ydwe/hook/inline.h>
 #include <aero/function/fp_call.hpp>
@@ -183,9 +183,9 @@ bool __cdecl EXSetEventDamage(uint32_t value)
 void InitializeEventDamageData()
 {
 	RealUnitDamageFunc = hook::replace_pointer(searchUnitDamageFunc(), (uintptr_t)FakeUnitDamageFunc);
-	native_function::japi_hook("GetEventDamage", &RealGetEventDamage, (uintptr_t)FakeGetEventDamage);
-	native_function::japi_add((uintptr_t)EXGetEventDamageData, "EXGetEventDamageData", "(I)I");
-	native_function::japi_add((uintptr_t)EXSetEventDamage,     "EXSetEventDamage",     "(R)B");
+	jass::japi_hook("GetEventDamage", &RealGetEventDamage, (uintptr_t)FakeGetEventDamage);
+	jass::japi_add((uintptr_t)EXGetEventDamageData, "EXGetEventDamageData", "(I)I");
+	jass::japi_add((uintptr_t)EXSetEventDamage,     "EXSetEventDamage",     "(R)B");
 }
 }}
 

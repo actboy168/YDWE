@@ -101,4 +101,10 @@ namespace NGameHook
 #define YDWE_EVENT_SUCCEEDED(r) ((r) >= 0)
 #define YDWE_EVENT_FAILED(r) ((r) < 0)
 
+template <typename Result>
+bool results_is_failed(Result r)
+{
+	return (std::find_if(r.begin(), r.end(), YDWE_EVENT_FAILED(boost::lambda::_1)) != r.end());
+}
+
 #endif // YDWE_EVENT_H_INCLUDED

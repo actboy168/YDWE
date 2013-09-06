@@ -6,7 +6,7 @@
 _BASE_BEGIN
 namespace warcraft3 { namespace lua_engine {
 
-	uintptr_t jass_read(jassbind* lj, native_function::variable_type vt, int idx);
+	uintptr_t jass_read(jassbind* lj, jass::variable_type vt, int idx);
 
 	lua::state*& instance()
 	{
@@ -80,17 +80,17 @@ namespace warcraft3 { namespace lua_engine {
 		return true;
 	}
 
-	uintptr_t callback::call(size_t param_size, native_function::variable_type result_vt) const
+	uintptr_t callback::call(size_t param_size, jass::variable_type result_vt) const
 	{
 		lua::state*& ls = instance();
 
-		if (safe_pcall(ls->self(), param_size, (result_vt != native_function::TYPE_NOTHING) ? 1: 0) != LUA_OK)
+		if (safe_pcall(ls->self(), param_size, (result_vt != jass::TYPE_NOTHING) ? 1: 0) != LUA_OK)
 		{
 			ls->pop(1);
 			return 0;
 		}
 		
-		if (result_vt == native_function::TYPE_NOTHING)
+		if (result_vt == jass::TYPE_NOTHING)
 		{
 			return 0;
 		}
@@ -108,7 +108,7 @@ namespace warcraft3 { namespace lua_engine {
 			return 0;
 		}
  
-		return that.call(0, native_function::TYPE_BOOLEAN);
+		return that.call(0, jass::TYPE_BOOLEAN);
 	}
 
 	uint32_t cfunction_to_code(lua::state* ls, uint32_t index)

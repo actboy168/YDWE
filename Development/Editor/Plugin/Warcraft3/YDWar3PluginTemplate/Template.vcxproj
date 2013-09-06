@@ -92,7 +92,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="$(YDWE)\Editor\Core\YDWEVersion\common.rc" />
+    <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,5 @@
 #include <ydwe/warcraft3/jass.h>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/hook.h>
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <aero/function/fp_call.hpp>
 
@@ -47,7 +47,7 @@ void __cdecl EXDisplayChat(uint32_t player_handle, uint32_t chat_recipient, uint
 
 void InitializeDisplayChat()
 {
-	native_function::japi_add((uintptr_t)EXDisplayChat, "EXDisplayChat", "(Hplayer;IS)V");
+	jass::japi_add((uintptr_t)EXDisplayChat, "EXDisplayChat", "(Hplayer;IS)V");
 }
 }}
 

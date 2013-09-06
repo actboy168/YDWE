@@ -90,7 +90,7 @@
     <None Include="YDWE.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="YDWE.rc" />
+    <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

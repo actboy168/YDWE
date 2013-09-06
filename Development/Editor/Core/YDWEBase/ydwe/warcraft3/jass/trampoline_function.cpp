@@ -1,8 +1,8 @@
 #include <ydwe/warcraft3/jass/trampoline_function.h>
-#include <ydwe/warcraft3/detail/nf_register.h>
+#include <ydwe/warcraft3/jass/nf_register.h>
 #include <ydwe/warcraft3/hashtable.h>
 #include <ydwe/warcraft3/jass/trampoline.h>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/hook.h>
 #include <ydwe/util/singleton.h>
 #include <aero/function/fp_call.hpp>
 #include <map>
@@ -36,9 +36,9 @@ namespace warcraft3 { namespace jass {
 
 			initialized = true;
 			jump_function_id = get_string_hashtable()->get("SetUnitAbilityLevel")->index_;
-			native_function::table_hook("SetUnitAbilityLevel", (uintptr_t*)&detail::RealSetUnitAbilityLevel, (uintptr_t)detail::FakeSetUnitAbilityLevel);
-			native_function::nf_register::initialize();
-			native_function::nf_register::event_hook.connect([&]()
+			table_hook("SetUnitAbilityLevel", (uintptr_t*)&detail::RealSetUnitAbilityLevel, (uintptr_t)detail::FakeSetUnitAbilityLevel);
+			nf_register::initialize();
+			nf_register::event_hook.connect([&]()
 			{
 				initialized = false;
 				trampoline_mapping.clear();

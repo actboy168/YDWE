@@ -31,6 +31,6 @@ echo '<?xml version="1.0" encoding="utf-8"?>'
     <None Include="YDWEVersion.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="<?php echo $argv[1]; ?>.rc" />
+    <ResourceCompile Include="version.rc" />
   </ItemGroup>
 </Project>

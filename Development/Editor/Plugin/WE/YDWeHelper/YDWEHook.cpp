@@ -350,6 +350,20 @@ static boost::uint32_t AERO_FP_CALL_FASTCALL DetourWeTriggerNameInputCharCheck(b
 		LOG4CXX_TRACE(NYDWE::gInjectLogger, #name " hook already installed."); \
 	}
 
+bool isWeUtf8ToAnsiHookInstalled;
+uintptr_t pgTrueWeUtf8ToAnsi;
+void __fastcall DetourWeUtf8ToAnsi(const char* str)
+{
+	if (str)
+	{
+		aero::fast_call<void>(pgTrueWeUtf8ToAnsi, str);
+	}
+	else
+	{
+		aero::fast_call<void>(pgTrueWeUtf8ToAnsi, "");
+	}
+}
+
 static void InitInlineHook()
 {
 	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "Start installing inline hooks.");
@@ -386,7 +400,7 @@ static void InitInlineHook()
 	pgTrueWeSetWindowCaption = (uintptr_t)0x00433A00;//MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, &weSetWindowCaptionPattern[0], sizeof(weSetWindowCaptionPattern));
 	LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Found WeSetWindowCaption at 0x%1$08X.") % pgTrueWeSetWindowCaption);
 	INSTALL_INLINE_HOOK(WeSetWindowCaption)
-	
+
 	pgTrueWeSetMenuItem = (uintptr_t)0x0042AA10;
 	LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Found WeSetMenuItem at 0x%1$08X.") % pgTrueWeSetMenuItem);
 	INSTALL_INLINE_HOOK(WeSetMenuItem)
@@ -398,6 +412,10 @@ static void InitInlineHook()
 	pgTrueWeTriggerEditorEditboxCopy = (uintptr_t)0x0071FE90;
 	LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Found TriggerEditorEditboxCopy at 0x%1$08X.") % pgTrueWeTriggerEditorEditboxCopy);
 	INSTALL_INLINE_HOOK(WeTriggerEditorEditboxCopy)
+
+	pgTrueWeUtf8ToAnsi = (uintptr_t)0x00429CD0;
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Found WeUtf8ToAnsi at 0x%1$08X.") % pgTrueWeUtf8ToAnsi);
+	INSTALL_INLINE_HOOK(WeUtf8ToAnsi)
 
 	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "Installing inline hooks complete.");
 }

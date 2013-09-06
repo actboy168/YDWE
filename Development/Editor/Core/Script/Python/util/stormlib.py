@@ -58,7 +58,7 @@ class _MPQ:
     def AddFile(self, path, name, flags = MPQ_FILE_REPLACEEXISTING):
         return self.__module.AddFile(self.__mpq, path, name, flags)
     
-    def AddFileEx(self, path, name, flags = MPQ_FILE_REPLACEEXISTING | MPQ_FILE_ENCRYPTED| MPQ_FILE_COMPRESS):
+    def AddFileEx(self, path, name, flags = MPQ_FILE_REPLACEEXISTING | MPQ_FILE_COMPRESS):
         return self.__module.AddFileEx(self.__mpq, path, name, flags, MPQ_COMPRESSION_ZLIB, MPQ_COMPRESSION_ZLIB)
 
     def Compact(self):

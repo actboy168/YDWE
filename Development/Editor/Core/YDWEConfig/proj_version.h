@@ -1,7 +1,0 @@
-#ifndef PROJ_VERSION_H_INCLUDED
-#define PROJ_VERSION_H_INCLUDED
-
-#define YDWE_VERSION_FILEDESCRIPTION   "YDWE Configuration Utility"
-#define YDWE_VERSION_ORIGUINALFILENAME "YDWEConfig.exe"
-
-#endif

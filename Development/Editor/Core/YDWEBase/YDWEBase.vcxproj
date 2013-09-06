@@ -148,15 +148,16 @@
       <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Strict</FloatingPointModel>
     </ClCompile>
     <ClCompile Include="ydwe\warcraft3\detail\memory_search.cpp" />
-    <ClCompile Include="ydwe\warcraft3\detail\nf_register.cpp" />
     <ClCompile Include="ydwe\warcraft3\detail\string_hash.cpp" />
     <ClCompile Include="ydwe\warcraft3\basic_searcher.cpp" />
     <ClCompile Include="ydwe\warcraft3\hashtable.cpp" />
     <ClCompile Include="ydwe\warcraft3\jass.cpp" />
+    <ClCompile Include="ydwe\warcraft3\jass\func_value.cpp" />
     <ClCompile Include="ydwe\warcraft3\jass\global_variable.cpp" />
+    <ClCompile Include="ydwe\warcraft3\jass\hook.cpp" />
+    <ClCompile Include="ydwe\warcraft3\jass\nf_register.cpp" />
     <ClCompile Include="ydwe\warcraft3\jass\trampoline_function.cpp" />
     <ClCompile Include="ydwe\warcraft3\jass\trampoline.cpp" />
-    <ClCompile Include="ydwe\warcraft3\native_function.cpp" />
     <ClCompile Include="ydwe\warcraft3\war3_searcher.cpp" />
     <ClCompile Include="ydwe\win\env_variable.cpp" />
     <ClCompile Include="ydwe\win\file_version.cpp" />
@@ -219,16 +220,17 @@
     <ClInclude Include="ydwe\util\noncopyable.h" />
     <ClInclude Include="ydwe\util\format.h" />
     <ClInclude Include="ydwe\warcraft3\detail\memory_search.h" />
-    <ClInclude Include="ydwe\warcraft3\detail\nf_register.h" />
     <ClInclude Include="ydwe\warcraft3\detail\string_hash.h" />
     <ClInclude Include="ydwe\warcraft3\hashtable.h" />
     <ClInclude Include="ydwe\warcraft3\basic_searcher.h" />
     <ClInclude Include="ydwe\warcraft3\jass.h" />
+    <ClInclude Include="ydwe\warcraft3\jass\func_value.h" />
     <ClInclude Include="ydwe\warcraft3\jass\global_variable.h" />
+    <ClInclude Include="ydwe\warcraft3\jass\hook.h" />
+    <ClInclude Include="ydwe\warcraft3\jass\nf_register.h" />
     <ClInclude Include="ydwe\warcraft3\jass\trampoline_function.h" />
     <ClInclude Include="ydwe\warcraft3\jass\opcode.h" />
     <ClInclude Include="ydwe\warcraft3\jass\trampoline.h" />
-    <ClInclude Include="ydwe\warcraft3\native_function.h" />
     <ClInclude Include="ydwe\warcraft3\version.h" />
     <ClInclude Include="ydwe\warcraft3\war3_searcher.h" />
     <ClInclude Include="ydwe\win\env_variable.h" />
@@ -239,7 +241,7 @@
     <ClInclude Include="ydwe\win\version.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\YDWEVersion\common.rc" />
+    <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

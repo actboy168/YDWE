@@ -1,6 +1,6 @@
 #include <aero/function/fp_call.hpp>
 #include <ydwe/hook/iat.h>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/hook.h>
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <ydwe/warcraft3/version.h>
 #include <ydwe/warcraft3/jass.h>
@@ -635,17 +635,17 @@ namespace warcraft3 { namespace japi {
 
 	void InitializeAbilityState()
 	{
-		native_function::japi_add((uintptr_t)EXGetUnitAbilityById,    "EXGetUnitAbility",        "(Hunit;I)Hability;");
-		native_function::japi_add((uintptr_t)EXGetUnitAbilityByIndex, "EXGetUnitAbilityByIndex", "(Hunit;I)Hability;");
-		native_function::japi_add((uintptr_t)EXGetAbilityId,          "EXGetAbilityId",          "(Hability;)I");
-		native_function::japi_add((uintptr_t)EXGetAbilityState,       "EXGetAbilityState",       "(Hability;I)R");
-		native_function::japi_add((uintptr_t)EXSetAbilityState,       "EXSetAbilityState",       "(Hability;IR)B");
-		native_function::japi_add((uintptr_t)EXGetAbilityDataReal,    "EXGetAbilityDataReal",    "(Hability;II)R");
-		native_function::japi_add((uintptr_t)EXSetAbilityDataReal,    "EXSetAbilityDataReal",    "(Hability;IIR)B");
-		native_function::japi_add((uintptr_t)EXGetAbilityDataInteger, "EXGetAbilityDataInteger", "(Hability;II)I");
-		native_function::japi_add((uintptr_t)EXSetAbilityDataInteger, "EXSetAbilityDataInteger", "(Hability;III)B");
-		native_function::japi_add((uintptr_t)EXGetAbilityDataString,  "EXGetAbilityDataString",  "(Hability;II)S");
-		native_function::japi_add((uintptr_t)EXSetAbilityDataString,  "EXSetAbilityDataString",  "(Hability;IIS)B");
+		jass::japi_add((uintptr_t)EXGetUnitAbilityById,    "EXGetUnitAbility",        "(Hunit;I)Hability;");
+		jass::japi_add((uintptr_t)EXGetUnitAbilityByIndex, "EXGetUnitAbilityByIndex", "(Hunit;I)Hability;");
+		jass::japi_add((uintptr_t)EXGetAbilityId,          "EXGetAbilityId",          "(Hability;)I");
+		jass::japi_add((uintptr_t)EXGetAbilityState,       "EXGetAbilityState",       "(Hability;I)R");
+		jass::japi_add((uintptr_t)EXSetAbilityState,       "EXSetAbilityState",       "(Hability;IR)B");
+		jass::japi_add((uintptr_t)EXGetAbilityDataReal,    "EXGetAbilityDataReal",    "(Hability;II)R");
+		jass::japi_add((uintptr_t)EXSetAbilityDataReal,    "EXSetAbilityDataReal",    "(Hability;IIR)B");
+		jass::japi_add((uintptr_t)EXGetAbilityDataInteger, "EXGetAbilityDataInteger", "(Hability;II)I");
+		jass::japi_add((uintptr_t)EXSetAbilityDataInteger, "EXSetAbilityDataInteger", "(Hability;III)B");
+		jass::japi_add((uintptr_t)EXGetAbilityDataString,  "EXGetAbilityDataString",  "(Hability;II)S");
+		jass::japi_add((uintptr_t)EXSetAbilityDataString,  "EXSetAbilityDataString",  "(Hability;IIS)B");
 	}
 }}
 _BASE_END

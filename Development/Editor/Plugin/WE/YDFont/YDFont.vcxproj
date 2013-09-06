@@ -41,12 +41,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(WEPluginBin)</OutDir>
+    <OutDir>$(WEPluginBin)YDFont\</OutDir>
     <IntDir>$(WEPluginObj)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(WEPluginBin)</OutDir>
+    <OutDir>$(WEPluginBin)YDFont\</OutDir>
     <IntDir>$(WEPluginObj)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

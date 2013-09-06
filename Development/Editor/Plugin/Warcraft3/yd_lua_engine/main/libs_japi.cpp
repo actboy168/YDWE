@@ -1,7 +1,7 @@
 #include "../lua/helper.h"
 #include "../lua/jassbind.h"
 #include <ydwe/util/console.h>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/func_value.h>
 #include <map>
 #include <string>
 
@@ -16,7 +16,7 @@ namespace warcraft3 { namespace lua_engine {
 
 		const char* name = lj->tostring(2);
 
-		native_function::native_function const* nf = native_function::japi_func(name);
+		jass::func_value const* nf = jass::japi_func(name);
 		if (nf)
 		{
 			lj->pushunsigned((uint32_t)(uintptr_t)nf);

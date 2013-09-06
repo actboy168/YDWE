@@ -1,6 +1,6 @@
 #include <ydwe/warcraft3/jass.h>
 #include <ydwe/warcraft3/war3_searcher.h>
-#include <ydwe/warcraft3/native_function.h>
+#include <ydwe/warcraft3/jass/func_value.h>
 #include <cassert>
 #include <memory>
 
@@ -223,7 +223,7 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 
 	uintptr_t  call(const char* name, ...)
 	{
-		native_function::native_function const* nf = native_function::jass_func(name);
+		func_value const* nf = jass_func(name);
 
 		if (!nf) 
 		{
