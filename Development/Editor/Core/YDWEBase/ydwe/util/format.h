@@ -26,7 +26,7 @@ template <class T>
 inline int crt_snprintf(char* buf, size_t buf_size, const char* fmt, const T& value)
 {
 #pragma warning(suppress:4996)
-	return _snprintf(&*buffer_.begin() + len, offset, format_.data(), value);
+	return _snprintf(buf, buf_size, fmt, value);
 }
 
 template <class T>
