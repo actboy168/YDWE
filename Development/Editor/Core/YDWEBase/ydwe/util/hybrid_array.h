@@ -100,7 +100,7 @@ namespace util {
 			{
 				grow(num_elements);
 			}
-			std::copy(first, last, ptr_ + size_);
+			std::uninitialized_copy(first, last, ptr_ + size_);
 			size_ += num_elements;
 		}
 
@@ -109,7 +109,7 @@ namespace util {
 		{
 			capacity_ = (std::max)(size, capacity_ + capacity_ / 2);
 			pointer p = new value_type[capacity_];
-			std::copy(ptr_, ptr_ + size_, p);
+			std::uninitialized_copy(ptr_, ptr_ + size_, p);
 			if (ptr_ != data_)
 			{
 				delete [] ptr_;
