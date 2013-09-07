@@ -253,6 +253,14 @@ namespace warcraft3 { namespace jass {
 			}
 		}
 
+		if (flag & HOOK_CODE_REGISTER)
+		{
+			if (register_hook(proc_name, old_proc_ptr, new_proc))
+			{
+				result |= HOOK_MEMORY_TABLE;
+			}
+		}
+
 		if (flag & HOOK_MEMORY_REGISTER)
 		{
 			if (async_hook(proc_name, old_proc_ptr, new_proc))
@@ -260,19 +268,12 @@ namespace warcraft3 { namespace jass {
 				result |= HOOK_MEMORY_TABLE;
 			}
 		}
-		else if (flag & HOOK_ONCE_MEMORY_REGISTER)
+		
+		if ((flag & HOOK_ONCE_MEMORY_REGISTER) && (result == 0))
 		{
 			if (async_once_hook(proc_name, old_proc_ptr, new_proc))
 			{
 				result |= HOOK_ONCE_MEMORY_REGISTER;
-			}
-		}
-
-		if (flag & HOOK_CODE_REGISTER)
-		{
-			if (register_hook(proc_name, old_proc_ptr, new_proc))
-			{
-				result |= HOOK_MEMORY_TABLE;
 			}
 		}
 
@@ -299,6 +300,14 @@ namespace warcraft3 { namespace jass {
 			}
 		}
 
+		if (flag & HOOK_CODE_REGISTER)
+		{
+			if (register_unhook(proc_name, old_proc_ptr, new_proc))
+			{
+				result |= HOOK_MEMORY_TABLE;
+			}
+		}
+
 		if (flag & HOOK_MEMORY_REGISTER)
 		{
 			if (async_unhook(proc_name, old_proc_ptr, new_proc))
@@ -306,19 +315,12 @@ namespace warcraft3 { namespace jass {
 				result |= HOOK_MEMORY_TABLE;
 			}
 		}
-		else if (flag & HOOK_ONCE_MEMORY_REGISTER)
+		
+		if (flag & HOOK_ONCE_MEMORY_REGISTER)
 		{
 			if (async_once_unhook(proc_name, old_proc_ptr, new_proc))
 			{
 				result |= HOOK_ONCE_MEMORY_REGISTER;
-			}
-		}
-
-		if (flag & HOOK_CODE_REGISTER)
-		{
-			if (register_unhook(proc_name, old_proc_ptr, new_proc))
-			{
-				result |= HOOK_MEMORY_TABLE;
 			}
 		}
 
