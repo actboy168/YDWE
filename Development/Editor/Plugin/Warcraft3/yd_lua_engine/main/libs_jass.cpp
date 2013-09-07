@@ -57,10 +57,7 @@ namespace warcraft3 { namespace lua_engine {
 		case jass::TYPE_REAL:
 			return lj->read_real(idx);
 		case jass::TYPE_STRING:
-			//
-			// Fixed me
-			//
-			return 0;
+			return lj->read_string(idx);
 		case jass::TYPE_HANDLE:
 			return lj->read_handle(idx);
 		case jass::TYPE_BOOLEAN:

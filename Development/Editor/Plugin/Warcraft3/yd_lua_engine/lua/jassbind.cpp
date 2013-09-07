@@ -37,6 +37,11 @@ namespace warcraft3 { namespace lua_engine {
 		mybase::pushunsigned(value);
 	}
 
+	jass::jstring_t    jassbind::read_string (int index) 
+	{
+		return jass::create_string(mybase::tostring(index));
+	}
+
 	void             jassbind::push_string (jass::jstring_t value)
 	{
 		mybase::pushstring(jass::from_trigstring(jass::from_string(value)));
