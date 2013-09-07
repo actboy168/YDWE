@@ -267,10 +267,10 @@ namespace warcraft3 { namespace lua_engine {
 	{
 		jreal_createmeta(L);
 
-		lua_newtable(L);
-		lua_pushcfunction(L, jreal_new);
-		lua_setfield(L, -2, "new");
-		lua_setglobal(L, "jreal");
+		//lua_newtable(L);
+		//lua_pushcfunction(L, jreal_new);
+		//lua_setfield(L, -2, "new");
+		//lua_setglobal(L, "jreal");
 
 		return 0;
 	}
