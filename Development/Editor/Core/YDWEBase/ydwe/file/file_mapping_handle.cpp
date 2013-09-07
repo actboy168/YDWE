@@ -3,8 +3,17 @@
 
 _BASE_BEGIN namespace file {
 
-	file_mapping_handle::file_mapping_handle(file_handle const& file, LPSECURITY_ATTRIBUTES lpAttributes, DWORD flProtect, uint64_t dwMaximumSize, LPCWSTR lpName)
-		: _Mybase(::CreateFileMappingW(file.get(), lpAttributes, flProtect, static_cast<DWORD>(dwMaximumSize >> 32), static_cast<DWORD>(dwMaximumSize), lpName))
+	file_mapping_handle::file_mapping_handle(file_handle const& file, LPSECURITY_ATTRIBUTES lpAttributes, uint32_t flProtect, uint64_t dwMaximumSize, const wchar_t* name)
+		: _Mybase(::CreateFileMappingW(file.get(), lpAttributes, flProtect, static_cast<DWORD>(dwMaximumSize >> 32), static_cast<DWORD>(dwMaximumSize), name))
+	{
+		if (!_Mybase::operator bool())
+		{
+			throw windows_exception("failed to open file mapping");
+		}
+	}
+
+	file_mapping_handle::file_mapping_handle(uint32_t dwDesiredAccess, bool bInheritHandle, const wchar_t* name)
+		: _Mybase(::OpenFileMappingW(dwDesiredAccess, bInheritHandle, name))
 	{
 		if (!_Mybase::operator bool())
 		{

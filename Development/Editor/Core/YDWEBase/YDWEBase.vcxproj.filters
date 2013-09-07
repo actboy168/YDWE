@@ -430,6 +430,9 @@
     <ClInclude Include="ydwe\warcraft3\jass\func_value.h">
       <Filter>ydwe\warcraft3\jass</Filter>
     </ClInclude>
+    <ClInclude Include="ydwe\win\event.h">
+      <Filter>ydwe\win</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

@@ -11,7 +11,8 @@ _BASE_BEGIN namespace file {
 		typedef win::scoped_handle<NULL> _Mybase;
 
 	public:
-		file_mapping_handle(file_handle const& file, LPSECURITY_ATTRIBUTES lpAttributes, DWORD flProtect, uint64_t dwMaximumSize, LPCWSTR lpName);
+		file_mapping_handle(file_handle const& file, LPSECURITY_ATTRIBUTES lpAttributes, uint32_t flProtect, uint64_t dwMaximumSize, const wchar_t* name);
+		file_mapping_handle(uint32_t dwDesiredAccess, bool bInheritHandle, const wchar_t* name);
 		void* create_view(DWORD dwDesiredAccess, uint64_t dwFileOffset, size_t dwNumberOfBytesToMap);
 	};
 }}

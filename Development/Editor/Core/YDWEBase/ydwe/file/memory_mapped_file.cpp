@@ -27,7 +27,6 @@ _BASE_BEGIN namespace file {
 		}
 	}
 
-
 	void const* memory_mapped_file::memory() const
 	{
 		return memory_;
@@ -37,7 +36,6 @@ _BASE_BEGIN namespace file {
 	{
 		return cb_;
 	}
-
 
 	void memory_mapped_file::open(const wchar_t* file_name, uint64_t offset, size_t request_size)
 	{

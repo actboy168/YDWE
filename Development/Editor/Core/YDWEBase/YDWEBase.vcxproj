@@ -234,6 +234,7 @@
     <ClInclude Include="ydwe\warcraft3\version.h" />
     <ClInclude Include="ydwe\warcraft3\war3_searcher.h" />
     <ClInclude Include="ydwe\win\env_variable.h" />
+    <ClInclude Include="ydwe\win\event.h" />
     <ClInclude Include="ydwe\win\file_version.h" />
     <ClInclude Include="ydwe\win\pe_reader.h" />
     <ClInclude Include="ydwe\win\process.h" />
