@@ -8,7 +8,7 @@
 _BASE_BEGIN
 namespace warcraft3 { namespace lua_engine {
 
-	int  jass_call_closure(lua_State* L);
+	int jass_call_closure(lua_State* L);
 
 	int japi_get(lua_State* L)
 	{

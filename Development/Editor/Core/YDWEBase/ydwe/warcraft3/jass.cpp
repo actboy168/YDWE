@@ -203,8 +203,13 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 	template <> _BASE_API
 	void call_param::push<float>(size_t i, float value)
 	{
+		push_real(i, to_real(value));
+	}
+
+	void call_param::push_real(size_t i, jreal_t value)
+	{
 		assert(i < param_buffer_.size());
-		real_buffer_[i] = to_real(value);
+		real_buffer_[i] = value;
 		param_buffer_[i] = (uintptr_t)&real_buffer_[i];
 	}
 

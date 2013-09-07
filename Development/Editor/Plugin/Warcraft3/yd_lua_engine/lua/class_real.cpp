@@ -1,3 +1,4 @@
+#include "../lua/class_real.h"
 #include "../lua/helper.h"
 #include "../lua/jassbind.h"
 #include <ydwe/util/format.h>
@@ -26,23 +27,23 @@ namespace warcraft3 { namespace lua_engine {
 		return ((lua_type(L, index1) == LUA_TUSERDATA) && (lua_type(L, index2) == LUA_TUSERDATA));
 	}
 
-	template <class Result>
-	Result jreal_read(lua_State* L, int index) 
+	template <class T>
+	T jreal_read(lua_State* L, int index) 
 	{
 		int type = lua_type(L, index);
-		Result f = 0;
+		T f = 0;
 
 		switch(type)
 		{
 		case LUA_TNUMBER: 
 			{
-				f = (Result)lua_tonumber(L, index);
+				f = (T)lua_tonumber(L, index);
 				break;						 
 			}
 		case LUA_TUSERDATA:
 			{
 				jass::jreal_t tmp = *(jass::jreal_t*)luaL_checkudata(L, index, LUA_JASS_REAL);
-				f = (Result)jass::from_real(tmp);
+				f = (T)jass::from_real(tmp);
 				break;								 
 			}
 		default:
@@ -56,6 +57,12 @@ namespace warcraft3 { namespace lua_engine {
 	{
 		jass::jreal_t* p = jreal_create(L);
 		*p = jass::to_real(f);
+	}
+
+	void jreal_push(lua_State* L, jass::jreal_t f)
+	{
+		jass::jreal_t* p = jreal_create(L);
+		*p = f;
 	}
 
 	int jreal_add(lua_State* L)
@@ -247,7 +254,7 @@ namespace warcraft3 { namespace lua_engine {
 		switch(top) 
 		{
 		case 0:
-			jreal_push(L, 0);
+			jreal_push(L, (float)0);
 			break;
 		default:
 			jreal_push(L, (float)lua_tonumber(L, 1));
@@ -268,3 +275,4 @@ namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 }}
+_BASE_END

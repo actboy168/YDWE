@@ -105,7 +105,7 @@ namespace warcraft3 { namespace lua_engine {
 				param.push(i, lj->read_integer(i+1));
 				break;
 			case jass::TYPE_REAL:
-				param.push(i, (float)lj->tonumber(i+1));
+				param.push_real(i, lj->read_real(i+1));
 				break;
 			case jass::TYPE_STRING:				
 				param.push(i, lj->tostring(i+1));

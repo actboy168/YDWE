@@ -215,10 +215,10 @@
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
     </ClCompile>
     <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="lua\class_real.cpp" />
     <ClCompile Include="lua\helper.cpp" />
     <ClCompile Include="lua\jassbind.cpp" />
     <ClCompile Include="lua\callback.cpp" />
-    <ClCompile Include="main\class_real.cpp" />
     <ClCompile Include="main\libs_japi.cpp" />
     <ClCompile Include="main\libs_jass.cpp" />
     <ClCompile Include="main\libs_jass_ext.cpp" />
@@ -255,6 +255,7 @@
     <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lundump.h" />
     <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lvm.h" />
     <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lzio.h" />
+    <ClInclude Include="lua\class_real.h" />
     <ClInclude Include="lua\helper.h" />
     <ClInclude Include="lua\jassbind.h" />
     <ClInclude Include="lua\callback.h" />

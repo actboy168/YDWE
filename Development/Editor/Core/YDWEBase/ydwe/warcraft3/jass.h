@@ -36,6 +36,7 @@ _BASE_BEGIN namespace warcraft3 { namespace jass {
 	public:
 		call_param(size_t n);
 		template <class T> void push(size_t i, T value);
+		void push_real(size_t i, jreal_t value);
 		const uintptr_t* data() const;
 
 	private:

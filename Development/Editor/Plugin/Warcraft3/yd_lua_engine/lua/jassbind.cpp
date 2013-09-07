@@ -1,4 +1,5 @@
 #include "../lua/jassbind.h"
+#include "../lua/class_real.h"
 #include <ydwe/warcraft3/hashtable.h>
 #include <cstdint>
 
@@ -64,12 +65,12 @@ namespace warcraft3 { namespace lua_engine {
 	jass::jreal_t    jassbind::read_real   (int index) 
 	{
 		if (mybase::isnil(index)) return 0;
-		return jass::to_real((float)mybase::tonumber(index));
+		return jass::to_real(jreal_read<float>(self(), index));
 	}
 
 	void             jassbind::push_real   (jass::jreal_t value)
 	{
-		mybase::pushnumber(jass::from_real(value));
+		jreal_push(self(), value);
 	}
 
 	jass::jhandle_t  jassbind::read_handle (int index) 
