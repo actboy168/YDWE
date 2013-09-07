@@ -18,7 +18,7 @@ namespace warcraft3 { namespace lua_engine {
 			open_jass_ext(ls);
 			insert_searchers_table(ls);
 		}
-		return 1;
+		return 0;
 	}
 }}
 
