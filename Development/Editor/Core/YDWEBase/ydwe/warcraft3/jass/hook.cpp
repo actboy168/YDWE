@@ -111,7 +111,8 @@ namespace warcraft3 { namespace jass {
 
 		std::vector<register_info> register_info_list;
 		std::vector<hook_info>     hook_info_list;
-
+		std::vector<hook_info>     once_hook_info_list;
+		
 		uintptr_t search_register_func()
 		{
 			uintptr_t ptr = get_war3_searcher().search_string("StringCase");
@@ -128,7 +129,7 @@ namespace warcraft3 { namespace jass {
 		{
 			hook_info_list.push_back(hook_info(proc_name, old_proc_ptr, new_proc));
 		}
-
+		
 		void async_unhook(const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
 		{
 			std::remove_if(hook_info_list.begin(), hook_info_list.end(),
@@ -142,7 +143,26 @@ namespace warcraft3 { namespace jass {
 				}
 			);
 		}
-		
+
+		void async_once_hook(const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
+		{
+			once_hook_info_list.push_back(hook_info(proc_name, old_proc_ptr, new_proc));
+		}
+
+		void async_once_unhook(const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
+		{
+			std::remove_if(once_hook_info_list.begin(), once_hook_info_list.end(),
+				[&](const hook_info& h)->bool
+				{
+					return (
+							   (new_proc == h.new_proc)
+							&& (old_proc_ptr == h.old_proc_ptr)
+							&& (proc_name == h.proc_name)
+						);
+				}
+			);
+		}
+
 		void async_initialize()
 		{
 			nf_register::initialize();
@@ -165,6 +185,13 @@ namespace warcraft3 { namespace jass {
 					{
 						table_hook(it.proc_name.c_str(), it.old_proc_ptr, it.new_proc);
 					}
+
+					foreach (hook_info const& it, once_hook_info_list)
+					{
+						table_hook(it.proc_name.c_str(), it.old_proc_ptr, it.new_proc);
+					}
+
+					once_hook_info_list.clear();
 				});
 			}
 		}
@@ -176,6 +203,21 @@ namespace warcraft3 { namespace jass {
 		detail::async_hook(proc_name, old_proc_ptr, new_proc);
 		return true;
 	}
+
+	bool async_once_hook       (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
+	{
+		detail::async_initialize();
+		detail::async_once_hook(proc_name, old_proc_ptr, new_proc);
+		return true;
+	}
+
+	bool async_once_unhook       (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
+	{
+		detail::async_initialize();
+		detail::async_once_unhook(proc_name, old_proc_ptr, new_proc);
+		return true;
+	}
+
 
 	bool async_unhook         (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
 	{
@@ -218,6 +260,13 @@ namespace warcraft3 { namespace jass {
 				result |= HOOK_MEMORY_TABLE;
 			}
 		}
+		else if (flag & HOOK_ONCE_MEMORY_REGISTER)
+		{
+			if (async_once_hook(proc_name, old_proc_ptr, new_proc))
+			{
+				result |= HOOK_ONCE_MEMORY_REGISTER;
+			}
+		}
 
 		if (flag & HOOK_CODE_REGISTER)
 		{
@@ -255,6 +304,13 @@ namespace warcraft3 { namespace jass {
 			if (async_unhook(proc_name, old_proc_ptr, new_proc))
 			{
 				result |= HOOK_MEMORY_TABLE;
+			}
+		}
+		else if (flag & HOOK_ONCE_MEMORY_REGISTER)
+		{
+			if (async_once_unhook(proc_name, old_proc_ptr, new_proc))
+			{
+				result |= HOOK_ONCE_MEMORY_REGISTER;
 			}
 		}
 
