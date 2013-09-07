@@ -15,7 +15,7 @@ loader.load = function(path)
 	local obj = dotnet:load(path, 'WEInit')
 	if not obj then
 		log.error('failed: load failed')
-		return false, 
+		return false
 	end
 	if obj:error_code() ~= 0 then
 		log.error(string.format('failed: load failed(%08X)',  obj:error_code()))
