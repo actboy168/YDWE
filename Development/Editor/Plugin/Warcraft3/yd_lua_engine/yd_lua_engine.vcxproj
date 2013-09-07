@@ -57,6 +57,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>LUA_COMPAT_ALL;WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(OpenSource)\Lua\5.2.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -74,6 +75,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>LUA_COMPAT_ALL;WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(OpenSource)\Lua\5.2.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -216,6 +218,7 @@
     <ClCompile Include="lua\helper.cpp" />
     <ClCompile Include="lua\jassbind.cpp" />
     <ClCompile Include="lua\callback.cpp" />
+    <ClCompile Include="main\class_real.cpp" />
     <ClCompile Include="main\libs_japi.cpp" />
     <ClCompile Include="main\libs_jass.cpp" />
     <ClCompile Include="main\libs_jass_ext.cpp" />

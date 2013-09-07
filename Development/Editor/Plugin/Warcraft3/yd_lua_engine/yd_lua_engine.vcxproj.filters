@@ -152,6 +152,9 @@
     <ClCompile Include="main\open_lua_engine.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
+    <ClCompile Include="main\class_real.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua\callback.h">
