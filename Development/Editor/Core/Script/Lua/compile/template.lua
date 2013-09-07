@@ -53,7 +53,7 @@ local function map_file_import(filename)
 				__map_handle__,
 				temp_file_path,
 				filename,
-				bit.bor(bit.bor(stormlib.MPQ_FILE_SINGLE_UNIT, stormlib.MPQ_FILE_COMPRESS), stormlib.MPQ_FILE_REPLACEEXISTING),
+				bit.bor(stormlib.MPQ_FILE_COMPRESS, stormlib.MPQ_FILE_REPLACEEXISTING),
 				stormlib.MPQ_COMPRESSION_ZLIB,
 				stormlib.MPQ_COMPRESSION_ZLIB
 			) then

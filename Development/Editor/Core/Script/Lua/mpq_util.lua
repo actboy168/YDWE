@@ -21,7 +21,7 @@ function mpq_util.insert_file(self, map_path, file_path, path_in_archive)
 			mpq_handle,
 			file_path,
 			path_in_archive,
-			bit.bor(bit.bor(stormlib.MPQ_FILE_SINGLE_UNIT, stormlib.MPQ_FILE_COMPRESS), stormlib.MPQ_FILE_REPLACEEXISTING),
+			bit.bor(stormlib.MPQ_FILE_COMPRESS, stormlib.MPQ_FILE_REPLACEEXISTING),
 			stormlib.MPQ_COMPRESSION_ZLIB,
 			stormlib.MPQ_COMPRESSION_ZLIB
 		) then
@@ -93,7 +93,7 @@ function mpq_util.update_file(self, map_path, path_in_archive, process_function)
 						mpq_handle,
 						out_file_path,
 						path_in_archive,
-						bit.bor(bit.bor(stormlib.MPQ_FILE_SINGLE_UNIT, stormlib.MPQ_FILE_COMPRESS), stormlib.MPQ_FILE_REPLACEEXISTING),
+						bit.bor(stormlib.MPQ_FILE_COMPRESS, stormlib.MPQ_FILE_REPLACEEXISTING),
 						stormlib.MPQ_COMPRESSION_ZLIB,
 						stormlib.MPQ_COMPRESSION_ZLIB
 					) then
@@ -120,7 +120,7 @@ function mpq_util.update_file(self, map_path, path_in_archive, process_function)
 		-- 关闭地图
 		stormlib.close_archive(mpq_handle)
 	else
-		log.error("Cannot open map archive" .. map_path:string())
+		log.error("Cannot open map archive " .. map_path:string())
 	end
 
 	return result
