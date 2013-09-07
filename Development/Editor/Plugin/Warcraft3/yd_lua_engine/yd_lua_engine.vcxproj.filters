@@ -155,6 +155,9 @@
     <ClCompile Include="lua\class_real.cpp">
       <Filter>bind\lua</Filter>
     </ClCompile>
+    <ClCompile Include="main\jass_hook.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua\callback.h">
