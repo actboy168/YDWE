@@ -17,8 +17,8 @@ namespace warcraft3 { namespace lua_engine {
 			open_jass(ls);
 			open_japi(ls);
 			open_jass_ext(ls);
-			insert_searchers_table(ls);
 			jreal_initialize((lua_State*)ls);
+			insert_searchers_table(ls);
 		}
 		return 0;
 	}
