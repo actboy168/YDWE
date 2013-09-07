@@ -12,6 +12,7 @@
 #include <aero/function/fp_call.hpp>
 #include <map>
 #include <string>
+#include <algorithm>
 
 _BASE_BEGIN 
 namespace warcraft3 { namespace jass {
@@ -128,6 +129,20 @@ namespace warcraft3 { namespace jass {
 			hook_info_list.push_back(hook_info(proc_name, old_proc_ptr, new_proc));
 		}
 
+		void async_unhook(const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
+		{
+			std::remove_if(hook_info_list.begin(), hook_info_list.end(),
+				[&](const hook_info& h)->bool
+				{
+					return (
+						      (new_proc == h.new_proc)
+						   && (old_proc_ptr == h.old_proc_ptr)
+						   && (proc_name == h.proc_name)
+						);
+				}
+			);
+		}
+		
 		void async_initialize()
 		{
 			nf_register::initialize();
@@ -162,10 +177,25 @@ namespace warcraft3 { namespace jass {
 		return true;
 	}
 
+	bool async_unhook         (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
+	{
+		detail::async_initialize();
+		detail::async_unhook(proc_name, old_proc_ptr, new_proc);
+		return true;
+	}
+
 	bool japi_hook           (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
 	{
 		uint32_t flag  = HOOK_MEMORY_REGISTER | HOOK_AS_JAPI;
 		uint32_t result = hook(proc_name, old_proc_ptr, new_proc, flag);
+		return flag == result;
+	}
+
+
+	bool japi_unhook         (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
+	{
+		uint32_t flag  = HOOK_MEMORY_REGISTER | HOOK_AS_JAPI;
+		uint32_t result = unhook(proc_name, old_proc_ptr, new_proc, flag);
 		return flag == result;
 	}
 
@@ -208,7 +238,7 @@ namespace warcraft3 { namespace jass {
 		return result;
 	}
 
-	uint32_t unhook         (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc, hook_type flag)
+	uint32_t unhook         (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc, uint32_t flag)
 	{
 		uint32_t result = 0;
 
@@ -222,8 +252,7 @@ namespace warcraft3 { namespace jass {
 
 		if (flag & HOOK_MEMORY_REGISTER)
 		{
-			// FIXME
-			//if (async_unhook(proc_name, old_proc_ptr, new_proc))
+			if (async_unhook(proc_name, old_proc_ptr, new_proc))
 			{
 				result |= HOOK_MEMORY_TABLE;
 			}
