@@ -1,5 +1,4 @@
 #include "../lua/jassbind.h"
-#include "../lua/callback.h"
 #include <ydwe/warcraft3/hashtable.h>
 #include <ydwe/warcraft3/war3_searcher.h>
 #include <ydwe/warcraft3/jass/func_value.h>
@@ -52,10 +51,7 @@ namespace warcraft3 { namespace lua_engine {
 		case jass::TYPE_NOTHING:
 			return 0;
 		case jass::TYPE_CODE:
-			//
-			// Fixed me
-			//
-			return 0;
+			return lj->read_code(idx);
 		case jass::TYPE_INTEGER:
 			return lj->read_integer(idx);
 		case jass::TYPE_REAL:
@@ -96,7 +92,7 @@ namespace warcraft3 { namespace lua_engine {
 				param.push(i, lj->read_boolean(i+1));
 				break;
 			case jass::TYPE_CODE:
-				param.push(i, (jass::jcode_t)cfunction_to_code(lj, i+1));
+				param.push(i, lj->read_code(i+1));
 				break;
 			case jass::TYPE_HANDLE:
 				param.push(i, lj->read_handle(i+1));

@@ -1,5 +1,6 @@
 #include "../lua/jassbind.h"
 #include "../lua/class_real.h"
+#include "../lua/callback.h"
 #include <ydwe/warcraft3/hashtable.h>
 #include <cstdint>
 
@@ -26,14 +27,8 @@ namespace warcraft3 { namespace lua_engine {
 
 	jass::jcode_t    jassbind::read_code   (int index) 
 	{
-		if (mybase::isnil(index)) return 0;
-
-		if (mybase::isnumber(index))
-			return mybase::tounsigned(index);
-
-		if (mybase::isboolean(index))
-			return mybase::toboolean(index) ? 1 : 0;
-
+		if (mybase::isnumber(index)) return mybase::tounsigned(index);
+		if (mybase::isfunction(index)) return cfunction_to_code(this, index);
 		return 0;
 	}
 
