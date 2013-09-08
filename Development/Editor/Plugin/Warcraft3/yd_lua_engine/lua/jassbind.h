@@ -20,6 +20,7 @@ namespace warcraft3 { namespace lua_engine {
 		void             push_boolean(jass::jboolean_t value);
 		jass::jreal_t    read_real   (int index);
 		void             push_real   (jass::jreal_t value);
+		void             push_real_precise(jass::jreal_t value);
 		jass::jhandle_t  read_handle (int index);
 		void             push_handle (jass::jhandle_t value);
 	};

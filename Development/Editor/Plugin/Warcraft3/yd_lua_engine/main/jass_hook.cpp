@@ -114,7 +114,7 @@ namespace warcraft3 { namespace lua_engine {
 			{
 				if (nf_->get_param()[i] == jass::TYPE_REAL)
 				{
-					jass_push(lj, jass::TYPE_REAL, paramlist[i]? *(uintptr_t*)paramlist[i]: 0);
+					lj->push_real_precise(paramlist[i]? *(uintptr_t*)paramlist[i]: 0);
 				}
 				else
 				{

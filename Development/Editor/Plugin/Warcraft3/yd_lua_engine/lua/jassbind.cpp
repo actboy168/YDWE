@@ -67,8 +67,13 @@ namespace warcraft3 { namespace lua_engine {
 		if (mybase::isnil(index)) return 0;
 		return jass::to_real(jreal_read<float>(self(), index));
 	}
-
+	
 	void             jassbind::push_real   (jass::jreal_t value)
+	{
+		mybase::pushnumber(jass::from_real(value));
+	}
+
+	void             jassbind::push_real_precise(jass::jreal_t value)
 	{
 		jreal_push(self(), value);
 	}
