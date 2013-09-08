@@ -21,8 +21,9 @@ namespace warcraft3 {
 	bool storm::load()
 	{
 		if (!mod_) return false;
-		fn_sfile_load_file_   = get_proc(281); if (!(fn_sfile_load_file_)) return false; 
+		fn_sfile_load_file_   = get_proc(281); if (!(fn_sfile_load_file_))   return false; 
 		fn_sfile_unload_file_ = get_proc(280); if (!(fn_sfile_unload_file_)) return false; 
+		fn_sfile_exists_      = get_proc(288); if (!(fn_sfile_exists_))      return false; 
 
 		return true;
 	}
@@ -47,6 +48,12 @@ namespace warcraft3 {
 	{
 		if (!valid()) return false;
 		return !!aero::std_call<BOOL>(fn_sfile_unload_file_, buffer);
+	}
+
+	bool storm::has_file(const char* file_name)
+	{
+		if (!valid()) return false;
+		return !!aero::std_call<BOOL>(fn_sfile_exists_, file_name);
 	}
 
 	uintptr_t storm::get_proc(uint32_t ord)

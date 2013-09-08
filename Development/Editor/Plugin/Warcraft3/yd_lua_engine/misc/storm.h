@@ -17,6 +17,7 @@ namespace warcraft3 {
 		bool load_file(const char* file_name, const void** buffer_ptr, size_t* size_ptr);
 		bool load_file(HANDLE archive_handle, const char* file_name, const void** buffer_ptr, size_t* size_ptr, size_t reserve_size, uint32_t search_scope, OVERLAPPED* overlapped_ptr);
 		bool unload_file(const void* buffer);
+		bool has_file(const char* file_name);
 
 	private:
 		uintptr_t get_proc(uint32_t ord);
@@ -26,6 +27,7 @@ namespace warcraft3 {
 		bool      valid_;
 		uintptr_t fn_sfile_load_file_;
 		uintptr_t fn_sfile_unload_file_;
+		uintptr_t fn_sfile_exists_;
 	};
 }
 

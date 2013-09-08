@@ -223,6 +223,7 @@
     <ClCompile Include="main\libs_japi.cpp" />
     <ClCompile Include="main\libs_jass.cpp" />
     <ClCompile Include="main\libs_jass_ext.cpp" />
+    <ClCompile Include="main\libs_slk.cpp" />
     <ClCompile Include="main\lua_loader.cpp" />
     <ClCompile Include="main\open_lua_engine.cpp" />
     <ClCompile Include="misc\storm.cpp" />
@@ -262,11 +263,15 @@
     <ClInclude Include="lua\callback.h" />
     <ClInclude Include="main\lua_loader.h" />
     <ClInclude Include="main\open_lua_engine.h" />
+    <ClInclude Include="misc\slk_interface_storm.h" />
     <ClInclude Include="misc\storm.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(YDWE)\Editor\Core\YDWEBase\YDWEBase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Core\SlkLib\SlkLib.vcxproj">
+      <Project>{4affe3a0-639d-11e2-a80e-ab2baf291a2f}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

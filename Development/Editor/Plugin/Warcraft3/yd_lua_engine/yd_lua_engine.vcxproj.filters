@@ -158,6 +158,9 @@
     <ClCompile Include="main\jass_hook.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
+    <ClCompile Include="main\libs_slk.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua\callback.h">
@@ -255,6 +258,9 @@
     </ClInclude>
     <ClInclude Include="lua\class_real.h">
       <Filter>bind\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="misc\slk_interface_storm.h">
+      <Filter>bind\misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
