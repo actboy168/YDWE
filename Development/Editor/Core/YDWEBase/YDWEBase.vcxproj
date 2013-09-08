@@ -150,6 +150,7 @@
     <ClCompile Include="ydwe\warcraft3\detail\memory_search.cpp" />
     <ClCompile Include="ydwe\warcraft3\detail\string_hash.cpp" />
     <ClCompile Include="ydwe\warcraft3\basic_searcher.cpp" />
+    <ClCompile Include="ydwe\warcraft3\event.cpp" />
     <ClCompile Include="ydwe\warcraft3\hashtable.cpp" />
     <ClCompile Include="ydwe\warcraft3\jass.cpp" />
     <ClCompile Include="ydwe\warcraft3\jass\func_value.cpp" />
@@ -221,6 +222,7 @@
     <ClInclude Include="ydwe\util\format.h" />
     <ClInclude Include="ydwe\warcraft3\detail\memory_search.h" />
     <ClInclude Include="ydwe\warcraft3\detail\string_hash.h" />
+    <ClInclude Include="ydwe\warcraft3\event.h" />
     <ClInclude Include="ydwe\warcraft3\hashtable.h" />
     <ClInclude Include="ydwe\warcraft3\basic_searcher.h" />
     <ClInclude Include="ydwe\warcraft3\jass.h" />

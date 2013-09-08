@@ -1,5 +1,5 @@
 #include <ydwe/warcraft3/jass/trampoline_function.h>
-#include <ydwe/warcraft3/jass/nf_register.h>
+#include <ydwe/warcraft3/event.h>
 #include <ydwe/warcraft3/hashtable.h>
 #include <ydwe/warcraft3/jass/trampoline.h>
 #include <ydwe/warcraft3/jass/hook.h>
@@ -37,8 +37,8 @@ namespace warcraft3 { namespace jass {
 			initialized = true;
 			jump_function_id = get_string_hashtable()->get("SetUnitAbilityLevel")->index_;
 			table_hook("SetUnitAbilityLevel", (uintptr_t*)&detail::RealSetUnitAbilityLevel, (uintptr_t)detail::FakeSetUnitAbilityLevel);
-			nf_register::initialize();
-			nf_register::event_hook.connect([&]()
+
+			register_game_reset_event([&]()
 			{
 				initialized = false;
 				trampoline_mapping.clear();
