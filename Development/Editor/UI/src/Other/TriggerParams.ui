@@ -2670,7 +2670,7 @@ ABILITY_DATA_RESEARCH_HOTKEY=0,AbilityDataInteger,202,学习热键
 
 ABILITY_DATA_CAST=0,AbilityDataReal,101,施放时间
 ABILITY_DATA_DUR=0,AbilityDataReal,102,持续时间(普通)
-ABILITY_DATA_HERODUR=0,AbilityDataReal,113,持续时间(英雄)
+ABILITY_DATA_HERODUR=0,AbilityDataReal,103,持续时间(英雄)
 ABILITY_DATA_COOL=0,AbilityDataReal,105,施放间隔
 ABILITY_DATA_AREA=0,AbilityDataReal,106,影响区域
 ABILITY_DATA_RNG=0,AbilityDataReal,107,施法距离
