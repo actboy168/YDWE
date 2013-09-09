@@ -245,7 +245,12 @@ namespace warcraft3 { namespace lua_engine {
 		luaL_newmetatable(L, LUA_JASS_REAL);
 		lua_pushvalue(L, -1);
 		lua_setfield(L, -2, "__index");
+#if LUA_VERSION_NUM >= 502
+		luaL_setfuncs(L, lib, 0);
+		lua_pop(L, 1);
+#else
 		luaL_register(L, NULL, lib);
+#endif
 	}
 
 	int jreal_new (lua_State* L)
