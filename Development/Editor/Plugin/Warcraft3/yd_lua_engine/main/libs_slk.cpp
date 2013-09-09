@@ -85,10 +85,23 @@ namespace warcraft3 { namespace lua_engine {
 	int jass_slk_table(lua::state* ls)
 	{
 		slk::ROBJECT_TYPE::ENUM type = (slk::ROBJECT_TYPE::ENUM)ls->tounsigned(lua_upvalueindex(1));
-		const char* id = ls->tostring(2);
+		slk::object_id id;
+
+		switch (ls->type(2))
+		{
+		case LUA_TSTRING:	
+			id = slk::object_id(boost::string_ref(ls->tostring(2)));
+			break;
+		case LUA_TNUMBER:	
+			id = slk::object_id(ls->tounsigned(2));
+			break;
+		default:
+			ls->pushnil();
+			return 1;
+		}
 
 		slk::SlkTable& table = slk_manager::instance().load(type);
-		auto it = table.find(boost::string_ref(id));
+		auto it = table.find(id);
 		if (it == table.end())
 		{
 			ls->pushnil();
