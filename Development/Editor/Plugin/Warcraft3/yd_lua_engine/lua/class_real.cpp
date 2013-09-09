@@ -220,7 +220,7 @@ namespace warcraft3 { namespace lua_engine {
 
 	int jreal_tostring(lua_State* L)
 	{		
-		lua_pushstring(L, ydwe::util::format("%f", jreal_read<float>(L, 1)).c_str());
+		lua_pushstring(L, util::format("%f", jreal_read<float>(L, 1)).c_str());
 		return 1;
 	}
 
