@@ -12,18 +12,19 @@
 namespace fs = boost::filesystem;
 
 namespace NLuaAPI { namespace NMPQ {
-	static void *LuaMpqStormLibCreateArchive(const fs::path &mpqPath, boost::uint32_t createDispositon, boost::uint32_t hashTableSize)
+	static void *LuaMpqStormLibCreateArchive(const fs::path &mpqPath, boost::uint32_t /*dwFlags*/, boost::uint32_t dwMaxFileCount)
 	{
+		SFILE_CREATE_MPQ CreateInfo = {0};
+		CreateInfo.cbSize         = sizeof(SFILE_CREATE_MPQ);
+		CreateInfo.dwMpqVersion   = MPQ_FORMAT_VERSION_1;
+		CreateInfo.dwStreamFlags  = STREAM_PROVIDER_LINEAR | BASE_PROVIDER_FILE;
+		CreateInfo.dwAttrFlags    = 0;
+		CreateInfo.dwSectorSize   = 0x10000;
+		CreateInfo.dwRawChunkSize = 0;
+		CreateInfo.dwMaxFileCount = dwMaxFileCount;
+
 		HANDLE mpqHandle;
-
-		bool ret = SFileCreateArchive(
-			mpqPath.string().c_str(),
-			createDispositon,
-			hashTableSize,
-			&mpqHandle
-			);
-
-		if (!ret)
+		if (!SFileCreateArchive2(mpqPath.string().c_str(), &CreateInfo, &mpqHandle))
 		{
 			mpqHandle = NULL;
 		}
