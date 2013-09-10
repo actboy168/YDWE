@@ -115,6 +115,11 @@ namespace lua {
 			return lua_type(self(), idx);
 		}
 
+		inline void checktype(int narg, int t)
+		{
+			luaL_checktype(self(), narg, t);
+		}
+		
 		inline const char* type_name(int tp)
 		{
 			return lua_typename(self(), tp);
