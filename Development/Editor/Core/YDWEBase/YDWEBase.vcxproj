@@ -199,6 +199,7 @@
     <ClInclude Include="ydwe\lua\luabind\converter_boost_string_ref.h" />
     <ClInclude Include="ydwe\lua\luabind\converter_pvoid.h" />
     <ClInclude Include="ydwe\lua\luabind\converter_std_wstring.h" />
+    <ClInclude Include="ydwe\lua\make_range.h" />
     <ClInclude Include="ydwe\lua\state.h" />
     <ClInclude Include="ydwe\path\detail\get_path.h" />
     <ClInclude Include="ydwe\path\filesystem_helper.h" />

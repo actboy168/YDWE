@@ -439,6 +439,9 @@
     <ClInclude Include="ydwe\warcraft3\event.h">
       <Filter>ydwe\warcraft3</Filter>
     </ClInclude>
+    <ClInclude Include="ydwe\lua\make_range.h">
+      <Filter>ydwe\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

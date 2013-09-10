@@ -2,12 +2,14 @@
 #include <ydwe/util/do_once.h>
 #include <ydwe/util/string_ref.h>
 #include <ydwe/warcraft3/event.h>
+#include <ydwe/lua/make_range.h>
 #include <slk/ObjectManager.hpp>
 #include "../misc/slk_interface_storm.h"
 
 _BASE_BEGIN
+
 namespace warcraft3 { namespace lua_engine {
-	
+
 	class slk_manager
 	{
 	public:
@@ -51,12 +53,63 @@ namespace warcraft3 { namespace lua_engine {
 
 	std::unique_ptr<slk_manager> slk_manager::s_ptr_;
 
+	int jass_slk_object_index(lua::state* ls);
+	int jass_slk_object_factory(lua::state* ls);
+	int jass_slk_create_proxy_table(lua::state* ls, lua::state::cfunction index_func, lua::state::cfunction factory_func, uintptr_t upvalue);
+}}
+
+namespace lua
+{
+	template <>
+	int convert_to_lua(state* ls, const std::string& v)
+	{
+		ls->pushstring(v.c_str());
+		return 1;
+	}
+
+	template <>
+	int convert_to_lua(state* ls, const slk::SlkValue& v)
+	{
+		ls->pushstring(v.to_string().c_str());
+		return 1;
+	}
+
+	template <>
+	int convert_to_lua(state* ls, const slk::object_id& v)
+	{
+		ls->pushstring(v.to_string().c_str());
+		return 1;
+	}
+
+	template <>
+	int convert_to_lua(state* ls, const slk::SlkSingle& v)
+	{
+		warcraft3::lua_engine::jass_slk_create_proxy_table(
+			  ls
+			, warcraft3::lua_engine::jass_slk_object_index
+			, warcraft3::lua_engine::jass_slk_object_factory
+			, (uintptr_t)&(v)
+			);
+		return 1;
+	}
+
+	template <class F, class S>
+	int convert_to_lua(state* ls, const std::pair<F, S>& v)
+	{
+		convert_to_lua(ls, v.first);
+		convert_to_lua(ls, v.second);
+		return 2;
+	}
+}
+
+namespace warcraft3 { namespace lua_engine {
+	
 	int jass_slk_table_newindex(lua::state* /*ls*/)
 	{
 		return 0;
 	}
 
-	int jass_slk_create_proxy_table(lua::state* ls, lua::state::cfunction f, uintptr_t upvalue)
+	int jass_slk_create_proxy_table(lua::state* ls, lua::state::cfunction index_func, lua::state::cfunction factory_func, uintptr_t upvalue)
 	{
 		ls->newtable();
 		{
@@ -64,7 +117,7 @@ namespace warcraft3 { namespace lua_engine {
 			{
 				ls->pushstring("__index");
 				ls->pushunsigned(upvalue);
-				ls->pushcclosure(f, 1);
+				ls->pushcclosure(index_func, 1);
 				ls->rawset(-3);
 
 				ls->pushstring("__newindex");
@@ -72,8 +125,19 @@ namespace warcraft3 { namespace lua_engine {
 				ls->rawset(-3);
 			}
 			ls->setmetatable(-2);
+
+			ls->pushstring("factory");
+			ls->pushunsigned(upvalue);
+			ls->pushcclosure(factory_func, 1);
+			ls->rawset(-3);
 		}
 		return 1;
+	}
+
+	int jass_slk_object_factory(lua::state* ls)
+	{
+		slk::SlkSingle* object_ptr = (slk::SlkSingle*)(uintptr_t)ls->tounsigned(lua_upvalueindex(1));
+		return lua::make_range(ls, *object_ptr);
 	}
 
 	int jass_slk_object_index(lua::state* ls)
@@ -87,8 +151,14 @@ namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
-		ls->pushstring(it->second.to_string().c_str());
-		return 1;
+		return lua::convert_to_lua(ls, it->second);
+	}
+
+	int jass_slk_table_factory(lua::state* ls)
+	{
+		slk::ROBJECT_TYPE::ENUM type = (slk::ROBJECT_TYPE::ENUM)ls->tounsigned(lua_upvalueindex(1));
+		slk::SlkTable& table = slk_manager::instance().load(type);
+		return lua::make_range(ls, table);
 	}
 
 	int jass_slk_table_index(lua::state* ls)
@@ -116,14 +186,14 @@ namespace warcraft3 { namespace lua_engine {
 			ls->pushnil();
 			return 1;
 		}
-		
-		return jass_slk_create_proxy_table(ls, jass_slk_object_index, (uintptr_t)&(it->second));
+
+		return lua::convert_to_lua(ls, it->second);
 	}
 
 	int slk_create_table(lua::state* ls, const char* name, slk::ROBJECT_TYPE::ENUM type)
 	{
 		ls->pushstring(name);
-		jass_slk_create_proxy_table(ls, jass_slk_table_index, type);
+		jass_slk_create_proxy_table(ls, jass_slk_table_index, jass_slk_table_factory, type);
 		ls->rawset(-3);
 		return 0;
 	}
