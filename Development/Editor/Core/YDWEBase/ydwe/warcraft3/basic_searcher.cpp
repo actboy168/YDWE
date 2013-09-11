@@ -23,6 +23,11 @@ namespace ydwe { namespace warcraft3 {
 		text_end_  = text_beg_ + text_ptr->SizeOfRawData;
 	}
 
+	uintptr_t basic_searcher::base() const
+	{
+		return (uintptr_t)module_.module();
+	}
+
 	uintptr_t basic_searcher::search_string_ptr(const char* str, size_t length) const
 	{
 		uintptr_t retval;
