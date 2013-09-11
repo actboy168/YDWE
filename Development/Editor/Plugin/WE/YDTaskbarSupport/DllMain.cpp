@@ -2,8 +2,8 @@
 #include <random>
 #include <string>
 #include <boost/filesystem.hpp>
-#include <ydwe/win/version.h>
-#include <ydwe/path/service.h>
+#include <base/win/version.h>
+#include <base/path/service.h>
 #include "Windows7.h"
 #include "JumpList.h"
 

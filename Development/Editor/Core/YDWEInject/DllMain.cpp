@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include <locale>
 #include <boost/filesystem.hpp>
-#include <ydwe/path/self.h>
+#include <base/path/self.h>
 #include "../LuaEngine/LuaEngine.h"
 
 LuaEngine gLuaEngine;

@@ -7,17 +7,17 @@
 #include <boost/foreach.hpp>
 #include <boost/exception/all.hpp>
 #include <CImg.h>
-#include <ydwe/file/memory_mapped_file.h>
-#include <ydwe/exception/system_exception.h>
-#include <ydwe/exception/windows_exception.h>
-#include <ydwe/file/stream.h>
-#include <ydwe/i18n/libintl.h>
-#include <ydwe/path/service.h>
-#include <ydwe/util/unicode.h>
-#include <ydwe/win/file_version.h>
-#include <ydwe/win/process.h>
-#include <ydwe/warcraft3/directory.h>
-#include <ydwe/util/format.h>
+#include <base/file/memory_mapped_file.h>
+#include <base/exception/system_exception.h>
+#include <base/exception/windows_exception.h>
+#include <base/file/stream.h>
+#include <base/i18n/libintl.h>
+#include <base/path/service.h>
+#include <base/util/unicode.h>
+#include <base/win/file_version.h>
+#include <base/win/process.h>
+#include <base/warcraft3/directory.h>
+#include <base/util/format.h>
 
 namespace fs = boost::filesystem;
 

@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="base\graph\graph.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ydwe\graph\graph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\YDWEBase\YDWEBase.vcxproj">
@@ -20,8 +20,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ydwe\graph\config.h" />
-    <ClInclude Include="ydwe\graph\graph.h" />
+    <ClInclude Include="base\graph\config.h" />
+    <ClInclude Include="base\graph\graph.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C371743B-AD12-4A31-82DF-5A058083773F}</ProjectGuid>

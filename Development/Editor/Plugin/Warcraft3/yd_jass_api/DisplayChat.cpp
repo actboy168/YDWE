@@ -1,6 +1,6 @@
-#include <ydwe/warcraft3/jass.h>
-#include <ydwe/warcraft3/jass/hook.h>
-#include <ydwe/warcraft3/war3_searcher.h>
+#include <base/warcraft3/jass.h>
+#include <base/warcraft3/jass/hook.h>
+#include <base/warcraft3/war3_searcher.h>
 #include <aero/function/fp_call.hpp>
 
 _BASE_BEGIN

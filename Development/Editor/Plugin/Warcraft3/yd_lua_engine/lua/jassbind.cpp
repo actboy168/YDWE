@@ -1,7 +1,7 @@
 #include "../lua/jassbind.h"
 #include "../lua/class_real.h"
 #include "../lua/callback.h"
-#include <ydwe/warcraft3/hashtable.h>
+#include <base/warcraft3/hashtable.h>
 #include <cstdint>
 
 _BASE_BEGIN

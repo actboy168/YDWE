@@ -1,11 +1,11 @@
 #include "../lua/helper.h"
 #include "../lua/jassbind.h"
 #include "../lua/callback.h"
-#include <ydwe/util/console.h>
-#include <ydwe/util/do_once.h>
-#include <ydwe/warcraft3/jass/func_value.h>
+#include <base/util/console.h>
+#include <base/util/do_once.h>
+#include <base/warcraft3/jass/func_value.h>
 #include <aero/function/fp_call.hpp>
-#include <ydwe/hook/inline.h>
+#include <base/hook/inline.h>
 
 
 _BASE_BEGIN

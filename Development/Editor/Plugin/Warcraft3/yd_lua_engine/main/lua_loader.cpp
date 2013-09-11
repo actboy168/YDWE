@@ -3,10 +3,10 @@
 #include "../main/lua_loader.h"
 #include "../misc/storm.h"
 #include "../main/open_lua_engine.h"
-#include <ydwe/lua/state.h>
-#include <ydwe/warcraft3/jass/func_value.h>
-#include <ydwe/warcraft3/jass/hook.h>
-#include <ydwe/util/singleton.h>
+#include <base/lua/state.h>
+#include <base/warcraft3/jass/func_value.h>
+#include <base/warcraft3/jass/hook.h>
+#include <base/util/singleton.h>
 #include <aero/function/fp_call.hpp>
 
 _BASE_BEGIN

@@ -1,10 +1,10 @@
 #include "../lua/jassbind.h"
-#include <ydwe/warcraft3/hashtable.h>
-#include <ydwe/warcraft3/war3_searcher.h>
-#include <ydwe/warcraft3/jass/func_value.h>
-#include <ydwe/warcraft3/jass.h>
-#include <ydwe/warcraft3/jass/global_variable.h>
-#include <ydwe/util/singleton.h>
+#include <base/warcraft3/hashtable.h>
+#include <base/warcraft3/war3_searcher.h>
+#include <base/warcraft3/jass/func_value.h>
+#include <base/warcraft3/jass.h>
+#include <base/warcraft3/jass/global_variable.h>
+#include <base/util/singleton.h>
 
 _BASE_BEGIN
 namespace warcraft3 { namespace lua_engine {

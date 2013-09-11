@@ -8,7 +8,7 @@
 #include <slk/reader/MetaReader.hpp>
 #include <slk/writer/ObjWriter.hpp>
 #include <slk/converter/ConvertTable.hpp>
-#include <ydwe/file/stream.h>
+#include <base/file/stream.h>
 
 namespace slk
 {

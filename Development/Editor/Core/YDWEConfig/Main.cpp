@@ -1,8 +1,8 @@
 #include <boost/exception/all.hpp>
 #include <windows.h>
 #include "MainWindow.h"
-#include <ydwe/com/guard.h>
-#include <ydwe/util/unicode.h>
+#include <base/com/guard.h>
+#include <base/util/unicode.h>
 
 
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR lpCmdLine, int nCmdShow)

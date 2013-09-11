@@ -1,7 +1,7 @@
 #include "../lua/helper.h"
 #include "../misc/storm.h"
 #include <cstring>
-#include <ydwe/util/singleton.h>
+#include <base/util/singleton.h>
 
 _BASE_BEGIN
 namespace warcraft3 { namespace lua_engine {

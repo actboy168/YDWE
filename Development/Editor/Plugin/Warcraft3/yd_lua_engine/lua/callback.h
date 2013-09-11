@@ -1,7 +1,7 @@
 #pragma once
 
-#include <ydwe/lua/state.h>
-#include <ydwe/warcraft3/jass/func_value.h>
+#include <base/lua/state.h>
+#include <base/warcraft3/jass/func_value.h>
 #include <lua.hpp>
 #include <cstdint>
 

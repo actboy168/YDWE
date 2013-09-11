@@ -1,9 +1,9 @@
 #pragma warning(push, 3)
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
-#include <ydwe/lua/luabind.h>
+#include <base/lua/luabind.h>
 #pragma warning(pop)
-#include <ydwe/exception/windows_exception.h>
+#include <base/exception/windows_exception.h>
 #include <Windows.h>
 #include <cstdint>
 #include "resource.h"

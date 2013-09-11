@@ -8,10 +8,10 @@
 #include <boost/lambda/lambda.hpp>
 #include <boost/scope_exit.hpp>
 #include <aero/aero.hpp>
-#include <ydwe/path/service.h>
-#include <ydwe/util/unicode.h>
-#include <ydwe/hook/inline.h>
-#include <ydwe/hook/iat.h>
+#include <base/path/service.h>
+#include <base/util/unicode.h>
+#include <base/hook/inline.h>
+#include <base/hook/iat.h>
 
 #include "YDWEEvent.h"
 #include "YDWELogger.h"

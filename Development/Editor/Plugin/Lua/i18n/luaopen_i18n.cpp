@@ -1,9 +1,9 @@
 #pragma warning(push, 3)
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
-#include <ydwe/lua/luabind.h>
+#include <base/lua/luabind.h>
 #pragma warning(pop)
-#include <ydwe/i18n/libintl.h>
+#include <base/i18n/libintl.h>
 
 int luaopen_i18n(lua_State *pState)
 {

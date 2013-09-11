@@ -1,8 +1,8 @@
 #include "../lua/helper.h"
-#include <ydwe/util/do_once.h>
-#include <ydwe/util/string_ref.h>
-#include <ydwe/warcraft3/event.h>
-#include <ydwe/lua/make_range.h>
+#include <base/util/do_once.h>
+#include <base/util/string_ref.h>
+#include <base/warcraft3/event.h>
+#include <base/lua/make_range.h>
 #include <slk/ObjectManager.hpp>
 #include "../misc/slk_interface_storm.h"
 

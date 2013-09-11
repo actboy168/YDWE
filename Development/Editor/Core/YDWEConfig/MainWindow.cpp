@@ -7,14 +7,14 @@
 #include <slk/reader/CommonReader.cpp>
 #include "Regedit.h"
 #include "Shortcuts.h"
-#include <ydwe/warcraft3/directory.h>
-#include <ydwe/file/stream.h>
-#include <ydwe/path/self.h>
-#include <ydwe/path/service.h>
-#include <ydwe/path/filesystem_helper.h>
-#include <ydwe/util/unicode.h>
-#include <ydwe/win/version.h>
-#include <ydwe/win/file_version.h>
+#include <base/warcraft3/directory.h>
+#include <base/file/stream.h>
+#include <base/path/self.h>
+#include <base/path/service.h>
+#include <base/path/filesystem_helper.h>
+#include <base/util/unicode.h>
+#include <base/win/version.h>
+#include <base/win/file_version.h>
 
 namespace 
 {

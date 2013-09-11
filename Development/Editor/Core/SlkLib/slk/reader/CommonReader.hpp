@@ -3,7 +3,7 @@
 #include <slk/utility/sequence.h>
 #include <slk/utility/buffer.h>
 #include <functional>
-#include <ydwe/util/string_ref.h>
+#include <base/util/string_ref.h>
 
 namespace slk { namespace reader { namespace utility {
 	void remove_bom(buffer_reader& reader);

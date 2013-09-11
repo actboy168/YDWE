@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ydwe/util/noncopyable.h>
+#include <base/util/noncopyable.h>
 #include <slk/table/SlkTable.hpp>
 #include <slk/table/MetaTable.hpp>
 #include <slk/Converter.hpp>

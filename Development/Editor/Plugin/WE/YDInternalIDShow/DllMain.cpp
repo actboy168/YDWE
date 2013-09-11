@@ -1,6 +1,6 @@
 #include <aero/aero.hpp>
 #include <windows.h>
-#include <ydwe/hook/inline.h>
+#include <base/hook/inline.h>
 
 namespace NYDWEPlugin
 {

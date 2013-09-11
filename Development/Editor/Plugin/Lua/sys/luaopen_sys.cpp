@@ -6,7 +6,7 @@
 #include <luabind/operator.hpp>
 #include <luabind/table_policy.hpp>
 #include <luabind/return_reference_to_policy.hpp>
-#include <ydwe/lua/luabind.h>
+#include <base/lua/luabind.h>
 #pragma warning(pop)
 #include <boost/filesystem.hpp>
 #include <boost/foreach.hpp>
@@ -15,8 +15,8 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <Windows.h>
-#include <ydwe/win/process.h>
-#include <ydwe/win/file_version.h>
+#include <base/win/process.h>
+#include <base/win/file_version.h>
 #include <fcntl.h>
 #include <io.h>
 

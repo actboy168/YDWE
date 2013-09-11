@@ -1,7 +1,7 @@
 #include "../lua/helper.h"
 #include "../lua/jassbind.h"
-#include <ydwe/util/console.h>
-#include <ydwe/warcraft3/jass/func_value.h>
+#include <base/util/console.h>
+#include <base/warcraft3/jass/func_value.h>
 #include <map>
 #include <string>
 

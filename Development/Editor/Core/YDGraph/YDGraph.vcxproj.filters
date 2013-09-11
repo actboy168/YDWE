@@ -7,15 +7,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ydwe\graph\graph.cpp">
+    <ClCompile Include="base\graph\graph.cpp">
       <Filter>graph</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ydwe\graph\graph.h">
+    <ClInclude Include="base\graph\config.h">
       <Filter>graph</Filter>
     </ClInclude>
-    <ClInclude Include="ydwe\graph\config.h">
+    <ClInclude Include="base\graph\graph.h">
       <Filter>graph</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,10 +1,10 @@
 #include <aero/function/fp_call.hpp>
-#include <ydwe/hook/iat.h>
-#include <ydwe/warcraft3/jass/hook.h>
-#include <ydwe/warcraft3/war3_searcher.h>
-#include <ydwe/warcraft3/version.h>
-#include <ydwe/warcraft3/jass.h>
-#include <ydwe/hook/inline.h>
+#include <base/hook/iat.h>
+#include <base/warcraft3/jass/hook.h>
+#include <base/warcraft3/war3_searcher.h>
+#include <base/warcraft3/version.h>
+#include <base/warcraft3/jass.h>
+#include <base/hook/inline.h>
 #include <array>
 
 _BASE_BEGIN

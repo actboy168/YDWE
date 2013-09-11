@@ -1,7 +1,7 @@
 #pragma warning(push, 3)
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
-#include <ydwe/lua/luabind.h>
+#include <base/lua/luabind.h>
 #pragma warning(pop)
 #include <boost/filesystem.hpp>
 #include <boost/scope_exit.hpp>

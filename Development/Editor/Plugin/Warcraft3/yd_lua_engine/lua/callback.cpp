@@ -1,6 +1,6 @@
 #include "../lua/callback.h"
 #include "../lua/jassbind.h"
-#include <ydwe/warcraft3/jass/trampoline_function.h>
+#include <base/warcraft3/jass/trampoline_function.h>
 #include <Windows.h>
 
 _BASE_BEGIN

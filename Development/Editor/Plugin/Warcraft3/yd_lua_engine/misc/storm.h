@@ -2,7 +2,7 @@
 
 #include <Windows.h>
 #include <cstdint>
-#include <ydwe/config.h>
+#include <base/config.h>
 
 _BASE_BEGIN
 namespace warcraft3 {

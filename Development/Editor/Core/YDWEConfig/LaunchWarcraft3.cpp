@@ -1,11 +1,11 @@
 
 #include <boost/filesystem.hpp>
-#include <ydwe/file/stream.h>
-#include <ydwe/path/service.h>
-#include <ydwe/win/env_variable.h>
-#include <ydwe/win/process.h>
+#include <base/file/stream.h>
+#include <base/path/service.h>
+#include <base/win/env_variable.h>
+#include <base/win/process.h>
 #include <slk/reader/IniReader.hpp>
-#include <ydwe/warcraft3/directory.h>
+#include <base/warcraft3/directory.h>
 
 bool launch_warcraft3()
 {

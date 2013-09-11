@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 
-#include <ydwe/graph/graph.h>
+#include <base/graph/graph.h>
 
 namespace DuiLib
 {

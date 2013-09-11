@@ -9,10 +9,10 @@
 #include <boost/lambda/lambda.hpp>
 #include <boost/scope_exit.hpp>
 #include <aero/aero.hpp>
-#include <ydwe/util/unicode.h>
-#include <ydwe/hook/inline.h>
-#include <ydwe/hook/iat_manager.h>
-#include <ydwe/util/format.h>
+#include <base/util/unicode.h>
+#include <base/hook/inline.h>
+#include <base/hook/iat_manager.h>
+#include <base/util/format.h>
 
 #include <objbase.h>
 #include <windows.h>

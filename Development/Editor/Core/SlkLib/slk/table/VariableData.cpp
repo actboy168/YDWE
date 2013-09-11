@@ -2,7 +2,7 @@
 #include <string>
 #include <slk/utility/buffer.h>
 #include <slk/utility/convert.h>
-#include <ydwe/exception/exception.h>
+#include <base/exception/exception.h>
 
 namespace slk
 {

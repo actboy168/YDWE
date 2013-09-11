@@ -1,10 +1,10 @@
 #include "Shortcuts.h"
 #include <Shobjidl.h>
 #include <memory>
-#include <ydwe/win/version.h>
-#include <ydwe/path/service.h>
-#include <ydwe/path/filesystem_helper.h>
-#include <ydwe/com/unique_ptr.h>
+#include <base/win/version.h>
+#include <base/path/service.h>
+#include <base/path/filesystem_helper.h>
+#include <base/com/unique_ptr.h>
 
 namespace Shortcuts
 {

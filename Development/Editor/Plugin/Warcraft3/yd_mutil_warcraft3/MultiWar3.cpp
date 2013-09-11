@@ -1,8 +1,8 @@
 #include <WinSock.h>
-#include <ydwe/hook/iat_manager.h>
-#include <ydwe/util/foreach.h>
-#include <ydwe/warcraft3/version.h>
-#include <ydwe/warcraft3/war3_searcher.h>
+#include <base/hook/iat_manager.h>
+#include <base/util/foreach.h>
+#include <base/warcraft3/version.h>
+#include <base/warcraft3/war3_searcher.h>
 #include <aero/function/fp_call.hpp>
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/allocators/allocator.hpp> 

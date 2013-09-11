@@ -3,14 +3,14 @@
 #include <cstdint>
 #include <aero/function/fp_call.hpp>
 #include <boost/filesystem.hpp>
-#include <ydwe/exception/exception.h>
-#include <ydwe/hook/inline.h>
-#include <ydwe/lua/luabind.h>
-#include <ydwe/path/service.h>
-#include <ydwe/path/self.h>
-#include <ydwe/win/file_version.h>
-#include <ydwe/file/stream.h>
-#include <ydwe/util/format.h>
+#include <base/exception/exception.h>
+#include <base/hook/inline.h>
+#include <base/lua/luabind.h>
+#include <base/path/service.h>
+#include <base/path/self.h>
+#include <base/win/file_version.h>
+#include <base/file/stream.h>
+#include <base/util/format.h>
 
 #pragma warning(push)
 #pragma warning(disable: 4231)

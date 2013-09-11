@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include <zip_reader.h>
-#include <ydwe/path/filesystem_helper.h>
+#include <base/path/filesystem_helper.h>
 
 namespace DuiLib
 {

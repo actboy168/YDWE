@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ydwe/util/buffer.h>
+#include <base/util/buffer.h>
 
 namespace slk
 {

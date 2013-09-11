@@ -1,13 +1,13 @@
 #include <map>
 #include <string>
 #include <aero/function/fp_call.hpp>
-#include <ydwe/hook/assembler/writer.h>
-#include <ydwe/util/noncopyable.h>
-#include <ydwe/util/horrible_cast.h>
-#include <ydwe/warcraft3/jass.h>
-#include <ydwe/warcraft3/jass/func_value.h>
-#include <ydwe/warcraft3/jass/hook.h>
-#include <ydwe/warcraft3/war3_searcher.h>
+#include <base/hook/assembler/writer.h>
+#include <base/util/noncopyable.h>
+#include <base/util/horrible_cast.h>
+#include <base/warcraft3/jass.h>
+#include <base/warcraft3/jass/func_value.h>
+#include <base/warcraft3/jass/hook.h>
+#include <base/warcraft3/war3_searcher.h>
 #include "../lua/jassbind.h"
 #include "../lua/callback.h"
 

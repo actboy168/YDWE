@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <aero/function/fp_call.hpp>
-#include <ydwe/warcraft3/jass/hook.h>
-#include <ydwe/warcraft3/jass.h>
+#include <base/warcraft3/jass/hook.h>
+#include <base/warcraft3/jass.h>
 #include <boost/preprocessor/repetition.hpp>
 #include <boost/preprocessor/punctuation/comma_if.hpp>
 #include <set>

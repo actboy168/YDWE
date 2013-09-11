@@ -2,13 +2,13 @@
 #pragma warning(push, 3)
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
-#include <ydwe/lua/luabind.h>
+#include <base/lua/luabind.h>
 #pragma warning(pop)
 #include <boost/foreach.hpp>
 #include "YDWEEvent.h"
 #include "YDWELogger.h"
 #include <aero/function/fp_call.hpp>
-#include <ydwe/exception/exception.h>
+#include <base/exception/exception.h>
 
 namespace NYDWE {
 
