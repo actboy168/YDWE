@@ -80,7 +80,6 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Regedit.cpp" />
     <ClCompile Include="Shortcuts.cpp" />
-    <ClCompile Include="Warcraft3Directory.cpp" />
     <ClCompile Include="LaunchWarcraft3.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -96,7 +95,6 @@
     <ClInclude Include="Regedit.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shortcuts.h" />
-    <ClInclude Include="Warcraft3Directory.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc" />

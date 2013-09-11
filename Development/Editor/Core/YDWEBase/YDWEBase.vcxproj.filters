@@ -212,6 +212,9 @@
     <ClCompile Include="ydwe\warcraft3\event.cpp">
       <Filter>ydwe\warcraft3</Filter>
     </ClCompile>
+    <ClCompile Include="ydwe\warcraft3\directory.cpp">
+      <Filter>ydwe\warcraft3</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ydwe\util\detail\codecvt.h">
@@ -441,6 +444,9 @@
     </ClInclude>
     <ClInclude Include="ydwe\lua\make_range.h">
       <Filter>ydwe\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="ydwe\warcraft3\directory.h">
+      <Filter>ydwe\warcraft3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

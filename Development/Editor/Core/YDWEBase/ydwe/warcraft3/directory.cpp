@@ -1,12 +1,13 @@
-#include "Warcraft3Directory.h"
+#include <ydwe/warcraft3/directory.h>
 #include <boost/assign.hpp>
 #include <boost/filesystem.hpp>
 #include <winstl/registry/reg_key.hpp>
 #include <winstl/registry/reg_value.hpp> 
 #include <ydwe/util/foreach.h>
 
-namespace warcraft3_directory
-{
+_BASE_BEGIN
+namespace warcraft3 { namespace directory {
+
 	bool read_current_user(boost::filesystem::path& result)
 	{
 		try {
@@ -137,20 +138,21 @@ namespace warcraft3_directory
 
 	bool get(const wchar_t* title, boost::filesystem::path& war3_path)
 	{
-		while (!warcraft3_directory::read(war3_path))
+		while (!read(war3_path))
 		{
 			boost::filesystem::path result;
-			if (!warcraft3_directory::choose(title, result))
+			if (!choose(title, result))
 			{
 				return false;
 			}
 
-			if (warcraft3_directory::validate(result))
+			if (validate(result))
 			{
-				warcraft3_directory::write(result);
+				write(result);
 			}
 		}
 
 		return true;
 	}
-}
+}}
+_BASE_END

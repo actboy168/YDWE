@@ -160,6 +160,7 @@
     <ClCompile Include="ydwe\warcraft3\jass\trampoline_function.cpp" />
     <ClCompile Include="ydwe\warcraft3\jass\trampoline.cpp" />
     <ClCompile Include="ydwe\warcraft3\war3_searcher.cpp" />
+    <ClCompile Include="ydwe\warcraft3\directory.cpp" />
     <ClCompile Include="ydwe\win\env_variable.cpp" />
     <ClCompile Include="ydwe\win\file_version.cpp" />
     <ClCompile Include="ydwe\win\pe_reader.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="ydwe\warcraft3\jass\trampoline.h" />
     <ClInclude Include="ydwe\warcraft3\version.h" />
     <ClInclude Include="ydwe\warcraft3\war3_searcher.h" />
+    <ClInclude Include="ydwe\warcraft3\directory.h" />
     <ClInclude Include="ydwe\win\env_variable.h" />
     <ClInclude Include="ydwe\win\event.h" />
     <ClInclude Include="ydwe\win\file_version.h" />

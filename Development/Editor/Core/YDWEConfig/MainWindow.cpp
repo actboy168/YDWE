@@ -7,7 +7,7 @@
 #include <slk/reader/CommonReader.cpp>
 #include "Regedit.h"
 #include "Shortcuts.h"
-#include "Warcraft3Directory.h"
+#include <ydwe/warcraft3/directory.h>
 #include <ydwe/file/stream.h>
 #include <ydwe/path/self.h>
 #include <ydwe/path/service.h>
@@ -526,7 +526,7 @@ void CMainWindow::UpdateWarcraft3Directory()
 	if (m_pWarcraft3Directory)
 	{
 		boost::filesystem::path result;
-		if (warcraft3_directory::read(result))
+		if (ydwe::warcraft3::directory::read(result))
 		{
 			m_pWarcraft3Directory->SetText(result.c_str());
 		}
@@ -599,7 +599,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 			}
 			else if (name == _T("choose_war3_dir"))
 			{
-				if (warcraft3_directory::choose(nullptr))
+				if (ydwe::warcraft3::directory::choose(nullptr))
 				{
 					UpdateWarcraft3Directory();
 				}

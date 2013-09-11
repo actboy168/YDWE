@@ -5,7 +5,7 @@
 #include <ydwe/win/env_variable.h>
 #include <ydwe/win/process.h>
 #include <slk/reader/IniReader.hpp>
-#include "Warcraft3Directory.h"
+#include <ydwe/warcraft3/directory.h>
 
 bool launch_warcraft3()
 {
@@ -18,7 +18,7 @@ bool launch_warcraft3()
 		ev.set(p + ev.get());
 
 		boost::filesystem::path war3_path;
-		if (!warcraft3_directory::get(nullptr, war3_path))
+		if (!ydwe::warcraft3::directory::get(nullptr, war3_path))
 		{
 			return false;
 		}

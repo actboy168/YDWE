@@ -27,9 +27,6 @@
     <ClCompile Include="Shortcuts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Warcraft3Directory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LaunchWarcraft3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -46,9 +43,6 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Warcraft3Directory.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

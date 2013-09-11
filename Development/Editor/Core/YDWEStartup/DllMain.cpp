@@ -16,8 +16,7 @@
 #include <ydwe/util/unicode.h>
 #include <ydwe/win/file_version.h>
 #include <ydwe/win/process.h>
-#include <YDWEConfig/Warcraft3Directory.h>
-#include <YDWEConfig/Warcraft3Directory.cpp>
+#include <ydwe/warcraft3/directory.h>
 #include <ydwe/util/format.h>
 
 namespace fs = boost::filesystem;
@@ -167,7 +166,7 @@ static void DoTask()
 	}
 
 	fs::path gWarcraftDirectory;
-	if (!warcraft3_directory::get(__("Please choose your Warcraft 3 installation directory"), gWarcraftDirectory))
+	if (!ydwe::warcraft3::directory::get(__("Please choose your Warcraft 3 installation directory"), gWarcraftDirectory))
 	{
 		return ;
 	}
