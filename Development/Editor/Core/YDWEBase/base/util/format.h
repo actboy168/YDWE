@@ -186,8 +186,24 @@ private:
 		format_cast_string(oss.str().c_str());
 	}
 
+	const char* empty_string(const char*)
+	{
+		return "(null)";
+	}
+
+	const wchar_t* empty_string(const wchar_t*)
+	{
+		return L"(null)";
+	}
+
 	void format_cast_string(const char_t* value)
 	{
+		if (!value) 
+		{
+			format_cast_string(empty_string(value));
+			return ;
+		}
+
 		const char_t* first = value;
 		const char_t* next = first;
 
