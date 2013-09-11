@@ -9,7 +9,7 @@
 #include <base/util/string_ref.h>
 #include <boost/filesystem.hpp>
 
-_BASE_BEGIN 
+namespace base { 
 namespace i18n {
 
 	class mofile : public util::noncopyable
@@ -37,4 +37,4 @@ namespace i18n {
 	};
 }
 
-_BASE_END
+}

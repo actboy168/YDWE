@@ -3,7 +3,7 @@
 #include <base/hook/detail/replace_pointer.h>
 #include <cassert>
 
-_BASE_BEGIN namespace hook {
+namespace base { namespace hook {
 	iat_manager::iat_manager()
 		: iat_ptr_(new detail::import_address_table())
 	{ }

@@ -1,6 +1,6 @@
 #include <base/win/pe_reader.h>
 
-_BASE_BEGIN namespace win {
+namespace base { namespace win {
 
 	pe_reader::pe_reader() 
 		: module_(0) 

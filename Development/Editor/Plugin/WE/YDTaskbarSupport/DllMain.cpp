@@ -30,7 +30,7 @@ bool JumpListAddRecentTask(JumpList& jumpList, fs::path const& ydweDirectory, fs
 
 void Initialize()
 {
-	if (ydwe::win::version() < ydwe::win::VERSION_WIN7)
+	if (base::win::version() < base::win::VERSION_WIN7)
 	{
 		return ;
 	}
@@ -41,7 +41,7 @@ void Initialize()
 	jumpList.SetAppID(CurrentAppID().c_str());
 	if (jumpList.InitializeList())
 	{
-		fs::path ydweDirectory = ydwe::path::get(ydwe::path::DIR_MODULE).remove_filename().remove_filename();
+		fs::path ydweDirectory = base::path::get(base::path::DIR_MODULE).remove_filename().remove_filename();
 
 		jumpList.AddTaskSeparator();
 

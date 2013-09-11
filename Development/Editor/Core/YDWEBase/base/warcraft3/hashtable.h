@@ -5,7 +5,7 @@
 #include <base/warcraft3/detail/string_hash.h>
 #include <cstring>
 
-_BASE_BEGIN namespace warcraft3 {
+namespace base { namespace warcraft3 {
 
 	namespace hashtable
 	{

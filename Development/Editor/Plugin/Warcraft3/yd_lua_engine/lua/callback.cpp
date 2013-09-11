@@ -3,8 +3,7 @@
 #include <base/warcraft3/jass/trampoline_function.h>
 #include <Windows.h>
 
-_BASE_BEGIN
-namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine {
 
 	uintptr_t jass_read(jassbind* lj, jass::variable_type vt, int idx);
 
@@ -116,6 +115,4 @@ namespace warcraft3 { namespace lua_engine {
 		ls->pushvalue(index);
 		return jass::trampoline_create(jass_callback, (uintptr_t)luaL_ref(ls->self(), LUA_REGISTRYINDEX));
 	}
-}}
-
-_BASE_END
+}}}

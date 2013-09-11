@@ -5,9 +5,7 @@
 #include <base/warcraft3/version.h>
 #include <base/warcraft3/jass.h>
 
-_BASE_BEGIN
-
-namespace warcraft3 { namespace japi {
+namespace base { namespace warcraft3 { namespace japi {
 
 enum UNIT_STATE
 {
@@ -175,6 +173,4 @@ void InitializeUnitState()
 	//jass::async_add((uintptr_t)EXGetUnitObject, "EXGetUnitObject", "(Hunit;)I");
 }
 
-}}
-
-_BASE_END
+}}}

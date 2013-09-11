@@ -6,8 +6,7 @@
 #include <base/warcraft3/jass/global_variable.h>
 #include <base/util/singleton.h>
 
-_BASE_BEGIN
-namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine {
 
 	bool is_gaming()
 	{
@@ -314,6 +313,4 @@ namespace warcraft3 { namespace lua_engine {
 
 		return 1;
 	}
-}}
-
-_BASE_END
+}}}

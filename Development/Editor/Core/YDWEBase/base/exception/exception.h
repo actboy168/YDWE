@@ -5,7 +5,7 @@
 #include <cstdarg>
 #include <exception>
 
-_BASE_BEGIN 
+namespace base { 
 
 	class _BASE_API exception : public std::exception
 	{
@@ -28,4 +28,4 @@ _BASE_BEGIN
 		error_msg  what_;
 	};
 
-_BASE_END
+}

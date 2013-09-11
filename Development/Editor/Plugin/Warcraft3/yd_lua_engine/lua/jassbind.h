@@ -3,8 +3,7 @@
 #include <base/lua/state.h>
 #include <base/warcraft3/jass.h>
 
-_BASE_BEGIN
-namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine {
 
 	struct jassbind : public lua::state
 	{
@@ -24,6 +23,4 @@ namespace warcraft3 { namespace lua_engine {
 		jass::jhandle_t  read_handle (int index);
 		void             push_handle (jass::jhandle_t value);
 	};
-}}
-
-_BASE_END
+}}}

@@ -1,6 +1,6 @@
 #pragma once
 
-_BASE_BEGIN namespace warcraft3 {
+namespace base { namespace warcraft3 {
 	enum VERSION
 	{
 		version_100  = 4448,

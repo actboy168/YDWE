@@ -13,7 +13,7 @@ extern "C" IMAGE_DOS_HEADER __ImageBase;
 
 #define ENSURE(cond) if (FAILED(cond)) throw windows_exception(#cond " failed.");
 
-_BASE_BEGIN namespace path {
+namespace base { namespace path {
 
 	boost::filesystem::path get(PATH_TYPE type)
 	{

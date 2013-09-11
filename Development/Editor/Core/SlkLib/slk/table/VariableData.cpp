@@ -47,7 +47,7 @@ namespace slk
 			}
 			break;
 		default:
-			throw ydwe::exception("Unexpected data type: %d.", _type);
+			throw base::exception("Unexpected data type: %d.", _type);
 			break;
 		}
 	}

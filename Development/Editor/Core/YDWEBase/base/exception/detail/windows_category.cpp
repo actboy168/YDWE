@@ -5,7 +5,7 @@
 #include <Windows.h>
 #include <sstream>
 
-_BASE_BEGIN
+namespace base {
 
 namespace exception_detail
 {
@@ -55,4 +55,4 @@ namespace exception_detail
 	}
 }
 
-_BASE_END
+}

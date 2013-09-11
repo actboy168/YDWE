@@ -6,7 +6,7 @@
 
 #pragma comment(lib, "version.lib")
 
-_BASE_BEGIN namespace win {
+namespace base { namespace win {
 
 	file_version::file_version() 
 		: fixed_file_info_(nullptr)

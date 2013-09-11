@@ -17,12 +17,12 @@ namespace luabind
 
 		std::wstring from(lua_State* L, int index)
 		{
-			return ydwe::util::a2w(std::string(lua_tostring(L, index), lua_strlen(L, index)));
+			return base::util::a2w(std::string(lua_tostring(L, index), lua_strlen(L, index)));
 		}
 
 		void to(lua_State* L, std::wstring const& value)
 		{
-			std::string utf8_value = ydwe::util::w2a(value);
+			std::string utf8_value = base::util::w2a(value);
 			lua_pushlstring(L, utf8_value.data(), utf8_value.size());
 		}
 	};

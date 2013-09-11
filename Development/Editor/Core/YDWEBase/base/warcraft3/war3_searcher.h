@@ -3,7 +3,7 @@
 #include <base/config.h>
 #include <base/warcraft3/basic_searcher.h>
 
-_BASE_BEGIN namespace warcraft3 {
+namespace base { namespace warcraft3 {
 
 	class _BASE_API war3_searcher : public basic_searcher
 	{

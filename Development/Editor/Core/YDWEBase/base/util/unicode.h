@@ -5,7 +5,7 @@
 #include <base/util/string_ref.h>
 #include <cstdint>
 
-_BASE_BEGIN 
+namespace base { 
 namespace util {
 	class conv_method
 	{
@@ -51,4 +51,4 @@ namespace util {
 
 	_BASE_API bool is_utf8(const char *source);
 }
-_BASE_END
+}

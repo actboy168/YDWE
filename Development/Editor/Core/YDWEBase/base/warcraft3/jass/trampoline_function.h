@@ -4,7 +4,7 @@
 #include <base/util/horrible_cast.h>
 #include <cstdint>
 
-_BASE_BEGIN 
+namespace base { 
 namespace warcraft3 { namespace jass {
 
 	_BASE_API uintptr_t trampoline_create(uintptr_t param_,  uintptr_t callback_);
@@ -21,4 +21,4 @@ namespace warcraft3 { namespace jass {
 	}
 }}
 
-_BASE_END						
+}						

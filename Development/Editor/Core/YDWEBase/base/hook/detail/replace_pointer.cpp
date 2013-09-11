@@ -2,7 +2,7 @@
 #include <base/hook/detail/memory_protect.h>
 #include <Windows.h>
 
-_BASE_BEGIN namespace hook { namespace detail {
+namespace base { namespace hook { namespace detail {
 	uintptr_t replace_pointer(uintptr_t address, uintptr_t new_value)
 	{
 		uintptr_t old_value = 0;

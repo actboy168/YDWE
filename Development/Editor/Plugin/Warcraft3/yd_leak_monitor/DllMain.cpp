@@ -82,7 +82,7 @@ namespace monitor
 	public: \
 		static void initialize() \
 		{ \
-			ydwe::warcraft3::jass::async_hook(porc_name, &real_proc, (uintptr_t)fake_proc); \
+			base::warcraft3::jass::async_hook(porc_name, &real_proc, (uintptr_t)fake_proc); \
 		} \
 	private: \
 		static uintptr_t real_proc; \
@@ -103,7 +103,7 @@ namespace monitor
 	public:
 		static void initialize()
 		{
-			ydwe::warcraft3::jass::async_hook(porc_name, &real_proc, (uintptr_t)fake_proc);
+			base::warcraft3::jass::async_hook(porc_name, &real_proc, (uintptr_t)fake_proc);
 		}
 
 	private:
@@ -122,7 +122,7 @@ namespace monitor
 static uintptr_t RealGetLocalizedHotkey = 0;
 uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 {
-	const char* str = ydwe::warcraft3::jass::from_string(s);
+	const char* str = base::warcraft3::jass::from_string(s);
 	if (str && (0 == strncmp("yd_leak_monitor::", str, sizeof("yd_leak_monitor::")-1)))
 	{
 		if (strcmp(str + (sizeof("yd_leak_monitor::")-1), commonj::location) == 0)
@@ -191,7 +191,7 @@ void Initialize()
 	monitor::creater  <commonj::force,    0, commonj::CreateForce>::initialize();
 	monitor::destroyer<commonj::force, commonj::DestroyForce>::initialize();
 
-	ydwe::warcraft3::jass::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
+	base::warcraft3::jass::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID /*pReserved*/)

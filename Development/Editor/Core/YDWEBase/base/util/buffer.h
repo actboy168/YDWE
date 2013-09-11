@@ -7,7 +7,7 @@
 #include <vector>
 #include <streambuf>
 
-_BASE_BEGIN 
+namespace base { 
 namespace util {
 
 	class buffer
@@ -262,4 +262,4 @@ namespace util {
 	};		 
 #pragma warning(pop)
 }
-_BASE_END
+}

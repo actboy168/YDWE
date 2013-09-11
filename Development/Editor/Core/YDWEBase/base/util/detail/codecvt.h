@@ -6,7 +6,7 @@
 #include <locale>
 #include <string>
 
-_BASE_BEGIN 
+namespace base { 
 namespace util { namespace detail {
 	typedef std::codecvt<wchar_t, char, std::mbstate_t> codecvt_type;
 
@@ -35,4 +35,4 @@ namespace util { namespace detail {
 		return std::move(to);
 	}
 }}
-_BASE_END
+}

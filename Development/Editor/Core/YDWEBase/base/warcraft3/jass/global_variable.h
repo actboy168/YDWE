@@ -6,7 +6,7 @@
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/jass/func_value.h>
 
-_BASE_BEGIN 
+namespace base { 
 namespace warcraft3 { namespace jass {
 
 	inline variable_type opcode_type_to_var_type(OPCODE_VARIABLE_TYPE opt)
@@ -55,4 +55,4 @@ namespace warcraft3 { namespace jass {
 		hashtable::variable_node* ptr_;
 	};
 }}
-_BASE_END 
+} 

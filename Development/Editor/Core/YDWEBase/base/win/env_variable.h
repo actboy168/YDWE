@@ -4,7 +4,7 @@
 #include <boost/optional.hpp>
 #include <string>
 
-_BASE_BEGIN namespace win {
+namespace base { namespace win {
 
 	class _BASE_API env_variable
 	{

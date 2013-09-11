@@ -1,6 +1,6 @@
 #include <base/hook/detail/disassembly.h>
 
-_BASE_BEGIN namespace hook { namespace detail {
+namespace base { namespace hook { namespace detail {
 
 	enum OP_FLAG
 	{

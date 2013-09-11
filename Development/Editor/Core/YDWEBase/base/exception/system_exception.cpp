@@ -1,6 +1,6 @@
 #include <base/exception/system_exception.h>
 
-_BASE_BEGIN
+namespace base {
 
 system_exception::system_exception(const std::error_code& ec, const char* reason)
 	: error_code_(ec)
@@ -13,4 +13,4 @@ const std::error_code& system_exception::code() const
 	return error_code_;
 }
 
-_BASE_END
+}

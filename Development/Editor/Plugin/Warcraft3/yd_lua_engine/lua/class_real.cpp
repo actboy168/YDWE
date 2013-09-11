@@ -3,8 +3,7 @@
 #include "../lua/jassbind.h"
 #include <base/util/format.h>
 
-_BASE_BEGIN
-namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine {
 
 #define LUA_JASS_REAL "jreal_t"
 
@@ -279,5 +278,4 @@ namespace warcraft3 { namespace lua_engine {
 
 		return 0;
 	}
-}}
-_BASE_END
+}}}

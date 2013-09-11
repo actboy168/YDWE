@@ -7,7 +7,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 	if (reason == DLL_PROCESS_ATTACH)
 	{
 		::DisableThreadLibraryCalls(module);
-		g_fontptr.reset(new FontManager(ydwe::path::get(ydwe::path::DIR_MODULE).parent_path()));
+		g_fontptr.reset(new FontManager(base::path::get(base::path::DIR_MODULE).parent_path()));
 	}
 	else if (reason == DLL_PROCESS_DETACH)
 	{

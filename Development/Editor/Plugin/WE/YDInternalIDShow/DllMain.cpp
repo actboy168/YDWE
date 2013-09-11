@@ -49,12 +49,12 @@ static void InitHook()
 {
 	fpgSlkStringGet = (uintptr_t)0x00515670;
 
-	ydwe::hook::inline_install(&fpgSlkStringGet, (uintptr_t)SlkStringGetHook);
+	base::hook::inline_install(&fpgSlkStringGet, (uintptr_t)SlkStringGetHook);
 }
 
 static void CleanHook()
 {
-	ydwe::hook::inline_uninstall(&fpgSlkStringGet, (uintptr_t)SlkStringGetHook);
+	base::hook::inline_uninstall(&fpgSlkStringGet, (uintptr_t)SlkStringGetHook);
 }
 
 HMODULE gSelfModule;

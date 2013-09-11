@@ -2,7 +2,7 @@
 
 #include <base/config.h>
 
-_BASE_BEGIN
+namespace base {
 namespace win {
 	enum Version 
 	{
@@ -17,4 +17,4 @@ namespace win {
 
 	Version _BASE_API version();
 }
-_BASE_END
+}

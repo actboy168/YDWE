@@ -18,7 +18,7 @@ static int RunCommand(const char *command)
 {
 	int result = -1;
 
-	std::wstring wCommand = ydwe::util::a2w(command);
+	std::wstring wCommand = base::util::a2w(command);
 	boost::replace_all(wCommand, L"'", L"\"");
 
 	int argc;

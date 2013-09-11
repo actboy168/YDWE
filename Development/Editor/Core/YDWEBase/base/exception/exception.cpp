@@ -5,7 +5,7 @@
 #include <cassert>
 #include <cstdint>
 
-_BASE_BEGIN 
+namespace base { 
 
 #define YD_VA_START(v)  ((va_list)_ADDRESSOF(v) + _INTSIZEOF(v))
 
@@ -84,9 +84,9 @@ _BASE_BEGIN
 
 	const char* exception::what() const
 	{
-		return what_ ? what_.c_str() : "unknown ydwe::exception";
+		return what_ ? what_.c_str() : "unknown base::exception";
 	}
 
 #undef YD_VA_START
 
-_BASE_END
+}

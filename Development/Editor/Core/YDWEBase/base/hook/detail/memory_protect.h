@@ -3,7 +3,7 @@
 #include <base/config.h>
 #include <Windows.h>
 
-_BASE_BEGIN 
+namespace base { 
 namespace hook { namespace detail {
 	class memory_protect
 	{
@@ -18,4 +18,4 @@ namespace hook { namespace detail {
 		DWORD access_;
 	};
 }}
-_BASE_END
+}

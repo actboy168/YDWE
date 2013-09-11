@@ -181,7 +181,7 @@ namespace slk
 
 				if ((x == 0) || (y == 0))
 				{
-					throw ydwe::exception("slk data corrupted.") ;
+					throw base::exception("slk data corrupted.") ;
 				}
 
 				this->assign(x, y);
@@ -296,7 +296,7 @@ namespace slk
 	{
 		if (!reader.read_ptr<SLK_HEADER>()->IsValid())
 		{
-			throw ydwe::exception("slk data corrupted.") ;
+			throw base::exception("slk data corrupted.") ;
 		}
 
 		SlkDataArray(reader).convert(table);

@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <cassert>
 
-_BASE_BEGIN 
+namespace base { 
 namespace hook { namespace assembler {
 	struct reg
 	{
@@ -54,4 +54,4 @@ namespace hook { namespace assembler {
 	const reg edi    = { c_register_edi_code };
 	const reg no_reg = { c_register_no_reg_code };
 }}
-_BASE_END
+}

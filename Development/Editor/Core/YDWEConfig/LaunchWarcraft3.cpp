@@ -10,15 +10,15 @@
 bool launch_warcraft3()
 {
 	try {
-		boost::filesystem::path ydwe_path = ydwe::path::get(ydwe::path::DIR_EXE).remove_filename().remove_filename();
+		boost::filesystem::path ydwe_path = base::path::get(base::path::DIR_EXE).remove_filename().remove_filename();
 
-		ydwe::win::env_variable ev(L"PATH");
+		base::win::env_variable ev(L"PATH");
 		std::wstring p;
 		p += (ydwe_path / L"bin").c_str();    p += L";"; 
 		ev.set(p + ev.get());
 
 		boost::filesystem::path war3_path;
-		if (!ydwe::warcraft3::directory::get(nullptr, war3_path))
+		if (!base::warcraft3::directory::get(nullptr, war3_path))
 		{
 			return false;
 		}
@@ -30,7 +30,7 @@ bool launch_warcraft3()
 		table["MapTest"]["LaunchOpenGL"]   = "0";
 		table["MapTest"]["LaunchWindowed"] = "1";
 		try {
-			slk::buffer buf = ydwe::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
+			slk::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
 			slk::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		} 
@@ -47,7 +47,7 @@ bool launch_warcraft3()
 			command_line += L" -window";
 		}
 
-		ydwe::win::process warcraft3_process;
+		base::win::process warcraft3_process;
 
 		if (boost::filesystem::exists(inject_dll))
 		{

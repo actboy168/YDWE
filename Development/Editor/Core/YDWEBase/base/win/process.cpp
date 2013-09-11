@@ -7,7 +7,7 @@
 #include <cassert>
 #include <detours.h>
 
-_BASE_BEGIN
+namespace base {
 
 namespace win {
 
@@ -363,4 +363,4 @@ namespace win {
 	}
 }
 
-_BASE_END
+}

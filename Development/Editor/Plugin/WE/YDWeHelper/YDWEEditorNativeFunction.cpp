@@ -314,10 +314,10 @@ void NativeInit()
 	LOG4CXX_DEBUG(gInjectLogger, "WE native function initialization begins.");
 
 	fpgWeTemplateStringTranslate = MemoryPatternSearch((void *)pWeTextSectionBase, weTextSectionLength, &gWeTemplateStringTranslatePattern[0], sizeof(gWeTemplateStringTranslatePattern));
-	LOG4CXX_TRACE(gInjectLogger, ydwe::util::format("Found WeTranlateTemplateString at 0x%08X.", fpgWeTemplateStringTranslate));
+	LOG4CXX_TRACE(gInjectLogger, base::util::format("Found WeTranlateTemplateString at 0x%08X.", fpgWeTemplateStringTranslate));
 
 	fpgWeMessageShow = MemoryPatternSearch((void *)pWeTextSectionBase, weTextSectionLength, &gWeMessageShowPattern[0], sizeof(gWeMessageShowPattern));
-	LOG4CXX_TRACE(gInjectLogger, ydwe::util::format("Found WeMessageShow at 0x%08X.", fpgWeMessageShow));
+	LOG4CXX_TRACE(gInjectLogger, base::util::format("Found WeMessageShow at 0x%08X.", fpgWeMessageShow));
 
 	LOG4CXX_DEBUG(gInjectLogger, "WE native function initialization finished.");
 }

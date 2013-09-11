@@ -7,9 +7,7 @@
 #include <aero/function/fp_call.hpp>
 #include <base/hook/inline.h>
 
-
-_BASE_BEGIN
-namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine {
 
 
 	int  install_jass_hook(jassbind*, const jass::func_value* nf, const char* name, const callback& fake_func);
@@ -79,6 +77,4 @@ namespace warcraft3 { namespace lua_engine {
 		ls->setglobal("jass_ext");
 		return 1;
 	}
-}}
-
-_BASE_END
+}}}

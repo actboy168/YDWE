@@ -4,7 +4,7 @@
 #include <boost/filesystem.hpp>
 #include <Windows.h>
 
-_BASE_BEGIN
+namespace base {
 
 namespace win {
 
@@ -46,4 +46,4 @@ namespace win {
 	);
 }
 
-_BASE_END
+}

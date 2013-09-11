@@ -1,6 +1,6 @@
 #include <base/util/unicode.h>
 
-_BASE_BEGIN namespace util {
+namespace base { namespace util {
 
 	static const char g_trailing_bytes_for_utf8[] = {
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 

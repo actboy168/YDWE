@@ -130,7 +130,7 @@ FontManager::FontManager(fs::path&& module_path)
 
 		if (font_ != NULL)
 		{
-			CreateWindowExANextHook = (fnCreateWindowExA)ydwe::hook::iat(
+			CreateWindowExANextHook = (fnCreateWindowExA)base::hook::iat(
 				::GetModuleHandle(NULL),
 				"user32.dll",
 				"CreateWindowExA",
@@ -146,7 +146,7 @@ FontManager::~FontManager()
 	if (font_)
 	{
 		::DeleteObject(font_);
-		ydwe::hook::iat(::GetModuleHandle(NULL),
+		base::hook::iat(::GetModuleHandle(NULL),
 			"user32.dll",
 			"CreateWindowExA",
 			(uintptr_t)CreateWindowExANextHook);

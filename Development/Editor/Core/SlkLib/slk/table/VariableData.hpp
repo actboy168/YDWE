@@ -50,7 +50,7 @@ namespace slk
 				buf.push_back('\0');
 				break;
 			default:
-				throw ydwe::exception("Unexpected data type: %d.", _type);
+				throw base::exception("Unexpected data type: %d.", _type);
 				break;
 			}
 		}

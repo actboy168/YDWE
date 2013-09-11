@@ -5,8 +5,7 @@
 #include <map>
 #include <string>
 
-_BASE_BEGIN
-namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int jass_call_closure(lua_State* L);
 
@@ -43,6 +42,4 @@ namespace warcraft3 { namespace lua_engine {
 		ls->setglobal("japi");
 		return 1;
 	}
-}}
-
-_BASE_END
+}}}

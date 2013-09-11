@@ -1,7 +1,7 @@
 #include <base/warcraft3/event.h>
 #include <base/warcraft3/jass/nf_register.h>
 
-_BASE_BEGIN 
+namespace base { 
 namespace warcraft3 {
 	void register_game_reset_event(std::function<void(void)> func)
 	{
@@ -9,4 +9,4 @@ namespace warcraft3 {
 		jass::nf_register::event_hook.connect(func);
 	}
 }
-_BASE_END
+}

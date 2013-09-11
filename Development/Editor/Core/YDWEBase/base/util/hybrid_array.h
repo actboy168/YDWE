@@ -5,7 +5,7 @@
 #include <iterator>
 #include <type_traits>
 
-_BASE_BEGIN 
+namespace base { 
 namespace util {
 
 	template <typename T, size_t SIZE>
@@ -136,4 +136,4 @@ namespace util {
 	};
 
 }
-_BASE_END
+}

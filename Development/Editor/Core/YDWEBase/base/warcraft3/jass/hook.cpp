@@ -14,7 +14,7 @@
 #include <string>
 #include <algorithm>
 
-_BASE_BEGIN 
+namespace base { 
 namespace warcraft3 { namespace jass {
 
 	bool table_hook     (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
@@ -348,4 +348,4 @@ namespace warcraft3 { namespace jass {
 			&& japi_func_add(name, func, param);
 	}
 }}
-_BASE_END
+}

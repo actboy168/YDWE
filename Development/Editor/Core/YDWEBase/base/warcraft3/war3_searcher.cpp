@@ -2,7 +2,7 @@
 #include <base/warcraft3/version.h>
 #include <base/util/singleton.h>
 
-_BASE_BEGIN namespace warcraft3 {
+namespace base { namespace warcraft3 {
 
 	war3_searcher::war3_searcher()
 		: _Mybase(::GetModuleHandleW(L"Game.dll"))

@@ -3,7 +3,7 @@
 #include <base/config.h>
 #include <boost/filesystem.hpp>
 
-_BASE_BEGIN namespace path {
+namespace base { namespace path {
 	enum PATH_TYPE
 	{
 		DIR_EXE = 0,

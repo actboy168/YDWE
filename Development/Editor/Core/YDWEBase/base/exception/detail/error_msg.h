@@ -1,7 +1,7 @@
 #include <base/config.h>
 #include <Windows.h>
 
-_BASE_BEGIN
+namespace base {
 
 namespace exception_detail
 {
@@ -109,4 +109,4 @@ namespace exception_detail
 	};
 }
 
-_BASE_END
+}

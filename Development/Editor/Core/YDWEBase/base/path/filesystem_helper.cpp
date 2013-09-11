@@ -1,6 +1,6 @@
 #include <base/path/filesystem_helper.h>
 
-_BASE_BEGIN namespace path {
+namespace base { namespace path {
 
 	bool equal(boost::filesystem::path const& lhs, boost::filesystem::path const& rhs)
 	{

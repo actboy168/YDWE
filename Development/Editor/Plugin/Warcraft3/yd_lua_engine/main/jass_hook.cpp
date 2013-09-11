@@ -13,8 +13,7 @@
 
 #define CACHE_ALIGN __declspec(align(32))
 
-_BASE_BEGIN
-namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine {
 
 	bool jass_push(jassbind* lj, jass::variable_type vt, uint32_t value);
 	int  jass_call_native_function(jassbind* lj, const jass::func_value* nf, uintptr_t func_address = 0);
@@ -174,6 +173,4 @@ namespace warcraft3 { namespace lua_engine {
 		g_hook_info_mapping[name]->uninstall();
 		return 0;
 	}
-}}
-
-_BASE_END
+}}}

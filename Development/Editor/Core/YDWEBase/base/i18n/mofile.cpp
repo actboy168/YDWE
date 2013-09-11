@@ -2,7 +2,7 @@
 #include <base/file/stream.h>
 #include <base/util/dynarray.h>
 
-_BASE_BEGIN 
+namespace base { 
 namespace i18n {
 
 	namespace detail
@@ -142,4 +142,4 @@ namespace i18n {
 	}
 }
 
-_BASE_END
+}

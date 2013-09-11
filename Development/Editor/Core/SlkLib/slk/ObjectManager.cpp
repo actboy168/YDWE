@@ -135,14 +135,14 @@ namespace slk
 		buffer buf(storm_.load(szFilename, ec));
 		if (ec != 0)
 		{
-			throw ydwe::exception("Not found file %s.", szFilename);
+			throw base::exception("Not found file %s.", szFilename);
 		}
 		return std::move(buf);
 	}
 
 	bool ObjectManager::save_file(const char* szFilename, buffer&& buf)
 	{
-		ydwe::file::write_stream(szFilename).write(std::forward<buffer>(buf));
+		base::file::write_stream(szFilename).write(std::forward<buffer>(buf));
 		return false;
 	}
 	
@@ -160,10 +160,10 @@ namespace slk
 				TableRead<ObjReader>(table, load_file(detail::FileList(type)));
 				break;
 			default:
-				throw ydwe::exception("Unknown object type %d.", type);
+				throw base::exception("Unknown object type %d.", type);
 			}
 		}
-		catch (ydwe::exception const&)
+		catch (base::exception const&)
 		{
 			return false;
 		}
@@ -184,10 +184,10 @@ namespace slk
 				TableRead<ObjReader>(table, load_file(detail::FileList(type)));
 				break;
 			default:
-				throw ydwe::exception("Unknown object type %d.", type);
+				throw base::exception("Unknown object type %d.", type);
 			}
 		}
-		catch (ydwe::exception const&)
+		catch (base::exception const&)
 		{
 			return false;
 		}
@@ -216,10 +216,10 @@ namespace slk
 				TableRead<SlkReader>(table, load_file(detail::FileList(type)));
 				break;
 			default:
-				throw ydwe::exception("Unknown slk type %d.", type);
+				throw base::exception("Unknown slk type %d.", type);
 			}
 		}
-		catch (ydwe::exception const&)
+		catch (base::exception const&)
 		{
 			return false;
 		}
@@ -279,10 +279,10 @@ namespace slk
 				TableRead<TxtReader>(table, load_file(detail::FileList(type)));
 				break;
 			default:
-				throw ydwe::exception("Unknown txt type %d.", type);
+				throw base::exception("Unknown txt type %d.", type);
 			}
 		}
-		catch (ydwe::exception const&)
+		catch (base::exception const&)
 		{
 			return false;
 		}
@@ -307,10 +307,10 @@ namespace slk
 				TableRead<MetaReader>(table, load_file(detail::FileList(type)));
 				break;
 			default:
-				throw ydwe::exception("Unknown MetaSlk type %d.", type);
+				throw base::exception("Unknown MetaSlk type %d.", type);
 			}
 		}
-		catch (ydwe::exception const&)
+		catch (base::exception const&)
 		{
 			return false;
 		}
@@ -483,7 +483,7 @@ namespace slk
 						return false;
 				}
 			}
-			catch (ydwe::exception const&)
+			catch (base::exception const&)
 			{
 				return false;
 			}
@@ -506,7 +506,7 @@ namespace slk
 				ObjTableToSlkTable(table, objTable, metaTable, mgr.get_converter());
 
 			}
-			catch (ydwe::exception const&)
+			catch (base::exception const&)
 			{
 				return false;
 			}
@@ -523,7 +523,7 @@ namespace slk
 				SlkTableToObjTable(objTable, table, metaTable);
 				return mgr.save(static_cast<OBJ_TYPE::ENUM>(type), objTable);
 			}
-			catch (ydwe::exception const&)
+			catch (base::exception const&)
 			{
 				return false;
 			}
@@ -539,7 +539,7 @@ namespace slk
 			buffer_reader reader(b);
 			IniReader::Read(reader, table);		
 		}
-		catch (ydwe::exception const&) {
+		catch (base::exception const&) {
 			return false;
 		}
 		return true;
@@ -551,7 +551,7 @@ namespace slk
 		try {
 			TableRead<SlkReader>(table, load_file(filename));	
 		}
-		catch (ydwe::exception const&) {
+		catch (base::exception const&) {
 			return false;
 		}
 		return true;
@@ -614,7 +614,7 @@ namespace slk
 				return false;
 			}
 		}
-		catch (ydwe::exception const&)
+		catch (base::exception const&)
 		{
 			return false;
 		}
@@ -636,7 +636,7 @@ namespace slk
 				return false;
 			}
 		}
-		catch (ydwe::exception const&)
+		catch (base::exception const&)
 		{
 			return false;
 		}

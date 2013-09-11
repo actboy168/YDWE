@@ -5,8 +5,7 @@
 #include <lua.hpp>
 #include <cstdint>
 
-_BASE_BEGIN
-namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine {
 
 	lua::state*&        instance();	
 	void                do_buffer(const char* name, const char* buffer, size_t size);
@@ -27,6 +26,4 @@ namespace warcraft3 { namespace lua_engine {
 	};
 
 
-}}
-
-_BASE_END
+}}}

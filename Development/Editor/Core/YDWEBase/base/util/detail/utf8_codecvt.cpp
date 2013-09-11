@@ -3,7 +3,7 @@
 #include <base/util/detail/utf8_codecvt.h>
 
 
-_BASE_BEGIN 
+namespace base { 
 namespace util { namespace detail {
 	namespace
 	{
@@ -217,4 +217,4 @@ namespace util { namespace detail {
 	}
 	
 }} 
-_BASE_END
+}

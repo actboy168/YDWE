@@ -4,8 +4,7 @@
 #include <base/warcraft3/hashtable.h>
 #include <cstdint>
 
-_BASE_BEGIN
-namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine {
 
 	jass::jinteger_t jassbind::read_integer(int index) 
 	{
@@ -91,6 +90,4 @@ namespace warcraft3 { namespace lua_engine {
 			mybase::pushnil();
 	}
 
-}}
-
-_BASE_END
+}}}

@@ -64,7 +64,7 @@ CMainWindow::CMainWindow()
 {
 	try
 	{
-		m_ydwe_path = ydwe::path::get(ydwe::path::DIR_EXE).remove_filename().remove_filename() / L"YDWE.exe";
+		m_ydwe_path = base::path::get(base::path::DIR_EXE).remove_filename().remove_filename() / L"YDWE.exe";
 	}
 	catch (...)
 	{
@@ -83,7 +83,7 @@ void CMainWindow::OnFinalMessage(HWND /*hWnd*/)
 
 fs::path CMainWindow::GetSkinZip() const 
 {
-	return std::move(ydwe::path::self().remove_filename() / L"skin.zip"); 
+	return std::move(base::path::self().remove_filename() / L"skin.zip"); 
 }
 
 void CMainWindow::ContrlSelected(std::string const& name, bool bSelect)
@@ -109,12 +109,12 @@ void CMainWindow::InitWindow()
 			for (uint8_t i = 0; i < attribute.Count(); ++i)
 			{
 				std::string radioname = name + "_" + std::to_string((long long)i);
-				m_controls[radioname] = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(ydwe::util::u2w(radioname).c_str()));
+				m_controls[radioname] = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(base::util::u2w(radioname).c_str()));
 			}
 		}
 		else
 		{
-			m_controls[name] = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(ydwe::util::u2w(name).c_str()));
+			m_controls[name] = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(base::util::u2w(name).c_str()));
 		}
 	}
 
@@ -161,7 +161,7 @@ bool CMainWindow::LoadConfig(slk::IniTable& table)
 	try
 	{
 		ResetConfig(table);
-		slk::buffer buf = ydwe::file::read_stream(ydwe::path::self().remove_filename() / L"EverConfig.cfg").read<slk::buffer>();
+		slk::buffer buf = base::file::read_stream(base::path::self().remove_filename() / L"EverConfig.cfg").read<slk::buffer>();
 		slk::buffer_reader reader(buf);
 		slk::IniReader::Read(reader, table);
 	}
@@ -177,7 +177,7 @@ bool CMainWindow::SaveConfig(slk::IniTable const& table)
 {
 	try
 	{
-		ydwe::file::write_stream(ydwe::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
+		base::file::write_stream(base::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
 	}
 	catch (...)
 	{
@@ -296,7 +296,7 @@ void CMainWindow::DoneRegistryUI()
 
 void CMainWindow::InitOSHelpUI()
 {
-	if (ydwe::win::version() >= ydwe::win::VERSION_WIN7)
+	if (base::win::version() >= base::win::VERSION_WIN7)
 	{
 		m_pShortcuts_taskbar->SetText(L"固定到任务栏");
 	}
@@ -391,7 +391,7 @@ void CMainWindow::InitPluginUI()
 
 		slk::IniTable table;
 		try {
-			slk::buffer buf = ydwe::file::read_stream(plugin_path / L"config.cfg").read<slk::buffer>();
+			slk::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<slk::buffer>();
 			slk::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);	
 		}
@@ -404,10 +404,10 @@ void CMainWindow::InitPluginUI()
 			try {
 				if (!fs::is_directory(*itr))
 				{
-					if (ydwe::path::equal(itr->path().extension(), L".dll") 
-						&& (!ydwe::path::equal(itr->path().filename(), L"yd_loader.dll")))
+					if (base::path::equal(itr->path().extension(), L".dll") 
+						&& (!base::path::equal(itr->path().filename(), L"yd_loader.dll")))
 					{
-						ydwe::win::file_version fv(itr->path().c_str());
+						base::win::file_version fv(itr->path().c_str());
 
 						DuiLib::CCheckBoxUI* node = new DuiLib::CCheckBoxUI;
 						m_pWar3PluginList->Add(node);
@@ -415,7 +415,7 @@ void CMainWindow::InitPluginUI()
 						node->SetAttribute(L"class", L"CheckBox");
 						node->SetAttribute(L"text", fv[L"FileDescription"]);
 						node->SetAttribute(L"tooltip", itr->path().filename().c_str());
-						node->Selected("0" != table["Enable"][ydwe::util::w2u(itr->path().filename().wstring())]);
+						node->Selected("0" != table["Enable"][base::util::w2u(itr->path().filename().wstring())]);
 					}
 				}
 			}
@@ -442,12 +442,12 @@ void CMainWindow::DonePluginUI()
 			if (pCheckBox)
 			{
 				
-				table["Enable"][ydwe::util::w2u(pCheckBox->GetToolTip())] = pCheckBox->IsSelected()? "1": "0";
+				table["Enable"][base::util::w2u(pCheckBox->GetToolTip())] = pCheckBox->IsSelected()? "1": "0";
 			}
 		}
 
 		fs::path plugin_path = m_ydwe_path.parent_path() / L"plugin" / L"warcraft3";
-		ydwe::file::write_stream(plugin_path/ L"config.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
+		base::file::write_stream(plugin_path/ L"config.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
 	}
 	catch (...) {
 	}
@@ -474,7 +474,7 @@ void CMainWindow::InitPatchUI(slk::IniTable& table)
 				if (fs::exists(game_dll) && fs::exists(patch_mpq))
 				{
 					patch.normalize();
-					ydwe::win::file_version versionInfo(game_dll.c_str());
+					base::win::file_version versionInfo(game_dll.c_str());
 
 					DuiLib::CRadioButtonUI* node = new DuiLib::CRadioButtonUI;
 					m_pWar3PatchList->Add(node);
@@ -483,7 +483,7 @@ void CMainWindow::InitPatchUI(slk::IniTable& table)
 					node->SetAttribute(L"group", L"War3PatchItem");
 					node->SetAttribute(L"text", (std::wstring(L"[") + versionInfo[L"FileVersion"] + L"]" + patch.filename().wstring()).c_str());
 					node->SetAttribute(L"tooltip", patch.c_str());
-					node->Selected(ydwe::path::equal(patch.filename(), table["War3Patch"]["DirName"]));
+					node->Selected(base::path::equal(patch.filename(), table["War3Patch"]["DirName"]));
 					empty = false;
 				}
 			}
@@ -513,7 +513,7 @@ void CMainWindow::DonePatchUI(slk::IniTable& table)
 			DuiLib::CRadioButtonUI* pRadioButton = dynamic_cast<DuiLib::CRadioButtonUI*>(pControl);
 			if (pRadioButton && pRadioButton->IsSelected())
 			{
-				table["War3Patch"]["DirName"] = ydwe::util::w2u(fs::path(pRadioButton->GetToolTip()).filename().wstring());
+				table["War3Patch"]["DirName"] = base::util::w2u(fs::path(pRadioButton->GetToolTip()).filename().wstring());
 				return false;
 			}
 			return true;
@@ -526,7 +526,7 @@ void CMainWindow::UpdateWarcraft3Directory()
 	if (m_pWarcraft3Directory)
 	{
 		boost::filesystem::path result;
-		if (ydwe::warcraft3::directory::read(result))
+		if (base::warcraft3::directory::read(result))
 		{
 			m_pWarcraft3Directory->SetText(result.c_str());
 		}
@@ -599,7 +599,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 			}
 			else if (name == _T("choose_war3_dir"))
 			{
-				if (ydwe::warcraft3::directory::choose(nullptr))
+				if (base::warcraft3::directory::choose(nullptr))
 				{
 					UpdateWarcraft3Directory();
 				}

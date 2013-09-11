@@ -1,7 +1,7 @@
 #include <base/exception/windows_exception.h>
 #include <base/exception/detail/windows_category.h>
 
-_BASE_BEGIN
+namespace base {
 
 namespace exception_detail {
 	const std::error_category& __cdecl windows_category()
@@ -15,4 +15,4 @@ windows_exception::windows_exception(const char* reason, int error_code)
 	: system_exception(std::error_code(error_code, exception_detail::windows_category()), reason)
 { }
 
-_BASE_END
+}

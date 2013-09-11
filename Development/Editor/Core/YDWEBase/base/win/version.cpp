@@ -1,7 +1,7 @@
 #include <base/win/version.h>
 #include <Windows.h>
 
-_BASE_BEGIN
+namespace base {
 namespace win {
 
 	Version version()
@@ -36,4 +36,4 @@ namespace win {
 		return version_;
 	}
 }
-_BASE_END
+}

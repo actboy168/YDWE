@@ -4,6 +4,6 @@
 
 namespace slk
 {
-	using ydwe::util::buffer;
-	using ydwe::util::buffer_reader;
+	using base::util::buffer;
+	using base::util::buffer_reader;
 }

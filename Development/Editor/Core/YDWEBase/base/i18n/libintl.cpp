@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <Windows.h>
 
-_BASE_BEGIN namespace i18n {
+namespace base { namespace i18n {
 
 	class manager
 	{

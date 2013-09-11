@@ -7,7 +7,7 @@
 #include <aero/function/fp_call.hpp>
 #include <map>
 
-_BASE_BEGIN 
+namespace base { 
 namespace warcraft3 { namespace jass {
 
 	namespace detail {
@@ -80,4 +80,4 @@ namespace warcraft3 { namespace jass {
 	}
 }}
 
-_BASE_END
+}

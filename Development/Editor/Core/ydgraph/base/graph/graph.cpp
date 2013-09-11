@@ -7,14 +7,14 @@
 #include <boost/gil/extension/io/png_all.hpp>
 #pragma warning(pop)
 
-namespace ydwe { namespace graph {
+namespace base { namespace graph {
 	namespace detail
 	{
 		template <typename Image, typename FormatTag>
 		inline Image from_memory(char* ptr, size_t size, const FormatTag& settings)
 		{
 			Image img;
-			boost::gil::read_image(ydwe::util::buffer_stream(ptr, ptr + size)
+			boost::gil::read_image(base::util::buffer_stream(ptr, ptr + size)
 				, img
 				, settings
 				);

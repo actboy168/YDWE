@@ -1,7 +1,7 @@
 #include <base/file/file_mapping_handle.h>
 #include <base/exception/windows_exception.h>
 
-_BASE_BEGIN namespace file {
+namespace base { namespace file {
 
 	file_mapping_handle::file_mapping_handle(file_handle const& file, LPSECURITY_ATTRIBUTES lpAttributes, uint32_t flProtect, uint64_t dwMaximumSize, const wchar_t* name)
 		: _Mybase(::CreateFileMappingW(file.get(), lpAttributes, flProtect, static_cast<DWORD>(dwMaximumSize >> 32), static_cast<DWORD>(dwMaximumSize), name))

@@ -3,7 +3,7 @@
 #include <base/config.h>
 #include <lua.hpp>
 
-_BASE_BEGIN 
+namespace base { 
 namespace lua {
 
 	struct state
@@ -386,4 +386,4 @@ namespace lua {
 		}
 	};
 }
-_BASE_END
+}

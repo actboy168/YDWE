@@ -8,7 +8,7 @@
 #include <boost/gil/gil_all.hpp>
 #pragma warning(pop)
 
-namespace ydwe { namespace graph {
+namespace base { namespace graph {
 	typedef boost::gil::argb8_image_t image_t;
 	
 	_GRAPH_API image_t from_png (char* ptr, size_t size);

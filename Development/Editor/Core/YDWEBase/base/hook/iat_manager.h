@@ -5,7 +5,7 @@
 #include <list>
 #include <memory>
 
-_BASE_BEGIN namespace hook {
+namespace base { namespace hook {
 	namespace detail
 	{
 		class import_address_table;

@@ -5,7 +5,7 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <aero/function/fp_call.hpp>
 
-_BASE_BEGIN 
+namespace base { 
 namespace warcraft3 { namespace jass { namespace nf_register {
 
 	util::signal<void, void> event_hook;
@@ -143,4 +143,4 @@ namespace warcraft3 { namespace jass { namespace nf_register {
 	}
 
 }}}
-_BASE_END 
+} 

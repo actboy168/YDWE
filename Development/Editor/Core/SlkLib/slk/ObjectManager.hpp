@@ -140,7 +140,7 @@ namespace slk
 #pragma warning(push)
 #pragma warning(disable:4275)
 	class SLKLIB_API ObjectManager 
-		: private ydwe::util::noncopyable
+		: private base::util::noncopyable
 	{
 	public:
 		ObjectManager(InterfaceStorm& that);

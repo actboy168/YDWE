@@ -1,7 +1,7 @@
 #include <base/file/file_handle.h>
 #include <base/exception/windows_exception.h>
 
-_BASE_BEGIN namespace file {
+namespace base { namespace file {
 
 	file_handle::file_handle(LPCWSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
 		: _Mybase(::CreateFileW(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile))

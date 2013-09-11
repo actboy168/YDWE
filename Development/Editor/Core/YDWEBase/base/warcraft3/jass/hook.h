@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <vector>
 
-_BASE_BEGIN namespace warcraft3 { namespace jass {
+namespace base { namespace warcraft3 { namespace jass {
 
 	enum hook_type
 	{

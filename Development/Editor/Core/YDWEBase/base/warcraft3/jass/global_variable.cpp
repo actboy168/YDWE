@@ -1,6 +1,6 @@
 #include <base/warcraft3/jass/global_variable.h>
 
-_BASE_BEGIN 
+namespace base { 
 namespace warcraft3 { namespace jass {
 
 	global_variable::global_variable(const char* name)
@@ -59,4 +59,4 @@ namespace warcraft3 { namespace jass {
 	}
 }}
 
-_BASE_END 
+} 

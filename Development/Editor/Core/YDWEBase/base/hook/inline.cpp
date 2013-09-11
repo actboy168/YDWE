@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <detours.h>
 
-_BASE_BEGIN 
+namespace base { 
 namespace hook {
 	bool inline_install(uintptr_t* pointer_ptr, uintptr_t detour)
 	{
@@ -53,4 +53,4 @@ namespace hook {
 		return detail::replace_pointer(address, new_value);
 	}
 }
-_BASE_END
+}

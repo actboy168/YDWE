@@ -4,7 +4,7 @@
 #include <base/exception/exception.h>
 #include <system_error>
 
-_BASE_BEGIN
+namespace base {
 
 class _BASE_API system_exception : public exception
 {
@@ -17,4 +17,4 @@ protected:
 	std::error_code error_code_;
 };
 
-_BASE_END 
+} 

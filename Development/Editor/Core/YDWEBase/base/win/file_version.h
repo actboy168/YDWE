@@ -8,7 +8,7 @@
 #include <memory>
 #pragma warning(pop)
 
-_BASE_BEGIN
+namespace base {
 namespace win {
 	class _BASE_API file_version
 	{
@@ -50,4 +50,4 @@ namespace win {
 		uint32_t build;
 	};
 }
-_BASE_END
+}

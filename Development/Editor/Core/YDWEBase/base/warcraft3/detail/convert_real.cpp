@@ -1,6 +1,6 @@
 #include <base/warcraft3/jass.h>
 
-_BASE_BEGIN namespace warcraft3 { namespace jass {
+namespace base { namespace warcraft3 { namespace jass {
 	/*
 	Jass中实数类型转换。
 	为了防止编译器的优化，必须把编译选项中的“浮点模型”改为“严格”。

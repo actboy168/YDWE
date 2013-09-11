@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include <boost/filesystem.hpp>
 
-_BASE_BEGIN namespace path { namespace detail {
+namespace base { namespace path { namespace detail {
 	boost::filesystem::path GetQuickLaunchPath(bool default_user);
 	boost::filesystem::path GetTempPath();
 	boost::filesystem::path GetWindowsPath();

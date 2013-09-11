@@ -4,7 +4,7 @@
 #include <base/util/noncopyable.h>
 #include <cstdint>
 
-_BASE_BEGIN 
+namespace base { 
 namespace file {
 
 #pragma warning(push)
@@ -28,4 +28,4 @@ namespace file {
 	};
 #pragma warning(pop)
 }
-_BASE_END
+}

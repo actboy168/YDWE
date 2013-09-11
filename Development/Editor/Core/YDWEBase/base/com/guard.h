@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <base/exception/windows_exception.h>
 
-_BASE_BEGIN namespace com {
+namespace base { namespace com {
 	class guard
 	{
 	public:

@@ -105,7 +105,7 @@ namespace NYDWE {
 		std::cmatch matcher;
 		if (lpCommandLine && std::regex_match(lpCommandLine, matcher, gRegexCommandLine))
 		{
-			std::string currentWarcraftMap = (ydwe::path::get(ydwe::path::DIR_EXE).remove_filename() / matcher.str(1)).string();
+			std::string currentWarcraftMap = (base::path::get(base::path::DIR_EXE).remove_filename() / matcher.str(1)).string();
 			LOG4CXX_TRACE(NYDWE::gInjectLogger, "Executing map " + currentWarcraftMap);
 
 			CYDWEEventData eventData;
@@ -334,16 +334,16 @@ namespace NYDWE {
 			return 0;
 	}
 
-#define INSTALL_INLINE_HOOK(name) if (!is##name##HookInstalled) { if (pgTrue##name##) { is##name##HookInstalled = ydwe::hook::inline_install(&pgTrue##name##, (uintptr_t)Detour##name##); }}
+#define INSTALL_INLINE_HOOK(name) if (!is##name##HookInstalled) { if (pgTrue##name##) { is##name##HookInstalled = base::hook::inline_install(&pgTrue##name##, (uintptr_t)Detour##name##); }}
 
 	void SetupEvent()
 	{
-		pgTrueCreateFileA     = ydwe::hook::iat(L"storm.dll",             "kernel32.dll", "CreateFileA",     (uintptr_t)DetourStormCreateFileA);
-		pgTrueCreateFileA     = ydwe::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateFileA",     (uintptr_t)DetourWeCreateFileA);
-		pgTrueCreateProcessA  = ydwe::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateProcessA",  (uintptr_t)DetourWeCreateProcessA);
-		pgTrueCreateWindowExA = ydwe::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "CreateWindowExA", (uintptr_t)DetourWeCreateWindowExA);
-		pgTrueSetMenu         = ydwe::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "SetMenu",         (uintptr_t)DetourWeSetMenu);
-		pgTrueCreateDialogIndirectParamA = ydwe::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "CreateDialogIndirectParamA",  (uintptr_t)DetourWeCreateDialogIndirectParamA);
+		pgTrueCreateFileA     = base::hook::iat(L"storm.dll",             "kernel32.dll", "CreateFileA",     (uintptr_t)DetourStormCreateFileA);
+		pgTrueCreateFileA     = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateFileA",     (uintptr_t)DetourWeCreateFileA);
+		pgTrueCreateProcessA  = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateProcessA",  (uintptr_t)DetourWeCreateProcessA);
+		pgTrueCreateWindowExA = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "CreateWindowExA", (uintptr_t)DetourWeCreateWindowExA);
+		pgTrueSetMenu         = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "SetMenu",         (uintptr_t)DetourWeSetMenu);
+		pgTrueCreateDialogIndirectParamA = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "CreateDialogIndirectParamA",  (uintptr_t)DetourWeCreateDialogIndirectParamA);
 
 		pgTrueWeWinMain     = (uintptr_t)0x004021A0;
 		INSTALL_INLINE_HOOK(WeWinMain);

@@ -1,7 +1,7 @@
 #include <base/file/stream.h>
 #include <base/exception/exception.h>
 
-_BASE_BEGIN 
+namespace base { 
 namespace file {
 
 	stream::stream(const char* filename, std::ios_base::openmode mode)
@@ -119,4 +119,4 @@ namespace file {
 	}
 }
 
-_BASE_END
+}

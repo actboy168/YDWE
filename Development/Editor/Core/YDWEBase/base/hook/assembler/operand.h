@@ -4,7 +4,7 @@
 #include <array>
 #include <cassert>
 
-_BASE_BEGIN 
+namespace base { 
 namespace hook { namespace assembler {
 
 	class operand
@@ -61,4 +61,4 @@ namespace hook { namespace assembler {
 		size_t  len_;
 	};
 }}
-_BASE_END
+}

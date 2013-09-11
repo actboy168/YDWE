@@ -2,7 +2,7 @@
 
 #include <base/config.h>
 
-_BASE_BEGIN 
+namespace base { 
 namespace util {
 	class noncopyable
 	{
@@ -14,4 +14,4 @@ namespace util {
 		const noncopyable& operator=( const noncopyable& );
 	};
 }
-_BASE_END
+}

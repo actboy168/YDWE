@@ -9,7 +9,3 @@
 #		define _BASE_API __declspec(dllimport)
 #	endif
 #endif
-
-#define _BASE       ydwe
-#define _BASE_BEGIN namespace _BASE {
-#define _BASE_END   }

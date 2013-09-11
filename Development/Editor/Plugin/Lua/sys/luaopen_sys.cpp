@@ -152,7 +152,7 @@ namespace NLuaAPI { namespace NSys {
 	{
 		lua_newtable(pState);
 		luabind::object version_table(luabind::from_stack(pState, -1));
-		ydwe::win::simple_file_version fv(module.c_str());
+		base::win::simple_file_version fv(module.c_str());
 		version_table["major"]       = fv.major;
 		version_table["minor"]       = fv.minor;
 		version_table["revision"]    = fv.revision;
@@ -436,7 +436,7 @@ namespace NLuaAPI { namespace NSys {
 		}
 	}
 
-	static void LuaProcessCreate(lua_State *pState, ydwe::win::process& p, const luabind::object &application_object, const luabind::object &commandline_object, const luabind::object &currentdirectory_object)
+	static void LuaProcessCreate(lua_State *pState, base::win::process& p, const luabind::object &application_object, const luabind::object &commandline_object, const luabind::object &currentdirectory_object)
 	{
 		boost::optional<fs::path> application_opt      = detail::cast_path_opt(application_object);
 		std::wstring              commandline          = detail::cast_wstring(commandline_object);
@@ -469,7 +469,7 @@ namespace NLuaAPI { namespace NSys {
 		lua_pushboolean(pState, result);
 	}
 
-	static void LuaProcessRedirect(lua_State *pState, ydwe::win::process& p, const luabind::object &stdinput_object, const luabind::object &stdoutput_object, const luabind::object &stderror_object)
+	static void LuaProcessRedirect(lua_State *pState, base::win::process& p, const luabind::object &stdinput_object, const luabind::object &stdoutput_object, const luabind::object &stderror_object)
 	{
 		HANDLE stdinput  = detail::cast_file_handle(stdinput_object);
 		HANDLE stdoutput = detail::cast_file_handle(stdoutput_object);
@@ -505,13 +505,13 @@ int luaopen_sys(lua_State *pState)
 			.def(tostring(const_self))
 		,
 
-		class_<ydwe::win::process>("process")
+		class_<base::win::process>("process")
 			.def(constructor<>())
-			.def("inject",     &ydwe::win::process::inject)
+			.def("inject",     &base::win::process::inject)
 			.def("redirect",   &NLuaAPI::NSys::LuaProcessRedirect)
 			.def("create",     &NLuaAPI::NSys::LuaProcessCreate)
-			.def("wait",       &ydwe::win::process::wait)
-			.def("close",      &ydwe::win::process::close)
+			.def("wait",       &base::win::process::wait)
+			.def("close",      &base::win::process::close)
 		,
 
 		// Retrieve & set directories

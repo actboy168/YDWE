@@ -2,7 +2,7 @@
 #include <cwchar>
 #include <windows.h>
 
-_BASE_BEGIN
+namespace base {
 namespace util { namespace detail {
 
 std::codecvt_base::result ansi_codecvt_facet::do_in(std::mbstate_t &, const char* from, const char* from_end, const char*& from_next, wchar_t* to, wchar_t* to_end, wchar_t*& to_next) const
@@ -61,4 +61,4 @@ int ansi_codecvt_facet::do_max_length() const throw ()
 }
 
 }}
-_BASE_END
+}

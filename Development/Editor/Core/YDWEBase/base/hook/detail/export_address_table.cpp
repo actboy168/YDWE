@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-_BASE_BEGIN namespace hook { namespace detail {
+namespace base { namespace hook { namespace detail {
 
 	export_address_table::export_address_table()
 		: image_()

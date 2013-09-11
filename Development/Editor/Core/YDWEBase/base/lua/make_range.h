@@ -3,7 +3,7 @@
 #include <base/config.h>
 #include <base/lua/state.h>
 
-_BASE_BEGIN 
+namespace base { 
 
 namespace lua
 {
@@ -67,4 +67,4 @@ namespace lua
 	}
 }
 
-_BASE_END
+}

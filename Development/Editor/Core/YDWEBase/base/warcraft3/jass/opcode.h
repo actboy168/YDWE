@@ -4,7 +4,7 @@
 #include <cassert>
 #include <cstdint>
 
-_BASE_BEGIN 
+namespace base { 
 namespace warcraft3 { namespace jass {
 
 	struct opcode 
@@ -167,4 +167,4 @@ namespace warcraft3 { namespace jass {
 	};
 }}
 
-_BASE_END
+}

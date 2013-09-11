@@ -4,7 +4,7 @@
 #include <base/file/file_handle.h>
 #include <Windows.h>
 
-_BASE_BEGIN namespace file {
+namespace base { namespace file {
 
 	class file_mapping_handle : public win::scoped_handle<NULL>
 	{

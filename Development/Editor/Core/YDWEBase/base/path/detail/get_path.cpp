@@ -11,7 +11,7 @@
 
 #define ENSURE(cond) if (FAILED(cond)) throw windows_exception(#cond " failed.");
 
-_BASE_BEGIN namespace path { namespace detail {
+namespace base { namespace path { namespace detail {
 	boost::filesystem::path GetQuickLaunchPath(bool default_user) 
 	{
 		if (default_user) 

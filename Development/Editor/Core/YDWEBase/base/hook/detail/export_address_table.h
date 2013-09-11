@@ -3,7 +3,7 @@
 #include <base/win/pe_reader.h>
 #include <Windows.h>
 
-_BASE_BEGIN namespace hook { namespace detail {
+namespace base { namespace hook { namespace detail {
 	class export_address_table
 	{
 	public:

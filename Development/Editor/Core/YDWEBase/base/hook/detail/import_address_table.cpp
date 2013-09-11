@@ -1,7 +1,7 @@
 #include <base/hook/detail/import_address_table.h>
 #include <cassert>
 
-_BASE_BEGIN namespace hook { namespace detail {
+namespace base { namespace hook { namespace detail {
 
 	import_address_table::import_address_table()
 		: image_()

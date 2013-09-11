@@ -98,7 +98,7 @@ HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
 				}
 			}
 
-			RealCreateWindowExA = ydwe::hook::iat(L"Game.dll", "user32.dll", "CreateWindowExA", (uintptr_t)FakeCreateWindowExA);
+			RealCreateWindowExA = base::hook::iat(L"Game.dll", "user32.dll", "CreateWindowExA", (uintptr_t)FakeCreateWindowExA);
 			HANDLE hMpq;
 			aero::std_call<BOOL>(RealSFileOpenArchive, (g_DllMod.patch_path / "Patch.mpq").string().c_str(), 9, 6, &hMpq);
 
@@ -154,7 +154,7 @@ void DllModule::LoadPlugins()
 
 		slk::IniTable table;
 		try {
-			slk::buffer buf = ydwe::file::read_stream(plugin_path / L"config.cfg").read<slk::buffer>();
+			slk::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<slk::buffer>();
 			slk::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		}
@@ -168,10 +168,10 @@ void DllModule::LoadPlugins()
 			try {
 				if (!fs::is_directory(*itr))
 				{
-					std::string utf8_name = ydwe::util::w2u(itr->path().filename().wstring());
+					std::string utf8_name = base::util::w2u(itr->path().filename().wstring());
 
-					if ((! ydwe::path::equal(itr->path().filename(), std::string(PluginName()) + ".dll"))
-						&& ydwe::path::equal(itr->path().extension(), L".dll")
+					if ((! base::path::equal(itr->path().filename(), std::string(PluginName()) + ".dll"))
+						&& base::path::equal(itr->path().extension(), L".dll")
 						&& ("0" != table["Enable"][utf8_name]))
 					{
 						HMODULE module = ::LoadLibraryW(itr->path().c_str());
@@ -246,7 +246,7 @@ bool DllModule::SearchPatch(fs::path& result, std::wstring const& fv_str)
 				{
 					if (fs::exists(*itr / "Game.dll") && fs::exists(*itr / "Patch.mpq"))
 					{
-						ydwe::win::file_version fv((*itr / "Game.dll").c_str());
+						base::win::file_version fv((*itr / "Game.dll").c_str());
 						if (fv_str == fv[L"FileVersion"])
 						{
 							result = *itr;
@@ -283,7 +283,7 @@ void DllModule::Attach()
 		ResetConfig(table);
 
 		try {
-			slk::buffer buf = ydwe::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
+			slk::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
 			slk::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		} 
@@ -317,7 +317,7 @@ void DllModule::Attach()
 	catch (...) {
 	}
 
-	RealLoadLibraryA  = ydwe::hook::iat(L"War3.exe", "kernel32.dll", "LoadLibraryA", (uintptr_t)FakeLoadLibraryA);
+	RealLoadLibraryA  = base::hook::iat(L"War3.exe", "kernel32.dll", "LoadLibraryA", (uintptr_t)FakeLoadLibraryA);
 }
 
 void DllModule::Detach()

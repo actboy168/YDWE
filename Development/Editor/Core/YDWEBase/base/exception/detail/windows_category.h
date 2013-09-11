@@ -3,7 +3,7 @@
 #include <base/config.h>
 #include <system_error>
 
-_BASE_BEGIN
+namespace base {
 
 namespace exception_detail
 {
@@ -16,4 +16,4 @@ namespace exception_detail
 	};
 }
 
-_BASE_END
+}

@@ -15,14 +15,14 @@ namespace Shortcuts
 			bool shortcut_existed = fs::exists(shortcut_path);
 
 			{
-				ydwe::com::unique_ptr<IShellLinkW> pShellLink;
+				base::com::unique_ptr<IShellLinkW> pShellLink;
 				HRESULT hr = pShellLink.CreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER);
 				if (FAILED(hr))
 					return false;
 
 				pShellLink->SetPath(target_path.c_str());
 
-				ydwe::com::unique_ptr<IPersistFile> pPf;
+				base::com::unique_ptr<IPersistFile> pPf;
 				hr = pPf.QueryFrom(pShellLink.get());
 				if (FAILED(hr))
 					return false;
@@ -48,13 +48,13 @@ namespace Shortcuts
 		bool ResolveShortcut(fs::path const& shortcut_path, fs::path* target_path) 
 		{
 			HRESULT hr;
-			ydwe::com::unique_ptr<IShellLinkW> pShellLink;
+			base::com::unique_ptr<IShellLinkW> pShellLink;
 
 			hr = pShellLink.CreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER);
 			if (FAILED(hr))
 				return false;
 
-			ydwe::com::unique_ptr<IPersistFile> pPf;
+			base::com::unique_ptr<IPersistFile> pPf;
 
 			hr = pPf.QueryFrom(pShellLink.get());
 			if (FAILED(hr))
@@ -98,7 +98,7 @@ namespace Shortcuts
 	{
 		try
 		{
-			fs::path shortcut_path = ydwe::path::get(ydwe::path::DIR_USER_DESKTOP) / target_path.filename().replace_extension(L".lnk");
+			fs::path shortcut_path = base::path::get(base::path::DIR_USER_DESKTOP) / target_path.filename().replace_extension(L".lnk");
 
 			if (!detail::CreateOrUpdateShortcutLink(shortcut_path, target_path))
 			{
@@ -118,7 +118,7 @@ namespace Shortcuts
 	{
 		try
 		{
-			fs::path desktop_path = ydwe::path::get(ydwe::path::DIR_USER_DESKTOP);
+			fs::path desktop_path = base::path::get(base::path::DIR_USER_DESKTOP);
 			if (!fs::exists(desktop_path))
 			{
 				throw std::domain_error("Couldn't find path to desktop.");
@@ -137,7 +137,7 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (ydwe::path::equal(read_target, target_path))
+					if (base::path::equal(read_target, target_path))
 					{
 						fs::remove(shortcut_path);
 						return true;
@@ -156,7 +156,7 @@ namespace Shortcuts
 	{
 		try
 		{
-			fs::path desktop_path = ydwe::path::get(ydwe::path::DIR_USER_DESKTOP);
+			fs::path desktop_path = base::path::get(base::path::DIR_USER_DESKTOP);
 			if (!fs::exists(desktop_path))
 			{
 				throw std::domain_error("Couldn't find path to desktop.");
@@ -175,7 +175,7 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (ydwe::path::equal(read_target, target_path))
+					if (base::path::equal(read_target, target_path))
 					{
 						return true;
 					}
@@ -193,9 +193,9 @@ namespace Shortcuts
 	{
 		try
 		{
-			if (ydwe::win::version() >= ydwe::win::VERSION_WIN7)
+			if (base::win::version() >= base::win::VERSION_WIN7)
 			{
-				fs::path shortcut_path = ydwe::path::get(ydwe::path::DIR_TEMP) / target_path.filename().replace_extension(L".lnk");
+				fs::path shortcut_path = base::path::get(base::path::DIR_TEMP) / target_path.filename().replace_extension(L".lnk");
 
 				if (!detail::CreateOrUpdateShortcutLink(shortcut_path, target_path))
 				{
@@ -208,7 +208,7 @@ namespace Shortcuts
 			}
 			else
 			{
-				fs::path shortcut_path = ydwe::path::get(ydwe::path::DIR_USER_QUICK_LAUNCH) / target_path.filename().replace_extension(L".lnk");
+				fs::path shortcut_path = base::path::get(base::path::DIR_USER_QUICK_LAUNCH) / target_path.filename().replace_extension(L".lnk");
 
 				return detail::CreateOrUpdateShortcutLink(shortcut_path, target_path);
 			}
@@ -225,13 +225,13 @@ namespace Shortcuts
 		try
 		{
 			fs::path taskbar_path;
-			if (ydwe::win::version() >= ydwe::win::VERSION_WIN7)
+			if (base::win::version() >= base::win::VERSION_WIN7)
 			{
-				taskbar_path = ydwe::path::get(ydwe::path::DIR_TASKBAR_PINS);
+				taskbar_path = base::path::get(base::path::DIR_TASKBAR_PINS);
 			}
 			else
 			{
-				taskbar_path = ydwe::path::get(ydwe::path::DIR_USER_QUICK_LAUNCH);
+				taskbar_path = base::path::get(base::path::DIR_USER_QUICK_LAUNCH);
 			}
 
 			if (!fs::exists(taskbar_path))
@@ -252,9 +252,9 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (ydwe::path::equal(read_target, target_path))
+					if (base::path::equal(read_target, target_path))
 					{
-						if (ydwe::win::version() >= ydwe::win::VERSION_WIN7)
+						if (base::win::version() >= base::win::VERSION_WIN7)
 						{
 							return detail::TaskbarUnpinShortcutLink(shortcut_path);
 						}
@@ -279,13 +279,13 @@ namespace Shortcuts
 		try
 		{
 			fs::path taskbar_path;
-			if (ydwe::win::version() >= ydwe::win::VERSION_WIN7)
+			if (base::win::version() >= base::win::VERSION_WIN7)
 			{
-				taskbar_path = ydwe::path::get(ydwe::path::DIR_TASKBAR_PINS);
+				taskbar_path = base::path::get(base::path::DIR_TASKBAR_PINS);
 			}
 			else
 			{
-				taskbar_path = ydwe::path::get(ydwe::path::DIR_USER_QUICK_LAUNCH);
+				taskbar_path = base::path::get(base::path::DIR_USER_QUICK_LAUNCH);
 			}
 
 			if (!fs::exists(taskbar_path))
@@ -306,7 +306,7 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (ydwe::path::equal(read_target, target_path))
+					if (base::path::equal(read_target, target_path))
 					{
 						return true;
 					}

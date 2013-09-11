@@ -4,7 +4,7 @@
 #include <base/util/noncopyable.h>
 #include <Windows.h>
 
-_BASE_BEGIN
+namespace base {
 
 namespace win {
 
@@ -45,4 +45,4 @@ namespace win {
 	};
 }
 
-_BASE_END
+}

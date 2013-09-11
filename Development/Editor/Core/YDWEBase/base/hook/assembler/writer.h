@@ -6,7 +6,7 @@
 #include <cassert>
 #include <Windows.h>
 
-_BASE_BEGIN 
+namespace base { 
 namespace hook { namespace assembler {
 
 	template <size_t BufSizeT = 256>
@@ -137,4 +137,4 @@ namespace hook { namespace assembler {
 		uint8_t* cur_;
 	};
 }}
-_BASE_END
+}

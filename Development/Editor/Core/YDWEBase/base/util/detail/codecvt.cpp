@@ -6,7 +6,7 @@
 #include <base/util/dynarray.h>
 #include <Windows.h>
 
-_BASE_BEGIN 
+namespace base { 
 namespace util { namespace detail {
 	const std::size_t default_codecvt_buf_size = 256;
 

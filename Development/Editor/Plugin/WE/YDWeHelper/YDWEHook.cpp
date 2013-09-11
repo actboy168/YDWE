@@ -50,7 +50,7 @@ static bool InstallPatch(void *searchStart, boost::uint32_t searchLength, boost:
 	void *patchPoint = MemoryPatternSearch(searchStart, searchLength, patchPattern, patternLength);
 	if (patchPoint)
 	{
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("Found patch point: 0x%08X", reinterpret_cast<uintptr_t>(patchPoint)));
+		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found patch point: 0x%08X", reinterpret_cast<uintptr_t>(patchPoint)));
 
 		// Patch memory
 		bool patchResult = MemoryPatchAndVerify(patchPoint, patch, patchLength);
@@ -86,7 +86,7 @@ static void InitSectionInfo()
 		pgWeTextSectionBase = (void *)result->get<0>();
 		gWeTextSectionLength = result->get<1>();
 
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("WE .text section start address: 0x%08X. length 0x%08X", pgWeTextSectionBase, gWeTextSectionLength));
+		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("WE .text section start address: 0x%08X. length 0x%08X", pgWeTextSectionBase, gWeTextSectionLength));
 	}
 	else
 	{
@@ -99,7 +99,7 @@ static void InitSectionInfo()
 		pgWeDataSectionBase = (void *)result->get<0>();
 		gWeDataSectionLength = result->get<1>();
 
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("WE .data section start address: 0x%08X. length 0x%08X", pgWeDataSectionBase, gWeDataSectionLength));
+		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("WE .data section start address: 0x%08X. length 0x%08X", pgWeDataSectionBase, gWeDataSectionLength));
 	}
 	else
 	{
@@ -112,7 +112,7 @@ static bool isWeSetWindowCaptionHookInstalled;
 
 BOOL __fastcall DetourWeSetWindowCaption(HWND hWnd, LPCSTR lpString)
 {
-	if ((!lpString) || ydwe::util::is_utf8(lpString))
+	if ((!lpString) || base::util::is_utf8(lpString))
 	{
 		return aero::fast_call<BOOL>(pgTrueWeSetWindowCaption, hWnd, lpString);
 	}
@@ -128,9 +128,9 @@ uint32_t __fastcall DetourWeSetMenuItem(uint32_t this_, uint32_t edx_, uint32_t 
 {
 	try
 	{
-		if ((str) && !ydwe::util::is_utf8(str))
+		if ((str) && !base::util::is_utf8(str))
 		{
-			std::string tmp = ydwe::util::a2u(str);
+			std::string tmp = base::util::a2u(str);
 			return aero::this_call<uint32_t>(pgTrueWeSetMenuItem, this_, item, tmp.c_str(), hotkey);
 		}
 	}
@@ -195,7 +195,7 @@ int __fastcall DetourWeStringCompare(const char* a, const char* b, bool ignore_c
 			std::transform(b_str.begin(), b_str.end(), b_str.begin(), tolower);
 		}
 
-		return g_deflocale.compare(ydwe::util::u2w(a_str), ydwe::util::u2w(b_str));
+		return g_deflocale.compare(base::util::u2w(a_str), base::util::u2w(b_str));
 	}
 	catch (...)
 	{
@@ -245,7 +245,7 @@ BOOL __fastcall DetourWeTriggerEditorEditboxCopy(const char *source)
 	if (source)
 	{
 		try {
-			return WriteText(ydwe::util::u2w(source));
+			return WriteText(base::util::u2w(source));
 		}
 		catch (...) {			
 		}
@@ -330,7 +330,7 @@ static boost::uint32_t AERO_FP_CALL_FASTCALL DetourWeTriggerNameInputCharCheck(b
 	{ \
 		if (pgTrue##name##) \
 		{ \
-			is##name##HookInstalled = ydwe::hook::inline_install(&pgTrue##name##, (uintptr_t)Detour##name##); \
+			is##name##HookInstalled = base::hook::inline_install(&pgTrue##name##, (uintptr_t)Detour##name##); \
 			if (is##name##HookInstalled) \
 			{ \
 				LOG4CXX_TRACE(NYDWE::gInjectLogger, #name " hook installation succeeded."); \
@@ -370,26 +370,26 @@ static void InitInlineHook()
 
 	pgTrueWeGetSystemParameter = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, 
 		&weGetSystemParameterPattern[0], sizeof(weGetSystemParameterPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("Found WeGetSystemParameter at 0x%08X.", pgTrueWeGetSystemParameter));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeGetSystemParameter at 0x%08X.", pgTrueWeGetSystemParameter));
 	INSTALL_INLINE_HOOK(WeGetSystemParameter)
 
 	pgTrueWeVerifyMapCellsLimit = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, 
 		gWeTextSectionLength, &weVerifyMapCellsLimitPattern[0], sizeof(weVerifyMapCellsLimitPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("Found WeVerifyMapCellsLimit at 0x%08X.", pgTrueWeVerifyMapCellsLimit));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeVerifyMapCellsLimit at 0x%08X.", pgTrueWeVerifyMapCellsLimit));
 	boost::uint32_t callOffset = aero::offset_element_sum<boost::uint32_t>(pgTrueWeVerifyMapCellsLimit, 6);
 	pgMapCellsGetUnknownGlobalFlag = aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, callOffset + 10);
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("Found GetUnkownFlag at 0x%08X.", pgMapCellsGetUnknownGlobalFlag));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found GetUnkownFlag at 0x%08X.", pgMapCellsGetUnknownGlobalFlag));
 	pgWeVerifyMapCellsLimitPatcher.reset(new CMemoryPatch(aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, 3), "\x90\x90", 2));
 	pgWeVerifyMapCellsLimitPatcher->patch();
 	INSTALL_INLINE_HOOK(WeVerifyMapCellsLimit)
 
 	pgTrueWeTriggerNameCheck = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, 
 		&weTriggerNameCheckPattern[0], sizeof(weTriggerNameCheckPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("Found WeTriggerNameCheck at 0x%08X.", pgTrueWeTriggerNameCheck));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeTriggerNameCheck at 0x%08X.", pgTrueWeTriggerNameCheck));
 	INSTALL_INLINE_HOOK(WeTriggerNameCheck)
 
 	pgTrueWeTriggerNameInputCharCheck = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, &weTriggerNameInputCharCheckPattern[0], sizeof(weTriggerNameInputCharCheckPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("Found WeTriggerNameInputCharCheck at 0x%08X.", pgTrueWeTriggerNameInputCharCheck));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeTriggerNameInputCharCheck at 0x%08X.", pgTrueWeTriggerNameInputCharCheck));
 	pgWeTriggerNameInputCharCheckPatcher.reset(new CMemoryPatch(
 		aero::pointer_sum<aero::pointer_type>(pgTrueWeTriggerNameInputCharCheck, 3),
 		"\x90\x90", 2)
@@ -398,23 +398,23 @@ static void InitInlineHook()
 	INSTALL_INLINE_HOOK(WeTriggerNameInputCharCheck)
 
 	pgTrueWeSetWindowCaption = (uintptr_t)0x00433A00;//MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, &weSetWindowCaptionPattern[0], sizeof(weSetWindowCaptionPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("Found WeSetWindowCaption at 0x%08X.", pgTrueWeSetWindowCaption));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeSetWindowCaption at 0x%08X.", pgTrueWeSetWindowCaption));
 	INSTALL_INLINE_HOOK(WeSetWindowCaption)
 
 	pgTrueWeSetMenuItem = (uintptr_t)0x0042AA10;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("Found WeSetMenuItem at 0x%08X.", pgTrueWeSetMenuItem));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeSetMenuItem at 0x%08X.", pgTrueWeSetMenuItem));
 	INSTALL_INLINE_HOOK(WeSetMenuItem)
 
 	pgTrueWeStringCompare = (uintptr_t)0x004D2D90;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("Found WeStringCompare at 0x%08X.", pgTrueWeStringCompare));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeStringCompare at 0x%08X.", pgTrueWeStringCompare));
 	INSTALL_INLINE_HOOK(WeStringCompare)
 
 	pgTrueWeTriggerEditorEditboxCopy = (uintptr_t)0x0071FE90;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("Found TriggerEditorEditboxCopy at 0x%08X.", pgTrueWeTriggerEditorEditboxCopy));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found TriggerEditorEditboxCopy at 0x%08X.", pgTrueWeTriggerEditorEditboxCopy));
 	INSTALL_INLINE_HOOK(WeTriggerEditorEditboxCopy)
 
 	pgTrueWeUtf8ToAnsi = (uintptr_t)0x00429CD0;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, ydwe::util::format("Found WeUtf8ToAnsi at 0x%08X.", pgTrueWeUtf8ToAnsi));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeUtf8ToAnsi at 0x%08X.", pgTrueWeUtf8ToAnsi));
 	INSTALL_INLINE_HOOK(WeUtf8ToAnsi)
 
 	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "Installing inline hooks complete.");
@@ -426,7 +426,7 @@ static void InitInlineHook()
 	if (is##name##HookInstalled) \
 	{ \
 		is##name##HookInstalled = \
-			!ydwe::hook::inline_uninstall(&pgTrue##name, (uintptr_t)Detour##name); \
+			!base::hook::inline_uninstall(&pgTrue##name, (uintptr_t)Detour##name); \
 		LOG4CXX_TRACE(NYDWE::gInjectLogger, #name " hook uninstallation succeeded."); \
 	} \
 	else \
@@ -455,15 +455,15 @@ static void UninstallInlineHook()
 
 #undef UNINSTALL_INLINE_HOOK
 
-static ydwe::hook::iat_manager pgStormIatHooker;
-static ydwe::hook::iat_manager pgWeIatHooker;
+static base::hook::iat_manager pgStormIatHooker;
+static base::hook::iat_manager pgWeIatHooker;
 
 static uintptr_t pgTrueSHBrowseForFolderA;
 PIDLIST_ABSOLUTE WINAPI DetourWeSHBrowseForFolderA(LPBROWSEINFOA lpbi)
 {
-	if (lpbi->lpszTitle && ydwe::util::is_utf8(lpbi->lpszTitle))
+	if (lpbi->lpszTitle && base::util::is_utf8(lpbi->lpszTitle))
 	{
-		std::string tmp =  ydwe::util::u2a(lpbi->lpszTitle);
+		std::string tmp =  base::util::u2a(lpbi->lpszTitle);
 		lpbi->lpszTitle = tmp.c_str();
 		return aero::std_call<PIDLIST_ABSOLUTE>(pgTrueSHBrowseForFolderA, lpbi);
 	}
@@ -475,9 +475,9 @@ PIDLIST_ABSOLUTE WINAPI DetourWeSHBrowseForFolderA(LPBROWSEINFOA lpbi)
 static uintptr_t pgTrueGetOpenFileNameA;
 BOOL WINAPI DetourWeGetOpenFileNameA(LPOPENFILENAMEA lpofn)
 {
-	if (lpofn->lpstrTitle && ydwe::util::is_utf8(lpofn->lpstrTitle))
+	if (lpofn->lpstrTitle && base::util::is_utf8(lpofn->lpstrTitle))
 	{
-		std::string tmp =  ydwe::util::u2a(lpofn->lpstrTitle);
+		std::string tmp =  base::util::u2a(lpofn->lpstrTitle);
 		lpofn->lpstrTitle = tmp.c_str();
 		return aero::std_call<BOOL>(pgTrueGetOpenFileNameA, lpofn);
 	}
@@ -488,9 +488,9 @@ BOOL WINAPI DetourWeGetOpenFileNameA(LPOPENFILENAMEA lpofn)
 static uintptr_t pgTrueGetSaveFileNameA;
 BOOL WINAPI DetourWeGetSaveFileNameA(LPOPENFILENAMEA lpofn)
 {
-	if (lpofn->lpstrTitle && ydwe::util::is_utf8(lpofn->lpstrTitle))
+	if (lpofn->lpstrTitle && base::util::is_utf8(lpofn->lpstrTitle))
 	{
-		std::string tmp =  ydwe::util::u2a(lpofn->lpstrTitle);
+		std::string tmp =  base::util::u2a(lpofn->lpstrTitle);
 		lpofn->lpstrTitle = tmp.c_str();
 		return aero::std_call<BOOL>(pgTrueGetSaveFileNameA, lpofn);
 	}
@@ -771,13 +771,13 @@ static void InitPatches()
 		};
 
 		uintptr_t ptr = WE_ADDRESS(0x00784488);
-		ydwe::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_NORMAL]); ptr += 4;
-		ydwe::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_PIERCE]); ptr += 4;
-		ydwe::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_SIEGE]);  ptr += 4;
-		ydwe::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_MAGIC]);  ptr += 4;
-		ydwe::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_CHAOS]);  ptr += 4;
-		ydwe::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_SPELLS]); ptr += 4;
-		ydwe::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_HERO]);   ptr += 4;
+		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_NORMAL]); ptr += 4;
+		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_PIERCE]); ptr += 4;
+		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_SIEGE]);  ptr += 4;
+		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_MAGIC]);  ptr += 4;
+		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_CHAOS]);  ptr += 4;
+		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_SPELLS]); ptr += 4;
+		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_HERO]);   ptr += 4;
 
 #undef WE_ADDRESS
 	}

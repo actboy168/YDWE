@@ -2,7 +2,7 @@
 
 #include <base/util/noncopyable.h>
 
-_BASE_BEGIN namespace util {
+namespace base { namespace util {
 	template <typename object_type>
 	struct singleton_nonthreadsafe 
 		: private noncopyable

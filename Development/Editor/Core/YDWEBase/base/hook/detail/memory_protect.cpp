@@ -1,6 +1,6 @@
 #include <base/hook/detail/memory_protect.h>
 
-_BASE_BEGIN namespace hook { namespace detail {
+namespace base { namespace hook { namespace detail {
 
 	memory_protect::memory_protect(uintptr_t address)
 		: success_(false)

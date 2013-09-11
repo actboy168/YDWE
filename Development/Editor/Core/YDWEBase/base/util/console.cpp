@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <cstdio>
 
-_BASE_BEGIN namespace util {
+namespace base { namespace util {
 
 	void console::enable()
 	{

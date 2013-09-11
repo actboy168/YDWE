@@ -196,13 +196,13 @@ int luaopen_filesystem(lua_State *pState)
 		def("basename", (std::string (*)(const fs::path &))&fs::basename),
 		def("system_complete", (fs::path (*)(const fs::path &))&fs::system_complete),
 		def("canonical", (fs::path (*)(const fs::path &, const fs::path &))&fs::canonical),
-		def("get", (fs::path (*)(uint32_t))&ydwe::path::get)
+		def("get", (fs::path (*)(uint32_t))&base::path::get)
 	];
 
 	lua_getglobal(pState, "fs");
 	object constantTable(from_stack(pState, -1));
 
-#define LUA_AREA_CONSTANT(name) constantTable[#name] = ydwe::path:: ## name
+#define LUA_AREA_CONSTANT(name) constantTable[#name] = base::path:: ## name
 
 	LUA_AREA_CONSTANT(DIR_EXE);
 	LUA_AREA_CONSTANT(DIR_MODULE);

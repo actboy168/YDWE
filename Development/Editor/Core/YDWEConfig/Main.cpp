@@ -16,7 +16,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR l
 
 	try
 	{
-		ydwe::com::guard com;
+		base::com::guard com;
 
 		DuiLib::CPaintManagerUI::SetInstance(hInstance);
 
@@ -28,7 +28,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR l
 	}
 	catch (std::exception const& e)
 	{
-		::MessageBoxW(NULL, ydwe::util::u2w(e.what(), ydwe::util::conv_method::replace | '?').c_str(), L"ERROR", MB_ICONERROR | MB_OK);
+		::MessageBoxW(NULL, base::util::u2w(e.what(), base::util::conv_method::replace | '?').c_str(), L"ERROR", MB_ICONERROR | MB_OK);
 	}
 	catch (...)
 	{

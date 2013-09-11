@@ -7,7 +7,7 @@
 #include <Shlobj.h>
 #pragma warning(pop)
 
-_BASE_BEGIN namespace com { namespace detail {
+namespace base { namespace com { namespace detail {
 	template<class _Ty>
 	struct unique_ptr_delete
 	{

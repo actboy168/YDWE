@@ -6,9 +6,7 @@
 #include <slk/ObjectManager.hpp>
 #include "../misc/slk_interface_storm.h"
 
-_BASE_BEGIN
-
-namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine {
 
 	class slk_manager
 	{
@@ -213,6 +211,4 @@ namespace warcraft3 { namespace lua_engine {
 		ls->setglobal("slk");
 		return 1;
 	}
-}}
-
-_BASE_END
+}}}

@@ -2,7 +2,7 @@
 #include <base/warcraft3/detail/memory_search.h>
 #include <base/hook/detail/disassembly.h>
 
-_BASE_BEGIN namespace warcraft3 {
+namespace base { namespace warcraft3 {
 
 	basic_searcher::basic_searcher(HMODULE hModule)
 		: module_(hModule)

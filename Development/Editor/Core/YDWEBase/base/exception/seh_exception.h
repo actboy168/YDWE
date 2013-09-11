@@ -4,7 +4,7 @@
 #include <base/exception/windows_exception.h>
 #include <Windows.h>
 
-_BASE_BEGIN 
+namespace base { 
 
 class _BASE_API seh_exception : public windows_exception
 {
@@ -20,4 +20,4 @@ protected:
 	CONTEXT context_record_;
 };
 
-_BASE_END
+}

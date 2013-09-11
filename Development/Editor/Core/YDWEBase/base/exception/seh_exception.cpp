@@ -1,7 +1,7 @@
 #include <base/exception/seh_exception.h>
 #include <base/exception/windows_exception.h>
 
-_BASE_BEGIN
+namespace base {
 
 	seh_exception::seh_exception(const PEXCEPTION_POINTERS exp_ptr)
 		: windows_exception("seh exception", exp_ptr->ExceptionRecord->ExceptionCode)
@@ -31,4 +31,4 @@ _BASE_BEGIN
 		_set_se_translator(trans_func);
 #pragma warning(pop)
 	}
-_BASE_END
+}

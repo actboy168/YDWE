@@ -7,8 +7,7 @@
 #include <base/hook/inline.h>
 #include <array>
 
-_BASE_BEGIN
-namespace warcraft3 { namespace japi {
+namespace base { namespace warcraft3 { namespace japi {
 
 	uint32_t  __cdecl EXGetUnitObject(uint32_t unit_handle);
 
@@ -652,5 +651,4 @@ namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXGetAbilityDataString,  "EXGetAbilityDataString",  "(Hability;II)S");
 		jass::japi_add((uintptr_t)EXSetAbilityDataString,  "EXSetAbilityDataString",  "(Hability;IIS)B");
 	}
-}}
-_BASE_END
+}}}

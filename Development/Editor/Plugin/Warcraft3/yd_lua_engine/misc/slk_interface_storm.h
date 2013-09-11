@@ -1,8 +1,7 @@
 #include "storm.h"
 #include <slk/InterfaceStorm.hpp>
 
-_BASE_BEGIN
-namespace warcraft3 {
+namespace base { namespace warcraft3 {
 
 	class slk_interface_storm
 		: public slk::InterfaceStorm
@@ -35,6 +34,4 @@ namespace warcraft3 {
 	private:
 		storm s_;
 	};
-}
-
-_BASE_END
+}}

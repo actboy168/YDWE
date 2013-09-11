@@ -2,7 +2,7 @@
 
 #include <base/config.h>
 
-_BASE_BEGIN namespace util {
+namespace base { namespace util {
 	class _BASE_API console
 	{
 	public:

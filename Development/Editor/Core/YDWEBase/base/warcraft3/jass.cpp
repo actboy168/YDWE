@@ -4,7 +4,7 @@
 #include <cassert>
 #include <memory>
 
-_BASE_BEGIN namespace warcraft3 { namespace jass {
+namespace base { namespace warcraft3 { namespace jass {
 
 	string_fake::string_fake() 
 	{

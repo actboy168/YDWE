@@ -9,8 +9,7 @@
 #include <base/util/singleton.h>
 #include <aero/function/fp_call.hpp>
 
-_BASE_BEGIN
-namespace warcraft3 { namespace lua_engine { namespace lua_loader {
+namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 
 	int open_libs(lua::state* ls)
 	{
@@ -71,6 +70,4 @@ namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 	{
 		jass::async_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
 	}
-}}}
-
-_BASE_END
+}}}}

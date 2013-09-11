@@ -17,7 +17,7 @@ namespace zip {
 			{
 				it.impl_.reset();
 
-				ydwe::windows_exception ex(nullptr, ERROR_FILE_NOT_FOUND);
+				base::windows_exception ex(nullptr, ERROR_FILE_NOT_FOUND);
 				if (!ec) {
 					throw ex;
 				}

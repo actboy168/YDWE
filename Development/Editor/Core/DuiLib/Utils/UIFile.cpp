@@ -55,7 +55,7 @@ namespace DuiLib
 				zip::reader::entry& current_entry_info = *it;
 				if (current_entry_info.is_vaild()
 					&& (!current_entry_info.is_directory())
-					&& (ydwe::path::equal(current_entry_info.file_path(), name)))
+					&& (base::path::equal(current_entry_info.file_path(), name)))
 				{
 					CUIBuffer buf;
 					buf.reset((size_t)current_entry_info.original_size());

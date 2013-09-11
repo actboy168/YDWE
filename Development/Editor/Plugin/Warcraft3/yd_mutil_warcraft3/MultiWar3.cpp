@@ -179,7 +179,7 @@ HANDLE __stdcall fake_CreateEventA(LPSECURITY_ATTRIBUTES lpEventAttributes, BOOL
     return retval;
 }
 
-ydwe::hook::iat_manager g_iat;
+base::hook::iat_manager g_iat;
 
 void InitializeMutilWar3()
 {
@@ -187,7 +187,7 @@ void InitializeMutilWar3()
 		g_udp_port_manager.reset(new udp_port_manager());
 
 		HMODULE h = NULL;
-		if (ydwe::warcraft3::get_war3_searcher().get_version() > ydwe::warcraft3::version_121b)
+		if (base::warcraft3::get_war3_searcher().get_version() > base::warcraft3::version_121b)
 		{
 			h = ::GetModuleHandleW(L"Game.dll");
 		}

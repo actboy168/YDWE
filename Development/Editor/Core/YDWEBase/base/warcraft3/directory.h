@@ -3,7 +3,7 @@
 #include <base/config.h>
 #include <boost/filesystem.hpp>
 
-_BASE_BEGIN
+namespace base {
 namespace warcraft3 { namespace directory {
 
 	_BASE_API bool read_current_user(boost::filesystem::path& result);
@@ -15,4 +15,4 @@ namespace warcraft3 { namespace directory {
 	_BASE_API bool choose(const wchar_t* title);
 	_BASE_API bool get(const wchar_t* title, boost::filesystem::path& war3_path);
 }}
-_BASE_END
+}

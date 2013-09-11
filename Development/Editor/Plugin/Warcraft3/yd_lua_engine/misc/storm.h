@@ -4,8 +4,7 @@
 #include <cstdint>
 #include <base/config.h>
 
-_BASE_BEGIN
-namespace warcraft3 {
+namespace base { namespace warcraft3 {
 
 	class storm
 	{
@@ -29,6 +28,4 @@ namespace warcraft3 {
 		uintptr_t fn_sfile_unload_file_;
 		uintptr_t fn_sfile_exists_;
 	};
-}
-
-_BASE_END
+}}

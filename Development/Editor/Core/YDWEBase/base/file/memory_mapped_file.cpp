@@ -3,7 +3,7 @@
 #include <base/file/file_mapping_handle.h>
 #include <base/exception/windows_exception.h>
 
-_BASE_BEGIN namespace file {
+namespace base { namespace file {
 
 	memory_mapped_file::memory_mapped_file(const wchar_t* file_name)
 		: cb_(0)

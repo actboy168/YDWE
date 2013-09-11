@@ -21,8 +21,8 @@
 
 namespace fs = boost::filesystem;
 
-#define _(str)  ydwe::i18n::gettext(str).to_string().c_str()
-#define __(str) ydwe::util::u2w_ref(ydwe::i18n::gettext(str)).c_str()
+#define _(str)  base::i18n::gettext(str).to_string().c_str()
+#define __(str) base::util::u2w_ref(base::i18n::gettext(str)).c_str()
 
 static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boost::filesystem::path &fileSecond, std::error_code *pErrorCode = nullptr)
 {
@@ -33,13 +33,13 @@ static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boo
 			pErrorCode->assign(boost::system::errc::success, std::generic_category());
 		}
 
-		ydwe::file::memory_mapped_file mapperFirst(fileFirst.c_str());
-		ydwe::file::memory_mapped_file mapperSecond(fileSecond.c_str());
+		base::file::memory_mapped_file mapperFirst(fileFirst.c_str());
+		base::file::memory_mapped_file mapperSecond(fileSecond.c_str());
 
 		size_t size;
 		return (size = mapperFirst.size()) == mapperSecond.size() && memcmp(mapperFirst.memory(), mapperSecond.memory(), size) == 0;
 	}
-	catch (ydwe::system_exception const& e)
+	catch (base::system_exception const& e)
 	{
 		if (pErrorCode)
 		{
@@ -59,10 +59,10 @@ static void ShowSplash(fs::path const& ydwe_path)
 		if (f)
 		{
 			try {
-				ydwe::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
+				base::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
 				cimg_library::CImg<boost::uint8_t> splashImage = cimg_library::CImg<boost::uint8_t>::get_load_bmp(f);
 				boost::uint8_t color[] = { 255, 255, 255 };
-				splashImage.draw_text(10, 10, ydwe::util::format("YDWE %d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), color, 0, 1, 20);
+				splashImage.draw_text(10, 10, base::util::format("YDWE %d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), color, 0, 1, 20);
 				cimg_library::CImgDisplay display(splashImage, "YDWE", 3, false, true);
 				display.move(
 					(cimg_library::CImgDisplay::screen_width() - display.width()) / 2,
@@ -137,7 +137,7 @@ static void MoveDetouredSystemDll(const fs::path &war3Directory)
 static bool CreateDotNetConfig(fs::path const& config_path)
 {
 	try {
-		ydwe::file::write_stream(config_path).write(std::string(
+		base::file::write_stream(config_path).write(std::string(
 			"<?xml version=\"1.0\"?>"						    "\n"
 			"<configuration>"								    "\n"
 			"	<runtime>"									    "\n"
@@ -155,10 +155,10 @@ static bool CreateDotNetConfig(fs::path const& config_path)
 
 static void DoTask()
 {
-	fs::path gExecutableDirectory = ydwe::path::get(ydwe::path::DIR_EXE).remove_filename();
+	fs::path gExecutableDirectory = base::path::get(base::path::DIR_EXE).remove_filename();
 
-	ydwe::i18n::textdomain("YDWEStartup");
-	ydwe::i18n::bindtextdomain("YDWEStartup", gExecutableDirectory / L"share" / L"locale");
+	base::i18n::textdomain("YDWEStartup");
+	base::i18n::bindtextdomain("YDWEStartup", gExecutableDirectory / L"share" / L"locale");
 
 	if (gExecutableDirectory != fs::path(gExecutableDirectory.string()))
 	{
@@ -166,7 +166,7 @@ static void DoTask()
 	}
 
 	fs::path gWarcraftDirectory;
-	if (!ydwe::warcraft3::directory::get(__("Please choose your Warcraft 3 installation directory"), gWarcraftDirectory))
+	if (!base::warcraft3::directory::get(__("Please choose your Warcraft 3 installation directory"), gWarcraftDirectory))
 	{
 		return ;
 	}
@@ -210,12 +210,12 @@ static void DoTask()
 
 	CreateDotNetConfig(gWarcraftDirectory / L"worldeditydwe.exe.config");
 
-	ydwe::win::process worldedit_process;
+	base::win::process worldedit_process;
 	bool result = worldedit_process.create(worldeditPreferredPath, std::wstring(::GetCommandLineW()));
 
 	if (!result)
 	{
-		throw ydwe::windows_exception(_("Failed to launch world editor."));
+		throw base::windows_exception(_("Failed to launch world editor."));
 	}
 
 	ShowSplash(gExecutableDirectory);
@@ -232,7 +232,7 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 	}
 	catch (std::exception const& e)
 	{
-		MessageBoxW(NULL, ydwe::util::u2w_ref(e.what()).c_str(), __("Error"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, base::util::u2w_ref(e.what()).c_str(), __("Error"), MB_OK | MB_ICONERROR);
 	}
 	catch (...)
 	{

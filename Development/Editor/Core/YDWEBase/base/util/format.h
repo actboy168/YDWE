@@ -10,7 +10,7 @@
 #pragma warning(push)
 #pragma warning(disable:4702)
 
-_BASE_BEGIN
+namespace base {
 namespace util { namespace format_detail {
 
 struct default_report_error
@@ -572,4 +572,4 @@ BOOST_PP_REPEAT(16, DEFINE_FORMAT_CREATER, ~)
 
 #pragma warning(pop)
 
-_BASE_END
+}

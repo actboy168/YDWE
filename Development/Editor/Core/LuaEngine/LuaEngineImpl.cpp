@@ -104,9 +104,9 @@ bool LuaEngineImpl::InitializeInfo()
 	OSVERSIONINFOW osvi = { sizeof OSVERSIONINFOW };
 	::GetVersionExW(&osvi);
 
-	LOG4CXX_INFO(logger_, ydwe::util::format(L"YDWE Script engine %s started.", ydwe::win::file_version(ydwe::path::self().c_str())[L"FileVersion"]));
+	LOG4CXX_INFO(logger_, base::util::format(L"YDWE Script engine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]));
 	LOG4CXX_INFO(logger_, "Compiled at " __TIME__ ", " __DATE__);
-	LOG4CXX_INFO(logger_, ydwe::util::format("Windows version: %d.%d.%d", osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber));
+	LOG4CXX_INFO(logger_, base::util::format("Windows version: %d.%d.%d", osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber));
 
 	return true;
 }
@@ -114,7 +114,7 @@ bool LuaEngineImpl::InitializeInfo()
 bool LuaEngineImpl::InitializeLua()
 {
 #ifndef _DEBUG
-	ydwe::hook::inline_install(&RealLuaPcall, (uintptr_t)FakeLuaPcall);
+	base::hook::inline_install(&RealLuaPcall, (uintptr_t)FakeLuaPcall);
 #endif
 	state_ = luaL_newstate();
 	if (!state_)
@@ -199,7 +199,7 @@ bool LuaEngineImpl::LoadFile(boost::filesystem::path const& file_path)
 
 	try
 	{
-		std::vector<char> buffer = ydwe::file::read_stream(file_path).read<std::vector<char>>();
+		std::vector<char> buffer = base::file::read_stream(file_path).read<std::vector<char>>();
 		LuaDoString(state_, buffer.data(), buffer.size(), name.c_str());
 		return true;
 	}

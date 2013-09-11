@@ -5,7 +5,7 @@
 #include <winstl/registry/reg_value.hpp> 
 #include <base/util/foreach.h>
 
-_BASE_BEGIN
+namespace base {
 namespace warcraft3 { namespace directory {
 
 	bool read_current_user(boost::filesystem::path& result)
@@ -155,4 +155,4 @@ namespace warcraft3 { namespace directory {
 		return true;
 	}
 }}
-_BASE_END
+}

@@ -2,8 +2,7 @@
 #include "../lua/callback.h"
 #include "../lua/helper.h"
 
-_BASE_BEGIN
-namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine {
 	int open_jass(lua::state* ls);
 	int open_japi(lua::state* ls);
 	int open_jass_ext(lua::state* ls);
@@ -24,6 +23,4 @@ namespace warcraft3 { namespace lua_engine {
 		}
 		return 0;
 	}
-}}
-
-_BASE_END
+}}}

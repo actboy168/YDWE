@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include <cstdint>
 
-_BASE_BEGIN
+namespace base {
 namespace win {
 
 	class _BASE_API pe_reader
@@ -27,4 +27,4 @@ namespace win {
 	};
 }
 
-_BASE_END
+}

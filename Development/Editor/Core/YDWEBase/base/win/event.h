@@ -6,7 +6,7 @@
 #include <base/win/scoped_handle.h>
 #include <cstdint>
 
-_BASE_BEGIN
+namespace base {
 namespace win {
 
 	class event 
@@ -75,4 +75,4 @@ namespace win {
 		}
 	};
 }
-_BASE_END
+}
