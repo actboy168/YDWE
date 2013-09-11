@@ -24,6 +24,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		case LUA_ERRMEM:
 		case LUA_ERRERR:
 			printf("Error(%d): %s\n", error, lua_tostring(pState, -1));
+			lua_pop(pState, 1);
 			break;
 		default:
 			printf("Error(%d)\n", error);
@@ -43,10 +44,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return ;
 		}
 
-		if (safe_pcall(ls->self(), 0, 0) != LUA_OK)
-		{
-			ls->pop(1);
-		}
+		safe_pcall(ls->self(), 0, 0);
 	}
 
 	callback::callback()
@@ -85,7 +83,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		if (safe_pcall(ls->self(), param_size, (result_vt != jass::TYPE_NOTHING) ? 1: 0) != LUA_OK)
 		{
-			ls->pop(1);
 			return 0;
 		}
 		
