@@ -33,6 +33,12 @@ uintptr_t searchUnitDamageFunc()
 	return 0;
 }
 
+uintptr_t getUnitDamageFunc()
+{
+	static uintptr_t s_result = searchUnitDamageFunc();
+	return s_result;
+}
+
 struct war3_event_damage_data
 {
 	uint32_t source_unit;
@@ -182,7 +188,7 @@ bool __cdecl EXSetEventDamage(uint32_t value)
 
 void InitializeEventDamageData()
 {
-	RealUnitDamageFunc = hook::replace_pointer(searchUnitDamageFunc(), (uintptr_t)FakeUnitDamageFunc);
+	RealUnitDamageFunc = hook::replace_pointer(getUnitDamageFunc(), (uintptr_t)FakeUnitDamageFunc);
 	jass::japi_hook("GetEventDamage", &RealGetEventDamage, (uintptr_t)FakeGetEventDamage);
 	jass::japi_add((uintptr_t)EXGetEventDamageData, "EXGetEventDamageData", "(I)I");
 	jass::japi_add((uintptr_t)EXSetEventDamage,     "EXSetEventDamage",     "(R)B");
