@@ -263,9 +263,14 @@ namespace warcraft3 { namespace japi {
 		return 0;
 	}
 
+	bool IsVirtualFunctionTable(uintptr_t ptr)
+	{
+		return (get_war3_searcher().base() & 0xFF000000) == (ptr & 0xFF000000);
+	}
+
 	uint32_t GetAbilityCooldown(uintptr_t ability_ptr)
 	{
-		if (ability_ptr)
+		if (ability_ptr && IsVirtualFunctionTable(*(uintptr_t*)(ability_ptr + 0xD0)))
 		{
 			uintptr_t genttimer_ptr = *(uintptr_t*)(ability_ptr + 0xDC);
 			if (genttimer_ptr)
@@ -281,7 +286,7 @@ namespace warcraft3 { namespace japi {
 
 	bool     SetAbilityCooldown(uintptr_t ability_ptr, float value)
 	{	
-		if (ability_ptr)
+		if (ability_ptr && IsVirtualFunctionTable(*(uintptr_t*)(ability_ptr + 0xD0)))
 		{
 			uintptr_t genttimer_ptr = *(uintptr_t*)(ability_ptr + 0xDC);
 			if (genttimer_ptr)
