@@ -7,9 +7,7 @@
 #include <cassert>
 #include <detours.h>
 
-namespace base {
-
-namespace win {
+namespace base { namespace win {
 
 	namespace detail 
 	{
@@ -81,6 +79,47 @@ namespace win {
 			{
 				return create_process_use_system(application, command_line, creation_flags, current_directory, startup_info, process_information);
 			}
+		}
+	}
+
+	namespace process_helper
+	{
+		bool wait(HANDLE process, uint32_t timeout)
+		{
+			return (::WaitForSingleObject(process, timeout) == WAIT_OBJECT_0);
+		}
+
+		uint32_t exit_code(HANDLE process)
+		{
+			uint32_t tmp_exit_code = 0;
+
+			if (!::GetExitCodeProcess(process, reinterpret_cast<LPDWORD>(&tmp_exit_code))) 
+			{
+				return 0;
+			}
+
+			return tmp_exit_code;
+		}
+
+		bool is_running(HANDLE process) 
+		{
+			if (exit_code(process) == STILL_ACTIVE) 
+			{
+				return wait(process, 0);
+			}
+
+			return false;
+		}
+
+		bool kill(HANDLE process, int exit_code, uint32_t timeout)
+		{
+			bool result = (::TerminateProcess(process, exit_code) != FALSE);
+			if (result && timeout)
+			{
+				return wait(process, timeout);
+			}
+
+			return result;
 		}
 	}
 
@@ -309,23 +348,40 @@ namespace win {
 	{
 		if (statue_ == PROCESS_STATUE_RUNNING)
 		{
-			uint32_t code = 0;
-			::WaitForSingleObject(pi_.hProcess, INFINITE);
-			bool result = !!::GetExitCodeProcess(pi_.hProcess, reinterpret_cast<LPDWORD>(&code));
-			return result ? code : 0;
+			process_helper::wait(pi_.hProcess, INFINITE);
+			return process_helper::exit_code(pi_.hProcess);
 		}
 
 		return 0;
+	}
+
+	bool process::is_running()
+	{
+		if (statue_ == PROCESS_STATUE_RUNNING)
+		{
+			return process_helper::is_running(pi_.hProcess);
+		}
+
+		return false;
+	}
+
+	bool process::kill(uint32_t timeout)
+	{
+		if (statue_ == PROCESS_STATUE_RUNNING)
+		{
+			return process_helper::kill(pi_.hProcess, 0, timeout);
+		}
+
+		return false;
 	}
 
 	bool process::close()
 	{
 		if (statue_ == PROCESS_STATUE_RUNNING)
 		{
-			statue_ = PROCESS_STATUE_CLOSE;
+			statue_ = PROCESS_STATUE_READY;
 			::CloseHandle(pi_.hThread);
 			::CloseHandle(pi_.hProcess);
-
 			return true;
 		}
 
@@ -336,7 +392,7 @@ namespace win {
 	{
 		if (statue_ == PROCESS_STATUE_RUNNING)
 		{
-			statue_ = PROCESS_STATUE_CLOSE;
+			statue_ = PROCESS_STATUE_READY;
 			*pi_ptr = pi_;
 			return true;
 		}
@@ -361,6 +417,4 @@ namespace win {
 
 		return false;
 	}
-}
-
-}
+}}

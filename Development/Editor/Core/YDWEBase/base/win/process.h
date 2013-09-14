@@ -4,9 +4,7 @@
 #include <boost/filesystem.hpp>
 #include <Windows.h>
 
-namespace base {
-
-namespace win {
+namespace base { namespace win {
 
 	class _BASE_API process
 	{
@@ -15,7 +13,6 @@ namespace win {
 		{
 			PROCESS_STATUE_READY,
 			PROCESS_STATUE_RUNNING,
-			PROCESS_STATUE_CLOSE,
 		};
 		
 		process();
@@ -26,6 +23,8 @@ namespace win {
 		bool     create(const boost::filesystem::path& application, const std::wstring& command_line);
 		bool     create(const std::wstring& command_line, const boost::filesystem::path& current_directory);
 		bool     create(const std::wstring& command_line);
+		bool     is_running();
+		bool     kill(uint32_t timeout);
 		uint32_t wait();
 		bool     close();
 		bool     release(PROCESS_INFORMATION* pi_ptr);
@@ -44,6 +43,4 @@ namespace win {
 		const boost::filesystem::path& inject_dll, 
 		PROCESS_INFORMATION*           pi_ptr = nullptr
 	);
-}
-
-}
+}}
