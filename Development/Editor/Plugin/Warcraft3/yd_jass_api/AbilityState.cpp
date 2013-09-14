@@ -267,17 +267,63 @@ namespace base { namespace warcraft3 { namespace japi {
 		return (get_war3_searcher().base() & 0xFF000000) == (ptr & 0xFF000000);
 	}
 
+	struct CAgentTimer
+	{
+	public:
+		jass::jreal_t get_timeout()
+		{
+			if (is_valid())
+			{
+				uintptr_t rf = running_info();
+				if (rf)
+				{
+					return jass::to_real(jass::from_real(timeout(rf)) - jass::from_real(current_time(rf)));
+				}
+			}
+			return jass::to_real(0.f);
+		}
+
+		bool set_timeout(float value)
+		{
+			if (is_valid())
+			{
+				uintptr_t rf = running_info();
+				if (rf)
+				{
+					timeout(rf) = jass::to_real(jass::from_real(current_time(rf)) + value);
+					return true;
+				}
+			}
+			return false;
+		}
+
+	private:
+		bool is_valid()
+		{ 
+			return this && IsVirtualFunctionTable(*(uintptr_t*)this);
+		}
+
+		uintptr_t running_info()
+		{
+			return *(uintptr_t*)((uintptr_t)(this) + 0x0C);
+		}
+
+		uintptr_t current_time(uintptr_t rf) 
+		{  
+			return *(uintptr_t*)(*(uintptr_t*)(rf + 0x0C) + 0x40);
+		}
+
+		uintptr_t& timeout(uintptr_t rf) 
+		{  
+			return *(uintptr_t*)(rf + 0x04);
+		}
+	};
+
 	uint32_t GetAbilityCooldown(uintptr_t ability_ptr)
 	{
-		if (ability_ptr && IsVirtualFunctionTable(*(uintptr_t*)(ability_ptr + 0xD0)))
+		if (ability_ptr)
 		{
-			uintptr_t genttimer_ptr = *(uintptr_t*)(ability_ptr + 0xDC);
-			if (genttimer_ptr)
-			{
-				float current  = jass::from_real(*(uint32_t*)(*(uint32_t*)(genttimer_ptr + 12) + 64));
-				float end_time = jass::from_real(*(uint32_t*)(genttimer_ptr + 4));
-				return jass::to_real(end_time - current);
-			}
+			return reinterpret_cast<CAgentTimer*>(ability_ptr + 0xD0)->get_timeout();
 		}
 
 		return jass::to_real(0.f);
@@ -285,15 +331,9 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	bool     SetAbilityCooldown(uintptr_t ability_ptr, float value)
 	{	
-		if (ability_ptr && IsVirtualFunctionTable(*(uintptr_t*)(ability_ptr + 0xD0)))
+		if (ability_ptr)
 		{
-			uintptr_t genttimer_ptr = *(uintptr_t*)(ability_ptr + 0xDC);
-			if (genttimer_ptr)
-			{
-				float current = jass::from_real(*(uint32_t*)(*(uint32_t*)(genttimer_ptr + 12) + 64));
-				*(uint32_t*)(genttimer_ptr + 4) =  jass::to_real(current + value);
-				return true;
-			}
+			return reinterpret_cast<CAgentTimer*>(ability_ptr + 0xD0)->set_timeout(value);
 		}
 
 		return false;
