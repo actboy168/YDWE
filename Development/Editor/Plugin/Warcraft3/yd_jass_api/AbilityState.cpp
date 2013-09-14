@@ -288,6 +288,12 @@ namespace base { namespace warcraft3 { namespace japi {
 			if (is_valid())
 			{
 				uintptr_t rf = running_info();
+				if (!rf)
+				{
+					start();
+					rf = running_info();
+				}
+
 				if (rf)
 				{
 					timeout(rf) = jass::to_real(jass::from_real(current_time(rf)) + value);
@@ -316,6 +322,17 @@ namespace base { namespace warcraft3 { namespace japi {
 		uintptr_t& timeout(uintptr_t rf) 
 		{  
 			return *(uintptr_t*)(rf + 0x04);
+		}
+
+		void start()
+		{
+			uintptr_t ability = (uintptr_t)(this) - 0xD0;
+			if (aero::this_call<bool>(*(uintptr_t*)(*(uintptr_t*)ability + 0x394), ability))
+			{
+				jass::jreal_t cooldown = jass::to_real(0.f);
+				aero::this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x2EC), ability, &cooldown, *(uintptr_t*)(ability+0x50));
+				aero::this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x3A4), ability, &cooldown);
+			}
 		}
 	};
 
