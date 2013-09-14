@@ -1448,6 +1448,22 @@ YDWEGetUnitAbilityDataString="技能数据 (字符串) [JAPI]"
 YDWEGetUnitAbilityDataString=~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据
 YDWEGetUnitAbilityDataStringHint=""
 
+#ifndef DISABLE_YDTRIGGER
+
+YDWEGetObjectPropertyInteger="物体属性 (整数) [JAPI]"
+YDWEGetObjectPropertyInteger="[",~类型,"]",~物体," 的 ",~属性名,""
+YDWEGetObjectPropertyIntegerHint="属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
+
+YDWEGetObjectPropertyReal="物体属性 (实数) [JAPI]"
+YDWEGetObjectPropertyReal="[",~类型,"]",~物体," 的 ",~属性名,""
+YDWEGetObjectPropertyRealHint="属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
+
+YDWEGetObjectPropertyString="物体属性 (字符串) [JAPI]"
+YDWEGetObjectPropertyString="[",~类型,"]",~物体," 的 ",~属性名,""
+YDWEGetObjectPropertyStringHint="属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
+
+#endif
+
 // returns hashtable
 LoadIntegerBJ="<1.24> 从哈希表提取整数"
 LoadIntegerBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取整数"

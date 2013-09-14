@@ -24,6 +24,9 @@ enum GUIID_User_Defined
   CC_GUIID_GetEnumUnit,
   CC_GUIID_TriggerSleepAction,
   CC_GUIID_PolledWait,
+  CC_GUIID_YDWEGetObjectPropertyInteger,
+  CC_GUIID_YDWEGetObjectPropertyReal,
+  CC_GUIID_YDWEGetObjectPropertyString,
 };
 //--------------------------------------------------------
 //  WE_Defined_ID

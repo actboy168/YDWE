@@ -40,4 +40,27 @@
 #
 #  define YDWESaveTriggerName(t,s) DoNothing()
 #
+#  include <YDTrigger/Common/switch.h>
+#  define YDWEGetObjectProperty(object_type, object_id, property)            \
+     YDTRIGGER_COMMON_SWITCH(YDWE_GET_OBJECT_PROPERTY_ ## object_type, (     \
+       EXExecuteScript("slk.ability["      + I2S(object_id) + "]." + property), \
+       EXExecuteScript("slk.buff["         + I2S(object_id) + "]." + property), \
+       EXExecuteScript("slk.unit["         + I2S(object_id) + "]." + property), \
+       EXExecuteScript("slk.item["         + I2S(object_id) + "]." + property), \
+       EXExecuteScript("slk.upgrade["      + I2S(object_id) + "]." + property), \
+       EXExecuteScript("slk.doodad["       + I2S(object_id) + "]." + property), \
+       EXExecuteScript("slk.destructable[" + I2S(object_id) + "]." + property), \
+       ))
+#  define YDWEGetObjectPropertyInteger(type, id, prop) S2I(YDWEGetObjectProperty(type, id, prop))
+#  define YDWEGetObjectPropertyReal(type, id, prop)    S2R(YDWEGetObjectProperty(type, id, prop))
+#  define YDWEGetObjectPropertyString(type, id, prop)  (YDWEGetObjectProperty(type, id, prop))
+#
+#  define YDWE_GET_OBJECT_PROPERTY_YDWE_OBJECT_TYPE_ABILITY      0
+#  define YDWE_GET_OBJECT_PROPERTY_YDWE_OBJECT_TYPE_BUFF         1
+#  define YDWE_GET_OBJECT_PROPERTY_YDWE_OBJECT_TYPE_UNIT         2
+#  define YDWE_GET_OBJECT_PROPERTY_YDWE_OBJECT_TYPE_ITEM         3
+#  define YDWE_GET_OBJECT_PROPERTY_YDWE_OBJECT_TYPE_UPGRADE      4
+#  define YDWE_GET_OBJECT_PROPERTY_YDWE_OBJECT_TYPE_DOODAD       5
+#  define YDWE_GET_OBJECT_PROPERTY_YDWE_OBJECT_TYPE_DESTRUCTABLE 6
+#
 #endif

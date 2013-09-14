@@ -1083,6 +1083,22 @@ _YDWEGetUnitAbilityDataString_Defaults=GetTriggerUnit,_,1,ABILITY_DATA_TIP
 _YDWEGetUnitAbilityDataString_Limits=_,_,_,_,1,_,_,_,
 _YDWEGetUnitAbilityDataString_Category=TC_UNIT
 
+#ifndef DISABLE_YDTRIGGER
+
+YDWEGetObjectPropertyInteger=0,0,integer,objecttype,Null,string
+_YDWEGetObjectPropertyInteger_Defaults=objecttype00_abilcode,AHhb,"levels"
+_YDWEGetObjectPropertyInteger_Category=TC_YDBF
+
+YDWEGetObjectPropertyReal=0,0,real,objecttype,Null,string
+_YDWEGetObjectPropertyReal_Defaults=objecttype00_abilcode,AHhb,"Rng1"
+_YDWEGetObjectPropertyReal_Category=TC_YDBF
+
+YDWEGetObjectPropertyString=0,0,string,objecttype,Null,string
+_YDWEGetObjectPropertyString_Defaults=objecttype00_abilcode,AHhb,"Name"
+_YDWEGetObjectPropertyString_Category=TC_YDBF
+
+#endif
+
 GetLastTransmissionDurationBJ=0,1,real
 _GetLastTransmissionDurationBJ_Defaults=
 _GetLastTransmissionDurationBJ_Category=TC_CINEMATIC

@@ -86,4 +86,7 @@ GUIID_Table_Init()
   GUIID_Table_Put(GetEnumUnit);
   GUIID_Table_Put(TriggerSleepAction);
   GUIID_Table_Put(PolledWait);
+  GUIID_Table_Put(YDWEGetObjectPropertyInteger);
+  GUIID_Table_Put(YDWEGetObjectPropertyReal);
+  GUIID_Table_Put(YDWEGetObjectPropertyString);
 }

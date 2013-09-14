@@ -68,6 +68,7 @@ handle=0,0,0,WESTRING_TRIGTYPE_handle
 agent=0,0,0,WESTRING_TRIGTYPE_agent,agent
 #ifndef DISABLE_YDTRIGGER
 typename=1,0,0,参数类型,string
+objecttype=1,0,0,物体类型,string
 #endif
 unitstatechangetype=0,0,0,单位状态修改类型,integer
 bonusType=0,0,0,属性类型,integer
