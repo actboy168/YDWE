@@ -7,6 +7,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int open_japi(lua::state* ls);
 	int open_jass_ext(lua::state* ls);
 	int open_slk(lua::state* ls);
+	int fix_math(lua::state* ls);
 	int jreal_initialize(lua_State* L);
 
 	int open_lua_engine(lua::state* ls)
@@ -20,6 +21,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			open_slk(ls);
 			jreal_initialize((lua_State*)ls);
 			insert_searchers_table(ls);
+			fix_math(ls);
 		}
 		return 0;
 	}

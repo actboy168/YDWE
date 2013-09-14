@@ -119,7 +119,17 @@ namespace lua {
 		{
 			luaL_checktype(self(), narg, t);
 		}
-		
+
+		inline lua_Unsigned checkunsigned(int narg)
+		{
+			return luaL_checkunsigned(self(), narg);
+		}
+
+		inline lua_Number checknumber(int narg)
+		{
+			return luaL_checknumber(self(), narg);
+		}
+
 		inline const char* type_name(int tp)
 		{
 			return lua_typename(self(), tp);
@@ -383,6 +393,26 @@ namespace lua {
 		inline int pcall(int nargs, int nresults, int errfunc)
 		{
 			return pcallk(nargs, nresults, errfunc, 0, NULL);
+		}
+
+
+		inline void argcheck(bool cond, int narg, const char* extramsg)
+		{
+			if (cond)
+			{
+				luaL_argerror(self(), narg, extramsg);
+			}
+		}
+
+		int error(const char *fmt, ...)
+		{
+			va_list argp;
+			va_start(argp, fmt);
+			luaL_where(self(), 1);
+			lua_pushvfstring(self(), fmt, argp);
+			va_end(argp);
+			lua_concat(self(), 2);
+			return lua_error(self());
 		}
 	};
 }
