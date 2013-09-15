@@ -109,6 +109,7 @@
     <ClCompile Include="Core\GetVarType.cpp" />
     <ClCompile Include="Core\locvar.cpp" />
     <ClCompile Include="Core\SaveLoadCheck.cpp" />
+    <ClCompile Include="Core\trigger_data_ui.cpp" />
     <ClCompile Include="CreateYDTriggerImportFile.cpp" />
     <ClCompile Include="Detours\detoured.cpp" />
     <ClCompile Include="DllMain.cpp" />

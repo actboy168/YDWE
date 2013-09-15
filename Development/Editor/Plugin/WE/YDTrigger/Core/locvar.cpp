@@ -14,6 +14,8 @@ int _fastcall Utf8toAscii(char src[], char dst[], unsigned int limit);
 
 namespace locvar
 {
+	extern std::map<std::string, std::string> trigger_data_ui;
+
 	std::map<std::string, std::map<std::string, std::string>> register_var;
 
 	state global;
@@ -224,7 +226,6 @@ namespace locvar
 		}
 	}
 
-
 	void params(DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string)
 	{
 		{
@@ -267,13 +268,28 @@ namespace locvar
 
 		for each (auto it in register_var[name])
 		{
-			locvar::do_set(OutClass, it.second.c_str(), it.first.c_str()
-				, state(CC_GUIID_YDWETimerStartMultiple, name, handle_string)
-				, [&]()
-				{ 
-					locvar::do_get(OutClass, it.second.c_str(), it.first.c_str(), global); 
-				}
-			);
+			auto uiit = trigger_data_ui.find(it.first);
+			if (uiit == trigger_data_ui.end())
+			{
+				locvar::do_set(OutClass, it.second.c_str(), it.first.c_str()
+					, state(CC_GUIID_YDWETimerStartMultiple, name, handle_string)
+					, [&]()
+					{ 
+						locvar::do_get(OutClass, it.second.c_str(), it.first.c_str(), global); 
+					}
+				);
+			}
+			else
+			{
+				locvar::do_set(OutClass, it.second.c_str(), it.first.c_str()
+					, state(CC_GUIID_YDWETimerStartMultiple, name, handle_string)
+					, [&]()
+					{ 
+						PUT_CONST(it.first.c_str(), 0);
+						PUT_CONST("()", 0);
+					}
+				);
+			}
 		}
 		register_var.erase(name);
 	}
@@ -285,12 +301,13 @@ namespace locvar
 			return false;
 		}
 
-		if (strcmp(name, "GetSpellTargetUnit") == 0)
+		auto it = trigger_data_ui.find(name);
+		if (it == trigger_data_ui.end())
 		{
-			locvar::do_get(OutClass, "unit", "GetSpellTargetUnit", global);
-			return true;
+			return false;
 		}
 		
-		return false;
+		locvar::do_get(OutClass, it->second.c_str(), it->first.c_str(), global);
+		return true;
 	}
 }

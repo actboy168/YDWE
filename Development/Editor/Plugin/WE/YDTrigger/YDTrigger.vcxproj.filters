@@ -144,6 +144,9 @@
     <ClCompile Include="Core\locvar.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Core\trigger_data_ui.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
