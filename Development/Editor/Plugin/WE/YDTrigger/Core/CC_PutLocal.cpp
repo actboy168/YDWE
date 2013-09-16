@@ -134,7 +134,10 @@ CC_PutLocal_Search(DWORD This, DWORD OutClass, DWORD isSearchHashLocal, LONG ind
 		  CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, 0);
 		  break; 
 	  case CC_GUIID_YDWESetAnyTypeLocalVariable:
-		  g_local_in_mainproc = TRUE;
+		  if (isSearchHashLocal)
+		  {
+			  g_local_in_mainproc = TRUE;
+		  }
 		  break;
       default:
         break;           
