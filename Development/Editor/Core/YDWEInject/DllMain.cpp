@@ -18,6 +18,8 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 
 			boost::filesystem::path root_path = base::path::self().remove_filename().remove_filename();
 
+			::LoadLibraryW((root_path / L"bin" / L"VirtualMpq.dll").c_str());
+
 			if (gLuaEngine.Initialize(root_path / L"logs" / L"YDLogger.cfg"))
 			{
 				gLuaEngine.SetPath(root_path / L"share" / L"script" / L"?.lua");
