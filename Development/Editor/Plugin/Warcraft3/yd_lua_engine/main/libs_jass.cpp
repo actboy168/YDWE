@@ -383,7 +383,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int open_jass(lua::state* ls)
 	{
-		//MessageBoxA(0,0,0,0);
 		handle_make_mt(ls);
 		array_make_mt(ls);
 		
