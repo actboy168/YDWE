@@ -230,45 +230,63 @@ private:
 	boost::filesystem::path source_;
 };
 
+struct we_import_file
+{
+	uint8_t type;
+	char    file[520];
+};
+
+struct we_import_info
+{
+	char            pre_import_path[260];
+	char            default_path[260];
+	uint32_t        count1;
+	uint32_t        count2;
+	we_import_file* array;
+};
+
 uintptr_t real_we_create_map = 0x0055D720;
 bool __fastcall fake_we_create_map(uintptr_t this_, uintptr_t /*edx_*/, const char* name, bool is_tft)
 {
-	//try {
-	//	boost::filesystem::path target(name);
-	//	boost::filesystem::path source = target.parent_path();
-	//	if (is_tft)
-	//	{
-	//		target.replace_extension(L".w3x");
-	//	}
-	//	else
-	//	{
-	//		target.replace_extension(L".w3m");
-	//	}
-	//
-	//	stormlib_builder sb(target, source);
-	//
-	//	boost::filesystem::recursive_directory_iterator end_itr;
-	//	for (boost::filesystem::recursive_directory_iterator itr(source); itr != end_itr; ++itr)
-	//	{
-	//		try {
-	//			if (!boost::filesystem::is_directory(*itr) && (itr->path() != target))
-	//			{
-	//				sb.add(stormlib_builder::path_sub(itr->path(), source), itr->path());
-	//			}
-	//		}
-	//		catch(...) {
-	//		}
-	//	}
-	//
-	//	aero::fast_call<void>(0x005261D0, *((uint32_t*)this_+3734));
-	//	return true;
-	//}
-	//catch (...) {
-	//}
-	//
-	//return false;
+	//return aero::this_call<bool>(real_we_create_map, this_, name, is_tft);
+	try {
+		boost::filesystem::path target(name);
+		boost::filesystem::path source = target.parent_path();
+		boost::filesystem::path source_mpq(source.wstring().substr(0, source.wstring().size()-4);
 
-	return aero::this_call<bool>(real_we_create_map, this_, name, is_tft);
+		if (is_tft)
+		{
+			target.replace_extension(L".w3x");
+		}
+		else
+		{
+			target.replace_extension(L".w3m");
+		}
+
+		aero::this_call<void>(0x005261D0, *((uint32_t*)this_+3734));
+
+		stormlib_builder sb(target, source);
+	
+		boost::filesystem::recursive_directory_iterator end_itr;
+		for (boost::filesystem::recursive_directory_iterator itr(source); itr != end_itr; ++itr)
+		{
+			try {
+				if (!boost::filesystem::is_directory(*itr) && (itr->path() != target))
+				{
+					sb.add(stormlib_builder::path_sub(itr->path(), source), itr->path());
+				}
+			}
+			catch(...) {
+			}
+		}
+
+		aero::std_call<uintptr_t>(0x00405240, (source/ L"war3map.j").string().c_str());
+		return true;
+	}
+	catch (...) {
+	}
+	
+	return false;
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
