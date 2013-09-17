@@ -125,11 +125,16 @@ namespace lua {
 			return luaL_checkunsigned(self(), narg);
 		}
 
+		inline lua_Integer checkinteger(int narg)
+		{
+			return luaL_checkinteger(self(), narg);
+		}
+		
 		inline lua_Number checknumber(int narg)
 		{
 			return luaL_checknumber(self(), narg);
 		}
-
+		
 		inline const char* type_name(int tp)
 		{
 			return lua_typename(self(), tp);

@@ -8,6 +8,8 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
+#define LUA_JASS_ARRAY "jarray_t"
+
 	bool is_gaming()
 	{
 		return get_war3_searcher().is_gaming();
@@ -132,6 +134,39 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return jass_call_native_function(lj, (const jass::func_value*)lj->tounsigned(lua_upvalueindex(1)));
 	}
 
+	void jass_get_global_variable(jassbind* lj, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value)
+	{
+		switch (opt)
+		{
+		case jass::OPCODE_VARIABLE_NOTHING:
+		case jass::OPCODE_VARIABLE_UNKNOWN:
+		case jass::OPCODE_VARIABLE_NULL:
+			lj->pushnil();
+			break;
+		case jass::OPCODE_VARIABLE_CODE:
+			lj->push_code(value);
+			break;
+		case jass::OPCODE_VARIABLE_INTEGER:
+			lj->push_integer(value);
+			break;
+		case jass::OPCODE_VARIABLE_REAL:
+			lj->push_real(value);
+			break;
+		case jass::OPCODE_VARIABLE_STRING:
+			lj->push_string(get_string_fasttable()->get(value));
+			break;
+		case jass::OPCODE_VARIABLE_HANDLE:
+			lj->push_handle(value);
+			break;
+		case jass::OPCODE_VARIABLE_BOOLEAN:
+			lj->push_boolean(value);
+			break;
+		default:
+			lj->pushnil();
+			break;
+		}
+	}
+
 	int jass_get(lua_State* L)
 	{
 		jassbind* lj = (jassbind*)L;
@@ -155,43 +190,31 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jass::global_variable gv(name);
 		if (gv.is_vaild())
 		{
-			switch (gv.type())
+			if (!gv.is_array())
 			{
-			case jass::OPCODE_VARIABLE_NOTHING:
-			case jass::OPCODE_VARIABLE_UNKNOWN:
-			case jass::OPCODE_VARIABLE_NULL:
-				lj->pushnil();
+				jass_get_global_variable(lj, gv.type(), gv);
 				return 1;
-			case jass::OPCODE_VARIABLE_CODE:
-				lj->push_code(gv);
-				return 1;
-			case jass::OPCODE_VARIABLE_INTEGER:
-				lj->push_integer(gv);
-				return 1;
-			case jass::OPCODE_VARIABLE_REAL:
-				lj->push_real(gv);
-				return 1;
-			case jass::OPCODE_VARIABLE_STRING:
-				lj->push_string(get_string_fasttable()->get(gv));
-				return 1;
-			case jass::OPCODE_VARIABLE_HANDLE:
-				lj->push_handle(gv);
-				return 1;
-			case jass::OPCODE_VARIABLE_BOOLEAN:
-				lj->push_boolean(gv);
-				return 1;
-			case jass::OPCODE_VARIABLE_INTEGER_ARRAY:
-			case jass::OPCODE_VARIABLE_REAL_ARRAY:
-			case jass::OPCODE_VARIABLE_STRING_ARRAY:
-			case jass::OPCODE_VARIABLE_HANDLE_ARRAY:
-			case jass::OPCODE_VARIABLE_BOOLEAN_ARRAY:
-				//
-				// Fixed me
-				//
-				lj->pushnil();
-				return 1;
-			default:
-				return 1;
+			}
+			else
+			{
+				switch (gv.type())
+				{
+				case jass::OPCODE_VARIABLE_INTEGER_ARRAY:
+				case jass::OPCODE_VARIABLE_REAL_ARRAY:
+				case jass::OPCODE_VARIABLE_STRING_ARRAY:
+				case jass::OPCODE_VARIABLE_HANDLE_ARRAY:
+				case jass::OPCODE_VARIABLE_BOOLEAN_ARRAY:
+					lj->newtable();
+					luaL_getmetatable(lj->self(), LUA_JASS_ARRAY);
+					lj->setmetatable(-2);
+					lj->pushstring("__value");
+					lj->pushunsigned((uintptr_t)gv.ptr());
+					lj->rawset(-3);
+					return 1;
+				default:
+					lj->pushnil();
+					return 1;
+				}
 			}
 		}
 
@@ -291,9 +314,78 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		ls->pop(1);
 	}
 
+	jass::global_variable array_value(jassbind* lj)
+	{
+		lj->pushvalue(1);
+		lj->pushstring("__value");
+		lj->rawget(-2);
+		jass::global_variable gv((hashtable::variable_node*)lj->checkunsigned(-1));
+		lj->pop(2);
+		return std::move(gv);
+	}
+
+	int array_index(lua_State* L) 
+	{
+		jassbind* lj = (jassbind*)L;
+		jass::global_variable gv = array_value(lj);
+		int32_t index = lj->checkinteger(2);
+
+		if (!gv.array_vaild(index))
+		{
+			lj->pushnil();
+			return 1;
+		}
+
+		jass_get_global_variable(lj, jass::opcode_type_remove_array(gv.type()), gv[index]);
+		return 1;
+	}
+
+	int array_newindex(lua_State* L)
+	{
+		jassbind* lj = (jassbind*)L;
+		jass::global_variable gv = array_value(lj);
+		int32_t index = lj->checkinteger(2);
+
+		if (!gv.array_vaild(index))
+		{
+			return 0;
+		}
+
+		gv[index] = jass_read(lj, jass::opcode_type_to_var_type(gv.type()), 3);
+		return 0;
+	}
+
+	int array_len(lua_State* L) 
+	{
+		jassbind* lj = (jassbind*)L;
+		jass::global_variable gv((hashtable::variable_node*)lj->checkunsigned(lua_upvalueindex(1)));
+		lj->pushinteger(gv.array_size());
+		return 1;
+	}
+
+	void array_make_mt(lua::state* ls)
+	{
+		luaL_Reg lib[] = {
+			{ "__index",    array_index },
+			{ "__newindex", array_newindex },
+			{ "__len",      array_len },
+			{ NULL, NULL },
+		};
+
+		luaL_newmetatable(ls->self(), LUA_JASS_ARRAY);
+#if LUA_VERSION_NUM >= 502
+		luaL_setfuncs(ls->self(), lib, 0);
+		ls->pop(1);
+#else
+		luaL_register(ls->self(), NULL, lib);
+#endif
+	}
+
 	int open_jass(lua::state* ls)
 	{
+		//MessageBoxA(0,0,0,0);
 		handle_make_mt(ls);
+		array_make_mt(ls);
 		
 		ls->newtable();
 		{
