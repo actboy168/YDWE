@@ -65,6 +65,10 @@ local function map_file_import(filename)
 	end
 end
 
+local function string_hash(str)
+	return string.format('0x%08X', ar.storm.string_hash(str))
+end
+
 template = {}
 
 function template.do_compile (self, code, env)
@@ -95,7 +99,7 @@ function template.compile(self, map_path, map_handle, map_script_path)
 
    	package.loaded['slk'] = nil
    	__map_handle__ = map_handle
-	local env = setmetatable({import = map_file_import}, {__index = _G})
+	local env = setmetatable({import = map_file_import, StringHash = string_hash}, {__index = _G})
 	local success, content = self:do_compile(content, env)
 	if not success then
 		if content then

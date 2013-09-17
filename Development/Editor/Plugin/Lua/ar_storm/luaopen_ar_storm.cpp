@@ -22,6 +22,7 @@ namespace NLuaAPI { namespace NSTORM {
 	const int gOrdinalStormSFileLoadFile = 279;
 	const int gOrdinalStormSFileUnloadFile = 280;
 	const int gOrdinalStormSFileExists = 288;
+	const int gOrdinalStormSStrHash = 590;
 
 	void *pgStormSFileOpenArchive;
 	void *pgStormSFileCloseArchive;
@@ -33,6 +34,7 @@ namespace NLuaAPI { namespace NSTORM {
 	void *pgStormSFileLoadFile;
 	void *pgStormSFileUnloadFile;
 	void *pgStormSFileExists;
+	void *pgStormSStrHash;
 
 #define INITIALIZE_STORM_FUNCTION_POINTER(name) pgStorm##name = GetProcAddress(stormDll, reinterpret_cast<LPCSTR>(gOrdinalStorm##name##));
 
@@ -51,6 +53,7 @@ namespace NLuaAPI { namespace NSTORM {
 			INITIALIZE_STORM_FUNCTION_POINTER(SFileLoadFile)
 			INITIALIZE_STORM_FUNCTION_POINTER(SFileUnloadFile)
 			INITIALIZE_STORM_FUNCTION_POINTER(SFileExists)
+			INITIALIZE_STORM_FUNCTION_POINTER(SStrHash)
 		}
 	}
 
@@ -170,6 +173,11 @@ namespace NLuaAPI { namespace NSTORM {
 			luabind::object(pState, false).push(pState);
 		}
 	}
+
+	uint32_t LuaStormStringHash(const char* str)
+	{
+		return aero::std_call<uint32_t>(pgStormSStrHash, str);
+	}
 }}
 
 int luaopen_ar_storm(lua_State *pState)
@@ -185,7 +193,8 @@ int luaopen_ar_storm(lua_State *pState)
 			def("close_archive",        &NLuaAPI::NSTORM::LuaMpqNativeCloseArchive),
 			def("extract_file",         &NLuaAPI::NSTORM::LuaMpqNativeExtractFile),
 			def("has_file",             &NLuaAPI::NSTORM::LuaMpqNativeHasFile),
-			def("load_file",            &NLuaAPI::NSTORM::LuaMpqNativeLoadFile)
+			def("load_file",            &NLuaAPI::NSTORM::LuaMpqNativeLoadFile),
+			def("string_hash",          &NLuaAPI::NSTORM::LuaStormStringHash)
 		]
 	];
 
