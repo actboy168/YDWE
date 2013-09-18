@@ -252,7 +252,7 @@ bool __fastcall fake_we_create_map(uintptr_t this_, uintptr_t /*edx_*/, const ch
 	try {
 		boost::filesystem::path target(name);
 		boost::filesystem::path source = target.parent_path();
-		boost::filesystem::path source_mpq(source.wstring().substr(0, source.wstring().size()-4);
+		boost::filesystem::path source_mpq(source.wstring().substr(0, source.wstring().size()-4));
 
 		if (is_tft)
 		{
