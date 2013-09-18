@@ -134,13 +134,13 @@ void _fastcall CC_PutExternFuncEx_TopDown(DWORD This, DWORD OutClass, char* name
 
 void _fastcall CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name)
 {
-	CC_PutExternFuncEx_TopDown(This, OutClass, name);
-
 	switch (*(DWORD*)(This+0x138))
 	{
 	case CC_GUIID_YDWETimerStartMultiple:
 		{
 			locvar::guard _tmp_guard_(CC_GUIID_YDWETimerStartMultiple, name, "GetExpiredTimer()");
+
+			CC_PutExternFuncEx_TopDown(This, OutClass, name);
 
 			char buff[260];
 			BLZSStrPrintf(buff, 260, "function %sT takes nothing returns nothing", name);
@@ -158,6 +158,8 @@ void _fastcall CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name)
 		{
 			locvar::guard _tmp_guard_(CC_GUIID_YDWERegisterTriggerMultiple, name, "GetTriggeringTrigger()");
 
+			CC_PutExternFuncEx_TopDown(This, OutClass, name);
+
 			char buff[260];
 			BLZSStrPrintf(buff, 260, "function %sConditions takes nothing returns nothing", name);
 			PUT_CONST(buff, 1);
@@ -171,6 +173,7 @@ void _fastcall CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name)
 		}
 		break;
 	default:
+		CC_PutExternFuncEx_TopDown(This, OutClass, name);
 		break;
 	}
 }
