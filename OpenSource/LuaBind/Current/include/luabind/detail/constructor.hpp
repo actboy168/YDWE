@@ -8,16 +8,16 @@
 #  define LUABIND_DETAIL_CONSTRUCTOR_081018_HPP
 
 #  include <luabind/get_main_thread.hpp>
-#  include <luabind/object.hpp>
-#  include <luabind/wrapper_base.hpp>
+#  include <luabind/detail/object.hpp>
+#  ifndef LUABIND_WRAPPER_BASE_HPP_INCLUDED
+#   include <luabind/wrapper_base.hpp>
+#  endif
 #  include <luabind/detail/inheritance.hpp>
 
-#  ifndef LUABIND_CPP0x
-#   include <boost/preprocessor/iteration/iterate.hpp>
-#   include <boost/preprocessor/iteration/local.hpp>
-#   include <boost/preprocessor/repetition/enum_params.hpp>
-#   include <boost/preprocessor/repetition/enum_binary_params.hpp>
-#  endif
+#  include <boost/preprocessor/iteration/iterate.hpp>
+#  include <boost/preprocessor/iteration/local.hpp>
+#  include <boost/preprocessor/repetition/enum_params.hpp>
+#  include <boost/preprocessor/repetition/enum_binary_params.hpp>
 
 namespace luabind { namespace detail {
 
@@ -29,35 +29,6 @@ void inject_backref(lua_State* L, T* p, wrap_base*)
 {
     weak_ref(get_main_thread(L), L, 1).swap(wrap_access::ref(*p));
 }
-
-#  ifdef LUABIND_CPP0x
-
-template <class T, class Pointer, class Signature>
-struct construct;
-
-template <class T, class Pointer, class R, class Self, class... Args>
-struct construct<T, Pointer, vector<R, Self, Args...> >
-{
-    typedef pointer_holder<Pointer, T> holder_type;
-
-    void operator()(argument const& self_, Args... args) const
-    {
-        object_rep* self = touserdata<object_rep>(self_);
-
-        std::auto_ptr<T> instance(new T(args...));
-        inject_backref(self_.interpreter(), instance.get(), instance.get());
-
-        void* naked_ptr = instance.get();
-        Pointer ptr(instance.release());
-
-        void* storage = self->allocate(sizeof(holder_type));
-
-        self->set_instance(new (storage) holder_type(
-            ptr, registered_class<T>::id, naked_ptr));
-    }
-};
-
-#   else // LUABIND_CPP0x
 
 template <std::size_t Arity, class T, class Pointer, class Signature>
 struct construct_aux;
@@ -92,8 +63,6 @@ struct construct_aux<0, T, Pointer, Signature>
 #  define BOOST_PP_ITERATION_PARAMS_1 \
     (3, (1, LUABIND_MAX_ARITY, <luabind/detail/constructor.hpp>))
 #  include BOOST_PP_ITERATE()
-
-#  endif // LUABIND_CPP0x
 
 }} // namespace luabind::detail
 

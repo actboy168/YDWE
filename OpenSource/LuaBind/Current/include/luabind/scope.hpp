@@ -25,7 +25,7 @@
 
 #include <luabind/prefix.hpp>
 #include <luabind/config.hpp>
-#include <luabind/lua_include.hpp>
+#include <luabind/lua_state_fwd.hpp>
 #include <memory>
 
 namespace luabind { 

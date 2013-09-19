@@ -20,56 +20,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 
-#define LUABIND_BUILDING
+#ifndef INCLUDED_error_callback_fun_hpp_GUID_1150976a_4348_495f_99ce_9d7edd00a0b8
+#define INCLUDED_error_callback_fun_hpp_GUID_1150976a_4348_495f_99ce_9d7edd00a0b8
 
-#include <luabind/error.hpp>
+// Internal Includes
+#include <luabind/config.hpp>
+#include <luabind/lua_state_fwd.hpp>
 
+// Library/third-party includes
+// - none
+
+// Standard includes
+// - none
 
 namespace luabind
 {
+	class type_id;
 
-	namespace
-	{
-		pcall_callback_fun pcall_callback = 0;
-#ifdef LUABIND_NO_EXCEPTIONS
-		error_callback_fun error_callback = 0;
-		cast_failed_callback_fun cast_failed_callback = 0;
-#endif
-	}
-
-
-#ifdef LUABIND_NO_EXCEPTIONS
-
-	void set_error_callback(error_callback_fun e)
-	{
-		error_callback = e;
-	}
-
-	void set_cast_failed_callback(cast_failed_callback_fun c)
-	{
-		cast_failed_callback = c;
-	}
-
-	error_callback_fun get_error_callback()
-	{
-		return error_callback;
-	}
-
-	cast_failed_callback_fun get_cast_failed_callback()
-	{
-		return cast_failed_callback;
-	}
-
-#endif
-
-	void set_pcall_callback(pcall_callback_fun e)
-	{
-		pcall_callback = e;
-	}
-
-	pcall_callback_fun get_pcall_callback()
-	{
-		return pcall_callback;
-	}
-
+	typedef void(*error_callback_fun)(lua_State*);
+	typedef void(*cast_failed_callback_fun)(lua_State*, type_id const&);
+	typedef int(*pcall_callback_fun)(lua_State*);
 }
+
+#endif // INCLUDED_error_callback_fun_hpp_GUID_1150976a_4348_495f_99ce_9d7edd00a0b8

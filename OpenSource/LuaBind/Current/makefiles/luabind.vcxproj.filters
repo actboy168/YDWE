@@ -63,6 +63,15 @@
     <ClCompile Include="..\src\wrapper_base.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\function_introspection.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\operator.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\set_package_preload.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\luabind\adopt_policy.hpp">
@@ -301,6 +310,24 @@
     </ClInclude>
     <ClInclude Include="..\include\luabind\detail\yes_no.hpp">
       <Filter>include\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\luabind\detail\object.hpp">
+      <Filter>include\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\luabind\error_callback_fun.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\luabind\function_introspection.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\luabind\lua_state_fwd.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\luabind\set_package_preload.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\luabind\std_shared_ptr_converter.hpp">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

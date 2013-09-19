@@ -8,90 +8,17 @@
 #  define LUABIND_DEDUCE_SIGNATURE_080911_HPP
 
 #  include <luabind/detail/most_derived.hpp>
-#  include <luabind/vector.hpp>
 
-#  ifndef LUABIND_CPP0x
-#   if LUABIND_MAX_ARITY <= 8
-#    include <boost/mpl/vector/vector10.hpp>
-#   else
-#    include <boost/mpl/vector/vector50.hpp>
-#   endif
-#   include <boost/preprocessor/cat.hpp>
-#   include <boost/preprocessor/iteration/iterate.hpp>
-#   include <boost/preprocessor/repetition/enum_params.hpp>
+#  if LUABIND_MAX_ARITY <= 8
+#   include <boost/mpl/vector/vector10.hpp>
+#  else
+#   include <boost/mpl/vector/vector50.hpp>
 #  endif
+#  include <boost/preprocessor/cat.hpp>
+#  include <boost/preprocessor/iteration/iterate.hpp>
+#  include <boost/preprocessor/repetition/enum_params.hpp>
 
 namespace luabind { namespace detail {
-
-#  ifdef LUABIND_CPP0x
-
-template <class R, class... Args>
-vector<R, Args...> deduce_signature(R(*)(Args...), ...)
-{
-    return vector<R, Args...>();
-}
-
-template <class R, class T, class... Args>
-vector<R, T&, Args...> deduce_signature(R(T::*)(Args...))
-{
-    return vector<R, T&, Args...>();
-}
-
-template <class R, class T, class Wrapped, class... Args>
-vector<R, typename most_derived<T,Wrapped>::type&, Args...>
-deduce_signature(R(T::*)(Args...), Wrapped*)
-{
-    return vector<R, typename most_derived<T,Wrapped>::type&, Args...>();
-}
-
-template <class R, class T, class... Args>
-vector<R, T const&, Args...> deduce_signature(R(T::*)(Args...) const)
-{
-    return vector<R, T const&, Args...>();
-}
-
-template <class R, class T, class Wrapped, class... Args>
-vector<R, typename most_derived<T,Wrapped>::type const&, Args...>
-deduce_signature(R(T::*)(Args...) const, Wrapped*)
-{
-    return vector<R, typename most_derived<T,Wrapped>::type const&, Args...>();
-}
-
-// This is primarily intended to catch C++0x lambda closures. It figures out
-// the signature of a function object, and strips the object type from the
-// resulting signature:
-//
-//   vector<void, unspecified const&, ...>
-//
-//     into
-//
-//   vector<void, ...>
-//
-// This overload is all luabind needs to correctly handle monomorphic function
-// objects with a fixed signature such as C++0x lambdas. The standard doesn't
-// explicitly say that an implementation isn't allowed to add additional
-// overloads of operator() to the closure type, in practice however, noone
-// seems to.
-
-template <class Signature>
-struct strip_this_argument;
-
-template <class R, class T, class... Args>
-struct strip_this_argument<vector<R, T, Args...> >
-{
-    typedef vector<R, Args...> type;
-};
-
-template <class F>
-typename strip_this_argument<
-    decltype(deduce_signature(&F::operator()))
->::type deduce_signature(F const&)
-{
-    return typename strip_this_argument<
-        decltype(deduce_signature(&F::operator()))>::type();
-}
-
-#  else // LUABIND_CPP0x
 
 namespace mpl = boost::mpl;
 
@@ -130,8 +57,6 @@ deduce_signature(R(T::*)() const, Wrapped*)
 #  define BOOST_PP_ITERATION_PARAMS_1 \
     (3, (1, LUABIND_MAX_ARITY, <luabind/detail/deduce_signature.hpp>))
 #  include BOOST_PP_ITERATE()
-
-#  endif // LUABIND_CPP0x
 
 }} // namespace luabind::detail
 

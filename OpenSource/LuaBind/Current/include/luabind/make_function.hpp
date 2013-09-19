@@ -6,8 +6,7 @@
 # define LUABIND_MAKE_FUNCTION_081014_HPP
 
 # include <luabind/config.hpp>
-# include <luabind/object.hpp>
-# include <luabind/vector.hpp>
+# include <luabind/detail/object.hpp>
 # include <luabind/detail/call.hpp>
 # include <luabind/detail/deduce_signature.hpp>
 # include <luabind/detail/format_signature.hpp>
@@ -103,11 +102,9 @@ namespace detail
 template <class F, class Signature, class Policies>
 object make_function(lua_State* L, F f, Signature, Policies)
 {
-    typedef typename detail::as_vector<Signature>::type signature;
-
     return detail::make_function_aux(
         L
-      , new detail::function_object_impl<F, signature, Policies>(
+      , new detail::function_object_impl<F, Signature, Policies>(
             f, Policies()
         )
     );

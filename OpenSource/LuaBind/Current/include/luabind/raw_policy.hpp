@@ -31,7 +31,7 @@ namespace luabind { namespace detail  {
 
 	struct raw_converter
 	{
-        int const consumed_args(...)
+        int consumed_args(...) const
         {
             return 0;
         }

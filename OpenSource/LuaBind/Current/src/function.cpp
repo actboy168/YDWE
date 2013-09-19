@@ -107,6 +107,7 @@ void invoke_context::format_error(
 
     if (candidate_index == 0)
     {
+        int stacksize = lua_gettop(L);
         lua_pushstring(L, "No matching overload found, candidates:\n");
         int count = 0;
         for (function_object const* f = overloads; f != 0; f = f->next)
@@ -116,11 +117,12 @@ void invoke_context::format_error(
             f->format_signature(L, function_name);
             ++count;
         }
-        lua_concat(L, count * 2);
+        lua_concat(L, lua_gettop(L) - stacksize);
     }
     else
     {
         // Ambiguous
+        int stacksize = lua_gettop(L);
         lua_pushstring(L, "Ambiguous, candidates:\n");
         for (int i = 0; i < candidate_index; ++i)
         {
@@ -128,7 +130,7 @@ void invoke_context::format_error(
                 lua_pushstring(L, "\n");
             candidates[i]->format_signature(L, function_name);
         }
-        lua_concat(L, candidate_index * 2);
+        lua_concat(L, lua_gettop(L) - stacksize);
     }
 }
 

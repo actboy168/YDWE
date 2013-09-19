@@ -26,9 +26,12 @@
 #include <luabind/prefix.hpp>
 #include <exception>
 #include <luabind/config.hpp>
-#include <luabind/typeid.hpp>
+#include <luabind/error_callback_fun.hpp>
+#include <luabind/lua_state_fwd.hpp>
 
-struct lua_State;
+#ifndef LUABIND_NO_EXCEPTIONS
+#include <luabind/typeid.hpp>
+#endif
 
 namespace luabind
 {
@@ -73,9 +76,6 @@ namespace luabind
 
 #else
 
-	typedef void(*error_callback_fun)(lua_State*);
-	typedef void(*cast_failed_callback_fun)(lua_State*, type_id const&);
-
 	LUABIND_API void set_error_callback(error_callback_fun e);
 	LUABIND_API void set_cast_failed_callback(cast_failed_callback_fun c);
 	LUABIND_API error_callback_fun get_error_callback();
@@ -83,7 +83,6 @@ namespace luabind
 
 #endif
 
-	typedef int(*pcall_callback_fun)(lua_State*);
 	LUABIND_API void set_pcall_callback(pcall_callback_fun e);
 	LUABIND_API pcall_callback_fun get_pcall_callback();
 

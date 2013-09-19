@@ -25,10 +25,13 @@
 #define LUABIND_ADOPT_POLICY_HPP_INCLUDED
 
 #include <luabind/config.hpp>
-#include <luabind/wrapper_base.hpp>
+
+#ifndef LUABIND_WRAPPER_BASE_HPP_INCLUDED
+# include <luabind/wrapper_base.hpp>
+#endif
+
 #include <luabind/detail/policy.hpp>
 #include <luabind/back_reference_fwd.hpp>
-#include <luabind/wrapper_base.hpp>
 #include <boost/type_traits/is_polymorphic.hpp>
 
 namespace luabind { namespace detail 
@@ -52,7 +55,7 @@ namespace luabind { namespace detail
 	{
 		typedef adopt_pointer type;
 
-        int const consumed_args(...)
+        int consumed_args(...) const
         {
             return 1;
         }

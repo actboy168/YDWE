@@ -24,9 +24,11 @@
 
 #include <luabind/lua_include.hpp>
 
-#include <luabind/luabind.hpp>
-#include <luabind/function.hpp>
+#include <luabind/class.hpp>
 #include <luabind/get_main_thread.hpp>
+#include <luabind/set_package_preload.hpp>
+#include <luabind/function_introspection.hpp>
+#include <luabind/detail/garbage_collector.hpp>
 
 namespace luabind {
 
@@ -64,30 +66,6 @@ namespace
       return 0;
   }
 
-  int destroy_class_id_map(lua_State* L)
-  {
-      detail::class_id_map* m =
-          (detail::class_id_map*)lua_touserdata(L, 1);
-      m->~class_id_map();
-      return 0;
-  }
-
-  int destroy_cast_graph(lua_State* L)
-  {
-      detail::cast_graph* g =
-          (detail::cast_graph*)lua_touserdata(L, 1);
-      g->~cast_graph();
-      return 0;
-  }
-
-  int destroy_class_map(lua_State* L)
-  {
-      detail::class_map* m =
-          (detail::class_map*)lua_touserdata(L, 1);
-      m->~class_map();
-      return 0;
-  }
-
 } // namespace unnamed
 
     LUABIND_API lua_State* get_main_thread(lua_State* L)
@@ -101,6 +79,37 @@ namespace
             throw std::runtime_error("Unable to get main thread, luabind::open() not called?");
 
         return result;
+    }
+    namespace {
+        template<typename T>
+        inline void * shared_create_userdata(lua_State* L, const char * name) {
+            lua_pushstring(L, name);
+            void* storage = lua_newuserdata(L, sizeof(T));
+
+            // set gc metatable
+            lua_newtable(L);
+            lua_pushcclosure(L, &detail::garbage_collector<T>, 0);
+            lua_setfield(L, -2, "__gc");
+            lua_setmetatable(L, -2);
+
+            lua_settable(L, LUA_REGISTRYINDEX);
+            return storage;
+        }
+
+        template<typename T>
+        inline void createGarbageCollectedRegistryUserdata(lua_State* L, const char * name) {
+            void * storage = shared_create_userdata<T>(L, name);
+            // placement "new"
+            new (storage) T;
+        }
+
+        template<typename T, typename A1>
+        inline void createGarbageCollectedRegistryUserdata(lua_State* L, const char * name, A1 constructorArg) {
+            void * storage = shared_create_userdata<T>(L, name);
+
+            // placement "new"
+            new (storage) T(constructorArg);
+        }
     }
 
     LUABIND_API void open(lua_State* L)
@@ -116,83 +125,26 @@ namespace
             );
         }
 
-        if (detail::class_registry::get_registry(L))
-            return;
-
-        lua_pushstring(L, "__luabind_classes");
-        detail::class_registry* r = static_cast<detail::class_registry*>(
-            lua_newuserdata(L, sizeof(detail::class_registry)));
-
-        // set gc metatable
-        lua_newtable(L);
-        lua_pushstring(L, "__gc");
-        lua_pushcclosure(
-            L
-          , detail::garbage_collector_s<
-                detail::class_registry
-            >::apply
-          , 0);
-
-        lua_settable(L, -3);
-        lua_setmetatable(L, -2);
-
-        new(r) detail::class_registry(L);
-        lua_settable(L, LUA_REGISTRYINDEX);
-
-        lua_pushstring(L, "__luabind_class_id_map");
-        void* classes_storage = lua_newuserdata(L, sizeof(detail::class_id_map));
-        detail::class_id_map* class_ids = new (classes_storage) detail::class_id_map;
-        (void)class_ids;
-
-        lua_newtable(L);
-        lua_pushcclosure(L, &destroy_class_id_map, 0);
-        lua_setfield(L, -2, "__gc");
-        lua_setmetatable(L, -2);
-
-        lua_settable(L, LUA_REGISTRYINDEX);
-
-        lua_pushstring(L, "__luabind_cast_graph");
-        void* cast_graph_storage = lua_newuserdata(
-            L, sizeof(detail::cast_graph));
-        detail::cast_graph* graph = new (cast_graph_storage) detail::cast_graph;
-        (void)graph;
-
-        lua_newtable(L);
-        lua_pushcclosure(L, &destroy_cast_graph, 0);
-        lua_setfield(L, -2, "__gc");
-        lua_setmetatable(L, -2);
-
-        lua_settable(L, LUA_REGISTRYINDEX);
-
-        lua_pushstring(L, "__luabind_class_map");
-        void* class_map_storage = lua_newuserdata(
-            L, sizeof(detail::class_map));
-        detail::class_map* classes = new (class_map_storage) detail::class_map;
-        (void)classes;
-
-        lua_newtable(L);
-        lua_pushcclosure(L, &destroy_class_map, 0);
-        lua_setfield(L, -2, "__gc");
-        lua_setmetatable(L, -2);
-
-        lua_settable(L, LUA_REGISTRYINDEX);
+        createGarbageCollectedRegistryUserdata<detail::class_registry>(L, "__luabind_classes", L);
+        createGarbageCollectedRegistryUserdata<detail::class_id_map>(L, "__luabind_class_id_map");
+        createGarbageCollectedRegistryUserdata<detail::cast_graph>(L, "__luabind_cast_graph");
+        createGarbageCollectedRegistryUserdata<detail::class_map>(L, "__luabind_class_map");
 
         // add functions (class, cast etc...)
-        lua_pushstring(L, "class");
         lua_pushcclosure(L, detail::create_class::stage1, 0);
-        lua_settable(L, LUA_GLOBALSINDEX);
+        lua_setglobal(L, "class");
 
-        lua_pushstring(L, "property");
         lua_pushcclosure(L, &make_property, 0);
-        lua_settable(L, LUA_GLOBALSINDEX);
+        lua_setglobal(L, "property");
 
         lua_pushlightuserdata(L, &main_thread_tag);
         lua_pushlightuserdata(L, L);
         lua_rawset(L, LUA_REGISTRYINDEX);
 
-        lua_pushstring(L, "super");
         lua_pushcclosure(L, &deprecated_super, 0);
-        lua_settable(L, LUA_GLOBALSINDEX);
+        lua_setglobal(L, "super");
+
+        set_package_preload(L, "luabind.function_introspection", &bind_function_introspection);
     }
 
 } // namespace luabind

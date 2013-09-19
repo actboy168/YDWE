@@ -1,5 +1,18 @@
-// Copyright (c) 2003 Daniel Wallin and Arvid Norberg
+/**
+	@file
+	@brief Implementation
 
+	@date 2012
+
+	@author
+	Ryan Pavlik
+	<rpavlik@iastate.edu> and <abiryan@ryand.net>
+	http://academic.cleardefinition.com/
+	Iowa State University Virtual Reality Applications Center
+	Human-Computer Interaction Graduate Program
+*/
+
+//          Copyright Iowa State University 2012.
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation
@@ -22,54 +35,24 @@
 
 #define LUABIND_BUILDING
 
-#include <luabind/error.hpp>
+// Internal Includes
+#include <luabind/set_package_preload.hpp>
+#include <luabind/config.hpp>           // for LUABIND_API
+#include <luabind/detail/object.hpp>    // for object, rawget, globals
+
+// Library/third-party includes
+#include <luabind/lua_include.hpp>      // for lua_pushstring, lua_rawset, etc
+
+// Standard includes
+// - none
 
 
-namespace luabind
-{
+namespace luabind {
+    LUABIND_API void set_package_preload(lua_State * L, const char * modulename, int (*loader) (lua_State *)) {
+        rawget(rawget(globals(L), "package"), "preload").push(L);
+        lua_pushcclosure(L, loader, 0);
+        lua_setfield(L, -2, modulename);
+        lua_pop(L, 1);
+    }
 
-	namespace
-	{
-		pcall_callback_fun pcall_callback = 0;
-#ifdef LUABIND_NO_EXCEPTIONS
-		error_callback_fun error_callback = 0;
-		cast_failed_callback_fun cast_failed_callback = 0;
-#endif
-	}
-
-
-#ifdef LUABIND_NO_EXCEPTIONS
-
-	void set_error_callback(error_callback_fun e)
-	{
-		error_callback = e;
-	}
-
-	void set_cast_failed_callback(cast_failed_callback_fun c)
-	{
-		cast_failed_callback = c;
-	}
-
-	error_callback_fun get_error_callback()
-	{
-		return error_callback;
-	}
-
-	cast_failed_callback_fun get_cast_failed_callback()
-	{
-		return cast_failed_callback;
-	}
-
-#endif
-
-	void set_pcall_callback(pcall_callback_fun e)
-	{
-		pcall_callback = e;
-	}
-
-	pcall_callback_fun get_pcall_callback()
-	{
-		return pcall_callback;
-	}
-
-}
+} // namespace luabind

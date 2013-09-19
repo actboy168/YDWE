@@ -23,6 +23,8 @@
 #ifndef LUABIND_FROM_STACK_050715_HPP
 #define LUABIND_FROM_STACK_050715_HPP
 
+#include <luabind/lua_state_fwd.hpp>
+
 namespace luabind {
 
 struct from_stack

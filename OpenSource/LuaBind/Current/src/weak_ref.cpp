@@ -36,6 +36,7 @@ namespace
 {
 
   int weak_table_tag;
+  int impl_table_tag;
 
 } // namespace unnamed
 
@@ -49,7 +50,7 @@ LUABIND_API void get_weak_table(lua_State* L)
         lua_pop(L, 1);
         lua_newtable(L);
         // metatable
-        lua_newtable(L);
+        lua_createtable(L, 0, 1); // One non-sequence entry for __mode.
         lua_pushliteral(L, "__mode");
         lua_pushliteral(L, "v");
         lua_rawset(L, -3);
@@ -59,7 +60,28 @@ LUABIND_API void get_weak_table(lua_State* L)
         lua_pushlightuserdata(L, &weak_table_tag);
         lua_pushvalue(L, -2);
         lua_rawset(L, LUA_REGISTRYINDEX);
+
     }
+
+}
+
+LUABIND_API void get_impl_table(lua_State* L)
+{
+
+    lua_pushlightuserdata(L, &impl_table_tag);
+    lua_rawget(L, LUA_REGISTRYINDEX);
+
+    if (lua_isnil(L, -1))
+    {
+        lua_pop(L, 1);
+
+        lua_newtable(L);
+        lua_pushlightuserdata(L, &impl_table_tag);
+        lua_pushvalue(L, -2);
+        lua_rawset(L, LUA_REGISTRYINDEX);
+
+    }
+
 }
 
 } // namespace luabind
@@ -74,15 +96,22 @@ namespace luabind
             , state(main)
             , ref(0)
         {
-            get_weak_table(s);
-            lua_pushvalue(s, index);
+
+            get_impl_table(s);
+            lua_pushlightuserdata(s, this);
             ref = luaL_ref(s, -2);
             lua_pop(s, 1);
+
+            get_weak_table(s);
+            lua_pushvalue(s, index);
+            lua_rawseti(s, -2, ref);
+            lua_pop(s, 1);
+
         }
 
         ~impl()
         {
-            get_weak_table(state);
+            get_impl_table(state);
             luaL_unref(state, -1, ref);
             lua_pop(state, 1);
         }

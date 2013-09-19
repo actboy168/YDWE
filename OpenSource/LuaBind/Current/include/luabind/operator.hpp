@@ -26,10 +26,9 @@
 #include <boost/mpl/eval_if.hpp>
 #include <boost/mpl/identity.hpp>
 #include <boost/mpl/apply_wrap.hpp>
-#ifndef LUABIND_CPP0x
+#include <boost/preprocessor/repetition/enum_params.hpp>
 #include <boost/preprocessor/repetition/enum_trailing.hpp>
 #include <boost/preprocessor/repetition/enum_trailing_params.hpp>
-#endif
 #include <boost/type_traits/is_same.hpp>
 #include <luabind/detail/other.hpp>
 #include <luabind/raw_policy.hpp>
@@ -65,70 +64,28 @@ namespace luabind { namespace detail {
     
 }} // namespace luabind
 
+#include <boost/preprocessor/iteration/iterate.hpp>
+
 namespace luabind { namespace operators {
 
-# ifdef LUABIND_CPP0x
-
-template <class Self, class... Args>
-struct call_operator
-  : detail::operator_<call_operator>
-{
-    call_operator(int)
-    {}
-
-    template <class T, class Policies>
-    struct apply
-    {
-        static void execute(
-            lua_State* L
-          , typename detail::unwrap_parameter_type<T, Self>::type self
-          , detail::unwrap_parameter_type<T, Args>::type args...
-        )
-        {
-            using namespace detail;
-            operator_result(
-                L
-              , (self(args...), detail::operator_void_return())
-              , (Policies*)0
-            );
-        }
-    };
-
-    static char const* name() { return "__call"; }
-};
-
-# else // LUABIND_CPP_0x
    #define BOOST_PP_ITERATION_PARAMS_1 (3, \
        (0, LUABIND_MAX_ARITY, <luabind/detail/call_operator_iterate.hpp>))
    #include BOOST_PP_ITERATE()
-# endif // LUABIND_CPP_0x
     
 }} // namespace luabind::operators
 
-#ifndef LUABIND_CPP0x
-# include <boost/preprocessor/iteration/local.hpp>
-#endif
+#include <boost/preprocessor/iteration/local.hpp>
 
 namespace luabind {
 
     template<class Derived>
     struct self_base
     {
-# ifdef LUABIND_CPP0x
-
-        template <class... Args>
-        operators::call_operator<Derived, Args...> operator()(Args const&...) const
-        {
-            return 0;
-        }
-
-# else // LUABIND_CPP0x
-
         operators::call_operator0<Derived> operator()() const
         {
             return 0;
         }
-
+        
 #define BOOST_PP_LOCAL_MACRO(n) \
         template<BOOST_PP_ENUM_PARAMS(n, class A)> \
         BOOST_PP_CAT(operators::call_operator, n)< \
@@ -144,8 +101,6 @@ namespace luabind {
 
 #define BOOST_PP_LOCAL_LIMITS (1, LUABIND_MAX_ARITY)
 #include BOOST_PP_LOCAL_ITERATE()
-
-# endif // LUABIND_CPP0x
 
     };
 
@@ -222,7 +177,7 @@ namespace detail {
     };
 
     template<class Policies>
-    inline void operator_result(lua_State* L, operator_void_return, Policies*)
+    inline void operator_result(lua_State*, operator_void_return, Policies*)
     {
     }
 
@@ -333,12 +288,13 @@ namespace luabind {
     LUABIND_BINARY_OPERATOR(sub, -)
     LUABIND_BINARY_OPERATOR(mul, *)
     LUABIND_BINARY_OPERATOR(div, /)
+    LUABIND_BINARY_OPERATOR(mod, %)
     LUABIND_BINARY_OPERATOR(pow, ^)
     LUABIND_BINARY_OPERATOR(lt, <)
     LUABIND_BINARY_OPERATOR(le, <=)
     LUABIND_BINARY_OPERATOR(eq, ==)
 
-#undef LUABIND_UNARY_OPERATOR
+#undef LUABIND_BINARY_OPERATOR
 
 #define LUABIND_UNARY_OPERATOR(name_, op, fn) \
     namespace operators { \
@@ -388,7 +344,7 @@ namespace luabind {
     LUABIND_UNARY_OPERATOR(tostring, tostring_operator, tostring)
     LUABIND_UNARY_OPERATOR(unm, -, operator-)
 
-#undef LUABIND_BINARY_OPERATOR
+#undef LUABIND_UNARY_OPERATOR
 
     namespace {
 

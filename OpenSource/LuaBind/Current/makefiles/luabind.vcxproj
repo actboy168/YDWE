@@ -19,12 +19,15 @@
     <ClCompile Include="..\src\error.cpp" />
     <ClCompile Include="..\src\exception_handler.cpp" />
     <ClCompile Include="..\src\function.cpp" />
+    <ClCompile Include="..\src\function_introspection.cpp" />
     <ClCompile Include="..\src\inheritance.cpp" />
     <ClCompile Include="..\src\link_compatibility.cpp" />
     <ClCompile Include="..\src\object_rep.cpp" />
     <ClCompile Include="..\src\open.cpp" />
+    <ClCompile Include="..\src\operator.cpp" />
     <ClCompile Include="..\src\pcall.cpp" />
     <ClCompile Include="..\src\scope.cpp" />
+    <ClCompile Include="..\src\set_package_preload.cpp" />
     <ClCompile Include="..\src\stack_content_by_name.cpp" />
     <ClCompile Include="..\src\weak_ref.cpp" />
     <ClCompile Include="..\src\wrapper_base.cpp" />
@@ -61,6 +64,7 @@
     <ClInclude Include="..\include\luabind\detail\link_compatibility.hpp" />
     <ClInclude Include="..\include\luabind\detail\make_instance.hpp" />
     <ClInclude Include="..\include\luabind\detail\most_derived.hpp" />
+    <ClInclude Include="..\include\luabind\detail\object.hpp" />
     <ClInclude Include="..\include\luabind\detail\object_call.hpp" />
     <ClInclude Include="..\include\luabind\detail\object_rep.hpp" />
     <ClInclude Include="..\include\luabind\detail\open.hpp" />
@@ -79,15 +83,18 @@
     <ClInclude Include="..\include\luabind\detail\yes_no.hpp" />
     <ClInclude Include="..\include\luabind\discard_result_policy.hpp" />
     <ClInclude Include="..\include\luabind\error.hpp" />
+    <ClInclude Include="..\include\luabind\error_callback_fun.hpp" />
     <ClInclude Include="..\include\luabind\exception_handler.hpp" />
     <ClInclude Include="..\include\luabind\from_stack.hpp" />
     <ClInclude Include="..\include\luabind\function.hpp" />
+    <ClInclude Include="..\include\luabind\function_introspection.hpp" />
     <ClInclude Include="..\include\luabind\get_main_thread.hpp" />
     <ClInclude Include="..\include\luabind\get_pointer.hpp" />
     <ClInclude Include="..\include\luabind\handle.hpp" />
     <ClInclude Include="..\include\luabind\iterator_policy.hpp" />
     <ClInclude Include="..\include\luabind\luabind.hpp" />
     <ClInclude Include="..\include\luabind\lua_include.hpp" />
+    <ClInclude Include="..\include\luabind\lua_state_fwd.hpp" />
     <ClInclude Include="..\include\luabind\make_function.hpp" />
     <ClInclude Include="..\include\luabind\nil.hpp" />
     <ClInclude Include="..\include\luabind\no_dependency.hpp" />
@@ -99,7 +106,9 @@
     <ClInclude Include="..\include\luabind\raw_policy.hpp" />
     <ClInclude Include="..\include\luabind\return_reference_to_policy.hpp" />
     <ClInclude Include="..\include\luabind\scope.hpp" />
+    <ClInclude Include="..\include\luabind\set_package_preload.hpp" />
     <ClInclude Include="..\include\luabind\shared_ptr_converter.hpp" />
+    <ClInclude Include="..\include\luabind\std_shared_ptr_converter.hpp" />
     <ClInclude Include="..\include\luabind\table_policy.hpp" />
     <ClInclude Include="..\include\luabind\tag_function.hpp" />
     <ClInclude Include="..\include\luabind\typeid.hpp" />
@@ -151,7 +160,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\include;$(ProjectDir)\..\..\..\Lua\Current\include;$(ProjectDir)\..\..\..\Boost\1.53;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LUABIND_DYNAMIC_LINK;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUA_COMPAT_ALL;LUABIND_DYNAMIC_LINK;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -170,7 +179,7 @@
     <ClCompile>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>$(ProjectDir)\..\include;$(ProjectDir)\..\..\..\Lua\Current\include;$(ProjectDir)\..\..\..\Boost\1.53;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LUABIND_DYNAMIC_LINK;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LUA_COMPAT_ALL;LUABIND_DYNAMIC_LINK;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>

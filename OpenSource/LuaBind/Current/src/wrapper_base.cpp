@@ -34,6 +34,7 @@ namespace luabind { namespace detail
 	LUABIND_API void do_call_member_selection(lua_State* L, char const* name)
 	{
 		object_rep* obj = static_cast<object_rep*>(lua_touserdata(L, -1));
+		assert(obj);
 
         lua_pushstring(L, name);
         lua_gettable(L, -2);

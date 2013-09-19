@@ -1,5 +1,17 @@
-// Copyright (c) 2003 Daniel Wallin and Arvid Norberg
+/** @file
+	@brief Header
 
+	@date 2012
+
+	@author
+	Ryan Pavlik
+	<rpavlik@iastate.edu> and <abiryan@ryand.net>
+	http://academic.cleardefinition.com/
+	Iowa State University Virtual Reality Applications Center
+	Human-Computer Interaction Graduate Program
+*/
+
+//          Copyright Iowa State University 2012.
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation
@@ -20,56 +32,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 
-#define LUABIND_BUILDING
+#pragma once
+#ifndef INCLUDED_function_introspection_hpp_GUID_b55783e7_e6da_4816_925e_9256245c1065
+#define INCLUDED_function_introspection_hpp_GUID_b55783e7_e6da_4816_925e_9256245c1065
 
-#include <luabind/error.hpp>
+// Internal Includes
+#include <luabind/config.hpp>
+#include <luabind/lua_state_fwd.hpp>
 
+// Library/third-party includes
+// - none
 
-namespace luabind
-{
-
-	namespace
-	{
-		pcall_callback_fun pcall_callback = 0;
-#ifdef LUABIND_NO_EXCEPTIONS
-		error_callback_fun error_callback = 0;
-		cast_failed_callback_fun cast_failed_callback = 0;
-#endif
-	}
+// Standard includes
+// - none
 
 
-#ifdef LUABIND_NO_EXCEPTIONS
+namespace luabind {
 
-	void set_error_callback(error_callback_fun e)
-	{
-		error_callback = e;
-	}
+	LUABIND_API int bind_function_introspection(lua_State * L);
 
-	void set_cast_failed_callback(cast_failed_callback_fun c)
-	{
-		cast_failed_callback = c;
-	}
+} // end of namespace luabind
 
-	error_callback_fun get_error_callback()
-	{
-		return error_callback;
-	}
-
-	cast_failed_callback_fun get_cast_failed_callback()
-	{
-		return cast_failed_callback;
-	}
-
-#endif
-
-	void set_pcall_callback(pcall_callback_fun e)
-	{
-		pcall_callback = e;
-	}
-
-	pcall_callback_fun get_pcall_callback()
-	{
-		return pcall_callback;
-	}
-
-}
+#endif // INCLUDED_function_introspection_hpp_GUID_b55783e7_e6da_4816_925e_9256245c1065

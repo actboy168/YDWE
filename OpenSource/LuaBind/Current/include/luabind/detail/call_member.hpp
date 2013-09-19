@@ -31,15 +31,13 @@
 #include <luabind/detail/pcall.hpp>
 #include <luabind/error.hpp>
 #include <luabind/detail/stack_utils.hpp>
-#include <luabind/object.hpp> // TODO: REMOVE DEPENDENCY
+#include <luabind/detail/object.hpp> // TODO: REMOVE DEPENDENCY
 
-#ifndef LUABIND_CPP0x
-# include <boost/tuple/tuple.hpp>
+#include <boost/tuple/tuple.hpp>
 
-# include <boost/preprocessor/control/if.hpp>
-# include <boost/preprocessor/facilities/expand.hpp>
-# include <boost/preprocessor/repetition/enum.hpp>
-#endif
+#include <boost/preprocessor/control/if.hpp>
+#include <boost/preprocessor/facilities/expand.hpp>
+#include <boost/preprocessor/repetition/enum.hpp>
 
 #include <boost/mpl/apply_wrap.hpp>
 
@@ -86,11 +84,7 @@ namespace luabind
 					// and all the parameters
 
 					push_args_from_tuple<1>::apply(L, m_args);
-# ifdef LUABIND_CPP0x
-                    if (pcall(L, std::tuple_size<Tuple>::value + 1, 0))
-# else
 					if (pcall(L, boost::tuples::length<Tuple>::value + 1, 0))
-# endif
 					{
 						assert(lua_gettop(L) == top + 1);
 #ifndef LUABIND_NO_EXCEPTIONS
@@ -121,11 +115,7 @@ namespace luabind
 					// pcall will pop the function and self reference
 					// and all the parameters
 					push_args_from_tuple<1>::apply(L, m_args);
-# ifdef LUABIND_CPP0x
-                    if (pcall(L, std::tuple_size<Tuple>::value + 1, 1))
-# else
 					if (pcall(L, boost::tuples::length<Tuple>::value + 1, 1))
-# endif
 					{
 						assert(lua_gettop(L) == top + 1);
 #ifndef LUABIND_NO_EXCEPTIONS
@@ -177,11 +167,7 @@ namespace luabind
 					// and all the parameters
 
 					detail::push_args_from_tuple<1>::apply(L, m_args, p);
-# ifdef LUABIND_CPP0x
-                    if (pcall(L, std::tuple_size<Tuple>::value + 1, 1))
-# else
 					if (pcall(L, boost::tuples::length<Tuple>::value + 1, 1))
-# endif
 					{
 						assert(lua_gettop(L) == top + 1);
 #ifndef LUABIND_NO_EXCEPTIONS
@@ -261,11 +247,7 @@ namespace luabind
 					// and all the parameters
 
 					push_args_from_tuple<1>::apply(L, m_args);
-# ifdef LUABIND_CPP0x
-                    if (pcall(L, std::tuple_size<Tuple>::value + 1, 0))
-# else
 					if (pcall(L, boost::tuples::length<Tuple>::value + 1, 0))
-# endif
 					{
 						assert(lua_gettop(L) == top + 1);
 #ifndef LUABIND_NO_EXCEPTIONS
@@ -296,11 +278,7 @@ namespace luabind
 					// and all the parameters
 
 					detail::push_args_from_tuple<1>::apply(L, m_args, p);
-# ifdef LUABIND_CPP0x
-                    if (pcall(L, std::tuple_size<Tuple>::value + 1, 0))
-# else
 					if (pcall(L, boost::tuples::length<Tuple>::value + 1, 0))
-# endif
 					{
 						assert(lua_gettop(L) == top + 1);
 #ifndef LUABIND_NO_EXCEPTIONS
@@ -327,54 +305,15 @@ namespace luabind
 
 	} // detail
 
-# ifdef LUABIND_CPP0x
-
-namespace detail
-{
-
-  template <class R, class... Args>
-  struct make_member_proxy
-  {
-      typedef proxy_member_caller<R, std::tuple<Args const*...> > type;
-  };
-
-  template <class... Args>
-  struct make_member_proxy<void, Args...>
-  {
-      typedef proxy_member_void_caller<std::tuple<Args const*...> > type;
-  };
-
-} // namespace detail
-
-template <class R, class... Args>
-typename detail::make_member_proxy<R, Args...>::type call_member(
-    object const& obj, char const* name, Args const&... args)
-{
-    // get the function
-    obj.push(obj.interpreter());
-    lua_pushstring(obj.interpreter(), name);
-    lua_gettable(obj.interpreter(), -2);
-    // duplicate the self-object
-    lua_pushvalue(obj.interpreter(), -2);
-    // remove the bottom self-object
-    lua_remove(obj.interpreter(), -3);
-
-    typedef typename detail::make_member_proxy<R, Args...>::type proxy_type;
-    return proxy_type(obj.interpreter(), std::tuple<Args const*...>(&args...));
-}
-
-# else // LUABIND_CPP0x
-
 	#define BOOST_PP_ITERATION_PARAMS_1 (4, (0, LUABIND_MAX_ARITY, <luabind/detail/call_member.hpp>, 1))
 	#include BOOST_PP_ITERATE()
-
-# endif
 
 }
 
 #endif // LUABIND_CALL_MEMBER_HPP_INCLUDED
 
-#elif BOOST_PP_ITERATION_FLAGS() == 1
+#else
+#if BOOST_PP_ITERATION_FLAGS() == 1
 
 #define LUABIND_TUPLE_PARAMS(z, n, data) const A##n *
 #define LUABIND_OPERATOR_PARAMS(z, n, data) const A##n & a##n
@@ -417,5 +356,6 @@ typename detail::make_member_proxy<R, Args...>::type call_member(
 #undef LUABIND_OPERATOR_PARAMS
 #undef LUABIND_TUPLE_PARAMS
 
+#endif
 #endif
 

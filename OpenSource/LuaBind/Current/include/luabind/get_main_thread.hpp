@@ -6,6 +6,7 @@
 # define LUABIND_GET_MAIN_THREAD_090321_HPP
 
 # include <luabind/config.hpp>
+# include <luabind/lua_state_fwd.hpp>
 
 namespace luabind {
 

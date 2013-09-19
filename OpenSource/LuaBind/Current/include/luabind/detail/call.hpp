@@ -7,12 +7,6 @@
 # ifndef LUABIND_CALL2_080911_HPP
 #  define LUABIND_CALL2_080911_HPP
 
-#  include <luabind/config.hpp>
-
-#  ifdef LUABIND_CPP0x
-#   include <luabind/detail/call_0x.hpp>
-#  else
-
 #  include <boost/mpl/apply_wrap.hpp>
 #  include <boost/mpl/begin_end.hpp>
 #  include <boost/mpl/deref.hpp>
@@ -26,6 +20,7 @@
 #  include <boost/preprocessor/repetition/enum_trailing_params.hpp>
 #  include <boost/type_traits/is_void.hpp>
 
+#  include <luabind/config.hpp>
 #  include <luabind/detail/policy.hpp>
 #  include <luabind/yield_policy.hpp>
 
@@ -196,8 +191,6 @@ inline int sum_scores(int const* first, int const* last)
 #  include BOOST_PP_ITERATE()
 
 }} // namespace luabind::detail
-
-# endif // LUABIND_CPP0x
 
 # endif // LUABIND_CALL2_080911_HPP
 

@@ -30,10 +30,8 @@
 #include <luabind/detail/ref.hpp>
 #include <luabind/detail/call_member.hpp>
 
-#ifndef LUABIND_CPP0x
-# include <boost/preprocessor/repetition/enum_trailing_params.hpp>
-# include <boost/preprocessor/repetition/enum_trailing_binary_params.hpp>
-#endif
+#include <boost/preprocessor/repetition/enum_trailing_params.hpp>
+#include <boost/preprocessor/repetition/enum_trailing_binary_params.hpp>
 
 #include <stdexcept>
 
@@ -62,57 +60,15 @@ namespace luabind
 		friend struct detail::wrap_access;
 		wrap_base() {}
 
-# ifdef LUABIND_CPP0x
-
-        template <class R, class... Args>
-        typename detail::make_member_proxy<R, Args...>::type call(
-            char const* name, Args const&... args) const
-        {
-            lua_State* L = m_self.state();
-            m_self.get(L);
-            assert(!lua_isnil(L, -1));
-            detail::do_call_member_selection(L, name);
-
-            if (lua_isnil(L, -1))
-            {
-                lua_pop(L, 1);
-                throw std::runtime_error("Attempt to call nonexistent function");
-            }
-
-            // push the self reference as the first parameter
-            m_self.get(L);
-
-            typedef typename detail::make_member_proxy<R, Args...>::type
-                proxy_type;
-            return proxy_type(L, std::tuple<Args const*...>(&args...));
-        }
-
-# else // LUABIND_CPP0x
-
     #define BOOST_PP_ITERATION_PARAMS_1 (4, (0, LUABIND_MAX_ARITY, <luabind/wrapper_base.hpp>, 1))
 	#include BOOST_PP_ITERATE()
-
-# endif // LUABIND_CPP0x
 
 	private:
 		wrapped_self_t m_self;
 	};
 
-# ifdef LUABIND_CPP0x
-
-    template <class R, class... Args>
-    typename detail::make_member_proxy<R, Args...>::type call_member(
-        wrap_base const* self, char const* name, Args const&... args)
-    {
-        return self->call<R>(name, args...);
-    }
-
-# else // LUABIND_CPP0x
-
-#  define BOOST_PP_ITERATION_PARAMS_1 (4, (0, LUABIND_MAX_ARITY, <luabind/wrapper_base.hpp>, 2))
+#define BOOST_PP_ITERATION_PARAMS_1 (4, (0, LUABIND_MAX_ARITY, <luabind/wrapper_base.hpp>, 2))
 #include BOOST_PP_ITERATE()
-
-# endif // LUABIND_CPP0x
 
 	namespace detail
 	{
@@ -133,7 +89,8 @@ namespace luabind
 
 #endif // LUABIND_WRAPPER_BASE_HPP_INCLUDED
 
-#elif BOOST_PP_ITERATION_FLAGS() == 1
+#else
+#if BOOST_PP_ITERATION_FLAGS() == 1
 
 #define LUABIND_TUPLE_PARAMS(z, n, data) const A##n *
 #define LUABIND_OPERATOR_PARAMS(z, n, data) const A##n & a##n
@@ -231,4 +188,5 @@ namespace luabind
 
 #undef N
 
+#endif
 #endif
