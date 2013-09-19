@@ -53,7 +53,7 @@ local function map_file_import(filename)
 				__map_handle__,
 				temp_file_path,
 				filename,
-				bit.bor(stormlib.MPQ_FILE_COMPRESS, stormlib.MPQ_FILE_REPLACEEXISTING),
+				bit32.bor(stormlib.MPQ_FILE_COMPRESS, stormlib.MPQ_FILE_REPLACEEXISTING),
 				stormlib.MPQ_COMPRESSION_ZLIB,
 				stormlib.MPQ_COMPRESSION_ZLIB
 			) then
@@ -109,9 +109,9 @@ function template.compile(self, map_path, map_handle, map_script_path)
 	local success, content = self:do_compile(content, env)
 	if not success then
 		if content then
-			gui.message_dialog(nil, content, _("Error"), bit.bor(gui.MB_ICONERROR, gui.MB_OK))
+			gui.message_dialog(nil, content, _("Error"), bit32.bor(gui.MB_ICONERROR, gui.MB_OK))
 		else
-			gui.message_dialog(nil, _("Unknown"), _("Error"), bit.bor(gui.MB_ICONERROR, gui.MB_OK))
+			gui.message_dialog(nil, _("Unknown"), _("Error"), bit32.bor(gui.MB_ICONERROR, gui.MB_OK))
 		end			
 		log.error("Template error processing: " .. tostring(content))
 		return nil
