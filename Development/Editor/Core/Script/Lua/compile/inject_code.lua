@@ -69,7 +69,7 @@ function inject_code.do_inject(self, map_script_path, inject_code_path_table)
 		log.trace("Writing code to " .. map_script_path:filename():string())
 
 		-- 打开文件供写入（追加模式）
-		local map_script_file, e = io.open(map_script_path:string(), "ab+")
+		local map_script_file, e = io.open(map_script_path:string(), "a+b")
 		if map_script_file then
 
 			-- 循环处理每个需要注入的文件

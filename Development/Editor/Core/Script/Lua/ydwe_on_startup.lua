@@ -27,7 +27,7 @@ local function check_conflicting_ui()
 	end
 	
 	if found then
-		if gui.message_dialog(nil, string.format(_("YDWE has detected that there is a directory named \"%s\" located in Warcraft 3 installation directory. It may prevent YDWE from working. Do you want to delete it?"), 'UI'), _("YDWE"), bit.bor(gui.MB_ICONQUESTION, gui.MB_YESNO)) == gui.IDYES then
+		if gui.message_dialog(nil, string.format(_("YDWE has detected that there is a directory named \"%s\" located in Warcraft 3 installation directory. It may prevent YDWE from working. Do you want to delete it?"), 'UI'), _("YDWE"), bit32.bor(gui.MB_ICONQUESTION, gui.MB_YESNO)) == gui.IDYES then
 			for index, file in ipairs(file_list) do			
 				log.debug("remove file " .. (fs.war3_path() / file):string())
 				pcall(fs.remove_all, fs.war3_path() / file)
@@ -49,7 +49,7 @@ local function check_conflicting_units()
 	end
 	
 	if found then
-		if gui.message_dialog(nil, string.format(_("YDWE has detected that there is a directory named \"%s\" located in Warcraft 3 installation directory. It may prevent YDWE from working. Do you want to delete it?"), 'Units'), _("YDWE"), bit.bor(gui.MB_ICONQUESTION, gui.MB_YESNO)) == gui.IDYES then		
+		if gui.message_dialog(nil, string.format(_("YDWE has detected that there is a directory named \"%s\" located in Warcraft 3 installation directory. It may prevent YDWE from working. Do you want to delete it?"), 'Units'), _("YDWE"), bit32.bor(gui.MB_ICONQUESTION, gui.MB_YESNO)) == gui.IDYES then		
 			for file in units_dir:list_directory() do	
 				if not fs.is_directory(file) then
 					log.debug("remove file " .. file:string())
@@ -123,7 +123,7 @@ local function check_war3_version()
 					nil,
 					_("YDWE has detected that your game.dll and war3patch.mpq mismatch. It may be caused by the so called \"Warcraft Version Converter\". This situation will cause a failure on saving and testing maps. It is strongly recommended to use the offical patched provided by Blizzard."),
 					_("YDWE"),
-					bit.bor(gui.MB_ICONQUESTION, gui.MB_OK)
+					bit32.bor(gui.MB_ICONQUESTION, gui.MB_OK)
 				)
 			end
 		end

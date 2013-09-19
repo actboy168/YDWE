@@ -71,6 +71,11 @@ end
 
 template = {}
 
+local function sanbox(f, env) 
+	local _ENV = env 
+	return f	
+end
+	
 function template.do_compile (self, code, env)
 	local lua_codes = {''}
 	table.insert(lua_codes, "local __jass_result__ = {''}")
@@ -84,7 +89,8 @@ function template.do_compile (self, code, env)
 	if not f then
 		return f, err
 	end
-	return pcall(setfenv(f, env))
+	
+	return pcall(sanbox(f, env))
 end
 
 function template.compile(self, map_path, map_handle, map_script_path)

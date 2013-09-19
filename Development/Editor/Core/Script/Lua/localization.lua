@@ -1,7 +1,7 @@
 require "i18n"
 require "util"
 
-local cm = i18n.conv_method(bit.bor(bit.rshift(2, 16), string.byte("?", 1)))
+local cm = i18n.conv_method(bit32.bor(bit32.rshift(2, 16), string.byte("?", 1)))
 
 -- 转换为本地语言
 -- str - UTF-8编码的文本ID

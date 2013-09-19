@@ -78,7 +78,7 @@ local function file_export()
 				main_window_handle,
 				_("The file you have entered does not exist."),
 				_("YDWE"),
-				bit.bor(gui.MB_ICONERROR, gui.MB_OK)
+				bit32.bor(gui.MB_ICONERROR, gui.MB_OK)
 			)
 		end
 	end
@@ -118,7 +118,7 @@ local function lua_test()
 					main_window_handle,
 					_("Error occured when executing code: ") .. tostring(result),
 					_("YDWE"),
-					bit.bor(gui.MB_ICONERROR, gui.MB_OK)
+					bit32.bor(gui.MB_ICONERROR, gui.MB_OK)
 				)
 				log.warn("Code execution failed. Error: " .. tostring(result))
 			end
@@ -127,7 +127,7 @@ local function lua_test()
 				main_window_handle,
 				_("There are syntax errors in your code."),
 				_("YDWE"),
-				bit.bor(gui.MB_ICONERROR, gui.MB_OK)
+				bit32.bor(gui.MB_ICONERROR, gui.MB_OK)
 			)
 			log.warn("Syntax error found in the code.")
 		end
@@ -176,7 +176,7 @@ event.register(event.EVENT_INIT_MENU, false, function (event_data)
 	ydwe_menu_handle = gui.create_menu()
 
 	-- 添加到菜单末尾
-	gui.append_menu(event_data.main_menu_handle, bit.bor(gui.MF_STRING, gui.MF_POPUP), mem.pointer_to_number(ydwe_menu_handle), _("&YDWE"))
+	gui.append_menu(event_data.main_menu_handle, bit32.bor(gui.MF_STRING, gui.MF_POPUP), mem.pointer_to_number(ydwe_menu_handle), _("&YDWE"))
 
 	-- 添加子菜单
 	gui.append_menu(ydwe_menu_handle, gui.MF_STRING, YDWE_MENU_ID_CONFIG, _("YDWE &Config"))
@@ -208,7 +208,7 @@ event.register(event.EVENT_WINDOW_MESSAGE, false,  function (event_data)
 	-- 只处理菜单信息
 	if event_data.message == gui.WM_COMMAND then
 		-- 菜单ID（低16位）
-		local menu_id = bit.band(event_data.wparam, 0xFFFF)
+		local menu_id = bit32.band(event_data.wparam, 0xFFFF)
 
 		-- 根据ID判断操作
 		if menu_id == YDWE_MENU_ID_CONFIG then
