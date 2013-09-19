@@ -6,23 +6,23 @@
 
 // YD Beyond Fate
 #ifndef DISABLE_YDTRIGGER
-YDWECustomScriptCode="自定义代码[YDWE]"
+YDWECustomScriptCode="自定义代码"
 YDWECustomScriptCode=~Jass 代码
 YDWECustomScriptCodeHint="可以在任何有返回值的地方输入一行代码. 比如: 杀死(自定义代码：GetTriggerUnit())。"
 
-YDWEGetAnyTypeLocalVariable="获取局部变量[YDWE]"
+YDWEGetAnyTypeLocalVariable="局部变量 -- 读取"
 YDWEGetAnyTypeLocalVariable="loc_",~变量名
 YDWEGetAnyTypeLocalVariableHint="可以获取到任意类型的局部变量。"
 
-YDWEForLoopLocVarIndex="获取局部变量循环数[YDWE]"
+YDWEForLoopLocVarIndex="局部变量 -- 读取(循环数)"
 YDWEForLoopLocVarIndex="loop_",~变量名
 YDWEForLoopLocVarIndexHint="用来获取当前循环中的循环数，是个真正的Jass局部变量。"  
 
-YDWELoadAnyTypeDataByUserData="获取 自定义值[YDWE]"
+YDWELoadAnyTypeDataByUserData="自定义值 -- 读取"
 YDWELoadAnyTypeDataByUserData="获取 [",~类型,"] ",~null," 的 ",~属性
 YDWELoadAnyTypeDataByUserDataHint="从某个数据上获取自定义值，如获取[单位] 恶魔猎手 的 命中率 。"    
 
-YDWEHaveSavedAnyTypeDataByUserData="是否存有自定义值[YDWE]"
+YDWEHaveSavedAnyTypeDataByUserData="自定义值 -- 是否存有"
 YDWEHaveSavedAnyTypeDataByUserData="[",~类型,"] ",~null," 拥有 [",~类型,"] "~属性
 YDWEHaveSavedAnyTypeDataByUserDataHint="判断某个数据的自定义值是否存在，如[单位] 恶魔猎手 拥有[物品] 圣剑。"
 #endif

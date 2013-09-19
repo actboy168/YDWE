@@ -280,6 +280,10 @@ YDWESetAnyTypeLocalVariable=0,typename,scriptcode,Null
 _YDWESetAnyTypeLocalVariable_Defaults=_,_,_
 _YDWESetAnyTypeLocalVariable_Category=TC_YDBF
 
+YDWEForLoopLocVarMultiple=1,scriptcode,integer,integer
+_YDWEForLoopLocVarMultiple_Defaults=_,1,10
+_YDWEForLoopLocVarMultiple_Category=TC_YDBF
+
 YDWETimerStartMultiple=0,timer,real,periodicoption
 _YDWETimerStartMultiple_Defaults=CreateTimer,0.03,PeriodicOptionOneTime
 _YDWETimerStartMultiple_Limits=_,_,0,_,_,_
@@ -294,10 +298,6 @@ _YDWERegisterTriggerMultiple_Category=TC_YDBF
 
 YDWERegisterTriggerFlush=0,nothing
 _YDWERegisterTriggerFlush_Category=TC_YDBF
-
-YDWEForLoopLocVarMultiple=1,scriptcode,integer,integer
-_YDWEForLoopLocVarMultiple_Defaults=_,1,10
-_YDWEForLoopLocVarMultiple_Category=TC_YDBF
 
 YDWESaveAnyTypeDataByUserData=0,typename,Null,scriptcode,typename,Null
 _YDWESaveAnyTypeDataByUserData_Defaults=_,_,_,_,_

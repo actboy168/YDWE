@@ -1533,45 +1533,46 @@ YDWEAddAIOrderHint="让单位有一定概率施放技能，命令要与技能目标一致；代码由Red_Wo
 
 //YD Aganist Fate
 #ifndef DISABLE_YDTRIGGER
-YDWEEnumUnitsInRangeMultiple="选取单位做动作 [YDWE]"
+YDWEEnumUnitsInRangeMultiple="选取单位 -- 圆形范围"
 YDWEEnumUnitsInRangeMultiple="选取以(",~坐标X,", ",~坐标Y,")为圆心,",~半径,"为半径的圆范围内的单位做动作" 
 YDWEEnumUnitsInRangeMultipleHint="选取范围内的单位做动作"
 
-YDWESetAnyTypeLocalVariable="设置局部变量[YDWE]"
+YDWESetAnyTypeLocalVariable="局部变量 -- 设置"
 YDWESetAnyTypeLocalVariable="设置 [",~类型,"] loc_",~变量名," = ",~null
 YDWESetAnyTypeLocalVariableHint="设置局部变量，可以指定变量类型.在1.24下不可直接将变量置为null"
 
-YDWETimerStartMultiple="运行计时器[YDWE]"
-YDWETimerStartMultiple="立即运行 ",~计时器," 时间设置: ",~time," 秒，是否循环: ",~false/true 
-YDWETimerStartMultipleHint="让计时器运行多个动作。计时器内不能使用等待。"  
-
-YDWETimerStartFlush="清除当前逆天计时器[YDWE]"
-YDWETimerStartFlush="清除当前逆天计时器"
-YDWETimerStartFlushHint="删除当前逆天计时器，并清空缓存或哈希表."
-
-YDWERegisterTriggerMultiple="注册触发器[YDWE]"
-YDWERegisterTriggerMultiple="注册 ",~触发器 
-YDWERegisterTriggerMultipleHint="触发器内不能使用等待。" 
-
-YDWERegisterTriggerFlush="清除当前逆天触发器[YDWE]"
-YDWERegisterTriggerFlush="清除当前逆天触发器"
-YDWERegisterTriggerFlushHint="删除当前逆天触发器，并清空缓存或哈希表."
-
-YDWEForLoopLocVarMultiple="使用局部变量(做多项动作)[YDWE]"
+YDWEForLoopLocVarMultiple="局部变量 -- 循环"
 YDWEForLoopLocVarMultiple="循环动作[loop_",~局部变量名,"]从 ",~开始," 到 ",~结束,", 运行 (Loop - 动作)"
 YDWEForLoopLocVarMultipleHint=
 
-YDWESaveAnyTypeDataByUserData="设置 自定义值 [YDWE]"
+YDWETimerStartMultiple="计时器   -- 运行"
+YDWETimerStartMultiple="立即运行 ",~计时器," 时间设置: ",~time," 秒，是否循环: ",~false/true 
+YDWETimerStartMultipleHint="让计时器运行多个动作。计时器内不能使用等待。"  
+
+YDWETimerStartFlush="计时器   -- 清除"
+YDWETimerStartFlush="清除当前逆天计时器"
+YDWETimerStartFlushHint="删除当前逆天计时器，并清空缓存或哈希表."
+
+YDWERegisterTriggerMultiple="触发器   -- 注册"
+YDWERegisterTriggerMultiple="注册 ",~触发器 
+YDWERegisterTriggerMultipleHint="触发器内不能使用等待。" 
+
+YDWERegisterTriggerFlush="触发器   -- 清除"
+YDWERegisterTriggerFlush="清除当前逆天触发器"
+YDWERegisterTriggerFlushHint="删除当前逆天触发器，并清空缓存或哈希表."
+
+YDWESaveAnyTypeDataByUserData="自定义值 -- 设置"
 YDWESaveAnyTypeDataByUserData="设置 [",~类型,"] ",~null," 的 ",~属性," 为 [",~类型,"]",~null
 YDWESaveAnyTypeDataByUserDataHint="设置某个数据的自定义属性，如设置[单位]李启铭_的_爸爸_为[单位]李刚。"
 
-YDWEFlushAllByUserData="清空 全部自定义值 [YDWE]"
+YDWEFlushAllByUserData="自定义值 -- 清除全部"
 YDWEFlushAllByUserData="清空 [",~类型,"] ",~null," 的所有自定义属性。"
 YDWEFlushAllByUserDataHint="清空某个数据所有的自定义属性。"
 
-YDWEFlushAnyTypeDataByUserData="清空 自定义值 [YDWE]"
+YDWEFlushAnyTypeDataByUserData="自定义值 -- 清除"
 YDWEFlushAnyTypeDataByUserData="清空 [",~类型,"] ",~null," 的[",~类型,"] ",~属性
 YDWEFlushAnyTypeDataByUserDataHint="清空某个数据的某项自定义属性。"
+
 #endif
 
 //YD Save Load
