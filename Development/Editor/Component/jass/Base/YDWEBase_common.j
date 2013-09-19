@@ -14,6 +14,8 @@ globals
     real yd_MapMinX = 0
     real yd_MapMaxY = 0
     real yd_MapMinY = 0
+    player array yd_TempPlayerArray
+    integer      yd_TempPlayerArrayTop
 endglobals
 
 //===========================================================================
@@ -193,6 +195,11 @@ function YDWESetAttackDamageWeaponType takes attacktype at,damagetype dt,weapont
 endfunction
 //unitpool bj_lastCreatedPool=null
 //unit bj_lastPoolAbstractedUnit=null
+
+function YDWEForceToPlayerArrayEnum takes nothing returns nothing
+    set yd_TempPlayerArray[yd_TempPlayerArrayTop] = GetEnumPlayer()
+    set yd_TempPlayerArrayTop = yd_TempPlayerArrayTop + 1
+endfunction
 
 //===========================================================================
 //===========================================================================

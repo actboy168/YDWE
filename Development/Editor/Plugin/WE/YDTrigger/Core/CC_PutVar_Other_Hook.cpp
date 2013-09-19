@@ -2,6 +2,7 @@
 #include "locvar.h"
 
 extern BOOL g_bYDWEEnumUnitsInRangeMultipleFlag;
+extern BOOL g_bForForceMultipleFlag;
 
 void _fastcall 
 CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD index, DWORD type)
@@ -23,7 +24,17 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
         {
             PUT_CONST("GetEnumUnit()", 0);
         }
-        return;
+		return;
+	case CC_GUIID_GetEnumPlayer:
+		if (g_bForForceMultipleFlag)
+		{
+			PUT_CONST("yd_TempPlayerArray["STRING_YDWE_LOCAL"index]", 0);
+		}
+		else
+		{
+			PUT_CONST("GetEnumPlayer()", 0);
+		}
+		return;
     case CC_GUIID_YDWECustomScriptCode:
       BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index+1);
       CC_PutVar(nItemClass, EDX, OutClass, NewName, 0, type, 1);

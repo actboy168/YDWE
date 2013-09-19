@@ -36,7 +36,7 @@ CC_PutLocal_SaveAndCheck(DWORD This, DWORD OutClass, enum VARTYPE_User_Defined t
 }
 
 void _fastcall
-CC_PutLocal_LocalVar(DWORD This, DWORD OutClass, enum VARTYPE_User_Defined type, char* name)
+CC_PutLocal_LocalVar(DWORD This, DWORD OutClass, enum VARTYPE_User_Defined type, char* prefix, char* name)
 {
   char buff[260];
   char name_covert[260];
@@ -45,7 +45,7 @@ CC_PutLocal_LocalVar(DWORD This, DWORD OutClass, enum VARTYPE_User_Defined type,
   {
     CC_PutBegin();
     ConvertString(name, name_covert, 260);
-    BLZSStrPrintf(buff, 260, "local %s ydl_%s", TypeName[type], name_covert);
+    BLZSStrPrintf(buff, 260, "local %s %s_%s", TypeName[type], prefix, name_covert);
     PUT_CONST(buff, 1);
     CC_PutEnd();
   }
@@ -107,11 +107,12 @@ CC_PutLocal_Search(DWORD This, DWORD OutClass, DWORD isSearchHashLocal, LONG ind
         CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, -1);
         break;      
       case CC_GUIID_YDWEForLoopLocVarMultiple:
-        CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_integer, ((char*)&GetGUIVar_Value(nItemClass, 0)));
+        CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_integer, "ydul", ((char*)&GetGUIVar_Value(nItemClass, 0)));
         CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, -1);
-        break;          
+		break;    
+	  case CC_GUIID_ForForceMultiple:
+		  CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_integer, "ydl", "index");
       case CC_GUIID_ForGroupMultiple:
-      case CC_GUIID_ForForceMultiple:
       case CC_GUIID_EnumDestructablesInRectAllMultiple:
       case CC_GUIID_EnumDestructablesInCircleBJMultiple:
       case CC_GUIID_EnumItemsInRectBJMultiple:
@@ -121,16 +122,16 @@ CC_PutLocal_Search(DWORD This, DWORD OutClass, DWORD isSearchHashLocal, LONG ind
         }
         break; 
       case CC_GUIID_YDWEEnumUnitsInRangeMultiple:
-          CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_group, "group");
-          CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_unit, "unit");
+          CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_group,  "ydl", "group");
+          CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_unit,  "ydl", "unit");
           CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, 0);
           break;
       case CC_GUIID_YDWETimerStartMultiple:
-        CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_timer, "timer");
+        CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_timer,  "ydl", "timer");
         CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, 0);
 		break; 
 	  case CC_GUIID_YDWERegisterTriggerMultiple:
-		  CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_trigger, "trigger");
+		  CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_trigger, "ydl", "trigger");
 		  CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, 0);
 		  break; 
 	  case CC_GUIID_YDWESetAnyTypeLocalVariable:

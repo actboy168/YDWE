@@ -2,6 +2,7 @@
 #include "locvar.h"
 
 BOOL g_bYDWEEnumUnitsInRangeMultipleFlag = FALSE;
+BOOL g_bForForceMultipleFlag = FALSE;
 
 BOOL _fastcall  CC_PutAction_SearchVar(DWORD This, DWORD OutClass);
 
@@ -25,7 +26,7 @@ void _fastcall
         CC_GetGlobalVar((*(DWORD**)(This+0x12C))[0], 0, varname, 260);
         break;
     case CC_GUIID_YDWEForLoopLocVarMultiple:
-        BLZSStrPrintf(varname_t, 260, STRING_YDWE_LOCAL"%s", ((char*)&GetGUIVar_Value(This, 0)));
+        BLZSStrPrintf(varname_t, 260, "ydul_%s", ((char*)&GetGUIVar_Value(This, 0)));
         ConvertString(varname_t, varname, 260);
         break;
     }
@@ -181,6 +182,31 @@ void _fastcall
             }
         }
         break;
+	case CC_GUIID_ForForceMultiple:
+		{
+			if (!g_bForForceMultipleFlag)
+			{
+				g_bForForceMultipleFlag = TRUE;
+
+				CC_PutBegin();
+				PUT_CONST("set yd_TempPlayerArrayTop = 0", 1);
+				PUT_CONST("call ForForce(", 0); 
+				PUT_VAR(This, 0); 
+				PUT_CONST(", function YDWEForceToPlayerArrayEnum)", 1); 
+				PUT_CONST("set ydl_index = 0", 1);
+				PUT_CONST("loop", 1);
+				CC_PutBegin();
+				PUT_CONST("exitwhen ydl_index >= yd_TempPlayerArrayTop", 1);
+				CC_PutEnd();
+				CC_PutBlock_Action(This, OutClass, name, 0);
+				PUT_CONST("set ydl_index = ydl_index + 1", 1);
+				PUT_CONST("endloop", 1);
+				CC_PutEnd();
+
+				g_bForForceMultipleFlag = FALSE;
+			}
+		}
+		break;
     case CC_GUIID_ForLoopA:
     case CC_GUIID_ForLoopB:
     case CC_GUIID_ForLoopVar:

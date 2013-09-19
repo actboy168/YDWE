@@ -84,6 +84,7 @@ GUIID_Table_Init()
   GUIID_Table_Put(YDWEEnumUnitsInRangeMultiple);
   GUIID_Table_Put(YDWEActivateTrigger);
   GUIID_Table_Put(GetEnumUnit);
+  GUIID_Table_Put(GetEnumPlayer);
   GUIID_Table_Put(TriggerSleepAction);
   GUIID_Table_Put(PolledWait);
   GUIID_Table_Put(YDWEGetObjectPropertyInteger);

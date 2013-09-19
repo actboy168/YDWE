@@ -116,19 +116,29 @@ void _fastcall CC_PutExternFuncEx_TopDown(DWORD This, DWORD OutClass, char* name
 
 	CC_PutExternFuncEx_Item(This, OutClass, name);
 
-	if (((CC_GUIID_ForGroupMultiple <= *(DWORD*)(This+0x138)) && (*(DWORD*)(This+0x138) <= CC_GUIID_EnumItemsInRectBJMultiple)))
+	switch (*(DWORD*)(This+0x138))
 	{
-		BLZSStrPrintf(buff, 260, "function %sA takes nothing returns nothing", name);
-		PUT_CONST(buff, 1);
+	case CC_GUIID_ForGroupMultiple:
+	//case CC_GUIID_ForForceMultiple:
+	case CC_GUIID_EnumDestructablesInRectAllMultiple:
+	case CC_GUIID_EnumDestructablesInCircleBJMultiple:
+	case CC_GUIID_EnumItemsInRectBJMultiple:
+		{
+			BLZSStrPrintf(buff, 260, "function %sA takes nothing returns nothing", name);
+			PUT_CONST(buff, 1);
 
-		CC_PutLocal_Begin(This, OutClass, FALSE, FALSE);
+			CC_PutLocal_Begin(This, OutClass, FALSE, FALSE);
 
-		CC_PutBlock_Action(This, OutClass, name, -1);
+			CC_PutBlock_Action(This, OutClass, name, -1);
 
-		CC_PutLocal_End(This, OutClass, FALSE, TRUE);
+			CC_PutLocal_End(This, OutClass, FALSE, TRUE);
 
-		PUT_CONST("endfunction", 1);
-		PUT_CONST("", 1);
+			PUT_CONST("endfunction", 1);
+			PUT_CONST("", 1);
+		}
+		break;
+	default:
+		break;
 	}
 }
 
