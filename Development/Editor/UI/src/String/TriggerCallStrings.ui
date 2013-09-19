@@ -586,7 +586,7 @@ StringHash="获取字符串的哈希值"
 StringHash="(",~String,")的哈希值"
 StringHashHint="获取一个对应该字符串的密钥，不同的字符串的密钥基本不可能相同，也很难找到两个不同的字符串他们有着相同的密钥。可以用于制作密码等功能。"
 
-YDWE_PreloadSL_Get="获取存档数据 [YDWE]"
+YDWE_PreloadSL_Get="获取存档数据"
 YDWE_PreloadSL_Get="从",~玩家,"获取 ※",~数据注释,"，","从","当","前","存","档","[",~数据项索引,"]","上","获","取"
 YDWE_PreloadSL_GetHint="从玩家本地存档上获取数据，需要填入正确的数据项索引，标签即该项数据的注释。"
 
@@ -626,11 +626,11 @@ YDWE_TP_GetExpiredTimerIndex="新中心计时器-获取当前到期计时器运行索引<Fetrix_sai
 YDWE_TP_GetExpiredTimerIndex="获取当前到期计时器运行索引"
 YDWE_TP_GetExpiredTimerIndexHint="当中心计时器运行某个触发器时，会生成一个运行索引；可以通过本条API来获取当前到期的计时器运行索引。"  
 
-YDWEGetGameCurrentTime="计时器系统-获取游戏当前时间[YDWE]"
+YDWEGetGameCurrentTime="计时器系统-获取游戏当前时间"
 YDWEGetGameCurrentTime="获取游戏当前时间"
 YDWEGetGameCurrentTimeHint="获得从游戏开始到目前流逝的时间，以秒为单位。" 
 
-YDWETimerSystemGetRunIndex="计时器系统-获取中心计时器当前执行索引[YDWE]"
+YDWETimerSystemGetRunIndex="计时器系统-获取中心计时器当前执行索引"
 YDWETimerSystemGetRunIndex="获取中心计时器当前执行索引"
 YDWETimerSystemGetRunIndexHint="获得中心计时器运行触发器或函数目前为止的执行次数。" 
 
@@ -1286,7 +1286,7 @@ AtanBJHint="采用角度制计算. 返回角度取值-90 — 90."
 
 Atan2="反正切(Y:X)(弧度) [R]"
 Atan2="Atan(",~Y," : ",~X,")"
-Atan2Hint="采用弧度制计算. 返回弧度取值-π/2 — π/2. native函数."
+Atan2Hint="采用弧度制计算. 返回弧度取值-π/2 — π/2. "
 
 Atan2BJ="反正切(角度)(Y:X)"
 Atan2BJ="Atan(",~Y," : ",~X,")"
