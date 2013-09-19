@@ -33,8 +33,7 @@ namespace lua
 
 		static int destroy(state* ls)
 		{
-			iterator* self = static_cast<iterator*>(ls->touserdata(1));
-			self->~iterator();
+			static_cast<iterator*>(ls->touserdata(1))->~iterator();
 			return 0;
 		}
 
