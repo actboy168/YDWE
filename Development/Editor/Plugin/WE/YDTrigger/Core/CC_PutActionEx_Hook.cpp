@@ -154,7 +154,11 @@ void _fastcall
         }
     case CC_GUIID_YDWEEnumUnitsInRangeMultiple:
         {
-            if (!g_bYDWEEnumUnitsInRangeMultipleFlag)
+            if (g_bYDWEEnumUnitsInRangeMultipleFlag)
+			{
+				ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_YDWEEnumUnitsInRangeMultiple");
+			}
+			else
             {
                 g_bYDWEEnumUnitsInRangeMultipleFlag = TRUE;
 
@@ -184,7 +188,11 @@ void _fastcall
         break;
 	case CC_GUIID_ForForceMultiple:
 		{
-			if (!g_bForForceMultipleFlag)
+			if (g_bForForceMultipleFlag)
+			{
+				ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ForForceMultiple");
+			}
+			else
 			{
 				g_bForForceMultipleFlag = TRUE;
 
