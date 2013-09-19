@@ -11,38 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\lauxlib.h" />
-    <ClInclude Include="..\include\lua.h" />
-    <ClInclude Include="..\include\lua.hpp" />
-    <ClInclude Include="..\include\luaconf.h" />
-    <ClInclude Include="..\include\lualib.h" />
-    <ClInclude Include="..\src\lapi.h" />
-    <ClInclude Include="..\src\lcode.h" />
-    <ClInclude Include="..\src\lctype.h" />
-    <ClInclude Include="..\src\ldebug.h" />
-    <ClInclude Include="..\src\ldo.h" />
-    <ClInclude Include="..\src\lfunc.h" />
-    <ClInclude Include="..\src\lgc.h" />
-    <ClInclude Include="..\src\llex.h" />
-    <ClInclude Include="..\src\llimits.h" />
-    <ClInclude Include="..\src\lmem.h" />
-    <ClInclude Include="..\src\lobject.h" />
-    <ClInclude Include="..\src\lopcodes.h" />
-    <ClInclude Include="..\src\lparser.h" />
-    <ClInclude Include="..\src\lstate.h" />
-    <ClInclude Include="..\src\lstring.h" />
-    <ClInclude Include="..\src\ltable.h" />
-    <ClInclude Include="..\src\ltm.h" />
-    <ClInclude Include="..\src\lundump.h" />
-    <ClInclude Include="..\src\lvm.h" />
-    <ClInclude Include="..\src\lzio.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\src\lapi.c" />
     <ClCompile Include="..\src\lauxlib.c" />
     <ClCompile Include="..\src\lbaselib.c" />
     <ClCompile Include="..\src\lbitlib.c" />
     <ClCompile Include="..\src\lcode.c" />
+    <ClCompile Include="..\src\lcorolib.c" />
+    <ClCompile Include="..\src\lctype.c" />
     <ClCompile Include="..\src\ldblib.c" />
     <ClCompile Include="..\src\ldebug.c" />
     <ClCompile Include="..\src\ldo.c" />
@@ -68,6 +43,33 @@
     <ClCompile Include="..\src\lundump.c" />
     <ClCompile Include="..\src\lvm.c" />
     <ClCompile Include="..\src\lzio.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\lauxlib.h" />
+    <ClInclude Include="..\include\lua.h" />
+    <ClInclude Include="..\include\lua.hpp" />
+    <ClInclude Include="..\include\luaconf.h" />
+    <ClInclude Include="..\include\lualib.h" />
+    <ClInclude Include="..\src\lapi.h" />
+    <ClInclude Include="..\src\lcode.h" />
+    <ClInclude Include="..\src\lctype.h" />
+    <ClInclude Include="..\src\ldebug.h" />
+    <ClInclude Include="..\src\ldo.h" />
+    <ClInclude Include="..\src\lfunc.h" />
+    <ClInclude Include="..\src\lgc.h" />
+    <ClInclude Include="..\src\llex.h" />
+    <ClInclude Include="..\src\llimits.h" />
+    <ClInclude Include="..\src\lmem.h" />
+    <ClInclude Include="..\src\lobject.h" />
+    <ClInclude Include="..\src\lopcodes.h" />
+    <ClInclude Include="..\src\lparser.h" />
+    <ClInclude Include="..\src\lstate.h" />
+    <ClInclude Include="..\src\lstring.h" />
+    <ClInclude Include="..\src\ltable.h" />
+    <ClInclude Include="..\src\ltm.h" />
+    <ClInclude Include="..\src\lundump.h" />
+    <ClInclude Include="..\src\lvm.h" />
+    <ClInclude Include="..\src\lzio.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B84F7231-16CE-41D8-8C08-7B523FF4225B}</ProjectGuid>
@@ -121,7 +123,6 @@
     <Lib />
     <Link>
       <OutputFile>..\bin\$(PlatformName)\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
