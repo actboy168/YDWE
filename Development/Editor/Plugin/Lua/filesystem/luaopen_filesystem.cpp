@@ -4,7 +4,6 @@
 #include <luabind/luabind.hpp>
 #include <luabind/object.hpp>
 #include <luabind/operator.hpp>
-#include <luabind/table_policy.hpp>
 #include <luabind/return_reference_to_policy.hpp>
 #include <luabind/iterator_policy.hpp>
 #include <base/lua/luabind.h>

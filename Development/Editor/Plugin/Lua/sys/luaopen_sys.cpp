@@ -4,7 +4,6 @@
 #include <luabind/luabind.hpp>
 #include <luabind/object.hpp>
 #include <luabind/operator.hpp>
-#include <luabind/table_policy.hpp>
 #include <luabind/return_reference_to_policy.hpp>
 #include <base/lua/luabind.h>
 #pragma warning(pop)
@@ -534,15 +533,16 @@ int luaopen_sys(lua_State *pState)
 		
 		def("get_clipboard_text", &NLuaAPI::NSys::LuaSysGetClipboardText),
 		def("set_clipboard_text", &NLuaAPI::NSys::LuaSysSetClipboardText)
-	];
-	lua_getglobal(pState, "sys");
-		lua_getfield(pState, -1, "open_pipe");
-			lua_createtable(pState, 0, 1);
-				lua_pushcfunction(pState, NLuaAPI::NSys::LuaFileClose);
-				lua_setfield(pState, -2, "__close");
-			lua_setfenv(pState, -2);
-		lua_pop(pState, 1);
-	lua_pop(pState, 1);
+	];
+
+	//lua_getglobal(pState, "sys");
+	//	lua_getfield(pState, -1, "open_pipe");
+	//		lua_createtable(pState, 0, 1);
+	//			lua_pushcfunction(pState, NLuaAPI::NSys::LuaFileClose);
+	//			lua_setfield(pState, -2, "__close");
+	//		lua_setfenv(pState, -2);
+	//	lua_pop(pState, 1);
+	//lua_pop(pState, 1);
 
 	return 0;
 }
