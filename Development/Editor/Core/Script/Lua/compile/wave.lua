@@ -68,6 +68,12 @@ end
 function wave.compile(self, code_path, option)
 	log.trace("Wave compilation start.")		
 	
+	local map_script_file = io.open(code_path:string(), "a+b")
+	if map_script_file then
+		map_script_file:write("/**/\r\n")
+		map_script_file:close()
+	end
+	
 	local exit_code, out, err, out_file_path = self:do_compile(code_path, option)
 	
 	-- 退出码0代表成功
