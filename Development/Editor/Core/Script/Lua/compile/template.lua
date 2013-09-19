@@ -70,11 +70,6 @@ local function string_hash(str)
 end
 
 template = {}
-
-local function sanbox(f, env) 
-	local _ENV = env 
-	return f	
-end
 	
 function template.do_compile (self, code, env)
 	local lua_codes = {''}
@@ -85,12 +80,12 @@ function template.do_compile (self, code, env)
 		return r, err
 	end
 	table.insert(lua_codes, "return table.concat(__jass_result__)")	
-	local f, err = loadstring(table.concat(lua_codes, '\n'))
+	local f, err = loadstring(table.concat(lua_codes, '\n'), nil, 't', env)
 	if not f then
 		return f, err
 	end
 	
-	return pcall(sanbox(f, env))
+	return pcall(f)
 end
 
 function template.compile(self, map_path, map_handle, map_script_path)
