@@ -56,13 +56,13 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>LUA_COMPAT_ALL;WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OpenSource)\Lua\5.2.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>yd_lua_engine.def</ModuleDefinitionFile>
+      <AdditionalDependencies>luacore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -74,7 +74,6 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>LUA_COMPAT_ALL;WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OpenSource)\Lua\5.2.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -83,137 +82,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>yd_lua_engine.def</ModuleDefinitionFile>
+      <AdditionalDependencies>luacore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lapi.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lauxlib.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lbaselib.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lbitlib.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lcode.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lcorolib.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lctype.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldblib.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldebug.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldo.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldump.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lfunc.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lgc.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\linit.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\liolib.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\llex.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lmathlib.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lmem.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\loadlib.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lobject.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lopcodes.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\loslib.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lparser.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstate.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstring.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstrlib.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltable.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltablib.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltm.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lundump.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lvm.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lzio.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level3</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level3</WarningLevel>
-    </ClCompile>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="lua\class_real.cpp" />
     <ClCompile Include="lua\helper.cpp" />
@@ -233,31 +105,6 @@
     <None Include="yd_lua_engine.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\include\lauxlib.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\include\lua.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\include\lua.hpp" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\include\luaconf.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\include\lualib.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lapi.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lcode.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lctype.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldebug.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ldo.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lfunc.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lgc.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\llex.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\llimits.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lmem.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lobject.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lopcodes.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lparser.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstate.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lstring.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltable.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\ltm.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lundump.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lvm.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.2\src\lzio.h" />
     <ClInclude Include="lua\class_real.h" />
     <ClInclude Include="lua\helper.h" />
     <ClInclude Include="lua\jassbind.h" />
