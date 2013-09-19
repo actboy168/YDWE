@@ -163,15 +163,15 @@ YDWETimerRunTrigger="计时器系统-运行触发器"
 YDWETimerRunTrigger="在 ",~时间," 秒后运行 ",~触发器
 YDWETimerRunTriggerHint="启动中心计时器，在指定时间之后运行触发器。"
 
-YDWETimerRunPeriodicTrigger="计时器系统-循环运行触发器<everguo添加>"
+YDWETimerRunPeriodicTrigger="计时器系统-循环运行触发器"
 YDWETimerRunPeriodicTrigger="每隔 ",~时间," 秒运行 ",~触发器,"，永久运行 ",~真值,"，运行 ",~整数," 次，运行标识 ",~整数,"。" 
 YDWETimerRunPeriodicTriggerHint="启动中心计时器，按指定间隔时间运行触发器；当永久运行为真，运行次数会被忽略；运行标识是自定义一个值，用来区别其它运行。"
 
-YDWETimerRunPeriodicTriggerFunction="计时器系统-循环运行触发器函数<everguo添加>"
+YDWETimerRunPeriodicTriggerFunction="计时器系统-循环运行触发器函数"
 YDWETimerRunPeriodicTriggerFunction="每隔 ",~时间," 秒直接运行 ",~触发器," 动作函数，永久运行 ",~真值,"，运行 ",~整数," 次，运行标识 ",~整数,"。" 
 YDWETimerRunPeriodicTriggerFunctionHint="使用方法同上；直接运行触发器动作函数效率比运行触发器高，但触发器动作中不能有等待。"
 
-YDWETimerRunPeriodicTriggerOver="计时器系统-终止运行触发器<everguo添加>"
+YDWETimerRunPeriodicTriggerOver="计时器系统-终止运行触发器"
 YDWETimerRunPeriodicTriggerOver="停止运行 ",~触发器,"，运行标识 ",~整数,"。" 
 YDWETimerRunPeriodicTriggerOverHint="使中心计时器不再运行该触发器；若触发器同一时间被多次运行且运行标识相同，中心计时器会停止对该触发器所有运行。"
 
@@ -1441,7 +1441,7 @@ YDWECreateEwsp="创建环绕单位<wataloo添加>"
 YDWECreateEwsp="围绕 ",~单位," 创建 ",~单位类型," 共 ",~n,"个 ，旋转半径 ",~R,"，持续 ",~T," 秒，刷新周期 ",~I,"，旋转角速度每个周期 ",~S,"。"
 YDWECreateEwspHint="刷新周期越小动画越连续，但也越耗资源"    
 
-YDWEJumpTimer="跳跃函数<everguo添加>"
+YDWEJumpTimer="跳跃函数"
 YDWEJumpTimer="命令 ",~单位," 向 ",~方向," 方向跳跃，距离为 ",~距离," ，持续 ",~时间," 秒，刷新周期 ",~I,"，最大高度 ",~高度,"。"
 YDWEJumpTimerHint="当最大高度设置为0，则为普通的移动。"
 
@@ -1478,23 +1478,23 @@ YDWE_TP_SetTimeInterval="新中心计时器-修改运行间隔<Fetrix_sai制作>"
 YDWE_TP_SetTimeInterval="修改运行索引为 ",~计时器运行索引," 的计时器运行间隔为 ",~实数 
 YDWE_TP_SetTimeIntervalHint="当中心计时器运行某个触发器时，会生成一个运行索引；可以中途修改计时器某次运行的时间间隔。"  
 
-YDWEAttackWaveTimer="刷兵系统<everguo添加>"
+YDWEAttackWaveTimer="刷兵系统"
 YDWEAttackWaveTimer="为玩家 ",~玩家," 创建 ",~n," 个 ",~单位类型," 在点 ",~初始点," 面向 ",~角度,"，命令他们攻击到点 ",~目标点,"，刷新周期 ",~周期,"。"
 YDWEAttackWaveTimerHint="3C的刷兵系统，也可用于防守RPG，按周期生成每波单位向指定点进攻。"  
 
-YDWERemoveAttackWaveByUnitID="取消刷兵(输入参数)<everguo添加>"
+YDWERemoveAttackWaveByUnitID="取消刷兵(输入参数)"
 YDWERemoveAttackWaveByUnitID="停止创建 ",~单位,"，地点为 ",~初始点,"，周期是 ",~周期
 YDWERemoveAttackWaveByUnitIDHint="取消刷兵，注意这里填写的参数要与前面刷兵系统一致，不然无法停止刷兵。"  
 
-YDWERemoveAttackWaveByTimer="取消刷兵(删除计时器)<everguo添加>"
+YDWERemoveAttackWaveByTimer="取消刷兵(删除计时器)"
 YDWERemoveAttackWaveByTimer="删除刷兵计时器 ",~计时器
 YDWERemoveAttackWaveByTimerHint="取消刷兵，并能自动清空缓存。" 
 
-YDWEDoubleItemSlotByAbility="多重物品栏(技能触发)<everguo添加>"
+YDWEDoubleItemSlotByAbility="多重物品栏(技能触发)"
 YDWEDoubleItemSlotByAbility="当 ",~单位," 使用技能 ",~背包技能," 时切换背包，辅助单位为 ",~背包单位,"，背包个数为 ",~整数 
 YDWEDoubleItemSlotByAbilityHint="切换背包时会触发单位获得和掉落物品事件；背包技能和背包单位的设置请参考example文件夹中的辅助地图。"  
 
-YDWEDoubleItemSlotByItem="多重物品栏(物品触发)<everguo添加>"
+YDWEDoubleItemSlotByItem="多重物品栏(物品触发)"
 YDWEDoubleItemSlotByItem="当 ",~单位," 使用物品 ",~背包物品," 时切换背包，辅助单位为 ",~背包单位,"，背包个数为 ",~整数 
 YDWEDoubleItemSlotByItemHint="切换背包时会触发单位获得和掉落物品事件；背包物品和背包单位的设置请参考example文件夹中的辅助地图。"  
 
@@ -1527,7 +1527,7 @@ YDWEHeroMaxSkillAI="AI-自动学习全部技能<GreedWind制作>"
 YDWEHeroMaxSkillAI="让英雄 ",~英雄," 自动学习所有技能。"
 YDWEHeroMaxSkillAIHint="英雄会洗去之前学习过的技能，并根据技能表顺序学习完所有技能。" 
 
-YDWEAddAIOrder="AI-自动施放技能<everguo添加>"
+YDWEAddAIOrder="AI-自动施放技能"
 YDWEAddAIOrder="让单位 ",~单位," 在 ",~整数,"时 ",~目标,"施","放","技","能","，","技","能","施","放","方","式","为","(","对","单","位-",~命令,"、","对","点-",~命令,"、","立","即-",~命令,")，","施","放","概","率","为 ",~整数,"%" 
 YDWEAddAIOrderHint="让单位有一定概率施放技能，命令要与技能目标一致；代码由Red_Wolf和Fetrix_sai优化。" 
 
@@ -1718,19 +1718,19 @@ YDWESetEventDamage="设置伤害值 [JAPI]"
 YDWESetEventDamage="设置单位所受伤害为 ",~伤害值
 YDWESetEventDamageHint="修改伤害事件里的伤害值，不能在等待之后使用。"
 
-YDWEFlyEnable="设置单位可以飞行<everguo添加>"
+YDWEFlyEnable="设置单位可以飞行"
 YDWEFlyEnable="让单位 ",~地面单位," 变得可以飞行。"
 YDWEFlyEnableHint="让一个地面单位变得可以飞行，可以设置其飞行高度。"
 
-YDWESetMapLimitCoordinate="设置地图边界坐标<everguo添加>"
+YDWESetMapLimitCoordinate="设置地图边界坐标"
 YDWESetMapLimitCoordinate="设置地图的边界坐标为 ( X坐标最小值 ",~实数,"，X坐标最大值 ",~实数,"，Y坐标最小值 ",~实数,"，Y坐标最大值 ",~实数," )" 
 YDWESetMapLimitCoordinateHint="边界坐标的设置会影响钩子、跳跃等技能在地图边界处的表现形式；默认的边界坐标是镜头范围的边界,新手慎用本设置!"
 
-YDWELifeChange="设置单位生命上限<白银的游戏王制作>"
+YDWELifeChange="设置单位生命上限"
 YDWELifeChange="设置 ",~单位," 的生命上限 ",~变化," ",~整数," ，关联技能为 ",~辅助技能
 YDWELifeChangeHint="如果修改后单位生命上限小于0，单位会立即死亡；关联技能的设置请参考example文件夹下的辅助地图。" 
 
-YDWEManaChange="设置单位魔法上限<白银的游戏王制作>"
+YDWEManaChange="设置单位魔法上限"
 YDWEManaChange="设置 ",~单位," 的魔法上限 ",~变化," ",~整数," ，关联技能为 ",~辅助技能
 YDWEManaChangeHint="如果修改后单位魔法上限小于0，单位的魔法栏将消失；关联技能的设置请参考example文件夹下的辅助地图。" 
 
