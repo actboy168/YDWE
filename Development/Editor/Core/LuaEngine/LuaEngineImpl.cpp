@@ -123,8 +123,8 @@ bool LuaEngineImpl::InitializeLua()
 		return false;
 	}
 
-	luabind::open(state_);
 	luaL_openlibs(state_);
+	luabind::open(state_);
 	LOG4CXX_DEBUG(logger_, "Initialize script engine successfully.");
 
 	return true;

@@ -384,19 +384,41 @@ namespace NLuaAPI { namespace NSys {
 		return result;
 	}
 
-	static FILE** LuaNewFile(lua_State* pState) 
+#define tolstream(L, idx)	((luaL_Stream*)luaL_checkudata(L, idx, LUA_FILEHANDLE))
+
+	static luaL_Stream* LuaNewFile(lua_State* pState) 
 	{
-		FILE** pf = (FILE**)lua_newuserdata(pState, sizeof(FILE*));
-		*pf = NULL;
-		luaL_getmetatable(pState, LUA_FILEHANDLE);
-		lua_setmetatable(pState, -2);
-		return pf;
+
+		luaL_Stream *p = (luaL_Stream*)lua_newuserdata(pState, sizeof(luaL_Stream));
+		p->closef = NULL;
+		luaL_setmetatable(pState, LUA_FILEHANDLE);
+		return p;
+	}
+
+	static int LuaFileClose(lua_State* pState)
+	{
+		luaL_Stream* p = tolstream(pState, 1);
+		int ok = fclose(p->f);
+		int en = errno;  /* calls to Lua API may change this value */
+		if (ok)
+		{
+			lua_pushboolean(pState, 1);
+			return 1;
+		}
+		else 
+		{
+			lua_pushnil(pState);
+			lua_pushfstring(pState, "%s", strerror(en));
+			lua_pushinteger(pState, en);
+			return 3;
+		}
 	}
 
 	static void LuaOpenFileForHandle(lua_State* pState, HANDLE h, int dmode, const char* mode)
 	{
-		FILE** pf = LuaNewFile(pState);
-		*pf = _fdopen(_open_osfhandle((long)h, dmode), mode);;
+		luaL_Stream* pf = LuaNewFile(pState);
+		pf->f      = _fdopen(_open_osfhandle((long)h, dmode), mode);
+		pf->closef = &LuaFileClose;
 	}
 	
 	static void LuaOpenPipe(lua_State *pState)
@@ -412,27 +434,6 @@ namespace NLuaAPI { namespace NSys {
 		::SetHandleInformation(write_pipe, HANDLE_FLAG_INHERIT, 0);
 		LuaOpenFileForHandle(pState, read_pipe,  _O_RDONLY | _O_TEXT, "rt");
 		LuaOpenFileForHandle(pState, write_pipe, _O_WRONLY | _O_TEXT, "wt");
-	}
-
-	static int LuaFileClose (lua_State *L)
-	{
-		FILE **p = ((FILE **)luaL_checkudata(L, 1, LUA_FILEHANDLE));
-		int ok = fclose(*p);
-		*p = NULL;
-
-		int en = errno;  /* calls to Lua API may change this value */
-		if (ok)
-		{
-			lua_pushboolean(L, 1);
-			return 1;
-		}
-		else 
-		{
-			lua_pushnil(L);
-			lua_pushfstring(L, "%s", strerror(en));
-			lua_pushinteger(L, en);
-			return 3;
-		}
 	}
 
 	static void LuaProcessCreate(lua_State *pState, base::win::process& p, const luabind::object &application_object, const luabind::object &commandline_object, const luabind::object &currentdirectory_object)
@@ -534,15 +535,6 @@ int luaopen_sys(lua_State *pState)
 		def("get_clipboard_text", &NLuaAPI::NSys::LuaSysGetClipboardText),
 		def("set_clipboard_text", &NLuaAPI::NSys::LuaSysSetClipboardText)
 	];
-
-	//lua_getglobal(pState, "sys");
-	//	lua_getfield(pState, -1, "open_pipe");
-	//		lua_createtable(pState, 0, 1);
-	//			lua_pushcfunction(pState, NLuaAPI::NSys::LuaFileClose);
-	//			lua_setfield(pState, -2, "__close");
-	//		lua_setfenv(pState, -2);
-	//	lua_pop(pState, 1);
-	//lua_pop(pState, 1);
 
 	return 0;
 }
