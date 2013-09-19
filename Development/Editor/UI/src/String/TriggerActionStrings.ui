@@ -154,12 +154,12 @@ ConditionalTriggerExecute="运行 ",~触发," (检查条件)"
 ConditionalTriggerExecuteHint="如果其触发条件成立则运行触发动作."        
 
 #ifndef DISABLE_YDTRIGGER
-YDWEActivateTrigger="激活触发 [YDWE]"
+YDWEActivateTrigger="激活触发"
 YDWEActivateTrigger="激活 ",~Trigger," ( ",~On/Off," 兼容模式 )"
 YDWEActivateTriggerHint="不要多次激活一个触发器。不要激活未开启休眠的触发器。打开兼容模式会略微影响效率，若关闭兼容模式，请保证该动作在需要激活的触发器之后，否则会有语法错误。"
 #endif
 
-YDWETimerRunTrigger="计时器系统-运行触发器[YDWE]"
+YDWETimerRunTrigger="计时器系统-运行触发器"
 YDWETimerRunTrigger="在 ",~时间," 秒后运行 ",~触发器
 YDWETimerRunTriggerHint="启动中心计时器，在指定时间之后运行触发器。"
 
@@ -1576,132 +1576,132 @@ YDWEFlushAnyTypeDataByUserDataHint="清空某个数据的某项自定义属性。"
 #endif
 
 //YD Save Load
-YDWE_PreloadSL_SetFile="设置存档索引(存档名单)[YDWE]"
+YDWE_PreloadSL_SetFile="设置存档索引(存档名单)"
 YDWE_PreloadSL_SetFile="为",~玩家,"在","『",~目录名,"』","下","，","将","〖",~存档名,"〗","的","索","引","设","置","为","→","[",~整数,"]"
 YDWE_PreloadSL_SetFileHint="高级功能，当目录下有多个玩家存档时，为存档添加整数索引，建立起存档文件名字与索引的对应关系。" 
 
-YDWE_PreloadSL_Save="保存玩家存档[YDWE]"
+YDWE_PreloadSL_Save="保存玩家存档"
 YDWE_PreloadSL_Save="为",~玩家,"在","『",~目录名,"』","〖",~存档名,"〗","下","保","存","存","档","，","该","存","档","含","有","[",~整数,"]","个","数","据","项" 
 YDWE_PreloadSL_SaveHint="保存一个玩家存档在指定路径下，注意存档的数据项数目不要填错。" 
 
-YDWE_PreloadSL_Load="读取玩家存档[YDWE]"
+YDWE_PreloadSL_Load="读取玩家存档"
 YDWE_PreloadSL_Load="为",~玩家,"从","『",~目录名,"』","〖",~存档名,"〗","上","读","取","存","档","，","该","存","档","含","有","[",~整数,"]","个","数","据","项"
 YDWE_PreloadSL_LoadHint="获取指定目录下某个玩家存档，必须填写正确的文件名和数据项数目。"
 
-YDWE_PreloadSL_Set="添加存档数据[YDWE]"
+YDWE_PreloadSL_Set="添加存档数据"
 YDWE_PreloadSL_Set="为",~玩家,"添","加"," ※",~数据注释,"，","在","当","前","存","档","[",~数据项索引,"]","上","，","添","加","┠",~数据,"┨" 
 YDWE_PreloadSL_SetHint="把数据写入到玩家存档，需要填入正确的数据项索引，注释则可以随意填写。" 
 
 //YD LocalVariable
-YDWELocalVariableInitiliation="开启局部变量功能[YDWE]"
+YDWELocalVariableInitiliation="开启局部变量功能"
 YDWELocalVariableInitiliation="开启局部变量功能"
 YDWELocalVariableInitiliationHint="必须在局部变量赋值之前启用；若触发器内没有等待动作，可以不启用；有等待需求时必须选用局部变量专用等待动作。" 
 
-YDWELocalVariableEnd="清空局部变量[YDWE]"
+YDWELocalVariableEnd="清空局部变量"
 YDWELocalVariableEnd="清空局部变量"
 YDWELocalVariableEndHint="清空本触发器内用到的全部局部变量，避免内存泄露；使用本动作之前请确保局部变量已经使用完毕。"
 
-YDWESetLocalVariableInteger="设置 整数 局部变量[YDWE]"
+YDWESetLocalVariableInteger="设置 整数 局部变量"
 YDWESetLocalVariableInteger="设置 local_",~i," = ",~整数 
 YDWESetLocalVariableIntegerHint="为整数局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableIntegerArray="设置 整数 局部变量数组[YDWE]"
+YDWESetLocalVariableIntegerArray="设置 整数 局部变量数组"
 YDWESetLocalVariableIntegerArray="设置 local_",~i,"[",~index,"]"," = ",~整数 
 YDWESetLocalVariableIntegerArrayHint="为整数局部变量数组赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableReal="设置 实数 局部变量[YDWE]"
+YDWESetLocalVariableReal="设置 实数 局部变量"
 YDWESetLocalVariableReal="设置 local_",~R," = ",~实数 
 YDWESetLocalVariableRealHint="为实数局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableRealArray="设置 实数 局部变量数组[YDWE]"
+YDWESetLocalVariableRealArray="设置 实数 局部变量数组"
 YDWESetLocalVariableRealArray="设置 local_",~R,"[",~index,"]"," = ",~实数 
 YDWESetLocalVariableRealArrayHint="为实数局部变量数组赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableString="设置 字符串 局部变量[YDWE]"
+YDWESetLocalVariableString="设置 字符串 局部变量"
 YDWESetLocalVariableString="设置 local_",~str," = ",~字符串 
 YDWESetLocalVariableStringHint="为字符串局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableStringArray="设置 字符串 局部变量数组[YDWE]"
+YDWESetLocalVariableStringArray="设置 字符串 局部变量数组"
 YDWESetLocalVariableStringArray="设置 local_",~str,"[",~index,"]"," = ",~字符串 
 YDWESetLocalVariableStringArrayHint="为字符串局部变量数组赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableBoolean="设置 真值 局部变量[YDWE]"
+YDWESetLocalVariableBoolean="设置 真值 局部变量"
 YDWESetLocalVariableBoolean="设置 local_",~bl," = ",~真值 
 YDWESetLocalVariableBooleanHint="为真值局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableBooleanArray="设置 真值 局部变量数组[YDWE]"
+YDWESetLocalVariableBooleanArray="设置 真值 局部变量数组"
 YDWESetLocalVariableBooleanArray="设置 local_",~bl,"[",~index,"]"," = ",~真值 
 YDWESetLocalVariableBooleanArrayHint="为真值局部变量数组赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableUnit="设置 单位 局部变量[YDWE]"
+YDWESetLocalVariableUnit="设置 单位 局部变量"
 YDWESetLocalVariableUnit="设置 local_",~u," = ",~单位 
 YDWESetLocalVariableUnitHint="为单位局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableUnitArray="设置 单位 局部变量数组[YDWE]"
+YDWESetLocalVariableUnitArray="设置 单位 局部变量数组"
 YDWESetLocalVariableUnitArray="设置 local_",~u,"[",~index,"]"," = ",~单位 
 YDWESetLocalVariableUnitArrayHint="为单位局部变量赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableUnitID="设置 单位类型 局部变量[YDWE]"
+YDWESetLocalVariableUnitID="设置 单位类型 局部变量"
 YDWESetLocalVariableUnitID="设置 local_",~uid," = ",~单位类型 
 YDWESetLocalVariableUnitIDHint="为单位类型局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableUnitIDArray="设置 单位类型 局部变量数组[YDWE]"
+YDWESetLocalVariableUnitIDArray="设置 单位类型 局部变量数组"
 YDWESetLocalVariableUnitIDArray="设置 local_",~uid,"[",~index,"]"," = ",~单位类型 
 YDWESetLocalVariableUnitIDArrayHint="为单位类型局部变量赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableAbilityID="设置 技能类型 局部变量[YDWE]"
+YDWESetLocalVariableAbilityID="设置 技能类型 局部变量"
 YDWESetLocalVariableAbilityID="设置 local_",~ab," = ",~技能 
 YDWESetLocalVariableAbilityIDHint="为单位类型局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableAbilityIDArray="设置 技能类型 局部变量数组[YDWE]"
+YDWESetLocalVariableAbilityIDArray="设置 技能类型 局部变量数组"
 YDWESetLocalVariableAbilityIDArray="设置 local_",~ab,"[",~index,"]"," = ",~技能 
 YDWESetLocalVariableAbilityIDArrayHint="为单位类型局部变量赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableItem="设置 物品 局部变量[YDWE]"
+YDWESetLocalVariableItem="设置 物品 局部变量"
 YDWESetLocalVariableItem="设置 local_",~it," = ",~物品 
 YDWESetLocalVariableItemHint="为物品局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableItemArray="设置 物品 局部变量数组[YDWE]"
+YDWESetLocalVariableItemArray="设置 物品 局部变量数组"
 YDWESetLocalVariableItemArray="设置 local_",~it,"[",~index,"]"," = ",~物品 
 YDWESetLocalVariableItemArrayHint="为物品局部变量数组赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableItemID="设置 物品类型 局部变量[YDWE]"
+YDWESetLocalVariableItemID="设置 物品类型 局部变量"
 YDWESetLocalVariableItemID="设置 local_",~itid," = ",~物品类型 
 YDWESetLocalVariableItemIDHint="为物品类型局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableItemIDArray="设置 物品类型 局部变量数组[YDWE]"
+YDWESetLocalVariableItemIDArray="设置 物品类型 局部变量数组"
 YDWESetLocalVariableItemIDArray="设置 local_",~itid,"[",~index,"]"," = ",~物品类型 
 YDWESetLocalVariableItemIDArrayHint="为物品类型局部变量数组赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableLocation="设置 点 局部变量[YDWE]"
+YDWESetLocalVariableLocation="设置 点 局部变量"
 YDWESetLocalVariableLocation="设置 local_",~point," = ",~点 
 YDWESetLocalVariableLocationHint="为点局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableLocationArray="设置 点 局部变量数组[YDWE]"
+YDWESetLocalVariableLocationArray="设置 点 局部变量数组"
 YDWESetLocalVariableLocationArray="设置 local_",~point,"[",~index,"]"," = ",~点 
 YDWESetLocalVariableLocationArrayHint="为点局部变量数组赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableGroup="设置 单位组 局部变量[YDWE]"
+YDWESetLocalVariableGroup="设置 单位组 局部变量"
 YDWESetLocalVariableGroup="设置 local_",~g," = ",~单位组 
 YDWESetLocalVariableGroupHint="为单位组局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableGroupArray="设置 单位组 局部变量数组[YDWE]"
+YDWESetLocalVariableGroupArray="设置 单位组 局部变量数组"
 YDWESetLocalVariableGroupArray="设置 local_",~g,"[",~index,"]"," = ",~单位组 
 YDWESetLocalVariableGroupArrayHint="为单位组局部变量数组赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableEffect="设置 特效 局部变量[YDWE]"
+YDWESetLocalVariableEffect="设置 特效 局部变量"
 YDWESetLocalVariableEffect="设置 local_",~e," = ",~特效 
 YDWESetLocalVariableEffectHint="为特效局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableEffectArray="设置 特效 局部变量数组[YDWE]"
+YDWESetLocalVariableEffectArray="设置 特效 局部变量数组"
 YDWESetLocalVariableEffectArray="设置 local_",~e,"[",~index,"]"," = ",~特效 
 YDWESetLocalVariableEffectArrayHint="为特效局部变量数组赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableRect="设置 地区 局部变量[YDWE]"
+YDWESetLocalVariableRect="设置 地区 局部变量"
 YDWESetLocalVariableRect="设置 local_",~rt," = ",~地区 
 YDWESetLocalVariableRectHint="为地区局部变量赋值，参数处填入该变量的名字;该变量在本条触发器内有效。"
 
-YDWESetLocalVariableRectArray="设置 地区 局部变量数组[YDWE]"
+YDWESetLocalVariableRectArray="设置 地区 局部变量数组"
 YDWESetLocalVariableRectArray="设置 local_",~rt,"[",~index,"]"," = ",~地区 
 YDWESetLocalVariableRectArrayHint="为地区局部变量数组赋值，参数处填入该变量的名字和数组索引;该变量在本条触发器内有效。"
 
@@ -1710,7 +1710,7 @@ SetRandomSeed="设置随机种子数为：",~整数
 SetRandomSeedHint="设置游戏的随机种子，随机种子会影响随机整数，攻击骰子之类的随机数。"
 
 //YD Function
-YDWESetAttackDamageWeaponType="设置默认攻击|伤害|武器类型[YDWE]"
+YDWESetAttackDamageWeaponType="设置默认攻击|伤害|武器类型"
 YDWESetAttackDamageWeaponType="设置默认攻击类型为 ",~攻击类型,"，伤害类型为 ",~伤害类型,"，武器类型为 ",~武器类型 
 YDWESetAttackDamageWeaponTypeHint="设置一些技能（如钩子、月神箭）需要用到的攻击|伤害|武器类型，系统会按设置的攻击|伤害|武器类型对目标造成伤害。"
 
@@ -1756,291 +1756,291 @@ YDWERecordClear="清空",~玩家,"当前所有存档数据"
 YDWERecordClearHint="由于每个玩家最多只能存储100条左右的数据，假如超过上限，建议使用此功能清空全部数据，然后重新保存有用的数据。" 
 
 //YD Load
-YDWEFlushMissionByInteger="清空 目录 (整数路径)[YDWE]"
+YDWEFlushMissionByInteger="清空 目录 (整数路径)"
 YDWEFlushMissionByInteger="清空目录-> ",~整数
 YDWEFlushMissionByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从GameCache或HashTable上清空目录。"
 
-YDWEFlushMissionByString="清空 目录 (字符串路径)[YDWE]"
+YDWEFlushMissionByString="清空 目录 (字符串路径)"
 YDWEFlushMissionByString="清空目录-> ",~字符串
 YDWEFlushMissionByStringHint="通过输入的路径，系统会根据当前魔兽版本从GameCache或HashTable上清空目录。" 
 
-YDWESaveIntegerByInteger="存储 整数 (整数路径)[YDWE]"
+YDWESaveIntegerByInteger="存储 整数 (整数路径)"
 YDWESaveIntegerByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储整数-> ",~整数
 YDWESaveIntegerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储整数数据。"
 
-YDWESaveRealByInteger="存储 实数 (整数路径)[YDWE]"
+YDWESaveRealByInteger="存储 实数 (整数路径)"
 YDWESaveRealByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储实数-> ",~实数
 YDWESaveRealByIntegerHint="通过输入的路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储实数数据。"
 
-YDWESaveStringByInteger="存储 字符串 (整数路径)[YDWE]"
+YDWESaveStringByInteger="存储 字符串 (整数路径)"
 YDWESaveStringByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储字符串-> ",~字符串
 YDWESaveStringByIntegerHint="通过输入的路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储字符串数据。"
 
-YDWESaveBooleanByInteger="存储 真值 (整数路径)[YDWE]"
+YDWESaveBooleanByInteger="存储 真值 (整数路径)"
 YDWESaveBooleanByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储真值-> ",~真值
 YDWESaveBooleanByIntegerHint="通过输入的路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储真值数据。"
 
-YDWESaveUnitByInteger="存储 单位 (整数路径)[YDWE]"
+YDWESaveUnitByInteger="存储 单位 (整数路径)"
 YDWESaveUnitByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储单位-> ",~单位
 YDWESaveUnitByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储单位数据。" 
 
-YDWESaveUnitIDByInteger="存储 单位类型 (整数路径)[YDWE]"
+YDWESaveUnitIDByInteger="存储 单位类型 (整数路径)"
 YDWESaveUnitIDByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储单位类型 -> ",~单位类型 
 YDWESaveUnitIDByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储单位类型数据。" 
 
-YDWESaveAbilityIDByInteger="存储 技能 (整数路径)[YDWE]"
+YDWESaveAbilityIDByInteger="存储 技能 (整数路径)"
 YDWESaveAbilityIDByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储技能 -> ",~技能 
 YDWESaveAbilityIDByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储技能数据。" 
 
-YDWESaveItemByInteger="存储 物品 (整数路径)[YDWE]"
+YDWESaveItemByInteger="存储 物品 (整数路径)"
 YDWESaveItemByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储物品-> ",~物品
 YDWESaveItemByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储物品数据。"
 
-YDWESaveItemIDByInteger="存储 物品类型 (整数路径)[YDWE]"
+YDWESaveItemIDByInteger="存储 物品类型 (整数路径)"
 YDWESaveItemIDByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储物品类型-> ",~物品类型
 YDWESaveItemIDByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储物品类型数据。"
 
-YDWESavePlayerByInteger="存储 玩家 (整数路径)[YDWE]"
+YDWESavePlayerByInteger="存储 玩家 (整数路径)"
 YDWESavePlayerByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储玩家-> ",~玩家
 YDWESavePlayerByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储玩家数据。"
 
-YDWESaveTimerByInteger="存储 计时器 (整数路径)[YDWE]"
+YDWESaveTimerByInteger="存储 计时器 (整数路径)"
 YDWESaveTimerByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储计时器-> ",~计时器
 YDWESaveTimerByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储计时器数据。"
 
-YDWESaveTriggerByInteger="存储 触发器 (整数路径)[YDWE]"
+YDWESaveTriggerByInteger="存储 触发器 (整数路径)"
 YDWESaveTriggerByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储触发器-> ",~触发器
 YDWESaveTriggerByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储触发器数据。"
 
-YDWESaveLocationByInteger="存储 点 (整数路径)[YDWE]"
+YDWESaveLocationByInteger="存储 点 (整数路径)"
 YDWESaveLocationByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储点-> ",~点
 YDWESaveLocationByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储点数据。"
 
-YDWESaveGroupByInteger="存储 单位组 (整数路径)[YDWE]"
+YDWESaveGroupByInteger="存储 单位组 (整数路径)"
 YDWESaveGroupByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储单位组-> ",~单位组
 YDWESaveGroupByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储单位组数据。"
 
-YDWESaveMultiboardByInteger="存储 多面板 (整数路径)[YDWE]"
+YDWESaveMultiboardByInteger="存储 多面板 (整数路径)"
 YDWESaveMultiboardByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储多面板-> ",~多面板
 YDWESaveMultiboardByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储多面板数据。"
 
-YDWESaveMultiboardItemByInteger="存储 多面板项目 (整数路径)[YDWE]"
+YDWESaveMultiboardItemByInteger="存储 多面板项目 (整数路径)"
 YDWESaveMultiboardItemByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储多面板项目-> ",~多面板项目
 YDWESaveMultiboardItemByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储多面板项目数据。"
 
-YDWESaveTextTagByInteger="存储 漂浮文字 (整数路径)[YDWE]"
+YDWESaveTextTagByInteger="存储 漂浮文字 (整数路径)"
 YDWESaveTextTagByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储漂浮文字-> ",~漂浮文字
 YDWESaveTextTagByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储漂浮文字数据。"
 
-YDWESaveLightningByInteger="存储 闪电 (整数路径)[YDWE]"
+YDWESaveLightningByInteger="存储 闪电 (整数路径)"
 YDWESaveLightningByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储闪电-> ",~闪电
 YDWESaveLightningByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储闪电数据。"
 
-YDWESaveRegionByInteger="存储 区域 (整数路径)[YDWE]"
+YDWESaveRegionByInteger="存储 区域 (整数路径)"
 YDWESaveRegionByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储区域-> ",~区域
 YDWESaveRegionByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储区域数据。"
 
-YDWESaveRectByInteger="存储 地区 (整数路径)[YDWE]"
+YDWESaveRectByInteger="存储 地区 (整数路径)"
 YDWESaveRectByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储地区-> ",~地区
 YDWESaveRectByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储地区数据。"
 
-YDWESaveLeaderboardByInteger="存储 排行榜 (整数路径)[YDWE]"
+YDWESaveLeaderboardByInteger="存储 排行榜 (整数路径)"
 YDWESaveLeaderboardByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储排行榜-> ",~排行榜
 YDWESaveLeaderboardByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储排行榜数据。"
 
-YDWESaveEffectByInteger="存储 特效 (整数路径)[YDWE]"
+YDWESaveEffectByInteger="存储 特效 (整数路径)"
 YDWESaveEffectByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储特效-> ",~特效
 YDWESaveEffectByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储特效数据。"
 
-YDWESaveDestructableByInteger="存储 可破坏物 (整数路径)[YDWE]"
+YDWESaveDestructableByInteger="存储 可破坏物 (整数路径)"
 YDWESaveDestructableByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储可破坏物-> ",~可破坏物
 YDWESaveDestructableByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储可破坏物数据。"
 
-YDWESaveTriggerConditionByInteger="存储 触发器条件 (整数路径)[YDWE]"
+YDWESaveTriggerConditionByInteger="存储 触发器条件 (整数路径)"
 YDWESaveTriggerConditionByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储触发器条件-> ",~触发器条件
 YDWESaveTriggerConditionByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储触发器条件数据。"
 
-YDWESaveTriggerActionByInteger="存储 触发器动作 (整数路径)[YDWE]"
+YDWESaveTriggerActionByInteger="存储 触发器动作 (整数路径)"
 YDWESaveTriggerActionByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储触发器动作-> ",~触发器动作
 YDWESaveTriggerActionByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储触发器动作数据。"
 
-YDWESaveTriggerEventByInteger="存储 事件 (整数路径)[YDWE]"
+YDWESaveTriggerEventByInteger="存储 事件 (整数路径)"
 YDWESaveTriggerEventByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储事件-> ",~事件
 YDWESaveTriggerEventByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储事件数据。"
 
-YDWESaveForceByInteger="存储 势力 (整数路径)[YDWE]"
+YDWESaveForceByInteger="存储 势力 (整数路径)"
 YDWESaveForceByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储势力-> ",~势力
 YDWESaveForceByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储势力数据。"
 
-YDWESaveBoolexprByInteger="存储 布尔表达式 (整数路径)[YDWE]"
+YDWESaveBoolexprByInteger="存储 布尔表达式 (整数路径)"
 YDWESaveBoolexprByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储布尔表达式-> ",~布尔表达式
 YDWESaveBoolexprByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储布尔表达式数据。"
 
-YDWESaveSoundByInteger="存储 声音 (整数路径)[YDWE]"
+YDWESaveSoundByInteger="存储 声音 (整数路径)"
 YDWESaveSoundByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储声音-> ",~声音
 YDWESaveSoundByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储声音数据。"
 
-YDWESaveTimerDialogByInteger="存储 计时器窗口 (整数路径)[YDWE]"
+YDWESaveTimerDialogByInteger="存储 计时器窗口 (整数路径)"
 YDWESaveTimerDialogByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储计时器窗口-> ",~计时器窗口
 YDWESaveTimerDialogByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储计时器窗口数据。"
 
-YDWESaveTrackableByInteger="存储 可追踪物 (整数路径)[YDWE]"
+YDWESaveTrackableByInteger="存储 可追踪物 (整数路径)"
 YDWESaveTrackableByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储可追踪物-> ",~可追踪物
 YDWESaveTrackableByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储可追踪物数据。"
 
-YDWESaveDialogByInteger="存储 对话框 (整数路径)[YDWE]"
+YDWESaveDialogByInteger="存储 对话框 (整数路径)"
 YDWESaveDialogByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储对话框-> ",~对话框
 YDWESaveDialogByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储对话框数据。"
 
-YDWESaveButtonByInteger="存储 对话框按钮 (整数路径)[YDWE]"
+YDWESaveButtonByInteger="存储 对话框按钮 (整数路径)"
 YDWESaveButtonByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储对话框按钮-> ",~对话框按钮
 YDWESaveButtonByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储对话框按钮数据。"
 
-YDWESaveQuestByInteger="存储 任务 (整数路径)[YDWE]"
+YDWESaveQuestByInteger="存储 任务 (整数路径)"
 YDWESaveQuestByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储任务-> ",~任务
 YDWESaveQuestByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储任务数据。"
 
-YDWESaveQuestItemByInteger="存储 任务目标项 (整数路径)[YDWE]"
+YDWESaveQuestItemByInteger="存储 任务目标项 (整数路径)"
 YDWESaveQuestItemByInteger="存储目录-> ",~整数,"，标签-> ",~整数,"，存储任务目标项-> ",~任务目标项 
 YDWESaveQuestItemByIntegerHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储任务目标项数据。"
 
-YDWESaveIntegerByString="存储 整数 (字符串路径)[YDWE]"
+YDWESaveIntegerByString="存储 整数 (字符串路径)"
 YDWESaveIntegerByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储整数-> ",~整数
 YDWESaveIntegerByStringHint="通过输入的路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储整数数据。" 
 
-YDWESaveRealByString="存储 实数 (字符串路径)[YDWE]"
+YDWESaveRealByString="存储 实数 (字符串路径)"
 YDWESaveRealByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储实数-> ",~实数
 YDWESaveRealByStringHint="通过输入的路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储实数数据。"
 
-YDWESaveStringByString="存储 字符串 (字符串路径)[YDWE]"
+YDWESaveStringByString="存储 字符串 (字符串路径)"
 YDWESaveStringByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储字符串-> ",~字符串
 YDWESaveStringByStringHint="通过输入的路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储字符串数据。"
 
-YDWESaveBooleanByString="存储 真值 (字符串路径)[YDWE]"
+YDWESaveBooleanByString="存储 真值 (字符串路径)"
 YDWESaveBooleanByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储真值-> ",~真值
 YDWESaveBooleanByStringHint="通过输入的路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储真值数据。"
 
-YDWESaveUnitByString="存储 单位 (字符串路径)[YDWE]"
+YDWESaveUnitByString="存储 单位 (字符串路径)"
 YDWESaveUnitByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储单位-> ",~单位
 YDWESaveUnitByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储单位数据。 
 
-YDWESaveUnitIDByString="存储 单位类型 (字符串路径)[YDWE]"
+YDWESaveUnitIDByString="存储 单位类型 (字符串路径)"
 YDWESaveUnitIDByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储单位类型-> ",~单位类型
 YDWESaveUnitIDByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储单位类型数据。 
 
-YDWESaveAbilityIDByString="存储 技能 (字符串路径)[YDWE]"
+YDWESaveAbilityIDByString="存储 技能 (字符串路径)"
 YDWESaveAbilityIDByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储技能-> ",~技能
 YDWESaveAbilityIDByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储技能数据。
 
-YDWESaveItemByString="存储 物品 (字符串路径)[YDWE]"
+YDWESaveItemByString="存储 物品 (字符串路径)"
 YDWESaveItemByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储物品-> ",~物品
 YDWESaveItemByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储物品数据。 
 
-YDWESaveItemIDByString="存储 物品类型 (字符串路径)[YDWE]"
+YDWESaveItemIDByString="存储 物品类型 (字符串路径)"
 YDWESaveItemIDByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储物品类型-> ",~物品类型
 YDWESaveItemIDByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储物品类型数据。 
 
-YDWESavePlayerByString="存储 玩家 (字符串路径)[YDWE]"
+YDWESavePlayerByString="存储 玩家 (字符串路径)"
 YDWESavePlayerByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储玩家-> ",~玩家
 YDWESavePlayerByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储玩家数据。 
 
-YDWESaveTimerByString="存储 计时器 (字符串路径)[YDWE]"
+YDWESaveTimerByString="存储 计时器 (字符串路径)"
 YDWESaveTimerByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储计时器-> ",~计时器
 YDWESaveTimerByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储计时器数据。 
 
-YDWESaveTriggerByString="存储 触发器 (字符串路径)[YDWE]"
+YDWESaveTriggerByString="存储 触发器 (字符串路径)"
 YDWESaveTriggerByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储触发器-> ",~触发器
 YDWESaveTriggerByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储触发器数据。
 
-YDWESaveLocationByString="存储 点 (字符串路径)[YDWE]"
+YDWESaveLocationByString="存储 点 (字符串路径)"
 YDWESaveLocationByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储点-> ",~点
 YDWESaveLocationByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储点数据。
 
-YDWESaveGroupByString="存储 单位组 (字符串路径)[YDWE]"
+YDWESaveGroupByString="存储 单位组 (字符串路径)"
 YDWESaveGroupByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储单位组-> ",~单位组
 YDWESaveGroupByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储单位组数据。
 
-YDWESaveMultiboardByString="存储 多面板 (字符串路径)[YDWE]"
+YDWESaveMultiboardByString="存储 多面板 (字符串路径)"
 YDWESaveMultiboardByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储多面板-> ",~多面板
 YDWESaveMultiboardByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储多面板数据。
 
-YDWESaveMultiboardItemByString="存储 多面板项目 (字符串路径)[YDWE]"
+YDWESaveMultiboardItemByString="存储 多面板项目 (字符串路径)"
 YDWESaveMultiboardItemByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储多面板项目-> ",~多面板项目
 YDWESaveMultiboardItemByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储多面板项目数据。
     
-YDWESaveTextTagByString="存储 漂浮文字 (字符串路径)[YDWE]"
+YDWESaveTextTagByString="存储 漂浮文字 (字符串路径)"
 YDWESaveTextTagByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储漂浮文字-> ",~漂浮文字
 YDWESaveTextTagByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储漂浮文字数据。
 
-YDWESaveLightningByString="存储 闪电 (字符串路径)[YDWE]"
+YDWESaveLightningByString="存储 闪电 (字符串路径)"
 YDWESaveLightningByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储闪电-> ",~闪电
 YDWESaveLightningByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储闪电数据。
 
-YDWESaveRegionByString="存储 区域 (字符串路径)[YDWE]"
+YDWESaveRegionByString="存储 区域 (字符串路径)"
 YDWESaveRegionByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储区域-> ",~区域
 YDWESaveRegionByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储区域数据。
 
-YDWESaveRectByString="存储 地区 (字符串路径)[YDWE]"
+YDWESaveRectByString="存储 地区 (字符串路径)"
 YDWESaveRectByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储地区-> ",~地区
 YDWESaveRectByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储地区数据。
 
-YDWESaveLeaderboardByString="存储 排行榜 (字符串路径)[YDWE]"
+YDWESaveLeaderboardByString="存储 排行榜 (字符串路径)"
 YDWESaveLeaderboardByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储排行榜-> ",~排行榜
 YDWESaveLeaderboardByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储排行榜数据。
 
-YDWESaveEffectByString="存储 特效 (字符串路径)[YDWE]"
+YDWESaveEffectByString="存储 特效 (字符串路径)"
 YDWESaveEffectByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储特效-> ",~特效
 YDWESaveEffectByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储特效数据。
 
-YDWESaveDestructableByString="存储 可破坏物 (字符串路径)[YDWE]"
+YDWESaveDestructableByString="存储 可破坏物 (字符串路径)"
 YDWESaveDestructableByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储可破坏物-> ",~可破坏物
 YDWESaveDestructableByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储可破坏物数据。
 
-YDWESaveTriggerConditionByString="存储 触发器条件 (字符串路径)[YDWE]"
+YDWESaveTriggerConditionByString="存储 触发器条件 (字符串路径)"
 YDWESaveTriggerConditionByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储触发器条件-> ",~触发器条件
 YDWESaveTriggerConditionByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储触发器条件数据。
 
-YDWESaveTriggerActionByString="存储 触发器动作 (字符串路径)[YDWE]"
+YDWESaveTriggerActionByString="存储 触发器动作 (字符串路径)"
 YDWESaveTriggerActionByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储触发器动作-> ",~触发器动作
 YDWESaveTriggerActionByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储触发器动作数据。
 
-YDWESaveTriggerEventByString="存储 事件 (字符串路径)[YDWE]"
+YDWESaveTriggerEventByString="存储 事件 (字符串路径)"
 YDWESaveTriggerEventByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储事件-> ",~事件
 YDWESaveTriggerEventByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储事件数据。
 
-YDWESaveForceByString="存储 势力 (字符串路径)[YDWE]"
+YDWESaveForceByString="存储 势力 (字符串路径)"
 YDWESaveForceByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储势力-> ",~势力
 YDWESaveForceByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储势力数据。
 
-YDWESaveBoolexprByString="存储 布尔表达式 (字符串路径)[YDWE]"
+YDWESaveBoolexprByString="存储 布尔表达式 (字符串路径)"
 YDWESaveBoolexprByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储布尔表达式-> ",~布尔表达式
 YDWESaveBoolexprByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储布尔表达式数据。
 
-YDWESaveSoundByString="存储 声音 (字符串路径)[YDWE]"
+YDWESaveSoundByString="存储 声音 (字符串路径)"
 YDWESaveSoundByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储声音-> ",~声音
 YDWESaveSoundByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储声音数据。
 
-YDWESaveTimerDialogByString="存储 计时器窗口 (字符串路径)[YDWE]"
+YDWESaveTimerDialogByString="存储 计时器窗口 (字符串路径)"
 YDWESaveTimerDialogByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储计时器窗口-> ",~计时器窗口
 YDWESaveTimerDialogByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储计时器窗口数据。
 
-YDWESaveTrackableByString="存储 可追踪物 (字符串路径)[YDWE]"
+YDWESaveTrackableByString="存储 可追踪物 (字符串路径)"
 YDWESaveTrackableByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储可追踪物-> ",~可追踪物
 YDWESaveTrackableByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储可追踪物数据。
 
-YDWESaveDialogByString="存储 对话框 (字符串路径)[YDWE]"
+YDWESaveDialogByString="存储 对话框 (字符串路径)"
 YDWESaveDialogByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储对话框-> ",~对话框
 YDWESaveDialogByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储对话框数据。
 
-YDWESaveButtonByString="存储 对话框按钮 (字符串路径)[YDWE]"
+YDWESaveButtonByString="存储 对话框按钮 (字符串路径)"
 YDWESaveButtonByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储对话框按钮-> ",~对话框按钮
 YDWESaveButtonByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储对话框按钮数据。
 
-YDWESaveQuestByString="存储 任务 (字符串路径)[YDWE]"
+YDWESaveQuestByString="存储 任务 (字符串路径)"
 YDWESaveQuestByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储任务-> ",~任务
 YDWESaveQuestByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储任务数据。"
 
-YDWESaveQuestItemByString="存储 任务目标项 (字符串路径)[YDWE]"
+YDWESaveQuestItemByString="存储 任务目标项 (字符串路径)"
 YDWESaveQuestItemByString="存储目录-> ",~字符串,"，标签-> ",~字符串,"，存储任务目标项 -> ",~任务目标项
 YDWESaveQuestItemByStringHint="通过输入路径，系统会根据当前魔兽版本采用Return bug+GC或HashTable存储任务目标项数据。"
 
