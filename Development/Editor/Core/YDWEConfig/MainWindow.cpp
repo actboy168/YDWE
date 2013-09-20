@@ -52,6 +52,7 @@ namespace
 		("LaunchFullWindowed",                      Attribute("MapTest"))
 		("LaunchLockingMouse",                      Attribute("MapTest"))
 		("LaunchFixedRatioWindowed",                Attribute("MapTest"))
+		("LaunchDisableSecurityAccess",             Attribute("MapTest"))		
 		("EnableDotNetSupport",                     Attribute("ThirdPartyPlugin"))
 		("EnableTesh",                              Attribute("ThirdPartyPlugin"))
 		("EnableYDTrigger",                         Attribute("ThirdPartyPlugin"))
@@ -143,6 +144,7 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["MapTest"]["LaunchFullWindowed"] = "0";
 	table["MapTest"]["LaunchLockingMouse"] = "0";
 	table["MapTest"]["LaunchFixedRatioWindowed"] = "1";
+	table["MapTest"]["LaunchDisableSecurityAccess"] = "0";	
 	table["ScriptCompiler"]["EnableJassHelper"] = "1";
 	table["ScriptCompiler"]["EnableJassHelperDebug"] = "0";
 	table["ScriptCompiler"]["EnableJassHelperOptimization"] = "1";

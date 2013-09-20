@@ -27,6 +27,7 @@ public:
 	bool     IsFullWindowedMode;
 	bool     IsLockingMouse;
 	bool     IsFixedRatioWindowed;
+	bool     IsDisableSecurityAccess;
 	fs::path patch_path;
 	fs::path ydwe_path;
 

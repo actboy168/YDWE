@@ -79,6 +79,7 @@
                   <CheckBox text="固定窗口比例"   width="200" name="LaunchFixedRatioWindowed" tooltip="让窗口保持4：3的比例。" />
                 </VerticalLayout>
               </HorizontalLayout>
+              <CheckBox text="阻止魔兽提升自身的访问限制" width="200" name="LaunchDisableSecurityAccess" tooltip="魔兽会提升自身的访问限制，阻止所有非管理员权限的进程访问它，Vista之后管理员权限需要UAC，很烦人不是吗。" />
             </VerticalLayout>
           </VerticalLayout>
           <Control height="16" />
