@@ -9,16 +9,16 @@
   <Class name="Title" bkimage="file='Common/Button.png' corner='5,11,5,11' source='0,24,96,48'" />
   <Class name="LabelTitle" class="Title"  borderround="4,4" />
   <Class name="Background" bkcolor="#FFFAFCFC" />
-  <Class name="TabSelect" font="1" 
+  <Class name="TabSelect" font="1"
 		textcolor="#000000" selectedtextcolor="#FFFFFF" hottextcolor="#000000" focusedtextcolor="#000000" pushedtextcolor="#77A8DE" selectedpushedtextcolor="#77A8DE"
 		normalimage         = "file='Common/Button.png' corner='5,11,5,11' source='0, 0,96,24'"
 		selectedimage       = "file='Common/Button.png' corner='5,11,5,11' source='0,24,96,48'"
 		hotimage            = "file='Common/Button.png' corner='5,11,5,11' source='0,72,96,96'"
 		pushedimage         = "file='Common/Button.png' corner='5,11,5,11' source='0,48,96,72'"
     selectedpushedimage = "file='Common/Button.png' corner='5,11,5,11' source='0,48,96,72'"
-		disabledimage       = "file='Common/Button.png' corner='5,11,5,11' source='0,72,96,96'"	
+		disabledimage       = "file='Common/Button.png' corner='5,11,5,11' source='0,72,96,96'"
 	/>
-  
+
   <VerticalLayout class="Title" inset="0,0,0,0" >
     <Label text="YDWE配置程序" height="36" align="center" />
     <HorizontalLayout>
@@ -34,7 +34,7 @@
         <Control height="1" />
         <RadioButton name="tab_4" group="TabSelect" text="系统关联"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
       </VerticalLayout>
-      
+
 		<TabLayout name="tabs" >
         <VerticalLayout class="Background" inset="2,24,2,24" >
           <VerticalLayout height="140" >
@@ -76,9 +76,9 @@
                 <VerticalLayout>
                   <CheckBox text="窗口化全屏"     width="200" name="LaunchFullWindowed"       tooltip="使魔兽以窗口化全屏的方式启动。" />
                   <CheckBox text="锁定鼠标"       width="200" name="LaunchLockingMouse"       tooltip="让鼠标无法移动到窗口外。" />
-                  <CheckBox text="固定窗口比例"   width="200" name="LaunchFixedRatioWindowed" tooltip="让窗口保持4：3的比例。" />                  
+                  <CheckBox text="固定窗口比例"   width="200" name="LaunchFixedRatioWindowed" tooltip="让窗口保持4：3的比例。" />
                 </VerticalLayout>
-              </HorizontalLayout>              
+              </HorizontalLayout>
             </VerticalLayout>
           </VerticalLayout>
           <Control height="16" />
@@ -114,7 +114,7 @@
               <CheckBox text="显示物体属性内部ID(*)" width="200" name="EnableShowInternalAttributeId" tooltip="显示物体属性的内部ID。" />
             </VerticalLayout>
           </VerticalLayout>
-        </VerticalLayout>      
+        </VerticalLayout>
         <VerticalLayout class="Background" inset="2,24,2,24" >
           <VerticalLayout height="420" >
             <Label text="插件"  tooltip="选择需要开启的插件。" class="LabelTitle" />
@@ -126,7 +126,7 @@
               </HorizontalLayout>
             </VerticalLayout>
           </VerticalLayout>
-        </VerticalLayout>      
+        </VerticalLayout>
         <VerticalLayout class="Background" inset="2,24,2,24" vscrollbar="true" >
           <VerticalLayout height="80" >
             <Label text="关联地图文件"  tooltip="勾选后，双击地图就可以用YDWE打开。" class="LabelTitle" />
