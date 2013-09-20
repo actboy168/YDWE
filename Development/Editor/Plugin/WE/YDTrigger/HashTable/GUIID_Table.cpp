@@ -82,12 +82,20 @@ GUIID_Table_Init()
   GUIID_Table_Put(YDWEForLoopLocVarIndex);
   GUIID_Table_Put(YDWECustomScriptCode);
   GUIID_Table_Put(YDWEEnumUnitsInRangeMultiple);
+  GUIID_Table_Put(GroupEnumUnitsInRange);
+  GUIID_Table_Put(GroupEnumUnitsInRangeCounted);
+  GUIID_Table_Put(GroupEnumUnitsInRangeOfLoc);
+  GUIID_Table_Put(GroupEnumUnitsInRangeOfLocCounted);
+
   GUIID_Table_Put(YDWEActivateTrigger);
   GUIID_Table_Put(GetEnumUnit);
+  GUIID_Table_Put(GetFilterUnit);  
   GUIID_Table_Put(GetEnumPlayer);
   GUIID_Table_Put(TriggerSleepAction);
   GUIID_Table_Put(PolledWait);
   GUIID_Table_Put(YDWEGetObjectPropertyInteger);
   GUIID_Table_Put(YDWEGetObjectPropertyReal);
   GUIID_Table_Put(YDWEGetObjectPropertyString);
+
+
 }

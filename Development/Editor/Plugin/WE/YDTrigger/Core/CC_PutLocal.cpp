@@ -120,7 +120,15 @@ CC_PutLocal_Search(DWORD This, DWORD OutClass, DWORD isSearchHashLocal, LONG ind
         {
           CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, -1);
         }
-        break; 
+		break; 
+	  case CC_GUIID_GroupEnumUnitsInRange:
+	  case CC_GUIID_GroupEnumUnitsInRangeCounted:
+	  case CC_GUIID_GroupEnumUnitsInRangeOfLoc:
+	  case CC_GUIID_GroupEnumUnitsInRangeOfLocCounted:
+		  CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_group,  "ydl", "tmp_group");
+		  CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_group,  "ydl", "group");
+		  CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_unit,  "ydl", "unit");
+		  break;
       case CC_GUIID_YDWEEnumUnitsInRangeMultiple:
           CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_group,  "ydl", "group");
           CC_PutLocal_LocalVar(nItemClass, OutClass, CC_TYPE_unit,  "ydl", "unit");

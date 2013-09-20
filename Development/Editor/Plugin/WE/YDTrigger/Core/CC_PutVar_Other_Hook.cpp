@@ -25,6 +25,16 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
             PUT_CONST("GetEnumUnit()", 0);
         }
 		return;
+	case CC_GUIID_GetFilterUnit:
+		if (g_bYDWEEnumUnitsInRangeMultipleFlag)
+		{
+			PUT_CONST(STRING_YDWE_LOCAL"unit", 0);
+		}
+		else
+		{
+			PUT_CONST("GetFilterUnit()", 0);
+		}
+		return;
 	case CC_GUIID_GetEnumPlayer:
 		if (g_bForForceMultipleFlag)
 		{

@@ -84,6 +84,10 @@ void _fastcall CC_PutExternFuncEx_TopDown(DWORD This, DWORD OutClass, char* name
 		case CC_GUIID_IfThenElse:
 		case CC_GUIID_GetBooleanAnd:
 		case CC_GUIID_GetBooleanOr:
+		case CC_GUIID_GroupEnumUnitsInRange:
+		case CC_GUIID_GroupEnumUnitsInRangeCounted:
+		case CC_GUIID_GroupEnumUnitsInRangeOfLoc:
+		case CC_GUIID_GroupEnumUnitsInRangeOfLocCounted:
 			flag = -1;
 			break;
 		}
