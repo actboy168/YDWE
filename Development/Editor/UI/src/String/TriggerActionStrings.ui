@@ -612,19 +612,19 @@ ForGroupHint="使用'选取单位'来取代相应的单位. 对于单位组内每个单位都会运行一次动
 
 GroupEnumUnitsInRange="选取单位添加到单位组(坐标)"
 GroupEnumUnitsInRange="为 ",~单位组," 添加以( ",~坐标X," , ",~坐标Y," )为圆心，",~半径," 为半径的圆范围内，满足 ",~条件," 的单位" 
-GroupEnumUnitsInRangeHint="选取范围内满足条件的单位，添加给单位组"
+GroupEnumUnitsInRangeHint=
 
-GroupEnumUnitsInRangeCounted="选取几个单位添加到单位组(坐标)"
-GroupEnumUnitsInRangeCounted="为 ",~单位组," 添加以( ",~坐标X," , ",~坐标Y," )为圆心，",~半径," 为半径的圆范围内，满足 ",~条件," 的单位，数量上限为 ",~N 
-GroupEnumUnitsInRangeCountedHint="选取范围内满足条件且不超过上限的单位，添加给单位组"
+GroupEnumUnitsInRangeCounted="选取单位添加到单位组(坐标)(不建议使用)"
+GroupEnumUnitsInRangeCounted="为 ",~单位组," 添加以( ",~坐标X," , ",~坐标Y," )为圆心，",~半径," 为半径的圆范围内，满足 ",~条件," 的单位。无效项( ",~N," )"
+GroupEnumUnitsInRangeCountedHint="最后一项是无效项，建议用上一个UI"
 
 GroupEnumUnitsInRangeOfLoc="选取单位添加到单位组(点)"
 GroupEnumUnitsInRangeOfLoc="为 ",~单位组," 添加以 ",~点," 为圆心，",~半径," 为半径的圆范围内，满足 ",~条件," 的单位" 
-GroupEnumUnitsInRangeOfLocHint="选取范围内满足条件的单位，添加给单位组"
+GroupEnumUnitsInRangeOfLocHint=
 
-GroupEnumUnitsInRangeOfLocCounted="选取几个单位添加到单位组(点)"
-GroupEnumUnitsInRangeOfLocCounted="为 ",~单位组," 添加以 ",~点," 为圆心，",~半径," 为半径的圆范围内，满足 ",~条件," 的单位，数量上限为 ",~N 
-GroupEnumUnitsInRangeOfLocCountedHint="选取范围内满足条件且不超过上限的单位，添加给单位组"
+GroupEnumUnitsInRangeOfLocCounted="选取单位添加到单位组(点)(不建议使用)"
+GroupEnumUnitsInRangeOfLocCounted="为 ",~单位组," 添加以 ",~点," 为圆心，",~半径," 为半径的圆范围内，满足 ",~条件," 的单位。无效项( ",~N," )"
+GroupEnumUnitsInRangeOfLocCountedHint="最后一项是无效项，建议用上一个UI"
 
 GroupAddUnit="添加单位 [R]"
 GroupAddUnit="为 ",~单位组," 添加 ",~单位
