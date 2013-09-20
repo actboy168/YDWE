@@ -16,6 +16,7 @@ globals
     real yd_MapMinY = 0
     player array yd_TempPlayerArray
     integer      yd_TempPlayerArrayTop
+    private string array yd_PlayerColor
 endglobals
 
 //===========================================================================
@@ -201,6 +202,10 @@ function YDWEForceToPlayerArrayEnum takes nothing returns nothing
     set yd_TempPlayerArrayTop = yd_TempPlayerArrayTop + 1
 endfunction
 
+function YDWEGetPlayerColorString takes player p, string s returns string
+    return yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+endfunction
+
 //===========================================================================
 //===========================================================================
 //系统函数补充
@@ -258,7 +263,25 @@ function InitializeYD takes nothing returns nothing
 	set yd_MapMinX = GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 	set yd_MapMinY = GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 	set yd_MapMaxX = GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
-	set yd_MapMaxY = GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)  
+	set yd_MapMaxY = GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
+
+	
+    set yd_PlayerColor [0] = "|cFFFF0303"
+    set yd_PlayerColor [1] = "|cFF0042FF"
+    set yd_PlayerColor [2] = "|cFF1CE6B9"
+    set yd_PlayerColor [3] = "|cFF540081"
+    set yd_PlayerColor [4] = "|cFFFFFC01"
+    set yd_PlayerColor [5] = "|cFFFE8A0E"
+    set yd_PlayerColor [6] = "|cFF20C000"
+    set yd_PlayerColor [7] = "|cFFE55BB0"
+    set yd_PlayerColor [8] = "|cFF959697"
+    set yd_PlayerColor [9] = "|cFF7EBFF1"
+    set yd_PlayerColor[10] = "|cFF106246"
+    set yd_PlayerColor[11] = "|cFF4E2A04"
+    set yd_PlayerColor[12] = "|cFF282828"
+    set yd_PlayerColor[13] = "|cFF282828"
+    set yd_PlayerColor[14] = "|cFF282828"
+    set yd_PlayerColor[15] = "|cFF282828"
     //=================显示版本=====================
     call YDWEVersion_Init()
 endfunction

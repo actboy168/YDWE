@@ -1492,6 +1492,10 @@ YDWEId2S=0,1,string,integer
 _YDWEId2S_Defaults=spsh
 _YDWEId2S_Category=TC_YDFC
 
+YDWEGetPlayerColorString=0,1,string,player,string
+_YDWEGetPlayerColorString_Defaults=Player00,_
+_YDWEGetPlayerColorString_Category=TC_YDFC
+
 SubStringBJ=0,1,string,string,integer,integer
 _SubStringBJ_Defaults=_,1,5
 _SubStringBJ_Category=TC_NOTHING

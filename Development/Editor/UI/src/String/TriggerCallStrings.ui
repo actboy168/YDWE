@@ -1851,9 +1851,14 @@ SubString="截取字符串 [R]"
 SubString="截取 ",~字符串," 的 ",~Start," - ",~End," 字节部分(不包括首字节)"
 SubStringHint="例: 截取''Grunts stink''的2 - 4字节部分 = ''un''."
 
-YDWEId2S="转换Id为字符串 [YDWE]"
+YDWEGetPlayerColorString="附加上玩家颜色"
+YDWEGetPlayerColorString="|c[",~玩家,"]",~Start,"|r"
+YDWEGetPlayerColorStringHint=
+
+YDWEId2S="转换Id为字符串"
 YDWEId2S="需要转换的Id为：",~整数
 YDWEId2SHint="将一个单位、物品等目标的Id转换成字符串；如'spsh'转换后为spsh。"     
+
 
 I2S="转换整数为字符串"
 I2S="转换 ",~Integer," 为字符串"
