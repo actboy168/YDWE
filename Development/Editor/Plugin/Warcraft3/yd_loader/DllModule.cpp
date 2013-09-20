@@ -15,6 +15,7 @@
 #include <slk/reader/CommonReader.cpp>
 
 uintptr_t RealLoadLibraryA  = 0;
+uintptr_t RealGameLoadLibraryA  = 0;
 uintptr_t RealCreateWindowExA = 0;
 uintptr_t RealSFileOpenArchive = (uintptr_t)::GetProcAddress(LoadLibraryW(L"Storm.dll"), (LPCSTR)266);
 
@@ -81,6 +82,17 @@ void DaemonThreadProc()
 }
 
 
+HMODULE __stdcall FakeGameLoadLibraryA(LPCSTR lpFilePath)
+{
+	fs::path lib((const char*)lpFilePath);
+	if (lib == "advapi32.dll")
+	{
+		return NULL;
+	}
+
+	return aero::std_call<HMODULE>(RealGameLoadLibraryA, lpFilePath);
+}
+
 HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
 {
 	fs::path lib((const char*)lpFilePath);
@@ -98,7 +110,12 @@ HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
 				}
 			}
 
-			RealCreateWindowExA = base::hook::iat(L"Game.dll", "user32.dll", "CreateWindowExA", (uintptr_t)FakeCreateWindowExA);
+			RealCreateWindowExA  = base::hook::iat(L"Game.dll", "user32.dll", "CreateWindowExA", (uintptr_t)FakeCreateWindowExA);
+			if (g_DllMod.IsDisableSecurityAccess)
+			{
+				RealGameLoadLibraryA = base::hook::iat(L"Game.dll", "kernel32.dll", "LoadLibraryA", (uintptr_t)FakeGameLoadLibraryA);
+			}
+
 			HANDLE hMpq;
 			aero::std_call<BOOL>(RealSFileOpenArchive, (g_DllMod.patch_path / "Patch.mpq").string().c_str(), 9, 6, &hMpq);
 
@@ -222,6 +239,7 @@ void ResetConfig(slk::IniTable& table)
 	table["MapTest"]["LaunchFullWindowed"] = "0";
 	table["MapTest"]["LaunchLockingMouse"] = "0";
 	table["MapTest"]["LaunchFixedRatioWindowed"] = "1";
+	table["MapTest"]["LaunchDisableSecurityAccess"] = "0";	
 	table["ScriptCompiler"]["EnableJassHelper"] = "1";
 	table["ScriptCompiler"]["EnableJassHelperDebug"] = "0";
 	table["ScriptCompiler"]["EnableJassHelperOptimization"] = "1";
@@ -290,9 +308,10 @@ void DllModule::Attach()
 		catch (...) {
 		}
 
-		IsFullWindowedMode   = "0" != table["MapTest"]["LaunchFullWindowed"];
-		IsLockingMouse       = "0" != table["MapTest"]["LaunchLockingMouse"];
-		IsFixedRatioWindowed = "0" != table["MapTest"]["LaunchFixedRatioWindowed"];
+		IsFullWindowedMode      = "0" != table["MapTest"]["LaunchFullWindowed"];
+		IsLockingMouse          = "0" != table["MapTest"]["LaunchLockingMouse"];
+		IsFixedRatioWindowed    = "0" != table["MapTest"]["LaunchFixedRatioWindowed"];
+		IsDisableSecurityAccess = "0" != table["MapTest"]["LaunchDisableSecurityAccess"];
 
 		try {
 			if (table["War3Patch"]["Option"] == "1")
