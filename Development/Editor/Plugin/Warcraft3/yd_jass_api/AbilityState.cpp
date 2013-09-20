@@ -205,7 +205,7 @@ namespace ydwe { namespace warcraft3 { namespace japi {
 
 	circular_queue<uintptr_t> ability_pool;
 
-	mapping_ability* search_mapping_ability()
+	mapping_ability** search_mapping_ability()
 	{
 		war3_searcher& s = get_war3_searcher();
 		uintptr_t ptr = 0;
@@ -225,18 +225,22 @@ namespace ydwe { namespace warcraft3 { namespace japi {
 		ptr = detail::convert_function(ptr);
 		ptr = detail::next_opcode(ptr, 0x89, 6);
 		ptr = *(uintptr_t*)(ptr + 0x02);
-		return (mapping_ability*)*(uintptr_t*)(ptr);		
+		return (mapping_ability**)(ptr);		
 	}
 
 	uint32_t GetAbilityObjectById64(object_id_64 const& id)
 	{
-		static mapping_ability* table_ptr = search_mapping_ability();
+		static mapping_ability** table_pptr = search_mapping_ability();
+
+		mapping_ability* table_ptr = *table_pptr;
+		if (!table_ptr)
+			return 0;
 
 		if (id.a >> 31)
 		{
 			if ((id.a & 0x7FFFFFFF) < table_ptr->unk0F)
 			{
-				if (*(uint32_t *)(table_ptr->unk0B + 8 * id.a) == -2)
+				if (table_ptr->unk0B && *(uint32_t *)(table_ptr->unk0B + 8 * id.a) == -2)
 				{
 					uint32_t v4 = *(uint32_t *)(table_ptr->unk0B + 8 * id.a + 4);
 					if (v4 && (!*(uint32_t*)(v4 + 0x20)) && (*(uint32_t*)(v4 + 0x18) == id.b))
@@ -250,7 +254,7 @@ namespace ydwe { namespace warcraft3 { namespace japi {
 		{
 			if (id.a < table_ptr->unk07)
 			{
-				if (*(uint32_t *)(table_ptr->unk03 + 8 * id.a) == -2)
+				if (table_ptr->unk03 && *(uint32_t *)(table_ptr->unk03 + 8 * id.a) == -2)
 				{
 					uint32_t v5 = *(uint32_t *)(table_ptr->unk03 + 8 * id.a + 4);
 					if (v5 && (!*(uint32_t*)(v5 + 0x20)) && (*(uint32_t*)(v5 + 0x18) == id.b))
