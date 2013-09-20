@@ -204,7 +204,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	circular_queue<uintptr_t> ability_pool;
 
-	mapping_ability* search_mapping_ability()
+	mapping_ability** search_mapping_ability()
 	{
 		war3_searcher& s = get_war3_searcher();
 		uintptr_t ptr = 0;
@@ -224,12 +224,16 @@ namespace base { namespace warcraft3 { namespace japi {
 		ptr = convert_function(ptr);
 		ptr = next_opcode(ptr, 0x89, 6);
 		ptr = *(uintptr_t*)(ptr + 0x02);
-		return (mapping_ability*)*(uintptr_t*)(ptr);		
+		return (mapping_ability**)(ptr);		
 	}
 
 	uint32_t GetAbilityObjectById64(object_id_64 const& id)
 	{
-		static mapping_ability* table_ptr = search_mapping_ability();
+		static mapping_ability** table_pptr = search_mapping_ability();
+
+		mapping_ability* table_ptr = *table_pptr;
+		if (!table_ptr)
+			return 0;
 
 		if (id.a >> 31)
 		{
