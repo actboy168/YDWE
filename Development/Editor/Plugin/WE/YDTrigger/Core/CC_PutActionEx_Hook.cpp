@@ -5,6 +5,7 @@ BOOL g_bYDWEEnumUnitsInRangeMultipleFlag = FALSE;
 BOOL g_bForForceMultipleFlag = FALSE;
 
 BOOL _fastcall  CC_PutAction_SearchVar(DWORD This, DWORD OutClass);
+void _fastcall  CC_PutActionEx_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl);
 
 void _fastcall 
 	CC_PutActionEx_ForLoop_GetVarName(DWORD This, DWORD cc_guiid_type, char* varname)
@@ -225,6 +226,108 @@ void CC_PutActionEx_ForGroupConditionEnd(DWORD This, DWORD OutClass, char* name)
 	CC_PutBegin();
 }
 
+void CC_PutActionEx_ForGroup(DWORD This, DWORD OutClass, char* name)
+{
+	uint32_t ui_type = *(uint32_t*)(This+0x138);
+	if (g_bYDWEEnumUnitsInRangeMultipleFlag)
+	{
+		ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_YDWEEnumUnitsInRangeMultiple");
+	}
+	else
+	{
+		g_bYDWEEnumUnitsInRangeMultipleFlag = TRUE;
+
+		CC_PutBegin();
+		CC_PutActionEx_ForGroupEnum(This, GetGUIVar_Class(This, 0), OutClass, name);
+		PUT_CONST("loop", 1);
+		CC_PutBegin();
+		PUT_CONST("set ydl_unit = FirstOfGroup(ydl_group)", 1);
+		PUT_CONST("exitwhen ydl_unit == null", 1);
+		PUT_CONST("call GroupRemoveUnit(ydl_group, ydl_unit)", 1);
+		CC_PutActionEx_ForGroupConditionBegin(GetGUIVar_Class(This, 0), OutClass, name);
+		if (CC_GUIID_ForGroup == *(DWORD*)(This+0x138))
+		{
+			CC_PutActionEx_Hook(GetGUIVar_Class(This, 1), 0, OutClass, name, CC_GUI_TYPE_ACTION, 0);
+		}
+		else
+		{
+			CC_PutBlock_Action(This, OutClass, name, 0);
+		}
+		CC_PutActionEx_ForGroupConditionEnd(GetGUIVar_Class(This, 0), OutClass, name);
+		CC_PutEnd();
+		PUT_CONST("endloop", 1);
+		PUT_CONST("call DestroyGroup(ydl_group)", 1);
+		CC_PutEnd();
+
+		g_bYDWEEnumUnitsInRangeMultipleFlag = FALSE;
+	}
+}
+
+void CC_PutActionEx_ForGroupMatching(DWORD This, DWORD OutClass, char* name)
+{
+	uint32_t ui_type = *(uint32_t*)(This+0x138);
+
+	if (g_bYDWEEnumUnitsInRangeMultipleFlag)
+	{
+		ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_YDWEEnumUnitsInRangeMultiple");
+	}
+	else
+	{
+		g_bYDWEEnumUnitsInRangeMultipleFlag = TRUE;
+
+		CC_PutBegin();
+		PUT_CONST("set ydl_group = CreateGroup()", 1);
+		PUT_CONST("set ydl_tmp_group = CreateGroup()", 1);
+		if (ui_type == CC_GUIID_GetUnitsInRectMatching)
+		{
+			PUT_CONST("call GroupEnumUnitsInRect(ydl_tmp_group, ", 0); 
+			PUT_VAR(This, 0);
+			PUT_CONST(", null)", 1); 
+		}
+		else if (ui_type == CC_GUIID_GetUnitsInRangeOfLocMatching)
+		{
+			PUT_CONST("call GroupEnumUnitsInRangeOfLoc(ydl_tmp_group, ", 0); 
+			PUT_VAR(This, 1);
+			PUT_CONST(", ", 0); 
+			PUT_VAR(This, 0);
+			PUT_CONST(", null)", 1); 
+		}
+		else
+		{
+			PUT_CONST("call GroupEnumUnitsOfPlayer(ydl_tmp_group, ", 0); 
+			PUT_VAR(This, 0);
+			PUT_CONST(", null)", 1); 
+		}
+
+		PUT_CONST("loop", 1);
+		CC_PutBegin();
+		PUT_CONST("set ydl_unit = FirstOfGroup(ydl_tmp_group)", 1);
+		PUT_CONST("exitwhen ydl_unit == null", 1);
+		PUT_CONST("call GroupRemoveUnit(ydl_tmp_group, ydl_unit)", 1);
+		PUT_CONST("if (", 0);
+		if (ui_type == CC_GUIID_GetUnitsInRangeOfLocMatching)
+		{
+			CC_PutVar_Code(This, OutClass, name, 2, CC_GUI_TYPE_CONDITION);
+		}
+		else
+		{
+			CC_PutVar_Code(This, OutClass, name, 1, CC_GUI_TYPE_CONDITION);
+		}
+
+		PUT_CONST(") then", 1);
+		CC_PutBegin();
+		PUT_CONST("call GroupAddUnit(ydl_group, ydl_unit)", 1);
+		CC_PutEnd();
+		PUT_CONST("endif", 1);
+		CC_PutEnd();
+		PUT_CONST("endloop", 1);
+		PUT_CONST("call DestroyGroup(ydl_tmp_group)", 1);
+		CC_PutEnd();
+
+		g_bYDWEEnumUnitsInRangeMultipleFlag = FALSE;
+	}
+}
+
 void _fastcall 
 	CC_PutActionEx_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl)
 {
@@ -233,111 +336,20 @@ void _fastcall
 	if (CC_GUIID_ForGroupMultiple == *(DWORD*)(This+0x138)
 		|| CC_GUIID_ForGroup == *(DWORD*)(This+0x138))
 	{
-		uint32_t ui_type = *(uint32_t*)(This+0x138);
-		if (g_bYDWEEnumUnitsInRangeMultipleFlag)
-		{
-			ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_YDWEEnumUnitsInRangeMultiple");
-		}
-		else
-		{
-			g_bYDWEEnumUnitsInRangeMultipleFlag = TRUE;
-
-			CC_PutBegin();
-			CC_PutActionEx_ForGroupEnum(This, GetGUIVar_Class(This, 0), OutClass, name);
-			PUT_CONST("loop", 1);
-			CC_PutBegin();
-			PUT_CONST("set ydl_unit = FirstOfGroup(ydl_group)", 1);
-			PUT_CONST("exitwhen ydl_unit == null", 1);
-			PUT_CONST("call GroupRemoveUnit(ydl_group, ydl_unit)", 1);
-			CC_PutActionEx_ForGroupConditionBegin(GetGUIVar_Class(This, 0), OutClass, name);
-			if (CC_GUIID_ForGroup == *(DWORD*)(This+0x138))
-			{
-				CC_PutActionEx_Hook(GetGUIVar_Class(This, 1), 0, OutClass, name, CC_GUI_TYPE_ACTION, 0);
-			}
-			else
-			{
-				CC_PutBlock_Action(This, OutClass, name, 0);
-			}
-			CC_PutActionEx_ForGroupConditionEnd(GetGUIVar_Class(This, 0), OutClass, name);
-			CC_PutEnd();
-			PUT_CONST("endloop", 1);
-			PUT_CONST("call DestroyGroup(ydl_group)", 1);
-			CC_PutEnd();
-
-			g_bYDWEEnumUnitsInRangeMultipleFlag = FALSE;
-		}
+		CC_PutActionEx_ForGroup(This, OutClass, name);
 		return ;
 	}
 	else
 	{
 		cc_search_var(This, [&](uint32_t var_ptr)
 		{
-			uint32_t ui_type = *(uint32_t*)(var_ptr+0x138);
-			switch (ui_type)
+			switch (*(uint32_t*)(var_ptr+0x138))
 			{
 			case CC_GUIID_GetUnitsInRectMatching:
 			case CC_GUIID_GetUnitsInRangeOfLocMatching:
 			case CC_GUIID_GetUnitsOfPlayerMatching:
 				{
-					if (g_bYDWEEnumUnitsInRangeMultipleFlag)
-					{
-						ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_YDWEEnumUnitsInRangeMultiple");
-					}
-					else
-					{
-						g_bYDWEEnumUnitsInRangeMultipleFlag = TRUE;
-
-						CC_PutBegin();
-						PUT_CONST("set ydl_group = CreateGroup()", 1);
-						PUT_CONST("set ydl_tmp_group = CreateGroup()", 1);
-						if (ui_type == CC_GUIID_GetUnitsInRectMatching)
-						{
-							PUT_CONST("call GroupEnumUnitsInRect(ydl_tmp_group, ", 0); 
-							PUT_VAR(var_ptr, 0);
-							PUT_CONST(", null)", 1); 
-						}
-						else if (ui_type == CC_GUIID_GetUnitsInRangeOfLocMatching)
-						{
-							PUT_CONST("call GroupEnumUnitsInRangeOfLoc(ydl_tmp_group, ", 0); 
-							PUT_VAR(var_ptr, 1);
-							PUT_CONST(", ", 0); 
-							PUT_VAR(var_ptr, 0);
-							PUT_CONST(", null)", 1); 
-						}
-						else
-						{
-							PUT_CONST("call GroupEnumUnitsOfPlayer(ydl_tmp_group, ", 0); 
-							PUT_VAR(var_ptr, 0);
-							PUT_CONST(", null)", 1); 
-						}
-
-						PUT_CONST("loop", 1);
-						CC_PutBegin();
-						PUT_CONST("set ydl_unit = FirstOfGroup(ydl_tmp_group)", 1);
-						PUT_CONST("exitwhen ydl_unit == null", 1);
-						PUT_CONST("call GroupRemoveUnit(ydl_tmp_group, ydl_unit)", 1);
-						PUT_CONST("if (", 0);
-						if (ui_type == CC_GUIID_GetUnitsInRangeOfLocMatching)
-						{
-							CC_PutVar_Code(var_ptr, OutClass, name, 2, CC_GUI_TYPE_CONDITION);
-						}
-						else
-						{
-							CC_PutVar_Code(var_ptr, OutClass, name, 1, CC_GUI_TYPE_CONDITION);
-						}
-
-						PUT_CONST(") then", 1);
-						CC_PutBegin();
-						PUT_CONST("call GroupAddUnit(ydl_group, ydl_unit)", 1);
-						CC_PutEnd();
-						PUT_CONST("endif", 1);
-						CC_PutEnd();
-						PUT_CONST("endloop", 1);
-						PUT_CONST("call DestroyGroup(ydl_tmp_group)", 1);
-						CC_PutEnd();
-
-						g_bYDWEEnumUnitsInRangeMultipleFlag = FALSE;
-					}
+					CC_PutActionEx_ForGroupMatching(var_ptr, OutClass, name);
 				}
 				break;
 			}
