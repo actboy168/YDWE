@@ -75,4 +75,23 @@ void All_Unhook();
 #define WE_ADDRESS(addr) ((DWORD)(addr)-0x00400000+g_nWEBase)
 extern DWORD g_nWEBase;
 
+
+
+#include <functional>
+#include <cstdint>
+
+inline void cc_search_var(uint32_t ptr, std::function<void(uint32_t)> func)
+{
+	uint32_t var_count = *(uint32_t*)(ptr+0x128);
+	for (uint32_t i = 0; i < var_count; ++i)
+	{
+		uint32_t var_ptr = GetGUIVar_Class(ptr, i);
+		if (var_ptr)
+		{
+			cc_search_var(var_ptr, func);
+			func(var_ptr);
+		}    
+	}
+}
+
 #endif

@@ -82,10 +82,15 @@ GUIID_Table_Init()
   GUIID_Table_Put(YDWEForLoopLocVarIndex);
   GUIID_Table_Put(YDWECustomScriptCode);
   GUIID_Table_Put(YDWEEnumUnitsInRangeMultiple);
+  GUIID_Table_Put(ForGroup);
   GUIID_Table_Put(GroupEnumUnitsInRange);
   GUIID_Table_Put(GroupEnumUnitsInRangeCounted);
   GUIID_Table_Put(GroupEnumUnitsInRangeOfLoc);
   GUIID_Table_Put(GroupEnumUnitsInRangeOfLocCounted);
+  GUIID_Table_Put(GetUnitsInRectMatching);
+  GUIID_Table_Put(GetUnitsInRangeOfLocMatching);
+  GUIID_Table_Put(GetUnitsOfPlayerMatching);
+  GUIID_Table_Put(GetPlayersMatching);
 
   GUIID_Table_Put(YDWEActivateTrigger);
   GUIID_Table_Put(GetEnumUnit);
@@ -96,6 +101,4 @@ GUIID_Table_Init()
   GUIID_Table_Put(YDWEGetObjectPropertyInteger);
   GUIID_Table_Put(YDWEGetObjectPropertyReal);
   GUIID_Table_Put(YDWEGetObjectPropertyString);
-
-
 }

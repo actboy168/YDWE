@@ -45,6 +45,11 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 			PUT_CONST("GetEnumPlayer()", 0);
 		}
 		return;
+	case CC_GUIID_GetUnitsInRectMatching:
+	case CC_GUIID_GetUnitsInRangeOfLocMatching:
+	case CC_GUIID_GetUnitsOfPlayerMatching:
+		PUT_CONST("ydl_group", 0);
+		return;
     case CC_GUIID_YDWECustomScriptCode:
       BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index+1);
       CC_PutVar(nItemClass, EDX, OutClass, NewName, 0, type, 1);
