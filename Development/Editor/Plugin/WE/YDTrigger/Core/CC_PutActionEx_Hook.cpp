@@ -328,6 +328,43 @@ void CC_PutActionEx_ForGroupMatching(DWORD This, DWORD OutClass, char* name)
 	}
 }
 
+void CC_PutActionEx_ForForce(DWORD This, DWORD OutClass, char* name)
+{
+	if (g_bForForceMultipleFlag)
+	{
+		ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ForForceMultiple");
+	}
+	else
+	{
+		g_bForForceMultipleFlag = TRUE;
+
+		CC_PutBegin();
+		PUT_CONST("set yd_TempPlayerArrayTop = 0", 1);
+		PUT_CONST("call ForForce(", 0); 
+		PUT_VAR(This, 0); 
+		PUT_CONST(", function YDWEForceToPlayerArrayEnum)", 1); 
+		PUT_CONST("set ydl_index = 0", 1);
+		PUT_CONST("loop", 1);
+		CC_PutBegin();
+		PUT_CONST("exitwhen ydl_index >= yd_TempPlayerArrayTop", 1);
+		CC_PutEnd();
+		if (CC_GUIID_ForForce == *(DWORD*)(This+0x138))
+		{
+			CC_PutActionEx_Hook(GetGUIVar_Class(This, 1), 0, OutClass, name, CC_GUI_TYPE_ACTION, 0);
+		}
+		else
+		{
+			CC_PutBlock_Action(This, OutClass, name, 0);
+		}
+		PUT_CONST("set ydl_index = ydl_index + 1", 1);
+		PUT_CONST("endloop", 1);
+		CC_PutEnd();
+
+		g_bForForceMultipleFlag = FALSE;
+	}
+}
+
+
 void _fastcall 
 	CC_PutActionEx_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl)
 {
@@ -337,6 +374,12 @@ void _fastcall
 		|| CC_GUIID_ForGroup == *(DWORD*)(This+0x138))
 	{
 		CC_PutActionEx_ForGroup(This, OutClass, name);
+		return ;
+	}
+	else if (CC_GUIID_ForForceMultiple == *(DWORD*)(This+0x138)
+		|| CC_GUIID_ForForce == *(DWORD*)(This+0x138))
+	{
+		CC_PutActionEx_ForForce(This, OutClass, name);
 		return ;
 	}
 	else
@@ -486,35 +529,6 @@ void _fastcall
 				CC_PutEnd();
 
 				g_bYDWEEnumUnitsInRangeMultipleFlag = FALSE;
-			}
-		}
-		break;
-	case CC_GUIID_ForForceMultiple:
-		{
-			if (g_bForForceMultipleFlag)
-			{
-				ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ForForceMultiple");
-			}
-			else
-			{
-				g_bForForceMultipleFlag = TRUE;
-
-				CC_PutBegin();
-				PUT_CONST("set yd_TempPlayerArrayTop = 0", 1);
-				PUT_CONST("call ForForce(", 0); 
-				PUT_VAR(This, 0); 
-				PUT_CONST(", function YDWEForceToPlayerArrayEnum)", 1); 
-				PUT_CONST("set ydl_index = 0", 1);
-				PUT_CONST("loop", 1);
-				CC_PutBegin();
-				PUT_CONST("exitwhen ydl_index >= yd_TempPlayerArrayTop", 1);
-				CC_PutEnd();
-				CC_PutBlock_Action(This, OutClass, name, 0);
-				PUT_CONST("set ydl_index = ydl_index + 1", 1);
-				PUT_CONST("endloop", 1);
-				CC_PutEnd();
-
-				g_bForForceMultipleFlag = FALSE;
 			}
 		}
 		break;

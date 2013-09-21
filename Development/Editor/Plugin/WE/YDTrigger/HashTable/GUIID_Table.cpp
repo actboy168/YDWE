@@ -83,6 +83,7 @@ GUIID_Table_Init()
   GUIID_Table_Put(YDWECustomScriptCode);
   GUIID_Table_Put(YDWEEnumUnitsInRangeMultiple);
   GUIID_Table_Put(ForGroup);
+  GUIID_Table_Put(ForForce);  
   GUIID_Table_Put(GroupEnumUnitsInRange);
   GUIID_Table_Put(GroupEnumUnitsInRangeCounted);
   GUIID_Table_Put(GroupEnumUnitsInRangeOfLoc);

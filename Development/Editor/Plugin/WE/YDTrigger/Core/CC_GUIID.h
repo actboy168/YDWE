@@ -21,6 +21,7 @@ enum GUIID_User_Defined
   CC_GUIID_YDWECustomScriptCode,
   CC_GUIID_YDWEEnumUnitsInRangeMultiple,
   CC_GUIID_ForGroup,
+  CC_GUIID_ForForce,
   CC_GUIID_GroupEnumUnitsInRange,
   CC_GUIID_GroupEnumUnitsInRangeCounted,
   CC_GUIID_GroupEnumUnitsInRangeOfLoc,
