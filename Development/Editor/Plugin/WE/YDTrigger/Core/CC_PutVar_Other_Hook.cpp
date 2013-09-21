@@ -45,6 +45,16 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 			PUT_CONST("GetEnumPlayer()", 0);
 		}
 		return;
+	case CC_GUIID_GetFilterPlayer:
+		if (g_bForForceMultipleFlag)
+		{
+			PUT_CONST("yd_TempPlayerArray["STRING_YDWE_LOCAL"index]", 0);
+		}
+		else
+		{
+			PUT_CONST("GetFilterPlayer()", 0);
+		}
+		return;
 	case CC_GUIID_GetUnitsInRectMatching:
 	case CC_GUIID_GetUnitsInRangeOfLocMatching:
 	case CC_GUIID_GetUnitsOfPlayerMatching:

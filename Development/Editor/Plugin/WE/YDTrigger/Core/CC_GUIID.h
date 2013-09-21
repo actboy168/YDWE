@@ -34,6 +34,7 @@ enum GUIID_User_Defined
   CC_GUIID_GetEnumUnit,
   CC_GUIID_GetFilterUnit,
   CC_GUIID_GetEnumPlayer,
+  CC_GUIID_GetFilterPlayer,
   CC_GUIID_TriggerSleepAction,
   CC_GUIID_PolledWait,
   CC_GUIID_YDWEGetObjectPropertyInteger,
