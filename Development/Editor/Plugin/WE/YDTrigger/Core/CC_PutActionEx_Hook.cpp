@@ -33,8 +33,7 @@ void _fastcall
 	}
 }
 
-void _fastcall 
-	CC_PutActionEx_ForLoop(DWORD This, DWORD OutClass, char* name, DWORD cc_guiid_type)
+void CC_PutActionEx_ForLoop(DWORD This, DWORD OutClass, char* name, DWORD cc_guiid_type)
 {
 	char buff[260];
 	char varname[260];
@@ -339,24 +338,27 @@ void CC_PutActionEx_ForForce(DWORD This, DWORD OutClass, char* name)
 		g_bForForceMultipleFlag = TRUE;
 
 		CC_PutBegin();
-		PUT_CONST("set yd_TempPlayerArrayTop = 0", 1);
-		PUT_CONST("call ForForce(", 0); 
+		PUT_CONST("set ydl_force = ", 0); 
 		PUT_VAR(This, 0); 
-		PUT_CONST(", function YDWEForceToPlayerArrayEnum)", 1); 
+		PUT_CONST("", 1); 
 		PUT_CONST("set ydl_index = 0", 1);
 		PUT_CONST("loop", 1);
 		CC_PutBegin();
-		PUT_CONST("exitwhen ydl_index >= yd_TempPlayerArrayTop", 1);
-		CC_PutEnd();
+		PUT_CONST("exitwhen ydl_index >= 16", 1);
+		PUT_CONST("if IsPlayerInForce(Player(ydl_index), ydl_force) then", 1);
 		if (CC_GUIID_ForForce == *(DWORD*)(This+0x138))
 		{
+			CC_PutBegin();
 			CC_PutActionEx_Hook(GetGUIVar_Class(This, 1), 0, OutClass, name, CC_GUI_TYPE_ACTION, 0);
+			CC_PutEnd();
 		}
 		else
 		{
 			CC_PutBlock_Action(This, OutClass, name, 0);
 		}
+		PUT_CONST("endif", 1);
 		PUT_CONST("set ydl_index = ydl_index + 1", 1);
+		CC_PutEnd();
 		PUT_CONST("endloop", 1);
 		CC_PutEnd();
 
