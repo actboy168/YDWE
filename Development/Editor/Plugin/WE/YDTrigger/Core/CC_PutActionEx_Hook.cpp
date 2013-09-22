@@ -336,26 +336,89 @@ void CC_PutActionEx_ForForce(DWORD This, DWORD OutClass, char* name)
 	else
 	{
 		g_bForForceMultipleFlag = TRUE;
-
-		CC_PutBegin();
-		PUT_CONST("set ydl_force = ", 0); 
-		PUT_VAR(This, 0); 
-		PUT_CONST("", 1); 
-		PUT_CONST("set ydl_index = 0", 1);
-		PUT_CONST("loop", 1);
-		CC_PutBegin();
-		PUT_CONST("exitwhen ydl_index >= 16", 1);
-		PUT_CONST("if IsPlayerInForce(Player(ydl_index), ydl_force) then", 1);
-		if (CC_GUIID_ForForce == *(DWORD*)(This+0x138))
+		
+		if (GetGUIVar_Class(This, 0) && (CC_GUIID_GetPlayersMatching == *(DWORD*)(GetGUIVar_Class(This, 0)+0x138)))
 		{
 			CC_PutBegin();
-			CC_PutActionEx_Hook(GetGUIVar_Class(This, 1), 0, OutClass, name, CC_GUI_TYPE_ACTION, 0);
+			PUT_CONST("set ydl_index = 0", 1);
+			PUT_CONST("loop", 1);
+			CC_PutBegin();
+			PUT_CONST("exitwhen ydl_index >= 16", 1);
+			PUT_CONST("if (GetPlayerSlotState(Player(ydl_index)) != PLAYER_SLOT_STATE_EMPTY) and (", 0);
+			CC_PutVar_Code(GetGUIVar_Class(This, 0), OutClass, name, 0, CC_GUI_TYPE_CONDITION);
+			PUT_CONST(") then", 1);
+			if (CC_GUIID_ForForce == *(DWORD*)(This+0x138))
+			{
+				CC_PutBegin();
+				CC_PutActionEx_Hook(GetGUIVar_Class(This, 1), 0, OutClass, name, CC_GUI_TYPE_ACTION, 0);
+				CC_PutEnd();
+			}
+			else
+			{
+				CC_PutBlock_Action(This, OutClass, name, 0);
+			}
+			PUT_CONST("endif", 1);
+			PUT_CONST("set ydl_index = ydl_index + 1", 1);
+			CC_PutEnd();
+			PUT_CONST("endloop", 1);
 			CC_PutEnd();
 		}
 		else
 		{
-			CC_PutBlock_Action(This, OutClass, name, 0);
+			CC_PutBegin();
+			PUT_CONST("set ydl_force = ", 0); 
+			PUT_VAR(This, 0); 
+			PUT_CONST("", 1); 
+			PUT_CONST("set ydl_index = 0", 1);
+			PUT_CONST("loop", 1);
+			CC_PutBegin();
+			PUT_CONST("exitwhen ydl_index >= 16", 1);
+			PUT_CONST("if IsPlayerInForce(Player(ydl_index), ydl_force) then", 1);
+			if (CC_GUIID_ForForce == *(DWORD*)(This+0x138))
+			{
+				CC_PutBegin();
+				CC_PutActionEx_Hook(GetGUIVar_Class(This, 1), 0, OutClass, name, CC_GUI_TYPE_ACTION, 0);
+				CC_PutEnd();
+			}
+			else
+			{
+				CC_PutBlock_Action(This, OutClass, name, 0);
+			}
+			PUT_CONST("endif", 1);
+			PUT_CONST("set ydl_index = ydl_index + 1", 1);
+			CC_PutEnd();
+			PUT_CONST("endloop", 1);
+			CC_PutEnd();
 		}
+
+		g_bForForceMultipleFlag = FALSE;
+	}
+}
+
+void CC_PutActionEx_ForForceMatching(DWORD This, DWORD OutClass, char* name)
+{
+	uint32_t ui_type = *(uint32_t*)(This+0x138);
+
+	if (g_bForForceMultipleFlag)
+	{
+		ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_YDWEEnumUnitsInRangeMultiple");
+	}
+	else
+	{
+		g_bForForceMultipleFlag = TRUE;
+
+		CC_PutBegin();
+		PUT_CONST("set ydl_force = CreateForce()", 1);
+		PUT_CONST("set ydl_index = 0", 1);
+		PUT_CONST("loop", 1);
+		CC_PutBegin();
+		PUT_CONST("exitwhen ydl_index >= 16", 1);
+		PUT_CONST("if (GetPlayerSlotState(Player(ydl_index)) != PLAYER_SLOT_STATE_EMPTY) and (", 0);
+		CC_PutVar_Code(This, OutClass, name, 0, CC_GUI_TYPE_CONDITION);
+		PUT_CONST(") then", 1);
+		CC_PutBegin();
+		PUT_CONST("call ForceAddPlayer(ydl_force, Player(ydl_index))", 1);
+		CC_PutEnd();
 		PUT_CONST("endif", 1);
 		PUT_CONST("set ydl_index = ydl_index + 1", 1);
 		CC_PutEnd();
@@ -365,7 +428,6 @@ void CC_PutActionEx_ForForce(DWORD This, DWORD OutClass, char* name)
 		g_bForForceMultipleFlag = FALSE;
 	}
 }
-
 
 void _fastcall 
 	CC_PutActionEx_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl)
@@ -395,6 +457,11 @@ void _fastcall
 			case CC_GUIID_GetUnitsOfPlayerMatching:
 				{
 					CC_PutActionEx_ForGroupMatching(var_ptr, OutClass, name);
+				}
+				break;
+			case CC_GUIID_GetPlayersMatching:
+				{
+					CC_PutActionEx_ForForceMatching(var_ptr, OutClass, name);
 				}
 				break;
 			}

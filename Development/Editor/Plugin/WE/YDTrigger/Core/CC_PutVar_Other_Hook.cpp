@@ -38,7 +38,7 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 	case CC_GUIID_GetEnumPlayer:
 		if (g_bForForceMultipleFlag)
 		{
-			PUT_CONST("Player(yd_TempPlayerArray["STRING_YDWE_LOCAL"index])", 0);
+			PUT_CONST("Player("STRING_YDWE_LOCAL"index)", 0);
 		}
 		else
 		{
@@ -48,7 +48,7 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 	case CC_GUIID_GetFilterPlayer:
 		if (g_bForForceMultipleFlag)
 		{
-			PUT_CONST("Player(yd_TempPlayerArray["STRING_YDWE_LOCAL"index])", 0);
+			PUT_CONST("Player("STRING_YDWE_LOCAL"index)", 0);
 		}
 		else
 		{
@@ -59,6 +59,9 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 	case CC_GUIID_GetUnitsInRangeOfLocMatching:
 	case CC_GUIID_GetUnitsOfPlayerMatching:
 		PUT_CONST("ydl_group", 0);
+		return;
+	case CC_GUIID_GetPlayersMatching:
+		PUT_CONST("ydl_force", 0);
 		return;
     case CC_GUIID_YDWECustomScriptCode:
       BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index+1);

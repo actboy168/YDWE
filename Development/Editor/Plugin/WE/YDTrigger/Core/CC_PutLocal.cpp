@@ -117,8 +117,18 @@ void _fastcall
 			CC_PutLocal_LocalVar(OutClass, CC_TYPE_integer, "ydul", ((char*)&GetGUIVar_Value(nItemClass, 0)));
 			CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, -1);
 			break;
+		case CC_GUIID_ForForce:
+			CC_PutLocal_LocalVar(OutClass, CC_TYPE_integer, "ydl", "index");
+			CC_PutLocal_LocalVar(OutClass, CC_TYPE_force, "ydl", "force");
+			break; 
 		case CC_GUIID_ForForceMultiple:
 			CC_PutLocal_LocalVar(OutClass, CC_TYPE_integer, "ydl", "index");
+			CC_PutLocal_LocalVar(OutClass, CC_TYPE_force, "ydl", "force");
+			if (isSearchHashLocal)
+			{
+				CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, -1);
+			}
+			break; 
 		case CC_GUIID_EnumDestructablesInRectAllMultiple:
 		case CC_GUIID_EnumDestructablesInCircleBJMultiple:
 		case CC_GUIID_EnumItemsInRectBJMultiple:
@@ -203,6 +213,7 @@ void _fastcall
 		case CC_TYPE_group:
 		case CC_TYPE_timer:
 		case CC_TYPE_trigger:
+		case CC_TYPE_force:
 			CC_PutBegin();
 			ConvertString(g_local_var_list[i].name, name_covert, 260);
 			BLZSStrPrintf(buff, 260, "set ydl_%s = null", name_covert);
