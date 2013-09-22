@@ -3,6 +3,7 @@
 
 extern BOOL g_bYDWEEnumUnitsInRangeMultipleFlag;
 extern BOOL g_bForForceMultipleFlag;
+extern bool g_bBuildTriggerCondition;
 
 void _fastcall 
 CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD index, DWORD type)
@@ -58,10 +59,24 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 	case CC_GUIID_GetUnitsInRectMatching:
 	case CC_GUIID_GetUnitsInRangeOfLocMatching:
 	case CC_GUIID_GetUnitsOfPlayerMatching:
-		PUT_CONST("ydl_group", 0);
+		if (!g_bBuildTriggerCondition)
+		{
+			PUT_CONST("ydl_group", 0);
+		}
+		else
+		{
+			CC_PutVar_Other(This, EDX, OutClass, name, index, type);
+		}
 		return;
 	case CC_GUIID_GetPlayersMatching:
-		PUT_CONST("ydl_force", 0);
+		if (!g_bBuildTriggerCondition)
+		{
+			PUT_CONST("ydl_force", 0);
+		}
+		else
+		{
+			CC_PutVar_Other(This, EDX, OutClass, name, index, type);
+		}
 		return;
     case CC_GUIID_YDWECustomScriptCode:
       BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index+1);

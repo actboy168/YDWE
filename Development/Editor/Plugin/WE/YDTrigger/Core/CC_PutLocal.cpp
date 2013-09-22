@@ -78,6 +78,10 @@ void _fastcall
 				CC_PutLocal_LocalVar(OutClass, CC_TYPE_group,  "ydl", "group");
 				CC_PutLocal_LocalVar(OutClass, CC_TYPE_unit,  "ydl", "unit");
 				break;
+			case CC_GUIID_GetPlayersMatching:
+				CC_PutLocal_LocalVar(OutClass, CC_TYPE_integer, "ydl", "index");
+				CC_PutLocal_LocalVar(OutClass, CC_TYPE_force, "ydl", "force");
+				break;
 			default:
 				break;
 			}

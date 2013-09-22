@@ -94,4 +94,8 @@ inline void cc_search_var(uint32_t ptr, std::function<void(uint32_t)> func)
 	}
 }
 
+void CC_PutSearchCondition (DWORD This, DWORD OutClass, char* name);
+void CC_PutSearchCondition2(DWORD This, DWORD OutClass, char* name);
+void CC_PutSearchCondition3(DWORD This, DWORD OutClass, char* name, DWORD index);
+
 #endif

@@ -190,12 +190,14 @@ void CC_PutActionEx_ForGroupConditionBegin(DWORD This, DWORD OutClass, char* nam
 		switch (*(uint32_t*)(This+0x138))
 		{
 		case CC_GUIID_GetUnitsInRangeOfLocMatching:
+			CC_PutSearchCondition(GetGUIVar_Class(This, 2), OutClass, name);
 			PUT_CONST("if (", 0);
 			CC_PutVar_Code(This, OutClass, name, 2, CC_GUI_TYPE_CONDITION);
 			PUT_CONST(") then", 1);
 			return;
 		case CC_GUIID_GetUnitsInRectMatching:
 		case CC_GUIID_GetUnitsOfPlayerMatching:
+			CC_PutSearchCondition(GetGUIVar_Class(This, 1), OutClass, name);
 			PUT_CONST("if (", 0);
 			CC_PutVar_Code(This, OutClass, name, 1, CC_GUI_TYPE_CONDITION);
 			PUT_CONST(") then", 1);
@@ -303,17 +305,21 @@ void CC_PutActionEx_ForGroupMatching(DWORD This, DWORD OutClass, char* name)
 		PUT_CONST("set ydl_unit = FirstOfGroup(ydl_tmp_group)", 1);
 		PUT_CONST("exitwhen ydl_unit == null", 1);
 		PUT_CONST("call GroupRemoveUnit(ydl_tmp_group, ydl_unit)", 1);
-		PUT_CONST("if (", 0);
 		if (ui_type == CC_GUIID_GetUnitsInRangeOfLocMatching)
 		{
+			CC_PutSearchCondition(GetGUIVar_Class(This, 2), OutClass, name);
+			PUT_CONST("if (", 0);
 			CC_PutVar_Code(This, OutClass, name, 2, CC_GUI_TYPE_CONDITION);
+			PUT_CONST(") then", 1);
 		}
 		else
 		{
+			CC_PutSearchCondition(GetGUIVar_Class(This, 1), OutClass, name);
+			PUT_CONST("if (", 0);
 			CC_PutVar_Code(This, OutClass, name, 1, CC_GUI_TYPE_CONDITION);
+			PUT_CONST(") then", 1);
 		}
 
-		PUT_CONST(") then", 1);
 		CC_PutBegin();
 		PUT_CONST("call GroupAddUnit(ydl_group, ydl_unit)", 1);
 		CC_PutEnd();
@@ -344,6 +350,7 @@ void CC_PutActionEx_ForForce(DWORD This, DWORD OutClass, char* name)
 			PUT_CONST("loop", 1);
 			CC_PutBegin();
 			PUT_CONST("exitwhen ydl_index >= 16", 1);
+			CC_PutSearchCondition(GetGUIVar_Class(This, 0), OutClass, name);
 			PUT_CONST("if (GetPlayerSlotState(Player(ydl_index)) != PLAYER_SLOT_STATE_EMPTY) and (", 0);
 			CC_PutVar_Code(GetGUIVar_Class(This, 0), OutClass, name, 0, CC_GUI_TYPE_CONDITION);
 			PUT_CONST(") then", 1);
@@ -413,6 +420,7 @@ void CC_PutActionEx_ForForceMatching(DWORD This, DWORD OutClass, char* name)
 		PUT_CONST("loop", 1);
 		CC_PutBegin();
 		PUT_CONST("exitwhen ydl_index >= 16", 1);
+		CC_PutSearchCondition(GetGUIVar_Class(This, 0), OutClass, name);
 		PUT_CONST("if (GetPlayerSlotState(Player(ydl_index)) != PLAYER_SLOT_STATE_EMPTY) and (", 0);
 		CC_PutVar_Code(This, OutClass, name, 0, CC_GUI_TYPE_CONDITION);
 		PUT_CONST(") then", 1);
@@ -428,6 +436,62 @@ void CC_PutActionEx_ForForceMatching(DWORD This, DWORD OutClass, char* name)
 		g_bForForceMultipleFlag = FALSE;
 	}
 }
+
+void CC_PutSearchCondition(DWORD This, DWORD OutClass, char* name)
+{
+	cc_search_var(This, [&](uint32_t var_ptr)
+	{
+		switch (*(uint32_t*)(var_ptr+0x138))
+		{
+		case CC_GUIID_GetUnitsInRectMatching:
+		case CC_GUIID_GetUnitsInRangeOfLocMatching:
+		case CC_GUIID_GetUnitsOfPlayerMatching:
+			{
+				CC_PutActionEx_ForGroupMatching(var_ptr, OutClass, name);
+			}
+			break;
+		case CC_GUIID_GetPlayersMatching:
+			{
+				CC_PutActionEx_ForForceMatching(var_ptr, OutClass, name);
+			}
+			break;
+		}
+	});
+}
+
+void CC_PutSearchCondition2(DWORD This, DWORD OutClass, char* name)
+{
+	DWORD nItemCount = *(DWORD*)(This+0xC);
+	for (DWORD i = 0; i < nItemCount; i++)
+	{
+		DWORD nItemClass = ((DWORD*)(*(DWORD*)(This+0x10)))[i];
+		if (Proc_GetGUIType(nItemClass) == CC_GUI_TYPE_CONDITION)
+		{
+			if (*(DWORD*)(nItemClass+0x13C) != 0)
+			{
+				CC_PutSearchCondition(nItemClass, OutClass, name);
+			}
+		}
+	}
+}
+
+void CC_PutSearchCondition3(DWORD This, DWORD OutClass, char* name, DWORD index)
+{
+	DWORD nItemCount = *(DWORD*)(This+0xC);
+
+	for (DWORD i = 0; i < nItemCount; i++)
+	{
+		DWORD nItemClass = ((DWORD*)(*(DWORD*)(This+0x10)))[i];
+		if (*(DWORD*)(nItemClass+0x13C) != 0)
+		{
+			if ((index) == -1 || (*(DWORD*)(nItemClass+0x154) == index))
+			{
+				CC_PutSearchCondition(nItemClass, OutClass, name);
+			}
+		}
+	}
+}
+
 
 void _fastcall 
 	CC_PutActionEx_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl)
@@ -448,30 +512,14 @@ void _fastcall
 	}
 	else
 	{
-		cc_search_var(This, [&](uint32_t var_ptr)
-		{
-			switch (*(uint32_t*)(var_ptr+0x138))
-			{
-			case CC_GUIID_GetUnitsInRectMatching:
-			case CC_GUIID_GetUnitsInRangeOfLocMatching:
-			case CC_GUIID_GetUnitsOfPlayerMatching:
-				{
-					CC_PutActionEx_ForGroupMatching(var_ptr, OutClass, name);
-				}
-				break;
-			case CC_GUIID_GetPlayersMatching:
-				{
-					CC_PutActionEx_ForForceMatching(var_ptr, OutClass, name);
-				}
-				break;
-			}
-		});
+		CC_PutSearchCondition(This, OutClass, name);
 	}
 
 	switch (*(DWORD*)(This+0x138))
 	{
 	case CC_GUIID_IfThenElse:
 		{
+			CC_PutSearchCondition(GetGUIVar_Class(This, 0), OutClass, name);
 			CC_PutBegin();
 			PUT_CONST("if (", 0);
 			CC_PutVar_Code(This, OutClass, name, 0, CC_GUI_TYPE_CONDITION);
@@ -486,6 +534,7 @@ void _fastcall
 		}
 	case CC_GUIID_IfThenElseMultiple:
 		{
+			CC_PutSearchCondition3(This, OutClass, name, 0);
 			CC_PutBegin();
 			PUT_CONST("if (", 0);
 			CC_PutBlock_Condition_And(This, OutClass, name, 0);
@@ -543,17 +592,21 @@ void _fastcall
 				PUT_CONST("set ydl_unit = FirstOfGroup(ydl_tmp_group)", 1);
 				PUT_CONST("exitwhen ydl_unit == null", 1);
 				PUT_CONST("call GroupRemoveUnit(ydl_tmp_group, ydl_unit)", 1);
-				PUT_CONST("if (", 0);
 				if (ui_type == CC_GUIID_GroupEnumUnitsInRangeOfLoc
 					|| ui_type == CC_GUIID_GroupEnumUnitsInRangeOfLocCounted)
 				{
+					CC_PutSearchCondition(GetGUIVar_Class(This, 3), OutClass, name);
+					PUT_CONST("if (", 0);
 					CC_PutVar_Code(This, OutClass, name, 3, CC_GUI_TYPE_CONDITION);
+					PUT_CONST(") then", 1);
 				}
 				else
 				{
+					CC_PutSearchCondition(GetGUIVar_Class(This, 4), OutClass, name);
+					PUT_CONST("if (", 0);
 					CC_PutVar_Code(This, OutClass, name, 4, CC_GUI_TYPE_CONDITION);
+					PUT_CONST(") then", 1);
 				}
-				PUT_CONST(") then", 1);
 				CC_PutBegin();
 				PUT_CONST("call GroupAddUnit(ydl_group, ydl_unit)", 1);
 				CC_PutEnd();
