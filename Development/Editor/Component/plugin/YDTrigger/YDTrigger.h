@@ -32,8 +32,6 @@
 #    endif
 #  endif
 #
-#  define YDTriggerEnumUintsInRange(g, x, y, r) GroupEnumUnitsInRange(g, x, y, r, null)
-#
 #  ifdef USE_BJ_ANTI_LEAK
 #    include "AntiBJLeak/MainMacro.h"
 #  endif
