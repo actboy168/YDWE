@@ -93,7 +93,7 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
       return;
     case CC_GUIID_YDWEForLoopLocVarIndex:
       ConvertString((char*)&GetGUIVar_Value(nItemClass, 0), NewName, 260);
-      BLZSStrPrintf(buff, 260, STRING_YDWE_LOCAL"%s", NewName);
+      BLZSStrPrintf(buff, 260, "ydul_%s", NewName);
       PUT_CONST(buff, 0);
       return;
     default:
