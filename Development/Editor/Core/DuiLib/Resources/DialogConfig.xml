@@ -66,7 +66,7 @@
           </VerticalLayout>
         </VerticalLayout>
         <VerticalLayout class="Background" inset="2,24,2,24" >
-          <VerticalLayout  height="170" >
+          <VerticalLayout  height="200" >
             <Label text="常规选项" tooltip="有关测试地图时魔兽的一些调整选项。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
               <CheckBox text="OpenGL模式启动魔兽" width="200" name="LaunchOpenGL"   tooltip="使魔兽使用OpenGL渲染引擎来渲染画面，默认是D3D。" />
