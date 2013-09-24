@@ -1,7 +1,7 @@
 
 //===================================================
-// For use with TriggerRegisterGameEvent    
-//=================================================== 
+// For use with TriggerRegisterGameEvent
+//===================================================
 ID_EVENT_GAME_VICTORY=0,eventid,EVENT_GAME_VICTORY,"(000)游戏事件 - 游戏胜利"
 ID_EVENT_GAME_END_LEVEL=0,eventid,EVENT_GAME_END_LEVEL,"(001)游戏事件 - 游戏结束"
 ID_EVENT_GAME_VARIABLE_LIMIT=0,eventid,EVENT_GAME_VARIABLE_LIMIT,"(002)游戏事件 - 变量改变"
@@ -103,7 +103,7 @@ ID_EVENT_UNIT_DROP_ITEM=0,eventid,EVENT_UNIT_DROP_ITEM,"(085)单位事件 - 丢弃物品
 ID_EVENT_UNIT_PICKUP_ITEM=0,eventid,EVENT_UNIT_PICKUP_ITEM,"(086)单位事件 - 获得物品"
 ID_EVENT_UNIT_USE_ITEM=0,eventid,EVENT_UNIT_USE_ITEM,"(087)单位事件 - 使用物品"
 ID_EVENT_UNIT_LOADED=0,eventid,EVENT_UNIT_LOADED,"(088)单位事件 - 被运输机装载"
-	
+
 //===================================================
 // Other
 //===================================================
@@ -116,7 +116,7 @@ ID_EVENT_DIALOG_CLICK=0,eventid,EVENT_DIALOG_CLICK,"(091)对话框事件 - 对话框被点
 //===================================================
 
 //===================================================
-// For use with TriggerRegisterGameEvent    
+// For use with TriggerRegisterGameEvent
 //===================================================
 ID_EVENT_GAME_LOADED=0,eventid,EVENT_GAME_LOADED,"(256)游戏事件 - 游戏读档"
 ID_EVENT_GAME_TOURNAMENT_FINISH_SOON=0,eventid,EVENT_GAME_TOURNAMENT_FINISH_SOON,"(257)游戏事件 - 游戏将在现在结束"

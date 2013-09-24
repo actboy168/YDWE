@@ -16,11 +16,11 @@ YDWEGetAnyTypeLocalVariableHint="可以获取到任意类型的局部变量。"
 
 YDWEForLoopLocVarIndex="局部变量 -- 读取(循环数)"
 YDWEForLoopLocVarIndex="loop_",~变量名
-YDWEForLoopLocVarIndexHint="用来获取当前循环中的循环数，是个真正的Jass局部变量。"  
+YDWEForLoopLocVarIndexHint="用来获取当前循环中的循环数，是个真正的Jass局部变量。"
 
 YDWELoadAnyTypeDataByUserData="自定义值 -- 读取"
 YDWELoadAnyTypeDataByUserData="获取 [",~类型,"] ",~null," 的 ",~属性
-YDWELoadAnyTypeDataByUserDataHint="从某个数据上获取自定义值，如获取[单位] 恶魔猎手 的 命中率 。"    
+YDWELoadAnyTypeDataByUserDataHint="从某个数据上获取自定义值，如获取[单位] 恶魔猎手 的 命中率 。"
 
 YDWEHaveSavedAnyTypeDataByUserData="自定义值 -- 是否存有"
 YDWEHaveSavedAnyTypeDataByUserData="[",~类型,"] ",~null," 拥有 [",~类型,"] "~属性
@@ -30,46 +30,46 @@ YDWEHaveSavedAnyTypeDataByUserDataHint="判断某个数据的自定义值是否存在，如[单位]
 //returns id string
 YDWEI2UnitId="转换整数为单位Id [YDWE]"
 YDWEI2UnitId="转换 ",~整数," 为单位Id"
-YDWEI2UnitIdHint="将一个整数转换成单位ID，如输入1751543663，将转成步兵的ID。" 
+YDWEI2UnitIdHint="将一个整数转换成单位ID，如输入1751543663，将转成步兵的ID。"
 
 YDWEI2ItemId="转换整数为物品Id [YDWE]"
 YDWEI2ItemId="转换 ",~整数," 为物品Id"
-YDWEI2ItemIdHint="将一个整数转换成物品ID，如输入1936749416，将转成魔法护盾的ID。" 
+YDWEI2ItemIdHint="将一个整数转换成物品ID，如输入1936749416，将转成魔法护盾的ID。"
 
 YDWES2Id="转换字符串为Id [YDWE]"
 YDWES2Id="需要转换成ID的字符串为：",~字符窜
-YDWES2IdHint="将一个字符串转换成单位、物品等目标的ID；如spsh转换后为'spsh'，届时可以通过聊天输入字符串来创建单位或物品。" 
+YDWES2IdHint="将一个字符串转换成单位、物品等目标的ID；如spsh转换后为'spsh'，届时可以通过聊天输入字符串来创建单位或物品。"
 
 YDWES2UnitId="转换字符串为单位Id [YDWE]"
 YDWES2UnitId="需要转换成单位Id的字符窜为：",~字符窜
-YDWES2UnitIdHint="将一个字符窜转换成单位ID，如输入hfoo，将转成步兵的ID。" 
+YDWES2UnitIdHint="将一个字符窜转换成单位ID，如输入hfoo，将转成步兵的ID。"
 
 YDWES2ItemId="转换字符串为物品Id [YDWE]"
 YDWES2ItemId="需要转换成物品Id的字符串为：",~字符窜
-YDWES2ItemIdHint="将一个字符串转换成物品ID，如输入spsh，将转成魔法护盾的ID。" 
+YDWES2ItemIdHint="将一个字符串转换成物品ID，如输入spsh，将转成魔法护盾的ID。"
 
 // returns Map x y
 YDWECoordinateX="修正X坐标 [YDWE]"
 YDWECoordinateX="需要修正的X坐标为：",~实数
-YDWECoordinateXHint="设修正X坐标，强制它大于地图边界最小值，小于地图边界最大值，避免弹出游戏错误。" 
+YDWECoordinateXHint="设修正X坐标，强制它大于地图边界最小值，小于地图边界最大值，避免弹出游戏错误。"
 
 YDWECoordinateY="修正Y坐标 [YDWE]"
 YDWECoordinateY="需要修正的Y坐标为：",~实数
-YDWECoordinateYHint="设修正Y坐标，强制它大于地图边界最小值，小于地图边界最大值，避免弹出游戏错误。" 
+YDWECoordinateYHint="设修正Y坐标，强制它大于地图边界最小值，小于地图边界最大值，避免弹出游戏错误。"
 
 // returns distance
 YDWEDistanceBetweenUnits="两个单位之间的距离 [YDWE]"
-YDWEDistanceBetweenUnits="从",~单位,"到",~单位,"的距离" 
+YDWEDistanceBetweenUnits="从",~单位,"到",~单位,"的距离"
 YDWEDistanceBetweenUnitsHint="获取两个单位之间的距离。"
 
 // returns angle
 YDWEAngleBetweenUnits="两个单位之间的角度 [YDWE]"
-YDWEAngleBetweenUnits="从",~单位,"到",~单位,"的角度" 
+YDWEAngleBetweenUnits="从",~单位,"到",~单位,"的角度"
 YDWEAngleBetweenUnitsHint="获取两个单位之间的角度。"
 
 // returns armor
 YDWEGetUnitArmor="获取单位护甲<Rising_Dusk制作>"
-YDWEGetUnitArmor="获取 ",~单位," 的护甲值，关联技能为 ",~辅助技能 
+YDWEGetUnitArmor="获取 ",~单位," 的护甲值，关联技能为 ",~辅助技能
 YDWEGetUnitArmorHint="可以获取单位的护甲值；需要保证混乱攻击对所有护甲均为100%伤害。关联技能的设置请参考example文件夹下的辅助地图。"
 
 // returns ElapsedTime
@@ -77,12 +77,12 @@ YDWE_TP_GetElapsedTime="获取中心计时器逝去时间<Fetrix_sai制作>"
 YDWE_TP_GetElapsedTime="获取运行索引为 ",~计时器运行索引," 的计时器逝去时间"
 YDWE_TP_GetElapsedTimeHint=""
 
-// returns RemainingTime 
+// returns RemainingTime
 YDWE_TP_GetRemainingTime="获取中心计时器剩余时间<Fetrix_sai制作>"
 YDWE_TP_GetRemainingTime="获取运行索引为 ",~计时器运行索引," 的计时器剩余时间"
 YDWE_TP_GetRemainingTimeHint=""
 
-// returns Timeout 
+// returns Timeout
 YDWE_TP_GetTimeout="获取中心计时器刷新周期<Fetrix_sai制作>"
 YDWE_TP_GetTimeout="获取运行索引为 ",~计时器运行索引," 的计时器刷新周期"
 YDWE_TP_GetTimeoutHint=""
@@ -91,7 +91,7 @@ YDWE_TP_GetTimeoutHint=""
   ="自定义代码 [C]"
   ="代码: ",~Jass代码
   Hint="输入一行Jass代码"
-  
+
 YDWEIsTriggerEventId="判断触发的事件 [YDWE]"
 YDWEIsTriggerEventId="当前触发的事件为 ",~事件
 YDWEIsTriggerEventIdHint="任意单位事件 等于 玩家单位事件，指定单位事件 等于 单位事件"
@@ -102,7 +102,7 @@ YDWEIsTriggerEventIdHint="任意单位事件 等于 玩家单位事件，指定单位事件 等于 单位
 
  UnitRemoveAbility="删除技能 [C]"
  UnitRemoveAbility="为 ",~单位," 删除 ",~技能
- UnitRemoveAbilityHint="删除成功返回true." 
+ UnitRemoveAbilityHint="删除成功返回true."
 
 // returns boolean
 
@@ -111,28 +111,28 @@ YDWEGetLocalVariableBoolean="local_",~bl
 YDWEGetLocalVariableBooleanHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableBooleanArray="局部变量数组"
-YDWEGetLocalVariableBooleanArray="local_",~bl,"[",~index,"]" 
+YDWEGetLocalVariableBooleanArray="local_",~bl,"[",~index,"]"
 YDWEGetLocalVariableBooleanArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 YDWEGetBooleanByInteger="获取 真值 (整数路径)"
 YDWEGetBooleanByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取真值"
-YDWEGetBooleanByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取真值数据。" 
+YDWEGetBooleanByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取真值数据。"
 
 YDWEGetBooleanByString="获取 真值 (字符串路径)"
 YDWEGetBooleanByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取真值"
-YDWEGetBooleanByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取真值数据。" 
+YDWEGetBooleanByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取真值数据。"
 
 YDWEIsItemSwitch="单位切换背包[YDWE]"
 YDWEIsItemSwitch=~单位," 正在切换背包"
-YDWEIsItemSwitchHint="判断单位是否在切换背包，避免单位切换背包时触发获得和掉落物品事件。" 
+YDWEIsItemSwitchHint="判断单位是否在切换背包，避免单位切换背包时触发获得和掉落物品事件。"
 
 YDWEPlatformIsInPlatform="地图在11平台上 [JAPI]"
 YDWEPlatformIsInPlatform="目前地图正在11平台上运行"
-YDWEPlatformIsInPlatformHint="判断地图是否在11平台上；此功能可以根据地图所在平台做出差异化操作。特别注意：此操作内含有等待。" 
+YDWEPlatformIsInPlatformHint="判断地图是否在11平台上；此功能可以根据地图所在平台做出差异化操作。特别注意：此操作内含有等待。"
 
 //YDWEPlatformIsInRoom="地图在特殊房间中 [JAPI]"
 //YDWEPlatformIsInRoom="目前地图在11平台的特殊房间中"
-//YDWEPlatformIsInRoomHint="判断地图是否在11平台的特殊房间中；此功能是为了一些测试地图准备，让地图只能在某个房间建立。特别注意：此操作内含有等待。" 
+//YDWEPlatformIsInRoomHint="判断地图是否在11平台的特殊房间中；此功能是为了一些测试地图准备，让地图只能在某个房间建立。特别注意：此操作内含有等待。"
 
 IsDestructableAliveBJ="可破坏物存活"
 IsDestructableAliveBJ=~可破坏物," 是存活的"
@@ -347,11 +347,11 @@ IsTriggerQueueEmptyBJ="触发队列为空"
 IsTriggerQueueEmptyBJHint="可使用'触发器 - 添加到队列'和'触发器 - 移出队列'动作来操作触发队列."
 
 IsUnit="单位检查"
-IsUnit=~单位," 与 ",~单位,"相同" 
+IsUnit=~单位," 与 ",~单位,"相同"
 IsUnitHint="用来判断两个单位是否相等。"
 
 IsUnitDetected="被检测到"
-IsUnitDetected=~单位," 处在 ",~玩家," 的真实视野范围内" 
+IsUnitDetected=~单位," 处在 ",~玩家," 的真实视野范围内"
 IsUnitDetectedHint="用来判断单位在这个玩家反隐形范围内，注：不包含该玩家同盟的反隐范围。"
 
 IsUnitType="单位类别检查"
@@ -503,7 +503,7 @@ IsLocationVisibleToPlayerHint=
 
 IsVisibleToPlayer="坐标可见"
 IsVisibleToPlayer="坐标(",~x,",",~y,") 对 ",~玩家," 可见"
-IsVisibleToPlayerHint="" 
+IsVisibleToPlayerHint=""
 
 IsLocationFoggedToPlayer="点在迷雾中"
 IsLocationFoggedToPlayer=~指定点," 在 ",~Player," 的迷雾范围内"
@@ -581,7 +581,7 @@ R2RHint="舍弃小数部分."
 S2I="转换字符串为整数"
 S2I="转换 ",~String," 为整数"
 S2IHint=
-      
+
 StringHash="获取字符串的哈希值"
 StringHash="(",~String,")的哈希值"
 StringHashHint="获取一个对应该字符串的密钥，不同的字符串的密钥基本不可能相同，也很难找到两个不同的字符串他们有着相同的密钥。可以用于制作密码等功能。"
@@ -599,11 +599,11 @@ YDWEGetLocalVariableInteger="local_",~i
 YDWEGetLocalVariableIntegerHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableIntegerArray="局部变量数组"
-YDWEGetLocalVariableIntegerArray="local_",~i,"[",~index,"]" 
+YDWEGetLocalVariableIntegerArray="local_",~i,"[",~index,"]"
 YDWEGetLocalVariableIntegerArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 YDWEGeneralBounsSystemUnitGetBonus="万能属性系统-获取属性<茄子制作>"
-YDWEGeneralBounsSystemUnitGetBonus="获取 ",~单位," 附加 ",~属性 
+YDWEGeneralBounsSystemUnitGetBonus="获取 ",~单位," 附加 ",~属性
 YDWEGeneralBounsSystemUnitGetBonusHint=
 
 GetHandleIdBJ="<1.24> 获取对象的h2i值"
@@ -619,36 +619,36 @@ StringHashBJ="转换 ",~String," 为整数"
 StringHashBJHint="创建一个对应该字符串的永久密钥,可以在哈希表中作为索引号使用"
 
 YDWE_TP_NewTimerPeriodic="新中心计时器-开启新的运行索引<Fetrix_sai制作>"
-YDWE_TP_NewTimerPeriodic="开启中心计时器一个新的运行索引，时间间隔为 ",~时间," 秒，是否循环 ",~真值,"，运行触发器 ",~触发器 
-YDWE_TP_NewTimerPeriodicHint="当中心计时器运行某个触发器时，会生成一个运行索引；本条API会按设置的参数来运行触发器，并返回一个运行索引。"  
+YDWE_TP_NewTimerPeriodic="开启中心计时器一个新的运行索引，时间间隔为 ",~时间," 秒，是否循环 ",~真值,"，运行触发器 ",~触发器
+YDWE_TP_NewTimerPeriodicHint="当中心计时器运行某个触发器时，会生成一个运行索引；本条API会按设置的参数来运行触发器，并返回一个运行索引。"
 
 YDWE_TP_GetExpiredTimerIndex="新中心计时器-获取当前到期计时器运行索引<Fetrix_sai制作>"
 YDWE_TP_GetExpiredTimerIndex="获取当前到期计时器运行索引"
-YDWE_TP_GetExpiredTimerIndexHint="当中心计时器运行某个触发器时，会生成一个运行索引；可以通过本条API来获取当前到期的计时器运行索引。"  
+YDWE_TP_GetExpiredTimerIndexHint="当中心计时器运行某个触发器时，会生成一个运行索引；可以通过本条API来获取当前到期的计时器运行索引。"
 
 YDWEGetGameCurrentTime="计时器系统-获取游戏当前时间"
 YDWEGetGameCurrentTime="获取游戏当前时间"
-YDWEGetGameCurrentTimeHint="获得从游戏开始到目前流逝的时间，以秒为单位。" 
+YDWEGetGameCurrentTimeHint="获得从游戏开始到目前流逝的时间，以秒为单位。"
 
 YDWETimerSystemGetRunIndex="计时器系统-获取中心计时器当前执行索引"
 YDWETimerSystemGetRunIndex="获取中心计时器当前执行索引"
-YDWETimerSystemGetRunIndexHint="获得中心计时器运行触发器或函数目前为止的执行次数。" 
+YDWETimerSystemGetRunIndexHint="获得中心计时器运行触发器或函数目前为止的执行次数。"
 
 YDWEGetUnitItemSoftId="物品在物品栏中的位置[YDWE]"
-YDWEGetUnitItemSoftId="获取 ",~单位," 物品栏中 ",~物品," 的位置" 
-YDWEGetUnitItemSoftIdHint="返回物品所在单位物品栏中的位置，为1-6之间的某个值；若单位身上不存在该物品，则返回0。" 
+YDWEGetUnitItemSoftId="获取 ",~单位," 物品栏中 ",~物品," 的位置"
+YDWEGetUnitItemSoftIdHint="返回物品所在单位物品栏中的位置，为1-6之间的某个值；若单位身上不存在该物品，则返回0。"
 
 YDWEConverUnitcodeToInt="显示单位类型为整数[YDWE]"
 YDWEConverUnitcodeToInt="显示<",~单位类型,">为整数"
-YDWEConverUnitcodeToIntHint="单位类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。" 
+YDWEConverUnitcodeToIntHint="单位类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
 
 YDWEConverItemcodeToInt="显示物品类型为整数[YDWE]"
 YDWEConverItemcodeToInt="显示<",~物品类型,">为整数"
-YDWEConverItemcodeToIntHint="物品类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。" 
+YDWEConverItemcodeToIntHint="物品类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
 
 YDWEConverAbilcodeToInt="显示技能类型为整数[YDWE]"
 YDWEConverAbilcodeToInt="显示<",~技能类型,">为整数"
-YDWEConverAbilcodeToIntHint="技能类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。" 
+YDWEConverAbilcodeToIntHint="技能类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
 
 YDWEConverOrdercodeToInt="显示命令ID为整数[YDWE]"
 YDWEConverOrdercodeToInt="显示<",~命令ID,">为整数"
@@ -656,31 +656,31 @@ YDWEConverOrdercodeToIntHint="命令ID本身是个整数，因此无需转换；该功能主要用于存
 
 YDWEGetIntegerByInteger="获取 整数 (整数路径)"
 YDWEGetIntegerByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取整数"
-YDWEGetIntegerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取整数数据。" 
+YDWEGetIntegerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取整数数据。"
 
 YDWEGetIntegerByString="获取 整数 (字符串路径)"
 YDWEGetIntegerByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取整数"
-YDWEGetIntegerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取整数数据。" 
+YDWEGetIntegerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取整数数据。"
 
 YDWEGetUnitGoldCost="获取 黄金消耗 (单位类型)"
-YDWEGetUnitGoldCost="获取 ",~单位," 建造时消耗的黄金" 
-YDWEGetUnitGoldCostHint="本触发只能获取普通单位建造时消耗的黄金，若填入英雄单位，将会获得固定值425" 
+YDWEGetUnitGoldCost="获取 ",~单位," 建造时消耗的黄金"
+YDWEGetUnitGoldCostHint="本触发只能获取普通单位建造时消耗的黄金，若填入英雄单位，将会获得固定值425"
 
 YDWEGetUnitWoodCost="获取 木头消耗 (单位类型)"
-YDWEGetUnitWoodCost="获取 ",~单位," 建造时消耗的木头" 
-YDWEGetUnitWoodCostHint="本触发只能获取普通单位建造时消耗的木头，若填入英雄单位，将会获得固定值100" 
+YDWEGetUnitWoodCost="获取 ",~单位," 建造时消耗的木头"
+YDWEGetUnitWoodCostHint="本触发只能获取普通单位建造时消耗的木头，若填入英雄单位，将会获得固定值100"
 
 YDWEGetUnitBuildTime="获取 建造时间 (单位类型)"
-YDWEGetUnitBuildTime="获取 ",~单位," 建造时需要的时间" 
-YDWEGetUnitBuildTimeHint="本触发只能获取普通单位建造时需要的时间，若填入英雄单位，将会获得固定值55" 
+YDWEGetUnitBuildTime="获取 ",~单位," 建造时需要的时间"
+YDWEGetUnitBuildTimeHint="本触发只能获取普通单位建造时需要的时间，若填入英雄单位，将会获得固定值55"
 
 YDWEGetUnitFoodUsed="获取 消耗人口 (单位)"
-YDWEGetUnitFoodUsed="获取 ",~单位," 建造时消耗的人口" 
-YDWEGetUnitFoodUsedHint="本触发只能获取普通单位建造时消耗的人口，若填入英雄单位，将会获得固定值5" 
+YDWEGetUnitFoodUsed="获取 ",~单位," 建造时消耗的人口"
+YDWEGetUnitFoodUsedHint="本触发只能获取普通单位建造时消耗的人口，若填入英雄单位，将会获得固定值5"
 
 YDWEGetUnitFoodMade="获取 提供人口 (单位)"
-YDWEGetUnitFoodMade="获取 ",~单位," 建造后提供的人口" 
-YDWEGetUnitFoodMadeHint="本触发只能获取普通单位建造后提供的人口，若填入英雄单位，将会获得固定值0" 
+YDWEGetUnitFoodMade="获取 ",~单位," 建造后提供的人口"
+YDWEGetUnitFoodMadeHint="本触发只能获取普通单位建造后提供的人口，若填入英雄单位，将会获得固定值0"
 
 GetElevatorHeight="升降机高度"
 GetElevatorHeight=~升降机," 的高度"
@@ -943,30 +943,30 @@ QueuedTriggerCountBJ="触发队列中的触发数量"
 QueuedTriggerCountBJHint="可使用'触发器 - 添加到队列'和'触发器 - 移出队列'动作来操作触发队列."
 
 
-// returns real  
+// returns real
 OperatorReal="算术运算"
 OperatorReal=~Value," ",~Operator," ",~Value
 OperatorRealHint=
 
    ="自定义代码 [C]"
    ="代码: ",~Jass代码
-   Hint="输入一行Jass代码"                
+   Hint="输入一行Jass代码"
 
 YDWEGetLocalVariableReal="局部变量"
 YDWEGetLocalVariableReal="local_",~R
 YDWEGetLocalVariableRealHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableRealArray="局部变量数组"
-YDWEGetLocalVariableRealArray="local_",~R,"[",~index,"]" 
+YDWEGetLocalVariableRealArray="local_",~R,"[",~index,"]"
 YDWEGetLocalVariableRealArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 YDWEGetRealByInteger="获取 实数 (整数路径)"
 YDWEGetRealByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取实数"
-YDWEGetRealByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取实数数据。" 
+YDWEGetRealByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取实数数据。"
 
 YDWEGetRealByString="获取 实数 (字符串路径)"
 YDWEGetRealByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取实数"
-YDWEGetRealByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取实数数据。" 
+YDWEGetRealByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取实数数据。"
 
 GetLocationX="点的X轴坐标"
 GetLocationX=~点," 的X轴坐标"
@@ -1066,7 +1066,7 @@ YDWER2DegHint=
 
 YDWER2Rad="转换实数为弧度"
 YDWER2Rad="转换实数 ",~Real," 为弧度"
-YDWER2RadHint= 
+YDWER2RadHint=
 
 TimerGetElapsed="逝去时间"
 TimerGetElapsed=~计时器," 的逝去时间"
@@ -1142,7 +1142,7 @@ GetSpellTargetXHint="这是1.24的函数，但已加入函数库，在1.20也可以使用。"
 
 GetSpellTargetY="技能施放点Y坐标"
 GetSpellTargetY="获取技能目标点的Y坐标"
-GetSpellTargetYHint="这是1.24的函数，但已加入函数库，在1.20也可以使用。"   
+GetSpellTargetYHint="这是1.24的函数，但已加入函数库，在1.20也可以使用。"
 
 GetTournamentFinishSoonTimeRemaining="比赛剩余时间"
 GetTournamentFinishSoonTimeRemaining="比赛剩余时间"
@@ -1354,11 +1354,11 @@ GetSoundFileDurationBJHint="单位为秒."
 
 WaygateGetDestinationX="传送门目的地X坐标"
 WaygateGetDestinationX=~传送门," 的目的地X坐标"
-WaygateGetDestinationXHint="" 
+WaygateGetDestinationXHint=""
 
 WaygateGetDestinationY="传送门目的地Y坐标"
 WaygateGetDestinationY=~传送门," 的目的地Y坐标"
-WaygateGetDestinationYHint="" 
+WaygateGetDestinationYHint=""
 
 GetUnitState="属性 [R]"
 GetUnitState=~单位," 的 ",~Property
@@ -1539,7 +1539,7 @@ LoadUnitHandleHint="如果不存在则返回空"
 
 LoadAbilityHandleBJ="<1.24> 从哈希表提取技能"
 LoadAbilityHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取技能"
-LoadAbilityHandleBJHint="如果不存在则返回空" 
+LoadAbilityHandleBJHint="如果不存在则返回空"
 
 LoadAbilityHandle="<1.24> 从哈希表提取技能 [C]"
 LoadAbilityHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取技能"
@@ -1547,7 +1547,7 @@ LoadAbilityHandleHint="如果不存在则返回空"
 
 YDWELoadAbilityHandleBJ="<1.24> 从哈希表提取技能"
 YDWELoadAbilityHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取技能"
-YDWELoadAbilityHandleBJHint="如果不存在则返回空" 
+YDWELoadAbilityHandleBJHint="如果不存在则返回空"
 
 YDWELoadAbilityHandle="<1.24> 从哈希表提取技能 [C]"
 YDWELoadAbilityHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取技能"
@@ -1833,7 +1833,7 @@ LoadHashtableHandleHint="如果不存在则返回空"
 
 OperatorString="连接字符串"
 OperatorString=~字符串1," + ",~字符串2
-OperatorStringHint=    
+OperatorStringHint=
 
     ="自定义代码 [C]"
     ="代码: ",~Jass代码
@@ -1841,7 +1841,7 @@ OperatorStringHint=
 
 GetObjectName="物体名称 [C]"
 GetObjectName=~物体ID," 的名称"
-GetObjectNameHint="如'A01Z',物体编辑器中物体的名字"                 
+GetObjectNameHint="如'A01Z',物体编辑器中物体的名字"
 
 SubStringBJ="截取字符串"
 SubStringBJ="截取 ",~字符串," 的 ",~Start," - ",~End," 字节部分"
@@ -1857,7 +1857,7 @@ YDWEGetPlayerColorStringHint=
 
 YDWEId2S="转换Id为字符串"
 YDWEId2S="需要转换的Id为：",~整数
-YDWEId2SHint="将一个单位、物品等目标的Id转换成字符串；如'spsh'转换后为spsh。"     
+YDWEId2SHint="将一个单位、物品等目标的Id转换成字符串；如'spsh'转换后为spsh。"
 
 
 I2S="转换整数为字符串"
@@ -1877,16 +1877,16 @@ YDWEGetLocalVariableString="local_",~str
 YDWEGetLocalVariableStringHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableStringArray="局部变量数组"
-YDWEGetLocalVariableStringArray="local_",~str,"[",~index,"]" 
+YDWEGetLocalVariableStringArray="local_",~str,"[",~index,"]"
 YDWEGetLocalVariableStringArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 YDWEGetStringByInteger="获取 字符串 (整数路径)"
 YDWEGetStringByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取字符串"
-YDWEGetStringByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取字符串数据。" 
+YDWEGetStringByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取字符串数据。"
 
 YDWEGetStringByString="获取 字符串 (字符串路径)"
 YDWEGetStringByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取字符串"
-YDWEGetStringByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取字符串数据。" 
+YDWEGetStringByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取字符串数据。"
 
 R2SW="格式转换实数为字符串"
 R2SW="转换 ",~Real," 为字符串,最小宽度: ",~Width," ,小数位数: ",~Precision
@@ -1991,16 +1991,16 @@ YDWEGetLocalVariableLocation="local_",~point
 YDWEGetLocalVariableLocationHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableLocationArray="局部变量数组"
-YDWEGetLocalVariableLocationArray="local_",~point,"[",~index,"]" 
+YDWEGetLocalVariableLocationArray="local_",~point,"[",~index,"]"
 YDWEGetLocalVariableLocationArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocationByInteger="获取 点 (整数路径)"
-YDWEGetLocationByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取点" 
-YDWEGetLocationByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取点数据。" 
+YDWEGetLocationByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取点"
+YDWEGetLocationByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取点数据。"
 
 YDWEGetLocationByString="获取 点 (字符串路径)"
-YDWEGetLocationByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取点" 
-YDWEGetLocationByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取点数据。" 
+YDWEGetLocationByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取点"
+YDWEGetLocationByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取点数据。"
 
 OffsetLocation="坐标位移点"
 OffsetLocation=~指定点," 坐标位移 (",~X,", ",~Y,")处"
@@ -2068,12 +2068,12 @@ GetTriggeringRegion="触发区域"
 GetTriggeringRegionHint="响应单位进入/离开不规则区域事件."
 
 YDWEGetRegionByInteger="获取 区域 (整数路径)"
-YDWEGetRegionByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取区域" 
-YDWEGetRegionByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取区域数据。" 
+YDWEGetRegionByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取区域"
+YDWEGetRegionByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取区域数据。"
 
 YDWEGetRegionByString="获取 区域 (字符串路径)"
-YDWEGetRegionByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取区域" 
-YDWEGetRegionByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取区域数据。" 
+YDWEGetRegionByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取区域"
+YDWEGetRegionByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取区域数据。"
 
 // returns rect
 GetCurrentCameraBoundsMapRectBJ="当前可用镜头范围"
@@ -2101,16 +2101,16 @@ YDWEGetLocalVariableRect="local_",~rt
 YDWEGetLocalVariableRectpHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableRectArray="局部变量数组"
-YDWEGetLocalVariableRectArray="local_",~rt,"[",~index,"]" 
+YDWEGetLocalVariableRectArray="local_",~rt,"[",~index,"]"
 YDWEGetLocalVariableRectArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 YDWEGetRectByInteger="获取 地区 (整数路径)"
-YDWEGetRectByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取地区" 
-YDWEGetRectByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取地区数据。" 
+YDWEGetRectByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取地区"
+YDWEGetRectByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取地区数据。"
 
 YDWEGetRectByString="获取 区域 (字符串路径)"
-YDWEGetRectByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取地区" 
-YDWEGetRectByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取地区数据。" 
+YDWEGetRectByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取地区"
+YDWEGetRectByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取地区数据。"
 
 YDWEGetRect="新建矩形区域(指定中心坐标)[YDWE]"
 YDWEGetRect="以坐标(",~x,",",~y,")为中心，创建长",~实数,"，宽",~实数,"的矩形区域。"
@@ -2175,30 +2175,30 @@ FirstOfGroup=~单位组," 中第一个单位"
       ="自定义代码 [C]"
       ="代码: ",~Jass代码
       Hint="输入一行Jass代码"
-      
+
 YDWEGetLocalVariableUnit="局部变量"
 YDWEGetLocalVariableUnit="local_",~u
 YDWEGetLocalVariableUnitHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableUnitArray="局部变量数组"
-YDWEGetLocalVariableUnitArray="local_",~u,"[",~index,"]" 
+YDWEGetLocalVariableUnitArray="local_",~u,"[",~index,"]"
 YDWEGetLocalVariableUnitArrayHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
-      
+
 YDWEGetUnitByInteger="获取 单位 (整数路径)"
-YDWEGetUnitByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取单位" 
-YDWEGetUnitByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位数据。" 
+YDWEGetUnitByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取单位"
+YDWEGetUnitByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位数据。"
 
 YDWEGetUnitByString="获取 单位 (字符串路径)"
-YDWEGetUnitByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取单位" 
-YDWEGetUnitByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位数据。"    
+YDWEGetUnitByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取单位"
+YDWEGetUnitByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位数据。"
 
 GetLastAbilityCastingUnit="获取最后结束施放特殊技能的单位"
-GetLastAbilityCastingUnit="获取最后结束施放特殊技能的单位" 
+GetLastAbilityCastingUnit="获取最后结束施放特殊技能的单位"
 GetLastAbilityCastingUnitHint="响应单位释放特殊技能事件，当技能释放完毕后，可以获取最后施放特殊技能的单位。"
 
 GetLastAbilityTargetUnit="获取最后被特殊技能命中的单位"
-GetLastAbilityTargetUnit="获取最后被特殊技能命中的单位" 
-GetLastAbilityTargetUnitHint="响应单位释放可以命中目标的特殊技能事件，如钩子、月神箭；当技能命中目标后，可以获取最后被特殊技能命中的单位。"     
+GetLastAbilityTargetUnit="获取最后被特殊技能命中的单位"
+GetLastAbilityTargetUnitHint="响应单位释放可以命中目标的特殊技能事件，如钩子、月神箭；当技能命中目标后，可以获取最后被特殊技能命中的单位。"
 
 GroupPickRandomUnit="单位组中随机单位"
 GroupPickRandomUnit=~单位组," 中随机选取的一个单位"
@@ -2351,18 +2351,18 @@ PlaceRandomUnitHint="从单位池中随机选取一个单位类型."
 // returns unitpool
 CreateUnitPool="新建单位池 [R]"
 CreateUnitPool="新建的空单位池"
-CreateUnitPoolHint="会创建单位池。" 
+CreateUnitPoolHint="会创建单位池。"
 
 YDWEGetLastUnitPool="最后创建的单位池 [YDWE]"
 YDWEGetLastUnitPool="最后创建的单位池"
-YDWEGetLastUnitPoolHint="该单位池必须是由YDWE提供的<创建单位池>动作生成，不然无法获取。" 
+YDWEGetLastUnitPoolHint="该单位池必须是由YDWE提供的<创建单位池>动作生成，不然无法获取。"
 
 // returns unitcode
 
        ="自定义代码 [C]"
        ="代码: ",~Jass代码
        Hint="输入一行Jass代码"
-       
+
 GetUnitTypeId="指定单位的类型"
 GetUnitTypeId=~单位," 的类型"
 GetUnitTypeIdHint=
@@ -2372,16 +2372,16 @@ YDWEGetLocalVariableUnitID="local_",~uid
 YDWEGetLocalVariableUnitIDHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableUnitIDArray="局部变量数组"
-YDWEGetLocalVariableUnitIDArray="local_",~uid,"[",~index,"]" 
+YDWEGetLocalVariableUnitIDArray="local_",~uid,"[",~index,"]"
 YDWEGetLocalVariableUnitIDArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 YDWEGetUnitIDByInteger="获取 单位类型 (整数路径)"
-YDWEGetUnitIDByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取单位类型" 
-YDWEGetUnitIDByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位类型数据。" 
+YDWEGetUnitIDByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取单位类型"
+YDWEGetUnitIDByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位类型数据。"
 
 YDWEGetUnitIDByString="获取 单位类型 (字符串路径)"
-YDWEGetUnitIDByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取单位类型" 
-YDWEGetUnitIDByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位类型数据。" 
+YDWEGetUnitIDByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取单位类型"
+YDWEGetUnitIDByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位类型数据。"
 
 ChooseRandomCreepBJ="随机中立单位类型"
 ChooseRandomCreepBJ="一个等级 ",~Level," 的随机中立单位类型"
@@ -2465,12 +2465,12 @@ GetUnitRallyDestructable=~单位," 的集结点目标"
 GetUnitRallyDestructableHint="如果指定单位没有设置集结点到可破坏物上,则返回null."
 
 YDWEGetDestructableByInteger="获取 可破坏物 (整数路径)"
-YDWEGetDestructableByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取可破坏物" 
-YDWEGetDestructableByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可破坏物数据。" 
+YDWEGetDestructableByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取可破坏物"
+YDWEGetDestructableByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可破坏物数据。"
 
 YDWEGetDestructableByString="获取 可破坏物 (字符串路径)"
-YDWEGetDestructableByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取可破坏物" 
-YDWEGetDestructableByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可破坏物数据。" 
+YDWEGetDestructableByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取可破坏物"
+YDWEGetDestructableByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可破坏物数据。"
 
 
 // returns destructablecode
@@ -2501,7 +2501,7 @@ GetLastCombinedItem="最后被合成的物品"
 GetLastCombinedItemHint="最后由物品合成系统合成的物品"
 
 UnitDropItem="单位掉落的物品"
-UnitDropItem="让 ",~单位," 掉落一件 ",~物品 
+UnitDropItem="让 ",~单位," 掉落一件 ",~物品
 UnitDropItemHint="在单位所在区域(32x32)内的随机点创建一个物品，注意当单位站在不可通行路径旁边时，该物品可能掉落其中而无法拾取。"
 
 YDWEGetLocalVariableItem="局部变量"
@@ -2509,16 +2509,16 @@ YDWEGetLocalVariableItem="local_",~it
 YDWEGetLocalVariableItemHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableItemArray="局部变量数组"
-YDWEGetLocalVariableItemArray="local_",~it,"[",~index,"]" 
+YDWEGetLocalVariableItemArray="local_",~it,"[",~index,"]"
 YDWEGetLocalVariableItemArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 YDWEGetItemByInteger="获取 物品 (整数路径)"
-YDWEGetItemByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取物品" 
-YDWEGetItemByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品数据。" 
+YDWEGetItemByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取物品"
+YDWEGetItemByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品数据。"
 
 YDWEGetItemByString="获取 物品 (字符串路径)"
-YDWEGetItemByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取物品" 
-YDWEGetItemByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品数据。" 
+YDWEGetItemByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取物品"
+YDWEGetItemByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品数据。"
 
 RandomItemInRectSimpleBJ="矩形区域内随机物品"
 RandomItemInRectSimpleBJ=~矩形区域," 内随机选取的一个物品"
@@ -2583,7 +2583,7 @@ GetItemTypeHint=
         ="自定义代码 [C]"
         ="代码: ",~Jass代码
         Hint="输入一行Jass代码"
-        
+
 GetItemTypeId="指定物品的类型"
 GetItemTypeId=~物品," 的类型"
 GetItemTypeIdHint=
@@ -2593,16 +2593,16 @@ YDWEGetLocalVariableItemID="local_",~itid
 YDWEGetLocalVariableItemIDHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableItemIDArray="局部变量数组"
-YDWEGetLocalVariableItemIDArray="local_",~itid,"[",~index,"]" 
+YDWEGetLocalVariableItemIDArray="local_",~itid,"[",~index,"]"
 YDWEGetLocalVariableItemIDArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 YDWEGetItemIDByInteger="获取 物品类型 (整数路径)"
-YDWEGetItemIDByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取物品类型" 
-YDWEGetItemIDByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品类型数据。" 
+YDWEGetItemIDByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取物品类型"
+YDWEGetItemIDByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品类型数据。"
 
 YDWEGetItemIDByString="获取 物品类型 (字符串路径)"
-YDWEGetItemIDByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取物品类型" 
-YDWEGetItemIDByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品类型数据。" 
+YDWEGetItemIDByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取物品类型"
+YDWEGetItemIDByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取物品类型数据。"
 
 ChooseRandomItemExBJ="随机物品类型(指定分类)"
 ChooseRandomItemExBJ="等级 ",~Level," 的随机 ",~Class," 物品类型"
@@ -2632,7 +2632,7 @@ GetResearchedHint="响应'开始/取消/完成科技研究'单位事件."
          ="自定义代码 [C]"
          ="代码: ",~Jass代码
          Hint="输入一行Jass代码"
-         
+
 GetSpellAbilityId="施放技能"
 GetSpellAbilityId="施放技能"
 GetSpellAbilityIdHint="响应施放技能单位事件, 指代被施放的技能."
@@ -2642,19 +2642,19 @@ GetLearnedSkill="学习技能"
 GetLearnedSkillHint="响应'学习技能'单位事件, 指代被学习的技能."
 
 YDWEGetAbilityIDByInteger="获取 技能 (整数路径)"
-YDWEGetAbilityIDByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取技能" 
-YDWEGetAbilityIDByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取技能数据。" 
+YDWEGetAbilityIDByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取技能"
+YDWEGetAbilityIDByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取技能数据。"
 
 YDWEGetAbilityIDByString="获取 技能 (字符串路径)"
-YDWEGetAbilityIDByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取技能" 
-YDWEGetAbilityIDByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取技能数据。"  
+YDWEGetAbilityIDByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取技能"
+YDWEGetAbilityIDByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取技能数据。"
 
 YDWEGetLocalVariableAbilityID="局部变量"
 YDWEGetLocalVariableAbilityID="local_",~abid
 YDWEGetLocalVariableAbilityIDHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableAbilityIDArray="局部变量数组"
-YDWEGetLocalVariableAbilityIDArray="local_",~abid,"[",~index,"]" 
+YDWEGetLocalVariableAbilityIDArray="local_",~abid,"[",~index,"]"
 YDWEGetLocalVariableAbilityIDArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 // returns heroskillcode
@@ -2678,11 +2678,11 @@ GetOwningPlayerHint=
 
 YDWEGetPlayerByInteger="获取 玩家 (整数路径)"
 YDWEGetPlayerByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取玩家"
-YDWEGetPlayerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取玩家数据。" 
+YDWEGetPlayerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取玩家数据。"
 
 YDWEGetPlayerByString="获取 玩家 (字符串路径)"
 YDWEGetPlayerByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取玩家"
-YDWEGetPlayerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取玩家数据。" 
+YDWEGetPlayerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取玩家数据。"
 
 GetItemPlayer="物品所属玩家"
 GetItemPlayer=~物品," 的所属玩家"
@@ -2739,16 +2739,16 @@ YDWEGetLocalVariableGroup="local_",~g
 YDWEGetLocalVariableGroupHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableGroupArray="局部变量数组"
-YDWEGetLocalVariableGroupArray="local_",~g,"[",~index,"]" 
+YDWEGetLocalVariableGroupArray="local_",~g,"[",~index,"]"
 YDWEGetLocalVariableGroupArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 YDWEGetGroupByInteger="获取 单位组 (整数路径)"
-YDWEGetGroupByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取单位组" 
-YDWEGetGroupByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位组数据。" 
+YDWEGetGroupByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取单位组"
+YDWEGetGroupByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位组数据。"
 
 YDWEGetGroupByString="获取 单位组 (字符串路径)"
-YDWEGetGroupByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取单位组" 
-YDWEGetGroupByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位组数据。" 
+YDWEGetGroupByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取单位组"
+YDWEGetGroupByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取单位组数据。"
 
 GetRandomSubGroup="单位组中随机单位"
 GetRandomSubGroup="随机获取 ",~Count," 个单位从 ",~单位组
@@ -2868,56 +2868,56 @@ GetTriggeringTriggerHint="当前所运行的触发器."
 
 YDWEGetTriggerByInteger="获取 触发器 (整数路径)"
 YDWEGetTriggerByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取触发器"
-YDWEGetTriggerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器数据。" 
+YDWEGetTriggerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器数据。"
 
 YDWEGetTriggerByString="获取 触发器 (字符串路径)"
 YDWEGetTriggerByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取触发器"
-YDWEGetTriggerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器数据。" 
+YDWEGetTriggerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器数据。"
 
 // returns triggercondition
 YDWEGetTriggerConditionByInteger="获取 触发器条件 (整数路径)"
 YDWEGetTriggerConditionByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取触发器条件"
-YDWEGetTriggerConditionByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器条件数据。" 
+YDWEGetTriggerConditionByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器条件数据。"
 
 YDWEGetTriggerConditionByString="获取 触发器条件 (字符串路径)"
 YDWEGetTriggerConditionByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取触发器条件"
-YDWEGetTriggerConditionByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器条件数据。" 
+YDWEGetTriggerConditionByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器条件数据。"
 
 // returns triggeraction
 YDWEGetTriggerActionByInteger="获取 触发器动作 (整数路径)"
 YDWEGetTriggerActionByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取触发器动作"
-YDWEGetTriggerActionByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器动作数据。" 
+YDWEGetTriggerActionByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器动作数据。"
 
 YDWEGetTriggerActionByString="获取 触发器动作 (字符串路径)"
 YDWEGetTriggerActionByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取触发器动作"
-YDWEGetTriggerActionByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器动作数据。" 
+YDWEGetTriggerActionByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取触发器动作数据。"
 
 // returns event
 YDWEGetTriggerEventByInteger="获取 事件 (整数路径)"
 YDWEGetTriggerEventByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取事件"
-YDWEGetTriggerEventByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取事件数据。" 
+YDWEGetTriggerEventByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取事件数据。"
 
 YDWEGetTriggerEventByString="获取 事件 (字符串路径)"
 YDWEGetTriggerEventByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取事件"
-YDWEGetTriggerEventByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取事件数据。" 
+YDWEGetTriggerEventByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取事件数据。"
 
 // returns force
 YDWEGetForceByInteger="获取 势力 (整数路径)"
 YDWEGetForceByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取势力"
-YDWEGetForceByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取势力数据。" 
+YDWEGetForceByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取势力数据。"
 
 YDWEGetForceByString="获取 势力 (字符串路径)"
 YDWEGetForceByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取势力"
-YDWEGetForceByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取势力数据。" 
+YDWEGetForceByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取势力数据。"
 
 // returns boolexpr
 YDWEGetBoolexprByInteger="获取 布尔表达式 (整数路径)"
 YDWEGetBoolexprByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取布尔表达式"
-YDWEGetBoolexprByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取布尔表达式数据。" 
+YDWEGetBoolexprByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取布尔表达式数据。"
 
 YDWEGetBoolexprByString="获取 布尔表达式 (字符串路径)"
 YDWEGetBoolexprByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取布尔表达式"
-YDWEGetBoolexprByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取布尔表达式数据。" 
+YDWEGetBoolexprByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取布尔表达式数据。"
 
 // returns gamedifficulty
 GetGameDifficulty="当前游戏难度"
@@ -2952,7 +2952,7 @@ GetPlayerColorHint=
 // returns playerslotstate
 GetPlayerSlotState="玩家游戏状态"
 GetPlayerSlotState=~Player," 的游戏状态"
-GetPlayerSlotStateHint=  
+GetPlayerSlotStateHint=
 
 // returns effect
 
@@ -2994,16 +2994,16 @@ YDWEGetLocalVariableEffect="local_",~e
 YDWEGetLocalVariableEffectpHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 
 YDWEGetLocalVariableEffectArray="局部变量数组"
-YDWEGetLocalVariableEffectArray="local_",~e,"[",~index,"]" 
+YDWEGetLocalVariableEffectArray="local_",~e,"[",~index,"]"
 YDWEGetLocalVariableEffectArrayHint="获取一个局部变量数组，参数处填入该变量的名字和数组索引;局部变量仅在当前触发器下有效。"
 
 YDWEGetEffectByInteger="获取 特效 (整数路径)"
-YDWEGetEffectByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取特效" 
-YDWEGetEffectByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取特效数据。" 
+YDWEGetEffectByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取特效"
+YDWEGetEffectByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取特效数据。"
 
 YDWEGetEffectByString="获取 特效 (字符串路径)"
-YDWEGetEffectByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取特效" 
-YDWEGetEffectByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取特效数据。" 
+YDWEGetEffectByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取特效"
+YDWEGetEffectByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取特效数据。"
 
 // returns lightning
 //AddLightning
@@ -3021,12 +3021,12 @@ GetLastCreatedLightningBJ="最后创建的闪电效果"
 GetLastCreatedLightningBJHint="最后一个使用'闪电效果 - 创建'动作创建的闪电效果."
 
 YDWEGetLightningByInteger="获取 闪电 (整数路径)"
-YDWEGetLightningByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取闪电" 
-YDWEGetLightningByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取闪电数据。" 
+YDWEGetLightningByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取闪电"
+YDWEGetLightningByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取闪电数据。"
 
 YDWEGetLightningByString="获取 闪电 (字符串路径)"
-YDWEGetLightningByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取闪电" 
-YDWEGetLightningByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取闪电数据。" 
+YDWEGetLightningByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取闪电"
+YDWEGetLightningByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取闪电数据。"
 
 // returns image
 GetLastCreatedImage="最后创建的图像"
@@ -3097,11 +3097,11 @@ GetLastPlayedSoundHint="最后一个由'声音 - 播放音效'或'电影 - 播放单位消息'动作播
 
 YDWEGetSoundByInteger="获取 音效 (整数路径)"
 YDWEGetSoundByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取音效"
-YDWEGetSoundByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取音效数据。" 
+YDWEGetSoundByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取音效数据。"
 
 YDWEGetSoundByString="获取 音效 (字符串路径)"
 YDWEGetSoundByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取音效"
-YDWEGetSoundByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取音效数据。"    
+YDWEGetSoundByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取音效数据。"
 
 // returns music
 GetLastPlayedMusic="最后播放的音乐"
@@ -3115,19 +3115,19 @@ CreateQuestHint="新建一个任务.注：这条毫无用处，别用——everguo"
 
 YDWECreateQuest="新建任务[YDWE]"
 YDWECreateQuest="新建一个 ",~Quest Type," 任务,标题: ",~文字," 任务说明: ",~文字," 任务图标: ",~Icon Path
-YDWECreateQuestHint="新建一个任务；YDWE新增。" 
+YDWECreateQuestHint="新建一个任务；YDWE新增。"
 
 GetLastCreatedQuestBJ="最后创建的任务"
 GetLastCreatedQuestBJ="最后创建的任务"
 GetLastCreatedQuestBJHint="最后一个由'任务 - 创建任务'动作创建的任务."
 
 YDWEGetQuestByInteger="获取 任务 (整数路径)"
-YDWEGetQuestByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取任务" 
-YDWEGetQuestByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务数据。" 
+YDWEGetQuestByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取任务"
+YDWEGetQuestByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务数据。"
 
 YDWEGetQuestByString="获取 任务 (字符串路径)"
-YDWEGetQuestByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取任务" 
-YDWEGetQuestByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务数据。" 
+YDWEGetQuestByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取任务"
+YDWEGetQuestByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务数据。"
 
 // returns questitem
 
@@ -3140,12 +3140,12 @@ GetLastCreatedQuestItemBJ="最后创建的任务项目"
 GetLastCreatedQuestItemBJHint="最后一个由'任务 - 创建任务项目'动作创建的任务项目."
 
 YDWEGetQuestItemByInteger="获取 任务目标项 (整数路径)"
-YDWEGetQuestItemByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取任务目标项" 
-YDWEGetQuestItemByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务目标项数据。" 
+YDWEGetQuestItemByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取任务目标项"
+YDWEGetQuestItemByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务目标项数据。"
 
 YDWEGetQuestItemByString="获取 任务目标项 (字符串路径)"
-YDWEGetQuestItemByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取任务目标项" 
-YDWEGetQuestItemByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务目标项数据。" 
+YDWEGetQuestItemByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取任务目标项"
+YDWEGetQuestItemByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取任务目标项数据。"
 
 // returns defeatcondition
 
@@ -3166,11 +3166,11 @@ DialogCreateHint="创建新的对话框."
 
 YDWEGetDialogByInteger="获取 对话框 (整数路径)"
 YDWEGetDialogByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取对话框"
-YDWEGetDialogByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框数据。" 
+YDWEGetDialogByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框数据。"
 
 YDWEGetDialogByString="获取 对话框 (字符串路径)"
 YDWEGetDialogByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取对话框"
-YDWEGetDialogByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框数据。" 
+YDWEGetDialogByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框数据。"
 
 // returns button
 DialogAddButton="添加对话框按钮 [R]"
@@ -3179,11 +3179,11 @@ DialogAddButtonHint="会创建对话框按钮."
 
 YDWEGetButtonByInteger="获取 对话框按钮 (整数路径)"
 YDWEGetButtonByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取对话框按钮"
-YDWEGetButtonByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框按钮数据。" 
+YDWEGetButtonByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框按钮数据。"
 
 YDWEGetButtonByString="获取 对话框按钮 (字符串路径)"
 YDWEGetButtonByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取对话框按钮"
-YDWEGetButtonByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框按钮数据。" 
+YDWEGetButtonByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取对话框按钮数据。"
 
 GetLastCreatedButtonBJ="最后创建的对话框按钮"
 GetLastCreatedButtonBJ="最后创建的对话框按钮"
@@ -3208,12 +3208,12 @@ PlayerGetLeaderboardBJ=~Player," 使用的排行榜"
 PlayerGetLeaderboardBJHint="每个玩家只能使用1个排行榜."
 
 YDWEGetLeaderboardByInteger="获取 排行榜 (整数路径)"
-YDWEGetLeaderboardByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取排行榜" 
-YDWEGetLeaderboardByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取排行榜数据。" 
+YDWEGetLeaderboardByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取排行榜"
+YDWEGetLeaderboardByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取排行榜数据。"
 
 YDWEGetLeaderboardByString="获取 排行榜 (字符串路径)"
-YDWEGetLeaderboardByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取排行榜" 
-YDWEGetLeaderboardByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取排行榜数据。" 
+YDWEGetLeaderboardByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取排行榜"
+YDWEGetLeaderboardByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取排行榜数据。"
 
 // returns multiboard
 CreateMultiboard="新建多面板 [R]"
@@ -3225,12 +3225,12 @@ GetLastCreatedMultiboard="最后创建的多面板"
 GetLastCreatedMultiboardHint="最后一个由'多面板 - 创建多面板'动作创建的多面板."
 
 YDWEGetMultiBoardByInteger="获取 多面板 (整数路径)"
-YDWEGetMultiBoardByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取多面板" 
-YDWEGetMultiBoardByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板数据。" 
+YDWEGetMultiBoardByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取多面板"
+YDWEGetMultiBoardByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板数据。"
 
 YDWEGetMultiBoardByString="获取 多面板 (字符串路径)"
-YDWEGetMultiBoardByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取多面板" 
-YDWEGetMultiBoardByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板数据。" 
+YDWEGetMultiBoardByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取多面板"
+YDWEGetMultiBoardByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板数据。"
 
 // returns multiboarditem
 
@@ -3239,12 +3239,12 @@ MultiboardGetItem=~多面板," 的第 ",~X," 行,第 ",~Y," 列项"
 MultiboardGetItemHint="(0,0)作为多面板首项,会创建多面板项目."
 
 YDWEGetMultiBoardItemByInteger="获取 多面板项目 (整数路径)"
-YDWEGetMultiBoardItemByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取多面板项目" 
-YDWEGetMultiBoardItemByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板项目数据。" 
+YDWEGetMultiBoardItemByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取多面板项目"
+YDWEGetMultiBoardItemByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板项目数据。"
 
 YDWEGetMultiBoardItemByString="获取 多面板项目 (字符串路径)"
-YDWEGetMultiBoardItemByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取多面板项目" 
-YDWEGetMultiBoardItemByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板项目数据。" 
+YDWEGetMultiBoardItemByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取多面板项目"
+YDWEGetMultiBoardItemByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取多面板项目数据。"
 
 // returns timer
 CreateTimer="新建计时器 [R]"
@@ -3260,12 +3260,12 @@ GetExpiredTimer="到期的计时器"
 GetExpiredTimerHint="响应'时间 - 计时器到期'事件."
 
 YDWEGetTimerByInteger="获取 计时器 (整数路径)"
-YDWEGetTimerByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取计时器" 
-YDWEGetTimerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器数据。" 
+YDWEGetTimerByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取计时器"
+YDWEGetTimerByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器数据。"
 
 YDWEGetTimerByString="获取 计时器 (字符串路径)"
-YDWEGetTimerByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取计时器" 
-YDWEGetTimerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器数据。" 
+YDWEGetTimerByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取计时器"
+YDWEGetTimerByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器数据。"
 
 YDWERemoveAttackWaveReturnTimer="最后创建的刷兵计时器[YDWE]"
 YDWERemoveAttackWaveReturnTimer="最后创建的刷兵计时器"
@@ -3275,7 +3275,7 @@ YDWERemoveAttackWaveReturnTimerHint="响应刷兵系统"
             ="自定义代码 [C]"
             ="代码: ",~Jass代码
             Hint="输入一行Jass代码"
-       
+
 
 // returns timerdialog
 CreateTimerDialog="新建计时器窗口 [R]"
@@ -3287,12 +3287,12 @@ GetLastCreatedTimerDialogBJ="最后创建的计时器窗口"
 GetLastCreatedTimerDialogBJHint="最后一个由'计时器 - 创建计时器窗口'动作创建的计时器窗口."
 
 YDWEGetTimerDialogByInteger="获取 计时器窗口 (整数路径)"
-YDWEGetTimerDialogByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取计时器窗口" 
-YDWEGetTimerDialogByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器窗口数据。" 
+YDWEGetTimerDialogByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取计时器窗口"
+YDWEGetTimerDialogByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器窗口数据。"
 
 YDWEGetTimerDialogByString="获取 计时器窗口 (字符串路径)"
-YDWEGetTimerDialogByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取计时器窗口" 
-YDWEGetTimerDialogByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器窗口数据。" 
+YDWEGetTimerDialogByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取计时器窗口"
+YDWEGetTimerDialogByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取计时器窗口数据。"
 
 // returns gamecache
 InitGameCache="新建游戏缓存 [R]"
@@ -3328,11 +3328,11 @@ GetTriggeringTrackableHint=
 
 YDWEGetTrackableByInteger="获取 可追踪物 (整数路径)"
 YDWEGetTrackableByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取可追踪物"
-YDWEGetTrackableByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可追踪物数据。" 
+YDWEGetTrackableByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可追踪物数据。"
 
 YDWEGetTrackableByString="获取 可追踪物 (字符串路径)"
 YDWEGetTrackableByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取可追踪物"
-YDWEGetTrackableByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可追踪物数据。" 
+YDWEGetTrackableByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取可追踪物数据。"
 
 // returns texttag
 CreateTextTag="新建漂浮文字 [R]"
@@ -3345,33 +3345,33 @@ GetLastCreatedTextTagHint="最后一个由'漂浮文字 - 创建漂浮文字'动作创建的漂浮文字
 
 YDWEGetTextTagByInteger="获取 漂浮文字 (整数路径)"
 YDWEGetTextTagByInteger="从存储目录-> ",~整数,"，标签-> ",~整数," 上获取漂浮文字"
-YDWEGetTextTagByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取漂浮文字数据。" 
+YDWEGetTextTagByIntegerHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取漂浮文字数据。"
 
 YDWEGetTextTagByString="获取 漂浮文字 (字符串路径)"
 YDWEGetTextTagByString="从存储目录-> ",~字符串,"，标签-> ",~字符串," 上获取漂浮文字"
-YDWEGetTextTagByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取漂浮文字数据。" 
+YDWEGetTextTagByStringHint="通过输入的路径，系统会根据当前魔兽版本从缓存或HashTable上获取漂浮文字数据。"
 
 
 //H2I
 YDWEGetUnitID="获取 单位 的整数地址"
 YDWEGetUnitID="获取 ",~单位," 的整数地址"
-YDWEGetUnitIDHint="可以把一个单位转成整数，方便存入缓存或Hash表。" 
+YDWEGetUnitIDHint="可以把一个单位转成整数，方便存入缓存或Hash表。"
 
 YDWEGetPlayerID="获取 玩家 的整数地址"
 YDWEGetPlayerID="获取 ",~玩家," 的整数地址"
-YDWEGetPlayerIDHint="可以把一个玩家转成整数，方便存入缓存或Hash表。" 
+YDWEGetPlayerIDHint="可以把一个玩家转成整数，方便存入缓存或Hash表。"
 
 YDWEGetItemID="获取 物品 的整数地址"
 YDWEGetItemID="获取 ",~物品," 的整数地址"
-YDWEGetItemIDHint="可以把一个物品转成整数，方便存入缓存或Hash表。" 
+YDWEGetItemIDHint="可以把一个物品转成整数，方便存入缓存或Hash表。"
 
 YDWEGetTimerID="获取 计时器 的整数地址"
 YDWEGetTimerID="获取 ",~计时器," 的整数地址"
-YDWEGetTimerIDHint="可以把一个计时器转成整数，方便存入缓存或Hash表。" 
+YDWEGetTimerIDHint="可以把一个计时器转成整数，方便存入缓存或Hash表。"
 
 YDWEGetTriggerID="获取 触发器 的整数地址"
 YDWEGetTriggerID="获取 ",~触发器," 的整数地址"
-YDWEGetTriggerIDHint="可以把一个触发器转成整数，方便存入缓存或Hash表。" 
+YDWEGetTriggerIDHint="可以把一个触发器转成整数，方便存入缓存或Hash表。"
 
 YDWEGetGroupID="获取 单位组 的整数地址"
 YDWEGetGroupID="获取 ",~单位组," 的整数地址"

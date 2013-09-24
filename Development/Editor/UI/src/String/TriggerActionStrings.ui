@@ -28,7 +28,7 @@ PolledWaitHint="¸ÃÑÓ³Ù¹¦ÄÜÊÜÓÎÏ·Ê±¼äµÄÓ°Ïì.Í¨¹ýµ÷ÕûÓÎÏ·ËÙ¶ÈÀ´µ÷½Ú¸Ã¹¦ÄÜµÄ¾ßÌåÑÓ³
 
 #ifdef DISABLE_YDTRIGGER
 YDWEWaitForLocalVariable="µÈ´ý(¾Ö²¿±äÁ¿×¨ÓÃ)[YDWE]"
-YDWEWaitForLocalVariable="µÈ´ý ",~Time," Ãë(¾Ö²¿±äÁ¿×¨ÓÃ)" 
+YDWEWaitForLocalVariable="µÈ´ý ",~Time," Ãë(¾Ö²¿±äÁ¿×¨ÓÃ)"
 YDWEWaitForLocalVariableHint="µ±´¥·¢Æ÷ÄÚÓÐ¾Ö²¿±äÁ¿£¬ÐèÒªÓÃµ½µÈ´ý¶¯×÷Ê±£¬±ØÐë²ÉÓÃÕâ¸ö¾Ö²¿±äÁ¿×¨ÓÃµÈ´ý¶¯×÷£¬²»È»´¥·¢Æ÷ÎÞ·¨ÓÃÓÚ¶àÈË¡£"
 #endif
 
@@ -151,7 +151,7 @@ EnableTriggerHint=
 
 ConditionalTriggerExecute="ÔËÐÐ´¥·¢(¼ì²éÌõ¼þ)"
 ConditionalTriggerExecute="ÔËÐÐ ",~´¥·¢," (¼ì²éÌõ¼þ)"
-ConditionalTriggerExecuteHint="Èç¹ûÆä´¥·¢Ìõ¼þ³ÉÁ¢ÔòÔËÐÐ´¥·¢¶¯×÷."        
+ConditionalTriggerExecuteHint="Èç¹ûÆä´¥·¢Ìõ¼þ³ÉÁ¢ÔòÔËÐÐ´¥·¢¶¯×÷."
 
 #ifndef DISABLE_YDTRIGGER
 YDWEActivateTrigger="¼¤»î´¥·¢"
@@ -164,15 +164,15 @@ YDWETimerRunTrigger="ÔÚ ",~Ê±¼ä," ÃëºóÔËÐÐ ",~´¥·¢Æ÷
 YDWETimerRunTriggerHint="Æô¶¯ÖÐÐÄ¼ÆÊ±Æ÷£¬ÔÚÖ¸¶¨Ê±¼äÖ®ºóÔËÐÐ´¥·¢Æ÷¡£"
 
 YDWETimerRunPeriodicTrigger="¼ÆÊ±Æ÷ÏµÍ³-Ñ­»·ÔËÐÐ´¥·¢Æ÷"
-YDWETimerRunPeriodicTrigger="Ã¿¸ô ",~Ê±¼ä," ÃëÔËÐÐ ",~´¥·¢Æ÷,"£¬ÓÀ¾ÃÔËÐÐ ",~ÕæÖµ,"£¬ÔËÐÐ ",~ÕûÊý," ´Î£¬ÔËÐÐ±êÊ¶ ",~ÕûÊý,"¡£" 
+YDWETimerRunPeriodicTrigger="Ã¿¸ô ",~Ê±¼ä," ÃëÔËÐÐ ",~´¥·¢Æ÷,"£¬ÓÀ¾ÃÔËÐÐ ",~ÕæÖµ,"£¬ÔËÐÐ ",~ÕûÊý," ´Î£¬ÔËÐÐ±êÊ¶ ",~ÕûÊý,"¡£"
 YDWETimerRunPeriodicTriggerHint="Æô¶¯ÖÐÐÄ¼ÆÊ±Æ÷£¬°´Ö¸¶¨¼ä¸ôÊ±¼äÔËÐÐ´¥·¢Æ÷£»µ±ÓÀ¾ÃÔËÐÐÎªÕæ£¬ÔËÐÐ´ÎÊý»á±»ºöÂÔ£»ÔËÐÐ±êÊ¶ÊÇ×Ô¶¨ÒåÒ»¸öÖµ£¬ÓÃÀ´Çø±ðÆäËüÔËÐÐ¡£"
 
 YDWETimerRunPeriodicTriggerFunction="¼ÆÊ±Æ÷ÏµÍ³-Ñ­»·ÔËÐÐ´¥·¢Æ÷º¯Êý"
-YDWETimerRunPeriodicTriggerFunction="Ã¿¸ô ",~Ê±¼ä," ÃëÖ±½ÓÔËÐÐ ",~´¥·¢Æ÷," ¶¯×÷º¯Êý£¬ÓÀ¾ÃÔËÐÐ ",~ÕæÖµ,"£¬ÔËÐÐ ",~ÕûÊý," ´Î£¬ÔËÐÐ±êÊ¶ ",~ÕûÊý,"¡£" 
+YDWETimerRunPeriodicTriggerFunction="Ã¿¸ô ",~Ê±¼ä," ÃëÖ±½ÓÔËÐÐ ",~´¥·¢Æ÷," ¶¯×÷º¯Êý£¬ÓÀ¾ÃÔËÐÐ ",~ÕæÖµ,"£¬ÔËÐÐ ",~ÕûÊý," ´Î£¬ÔËÐÐ±êÊ¶ ",~ÕûÊý,"¡£"
 YDWETimerRunPeriodicTriggerFunctionHint="Ê¹ÓÃ·½·¨Í¬ÉÏ£»Ö±½ÓÔËÐÐ´¥·¢Æ÷¶¯×÷º¯ÊýÐ§ÂÊ±ÈÔËÐÐ´¥·¢Æ÷¸ß£¬µ«´¥·¢Æ÷¶¯×÷ÖÐ²»ÄÜÓÐµÈ´ý¡£"
 
 YDWETimerRunPeriodicTriggerOver="¼ÆÊ±Æ÷ÏµÍ³-ÖÕÖ¹ÔËÐÐ´¥·¢Æ÷"
-YDWETimerRunPeriodicTriggerOver="Í£Ö¹ÔËÐÐ ",~´¥·¢Æ÷,"£¬ÔËÐÐ±êÊ¶ ",~ÕûÊý,"¡£" 
+YDWETimerRunPeriodicTriggerOver="Í£Ö¹ÔËÐÐ ",~´¥·¢Æ÷,"£¬ÔËÐÐ±êÊ¶ ",~ÕûÊý,"¡£"
 YDWETimerRunPeriodicTriggerOverHint="Ê¹ÖÐÐÄ¼ÆÊ±Æ÷²»ÔÙÔËÐÐ¸Ã´¥·¢Æ÷£»Èô´¥·¢Æ÷Í¬Ò»Ê±¼ä±»¶à´ÎÔËÐÐÇÒÔËÐÐ±êÊ¶ÏàÍ¬£¬ÖÐÐÄ¼ÆÊ±Æ÷»áÍ£Ö¹¶Ô¸Ã´¥·¢Æ÷ËùÓÐÔËÐÐ¡£"
 
 TriggerExecute="ÔËÐÐ´¥·¢(ÎÞÊÓÌõ¼þ)"
@@ -577,7 +577,7 @@ YDWESetUnitAbilityDataStringHint=""
 
 // Custom actions
 YDWECreateUnitPool="´´½¨µ¥Î»³Ø [YDWE]"
-YDWECreateUnitPool="ÐÂ½¨Ò»¸öµ¥Î»³Ø" 
+YDWECreateUnitPool="ÐÂ½¨Ò»¸öµ¥Î»³Ø"
 YDWECreateUnitPoolHint="ÐÂ½¨Ò»¸öµ¥Î»³Ø£¬¸Ãµ¥Î»³Ø¿ÉÒÔ±»<×îºó´´½¨µÄµ¥Î»³Ø>»ñµÃ¡£"
 
 UnitPoolAddUnitType="Ìí¼Óµ¥Î»ÀàÐÍ [R]"
@@ -611,7 +611,7 @@ ForGroup="Ñ¡È¡ ",~µ¥Î»×é," ÄÚËùÓÐµ¥Î» ",~×ö¶¯×÷
 ForGroupHint="Ê¹ÓÃ'Ñ¡È¡µ¥Î»'À´È¡´úÏàÓ¦µÄµ¥Î». ¶ÔÓÚµ¥Î»×éÄÚÃ¿¸öµ¥Î»¶¼»áÔËÐÐÒ»´Î¶¯×÷(°üÀ¨ËÀÍöµÄ,²»°üÀ¨Òþ²ØµÄ). µÈ´ý²»ÄÜÔÚ×é¶¯×÷ÖÐÔËÐÐ."
 
 GroupEnumUnitsInRange="Ñ¡È¡µ¥Î»Ìí¼Óµ½µ¥Î»×é(×ø±ê)"
-GroupEnumUnitsInRange="Îª ",~µ¥Î»×é," Ìí¼ÓÒÔ( ",~×ø±êX," , ",~×ø±êY," )ÎªÔ²ÐÄ£¬",~°ë¾¶," Îª°ë¾¶µÄÔ²·¶Î§ÄÚ£¬Âú×ã ",~Ìõ¼þ," µÄµ¥Î»" 
+GroupEnumUnitsInRange="Îª ",~µ¥Î»×é," Ìí¼ÓÒÔ( ",~×ø±êX," , ",~×ø±êY," )ÎªÔ²ÐÄ£¬",~°ë¾¶," Îª°ë¾¶µÄÔ²·¶Î§ÄÚ£¬Âú×ã ",~Ìõ¼þ," µÄµ¥Î»"
 GroupEnumUnitsInRangeHint=
 
 GroupEnumUnitsInRangeCounted="Ñ¡È¡µ¥Î»Ìí¼Óµ½µ¥Î»×é(×ø±ê)(²»½¨ÒéÊ¹ÓÃ)"
@@ -619,7 +619,7 @@ GroupEnumUnitsInRangeCounted="Îª ",~µ¥Î»×é," Ìí¼ÓÒÔ( ",~×ø±êX," , ",~×ø±êY," )Îª
 GroupEnumUnitsInRangeCountedHint="×îºóÒ»ÏîÊÇÎÞÐ§Ïî£¬½¨ÒéÓÃÉÏÒ»¸öUI"
 
 GroupEnumUnitsInRangeOfLoc="Ñ¡È¡µ¥Î»Ìí¼Óµ½µ¥Î»×é(µã)"
-GroupEnumUnitsInRangeOfLoc="Îª ",~µ¥Î»×é," Ìí¼ÓÒÔ ",~µã," ÎªÔ²ÐÄ£¬",~°ë¾¶," Îª°ë¾¶µÄÔ²·¶Î§ÄÚ£¬Âú×ã ",~Ìõ¼þ," µÄµ¥Î»" 
+GroupEnumUnitsInRangeOfLoc="Îª ",~µ¥Î»×é," Ìí¼ÓÒÔ ",~µã," ÎªÔ²ÐÄ£¬",~°ë¾¶," Îª°ë¾¶µÄÔ²·¶Î§ÄÚ£¬Âú×ã ",~Ìõ¼þ," µÄµ¥Î»"
 GroupEnumUnitsInRangeOfLocHint=
 
 GroupEnumUnitsInRangeOfLocCounted="Ñ¡È¡µ¥Î»Ìí¼Óµ½µ¥Î»×é(µã)(²»½¨ÒéÊ¹ÓÃ)"
@@ -1004,11 +1004,11 @@ DialogAddQuitButtonHint="¸Ãº¯Êý´´½¨µÄ°´Å¥²¢²»±»¼ÍÂ¼µ½'×îºó´´½¨µÄ¶Ô»°¿ò°´Å¥'.µ±¸Ã
 
 DialogClearBJ="Çå¿Õ"
 DialogClearBJ="Çå¿Õ ",~Dialog
-DialogClearBJHint="Çå³ý¶Ô»°¿òµÄ±êÌâºÍ°´Å¥."             
+DialogClearBJHint="Çå³ý¶Ô»°¿òµÄ±êÌâºÍ°´Å¥."
 
 DialogDestroy="É¾³ý [R]"
 DialogDestroy="É¾³ý ",~¶Ô»°¿ò
-DialogDestroyHint="½«¶Ô»°¿òÇå³ý³öÄÚ´æ.Ò»°ãÀ´Ëµ¶Ô»°¿ò²¢²»ÐèÒªÉ¾³ý." 
+DialogDestroyHint="½«¶Ô»°¿òÇå³ý³öÄÚ´æ.Ò»°ãÀ´Ëµ¶Ô»°¿ò²¢²»ÐèÒªÉ¾³ý."
 
 // Multiboard actions
 CreateMultiboardBJ="´´½¨"
@@ -1230,14 +1230,14 @@ SetBlightRadiusLocBJ=~Create/Remove," Ò»¿é»ÄÎßµØ±í¸ø ",~Player," ÔÚÔ²ÐÄÎª ",~Ö¸¶
 SetBlightRadiusLocBJHint=
 
 
-// Camera actions 
+// Camera actions
 CameraSetupApplyForceDuration="Ó¦ÓÃ¾µÍ·(ËùÓÐÍæ¼Ò)(ÏÞÊ±) [R]"
 CameraSetupApplyForceDuration="½« ",~¾µÍ·," Ó¦ÓÃ·½Ê½ÉèÖÃÎª ",~Apply Method,",³ÖÐø ",~Time," Ãë"
 CameraSetupApplyForceDurationHint=
 
 CameraSetupApplyForPlayer="Ó¦ÓÃ¾µÍ·(Ö¸¶¨Íæ¼Ò)(ÏÞÊ±)"
 CameraSetupApplyForPlayer="",~Ó¦ÓÃ·½Ê½," ",~¾µÍ·," ×÷ÓÃÓÚ ",~Player,",³ÖÐø ",~Time," Ãë"
-CameraSetupApplyForPlayerHint=     
+CameraSetupApplyForPlayerHint=
 
 PanCameraToTimed="Æ½ÒÆ¾µÍ·(ËùÓÐÍæ¼Ò)(ÏÞÊ±) [R]"
 PanCameraToTimed="Æ½ÒÆÍæ¼Ò¾µÍ·µ½(",~X,",",~Y,"),³ÖÐø ",~Time," Ãë"
@@ -1434,19 +1434,19 @@ SetFogStateRadius="Îª ",~Íæ¼Ò," ÉèÖÃ ",~FogStateVisible," ÔÚÔ²ÐÄÎª(",~X,",",~Y,"
 SetFogStateRadiusHint=
 
 
-//YDWE API 
+//YDWE API
 
 //YD Ability
 YDWECreateEwsp="´´½¨»·ÈÆµ¥Î»<watalooÌí¼Ó>"
 YDWECreateEwsp="Î§ÈÆ ",~µ¥Î»," ´´½¨ ",~µ¥Î»ÀàÐÍ," ¹² ",~n,"¸ö £¬Ðý×ª°ë¾¶ ",~R,"£¬³ÖÐø ",~T," Ãë£¬Ë¢ÐÂÖÜÆÚ ",~I,"£¬Ðý×ª½ÇËÙ¶ÈÃ¿¸öÖÜÆÚ ",~S,"¡£"
-YDWECreateEwspHint="Ë¢ÐÂÖÜÆÚÔ½Ð¡¶¯»­Ô½Á¬Ðø£¬µ«Ò²Ô½ºÄ×ÊÔ´"    
+YDWECreateEwspHint="Ë¢ÐÂÖÜÆÚÔ½Ð¡¶¯»­Ô½Á¬Ðø£¬µ«Ò²Ô½ºÄ×ÊÔ´"
 
 YDWEJumpTimer="ÌøÔ¾º¯Êý"
 YDWEJumpTimer="ÃüÁî ",~µ¥Î»," Ïò ",~·½Ïò," ·½ÏòÌøÔ¾£¬¾àÀëÎª ",~¾àÀë," £¬³ÖÐø ",~Ê±¼ä," Ãë£¬Ë¢ÐÂÖÜÆÚ ",~I,"£¬×î´ó¸ß¶È ",~¸ß¶È,"¡£"
 YDWEJumpTimerHint="µ±×î´ó¸ß¶ÈÉèÖÃÎª0£¬ÔòÎªÆÕÍ¨µÄÒÆ¶¯¡£"
 
-YDWEMeatHook="Èâ¹³<¹³·Ê´óÕ½>"    
-YDWEMeatHook="ÈÃ","µ¥","Î» ",~µ¥Î»," Ïò ",~µã," ·Å","³ö","Ò»","Ìõ","¹³","×Ó£¬","¹³","Í·","Îª ",~¹³Í·,"£¬Á´ÌõÎª ",~Á´Ìõ,"£¬×î","Ô¶","¾à","Àë¿É","´ï ",~ÊµÊý,"£¬Á´Ìõ","¼ä¾à","Îª ",~ÊµÊý,"£¬¶ÔµÐ¶Ô","µ¥Î»","Ôì³É","ÉËº¦ ",~ÊµÊý,"£¬Ë¢ÐÂ","ÖÜÆÚÎª ",~ÊµÊý,"¡£" 
+YDWEMeatHook="Èâ¹³<¹³·Ê´óÕ½>"
+YDWEMeatHook="ÈÃ","µ¥","Î» ",~µ¥Î»," Ïò ",~µã," ·Å","³ö","Ò»","Ìõ","¹³","×Ó£¬","¹³","Í·","Îª ",~¹³Í·,"£¬Á´ÌõÎª ",~Á´Ìõ,"£¬×î","Ô¶","¾à","Àë¿É","´ï ",~ÊµÊý,"£¬Á´Ìõ","¼ä¾à","Îª ",~ÊµÊý,"£¬¶ÔµÐ¶Ô","µ¥Î»","Ôì³É","ÉËº¦ ",~ÊµÊý,"£¬Ë¢ÐÂ","ÖÜÆÚÎª ",~ÊµÊý,"¡£"
 YDWEMeatHookHint="            ¹³·Ê´óÕ½ÀïµÄ¹³×Ó£¬ÓÉOrsºÍEverguoÓÅ»¯´úÂë¡£ÇëÎñ±Ø´ÓÑÝÊ¾µØÍ¼Àï¸´ÖÆ¹³×ÓºÍ¹³Ìõµ¥Î»£¬ËãÎÒÇó´ó¼ÒÁË-.-"
 
 YDWETimerPatternJumpAttack="ÌøÅüº¯Êý<Warft_TigerCNÖÆ×÷>"
@@ -1458,83 +1458,83 @@ YDWETimerPatternMoonPriestessArrow="ÃüÁî ",~µ¥Î»," Ïò ",~·½Ïò," ·½Ïò·ÉÐÐ£¬¾àÀëÎª
 YDWETimerPatternMoonPriestessArrowHint="                                                           ÓÉ¸¨Öúµ¥Î»¸øÄ¿±êÌí¼ÓÑ£ÔÎµÈ×´Ì¬¡£´úÂëÓÉFetrix_saiÐÞ¸Ä¡£"
 
 YDWETimerPatternRushSlide="³å·æ<Warft_TigerCNÖÆ×÷>"
-YDWETimerPatternRushSlide="ÃüÁî ",~µ¥Î»," Ïò ",~·½Ïò," ·½Ïò³å·æ£¬Éä³ÌÎª ",~¾àÀë," £¬³ÖÐø ",~Ê±¼ä," Ãë£¬Ë¢ÐÂÖÜÆÚ ",~I,"£¬¶ÔÍ¾¾­µÐÈËÉËº¦Öµ ",~ÊµÊý,"£¬´Ý»ÙÊ÷Ä¾ ",~²¼¶û,"£¬²»¼ÆËãÅö×² ",~²¼¶û,"£¬ÎÞÊÓµØÐÎ ",~²¼¶û," £¬ÔÚÄ¿±êµÄ ",~²¿Î»," ¸½¼Ó ",~ÌØÐ§,"(µØÃæ)£¬¸½¼Ó ",~ÌØÐ§,"(Ë®ÖÐ)" 
+YDWETimerPatternRushSlide="ÃüÁî ",~µ¥Î»," Ïò ",~·½Ïò," ·½Ïò³å·æ£¬Éä³ÌÎª ",~¾àÀë," £¬³ÖÐø ",~Ê±¼ä," Ãë£¬Ë¢ÐÂÖÜÆÚ ",~I,"£¬¶ÔÍ¾¾­µÐÈËÉËº¦Öµ ",~ÊµÊý,"£¬´Ý»ÙÊ÷Ä¾ ",~²¼¶û,"£¬²»¼ÆËãÅö×² ",~²¼¶û,"£¬ÎÞÊÓµØÐÎ ",~²¼¶û," £¬ÔÚÄ¿±êµÄ ",~²¿Î»," ¸½¼Ó ",~ÌØÐ§,"(µØÃæ)£¬¸½¼Ó ",~ÌØÐ§,"(Ë®ÖÐ)"
 YDWETimerPatternRushSlideHint="                                                                                                 ´úÂëÓÉFetrix_saiÐÞ¸Ä"
 
 YDWEAroundSystem="ÍòÄÜ»·ÈÆº¯Êý<Fetrix_saiÖÆ×÷>"
-YDWEAroundSystem="ÃüÁî ",~µ¥Î»," Î§ÈÆ ",~µ¥Î»," »·ÈÆ£¬½ÇËÙ¶ÈÎª ",~ÊµÊý,"£¬ÀëÐÄËÙ¶ÈÎª ",~ÊµÊý,"£¬ÌáÉýËÙ¶ÈÎª ",~ÊµÊý,"£¬³ÖÐø ",~ÊµÊý," Ãë""£¬""Ë¢""ÐÂ""ÖÜ""ÆÚ""Îª ",~ÊµÊý," Ãë" 
+YDWEAroundSystem="ÃüÁî ",~µ¥Î»," Î§ÈÆ ",~µ¥Î»," »·ÈÆ£¬½ÇËÙ¶ÈÎª ",~ÊµÊý,"£¬ÀëÐÄËÙ¶ÈÎª ",~ÊµÊý,"£¬ÌáÉýËÙ¶ÈÎª ",~ÊµÊý,"£¬³ÖÐø ",~ÊµÊý," Ãë""£¬""Ë¢""ÐÂ""ÖÜ""ÆÚ""Îª ",~ÊµÊý," Ãë"
 YDWEAroundSystemHint="½ÇËÙ¶ÈÎªÕý£¬Ë³Ê±ÕëÐý×ª£¬·´Ö®ÄæÊ±Õë£»ÀëÐÄËÙ¶ÈÎªÕý£¬Ô¶ÀëÄ¿±ê£¬·´Ö®¿¿½ü£»ÌáÉýËÙ¶ÈÎªÕý£¬Ôò¸ß¶ÈÉÏÉý£¬·´Ö®ÏÂ½µ¡£"
 
-//YD System  YDWENewItemsFormula="½«( ",~²ÄÁÏ1,",",~ÕûÊý,")¡¢(",~²ÄÁÏ2,",",~ÕûÊý,")¡¢(",~²ÄÁÏ3,",",~ÕûÊý,")¡¢(",~²ÄÁÏ4,",",~ÕûÊý,")¡¢(",~²ÄÁÏ5,",",~ÕûÊý,")¡¢(",~²ÄÁÏ6,",",~ÕûÊý," )ºÏ³É ",~ÎïÆ·." " 
+//YD System  YDWENewItemsFormula="½«( ",~²ÄÁÏ1,",",~ÕûÊý,")¡¢(",~²ÄÁÏ2,",",~ÕûÊý,")¡¢(",~²ÄÁÏ3,",",~ÕûÊý,")¡¢(",~²ÄÁÏ4,",",~ÕûÊý,")¡¢(",~²ÄÁÏ5,",",~ÕûÊý,")¡¢(",~²ÄÁÏ6,",",~ÕûÊý," )ºÏ³É ",~ÎïÆ·." "
 YDWENewItemsFormula="ÎïÆ·ºÏ³ÉÏµÍ³<Fetrix_saiÖÆ×÷>"
-YDWENewItemsFormula="½«²ÄÁÏ1( ",~ÀàÐÍ,",",~ÕûÊý,")¡¢²ÄÁÏ2( ",~ÀàÐÍ,",",~ÕûÊý,")¡¢²ÄÁÏ3( ",~ÀàÐÍ,",",~ÕûÊý,")""¡¢""²Ä""ÁÏ""4""( ",~ÀàÐÍ,",",~ÕûÊý,")¡¢²ÄÁÏ5( ",~ÀàÐÍ,",",~ÕûÊý,")¡¢²ÄÁÏ6( ",~ÀàÐÍ,",",~ÕûÊý,")ºÏ³É ",~ÎïÆ·," " 
-YDWENewItemsFormulaHint="ÌîÐ´ÎïÆ·ºÏ³ÉËùÐèµÄ²ÄÁÏ¼°ÆäÊýÁ¿£¬×î¶à¿ÉÒÔÌî6ÖÖ£»µ±ËùÐè²ÄÁÏÊýÁ¿Îª0Ê±£¬¶ÔÓ¦²ÄÁÏ½«±»ºöÂÔ¡£"  
+YDWENewItemsFormula="½«²ÄÁÏ1( ",~ÀàÐÍ,",",~ÕûÊý,")¡¢²ÄÁÏ2( ",~ÀàÐÍ,",",~ÕûÊý,")¡¢²ÄÁÏ3( ",~ÀàÐÍ,",",~ÕûÊý,")""¡¢""²Ä""ÁÏ""4""( ",~ÀàÐÍ,",",~ÕûÊý,")¡¢²ÄÁÏ5( ",~ÀàÐÍ,",",~ÕûÊý,")¡¢²ÄÁÏ6( ",~ÀàÐÍ,",",~ÕûÊý,")ºÏ³É ",~ÎïÆ·," "
+YDWENewItemsFormulaHint="ÌîÐ´ÎïÆ·ºÏ³ÉËùÐèµÄ²ÄÁÏ¼°ÆäÊýÁ¿£¬×î¶à¿ÉÒÔÌî6ÖÖ£»µ±ËùÐè²ÄÁÏÊýÁ¿Îª0Ê±£¬¶ÔÓ¦²ÄÁÏ½«±»ºöÂÔ¡£"
 
 YDWE_TP_PauseTimerPeriodic="ÐÂÖÐÐÄ¼ÆÊ±Æ÷-ÖÕÖ¹ÔËÐÐ<Fetrix_saiÖÆ×÷>"
 YDWE_TP_PauseTimerPeriodic="ÖÕÖ¹ÔËÐÐË÷ÒýÎª ",~¼ÆÊ±Æ÷ÔËÐÐË÷Òý," µÄ¼ÆÊ±Æ÷ÔËÐÐ "
-YDWE_TP_PauseTimerPeriodicHint="µ±ÖÐÐÄ¼ÆÊ±Æ÷ÔËÐÐÄ³¸ö´¥·¢Æ÷Ê±£¬»áÉú³ÉÒ»¸öÔËÐÐË÷Òý£»¿ÉÒÔÍ¨¹ý¸ÃÔËÐÐË÷ÒýÀ´ÖÕÖ¹±¾´Î¼ÆÊ±Æ÷ÔËÐÐ¡£"  
+YDWE_TP_PauseTimerPeriodicHint="µ±ÖÐÐÄ¼ÆÊ±Æ÷ÔËÐÐÄ³¸ö´¥·¢Æ÷Ê±£¬»áÉú³ÉÒ»¸öÔËÐÐË÷Òý£»¿ÉÒÔÍ¨¹ý¸ÃÔËÐÐË÷ÒýÀ´ÖÕÖ¹±¾´Î¼ÆÊ±Æ÷ÔËÐÐ¡£"
 
 YDWE_TP_SetTimeInterval="ÐÂÖÐÐÄ¼ÆÊ±Æ÷-ÐÞ¸ÄÔËÐÐ¼ä¸ô<Fetrix_saiÖÆ×÷>"
-YDWE_TP_SetTimeInterval="ÐÞ¸ÄÔËÐÐË÷ÒýÎª ",~¼ÆÊ±Æ÷ÔËÐÐË÷Òý," µÄ¼ÆÊ±Æ÷ÔËÐÐ¼ä¸ôÎª ",~ÊµÊý 
-YDWE_TP_SetTimeIntervalHint="µ±ÖÐÐÄ¼ÆÊ±Æ÷ÔËÐÐÄ³¸ö´¥·¢Æ÷Ê±£¬»áÉú³ÉÒ»¸öÔËÐÐË÷Òý£»¿ÉÒÔÖÐÍ¾ÐÞ¸Ä¼ÆÊ±Æ÷Ä³´ÎÔËÐÐµÄÊ±¼ä¼ä¸ô¡£"  
+YDWE_TP_SetTimeInterval="ÐÞ¸ÄÔËÐÐË÷ÒýÎª ",~¼ÆÊ±Æ÷ÔËÐÐË÷Òý," µÄ¼ÆÊ±Æ÷ÔËÐÐ¼ä¸ôÎª ",~ÊµÊý
+YDWE_TP_SetTimeIntervalHint="µ±ÖÐÐÄ¼ÆÊ±Æ÷ÔËÐÐÄ³¸ö´¥·¢Æ÷Ê±£¬»áÉú³ÉÒ»¸öÔËÐÐË÷Òý£»¿ÉÒÔÖÐÍ¾ÐÞ¸Ä¼ÆÊ±Æ÷Ä³´ÎÔËÐÐµÄÊ±¼ä¼ä¸ô¡£"
 
 YDWEAttackWaveTimer="Ë¢±øÏµÍ³"
 YDWEAttackWaveTimer="ÎªÍæ¼Ò ",~Íæ¼Ò," ´´½¨ ",~n," ¸ö ",~µ¥Î»ÀàÐÍ," ÔÚµã ",~³õÊ¼µã," ÃæÏò ",~½Ç¶È,"£¬ÃüÁîËûÃÇ¹¥»÷µ½µã ",~Ä¿±êµã,"£¬Ë¢ÐÂÖÜÆÚ ",~ÖÜÆÚ,"¡£"
-YDWEAttackWaveTimerHint="3CµÄË¢±øÏµÍ³£¬Ò²¿ÉÓÃÓÚ·ÀÊØRPG£¬°´ÖÜÆÚÉú³ÉÃ¿²¨µ¥Î»ÏòÖ¸¶¨µã½ø¹¥¡£"  
+YDWEAttackWaveTimerHint="3CµÄË¢±øÏµÍ³£¬Ò²¿ÉÓÃÓÚ·ÀÊØRPG£¬°´ÖÜÆÚÉú³ÉÃ¿²¨µ¥Î»ÏòÖ¸¶¨µã½ø¹¥¡£"
 
 YDWERemoveAttackWaveByUnitID="È¡ÏûË¢±ø(ÊäÈë²ÎÊý)"
 YDWERemoveAttackWaveByUnitID="Í£Ö¹´´½¨ ",~µ¥Î»,"£¬µØµãÎª ",~³õÊ¼µã,"£¬ÖÜÆÚÊÇ ",~ÖÜÆÚ
-YDWERemoveAttackWaveByUnitIDHint="È¡ÏûË¢±ø£¬×¢ÒâÕâÀïÌîÐ´µÄ²ÎÊýÒªÓëÇ°ÃæË¢±øÏµÍ³Ò»ÖÂ£¬²»È»ÎÞ·¨Í£Ö¹Ë¢±ø¡£"  
+YDWERemoveAttackWaveByUnitIDHint="È¡ÏûË¢±ø£¬×¢ÒâÕâÀïÌîÐ´µÄ²ÎÊýÒªÓëÇ°ÃæË¢±øÏµÍ³Ò»ÖÂ£¬²»È»ÎÞ·¨Í£Ö¹Ë¢±ø¡£"
 
 YDWERemoveAttackWaveByTimer="È¡ÏûË¢±ø(É¾³ý¼ÆÊ±Æ÷)"
 YDWERemoveAttackWaveByTimer="É¾³ýË¢±ø¼ÆÊ±Æ÷ ",~¼ÆÊ±Æ÷
-YDWERemoveAttackWaveByTimerHint="È¡ÏûË¢±ø£¬²¢ÄÜ×Ô¶¯Çå¿Õ»º´æ¡£" 
+YDWERemoveAttackWaveByTimerHint="È¡ÏûË¢±ø£¬²¢ÄÜ×Ô¶¯Çå¿Õ»º´æ¡£"
 
 YDWEDoubleItemSlotByAbility="¶àÖØÎïÆ·À¸(¼¼ÄÜ´¥·¢)"
-YDWEDoubleItemSlotByAbility="µ± ",~µ¥Î»," Ê¹ÓÃ¼¼ÄÜ ",~±³°ü¼¼ÄÜ," Ê±ÇÐ»»±³°ü£¬¸¨Öúµ¥Î»Îª ",~±³°üµ¥Î»,"£¬±³°ü¸öÊýÎª ",~ÕûÊý 
-YDWEDoubleItemSlotByAbilityHint="ÇÐ»»±³°üÊ±»á´¥·¢µ¥Î»»ñµÃºÍµôÂäÎïÆ·ÊÂ¼þ£»±³°ü¼¼ÄÜºÍ±³°üµ¥Î»µÄÉèÖÃÇë²Î¿¼exampleÎÄ¼þ¼ÐÖÐµÄ¸¨ÖúµØÍ¼¡£"  
+YDWEDoubleItemSlotByAbility="µ± ",~µ¥Î»," Ê¹ÓÃ¼¼ÄÜ ",~±³°ü¼¼ÄÜ," Ê±ÇÐ»»±³°ü£¬¸¨Öúµ¥Î»Îª ",~±³°üµ¥Î»,"£¬±³°ü¸öÊýÎª ",~ÕûÊý
+YDWEDoubleItemSlotByAbilityHint="ÇÐ»»±³°üÊ±»á´¥·¢µ¥Î»»ñµÃºÍµôÂäÎïÆ·ÊÂ¼þ£»±³°ü¼¼ÄÜºÍ±³°üµ¥Î»µÄÉèÖÃÇë²Î¿¼exampleÎÄ¼þ¼ÐÖÐµÄ¸¨ÖúµØÍ¼¡£"
 
 YDWEDoubleItemSlotByItem="¶àÖØÎïÆ·À¸(ÎïÆ·´¥·¢)"
-YDWEDoubleItemSlotByItem="µ± ",~µ¥Î»," Ê¹ÓÃÎïÆ· ",~±³°üÎïÆ·," Ê±ÇÐ»»±³°ü£¬¸¨Öúµ¥Î»Îª ",~±³°üµ¥Î»,"£¬±³°ü¸öÊýÎª ",~ÕûÊý 
-YDWEDoubleItemSlotByItemHint="ÇÐ»»±³°üÊ±»á´¥·¢µ¥Î»»ñµÃºÍµôÂäÎïÆ·ÊÂ¼þ£»±³°üÎïÆ·ºÍ±³°üµ¥Î»µÄÉèÖÃÇë²Î¿¼exampleÎÄ¼þ¼ÐÖÐµÄ¸¨ÖúµØÍ¼¡£"  
+YDWEDoubleItemSlotByItem="µ± ",~µ¥Î»," Ê¹ÓÃÎïÆ· ",~±³°üÎïÆ·," Ê±ÇÐ»»±³°ü£¬¸¨Öúµ¥Î»Îª ",~±³°üµ¥Î»,"£¬±³°ü¸öÊýÎª ",~ÕûÊý
+YDWEDoubleItemSlotByItemHint="ÇÐ»»±³°üÊ±»á´¥·¢µ¥Î»»ñµÃºÍµôÂäÎïÆ·ÊÂ¼þ£»±³°üÎïÆ·ºÍ±³°üµ¥Î»µÄÉèÖÃÇë²Î¿¼exampleÎÄ¼þ¼ÐÖÐµÄ¸¨ÖúµØÍ¼¡£"
 
 YDWEGeneralBounsSystemUnitSetBonus="ÍòÄÜÊôÐÔÏµÍ³-ÉèÖÃÊôÐÔ<ÇÑ×ÓÖÆ×÷>"
-YDWEGeneralBounsSystemUnitSetBonus="ÉèÖÃ ",~µ¥Î»," µÄ¸½¼Ó ",~ÊôÐÔ," ",~¼ÆËã," ",~ÊýÖµ 
+YDWEGeneralBounsSystemUnitSetBonus="ÉèÖÃ ",~µ¥Î»," µÄ¸½¼Ó ",~ÊôÐÔ," ",~¼ÆËã," ",~ÊýÖµ
 YDWEGeneralBounsSystemUnitSetBonusHint=
 
 //YD AI
 YDWESetGuard="Ó¶±øÏµÍ³<Red_WolfÖÆ×÷>"
 YDWESetGuard="ÃüÁî ",~µ¥Î»," ¸úËæ ",~µ¥Î»,"£¬Ë¢ÐÂÖÜÆÚ ",~timeout,"£¬Ñ²Âß°ë¾¶ ",~guardRanger,"£¬·µ»Ø°ë¾¶ ",~returnRanger,"£¬´«ËÍ°ë¾¶ ",~outRanger,"£¬Ñ²Âß¸ÅÂÊ ",~percent,"%"
-YDWESetGuardHint="ÈÃÒ»¸öÓ¶±ø¸úËæÖ÷ÈË£¬¿ÉÒÔÔÚÖ÷ÈËÉí±ßÑ²Âß£¬µ±Ô¶ÀëÖ÷ÈËºó×Ô¶¯·µ»Ø»ò´«ËÍµ½Ö÷ÈËÉí±ß¡£"  
+YDWESetGuardHint="ÈÃÒ»¸öÓ¶±ø¸úËæÖ÷ÈË£¬¿ÉÒÔÔÚÖ÷ÈËÉí±ßÑ²Âß£¬µ±Ô¶ÀëÖ÷ÈËºó×Ô¶¯·µ»Ø»ò´«ËÍµ½Ö÷ÈËÉí±ß¡£"
 
 YDWERemoveGuard="È¡ÏûÓ¶±ø<Red_WolfÖÆ×÷>"
-YDWERemoveGuard="È¡Ïû ",~µ¥Î»," µÄ¸úËæ" 
-YDWERemoveGuardHint="ÈÃÒ»¸öÓ¶±ø²»ÔÙ¸úËæÖ÷ÈË¡£±¸×¢£ºÈç¹ûÓ¶±øÊÇÕÙ»½ÉúÎïÄÇÃ´²»±ØÈ¡Ïû£¬ÒòÎªµ±Ó¶±ø»òÖ÷ÈËËÀÍöºó£¬ÏµÍ³»á×Ô¶¯È¡Ïû¸úËæ¡£"  
+YDWERemoveGuard="È¡Ïû ",~µ¥Î»," µÄ¸úËæ"
+YDWERemoveGuardHint="ÈÃÒ»¸öÓ¶±ø²»ÔÙ¸úËæÖ÷ÈË¡£±¸×¢£ºÈç¹ûÓ¶±øÊÇÕÙ»½ÉúÎïÄÇÃ´²»±ØÈ¡Ïû£¬ÒòÎªµ±Ó¶±ø»òÖ÷ÈËËÀÍöºó£¬ÏµÍ³»á×Ô¶¯È¡Ïû¸úËæ¡£"
 
 YDWEAIRecordAbility="AI-¼¼ÄÜ°ó¶¨Ó¢ÐÛ<GreedWindÖÆ×÷>"
 YDWEAIRecordAbility="¸øµ¥Î» ",~Ó¢ÐÛ," °ó¶¨¼¼ÄÜ ",~¼¼ÄÜ1," ",~¼¼ÄÜ2," ",~¼¼ÄÜ3," ",~¼¼ÄÜ4," ",~¼¼ÄÜ5
-YDWEAIRecordAbilityHint="Îªµ¥Î»°ó¶¨5¸ö¼¼ÄÜ£¬Èç¹ûÓ¢ÐÛÖ»ÓÐ4¸ö¼¼ÄÜ£¬ÄÇÃ´µÚ5¸ö¼¼ÄÜÇëÉèÖÃÎª¿Õ¡£" 
+YDWEAIRecordAbilityHint="Îªµ¥Î»°ó¶¨5¸ö¼¼ÄÜ£¬Èç¹ûÓ¢ÐÛÖ»ÓÐ4¸ö¼¼ÄÜ£¬ÄÇÃ´µÚ5¸ö¼¼ÄÜÇëÉèÖÃÎª¿Õ¡£"
 
 YDWEAIRecordLearn_sequence="AI-¼¼ÄÜÑ§Ï°Ë³Ðò°ó¶¨Ó¢ÐÛ<GreedWindÖÆ×÷>"
-YDWEAIRecordLearn_sequence="¸øµ¥Î» ",~Ó¢ÐÛ," ÉèÖÃ¼¼ÄÜÑ§Ï°Ë³ÐòÎª( ",~¼¼ÄÜ1," ",~¼¼ÄÜ2," ",~¼¼ÄÜ3," ",~¼¼ÄÜ4," ",~¼¼ÄÜ5," )" 
-YDWEAIRecordLearn_sequenceHint="µ¥Î»»á°´ÊäÈëµÄµÈ¼¶È¥Ñ§Ï°¶ÔÓ¦µÄ¼¼ÄÜ£¬ÇÐ¼Ç¼¼ÄÜÑ§Ï°Ë³ÐòÒª°´^µÈ¼¶^µÈ¼¶...^µÈ¼¶^µÄ¸ñÊ½ÊäÈë¡£" 
+YDWEAIRecordLearn_sequence="¸øµ¥Î» ",~Ó¢ÐÛ," ÉèÖÃ¼¼ÄÜÑ§Ï°Ë³ÐòÎª( ",~¼¼ÄÜ1," ",~¼¼ÄÜ2," ",~¼¼ÄÜ3," ",~¼¼ÄÜ4," ",~¼¼ÄÜ5," )"
+YDWEAIRecordLearn_sequenceHint="µ¥Î»»á°´ÊäÈëµÄµÈ¼¶È¥Ñ§Ï°¶ÔÓ¦µÄ¼¼ÄÜ£¬ÇÐ¼Ç¼¼ÄÜÑ§Ï°Ë³ÐòÒª°´^µÈ¼¶^µÈ¼¶...^µÈ¼¶^µÄ¸ñÊ½ÊäÈë¡£"
 
 YDWEHeroLearnSkillAI="AI-×Ô¶¯Ñ§Ï°¶ÔÓ¦¼¼ÄÜ<GreedWindÖÆ×÷>"
-YDWEHeroLearnSkillAI="ÈÃÓ¢ÐÛ ",~Ó¢ÐÛ," ×Ô¶¯Ñ§Ï°¼¼ÄÜ£¬ËùÑ§¼¼ÄÜ¶ÔÓ¦µÄÓ¢ÐÛµÈ¼¶Îª ",~ÕûÊý 
-YDWEHeroLearnSkillAIHint="Ó¢ÐÛ»áÑ§Ï°ÓëµÈ¼¶¶ÔÓ¦µÄ¼¼ÄÜ£¬ÕâÐ©¼¼ÄÜ±ØÐëÔÚÖ®Ç°°ó¶¨¸øÓ¢ÐÛ¡£"  
+YDWEHeroLearnSkillAI="ÈÃÓ¢ÐÛ ",~Ó¢ÐÛ," ×Ô¶¯Ñ§Ï°¼¼ÄÜ£¬ËùÑ§¼¼ÄÜ¶ÔÓ¦µÄÓ¢ÐÛµÈ¼¶Îª ",~ÕûÊý
+YDWEHeroLearnSkillAIHint="Ó¢ÐÛ»áÑ§Ï°ÓëµÈ¼¶¶ÔÓ¦µÄ¼¼ÄÜ£¬ÕâÐ©¼¼ÄÜ±ØÐëÔÚÖ®Ç°°ó¶¨¸øÓ¢ÐÛ¡£"
 
 YDWEHeroMaxSkillAI="AI-×Ô¶¯Ñ§Ï°È«²¿¼¼ÄÜ<GreedWindÖÆ×÷>"
 YDWEHeroMaxSkillAI="ÈÃÓ¢ÐÛ ",~Ó¢ÐÛ," ×Ô¶¯Ñ§Ï°ËùÓÐ¼¼ÄÜ¡£"
-YDWEHeroMaxSkillAIHint="Ó¢ÐÛ»áÏ´È¥Ö®Ç°Ñ§Ï°¹ýµÄ¼¼ÄÜ£¬²¢¸ù¾Ý¼¼ÄÜ±íË³ÐòÑ§Ï°ÍêËùÓÐ¼¼ÄÜ¡£" 
+YDWEHeroMaxSkillAIHint="Ó¢ÐÛ»áÏ´È¥Ö®Ç°Ñ§Ï°¹ýµÄ¼¼ÄÜ£¬²¢¸ù¾Ý¼¼ÄÜ±íË³ÐòÑ§Ï°ÍêËùÓÐ¼¼ÄÜ¡£"
 
 YDWEAddAIOrder="AI-×Ô¶¯Ê©·Å¼¼ÄÜ"
-YDWEAddAIOrder="ÈÃµ¥Î» ",~µ¥Î»," ÔÚ ",~ÕûÊý,"Ê± ",~Ä¿±ê,"Ê©","·Å","¼¼","ÄÜ","£¬","¼¼","ÄÜ","Ê©","·Å","·½","Ê½","Îª","(","¶Ô","µ¥","Î»-",~ÃüÁî,"¡¢","¶Ô","µã-",~ÃüÁî,"¡¢","Á¢","¼´-",~ÃüÁî,")£¬","Ê©","·Å","¸Å","ÂÊ","Îª ",~ÕûÊý,"%" 
-YDWEAddAIOrderHint="ÈÃµ¥Î»ÓÐÒ»¶¨¸ÅÂÊÊ©·Å¼¼ÄÜ£¬ÃüÁîÒªÓë¼¼ÄÜÄ¿±êÒ»ÖÂ£»´úÂëÓÉRed_WolfºÍFetrix_saiÓÅ»¯¡£" 
+YDWEAddAIOrder="ÈÃµ¥Î» ",~µ¥Î»," ÔÚ ",~ÕûÊý,"Ê± ",~Ä¿±ê,"Ê©","·Å","¼¼","ÄÜ","£¬","¼¼","ÄÜ","Ê©","·Å","·½","Ê½","Îª","(","¶Ô","µ¥","Î»-",~ÃüÁî,"¡¢","¶Ô","µã-",~ÃüÁî,"¡¢","Á¢","¼´-",~ÃüÁî,")£¬","Ê©","·Å","¸Å","ÂÊ","Îª ",~ÕûÊý,"%"
+YDWEAddAIOrderHint="ÈÃµ¥Î»ÓÐÒ»¶¨¸ÅÂÊÊ©·Å¼¼ÄÜ£¬ÃüÁîÒªÓë¼¼ÄÜÄ¿±êÒ»ÖÂ£»´úÂëÓÉRed_WolfºÍFetrix_saiÓÅ»¯¡£"
 
 //YD Aganist Fate
 #ifndef DISABLE_YDTRIGGER
 YDWEEnumUnitsInRangeMultiple="Ñ¡È¡µ¥Î» -- Ô²ÐÎ·¶Î§"
-YDWEEnumUnitsInRangeMultiple="Ñ¡È¡ÒÔ(",~×ø±êX,", ",~×ø±êY,")ÎªÔ²ÐÄ,",~°ë¾¶,"Îª°ë¾¶µÄÔ²·¶Î§ÄÚµÄµ¥Î»×ö¶¯×÷" 
+YDWEEnumUnitsInRangeMultiple="Ñ¡È¡ÒÔ(",~×ø±êX,", ",~×ø±êY,")ÎªÔ²ÐÄ,",~°ë¾¶,"Îª°ë¾¶µÄÔ²·¶Î§ÄÚµÄµ¥Î»×ö¶¯×÷"
 YDWEEnumUnitsInRangeMultipleHint="Ñ¡È¡·¶Î§ÄÚµÄµ¥Î»×ö¶¯×÷"
 
 YDWESetAnyTypeLocalVariable="¾Ö²¿±äÁ¿ -- ÉèÖÃ"
@@ -1546,16 +1546,16 @@ YDWEForLoopLocVarMultiple="Ñ­»·¶¯×÷[loop_",~¾Ö²¿±äÁ¿Ãû,"]´Ó ",~¿ªÊ¼," µ½ ",~½áÊø
 YDWEForLoopLocVarMultipleHint=
 
 YDWETimerStartMultiple="¼ÆÊ±Æ÷   -- ÔËÐÐ"
-YDWETimerStartMultiple="Á¢¼´ÔËÐÐ ",~¼ÆÊ±Æ÷," Ê±¼äÉèÖÃ: ",~time," Ãë£¬ÊÇ·ñÑ­»·: ",~false/true 
-YDWETimerStartMultipleHint="ÈÃ¼ÆÊ±Æ÷ÔËÐÐ¶à¸ö¶¯×÷¡£¼ÆÊ±Æ÷ÄÚ²»ÄÜÊ¹ÓÃµÈ´ý¡£"  
+YDWETimerStartMultiple="Á¢¼´ÔËÐÐ ",~¼ÆÊ±Æ÷," Ê±¼äÉèÖÃ: ",~time," Ãë£¬ÊÇ·ñÑ­»·: ",~false/true
+YDWETimerStartMultipleHint="ÈÃ¼ÆÊ±Æ÷ÔËÐÐ¶à¸ö¶¯×÷¡£¼ÆÊ±Æ÷ÄÚ²»ÄÜÊ¹ÓÃµÈ´ý¡£"
 
 YDWETimerStartFlush="¼ÆÊ±Æ÷   -- Çå³ý"
 YDWETimerStartFlush="Çå³ýµ±Ç°ÄæÌì¼ÆÊ±Æ÷"
 YDWETimerStartFlushHint="É¾³ýµ±Ç°ÄæÌì¼ÆÊ±Æ÷£¬²¢Çå¿Õ»º´æ»ò¹þÏ£±í."
 
 YDWERegisterTriggerMultiple="´¥·¢Æ÷   -- ×¢²á"
-YDWERegisterTriggerMultiple="×¢²á ",~´¥·¢Æ÷ 
-YDWERegisterTriggerMultipleHint="´¥·¢Æ÷ÄÚ²»ÄÜÊ¹ÓÃµÈ´ý¡£" 
+YDWERegisterTriggerMultiple="×¢²á ",~´¥·¢Æ÷
+YDWERegisterTriggerMultipleHint="´¥·¢Æ÷ÄÚ²»ÄÜÊ¹ÓÃµÈ´ý¡£"
 
 YDWERegisterTriggerFlush="´¥·¢Æ÷   -- Çå³ý"
 YDWERegisterTriggerFlush="Çå³ýµ±Ç°ÄæÌì´¥·¢Æ÷"
@@ -1578,131 +1578,131 @@ YDWEFlushAnyTypeDataByUserDataHint="Çå¿ÕÄ³¸öÊý¾ÝµÄÄ³Ïî×Ô¶¨ÒåÊôÐÔ¡£"
 //YD Save Load
 YDWE_PreloadSL_SetFile="ÉèÖÃ´æµµË÷Òý(´æµµÃûµ¥)"
 YDWE_PreloadSL_SetFile="Îª",~Íæ¼Ò,"ÔÚ","¡º",~Ä¿Â¼Ãû,"¡»","ÏÂ","£¬","½«","¡¼",~´æµµÃû,"¡½","µÄ","Ë÷","Òý","Éè","ÖÃ","Îª","¡ú","[",~ÕûÊý,"]"
-YDWE_PreloadSL_SetFileHint="¸ß¼¶¹¦ÄÜ£¬µ±Ä¿Â¼ÏÂÓÐ¶à¸öÍæ¼Ò´æµµÊ±£¬Îª´æµµÌí¼ÓÕûÊýË÷Òý£¬½¨Á¢Æð´æµµÎÄ¼þÃû×ÖÓëË÷ÒýµÄ¶ÔÓ¦¹ØÏµ¡£" 
+YDWE_PreloadSL_SetFileHint="¸ß¼¶¹¦ÄÜ£¬µ±Ä¿Â¼ÏÂÓÐ¶à¸öÍæ¼Ò´æµµÊ±£¬Îª´æµµÌí¼ÓÕûÊýË÷Òý£¬½¨Á¢Æð´æµµÎÄ¼þÃû×ÖÓëË÷ÒýµÄ¶ÔÓ¦¹ØÏµ¡£"
 
 YDWE_PreloadSL_Save="±£´æÍæ¼Ò´æµµ"
-YDWE_PreloadSL_Save="Îª",~Íæ¼Ò,"ÔÚ","¡º",~Ä¿Â¼Ãû,"¡»","¡¼",~´æµµÃû,"¡½","ÏÂ","±£","´æ","´æ","µµ","£¬","¸Ã","´æ","µµ","º¬","ÓÐ","[",~ÕûÊý,"]","¸ö","Êý","¾Ý","Ïî" 
-YDWE_PreloadSL_SaveHint="±£´æÒ»¸öÍæ¼Ò´æµµÔÚÖ¸¶¨Â·¾¶ÏÂ£¬×¢Òâ´æµµµÄÊý¾ÝÏîÊýÄ¿²»ÒªÌî´í¡£" 
+YDWE_PreloadSL_Save="Îª",~Íæ¼Ò,"ÔÚ","¡º",~Ä¿Â¼Ãû,"¡»","¡¼",~´æµµÃû,"¡½","ÏÂ","±£","´æ","´æ","µµ","£¬","¸Ã","´æ","µµ","º¬","ÓÐ","[",~ÕûÊý,"]","¸ö","Êý","¾Ý","Ïî"
+YDWE_PreloadSL_SaveHint="±£´æÒ»¸öÍæ¼Ò´æµµÔÚÖ¸¶¨Â·¾¶ÏÂ£¬×¢Òâ´æµµµÄÊý¾ÝÏîÊýÄ¿²»ÒªÌî´í¡£"
 
 YDWE_PreloadSL_Load="¶ÁÈ¡Íæ¼Ò´æµµ"
 YDWE_PreloadSL_Load="Îª",~Íæ¼Ò,"´Ó","¡º",~Ä¿Â¼Ãû,"¡»","¡¼",~´æµµÃû,"¡½","ÉÏ","¶Á","È¡","´æ","µµ","£¬","¸Ã","´æ","µµ","º¬","ÓÐ","[",~ÕûÊý,"]","¸ö","Êý","¾Ý","Ïî"
 YDWE_PreloadSL_LoadHint="»ñÈ¡Ö¸¶¨Ä¿Â¼ÏÂÄ³¸öÍæ¼Ò´æµµ£¬±ØÐëÌîÐ´ÕýÈ·µÄÎÄ¼þÃûºÍÊý¾ÝÏîÊýÄ¿¡£"
 
 YDWE_PreloadSL_Set="Ìí¼Ó´æµµÊý¾Ý"
-YDWE_PreloadSL_Set="Îª",~Íæ¼Ò,"Ìí","¼Ó"," ¡ù",~Êý¾Ý×¢ÊÍ,"£¬","ÔÚ","µ±","Ç°","´æ","µµ","[",~Êý¾ÝÏîË÷Òý,"]","ÉÏ","£¬","Ìí","¼Ó","©Ä",~Êý¾Ý,"©Ì" 
-YDWE_PreloadSL_SetHint="°ÑÊý¾ÝÐ´Èëµ½Íæ¼Ò´æµµ£¬ÐèÒªÌîÈëÕýÈ·µÄÊý¾ÝÏîË÷Òý£¬×¢ÊÍÔò¿ÉÒÔËæÒâÌîÐ´¡£" 
+YDWE_PreloadSL_Set="Îª",~Íæ¼Ò,"Ìí","¼Ó"," ¡ù",~Êý¾Ý×¢ÊÍ,"£¬","ÔÚ","µ±","Ç°","´æ","µµ","[",~Êý¾ÝÏîË÷Òý,"]","ÉÏ","£¬","Ìí","¼Ó","©Ä",~Êý¾Ý,"©Ì"
+YDWE_PreloadSL_SetHint="°ÑÊý¾ÝÐ´Èëµ½Íæ¼Ò´æµµ£¬ÐèÒªÌîÈëÕýÈ·µÄÊý¾ÝÏîË÷Òý£¬×¢ÊÍÔò¿ÉÒÔËæÒâÌîÐ´¡£"
 
 //YD LocalVariable
 YDWELocalVariableInitiliation="¿ªÆô¾Ö²¿±äÁ¿¹¦ÄÜ"
 YDWELocalVariableInitiliation="¿ªÆô¾Ö²¿±äÁ¿¹¦ÄÜ"
-YDWELocalVariableInitiliationHint="±ØÐëÔÚ¾Ö²¿±äÁ¿¸³ÖµÖ®Ç°ÆôÓÃ£»Èô´¥·¢Æ÷ÄÚÃ»ÓÐµÈ´ý¶¯×÷£¬¿ÉÒÔ²»ÆôÓÃ£»ÓÐµÈ´ýÐèÇóÊ±±ØÐëÑ¡ÓÃ¾Ö²¿±äÁ¿×¨ÓÃµÈ´ý¶¯×÷¡£" 
+YDWELocalVariableInitiliationHint="±ØÐëÔÚ¾Ö²¿±äÁ¿¸³ÖµÖ®Ç°ÆôÓÃ£»Èô´¥·¢Æ÷ÄÚÃ»ÓÐµÈ´ý¶¯×÷£¬¿ÉÒÔ²»ÆôÓÃ£»ÓÐµÈ´ýÐèÇóÊ±±ØÐëÑ¡ÓÃ¾Ö²¿±äÁ¿×¨ÓÃµÈ´ý¶¯×÷¡£"
 
 YDWELocalVariableEnd="Çå¿Õ¾Ö²¿±äÁ¿"
 YDWELocalVariableEnd="Çå¿Õ¾Ö²¿±äÁ¿"
 YDWELocalVariableEndHint="Çå¿Õ±¾´¥·¢Æ÷ÄÚÓÃµ½µÄÈ«²¿¾Ö²¿±äÁ¿£¬±ÜÃâÄÚ´æÐ¹Â¶£»Ê¹ÓÃ±¾¶¯×÷Ö®Ç°ÇëÈ·±£¾Ö²¿±äÁ¿ÒÑ¾­Ê¹ÓÃÍê±Ï¡£"
 
 YDWESetLocalVariableInteger="ÉèÖÃ ÕûÊý ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableInteger="ÉèÖÃ local_",~i," = ",~ÕûÊý 
+YDWESetLocalVariableInteger="ÉèÖÃ local_",~i," = ",~ÕûÊý
 YDWESetLocalVariableIntegerHint="ÎªÕûÊý¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableIntegerArray="ÉèÖÃ ÕûÊý ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableIntegerArray="ÉèÖÃ local_",~i,"[",~index,"]"," = ",~ÕûÊý 
+YDWESetLocalVariableIntegerArray="ÉèÖÃ local_",~i,"[",~index,"]"," = ",~ÕûÊý
 YDWESetLocalVariableIntegerArrayHint="ÎªÕûÊý¾Ö²¿±äÁ¿Êý×é¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableReal="ÉèÖÃ ÊµÊý ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableReal="ÉèÖÃ local_",~R," = ",~ÊµÊý 
+YDWESetLocalVariableReal="ÉèÖÃ local_",~R," = ",~ÊµÊý
 YDWESetLocalVariableRealHint="ÎªÊµÊý¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableRealArray="ÉèÖÃ ÊµÊý ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableRealArray="ÉèÖÃ local_",~R,"[",~index,"]"," = ",~ÊµÊý 
+YDWESetLocalVariableRealArray="ÉèÖÃ local_",~R,"[",~index,"]"," = ",~ÊµÊý
 YDWESetLocalVariableRealArrayHint="ÎªÊµÊý¾Ö²¿±äÁ¿Êý×é¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableString="ÉèÖÃ ×Ö·û´® ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableString="ÉèÖÃ local_",~str," = ",~×Ö·û´® 
+YDWESetLocalVariableString="ÉèÖÃ local_",~str," = ",~×Ö·û´®
 YDWESetLocalVariableStringHint="Îª×Ö·û´®¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableStringArray="ÉèÖÃ ×Ö·û´® ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableStringArray="ÉèÖÃ local_",~str,"[",~index,"]"," = ",~×Ö·û´® 
+YDWESetLocalVariableStringArray="ÉèÖÃ local_",~str,"[",~index,"]"," = ",~×Ö·û´®
 YDWESetLocalVariableStringArrayHint="Îª×Ö·û´®¾Ö²¿±äÁ¿Êý×é¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableBoolean="ÉèÖÃ ÕæÖµ ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableBoolean="ÉèÖÃ local_",~bl," = ",~ÕæÖµ 
+YDWESetLocalVariableBoolean="ÉèÖÃ local_",~bl," = ",~ÕæÖµ
 YDWESetLocalVariableBooleanHint="ÎªÕæÖµ¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableBooleanArray="ÉèÖÃ ÕæÖµ ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableBooleanArray="ÉèÖÃ local_",~bl,"[",~index,"]"," = ",~ÕæÖµ 
+YDWESetLocalVariableBooleanArray="ÉèÖÃ local_",~bl,"[",~index,"]"," = ",~ÕæÖµ
 YDWESetLocalVariableBooleanArrayHint="ÎªÕæÖµ¾Ö²¿±äÁ¿Êý×é¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableUnit="ÉèÖÃ µ¥Î» ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableUnit="ÉèÖÃ local_",~u," = ",~µ¥Î» 
+YDWESetLocalVariableUnit="ÉèÖÃ local_",~u," = ",~µ¥Î»
 YDWESetLocalVariableUnitHint="Îªµ¥Î»¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableUnitArray="ÉèÖÃ µ¥Î» ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableUnitArray="ÉèÖÃ local_",~u,"[",~index,"]"," = ",~µ¥Î» 
+YDWESetLocalVariableUnitArray="ÉèÖÃ local_",~u,"[",~index,"]"," = ",~µ¥Î»
 YDWESetLocalVariableUnitArrayHint="Îªµ¥Î»¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableUnitID="ÉèÖÃ µ¥Î»ÀàÐÍ ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableUnitID="ÉèÖÃ local_",~uid," = ",~µ¥Î»ÀàÐÍ 
+YDWESetLocalVariableUnitID="ÉèÖÃ local_",~uid," = ",~µ¥Î»ÀàÐÍ
 YDWESetLocalVariableUnitIDHint="Îªµ¥Î»ÀàÐÍ¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableUnitIDArray="ÉèÖÃ µ¥Î»ÀàÐÍ ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableUnitIDArray="ÉèÖÃ local_",~uid,"[",~index,"]"," = ",~µ¥Î»ÀàÐÍ 
+YDWESetLocalVariableUnitIDArray="ÉèÖÃ local_",~uid,"[",~index,"]"," = ",~µ¥Î»ÀàÐÍ
 YDWESetLocalVariableUnitIDArrayHint="Îªµ¥Î»ÀàÐÍ¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableAbilityID="ÉèÖÃ ¼¼ÄÜÀàÐÍ ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableAbilityID="ÉèÖÃ local_",~ab," = ",~¼¼ÄÜ 
+YDWESetLocalVariableAbilityID="ÉèÖÃ local_",~ab," = ",~¼¼ÄÜ
 YDWESetLocalVariableAbilityIDHint="Îªµ¥Î»ÀàÐÍ¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableAbilityIDArray="ÉèÖÃ ¼¼ÄÜÀàÐÍ ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableAbilityIDArray="ÉèÖÃ local_",~ab,"[",~index,"]"," = ",~¼¼ÄÜ 
+YDWESetLocalVariableAbilityIDArray="ÉèÖÃ local_",~ab,"[",~index,"]"," = ",~¼¼ÄÜ
 YDWESetLocalVariableAbilityIDArrayHint="Îªµ¥Î»ÀàÐÍ¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableItem="ÉèÖÃ ÎïÆ· ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableItem="ÉèÖÃ local_",~it," = ",~ÎïÆ· 
+YDWESetLocalVariableItem="ÉèÖÃ local_",~it," = ",~ÎïÆ·
 YDWESetLocalVariableItemHint="ÎªÎïÆ·¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableItemArray="ÉèÖÃ ÎïÆ· ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableItemArray="ÉèÖÃ local_",~it,"[",~index,"]"," = ",~ÎïÆ· 
+YDWESetLocalVariableItemArray="ÉèÖÃ local_",~it,"[",~index,"]"," = ",~ÎïÆ·
 YDWESetLocalVariableItemArrayHint="ÎªÎïÆ·¾Ö²¿±äÁ¿Êý×é¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableItemID="ÉèÖÃ ÎïÆ·ÀàÐÍ ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableItemID="ÉèÖÃ local_",~itid," = ",~ÎïÆ·ÀàÐÍ 
+YDWESetLocalVariableItemID="ÉèÖÃ local_",~itid," = ",~ÎïÆ·ÀàÐÍ
 YDWESetLocalVariableItemIDHint="ÎªÎïÆ·ÀàÐÍ¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableItemIDArray="ÉèÖÃ ÎïÆ·ÀàÐÍ ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableItemIDArray="ÉèÖÃ local_",~itid,"[",~index,"]"," = ",~ÎïÆ·ÀàÐÍ 
+YDWESetLocalVariableItemIDArray="ÉèÖÃ local_",~itid,"[",~index,"]"," = ",~ÎïÆ·ÀàÐÍ
 YDWESetLocalVariableItemIDArrayHint="ÎªÎïÆ·ÀàÐÍ¾Ö²¿±äÁ¿Êý×é¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableLocation="ÉèÖÃ µã ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableLocation="ÉèÖÃ local_",~point," = ",~µã 
+YDWESetLocalVariableLocation="ÉèÖÃ local_",~point," = ",~µã
 YDWESetLocalVariableLocationHint="Îªµã¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableLocationArray="ÉèÖÃ µã ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableLocationArray="ÉèÖÃ local_",~point,"[",~index,"]"," = ",~µã 
+YDWESetLocalVariableLocationArray="ÉèÖÃ local_",~point,"[",~index,"]"," = ",~µã
 YDWESetLocalVariableLocationArrayHint="Îªµã¾Ö²¿±äÁ¿Êý×é¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableGroup="ÉèÖÃ µ¥Î»×é ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableGroup="ÉèÖÃ local_",~g," = ",~µ¥Î»×é 
+YDWESetLocalVariableGroup="ÉèÖÃ local_",~g," = ",~µ¥Î»×é
 YDWESetLocalVariableGroupHint="Îªµ¥Î»×é¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableGroupArray="ÉèÖÃ µ¥Î»×é ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableGroupArray="ÉèÖÃ local_",~g,"[",~index,"]"," = ",~µ¥Î»×é 
+YDWESetLocalVariableGroupArray="ÉèÖÃ local_",~g,"[",~index,"]"," = ",~µ¥Î»×é
 YDWESetLocalVariableGroupArrayHint="Îªµ¥Î»×é¾Ö²¿±äÁ¿Êý×é¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableEffect="ÉèÖÃ ÌØÐ§ ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableEffect="ÉèÖÃ local_",~e," = ",~ÌØÐ§ 
+YDWESetLocalVariableEffect="ÉèÖÃ local_",~e," = ",~ÌØÐ§
 YDWESetLocalVariableEffectHint="ÎªÌØÐ§¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableEffectArray="ÉèÖÃ ÌØÐ§ ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableEffectArray="ÉèÖÃ local_",~e,"[",~index,"]"," = ",~ÌØÐ§ 
+YDWESetLocalVariableEffectArray="ÉèÖÃ local_",~e,"[",~index,"]"," = ",~ÌØÐ§
 YDWESetLocalVariableEffectArrayHint="ÎªÌØÐ§¾Ö²¿±äÁ¿Êý×é¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableRect="ÉèÖÃ µØÇø ¾Ö²¿±äÁ¿"
-YDWESetLocalVariableRect="ÉèÖÃ local_",~rt," = ",~µØÇø 
+YDWESetLocalVariableRect="ÉèÖÃ local_",~rt," = ",~µØÇø
 YDWESetLocalVariableRectHint="ÎªµØÇø¾Ö²¿±äÁ¿¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×Ö;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 YDWESetLocalVariableRectArray="ÉèÖÃ µØÇø ¾Ö²¿±äÁ¿Êý×é"
-YDWESetLocalVariableRectArray="ÉèÖÃ local_",~rt,"[",~index,"]"," = ",~µØÇø 
+YDWESetLocalVariableRectArray="ÉèÖÃ local_",~rt,"[",~index,"]"," = ",~µØÇø
 YDWESetLocalVariableRectArrayHint="ÎªµØÇø¾Ö²¿±äÁ¿Êý×é¸³Öµ£¬²ÎÊý´¦ÌîÈë¸Ã±äÁ¿µÄÃû×ÖºÍÊý×éË÷Òý;¸Ã±äÁ¿ÔÚ±¾Ìõ´¥·¢Æ÷ÄÚÓÐÐ§¡£"
 
 SetRandomSeed="ÉèÖÃËæ»úÖÖ×Ó"
@@ -1711,7 +1711,7 @@ SetRandomSeedHint="ÉèÖÃÓÎÏ·µÄËæ»úÖÖ×Ó£¬Ëæ»úÖÖ×Ó»áÓ°ÏìËæ»úÕûÊý£¬¹¥»÷÷»×ÓÖ®ÀàµÄËæ»
 
 //YD Function
 YDWESetAttackDamageWeaponType="ÉèÖÃÄ¬ÈÏ¹¥»÷|ÉËº¦|ÎäÆ÷ÀàÐÍ"
-YDWESetAttackDamageWeaponType="ÉèÖÃÄ¬ÈÏ¹¥»÷ÀàÐÍÎª ",~¹¥»÷ÀàÐÍ,"£¬ÉËº¦ÀàÐÍÎª ",~ÉËº¦ÀàÐÍ,"£¬ÎäÆ÷ÀàÐÍÎª ",~ÎäÆ÷ÀàÐÍ 
+YDWESetAttackDamageWeaponType="ÉèÖÃÄ¬ÈÏ¹¥»÷ÀàÐÍÎª ",~¹¥»÷ÀàÐÍ,"£¬ÉËº¦ÀàÐÍÎª ",~ÉËº¦ÀàÐÍ,"£¬ÎäÆ÷ÀàÐÍÎª ",~ÎäÆ÷ÀàÐÍ
 YDWESetAttackDamageWeaponTypeHint="ÉèÖÃÒ»Ð©¼¼ÄÜ£¨Èç¹³×Ó¡¢ÔÂÉñ¼ý£©ÐèÒªÓÃµ½µÄ¹¥»÷|ÉËº¦|ÎäÆ÷ÀàÐÍ£¬ÏµÍ³»á°´ÉèÖÃµÄ¹¥»÷|ÉËº¦|ÎäÆ÷ÀàÐÍ¶ÔÄ¿±êÔì³ÉÉËº¦¡£"
 
 YDWESetEventDamage="ÉèÖÃÉËº¦Öµ [JAPI]"
@@ -1723,37 +1723,37 @@ YDWEFlyEnable="ÈÃµ¥Î» ",~µØÃæµ¥Î»," ±äµÃ¿ÉÒÔ·ÉÐÐ¡£"
 YDWEFlyEnableHint="ÈÃÒ»¸öµØÃæµ¥Î»±äµÃ¿ÉÒÔ·ÉÐÐ£¬¿ÉÒÔÉèÖÃÆä·ÉÐÐ¸ß¶È¡£"
 
 YDWESetMapLimitCoordinate="ÉèÖÃµØÍ¼±ß½ç×ø±ê"
-YDWESetMapLimitCoordinate="ÉèÖÃµØÍ¼µÄ±ß½ç×ø±êÎª ( X×ø±ê×îÐ¡Öµ ",~ÊµÊý,"£¬X×ø±ê×î´óÖµ ",~ÊµÊý,"£¬Y×ø±ê×îÐ¡Öµ ",~ÊµÊý,"£¬Y×ø±ê×î´óÖµ ",~ÊµÊý," )" 
+YDWESetMapLimitCoordinate="ÉèÖÃµØÍ¼µÄ±ß½ç×ø±êÎª ( X×ø±ê×îÐ¡Öµ ",~ÊµÊý,"£¬X×ø±ê×î´óÖµ ",~ÊµÊý,"£¬Y×ø±ê×îÐ¡Öµ ",~ÊµÊý,"£¬Y×ø±ê×î´óÖµ ",~ÊµÊý," )"
 YDWESetMapLimitCoordinateHint="±ß½ç×ø±êµÄÉèÖÃ»áÓ°Ïì¹³×Ó¡¢ÌøÔ¾µÈ¼¼ÄÜÔÚµØÍ¼±ß½ç´¦µÄ±íÏÖÐÎÊ½£»Ä¬ÈÏµÄ±ß½ç×ø±êÊÇ¾µÍ··¶Î§µÄ±ß½ç,ÐÂÊÖÉ÷ÓÃ±¾ÉèÖÃ!"
 
 YDWELifeChange="ÉèÖÃµ¥Î»ÉúÃüÉÏÏÞ"
 YDWELifeChange="ÉèÖÃ ",~µ¥Î»," µÄÉúÃüÉÏÏÞ ",~±ä»¯," ",~ÕûÊý," £¬¹ØÁª¼¼ÄÜÎª ",~¸¨Öú¼¼ÄÜ
-YDWELifeChangeHint="Èç¹ûÐÞ¸Äºóµ¥Î»ÉúÃüÉÏÏÞÐ¡ÓÚ0£¬µ¥Î»»áÁ¢¼´ËÀÍö£»¹ØÁª¼¼ÄÜµÄÉèÖÃÇë²Î¿¼exampleÎÄ¼þ¼ÐÏÂµÄ¸¨ÖúµØÍ¼¡£" 
+YDWELifeChangeHint="Èç¹ûÐÞ¸Äºóµ¥Î»ÉúÃüÉÏÏÞÐ¡ÓÚ0£¬µ¥Î»»áÁ¢¼´ËÀÍö£»¹ØÁª¼¼ÄÜµÄÉèÖÃÇë²Î¿¼exampleÎÄ¼þ¼ÐÏÂµÄ¸¨ÖúµØÍ¼¡£"
 
 YDWEManaChange="ÉèÖÃµ¥Î»Ä§·¨ÉÏÏÞ"
 YDWEManaChange="ÉèÖÃ ",~µ¥Î»," µÄÄ§·¨ÉÏÏÞ ",~±ä»¯," ",~ÕûÊý," £¬¹ØÁª¼¼ÄÜÎª ",~¸¨Öú¼¼ÄÜ
-YDWEManaChangeHint="Èç¹ûÐÞ¸Äºóµ¥Î»Ä§·¨ÉÏÏÞÐ¡ÓÚ0£¬µ¥Î»µÄÄ§·¨À¸½«ÏûÊ§£»¹ØÁª¼¼ÄÜµÄÉèÖÃÇë²Î¿¼exampleÎÄ¼þ¼ÐÏÂµÄ¸¨ÖúµØÍ¼¡£" 
+YDWEManaChangeHint="Èç¹ûÐÞ¸Äºóµ¥Î»Ä§·¨ÉÏÏÞÐ¡ÓÚ0£¬µ¥Î»µÄÄ§·¨À¸½«ÏûÊ§£»¹ØÁª¼¼ÄÜµÄÉèÖÃÇë²Î¿¼exampleÎÄ¼þ¼ÐÏÂµÄ¸¨ÖúµØÍ¼¡£"
 
 //YD Game Data
 YDWERHSetGameWinner="ÉèÖÃÁªÃËÊ¤Àû [JAPI]"
 YDWERHSetGameWinner="ÉèÖÃ¶ÓÎé(",~ÕûÊý,")»ñÊ¤"
-YDWERHSetGameWinnerHint="¶ÓÎé1µÄIDÎª0£¬¶ÓÎé2µÄIDÎª1¡£" 
+YDWERHSetGameWinnerHint="¶ÓÎé1µÄIDÎª0£¬¶ÓÎé2µÄIDÎª1¡£"
 
 YDWERecordSetTitle="·þÎñÆ÷´æµµ-ÉèÖÃÆ½Ì¨»ý·ÖÏîÃû³Æ [JAPI]"
 YDWERecordSetTitle="ÉèÖÃÆ½Ì¨½çÃæÉÏµÚ",~ÕûÊý,"¸ö»ý·ÖÏîÃû³ÆÎª¡¼",~Õ½¶·Á¦,"¡½"
-YDWERecordSetTitleHint="11Æ½Ì¨RPG»ý·ÖÊÇÓÃÍæ¼Ò·þÎñÆ÷´æµµÀ´Ä£Äâ£¬ÕâÀï¿ÉÒÔÉèÖÃÐèÒªÏÔÊ¾ÔÚÆ½Ì¨½çÃæÉÏµÄ»ý·ÖÏîÃû×Ö£¬×î¶à¿ÉÏÔÊ¾8¸ö»ý·ÖÏî£¬Ã¿¸ö»ý·ÖÏîÃû×Ö²»³¬¹ý3¸öºº×Ö¡£" 
+YDWERecordSetTitleHint="11Æ½Ì¨RPG»ý·ÖÊÇÓÃÍæ¼Ò·þÎñÆ÷´æµµÀ´Ä£Äâ£¬ÕâÀï¿ÉÒÔÉèÖÃÐèÒªÏÔÊ¾ÔÚÆ½Ì¨½çÃæÉÏµÄ»ý·ÖÏîÃû×Ö£¬×î¶à¿ÉÏÔÊ¾8¸ö»ý·ÖÏî£¬Ã¿¸ö»ý·ÖÏîÃû×Ö²»³¬¹ý3¸öºº×Ö¡£"
 
 YDWERecordSetI="·þÎñÆ÷´æµµ-ÉèÖÃÍæ¼Ò´æµµÊý¾Ý [JAPI]"
 YDWERecordSetI="ÉèÖÃ",~Íæ¼Ò,"µÄ·þÎñÆ÷´æµµÊý¾Ý¡¼",~Õ½¶·Á¦,"¡½Îª",~ÕûÊý
-YDWERecordSetIHint="ÉèÖÃÍæ¼Ò·þÎñÆ÷´æµµÀïÄ³¸öÄ¿Â¼ÏÂµÄÊý¾Ý£¬ÈçÉèÖÃÍæ¼ÒÒ»µÄÕ½¶·Á¦Îª5¡£" 
+YDWERecordSetIHint="ÉèÖÃÍæ¼Ò·þÎñÆ÷´æµµÀïÄ³¸öÄ¿Â¼ÏÂµÄÊý¾Ý£¬ÈçÉèÖÃÍæ¼ÒÒ»µÄÕ½¶·Á¦Îª5¡£"
 
 YDWERecordSave="·þÎñÆ÷´æµµ-±£´æÍæ¼Ò´æµµÊý¾Ý [JAPI]"
 YDWERecordSave="±£´æ",~Íæ¼Ò,"µ±Ç°ËùÓÐ´æµµÊý¾Ý"
-YDWERecordSaveHint="·þÎñÆ÷´æµµÊý¾Ý±ØÐë±£´æºó²ÅÄÜÉúÐ§¡£" 
+YDWERecordSaveHint="·þÎñÆ÷´æµµÊý¾Ý±ØÐë±£´æºó²ÅÄÜÉúÐ§¡£"
 
 YDWERecordClear="·þÎñÆ÷´æµµ-Çå¿ÕÍæ¼Ò´æµµÊý¾Ý [JAPI]"
 YDWERecordClear="Çå¿Õ",~Íæ¼Ò,"µ±Ç°ËùÓÐ´æµµÊý¾Ý"
-YDWERecordClearHint="ÓÉÓÚÃ¿¸öÍæ¼Ò×î¶àÖ»ÄÜ´æ´¢100Ìõ×óÓÒµÄÊý¾Ý£¬¼ÙÈç³¬¹ýÉÏÏÞ£¬½¨ÒéÊ¹ÓÃ´Ë¹¦ÄÜÇå¿ÕÈ«²¿Êý¾Ý£¬È»ºóÖØÐÂ±£´æÓÐÓÃµÄÊý¾Ý¡£" 
+YDWERecordClearHint="ÓÉÓÚÃ¿¸öÍæ¼Ò×î¶àÖ»ÄÜ´æ´¢100Ìõ×óÓÒµÄÊý¾Ý£¬¼ÙÈç³¬¹ýÉÏÏÞ£¬½¨ÒéÊ¹ÓÃ´Ë¹¦ÄÜÇå¿ÕÈ«²¿Êý¾Ý£¬È»ºóÖØÐÂ±£´æÓÐÓÃµÄÊý¾Ý¡£"
 
 //YD Load
 YDWEFlushMissionByInteger="Çå¿Õ Ä¿Â¼ (ÕûÊýÂ·¾¶)"
@@ -1762,7 +1762,7 @@ YDWEFlushMissionByIntegerHint="Í¨¹ýÊäÈëµÄÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾´ÓGameCache
 
 YDWEFlushMissionByString="Çå¿Õ Ä¿Â¼ (×Ö·û´®Â·¾¶)"
 YDWEFlushMissionByString="Çå¿ÕÄ¿Â¼-> ",~×Ö·û´®
-YDWEFlushMissionByStringHint="Í¨¹ýÊäÈëµÄÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾´ÓGameCache»òHashTableÉÏÇå¿ÕÄ¿Â¼¡£" 
+YDWEFlushMissionByStringHint="Í¨¹ýÊäÈëµÄÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾´ÓGameCache»òHashTableÉÏÇå¿ÕÄ¿Â¼¡£"
 
 YDWESaveIntegerByInteger="´æ´¢ ÕûÊý (ÕûÊýÂ·¾¶)"
 YDWESaveIntegerByInteger="´æ´¢Ä¿Â¼-> ",~ÕûÊý,"£¬±êÇ©-> ",~ÕûÊý,"£¬´æ´¢ÕûÊý-> ",~ÕûÊý
@@ -1782,15 +1782,15 @@ YDWESaveBooleanByIntegerHint="Í¨¹ýÊäÈëµÄÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn b
 
 YDWESaveUnitByInteger="´æ´¢ µ¥Î» (ÕûÊýÂ·¾¶)"
 YDWESaveUnitByInteger="´æ´¢Ä¿Â¼-> ",~ÕûÊý,"£¬±êÇ©-> ",~ÕûÊý,"£¬´æ´¢µ¥Î»-> ",~µ¥Î»
-YDWESaveUnitByIntegerHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢µ¥Î»Êý¾Ý¡£" 
+YDWESaveUnitByIntegerHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢µ¥Î»Êý¾Ý¡£"
 
 YDWESaveUnitIDByInteger="´æ´¢ µ¥Î»ÀàÐÍ (ÕûÊýÂ·¾¶)"
-YDWESaveUnitIDByInteger="´æ´¢Ä¿Â¼-> ",~ÕûÊý,"£¬±êÇ©-> ",~ÕûÊý,"£¬´æ´¢µ¥Î»ÀàÐÍ -> ",~µ¥Î»ÀàÐÍ 
-YDWESaveUnitIDByIntegerHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢µ¥Î»ÀàÐÍÊý¾Ý¡£" 
+YDWESaveUnitIDByInteger="´æ´¢Ä¿Â¼-> ",~ÕûÊý,"£¬±êÇ©-> ",~ÕûÊý,"£¬´æ´¢µ¥Î»ÀàÐÍ -> ",~µ¥Î»ÀàÐÍ
+YDWESaveUnitIDByIntegerHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢µ¥Î»ÀàÐÍÊý¾Ý¡£"
 
 YDWESaveAbilityIDByInteger="´æ´¢ ¼¼ÄÜ (ÕûÊýÂ·¾¶)"
-YDWESaveAbilityIDByInteger="´æ´¢Ä¿Â¼-> ",~ÕûÊý,"£¬±êÇ©-> ",~ÕûÊý,"£¬´æ´¢¼¼ÄÜ -> ",~¼¼ÄÜ 
-YDWESaveAbilityIDByIntegerHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢¼¼ÄÜÊý¾Ý¡£" 
+YDWESaveAbilityIDByInteger="´æ´¢Ä¿Â¼-> ",~ÕûÊý,"£¬±êÇ©-> ",~ÕûÊý,"£¬´æ´¢¼¼ÄÜ -> ",~¼¼ÄÜ
+YDWESaveAbilityIDByIntegerHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢¼¼ÄÜÊý¾Ý¡£"
 
 YDWESaveItemByInteger="´æ´¢ ÎïÆ· (ÕûÊýÂ·¾¶)"
 YDWESaveItemByInteger="´æ´¢Ä¿Â¼-> ",~ÕûÊý,"£¬±êÇ©-> ",~ÕûÊý,"£¬´æ´¢ÎïÆ·-> ",~ÎïÆ·
@@ -1901,12 +1901,12 @@ YDWESaveQuestByInteger="´æ´¢Ä¿Â¼-> ",~ÕûÊý,"£¬±êÇ©-> ",~ÕûÊý,"£¬´æ´¢ÈÎÎñ-> ",~ÈÎ
 YDWESaveQuestByIntegerHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢ÈÎÎñÊý¾Ý¡£"
 
 YDWESaveQuestItemByInteger="´æ´¢ ÈÎÎñÄ¿±êÏî (ÕûÊýÂ·¾¶)"
-YDWESaveQuestItemByInteger="´æ´¢Ä¿Â¼-> ",~ÕûÊý,"£¬±êÇ©-> ",~ÕûÊý,"£¬´æ´¢ÈÎÎñÄ¿±êÏî-> ",~ÈÎÎñÄ¿±êÏî 
+YDWESaveQuestItemByInteger="´æ´¢Ä¿Â¼-> ",~ÕûÊý,"£¬±êÇ©-> ",~ÕûÊý,"£¬´æ´¢ÈÎÎñÄ¿±êÏî-> ",~ÈÎÎñÄ¿±êÏî
 YDWESaveQuestItemByIntegerHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢ÈÎÎñÄ¿±êÏîÊý¾Ý¡£"
 
 YDWESaveIntegerByString="´æ´¢ ÕûÊý (×Ö·û´®Â·¾¶)"
 YDWESaveIntegerByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢ÕûÊý-> ",~ÕûÊý
-YDWESaveIntegerByStringHint="Í¨¹ýÊäÈëµÄÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢ÕûÊýÊý¾Ý¡£" 
+YDWESaveIntegerByStringHint="Í¨¹ýÊäÈëµÄÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢ÕûÊýÊý¾Ý¡£"
 
 YDWESaveRealByString="´æ´¢ ÊµÊý (×Ö·û´®Â·¾¶)"
 YDWESaveRealByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢ÊµÊý-> ",~ÊµÊý
@@ -1922,11 +1922,11 @@ YDWESaveBooleanByStringHint="Í¨¹ýÊäÈëµÄÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bu
 
 YDWESaveUnitByString="´æ´¢ µ¥Î» (×Ö·û´®Â·¾¶)"
 YDWESaveUnitByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢µ¥Î»-> ",~µ¥Î»
-YDWESaveUnitByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢µ¥Î»Êý¾Ý¡£ 
+YDWESaveUnitByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢µ¥Î»Êý¾Ý¡£
 
 YDWESaveUnitIDByString="´æ´¢ µ¥Î»ÀàÐÍ (×Ö·û´®Â·¾¶)"
 YDWESaveUnitIDByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢µ¥Î»ÀàÐÍ-> ",~µ¥Î»ÀàÐÍ
-YDWESaveUnitIDByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢µ¥Î»ÀàÐÍÊý¾Ý¡£ 
+YDWESaveUnitIDByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢µ¥Î»ÀàÐÍÊý¾Ý¡£
 
 YDWESaveAbilityIDByString="´æ´¢ ¼¼ÄÜ (×Ö·û´®Â·¾¶)"
 YDWESaveAbilityIDByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢¼¼ÄÜ-> ",~¼¼ÄÜ
@@ -1934,19 +1934,19 @@ YDWESaveAbilityIDByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bu
 
 YDWESaveItemByString="´æ´¢ ÎïÆ· (×Ö·û´®Â·¾¶)"
 YDWESaveItemByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢ÎïÆ·-> ",~ÎïÆ·
-YDWESaveItemByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢ÎïÆ·Êý¾Ý¡£ 
+YDWESaveItemByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢ÎïÆ·Êý¾Ý¡£
 
 YDWESaveItemIDByString="´æ´¢ ÎïÆ·ÀàÐÍ (×Ö·û´®Â·¾¶)"
 YDWESaveItemIDByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢ÎïÆ·ÀàÐÍ-> ",~ÎïÆ·ÀàÐÍ
-YDWESaveItemIDByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢ÎïÆ·ÀàÐÍÊý¾Ý¡£ 
+YDWESaveItemIDByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢ÎïÆ·ÀàÐÍÊý¾Ý¡£
 
 YDWESavePlayerByString="´æ´¢ Íæ¼Ò (×Ö·û´®Â·¾¶)"
 YDWESavePlayerByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢Íæ¼Ò-> ",~Íæ¼Ò
-YDWESavePlayerByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢Íæ¼ÒÊý¾Ý¡£ 
+YDWESavePlayerByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢Íæ¼ÒÊý¾Ý¡£
 
 YDWESaveTimerByString="´æ´¢ ¼ÆÊ±Æ÷ (×Ö·û´®Â·¾¶)"
 YDWESaveTimerByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢¼ÆÊ±Æ÷-> ",~¼ÆÊ±Æ÷
-YDWESaveTimerByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢¼ÆÊ±Æ÷Êý¾Ý¡£ 
+YDWESaveTimerByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢¼ÆÊ±Æ÷Êý¾Ý¡£
 
 YDWESaveTriggerByString="´æ´¢ ´¥·¢Æ÷ (×Ö·û´®Â·¾¶)"
 YDWESaveTriggerByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢´¥·¢Æ÷-> ",~´¥·¢Æ÷
@@ -1967,7 +1967,7 @@ YDWESaveMultiboardByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn b
 YDWESaveMultiboardItemByString="´æ´¢ ¶àÃæ°åÏîÄ¿ (×Ö·û´®Â·¾¶)"
 YDWESaveMultiboardItemByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢¶àÃæ°åÏîÄ¿-> ",~¶àÃæ°åÏîÄ¿
 YDWESaveMultiboardItemByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢¶àÃæ°åÏîÄ¿Êý¾Ý¡£
-    
+
 YDWESaveTextTagByString="´æ´¢ Æ¯¸¡ÎÄ×Ö (×Ö·û´®Â·¾¶)"
 YDWESaveTextTagByString="´æ´¢Ä¿Â¼-> ",~×Ö·û´®,"£¬±êÇ©-> ",~×Ö·û´®,"£¬´æ´¢Æ¯¸¡ÎÄ×Ö-> ",~Æ¯¸¡ÎÄ×Ö
 YDWESaveTextTagByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bug+GC»òHashTable´æ´¢Æ¯¸¡ÎÄ×ÖÊý¾Ý¡£
@@ -2046,40 +2046,40 @@ YDWESaveQuestItemByStringHint="Í¨¹ýÊäÈëÂ·¾¶£¬ÏµÍ³»á¸ù¾Ýµ±Ç°Ä§ÊÞ°æ±¾²ÉÓÃReturn bu
 
 //YD Special Effect
 //YDWEMusicFountain="Éú³ÉÒôÀÖÅçÈª<!llusionÖÆ×÷>"
-//YDWEMusicFountain="´´½¨ÒôÀÖÅçÈªÌØÐ§ÔÚ ",~µã,"£¬ÉèÖÃ²¥·ÅËÙÂÊÎª ",~ÊµÊý,"£¬Í¼ÐÎ²ÎÊý1Îª ",~ÊµÊý," £¬Í¼ÐÎ²ÎÊý2Îª ",~ÊµÊý," £¬½áÊø²ÎÊýÎª ",~ÊµÊý," £¬ÓÎÏ·Ê±¼äÎª ",~ÊµÊý," £¬ÉÁµçÀàÐÍÎª "~ÉÁµçÌØÐ§,"¡£"  
-//YDWEMusicFountainHint="²¥·ÅËÙÂÊÊýÖµÉèÖÃÔ½´óÔòÌØÐ§²¥·Å½Ú×àÔ½¿ì£¬ÐÞ¸ÄÍ¼ÐÎ²ÎÊýºÍÓÎÏ·Ê±¼ä¿ÉÒÔ»ñµÃ²»Í¬Í¼ÐÎÐ§¹û£¬ÓÐÐËÈ¤¿ÉÒÔÊÔ×Å¸Ä¸Ä¿´¡£" 
+//YDWEMusicFountain="´´½¨ÒôÀÖÅçÈªÌØÐ§ÔÚ ",~µã,"£¬ÉèÖÃ²¥·ÅËÙÂÊÎª ",~ÊµÊý,"£¬Í¼ÐÎ²ÎÊý1Îª ",~ÊµÊý," £¬Í¼ÐÎ²ÎÊý2Îª ",~ÊµÊý," £¬½áÊø²ÎÊýÎª ",~ÊµÊý," £¬ÓÎÏ·Ê±¼äÎª ",~ÊµÊý," £¬ÉÁµçÀàÐÍÎª "~ÉÁµçÌØÐ§,"¡£"
+//YDWEMusicFountainHint="²¥·ÅËÙÂÊÊýÖµÉèÖÃÔ½´óÔòÌØÐ§²¥·Å½Ú×àÔ½¿ì£¬ÐÞ¸ÄÍ¼ÐÎ²ÎÊýºÍÓÎÏ·Ê±¼ä¿ÉÒÔ»ñµÃ²»Í¬Í¼ÐÎÐ§¹û£¬ÓÐÐËÈ¤¿ÉÒÔÊÔ×Å¸Ä¸Ä¿´¡£"
 
 YDWECreateLine="Éú³ÉË¿´ø<thodyÖÆ×÷>"
-YDWECreateLine="ÔÚ ",~µ¥Î»," ÉíÉÏÉú³ÉË¿´ø£¬ÌØÐ§µ¥Î»ÀàÐÍÎª ",~µ¥Î»ÀàÐÍ,"£¬ÊýÄ¿Îª ",~ÕûÊý,"£¬½Ç¶ÈÆ«ÒÆ ",~ÊµÊý,"£¬¼ä¾àÎª ",~ÊµÊý,"£¬³ÖÐøÊ±¼äÎª ",~ÊµÊý,"£¬Ë¢ÐÂÖÜÆÚÎª ",~ÊµÊý,"£¬³õÊ¼¸ß¶ÈÎª ",~ÊµÊý,"£¬¸ß¶ÈµÈ²îÎª ",~ÊµÊý,"£¬Ä£ÐÍ³ß´ç³õÊ¼Îª ",~ÊµÊý,"£¬³ß´çµÈ²îÎª ",~ÊµÊý,"¡£" 
+YDWECreateLine="ÔÚ ",~µ¥Î»," ÉíÉÏÉú³ÉË¿´ø£¬ÌØÐ§µ¥Î»ÀàÐÍÎª ",~µ¥Î»ÀàÐÍ,"£¬ÊýÄ¿Îª ",~ÕûÊý,"£¬½Ç¶ÈÆ«ÒÆ ",~ÊµÊý,"£¬¼ä¾àÎª ",~ÊµÊý,"£¬³ÖÐøÊ±¼äÎª ",~ÊµÊý,"£¬Ë¢ÐÂÖÜÆÚÎª ",~ÊµÊý,"£¬³õÊ¼¸ß¶ÈÎª ",~ÊµÊý,"£¬¸ß¶ÈµÈ²îÎª ",~ÊµÊý,"£¬Ä£ÐÍ³ß´ç³õÊ¼Îª ",~ÊµÊý,"£¬³ß´çµÈ²îÎª ",~ÊµÊý,"¡£"
 YDWECreateLineHint="  ºÃ¿´µÄË¿´ø~"
 
 //Script System actions
 YDWEInitCinematicSystem="¿ªÆôµçÓ°ÏµÍ³<AnitarfÖÆ×÷>"
-YDWEInitCinematicSystem="¿ªÆôScript SystemµçÓ°ÏµÍ³" 
+YDWEInitCinematicSystem="¿ªÆôScript SystemµçÓ°ÏµÍ³"
 YDWEInitCinematicSystemHint="µçÓ°ÏµÍ³±ØÐè¿ªÆôºó²ÅÄÜÊ¹ÓÃ£¬YDWE»á×Ô¶¯¼ÓÔØ¶ÔÓ¦µÄº¯Êý¿â¡£"
 
 YDWECinematicCameraDisable="¹Ø±ÕµçÓ°ÏµÍ³<AnitarfÖÆ×÷>"
-YDWECinematicCameraDisable="¹Ø±ÕScript SystemµçÓ°ÏµÍ³" 
+YDWECinematicCameraDisable="¹Ø±ÕScript SystemµçÓ°ÏµÍ³"
 YDWECinematicCameraDisableHint="µçÓ°ÏµÍ³¹Ø±ÕÖ®ºó£¬ÎÞ·¨ÔÙÊ¹ÓÃÏà¹Ø´¥·¢Æ÷¶¯×÷¡£"
 
 YDWECinSInitTempPoint="ÉèÖÃÑÝÔ±³öÉúµã<AnitarfÖÆ×÷>"
-YDWECinSInitTempPoint="ÉèÖÃÑÝÔ±µ¥Î»³öÉúÔÚ ",~µã"£¬ÏµÍ³»áÔÚ¸Ãµã´´½¨µ¥Î»" 
+YDWECinSInitTempPoint="ÉèÖÃÑÝÔ±µ¥Î»³öÉúÔÚ ",~µã"£¬ÏµÍ³»áÔÚ¸Ãµã´´½¨µ¥Î»"
 YDWECinSInitTempPointHint="ÏµÍ³Ä¬ÈÏÑÝÔ±µ¥Î»³öÉúÔÚ(0,0)µã£¬Í¨¹ýÕâÌõ¶¯×÷¿ÉÒÔÐÞ¸Ä³öÉúµãÎ»ÖÃ¡£Èç¹ûÒªÉ¾³ýÕâ¸öµã£¬ÇëÔÚµ¥Î»Éú³ÉÍê±ÏºóÔÙÉ¾³ý¡£"
 
 YDWEScriptSystemPeriod="ÉèÖÃµçÓ°ÏµÍ³Ë¢ÐÂÖÜÆÚ<AnitarfÖÆ×÷>"
-YDWEScriptSystemPeriod="ÉèÖÃµçÓ°ÏµÍ³Ë¢ÐÂÖÜÆÚÎª ",~Ë¢ÐÂÖÜÆÚ" Ãë" 
+YDWEScriptSystemPeriod="ÉèÖÃµçÓ°ÏµÍ³Ë¢ÐÂÖÜÆÚÎª ",~Ë¢ÐÂÖÜÆÚ" Ãë"
 YDWEScriptSystemPeriodHint="µçÓ°ÏµÍ³Ä¬ÈÏË¢ÐÂÖÜÆÚÊÇ0.02Ãë£¬Í¨¹ýÕâÀïÉè¶¨¿ÉÒÔ¸Ä±äË¢ÐÂÖÜÆÚ¡£"
 
 YDWEParticlePeriod="ÉèÖÃÁ£×ÓÏµÍ³Ë¢ÐÂÖÜÆÚ<AnitarfÖÆ×÷>"
-YDWEParticlePeriod="ÉèÖÃÁ£×ÓÏµÍ³Ë¢ÐÂÖÜÆÚÎª ",~Ë¢ÐÂÖÜÆÚ" Ãë" 
+YDWEParticlePeriod="ÉèÖÃÁ£×ÓÏµÍ³Ë¢ÐÂÖÜÆÚÎª ",~Ë¢ÐÂÖÜÆÚ" Ãë"
 YDWEParticlePeriodHint="Á£×ÓÏµÍ³°üº¬µ¥Î»ÒÆ¶¯ºÍ×ªÏòµÈÓëµ¥Î»ÓÐ¹Øº¯Êý£¬Ä¬ÈÏË¢ÐÂÖÜÆÚÊÇ0.02Ãë¡£"
 
 YDWECameraPeriod="ÉèÖÃ¾µÍ·ÏµÍ³Ë¢ÐÂÖÜÆÚ<AnitarfÖÆ×÷>"
-YDWECameraPeriod="ÉèÖÃ¾µÍ·ÏµÍ³Ë¢ÐÂÖÜÆÚÎª ",~Ë¢ÐÂÖÜÆÚ" Ãë" 
+YDWECameraPeriod="ÉèÖÃ¾µÍ·ÏµÍ³Ë¢ÐÂÖÜÆÚÎª ",~Ë¢ÐÂÖÜÆÚ" Ãë"
 YDWECameraPeriodHint="¾µÍ·ÏµÍ³°üº¬¾µÍ·ÒÆ¶¯ºÍËø¶¨µÈº¯Êý£¬Ä¬ÈÏË¢ÐÂÖÜÆÚÊÇ0.02Ãë¡£"
 
 YDWEFadeFilterUnit="ÉèÖÃÂË¾µµ¥Î»<AnitarfÖÆ×÷>"
-YDWEFadeFilterUnit="ÉèÖÃÂË¾µ¸¨Öúµ¥Î»ÀàÐÍÎª ",~µ¥Î»ÀàÐÍ 
+YDWEFadeFilterUnit="ÉèÖÃÂË¾µ¸¨Öúµ¥Î»ÀàÐÍÎª ",~µ¥Î»ÀàÐÍ
 YDWEFadeFilterUnitHint="µçÓ°ÏµÍ³´øÓÐÒ»¸öÂË¾µÄ£ÐÍ£¬Í¨¹ýËü¿ÉÒÔ»ñµÃ¸üºÃµÄÊÓ¾õÐ§¹û¡£"
 
 YDWEWriteToScene="¼ÇÂ¼µ±Ç°³¡¾°<AnitarfÖÆ×÷>"
@@ -2091,7 +2091,7 @@ YDWEPlayScene="²¥·Å³¡¾° ",~ÕûÊý
 YDWEPlaySceneHint="²¥·ÅÖ¸¶¨µÄ³¡¾°¡£"
 
 YDWEScriptNextScene="ÉèÖÃÏÂÒ»Ä»³¡¾°²¥·ÅÊ±¼ä<AnitarfÖÆ×÷>"
-YDWEScriptNextScene="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±²¥·ÅÏÂÒ»Ä»³¡¾°" 
+YDWEScriptNextScene="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±²¥·ÅÏÂÒ»Ä»³¡¾°"
 YDWEScriptNextSceneHint="µçÓ°ÏµÍ³½«Ò»²¿µçÓ°·ÖÎªÈô¸É³¡¾°£¬Ã¿´¦³¡¾°¿ÉÒÔÔÚÖ¸¶¨Ê±¼ä²¥·Å¡£"
 
 YDWEScriptExternalFunc="ÔËÐÐÍâ²¿º¯Êý<AnitarfÖÆ×÷>"
@@ -2099,23 +2099,23 @@ YDWEScriptExternalFunc="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÔËÐÐº¯Êý ",~×Ö·û´®
 YDWEScriptExternalFuncHint="¿ÉÒÔÔËÐÐµçÓ°ÏµÍ³Ö®ÍâµÄº¯Êý£¬ÌîÈëº¯ÊýµÄÃû×Ö¼´¿É¡£"
 
 YDWEScriptSubtitleLine="ÏÔÊ¾×ÖÄ»Ïß<AnitarfÖÆ×÷>"
-YDWEScriptSubtitleLine="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÏÔÊ¾×ÖÄ»Ïß ",~×Ö·û´® 
+YDWEScriptSubtitleLine="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÏÔÊ¾×ÖÄ»Ïß ",~×Ö·û´®
 YDWEScriptSubtitleLineHint="¿ÉÒÔÆÁÄ»ÉÏÏÔÊ¾Ò»ÐÐÎÄ×Ö¡£"
 
 YDWEScriptSubtitleClear="Çå³ý×ÖÄ»Ïß<AnitarfÖÆ×÷>"
-YDWEScriptSubtitleClear="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±Çå³ý×ÖÄ»Ïß" 
+YDWEScriptSubtitleClear="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±Çå³ý×ÖÄ»Ïß"
 YDWEScriptSubtitleClearHint="Çå³ýÆÁÄ»ÉÏÏÔÊ¾µÄÎÄ×Ö¡£"
 
 YDWEActorCreate="´´½¨ÑÝÔ±<AnitarfÖÆ×÷>"
-YDWEActorCreate="ÎªÍæ¼Ò ",~Íæ¼Ò," ´´½¨Ò»¸öÑÝÔ±µ¥Î»£¬±àºÅÎª ",~ÕûÊý,"£¬µ¥Î»ÀàÐÍÎª ",~ÕûÊý 
+YDWEActorCreate="ÎªÍæ¼Ò ",~Íæ¼Ò," ´´½¨Ò»¸öÑÝÔ±µ¥Î»£¬±àºÅÎª ",~ÕûÊý,"£¬µ¥Î»ÀàÐÍÎª ",~ÕûÊý
 YDWEActorCreateHint="µçÓ°Àï³ö³¡µÄÑÝÔ±£¬±ØÐëÍ¨¹ýÕâÌõ¶¯×÷À´Éú³É£»Ã¿¸öÑÝÔ±ÐèÒªÉèÖÃÒ»¸öÖÕÉí±àºÅ£¬Èç9527£¬ÏµÍ³»áÍ¨¹ýÕâ¸ö±àºÅÀ´ÈÃÑÝÔ±½øÐÐ±íÑÝ¡£"
 
 YDWEScriptActAbilityLvl="Ìí¼Ó¼¼ÄÜ<AnitarfÖÆ×÷>"
-YDWEScriptActAbilityLvl="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÎªÑÝÔ± ",~ÕûÊý," Ìí¼Ó¼¼ÄÜ ",~¼¼ÄÜ,"£¬µÈ¼¶Îª ",~ÕûÊý 
+YDWEScriptActAbilityLvl="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÎªÑÝÔ± ",~ÕûÊý," Ìí¼Ó¼¼ÄÜ ",~¼¼ÄÜ,"£¬µÈ¼¶Îª ",~ÕûÊý
 YDWEScriptActAbilityLvlHint="ÔÚÑÝÔ±ºóÃæµÄ²ÎÊýÌîÐ´ÑÝÔ±µÄ±àºÅ£¬Èç9527£¬¾Í¿ÉÒÔÎªÑÝÔ±Ìí¼ÓÒ»¸ö¼¼ÄÜ£»¿ÉÒÔÉèÖÃ¼¼ÄÜµÄµÈ¼¶¡£"
 
 YDWEScriptActAnimPlay="²¥·Å¶¯»­<AnitarfÖÆ×÷>"
-YDWEScriptActAnimPlay="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±²¥·ÅÑÝÔ± ",~ÕûÊý," µÄ¶¯»­ ",~ÕûÊý,"£¬¶¯»­»ìºÏÊ±¼äÎª ",~ÊµÊý," Ãë"  
+YDWEScriptActAnimPlay="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±²¥·ÅÑÝÔ± ",~ÕûÊý," µÄ¶¯»­ ",~ÕûÊý,"£¬¶¯»­»ìºÏÊ±¼äÎª ",~ÊµÊý," Ãë"
 YDWEScriptActAnimPlayHint="ÔÚ¶¯»­ºóÃæµÄ²ÎÊýÌîÐ´¸Ã¶¯»­µÄË÷Òý£¬0ÎªÄ¬ÈÏ¶¯»­£»¶¯»­»ìºÏÊ±¼äÊÇÉÏÒ»¸ö¶¯»­µ½ÏÂÒ»¸ö¶¯»­µÄ¹ý¶ÉÊ±¼ä£¬Îª0ÔòÁ¢¼´ÇÐ»»¡£"
 
 YDWEScriptActAnimSpeed="µ÷Õû¶¯»­ËÙ¶È<AnitarfÖÆ×÷>"
@@ -2127,87 +2127,87 @@ YDWEScriptActAnimReset="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÖØÖÃÑÝÔ± ",~ÕûÊý," µÄ¶¯»­"
 YDWEScriptActAnimResetHint="ÖØÖÃµ¥Î»µÄ¶¯»­£¬¼´²¥·Åµ¥Î»µÄÄ¬ÈÏ¶¯»­£»Õâ¸ö¶¯»­Í¨³£ÊÇÕ¾Á¢£¬Ë÷ÒýÎª0¡£"
 
 YDWEActorWalkProperties="µ¥Î»ÐÐ×ßÉèÖÃ<AnitarfÖÆ×÷>"
-YDWEActorWalkProperties="ÉèÖÃµ¥Î»ÀàÐÍ ",~µ¥Î»ÀàÐÍ," µÄÐÐ×ß¶¯»­Ë÷ÒýÎª ",~ÕûÊý,"£¬ÐÐ×ß¶¯»­²¥·ÅÊ±¼äÎª ",~ÊµÊý,"£¬µ¥Î»ÒÆ¶¯ËÙ¶ÈÎª ",~ÊµÊý  
+YDWEActorWalkProperties="ÉèÖÃµ¥Î»ÀàÐÍ ",~µ¥Î»ÀàÐÍ," µÄÐÐ×ß¶¯»­Ë÷ÒýÎª ",~ÕûÊý,"£¬ÐÐ×ß¶¯»­²¥·ÅÊ±¼äÎª ",~ÊµÊý,"£¬µ¥Î»ÒÆ¶¯ËÙ¶ÈÎª ",~ÊµÊý
 YDWEActorWalkPropertiesHint="ÉèÖÃµ¥Î»µÄÐÐ×ß¶¯»­²ÎÊý£¬ÔÚ±¾ÏµÍ³Àïµ¥Î»µÄÐÐ×ßÊÇÍ¨¹ý²»¶ÏÒÆ¶¯µ¥Î»²¢²¥·ÅÐÐ×ß¶¯»­À´Ä£ÄâÊµÏÖ¡£"
 
 YDWEScriptActWalk="µ¥Î»ÐÐ×ß<AnitarfÖÆ×÷>"
-YDWEScriptActWalk="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÈÃÑÝÔ± ",~ÕûÊý," ×ßµ½Ä¿µÄµØ(×ø±êX ",~ÊµÊý,"£¬×ø±êY ",~ÊµÊý,")£¬Ê±¼äÎª ",~ÊµÊý,"£¬¶¯»­»ìºÏÊ±¼äÎª ",~ÊµÊý," Ãë"  
+YDWEScriptActWalk="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÈÃÑÝÔ± ",~ÕûÊý," ×ßµ½Ä¿µÄµØ(×ø±êX ",~ÊµÊý,"£¬×ø±êY ",~ÊµÊý,")£¬Ê±¼äÎª ",~ÊµÊý,"£¬¶¯»­»ìºÏÊ±¼äÎª ",~ÊµÊý," Ãë"
 YDWEScriptActWalkHint="ÈÃµ¥Î»ÔÚÖ¸¶¨Ê±¼äÄÚÅÜµ½Ö¸¶¨×ø±ê£»ÔÚÊ¹ÓÃÕâÌõ¶¯×÷Ö®Ç°£¬±ØÐëÏÈÉèÖÃºÃµ¥Î»ÐÐ×ß²ÎÊý¡£"
 
 YDWEScriptActSlide="µ¥Î»»¬ÐÐ<AnitarfÖÆ×÷>"
-YDWEScriptActSlide="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÈÃÑÝÔ± ",~ÕûÊý," »¬ÐÐµ½Ä¿µÄµØ(×ø±êX ",~ÊµÊý,"£¬×ø±êY ",~ÊµÊý,")£¬Ê±¼äÎª ",~ÊµÊý," Ãë" ,"£¬×î´ó¸ß¶ÈÎª ",~ÊµÊý 
+YDWEScriptActSlide="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÈÃÑÝÔ± ",~ÕûÊý," »¬ÐÐµ½Ä¿µÄµØ(×ø±êX ",~ÊµÊý,"£¬×ø±êY ",~ÊµÊý,")£¬Ê±¼äÎª ",~ÊµÊý," Ãë" ,"£¬×î´ó¸ß¶ÈÎª ",~ÊµÊý
 YDWEScriptActSlideHint="ÉèÖÃµ¥Î»µÄÐÐ×ß¶¯»­²ÎÊý£¬ÔÚ±¾ÏµÍ³Àïµ¥Î»µÄÐÐ×ßÊÇÍ¨¹ý²»¶ÏÒÆ¶¯µ¥Î»²¢²¥·ÅÐÐ×ß¶¯»­À´Ä£ÄâÊµÏÖ¡£"
 
 YDWEScriptActTurn="µ¥Î»×ªÏò<AnitarfÖÆ×÷>"
-YDWEScriptActTurn="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÈÃÑÝÔ± ",~ÕûÊý," ³¯Ïò½Ç¶È ",~ÊµÊý,"£¬Ê±¼äÎª ",~ÊµÊý,"£¬Ðý×ª·½ÏòÎª ",~ÕûÊý 
+YDWEScriptActTurn="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÈÃÑÝÔ± ",~ÕûÊý," ³¯Ïò½Ç¶È ",~ÊµÊý,"£¬Ê±¼äÎª ",~ÊµÊý,"£¬Ðý×ª·½ÏòÎª ",~ÕûÊý
 YDWEScriptActTurnHint="ÈÃµ¥Î»ÔÚÖ¸¶¨Ê±¼äÄÚÐý×ªµ½³¯ÏòÄ³¸ö½Ç¶È£»µ±Ñ¡Ôñ×î½ü·½Ïò£¬µ¥Î»»á×Ô¶¯Ñ¡ÔñÓÃÊ±×î¶ÌµÄÐý×ª·½Ê½¡£"
 
 YDWEScriptActFace="Ëø¶¨µ¥Î»ÉíÌå³¯Ïò<AnitarfÖÆ×÷>"
-YDWEScriptActFace="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±Ëø¶¨ÑÝÔ± ",~ÕûÊý," µÄÉíÌå³¯ÏòÑÝÔ± ",~ÕûÊý,"£¬²¿Î»Îª ",~²¿Î»,"£¬Æ«ÒÆ×ø±êÎª( X ",~Xoffset,"£¬","Y ",~Yoffset,"£¬","Z ",~offset," )£¬","¶¯»­","»ìºÏ","Ê±¼äÎª ",~ÊµÊý," Ãë" 
+YDWEScriptActFace="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±Ëø¶¨ÑÝÔ± ",~ÕûÊý," µÄÉíÌå³¯ÏòÑÝÔ± ",~ÕûÊý,"£¬²¿Î»Îª ",~²¿Î»,"£¬Æ«ÒÆ×ø±êÎª( X ",~Xoffset,"£¬","Y ",~Yoffset,"£¬","Z ",~offset," )£¬","¶¯»­","»ìºÏ","Ê±¼äÎª ",~ÊµÊý," Ãë"
 YDWEScriptActFaceHint="ÈÃµ¥Î»µÄÍ·²¿»òÐØ²¿Ò»Ö±³¯ÏòÄ¿±êµ¥Î»µÄÆ«ÒÆ×ø±êµã´¦£¬Ö±µ½ÖØÖÃÉíÌå³¯ÏòÎªÖ¹£»×ø±êÆ«ÒÆÒÔÄ¿±êµ¥Î»½ÅÏÂÎªÔ­µã¡£"
 
 YDWEScriptActFaceReset="ÖØÖÃµ¥Î»ÉíÌå³¯Ïò<AnitarfÖÆ×÷>"
-YDWEScriptActFaceReset="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÖØÖÃÑÝÔ± ",~ÕûÊý," µÄÉíÌå³¯Ïò£¬¶¯»­»ìºÏÊ±¼äÎª ",~ÊµÊý 
+YDWEScriptActFaceReset="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÖØÖÃÑÝÔ± ",~ÕûÊý," µÄÉíÌå³¯Ïò£¬¶¯»­»ìºÏÊ±¼äÎª ",~ÊµÊý
 YDWEScriptActFaceResetHint="ÈÃµ¥Î»µÄÉíÌå³¯Ïò»Ö¸´Õý³£¡£"
 
 YDWEScriptActColour="¸Ä±äµ¥Î»ÑÕÉ«<AnitarfÖÆ×÷>"
-YDWEScriptActColour="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±¸Ä±äÑÝÔ± ",~ÕûÊý," µÄÑÕÉ«±ÈÀýÎª( ","ºì ",~ºì,"%£¬ÂÌ ",~ÂÌ,"%£¬À¶ ",~À¶,"% )£¬¿É¼û¶ÈÎª ",~¿É¼û¶È,"%£¬Ö¸¶¨Ê±¼äÎª ",~Ê±¼ä," Ãë"  
+YDWEScriptActColour="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±¸Ä±äÑÝÔ± ",~ÕûÊý," µÄÑÕÉ«±ÈÀýÎª( ","ºì ",~ºì,"%£¬ÂÌ ",~ÂÌ,"%£¬À¶ ",~À¶,"% )£¬¿É¼û¶ÈÎª ",~¿É¼û¶È,"%£¬Ö¸¶¨Ê±¼äÎª ",~Ê±¼ä," Ãë"
 YDWEScriptActColourHint="ÔÚÖ¸¶¨Ê±¼äÄÚÖð½¥¸Ä±äµ¥Î»µÄÑÕÉ«±ÈÀýºÍ¿É¼û¶Èµ½Ö¸¶¨Öµ£¬µ¥Î»Ä¬ÈÏÑÕÉ«±ÈÁÐ¾ùÊÇ100%£¬¿É¼û¶ÈÎª0Ê±µ¥Î»ÍêÈ«Í¸Ã÷¡£"
 
 YDWEScriptActSize="¸Ä±äµ¥Î»ÉíÌå³ß´ç<AnitarfÖÆ×÷>"
-YDWEScriptActSize="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±¸Ä±äÑÝÔ± ",~ÕûÊý," µÄÉíÌå³ß´çÎª " ,~ÊµÊý,"£¬Ö¸¶¨Ê±¼äÎª ",~ÊµÊý," Ãë"  
+YDWEScriptActSize="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±¸Ä±äÑÝÔ± ",~ÕûÊý," µÄÉíÌå³ß´çÎª " ,~ÊµÊý,"£¬Ö¸¶¨Ê±¼äÎª ",~ÊµÊý," Ãë"
 YDWEScriptActSizeHint="ÔÚÖ¸¶¨Ê±¼äÄÚÖð½¥¸Ä±äµ¥Î»µÄÉíÌå³ß´çÎªÄ¿±êÖµ£¬1.0Îªµ¥Î»Õý³£ÉíÌå³ß´ç¡£"
 
 YDWECameraSetupAssign="ÉèÖÃ¾µÍ·<AnitarfÖÆ×÷>"
-YDWECameraSetupAssign="ÉèÖÃ¾µÍ· ",~¾µÍ·," µÄ±àºÅÎª ",~ÕûÊý 
+YDWECameraSetupAssign="ÉèÖÃ¾µÍ· ",~¾µÍ·," µÄ±àºÅÎª ",~ÕûÊý
 YDWECameraSetupAssignHint="ÉèÖÃ¾µÍ·µÄ±àºÅ£¬ÏµÍ³»á¸ù¾Ý¾µÍ·Õâ¸ö±àºÅÀ´µ÷ÓÃ¾µÍ·¡£"
 
 YDWEScriptCamera="Ó¦ÓÃ¾µÍ·<AnitarfÖÆ×÷>"
-YDWEScriptCamera="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±Ó¦ÓÃ¾µÍ· ",~ÕûÊý,"£¬Ö¸¶¨Ê±¼äÎª ",~ÊµÊý,"£¬¾µÍ·ÇÐ»»·½Ê½Îª ",~ÕûÊý 
+YDWEScriptCamera="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±Ó¦ÓÃ¾µÍ· ",~ÕûÊý,"£¬Ö¸¶¨Ê±¼äÎª ",~ÊµÊý,"£¬¾µÍ·ÇÐ»»·½Ê½Îª ",~ÕûÊý
 YDWEScriptCameraHint="ÔÚÖ¸¶¨Ê±¼äÄÚ½«µ±Ç°¾µÍ·ÇÐ»»µ½Ä¿±ê¾µÍ·£»¿ÉÒÔÑ¡Ôñ¾µÍ·ÇÐ»»·½Ê½£¬µ±Ñ¡ÔñÁ¢¼´ÇÐ»»£¬Ö¸¶¨Ê±¼äµÄ²ÎÊý»á±»ºöÂÔ¡£"
 
 YDWEScriptCameraStat="¸Ä±ä¾µÍ·²ÎÊý<AnitarfÖÆ×÷>"
-YDWEScriptCameraStat="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÉèÖÃµ±Ç°¾µÍ·µÄ²ÎÊý ",~ÕûÊý," ÔÚÖ¸¶¨Ê±¼ä ",~ÊµÊý," ÄÚ¸Ä±äÎª ",~ÊµÊý,"£¬ËÙ¶ÈÎª ",~ÊµÊý,"£¬¾µÍ·ÇÐ»»·½Ê½Îª ",~ÕûÊý 
+YDWEScriptCameraStat="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÉèÖÃµ±Ç°¾µÍ·µÄ²ÎÊý ",~ÕûÊý," ÔÚÖ¸¶¨Ê±¼ä ",~ÊµÊý," ÄÚ¸Ä±äÎª ",~ÊµÊý,"£¬ËÙ¶ÈÎª ",~ÊµÊý,"£¬¾µÍ·ÇÐ»»·½Ê½Îª ",~ÕûÊý
 YDWEScriptCameraStatHint="ÔÚÖ¸¶¨Ê±¼äÄÚ½«¸Ä±äµ±Ç°¾µÍ·µÄÄ³¸öÊôÐÔµ½Ä¿±êÖµ£»µ±Ñ¡ÔñÁ¢¼´ÇÐ»»£¬Ö¸¶¨Ê±¼ä¡¢Ä¿±êÖµºÍËÙ¶ÈµÄ²ÎÊý»á±»ºöÂÔ¡£"
 
 YDWEScriptCameraIgnoreTerrain="¾µÍ·ºöÂÔÐüÑÂ<AnitarfÖÆ×÷>"
-YDWEScriptCameraIgnoreTerrain="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÉèÖÃ¾µÍ·ÒÆ¶¯Ê± ",~ÕæÖµ," ÐüÑÂ¸ß¶È" 
+YDWEScriptCameraIgnoreTerrain="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÉèÖÃ¾µÍ·ÒÆ¶¯Ê± ",~ÕæÖµ," ÐüÑÂ¸ß¶È"
 YDWEScriptCameraIgnoreTerrainHint="Èç¹ûÑ¡Ôñ²»ºöÂÔ£¬ÄÇÃ´¾µÍ·ÔÚÒÆ¶¯Ê±£¬»áËæ×ÅµØÐÎÆð·ü¶ø¶¶¶¯£»Ñ¡ÔñºöÂÔ£¬Èç¹û¾µÍ·¸ß¶ÈµÍÓÚµØ±í£¬»á¿´µ½µØ±íÏÂµÄÌì¿Õ¡£"
 
 YDWEScriptActCameraLock="Ëø¶¨¾µÍ·Î»ÖÃ<AnitarfÖÆ×÷>"
-YDWEScriptActCameraLock="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±Ëø¶¨¾µÍ·Î»ÖÃµ½ÑÝÔ± ",~ÕûÊý,"£¬Æ«ÒÆ×ø±êÎª( X ",~Xoffset,"£¬","Y ",~Yoffset,"£¬","Z ",~offset," )£¬¾µÍ·ÔË¶¯ÊÇ·ñÆ½»¬(",~ÕæÖµ,")£¬Ö¸","¶¨","Ê±","¼ä","Îª ",~ÊµÊý," Ãë"  
+YDWEScriptActCameraLock="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±Ëø¶¨¾µÍ·Î»ÖÃµ½ÑÝÔ± ",~ÕûÊý,"£¬Æ«ÒÆ×ø±êÎª( X ",~Xoffset,"£¬","Y ",~Yoffset,"£¬","Z ",~offset," )£¬¾µÍ·ÔË¶¯ÊÇ·ñÆ½»¬(",~ÕæÖµ,")£¬Ö¸","¶¨","Ê±","¼ä","Îª ",~ÊµÊý," Ãë"
 YDWEScriptActCameraLockHint="ÔÚÖ¸¶¨Ê±¼äÄÚ½«¾µÍ·Î»ÖÃËø¶¨ÔÚÄ¿±êµ¥Î»µÄÆ«ÒÆ×ø±êµã´¦£¬Èç¹û¾µÍ·ÔË¶¯Ñ¡Ôñ²»Æ½»¬£¬ÄÇÃ´¾µÍ·½«°´ÏßÐÔÒÆ¶¯¡£"
 
 YDWEScriptActCameraLockReset="ÖØÖÃ¾µÍ·Î»ÖÃ<AnitarfÖÆ×÷>"
-YDWEScriptActCameraLockReset="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÖØÖÃ¾µÍ·Î»ÖÃ£¬¾µÍ·ÔË¶¯ÊÇ·ñÆ½»¬(",~ÕæÖµ,")£¬Ö¸","¶¨","Ê±","¼ä","Îª ",~ÊµÊý," Ãë"  
+YDWEScriptActCameraLockReset="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÖØÖÃ¾µÍ·Î»ÖÃ£¬¾µÍ·ÔË¶¯ÊÇ·ñÆ½»¬(",~ÕæÖµ,")£¬Ö¸","¶¨","Ê±","¼ä","Îª ",~ÊµÊý," Ãë"
 YDWEScriptActCameraLockResetHint="ÔÚÖ¸¶¨Ê±¼äÄÚ½â³ý¾µÍ·Î»ÖÃËø¶¨£¬Èç¹û¾µÍ·ÔË¶¯Ñ¡Ôñ²»Æ½»¬£¬ÄÇÃ´¾µÍ·½«°´ÏßÐÔÒÆ¶¯¡£"
 
 YDWEScriptActCameraFace="Ëø¶¨¾µÍ·½Ç¶È<AnitarfÖÆ×÷>"
-YDWEScriptActCameraFace="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±Ëø¶¨¾µÍ·½Ç¶Èµ½ÑÝÔ± ",~ÕûÊý,"£¬Æ«ÒÆ×ø±êÎª( X ",~Xoffset,"£¬","Y ",~Yoffset,"£¬","Z ",~offset," )£¬¾µÍ·ÔË¶¯ÊÇ·ñÆ½»¬(",~ÕæÖµ,")£¬Ö¸","¶¨","Ê±","¼ä","Îª ",~ÊµÊý," Ãë"  
+YDWEScriptActCameraFace="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±Ëø¶¨¾µÍ·½Ç¶Èµ½ÑÝÔ± ",~ÕûÊý,"£¬Æ«ÒÆ×ø±êÎª( X ",~Xoffset,"£¬","Y ",~Yoffset,"£¬","Z ",~offset," )£¬¾µÍ·ÔË¶¯ÊÇ·ñÆ½»¬(",~ÕæÖµ,")£¬Ö¸","¶¨","Ê±","¼ä","Îª ",~ÊµÊý," Ãë"
 YDWEScriptActCameraFaceHint="ÔÚÖ¸¶¨Ê±¼äÄÚ½«¾µÍ·½Ç¶ÈËø¶¨ÔÚÄ¿±êµ¥Î»µÄÆ«ÒÆ×ø±êµã´¦£¬Èç¹û¾µÍ·ÔË¶¯Ñ¡Ôñ²»Æ½»¬£¬ÄÇÃ´¾µÍ·½«°´ÏßÐÔÒÆ¶¯¡£"
 
 YDWEScriptActCameraFaceReset="ÖØÖÃ¾µÍ·½Ç¶È<AnitarfÖÆ×÷>"
-YDWEScriptActCameraFaceReset="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÖØÖÃ¾µÍ·½Ç¶È£¬¾µÍ·ÔË¶¯ÊÇ·ñÆ½»¬(",~ÕæÖµ,")£¬Ö¸","¶¨","Ê±","¼ä","Îª ",~ÊµÊý," Ãë"  
+YDWEScriptActCameraFaceReset="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÖØÖÃ¾µÍ·½Ç¶È£¬¾µÍ·ÔË¶¯ÊÇ·ñÆ½»¬(",~ÕæÖµ,")£¬Ö¸","¶¨","Ê±","¼ä","Îª ",~ÊµÊý," Ãë"
 YDWEScriptActCameraFaceResetHint="ÔÚÖ¸¶¨Ê±¼äÄÚ½â³ý¾µÍ·½Ç¶ÈËø¶¨£¬Èç¹û¾µÍ·ÔË¶¯Ñ¡Ôñ²»Æ½»¬£¬ÄÇÃ´¾µÍ·½«°´ÏßÐÔÒÆ¶¯¡£"
 
 YDWEScriptFog="ÉèÖÃÃÔÎí<AnitarfÖÆ×÷>"
-YDWEScriptFog="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÉèÖÃÃÔÎí£¬ZÖáÆðÊ¼ ",~ÊµÊý,"£¬ZÖá½áÊø ",~ÊµÊý,"£¬ÑÕÉ«±ÈÀýÎª( ","ºì ",~ºì,"%£¬ÂÌ ",~ÂÌ,"%£¬À¶ ",~À¶,"% )£¬Ö¸¶¨Ê±¼äÎª ",~ÊµÊý," Ãë"  
+YDWEScriptFog="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÉèÖÃÃÔÎí£¬ZÖáÆðÊ¼ ",~ÊµÊý,"£¬ZÖá½áÊø ",~ÊµÊý,"£¬ÑÕÉ«±ÈÀýÎª( ","ºì ",~ºì,"%£¬ÂÌ ",~ÂÌ,"%£¬À¶ ",~À¶,"% )£¬Ö¸¶¨Ê±¼äÎª ",~ÊµÊý," Ãë"
 YDWEScriptFogHint="ÃÔÎíÔÚÖ¸¶¨Ê±¼äÄÚ±ä»¯µ½Ö¸¶¨Öµ¡£"
 
 YDWEScriptFade="ÉèÖÃÂË¾µ<AnitarfÖÆ×÷>"
-YDWEScriptFade="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÉèÖÃÂË¾µ£¬ÑÕÉ«±ÈÀýÎª( ","ºì ",~ºì,"%£¬ÂÌ ",~ÂÌ,"%£¬À¶ ",~À¶,"% )£¬Í¸Ã÷¶ÈÎª ",~ÊµÊý,"%£¬Ö¸¶¨Ê±¼äÎª ",~ÊµÊý," Ãë"   
+YDWEScriptFade="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±ÉèÖÃÂË¾µ£¬ÑÕÉ«±ÈÀýÎª( ","ºì ",~ºì,"%£¬ÂÌ ",~ÂÌ,"%£¬À¶ ",~À¶,"% )£¬Í¸Ã÷¶ÈÎª ",~ÊµÊý,"%£¬Ö¸¶¨Ê±¼äÎª ",~ÊµÊý," Ãë"
 YDWEScriptFadeHint="ÂË¾µÔÚÖ¸¶¨Ê±¼äÄÚ±ä»¯µ½Ö¸¶¨Öµ¡£"
 
 YDWEScriptPlaySound="²¥·ÅÉùÒô<AnitarfÖÆ×÷>"
-YDWEScriptPlaySound="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±²¥·ÅÉùÒô£¬Â·¾¶Îª ",~×Ö·û´®,"£¬²¥·ÅËÙÂÊÎª ",~ÊµÊý,"£¬ÒôÁ¿Îª ",~ÕûÊý   
+YDWEScriptPlaySound="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±²¥·ÅÉùÒô£¬Â·¾¶Îª ",~×Ö·û´®,"£¬²¥·ÅËÙÂÊÎª ",~ÊµÊý,"£¬ÒôÁ¿Îª ",~ÕûÊý
 YDWEScriptPlaySoundHint="²¥·ÅÉùÒô£»ÔÚÂ·¾¶´¦ÌîÐ´ÉùÒôÎÄ¼þµÄÂ·¾¶£»1.0ÎªÕý³£²¥·ÅËÙÂÊ£¬0.5Îª°ëËÙ£¬2.0ÎªÁ½±¶ËÙÂÊ£»ÒôÁ¿ÊÇÉùÒô´óÐ¡£¬È¡ÖµÓÚ0-127Ö®¼ä¡£"
 
 YDWEScriptPointEffect="´´½¨ÌØÐ§(Ö¸¶¨µã)<AnitarfÖÆ×÷>"
-YDWEScriptPointEffect="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±´´½¨ÌØÐ§ÔÚ¿Õ¼ä×ø±ê( X ",~ÊµÊý,"£¬Y ",~ÊµÊý,"£¬Z ",~ÊµÊý," )£¬Â·¾¶Îª ",~×Ö·û´®,"£¬ÌØÐ§´æÔÚÊ±¼äÎª ",~ÊµÊý," Ãë"   
+YDWEScriptPointEffect="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±´´½¨ÌØÐ§ÔÚ¿Õ¼ä×ø±ê( X ",~ÊµÊý,"£¬Y ",~ÊµÊý,"£¬Z ",~ÊµÊý," )£¬Â·¾¶Îª ",~×Ö·û´®,"£¬ÌØÐ§´æÔÚÊ±¼äÎª ",~ÊµÊý," Ãë"
 YDWEScriptPointEffectHint="´´½¨ÌØÐ§ÔÚ¿Õ¼ä×ø±ê´¦£¬¿ÉÒÔÉèÖÃÌØÐ§´æÔÚµÄÊ±¼ä¡£"
 
 YDWEScriptActEffect="´´½¨ÌØÐ§(°ó¶¨µ¥Î»)<AnitarfÖÆ×÷>"
-YDWEScriptActEffect="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±´´½¨ÌØÐ§ÔÚÑÝÔ± ",~ÕûÊý," ÉíÉÏ£¬ÌØÐ§Â·¾¶Îª ",~×Ö·û´®,"£¬¸½¼Ó²¿Î»Îª ",~×Ö·û´®,"£¬ÌØÐ§´æÔÚÊ±¼äÎª ",~ÊµÊý   
+YDWEScriptActEffect="ÔÚÊ±¼äÏß ",~ÊµÊý," ÃëÊ±´´½¨ÌØÐ§ÔÚÑÝÔ± ",~ÕûÊý," ÉíÉÏ£¬ÌØÐ§Â·¾¶Îª ",~×Ö·û´®,"£¬¸½¼Ó²¿Î»Îª ",~×Ö·û´®,"£¬ÌØÐ§´æÔÚÊ±¼äÎª ",~ÊµÊý
 YDWEScriptActEffectHint="´´½¨ÌØÐ§ÔÚµ¥Î»ÉíÉÏ£¬¿ÉÒÔÉèÖÃÌØÐ§¸½¼Ó²¿Î»ºÍ´æÔÚÊ±¼ä¡£"
 
 // Countdown Timer actions
@@ -2246,7 +2246,7 @@ CreateTimerDialogBJHint="¼ÆÊ±Æ÷´°¿Ú²»ÄÜÔÚµØÍ¼³õÊ¼»¯Ê±ÏÔÊ¾."
 
 DestroyTimerDialogBJ="É¾³ý¼ÆÊ±Æ÷´°¿Ú"
 DestroyTimerDialogBJ="É¾³ý ",~¼ÆÊ±Æ÷´°¿Ú
-DestroyTimerDialogBJHint=    
+DestroyTimerDialogBJHint=
 
 TimerDialogDisplay="ÏÔÊ¾/Òþ²Ø ¼ÆÊ±Æ÷´°¿Ú(ËùÓÐÍæ¼Ò) [R]"
 TimerDialogDisplay="ÉèÖÃ ",~¼ÆÊ±Æ÷´°¿Ú," µÄ×´Ì¬Îª",~Show/Hide
@@ -2770,7 +2770,7 @@ ClearMapMusicBJ="Çå¿Õ±³¾°ÒôÀÖÁÐ±í"
 ClearMapMusicBJ="Çå¿Õ±³¾°ÒôÀÖÁÐ±í"
 ClearMapMusicBJHint=
 //PlayMusic
-//PlayMusicEx 
+//PlayMusicEx
 
 PlayMusicBJ="²¥·Å±³¾°ÒôÀÖ"
 PlayMusicBJ="²¥·Å ",~±³¾°ÒôÀÖ
@@ -3137,7 +3137,7 @@ SetItemDropOnDeathBJ="ÉèÖÃ ",~ÎïÆ·," ",~Drop from/Stay with," ÔÚ³ÖÓÐÕßËÀÍöÊ±"
 SetItemDropOnDeathBJHint=
 
 SetItemDropID="ÉèÖÃÖØÉúÉñ·ûµÄ²úÉúµ¥Î»ÀàÐÍ"
-SetItemDropID="ÉèÖÃ ",~ÎïÆ·," ²úÉú ",~µ¥Î»ÀàÐÍ 
+SetItemDropID="ÉèÖÃ ",~ÎïÆ·," ²úÉú ",~µ¥Î»ÀàÐÍ
 SetItemDropIDHint="ÉèÖÃÖØÉúÉñ·û¶ÔÓ¦µÄµ¥Î»ÀàÐÍºó£¬µ±Ó¢ÐÛ³ÔÁËÖØÉúÉñ·û£¬Ôò»á²úÉúÖ¸¶¨ÀàÐÍµÄµ¥Î»¡£"
 
 SetItemPlayerBJ="¸Ä±äÎïÆ·ËùÊôÍæ¼Ò"
@@ -3159,7 +3159,7 @@ EnumItemsInRectBJHint="×é¶¯×÷ÖÐ¿ÉÊ¹ÓÃ'Ñ¡È¡ÎïÆ·'À´»ñÈ¡¶ÔÓ¦µÄÎïÆ·. ÇøÓòÄÚÃ¿¸öÎïÆ·¶
 
 // Itempool actions
 YDWECreateItemPool="´´½¨ÎïÆ·³Ø [YDWE]"
-YDWECreateItemPool="ÐÂ½¨Ò»¸öÎïÆ·³Ø" 
+YDWECreateItemPool="ÐÂ½¨Ò»¸öÎïÆ·³Ø"
 YDWECreateItemPoolHint="ÐÂ½¨Ò»¸öÎïÆ·³Ø£¬¸ÃÎïÆ·³Ø¿ÉÒÔ±»<×îºó´´½¨µÄÎïÆ·³Ø>»ñµÃ¡£"
 
 ItemPoolAddItemType="Ìí¼ÓÎïÆ·ÀàÐÍ [R]"
@@ -3175,7 +3175,7 @@ PlaceRandomItem="´Ó ",~ÎïÆ·³Ø," ÖÐÈÎÒâÑ¡ÔñÒ»¸öÎïÆ·²¢·ÅÖÃµ½( ",~X," , ",~Y," )µã"
 PlaceRandomItemHint=
 
 YDWEPlaceRandomItem="Ñ¡Ôñ·ÅÖÃÎïÆ· [YDWE]"
-YDWEPlaceRandomItem="´Ó ",~ÎïÆ·³Ø," ÖÐÑ¡ÔñÒ»¸öÎïÆ·²¢·ÅÖÃµ½µã( ",~X," , ",~Y," ) " 
+YDWEPlaceRandomItem="´Ó ",~ÎïÆ·³Ø," ÖÐÑ¡ÔñÒ»¸öÎïÆ·²¢·ÅÖÃµ½µã( ",~X," , ",~Y," ) "
 YDWEPlaceRandomItemHint="¸ÃÎïÆ·¿ÉÒÔ±»<×îºó´ÓÎïÆ·³ØÖÐÈ¡³öµÄÎïÆ·>»ñÈ¡¡£"
 
 DestroyItemPool="É¾³ýÎïÆ·³Ø [R]"
@@ -4177,8 +4177,8 @@ SetAllUnitTypeSlotsHint="Ó°ÏìËùÓÐÓµÓÐ'³öÊÛµ¥Î»'¼¼ÄÜµÄµ¥Î»."
 //CheatHint="** This is for debugging purposes only - remove before ship. **"
 
 YDWEMemoryLeakHelperMapIsOpenMemoryLeakHelper="×Ô¶¯ÅÅÐ¹ÏµÍ³-¿ªÆôÏµÍ³×Ô¶¯ÅÅÐ¹¹¦ÄÜ<Mr.MalteÖÆ×÷>"
-YDWEMemoryLeakHelperMapIsOpenMemoryLeakHelper="ÉèÖÃÏµÍ³×Ô¶¯ÅÅÐ¹¹¦ÄÜ¿ªÆô ",~false 
-YDWEMemoryLeakHelperMapIsOpenMemoryLeakHelperHint=YDHIDE_HINT_2 
+YDWEMemoryLeakHelperMapIsOpenMemoryLeakHelper="ÉèÖÃÏµÍ³×Ô¶¯ÅÅÐ¹¹¦ÄÜ¿ªÆô ",~false
+YDWEMemoryLeakHelperMapIsOpenMemoryLeakHelperHint=YDHIDE_HINT_2
 
 YDWEMemoryLeakHelperDisplayLeaks="×Ô¶¯ÅÅÐ¹ÏµÍ³-ÏÔÊ¾Ð¹Â¶<Mr.MalteÖÆ×÷>"
 YDWEMemoryLeakHelperDisplayLeaks="ÏÔÊ¾µã¡¢µ¥Î»×éºÍÌØÐ§Ð¹Â¶µÄÊýÄ¿"
@@ -4226,6 +4226,6 @@ FlushStoredMissionBJHint=YDHIDE_HINT_1
 
 #ifndef DISABLE_YDTRIGGER
 YDWEWaitForLocalVariable="µÈ´ý(¾Ö²¿±äÁ¿×¨ÓÃ)[YDWE]"
-YDWEWaitForLocalVariable="µÈ´ý ",~Time," Ãë(¾Ö²¿±äÁ¿×¨ÓÃ)" 
+YDWEWaitForLocalVariable="µÈ´ý ",~Time," Ãë(¾Ö²¿±äÁ¿×¨ÓÃ)"
 YDWEWaitForLocalVariableHint="Ê¹ÓÃÄæÌìÏµÁÐµÄUI£¬ÎÞÐèÊ¹ÓÃËü¡£"
 #endif

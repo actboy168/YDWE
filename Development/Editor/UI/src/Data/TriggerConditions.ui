@@ -78,7 +78,7 @@ _OperatorCompareOrderCode_Category=TC_CONDITION
 
 OperatorCompareBuffId=1,buffcode,EqualNotEqualOperator,buffcode
 _OperatorCompareBuffId_Defaults=_,OperatorEqualENE,_
-_OperatorCompareBuffId_Category=TC_CONDITION                                  
+_OperatorCompareBuffId_Category=TC_CONDITION
 
 OperatorCompareRegion=0,rect,EqualNotEqualOperator,rect
 _OperatorCompareRegion_Defaults=_,OperatorEqualENE,_

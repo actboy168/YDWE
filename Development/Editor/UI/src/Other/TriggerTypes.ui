@@ -94,15 +94,15 @@ terraintype=1,0,1,WESTRING_TRIGTYPE_terraintype,integer
 ubersplattype=1,0,1,WESTRING_TRIGTYPE_ubersplattype,string
 
 // Trigger Non-Variable Types - Atomic (built-in to the language)
-//removeguardtype=0,0,0,整数,integer 
+//removeguardtype=0,0,0,整数,integer
 //targetattach=0,1,1,身体部位,string
-turnclockwise=0,0,1,单位转向类型,integer 
-headORchest=0,0,1,头部或胸部,integer 
-camerachangetype=0,0,1,镜头切换方式,integer 
-camerastattype=0,0,1,镜头参数类型,integer 
-cameratgnoreterrain=0,0,1,镜头忽略悬崖,boolean 
-attackorattackedevent=0,0,1,事件类型,integer 
-targettype=0,0,1,目标类型,integer 
+turnclockwise=0,0,1,单位转向类型,integer
+headORchest=0,0,1,头部或胸部,integer
+camerachangetype=0,0,1,镜头切换方式,integer
+camerastattype=0,0,1,镜头参数类型,integer
+cameratgnoreterrain=0,0,1,镜头忽略悬崖,boolean
+attackorattackedevent=0,0,1,事件类型,integer
+targettype=0,0,1,目标类型,integer
 
 // Trigger Non-Variable Types - Basic (from common.j)
 unittype=0,0,0,WESTRING_TRIGTYPE_unittype

@@ -15,55 +15,55 @@
 
 //YDWE 修改属性
 bonusTypeC=0,bonusType,3,攻击
-bonusTypeD=0,bonusType,2,防御 
+bonusTypeD=0,bonusType,2,防御
 bonusTypeA=0,bonusType,0,生命上限
 bonusTypeB=0,bonusType,1,魔法上限
 
-//YDWE 修改单位 
-//targetattachA=0,targetattach,"overhead",头顶  
+//YDWE 修改单位
+//targetattachA=0,targetattach,"overhead",头顶
 unitstatechangetypeA=0,unitstatechangetype,0,增加
 unitstatechangetypeB=0,unitstatechangetype,1,减少
 unitstatechangetypeC=0,unitstatechangetype,2,等于
-//removeguardtypeA=0,removeguardtype,1,佣兵死亡 
-//removeguardtypeB=0,removeguardtype,2,主人死亡 
-//removeguardtypeC=0,removeguardtype,3,佣兵或主人死亡 
+//removeguardtypeA=0,removeguardtype,1,佣兵死亡
+//removeguardtypeB=0,removeguardtype,2,主人死亡
+//removeguardtypeC=0,removeguardtype,3,佣兵或主人死亡
 
-turnclockwiseA=0,turnclockwise,1,逆时针 
-turnclockwiseB=0,turnclockwise,-1,顺时针 
-turnclockwiseC=0,turnclockwise,0,最近方向 
+turnclockwiseA=0,turnclockwise,1,逆时针
+turnclockwiseB=0,turnclockwise,-1,顺时针
+turnclockwiseC=0,turnclockwise,0,最近方向
 
-headORchestA=0,headORchest,0,头部 
-headORchestB=0,headORchest,1,胸部 
+headORchestA=0,headORchest,0,头部
+headORchestB=0,headORchest,1,胸部
 
 camerachangetypeA=0,camerachangetype,1,立即
 camerachangetypeB=0,camerachangetype,2,线性
 camerachangetypeC=0,camerachangetype,3,平滑
 camerachangetypeD=0,camerachangetype,4,平滑后停止
 
-camerastattypeA=0,camerastattype,1,X坐标(目标X轴) 
-camerastattypeB=0,camerastattype,2,Y坐标(目标Y轴)  
-camerastattypeC=0,camerastattype,3,Z坐标(Z轴偏移) 
-camerastattypeD=0,camerastattype,4,面向角度(Z轴旋转角度) 
-camerastattypeE=0,camerastattype,5,仰角(X轴旋转角度) 
-camerastattypeF=0,camerastattype,6,倾斜角度(Y轴旋转角度)  
-camerastattypeG=0,camerastattype,7,视野范围(镜头区域) 
-camerastattypeH=0,camerastattype,8,远处裁景(远处截断距离) 
-camerastattypeI=0,camerastattype,9,镜头目标距离(镜头距离) 
+camerastattypeA=0,camerastattype,1,X坐标(目标X轴)
+camerastattypeB=0,camerastattype,2,Y坐标(目标Y轴)
+camerastattypeC=0,camerastattype,3,Z坐标(Z轴偏移)
+camerastattypeD=0,camerastattype,4,面向角度(Z轴旋转角度)
+camerastattypeE=0,camerastattype,5,仰角(X轴旋转角度)
+camerastattypeF=0,camerastattype,6,倾斜角度(Y轴旋转角度)
+camerastattypeG=0,camerastattype,7,视野范围(镜头区域)
+camerastattypeH=0,camerastattype,8,远处裁景(远处截断距离)
+camerastattypeI=0,camerastattype,9,镜头目标距离(镜头距离)
 
 cameratgnoreterrainA=0,cameratgnoreterrain,false,不忽略
-cameratgnoreterrainB=0,cameratgnoreterrain,true,忽略 
+cameratgnoreterrainB=0,cameratgnoreterrain,true,忽略
 
 //攻击或被攻击事件
-attackorattackedeventA=0,attackorattackedevent,0,被攻击 
-attackorattackedeventB=0,attackorattackedevent,1,攻击 
-//技能施放目标 
-targettypeA=0,targettype,1,对敌人 
-targettypeB=0,targettype,2,对点 
+attackorattackedeventA=0,attackorattackedevent,0,被攻击
+attackorattackedeventB=0,attackorattackedevent,1,攻击
+//技能施放目标
+targettypeA=0,targettype,1,对敌人
+targettypeB=0,targettype,2,对点
 targettypeC=0,targettype,3,立即
 targettypeD=0,targettype,4,对自己
 
 #ifndef DISABLE_YDTRIGGER
-//逆天-类型 
+//逆天-类型
 typename01_integer=0,typename,1,整数
 typename02_real=0,typename,2,实数
 typename03_boolean=0,typename,3,真值
@@ -112,7 +112,7 @@ objecttype05_doodadcode=0,objecttype,YDWE_OBJECT_TYPE_DOODAD,WESTRING_OBJTAB_DOO
 objecttype06_destructablecode=0,objecttype,YDWE_OBJECT_TYPE_DESTRUCTABLE,WESTRING_OBJTAB_DESTRUCTABLES
 
 #endif
-           
+
 // Operators
 OperatorAdd=0,ArithmeticOperator,"+",WESTRING_ARITHMETICOPERATOR_ADD
 OperatorSubtract=0,ArithmeticOperator,"-",WESTRING_ARITHMETICOPERATOR_SUBTRACT
@@ -133,7 +133,7 @@ OperatorNotEqualENE=0,EqualNotEqualOperator,"!=",WESTRING_EQUALNOTEQUALOPERATOR_
 bj_forLoopAIndex=0,integer,bj_forLoopAIndex,循环整数A [R]
 bj_forLoopBIndex=0,integer,bj_forLoopBIndex,循环整数B [R]
 
-abileventA=0,abilevent,1,环绕(特效) 
+abileventA=0,abilevent,1,环绕(特效)
 abileventB=0,abilevent,2,跳跃
 abileventC=0,abilevent,3,丝带
 abileventD=0,abilevent,4,钩子(命中)
@@ -142,7 +142,7 @@ abileventF=0,abilevent,6,冲锋
 abileventG=0,abilevent,7,跳劈
 abileventH=0,abilevent,8,月神箭(命中)
 abileventI=0,abilevent,9,月神箭(消失)
-abileventJ=0,abilevent,10,环绕(模板) 
+abileventJ=0,abilevent,10,环绕(模板)
 
 // Reals
 RealQueueDelayQuest=0,real,bj_QUEUE_DELAY_QUEST,WESTRING_QUEUE_DELAY_QUEST
@@ -1437,7 +1437,7 @@ CinematicIndexXED=1,cinematicindex,bj_CINEMATICINDEX_XED,WESTRING_CINEMATICTYPE_
 
 // Trigger Unit-Targeted Unit Orders
 // Common
-UnitOrderAttackUnitnull=0,unitorderutarg,null,无 
+UnitOrderAttackUnitnull=0,unitorderutarg,null,无
 UnitOrderAttackUnit=0,unitorderutarg,`attack`,WESTRING_UNITORDERUTARG_ATTACK
 UnitOrderAttackUnitOnce=0,unitorderutarg,`attackonce`,WESTRING_UNITORDERUTARG_ATTACKONCE
 UnitOrderMoveUnit=0,unitorderutarg,`move`,WESTRING_UNITORDERUTARG_MOVE
@@ -1547,7 +1547,7 @@ UnitOrderNeutralInterAct=0,unitorderutarg,`neutralinteract`,中立商店 - 选择单位 
 
 // Trigger Point-Targeted Unit Orders
 // Common
-UnitOrderAttacknull=0,unitorderptarg,null,无 
+UnitOrderAttacknull=0,unitorderptarg,null,无
 UnitOrderAttack=0,unitorderptarg,`attack`,WESTRING_UNITORDERPTARG_ATTACK
 UnitOrderAttackGround=0,unitorderptarg,`attackground`,WESTRING_UNITORDERPTARG_ATTACKGROUND
 UnitOrderMove=0,unitorderptarg,`move`,WESTRING_UNITORDERPTARG_MOVE
@@ -1633,7 +1633,7 @@ UnitOrderSetRallyItem=0,unitorderitarg,`setrally`,WESTRING_UNITORDERPTARG_SETRAL
 
 // Trigger Immediate / Untargeted Unit Orders
 // Common
-UnitOrderStopnull=0,unitordernotarg,null,无 
+UnitOrderStopnull=0,unitordernotarg,null,无
 UnitOrderStop=0,unitordernotarg,`stop`,WESTRING_UNITORDERNOTARG_STOP
 UnitOrderHoldPosition=0,unitordernotarg,`holdposition`,WESTRING_UNITORDERNOTARG_HOLDPOSITION
 UnitOrderAutoHarvestGold=0,unitordernotarg,`autoharvestgold`,WESTRING_UNITORDERNOTARG_AUTOHARVESTGOLD
@@ -2715,4 +2715,3 @@ CHAT_RECIPIENT_ALL=0,ChatRecipient,0,所有人频道
 CHAT_RECIPIENT_ALLIES=0,ChatRecipient,1,盟友频道
 CHAT_RECIPIENT_OBSERVERS=0,ChatRecipient,2,观看者/裁判频道
 CHAT_RECIPIENT_PRIVATE=0,ChatRecipient,3,私人频道
- 

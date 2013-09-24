@@ -159,29 +159,29 @@ _LockGuardPosition_Category=TC_AI
 
 //YD Ability
 YDWEJumpTimer=0,unit,degree,real,real,real,real
-_YDWEJumpTimer_Defaults=GetTriggerUnit,0,800,2,0.01,300 
-_YDWEJumpTimer_Limits=_,_,0,360,0,_,0,_,0.03,_,0,_ 
+_YDWEJumpTimer_Defaults=GetTriggerUnit,0,800,2,0.01,300
+_YDWEJumpTimer_Limits=_,_,0,360,0,_,0,_,0.03,_,0,_
 _YDWEJumpTimer_Category=TC_YDAB
 
 //function YDWEMeatHook takes unit lTl,location lng,integer uid1,integer uid2,real distance,real dis,real damage,real timeout returns nothing
 YDWEMeatHook=0,unit,location,unitcode,unitcode,real,real,real,real
-_YDWEMeatHook_Defaults=GetTriggerUnit,GetSpellTargetLoc,_,_,2000,35,100,0.03 
-_YDWEMeatHook_Limits=_,_,_,_,_,_,_,_,0,_,0,_,0,_,0.01,_ 
+_YDWEMeatHook_Defaults=GetTriggerUnit,GetSpellTargetLoc,_,_,2000,35,100,0.03
+_YDWEMeatHook_Limits=_,_,_,_,_,_,_,_,0,_,0,_,0,_,0.01,_
 _YDWEMeatHook_Category=TC_YDAB
 
 YDWETimerPatternJumpAttack=0,unit,degree,real,real,real,real,real,string,modelfile
 _YDWETimerPatternJumpAttack_Defaults=GetTriggerUnit,0,800,1,0.03,100,0,"chest",_
-_YDWETimerPatternJumpAttack_Limits=_,_,0,360,0,_,0.01,_,0.01,_,0,_,0,_,_,_,_,_ 
+_YDWETimerPatternJumpAttack_Limits=_,_,0,360,0,_,0.01,_,0.01,_,0,_,0,_,_,_,_,_
 _YDWETimerPatternJumpAttack_Category=TC_YDAB
 
 YDWETimerPatternMoonPriestessArrow=0,unit,degree,real,real,real,integer,abilcode,unitcode,unitorderutarg,string,modelfile
 _YDWETimerPatternMoonPriestessArrow_Defaults=GetTriggerUnit,0,800,1,0.03,1,_,_,UnitOrderAttackUnit,"overhead",_
-_YDWETimerPatternMoonPriestessArrow_Limits=_,_,0,360,0,_,0.01,_,0.01,_,1,_,_,_,_,_,_,_,_,_,_,_ 
+_YDWETimerPatternMoonPriestessArrow_Limits=_,_,0,360,0,_,0.01,_,0.01,_,1,_,_,_,_,_,_,_,_,_,_,_
 _YDWETimerPatternMoonPriestessArrow_Category=TC_YDAB
-                                                                
+
 YDWETimerPatternRushSlide=0,unit,degree,real,real,real,real,boolean,boolean,boolean,string,modelfile,modelfile
 _YDWETimerPatternRushSlide_Defaults=GetTriggerUnit,0,800,1,0.03,0,false,false,false,"origin",_,_
-_YDWETimerPatternRushSlide_Limits=_,_,0,360,0,_,0.01,_,0.01,_,0,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_ 
+_YDWETimerPatternRushSlide_Limits=_,_,0,360,0,_,0.01,_,0.01,_,0,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_
 _YDWETimerPatternRushSlide_Category=TC_YDAB
 
 YDWEAroundSystem=0,unit,unit,real,real,real,real,real
@@ -192,12 +192,12 @@ _YDWEAroundSystem_Category=TC_YDAB
 //YD System
 
 YDWENewItemsFormula=0,itemcode,integer,itemcode,integer,itemcode,integer,itemcode,integer,itemcode,integer,itemcode,integer,itemcode
-_YDWENewItemsFormula_Defaults=ches,0,ches,0,ches,0,ches,0,ches,0,ches,0,bzbe 
-_YDWENewItemsFormula_Limits=_,_,0,_,_,_,0,_,_,_,0,_,_,_,0,_,_,_,0,_,_,_,0,_,_,_ 
+_YDWENewItemsFormula_Defaults=ches,0,ches,0,ches,0,ches,0,ches,0,ches,0,bzbe
+_YDWENewItemsFormula_Limits=_,_,0,_,_,_,0,_,_,_,0,_,_,_,0,_,_,_,0,_,_,_,0,_,_,_
 _YDWENewItemsFormula_Category=TC_YDST
 
 YDWE_TP_PauseTimerPeriodic=0,integer
-_YDWE_TP_PauseTimerPeriodic_Defaults=_ 
+_YDWE_TP_PauseTimerPeriodic_Defaults=_
 _YDWE_TP_PauseTimerPeriodic_Category=TC_YDST
 
 YDWE_TP_SetTimeInterval=0,integer,real
@@ -206,12 +206,12 @@ _YDWE_TP_SetTimeInterval_Limits=_,_,0.01,_
 _YDWE_TP_SetTimeInterval_Category=TC_YDST
 
 YDWEAttackWaveTimer=0,player,integer,unitcode,location,degree,location,real
-_YDWEAttackWaveTimer_Defaults=Player00,1,hfoo,_,RealUnitFacing,_,2 
+_YDWEAttackWaveTimer_Defaults=Player00,1,hfoo,_,RealUnitFacing,_,2
 _YDWEAttackWaveTimer_Limits=_,_,1,_,0,_,0,_,0,360,_,_,0.01,_
 _YDWEAttackWaveTimer_Category=TC_YDST
 
 YDWERemoveAttackWaveByUnitID=0,unitcode,location,real
-_YDWERemoveAttackWaveByUnitID_Defaults=hfoo,_,2 
+_YDWERemoveAttackWaveByUnitID_Defaults=hfoo,_,2
 _YDWERemoveAttackWaveByUnitID_Limits=_,_,_,_,0.01,_
 _YDWERemoveAttackWaveByUnitID_Category=TC_YDST
 
@@ -219,24 +219,24 @@ YDWERemoveAttackWaveByTimer=0,timer
 _YDWERemoveAttackWaveByTimer_Defaults=YDWERemoveAttackWaveReturnTimer
 _YDWERemoveAttackWaveByTimer_Category=TC_YDST
 
-//MulItemSlot 
+//MulItemSlot
 YDWEDoubleItemSlotByAbility=0,unit,abilcode,unitcode,integer
-_YDWEDoubleItemSlotByAbility_Defaults=GetTriggerUnit,_,_,3  
+_YDWEDoubleItemSlotByAbility_Defaults=GetTriggerUnit,_,_,3
 _YDWEDoubleItemSlotByAbility_Limits=_,_,_,_,_,_,1,10
 _YDWEDoubleItemSlotByAbility_Category=TC_YDST
 
 YDWEDoubleItemSlotByItem=0,unit,itemcode,unitcode,integer
-_YDWEDoubleItemSlotByItem_Defaults=GetTriggerUnit,_,_,3 
+_YDWEDoubleItemSlotByItem_Defaults=GetTriggerUnit,_,_,3
 _YDWEDoubleItemSlotByItem_Limits=_,_,_,_,_,_,1,10
 _YDWEDoubleItemSlotByItem_Category=TC_YDST
 
 YDWEGeneralBounsSystemUnitSetBonus=0,unit,bonusType,unitstatechangetype,integer
 _YDWEGeneralBounsSystemUnitSetBonus_Defaults=GetTriggerUnit,bonusTypeA,unitstatechangetypeA,300
 _YDWEGeneralBounsSystemUnitSetBonus_Category=TC_YDST
-        
+
 //YD AI
 YDWESetGuard=0,unit,unit,real,real,real,real,integer
-_YDWESetGuard_Defaults=_,_,2,800,1200,1500,75 
+_YDWESetGuard_Defaults=_,_,2,800,1200,1500,75
 _YDWESetGuard_Limits=_,_,_,_,0.01,_,0,_,0,_,0,_,0,100
 _YDWESetGuard_Category=TC_YDAI
 
@@ -251,7 +251,7 @@ _YDWEAIRecordAbility_Limits=_,_,_,_,_,_,_,_,_,_,_,_
 _YDWEAIRecordAbility_Category=TC_YDAI
 
 YDWEAIRecordLearn_sequence=0,unitcode,string,string,string,string,string
-_YDWEAIRecordLearn_sequence_Defaults=Hamg,^1^3^5^,^2^4^7^,^8^9^10^,^6^,null 
+_YDWEAIRecordLearn_sequence_Defaults=Hamg,^1^3^5^,^2^4^7^,^8^9^10^,^6^,null
 _YDWEAIRecordLearn_sequence_Limits=_,_,_,_,_,_,_,_,_,_,_,_
 _YDWEAIRecordLearn_sequence_Category=TC_YDAI
 
@@ -259,7 +259,7 @@ YDWEHeroLearnSkillAI=0,unit,integer
 _YDWEHeroLearnSkillAI_Defaults=GetTriggerUnit,1
 _YDWEHeroLearnSkillAI_Limits=_,_,1,_
 _YDWEHeroLearnSkillAI_Category=TC_YDAI
-                                              
+
 YDWEHeroMaxSkillAI=0,unit
 _YDWEHeroMaxSkillAI_Defaults=GetTriggerUnit
 _YDWEHeroMaxSkillAI_Limits=_,_
@@ -847,7 +847,7 @@ _YDWESaveQuestItemByInteger_Category=TC_YDLD
 //_YDWEMusicFountain_Limits=_,_,0,_,0,_,0,_,0,_,0,_,_,_
 //_YDWEMusicFountain_Category=TC_YDSE
 YDWECreateEwsp=0,unit,unitcode,integer,real,real,real,real
-_YDWECreateEwsp_Defaults=GetTriggerUnit,hfoo,1,300,20,0.01,1 
+_YDWECreateEwsp_Defaults=GetTriggerUnit,hfoo,1,300,20,0.01,1
 _YDWECreateEwsp_Limits=_,_,_,_,1,_,0,_,0,_,0.01,_,_,_
 _YDWECreateEwsp_Category=TC_YDSE
 
@@ -1045,7 +1045,7 @@ _YDWEScriptActEffect_Defaults=2,1,null,null,0
 _YDWEScriptActEffect_Limits=0,_,1,_,_,_,_,_,0,_
 _YDWEScriptActEffect_Category=TC_SCRIPTSET
 
-// Trigger actions 
+// Trigger actions
 DisableTrigger=0,trigger
 _DisableTrigger_Defaults=GetTriggeringTrigger
 _DisableTrigger_Category=TC_TRIGGER
@@ -1127,7 +1127,7 @@ _CreateNUnitsAtLocFacingLocBJ_Category=TC_UNIT
 
 // CreateUnitAtLoc=0,player,unitcode,location,real
 //_ CreateUnitAtLoc_Defaults=Player00,hfoo,_,0
-//_ CreateUnitAtLoc_Category=TC_UNIT    
+//_ CreateUnitAtLoc_Category=TC_UNIT
 
 CreateCorpseLocBJ=0,unitcode,player,location
 _CreateCorpseLocBJ_Defaults=hfoo,Player00,_
@@ -1520,7 +1520,7 @@ YDWECreateUnitPool=0,nothing
 _YDWECreateUnitPool_Defaults=
 _YDWECreateUnitPool_Category=TC_UNITPOOL
 
-// Unitpool actions         
+// Unitpool actions
 UnitPoolAddUnitType=0,unitpool,unitcode,real
 _UnitPoolAddUnitType_Defaults=_,hfoo,1
 _UnitPoolAddUnitType_Category=TC_UNITPOOL
@@ -1875,7 +1875,7 @@ _AddUnitAnimationPropertiesBJ_Category=TC_ANIMATION
 SetUnitLookAt=0,unit,unitfacingbone,unit,real,real,real
 _SetUnitLookAt_Defaults=_,UnitFacingBoneHead,_,0,0,90
 _SetUnitLookAt_Category=TC_ANIMATION
- 
+
 ResetUnitLookAt=0,unit
 _ResetUnitLookAt_Defaults=_
 _ResetUnitLookAt_Category=TC_ANIMATION
@@ -2296,7 +2296,7 @@ _SetBlightRadiusLocBJ_Category=TC_ENVIRONMENT
 
 
 // Countdown Timer actions
-//TimerStart                    
+//TimerStart
 StartTimerBJ=0,timer,periodicoption,real
 _StartTimerBJ_Defaults=_,PeriodicOptionOneTime,30
 _StartTimerBJ_Limits=_,_,_,_,0,_
@@ -2325,7 +2325,7 @@ _DestroyTimer_Category=TC_TIMER
 
 YDWETimerDestroyTimer=0,real,timer
 _YDWETimerDestroyTimer_Defaults=2,GetLastCreatedTimerBJ
-_YDWETimerDestroyTimer_Limits=0,_,_,_ 
+_YDWETimerDestroyTimer_Limits=0,_,_,_
 _YDWETimerDestroyTimer_Category=TC_TIMER
 
 CreateTimerDialogBJ=0,timer,StringExt
@@ -3140,7 +3140,7 @@ _ClearMapMusicBJ_Category=TC_SOUND
 _ClearMapMusicBJ_ScriptName=ClearMapMusic
 
 //PlayMusic
-//PlayMusicEx 
+//PlayMusicEx
 
 PlayMusicBJ=0,musicfile
 _PlayMusicBJ_Defaults=_
@@ -3587,7 +3587,7 @@ _ItemPoolAddItemType_Category=TC_ITEMPOOL
 
 //ItemPoolAddItemType=0,itempool,itemcode,real
 //_ItemPoolAddItemType_Defaults=_,texp,1
-//_ItemPoolAddItemType_Category=TC_ITEMPOOL    
+//_ItemPoolAddItemType_Category=TC_ITEMPOOL
 
 ItemPoolRemoveItemType=0,itempool,itemcode
 _ItemPoolRemoveItemType_Defaults=_,texp
@@ -4114,7 +4114,7 @@ _SavePlayerHandle_Category=TC_HASHTABLE
 // SaveWidgetHandleBJ=0,widget,integer,integer,hashtable
 // _SaveWidgetHandleBJ_Defaults=_,_,_,GetLastCreatedHashtableBJ
 // _SaveWidgetHandleBJ_Category=TC_HASHTABLE
-// 
+//
 // SaveWidgetHandle=0,hashtable,integer,integer,wigdet
 // _SaveWidgetHandle_Defaults=GetLastCreatedHashtableBJ,_,_,_
 // _SaveWidgetHandle_Category=TC_HASHTABLE
@@ -4550,7 +4550,7 @@ _SetAllUnitTypeSlots_Category=TC_NEUTRALBUILDING
 
 //MemoryLeakHelper
 YDWEMemoryLeakHelperMapIsOpenMemoryLeakHelper=0,boolean
-_YDWEMemoryLeakHelperMapIsOpenMemoryLeakHelper_Defaults=false 
+_YDWEMemoryLeakHelperMapIsOpenMemoryLeakHelper_Defaults=false
 _YDWEMemoryLeakHelperMapIsOpenMemoryLeakHelper_Category=TC_YDHIDE
 
 YDWEMemoryLeakHelperDisplayLeaks=0,nothing

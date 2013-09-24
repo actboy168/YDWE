@@ -140,26 +140,26 @@ TriggerRegisterItemDeathEvent=~物品," 被破坏"
 TriggerRegisterItemDeathEventHint=
 
 //YD Event Trigger
-YDWESyStemAnyUnitDamagedRegistTrigger="任意单位伤害事件" 
-YDWESyStemAnyUnitDamagedRegistTrigger="任意单位 接受伤害" 
+YDWESyStemAnyUnitDamagedRegistTrigger="任意单位伤害事件"
+YDWESyStemAnyUnitDamagedRegistTrigger="任意单位 接受伤害"
 YDWESyStemAnyUnitDamagedRegistTriggerHint="若触发器动作里有对单位造成伤害动作，会引起死循环，最好加入条件判断或在伤害前关闭当前触发器。不推荐新手使用。"
 
-YDWESyStemItemUnmovableRegistTrigger="任意单位移动物品事件" 
-YDWESyStemItemUnmovableRegistTrigger="任意单位 移动物品栏里的物品" 
+YDWESyStemItemUnmovableRegistTrigger="任意单位移动物品事件"
+YDWESyStemItemUnmovableRegistTrigger="任意单位 移动物品栏里的物品"
 YDWESyStemItemUnmovableRegistTriggerHint="若触发器动作里有移动物品的动作，会引起死循环，最好将移动物品的动作放到别的触发器内或移动物品前关闭当前触发器。"
 
-YDWESyStemItemCombineRegistTrigger="任意单位合成物品事件" 
-YDWESyStemItemCombineRegistTrigger="任意单位 合成一件物品" 
+YDWESyStemItemCombineRegistTrigger="任意单位合成物品事件"
+YDWESyStemItemCombineRegistTrigger="任意单位 合成一件物品"
 YDWESyStemItemCombineRegistTriggerHint="用来响应物品合成系统，当有物品被合成时，可以用‘最后合成的物品’捕捉到；合成该物品的单位则可用‘触发单位’捕捉到"
 
-YDWESyStemAbilityCastingOverRegistTrigger="任意单位施放特殊技能结束" 
-YDWESyStemAbilityCastingOverRegistTrigger="任意单位施放特殊技能 ",~特殊技能," 结束" 
+YDWESyStemAbilityCastingOverRegistTrigger="任意单位施放特殊技能结束"
+YDWESyStemAbilityCastingOverRegistTrigger="任意单位施放特殊技能 ",~特殊技能," 结束"
 YDWESyStemAbilityCastingOverRegistTriggerHint="用来响应跳跃、环绕、钩子等YDWE提供的特殊技能，可用‘最后结束施放特殊技能的单位’来捕捉施放技能单位"
 
 // Unit events
 TriggerRegisterUnitEvent="指定单位事件""
 TriggerRegisterUnitEvent=~指定单位," ",~事件
-TriggerRegisterUnitEventHint= 
+TriggerRegisterUnitEventHint=
 
 TriggerRegisterPlayerUnitEventSimple="玩家单位事件"
 TriggerRegisterPlayerUnitEventSimple=~Player," 的单位 ",~Event

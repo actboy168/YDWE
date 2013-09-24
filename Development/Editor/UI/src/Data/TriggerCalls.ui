@@ -53,7 +53,7 @@ YDWEPlatformIsInPlatform=0,1,boolean
 _YDWEPlatformIsInPlatform_Category=TC_YDFC
 
 //YDWEPlatformIsInRoom=0,1,boolean
-//_YDWEPlatformIsInRoom_Category=TC_YDFC 
+//_YDWEPlatformIsInRoom_Category=TC_YDFC
 
 YDWEIsItemSwitch=0,1,boolean,unit
 _YDWEIsItemSwitch_Defaults=GetTriggerUnit
@@ -599,7 +599,7 @@ _YDWEGetUnitFoodUsed_Category=TC_YDFC
 YDWEGetUnitFoodMade=0,1,integer,unit
 _YDWEGetUnitFoodMade_Defaults=GetTriggerUnit
 _YDWEGetUnitFoodMade_Category=TC_YDFC
-                                  
+
 YDWEGetIntegerByInteger=0,1,integer,integer,integer
 _YDWEGetIntegerByInteger_Category=TC_YDLD
 
@@ -890,7 +890,7 @@ LoadInteger=0,1,integer,hashtable,integer,integer
 _LoadInteger_Defaults=GetLastCreatedHashtableBJ,_,_
 _LoadInteger_Category=TC_HASHTABLE
 
-// returns real     
+// returns real
 OperatorReal=0,1,real,real,ArithmeticOperator,real
 _OperatorReal_Defaults=1,OperatorAdd,1
 _OperatorReal_Category=TC_ARITHMETIC
@@ -1526,10 +1526,10 @@ _YDWEGetLocalVariableStringArray_Limits=_,_,0,_
 _YDWEGetLocalVariableStringArray_Category=TC_YDLC
 
 YDWEGetStringByInteger=0,1,string,integer,integer
-_YDWEGetStringByInteger_Category=TC_YDLD 
+_YDWEGetStringByInteger_Category=TC_YDLD
 
 YDWEGetStringByString=0,1,string,string,string
-_YDWEGetStringByString_Category=TC_YDLD 
+_YDWEGetStringByString_Category=TC_YDLD
 
 R2SW=0,1,string,real,integer,integer
 _R2SW_Defaults=GetUnitStateSwap,1,2
@@ -2041,10 +2041,10 @@ _YDWEGetLocalVariableUnitIDArray_Category=TC_YDLC
 
 YDWEGetUnitIDByInteger=0,1,unitcode,integer,integer
 _YDWEGetUnitIDByInteger_Limits=0,_,0,_
-_YDWEGetUnitIDByInteger_Category=TC_YDLD 
+_YDWEGetUnitIDByInteger_Category=TC_YDLD
 
 YDWEGetUnitIDByString=0,1,unitcode,string,string
-_YDWEGetUnitIDByString_Category=TC_YDLD 
+_YDWEGetUnitIDByString_Category=TC_YDLD
 
 ChooseRandomCreepBJ=0,1,unitcode,integer
 _ChooseRandomCreepBJ_Defaults=1
@@ -2652,10 +2652,10 @@ _YDWEGetLocalVariableEffectArray_Limits=_,_,0,_
 _YDWEGetLocalVariableEffectArray_Category=TC_YDLC
 
 YDWEGetEffectByInteger=0,1,effect,integer,integer
-_YDWEGetEffectByInteger_Category=TC_YDLD 
+_YDWEGetEffectByInteger_Category=TC_YDLD
 
 YDWEGetEffectByString=0,1,effect,string,string
-_YDWEGetEffectByString_Category=TC_YDLD 
+_YDWEGetEffectByString_Category=TC_YDLD
 
 // returns lightning
 //AddLightning
@@ -2667,7 +2667,7 @@ _AddLightning_Category=TC_LIGHTNING
 AddLightningEx=0,1,lightning,lightningtype,allowdontoption,real,real,real,real,real,real
 _AddLightningEx_Defaults=LightningTypeCLPB,AllowDontDont,0,0,0,0,0,0
 _AddLightningEx_Category=TC_LIGHTNING
-    
+
 YDWEGetLightningByInteger=0,1,lightning,integer,integer
 _YDWEGetLightningByInteger_Limits=0,_,0,_
 _YDWEGetLightningByInteger_Category=TC_YDLD
@@ -2818,7 +2818,7 @@ _YDWEGetDialogByInteger_Limits=0,_,0,_
 _YDWEGetDialogByInteger_Category=TC_YDLD
 
 YDWEGetDialogByString=0,1,dialog,string,string
-_YDWEGetDialogByString_Category=TC_YDLD 
+_YDWEGetDialogByString_Category=TC_YDLD
 
 // returns button
 DialogAddButton=0,1,button,dialog,StringExt,hotkeyint
@@ -2915,7 +2915,7 @@ _YDWERemoveAttackWaveReturnTimer_Category=TC_NOTHING
 _            _Defaults=_
 _            _Category=TC_NOTHING
 
-// returns timerdialog   
+// returns timerdialog
 GetLastCreatedTimerDialogBJ=0,1,timerdialog
 _GetLastCreatedTimerDialogBJ_Defaults=
 _GetLastCreatedTimerDialogBJ_Category=TC_LAST
