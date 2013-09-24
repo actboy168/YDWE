@@ -897,7 +897,7 @@ _OperatorReal_Category=TC_ARITHMETIC
 
    =0,1,real,scriptcode
 _   _Defaults=_
-_   _Category=TC_NOTHING        
+_   _Category=TC_NOTHING
 
 GetLocationX=0,1,real,location
 _GetLocationX_Category=TC_NOTHING
@@ -1486,7 +1486,7 @@ _    _Category=TC_NOTHING
 
 GetObjectName=0,1,string,scriptcode
 _GetObjectName_Defaults=_
-_GetObjectName_Category=TC_NOTHING     
+_GetObjectName_Category=TC_NOTHING
 
 YDWEId2S=0,1,string,integer
 _YDWEId2S_Defaults=spsh
@@ -2155,7 +2155,7 @@ _GetLastCreatedItem_Category=TC_LAST
 
 GetLastRemovedItem=0,1,item
 _GetLastRemovedItem_Defaults=
-_GetLastRemovedItem_Category=TC_LAST 
+_GetLastRemovedItem_Category=TC_LAST
 
 GetLastMovedItemInItemSlot=0,1,item
 _GetLastMovedItemInItemSlot_Category=TC_LAST
@@ -2166,7 +2166,7 @@ _YDWEGetLastCombinedItem_Category=TC_LAST
 UnitDropItem=0,1,item,unit,itemcode
 _UnitDropItem_Defaults=GetTriggerUnit,texp
 _UnitDropItem_Limits=_,_,_,_
-_UnitDropItem_Category=TC_NOTHING 
+_UnitDropItem_Category=TC_NOTHING
 
 YDWEGetLocalVariableItem=0,1,item,string
 _YDWEGetLocalVariableItem_Category=TC_YDLC
@@ -2392,7 +2392,7 @@ _GetLastCreatedGroup_Category=TC_LAST
 
            =0,1,group,scriptcode
 _           _Defaults=_
-_           _Category=TC_NOTHING   
+_           _Category=TC_NOTHING
 
  CreateNUnitsAtLoc=0,1,group,integer,unitcode,player,location,degree
 _ CreateNUnitsAtLoc_Defaults=1,hfoo,Player00,_,RealUnitFacing
@@ -2677,7 +2677,7 @@ _YDWEGetLightningByString_Category=TC_YDLD
 
 GetLastCreatedLightningBJ=1,0,lightning
 _GetLastCreatedLightningBJ_Defaults=
-_GetLastCreatedLightningBJ_Category=TC_LAST      
+_GetLastCreatedLightningBJ_Category=TC_LAST
 
 // returns image
 CreateImage=1,0,image,string,real,real,real,real,real,real,real,real,real,imagetype
