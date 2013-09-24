@@ -110,6 +110,7 @@ ID_EVENT_UNIT_LOADED=0,eventid,EVENT_UNIT_LOADED,"(088)单位事件 - 被运输机装载"
 ID_EVENT_WIDGET_DEATH=0,eventid,EVENT_WIDGET_DEATH,"(089)widget事件 - 死亡"
 ID_EVENT_DIALOG_BUTTON_CLICK=0,eventid,EVENT_DIALOG_BUTTON_CLICK,"(090)对话框事件 - 对话框按钮被点击"
 ID_EVENT_DIALOG_CLICK=0,eventid,EVENT_DIALOG_CLICK,"(091)对话框事件 - 对话框被点击"
+ID_EVENT_PLAYER_CHAT2=0,eventid,ConvertPlayerEvent(96),"(096)玩家事件 - 输入聊天消息"
 
 //===================================================
 // Frozen Throne Expansion Events
