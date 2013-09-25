@@ -81,7 +81,7 @@ TriggerRegisterTrackableTrackEventHint=
 // Player events
 TriggerRegisterPlayerChatEvent="输入聊天信息"
 TriggerRegisterPlayerChatEvent=~玩家," 输入 ",~Text," ,信息过滤方式 ",~Match Type
-TriggerRegisterPlayerChatEventHint="通过 '事件回应 - 输入/匹配 的聊天信息' 操作相应的输入/匹配的聊天信息. 通过 '事件回应 - 触发玩家' 操作输入聊天信息的玩家."
+TriggerRegisterPlayerChatEventHint="事件ID是(096)"
 
 TriggerRegisterPlayerEventEndCinematic="按下Esc键"
 TriggerRegisterPlayerEventEndCinematic=~玩家," 按下Esc键(跳过电影)"
