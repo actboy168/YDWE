@@ -231,6 +231,8 @@ namespace NYDWE {
 	uintptr_t pgTrueWeDialogProc;
 	INT_PTR CALLBACK DetourWeDialogProc(HWND dialogHandle, UINT message, WPARAM wParam, LPARAM lParam)
 	{
+		INT_PTR ret = aero::std_call<INT_PTR>(pgTrueWeDialogProc, dialogHandle, message, wParam, lParam);
+
 		if (message == WM_SETTEXT)
 		{
 			if (lParam)
@@ -263,7 +265,7 @@ namespace NYDWE {
 			}
 		}
 
-		return aero::std_call<INT_PTR>(pgTrueWeDialogProc, dialogHandle, message, wParam, lParam);
+		return ret;
 	}
 
 	uintptr_t pgTrueCreateDialogIndirectParamA;
