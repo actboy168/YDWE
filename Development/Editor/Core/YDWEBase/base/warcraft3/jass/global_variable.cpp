@@ -1,4 +1,5 @@
 #include <base/warcraft3/jass/global_variable.h>
+#include <cassert>
 
 namespace base { namespace warcraft3 { namespace jass {
 
