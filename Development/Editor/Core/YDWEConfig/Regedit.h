@@ -38,6 +38,9 @@ private:
 		bool remove(winstl::reg_key_w const& root);
 		bool set(winstl::reg_key_w const& root, Classes const& c);
 
+		bool has_owl(winstl::reg_key_w& root) const;
+		bool set_owl(winstl::reg_key_w& root);
+
 	private:
 		std::wstring ext_;
 	};
@@ -57,6 +60,7 @@ private:
 	bool remove_classes();
 
 	winstl::reg_key_w root_;
+	winstl::reg_key_w root2_;
 	FileAssociation::Classes classes_;
 	FileAssociation::Ext ext_w3x_;
 	FileAssociation::Ext ext_w3m_;

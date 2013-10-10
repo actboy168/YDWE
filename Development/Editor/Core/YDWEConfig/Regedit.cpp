@@ -130,25 +130,46 @@ bool FileAssociation::Ext::set(winstl::reg_key_w const& root, Classes const& c)
 	return false;
 }
 
+bool FileAssociation::Ext::has_owl(winstl::reg_key_w& root) const
+{
+	try {
+		return root.open_sub_key(ext_.c_str()).has_value(L"Application");
+	} catch (winstl::registry_exception const& ) { }
+
+	return false;
+}
+
+bool FileAssociation::Ext::set_owl(winstl::reg_key_w& root)
+{
+	try {
+		return root.open_sub_key(ext_.c_str()).delete_value(L"Application");
+	} catch (winstl::registry_exception const& ) { }
+
+	return false;
+}
 
 FileAssociation::FileAssociation(fs::path const& ydwe_path)
 	: root_(HKEY_CURRENT_USER, L"Software\\Classes")
+	, root2_(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts")
 	, classes_(L"YDWEMap")
 	, ext_w3x_(L".w3x")
 	, ext_w3m_(L".w3m")
 	, icon_path_(ydwe_path.parent_path() / L"bin" / L"logo.ico")
 	, command_(L"\"" + ydwe_path.wstring() + L"\" -loadfile \"%1\"")
-{
-}
+{ }
 
 bool FileAssociation::has_w3x()
 {
-	return classes_.has(root_, command_) && ext_w3x_.has(root_, classes_);
+	return classes_.has(root_, command_) 
+		&& ext_w3x_.has(root_, classes_)
+		&& ext_w3x_.has_owl(root2_);
 }
 
 bool FileAssociation::has_w3m()
 {
-	return classes_.has(root_, command_) && ext_w3m_.has(root_, classes_);
+	return classes_.has(root_, command_) 
+		&& ext_w3m_.has(root_, classes_)
+		&& ext_w3m_.has_owl(root2_);
 }
 
 bool FileAssociation::remove_w3x()
@@ -175,12 +196,12 @@ void FileAssociation::remove()
 
 bool FileAssociation::set_w3x()
 {
-	return ext_w3x_.set(root_, classes_);
+	return ext_w3x_.set(root_, classes_) && ext_w3x_.set_owl(root2_);
 }
 
 bool FileAssociation::set_w3m()
 {
-	return ext_w3m_.set(root_, classes_);
+	return ext_w3m_.set(root_, classes_) && ext_w3m_.set_owl(root2_);
 }
 
 bool FileAssociation::set_classes()
