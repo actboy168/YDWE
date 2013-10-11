@@ -242,26 +242,23 @@ function YDWEReplaceUnitBJNull takes unit whichUnit, integer newUnitId, integer 
 endfunction
 	
 function YDWEEnumDestructablesInCircleBJFilterNull takes nothing returns boolean
-    local real dx = GetDestructableX(GetFilterDestructable())
-    local real dy = GetDestructableY(GetFilterDestructable())
-
-    set dx = dx - GetLocationX(bj_enumDestructableCenter)
-    set dy = dy - GetLocationY(bj_enumDestructableCenter)
-	
-    return SquareRoot(dx * dx + dy * dy) <= bj_enumDestructableRadius
+    local real dx = GetDestructableX(GetFilterDestructable()) - GetLocationX(bj_enumDestructableCenter)
+    local real dy = GetDestructableY(GetFilterDestructable()) - GetLocationY(bj_enumDestructableCenter)
+    return dx * dx + dy * dy <= bj_enumDestructableRadius * bj_enumDestructableRadius
 endfunction
 
 function YDWEEnumDestructablesInCircleBJNull takes real radius, location loc, code actionFunc returns nothing
     local rect r
-
-    if (radius >= 0) then
+    local real centerX = GetLocationX(loc)
+    local real centerY = GetLocationY(loc)
+    if radius >= 0 then
         set bj_enumDestructableCenter = loc
         set bj_enumDestructableRadius = radius
-        set r = GetRectFromCircleBJ(loc, radius)
+        set r = Rect(centerX - radius, centerY - radius, centerX + radius, centerY + radius)
         call EnumDestructablesInRect(r, Filter(function YDWEEnumDestructablesInCircleBJFilterNull), actionFunc)
         call RemoveRect(r)
+    	set r = null
     endif
-    set r = null
 endfunction
 
 function YDWENudgeUnitsInRectEnumNull takes nothing returns nothing
