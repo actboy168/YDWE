@@ -12,7 +12,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	bool is_gaming()
 	{
-		return get_war3_searcher().is_gaming();
+		return 0 != get_jass_virtual_machine();
 	}
 
 	bool jass_push(jassbind* lj, jass::variable_type vt, uint32_t value)
