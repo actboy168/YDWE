@@ -2356,7 +2356,7 @@ EnumDestructablesInRectAllMultipleHint="组动作中可使用'选取的可破坏物'来获取对应
 
 EnumDestructablesInCircleBJMultiple="选取指定点范围内可破坏物做动作(多个动作)"
 EnumDestructablesInCircleBJMultiple="选取 ",~Radius," 范围以 ",~指定点," 为中心的区域内所有可破坏物做动作(多个动作)"
-EnumDestructablesInCircleBJMultipleHint="组动作中可使用'选取的可破坏物'来获取对应的可破坏物. 每个可破坏物都会运行一次动作(包括死亡和隐藏的). 等待不能在组动作中运行. 也是矩形区域,不建议使用该功能."
+EnumDestructablesInCircleBJMultipleHint="组动作中可使用'选取的可破坏物'来获取对应的可破坏物. 每个可破坏物都会运行一次动作(包括死亡和隐藏的). 等待不能在组动作中运行."
 
 EnumDestructablesInRectAll="选取矩形区域内可破坏物做动作"
 EnumDestructablesInRectAll="选取 ",~矩形区域," 内所有可破坏物 ",~做动作
@@ -2364,7 +2364,7 @@ EnumDestructablesInRectAllHint="组动作中可使用'选取的可破坏物'来获取对应的可破坏
 
 EnumDestructablesInCircleBJ="选取指定点范围内可破坏物做动作"
 EnumDestructablesInCircleBJ="选取 ",~Radius," 范围以 ",~指定点,"为中心的区域内所有可破坏物 ",~做动作
-EnumDestructablesInCircleBJHint="组动作中可使用'选取的可破坏物'来获取对应的可破坏物. 每个可破坏物都会运行一次动作(包括死亡和隐藏的). 等待不能在组动作中运行. 也是矩形区域,不建议使用该功能."
+EnumDestructablesInCircleBJHint="组动作中可使用'选取的可破坏物'来获取对应的可破坏物. 每个可破坏物都会运行一次动作(包括死亡和隐藏的). 等待不能在组动作中运行."
 
 
 // Leaderboard actions
