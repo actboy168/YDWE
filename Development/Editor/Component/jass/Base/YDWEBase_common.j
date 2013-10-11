@@ -248,6 +248,7 @@ function InitializeYD takes nothing returns nothing
 #else
 #  ifndef YDWE_GAMECACHE_INITVAR
 #  define YDWE_GAMECACHE_INITVAR
+     call FlushGameCache(InitGameCache("YDWE.wav"))
      set YDGC=InitGameCache("YDWE.wav") 
 #  endif 
 #endif
