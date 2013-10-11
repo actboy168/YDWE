@@ -16,11 +16,35 @@ namespace fs = boost::filesystem;
 
 namespace NLuaAPI { namespace NFileSystemAdditional {
 
-	static void LuaCopyFile(const fs::path &fromPath, const fs::path &toPath, bool overwritten)
+	void LuaCopyFile(const fs::path &fromPath, const fs::path &toPath, bool overwritten)
 	{
 		fs::copy_file(fromPath, toPath, overwritten ? fs::copy_option::overwrite_if_exists : fs::copy_option::fail_if_exists);
 	}
 
+	void LuaPermissions(lua_State *pState, fs::path const& p, const luabind::object& prms_obj)
+	{
+		switch (luabind::type(prms_obj))
+		{
+		case LUA_TNUMBER:
+			{
+				boost::optional<uint32_t> prms_opt = luabind::object_cast_nothrow<uint32_t>(prms_obj);
+				if (prms_opt)
+				{
+					fs::permissions(p, static_cast<fs::perms>(prms_opt.get()));
+				}
+			}
+			break;
+		case LUA_TNIL:
+			{
+				fs::perms prms = fs::status(p).permissions();
+				lua_pushnumber(pState, static_cast<uint32_t>(prms));
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	
 	class directory_iterator
 		: public boost::iterator_facade<directory_iterator, fs::path, boost::single_pass_traversal_tag, fs::path const&>
 	{
@@ -159,7 +183,8 @@ int luaopen_filesystem(lua_State *pState)
 			.def("make_preferred", &fs::path::make_preferred, return_reference_to(_1))
 			.def("remove_filename", &fs::path::remove_filename, return_reference_to(_1))
 			.def("replace_extension", &fs::path::replace_extension, return_reference_to(_1))
-			.def("list_directory",   &NLuaAPI::NFileSystemAdditional::LuaDirectoryFactory, return_stl_iterator)
+			.def("permissions", NLuaAPI::NFileSystemAdditional::LuaPermissions)
+			.def("list_directory", &NLuaAPI::NFileSystemAdditional::LuaDirectoryFactory, return_stl_iterator)
 			.def(const_self / const_self)
 			.def(other<const std::string &>() / const_self)
 			.def(const_self / other<const std::string &>())
@@ -187,7 +212,6 @@ int luaopen_filesystem(lua_State *pState)
 		def("remove_all", (boost::uintmax_t (*)(const fs::path &))&fs::remove_all),
 		def("rename", (void (*)(const fs::path &, const fs::path &))&fs::rename),
 		def("equivalent", (bool (*)(const fs::path &, const fs::path &))&fs::equivalent),
-		def("copy_file", NLuaAPI::NFileSystemAdditional::LuaCopyFile),
 		def("set_current_path", (void (*)(const fs::path &))&fs::current_path),
 		def("current_path", (fs::path (*)())&fs::current_path),
 		def("initial_path", (fs::path (*)())&fs::initial_path),
@@ -195,6 +219,7 @@ int luaopen_filesystem(lua_State *pState)
 		def("basename", (std::string (*)(const fs::path &))&fs::basename),
 		def("system_complete", (fs::path (*)(const fs::path &))&fs::system_complete),
 		def("canonical", (fs::path (*)(const fs::path &, const fs::path &))&fs::canonical),
+		def("copy_file", NLuaAPI::NFileSystemAdditional::LuaCopyFile),
 		def("get", (fs::path (*)(uint32_t))&base::path::get)
 	];
 

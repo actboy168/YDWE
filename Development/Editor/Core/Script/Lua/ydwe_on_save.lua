@@ -107,7 +107,6 @@ local function compile_map(map_path, option)
 	return result
 end
 
-
 -- 本函数当保存地图时调用
 -- event_data - 事件参数。table类型，包含了以下成员
 --	map_path - 保存的地图路径，字符串类型
@@ -178,4 +177,34 @@ event.register(event.EVENT_SAVE_MAP, false, function (event_data)
 	log.debug("********************* on save end *********************")
 
 	if result then return 0 else return -1 end
+end)
+
+-- 本函数当保存地图时调用
+-- event_data - 事件参数。table类型，包含了以下成员
+--	map_path - 保存的地图路径，字符串类型
+event.register(event.EVENT_PRE_SAVE_MAP, false, function (event_data)
+	log.debug("********************* on pre_save start *********************")
+	local map_path = fs.path(event_data.map_path)
+	log.trace("Saving " .. map_path:string())
+	
+	-- 如果地图文件带有只读属性，则先询问是否去掉只读属性
+	-- 128 == 0200 S_IWUSR
+	if 0 == bit32.band(map_path:permissions(nil), 128) then		
+		if gui.message_dialog(
+			  nil
+			, string.format(_("Whether to remove the read-only attribute from \"%s\"?"), map_path:string())
+			, _("YDWE")
+			, bit32.bor(gui.MB_ICONQUESTION, gui.MB_YESNO)
+			) == gui.IDYES 
+		then
+			log.trace("Remove the read-only attribute.")
+			-- 0x1000 == fs.add_perms
+			map_path:permissions(bit32.bor(0x1000, 128))
+		else
+			log.trace("Don't the remove read-only attribute.")
+		end
+	end
+		
+	log.debug("********************* on pre_save end *********************")
+	return 0
 end)

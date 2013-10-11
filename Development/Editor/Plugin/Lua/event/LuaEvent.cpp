@@ -83,11 +83,27 @@ namespace NYDWE {
 	HANDLE WINAPI DetourWeCreateFileA(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
 	{
 		std::string fileName(lpFileName);
-		if (boost::iends_with(fileName, "war3map.j"))
+		if (boost::iends_with(fileName, "war3mapMap.blp"))
 		{
 			LOG4CXX_TRACE(NYDWE::gInjectLogger, "WE is about to compile maps.");
 			gIsInCompileProcess = true;
 		}
+		else if (gIsInCompileProcess && (
+			boost::iends_with(fileName, ".w3x") ||
+			boost::iends_with(fileName, ".w3m")))
+		{
+			try {
+				boost::filesystem::path p(fileName);
+				p = p.parent_path().remove_filename() / p.filename();
+
+				CYDWEEventData eventData;
+				eventData.setEventData("map_path", p.string());
+				event_array[EVENT_PRE_SAVE_MAP](eventData);
+			}
+			catch (...) {				
+			}
+		}
+
 
 		//LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("WE CreateFile: %1%") % lpFileName);
 		return aero::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
