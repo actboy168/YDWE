@@ -162,14 +162,14 @@ bool FileAssociation::has_w3x()
 {
 	return classes_.has(root_, command_) 
 		&& ext_w3x_.has(root_, classes_)
-		&& ext_w3x_.has_owl(root2_);
+		&& (!ext_w3x_.has_owl(root2_));
 }
 
 bool FileAssociation::has_w3m()
 {
 	return classes_.has(root_, command_) 
 		&& ext_w3m_.has(root_, classes_)
-		&& ext_w3m_.has_owl(root2_);
+		&& (!ext_w3m_.has_owl(root2_));
 }
 
 bool FileAssociation::remove_w3x()
