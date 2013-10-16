@@ -291,6 +291,8 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			if (is_valid())
 			{
+				if (value < 0.f) value = 0.f;
+
 				uintptr_t rf = running_info();
 				if (!rf)
 				{
