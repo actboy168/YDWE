@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <iostream>
-#include <ydwe/path/self.h>
+#include <base/path/self.h>
 #include "timer.h"
 #include <boost/timer/timer.hpp>
 
@@ -24,7 +24,7 @@ void benchmark_2();
 
 int main()
 {
-	boost::filesystem::current_path(ydwe::path::self().remove_filename());
+	boost::filesystem::current_path(base::path::self().remove_filename());
 
 	time_it(benchmark_1);
 	time_it(benchmark_2);

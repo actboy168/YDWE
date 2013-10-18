@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-#include <ydwe/exception/exception.h>
+#include <base/exception/exception.h>
 #include <slk/ObjectManager.hpp>
 #include <slk/utility/sequence.h>
 #include "InterfaceStormLib.h"
@@ -17,11 +17,11 @@ void benchmark_2()
 		slk::ObjectManager mgr(storm);
 		if (!storm.open_archive("units.mpq", true))
 		{
-			throw ydwe::exception("Can't open units.mpq.");
+			throw base::exception("Can't open units.mpq.");
 		}
 		if (!storm.open_archive("DotA v6.77.w3x", true))
 		{
-			throw ydwe::exception("Can't open DotA v6.77.w3x.");
+			throw base::exception("Can't open DotA v6.77.w3x.");
 		}
 
 		mgr.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(slk::ROBJECT_TYPE::ABILITY);

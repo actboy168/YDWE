@@ -2,6 +2,7 @@
 
 #include <deque>
 #include <vector>
+#define __STORMLIB_SELF__
 #define __STORMLIB_NO_AUTO_LINKING__
 #include <StormLib.h>
 #include <slk/InterfaceStorm.hpp>
