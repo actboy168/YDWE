@@ -9,4 +9,5 @@
 *.sdf
 *.opensdf
 *.ipch
+*.sln.cache
 Thumbs.db
