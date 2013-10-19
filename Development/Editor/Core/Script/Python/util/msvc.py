@@ -31,7 +31,7 @@ def setup_env():
                         key_env[k].append(p.strip().strip('"').strip())
                         
     for k, l in key_env.items():
-        for v in l:
+        for v in reversed(l):
             if v != '':
                 try:
                     os.environ[k] = v + os.pathsep + os.environ[k]
