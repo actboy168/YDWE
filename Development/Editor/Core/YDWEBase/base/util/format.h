@@ -2,6 +2,7 @@
 
 #include <base/config.h>
 #include <cassert>
+#include <cstdint>
 #include <iostream>
 #include <sstream>
 #include <type_traits>
