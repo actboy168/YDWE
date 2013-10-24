@@ -355,6 +355,16 @@ namespace base { namespace win {
 		return 0;
 	}
 
+	bool process::wait(uint32_t timeout)
+	{
+		if (statue_ == PROCESS_STATUE_RUNNING)
+		{
+			return process_helper::wait(pi_.hProcess, timeout);
+		}
+
+		return false;
+	}
+	
 	bool process::is_running()
 	{
 		if (statue_ == PROCESS_STATUE_RUNNING)

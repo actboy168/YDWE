@@ -26,6 +26,7 @@ namespace base { namespace win {
 		bool     is_running();
 		bool     kill(uint32_t timeout);
 		uint32_t wait();
+		bool     wait(uint32_t timeout);
 		bool     close();
 		bool     release(PROCESS_INFORMATION* pi_ptr);
 
