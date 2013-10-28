@@ -3,21 +3,8 @@
 
 #include "YDWEBase.j"
 
-library_once YDWEMath requires YDWEBase
-    
-    globals
-        location yd_loc = Location(0.0, 0.0)
-    endglobals
+library_once YDWETimerPattern initializer Init requires YDWEBase
 
-    struct YDVector3
-        real x
-        real y
-        real z
-    endstruct
-
-endlibrary
-
-library_once YDWETimerPattern initializer Init requires YDWEMath, YDWEBase
 //***************************************************
 //* ∑ - Matrix 万能模板函数  
 //*-------------------- 
@@ -31,9 +18,15 @@ library_once YDWETimerPattern initializer Init requires YDWEMath, YDWEBase
     globals
         private boolexpr Bexpr = null
         private rect Area = null
-        
         private Thread tmp_data
+        private location yd_loc = Location(0.0, 0.0)
     endglobals
+
+    private struct YDVector3
+        real x
+        real y
+        real z
+    endstruct
 
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     //                                       Timer Pattern Union                                              //
@@ -194,7 +187,7 @@ library_once YDWETimerPattern initializer Init requires YDWEMath, YDWEBase
         endmethod
     endstruct
     
-    struct Parabola extends Thread
+    private struct Parabola extends Thread
     
         static method move takes nothing returns nothing
             local thistype this = Thread[GetExpiredTimer()]
@@ -207,9 +200,7 @@ library_once YDWETimerPattern initializer Init requires YDWEMath, YDWEBase
                 set .z = GetUnitZ(.obj) + .ac * .step * 2 + .ac * .dist + .bc //.pos.z + .ac * .step * 2 + .ac * .dist + .bc
                 set .step = .step + .dist
                 //debug call BJDebugMsg("|cff00ff00[YDWE] Timer Pattern : |r high = ." + R2S(GetLocationZ(yd_loc)))
-                if YDWECoordinateX(.pos.x) != .pos.x /*
-              */or YDWECoordinateY(.pos.y) != .pos.y /*
-              */or .pos.z <= GetLocationZ(yd_loc) then
+                if YDWECoordinateX(.pos.x) != .pos.x or YDWECoordinateY(.pos.y) != .pos.y or .pos.z <= GetLocationZ(yd_loc) then
                     set .switch = 0
                 endif
                 if .amount > 0.0 then
@@ -280,7 +271,7 @@ library_once YDWETimerPattern initializer Init requires YDWEMath, YDWEBase
     endstruct
     
     // uniform speed
-    struct Linear extends Thread
+    private struct Linear extends Thread
     
         static method move takes nothing returns nothing
             local thistype this = Thread[GetExpiredTimer()]
@@ -345,7 +336,7 @@ library_once YDWETimerPattern initializer Init requires YDWEMath, YDWEBase
     endstruct
     
     // Uniform deceleration
-    struct Deceleration extends Thread
+    private struct Deceleration extends Thread
     
         static method move takes nothing returns nothing
             local thistype this = Thread[GetExpiredTimer()]
