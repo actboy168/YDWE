@@ -25,7 +25,7 @@ def copy_boost_dll(name, configuration):
         filename = 'boost_' + name + '-vc100-mt-' + get_boost_version() + '.dll'
     else:
         filename = 'boost_' + name + '-vc100-mt-gd-' + get_boost_version() + '.dll'
-    fs.copy_file(path['OpenSource'] / 'Boost' / 'stage' / 'lib' / 'Win32' / filename, path['ResultCore'] / filename)
+    fs.copy_file(path['OpenSource'] / 'Boost' / 'stage' / 'lib' / filename, path['ResultCore'] / filename)
     
 def copy_lib_dll(name, configuration, version = 'Current'):
     fs.copy_directory(path['OpenSource'] / name / version / 'bin' / 'Win32' / configuration, path['ResultCore'], ['.dll'])
