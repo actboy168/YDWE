@@ -1,19 +1,30 @@
 # -*- coding: utf8 -*-
 
+import re
 import sys
 import util.path
 import util.filesystem as fs
 
 path = util.path.path
-    
+
+def get_boost_version():
+    f = open(str(path['OpenSource'] / 'Boost' / 'boost' / 'version.hpp'))
+    try:
+        m = re.search(r'\#define[\s]+BOOST_LIB_VERSION[\s]+\"([0-9_]+)\"', f.read())
+        if m:
+            return m.group(1)
+    finally:
+        f.close()
+    raise
+
 def copy_crt_dll():
     fs.copy_directory(path['ThirdParty'] / 'Microsoft' / 'CRT' / 'Win32' / 'Microsoft.VC100.CRT', path['ResultCore'], ['.dll'])
 
 def copy_boost_dll(name, configuration):
     if configuration == 'Release':
-        filename = 'boost_' + name + '-vc100-mt-1_53.dll'
+        filename = 'boost_' + name + '-vc100-mt-' + get_boost_version() + '.dll'
     else:
-        filename = 'boost_' + name + '-vc100-mt-gd-1_53.dll'
+        filename = 'boost_' + name + '-vc100-mt-gd-' + get_boost_version() + '.dll'
     fs.copy_file(path['OpenSource'] / 'Boost' / 'stage' / 'lib' / 'Win32' / filename, path['ResultCore'] / filename)
     
 def copy_lib_dll(name, configuration, version = 'Current'):
