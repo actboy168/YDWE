@@ -14,7 +14,7 @@ def copy_boost_dll(name, configuration):
         filename = 'boost_' + name + '-vc100-mt-1_53.dll'
     else:
         filename = 'boost_' + name + '-vc100-mt-gd-1_53.dll'
-    fs.copy_file(path['OpenSource'] / 'Boost' / '1.53' / 'stage' / 'lib' / 'Win32' / filename, path['ResultCore'] / filename)
+    fs.copy_file(path['OpenSource'] / 'Boost' / 'stage' / 'lib' / 'Win32' / filename, path['ResultCore'] / filename)
     
 def copy_lib_dll(name, configuration, version = 'Current'):
     fs.copy_directory(path['OpenSource'] / name / version / 'bin' / 'Win32' / configuration, path['ResultCore'], ['.dll'])
@@ -27,8 +27,8 @@ def copy_log_script():
     fs.copy_file(path['BuildRoot'] / 'Editor' / 'Core' / 'Script' / 'YDLogger.cfg', path['Result'] / 'logs' / 'YDLogger.cfg')
 
 def copy_boost_preprocessor():
-    fs.copy_directory(path['OpenSource'] / 'Boost' / '1.53' / 'boost' / 'preprocessor', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor')
-    fs.copy_file(path['OpenSource'] / 'Boost' / '1.53' / 'boost' / 'preprocessor.hpp', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor.hpp')
+    fs.copy_directory(path['OpenSource'] / 'Boost' / 'boost' / 'preprocessor', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor')
+    fs.copy_file(path['OpenSource'] / 'Boost' / 'boost' / 'preprocessor.hpp', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor.hpp')
     
 def copy_component():
     fs.copy_directory(path['BuildRoot'] / 'Editor' / 'Component', path['Result'])
