@@ -1,0 +1,2 @@
+[alias]
+  sbp = submodule foreach git pull origin master
