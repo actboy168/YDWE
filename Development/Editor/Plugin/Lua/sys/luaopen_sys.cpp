@@ -510,7 +510,7 @@ int luaopen_sys(lua_State *pState)
 			.def("inject",     &base::win::process::inject)
 			.def("redirect",   &NLuaAPI::NSys::LuaProcessRedirect)
 			.def("create",     &NLuaAPI::NSys::LuaProcessCreate)
-			.def("wait",       &base::win::process::wait)
+			.def("wait",       (uint32_t (base::win::process::*)())&base::win::process::wait)
 			.def("close",      &base::win::process::close)
 		,
 
