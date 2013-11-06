@@ -2,12 +2,8 @@
 
 #include <base/config.h>
 
-namespace base { namespace util {
-	class _BASE_API console
-	{
-	public:
-		static void enable();
-		static bool disable_close_button();
-		static void pause();
-	};
+namespace base { namespace console {
+	_BASE_API void enable();
+	_BASE_API bool disable_close_button();
+	_BASE_API void pause();
 }}

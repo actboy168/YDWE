@@ -2,9 +2,9 @@
 #include <windows.h>
 #include <cstdio>
 
-namespace base { namespace util {
+namespace base { namespace console {
 
-	void console::enable()
+	void enable()
 	{
 		FILE* new_file;
 		::AllocConsole(); 
@@ -13,7 +13,7 @@ namespace base { namespace util {
 		freopen_s(&new_file, "CONOUT$", "w", stderr);
 	}
 
-	bool console::disable_close_button()
+	bool disable_close_button()
 	{
 		wchar_t buffer[MAX_PATH];
 		
@@ -32,7 +32,7 @@ namespace base { namespace util {
 		return !!::RemoveMenu(hmenu, SC_CLOSE, MF_BYCOMMAND);
 	}
 
-	void console::pause()
+	void pause()
 	{
 		system("pause");
 	}
