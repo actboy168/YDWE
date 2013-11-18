@@ -9,7 +9,7 @@
 
 namespace base
 {
-	struct thread_data_base
+	struct _BASE_API thread_data_base
 	{
 		long     count;
 		HANDLE   thread_handle;

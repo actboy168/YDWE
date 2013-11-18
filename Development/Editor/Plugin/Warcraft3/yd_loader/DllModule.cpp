@@ -1,6 +1,7 @@
 #include "DllModule.h"
 #include "ParseCommandLine.h"
 #include "FullWindowedMode.h"
+#include <boost/bind.hpp>
 #include <aero/function/fp_call.hpp>
 #include <base/file/stream.h>
 #include <base/hook/iat.h>
@@ -13,6 +14,7 @@
 #include <slk/reader/IniReader.cpp>
 #include <slk/utility/sequence.cpp>
 #include <slk/reader/CommonReader.cpp>
+#include <map>
 
 uintptr_t RealLoadLibraryA  = 0;
 uintptr_t RealGameLoadLibraryA  = 0;
@@ -22,6 +24,7 @@ uintptr_t RealSFileOpenArchive = (uintptr_t)::GetProcAddress(LoadLibraryW(L"Stor
 FullWindowedMode fullWindowedMode;
 
 const char *PluginName();
+void LockingMouse();
 
 HWND WINAPI FakeCreateWindowExA(
 	DWORD dwExStyle,
@@ -63,24 +66,6 @@ HWND WINAPI FakeCreateWindowExA(
 
 	return hWnd;
 }
-
-void DaemonThreadProc()
-{
-	try
-	{
-		for (;;)
-		{
-			boost::this_thread::sleep(boost::posix_time::milliseconds(10));
-
-			void LockingMouse();
-			LockingMouse();
-		}
-	}
-	catch (boost::thread_interrupted const&) 
-	{
-	}
-}
-
 
 HMODULE __stdcall FakeGameLoadLibraryA(LPCSTR lpFilePath)
 {
@@ -135,32 +120,34 @@ DllModule::DllModule()
 	, IsLockingMouse(false)
 	, IsFixedRatioWindowed(false)
 	, hGameDll(NULL)
+	, daemon_thread_()
+	, daemon_thread_exit_(false)
 { }
+
+
 
 void DllModule::ThreadStart()
 {
-	try
-	{
-		daemon_thread_.reset(new boost::thread(DaemonThreadProc));
-	}
-	catch (boost::thread_resource_error const&) 
-	{
-	}
+	daemon_thread_.reset(new base::thread(boost::bind(&DllModule::ThreadFunc, this)));
 }
 
 void DllModule::ThreadStop()
 {
-	try
-	{
+	try {
 		if (daemon_thread_)
 		{
-			daemon_thread_->interrupt();
-			daemon_thread_->timed_join(boost::posix_time::milliseconds(1000));
+			daemon_thread_exit_ = true;
+			daemon_thread_->join();
 			daemon_thread_.reset();
 		}
-	}
-	catch (...)
+	} catch (...) { }
+}
+
+void DllModule::ThreadFunc()
+{
+	for (;!daemon_thread_exit_; base::this_thread::sleep_for(10))
 	{
+		LockingMouse();
 	}
 }
 
