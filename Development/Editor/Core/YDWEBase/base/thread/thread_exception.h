@@ -6,6 +6,8 @@
 
 namespace base
 {
+#pragma warning(push)
+#pragma warning(disable: 4275)
 	class _BASE_API thread_exception
 		: public std::system_error
 	{
@@ -27,4 +29,5 @@ namespace base
 		thread_resource_error(int ev, const std::string& what_arg);
 		~thread_resource_error() throw();
 	};
+#pragma warning(pop)
 }

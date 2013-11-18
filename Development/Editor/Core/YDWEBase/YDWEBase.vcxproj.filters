@@ -62,6 +62,9 @@
     <Filter Include="base\warcraft3\jass">
       <UniqueIdentifier>{96a12d03-e58b-4f43-8c9b-5226c011e69f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\thread">
+      <UniqueIdentifier>{9ca77287-10cc-4b02-bc03-1ed154a1e30e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -215,6 +218,15 @@
     <ClCompile Include="base\warcraft3\directory.cpp">
       <Filter>base\warcraft3</Filter>
     </ClCompile>
+    <ClCompile Include="base\win\get_tick_count.cpp">
+      <Filter>base\win</Filter>
+    </ClCompile>
+    <ClCompile Include="base\thread\thread.cpp">
+      <Filter>base\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="base\thread\thread_exception.cpp">
+      <Filter>base\thread</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -222,9 +234,6 @@
     </ClInclude>
     <ClInclude Include="base\util\unicode.h">
       <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\config.h">
-      <Filter>ydwe</Filter>
     </ClInclude>
     <ClInclude Include="base\path\filesystem_helper.h">
       <Filter>base\path</Filter>
@@ -447,6 +456,16 @@
     </ClInclude>
     <ClInclude Include="base\warcraft3\directory.h">
       <Filter>base\warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="base\config.h" />
+    <ClInclude Include="base\win\get_tick_count.h">
+      <Filter>base\win</Filter>
+    </ClInclude>
+    <ClInclude Include="base\thread\thread.h">
+      <Filter>base\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="base\thread\thread_exception.h">
+      <Filter>base\thread</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

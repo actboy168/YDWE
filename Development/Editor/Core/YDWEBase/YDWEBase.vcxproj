@@ -112,6 +112,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="base\thread\thread.cpp" />
+    <ClCompile Include="base\thread\thread_exception.cpp" />
+    <ClCompile Include="base\win\get_tick_count.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="base\exception\detail\windows_category.cpp" />
     <ClCompile Include="base\exception\exception.cpp" />
@@ -206,6 +209,8 @@
     <ClInclude Include="base\path\filesystem_helper.h" />
     <ClInclude Include="base\path\self.h" />
     <ClInclude Include="base\path\service.h" />
+    <ClInclude Include="base\thread\thread.h" />
+    <ClInclude Include="base\thread\thread_exception.h" />
     <ClInclude Include="base\util\buffer.h" />
     <ClInclude Include="base\util\console.h" />
     <ClInclude Include="base\util\detail\ansi_codecvt.h" />
@@ -241,6 +246,7 @@
     <ClInclude Include="base\win\env_variable.h" />
     <ClInclude Include="base\win\event.h" />
     <ClInclude Include="base\win\file_version.h" />
+    <ClInclude Include="base\win\get_tick_count.h" />
     <ClInclude Include="base\win\pe_reader.h" />
     <ClInclude Include="base\win\process.h" />
     <ClInclude Include="base\win\scoped_handle.h" />

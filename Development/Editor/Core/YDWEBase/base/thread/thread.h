@@ -83,6 +83,7 @@ namespace base
 			return new thread_data<F>(f);
 		}
 
+#pragma warning(suppress:4251)
 		boost::intrusive_ptr<thread_data_base> thread_info;
 	};
 }
