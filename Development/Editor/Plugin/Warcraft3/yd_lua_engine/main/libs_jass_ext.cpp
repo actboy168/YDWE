@@ -43,8 +43,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int jass_enable_console(lua_State* /*L*/)
 	{
-		util::console::enable();
-		util::console::disable_close_button();
+		console::enable();
+		console::disable_close_button();
 
 		return 0;
 	}
