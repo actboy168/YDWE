@@ -22,7 +22,11 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		{
 			register_game_reset_event([this]()
 			{
-				state_ = nullptr;
+				if (state_)
+				{
+					state_->close();
+					state_ = nullptr;
+				}
 			});
 		}
 
