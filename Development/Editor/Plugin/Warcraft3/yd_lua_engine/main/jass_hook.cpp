@@ -25,20 +25,22 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		friend 	int jass_hook_real_function(lua_State* L);
 	public:
 		jass_hook_helper()
-			: real_func_(0)
+			: lj_(nullptr)
+			, real_func_(0)
 			, nf_(nullptr)
 			, name_()
 			, lua_fake_func_()
 			, code_base_(0)
 		{ }
 
-		bool install(const jass::func_value* nf, const char* name, const callback& lua_fake_func)
+		bool install(jassbind* lj, const jass::func_value* nf, const char* name, const callback& lua_fake_func)
 		{
 			if (real_func_)
 			{
 				uninstall();
 			}
 
+			lj_ = lj;
 			nf_ = nf;
 			name_ = name;
 			lua_fake_func_ = lua_fake_func;
@@ -101,10 +103,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		uintptr_t fake_func(const uintptr_t* paramlist)
 		{
-			jassbind* lj = (jassbind*)instance();
 			size_t param_size = nf_->get_param().size();
 
-			if (!lua_fake_func_.call_pre())
+			if (!lua_fake_func_.call_pre(lj_))
 			{
 				return 0;
 			}
@@ -113,18 +114,18 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			{
 				if (nf_->get_param()[i] == jass::TYPE_REAL)
 				{
-					lj->push_real_precise(paramlist[i]? *(uintptr_t*)paramlist[i]: 0);
+					lj_->push_real_precise(paramlist[i]? *(uintptr_t*)paramlist[i]: 0);
 				}
 				else
 				{
-					jass_push(lj, nf_->get_param()[i], paramlist[i]);
+					jass_push(lj_, nf_->get_param()[i], paramlist[i]);
 				}
 			}
 
-			lj->pushunsigned((uint32_t)(uintptr_t)this);
-			lj->pushcclosure((lua::state::cfunction)jass_hook_real_function, 1);
+			lj_->pushunsigned((uint32_t)(uintptr_t)this);
+			lj_->pushcclosure((lua::state::cfunction)jass_hook_real_function, 1);
 
-			return lua_fake_func_.call(param_size+1, nf_->get_return());
+			return lua_fake_func_.call(lj_, param_size+1, nf_->get_return());
 		} 
 
 	private:
@@ -133,6 +134,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 #pragma warning(suppress:4201 4324)
 		} ;
 
+		jassbind*               lj_;           
 		uintptr_t               real_func_;
 		const jass::func_value* nf_;
 		std::string             name_;
@@ -150,7 +152,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	std::map<std::string, std::unique_ptr<jass_hook_helper>> g_hook_info_mapping;
 
-	int install_jass_hook(jassbind*, const jass::func_value* nf, const char* name, const callback& fake_func)
+	int install_jass_hook(jassbind* lj, const jass::func_value* nf, const char* name, const callback& fake_func)
 	{
 		auto it = g_hook_info_mapping.find(name);
 		if (it == g_hook_info_mapping.end())
@@ -158,7 +160,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			g_hook_info_mapping[name].reset(new jass_hook_helper());
 		}
 
-		g_hook_info_mapping[name]->install(nf, name, fake_func);
+		g_hook_info_mapping[name]->install(lj, nf, name, fake_func);
 		return 0;
 	}
 

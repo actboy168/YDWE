@@ -12,17 +12,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int open_lua_engine(lua::state* ls)
 	{
-		if (!instance())
-		{
-			instance() = ls;
-			open_jass(ls);
-			open_japi(ls);
-			open_jass_ext(ls);
-			open_slk(ls);
-			jreal_initialize((lua_State*)ls);
-			insert_searchers_table(ls);
-			fix_math(ls);
-		}
+		open_jass(ls);
+		open_japi(ls);
+		open_jass_ext(ls);
+		open_slk(ls);
+		jreal_initialize((lua_State*)ls);
+		insert_searchers_table(ls);
+		fix_math(ls);
 		return 0;
 	}
 }}}

@@ -7,12 +7,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	uintptr_t jass_read(jassbind* lj, jass::variable_type vt, int idx);
 
-	lua::state*& instance()
-	{
-		static lua::state* s_state = nullptr;
-		return s_state;
-	}
-
 	int safe_pcall (lua_State *pState, int nargs, int nresults)
 	{
 		int error = lua_pcall(pState, nargs, nresults, 0);
@@ -34,9 +28,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return error;
 	}
 
-	void do_buffer(const char* name, const char* buffer, size_t size)
+	void do_buffer(lua::state* ls, const char* name, const char* buffer, size_t size)
 	{
-		lua::state*& ls = instance();
 		if (luaL_loadbuffer(ls->self(), buffer, size, name) != LUA_OK)
 		{
 			printf("%s\n", ls->tostring(-1));
@@ -62,10 +55,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		: ref_(ref)
 	{ }
 
-	bool callback::call_pre() const
+	bool callback::call_pre(lua::state* ls) const
 	{
-		lua::state*& ls = instance();
-
 		ls->rawgeti(LUA_REGISTRYINDEX, ref_);
 		if (!ls->isfunction(-1))
 		{
@@ -77,10 +68,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return true;
 	}
 
-	uintptr_t callback::call(size_t param_size, jass::variable_type result_vt) const
+	uintptr_t callback::call(lua::state* ls, size_t param_size, jass::variable_type result_vt) const
 	{
-		lua::state*& ls = instance();
-
 		if (safe_pcall(ls->self(), param_size, (result_vt != jass::TYPE_NOTHING) ? 1: 0) != LUA_OK)
 		{
 			return 0;
@@ -96,20 +85,20 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return ret;
 	}
 
-	uint32_t __fastcall jass_callback(uint32_t param)
+	uint32_t __fastcall jass_callback(uint32_t ls, uint32_t param)
 	{
 		callback that(param);
-		if (!that.call_pre())
+
+		if (!that.call_pre((lua::state*)ls))
 		{
 			return 0;
-		}
- 
-		return that.call(0, jass::TYPE_BOOLEAN);
+		} 
+		return that.call((lua::state*)ls, 0, jass::TYPE_BOOLEAN);
 	}
 
 	uint32_t cfunction_to_code(lua::state* ls, uint32_t index)
 	{
 		ls->pushvalue(index);
-		return jass::trampoline_create(jass_callback, (uintptr_t)luaL_ref(ls->self(), LUA_REGISTRYINDEX));
+		return jass::trampoline_create(jass_callback, (uintptr_t)ls, (uintptr_t)luaL_ref(ls->self(), LUA_REGISTRYINDEX));
 	}
 }}}

@@ -13,6 +13,7 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 
+
 	int open_libs(lua::state* ls)
 	{
 		luaL_requiref(ls->self(), "_G",            luaopen_base, 1);      ls->pop(1);
@@ -31,7 +32,14 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		lua::state* ls = (lua::state*)luaL_newstate();
 		open_libs(ls);
 		clear_searchers_table(ls);
+		open_lua_engine(ls);
 		return ls;
+	}
+
+	lua::state* jass_state()
+	{
+		static lua::state* s_state = initialize_lua();
+		return s_state;
 	}
 
 	uintptr_t RealCheat = 0;
@@ -48,10 +56,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		std::string cheat_s = cheat;
 		if (cheat_s.compare(0, 4, "run ") == 0)
 		{
-			if (!instance())
-			{
-				open_lua_engine(initialize_lua());
-			}
+			lua::state* ls = jass_state();
 
 			cheat_s = cheat_s.substr(4);
 
@@ -60,7 +65,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			storm& s = util::singleton_nonthreadsafe<storm>::instance();
 			if (s.load_file(cheat_s.c_str(), (const void**)&buffer, &size))
 			{
-				do_buffer(cheat_s.c_str(), buffer, size);
+				do_buffer(ls, cheat_s.c_str(), buffer, size);
 				s.unload_file(buffer);
 			}
 		}
@@ -71,12 +76,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 
 	jass::jstring_t __cdecl EXExecuteScript(jass::jstring_t script)
 	{
-		if (!instance())
-		{
-			open_lua_engine(initialize_lua());
-		}
-
-		lua::state*& ls = instance();
+		lua::state* ls = jass_state();
 
 		std::string str_script = util::format("return (%s)", jass::from_trigstring(jass::from_string(script)));
 		if (luaL_loadbuffer(ls->self(), str_script.c_str(), str_script.size(), str_script.c_str()) != LUA_OK)
