@@ -28,16 +28,16 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return error;
 	}
 
-	void do_buffer(lua::state* ls, const char* name, const char* buffer, size_t size)
+	void do_buffer(lua_State* pState, const char* name, const char* buffer, size_t size)
 	{
-		if (luaL_loadbuffer(ls->self(), buffer, size, name) != LUA_OK)
+		if (luaL_loadbuffer(pState, buffer, size, name) != LUA_OK)
 		{
-			printf("%s\n", ls->tostring(-1));
-			ls->pop(1);
+			printf("%s\n", lua_tostring(pState, -1));
+			lua_pop(pState, 1);
 			return ;
 		}
 
-		safe_pcall(ls->self(), 0, 0);
+		safe_pcall(pState, 0, 0);
 	}
 
 	callback::callback()
@@ -99,6 +99,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	uint32_t cfunction_to_code(lua::state* ls, uint32_t index)
 	{
 		ls->pushvalue(index);
-		return jass::trampoline_create(jass_callback, (uintptr_t)ls, (uintptr_t)luaL_ref(ls->self(), LUA_REGISTRYINDEX));
+		return jass::trampoline_create(jass_callback, (uintptr_t)ls->self(), (uintptr_t)luaL_ref(ls->self(), LUA_REGISTRYINDEX));
 	}
 }}}
