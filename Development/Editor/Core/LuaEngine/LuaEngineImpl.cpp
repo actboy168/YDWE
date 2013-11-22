@@ -11,6 +11,7 @@
 #include <base/win/file_version.h>
 #include <base/file/stream.h>
 #include <base/util/format.h>
+#include <base/win/version.h>
 
 #pragma warning(push)
 #pragma warning(disable: 4231)
@@ -101,12 +102,11 @@ bool LuaEngineImpl::InitializeLogger(boost::filesystem::path const& log_config)
 
 bool LuaEngineImpl::InitializeInfo()
 {
-	OSVERSIONINFOW osvi = { sizeof OSVERSIONINFOW };
-	::GetVersionExW(&osvi);
+	base::win::version_number vn = base::win::get_version_number();
 
 	LOG4CXX_INFO(logger_, base::util::format(L"YDWE Script engine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]));
 	LOG4CXX_INFO(logger_, "Compiled at " __TIME__ ", " __DATE__);
-	LOG4CXX_INFO(logger_, base::util::format("Windows version: %d.%d.%d", osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber));
+	LOG4CXX_INFO(logger_, base::util::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build));
 
 	return true;
 }

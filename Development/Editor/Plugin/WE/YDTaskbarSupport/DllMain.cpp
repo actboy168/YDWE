@@ -30,7 +30,7 @@ bool JumpListAddRecentTask(JumpList& jumpList, fs::path const& ydweDirectory, fs
 
 void Initialize()
 {
-	if (base::win::version() < base::win::VERSION_WIN7)
+	if (base::win::get_version() < base::win::VERSION_WIN7)
 	{
 		return ;
 	}

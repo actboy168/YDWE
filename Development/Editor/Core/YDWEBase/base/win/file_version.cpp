@@ -2,6 +2,7 @@
 
 #include <boost/algorithm/string.hpp>
 #include <base/util/format.h>
+#include <base/path/detail/get_path.h>
 #include <vector>
 
 #pragma comment(lib, "version.lib")
@@ -16,6 +17,11 @@ namespace base { namespace win {
 	file_version::file_version(const wchar_t* module_path)
 		: version_info_()
 		, vaild_(create(module_path))
+	{ }
+
+	file_version::file_version(HMODULE module_handle)
+		: version_info_()
+		, vaild_(create(module_handle))
 	{ }
 
 	const wchar_t* file_version::operator[] (const wchar_t* key) const
@@ -59,6 +65,11 @@ namespace base { namespace win {
 		return fixed_file_info_; 
 	}
 
+	bool file_version::create(HMODULE module_handle)
+	{
+		return create(base::path::detail::GetModulePath(module_handle).c_str());
+	}
+
 	bool file_version::create(const wchar_t* module_path)
 	{
 		DWORD dummy_handle;
@@ -97,15 +108,28 @@ namespace base { namespace win {
 		return (!!::VerQueryValueW(version_info_.get(), (LPWSTR)(LPCWSTR)query.c_str(), (LPVOID*)value_ptr, &size));
 	}
 
-	int stoi_no_throw(std::wstring const& str)
+	namespace
 	{
-		try {
-			return std::stoi(str);
-		}
-		catch (...) {
+		int stoi_no_throw(std::wstring const& str)
+		{
+			try {
+				return std::stoi(str);
+			}
+			catch (...) {
+			}
+
+			return 0;
 		}
 
-		return 0;
+		void create_simple_file_version(simple_file_version& sfv, const std::wstring& version_string, const wchar_t* pred)
+		{
+			std::vector<std::wstring> version_array;
+			boost::algorithm::split(version_array, version_string, boost::algorithm::is_any_of(pred));
+			sfv.major       = (version_array.size() > 0) ? stoi_no_throw(version_array[0]) : 0;
+			sfv.minor       = (version_array.size() > 1) ? stoi_no_throw(version_array[1]) : 0;
+			sfv.revision    = (version_array.size() > 2) ? stoi_no_throw(version_array[2]) : 0;
+			sfv.build       = (version_array.size() > 3) ? stoi_no_throw(version_array[3]) : 0;
+		}
 	}
 
 	simple_file_version::simple_file_version()
@@ -115,14 +139,13 @@ namespace base { namespace win {
 		, build(0)
 	{ }
 
-	simple_file_version::simple_file_version(const wchar_t* module_path)
+	simple_file_version::simple_file_version(const wchar_t* module_path, const wchar_t* key, const wchar_t* pred)
 	{
-		std::wstring version_string = file_version(module_path)[L"FileVersion"];
-		std::vector<std::wstring> version_array;
-		boost::algorithm::split(version_array, version_string, boost::algorithm::is_any_of(L","));
-		major       = (version_array.size() > 0) ? stoi_no_throw(version_array[0]) : 0;
-		minor       = (version_array.size() > 1) ? stoi_no_throw(version_array[1]) : 0;
-		revision    = (version_array.size() > 2) ? stoi_no_throw(version_array[2]) : 0;
-		build       = (version_array.size() > 3) ? stoi_no_throw(version_array[3]) : 0;
+		create_simple_file_version(*this, file_version(module_path)[key], pred);
+	}
+
+	simple_file_version::simple_file_version(HMODULE module_handle, const wchar_t* key, const wchar_t* pred)
+	{
+		create_simple_file_version(*this, file_version(module_handle)[key], pred);
 	}
 }}

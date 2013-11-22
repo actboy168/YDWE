@@ -298,7 +298,7 @@ void CMainWindow::DoneRegistryUI()
 
 void CMainWindow::InitOSHelpUI()
 {
-	if (base::win::version() >= base::win::VERSION_WIN7)
+	if (base::win::get_version() >= base::win::VERSION_WIN7)
 	{
 		m_pShortcuts_taskbar->SetText(L"固定到任务栏");
 	}

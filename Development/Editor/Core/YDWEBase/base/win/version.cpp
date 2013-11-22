@@ -1,39 +1,71 @@
 #include <base/win/version.h>
 #include <Windows.h>
+#include <base/win/file_version.h>
 
-namespace base {
-namespace win {
+namespace base { namespace win {
 
-	Version version()
+	version_number get_version_number()
 	{
-		Version version_ = VERSION_PRE_XP;
+		version_number vn;
+
 		OSVERSIONINFOW osvi = { sizeof OSVERSIONINFOW };
 		::GetVersionExW(&osvi);
-		if ((osvi.dwMajorVersion == 5) && (osvi.dwMinorVersion > 0)) 
+		
+		vn.major = osvi.dwMajorVersion;
+		vn.minor = osvi.dwMinorVersion;
+		vn.build = osvi.dwBuildNumber;
+
+		if ((vn.major > 6) || (vn.major == 6 && vn.minor >= 2))
 		{
-			version_ = (osvi.dwMinorVersion == 1) ? VERSION_XP : VERSION_SERVER_2003;
+			// see
+			//   http://msdn.microsoft.com/en-us/library/windows/desktop/ms724451(v=vs.85).aspx
+			//   http://msdn.microsoft.com/en-us/library/windows/desktop/ms724429(v=vs.85).aspx
+
+			base::win::simple_file_version sfv(::GetModuleHandleW(L"kernel32.dll"), L"ProductVersion", L".");
+
+			vn.major = sfv.major;
+			vn.minor = sfv.minor;
+			vn.build = sfv.revision;
+		}
+
+		return vn;
+	}
+
+	version get_version()
+	{
+		version_number vn = get_version_number();
+		version        v  = VERSION_PRE_XP;
+
+		if ((vn.major == 5) && (vn.minor > 0)) 
+		{
+			v = (vn.minor == 1) ? VERSION_XP : VERSION_SERVER_2003;
 		} 
-		else if (osvi.dwMajorVersion == 6)
+		else if (vn.major == 6)
 		{
-			switch (osvi.dwMinorVersion) 
+			switch (vn.minor) 
 			{
 			case 0:
-				version_ = VERSION_VISTA;
+				v = VERSION_VISTA;
 				break;
 			case 1:
-				version_ = VERSION_WIN7;
+				v = VERSION_WIN7;
+				break;
+			case 2:
+				v = VERSION_WIN8;
+				break;
+			case 3:
+				v = VERSION_WIN8_1;
 				break;
 			default:
-				version_ = VERSION_WIN8;
+				v = VERSION_WIN_LAST;
 				break;
 			}
 		} 
-		else if (osvi.dwMajorVersion > 6) 
+		else if (vn.major > 6) 
 		{
-			version_ = VERSION_WIN_LAST;
+			v = VERSION_WIN_LAST;
 		}
 
-		return version_;
+		return v;
 	}
-}
-}
+}}

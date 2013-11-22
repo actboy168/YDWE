@@ -193,7 +193,7 @@ namespace Shortcuts
 	{
 		try
 		{
-			if (base::win::version() >= base::win::VERSION_WIN7)
+			if (base::win::get_version() >= base::win::VERSION_WIN7)
 			{
 				fs::path shortcut_path = base::path::get(base::path::DIR_TEMP) / target_path.filename().replace_extension(L".lnk");
 
@@ -225,7 +225,7 @@ namespace Shortcuts
 		try
 		{
 			fs::path taskbar_path;
-			if (base::win::version() >= base::win::VERSION_WIN7)
+			if (base::win::get_version() >= base::win::VERSION_WIN7)
 			{
 				taskbar_path = base::path::get(base::path::DIR_TASKBAR_PINS);
 			}
@@ -254,7 +254,7 @@ namespace Shortcuts
 
 					if (base::path::equal(read_target, target_path))
 					{
-						if (base::win::version() >= base::win::VERSION_WIN7)
+						if (base::win::get_version() >= base::win::VERSION_WIN7)
 						{
 							return detail::TaskbarUnpinShortcutLink(shortcut_path);
 						}
@@ -279,7 +279,7 @@ namespace Shortcuts
 		try
 		{
 			fs::path taskbar_path;
-			if (base::win::version() >= base::win::VERSION_WIN7)
+			if (base::win::get_version() >= base::win::VERSION_WIN7)
 			{
 				taskbar_path = base::path::get(base::path::DIR_TASKBAR_PINS);
 			}
