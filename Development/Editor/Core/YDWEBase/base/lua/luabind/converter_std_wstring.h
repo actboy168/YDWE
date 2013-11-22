@@ -3,6 +3,7 @@
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
 #include <base/util/unicode.h>
+#include <base/util/string_ref.h>
 
 namespace luabind
 {
@@ -17,7 +18,7 @@ namespace luabind
 
 		std::wstring from(lua_State* L, int index)
 		{
-			return base::util::a2w(std::string(lua_tostring(L, index), lua_strlen(L, index)));
+			return base::util::a2w(boost::string_ref(lua_tostring(L, index), lua_strlen(L, index)));
 		}
 
 		void to(lua_State* L, std::wstring const& value)

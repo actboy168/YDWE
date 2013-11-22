@@ -39,7 +39,7 @@ namespace exception_detail
 			str.remove_suffix(1);
 		}
 
-		return std::move(util::w2u_ref(str, util::conv_method::replace | '?'));
+		return std::move(util::w2u(str, util::conv_method::replace | '?'));
 	}
 
 	std::error_condition windows_category_impl::default_error_condition(int error_code) const

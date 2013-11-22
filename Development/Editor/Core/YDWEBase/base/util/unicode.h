@@ -5,8 +5,7 @@
 #include <base/util/string_ref.h>
 #include <cstdint>
 
-namespace base { 
-namespace util {
+namespace base { namespace util {
 	class conv_method
 	{
 	public:
@@ -35,20 +34,12 @@ namespace util {
 		uint32_t value_;
 	};
 
-	_BASE_API std::wstring u2w(std::string  const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  w2u(std::wstring const& from, conv_method how = conv_method::stop);
-	_BASE_API std::wstring a2w(std::string  const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  w2a(std::wstring const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  u2a(std::string  const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  a2u(std::string  const& from, conv_method how = conv_method::stop);
-
-	_BASE_API std::wstring u2w_ref(boost::string_ref  const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  w2u_ref(boost::wstring_ref const& from, conv_method how = conv_method::stop);
-	_BASE_API std::wstring a2w_ref(boost::string_ref  const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  w2a_ref(boost::wstring_ref const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  u2a_ref(boost::string_ref  const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  a2u_ref(boost::string_ref  const& from, conv_method how = conv_method::stop);
+	_BASE_API std::wstring u2w(boost::string_ref  const& from, conv_method how = conv_method::stop);
+	_BASE_API std::string  w2u(boost::wstring_ref const& from, conv_method how = conv_method::stop);
+	_BASE_API std::wstring a2w(boost::string_ref  const& from, conv_method how = conv_method::stop);
+	_BASE_API std::string  w2a(boost::wstring_ref const& from, conv_method how = conv_method::stop);
+	_BASE_API std::string  u2a(boost::string_ref  const& from, conv_method how = conv_method::stop);
+	_BASE_API std::string  a2u(boost::string_ref  const& from, conv_method how = conv_method::stop);
 
 	_BASE_API bool is_utf8(const char *source);
-}
-}
+}}
