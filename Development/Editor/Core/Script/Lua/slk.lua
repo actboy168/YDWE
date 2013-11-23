@@ -11,8 +11,8 @@ local slk_mgr = {}
 function slk_mgr.initialize (self)
 	local mpq_path = fs.ydwe_path() / "share" / "mpq"
 	self.interface = interface_stormlib()
-	self.interface:open_archive(mpq_path / "units.mpq")
-	self.interface:open_archive(mpq_path / "ydwe.mpq")
+	self.interface:open_path(mpq_path / "units")
+	self.interface:open_path(mpq_path / "ydwe")
 	self.interface:attach_archive(__map_handle__)	
 	self.manager = mapanalyzer.manager2(self.interface)
 

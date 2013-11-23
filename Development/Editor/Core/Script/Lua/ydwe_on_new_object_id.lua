@@ -9,7 +9,7 @@ local object = {}
 
 function object:initialize ()
 	self.interface = interface_stormlib()
-	self.interface:open_archive(fs.ydwe_path() / "share" / "mpq" / "units.mpq")
+	self.interface:open_path(fs.ydwe_path() / "share" / "mpq" / "units")
 	self.manager = mapanalyzer.manager2(self.interface)	
 	self.object_type = {
 		[0] = mapanalyzer.OBJECT_TYPE.UNIT,

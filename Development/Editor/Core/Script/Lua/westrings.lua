@@ -10,7 +10,7 @@ function _westrings.initialize ()
 	local obj = {}
 	obj.table_ = mapanalyzer.ini_table()
 	obj.interface = interface_stormlib()
-	obj.interface:open_archive(fs.ydwe_path() / "share" / "mpq" / "ydwe.mpq")
+	obj.interface:open_path(fs.ydwe_path() / "share" / "mpq" / "ydwe")
 	obj.manager = mapanalyzer.manager2(obj.interface)
 	obj.manager:load_file('ui\\worldeditstrings.txt', obj.table_)
 	obj.object_ = obj.table_:get('WorldEditStrings') or mapanalyzer.ini_object()
