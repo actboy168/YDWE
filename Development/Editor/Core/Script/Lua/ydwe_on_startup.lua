@@ -179,8 +179,8 @@ event.register(event.EVENT_WE_START, false, function (event_data)
 	check_war3_version()	
 
 	-- 载入Patch MPQ
-	mpq_util:load_mpq("units.mpq")
-	mpq_util:load_mpq("ydwe.mpq")
+	mpq_util:load_mpq("units", 14)
+	mpq_util:load_mpq("ydwe", 14)
 	
 	-- 加载插件
 	plugin:load_all()

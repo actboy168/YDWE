@@ -13,11 +13,7 @@ loader.load = function(path)
 	end
 	
 	-- YDTrigger MPQÂ·¾¶
-	local yd_trigger_mpq_path = fs.ydwe_path() / "share" / "mpq" / "YDTrigger.mpq"
-	if not fs.exists(yd_trigger_mpq_path) or not ar.storm.open_archive(yd_trigger_mpq_path, 15) then
-		log.error('failed: cannot find' .. yd_trigger_mpq_path:filename():string())
-		return false
-	end
+	mpq_util:load_mpq("ydtrigger", 15)
 
 	loader.dll = sys.load_library(path)
 	return loader.dll ~= nil

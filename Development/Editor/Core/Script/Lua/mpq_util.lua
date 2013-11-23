@@ -129,13 +129,18 @@ end
 -- 从主程序的mpq目录下载入MPQ
 -- mpqname - MPQ的文件名
 -- 返回值：MPQ句柄
-function mpq_util.load_mpq(self, mpqname)
+function mpq_util.load_mpq(self, mpqname, priority)
 	local result = 0
 	local mpq = fs.ydwe_path() / "share" / "mpq" / mpqname
 
-	-- 文件存在否？
 	if fs.exists(mpq) then
-		result = storm.open_archive(mpq, 14)
+		virtual_mpq.open_path(mpq, priority)
+		return result
+	end
+	
+	mpq = fs.ydwe_path() / "share" / "mpq" / (mpqname .. ".mpq")
+	if fs.exists(mpq) then
+		result = storm.open_archive(mpq, priority)
 		if result then
 			log.debug("Loaded " .. mpq:filename():string())
 		else

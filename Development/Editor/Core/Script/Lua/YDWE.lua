@@ -25,6 +25,7 @@ require "util"
 require "event"
 require "ar_stormlib"
 require "ar_storm"
+require "virtual_mpq"
 
 require "registry"
 require "version"

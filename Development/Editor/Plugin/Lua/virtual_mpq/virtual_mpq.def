@@ -1,0 +1,3 @@
+LIBRARY "virtual_mpq"
+EXPORTS
+	luaopen_virtual_mpq
