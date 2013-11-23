@@ -168,6 +168,7 @@ void CC_PutActionEx_ForGroupEnum(DWORD PThis, DWORD This, DWORD OutClass, char* 
 
 	PUT_CONST("if bj_wantDestroyGroup then", 1);
 	CC_PutBegin();
+	PUT_CONST("set bj_wantDestroyGroup = false", 1);
 	PUT_CONST("set ydl_group = ", 0);
 	PUT_VAR(PThis, 0);
 	PUT_CONST("", 1);
