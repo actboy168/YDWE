@@ -29,14 +29,14 @@ def pack_ui(name):
     print('pack_ui ' + name)
     stormlib_path = path['OpenSource'] / 'StormLib' / 'Current' / 'bin' / 'Win32' / 'Release' / 'StormLib.dll'
     from_path     = path['BuildRoot']  / 'Editor' / 'UI' / 'txt' / name
-    to_path       = path['Result']     / 'share' / 'mpq' / (name + '.mpq')
+    to_path       = path['Result']     / 'share' / 'mpq' / name
 
     fs.remove_all(from_path)
     fs.create_directories(from_path / 'ui')
     convert_file(path['UIObj'] / name, from_path / 'ui', 'TriggerData.i')
     convert_file(path['UIObj'] / name, from_path / 'ui', 'TriggerStrings.i')
     convert_file(path['UIObj'] / name, from_path / 'ui', 'WorldEditStrings.i')
-    util.mpqutil.create(stormlib_path, from_path, to_path)
+    fs.copy_directory(from_path, to_path)
     
 def Configuration():
     if len(sys.argv) > 1:
