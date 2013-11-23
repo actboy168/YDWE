@@ -171,43 +171,6 @@ struct InterfaceStormWrap : slk::InterfaceStorm, luabind::wrap_base
 		return std::move(ret);
 	}
 };
-
-struct SlkManager
-{
-	SlkManager()
-		: storm_()
-		, mgr_(storm_)
-	{ }
-
-	bool open(std::string const& path)
-	{
-		return storm_.open_archive(path);
-	}
-
-	bool attach(HANDLE hArchive)
-	{
-		return storm_.attach_archive(hArchive);
-	}
-
-	slk::SlkTable& load(slk::ROBJECT_TYPE::ENUM type)
-	{
-		return mgr_.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(type);
-	}
-
-	bool load_file(const char* filename, slk::IniTable& table)
-	{
-		return mgr_.load<slk::IniTable>(filename, table);
-	}
-
-	std::string const& convert_string(std::string const& str)
-	{
-		return mgr_.convert_string(str);
-	}
-
-	InterfaceStormLib  storm_;
-	slk::ObjectManager mgr_;
-};
-
 } // namespace NLua
 
 int luaopen_mapanalyzer(lua_State *pState)
@@ -285,15 +248,6 @@ int luaopen_mapanalyzer(lua_State *pState)
 			.def("get",   &NLua::IniTableWrap::get)
 			.def("set",   &NLua::IniTableWrap::set)
 			.def("begin", &NLua::TableWrap::begin<slk::IniTable>)
-		,
-
-		class_<NLua::SlkManager>("manager")
-			.def(constructor<>())
-			.def("open",      &NLua::SlkManager::open)
-			.def("attach",    &NLua::SlkManager::attach)
-			.def("load",      &NLua::SlkManager::load)
-			.def("load_file", &NLua::SlkManager::load_file)
-			.def("convert",   &NLua::SlkManager::convert_string)
 		,
 
 		class_<slk::ObjectManager>("manager2")
