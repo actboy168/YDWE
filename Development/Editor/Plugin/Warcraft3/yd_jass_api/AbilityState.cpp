@@ -279,7 +279,7 @@ namespace base { namespace warcraft3 { namespace japi {
 			if (is_valid())
 			{
 				uintptr_t rf = running_info();
-				if (rf)
+				if (rf_is_valid(rf))
 				{
 					return jass::to_real(jass::from_real(timeout(rf)) - jass::from_real(current_time(rf)));
 				}
@@ -300,7 +300,7 @@ namespace base { namespace warcraft3 { namespace japi {
 					rf = running_info();
 				}
 
-				if (rf)
+				if (rf_is_valid(rf))
 				{
 					timeout(rf) = jass::to_real(jass::from_real(current_time(rf)) + value);
 					return true;
@@ -313,6 +313,11 @@ namespace base { namespace warcraft3 { namespace japi {
 		bool is_valid()
 		{ 
 			return this && IsVirtualFunctionTable(*(uintptr_t*)this);
+		}
+
+		bool rf_is_valid(uintptr_t rf)
+		{ 
+			return rf && (rf + 0x04) && (rf + 0x0C);
 		}
 
 		uintptr_t running_info()
