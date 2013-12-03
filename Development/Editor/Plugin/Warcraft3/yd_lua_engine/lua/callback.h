@@ -7,7 +7,6 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	void                do_buffer(lua_State* pState, const char* name, const char* buffer, size_t size);
 	int                 safe_pcall (lua_State* pState, int nargs, int nresults);
 	uint32_t __fastcall jass_callback(uint32_t param);
 	uint32_t            cfunction_to_code(lua::state* ls, uint32_t index);

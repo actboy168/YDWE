@@ -87,7 +87,16 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			storm& s = util::singleton_nonthreadsafe<storm>::instance();
 			if (s.load_file(cheat_s.c_str(), (const void**)&buffer, &size))
 			{
-				do_buffer(ls->self(), cheat_s.c_str(), buffer, size);
+				if (luaL_loadbuffer(ls->self(), buffer, size, cheat_s.c_str()) == LUA_OK)
+				{
+					safe_pcall(ls->self(), 0, 0);
+				}
+				else
+				{
+					printf("%s\n", ls->tostring(-1));
+					ls->pop(1);
+				}
+				
 				s.unload_file(buffer);
 			}
 		}

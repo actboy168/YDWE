@@ -28,18 +28,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return error;
 	}
 
-	void do_buffer(lua_State* pState, const char* name, const char* buffer, size_t size)
-	{
-		if (luaL_loadbuffer(pState, buffer, size, name) != LUA_OK)
-		{
-			printf("%s\n", lua_tostring(pState, -1));
-			lua_pop(pState, 1);
-			return ;
-		}
-
-		safe_pcall(pState, 0, 0);
-	}
-
 	callback::callback()
 		: ref_(0)
 	{ }
