@@ -100,9 +100,9 @@ namespace DuiLib
 		std::unique_ptr<CImage> m_sThumbHotImage;
 		std::unique_ptr<CImage> m_sThumbPushedImage;
 		std::unique_ptr<CImage> m_sThumbDisabledImage;
+		std::wstring            m_sImageModify;
 #pragma warning(pop)
 
-		CDuiString m_sImageModify;
 	};
 }
 

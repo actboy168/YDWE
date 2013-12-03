@@ -38,7 +38,7 @@ namespace DuiLib
 #pragma warning(push)
 #pragma warning(disable:4251)
 		std::unique_ptr<CImage> m_sForeImage;
-		CDuiString m_sForeImageModify;
+		std::wstring m_sForeImageModify;
 #pragma warning(pop)
 	};
 

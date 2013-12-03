@@ -36,7 +36,7 @@ namespace DuiLib
 		std::unique_ptr<CImage> m_sThumbImage;
 		std::unique_ptr<CImage> m_sThumbHotImage;
 		std::unique_ptr<CImage> m_sThumbPushedImage;
-		CDuiString m_sImageModify;
+		std::wstring            m_sImageModify;
 #pragma warning(pop)
 	};
 }

@@ -40,7 +40,7 @@ public:
     int GetLimitText();
     void SetLimitText(int iChars);
     long GetTextLength(DWORD dwFlags = GTL_DEFAULT) const;
-    CDuiString GetText() const;
+    std::wstring GetText() const;
     void SetText(LPCTSTR pstrText);
     bool GetModify() const;
     void SetModify(bool bModified = true) const;
@@ -50,7 +50,7 @@ public:
     int SetSel(long nStartChar, long nEndChar);
     void ReplaceSel(LPCTSTR lpszNewText, bool bCanUndo);
     void ReplaceSelW(LPCWSTR lpszNewText, bool bCanUndo = false);
-    CDuiString GetSelText() const;
+    std::wstring GetSelText() const;
     int SetSelAll();
     int SetSelNone();
     WORD GetSelectionType() const;
@@ -61,7 +61,7 @@ public:
     bool SetAutoURLDetect(bool bAutoDetect = true);
     DWORD GetEventMask() const;
     DWORD SetEventMask(DWORD dwEventMask);
-    CDuiString GetTextRange(long nStartChar, long nEndChar) const;
+    std::wstring GetTextRange(long nStartChar, long nEndChar) const;
     void HideSelection(bool bHide = true, bool bChangeStyle = false);
     void ScrollCaret();
     int InsertText(long nInsertAfterChar, LPCTSTR lpstrText, bool bCanUndo = false);
@@ -80,7 +80,7 @@ public:
     void Cut();
     void Paste();
     int GetLineCount() const;
-    CDuiString GetLine(int nIndex, int nMaxLength) const;
+    std::wstring GetLine(int nIndex, int nMaxLength) const;
     int LineIndex(int nLine = -1) const;
     int LineLength(int nLine = -1) const;
     bool LineScroll(int nLines, int nChars = 0);
@@ -128,7 +128,7 @@ public:
 protected:
 #pragma warning(push)
 #pragma warning(disable:4251)
-	std::unique_ptr<CDuiString> m_sText;
+	std::unique_ptr<std::wstring> m_sText;
 #pragma warning(pop)
     CTxtWinHost* m_pTwh;
     bool m_bVScrollBarFixing;

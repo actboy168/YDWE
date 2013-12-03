@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "UIProgress.h"
+#include <base/util/format.h>
 
 #ifdef DUI_USE_PROGRESS
 
@@ -91,15 +92,12 @@ namespace DuiLib
 		}
 
 		if( m_sForeImage ) {
-			m_sForeImageModify.Empty();
 			if (m_bStretchForeImage)
-				m_sForeImageModify.SmallFormat(_T("dest='%d,%d,%d,%d'"), rc.left, rc.top, rc.right, rc.bottom);
+				m_sForeImageModify = base::util::format(L"dest='%d,%d,%d,%d'", rc.left, rc.top, rc.right, rc.bottom);
 			else
-				m_sForeImageModify.SmallFormat(_T("dest='%d,%d,%d,%d' source='%d,%d,%d,%d'")
-				, rc.left, rc.top, rc.right, rc.bottom
-				, rc.left, rc.top, rc.right, rc.bottom);
+				m_sForeImageModify = base::util::format(L"dest='%d,%d,%d,%d' source='%d,%d,%d,%d'", , rc.left, rc.top, rc.right, rc.bottom, rc.left, rc.top, rc.right, rc.bottom);
 
-			if( !DrawImage(hDC, *m_sForeImage.get(), (LPCTSTR)m_sForeImageModify) ) m_sForeImage.reset();
+			if( !DrawImage(hDC, *m_sForeImage.get(), m_sForeImageModify.c_str()) ) m_sForeImage.reset();
 			else return;
 		}
 	}

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "UIScrollBar.h"
+#include <base/util/format.h>
 
 namespace DuiLib
 {
@@ -563,10 +564,8 @@ namespace DuiLib
 		if( !IsEnabled() ) m_uThumbState |= UISTATE_DISABLED;
 		else m_uThumbState &= ~ UISTATE_DISABLED;
 
-		m_sImageModify.Empty();
-
 		if( !m_bHorizontal ) {
-			m_sImageModify.SmallFormat(_T("corner='%d,%d,%d,%d' dest='%d,%d,%d,%d'"), 
+			m_sImageModify = base::util::format(L"corner='%d,%d,%d,%d' dest='%d,%d,%d,%d'", 
 				0,
 				m_cxyFixed.cx / 2, 
 				0, 
@@ -582,25 +581,25 @@ namespace DuiLib
 
 		if( (m_uThumbState & UISTATE_DISABLED) != 0 ) {
 			if( m_sBkDisabledImage ) {
-				if( !DrawImage(hDC, *m_sBkDisabledImage.get(), m_sImageModify) ) m_sBkDisabledImage.reset();
+				if( !DrawImage(hDC, *m_sBkDisabledImage.get(), m_sImageModify.c_str()) ) m_sBkDisabledImage.reset();
 				else return;
 			}
 		}
 		else if( (m_uThumbState & UISTATE_PUSHED) != 0 ) {
 			if( m_sBkPushedImage ) {
-				if( !DrawImage(hDC, *m_sBkPushedImage.get(), m_sImageModify) ) m_sBkPushedImage.reset();
+				if( !DrawImage(hDC, *m_sBkPushedImage.get(), m_sImageModify.c_str()) ) m_sBkPushedImage.reset();
 				else return;
 			}
 		}
 		else if( (m_uThumbState & UISTATE_HOT) != 0 ) {
 			if( m_sBkHotImage ) {
-				if( !DrawImage(hDC, *m_sBkHotImage.get(), m_sImageModify) ) m_sBkHotImage.reset();
+				if( !DrawImage(hDC, *m_sBkHotImage.get(), m_sImageModify.c_str()) ) m_sBkHotImage.reset();
 				else return;
 			}
 		}
 
 		if( m_sBkNormalImage) {
-			if( !DrawImage(hDC, *m_sBkNormalImage.get(), m_sImageModify) ) m_sBkNormalImage.reset();
+			if( !DrawImage(hDC, *m_sBkNormalImage.get(), m_sImageModify.c_str()) ) m_sBkNormalImage.reset();
 			else return;
 		}
 	}
@@ -614,31 +613,29 @@ namespace DuiLib
 		if( !IsEnabled() ) m_uButton1State |= UISTATE_DISABLED;
 		else m_uButton1State &= ~ UISTATE_DISABLED;
 
-		m_sImageModify.Empty();
-		m_sImageModify.SmallFormat(_T("dest='%d,%d,%d,%d'"), m_rcButton1.left - m_rcItem.left, \
-			m_rcButton1.top - m_rcItem.top, m_rcButton1.right - m_rcItem.left, m_rcButton1.bottom - m_rcItem.top);
+		m_sImageModify = base::util::format(L"dest='%d,%d,%d,%d'", m_rcButton1.left - m_rcItem.left, m_rcButton1.top - m_rcItem.top, m_rcButton1.right - m_rcItem.left, m_rcButton1.bottom - m_rcItem.top);
 
 		if( (m_uButton1State & UISTATE_DISABLED) != 0 ) {
 			if( m_sButton1DisabledImage ) {
-				if( !DrawImage(hDC, *m_sButton1DisabledImage.get(), (LPCTSTR)m_sImageModify) ) m_sButton1DisabledImage.reset();
+				if( !DrawImage(hDC, *m_sButton1DisabledImage.get(), m_sImageModify.c_str()) ) m_sButton1DisabledImage.reset();
 				else return;
 			}
 		}
 		else if( (m_uButton1State & UISTATE_PUSHED) != 0 ) {
 			if( m_sButton1PushedImage ) {
-				if( !DrawImage(hDC, *m_sButton1PushedImage.get(), (LPCTSTR)m_sImageModify) ) m_sButton1PushedImage.reset();
+				if( !DrawImage(hDC, *m_sButton1PushedImage.get(), m_sImageModify.c_str()) ) m_sButton1PushedImage.reset();
 				else return;
 			}
 		}
 		else if( (m_uButton1State & UISTATE_HOT) != 0 ) {
 			if( m_sButton1HotImage ) {
-				if( !DrawImage(hDC, *m_sButton1HotImage.get(), (LPCTSTR)m_sImageModify) ) m_sButton1HotImage.reset();
+				if( !DrawImage(hDC, *m_sButton1HotImage.get(), m_sImageModify.c_str()) ) m_sButton1HotImage.reset();
 				else return;
 			}
 		}
 
 		if( m_sButton1NormalImage ) {
-			if( !DrawImage(hDC, *m_sButton1NormalImage.get(), (LPCTSTR)m_sImageModify) ) m_sButton1NormalImage.reset();
+			if( !DrawImage(hDC, *m_sButton1NormalImage.get(), m_sImageModify.c_str()) ) m_sButton1NormalImage.reset();
 			else return;
 		}
 
@@ -656,31 +653,29 @@ namespace DuiLib
 		if( !IsEnabled() ) m_uButton2State |= UISTATE_DISABLED;
 		else m_uButton2State &= ~ UISTATE_DISABLED;
 
-		m_sImageModify.Empty();
-		m_sImageModify.SmallFormat(_T("dest='%d,%d,%d,%d'"), m_rcButton2.left - m_rcItem.left, \
-			m_rcButton2.top - m_rcItem.top, m_rcButton2.right - m_rcItem.left, m_rcButton2.bottom - m_rcItem.top);
+		m_sImageModify = base::util::format(L"dest='%d,%d,%d,%d'", m_rcButton2.left - m_rcItem.left, m_rcButton2.top - m_rcItem.top, m_rcButton2.right - m_rcItem.left, m_rcButton2.bottom - m_rcItem.top);
 
 		if( (m_uButton2State & UISTATE_DISABLED) != 0 ) {
 			if( m_sButton2DisabledImage ) {
-				if( !DrawImage(hDC, *m_sButton2DisabledImage.get(), (LPCTSTR)m_sImageModify) ) m_sButton2DisabledImage.reset();
+				if( !DrawImage(hDC, *m_sButton2DisabledImage.get(), m_sImageModify.c_str()) ) m_sButton2DisabledImage.reset();
 				else return;
 			}
 		}
 		else if( (m_uButton2State & UISTATE_PUSHED) != 0 ) {
 			if( m_sButton2PushedImage ) {
-				if( !DrawImage(hDC, *m_sButton2PushedImage.get(), (LPCTSTR)m_sImageModify) ) m_sButton2PushedImage.reset();
+				if( !DrawImage(hDC, *m_sButton2PushedImage.get(), m_sImageModify.c_str()) ) m_sButton2PushedImage.reset();
 				else return;
 			}
 		}
 		else if( (m_uButton2State & UISTATE_HOT) != 0 ) {
 			if( m_sButton2HotImage ) {
-				if( !DrawImage(hDC, *m_sButton2HotImage.get(), (LPCTSTR)m_sImageModify) ) m_sButton2HotImage.reset();
+				if( !DrawImage(hDC, *m_sButton2HotImage.get(), m_sImageModify.c_str()) ) m_sButton2HotImage.reset();
 				else return;
 			}
 		}
 
 		if( m_sButton2NormalImage ) {
-			if( !DrawImage(hDC, *m_sButton2NormalImage.get(), (LPCTSTR)m_sImageModify) ) m_sButton2NormalImage.reset();
+			if( !DrawImage(hDC, *m_sButton2NormalImage.get(), m_sImageModify.c_str()) ) m_sButton2NormalImage.reset();
 			else return;
 		}
 
@@ -695,10 +690,8 @@ namespace DuiLib
 		if( !IsEnabled() ) m_uThumbState |= UISTATE_DISABLED;
 		else m_uThumbState &= ~ UISTATE_DISABLED;
 
-		m_sImageModify.Empty();
-
 		if( !m_bHorizontal ) {
-			m_sImageModify.SmallFormat(_T("corner='%d,%d,%d,%d' dest='%d,%d,%d,%d'"), 
+			m_sImageModify = base::util::format(L"corner='%d,%d,%d,%d' dest='%d,%d,%d,%d'", 
 				0,
 				m_cxyFixed.cx / 2, 
 				0, 
@@ -714,25 +707,25 @@ namespace DuiLib
 
 		if( (m_uThumbState & UISTATE_DISABLED) != 0 ) {
 			if( m_sThumbDisabledImage ) {
-				if( !DrawImage(hDC, *m_sThumbDisabledImage.get(), (LPCTSTR)m_sImageModify) ) m_sThumbDisabledImage.reset();
+				if( !DrawImage(hDC, *m_sThumbDisabledImage.get(), m_sImageModify.c_str()) ) m_sThumbDisabledImage.reset();
 				else return;
 			}
 		}
 		else if( (m_uThumbState & UISTATE_PUSHED) != 0 ) {
 			if( m_sThumbPushedImage ) {
-				if( !DrawImage(hDC, *m_sThumbPushedImage.get(), (LPCTSTR)m_sImageModify) ) m_sThumbPushedImage.reset();
+				if( !DrawImage(hDC, *m_sThumbPushedImage.get(), m_sImageModify.c_str()) ) m_sThumbPushedImage.reset();
 				else return;
 			}
 		}
 		else if( (m_uThumbState & UISTATE_HOT) != 0 ) {
 			if( m_sThumbHotImage ) {
-				if( !DrawImage(hDC, *m_sThumbHotImage.get(), (LPCTSTR)m_sImageModify) ) m_sThumbHotImage.reset();
+				if( !DrawImage(hDC, *m_sThumbHotImage.get(), m_sImageModify.c_str()) ) m_sThumbHotImage.reset();
 				else return;
 			}
 		}
 
 		if( m_sThumbNormalImage ) {
-			if( !DrawImage(hDC, *m_sThumbNormalImage.get(), (LPCTSTR)m_sImageModify) ) m_sThumbNormalImage.reset();
+			if( !DrawImage(hDC, *m_sThumbNormalImage.get(), m_sImageModify.c_str()) ) m_sThumbNormalImage.reset();
 			else return;
 		}
 

@@ -1197,7 +1197,7 @@ long CRichEditUI::GetTextLength(DWORD dwFlags) const
     return (long)lResult;
 }
 
-CDuiString CRichEditUI::GetText() const
+std::wstring CRichEditUI::GetText() const
 {
     long lLen = GetTextLength(GTL_DEFAULT);
     LPTSTR lpText = NULL;
@@ -1217,14 +1217,14 @@ CDuiString CRichEditUI::GetText() const
     gt.lpDefaultChar = NULL;
     gt.lpUsedDefChar = NULL;
     TxSendMessage(EM_GETTEXTEX, (WPARAM)&gt, (LPARAM)lpText, 0);
-    CDuiString sText(lpText);
+    std::wstring sText(lpText);
     delete[] lpText;
     return sText;
 }
 
 void CRichEditUI::SetText(LPCTSTR pstrText)
 {
-	m_sText.reset(new CDuiString(pstrText));
+	m_sText.reset(new std::wstring(pstrText));
     if( !m_pTwh ) return;
     SetSel(0, -1);
 	ReplaceSel(pstrText, FALSE);
@@ -1293,9 +1293,9 @@ void CRichEditUI::ReplaceSelW(LPCWSTR lpszNewText, bool bCanUndo)
     TxSendMessage(EM_REPLACESEL, (WPARAM) bCanUndo, (LPARAM)lpszNewText, 0); 
 }
 
-CDuiString CRichEditUI::GetSelText() const
+std::wstring CRichEditUI::GetSelText() const
 {
-    if( !m_pTwh ) return CDuiString();
+    if( !m_pTwh ) return std::wstring();
     CHARRANGE cr;
     cr.cpMin = cr.cpMax = 0;
     TxSendMessage(EM_EXGETSEL, 0, (LPARAM)&cr, 0);
@@ -1303,8 +1303,7 @@ CDuiString CRichEditUI::GetSelText() const
     lpText = new WCHAR[cr.cpMax - cr.cpMin + 1];
     ::ZeroMemory(lpText, (cr.cpMax - cr.cpMin + 1) * sizeof(WCHAR));
     TxSendMessage(EM_GETSELTEXT, 0, (LPARAM)lpText, 0);
-    CDuiString sText;
-    sText = (LPCWSTR)lpText;
+    std::wstring sText(lpText);
     delete[] lpText;
     return sText;
 }
@@ -1377,7 +1376,7 @@ DWORD CRichEditUI::SetEventMask(DWORD dwEventMask)
     return (DWORD)lResult;
 }
 
-CDuiString CRichEditUI::GetTextRange(long nStartChar, long nEndChar) const
+std::wstring CRichEditUI::GetTextRange(long nStartChar, long nEndChar) const
 {
     TEXTRANGEW tr = { 0 };
     tr.chrg.cpMin = nStartChar;
@@ -1387,8 +1386,7 @@ CDuiString CRichEditUI::GetTextRange(long nStartChar, long nEndChar) const
     ::ZeroMemory(lpText, (nEndChar - nStartChar + 1) * sizeof(WCHAR));
     tr.lpstrText = lpText;
     TxSendMessage(EM_GETTEXTRANGE, 0, (LPARAM)&tr, 0);
-    CDuiString sText;
-    sText = (LPCWSTR)lpText;
+    std::wstring sText(lpText);
     delete[] lpText;
     return sText;
 }
@@ -1532,15 +1530,14 @@ int CRichEditUI::GetLineCount() const
     return (int)lResult; 
 }
 
-CDuiString CRichEditUI::GetLine(int nIndex, int nMaxLength) const
+std::wstring CRichEditUI::GetLine(int nIndex, int nMaxLength) const
 {
     LPWSTR lpText = NULL;
     lpText = new WCHAR[nMaxLength + 1];
     ::ZeroMemory(lpText, (nMaxLength + 1) * sizeof(WCHAR));
     *(LPWORD)lpText = (WORD)nMaxLength;
     TxSendMessage(EM_GETLINE, nIndex, (LPARAM)lpText, 0);
-    CDuiString sText;
-    sText = (LPCWSTR)lpText;
+    std::wstring sText(lpText);
     delete[] lpText;
     return sText;
 }

@@ -160,20 +160,6 @@ namespace DuiLib
 		bool operator >  (LPCTSTR str) const;
 
 		int Compare(LPCTSTR pstr) const;
-		int CompareNoCase(LPCTSTR pstr) const;
-
-		void MakeUpper();
-		void MakeLower();
-
-		CDuiString Left(int nLength) const;
-		CDuiString Mid(int iPos, int nLength = -1) const;
-		CDuiString Right(int nLength) const;
-
-		int Find(TCHAR ch, int iPos = 0) const;
-		int Find(LPCTSTR pstr, int iPos = 0) const;
-		int Replace(LPCTSTR pstrFrom, LPCTSTR pstrTo);
-
-		int __cdecl SmallFormat(LPCTSTR pstrFormat, ...);
 
 	protected:
 		LPTSTR m_pstr;

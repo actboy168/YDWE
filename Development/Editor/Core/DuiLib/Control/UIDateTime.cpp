@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "UIDateTime.h"
+#include <base/util/format.h>
 
 #ifdef DUI_USE_DATETIME
 
@@ -207,10 +208,7 @@ namespace DuiLib
 			SetText(_T(""));
 		else if (m_nDTUpdateFlag == DT_UPDATE)
 		{
-			CDuiString sText;
-			sText.SmallFormat(_T("%4d-%02d-%02d"),
-				m_sysTime.wYear, m_sysTime.wMonth, m_sysTime.wDay, m_sysTime.wHour, m_sysTime.wMinute);
-			SetText(sText);
+			SetText(base::util::format(L"%4d-%02d-%02d", m_sysTime.wYear, m_sysTime.wMonth, m_sysTime.wDay, m_sysTime.wHour, m_sysTime.wMinute).c_str());
 		}
 	}
 
