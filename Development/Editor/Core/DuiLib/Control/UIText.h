@@ -12,7 +12,7 @@ namespace DuiLib
 	public:
 		CTextUI();
 
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 		UINT GetControlFlags() const;
 
 		std::wstring* GetLinkContent(int iIndex);

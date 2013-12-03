@@ -18,8 +18,8 @@ public:
 
 public:
     virtual std::wstring const& GetName() const;
-    virtual void SetName(LPCTSTR pstrName);
-    virtual LPCTSTR GetClass() const;
+    virtual void SetName(const wchar_t* pstrName);
+    virtual const wchar_t* GetClass() const;
     virtual UINT GetControlFlags() const;
 
     virtual bool Activate();
@@ -35,7 +35,7 @@ public:
     void SetBkColor2(DWORD dwBackColor);
     DWORD GetBkColor3() const;
 	void SetBkColor3(DWORD dwBackColor);
-	void SetBkImage(LPCTSTR pStrImage);
+	void SetBkImage(const wchar_t* pStrImage);
     DWORD GetBorderColor() const;
     void SetBorderColor(DWORD dwBorderColor);
 	DWORD GetFocusBorderColor() const;
@@ -44,8 +44,8 @@ public:
     void SetBorderSize(int nSize);
     SIZE GetBorderRound() const;
     void SetBorderRound(SIZE cxyRound);
-	bool DrawImage(HDC hDC, LPCTSTR pStrImage, LPCTSTR pStrModify = NULL);
-	bool DrawImage(HDC hDC, CImage const& cImage, LPCTSTR pStrModify = NULL);
+	bool DrawImage(HDC hDC, const wchar_t* pStrImage, const wchar_t* pStrModify = NULL);
+	bool DrawImage(HDC hDC, CImage const& cImage, const wchar_t* pStrModify = NULL);
 
     // 位置相关
     virtual const RECT& GetPos() const;
@@ -77,7 +77,7 @@ public:
 
     // 鼠标提示
     virtual std::wstring const& GetToolTip() const;
-    virtual void SetToolTip(LPCTSTR pstrText);
+    virtual void SetToolTip(const wchar_t* pstrText);
 
     // 快捷键
     virtual TCHAR GetShortcut() const;
@@ -116,8 +116,8 @@ public:
     virtual void Event(TEventUI& event);
     virtual void DoEvent(TEventUI& event);
 
-    virtual void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
-	CControlUI* ApplyAttributeList(LPCTSTR pstrList);
+    virtual void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
+	CControlUI* ApplyAttributeList(const wchar_t* pstrList);
 	CControlUI* ApplyAttributeTable(CAttributesList* pTable);
 	
 
@@ -133,7 +133,7 @@ public:
     virtual void DoPostPaint(HDC hDC, const RECT& rcPaint);
 
 	//虚拟窗口参数
-	void SetVirtualWnd(LPCTSTR pstrValue);
+	void SetVirtualWnd(const wchar_t* pstrValue);
 	std::wstring const& GetVirtualWnd() const;
 
 public:

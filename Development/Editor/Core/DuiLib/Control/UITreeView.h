@@ -19,7 +19,7 @@ namespace DuiLib
 		CTreeNodeUI(CTreeNodeUI* _ParentNode = NULL);
 
 	public:
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 		void	DoEvent(TEventUI& event);
 		void	Invalidate();
 		bool	Select(bool bSelect = true);
@@ -30,7 +30,7 @@ namespace DuiLib
 
 		void	SetVisibleTag(bool _IsVisible);
 		bool	GetVisibleTag();
-		void	SetItemText(LPCTSTR pstrValue);
+		void	SetItemText(const wchar_t* pstrValue);
 		std::wstring const&	GetItemText() const;
 		void	CheckBoxSelected(bool _Selected);
 		bool	IsCheckBoxSelected() const;
@@ -57,7 +57,7 @@ namespace DuiLib
 		void	SetSelItemHotTextColor(DWORD _dwSelHotItemTextColor);
 		DWORD	GetSelItemHotTextColor() const;
 
-		void	SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void	SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
 		CStdPtrArray GetTreeNodes();
 
@@ -101,7 +101,7 @@ namespace DuiLib
 		CTreeViewUI(void);
 
 	public:
-		virtual LPCTSTR GetClass() const;
+		virtual const wchar_t* GetClass() const;
 		virtual bool Add(CTreeNodeUI* pControl );
 		virtual long AddAt(CTreeNodeUI* pControl, int iIndex );
 		virtual bool AddAt(CTreeNodeUI* pControl,CTreeNodeUI* _IndexNode);
@@ -125,7 +125,7 @@ namespace DuiLib
 		virtual void SetSelItemTextColor(DWORD _dwSelItemTextColor);
 		virtual void SetSelItemHotTextColor(DWORD _dwSelHotItemTextColor);
 		
-		virtual void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		virtual void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 	private:
 		UINT m_uItemMinWidth;
 		bool m_bVisibleFolderBtn;

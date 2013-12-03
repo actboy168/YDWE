@@ -13,7 +13,7 @@ namespace DuiLib
 		m_uTextStyle = DT_SINGLELINE | DT_VCENTER | DT_CENTER;
 	}
 
-	LPCTSTR CButtonUI::GetClass() const
+	const wchar_t* CButtonUI::GetClass() const
 	{
 		return DUI_CTR_BUTTON;
 	}
@@ -125,7 +125,7 @@ namespace DuiLib
 		return CControlUI::EstimateSize(szAvailable);
 	}
 
-	void CButtonUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CButtonUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("normalimage")) == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
 		else if( _tcscmp(pstrName, _T("hotimage")) == 0 ) m_sHotImage.reset(new CImage(pstrValue));
@@ -137,28 +137,28 @@ namespace DuiLib
 		else if( _tcscmp(pstrName, _T("hotbkcolor")) == 0 )
 		{
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwHotBkColor = clrColor;
 		}
 		else if( _tcscmp(pstrName, _T("hottextcolor")) == 0 )
 		{
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwHotTextColor = clrColor;
 		}
 		else if( _tcscmp(pstrName, _T("pushedtextcolor")) == 0 )
 		{
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwPushedTextColor = clrColor;
 		}
 		else if( _tcscmp(pstrName, _T("focusedtextcolor")) == 0 )
 		{
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwFocusedTextColor = clrColor;
 		}

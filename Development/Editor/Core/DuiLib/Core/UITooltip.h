@@ -10,7 +10,7 @@ namespace DuiLib
 	public:
 		CTooltip();
 		~CTooltip();
-		void Open(HINSTANCE hInstance, HWND hWndPaint, LPCTSTR szText, RECT const& rc);
+		void Open(HINSTANCE hInstance, HWND hWndPaint, const wchar_t* szText, RECT const& rc);
 		void Close();
 		DWORD GetDelayTime();
 

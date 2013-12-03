@@ -13,10 +13,10 @@ namespace DuiLib
 	{
 	public:
 		CImage();
-		CImage(LPCTSTR pStrImage);
+		CImage(const wchar_t* pStrImage);
 		bool Draw(HDC hDC, CPaintManagerUI* pManager, const RECT& rc, const RECT& rcPaint) const;
-		bool Draw(HDC hDC, CPaintManagerUI* pManager, const RECT& rc, const RECT& rcPaint, LPCTSTR pStrModify) const;
-		void Parse(LPCTSTR pStrImage);
+		bool Draw(HDC hDC, CPaintManagerUI* pManager, const RECT& rc, const RECT& rcPaint, const wchar_t* pStrModify) const;
+		void Parse(const wchar_t* pStrImage);
 
 	public:
 #pragma warning(push)

@@ -9,13 +9,13 @@ namespace DuiLib
 		CFrameWindow();
 
 	protected:
-		LPCTSTR GetWindowClassName() const;
+		const wchar_t* GetWindowClassName() const;
 		UINT GetClassStyle() const;
 		void OnFinalMessage(HWND /*hWnd*/);
 
 		virtual void InitWindow() = 0;
 		virtual fs::path GetSkinZip() const = 0;
-		virtual LPCTSTR GetSkinXml() const = 0;
+		virtual const wchar_t* GetSkinXml() const = 0;
 
 	private:
 		LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);

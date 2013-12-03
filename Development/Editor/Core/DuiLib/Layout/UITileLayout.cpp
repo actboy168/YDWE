@@ -8,7 +8,7 @@ namespace DuiLib
 		m_szItem.cx = m_szItem.cy = 0;
 	}
 
-	LPCTSTR CTileLayoutUI::GetClass() const
+	const wchar_t* CTileLayoutUI::GetClass() const
 	{
 		return DUI_CTR_TILELAYOUT;
 	}
@@ -38,11 +38,11 @@ namespace DuiLib
 		NeedUpdate();
 	}
 
-	void CTileLayoutUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CTileLayoutUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("itemsize")) == 0 ) {
 			SIZE szItem = { 0 };
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			szItem.cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
 			szItem.cy = _tcstol(pstr + 1, &pstr, 10);   ASSERT(pstr);     
 			SetItemSize(szItem);

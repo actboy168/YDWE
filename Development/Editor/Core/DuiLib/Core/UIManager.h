@@ -141,7 +141,7 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
-typedef CControlUI* (*LPCREATECONTROL)(LPCTSTR pstrType);
+typedef CControlUI* (*LPCREATECONTROL)(const wchar_t* pstrType);
 
 
 class UILIB_API CPaintManagerUI
@@ -198,32 +198,32 @@ public:
     DWORD GetDefaultSelectedBkColor() const;
     void SetDefaultSelectedBkColor(DWORD dwColor);
     TFontInfo* GetDefaultFontInfo();
-    void SetDefaultFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+    void SetDefaultFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
     DWORD GetCustomFontCount() const;
-    HFONT AddFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
-    HFONT AddFontAt(int index, LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+    HFONT AddFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+    HFONT AddFontAt(int index, const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
     HFONT GetFont(int index);
-    HFONT GetFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+    HFONT GetFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
     bool FindFont(HFONT hFont);
-    bool FindFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+    bool FindFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
     int GetFontIndex(HFONT hFont);
-    int GetFontIndex(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+    int GetFontIndex(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
     bool RemoveFont(HFONT hFont);
     bool RemoveFontAt(int index);
     void RemoveAllFonts();
     TFontInfo* GetFontInfo(int index);
     TFontInfo* GetFontInfo(HFONT hFont);
 
-    const CImageInfo* GetImage(LPCTSTR bitmap);
-    const CImageInfo* GetImageEx(LPCTSTR bitmap, DWORD mask = 0);
-    const CImageInfo* AddImage(LPCTSTR bitmap, DWORD mask = 0);
-    const CImageInfo* AddImage(LPCTSTR bitmap, HBITMAP hBitmap, int iWidth, int iHeight, bool bAlpha);
-    bool RemoveImage(LPCTSTR bitmap);
+    const CImageInfo* GetImage(const wchar_t* bitmap);
+    const CImageInfo* GetImageEx(const wchar_t* bitmap, DWORD mask = 0);
+    const CImageInfo* AddImage(const wchar_t* bitmap, DWORD mask = 0);
+    const CImageInfo* AddImage(const wchar_t* bitmap, HBITMAP hBitmap, int iWidth, int iHeight, bool bAlpha);
+    bool RemoveImage(const wchar_t* bitmap);
     void RemoveAllImages();
     void ReloadAllImages();
 
-    void             AddDefaultAttribute(LPCTSTR pStrControlName, LPCTSTR pStrAttrKey, LPCTSTR pStrAttrValue);
-    CAttributesList* GetDefaultAttributeList(LPCTSTR pStrControlName) const;
+    void             AddDefaultAttribute(const wchar_t* pStrControlName, const wchar_t* pStrAttrKey, const wchar_t* pStrAttrValue);
+    CAttributesList* GetDefaultAttributeList(const wchar_t* pStrControlName) const;
 
     void RemoveAllDefaultAttributeList();
 
@@ -231,9 +231,9 @@ public:
     bool InitControls(CControlUI* pControl, CControlUI* pParent = NULL);
     void ReapObjects(CControlUI* pControl);
 
-    bool AddOptionGroup(LPCTSTR pStrGroupName, CControlUI* pControl);
-    CStdPtrArray* GetOptionGroup(LPCTSTR pStrGroupName);
-    void RemoveOptionGroup(LPCTSTR pStrGroupName, CControlUI* pControl);
+    bool AddOptionGroup(const wchar_t* pStrGroupName, CControlUI* pControl);
+    CStdPtrArray* GetOptionGroup(const wchar_t* pStrGroupName);
+    void RemoveOptionGroup(const wchar_t* pStrGroupName, CControlUI* pControl);
     void RemoveAllOptionGroups();
 
     CControlUI* GetFocus() const;
@@ -254,7 +254,7 @@ public:
     bool AddNotifier(INotifyUI* pControl);
     bool RemoveNotifier(INotifyUI* pControl);   
     void SendNotify(TNotifyUI& Msg, bool bAsync = false);
-    void SendNotify(CControlUI* pControl, LPCTSTR pstrMessage, WPARAM wParam = 0, LPARAM lParam = 0, bool bAsync = false);
+    void SendNotify(CControlUI* pControl, const wchar_t* pstrMessage, WPARAM wParam = 0, LPARAM lParam = 0, bool bAsync = false);
 
     bool AddPreMessageFilter(IMessageFilterUI* pFilter);
     bool RemovePreMessageFilter(IMessageFilterUI* pFilter);
@@ -275,11 +275,11 @@ public:
 
     CControlUI* GetRoot() const;
     CControlUI* FindControl(POINT pt) const;
-    CControlUI* FindControl(LPCTSTR pstrName) const;
+    CControlUI* FindControl(const wchar_t* pstrName) const;
     CControlUI* FindSubControlByPoint(CControlUI* pParent, POINT pt) const;
-    CControlUI* FindSubControlByName(CControlUI* pParent, LPCTSTR pstrName) const;
-    CControlUI* FindSubControlByClass(CControlUI* pParent, LPCTSTR pstrClass, int iIndex = 0);
-    CStdPtrArray* FindSubControlsByClass(CControlUI* pParent, LPCTSTR pstrClass);
+    CControlUI* FindSubControlByName(CControlUI* pParent, const wchar_t* pstrName) const;
+    CControlUI* FindSubControlByClass(CControlUI* pParent, const wchar_t* pstrClass, int iIndex = 0);
+    CStdPtrArray* FindSubControlsByClass(CControlUI* pParent, const wchar_t* pstrClass);
     CStdPtrArray* GetSubControlsByClass();
 
     static void MessageLoop();

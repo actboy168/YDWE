@@ -9,7 +9,7 @@ namespace DuiLib
 		::ZeroMemory(&m_rcTextPadding, sizeof(m_rcTextPadding));
 	}
 
-	LPCTSTR CLabelUI::GetClass() const
+	const wchar_t* CLabelUI::GetClass() const
 	{
 		return DUI_CTR_LABEL;
 	}
@@ -19,7 +19,7 @@ namespace DuiLib
 		return m_sText;
 	}
 
-	void CLabelUI::SetText(LPCTSTR pstrText)
+	void CLabelUI::SetText(const wchar_t* pstrText)
 	{
 		m_sText = pstrText;
 		Invalidate();
@@ -109,7 +109,7 @@ namespace DuiLib
 		CControlUI::DoEvent(event);
 	}
 
-	void CLabelUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CLabelUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("text")) == 0 ) SetText(pstrValue);
 		else if( _tcscmp(pstrName, _T("align")) == 0 ) {
@@ -145,19 +145,19 @@ namespace DuiLib
 		else if( _tcscmp(pstrName, _T("font")) == 0 ) SetFont(_ttoi(pstrValue));
 		else if( _tcscmp(pstrName, _T("textcolor")) == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetTextColor(clrColor);
 		}
 		else if( _tcscmp(pstrName, _T("disabledtextcolor")) == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetDisabledTextColor(clrColor);
 		}
 		else if( _tcscmp(pstrName, _T("textpadding")) == 0 ) {
 			RECT rcTextPadding = { 0 };
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			rcTextPadding.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
 			rcTextPadding.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
 			rcTextPadding.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    

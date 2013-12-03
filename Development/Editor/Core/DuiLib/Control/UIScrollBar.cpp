@@ -15,7 +15,7 @@ namespace DuiLib
 		::ZeroMemory(&m_rcButton2, sizeof(m_rcButton2));
 	}
 
-	LPCTSTR CScrollBarUI::GetClass() const
+	const wchar_t* CScrollBarUI::GetClass() const
 	{
 		return DUI_CTR_SCROLLBAR;
 	}
@@ -521,7 +521,7 @@ namespace DuiLib
 		if( m_pOwner != NULL ) m_pOwner->DoEvent(event); else CControlUI::DoEvent(event);
 	}
 
-	void CScrollBarUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CScrollBarUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("button1normalimage")) == 0 )        m_sButton1NormalImage.reset(new CImage(pstrValue));
 		else if( _tcscmp(pstrName, _T("button1hotimage")) == 0 )      m_sButton1HotImage.reset(new CImage(pstrValue));

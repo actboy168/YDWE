@@ -27,7 +27,7 @@ namespace DuiLib
 		if( m_pHorizontalScrollBar ) delete m_pHorizontalScrollBar;
 	}
 
-	LPCTSTR CContainerUI::GetClass() const
+	const wchar_t* CContainerUI::GetClass() const
 	{
 		return DUI_CTR_CONTAINER;
 	}
@@ -555,11 +555,11 @@ namespace DuiLib
 		}
 	}
 
-	void CContainerUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CContainerUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("inset")) == 0 ) {
 			RECT rcInset = { 0 };
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			rcInset.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
 			rcInset.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
 			rcInset.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
@@ -835,7 +835,7 @@ namespace DuiLib
 		}
 	}
 
-	bool CContainerUI::SetSubControlFixedHeight( LPCTSTR pstrSubControlName,int cy )
+	bool CContainerUI::SetSubControlFixedHeight( const wchar_t* pstrSubControlName,int cy )
 	{
 		CControlUI* pSubControl=NULL;
 		pSubControl=this->FindSubControl(pstrSubControlName);
@@ -848,7 +848,7 @@ namespace DuiLib
 			return FALSE;
 	}
 
-	bool CContainerUI::SetSubControlFixedWdith( LPCTSTR pstrSubControlName,int cx )
+	bool CContainerUI::SetSubControlFixedWdith( const wchar_t* pstrSubControlName,int cx )
 	{
 		CControlUI* pSubControl=NULL;
 		pSubControl=this->FindSubControl(pstrSubControlName);
@@ -861,7 +861,7 @@ namespace DuiLib
 			return FALSE;
 	}
 
-	int CContainerUI::GetSubControlFixedHeight( LPCTSTR pstrSubControlName )
+	int CContainerUI::GetSubControlFixedHeight( const wchar_t* pstrSubControlName )
 	{
 		CControlUI* pSubControl=NULL;
 		pSubControl=this->FindSubControl(pstrSubControlName);
@@ -871,7 +871,7 @@ namespace DuiLib
 			return pSubControl->GetFixedHeight();
 	}
 
-	int CContainerUI::GetSubControlFixedWdith( LPCTSTR pstrSubControlName )
+	int CContainerUI::GetSubControlFixedWdith( const wchar_t* pstrSubControlName )
 	{
 		CControlUI* pSubControl=NULL;
 		pSubControl=this->FindSubControl(pstrSubControlName);
@@ -881,7 +881,7 @@ namespace DuiLib
 			return pSubControl->GetFixedWidth();
 	}
 
-	CControlUI* CContainerUI::FindSubControl( LPCTSTR pstrSubControlName )
+	CControlUI* CContainerUI::FindSubControl( const wchar_t* pstrSubControlName )
 	{
 		CControlUI* pSubControl=NULL;
 		pSubControl=static_cast<CControlUI*>(GetManager()->FindSubControlByName(this,pstrSubControlName));

@@ -10,7 +10,7 @@ namespace DuiLib
 	public:
 		CButtonUI();
 
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 		UINT GetControlFlags() const;
 
 		bool Activate();
@@ -18,7 +18,7 @@ namespace DuiLib
 		void DoEvent(TEventUI& event);
 
 		SIZE EstimateSize(SIZE szAvailable);
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
 		void PaintText(HDC hDC);
 		void PaintStatusImage(HDC hDC);

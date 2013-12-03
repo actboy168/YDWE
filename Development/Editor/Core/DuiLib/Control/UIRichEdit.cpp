@@ -1040,7 +1040,7 @@ CRichEditUI::~CRichEditUI()
     }
 }
 
-LPCTSTR CRichEditUI::GetClass() const
+const wchar_t* CRichEditUI::GetClass() const
 {
     return DUI_CTR_RICHEDIT;
 }
@@ -1128,7 +1128,7 @@ void CRichEditUI::SetFont(int index)
     }
 }
 
-void CRichEditUI::SetFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+void CRichEditUI::SetFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
     if( m_pTwh ) {
         LOGFONT lf = { 0 };
@@ -1200,7 +1200,7 @@ long CRichEditUI::GetTextLength(DWORD dwFlags) const
 std::wstring CRichEditUI::GetText() const
 {
     long lLen = GetTextLength(GTL_DEFAULT);
-    LPTSTR lpText = NULL;
+    const wchar_t* lpText = NULL;
     GETTEXTEX gt;
     gt.flags = GT_DEFAULT;
 #ifdef _UNICODE
@@ -1222,7 +1222,7 @@ std::wstring CRichEditUI::GetText() const
     return sText;
 }
 
-void CRichEditUI::SetText(LPCTSTR pstrText)
+void CRichEditUI::SetText(const wchar_t* pstrText)
 {
 	m_sText.reset(new std::wstring(pstrText));
     if( !m_pTwh ) return;
@@ -1274,7 +1274,7 @@ int CRichEditUI::SetSel(long nStartChar, long nEndChar)
     return (int)lResult;
 }
 
-void CRichEditUI::ReplaceSel(LPCTSTR lpszNewText, bool bCanUndo)
+void CRichEditUI::ReplaceSel(const wchar_t* lpszNewText, bool bCanUndo)
 {
 #ifdef _UNICODE		
     TxSendMessage(EM_REPLACESEL, (WPARAM) bCanUndo, (LPARAM)lpszNewText, 0); 
@@ -1401,14 +1401,14 @@ void CRichEditUI::ScrollCaret()
     TxSendMessage(EM_SCROLLCARET, 0, 0, 0);
 }
 
-int CRichEditUI::InsertText(long nInsertAfterChar, LPCTSTR lpstrText, bool bCanUndo)
+int CRichEditUI::InsertText(long nInsertAfterChar, const wchar_t* lpstrText, bool bCanUndo)
 {
     int nRet = SetSel(nInsertAfterChar, nInsertAfterChar);
     ReplaceSel(lpstrText, bCanUndo);
     return nRet;
 }
 
-int CRichEditUI::AppendText(LPCTSTR lpstrText, bool bCanUndo)
+int CRichEditUI::AppendText(const wchar_t* lpstrText, bool bCanUndo)
 {
     int nRet = SetSel(-1, -1);
     ReplaceSel(lpstrText, bCanUndo);
@@ -2057,7 +2057,7 @@ void CRichEditUI::DoPaint(HDC hDC, const RECT& rcPaint)
     }
 }
 
-void CRichEditUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+void CRichEditUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
     if( _tcscmp(pstrName, _T("vscrollbar")) == 0 ) {
         if( _tcscmp(pstrValue, _T("true")) == 0 ) m_lTwhStyle |= ES_DISABLENOSCROLL | WS_VSCROLL;
@@ -2110,7 +2110,7 @@ void CRichEditUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
     else if( _tcscmp(pstrName, _T("textcolor")) == 0 ) {
         while( *pstrValue > _T('\0') && *pstrValue <= _T(' ') ) pstrValue = ::CharNext(pstrValue);
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        const wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         SetTextColor(clrColor);
     }

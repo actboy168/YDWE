@@ -11,7 +11,7 @@ namespace DuiLib
 		m_szThumb.cx = m_szThumb.cy = 10;
 	}
 
-	LPCTSTR CSliderUI::GetClass() const
+	const wchar_t* CSliderUI::GetClass() const
 	{
 		return DUI_CTR_SLIDER;
 	}
@@ -158,14 +158,14 @@ namespace DuiLib
 	}
 
 
-	void CSliderUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CSliderUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("thumbimage")) == 0 ) m_sThumbImage.reset(new CImage(pstrValue));
 		else if( _tcscmp(pstrName, _T("thumbhotimage")) == 0 ) m_sThumbHotImage.reset(new CImage(pstrValue));
 		else if( _tcscmp(pstrName, _T("thumbpushedimage")) == 0 ) m_sThumbPushedImage.reset(new CImage(pstrValue));
 		else if( _tcscmp(pstrName, _T("thumbsize")) == 0 ) {
 			SIZE szXY = {0};
-			LPTSTR pstr = NULL;
+			const wchar_t* pstr = NULL;
 			szXY.cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
 			szXY.cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
 			SetThumbSize(szXY);

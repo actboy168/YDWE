@@ -7,7 +7,7 @@ namespace DuiLib
 	{
 	}
 
-	LPCTSTR CTabLayoutUI::GetClass() const
+	const wchar_t* CTabLayoutUI::GetClass() const
 	{
 		return DUI_CTR_TABLAYOUT;
 	}
@@ -120,7 +120,7 @@ namespace DuiLib
 			return SelectItem(iIndex);
 	}
 
-	void CTabLayoutUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CTabLayoutUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("selectedid")) == 0 ) SelectItem(_ttoi(pstrValue));
 		return CContainerUI::SetAttribute(pstrName, pstrValue);

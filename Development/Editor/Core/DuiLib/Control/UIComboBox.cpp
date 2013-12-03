@@ -10,12 +10,12 @@ namespace DuiLib
 		m_nArrowWidth = 0;
 	}
 
-	LPCTSTR CComboBoxUI::GetClass() const
+	const wchar_t* CComboBoxUI::GetClass() const
 	{
 		return DUI_CTR_COMBOBOX;
 	}
 
-	void CComboBoxUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CComboBoxUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if (_tcscmp(pstrName, _T("arrowimage")) == 0)
 			m_sArrowImage.reset(new CImage(pstrValue));

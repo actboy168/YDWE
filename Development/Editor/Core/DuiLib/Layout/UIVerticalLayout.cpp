@@ -9,7 +9,7 @@ namespace DuiLib
 		::ZeroMemory(&m_rcNewPos, sizeof(m_rcNewPos));
 	}
 
-	LPCTSTR CVerticalLayoutUI::GetClass() const
+	const wchar_t* CVerticalLayoutUI::GetClass() const
 	{
 		return DUI_CTR_VERTICALLAYOUT;
 	}
@@ -158,7 +158,7 @@ namespace DuiLib
 		return m_bImmMode;
 	}
 
-	void CVerticalLayoutUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CVerticalLayoutUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("sepheight")) == 0 ) SetSepHeight(_ttoi(pstrValue));
 		else if( _tcscmp(pstrName, _T("sepimm")) == 0 ) SetSepImmMode(_tcscmp(pstrValue, _T("true")) == 0);

@@ -33,7 +33,7 @@ public:
     virtual ~CContainerUI();
 
 public:
-    LPCTSTR GetClass() const;
+    const wchar_t* GetClass() const;
 
     CControlUI* GetItemAt(int iIndex) const;
     int GetItemIndex(CControlUI* pControl) const;
@@ -67,19 +67,19 @@ public:
     void SetPos(RECT rc);
     void DoPaint(HDC hDC, const RECT& rcPaint);
 
-    void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+    void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
     void SetManager(CPaintManagerUI* pManager, CControlUI* pParent, bool bInit = true);
 
 	bool ForeachControl(std::function<bool(CControlUI*)> Proc);
     CControlUI* FindControl(FINDCONTROLPROC Proc, LPVOID pData, UINT uFlags);
 
-	bool SetSubControlFixedHeight(LPCTSTR pstrSubControlName,int cy);
-	bool SetSubControlFixedWdith(LPCTSTR pstrSubControlName,int cx);
+	bool SetSubControlFixedHeight(const wchar_t* pstrSubControlName,int cy);
+	bool SetSubControlFixedWdith(const wchar_t* pstrSubControlName,int cx);
 
-	int GetSubControlFixedHeight(LPCTSTR pstrSubControlName);
-	int GetSubControlFixedWdith(LPCTSTR pstrSubControlName);
-	CControlUI* FindSubControl(LPCTSTR pstrSubControlName);
+	int GetSubControlFixedHeight(const wchar_t* pstrSubControlName);
+	int GetSubControlFixedWdith(const wchar_t* pstrSubControlName);
+	CControlUI* FindSubControl(const wchar_t* pstrSubControlName);
 
     virtual SIZE GetScrollPos() const;
     virtual SIZE GetScrollRange() const;

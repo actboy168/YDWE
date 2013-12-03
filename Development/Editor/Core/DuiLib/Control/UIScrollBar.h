@@ -10,7 +10,7 @@ namespace DuiLib
 	public:
 		CScrollBarUI();
 
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 
 		CContainerUI* GetOwner() const;
 		void SetOwner(CContainerUI* pOwner);
@@ -35,7 +35,7 @@ namespace DuiLib
 
 		void SetPos(RECT rc);
 		void DoEvent(TEventUI& event);
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
 		void DoPaint(HDC hDC, const RECT& rcPaint);
 

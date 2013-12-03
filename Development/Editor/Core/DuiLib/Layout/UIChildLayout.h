@@ -11,10 +11,10 @@ namespace DuiLib
 		CChildLayoutUI();
 
 		void Init();
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 		void SetChildLayoutXML(const std::wstring& pXML);
 		const std::wstring& GetChildLayoutXML() const;
-		virtual LPCTSTR GetClass() const;
+		virtual const wchar_t* GetClass() const;
 
 	private:
 #pragma warning(suppress:4251)

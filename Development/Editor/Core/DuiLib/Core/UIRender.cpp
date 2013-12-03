@@ -698,7 +698,7 @@ bool CRenderEngine::DrawImage(HDC hDC, CPaintManagerUI* pManager, const RECT& rc
 }
 
 bool CRenderEngine::DrawImageString(HDC hDC, CPaintManagerUI* pManager, const RECT& rc, const RECT& rcPaint, 
-                                          LPCTSTR pStrImage, LPCTSTR pStrModify)
+                                          const wchar_t* pStrImage, const wchar_t* pStrModify)
 {
 	if ((pManager == NULL) || (hDC == NULL)) return false;
 
@@ -720,7 +720,7 @@ bool CRenderEngine::DrawImageString(HDC hDC, CPaintManagerUI* pManager, const RE
 
     std::wstring sItem;
     std::wstring sValue;
-    LPTSTR pstr = NULL;
+    wchar_t* pstr = NULL;
 
     for( int i = 0; i < 2; ++i,image_count = 0 ) {
         if( i == 1)
@@ -733,7 +733,7 @@ bool CRenderEngine::DrawImageString(HDC hDC, CPaintManagerUI* pManager, const RE
             sValue.clear();
             while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNext(pStrImage);
             while( *pStrImage != _T('\0') && *pStrImage != _T('=') && *pStrImage > _T(' ') ) {
-                LPTSTR pstrTemp = ::CharNext(pStrImage);
+                const wchar_t* pstrTemp = ::CharNext(pStrImage);
                 while( pStrImage < pstrTemp) {
                     sItem += *pStrImage++;
                 }
@@ -743,7 +743,7 @@ bool CRenderEngine::DrawImageString(HDC hDC, CPaintManagerUI* pManager, const RE
             while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNext(pStrImage);
             if( *pStrImage++ != _T('\'') ) break;
             while( *pStrImage != _T('\0') && *pStrImage != _T('\'') ) {
-                LPTSTR pstrTemp = ::CharNext(pStrImage);
+                const wchar_t* pstrTemp = ::CharNext(pStrImage);
                 while( pStrImage < pstrTemp) {
                     sValue += *pStrImage++;
                 }
@@ -948,7 +948,7 @@ void CRenderEngine::DrawRoundRect(HDC hDC, const RECT& rc, int nSize, int width,
     ::DeleteObject(hPen);
 }
 
-void CRenderEngine::DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, LPCTSTR pstrText, DWORD dwTextColor, int iFont, UINT uStyle)
+void CRenderEngine::DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, const wchar_t* pstrText, DWORD dwTextColor, int iFont, UINT uStyle)
 {
     ASSERT(::GetObjectType(hDC)==OBJ_DC || ::GetObjectType(hDC)==OBJ_MEMDC);
     if( pstrText == NULL || pManager == NULL ) return;

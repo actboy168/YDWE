@@ -8,7 +8,7 @@ namespace DuiLib {
 class IDialogBuilderCallback
 {
 public:
-    virtual CControlUI* CreateControl(LPCTSTR pstrClass) = 0;
+    virtual CControlUI* CreateControl(const wchar_t* pstrClass) = 0;
 };
 
 
@@ -23,8 +23,8 @@ public:
 
     CMarkup* GetMarkup();
 
-    void GetLastErrorMessage(LPTSTR pstrMessage, SIZE_T cchMax) const;
-    void GetLastErrorLocation(LPTSTR pstrSource, SIZE_T cchMax) const;
+    void GetLastErrorMessage(wchar_t* pstrMessage, SIZE_T cchMax) const;
+    void GetLastErrorLocation(wchar_t* pstrSource, SIZE_T cchMax) const;
 private:
     CControlUI* _Parse(CMarkupNode* parent, CControlUI* pParent = NULL, CPaintManagerUI* pManager = NULL);
 

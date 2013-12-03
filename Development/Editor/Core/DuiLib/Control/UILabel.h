@@ -10,11 +10,11 @@ namespace DuiLib
 	public:
 		CLabelUI();
 
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 
 		// 文本相关
 		virtual std::wstring const& GetText() const;
-		virtual void SetText(LPCTSTR pstrText);
+		virtual void SetText(const wchar_t* pstrText);
 
 		void SetTextStyle(UINT uStyle);
 		UINT GetTextStyle() const;
@@ -29,7 +29,7 @@ namespace DuiLib
 
 		SIZE EstimateSize(SIZE szAvailable);
 		void DoEvent(TEventUI& event);
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
 		void PaintText(HDC hDC);
 

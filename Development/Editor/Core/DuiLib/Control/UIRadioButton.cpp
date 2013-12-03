@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	LPCTSTR CRadioButtonUI::GetClass() const
+	const wchar_t* CRadioButtonUI::GetClass() const
 	{
 		return DUI_CTR_RADIOBUTTON;
 	}
@@ -21,7 +21,7 @@ namespace DuiLib
 		return m_sGroupName;
 	}
 
-	void CRadioButtonUI::SetGroup(LPCTSTR pStrGroupName)
+	void CRadioButtonUI::SetGroup(const wchar_t* pStrGroupName)
 	{
 		if( pStrGroupName == NULL ) {
 			if( m_sGroupName.empty() ) return;
@@ -84,7 +84,7 @@ namespace DuiLib
 		return true;
 	}
 
-	void CRadioButtonUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CRadioButtonUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("group")) == 0 ) SetGroup(pstrValue);
 		else CCheckBoxUI::SetAttribute(pstrName, pstrValue);

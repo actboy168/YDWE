@@ -33,7 +33,7 @@ namespace DuiLib {
 //
 
 #ifdef _DEBUG
-void UILIB_API DUI__Trace(LPCTSTR pstrFormat, ...)
+void UILIB_API DUI__Trace(const wchar_t* pstrFormat, ...)
 {
     TCHAR szBuffer[300] = { 0 };
     va_list args;
@@ -44,7 +44,7 @@ void UILIB_API DUI__Trace(LPCTSTR pstrFormat, ...)
     ::OutputDebugString(szBuffer);
 }
 
-LPCTSTR DUI__TraceMsg(UINT uMsg)
+const wchar_t* DUI__TraceMsg(UINT uMsg)
 {
 #define MSGDEF(x) if(uMsg==x) return _T(#x)
     MSGDEF(WM_SETCURSOR);
@@ -242,17 +242,17 @@ CWindowWnd::operator HWND() const
     return m_hWnd;
 }
 
-HWND CWindowWnd::CreateDuiWindow( HWND hwndParent, LPCTSTR pstrWindowName,DWORD dwStyle /*=0*/, DWORD dwExStyle /*=0*/ )
+HWND CWindowWnd::CreateDuiWindow( HWND hwndParent, const wchar_t* pstrWindowName,DWORD dwStyle /*=0*/, DWORD dwExStyle /*=0*/ )
 {
 	return Create(hwndParent,pstrWindowName,dwStyle,dwExStyle,0,0,0,0,NULL);
 }
 
-HWND CWindowWnd::Create(HWND hwndParent, LPCTSTR pstrName, DWORD dwStyle, DWORD dwExStyle, const RECT rc, HMENU hMenu)
+HWND CWindowWnd::Create(HWND hwndParent, const wchar_t* pstrName, DWORD dwStyle, DWORD dwExStyle, const RECT rc, HMENU hMenu)
 {
     return Create(hwndParent, pstrName, dwStyle, dwExStyle, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, hMenu);
 }
 
-HWND CWindowWnd::Create(HWND hwndParent, LPCTSTR pstrName, DWORD dwStyle, DWORD dwExStyle, int x, int y, int cx, int cy, HMENU hMenu)
+HWND CWindowWnd::Create(HWND hwndParent, const wchar_t* pstrName, DWORD dwStyle, DWORD dwExStyle, int x, int y, int cx, int cy, HMENU hMenu)
 {
     if (!RegisterWindowClass()) return NULL;
 	m_hWnd = ::CreateWindowEx(dwExStyle, GetWindowClassName(), pstrName, dwStyle, x, y, cx, cy, hwndParent, hMenu, CPaintManagerUI::GetInstance(), this);

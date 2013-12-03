@@ -58,10 +58,10 @@ namespace DuiLib
 
 	//************************************
 	// 函数名称: GetClass
-	// 返回类型: LPCTSTR
+	// 返回类型: const wchar_t*
 	// 函数说明: 
 	//************************************
-	LPCTSTR CTreeNodeUI::GetClass() const
+	const wchar_t* CTreeNodeUI::GetClass() const
 	{
 		return DUI_CTR_TREENODE;
 	}
@@ -267,10 +267,10 @@ namespace DuiLib
 	//************************************
 	// 函数名称: SetItemText
 	// 返回类型: void
-	// 参数信息: LPCTSTR pstrValue
+	// 参数信息: const wchar_t* pstrValue
 	// 函数说明: 
 	//************************************
-	void CTreeNodeUI::SetItemText( LPCTSTR pstrValue )
+	void CTreeNodeUI::SetItemText( const wchar_t* pstrValue )
 	{
 		pItemButton->SetText(pstrValue);
 	}
@@ -427,11 +427,11 @@ namespace DuiLib
 	//************************************
 	// 函数名称: SetAttribute
 	// 返回类型: void
-	// 参数信息: LPCTSTR pstrName
-	// 参数信息: LPCTSTR pstrValue
+	// 参数信息: const wchar_t* pstrName
+	// 参数信息: const wchar_t* pstrValue
 	// 函数说明: 
 	//************************************
-	void CTreeNodeUI::SetAttribute( LPCTSTR pstrName, LPCTSTR pstrValue )
+	void CTreeNodeUI::SetAttribute( const wchar_t* pstrName, const wchar_t* pstrValue )
 	{
 		if(_tcscmp(pstrName, _T("text")) == 0 )
 			pItemButton->SetText(pstrValue);
@@ -447,25 +447,25 @@ namespace DuiLib
 			pItemButton->ApplyAttributeTable(m_pManager->GetDefaultAttributeList(pstrValue));
 		else if(_tcscmp(pstrName, _T("itemtextcolor")) == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetItemTextColor(clrColor);
 		}
 		else if(_tcscmp(pstrName, _T("itemhottextcolor")) == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetItemHotTextColor(clrColor);
 		}
 		else if(_tcscmp(pstrName, _T("selitemtextcolor")) == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetSelItemTextColor(clrColor);
 		}
 		else if(_tcscmp(pstrName, _T("selitemhottextcolor")) == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetSelItemHotTextColor(clrColor);
 		}
@@ -717,10 +717,10 @@ namespace DuiLib
 
 	//************************************
 	// 函数名称: GetClass
-	// 返回类型: LPCTSTR
+	// 返回类型: const wchar_t*
 	// 函数说明: 
 	//************************************
-	LPCTSTR CTreeViewUI::GetClass() const
+	const wchar_t* CTreeViewUI::GetClass() const
 	{
 		return DUI_CTR_TREEVIEW;
 	}
@@ -1181,11 +1181,11 @@ namespace DuiLib
 	//************************************
 	// 函数名称: SetAttribute
 	// 返回类型: void
-	// 参数信息: LPCTSTR pstrName
-	// 参数信息: LPCTSTR pstrValue
+	// 参数信息: const wchar_t* pstrName
+	// 参数信息: const wchar_t* pstrValue
 	// 函数说明: 
 	//************************************
-	void CTreeViewUI::SetAttribute( LPCTSTR pstrName, LPCTSTR pstrValue )
+	void CTreeViewUI::SetAttribute( const wchar_t* pstrName, const wchar_t* pstrValue )
 	{
 		if(_tcscmp(pstrName,_T("visiblefolderbtn")) == 0)
 			SetVisibleFolderBtn(_tcscmp(pstrValue,_T("true")) == 0);
@@ -1195,25 +1195,25 @@ namespace DuiLib
 			SetItemMinWidth(_ttoi(pstrValue));
 		else if(_tcscmp(pstrName, _T("itemtextcolor")) == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetItemTextColor(clrColor);
 		}
 		else if(_tcscmp(pstrName, _T("itemhottextcolor")) == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetItemHotTextColor(clrColor);
 		}
 		else if(_tcscmp(pstrName, _T("selitemtextcolor")) == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetSelItemTextColor(clrColor);
 		}
 		else if(_tcscmp(pstrName, _T("selitemhottextcolor")) == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetSelItemHotTextColor(clrColor);
 		}

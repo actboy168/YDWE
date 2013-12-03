@@ -12,7 +12,7 @@ namespace DuiLib
 		SetFixedHeight(12);
 	}
 
-	LPCTSTR CProgressUI::GetClass() const
+	const wchar_t* CProgressUI::GetClass() const
 	{
 		return DUI_CTR_PROGRESS;
 	}
@@ -63,7 +63,7 @@ namespace DuiLib
 		Invalidate();
 	}
 
-	void CProgressUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CProgressUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("foreimage")) == 0 ) m_sForeImage.reset(new CImage(pstrValue));
 		else if( _tcscmp(pstrName, _T("hor")) == 0 ) SetHorizontal(_tcscmp(pstrValue, _T("true")) == 0);

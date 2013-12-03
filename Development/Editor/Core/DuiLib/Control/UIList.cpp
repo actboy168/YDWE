@@ -23,22 +23,22 @@ void TListInfoUI::SetLineColor(DWORD dwColor)
 	dwLineColor = dwColor;
 }
 
-void TListInfoUI::SetBkImage(LPCTSTR pStrImage)
+void TListInfoUI::SetBkImage(const wchar_t* pStrImage)
 {
 	sBkImage.reset(new CImage(pStrImage));
 }
 
-void TListInfoUI::SetSelectedImage(LPCTSTR pStrImage)
+void TListInfoUI::SetSelectedImage(const wchar_t* pStrImage)
 {
 	sSelectedImage.reset(new CImage(pStrImage));
 }
 
-void TListInfoUI::SetHotImage(LPCTSTR pStrImage)
+void TListInfoUI::SetHotImage(const wchar_t* pStrImage)
 {
 	sHotImage.reset(new CImage(pStrImage));
 }
 
-void TListInfoUI::SetDisabledImage(LPCTSTR pStrImage)
+void TListInfoUI::SetDisabledImage(const wchar_t* pStrImage)
 {
 	sDisabledImage.reset(new CImage(pStrImage));
 }
@@ -153,7 +153,7 @@ CListUI::CListUI() : m_pCallback(NULL), m_bScrollSelect(false), m_iCurSel(-1), m
     ::ZeroMemory(&m_ListInfo.rcColumn, sizeof(m_ListInfo.rcColumn));
 }
 
-LPCTSTR CListUI::GetClass() const
+const wchar_t* CListUI::GetClass() const
 {
     return DUI_CTR_LIST;
 }
@@ -594,7 +594,7 @@ void CListUI::Scroll(int dx, int dy)
     m_pList->SetScrollPos(CSize(sz.cx + dx, sz.cy + dy));
 }
 
-void CListUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+void CListUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
     if( _tcscmp(pstrName, _T("header")) == 0 ) GetHeader()->SetVisible(_tcscmp(pstrValue, _T("hidden")) != 0);
     else if( _tcscmp(pstrName, _T("headerbkimage")) == 0 ) GetHeader()->SetBkImage(pstrValue);
@@ -621,7 +621,7 @@ void CListUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
     }    
     if( _tcscmp(pstrName, _T("itemtextpadding")) == 0 ) {
         RECT rcTextPadding = { 0 };
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         rcTextPadding.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
         rcTextPadding.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
         rcTextPadding.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
@@ -630,13 +630,13 @@ void CListUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
     }
     else if( _tcscmp(pstrName, _T("itemtextcolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetTextColor(clrColor);
     }
     else if( _tcscmp(pstrName, _T("itembkcolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetBkColor(clrColor);
     }
@@ -644,46 +644,46 @@ void CListUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
     else if( _tcscmp(pstrName, _T("itemaltbk")) == 0 ) m_ListInfo.SetAlternateBk(_tcscmp(pstrValue, _T("true")) == 0);
     else if( _tcscmp(pstrName, _T("itemselectedtextcolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetSelectedTextColor(clrColor);
     }
     else if( _tcscmp(pstrName, _T("itemselectedbkcolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetSelectedBkColor(clrColor);
     }
     else if( _tcscmp(pstrName, _T("itemselectedimage")) == 0 ) m_ListInfo.SetSelectedImage(pstrValue);
     else if( _tcscmp(pstrName, _T("itemhottextcolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetHotTextColor(clrColor);
     }
     else if( _tcscmp(pstrName, _T("itemhotbkcolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetHotBkColor(clrColor);
     }
     else if( _tcscmp(pstrName, _T("itemhotimage")) == 0 ) m_ListInfo.SetHotImage(pstrValue);
     else if( _tcscmp(pstrName, _T("itemdisabledtextcolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetDisabledTextColor(clrColor);
     }
     else if( _tcscmp(pstrName, _T("itemdisabledbkcolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetDisabledBkColor(clrColor);
     }
     else if( _tcscmp(pstrName, _T("itemdisabledimage")) == 0 ) m_ListInfo.SetDisabledImage(pstrValue);
     else if( _tcscmp(pstrName, _T("itemlinecolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetLineColor(clrColor);
     }
@@ -1017,7 +1017,7 @@ CListHeaderUI::CListHeaderUI()
 {
 }
 
-LPCTSTR CListHeaderUI::GetClass() const
+const wchar_t* CListHeaderUI::GetClass() const
 {
     return DUI_CTR_LISTHEADER;
 }
@@ -1052,7 +1052,7 @@ m_uTextStyle(DT_VCENTER | DT_CENTER | DT_SINGLELINE), m_dwTextColor(0), m_iFont(
     SetMinWidth(16);
 }
 
-LPCTSTR CListHeaderItemUI::GetClass() const
+const wchar_t* CListHeaderItemUI::GetClass() const
 {
     return DUI_CTR_LISTHEADERITEM;
 }
@@ -1130,7 +1130,7 @@ void CListHeaderItemUI::SetFont(int index)
     m_iFont = index;
 }
 
-void CListHeaderItemUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+void CListHeaderItemUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
     if( _tcscmp(pstrName, _T("dragable")) == 0 ) SetDragable(_tcscmp(pstrValue, _T("true")) == 0);
     else if( _tcscmp(pstrName, _T("sepwidth")) == 0 ) SetSepWidth(_ttoi(pstrValue));
@@ -1155,13 +1155,13 @@ void CListHeaderItemUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
     else if( _tcscmp(pstrName, _T("font")) == 0 ) SetFont(_ttoi(pstrValue));
     else if( _tcscmp(pstrName, _T("textcolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         SetTextColor(clrColor);
     }
 	else if( _tcscmp(pstrName, _T("textpadding")) == 0 ) {
 		RECT rcTextPadding = { 0 };
-		LPTSTR pstr = NULL;
+		wchar_t* pstr = NULL;
 		rcTextPadding.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
 		rcTextPadding.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
 		rcTextPadding.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
@@ -1354,7 +1354,7 @@ m_uButtonState(0)
 {
 }
 
-LPCTSTR CListElementUI::GetClass() const
+const wchar_t* CListElementUI::GetClass() const
 {
     return DUI_CTR_LISTELEMENT;
 }
@@ -1513,7 +1513,7 @@ void CListElementUI::DoEvent(TEventUI& event)
     if( m_pOwner != NULL ) m_pOwner->DoEvent(event); else CControlUI::DoEvent(event);
 }
 
-void CListElementUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+void CListElementUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
     if( _tcscmp(pstrName, _T("selected")) == 0 ) Select();
     else CControlUI::SetAttribute(pstrName, pstrValue);
@@ -1586,7 +1586,7 @@ CListLabelElementUI::CListLabelElementUI()
 {
 }
 
-LPCTSTR CListLabelElementUI::GetClass() const
+const wchar_t* CListLabelElementUI::GetClass() const
 {
     return DUI_CTR_LISTLABELELEMENT;
 }
@@ -1700,7 +1700,7 @@ CListTextElementUI::CListTextElementUI() : m_nLinks(0), m_nHoverLink(-1), m_pOwn
 CListTextElementUI::~CListTextElementUI()
 { }
 
-LPCTSTR CListTextElementUI::GetClass() const
+const wchar_t* CListTextElementUI::GetClass() const
 {
     return DUI_CTR_LISTTEXTELEMENT;
 }
@@ -1710,13 +1710,13 @@ UINT CListTextElementUI::GetControlFlags() const
     return UIFLAG_WANTRETURN | ( (IsEnabled() && m_nLinks > 0) ? UIFLAG_SETCURSOR : 0);
 }
 
-LPCTSTR CListTextElementUI::GetText(int iIndex) const
+const wchar_t* CListTextElementUI::GetText(int iIndex) const
 {
 	if (iIndex < 0 || (size_t)iIndex >= m_aTexts.size()) NULL;
     return m_aTexts[iIndex].c_str();
 }
 
-void CListTextElementUI::SetText(int iIndex, LPCTSTR pstrText)
+void CListTextElementUI::SetText(int iIndex, const wchar_t* pstrText)
 {
     if( m_pOwner == NULL ) return;
     TListInfoUI* pInfo = m_pOwner->GetListInfo();
@@ -1829,7 +1829,7 @@ void CListTextElementUI::DrawItemText(HDC hDC, const RECT& rcItem)
         rcItem.top += pInfo->rcTextPadding.top;
         rcItem.bottom -= pInfo->rcTextPadding.bottom;
 
-        std::wstring strText;//不使用LPCTSTR，否则限制太多 by cddjr 2011/10/20
+        std::wstring strText;//不使用const wchar_t*，否则限制太多 by cddjr 2011/10/20
         if( pCallback ) strText = pCallback->GetItemText(this, m_iIndex, i);
         else strText = GetText(i);
         CRenderEngine::DrawText(hDC, m_pManager, rcItem, strText.c_str(), iTextColor, pInfo->nFont, DT_SINGLELINE | pInfo->uTextStyle);
@@ -1855,7 +1855,7 @@ m_uButtonState(0)
 {
 }
 
-LPCTSTR CListContainerElementUI::GetClass() const
+const wchar_t* CListContainerElementUI::GetClass() const
 {
     return DUI_CTR_LISTCONTAINERELEMENT;
 }
@@ -2048,7 +2048,7 @@ void CListContainerElementUI::DoEvent(TEventUI& event)
     if( m_pOwner != NULL ) m_pOwner->DoEvent(event); else CControlUI::DoEvent(event);
 }
 
-void CListContainerElementUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+void CListContainerElementUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
     if( _tcscmp(pstrName, _T("selected")) == 0 ) Select();
     else CContainerUI::SetAttribute(pstrName, pstrValue);

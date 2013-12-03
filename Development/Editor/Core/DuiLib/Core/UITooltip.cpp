@@ -15,7 +15,7 @@ namespace DuiLib
 		}
 	}
 
-	void CTooltip::Open(HINSTANCE hInstance, HWND hWndPaint, LPCTSTR szText, RECT const& rc)
+	void CTooltip::Open(HINSTANCE hInstance, HWND hWndPaint, const wchar_t* szText, RECT const& rc)
 	{
 		::ZeroMemory(&m_ToolTip, sizeof(TOOLINFO));
 		m_ToolTip.cbSize   = sizeof(TOOLINFO);
@@ -23,7 +23,7 @@ namespace DuiLib
 		m_ToolTip.hwnd     = hWndPaint;
 		m_ToolTip.uId      = (UINT_PTR)hWndPaint;
 		m_ToolTip.hinst    = hInstance;
-		m_ToolTip.lpszText = const_cast<LPTSTR>((LPCTSTR)szText);
+		m_ToolTip.lpszText = const_cast<wchar_t*>(szText);
 		m_ToolTip.rect     = rc;
 
 		if (m_hWndTooltip == NULL || !::IsWindow(m_hWndTooltip))

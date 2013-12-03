@@ -25,7 +25,7 @@ namespace DuiLib
 		}
 	}
 
-	void CChildLayoutUI::SetAttribute( LPCTSTR pstrName, LPCTSTR pstrValue )
+	void CChildLayoutUI::SetAttribute( const wchar_t* pstrName, const wchar_t* pstrValue )
 	{
 		if( _tcscmp(pstrName, _T("xmlfile")) == 0 )
 			SetChildLayoutXML(pstrValue);
@@ -43,7 +43,7 @@ namespace DuiLib
 		return m_pstrXMLFile;
 	}
 
-	LPCTSTR CChildLayoutUI::GetClass() const
+	const wchar_t* CChildLayoutUI::GetClass() const
 	{
 		return DUI_CTR_CHILDLAYOUT;
 	}

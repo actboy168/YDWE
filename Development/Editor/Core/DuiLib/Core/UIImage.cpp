@@ -6,7 +6,7 @@ namespace DuiLib
 	{
 	}
 
-	CImage::CImage(LPCTSTR pStrImage)
+	CImage::CImage(const wchar_t* pStrImage)
 	{
 		Parse(pStrImage);
 	}
@@ -34,7 +34,7 @@ namespace DuiLib
 		}
 	}
 
-	bool CImage::Draw(HDC hDC, CPaintManagerUI* pManager, const RECT& rc, const RECT& rcPaint, LPCTSTR pStrModify) const
+	bool CImage::Draw(HDC hDC, CPaintManagerUI* pManager, const RECT& rc, const RECT& rcPaint, const wchar_t* pStrModify) const
 	{
 		if (!pStrModify)
 		{
@@ -46,7 +46,7 @@ namespace DuiLib
 		return temp.Draw(hDC, pManager, rc, rcPaint);
 	}
 
-	void CImage::Parse(LPCTSTR pStrImage)
+	void CImage::Parse(const wchar_t* pStrImage)
 	{
 		if (!pStrImage) return;
 
@@ -65,7 +65,7 @@ namespace DuiLib
 
 		std::wstring sItem;
 		std::wstring sValue;
-		LPTSTR pstr = NULL;
+		wchar_t* pstr = NULL;
 
 		while (*pStrImage != _T('\0'))
 		{
@@ -74,7 +74,7 @@ namespace DuiLib
 			while (*pStrImage > _T('\0') && *pStrImage <= _T(' ')) pStrImage = ::CharNext(pStrImage);
 			while (*pStrImage != _T('\0') && *pStrImage != _T('=') && *pStrImage > _T(' ')) 
 			{
-				LPTSTR pstrTemp = ::CharNext(pStrImage);
+				const wchar_t* pstrTemp = ::CharNext(pStrImage);
 				while( pStrImage < pstrTemp) 
 				{
 					sItem += *pStrImage++;
@@ -86,7 +86,7 @@ namespace DuiLib
 			if( *pStrImage++ != _T('\'') ) break;
 			while( *pStrImage != _T('\0') && *pStrImage != _T('\'') ) 
 			{
-				LPTSTR pstrTemp = ::CharNext(pStrImage);
+				const wchar_t* pstrTemp = ::CharNext(pStrImage);
 				while( pStrImage < pstrTemp) 
 				{
 					sValue += *pStrImage++;

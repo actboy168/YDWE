@@ -15,7 +15,7 @@ public:
     CRichEditUI();
     virtual ~CRichEditUI();
 
-    LPCTSTR GetClass() const;
+    const wchar_t* GetClass() const;
     UINT GetControlFlags() const;
 
     bool IsWantTab();
@@ -32,7 +32,7 @@ public:
     void SetWordWrap(bool bWordWrap = true);
     int GetFont();
     void SetFont(int index);
-    void SetFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+    void SetFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
     LONG GetWinStyle();
     void SetWinStyle(LONG lStyle);
     DWORD GetTextColor();
@@ -41,14 +41,14 @@ public:
     void SetLimitText(int iChars);
     long GetTextLength(DWORD dwFlags = GTL_DEFAULT) const;
     std::wstring GetText() const;
-    void SetText(LPCTSTR pstrText);
+    void SetText(const wchar_t* pstrText);
     bool GetModify() const;
     void SetModify(bool bModified = true) const;
     void GetSel(CHARRANGE &cr) const;
     void GetSel(long& nStartChar, long& nEndChar) const;
     int SetSel(CHARRANGE &cr);
     int SetSel(long nStartChar, long nEndChar);
-    void ReplaceSel(LPCTSTR lpszNewText, bool bCanUndo);
+    void ReplaceSel(const wchar_t* lpszNewText, bool bCanUndo);
     void ReplaceSelW(LPCWSTR lpszNewText, bool bCanUndo = false);
     std::wstring GetSelText() const;
     int SetSelAll();
@@ -64,8 +64,8 @@ public:
     std::wstring GetTextRange(long nStartChar, long nEndChar) const;
     void HideSelection(bool bHide = true, bool bChangeStyle = false);
     void ScrollCaret();
-    int InsertText(long nInsertAfterChar, LPCTSTR lpstrText, bool bCanUndo = false);
-    int AppendText(LPCTSTR lpstrText, bool bCanUndo = false);
+    int InsertText(long nInsertAfterChar, const wchar_t* lpstrText, bool bCanUndo = false);
+    int AppendText(const wchar_t* lpstrText, bool bCanUndo = false);
     DWORD GetDefaultCharFormat(CHARFORMAT2 &cf) const;
     bool SetDefaultCharFormat(CHARFORMAT2 &cf);
     DWORD GetSelectionCharFormat(CHARFORMAT2 &cf) const;
@@ -121,7 +121,7 @@ public:
     void DoEvent(TEventUI& event);
     void DoPaint(HDC hDC, const RECT& rcPaint);
 
-    void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+    void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
     LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled);
 

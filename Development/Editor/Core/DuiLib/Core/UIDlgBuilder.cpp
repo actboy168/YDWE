@@ -30,18 +30,18 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
 
     if (pManager) 
 	{
-        LPCTSTR pstrClass = NULL;
+        const wchar_t* pstrClass = NULL;
         int nAttributes = 0;
-        LPCTSTR pstrName = NULL;
-        LPCTSTR pstrValue = NULL;
-        LPTSTR pstr = NULL;
+        const wchar_t* pstrName = NULL;
+        const wchar_t* pstrValue = NULL;
+        wchar_t* pstr = NULL;
         for (CMarkupNode node = root.GetChild() ; node.IsValid(); node = node.GetSibling() ) 
 		{
             pstrClass = node.GetName();
             if (_tcscmp(pstrClass, _T("Image")) == 0)
 			{
                 nAttributes = node.GetAttributeCount();
-                LPCTSTR pImageName = NULL;
+                const wchar_t* pImageName = NULL;
                 DWORD mask = 0;
                 for( int i = 0; i < nAttributes; i++ ) {
                     pstrName = node.GetAttributeName(i);
@@ -59,7 +59,7 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
             else if( _tcscmp(pstrClass, _T("Font")) == 0 ) 
 			{
                 nAttributes = node.GetAttributeCount();
-                LPCTSTR pFontName = NULL;
+                const wchar_t* pFontName = NULL;
                 int size = 12;
                 bool bold = false;
                 bool underline = false;
@@ -102,14 +102,14 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
                     pstrName = root.GetAttributeName(i);
                     pstrValue = root.GetAttributeValue(i);
                     if( _tcscmp(pstrName, _T("size")) == 0 ) {
-                        LPTSTR pstr = NULL;
+                        wchar_t* pstr = NULL;
                         int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
                         int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetInitSize(cx, cy);
                     } 
                     else if( _tcscmp(pstrName, _T("sizebox")) == 0 ) {
                         RECT rcSizeBox = { 0 };
-                        LPTSTR pstr = NULL;
+                        wchar_t* pstr = NULL;
                         rcSizeBox.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
                         rcSizeBox.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
                         rcSizeBox.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
@@ -118,7 +118,7 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
                     }
                     else if( _tcscmp(pstrName, _T("caption")) == 0 ) {
                         RECT rcCaption = { 0 };
-                        LPTSTR pstr = NULL;
+                        wchar_t* pstr = NULL;
                         rcCaption.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
                         rcCaption.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
                         rcCaption.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
@@ -126,19 +126,19 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
                         pManager->SetCaptionRect(rcCaption);
                     }
                     else if( _tcscmp(pstrName, _T("roundcorner")) == 0 ) {
-                        LPTSTR pstr = NULL;
+                        wchar_t* pstr = NULL;
                         int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
                         int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetRoundCorner(cx, cy);
                     } 
                     else if( _tcscmp(pstrName, _T("mininfo")) == 0 ) {
-                        LPTSTR pstr = NULL;
+                        wchar_t* pstr = NULL;
                         int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
                         int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetMinInfo(cx, cy);
                     }
                     else if( _tcscmp(pstrName, _T("maxinfo")) == 0 ) {
-                        LPTSTR pstr = NULL;
+                        wchar_t* pstr = NULL;
                         int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
                         int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetMaxInfo(cx, cy);
@@ -154,31 +154,31 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
                     } 
                     else if( _tcscmp(pstrName, _T("disabledfontcolor")) == 0 ) {
                         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-                        LPTSTR pstr = NULL;
+                        wchar_t* pstr = NULL;
                         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultDisabledColor(clrColor);
                     } 
                     else if( _tcscmp(pstrName, _T("defaultfontcolor")) == 0 ) {
                         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-                        LPTSTR pstr = NULL;
+                        wchar_t* pstr = NULL;
                         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultFontColor(clrColor);
                     }
                     else if( _tcscmp(pstrName, _T("linkfontcolor")) == 0 ) {
                         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-                        LPTSTR pstr = NULL;
+                        wchar_t* pstr = NULL;
                         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultLinkFontColor(clrColor);
                     } 
                     else if( _tcscmp(pstrName, _T("linkhoverfontcolor")) == 0 ) {
                         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-                        LPTSTR pstr = NULL;
+                        wchar_t* pstr = NULL;
                         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultLinkHoverFontColor(clrColor);
                     } 
                     else if( _tcscmp(pstrName, _T("selectedcolor")) == 0 ) {
                         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-                        LPTSTR pstr = NULL;
+                        wchar_t* pstr = NULL;
                         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultSelectedBkColor(clrColor);
                     } 
@@ -194,12 +194,12 @@ CMarkup* CDialogBuilder::GetMarkup()
     return &m_xml;
 }
 
-void CDialogBuilder::GetLastErrorMessage(LPTSTR pstrMessage, SIZE_T cchMax) const
+void CDialogBuilder::GetLastErrorMessage(wchar_t* pstrMessage, SIZE_T cchMax) const
 {
     return m_xml.GetLastErrorMessage(pstrMessage, cchMax);
 }
 
-void CDialogBuilder::GetLastErrorLocation(LPTSTR pstrSource, SIZE_T cchMax) const
+void CDialogBuilder::GetLastErrorLocation(wchar_t* pstrSource, SIZE_T cchMax) const
 {
     return m_xml.GetLastErrorLocation(pstrSource, cchMax);
 }
@@ -209,7 +209,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
     IContainerUI* pContainer = NULL;
     CControlUI* pReturn = NULL;
     for( CMarkupNode node = pRoot->GetChild() ; node.IsValid(); node = node.GetSibling() ) {
-        LPCTSTR pstrClass = node.GetName();
+        const wchar_t* pstrClass = node.GetName();
         if( _tcscmp(pstrClass, _T("Image")) == 0 || _tcscmp(pstrClass, _T("Font")) == 0 \
              ) continue;
 
@@ -217,7 +217,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 
 		if (_tcscmp(pstrClass, _T("Class")) == 0) 
 		{
-			LPCTSTR pControlName = node.GetAttributeValue(_T("name"));
+			const wchar_t* pControlName = node.GetAttributeValue(_T("name"));
 
 			if (pControlName && pControlName[0]) 
 			{
@@ -246,11 +246,11 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 		}
         else if (_tcscmp(pstrClass, _T("Include")) == 0)
 		{
-			LPCTSTR szValue = node.GetAttributeValue(_T("source"));
+			const wchar_t* szValue = node.GetAttributeValue(_T("source"));
 			if (szValue && szValue[0])
 			{
 				CDialogBuilder builder;
-				pControl = builder.Create((LPCTSTR)szValue, m_pCallback, pManager, pParent);
+				pControl = builder.Create((const wchar_t*)szValue, m_pCallback, pManager, pParent);
 			}
             continue;
         }

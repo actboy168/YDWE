@@ -10,7 +10,7 @@ namespace DuiLib
 	public:
 		CCheckBoxUI();
 
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 
 		bool Activate();
 		void SetEnabled(bool bEnable = true);
@@ -19,7 +19,7 @@ namespace DuiLib
 		virtual void Selected(bool bSelected);
 
 		SIZE EstimateSize(SIZE szAvailable);
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
 		void PaintStatusImage(HDC hDC);
 		void PaintText(HDC hDC);

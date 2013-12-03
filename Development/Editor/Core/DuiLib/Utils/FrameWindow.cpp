@@ -4,7 +4,7 @@ namespace DuiLib
 {
 	CFrameWindow::CFrameWindow() { };
 
-	LPCTSTR CFrameWindow::GetWindowClassName() const { return _T("FrameWindow"); };
+	const wchar_t* CFrameWindow::GetWindowClassName() const { return _T("FrameWindow"); };
 	UINT CFrameWindow::GetClassStyle() const { return UI_CLASSSTYLE_FRAME | CS_DBLCLKS | CS_DROPSHADOW; };
 	void CFrameWindow::OnFinalMessage(HWND /*hWnd*/) { };
 

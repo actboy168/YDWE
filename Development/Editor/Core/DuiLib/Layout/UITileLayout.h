@@ -10,7 +10,7 @@ namespace DuiLib
 	public:
 		CTileLayoutUI();
 
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 
 		void SetPos(RECT rc);
 
@@ -19,7 +19,7 @@ namespace DuiLib
 		int GetColumns() const;
 		void SetColumns(int nCols);
 
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
 	protected:
 		SIZE m_szItem;

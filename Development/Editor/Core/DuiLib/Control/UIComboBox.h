@@ -14,9 +14,9 @@ namespace DuiLib
 	{
 	public:
 		CComboBoxUI();
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
 		void PaintText(HDC hDC);
 		void PaintStatusImage(HDC hDC);

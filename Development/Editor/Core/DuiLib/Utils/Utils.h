@@ -25,11 +25,11 @@ namespace DuiLib
 	class STRINGorID
 	{
 	public:
-		STRINGorID(LPCTSTR lpString) : m_lpstr(lpString)
+		STRINGorID(const wchar_t* lpString) : m_lpstr(lpString)
 		{ }
 		STRINGorID(UINT nID) : m_lpstr(MAKEINTRESOURCE(nID))
 		{ }
-		LPCTSTR m_lpstr;
+		const wchar_t* m_lpstr;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////////////
@@ -116,7 +116,7 @@ namespace DuiLib
 	template <class T> class UILIB_API CStdStringPtrMap : public std::map<std::wstring, T*>
 	{
 	public:	
-		T* Find(LPCTSTR key) const
+		T* Find(const wchar_t* key) const
 		{
 			auto it = find(key);
 			if (it == end()) 
@@ -125,12 +125,12 @@ namespace DuiLib
 				return it->second;
 		}
 
-		bool Insert(LPCTSTR key, T* pData)
+		bool Insert(const wchar_t* key, T* pData)
 		{
 			return insert(std::make_pair(key, pData)).second;
 		}
 
-		bool Remove(LPCTSTR key)
+		bool Remove(const wchar_t* key)
 		{
 			auto it = find(key);
 			if (it == end()) return false;

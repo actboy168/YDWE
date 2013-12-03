@@ -12,7 +12,7 @@ namespace DuiLib
 	public:
 		CProgressUI();
 
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 
 		bool IsHorizontal();
 		void SetHorizontal(bool bHorizontal = true);
@@ -25,7 +25,7 @@ namespace DuiLib
 		int GetValue() const;
 		void SetValue(int nValue);
 
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 		void PaintStatusImage(HDC hDC);
 
 	protected:

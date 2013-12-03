@@ -10,14 +10,14 @@ namespace DuiLib
 	public:
 		CVerticalLayoutUI();
 
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 		UINT GetControlFlags() const;
 
 		void SetSepHeight(int iHeight);
 		int GetSepHeight() const;
 		void SetSepImmMode(bool bImmediately);
 		bool IsSepImmMode() const;
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 		void DoEvent(TEventUI& event);
 
 		void SetPos(RECT rc);

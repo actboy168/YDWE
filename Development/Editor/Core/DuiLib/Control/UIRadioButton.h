@@ -8,15 +8,15 @@ namespace DuiLib
 	class UILIB_API CRadioButtonUI : public CCheckBoxUI
 	{
 	public:
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 
 		void SetManager(CPaintManagerUI* pManager, CControlUI* pParent, bool bInit);
 		std::wstring const& GetGroup() const;
-		void SetGroup(LPCTSTR pStrGroupName);
+		void SetGroup(const wchar_t* pStrGroupName);
 
 		void Selected(bool bSelected);
 		bool Activate();
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
 	protected:
 #pragma warning(push)

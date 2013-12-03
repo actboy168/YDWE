@@ -15,11 +15,11 @@ namespace DuiLib
 	public:
 		CEditUI();
 
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 		UINT GetControlFlags() const;
 
 		void SetEnabled(bool bEnable = true);
-		void SetText(LPCTSTR pstrText);
+		void SetText(const wchar_t* pstrText);
 		void SetMaxChar(UINT uMax);
 		UINT GetMaxChar();
 		void SetReadOnly(bool bReadOnly);
@@ -37,14 +37,14 @@ namespace DuiLib
 
 		void SetSel(long nStartChar, long nEndChar);
 		void SetSelAll();
-		void SetReplaceSel(LPCTSTR lpszReplace);
+		void SetReplaceSel(const wchar_t* lpszReplace);
 
 		void SetPos(RECT rc);
 		void SetVisible(bool bVisible = true);
 		void SetInternVisible(bool bVisible = true);
 		SIZE EstimateSize(SIZE szAvailable);
 		void DoEvent(TEventUI& event);
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
 		void PaintStatusImage(HDC hDC);
 		void PaintText(HDC hDC);

@@ -20,8 +20,8 @@ namespace DuiLib
 		void Init(CDateTimeUI* pOwner);
 		RECT CalPos();
 
-		LPCTSTR GetWindowClassName() const;
-		LPCTSTR GetSuperClassName() const;
+		const wchar_t* GetWindowClassName() const;
+		const wchar_t* GetSuperClassName() const;
 		void OnFinalMessage(HWND hWnd);
 
 		LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -67,12 +67,12 @@ namespace DuiLib
 		return rcPos;
 	}
 
-	LPCTSTR CDateTimeWnd::GetWindowClassName() const
+	const wchar_t* CDateTimeWnd::GetWindowClassName() const
 	{
 		return _T("DateTimeWnd");
 	}
 
-	LPCTSTR CDateTimeWnd::GetSuperClassName() const
+	const wchar_t* CDateTimeWnd::GetSuperClassName() const
 	{
 		return DATETIMEPICK_CLASS;
 	}
@@ -154,7 +154,7 @@ namespace DuiLib
 	// 	if( m_pOwner == NULL ) return 0;
 	// 	// Copy text back
 	// 	int cchLen = ::GetWindowTextLength(m_hWnd) + 1;
-	// 	LPTSTR pstr = static_cast<LPTSTR>(_alloca(cchLen * sizeof(TCHAR)));
+	// 	const wchar_t* pstr = static_cast<const wchar_t*>(_alloca(cchLen * sizeof(TCHAR)));
 	// 	ASSERT(pstr);
 	// 	if( pstr == NULL ) return 0;
 	// 	::GetWindowText(m_hWnd, pstr, cchLen);
@@ -175,7 +175,7 @@ namespace DuiLib
 		m_nDTUpdateFlag = DT_NONE;
 	}
 
-	LPCTSTR CDateTimeUI::GetClass() const
+	const wchar_t* CDateTimeUI::GetClass() const
 	{
 		return DUI_CTR_DATETIME;
 	}

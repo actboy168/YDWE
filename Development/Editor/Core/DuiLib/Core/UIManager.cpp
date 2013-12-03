@@ -997,7 +997,7 @@ void CPaintManagerUI::ReapObjects(CControlUI* pControl)
     }    
 }
 
-bool CPaintManagerUI::AddOptionGroup(LPCTSTR pStrGroupName, CControlUI* pControl)
+bool CPaintManagerUI::AddOptionGroup(const wchar_t* pStrGroupName, CControlUI* pControl)
 {
     CStdPtrArray* aOptionGroup = m_mOptionGroup.Find(pStrGroupName);
     if (aOptionGroup) 
@@ -1018,12 +1018,12 @@ bool CPaintManagerUI::AddOptionGroup(LPCTSTR pStrGroupName, CControlUI* pControl
     return true;
 }
 
-CStdPtrArray* CPaintManagerUI::GetOptionGroup(LPCTSTR pStrGroupName)
+CStdPtrArray* CPaintManagerUI::GetOptionGroup(const wchar_t* pStrGroupName)
 {
     return m_mOptionGroup.Find(pStrGroupName);
 }
 
-void CPaintManagerUI::RemoveOptionGroup(LPCTSTR pStrGroupName, CControlUI* pControl)
+void CPaintManagerUI::RemoveOptionGroup(const wchar_t* pStrGroupName, CControlUI* pControl)
 {
 	CStdPtrArray* aOptionGroup = m_mOptionGroup.Find(pStrGroupName);
 	if (aOptionGroup) 
@@ -1341,7 +1341,7 @@ void CPaintManagerUI::AddDelayedCleanup(CControlUI* pControl)
     ::PostMessage(m_hWndPaint, WM_APP + 1, 0, 0L);
 }
 
-void CPaintManagerUI::SendNotify(CControlUI* pControl, LPCTSTR pstrMessage, WPARAM wParam /*= 0*/, LPARAM lParam /*= 0*/, bool bAsync /*= false*/)
+void CPaintManagerUI::SendNotify(CControlUI* pControl, const wchar_t* pstrMessage, WPARAM wParam /*= 0*/, LPARAM lParam /*= 0*/, bool bAsync /*= false*/)
 {
     TNotifyUI Msg;
     Msg.pSender = pControl;
@@ -1470,7 +1470,7 @@ TFontInfo* CPaintManagerUI::GetDefaultFontInfo()
     return &m_DefaultFontInfo;
 }
 
-void CPaintManagerUI::SetDefaultFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+void CPaintManagerUI::SetDefaultFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
     LOGFONT lf = { 0 };
     ::GetObject(::GetStockObject(DEFAULT_GUI_FONT), sizeof(LOGFONT), &lf);
@@ -1503,7 +1503,7 @@ DWORD CPaintManagerUI::GetCustomFontCount() const
     return m_aCustomFonts.GetSize();
 }
 
-HFONT CPaintManagerUI::AddFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+HFONT CPaintManagerUI::AddFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
     LOGFONT lf = { 0 };
     ::GetObject(::GetStockObject(DEFAULT_GUI_FONT), sizeof(LOGFONT), &lf);
@@ -1539,7 +1539,7 @@ HFONT CPaintManagerUI::AddFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool
     return hFont;
 }
 
-HFONT CPaintManagerUI::AddFontAt(int index, LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+HFONT CPaintManagerUI::AddFontAt(int index, const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
     LOGFONT lf = { 0 };
     ::GetObject(::GetStockObject(DEFAULT_GUI_FONT), sizeof(LOGFONT), &lf);
@@ -1582,7 +1582,7 @@ HFONT CPaintManagerUI::GetFont(int index)
     return pFontInfo->hFont;
 }
 
-HFONT CPaintManagerUI::GetFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+HFONT CPaintManagerUI::GetFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
     TFontInfo* pFontInfo = NULL;
     for( int it = 0; it < m_aCustomFonts.GetSize(); it++ ) {
@@ -1606,7 +1606,7 @@ bool CPaintManagerUI::FindFont(HFONT hFont)
     return false;
 }
 
-bool CPaintManagerUI::FindFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+bool CPaintManagerUI::FindFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
     TFontInfo* pFontInfo = NULL;
     for( int it = 0; it < m_aCustomFonts.GetSize(); it++ ) {
@@ -1629,7 +1629,7 @@ int CPaintManagerUI::GetFontIndex(HFONT hFont)
     return -1;
 }
 
-int CPaintManagerUI::GetFontIndex(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+int CPaintManagerUI::GetFontIndex(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
     TFontInfo* pFontInfo = NULL;
     for( int it = 0; it < m_aCustomFonts.GetSize(); it++ ) {
@@ -1707,14 +1707,14 @@ TFontInfo* CPaintManagerUI::GetFontInfo(HFONT hFont)
     return GetDefaultFontInfo();
 }
 
-const CImageInfo* CPaintManagerUI::GetImage(LPCTSTR bitmap)
+const CImageInfo* CPaintManagerUI::GetImage(const wchar_t* bitmap)
 {
     CImageInfo* data = m_mImageHash.Find(bitmap);
     if( !data && m_pParentResourcePM ) return m_pParentResourcePM->GetImage(bitmap);
     else return data;
 }
 
-const CImageInfo* CPaintManagerUI::GetImageEx(LPCTSTR bitmap, DWORD mask)
+const CImageInfo* CPaintManagerUI::GetImageEx(const wchar_t* bitmap, DWORD mask)
 {
     CImageInfo* data = m_mImageHash.Find(bitmap);
     if( !data ) {
@@ -1726,7 +1726,7 @@ const CImageInfo* CPaintManagerUI::GetImageEx(LPCTSTR bitmap, DWORD mask)
     return data;
 }
 
-const CImageInfo* CPaintManagerUI::AddImage(LPCTSTR bitmap, DWORD mask)
+const CImageInfo* CPaintManagerUI::AddImage(const wchar_t* bitmap, DWORD mask)
 {
 	CImageInfo* data = CImageInfo::Load(bitmap, mask);
     if( !data ) return NULL;
@@ -1740,7 +1740,7 @@ const CImageInfo* CPaintManagerUI::AddImage(LPCTSTR bitmap, DWORD mask)
     return data;
 }
 
-const CImageInfo* CPaintManagerUI::AddImage(LPCTSTR bitmap, HBITMAP hBitmap, int iWidth, int iHeight, bool bAlpha)
+const CImageInfo* CPaintManagerUI::AddImage(const wchar_t* bitmap, HBITMAP hBitmap, int iWidth, int iHeight, bool bAlpha)
 {
     if( hBitmap == NULL || iWidth <= 0 || iHeight <= 0 ) return NULL;
 
@@ -1753,7 +1753,7 @@ const CImageInfo* CPaintManagerUI::AddImage(LPCTSTR bitmap, HBITMAP hBitmap, int
     return data;
 }
 
-bool CPaintManagerUI::RemoveImage(LPCTSTR bitmap)
+bool CPaintManagerUI::RemoveImage(const wchar_t* bitmap)
 {
     const CImageInfo* data = GetImage(bitmap);
     if (!data) return false;
@@ -1803,7 +1803,7 @@ void CPaintManagerUI::ReloadAllImages()
     if( bRedraw && m_pRoot ) m_pRoot->Invalidate();
 }
 
-void CPaintManagerUI::AddDefaultAttribute(LPCTSTR pStrControlName, LPCTSTR pStrAttrKey, LPCTSTR pStrAttrValue)
+void CPaintManagerUI::AddDefaultAttribute(const wchar_t* pStrControlName, const wchar_t* pStrAttrKey, const wchar_t* pStrAttrValue)
 {
 	CAttributesList* pDefaultAttr = m_DefaultAttrHash.Find(pStrControlName);
 
@@ -1818,7 +1818,7 @@ void CPaintManagerUI::AddDefaultAttribute(LPCTSTR pStrControlName, LPCTSTR pStrA
 	}
 }
 
-CAttributesList* CPaintManagerUI::GetDefaultAttributeList(LPCTSTR pStrControlName) const
+CAttributesList* CPaintManagerUI::GetDefaultAttributeList(const wchar_t* pStrControlName) const
 {   
 	CAttributesList* pDefaultAttr = m_DefaultAttrHash.Find(pStrControlName);
 
@@ -1852,7 +1852,7 @@ CControlUI* CPaintManagerUI::FindControl(POINT pt) const
     return m_pRoot->FindControl(__FindControlFromPoint, &pt, UIFIND_VISIBLE | UIFIND_HITTEST | UIFIND_TOP_FIRST);
 }
 
-CControlUI* CPaintManagerUI::FindControl(LPCTSTR pstrName) const
+CControlUI* CPaintManagerUI::FindControl(const wchar_t* pstrName) const
 {
     ASSERT(m_pRoot);
     return m_mNameHash.Find(pstrName);
@@ -1865,14 +1865,14 @@ CControlUI* CPaintManagerUI::FindSubControlByPoint(CControlUI* pParent, POINT pt
     return pParent->FindControl(__FindControlFromPoint, &pt, UIFIND_VISIBLE | UIFIND_HITTEST | UIFIND_TOP_FIRST);
 }
 
-CControlUI* CPaintManagerUI::FindSubControlByName(CControlUI* pParent, LPCTSTR pstrName) const
+CControlUI* CPaintManagerUI::FindSubControlByName(CControlUI* pParent, const wchar_t* pstrName) const
 {
     if( pParent == NULL ) pParent = GetRoot();
     ASSERT(pParent);
     return pParent->FindControl(__FindControlFromName, (LPVOID)pstrName, UIFIND_ALL);
 }
 
-CControlUI* CPaintManagerUI::FindSubControlByClass(CControlUI* pParent, LPCTSTR pstrClass, int iIndex)
+CControlUI* CPaintManagerUI::FindSubControlByClass(CControlUI* pParent, const wchar_t* pstrClass, int iIndex)
 {
     if( pParent == NULL ) pParent = GetRoot();
     ASSERT(pParent);
@@ -1880,7 +1880,7 @@ CControlUI* CPaintManagerUI::FindSubControlByClass(CControlUI* pParent, LPCTSTR 
     return pParent->FindControl(__FindControlFromClass, (LPVOID)pstrClass, UIFIND_ALL);
 }
 
-CStdPtrArray* CPaintManagerUI::FindSubControlsByClass(CControlUI* pParent, LPCTSTR pstrClass)
+CStdPtrArray* CPaintManagerUI::FindSubControlsByClass(CControlUI* pParent, const wchar_t* pstrClass)
 {
     if( pParent == NULL ) pParent = GetRoot();
     ASSERT(pParent);
@@ -1947,7 +1947,7 @@ CControlUI* CALLBACK CPaintManagerUI::__FindControlFromUpdate(CControlUI* pThis,
 
 CControlUI* CALLBACK CPaintManagerUI::__FindControlFromName(CControlUI* pThis, LPVOID pData)
 {
-    LPCTSTR pstrName = static_cast<LPCTSTR>(pData);
+    const wchar_t* pstrName = static_cast<const wchar_t*>(pData);
     const std::wstring& sName = pThis->GetName();
     if( sName.empty() ) return NULL;
     return (_tcsicmp(sName.c_str(), pstrName) == 0) ? pThis : NULL;
@@ -1955,8 +1955,8 @@ CControlUI* CALLBACK CPaintManagerUI::__FindControlFromName(CControlUI* pThis, L
 
 CControlUI* CALLBACK CPaintManagerUI::__FindControlFromClass(CControlUI* pThis, LPVOID pData)
 {
-    LPCTSTR pstrType = static_cast<LPCTSTR>(pData);
-    LPCTSTR pType = pThis->GetClass();
+    const wchar_t* pstrType = static_cast<const wchar_t*>(pData);
+    const wchar_t* pType = pThis->GetClass();
     CStdPtrArray* pFoundControls = pThis->GetManager()->GetSubControlsByClass();
     if( _tcscmp(pstrType, _T("*")) == 0 || _tcscmp(pstrType, pType) == 0 ) {
         int iIndex = -1;
@@ -1969,8 +1969,8 @@ CControlUI* CALLBACK CPaintManagerUI::__FindControlFromClass(CControlUI* pThis, 
 
 CControlUI* CALLBACK CPaintManagerUI::__FindControlsFromClass(CControlUI* pThis, LPVOID pData)
 {
-    LPCTSTR pstrType = static_cast<LPCTSTR>(pData);
-    LPCTSTR pType = pThis->GetClass();
+    const wchar_t* pstrType = static_cast<const wchar_t*>(pData);
+    const wchar_t* pType = pThis->GetClass();
     if( _tcscmp(pstrType, _T("*")) == 0 || _tcscmp(pstrType, pType) == 0 ) 
         pThis->GetManager()->GetSubControlsByClass()->Add((LPVOID)pThis);
     return NULL;

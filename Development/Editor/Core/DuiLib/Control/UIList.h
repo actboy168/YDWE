@@ -50,10 +50,10 @@ public:
 	DWORD GetLineColor() const;
 	void  SetLineColor(DWORD dwLineColor);
 
-	void  SetBkImage(LPCTSTR pStrImage);
-	void  SetSelectedImage(LPCTSTR pStrImage);
-	void  SetHotImage(LPCTSTR pStrImage);
-	void  SetDisabledImage(LPCTSTR pStrImage);
+	void  SetBkImage(const wchar_t* pStrImage);
+	void  SetSelectedImage(const wchar_t* pStrImage);
+	void  SetHotImage(const wchar_t* pStrImage);
+	void  SetDisabledImage(const wchar_t* pStrImage);
 
 	DWORD GetTextColor() const;
 	DWORD GetBkColor() const;
@@ -81,7 +81,7 @@ public:
 class IListCallbackUI
 {
 public:
-    virtual LPCTSTR GetItemText(CControlUI* pList, int iItem, int iSubItem) = 0;
+    virtual const wchar_t* GetItemText(CControlUI* pList, int iItem, int iSubItem) = 0;
 };
 
 class IListOwnerUI
@@ -130,7 +130,7 @@ class UILIB_API CListUI : public CVerticalLayoutUI, public IListUI
 public:
     CListUI();
 
-    LPCTSTR GetClass() const;
+    const wchar_t* GetClass() const;
     UINT GetControlFlags() const;
 
     bool GetScrollSelect();
@@ -169,7 +169,7 @@ public:
 
     void SetPos(RECT rc);
     void DoEvent(TEventUI& event);
-    void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+    void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
     IListCallbackUI* GetTextCallback() const;
     void SetTextCallback(IListCallbackUI* pCallback);
@@ -227,7 +227,7 @@ class UILIB_API CListHeaderUI : public CHorizontalLayoutUI
 public:
     CListHeaderUI();
 
-    LPCTSTR GetClass() const;
+    const wchar_t* GetClass() const;
 
     SIZE EstimateSize(SIZE szAvailable);
 };
@@ -243,7 +243,7 @@ class UILIB_API CListHeaderItemUI : public CLabelUI
 public:
     CListHeaderItemUI();
 
-    LPCTSTR GetClass() const;
+    const wchar_t* GetClass() const;
     UINT GetControlFlags() const;
 
     void SetEnabled(bool bEnable = true);
@@ -262,7 +262,7 @@ public:
 
     void DoEvent(TEventUI& event);
     SIZE EstimateSize(SIZE szAvailable);
-    void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+    void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
     RECT GetThumbRect() const;
 
     void PaintText(HDC hDC);
@@ -299,7 +299,7 @@ class UILIB_API CListElementUI : public CLabelUI, public IListItemUI
 public:
     CListElementUI();
 
-    LPCTSTR GetClass() const;
+    const wchar_t* GetClass() const;
     UINT GetControlFlags() const;
 
     void SetEnabled(bool bEnable = true);
@@ -320,7 +320,7 @@ public:
     bool Activate();
 
     void DoEvent(TEventUI& event);
-    void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+    void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 
     void DrawItemBk(HDC hDC, const RECT& rcItem);
 
@@ -340,7 +340,7 @@ class UILIB_API CListLabelElementUI : public CListElementUI
 public:
     CListLabelElementUI();
 
-    LPCTSTR GetClass() const;
+    const wchar_t* GetClass() const;
 
     void DoEvent(TEventUI& event);
     SIZE EstimateSize(SIZE szAvailable);
@@ -359,11 +359,11 @@ public:
     CListTextElementUI();
     ~CListTextElementUI();
 
-    LPCTSTR GetClass() const;
+    const wchar_t* GetClass() const;
     UINT GetControlFlags() const;
 
-    LPCTSTR GetText(int iIndex) const;
-    void SetText(int iIndex, LPCTSTR pstrText);
+    const wchar_t* GetText(int iIndex) const;
+    void SetText(int iIndex, const wchar_t* pstrText);
 
     void SetOwner(CControlUI* pOwner);
     std::wstring* GetLinkContent(int iIndex);
@@ -393,7 +393,7 @@ class UILIB_API CListContainerElementUI : public CContainerUI, public IListItemU
 public:
     CListContainerElementUI();
 
-    LPCTSTR GetClass() const;
+    const wchar_t* GetClass() const;
     UINT GetControlFlags() const;
 
     int GetIndex() const;
@@ -413,7 +413,7 @@ public:
     bool Activate();
 
     void DoEvent(TEventUI& event);
-    void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+    void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
     void DoPaint(HDC hDC, const RECT& rcPaint);
 
     void DrawItemText(HDC hDC, const RECT& rcItem);    

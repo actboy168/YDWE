@@ -15,7 +15,7 @@ class UILIB_API CComboUI : public CContainerUI, public IListOwnerUI
 public:
     CComboUI();
 
-    LPCTSTR GetClass() const;
+    const wchar_t* GetClass() const;
 
     void DoInit();
     UINT GetControlFlags() const;
@@ -24,7 +24,7 @@ public:
     void SetEnabled(bool bEnable = true);
 
     std::wstring GetDropBoxAttributeList();
-    void SetDropBoxAttributeList(LPCTSTR pstrList);
+    void SetDropBoxAttributeList(const wchar_t* pstrList);
     SIZE GetDropBoxSize() const;
     void SetDropBoxSize(SIZE szDropBox);
 
@@ -52,7 +52,7 @@ public:
     SIZE EstimateSize(SIZE szAvailable);
     void SetPos(RECT rc);
     void DoEvent(TEventUI& event);
-    void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+    void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
     
     void DoPaint(HDC hDC, const RECT& rcPaint);
     void PaintText(HDC hDC);

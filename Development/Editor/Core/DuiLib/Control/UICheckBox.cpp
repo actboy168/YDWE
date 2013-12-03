@@ -7,7 +7,7 @@ namespace DuiLib
 	{
 	}
 
-	LPCTSTR CCheckBoxUI::GetClass() const
+	const wchar_t* CCheckBoxUI::GetClass() const
 	{
 		return DUI_CTR_CHECKBOX;
 	}
@@ -52,7 +52,7 @@ namespace DuiLib
 		return CControlUI::EstimateSize(szAvailable);
 	}
 
-	void CCheckBoxUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CCheckBoxUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("selected")) == 0 ) Selected(_tcscmp(pstrValue, _T("true")) == 0);
 		else if( _tcscmp(pstrName, _T("selectedimage")) == 0 ) m_sSelectedImage.reset(new CImage(pstrValue));
@@ -61,19 +61,19 @@ namespace DuiLib
 		else if( _tcscmp(pstrName, _T("selecteddisabledimage")) == 0 ) m_sSelectedDisabledImage.reset(new CImage(pstrValue));
 		else if( _tcscmp(pstrName, _T("selectedbkcolor")) == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwSelectedBkColor = clrColor;
 		}
 		else if( _tcscmp(pstrName, _T("selectedtextcolor")) == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwSelectedTextColor = clrColor;
 		}
 		else if( _tcscmp(pstrName, _T("selectedpushedtextcolor")) == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwSelectedPushedTextColor = clrColor;
 		}

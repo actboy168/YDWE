@@ -13,8 +13,8 @@ namespace DuiLib
 		void Init(CEditUI* pOwner);
 		RECT CalPos();
 
-		LPCTSTR GetWindowClassName() const;
-		LPCTSTR GetSuperClassName() const;
+		const wchar_t* GetWindowClassName() const;
+		const wchar_t* GetSuperClassName() const;
 		void OnFinalMessage(HWND hWnd);
 
 		LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -72,12 +72,12 @@ namespace DuiLib
 		return rcPos;
 	}
 
-	LPCTSTR CEditWnd::GetWindowClassName() const
+	const wchar_t* CEditWnd::GetWindowClassName() const
 	{
 		return _T("EditWnd");
 	}
 
-	LPCTSTR CEditWnd::GetSuperClassName() const
+	const wchar_t* CEditWnd::GetSuperClassName() const
 	{
 		return WC_EDIT;
 	}
@@ -136,7 +136,7 @@ namespace DuiLib
 		if( m_pOwner == NULL ) return 0;
 		// Copy text back
 		int cchLen = ::GetWindowTextLength(m_hWnd) + 1;
-		LPTSTR pstr = static_cast<LPTSTR>(_alloca(cchLen * sizeof(TCHAR)));
+		const wchar_t* pstr = static_cast<const wchar_t*>(_alloca(cchLen * sizeof(TCHAR)));
 		ASSERT(pstr);
 		if( pstr == NULL ) return 0;
 		::GetWindowText(m_hWnd, pstr, cchLen);
@@ -158,7 +158,7 @@ namespace DuiLib
 		SetBkColor(0xFFFFFFFF);
 	}
 
-	LPCTSTR CEditUI::GetClass() const
+	const wchar_t* CEditUI::GetClass() const
 	{
 		return DUI_CTR_EDIT;
 	}
@@ -279,7 +279,7 @@ namespace DuiLib
 		}
 	}
 
-	void CEditUI::SetText(LPCTSTR pstrText)
+	void CEditUI::SetText(const wchar_t* pstrText)
 	{
 		CLabelUI::SetText(pstrText);
 		if( m_pWindow != NULL ) Edit_SetText(*m_pWindow, GetText().c_str());
@@ -378,7 +378,7 @@ namespace DuiLib
 		SetSel(0,-1);
 	}
 
-	void CEditUI::SetReplaceSel(LPCTSTR lpszReplace)
+	void CEditUI::SetReplaceSel(const wchar_t* lpszReplace)
 	{
 		if( m_pWindow != NULL ) Edit_ReplaceSel(*m_pWindow, lpszReplace);
 	}
@@ -410,7 +410,7 @@ namespace DuiLib
 		return CControlUI::EstimateSize(szAvailable);
 	}
 
-	void CEditUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CEditUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("readonly")) == 0 ) SetReadOnly(_tcscmp(pstrValue, _T("true")) == 0);
 		else if( _tcscmp(pstrName, _T("numberonly")) == 0 ) SetNumberOnly(_tcscmp(pstrValue, _T("true")) == 0);
@@ -422,7 +422,7 @@ namespace DuiLib
 		else if( _tcscmp(pstrName, _T("disabledimage")) == 0 ) m_sDisabledImage.reset(new CImage(pstrValue));
 		else if( _tcscmp(pstrName, _T("nativebkcolor")) == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-			LPTSTR pstr = NULL;
+			const wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetNativeEditBkColor(clrColor);
 		}
@@ -476,7 +476,7 @@ namespace DuiLib
 		}
 		else
 		{
-			LPCTSTR p = GetText().c_str();
+			const wchar_t* p = GetText().c_str();
 			while (*p != _T('\0')) 
 			{
 				sText += m_cPasswordChar;

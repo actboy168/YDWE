@@ -12,7 +12,7 @@ namespace DuiLib
 	public:
 		CSliderUI();
 
-		LPCTSTR GetClass() const;
+		const wchar_t* GetClass() const;
 		UINT GetControlFlags() const;
 
 		void SetEnabled(bool bEnable = true);
@@ -23,7 +23,7 @@ namespace DuiLib
 		RECT GetThumbRect() const;
 
 		void DoEvent(TEventUI& event);
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue);
 		void PaintStatusImage(HDC hDC);
 
 	protected:

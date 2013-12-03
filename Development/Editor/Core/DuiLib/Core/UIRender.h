@@ -35,7 +35,7 @@ public:
 		const std::wstring& sImageName, RECT rcItem, RECT rcBmpPart, \
 		RECT rcCorner, DWORD dwMask, BYTE bFade, bool bHole, bool bTiledX, bool bTiledY);
     static bool DrawImageString(HDC hDC, CPaintManagerUI* pManager, const RECT& rcItem, const RECT& rcPaint, 
-        LPCTSTR pStrImage, LPCTSTR pStrModify = NULL);
+        const wchar_t* pStrImage, const wchar_t* pStrModify = NULL);
     static void DrawColor(HDC hDC, const RECT& rc, DWORD color);
     static void DrawGradient(HDC hDC, const RECT& rc, DWORD dwFirst, DWORD dwSecond, bool bVertical, int nSteps);
 
@@ -43,7 +43,7 @@ public:
     static void DrawLine(HDC hDC, const RECT& rc, int nSize, DWORD dwPenColor);
     static void DrawRect(HDC hDC, const RECT& rc, int nSize, DWORD dwPenColor);
     static void DrawRoundRect(HDC hDC, const RECT& rc, int width, int height, int nSize, DWORD dwPenColor);
-    static void DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, LPCTSTR pstrText, \
+    static void DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, const wchar_t* pstrText, \
         DWORD dwTextColor, int iFont, UINT uStyle);
     static HBITMAP GenerateBitmap(CPaintManagerUI* pManager, CControlUI* pControl, RECT rc);
 };

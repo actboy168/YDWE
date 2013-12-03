@@ -9,7 +9,7 @@ namespace DuiLib
 		::ZeroMemory(&m_rcNewPos, sizeof(m_rcNewPos));
 	}
 
-	LPCTSTR CHorizontalLayoutUI::GetClass() const
+	const wchar_t* CHorizontalLayoutUI::GetClass() const
 	{
 		return DUI_CTR_HORIZONTALLAYOUT;
 	}
@@ -150,7 +150,7 @@ namespace DuiLib
 		return m_bImmMode;
 	}
 
-	void CHorizontalLayoutUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	void CHorizontalLayoutUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
 		if( _tcscmp(pstrName, _T("sepwidth")) == 0 ) SetSepWidth(_ttoi(pstrValue));
 		else if( _tcscmp(pstrName, _T("sepimm")) == 0 ) SetSepImmMode(_tcscmp(pstrValue, _T("true")) == 0);

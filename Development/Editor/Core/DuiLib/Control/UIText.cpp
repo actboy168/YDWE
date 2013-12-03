@@ -13,7 +13,7 @@ namespace DuiLib
 		::ZeroMemory(m_rcLinks, sizeof(m_rcLinks));
 	}
 
-	LPCTSTR CTextUI::GetClass() const
+	const wchar_t* CTextUI::GetClass() const
 	{
 		return DUI_CTR_TEXT;
 	}

@@ -44,8 +44,8 @@ namespace DuiLib {
 #endif
 
 #ifdef _DEBUG
-void UILIB_API DUI__Trace(LPCTSTR pstrFormat, ...);
-LPCTSTR UILIB_API DUI__TraceMsg(UINT uMsg);
+UILIB_API void  DUI__Trace(const wchar_t* pstrFormat, ...);
+UILIB_API const wchar_t*  DUI__TraceMsg(UINT uMsg);
 #endif
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -73,9 +73,9 @@ public:
 
     bool RegisterWindowClass();
 
-    HWND Create(HWND hwndParent, LPCTSTR pstrName, DWORD dwStyle, DWORD dwExStyle, const RECT rc, HMENU hMenu = NULL);
-    HWND Create(HWND hwndParent, LPCTSTR pstrName, DWORD dwStyle, DWORD dwExStyle, int x = CW_USEDEFAULT, int y = CW_USEDEFAULT, int cx = CW_USEDEFAULT, int cy = CW_USEDEFAULT, HMENU hMenu = NULL);
-    HWND CreateDuiWindow(HWND hwndParent, LPCTSTR pstrWindowName,DWORD dwStyle =0, DWORD dwExStyle =0);
+    HWND Create(HWND hwndParent, const wchar_t* pstrName, DWORD dwStyle, DWORD dwExStyle, const RECT rc, HMENU hMenu = NULL);
+    HWND Create(HWND hwndParent, const wchar_t* pstrName, DWORD dwStyle, DWORD dwExStyle, int x = CW_USEDEFAULT, int y = CW_USEDEFAULT, int cx = CW_USEDEFAULT, int cy = CW_USEDEFAULT, HMENU hMenu = NULL);
+    HWND CreateDuiWindow(HWND hwndParent, const wchar_t* pstrWindowName,DWORD dwStyle =0, DWORD dwExStyle =0);
     void ShowWindow(bool bShow = true, bool bTakeFocus = true);
     UINT ShowModal();
     void Close(UINT nRet = IDOK);
@@ -87,7 +87,7 @@ public:
     void ResizeClient(int cx = -1, int cy = -1);
 
 protected:
-    virtual LPCTSTR GetWindowClassName() const = 0;
+    virtual const wchar_t* GetWindowClassName() const = 0;
     virtual UINT GetClassStyle() const;
 
     virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);

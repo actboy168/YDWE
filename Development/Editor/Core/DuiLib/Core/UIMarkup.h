@@ -20,18 +20,18 @@ class UILIB_API CMarkup
 {
     friend class CMarkupNode;
 public:
-    CMarkup(LPCTSTR pstrXML = NULL);
+    CMarkup(const wchar_t* pstrXML = NULL);
     ~CMarkup();
 
-    bool Load(LPCTSTR pstrXML);
+    bool Load(const wchar_t* pstrXML);
     bool LoadFromMem(BYTE* pByte, DWORD dwSize, int encoding = XMLFILE_ENCODING_UTF8);
-    bool LoadFromFile(LPCTSTR pstrFilename, int encoding = XMLFILE_ENCODING_UTF8);
+    bool LoadFromFile(const wchar_t* pstrFilename, int encoding = XMLFILE_ENCODING_UTF8);
     void Release();
     bool IsValid() const;
 
     void SetPreserveWhitespace(bool bPreserve = true);
-    void GetLastErrorMessage(LPTSTR pstrMessage, SIZE_T cchMax) const;
-    void GetLastErrorLocation(LPTSTR pstrSource, SIZE_T cchMax) const;
+    void GetLastErrorMessage(wchar_t* pstrMessage, SIZE_T cchMax) const;
+    void GetLastErrorLocation(wchar_t* pstrSource, SIZE_T cchMax) const;
 
     CMarkupNode GetRoot();
 
@@ -45,7 +45,7 @@ private:
         ULONG iData;
     } XMLELEMENT;
 
-    LPTSTR m_pstrXML;
+    wchar_t* m_pstrXML;
     XMLELEMENT* m_pElements;
     ULONG m_nElements;
     ULONG m_nReservedElements;
@@ -55,16 +55,16 @@ private:
 
 private:
     bool _Parse();
-    bool _Parse(LPTSTR& pstrText, ULONG iParent);
+    bool _Parse(wchar_t*& pstrText, ULONG iParent);
     XMLELEMENT* _ReserveElement();
-    inline void _SkipWhitespace(LPTSTR& pstr) const;
-    inline void _SkipWhitespace(LPCTSTR& pstr) const;
-    inline void _SkipIdentifier(LPTSTR& pstr) const;
-    inline void _SkipIdentifier(LPCTSTR& pstr) const;
-    bool _ParseData(LPTSTR& pstrText, LPTSTR& pstrData, char cEnd);
-    void _ParseMetaChar(LPTSTR& pstrText, LPTSTR& pstrDest);
-    bool _ParseAttributes(LPTSTR& pstrText);
-    bool _Failed(LPCTSTR pstrError, LPCTSTR pstrLocation = NULL);
+    inline void _SkipWhitespace(wchar_t*& pstr) const;
+    inline void _SkipWhitespace(const wchar_t*& pstr) const;
+    inline void _SkipIdentifier(wchar_t*& pstr) const;
+    inline void _SkipIdentifier(const wchar_t*& pstr) const;
+    bool _ParseData(wchar_t*& pstrText, wchar_t*& pstrData, char cEnd);
+    void _ParseMetaChar(wchar_t*& pstrText, wchar_t*& pstrDest);
+    bool _ParseAttributes(wchar_t*& pstrText);
+    bool _Failed(const wchar_t* pstrError, const wchar_t* pstrLocation = NULL);
 };
 
 
@@ -81,21 +81,21 @@ public:
     CMarkupNode GetParent();
     CMarkupNode GetSibling();
     CMarkupNode GetChild();
-    CMarkupNode GetChild(LPCTSTR pstrName);
+    CMarkupNode GetChild(const wchar_t* pstrName);
 
     bool HasSiblings() const;
     bool HasChildren() const;
-    LPCTSTR GetName() const;
-    LPCTSTR GetValue() const;
+    const wchar_t* GetName() const;
+    const wchar_t* GetValue() const;
 
     bool HasAttributes();
-    bool HasAttribute(LPCTSTR pstrName);
+    bool HasAttribute(const wchar_t* pstrName);
     int GetAttributeCount();
-    LPCTSTR GetAttributeName(int iIndex);
-    LPCTSTR GetAttributeValue(int iIndex);
-    LPCTSTR GetAttributeValue(LPCTSTR pstrName);
-    bool GetAttributeValue(int iIndex, LPTSTR pstrValue, SIZE_T cchMax);
-    bool GetAttributeValue(LPCTSTR pstrName, LPTSTR pstrValue, SIZE_T cchMax);
+    const wchar_t* GetAttributeName(int iIndex);
+    const wchar_t* GetAttributeValue(int iIndex);
+    const wchar_t* GetAttributeValue(const wchar_t* pstrName);
+    bool GetAttributeValue(int iIndex, wchar_t* pstrValue, SIZE_T cchMax);
+    bool GetAttributeValue(const wchar_t* pstrName, wchar_t* pstrValue, SIZE_T cchMax);
 
 private:
     void _MapAttributes();

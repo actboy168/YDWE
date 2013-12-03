@@ -46,12 +46,12 @@ std::wstring const& CControlUI::GetName() const
 	return m_sName;
 }
 
-void CControlUI::SetName(LPCTSTR pstrName)
+void CControlUI::SetName(const wchar_t* pstrName)
 {
     m_sName = pstrName;
 }
 
-LPCTSTR CControlUI::GetClass() const
+const wchar_t* CControlUI::GetClass() const
 {
     return DUI_CTR_CONTROL;
 }
@@ -150,7 +150,7 @@ void CControlUI::SetFocusBorderColor(DWORD dwBorderColor)
     Invalidate();
 }
 
-void CControlUI::SetBkImage(LPCTSTR pStrImage)
+void CControlUI::SetBkImage(const wchar_t* pStrImage)
 {
 	m_sBkImage.reset(new CImage(pStrImage));
 	Invalidate();
@@ -180,12 +180,12 @@ void CControlUI::SetBorderRound(SIZE cxyRound)
     Invalidate();
 }
 
-bool CControlUI::DrawImage(HDC hDC, LPCTSTR pStrImage, LPCTSTR pStrModify)
+bool CControlUI::DrawImage(HDC hDC, const wchar_t* pStrImage, const wchar_t* pStrModify)
 {
     return CRenderEngine::DrawImageString(hDC, m_pManager, m_rcItem, m_rcPaint, pStrImage, pStrModify);
 }
 
-bool CControlUI::DrawImage(HDC hDC, CImage const& cImage, LPCTSTR pStrModify)
+bool CControlUI::DrawImage(HDC hDC, CImage const& cImage, const wchar_t* pStrModify)
 {
 	return cImage.Draw(hDC, m_pManager, m_rcItem, m_rcPaint, pStrModify);
 }
@@ -402,7 +402,7 @@ std::wstring const& CControlUI::GetToolTip() const
 	return m_sToolTip;
 }
 
-void CControlUI::SetToolTip(LPCTSTR pstrText)
+void CControlUI::SetToolTip(const wchar_t* pstrText)
 {
     m_sToolTip = pstrText;
 }
@@ -624,7 +624,7 @@ void CControlUI::DoEvent(TEventUI& event)
 }
 
 
-void CControlUI::SetVirtualWnd(LPCTSTR pstrValue)
+void CControlUI::SetVirtualWnd(const wchar_t* pstrValue)
 {
 	m_sVirtualWnd = pstrValue;
 	m_pManager->UsedVirtualWnd(true);
@@ -651,7 +651,7 @@ std::wstring const& CControlUI::GetVirtualWnd() const
 	}
 }
 
-void CControlUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+void CControlUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
 	if (_tcscmp(pstrName, _T("class")) == 0)
 	{
@@ -659,7 +659,7 @@ void CControlUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 	}
 	else if( _tcscmp(pstrName, _T("pos")) == 0 ) {
         RECT rcPos = { 0 };
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         rcPos.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
         rcPos.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
         rcPos.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
@@ -671,7 +671,7 @@ void CControlUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
     }
     else if( _tcscmp(pstrName, _T("relativepos")) == 0 ) {
         SIZE szMove,szZoom;
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         szMove.cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
         szMove.cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
         szZoom.cx = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
@@ -680,7 +680,7 @@ void CControlUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
     }
     else if( _tcscmp(pstrName, _T("padding")) == 0 ) {
         RECT rcPadding = { 0 };
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         rcPadding.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
         rcPadding.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
         rcPadding.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
@@ -690,40 +690,40 @@ void CControlUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
     else if( _tcscmp(pstrName, _T("bkcolor")) == 0 || _tcscmp(pstrName, _T("bkcolor1")) == 0 ) {
         while( *pstrValue > _T('\0') && *pstrValue <= _T(' ') ) pstrValue = ::CharNext(pstrValue);
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         SetBkColor(clrColor);
     }
     else if( _tcscmp(pstrName, _T("bkcolor2")) == 0 ) {
         while( *pstrValue > _T('\0') && *pstrValue <= _T(' ') ) pstrValue = ::CharNext(pstrValue);
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         SetBkColor2(clrColor);
     }
     else if( _tcscmp(pstrName, _T("bkcolor3")) == 0 ) {
         while( *pstrValue > _T('\0') && *pstrValue <= _T(' ') ) pstrValue = ::CharNext(pstrValue);
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         SetBkColor3(clrColor);
     }
     else if( _tcscmp(pstrName, _T("bordercolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         SetBorderColor(clrColor);
     }
     else if( _tcscmp(pstrName, _T("focusbordercolor")) == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         SetFocusBorderColor(clrColor);
     }
     else if( _tcscmp(pstrName, _T("bordersize")) == 0 ) SetBorderSize(_ttoi(pstrValue));
     else if( _tcscmp(pstrName, _T("borderround")) == 0 ) {
         SIZE cxyRound = { 0 };
-        LPTSTR pstr = NULL;
+        wchar_t* pstr = NULL;
         cxyRound.cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
         cxyRound.cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);     
         SetBorderRound(cxyRound);
@@ -747,7 +747,7 @@ void CControlUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 	else if( _tcscmp(pstrName, _T("virtualwnd")) == 0 ) SetVirtualWnd(pstrValue);
 }
 
-CControlUI* CControlUI::ApplyAttributeList(LPCTSTR pstrList)
+CControlUI* CControlUI::ApplyAttributeList(const wchar_t* pstrList)
 {
 	std::wstring sItem;
 	std::wstring sValue;
@@ -755,7 +755,7 @@ CControlUI* CControlUI::ApplyAttributeList(LPCTSTR pstrList)
 		sItem.clear();
 		sValue.clear();
 		while( *pstrList != _T('\0') && *pstrList != _T('=') ) {
-			LPTSTR pstrTemp = ::CharNext(pstrList);
+			const wchar_t* pstrTemp = ::CharNext(pstrList);
 			while( pstrList < pstrTemp) {
 				sItem.push_back(*pstrList++);
 			}
@@ -765,7 +765,7 @@ CControlUI* CControlUI::ApplyAttributeList(LPCTSTR pstrList)
 		ASSERT( *pstrList == _T('\"') );
 		if( *pstrList++ != _T('\"') ) return this;
 		while( *pstrList != _T('\0') && *pstrList != _T('\"') ) {
-			LPTSTR pstrTemp = ::CharNext(pstrList);
+			const wchar_t* pstrTemp = ::CharNext(pstrList);
 			while( pstrList < pstrTemp) {
 				sValue.push_back(*pstrList++);
 			}
