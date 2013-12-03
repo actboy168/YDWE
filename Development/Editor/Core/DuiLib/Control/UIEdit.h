@@ -32,14 +32,6 @@ namespace DuiLib
 		bool IsNumberOnly() const;
 		int GetWindowStyls() const;
 
-		LPCTSTR GetNormalImage();
-		void SetNormalImage(LPCTSTR pStrImage);
-		LPCTSTR GetHotImage();
-		void SetHotImage(LPCTSTR pStrImage);
-		LPCTSTR GetFocusedImage();
-		void SetFocusedImage(LPCTSTR pStrImage);
-		LPCTSTR GetDisabledImage();
-		void SetDisabledImage(LPCTSTR pStrImage);
 		void SetNativeEditBkColor(DWORD dwBkColor);
 		DWORD GetNativeEditBkColor() const;
 
@@ -65,10 +57,13 @@ namespace DuiLib
 		bool m_bPasswordMode;
 		TCHAR m_cPasswordChar;
 		UINT m_uButtonState;
-		CDuiString m_sNormalImage;
-		CDuiString m_sHotImage;
-		CDuiString m_sFocusedImage;
-		CDuiString m_sDisabledImage;
+#pragma warning(push)
+#pragma warning(disable:4251)
+		std::unique_ptr<CImage> m_sNormalImage;
+		std::unique_ptr<CImage> m_sHotImage;
+		std::unique_ptr<CImage> m_sFocusedImage;
+		std::unique_ptr<CImage> m_sDisabledImage;
+#pragma warning(pop)
 		DWORD m_dwEditbkColor;
 		int m_iWindowStyls;
 	};

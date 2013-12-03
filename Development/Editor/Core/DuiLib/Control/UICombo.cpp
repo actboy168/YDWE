@@ -112,7 +112,7 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         m_pLayout->SetBorderSize(1);
         m_pLayout->SetAutoDestroy(false);
         m_pLayout->EnableScrollBar();
-        m_pLayout->ApplyAttributeList(m_pOwner->GetDropBoxAttributeList());
+        m_pLayout->ApplyAttributeList(m_pOwner->GetDropBoxAttributeList().c_str());
         for( int i = 0; i < m_pOwner->GetCount(); i++ ) {
             m_pLayout->Add(static_cast<CControlUI*>(m_pOwner->GetItemAt(i)));
         }
@@ -501,7 +501,7 @@ void CComboUI::SetEnabled(bool bEnable)
     if( !IsEnabled() ) m_uButtonState = 0;
 }
 
-CDuiString CComboUI::GetDropBoxAttributeList()
+std::wstring CComboUI::GetDropBoxAttributeList()
 {
     return m_sDropBoxAttributes;
 }
@@ -529,61 +529,6 @@ RECT CComboUI::GetTextPadding() const
 void CComboUI::SetTextPadding(RECT rc)
 {
     m_rcTextPadding = rc;
-    Invalidate();
-}
-
-LPCTSTR CComboUI::GetNormalImage() const
-{
-    return m_sNormalImage;
-}
-
-void CComboUI::SetNormalImage(LPCTSTR pStrImage)
-{
-    m_sNormalImage = pStrImage;
-    Invalidate();
-}
-
-LPCTSTR CComboUI::GetHotImage() const
-{
-    return m_sHotImage;
-}
-
-void CComboUI::SetHotImage(LPCTSTR pStrImage)
-{
-    m_sHotImage = pStrImage;
-    Invalidate();
-}
-
-LPCTSTR CComboUI::GetPushedImage() const
-{
-    return m_sPushedImage;
-}
-
-void CComboUI::SetPushedImage(LPCTSTR pStrImage)
-{
-    m_sPushedImage = pStrImage;
-    Invalidate();
-}
-
-LPCTSTR CComboUI::GetFocusedImage() const
-{
-    return m_sFocusedImage;
-}
-
-void CComboUI::SetFocusedImage(LPCTSTR pStrImage)
-{
-    m_sFocusedImage = pStrImage;
-    Invalidate();
-}
-
-LPCTSTR CComboUI::GetDisabledImage() const
-{
-    return m_sDisabledImage;
-}
-
-void CComboUI::SetDisabledImage(LPCTSTR pStrImage)
-{
-    m_sDisabledImage = pStrImage;
     Invalidate();
 }
 
@@ -635,11 +580,11 @@ void CComboUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
         rcTextPadding.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
         SetTextPadding(rcTextPadding);
     }
-    else if( _tcscmp(pstrName, _T("normalimage")) == 0 ) SetNormalImage(pstrValue);
-    else if( _tcscmp(pstrName, _T("hotimage")) == 0 ) SetHotImage(pstrValue);
-    else if( _tcscmp(pstrName, _T("pushedimage")) == 0 ) SetPushedImage(pstrValue);
-    else if( _tcscmp(pstrName, _T("focusedimage")) == 0 ) SetFocusedImage(pstrValue);
-    else if( _tcscmp(pstrName, _T("disabledimage")) == 0 ) SetDisabledImage(pstrValue);
+    else if( _tcscmp(pstrName, _T("normalimage")) == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
+    else if( _tcscmp(pstrName, _T("hotimage")) == 0 ) m_sHotImage.reset(new CImage(pstrValue));
+    else if( _tcscmp(pstrName, _T("pushedimage")) == 0 ) m_sPushedImage.reset(new CImage(pstrValue));
+    else if( _tcscmp(pstrName, _T("focusedimage")) == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
+    else if( _tcscmp(pstrName, _T("disabledimage")) == 0 ) m_sDisabledImage.reset(new CImage(pstrValue));
     else if( _tcscmp(pstrName, _T("dropbox")) == 0 ) SetDropBoxAttributeList(pstrValue);
 	else if( _tcscmp(pstrName, _T("dropboxsize")) == 0)
 	{
@@ -748,32 +693,32 @@ void CComboUI::PaintStatusImage(HDC hDC)
     else m_uButtonState &= ~ UISTATE_DISABLED;
 
     if( (m_uButtonState & UISTATE_DISABLED) != 0 ) {
-        if( !m_sDisabledImage.IsEmpty() ) {
-            if( !DrawImage(hDC, (LPCTSTR)m_sDisabledImage) ) m_sDisabledImage.Empty();
+        if(m_sDisabledImage) {
+            if( !DrawImage(hDC, *m_sDisabledImage.get()) ) m_sDisabledImage.reset();
             else return;
         }
     }
     else if( (m_uButtonState & UISTATE_PUSHED) != 0 ) {
-        if( !m_sPushedImage.IsEmpty() ) {
-            if( !DrawImage(hDC, (LPCTSTR)m_sPushedImage) ) m_sPushedImage.Empty();
+        if(m_sPushedImage) {
+            if( !DrawImage(hDC, *m_sPushedImage.get()) ) m_sPushedImage.reset();
             else return;
         }
     }
     else if( (m_uButtonState & UISTATE_HOT) != 0 ) {
-        if( !m_sHotImage.IsEmpty() ) {
-            if( !DrawImage(hDC, (LPCTSTR)m_sHotImage) ) m_sHotImage.Empty();
+        if(m_sHotImage) {
+            if( !DrawImage(hDC, *m_sHotImage.get()) ) m_sHotImage.reset();
             else return;
         }
     }
     else if( (m_uButtonState & UISTATE_FOCUSED) != 0 ) {
-        if( !m_sFocusedImage.IsEmpty() ) {
-            if( !DrawImage(hDC, (LPCTSTR)m_sFocusedImage) ) m_sFocusedImage.Empty();
+        if(m_sFocusedImage) {
+            if( !DrawImage(hDC, *m_sFocusedImage.get()) ) m_sFocusedImage.reset();
             else return;
         }
     }
 
-    if( !m_sNormalImage.IsEmpty() ) {
-        if( !DrawImage(hDC, (LPCTSTR)m_sNormalImage) ) m_sNormalImage.Empty();
+    if(m_sNormalImage) {
+        if( !DrawImage(hDC, *m_sNormalImage.get()) ) m_sNormalImage.reset();
         else return;
     }
 }

@@ -23,7 +23,7 @@ public:
     std::wstring const& GetText() const;
     void SetEnabled(bool bEnable = true);
 
-    CDuiString GetDropBoxAttributeList();
+    std::wstring GetDropBoxAttributeList();
     void SetDropBoxAttributeList(LPCTSTR pstrList);
     SIZE GetDropBoxSize() const;
     void SetDropBoxSize(SIZE szDropBox);
@@ -42,16 +42,6 @@ public:
 
     RECT GetTextPadding() const;
     void SetTextPadding(RECT rc);
-    LPCTSTR GetNormalImage() const;
-    void SetNormalImage(LPCTSTR pStrImage);
-    LPCTSTR GetHotImage() const;
-    void SetHotImage(LPCTSTR pStrImage);
-    LPCTSTR GetPushedImage() const;
-    void SetPushedImage(LPCTSTR pStrImage);
-    LPCTSTR GetFocusedImage() const;
-    void SetFocusedImage(LPCTSTR pStrImage);
-    LPCTSTR GetDisabledImage() const;
-    void SetDisabledImage(LPCTSTR pStrImage);
 
     TListInfoUI* GetListInfo();
     void SetItemFont(int index);
@@ -72,16 +62,20 @@ protected:
     CComboWnd* m_pWindow;
 
     int m_iCurSel;
-    RECT m_rcTextPadding;
-    CDuiString m_sDropBoxAttributes;
+	RECT m_rcTextPadding;
+#pragma warning(suppress:4251)
+    std::wstring m_sDropBoxAttributes;
     SIZE m_szDropBox;
     UINT m_uButtonState;
 
-    CDuiString m_sNormalImage;
-    CDuiString m_sHotImage;
-    CDuiString m_sPushedImage;
-    CDuiString m_sFocusedImage;
-    CDuiString m_sDisabledImage;
+#pragma warning(push)
+#pragma warning(disable:4251)
+    std::unique_ptr<CImage> m_sNormalImage;
+    std::unique_ptr<CImage> m_sHotImage;
+    std::unique_ptr<CImage> m_sPushedImage;
+    std::unique_ptr<CImage> m_sFocusedImage;
+	std::unique_ptr<CImage> m_sDisabledImage;
+#pragma warning(pop)
 
     TListInfoUI m_ListInfo;
 };

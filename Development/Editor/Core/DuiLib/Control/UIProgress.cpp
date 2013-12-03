@@ -62,22 +62,9 @@ namespace DuiLib
 		Invalidate();
 	}
 
-	LPCTSTR CProgressUI::GetForeImage() const
-	{
-		return m_sForeImage;
-	}
-
-	void CProgressUI::SetForeImage(LPCTSTR pStrImage)
-	{
-		if( m_sForeImage == pStrImage ) return;
-
-		m_sForeImage = pStrImage;
-		Invalidate();
-	}
-
 	void CProgressUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 	{
-		if( _tcscmp(pstrName, _T("foreimage")) == 0 ) SetForeImage(pstrValue);
+		if( _tcscmp(pstrName, _T("foreimage")) == 0 ) m_sForeImage.reset(new CImage(pstrValue));
 		else if( _tcscmp(pstrName, _T("hor")) == 0 ) SetHorizontal(_tcscmp(pstrValue, _T("true")) == 0);
 		else if( _tcscmp(pstrName, _T("min")) == 0 ) SetMinValue(_ttoi(pstrValue));
 		else if( _tcscmp(pstrName, _T("max")) == 0 ) SetMaxValue(_ttoi(pstrValue));
@@ -103,7 +90,7 @@ namespace DuiLib
 			rc.bottom = m_rcItem.bottom - m_rcItem.top;
 		}
 
-		if( !m_sForeImage.IsEmpty() ) {
+		if( m_sForeImage ) {
 			m_sForeImageModify.Empty();
 			if (m_bStretchForeImage)
 				m_sForeImageModify.SmallFormat(_T("dest='%d,%d,%d,%d'"), rc.left, rc.top, rc.right, rc.bottom);
@@ -112,7 +99,7 @@ namespace DuiLib
 				, rc.left, rc.top, rc.right, rc.bottom
 				, rc.left, rc.top, rc.right, rc.bottom);
 
-			if( !DrawImage(hDC, (LPCTSTR)m_sForeImage, (LPCTSTR)m_sForeImageModify) ) m_sForeImage.Empty();
+			if( !DrawImage(hDC, *m_sForeImage.get(), (LPCTSTR)m_sForeImageModify) ) m_sForeImage.reset();
 			else return;
 		}
 	}

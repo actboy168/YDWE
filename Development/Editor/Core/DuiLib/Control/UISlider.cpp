@@ -59,39 +59,6 @@ namespace DuiLib
 		}
 	}
 
-	LPCTSTR CSliderUI::GetThumbImage() const
-	{
-		return m_sThumbImage;
-	}
-
-	void CSliderUI::SetThumbImage(LPCTSTR pStrImage)
-	{
-		m_sThumbImage = pStrImage;
-		Invalidate();
-	}
-
-	LPCTSTR CSliderUI::GetThumbHotImage() const
-	{
-		return m_sThumbHotImage;
-	}
-
-	void CSliderUI::SetThumbHotImage(LPCTSTR pStrImage)
-	{
-		m_sThumbHotImage = pStrImage;
-		Invalidate();
-	}
-
-	LPCTSTR CSliderUI::GetThumbPushedImage() const
-	{
-		return m_sThumbPushedImage;
-	}
-
-	void CSliderUI::SetThumbPushedImage(LPCTSTR pStrImage)
-	{
-		m_sThumbPushedImage = pStrImage;
-		Invalidate();
-	}
-
 	void CSliderUI::DoEvent(TEventUI& event)
 	{
 		if( !IsMouseEnabled() && event.Type > UIEVENT__MOUSEBEGIN && event.Type < UIEVENT__MOUSEEND ) {
@@ -193,9 +160,9 @@ namespace DuiLib
 
 	void CSliderUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 	{
-		if( _tcscmp(pstrName, _T("thumbimage")) == 0 ) SetThumbImage(pstrValue);
-		else if( _tcscmp(pstrName, _T("thumbhotimage")) == 0 ) SetThumbHotImage(pstrValue);
-		else if( _tcscmp(pstrName, _T("thumbpushedimage")) == 0 ) SetThumbPushedImage(pstrValue);
+		if( _tcscmp(pstrName, _T("thumbimage")) == 0 ) m_sThumbImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, _T("thumbhotimage")) == 0 ) m_sThumbHotImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, _T("thumbpushedimage")) == 0 ) m_sThumbPushedImage.reset(new CImage(pstrValue));
 		else if( _tcscmp(pstrName, _T("thumbsize")) == 0 ) {
 			SIZE szXY = {0};
 			LPTSTR pstr = NULL;
@@ -219,26 +186,26 @@ namespace DuiLib
 		rcThumb.right -= m_rcItem.left;
 		rcThumb.bottom -= m_rcItem.top;
 		if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
-			if( !m_sThumbPushedImage.IsEmpty() ) {
+			if( m_sThumbPushedImage ) {
 				m_sImageModify.Empty();
 				m_sImageModify.SmallFormat(_T("dest='%d,%d,%d,%d'"), rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom);
-				if( !DrawImage(hDC, (LPCTSTR)m_sThumbPushedImage, (LPCTSTR)m_sImageModify) ) m_sThumbPushedImage.Empty();
+				if( !DrawImage(hDC, *m_sThumbPushedImage.get(), (LPCTSTR)m_sImageModify) ) m_sThumbPushedImage.reset();
 				else return;
 			}
 		}
 		else if( (m_uButtonState & UISTATE_HOT) != 0 ) {
-			if( !m_sThumbHotImage.IsEmpty() ) {
+			if( m_sThumbHotImage ) {
 				m_sImageModify.Empty();
 				m_sImageModify.SmallFormat(_T("dest='%d,%d,%d,%d'"), rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom);
-				if( !DrawImage(hDC, (LPCTSTR)m_sThumbHotImage, (LPCTSTR)m_sImageModify) ) m_sThumbHotImage.Empty();
+				if( !DrawImage(hDC, *m_sThumbHotImage.get(), (LPCTSTR)m_sImageModify) ) m_sThumbHotImage.reset();
 				else return;
 			}
 		}
 
-		if( !m_sThumbImage.IsEmpty() ) {
+		if( m_sThumbImage ) {
 			m_sImageModify.Empty();
 			m_sImageModify.SmallFormat(_T("dest='%d,%d,%d,%d'"), rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom);
-			if( !DrawImage(hDC, (LPCTSTR)m_sThumbImage, (LPCTSTR)m_sImageModify) ) m_sThumbImage.Empty();
+			if( !DrawImage(hDC, *m_sThumbImage.get(), (LPCTSTR)m_sImageModify) ) m_sThumbImage.reset();
 			else return;
 		}
 	}

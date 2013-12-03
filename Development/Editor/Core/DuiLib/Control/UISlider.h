@@ -21,12 +21,6 @@ namespace DuiLib
 		void SetChangeStep(int step);
 		void SetThumbSize(SIZE szXY);
 		RECT GetThumbRect() const;
-		LPCTSTR GetThumbImage() const;
-		void SetThumbImage(LPCTSTR pStrImage);
-		LPCTSTR GetThumbHotImage() const;
-		void SetThumbHotImage(LPCTSTR pStrImage);
-		LPCTSTR GetThumbPushedImage() const;
-		void SetThumbPushedImage(LPCTSTR pStrImage);
 
 		void DoEvent(TEventUI& event);
 		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
@@ -37,11 +31,13 @@ namespace DuiLib
 		UINT m_uButtonState;
 		int m_nStep;
 
-		CDuiString m_sThumbImage;
-		CDuiString m_sThumbHotImage;
-		CDuiString m_sThumbPushedImage;
-
+#pragma warning(push)
+#pragma warning(disable:4251)
+		std::unique_ptr<CImage> m_sThumbImage;
+		std::unique_ptr<CImage> m_sThumbHotImage;
+		std::unique_ptr<CImage> m_sThumbPushedImage;
 		CDuiString m_sImageModify;
+#pragma warning(pop)
 	};
 }
 #endif
