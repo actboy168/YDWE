@@ -35,18 +35,18 @@ namespace DuiLib {
 #ifdef _DEBUG
 void UILIB_API DUI__Trace(const wchar_t* pstrFormat, ...)
 {
-    TCHAR szBuffer[300] = { 0 };
+    wchar_t szBuffer[300] = { 0 };
     va_list args;
     va_start(args, pstrFormat);
-    ::wvnsprintf(szBuffer, lengthof(szBuffer) - 2, pstrFormat, args);
-    _tcscat(szBuffer, L"\n");
+    ::wvnsprintfW(szBuffer, lengthof(szBuffer) - 2, pstrFormat, args);
+    wcscat(szBuffer, L"\n");
     va_end(args);
-    ::OutputDebugString(szBuffer);
+    ::OutputDebugStringW(szBuffer);
 }
 
 const wchar_t* DUI__TraceMsg(UINT uMsg)
 {
-#define MSGDEF(x) if(uMsg==x) return _T(#x)
+#define MSGDEF(x) if(uMsg==x) return L ## #x
     MSGDEF(WM_SETCURSOR);
     MSGDEF(WM_NCHITTEST);
     MSGDEF(WM_NCPAINT);
@@ -101,8 +101,8 @@ const wchar_t* DUI__TraceMsg(UINT uMsg)
     MSGDEF(WM_GETICON);   
     MSGDEF(WM_GETTEXT);
     MSGDEF(WM_GETTEXTLENGTH);   
-    static TCHAR szMsg[10];
-    ::wsprintf(szMsg, L"0x%04X", uMsg);
+    static wchar_t szMsg[10];
+    ::wsprintfW(szMsg, L"0x%04X", uMsg);
     return szMsg;
 }
 #endif
@@ -255,7 +255,7 @@ HWND CWindowWnd::Create(HWND hwndParent, const wchar_t* pstrName, DWORD dwStyle,
 HWND CWindowWnd::Create(HWND hwndParent, const wchar_t* pstrName, DWORD dwStyle, DWORD dwExStyle, int x, int y, int cx, int cy, HMENU hMenu)
 {
     if (!RegisterWindowClass()) return NULL;
-	m_hWnd = ::CreateWindowEx(dwExStyle, GetWindowClassName(), pstrName, dwStyle, x, y, cx, cy, hwndParent, hMenu, CPaintManagerUI::GetInstance(), this);
+	m_hWnd = ::CreateWindowExW(dwExStyle, GetWindowClassName(), pstrName, dwStyle, x, y, cx, cy, hwndParent, hMenu, CPaintManagerUI::GetInstance(), this);
 	ASSERT(m_hWnd!=NULL);
     return m_hWnd;
 }
@@ -275,7 +275,7 @@ UINT CWindowWnd::ShowModal()
     ::ShowWindow(m_hWnd, SW_SHOWNORMAL);
     ::EnableWindow(hWndParent, FALSE);
     MSG msg = { 0 };
-    while( ::IsWindow(m_hWnd) && ::GetMessage(&msg, NULL, 0, 0) ) {
+    while( ::IsWindow(m_hWnd) && ::GetMessageW(&msg, NULL, 0, 0) ) {
         if( msg.message == WM_CLOSE && msg.hwnd == m_hWnd ) {
             nRet = msg.wParam;
             ::EnableWindow(hWndParent, TRUE);
@@ -283,7 +283,7 @@ UINT CWindowWnd::ShowModal()
         }
         if( !CPaintManagerUI::TranslateMessage(&msg) ) {
             ::TranslateMessage(&msg);
-            ::DispatchMessage(&msg);
+            ::DispatchMessageW(&msg);
         }
         if( msg.message == WM_QUIT ) break;
     }
@@ -331,15 +331,15 @@ void CWindowWnd::SetIcon(UINT nRes)
 {
     HICON hIcon = (HICON)::LoadImage(CPaintManagerUI::GetInstance(), MAKEINTRESOURCE(nRes), IMAGE_ICON, ::GetSystemMetrics(SM_CXICON), ::GetSystemMetrics(SM_CYICON), LR_DEFAULTCOLOR);
     ASSERT(hIcon);
-    ::SendMessage(m_hWnd, WM_SETICON, (WPARAM) TRUE, (LPARAM) hIcon);
+    ::SendMessageW(m_hWnd, WM_SETICON, (WPARAM) TRUE, (LPARAM) hIcon);
     hIcon = (HICON)::LoadImage(CPaintManagerUI::GetInstance(), MAKEINTRESOURCE(nRes), IMAGE_ICON, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON), LR_DEFAULTCOLOR);
     ASSERT(hIcon);
-    ::SendMessage(m_hWnd, WM_SETICON, (WPARAM) FALSE, (LPARAM) hIcon);
+    ::SendMessageW(m_hWnd, WM_SETICON, (WPARAM) FALSE, (LPARAM) hIcon);
 }
 
 bool CWindowWnd::RegisterWindowClass()
 {
-    WNDCLASS wc = { 0 };
+    WNDCLASSW wc = { 0 };
     wc.style = GetClassStyle();
     wc.cbClsExtra = 0;
     wc.cbWndExtra = 0;
@@ -350,7 +350,7 @@ bool CWindowWnd::RegisterWindowClass()
     wc.hbrBackground = NULL;
     wc.lpszMenuName  = NULL;
     wc.lpszClassName = GetWindowClassName();
-    ATOM ret = ::RegisterClass(&wc);
+    ATOM ret = ::RegisterClassW(&wc);
     ASSERT(ret!=NULL || ::GetLastError()==ERROR_CLASS_ALREADY_EXISTS);
     return ret != NULL || ::GetLastError() == ERROR_CLASS_ALREADY_EXISTS;
 }
@@ -392,13 +392,13 @@ LRESULT CALLBACK CWindowWnd::StartWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
 LRESULT CWindowWnd::SendMessage(UINT uMsg, WPARAM wParam /*= 0*/, LPARAM lParam /*= 0*/)
 {
     ASSERT(::IsWindow(m_hWnd));
-    return ::SendMessage(m_hWnd, uMsg, wParam, lParam);
+    return ::SendMessageW(m_hWnd, uMsg, wParam, lParam);
 } 
 
 LRESULT CWindowWnd::PostMessage(UINT uMsg, WPARAM wParam /*= 0*/, LPARAM lParam /*= 0*/)
 {
     ASSERT(::IsWindow(m_hWnd));
-    return ::PostMessage(m_hWnd, uMsg, wParam, lParam);
+    return ::PostMessageW(m_hWnd, uMsg, wParam, lParam);
 }
 
 void CWindowWnd::ResizeClient(int cx /*= -1*/, int cy /*= -1*/)

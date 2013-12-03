@@ -27,7 +27,7 @@ namespace DuiLib
 	public:
 		STRINGorID(const wchar_t* lpString) : m_lpstr(lpString)
 		{ }
-		STRINGorID(UINT nID) : m_lpstr(MAKEINTRESOURCE(nID))
+		STRINGorID(UINT nID) : m_lpstr(MAKEINTRESOURCEW(nID))
 		{ }
 		const wchar_t* m_lpstr;
 	};

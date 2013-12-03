@@ -71,22 +71,22 @@ namespace DuiLib
 		{
 			sItem.clear();
 			sValue.clear();
-			while (*pStrImage > _T('\0') && *pStrImage <= _T(' ')) pStrImage = ::CharNext(pStrImage);
+			while (*pStrImage > _T('\0') && *pStrImage <= _T(' ')) pStrImage = ::CharNextW(pStrImage);
 			while (*pStrImage != _T('\0') && *pStrImage != _T('=') && *pStrImage > _T(' ')) 
 			{
-				const wchar_t* pstrTemp = ::CharNext(pStrImage);
+				const wchar_t* pstrTemp = ::CharNextW(pStrImage);
 				while( pStrImage < pstrTemp) 
 				{
 					sItem += *pStrImage++;
 				}
 			}
-			while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNext(pStrImage);
+			while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNextW(pStrImage);
 			if( *pStrImage++ != _T('=') ) break;
-			while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNext(pStrImage);
+			while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNextW(pStrImage);
 			if( *pStrImage++ != _T('\'') ) break;
 			while( *pStrImage != _T('\0') && *pStrImage != _T('\'') ) 
 			{
-				const wchar_t* pstrTemp = ::CharNext(pStrImage);
+				const wchar_t* pstrTemp = ::CharNextW(pStrImage);
 				while( pStrImage < pstrTemp) 
 				{
 					sValue += *pStrImage++;
@@ -101,45 +101,45 @@ namespace DuiLib
 				}
 				else if( sItem == L"dest" ) 
 				{
-					m_rcItem.left = _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
-					m_rcItem.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
-					m_rcItem.right =  _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
-					m_rcItem.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
+					m_rcItem.left = wcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
+					m_rcItem.top = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
+					m_rcItem.right =  wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
+					m_rcItem.bottom = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
 				}
 				else if( sItem == L"source" ) 
 				{
-					m_rcBmpPart.left = _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
-					m_rcBmpPart.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-					m_rcBmpPart.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-					m_rcBmpPart.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);  
+					m_rcBmpPart.left = wcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
+					m_rcBmpPart.top = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+					m_rcBmpPart.right = wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+					m_rcBmpPart.bottom = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);  
 				}
 				else if( sItem == L"corner" )
 				{
-					m_rcCorner.left = _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
-					m_rcCorner.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-					m_rcCorner.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-					m_rcCorner.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
+					m_rcCorner.left = wcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
+					m_rcCorner.top = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+					m_rcCorner.right = wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+					m_rcCorner.bottom = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
 				}
 				else if( sItem == L"mask" )
 				{
-					if( sValue[0] == _T('#')) m_dwMask = _tcstoul(sValue.c_str() + 1, &pstr, 16);
-					else m_dwMask = _tcstoul(sValue.c_str(), &pstr, 16);
+					if( sValue[0] == _T('#')) m_dwMask = wcstoul(sValue.c_str() + 1, &pstr, 16);
+					else m_dwMask = wcstoul(sValue.c_str(), &pstr, 16);
 				}
 				else if( sItem == L"fade" )
 				{
-					m_bFade = (BYTE)_tcstoul(sValue.c_str(), &pstr, 10);
+					m_bFade = (BYTE)wcstoul(sValue.c_str(), &pstr, 10);
 				}
 				else if( sItem == L"hole" ) 
 				{
-					m_bHole = (_tcscmp(sValue.c_str(), L"true") == 0);
+					m_bHole = (wcscmp(sValue.c_str(), L"true") == 0);
 				}
 				else if( sItem == L"xtiled" ) 
 				{
-					m_bTiledX = (_tcscmp(sValue.c_str(), L"true") == 0);
+					m_bTiledX = (wcscmp(sValue.c_str(), L"true") == 0);
 				}
 				else if( sItem == L"ytiled" ) 
 				{
-					m_bTiledY = (_tcscmp(sValue.c_str(), L"true") == 0);
+					m_bTiledY = (wcscmp(sValue.c_str(), L"true") == 0);
 				}
 			}
 			if( *pStrImage++ != _T(' ') ) break;

@@ -26,8 +26,8 @@ namespace DuiLib
 		bool IsReadOnly() const;
 		void SetPasswordMode(bool bPasswordMode);
 		bool IsPasswordMode() const;
-		void SetPasswordChar(TCHAR cPasswordChar);
-		TCHAR GetPasswordChar() const;
+		void SetPasswordChar(wchar_t cPasswordChar);
+		wchar_t GetPasswordChar() const;
 		void SetNumberOnly(bool bNumberOnly);
 		bool IsNumberOnly() const;
 		int GetWindowStyls() const;
@@ -55,7 +55,7 @@ namespace DuiLib
 		UINT m_uMaxChar;
 		bool m_bReadOnly;
 		bool m_bPasswordMode;
-		TCHAR m_cPasswordChar;
+		wchar_t m_cPasswordChar;
 		UINT m_uButtonState;
 #pragma warning(push)
 #pragma warning(disable:4251)

@@ -101,7 +101,7 @@ typedef struct tagTEventUI
     CControlUI* pSender;
     DWORD dwTimestamp;
     POINT ptMouse;
-    TCHAR chKey;
+    wchar_t chKey;
     WORD wKeyState;
     WPARAM wParam;
     LPARAM lParam;

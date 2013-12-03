@@ -49,8 +49,8 @@ private:
     XMLELEMENT* m_pElements;
     ULONG m_nElements;
     ULONG m_nReservedElements;
-    TCHAR m_szErrorMsg[100];
-    TCHAR m_szErrorXML[50];
+    wchar_t m_szErrorMsg[100];
+    wchar_t m_szErrorXML[50];
     bool m_bPreserveWhitespace;
 
 private:

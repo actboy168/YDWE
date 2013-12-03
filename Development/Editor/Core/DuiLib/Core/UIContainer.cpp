@@ -557,31 +557,31 @@ namespace DuiLib
 
 	void CContainerUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, L"inset") == 0 ) {
+		if( wcscmp(pstrName, L"inset") == 0 ) {
 			RECT rcInset = { 0 };
 			wchar_t* pstr = NULL;
-			rcInset.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-			rcInset.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-			rcInset.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-			rcInset.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
+			rcInset.left = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+			rcInset.top = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+			rcInset.right = wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+			rcInset.bottom = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
 			SetInset(rcInset);
 		}
-		else if( _tcscmp(pstrName, L"mousechild") == 0 ) SetMouseChildEnabled(_tcscmp(pstrValue, L"true") == 0);
-		else if( _tcscmp(pstrName, L"vscrollbar") == 0 ) {
-			EnableScrollBar(_tcscmp(pstrValue, L"true") == 0, GetHorizontalScrollBar() != NULL);
+		else if( wcscmp(pstrName, L"mousechild") == 0 ) SetMouseChildEnabled(wcscmp(pstrValue, L"true") == 0);
+		else if( wcscmp(pstrName, L"vscrollbar") == 0 ) {
+			EnableScrollBar(wcscmp(pstrValue, L"true") == 0, GetHorizontalScrollBar() != NULL);
 		}
-		else if( _tcscmp(pstrName, L"vscrollbarstyle") == 0 ) {
+		else if( wcscmp(pstrName, L"vscrollbarstyle") == 0 ) {
 			EnableScrollBar(true, GetHorizontalScrollBar() != NULL);
 			if( GetVerticalScrollBar() ) GetVerticalScrollBar()->ApplyAttributeList(pstrValue);
 		}
-		else if( _tcscmp(pstrName, L"hscrollbar") == 0 ) {
-			EnableScrollBar(GetVerticalScrollBar() != NULL, _tcscmp(pstrValue, L"true") == 0);
+		else if( wcscmp(pstrName, L"hscrollbar") == 0 ) {
+			EnableScrollBar(GetVerticalScrollBar() != NULL, wcscmp(pstrValue, L"true") == 0);
 		}
-		else if( _tcscmp(pstrName, L"hscrollbarstyle") == 0 ) {
+		else if( wcscmp(pstrName, L"hscrollbarstyle") == 0 ) {
 			EnableScrollBar(GetVerticalScrollBar() != NULL, true);
 			if( GetHorizontalScrollBar() ) GetHorizontalScrollBar()->ApplyAttributeList(pstrValue);
 		}
-		else if( _tcscmp(pstrName, L"childpadding") == 0 ) SetChildPadding(_ttoi(pstrValue));
+		else if( wcscmp(pstrName, L"childpadding") == 0 ) SetChildPadding(_wtoi(pstrValue));
 		else CControlUI::SetAttribute(pstrName, pstrValue);
 	}
 

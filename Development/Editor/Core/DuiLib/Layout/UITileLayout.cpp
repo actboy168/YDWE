@@ -40,14 +40,14 @@ namespace DuiLib
 
 	void CTileLayoutUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, L"itemsize") == 0 ) {
+		if( wcscmp(pstrName, L"itemsize") == 0 ) {
 			SIZE szItem = { 0 };
 			wchar_t* pstr = NULL;
-			szItem.cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-			szItem.cy = _tcstol(pstr + 1, &pstr, 10);   ASSERT(pstr);     
+			szItem.cx = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+			szItem.cy = wcstol(pstr + 1, &pstr, 10);   ASSERT(pstr);     
 			SetItemSize(szItem);
 		}
-		else if( _tcscmp(pstrName, L"columns") == 0 ) SetColumns(_ttoi(pstrValue));
+		else if( wcscmp(pstrName, L"columns") == 0 ) SetColumns(_wtoi(pstrValue));
 		else CContainerUI::SetAttribute(pstrName, pstrValue);
 	}
 

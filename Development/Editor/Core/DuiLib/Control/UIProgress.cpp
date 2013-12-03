@@ -65,12 +65,12 @@ namespace DuiLib
 
 	void CProgressUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, L"foreimage") == 0 ) m_sForeImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"hor") == 0 ) SetHorizontal(_tcscmp(pstrValue, L"true") == 0);
-		else if( _tcscmp(pstrName, L"min") == 0 ) SetMinValue(_ttoi(pstrValue));
-		else if( _tcscmp(pstrName, L"max") == 0 ) SetMaxValue(_ttoi(pstrValue));
-		else if( _tcscmp(pstrName, L"value") == 0 ) SetValue(_ttoi(pstrValue));
-		else if( _tcscmp(pstrName, L"isstretchfore")==0) SetStretchForeImage(_tcscmp(pstrValue, L"true") == 0? true : false);
+		if( wcscmp(pstrName, L"foreimage") == 0 ) m_sForeImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"hor") == 0 ) SetHorizontal(wcscmp(pstrValue, L"true") == 0);
+		else if( wcscmp(pstrName, L"min") == 0 ) SetMinValue(_wtoi(pstrValue));
+		else if( wcscmp(pstrName, L"max") == 0 ) SetMaxValue(_wtoi(pstrValue));
+		else if( wcscmp(pstrName, L"value") == 0 ) SetValue(_wtoi(pstrValue));
+		else if( wcscmp(pstrName, L"isstretchfore")==0) SetStretchForeImage(wcscmp(pstrValue, L"true") == 0? true : false);
 		else CLabelUI::SetAttribute(pstrName, pstrValue);
 	}
 

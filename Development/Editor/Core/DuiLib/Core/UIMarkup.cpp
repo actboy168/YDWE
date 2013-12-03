@@ -48,7 +48,7 @@ CMarkupNode CMarkupNode::GetChild(const wchar_t* pstrName)
     if( m_pOwner == NULL ) return CMarkupNode();
     ULONG iPos = m_pOwner->m_pElements[m_iPos].iChild;
     while( iPos != 0 ) {
-        if( _tcscmp(m_pOwner->m_pstrXML + m_pOwner->m_pElements[iPos].iStart, pstrName) == 0 ) {
+        if( wcscmp(m_pOwner->m_pstrXML + m_pOwner->m_pElements[iPos].iStart, pstrName) == 0 ) {
             return CMarkupNode(m_pOwner, iPos);
         }
         iPos = m_pOwner->m_pElements[iPos].iNext;
@@ -108,7 +108,7 @@ const wchar_t* CMarkupNode::GetAttributeValue(const wchar_t* pstrName)
     if( m_pOwner == NULL ) return NULL;
     if( m_nAttributes == 0 ) _MapAttributes();
     for( int i = 0; i < m_nAttributes; i++ ) {
-        if( _tcscmp(m_pOwner->m_pstrXML + m_aAttributes[i].iName, pstrName) == 0 ) return m_pOwner->m_pstrXML + m_aAttributes[i].iValue;
+        if( wcscmp(m_pOwner->m_pstrXML + m_aAttributes[i].iName, pstrName) == 0 ) return m_pOwner->m_pstrXML + m_aAttributes[i].iValue;
     }
     return L"";
 }
@@ -118,7 +118,7 @@ bool CMarkupNode::GetAttributeValue(int iIndex, wchar_t* pstrValue, SIZE_T cchMa
     if( m_pOwner == NULL ) return false;
     if( m_nAttributes == 0 ) _MapAttributes();
     if( iIndex < 0 || iIndex >= m_nAttributes ) return false;
-    _tcsncpy(pstrValue, m_pOwner->m_pstrXML + m_aAttributes[iIndex].iValue, cchMax);
+    wcsncpy(pstrValue, m_pOwner->m_pstrXML + m_aAttributes[iIndex].iValue, cchMax);
     return true;
 }
 
@@ -127,8 +127,8 @@ bool CMarkupNode::GetAttributeValue(const wchar_t* pstrName, wchar_t* pstrValue,
     if( m_pOwner == NULL ) return false;
     if( m_nAttributes == 0 ) _MapAttributes();
     for( int i = 0; i < m_nAttributes; i++ ) {
-        if( _tcscmp(m_pOwner->m_pstrXML + m_aAttributes[i].iName, pstrName) == 0 ) {
-            _tcsncpy(pstrValue, m_pOwner->m_pstrXML + m_aAttributes[i].iValue, cchMax);
+        if( wcscmp(m_pOwner->m_pstrXML + m_aAttributes[i].iName, pstrName) == 0 ) {
+            wcsncpy(pstrValue, m_pOwner->m_pstrXML + m_aAttributes[i].iValue, cchMax);
             return true;
         }
     }
@@ -154,7 +154,7 @@ bool CMarkupNode::HasAttribute(const wchar_t* pstrName)
     if( m_pOwner == NULL ) return false;
     if( m_nAttributes == 0 ) _MapAttributes();
     for( int i = 0; i < m_nAttributes; i++ ) {
-        if( _tcscmp(m_pOwner->m_pstrXML + m_aAttributes[i].iName, pstrName) == 0 ) return true;
+        if( wcscmp(m_pOwner->m_pstrXML + m_aAttributes[i].iName, pstrName) == 0 ) return true;
     }
     return false;
 }
@@ -164,17 +164,17 @@ void CMarkupNode::_MapAttributes()
     m_nAttributes = 0;
     const wchar_t* pstr = m_pOwner->m_pstrXML + m_pOwner->m_pElements[m_iPos].iStart;
     const wchar_t* pstrEnd = m_pOwner->m_pstrXML + m_pOwner->m_pElements[m_iPos].iData;
-    pstr += _tcslen(pstr) + 1;
+    pstr += wcslen(pstr) + 1;
     while( pstr < pstrEnd ) {
         m_pOwner->_SkipWhitespace(pstr);
         m_aAttributes[m_nAttributes].iName = pstr - m_pOwner->m_pstrXML;
-        pstr += _tcslen(pstr) + 1;
+        pstr += wcslen(pstr) + 1;
         m_pOwner->_SkipWhitespace(pstr);
-        if( *pstr++ != _T('\"') ) return; // if( *pstr != _T('\"') ) { pstr = ::CharNext(pstr); return; }
+        if( *pstr++ != _T('\"') ) return; // if( *pstr != _T('\"') ) { pstr = ::CharNextW(pstr); return; }
         
         m_aAttributes[m_nAttributes++].iValue = pstr - m_pOwner->m_pstrXML;
         if( m_nAttributes >= MAX_XML_ATTRIBUTES ) return;
-        pstr += _tcslen(pstr) + 1;
+        pstr += wcslen(pstr) + 1;
     }
 }
 
@@ -211,9 +211,9 @@ void CMarkup::SetPreserveWhitespace(bool bPreserve)
 bool CMarkup::Load(const wchar_t* pstrXML)
 {
     Release();
-    SIZE_T cchLen = _tcslen(pstrXML) + 1;
-    m_pstrXML = static_cast<wchar_t*>(malloc(cchLen * sizeof(TCHAR)));
-    ::CopyMemory(m_pstrXML, pstrXML, cchLen * sizeof(TCHAR));
+    SIZE_T cchLen = wcslen(pstrXML) + 1;
+    m_pstrXML = static_cast<wchar_t*>(malloc(cchLen * sizeof(wchar_t)));
+    ::CopyMemory(m_pstrXML, pstrXML, cchLen * sizeof(wchar_t));
     bool bRes = _Parse();
     if( !bRes ) Release();
     return bRes;
@@ -221,7 +221,6 @@ bool CMarkup::Load(const wchar_t* pstrXML)
 
 bool CMarkup::LoadFromMem(BYTE* pByte, DWORD dwSize, int encoding)
 {
-#ifdef _UNICODE
     if (encoding == XMLFILE_ENCODING_UTF8)
     {
         if( dwSize >= 3 && pByte[0] == 0xEF && pByte[1] == 0xBB && pByte[2] == 0xBF ) 
@@ -230,7 +229,7 @@ bool CMarkup::LoadFromMem(BYTE* pByte, DWORD dwSize, int encoding)
         }
         DWORD nWide = ::MultiByteToWideChar( CP_UTF8, 0, (LPCSTR)pByte, dwSize, NULL, 0 );
 
-        m_pstrXML = static_cast<wchar_t*>(malloc((nWide + 1)*sizeof(TCHAR)));
+        m_pstrXML = static_cast<wchar_t*>(malloc((nWide + 1)*sizeof(wchar_t)));
         ::MultiByteToWideChar( CP_UTF8, 0, (LPCSTR)pByte, dwSize, m_pstrXML, nWide );
         m_pstrXML[nWide] = _T('\0');
     }
@@ -238,7 +237,7 @@ bool CMarkup::LoadFromMem(BYTE* pByte, DWORD dwSize, int encoding)
     {
         DWORD nWide = ::MultiByteToWideChar( CP_ACP, 0, (LPCSTR)pByte, dwSize, NULL, 0 );
 
-        m_pstrXML = static_cast<wchar_t*>(malloc((nWide + 1)*sizeof(TCHAR)));
+        m_pstrXML = static_cast<wchar_t*>(malloc((nWide + 1)*sizeof(wchar_t)));
         ::MultiByteToWideChar( CP_ACP, 0, (LPCSTR)pByte, dwSize, m_pstrXML, nWide );
         m_pstrXML[nWide] = _T('\0');
     }
@@ -264,71 +263,13 @@ bool CMarkup::LoadFromMem(BYTE* pByte, DWORD dwSize, int encoding)
                 pByte += 2;
             }
 
-            m_pstrXML = static_cast<wchar_t*>(malloc((dwSize + 1)*sizeof(TCHAR)));
-            ::CopyMemory( m_pstrXML, pByte, dwSize * sizeof(TCHAR) );
+            m_pstrXML = static_cast<wchar_t*>(malloc((dwSize + 1)*sizeof(wchar_t)));
+            ::CopyMemory( m_pstrXML, pByte, dwSize * sizeof(wchar_t) );
             m_pstrXML[dwSize] = _T('\0');
 
             pByte -= 2;
         }
     }
-#else // !_UNICODE
-    if (encoding == XMLFILE_ENCODING_UTF8)
-    {
-        if( dwSize >= 3 && pByte[0] == 0xEF && pByte[1] == 0xBB && pByte[2] == 0xBF ) 
-        {
-            pByte += 3; dwSize -= 3;
-        }
-        DWORD nWide = ::MultiByteToWideChar( CP_UTF8, 0, (LPCSTR)pByte, dwSize, NULL, 0 );
-
-        LPWSTR w_str = static_cast<LPWSTR>(malloc((nWide + 1)*sizeof(WCHAR)));
-        ::MultiByteToWideChar( CP_UTF8, 0, (LPCSTR)pByte, dwSize, w_str, nWide );
-        w_str[nWide] = L'\0';
-
-        DWORD wide = ::WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)w_str, nWide, NULL, 0, NULL, NULL);
-
-        m_pstrXML = static_cast<wchar_t*>(malloc((wide + 1)*sizeof(TCHAR)));
-        ::WideCharToMultiByte( CP_ACP, 0, (LPCWSTR)w_str, nWide, m_pstrXML, wide, NULL, NULL);
-        m_pstrXML[wide] = _T('\0');
-
-        free(w_str);
-    }
-    else if (encoding == XMLFILE_ENCODING_UNICODE)
-    {
-        if ( dwSize >= 2 && ( ( pByte[0] == 0xFE && pByte[1] == 0xFF ) || ( pByte[0] == 0xFF && pByte[1] == 0xFE ) ) )
-        {
-            dwSize = dwSize / 2 - 1;
-
-            if ( pByte[0] == 0xFE && pByte[1] == 0xFF )
-            {
-                pByte += 2;
-
-                for ( DWORD nSwap = 0 ; nSwap < dwSize ; nSwap ++ )
-                {
-                    register CHAR nTemp = pByte[ ( nSwap << 1 ) + 0 ];
-                    pByte[ ( nSwap << 1 ) + 0 ] = pByte[ ( nSwap << 1 ) + 1 ];
-                    pByte[ ( nSwap << 1 ) + 1 ] = nTemp;
-                }
-            }
-            else
-            {
-                pByte += 2;
-            }
-
-            DWORD nWide = ::WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)pByte, dwSize, NULL, 0, NULL, NULL);
-            m_pstrXML = static_cast<wchar_t*>(malloc((nWide + 1)*sizeof(TCHAR)));
-            ::WideCharToMultiByte( CP_ACP, 0, (LPCWSTR)pByte, dwSize, m_pstrXML, nWide, NULL, NULL);
-            m_pstrXML[nWide] = _T('\0');
-
-            pByte -= 2;
-        }
-    }
-    else
-    {
-        m_pstrXML = static_cast<wchar_t*>(malloc((dwSize + 1)*sizeof(TCHAR)));
-        ::CopyMemory( m_pstrXML, pByte, dwSize * sizeof(TCHAR) );
-        m_pstrXML[dwSize] = _T('\0');
-    }
-#endif // _UNICODE
 
     bool bRes = _Parse();
     if( !bRes ) Release();
@@ -361,12 +302,12 @@ void CMarkup::Release()
 
 void CMarkup::GetLastErrorMessage(wchar_t* pstrMessage, SIZE_T cchMax) const
 {
-    _tcsncpy(pstrMessage, m_szErrorMsg, cchMax);
+    wcsncpy(pstrMessage, m_szErrorMsg, cchMax);
 }
 
 void CMarkup::GetLastErrorLocation(wchar_t* pstrSource, SIZE_T cchMax) const
 {
-    _tcsncpy(pstrSource, m_szErrorXML, cchMax);
+    wcsncpy(pstrSource, m_szErrorXML, cchMax);
 }
 
 CMarkupNode CMarkup::GetRoot()
@@ -398,9 +339,9 @@ bool CMarkup::_Parse(wchar_t*& pstrText, ULONG iParent)
         _SkipWhitespace(pstrText);
         // Skip comment or processing directive
         if( *pstrText == _T('!') || *pstrText == _T('?') ) {
-            TCHAR ch = *pstrText;
+            wchar_t ch = *pstrText;
             if( *pstrText == _T('!') ) ch = _T('-');
-            while( *pstrText != _T('\0') && !(*pstrText == ch && *(pstrText + 1) == _T('>')) ) pstrText = ::CharNext(pstrText);
+            while( *pstrText != _T('\0') && !(*pstrText == ch && *(pstrText + 1) == _T('>')) ) pstrText = ::CharNextW(pstrText);
             if( *pstrText != _T('\0') ) pstrText += 2;
             _SkipWhitespace(pstrText);
             continue;
@@ -450,7 +391,7 @@ bool CMarkup::_Parse(wchar_t*& pstrText, ULONG iParent)
                 pstrText += 2;
                 _SkipWhitespace(pstrText);
                 SIZE_T cchName = pstrNameEnd - pstrName;
-                if( _tcsncmp(pstrText, pstrName, cchName) != 0 ) return _Failed(L"Unmatched closing tag", pstrText);
+                if( wcsncmp(pstrText, pstrName, cchName) != 0 ) return _Failed(L"Unmatched closing tag", pstrText);
                 pstrText += cchName;
                 _SkipWhitespace(pstrText);
                 if( *pstrText++ != _T('>') ) return _Failed(L"Unmatched closing tag", pstrText);
@@ -473,24 +414,24 @@ CMarkup::XMLELEMENT* CMarkup::_ReserveElement()
 
 void CMarkup::_SkipWhitespace(const wchar_t*& pstr) const
 {
-    while( *pstr > _T('\0') && *pstr <= _T(' ') ) pstr = ::CharNext(pstr);
+    while( *pstr > _T('\0') && *pstr <= _T(' ') ) pstr = ::CharNextW(pstr);
 }
 
 void CMarkup::_SkipWhitespace(wchar_t*& pstr) const
 {
-    while( *pstr > _T('\0') && *pstr <= _T(' ') ) pstr = ::CharNext(pstr);
+    while( *pstr > _T('\0') && *pstr <= _T(' ') ) pstr = ::CharNextW(pstr);
 }
 
 void CMarkup::_SkipIdentifier(const wchar_t*& pstr) const
 {
     // 属性只能用英文，所以这样处理没有问题
-    while( *pstr != _T('\0') && (*pstr == _T('_') || *pstr == _T(':') || _istalnum(*pstr)) ) pstr = ::CharNext(pstr);
+    while( *pstr != _T('\0') && (*pstr == _T('_') || *pstr == _T(':') || _istalnum(*pstr)) ) pstr = ::CharNextW(pstr);
 }
 
 void CMarkup::_SkipIdentifier(wchar_t*& pstr) const
 {
     // 属性只能用英文，所以这样处理没有问题
-    while( *pstr != _T('\0') && (*pstr == _T('_') || *pstr == _T(':') || _istalnum(*pstr)) ) pstr = ::CharNext(pstr);
+    while( *pstr != _T('\0') && (*pstr == _T('_') || *pstr == _T(':') || _istalnum(*pstr)) ) pstr = ::CharNextW(pstr);
 }
 
 bool CMarkup::_ParseAttributes(wchar_t*& pstrText)
@@ -534,7 +475,7 @@ bool CMarkup::_ParseData(wchar_t*& pstrText, wchar_t*& pstrDest, char cEnd)
             if( !m_bPreserveWhitespace ) _SkipWhitespace(pstrText);
         }
         else {
-            wchar_t* pstrTemp = ::CharNext(pstrText);
+            wchar_t* pstrTemp = ::CharNextW(pstrText);
             while( pstrText < pstrTemp) {
                 *pstrDest++ = *pstrText++;
             }
@@ -577,10 +518,8 @@ void CMarkup::_ParseMetaChar(wchar_t*& pstrText, wchar_t*& pstrDest)
 bool CMarkup::_Failed(const wchar_t* pstrError, const wchar_t* pstrLocation)
 {
     // Register last error
-    TRACE(L"XML Error: %s", pstrError);
-    if( pstrLocation != NULL ) TRACE(pstrLocation);
-    _tcsncpy(m_szErrorMsg, pstrError, (sizeof(m_szErrorMsg) / sizeof(m_szErrorMsg[0])) - 1);
-    _tcsncpy(m_szErrorXML, pstrLocation != NULL ? pstrLocation : L"", lengthof(m_szErrorXML) - 1);
+    wcsncpy(m_szErrorMsg, pstrError, (sizeof(m_szErrorMsg) / sizeof(m_szErrorMsg[0])) - 1);
+    wcsncpy(m_szErrorXML, pstrLocation != NULL ? pstrLocation : L"", lengthof(m_szErrorXML) - 1);
     return false; // Always return 'false'
 }
 

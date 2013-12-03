@@ -15,7 +15,7 @@ namespace DuiLib
 		DWORD GetDelayTime();
 
 	protected:
-		TOOLINFO  m_ToolTip;
+		TOOLINFOW m_ToolTip;
 		HWND      m_hWndTooltip;
 	};
 }

@@ -54,27 +54,27 @@ namespace DuiLib
 
 	void CCheckBoxUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, L"selected") == 0 ) Selected(_tcscmp(pstrValue, L"true") == 0);
-		else if( _tcscmp(pstrName, L"selectedimage") == 0 ) m_sSelectedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"selectedhotimage") == 0 ) m_sSelectedHotImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"selectedpushedimage") == 0 ) m_sSelectedPushedImage.reset(new CImage(pstrValue));		
-		else if( _tcscmp(pstrName, L"selecteddisabledimage") == 0 ) m_sSelectedDisabledImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"selectedbkcolor") == 0 ) {
-			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+		if( wcscmp(pstrName, L"selected") == 0 ) Selected(wcscmp(pstrValue, L"true") == 0);
+		else if( wcscmp(pstrName, L"selectedimage") == 0 ) m_sSelectedImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"selectedhotimage") == 0 ) m_sSelectedHotImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"selectedpushedimage") == 0 ) m_sSelectedPushedImage.reset(new CImage(pstrValue));		
+		else if( wcscmp(pstrName, L"selecteddisabledimage") == 0 ) m_sSelectedDisabledImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"selectedbkcolor") == 0 ) {
+			if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
 			wchar_t* pstr = NULL;
-			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
 			m_dwSelectedBkColor = clrColor;
 		}
-		else if( _tcscmp(pstrName, L"selectedtextcolor") == 0 ) {
-			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+		else if( wcscmp(pstrName, L"selectedtextcolor") == 0 ) {
+			if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
 			wchar_t* pstr = NULL;
-			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
 			m_dwSelectedTextColor = clrColor;
 		}
-		else if( _tcscmp(pstrName, L"selectedpushedtextcolor") == 0 ) {
-			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+		else if( wcscmp(pstrName, L"selectedpushedtextcolor") == 0 ) {
+			if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
 			wchar_t* pstr = NULL;
-			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
 			m_dwSelectedPushedTextColor = clrColor;
 		}
 		else CButtonUI::SetAttribute(pstrName, pstrValue);

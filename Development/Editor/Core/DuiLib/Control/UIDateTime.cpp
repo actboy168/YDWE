@@ -54,7 +54,7 @@ namespace DuiLib
 		if (m_pOwner->GetText().empty())
 			::GetLocalTime(&m_pOwner->m_sysTime);
 
-		::SendMessage(m_hWnd, DTM_SETSYSTEMTIME, 0, (LPARAM)&m_pOwner->m_sysTime);
+		::SendMessageW(m_hWnd, DTM_SETSYSTEMTIME, 0, (LPARAM)&m_pOwner->m_sysTime);
 		::ShowWindow(m_hWnd, SW_SHOWNOACTIVATE);
 		::SetFocus(m_hWnd);
 
@@ -116,7 +116,7 @@ namespace DuiLib
 		// 			::InvalidateRect(m_hWnd, &rcClient, FALSE);
 		// 		}
 		//	}
-		//	else if( uMsg == WM_KEYDOWN && TCHAR(wParam) == VK_RETURN ) {
+		//	else if( uMsg == WM_KEYDOWN && wchar_t(wParam) == VK_RETURN ) {
 		// 		m_pOwner->GetManager()->SendNotify(m_pOwner, DUI_MSGTYPE_RETURN);
 		//	}
 		// 		else if( uMsg == OCM__BASE + WM_CTLCOLOREDIT  || uMsg == OCM__BASE + WM_CTLCOLORSTATIC ) {
@@ -140,7 +140,7 @@ namespace DuiLib
 		LRESULT lRes = ::DefWindowProc(m_hWnd, uMsg, wParam, lParam);
 		if (m_pOwner->m_nDTUpdateFlag == DT_NONE)
 		{
-			::SendMessage(m_hWnd, DTM_GETSYSTEMTIME, 0, (LPARAM)&m_pOwner->m_sysTime);
+			::SendMessageW(m_hWnd, DTM_GETSYSTEMTIME, 0, (LPARAM)&m_pOwner->m_sysTime);
 			m_pOwner->m_nDTUpdateFlag = DT_UPDATE;
 			m_pOwner->UpdateText();
 		}
@@ -154,7 +154,7 @@ namespace DuiLib
 	// 	if( m_pOwner == NULL ) return 0;
 	// 	// Copy text back
 	// 	int cchLen = ::GetWindowTextLength(m_hWnd) + 1;
-	// 	const wchar_t* pstr = static_cast<const wchar_t*>(_alloca(cchLen * sizeof(TCHAR)));
+	// 	const wchar_t* pstr = static_cast<const wchar_t*>(_alloca(cchLen * sizeof(wchar_t)));
 	// 	ASSERT(pstr);
 	// 	if( pstr == NULL ) return 0;
 	// 	::GetWindowText(m_hWnd, pstr, cchLen);

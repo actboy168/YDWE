@@ -407,12 +407,12 @@ void CControlUI::SetToolTip(const wchar_t* pstrText)
     m_sToolTip = pstrText;
 }
 
-TCHAR CControlUI::GetShortcut() const
+wchar_t CControlUI::GetShortcut() const
 {
     return m_chShortcut;
 }
 
-void CControlUI::SetShortcut(TCHAR ch)
+void CControlUI::SetShortcut(wchar_t ch)
 {
     m_chShortcut = ch;
 }
@@ -653,98 +653,98 @@ std::wstring const& CControlUI::GetVirtualWnd() const
 
 void CControlUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
-	if (_tcscmp(pstrName, L"class") == 0)
+	if (wcscmp(pstrName, L"class") == 0)
 	{
 		ApplyAttributeTable(m_pManager->GetDefaultAttributeList(pstrValue));
 	}
-	else if( _tcscmp(pstrName, L"pos") == 0 ) {
+	else if( wcscmp(pstrName, L"pos") == 0 ) {
         RECT rcPos = { 0 };
         wchar_t* pstr = NULL;
-        rcPos.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-        rcPos.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-        rcPos.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-        rcPos.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
+        rcPos.left = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+        rcPos.top = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+        rcPos.right = wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+        rcPos.bottom = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
         SIZE szXY = {rcPos.left >= 0 ? rcPos.left : rcPos.right, rcPos.top >= 0 ? rcPos.top : rcPos.bottom};
         SetFixedXY(szXY);
         SetFixedWidth(rcPos.right - rcPos.left);
         SetFixedHeight(rcPos.bottom - rcPos.top);
     }
-    else if( _tcscmp(pstrName, L"relativepos") == 0 ) {
+    else if( wcscmp(pstrName, L"relativepos") == 0 ) {
         SIZE szMove,szZoom;
         wchar_t* pstr = NULL;
-        szMove.cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-        szMove.cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-        szZoom.cx = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-        szZoom.cy = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr); 
+        szMove.cx = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+        szMove.cy = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+        szZoom.cx = wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+        szZoom.cy = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr); 
         SetRelativePos(szMove,szZoom);
     }
-    else if( _tcscmp(pstrName, L"padding") == 0 ) {
+    else if( wcscmp(pstrName, L"padding") == 0 ) {
         RECT rcPadding = { 0 };
         wchar_t* pstr = NULL;
-        rcPadding.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-        rcPadding.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-        rcPadding.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-        rcPadding.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
+        rcPadding.left = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+        rcPadding.top = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+        rcPadding.right = wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+        rcPadding.bottom = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
         SetPadding(rcPadding);
     }
-    else if( _tcscmp(pstrName, L"bkcolor") == 0 || _tcscmp(pstrName, L"bkcolor1") == 0 ) {
-        while( *pstrValue > _T('\0') && *pstrValue <= _T(' ') ) pstrValue = ::CharNext(pstrValue);
-        if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+    else if( wcscmp(pstrName, L"bkcolor") == 0 || wcscmp(pstrName, L"bkcolor1") == 0 ) {
+        while( *pstrValue > _T('\0') && *pstrValue <= _T(' ') ) pstrValue = ::CharNextW(pstrValue);
+        if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
         wchar_t* pstr = NULL;
-        DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+        DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
         SetBkColor(clrColor);
     }
-    else if( _tcscmp(pstrName, L"bkcolor2") == 0 ) {
-        while( *pstrValue > _T('\0') && *pstrValue <= _T(' ') ) pstrValue = ::CharNext(pstrValue);
-        if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+    else if( wcscmp(pstrName, L"bkcolor2") == 0 ) {
+        while( *pstrValue > _T('\0') && *pstrValue <= _T(' ') ) pstrValue = ::CharNextW(pstrValue);
+        if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
         wchar_t* pstr = NULL;
-        DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+        DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
         SetBkColor2(clrColor);
     }
-    else if( _tcscmp(pstrName, L"bkcolor3") == 0 ) {
-        while( *pstrValue > _T('\0') && *pstrValue <= _T(' ') ) pstrValue = ::CharNext(pstrValue);
-        if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+    else if( wcscmp(pstrName, L"bkcolor3") == 0 ) {
+        while( *pstrValue > _T('\0') && *pstrValue <= _T(' ') ) pstrValue = ::CharNextW(pstrValue);
+        if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
         wchar_t* pstr = NULL;
-        DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+        DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
         SetBkColor3(clrColor);
     }
-    else if( _tcscmp(pstrName, L"bordercolor") == 0 ) {
-        if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+    else if( wcscmp(pstrName, L"bordercolor") == 0 ) {
+        if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
         wchar_t* pstr = NULL;
-        DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+        DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
         SetBorderColor(clrColor);
     }
-    else if( _tcscmp(pstrName, L"focusbordercolor") == 0 ) {
-        if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+    else if( wcscmp(pstrName, L"focusbordercolor") == 0 ) {
+        if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
         wchar_t* pstr = NULL;
-        DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+        DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
         SetFocusBorderColor(clrColor);
     }
-    else if( _tcscmp(pstrName, L"bordersize") == 0 ) SetBorderSize(_ttoi(pstrValue));
-    else if( _tcscmp(pstrName, L"borderround") == 0 ) {
+    else if( wcscmp(pstrName, L"bordersize") == 0 ) SetBorderSize(_wtoi(pstrValue));
+    else if( wcscmp(pstrName, L"borderround") == 0 ) {
         SIZE cxyRound = { 0 };
         wchar_t* pstr = NULL;
-        cxyRound.cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-        cxyRound.cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);     
+        cxyRound.cx = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+        cxyRound.cy = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);     
         SetBorderRound(cxyRound);
     }
-    else if( _tcscmp(pstrName, L"bkimage") == 0 ) m_sBkImage.reset(new CImage(pstrValue));
-    else if( _tcscmp(pstrName, L"width") == 0 ) SetFixedWidth(_ttoi(pstrValue));
-    else if( _tcscmp(pstrName, L"height") == 0 ) SetFixedHeight(_ttoi(pstrValue));
-    else if( _tcscmp(pstrName, L"minwidth") == 0 ) SetMinWidth(_ttoi(pstrValue));
-    else if( _tcscmp(pstrName, L"minheight") == 0 ) SetMinHeight(_ttoi(pstrValue));
-    else if( _tcscmp(pstrName, L"maxwidth") == 0 ) SetMaxWidth(_ttoi(pstrValue));
-    else if( _tcscmp(pstrName, L"maxheight") == 0 ) SetMaxHeight(_ttoi(pstrValue));
-    else if( _tcscmp(pstrName, L"name") == 0 ) SetName(pstrValue);
-    else if( _tcscmp(pstrName, L"tooltip") == 0 ) SetToolTip(pstrValue);
-    else if( _tcscmp(pstrName, L"enabled") == 0 ) SetEnabled(_tcscmp(pstrValue, L"true") == 0);
-    else if( _tcscmp(pstrName, L"mouse") == 0 ) SetMouseEnabled(_tcscmp(pstrValue, L"true") == 0);
-	else if( _tcscmp(pstrName, L"keyboard") == 0 ) SetKeyboardEnabled(_tcscmp(pstrValue, L"true") == 0);
-    else if( _tcscmp(pstrName, L"visible") == 0 ) SetVisible(_tcscmp(pstrValue, L"true") == 0);
-    else if( _tcscmp(pstrName, L"float") == 0 ) SetFloat(_tcscmp(pstrValue, L"true") == 0);
-    else if( _tcscmp(pstrName, L"shortcut") == 0 ) SetShortcut(pstrValue[0]);
-    else if( _tcscmp(pstrName, L"menu") == 0 ) SetContextMenuUsed(_tcscmp(pstrValue, L"true") == 0);
-	else if( _tcscmp(pstrName, L"virtualwnd") == 0 ) SetVirtualWnd(pstrValue);
+    else if( wcscmp(pstrName, L"bkimage") == 0 ) m_sBkImage.reset(new CImage(pstrValue));
+    else if( wcscmp(pstrName, L"width") == 0 ) SetFixedWidth(_wtoi(pstrValue));
+    else if( wcscmp(pstrName, L"height") == 0 ) SetFixedHeight(_wtoi(pstrValue));
+    else if( wcscmp(pstrName, L"minwidth") == 0 ) SetMinWidth(_wtoi(pstrValue));
+    else if( wcscmp(pstrName, L"minheight") == 0 ) SetMinHeight(_wtoi(pstrValue));
+    else if( wcscmp(pstrName, L"maxwidth") == 0 ) SetMaxWidth(_wtoi(pstrValue));
+    else if( wcscmp(pstrName, L"maxheight") == 0 ) SetMaxHeight(_wtoi(pstrValue));
+    else if( wcscmp(pstrName, L"name") == 0 ) SetName(pstrValue);
+    else if( wcscmp(pstrName, L"tooltip") == 0 ) SetToolTip(pstrValue);
+    else if( wcscmp(pstrName, L"enabled") == 0 ) SetEnabled(wcscmp(pstrValue, L"true") == 0);
+    else if( wcscmp(pstrName, L"mouse") == 0 ) SetMouseEnabled(wcscmp(pstrValue, L"true") == 0);
+	else if( wcscmp(pstrName, L"keyboard") == 0 ) SetKeyboardEnabled(wcscmp(pstrValue, L"true") == 0);
+    else if( wcscmp(pstrName, L"visible") == 0 ) SetVisible(wcscmp(pstrValue, L"true") == 0);
+    else if( wcscmp(pstrName, L"float") == 0 ) SetFloat(wcscmp(pstrValue, L"true") == 0);
+    else if( wcscmp(pstrName, L"shortcut") == 0 ) SetShortcut(pstrValue[0]);
+    else if( wcscmp(pstrName, L"menu") == 0 ) SetContextMenuUsed(wcscmp(pstrValue, L"true") == 0);
+	else if( wcscmp(pstrName, L"virtualwnd") == 0 ) SetVirtualWnd(pstrValue);
 }
 
 CControlUI* CControlUI::ApplyAttributeList(const wchar_t* pstrList)
@@ -755,7 +755,7 @@ CControlUI* CControlUI::ApplyAttributeList(const wchar_t* pstrList)
 		sItem.clear();
 		sValue.clear();
 		while( *pstrList != _T('\0') && *pstrList != _T('=') ) {
-			const wchar_t* pstrTemp = ::CharNext(pstrList);
+			const wchar_t* pstrTemp = ::CharNextW(pstrList);
 			while( pstrList < pstrTemp) {
 				sItem.push_back(*pstrList++);
 			}
@@ -765,7 +765,7 @@ CControlUI* CControlUI::ApplyAttributeList(const wchar_t* pstrList)
 		ASSERT( *pstrList == _T('\"') );
 		if( *pstrList++ != _T('\"') ) return this;
 		while( *pstrList != _T('\0') && *pstrList != _T('\"') ) {
-			const wchar_t* pstrTemp = ::CharNext(pstrList);
+			const wchar_t* pstrTemp = ::CharNextW(pstrList);
 			while( pstrList < pstrTemp) {
 				sValue.push_back(*pstrList++);
 			}

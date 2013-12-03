@@ -38,7 +38,7 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
         for (CMarkupNode node = root.GetChild() ; node.IsValid(); node = node.GetSibling() ) 
 		{
             pstrClass = node.GetName();
-            if (_tcscmp(pstrClass, L"Image") == 0)
+            if (wcscmp(pstrClass, L"Image") == 0)
 			{
                 nAttributes = node.GetAttributeCount();
                 const wchar_t* pImageName = NULL;
@@ -46,17 +46,17 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
                 for( int i = 0; i < nAttributes; i++ ) {
                     pstrName = node.GetAttributeName(i);
                     pstrValue = node.GetAttributeValue(i);
-                    if( _tcscmp(pstrName, L"name") == 0 ) {
+                    if( wcscmp(pstrName, L"name") == 0 ) {
                         pImageName = pstrValue;
 					}
-                    else if( _tcscmp(pstrName, L"mask") == 0 ) {
-                        if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
-                        mask = _tcstoul(pstrValue, &pstr, 16);
+                    else if( wcscmp(pstrName, L"mask") == 0 ) {
+                        if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
+                        mask = wcstoul(pstrValue, &pstr, 16);
                     }
                 }
                 if( pImageName ) pManager->AddImage(pImageName, mask);
             }
-            else if( _tcscmp(pstrClass, L"Font") == 0 ) 
+            else if( wcscmp(pstrClass, L"Font") == 0 ) 
 			{
                 nAttributes = node.GetAttributeCount();
                 const wchar_t* pFontName = NULL;
@@ -68,23 +68,23 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
                 for( int i = 0; i < nAttributes; i++ ) {
                     pstrName = node.GetAttributeName(i);
                     pstrValue = node.GetAttributeValue(i);
-                    if( _tcscmp(pstrName, L"name") == 0 ) {
+                    if( wcscmp(pstrName, L"name") == 0 ) {
                         pFontName = pstrValue;
                     }
-                    else if( _tcscmp(pstrName, L"size") == 0 ) {
-                        size = _tcstol(pstrValue, &pstr, 10);
+                    else if( wcscmp(pstrName, L"size") == 0 ) {
+                        size = wcstol(pstrValue, &pstr, 10);
                     }
-                    else if( _tcscmp(pstrName, L"bold") == 0 ) {
-                        bold = (_tcscmp(pstrValue, L"true") == 0);
+                    else if( wcscmp(pstrName, L"bold") == 0 ) {
+                        bold = (wcscmp(pstrValue, L"true") == 0);
                     }
-                    else if( _tcscmp(pstrName, L"underline") == 0 ) {
-                        underline = (_tcscmp(pstrValue, L"true") == 0);
+                    else if( wcscmp(pstrName, L"underline") == 0 ) {
+                        underline = (wcscmp(pstrValue, L"true") == 0);
                     }
-                    else if( _tcscmp(pstrName, L"italic") == 0 ) {
-                        italic = (_tcscmp(pstrValue, L"true") == 0);
+                    else if( wcscmp(pstrName, L"italic") == 0 ) {
+                        italic = (wcscmp(pstrValue, L"true") == 0);
                     }
-                    else if( _tcscmp(pstrName, L"default") == 0 ) {
-                        defaultfont = (_tcscmp(pstrValue, L"true") == 0);
+                    else if( wcscmp(pstrName, L"default") == 0 ) {
+                        defaultfont = (wcscmp(pstrValue, L"true") == 0);
                     }
                 }
                 if( pFontName ) {
@@ -95,91 +95,91 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
         }
 
         pstrClass = root.GetName();
-        if( _tcscmp(pstrClass, L"Window") == 0 ) {
+        if( wcscmp(pstrClass, L"Window") == 0 ) {
             if( pManager->GetPaintWindow() ) {
                 int nAttributes = root.GetAttributeCount();
                 for( int i = 0; i < nAttributes; i++ ) {
                     pstrName = root.GetAttributeName(i);
                     pstrValue = root.GetAttributeValue(i);
-                    if( _tcscmp(pstrName, L"size") == 0 ) {
+                    if( wcscmp(pstrName, L"size") == 0 ) {
                         wchar_t* pstr = NULL;
-                        int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-                        int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
+                        int cx = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+                        int cy = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetInitSize(cx, cy);
                     } 
-                    else if( _tcscmp(pstrName, L"sizebox") == 0 ) {
+                    else if( wcscmp(pstrName, L"sizebox") == 0 ) {
                         RECT rcSizeBox = { 0 };
                         wchar_t* pstr = NULL;
-                        rcSizeBox.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-                        rcSizeBox.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-                        rcSizeBox.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-                        rcSizeBox.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
+                        rcSizeBox.left = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+                        rcSizeBox.top = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+                        rcSizeBox.right = wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+                        rcSizeBox.bottom = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
                         pManager->SetSizeBox(rcSizeBox);
                     }
-                    else if( _tcscmp(pstrName, L"caption") == 0 ) {
+                    else if( wcscmp(pstrName, L"caption") == 0 ) {
                         RECT rcCaption = { 0 };
                         wchar_t* pstr = NULL;
-                        rcCaption.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-                        rcCaption.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-                        rcCaption.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-                        rcCaption.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
+                        rcCaption.left = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+                        rcCaption.top = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+                        rcCaption.right = wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+                        rcCaption.bottom = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
                         pManager->SetCaptionRect(rcCaption);
                     }
-                    else if( _tcscmp(pstrName, L"roundcorner") == 0 ) {
+                    else if( wcscmp(pstrName, L"roundcorner") == 0 ) {
                         wchar_t* pstr = NULL;
-                        int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-                        int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
+                        int cx = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+                        int cy = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetRoundCorner(cx, cy);
                     } 
-                    else if( _tcscmp(pstrName, L"mininfo") == 0 ) {
+                    else if( wcscmp(pstrName, L"mininfo") == 0 ) {
                         wchar_t* pstr = NULL;
-                        int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-                        int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
+                        int cx = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+                        int cy = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetMinInfo(cx, cy);
                     }
-                    else if( _tcscmp(pstrName, L"maxinfo") == 0 ) {
+                    else if( wcscmp(pstrName, L"maxinfo") == 0 ) {
                         wchar_t* pstr = NULL;
-                        int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-                        int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
+                        int cx = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+                        int cy = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetMaxInfo(cx, cy);
                     }
-                    else if( _tcscmp(pstrName, L"showdirty") == 0 ) {
-                        pManager->SetShowUpdateRect(_tcscmp(pstrValue, L"true") == 0);
+                    else if( wcscmp(pstrName, L"showdirty") == 0 ) {
+                        pManager->SetShowUpdateRect(wcscmp(pstrValue, L"true") == 0);
                     } 
-                    else if( _tcscmp(pstrName, L"alpha") == 0 ) {
-                        pManager->SetTransparent(_ttoi(pstrValue));
+                    else if( wcscmp(pstrName, L"alpha") == 0 ) {
+                        pManager->SetTransparent(_wtoi(pstrValue));
                     } 
-                    else if( _tcscmp(pstrName, L"bktrans") == 0 ) {
-                        pManager->SetBackgroundTransparent(_tcscmp(pstrValue, L"true") == 0);
+                    else if( wcscmp(pstrName, L"bktrans") == 0 ) {
+                        pManager->SetBackgroundTransparent(wcscmp(pstrValue, L"true") == 0);
                     } 
-                    else if( _tcscmp(pstrName, L"disabledfontcolor") == 0 ) {
-                        if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+                    else if( wcscmp(pstrName, L"disabledfontcolor") == 0 ) {
+                        if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
                         wchar_t* pstr = NULL;
-                        DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+                        DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultDisabledColor(clrColor);
                     } 
-                    else if( _tcscmp(pstrName, L"defaultfontcolor") == 0 ) {
-                        if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+                    else if( wcscmp(pstrName, L"defaultfontcolor") == 0 ) {
+                        if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
                         wchar_t* pstr = NULL;
-                        DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+                        DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultFontColor(clrColor);
                     }
-                    else if( _tcscmp(pstrName, L"linkfontcolor") == 0 ) {
-                        if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+                    else if( wcscmp(pstrName, L"linkfontcolor") == 0 ) {
+                        if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
                         wchar_t* pstr = NULL;
-                        DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+                        DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultLinkFontColor(clrColor);
                     } 
-                    else if( _tcscmp(pstrName, L"linkhoverfontcolor") == 0 ) {
-                        if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+                    else if( wcscmp(pstrName, L"linkhoverfontcolor") == 0 ) {
+                        if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
                         wchar_t* pstr = NULL;
-                        DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+                        DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultLinkHoverFontColor(clrColor);
                     } 
-                    else if( _tcscmp(pstrName, L"selectedcolor") == 0 ) {
-                        if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+                    else if( wcscmp(pstrName, L"selectedcolor") == 0 ) {
+                        if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
                         wchar_t* pstr = NULL;
-                        DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+                        DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultSelectedBkColor(clrColor);
                     } 
                 }
@@ -210,12 +210,12 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
     CControlUI* pReturn = NULL;
     for( CMarkupNode node = pRoot->GetChild() ; node.IsValid(); node = node.GetSibling() ) {
         const wchar_t* pstrClass = node.GetName();
-        if( _tcscmp(pstrClass, L"Image") == 0 || _tcscmp(pstrClass, L"Font") == 0 \
+        if( wcscmp(pstrClass, L"Image") == 0 || wcscmp(pstrClass, L"Font") == 0 \
              ) continue;
 
         CControlUI* pControl = NULL;
 
-		if (_tcscmp(pstrClass, L"Class") == 0) 
+		if (wcscmp(pstrClass, L"Class") == 0) 
 		{
 			const wchar_t* pControlName = node.GetAttributeValue(L"name");
 
@@ -226,7 +226,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 				{
 					wchar_t const* pstrName = node.GetAttributeName(i);
 					wchar_t const* pstrValue = node.GetAttributeValue(i);
-					if (_tcscmp(pstrName, L"class") == 0)
+					if (wcscmp(pstrName, L"class") == 0)
 					{
 						CAttributesList* pParent = pManager->GetDefaultAttributeList(pstrValue);
 						if (pParent)
@@ -237,14 +237,14 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 							}
 						}
 					}
-					else if (_tcscmp(pstrName, L"name") != 0)
+					else if (wcscmp(pstrName, L"name") != 0)
 					{
 						pManager->AddDefaultAttribute(pControlName, pstrName, pstrValue);
 					}
 				}
 			}
 		}
-        else if (_tcscmp(pstrClass, L"Include") == 0)
+        else if (wcscmp(pstrClass, L"Include") == 0)
 		{
 			const wchar_t* szValue = node.GetAttributeValue(L"source");
 			if (szValue && szValue[0])
@@ -255,7 +255,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
             continue;
         }
 		//树控件XML解析
-		else if( _tcscmp(pstrClass, L"TreeNode") == 0 ) {
+		else if( wcscmp(pstrClass, L"TreeNode") == 0 ) {
 			CTreeNodeUI* pParentNode	= dynamic_cast<CTreeNodeUI*>(pParent);
 			CTreeNodeUI* pNode			= new CTreeNodeUI();
 			if(pParentNode){
@@ -288,7 +288,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 			//检索子节点及附加控件
 			if(node.HasChildren()){
 				CControlUI* pSubControl = _Parse(&node,pNode,pManager);
-				if(pSubControl && _tcscmp(pSubControl->GetClass(),DUI_CTR_TREENODE) != 0)
+				if(pSubControl && wcscmp(pSubControl->GetClass(),DUI_CTR_TREENODE) != 0)
 				{
 					// 					pSubControl->SetFixedWidth(30);
 					// 					CHorizontalLayoutUI* pHorz = pNode->GetTreeNodeHoriznotal();
@@ -309,73 +309,73 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 			continue;
 		}
         else {
-            SIZE_T cchLen = _tcslen(pstrClass);
+            SIZE_T cchLen = wcslen(pstrClass);
             switch( cchLen ) {
             case 4:
 #ifdef DUI_USE_EDIT
-				if( _tcscmp(pstrClass, DUI_CTR_EDIT) == 0 )                   { pControl = new CEditUI; break; }
+				if( wcscmp(pstrClass, DUI_CTR_EDIT) == 0 )                   { pControl = new CEditUI; break; }
 #endif
-                if( _tcscmp(pstrClass, DUI_CTR_LIST) == 0 )                   { pControl = new CListUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_LIST) == 0 )                   { pControl = new CListUI; break; }
 #ifdef DUI_USE_TEXT
-                if( _tcscmp(pstrClass, DUI_CTR_TEXT) == 0 )                   { pControl = new CTextUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_TEXT) == 0 )                   { pControl = new CTextUI; break; }
 #endif
                 break;
             case 5:		
-                if( _tcscmp(pstrClass, DUI_CTR_COMBO) == 0 )                  { pControl = new CComboUI; break; }
-                if( _tcscmp(pstrClass, DUI_CTR_LABEL) == 0 )                  { pControl = new CLabelUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_COMBO) == 0 )                  { pControl = new CComboUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_LABEL) == 0 )                  { pControl = new CLabelUI; break; }
                 break;
             case 6:		
-				if( _tcscmp(pstrClass, DUI_CTR_BUTTON) == 0 )                 { pControl = new CButtonUI; break; }
+				if( wcscmp(pstrClass, DUI_CTR_BUTTON) == 0 )                 { pControl = new CButtonUI; break; }
 #ifdef DUI_USE_SLIDER
-                if( _tcscmp(pstrClass, DUI_CTR_SLIDER) == 0 )                 { pControl = new CSliderUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_SLIDER) == 0 )                 { pControl = new CSliderUI; break; }
 #endif
                 break;
             case 7:		
-				if( _tcscmp(pstrClass, DUI_CTR_CONTROL) == 0 )                { pControl = new CControlUI; break; }
-				if( _tcscmp(pstrClass, DUI_CTR_CHECKBOX) == 0 )               { pControl = new CCheckBoxUI; break; }
+				if( wcscmp(pstrClass, DUI_CTR_CONTROL) == 0 )                { pControl = new CControlUI; break; }
+				if( wcscmp(pstrClass, DUI_CTR_CHECKBOX) == 0 )               { pControl = new CCheckBoxUI; break; }
                 break;
 			case 8:		
 #ifdef DUI_USE_PROGRESS
-                if( _tcscmp(pstrClass, DUI_CTR_PROGRESS) == 0 )               { pControl = new CProgressUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_PROGRESS) == 0 )               { pControl = new CProgressUI; break; }
 #endif
 #ifdef DUI_USE_RICHEDIT
-                if( _tcscmp(pstrClass, DUI_CTR_RICHEDIT) == 0 )               { pControl = new CRichEditUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_RICHEDIT) == 0 )               { pControl = new CRichEditUI; break; }
 #endif
-				if( _tcscmp(pstrClass, DUI_CTR_CHECKBOX) == 0 )		          { pControl = new CCheckBoxUI; break; }
+				if( wcscmp(pstrClass, DUI_CTR_CHECKBOX) == 0 )		          { pControl = new CCheckBoxUI; break; }
 #ifdef DUI_USE_COMBOBOX
-				if( _tcscmp(pstrClass, DUI_CTR_COMBOBOX) == 0 )		          { pControl = new CComboBoxUI; break; }
+				if( wcscmp(pstrClass, DUI_CTR_COMBOBOX) == 0 )		          { pControl = new CComboBoxUI; break; }
 #endif
 #ifdef DUI_USE_DATETIME				
-				if( _tcscmp(pstrClass, DUI_CTR_DATETIME) == 0 )		          { pControl = new CDateTimeUI; break; }
+				if( wcscmp(pstrClass, DUI_CTR_DATETIME) == 0 )		          { pControl = new CDateTimeUI; break; }
 #endif
-				if( _tcscmp(pstrClass, DUI_CTR_TREEVIEW) == 0 )		          { pControl = new CTreeViewUI; break; }
+				if( wcscmp(pstrClass, DUI_CTR_TREEVIEW) == 0 )		          { pControl = new CTreeViewUI; break; }
                 break;
             case 9:		
-                if( _tcscmp(pstrClass, DUI_CTR_CONTAINER) == 0 )              { pControl = new CContainerUI; break; }
-                if( _tcscmp(pstrClass, DUI_CTR_TABLAYOUT) == 0 )              { pControl = new CTabLayoutUI; break; }
-                if( _tcscmp(pstrClass, DUI_CTR_SCROLLBAR) == 0 )              { pControl = new CScrollBarUI;  break; }
+                if( wcscmp(pstrClass, DUI_CTR_CONTAINER) == 0 )              { pControl = new CContainerUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_TABLAYOUT) == 0 )              { pControl = new CTabLayoutUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_SCROLLBAR) == 0 )              { pControl = new CScrollBarUI;  break; }
                 break;
             case 10:
-                if( _tcscmp(pstrClass, DUI_CTR_LISTHEADER) == 0 )             { pControl = new CListHeaderUI; break; }
-                if( _tcscmp(pstrClass, DUI_CTR_TILELAYOUT) == 0 )             { pControl = new CTileLayoutUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_LISTHEADER) == 0 )             { pControl = new CListHeaderUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_TILELAYOUT) == 0 )             { pControl = new CTileLayoutUI; break; }
                 break;	
 			case 11:	
-				if (_tcscmp(pstrClass, DUI_CTR_CHILDLAYOUT) == 0)			  { pControl = new CChildLayoutUI; break; }
-				if( _tcscmp(pstrClass, DUI_CTR_RADIOBUTTON) == 0 )            { pControl = new CRadioButtonUI; break; }
+				if (wcscmp(pstrClass, DUI_CTR_CHILDLAYOUT) == 0)			  { pControl = new CChildLayoutUI; break; }
+				if( wcscmp(pstrClass, DUI_CTR_RADIOBUTTON) == 0 )            { pControl = new CRadioButtonUI; break; }
 				break;													      
             case 14:													      
-                if( _tcscmp(pstrClass, DUI_CTR_VERTICALLAYOUT) == 0 )         { pControl = new CVerticalLayoutUI; break; }
-                if( _tcscmp(pstrClass, DUI_CTR_LISTHEADERITEM) == 0 )         { pControl = new CListHeaderItemUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_VERTICALLAYOUT) == 0 )         { pControl = new CVerticalLayoutUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_LISTHEADERITEM) == 0 )         { pControl = new CListHeaderItemUI; break; }
                 break;													      
             case 15:													      
-                if( _tcscmp(pstrClass, DUI_CTR_LISTTEXTELEMENT) == 0 )        { pControl = new CListTextElementUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_LISTTEXTELEMENT) == 0 )        { pControl = new CListTextElementUI; break; }
                 break;													      
             case 16:													      
-                if( _tcscmp(pstrClass, DUI_CTR_HORIZONTALLAYOUT) == 0 )       { pControl = new CHorizontalLayoutUI; break; }
-                if( _tcscmp(pstrClass, DUI_CTR_LISTLABELELEMENT) == 0 )       { pControl = new CListLabelElementUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_HORIZONTALLAYOUT) == 0 )       { pControl = new CHorizontalLayoutUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_LISTLABELELEMENT) == 0 )       { pControl = new CListLabelElementUI; break; }
                 break;
             case 20:
-                if( _tcscmp(pstrClass, DUI_CTR_LISTCONTAINERELEMENT) == 0 )   { pControl = new CListContainerElementUI; break; }
+                if( wcscmp(pstrClass, DUI_CTR_LISTCONTAINERELEMENT) == 0 )   { pControl = new CListContainerElementUI; break; }
                 break;
             }
             if( pControl == NULL && m_pCallback != NULL ) {

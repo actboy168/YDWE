@@ -228,7 +228,7 @@ void CRenderEngine::DrawImage(HDC hDC, HBITMAP hBitmap, const RECT& rc, const RE
     ASSERT(::GetObjectType(hDC)==OBJ_DC || ::GetObjectType(hDC)==OBJ_MEMDC);
 
     typedef BOOL (WINAPI *LPALPHABLEND)(HDC, int, int, int, int,HDC, int, int, int, int, BLENDFUNCTION);
-    static LPALPHABLEND lpAlphaBlend = (LPALPHABLEND) ::GetProcAddress(::GetModuleHandle(L"msimg32.dll"), "AlphaBlend");
+    static LPALPHABLEND lpAlphaBlend = (LPALPHABLEND) ::GetProcAddress(::GetModuleHandleW(L"msimg32.dll"), "AlphaBlend");
 
     if( lpAlphaBlend == NULL ) lpAlphaBlend = AlphaBitBlt;
     if( hBitmap == NULL ) return;
@@ -731,19 +731,19 @@ bool CRenderEngine::DrawImageString(HDC hDC, CPaintManagerUI* pManager, const RE
         while( *pStrImage != _T('\0') ) {
             sItem.clear();
             sValue.clear();
-            while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNext(pStrImage);
+            while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNextW(pStrImage);
             while( *pStrImage != _T('\0') && *pStrImage != _T('=') && *pStrImage > _T(' ') ) {
-                const wchar_t* pstrTemp = ::CharNext(pStrImage);
+                const wchar_t* pstrTemp = ::CharNextW(pStrImage);
                 while( pStrImage < pstrTemp) {
                     sItem += *pStrImage++;
                 }
             }
-            while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNext(pStrImage);
+            while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNextW(pStrImage);
             if( *pStrImage++ != _T('=') ) break;
-            while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNext(pStrImage);
+            while( *pStrImage > _T('\0') && *pStrImage <= _T(' ') ) pStrImage = ::CharNextW(pStrImage);
             if( *pStrImage++ != _T('\'') ) break;
             while( *pStrImage != _T('\0') && *pStrImage != _T('\'') ) {
-                const wchar_t* pstrTemp = ::CharNext(pStrImage);
+                const wchar_t* pstrTemp = ::CharNextW(pStrImage);
                 while( pStrImage < pstrTemp) {
                     sValue += *pStrImage++;
                 }
@@ -760,40 +760,40 @@ bool CRenderEngine::DrawImageString(HDC hDC, CPaintManagerUI* pManager, const RE
 						++image_count;
                 }
                 else if( sItem == L"dest" ) {
-                    rcItem.left = rc.left + _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
-                    rcItem.top = rc.top + _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
-                    rcItem.right = rc.left + _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
+                    rcItem.left = rc.left + wcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
+                    rcItem.top = rc.top + wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
+                    rcItem.right = rc.left + wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
 					if (rcItem.right > rc.right) rcItem.right = rc.right;
-                    rcItem.bottom = rc.top + _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
+                    rcItem.bottom = rc.top + wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
 					if (rcItem.bottom > rc.bottom) rcItem.bottom = rc.bottom;
                 }
                 else if( sItem == L"source" ) {
-                    rcBmpPart.left = _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
-                    rcBmpPart.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-                    rcBmpPart.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-                    rcBmpPart.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);  
+                    rcBmpPart.left = wcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
+                    rcBmpPart.top = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+                    rcBmpPart.right = wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+                    rcBmpPart.bottom = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);  
                 }
                 else if( sItem == L"corner" ) {
-                    rcCorner.left = _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
-                    rcCorner.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-                    rcCorner.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-                    rcCorner.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
+                    rcCorner.left = wcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
+                    rcCorner.top = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+                    rcCorner.right = wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+                    rcCorner.bottom = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
                 }
                 else if( sItem == L"mask" ) {
-                    if( sValue[0] == _T('#')) dwMask = _tcstoul(sValue.c_str() + 1, &pstr, 16);
-                    else dwMask = _tcstoul(sValue.c_str(), &pstr, 16);
+                    if( sValue[0] == _T('#')) dwMask = wcstoul(sValue.c_str() + 1, &pstr, 16);
+                    else dwMask = wcstoul(sValue.c_str(), &pstr, 16);
                 }
                 else if( sItem == L"fade" ) {
-                    bFade = (BYTE)_tcstoul(sValue.c_str(), &pstr, 10);
+                    bFade = (BYTE)wcstoul(sValue.c_str(), &pstr, 10);
                 }
                 else if( sItem == L"hole" ) {
-                    bHole = (_tcscmp(sValue.c_str(), L"true") == 0);
+                    bHole = (wcscmp(sValue.c_str(), L"true") == 0);
                 }
                 else if( sItem == L"xtiled" ) {
-                    bTiledX = (_tcscmp(sValue.c_str(), L"true") == 0);
+                    bTiledX = (wcscmp(sValue.c_str(), L"true") == 0);
                 }
                 else if( sItem == L"ytiled" ) {
-                    bTiledY = (_tcscmp(sValue.c_str(), L"true") == 0);
+                    bTiledY = (wcscmp(sValue.c_str(), L"true") == 0);
                 }
             }
             if( *pStrImage++ != _T(' ') ) break;
@@ -841,10 +841,10 @@ void CRenderEngine::DrawColor(HDC hDC, const RECT& rc, DWORD color)
 void CRenderEngine::DrawGradient(HDC hDC, const RECT& rc, DWORD dwFirst, DWORD dwSecond, bool bVertical, int nSteps)
 {
     typedef BOOL (WINAPI *LPALPHABLEND)(HDC, int, int, int, int,HDC, int, int, int, int, BLENDFUNCTION);
-    static LPALPHABLEND lpAlphaBlend = (LPALPHABLEND) ::GetProcAddress(::GetModuleHandle(L"msimg32.dll"), "AlphaBlend");
+    static LPALPHABLEND lpAlphaBlend = (LPALPHABLEND) ::GetProcAddress(::GetModuleHandleW(L"msimg32.dll"), "AlphaBlend");
     if( lpAlphaBlend == NULL ) lpAlphaBlend = AlphaBitBlt;
     typedef BOOL (WINAPI *PGradientFill)(HDC, PTRIVERTEX, ULONG, PVOID, ULONG, ULONG);
-    static PGradientFill lpGradientFill = (PGradientFill) ::GetProcAddress(::GetModuleHandle(L"msimg32.dll"), "GradientFill");
+    static PGradientFill lpGradientFill = (PGradientFill) ::GetProcAddress(::GetModuleHandleW(L"msimg32.dll"), "GradientFill");
 
     BYTE bAlpha = (BYTE)(((dwFirst >> 24) + (dwSecond >> 24)) >> 1);
     if( bAlpha == 0 ) return;
@@ -955,7 +955,7 @@ void CRenderEngine::DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, const
     ::SetBkMode(hDC, TRANSPARENT);
     ::SetTextColor(hDC, RGB(GetBValue(dwTextColor), GetGValue(dwTextColor), GetRValue(dwTextColor)));
     HFONT hOldFont = (HFONT)::SelectObject(hDC, pManager->GetFont(iFont));
-    ::DrawText(hDC, pstrText, -1, &rc, uStyle | DT_NOPREFIX);
+    ::DrawTextW(hDC, pstrText, -1, &rc, uStyle | DT_NOPREFIX);
     ::SelectObject(hDC, hOldFont);
 }
 

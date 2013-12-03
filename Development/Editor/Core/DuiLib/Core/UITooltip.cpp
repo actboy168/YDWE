@@ -35,19 +35,19 @@ namespace DuiLib
 
 			//ASSERT(m_hWndTooltip != NULL);
 
-			::SendMessage(m_hWndTooltip, TTM_ADDTOOL, 0, (LPARAM)&m_ToolTip);
-			::SendMessage(m_hWndTooltip, TTM_SETMAXTIPWIDTH, 0, 150);
+			::SendMessageW(m_hWndTooltip, TTM_ADDTOOL, 0, (LPARAM)&m_ToolTip);
+			::SendMessageW(m_hWndTooltip, TTM_SETMAXTIPWIDTH, 0, 150);
 		}
 
-		::SendMessage(m_hWndTooltip, TTM_SETTOOLINFO, 0, (LPARAM)&m_ToolTip);
-		::SendMessage(m_hWndTooltip, TTM_TRACKACTIVATE, TRUE, (LPARAM)&m_ToolTip);
+		::SendMessageW(m_hWndTooltip, TTM_SETTOOLINFO, 0, (LPARAM)&m_ToolTip);
+		::SendMessageW(m_hWndTooltip, TTM_TRACKACTIVATE, TRUE, (LPARAM)&m_ToolTip);
 	}
 
 	void CTooltip::Close()
 	{
 		if (m_hWndTooltip != NULL) 
 		{
-			::SendMessage(m_hWndTooltip, TTM_TRACKACTIVATE, FALSE, (LPARAM) &m_ToolTip);
+			::SendMessageW(m_hWndTooltip, TTM_TRACKACTIVATE, FALSE, (LPARAM) &m_ToolTip);
 		}
 	}
 
@@ -58,6 +58,6 @@ namespace DuiLib
 			return 400UL;
 		}
 
-		return (DWORD) ::SendMessage(m_hWndTooltip, TTM_GETDELAYTIME, TTDT_INITIAL, 0L);
+		return (DWORD) ::SendMessageW(m_hWndTooltip, TTM_GETDELAYTIME, TTDT_INITIAL, 0L);
 	}
 }

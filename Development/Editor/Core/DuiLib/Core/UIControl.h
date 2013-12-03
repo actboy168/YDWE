@@ -80,8 +80,8 @@ public:
     virtual void SetToolTip(const wchar_t* pstrText);
 
     // 快捷键
-    virtual TCHAR GetShortcut() const;
-    virtual void SetShortcut(TCHAR ch);
+    virtual wchar_t GetShortcut() const;
+    virtual void SetShortcut(wchar_t ch);
 
     // 菜单
     virtual bool IsContextMenuUsed() const;
@@ -170,7 +170,7 @@ protected:
     bool m_bFloat;
     bool m_bSetPos; // 防止SetPos循环调用
     TRelativePosUI m_tRelativePos;
-    TCHAR m_chShortcut;
+    wchar_t m_chShortcut;
     DWORD m_dwBackColor;
     DWORD m_dwBackColor2;
     DWORD m_dwBackColor3;

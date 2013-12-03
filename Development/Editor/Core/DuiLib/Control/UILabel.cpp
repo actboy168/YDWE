@@ -111,57 +111,57 @@ namespace DuiLib
 
 	void CLabelUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, L"text") == 0 ) SetText(pstrValue);
-		else if( _tcscmp(pstrName, L"align") == 0 ) {
-			if( _tcsstr(pstrValue, L"left") != NULL ) {
+		if( wcscmp(pstrName, L"text") == 0 ) SetText(pstrValue);
+		else if( wcscmp(pstrName, L"align") == 0 ) {
+			if( wcsstr(pstrValue, L"left") != NULL ) {
 				m_uTextStyle &= ~(DT_CENTER | DT_RIGHT);
 				m_uTextStyle |= DT_LEFT;
 			}
-			if( _tcsstr(pstrValue, L"center") != NULL ) {
+			if( wcsstr(pstrValue, L"center") != NULL ) {
 				m_uTextStyle &= ~(DT_LEFT | DT_RIGHT);
 				m_uTextStyle |= DT_CENTER;
 			}
-			if( _tcsstr(pstrValue, L"right") != NULL ) {
+			if( wcsstr(pstrValue, L"right") != NULL ) {
 				m_uTextStyle &= ~(DT_LEFT | DT_CENTER);
 				m_uTextStyle |= DT_RIGHT;
 			}
-			if( _tcsstr(pstrValue, L"top") != NULL ) {
+			if( wcsstr(pstrValue, L"top") != NULL ) {
 				m_uTextStyle &= ~(DT_BOTTOM | DT_VCENTER);
 				m_uTextStyle |= DT_TOP;
 			}
-			if( _tcsstr(pstrValue, L"vcenter") != NULL ) {
+			if( wcsstr(pstrValue, L"vcenter") != NULL ) {
 				m_uTextStyle &= ~(DT_TOP | DT_BOTTOM);			
 				m_uTextStyle |= DT_VCENTER;
 			}
-			if( _tcsstr(pstrValue, L"bottom") != NULL ) {
+			if( wcsstr(pstrValue, L"bottom") != NULL ) {
 				m_uTextStyle &= ~(DT_TOP | DT_VCENTER);
 				m_uTextStyle |= DT_BOTTOM;
 			}
 		}
-		else if( _tcscmp(pstrName, L"endellipsis") == 0 ) {
-			if( _tcscmp(pstrValue, L"true") == 0 ) m_uTextStyle |= DT_END_ELLIPSIS;
+		else if( wcscmp(pstrName, L"endellipsis") == 0 ) {
+			if( wcscmp(pstrValue, L"true") == 0 ) m_uTextStyle |= DT_END_ELLIPSIS;
 			else m_uTextStyle &= ~DT_END_ELLIPSIS;
 		}    
-		else if( _tcscmp(pstrName, L"font") == 0 ) SetFont(_ttoi(pstrValue));
-		else if( _tcscmp(pstrName, L"textcolor") == 0 ) {
-			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+		else if( wcscmp(pstrName, L"font") == 0 ) SetFont(_wtoi(pstrValue));
+		else if( wcscmp(pstrName, L"textcolor") == 0 ) {
+			if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
 			wchar_t* pstr = NULL;
-			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
 			SetTextColor(clrColor);
 		}
-		else if( _tcscmp(pstrName, L"disabledtextcolor") == 0 ) {
-			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+		else if( wcscmp(pstrName, L"disabledtextcolor") == 0 ) {
+			if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
 			wchar_t* pstr = NULL;
-			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
 			SetDisabledTextColor(clrColor);
 		}
-		else if( _tcscmp(pstrName, L"textpadding") == 0 ) {
+		else if( wcscmp(pstrName, L"textpadding") == 0 ) {
 			RECT rcTextPadding = { 0 };
 			wchar_t* pstr = NULL;
-			rcTextPadding.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-			rcTextPadding.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-			rcTextPadding.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-			rcTextPadding.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
+			rcTextPadding.left = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+			rcTextPadding.top = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
+			rcTextPadding.right = wcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
+			rcTextPadding.bottom = wcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
 			SetTextPadding(rcTextPadding);
 		}
 		else CControlUI::SetAttribute(pstrName, pstrValue);

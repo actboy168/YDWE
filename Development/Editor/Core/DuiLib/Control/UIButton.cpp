@@ -127,39 +127,39 @@ namespace DuiLib
 
 	void CButtonUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, L"normalimage") == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"hotimage") == 0 ) m_sHotImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"pushedimage") == 0 ) m_sPushedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"focusedimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"disabledimage") == 0 ) m_sDisabledImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"foreimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"hotforeimage") == 0 ) m_sHotForeImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"hotbkcolor") == 0 )
+		if( wcscmp(pstrName, L"normalimage") == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"hotimage") == 0 ) m_sHotImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"pushedimage") == 0 ) m_sPushedImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"focusedimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"disabledimage") == 0 ) m_sDisabledImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"foreimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"hotforeimage") == 0 ) m_sHotForeImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"hotbkcolor") == 0 )
 		{
-			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+			if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
 			wchar_t* pstr = NULL;
-			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
 			m_dwHotBkColor = clrColor;
 		}
-		else if( _tcscmp(pstrName, L"hottextcolor") == 0 )
+		else if( wcscmp(pstrName, L"hottextcolor") == 0 )
 		{
-			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+			if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
 			wchar_t* pstr = NULL;
-			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
 			m_dwHotTextColor = clrColor;
 		}
-		else if( _tcscmp(pstrName, L"pushedtextcolor") == 0 )
+		else if( wcscmp(pstrName, L"pushedtextcolor") == 0 )
 		{
-			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+			if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
 			wchar_t* pstr = NULL;
-			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
 			m_dwPushedTextColor = clrColor;
 		}
-		else if( _tcscmp(pstrName, L"focusedtextcolor") == 0 )
+		else if( wcscmp(pstrName, L"focusedtextcolor") == 0 )
 		{
-			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+			if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
 			wchar_t* pstr = NULL;
-			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
 			m_dwFocusedTextColor = clrColor;
 		}
 		else CLabelUI::SetAttribute(pstrName, pstrValue);

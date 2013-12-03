@@ -160,18 +160,18 @@ namespace DuiLib
 
 	void CSliderUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, L"thumbimage") == 0 ) m_sThumbImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"thumbhotimage") == 0 ) m_sThumbHotImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"thumbpushedimage") == 0 ) m_sThumbPushedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"thumbsize") == 0 ) {
+		if( wcscmp(pstrName, L"thumbimage") == 0 ) m_sThumbImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"thumbhotimage") == 0 ) m_sThumbHotImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"thumbpushedimage") == 0 ) m_sThumbPushedImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"thumbsize") == 0 ) {
 			SIZE szXY = {0};
 			const wchar_t* pstr = NULL;
-			szXY.cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
-			szXY.cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
+			szXY.cx = wcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
+			szXY.cy = wcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
 			SetThumbSize(szXY);
 		}
-		else if( _tcscmp(pstrName, L"step") == 0 ) {
-			SetChangeStep(_ttoi(pstrValue));
+		else if( wcscmp(pstrName, L"step") == 0 ) {
+			SetChangeStep(_wtoi(pstrValue));
 		}
 		else CProgressUI::SetAttribute(pstrName, pstrValue);
 	}

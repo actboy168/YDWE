@@ -104,7 +104,7 @@ namespace DuiLib
 				::InvalidateRect(m_hWnd, &rcClient, FALSE);
 			}
 		}
-		else if( uMsg == WM_KEYDOWN && TCHAR(wParam) == VK_RETURN ) {
+		else if( uMsg == WM_KEYDOWN && wchar_t(wParam) == VK_RETURN ) {
 			m_pOwner->GetManager()->SendNotify(m_pOwner, DUI_MSGTYPE_RETURN);
 		}
 		else if( uMsg == OCM__BASE + WM_CTLCOLOREDIT  || uMsg == OCM__BASE + WM_CTLCOLORSTATIC ) {
@@ -136,10 +136,10 @@ namespace DuiLib
 		if( m_pOwner == NULL ) return 0;
 		// Copy text back
 		int cchLen = ::GetWindowTextLength(m_hWnd) + 1;
-		const wchar_t* pstr = static_cast<const wchar_t*>(_alloca(cchLen * sizeof(TCHAR)));
+		const wchar_t* pstr = static_cast<const wchar_t*>(_alloca(cchLen * sizeof(wchar_t)));
 		ASSERT(pstr);
 		if( pstr == NULL ) return 0;
-		::GetWindowText(m_hWnd, pstr, cchLen);
+		::GetWindowTextW(m_hWnd, pstr, cchLen);
 		m_pOwner->SetText(pstr);
 		m_pOwner->GetManager()->SendNotify(m_pOwner, DUI_MSGTYPE_TEXTCHANGED);
 		return 0;
@@ -234,7 +234,7 @@ namespace DuiLib
 					POINT pt = event.ptMouse;
 					pt.x -= m_rcItem.left + m_rcTextPadding.left;
 					pt.y -= m_rcItem.top + m_rcTextPadding.top;
-					::SendMessage(*m_pWindow, WM_LBUTTONDOWN, event.wParam, MAKELPARAM(pt.x, pt.y));
+					::SendMessageW(*m_pWindow, WM_LBUTTONDOWN, event.wParam, MAKELPARAM(pt.x, pt.y));
 #endif
 				}
 			}
@@ -345,7 +345,7 @@ namespace DuiLib
 		return m_bPasswordMode;
 	}
 
-	void CEditUI::SetPasswordChar(TCHAR cPasswordChar)
+	void CEditUI::SetPasswordChar(wchar_t cPasswordChar)
 	{
 		if( m_cPasswordChar == cPasswordChar ) return;
 		m_cPasswordChar = cPasswordChar;
@@ -353,7 +353,7 @@ namespace DuiLib
 		Invalidate();
 	}
 
-	TCHAR CEditUI::GetPasswordChar() const
+	wchar_t CEditUI::GetPasswordChar() const
 	{
 		return m_cPasswordChar;
 	}
@@ -412,18 +412,18 @@ namespace DuiLib
 
 	void CEditUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, L"readonly") == 0 ) SetReadOnly(_tcscmp(pstrValue, L"true") == 0);
-		else if( _tcscmp(pstrName, L"numberonly") == 0 ) SetNumberOnly(_tcscmp(pstrValue, L"true") == 0);
-		else if( _tcscmp(pstrName, L"password") == 0 ) SetPasswordMode(_tcscmp(pstrValue, L"true") == 0);
-		else if( _tcscmp(pstrName, L"maxchar") == 0 ) SetMaxChar(_ttoi(pstrValue));
-		else if( _tcscmp(pstrName, L"normalimage") == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"hotimage") == 0 ) m_sHotImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"focusedimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"disabledimage") == 0 ) m_sDisabledImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, L"nativebkcolor") == 0 ) {
-			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+		if( wcscmp(pstrName, L"readonly") == 0 ) SetReadOnly(wcscmp(pstrValue, L"true") == 0);
+		else if( wcscmp(pstrName, L"numberonly") == 0 ) SetNumberOnly(wcscmp(pstrValue, L"true") == 0);
+		else if( wcscmp(pstrName, L"password") == 0 ) SetPasswordMode(wcscmp(pstrValue, L"true") == 0);
+		else if( wcscmp(pstrName, L"maxchar") == 0 ) SetMaxChar(_wtoi(pstrValue));
+		else if( wcscmp(pstrName, L"normalimage") == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"hotimage") == 0 ) m_sHotImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"focusedimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"disabledimage") == 0 ) m_sDisabledImage.reset(new CImage(pstrValue));
+		else if( wcscmp(pstrName, L"nativebkcolor") == 0 ) {
+			if( *pstrValue == _T('#')) pstrValue = ::CharNextW(pstrValue);
 			const wchar_t* pstr = NULL;
-			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			DWORD clrColor = wcstoul(pstrValue, &pstr, 16);
 			SetNativeEditBkColor(clrColor);
 		}
 		else CLabelUI::SetAttribute(pstrName, pstrValue);
@@ -480,7 +480,7 @@ namespace DuiLib
 			while (*p != _T('\0')) 
 			{
 				sText += m_cPasswordChar;
-				p = ::CharNext(p);
+				p = ::CharNextW(p);
 			}
 		}
 		

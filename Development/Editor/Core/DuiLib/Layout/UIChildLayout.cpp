@@ -27,7 +27,7 @@ namespace DuiLib
 
 	void CChildLayoutUI::SetAttribute( const wchar_t* pstrName, const wchar_t* pstrValue )
 	{
-		if( _tcscmp(pstrName, L"xmlfile") == 0 )
+		if( wcscmp(pstrName, L"xmlfile") == 0 )
 			SetChildLayoutXML(pstrValue);
 		else
 			CContainerUI::SetAttribute(pstrName,pstrValue);

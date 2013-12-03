@@ -28,7 +28,7 @@ typedef struct tagFINDTABINFO
 
 typedef struct tagFINDSHORTCUT
 {
-    TCHAR ch;
+    wchar_t ch;
     bool bPickNext;
 } FINDSHORTCUT;
 
@@ -80,14 +80,14 @@ m_pParentResourcePM(NULL)
     m_dwDefaultLinkFontColor = 0xFF0000FF;
     m_dwDefaultLinkHoverFontColor = 0xFFD3215F;
     m_dwDefaultSelectedBkColor = 0xFFBAE4FF;
-    LOGFONT lf = { 0 };
+    LOGFONTW lf = { 0 };
     ::GetObject(::GetStockObject(DEFAULT_GUI_FONT), sizeof(LOGFONT), &lf);
     lf.lfCharSet = DEFAULT_CHARSET;
 	if (CPaintManagerUI::m_pStrDefaultFontName.size()>0)
 	{
-		_tcscpy_s(lf.lfFaceName, LF_FACESIZE, CPaintManagerUI::m_pStrDefaultFontName.c_str());
+		wcscpy_s(lf.lfFaceName, LF_FACESIZE, CPaintManagerUI::m_pStrDefaultFontName.c_str());
 	}
-    HFONT hDefaultFont = ::CreateFontIndirect(&lf);
+    HFONT hDefaultFont = ::CreateFontIndirectW(&lf);
     m_DefaultFontInfo.hFont = hDefaultFont;
     m_DefaultFontInfo.sFontName = lf.lfFaceName;
     m_DefaultFontInfo.iSize = -lf.lfHeight;
@@ -100,7 +100,7 @@ m_pParentResourcePM(NULL)
         m_hUpdateRectPen = ::CreatePen(PS_SOLID, 1, RGB(220, 0, 0));
         // Boot Windows Common Controls (for the ToolTip control)
         ::InitCommonControls();
-        ::LoadLibrary(L"msimg32.dll");
+        ::LoadLibraryW(L"msimg32.dll");
     }
 
     m_szMinWindow.cx = 0;
@@ -286,7 +286,7 @@ void CPaintManagerUI::SetTransparent(int nOpacity)
         typedef BOOL (__stdcall *PFUNCSETLAYEREDWINDOWATTR)(HWND, COLORREF, BYTE, DWORD);
         PFUNCSETLAYEREDWINDOWATTR fSetLayeredWindowAttributes;
 
-        HMODULE hUser32 = ::GetModuleHandle(L"User32.dll");
+        HMODULE hUser32 = ::GetModuleHandleW(L"User32.dll");
         if (hUser32)
         {
             fSetLayeredWindowAttributes = 
@@ -335,7 +335,7 @@ bool CPaintManagerUI::PreMessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam,
            // Tabbing between controls
 			if( wParam == VK_TAB ) {
 #ifdef DUI_USE_RICHEDIT
-               if( m_pFocus && m_pFocus->IsVisible() && m_pFocus->IsEnabled() && _tcsstr(m_pFocus->GetClass(), DUI_CTR_RICHEDIT) != NULL ) {
+               if( m_pFocus && m_pFocus->IsVisible() && m_pFocus->IsEnabled() && wcsstr(m_pFocus->GetClass(), DUI_CTR_RICHEDIT) != NULL ) {
                    if( static_cast<CRichEditUI*>(m_pFocus)->IsWantTab() ) return false;
                }
 #endif
@@ -362,7 +362,7 @@ bool CPaintManagerUI::PreMessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam,
            if( m_pFocus != NULL ) {
                TEventUI event = { 0 };
                event.Type = UIEVENT_SYSKEY;
-               event.chKey = (TCHAR)wParam;
+               event.chKey = (wchar_t)wParam;
                event.ptMouse = m_ptLastMousePos;
                event.wKeyState = MapKeyState();
                event.dwTimestamp = ::GetTickCount();
@@ -591,7 +591,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
                     // NOTE: We use WM_PRINT here rather than the expected WM_PRINTCLIENT
                     //       since the latter will not print the nonclient correctly for
                     //       EDIT controls.
-                    ::SendMessage(hWndChild, WM_PRINT, wParam, lParam | PRF_NONCLIENT);
+                    ::SendMessageW(hWndChild, WM_PRINT, wParam, lParam | PRF_NONCLIENT);
                     hWndChild = ::GetWindow(hWndChild, GW_HWNDNEXT);
                 }
             }
@@ -659,7 +659,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
     case WM_MOUSELEAVE:
         {
             m_Tooltip.Close();
-            if( m_bMouseTracking ) ::SendMessage(m_hWndPaint, WM_MOUSEMOVE, 0, (LPARAM) -1);
+            if( m_bMouseTracking ) ::SendMessageW(m_hWndPaint, WM_MOUSEMOVE, 0, (LPARAM) -1);
             m_bMouseTracking = false;
         }
         break;
@@ -829,7 +829,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
             pControl->Event(event);
 
             // Let's make sure that the scroll item below the cursor is the same as before...
-            ::SendMessage(m_hWndPaint, WM_MOUSEMOVE, 0, (LPARAM) MAKELPARAM(m_ptLastMousePos.x, m_ptLastMousePos.y));
+            ::SendMessageW(m_hWndPaint, WM_MOUSEMOVE, 0, (LPARAM) MAKELPARAM(m_ptLastMousePos.x, m_ptLastMousePos.y));
         }
         break;
     case WM_CHAR:
@@ -837,7 +837,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
             if( m_pFocus == NULL ) break;
             TEventUI event = { 0 };
             event.Type = UIEVENT_CHAR;
-            event.chKey = (TCHAR)wParam;
+            event.chKey = (wchar_t)wParam;
             event.ptMouse = m_ptLastMousePos;
             event.wKeyState = MapKeyState();
             event.dwTimestamp = ::GetTickCount();
@@ -849,7 +849,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
             if( m_pFocus == NULL ) break;
             TEventUI event = { 0 };
             event.Type = UIEVENT_KEYDOWN;
-            event.chKey = (TCHAR)wParam;
+            event.chKey = (wchar_t)wParam;
             event.ptMouse = m_ptLastMousePos;
             event.wKeyState = MapKeyState();
             event.dwTimestamp = ::GetTickCount();
@@ -862,7 +862,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
             if( m_pEventKey == NULL ) break;
             TEventUI event = { 0 };
             event.Type = UIEVENT_KEYUP;
-            event.chKey = (TCHAR)wParam;
+            event.chKey = (wchar_t)wParam;
             event.ptMouse = m_ptLastMousePos;
             event.wKeyState = MapKeyState();
             event.dwTimestamp = ::GetTickCount();
@@ -894,7 +894,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
     case WM_NOTIFY:
         {
             LPNMHDR lpNMHDR = (LPNMHDR) lParam;
-            if( lpNMHDR != NULL ) lRes = ::SendMessage(lpNMHDR->hwndFrom, OCM__BASE + uMsg, wParam, lParam);
+            if( lpNMHDR != NULL ) lRes = ::SendMessageW(lpNMHDR->hwndFrom, OCM__BASE + uMsg, wParam, lParam);
             return true;
         }
         break;
@@ -902,7 +902,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
         {
             if( lParam == 0 ) break;
             HWND hWndChild = (HWND) lParam;
-            lRes = ::SendMessage(hWndChild, OCM__BASE + uMsg, wParam, lParam);
+            lRes = ::SendMessageW(hWndChild, OCM__BASE + uMsg, wParam, lParam);
             return true;
         }
         break;
@@ -913,7 +913,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
 			// Read-only or disabled edit controls do not send the WM_CTLCOLOREDIT message; instead, they send the WM_CTLCOLORSTATIC message.
             if( lParam == 0 ) break;
             HWND hWndChild = (HWND) lParam;
-            lRes = ::SendMessage(hWndChild, OCM__BASE + uMsg, wParam, lParam);
+            lRes = ::SendMessageW(hWndChild, OCM__BASE + uMsg, wParam, lParam);
             return true;
         }
         break;
@@ -1054,11 +1054,11 @@ void CPaintManagerUI::RemoveAllOptionGroups()
 void CPaintManagerUI::MessageLoop()
 {
     MSG msg = { 0 };
-    while( ::GetMessage(&msg, NULL, 0, 0) ) {
+    while( ::GetMessageW(&msg, NULL, 0, 0) ) {
         if( !CPaintManagerUI::TranslateMessage(&msg) ) {
             ::TranslateMessage(&msg);
 			try{
-            ::DispatchMessage(&msg);
+            ::DispatchMessageW(&msg);
 			} catch(...) {
 				DUITRACE(L"EXCEPTION: %s(%d)\n", __FILET__, __LINE__);
 				#ifdef _DEBUG
@@ -1338,7 +1338,7 @@ void CPaintManagerUI::AddDelayedCleanup(CControlUI* pControl)
 {
     pControl->SetManager(this, NULL, false);
     m_aDelayedCleanup.Add(pControl);
-    ::PostMessage(m_hWndPaint, WM_APP + 1, 0, 0L);
+    ::PostMessageW(m_hWndPaint, WM_APP + 1, 0, 0L);
 }
 
 void CPaintManagerUI::SendNotify(CControlUI* pControl, const wchar_t* pstrMessage, WPARAM wParam /*= 0*/, LPARAM lParam /*= 0*/, bool bAsync /*= false*/)
@@ -1472,15 +1472,15 @@ TFontInfo* CPaintManagerUI::GetDefaultFontInfo()
 
 void CPaintManagerUI::SetDefaultFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
-    LOGFONT lf = { 0 };
+    LOGFONTW lf = { 0 };
     ::GetObject(::GetStockObject(DEFAULT_GUI_FONT), sizeof(LOGFONT), &lf);
-    _tcscpy(lf.lfFaceName, pStrFontName);
+    wcscpy(lf.lfFaceName, pStrFontName);
     lf.lfCharSet = DEFAULT_CHARSET;
     lf.lfHeight = -nSize;
     if( bBold ) lf.lfWeight += FW_BOLD;
     if( bUnderline ) lf.lfUnderline = TRUE;
     if( bItalic ) lf.lfItalic = TRUE;
-    HFONT hFont = ::CreateFontIndirect(&lf);
+    HFONT hFont = ::CreateFontIndirectW(&lf);
     if( hFont == NULL ) return;
 
     ::DeleteObject(m_DefaultFontInfo.hFont);
@@ -1505,15 +1505,15 @@ DWORD CPaintManagerUI::GetCustomFontCount() const
 
 HFONT CPaintManagerUI::AddFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
-    LOGFONT lf = { 0 };
+    LOGFONTW lf = { 0 };
     ::GetObject(::GetStockObject(DEFAULT_GUI_FONT), sizeof(LOGFONT), &lf);
-    _tcscpy(lf.lfFaceName, pStrFontName);
+    wcscpy(lf.lfFaceName, pStrFontName);
     lf.lfCharSet = DEFAULT_CHARSET;
     lf.lfHeight = -nSize;
     if( bBold ) lf.lfWeight += FW_BOLD;
     if( bUnderline ) lf.lfUnderline = TRUE;
     if( bItalic ) lf.lfItalic = TRUE;
-    HFONT hFont = ::CreateFontIndirect(&lf);
+    HFONT hFont = ::CreateFontIndirectW(&lf);
     if( hFont == NULL ) return NULL;
 
     TFontInfo* pFontInfo = new TFontInfo;
@@ -1541,15 +1541,15 @@ HFONT CPaintManagerUI::AddFont(const wchar_t* pStrFontName, int nSize, bool bBol
 
 HFONT CPaintManagerUI::AddFontAt(int index, const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
-    LOGFONT lf = { 0 };
+    LOGFONTW lf = { 0 };
     ::GetObject(::GetStockObject(DEFAULT_GUI_FONT), sizeof(LOGFONT), &lf);
-    _tcscpy(lf.lfFaceName, pStrFontName);
+    wcscpy(lf.lfFaceName, pStrFontName);
     lf.lfCharSet = DEFAULT_CHARSET;
     lf.lfHeight = -nSize;
     if( bBold ) lf.lfWeight += FW_BOLD;
     if( bUnderline ) lf.lfUnderline = TRUE;
     if( bItalic ) lf.lfItalic = TRUE;
-    HFONT hFont = ::CreateFontIndirect(&lf);
+    HFONT hFont = ::CreateFontIndirectW(&lf);
     if( hFont == NULL ) return NULL;
 
     TFontInfo* pFontInfo = new TFontInfo;
@@ -1936,7 +1936,7 @@ CControlUI* CALLBACK CPaintManagerUI::__FindControlFromShortcut(CControlUI* pThi
     if( !pThis->IsVisible() ) return NULL; 
     FINDSHORTCUT* pFS = static_cast<FINDSHORTCUT*>(pData);
     if( pFS->ch == toupper(pThis->GetShortcut()) ) pFS->bPickNext = true;
-    if( _tcsstr(pThis->GetClass(), DUI_CTR_LABEL) != NULL ) return NULL;   // Labels never get focus!
+    if( wcsstr(pThis->GetClass(), DUI_CTR_LABEL) != NULL ) return NULL;   // Labels never get focus!
     return pFS->bPickNext ? pThis : NULL;
 }
 
@@ -1950,7 +1950,7 @@ CControlUI* CALLBACK CPaintManagerUI::__FindControlFromName(CControlUI* pThis, L
     const wchar_t* pstrName = static_cast<const wchar_t*>(pData);
     const std::wstring& sName = pThis->GetName();
     if( sName.empty() ) return NULL;
-    return (_tcsicmp(sName.c_str(), pstrName) == 0) ? pThis : NULL;
+    return (_wcsicmp(sName.c_str(), pstrName) == 0) ? pThis : NULL;
 }
 
 CControlUI* CALLBACK CPaintManagerUI::__FindControlFromClass(CControlUI* pThis, LPVOID pData)
@@ -1958,7 +1958,7 @@ CControlUI* CALLBACK CPaintManagerUI::__FindControlFromClass(CControlUI* pThis, 
     const wchar_t* pstrType = static_cast<const wchar_t*>(pData);
     const wchar_t* pType = pThis->GetClass();
     CStdPtrArray* pFoundControls = pThis->GetManager()->GetSubControlsByClass();
-    if( _tcscmp(pstrType, L"*") == 0 || _tcscmp(pstrType, pType) == 0 ) {
+    if( wcscmp(pstrType, L"*") == 0 || wcscmp(pstrType, pType) == 0 ) {
         int iIndex = -1;
         while( pFoundControls->GetAt(++iIndex) != NULL ) ;
         if( iIndex < pFoundControls->GetSize() ) pFoundControls->SetAt(iIndex, pThis);
@@ -1971,7 +1971,7 @@ CControlUI* CALLBACK CPaintManagerUI::__FindControlsFromClass(CControlUI* pThis,
 {
     const wchar_t* pstrType = static_cast<const wchar_t*>(pData);
     const wchar_t* pType = pThis->GetClass();
-    if( _tcscmp(pstrType, L"*") == 0 || _tcscmp(pstrType, pType) == 0 ) 
+    if( wcscmp(pstrType, L"*") == 0 || wcscmp(pstrType, pType) == 0 ) 
         pThis->GetManager()->GetSubControlsByClass()->Add((LPVOID)pThis);
     return NULL;
 }

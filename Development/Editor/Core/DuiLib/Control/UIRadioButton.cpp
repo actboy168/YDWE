@@ -86,7 +86,7 @@ namespace DuiLib
 
 	void CRadioButtonUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, L"group") == 0 ) SetGroup(pstrValue);
+		if( wcscmp(pstrName, L"group") == 0 ) SetGroup(pstrValue);
 		else CCheckBoxUI::SetAttribute(pstrName, pstrValue);
 	}
 }

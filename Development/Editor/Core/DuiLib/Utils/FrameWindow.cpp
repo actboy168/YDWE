@@ -23,7 +23,7 @@ namespace DuiLib
 		CControlUI* pRoot = builder.Create(GetSkinXml(), NULL, &m_pm);
 		if (!pRoot) 
 		{
-			::MessageBox(NULL,L"读取皮肤文件失败", L"YDWEConfig", MB_OK|MB_ICONERROR);
+			::MessageBoxW(NULL,L"读取皮肤文件失败", L"YDWEConfig", MB_OK|MB_ICONERROR);
 			::PostQuitMessage(0L);
 			return 0;
 		}
@@ -51,10 +51,10 @@ namespace DuiLib
 			&& pt.y < rcCaption.bottom) 
 		{
 			CControlUI* pControl = m_pm.FindControl(pt);
-			if (pControl && _tcsicmp(pControl->GetClass(), DUI_CTR_BUTTON) != 0 && 
-				_tcsicmp(pControl->GetClass(), DUI_CTR_CHECKBOX) != 0 &&
-				_tcsicmp(pControl->GetClass(), DUI_CTR_RADIOBUTTON) != 0 &&
-				_tcsicmp(pControl->GetClass(), DUI_CTR_TEXT) != 0)
+			if (pControl && _wcsicmp(pControl->GetClass(), DUI_CTR_BUTTON) != 0 && 
+				_wcsicmp(pControl->GetClass(), DUI_CTR_CHECKBOX) != 0 &&
+				_wcsicmp(pControl->GetClass(), DUI_CTR_RADIOBUTTON) != 0 &&
+				_wcsicmp(pControl->GetClass(), DUI_CTR_TEXT) != 0)
 			{
 				return HTCAPTION;
 			}
