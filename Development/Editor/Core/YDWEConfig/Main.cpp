@@ -21,7 +21,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR l
 		DuiLib::CPaintManagerUI::SetInstance(hInstance);
 
 		CMainWindow* pFrame = new CMainWindow();
-		pFrame->Create(NULL, _T("YDWEÅäÖÃ³ÌÐò"), UI_WNDSTYLE_DIALOG, 0);
+		pFrame->Create(NULL, L"YDWEÅäÖÃ³ÌÐò", UI_WNDSTYLE_DIALOG, 0);
 		pFrame->CenterWindow();
 		pFrame->ShowWindow(true);
 		DuiLib::CPaintManagerUI::MessageLoop();

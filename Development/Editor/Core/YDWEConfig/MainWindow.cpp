@@ -74,7 +74,7 @@ CMainWindow::CMainWindow()
 
 LPCTSTR CMainWindow::GetWindowClassName() const 
 { 
-	return _T("YDWEConfig"); 
+	return L"YDWEConfig"; 
 }
 
 void CMainWindow::OnFinalMessage(HWND /*hWnd*/) 
@@ -123,14 +123,14 @@ void CMainWindow::InitWindow()
 	m_pEnableCJass      = m_controls["EnableCJass"];
 	m_pLaunchWindowed   = m_controls["LaunchWindowed"];
 
-	m_pFileAssociation_w3x = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(_T("FileAssociation_w3x")));
-	m_pFileAssociation_w3m = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(_T("FileAssociation_w3m")));
-	m_pShortcuts_desktop   = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(_T("Shortcuts_desktop")));
-	m_pShortcuts_taskbar   = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(_T("Shortcuts_taskbar")));	
-	m_pAllowLocalFiles     = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(_T("AllowLocalFiles")));
-	m_pWar3PatchList       = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(_T("War3PatchList")));
-	m_pWar3PluginList      = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(_T("War3PluginList")));
-	m_pWarcraft3Directory  = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(_T("Warcraft3Directory")));	
+	m_pFileAssociation_w3x = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"FileAssociation_w3x"));
+	m_pFileAssociation_w3m = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"FileAssociation_w3m"));
+	m_pShortcuts_desktop   = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"Shortcuts_desktop"));
+	m_pShortcuts_taskbar   = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"Shortcuts_taskbar"));	
+	m_pAllowLocalFiles     = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"AllowLocalFiles"));
+	m_pWar3PatchList       = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(L"War3PatchList"));
+	m_pWar3PluginList      = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(L"War3PluginList"));
+	m_pWarcraft3Directory  = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(L"Warcraft3Directory"));	
 
 	m_pm.AddNotifier(this);
 }
@@ -577,7 +577,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 		else if (msg.sType == DUI_MSGTYPE_CLICK) 
 		{
 			std::wstring const& name = msg.pSender->GetName();
-			if (name == _T("ok")) 
+			if (name == L"ok") 
 			{
 				slk::IniTable table;
 				UIToConfig(table);
@@ -589,17 +589,17 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 
 				::PostQuitMessage(0L);
 			}
-			else if (name == _T("cancel"))
+			else if (name == L"cancel")
 			{
 				::PostQuitMessage(0L);
 			}
-			else if (name == _T("reset"))
+			else if (name == L"reset")
 			{
 				slk::IniTable table;
 				ResetConfig(table);
 				ConfigToUI(table);
 			}
-			else if (name == _T("choose_war3_dir"))
+			else if (name == L"choose_war3_dir")
 			{
 				if (base::warcraft3::directory::choose(nullptr))
 				{
@@ -607,7 +607,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 				}
 
 			}
-			else if (name.size() == 11 && name.substr(0, 10) == _T("War3Patch_"))
+			else if (name.size() == 11 && name.substr(0, 10) == L"War3Patch_")
 			{
 				if (m_pWar3PatchList)
 				{
@@ -615,9 +615,9 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 					m_pWar3PatchList->SetEnabled(n == 2);
 				}
 			}
-			else if (name.size() == 5 && name.substr(0, 4) == _T("tab_"))
+			else if (name.size() == 5 && name.substr(0, 4) == L"tab_")
 			{
-				DuiLib::CTabLayoutUI* tabs = dynamic_cast<DuiLib::CTabLayoutUI*>(m_pm.FindControl(_T("tabs")));
+				DuiLib::CTabLayoutUI* tabs = dynamic_cast<DuiLib::CTabLayoutUI*>(m_pm.FindControl(L"tabs"));
 				if (tabs)
 				{
 					tabs->SelectItem(std::stol(name.substr(4)));
