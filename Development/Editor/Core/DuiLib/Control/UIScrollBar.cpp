@@ -523,28 +523,28 @@ namespace DuiLib
 
 	void CScrollBarUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, _T("button1normalimage")) == 0 )        m_sButton1NormalImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("button1hotimage")) == 0 )      m_sButton1HotImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("button1pushedimage")) == 0 )   m_sButton1PushedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("button1disabledimage")) == 0 ) m_sButton1DisabledImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("button2normalimage")) == 0 )   m_sButton2NormalImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("button2hotimage")) == 0 )      m_sButton2HotImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("button2pushedimage")) == 0 )   m_sButton2PushedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("button2disabledimage")) == 0 ) m_sButton2DisabledImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("thumbhotimage")) == 0 )        m_sThumbHotImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("thumbpushedimage")) == 0 )     m_sThumbPushedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("thumbnormalimage")) == 0 )     m_sThumbNormalImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("thumbdisabledimage")) == 0 )   m_sThumbDisabledImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("bknormalimage")) == 0 )        m_sBkNormalImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("bkhotimage")) == 0 )           m_sBkHotImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("bkpushedimage")) == 0 )        m_sBkPushedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("bkdisabledimage")) == 0 )      m_sBkDisabledImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("hor")) == 0 ) SetHorizontal(_tcscmp(pstrValue, _T("true")) == 0);
-		else if( _tcscmp(pstrName, _T("linesize")) == 0 ) SetLineSize(_ttoi(pstrValue));
-		else if( _tcscmp(pstrName, _T("range")) == 0 ) SetScrollRange(_ttoi(pstrValue));
-		else if( _tcscmp(pstrName, _T("value")) == 0 ) SetScrollPos(_ttoi(pstrValue));
-		else if( _tcscmp(pstrName, _T("showbutton1")) == 0 ) SetShowButton1(_tcscmp(pstrValue, _T("true")) == 0);
-		else if( _tcscmp(pstrName, _T("showbutton2")) == 0 ) SetShowButton2(_tcscmp(pstrValue, _T("true")) == 0);
+		if( _tcscmp(pstrName, L"button1normalimage") == 0 )        m_sButton1NormalImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"button1hotimage") == 0 )      m_sButton1HotImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"button1pushedimage") == 0 )   m_sButton1PushedImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"button1disabledimage") == 0 ) m_sButton1DisabledImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"button2normalimage") == 0 )   m_sButton2NormalImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"button2hotimage") == 0 )      m_sButton2HotImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"button2pushedimage") == 0 )   m_sButton2PushedImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"button2disabledimage") == 0 ) m_sButton2DisabledImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"thumbhotimage") == 0 )        m_sThumbHotImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"thumbpushedimage") == 0 )     m_sThumbPushedImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"thumbnormalimage") == 0 )     m_sThumbNormalImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"thumbdisabledimage") == 0 )   m_sThumbDisabledImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"bknormalimage") == 0 )        m_sBkNormalImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"bkhotimage") == 0 )           m_sBkHotImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"bkpushedimage") == 0 )        m_sBkPushedImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"bkdisabledimage") == 0 )      m_sBkDisabledImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"hor") == 0 ) SetHorizontal(_tcscmp(pstrValue, L"true") == 0);
+		else if( _tcscmp(pstrName, L"linesize") == 0 ) SetLineSize(_ttoi(pstrValue));
+		else if( _tcscmp(pstrName, L"range") == 0 ) SetScrollRange(_ttoi(pstrValue));
+		else if( _tcscmp(pstrName, L"value") == 0 ) SetScrollPos(_ttoi(pstrValue));
+		else if( _tcscmp(pstrName, L"showbutton1") == 0 ) SetShowButton1(_tcscmp(pstrValue, L"true") == 0);
+		else if( _tcscmp(pstrName, L"showbutton2") == 0 ) SetShowButton2(_tcscmp(pstrValue, L"true") == 0);
 		else CControlUI::SetAttribute(pstrName, pstrValue);
 	}
 

@@ -228,7 +228,7 @@ void CRenderEngine::DrawImage(HDC hDC, HBITMAP hBitmap, const RECT& rc, const RE
     ASSERT(::GetObjectType(hDC)==OBJ_DC || ::GetObjectType(hDC)==OBJ_MEMDC);
 
     typedef BOOL (WINAPI *LPALPHABLEND)(HDC, int, int, int, int,HDC, int, int, int, int, BLENDFUNCTION);
-    static LPALPHABLEND lpAlphaBlend = (LPALPHABLEND) ::GetProcAddress(::GetModuleHandle(_T("msimg32.dll")), "AlphaBlend");
+    static LPALPHABLEND lpAlphaBlend = (LPALPHABLEND) ::GetProcAddress(::GetModuleHandle(L"msimg32.dll"), "AlphaBlend");
 
     if( lpAlphaBlend == NULL ) lpAlphaBlend = AlphaBitBlt;
     if( hBitmap == NULL ) return;
@@ -750,16 +750,16 @@ bool CRenderEngine::DrawImageString(HDC hDC, CPaintManagerUI* pManager, const RE
             }
             if( *pStrImage++ != _T('\'') ) break;
             if( !sValue.empty() ) {
-                if( sItem == _T("file") || sItem == _T("res") ) {
+                if( sItem == L"file" || sItem == L"res" ) {
 					if( image_count > 0 )
 						CRenderEngine::DrawImage(hDC, pManager, rc, rcPaint, sImageName,
 							rcItem, rcBmpPart, rcCorner, dwMask, bFade, bHole, bTiledX, bTiledY);
 
                     sImageName = sValue;
-					if( sItem == _T("file") )
+					if( sItem == L"file" )
 						++image_count;
                 }
-                else if( sItem == _T("dest") ) {
+                else if( sItem == L"dest" ) {
                     rcItem.left = rc.left + _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
                     rcItem.top = rc.top + _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
                     rcItem.right = rc.left + _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
@@ -767,33 +767,33 @@ bool CRenderEngine::DrawImageString(HDC hDC, CPaintManagerUI* pManager, const RE
                     rcItem.bottom = rc.top + _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
 					if (rcItem.bottom > rc.bottom) rcItem.bottom = rc.bottom;
                 }
-                else if( sItem == _T("source") ) {
+                else if( sItem == L"source" ) {
                     rcBmpPart.left = _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
                     rcBmpPart.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
                     rcBmpPart.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
                     rcBmpPart.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);  
                 }
-                else if( sItem == _T("corner") ) {
+                else if( sItem == L"corner" ) {
                     rcCorner.left = _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
                     rcCorner.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
                     rcCorner.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
                     rcCorner.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
                 }
-                else if( sItem == _T("mask") ) {
+                else if( sItem == L"mask" ) {
                     if( sValue[0] == _T('#')) dwMask = _tcstoul(sValue.c_str() + 1, &pstr, 16);
                     else dwMask = _tcstoul(sValue.c_str(), &pstr, 16);
                 }
-                else if( sItem == _T("fade") ) {
+                else if( sItem == L"fade" ) {
                     bFade = (BYTE)_tcstoul(sValue.c_str(), &pstr, 10);
                 }
-                else if( sItem == _T("hole") ) {
-                    bHole = (_tcscmp(sValue.c_str(), _T("true")) == 0);
+                else if( sItem == L"hole" ) {
+                    bHole = (_tcscmp(sValue.c_str(), L"true") == 0);
                 }
-                else if( sItem == _T("xtiled") ) {
-                    bTiledX = (_tcscmp(sValue.c_str(), _T("true")) == 0);
+                else if( sItem == L"xtiled" ) {
+                    bTiledX = (_tcscmp(sValue.c_str(), L"true") == 0);
                 }
-                else if( sItem == _T("ytiled") ) {
-                    bTiledY = (_tcscmp(sValue.c_str(), _T("true")) == 0);
+                else if( sItem == L"ytiled" ) {
+                    bTiledY = (_tcscmp(sValue.c_str(), L"true") == 0);
                 }
             }
             if( *pStrImage++ != _T(' ') ) break;
@@ -841,10 +841,10 @@ void CRenderEngine::DrawColor(HDC hDC, const RECT& rc, DWORD color)
 void CRenderEngine::DrawGradient(HDC hDC, const RECT& rc, DWORD dwFirst, DWORD dwSecond, bool bVertical, int nSteps)
 {
     typedef BOOL (WINAPI *LPALPHABLEND)(HDC, int, int, int, int,HDC, int, int, int, int, BLENDFUNCTION);
-    static LPALPHABLEND lpAlphaBlend = (LPALPHABLEND) ::GetProcAddress(::GetModuleHandle(_T("msimg32.dll")), "AlphaBlend");
+    static LPALPHABLEND lpAlphaBlend = (LPALPHABLEND) ::GetProcAddress(::GetModuleHandle(L"msimg32.dll"), "AlphaBlend");
     if( lpAlphaBlend == NULL ) lpAlphaBlend = AlphaBitBlt;
     typedef BOOL (WINAPI *PGradientFill)(HDC, PTRIVERTEX, ULONG, PVOID, ULONG, ULONG);
-    static PGradientFill lpGradientFill = (PGradientFill) ::GetProcAddress(::GetModuleHandle(_T("msimg32.dll")), "GradientFill");
+    static PGradientFill lpGradientFill = (PGradientFill) ::GetProcAddress(::GetModuleHandle(L"msimg32.dll"), "GradientFill");
 
     BYTE bAlpha = (BYTE)(((dwFirst >> 24) + (dwSecond >> 24)) >> 1);
     if( bAlpha == 0 ) return;

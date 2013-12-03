@@ -17,7 +17,7 @@ namespace DuiLib
 
 		if (!buf)
 		{
-			//::MessageBox(0, _T("读取图片数据失败！"), _T("抓BUG"), MB_OK);
+			//::MessageBox(0, L"读取图片数据失败！", L"抓BUG", MB_OK);
 			return NULL;
 		}
 

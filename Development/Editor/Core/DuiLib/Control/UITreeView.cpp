@@ -33,7 +33,7 @@ namespace DuiLib
 		pFolderButton->SetFixedWidth(GetFixedHeight());
 		pDottedLine->SetFixedWidth(2);
 		pCheckBox->SetFixedWidth(GetFixedHeight());
-		pItemButton->SetAttribute(_T("align"),_T("left"));
+		pItemButton->SetAttribute(L"align",L"left");
 
 		pDottedLine->SetVisible(false);
 		pCheckBox->SetVisible(false);
@@ -85,7 +85,7 @@ namespace DuiLib
 		if( event.Type == UIEVENT_DBLCLICK )
 		{
 			if( IsEnabled() ) {
-				m_pManager->SendNotify(this, _T("itemdbclick"));
+				m_pManager->SendNotify(this, L"itemdbclick");
 				Invalidate();
 			}
 			return;
@@ -433,37 +433,37 @@ namespace DuiLib
 	//************************************
 	void CTreeNodeUI::SetAttribute( const wchar_t* pstrName, const wchar_t* pstrValue )
 	{
-		if(_tcscmp(pstrName, _T("text")) == 0 )
+		if(_tcscmp(pstrName, L"text") == 0 )
 			pItemButton->SetText(pstrValue);
-		else if(_tcscmp(pstrName, _T("horizattr")) == 0 )
+		else if(_tcscmp(pstrName, L"horizattr") == 0 )
 			pHoriz->ApplyAttributeTable(m_pManager->GetDefaultAttributeList(pstrValue));
-		else if(_tcscmp(pstrName, _T("dotlineattr")) == 0 )
+		else if(_tcscmp(pstrName, L"dotlineattr") == 0 )
 			pDottedLine->ApplyAttributeTable(m_pManager->GetDefaultAttributeList(pstrValue));
-		else if(_tcscmp(pstrName, _T("folderattr")) == 0 )
+		else if(_tcscmp(pstrName, L"folderattr") == 0 )
 			pFolderButton->ApplyAttributeTable(m_pManager->GetDefaultAttributeList(pstrValue));
-		else if(_tcscmp(pstrName, _T("checkboxattr")) == 0 )
+		else if(_tcscmp(pstrName, L"checkboxattr") == 0 )
 			pCheckBox->ApplyAttributeTable(m_pManager->GetDefaultAttributeList(pstrValue));
-		else if(_tcscmp(pstrName, _T("itemattr")) == 0 )
+		else if(_tcscmp(pstrName, L"itemattr") == 0 )
 			pItemButton->ApplyAttributeTable(m_pManager->GetDefaultAttributeList(pstrValue));
-		else if(_tcscmp(pstrName, _T("itemtextcolor")) == 0 ){
+		else if(_tcscmp(pstrName, L"itemtextcolor") == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetItemTextColor(clrColor);
 		}
-		else if(_tcscmp(pstrName, _T("itemhottextcolor")) == 0 ){
+		else if(_tcscmp(pstrName, L"itemhottextcolor") == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetItemHotTextColor(clrColor);
 		}
-		else if(_tcscmp(pstrName, _T("selitemtextcolor")) == 0 ){
+		else if(_tcscmp(pstrName, L"selitemtextcolor") == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetSelItemTextColor(clrColor);
 		}
-		else if(_tcscmp(pstrName, _T("selitemhottextcolor")) == 0 ){
+		else if(_tcscmp(pstrName, L"selitemhottextcolor") == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
@@ -901,7 +901,7 @@ namespace DuiLib
 	bool CTreeViewUI::OnCheckBoxChanged( void* param )
 	{
 		TNotifyUI* pMsg = (TNotifyUI*)param;
-		if(pMsg->sType == _T("selectchanged"))
+		if(pMsg->sType == L"selectchanged")
 		{
 			CCheckBoxUI* pCheckBox = (CCheckBoxUI*)pMsg->pSender;
 			CTreeNodeUI* pItem = (CTreeNodeUI*)pCheckBox->GetParent()->GetParent();
@@ -920,7 +920,7 @@ namespace DuiLib
 	bool CTreeViewUI::OnFolderChanged( void* param )
 	{
 		TNotifyUI* pMsg = (TNotifyUI*)param;
-		if(pMsg->sType == _T("selectchanged"))
+		if(pMsg->sType == L"selectchanged")
 		{
 			CCheckBoxUI* pFolder = (CCheckBoxUI*)pMsg->pSender;
 			CTreeNodeUI* pItem = (CTreeNodeUI*)pFolder->GetParent()->GetParent();
@@ -940,7 +940,7 @@ namespace DuiLib
 	bool CTreeViewUI::OnDBClickItem( void* param )
 	{
 		TNotifyUI* pMsg = (TNotifyUI*)param;
-		if(pMsg->sType == _T("itemdbclick"))
+		if(pMsg->sType == L"itemdbclick")
 		{
 			CTreeNodeUI* pItem		= static_cast<CTreeNodeUI*>(pMsg->pSender);
 			CCheckBoxUI* pFolder	= pItem->GetFolderButton();
@@ -1187,31 +1187,31 @@ namespace DuiLib
 	//************************************
 	void CTreeViewUI::SetAttribute( const wchar_t* pstrName, const wchar_t* pstrValue )
 	{
-		if(_tcscmp(pstrName,_T("visiblefolderbtn")) == 0)
-			SetVisibleFolderBtn(_tcscmp(pstrValue,_T("true")) == 0);
-		else if(_tcscmp(pstrName,_T("visiblecheckbtn")) == 0)
-			SetVisibleCheckBtn(_tcscmp(pstrValue,_T("true")) == 0);
-		else if(_tcscmp(pstrName,_T("itemminwidth")) == 0)
+		if(_tcscmp(pstrName,L"visiblefolderbtn") == 0)
+			SetVisibleFolderBtn(_tcscmp(pstrValue,L"true") == 0);
+		else if(_tcscmp(pstrName,L"visiblecheckbtn") == 0)
+			SetVisibleCheckBtn(_tcscmp(pstrValue,L"true") == 0);
+		else if(_tcscmp(pstrName,L"itemminwidth") == 0)
 			SetItemMinWidth(_ttoi(pstrValue));
-		else if(_tcscmp(pstrName, _T("itemtextcolor")) == 0 ){
+		else if(_tcscmp(pstrName, L"itemtextcolor") == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetItemTextColor(clrColor);
 		}
-		else if(_tcscmp(pstrName, _T("itemhottextcolor")) == 0 ){
+		else if(_tcscmp(pstrName, L"itemhottextcolor") == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetItemHotTextColor(clrColor);
 		}
-		else if(_tcscmp(pstrName, _T("selitemtextcolor")) == 0 ){
+		else if(_tcscmp(pstrName, L"selitemtextcolor") == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetSelItemTextColor(clrColor);
 		}
-		else if(_tcscmp(pstrName, _T("selitemhottextcolor")) == 0 ){
+		else if(_tcscmp(pstrName, L"selitemhottextcolor") == 0 ){
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);

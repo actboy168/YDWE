@@ -160,8 +160,8 @@ namespace DuiLib
 
 	void CVerticalLayoutUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, _T("sepheight")) == 0 ) SetSepHeight(_ttoi(pstrValue));
-		else if( _tcscmp(pstrName, _T("sepimm")) == 0 ) SetSepImmMode(_tcscmp(pstrValue, _T("true")) == 0);
+		if( _tcscmp(pstrName, L"sepheight") == 0 ) SetSepHeight(_ttoi(pstrValue));
+		else if( _tcscmp(pstrName, L"sepimm") == 0 ) SetSepImmMode(_tcscmp(pstrValue, L"true") == 0);
 		else CContainerUI::SetAttribute(pstrName, pstrValue);
 	}
 

@@ -54,24 +54,24 @@ namespace DuiLib
 
 	void CCheckBoxUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, _T("selected")) == 0 ) Selected(_tcscmp(pstrValue, _T("true")) == 0);
-		else if( _tcscmp(pstrName, _T("selectedimage")) == 0 ) m_sSelectedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("selectedhotimage")) == 0 ) m_sSelectedHotImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("selectedpushedimage")) == 0 ) m_sSelectedPushedImage.reset(new CImage(pstrValue));		
-		else if( _tcscmp(pstrName, _T("selecteddisabledimage")) == 0 ) m_sSelectedDisabledImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("selectedbkcolor")) == 0 ) {
+		if( _tcscmp(pstrName, L"selected") == 0 ) Selected(_tcscmp(pstrValue, L"true") == 0);
+		else if( _tcscmp(pstrName, L"selectedimage") == 0 ) m_sSelectedImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"selectedhotimage") == 0 ) m_sSelectedHotImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"selectedpushedimage") == 0 ) m_sSelectedPushedImage.reset(new CImage(pstrValue));		
+		else if( _tcscmp(pstrName, L"selecteddisabledimage") == 0 ) m_sSelectedDisabledImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"selectedbkcolor") == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwSelectedBkColor = clrColor;
 		}
-		else if( _tcscmp(pstrName, _T("selectedtextcolor")) == 0 ) {
+		else if( _tcscmp(pstrName, L"selectedtextcolor") == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwSelectedTextColor = clrColor;
 		}
-		else if( _tcscmp(pstrName, _T("selectedpushedtextcolor")) == 0 ) {
+		else if( _tcscmp(pstrName, L"selectedpushedtextcolor") == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);

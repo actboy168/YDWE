@@ -127,35 +127,35 @@ namespace DuiLib
 
 	void CButtonUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, _T("normalimage")) == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("hotimage")) == 0 ) m_sHotImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("pushedimage")) == 0 ) m_sPushedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("focusedimage")) == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("disabledimage")) == 0 ) m_sDisabledImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("foreimage")) == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("hotforeimage")) == 0 ) m_sHotForeImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("hotbkcolor")) == 0 )
+		if( _tcscmp(pstrName, L"normalimage") == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"hotimage") == 0 ) m_sHotImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"pushedimage") == 0 ) m_sPushedImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"focusedimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"disabledimage") == 0 ) m_sDisabledImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"foreimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"hotforeimage") == 0 ) m_sHotForeImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"hotbkcolor") == 0 )
 		{
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwHotBkColor = clrColor;
 		}
-		else if( _tcscmp(pstrName, _T("hottextcolor")) == 0 )
+		else if( _tcscmp(pstrName, L"hottextcolor") == 0 )
 		{
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwHotTextColor = clrColor;
 		}
-		else if( _tcscmp(pstrName, _T("pushedtextcolor")) == 0 )
+		else if( _tcscmp(pstrName, L"pushedtextcolor") == 0 )
 		{
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			m_dwPushedTextColor = clrColor;
 		}
-		else if( _tcscmp(pstrName, _T("focusedtextcolor")) == 0 )
+		else if( _tcscmp(pstrName, L"focusedtextcolor") == 0 )
 		{
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			wchar_t* pstr = NULL;

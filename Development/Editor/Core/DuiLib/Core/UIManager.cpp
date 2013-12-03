@@ -100,7 +100,7 @@ m_pParentResourcePM(NULL)
         m_hUpdateRectPen = ::CreatePen(PS_SOLID, 1, RGB(220, 0, 0));
         // Boot Windows Common Controls (for the ToolTip control)
         ::InitCommonControls();
-        ::LoadLibrary(_T("msimg32.dll"));
+        ::LoadLibrary(L"msimg32.dll");
     }
 
     m_szMinWindow.cx = 0;
@@ -286,7 +286,7 @@ void CPaintManagerUI::SetTransparent(int nOpacity)
         typedef BOOL (__stdcall *PFUNCSETLAYEREDWINDOWATTR)(HWND, COLORREF, BYTE, DWORD);
         PFUNCSETLAYEREDWINDOWATTR fSetLayeredWindowAttributes;
 
-        HMODULE hUser32 = ::GetModuleHandle(_T("User32.dll"));
+        HMODULE hUser32 = ::GetModuleHandle(L"User32.dll");
         if (hUser32)
         {
             fSetLayeredWindowAttributes = 
@@ -383,7 +383,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
 //    case WM_SETCURSOR:
 //       break;
 //    default:
-//       DUITRACE(_T("MSG: %-20s (%08ld)"), DUITRACEMSG(uMsg), ::GetTickCount());
+//       DUITRACE(L"MSG: %-20s (%08ld)", DUITRACEMSG(uMsg), ::GetTickCount());
 //    }
 //#endif
     // Not ready yet?
@@ -1060,7 +1060,7 @@ void CPaintManagerUI::MessageLoop()
 			try{
             ::DispatchMessage(&msg);
 			} catch(...) {
-				DUITRACE(_T("EXCEPTION: %s(%d)\n"), __FILET__, __LINE__);
+				DUITRACE(L"EXCEPTION: %s(%d)\n", __FILET__, __LINE__);
 				#ifdef _DEBUG
 				throw "CPaintManagerUI::MessageLoop";
 				#endif
@@ -1958,7 +1958,7 @@ CControlUI* CALLBACK CPaintManagerUI::__FindControlFromClass(CControlUI* pThis, 
     const wchar_t* pstrType = static_cast<const wchar_t*>(pData);
     const wchar_t* pType = pThis->GetClass();
     CStdPtrArray* pFoundControls = pThis->GetManager()->GetSubControlsByClass();
-    if( _tcscmp(pstrType, _T("*")) == 0 || _tcscmp(pstrType, pType) == 0 ) {
+    if( _tcscmp(pstrType, L"*") == 0 || _tcscmp(pstrType, pType) == 0 ) {
         int iIndex = -1;
         while( pFoundControls->GetAt(++iIndex) != NULL ) ;
         if( iIndex < pFoundControls->GetSize() ) pFoundControls->SetAt(iIndex, pThis);
@@ -1971,7 +1971,7 @@ CControlUI* CALLBACK CPaintManagerUI::__FindControlsFromClass(CControlUI* pThis,
 {
     const wchar_t* pstrType = static_cast<const wchar_t*>(pData);
     const wchar_t* pType = pThis->GetClass();
-    if( _tcscmp(pstrType, _T("*")) == 0 || _tcscmp(pstrType, pType) == 0 ) 
+    if( _tcscmp(pstrType, L"*") == 0 || _tcscmp(pstrType, pType) == 0 ) 
         pThis->GetManager()->GetSubControlsByClass()->Add((LPVOID)pThis);
     return NULL;
 }

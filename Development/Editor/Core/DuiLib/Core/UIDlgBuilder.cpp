@@ -38,7 +38,7 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
         for (CMarkupNode node = root.GetChild() ; node.IsValid(); node = node.GetSibling() ) 
 		{
             pstrClass = node.GetName();
-            if (_tcscmp(pstrClass, _T("Image")) == 0)
+            if (_tcscmp(pstrClass, L"Image") == 0)
 			{
                 nAttributes = node.GetAttributeCount();
                 const wchar_t* pImageName = NULL;
@@ -46,17 +46,17 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
                 for( int i = 0; i < nAttributes; i++ ) {
                     pstrName = node.GetAttributeName(i);
                     pstrValue = node.GetAttributeValue(i);
-                    if( _tcscmp(pstrName, _T("name")) == 0 ) {
+                    if( _tcscmp(pstrName, L"name") == 0 ) {
                         pImageName = pstrValue;
 					}
-                    else if( _tcscmp(pstrName, _T("mask")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"mask") == 0 ) {
                         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
                         mask = _tcstoul(pstrValue, &pstr, 16);
                     }
                 }
                 if( pImageName ) pManager->AddImage(pImageName, mask);
             }
-            else if( _tcscmp(pstrClass, _T("Font")) == 0 ) 
+            else if( _tcscmp(pstrClass, L"Font") == 0 ) 
 			{
                 nAttributes = node.GetAttributeCount();
                 const wchar_t* pFontName = NULL;
@@ -68,23 +68,23 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
                 for( int i = 0; i < nAttributes; i++ ) {
                     pstrName = node.GetAttributeName(i);
                     pstrValue = node.GetAttributeValue(i);
-                    if( _tcscmp(pstrName, _T("name")) == 0 ) {
+                    if( _tcscmp(pstrName, L"name") == 0 ) {
                         pFontName = pstrValue;
                     }
-                    else if( _tcscmp(pstrName, _T("size")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"size") == 0 ) {
                         size = _tcstol(pstrValue, &pstr, 10);
                     }
-                    else if( _tcscmp(pstrName, _T("bold")) == 0 ) {
-                        bold = (_tcscmp(pstrValue, _T("true")) == 0);
+                    else if( _tcscmp(pstrName, L"bold") == 0 ) {
+                        bold = (_tcscmp(pstrValue, L"true") == 0);
                     }
-                    else if( _tcscmp(pstrName, _T("underline")) == 0 ) {
-                        underline = (_tcscmp(pstrValue, _T("true")) == 0);
+                    else if( _tcscmp(pstrName, L"underline") == 0 ) {
+                        underline = (_tcscmp(pstrValue, L"true") == 0);
                     }
-                    else if( _tcscmp(pstrName, _T("italic")) == 0 ) {
-                        italic = (_tcscmp(pstrValue, _T("true")) == 0);
+                    else if( _tcscmp(pstrName, L"italic") == 0 ) {
+                        italic = (_tcscmp(pstrValue, L"true") == 0);
                     }
-                    else if( _tcscmp(pstrName, _T("default")) == 0 ) {
-                        defaultfont = (_tcscmp(pstrValue, _T("true")) == 0);
+                    else if( _tcscmp(pstrName, L"default") == 0 ) {
+                        defaultfont = (_tcscmp(pstrValue, L"true") == 0);
                     }
                 }
                 if( pFontName ) {
@@ -95,19 +95,19 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
         }
 
         pstrClass = root.GetName();
-        if( _tcscmp(pstrClass, _T("Window")) == 0 ) {
+        if( _tcscmp(pstrClass, L"Window") == 0 ) {
             if( pManager->GetPaintWindow() ) {
                 int nAttributes = root.GetAttributeCount();
                 for( int i = 0; i < nAttributes; i++ ) {
                     pstrName = root.GetAttributeName(i);
                     pstrValue = root.GetAttributeValue(i);
-                    if( _tcscmp(pstrName, _T("size")) == 0 ) {
+                    if( _tcscmp(pstrName, L"size") == 0 ) {
                         wchar_t* pstr = NULL;
                         int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
                         int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetInitSize(cx, cy);
                     } 
-                    else if( _tcscmp(pstrName, _T("sizebox")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"sizebox") == 0 ) {
                         RECT rcSizeBox = { 0 };
                         wchar_t* pstr = NULL;
                         rcSizeBox.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
@@ -116,7 +116,7 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
                         rcSizeBox.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
                         pManager->SetSizeBox(rcSizeBox);
                     }
-                    else if( _tcscmp(pstrName, _T("caption")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"caption") == 0 ) {
                         RECT rcCaption = { 0 };
                         wchar_t* pstr = NULL;
                         rcCaption.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
@@ -125,58 +125,58 @@ CControlUI* CDialogBuilder::Create(IDialogBuilderCallback* pCallback, CPaintMana
                         rcCaption.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
                         pManager->SetCaptionRect(rcCaption);
                     }
-                    else if( _tcscmp(pstrName, _T("roundcorner")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"roundcorner") == 0 ) {
                         wchar_t* pstr = NULL;
                         int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
                         int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetRoundCorner(cx, cy);
                     } 
-                    else if( _tcscmp(pstrName, _T("mininfo")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"mininfo") == 0 ) {
                         wchar_t* pstr = NULL;
                         int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
                         int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetMinInfo(cx, cy);
                     }
-                    else if( _tcscmp(pstrName, _T("maxinfo")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"maxinfo") == 0 ) {
                         wchar_t* pstr = NULL;
                         int cx = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
                         int cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr); 
                         pManager->SetMaxInfo(cx, cy);
                     }
-                    else if( _tcscmp(pstrName, _T("showdirty")) == 0 ) {
-                        pManager->SetShowUpdateRect(_tcscmp(pstrValue, _T("true")) == 0);
+                    else if( _tcscmp(pstrName, L"showdirty") == 0 ) {
+                        pManager->SetShowUpdateRect(_tcscmp(pstrValue, L"true") == 0);
                     } 
-                    else if( _tcscmp(pstrName, _T("alpha")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"alpha") == 0 ) {
                         pManager->SetTransparent(_ttoi(pstrValue));
                     } 
-                    else if( _tcscmp(pstrName, _T("bktrans")) == 0 ) {
-                        pManager->SetBackgroundTransparent(_tcscmp(pstrValue, _T("true")) == 0);
+                    else if( _tcscmp(pstrName, L"bktrans") == 0 ) {
+                        pManager->SetBackgroundTransparent(_tcscmp(pstrValue, L"true") == 0);
                     } 
-                    else if( _tcscmp(pstrName, _T("disabledfontcolor")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"disabledfontcolor") == 0 ) {
                         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
                         wchar_t* pstr = NULL;
                         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultDisabledColor(clrColor);
                     } 
-                    else if( _tcscmp(pstrName, _T("defaultfontcolor")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"defaultfontcolor") == 0 ) {
                         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
                         wchar_t* pstr = NULL;
                         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultFontColor(clrColor);
                     }
-                    else if( _tcscmp(pstrName, _T("linkfontcolor")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"linkfontcolor") == 0 ) {
                         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
                         wchar_t* pstr = NULL;
                         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultLinkFontColor(clrColor);
                     } 
-                    else if( _tcscmp(pstrName, _T("linkhoverfontcolor")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"linkhoverfontcolor") == 0 ) {
                         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
                         wchar_t* pstr = NULL;
                         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
                         pManager->SetDefaultLinkHoverFontColor(clrColor);
                     } 
-                    else if( _tcscmp(pstrName, _T("selectedcolor")) == 0 ) {
+                    else if( _tcscmp(pstrName, L"selectedcolor") == 0 ) {
                         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
                         wchar_t* pstr = NULL;
                         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
@@ -210,14 +210,14 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
     CControlUI* pReturn = NULL;
     for( CMarkupNode node = pRoot->GetChild() ; node.IsValid(); node = node.GetSibling() ) {
         const wchar_t* pstrClass = node.GetName();
-        if( _tcscmp(pstrClass, _T("Image")) == 0 || _tcscmp(pstrClass, _T("Font")) == 0 \
+        if( _tcscmp(pstrClass, L"Image") == 0 || _tcscmp(pstrClass, L"Font") == 0 \
              ) continue;
 
         CControlUI* pControl = NULL;
 
-		if (_tcscmp(pstrClass, _T("Class")) == 0) 
+		if (_tcscmp(pstrClass, L"Class") == 0) 
 		{
-			const wchar_t* pControlName = node.GetAttributeValue(_T("name"));
+			const wchar_t* pControlName = node.GetAttributeValue(L"name");
 
 			if (pControlName && pControlName[0]) 
 			{
@@ -226,7 +226,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 				{
 					wchar_t const* pstrName = node.GetAttributeName(i);
 					wchar_t const* pstrValue = node.GetAttributeValue(i);
-					if (_tcscmp(pstrName, _T("class")) == 0)
+					if (_tcscmp(pstrName, L"class") == 0)
 					{
 						CAttributesList* pParent = pManager->GetDefaultAttributeList(pstrValue);
 						if (pParent)
@@ -237,16 +237,16 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 							}
 						}
 					}
-					else if (_tcscmp(pstrName, _T("name")) != 0)
+					else if (_tcscmp(pstrName, L"name") != 0)
 					{
 						pManager->AddDefaultAttribute(pControlName, pstrName, pstrValue);
 					}
 				}
 			}
 		}
-        else if (_tcscmp(pstrClass, _T("Include")) == 0)
+        else if (_tcscmp(pstrClass, L"Include") == 0)
 		{
-			const wchar_t* szValue = node.GetAttributeValue(_T("source"));
+			const wchar_t* szValue = node.GetAttributeValue(L"source");
 			if (szValue && szValue[0])
 			{
 				CDialogBuilder builder;
@@ -255,7 +255,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
             continue;
         }
 		//树控件XML解析
-		else if( _tcscmp(pstrClass, _T("TreeNode")) == 0 ) {
+		else if( _tcscmp(pstrClass, L"TreeNode") == 0 ) {
 			CTreeNodeUI* pParentNode	= dynamic_cast<CTreeNodeUI*>(pParent);
 			CTreeNodeUI* pNode			= new CTreeNodeUI();
 			if(pParentNode){
@@ -389,7 +389,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 			if( pControl == NULL )
 			{
 #ifdef _DEBUG
-				DUITRACE(_T("未知控件:%s"),pstrClass);
+				DUITRACE(L"未知控件:%s",pstrClass);
 #endif
 				continue;
 			}

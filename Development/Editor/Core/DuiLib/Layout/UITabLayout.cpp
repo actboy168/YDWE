@@ -122,7 +122,7 @@ namespace DuiLib
 
 	void CTabLayoutUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, _T("selectedid")) == 0 ) SelectItem(_ttoi(pstrValue));
+		if( _tcscmp(pstrName, L"selectedid") == 0 ) SelectItem(_ttoi(pstrValue));
 		return CContainerUI::SetAttribute(pstrName, pstrValue);
 	}
 

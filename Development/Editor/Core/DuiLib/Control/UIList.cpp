@@ -596,30 +596,30 @@ void CListUI::Scroll(int dx, int dy)
 
 void CListUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
-    if( _tcscmp(pstrName, _T("header")) == 0 ) GetHeader()->SetVisible(_tcscmp(pstrValue, _T("hidden")) != 0);
-    else if( _tcscmp(pstrName, _T("headerbkimage")) == 0 ) GetHeader()->SetBkImage(pstrValue);
-    else if( _tcscmp(pstrName, _T("scrollselect")) == 0 ) SetScrollSelect(_tcscmp(pstrValue, _T("true")) == 0);
-    else if( _tcscmp(pstrName, _T("multiexpanding")) == 0 ) SetMultiExpanding(_tcscmp(pstrValue, _T("true")) == 0);
-    else if( _tcscmp(pstrName, _T("itemfont")) == 0 ) m_ListInfo.nFont = _ttoi(pstrValue);
-    else if( _tcscmp(pstrName, _T("itemalign")) == 0 ) {
-        if( _tcsstr(pstrValue, _T("left")) != NULL ) {
+    if( _tcscmp(pstrName, L"header") == 0 ) GetHeader()->SetVisible(_tcscmp(pstrValue, L"hidden") != 0);
+    else if( _tcscmp(pstrName, L"headerbkimage") == 0 ) GetHeader()->SetBkImage(pstrValue);
+    else if( _tcscmp(pstrName, L"scrollselect") == 0 ) SetScrollSelect(_tcscmp(pstrValue, L"true") == 0);
+    else if( _tcscmp(pstrName, L"multiexpanding") == 0 ) SetMultiExpanding(_tcscmp(pstrValue, L"true") == 0);
+    else if( _tcscmp(pstrName, L"itemfont") == 0 ) m_ListInfo.nFont = _ttoi(pstrValue);
+    else if( _tcscmp(pstrName, L"itemalign") == 0 ) {
+        if( _tcsstr(pstrValue, L"left") != NULL ) {
             m_ListInfo.uTextStyle &= ~(DT_CENTER | DT_RIGHT);
             m_ListInfo.uTextStyle |= DT_LEFT;
         }
-        if( _tcsstr(pstrValue, _T("center")) != NULL ) {
+        if( _tcsstr(pstrValue, L"center") != NULL ) {
             m_ListInfo.uTextStyle &= ~(DT_LEFT | DT_RIGHT);
             m_ListInfo.uTextStyle |= DT_CENTER;
         }
-        if( _tcsstr(pstrValue, _T("right")) != NULL ) {
+        if( _tcsstr(pstrValue, L"right") != NULL ) {
             m_ListInfo.uTextStyle &= ~(DT_LEFT | DT_CENTER);
             m_ListInfo.uTextStyle |= DT_RIGHT;
         }
     }
-    else if( _tcscmp(pstrName, _T("itemendellipsis")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_ListInfo.uTextStyle |= DT_END_ELLIPSIS;
+    else if( _tcscmp(pstrName, L"itemendellipsis") == 0 ) {
+        if( _tcscmp(pstrValue, L"true") == 0 ) m_ListInfo.uTextStyle |= DT_END_ELLIPSIS;
         else m_ListInfo.uTextStyle &= ~DT_END_ELLIPSIS;
     }    
-    if( _tcscmp(pstrName, _T("itemtextpadding")) == 0 ) {
+    if( _tcscmp(pstrName, L"itemtextpadding") == 0 ) {
         RECT rcTextPadding = { 0 };
         wchar_t* pstr = NULL;
         rcTextPadding.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
@@ -628,60 +628,60 @@ void CListUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
         rcTextPadding.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
         SetItemTextPadding(rcTextPadding);
     }
-    else if( _tcscmp(pstrName, _T("itemtextcolor")) == 0 ) {
+    else if( _tcscmp(pstrName, L"itemtextcolor") == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
         wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetTextColor(clrColor);
     }
-    else if( _tcscmp(pstrName, _T("itembkcolor")) == 0 ) {
+    else if( _tcscmp(pstrName, L"itembkcolor") == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
         wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetBkColor(clrColor);
     }
-    else if( _tcscmp(pstrName, _T("itembkimage")) == 0 ) m_ListInfo.SetBkImage(pstrValue);
-    else if( _tcscmp(pstrName, _T("itemaltbk")) == 0 ) m_ListInfo.SetAlternateBk(_tcscmp(pstrValue, _T("true")) == 0);
-    else if( _tcscmp(pstrName, _T("itemselectedtextcolor")) == 0 ) {
+    else if( _tcscmp(pstrName, L"itembkimage") == 0 ) m_ListInfo.SetBkImage(pstrValue);
+    else if( _tcscmp(pstrName, L"itemaltbk") == 0 ) m_ListInfo.SetAlternateBk(_tcscmp(pstrValue, L"true") == 0);
+    else if( _tcscmp(pstrName, L"itemselectedtextcolor") == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
         wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetSelectedTextColor(clrColor);
     }
-    else if( _tcscmp(pstrName, _T("itemselectedbkcolor")) == 0 ) {
+    else if( _tcscmp(pstrName, L"itemselectedbkcolor") == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
         wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetSelectedBkColor(clrColor);
     }
-    else if( _tcscmp(pstrName, _T("itemselectedimage")) == 0 ) m_ListInfo.SetSelectedImage(pstrValue);
-    else if( _tcscmp(pstrName, _T("itemhottextcolor")) == 0 ) {
+    else if( _tcscmp(pstrName, L"itemselectedimage") == 0 ) m_ListInfo.SetSelectedImage(pstrValue);
+    else if( _tcscmp(pstrName, L"itemhottextcolor") == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
         wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetHotTextColor(clrColor);
     }
-    else if( _tcscmp(pstrName, _T("itemhotbkcolor")) == 0 ) {
+    else if( _tcscmp(pstrName, L"itemhotbkcolor") == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
         wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetHotBkColor(clrColor);
     }
-    else if( _tcscmp(pstrName, _T("itemhotimage")) == 0 ) m_ListInfo.SetHotImage(pstrValue);
-    else if( _tcscmp(pstrName, _T("itemdisabledtextcolor")) == 0 ) {
+    else if( _tcscmp(pstrName, L"itemhotimage") == 0 ) m_ListInfo.SetHotImage(pstrValue);
+    else if( _tcscmp(pstrName, L"itemdisabledtextcolor") == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
         wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetDisabledTextColor(clrColor);
     }
-    else if( _tcscmp(pstrName, _T("itemdisabledbkcolor")) == 0 ) {
+    else if( _tcscmp(pstrName, L"itemdisabledbkcolor") == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
         wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         m_ListInfo.SetDisabledBkColor(clrColor);
     }
-    else if( _tcscmp(pstrName, _T("itemdisabledimage")) == 0 ) m_ListInfo.SetDisabledImage(pstrValue);
-    else if( _tcscmp(pstrName, _T("itemlinecolor")) == 0 ) {
+    else if( _tcscmp(pstrName, L"itemdisabledimage") == 0 ) m_ListInfo.SetDisabledImage(pstrValue);
+    else if( _tcscmp(pstrName, L"itemlinecolor") == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
         wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
@@ -1132,34 +1132,34 @@ void CListHeaderItemUI::SetFont(int index)
 
 void CListHeaderItemUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
-    if( _tcscmp(pstrName, _T("dragable")) == 0 ) SetDragable(_tcscmp(pstrValue, _T("true")) == 0);
-    else if( _tcscmp(pstrName, _T("sepwidth")) == 0 ) SetSepWidth(_ttoi(pstrValue));
-    else if( _tcscmp(pstrName, _T("align")) == 0 ) {
-        if( _tcsstr(pstrValue, _T("left")) != NULL ) {
+    if( _tcscmp(pstrName, L"dragable") == 0 ) SetDragable(_tcscmp(pstrValue, L"true") == 0);
+    else if( _tcscmp(pstrName, L"sepwidth") == 0 ) SetSepWidth(_ttoi(pstrValue));
+    else if( _tcscmp(pstrName, L"align") == 0 ) {
+        if( _tcsstr(pstrValue, L"left") != NULL ) {
             m_uTextStyle &= ~(DT_CENTER | DT_RIGHT);
             m_uTextStyle |= DT_LEFT;
         }
-        if( _tcsstr(pstrValue, _T("center")) != NULL ) {
+        if( _tcsstr(pstrValue, L"center") != NULL ) {
             m_uTextStyle &= ~(DT_LEFT | DT_RIGHT);
             m_uTextStyle |= DT_CENTER;
         }
-        if( _tcsstr(pstrValue, _T("right")) != NULL ) {
+        if( _tcsstr(pstrValue, L"right") != NULL ) {
             m_uTextStyle &= ~(DT_LEFT | DT_CENTER);
             m_uTextStyle |= DT_RIGHT;
         }
     }
-    else if( _tcscmp(pstrName, _T("endellipsis")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_uTextStyle |= DT_END_ELLIPSIS;
+    else if( _tcscmp(pstrName, L"endellipsis") == 0 ) {
+        if( _tcscmp(pstrValue, L"true") == 0 ) m_uTextStyle |= DT_END_ELLIPSIS;
         else m_uTextStyle &= ~DT_END_ELLIPSIS;
     }    
-    else if( _tcscmp(pstrName, _T("font")) == 0 ) SetFont(_ttoi(pstrValue));
-    else if( _tcscmp(pstrName, _T("textcolor")) == 0 ) {
+    else if( _tcscmp(pstrName, L"font") == 0 ) SetFont(_ttoi(pstrValue));
+    else if( _tcscmp(pstrName, L"textcolor") == 0 ) {
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
         wchar_t* pstr = NULL;
         DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
         SetTextColor(clrColor);
     }
-	else if( _tcscmp(pstrName, _T("textpadding")) == 0 ) {
+	else if( _tcscmp(pstrName, L"textpadding") == 0 ) {
 		RECT rcTextPadding = { 0 };
 		wchar_t* pstr = NULL;
 		rcTextPadding.left = _tcstol(pstrValue, &pstr, 10);  ASSERT(pstr);    
@@ -1168,11 +1168,11 @@ void CListHeaderItemUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pst
 		rcTextPadding.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
 		SetTextPadding(rcTextPadding);
 	}
-    else if( _tcscmp(pstrName, _T("normalimage")) == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
-    else if( _tcscmp(pstrName, _T("hotimage")) == 0 ) m_sHotImage.reset(new CImage(pstrValue));
-    else if( _tcscmp(pstrName, _T("pushedimage")) == 0 ) m_sPushedImage.reset(new CImage(pstrValue));
-    else if( _tcscmp(pstrName, _T("focusedimage")) == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
-    else if( _tcscmp(pstrName, _T("sepimage")) == 0 ) m_sSepImage.reset(new CImage(pstrValue));
+    else if( _tcscmp(pstrName, L"normalimage") == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
+    else if( _tcscmp(pstrName, L"hotimage") == 0 ) m_sHotImage.reset(new CImage(pstrValue));
+    else if( _tcscmp(pstrName, L"pushedimage") == 0 ) m_sPushedImage.reset(new CImage(pstrValue));
+    else if( _tcscmp(pstrName, L"focusedimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
+    else if( _tcscmp(pstrName, L"sepimage") == 0 ) m_sSepImage.reset(new CImage(pstrValue));
     else CControlUI::SetAttribute(pstrName, pstrValue);
 }
 
@@ -1515,7 +1515,7 @@ void CListElementUI::DoEvent(TEventUI& event)
 
 void CListElementUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
-    if( _tcscmp(pstrName, _T("selected")) == 0 ) Select();
+    if( _tcscmp(pstrName, L"selected") == 0 ) Select();
     else CControlUI::SetAttribute(pstrName, pstrValue);
 }
 
@@ -2050,7 +2050,7 @@ void CListContainerElementUI::DoEvent(TEventUI& event)
 
 void CListContainerElementUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
-    if( _tcscmp(pstrName, _T("selected")) == 0 ) Select();
+    if( _tcscmp(pstrName, L"selected") == 0 ) Select();
     else CContainerUI::SetAttribute(pstrName, pstrValue);
 }
 

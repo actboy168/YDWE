@@ -39,7 +39,7 @@ void UILIB_API DUI__Trace(const wchar_t* pstrFormat, ...)
     va_list args;
     va_start(args, pstrFormat);
     ::wvnsprintf(szBuffer, lengthof(szBuffer) - 2, pstrFormat, args);
-    _tcscat(szBuffer, _T("\n"));
+    _tcscat(szBuffer, L"\n");
     va_end(args);
     ::OutputDebugString(szBuffer);
 }
@@ -102,7 +102,7 @@ const wchar_t* DUI__TraceMsg(UINT uMsg)
     MSGDEF(WM_GETTEXT);
     MSGDEF(WM_GETTEXTLENGTH);   
     static TCHAR szMsg[10];
-    ::wsprintf(szMsg, _T("0x%04X"), uMsg);
+    ::wsprintf(szMsg, L"0x%04X", uMsg);
     return szMsg;
 }
 #endif

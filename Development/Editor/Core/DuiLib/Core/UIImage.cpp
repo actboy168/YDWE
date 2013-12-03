@@ -95,51 +95,51 @@ namespace DuiLib
 			if( *pStrImage++ != _T('\'') ) break;
 			if( !sValue.empty() ) 
 			{
-				if( sItem == _T("file") || sItem == _T("res") )
+				if( sItem == L"file" || sItem == L"res" )
 				{
 					m_sImageName = sValue;
 				}
-				else if( sItem == _T("dest") ) 
+				else if( sItem == L"dest" ) 
 				{
 					m_rcItem.left = _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
 					m_rcItem.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
 					m_rcItem.right =  _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
 					m_rcItem.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
 				}
-				else if( sItem == _T("source") ) 
+				else if( sItem == L"source" ) 
 				{
 					m_rcBmpPart.left = _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
 					m_rcBmpPart.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
 					m_rcBmpPart.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
 					m_rcBmpPart.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);  
 				}
-				else if( sItem == _T("corner") )
+				else if( sItem == L"corner" )
 				{
 					m_rcCorner.left = _tcstol(sValue.c_str(), &pstr, 10);  ASSERT(pstr);    
 					m_rcCorner.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
 					m_rcCorner.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
 					m_rcCorner.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
 				}
-				else if( sItem == _T("mask") )
+				else if( sItem == L"mask" )
 				{
 					if( sValue[0] == _T('#')) m_dwMask = _tcstoul(sValue.c_str() + 1, &pstr, 16);
 					else m_dwMask = _tcstoul(sValue.c_str(), &pstr, 16);
 				}
-				else if( sItem == _T("fade") )
+				else if( sItem == L"fade" )
 				{
 					m_bFade = (BYTE)_tcstoul(sValue.c_str(), &pstr, 10);
 				}
-				else if( sItem == _T("hole") ) 
+				else if( sItem == L"hole" ) 
 				{
-					m_bHole = (_tcscmp(sValue.c_str(), _T("true")) == 0);
+					m_bHole = (_tcscmp(sValue.c_str(), L"true") == 0);
 				}
-				else if( sItem == _T("xtiled") ) 
+				else if( sItem == L"xtiled" ) 
 				{
-					m_bTiledX = (_tcscmp(sValue.c_str(), _T("true")) == 0);
+					m_bTiledX = (_tcscmp(sValue.c_str(), L"true") == 0);
 				}
-				else if( sItem == _T("ytiled") ) 
+				else if( sItem == L"ytiled" ) 
 				{
-					m_bTiledY = (_tcscmp(sValue.c_str(), _T("true")) == 0);
+					m_bTiledY = (_tcscmp(sValue.c_str(), L"true") == 0);
 				}
 			}
 			if( *pStrImage++ != _T(' ') ) break;

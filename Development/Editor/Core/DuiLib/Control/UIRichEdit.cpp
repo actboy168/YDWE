@@ -306,7 +306,7 @@ BOOL CTxtWinHost::Init(CRichEditUI *re, const CREATESTRUCT *pcs)
     //    goto err;
 
 	PCreateTextServices TextServicesProc = nullptr;
-	HMODULE hmod = LoadLibrary(_T("msftedit.dll"));
+	HMODULE hmod = LoadLibrary(L"msftedit.dll");
 	if (hmod)
 	{
 		TextServicesProc = (PCreateTextServices)GetProcAddress(hmod,"CreateTextServices");
@@ -2059,55 +2059,55 @@ void CRichEditUI::DoPaint(HDC hDC, const RECT& rcPaint)
 
 void CRichEditUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
-    if( _tcscmp(pstrName, _T("vscrollbar")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_lTwhStyle |= ES_DISABLENOSCROLL | WS_VSCROLL;
+    if( _tcscmp(pstrName, L"vscrollbar") == 0 ) {
+        if( _tcscmp(pstrValue, L"true") == 0 ) m_lTwhStyle |= ES_DISABLENOSCROLL | WS_VSCROLL;
     }
-    if( _tcscmp(pstrName, _T("autovscroll")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_lTwhStyle |= ES_AUTOVSCROLL;
+    if( _tcscmp(pstrName, L"autovscroll") == 0 ) {
+        if( _tcscmp(pstrValue, L"true") == 0 ) m_lTwhStyle |= ES_AUTOVSCROLL;
     }
-    else if( _tcscmp(pstrName, _T("hscrollbar")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_lTwhStyle |= ES_DISABLENOSCROLL | WS_HSCROLL;
+    else if( _tcscmp(pstrName, L"hscrollbar") == 0 ) {
+        if( _tcscmp(pstrValue, L"true") == 0 ) m_lTwhStyle |= ES_DISABLENOSCROLL | WS_HSCROLL;
     }
-    if( _tcscmp(pstrName, _T("autohscroll")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_lTwhStyle |= ES_AUTOHSCROLL;
+    if( _tcscmp(pstrName, L"autohscroll") == 0 ) {
+        if( _tcscmp(pstrValue, L"true") == 0 ) m_lTwhStyle |= ES_AUTOHSCROLL;
     }
-    else if( _tcscmp(pstrName, _T("wanttab")) == 0 ) {
-        SetWantTab(_tcscmp(pstrValue, _T("true")) == 0);
+    else if( _tcscmp(pstrName, L"wanttab") == 0 ) {
+        SetWantTab(_tcscmp(pstrValue, L"true") == 0);
     }
-    else if( _tcscmp(pstrName, _T("wantreturn")) == 0 ) {
-        SetWantReturn(_tcscmp(pstrValue, _T("true")) == 0);
+    else if( _tcscmp(pstrName, L"wantreturn") == 0 ) {
+        SetWantReturn(_tcscmp(pstrValue, L"true") == 0);
     }
-    else if( _tcscmp(pstrName, _T("wantctrlreturn")) == 0 ) {
-        SetWantCtrlReturn(_tcscmp(pstrValue, _T("true")) == 0);
+    else if( _tcscmp(pstrName, L"wantctrlreturn") == 0 ) {
+        SetWantCtrlReturn(_tcscmp(pstrValue, L"true") == 0);
     }
-    else if( _tcscmp(pstrName, _T("rich")) == 0 ) {
-        SetRich(_tcscmp(pstrValue, _T("true")) == 0);
+    else if( _tcscmp(pstrName, L"rich") == 0 ) {
+        SetRich(_tcscmp(pstrValue, L"true") == 0);
     }
-    else if( _tcscmp(pstrName, _T("multiline")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("false")) == 0 ) m_lTwhStyle &= ~ES_MULTILINE;
+    else if( _tcscmp(pstrName, L"multiline") == 0 ) {
+        if( _tcscmp(pstrValue, L"false") == 0 ) m_lTwhStyle &= ~ES_MULTILINE;
     }
-    else if( _tcscmp(pstrName, _T("readonly")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) { m_lTwhStyle |= ES_READONLY; m_bReadOnly = true; }
+    else if( _tcscmp(pstrName, L"readonly") == 0 ) {
+        if( _tcscmp(pstrValue, L"true") == 0 ) { m_lTwhStyle |= ES_READONLY; m_bReadOnly = true; }
     }
-    else if( _tcscmp(pstrName, _T("password")) == 0 ) {
-        if( _tcscmp(pstrValue, _T("true")) == 0 ) m_lTwhStyle |= ES_PASSWORD;
+    else if( _tcscmp(pstrName, L"password") == 0 ) {
+        if( _tcscmp(pstrValue, L"true") == 0 ) m_lTwhStyle |= ES_PASSWORD;
     }
-    else if( _tcscmp(pstrName, _T("align")) == 0 ) {
-        if( _tcsstr(pstrValue, _T("left")) != NULL ) {
+    else if( _tcscmp(pstrName, L"align") == 0 ) {
+        if( _tcsstr(pstrValue, L"left") != NULL ) {
             m_lTwhStyle &= ~(ES_CENTER | ES_RIGHT);
             m_lTwhStyle |= ES_LEFT;
         }
-        if( _tcsstr(pstrValue, _T("center")) != NULL ) {
+        if( _tcsstr(pstrValue, L"center") != NULL ) {
             m_lTwhStyle &= ~(ES_LEFT | ES_RIGHT);
             m_lTwhStyle |= ES_CENTER;
         }
-        if( _tcsstr(pstrValue, _T("right")) != NULL ) {
+        if( _tcsstr(pstrValue, L"right") != NULL ) {
             m_lTwhStyle &= ~(ES_LEFT | ES_CENTER);
             m_lTwhStyle |= ES_RIGHT;
         }
     }
-    else if( _tcscmp(pstrName, _T("font")) == 0 ) SetFont(_ttoi(pstrValue));
-    else if( _tcscmp(pstrName, _T("textcolor")) == 0 ) {
+    else if( _tcscmp(pstrName, L"font") == 0 ) SetFont(_ttoi(pstrValue));
+    else if( _tcscmp(pstrName, L"textcolor") == 0 ) {
         while( *pstrValue > _T('\0') && *pstrValue <= _T(' ') ) pstrValue = ::CharNext(pstrValue);
         if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
         const wchar_t* pstr = NULL;

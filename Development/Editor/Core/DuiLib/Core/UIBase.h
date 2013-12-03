@@ -40,7 +40,7 @@ namespace DuiLib {
 #ifndef DUITRACE
 #define DUITRACE
 #endif
-#define DUITRACEMSG _T("")
+#define DUITRACEMSG L""
 #endif
 
 #ifdef _DEBUG

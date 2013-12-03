@@ -69,7 +69,7 @@ namespace DuiLib
 
 	const wchar_t* CDateTimeWnd::GetWindowClassName() const
 	{
-		return _T("DateTimeWnd");
+		return L"DateTimeWnd";
 	}
 
 	const wchar_t* CDateTimeWnd::GetSuperClassName() const
@@ -205,7 +205,7 @@ namespace DuiLib
 	void CDateTimeUI::UpdateText()
 	{
 		if (m_nDTUpdateFlag == DT_DELETE)
-			SetText(_T(""));
+			SetText(L"");
 		else if (m_nDTUpdateFlag == DT_UPDATE)
 		{
 			SetText(base::util::format(L"%4d-%02d-%02d", m_sysTime.wYear, m_sysTime.wMonth, m_sysTime.wDay, m_sysTime.wHour, m_sysTime.wMinute).c_str());

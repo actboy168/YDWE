@@ -4,7 +4,7 @@ namespace DuiLib
 {
 	CFrameWindow::CFrameWindow() { };
 
-	const wchar_t* CFrameWindow::GetWindowClassName() const { return _T("FrameWindow"); };
+	const wchar_t* CFrameWindow::GetWindowClassName() const { return L"FrameWindow"; };
 	UINT CFrameWindow::GetClassStyle() const { return UI_CLASSSTYLE_FRAME | CS_DBLCLKS | CS_DROPSHADOW; };
 	void CFrameWindow::OnFinalMessage(HWND /*hWnd*/) { };
 
@@ -23,7 +23,7 @@ namespace DuiLib
 		CControlUI* pRoot = builder.Create(GetSkinXml(), NULL, &m_pm);
 		if (!pRoot) 
 		{
-			::MessageBox(NULL,_T("读取皮肤文件失败"), _T("YDWEConfig"), MB_OK|MB_ICONERROR);
+			::MessageBox(NULL,L"读取皮肤文件失败", L"YDWEConfig", MB_OK|MB_ICONERROR);
 			::PostQuitMessage(0L);
 			return 0;
 		}

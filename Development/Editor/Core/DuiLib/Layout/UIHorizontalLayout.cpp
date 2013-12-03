@@ -152,8 +152,8 @@ namespace DuiLib
 
 	void CHorizontalLayoutUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, _T("sepwidth")) == 0 ) SetSepWidth(_ttoi(pstrValue));
-		else if( _tcscmp(pstrName, _T("sepimm")) == 0 ) SetSepImmMode(_tcscmp(pstrValue, _T("true")) == 0);
+		if( _tcscmp(pstrName, L"sepwidth") == 0 ) SetSepWidth(_ttoi(pstrValue));
+		else if( _tcscmp(pstrName, L"sepimm") == 0 ) SetSepImmMode(_tcscmp(pstrValue, L"true") == 0);
 		else CContainerUI::SetAttribute(pstrName, pstrValue);
 	}
 

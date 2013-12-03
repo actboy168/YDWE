@@ -74,7 +74,7 @@ namespace DuiLib
 
 	const wchar_t* CEditWnd::GetWindowClassName() const
 	{
-		return _T("EditWnd");
+		return L"EditWnd";
 	}
 
 	const wchar_t* CEditWnd::GetSuperClassName() const
@@ -412,15 +412,15 @@ namespace DuiLib
 
 	void CEditUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 	{
-		if( _tcscmp(pstrName, _T("readonly")) == 0 ) SetReadOnly(_tcscmp(pstrValue, _T("true")) == 0);
-		else if( _tcscmp(pstrName, _T("numberonly")) == 0 ) SetNumberOnly(_tcscmp(pstrValue, _T("true")) == 0);
-		else if( _tcscmp(pstrName, _T("password")) == 0 ) SetPasswordMode(_tcscmp(pstrValue, _T("true")) == 0);
-		else if( _tcscmp(pstrName, _T("maxchar")) == 0 ) SetMaxChar(_ttoi(pstrValue));
-		else if( _tcscmp(pstrName, _T("normalimage")) == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("hotimage")) == 0 ) m_sHotImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("focusedimage")) == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("disabledimage")) == 0 ) m_sDisabledImage.reset(new CImage(pstrValue));
-		else if( _tcscmp(pstrName, _T("nativebkcolor")) == 0 ) {
+		if( _tcscmp(pstrName, L"readonly") == 0 ) SetReadOnly(_tcscmp(pstrValue, L"true") == 0);
+		else if( _tcscmp(pstrName, L"numberonly") == 0 ) SetNumberOnly(_tcscmp(pstrValue, L"true") == 0);
+		else if( _tcscmp(pstrName, L"password") == 0 ) SetPasswordMode(_tcscmp(pstrValue, L"true") == 0);
+		else if( _tcscmp(pstrName, L"maxchar") == 0 ) SetMaxChar(_ttoi(pstrValue));
+		else if( _tcscmp(pstrName, L"normalimage") == 0 ) m_sNormalImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"hotimage") == 0 ) m_sHotImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"focusedimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"disabledimage") == 0 ) m_sDisabledImage.reset(new CImage(pstrValue));
+		else if( _tcscmp(pstrName, L"nativebkcolor") == 0 ) {
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
 			const wchar_t* pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);

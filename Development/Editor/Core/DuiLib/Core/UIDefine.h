@@ -39,39 +39,39 @@ union DuiMessageMapFunctions
 //定义所有消息类型
 //////////////////////////////////////////////////////////////////////////
 
-#define DUI_MSGTYPE_MENU                   (_T("menu"))
-#define DUI_MSGTYPE_LINK                   (_T("link"))
+#define DUI_MSGTYPE_MENU                   (L"menu")
+#define DUI_MSGTYPE_LINK                   (L"link")
 
-#define DUI_MSGTYPE_TIMER                  (_T("timer"))
-#define DUI_MSGTYPE_CLICK                  (_T("click"))
+#define DUI_MSGTYPE_TIMER                  (L"timer")
+#define DUI_MSGTYPE_CLICK                  (L"click")
 
-#define DUI_MSGTYPE_RETURN                 (_T("return"))
-#define DUI_MSGTYPE_SCROLL                 (_T("scroll"))
+#define DUI_MSGTYPE_RETURN                 (L"return")
+#define DUI_MSGTYPE_SCROLL                 (L"scroll")
 
-#define DUI_MSGTYPE_DROPDOWN               (_T("dropdown"))
-#define DUI_MSGTYPE_SETFOCUS               (_T("setfocus"))
+#define DUI_MSGTYPE_DROPDOWN               (L"dropdown")
+#define DUI_MSGTYPE_SETFOCUS               (L"setfocus")
 
-#define DUI_MSGTYPE_KILLFOCUS              (_T("killfocus"))
-#define DUI_MSGTYPE_ITEMCLICK 		   	   (_T("itemclick"))
-#define DUI_MSGTYPE_TABSELECT              (_T("tabselect"))
+#define DUI_MSGTYPE_KILLFOCUS              (L"killfocus")
+#define DUI_MSGTYPE_ITEMCLICK 		   	   (L"itemclick")
+#define DUI_MSGTYPE_TABSELECT              (L"tabselect")
 
-#define DUI_MSGTYPE_ITEMSELECT 		   	   (_T("itemselect"))
-#define DUI_MSGTYPE_ITEMEXPAND             (_T("itemexpand"))
-#define DUI_MSGTYPE_WINDOWINIT             (_T("windowinit"))
-#define DUI_MSGTYPE_BUTTONDOWN 		   	   (_T("buttondown"))
-#define DUI_MSGTYPE_MOUSEENTER			   (_T("mouseenter"))
-#define DUI_MSGTYPE_MOUSELEAVE			   (_T("mouseleave"))
+#define DUI_MSGTYPE_ITEMSELECT 		   	   (L"itemselect")
+#define DUI_MSGTYPE_ITEMEXPAND             (L"itemexpand")
+#define DUI_MSGTYPE_WINDOWINIT             (L"windowinit")
+#define DUI_MSGTYPE_BUTTONDOWN 		   	   (L"buttondown")
+#define DUI_MSGTYPE_MOUSEENTER			   (L"mouseenter")
+#define DUI_MSGTYPE_MOUSELEAVE			   (L"mouseleave")
 
-#define DUI_MSGTYPE_TEXTCHANGED            (_T("textchanged"))
-#define DUI_MSGTYPE_HEADERCLICK            (_T("headerclick"))
-#define DUI_MSGTYPE_ITEMDBCLICK            (_T("itemdbclick"))
-#define DUI_MSGTYPE_SHOWACTIVEX            (_T("showactivex"))
+#define DUI_MSGTYPE_TEXTCHANGED            (L"textchanged")
+#define DUI_MSGTYPE_HEADERCLICK            (L"headerclick")
+#define DUI_MSGTYPE_ITEMDBCLICK            (L"itemdbclick")
+#define DUI_MSGTYPE_SHOWACTIVEX            (L"showactivex")
 
-#define DUI_MSGTYPE_ITEMCOLLAPSE           (_T("itemcollapse"))
-#define DUI_MSGTYPE_ITEMACTIVATE           (_T("itemactivate"))
-#define DUI_MSGTYPE_VALUECHANGED           (_T("valuechanged"))
+#define DUI_MSGTYPE_ITEMCOLLAPSE           (L"itemcollapse")
+#define DUI_MSGTYPE_ITEMACTIVATE           (L"itemactivate")
+#define DUI_MSGTYPE_VALUECHANGED           (L"valuechanged")
 
-#define DUI_MSGTYPE_SELECTCHANGED 		   (_T("selectchanged"))
+#define DUI_MSGTYPE_SELECTCHANGED 		   (L"selectchanged")
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -169,13 +169,13 @@ protected:                                                                \
 
 //声明结束
 #define DUI_END_MESSAGE_MAP()                                             \
-	{ _T(""), _T(""), DuiSig_end, (DUI_PMSG)0 }                           \
+	{ L"", L"", DuiSig_end, (DUI_PMSG)0 }                           \
 };                                                                        \
 
 
 //定义消息类型--执行函数宏
 #define DUI_ON_MSGTYPE(msgtype, memberFxn)                                \
-	{ msgtype, _T(""), DuiSig_vn, (DUI_PMSG)&memberFxn},                  \
+	{ msgtype, L"", DuiSig_vn, (DUI_PMSG)&memberFxn},                  \
 
 
 //定义消息类型--控件名称--执行函数宏
@@ -207,7 +207,7 @@ protected:                                                                \
 
   //定义timer消息--执行函数宏
 #define DUI_ON_TIMER()                                                    \
-	{ DUI_MSGTYPE_TIMER, _T(""), DuiSig_vn,(DUI_PMSG)&OnTimer },          \
+	{ DUI_MSGTYPE_TIMER, L"", DuiSig_vn,(DUI_PMSG)&OnTimer },          \
 
 
 ///
@@ -217,51 +217,51 @@ protected:                                                                \
 //////////////BEGIN控件名称宏定义//////////////////////////////////////////////////
 ///
 
-#define  DUI_CTR_EDIT                            (_T("Edit"))
-#define  DUI_CTR_LIST                            (_T("List"))
-#define  DUI_CTR_TEXT                            (_T("Text"))
+#define  DUI_CTR_EDIT                            (L"Edit")
+#define  DUI_CTR_LIST                            (L"List")
+#define  DUI_CTR_TEXT                            (L"Text")
 
-#define  DUI_CTR_COMBO                           (_T("Combo"))
-#define  DUI_CTR_LABEL                           (_T("Label"))
+#define  DUI_CTR_COMBO                           (L"Combo")
+#define  DUI_CTR_LABEL                           (L"Label")
 
-#define  DUI_CTR_BUTTON                          (_T("Button"))
-#define  DUI_CTR_SLIDER                          (_T("Slider"))
+#define  DUI_CTR_BUTTON                          (L"Button")
+#define  DUI_CTR_SLIDER                          (L"Slider")
 
-#define  DUI_CTR_CONTROL                         (_T("Control"))
-#define  DUI_CTR_ACTIVEX                         (_T("ActiveX"))
-#define  DUI_CTR_CHECKBOX                        (_T("CheckBox"))
+#define  DUI_CTR_CONTROL                         (L"Control")
+#define  DUI_CTR_ACTIVEX                         (L"ActiveX")
+#define  DUI_CTR_CHECKBOX                        (L"CheckBox")
 
-#define  DUI_CTR_LISTITEM                        (_T("ListItem"))
-#define  DUI_CTR_PROGRESS                        (_T("Progress"))
-#define  DUI_CTR_RICHEDIT                        (_T("RichEdit"))
-#define  DUI_CTR_COMBOBOX                        (_T("ComboBox"))
-#define  DUI_CTR_DATETIME                        (_T("DateTime"))
-#define  DUI_CTR_TREEVIEW                        (_T("TreeView"))
-#define  DUI_CTR_TREENODE                        (_T("TreeNode"))
+#define  DUI_CTR_LISTITEM                        (L"ListItem")
+#define  DUI_CTR_PROGRESS                        (L"Progress")
+#define  DUI_CTR_RICHEDIT                        (L"RichEdit")
+#define  DUI_CTR_COMBOBOX                        (L"ComboBox")
+#define  DUI_CTR_DATETIME                        (L"DateTime")
+#define  DUI_CTR_TREEVIEW                        (L"TreeView")
+#define  DUI_CTR_TREENODE                        (L"TreeNode")
 
-#define  DUI_CTR_CONTAINER                       (_T("Container"))
-#define  DUI_CTR_TABLAYOUT                       (_T("TabLayout"))
-#define  DUI_CTR_SCROLLBAR                       (_T("ScrollBar"))
+#define  DUI_CTR_CONTAINER                       (L"Container")
+#define  DUI_CTR_TABLAYOUT                       (L"TabLayout")
+#define  DUI_CTR_SCROLLBAR                       (L"ScrollBar")
 
-#define  DUI_CTR_LISTHEADER                      (_T("ListHeader"))
-#define  DUI_CTR_TILELAYOUT                      (_T("TileLayout"))
-#define  DUI_CTR_WEBBROWSER                      (_T("WebBrowser"))
+#define  DUI_CTR_LISTHEADER                      (L"ListHeader")
+#define  DUI_CTR_TILELAYOUT                      (L"TileLayout")
+#define  DUI_CTR_WEBBROWSER                      (L"WebBrowser")
 
-#define  DUI_CTR_CHILDLAYOUT                     (_T("ChildLayout"))
-#define  DUI_CTR_LISTELEMENT                     (_T("ListElement"))
-#define  DUI_CTR_RADIOBUTTON                     (_T("RadioButton"))
+#define  DUI_CTR_CHILDLAYOUT                     (L"ChildLayout")
+#define  DUI_CTR_LISTELEMENT                     (L"ListElement")
+#define  DUI_CTR_RADIOBUTTON                     (L"RadioButton")
 
-#define  DUI_CTR_DIALOGLAYOUT                    (_T("DialogLayout"))
+#define  DUI_CTR_DIALOGLAYOUT                    (L"DialogLayout")
 
-#define  DUI_CTR_VERTICALLAYOUT                  (_T("VerticalLayout"))
-#define  DUI_CTR_LISTHEADERITEM                  (_T("ListHeaderItem"))
+#define  DUI_CTR_VERTICALLAYOUT                  (L"VerticalLayout")
+#define  DUI_CTR_LISTHEADERITEM                  (L"ListHeaderItem")
 
-#define  DUI_CTR_LISTTEXTELEMENT                 (_T("ListTextElement"))
+#define  DUI_CTR_LISTTEXTELEMENT                 (L"ListTextElement")
 
-#define  DUI_CTR_HORIZONTALLAYOUT                (_T("HorizontalLayout"))
-#define  DUI_CTR_LISTLABELELEMENT                (_T("ListLabelElement"))
+#define  DUI_CTR_HORIZONTALLAYOUT                (L"HorizontalLayout")
+#define  DUI_CTR_LISTLABELELEMENT                (L"ListLabelElement")
 
-#define  DUI_CTR_LISTCONTAINERELEMENT            (_T("ListContainerElement"))
+#define  DUI_CTR_LISTCONTAINERELEMENT            (L"ListContainerElement")
 
 //#define DUI_USE_COMBOBOX
 //#define DUI_USE_DATETIME
