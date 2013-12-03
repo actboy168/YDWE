@@ -1698,14 +1698,7 @@ CListTextElementUI::CListTextElementUI() : m_nLinks(0), m_nHoverLink(-1), m_pOwn
 }
 
 CListTextElementUI::~CListTextElementUI()
-{
-    CDuiString* pText;
-    for( int it = 0; it < m_aTexts.GetSize(); it++ ) {
-        pText = static_cast<CDuiString*>(m_aTexts[it]);
-        if( pText ) delete pText;
-    }
-    m_aTexts.Empty();
-}
+{ }
 
 LPCTSTR CListTextElementUI::GetClass() const
 {
@@ -1719,9 +1712,8 @@ UINT CListTextElementUI::GetControlFlags() const
 
 LPCTSTR CListTextElementUI::GetText(int iIndex) const
 {
-    CDuiString* pText = static_cast<CDuiString*>(m_aTexts.GetAt(iIndex));
-    if( pText ) return pText->GetData();
-    return NULL;
+	if (iIndex < 0 || (size_t)iIndex >= m_aTexts.size()) NULL;
+    return m_aTexts[iIndex].c_str();
 }
 
 void CListTextElementUI::SetText(int iIndex, LPCTSTR pstrText)
@@ -1729,15 +1721,8 @@ void CListTextElementUI::SetText(int iIndex, LPCTSTR pstrText)
     if( m_pOwner == NULL ) return;
     TListInfoUI* pInfo = m_pOwner->GetListInfo();
     if( iIndex < 0 || iIndex >= pInfo->nColumns ) return;
-    while( m_aTexts.GetSize() < pInfo->nColumns ) { m_aTexts.Add(NULL); }
-
-    CDuiString* pText = static_cast<CDuiString*>(m_aTexts[iIndex]);
-    if( (pText == NULL && pstrText == NULL) || (pText && *pText == pstrText) ) return;
-
-	if ( pText ) //by cddjr 2011/10/20
-		pText->Assign(pstrText);
-	else
-		m_aTexts.SetAt(iIndex, new CDuiString(pstrText));
+	m_aTexts.resize(pInfo->nColumns);
+	m_aTexts[iIndex] = pstrText;
     Invalidate();
 }
 
@@ -1747,7 +1732,7 @@ void CListTextElementUI::SetOwner(CControlUI* pOwner)
     m_pOwner = dynamic_cast<IListUI*>(pOwner);
 }
 
-CDuiString* CListTextElementUI::GetLinkContent(int iIndex)
+std::wstring* CListTextElementUI::GetLinkContent(int iIndex)
 {
     if( iIndex >= 0 && iIndex < m_nLinks ) return &m_sLinks[iIndex];
     return NULL;
@@ -1844,17 +1829,17 @@ void CListTextElementUI::DrawItemText(HDC hDC, const RECT& rcItem)
         rcItem.top += pInfo->rcTextPadding.top;
         rcItem.bottom -= pInfo->rcTextPadding.bottom;
 
-        CDuiString strText;//不使用LPCTSTR，否则限制太多 by cddjr 2011/10/20
+        std::wstring strText;//不使用LPCTSTR，否则限制太多 by cddjr 2011/10/20
         if( pCallback ) strText = pCallback->GetItemText(this, m_iIndex, i);
-        else strText.Assign(GetText(i));
-        CRenderEngine::DrawText(hDC, m_pManager, rcItem, strText.GetData(), iTextColor, pInfo->nFont, DT_SINGLELINE | pInfo->uTextStyle);
+        else strText = GetText(i);
+        CRenderEngine::DrawText(hDC, m_pManager, rcItem, strText.c_str(), iTextColor, pInfo->nFont, DT_SINGLELINE | pInfo->uTextStyle);
 
         m_nLinks += nLinks;
         nLinks = lengthof(m_rcLinks) - m_nLinks; 
     }
     for( int i = m_nLinks; i < lengthof(m_rcLinks); i++ ) {
         ::ZeroMemory(m_rcLinks + i, sizeof(RECT));
-        ((CDuiString*)(m_sLinks + i))->Empty();
+        m_sLinks[i].clear();
     }
 }
 

@@ -15,7 +15,7 @@ namespace DuiLib
 		LPCTSTR GetClass() const;
 		UINT GetControlFlags() const;
 
-		CDuiString* GetLinkContent(int iIndex);
+		std::wstring* GetLinkContent(int iIndex);
 
 		void DoEvent(TEventUI& event);
 		SIZE EstimateSize(SIZE szAvailable);
@@ -26,7 +26,8 @@ namespace DuiLib
 		enum { MAX_LINK = 8 };
 		int m_nLinks;
 		RECT m_rcLinks[MAX_LINK];
-		CDuiString m_sLinks[MAX_LINK];
+#pragma warning(suppress:4251)
+		std::wstring m_sLinks[MAX_LINK];
 		int m_nHoverLink;
 	};
 

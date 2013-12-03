@@ -277,7 +277,7 @@ namespace DuiLib
 
 	//************************************
 	// 函数名称: GetItemText
-	// 返回类型: UiLib::CDuiString
+	// 返回类型: std::wstring
 	// 函数说明: 
 	//************************************
 	std::wstring const& CTreeNodeUI::GetItemText() const

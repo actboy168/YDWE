@@ -54,8 +54,8 @@ LPCTSTR UILIB_API DUI__TraceMsg(UINT uMsg);
 class UILIB_API CNotifyPump
 {
 public:
-	bool AddVirtualWnd(CDuiString strName,CNotifyPump* pObject);
-	bool RemoveVirtualWnd(CDuiString strName);
+	bool AddVirtualWnd(const std::wstring& strName,CNotifyPump* pObject);
+	bool RemoveVirtualWnd(const std::wstring& strName);
 	void NotifyPump(TNotifyUI& msg);
 	bool LoopDispatch(TNotifyUI& msg);
 	DUI_DECLARE_MESSAGE_MAP()

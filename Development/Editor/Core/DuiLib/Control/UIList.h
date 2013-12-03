@@ -366,7 +366,7 @@ public:
     void SetText(int iIndex, LPCTSTR pstrText);
 
     void SetOwner(CControlUI* pOwner);
-    CDuiString* GetLinkContent(int iIndex);
+    std::wstring* GetLinkContent(int iIndex);
 
     void DoEvent(TEventUI& event);
     SIZE EstimateSize(SIZE szAvailable);
@@ -376,11 +376,13 @@ public:
 protected:
     enum { MAX_LINK = 8 };
     int m_nLinks;
-    RECT m_rcLinks[MAX_LINK];
-    CDuiString m_sLinks[MAX_LINK];
+	RECT m_rcLinks[MAX_LINK];
+#pragma warning(suppress:4251)
+    std::wstring m_sLinks[MAX_LINK];
     int m_nHoverLink;
-    IListUI* m_pOwner;
-    CStdPtrArray m_aTexts;
+	IListUI* m_pOwner;
+#pragma warning(suppress:4251)
+    std::vector<std::wstring> m_aTexts;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////

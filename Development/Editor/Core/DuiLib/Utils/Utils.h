@@ -111,61 +111,6 @@ namespace DuiLib
 		int m_nAllocated;
 	};
 
-
-	/////////////////////////////////////////////////////////////////////////////////////
-	//
-	class UILIB_API CDuiString
-	{
-	public:
-		enum { MAX_LOCAL_STRING_LEN = 63 };
-
-		CDuiString();
-		CDuiString(const TCHAR ch);
-		CDuiString(const CDuiString& src);
-		CDuiString(LPCTSTR lpsz, int nLen = -1);
-		~CDuiString();
-
-		void Empty();
-		int GetLength() const;
-		bool IsEmpty() const;
-		TCHAR GetAt(int nIndex) const;
-		void Append(LPCTSTR pstr);
-		void Assign(LPCTSTR pstr, int nLength = -1);
-		LPCTSTR GetData() const;
-
-		operator LPCTSTR() const;
-
-		TCHAR operator[] (int nIndex) const;
-		const CDuiString& operator=(const CDuiString& src);
-		const CDuiString& operator=(const TCHAR ch);
-		const CDuiString& operator=(LPCTSTR pstr);
-#ifdef _UNICODE
-		const CDuiString& CDuiString::operator=(LPCSTR lpStr);
-		const CDuiString& CDuiString::operator+=(LPCSTR lpStr);
-#else
-		const CDuiString& CDuiString::operator=(LPCWSTR lpwStr);
-		const CDuiString& CDuiString::operator+=(LPCWSTR lpwStr);
-#endif
-		CDuiString operator+(const CDuiString& src) const;
-		CDuiString operator+(LPCTSTR pstr) const;
-		const CDuiString& operator+=(const CDuiString& src);
-		const CDuiString& operator+=(LPCTSTR pstr);
-		const CDuiString& operator+=(const TCHAR ch);
-
-		bool operator == (LPCTSTR str) const;
-		bool operator != (LPCTSTR str) const;
-		bool operator <= (LPCTSTR str) const;
-		bool operator <  (LPCTSTR str) const;
-		bool operator >= (LPCTSTR str) const;
-		bool operator >  (LPCTSTR str) const;
-
-		int Compare(LPCTSTR pstr) const;
-
-	protected:
-		LPTSTR m_pstr;
-		TCHAR m_szBuffer[MAX_LOCAL_STRING_LEN + 1];
-	};
-
 #pragma warning(push)
 #pragma warning(disable:4251)
 	template <class T> class UILIB_API CStdStringPtrMap : public std::map<std::wstring, T*>

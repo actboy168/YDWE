@@ -749,15 +749,15 @@ void CControlUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 
 CControlUI* CControlUI::ApplyAttributeList(LPCTSTR pstrList)
 {
-	CDuiString sItem;
-	CDuiString sValue;
+	std::wstring sItem;
+	std::wstring sValue;
 	while( *pstrList != _T('\0') ) {
-		sItem.Empty();
-		sValue.Empty();
+		sItem.clear();
+		sValue.clear();
 		while( *pstrList != _T('\0') && *pstrList != _T('=') ) {
 			LPTSTR pstrTemp = ::CharNext(pstrList);
 			while( pstrList < pstrTemp) {
-				sItem += *pstrList++;
+				sItem.push_back(*pstrList++);
 			}
 		}
 		ASSERT( *pstrList == _T('=') );
@@ -767,12 +767,12 @@ CControlUI* CControlUI::ApplyAttributeList(LPCTSTR pstrList)
 		while( *pstrList != _T('\0') && *pstrList != _T('\"') ) {
 			LPTSTR pstrTemp = ::CharNext(pstrList);
 			while( pstrList < pstrTemp) {
-				sValue += *pstrList++;
+				sValue.push_back(*pstrList++);
 			}
 		}
 		ASSERT( *pstrList == _T('\"') );
 		if( *pstrList++ != _T('\"') ) return this;
-		SetAttribute(sItem, sValue);
+		SetAttribute(sItem.c_str(), sValue.c_str());
 		if( *pstrList++ != _T(' ') ) return this;
 	}
 	Invalidate();

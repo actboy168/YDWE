@@ -142,14 +142,14 @@ static const DUI_MSGMAP_ENTRY* DuiFindMessageEntry(const DUI_MSGMAP_ENTRY* lpEnt
 	return pMsgTypeEntry;
 }
 
-bool CNotifyPump::AddVirtualWnd(CDuiString strName,CNotifyPump* pObject)
+bool CNotifyPump::AddVirtualWnd(const std::wstring& strName,CNotifyPump* pObject)
 {
-	return m_VirtualWndMap.Insert(strName.GetData(), pObject);
+	return m_VirtualWndMap.Insert(strName.c_str(), pObject);
 }
 
-bool CNotifyPump::RemoveVirtualWnd(CDuiString strName)
+bool CNotifyPump::RemoveVirtualWnd(const std::wstring& strName)
 {
-	return m_VirtualWndMap.Remove(strName);
+	return m_VirtualWndMap.Remove(strName.c_str());
 }
 
 bool CNotifyPump::LoopDispatch(TNotifyUI& msg)
