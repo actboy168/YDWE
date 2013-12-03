@@ -95,7 +95,7 @@ namespace DuiLib
 		}
 		else if (uMsg == WM_KEYUP && (wParam == VK_DELETE || wParam == VK_BACK))
 		{
-			LRESULT lRes = ::DefWindowProc(m_hWnd, uMsg, wParam, lParam);
+			LRESULT lRes = ::DefWindowProcW(m_hWnd, uMsg, wParam, lParam);
 			m_pOwner->m_nDTUpdateFlag = DT_DELETE;
 			m_pOwner->UpdateText();
 			PostMessage(WM_CLOSE);
@@ -103,7 +103,7 @@ namespace DuiLib
 		}
 		else if (uMsg == WM_KEYUP && wParam == VK_ESCAPE)
 		{
-			LRESULT lRes = ::DefWindowProc(m_hWnd, uMsg, wParam, lParam);
+			LRESULT lRes = ::DefWindowProcW(m_hWnd, uMsg, wParam, lParam);
 			m_pOwner->m_nDTUpdateFlag = DT_KEEP;
 			PostMessage(WM_CLOSE);
 			return lRes;
@@ -137,7 +137,7 @@ namespace DuiLib
 
 	LRESULT CDateTimeWnd::OnKillFocus(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
-		LRESULT lRes = ::DefWindowProc(m_hWnd, uMsg, wParam, lParam);
+		LRESULT lRes = ::DefWindowProcW(m_hWnd, uMsg, wParam, lParam);
 		if (m_pOwner->m_nDTUpdateFlag == DT_NONE)
 		{
 			::SendMessageW(m_hWnd, DTM_GETSYSTEMTIME, 0, (LPARAM)&m_pOwner->m_sysTime);

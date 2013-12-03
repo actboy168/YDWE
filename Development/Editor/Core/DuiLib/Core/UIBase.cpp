@@ -367,7 +367,7 @@ LRESULT CALLBACK CWindowWnd::WindowProc(HWND hWnd, UINT uMsg,  WPARAM wParam, LP
 
 	if (uMsg == WM_NCDESTROY)
 	{
-		LRESULT lRes = ::DefWindowProc(pThis->m_hWnd, uMsg, wParam, lParam);
+		LRESULT lRes = ::DefWindowProcW(pThis->m_hWnd, uMsg, wParam, lParam);
 		pThis->m_hWnd = NULL;
 		return lRes;
 	}
@@ -414,7 +414,7 @@ void CWindowWnd::ResizeClient(int cx /*= -1*/, int cy /*= -1*/)
 
 LRESULT CWindowWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-    return ::DefWindowProc(m_hWnd, uMsg, wParam, lParam);
+    return ::DefWindowProcW(m_hWnd, uMsg, wParam, lParam);
 }
 
 void CWindowWnd::OnFinalMessage(HWND /*hWnd*/)

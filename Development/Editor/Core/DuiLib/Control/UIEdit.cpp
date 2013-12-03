@@ -125,7 +125,7 @@ namespace DuiLib
 
 	LRESULT CEditWnd::OnKillFocus(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
-		LRESULT lRes = ::DefWindowProc(m_hWnd, uMsg, wParam, lParam);
+		LRESULT lRes = ::DefWindowProcW(m_hWnd, uMsg, wParam, lParam);
 		PostMessage(WM_CLOSE);
 		return lRes;
 	}
@@ -135,7 +135,7 @@ namespace DuiLib
 		if( !m_bInit ) return 0;
 		if( m_pOwner == NULL ) return 0;
 		// Copy text back
-		int cchLen = ::GetWindowTextLength(m_hWnd) + 1;
+		int cchLen = ::GetWindowTextLengthW(m_hWnd) + 1;
 		const wchar_t* pstr = static_cast<const wchar_t*>(_alloca(cchLen * sizeof(wchar_t)));
 		ASSERT(pstr);
 		if( pstr == NULL ) return 0;
@@ -215,7 +215,7 @@ namespace DuiLib
 
 					if( PtInRect(&m_rcItem, event.ptMouse) )
 					{
-						int nSize = GetWindowTextLength(*m_pWindow);
+						int nSize = ::GetWindowTextLengthW(*m_pWindow);
 						if( nSize == 0 )
 							nSize = 1;
 
@@ -225,7 +225,7 @@ namespace DuiLib
 				else if( m_pWindow != NULL )
 				{
 #if 1
-					int nSize = GetWindowTextLength(*m_pWindow);
+					int nSize = ::GetWindowTextLengthW(*m_pWindow);
 					if( nSize == 0 )
 						nSize = 1;
 
