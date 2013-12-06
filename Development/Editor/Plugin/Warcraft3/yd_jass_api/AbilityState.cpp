@@ -302,7 +302,10 @@ namespace base { namespace warcraft3 { namespace japi {
 
 				if (rf_is_valid(rf))
 				{
-					timeout(rf) = jass::to_real(jass::from_real(current_time(rf)) + value);
+					jass::jreal_t cooldown = jass::to_real(value);
+					uintptr_t ability = (uintptr_t)(this) - 0xD0;
+					aero::this_call<void>(*(uintptr_t*)(*(uintptr_t*)(this) + 0x08), this, *(uintptr_t*)((uintptr_t)this + 0x08), &cooldown, 0xD01BEu, 0, 0);
+
 					return true;
 				}
 			}
