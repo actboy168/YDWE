@@ -2,8 +2,37 @@
 #include "../misc/storm.h"
 #include <cstring>
 #include <base/util/singleton.h>
+#include <base/warcraft3/jass.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
+
+	static void* l_alloc(void* /*ud*/, void* ptr, size_t /*osize*/, size_t nsize) 
+	{
+		if (nsize == 0) 
+		{
+			free(ptr);
+			return NULL;
+		}
+		else
+		{
+			return realloc(ptr, nsize);
+		}
+	}
+
+	static int panic(lua_State *L) 
+	{
+		luai_writestringerror("PANIC: unprotected error in call to Lua API (%s)\n", lua_tostring(L, -1));
+		return 0;
+	}
+
+	lua_State* luaL_newstate2()
+	{
+		unsigned int hi = jass::call("GetRandomInt", 0, 0xFFFF);
+		unsigned int lo = jass::call("GetRandomInt", 0, 0xFFFF);
+		lua_State *L = lua_newstate2(l_alloc, NULL, (hi << 16) | lo);
+		if (L) lua_atpanic(L, &panic);
+		return L;
+	}
 
 	const char* findtable(lua::state* ls, int idx, const char *fname, int szhint) 
 	{
