@@ -123,6 +123,7 @@
     <Lib />
     <Link>
       <OutputFile>..\bin\$(PlatformName)\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
