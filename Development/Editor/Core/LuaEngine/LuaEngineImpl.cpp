@@ -43,19 +43,6 @@ int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
 	return results;
 }
 
-void LuaDoString(lua_State* pState, const char* str, size_t size, const char* name)
-{
-	if (luaL_loadbuffer(pState, str, size, name))
-	{
-		throw luabind::error(pState);
-	}
-
-	if (lua_pcall(pState, 0, LUA_MULTRET, 0))
-	{
-		throw luabind::error(pState);
-	}
-}
-
 LuaEngineImpl::LuaEngineImpl()
 	: state_(nullptr)
 	, logger_(nullptr)
@@ -200,7 +187,16 @@ bool LuaEngineImpl::LoadFile(boost::filesystem::path const& file_path)
 	try
 	{
 		std::vector<char> buffer = base::file::read_stream(file_path).read<std::vector<char>>();
-		LuaDoString(state_, buffer.data(), buffer.size(), name.c_str());
+		if (luaL_loadbuffer(state_, buffer.data(), buffer.size(), name.c_str()))
+		{
+			throw luabind::error(state_);
+		}
+
+		if (lua_pcall(state_, 0, LUA_MULTRET, 0))
+		{
+			throw luabind::error(state_);
+		}
+
 		return true;
 	}
 	catch (luabind::error const& e)
