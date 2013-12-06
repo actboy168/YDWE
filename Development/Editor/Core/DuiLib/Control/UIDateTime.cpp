@@ -208,7 +208,7 @@ namespace DuiLib
 			SetText(L"");
 		else if (m_nDTUpdateFlag == DT_UPDATE)
 		{
-			SetText(base::util::format(L"%4d-%02d-%02d", m_sysTime.wYear, m_sysTime.wMonth, m_sysTime.wDay, m_sysTime.wHour, m_sysTime.wMinute).c_str());
+			SetText(base::format(L"%4d-%02d-%02d", m_sysTime.wYear, m_sysTime.wMonth, m_sysTime.wDay, m_sysTime.wHour, m_sysTime.wMinute).c_str());
 		}
 	}
 

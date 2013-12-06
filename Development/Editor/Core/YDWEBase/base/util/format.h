@@ -11,7 +11,7 @@
 #pragma warning(push)
 #pragma warning(disable:4702)
 
-namespace base { namespace util { namespace format_detail {
+namespace base { namespace format_detail {
 
 struct default_report_error
 {
@@ -539,14 +539,14 @@ private:
 		return c+1;
 	}
 
-	hybrid_array<char_t, 512> buffer_;
-	hybrid_array<char_t, 16>  format_;
-	hybrid_array<char_t, 16>  temp_;
-	const char_t*             fmt_;
-	std::size_t               flags_;
-	std::ptrdiff_t            width_;
-	std::ptrdiff_t            precision_;
-	char_t                    ch_;
+	util::hybrid_array<char_t, 512> buffer_;
+	util::hybrid_array<char_t, 16>  format_;
+	util::hybrid_array<char_t, 16>  temp_;
+	const char_t*                   fmt_;
+	std::size_t                     flags_;
+	std::ptrdiff_t                  width_;
+	std::ptrdiff_t                  precision_;
+	char_t                          ch_;
 };
 
 inline std::ostream& standard_output(const char*) { return std::cout; }
@@ -584,6 +584,6 @@ BOOST_PP_REPEAT(16, DEFINE_FORMAT_CREATER, ~)
 #undef DEFINE_FORMAT_ACCEPT
 #undef DEFINE_FORMAT_CREATER
 
-}}
+}
 
 #pragma warning(pop)

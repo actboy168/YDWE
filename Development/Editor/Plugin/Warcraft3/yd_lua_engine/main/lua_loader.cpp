@@ -109,7 +109,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 	{
 		lua::state* ls = jass_state_s::instance().get();
 
-		std::string str_script = util::format("return (%s)", jass::from_trigstring(jass::from_string(script)));
+		std::string str_script = format("return (%s)", jass::from_trigstring(jass::from_string(script)));
 		if (luaL_loadbuffer(ls->self(), str_script.c_str(), str_script.size(), str_script.c_str()) != LUA_OK)
 		{
 			printf("%s\n", ls->tostring(-1));

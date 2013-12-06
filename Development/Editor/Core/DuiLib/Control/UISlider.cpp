@@ -187,21 +187,21 @@ namespace DuiLib
 		rcThumb.bottom -= m_rcItem.top;
 		if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
 			if( m_sThumbPushedImage ) {
-				m_sImageModify = base::util::format(L"dest='%d,%d,%d,%d'", rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom);
+				m_sImageModify = base::format(L"dest='%d,%d,%d,%d'", rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom);
 				if( !DrawImage(hDC, *m_sThumbPushedImage.get(), m_sImageModify.c_str()) ) m_sThumbPushedImage.reset();
 				else return;
 			}
 		}
 		else if( (m_uButtonState & UISTATE_HOT) != 0 ) {
 			if( m_sThumbHotImage ) {
-				m_sImageModify = base::util::format(L"dest='%d,%d,%d,%d'", rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom);
+				m_sImageModify = base::format(L"dest='%d,%d,%d,%d'", rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom);
 				if( !DrawImage(hDC, *m_sThumbHotImage.get(), m_sImageModify.c_str()) ) m_sThumbHotImage.reset();
 				else return;
 			}
 		}
 
 		if( m_sThumbImage ) {
-			m_sImageModify = base::util::format(L"dest='%d,%d,%d,%d'", rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom);
+			m_sImageModify = base::format(L"dest='%d,%d,%d,%d'", rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom);
 			if( !DrawImage(hDC, *m_sThumbImage.get(), m_sImageModify.c_str()) ) m_sThumbImage.reset();
 			else return;
 		}

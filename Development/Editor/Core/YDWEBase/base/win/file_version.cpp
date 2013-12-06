@@ -104,7 +104,7 @@ namespace base { namespace win {
 	{
 		assert(value_ptr);
 		UINT size;
-		std::wstring query = util::format(L"\\StringFileInfo\\%04x%04x\\%s", language, code_page, key);
+		std::wstring query = format(L"\\StringFileInfo\\%04x%04x\\%s", language, code_page, key);
 		return (!!::VerQueryValueW(version_info_.get(), (LPWSTR)(LPCWSTR)query.c_str(), (LPVOID*)value_ptr, &size));
 	}
 

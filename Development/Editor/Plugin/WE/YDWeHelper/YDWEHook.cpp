@@ -50,7 +50,7 @@ static bool InstallPatch(void *searchStart, boost::uint32_t searchLength, boost:
 	void *patchPoint = MemoryPatternSearch(searchStart, searchLength, patchPattern, patternLength);
 	if (patchPoint)
 	{
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found patch point: 0x%08X", reinterpret_cast<uintptr_t>(patchPoint)));
+		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found patch point: 0x%08X", reinterpret_cast<uintptr_t>(patchPoint)));
 
 		// Patch memory
 		bool patchResult = MemoryPatchAndVerify(patchPoint, patch, patchLength);
@@ -86,7 +86,7 @@ static void InitSectionInfo()
 		pgWeTextSectionBase = (void *)result->get<0>();
 		gWeTextSectionLength = result->get<1>();
 
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("WE .text section start address: 0x%08X. length 0x%08X", pgWeTextSectionBase, gWeTextSectionLength));
+		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("WE .text section start address: 0x%08X. length 0x%08X", pgWeTextSectionBase, gWeTextSectionLength));
 	}
 	else
 	{
@@ -99,7 +99,7 @@ static void InitSectionInfo()
 		pgWeDataSectionBase = (void *)result->get<0>();
 		gWeDataSectionLength = result->get<1>();
 
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("WE .data section start address: 0x%08X. length 0x%08X", pgWeDataSectionBase, gWeDataSectionLength));
+		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("WE .data section start address: 0x%08X. length 0x%08X", pgWeDataSectionBase, gWeDataSectionLength));
 	}
 	else
 	{
@@ -370,26 +370,26 @@ static void InitInlineHook()
 
 	pgTrueWeGetSystemParameter = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, 
 		&weGetSystemParameterPattern[0], sizeof(weGetSystemParameterPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeGetSystemParameter at 0x%08X.", pgTrueWeGetSystemParameter));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeGetSystemParameter at 0x%08X.", pgTrueWeGetSystemParameter));
 	INSTALL_INLINE_HOOK(WeGetSystemParameter)
 
 	pgTrueWeVerifyMapCellsLimit = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, 
 		gWeTextSectionLength, &weVerifyMapCellsLimitPattern[0], sizeof(weVerifyMapCellsLimitPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeVerifyMapCellsLimit at 0x%08X.", pgTrueWeVerifyMapCellsLimit));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeVerifyMapCellsLimit at 0x%08X.", pgTrueWeVerifyMapCellsLimit));
 	boost::uint32_t callOffset = aero::offset_element_sum<boost::uint32_t>(pgTrueWeVerifyMapCellsLimit, 6);
 	pgMapCellsGetUnknownGlobalFlag = aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, callOffset + 10);
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found GetUnkownFlag at 0x%08X.", pgMapCellsGetUnknownGlobalFlag));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found GetUnkownFlag at 0x%08X.", pgMapCellsGetUnknownGlobalFlag));
 	pgWeVerifyMapCellsLimitPatcher.reset(new CMemoryPatch(aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, 3), "\x90\x90", 2));
 	pgWeVerifyMapCellsLimitPatcher->patch();
 	INSTALL_INLINE_HOOK(WeVerifyMapCellsLimit)
 
 	pgTrueWeTriggerNameCheck = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, 
 		&weTriggerNameCheckPattern[0], sizeof(weTriggerNameCheckPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeTriggerNameCheck at 0x%08X.", pgTrueWeTriggerNameCheck));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeTriggerNameCheck at 0x%08X.", pgTrueWeTriggerNameCheck));
 	INSTALL_INLINE_HOOK(WeTriggerNameCheck)
 
 	pgTrueWeTriggerNameInputCharCheck = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, &weTriggerNameInputCharCheckPattern[0], sizeof(weTriggerNameInputCharCheckPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeTriggerNameInputCharCheck at 0x%08X.", pgTrueWeTriggerNameInputCharCheck));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeTriggerNameInputCharCheck at 0x%08X.", pgTrueWeTriggerNameInputCharCheck));
 	pgWeTriggerNameInputCharCheckPatcher.reset(new CMemoryPatch(
 		aero::pointer_sum<aero::pointer_type>(pgTrueWeTriggerNameInputCharCheck, 3),
 		"\x90\x90", 2)
@@ -398,23 +398,23 @@ static void InitInlineHook()
 	INSTALL_INLINE_HOOK(WeTriggerNameInputCharCheck)
 
 	pgTrueWeSetWindowCaption = (uintptr_t)0x00433A00;//MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, &weSetWindowCaptionPattern[0], sizeof(weSetWindowCaptionPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeSetWindowCaption at 0x%08X.", pgTrueWeSetWindowCaption));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeSetWindowCaption at 0x%08X.", pgTrueWeSetWindowCaption));
 	INSTALL_INLINE_HOOK(WeSetWindowCaption)
 
 	pgTrueWeSetMenuItem = (uintptr_t)0x0042AA10;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeSetMenuItem at 0x%08X.", pgTrueWeSetMenuItem));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeSetMenuItem at 0x%08X.", pgTrueWeSetMenuItem));
 	INSTALL_INLINE_HOOK(WeSetMenuItem)
 
 	pgTrueWeStringCompare = (uintptr_t)0x004D2D90;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeStringCompare at 0x%08X.", pgTrueWeStringCompare));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeStringCompare at 0x%08X.", pgTrueWeStringCompare));
 	INSTALL_INLINE_HOOK(WeStringCompare)
 
 	pgTrueWeTriggerEditorEditboxCopy = (uintptr_t)0x0071FE90;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found TriggerEditorEditboxCopy at 0x%08X.", pgTrueWeTriggerEditorEditboxCopy));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found TriggerEditorEditboxCopy at 0x%08X.", pgTrueWeTriggerEditorEditboxCopy));
 	INSTALL_INLINE_HOOK(WeTriggerEditorEditboxCopy)
 
 	pgTrueWeUtf8ToAnsi = (uintptr_t)0x00429CD0;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::util::format("Found WeUtf8ToAnsi at 0x%08X.", pgTrueWeUtf8ToAnsi));
+	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeUtf8ToAnsi at 0x%08X.", pgTrueWeUtf8ToAnsi));
 	INSTALL_INLINE_HOOK(WeUtf8ToAnsi)
 
 	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "Installing inline hooks complete.");

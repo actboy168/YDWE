@@ -93,9 +93,9 @@ namespace DuiLib
 
 		if( m_sForeImage ) {
 			if (m_bStretchForeImage)
-				m_sForeImageModify = base::util::format(L"dest='%d,%d,%d,%d'", rc.left, rc.top, rc.right, rc.bottom);
+				m_sForeImageModify = base::format(L"dest='%d,%d,%d,%d'", rc.left, rc.top, rc.right, rc.bottom);
 			else
-				m_sForeImageModify = base::util::format(L"dest='%d,%d,%d,%d' source='%d,%d,%d,%d'", , rc.left, rc.top, rc.right, rc.bottom, rc.left, rc.top, rc.right, rc.bottom);
+				m_sForeImageModify = base::format(L"dest='%d,%d,%d,%d' source='%d,%d,%d,%d'", , rc.left, rc.top, rc.right, rc.bottom, rc.left, rc.top, rc.right, rc.bottom);
 
 			if( !DrawImage(hDC, *m_sForeImage.get(), m_sForeImageModify.c_str()) ) m_sForeImage.reset();
 			else return;

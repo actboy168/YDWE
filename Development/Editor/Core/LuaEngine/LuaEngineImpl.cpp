@@ -104,9 +104,9 @@ bool LuaEngineImpl::InitializeInfo()
 {
 	base::win::version_number vn = base::win::get_version_number();
 
-	LOG4CXX_INFO(logger_, base::util::format(L"YDWE Script engine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]));
+	LOG4CXX_INFO(logger_, base::format(L"YDWE Script engine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]));
 	LOG4CXX_INFO(logger_, "Compiled at " __TIME__ ", " __DATE__);
-	LOG4CXX_INFO(logger_, base::util::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build));
+	LOG4CXX_INFO(logger_, base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build));
 
 	return true;
 }

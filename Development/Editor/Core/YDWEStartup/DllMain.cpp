@@ -62,7 +62,7 @@ static void ShowSplash(fs::path const& ydwe_path)
 				base::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
 				cimg_library::CImg<boost::uint8_t> splashImage = cimg_library::CImg<boost::uint8_t>::get_load_bmp(f);
 				boost::uint8_t color[] = { 255, 255, 255 };
-				splashImage.draw_text(10, 10, base::util::format("YDWE %d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), color, 0, 1, 20);
+				splashImage.draw_text(10, 10, base::format("YDWE %d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), color, 0, 1, 20);
 				cimg_library::CImgDisplay display(splashImage, "YDWE", 3, false, true);
 				display.move(
 					(cimg_library::CImgDisplay::screen_width() - display.width()) / 2,
