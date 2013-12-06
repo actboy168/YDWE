@@ -23,7 +23,7 @@
 #include <log4cxx/helpers/fileinputstream.h>
 #pragma warning(pop)
 
-uintptr_t RealLuaPcall = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"luacore.dll"), "lua_pcall");
+uintptr_t RealLuaPcall = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"luacore.dll"), "lua_pcallk");
 int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
 {
 	EXCEPTION_POINTERS* xp = nullptr;
