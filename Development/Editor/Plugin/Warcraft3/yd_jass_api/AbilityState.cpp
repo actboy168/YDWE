@@ -6,6 +6,7 @@
 #include <base/warcraft3/jass.h>
 #include <base/hook/inline.h>
 #include <array>
+#include <string>
 
 namespace base { namespace warcraft3 { namespace japi {
 
@@ -266,11 +267,6 @@ namespace base { namespace warcraft3 { namespace japi {
 		return 0;
 	}
 
-	bool IsVirtualFunctionTable(uintptr_t ptr)
-	{
-		return (get_war3_searcher().base() & 0xFF000000) == (ptr & 0xFF000000);
-	}
-
 	struct CAgentTimer
 	{
 	public:
@@ -314,8 +310,23 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	private:
 		bool is_valid()
-		{ 
-			return this && IsVirtualFunctionTable(*(uintptr_t*)this);
+		{
+			static uintptr_t s_vft = 0;
+
+			if (!this) return false;
+
+			if (s_vft)
+			{
+				return (s_vft == *(uintptr_t*)this);
+			}
+
+			const char* name = get_class_name((uintptr_t)this);
+			if (name && std::string(name) == ".?AVCAgentTimer@@")
+			{
+				s_vft = *(uintptr_t*)this;
+				return true;
+			}
+			return false;
 		}
 
 		bool rf_is_valid(uintptr_t rf)

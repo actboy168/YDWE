@@ -240,4 +240,30 @@ namespace base { namespace warcraft3 {
 	{
 		return util::singleton_nonthreadsafe<war3_searcher>::instance();
 	}
+
+	namespace detail
+	{
+		bool is_valid_ptr(uintptr_t ptr)
+		{
+			return (get_war3_searcher().base() & 0xFF000000) == (ptr & 0xFF000000);
+		}
+	}
+
+	const char* get_class_name(uintptr_t ptr)
+	{
+		if (ptr && !::IsBadReadPtr(reinterpret_cast<const void*>(ptr), sizeof(uintptr_t)))
+		{
+			ptr = *(uintptr_t*)ptr - 0x04;
+			if (detail::is_valid_ptr(ptr))
+			{
+				ptr = *(uintptr_t*)ptr + 0x0C;
+				if (detail::is_valid_ptr(ptr))
+				{
+					ptr = *(uintptr_t*)ptr + 0x08;
+					return (const char*)ptr;
+				}
+			}
+		}
+		return nullptr;
+	}
 }}
