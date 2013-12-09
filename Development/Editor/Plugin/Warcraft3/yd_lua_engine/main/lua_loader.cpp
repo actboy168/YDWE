@@ -20,7 +20,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		jass_state()
 			: state_(nullptr)
 		{
-			register_game_reset_event([this]()
+			register_game_reset_event([this](uintptr_t)
 			{
 				if (state_)
 				{

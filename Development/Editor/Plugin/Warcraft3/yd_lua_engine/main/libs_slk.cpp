@@ -38,7 +38,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				s_ptr_.reset(new slk_manager());
 				DO_ONCE_NOTHREADSAFE()
 				{
-					register_game_reset_event([]{ s_ptr_.reset(); });
+					register_game_reset_event([](uintptr_t){ s_ptr_.reset(); });
 				}
 			}
 

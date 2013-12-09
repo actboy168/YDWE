@@ -37,7 +37,7 @@ namespace base { namespace warcraft3 { namespace jass {
 			jump_function_id = get_string_hashtable()->get("IsUnitInRangeXY")->index_;
 			table_hook("IsUnitInRangeXY", (uintptr_t*)&detail::RealIsUnitInRangeXY, (uintptr_t)detail::FakeIsUnitInRangeXY);
 
-			register_game_reset_event([&]()
+			register_game_reset_event([&](uintptr_t)
 			{
 				initialized = false;
 				trampoline_mapping.clear();

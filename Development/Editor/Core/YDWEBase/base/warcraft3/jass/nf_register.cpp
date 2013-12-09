@@ -5,18 +5,19 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <aero/function/fp_call.hpp>
 
-namespace base { 
-namespace warcraft3 { namespace jass { namespace nf_register {
+namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 
-	util::signal<void, void> event_hook;
-	util::signal<void, void> event_add;
-	uintptr_t                thread_id          = 0;
-	uintptr_t                stat               = 0;
-	uintptr_t                real_storm_alloc   = 0;
-	uintptr_t                real_tls_get_value = 0;
+	util::signal<void, uintptr_t> event_hook;
+	util::signal<void, void>      event_add;
+	uintptr_t                     thread_id          = 0;
+	uintptr_t                     stat               = 0;
+	uintptr_t                     real_storm_alloc   = 0;
+	uintptr_t                     real_tls_get_value = 0;
 
 	uintptr_t __stdcall fake_storm_alloc(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
 	{
+		uintptr_t retval = aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+
 		if ((amount == 176) 
 			&& (log_line == 668)
 			&& (default_value == 0)
@@ -35,16 +36,18 @@ namespace warcraft3 { namespace jass { namespace nf_register {
 					&& (strcmp(log_filename, ".\\Agile.cpp") == 0))
 				{
 					stat = 0;
-					event_hook();
+					event_hook(retval);
 				}
 			}
 		}
 
-		return aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+		return retval;
 	}
 
 	uintptr_t __stdcall fake_storm_alloc_122(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
 	{
+		uintptr_t retval = aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+
 		if ((amount == 176) 
 			&& (log_line == 667)
 			&& (default_value == 0)
@@ -63,16 +66,17 @@ namespace warcraft3 { namespace jass { namespace nf_register {
 					&& (strcmp(log_filename, ".\\Agile.cpp") == 0))
 				{
 					stat = 0;
-					event_hook();
+					event_hook(retval);
 				}
 			}
 		}
 
-		return aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+		return retval;
 	}
 
 	uintptr_t __stdcall fake_storm_alloc_120(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
 	{
+		uintptr_t retval = aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
 		if ((amount == 176) 
 			&& (log_line == 667)
 			&& (default_value == 0)
@@ -91,12 +95,12 @@ namespace warcraft3 { namespace jass { namespace nf_register {
 					&& (strcmp(log_filename, "E:\\Drive1\\temp\\buildwar3x\\engine\\Source\\Agile\\Agile.cpp") == 0))
 				{
 					stat = 0;
-					event_hook();
+					event_hook(retval);
 				}
 			}
 		}
 
-		return aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+		return retval;
 	}
 
 	uintptr_t __stdcall fake_tls_get_value(uint32_t tls_index)
@@ -142,5 +146,4 @@ namespace warcraft3 { namespace jass { namespace nf_register {
 		return false;
 	}
 
-}}}
-} 
+}}}} 

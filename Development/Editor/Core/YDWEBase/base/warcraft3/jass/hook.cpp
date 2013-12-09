@@ -179,7 +179,7 @@ namespace warcraft3 { namespace jass {
 					}
 				});
 
-				nf_register::event_hook.connect([&]()
+				nf_register::event_hook.connect([&](uintptr_t)
 				{
 					foreach (hook_info const& it, hook_info_list)
 					{
