@@ -45,8 +45,9 @@ namespace locvar
 
 		char buff[260];
 
-		if (s.mother_id == (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple))
+		if ((s.mother_id == (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple)) && (s.prev_handle_string != nullptr))
 		{
+			register_var[s.name][var_name] = type_name;
 			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, s.prev_handle_string, SStrHash(var_name));
 		}
 		else if ((s.mother_id == CC_GUIID_YDWETimerStartMultiple) || (s.mother_id == CC_GUIID_YDWERegisterTriggerMultiple))
