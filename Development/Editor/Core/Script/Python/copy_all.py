@@ -58,6 +58,7 @@ def copy_all(configuration):
     copy_lib_dll('Lua',          configuration)
     copy_lib_dll('LuaBind',      configuration)
     copy_lib_dll('StormLib',     configuration)
+    fs.copy_file(path['OpenSource'] / 'luaffi' / 'ffi.dll', path['ResultCore'] / 'modules' / 'ffi.dll')
     copy_lua_script()
     copy_log_script()
     copy_boost_preprocessor()
