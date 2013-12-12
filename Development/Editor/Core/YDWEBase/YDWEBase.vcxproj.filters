@@ -65,6 +65,9 @@
     <Filter Include="base\thread">
       <UniqueIdentifier>{9ca77287-10cc-4b02-bc03-1ed154a1e30e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\lockfree">
+      <UniqueIdentifier>{5fe812b9-677b-4e06-86a2-333736d0c16e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -466,6 +469,9 @@
     </ClInclude>
     <ClInclude Include="base\thread\thread_exception.h">
       <Filter>base\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="base\lockfree\queue.h">
+      <Filter>base\lockfree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
