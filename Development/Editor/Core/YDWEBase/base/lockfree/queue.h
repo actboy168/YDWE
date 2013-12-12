@@ -40,7 +40,7 @@ namespace base { namespace lockfree { namespace details {
 		inline ~atomic_ptr_t () { }
 		inline void set  (T *ptr_) { this->ptr = ptr_; }
 		inline T *xchg (T *val) { return (T*) _InterlockedExchangePointer ((PVOID*) &ptr, val); }
-		inline T *cas  (T *cmp, T *val) { return (T*) _InterlockedCompareExchangePointer ( (volatile PVOID*) &ptr, val, cmp); }
+		inline T *cas  (T *cmp, T *val) { return (T*) _InterlockedCompareExchangePointer ((volatile PVOID*) &ptr, val, cmp); }
 	private:
 		volatile T *ptr;
 	};
@@ -57,7 +57,7 @@ namespace base { namespace lockfree { namespace details {
 		: public _Alloc::template rebind<yqueue_chunk_t<T, _Size> >::other
 	{
 	public:
-		typedef yqueue_chunk_t<T, _Size>                      _Chunt;
+		typedef yqueue_chunk_t<T, _Size>                        _Chunt;
 		typedef typename _Alloc::template rebind<_Chunt>::other _Base;
 
 	public:
