@@ -1,7 +1,7 @@
-#ifndef YDWEYDWEAbilityStateIncluded 
-#define YDWEYDWEAbilityStateIncluded
+#ifndef YDWEAbilityStateIncluded 
+#define YDWEAbilityStateIncluded
 
-library YDWEYDWEAbilityState
+library YDWEAbilityState
 	globals
 		private constant integer ABILITY_STATE_COOLDOWN         = 1
 		
@@ -92,4 +92,4 @@ library YDWEYDWEAbilityState
 	
 endlibrary
 
-#endif  /// YDWEYDWEAbilityStateIncluded
+#endif  /// YDWEAbilityStateIncluded
