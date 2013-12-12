@@ -56,12 +56,29 @@ struct event_damage_data
 	bool                    physical;
 	bool                    change;
 	war3_event_damage_data* data;
+	uint32_t                old_amount;
 
 	event_damage_data(uint32_t is_physical, war3_event_damage_data* ptr)
 		: physical(!!is_physical)
 		, change(false)
 		, data(ptr)
+		, old_amount(0)
 	{ }
+
+	bool is_same(uint32_t* damage1, uint32_t* damage2) const
+	{
+		if (!old_amount) 
+		{
+			return true;
+		}
+		
+		if ((*damage1 ^ *damage2) != 0x80000000)
+		{
+			return false;
+		}
+
+		return old_amount == *damage1;
+	}
 
 	uint32_t damage_type()
 	{
@@ -100,7 +117,7 @@ uint32_t __fastcall FakeUnitDamageDoneFunc(uint32_t _this, uint32_t _edx, uint32
 	if (!g_edd.empty())
 	{
 		event_damage_data& edd = g_edd.back();
-		if (edd.change)
+		if (edd.change && edd.is_same(damage1, damage2))
 		{
 			edd.change = false;
 			float d = jass::from_real(edd.data->amount);
@@ -179,8 +196,13 @@ bool __cdecl EXSetEventDamage(uint32_t value)
 		return false;
 	}
 
-	g_edd.back().change = true;
-	g_edd.back().data->amount = *(uint32_t*)value;
+	event_damage_data& edd = g_edd.back();
+	edd.change = true;
+	if (!edd.old_amount)
+	{
+		edd.old_amount = edd.data->amount;
+	}
+	edd.data->amount = *(uint32_t*)value;
 
 	return true;
 }
