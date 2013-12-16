@@ -1,19 +1,17 @@
 #include <base/warcraft3/directory.h>
 #include <boost/assign.hpp>
 #include <boost/filesystem.hpp>
-#include <winstl/registry/reg_key.hpp>
-#include <winstl/registry/reg_value.hpp> 
+#include <base/win/registry/key.h>
+#include <base/win/registry/value.h> 
 #include <base/util/foreach.h>
 
-namespace base {
-namespace warcraft3 { namespace directory {
+namespace base { namespace warcraft3 { namespace directory {
 
 	bool read_current_user(boost::filesystem::path& result)
 	{
 		try {
-			winstl::reg_key_w   warReg   = winstl::reg_key_w(HKEY_CURRENT_USER, L"Software\\Blizzard Entertainment\\Warcraft III");
-			winstl::reg_value_w regValue = warReg.get_value(L"InstallPath");
-			result = regValue.value_sz().c_str();
+			base::registry::read_key_w warkey(HKEY_CURRENT_USER, L"Software\\Blizzard Entertainment\\Warcraft III");
+			result = (boost::filesystem::path)warkey[L"InstallPath"];
 			return true;
 		}
 		catch (...) {
@@ -26,9 +24,8 @@ namespace warcraft3 { namespace directory {
 	bool read_all_users(boost::filesystem::path& result)
 	{
 		try {
-			winstl::reg_key_w   warReg   = winstl::reg_key_w(HKEY_LOCAL_MACHINE, L"Software\\Blizzard Entertainment\\Warcraft III", KEY_READ);
-			winstl::reg_value_w regValue = warReg.get_value(L"InstallPath");
-			result = regValue.value_sz().c_str();
+			base::registry::read_key_w warkey(HKEY_LOCAL_MACHINE, L"Software\\Blizzard Entertainment\\Warcraft III");
+			result = (boost::filesystem::path)warkey[L"InstallPath"];
 			return true;
 		}
 		catch (...) {
@@ -60,8 +57,8 @@ namespace warcraft3 { namespace directory {
 		}
 
 		try {
-			winstl::reg_key_w warReg = winstl::reg_key_w::create_key(HKEY_CURRENT_USER, L"Software\\Blizzard Entertainment\\Warcraft III");
-			warReg.set_value(L"InstallPath", p.c_str());
+			base::registry::write_key_w warkey(HKEY_CURRENT_USER, L"Software\\Blizzard Entertainment\\Warcraft III");
+			warkey[L"InstallPath"] = p;
 			return true;
 		}
 		catch (...) {
@@ -154,5 +151,4 @@ namespace warcraft3 { namespace directory {
 
 		return true;
 	}
-}}
-}
+}}}

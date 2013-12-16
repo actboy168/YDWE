@@ -250,6 +250,10 @@
     <ClInclude Include="base\win\get_tick_count.h" />
     <ClInclude Include="base\win\pe_reader.h" />
     <ClInclude Include="base\win\process.h" />
+    <ClInclude Include="base\win\registry\exception.h" />
+    <ClInclude Include="base\win\registry\key.h" />
+    <ClInclude Include="base\win\registry\traits.h" />
+    <ClInclude Include="base\win\registry\value.h" />
     <ClInclude Include="base\win\scoped_handle.h" />
     <ClInclude Include="base\win\version.h" />
   </ItemGroup>

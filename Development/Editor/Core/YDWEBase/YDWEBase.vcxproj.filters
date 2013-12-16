@@ -68,6 +68,9 @@
     <Filter Include="base\lockfree">
       <UniqueIdentifier>{5fe812b9-677b-4e06-86a2-333736d0c16e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\win\registry">
+      <UniqueIdentifier>{306f1d0f-9d0f-4f74-a119-6bdbeb6a31f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -472,6 +475,18 @@
     </ClInclude>
     <ClInclude Include="base\lockfree\queue.h">
       <Filter>base\lockfree</Filter>
+    </ClInclude>
+    <ClInclude Include="base\win\registry\exception.h">
+      <Filter>base\win\registry</Filter>
+    </ClInclude>
+    <ClInclude Include="base\win\registry\key.h">
+      <Filter>base\win\registry</Filter>
+    </ClInclude>
+    <ClInclude Include="base\win\registry\traits.h">
+      <Filter>base\win\registry</Filter>
+    </ClInclude>
+    <ClInclude Include="base\win\registry\value.h">
+      <Filter>base\win\registry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
