@@ -2,14 +2,8 @@
 
 #include <windows.h>
 
-
-#pragma warning(push)
-#pragma warning(disable:4290)
-#include <winstl/registry/reg_key.hpp>
-#include <winstl/registry/reg_value.hpp> 
-#include <winstl/registry/reg_key_sequence.hpp>
-#include <winstl/registry/reg_value_sequence.hpp>
-#pragma warning(pop)
+#include <base/win/registry/key.h>
+#include <base/win/registry/value.h>
 
 #include <boost/filesystem.hpp>
 namespace fs = boost::filesystem;
@@ -22,9 +16,9 @@ private:
 	public:
 		Classes(std::wstring const& name);
 		std::wstring const& name() const;
-		bool has(winstl::reg_key_w& root, std::wstring const& command) const;
-		bool remove(winstl::reg_key_w const& root);
-		bool set(winstl::reg_key_w const& root, std::wstring const& description, std::wstring const& icon_path, std::wstring const& command);
+		bool has(base::registry::write_key_w& root, std::wstring const& command) const;
+		bool remove(base::registry::write_key_w& root);
+		bool set(base::registry::write_key_w const& root, std::wstring const& description, std::wstring const& icon_path, std::wstring const& command);
 
 	private:
 		std::wstring name_;
@@ -34,12 +28,12 @@ private:
 	{
 	public:
 		Ext(std::wstring const& ext);
-		bool has(winstl::reg_key_w& root, Classes const& c) const;
-		bool remove(winstl::reg_key_w const& root);
-		bool set(winstl::reg_key_w const& root, Classes const& c);
+		bool has(base::registry::write_key_w& root, Classes const& c) const;
+		bool remove(base::registry::write_key_w& root);
+		bool set(base::registry::write_key_w const& root, Classes const& c);
 
-		bool has_owl(winstl::reg_key_w& root) const;
-		bool set_owl(winstl::reg_key_w& root);
+		bool has_owl(base::registry::write_key_w& root) const;
+		bool set_owl(base::registry::write_key_w& root);
 
 	private:
 		std::wstring ext_;
@@ -59,8 +53,8 @@ private:
 	bool remove_w3m();
 	bool remove_classes();
 
-	winstl::reg_key_w root_;
-	winstl::reg_key_w root2_;
+	base::registry::write_key_w root_;
+	base::registry::write_key_w root2_;
 	FileAssociation::Classes classes_;
 	FileAssociation::Ext ext_w3x_;
 	FileAssociation::Ext ext_w3m_;
