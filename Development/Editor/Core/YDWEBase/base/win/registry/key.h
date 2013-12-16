@@ -225,12 +225,12 @@ public:
 
 public:
 	template <typename KeyType>
-	KeyType open_sub_key(char_type const* subKeyName)
+	KeyType open_sub_key(const string_type& subKeyName) const
 	{
 		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::fail_if_exists);
 	}
 
-	bool                has_sub_key    (char_type const* subKeyName);
+	bool                has_sub_key    (const string_type& subKeyName);
 
 public:
 	static REGSAM       default_access_mask() { return KEY_READ; }
@@ -287,10 +287,10 @@ inline typename basic_read_key<C, T, V>::size_type basic_read_key<C, T, V>::num_
 }
 
 template <typename C, typename T, typename V>
-inline bool basic_read_key<C, T, V>::has_sub_key(char_type const* subKeyName)
+inline bool basic_read_key<C, T, V>::has_sub_key(const string_type& subKeyName)
 {
 	hkey_type   hkey;
-	result_type res = traits_type::open_key(m_hkey, subKeyName, &hkey, KEY_READ);
+	result_type res = traits_type::open_key(m_hkey, subKeyName.c_str(), &hkey, KEY_READ);
 
 	switch (res)
 	{
@@ -333,12 +333,12 @@ public:
 
 public:
   	template <typename KeyType>
-  	KeyType create_sub_key(char_type const* subKeyName)
+  	KeyType create_sub_key(const string_type& subKeyName)
   	{
   		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::create_if_exists);
   	}
 
-	bool                delete_sub_key (char_type const* subKeyName, bool deleteTree = false);
+	bool                delete_sub_key (const string_type& subKeyName, bool deleteTree = false);
 
 public:
 	static REGSAM       default_access_mask() { return KEY_WRITE | KEY_READ; }
@@ -365,11 +365,11 @@ inline basic_write_key<C, T, V>::basic_write_key(class_type const& rhs)
 { }
 
 template <typename C, typename T, typename V>
-inline bool basic_write_key<C, T, V>::delete_sub_key(char_type const* subKeyName, bool deleteTree /*= false*/)
+inline bool basic_write_key<C, T, V>::delete_sub_key(const string_type& subKeyName, bool deleteTree /*= false*/)
 {
 	result_type res = deleteTree 
-			? traits_type::delete_tree(m_hkey, subKeyName) 
-			: traits_type::delete_key(m_hkey, subKeyName);
+			? traits_type::delete_tree(m_hkey, subKeyName.c_str()) 
+			: traits_type::delete_key(m_hkey, subKeyName.c_str());
 
 	switch(res)
 	{
@@ -380,6 +380,18 @@ inline bool basic_write_key<C, T, V>::delete_sub_key(char_type const* subKeyName
 	case ERROR_FILE_NOT_FOUND:
 		return false;
 	}
+}
+
+template <typename C, typename T, typename V>
+inline basic_read_key<C, T, V> operator/(const basic_read_key<C, T, V>& lhs, const typename basic_read_key<C, T, V>::string_type& rhs)  
+{ 
+	return lhs.open_sub_key<basic_read_key<C, T, V>>(rhs); 
+}
+
+template <typename C, typename T, typename V>
+inline basic_write_key<C, T, V> operator/(const basic_write_key<C, T, V>& lhs, const typename basic_write_key<C, T, V>::string_type& rhs)  
+{ 
+	return lhs.open_sub_key<basic_write_key<C, T, V>>(rhs); 
 }
 
 typedef basic_read_key <char,    reg_traits<char>>    read_key_a;
