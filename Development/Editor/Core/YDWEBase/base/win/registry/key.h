@@ -12,8 +12,8 @@ namespace base { namespace registry {
 BOOST_SCOPED_ENUM_START(open_option)
 {
 	none, 
-	fail_if_exists = none, 
-	create_if_exists,
+	fail_if_not_exists = none, 
+	create_if_not_exists,
 };
 BOOST_SCOPED_ENUM_END
 
@@ -110,7 +110,7 @@ inline void basic_base_key<C, T, V>::swap(class_type& rhs) throw()
 template <typename C, typename T, typename V>
 inline typename basic_base_key<C, T, V>::hkey_type basic_base_key<C, T, V>::open_key_(hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
 {
-	if (option == open_option::fail_if_exists)
+	if (option == open_option::fail_if_not_exists)
 	{
 		hkey_type   hkey;
 		result_type res = traits_type::open_key(hkeyParent, keyName.c_str(), &hkey, accessMask);
@@ -119,7 +119,7 @@ inline typename basic_base_key<C, T, V>::hkey_type basic_base_key<C, T, V>::open
 	}
 	else
 	{
-		assert(option == open_option::create_if_exists);
+		assert(option == open_option::create_if_not_exists);
 
 		static const char_type  s_emptyString[] = { '\0' };
 		hkey_type hbasekey;
@@ -213,7 +213,7 @@ public:
 
 	template <typename KeyType>  
 	basic_read_key(KeyType const& keyParent, const string_type& keyName)
-		: base_type(keyParent.handle(), keyName, class_type::default_access_mask(), open_option::fail_if_exists)
+		: base_type(keyParent.handle(), keyName, class_type::default_access_mask(), open_option::fail_if_not_exists)
 	{ }
 
 	basic_read_key                     (class_type const& rhs);
@@ -227,7 +227,7 @@ public:
 	template <typename KeyType>
 	KeyType open_sub_key(const string_type& subKeyName) const
 	{
-		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::fail_if_exists);
+		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::fail_if_not_exists);
 	}
 
 	bool                has_sub_key    (const string_type& subKeyName);
@@ -243,7 +243,7 @@ inline basic_read_key<C, T, V>::basic_read_key()
 
 template <typename C, typename T, typename V>
 inline basic_read_key<C, T, V>::basic_read_key(hkey_type hkeyParent, const string_type& keyName)
-	: base_type(hkeyParent, keyName, class_type::default_access_mask(), open_option::fail_if_exists)
+	: base_type(hkeyParent, keyName, class_type::default_access_mask(), open_option::fail_if_not_exists)
 { }
 
 template <typename C, typename T, typename V>
@@ -326,7 +326,7 @@ public:
 
 	template <typename KeyType>  
 	basic_write_key(KeyType const& keyParent, const string_type& keyName)
-		: base_type(keyParent.handle(), keyName, class_type::default_access_mask(), open_option::create_if_exists)
+		: base_type(keyParent.handle(), keyName, class_type::default_access_mask(), open_option::create_if_not_exists)
 	{ }
 
 	basic_write_key                    (class_type const& rhs);
@@ -335,7 +335,7 @@ public:
   	template <typename KeyType>
   	KeyType create_sub_key(const string_type& subKeyName)
   	{
-  		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::create_if_exists);
+  		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::create_if_not_exists);
   	}
 
 	bool                delete_sub_key (const string_type& subKeyName, bool deleteTree = false);
@@ -351,7 +351,7 @@ inline basic_write_key<C, T, V>::basic_write_key()
 
 template <typename C, typename T, typename V>
 inline basic_write_key<C, T, V>::basic_write_key(hkey_type hkeyParent, const string_type& keyName)
-	: base_type(hkeyParent, keyName, class_type::default_access_mask(), open_option::create_if_exists)
+	: base_type(hkeyParent, keyName, class_type::default_access_mask(), open_option::create_if_not_exists)
 { }
 
 template <typename C, typename T, typename V>
