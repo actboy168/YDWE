@@ -5,6 +5,7 @@
 #include <base/win/registry/exception.h>
 #include <base/util/dynarray.h>
 #include <boost/detail/scoped_enum_emulation.hpp>
+#include <map>
 
 namespace base { namespace registry {
 
@@ -32,7 +33,7 @@ public:
 
 public:
 	basic_base_key                     ();
-	basic_base_key                     (hkey_type hkeyParent, char_type const* keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
+	basic_base_key                     (hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
 	basic_base_key                     (class_type const& rhs);
 	basic_base_key                     (class_type const& rhs, REGSAM accessMask);
 	virtual ~basic_base_key            () throw();
@@ -46,11 +47,8 @@ public:
 	value_type&         value          (const string_type& valueName);
 	value_type&         operator[]     (const string_type& valueName);
 
-protected:
-	void                initialize_    (hkey_type hkeyParent, char_type const* keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
-
 protected:							   
-	static hkey_type    open_key_      (hkey_type hkeyParent, char_type const* keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
+	static hkey_type    open_key_      (hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
 	static hkey_type    dup_key_       (hkey_type hkey, REGSAM accessMask);
 
 protected:
@@ -68,7 +66,7 @@ inline basic_base_key<C, T, V>::basic_base_key()
 { }
 
 template <typename C, typename T, typename V>
-inline basic_base_key<C, T, V>::basic_base_key(hkey_type hkeyParent, char_type const* keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
+inline basic_base_key<C, T, V>::basic_base_key(hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
 	: m_name(keyName)
 	, m_hkey(open_key_(hkeyParent, keyName, accessMask, option))
 	, m_accessMask(accessMask)
@@ -110,12 +108,12 @@ inline void basic_base_key<C, T, V>::swap(class_type& rhs) throw()
 }
 
 template <typename C, typename T, typename V>
-inline typename basic_base_key<C, T, V>::hkey_type basic_base_key<C, T, V>::open_key_(hkey_type hkeyParent, char_type const* keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
+inline typename basic_base_key<C, T, V>::hkey_type basic_base_key<C, T, V>::open_key_(hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
 {
 	if (option == open_option::fail_if_exists)
 	{
 		hkey_type   hkey;
-		result_type res = traits_type::open_key(hkeyParent, keyName, &hkey, accessMask);
+		result_type res = traits_type::open_key(hkeyParent, keyName.c_str(), &hkey, accessMask);
 		check_and_throw_exception("could not open key", res);
 		return hkey;
 	}
@@ -128,7 +126,7 @@ inline typename basic_base_key<C, T, V>::hkey_type basic_base_key<C, T, V>::open
 		hkey_type hkey;
 		result_type res = traits_type::open_key(hkeyParent, s_emptyString, &hbasekey, KEY_CREATE_SUB_KEY);
 		check_and_throw_exception("could not open key", res);
-		res = traits_type::create_key(hbasekey, keyName, &hkey, accessMask);
+		res = traits_type::create_key(hbasekey, keyName.c_str(), &hkey, accessMask);
 		check_and_throw_exception("could not create sub-key", res);
 		return hkey;
 	}
@@ -210,10 +208,15 @@ public:
 
 public:
 	basic_read_key                     ();
-	basic_read_key                     (hkey_type hkeyParent, char_type const* keyName);                          
-	basic_read_key                     (class_type const& keyParent, char_type const* keyName);
+	basic_read_key                     (hkey_type hkeyParent, const string_type& keyName);
+	basic_read_key                     (hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
+
+	template <typename KeyType>  
+	basic_read_key(KeyType const& keyParent, const string_type& keyName)
+		: base_type(keyParent.handle(), keyName, class_type::default_access_mask(), open_option::fail_if_exists)
+	{ }
+
 	basic_read_key                     (class_type const& rhs);
-	basic_read_key                     (hkey_type hkeyParent, char_type const* keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
 
 public:
 	string_type         reg_class      () const;
@@ -239,17 +242,12 @@ inline basic_read_key<C, T, V>::basic_read_key()
 { }
 
 template <typename C, typename T, typename V>
-inline basic_read_key<C, T, V>::basic_read_key(hkey_type hkeyParent, char_type const* keyName)
+inline basic_read_key<C, T, V>::basic_read_key(hkey_type hkeyParent, const string_type& keyName)
 	: base_type(hkeyParent, keyName, class_type::default_access_mask(), open_option::fail_if_exists)
 { }
 
 template <typename C, typename T, typename V>
-inline basic_read_key<C, T, V>::basic_read_key(class_type const& keyParent, char_type const* keyName)
-	: base_type(keyParent.handle(), keyName, class_type::default_access_mask(), open_option::fail_if_exists)
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_read_key<C, T, V>::basic_read_key(hkey_type hkeyParent, char_type const* keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
+inline basic_read_key<C, T, V>::basic_read_key(hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
 	: base_type(hkeyParent, keyName, accessMask, option)
 { }
 
@@ -323,10 +321,15 @@ public:
 
 public:
 	basic_write_key                    ();
-	basic_write_key                    (hkey_type hkeyParent, char_type const* keyName);                          
-	basic_write_key                    (class_type const& keyParent, char_type const* keyName);
+	basic_write_key                    (hkey_type hkeyParent, const string_type& keyName);
+	basic_write_key                    (hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
+
+	template <typename KeyType>  
+	basic_write_key(KeyType const& keyParent, const string_type& keyName)
+		: base_type(keyParent.handle(), keyName, class_type::default_access_mask(), open_option::create_if_exists)
+	{ }
+
 	basic_write_key                    (class_type const& rhs);
-	basic_write_key                    (hkey_type hkeyParent, char_type const* keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
 
 public:
   	template <typename KeyType>
@@ -335,7 +338,7 @@ public:
   		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::create_if_exists);
   	}
 
-	bool                delete_sub_key (char_type const* subKeyName);
+	bool                delete_sub_key (char_type const* subKeyName, bool deleteTree = false);
 
 public:
 	static REGSAM       default_access_mask() { return KEY_WRITE | KEY_READ; }
@@ -347,17 +350,12 @@ inline basic_write_key<C, T, V>::basic_write_key()
 { }
 
 template <typename C, typename T, typename V>
-inline basic_write_key<C, T, V>::basic_write_key(hkey_type hkeyParent, char_type const* keyName)
+inline basic_write_key<C, T, V>::basic_write_key(hkey_type hkeyParent, const string_type& keyName)
 	: base_type(hkeyParent, keyName, class_type::default_access_mask(), open_option::create_if_exists)
 { }
 
 template <typename C, typename T, typename V>
-inline basic_write_key<C, T, V>::basic_write_key(class_type const& keyParent, char_type const* keyName)
-	: base_type(keyParent.handle(), keyName, class_type::default_access_mask(), open_option::create_if_exists)
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_write_key<C, T, V>::basic_write_key(hkey_type hkeyParent, char_type const* keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
+inline basic_write_key<C, T, V>::basic_write_key(hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
 	: base_type(hkeyParent, keyName, accessMask, option)
 { }
 
@@ -367,9 +365,11 @@ inline basic_write_key<C, T, V>::basic_write_key(class_type const& rhs)
 { }
 
 template <typename C, typename T, typename V>
-inline bool basic_write_key<C, T, V>::delete_sub_key(char_type const* subKeyName)
+inline bool basic_write_key<C, T, V>::delete_sub_key(char_type const* subKeyName, bool deleteTree /*= false*/)
 {
-	result_type res = traits_type::delete_key(m_hkey, subKeyName);
+	result_type res = deleteTree 
+			? traits_type::delete_tree(m_hkey, subKeyName) 
+			: traits_type::delete_key(m_hkey, subKeyName);
 
 	switch(res)
 	{

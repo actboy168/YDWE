@@ -282,7 +282,7 @@ namespace base { namespace registry {
 				std::is_unsigned<Source>::value && (sizeof(Source) == sizeof(uint32_t))
 			, int>::type* = 0)
 		{
-			return set(value);
+			return set_uint32_t(value);
 		}
 
 		template <typename Source>
@@ -290,7 +290,7 @@ namespace base { namespace registry {
 				std::is_unsigned<Source>::value && (sizeof(Source) == sizeof(uint64_t))
 			, int>::type* = 0)
 		{
-			return set(value);
+			return set_uint64_t(value);
 		}
 
 		template <typename Source>
