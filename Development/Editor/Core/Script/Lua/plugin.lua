@@ -2,6 +2,7 @@
 plugin = {}
 plugin.loaders = {}
 plugin.path = fs.ydwe_path() / "plugin"
+plugin.blacklist = { 'YDTileLimitBreaker', 'YDCustomObjectId', 'YDColorizer' }
 
 function plugin.load (self, plugin_config_path)
 	log.trace("Load plugin config " .. plugin_config_path:string())
@@ -14,9 +15,11 @@ function plugin.load (self, plugin_config_path)
 		return
 	end
 
-	if plugin_name == 'YDTileLimitBreaker' or plugin_name == 'YDCustomObjectId' then
-		log.trace("Blacklist.")
-		return
+	for _, v in pairs(plugin.blacklist) do
+		if v == plugin_name then
+			log.trace("Blacklist.")
+			return
+		end
 	end
 	
 	if self.loaders[plugin_name] then
