@@ -9,6 +9,7 @@ namespace base { namespace win {
 		version_number vn;
 
 		OSVERSIONINFOW osvi = { sizeof OSVERSIONINFOW };
+#pragma warning(suppress:4996)
 		::GetVersionExW(&osvi);
 		
 		vn.major = osvi.dwMajorVersion;
