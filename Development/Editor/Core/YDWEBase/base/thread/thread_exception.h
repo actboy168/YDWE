@@ -14,8 +14,8 @@ namespace base
 	public:
 		thread_exception();
 		thread_exception(int sys_error_code);
-		thread_exception(std::errc ev, const char* what_arg);
-		thread_exception(std::errc ev, const std::string& what_arg);
+		thread_exception(std::generic_errno ev, const char* what_arg);
+		thread_exception(std::generic_errno ev, const std::string& what_arg);
 		~thread_exception() throw();
 		int native_error() const;
 	};
@@ -25,8 +25,8 @@ namespace base
 	{
 	public:
 		thread_resource_error();
-		thread_resource_error(std::errc ev, const char* what_arg);
-		thread_resource_error(std::errc ev, const std::string& what_arg);
+		thread_resource_error(std::generic_errno ev, const char* what_arg);
+		thread_resource_error(std::generic_errno ev, const std::string& what_arg);
 		~thread_resource_error() throw();
 	};
 #pragma warning(pop)

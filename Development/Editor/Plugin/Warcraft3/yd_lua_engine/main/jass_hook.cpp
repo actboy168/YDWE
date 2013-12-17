@@ -28,7 +28,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		aligned_delete()
 		{ }
 
+
+#if _MSC_VER >= 1800
 		template<class T2, class = typename std::enable_if<std::is_convertible<T2 *, T *>::value, void>::type>
+#else
+		template<class T2>
+#endif
 		aligned_delete(const aligned_delete<T2>&)
 		{ }
 
