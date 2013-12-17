@@ -9,7 +9,7 @@ def popen(cmd):
 
 def rebuild(solution, configuration, platform = 'Win32'):
     #p = popen('devenv "{0}" /Rebuild "{1}|{2}"'.format(solution, configuration, platform))
-    p = popen('MSBuild "{0}" /m /v:m /clp:ShowEventId /p:Configuration={1},Platform={2}'.format(solution, configuration, platform))
+    p = popen('MSBuild "{0}" /m /v:m /clp:ShowEventId /p:Configuration="{1}",Platform="{2}"'.format(solution, configuration, platform))
     while p.poll() == None:
         sys.stdout.write(p.stdout.readline())
         #time.sleep(0.01) 
