@@ -1,5 +1,6 @@
 #include <map>
 #include <string>
+#include <memory>
 #include <aero/function/fp_call.hpp>
 #include <base/hook/assembler/writer.h>
 #include <base/util/noncopyable.h>
@@ -19,6 +20,26 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int  jass_call_native_function(jassbind* lj, const jass::func_value* nf, uintptr_t func_address = 0);
 	int  jass_hook_real_function(lua_State* L);
 	void install_on_trigger_event(jassbind* lj);
+
+
+	template <class T>
+	struct aligned_delete
+	{
+		aligned_delete()
+		{ }
+
+		template<class T2, class = typename std::enable_if<std::is_convertible<T2 *, T *>::value, void>::type>
+		aligned_delete(const aligned_delete<T2>&)
+		{ }
+
+		void operator()(T* ptr) const
+		{
+			static_assert(0 < sizeof (T),
+			"can't delete an incomplete type");
+			ptr->~T();
+			_aligned_free(ptr);
+		}
+	};
 
 	class jass_hook_helper : util::noncopyable
 	{
@@ -71,6 +92,18 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 			real_func_ = 0;
 			return true;
+		}
+
+		static jass_hook_helper* create()
+		{
+			jass_hook_helper* ptr = reinterpret_cast<jass_hook_helper*>(_aligned_malloc(sizeof (jass_hook_helper), 32));
+			if (!ptr)
+			{
+				throw std::bad_alloc();
+			}
+
+			new(ptr)jass_hook_helper();
+			return ptr;
 		}
 
 	private:
@@ -150,14 +183,14 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return jass_call_native_function(lj, h->nf_, h->real_func_);
 	}
 
-	std::map<std::string, std::unique_ptr<jass_hook_helper>> g_hook_info_mapping;
+	std::map<std::string, std::unique_ptr<jass_hook_helper, aligned_delete<jass_hook_helper>>> g_hook_info_mapping;
 
 	int install_jass_hook(jassbind* lj, const jass::func_value* nf, const char* name, const callback& fake_func)
 	{
 		auto it = g_hook_info_mapping.find(name);
 		if (it == g_hook_info_mapping.end())
 		{
-			g_hook_info_mapping[name].reset(new jass_hook_helper());
+			g_hook_info_mapping[name].reset(jass_hook_helper::create());
 		}
 
 		g_hook_info_mapping[name]->install(lj, nf, name, fake_func);
