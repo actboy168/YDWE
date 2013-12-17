@@ -1,11 +1,12 @@
 local loader = {}
 	
 loader.load = function(path)
+--[[
 	if global_config:get_integer("ThirdPartyPlugin.EnableDotNetSupport", 1) ~= 1 then
 		log.warn('failed: diable')
 		return false
 	end
-	
+--]]
 	require "dotnet"
 	if not dotnet.initialized then
 		log.error('failed: not support')

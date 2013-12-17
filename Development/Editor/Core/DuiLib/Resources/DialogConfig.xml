@@ -98,10 +98,9 @@
           </VerticalLayout>
         </VerticalLayout>
         <VerticalLayout class="Background" inset="2,24,2,24" >
-          <VerticalLayout height="110" >
+          <VerticalLayout height="80" >
             <Label text="插件选项"  tooltip="一些可能存在兼容性问题的功能的开关。需要重启YDWE生效。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
-              <CheckBox text="启用颜色插件(*)"         width="200" name="EnableDotNetSupport" tooltip="开启后，物体编辑器中输入字符串时，会加载颜色插件。需要安装了.net此项方能生效。" />
               <CheckBox text="启用语法高亮插件(*)"     width="200" name="EnableTesh" tooltip="启用TESH，如果触发编辑器出现了崩溃等现象，请禁用此项。" />
               <CheckBox text="启用逆天触发器插件(*)"   width="200" name="EnableYDTrigger" tooltip="全面强化触发编辑器的功能。"  />
             </VerticalLayout>
