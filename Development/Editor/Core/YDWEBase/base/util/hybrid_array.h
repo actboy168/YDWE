@@ -1,6 +1,7 @@
 #pragma once
 
 #include <base/config.h>
+#include <algorithm>
 #include <limits>
 #include <iterator>
 #include <type_traits>
