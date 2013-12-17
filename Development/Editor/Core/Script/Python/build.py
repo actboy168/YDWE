@@ -67,6 +67,7 @@ def build(configuration):
     build_clear(configuration)
     build_all(configuration)
     build_move(configuration)
+    fs.remove_all(path['Result'] / 'plugin' / 'YDColorizer')
     print ('time {0}'.format(datetime.datetime.now() - t))
     
 def Configuration():
