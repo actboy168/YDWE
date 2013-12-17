@@ -1,5 +1,6 @@
 #include <windows.h>
-#include <winstl/filesystem/memory_mapped_file.hpp>
+#include <string>
+#include <base/file/memory_mapped_file.h>
 
 typedef struct _tagTT_OFFSET_TABLE
 {
@@ -134,7 +135,7 @@ namespace font
 	{ 
 		try 
 		{
-			winstl::memory_mapped_file mmap(szFilePath.c_str());
+			base::file::memory_mapped_file mmap(szFilePath.c_str());
 			const char* memory_ptr = static_cast<const char*>(mmap.memory());
 			if (memory_ptr)
 			{
