@@ -10,7 +10,16 @@
 #include <metahost.h>
 #import "mscorlib.tlb" raw_interfaces_only, rename("ReportEvent","ReportCLREvent")
 #include <atlcomcli.h>
-#pragma comment(lib, "atlsd.lib")
+
+#if _MSC_VER >= 1800
+#	pragma comment(lib, "atls.lib")
+#else
+#	if !defined(_DEBUG)
+#		pragma comment(lib, "atls.lib")
+#	else
+#		pragma comment(lib, "atlsd.lib")
+#	endif
+#endif
 
 namespace clr_helper { namespace runtime {
 
