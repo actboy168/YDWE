@@ -1,9 +1,10 @@
 #include <aero/function/fp_call.hpp>
 #include <base/hook/iat.h>
 #include <base/warcraft3/jass/hook.h>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/version.h>
 #include <base/warcraft3/jass.h>
+#include <base/warcraft3/utility.h>
+#include <base/warcraft3/version.h>
+#include <base/warcraft3/war3_searcher.h>
 #include <base/hook/inline.h>
 #include <array>
 #include <string>
@@ -105,26 +106,6 @@ namespace base { namespace warcraft3 { namespace japi {
 		ABILITY_DATA_UNUBERTIP,			// string
 	};
 
-	struct mapping_ability
-	{
-		uint32_t unk00;
-		uint32_t unk01;
-		uint32_t unk02;
-		uint32_t unk03;
-		uint32_t unk04;
-		uint32_t unk05;
-		uint32_t unk06;
-		uint32_t unk07;
-		uint32_t unk08;
-		uint32_t unk09;
-		uint32_t unk0A;
-		uint32_t unk0B;
-		uint32_t unk0C;
-		uint32_t unk0D;
-		uint32_t unk0E;
-		uint32_t unk0F;
-	};
-
 	template <class T>
 	struct ability_ui_elem
 	{
@@ -187,85 +168,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		ability_data_table* tabel_;     // 0x54
 	};
 
-	struct object_id_64
-	{
-		uint32_t a;
-		uint32_t b;
-
-		object_id_64(uint32_t a_, uint32_t b_)
-			: a(a_)
-			, b(b_)
-		{ }
-
-		bool is_valid() const
-		{
-			return (a & b) != (uint32_t)(-1);
-		}
-	};
-
 	circular_queue<uintptr_t> ability_pool;
-
-	mapping_ability** search_mapping_ability()
-	{
-		war3_searcher& s = get_war3_searcher();
-		uintptr_t ptr = 0;
-		if (s.get_version() > version_121b)
-		{
-			ptr = s.search_string("e:\\Drive1\\temp\\buildwar3x\\Engine\\Source\\Tempest/tempest_thread.h");
-		}
-		else
-		{
-			ptr = s.search_string("..\\Tempest/tempest_thread.h");
-		}
-
-		ptr += 0x04;
-		ptr = next_opcode(ptr, 0xE8, 5);
-		ptr += 0x05;
-		ptr = next_opcode(ptr, 0xE8, 5);
-		ptr = convert_function(ptr);
-		ptr = next_opcode(ptr, 0x89, 6);
-		ptr = *(uintptr_t*)(ptr + 0x02);
-		return (mapping_ability**)(ptr);		
-	}
-
-	uint32_t GetAbilityObjectById64(object_id_64 const& id)
-	{
-		static mapping_ability** table_pptr = search_mapping_ability();
-
-		mapping_ability* table_ptr = *table_pptr;
-		if (!table_ptr)
-			return 0;
-
-		if (id.a >> 31)
-		{
-			if ((id.a & 0x7FFFFFFF) < table_ptr->unk0F)
-			{
-				if (table_ptr->unk0B && *(uint32_t *)(table_ptr->unk0B + 8 * id.a) == -2)
-				{
-					uint32_t v4 = *(uint32_t *)(table_ptr->unk0B + 8 * id.a + 4);
-					if (v4 && (!*(uint32_t*)(v4 + 0x20)) && (*(uint32_t*)(v4 + 0x18) == id.b))
-					{
-						return *(uintptr_t*)(v4 + 0x54);
-					}
-				}
-			}
-		}
-		else
-		{
-			if (id.a < table_ptr->unk07)
-			{
-				if (table_ptr->unk03 && *(uint32_t *)(table_ptr->unk03 + 8 * id.a) == -2)
-				{
-					uint32_t v5 = *(uint32_t *)(table_ptr->unk03 + 8 * id.a + 4);
-					if (v5 && (!*(uint32_t*)(v5 + 0x20)) && (*(uint32_t*)(v5 + 0x18) == id.b))
-					{
-						return *(uintptr_t*)(v5 + 0x54);
-					}
-				}
-			}
-		}
-		return 0;
-	}
 
 	struct CAgentTimer
 	{
@@ -319,7 +222,7 @@ namespace base { namespace warcraft3 { namespace japi {
 				return (s_vft == *(uintptr_t*)this);
 			}
 
-			const char* name = get_class_name((uintptr_t)this);
+			const char* name = utility::get_class_name((uintptr_t)this);
 			if (name && std::string(name) == ".?AVCAgentTimer@@")
 			{
 				s_vft = *(uintptr_t*)this;
@@ -386,11 +289,11 @@ namespace base { namespace warcraft3 { namespace japi {
 
 		if (unit_ptr)
 		{
-			object_id_64* abil_id = (object_id_64*)(unit_ptr + 0x1D8 + (get_war3_searcher().get_version() > version_124c ? 4: 0));
+			utility::objectid_64* abil_id = (utility::objectid_64*)(unit_ptr + 0x1D8 + (get_war3_searcher().get_version() > version_124c ? 4: 0));
 
 			for (; abil_id->is_valid();)
 			{
-				uint32_t ability_ptr = GetAbilityObjectById64(*abil_id);
+				uint32_t ability_ptr = utility::objectid_64_to_32(*abil_id);
 
 				if (!ability_ptr)
 				{
@@ -402,7 +305,7 @@ namespace base { namespace warcraft3 { namespace japi {
 					return ability_ptr;
 				}
 
-				abil_id = (object_id_64*)(ability_ptr + 0x24);
+				abil_id = (utility::objectid_64*)(ability_ptr + 0x24);
 			}
 		}
 
@@ -415,11 +318,11 @@ namespace base { namespace warcraft3 { namespace japi {
 
 		if (unit_ptr)
 		{
-			object_id_64* abil_id = (object_id_64*)(unit_ptr + 0x1DC);
+			utility::objectid_64* abil_id = (utility::objectid_64*)(unit_ptr + 0x1DC);
 
 			for (; abil_id->is_valid(); --index)
 			{
-				uint32_t ability_ptr = GetAbilityObjectById64(*abil_id);
+				uint32_t ability_ptr = utility::objectid_64_to_32(*abil_id);
 
 				if (!ability_ptr)
 				{
@@ -431,7 +334,7 @@ namespace base { namespace warcraft3 { namespace japi {
 					return ability_ptr;
 				}
 
-				abil_id = (object_id_64*)(ability_ptr + 0x24);
+				abil_id = (utility::objectid_64*)(ability_ptr + 0x24);
 			}
 		}
 

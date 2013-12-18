@@ -32,5 +32,4 @@ namespace base { namespace warcraft3 {
 	};
 
 	_BASE_API war3_searcher& get_war3_searcher();
-	_BASE_API const char*    get_class_name(uintptr_t ptr);
 }}
