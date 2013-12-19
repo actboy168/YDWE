@@ -170,6 +170,16 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	circular_queue<uintptr_t> ability_pool;
 
+	uintptr_t find_abilityid_64(const utility::objectid_64& id)
+	{
+		uintptr_t ptr = utility::find_objectid_64(id);
+		if (*(uintptr_t*)(ptr + 0x20))
+		{
+			return 0;
+		}
+		return *(uintptr_t*)(ptr + 0x54);
+	}
+
 	struct CAgentTimer
 	{
 	public:
@@ -293,7 +303,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 			for (; abil_id->is_valid();)
 			{
-				uint32_t ability_ptr = utility::objectid_64_to_32(*abil_id);
+				uint32_t ability_ptr = find_abilityid_64(*abil_id);
 
 				if (!ability_ptr)
 				{
@@ -322,7 +332,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 			for (; abil_id->is_valid(); --index)
 			{
-				uint32_t ability_ptr = utility::objectid_64_to_32(*abil_id);
+				uint32_t ability_ptr = find_abilityid_64(*abil_id);
 
 				if (!ability_ptr)
 				{

@@ -21,6 +21,6 @@ namespace base { namespace warcraft3 { namespace utility {
 		}
 	};
 
-	_BASE_API uint32_t    objectid_64_to_32(const objectid_64& id);
+	_BASE_API uintptr_t   find_objectid_64(const objectid_64& id);
 	_BASE_API const char* get_class_name(uintptr_t ptr);
 }}}

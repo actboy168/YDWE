@@ -50,7 +50,7 @@ namespace base { namespace warcraft3 { namespace utility {
 		}
 	}
 
-	uint32_t objectid_64_to_32(const objectid_64& id)
+	uintptr_t find_objectid_64(const objectid_64& id)
 	{
 		static mapping_objectid** table_pptr = detail::search_mapping_objectid();
 
@@ -62,12 +62,12 @@ namespace base { namespace warcraft3 { namespace utility {
 		{
 			if ((id.a & 0x7FFFFFFF) < table_ptr->unk0F)
 			{
-				if (table_ptr->unk0B && *(uint32_t *)(table_ptr->unk0B + 8 * id.a) == -2)
+				if (table_ptr->unk0B && *(uintptr_t*)(table_ptr->unk0B + 8 * id.a) == -2)
 				{
-					uint32_t v4 = *(uint32_t *)(table_ptr->unk0B + 8 * id.a + 4);
-					if (v4 && (!*(uint32_t*)(v4 + 0x20)) && (*(uint32_t*)(v4 + 0x18) == id.b))
+					uintptr_t v4 = *(uintptr_t*)(table_ptr->unk0B + 8 * id.a + 4);
+					if (v4 && (*(uintptr_t*)(v4 + 0x18) == id.b))
 					{
-						return *(uintptr_t*)(v4 + 0x54);
+						return v4;
 					}
 				}
 			}
@@ -76,12 +76,12 @@ namespace base { namespace warcraft3 { namespace utility {
 		{
 			if (id.a < table_ptr->unk07)
 			{
-				if (table_ptr->unk03 && *(uint32_t *)(table_ptr->unk03 + 8 * id.a) == -2)
+				if (table_ptr->unk03 && *(uintptr_t*)(table_ptr->unk03 + 8 * id.a) == -2)
 				{
-					uint32_t v5 = *(uint32_t *)(table_ptr->unk03 + 8 * id.a + 4);
-					if (v5 && (!*(uint32_t*)(v5 + 0x20)) && (*(uint32_t*)(v5 + 0x18) == id.b))
+					uintptr_t v5 = *(uintptr_t*)(table_ptr->unk03 + 8 * id.a + 4);
+					if (v5 && (*(uintptr_t*)(v5 + 0x18) == id.b))
 					{
-						return *(uintptr_t*)(v5 + 0x54);
+						return v5;
 					}
 				}
 			}
