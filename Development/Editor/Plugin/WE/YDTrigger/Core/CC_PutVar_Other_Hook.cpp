@@ -2,8 +2,6 @@
 #include "locvar.h"
 
 extern BOOL g_bYDWEEnumUnitsInRangeMultipleFlag;
-extern BOOL g_bForForceMultipleFlag;
-extern bool g_bBuildTriggerCondition;
 
 void _fastcall 
 CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD index, DWORD type)
@@ -34,48 +32,6 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 		else
 		{
 			PUT_CONST("GetFilterUnit()", 0);
-		}
-		return;
-	case CC_GUIID_GetEnumPlayer:
-		if (g_bForForceMultipleFlag)
-		{
-			PUT_CONST("Player("STRING_YDWE_LOCAL"index)", 0);
-		}
-		else
-		{
-			PUT_CONST("GetEnumPlayer()", 0);
-		}
-		return;
-	case CC_GUIID_GetFilterPlayer:
-		if (g_bForForceMultipleFlag)
-		{
-			PUT_CONST("Player("STRING_YDWE_LOCAL"index)", 0);
-		}
-		else
-		{
-			PUT_CONST("GetFilterPlayer()", 0);
-		}
-		return;
-	case CC_GUIID_GetUnitsInRectMatching:
-	case CC_GUIID_GetUnitsInRangeOfLocMatching:
-	case CC_GUIID_GetUnitsOfPlayerMatching:
-		if (!g_bBuildTriggerCondition)
-		{
-			PUT_CONST("ydl_group", 0);
-		}
-		else
-		{
-			CC_PutVar_Other(This, EDX, OutClass, name, index, type);
-		}
-		return;
-	case CC_GUIID_GetPlayersMatching:
-		if (!g_bBuildTriggerCondition)
-		{
-			PUT_CONST("ydl_force", 0);
-		}
-		else
-		{
-			CC_PutVar_Other(This, EDX, OutClass, name, index, type);
 		}
 		return;
     case CC_GUIID_YDWECustomScriptCode:

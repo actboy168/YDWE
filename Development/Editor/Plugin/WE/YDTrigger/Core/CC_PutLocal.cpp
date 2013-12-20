@@ -71,17 +71,6 @@ void _fastcall
 					g_local_in_mainproc = TRUE;
 				}
 				break;
-			case CC_GUIID_GetUnitsInRectMatching:
-			case CC_GUIID_GetUnitsInRangeOfLocMatching:
-			case CC_GUIID_GetUnitsOfPlayerMatching:
-				CC_PutLocal_LocalVar(OutClass, CC_TYPE_group,  "ydl", "tmp_group");
-				CC_PutLocal_LocalVar(OutClass, CC_TYPE_group,  "ydl", "group");
-				CC_PutLocal_LocalVar(OutClass, CC_TYPE_unit,  "ydl", "unit");
-				break;
-			case CC_GUIID_GetPlayersMatching:
-				CC_PutLocal_LocalVar(OutClass, CC_TYPE_integer, "ydl", "index");
-				CC_PutLocal_LocalVar(OutClass, CC_TYPE_force, "ydl", "force");
-				break;
 			default:
 				break;
 			}
@@ -121,18 +110,6 @@ void _fastcall
 			CC_PutLocal_LocalVar(OutClass, CC_TYPE_integer, "ydul", ((char*)&GetGUIVar_Value(nItemClass, 0)));
 			CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, -1);
 			break;
-		case CC_GUIID_ForForce:
-			CC_PutLocal_LocalVar(OutClass, CC_TYPE_integer, "ydl", "index");
-			CC_PutLocal_LocalVar(OutClass, CC_TYPE_force, "ydl", "force");
-			break; 
-		case CC_GUIID_ForForceMultiple:
-			CC_PutLocal_LocalVar(OutClass, CC_TYPE_integer, "ydl", "index");
-			CC_PutLocal_LocalVar(OutClass, CC_TYPE_force, "ydl", "force");
-			if (isSearchHashLocal)
-			{
-				CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, -1);
-			}
-			break; 
 		case CC_GUIID_EnumDestructablesInRectAllMultiple:
 		case CC_GUIID_EnumDestructablesInCircleBJMultiple:
 		case CC_GUIID_EnumItemsInRectBJMultiple:
@@ -140,18 +117,6 @@ void _fastcall
 			{
 				CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, -1);
 			}
-			break; 
-		case CC_GUIID_GroupEnumUnitsInRange:
-		case CC_GUIID_GroupEnumUnitsInRangeCounted:
-		case CC_GUIID_GroupEnumUnitsInRangeOfLoc:
-		case CC_GUIID_GroupEnumUnitsInRangeOfLocCounted:
-			CC_PutLocal_LocalVar( OutClass, CC_TYPE_group,  "ydl", "tmp_group");
-			CC_PutLocal_LocalVar( OutClass, CC_TYPE_group,  "ydl", "group");
-			CC_PutLocal_LocalVar( OutClass, CC_TYPE_unit,  "ydl", "unit");
-			break;
-		case CC_GUIID_ForGroup:
-			CC_PutLocal_LocalVar( OutClass, CC_TYPE_group,  "ydl", "group");
-			CC_PutLocal_LocalVar( OutClass, CC_TYPE_unit,  "ydl", "unit");
 			break;
 		case CC_GUIID_ForGroupMultiple:
 		case CC_GUIID_YDWEEnumUnitsInRangeMultiple:

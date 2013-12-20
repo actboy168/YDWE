@@ -1,7 +1,5 @@
 #include "CC_Include.h"
 
-bool g_bBuildTriggerCondition = false;
-
 int _fastcall 
 CC_PutTrigger_Count(DWORD This, DWORD cc_gui_type)
 {
@@ -68,13 +66,11 @@ CC_PutTrigger_ECA_ExternProc(DWORD This, DWORD OutClass)
     BLZSStrPrintf(buff, 260, "function %sConditions takes nothing returns boolean", name);
     PUT_CONST(buff, 1);
 
-	g_bBuildTriggerCondition = true;
     CC_PutBegin();
     PUT_CONST("return (", 0);
     CC_PutTrigger_Condition_And(This, OutClass, name);
     PUT_CONST(")", 1);
 	CC_PutEnd();
-	g_bBuildTriggerCondition = false;
       
     PUT_CONST("endfunction", 1);
     PUT_CONST("", 1);

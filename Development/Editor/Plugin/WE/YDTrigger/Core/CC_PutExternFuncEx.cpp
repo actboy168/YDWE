@@ -84,11 +84,6 @@ void _fastcall CC_PutExternFuncEx_TopDown(DWORD This, DWORD OutClass, char* name
 		case CC_GUIID_IfThenElse:
 		case CC_GUIID_GetBooleanAnd:
 		case CC_GUIID_GetBooleanOr:
-		case CC_GUIID_GroupEnumUnitsInRange:
-		case CC_GUIID_GroupEnumUnitsInRangeCounted:
-		case CC_GUIID_GroupEnumUnitsInRangeOfLoc:
-		case CC_GUIID_GroupEnumUnitsInRangeOfLocCounted:
-		case CC_GUIID_ForGroup:
 			flag = -1;
 			break;
 		}
@@ -123,8 +118,8 @@ void _fastcall CC_PutExternFuncEx_TopDown(DWORD This, DWORD OutClass, char* name
 
 	switch (*(DWORD*)(This+0x138))
 	{
-	//case CC_GUIID_ForGroupMultiple:
-	//case CC_GUIID_ForForceMultiple:
+	case CC_GUIID_ForGroupMultiple:
+	case CC_GUIID_ForForceMultiple:
 	case CC_GUIID_EnumDestructablesInRectAllMultiple:
 	case CC_GUIID_EnumDestructablesInCircleBJMultiple:
 	case CC_GUIID_EnumItemsInRectBJMultiple:
