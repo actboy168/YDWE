@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{a863b2c9-f0b9-4629-a09b-16910e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{2daad005-c4c8-42e6-b277-04e42095acca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\msvc">
+      <UniqueIdentifier>{16bb5f70-889b-4364-87c6-541b8ea3338c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\call.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ctype.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ffi.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\parser.c">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\call_arm.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\call_x64.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\call_x64win.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\call_x86.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ffi.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\msvc\inttypes.h">
+      <Filter>include\msvc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\msvc\stdbool.h">
+      <Filter>include\msvc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\msvc\stdint.h">
+      <Filter>include\msvc</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
