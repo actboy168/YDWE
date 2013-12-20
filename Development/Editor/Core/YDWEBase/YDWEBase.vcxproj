@@ -114,6 +114,7 @@
   <ItemGroup>
     <ClCompile Include="base\thread\thread.cpp" />
     <ClCompile Include="base\thread\thread_exception.cpp" />
+    <ClCompile Include="base\warcraft3\utility.cpp" />
     <ClCompile Include="base\win\get_tick_count.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="base\exception\detail\windows_category.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="base\warcraft3\jass\trampoline_function.h" />
     <ClInclude Include="base\warcraft3\jass\opcode.h" />
     <ClInclude Include="base\warcraft3\jass\trampoline.h" />
+    <ClInclude Include="base\warcraft3\utility.h" />
     <ClInclude Include="base\warcraft3\version.h" />
     <ClInclude Include="base\warcraft3\war3_searcher.h" />
     <ClInclude Include="base\warcraft3\directory.h" />
