@@ -20,7 +20,7 @@ def run_bat(bat_path, cmd=None):
 def complie_opensource(configuration):
     util.msvc.rebuild(path['OpenSource']/ 'Lua' / 'Current' / 'makefiles' / 'luacore.sln', configuration)
     util.msvc.rebuild(path['OpenSource']/ 'LuaBind' / 'Current' / 'makefiles' / 'luabind.sln', configuration)
-    run_bat(path['OpenSource']/ 'luaffi' / 'msvcbuild.bat', configuration.lower())
+    util.msvc.rebuild(path['OpenSource']/ 'luaffi' / 'makefiles' / 'luaffi.sln', configuration)
 
 def complie(configuration):
     print('complie')
