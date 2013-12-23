@@ -151,7 +151,7 @@ namespace virtual_mpq
 
 		uint32_t __stdcall SFileGetFileSize(HANDLE file_handle, uint32_t* file_size_high_ptr)
 		{
-			return aero::std_call<uint32_t>(real::SFileGetFileArchive, file_handle, file_size_high_ptr);
+			return aero::std_call<uint32_t>(real::SFileGetFileSize, file_handle, file_size_high_ptr);
 		}
 
 		bool __stdcall SFileReadFile(HANDLE file_handle, void* buffer, uint32_t size, uint32_t* size_ptr, uint32_t unk)
