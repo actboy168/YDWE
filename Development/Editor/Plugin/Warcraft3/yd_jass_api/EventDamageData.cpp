@@ -57,12 +57,14 @@ struct event_damage_data
 	bool                    change;
 	war3_event_damage_data* data;
 	uint32_t                old_amount;
+	uint32_t                new_amount;
 
 	event_damage_data(uint32_t is_physical, war3_event_damage_data* ptr)
 		: physical(!!is_physical)
 		, change(false)
 		, data(ptr)
 		, old_amount(0)
+		, new_amount(0)
 	{ }
 
 	bool is_same(uint32_t* damage1, uint32_t* damage2) const
@@ -71,7 +73,7 @@ struct event_damage_data
 		{
 			return true;
 		}
-		
+
 		if ((*damage1 ^ *damage2) != 0x80000000)
 		{
 			return false;
@@ -104,7 +106,7 @@ uint32_t __cdecl FakeGetEventDamage()
 		event_damage_data& edd = g_edd.back();
 		if (edd.change)
 		{
-			return g_edd.back().data->amount;
+			return g_edd.back().new_amount;
 		}
 	}
 
@@ -120,7 +122,7 @@ uint32_t __fastcall FakeUnitDamageDoneFunc(uint32_t _this, uint32_t _edx, uint32
 		if (edd.change && edd.is_same(damage1, damage2))
 		{
 			edd.change = false;
-			float d = jass::from_real(edd.data->amount);
+			float d = jass::from_real(edd.new_amount);
 			uint32_t new_damage1 = jass::to_real(d);
 			uint32_t new_damage2 = jass::to_real(-d);
 			return aero::fast_call<uint32_t>(RealUnitDamageDoneFunc, _this, _edx, &new_damage1, &new_damage2);
@@ -198,11 +200,8 @@ bool __cdecl EXSetEventDamage(uint32_t value)
 
 	event_damage_data& edd = g_edd.back();
 	edd.change = true;
-	if (!edd.old_amount)
-	{
-		edd.old_amount = edd.data->amount;
-	}
-	edd.data->amount = *(uint32_t*)value;
+	edd.old_amount = edd.data->amount;
+	edd.new_amount = *(uint32_t*)value;
 
 	return true;
 }
