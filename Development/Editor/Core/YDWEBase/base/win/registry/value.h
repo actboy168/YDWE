@@ -136,7 +136,8 @@ namespace base { namespace registry {
 	{
 		string_type ret;
 		size_type   data_size = 0;
-		result_type res       = traits_type::query_info(m_hkey, NULL, NULL, NULL, NULL, NULL, NULL, NULL, &data_size, NULL, NULL);
+		uint32_t    dw;
+		result_type res       = traits_type::query_value(m_hkey, m_name.c_str(), dw, NULL, data_size);
 		check_and_throw_exception("could not determine the data size", res);
 
 		if (data_size > 0)

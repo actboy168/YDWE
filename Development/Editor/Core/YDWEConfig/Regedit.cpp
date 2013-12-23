@@ -67,10 +67,10 @@ bool FileAssociation::Ext::remove(base::registry::write_key_w& root)
 	return false;
 }
 
-bool FileAssociation::Ext::set(base::registry::write_key_w const& root, Classes const& c)
+bool FileAssociation::Ext::set(base::registry::write_key_w& root, Classes const& c)
 {
 	try {
-		(root /ext_)[L""] = c.name();
+		(root / ext_)[L""] = c.name();
 	} catch (base::registry::registry_exception const& ) { }
 
 	return false;

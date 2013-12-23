@@ -305,13 +305,13 @@ inline bool basic_read_key<C, T, V>::has_sub_key(const string_type& subKeyName)
 
 template <typename C, typename T = reg_traits<C>, typename V = basic_write_value<C, T>>
 class basic_write_key
-	: public basic_read_key<C, T, V>
+	: public basic_base_key<C, T, V>
 {
 public:
 	typedef C                                 char_type;
 	typedef T                                 traits_type;
 	typedef V                                 value_type;
-	typedef basic_read_key<C, T, V>           base_type;
+	typedef basic_base_key<C, T, V>           base_type;
 	typedef basic_write_key<C, T, V>          class_type;
 	typedef typename traits_type::size_type   size_type;
 	typedef typename traits_type::string_type string_type;
@@ -332,13 +332,25 @@ public:
 	basic_write_key                    (class_type const& rhs);
 
 public:
+	string_type         reg_class      () const;
+	size_type           num_sub_keys   () const;
+	size_type           num_values     () const;
+
+public:
   	template <typename KeyType>
   	KeyType create_sub_key(const string_type& subKeyName)
   	{
   		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::create_if_not_exists);
   	}
 
+	template <typename KeyType>
+	KeyType open_sub_key(const string_type& subKeyName) const
+	{
+		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::fail_if_not_exists);
+	}
+
 	bool                delete_sub_key (const string_type& subKeyName, bool deleteTree = false);
+	bool                has_sub_key    (const string_type& subKeyName);
 
 public:
 	static REGSAM       default_access_mask() { return KEY_WRITE | KEY_READ; }
@@ -383,15 +395,32 @@ inline bool basic_write_key<C, T, V>::delete_sub_key(const string_type& subKeyNa
 }
 
 template <typename C, typename T, typename V>
+inline bool basic_write_key<C, T, V>::has_sub_key(const string_type& subKeyName)
+{
+	hkey_type   hkey;
+	result_type res = traits_type::open_key(m_hkey, subKeyName.c_str(), &hkey, KEY_READ);
+
+	switch (res)
+	{
+	case ERROR_SUCCESS:
+		::RegCloseKey(hkey);
+	case ERROR_ACCESS_DENIED:
+		return true;
+	default:
+		return false;
+	}
+}
+
+template <typename C, typename T, typename V>
 inline basic_read_key<C, T, V> operator/(const basic_read_key<C, T, V>& lhs, const typename basic_read_key<C, T, V>::string_type& rhs)  
 { 
 	return lhs.open_sub_key<basic_read_key<C, T, V>>(rhs); 
 }
 
 template <typename C, typename T, typename V>
-inline basic_write_key<C, T, V> operator/(const basic_write_key<C, T, V>& lhs, const typename basic_write_key<C, T, V>::string_type& rhs)  
+inline basic_write_key<C, T, V> operator/(basic_write_key<C, T, V>& lhs, const typename basic_write_key<C, T, V>::string_type& rhs)  
 { 
-	return lhs.open_sub_key<basic_write_key<C, T, V>>(rhs); 
+	return lhs.create_sub_key<basic_write_key<C, T, V>>(rhs); 
 }
 
 typedef basic_read_key <char,    reg_traits<char>>    read_key_a;

@@ -30,7 +30,7 @@ private:
 		Ext(std::wstring const& ext);
 		bool has(base::registry::write_key_w& root, Classes const& c) const;
 		bool remove(base::registry::write_key_w& root);
-		bool set(base::registry::write_key_w const& root, Classes const& c);
+		bool set(base::registry::write_key_w& root, Classes const& c);
 
 		bool has_owl(base::registry::write_key_w& root) const;
 		bool set_owl(base::registry::write_key_w& root);
