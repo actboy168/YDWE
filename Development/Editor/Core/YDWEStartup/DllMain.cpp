@@ -236,7 +236,7 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 	}
 	catch (std::exception const& e)
 	{
-		MessageBoxW(NULL, base::util::u2w(e.what(), base::util::conv_method::replace | '?').c_str(), __("Error"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, base::util::a2w(e.what(), base::util::conv_method::replace | '?').c_str(), __("Error"), MB_OK | MB_ICONERROR);
 	}
 	catch (...)
 	{
