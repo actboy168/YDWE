@@ -48,7 +48,7 @@ namespace util { namespace detail {
 				if (how.type() == conv_method::replace)
 				{
 					target.push_back(static_cast<wchar_t>(how.default_char()));
-					from_next += 1;
+					from_next += len;
 				}
 				else
 				{
