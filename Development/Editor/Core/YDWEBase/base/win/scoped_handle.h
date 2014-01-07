@@ -23,7 +23,7 @@ namespace win {
 
 		~scoped_handle()
 		{
-			if (!this->operator bool())
+			if (this->operator bool())
 			{
 				::CloseHandle(handle_);
 				handle_ = NullHandle;
