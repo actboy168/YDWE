@@ -6,9 +6,10 @@
 
 namespace base { namespace file {
 
-	class file_handle : public win::scoped_handle<INVALID_HANDLE_VALUE>
+	class file_handle 
+		: public win::scoped_handle<INVALID_HANDLE_VALUE>
 	{
-		typedef win::scoped_handle<INVALID_HANDLE_VALUE> _Mybase;
+		typedef win::scoped_handle<INVALID_HANDLE_VALUE> mybase;
 
 	public:
 		file_handle(LPCWSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile);

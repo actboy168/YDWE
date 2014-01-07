@@ -6,9 +6,10 @@
 
 namespace base { namespace file {
 
-	class file_mapping_handle : public win::scoped_handle<NULL>
+	class file_mapping_handle 
+		: public win::scoped_handle<NULL>
 	{
-		typedef win::scoped_handle<NULL> _Mybase;
+		typedef win::scoped_handle<NULL> mybase;
 
 	public:
 		file_mapping_handle(file_handle const& file, LPSECURITY_ATTRIBUTES lpAttributes, uint32_t flProtect, uint64_t dwMaximumSize, const wchar_t* name);

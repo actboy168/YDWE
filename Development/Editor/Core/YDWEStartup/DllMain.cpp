@@ -37,7 +37,8 @@ static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boo
 		base::file::memory_mapped_file mapperSecond(fileSecond.c_str());
 
 		size_t size;
-		return (size = mapperFirst.size()) == mapperSecond.size() && memcmp(mapperFirst.memory(), mapperSecond.memory(), size) == 0;
+		return ((size = mapperFirst.size()) == mapperSecond.size()) 
+			&& (memcmp(mapperFirst.memory(), mapperSecond.memory(), size) == 0);
 	}
 	catch (base::system_exception const& e)
 	{
