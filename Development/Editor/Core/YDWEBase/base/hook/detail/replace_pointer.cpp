@@ -20,6 +20,8 @@ namespace base { namespace hook { namespace detail {
 			{
 				return 0;
 			}
+
+			::FlushInstructionCache(::GetCurrentProcess(), (LPVOID)address, sizeof(uintptr_t));
 		}
 
 		return old_value;

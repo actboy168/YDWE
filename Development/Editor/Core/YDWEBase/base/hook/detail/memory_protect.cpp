@@ -2,19 +2,15 @@
 
 namespace base { namespace hook { namespace detail {
 
-	memory_protect::memory_protect(uintptr_t address)
+	memory_protect::memory_protect(uintptr_t address, size_t size)
 		: success_(false)
+		, access_(0)
+		, address_(address)
+		, size_(size)
 	{
-		if (0 == ::VirtualQuery((LPCVOID)address, &mbi_, sizeof(mbi_)))
-			return ;
-
-
-		if (!::VirtualProtect(mbi_.BaseAddress, mbi_.RegionSize, PAGE_WRITECOPY, &access_))
+		if (!::VirtualProtect((LPVOID)address_, size_, PAGE_READWRITE, &access_))
 		{
-			if (!::VirtualProtect(mbi_.BaseAddress, mbi_.RegionSize, PAGE_READWRITE, &access_))
-			{
-				return ;
-			}
+			return;
 		}
 
 		success_ = true;
@@ -24,8 +20,8 @@ namespace base { namespace hook { namespace detail {
 	{
 		if (success())
 		{
-			DWORD newAccess;
-			::VirtualProtect(mbi_.BaseAddress, mbi_.RegionSize, access_, &newAccess);
+			DWORD new_access;
+			::VirtualProtect((LPVOID)address_, size_, access_, &new_access);
 		}
 	}
 
