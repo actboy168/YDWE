@@ -17,6 +17,9 @@ def get_boost_version():
         f.close()
     raise
 
+def copy_crt_dll():
+    fs.copy_directory(path['ThirdParty'] / 'Microsoft' / 'CRT' / 'Win32' / 'Microsoft.VC100.CRT', path['ResultCore'], ['.dll'])
+
 def copy_boost_dll(name, configuration):
     if configuration == 'Release':
         filename = 'boost_' + name + '-vc100-mt-' + get_boost_version() + '.dll'
@@ -43,6 +46,8 @@ def copy_component():
 
 def copy_all(configuration):
     print('copy_all')
+    if configuration == 'Release':
+        copy_crt_dll()
     copy_boost_dll('system',     configuration)
     copy_boost_dll('filesystem', configuration)
     copy_boost_dll('date_time',  configuration)

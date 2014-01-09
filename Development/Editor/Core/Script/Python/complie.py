@@ -22,14 +22,6 @@ def complie_opensource(configuration):
     util.msvc.rebuild(path['OpenSource']/ 'LuaBind' / 'Current' / 'makefiles' / 'luabind.sln', configuration)
     util.msvc.rebuild(path['OpenSource']/ 'luaffi' / 'makefiles' / 'luaffi.sln', configuration)
 
-def copy_crt_dll(configuration):
-    if configuration == 'Release':
-        crt_dll_dir = fs.path(util.msvc.vc_install_dir) / 'redist' / 'x86' / 'Microsoft.VC100.CRT'
-    else:
-        return
-    if fs.exists(crt_dll_dir):
-        fs.copy_directory(crt_dll_dir, path['ResultCore'], ['.dll'])
-
 def complie(configuration):
     print('complie')
     print('msvc.setup_env')
@@ -41,8 +33,6 @@ def complie(configuration):
     util.msvc.rebuild(path['BuildRoot']/ 'Editor' / 'Plugin' / 'YDColorizer' / 'YDColorizer.sln', configuration, 'Any CPU')
     util.msvc.rebuild(path['BuildRoot']/ 'Editor' / 'UI' / 'sln' / 'YDUI.sln', 'YDWE')
     util.msvc.rebuild(path['BuildRoot']/ 'Editor' / 'UI' / 'sln' / 'YDUI.sln', 'YDTrigger')
-    print('copy crt dll')
-    copy_crt_dll(configuration)
 
 def Configuration():
     import sys
