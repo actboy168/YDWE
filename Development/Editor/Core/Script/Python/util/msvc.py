@@ -4,6 +4,8 @@ import re
 import subprocess
 import time
 
+vc_install_dir = ''
+
 def popen(cmd):
     return subprocess.Popen(cmd, stdin=open(os.devnull), stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
 
@@ -16,7 +18,8 @@ def rebuild(solution, configuration, platform = 'Win32'):
     sys.stdout.write(p.stdout.read())
 
 def setup_env():
-    keys = ['LIB', 'LIBPATH', 'PATH', 'INCLUDE']
+    global vc_install_dir
+    keys = ['LIB', 'LIBPATH', 'PATH', 'INCLUDE', 'VCINSTALLDIR']
     key_env = dict([(key, []) for key in keys])
     rekeys = {}
     for key in keys:
@@ -34,8 +37,11 @@ def setup_env():
     for k, l in key_env.items():
         for v in reversed(l):
             if v != '':
-                try:
-                    os.environ[k] = v + os.pathsep + os.environ[k]
-                except:
-                    os.environ[k] = v
+                if k == 'VCINSTALLDIR':
+                    vc_install_dir = v
+                else:
+                    try:
+                        os.environ[k] = v + os.pathsep + os.environ[k]
+                    except:
+                        os.environ[k] = v
 
