@@ -142,17 +142,17 @@ namespace base { namespace registry {
 
 		if (data_size > 0)
 		{
-			std::dynarray<char_type> buffer(1 + data_size);
+			std::dynarray<char_type> buffer(1 + data_size / sizeof(char_type));
 			uint32_t               dw;
 
-			data_size = buffer.size();
+			data_size = buffer.size() * sizeof(char_type);
 			res = traits_type::query_value(m_hkey, m_name.c_str(), dw, buffer.data(), data_size);
 			check_and_throw_exception("could not elicit string value", res);
 
 			if (data_size > 0)
 			{
 				assert(0 != data_size);
-				--data_size;
+				data_size -= sizeof(char_type);
 				buffer[data_size / sizeof(char_type)] = 0;
 				ret.assign(buffer.data(), data_size / sizeof(char_type));
 
