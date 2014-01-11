@@ -120,7 +120,7 @@
     <ClInclude Include="..\include\luabind\yield_policy.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B84F7231-16CE-41D8-8C08-7B523FF4225B}</ProjectGuid>
+    <ProjectGuid>{506832CE-F522-43D8-867D-5C97A9D6552A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

@@ -89,7 +89,7 @@ static lua_State *globalL = NULL;
 
 static const char *progname = LUA_PROGNAME;
 
-
+void luabind_open(lua_State* L);
 
 static void lstop (lua_State *L, lua_Debug *ar) {
   (void)ar;  /* unused arg. */
@@ -434,7 +434,6 @@ static int handle_luainit (lua_State *L) {
     return dostring(L, init, name);
 }
 
-
 static int pmain (lua_State *L) {
   int argc = (int)lua_tointeger(L, 1);
   char **argv = (char **)lua_touserdata(L, 2);
@@ -456,6 +455,7 @@ static int pmain (lua_State *L) {
   luaL_checkversion(L);
   lua_gc(L, LUA_GCSTOP, 0);  /* stop collector during initialization */
   luaL_openlibs(L);  /* open libraries */
+  luabind_open(L);
   lua_gc(L, LUA_GCRESTART, 0);
   if (!args[has_E] && handle_luainit(L) != LUA_OK)
     return 0;  /* error running LUA_INIT */
