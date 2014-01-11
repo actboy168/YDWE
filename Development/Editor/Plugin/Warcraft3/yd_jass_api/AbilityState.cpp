@@ -626,7 +626,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			return false;
 		}
-		strcpy_s(*buf, 128, jass::from_string(value));
+		strncpy_s(*buf, 128, jass::from_string(value), 127);
 		//aero::this_call<void>(0x6F021FB0, ability_pool.at(ability_handle));
 		return true;
 	}
