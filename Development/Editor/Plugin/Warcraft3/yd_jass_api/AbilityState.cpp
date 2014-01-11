@@ -8,10 +8,13 @@
 #include <base/hook/inline.h>
 #include <array>
 #include <string>
+#include "StringPool.h"
 
 namespace base { namespace warcraft3 { namespace japi {
 
 	uint32_t  __cdecl EXGetUnitObject(uint32_t unit_handle);
+
+	string_pool ability_string_pool;
 
 	template <class T, size_t kSize = 256>
 	class circular_queue : public std::array<T, kSize>
@@ -626,8 +629,18 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			return false;
 		}
-		strncpy_s(*buf, 128, jass::from_string(value), 127);
-		//aero::this_call<void>(0x6F021FB0, ability_pool.at(ability_handle));
+
+		ability_string_pool.free((uintptr_t)*buf);
+		const char* value_str = jass::from_string(value);
+		size_t      value_len = strlen(value_str);
+		uintptr_t   value_buf = ability_string_pool.malloc(value_len+1);
+
+		if (value_buf)
+		{
+			*buf = (char*)value_buf;
+			strncpy_s(*buf, value_len + 1, value_str, value_len);
+			//aero::this_call<void>(0x6F021FB0, ability_pool.at(ability_handle));
+		}
 		return true;
 	}
 
