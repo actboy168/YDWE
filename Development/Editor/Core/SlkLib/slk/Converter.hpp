@@ -33,7 +33,7 @@ namespace slk
 
 				InterfaceStorm::error_code ec = 0;
 				buffer buf(storm_.load(Filename, ec));
-				if (ec == 0)
+				if (ec == 0 && buf.begin() != buf.end())
 				{
 					buffer_reader reader(buf);
 					Reader::Read(reader, table_);

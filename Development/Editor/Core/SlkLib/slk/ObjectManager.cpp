@@ -133,7 +133,7 @@ namespace slk
 	{
 		InterfaceStorm::error_code ec = 0;
 		buffer buf(storm_.load(szFilename, ec));
-		if (ec != 0)
+		if (ec != 0 || buf.begin() == buf.begin())
 		{
 			throw base::exception("Not found file %s.", szFilename);
 		}
