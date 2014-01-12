@@ -4,7 +4,7 @@
 #include <base/warcraft3/jass/trampoline.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/util/singleton.h>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <map>
 
 namespace base { namespace warcraft3 { namespace jass {
@@ -19,7 +19,7 @@ namespace base { namespace warcraft3 { namespace jass {
 				return ((uint32_t(__fastcall*)(uint32_t, uint32_t))*x)(*y, *dis);
 			}
 	
-			return aero::c_call<uint32_t>(RealIsUnitInRangeXY, unit_handle, x, y, dis);
+			return base::c_call<uint32_t>(RealIsUnitInRangeXY, unit_handle, x, y, dis);
 		}
 
 		std::map<uint64_t, trampoline> trampoline_mapping;

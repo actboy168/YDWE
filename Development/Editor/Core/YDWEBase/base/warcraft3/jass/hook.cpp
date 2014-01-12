@@ -9,7 +9,7 @@
 #include <base/hook/iat.h>
 #include <base/util/do_once.h>
 #include <base/util/foreach.h>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <map>
 #include <string>
 #include <algorithm>
@@ -175,7 +175,7 @@ namespace warcraft3 { namespace jass {
 
 					foreach (register_info const& it, register_info_list)
 					{
-						aero::fast_call<void>(register_func, it.func, it.name.c_str(), it.param.c_str());
+						base::fast_call<void>(register_func, it.func, it.name.c_str(), it.param.c_str());
 					}
 				});
 

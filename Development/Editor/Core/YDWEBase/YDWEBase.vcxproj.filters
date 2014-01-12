@@ -494,6 +494,9 @@
     <ClInclude Include="base\warcraft3\utility.h">
       <Filter>base\warcraft3</Filter>
     </ClInclude>
+    <ClInclude Include="base\hook\fp_call.h">
+      <Filter>base\hook</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

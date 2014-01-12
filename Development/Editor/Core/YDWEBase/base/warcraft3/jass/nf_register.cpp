@@ -3,7 +3,7 @@
 #include <base/util/do_once.h>
 #include <base/warcraft3/version.h>
 #include <base/warcraft3/war3_searcher.h>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 
 namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 
@@ -16,7 +16,7 @@ namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 
 	uintptr_t __stdcall fake_storm_alloc(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
 	{
-		uintptr_t retval = aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+		uintptr_t retval = base::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
 
 		if ((amount == 176) 
 			&& (log_line == 668)
@@ -46,7 +46,7 @@ namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 
 	uintptr_t __stdcall fake_storm_alloc_122(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
 	{
-		uintptr_t retval = aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+		uintptr_t retval = base::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
 
 		if ((amount == 176) 
 			&& (log_line == 667)
@@ -76,7 +76,7 @@ namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 
 	uintptr_t __stdcall fake_storm_alloc_120(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
 	{
-		uintptr_t retval = aero::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+		uintptr_t retval = base::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
 		if ((amount == 176) 
 			&& (log_line == 667)
 			&& (default_value == 0)
@@ -118,7 +118,7 @@ namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 			}
 		}
 
-		return aero::std_call<uintptr_t>(real_tls_get_value, tls_index);
+		return base::std_call<uintptr_t>(real_tls_get_value, tls_index);
 	}
 
 	bool initialize()

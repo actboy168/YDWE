@@ -195,6 +195,7 @@
     <ClInclude Include="base\hook\detail\replace_pointer.h" />
     <ClInclude Include="base\hook\detail\export_address_table.h" />
     <ClInclude Include="base\hook\eat.h" />
+    <ClInclude Include="base\hook\fp_call.h" />
     <ClInclude Include="base\hook\iat.h" />
     <ClInclude Include="base\hook\iat_manager.h" />
     <ClInclude Include="base\hook\inline.h" />
