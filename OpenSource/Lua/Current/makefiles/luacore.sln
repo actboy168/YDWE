@@ -8,6 +8,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "lua.vcxproj", "{7633
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luabind", "..\..\..\LuaBind\Current\makefiles\luabind.vcxproj", "{506832CE-F522-43D8-867D-5C97A9D6552A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lpeg", "lpeg.vcxproj", "{F4F8BD99-F170-406D-BB58-BC8E2D693A20}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B84F7231-16CE-41D8-8C08-7B523FF4225B} = {B84F7231-16CE-41D8-8C08-7B523FF4225B}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luac", "luac.vcxproj", "{61D89C3A-DF19-4D4F-AEF3-8B491E1F519E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -26,6 +33,12 @@ Global
 		{506832CE-F522-43D8-867D-5C97A9D6552A}.Debug|Win32.Build.0 = Debug|Win32
 		{506832CE-F522-43D8-867D-5C97A9D6552A}.Release|Win32.ActiveCfg = Release|Win32
 		{506832CE-F522-43D8-867D-5C97A9D6552A}.Release|Win32.Build.0 = Release|Win32
+		{F4F8BD99-F170-406D-BB58-BC8E2D693A20}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F4F8BD99-F170-406D-BB58-BC8E2D693A20}.Release|Win32.ActiveCfg = Release|Win32
+		{61D89C3A-DF19-4D4F-AEF3-8B491E1F519E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{61D89C3A-DF19-4D4F-AEF3-8B491E1F519E}.Debug|Win32.Build.0 = Debug|Win32
+		{61D89C3A-DF19-4D4F-AEF3-8B491E1F519E}.Release|Win32.ActiveCfg = Release|Win32
+		{61D89C3A-DF19-4D4F-AEF3-8B491E1F519E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
