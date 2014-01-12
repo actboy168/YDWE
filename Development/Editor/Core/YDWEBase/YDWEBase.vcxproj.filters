@@ -497,6 +497,9 @@
     <ClInclude Include="base\hook\fp_call.h">
       <Filter>base\hook</Filter>
     </ClInclude>
+    <ClInclude Include="base\lua\luabind\converter_uint32_t.h">
+      <Filter>base\lua\luabind</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">
