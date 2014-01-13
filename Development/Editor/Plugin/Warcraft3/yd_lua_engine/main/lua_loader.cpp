@@ -10,7 +10,7 @@
 #include <base/warcraft3/jass/hook.h>
 #include <base/util/singleton.h>
 #include <base/util/format.h>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 
@@ -71,7 +71,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 
 		if (!cheat)
 		{
-			aero::c_call<uint32_t>(RealCheat, cheat_str);
+			base::c_call<uint32_t>(RealCheat, cheat_str);
 			return ;
 		}
 
@@ -101,7 +101,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			}
 		}
 
-		aero::c_call<uint32_t>(RealCheat, cheat_str);
+		base::c_call<uint32_t>(RealCheat, cheat_str);
 	}
 
 

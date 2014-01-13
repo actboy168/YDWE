@@ -1,4 +1,4 @@
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <base/hook/iat.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/warcraft3/war3_searcher.h>
@@ -47,7 +47,7 @@ uint32_t _cdecl FakeGetUnitState(uint32_t unit_handle, uint32_t state_type)
 	case UNIT_STATE_ARMOR:
 		break;
 	default:
-		return aero::c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
+		return base::c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
 	}
 
 	war3_searcher&s = get_war3_searcher();
@@ -114,7 +114,7 @@ void _cdecl FakeSetUnitState(uint32_t unit_handle, uint32_t state_type, uint32_t
 	case UNIT_STATE_ARMOR:
 		break;
 	default:
-		aero::c_call<void>(RealSetUnitState, unit_handle, state_type, value_ptr);
+		base::c_call<void>(RealSetUnitState, unit_handle, state_type, value_ptr);
 		return;
 	}
 

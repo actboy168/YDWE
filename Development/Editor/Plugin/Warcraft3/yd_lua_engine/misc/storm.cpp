@@ -1,5 +1,5 @@
 #include "storm.h"
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 
 namespace base { namespace warcraft3 {
 
@@ -40,19 +40,19 @@ namespace base { namespace warcraft3 {
 	bool storm::load_file(HANDLE archive_handle, const char* file_name, const void** buffer_ptr, size_t* size_ptr, size_t reserve_size, uint32_t search_scope, OVERLAPPED* overlapped_ptr)
 	{
 		if (!valid()) return false;
-		return !!aero::std_call<BOOL>(fn_sfile_load_file_, archive_handle, file_name, buffer_ptr, size_ptr, reserve_size, search_scope, overlapped_ptr);
+		return !!base::std_call<BOOL>(fn_sfile_load_file_, archive_handle, file_name, buffer_ptr, size_ptr, reserve_size, search_scope, overlapped_ptr);
 	}
 
 	bool storm::unload_file(const void* buffer)
 	{
 		if (!valid()) return false;
-		return !!aero::std_call<BOOL>(fn_sfile_unload_file_, buffer);
+		return !!base::std_call<BOOL>(fn_sfile_unload_file_, buffer);
 	}
 
 	bool storm::has_file(const char* file_name)
 	{
 		if (!valid()) return false;
-		return !!aero::std_call<BOOL>(fn_sfile_exists_, file_name);
+		return !!base::std_call<BOOL>(fn_sfile_exists_, file_name);
 	}
 
 	uintptr_t storm::get_proc(uint32_t ord)

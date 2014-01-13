@@ -1,7 +1,7 @@
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/warcraft3/war3_searcher.h>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 
 namespace base { namespace warcraft3 { namespace japi {
 
@@ -40,7 +40,7 @@ void __cdecl EXDisplayChat(uint32_t player_handle, uint32_t chat_recipient, uint
 	uint32_t CGameUI = get_war3_searcher().get_gameui(0, 0);
 	if (CGameUI != 0)
 	{
-		aero::this_call<void>(InGameChatWhat, CGameUI, jass::call("GetPlayerId", player_handle), jass::from_trigstring(jass::from_string(message)), chat_recipient, (float)10.0f);
+		base::this_call<void>(InGameChatWhat, CGameUI, jass::call("GetPlayerId", player_handle), jass::from_trigstring(jass::from_string(message)), chat_recipient, (float)10.0f);
 	}
 }
 

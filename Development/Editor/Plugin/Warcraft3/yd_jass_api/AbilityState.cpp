@@ -1,4 +1,4 @@
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <base/hook/iat.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/warcraft3/jass.h>
@@ -215,7 +215,7 @@ namespace base { namespace warcraft3 { namespace japi {
 				if (rf_is_valid(rf))
 				{
 					jass::jreal_t cooldown = jass::to_real(value);
-					aero::this_call<void>(*(uintptr_t*)(*(uintptr_t*)(this) + 0x08), this, *(uintptr_t*)((uintptr_t)this + 0x08), &cooldown, 0xD01BEu, 0, 0);
+					base::this_call<void>(*(uintptr_t*)(*(uintptr_t*)(this) + 0x08), this, *(uintptr_t*)((uintptr_t)this + 0x08), &cooldown, 0xD01BEu, 0, 0);
 
 					return true;
 				}
@@ -268,10 +268,10 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			uintptr_t ability = (uintptr_t)(this) - 0xD0;
 			jass::jreal_t cooldown = jass::to_real(0.f);
-			aero::this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x2EC), ability, &cooldown, *(uintptr_t*)(ability+0x50));
+			base::this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x2EC), ability, &cooldown, *(uintptr_t*)(ability + 0x50));
 			if (jass::from_real(cooldown) > 0.f)
 			{
-				aero::this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x3A4), ability, &cooldown);
+				base::this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x3A4), ability, &cooldown);
 			}
 		}
 	};
@@ -639,7 +639,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			*buf = (char*)value_buf;
 			strncpy_s(*buf, value_len + 1, value_str, value_len);
-			//aero::this_call<void>(0x6F021FB0, ability_pool.at(ability_handle));
+			//base::this_call<void>(0x6F021FB0, ability_pool.at(ability_handle));
 		}
 		return true;
 	}

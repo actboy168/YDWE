@@ -4,7 +4,6 @@
 #include <base/util/console.h>
 #include <base/util/do_once.h>
 #include <base/warcraft3/jass/func_value.h>
-#include <aero/function/fp_call.hpp>
 #include <base/hook/inline.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
