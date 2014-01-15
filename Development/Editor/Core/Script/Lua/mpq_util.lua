@@ -46,18 +46,7 @@ end
 -- 返回值：true表示成功，false表示失败
 function mpq_util.insert_file_form_ydwe(self, map_path, path_in_archive)
 	log.trace("mpq_util.insert_file_form_ydwe.")
-	local result = false
-	local extract_file_path = fs.ydwe_path() / "logs" / path_in_archive	
-	fs.create_directories(extract_file_path:parent_path())
-	if storm.extract_file(extract_file_path, path_in_archive) then
-		result = self:insert_file(map_path, extract_file_path, path_in_archive)
-
-		-- 删除临时文件
-		pcall(fs.remove_all, extract_file_path)
-	else
-		log.error("Cannot extract " .. path_in_archive)
-	end
-	return result
+	return self:insert_file(map_path, fs.ydwe_path() / "share" / "mpq" / "units" / path_in_archive, path_in_archive)
 end
 
 -- 从地图中解压出文件来然后调用回调函数更新
