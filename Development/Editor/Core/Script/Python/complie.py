@@ -16,11 +16,6 @@ def run_bat(bat_path, cmd=None):
     p = subprocess.Popen(cmd, cwd=str(bat_path.parent_path()), stdin=open(os.devnull), stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
     for line in p.stdout.readlines():
         print(line)
-        
-def complie_opensource(configuration):
-    util.msvc.rebuild(path['OpenSource']/ 'Lua' / 'Current' / 'makefiles' / 'luacore.sln', configuration)
-    util.msvc.rebuild(path['OpenSource']/ 'LuaBind' / 'Current' / 'makefiles' / 'luabind.sln', configuration)
-    util.msvc.rebuild(path['OpenSource']/ 'luaffi' / 'makefiles' / 'luaffi.sln', configuration)
 
 def copy_crt_dll(configuration):
     if configuration == 'Release':
@@ -35,7 +30,8 @@ def complie(configuration):
     print('msvc.setup_env')
     util.msvc.setup_env()
     print('rebuild opensource')
-    complie_opensource(configuration)
+    util.msvc.rebuild(path['OpenSource']/ 'Lua' / 'Current' / 'makefiles' / 'luacore.sln', configuration)
+    util.msvc.rebuild(path['OpenSource']/ 'luaffi' / 'makefiles' / 'luaffi.sln', configuration)
     print('rebuild ydwe')
     util.msvc.rebuild(path['BuildRoot']/ 'Editor' / 'Core' / 'Solution' / 'YDWE.sln', configuration)    
     util.msvc.rebuild(path['BuildRoot']/ 'Editor' / 'Plugin' / 'YDColorizer' / 'YDColorizer.sln', configuration, 'Any CPU')

@@ -51,7 +51,6 @@ def copy_all(configuration):
     copy_lib_dll('APR-Util',     configuration)
     copy_lib_dll('Log4CXX',      configuration)
     copy_lib_dll('Lua',          configuration)
-    copy_lib_dll('LuaBind',      configuration)
     copy_lib_dll('StormLib',     configuration)
     fs.copy_file(path['OpenSource'] / 'luaffi' / 'bin' / configuration / 'ffi.dll', path['ResultCore'] / 'modules' / 'ffi.dll')
     copy_lua_script()
