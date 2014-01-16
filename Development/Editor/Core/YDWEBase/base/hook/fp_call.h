@@ -8,7 +8,7 @@
 namespace base {
 
 #define DEFINE_FP_CALL_ASSERT(z, n, param) \
-	static_assert(sizeof(uintptr_t) == sizeof(BOOST_PP_CAT(param, n)), "sizeof(uintptr_t) != sizeof(" ## BOOST_PP_STRINGIZE(BOOST_PP_CAT(param, n)) ## ")"); \
+	static_assert(sizeof(uintptr_t) >= sizeof(BOOST_PP_CAT(param, n)), "sizeof(uintptr_t) != sizeof(" ## BOOST_PP_STRINGIZE(BOOST_PP_CAT(param, n)) ## ")"); \
 	static_assert(!std::is_reference<BOOST_PP_CAT(param, n)>::value, BOOST_PP_STRINGIZE(BOOST_PP_CAT(param, n)) ## "is a reference)"); \
 
 #define DEFINE_FP_CALL(z, n, unused) \
