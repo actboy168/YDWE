@@ -1,5 +1,5 @@
-#include <aero/aero.hpp>
 #include <windows.h>
+#include <base/hook/fp_call.h>
 #include <base/hook/inline.h>
 
 namespace NYDWEPlugin
@@ -8,7 +8,7 @@ namespace NYDWEPlugin
 static uintptr_t fpgSlkStringGet;
 static BOOL __fastcall SlkStringGetHook(void *thisObject, void *dummy, int rowId, size_t index, char *buffer, size_t bufferSize)
 {
-	BOOL result = aero::this_call<BOOL>(fpgSlkStringGet, thisObject, rowId, index, buffer, bufferSize);
+	BOOL result = base::this_call<BOOL>(fpgSlkStringGet, thisObject, rowId, index, buffer, bufferSize);
 
 	void *pNode;
 	__asm

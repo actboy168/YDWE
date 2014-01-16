@@ -5,7 +5,7 @@
 #pragma warning(pop)
 #include <boost/filesystem.hpp>
 #include <boost/scope_exit.hpp>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <Windows.h>
 
 namespace fs = boost::filesystem;
@@ -68,7 +68,7 @@ namespace NLuaAPI { namespace NSTORM {
 
 		HANDLE mpqHandle;
 
-		if (!aero::std_call<BOOL>(pgStormSFileOpenArchive, mpqPath.string().c_str(), priority, 0, &mpqHandle))
+		if (!base::std_call<BOOL>(pgStormSFileOpenArchive, mpqPath.string().c_str(), priority, 0, &mpqHandle))
 		{
 			return 0;
 		}
@@ -81,7 +81,7 @@ namespace NLuaAPI { namespace NSTORM {
 		if (!pgStormSFileCloseArchive)
 			return false;
 
-		return !!aero::std_call<BOOL>(pgStormSFileCloseArchive, mpqHandle);
+		return !!base::std_call<BOOL>(pgStormSFileCloseArchive, mpqHandle);
 	}
 
 	static bool LuaMpqNativeHasFile(const std::string &pathInMpq)
@@ -89,7 +89,7 @@ namespace NLuaAPI { namespace NSTORM {
 		if (!pgStormSFileExists)
 			return false;
 
-		return !!aero::std_call<BOOL>(pgStormSFileExists, pathInMpq.c_str());
+		return !!base::std_call<BOOL>(pgStormSFileExists, pathInMpq.c_str());
 	}
 
 	static bool LuaMpqNativeExtractFile(const fs::path &filePath, const std::string &pathInMpq)
@@ -105,11 +105,11 @@ namespace NLuaAPI { namespace NSTORM {
 		{
 			if (ret)
 			{
-				aero::std_call<BOOL>(pgStormSFileUnloadFile, fileContentBuffer);
+				base::std_call<BOOL>(pgStormSFileUnloadFile, fileContentBuffer);
 			}
 		} BOOST_SCOPE_EXIT_END;
 
-		ret = aero::std_call<BOOL>(pgStormSFileLoadFile, pathInMpq.c_str(), &fileContentBuffer, &size, 0, NULL);
+		ret = base::std_call<BOOL>(pgStormSFileLoadFile, pathInMpq.c_str(), &fileContentBuffer, &size, 0, NULL);
 
 		if (ret)
 		{
@@ -152,13 +152,13 @@ namespace NLuaAPI { namespace NSTORM {
 		uint32_t size;
 		BOOL ret = FALSE;
 
-		ret = aero::std_call<BOOL>(pgStormSFileLoadFile, pathInMpq.c_str(), &fileContentBuffer, &size, 0, NULL);
+		ret = base::std_call<BOOL>(pgStormSFileLoadFile, pathInMpq.c_str(), &fileContentBuffer, &size, 0, NULL);
 
 		BOOST_SCOPE_EXIT( (&ret) (&fileContentBuffer) )
 		{
 			if (ret)
 			{
-				aero::std_call<BOOL>(pgStormSFileUnloadFile, fileContentBuffer);
+				base::std_call<BOOL>(pgStormSFileUnloadFile, fileContentBuffer);
 			}
 		} BOOST_SCOPE_EXIT_END;
 
@@ -176,7 +176,7 @@ namespace NLuaAPI { namespace NSTORM {
 
 	uint32_t LuaStormStringHash(const char* str)
 	{
-		return aero::std_call<uint32_t>(pgStormSStrHash, str);
+		return base::std_call<uint32_t>(pgStormSStrHash, str);
 	}
 }}
 

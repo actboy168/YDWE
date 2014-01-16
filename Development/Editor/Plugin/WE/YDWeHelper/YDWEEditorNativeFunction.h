@@ -8,8 +8,6 @@
 #pragma once
 #endif
 
-#include <aero/aero.hpp>
-
 namespace NYDWE
 {
 
@@ -23,7 +21,7 @@ namespace NYDWE
  * \param silent If false, WE will show a text in case of error
  * \return aero::nbool_t TRUE if success, FALSE if fail
  */
-aero::nbool_t WeTemplateStringTranslate(const char *templateString, char *buffer, size_t bufferSize, int silent);
+BOOL WeTemplateStringTranslate(const char *templateString, char *buffer, size_t bufferSize, int silent);
 
 /** \brief Show message in WE
  *

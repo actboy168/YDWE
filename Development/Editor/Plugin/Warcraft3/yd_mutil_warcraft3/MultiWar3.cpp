@@ -3,7 +3,7 @@
 #include <base/util/foreach.h>
 #include <base/warcraft3/version.h>
 #include <base/warcraft3/war3_searcher.h>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/allocators/allocator.hpp> 
 #include <boost/interprocess/containers/set.hpp>
@@ -88,7 +88,7 @@ int __stdcall fake_bind(SOCKET s, const struct sockaddr FAR* name, int namelen)
 
 				for (;;)
 				{
-					if (aero::std_call<int>(real_bind, s, name, namelen) != SOCKET_ERROR)
+					if (base::std_call<int>(real_bind, s, name, namelen) != SOCKET_ERROR)
 					{
 						g_udp_port_manager->set_self(s, udp_port);
 						return 0;
@@ -108,7 +108,7 @@ int __stdcall fake_bind(SOCKET s, const struct sockaddr FAR* name, int namelen)
 
 			for (;;)
 			{
-				if (aero::std_call<int>(real_bind, s, name, namelen) != SOCKET_ERROR)
+				if (base::std_call<int>(real_bind, s, name, namelen) != SOCKET_ERROR)
 				{
 					g_tcp_port = port;
 					return 0;
@@ -119,14 +119,14 @@ int __stdcall fake_bind(SOCKET s, const struct sockaddr FAR* name, int namelen)
 		}
     }
 
-    return aero::std_call<int>(real_bind, s, name, namelen);
+	return base::std_call<int>(real_bind, s, name, namelen);
 }
 
 int __stdcall fake_closesocket(SOCKET s)
 {
 	g_udp_port_manager->remove(s);
 
-    return aero::std_call<int>(real_closesocket, s);
+	return base::std_call<int>(real_closesocket, s);
 }
 
 int __stdcall fake_sendto(SOCKET s, const char FAR * buf, int len, int flags, const struct sockaddr FAR * to, int tolen)
@@ -158,18 +158,18 @@ int __stdcall fake_sendto(SOCKET s, const char FAR * buf, int len, int flags, co
 					sockaddr_in sock_addr = *(sockaddr_in*)to;
 					sock_addr.sin_port = ::htons(port);
 					sock_addr.sin_addr.S_un.S_addr = ::inet_addr("127.0.0.1");
-					aero::std_call<int>(real_sendto, s, (char*)buf, len, flags, (const sockaddr*)&sock_addr, sizeof(sockaddr_in));
+					base::std_call<int>(real_sendto, s, (char*)buf, len, flags, (const sockaddr*)&sock_addr, sizeof(sockaddr_in));
 				}
 			});
         }
     }
 
-    return aero::std_call<int>(real_sendto, s, buf, len, flags, to, tolen);
+	return base::std_call<int>(real_sendto, s, buf, len, flags, to, tolen);
 }
 
 HANDLE __stdcall fake_CreateEventA(LPSECURITY_ATTRIBUTES lpEventAttributes, BOOL bManualReset, BOOL bInitialState, LPCSTR lpName)
 {
-    HANDLE retval = aero::std_call<HANDLE>(real_CreateEventA, lpEventAttributes, bManualReset, bInitialState, lpName);
+	HANDLE retval = base::std_call<HANDLE>(real_CreateEventA, lpEventAttributes, bManualReset, bInitialState, lpName);
 
     if ((lpName != NULL) && (0 == strcmp(lpName, "Warcraft III Game Application")))
     {

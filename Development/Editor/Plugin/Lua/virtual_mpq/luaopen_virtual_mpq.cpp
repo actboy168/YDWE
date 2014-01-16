@@ -1,5 +1,5 @@
 #include <windows.h>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <base/file/stream.h>
 #include <base/hook/iat.h>
 #include <base/hook/inline.h>
@@ -43,7 +43,7 @@ namespace virtual_mpq
 
 		void* SMemAlloc(size_t amount)
 		{
-			return aero::std_call<void*>(real::SMemAlloc, amount, ".\\SFile.cpp", 4072, 0);
+			return base::std_call<void*>(real::SMemAlloc, amount, ".\\SFile.cpp", 4072, 0);
 		}
 
 		boost::optional<boost::filesystem::path> find_file(const char* filename)
@@ -116,57 +116,57 @@ namespace virtual_mpq
 	{
 		bool __stdcall SFileEnableDirectAccess(uint32_t flags)
 		{
-			return aero::std_call<bool>(real::SFileEnableDirectAccess, flags);
+			return base::std_call<bool>(real::SFileEnableDirectAccess, flags);
 		}
 
 		bool __stdcall SFileGetFileArchive(HANDLE file_handle, HANDLE* mpq_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileGetFileArchive, file_handle, mpq_handle_ptr);
+			return base::std_call<bool>(real::SFileGetFileArchive, file_handle, mpq_handle_ptr);
 		}
 
 		LCID __stdcall SFileSetLocale(LCID locale)
 		{
-			return aero::std_call<LCID>(real::SFileSetLocale, locale);
+			return base::std_call<LCID>(real::SFileSetLocale, locale);
 		}
 
 		bool __stdcall SFileOpenArchive(const char* mpqname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileOpenArchive, mpqname, priority, flags, mpq_handle_ptr);;
+			return base::std_call<bool>(real::SFileOpenArchive, mpqname, priority, flags, mpq_handle_ptr);;
 		}
 
 		bool __stdcall SFileOpenFile(const char* filename, HANDLE* file_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileOpenFile, filename, file_handle_ptr);;
+			return base::std_call<bool>(real::SFileOpenFile, filename, file_handle_ptr);;
 		}
 
 		bool __stdcall SFileOpenFileEx(HANDLE mpq_handle, const char *filename, uint32_t search_scope, HANDLE* file_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileOpenFileEx, mpq_handle, filename, search_scope, file_handle_ptr);;
+			return base::std_call<bool>(real::SFileOpenFileEx, mpq_handle, filename, search_scope, file_handle_ptr);;
 		}
 
 		bool __stdcall SFileCloseFile(HANDLE file_handle)
 		{
-			return aero::std_call<bool>(real::SFileCloseFile, file_handle);
+			return base::std_call<bool>(real::SFileCloseFile, file_handle);
 		}
 
 		uint32_t __stdcall SFileGetFileSize(HANDLE file_handle, uint32_t* file_size_high_ptr)
 		{
-			return aero::std_call<uint32_t>(real::SFileGetFileSize, file_handle, file_size_high_ptr);
+			return base::std_call<uint32_t>(real::SFileGetFileSize, file_handle, file_size_high_ptr);
 		}
 
 		bool __stdcall SFileReadFile(HANDLE file_handle, void* buffer, uint32_t size, uint32_t* size_ptr, uint32_t unk)
 		{
-			return aero::std_call<bool>(real::SFileReadFile, file_handle, buffer, size, size_ptr, unk);
+			return base::std_call<bool>(real::SFileReadFile, file_handle, buffer, size, size_ptr, unk);
 		}
 
 		uint32_t __stdcall SFileSetFilePointer(HANDLE file_handle, uint32_t pos, uint32_t* pos_high, uint32_t method)
 		{
-			return aero::std_call<uint32_t>(real::SFileSetFilePointer, file_handle, pos, pos_high, method);
+			return base::std_call<uint32_t>(real::SFileSetFilePointer, file_handle, pos, pos_high, method);
 		}
 
 		bool __stdcall SFileGetArchiveName(HANDLE mpq_handle, char* name, uint32_t size)
 		{
-			return aero::std_call<bool>(real::SFileGetArchiveName, mpq_handle, name, size);
+			return base::std_call<bool>(real::SFileGetArchiveName, mpq_handle, name, size);
 		}
 
 		bool __stdcall SFileLoadFile(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
@@ -176,12 +176,12 @@ namespace virtual_mpq
 				return true;
 			}
 
-			return aero::std_call<bool>(real::SFileLoadFile, filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
+			return base::std_call<bool>(real::SFileLoadFile, filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
 		}
 
 		bool __stdcall SFileUnloadFile(void* buffer)
 		{
-			return aero::std_call<bool>(real::SFileUnloadFile, buffer);
+			return base::std_call<bool>(real::SFileUnloadFile, buffer);
 		}
 
 		bool __stdcall SFileLoadFileEx(HANDLE mpq_handle, const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, uint32_t search_scope, OVERLAPPED* overlapped_ptr)
@@ -191,7 +191,7 @@ namespace virtual_mpq
 				return true;
 			}
 
-			return aero::std_call<bool>(real::SFileLoadFileEx, mpq_handle, filename, buffer_ptr, size_ptr, reserve_size, search_scope, overlapped_ptr);
+			return base::std_call<bool>(real::SFileLoadFileEx, mpq_handle, filename, buffer_ptr, size_ptr, reserve_size, search_scope, overlapped_ptr);
 		}
 
 		bool __stdcall SFileFileExists(const char* filename)
@@ -201,7 +201,7 @@ namespace virtual_mpq
 				return true;
 			}
 
-			return aero::std_call<bool>(real::SFileFileExists, filename);
+			return base::std_call<bool>(real::SFileFileExists, filename);
 		}
 
 		bool __stdcall SFileFileExistsEx(HANDLE mpq_handle, const char* filename, uint32_t flags)
@@ -211,22 +211,22 @@ namespace virtual_mpq
 				return true;
 			}
 
-			return aero::std_call<bool>(real::SFileFileExistsEx, mpq_handle, filename, flags);
+			return base::std_call<bool>(real::SFileFileExistsEx, mpq_handle, filename, flags);
 		}
 
 		bool __stdcall SFileReadFileEx(HANDLE file_handle, void* buffer, uint32_t size, uint32_t* size_ptr, uint32_t unk, OVERLAPPED* overlapped_ptr, uint32_t unk2)
 		{
-			return aero::std_call<bool>(real::SFileReadFileEx, file_handle, buffer, size, size_ptr, unk, overlapped_ptr, unk2);
+			return base::std_call<bool>(real::SFileReadFileEx, file_handle, buffer, size, size_ptr, unk, overlapped_ptr, unk2);
 		}
 
 		bool __stdcall SFileOpenFileAsArchive(HANDLE handle, const char* filename, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileOpenFileAsArchive, handle, filename, priority, flags, mpq_handle_ptr);
+			return base::std_call<bool>(real::SFileOpenFileAsArchive, handle, filename, priority, flags, mpq_handle_ptr);
 		}
 
 		bool __stdcall SFileOpenPathAsArchive(HANDLE handle, const char* pathname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileOpenPathAsArchive, handle, pathname, priority, flags, mpq_handle_ptr);
+			return base::std_call<bool>(real::SFileOpenPathAsArchive, handle, pathname, priority, flags, mpq_handle_ptr);
 		}
 	}
 

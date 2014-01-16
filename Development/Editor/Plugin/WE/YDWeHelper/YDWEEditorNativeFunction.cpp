@@ -4,6 +4,7 @@
 #include "YDWELogger.h"
 #include "YDWEEditorNativeFunction.h"
 #include <base/util/format.h>
+#include <base/hook/fp_call.h>
 
 namespace NYDWE
 {
@@ -112,10 +113,10 @@ static uint16_t gWeTemplateStringTranslatePattern[] =
 
 static void *fpgWeTemplateStringTranslate;
 
-aero::nbool_t WeTemplateStringTranslate(const char *templateString, char *buffer, size_t bufferSize, int silent)
+BOOL WeTemplateStringTranslate(const char *templateString, char *buffer, size_t bufferSize, int silent)
 {
 	if (fpgWeTemplateStringTranslate)
-		return aero::fast_call<aero::nbool_t>(fpgWeTemplateStringTranslate, templateString, buffer, bufferSize, silent);
+		return base::fast_call<BOOL>(fpgWeTemplateStringTranslate, templateString, buffer, bufferSize, silent);
 	else
 		return FALSE;
 }
@@ -281,7 +282,7 @@ aero::nbool_t WeTemplateStringTranslate(const char *templateString, char *buffer
 .text:004D5AA1 C3                                   retn
 .text:004D5AA1                      WeMessageShow endp
 */
-static boost::uint16_t gWeMessageShowPattern[] =
+static uint16_t gWeMessageShowPattern[] =
 {
 	0xFF55, 
 	0xFF8B, 0xFFEC,
@@ -301,7 +302,7 @@ static void *fpgWeMessageShow;
 void WeMessageShow(const char *message, int flag)
 {
 	if (fpgWeMessageShow)
-		aero::fast_call<void>(fpgWeMessageShow, message, flag);
+		base::fast_call<void>(fpgWeMessageShow, message, flag);
 }
 
 void NativeInit()

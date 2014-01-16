@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include "LuaEngineImpl.h"
 #include <cstdint>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <boost/filesystem.hpp>
 #include <base/exception/exception.h>
 #include <base/hook/inline.h>
@@ -30,7 +30,7 @@ int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
 	int results = 0;
 	__try
 	{
-		results = aero::c_call<int>(RealLuaPcall, L, nargs, nresults, errfunc);
+		results = base::c_call<int>(RealLuaPcall, L, nargs, nresults, errfunc);
 	}
 	__except(xp = GetExceptionInformation(), EXCEPTION_EXECUTE_HANDLER)
 	{

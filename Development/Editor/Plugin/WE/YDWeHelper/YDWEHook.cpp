@@ -4,14 +4,15 @@
 #include <algorithm>
 #include <functional>
 #include <regex>
+#include <aero/aero.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/smart_ptr.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/scope_exit.hpp>
-#include <aero/aero.hpp>
 #include <base/util/unicode.h>
 #include <base/hook/inline.h>
 #include <base/hook/iat_manager.h>
+#include <base/hook/fp_call.h>
 #include <base/util/format.h>
 
 #include <objbase.h>
@@ -114,7 +115,7 @@ BOOL __fastcall DetourWeSetWindowCaption(HWND hWnd, LPCSTR lpString)
 {
 	if ((!lpString) || base::util::is_utf8(lpString))
 	{
-		return aero::fast_call<BOOL>(pgTrueWeSetWindowCaption, hWnd, lpString);
+		return base::fast_call<BOOL>(pgTrueWeSetWindowCaption, hWnd, lpString);
 	}
 	else
 	{
@@ -131,14 +132,14 @@ uint32_t __fastcall DetourWeSetMenuItem(uint32_t this_, uint32_t edx_, uint32_t 
 		if ((str) && !base::util::is_utf8(str))
 		{
 			std::string tmp = base::util::a2u(str);
-			return aero::this_call<uint32_t>(pgTrueWeSetMenuItem, this_, item, tmp.c_str(), hotkey);
+			return base::this_call<uint32_t>(pgTrueWeSetMenuItem, this_, item, tmp.c_str(), hotkey);
 		}
 	}
 	catch (...)
 	{
 	}
 
-	return aero::this_call<uint32_t>(pgTrueWeSetMenuItem, this_, item, str, hotkey);
+	return base::this_call<uint32_t>(pgTrueWeSetMenuItem, this_, item, str, hotkey);
 }
 
 template<class CharT>
@@ -181,7 +182,7 @@ int __fastcall DetourWeStringCompare(const char* a, const char* b, bool ignore_c
 {
 	if (!a || !b)
 	{
-		return aero::fast_call<bool>(pgTrueWeStringCompare, a, b, ignore_case);
+		return base::fast_call<bool>(pgTrueWeStringCompare, a, b, ignore_case);
 	}
 
 	try
@@ -201,7 +202,7 @@ int __fastcall DetourWeStringCompare(const char* a, const char* b, bool ignore_c
 	{
 	}
 
-	return aero::fast_call<bool>(pgTrueWeStringCompare, a, b, ignore_case);
+	return base::fast_call<bool>(pgTrueWeStringCompare, a, b, ignore_case);
 }
 
 template <typename charT>
@@ -251,7 +252,7 @@ BOOL __fastcall DetourWeTriggerEditorEditboxCopy(const char *source)
 		}
 	}
 
-	return aero::fast_call<BOOL>(pgTrueWeTriggerEditorEditboxCopy, source);
+	return base::fast_call<BOOL>(pgTrueWeTriggerEditorEditboxCopy, source);
 }
 
 static uintptr_t pgTrueWeGetSystemParameter;
@@ -259,7 +260,7 @@ static bool isWeGetSystemParameterHookInstalled;
 
 static boost::int32_t __fastcall DetourWeGetSystemParameter(LPCSTR parentKey, LPCSTR childKey, boost::int32_t flag)
 {
-	boost::int32_t result = aero::fast_call<boost::int32_t>(pgTrueWeGetSystemParameter, parentKey, childKey, flag);
+	boost::int32_t result = base::fast_call<boost::int32_t>(pgTrueWeGetSystemParameter, parentKey, childKey, flag);
 
 	if (strcmp(parentKey, "WorldEditMisc") == 0)
 	{
@@ -282,13 +283,13 @@ static void *pgMapCellsGetUnknownGlobalFlag;
 
 boost::scoped_ptr<CMemoryPatch> pgWeVerifyMapCellsLimitPatcher;
 
-static boost::int32_t AERO_FP_CALL_FASTCALL DetourWeVerifyMapCellsLimit(boost::int32_t flag)
+static boost::int32_t __fastcall DetourWeVerifyMapCellsLimit(boost::int32_t flag)
 {
 	boost::int32_t cellSideLimit;
 
 	if (flag == -1)
 	{
-		flag = aero::fast_call<boost::int32_t>(pgMapCellsGetUnknownGlobalFlag);
+		flag = base::fast_call<boost::int32_t>(pgMapCellsGetUnknownGlobalFlag);
 	}
 
 	if (flag >= 1)
@@ -306,9 +307,9 @@ static boost::int32_t AERO_FP_CALL_FASTCALL DetourWeVerifyMapCellsLimit(boost::i
 static uintptr_t pgTrueWeTriggerNameCheck;
 static bool isWeTriggerNameCheckHookInstalled;
 
-static BOOL AERO_FP_CALL_FASTCALL DetourWeTriggerNameCheck(const char *triggerName, BOOL allowSpaces)
+static BOOL __fastcall DetourWeTriggerNameCheck(const char *triggerName, BOOL allowSpaces)
 {
-	//BOOL result = aero::fast_call<BOOL>(pgTrueWeTriggerNameCheck, triggerName, allowSpaces);
+	//BOOL result = base::fast_call<BOOL>(pgTrueWeTriggerNameCheck, triggerName, allowSpaces);
 	//return result;
 	return triggerName && (*triggerName != 0);
 }
@@ -318,9 +319,9 @@ static bool isWeTriggerNameInputCharCheckHookInstalled;
 
 boost::scoped_ptr<CMemoryPatch> pgWeTriggerNameInputCharCheckPatcher;
 
-static boost::uint32_t AERO_FP_CALL_FASTCALL DetourWeTriggerNameInputCharCheck(boost::uint32_t c, boost::uint32_t flag)
+static boost::uint32_t __fastcall DetourWeTriggerNameInputCharCheck(boost::uint32_t c, boost::uint32_t flag)
 {
-	//boost::uint32_t result = aero::fast_call<boost::uint32_t>(pgTrueWeTriggerNameInputCharCheck, c, flag);
+	//boost::uint32_t result = base::fast_call<boost::uint32_t>(pgTrueWeTriggerNameInputCharCheck, c, flag);
 	//return result;
 	return 1;
 }
@@ -356,11 +357,11 @@ void __fastcall DetourWeUtf8ToAnsi(const char* str)
 {
 	if (str)
 	{
-		aero::fast_call<void>(pgTrueWeUtf8ToAnsi, str);
+		base::fast_call<void>(pgTrueWeUtf8ToAnsi, str);
 	}
 	else
 	{
-		aero::fast_call<void>(pgTrueWeUtf8ToAnsi, "");
+		base::fast_call<void>(pgTrueWeUtf8ToAnsi, "");
 	}
 }
 
@@ -465,10 +466,10 @@ PIDLIST_ABSOLUTE WINAPI DetourWeSHBrowseForFolderA(LPBROWSEINFOA lpbi)
 	{
 		std::string tmp =  base::util::u2a(lpbi->lpszTitle);
 		lpbi->lpszTitle = tmp.c_str();
-		return aero::std_call<PIDLIST_ABSOLUTE>(pgTrueSHBrowseForFolderA, lpbi);
+		return base::std_call<PIDLIST_ABSOLUTE>(pgTrueSHBrowseForFolderA, lpbi);
 	}
 
-	return aero::std_call<PIDLIST_ABSOLUTE>(pgTrueSHBrowseForFolderA, lpbi);
+	return base::std_call<PIDLIST_ABSOLUTE>(pgTrueSHBrowseForFolderA, lpbi);
 }
 
 	
@@ -479,10 +480,10 @@ BOOL WINAPI DetourWeGetOpenFileNameA(LPOPENFILENAMEA lpofn)
 	{
 		std::string tmp =  base::util::u2a(lpofn->lpstrTitle);
 		lpofn->lpstrTitle = tmp.c_str();
-		return aero::std_call<BOOL>(pgTrueGetOpenFileNameA, lpofn);
+		return base::std_call<BOOL>(pgTrueGetOpenFileNameA, lpofn);
 	}
 
-	return aero::std_call<BOOL>(pgTrueGetOpenFileNameA, lpofn);
+	return base::std_call<BOOL>(pgTrueGetOpenFileNameA, lpofn);
 }
 
 static uintptr_t pgTrueGetSaveFileNameA;
@@ -492,10 +493,10 @@ BOOL WINAPI DetourWeGetSaveFileNameA(LPOPENFILENAMEA lpofn)
 	{
 		std::string tmp =  base::util::u2a(lpofn->lpstrTitle);
 		lpofn->lpstrTitle = tmp.c_str();
-		return aero::std_call<BOOL>(pgTrueGetSaveFileNameA, lpofn);
+		return base::std_call<BOOL>(pgTrueGetSaveFileNameA, lpofn);
 	}
 
-	return aero::std_call<BOOL>(pgTrueGetSaveFileNameA, lpofn);
+	return base::std_call<BOOL>(pgTrueGetSaveFileNameA, lpofn);
 }
 
 #define INSTALL_STORM_IAT_HOOK(apiName) \

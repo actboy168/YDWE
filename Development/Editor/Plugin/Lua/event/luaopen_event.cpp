@@ -7,7 +7,7 @@
 #include <boost/foreach.hpp>
 #include "YDWEEvent.h"
 #include "YDWELogger.h"
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <base/exception/exception.h>
 
 namespace NYDWE {
@@ -128,7 +128,7 @@ namespace NYDWE {
 
 	void WeMessageShow(const char *message, int flag)
 	{
-		aero::fast_call<void>(0x004D5900, message, flag);
+		base::fast_call<void>(0x004D5900, message, flag);
 	}
 
 	void SetupEvent();

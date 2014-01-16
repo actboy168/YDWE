@@ -1,5 +1,5 @@
 #include "Windows7.h"
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 
 namespace windows7
 {
@@ -12,7 +12,7 @@ namespace windows7
 			return E_FAIL;
 		}
 
-		return aero::std_call<HRESULT>(pSetCurrentProcessExplicitAppUserModelID, AppID);
+		return base::std_call<HRESULT>(pSetCurrentProcessExplicitAppUserModelID, AppID);
 	}
 
 	HRESULT ShellCreateItemFromParsingName(PCWSTR pszPath, IBindCtx *pbc, REFIID riid, void **ppv)
@@ -24,6 +24,6 @@ namespace windows7
 			return E_FAIL;
 		}
 
-		return aero::std_call<HRESULT>(pSHCreateItemFromParsingName, pszPath, pbc, riid, ppv);
+		return base::std_call<HRESULT>(pSHCreateItemFromParsingName, pszPath, pbc, riid, ppv);
 	}		
 }

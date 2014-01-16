@@ -1,5 +1,5 @@
 #include <windows.h>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/warcraft3/jass.h>
 #include <boost/preprocessor/repetition.hpp>
@@ -88,7 +88,7 @@ namespace monitor
 		static uintptr_t real_proc; \
 		static uintptr_t __cdecl fake_proc(BOOST_PP_ENUM_PARAMS(n, uint32_t p)) \
 		{ \
-			uintptr_t retval = aero::c_call<uintptr_t>(real_proc BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, p)); \
+			uintptr_t retval = base::c_call<uintptr_t>(real_proc BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, p)); \
 			handle_manager<type_name>::insert(retval); \
 			return retval; \
 		} \
@@ -111,7 +111,7 @@ namespace monitor
 		static void __cdecl fake_proc(uintptr_t h)
 		{
 			handle_manager<type_name>::erase(h);
-			aero::c_call<void>(real_proc, h);
+			base::c_call<void>(real_proc, h);
 		}
 	};
 
@@ -151,7 +151,7 @@ uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 		}
 	}
 
-	return aero::c_call<uint32_t>(RealGetLocalizedHotkey, s);
+	return base::c_call<uint32_t>(RealGetLocalizedHotkey, s);
 }
 
 void Initialize()

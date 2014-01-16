@@ -2,7 +2,7 @@
 #include "ParseCommandLine.h"
 #include "FullWindowedMode.h"
 #include <boost/bind.hpp>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <base/file/stream.h>
 #include <base/hook/iat.h>
 #include <base/path/filesystem_helper.h>
@@ -40,7 +40,7 @@ HWND WINAPI FakeCreateWindowExA(
 	HANDLE hlnstance,
 	LPVOID lpParam)
 {
-	HWND hWnd = aero::std_call<HWND>(RealCreateWindowExA, dwExStyle, lpClassName, lpWindowName, dwStyle, x,  y,  nWidth, nHeight, hWndParent, hMenu, hlnstance, lpParam);
+	HWND hWnd = base::std_call<HWND>(RealCreateWindowExA, dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hlnstance, lpParam);
 	if ((0 == strcmp(lpClassName, "Warcraft III"))
 		&& (0 == strcmp(lpWindowName, "Warcraft III"))
 		&& (NULL == g_DllMod.hWar3Wnd))
@@ -75,7 +75,7 @@ HMODULE __stdcall FakeGameLoadLibraryA(LPCSTR lpFilePath)
 		return NULL;
 	}
 
-	return aero::std_call<HMODULE>(RealGameLoadLibraryA, lpFilePath);
+	return base::std_call<HMODULE>(RealGameLoadLibraryA, lpFilePath);
 }
 
 HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
@@ -102,7 +102,7 @@ HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
 			}
 
 			HANDLE hMpq;
-			aero::std_call<BOOL>(RealSFileOpenArchive, (g_DllMod.patch_path / "Patch.mpq").string().c_str(), 9, 6, &hMpq);
+			base::std_call<BOOL>(RealSFileOpenArchive, (g_DllMod.patch_path / "Patch.mpq").string().c_str(), 9, 6, &hMpq);
 
 			g_DllMod.LoadPlugins();
 
@@ -110,7 +110,7 @@ HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
 		}
 	}
 
-	return aero::std_call<HMODULE>(RealLoadLibraryA, lpFilePath);
+	return base::std_call<HMODULE>(RealLoadLibraryA, lpFilePath);
 }
 
 DllModule::DllModule()
@@ -197,7 +197,7 @@ void DllModule::LoadPlugins()
 			uintptr_t fInitialize = (uintptr_t)::GetProcAddress(module, "Initialize");
 			if (fPluginName 
 				&& fInitialize
-				&& (it->first == std::string(aero::c_call<const char *>(fPluginName)) + ".dll"))
+				&& (it->first == std::string(base::c_call<const char *>(fPluginName)) + ".dll"))
 			{
 				++it;
 			}
@@ -210,7 +210,7 @@ void DllModule::LoadPlugins()
 
 		for (auto it = plugin_mapping.begin(); it != plugin_mapping.end(); ++it)
 		{
-			aero::c_call<void>(::GetProcAddress(it->second, "Initialize"));
+			base::c_call<void>(::GetProcAddress(it->second, "Initialize"));
 		}
 	}
 	catch(...) {
