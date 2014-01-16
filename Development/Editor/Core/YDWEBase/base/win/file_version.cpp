@@ -67,7 +67,7 @@ namespace base { namespace win {
 
 	bool file_version::create(HMODULE module_handle)
 	{
-		return create(base::path::detail::GetModulePath(module_handle).c_str());
+		return create(base::path::detail::module_path(module_handle).c_str());
 	}
 
 	bool file_version::create(const wchar_t* module_path)

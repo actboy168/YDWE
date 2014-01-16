@@ -23,15 +23,15 @@ namespace base { namespace path {
 		switch (type) 
 		{
 		case DIR_EXE:
-			return std::move(detail::GetModulePath(NULL));
+			return std::move(detail::module_path(NULL));
 		case DIR_MODULE:
-			return std::move(detail::GetModulePath(reinterpret_cast<HMODULE>(&__ImageBase)));
+			return std::move(detail::module_path(reinterpret_cast<HMODULE>(&__ImageBase)));
 		case DIR_TEMP:
-			return std::move(detail::GetTempPath());
+			return std::move(detail::temp_path());
 		case DIR_WINDOWS:
-			return std::move(detail::GetWindowsPath());
+			return std::move(detail::windows_path());
 		case DIR_SYSTEM:
-			return std::move(detail::GetSystemPath());
+			return std::move(detail::system_path());
 		case DIR_PROGRAM_FILES:
 			ENSURE(::SHGetFolderPathW(NULL, CSIDL_PROGRAM_FILES, NULL, SHGFP_TYPE_CURRENT, buffer));
 			return std::move(boost::filesystem::path(buffer));
@@ -69,9 +69,9 @@ namespace base { namespace path {
 			ENSURE(::SHGetFolderPathW(NULL, CSIDL_COMMON_DESKTOPDIRECTORY, NULL, SHGFP_TYPE_CURRENT, buffer));
 			return std::move(boost::filesystem::path(buffer));
 		case DIR_USER_QUICK_LAUNCH:
-			return std::move(detail::GetQuickLaunchPath(false));
+			return std::move(detail::quick_launch_path(false));
 		case DIR_DEFAULT_USER_QUICK_LAUNCH:
-			return std::move(detail::GetQuickLaunchPath(true));
+			return std::move(detail::quick_launch_path(true));
 		case DIR_TASKBAR_PINS:
 			{
 				boost::filesystem::path result = get(DIR_USER_QUICK_LAUNCH);

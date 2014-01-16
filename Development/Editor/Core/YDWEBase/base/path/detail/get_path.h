@@ -5,9 +5,10 @@
 #include <boost/filesystem.hpp>
 
 namespace base { namespace path { namespace detail {
-	boost::filesystem::path GetQuickLaunchPath(bool default_user);
-	boost::filesystem::path GetTempPath();
-	boost::filesystem::path GetWindowsPath();
-	boost::filesystem::path GetSystemPath();
-	_BASE_API boost::filesystem::path GetModulePath(HMODULE module_handle);
+	boost::filesystem::path quick_launch_path(bool default_user);
+	boost::filesystem::path temp_path();
+	boost::filesystem::path windows_path();
+	boost::filesystem::path system_path();
+	_BASE_API boost::filesystem::path module_path(HMODULE module_handle);
+	_BASE_API boost::filesystem::path module_path(HANDLE process_handle, HMODULE module_handle);
 }}}
