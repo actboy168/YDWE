@@ -5,5 +5,5 @@
 namespace windows7
 {
 	HRESULT SetCurrentProcessExplicitAppUserModelID(PCWSTR AppID);
-	HRESULT ShellCreateItemFromParsingName(PCWSTR pszPath, IBindCtx *pbc, REFIID riid, void **ppv);
+	HRESULT ShellCreateItemFromParsingName(PCWSTR pszPath, IBindCtx *pbc, const IID* riid, void **ppv);
 }

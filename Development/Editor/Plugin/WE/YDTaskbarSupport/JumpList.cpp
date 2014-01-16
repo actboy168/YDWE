@@ -299,7 +299,7 @@ BOOL JumpList::AddDestination(LPCWSTR lpcszCategoryName, LPCWSTR lpcszDestinatio
 	}
 
 	IShellItem* psi = NULL;
-	HRESULT hr = windows7::ShellCreateItemFromParsingName(lpcszDestinationPath, NULL, IID_IShellItem, (LPVOID*)&psi);
+	HRESULT hr = windows7::ShellCreateItemFromParsingName(lpcszDestinationPath, NULL, &IID_IShellItem, (LPVOID*)&psi);
 
 	if (FAILED(hr))
 	{
