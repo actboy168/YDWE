@@ -15,10 +15,19 @@ namespace base { namespace warcraft3 {
 	public:
 		command_line(); 
 		std::wstring str() const;
+		bool         app(const std::wstring& v);
+		bool         has(const std::wstring& key) const;
+		bool         del(const std::wstring& key);
+		bool         add(const std::wstring& key);
+		bool         add(const std::wstring& key, const std::wstring& val);
+
+	private:
+		std::wstring app_;
 
 	public:
-		static void parse(std::function<void(std::wstring const&, std::wstring const&)> proc);
+		static std::wstring parse(std::function<void(std::wstring const&, std::wstring const&)> proc);
 	};
 #pragma warning (pop)
+
 }}
 

@@ -4,13 +4,16 @@
 
 namespace base { namespace warcraft3 {
 
-	void command_line::parse(std::function<void(std::wstring const&, std::wstring const&)> proc)
+	std::wstring command_line::parse(std::function<void(std::wstring const&, std::wstring const&)> proc)
 	{
+		std::wstring result;
+
 		int argc;
 		wchar_t** argv = ::CommandLineToArgvW(::GetCommandLineW(), &argc);
-
 		if (argv)
 		{
+			result = argv[0];
+
 			std::wstring key;
 			std::wstring val;
 			for (int i = 1; i < argc; ++i)
@@ -41,18 +44,26 @@ namespace base { namespace warcraft3 {
 
 			::LocalFree(argv);
 		}
+
+		return std::move(result);
 	}
 
 	command_line::command_line()
+		: app_()
 	{
-		parse([this](std::wstring const& key, std::wstring const& val){
-			insert(std::make_pair(key, val));
+		app_ = parse([this](std::wstring const& key, std::wstring const& val){
+			add(key, val);
 		});
 	}
 
 	std::wstring command_line::str() const
 	{
 		std::wstring result;
+
+		result += L" \"";
+		result += app_;
+		result += L" \"";
+
 		foreach(auto it, *this)
 		{
 			result += L" -";
@@ -66,5 +77,32 @@ namespace base { namespace warcraft3 {
 		}
 
 		return std::move(result);
+	}
+
+	bool command_line::app(const std::wstring& v)
+	{
+		app_ = v;
+		return true;
+	}
+
+	bool command_line::has(const std::wstring& key) const
+	{
+		return this->find(key) != this->end();
+	}
+
+	bool command_line::del(const std::wstring& key)
+	{
+		this->erase(key);
+		return true;
+	}
+
+	bool command_line::add(const std::wstring& key)
+	{
+		return add(key, std::wstring());
+	}
+
+	bool command_line::add(const std::wstring& key, const std::wstring& val)
+	{
+		return this->insert(std::make_pair(key, val)).second;
 	}
 }}

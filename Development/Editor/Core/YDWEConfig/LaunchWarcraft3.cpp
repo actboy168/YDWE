@@ -6,8 +6,9 @@
 #include <base/win/process.h>
 #include <slk/reader/IniReader.hpp>
 #include <base/warcraft3/directory.h>
+#include <base/warcraft3/command_line.h>
 
-bool launch_warcraft3()
+bool launch_warcraft3(base::warcraft3::command_line& cmd)
 {
 	try {
 		boost::filesystem::path ydwe_path = base::path::get(base::path::DIR_EXE).remove_filename().remove_filename();
@@ -24,7 +25,6 @@ bool launch_warcraft3()
 		}
 
 		boost::filesystem::path inject_dll = ydwe_path / L"plugin" / L"warcraft3" / L"yd_loader.dll";
-		std::wstring command_line = L"\"" + war3_path.wstring() + L"\"";
 
 		slk::IniTable table;
 		table["MapTest"]["LaunchOpenGL"]   = "0";
@@ -39,26 +39,26 @@ bool launch_warcraft3()
 
 		if ("0" != table["MapTest"]["LaunchOpenGL"])
 		{
-			command_line += L" -opengl";
+			cmd.add(L"opengl");
 		}
 
 		if ("0" != table["MapTest"]["LaunchWindowed"])
 		{
-			command_line += L" -window";
+			cmd.add(L"window");
 		}
 
 		base::win::process warcraft3_process;
 
 		if (boost::filesystem::exists(inject_dll))
 		{
-			command_line += L" -ydwe \"";
-			command_line += ydwe_path.wstring();
-			command_line += L"\"";
-
+			cmd.add(L"ydwe", ydwe_path.wstring());
 			warcraft3_process.inject(inject_dll);			
 		}
 
-		return warcraft3_process.create(war3_path / L"war3.exe", command_line);
+
+		cmd.app(war3_path.wstring());
+		cmd.del(L"launchwar3");
+		return warcraft3_process.create(war3_path / L"war3.exe", cmd.str());
 
 	}
 	catch (...) {
