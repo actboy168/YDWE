@@ -17,9 +17,6 @@
     <ClCompile Include="DllModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParseCommandLine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LockingMouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -30,9 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DllModule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ParseCommandLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FullWindowedMode.h">

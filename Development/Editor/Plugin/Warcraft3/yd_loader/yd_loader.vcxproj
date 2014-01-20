@@ -86,7 +86,6 @@
   <ItemGroup>
     <ClCompile Include="FullWindowedMode.cpp" />
     <ClCompile Include="LockingMouse.cpp" />
-    <ClCompile Include="ParseCommandLine.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="DllModule.cpp" />
   </ItemGroup>
@@ -96,7 +95,6 @@
   <ItemGroup>
     <ClInclude Include="DllModule.h" />
     <ClInclude Include="FullWindowedMode.h" />
-    <ClInclude Include="ParseCommandLine.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(YDWE)\Editor\Core\YDWEBase\YDWEBase.vcxproj">

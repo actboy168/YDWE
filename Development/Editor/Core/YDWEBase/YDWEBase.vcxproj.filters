@@ -236,6 +236,9 @@
     <ClCompile Include="base\warcraft3\utility.cpp">
       <Filter>base\warcraft3</Filter>
     </ClCompile>
+    <ClCompile Include="base\warcraft3\command_line.cpp">
+      <Filter>base\warcraft3</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -499,6 +502,9 @@
     </ClInclude>
     <ClInclude Include="base\lua\luabind\converter_uint32_t.h">
       <Filter>base\lua\luabind</Filter>
+    </ClInclude>
+    <ClInclude Include="base\warcraft3\command_line.h">
+      <Filter>base\warcraft3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
