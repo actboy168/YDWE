@@ -45,23 +45,37 @@ local function precompile(code, output_func, lua_codes)
 end
 
 local function map_file_import(filename)
-	return function (buf)
-		local temp_file_path = fs.ydwe_path() / "logs" / "import" / filename
-		fs.create_directories(temp_file_path:parent_path())
-		if io.save(temp_file_path, buf) then
+	return function (buf, is_path)
+		local function import(path)
 			if stormlib.add_file_ex(
 				__map_handle__,
-				temp_file_path,
+				path,
 				filename,
 				bit32.bor(stormlib.MPQ_FILE_COMPRESS, stormlib.MPQ_FILE_REPLACEEXISTING),
 				stormlib.MPQ_COMPRESSION_ZLIB,
 				stormlib.MPQ_COMPRESSION_ZLIB
 			) then
 				log.trace("import file succeeded.")
-				return
+				return true
+			else
+				log.error("import file failed.")
+				return false
 			end
 		end
-		log.error("import file failed.")
+		
+		if is_path then
+			import(__map_path__:parent_path() / buf)
+			return
+		else
+			local temp_file_path = fs.ydwe_path() / "logs" / "import" / filename
+			fs.create_directories(temp_file_path:parent_path())
+			if not io.save(temp_file_path, buf) then
+				log.error("import file failed.")
+				return
+			end
+			import(temp_file_path)
+			return
+		end
 	end
 end
 
@@ -90,7 +104,7 @@ end
 
 function template.compile(self, map_path, map_handle, map_script_path)
 	log.trace("Template compilation start.")
-    
+
 	local output_path = fs.ydwe_path() / "logs" / "lua_processed.j"
 	local content, err = io.load(map_script_path)
 	if not content then
@@ -98,8 +112,9 @@ function template.compile(self, map_path, map_handle, map_script_path)
 		return nil
 	end
 
-   	package.loaded['slk'] = nil
-   	__map_handle__ = map_handle
+	package.loaded['slk'] = nil
+	__map_handle__ = map_handle
+	__map_path__   = map_path
 	local env = setmetatable({import = map_file_import, StringHash = string_hash}, {__index = _G})
 	local success, content = self:do_compile(content, env)
 	if not success then
