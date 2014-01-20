@@ -60,9 +60,9 @@ namespace base { namespace warcraft3 {
 	{
 		std::wstring result;
 
-		result += L" \"";
+		result += L"\"";
 		result += app_;
-		result += L" \"";
+		result += L"\"";
 
 		foreach(auto it, *this)
 		{
@@ -72,7 +72,7 @@ namespace base { namespace warcraft3 {
 			{
 				result += L" \"";
 				result += it.second;
-				result += L" \"";
+				result += L"\"";
 			}
 		}
 
