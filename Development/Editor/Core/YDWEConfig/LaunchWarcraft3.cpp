@@ -24,6 +24,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 			return false;
 		}
 
+		war3_path = war3_path / L"war3.exe";
 		boost::filesystem::path inject_dll = ydwe_path / L"plugin" / L"warcraft3" / L"yd_loader.dll";
 
 		slk::IniTable table;
@@ -55,11 +56,9 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 			warcraft3_process.inject(inject_dll);			
 		}
 
-
 		cmd.app(war3_path.wstring());
 		cmd.del(L"launchwar3");
-		return warcraft3_process.create(war3_path / L"war3.exe", cmd.str());
-
+		return warcraft3_process.create(war3_path, cmd.str());
 	}
 	catch (...) {
 	}
