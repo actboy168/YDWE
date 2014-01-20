@@ -27,17 +27,16 @@ bool FileAssociation::Classes::remove(base::registry::write_key_w& root)
 	return false;
 }
 
-bool FileAssociation::Classes::set(base::registry::write_key_w const& root, std::wstring const& description, std::wstring const& icon_path, std::wstring const& command)
+bool FileAssociation::Classes::set(base::registry::write_key_w const& root, std::wstring const& description, std::wstring const& icon_path, std::wstring const& command1, std::wstring const& command2)
 {
 	try {
 		base::registry::write_key_w reg(root, name_);
 		reg[L""] = description;
 
-		// Default Icon
 		(reg / L"DefaultIcon")[L""] = icon_path;
-
-		// Shell\Open\Command
-		(reg / L"shell\\open\\command")[L""] = command;
+		(reg / L"shell\\open\\command")[L""] = command1;
+		(reg / L"shell\\run_war3")[L""] = L"”√ydwe≤‚ ‘µÿÕº";
+		(reg / L"shell\\run_war3\\command")[L""] = command2;
 
 		return true;
 	} catch (base::registry::registry_exception const& ) { }
@@ -101,19 +100,20 @@ FileAssociation::FileAssociation(fs::path const& ydwe_path)
 	, ext_w3x_(L".w3x")
 	, ext_w3m_(L".w3m")
 	, icon_path_(ydwe_path.parent_path() / L"bin" / L"logo.ico")
-	, command_(L"\"" + ydwe_path.wstring() + L"\" -loadfile \"%1\"")
+	, command1_(L"\"" + ydwe_path.wstring() + L"\" -loadfile \"%1\"")
+	, command2_(L"\"" + (ydwe_path.parent_path() / L"bin" / L"ydweconfig.exe").wstring() + L"\" -launchwar3 -loadfile \"%1\"")
 { }
 
 bool FileAssociation::has_w3x()
 {
-	return classes_.has(root_, command_) 
+	return classes_.has(root_, command1_)
 		&& ext_w3x_.has(root_, classes_)
 		&& (!ext_w3x_.has_owl(root2_));
 }
 
 bool FileAssociation::has_w3m()
 {
-	return classes_.has(root_, command_) 
+	return classes_.has(root_, command1_)
 		&& ext_w3m_.has(root_, classes_)
 		&& (!ext_w3m_.has_owl(root2_));
 }
@@ -152,7 +152,7 @@ bool FileAssociation::set_w3m()
 
 bool FileAssociation::set_classes()
 {
-	return classes_.set(root_, L"YDWE Map File", icon_path_.wstring(), command_);
+	return classes_.set(root_, L"YDWE Map File", icon_path_.wstring(), command1_, command2_);
 }
 
 bool Registry::has(HKEY hkey, std::wstring const& name, std::wstring const& key)

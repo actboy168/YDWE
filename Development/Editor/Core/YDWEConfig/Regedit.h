@@ -18,7 +18,7 @@ private:
 		std::wstring const& name() const;
 		bool has(base::registry::write_key_w& root, std::wstring const& command) const;
 		bool remove(base::registry::write_key_w& root);
-		bool set(base::registry::write_key_w const& root, std::wstring const& description, std::wstring const& icon_path, std::wstring const& command);
+		bool set(base::registry::write_key_w const& root, std::wstring const& description, std::wstring const& icon_path, std::wstring const& command1, std::wstring const& command2);
 
 	private:
 		std::wstring name_;
@@ -60,7 +60,8 @@ private:
 	FileAssociation::Ext ext_w3m_;
 
 	fs::path icon_path_;
-	std::wstring command_;
+	std::wstring command1_;
+	std::wstring command2_;
 };
 
 class Registry
