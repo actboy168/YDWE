@@ -272,7 +272,7 @@ bool DllModule::SearchPatch(fs::path& result, std::wstring const& fv_str)
 
 void DllModule::Attach()
 {
-	base::warcraft3::parse_command_line([&](std::wstring const& key, std::wstring const& val){
+	base::warcraft3::command_line::parse([&](std::wstring const& key, std::wstring const& val){
 		if (key == L"ydwe")
 		{
 			ydwe_path = val;
