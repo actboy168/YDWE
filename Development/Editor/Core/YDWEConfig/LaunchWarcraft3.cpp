@@ -2,11 +2,23 @@
 #include <boost/filesystem.hpp>
 #include <base/file/stream.h>
 #include <base/path/service.h>
+#include <base/path/filesystem_helper.h>
 #include <base/win/env_variable.h>
 #include <base/win/process.h>
 #include <slk/reader/IniReader.hpp>
 #include <base/warcraft3/directory.h>
 #include <base/warcraft3/command_line.h>
+#include <base/win/registry/key.h>
+
+std::wstring get_test_map_path()
+{
+	std::wstring result = L"Maps\\Test\\WorldEditTestMap";
+	try {
+		result = base::registry::read_key_w(HKEY_CURRENT_USER, L"Software\\Blizzard Entertainment\\WorldEdit")[L"Test Map - Copy Location"].get<std::wstring>();
+	}
+	catch (base::registry::registry_exception const&) {}
+	return std::move(result);
+}
 
 bool launch_warcraft3(base::warcraft3::command_line& cmd)
 {
@@ -22,6 +34,28 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		if (!base::warcraft3::directory::get(nullptr, war3_path))
 		{
 			return false;
+		}
+
+		//
+		//  war3.exe -loadfile "xxx.w3x"
+		//  据测试，当xxx.w3x的长度>=54时，war3会无法识别(原因不明)
+		//  所以这里模仿we测试地图的行为，将地图复制到war3目录下，并使用相对路径(相对war3根目录的目录)
+		//
+		if (cmd.has(L"loadfile"))
+		{
+			boost::filesystem::path loadfile = cmd[L"loadfile"];
+
+			// war3将非.w3g后缀名的文件当地图处理
+			if (!base::path::equal(loadfile.extension(), L".w3g"))
+			{
+				boost::filesystem::path test_map_path = boost::filesystem::path(get_test_map_path()) / loadfile.extension();
+				try {
+					boost::filesystem::copy_file(loadfile, war3_path / test_map_path, boost::filesystem::copy_option::overwrite_if_exists);
+					cmd[L"loadfile"] = test_map_path.wstring();
+				}
+				catch (...) {
+				}
+			}
 		}
 
 		war3_path = war3_path / L"war3.exe";
