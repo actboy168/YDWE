@@ -78,27 +78,11 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		std::string cheat_s = cheat;
 		if (cheat_s.compare(0, 4, "run ") == 0)
 		{
-			lua::state* ls = jass_state_s::instance().get();
-
 			cheat_s = cheat_s.substr(4);
-
-			const char* buffer = nullptr;
-			size_t      size   = 0;
-			storm& s = util::singleton_nonthreadsafe<storm>::instance();
-			if (s.load_file(cheat_s.c_str(), (const void**)&buffer, &size))
-			{
-				if (luaL_loadbuffer(ls->self(), buffer, size, cheat_s.c_str()) == LUA_OK)
-				{
-					safe_pcall(ls->self(), 0, 0);
-				}
-				else
-				{
-					printf("%s\n", ls->tostring(-1));
-					ls->pop(1);
-				}
-				
-				s.unload_file(buffer);
-			}
+			lua::state* ls = jass_state_s::instance().get();
+			ls->getglobal("require");
+			ls->pushlstring(cheat_s.c_str(), cheat_s.size());
+			safe_pcall(ls->self(), 1, 1);
 		}
 
 		base::c_call<uint32_t>(RealCheat, cheat_str);
