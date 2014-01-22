@@ -18,6 +18,7 @@ namespace base { namespace win {
 		process();
 		~process();
 		bool     inject(const boost::filesystem::path& dll_path);
+		bool     hide_window();
 		bool     redirect(HANDLE std_input, HANDLE std_output, HANDLE std_error);
 		bool     create(const boost::filesystem::path& application, const std::wstring& command_line, const boost::filesystem::path& current_directory);
 		bool     create(const boost::filesystem::path& application, const std::wstring& command_line);

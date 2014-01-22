@@ -147,6 +147,18 @@ namespace base { namespace win {
 		return false;
 	}
 
+	bool process::hide_window()
+	{
+		if (statue_ == PROCESS_STATUE_READY)
+		{
+			si_.dwFlags |= STARTF_USESHOWWINDOW;
+			si_.wShowWindow = SW_HIDE;
+			return true;
+		}
+
+		return false;
+	}
+
 	bool process::redirect(HANDLE std_input, HANDLE std_output, HANDLE std_error)
 	{
 		if (statue_ == PROCESS_STATUE_READY)

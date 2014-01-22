@@ -75,6 +75,7 @@ function sys.spawn_pipe (command_line, current_dir)
 	local out_rd, out_wr = sys.open_pipe()
 	local err_rd, err_wr = sys.open_pipe()
 	local p = sys.process()
+	p:hide_window()
 	p:redirect(in_rd, out_wr, err_wr)
 	if not p:create(nil, command_line, current_dir) then
 		log.error(string.format("Executed %s failed", command_line))

@@ -507,11 +507,12 @@ int luaopen_sys(lua_State *pState)
 
 		class_<base::win::process>("process")
 			.def(constructor<>())
-			.def("inject",     &base::win::process::inject)
-			.def("redirect",   &NLuaAPI::NSys::LuaProcessRedirect)
-			.def("create",     &NLuaAPI::NSys::LuaProcessCreate)
-			.def("wait",       (uint32_t (base::win::process::*)())&base::win::process::wait)
-			.def("close",      &base::win::process::close)
+			.def("inject",      &base::win::process::inject)
+			.def("hide_window", &base::win::process::hide_window)
+			.def("redirect",    &NLuaAPI::NSys::LuaProcessRedirect)
+			.def("create",      &NLuaAPI::NSys::LuaProcessCreate)
+			.def("wait",        (uint32_t (base::win::process::*)())&base::win::process::wait)
+			.def("close",       &base::win::process::close)
 		,
 
 		// Retrieve & set directories
