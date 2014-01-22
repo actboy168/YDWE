@@ -48,7 +48,7 @@ namespace win {
 			return std::move(boost::optional<std::wstring>());
 		}
 
-		return std::move(boost::optional<std::wstring>(std::wstring(buffer.begin(), buffer.end())));
+		return std::move(boost::optional<std::wstring>(std::wstring(buffer.begin(), buffer.begin() + retval)));
 	}
 
 	bool env_variable::set(std::wstring const& value)
