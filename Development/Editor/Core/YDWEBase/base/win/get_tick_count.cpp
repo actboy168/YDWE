@@ -1,19 +1,62 @@
 #include <base/win/get_tick_count.h>
+#include <base/thread/lock/spin.h>
+#include <base/thread/lock/guard.h>
+#include <base/util/singleton.h>
 #include <windows.h>
 
 namespace base { namespace win {
-	
+
+	namespace detail
+	{
+		class get_tick_count
+		{
+		public:
+			get_tick_count()
+				: ptr_(reinterpret_cast<GetTickCount64_t>(::GetProcAddress(::GetModuleHandleW(L"kernel32.dll"), "GetTickCount64")))
+			{
+				if (!ptr_)
+				{
+					ptr_ = custom;
+				}
+			}
+
+			uint64_t call() const
+			{
+				return ptr_();
+			}
+
+		private:
+			typedef ULONGLONG(WINAPI* GetTickCount64_t)();
+			GetTickCount64_t ptr_;
+
+		private:
+			static uint32_t             rollover_time;
+			static uint32_t             lastnow_time;
+			static thread::lock::spin<> gtc_lock;
+
+			static uint64_t __stdcall custom()
+			{
+				uint32_t now = ::GetTickCount();
+
+				thread::lock::guard<thread::lock::spin<>>  lock(gtc_lock);
+
+				if ((now < lastnow_time) && ((lastnow_time - now) >(1 << 30)))
+				{
+					++rollover_time;
+				}
+				lastnow_time = now;
+
+				return (((uint64_t)rollover_time) << 32) | now;
+			}
+		};
+
+		uint32_t  get_tick_count::rollover_time = 0;
+		uint32_t  get_tick_count::lastnow_time = 0;
+		thread::lock::spin<> get_tick_count::gtc_lock;
+	}
+
 	uint64_t get_tick_count()
 	{
-		static uint64_t s_rollover_time = 0;
-		static uint32_t s_lastnow_time  = 0;
-		uint32_t now = ::GetTickCount();
-		
-		if (now < s_lastnow_time) 
-		{
-			s_rollover_time += 0x100000000I64;  // ~49.7 days.
-		}
-		s_lastnow_time = now;
-		return now + s_rollover_time;
+		return util::singleton_threadsafe<detail::get_tick_count>::instance().call();
 	}
 }}

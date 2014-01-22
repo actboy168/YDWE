@@ -214,6 +214,8 @@
     <ClInclude Include="base\path\filesystem_helper.h" />
     <ClInclude Include="base\path\self.h" />
     <ClInclude Include="base\path\service.h" />
+    <ClInclude Include="base\thread\lock\guard.h" />
+    <ClInclude Include="base\thread\lock\spin.h" />
     <ClInclude Include="base\thread\thread.h" />
     <ClInclude Include="base\thread\thread_exception.h" />
     <ClInclude Include="base\util\buffer.h" />

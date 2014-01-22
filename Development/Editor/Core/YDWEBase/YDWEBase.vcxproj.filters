@@ -71,6 +71,9 @@
     <Filter Include="base\win\registry">
       <UniqueIdentifier>{306f1d0f-9d0f-4f74-a119-6bdbeb6a31f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\thread\lock">
+      <UniqueIdentifier>{3beaa0e4-1378-4d7e-8d51-a8869869b7f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -505,6 +508,12 @@
     </ClInclude>
     <ClInclude Include="base\warcraft3\command_line.h">
       <Filter>base\warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="base\thread\lock\spin.h">
+      <Filter>base\thread\lock</Filter>
+    </ClInclude>
+    <ClInclude Include="base\thread\lock\guard.h">
+      <Filter>base\thread\lock</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
