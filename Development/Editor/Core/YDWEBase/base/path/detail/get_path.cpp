@@ -53,14 +53,18 @@ namespace base { namespace path { namespace detail {
 			return std::move(boost::filesystem::path(result.get()));
 		}
 
-		wchar_t buffer[MAX_PATH + 1];
-		DWORD path_len = ::GetTempPathW(MAX_PATH, buffer);
-		if (path_len >= MAX_PATH || path_len <= 0)
+		std::dynarray<wchar_t> buffer(::GetTempPathW(0, nullptr));
+		if (buffer.empty() || ::GetTempPathW(buffer.size(), &buffer[0]) == 0)
 		{
-			throw windows_exception("::GetTempPathW(MAX_PATH, buffer) failed.");
+			throw windows_exception("::GetTempPathW failed.");
 		}
 
-		return std::move(boost::filesystem::path(buffer));
+		boost::filesystem::path p(buffer.begin(), buffer.begin() + buffer.size() - 1);
+		if (!boost::filesystem::is_directory(p))
+		{
+			throw windows_exception("::GetTempPathW failed.");
+		}
+		return std::move(p);
 	}
 
 	boost::filesystem::path windows_path()
