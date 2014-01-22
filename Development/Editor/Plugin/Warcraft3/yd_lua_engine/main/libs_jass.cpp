@@ -134,6 +134,14 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return jass_call_native_function(lj, (const jass::func_value*)lj->tounsigned(lua_upvalueindex(1)));
 	}
 
+	int jass_call_null_function(lua_State* L)
+	{
+		jassbind* lj = (jassbind*)L;
+		printf("Wanring: %s\n", lj->tostring(lua_upvalueindex(1)));
+		lj->pushnil();
+		return 1;
+	}
+
 	void jass_get_global_variable(jassbind* lj, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value)
 	{
 		switch (opt)
@@ -176,9 +184,18 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jass::func_value const* nf = jass::jass_func(name);
 		if (nf && nf->is_valid())
 		{
-			lj->pushunsigned((uint32_t)(uintptr_t)nf);
-			lj->pushcclosure((lua::state::cfunction)jass_call_closure, 1);
-			return 1;
+			if (0 == strcmp(name, "TriggerSleepAction"))
+			{
+				lj->pushstring("TriggerSleepAction isn't implemented.");
+				lj->pushcclosure((lua::state::cfunction)jass_call_null_function, 1);
+				return 1;
+			}
+			else
+			{
+				lj->pushunsigned((uint32_t)(uintptr_t)nf);
+				lj->pushcclosure((lua::state::cfunction)jass_call_closure, 1);
+				return 1;
+			}
 		}
 
 		if (!is_gaming())
