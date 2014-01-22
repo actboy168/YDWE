@@ -55,10 +55,10 @@ local function map_file_import(filename)
 				stormlib.MPQ_COMPRESSION_ZLIB,
 				stormlib.MPQ_COMPRESSION_ZLIB
 			) then
-				log.trace("import file succeeded.")
+				log.trace("succeeded: import " .. filename)
 				return true
 			else
-				log.error("import file failed.")
+				log.error("failed: import " .. path:string())
 				return false
 			end
 		end
@@ -70,7 +70,7 @@ local function map_file_import(filename)
 			local temp_file_path = fs.ydwe_path() / "logs" / "import" / filename
 			fs.create_directories(temp_file_path:parent_path())
 			if not io.save(temp_file_path, buf) then
-				log.error("import file failed.")
+				log.error("failed: save " .. temp_file_path:string())
 				return
 			end
 			import(temp_file_path)
