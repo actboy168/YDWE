@@ -212,6 +212,11 @@ HGLOBAL CreateGlobalData(const std::basic_string<charT>& str)
 	if (data) 
 	{
 		charT* raw_data = static_cast<charT*>(::GlobalLock(data));
+		if (!raw_data)
+		{
+			::GlobalUnlock(data);
+			return nullptr;
+		}
 		memcpy(raw_data, str.data(), str.size() * sizeof(charT));
 		raw_data[str.size()] = '\0';
 		::GlobalUnlock(data);
