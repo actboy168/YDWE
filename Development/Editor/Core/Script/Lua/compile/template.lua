@@ -44,36 +44,19 @@ local function precompile(code, output_func, lua_codes)
 	return 
 end
 
-local function map_file_import(filename)
-	return function (buf, is_path)
-		local function import(path)
-			if stormlib.add_file_ex(
-				__map_handle__,
-				path,
-				filename,
-				bit32.bor(stormlib.MPQ_FILE_COMPRESS, stormlib.MPQ_FILE_REPLACEEXISTING),
-				stormlib.MPQ_COMPRESSION_ZLIB,
-				stormlib.MPQ_COMPRESSION_ZLIB
-			) then
-				log.trace("succeeded: import " .. filename)
-				return true
-			else
-				log.error("failed: import " .. path:string())
-				return false
-			end
-		end
-		
+local function map_file_import(path_in_archive)
+	return function (buf, is_path)		
 		if is_path then
-			import(__map_path__:parent_path() / buf)
+			mpq_util:import_file(__map_handle__, __map_path__:parent_path() / buf, path_in_archive)
 			return
 		else
-			local temp_file_path = fs.ydwe_path() / "logs" / "import" / filename
+			local temp_file_path = fs.ydwe_path() / "logs" / "import" / path_in_archive
 			fs.create_directories(temp_file_path:parent_path())
 			if not io.save(temp_file_path, buf) then
 				log.error("failed: save " .. temp_file_path:string())
 				return
 			end
-			import(temp_file_path)
+			mpq_util:import_file(__map_handle__, temp_file_path, path_in_archive)
 			return
 		end
 	end
@@ -85,7 +68,13 @@ end
 
 template = {}
 	
-function template.do_compile (self, code, env)
+function template:do_compile(op)
+	local code, err = io.load(op.input)
+	if not code then
+		log.error("Template read " .. op.input:string() .. ". Error: " .. err)
+		return false, err
+	end
+	
 	local lua_codes = {''}
 	table.insert(lua_codes, "local __jass_result__ = {''}")
 	table.insert(lua_codes, "local function __jass_output__(str) table.insert(__jass_result__, str) end")
@@ -93,6 +82,11 @@ function template.do_compile (self, code, env)
 	if not r then
 		return r, err
 	end
+	
+	package.loaded['slk'] = nil
+	__map_handle__ = op.map_handle
+	__map_path__   = op.map_path
+	local env = setmetatable({import = map_file_import, StringHash = string_hash}, {__index = _G})
 	table.insert(lua_codes, "return table.concat(__jass_result__)")	
 	local f, err = loadstring(table.concat(lua_codes, '\n'), nil, 't', env)
 	if not f then
@@ -102,21 +96,10 @@ function template.do_compile (self, code, env)
 	return pcall(f)
 end
 
-function template.compile(self, map_path, map_handle, map_script_path)
+function template:compile(op)
 	log.trace("Template compilation start.")
-
-	local output_path = fs.ydwe_path() / "logs" / "lua_processed.j"
-	local content, err = io.load(map_script_path)
-	if not content then
-		log.error("Template read " .. map_script_path:string() .. ". Error: " .. err)
-		return nil
-	end
-
-	package.loaded['slk'] = nil
-	__map_handle__ = map_handle
-	__map_path__   = map_path
-	local env = setmetatable({import = map_file_import, StringHash = string_hash}, {__index = _G})
-	local success, content = self:do_compile(content, env)
+	op.output = fs.ydwe_path() / "logs" / "lua_processed.j"
+	local success, content = self:do_compile(op)
 	if not success then
 		if content then
 			gui.message_dialog(nil, content, _("Error"), bit32.bor(gui.MB_ICONERROR, gui.MB_OK))
@@ -124,15 +107,15 @@ function template.compile(self, map_path, map_handle, map_script_path)
 			gui.message_dialog(nil, _("Unknown"), _("Error"), bit32.bor(gui.MB_ICONERROR, gui.MB_OK))
 		end			
 		log.error("Template error processing: " .. tostring(content))
-		return nil
+		return false
 	end
 
-	local result, err = io.save(output_path, content)
+	local result, err = io.save(op.output, content)
 	if not result then
-		log.error("Template write " .. output_path:string() .. ". Error: " .. err)
-		return nil
+		log.error("Template write " .. op.output:string() .. ". Error: " .. err)
+		return false
 	end
 	
 	log.debug("Template compilation succeeded.")
-	return output_path
+	return true
 end

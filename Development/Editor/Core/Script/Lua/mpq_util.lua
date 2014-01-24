@@ -5,48 +5,29 @@ local stormlib = ar.stormlib
 mpq_util = {}
 
 -- 添加文件给地图
--- map_path - 地图路径，fs.path
+-- mpq_handle - 已经打开的地图handle
 -- file_path - 需要加入的文件的路径，fs.path
 -- path_in_archive - 地图压缩包中的路径，string
 -- 返回值：true表示成功，false表示失败
-function mpq_util.insert_file(self, map_path, file_path, path_in_archive)
-	log.trace("mpq_util.insert_file.")
-	-- 结果
-	local result = false
+function mpq_util:import_file(mpq_handle, file_path, path_in_archive)
+	log.trace("mpq_util.import_file.")
 
-	-- 打开MPQ（地图）
-	local mpq_handle = stormlib.open_archive(map_path, 0, 0)
-	if mpq_handle then
-		if stormlib.add_file_ex(
-			mpq_handle,
-			file_path,
-			path_in_archive,
-			bit32.bor(stormlib.MPQ_FILE_COMPRESS, stormlib.MPQ_FILE_REPLACEEXISTING),
-			stormlib.MPQ_COMPRESSION_ZLIB,
-			stormlib.MPQ_COMPRESSION_ZLIB
-		) then
-			result = true
-			log.error("insert_file .")
-		else
-			log.error("insert_file " .. map_path:string() .. " faild. ")
-		end
-
-		-- 关闭地图
-		stormlib.close_archive(mpq_handle)
+	if stormlib.add_file_ex(
+		mpq_handle,
+		file_path,
+		path_in_archive,
+		bit32.bor(stormlib.MPQ_FILE_COMPRESS, stormlib.MPQ_FILE_REPLACEEXISTING),
+		stormlib.MPQ_COMPRESSION_ZLIB,
+		stormlib.MPQ_COMPRESSION_ZLIB
+	) then
+		log.trace("succeeded: import " .. path_in_archive)
+		return true
 	else
-		log.error("Cannot open map archive " .. map_path)
+		log.error("failed: import " .. path:string())
+		return false
 	end
 
 	return result
-end
-
--- 添加文件给地图
--- map_path - 地图路径，fs.path
--- path_in_archive - 地图压缩包中的路径，string
--- 返回值：true表示成功，false表示失败
-function mpq_util.insert_file_form_ydwe(self, map_path, path_in_archive)
-	log.trace("mpq_util.insert_file_form_ydwe.")
-	return self:insert_file(map_path, fs.ydwe_path() / "share" / "mpq" / "units" / path_in_archive, path_in_archive)
 end
 
 -- 从地图中解压出文件来然后调用回调函数更新
@@ -55,7 +36,7 @@ end
 -- process_function - 函数，必须接收一个fs.path对象，返回一个fs.path对象
 -- 形如 function (in_path) return out_path end
 -- 返回值：true表示成功，false表示失败
-function mpq_util.update_file(self, map_path, path_in_archive, process_function)
+function mpq_util:update_file(map_path, path_in_archive, process_function)
 	-- 结果
 	local result = false
 	log.trace("mpq_util.update_file.")
@@ -78,21 +59,9 @@ function mpq_util.update_file(self, map_path, path_in_archive, process_function)
 				-- 如果函数成功完成任务
 				if out_file_path then
 					-- 替换文件
-					if stormlib.add_file_ex(
-						mpq_handle,
-						out_file_path,
-						path_in_archive,
-						bit32.bor(stormlib.MPQ_FILE_COMPRESS, stormlib.MPQ_FILE_REPLACEEXISTING),
-						stormlib.MPQ_COMPRESSION_ZLIB,
-						stormlib.MPQ_COMPRESSION_ZLIB
-					) then
-						log.trace("Archive update succeeded.")
-						result = true
-					else
-						log.error("Error occurred when write back")
-					end
+					result = mpq_util:import_file(mpq_handle, out_file_path, path_in_archive)
 				else
-					-- 出现了错误--
+					-- 出现了错误
 					log.error("Processor function cannot complete its task.")
 				end
 			else
@@ -118,7 +87,7 @@ end
 -- 从主程序的mpq目录下载入MPQ
 -- mpqname - MPQ的文件名
 -- 返回值：MPQ句柄
-function mpq_util.load_mpq(self, mpqname, priority)
+function mpq_util:load_mpq(mpqname, priority)
 	local result = 0
 	local mpq = fs.ydwe_path() / "share" / "mpq" / mpqname
 

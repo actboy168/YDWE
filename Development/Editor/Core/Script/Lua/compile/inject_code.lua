@@ -1,30 +1,33 @@
 
 inject_code = {}
 
--- ×¢Èë´úÂë±í
+-- æ³¨å…¥ä»£ç è¡¨
 inject_code.new_table = {}
 inject_code.old_table = {}
 
+function inject_code:inject_file(op, path_in_archive)
+	op.inject_file(fs.ydwe_path() / "share" / "mpq" / "units" / path_in_archive, path_in_archive)
+end
 
--- Õì²âÐèÒª×¢ÈëÄÄÐ©´úÂë
--- map_script_path - ½Å±¾µÄÂ·¾¶£¬fs.path±äÁ¿
--- option - Ñ¡Ïî£¬tableÀàÐÍ£¬Ö§³Ö³ÉÔ±£º
--- 	runtime_version - ±íÊ¾Ä§ÊÞ°æ±¾
--- ·µ»Ø£ºÒ»¸ötable£¬Êý×éÐÎÊ½£¬°üº¬ËùÓÐÐèÒª×¢ÈëµÄÎÄ¼þÃû£¨×¢Òâ²»ÊÇfs.path£©
-function inject_code.detect(self, map_script_path, option)	
-	-- ½á¹û±äÁ¿
+-- ä¾¦æµ‹éœ€è¦æ³¨å…¥å“ªäº›ä»£ç 
+-- op.input - è„šæœ¬çš„è·¯å¾„ï¼Œfs.pathå˜é‡
+-- op.option - é€‰é¡¹ï¼Œtableç±»åž‹ï¼Œæ”¯æŒæˆå‘˜ï¼š
+-- 	runtime_version - è¡¨ç¤ºé­”å…½ç‰ˆæœ¬
+-- è¿”å›žï¼šä¸€ä¸ªtableï¼Œæ•°ç»„å½¢å¼ï¼ŒåŒ…å«æ‰€æœ‰éœ€è¦æ³¨å…¥çš„æ–‡ä»¶åï¼ˆæ³¨æ„ä¸æ˜¯fs.pathï¼‰
+function inject_code:detect(op)	
+	-- ç»“æžœå˜é‡
 	local inject_code = nil
 	local inject_slk = false
 	
-	-- ¶ÁÈëËùÓÐÎÄ±¾
-	local s, e = io.load(map_script_path)
-	-- ÎÄ¼þ´æÔÚ
+	-- è¯»å…¥æ‰€æœ‰æ–‡æœ¬
+	local s, e = io.load(op.input)
+	-- æ–‡ä»¶å­˜åœ¨
 	if s then
-		-- ½á¹û
+		-- ç»“æžœ
 		inject_code = {}
 
-		-- ¼ì²éÊÇ·ñÓÐÐèÒª×¢ÈëµÄº¯Êý
-		local all_table = option.runtime_version:is_new() and self.new_table or self.old_table		
+		-- æ£€æŸ¥æ˜¯å¦æœ‰éœ€è¦æ³¨å…¥çš„å‡½æ•°
+		local all_table = op.option.runtime_version:is_new() and self.new_table or self.old_table		
 		local GeneralBounsSystemFile = fs.ydwe_path() / "jass" / "YDWEGeneralBounsSystem.j"
 
 		for file, function_table in pairs(all_table) do	
@@ -50,29 +53,35 @@ function inject_code.detect(self, map_script_path, option)
 		log.error(e)
 	end
 
-	return inject_code, inject_slk
+	if inject_slk then
+		self:inject_file(op, "units\\abilitydata.slk")
+		--ä¼šæŽ‰çº¿
+		--self:inject_file(op, "units\\abilitymetadata.slk")
+	end
+	
+	return inject_code
 end
 
--- ×¢Èë´úÂëµ½Jass´úÂëÎÄ¼þ£¨×î³£¼ûµÄÊÇwar3map.j£©ÖÐ
--- map_script_path - war3map.jµÄÂ·¾¶£¬fs.path¶ÔÏó
--- inject_code_path_table - ËùÓÐÐèÒª×¢ÈëµÄ´úÂëÎÄ¼þÂ·¾¶£¬table£¬tableÖÐ¿ÉÒÔÊÇ
--- 		string - ´ËÊ±ÎªYDWE / "jass" Ä¿Â¼ÏÂµÄ¶ÔÓ¦Ãû³ÆµÄÎÄ¼þ
---		fs.path - ´ËÊ±È¡ÆäÂ·¾¶
--- ×¢£º¸Ãtable±ØÐëÊÇÊý×éÐÎÊ½µÄ£¬¹þÏ£±íÐÎÊ½µÄ²»´¦Àí
--- ·µ»ØÖµ£º0 - ³É¹¦£»-1 - ³ö´íÊ§°Ü£»1 - Ê²Ã´¶¼Ã»×ö
-function inject_code.do_inject(self, map_script_path, inject_code_path_table)
-	-- ½á¹û
+-- æ³¨å…¥ä»£ç åˆ°Jassä»£ç æ–‡ä»¶ï¼ˆæœ€å¸¸è§çš„æ˜¯war3map.jï¼‰ä¸­
+-- op.output - war3map.jçš„è·¯å¾„ï¼Œfs.pathå¯¹è±¡
+-- inject_code_path_table - æ‰€æœ‰éœ€è¦æ³¨å…¥çš„ä»£ç æ–‡ä»¶è·¯å¾„ï¼Œtableï¼Œtableä¸­å¯ä»¥æ˜¯
+-- 		string - æ­¤æ—¶ä¸ºYDWE / "jass" ç›®å½•ä¸‹çš„å¯¹åº”åç§°çš„æ–‡ä»¶
+--		fs.path - æ­¤æ—¶å–å…¶è·¯å¾„
+-- æ³¨ï¼šè¯¥tableå¿…é¡»æ˜¯æ•°ç»„å½¢å¼çš„ï¼Œå“ˆå¸Œè¡¨å½¢å¼çš„ä¸å¤„ç†
+-- è¿”å›žå€¼ï¼š0 - æˆåŠŸï¼›-1 - å‡ºé”™å¤±è´¥ï¼›1 - ä»€ä¹ˆéƒ½æ²¡åš
+function inject_code:do_inject(op, inject_code_path_table)
+	-- ç»“æžœ
 	local result = 1
 	if inject_code_path_table and #inject_code_path_table > 0 then
-		-- Ä¬ÈÏ³É¹¦
+		-- é»˜è®¤æˆåŠŸ
 		result = 0
-		log.trace("Writing code to " .. map_script_path:filename():string())
+		log.trace("Writing code to " .. op.output:filename():string())
 
-		-- ´ò¿ªÎÄ¼þ¹©Ð´Èë£¨×·¼ÓÄ£Ê½£©
-		local map_script_file, e = io.open(map_script_path:string(), "a+b")
+		-- æ‰“å¼€æ–‡ä»¶ä¾›å†™å…¥ï¼ˆè¿½åŠ æ¨¡å¼ï¼‰
+		local map_script_file, e = io.open(op.output:string(), "a+b")
 		if map_script_file then
 
-			-- Ñ­»·´¦ÀíÃ¿¸öÐèÒª×¢ÈëµÄÎÄ¼þ
+			-- å¾ªçŽ¯å¤„ç†æ¯ä¸ªéœ€è¦æ³¨å…¥çš„æ–‡ä»¶
 			for index, inject_code_path in ipairs(inject_code_path_table) do
 				local inject_code_path_string = nil
 				if type(inject_code_path) == "string" then
@@ -88,11 +97,11 @@ function inject_code.do_inject(self, map_script_path, inject_code_path_table)
 				log.trace("Injecting " .. inject_code_path_string:string())
 				local code_content, e = io.load(inject_code_path_string)
 				if code_content then
-					-- ²åÈë´úÂëµ½Ô­ÎÄ¼þ×îºó
+					-- æ’å…¥ä»£ç åˆ°åŽŸæ–‡ä»¶æœ€åŽ
 					map_script_file:write(code_content)
-					-- Ð´ÉÏÒ»¸ö»»ÐÐ·û£¨ÎÒÈÕËûÂèµÄcJassÄã¾ÓÈ»²»Ö§³ÖLinux¸ñÊ½µÄ»»ÐÐ·û£©
+					-- å†™ä¸Šä¸€ä¸ªæ¢è¡Œç¬¦ï¼ˆæˆ‘æ—¥ä»–å¦ˆçš„cJassä½ å±…ç„¶ä¸æ”¯æŒLinuxæ ¼å¼çš„æ¢è¡Œç¬¦ï¼‰
 					map_script_file:write("\r\n")
-					-- ³É¹¦
+					-- æˆåŠŸ
 					log.trace("Injection completed")
 				else
 					result = -1
@@ -101,7 +110,7 @@ function inject_code.do_inject(self, map_script_path, inject_code_path_table)
 				end
 			end
 			
-			-- ¹Ø±ÕÎÄ¼þ
+			-- å…³é—­æ–‡ä»¶
 			map_script_file:close()
 		else
 			result = -1
@@ -114,39 +123,39 @@ function inject_code.do_inject(self, map_script_path, inject_code_path_table)
 end
 
 
-function inject_code.inject(self, map_script_path, option)
-	local inject_code, inject_slk = self:detect(map_script_path, option)
-	return self:do_inject(map_script_path, inject_code), inject_slk
+function inject_code:compile(op)
+	op.output = op.input
+	return self:do_inject(op, self:detect(op))
 end
 
--- É¨Ãè×¢Èë´úÂë
--- config_dir - ÐèÒªÉ¨ÃèµÄÂ·¾¶
--- ·µ»ØÖµÎÞ£¬ÐÞ¸ÄÈ«¾Ö±äÁ¿inject_code_table_newÒÔ¼°inject_code_table_old
--- inject_code_table_new - ÐÂ°æ£¨1.24£©º¯Êý±í
--- inject_code_table_old - ¾É°æº¯Êý±í
-function inject_code.scan(self, config_dir)
+-- æ‰«ææ³¨å…¥ä»£ç 
+-- config_dir - éœ€è¦æ‰«æçš„è·¯å¾„
+-- è¿”å›žå€¼æ— ï¼Œä¿®æ”¹å…¨å±€å˜é‡inject_code_table_newä»¥åŠinject_code_table_old
+-- inject_code_table_new - æ–°ç‰ˆï¼ˆ1.24ï¼‰å‡½æ•°è¡¨
+-- inject_code_table_old - æ—§ç‰ˆå‡½æ•°è¡¨
+function inject_code:scan(config_dir)
 	local counter = 0
 	log.trace("Scanning for inject files in " .. config_dir:string())
 
-	-- ±éÀúÄ¿Â¼
+	-- éåŽ†ç›®å½•
 	for  full_path in config_dir:list_directory() do		
 		if fs.is_directory(full_path) then
-			-- µÝ¹é´¦Àí
+			-- é€’å½’å¤„ç†
 			counter = counter + self:scan(full_path)
 		elseif full_path:extension():string() == ".cfg" then
-			-- ²åÈëÐÂ±í
+			-- æ’å…¥æ–°è¡¨
 			local new_table = {}
 			local old_table = {}
 
-			-- ½âÎö×´Ì¬£¬Ä¬ÈÏ0
-			-- 0 - 1.24/1.20Í¨ÓÃ
-			-- 1 - 1.24×¨ÓÃ
-			-- 2 - 1.20×¨ÓÃ
+			-- è§£æžçŠ¶æ€ï¼Œé»˜è®¤0
+			-- 0 - 1.24/1.20é€šç”¨
+			-- 1 - 1.24ä¸“ç”¨
+			-- 2 - 1.20ä¸“ç”¨
 			local state = 0
 
-			-- Ñ­»·´¦ÀíÃ¿Ò»ÐÐ
+			-- å¾ªçŽ¯å¤„ç†æ¯ä¸€è¡Œ
 			for line in io.lines(full_path:string()) do
-				-- ²åÈëº¯ÊýÃû
+				-- æ’å…¥å‡½æ•°å
 				local trimed = line:trim()
 				if trimed ~= "" and trimed:sub(1, 1) ~= "#" then
 					if trimed == "[general]" then
@@ -169,7 +178,7 @@ function inject_code.scan(self, config_dir)
 			end
 
 			
-			-- ²åÈëÈ«¾Ö±íÖÐ£¨Ìæ»»ÎÄ¼þÀ©Õ¹Ãû£©
+			-- æ’å…¥å…¨å±€è¡¨ä¸­ï¼ˆæ›¿æ¢æ–‡ä»¶æ‰©å±•åï¼‰
 			local substitution = full_path
 			substitution = substitution:replace_extension(fs.path(".j"))
 			if #old_table > 0 then
@@ -186,7 +195,7 @@ function inject_code.scan(self, config_dir)
 	return counter
 end
 
-function inject_code.initialize(self)
+function inject_code:initialize()
 	local counter = self:scan(fs.ydwe_path() / "jass")
 	log.trace(string.format("Scanned file: %d", counter))
 end

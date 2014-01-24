@@ -47,51 +47,51 @@ local function compile_map(map_path, option)
 
 	-- 如果JassHelper开启，执行正常编译
 	if option.enable_jasshelper then
-		-- 根据注入类型决定注入内容
-		local inject_slk = false
-
 		result = mpq_util:update_file(map_path, "war3map.j",
 			-- 解压缩地图脚本，处理然后写回
 			function (map_handle, in_script_path)
 				-- 开始处理
 				log.trace("Processing " .. in_script_path:filename():string())
 
+				local compile_t = {
+					['input'] = in_script_path,
+					['output'] = nil,
+					['option'] = option,
+					['map_path'] = map_path,
+					['map_handle'] = map_handle,
+					['inject_file'] = function (file_path, path_in_archive)
+						return mpq_util:import_file(map_handle, file_path, path_in_archive)
+					end,
+				}
+
 				-- 未启用用cJass
 				if not option.enable_cjass then
 					-- 根据注入选项进行处理（由于Lua的closure，此处可以访问“父”函数的局部变量）
-					if option.script_injection == 0 then				
-						local _ = nil
-						_, inject_slk = inject_code:inject(in_script_path, option)						
+					if option.script_injection == 0 then
+						inject_code:compile(compile_t)
 					end
-	
+
 					-- Wave预处理
-					local result_path = wave:compile(in_script_path, option)
-					if not result_path then
+					compile_t.input = compile_t.output
+					if not wave:compile(compile_t) then
 						return nil
-					end					
-					in_script_path = result_path
+					end
 				end
 
-				local result = template:compile(map_path, map_handle, in_script_path)
-				if not result then
+				compile_t.input = compile_t.output
+				if not template:compile(compile_t) then
 					return nil
 				end
 				
-				return result
+				return compile_t.output
 			end
 		)
-
-		if inject_slk then
-			mpq_util:insert_file_form_ydwe(map_path, "units\\abilitydata.slk")
-			--会掉线
-			--mpq_util:insert_file_form_ydwe(map_path, "units\\abilitymetadata.slk")
-		end
 		
 		-- 开始调用编译工具编译
 		if result then
 			-- 调用cJass
 			if option.enable_cjass then
-				result = cjass:compile(map_path, option)				
+				result = cjass:compile(map_path, option)
 			end
 
 			-- 调用jasshelepr
