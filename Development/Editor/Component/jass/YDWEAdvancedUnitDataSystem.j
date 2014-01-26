@@ -49,24 +49,6 @@ private function Log takes real x returns real
         return mid
     endfunction
 
-private  function Logarithm takes real base, real x returns real
-        local real min = -88.0
-        local real max = 88.0
-        local real mid
-        local integer i = 20
-        loop
-            set mid = (min + max) / 2
-            exitwhen(i <= 0)
-            set i = i - 1
-            if(Pow(base, mid) >= x) then
-                set max = mid
-            else
-                set min = mid
-            endif
-        endloop
-        return mid
-    endfunction                   
-       
 function YDWEGetUnitGoldCost takes integer unitid returns integer
     if IsHeroUnitId(unitid) == true then
         return 425
