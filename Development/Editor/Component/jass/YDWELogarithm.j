@@ -3,15 +3,20 @@
 
 #include "YDWEBase.j"
 
-library Logarithm
+library YDWELogarithm initializer onInit
+
+globals
+    private real array base
+endglobals
+
 // Author : zyl910
 // Modified by : c kuhn
-// [private]ÓÃ¼¶Êý¼ÆËãÒÔeÎªµ×µÄ¶ÔÊý
+// [private]ç”¨çº§æ•°è®¡ç®—ä»¥eä¸ºåº•çš„å¯¹æ•°
 // Returns 0 if x <= 0
 private function ln_taylor takes real x returns real
     // ln( (1+x) / (1-x) ) = ln(1+x) - ln(1-x) = 2 * ( x + x^3 / 3 + x^5 / 5 + ... )
     // x = (y-1) / (y+1)
-    // (0 < y < +¡Þ, -1 < x < 1)
+    // (0 < y < +âˆž, -1 < x < 1)
     local real fRet = 0.
     local real x2 // x*x
     local real fCur
@@ -33,7 +38,7 @@ private function ln_taylor takes real x returns real
 endfunction
 
 // Author : c kuhn
-// Í¨¹ýÂú¶þ²æÊ÷ÌØÐÔ¿ìËÙÕÒµ½´óµÄ²¿·Ö
+// é€šè¿‡æ»¡äºŒå‰æ ‘ç‰¹æ€§å¿«é€Ÿæ‰¾åˆ°å¤§çš„éƒ¨åˆ†
 private function Log2 takes real x returns real
     local real res = 0.
     local real sign =1.
@@ -41,43 +46,35 @@ private function Log2 takes real x returns real
     local real level = 32.
     local real mid
     local real temp
-    local real fac
+    local real fac = 0.
     local integer count = 6
-    local real array base
-    
+
     if x>0 and (x<1 or x>1) then
-        //¶þ½øÖÆ·Ö½â»ùÊý
-        set base[1] = 2.
-        set base[2] = 4.
-        set base[3] = 16.
-        set base[4] = 256.
-        set base[5] = 65536.
-        //¹ý´óµÄÊý±ØÐëÓÃ³Ë·¨
-        set base[6] = 65536. * 65536. //2^32
         if x<1 then
             set sign = -1.
             set x = 1. / x
         endif
-        set mid = base[6] * base[6] //2^64
-        loop
-            set temp = x / mid
-            exitwhen temp >= 1. and temp < 2.
-            if x < mid then
-                set i = i - level
-                set mid = mid / base[count]
-            else
-                set i = i + level
-                set mid = mid * base[count]
-            endif
-            
-            set level = level / 2.
-            set count = count - 1
-        endloop
-        set fac = i
-        set x = temp
-        set temp = 1.4142135 //¸ùºÅ2
-        if(x > temp) then
-            set x = x / temp
+        if x >= 2. then
+            set mid = base[7]
+            loop
+                set temp = x / mid
+                exitwhen temp >= 1. and temp < 2.
+                if x < mid then
+                    set i = i - level
+                    set mid = mid / base[count]
+                else
+                    set i = i + level
+                    set mid = mid * base[count]
+                endif
+                set level = level / 2.
+                set count = count - 1
+            endloop
+            set fac = i
+            set x = temp
+        endif
+        //æ ¹å·2
+        if x > 1.4142135 then
+            set x = x / 1.4142135
             set fac = fac + .5
         endif
         set res=sign*(fac+ln_taylor(x)*1.442695)
@@ -86,25 +83,37 @@ private function Log2 takes real x returns real
     return res
 endfunction
 
-// ÒÔ 10 Îªµ×µÄ¶ÔÊý
+// ä»¥ 10 ä¸ºåº•çš„å¯¹æ•°
 // Returns 0 if x <= 0
 function YDWELogarithmLg takes real x returns real
     return Log2(x) * 0.3010300 // 1/log2(10) = 0.30102999566398119521373889472449
 endfunction
 
-// ÒÔ e Îªµ×µÄ¶ÔÊý
+// ä»¥ e ä¸ºåº•çš„å¯¹æ•°
 // Returns 0 if x <= 0
 function YDWELogarithmLn takes real x returns real
     return Log2(x) * 0.6931472 // 1/log2(e) = 0.69314718055994530941723212145818
 endfunction
 
-// ÒÔ ÈÎÒâÊý Îªµ×µÄ¶ÔÊý 
+// ä»¥ ä»»æ„æ•° ä¸ºåº•çš„å¯¹æ•° 
 function YDWELogarithmLog takes real a,real x returns real
     if a<=0 or (a<=1 and a>=1) then
         return 0.
     endif
     return Log2(x) / Log2(a)
 endfunction
+
+private function onInit takes nothing returns nothing
+    set base[1] = 2.
+    set base[2] = 4.
+    set base[3] = 16.
+    set base[4] = 256.
+    set base[5] = 65536.
+    //è¿‡å¤§çš„æ•°å¿…é¡»ç”¨ä¹˜æ³•
+    set base[6] = 65536. * 65536. //2^32
+    set base[7] = base[6] * base[6] //2^64
+endfunction
+
 endlibrary
 
 #endif /// YDWELogarithmIncluded
