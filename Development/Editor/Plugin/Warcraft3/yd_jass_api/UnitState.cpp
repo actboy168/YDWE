@@ -17,18 +17,24 @@ enum UNIT_STATE
 	UNIT_STATE_DAMAGE_MAX   = 0x15,
 	UNIT_STATE_DAMAGE_RANGE = 0x16,
 	UNIT_STATE_ARMOR        = 0x20,
+	// Added
+	UNIT_STATE_ARMOR_TYPE	= 0x21,
+	UNIT_STATE_DAMAGE_RATE	= 0x22,	// Attack rate, work on both attacks
+	UNIT_STATE_DAMAGE_TYPE	= 0x23,
 };
 
 struct unit_property {
 	uint32_t unk_00[34];
-	int32_t  damage_dice;   // 0x88
+	int32_t  damage_dice;   // 0x88 (integer)
 	uint32_t unk_8c[2];
-	int32_t  damage_side;   // 0x94
+	int32_t  damage_side;   // 0x94 (integer)
 	uint32_t unk_98[2];
-	int32_t  damage_base;   // 0xA0
+	int32_t  damage_base;   // 0xA0 (integer)
 	uint32_t unk_a4[2];
-	int32_t  damage_bonus;  // 0xAC
-	uint32_t unk_a5[106];
+	int32_t  damage_bonus;  // 0xAC (integer)
+	uint32_t unk_a5[17];
+	int32_t damage_type;	// 0xF4 (integer)
+	uint32_t unk_a6[88];
 	uint32_t damage_ranage; // 0x258
 };
 
@@ -45,6 +51,9 @@ uint32_t _cdecl FakeGetUnitState(uint32_t unit_handle, uint32_t state_type)
 	case UNIT_STATE_DAMAGE_MAX:
 	case UNIT_STATE_DAMAGE_RANGE:
 	case UNIT_STATE_ARMOR:
+	// Added @ 2014/2/9
+	case UNIT_STATE_ARMOR_TYPE:
+	case UNIT_STATE_DAMAGE_TYPE:
 		break;
 	default:
 		return base::c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
@@ -60,6 +69,14 @@ uint32_t _cdecl FakeGetUnitState(uint32_t unit_handle, uint32_t state_type)
 	if (state_type == UNIT_STATE_ARMOR)
 	{
 		return *(uint32_t*)(unit_object + 0xE0);
+	}
+
+	// Added @ 2014/2/9
+	if (state_type == UNIT_STATE_ARMOR_TYPE)
+	{
+		// converts from integer type to real
+		int32_t retval = *(uint32_t*)(unit_object + 0xE4);
+		return jass::to_real((float)retval);
 	}
 
 	unit_property* ptr = (unit_property*)*(uintptr_t*)(unit_object + 0x1E4 + (s.get_version() > version_124c ? 4: 0));
@@ -91,6 +108,9 @@ uint32_t _cdecl FakeGetUnitState(uint32_t unit_handle, uint32_t state_type)
 		break;
 	case UNIT_STATE_DAMAGE_RANGE:
 		return ptr->damage_ranage;
+	case UNIT_STATE_DAMAGE_TYPE:
+		retval = ptr->damage_type;
+		break;
 	default:
 		retval = 0;
 		break;
@@ -112,6 +132,9 @@ void _cdecl FakeSetUnitState(uint32_t unit_handle, uint32_t state_type, uint32_t
 	case UNIT_STATE_DAMAGE_MAX:
 	case UNIT_STATE_DAMAGE_RANGE:
 	case UNIT_STATE_ARMOR:
+	// Added @ 2014/2/9
+	case UNIT_STATE_ARMOR_TYPE:
+	case UNIT_STATE_DAMAGE_TYPE:
 		break;
 	default:
 		base::c_call<void>(RealSetUnitState, unit_handle, state_type, value_ptr);
@@ -128,6 +151,14 @@ void _cdecl FakeSetUnitState(uint32_t unit_handle, uint32_t state_type, uint32_t
 	if (state_type == UNIT_STATE_ARMOR)
 	{
 		*(uint32_t*)(unit_object + 0xE0) = *value_ptr;
+		return ;
+	}
+
+	// Added @ 2014/2/9
+	if (state_type == UNIT_STATE_ARMOR_TYPE)
+	{
+		// converts from real type to integer
+		*(uint32_t*)(unit_object + 0xE4) = (uint32_t)jass::from_real(*value_ptr);
 		return ;
 	}
 
@@ -153,6 +184,9 @@ void _cdecl FakeSetUnitState(uint32_t unit_handle, uint32_t state_type, uint32_t
 		return ;
 	case UNIT_STATE_DAMAGE_RANGE:
 		ptr->damage_ranage = *value_ptr;
+		return ;
+	case UNIT_STATE_DAMAGE_TYPE:
+		ptr->damage_type = (uint32_t)jass::from_real(*value_ptr);
 		return ;
 	case UNIT_STATE_DAMAGE_MIN:
 	case UNIT_STATE_DAMAGE_MAX:
