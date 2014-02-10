@@ -1,5 +1,6 @@
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/war3_searcher.h>
+#include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/jass/func_value.h>
 #include <cassert>
 #include <memory>
@@ -178,6 +179,11 @@ namespace base { namespace warcraft3 { namespace jass {
 		}
 
 		return val;
+	}
+
+	const char* from_stringid(uint32_t strid)
+	{
+		return get_string_hashtable()->get(strid)->str_;
 	}
 
 	call_param::call_param(size_t n)
