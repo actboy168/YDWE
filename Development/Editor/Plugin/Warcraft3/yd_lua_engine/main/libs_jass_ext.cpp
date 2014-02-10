@@ -8,6 +8,8 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
+	int jass_runtime_get(lua_State* L);
+	int jass_runtime_set(lua_State* L);
 
 	int  install_jass_hook(jassbind*, const jass::func_value* nf, const char* name, const callback& fake_func);
 	int  uninstall_jass_hook(jassbind*, const char* name);
@@ -63,6 +65,23 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 					ls->pushstring("__newindex");
 					ls->pushcclosure((lua::state::cfunction)jass_hook_set, 0);
+					ls->rawset(-3);
+				}
+				ls->setmetatable(-2);
+			}
+			ls->rawset(-3);
+
+			ls->pushstring("runtime");
+			ls->newtable();
+			{
+				ls->newtable();
+				{
+					ls->pushstring("__index");
+					ls->pushcclosure((lua::state::cfunction)jass_runtime_get, 0);
+					ls->rawset(-3);
+
+					ls->pushstring("__newindex");
+					ls->pushcclosure((lua::state::cfunction)jass_runtime_set, 0);
 					ls->rawset(-3);
 				}
 				ls->setmetatable(-2);

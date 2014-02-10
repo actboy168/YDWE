@@ -1,5 +1,6 @@
 #include "../lua/callback.h"
 #include "../lua/jassbind.h"
+#include "../main/runtime.h"
 #include <base/warcraft3/jass/trampoline_function.h>
 #include <Windows.h>
 
@@ -9,20 +10,35 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int safe_pcall (lua_State *pState, int nargs, int nresults)
 	{
-		int error = lua_pcall(pState, nargs, nresults, 0);
-		switch (error)
+		int error_handle = 0;
+		if (runtime::error_handle != 0) {
+			error_handle = 1;
+			runtime::get_function(runtime::error_handle, pState);
+			lua_insert(pState, error_handle);
+		}
+
+		int error = lua_pcall(pState, nargs, nresults, error_handle);
+
+		if (error_handle == 0)
 		{
-		case LUA_OK:
-			break;
-		case LUA_ERRRUN:
-		case LUA_ERRMEM:
-		case LUA_ERRERR:
-			printf("Error(%d): %s\n", error, lua_tostring(pState, -1));
-			lua_pop(pState, 1);
-			break;
-		default:
-			printf("Error(%d)\n", error);
-			break;
+			switch (error)
+			{
+			case LUA_OK:
+				break;
+			case LUA_ERRRUN:
+			case LUA_ERRMEM:
+			case LUA_ERRERR:
+				printf("Error(%d): %s\n", error, lua_tostring(pState, -1));
+				lua_pop(pState, 1);
+				break;
+			default:
+				printf("Error(%d)\n", error);
+				break;
+			}
+		}
+		else
+		{
+			lua_remove(pState, error_handle);
 		}
 
 		return error;

@@ -59,6 +59,9 @@
     <ClCompile Include="main\fix_math.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
+    <ClCompile Include="main\runtime.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua\callback.h">
@@ -84,6 +87,9 @@
     </ClInclude>
     <ClInclude Include="misc\slk_interface_storm.h">
       <Filter>bind\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="main\runtime.h">
+      <Filter>bind\main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
