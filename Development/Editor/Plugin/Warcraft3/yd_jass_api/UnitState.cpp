@@ -151,6 +151,16 @@ namespace base { namespace warcraft3 { namespace japi {
 			return 0;
 		}
 
+		if (state_type == UNIT_STATE_LIFE_REGEN)
+		{
+			return *(uint32_t*)(unit_object + 0xB0);
+		}
+
+		if (state_type == UNIT_STATE_MANA_REGEN)
+		{
+			return *(uint32_t*)(unit_object + 0xD4);
+		}
+
 		if (state_type == UNIT_STATE_ARMOR)
 		{
 			return *(uint32_t*)(unit_object + 0xE0);
@@ -318,6 +328,18 @@ namespace base { namespace warcraft3 { namespace japi {
 		uintptr_t unit_object = s.unit_handle_to_object(unit_handle);
 		if (!unit_object)
 		{
+			return ;
+		}
+
+		if (state_type == UNIT_STATE_LIFE_REGEN)
+		{
+			*(uint32_t*)(unit_object + 0xB0) = *value_ptr;
+			return ;
+		}
+
+		if (state_type == UNIT_STATE_MANA_REGEN)
+		{
+			*(uint32_t*)(unit_object + 0xD4) = *value_ptr;
 			return ;
 		}
 
