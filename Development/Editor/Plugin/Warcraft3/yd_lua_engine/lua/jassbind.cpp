@@ -76,18 +76,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		jreal_push(self(), value);
 	}
-
-	jass::jhandle_t  jassbind::read_handle (int index) 
-	{
-		return (jass::jhandle_t)mybase::touserdata(index);
-	}
-
-	void             jassbind::push_handle (jass::jhandle_t value)
-	{
-		if (value)
-			mybase::pushlightuserdata((void*)value);
-		else
-			mybase::pushnil();
-	}
-
 }}}

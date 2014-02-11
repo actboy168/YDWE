@@ -23,7 +23,7 @@ function mpq_util:import_file(mpq_handle, file_path, path_in_archive)
 		log.trace("succeeded: import " .. path_in_archive)
 		return true
 	else
-		log.error("failed: import " .. path:string())
+		log.error("failed: import " .. file_path:string())
 		return false
 	end
 
