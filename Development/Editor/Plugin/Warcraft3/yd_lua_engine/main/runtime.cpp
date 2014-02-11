@@ -1,4 +1,5 @@
 #include <base/lua/state.h>
+#include <base/util/console.h>
 #include <cstring>
 #include "runtime.h"
 
@@ -6,8 +7,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	namespace runtime
 	{
-		int error_handle = 0;
-		int handle_level = 1;
+		int  error_handle = 0;
+		int  handle_level = 1;
+		bool console      = false;
 
 		void set_function(int& result, lua_State* L, int index)
 		{
@@ -51,7 +53,20 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		{
 			runtime::handle_level = ls->checkinteger(3);
 		}
-
+		else if (strcmp("console", name) == 0)
+		{
+			runtime::console = !!ls->toboolean(3);
+			if (runtime::console)
+			{
+				console::enable();
+				console::disable_close_button();
+			}
+			else
+			{
+				console::disable();
+			}
+		}
+		
 		return 0;
 	}
 
@@ -68,6 +83,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		else if (strcmp("handle_level", name) == 0)
 		{
 			ls->pushinteger(runtime::handle_level);
+			return 1;
+		}
+		else if (strcmp("console", name) == 0)
+		{
+			ls->pushboolean(runtime::console);
 			return 1;
 		}
 
