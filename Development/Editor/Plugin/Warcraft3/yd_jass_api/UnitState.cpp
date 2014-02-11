@@ -8,45 +8,45 @@
 namespace base { namespace warcraft3 { namespace japi {
 	enum UNIT_STATE
 	{
-		// original
-		UNIT_STATE_ATTACK1_DAMAGE_DICE			= 0x10,
-		UNIT_STATE_ATTACK1_DAMAGE_SIDE			= 0x11,
-		UNIT_STATE_ATTACK1_DAMAGE_BASE			= 0x12,
-		UNIT_STATE_ATTACK1_DAMAGE_BONUS			= 0x13,
-		UNIT_STATE_ATTACK1_DAMAGE_MIN			= 0x14,
-		UNIT_STATE_ATTACK1_DAMAGE_MAX			= 0x15,
-		UNIT_STATE_ATTACK1_RANGE				= 0x16,
-		UNIT_STATE_ARMOR						= 0x20,
-		// attack 1 attribute adds
-		UNIT_STATE_ATTACK1_DAMAGE_LOSS_FACTOR	= 0x21,
-		UNIT_STATE_ATTACK1_WEAPON_SOUND			= 0x22,
-		UNIT_STATE_ATTACK1_WEAPON_TYPE			= 0x23,
-		UNIT_STATE_ATTACK1_MAX_TARGETS			= 0x24,
-		UNIT_STATE_ATTACK1_INTERVAL				= 0x25,
-		UNIT_STATE_ATTACK1_INITIAL_DELAY		= 0x26,
-		UNIT_STATE_ATTACK1_RANGE_BUFFER			= 0x27,
-		// attack 2 attributes (sorted in a sequencial order based on memory address)
-		UNIT_STATE_ATTACK2_DAMAGE_DICE			= 0x30,
-		UNIT_STATE_ATTACK2_DAMAGE_SIDE			= 0x31,
-		UNIT_STATE_ATTACK2_DAMAGE_BASE			= 0x32,
-		UNIT_STATE_ATTACK2_DAMAGE_BONUS			= 0x33,
-		UNIT_STATE_ATTACK2_DAMAGE_LOSS_FACTOR	= 0x34,
-		UNIT_STATE_ATTACK2_WEAPON_SOUND			= 0x35,
-		UNIT_STATE_ATTACK2_WEAPON_TYPE			= 0x36,
-		UNIT_STATE_ATTACK2_MAX_TARGETS			= 0x37,
-		UNIT_STATE_ATTACK2_INTERVAL				= 0x38,
-		UNIT_STATE_ATTACK2_INITIAL_DELAY		= 0x39,
-		UNIT_STATE_ATTACK2_RANGE				= 0x40,
-		UNIT_STATE_ATTACK2_RANGE_BUFFER			= 0x41,
-		UNIT_STATE_ATTACK2_DAMAGE_MIN			= 0x42,
-		UNIT_STATE_ATTACK2_DAMAGE_MAX			= 0x43,
-		// general attributes
-		UNIT_STATE_ARMOR_TYPE					= 0x50,
-		UNIT_STATE_RATE_OF_FIRE					= 0x51, // global attack rate of unit, work on both attacks
-		UNIT_STATE_ACQUISITION_RANGE			= 0x52, // how far the unit will automatically look for targets
-		UNIT_STATE_LIFE_REGEN					= 0x53,
-		UNIT_STATE_MANA_REGEN					= 0x54,
-		UNIT_STATE_ID							= 0x55,
+	    // original
+	    UNIT_STATE_ATTACK1_DAMAGE_DICE          = 0x10,
+	    UNIT_STATE_ATTACK1_DAMAGE_SIDE          = 0x11,
+	    UNIT_STATE_ATTACK1_DAMAGE_BASE          = 0x12,
+	    UNIT_STATE_ATTACK1_DAMAGE_BONUS         = 0x13,
+	    UNIT_STATE_ATTACK1_DAMAGE_MIN           = 0x14,
+	    UNIT_STATE_ATTACK1_DAMAGE_MAX           = 0x15,
+	    UNIT_STATE_ATTACK1_RANGE                = 0x16,
+	    UNIT_STATE_ARMOR                        = 0x20,
+	    // attack 1 attribute adds
+	    UNIT_STATE_ATTACK1_DAMAGE_LOSS_FACTOR   = 0x21,
+	    UNIT_STATE_ATTACK1_WEAPON_SOUND         = 0x22,
+	    UNIT_STATE_ATTACK1_WEAPON_TYPE          = 0x23,
+	    UNIT_STATE_ATTACK1_MAX_TARGETS          = 0x24,
+	    UNIT_STATE_ATTACK1_INTERVAL             = 0x25,
+	    UNIT_STATE_ATTACK1_INITIAL_DELAY        = 0x26,
+	    UNIT_STATE_ATTACK1_RANGE_BUFFER         = 0x27,
+	    // attack 2 attributes (sorted in a sequencial order based on memory address)
+	    UNIT_STATE_ATTACK2_DAMAGE_DICE          = 0x30,
+	    UNIT_STATE_ATTACK2_DAMAGE_SIDE          = 0x31,
+	    UNIT_STATE_ATTACK2_DAMAGE_BASE          = 0x32,
+	    UNIT_STATE_ATTACK2_DAMAGE_BONUS         = 0x33,
+	    UNIT_STATE_ATTACK2_DAMAGE_LOSS_FACTOR   = 0x34,
+	    UNIT_STATE_ATTACK2_WEAPON_SOUND         = 0x35,
+	    UNIT_STATE_ATTACK2_WEAPON_TYPE          = 0x36,
+	    UNIT_STATE_ATTACK2_MAX_TARGETS          = 0x37,
+	    UNIT_STATE_ATTACK2_INTERVAL             = 0x38,
+	    UNIT_STATE_ATTACK2_INITIAL_DELAY        = 0x39,
+	    UNIT_STATE_ATTACK2_RANGE                = 0x40,
+	    UNIT_STATE_ATTACK2_RANGE_BUFFER         = 0x41,
+	    UNIT_STATE_ATTACK2_DAMAGE_MIN           = 0x42,
+	    UNIT_STATE_ATTACK2_DAMAGE_MAX           = 0x43,
+	    // general attributes
+	    UNIT_STATE_ARMOR_TYPE                   = 0x50,
+	    UNIT_STATE_RATE_OF_FIRE                 = 0x51, // global attack rate of unit, work on both attacks
+	    UNIT_STATE_ACQUISITION_RANGE            = 0x52, // how far the unit will automatically look for targets
+	    UNIT_STATE_LIFE_REGEN                   = 0x53,
+	    UNIT_STATE_MANA_REGEN                   = 0x54,
+	    UNIT_STATE_ID                           = 0x55,
 	};
 
 	struct unit_property {
