@@ -9,7 +9,14 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		int  error_handle = 0;
 		int  handle_level = 1;
-		bool console      = false;
+		bool console = false;
+
+		void initialize()
+		{
+			error_handle = 0;
+			handle_level = 1;
+			console = false;
+		}
 
 		void set_function(int& result, lua_State* L, int index)
 		{

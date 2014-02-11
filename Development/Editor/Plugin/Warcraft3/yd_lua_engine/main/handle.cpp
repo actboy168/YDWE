@@ -23,8 +23,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		handle_set_ref(h, true);
 	}
 
-#define LUA_JASS_HANDLE "jhandle_t"
-
 	int handle_tostring(lua_State *L, jass::jhandle_t h)
 	{
 		static char hex[] = "0123456789ABCDEF";
@@ -55,6 +53,19 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
+#define LUA_JASS_HANDLE "jhandle_t"
+
+	int handle_ud_get_table(lua::state* ls)
+	{
+		if (runtime::handle_ud_table == 0)
+		{
+			ls->newtable();
+			runtime::handle_ud_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
+		}
+		lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::handle_ud_table);
+		return 1;
+	}
+
 	void handle_ud_push(lua::state* ls, jass::jhandle_t value)
 	{
 		if (!value)
@@ -62,10 +73,23 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return ls->pushnil();
 		}
 
-		jass::jhandle_t* hptr = (jass::jhandle_t*)ls->newuserdata(sizeof(jass::jhandle_t));
-		*hptr = value;
-		handle_add_ref(value);
-		luaL_setmetatable(ls->self(), LUA_JASS_HANDLE);
+		handle_ud_get_table(ls);
+		ls->pushunsigned(value);
+		ls->rawget(-2);
+		if (ls->isnil(-1))
+		{
+			ls->pop(1);
+			jass::jhandle_t* hptr = (jass::jhandle_t*)ls->newuserdata(sizeof(jass::jhandle_t));
+			*hptr = value;
+			handle_add_ref(value);
+			luaL_setmetatable(ls->self(), LUA_JASS_HANDLE);
+
+			ls->pushunsigned(value);
+			ls->pushvalue(-2);
+			ls->rawset(-3);
+		}
+
+		ls->remove(-2);
 		return;
 	}
 
@@ -98,6 +122,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		lua::state* ls = (lua::state*)L;
 		jass::jhandle_t h = (jass::jhandle_t)handle_ud_read(ls, 1);
+		handle_ud_get_table(ls);
+		ls->pushunsigned(h);
+		ls->pushnil();
+		ls->rawset(-3);
+
 		handle_release(h);
 		return 0;
 	}
