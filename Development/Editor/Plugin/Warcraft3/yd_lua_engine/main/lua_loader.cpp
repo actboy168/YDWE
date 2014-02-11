@@ -3,6 +3,7 @@
 #include "../main/lua_loader.h"
 #include "../misc/storm.h"
 #include "../main/open_lua_engine.h"
+#include "runtime.h"
 #include <base/lua/state.h>
 #include <base/warcraft3/event.h>
 #include <base/warcraft3/jass.h>
@@ -33,6 +34,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		lua::state* get()
 		{
 			if (!state_) state_ = initialize();
+			runtime::initialize();
 			return state_;
 		}
 
