@@ -46,7 +46,6 @@ namespace base { namespace warcraft3 { namespace japi {
 	    UNIT_STATE_ACQUISITION_RANGE            = 0x52, // how far the unit will automatically look for targets
 	    UNIT_STATE_LIFE_REGEN                   = 0x53,
 	    UNIT_STATE_MANA_REGEN                   = 0x54,
-	    UNIT_STATE_ID                           = 0x55,
 	};
 
 	struct unit_property {
@@ -138,7 +137,6 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ACQUISITION_RANGE:
 		case UNIT_STATE_LIFE_REGEN:
 		case UNIT_STATE_MANA_REGEN:
-		case UNIT_STATE_ID:
 			break;
 		default:
 			return base::c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
@@ -169,13 +167,6 @@ namespace base { namespace warcraft3 { namespace japi {
 		if (state_type == UNIT_STATE_ARMOR_TYPE)
 		{
 		    int32_t retval = *(uint32_t*)(unit_object + 0xE4);
-		    return jass::to_real((float)retval);
-		}
-
-		if (state_type==UNIT_STATE_ID)
-		{
-			//uint32_t retval = *(uint32_t*)(unit_object + 0x30);
-			uint32_t retval = 1751543663;
 		    return jass::to_real((float)retval);
 		}
 
