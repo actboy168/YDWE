@@ -11,9 +11,19 @@ library YDWEYDWEJapiOther
 	endglobals
 
 	native EXDisplayChat     takes player p, integer chat_recipient, string message returns nothing
-	
+	native EXGetUnitId       takes unit u returns integer
+	native EXSetUnitId       takes unit u, integer id returns nothing
+
 	function YDWEDisplayChat takes player p, integer chat_recipient, string message returns nothing
 		call EXDisplayChat(p, chat_recipient, message)
+	endfunction
+
+	function YDWEGetUnitId takes unit u returns integer
+		return EXGetUnitId(u)
+	endfunction
+	
+	function YDWESetUnitId takes unit u, integer id returns nothing
+		call EXSetUnitId(u, id)
 	endfunction
 	
 endlibrary
