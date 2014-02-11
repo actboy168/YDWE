@@ -1,4 +1,5 @@
 #include "../lua/jassbind.h"
+#include "handle.h"
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/jass/func_value.h>
@@ -275,62 +276,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	int handle_eq(lua_State *L)
-	{
-		jassbind* lj = (jassbind*)L;
-		jass::jhandle_t a = lj->read_handle(1);
-		jass::jhandle_t b = lj->read_handle(2);
-		lj->pushboolean(a == b);
-		return 1;
-	}
-
-	int handle_tostring(lua_State *L)
-	{
-		static char hex[] = "0123456789ABCDEF";
-
-		jassbind* lj = (jassbind*)L;
-		jass::jhandle_t h = lj->read_handle(1);
-
-		luaL_Buffer b;
-		luaL_buffinitsize(L , &b , 28);
-		luaL_addstring(&b, "handle: 0x");
-
-		bool strip = true;
-		for (int i = 7; i >= 0; i--) 
-		{
-			int c = (h >> (i*4)) & 0xF;
-			if (strip && c == 0) 
-			{
-				continue;
-			}
-			strip = false;
-			luaL_addchar(&b, hex[c]);
-		}
-
-		if (strip)
-		{
-			luaL_addchar(&b , '0');
-		}
-
-		luaL_pushresult(&b);
-
-		return 1;
-	}
-
-	void handle_make_mt(lua::state* ls)
-	{
-		luaL_Reg lib[] = {
-			{ "__eq",       handle_eq },
-			{ "__tostring", handle_tostring },
-			{ NULL, NULL },
-		};
-
-		ls->pushlightuserdata(NULL);
-		luaL_newlib(ls->self(), lib);
-		ls->setmetatable(-2);
-		ls->pop(1);
-	}
-
 	jass::global_variable array_value(jassbind* lj)
 	{
 		lj->pushvalue(1);
@@ -400,7 +345,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int open_jass(lua::state* ls)
 	{
-		handle_make_mt(ls);
+		handle_lud_make_mt(ls); 
+		handle_ud_make_mt(ls);
 		array_make_mt(ls);
 		
 		ls->newtable();

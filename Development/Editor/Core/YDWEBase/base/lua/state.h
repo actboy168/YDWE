@@ -134,7 +134,12 @@ namespace lua {
 		{
 			return luaL_checknumber(self(), narg);
 		}
-		
+		template <class R>
+		inline R checkudata(int ud, const char *tname)
+		{
+			return reinterpret_cast<R>(luaL_checkudata(self(), ud, tname));
+		}
+
 		inline const char* type_name(int tp)
 		{
 			return lua_typename(self(), tp);

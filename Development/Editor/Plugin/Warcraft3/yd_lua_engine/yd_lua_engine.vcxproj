@@ -92,6 +92,7 @@
     <ClCompile Include="lua\jassbind.cpp" />
     <ClCompile Include="lua\callback.cpp" />
     <ClCompile Include="main\fix_math.cpp" />
+    <ClCompile Include="main\handle.cpp" />
     <ClCompile Include="main\jass_hook.cpp" />
     <ClCompile Include="main\libs_japi.cpp" />
     <ClCompile Include="main\libs_jass.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="lua\helper.h" />
     <ClInclude Include="lua\jassbind.h" />
     <ClInclude Include="lua\callback.h" />
+    <ClInclude Include="main\handle.h" />
     <ClInclude Include="main\lua_loader.h" />
     <ClInclude Include="main\open_lua_engine.h" />
     <ClInclude Include="main\runtime.h" />
