@@ -111,7 +111,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 			show_error(base::format("[%s]Division by zero.", get_function_name(current_opcode(vm))));
 			break;
 		default:
-			show_error(base::format("[%s]Unknown error code.", get_function_name(current_opcode(vm))));
+			show_error(base::format("[%s]Unknown error code(%d).", get_function_name(current_opcode(vm)), result));
 			break;
 		}
 		return result;
