@@ -60,6 +60,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		if (runtime::handle_ud_table == 0)
 		{
 			ls->newtable();
+			ls->pushstring("__mode");
+			ls->pushstring("kv");
+			ls->rawset(-3);
 			runtime::handle_ud_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
 		}
 		lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::handle_ud_table);

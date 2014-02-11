@@ -7,6 +7,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		extern int error_handle;
 		extern int handle_level;
+		extern int handle_ud_table;
 
 		void initialize();
 		void set_function(int& result, lua_State* L, int index);
