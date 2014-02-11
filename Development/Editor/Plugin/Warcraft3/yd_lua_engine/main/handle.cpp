@@ -2,8 +2,26 @@
 #include "runtime.h"
 #include "../lua/jassbind.h"
 #include <base/warcraft3/jass.h>
+#include <base/warcraft3/hashtable.h>
+#include <base/hook/fp_call.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
+
+	void handle_set_ref(jass::jhandle_t h, bool dec)
+	{
+		uintptr_t vm = get_jass_virtual_machine();
+		base::fast_call<void>(*(uintptr_t*)(vm + 0x28A0), h, dec ? 1 : 0, *(uintptr_t*)(vm + 0x28A4));
+	}
+
+	void handle_add_ref(jass::jhandle_t h)
+	{
+		handle_set_ref(h, false);
+	}
+
+	void handle_release(jass::jhandle_t h)
+	{
+		handle_set_ref(h, true);
+	}
 
 #define LUA_JASS_HANDLE "jhandle_t"
 
@@ -37,6 +55,20 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
+	void handle_ud_push(lua::state* ls, jass::jhandle_t value)
+	{
+		if (!value)
+		{
+			return ls->pushnil();
+		}
+
+		jass::jhandle_t* hptr = (jass::jhandle_t*)ls->newuserdata(sizeof(jass::jhandle_t));
+		*hptr = value;
+		handle_add_ref(value);
+		luaL_setmetatable(ls->self(), LUA_JASS_HANDLE);
+		return;
+	}
+
 	jass::jhandle_t handle_ud_read(lua::state* ls, int index)
 	{
 		if (ls->isnil(index))
@@ -66,6 +98,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		lua::state* ls = (lua::state*)L;
 		jass::jhandle_t h = (jass::jhandle_t)handle_ud_read(ls, 1);
+		handle_release(h);
 		return 0;
 	}
 
@@ -85,6 +118,16 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 #else
 		luaL_register(ls->self(), NULL, lib);
 #endif
+	}
+
+	void handle_lud_push(lua::state* ls, jass::jhandle_t value)
+	{
+		if (!value)
+		{
+			return ls->pushnil();
+		}
+
+		return ls->pushlightuserdata((void*)value);
 	}
 
 	jass::jhandle_t handle_lud_read(lua::state* ls, int index)
@@ -149,25 +192,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		else if (2 == runtime::handle_level)
 		{
 			// userdata
-			if (!value)
-			{
-				return mybase::pushnil();
-			}
-
-			jass::jhandle_t* hptr = (jass::jhandle_t*)lua_newuserdata(self(), sizeof(jass::jhandle_t));
-			*hptr = value;
-			luaL_setmetatable(self(), LUA_JASS_HANDLE);
-			return;
+			return handle_ud_push(this, value);
 		}
 		else
 		{
 			// lightuserdata
-			if (!value)
-			{
-				return mybase::pushnil();
-			}
-
-			return mybase::pushlightuserdata((void*)value);
+			return handle_lud_push(this, value);
 		}
 	}
 }}}
