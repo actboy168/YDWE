@@ -138,7 +138,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int jass_call_null_function(lua_State* L)
 	{
 		jassbind* lj = (jassbind*)L;
-		printf("Wanring: %s\n", lj->tostring(lua_upvalueindex(1)));
+		printf("Wanring: %s isn't implemented.\n", lj->tostring(lua_upvalueindex(1)));
 		lj->pushnil();
 		return 1;
 	}
@@ -182,12 +182,17 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		const char* name = lj->tostring(2);
 
+		uintptr_t vm = get_jass_virtual_machine();
+
 		jass::func_value const* nf = jass::jass_func(name);
 		if (nf && nf->is_valid())
 		{
-			if (0 == strcmp(name, "TriggerSleepAction"))
+			if ((0 == strcmp(name, "TriggerSleepAction"))
+				|| (0 == strcmp(name, "TriggerWaitForSound"))
+				|| (0 == strcmp(name, "TriggerSyncReady"))
+				|| (0 == strcmp(name, "SyncSelections")))
 			{
-				lj->pushstring("TriggerSleepAction isn't implemented.");
+				lj->pushstring(name);
 				lj->pushcclosure((lua::state::cfunction)jass_call_null_function, 1);
 				return 1;
 			}
