@@ -95,7 +95,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 			ls->pushunsigned(value);
 			ls->pushvalue(-2);
-			ls->rawset(-3);
+			ls->rawset(-4);
 		}
 
 		ls->remove(-2);
