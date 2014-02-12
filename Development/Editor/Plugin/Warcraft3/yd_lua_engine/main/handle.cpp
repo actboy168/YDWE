@@ -60,9 +60,15 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		if (runtime::handle_ud_table == 0)
 		{
 			ls->newtable();
-			ls->pushstring("__mode");
-			ls->pushstring("kv");
-			ls->rawset(-3);
+			{
+				ls->newtable();
+				{
+					ls->pushstring("__mode");
+					ls->pushstring("kv");
+					ls->rawset(-3);
+				}
+				ls->setmetatable(-2);
+			}
 			runtime::handle_ud_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
 		}
 		lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::handle_ud_table);
@@ -89,7 +95,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 			ls->pushunsigned(value);
 			ls->pushvalue(-2);
-			ls->rawset(-3);
+			ls->rawset(-4);
 		}
 
 		ls->remove(-2);
