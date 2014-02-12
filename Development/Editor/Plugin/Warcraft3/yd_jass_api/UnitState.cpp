@@ -46,6 +46,8 @@ namespace base { namespace warcraft3 { namespace japi {
 	    UNIT_STATE_ACQUISITION_RANGE            = 0x52, // how far the unit will automatically look for targets
 	    UNIT_STATE_LIFE_REGEN                   = 0x53,
 	    UNIT_STATE_MANA_REGEN                   = 0x54,
+	    UNIT_STATE_MAX_LIFE                     = 0x1,
+	    UNIT_STATE_MAX_MANA                     = 0x3,
 	};
 
 	struct unit_property {
@@ -95,6 +97,61 @@ namespace base { namespace warcraft3 { namespace japi {
 		uint32_t unk_270[1];
 		uint32_t attack2_range_buffer;          // +8
 	};
+
+	uintptr_t getGameAddress()
+	{
+		war3_searcher&s = get_war3_searcher();
+		uint32_t version = s.get_version();
+		uintptr_t address = s.base();
+		switch (version)
+		{
+		case version_120:
+		case version_120b:
+		case version_120c:
+		case version_120d:
+		case version_120e:
+			address += 0x87C744;
+			break;
+		case version_121:
+		case version_121b:
+			address += 0x87D7BC;
+			break;
+		case version_122:
+			address += 0xAA4178;
+			break;
+		case version_123:
+			address += 0xABCFC8;
+			break;
+		case version_124:
+		case version_124b:
+		case version_124c:
+		case version_124d:
+		case version_124e:
+			address += 0xACE5E0;
+			break;
+		case version_125:
+		case version_125b:
+		case version_126:
+			address += 0xAB7788;
+			break;
+		default:
+			address = 0;
+		}
+		return address;
+	}
+
+	uintptr_t getNodeAddress(int32_t nodeIndex, uint32_t offest)
+	{
+		uintptr_t gameAddress = getGameAddress();
+		if (gameAddress == 0)
+			return 0;
+		uintptr_t gameInstanceAddress = *(uint32_t*)(gameAddress);
+		uintptr_t gameMemoryAddress = *(uint32_t*)(gameInstanceAddress + 0xC);
+		if (gameMemoryAddress == 0xFFFFFFFF || gameMemoryAddress == 0)
+			return 0;
+		uintptr_t nodeBaseAddress = *(uint32_t*)(gameMemoryAddress + nodeIndex * 8 + 4);
+		return nodeBaseAddress + offest;
+	}
 
 	uintptr_t RealGetUnitState = 0;
 	uint32_t _cdecl FakeGetUnitState(uint32_t unit_handle, uint32_t state_type)
@@ -309,6 +366,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ACQUISITION_RANGE:
 		case UNIT_STATE_LIFE_REGEN:
 		case UNIT_STATE_MANA_REGEN:
+
+		case UNIT_STATE_MAX_LIFE:
+		case UNIT_STATE_MAX_MANA:
 			break;
 		default:
 			base::c_call<void>(RealSetUnitState, unit_handle, state_type, value_ptr);
@@ -344,6 +404,18 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			*(uint32_t*)(unit_object + 0xE4) = (uint32_t)jass::from_real(*value_ptr);
 			return ;
+		}
+
+		if (state_type == UNIT_STATE_MAX_LIFE || state_type == UNIT_STATE_MAX_MANA)
+		{
+			int32_t node_offest = (state_type == UNIT_STATE_MAX_LIFE) ? 0x8 : 0x28;
+			int32_t nodeIndex = *(uint32_t*)(unit_object + 0x98 + node_offest);
+			if (nodeIndex < 0)
+				return;
+			uintptr_t stateMaxAddr = getNodeAddress(nodeIndex ,0x84);
+			//uintptr_t stateMaxAddr = getNodeAddress(nodeIndex ,0x78);	// current state
+			*(uint32_t*)(stateMaxAddr) = *value_ptr;
+			return;
 		}
 
 		unit_property* ptr = (unit_property*)*(uintptr_t*)(unit_object + 0x1E4 + (s.get_version() > version_124c ? 4: 0));
