@@ -61,7 +61,6 @@ namespace base { namespace warcraft3 {
 			+ 100*(((uint8_t*)ptr)[size+1]-'0') 
 			+  10*(((uint8_t*)ptr)[size+2]-'0') 
 			+     (((uint8_t*)ptr)[size+3]-'0');
-#undef WARCRAFTIII_VERSION_STR
 	}
 
 	uintptr_t war3_searcher::search_get_instance() const
