@@ -34,7 +34,6 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		lua::state* get()
 		{
 			if (!state_) state_ = initialize();
-			runtime::initialize();
 			return state_;
 		}
 
@@ -59,6 +58,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			open_libs(ls);
 			clear_searchers_table(ls);
 			open_lua_engine(ls);
+			runtime::initialize();
 			return ls;
 		}
 
