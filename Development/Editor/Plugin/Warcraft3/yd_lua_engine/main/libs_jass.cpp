@@ -206,8 +206,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		const char* name = lj->tostring(2);
 
-		uintptr_t vm = get_jass_virtual_machine();
-
 		jass::func_value const* nf = jass::jass_func(name);
 		if (nf && nf->is_valid())
 		{
