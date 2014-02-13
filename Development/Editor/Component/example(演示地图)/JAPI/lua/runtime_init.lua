@@ -30,7 +30,7 @@ end
 --
 jass_ext.runtime.handle_level = 1
 
--- 开启此项时(默认开启)，调用jass.xxx/japi.xxx发生崩溃时，会生产一个lua错误，并忽略这个崩溃。
+-- 开启此项(默认开启)，调用jass.xxx/japi.xxx发生崩溃时，会生产一个lua错误，并忽略这个崩溃。
 -- 你可以注册jass_ext.runtime.error_handle，来获得这个错误。
 -- 注：开启此项会略微增加运行时消耗（即使没有发生错误）。
 jass_ext.runtime.catch_crash = true
