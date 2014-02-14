@@ -10,7 +10,7 @@ path = util.path.path
 def pack_units():
     print('pack_units')
     stormlib_path = path['OpenSource'] / 'StormLib' / 'Current' / 'bin' / 'Win32' / 'Release' / 'StormLib.dll'
-    from_path     = path['BuildRoot']  / 'Editor' / 'UI' / 'src' / 'Units'
+    from_path     = path['Development']  / 'Editor' / 'UI' / 'src' / 'Units'
     to_path       = path['Result']     / 'share' / 'mpq' / 'units'
     fs.copy_directory(from_path, to_path)
     
