@@ -30,7 +30,7 @@ def build_clear(configuration):
     fs.remove_all(path['ResultRoot'] / 'bin' / configuration)
     fs.remove_all(path['ResultRoot'] / 'obj' / configuration)
     fs.remove_all(path['ResultRoot'] / 'lib' / configuration)
-    fs.remove_all(path['ResultRoot'] / 'publish' / configuration)
+    fs.remove_all(path['ProjectRoot'] / 'Build' / 'publish' / configuration)
     fs.remove_all(path['Development'] / 'Editor' / 'UI' / 'bin')
     fs.remove_all(path['Development'] / 'Editor' / 'UI' / 'out')
     fs.remove_all(path['Development'] / 'Editor' / 'UI' / 'txt')
@@ -39,7 +39,7 @@ def build_move(configuration):
     print ('build_move')
     fs.copy_directory(
           path['ResultRoot'] / 'bin' / configuration
-        , path['ResultRoot'] / 'publish' / configuration
+        , path['ProjectRoot'] / 'Build' / 'publish' / configuration
         , ['.pdb', '.exp', '.ilk', '.aps', '.lib']
         , False)
     
