@@ -241,7 +241,7 @@ namespace base { namespace warcraft3 { namespace jass {
 			return 0;
 		}
 
-		return call(nf->get_address(), (const uintptr_t*)((va_list)_ADDRESSOF(name) + _INTSIZEOF(name)), nf->get_param().size() * sizeof uintptr_t);
+		return call(nf->get_address(), (const uintptr_t*)((va_list)_ADDRESSOF(name) + _INTSIZEOF(name)), nf->get_param().size());
 	}
 
 	uintptr_t call(uintptr_t func_address, const uintptr_t* param_list, size_t param_list_size)
