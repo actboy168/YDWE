@@ -2,26 +2,8 @@
 #include "runtime.h"
 #include "../lua/jassbind.h"
 #include <base/warcraft3/jass.h>
-#include <base/warcraft3/hashtable.h>
-#include <base/hook/fp_call.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
-
-	void handle_set_ref(jass::jhandle_t h, bool dec)
-	{
-		uintptr_t vm = get_jass_virtual_machine();
-		base::fast_call<void>(*(uintptr_t*)(vm + 0x28A0), h, dec ? 1 : 0, *(uintptr_t*)(vm + 0x28A4));
-	}
-
-	void handle_add_ref(jass::jhandle_t h)
-	{
-		handle_set_ref(h, false);
-	}
-
-	void handle_release(jass::jhandle_t h)
-	{
-		handle_set_ref(h, true);
-	}
 
 	int handle_tostring(lua_State *L, jass::jhandle_t h)
 	{
@@ -90,7 +72,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			ls->pop(1);
 			jass::jhandle_t* hptr = (jass::jhandle_t*)ls->newuserdata(sizeof(jass::jhandle_t));
 			*hptr = value;
-			handle_add_ref(value);
+			jass::handle_add_ref(value);
 			luaL_setmetatable(ls->self(), LUA_JASS_HANDLE);
 
 			ls->pushunsigned(value);
@@ -136,7 +118,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		ls->pushnil();
 		ls->rawset(-3);
 
-		handle_release(h);
+		jass::handle_release(h);
 		return 0;
 	}
 

@@ -1,5 +1,6 @@
 #include "../lua/jassbind.h"
 #include "handle.h"
+#include "runtime.h"
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/jass/func_value.h>
@@ -70,6 +71,19 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
+	uintptr_t safe_jass_call(lua_State* L, uintptr_t func_address, const uintptr_t* param_list, size_t param_list_size)
+	{
+		__try {
+			return jass::call(func_address, param_list, param_list_size);
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER){
+			lua_pushstring(L, "Call jass function crash.");
+			lua_error(L);
+		}
+
+		return 0;
+	}
+
 	int jass_call_native_function(jassbind* lj, const jass::func_value* nf, uintptr_t func_address = 0)
 	{
 		size_t param_size = nf->get_param().size();
@@ -112,7 +126,17 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 
 		if (func_address == 0) func_address = nf->get_address();
-		uintptr_t retval = jass::call(func_address, param.data(), param_size);
+
+		uintptr_t retval = 0;
+		if (runtime::catch_crash)
+		{
+			retval = safe_jass_call(lj->self(), func_address, param.data(), param_size);
+		}
+		else
+		{
+			retval = jass::call(func_address, param.data(), param_size);
+		}
+
 
 		if (nf->get_return() == jass::TYPE_STRING)
 		{
@@ -138,7 +162,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int jass_call_null_function(lua_State* L)
 	{
 		jassbind* lj = (jassbind*)L;
-		printf("Wanring: %s\n", lj->tostring(lua_upvalueindex(1)));
+		printf("Wanring: %s isn't implemented.\n", lj->tostring(lua_upvalueindex(1)));
 		lj->pushnil();
 		return 1;
 	}
@@ -185,9 +209,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jass::func_value const* nf = jass::jass_func(name);
 		if (nf && nf->is_valid())
 		{
-			if (0 == strcmp(name, "TriggerSleepAction"))
+			if ((0 == strcmp(name, "TriggerSleepAction"))
+				|| (0 == strcmp(name, "TriggerWaitForSound"))
+				|| (0 == strcmp(name, "TriggerSyncReady"))
+				|| (0 == strcmp(name, "SyncSelections")))
 			{
-				lj->pushstring("TriggerSleepAction isn't implemented.");
+				lj->pushstring(name);
 				lj->pushcclosure((lua::state::cfunction)jass_call_null_function, 1);
 				return 1;
 			}

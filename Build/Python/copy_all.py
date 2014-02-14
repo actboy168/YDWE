@@ -28,18 +28,18 @@ def copy_lib_dll(name, configuration, version = 'Current'):
     fs.copy_directory(path['OpenSource'] / name / version / 'bin' / 'Win32' / configuration, path['ResultCore'], ['.dll'])
     
 def copy_lua_script():
-    fs.copy_directory(path['BuildRoot'] / 'Editor' / 'Core' / 'Script' / 'lua', path['Result'] / 'share' / 'script', ['.lua'])
+    fs.copy_directory(path['Development'] / 'Editor' / 'Core' / 'Script' / 'lua', path['Result'] / 'share' / 'script', ['.lua'])
     
 def copy_log_script():
     fs.create_directories(path['Result'] / 'logs')
-    fs.copy_file(path['BuildRoot'] / 'Editor' / 'Core' / 'Script' / 'YDLogger.cfg', path['Result'] / 'logs' / 'YDLogger.cfg')
+    fs.copy_file(path['Development'] / 'Editor' / 'Core' / 'Script' / 'YDLogger.cfg', path['Result'] / 'logs' / 'YDLogger.cfg')
 
 def copy_boost_preprocessor():
     fs.copy_directory(path['OpenSource'] / 'Boost' / 'boost' / 'preprocessor', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor')
     fs.copy_file(path['OpenSource'] / 'Boost' / 'boost' / 'preprocessor.hpp', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor.hpp')
     
 def copy_component():
-    fs.copy_directory(path['BuildRoot'] / 'Editor' / 'Component', path['Result'])
+    fs.copy_directory(path['Development'] / 'Editor' / 'Component', path['Result'])
 
 def copy_all(configuration):
     print('copy_all')

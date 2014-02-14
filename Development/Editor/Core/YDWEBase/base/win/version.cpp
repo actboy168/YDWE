@@ -22,7 +22,7 @@ namespace base { namespace win {
 			//   http://msdn.microsoft.com/en-us/library/windows/desktop/ms724451(v=vs.85).aspx
 			//   http://msdn.microsoft.com/en-us/library/windows/desktop/ms724429(v=vs.85).aspx
 
-			base::win::simple_file_version sfv(::GetModuleHandleW(L"kernel32.dll"), L"ProductVersion", L".");
+			simple_file_version sfv(::GetModuleHandleW(L"kernel32.dll"), L"ProductVersion", L".");
 
 			vn.major = sfv.major;
 			vn.minor = sfv.minor;

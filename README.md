@@ -4,8 +4,8 @@ YDWE是一个用于制作《魔兽争霸III》(英文名 Warcraft3，下面简�
 
 ## 编译方法
 
-1. 进入/Development/Editor/Core/Solution/目录，执行Build_Release.bat
-2. 编译好的文件可以在/Development/Editor/Build/publish/Release/找到
+1. 执行/Build/Build_Release.bat
+2. 编译好的文件可以在/Build/publish/Release/找到
 
 ==============================================================================
 
@@ -19,4 +19,4 @@ You will need to compile all submodules before compling the actual project.
 git submodule update --init
 ```
 
-Simply run ./Development/Editor/Core/Solution/Build_Release.bat to compile
+Simply run ./Build/Build_Release.bat to compile

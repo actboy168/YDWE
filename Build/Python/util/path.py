@@ -21,12 +21,12 @@ def BuildRoot():
     return ret
 
 path = {}
-path['BuildRoot']    = BuildRoot()
-path['ProjectRoot']  = path['BuildRoot'].parent_path()
+path['ProjectRoot']  = BuildRoot()
+path['Development']  = path['ProjectRoot'] / 'Development'
 path['OpenSource']   = path['ProjectRoot'] / 'OpenSource'
 path['ThirdParty']   = path['ProjectRoot'] / 'ThirdParty'
-path['CoreRoot']     = path['BuildRoot'] / 'Editor' / 'Core'
-path['ResultRoot']   = path['BuildRoot'] / 'Editor' / 'Build'
+path['CoreRoot']     = path['Development'] / 'Editor' / 'Core'
+path['ResultRoot']   = path['Development'] / 'Editor' / 'Build'
 path['UIObj']        = path['ResultRoot'] / 'obj' / 'UI' / 'YDUI'
 
 def ResetPath(configuration):    

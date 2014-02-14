@@ -515,6 +515,9 @@
     <ClInclude Include="base\thread\lock\guard.h">
       <Filter>base\thread\lock</Filter>
     </ClInclude>
+    <ClInclude Include="base\win\registry\predefined_keys.h">
+      <Filter>base\win\registry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

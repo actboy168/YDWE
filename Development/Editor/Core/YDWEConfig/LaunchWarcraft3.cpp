@@ -48,7 +48,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 			// war3将非.w3g后缀名的文件当地图处理
 			if (!base::path::equal(loadfile.extension(), L".w3g"))
 			{
-				boost::filesystem::path test_map_path = boost::filesystem::path(get_test_map_path()) / loadfile.extension();
+				boost::filesystem::path test_map_path = get_test_map_path() + loadfile.extension().wstring();
 				try {
 					boost::filesystem::copy_file(loadfile, war3_path / test_map_path, boost::filesystem::copy_option::overwrite_if_exists);
 					cmd[L"loadfile"] = test_map_path.wstring();

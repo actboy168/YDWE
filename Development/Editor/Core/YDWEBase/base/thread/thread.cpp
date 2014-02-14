@@ -64,7 +64,7 @@ namespace base
 			}
 
 			bool const using_timer  = timeout_index!=~0u;
-			uintmax_t target = target_time + base::win::get_tick_count();
+			uintmax_t target = target_time + win::get_tick_count();
 
 			for (;;)
 			{
@@ -88,12 +88,12 @@ namespace base
 					::Sleep((DWORD)target_time);
 				}
 
-				if (target <= base::win::get_tick_count())
+				if (target <= win::get_tick_count())
 				{
 					return false;
 				}
 
-				target_time = target - base::win::get_tick_count();
+				target_time = target - win::get_tick_count();
 			}
 		}
 
