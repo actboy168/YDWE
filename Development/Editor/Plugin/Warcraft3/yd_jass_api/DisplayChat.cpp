@@ -40,7 +40,7 @@ void __cdecl EXDisplayChat(uint32_t player_handle, uint32_t chat_recipient, uint
 	uint32_t CGameUI = get_war3_searcher().get_gameui(0, 0);
 	if (CGameUI != 0)
 	{
-		base::this_call<void>(InGameChatWhat, CGameUI, jass::call("GetPlayerId", player_handle), jass::from_trigstring(jass::from_string(message)), chat_recipient, (float)10.0f);
+		this_call<void>(InGameChatWhat, CGameUI, jass::call("GetPlayerId", player_handle), jass::from_trigstring(jass::from_string(message)), chat_recipient, (float)10.0f);
 	}
 }
 

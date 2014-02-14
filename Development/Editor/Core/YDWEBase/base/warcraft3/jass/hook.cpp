@@ -175,7 +175,7 @@ namespace warcraft3 { namespace jass {
 
 					foreach (register_info const& it, register_info_list)
 					{
-						base::fast_call<void>(register_func, it.func, it.name.c_str(), it.param.c_str());
+						fast_call<void>(register_func, it.func, it.name.c_str(), it.param.c_str());
 					}
 				});
 

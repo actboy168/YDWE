@@ -74,7 +74,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 
 		if (!cheat)
 		{
-			base::c_call<uint32_t>(RealCheat, cheat_str);
+			c_call<uint32_t>(RealCheat, cheat_str);
 			return ;
 		}
 
@@ -88,7 +88,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			safe_pcall(ls->self(), 1, 1);
 		}
 
-		base::c_call<uint32_t>(RealCheat, cheat_str);
+		c_call<uint32_t>(RealCheat, cheat_str);
 	}
 
 

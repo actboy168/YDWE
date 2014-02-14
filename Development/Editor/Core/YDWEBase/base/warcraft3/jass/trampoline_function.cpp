@@ -19,7 +19,7 @@ namespace base { namespace warcraft3 { namespace jass {
 				return ((uint32_t(__fastcall*)(uint32_t, uint32_t))*x)(*y, *dis);
 			}
 	
-			return base::c_call<uint32_t>(RealIsUnitInRangeXY, unit_handle, x, y, dis);
+			return c_call<uint32_t>(RealIsUnitInRangeXY, unit_handle, x, y, dis);
 		}
 
 		std::map<uint64_t, trampoline> trampoline_mapping;
