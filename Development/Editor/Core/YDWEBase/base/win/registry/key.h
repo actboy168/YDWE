@@ -431,3 +431,5 @@ typedef write_key_a                                   key_a;
 typedef write_key_w                                   key_w;
 
 }}
+
+#include <base/win/registry/predefined_keys.h>
