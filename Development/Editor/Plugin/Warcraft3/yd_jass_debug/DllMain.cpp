@@ -4,7 +4,6 @@
 #include <base/hook/fp_call.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/opcode.h>
-#include <base/warcraft3/hashtable.h>
 #include <base/util/console.h>
 #include <base/util/format.h>
 #include <iostream>
