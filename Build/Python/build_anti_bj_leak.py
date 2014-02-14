@@ -186,7 +186,7 @@ def parse_file(filename, outputpath):
 ###############################################################
 def build_anti_bj_leak():
   print('build_anti_bj_leak')
-  parse_file(str(path['CoreRoot'] / 'Script' / 'Python' / 'bj_script.j'), str(path['Result'] / 'jass' / 'AntiBJLeak'))
+  parse_file(str(path['ProjectRoot'] / 'Build' / 'Python' / 'bj_script.j'), str(path['Result'] / 'jass' / 'AntiBJLeak'))
 
 def Configuration():
     if len(sys.argv) > 1:
