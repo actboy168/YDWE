@@ -24,7 +24,11 @@ namespace base { namespace warcraft3 { namespace japi {
 	    UNIT_STATE_ATTACK1_MAX_TARGETS          = 0x24,
 	    UNIT_STATE_ATTACK1_INTERVAL             = 0x25,
 	    UNIT_STATE_ATTACK1_INITIAL_DELAY        = 0x26,
+		UNIT_STATE_ATTACK1_BACK_SWING			= 0x28,
 	    UNIT_STATE_ATTACK1_RANGE_BUFFER         = 0x27,
+		UNIT_STATE_ATTACK1_TARGET_TYPES         = 0x29,
+		UNIT_STATE_ATTACK1_SPILL_DIST			= 0x56,
+		UNIT_STATE_ATTACK1_SPILL_RADIUS			= 0x57,
 	    // attack 2 attributes (sorted in a sequencial order based on memory address)
 	    UNIT_STATE_ATTACK2_DAMAGE_DICE          = 0x30,
 	    UNIT_STATE_ATTACK2_DAMAGE_SIDE          = 0x31,
@@ -40,6 +44,10 @@ namespace base { namespace warcraft3 { namespace japi {
 	    UNIT_STATE_ATTACK2_RANGE_BUFFER         = 0x41,
 	    UNIT_STATE_ATTACK2_DAMAGE_MIN           = 0x42,
 	    UNIT_STATE_ATTACK2_DAMAGE_MAX           = 0x43,
+		UNIT_STATE_ATTACK2_BACK_SWING			= 0x44,
+		UNIT_STATE_ATTACK2_TARGET_TYPES         = 0x45,
+		UNIT_STATE_ATTACK2_SPILL_DIST			= 0x46,
+		UNIT_STATE_ATTACK2_SPILL_RADIUS			= 0x47,
 	    // general attributes
 	    UNIT_STATE_ARMOR_TYPE                   = 0x50,
 	    UNIT_STATE_RATE_OF_FIRE                 = 0x51, // global attack rate of unit, work on both attacks
@@ -48,54 +56,73 @@ namespace base { namespace warcraft3 { namespace japi {
 	    UNIT_STATE_MANA_REGEN                   = 0x54,
 	    UNIT_STATE_MAX_LIFE                     = 0x1,
 	    UNIT_STATE_MAX_MANA                     = 0x3,
+	    UNIT_STATE_MIN_RANGE                    = 0x55,
+		// ...starts from 0x58
 	};
 
 	struct unit_property {
-		uint32_t unk_00[34];
-		int32_t  attack1_damage_dice;           // 0x88 (integer)
-		int32_t  attack2_damage_dice;           // +4
-		uint32_t unk_8c[1];
-		int32_t  attack1_damage_side;           // 0x94 (integer)
-		int32_t  attack2_damage_side;           // +4
-		uint32_t unk_9c[1];
-		int32_t  attack1_damage_base;           // 0xA0 (integer)
-		int32_t  attack2_damage_base;           // +4
-		uint32_t unk_a8[1];
-		int32_t  attack1_damage_bonus;          // 0xAC (integer)
-		int32_t  attack2_damage_bonus;          // +4
-		uint32_t unk_b4[2];
-		uint32_t  attack1_damage_loss_factor;   // 0xBC (real)
-		uint32_t unk_c0[3];
-		uint32_t  attack2_damage_loss_factor;   // +16(0xF)
-		uint32_t unk_d0[6];
-		int32_t  attack1_weapon_sound;          // 0xE8 (real)
-		int32_t  attack2_weapon_sound;          // +4
-		uint32_t unk_f0[1];
-		int32_t attack1_weapon_type;            // 0xF4 (integer)
-		int32_t attack2_weapon_type;            // +4
-		uint32_t unk_fc[1];
-		int32_t attack1_target_amount;          // 0x100 (integer)
-		int32_t attack2_target_amount;          // +4
-		uint32_t unk_108[20];
-		uint32_t attack1_interval;              // 0x158 (real)
-		uint32_t unk_15c[1];
-		uint32_t attack2_interval;              // +8
-		uint32_t unk_164[2];
-		uint32_t attack1_initial_delay;         // 0x16C (real)
-		uint32_t unk_170[3];
-		uint32_t attack2_initial_delay;         // +16(0xF)
-		uint32_t unk_180[12];
-		uint32_t rate_of_fire;                  // 0x1B0 (real)
-		uint32_t unk_1b4[36];
-		uint32_t acquisition_range;             // 0x244 (real)
-		uint32_t unk_248[4];
-		uint32_t attack1_range;                 // 0x258 (real)
-		uint32_t unk_25c[1];
-		uint32_t attack2_range;                 // +8
-		uint32_t unk_264[2];
-		uint32_t attack1_range_buffer;          // 0x26C (real)
-		uint32_t unk_270[1];
-		uint32_t attack2_range_buffer;          // +8
+	    uint32_t unk_00[34];
+	    int32_t  attack1_damage_dice;           // 0x88 (integer)
+	    int32_t  attack2_damage_dice;           // +4
+	    uint32_t unk_8c[1];
+	    int32_t  attack1_damage_side;           // 0x94 (integer)
+	    int32_t  attack2_damage_side;           // +4
+	    uint32_t unk_9c[1];
+	    int32_t  attack1_damage_base;           // 0xA0 (integer)
+	    int32_t  attack2_damage_base;           // +4
+	    uint32_t unk_a8[1];
+	    int32_t  attack1_damage_bonus;          // 0xAC (integer)
+	    int32_t  attack2_damage_bonus;          // +4
+	    uint32_t unk_b4[2];
+	    uint32_t  attack1_damage_loss_factor;   // 0xBC (real)
+	    uint32_t unk_c0[3];
+	    uint32_t  attack2_damage_loss_factor;   // +16(0xF)
+	    uint32_t unk_d0[6];
+	    int32_t  attack1_weapon_sound;          // 0xE8 (real)
+	    int32_t  attack2_weapon_sound;          // +4
+	    uint32_t unk_f0[1];
+	    int32_t attack1_weapon_type;            // 0xF4 (integer)
+	    int32_t attack2_weapon_type;            // +4
+	    uint32_t unk_fc[1];
+	    int32_t attack1_target_amount;          // 0x100 (integer)
+	    int32_t attack2_target_amount;          // +4
+	    uint32_t unk_108[2];
+	    uint32_t attack1_spill_dist;            // 0x110 (real)
+	    uint32_t unk_114[3];
+	    uint32_t attack2_spill_dist;            // +16(0xF)
+	    uint32_t unk_124[4];
+	    uint32_t attack1_spill_radius;          // 0x134
+	    uint32_t unk_138[3];
+	    uint32_t attack2_spill_radius;          // +16(0xF)
+	    uint32_t unk_148[4];
+	    uint32_t attack1_interval;              // 0x158 (real)
+	    uint32_t unk_15c[1];
+	    uint32_t attack2_interval;              // +8
+	    uint32_t unk_164[2];
+	    uint32_t attack1_dmgpt;                 // 0x16C (real)
+	    uint32_t unk_170[3];
+	    uint32_t attack2_dmgpt;                 // +16(0xF)
+	    uint32_t unk_180[4];
+	    uint32_t attack1_back_swing;            // 0x190 (real)
+	    uint32_t unk_194[3];
+	    uint32_t attack2_back_swing;            // +16(0xF)
+	    uint32_t unk_1a4[3];
+	    uint32_t rate_of_fire;                  // 0x1B0 (real)
+	    uint32_t unk_1b4[25];
+	    int32_t attack1_targs;                  // 0x218
+	    int32_t attack2_targs;                  // +4
+	    uint32_t unk_220[9];
+	    uint32_t acquisition_range;             // 0x244 (real)
+	    uint32_t unk_248[1];
+	    uint32_t minimum_range;                 // 0x24c (real)
+	    uint32_t unk_250[2];
+	    uint32_t attack1_range;                 // 0x258 (real)
+	    uint32_t unk_25c[1];
+	    uint32_t attack2_range;                 // +8
+	    uint32_t unk_264[2];
+	    uint32_t attack1_range_buffer;          // 0x26C (real)
+	    uint32_t unk_270[1];
+	    uint32_t attack2_range_buffer;          // +8
 	};
 
 	uintptr_t getGameAddress()
@@ -172,6 +199,10 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ATTACK1_RANGE_BUFFER:
 		case UNIT_STATE_ATTACK1_DAMAGE_MIN:
 		case UNIT_STATE_ATTACK1_DAMAGE_MAX:
+		case UNIT_STATE_ATTACK1_BACK_SWING:
+		case UNIT_STATE_ATTACK1_TARGET_TYPES:
+		case UNIT_STATE_ATTACK1_SPILL_DIST:
+		case UNIT_STATE_ATTACK1_SPILL_RADIUS:
 
 		case UNIT_STATE_ATTACK2_DAMAGE_DICE:
 		case UNIT_STATE_ATTACK2_DAMAGE_SIDE:
@@ -187,6 +218,10 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ATTACK2_RANGE_BUFFER:
 		case UNIT_STATE_ATTACK2_DAMAGE_MIN:
 		case UNIT_STATE_ATTACK2_DAMAGE_MAX:
+		case UNIT_STATE_ATTACK2_BACK_SWING:
+		case UNIT_STATE_ATTACK2_TARGET_TYPES:
+		case UNIT_STATE_ATTACK2_SPILL_DIST:
+		case UNIT_STATE_ATTACK2_SPILL_RADIUS:
 
 		case UNIT_STATE_ARMOR:
 		case UNIT_STATE_ARMOR_TYPE:
@@ -194,6 +229,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ACQUISITION_RANGE:
 		case UNIT_STATE_LIFE_REGEN:
 		case UNIT_STATE_MANA_REGEN:
+		case UNIT_STATE_MIN_RANGE:
 			break;
 		default:
 			return base::c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
@@ -241,6 +277,8 @@ namespace base { namespace warcraft3 { namespace japi {
 			return ptr->rate_of_fire;
 		case UNIT_STATE_ACQUISITION_RANGE:
 			return ptr->acquisition_range;
+		case UNIT_STATE_MIN_RANGE:
+			return ptr->minimum_range;
 		// Attack - 1
 		case UNIT_STATE_ATTACK1_DAMAGE_DICE:
 			retval = ptr->attack1_damage_dice;
@@ -268,7 +306,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ATTACK1_INTERVAL:
 			return ptr->attack1_interval;
 		case UNIT_STATE_ATTACK1_INITIAL_DELAY:
-			return ptr->attack1_initial_delay;
+			return ptr->attack1_dmgpt;
 		case UNIT_STATE_ATTACK1_RANGE:
 			return ptr->attack1_range;
 		case UNIT_STATE_ATTACK1_RANGE_BUFFER:
@@ -279,6 +317,14 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ATTACK1_DAMAGE_MAX:
 			retval = ptr->attack1_damage_base + ptr->attack1_damage_bonus + ptr->attack1_damage_dice * ptr->attack1_damage_side;
 			break;
+		case UNIT_STATE_ATTACK1_BACK_SWING:
+			return ptr->attack1_back_swing;
+		case UNIT_STATE_ATTACK1_TARGET_TYPES:
+			retval = ptr->attack1_targs;
+		case UNIT_STATE_ATTACK1_SPILL_DIST:
+			return ptr->attack1_spill_dist;
+		case UNIT_STATE_ATTACK1_SPILL_RADIUS:
+			return ptr->attack1_spill_radius;
 		// Attack - 2
 		case UNIT_STATE_ATTACK2_DAMAGE_DICE:
 			retval = ptr->attack2_damage_dice;
@@ -306,7 +352,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ATTACK2_INTERVAL:
 			return ptr->attack2_interval;
 		case UNIT_STATE_ATTACK2_INITIAL_DELAY:
-			return ptr->attack2_initial_delay;
+			return ptr->attack2_dmgpt;
 		case UNIT_STATE_ATTACK2_RANGE:
 			return ptr->attack2_range;
 		case UNIT_STATE_ATTACK2_RANGE_BUFFER:
@@ -317,6 +363,14 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ATTACK2_DAMAGE_MAX:
 			retval = ptr->attack2_damage_base + ptr->attack2_damage_bonus + ptr->attack2_damage_dice * ptr->attack2_damage_side;
 			break;
+		case UNIT_STATE_ATTACK2_BACK_SWING:
+			return ptr->attack2_back_swing;
+		case UNIT_STATE_ATTACK2_TARGET_TYPES:
+			retval = ptr->attack2_targs;
+		case UNIT_STATE_ATTACK2_SPILL_DIST:
+			return ptr->attack2_spill_dist;
+		case UNIT_STATE_ATTACK2_SPILL_RADIUS:
+			return ptr->attack2_spill_radius;
 		default:
 			retval = 0;
 			break;
@@ -344,6 +398,10 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ATTACK1_RANGE_BUFFER:
 		case UNIT_STATE_ATTACK1_DAMAGE_MIN:
 		case UNIT_STATE_ATTACK1_DAMAGE_MAX:
+		case UNIT_STATE_ATTACK1_BACK_SWING:
+		case UNIT_STATE_ATTACK1_TARGET_TYPES:
+		case UNIT_STATE_ATTACK1_SPILL_DIST:
+		case UNIT_STATE_ATTACK1_SPILL_RADIUS:
 
 		case UNIT_STATE_ATTACK2_DAMAGE_DICE:
 		case UNIT_STATE_ATTACK2_DAMAGE_SIDE:
@@ -359,6 +417,10 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ATTACK2_RANGE_BUFFER:
 		case UNIT_STATE_ATTACK2_DAMAGE_MIN:
 		case UNIT_STATE_ATTACK2_DAMAGE_MAX:
+		case UNIT_STATE_ATTACK2_BACK_SWING:
+		case UNIT_STATE_ATTACK2_TARGET_TYPES:
+		case UNIT_STATE_ATTACK2_SPILL_DIST:
+		case UNIT_STATE_ATTACK2_SPILL_RADIUS:
 
 		case UNIT_STATE_ARMOR:
 		case UNIT_STATE_ARMOR_TYPE:
@@ -366,7 +428,8 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ACQUISITION_RANGE:
 		case UNIT_STATE_LIFE_REGEN:
 		case UNIT_STATE_MANA_REGEN:
-
+		case UNIT_STATE_MIN_RANGE:
+		
 		case UNIT_STATE_MAX_LIFE:
 		case UNIT_STATE_MAX_MANA:
 			break;
@@ -433,6 +496,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_ACQUISITION_RANGE:
 			ptr->acquisition_range = *value_ptr;
 			return ;
+		case UNIT_STATE_MIN_RANGE:
+			ptr->minimum_range = *value_ptr;
+			return ;
 		// Attack - 1
 		case UNIT_STATE_ATTACK1_DAMAGE_DICE:
 			ptr->attack1_damage_dice = (uint32_t)jass::from_real(*value_ptr);
@@ -462,13 +528,25 @@ namespace base { namespace warcraft3 { namespace japi {
 			ptr->attack1_interval = *value_ptr;
 			return ;
 		case UNIT_STATE_ATTACK1_INITIAL_DELAY:
-			ptr->attack1_initial_delay = *value_ptr;
+			ptr->attack1_dmgpt = *value_ptr;
 			return ;
 		case UNIT_STATE_ATTACK1_RANGE:
 			ptr->attack1_range = *value_ptr;
 			return ;
 		case UNIT_STATE_ATTACK1_RANGE_BUFFER:
 			ptr->attack1_range_buffer = *value_ptr;
+			return ;
+		case UNIT_STATE_ATTACK1_BACK_SWING:
+			ptr->attack1_back_swing = *value_ptr;
+			return ;
+		case UNIT_STATE_ATTACK1_TARGET_TYPES:
+			ptr->attack1_targs = (uint32_t)jass::from_real(*value_ptr);
+			return ;
+		case UNIT_STATE_ATTACK1_SPILL_DIST:
+			ptr->attack1_spill_dist = *value_ptr;
+			return ;
+		case UNIT_STATE_ATTACK1_SPILL_RADIUS:
+			ptr->attack1_spill_radius = *value_ptr;
 			return ;
 		// Attack - 2
 		case UNIT_STATE_ATTACK2_DAMAGE_DICE:
@@ -499,13 +577,25 @@ namespace base { namespace warcraft3 { namespace japi {
 			ptr->attack2_interval = *value_ptr;
 			return ;
 		case UNIT_STATE_ATTACK2_INITIAL_DELAY:
-			ptr->attack2_initial_delay = *value_ptr;
+			ptr->attack2_dmgpt = *value_ptr;
 			return ;
 		case UNIT_STATE_ATTACK2_RANGE:
 			ptr->attack2_range = *value_ptr;
 			return ;
 		case UNIT_STATE_ATTACK2_RANGE_BUFFER:
 			ptr->attack2_range_buffer = *value_ptr;
+			return ;
+		case UNIT_STATE_ATTACK2_BACK_SWING:
+			ptr->attack2_back_swing = *value_ptr;
+			return ;
+		case UNIT_STATE_ATTACK2_TARGET_TYPES:
+			ptr->attack2_targs = (uint32_t)jass::from_real(*value_ptr);
+			return ;
+		case UNIT_STATE_ATTACK2_SPILL_DIST:
+			ptr->attack2_spill_dist = *value_ptr;
+			return ;
+		case UNIT_STATE_ATTACK2_SPILL_RADIUS:
+			ptr->attack2_spill_radius = *value_ptr;
 			return ;
 		case UNIT_STATE_ATTACK1_DAMAGE_MIN:
 		case UNIT_STATE_ATTACK1_DAMAGE_MAX:
