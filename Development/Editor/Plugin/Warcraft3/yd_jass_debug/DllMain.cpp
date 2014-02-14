@@ -4,6 +4,7 @@
 #include <base/hook/fp_call.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/opcode.h>
+#include <base/warcraft3/hashtable.h>
 #include <base/util/console.h>
 #include <base/util/format.h>
 #include <iostream>
@@ -72,22 +73,35 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		return *(struct jass::opcode**)(vm+0x20);
 	}
 
-	const char* get_function_name(struct jass::opcode* current_op)
+	void show_pos(struct jass::opcode* current_op)
 	{
 		struct jass::opcode *op;
 		for (op = current_op; op->opcode_type != jass::OPTYPE_FUNCTION; --op)
 		{ }
 
-		return jass::from_stringid(op->arg);
+		std::cout << "    [" << jass::from_stringid(op->arg) << ":" << current_op  - op << "]" << std::endl;
 	}
 
-	void show_error(const std::string& msg)
+	void show_error(uint32_t vm, const std::string& msg)
 	{
 		base::console::enable();
 		std::cout << "---------------------------------------" << std::endl;
 		std::cout << "              JASS ERROR               " << std::endl;
 		std::cout << "---------------------------------------" << std::endl;
 		std::cout << msg << std::endl;
+		std::cout << std::endl;
+		std::cout << "stack traceback:" << std::endl;
+
+		uintptr_t stack = *(uintptr_t*)(vm + 0x2868);
+		jass::opcode* op = current_opcode(vm);
+		while (op)
+		{
+			show_pos(op);
+			stack = *(uintptr_t*)(stack + 0x04);
+			uintptr_t code = *(uintptr_t*)(*(uintptr_t*)(stack + 4 * *(uintptr_t*)(stack + 0x8C) + 0x08) + 0x20);
+			op = (jass::opcode*)(*(uintptr_t*)(*(uintptr_t*)(vm + 0x2858)) + code * 4);
+		}
+
 		std::cout << "---------------------------------------" << std::endl;
 	}
 
@@ -102,16 +116,16 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		case 4:
 			break;
 		case 2:
-			show_error(base::format("[%s]Hit opcode limit.", get_function_name(current_opcode(vm))));
+			show_error(vm, "Hit opcode limit.");
 			break;
 		case 6:
-			show_error(base::format("[%s]Variable '%s' used without having been initialized.", get_function_name(current_opcode(vm)), jass::from_stringid(current_opcode(vm)->arg)));
+			show_error(vm, base::format("Variable '%s' used without having been initialized.", jass::from_stringid(current_opcode(vm)->arg)));
 			break;
 		case 7:
-			show_error(base::format("[%s]Division by zero.", get_function_name(current_opcode(vm))));
+			show_error(vm, "Division by zero.");
 			break;
 		default:
-			show_error(base::format("[%s]Unknown error code(%d).", get_function_name(current_opcode(vm)), result));
+			show_error(vm, base::format("Unknown error code(%d).", result));
 			break;
 		}
 		return result;
