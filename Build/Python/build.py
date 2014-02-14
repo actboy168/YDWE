@@ -24,7 +24,14 @@ def Log():
     if len(sys.argv) > 2:
         logname = sys.argv[2]
     sys.stdout = RedirectLog(logname, sys.stdout)
-    
+
+def move_include():
+    fs.copy_directory(
+          path['ProjectRoot'] / 'Build' / 'include'
+        , path['ResultRoot'] / 'include'
+        , ['.h']
+        , True)
+
 def build_clear(configuration):
     print ('build_clear') 
     fs.remove_all(path['ResultRoot'] / 'bin' / configuration)
@@ -65,6 +72,7 @@ def build(configuration):
     t = datetime.datetime.now()
     print ('build {0}'.format(t))
     build_clear(configuration)
+    move_include()
     build_all(configuration)
     build_move(configuration)
     fs.remove_all(path['Result'] / 'plugin' / 'YDColorizer')
