@@ -1,1 +1,1 @@
-call Build.bat Release build.log
+call "%~dp0Build.bat" Release "%~dp0build.log"

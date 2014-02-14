@@ -1,1 +1,1 @@
-call Build.bat Debug build.log
+call "%~dp0Build.bat" Debug "%~dp0build.log"
