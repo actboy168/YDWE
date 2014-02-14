@@ -29,7 +29,7 @@ namespace base { namespace warcraft3 { namespace japi {
 	    UNIT_STATE_ATTACK1_TARGET_TYPES         = 0x29,
 	    UNIT_STATE_ATTACK1_SPILL_DIST           = 0x56,
 	    UNIT_STATE_ATTACK1_SPILL_RADIUS         = 0x57,
-		UNIT_STATE_ATTACK1_WEAPON_TYPE			= 0x58,
+	    UNIT_STATE_ATTACK1_WEAPON_TYPE          = 0x58,
 	    // attack 2 attributes (sorted in a sequencial order based on memory address)
 	    UNIT_STATE_ATTACK2_DAMAGE_DICE          = 0x30,
 	    UNIT_STATE_ATTACK2_DAMAGE_SIDE          = 0x31,
@@ -49,7 +49,7 @@ namespace base { namespace warcraft3 { namespace japi {
 	    UNIT_STATE_ATTACK2_TARGET_TYPES         = 0x45,
 	    UNIT_STATE_ATTACK2_SPILL_DIST           = 0x46,
 	    UNIT_STATE_ATTACK2_SPILL_RADIUS         = 0x47,
-		UNIT_STATE_ATTACK2_WEAPON_TYPE			= 0x59,
+	    UNIT_STATE_ATTACK2_WEAPON_TYPE          = 0x59,
 	    // general attributes
 	    UNIT_STATE_ARMOR_TYPE                   = 0x50,
 	    UNIT_STATE_RATE_OF_FIRE                 = 0x51, // global attack rate of unit, work on both attacks
@@ -59,7 +59,9 @@ namespace base { namespace warcraft3 { namespace japi {
 	    UNIT_STATE_MAX_LIFE                     = 0x1,
 	    UNIT_STATE_MAX_MANA                     = 0x3,
 	    UNIT_STATE_MIN_RANGE                    = 0x55,
-	    // ...starts from 0x5A
+	    UNIT_STATE_AS_TARGET_TYPE               = 0x60,
+	    UNIT_STATE_TYPE                         = 0x61,
+	    // ...starts from 0x62
 	};
 
 	struct unit_property {
@@ -237,6 +239,8 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_LIFE_REGEN:
 		case UNIT_STATE_MANA_REGEN:
 		case UNIT_STATE_MIN_RANGE:
+		case UNIT_STATE_AS_TARGET_TYPE:
+		case UNIT_STATE_TYPE:
 			break;
 		default:
 			return base::c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
@@ -267,6 +271,18 @@ namespace base { namespace warcraft3 { namespace japi {
 		if (state_type == UNIT_STATE_ARMOR_TYPE)
 		{
 		    int32_t retval = *(uint32_t*)(unit_object + 0xE4);
+		    return jass::to_real((float)retval);
+		}
+
+		if (state_type == UNIT_STATE_AS_TARGET_TYPE)
+		{
+			int32_t retval = *(uint32_t*)(unit_object + 0x248);
+		    return jass::to_real((float)retval);
+		}
+
+		if (state_type == UNIT_STATE_TYPE)
+		{
+			int32_t retval = *(uint32_t*)(unit_object + 0x24C);
 		    return jass::to_real((float)retval);
 		}
 
@@ -445,7 +461,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_LIFE_REGEN:
 		case UNIT_STATE_MANA_REGEN:
 		case UNIT_STATE_MIN_RANGE:
-		
+		case UNIT_STATE_AS_TARGET_TYPE:
+		case UNIT_STATE_TYPE:
+
 		case UNIT_STATE_MAX_LIFE:
 		case UNIT_STATE_MAX_MANA:
 			break;
@@ -495,6 +513,18 @@ namespace base { namespace warcraft3 { namespace japi {
 			//uintptr_t stateMaxAddr = getNodeAddress(nodeIndex ,0x78);	// current state
 			*(uint32_t*)(stateMaxAddr) = *value_ptr;
 			return;
+		}
+
+		if (state_type == UNIT_STATE_AS_TARGET_TYPE)
+		{
+			*(uint32_t*)(unit_object + 0x248) = (uint32_t)jass::from_real(*value_ptr);
+			return ;
+		}
+
+		if (state_type == UNIT_STATE_TYPE)
+		{
+			*(uint32_t*)(unit_object + 0x24C) = (uint32_t)jass::from_real(*value_ptr);
+			return ;
 		}
 
 		unit_property* ptr = (unit_property*)*(uintptr_t*)(unit_object + 0x1E4 + (s.get_version() > version_124c ? 4: 0));
