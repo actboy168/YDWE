@@ -36,6 +36,7 @@ namespace base { namespace win {
 		boost::filesystem::path inject_dll_;
 		STARTUPINFOW            si_;
 		PROCESS_INFORMATION     pi_;
+		bool                    inherit_handle_;
 	};
 
 	_BASE_API bool create_process(

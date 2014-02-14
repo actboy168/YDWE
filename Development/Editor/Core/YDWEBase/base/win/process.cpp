@@ -14,6 +14,7 @@ namespace base { namespace win {
 		bool create_process_use_system(
 			const wchar_t*        application, 
 			wchar_t*              command_line,
+			bool                  inherit_handle,
 			uint32_t              creation_flags,
 			const wchar_t*        current_directory,
 			LPSTARTUPINFOW        startup_info,
@@ -21,7 +22,7 @@ namespace base { namespace win {
 		{
 			return !!::CreateProcessW(
 				application, command_line, 
-				NULL, NULL, FALSE, creation_flags, NULL, 
+				NULL, NULL, inherit_handle, creation_flags, NULL,
 				current_directory, 
 				startup_info, 
 				process_information);
@@ -30,6 +31,7 @@ namespace base { namespace win {
 		bool create_process_use_detour(
 			const wchar_t*        application, 
 			wchar_t*              command_line,
+			bool                  inherit_handle,
 			uint32_t              creation_flags,
 			const wchar_t*        current_directory,
 			LPSTARTUPINFOW        startup_info,
@@ -38,7 +40,7 @@ namespace base { namespace win {
 		{
 			return !!DetourCreateProcessWithDllW(
 				application, command_line, 
-				NULL, NULL, FALSE, creation_flags, NULL, 
+				NULL, NULL, inherit_handle, creation_flags, NULL,
 				current_directory, 
 				startup_info, 
 				process_information, 
@@ -50,6 +52,7 @@ namespace base { namespace win {
 		bool create_process(
 			const wchar_t*                 application, 
 			wchar_t*                       command_line,
+			bool                           inherit_handle,
 			uint32_t                       creation_flags,
 			const wchar_t*                 current_directory,
 			LPSTARTUPINFOW                 startup_info,
@@ -59,7 +62,7 @@ namespace base { namespace win {
 			if (boost::filesystem::exists(dll_path))
 			{
 #if 1
-				return create_process_use_detour(application, command_line, creation_flags, current_directory, startup_info, process_information, dll_path.string().c_str());
+				return create_process_use_detour(application, command_line, inherit_handle, creation_flags, current_directory, startup_info, process_information, dll_path.string().c_str());
 #else
 				bool result = create_process_use_system(application, command_line, creation_flags | CREATE_SUSPENDED, current_directory, startup_info, process_information);
 
@@ -77,7 +80,7 @@ namespace base { namespace win {
 			}
 			else
 			{
-				return create_process_use_system(application, command_line, creation_flags, current_directory, startup_info, process_information);
+				return create_process_use_system(application, command_line, inherit_handle, creation_flags, current_directory, startup_info, process_information);
 			}
 		}
 	}
@@ -125,9 +128,11 @@ namespace base { namespace win {
 
 	process::process()
 		: statue_(PROCESS_STATUE_READY)
+		, inherit_handle_(false)
 	{
 		si_.cb = sizeof STARTUPINFOW;
 		::GetStartupInfoW(&si_);
+		si_.dwFlags = 0;
 		memset(&pi_, 0 ,sizeof PROCESS_INFORMATION);
 	}
 
@@ -166,6 +171,7 @@ namespace base { namespace win {
 			if (std_input || std_output || std_error)
 			{
 				si_.dwFlags |= STARTF_USESTDHANDLES;
+				inherit_handle_ = true;
 
 				if (std_input)
 				{
@@ -200,7 +206,8 @@ namespace base { namespace win {
 			{
 				if (!detail::create_process(
 						boost::filesystem::exists(application) ? application.c_str(): nullptr, 
-						nullptr, 
+						nullptr,
+						inherit_handle_,
 						NORMAL_PRIORITY_CLASS, 
 						boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
 						&si_, &pi_, inject_dll_
@@ -216,7 +223,8 @@ namespace base { namespace win {
 
 				if (!detail::create_process(
 						boost::filesystem::exists(application) ? application.c_str(): nullptr, 
-						command_line_buffer.data(), 
+						command_line_buffer.data(),
+						inherit_handle_,
 						NORMAL_PRIORITY_CLASS, 
 						boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
 						&si_, &pi_, inject_dll_
@@ -241,7 +249,8 @@ namespace base { namespace win {
 			{
 				if (!detail::create_process(
 					boost::filesystem::exists(application) ? application.c_str(): nullptr, 
-					nullptr, 
+					nullptr,
+					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					nullptr, 
 					&si_, &pi_, inject_dll_
@@ -257,7 +266,8 @@ namespace base { namespace win {
 
 				if (!detail::create_process(
 					boost::filesystem::exists(application) ? application.c_str(): nullptr, 
-					command_line_buffer.data(), 
+					command_line_buffer.data(),
+					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					nullptr, 
 					&si_, &pi_, inject_dll_
@@ -282,7 +292,8 @@ namespace base { namespace win {
 			{
 				if (!detail::create_process(
 					nullptr, 
-					nullptr, 
+					nullptr,
+					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
 					&si_, &pi_, inject_dll_
@@ -298,7 +309,8 @@ namespace base { namespace win {
 
 				if (!detail::create_process(
 					nullptr, 
-					command_line_buffer.data(), 
+					command_line_buffer.data(),
+					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
 					&si_, &pi_, inject_dll_
@@ -324,6 +336,7 @@ namespace base { namespace win {
 				if (!detail::create_process(
 					nullptr, 
 					nullptr, 
+					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					nullptr, 
 					&si_, &pi_, inject_dll_
@@ -339,7 +352,8 @@ namespace base { namespace win {
 
 				if (!detail::create_process(
 					nullptr, 
-					command_line_buffer.data(), 
+					command_line_buffer.data(),
+					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					nullptr, 
 					&si_, &pi_, inject_dll_

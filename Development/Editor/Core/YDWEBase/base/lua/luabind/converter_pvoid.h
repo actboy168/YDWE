@@ -19,7 +19,7 @@ namespace luabind
 		static int match(lua_State *L, U, int index)
 		{
 			int type = lua_type(L, index);
-			return (type == LUA_TLIGHTUSERDATA || type == LUA_TNIL) ? 0 : -1;
+			return (type == LUA_TLIGHTUSERDATA || type == LUA_TUSERDATA || type == LUA_TNIL) ? 0 : -1;
 		}
 
 		template <class U>

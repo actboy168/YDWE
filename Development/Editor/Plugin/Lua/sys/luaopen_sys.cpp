@@ -423,8 +423,13 @@ namespace NLuaAPI { namespace NSys {
 	
 	static void LuaOpenPipe(lua_State *pState)
 	{
+		SECURITY_ATTRIBUTES sa;
+		sa.nLength = sizeof(SECURITY_ATTRIBUTES);
+		sa.bInheritHandle = TRUE;
+		sa.lpSecurityDescriptor = NULL;
+
 		HANDLE read_pipe, write_pipe;
-		if (!::CreatePipe(&read_pipe, &write_pipe, NULL, 0))
+		if (!::CreatePipe(&read_pipe, &write_pipe, &sa, 0))
 		{
 			lua_pushnil(pState);
 			lua_pushnil(pState);
