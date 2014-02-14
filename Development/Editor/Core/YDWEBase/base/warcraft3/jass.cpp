@@ -2,6 +2,7 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/jass/func_value.h>
+#include <base/hook/fp_call.h>
 #include <cassert>
 #include <memory>
 
@@ -184,6 +185,22 @@ namespace base { namespace warcraft3 { namespace jass {
 	const char* from_stringid(uint32_t strid)
 	{
 		return get_string_hashtable()->get(strid)->str_;
+	}
+
+	void handle_set_ref(jass::jhandle_t h, bool dec)
+	{
+		uintptr_t vm = get_jass_virtual_machine();
+		base::fast_call<void>(*(uintptr_t*)(vm + 0x28A0), h, dec ? 1 : 0, *(uintptr_t*)(vm + 0x28A4));
+	}
+
+	void handle_add_ref(jass::jhandle_t h)
+	{
+		handle_set_ref(h, false);
+	}
+
+	void handle_release(jass::jhandle_t h)
+	{
+		handle_set_ref(h, true);
 	}
 
 	call_param::call_param(size_t n)
