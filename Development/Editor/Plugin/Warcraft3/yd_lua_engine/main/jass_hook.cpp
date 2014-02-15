@@ -212,4 +212,52 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		g_hook_info_mapping[name]->uninstall();
 		return 0;
 	}
+
+	int jass_hook_set(lua_State* L)
+	{
+		jassbind* lj = (jassbind*)L;
+		const char* name = lj->tostring(2);
+
+		const jass::func_value* nf = jass::jass_func(name);
+		if (nf && nf->is_valid())
+		{
+			if (lj->isfunction(3))
+			{
+				install_jass_hook(lj, nf, name, callback(lj, 3));
+			}
+			else if (lj->isnil(3))
+			{
+				uninstall_jass_hook(lj, name);
+			}
+		}
+
+		return 0;
+	}
+
+	int jass_hook_get(lua_State* L)
+	{
+		jassbind* lj = (jassbind*)L;
+		lj->pushnil();
+		return 1;
+	}
+
+	int jass_hook(lua_State *L)
+	{
+		lua::state* ls = (lua::state*)L;
+		ls->newtable();
+		{
+			ls->newtable();
+			{
+				ls->pushstring("__index");
+				ls->pushcclosure((lua::state::cfunction)jass_hook_get, 0);
+				ls->rawset(-3);
+
+				ls->pushstring("__newindex");
+				ls->pushcclosure((lua::state::cfunction)jass_hook_set, 0);
+				ls->rawset(-3);
+			}
+			ls->setmetatable(-2);
+		}
+		return 1;
+	}
 }}}

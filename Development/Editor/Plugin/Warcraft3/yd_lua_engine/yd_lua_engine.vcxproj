@@ -96,7 +96,6 @@
     <ClCompile Include="main\jass_hook.cpp" />
     <ClCompile Include="main\libs_japi.cpp" />
     <ClCompile Include="main\libs_jass.cpp" />
-    <ClCompile Include="main\libs_jass_ext.cpp" />
     <ClCompile Include="main\libs_slk.cpp" />
     <ClCompile Include="main\lua_loader.cpp" />
     <ClCompile Include="main\open_lua_engine.cpp" />

@@ -38,9 +38,6 @@
     <ClCompile Include="main\lua_loader.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
-    <ClCompile Include="main\libs_jass_ext.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
     <ClCompile Include="main\libs_japi.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>

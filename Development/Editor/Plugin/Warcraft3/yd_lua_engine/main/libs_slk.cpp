@@ -196,19 +196,19 @@ namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	int open_slk(lua::state* ls)
+	int jass_slk(lua_State *L)
 	{
+		lua::state* ls = (lua::state*)L;
 		ls->newtable();
 		{
-			slk_create_table(ls, "ability",      slk::ROBJECT_TYPE::ABILITY);
-			slk_create_table(ls, "buff",         slk::ROBJECT_TYPE::BUFF);
-			slk_create_table(ls, "unit",         slk::ROBJECT_TYPE::UNIT);
-			slk_create_table(ls, "item",         slk::ROBJECT_TYPE::ITEM);
-			slk_create_table(ls, "upgrade",      slk::ROBJECT_TYPE::UPGRADE);
-			slk_create_table(ls, "doodad",       slk::ROBJECT_TYPE::DOODAD);
+			slk_create_table(ls, "ability", slk::ROBJECT_TYPE::ABILITY);
+			slk_create_table(ls, "buff", slk::ROBJECT_TYPE::BUFF);
+			slk_create_table(ls, "unit", slk::ROBJECT_TYPE::UNIT);
+			slk_create_table(ls, "item", slk::ROBJECT_TYPE::ITEM);
+			slk_create_table(ls, "upgrade", slk::ROBJECT_TYPE::UPGRADE);
+			slk_create_table(ls, "doodad", slk::ROBJECT_TYPE::DOODAD);
 			slk_create_table(ls, "destructable", slk::ROBJECT_TYPE::DESTRUCTABLE);
 		}
-		ls->setglobal("slk");
 		return 1;
 	}
 }}}

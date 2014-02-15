@@ -370,12 +370,15 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 #endif
 	}
 
-	int open_jass(lua::state* ls)
+
+	int jass_common(lua_State *L)
 	{
-		handle_lud_make_mt(ls); 
+		lua::state* ls = (lua::state*)L;
+
+		handle_lud_make_mt(ls);
 		handle_ud_make_mt(ls);
 		array_make_mt(ls);
-		
+
 		ls->newtable();
 		{
 			ls->newtable();
@@ -390,8 +393,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			}
 			ls->setmetatable(-2);
 		}
-		ls->setglobal("jass");
-
 		return 1;
 	}
 }}}

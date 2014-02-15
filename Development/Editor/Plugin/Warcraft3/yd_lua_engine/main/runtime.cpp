@@ -113,4 +113,25 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		return 0;
 	}
+
+	int jass_runtime(lua_State *L)
+	{
+		lua::state* ls = (lua::state*)L;
+		ls->newtable();
+		{
+			ls->newtable();
+			{
+				ls->pushstring("__index");
+				ls->pushcclosure((lua::state::cfunction)jass_runtime_get, 0);
+				ls->rawset(-3);
+
+				ls->pushstring("__newindex");
+				ls->pushcclosure((lua::state::cfunction)jass_runtime_set, 0);
+				ls->rawset(-3);
+			}
+			ls->setmetatable(-2);
+		}
+		return 1;
+	}
+
 }}}

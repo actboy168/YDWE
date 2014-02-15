@@ -27,8 +27,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	int open_japi(lua::state* ls)
+	int jass_japi(lua_State *L)
 	{
+		lua::state* ls = (lua::state*)L;
 		ls->newtable();
 		{
 			ls->newtable();
@@ -39,7 +40,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			}
 			ls->setmetatable(-2);
 		}
-		ls->setglobal("japi");
 		return 1;
 	}
 }}}
