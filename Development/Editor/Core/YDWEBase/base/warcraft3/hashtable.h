@@ -185,6 +185,7 @@ namespace base { namespace warcraft3 {
 	}
 
 	_BASE_API uintptr_t                     get_jass_virtual_machine();
+	_BASE_API uintptr_t                     get_current_jass_virtual_machine();
 	_BASE_API hashtable::native_func_table* get_native_function_hashtable();
 	_BASE_API hashtable::variable_table*    get_variable_hashtable();
 	_BASE_API hashtable::reverse_table*     get_string_hashtable();
