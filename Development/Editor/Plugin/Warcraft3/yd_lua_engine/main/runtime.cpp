@@ -7,6 +7,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	namespace runtime
 	{
+		int  version = 1;
 		int  error_handle = 0;
 		int  handle_level = 1;
 		int  handle_ud_table = 0;
@@ -90,7 +91,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		lua::state* ls = (lua::state*)L;
 		const char* name = ls->tostring(2);
 
-		if (strcmp("error_handle", name) == 0)
+		if (strcmp("version", name) == 0)
+		{
+			ls->pushinteger(runtime::version);
+			return 1;
+		}
+		else if (strcmp("error_handle", name) == 0)
 		{
 			runtime::get_function(runtime::error_handle, ls->self());
 			return 1;
