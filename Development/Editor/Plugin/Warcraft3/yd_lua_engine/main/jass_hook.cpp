@@ -142,11 +142,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		{
 			size_t param_size = nf_->get_param().size();
 
-			if (!lua_fake_func_.call_pre(lj_))
-			{
-				return 0;
-			}
-
 			for (size_t i = 0; i < param_size; ++i)
 			{
 				if (nf_->get_param()[i] == jass::TYPE_REAL)

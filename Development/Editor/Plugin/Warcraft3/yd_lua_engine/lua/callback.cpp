@@ -59,8 +59,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		: ref_(ref)
 	{ }
 
-	bool callback::call_pre(lua::state* ls) const
+	uintptr_t callback::call(lua::state* ls, size_t param_size, jass::variable_type result_vt) const
 	{
+		int base = ls->gettop() - param_size + 1;
 		ls->rawgeti(LUA_REGISTRYINDEX, ref_);
 		if (!ls->isfunction(-1))
 		{
@@ -68,12 +69,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			ls->pop(1);
 			return false;
 		}
+		ls->insert(base);
 
-		return true;
-	}
-
-	uintptr_t callback::call(lua::state* ls, size_t param_size, jass::variable_type result_vt) const
-	{
 		if (safe_pcall(ls->self(), param_size, (result_vt != jass::TYPE_NOTHING) ? 1: 0) != LUA_OK)
 		{
 			return 0;
@@ -92,11 +89,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	uint32_t __fastcall jass_callback(uint32_t ls, uint32_t param)
 	{
 		callback that(param);
-
-		if (!that.call_pre((lua::state*)ls))
-		{
-			return 0;
-		} 
 		return that.call((lua::state*)ls, 0, jass::TYPE_BOOLEAN);
 	}
 

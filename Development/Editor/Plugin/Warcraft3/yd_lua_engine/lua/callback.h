@@ -17,7 +17,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		callback();
 		callback(lua::state* ls, uint32_t index);
 		callback(uint32_t ref);
-		bool      call_pre(lua::state* ls) const;
 		uintptr_t call(lua::state* ls, size_t param_size, jass::variable_type result_vt) const;
 
 	private:
