@@ -103,13 +103,27 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		case LUA_ERRRUN:
 		case LUA_ERRMEM:
 		case LUA_ERRERR:
-			printf("Error(%d): %s\n", error, ls->tostring(-1));
-			ls->pop(1);
+			if (runtime::error_handle == 0)
+			{
+				printf("Error(%d): %s\n", error, ls->tostring(-1));
+				ls->pop(1);
+			}
+			else
+			{
+				runtime::get_function(runtime::error_handle, ls->self());
+				ls->pushvalue(-2);
+				safe_call(ls, 1, 0);
+				ls->pop(2);
+			}
 			break;
 		default:
-			printf("Error(%d)\n", error);
+			if (runtime::error_handle == 0)
+			{
+				printf("Error(%d)\n", error);
+			}
 			break;
 		}
+
 		ls->remove(base);
 		return error;
 	}
