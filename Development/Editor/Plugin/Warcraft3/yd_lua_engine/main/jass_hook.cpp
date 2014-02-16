@@ -58,7 +58,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			, code_base_(0)
 		{ }
 
-		bool install(jassbind* lj, const jass::func_value* nf, const char* name, const callback& lua_fake_func)
+		bool install(jassbind* lj, const jass::func_value* nf, const char* name, int lua_fake_func)
 		{
 			if (real_func_)
 			{
@@ -157,7 +157,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			lj_->pushunsigned((uint32_t)(uintptr_t)this);
 			lj_->pushcclosure((lua::state::cfunction)jass_hook_real_function, 1);
 
-			return lua_fake_func_.call(lj_, param_size+1, nf_->get_return());
+			return safe_call_ref(lj_, lua_fake_func_, param_size + 1, nf_->get_return());
 		} 
 
 	private:
@@ -170,7 +170,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		uintptr_t               real_func_;
 		const jass::func_value* nf_;
 		std::string             name_;
-		callback                lua_fake_func_;
+		int                     lua_fake_func_;
 		uintptr_t               code_base_;
 	};
 
@@ -184,7 +184,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	std::map<std::string, std::unique_ptr<jass_hook_helper, aligned_delete<jass_hook_helper>>> g_hook_info_mapping;
 
-	int install_jass_hook(jassbind* lj, const jass::func_value* nf, const char* name, const callback& fake_func)
+	int install_jass_hook(jassbind* lj, const jass::func_value* nf, const char* name, int fake_func)
 	{
 		auto it = g_hook_info_mapping.find(name);
 		if (it == g_hook_info_mapping.end())
@@ -218,7 +218,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		{
 			if (lj->isfunction(3))
 			{
-				install_jass_hook(lj, nf, name, callback(lj, 3));
+				lj->pushvalue(3);
+				install_jass_hook(lj, nf, name, luaL_ref(lj->self(), LUA_REGISTRYINDEX));
 			}
 			else if (lj->isnil(3))
 			{
