@@ -12,6 +12,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		int  handle_level = 1;
 		int  handle_ud_table = 0;
 		bool console = false;
+		bool sleep = true;
 		bool catch_crash = true;
 
 		void initialize()
@@ -20,6 +21,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			handle_level = 1;
 			handle_ud_table = 0;
 			console = false;
+			sleep = true;
 			catch_crash = true;
 		}
 
@@ -78,6 +80,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				console::disable();
 			}
 		}
+		else if (strcmp("sleep", name) == 0)
+		{
+			runtime::sleep = !!ls->toboolean(3);
+		}
 		else if (strcmp("catch_crash", name) == 0)
 		{
 			runtime::catch_crash = !!ls->toboolean(3);
@@ -109,6 +115,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		else if (strcmp("console", name) == 0)
 		{
 			ls->pushboolean(runtime::console);
+			return 1;
+		}
+		else if (strcmp("sleep", name) == 0)
+		{
+			ls->pushboolean(runtime::sleep);
 			return 1;
 		}
 		else if (strcmp("catch_crash", name) == 0)
