@@ -70,15 +70,15 @@ local function compile_map(map_path, option)
 					if option.script_injection == 0 then
 						inject_code:compile(compile_t)
 					end
+					compile_t.input = compile_t.output
 
 					-- Wave预处理
-					compile_t.input = compile_t.output
 					if not wave:compile(compile_t) then
 						return nil
 					end
+					compile_t.input = compile_t.output
 				end
 
-				compile_t.input = compile_t.output
 				if not template:compile(compile_t) then
 					return nil
 				end
