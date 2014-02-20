@@ -68,7 +68,9 @@ local function compile_map(map_path, option)
 				if not option.enable_cjass then
 					-- 根据注入选项进行处理（由于Lua的closure，此处可以访问“父”函数的局部变量）
 					if option.script_injection == 0 then
-						inject_code:compile(compile_t)
+						if not inject_code:compile(compile_t) then
+							return nil
+						end
 						compile_t.input = compile_t.output
 					end
 
