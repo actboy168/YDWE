@@ -6,6 +6,7 @@
 #include <base/warcraft3/jass/func_value.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/global_variable.h>
+#include <base/warcraft3/jass/trampoline_function.h>
 #include <base/util/singleton.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
@@ -163,7 +164,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			uintptr_t vm = get_current_jass_virtual_machine();
 			if (vm && *(uintptr_t*)(vm + 0x34))
 			{
-				*(uintptr_t*)(vm + 0x20) -= 9 * 8;
+				*(uintptr_t*)(vm + 0x20) -= jass::trampoline_size();
 				return lua_yield(lj->self(), 0);
 			}
 		}
