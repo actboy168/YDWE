@@ -15,7 +15,7 @@ namespace base { namespace warcraft3 {
 	{
 		war3_searcher& s = get_war3_searcher();
 		uintptr_t vm = s.get_instance(5);
-		vm = *(uintptr_t*)(*(uintptr_t*)(vm+0x0C) + 4 * *(uintptr_t*)(vm+0x14));
+		vm = *(uintptr_t*)(*(uintptr_t*)(vm+0x0C) + 4 * *(uintptr_t*)(vm+0x14) - 4);
 		return vm - ((s.get_version() > version_120e) ? 0: 4);
 	}
 	
