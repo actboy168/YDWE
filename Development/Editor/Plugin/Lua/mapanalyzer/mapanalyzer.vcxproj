@@ -97,7 +97,7 @@
     <ProjectReference Include="..\..\..\Core\SlkLib\SlkLib.vcxproj">
       <Project>{4affe3a0-639d-11e2-a80e-ab2baf291a2f}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Core\YDWEBase\YDWEBase.vcxproj">
+    <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
   </ItemGroup>

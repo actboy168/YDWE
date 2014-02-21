@@ -23,7 +23,7 @@
     <ProjectReference Include="..\..\Core\SlkLib\SlkLib.vcxproj">
       <Project>{4affe3a0-639d-11e2-a80e-ab2baf291a2f}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\YDWEBase\YDWEBase.vcxproj">
+    <ProjectReference Include="..\..\Core\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
   </ItemGroup>
@@ -86,11 +86,11 @@ xcopy "$(CoreBin)SlkLib.pdb" "$(OutDir)SlkLib.pdb" /d /y /e
 
 xcopy "$(CoreBin)SlkLib.lib" "$(OutDir)SlkLib.lib" /d /y /e
 
-xcopy "$(CoreBin)YDWEBase.dll" "$(OutDir)YDWEBase.dll" /d /y /e
+xcopy "$(CoreBin)YDWEBase.dll" "$(OutDir)ydbase.dll" /d /y /e
 
-xcopy "$(CoreBin)YDWEBase.pdb" "$(OutDir)YDWEBase.pdb" /d /y /e
+xcopy "$(CoreBin)YDWEBase.pdb" "$(OutDir)ydbase.pdb" /d /y /e
 
-xcopy "$(CoreBin)YDWEBase.lib" "$(OutDir)YDWEBase.lib" /d /y /e
+xcopy "$(CoreBin)YDWEBase.lib" "$(OutDir)ydbase.lib" /d /y /e
 
 echo "F" | xcopy "$(OpenSource)StormLib\Current\bin\$(PlatformName)\$(ConfigurationName)\StormLib.dll" "$(OutDir)StormLib.dll" /d /y /e
 
@@ -132,11 +132,11 @@ echo "F" | xcopy "$(CoreBin)SlkLib.pdb" "$(OutDir)SlkLib.pdb" /d /y
 
 echo "F" | xcopy "$(CoreBin)SlkLib.lib" "$(OutDir)SlkLib.lib" /d /y
 
-echo "F" | xcopy "$(CoreBin)YDWEBase.dll" "$(OutDir)YDWEBase.dll" /d /y
+echo "F" | xcopy "$(CoreBin)ydbase.dll" "$(OutDir)ydbase.dll" /d /y
 
-echo "F" | xcopy "$(CoreBin)YDWEBase.pdb" "$(OutDir)YDWEBase.pdb" /d /y
+echo "F" | xcopy "$(CoreBin)ydbase.pdb" "$(OutDir)ydbase.pdb" /d /y
 
-echo "F" | xcopy "$(CoreBin)YDWEBase.lib" "$(OutDir)YDWEBase.lib" /d /y
+echo "F" | xcopy "$(CoreBin)ydbase.lib" "$(OutDir)ydbase.lib" /d /y
 
 echo "F" | xcopy "$(OpenSource)StormLib\Current\bin\$(PlatformName)\$(ConfigurationName)\StormLib.dll" "$(OutDir)StormLib.dll" /d /y
 

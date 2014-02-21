@@ -102,7 +102,7 @@
     <ProjectReference Include="..\LuaEngine\LuaEngine.vcxproj">
       <Project>{42def9a2-d658-4984-aa00-073b9cc03552}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\YDWEBase\YDWEBase.vcxproj">
+    <ProjectReference Include="..\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
   </ItemGroup>

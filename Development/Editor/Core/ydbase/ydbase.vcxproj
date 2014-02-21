@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{75B04C07-94D9-41E7-BBFD-E67F79BFF41A}</ProjectGuid>
-    <RootNamespace>YDWEBase</RootNamespace>
+    <RootNamespace>ydbase</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
