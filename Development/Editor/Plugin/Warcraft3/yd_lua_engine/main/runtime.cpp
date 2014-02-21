@@ -10,19 +10,23 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		int  version = 1;
 		int  error_handle = 0;
 		int  handle_level = 1;
-		int  handle_ud_table = 0;
 		bool console = false;
 		bool sleep = true;
 		bool catch_crash = true;
+
+		int  handle_ud_table = 0;
+		int  thread_table = 0;
 
 		void initialize()
 		{
 			error_handle = 0;
 			handle_level = 1;
-			handle_ud_table = 0;
 			console = false;
 			sleep = true;
 			catch_crash = true;
+
+			handle_ud_table = 0;
+			thread_table = 0;
 		}
 
 		void set_function(int& result, lua_State* L, int index)

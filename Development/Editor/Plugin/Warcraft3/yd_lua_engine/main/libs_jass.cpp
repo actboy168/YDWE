@@ -156,7 +156,19 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
-		return jass_call_native_function(lj, (const jass::func_value*)lj->tounsigned(lua_upvalueindex(1)));
+		int result = jass_call_native_function(lj, (const jass::func_value*)lj->tounsigned(lua_upvalueindex(1)));
+
+		if (runtime::sleep)
+		{
+			uintptr_t vm = get_current_jass_virtual_machine();
+			if (vm && *(uintptr_t*)(vm + 0x34))
+			{
+				*(uintptr_t*)(vm + 0x20) -= 9 * 8;
+				return lua_yield(lj->self(), 0);
+			}
+		}
+
+		return result;
 	}
 
 	int jass_call_null_function(lua_State* L)
@@ -209,21 +221,22 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jass::func_value const* nf = jass::jass_func(name);
 		if (nf && nf->is_valid())
 		{
-			if ((0 == strcmp(name, "TriggerSleepAction"))
-				|| (0 == strcmp(name, "TriggerWaitForSound"))
-				|| (0 == strcmp(name, "TriggerSyncReady"))
-				|| (0 == strcmp(name, "SyncSelections")))
+			if (!runtime::sleep)
 			{
-				lj->pushstring(name);
-				lj->pushcclosure((lua::state::cfunction)jass_call_null_function, 1);
-				return 1;
+				if ((0 == strcmp(name, "TriggerSleepAction"))
+					|| (0 == strcmp(name, "TriggerWaitForSound"))
+					|| (0 == strcmp(name, "TriggerSyncReady"))
+					|| (0 == strcmp(name, "SyncSelections")))
+				{
+					lj->pushstring(name);
+					lj->pushcclosure((lua::state::cfunction)jass_call_null_function, 1);
+					return 1;
+				}
 			}
-			else
-			{
-				lj->pushunsigned((uint32_t)(uintptr_t)nf);
-				lj->pushcclosure((lua::state::cfunction)jass_call_closure, 1);
-				return 1;
-			}
+
+			lj->pushunsigned((uint32_t)(uintptr_t)nf);
+			lj->pushcclosure((lua::state::cfunction)jass_call_closure, 1);
+			return 1;
 		}
 
 		if (!is_gaming())

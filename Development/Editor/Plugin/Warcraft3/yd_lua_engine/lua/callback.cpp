@@ -86,11 +86,56 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
+	int thread_get_table(lua::state* ls)
+	{
+		if (runtime::thread_table == 0)
+		{
+			ls->newtable();
+			runtime::thread_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
+		}
+		lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::thread_table);
+		return 1;
+	}
+
+	int thread_create(lua::state* ls, int index)
+	{
+		thread_get_table(ls);
+		ls->pushvalue(index);
+		ls->rawget(-2);
+		if (ls->isnil(-1))
+		{
+			ls->pop(1);
+			ls->newthread();
+		}
+		else
+		{
+			ls->pushvalue(index);
+			ls->pushnil();
+			ls->rawset(-4);
+		}
+		ls->remove(-2);
+		return 1;
+	}
+
+	int thread_save(lua::state* ls, int key, int value)
+	{
+		thread_get_table(ls);
+		ls->pushvalue(key);
+		ls->pushvalue(value);
+		ls->rawset(-3);
+		ls->pop(1);
+		return 0;
+	}
+
+
 	int safe_call_has_sleep(lua::state* ls, int nargs, int /*nresults*/)
 	{
-		lua::state* thread = ls->newthread();
-		int base = ls->gettop() - (nargs + 1);
-		ls->insert(base);
+		int func_idx = ls->gettop() - nargs;
+		thread_create(ls, func_idx);
+		lua::state* thread = ls->tothread(-1);
+		int thread_idx = ls->gettop() - (nargs + 1);
+		ls->insert(thread_idx);
+		func_idx++;
 
 		int nresults = 0;
 		int error = safe_resume(thread, ls, nargs, nresults);
@@ -98,7 +143,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		switch (error)
 		{
 		case LUA_OK:
+			break;
 		case LUA_YIELD:
+			thread_save(ls, func_idx, thread_idx);
 			break;
 		case LUA_ERRRUN:
 		case LUA_ERRMEM:
@@ -124,7 +171,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			break;
 		}
 
-		ls->remove(base);
+		ls->remove(thread_idx);
 		return error;
 	}
 
