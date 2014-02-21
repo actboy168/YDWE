@@ -9,7 +9,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		int  version = 1;
 		int  error_handle = 0;
-		int  handle_level = 1;
+		int  handle_level = 2;
 		bool console = false;
 		bool sleep = true;
 		bool catch_crash = true;
@@ -20,7 +20,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		void initialize()
 		{
 			error_handle = 0;
-			handle_level = 1;
+			handle_level = 2;
 			console = false;
 			sleep = true;
 			catch_crash = true;
