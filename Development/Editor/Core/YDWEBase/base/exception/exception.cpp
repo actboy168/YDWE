@@ -49,7 +49,7 @@ namespace base {
 
 		if (buffer)
 		{
-			int n = ::_vsnprintf_s(buffer.c_str(), buffer_size, buffer_size, fmt, argsList);
+			int n = ::_vsnprintf_s(buffer.c_str(), buffer_size, buffer_size-1, fmt, argsList);
 			if (n > 0)
 			{
 				return buffer;
@@ -72,7 +72,7 @@ namespace base {
 
 		if (buffer)
 		{
-			int n = ::_vsnwprintf_s(buffer.c_str(), buffer_size, buffer_size, fmt, argsList);
+			int n = ::_vsnwprintf_s(buffer.c_str(), buffer_size, buffer_size-1, fmt, argsList);
 			if (n > 0)
 			{
 				return buffer;
