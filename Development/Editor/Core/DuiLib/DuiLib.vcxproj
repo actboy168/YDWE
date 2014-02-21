@@ -160,7 +160,6 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="UIlib.h" />
-    <ClInclude Include="Utils\format.h" />
     <ClInclude Include="Utils\FrameWindow.h" />
     <ClInclude Include="Utils\UIDelegate.h" />
     <ClInclude Include="Utils\UIFile.h" />
