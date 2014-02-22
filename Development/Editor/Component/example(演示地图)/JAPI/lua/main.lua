@@ -1,4 +1,4 @@
-local CJ = jass
+local CJ = require "jass.common"
 local BJ = require "blizzard.lua"
 
 local trig = CJ.CreateTrigger()

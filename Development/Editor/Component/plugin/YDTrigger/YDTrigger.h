@@ -41,13 +41,13 @@
 #  include <YDTrigger/Common/switch.h>
 #  define YDWEGetObjectProperty(object_type, object_id, property)            \
      YDTRIGGER_COMMON_SWITCH(YDWE_GET_OBJECT_PROPERTY_ ## object_type, (     \
-       EXExecuteScript("slk.ability["      + I2S(object_id) + "]." + property), \
-       EXExecuteScript("slk.buff["         + I2S(object_id) + "]." + property), \
-       EXExecuteScript("slk.unit["         + I2S(object_id) + "]." + property), \
-       EXExecuteScript("slk.item["         + I2S(object_id) + "]." + property), \
-       EXExecuteScript("slk.upgrade["      + I2S(object_id) + "]." + property), \
-       EXExecuteScript("slk.doodad["       + I2S(object_id) + "]." + property), \
-       EXExecuteScript("slk.destructable[" + I2S(object_id) + "]." + property), \
+       EXExecuteScript("(require'jass.slk').ability["      + I2S(object_id) + "]." + property), \
+       EXExecuteScript("(require'jass.slk').buff["         + I2S(object_id) + "]." + property), \
+       EXExecuteScript("(require'jass.slk').unit["         + I2S(object_id) + "]." + property), \
+       EXExecuteScript("(require'jass.slk').item["         + I2S(object_id) + "]." + property), \
+       EXExecuteScript("(require'jass.slk').upgrade["      + I2S(object_id) + "]." + property), \
+       EXExecuteScript("(require'jass.slk').doodad["       + I2S(object_id) + "]." + property), \
+       EXExecuteScript("(require'jass.slk').destructable[" + I2S(object_id) + "]." + property), \
        ))
 #  define YDWEGetObjectPropertyInteger(type, id, prop) S2I(YDWEGetObjectProperty(type, id, prop))
 #  define YDWEGetObjectPropertyReal(type, id, prop)    S2R(YDWEGetObjectProperty(type, id, prop))
