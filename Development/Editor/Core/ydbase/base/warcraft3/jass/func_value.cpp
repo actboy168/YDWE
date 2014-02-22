@@ -154,6 +154,11 @@ namespace warcraft3 { namespace jass {
 	{
 		static mapping m = mapping::initialize_from_register();
 
+		if (!proc_name)
+		{
+			return nullptr;
+		}
+
 		auto it = m.find(proc_name);
 		if (it != m.end() && it->second.is_valid())
 		{
@@ -167,6 +172,11 @@ namespace warcraft3 { namespace jass {
 
 	func_value const* japi_func(const char* proc_name)
 	{
+		if (!proc_name)
+		{
+			return nullptr;
+		}
+
 		auto it = japi_mapping.find(proc_name);
 		if (it != japi_mapping.end() && it->second.is_valid())
 		{
