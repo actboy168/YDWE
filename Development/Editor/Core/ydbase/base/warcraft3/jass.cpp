@@ -190,7 +190,10 @@ namespace base { namespace warcraft3 { namespace jass {
 	void handle_set_ref(jass::jhandle_t h, bool dec)
 	{
 		uintptr_t vm = get_jass_virtual_machine();
-		fast_call<void>(*(uintptr_t*)(vm + 0x28A0), h, dec ? 1 : 0, *(uintptr_t*)(vm + 0x28A4));
+		if (vm && *(uintptr_t*)(vm + 0x28A0))
+		{
+			fast_call<void>(*(uintptr_t*)(vm + 0x28A0), h, dec ? 1 : 0, *(uintptr_t*)(vm + 0x28A4));
+		}
 	}
 
 	void handle_add_ref(jass::jhandle_t h)
