@@ -43,6 +43,8 @@ def copy_component():
 
 def copy_all(configuration):
     print('copy_all')
+    fs.create_directories(path['ResultCore'])
+    fs.create_directories(path['ResultCore'] / 'modules')
     copy_boost_dll('system',     configuration)
     copy_boost_dll('filesystem', configuration)
     copy_boost_dll('date_time',  configuration)
