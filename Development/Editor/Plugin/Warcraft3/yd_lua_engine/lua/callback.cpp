@@ -16,19 +16,19 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return ml;
 	}
 
-	int safe_call_not_sleep(lua::state* ls, int nargs, int nresults)
+	int safe_call_not_sleep(lua::state* ls, int nargs, int nresults, int error_handle)
 	{
-		int error_handle = 0;
-		if (runtime::error_handle != 0) 
+		int error_index = 0;
+		if (error_handle != 0) 
 		{
-			error_handle = 1;
-			runtime::get_function(runtime::error_handle, ls->self());
-			ls->insert(error_handle);
+			error_index = 1;
+			runtime::get_function(error_handle, ls->self());
+			ls->insert(error_index);
 		}
 
-		int error = lua_pcall(ls->self(), nargs, nresults, error_handle);
+		int error = lua_pcall(ls->self(), nargs, nresults, error_index);
 
-		if (error_handle == 0)
+		if (error_index == 0)
 		{
 			switch (error)
 			{
@@ -47,7 +47,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		else
 		{
-			ls->remove(error_handle);
+			ls->remove(error_index);
 		}
 
 		return error;
@@ -127,8 +127,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-
-	int safe_call_has_sleep(lua::state* ls, int nargs, int /*nresults*/)
+	int safe_call_has_sleep(lua::state* ls, int nargs, int /*nresults*/, int error_handle)
 	{
 		int func_idx = ls->gettop() - nargs;
 		thread_create(ls, func_idx);
@@ -150,21 +149,21 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		case LUA_ERRRUN:
 		case LUA_ERRMEM:
 		case LUA_ERRERR:
-			if (runtime::error_handle == 0)
+			if (error_handle == 0)
 			{
 				printf("Error(%d): %s\n", error, ls->tostring(-1));
 				ls->pop(1);
 			}
 			else
 			{
-				runtime::get_function(runtime::error_handle, ls->self());
+				runtime::get_function(error_handle, ls->self());
 				ls->pushvalue(-2);
-				safe_call(ls, 1, 0);
+				safe_call_has_sleep(ls, 1, 0, 0);
 				ls->pop(2);
 			}
 			break;
 		default:
-			if (runtime::error_handle == 0)
+			if (error_handle == 0)
 			{
 				printf("Error(%d)\n", error);
 			}
@@ -179,11 +178,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		if (runtime::sleep)
 		{
-			return safe_call_has_sleep(ls, nargs, nresults);
+			return safe_call_has_sleep(ls, nargs, nresults, runtime::error_handle);
 		}
 		else
 		{
-			return safe_call_not_sleep(ls, nargs, nresults);
+			return safe_call_not_sleep(ls, nargs, nresults, runtime::error_handle);
 		}
 	}
 
