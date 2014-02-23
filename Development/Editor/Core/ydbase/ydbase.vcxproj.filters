@@ -242,6 +242,9 @@
     <ClCompile Include="base\warcraft3\command_line.cpp">
       <Filter>base\warcraft3</Filter>
     </ClCompile>
+    <ClCompile Include="base\lua\private.cpp">
+      <Filter>base\lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -517,6 +520,9 @@
     </ClInclude>
     <ClInclude Include="base\win\registry\predefined_keys.h">
       <Filter>base\win\registry</Filter>
+    </ClInclude>
+    <ClInclude Include="base\lua\private.h">
+      <Filter>base\lua</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

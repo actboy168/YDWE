@@ -112,6 +112,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="base\lua\private.cpp" />
     <ClCompile Include="base\thread\thread.cpp" />
     <ClCompile Include="base\thread\thread_exception.cpp" />
     <ClCompile Include="base\warcraft3\command_line.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="base\lua\luabind\converter_std_wstring.h" />
     <ClInclude Include="base\lua\luabind\converter_uint32_t.h" />
     <ClInclude Include="base\lua\make_range.h" />
+    <ClInclude Include="base\lua\private.h" />
     <ClInclude Include="base\lua\state.h" />
     <ClInclude Include="base\path\detail\get_path.h" />
     <ClInclude Include="base\path\filesystem_helper.h" />

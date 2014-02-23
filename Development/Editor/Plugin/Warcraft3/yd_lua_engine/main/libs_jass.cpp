@@ -8,6 +8,7 @@
 #include <base/warcraft3/jass/global_variable.h>
 #include <base/warcraft3/jass/trampoline_function.h>
 #include <base/util/singleton.h>
+#include <base/lua/private.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
@@ -159,7 +160,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		int result = jass_call_native_function(lj, (const jass::func_value*)lj->tounsigned(lua_upvalueindex(1)));
 
-		if (runtime::sleep)
+		if (lua::allow_yield(lj->self()))
 		{
 			uintptr_t vm = get_current_jass_virtual_machine();
 			if (vm && *(uintptr_t*)(vm + 0x34))
@@ -222,7 +223,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jass::func_value const* nf = jass::jass_func(name);
 		if (nf && nf->is_valid())
 		{
-			if (!runtime::sleep)
+			if (!lua::allow_yield(lj->self()))
 			{
 				if ((0 == strcmp(name, "TriggerSleepAction"))
 					|| (0 == strcmp(name, "TriggerWaitForSound"))
