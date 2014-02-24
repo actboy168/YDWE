@@ -1,7 +1,7 @@
 #include <base/lua/state.h>
 #include <base/util/console.h>
 #include <cstring>
-#include "runtime.h"
+#include "libs_runtime.h"
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 

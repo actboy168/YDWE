@@ -3,7 +3,7 @@
 #include "../main/lua_loader.h"
 #include "../misc/storm.h"
 #include "../main/open_lua_engine.h"
-#include "runtime.h"
+#include "libs_runtime.h"
 #include <base/lua/state.h>
 #include <base/warcraft3/event.h>
 #include <base/warcraft3/jass.h>

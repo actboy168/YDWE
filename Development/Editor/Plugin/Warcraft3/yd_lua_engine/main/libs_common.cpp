@@ -1,6 +1,6 @@
 #include "../lua/jassbind.h"
 #include "class_handle.h"
-#include "runtime.h"
+#include "libs_runtime.h"
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/jass/func_value.h>
