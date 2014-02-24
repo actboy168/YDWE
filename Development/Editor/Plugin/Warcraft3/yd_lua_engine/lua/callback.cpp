@@ -90,6 +90,15 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		if (runtime::thread_table == 0)
 		{
 			ls->newtable();
+			{
+				ls->newtable();
+				{
+					ls->pushstring("__mode");
+					ls->pushstring("kv");
+					ls->rawset(-3);
+				}
+				ls->setmetatable(-2);
+			}
 			runtime::thread_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
 		}
 		lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::thread_table);
