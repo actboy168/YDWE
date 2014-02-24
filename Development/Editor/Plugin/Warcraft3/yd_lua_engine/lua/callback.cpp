@@ -3,6 +3,7 @@
 #include "../main/libs_runtime.h"
 #include <base/warcraft3/jass/trampoline_function.h>
 #include <Windows.h>
+#include <cassert>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
