@@ -1,5 +1,5 @@
 #include "../lua/jassbind.h"
-#include "../lua/class_real.h"
+#include "../main/class_real.h"
 #include "../lua/callback.h"
 #include <base/warcraft3/hashtable.h>
 #include <cstdint>

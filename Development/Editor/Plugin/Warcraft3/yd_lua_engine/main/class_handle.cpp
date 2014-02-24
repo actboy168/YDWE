@@ -1,4 +1,4 @@
-#include "handle.h"
+#include "class_handle.h"
 #include "runtime.h"
 #include "../lua/jassbind.h"
 #include <base/warcraft3/jass.h>
