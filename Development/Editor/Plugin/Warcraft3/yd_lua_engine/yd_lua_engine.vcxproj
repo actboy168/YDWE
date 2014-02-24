@@ -90,6 +90,7 @@
     <ClCompile Include="lua\helper.cpp" />
     <ClCompile Include="lua\jassbind.cpp" />
     <ClCompile Include="lua\callback.cpp" />
+    <ClCompile Include="main\class_array.cpp" />
     <ClCompile Include="main\class_real.cpp" />
     <ClCompile Include="main\fix_math.cpp" />
     <ClCompile Include="main\class_handle.cpp" />
@@ -109,6 +110,7 @@
     <ClInclude Include="lua\helper.h" />
     <ClInclude Include="lua\jassbind.h" />
     <ClInclude Include="lua\callback.h" />
+    <ClInclude Include="main\class_array.h" />
     <ClInclude Include="main\class_handle.h" />
     <ClInclude Include="main\class_real.h" />
     <ClInclude Include="main\lua_loader.h" />

@@ -1,5 +1,6 @@
 #include "../lua/jassbind.h"
 #include "class_handle.h"
+#include "class_array.h"
 #include "libs_runtime.h"
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/war3_searcher.h>
@@ -11,8 +12,6 @@
 #include <base/lua/private.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
-
-#define LUA_JASS_ARRAY "jarray_t"
 
 	bool is_gaming()
 	{
@@ -264,13 +263,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				case jass::OPCODE_VARIABLE_STRING_ARRAY:
 				case jass::OPCODE_VARIABLE_HANDLE_ARRAY:
 				case jass::OPCODE_VARIABLE_BOOLEAN_ARRAY:
-					lj->newtable();
-					luaL_getmetatable(lj->self(), LUA_JASS_ARRAY);
-					lj->setmetatable(-2);
-					lj->pushstring("__value");
-					lj->pushunsigned((uintptr_t)gv.ptr());
-					lj->rawset(-3);
-					return 1;
+					return array_create(lj->self(), (uintptr_t)gv.ptr());
 				default:
 					lj->pushnil();
 					return 1;
@@ -318,81 +311,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	jass::global_variable array_value(jassbind* lj)
-	{
-		lj->pushvalue(1);
-		lj->pushstring("__value");
-		lj->rawget(-2);
-		jass::global_variable gv((hashtable::variable_node*)lj->checkunsigned(-1));
-		lj->pop(2);
-		return std::move(gv);
-	}
-
-	int array_index(lua_State* L) 
-	{
-		jassbind* lj = (jassbind*)L;
-		jass::global_variable gv = array_value(lj);
-		int32_t index = lj->checkinteger(2);
-
-		if (!gv.array_vaild(index))
-		{
-			lj->pushnil();
-			return 1;
-		}
-
-		jass_get_global_variable(lj, jass::opcode_type_remove_array(gv.type()), gv[index]);
-		return 1;
-	}
-
-	int array_newindex(lua_State* L)
-	{
-		jassbind* lj = (jassbind*)L;
-		jass::global_variable gv = array_value(lj);
-		int32_t index = lj->checkinteger(2);
-
-		if (!gv.array_vaild(index))
-		{
-			return 0;
-		}
-
-		gv[index] = jass_read(lj, jass::opcode_type_to_var_type(gv.type()), 3);
-		return 0;
-	}
-
-	int array_len(lua_State* L) 
-	{
-		jassbind* lj = (jassbind*)L;
-		jass::global_variable gv((hashtable::variable_node*)lj->checkunsigned(lua_upvalueindex(1)));
-		lj->pushinteger(gv.array_size());
-		return 1;
-	}
-
-	void array_make_mt(lua::state* ls)
-	{
-		luaL_Reg lib[] = {
-			{ "__index",    array_index },
-			{ "__newindex", array_newindex },
-			{ "__len",      array_len },
-			{ NULL, NULL },
-		};
-
-		luaL_newmetatable(ls->self(), LUA_JASS_ARRAY);
-#if LUA_VERSION_NUM >= 502
-		luaL_setfuncs(ls->self(), lib, 0);
-		ls->pop(1);
-#else
-		luaL_register(ls->self(), NULL, lib);
-#endif
-	}
-
-
 	int jass_common(lua_State *L)
 	{
 		lua::state* ls = (lua::state*)L;
 
 		handle_lud_make_mt(ls);
 		handle_ud_make_mt(ls);
-		array_make_mt(ls);
+		array_make_mt(ls->self());
 
 		ls->newtable();
 		{

@@ -62,6 +62,9 @@
     <ClCompile Include="main\libs_runtime.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
+    <ClCompile Include="main\class_array.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua\callback.h">
@@ -92,6 +95,9 @@
       <Filter>bind\main</Filter>
     </ClInclude>
     <ClInclude Include="main\libs_runtime.h">
+      <Filter>bind\main</Filter>
+    </ClInclude>
+    <ClInclude Include="main\class_array.h">
       <Filter>bind\main</Filter>
     </ClInclude>
   </ItemGroup>
