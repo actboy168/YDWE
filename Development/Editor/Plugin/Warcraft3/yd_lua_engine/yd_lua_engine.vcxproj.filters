@@ -32,19 +32,7 @@
     <ClCompile Include="misc\storm.cpp">
       <Filter>bind\misc</Filter>
     </ClCompile>
-    <ClCompile Include="main\lua_loader.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\libs_japi.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\open_lua_engine.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\libs_slk.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\fix_math.cpp">
+    <ClCompile Include="main\class_array.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
     <ClCompile Include="main\class_handle.cpp">
@@ -53,16 +41,28 @@
     <ClCompile Include="main\class_real.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
-    <ClCompile Include="main\libs_hook.cpp">
+    <ClCompile Include="main\fix_math.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
     <ClCompile Include="main\libs_common.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
+    <ClCompile Include="main\libs_hook.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
+    <ClCompile Include="main\libs_japi.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
     <ClCompile Include="main\libs_runtime.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
-    <ClCompile Include="main\class_array.cpp">
+    <ClCompile Include="main\libs_slk.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
+    <ClCompile Include="main\lua_loader.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
+    <ClCompile Include="main\open_lua_engine.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
   </ItemGroup>
@@ -79,14 +79,11 @@
     <ClInclude Include="misc\storm.h">
       <Filter>bind\misc</Filter>
     </ClInclude>
-    <ClInclude Include="main\lua_loader.h">
-      <Filter>bind\main</Filter>
-    </ClInclude>
-    <ClInclude Include="main\open_lua_engine.h">
-      <Filter>bind\main</Filter>
-    </ClInclude>
     <ClInclude Include="misc\slk_interface_storm.h">
       <Filter>bind\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="main\class_array.h">
+      <Filter>bind\main</Filter>
     </ClInclude>
     <ClInclude Include="main\class_handle.h">
       <Filter>bind\main</Filter>
@@ -97,7 +94,10 @@
     <ClInclude Include="main\libs_runtime.h">
       <Filter>bind\main</Filter>
     </ClInclude>
-    <ClInclude Include="main\class_array.h">
+    <ClInclude Include="main\lua_loader.h">
+      <Filter>bind\main</Filter>
+    </ClInclude>
+    <ClInclude Include="main\open_lua_engine.h">
       <Filter>bind\main</Filter>
     </ClInclude>
   </ItemGroup>

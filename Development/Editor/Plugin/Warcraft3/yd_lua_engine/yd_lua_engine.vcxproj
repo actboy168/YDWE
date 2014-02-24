@@ -91,16 +91,16 @@
     <ClCompile Include="lua\jassbind.cpp" />
     <ClCompile Include="lua\callback.cpp" />
     <ClCompile Include="main\class_array.cpp" />
+    <ClCompile Include="main\class_handle.cpp" />
     <ClCompile Include="main\class_real.cpp" />
     <ClCompile Include="main\fix_math.cpp" />
-    <ClCompile Include="main\class_handle.cpp" />
+    <ClCompile Include="main\libs_common.cpp" />
     <ClCompile Include="main\libs_hook.cpp" />
     <ClCompile Include="main\libs_japi.cpp" />
-    <ClCompile Include="main\libs_common.cpp" />
+    <ClCompile Include="main\libs_runtime.cpp" />
     <ClCompile Include="main\libs_slk.cpp" />
     <ClCompile Include="main\lua_loader.cpp" />
     <ClCompile Include="main\open_lua_engine.cpp" />
-    <ClCompile Include="main\libs_runtime.cpp" />
     <ClCompile Include="misc\storm.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +113,9 @@
     <ClInclude Include="main\class_array.h" />
     <ClInclude Include="main\class_handle.h" />
     <ClInclude Include="main\class_real.h" />
+    <ClInclude Include="main\libs_runtime.h" />
     <ClInclude Include="main\lua_loader.h" />
     <ClInclude Include="main\open_lua_engine.h" />
-    <ClInclude Include="main\libs_runtime.h" />
     <ClInclude Include="misc\slk_interface_storm.h" />
     <ClInclude Include="misc\storm.h" />
   </ItemGroup>
