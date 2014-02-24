@@ -1,7 +1,7 @@
 #include <base/lua/private.h>
 
 extern "C" {
-#include <../src/lstate.h>
+#include <lstate.h>
 }
 
 namespace base { namespace lua {

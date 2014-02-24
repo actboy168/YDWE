@@ -61,6 +61,7 @@
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
+      <AdditionalIncludeDirectories>$(OpenSource)\Lua\Current\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <BaseAddress>
@@ -92,6 +93,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>$(OpenSource)\Lua\Current\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
     <Bscmake>
