@@ -34,14 +34,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			{
 			case LUA_OK:
 				break;
-			case LUA_ERRRUN:
-			case LUA_ERRMEM:
-			case LUA_ERRERR:
-				printf("Error(%d): %s\n", error, ls->tostring(-1));
-				ls->pop(1);
+			case LUA_YIELD:
+				assert("lua_pcall return LUA_YIELD" || false);
 				break;
 			default:
-				printf("Error(%d)\n", error);
+				printf("Error(%d): %s\n", error, ls->tostring(-1));
+				ls->pop(1);
 				break;
 			}
 		}
@@ -146,9 +144,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		case LUA_YIELD:
 			thread_save(ls, func_idx, thread_idx);
 			break;
-		case LUA_ERRRUN:
-		case LUA_ERRMEM:
-		case LUA_ERRERR:
+		default:
 			if (error_handle == 0)
 			{
 				printf("Error(%d): %s\n", error, ls->tostring(-1));
@@ -160,12 +156,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				ls->pushvalue(-2);
 				safe_call_has_sleep(ls, 1, 0, 0);
 				ls->pop(2);
-			}
-			break;
-		default:
-			if (error_handle == 0)
-			{
-				printf("Error(%d)\n", error);
 			}
 			break;
 		}
