@@ -44,9 +44,6 @@
     <ClCompile Include="main\open_lua_engine.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
-    <ClCompile Include="lua\class_real.cpp">
-      <Filter>bind\lua</Filter>
-    </ClCompile>
     <ClCompile Include="main\jass_hook.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
@@ -59,7 +56,10 @@
     <ClCompile Include="main\runtime.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
-    <ClCompile Include="main\handle.cpp">
+    <ClCompile Include="main\class_handle.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
+    <ClCompile Include="main\class_real.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
   </ItemGroup>
@@ -82,16 +82,16 @@
     <ClInclude Include="main\open_lua_engine.h">
       <Filter>bind\main</Filter>
     </ClInclude>
-    <ClInclude Include="lua\class_real.h">
-      <Filter>bind\lua</Filter>
-    </ClInclude>
     <ClInclude Include="misc\slk_interface_storm.h">
       <Filter>bind\misc</Filter>
     </ClInclude>
     <ClInclude Include="main\runtime.h">
       <Filter>bind\main</Filter>
     </ClInclude>
-    <ClInclude Include="main\handle.h">
+    <ClInclude Include="main\class_handle.h">
+      <Filter>bind\main</Filter>
+    </ClInclude>
+    <ClInclude Include="main\class_real.h">
       <Filter>bind\main</Filter>
     </ClInclude>
   </ItemGroup>

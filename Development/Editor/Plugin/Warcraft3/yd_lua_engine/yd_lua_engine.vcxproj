@@ -87,12 +87,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="lua\class_real.cpp" />
     <ClCompile Include="lua\helper.cpp" />
     <ClCompile Include="lua\jassbind.cpp" />
     <ClCompile Include="lua\callback.cpp" />
+    <ClCompile Include="main\class_real.cpp" />
     <ClCompile Include="main\fix_math.cpp" />
-    <ClCompile Include="main\handle.cpp" />
+    <ClCompile Include="main\class_handle.cpp" />
     <ClCompile Include="main\jass_hook.cpp" />
     <ClCompile Include="main\libs_japi.cpp" />
     <ClCompile Include="main\libs_jass.cpp" />
@@ -106,11 +106,11 @@
     <None Include="yd_lua_engine.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lua\class_real.h" />
     <ClInclude Include="lua\helper.h" />
     <ClInclude Include="lua\jassbind.h" />
     <ClInclude Include="lua\callback.h" />
-    <ClInclude Include="main\handle.h" />
+    <ClInclude Include="main\class_handle.h" />
+    <ClInclude Include="main\class_real.h" />
     <ClInclude Include="main\lua_loader.h" />
     <ClInclude Include="main\open_lua_engine.h" />
     <ClInclude Include="main\runtime.h" />
