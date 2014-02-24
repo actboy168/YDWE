@@ -122,7 +122,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	void handle_ud_make_mt(lua::state* ls)
+	void handle_ud_make_mt(lua_State *L)
 	{
 		luaL_Reg lib[] = {
 			{ "__eq",       handle_ud_eq },
@@ -131,12 +131,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			{ NULL, NULL },
 		};
 
-		luaL_newmetatable(ls->self(), LUA_JASS_HANDLE);
+		luaL_newmetatable(L, LUA_JASS_HANDLE);
 #if LUA_VERSION_NUM >= 502
-		luaL_setfuncs(ls->self(), lib, 0);
-		ls->pop(1);
+		luaL_setfuncs(L, lib, 0);
+		lua_pop(L, 1);
 #else
-		luaL_register(ls->self(), NULL, lib);
+		luaL_register(L, NULL, lib);
 #endif
 	}
 
@@ -169,7 +169,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return handle_tostring(L, (jass::jhandle_t)handle_lud_read((lua::state*)L, 1));
 	}
 
-	void handle_lud_make_mt(lua::state* ls)
+	void handle_lud_make_mt(lua_State *L)
 	{
 		luaL_Reg lib[] = {
 			{ "__eq",       handle_lud_eq },
@@ -177,10 +177,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			{ NULL, NULL },
 		};
 	
-		ls->pushlightuserdata(NULL);
-		luaL_newlib(ls->self(), lib);
-		ls->setmetatable(-2);
-		ls->pop(1);
+		lua_pushlightuserdata(L, NULL);
+		luaL_newlib(L, lib);
+		lua_setmetatable(L, -2);
+		lua_pop(L, 1);
 	}
 	
 	jass::jhandle_t jassbind::read_handle(int index)

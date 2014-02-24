@@ -1,7 +1,11 @@
 #include "../main/open_lua_engine.h"
 #include "../lua/callback.h"
 #include "../lua/helper.h"
+#include "class_real.h"
+#include "class_array.h"
+#include "class_handle.h"
 #include <base/util/console.h>
+
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
@@ -11,7 +15,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int jass_runtime(lua_State *L);
 	int jass_slk(lua_State *L);
 	int fix_math(lua::state* ls);
-	int jreal_initialize(lua_State* L);
 
 	int jass_enable_console(lua_State* /*L*/)
 	{
@@ -68,7 +71,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		luaL_requiref(ls->self(), "jass.runtime", jass_runtime, 0);
 		luaL_requiref(ls->self(), "jass.slk",     jass_slk, 0);
 
-		jreal_initialize((lua_State*)ls);
+		jreal_make_mt (ls->self());
+		handle_ud_make_mt(ls->self());
+		handle_lud_make_mt(ls->self());
+		array_make_mt (ls->self());
+
 		insert_searchers_table(ls);
 		fix_math(ls);
 

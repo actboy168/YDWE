@@ -223,7 +223,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	void jreal_createmeta(lua_State* L) 
+	void jreal_make_mt(lua_State* L)
 	{	
 		luaL_Reg lib[] = {
 			{ "__add",      jreal_add      },
@@ -250,32 +250,5 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 #else
 		luaL_register(L, NULL, lib);
 #endif
-	}
-
-	int jreal_new (lua_State* L)
-	{
-		int top = lua_gettop(L);
-		switch(top) 
-		{
-		case 0:
-			jreal_push(L, (float)0);
-			break;
-		default:
-			jreal_push(L, (float)lua_tonumber(L, 1));
-			break;
-		}
-		return 1;
-	}
-
-	int jreal_initialize(lua_State* L)
-	{
-		jreal_createmeta(L);
-
-		//lua_newtable(L);
-		//lua_pushcfunction(L, jreal_new);
-		//lua_setfield(L, -2, "new");
-		//lua_setglobal(L, "jreal");
-
-		return 0;
 	}
 }}}

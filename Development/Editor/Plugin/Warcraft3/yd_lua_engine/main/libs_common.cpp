@@ -315,10 +315,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		lua::state* ls = (lua::state*)L;
 
-		handle_lud_make_mt(ls);
-		handle_ud_make_mt(ls);
-		array_make_mt(ls->self());
-
 		ls->newtable();
 		{
 			ls->newtable();

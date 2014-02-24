@@ -84,7 +84,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		luaL_setfuncs(L, lib, 0);
 		lua_pop(L, 1);
 #else
-		luaL_register(ls->self(), NULL, lib);
+		luaL_register(L, NULL, lib);
 #endif
 	}
 }}}
