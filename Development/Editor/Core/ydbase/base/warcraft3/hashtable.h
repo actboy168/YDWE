@@ -3,6 +3,7 @@
 #include <base/config.h>
 #include <cstdint>
 #include <base/warcraft3/detail/string_hash.h>
+#include <boost/iterator/iterator_facade.hpp>
 #include <cstring>
 
 namespace base { namespace warcraft3 {
@@ -69,6 +70,8 @@ namespace base { namespace warcraft3 {
 			uint32_t     unk8_;
 			uint32_t     mask_;
 
+			class iterator;
+
 			Node* get(const char* str)
 			{
 				uint32_t hash;
@@ -102,6 +105,71 @@ namespace base { namespace warcraft3 {
 			}
 		};
 
+		template <class Node>
+		class table<Node>::iterator
+			: public boost::iterator_facade<iterator, Node, boost::single_pass_traversal_tag>
+		{
+		public:
+			iterator()
+				: ptr_(nullptr)
+				, index_(0)
+				, current_(nullptr)
+			{ }
+
+			explicit iterator(table<Node>* ptr)
+				: ptr_(ptr)
+				, index_(0)
+				, current_(nullptr)
+			{
+				increment();
+			}
+
+			~iterator()
+			{ }
+			
+		private:
+			friend class boost::iterator_core_access;
+
+			void   increment()
+			{
+				if (!current_)
+				{
+					if (index_ > ptr_->mask_)
+					{
+						return;
+					}
+
+					current_ = ptr_->entry_[index_].end_;
+				}
+				else
+				{
+					current_ = (Node*)(uintptr_t)(current_->prev_);
+				}
+
+				if (!current_->is_vaild())
+				{
+					index_++;
+					current_ = nullptr;
+					return increment();
+				}
+			}
+
+			bool   equal(const iterator& other) const
+			{
+				return current_ == other.current_;
+			}
+
+			Node& dereference() const
+			{
+				return *current_;
+			}
+
+		private:
+			table<Node>* ptr_;
+			uint32_t     index_;
+			Node*        current_;
+		};
+
 		struct variable_node : public node
 		{
 			uint32_t    unk_;
@@ -111,7 +179,19 @@ namespace base { namespace warcraft3 {
 
 		struct variable_table
 		{
-			table<variable_node> table_;
+			typedef table<variable_node> table_t;
+			typedef table_t::iterator iterator;
+			table_t table_;
+
+			iterator begin()
+			{
+				return iterator(&table_);
+			}
+
+			iterator end()
+			{
+				return iterator();
+			}
 
 			variable_node* get(const char* str)
 			{
