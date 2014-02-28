@@ -49,28 +49,15 @@ namespace commonj
 namespace monitor
 {
 	template <const char* type_name>
-	class handle_manager : public std::set<uintptr_t>
+	class handle_manager 
 	{
 	public:
-		static bool insert(uintptr_t h)
+		static std::set<uintptr_t>& instance()
 		{
-			return mgr_.insert(h).second;
+			static std::set<uintptr_t> s;
+			return s;
 		}
-
-		static void erase(uintptr_t h)
-		{
-			mgr_.erase(h);
-		}
-
-		static size_t size()
-		{
-			return mgr_.size();
-		}
-
-	private:
-		static std::set<uintptr_t> mgr_;
 	};
-	template <const char* type_name> std::set<uintptr_t> handle_manager<type_name>::mgr_;
 
 	template <const char* type_name, size_t param, const char* porc_name>
 	class creater;
@@ -89,7 +76,7 @@ namespace monitor
 		static uintptr_t __cdecl fake_proc(BOOST_PP_ENUM_PARAMS(n, uint32_t p)) \
 		{ \
 			uintptr_t retval = base::c_call<uintptr_t>(real_proc BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, p)); \
-			handle_manager<type_name>::insert(retval); \
+			handle_manager<type_name>::instance().insert(retval); \
 			return retval; \
 		} \
 	}; \
@@ -110,7 +97,7 @@ namespace monitor
 		static uintptr_t real_proc;
 		static void __cdecl fake_proc(uintptr_t h)
 		{
-			handle_manager<type_name>::erase(h);
+			handle_manager<type_name>::instance().erase(h);
 			base::c_call<void>(real_proc, h);
 		}
 	};
@@ -130,27 +117,27 @@ uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 	{
 		if (strcmp(str + LEAK_MONITOR_SIZE, commonj::location) == 0)
 		{
-			return monitor::handle_manager<commonj::location>::size();
+			return monitor::handle_manager<commonj::location>::instance().size();
 		}
 		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::effect) == 0)
 		{
-			return monitor::handle_manager<commonj::effect>::size();
+			return monitor::handle_manager<commonj::effect>::instance().size();
 		}
 		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::group) == 0)
 		{
-			return monitor::handle_manager<commonj::group>::size();
+			return monitor::handle_manager<commonj::group>::instance().size();
 		}
 		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::region) == 0)
 		{
-			return monitor::handle_manager<commonj::region>::size();
+			return monitor::handle_manager<commonj::region>::instance().size();
 		}
 		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::rect) == 0)
 		{
-			return monitor::handle_manager<commonj::rect>::size();
+			return monitor::handle_manager<commonj::rect>::instance().size();
 		}
 		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::force) == 0)
 		{
-			return monitor::handle_manager<commonj::force>::size();
+			return monitor::handle_manager<commonj::force>::instance().size();
 		}
 	}
 
@@ -184,11 +171,11 @@ void Initialize()
 	monitor::creater  <commonj::group,    0, commonj::CreateGroup>::initialize();
 	monitor::destroyer<commonj::group, commonj::DestroyGroup>::initialize();
 
-	monitor::creater  <commonj::region,    0, commonj::CreateRegion>::initialize();
+	monitor::creater  <commonj::region,   0, commonj::CreateRegion>::initialize();
 	monitor::destroyer<commonj::region, commonj::RemoveRegion>::initialize();
 
-	monitor::creater  <commonj::rect,    4, commonj::Rect>::initialize();
-	monitor::creater  <commonj::rect,    2, commonj::RectFromLoc>::initialize();
+	monitor::creater  <commonj::rect,     4, commonj::Rect>::initialize();
+	monitor::creater  <commonj::rect,     2, commonj::RectFromLoc>::initialize();
 	monitor::destroyer<commonj::rect, commonj::RemoveRect>::initialize();
 
 	monitor::creater  <commonj::force,    0, commonj::CreateForce>::initialize();
