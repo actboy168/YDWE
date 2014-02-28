@@ -4,6 +4,7 @@
 #include <base/warcraft3/jass/trampoline.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/util/singleton.h>
+#include <base/util/do_once.h>
 #include <base/hook/fp_call.h>
 #include <map>
 
@@ -16,7 +17,7 @@ namespace base { namespace warcraft3 { namespace jass {
 		{
 			if (unit_handle == 'YDWE' && x && y && dis)
 			{
-				return ((uint32_t(__fastcall*)(uint32_t, uint32_t))*x)(*y, *dis);
+				return fast<uint32_t>(*x, *y, *dis);
 			}
 	
 			return c_call<uint32_t>(RealIsUnitInRangeXY, unit_handle, x, y, dis);
@@ -28,21 +29,22 @@ namespace base { namespace warcraft3 { namespace jass {
 
 		void trampoline_initialize()
 		{
-			if (initialized)
+			DO_ONCE_NOTHREADSAFE()
 			{
-				return ;
+				register_game_reset_event([&](uintptr_t)
+				{
+					initialized = false;
+					trampoline_mapping.clear();
+					jump_function_id = 0;
+				});
 			}
-
-			initialized = true;
-			jump_function_id = get_string_hashtable()->get("IsUnitInRangeXY")->index_;
-			table_hook("IsUnitInRangeXY", (uintptr_t*)&detail::RealIsUnitInRangeXY, (uintptr_t)detail::FakeIsUnitInRangeXY);
-
-			register_game_reset_event([&](uintptr_t)
+			
+			if (!initialized)
 			{
-				initialized = false;
-				trampoline_mapping.clear();
-				jump_function_id = 0;
-			});
+				initialized = true;
+				jump_function_id = get_string_hashtable()->get("IsUnitInRangeXY")->index_;
+				table_hook("IsUnitInRangeXY", (uintptr_t*)&detail::RealIsUnitInRangeXY, (uintptr_t)detail::FakeIsUnitInRangeXY);
+			}
 		}
 	}
 
