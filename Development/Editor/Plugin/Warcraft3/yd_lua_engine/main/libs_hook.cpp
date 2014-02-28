@@ -10,6 +10,7 @@
 #include <base/warcraft3/war3_searcher.h>
 #include "../lua/jassbind.h"
 #include "../lua/callback.h"
+#include "libs_runtime.h"
 
 #define CACHE_ALIGN __declspec(align(32))
 
@@ -218,8 +219,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		{
 			if (lj->isfunction(3))
 			{
-				lj->pushvalue(3);
-				install_jass_hook(lj, nf, name, luaL_ref(lj->self(), LUA_REGISTRYINDEX));
+				install_jass_hook(lj, nf, name, runtime::callback_push(lj, 3));
 			}
 			else if (lj->isnil(3))
 			{

@@ -128,6 +128,64 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::handle_ud_table);
 			return 1;
 		}
+
+		int callback_get_table(lua::state* ls)
+		{
+			if (runtime::callback_table == 0)
+			{
+				ls->newtable();
+				runtime::callback_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
+			}
+			lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::callback_table);
+			return 1;
+		}
+
+		int callback_push(lua::state* ls, int idx)
+		{
+			callback_get_table(ls);
+			
+			// read t[v]
+			ls->pushvalue(idx);
+			ls->rawget(-2);
+			if (ls->isnumber(-1))
+			{
+				int ret = ls->tointeger(-1);
+				ls->pop(2);
+				return ret;
+			}
+			ls->pop(1);
+
+			// free = t[0] + 1
+			ls->rawgeti(-1, 0);
+			int free = 1 + ls->tointeger(-1);
+			ls->pop(1);
+
+			// t[0] = free
+			ls->pushinteger(free);
+			ls->rawseti(-2, 0);
+
+
+			// t[free] = v
+			ls->pushvalue(idx);
+			ls->rawseti(-2, free);
+
+			// t[v] = free
+			ls->pushvalue(idx);
+			ls->pushinteger(free);
+			ls->rawset(-3);
+
+			// pop t
+			ls->pop(1);
+			return free;
+		}
+
+		int callback_read(lua::state* ls, int ref)
+		{
+			callback_get_table(ls);
+			ls->rawgeti(-1, ref);
+			ls->remove(-2);
+			return 1;
+		}
 	}
 
 	int jass_runtime_set(lua_State* L)

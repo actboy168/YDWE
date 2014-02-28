@@ -18,5 +18,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		int thread_save(lua::state* ls, int key, int value);
 
 		int handle_ud_get_table(lua::state* ls);
+
+		int callback_push(lua::state* ls, int idx);
+		int callback_read(lua::state* ls, int ref);
 	}
 }}}

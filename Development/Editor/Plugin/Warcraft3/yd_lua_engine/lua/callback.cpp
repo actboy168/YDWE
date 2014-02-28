@@ -139,7 +139,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	uintptr_t safe_call_ref(lua::state* ls, uint32_t ref, size_t nargs, jass::variable_type result_vt)
 	{
 		int base = ls->gettop() - nargs + 1;
-		ls->rawgeti(LUA_REGISTRYINDEX, ref);
+		runtime::callback_read(ls, ref);
 		if (!ls->isfunction(-1))
 		{
 			printf("callback::call() attempt to call (not a function)\n");
@@ -170,14 +170,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	uint32_t cfunction_to_code(lua::state* ls, uint32_t index)
 	{
-		ls->pushvalue(index);
 		if (runtime::sleep)
 		{
-			return jass::trampoline_create(jass_callback, (uintptr_t)get_mainthread(ls), (uintptr_t)luaL_ref(ls->self(), LUA_REGISTRYINDEX));
+			return jass::trampoline_create(jass_callback, (uintptr_t)get_mainthread(ls), runtime::callback_push(ls, index));
 		}
 		else
 		{
-			return jass::trampoline_create(jass_callback, (uintptr_t)ls->self(), (uintptr_t)luaL_ref(ls->self(), LUA_REGISTRYINDEX));
+			return jass::trampoline_create(jass_callback, (uintptr_t)ls->self(), runtime::callback_push(ls, index));
 		}
 	}
 }}}
