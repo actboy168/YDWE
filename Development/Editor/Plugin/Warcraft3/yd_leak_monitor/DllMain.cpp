@@ -119,33 +119,36 @@ namespace monitor
 	uintptr_t destroyer<type_name, porc_name>::real_proc = 0;
 }
 
+#define LEAK_MONITOR      "yd_leak_monitor::"
+#define LEAK_MONITOR_SIZE (sizeof(LEAK_MONITOR)-1)
+
 static uintptr_t RealGetLocalizedHotkey = 0;
 uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 {
 	const char* str = base::warcraft3::jass::from_string(s);
-	if (str && (0 == strncmp("yd_leak_monitor::", str, sizeof("yd_leak_monitor::")-1)))
+	if (str && (0 == strncmp(LEAK_MONITOR, str, LEAK_MONITOR_SIZE)))
 	{
-		if (strcmp(str + (sizeof("yd_leak_monitor::")-1), commonj::location) == 0)
+		if (strcmp(str + LEAK_MONITOR_SIZE, commonj::location) == 0)
 		{
 			return monitor::handle_manager<commonj::location>::size();
 		}
-		else if (strcmp(str + (sizeof("yd_leak_monitor::")-1), commonj::effect) == 0)
+		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::effect) == 0)
 		{
 			return monitor::handle_manager<commonj::effect>::size();
 		}
-		else if (strcmp(str + (sizeof("yd_leak_monitor::")-1), commonj::group) == 0)
+		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::group) == 0)
 		{
 			return monitor::handle_manager<commonj::group>::size();
 		}
-		else if (strcmp(str + (sizeof("yd_leak_monitor::")-1), commonj::region) == 0)
+		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::region) == 0)
 		{
 			return monitor::handle_manager<commonj::region>::size();
 		}
-		else if (strcmp(str + (sizeof("yd_leak_monitor::")-1), commonj::rect) == 0)
+		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::rect) == 0)
 		{
 			return monitor::handle_manager<commonj::rect>::size();
 		}
-		else if (strcmp(str + (sizeof("yd_leak_monitor::")-1), commonj::force) == 0)
+		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::force) == 0)
 		{
 			return monitor::handle_manager<commonj::force>::size();
 		}
