@@ -1,7 +1,9 @@
 #include <windows.h>
 #include <base/hook/fp_call.h>
-#include <base/warcraft3/jass/hook.h>
+#include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/jass.h>
+#include <base/warcraft3/jass/global_variable.h>
+#include <base/warcraft3/jass/hook.h>
 #include <boost/preprocessor/repetition.hpp>
 #include <boost/preprocessor/punctuation/comma_if.hpp>
 #include <set>
@@ -112,9 +114,6 @@ namespace monitor
 #define GLOBAL_VARIABLE      "yd_global_variable::"
 #define GLOBAL_VARIABLE_SIZE (sizeof(GLOBAL_VARIABLE)-1)
 
-#include <base/warcraft3/hashtable.h>
-#include <base/warcraft3/jass/global_variable.h>
-#include <base/util/console.h>
 
 size_t get_global_variable_count(const std::set<uintptr_t>& handle_set)
 {
