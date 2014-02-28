@@ -17,6 +17,22 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return ml;
 	}
 
+	void error_function(lua::state* ls, int error_handle)
+	{
+		if (error_handle == 0)
+		{
+			printf("Error: %s\n", ls->tostring(-1));
+			ls->pop(1);
+		}
+		else
+		{
+			runtime::get_function(error_handle, ls->self());
+			ls->pushvalue(-2);
+			safe_call(ls, 1, 0, 0);
+			ls->pop(2);
+		}
+	}
+
 	int safe_call_not_sleep(lua::state* ls, int nargs, int nresults, int error_handle)
 	{
 		int error_index = 0;
@@ -105,18 +121,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			runtime::thread_save(ls, func_idx, thread_idx);
 			break;
 		default:
-			if (error_handle == 0)
-			{
-				printf("Error(%d): %s\n", error, ls->tostring(-1));
-				ls->pop(1);
-			}
-			else
-			{
-				runtime::get_function(error_handle, ls->self());
-				ls->pushvalue(-2);
-				safe_call_has_sleep(ls, 1, 0, 0);
-				ls->pop(2);
-			}
+			error_function(ls, error_handle);
 			break;
 		}
 
@@ -124,15 +129,15 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return error;
 	}
 
-	int safe_call(lua::state* ls, int nargs, int nresults)
+	int safe_call(lua::state* ls, int nargs, int nresults, int error_handle)
 	{
 		if (runtime::sleep)
 		{
-			return safe_call_has_sleep(ls, nargs, nresults, runtime::error_handle);
+			return safe_call_has_sleep(ls, nargs, nresults, error_handle);
 		}
 		else
 		{
-			return safe_call_not_sleep(ls, nargs, nresults, runtime::error_handle);
+			return safe_call_not_sleep(ls, nargs, nresults, error_handle);
 		}
 	}
 
@@ -142,13 +147,14 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		runtime::callback_read(ls, ref);
 		if (!ls->isfunction(-1))
 		{
-			printf("callback::call() attempt to call (not a function)\n");
+			ls->pushstring("safe_call attempt to call (not a function)\n");
+			error_function(ls, runtime::error_handle);
 			ls->pop(1);
 			return false;
 		}
 		ls->insert(base);
 
-		if (safe_call(ls, nargs, (result_vt != jass::TYPE_NOTHING) ? 1 : 0) != LUA_OK)
+		if (safe_call(ls, nargs, (result_vt != jass::TYPE_NOTHING) ? 1 : 0, runtime::error_handle) != LUA_OK)
 		{
 			return 0;
 		}

@@ -85,7 +85,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			lua::state* ls = jass_state_s::instance().get();
 			ls->getglobal("require");
 			ls->pushlstring(cheat_s.c_str(), cheat_s.size());
-			safe_call(ls, 1, 1);
+			safe_call(ls, 1, 1, runtime::error_handle);
 		}
 
 		c_call<uint32_t>(RealCheat, cheat_str);
@@ -104,7 +104,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			return 0;
 		}
 
-		if (LUA_OK != safe_call(ls, 0, 1))
+		if (LUA_OK != safe_call(ls, 0, 1, runtime::error_handle))
 		{
 			return 0;
 		}
