@@ -16,6 +16,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		int  handle_ud_table = 0;
 		int  thread_table = 0;
+		int  callback_table = 0;
 
 		void initialize()
 		{
@@ -27,6 +28,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 			handle_ud_table = 0;
 			thread_table = 0;
+			callback_table = 0;
 		}
 
 		void set_function(int& result, lua_State* L, int index)
@@ -55,6 +57,76 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		void get_function(int result, lua_State* L)
 		{
 			lua_rawgeti(L, LUA_REGISTRYINDEX, result);
+		}
+
+		int thread_get_table(lua::state* ls)
+		{
+			if (runtime::thread_table == 0)
+			{
+				ls->newtable();
+				{
+					ls->newtable();
+					{
+						ls->pushstring("__mode");
+						ls->pushstring("kv");
+						ls->rawset(-3);
+					}
+					ls->setmetatable(-2);
+				}
+				runtime::thread_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
+			}
+			lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::thread_table);
+			return 1;
+		}
+
+		int thread_create(lua::state* ls, int index)
+		{
+			thread_get_table(ls);
+			ls->pushvalue(index);
+			ls->rawget(-2);
+			if (ls->isnil(-1))
+			{
+				ls->pop(1);
+				ls->newthread();
+			}
+			else
+			{
+				ls->pushvalue(index);
+				ls->pushnil();
+				ls->rawset(-4);
+			}
+			ls->remove(-2);
+			return 1;
+		}
+
+		int thread_save(lua::state* ls, int key, int value)
+		{
+			thread_get_table(ls);
+			ls->pushvalue(key);
+			ls->pushvalue(value);
+			ls->rawset(-3);
+			ls->pop(1);
+			return 0;
+		}
+
+		int handle_ud_get_table(lua::state* ls)
+		{
+			if (runtime::handle_ud_table == 0)
+			{
+				ls->newtable();
+				{
+					ls->newtable();
+					{
+						ls->pushstring("__mode");
+						ls->pushstring("kv");
+						ls->rawset(-3);
+					}
+					ls->setmetatable(-2);
+				}
+				runtime::handle_ud_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
+			}
+			lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::handle_ud_table);
+			return 1;
 		}
 	}
 

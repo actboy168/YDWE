@@ -10,11 +10,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		extern bool sleep;
 		extern bool catch_crash;
 
-		extern int handle_ud_table;
-		extern int thread_table;
-
 		void initialize();
 		void set_function(int& result, lua_State* L, int index);
 		void get_function(int result, lua_State* L);
+
+		int thread_create(lua::state* ls, int index);
+		int thread_save(lua::state* ls, int key, int value);
+
+		int handle_ud_get_table(lua::state* ls);
 	}
 }}}

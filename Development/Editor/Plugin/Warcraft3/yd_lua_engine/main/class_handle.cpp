@@ -37,26 +37,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 #define LUA_JASS_HANDLE "jhandle_t"
 
-	int handle_ud_get_table(lua::state* ls)
-	{
-		if (runtime::handle_ud_table == 0)
-		{
-			ls->newtable();
-			{
-				ls->newtable();
-				{
-					ls->pushstring("__mode");
-					ls->pushstring("kv");
-					ls->rawset(-3);
-				}
-				ls->setmetatable(-2);
-			}
-			runtime::handle_ud_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
-		}
-		lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::handle_ud_table);
-		return 1;
-	}
-
 	void handle_ud_push(lua::state* ls, jass::jhandle_t value)
 	{
 		if (!value)
@@ -64,7 +44,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return ls->pushnil();
 		}
 
-		handle_ud_get_table(ls);
+		runtime::handle_ud_get_table(ls);
 		ls->pushunsigned(value);
 		ls->rawget(-2);
 		if (ls->isnil(-1))
@@ -113,7 +93,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		lua::state* ls = (lua::state*)L;
 		jass::jhandle_t h = (jass::jhandle_t)handle_ud_read(ls, 1);
-		handle_ud_get_table(ls);
+		runtime::handle_ud_get_table(ls);
 		ls->pushunsigned(h);
 		ls->pushnil();
 		ls->rawset(-3);
