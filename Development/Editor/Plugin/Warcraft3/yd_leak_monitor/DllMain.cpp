@@ -109,35 +109,99 @@ namespace monitor
 #define LEAK_MONITOR      "yd_leak_monitor::"
 #define LEAK_MONITOR_SIZE (sizeof(LEAK_MONITOR)-1)
 
+#define GLOBAL_VARIABLE      "yd_global_variable::"
+#define GLOBAL_VARIABLE_SIZE (sizeof(GLOBAL_VARIABLE)-1)
+
+#include <base/warcraft3/hashtable.h>
+#include <base/warcraft3/jass/global_variable.h>
+#include <base/util/console.h>
+
+size_t get_global_variable_count(const std::set<uintptr_t>& handle_set)
+{
+	size_t size = handle_set.size();
+	std::set<uintptr_t> tmp = handle_set;
+
+	using namespace base::warcraft3;
+	hashtable::variable_table* vt = get_variable_hashtable();
+	for (auto it = vt->begin(); it != vt->end(); ++it)
+	{
+		jass::global_variable gv(&*it);
+
+		if (jass::OPCODE_VARIABLE_HANDLE == gv.type())
+		{
+			tmp.erase((uint32_t)gv);
+		}
+		else if (jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type())
+		{
+			for (uint32_t i = 0; i < gv.array_size(); ++i)
+			{
+				tmp.erase(gv[i]);
+			}
+		}
+	}
+
+	return size - tmp.size();
+}
+
 static uintptr_t RealGetLocalizedHotkey = 0;
 uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 {
 	const char* str = base::warcraft3::jass::from_string(s);
-	if (str && (0 == strncmp(LEAK_MONITOR, str, LEAK_MONITOR_SIZE)))
+	if (str)
 	{
-		if (strcmp(str + LEAK_MONITOR_SIZE, commonj::location) == 0)
+		if (0 == strncmp(LEAK_MONITOR, str, LEAK_MONITOR_SIZE))
 		{
-			return monitor::handle_manager<commonj::location>::instance().size();
+			if (strcmp(str + LEAK_MONITOR_SIZE, commonj::location) == 0)
+			{
+				return monitor::handle_manager<commonj::location>::instance().size();
+			}
+			else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::effect) == 0)
+			{
+				return monitor::handle_manager<commonj::effect>::instance().size();
+			}
+			else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::group) == 0)
+			{
+				return monitor::handle_manager<commonj::group>::instance().size();
+			}
+			else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::region) == 0)
+			{
+				return monitor::handle_manager<commonj::region>::instance().size();
+			}
+			else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::rect) == 0)
+			{
+				return monitor::handle_manager<commonj::rect>::instance().size();
+			}
+			else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::force) == 0)
+			{
+				return monitor::handle_manager<commonj::force>::instance().size();
+			}
 		}
-		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::effect) == 0)
+		else if (0 == strncmp(GLOBAL_VARIABLE, str, GLOBAL_VARIABLE_SIZE))
 		{
-			return monitor::handle_manager<commonj::effect>::instance().size();
-		}
-		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::group) == 0)
-		{
-			return monitor::handle_manager<commonj::group>::instance().size();
-		}
-		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::region) == 0)
-		{
-			return monitor::handle_manager<commonj::region>::instance().size();
-		}
-		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::rect) == 0)
-		{
-			return monitor::handle_manager<commonj::rect>::instance().size();
-		}
-		else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::force) == 0)
-		{
-			return monitor::handle_manager<commonj::force>::instance().size();
+			if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::location) == 0)
+			{
+				return get_global_variable_count(monitor::handle_manager<commonj::location>::instance());
+			}
+			else if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::effect) == 0)
+			{
+				return get_global_variable_count(monitor::handle_manager<commonj::effect>::instance());
+			}
+			else if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::group) == 0)
+			{
+				return get_global_variable_count(monitor::handle_manager<commonj::group>::instance());
+			}
+			else if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::region) == 0)
+			{
+				return get_global_variable_count(monitor::handle_manager<commonj::region>::instance());
+			}
+			else if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::rect) == 0)
+			{
+				return get_global_variable_count(monitor::handle_manager<commonj::rect>::instance());
+			}
+			else if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::force) == 0)
+			{
+				return get_global_variable_count(monitor::handle_manager<commonj::force>::instance());
+			}
 		}
 	}
 
