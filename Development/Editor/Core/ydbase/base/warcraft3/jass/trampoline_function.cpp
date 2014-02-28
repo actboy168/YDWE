@@ -17,7 +17,7 @@ namespace base { namespace warcraft3 { namespace jass {
 		{
 			if (unit_handle == 'YDWE' && x && y && dis)
 			{
-				return fast<uint32_t>(*x, *y, *dis);
+				return fast_call<uint32_t>(*x, *y, *dis);
 			}
 	
 			return c_call<uint32_t>(RealIsUnitInRangeXY, unit_handle, x, y, dis);
