@@ -35,18 +35,17 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int safe_call_not_sleep(lua::state* ls, int nargs, int nresults, int error_handle)
 	{
-		int error_index = 0;
-		if (error_handle != 0) 
+		if (error_handle != 0)
 		{
-			error_index = 1;
 			runtime::get_function(error_handle, ls->self());
-			ls->insert(error_index);
+			ls->insert(1);
+			int error = lua_pcall(ls->self(), nargs, nresults, 1);
+			ls->remove(1);
+			return error;
 		}
-
-		int error = lua_pcall(ls->self(), nargs, nresults, error_index);
-
-		if (error_index == 0)
+		else
 		{
+			int error = lua_pcall(ls->self(), nargs, nresults, 0);
 			switch (error)
 			{
 			case LUA_OK:
@@ -55,17 +54,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				assert("lua_pcall return LUA_YIELD" || false);
 				break;
 			default:
-				printf("Error(%d): %s\n", error, ls->tostring(-1));
-				ls->pop(1);
+				error_function(ls, error_handle);
 				break;
 			}
+			return error;
 		}
-		else
-		{
-			ls->remove(error_index);
-		}
-
-		return error;
 	}
 
 	int safe_resume(lua::state* thread, lua::state* ls, int nargs, int& nresults)
