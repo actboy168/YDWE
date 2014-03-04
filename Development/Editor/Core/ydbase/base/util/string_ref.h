@@ -21,27 +21,18 @@
 #endif
 
 namespace std {
-
-    template<class charT, class traits = char_traits<charT>> class basic_string_view;
-    typedef basic_string_view<char,     char_traits<char>>         string_view;
-    typedef basic_string_view<wchar_t,  char_traits<wchar_t>>      wstring_view;
-#if 0
-    typedef basic_string_view<char16_t, char_traits<char16_t>>     u16string_view;
-    typedef basic_string_view<char32_t, char_traits<char32_t>>     u32string_view;
-#endif
-
-    namespace detail {
+    namespace string_view_detail {
         template <class charT, class traits>
-        class string_view_traits_eq
+        class traits_eq
         {
         public:
-            string_view_traits_eq(charT ch) : ch_(ch) {}
+            traits_eq(charT ch) : ch_(ch) {}
             bool operator() (charT val) const { return traits::eq(ch_, val); }
             charT ch_;
         };
     }
 
-    template <class charT, class traits>
+    template <class charT, class traits = char_traits<charT>>
     class basic_string_view
     {
     public:
@@ -210,7 +201,7 @@ namespace std {
         }
         BASE_CONSTEXPR size_type find(charT c, size_type pos = 0) const BASE_NOEXCEPT
         {
-            const_iterator iter = find_if(cbegin() + pos, cend(), detail::string_view_traits_eq<charT, traits>(c));
+            const_iterator iter = find_if(cbegin() + pos, cend(), string_view_detail::traits_eq<charT, traits>(c));
             return iter == cend() ? npos: distance(cbegin(), iter);
         }
         BASE_CONSTEXPR size_type find(const charT* s, size_type pos, size_type n) const
@@ -229,7 +220,7 @@ namespace std {
         }
         BASE_CONSTEXPR size_type rfind(charT c, size_type pos = npos) const BASE_NOEXCEPT
         {
-            const_reverse_iterator iter = find_if(crbegin() + (size() - pos), crend(), detail::string_view_traits_eq<charT, traits>(c));
+            const_reverse_iterator iter = find_if(crbegin() + (size() - pos), crend(), string_view_detail::traits_eq<charT, traits>(c));
             return iter == crend() ? npos: reverse_distance(crbegin(), iter);
         }
         BASE_CONSTEXPR size_type rfind(const charT* s, size_type pos, size_type n) const
@@ -373,7 +364,7 @@ namespace std {
     template<typename charT, typename traits>
     BASE_CONSTEXPR inline bool operator!=(basic_string_view<charT, traits> x, basic_string_view<charT, traits> y) BASE_NOEXCEPT
     {
-        if ( x.size () != y.size ()) return true;
+        if (x.size () != y.size ()) return true;
         return x.compare(y) != 0;
     }
 
@@ -521,7 +512,7 @@ namespace std {
         return basic_string_view<charT, traits>(x) >= y;
     }
 
-    namespace detail {
+    namespace string_view_detail {
         template<class charT, class traits>
         inline void insert_fill_chars(basic_ostream<charT, traits>& os, size_t n)
         {
@@ -542,7 +533,7 @@ namespace std {
             const bool align_left = (os.flags() & basic_ostream<charT, traits>::adjustfield) == basic_ostream<charT, traits>::left;
             if (!align_left)
             {
-                detail::insert_fill_chars(os, alignment_size);
+                insert_fill_chars(os, alignment_size);
                 if (os.good())
                     os.write(str.data(), size);
             }
@@ -550,7 +541,7 @@ namespace std {
             {
                 os.write(str.data(), size);
                 if (os.good())
-                    detail::insert_fill_chars(os, alignment_size);
+                    insert_fill_chars(os, alignment_size);
             }
         }
     }
@@ -565,27 +556,39 @@ namespace std {
             if (w <= size)
                 os.write(str.data(), size);
             else
-                detail::insert_aligned(os, str);
+                string_view_detail::insert_aligned(os, str);
             os.width(0);
         }
         return os;
     }
-}
 
+    template<class charT, class traits>
+    struct hash<basic_string_view<charT, traits>>
+        : public unary_function<basic_string_view<charT, traits>, size_t>
+    {
+        size_t operator()(const basic_string_view<charT, traits>& key) const
+        {
+            size_t h = 0;
+            for (const_iterator iter = key.cbegin(); iter != key.cend(); ++iter)
+                h = (h * 131) + *iter;
+            return h;
+        }
+    };
+
+    typedef basic_string_view<char>     string_view;
+    typedef basic_string_view<wchar_t>  wstring_view;
 #if 0
-namespace std {
-    template<> struct hash<string_view>;
-    template<> struct hash<u16string_view>;
-    template<> struct hash<u32string_view>;
-    template<> struct hash<wstring_view>;
-}
+    typedef basic_string_view<char16_t> u16string_view;
+    typedef basic_string_view<char32_t> u32string_view;
 #endif
+
+}
 
 #undef BASE_CONSTEXPR
 #undef BASE_NOEXCEPT
 #undef BASE_CONSTEXPR_OR_CONST
 
 namespace boost {
-	typedef std::basic_string_view<char,    std::char_traits<char>>    string_ref;
-	typedef std::basic_string_view<wchar_t, std::char_traits<wchar_t>> wstring_ref;
+    typedef std::basic_string_view<char,    std::char_traits<char>>    string_ref;
+    typedef std::basic_string_view<wchar_t, std::char_traits<wchar_t>> wstring_ref;
 }
