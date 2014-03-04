@@ -29,7 +29,7 @@ namespace slk { namespace reader { namespace utility {
 				auto ItBeg = find_begin(line, char_equal(']'));
 				if (ItBeg != line.end())
 				{
-					object = &table[trim_copy<boost::string_ref>(line.begin()+1, ItBeg).to_string()];
+					object = &table[trim_copy(line.begin()+1, ItBeg).to_string()];
 				}
 			}
 			else
@@ -40,8 +40,8 @@ namespace slk { namespace reader { namespace utility {
 
 					if (ItBeg != line.end())
 					{
-						boost::string_ref key = trim_copy<boost::string_ref>(line.begin(), ItBeg);
-						boost::string_ref val = trim_copy<boost::string_ref>(ItBeg+1, line.end());
+						boost::string_ref key = trim_copy(line.begin(), ItBeg);
+						boost::string_ref val = trim_copy(ItBeg+1, line.end());
 						if (!val.empty() && !key.empty())
 						{
 							(*object)[key.to_string()] = val.to_string();

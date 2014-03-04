@@ -102,7 +102,7 @@ namespace slk
 	public:
 		const std::string& Convert(const std::string& str) const
 		{
-			std::string tmp = trim_copy<std::string>(str.cbegin(), str.cend());
+			std::string tmp = trim_copy_string(str.cbegin(), str.cend());
 			if (tmp == "-")
 			{
 				static std::string s_dummy_zero = "0";

@@ -33,7 +33,7 @@ namespace slk { namespace reader { namespace utility {
 
 			if (len != 0)
 			{
-				boost::string_ref value(ptr, ptr+len);
+				boost::string_ref value(ptr, len);
 				callback(value);
 			}
 		}

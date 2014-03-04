@@ -166,12 +166,12 @@ namespace slk
 					{
 					case 'X':
 						{
-							x = Str2UInt(trim_copy<boost::string_ref>(beg+1, end));
+							x = Str2UInt(trim_copy(beg+1, end));
 						}
 						break;
 					case 'Y':
 						{
-							y = Str2UInt(trim_copy<boost::string_ref>(beg+1, end));
+							y = Str2UInt(trim_copy(beg+1, end));
 						}
 						break;
 					default:
@@ -196,17 +196,17 @@ namespace slk
 					{
 					case 'X':
 						{
-							this->set_x(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
+							this->set_x(Str2UInt(trim_copy(beg+1, end)));
 						}
 						break;
 					case 'Y':
 						{
-							this->set_y(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
+							this->set_y(Str2UInt(trim_copy(beg+1, end)));
 						}
 						break;
 					case 'K':
 						{
-							this->set_k(trim_copy<boost::string_ref>(beg+1, end));
+							this->set_k(trim_copy(beg+1, end));
 						}
 						break;
 					default:
@@ -224,12 +224,12 @@ namespace slk
 					{
 					case 'X':
 						{
-							this->set_x(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
+							this->set_x(Str2UInt(trim_copy(beg+1, end)));
 						}
 						break;
 					case 'Y':
 						{
-							this->set_y(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
+							this->set_y(Str2UInt(trim_copy(beg+1, end)));
 						}
 						break;
 					default:
@@ -247,7 +247,7 @@ namespace slk
 					return 0;
 				}
 
-				boost::string_ref key = trim_copy<boost::string_ref>(line.begin(), It);
+				boost::string_ref key = trim_copy(line.begin(), It);
 
 				line.remove_prefix(It - line.begin() + 1);
 				return key.front();

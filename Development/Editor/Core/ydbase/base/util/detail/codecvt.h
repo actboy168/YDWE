@@ -25,7 +25,7 @@ namespace util { namespace detail {
 	}
 
 	template<class FromChar, class ToChar> 
-	std::basic_string<ToChar> convert(boost::basic_string_ref<FromChar> const& from, const codecvt_type& cvt, conv_method how)
+	std::basic_string<ToChar> convert(std::basic_string_view<FromChar> const& from, const codecvt_type& cvt, conv_method how)
 	{
 		std::basic_string<ToChar> to;
 		if (from.size())

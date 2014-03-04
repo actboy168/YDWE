@@ -101,46 +101,11 @@ namespace slk
 		trim_left(Input, IsFound);
 	}
 
-	template <typename SequenceT, typename PredicateT>
-	inline SequenceT trim_left_copy(SequenceT& Input, PredicateT IsFound)
+	inline std::string trim_copy_string(std::string::const_iterator ItBegin, std::string::const_iterator ItEnd)
 	{
-		typename SequenceT::const_iterator TrimEnd = Input.end();
-		typename SequenceT::const_iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
-		return std::move(SequenceT(TrimBegin, TrimEnd));
-	}
-
-	template <typename SequenceT, typename PredicateT>
-	inline SequenceT trim_right_copy(SequenceT& Input, PredicateT IsFound)
-	{
-		typename SequenceT::const_iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
-		typename SequenceT::const_iterator TrimBegin = Input.begin();
-		return std::move(SequenceT(TrimBegin, TrimEnd));
-	}
-	 
-	template <typename SequenceT, typename PredicateT>
-	inline SequenceT trim_copy(typename SequenceT::const_iterator ItBegin, typename SequenceT::const_iterator ItEnd, PredicateT IsFound)
-	{
-		typename SequenceT::const_iterator TrimEnd = detail::find_end(ItBegin, ItEnd, IsFound);
-		typename SequenceT::const_iterator TrimBegin = detail::find_begin(ItBegin, TrimEnd, IsFound);
-		return std::move(SequenceT(TrimBegin, TrimEnd));
-	}
-
-	template <typename SequenceT, typename PredicateT>
-	inline SequenceT trim_copy(const SequenceT& Input, PredicateT IsFound)
-	{
-		return std::move(trim_copy<SequenceT, PredicateT>(Input.cbegin(), Input.cend(), IsFound));
-	}
-
-	template <typename SequenceT>
-	inline SequenceT trim_copy(const SequenceT& Input)
-	{
-		return std::move(trim_copy<SequenceT, decltype(ctype::is_space())>(Input.cbegin(), Input.cend(), ctype::is_space()));
-	}
-
-	template <typename SequenceT>
-	inline SequenceT trim_copy(typename SequenceT::const_iterator ItBegin, typename SequenceT::const_iterator ItEnd)
-	{
-		return std::move(trim_copy<SequenceT, decltype(ctype::is_space())>(ItBegin, ItEnd, ctype::is_space()));
+		std::string::const_iterator TrimEnd = detail::find_end(ItBegin, ItEnd, ctype::is_space());
+		std::string::const_iterator TrimBegin = detail::find_begin(ItBegin, TrimEnd, ctype::is_space());
+		return std::move(std::string(TrimBegin, TrimEnd));
 	}
 
 	template <typename SequenceT, typename PredicateT>
@@ -172,6 +137,50 @@ namespace slk
 
 		return InEnd;
 	}
+
+	template <typename Iterator>
+	boost::string_ref make_string_ref(Iterator first, Iterator last)
+	{
+		if (first < last)
+		{
+			return boost::string_ref(first, std::distance(first, last));
+		}
+		else
+		{
+			return boost::string_ref();
+		}
+	}
+	template <typename PredicateT>
+	inline boost::string_ref trim_copy(typename boost::string_ref::const_iterator ItBegin, typename boost::string_ref::const_iterator ItEnd, PredicateT IsFound)
+	{
+		typename boost::string_ref::const_iterator TrimEnd = detail::find_end(ItBegin, ItEnd, IsFound);
+		typename boost::string_ref::const_iterator TrimBegin = detail::find_begin(ItBegin, TrimEnd, IsFound);
+		return std::move(make_string_ref(TrimBegin, TrimEnd));
+	}
+	template <typename PredicateT>
+	inline boost::string_ref trim_left_copy(boost::string_ref& Input, PredicateT IsFound)
+	{
+		typename boost::string_ref::const_iterator TrimEnd = Input.end();
+		typename boost::string_ref::const_iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
+		return std::move(make_string_ref(TrimBegin, TrimEnd));
+	}
+	template <typename PredicateT>
+	inline boost::string_ref trim_right_copy(boost::string_ref& Input, PredicateT IsFound)
+	{
+		typename boost::string_ref::const_iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
+		typename boost::string_ref::const_iterator TrimBegin = Input.begin();
+		return std::move(make_string_ref(TrimBegin, TrimEnd));
+	}
+	template <typename PredicateT>
+	inline boost::string_ref trim_copy(const boost::string_ref& Input, PredicateT IsFound)
+	{
+		return std::move(trim_copy(Input.cbegin(), Input.cend(), IsFound));
+	}
+	inline boost::string_ref trim_copy(boost::string_ref::const_iterator ItBegin, boost::string_ref::const_iterator ItEnd)
+	{
+		return std::move(trim_copy(ItBegin, ItEnd, ctype::is_space()));
+	}
+
 
 	template <typename ResultT, typename SequenceT, typename PredicateT>
 	inline ResultT& split(ResultT& Result, SequenceT const& Input, PredicateT IsFound)
