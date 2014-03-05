@@ -7,7 +7,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	namespace runtime
 	{
-		int  version = 1;
+		int  version = 2;
 		int  error_handle = 0;
 		int  handle_level = 2;
 		bool console = false;
