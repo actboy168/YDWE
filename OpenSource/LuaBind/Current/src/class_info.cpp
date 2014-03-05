@@ -125,6 +125,12 @@ namespace luabind
 
 	LUABIND_API void bind_class_info(lua_State* L)
 	{
+		detail::class_registry* reg = detail::class_registry::get_registry(L);
+		if (reg->find_class(typeid(class_info))) {
+			// We've already been registered!
+			return;
+		}
+
 		module(L)
 		[
 			class_<class_info>("class_info_data")
