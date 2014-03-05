@@ -34,36 +34,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return L;
 	}
 
-	const char* findtable(lua::state* ls, int idx, const char *fname, int szhint) 
-	{
-		const char *e;
-		if (idx) 
-			ls->pushvalue(idx);
-		do 
-		{
- 			e = strchr(fname, '.');
-			if (e == NULL) e = fname + strlen(fname);
-			ls->pushlstring(fname, e - fname);
-			ls->rawget(-2);
-			if (ls->isnil(-1))  /* no such field? */
-			{ 
-				ls->pop(1);  /* remove this nil */
-				ls->createtable(0, (*e == '.' ? 1 : szhint)); /* new table for field */
-				ls->pushlstring(fname, e - fname);
-				ls->pushvalue(-2);
-				ls->settable(-4);  /* set new table into field */
-			}
-			else if (!ls->istable(-1))   /* field has a non-table value? */
-			{
-				ls->pop(2);  /* remove table and value */
-				return fname;  /* return problematic part of the name */
-			}
-			ls->remove(-2);  /* remove previous table */
-			fname = e + 1;
-		} while (*e == '.');
-		return NULL;
-	}
-
 	int __cdecl searcher_preload(lua::state* ls) 
 	{
 		const char *name = luaL_checkstring(ls->self(), 1);
@@ -105,7 +75,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	bool clear_searchers_table(lua::state* ls)
 	{
-		findtable(ls, LUA_REGISTRYINDEX, "_LOADED", 1); 
+		ls->getfield(LUA_REGISTRYINDEX, "_LOADED"); 
 		ls->getfield(-1, LUA_LOADLIBNAME);
 
 		if (ls->istable(-1)) 
@@ -126,7 +96,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	bool insert_searchers_table(lua::state* ls)
 	{
-		findtable(ls, LUA_REGISTRYINDEX, "_LOADED", 1); 
+		ls->getfield(LUA_REGISTRYINDEX, "_LOADED"); 
 		ls->getfield(-1, LUA_LOADLIBNAME);
 
 		if (ls->istable(-1)) 
