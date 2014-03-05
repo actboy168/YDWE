@@ -83,10 +83,10 @@ namespace std {
             , size_(len)
             { }
 
-        BASE_CONSTEXPR const_iterator   begin() const BASE_NOEXCEPT { return data_; }
-        BASE_CONSTEXPR const_iterator  cbegin() const BASE_NOEXCEPT { return data_; }
-        BASE_CONSTEXPR const_iterator     end() const BASE_NOEXCEPT { return begin() + size(); }
-        BASE_CONSTEXPR const_iterator    cend() const BASE_NOEXCEPT { return begin() + size(); }
+        BASE_CONSTEXPR const_iterator    begin() const BASE_NOEXCEPT { return data_; }
+        BASE_CONSTEXPR const_iterator   cbegin() const BASE_NOEXCEPT { return data_; }
+        BASE_CONSTEXPR const_iterator      end() const BASE_NOEXCEPT { return begin() + size(); }
+        BASE_CONSTEXPR const_iterator     cend() const BASE_NOEXCEPT { return begin() + size(); }
                 const_reverse_iterator  rbegin() const BASE_NOEXCEPT { return const_reverse_iterator(end()); }
                 const_reverse_iterator crbegin() const BASE_NOEXCEPT { return const_reverse_iterator(end()); }
                 const_reverse_iterator    rend() const BASE_NOEXCEPT { return const_reverse_iterator(begin()); }
@@ -152,25 +152,22 @@ namespace std {
         {
             if (pos > size())
                 throw out_of_range("std::string_view::copy");
-            size_type rlen = (n > (size() - pos)) ? (size() - pos) : n;
-            if (pos + n > size())
-                n = size () - pos;
-            copy_n(begin() + pos, n, s);
-            return n;
+            size_type rlen = (std::min)(n, size_ - pos);
+            copy_n(begin() + pos, rlen, s);
+            return rlen;
         }
 
         BASE_CONSTEXPR basic_string_view substr(size_type pos = 0, size_type n = npos) const
         {
             if (pos > size())
                 throw out_of_range("std::string_view::substr");
-            if (pos + n > size())
-                n = size () - pos;
-            return basic_string_view(data() + pos, n);
+            size_type rlen = (std::min)(n, size_ - pos);
+            return basic_string_view(data() + pos, rlen);
         }
 
         BASE_CONSTEXPR int compare(basic_string_view s) const BASE_NOEXCEPT
         {
-            const int cmp = traits::compare(data(), s.data(), (min)(size(), s.size()));
+            const int cmp = traits::compare(data(), s.data(), (std::min)(size(), s.size()));
             return cmp != 0 ? cmp: (size() == s.size() ? 0: (size() < s.size()? -1: 1));
         }
         BASE_CONSTEXPR int compare(size_type pos1, size_type n1, basic_string_view s) const
@@ -201,8 +198,9 @@ namespace std {
         }
         BASE_CONSTEXPR size_type find(charT c, size_type pos = 0) const BASE_NOEXCEPT
         {
-            const_iterator iter = find_if(cbegin() + pos, cend(), string_view_detail::traits_eq<charT, traits>(c));
-            return iter == cend() ? npos: distance(cbegin(), iter);
+            if (pos >= size()) return npos;
+            const_pointer p = traits::find(cbegin() + pos, size() - pos, c);
+            return p == nullptr ? npos: static_cast<size_type>(p - data());
         }
         BASE_CONSTEXPR size_type find(const charT* s, size_type pos, size_type n) const
         {
@@ -212,7 +210,7 @@ namespace std {
         {
             return find(basic_string_view(s), pos);
         }
-    
+
         BASE_CONSTEXPR size_type rfind(basic_string_view s, size_type pos = npos) const BASE_NOEXCEPT
         {
             const_reverse_iterator iter = search(crbegin() + (size() - pos), crend(), s.crbegin(), s.crend(), traits::eq);
