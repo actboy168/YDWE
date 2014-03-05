@@ -196,9 +196,8 @@ namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	int jass_slk(lua_State *L)
+	int jass_slk(lua::state* ls)
 	{
-		lua::state* ls = (lua::state*)L;
 		ls->newtable();
 		{
 			slk_create_table(ls, "ability", slk::ROBJECT_TYPE::ABILITY);

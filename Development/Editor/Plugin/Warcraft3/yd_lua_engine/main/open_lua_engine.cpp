@@ -9,11 +9,11 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	int jass_common(lua_State *L);
-	int jass_japi(lua_State *L);
-	int jass_hook(lua_State *L);
-	int jass_runtime(lua_State *L);
-	int jass_slk(lua_State *L);
+	int jass_common(lua::state* ls);
+	int jass_japi(lua::state* ls);
+	int jass_hook(lua::state* ls);
+	int jass_runtime(lua::state* ls);
+	int jass_slk(lua::state* ls);
 	int fix_math(lua::state* ls);
 
 	int jass_enable_console(lua_State* /*L*/)
@@ -63,18 +63,26 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
+	void register_preload_lib(lua::state* ls, const char *name, lua::state::cfunction f)
+	{
+		ls->getfield(LUA_REGISTRYINDEX, "_PRELOAD");
+		ls->pushcclosure(f, 0);
+		ls->setfield(-2, name);
+		ls->pop(1);
+	}
+
 	int open_lua_engine(lua::state* ls)
 	{
-		luaL_requiref(ls->self(), "jass.common",  jass_common, 0);
-		luaL_requiref(ls->self(), "jass.japi",    jass_japi, 0);
-		luaL_requiref(ls->self(), "jass.hook",    jass_hook, 0);
-		luaL_requiref(ls->self(), "jass.runtime", jass_runtime, 0);
-		luaL_requiref(ls->self(), "jass.slk",     jass_slk, 0);
+		register_preload_lib(ls, "jass.common",  jass_common);
+		register_preload_lib(ls, "jass.japi",    jass_japi);
+		register_preload_lib(ls, "jass.hook",    jass_hook);
+		register_preload_lib(ls, "jass.runtime", jass_runtime);
+		register_preload_lib(ls, "jass.slk",     jass_slk);
 
-		jreal_make_mt (ls->self());
+		jreal_make_mt(ls->self());
 		handle_ud_make_mt(ls->self());
 		handle_lud_make_mt(ls->self());
-		array_make_mt (ls->self());
+		array_make_mt(ls->self());
 
 		insert_searchers_table(ls);
 		fix_math(ls);

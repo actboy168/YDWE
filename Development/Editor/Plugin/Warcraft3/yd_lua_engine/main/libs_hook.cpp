@@ -237,9 +237,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	int jass_hook(lua_State *L)
+	int jass_hook(lua::state* ls)
 	{
-		lua::state* ls = (lua::state*)L;
 		ls->newtable();
 		{
 			ls->newtable();

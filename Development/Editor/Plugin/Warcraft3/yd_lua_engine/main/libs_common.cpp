@@ -311,10 +311,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	int jass_common(lua_State *L)
+	int jass_common(lua::state* ls)
 	{
-		lua::state* ls = (lua::state*)L;
-
 		ls->newtable();
 		{
 			ls->newtable();
