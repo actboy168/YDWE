@@ -10,7 +10,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	uintptr_t jass_read(jassbind* lj, jass::variable_type opt, int idx);
 	void jass_get_global_variable(jassbind* lj, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value);
 
-	jass::global_variable array_value(jassbind* lj)
+	jass::global_variable jarray_value(jassbind* lj)
 	{
 		lj->pushvalue(1);
 		lj->pushstring("__value");
@@ -20,10 +20,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return std::move(gv);
 	}
 
-	int array_index(lua_State* L)
+	int jarray_index(lua_State* L)
 	{
 		jassbind* lj = (jassbind*)L;
-		jass::global_variable gv = array_value(lj);
+		jass::global_variable gv = jarray_value(lj);
 		int32_t index = lj->checkinteger(2);
 	
 		if (!gv.array_vaild(index))
@@ -36,10 +36,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 	
-	int array_newindex(lua_State* L)
+	int jarray_newindex(lua_State* L)
 	{
 		jassbind* lj = (jassbind*)L;
-		jass::global_variable gv = array_value(lj);
+		jass::global_variable gv = jarray_value(lj);
 		int32_t index = lj->checkinteger(2);
 	
 		if (!gv.array_vaild(index))
@@ -51,7 +51,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 	
-	int array_len(lua_State* L)
+	int jarray_len(lua_State* L)
 	{
 		jassbind* lj = (jassbind*)L;
 		jass::global_variable gv((hashtable::variable_node*)lj->checkunsigned(lua_upvalueindex(1)));
@@ -59,7 +59,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	int array_create(lua_State* L, uintptr_t value)
+	int jarray_create(lua_State* L, uintptr_t value)
 	{
 		lua_newtable(L);
 		luaL_getmetatable(L, LUA_JASS_ARRAY);
@@ -70,12 +70,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	void array_make_mt(lua_State* L)
+	void jarray_make_mt(lua_State* L)
 	{
 		luaL_Reg lib[] = {
-			{ "__index", array_index },
-			{ "__newindex", array_newindex },
-			{ "__len", array_len },
+			{ "__index",    jarray_index },
+			{ "__newindex", jarray_newindex },
+			{ "__len",      jarray_len },
 			{ NULL, NULL },
 		};
 	

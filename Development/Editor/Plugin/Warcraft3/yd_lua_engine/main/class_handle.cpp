@@ -5,7 +5,7 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	int handle_tostring(lua_State *L, jass::jhandle_t h)
+	int jhandle_tostring(lua_State *L, jass::jhandle_t h)
 	{
 		static char hex[] = "0123456789ABCDEF";
 
@@ -37,7 +37,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 #define LUA_JASS_HANDLE "jhandle_t"
 
-	void handle_ud_push(lua::state* ls, jass::jhandle_t value)
+	void jhandle_ud_push(lua::state* ls, jass::jhandle_t value)
 	{
 		if (!value)
 		{
@@ -64,7 +64,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return;
 	}
 
-	jass::jhandle_t handle_ud_read(lua::state* ls, int index)
+	jass::jhandle_t jhandle_ud_read(lua::state* ls, int index)
 	{
 		if (ls->isnil(index))
 		{
@@ -75,24 +75,24 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return *hptr;
 	}
 
-	int handle_ud_eq(lua_State *L)
+	int jhandle_ud_eq(lua_State *L)
 	{
 		lua::state* ls = (lua::state*)L;
-		jass::jhandle_t a = (jass::jhandle_t)handle_ud_read(ls, 1);
-		jass::jhandle_t b = (jass::jhandle_t)handle_ud_read(ls, 2);
+		jass::jhandle_t a = jhandle_ud_read(ls, 1);
+		jass::jhandle_t b = jhandle_ud_read(ls, 2);
 		ls->pushboolean(a == b);
 		return 1;
 	}
 
-	int handle_ud_tostring(lua_State *L)
+	int jhandle_ud_tostring(lua_State *L)
 	{
-		return handle_tostring(L, (jass::jhandle_t)handle_ud_read((lua::state*)L, 1));
+		return jhandle_tostring(L, jhandle_ud_read((lua::state*)L, 1));
 	}
 
-	int handle_ud_gc(lua_State *L)
+	int jhandle_ud_gc(lua_State *L)
 	{
 		lua::state* ls = (lua::state*)L;
-		jass::jhandle_t h = (jass::jhandle_t)handle_ud_read(ls, 1);
+		jass::jhandle_t h = jhandle_ud_read(ls, 1);
 		runtime::handle_ud_get_table(ls);
 		ls->pushunsigned(h);
 		ls->pushnil();
@@ -102,12 +102,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	void handle_ud_make_mt(lua_State *L)
+	void jhandle_ud_make_mt(lua_State *L)
 	{
 		luaL_Reg lib[] = {
-			{ "__eq",       handle_ud_eq },
-			{ "__tostring", handle_ud_tostring },
-			{ "__gc",       handle_ud_gc },
+			{ "__eq",       jhandle_ud_eq },
+			{ "__tostring", jhandle_ud_tostring },
+			{ "__gc",       jhandle_ud_gc },
 			{ NULL, NULL },
 		};
 
@@ -120,7 +120,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 #endif
 	}
 
-	void handle_lud_push(lua::state* ls, jass::jhandle_t value)
+	void jhandle_lud_push(lua::state* ls, jass::jhandle_t value)
 	{
 		if (!value)
 		{
@@ -130,30 +130,30 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return ls->pushlightuserdata((void*)value);
 	}
 
-	jass::jhandle_t handle_lud_read(lua::state* ls, int index)
+	jass::jhandle_t jhandle_lud_read(lua::state* ls, int index)
 	{
 		return (jass::jhandle_t)ls->touserdata(index);
 	}
 
-	int handle_lud_eq(lua_State *L)
+	int jhandle_lud_eq(lua_State *L)
 	{
 		lua::state* ls = (lua::state*)L;
-		jass::jhandle_t a = (jass::jhandle_t)handle_lud_read(ls, 1);
-		jass::jhandle_t b = (jass::jhandle_t)handle_lud_read(ls, 2);
+		jass::jhandle_t a = jhandle_lud_read(ls, 1);
+		jass::jhandle_t b = jhandle_lud_read(ls, 2);
 		ls->pushboolean(a == b);
 		return 1;
 	}
 
-	int handle_lud_tostring(lua_State *L)
+	int jhandle_lud_tostring(lua_State *L)
 	{
-		return handle_tostring(L, (jass::jhandle_t)handle_lud_read((lua::state*)L, 1));
+		return jhandle_tostring(L, jhandle_lud_read((lua::state*)L, 1));
 	}
 
-	void handle_lud_make_mt(lua_State *L)
+	void jhandle_lud_make_mt(lua_State *L)
 	{
 		luaL_Reg lib[] = {
-			{ "__eq",       handle_lud_eq },
-			{ "__tostring", handle_lud_tostring },
+			{ "__eq",       jhandle_lud_eq },
+			{ "__tostring", jhandle_lud_tostring },
 			{ NULL, NULL },
 		};
 	
@@ -173,12 +173,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		else if (2 == runtime::handle_level)
 		{
 			// userdata
-			return handle_ud_read(this, index);
+			return jhandle_ud_read(this, index);
 		}
 		else
 		{
 			// lightuserdata
-			return handle_lud_read(this, index);
+			return jhandle_lud_read(this, index);
 		}
 	}
 
@@ -192,12 +192,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		else if (2 == runtime::handle_level)
 		{
 			// userdata
-			return handle_ud_push(this, value);
+			return jhandle_ud_push(this, value);
 		}
 		else
 		{
 			// lightuserdata
-			return handle_lud_push(this, value);
+			return jhandle_lud_push(this, value);
 		}
 	}
 }}}

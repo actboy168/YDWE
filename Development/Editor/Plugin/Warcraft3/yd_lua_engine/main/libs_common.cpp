@@ -263,7 +263,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				case jass::OPCODE_VARIABLE_STRING_ARRAY:
 				case jass::OPCODE_VARIABLE_HANDLE_ARRAY:
 				case jass::OPCODE_VARIABLE_BOOLEAN_ARRAY:
-					return array_create(lj->self(), (uintptr_t)gv.ptr());
+					return jarray_create(lj->self(), (uintptr_t)gv.ptr());
 				default:
 					lj->pushnil();
 					return 1;

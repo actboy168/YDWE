@@ -80,9 +80,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		register_preload_lib(ls, "jass.slk",     jass_slk);
 
 		jreal_make_mt(ls->self());
-		handle_ud_make_mt(ls->self());
-		handle_lud_make_mt(ls->self());
-		array_make_mt(ls->self());
+		jhandle_ud_make_mt(ls->self());
+		jhandle_lud_make_mt(ls->self());
+		jarray_make_mt(ls->self());
 
 		insert_searchers_table(ls);
 		fix_math(ls);
