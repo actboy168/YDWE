@@ -108,7 +108,7 @@ local function lua_test()
 
 	if ok then
 		log.trace("Execute code: " .. script_string)
-		local code = loadstring(script_string)
+		local code = load(script_string)
 		if code then
 			local ok, result = pcall(code)
 			if ok then
