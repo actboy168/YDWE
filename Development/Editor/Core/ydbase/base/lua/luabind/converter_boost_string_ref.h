@@ -17,7 +17,7 @@ namespace luabind
 
 		boost::string_ref from(lua_State* L, int index)
 		{
-			return boost::string_ref(lua_tostring(L, index), lua_strlen(L, index));
+			return boost::string_ref(lua_tostring(L, index), lua_rawlen(L, index));
 		}
 
 		void to(lua_State* L, boost::string_ref const& value)
