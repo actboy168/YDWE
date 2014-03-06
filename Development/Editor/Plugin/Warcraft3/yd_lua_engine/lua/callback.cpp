@@ -17,48 +17,59 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return ml;
 	}
 
-	void error_function(lua::state* ls, int error_handle)
+	void error_function(lua::state* ls, bool err_func)
 	{
-		if (error_handle == 0)
+		if (err_func)
 		{
-			printf("Error: %s\n", ls->tostring(-1));
-			ls->pop(1);
+			runtime::get_err_function(ls);
+			if (ls->isfunction(-1))
+			{
+				ls->pushvalue(-2);
+				safe_call(ls, 1, 0, false);
+				ls->pop(2);
+				return;
+			}
+			else
+			{
+				ls->pop(1);
+			}
 		}
-		else
-		{
-			runtime::get_function(error_handle, ls->self());
-			ls->pushvalue(-2);
-			safe_call(ls, 1, 0, 0);
-			ls->pop(2);
-		}
+
+		printf("Error: %s\n", ls->tostring(-1));
+		ls->pop(1);
 	}
 
-	int safe_call_not_sleep(lua::state* ls, int nargs, int nresults, int error_handle)
+	int safe_call_not_sleep(lua::state* ls, int nargs, int nresults, bool err_func)
 	{
-		if (error_handle != 0)
+		if (err_func)
 		{
-			runtime::get_function(error_handle, ls->self());
-			ls->insert(1);
-			int error = lua_pcall(ls->self(), nargs, nresults, 1);
-			ls->remove(1);
-			return error;
-		}
-		else
-		{
-			int error = lua_pcall(ls->self(), nargs, nresults, 0);
-			switch (error)
+			runtime::get_err_function(ls);
+			if (ls->isfunction(-1))
 			{
-			case LUA_OK:
-				break;
-			case LUA_YIELD:
-				assert("lua_pcall return LUA_YIELD" || false);
-				break;
-			default:
-				error_function(ls, error_handle);
-				break;
+				ls->insert(1);
+				int error = lua_pcall(ls->self(), nargs, nresults, 1);
+				ls->remove(1);
+				return error;
 			}
-			return error;
+			else
+			{
+				ls->pop(1);
+			}
 		}
+
+		int error = lua_pcall(ls->self(), nargs, nresults, 0);
+		switch (error)
+		{
+		case LUA_OK:
+			break;
+		case LUA_YIELD:
+			assert("lua_pcall return LUA_YIELD" || false);
+			break;
+		default:
+			error_function(ls, false);
+			break;
+		}
+		return error;
 	}
 
 	int safe_resume(lua::state* thread, lua::state* ls, int nargs, int& nresults)
@@ -94,7 +105,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
-	int safe_call_has_sleep(lua::state* ls, int nargs, int /*nresults*/, int error_handle)
+	int safe_call_has_sleep(lua::state* ls, int nargs, int /*nresults*/, bool err_func)
 	{
 		int func_idx = ls->gettop() - nargs;
 		runtime::thread_create(ls, func_idx);
@@ -114,7 +125,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			runtime::thread_save(ls, func_idx, thread_idx);
 			break;
 		default:
-			error_function(ls, error_handle);
+			error_function(ls, err_func);
 			break;
 		}
 
@@ -122,15 +133,15 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return error;
 	}
 
-	int safe_call(lua::state* ls, int nargs, int nresults, int error_handle)
+	int safe_call(lua::state* ls, int nargs, int nresults, bool err_func)
 	{
 		if (runtime::sleep)
 		{
-			return safe_call_has_sleep(ls, nargs, nresults, error_handle);
+			return safe_call_has_sleep(ls, nargs, nresults, err_func);
 		}
 		else
 		{
-			return safe_call_not_sleep(ls, nargs, nresults, error_handle);
+			return safe_call_not_sleep(ls, nargs, nresults, err_func);
 		}
 	}
 
@@ -141,13 +152,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		if (!ls->isfunction(-1))
 		{
 			ls->pushstring("safe_call attempt to call (not a function)\n");
-			error_function(ls, runtime::error_handle);
+			error_function(ls, true);
 			ls->pop(1);
 			return false;
 		}
 		ls->insert(base);
 
-		if (safe_call(ls, nargs, (result_vt != jass::TYPE_NOTHING) ? 1 : 0, runtime::error_handle) != LUA_OK)
+		if (safe_call(ls, nargs, (result_vt != jass::TYPE_NOTHING) ? 1 : 0, true) != LUA_OK)
 		{
 			return 0;
 		}

@@ -8,7 +8,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	namespace runtime
 	{
 		int  version = 2;
-		int  error_handle = 0;
 		int  handle_level = 2;
 		bool console = false;
 		bool sleep = true;
@@ -20,7 +19,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		void initialize()
 		{
-			error_handle = 0;
 			handle_level = 2;
 			console = false;
 			sleep = true;
@@ -31,32 +29,20 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			callback_table = 0;
 		}
 
-		void set_function(int& result, lua_State* L, int index)
+		int set_err_function(lua::state* ls, int index)
 		{
-			if (lua_isfunction(L, index))
+			if (ls->isfunction(index) || ls->isnil(index))
 			{
-				if (result != 0)
-				{
-					luaL_unref(L, LUA_REGISTRYINDEX, result);
-				}
-
-				lua_pushvalue(L, index);
-				result = luaL_ref(L, LUA_REGISTRYINDEX);
+				ls->pushvalue(index);
+				ls->setfield(LUA_REGISTRYINDEX, "_JASS_ERROR_HANDLE");
 			}
-			else if (lua_isnil(L, index))
-			{
-				if (result != 0)
-				{
-					luaL_unref(L, LUA_REGISTRYINDEX, result);
-				}
-
-				result = 0;
-			}
+			return 0;
 		}
 
-		void get_function(int result, lua_State* L)
+		int get_err_function(lua::state* ls)
 		{
-			lua_rawgeti(L, LUA_REGISTRYINDEX, result);
+			ls->getfield(LUA_REGISTRYINDEX, "_JASS_ERROR_HANDLE");
+			return 1;
 		}
 
 		int thread_get_table(lua::state* ls)
@@ -195,7 +181,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		if (strcmp("error_handle", name) == 0)
 		{
-			runtime::set_function(runtime::error_handle, ls->self(), 3);
+			runtime::set_err_function(ls, 3);
 		}
 		else if (strcmp("handle_level", name) == 0)
 		{
@@ -238,8 +224,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		else if (strcmp("error_handle", name) == 0)
 		{
-			runtime::get_function(runtime::error_handle, ls->self());
-			return 1;
+			return runtime::get_err_function(ls);
 		}
 		else if (strcmp("handle_level", name) == 0)
 		{
