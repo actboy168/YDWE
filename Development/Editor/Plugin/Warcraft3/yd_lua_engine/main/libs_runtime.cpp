@@ -13,20 +13,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		bool sleep = true;
 		bool catch_crash = true;
 
-		int  handle_ud_table = 0;
-		int  thread_table = 0;
-		int  callback_table = 0;
-
 		void initialize()
 		{
 			handle_level = 2;
 			console = false;
 			sleep = true;
 			catch_crash = true;
-
-			handle_ud_table = 0;
-			thread_table = 0;
-			callback_table = 0;
 		}
 
 		int set_err_function(lua::state* ls, int index)
@@ -45,11 +37,14 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
-		int thread_get_table(lua::state* ls)
+		int get_global_table(lua::state* ls, const char* name, bool weak)
 		{
-			if (runtime::thread_table == 0)
+			ls->getfield(LUA_REGISTRYINDEX, name);
+			if (!ls->istable(-1))
 			{
+				ls->pop(1);
 				ls->newtable();
+				if (weak)
 				{
 					ls->newtable();
 					{
@@ -59,10 +54,15 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 					}
 					ls->setmetatable(-2);
 				}
-				runtime::thread_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
+				ls->pushvalue(-1);
+				ls->setfield(LUA_REGISTRYINDEX, name);
 			}
-			lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::thread_table);
 			return 1;
+		}
+
+		int thread_get_table(lua::state* ls)
+		{
+			return get_global_table(ls, "_JASS_THREAD_TABLE", true);
 		}
 
 		int thread_create(lua::state* ls, int index)
@@ -97,33 +97,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		int handle_ud_get_table(lua::state* ls)
 		{
-			if (runtime::handle_ud_table == 0)
-			{
-				ls->newtable();
-				{
-					ls->newtable();
-					{
-						ls->pushstring("__mode");
-						ls->pushstring("kv");
-						ls->rawset(-3);
-					}
-					ls->setmetatable(-2);
-				}
-				runtime::handle_ud_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
-			}
-			lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::handle_ud_table);
-			return 1;
+			return get_global_table(ls, "_JASS_HANDLE_UD_TABLE", true);
 		}
 
 		int callback_get_table(lua::state* ls)
 		{
-			if (runtime::callback_table == 0)
-			{
-				ls->newtable();
-				runtime::callback_table = luaL_ref(ls->self(), LUA_REGISTRYINDEX);
-			}
-			lua_rawgeti(ls->self(), LUA_REGISTRYINDEX, runtime::callback_table);
-			return 1;
+			return get_global_table(ls, "_JASS_CALLBACK_TABLE", false);
 		}
 
 		int callback_push(lua::state* ls, int idx)
