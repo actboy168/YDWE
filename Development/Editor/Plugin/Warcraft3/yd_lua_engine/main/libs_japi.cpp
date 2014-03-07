@@ -2,29 +2,50 @@
 #include "../lua/jassbind.h"
 #include <base/util/console.h>
 #include <base/warcraft3/jass/func_value.h>
+#include <base/lua/make_range.h>
 #include <map>
 #include <string>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
-
 	int jass_call_closure(lua_State* L);
+}}}
 
-	int japi_get(lua_State* L)
+namespace base { namespace lua {
+	template <>
+	int convert_to_lua(state* ls, const warcraft3::jass::func_value& v)
 	{
-		jassbind* lj = (jassbind*)L;
+		ls->pushunsigned((uint32_t)(uintptr_t)&v);
+		ls->pushcclosure((lua::state::cfunction)warcraft3::lua_engine::jass_call_closure, 1);
+		return 1;
+	}
+}}
 
-		const char* name = lj->tostring(2);
+namespace base { namespace warcraft3 { namespace lua_engine {
+
+	int japi_index(lua::state* ls)
+	{
+		const char* name = ls->tostring(2);
 
 		jass::func_value const* nf = jass::japi_func(name);
 		if (nf)
 		{
-			lj->pushunsigned((uint32_t)(uintptr_t)nf);
-			lj->pushcclosure((lua::state::cfunction)jass_call_closure, 1);
+			ls->pushunsigned((uint32_t)(uintptr_t)nf);
+			ls->pushcclosure((lua::state::cfunction)jass_call_closure, 1);
 			return 1;
 		}
 
-		lj->pushnil();
+		ls->pushnil();
 		return 1;
+	}
+
+	int japi_newindex(lua::state* /*ls*/)
+	{
+		return 0;
+	}
+
+	int japi_pairs(lua::state* ls)
+	{
+		return lua::make_range(ls, jass::japi_function);
 	}
 
 	int jass_japi(lua::state* ls)
@@ -34,7 +55,15 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			ls->newtable();
 			{
 				ls->pushstring("__index");
-				ls->pushcclosure((lua::state::cfunction)japi_get, 0);
+				ls->pushcclosure(japi_index, 0);
+				ls->rawset(-3);
+
+				ls->pushstring("__newindex");
+				ls->pushcclosure(japi_newindex, 0);
+				ls->rawset(-3);
+
+				ls->pushstring("__pairs");
+				ls->pushcclosure(japi_pairs, 0);
 				ls->rawset(-3);
 			}
 			ls->setmetatable(-2);

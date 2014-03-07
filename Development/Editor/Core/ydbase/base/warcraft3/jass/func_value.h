@@ -3,9 +3,9 @@
 #include <base/config.h>
 #include <cstdint>
 #include <vector>
+#include <unordered_map>
 
-namespace base { 
-namespace warcraft3 { namespace jass {
+namespace base { namespace warcraft3 { namespace jass {
 
 	enum variable_type
 	{
@@ -49,10 +49,12 @@ namespace warcraft3 { namespace jass {
 		uintptr_t                  address_;
 	};
 
+	typedef std::unordered_map<std::string, func_value> func_mapping;
+	_BASE_API extern func_mapping japi_function;
+
 	_BASE_API func_value const* jass_func(const char* proc_name);
 	_BASE_API func_value const* japi_func(const char* proc_name);
 	/*_BASE_API*/ bool japi_func_add(const char* proc_name, uintptr_t new_proc);
 	/*_BASE_API*/ bool japi_func_add(const char* proc_name, uintptr_t new_proc, const char* param);
 	/*_BASE_API*/ bool japi_func_remove(const char* proc_name);
-}}
-}
+}}}

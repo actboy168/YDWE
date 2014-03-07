@@ -3,10 +3,7 @@
 #include <base/config.h>
 #include <base/lua/state.h>
 
-namespace base { 
-
-namespace lua
-{
+namespace base { namespace lua {
 	template <class T>
 	int convert_to_lua(state* ls, const T& v);
 
@@ -64,6 +61,12 @@ namespace lua
 	{
 		return make_range(ls, std::begin(container), std::end(container));
 	}
-}
 
-}
+	template <class F, class S>
+	int convert_to_lua(state* ls, const std::pair<F, S>& v)
+	{
+		convert_to_lua(ls, v.first);
+		convert_to_lua(ls, v.second);
+		return 2;
+	}
+}}

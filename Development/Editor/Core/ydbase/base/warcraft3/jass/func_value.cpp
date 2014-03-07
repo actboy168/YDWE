@@ -5,8 +5,7 @@
 #include <map>
 #include <string>
 
-namespace base { 
-namespace warcraft3 { namespace jass {
+namespace base { namespace warcraft3 { namespace jass {
 
 	namespace detail {
 
@@ -55,6 +54,22 @@ namespace warcraft3 { namespace jass {
 			}
 		};
 #pragma pack(pop)
+
+		func_mapping initialize_mapping_from_register()
+		{
+			func_mapping m;
+
+			uintptr_t ptr_Deg2Rad = get_war3_searcher().search_string("Deg2Rad");
+			if (ptr_Deg2Rad)
+			{
+				for (asm_register_native_function* ptr = (asm_register_native_function*)(ptr_Deg2Rad - 6); ptr->verify(); ++ptr)
+				{
+					m.insert(std::make_pair(ptr->get_name(), func_value(ptr->get_param(), ptr->get_address())));
+				}
+			}
+
+			return std::move(m);
+		}
 	}
 
 	func_value::func_value()
@@ -127,32 +142,9 @@ namespace warcraft3 { namespace jass {
 		return jass::call(address_, param_list, param_.size());
 	}
 
-	class mapping : public std::map<std::string, func_value>
-	{
-	public:
-		mapping()
-		{ }
-
-		static mapping initialize_from_register()
-		{
-			mapping m;
-
-			uintptr_t ptr_Deg2Rad = get_war3_searcher().search_string("Deg2Rad");
-			if (ptr_Deg2Rad)
-			{
-				for (detail::asm_register_native_function* ptr = (detail::asm_register_native_function*)(ptr_Deg2Rad - 6); ptr->verify(); ++ptr)
-				{
-					m.insert(std::make_pair(ptr->get_name(), func_value(ptr->get_param(), ptr->get_address())));
-				}
-			}
-
-			return std::move(m);
-		}
-	};
-
 	func_value const* jass_func(const char* proc_name)
 	{
-		static mapping m = mapping::initialize_from_register();
+		static func_mapping m = detail::initialize_mapping_from_register();
 
 		if (!proc_name)
 		{
@@ -168,7 +160,7 @@ namespace warcraft3 { namespace jass {
 		return nullptr;
 	}
 
-	static mapping japi_mapping;
+	func_mapping japi_function;
 
 	func_value const* japi_func(const char* proc_name)
 	{
@@ -177,8 +169,8 @@ namespace warcraft3 { namespace jass {
 			return nullptr;
 		}
 
-		auto it = japi_mapping.find(proc_name);
-		if (it != japi_mapping.end() && it->second.is_valid())
+		auto it = japi_function.find(proc_name);
+		if (it != japi_function.end() && it->second.is_valid())
 		{
 			return &(it->second);
 		}
@@ -194,24 +186,23 @@ namespace warcraft3 { namespace jass {
 			return false;
 		}
 
-		return japi_mapping.insert(std::make_pair(proc_name, func_value(*nf, new_proc))).second;
+		return japi_function.insert(std::make_pair(proc_name, func_value(*nf, new_proc))).second;
 	}
 
 	bool japi_func_add(const char* proc_name, uintptr_t new_proc, const char* param)
 	{
-		return japi_mapping.insert(std::make_pair(proc_name, func_value(param, new_proc))).second;
+		return japi_function.insert(std::make_pair(proc_name, func_value(param, new_proc))).second;
 	}
 
 	bool japi_func_remove(const char* proc_name)
 	{
-		auto it = japi_mapping.find(proc_name);
-		if (it != japi_mapping.end())
+		auto it = japi_function.find(proc_name);
+		if (it != japi_function.end())
 		{
-			japi_mapping.erase(it);
+			japi_function.erase(it);
 			return true;
 		}
 
 		return false;
 	}
-}}
-}
+}}}

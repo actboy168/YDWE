@@ -90,14 +90,6 @@ namespace lua
 			);
 		return 1;
 	}
-
-	template <class F, class S>
-	int convert_to_lua(state* ls, const std::pair<F, S>& v)
-	{
-		convert_to_lua(ls, v.first);
-		convert_to_lua(ls, v.second);
-		return 2;
-	}
 }
 
 namespace warcraft3 { namespace lua_engine {
