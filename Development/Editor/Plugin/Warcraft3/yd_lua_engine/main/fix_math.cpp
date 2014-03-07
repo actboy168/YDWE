@@ -1,11 +1,10 @@
 #include "../main/open_lua_engine.h"
 #include "../lua/callback.h"
 #include "../lua/helper.h"
+#include "common.h"
 #include <base/warcraft3/jass.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
-
-	bool is_gaming();
 
 	int fix_math_random(lua::state* ls)
 	{

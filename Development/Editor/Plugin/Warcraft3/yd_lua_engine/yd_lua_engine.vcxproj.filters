@@ -65,6 +65,9 @@
     <ClCompile Include="main\open_lua_engine.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
+    <ClCompile Include="main\common.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua\callback.h">
@@ -98,6 +101,9 @@
       <Filter>bind\main</Filter>
     </ClInclude>
     <ClInclude Include="main\open_lua_engine.h">
+      <Filter>bind\main</Filter>
+    </ClInclude>
+    <ClInclude Include="main\common.h">
       <Filter>bind\main</Filter>
     </ClInclude>
   </ItemGroup>

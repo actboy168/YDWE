@@ -1,13 +1,12 @@
 #include "../lua/callback.h"
 #include "../lua/jassbind.h"
 #include "../main/libs_runtime.h"
+#include "../main/common.h"
 #include <base/warcraft3/jass/trampoline_function.h>
 #include <Windows.h>
 #include <cassert>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
-
-	uintptr_t jass_read(jassbind* lj, jass::variable_type vt, int idx);
 
 	lua::state* get_mainthread(lua::state* thread)
 	{

@@ -11,16 +11,13 @@
 #include "../lua/jassbind.h"
 #include "../lua/callback.h"
 #include "libs_runtime.h"
+#include "common.h"
 
 #define CACHE_ALIGN __declspec(align(32))
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	bool jass_push(jassbind* lj, jass::variable_type vt, uint32_t value);
-	int  jass_call_native_function(jassbind* lj, const jass::func_value* nf, uintptr_t func_address = 0);
 	int  jass_hook_real_function(lua_State* L);
-	void install_on_trigger_event(jassbind* lj);
-
 
 	template <class T>
 	struct aligned_delete

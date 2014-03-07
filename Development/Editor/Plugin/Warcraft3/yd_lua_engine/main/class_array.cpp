@@ -1,13 +1,13 @@
 #include "class_array.h"
 #include "../lua/helper.h"
 #include "../lua/jassbind.h"
+#include "common.h"
 #include <base/warcraft3/jass/global_variable.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
 #define LUA_JASS_ARRAY "jarray_t"
 
-	uintptr_t jass_read(jassbind* lj, jass::variable_type opt, int idx);
 	void jass_get_global_variable(jassbind* lj, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value);
 
 	jass::global_variable jarray_value(jassbind* lj)

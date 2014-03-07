@@ -1,24 +1,22 @@
 #include "../lua/helper.h"
 #include "../lua/jassbind.h"
-#include <base/util/console.h>
+#include "common.h"
 #include <base/warcraft3/jass/func_value.h>
 #include <base/lua/make_range.h>
 #include <map>
 #include <string>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
-	int jass_call_closure(lua_State* L);
-}}}
-
-namespace base { namespace lua {
-	template <>
-	int convert_to_lua(state* ls, const warcraft3::jass::func_value& v)
-	{
-		ls->pushunsigned((uint32_t)(uintptr_t)&v);
-		ls->pushcclosure((lua::state::cfunction)warcraft3::lua_engine::jass_call_closure, 1);
-		return 1;
+namespace base {
+	namespace lua {
+		template <>
+		inline int convert_to_lua(state* ls, const warcraft3::jass::func_value& v)
+		{
+			ls->pushunsigned((uint32_t)(uintptr_t)&v);
+			ls->pushcclosure((lua::state::cfunction)warcraft3::lua_engine::jass_call_closure, 1);
+			return 1;
+		}
 	}
-}}
+}
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
