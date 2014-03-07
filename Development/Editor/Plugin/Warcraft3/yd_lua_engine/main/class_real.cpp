@@ -1,6 +1,6 @@
 #include "class_real.h"
-#include "../lua/helper.h"
-#include "../lua/jassbind.h"
+#include "helper.h"
+#include "jassbind.h"
 #include <base/util/format.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {

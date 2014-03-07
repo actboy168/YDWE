@@ -1,6 +1,6 @@
-#include "../lua/jassbind.h"
-#include "../main/class_real.h"
-#include "../lua/callback.h"
+#include "jassbind.h"
+#include "class_real.h"
+#include "callback.h"
 #include <base/warcraft3/hashtable.h>
 #include <cstdint>
 

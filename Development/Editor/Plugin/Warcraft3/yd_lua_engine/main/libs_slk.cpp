@@ -1,10 +1,10 @@
-#include "../lua/helper.h"
+#include "helper.h"
 #include <base/util/do_once.h>
 #include <base/util/string_view.h>
 #include <base/warcraft3/event.h>
 #include <base/lua/make_range.h>
 #include <slk/ObjectManager.hpp>
-#include "../misc/slk_interface_storm.h"
+#include "slk_interface_storm.h"
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 

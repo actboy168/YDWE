@@ -1,6 +1,6 @@
 #include "class_array.h"
-#include "../lua/helper.h"
-#include "../lua/jassbind.h"
+#include "helper.h"
+#include "jassbind.h"
 #include "common.h"
 #include <base/warcraft3/jass/global_variable.h>
 

@@ -1,6 +1,6 @@
-#include "../main/open_lua_engine.h"
-#include "../lua/callback.h"
-#include "../lua/helper.h"
+#include "open_lua_engine.h"
+#include "callback.h"
+#include "helper.h"
 #include "common.h"
 #include <base/warcraft3/jass.h>
 

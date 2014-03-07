@@ -1,7 +1,7 @@
-#include "../lua/callback.h"
-#include "../lua/jassbind.h"
-#include "../main/libs_runtime.h"
-#include "../main/common.h"
+#include "callback.h"
+#include "jassbind.h"
+#include "libs_runtime.h"
+#include "common.h"
 #include <base/warcraft3/jass/trampoline_function.h>
 #include <Windows.h>
 #include <cassert>

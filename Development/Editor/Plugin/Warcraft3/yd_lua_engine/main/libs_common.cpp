@@ -1,4 +1,4 @@
-#include "../lua/jassbind.h"
+#include "jassbind.h"
 #include "class_array.h"
 #include "libs_runtime.h"
 #include "common.h"

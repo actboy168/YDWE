@@ -1,5 +1,5 @@
-#include "../lua/helper.h"
-#include "../lua/jassbind.h"
+#include "helper.h"
+#include "jassbind.h"
 #include <base/warcraft3/jass/func_value.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {

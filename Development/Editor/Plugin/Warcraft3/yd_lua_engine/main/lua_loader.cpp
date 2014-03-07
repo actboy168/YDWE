@@ -1,8 +1,8 @@
-#include "../lua/callback.h"
-#include "../lua/helper.h"
-#include "../main/lua_loader.h"
-#include "../misc/storm.h"
-#include "../main/open_lua_engine.h"
+#include "callback.h"
+#include "helper.h"
+#include "lua_loader.h"
+#include "storm.h"
+#include "open_lua_engine.h"
 #include "libs_runtime.h"
 #include <base/lua/state.h>
 #include <base/warcraft3/event.h>

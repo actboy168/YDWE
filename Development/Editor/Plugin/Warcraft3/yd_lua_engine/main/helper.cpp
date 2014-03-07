@@ -1,5 +1,5 @@
-#include "../lua/helper.h"
-#include "../misc/storm.h"
+#include "helper.h"
+#include "storm.h"
 #include <cstring>
 #include <base/util/singleton.h>
 #include <base/warcraft3/jass.h>

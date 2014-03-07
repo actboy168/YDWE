@@ -8,8 +8,8 @@
 #include <base/warcraft3/jass/func_value.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/warcraft3/war3_searcher.h>
-#include "../lua/jassbind.h"
-#include "../lua/callback.h"
+#include "jassbind.h"
+#include "callback.h"
 #include "libs_runtime.h"
 #include "common.h"
 
