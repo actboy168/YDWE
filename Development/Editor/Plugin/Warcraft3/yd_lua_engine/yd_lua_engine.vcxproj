@@ -87,13 +87,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="lua\helper.cpp" />
-    <ClCompile Include="lua\jassbind.cpp" />
-    <ClCompile Include="lua\callback.cpp" />
+    <ClCompile Include="main\callback.cpp" />
     <ClCompile Include="main\class_array.cpp" />
     <ClCompile Include="main\class_handle.cpp" />
     <ClCompile Include="main\class_real.cpp" />
     <ClCompile Include="main\fix_math.cpp" />
+    <ClCompile Include="main\helper.cpp" />
+    <ClCompile Include="main\jassbind.cpp" />
     <ClCompile Include="main\libs_common.cpp" />
     <ClCompile Include="main\libs_hook.cpp" />
     <ClCompile Include="main\libs_japi.cpp" />
@@ -102,24 +102,24 @@
     <ClCompile Include="main\lua_loader.cpp" />
     <ClCompile Include="main\open_lua_engine.cpp" />
     <ClCompile Include="main\common.cpp" />
-    <ClCompile Include="misc\storm.cpp" />
+    <ClCompile Include="main\storm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="yd_lua_engine.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lua\helper.h" />
-    <ClInclude Include="lua\jassbind.h" />
-    <ClInclude Include="lua\callback.h" />
+    <ClInclude Include="main\callback.h" />
     <ClInclude Include="main\class_array.h" />
     <ClInclude Include="main\class_handle.h" />
     <ClInclude Include="main\class_real.h" />
     <ClInclude Include="main\common.h" />
+    <ClInclude Include="main\helper.h" />
+    <ClInclude Include="main\jassbind.h" />
     <ClInclude Include="main\libs_runtime.h" />
     <ClInclude Include="main\lua_loader.h" />
     <ClInclude Include="main\open_lua_engine.h" />
-    <ClInclude Include="misc\slk_interface_storm.h" />
-    <ClInclude Include="misc\storm.h" />
+    <ClInclude Include="main\slk_interface_storm.h" />
+    <ClInclude Include="main\storm.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(YDWE)\Editor\Core\ydbase\ydbase.vcxproj">
