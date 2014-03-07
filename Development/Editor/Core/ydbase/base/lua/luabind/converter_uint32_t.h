@@ -17,7 +17,7 @@ namespace luabind
 
 		uint32_t from(lua_State* L, int index)
 		{
-			return luaL_checkunsigned(L, index);
+			return 0xFFFFFFFF & luaL_checkunsigned(L, index);
 		}
 
 		void to(lua_State* L, uint32_t const& value)
