@@ -7,9 +7,6 @@
     <Filter Include="Resource Files">
       <UniqueIdentifier>{6f78e772-33da-4e0e-bc51-84b6af6f46d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="bind\lua">
-      <UniqueIdentifier>{20cd4830-b3ea-486c-a046-88532184884d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="bind\misc">
       <UniqueIdentifier>{a7c4e92a-b015-446f-8994-c017c1d15c35}</UniqueIdentifier>
     </Filter>
@@ -17,34 +14,16 @@
       <UniqueIdentifier>{F5DAD6D0-9FF8-11E2-B745-232E312CC9AE}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="bind\library">
+      <UniqueIdentifier>{44be37c9-e7b9-41f5-9f41-3b70173f2561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bind\class">
+      <UniqueIdentifier>{aee90470-d9bf-4dff-9e10-8f4b3519fde6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="main\class_array.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\class_handle.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\class_real.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
     <ClCompile Include="main\fix_math.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\libs_common.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\libs_hook.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\libs_japi.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\libs_runtime.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\libs_slk.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
     <ClCompile Include="main\lua_loader.cpp">
@@ -53,58 +32,82 @@
     <ClCompile Include="main\open_lua_engine.cpp">
       <Filter>bind\main</Filter>
     </ClCompile>
-    <ClCompile Include="main\common.cpp">
-      <Filter>bind\main</Filter>
-    </ClCompile>
-    <ClCompile Include="main\callback.cpp">
-      <Filter>bind\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="main\helper.cpp">
-      <Filter>bind\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="main\jassbind.cpp">
-      <Filter>bind\lua</Filter>
-    </ClCompile>
     <ClCompile Include="main\storm.cpp">
       <Filter>bind\misc</Filter>
     </ClCompile>
+    <ClCompile Include="main\libs_common.cpp">
+      <Filter>bind\library</Filter>
+    </ClCompile>
+    <ClCompile Include="main\libs_hook.cpp">
+      <Filter>bind\library</Filter>
+    </ClCompile>
+    <ClCompile Include="main\libs_japi.cpp">
+      <Filter>bind\library</Filter>
+    </ClCompile>
+    <ClCompile Include="main\libs_runtime.cpp">
+      <Filter>bind\library</Filter>
+    </ClCompile>
+    <ClCompile Include="main\libs_slk.cpp">
+      <Filter>bind\library</Filter>
+    </ClCompile>
+    <ClCompile Include="main\common.cpp">
+      <Filter>bind\library</Filter>
+    </ClCompile>
+    <ClCompile Include="main\class_array.cpp">
+      <Filter>bind\class</Filter>
+    </ClCompile>
+    <ClCompile Include="main\class_handle.cpp">
+      <Filter>bind\class</Filter>
+    </ClCompile>
+    <ClCompile Include="main\class_real.cpp">
+      <Filter>bind\class</Filter>
+    </ClCompile>
+    <ClCompile Include="main\callback.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
+    <ClCompile Include="main\helper.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
+    <ClCompile Include="main\jassbind.cpp">
+      <Filter>bind\main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main\class_array.h">
-      <Filter>bind\main</Filter>
-    </ClInclude>
-    <ClInclude Include="main\class_handle.h">
-      <Filter>bind\main</Filter>
-    </ClInclude>
-    <ClInclude Include="main\class_real.h">
-      <Filter>bind\main</Filter>
-    </ClInclude>
-    <ClInclude Include="main\libs_runtime.h">
-      <Filter>bind\main</Filter>
-    </ClInclude>
     <ClInclude Include="main\lua_loader.h">
       <Filter>bind\main</Filter>
     </ClInclude>
     <ClInclude Include="main\open_lua_engine.h">
       <Filter>bind\main</Filter>
     </ClInclude>
-    <ClInclude Include="main\common.h">
-      <Filter>bind\main</Filter>
-    </ClInclude>
-    <ClInclude Include="main\callback.h">
-      <Filter>bind\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="main\helper.h">
-      <Filter>bind\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="main\jassbind.h">
-      <Filter>bind\lua</Filter>
-    </ClInclude>
     <ClInclude Include="main\storm.h">
       <Filter>bind\misc</Filter>
     </ClInclude>
     <ClInclude Include="main\slk_interface_storm.h">
       <Filter>bind\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="main\libs_runtime.h">
+      <Filter>bind\library</Filter>
+    </ClInclude>
+    <ClInclude Include="main\common.h">
+      <Filter>bind\library</Filter>
+    </ClInclude>
+    <ClInclude Include="main\class_array.h">
+      <Filter>bind\class</Filter>
+    </ClInclude>
+    <ClInclude Include="main\class_handle.h">
+      <Filter>bind\class</Filter>
+    </ClInclude>
+    <ClInclude Include="main\class_real.h">
+      <Filter>bind\class</Filter>
+    </ClInclude>
+    <ClInclude Include="main\callback.h">
+      <Filter>bind\main</Filter>
+    </ClInclude>
+    <ClInclude Include="main\helper.h">
+      <Filter>bind\main</Filter>
+    </ClInclude>
+    <ClInclude Include="main\jassbind.h">
+      <Filter>bind\main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
