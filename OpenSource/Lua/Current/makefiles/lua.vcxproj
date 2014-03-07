@@ -85,7 +85,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\lua.c" />
-    <ClCompile Include="..\src\luabind.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="luabind.vcxproj">

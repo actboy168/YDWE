@@ -149,3 +149,19 @@ namespace
 
 } // namespace luabind
 
+extern "C" LUABIND_API int luaopen_luabind(lua_State* L)
+{
+	try
+	{
+		luabind::open(L);
+	}
+	catch (std::exception const& e)
+	{
+		return luaL_error(L, "luabind::open exception: %s.", e.what());
+	}
+	catch (...)
+	{
+		return luaL_error(L, "luabind::open unknown exception.");
+	}
+	return 0;
+}
