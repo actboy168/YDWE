@@ -585,8 +585,3 @@ namespace std {
 #undef BASE_CONSTEXPR
 #undef BASE_NOEXCEPT
 #undef BASE_CONSTEXPR_OR_CONST
-
-namespace boost {
-    typedef std::basic_string_view<char,    std::char_traits<char>>    string_ref;
-    typedef std::basic_string_view<wchar_t, std::char_traits<wchar_t>> wstring_ref;
-}

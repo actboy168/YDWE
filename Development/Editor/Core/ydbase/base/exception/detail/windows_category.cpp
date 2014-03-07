@@ -33,7 +33,7 @@ namespace exception_detail
 			return os.str();
 		}
 
-		boost::wstring_ref str(buffer.c_str());
+		std::wstring_view str(buffer.c_str());
 		while (str.size() && ((str.back() == L'\n') || (str.back() == L'\r')))
 		{
 			str.remove_suffix(1);

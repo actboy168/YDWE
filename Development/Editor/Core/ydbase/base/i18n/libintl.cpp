@@ -105,12 +105,12 @@ namespace base { namespace i18n {
 		return manager_s::instance().set_default(domain);
 	}
 
-	boost::string_ref gettext(const char* orig_str)
+	std::string_view gettext(const char* orig_str)
 	{
 		return dgettext(nullptr, orig_str);
 	}
 
-	boost::string_ref dgettext(const char* domain, const char* orig_str)
+	std::string_view dgettext(const char* domain, const char* orig_str)
 	{
 		if (!orig_str)
 		{
@@ -134,7 +134,7 @@ namespace base { namespace i18n {
 			return orig_str;
 		}
 
-		const boost::string_ref* result = mf->get_translated_string(orig_str);
+		const std::string_view* result = mf->get_translated_string(orig_str);
 		if (!result)
 		{
 			return orig_str;

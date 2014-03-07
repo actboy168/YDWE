@@ -19,7 +19,7 @@ namespace slk { namespace reader { namespace utility {
 		}
 	}
 
-	void each_line(buffer_reader& reader, std::function<void(boost::string_ref&)> callback)
+	void each_line(buffer_reader& reader, std::function<void(std::string_view&)> callback)
 	{
 		std::error_code ec;
 		while (!ec)
@@ -33,7 +33,7 @@ namespace slk { namespace reader { namespace utility {
 
 			if (len != 0)
 			{
-				boost::string_ref value(ptr, len);
+				std::string_view value(ptr, len);
 				callback(value);
 			}
 		}

@@ -81,16 +81,16 @@ namespace slk
 	}
 
 	template <typename PredicateT>
-	inline void trim_left(boost::string_ref& Input, PredicateT IsFound)
+	inline void trim_left(std::string_view& Input, PredicateT IsFound)
 	{
-		boost::string_ref::iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
+		std::string_view::iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
 		Input.remove_prefix(std::distance(Input.begin(), TrimBegin));
 	}
 
 	template <typename PredicateT>
-	inline void trim_right(boost::string_ref& Input, PredicateT IsFound)
+	inline void trim_right(std::string_view& Input, PredicateT IsFound)
 	{
-		boost::string_ref::iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
+		std::string_view::iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
 		Input.remove_suffix(std::distance(TrimEnd, Input.end()));
 	}
 
@@ -139,44 +139,44 @@ namespace slk
 	}
 
 	template <typename Iterator>
-	boost::string_ref make_string_ref(Iterator first, Iterator last)
+	std::string_view make_string_ref(Iterator first, Iterator last)
 	{
 		if (first < last)
 		{
-			return boost::string_ref(first, std::distance(first, last));
+			return std::string_view(first, std::distance(first, last));
 		}
 		else
 		{
-			return boost::string_ref();
+			return std::string_view();
 		}
 	}
 	template <typename PredicateT>
-	inline boost::string_ref trim_copy(typename boost::string_ref::const_iterator ItBegin, typename boost::string_ref::const_iterator ItEnd, PredicateT IsFound)
+	inline std::string_view trim_copy(typename std::string_view::const_iterator ItBegin, typename std::string_view::const_iterator ItEnd, PredicateT IsFound)
 	{
-		typename boost::string_ref::const_iterator TrimEnd = detail::find_end(ItBegin, ItEnd, IsFound);
-		typename boost::string_ref::const_iterator TrimBegin = detail::find_begin(ItBegin, TrimEnd, IsFound);
+		typename std::string_view::const_iterator TrimEnd = detail::find_end(ItBegin, ItEnd, IsFound);
+		typename std::string_view::const_iterator TrimBegin = detail::find_begin(ItBegin, TrimEnd, IsFound);
 		return std::move(make_string_ref(TrimBegin, TrimEnd));
 	}
 	template <typename PredicateT>
-	inline boost::string_ref trim_left_copy(boost::string_ref& Input, PredicateT IsFound)
+	inline std::string_view trim_left_copy(std::string_view& Input, PredicateT IsFound)
 	{
-		typename boost::string_ref::const_iterator TrimEnd = Input.end();
-		typename boost::string_ref::const_iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
+		typename std::string_view::const_iterator TrimEnd = Input.end();
+		typename std::string_view::const_iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
 		return std::move(make_string_ref(TrimBegin, TrimEnd));
 	}
 	template <typename PredicateT>
-	inline boost::string_ref trim_right_copy(boost::string_ref& Input, PredicateT IsFound)
+	inline std::string_view trim_right_copy(std::string_view& Input, PredicateT IsFound)
 	{
-		typename boost::string_ref::const_iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
-		typename boost::string_ref::const_iterator TrimBegin = Input.begin();
+		typename std::string_view::const_iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
+		typename std::string_view::const_iterator TrimBegin = Input.begin();
 		return std::move(make_string_ref(TrimBegin, TrimEnd));
 	}
 	template <typename PredicateT>
-	inline boost::string_ref trim_copy(const boost::string_ref& Input, PredicateT IsFound)
+	inline std::string_view trim_copy(const std::string_view& Input, PredicateT IsFound)
 	{
 		return std::move(trim_copy(Input.cbegin(), Input.cend(), IsFound));
 	}
-	inline boost::string_ref trim_copy(boost::string_ref::const_iterator ItBegin, boost::string_ref::const_iterator ItEnd)
+	inline std::string_view trim_copy(std::string_view::const_iterator ItBegin, std::string_view::const_iterator ItEnd)
 	{
 		return std::move(trim_copy(ItBegin, ItEnd, ctype::is_space()));
 	}

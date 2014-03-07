@@ -23,7 +23,7 @@ namespace slk
 		std::string value;
 
 		reader::utility::remove_bom(reader);
-		reader::utility::each_line(reader, [&](boost::string_ref& line)
+		reader::utility::each_line(reader, [&](std::string_view& line)
 		{
 			switch (state)
 			{
@@ -50,7 +50,7 @@ namespace slk
 				break;
 			case WST_READER_STATE::STATE_BODY:
 				{
-					boost::string_ref new_line = trim_left_copy(line, ctype::is_space());
+					std::string_view new_line = trim_left_copy(line, ctype::is_space());
 					if (new_line.empty() || ('}' != new_line[0]))
 					{
 						value.append(line.begin(), line.end());

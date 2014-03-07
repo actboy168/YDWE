@@ -34,12 +34,12 @@ namespace base { namespace util {
 		uint32_t value_;
 	};
 
-	_BASE_API std::wstring u2w(boost::string_ref  const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  w2u(boost::wstring_ref const& from, conv_method how = conv_method::stop);
-	_BASE_API std::wstring a2w(boost::string_ref  const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  w2a(boost::wstring_ref const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  u2a(boost::string_ref  const& from, conv_method how = conv_method::stop);
-	_BASE_API std::string  a2u(boost::string_ref  const& from, conv_method how = conv_method::stop);
+	_BASE_API std::wstring u2w(std::string_view  const& from, conv_method how = conv_method::stop);
+	_BASE_API std::string  w2u(std::wstring_view const& from, conv_method how = conv_method::stop);
+	_BASE_API std::wstring a2w(std::string_view  const& from, conv_method how = conv_method::stop);
+	_BASE_API std::string  w2a(std::wstring_view const& from, conv_method how = conv_method::stop);
+	_BASE_API std::string  u2a(std::string_view  const& from, conv_method how = conv_method::stop);
+	_BASE_API std::string  a2u(std::string_view  const& from, conv_method how = conv_method::stop);
 
 	_BASE_API bool is_utf8(const char *source);
 }}

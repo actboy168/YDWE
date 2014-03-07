@@ -34,32 +34,32 @@ namespace base { namespace util {
 		codecvt<detail::ansi_codecvt_facet> ansi_codecvt;
 	}
 
-	std::wstring u2w(boost::string_ref const& from, conv_method how)
+	std::wstring u2w(std::string_view const& from, conv_method how)
 	{
 		return std::move(detail::convert<char, wchar_t>(from, utf8_codecvt(), how));
 	}
 
-	std::string w2u(boost::wstring_ref const& from, conv_method how)
+	std::string w2u(std::wstring_view const& from, conv_method how)
 	{
 		return std::move(detail::convert<wchar_t, char>(from, utf8_codecvt(), how));
 	}
 
-	std::wstring a2w(boost::string_ref const& from, conv_method how)
+	std::wstring a2w(std::string_view const& from, conv_method how)
 	{
 		return std::move(detail::convert<char, wchar_t>(from, ansi_codecvt(), how));
 	}
 
-	std::string w2a(boost::wstring_ref const& from, conv_method how)
+	std::string w2a(std::wstring_view const& from, conv_method how)
 	{
 		return std::move(detail::convert<wchar_t, char>(from, ansi_codecvt(), how));
 	}
 
-	std::string u2a(boost::string_ref  const& from, conv_method how) 
+	std::string u2a(std::string_view  const& from, conv_method how) 
 	{
 		return std::move(w2a(u2w(from, how), how));
 	}
 
-	std::string a2u(boost::string_ref const& from, conv_method how) 
+	std::string a2u(std::string_view const& from, conv_method how) 
 	{
 		return std::move(w2u(a2w(from, how), how));
 	}

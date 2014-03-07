@@ -33,7 +33,7 @@ namespace slk
 			}
 		}
 
-		object_id(const boost::string_ref& id)
+		object_id(const std::string_view& id)
 		{
 			if (id.size() >= 4)
 			{

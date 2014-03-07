@@ -21,8 +21,8 @@ namespace i18n {
 	private:
 		uint32_t                        number_of_strings_;
 		util::buffer                    buffer_;
-		std::unique_ptr<boost::string_ref []> sorted_orig_strings_;
-		std::unique_ptr<boost::string_ref []> translated_strings_;
+		std::unique_ptr<std::string_view []> sorted_orig_strings_;
+		std::unique_ptr<std::string_view []> translated_strings_;
 
 	private:
 		mofile(util::buffer&& b)
@@ -33,7 +33,7 @@ namespace i18n {
 		bool read();
 
 	public:
-		const boost::string_ref* get_translated_string(const boost::string_ref& orig) const;
+		const std::string_view* get_translated_string(const std::string_view& orig) const;
 	};
 }
 

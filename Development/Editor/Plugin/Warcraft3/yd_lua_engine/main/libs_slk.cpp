@@ -164,7 +164,7 @@ namespace warcraft3 { namespace lua_engine {
 		switch (ls->type(2))
 		{
 		case LUA_TSTRING:	
-			id = slk::object_id(boost::string_ref(ls->tostring(2)));
+			id = slk::object_id(std::string_view(ls->tostring(2)));
 			break;
 		case LUA_TNUMBER:	
 			id = slk::object_id(ls->tounsigned(2));

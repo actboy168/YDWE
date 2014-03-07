@@ -7,7 +7,7 @@ namespace i18n {
 
 	namespace detail
 	{
-		bool mofile_read_strings_array(util::buffer_reader& reader, uint32_t number_of_strings, uint32_t offset, boost::string_ref* result)
+		bool mofile_read_strings_array(util::buffer_reader& reader, uint32_t number_of_strings, uint32_t offset, std::string_view* result)
 		{
 			reader.seek(offset, std::ios::beg);
 
@@ -41,13 +41,13 @@ namespace i18n {
 
 			reader.seek(first_offset, std::ios::beg);
 
-			boost::string_ref string_array(reader.reads_ptr(string_array_size), string_array_size);
+			std::string_view string_array(reader.reads_ptr(string_array_size), string_array_size);
 
-			boost::string_ref::iterator iter = string_array.begin();
+			std::string_view::iterator iter = string_array.begin();
 			for (uint32_t i = 0; i < number_of_strings; i++)
 			{
 				size_t len = strings_lengths[i] + 1;
-				result[i] = boost::string_ref(iter, len);
+				result[i] = std::string_view(iter, len);
 				iter += len;
 			}
 
@@ -58,8 +58,8 @@ namespace i18n {
 	void mofile::initialize(uint32_t number_of_strings)
 	{
 		number_of_strings_ = number_of_strings;
-		sorted_orig_strings_.reset(new boost::string_ref[number_of_strings_]);
-		translated_strings_.reset(new boost::string_ref[number_of_strings_]);
+		sorted_orig_strings_.reset(new std::string_view[number_of_strings_]);
+		translated_strings_.reset(new std::string_view[number_of_strings_]);
 	}
 
 	bool mofile::read()
@@ -127,10 +127,10 @@ namespace i18n {
 		return nullptr;
 	}
 
-	const boost::string_ref* mofile::get_translated_string(const boost::string_ref& orig) const
+	const std::string_view* mofile::get_translated_string(const std::string_view& orig) const
 	{
-		const boost::string_ref* end_iter = sorted_orig_strings_.get() + number_of_strings_;
-		const boost::string_ref* orig_str_ptr = std::lower_bound((const boost::string_ref*)sorted_orig_strings_.get(), end_iter, orig);
+		const std::string_view* end_iter = sorted_orig_strings_.get() + number_of_strings_;
+		const std::string_view* orig_str_ptr = std::lower_bound((const std::string_view*)sorted_orig_strings_.get(), end_iter, orig);
 		if (!orig_str_ptr || (orig_str_ptr == end_iter))
 		{
 			return nullptr;

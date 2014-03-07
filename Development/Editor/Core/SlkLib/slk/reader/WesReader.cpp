@@ -8,10 +8,10 @@ namespace slk
 	{
 		bool is_WorldEditStrings = false;
 		reader::utility::remove_bom(reader);
-		reader::utility::each_line(reader, [&](boost::string_ref& line)
+		reader::utility::each_line(reader, [&](std::string_view& line)
 		{
 			size_t pos = line.find("//");
-			if (pos != boost::string_ref::npos)
+			if (pos != std::string_view::npos)
 			{
 				line.remove_prefix(pos);
 			}
@@ -34,8 +34,8 @@ namespace slk
 
 					if (ItBeg != line.end())
 					{
-						boost::string_ref key = trim_copy(line.begin(), ItBeg);
-						boost::string_ref val = trim_copy(ItBeg+1, line.end());
+						std::string_view key = trim_copy(line.begin(), ItBeg);
+						std::string_view val = trim_copy(ItBeg+1, line.end());
 						if (!val.empty() && !key.empty())
 						{
 							table[key.to_string()] = val.to_string();
