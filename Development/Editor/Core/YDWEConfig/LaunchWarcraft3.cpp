@@ -1,5 +1,4 @@
-
-#include <boost/filesystem.hpp>
+﻿#include <boost/filesystem.hpp>
 #include <base/file/stream.h>
 #include <base/path/service.h>
 #include <base/path/filesystem_helper.h>
