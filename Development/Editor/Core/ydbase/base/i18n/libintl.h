@@ -2,7 +2,7 @@
 
 #include <base/config.h>
 #include <boost/filesystem.hpp>
-#include <base/util/string_ref.h>
+#include <base/util/string_view.h>
 
 namespace base { namespace i18n {
 	_BASE_API bool              bindtextdomain(const char* domain, boost::filesystem::path const& mofile_path);

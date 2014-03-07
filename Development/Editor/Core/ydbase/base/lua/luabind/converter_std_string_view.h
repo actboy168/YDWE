@@ -2,7 +2,7 @@
 
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
-#include <base/util/string_ref.h>
+#include <base/util/string_view.h>
 
 namespace luabind
 {

@@ -1,6 +1,6 @@
 #include <base/exception/detail/windows_category.h>
 #include <base/exception/detail/error_msg.h>
-#include <base/util/string_ref.h>
+#include <base/util/string_view.h>
 #include <base/util/unicode.h>
 #include <Windows.h>
 #include <sstream>

@@ -433,12 +433,6 @@
     <ClInclude Include="base\util\do_once.h">
       <Filter>base\util</Filter>
     </ClInclude>
-    <ClInclude Include="base\util\string_ref.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\lua\luabind\converter_boost_string_ref.h">
-      <Filter>base\lua\luabind</Filter>
-    </ClInclude>
     <ClInclude Include="base\util\dynarray.h">
       <Filter>base\util</Filter>
     </ClInclude>
@@ -523,6 +517,12 @@
     </ClInclude>
     <ClInclude Include="base\lua\private.h">
       <Filter>base\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="base\util\string_view.h">
+      <Filter>base\util</Filter>
+    </ClInclude>
+    <ClInclude Include="base\lua\luabind\converter_std_string_view.h">
+      <Filter>base\lua\luabind</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

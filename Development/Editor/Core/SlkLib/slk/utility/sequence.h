@@ -1,7 +1,7 @@
 #pragma once
 
 #include <slk/port/config.h>
-#include <base/util/string_ref.h>
+#include <base/util/string_view.h>
 
 namespace slk
 {
@@ -139,7 +139,7 @@ namespace slk
 	}
 
 	template <typename Iterator>
-	std::string_view make_string_ref(Iterator first, Iterator last)
+	std::string_view make_string_view(Iterator first, Iterator last)
 	{
 		if (first < last)
 		{
@@ -155,21 +155,21 @@ namespace slk
 	{
 		typename std::string_view::const_iterator TrimEnd = detail::find_end(ItBegin, ItEnd, IsFound);
 		typename std::string_view::const_iterator TrimBegin = detail::find_begin(ItBegin, TrimEnd, IsFound);
-		return std::move(make_string_ref(TrimBegin, TrimEnd));
+		return std::move(make_string_view(TrimBegin, TrimEnd));
 	}
 	template <typename PredicateT>
 	inline std::string_view trim_left_copy(std::string_view& Input, PredicateT IsFound)
 	{
 		typename std::string_view::const_iterator TrimEnd = Input.end();
 		typename std::string_view::const_iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
-		return std::move(make_string_ref(TrimBegin, TrimEnd));
+		return std::move(make_string_view(TrimBegin, TrimEnd));
 	}
 	template <typename PredicateT>
 	inline std::string_view trim_right_copy(std::string_view& Input, PredicateT IsFound)
 	{
 		typename std::string_view::const_iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
 		typename std::string_view::const_iterator TrimBegin = Input.begin();
-		return std::move(make_string_ref(TrimBegin, TrimEnd));
+		return std::move(make_string_view(TrimBegin, TrimEnd));
 	}
 	template <typename PredicateT>
 	inline std::string_view trim_copy(const std::string_view& Input, PredicateT IsFound)

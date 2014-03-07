@@ -2,7 +2,7 @@
 
 #include <base/config.h>
 #include <base/util/unicode.h>
-#include <base/util/string_ref.h>
+#include <base/util/string_view.h>
 #include <locale>
 #include <string>
 

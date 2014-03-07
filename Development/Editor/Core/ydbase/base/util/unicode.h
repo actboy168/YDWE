@@ -2,7 +2,7 @@
 
 #include <string>
 #include <base/config.h>
-#include <base/util/string_ref.h>
+#include <base/util/string_view.h>
 #include <cstdint>
 
 namespace base { namespace util {

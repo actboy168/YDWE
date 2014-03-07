@@ -207,7 +207,7 @@
     <ClInclude Include="base\i18n\mofile.h" />
     <ClInclude Include="base\lockfree\queue.h" />
     <ClInclude Include="base\lua\luabind.h" />
-    <ClInclude Include="base\lua\luabind\converter_boost_string_ref.h" />
+    <ClInclude Include="base\lua\luabind\converter_std_string_view.h" />
     <ClInclude Include="base\lua\luabind\converter_pvoid.h" />
     <ClInclude Include="base\lua\luabind\converter_std_wstring.h" />
     <ClInclude Include="base\lua\luabind\converter_uint32_t.h" />
@@ -234,7 +234,7 @@
     <ClInclude Include="base\util\hybrid_array.h" />
     <ClInclude Include="base\util\signal.h" />
     <ClInclude Include="base\util\singleton.h" />
-    <ClInclude Include="base\util\string_ref.h" />
+    <ClInclude Include="base\util\string_view.h" />
     <ClInclude Include="base\util\unicode.h" />
     <ClInclude Include="base\util\noncopyable.h" />
     <ClInclude Include="base\util\format.h" />
