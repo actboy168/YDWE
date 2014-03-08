@@ -6,7 +6,7 @@
 #include <base/warcraft3/jass/hook.h>
 #include <boost/preprocessor/repetition.hpp>
 #include <boost/preprocessor/punctuation/comma_if.hpp>
-#include <set>
+#include <map>
 
 namespace commonj
 {
@@ -54,9 +54,9 @@ namespace monitor
 	class handle_manager 
 	{
 	public:
-		static std::set<uintptr_t>& instance()
+		static std::map<uintptr_t, uintptr_t>& instance()
 		{
-			static std::set<uintptr_t> s;
+			static std::map<uintptr_t, uintptr_t> s;
 			return s;
 		}
 	};
@@ -69,16 +69,17 @@ namespace monitor
 	class creater<type_name, n, porc_name> \
 	{ \
 	public: \
-		static void initialize() \
-		{ \
-			base::warcraft3::jass::async_hook(porc_name, &real_proc, (uintptr_t)fake_proc); \
-		} \
+	static void initialize() \
+	{ \
+	base::warcraft3::jass::async_hook(porc_name, &real_proc, (uintptr_t)fake_proc); \
+	} \
 	private: \
-		static uintptr_t real_proc; \
-		static uintptr_t __cdecl fake_proc(BOOST_PP_ENUM_PARAMS(n, uint32_t p)) \
-		{ \
+	static uintptr_t real_proc; \
+	static uintptr_t __cdecl fake_proc(BOOST_PP_ENUM_PARAMS(n, uint32_t p)) \
+	{ \
 			uintptr_t retval = base::c_call<uintptr_t>(real_proc BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, p)); \
-			handle_manager<type_name>::instance().insert(retval); \
+			uintptr_t vm = base::warcraft3::get_current_jass_virtual_machine(); \
+			handle_manager<type_name>::instance()[retval] = *(uintptr_t*)(vm + 0x20); \
 			return retval; \
 		} \
 	}; \
@@ -111,37 +112,6 @@ namespace monitor
 #define LEAK_MONITOR      "yd_leak_monitor::"
 #define LEAK_MONITOR_SIZE (sizeof(LEAK_MONITOR)-1)
 
-#define GLOBAL_VARIABLE      "yd_global_variable::"
-#define GLOBAL_VARIABLE_SIZE (sizeof(GLOBAL_VARIABLE)-1)
-
-
-size_t get_global_variable_count(const std::set<uintptr_t>& handle_set)
-{
-	size_t size = handle_set.size();
-	std::set<uintptr_t> tmp = handle_set;
-
-	using namespace base::warcraft3;
-	hashtable::variable_table* vt = get_variable_hashtable();
-	for (auto it = vt->begin(); it != vt->end(); ++it)
-	{
-		jass::global_variable gv(&*it);
-
-		if (jass::OPCODE_VARIABLE_HANDLE == gv.type())
-		{
-			tmp.erase((uint32_t)gv);
-		}
-		else if (jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type())
-		{
-			for (uint32_t i = 0; i < gv.array_size(); ++i)
-			{
-				tmp.erase(gv[i]);
-			}
-		}
-	}
-
-	return size - tmp.size();
-}
-
 static uintptr_t RealGetLocalizedHotkey = 0;
 uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 {
@@ -173,33 +143,6 @@ uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 			else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::force) == 0)
 			{
 				return monitor::handle_manager<commonj::force>::instance().size();
-			}
-		}
-		else if (0 == strncmp(GLOBAL_VARIABLE, str, GLOBAL_VARIABLE_SIZE))
-		{
-			if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::location) == 0)
-			{
-				return get_global_variable_count(monitor::handle_manager<commonj::location>::instance());
-			}
-			else if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::effect) == 0)
-			{
-				return get_global_variable_count(monitor::handle_manager<commonj::effect>::instance());
-			}
-			else if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::group) == 0)
-			{
-				return get_global_variable_count(monitor::handle_manager<commonj::group>::instance());
-			}
-			else if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::region) == 0)
-			{
-				return get_global_variable_count(monitor::handle_manager<commonj::region>::instance());
-			}
-			else if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::rect) == 0)
-			{
-				return get_global_variable_count(monitor::handle_manager<commonj::rect>::instance());
-			}
-			else if (strcmp(str + GLOBAL_VARIABLE_SIZE, commonj::force) == 0)
-			{
-				return get_global_variable_count(monitor::handle_manager<commonj::force>::instance());
 			}
 		}
 	}
