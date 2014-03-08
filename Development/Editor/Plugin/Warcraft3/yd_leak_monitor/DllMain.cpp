@@ -271,8 +271,10 @@ uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 							jass::string_fake msgid = jass::to_string(msg.c_str());
 							jass::call("DisplayTextToPlayer", base::warcraft3::jass::call("GetLocalPlayer"), &x, &y, (jass::jstring_t)msgid);
 						}
+						return 1;
 					}
 				} catch (...) { }
+				return 0;
 			}
 			else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::location) == 0)
 			{
