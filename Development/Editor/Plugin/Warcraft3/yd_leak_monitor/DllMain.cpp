@@ -1,12 +1,16 @@
 #include <windows.h>
 #include <base/hook/fp_call.h>
+#include <base/path/self.h>
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/global_variable.h>
 #include <base/warcraft3/jass/hook.h>
+#include <base/util/format.h>
+#include <base/util/unicode.h>
 #include <boost/preprocessor/repetition.hpp>
 #include <boost/preprocessor/punctuation/comma_if.hpp>
 #include <map>
+#include <fstream>
 
 namespace commonj
 {
@@ -109,6 +113,134 @@ namespace monitor
 	uintptr_t destroyer<type_name, porc_name>::real_proc = 0;
 }
 
+struct handle_info_t
+{
+	uint32_t handle;
+	uint32_t object;
+	uint32_t reference;
+	uint32_t pos;
+	std::vector<std::string> gv_reference;
+
+	handle_info_t()
+		: handle(0)
+		, object(0)
+		, reference(0)
+		, pos(0)
+		, gv_reference()
+	{ }
+};
+
+class handle_table_t
+	: public std::map<uint32_t, handle_info_t>
+{
+public:
+	void add_handle(uint32_t handle, uint32_t object, uint32_t reference)
+	{
+		handle_info_t hi;
+		hi.handle = handle;
+		hi.object = object;
+		hi.reference = reference;
+		insert(std::make_pair(handle, hi));
+	}
+
+	void add_gv_reference(uint32_t handle, const std::string& name)
+	{
+		auto it = find(handle);
+		if (it == end())
+		{
+			return;
+		}
+
+		it->second.gv_reference.push_back(name);
+	}
+
+	void update_pos(std::map<uintptr_t, uintptr_t> m)
+	{
+		for (auto it = m.begin(); it != m.end(); ++it)
+		{
+			auto h = find(it->first);
+			if (h != end()) 
+			{
+				h->second.pos = it->second;
+			}
+		}
+	}
+};
+
+void create_report(std::fstream& fs)
+{
+	handle_table_t ht;
+
+	using namespace base::warcraft3;
+
+	hashtable::reverse_table* table = get_handle_hashtable();
+	for (auto it = table->begin(); it != table->end(); ++it)
+	{
+		ht.add_handle(it->index_, (uint32_t)table->at(3 * (it->index_ - 0x100000) + 1), (uint32_t)table->at(3 * (it->index_ - 0x100000)));
+	}
+
+	hashtable::variable_table* vt = get_variable_hashtable();
+	for (auto it = vt->begin(); it != vt->end(); ++it)
+	{
+		jass::global_variable gv(&*it);
+
+		if (jass::OPCODE_VARIABLE_HANDLE == gv.type())
+		{
+			ht.add_gv_reference((uint32_t)gv, gv.ptr()->str_);
+		}
+		else if (jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type())
+		{
+			for (uint32_t i = 0; i < gv.array_size(); ++i)
+			{
+				ht.add_gv_reference(gv[i], base::format("%s[%d]", gv.ptr()->str_, i));
+			}
+		}
+	}
+
+	ht.update_pos(monitor::handle_manager<commonj::location>::instance());
+	ht.update_pos(monitor::handle_manager<commonj::effect>::instance());
+	ht.update_pos(monitor::handle_manager<commonj::group>::instance());
+	ht.update_pos(monitor::handle_manager<commonj::region>::instance());
+	ht.update_pos(monitor::handle_manager<commonj::rect>::instance());
+	ht.update_pos(monitor::handle_manager<commonj::force>::instance());
+
+
+	fs << "---------------------------------------" << std::endl;
+	fs << "           YDWE Leak Monitor           " << std::endl;
+	fs << "---------------------------------------" << std::endl;
+	fs << "Total:" << ht.size() << std::endl;
+	fs << "---------------------------------------" << std::endl;
+
+	for (auto it = ht.begin(); it != ht.end(); ++it)
+	{
+		handle_info_t& h = it->second;
+
+		fs << base::format("%08X %08X", h.handle, h.reference) << std::endl;
+		if (h.object)
+		{
+			uintptr_t type = base::this_call<uintptr_t>(*(uintptr_t*)(*(uintptr_t*)h.object + 0x1C), h.object);
+			fs << base::format("  type: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
+		}
+		if (h.pos)
+		{
+			jass::opcode *current_op = (jass::opcode *)h.pos;
+			jass::opcode *op;
+			for (op = current_op; op->opcode_type != jass::OPTYPE_FUNCTION; --op)
+			{ }
+
+			fs << base::format("  create: %s, %d", jass::from_stringid(op->arg), current_op - op) << std::endl;
+		}
+		if (!h.gv_reference.empty())
+		{
+			fs << base::format("  global:") << std::endl;
+			for (auto gv = h.gv_reference.begin(); gv != h.gv_reference.end(); ++gv)
+			{
+				fs << base::format("    | %s", gv->c_str()) << std::endl;
+			}
+		}
+	}
+}
+
 #define LEAK_MONITOR      "yd_leak_monitor::"
 #define LEAK_MONITOR_SIZE (sizeof(LEAK_MONITOR)-1)
 
@@ -120,7 +252,29 @@ uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 	{
 		if (0 == strncmp(LEAK_MONITOR, str, LEAK_MONITOR_SIZE))
 		{
-			if (strcmp(str + LEAK_MONITOR_SIZE, commonj::location) == 0)
+			if (strcmp(str + LEAK_MONITOR_SIZE, "create_report") == 0)
+			{
+				std::fstream fs;
+				try {
+					boost::filesystem::path report = base::path::self().remove_filename().remove_filename().remove_filename() / L"logs" / L"leak_moniter_report.txt";
+
+					std::fstream fs(report.c_str(), std::ios::out);
+					if (fs)
+					{
+						create_report(fs);
+
+						{
+							using namespace base::warcraft3;
+							uint32_t x = 0;
+							uint32_t y = 0;
+							std::string msg = base::util::w2u(base::format(L"已经保存到：%s", report.wstring()));
+							jass::string_fake msgid = jass::to_string(msg.c_str());
+							jass::call("DisplayTextToPlayer", base::warcraft3::jass::call("GetLocalPlayer"), &x, &y, (jass::jstring_t)msgid);
+						}
+					}
+				} catch (...) { }
+			}
+			else if (strcmp(str + LEAK_MONITOR_SIZE, commonj::location) == 0)
 			{
 				return monitor::handle_manager<commonj::location>::instance().size();
 			}
