@@ -34,6 +34,11 @@ namespace base { namespace warcraft3 {
 		return (hashtable::reverse_table*)(*(uintptr_t*)(*(uintptr_t*)(get_jass_virtual_machine()+0x2858)+0x08));
 	}
 
+	hashtable::reverse_table* get_handle_hashtable()
+	{
+		return (hashtable::reverse_table*)(*(uintptr_t*)*(uintptr_t*)(get_jass_virtual_machine() + 0x28A4) + 0x194);
+	}
+
 	hashtable::string_fasttable* get_string_fasttable()
 	{
 		return (hashtable::string_fasttable*)(*(uintptr_t*)(get_jass_virtual_machine()+0x2874));

@@ -72,6 +72,29 @@ namespace base { namespace warcraft3 {
 
 			class iterator;
 
+			Node* get(uint32_t hash)
+			{
+				Node* fnode_ptr = nullptr;
+
+				if (this->mask_ == 0xFFFFFFFF)
+					return nullptr;
+
+				fnode_ptr = this->entry_[hash & this->mask_].end_;
+
+				if (!fnode_ptr->is_vaild())
+					return nullptr;
+
+				for (;;)
+				{
+					if (fnode_ptr->hash_ == hash)
+						return fnode_ptr;
+					fnode_ptr = (Node*)(uintptr_t)(fnode_ptr->prev_);
+
+					if (!fnode_ptr->is_vaild())
+						return nullptr;
+				}
+			}
+
 			Node* get(const char* str)
 			{
 				uint32_t hash;
@@ -228,15 +251,33 @@ namespace base { namespace warcraft3 {
 
 		struct reverse_table
 		{
+			typedef table<reverse_node> table_t;
+			typedef table_t::iterator iterator;
+
 			uint32_t            unk0_;
 			uint32_t            unk1_;
 			reverse_node**      node_array_;
 			uint32_t            unk3_;
-			table<reverse_node> table_;
+			table_t             table_;
 
-			reverse_node* get(uint32_t index)
+			iterator begin()
+			{
+				return iterator(&table_);
+			}
+
+			iterator end()
+			{
+				return iterator();
+			}
+
+			reverse_node* at(uint32_t index)
 			{
 				return node_array_[index];
+			}
+
+			reverse_node* get(uint32_t hash)
+			{
+				return table_.get(hash);
 			}
 
 			reverse_node* get(const char* str)
@@ -269,6 +310,7 @@ namespace base { namespace warcraft3 {
 	_BASE_API hashtable::native_func_table* get_native_function_hashtable();
 	_BASE_API hashtable::variable_table*    get_variable_hashtable();
 	_BASE_API hashtable::reverse_table*     get_string_hashtable();
+	_BASE_API hashtable::reverse_table*     get_handle_hashtable();
 	_BASE_API uintptr_t                     get_code_table();
 	_BASE_API hashtable::string_fasttable*  get_string_fasttable();
 }}

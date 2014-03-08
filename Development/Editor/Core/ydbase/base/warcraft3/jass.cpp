@@ -184,7 +184,7 @@ namespace base { namespace warcraft3 { namespace jass {
 
 	const char* from_stringid(uint32_t strid)
 	{
-		return get_string_hashtable()->get(strid)->str_;
+		return get_string_hashtable()->at(strid)->str_;
 	}
 
 	void handle_set_ref(jass::jhandle_t h, bool dec)
