@@ -1,13 +1,14 @@
 #include <windows.h>
 #include "FontManager.hpp"
-#include <base/path/service.h>
+#include <base/path/self.h>
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 {
 	if (reason == DLL_PROCESS_ATTACH)
 	{
 		::DisableThreadLibraryCalls(module);
-		g_fontptr.reset(new FontManager(base::path::get(base::path::DIR_MODULE).parent_path()));
+		MessageBox(0, 0, 0, 0);
+		g_fontptr.reset(new FontManager(base::path::self().parent_path()));
 	}
 	else if (reason == DLL_PROCESS_DETACH)
 	{
