@@ -1569,9 +1569,9 @@ size_t CPaintManagerUI::ReplaceFont(int index, const wchar_t* pStrFontName, int 
 
 	if (index >= 0 && index < m_aCustomFonts.GetSize())
 	{
-		TFontInfo* pFontInfo = static_cast<TFontInfo*>(m_aCustomFonts[index]);
-		::DeleteObject(pFontInfo->hFont);
-		delete pFontInfo; 
+		TFontInfo* old = static_cast<TFontInfo*>(m_aCustomFonts[index]);
+		::DeleteObject(old->hFont);
+		delete old;
 		m_aCustomFonts.SetAt(index, pFontInfo);
 	}
 	else
