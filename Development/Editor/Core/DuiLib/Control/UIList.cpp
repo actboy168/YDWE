@@ -1564,9 +1564,8 @@ void CListElementUI::DrawItemBk(HDC hDC, const RECT& rcItem)
             if( !DrawImage(hDC, *m_sBkImage.get()) ) m_sBkImage.reset();
         }
     }
-
-    if (!m_sBkImage) {
-        if( !pInfo->sBkImage ) {
+	else {
+        if( pInfo->sBkImage ) {
             if( !DrawImage(hDC, *pInfo->sBkImage.get()) ) pInfo->sBkImage.reset();
             else return;
         }
