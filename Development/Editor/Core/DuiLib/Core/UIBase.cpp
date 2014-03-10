@@ -369,6 +369,7 @@ LRESULT CALLBACK CWindowWnd::WindowProc(HWND hWnd, UINT uMsg,  WPARAM wParam, LP
 	{
 		LRESULT lRes = ::DefWindowProcW(pThis->m_hWnd, uMsg, wParam, lParam);
 		pThis->m_hWnd = NULL;
+		pThis->OnFinalMessage(hWnd);
 		return lRes;
 	}
 	else
