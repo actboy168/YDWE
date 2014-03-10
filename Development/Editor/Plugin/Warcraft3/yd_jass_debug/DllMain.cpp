@@ -118,9 +118,19 @@ namespace base { namespace warcraft3 { namespace jdebug {
 			show_error(vm, "Hit opcode limit.");
 			break;
 		case 6:
-			assert(current_opcode(vm)->opcode_type == jass::OPTYPE_GETVAR);
-			show_error(vm, base::format("Variable '%s' used without having been initialized.", jass::from_stringid(current_opcode(vm)->arg)));
+		{
+			jass::opcode* op = current_opcode(vm);
+			if (op->opcode_type == jass::OPTYPE_PUSH)
+			{
+				show_error(vm, base::format("Stack [0x02X] used without having been initialized.", op->r3));
+			}
+			else
+			{
+				assert(op->opcode_type == jass::OPTYPE_GETVAR);
+				show_error(vm, base::format("Variable '%s' used without having been initialized.", jass::from_stringid(op->arg)));
+			}
 			break;
+		}
 		case 7:
 			show_error(vm, "Division by zero.");
 			break;
