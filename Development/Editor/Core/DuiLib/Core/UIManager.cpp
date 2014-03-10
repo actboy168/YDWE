@@ -1503,7 +1503,7 @@ DWORD CPaintManagerUI::GetCustomFontCount() const
     return m_aCustomFonts.GetSize();
 }
 
-HFONT CPaintManagerUI::AddFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+size_t CPaintManagerUI::AddFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
     LOGFONTW lf = { 0 };
     ::GetObject(::GetStockObject(DEFAULT_GUI_FONT), sizeof(LOGFONT), &lf);
@@ -1533,13 +1533,13 @@ HFONT CPaintManagerUI::AddFont(const wchar_t* pStrFontName, int nSize, bool bBol
     if( !m_aCustomFonts.Add(pFontInfo) ) {
         ::DeleteObject(hFont);
         delete pFontInfo;
-        return NULL;
+        return -1;
     }
 
-    return hFont;
+	return m_aCustomFonts.GetSize() - 1;
 }
 
-HFONT CPaintManagerUI::AddFontAt(int index, const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+size_t CPaintManagerUI::ReplaceFont(int index, const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
     LOGFONTW lf = { 0 };
     ::GetObject(::GetStockObject(DEFAULT_GUI_FONT), sizeof(LOGFONT), &lf);
@@ -1566,13 +1566,22 @@ HFONT CPaintManagerUI::AddFontAt(int index, const wchar_t* pStrFontName, int nSi
         ::GetTextMetrics(m_hDcPaint, &pFontInfo->tm);
         ::SelectObject(m_hDcPaint, hOldFont);
     }
-    if( !m_aCustomFonts.InsertAt(index, pFontInfo) ) {
-        ::DeleteObject(hFont);
-        delete pFontInfo;
-        return NULL;
-    }
 
-    return hFont;
+	if (index >= 0 && index < m_aCustomFonts.GetSize())
+	{
+		TFontInfo* pFontInfo = static_cast<TFontInfo*>(m_aCustomFonts[index]);
+		::DeleteObject(pFontInfo->hFont);
+		delete pFontInfo; 
+		m_aCustomFonts.SetAt(index, pFontInfo);
+	}
+	else
+	{
+		::DeleteObject(hFont);
+		delete pFontInfo;
+		return -1;
+	}
+
+	return index;
 }
 
 HFONT CPaintManagerUI::GetFont(int index)
