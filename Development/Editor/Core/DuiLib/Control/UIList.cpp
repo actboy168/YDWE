@@ -1173,7 +1173,7 @@ void CListHeaderItemUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pst
     else if( wcscmp(pstrName, L"pushedimage") == 0 ) m_sPushedImage.reset(new CImage(pstrValue));
     else if( wcscmp(pstrName, L"focusedimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
     else if( wcscmp(pstrName, L"sepimage") == 0 ) m_sSepImage.reset(new CImage(pstrValue));
-    else CControlUI::SetAttribute(pstrName, pstrValue);
+	else CLabelUI::SetAttribute(pstrName, pstrValue);
 }
 
 void CListHeaderItemUI::DoEvent(TEventUI& event)
@@ -1516,7 +1516,7 @@ void CListElementUI::DoEvent(TEventUI& event)
 void CListElementUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
     if( wcscmp(pstrName, L"selected") == 0 ) Select();
-    else CControlUI::SetAttribute(pstrName, pstrValue);
+    else CLabelUI::SetAttribute(pstrName, pstrValue);
 }
 
 void CListElementUI::DrawItemBk(HDC hDC, const RECT& rcItem)
