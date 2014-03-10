@@ -83,14 +83,14 @@ DWORD TListInfoUI::GetDisabledBkColor() const
 	return dwDisabledBkColor;
 }
 
-void TListInfoUI::SetTextColor(DWORD dwTextColor)
+void TListInfoUI::SetTextColor(DWORD val)
 {
-	dwTextColor = dwTextColor;
+	dwTextColor = val;
 }
 
-void TListInfoUI::SetBkColor(DWORD dwBkColor)
+void TListInfoUI::SetBkColor(DWORD val)
 {
-	dwBkColor = dwBkColor;
+	dwBkColor = val;
 }
 
 void TListInfoUI::SetSelectedTextColor(DWORD dwTextColor)
