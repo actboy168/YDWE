@@ -69,7 +69,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 
 	struct jass::opcode* current_opcode(uint32_t vm)
 	{
-		return *(struct jass::opcode**)(vm+0x20);
+		return *(struct jass::opcode**)(vm + 0x20) - 1;
 	}
 
 	void show_pos(struct jass::opcode* current_op)
@@ -118,6 +118,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 			show_error(vm, "Hit opcode limit.");
 			break;
 		case 6:
+			assert(current_opcode(vm)->opcode_type == jass::OPTYPE_GETVAR);
 			show_error(vm, base::format("Variable '%s' used without having been initialized.", jass::from_stringid(current_opcode(vm)->arg)));
 			break;
 		case 7:
