@@ -54,7 +54,7 @@ namespace warcraft3 { namespace jass {
 		OPTYPE_SETVAR       = 0x11,	// _ _ srcreg destvar
 		OPTYPE_SETARRAY     = 0x12,
 		OPTYPE_PUSH         = 0x13, // _ _ srcreg _
-		OPTYPE_SETRIGHT     = 0x14,
+		OPTYPE_POP          = 0x14,
 		OPTYPE_NATIVE       = 0x15, // _ _ _ fn
 		OPTYPE_JASSCALL     = 0x16, // _ _ _ fn
 		OPTYPE_I2R          = 0x17,
