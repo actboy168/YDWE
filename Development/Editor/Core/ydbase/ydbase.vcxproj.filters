@@ -74,6 +74,9 @@
     <Filter Include="base\thread\lock">
       <UniqueIdentifier>{3beaa0e4-1378-4d7e-8d51-a8869869b7f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\win\font">
+      <UniqueIdentifier>{d3bb681c-bfad-45b8-b53a-094ab9bbc6bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -244,6 +247,12 @@
     </ClCompile>
     <ClCompile Include="base\lua\private.cpp">
       <Filter>base\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="base\win\font\file.cpp">
+      <Filter>base\win\font</Filter>
+    </ClCompile>
+    <ClCompile Include="base\win\font\utility.cpp">
+      <Filter>base\win\font</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -523,6 +532,12 @@
     </ClInclude>
     <ClInclude Include="base\lua\luabind\converter_std_string_view.h">
       <Filter>base\lua\luabind</Filter>
+    </ClInclude>
+    <ClInclude Include="base\win\font\file.h">
+      <Filter>base\win\font</Filter>
+    </ClInclude>
+    <ClInclude Include="base\win\font\utility.h">
+      <Filter>base\win\font</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

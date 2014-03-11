@@ -119,6 +119,8 @@
     <ClCompile Include="base\thread\thread_exception.cpp" />
     <ClCompile Include="base\warcraft3\command_line.cpp" />
     <ClCompile Include="base\warcraft3\utility.cpp" />
+    <ClCompile Include="base\win\font\file.cpp" />
+    <ClCompile Include="base\win\font\utility.cpp" />
     <ClCompile Include="base\win\get_tick_count.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="base\exception\detail\windows_category.cpp" />
@@ -259,6 +261,8 @@
     <ClInclude Include="base\win\env_variable.h" />
     <ClInclude Include="base\win\event.h" />
     <ClInclude Include="base\win\file_version.h" />
+    <ClInclude Include="base\win\font\file.h" />
+    <ClInclude Include="base\win\font\utility.h" />
     <ClInclude Include="base\win\get_tick_count.h" />
     <ClInclude Include="base\win\pe_reader.h" />
     <ClInclude Include="base\win\process.h" />
