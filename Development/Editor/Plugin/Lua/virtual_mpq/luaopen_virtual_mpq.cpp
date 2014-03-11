@@ -4,7 +4,7 @@
 
 int luaopen_virtual_mpq(lua_State *pState)
 {
-	base::warcraft3::virtual_mpq::initialize();
+	base::warcraft3::virtual_mpq::initialize(::GetModuleHandleW(NULL));
 
 	using namespace luabind;
 	module(pState, "virtual_mpq")

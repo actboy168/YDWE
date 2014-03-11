@@ -1,5 +1,4 @@
 #include <base/warcraft3/virtual_mpq.h>
-#include <windows.h>
 #include <base/hook/fp_call.h>
 #include <base/file/stream.h>
 #include <base/hook/iat.h>
@@ -238,11 +237,11 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		filesystem::open_path(p, priority);
 	}
 
-	void initialize()
+	void initialize(HMODULE module_handle)
 	{
 		real::SMemAlloc = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)401);
 
-#define IAT_HOOK(ord, name) real:: ## name = base::hook::iat(::GetModuleHandleW(NULL), "Storm.dll", (const char*)(ord), (uintptr_t)fake:: ## name ##)
+#define IAT_HOOK(ord, name) real:: ## name = base::hook::iat(module_handle, "Storm.dll", (const char*)(ord), (uintptr_t)fake:: ## name ##)
 		IAT_HOOK(253, SFileCloseFile);
 		IAT_HOOK(263, SFileEnableDirectAccess);
 		IAT_HOOK(264, SFileGetFileArchive);
