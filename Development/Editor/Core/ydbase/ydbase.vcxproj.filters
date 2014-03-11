@@ -251,6 +251,9 @@
     <ClCompile Include="base\win\font\utility.cpp">
       <Filter>base\win\font</Filter>
     </ClCompile>
+    <ClCompile Include="base\warcraft3\virtual_mpq.cpp">
+      <Filter>base\warcraft3</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -532,6 +535,9 @@
     </ClInclude>
     <ClInclude Include="base\win\font\utility.h">
       <Filter>base\win\font</Filter>
+    </ClInclude>
+    <ClInclude Include="base\warcraft3\virtual_mpq.h">
+      <Filter>base\warcraft3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
