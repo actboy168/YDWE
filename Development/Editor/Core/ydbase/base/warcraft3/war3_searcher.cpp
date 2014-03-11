@@ -282,6 +282,19 @@ namespace base { namespace warcraft3 {
 			return 0;
 		}
 
-		return (uintptr_t)get_handle_hashtable()->at(3 * (handle - 0x100000) + 1);
+		uintptr_t object = (uintptr_t)get_handle_hashtable()->at(3 * (handle - 0x100000) + 1);
+
+		if (!object)
+		{
+			return 0;
+		}
+
+		uintptr_t ptr = find_objectid_64(*(objectid_64*)(object + 0x0C));
+		if (!ptr || (*(uintptr_t*)(ptr + 0x0C) != '+agl') || *(uintptr_t*)(ptr + 0x20))
+		{
+			return 0;
+		}
+
+		return object;
 	}
 }}
