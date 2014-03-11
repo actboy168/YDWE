@@ -98,21 +98,15 @@
           </VerticalLayout>
         </VerticalLayout>
         <VerticalLayout class="Background" inset="2,24,2,24" >
-          <VerticalLayout height="80" >
+          <VerticalLayout height="230" >
             <Label text="插件选项"  tooltip="一些可能存在兼容性问题的功能的开关。需要重启YDWE生效。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
               <CheckBox text="启用语法高亮插件(*)"     width="200" name="EnableTesh" tooltip="启用TESH，如果触发编辑器出现了崩溃等现象，请禁用此项。" />
               <CheckBox text="启用逆天触发器插件(*)"   width="200" name="EnableYDTrigger" tooltip="全面强化触发编辑器的功能。"  />
-            </VerticalLayout>
-          </VerticalLayout>
-          <Control height="16" />
-          <VerticalLayout height="160" >
-            <Label text="字体(*)"  tooltip="设置YDWE的字体" class="Title" />
-            <VerticalLayout class="Background" inset="10,6,10,6" >
-              <CheckBox text="启用"   width="200" name="FontEnable" />
+              <CheckBox text="启用字体插件(*)" tooltip="设置YDWE的字体" width="200" name="FontEnable" />
               <HorizontalLayout>
-                <Combo name="FontNames" dropboxsize="0, 300" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
-                </Combo>
+                <Control width="20" />
+                <Combo name="FontNames" dropboxsize="0, 300" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" />
                 <Control width="20" />
                 <Combo name="FontSizes" width="60" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
                   <ListLabelElement text="10" />
