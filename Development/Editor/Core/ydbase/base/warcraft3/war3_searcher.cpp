@@ -1,5 +1,6 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/version.h>
+#include <base/warcraft3/hashtable.h>
 #include <base/util/singleton.h>
 #include <base/hook/fp_call.h>
 
@@ -10,7 +11,6 @@ namespace base { namespace warcraft3 {
 		, version_(search_version())
 		, get_instance_(search_get_instance())
 		, get_gameui_(search_get_gameui())
-		, unit_handle_to_object_(search_unit_handle_to_object())
 	{ }
 
 	war3_searcher::war3_searcher(HMODULE hGameDll)
@@ -18,7 +18,6 @@ namespace base { namespace warcraft3 {
 		, version_(search_version())
 		, get_instance_(search_get_instance())
 		, get_gameui_(search_get_gameui())
-		, unit_handle_to_object_(search_unit_handle_to_object())
 	{ }
 
 	uint32_t war3_searcher::get_version() const
@@ -34,11 +33,6 @@ namespace base { namespace warcraft3 {
 	uint32_t war3_searcher::get_gameui(uint32_t unk0, uint32_t unk1)
 	{
 		return ((uint32_t(_fastcall*)(uint32_t, uint32_t))get_gameui_)(unk0, unk1);
-	}
-
-	uintptr_t war3_searcher::unit_handle_to_object(uint32_t handle)
-	{
-		return ((uintptr_t(_fastcall*)(uint32_t))unit_handle_to_object_)(handle);
 	}
 
 	bool war3_searcher::is_gaming()
@@ -157,83 +151,6 @@ namespace base { namespace warcraft3 {
 		get_gameui = convert_function(get_gameui);
 
 		return get_gameui;
-	}
-
-	namespace detail
-	{
-		uintptr_t unit_handle_table     = 0;
-		uintptr_t get_unit_handle_table = 0;
-
-		uintptr_t __fastcall unit_handle_to_object_120(uint32_t handle)
-		{
-			uintptr_t table = ((uintptr_t(_fastcall*)(uintptr_t))get_unit_handle_table)(*(uintptr_t*)unit_handle_table);
-			if (table)
-			{
-				if (handle >= 0x100000)
-				{
-					return *(uintptr_t*)(*(uintptr_t*)(table + 0x19C) + 12 * handle - 0xBFFFFC);
-				}
-			}
-
-			return 0;
-		}
-	}
-
-	uintptr_t war3_searcher::search_unit_handle_to_object() const
-	{
-		uintptr_t unit_handle_to_object;
-
-		//=========================================
-		// (1)
-		//
-		// push offset "(Hunit;)R"
-		// mov  edx, "GetUnitX"
-		// mov  ecx, [GetUnitXº¯ÊýµÄµØÖ·] <----
-		// call BindNative
-		//=========================================
-		unit_handle_to_object = search_string("GetUnitX");
-		unit_handle_to_object = *(uintptr_t*)(unit_handle_to_object + 0x05);
-
-		if (version_ > version_121b)
-		{
-			//=========================================
-			// (2)
-			//  GetUnitX:
-			//    mov     ecx, [esp+arg_0]
-			//    sub     esp, 0Ch
-			//    call    UnitHanldeToObject  <----
-			//    test    eax, eax
-			//    ...
-			//    ...
-			//=========================================
-			unit_handle_to_object = next_opcode(unit_handle_to_object, 0xE8, 5);
-			unit_handle_to_object = convert_function(unit_handle_to_object);
-
-			return unit_handle_to_object;
-		}
-		else
-		{
-			//=========================================
-			// (2)
-			//  GetUnitX:
-			//    push    ebp
-			//    mov     ebp, esp
-			//    sub     esp, 20h
-			//    mov     ecx, dword_6F8722BC
-			//    push    ebx
-			//    xor     ebx, ebx
-			//    push    edi
-			//    mov     [ebp+var_4], ebx
-			//    call    sub_6F29B2E0
-			//=========================================
-			unit_handle_to_object = next_opcode(unit_handle_to_object, 0x8B, 6);
-			detail::unit_handle_table    = *(uintptr_t*)(unit_handle_to_object+2);
-
-			unit_handle_to_object = next_opcode(unit_handle_to_object, 0xE8, 5);
-			detail::get_unit_handle_table = convert_function(unit_handle_to_object);
-
-			return (uintptr_t)detail::unit_handle_to_object_120;
-		}
 	}
 
 	war3_searcher& get_war3_searcher()
@@ -356,5 +273,15 @@ namespace base { namespace warcraft3 {
 	uint32_t get_object_type(uintptr_t ptr)
 	{
 		return this_call<uint32_t>(*(uintptr_t*)(*(uintptr_t*)ptr + 0x1C), ptr);
+	}
+
+	uintptr_t handle_to_object(uint32_t handle)
+	{
+		if (handle < 0x100000)
+		{
+			return 0;
+		}
+
+		return (uintptr_t)get_handle_hashtable()->at(3 * (handle - 0x100000) + 1);
 	}
 }}

@@ -4,6 +4,7 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/version.h>
 #include <base/warcraft3/jass.h>
+#include <cassert>
 
 namespace base { namespace warcraft3 { namespace japi {
 
@@ -50,18 +51,19 @@ uint32_t _cdecl FakeGetUnitState(uint32_t unit_handle, uint32_t state_type)
 		return c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
 	}
 
-	war3_searcher&s = get_war3_searcher();
-	uintptr_t unit_object = s.unit_handle_to_object(unit_handle);
+	uintptr_t unit_object = handle_to_object(unit_handle);
 	if (!unit_object)
 	{
 		return 0;
 	}
+	assert('+w3u' == get_object_type(unit_object));
 
 	if (state_type == UNIT_STATE_ARMOR)
 	{
 		return *(uint32_t*)(unit_object + 0xE0);
 	}
 
+	war3_searcher&s = get_war3_searcher();
 	unit_property* ptr = (unit_property*)*(uintptr_t*)(unit_object + 0x1E4 + (s.get_version() > version_124c ? 4: 0));
 	if (!ptr)
 	{
@@ -118,12 +120,12 @@ void _cdecl FakeSetUnitState(uint32_t unit_handle, uint32_t state_type, uint32_t
 		return;
 	}
 
-	war3_searcher&s = get_war3_searcher();
-	uintptr_t unit_object = s.unit_handle_to_object(unit_handle);
+	uintptr_t unit_object = handle_to_object(unit_handle);
 	if (!unit_object)
 	{
 		return ;
 	}
+	assert('+w3u' == get_object_type(unit_object));
 
 	if (state_type == UNIT_STATE_ARMOR)
 	{
@@ -131,6 +133,7 @@ void _cdecl FakeSetUnitState(uint32_t unit_handle, uint32_t state_type, uint32_t
 		return ;
 	}
 
+	war3_searcher&s = get_war3_searcher();
 	unit_property* ptr = (unit_property*)*(uintptr_t*)(unit_object + 0x1E4 + (s.get_version() > version_124c ? 4: 0));
 	if (!ptr)
 	{
@@ -163,7 +166,7 @@ void _cdecl FakeSetUnitState(uint32_t unit_handle, uint32_t state_type, uint32_t
 
 uint32_t _cdecl EXGetUnitObject(uint32_t unit_handle)
 {
-	return get_war3_searcher().unit_handle_to_object(unit_handle);
+	return handle_to_object(unit_handle);
 }
 
 void InitializeUnitState()

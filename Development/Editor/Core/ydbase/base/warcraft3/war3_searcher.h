@@ -16,19 +16,16 @@ namespace base { namespace warcraft3 {
 		uint32_t  get_instance(uint32_t index);
 		uint32_t  get_gameui(uint32_t unk0, uint32_t unk1);
 		bool      is_gaming();
-		uintptr_t unit_handle_to_object(uint32_t handle);
 
 	private:
 		uint32_t  search_version() const;
 		uintptr_t search_get_instance() const;
 		uintptr_t search_get_gameui() const;
-		uintptr_t search_unit_handle_to_object() const;
 
 	private:
 		uint32_t  version_;
 		uintptr_t get_instance_;
 		uintptr_t get_gameui_;
-		uintptr_t unit_handle_to_object_;
 	};
 
 	struct objectid_64
@@ -51,4 +48,5 @@ namespace base { namespace warcraft3 {
 	_BASE_API uintptr_t   find_objectid_64(const objectid_64& id);
 	_BASE_API const char* get_class_name(uintptr_t ptr);
 	_BASE_API uint32_t    get_object_type(uintptr_t ptr);
+	_BASE_API uintptr_t   handle_to_object(uint32_t handle);
 }}
