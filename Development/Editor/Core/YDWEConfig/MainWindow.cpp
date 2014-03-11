@@ -15,6 +15,22 @@
 #include <base/util/unicode.h>
 #include <base/win/version.h>
 #include <base/win/file_version.h>
+#include <base/win/font/utility.h>
+
+std::wstring CComboUI_GetSelectText(DuiLib::CComboUI* pui)
+{
+	int i = pui->GetCurSel();
+	if (i < 0 || i >= pui->GetCount())
+	{
+		return std::wstring();
+	}
+	DuiLib::CListLabelElementUI* elem = dynamic_cast<DuiLib::CListLabelElementUI*>(pui->GetItemAt(i));
+	if (!elem)
+	{
+		return std::wstring();
+	}
+	return elem->GetText();
+}
 
 namespace 
 {
@@ -130,7 +146,10 @@ void CMainWindow::InitWindow()
 	m_pAllowLocalFiles     = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"AllowLocalFiles"));
 	m_pWar3PatchList       = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(L"War3PatchList"));
 	m_pWar3PluginList      = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(L"War3PluginList"));
-	m_pWarcraft3Directory  = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(L"Warcraft3Directory"));	
+	m_pWarcraft3Directory  = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(L"Warcraft3Directory"));
+	m_pFontNames           = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(L"FontNames"));
+	m_pFontSizes           = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(L"FontSizes"));
+	m_pFontPreview         = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(L"FontPreview"));
 
 	m_pm.AddNotifier(this);
 }
@@ -156,6 +175,9 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["FeatureToggle"]["EnableManualNewId"] = "0";
 	table["FeatureToggle"]["EnableTriggerCopyEncodingAutoConversion"] = "1";
 	table["FeatureToggle"]["EnableShowInternalAttributeId"] = "0";
+	table["Font"]["Enable"] = "0";
+	table["Font"]["Name"] = "";
+	table["Font"]["Size"] = "12";
 }
 
 bool CMainWindow::LoadConfig(slk::IniTable& table)
@@ -218,6 +240,24 @@ void CMainWindow::ConfigToUI(slk::IniTable& table)
 		}
 	}
 
+	std::wstring font_name = base::util::u2w(table["Font"]["Name"]);
+	for (int i = 0; i < m_pFontNames->GetCount(); ++i)
+	{
+		if (font_name == ((DuiLib::CListLabelElementUI*)m_pFontNames->GetItemAt(i))->GetText())
+		{
+			m_pFontNames->SelectItem(i);
+			break;
+		}
+	}
+	std::wstring font_size = base::util::u2w(table["Font"]["Size"]);
+	for (int i = 0; i < m_pFontSizes->GetCount(); ++i)
+	{
+		if (font_size == ((DuiLib::CListLabelElementUI*)m_pFontSizes->GetItemAt(i))->GetText())
+		{
+			m_pFontSizes->SelectItem(i);
+			break;
+		}
+	}
 	m_pm.SendNotify(m_pEnableCJass, DUI_MSGTYPE_SELECTCHANGED);
 	m_pm.SendNotify(m_pEnableJassHelper, DUI_MSGTYPE_SELECTCHANGED);
 }
@@ -249,6 +289,9 @@ void CMainWindow::UIToConfig(slk::IniTable& table)
 			}
 		}
 	}
+
+	table["Font"]["Name"] = base::util::w2u(CComboUI_GetSelectText(m_pFontNames));
+	table["Font"]["Size"] = base::util::w2u(CComboUI_GetSelectText(m_pFontSizes));
 }
 
 void CMainWindow::EnableMapSave(bool bEnable)
@@ -523,6 +566,19 @@ void CMainWindow::DonePatchUI(slk::IniTable& table)
 	}
 }
 
+void CMainWindow::InitFontUI()
+{
+	std::set<std::wstring> font_names = base::font::get_list();
+	
+	for (auto it = font_names.begin(); it != font_names.end(); ++it)
+	{
+		DuiLib::CListLabelElementUI* elem = new DuiLib::CListLabelElementUI;
+		elem->SetText(it->c_str());
+		elem->SetManager(m_pFontNames->GetManager(), m_pFontNames, false);
+		m_pFontNames->Add(elem);
+	}
+}
+
 void CMainWindow::UpdateWarcraft3Directory()
 {
 	if (m_pWarcraft3Directory)
@@ -547,6 +603,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 		{
 			slk::IniTable table;
 			if (!LoadConfig(table)) { ResetConfig(table); }
+			InitFontUI();
 			ConfigToUI(table);
 			InitRegistryUI();
 			InitOSHelpUI();
@@ -572,6 +629,16 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 				ContrlSetEnabled("LaunchFullWindowed",       bEnable);
 				ContrlSetEnabled("LaunchLockingMouse",       bEnable);
 				ContrlSetEnabled("LaunchFixedRatioWindowed", bEnable);
+			}
+		}
+		else if (msg.sType == DUI_MSGTYPE_ITEMSELECT)
+		{
+			static size_t dynfont = m_pm.AddFont(L"system", 12, false, false, false);
+
+			if (msg.pSender == m_pFontNames || msg.pSender == m_pFontSizes)
+			{
+				m_pm.ReplaceFont(dynfont, CComboUI_GetSelectText(m_pFontNames).c_str(), base::font::size_to_height(std::stoi(CComboUI_GetSelectText(m_pFontSizes))), false, false, false);
+				m_pFontPreview->SetFont(dynfont);
 			}
 		}
 		else if (msg.sType == DUI_MSGTYPE_CLICK) 

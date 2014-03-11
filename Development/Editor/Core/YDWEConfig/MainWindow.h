@@ -36,6 +36,7 @@ public:
 	void DonePatchUI(slk::IniTable& table);
 	void InitPluginUI();
 	void DonePluginUI();
+	void InitFontUI();
 	void UpdateWarcraft3Directory();
 
 private:
@@ -52,6 +53,9 @@ private:
 	DuiLib::CVerticalLayoutUI* m_pWar3PatchList;
 	DuiLib::CVerticalLayoutUI* m_pWar3PluginList;
 	DuiLib::CLabelUI*          m_pWarcraft3Directory;
+	DuiLib::CComboUI*          m_pFontNames;
+	DuiLib::CComboUI*          m_pFontSizes;
+	DuiLib::CLabelUI*          m_pFontPreview;
 
 	fs::path                m_ydwe_path;
 };

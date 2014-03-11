@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Window size="400,540" caption="0,0,0,36" roundcorner="10,10" >
-  <Font name="幼圆" size="18" />
   <Font name="微软雅黑" size="18"  default="true" />
+  <Font name="幼圆" size="18" />
   <Font name="微软雅黑" size="14" />
   <Include source="styles.xml" />
 
   <Class name="Title" bkimage="file='Common/Button.png' corner='5,11,5,11' source='0,24,96,48'" />
   <Class name="LabelTitle" class="Title"  borderround="4,4" />
+  <Class name="ListLabelElement" />
   <Class name="Background" bkcolor="#FFFAFCFC" />
-  <Class name="TabSelect" font="1"
+  <Class name="TabSelect" font="0"
 		textcolor="#000000" selectedtextcolor="#FFFFFF" hottextcolor="#000000" focusedtextcolor="#000000" pushedtextcolor="#77A8DE" selectedpushedtextcolor="#77A8DE"
 		normalimage         = "file='Common/Button.png' corner='5,11,5,11' source='0, 0,96,24'"
 		selectedimage       = "file='Common/Button.png' corner='5,11,5,11' source='0,24,96,48'"
@@ -34,8 +35,7 @@
         <Control height="1" />
         <RadioButton name="tab_4" group="TabSelect" text="系统关联"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
       </VerticalLayout>
-
-		<TabLayout name="tabs" >
+      <TabLayout name="tabs" >
         <VerticalLayout class="Background" inset="2,24,2,24" >
           <VerticalLayout height="140" >
             <Label text="地图版本" tooltip= "地图兼容性选项。" class="LabelTitle" />
@@ -103,6 +103,31 @@
             <VerticalLayout class="Background" inset="10,6,10,6" >
               <CheckBox text="启用语法高亮插件(*)"     width="200" name="EnableTesh" tooltip="启用TESH，如果触发编辑器出现了崩溃等现象，请禁用此项。" />
               <CheckBox text="启用逆天触发器插件(*)"   width="200" name="EnableYDTrigger" tooltip="全面强化触发编辑器的功能。"  />
+            </VerticalLayout>
+          </VerticalLayout>
+          <Control height="16" />
+          <VerticalLayout height="160" >
+            <Label text="字体(*)"  tooltip="TODO" class="Title" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <HorizontalLayout>
+                <VerticalLayout >
+                  <Combo name="FontNames" height="30" tooltip="TODO" dropboxsize="0, 300" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
+                  </Combo>
+                </VerticalLayout>
+                <Control width="20" />
+                <VerticalLayout width="60" >
+                  <Combo name="FontSizes" height="30" tooltip="TODO" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
+                    <ListLabelElement text="10" />
+                    <ListLabelElement text="11" />
+                    <ListLabelElement text="12" />
+                    <ListLabelElement text="13" />
+                    <ListLabelElement text="14" />
+                    <ListLabelElement text="15" />
+                    <ListLabelElement text="16" />
+                  </Combo>
+                </VerticalLayout>
+              </HorizontalLayout>
+              <Label name="FontPreview" text="AaBbCc 0123456789 测试" textcolor="#FF000000" align="center" height="80" />
             </VerticalLayout>
           </VerticalLayout>
           <Control height="16" />
