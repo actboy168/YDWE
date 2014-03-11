@@ -61,10 +61,11 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 			return boost::optional<boost::filesystem::path>();
 		}
 
-		void open_path(const boost::filesystem::path& p, uint32_t priority)
+		bool open_path(const boost::filesystem::path& p, uint32_t priority)
 		{
 			if (priority > 15) priority = 15;
 			mpq_path[priority].push_front(p);
+			return true;
 		}
 
 		bool SFileLoadFile(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
@@ -231,16 +232,21 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		//}
 	}
 
-	void open_path(const boost::filesystem::path& p, uint32_t priority)
+	bool open_path(const boost::filesystem::path& p, uint32_t priority)
 	{
-		filesystem::open_path(p, priority);
+		if (!boost::filesystem::exists(p))
+		{
+			return false;
+		}
+
+		return filesystem::open_path(p, priority);
 	}
 
-	void initialize(HMODULE module_handle)
+	bool initialize(HMODULE module_handle)
 	{
-		real::SMemAlloc = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)401);
-
-#define IAT_HOOK(ord, name) real:: ## name = base::hook::iat(module_handle, "Storm.dll", (const char*)(ord), (uintptr_t)fake:: ## name ##)
+		bool result = true;
+		result = result && (0 != (real::SMemAlloc = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)401)));
+#define IAT_HOOK(ord, name) result = result && (0 != (real:: ## name = base::hook::iat(module_handle, "Storm.dll", (const char*)(ord), (uintptr_t)fake:: ## name ##)))
 		//IAT_HOOK(253, SFileCloseFile);
 		//IAT_HOOK(263, SFileEnableDirectAccess);
 		//IAT_HOOK(264, SFileGetFileArchive);
@@ -261,5 +267,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		//IAT_HOOK(293, SFileOpenFileAsArchive);
 		//IAT_HOOK(300, SFileOpenPathAsArchive);
 #undef 	IAT_HOOK
+
+		return result;
 	}
 }}}

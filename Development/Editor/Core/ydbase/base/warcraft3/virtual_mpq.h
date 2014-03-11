@@ -6,6 +6,6 @@
 
 namespace base { namespace warcraft3 { namespace virtual_mpq {
 	
-	_BASE_API void open_path(const boost::filesystem::path& p, uint32_t priority);
-	_BASE_API void initialize(HMODULE module_handle);
+	_BASE_API bool open_path(const boost::filesystem::path& p, uint32_t priority);
+	_BASE_API bool initialize(HMODULE module_handle);
 }}}
