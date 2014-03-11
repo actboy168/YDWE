@@ -3,6 +3,7 @@
 #include <cstring>
 #include <base/util/singleton.h>
 #include <base/warcraft3/jass.h>
+#include <base/warcraft3/war3_searcher.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
@@ -25,11 +26,20 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
+	uintptr_t get_random_seed()
+	{
+		war3_searcher& s = get_war3_searcher();
+		uintptr_t ptr = s.search_string("SetRandomSeed");
+		ptr = *(uintptr_t*)(ptr + 0x05);
+		ptr = next_opcode(ptr, 0x8B, 6);
+		ptr = *(uintptr_t*)(ptr + 2);
+
+		return *(uintptr_t*)(*(uintptr_t*)(ptr) + 4);
+	}
+
 	lua_State* luaL_newstate2()
 	{
-		unsigned int hi = jass::call("GetRandomInt", 0, 0xFFFF);
-		unsigned int lo = jass::call("GetRandomInt", 0, 0xFFFF);
-		lua_State *L = lua_newstate2(l_alloc, NULL, (hi << 16) | lo);
+		lua_State *L = lua_newstate2(l_alloc, NULL, get_random_seed());
 		if (L) lua_atpanic(L, &panic);
 		return L;
 	}
