@@ -2,7 +2,6 @@
 #include <base/hook/iat.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/warcraft3/jass.h>
-#include <base/warcraft3/utility.h>
 #include <base/warcraft3/version.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/hook/inline.h>
@@ -173,9 +172,9 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	circular_queue<uintptr_t> ability_pool;
 
-	uintptr_t find_abilityid_64(const utility::objectid_64& id)
+	uintptr_t find_abilityid_64(const objectid_64& id)
 	{
-		uintptr_t ptr = utility::find_objectid_64(id);
+		uintptr_t ptr = find_objectid_64(id);
 		if (*(uintptr_t*)(ptr + 0x20))
 		{
 			return 0;
@@ -235,7 +234,7 @@ namespace base { namespace warcraft3 { namespace japi {
 				return (s_vft == *(uintptr_t*)this);
 			}
 
-			const char* name = utility::get_class_name((uintptr_t)this);
+			const char* name = get_class_name((uintptr_t)this);
 			if (name && std::string(name) == ".?AVCAgentTimer@@")
 			{
 				s_vft = *(uintptr_t*)this;
@@ -302,7 +301,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 		if (unit_ptr)
 		{
-			utility::objectid_64* abil_id = (utility::objectid_64*)(unit_ptr + 0x1D8 + (get_war3_searcher().get_version() > version_124c ? 4: 0));
+			objectid_64* abil_id = (objectid_64*)(unit_ptr + 0x1D8 + (get_war3_searcher().get_version() > version_124c ? 4: 0));
 
 			for (; abil_id->is_valid();)
 			{
@@ -318,7 +317,7 @@ namespace base { namespace warcraft3 { namespace japi {
 					return ability_ptr;
 				}
 
-				abil_id = (utility::objectid_64*)(ability_ptr + 0x24);
+				abil_id = (objectid_64*)(ability_ptr + 0x24);
 			}
 		}
 
@@ -331,7 +330,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 		if (unit_ptr)
 		{
-			utility::objectid_64* abil_id = (utility::objectid_64*)(unit_ptr + 0x1DC);
+			objectid_64* abil_id = (objectid_64*)(unit_ptr + 0x1DC);
 
 			for (; abil_id->is_valid(); --index)
 			{
@@ -347,7 +346,7 @@ namespace base { namespace warcraft3 { namespace japi {
 					return ability_ptr;
 				}
 
-				abil_id = (utility::objectid_64*)(ability_ptr + 0x24);
+				abil_id = (objectid_64*)(ability_ptr + 0x24);
 			}
 		}
 

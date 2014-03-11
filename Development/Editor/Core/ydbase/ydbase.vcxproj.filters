@@ -239,9 +239,6 @@
     <ClCompile Include="base\thread\thread_exception.cpp">
       <Filter>base\thread</Filter>
     </ClCompile>
-    <ClCompile Include="base\warcraft3\utility.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
     <ClCompile Include="base\warcraft3\command_line.cpp">
       <Filter>base\warcraft3</Filter>
     </ClCompile>
@@ -502,9 +499,6 @@
     </ClInclude>
     <ClInclude Include="base\win\registry\value.h">
       <Filter>base\win\registry</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\utility.h">
-      <Filter>base\warcraft3</Filter>
     </ClInclude>
     <ClInclude Include="base\hook\fp_call.h">
       <Filter>base\hook</Filter>
