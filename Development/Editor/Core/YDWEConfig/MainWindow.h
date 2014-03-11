@@ -53,6 +53,7 @@ private:
 	DuiLib::CVerticalLayoutUI* m_pWar3PatchList;
 	DuiLib::CVerticalLayoutUI* m_pWar3PluginList;
 	DuiLib::CLabelUI*          m_pWarcraft3Directory;
+	DuiLib::CCheckBoxUI*       m_pFontEnable;
 	DuiLib::CComboUI*          m_pFontNames;
 	DuiLib::CComboUI*          m_pFontSizes;
 	DuiLib::CLabelUI*          m_pFontPreview;

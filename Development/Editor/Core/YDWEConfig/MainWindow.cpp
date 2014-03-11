@@ -147,6 +147,7 @@ void CMainWindow::InitWindow()
 	m_pWar3PatchList       = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(L"War3PatchList"));
 	m_pWar3PluginList      = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(L"War3PluginList"));
 	m_pWarcraft3Directory  = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(L"Warcraft3Directory"));
+	m_pFontEnable          = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"FontEnable"));
 	m_pFontNames           = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(L"FontNames"));
 	m_pFontSizes           = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(L"FontSizes"));
 	m_pFontPreview         = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(L"FontPreview"));
@@ -240,6 +241,9 @@ void CMainWindow::ConfigToUI(slk::IniTable& table)
 		}
 	}
 
+	m_pFontEnable->Selected(table["Font"]["Enable"] == "0");
+	m_pFontEnable->Selected(table["Font"]["Enable"] != "0");
+
 	std::wstring font_name = base::util::u2w(table["Font"]["Name"]);
 	for (int i = 0; i < m_pFontNames->GetCount(); ++i)
 	{
@@ -285,11 +289,12 @@ void CMainWindow::UIToConfig(slk::IniTable& table)
 			DuiLib::CCheckBoxUI* ctrl = m_controls[name];
 			if (ctrl)
 			{
-				table[attribute.Section()][name] = ctrl->IsSelected()? "1" : "0";;
+				table[attribute.Section()][name] = ctrl->IsSelected()? "1" : "0";
 			}
 		}
 	}
 
+	table["Font"]["Enable"] = m_pFontEnable->IsSelected() ? "1" : "0";
 	table["Font"]["Name"] = base::util::w2u(CComboUI_GetSelectText(m_pFontNames));
 	table["Font"]["Size"] = base::util::w2u(CComboUI_GetSelectText(m_pFontSizes));
 }
@@ -629,6 +634,13 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 				ContrlSetEnabled("LaunchFullWindowed",       bEnable);
 				ContrlSetEnabled("LaunchLockingMouse",       bEnable);
 				ContrlSetEnabled("LaunchFixedRatioWindowed", bEnable);
+			}
+			else if (m_pFontEnable && m_pFontEnable == msg.pSender)
+			{
+				bool bEnable = m_pFontEnable->IsSelected();
+				m_pFontNames->SetEnabled(bEnable);
+				m_pFontSizes->SetEnabled(bEnable);
+				m_pFontPreview->SetEnabled(bEnable);
 			}
 		}
 		else if (msg.sType == DUI_MSGTYPE_ITEMSELECT)

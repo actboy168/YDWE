@@ -107,25 +107,22 @@
           </VerticalLayout>
           <Control height="16" />
           <VerticalLayout height="160" >
-            <Label text="字体(*)"  tooltip="TODO" class="Title" />
+            <Label text="字体(*)"  tooltip="设置YDWE的字体" class="Title" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
+              <CheckBox text="启用"   width="200" name="FontEnable" />
               <HorizontalLayout>
-                <VerticalLayout >
-                  <Combo name="FontNames" height="30" tooltip="TODO" dropboxsize="0, 300" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
-                  </Combo>
-                </VerticalLayout>
+                <Combo name="FontNames" dropboxsize="0, 300" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
+                </Combo>
                 <Control width="20" />
-                <VerticalLayout width="60" >
-                  <Combo name="FontSizes" height="30" tooltip="TODO" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
-                    <ListLabelElement text="10" />
-                    <ListLabelElement text="11" />
-                    <ListLabelElement text="12" />
-                    <ListLabelElement text="13" />
-                    <ListLabelElement text="14" />
-                    <ListLabelElement text="15" />
-                    <ListLabelElement text="16" />
-                  </Combo>
-                </VerticalLayout>
+                <Combo name="FontSizes" width="60" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
+                  <ListLabelElement text="10" />
+                  <ListLabelElement text="11" />
+                  <ListLabelElement text="12" />
+                  <ListLabelElement text="13" />
+                  <ListLabelElement text="14" />
+                  <ListLabelElement text="15" />
+                  <ListLabelElement text="16" />
+                </Combo>
               </HorizontalLayout>
               <Label name="FontPreview" text="AaBbCc 0123456789 测试" textcolor="#FF000000" align="center" height="80" />
             </VerticalLayout>
