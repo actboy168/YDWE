@@ -1,6 +1,7 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/version.h>
 #include <base/util/singleton.h>
+#include <base/hook/fp_call.h>
 
 namespace base { namespace warcraft3 {
 
@@ -349,5 +350,11 @@ namespace base { namespace warcraft3 {
 			}
 		}
 		return nullptr;
+	}
+
+
+	uint32_t get_object_type(uintptr_t ptr)
+	{
+		return this_call<uint32_t>(*(uintptr_t*)(*(uintptr_t*)ptr + 0x1C), ptr);
 	}
 }}

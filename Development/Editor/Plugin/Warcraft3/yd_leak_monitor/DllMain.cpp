@@ -5,6 +5,7 @@
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/global_variable.h>
 #include <base/warcraft3/jass/hook.h>
+#include <base/warcraft3/war3_searcher.h>
 #include <base/util/format.h>
 #include <base/util/unicode.h>
 #include <boost/preprocessor/repetition.hpp>
@@ -218,7 +219,7 @@ void create_report(std::fstream& fs)
 		fs << base::format("%08X %08X", h.handle, h.reference) << std::endl;
 		if (h.object)
 		{
-			uintptr_t type = base::this_call<uintptr_t>(*(uintptr_t*)(*(uintptr_t*)h.object + 0x1C), h.object);
+			uint32_t type = get_object_type(h.object);
 			fs << base::format("  type: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
 		}
 		if (h.pos)
