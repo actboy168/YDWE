@@ -637,7 +637,9 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 
 			if (msg.pSender == m_pFontNames || msg.pSender == m_pFontSizes)
 			{
-				m_pm.ReplaceFont(dynfont, CComboUI_GetSelectText(m_pFontNames).c_str(), base::font::size_to_height(std::stoi(CComboUI_GetSelectText(m_pFontSizes))), false, false, false);
+				try {
+					m_pm.ReplaceFont(dynfont, CComboUI_GetSelectText(m_pFontNames).c_str(), base::font::size_to_height(std::stoi(CComboUI_GetSelectText(m_pFontSizes))), false, false, false);
+				} catch (...) { }
 				m_pFontPreview->SetFont(dynfont);
 			}
 		}
