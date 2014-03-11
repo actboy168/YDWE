@@ -82,15 +82,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="XFont.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="YDFont.def" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="FontManager.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">

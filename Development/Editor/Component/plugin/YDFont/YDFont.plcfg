@@ -2,5 +2,5 @@
 PluginName = YDFont
 [Load]
 Enable = 1
-Loader = ../DefaultPluginLoader.lua
+Loader = YDFont.lua
 Dll    = YDFont.dll

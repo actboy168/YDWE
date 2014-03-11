@@ -1,3 +1,5 @@
 LIBRARY "YDFont"
 EXPORTS
 	PluginName
+	SetFontByName
+
