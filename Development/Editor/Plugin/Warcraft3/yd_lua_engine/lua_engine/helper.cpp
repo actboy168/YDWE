@@ -1,7 +1,6 @@
 #include "helper.h"
 #include "storm.h"
 #include <cstring>
-#include <base/util/singleton.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/war3_searcher.h>
 
@@ -60,7 +59,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		const char* buffer = nullptr;
 		size_t      size   = 0;
 
-		storm& s = util::singleton_nonthreadsafe<storm>::instance();
+		storm& s = storm_s::instance();
 		if (s.load_file(name, (const void**)&buffer, &size))
 		{
 			int stat = (luaL_loadbuffer(ls->self(), buffer, size, name) == LUA_OK);

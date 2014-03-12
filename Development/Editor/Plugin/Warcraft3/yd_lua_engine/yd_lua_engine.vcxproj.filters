@@ -71,6 +71,9 @@
     <ClCompile Include="lua_engine\jassbind.cpp">
       <Filter>lua_engine\main</Filter>
     </ClCompile>
+    <ClCompile Include="lua_engine\libs_storm.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua_engine\lua_loader.h">

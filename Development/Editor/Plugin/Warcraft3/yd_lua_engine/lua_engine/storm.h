@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <cstdint>
 #include <base/config.h>
+#include <base/util/singleton.h>
 
 namespace base { namespace warcraft3 {
 
@@ -28,4 +29,6 @@ namespace base { namespace warcraft3 {
 		uintptr_t fn_sfile_unload_file_;
 		uintptr_t fn_sfile_exists_;
 	};
+
+	typedef util::singleton_nonthreadsafe<storm> storm_s;
 }}

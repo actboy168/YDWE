@@ -99,6 +99,7 @@
     <ClCompile Include="lua_engine\libs_japi.cpp" />
     <ClCompile Include="lua_engine\libs_runtime.cpp" />
     <ClCompile Include="lua_engine\libs_slk.cpp" />
+    <ClCompile Include="lua_engine\libs_storm.cpp" />
     <ClCompile Include="lua_engine\lua_loader.cpp" />
     <ClCompile Include="lua_engine\open_lua_engine.cpp" />
     <ClCompile Include="lua_engine\common.cpp" />
