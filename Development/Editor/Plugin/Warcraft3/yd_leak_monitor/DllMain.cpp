@@ -5,6 +5,7 @@
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/global_variable.h>
 #include <base/warcraft3/jass/hook.h>
+#include <base/warcraft3/jass/opcode.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/util/format.h>
 #include <base/util/unicode.h>
@@ -84,7 +85,7 @@ namespace monitor
 	{ \
 			uintptr_t retval = base::c_call<uintptr_t>(real_proc BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, p)); \
 			uintptr_t vm = (uintptr_t)base::warcraft3::get_current_jass_vm_nofix(); \
-			handle_manager<type_name>::instance()[retval] = *(uintptr_t*)(vm + 0x20); \
+			handle_manager<type_name>::instance()[retval] = (uintptr_t)(*(base::warcraft3::jass::opcode**)(vm + 0x20) - 1);  \
 			return retval; \
 		} \
 	}; \
