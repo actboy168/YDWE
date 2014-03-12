@@ -38,7 +38,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			lj->push_real(value);
 			break;
 		case jass::OPCODE_VARIABLE_STRING:
-			lj->push_string(get_string_fasttable()->get(value));
+			lj->push_string(get_jass_vm()->string_table->get(value));
 			break;
 		case jass::OPCODE_VARIABLE_HANDLE:
 			lj->push_handle(value);

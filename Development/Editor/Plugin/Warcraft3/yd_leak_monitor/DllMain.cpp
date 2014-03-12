@@ -83,7 +83,7 @@ namespace monitor
 	static uintptr_t __cdecl fake_proc(BOOST_PP_ENUM_PARAMS(n, uint32_t p)) \
 	{ \
 			uintptr_t retval = base::c_call<uintptr_t>(real_proc BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, p)); \
-			uintptr_t vm = base::warcraft3::get_current_jass_virtual_machine(); \
+			uintptr_t vm = (uintptr_t)base::warcraft3::get_current_jass_vm(); \
 			handle_manager<type_name>::instance()[retval] = *(uintptr_t*)(vm + 0x20); \
 			return retval; \
 		} \
@@ -174,13 +174,13 @@ void create_report(std::fstream& fs)
 
 	using namespace base::warcraft3;
 
-	hashtable::reverse_table* table = get_handle_hashtable();
+	hashtable::reverse_table* table = get_jass_vm()->handle_table->table;
 	for (auto it = table->begin(); it != table->end(); ++it)
 	{
 		ht.add_handle(it->index_, (uint32_t)table->at(3 * (it->index_ - 0x100000) + 1), (uint32_t)table->at(3 * (it->index_ - 0x100000)));
 	}
 
-	hashtable::variable_table* vt = get_variable_hashtable();
+	hashtable::variable_table* vt = get_jass_vm()->global_table;
 	for (auto it = vt->begin(); it != vt->end(); ++it)
 	{
 		jass::global_variable gv(&*it);

@@ -305,12 +305,38 @@ namespace base { namespace warcraft3 {
 		};
 	}
 
-	_BASE_API uintptr_t                     get_jass_virtual_machine();
-	_BASE_API uintptr_t                     get_current_jass_virtual_machine();
+	struct symbol_table_t {
+		uint32_t unk0;
+		uint32_t unk1;
+		hashtable::reverse_table* string_table;
+	};
+
+	struct code_table_t {
+		uint32_t unk0;
+		uint32_t unk1;
+		uintptr_t table;
+	};
+
+	struct handle_table_t {
+		char unk[0x194];
+		hashtable::reverse_table* table; // 0x194
+	};
+
+	struct jass_vm_t
+	{
+		char                         unk1[0x2858];
+		symbol_table_t*              symbol_table;          //0x2858
+		hashtable::variable_table*   global_table;          //0x285C
+		char                         unk2[0x14];
+		hashtable::string_fasttable* string_table;		    //0x2874
+		char                         unk3[0x10];
+		code_table_t*                code_table;		    //0x2888
+		char                         unk4[0x14];
+		uintptr_t                    set_handle_reference;	//0x28A0
+		handle_table_t*              handle_table;	        //0x28A4
+	};
+
+	_BASE_API jass_vm_t*                    get_jass_vm();
+	_BASE_API jass_vm_t*                    get_current_jass_vm();
 	_BASE_API hashtable::native_func_table* get_native_function_hashtable();
-	_BASE_API hashtable::variable_table*    get_variable_hashtable();
-	_BASE_API hashtable::reverse_table*     get_string_hashtable();
-	_BASE_API hashtable::reverse_table*     get_handle_hashtable();
-	_BASE_API uintptr_t                     get_code_table();
-	_BASE_API hashtable::string_fasttable*  get_string_fasttable();
 }}

@@ -10,7 +10,7 @@ namespace warcraft3 { namespace jass {
 		, code_(0)
 	{
 		uintptr_t address = 4 + (uintptr_t)&trampoline_;
-		uintptr_t offset = address - get_code_table();
+		uintptr_t offset = address - get_jass_vm()->code_table->table;
 		*(uintptr_t*)(address + (offset % 4)) = (uintptr_t)mybase::data();
 		code_ = offset / 4;
 	}
@@ -21,7 +21,7 @@ namespace warcraft3 { namespace jass {
 		, code_(0)
 	{
 		uintptr_t address = 4 + (uintptr_t)&trampoline_;
-		uintptr_t offset = address - get_code_table();
+		uintptr_t offset = address - get_jass_vm()->code_table->table;
 		*(uintptr_t*)(address + (offset % 4)) = (uintptr_t)mybase::data();
 		code_ = offset / 4;
 	}

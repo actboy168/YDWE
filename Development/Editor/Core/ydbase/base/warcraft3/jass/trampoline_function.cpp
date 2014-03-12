@@ -42,7 +42,7 @@ namespace base { namespace warcraft3 { namespace jass {
 			if (!initialized)
 			{
 				initialized = true;
-				jump_function_id = get_string_hashtable()->get("IsUnitInRangeXY")->index_;
+				jump_function_id = get_jass_vm()->symbol_table->string_table->get("IsUnitInRangeXY")->index_;
 				table_hook("IsUnitInRangeXY", (uintptr_t*)&detail::RealIsUnitInRangeXY, (uintptr_t)detail::FakeIsUnitInRangeXY);
 			}
 		}

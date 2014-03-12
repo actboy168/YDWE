@@ -4,7 +4,7 @@
 namespace base { namespace warcraft3 { namespace jass {
 
 	global_variable::global_variable(const char* name)
-		: ptr_(get_variable_hashtable()->get(name))
+		: ptr_(get_jass_vm()->global_table->get(name))
 	{ }
 
 	global_variable::global_variable(hashtable::variable_node* ptr)

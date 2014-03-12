@@ -14,7 +14,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	bool is_gaming()
 	{
-		return 0 != get_jass_virtual_machine();
+		return 0 != get_jass_vm();
 	}
 
 	bool jass_push(jassbind* lj, jass::variable_type vt, uint32_t value)
@@ -140,7 +140,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		if (nf->get_return() == jass::TYPE_STRING)
 		{
-			retval = get_string_fasttable()->get(retval);
+			retval = get_jass_vm()->string_table->get(retval);
 		}
 
 		return jass_push(lj, nf->get_return(), retval) ? 1 : 0;
@@ -160,7 +160,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		if (lua::allow_yield(lj->self()))
 		{
-			uintptr_t vm = get_current_jass_virtual_machine();
+			uintptr_t vm = (uintptr_t)get_current_jass_vm();
 			if (vm && *(uintptr_t*)(vm + 0x34))
 			{
 				*(uintptr_t*)(vm + 0x20) -= jass::trampoline_size();

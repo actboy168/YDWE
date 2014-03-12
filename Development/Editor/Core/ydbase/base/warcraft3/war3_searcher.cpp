@@ -282,7 +282,7 @@ namespace base { namespace warcraft3 {
 			return 0;
 		}
 
-		uintptr_t object = (uintptr_t)get_handle_hashtable()->at(3 * (handle - 0x100000) + 1);
+		uintptr_t object = (uintptr_t)get_jass_vm()->handle_table->table->at(3 * (handle - 0x100000) + 1);
 
 		if (!object)
 		{
