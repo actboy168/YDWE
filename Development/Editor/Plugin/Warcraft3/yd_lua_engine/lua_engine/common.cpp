@@ -160,7 +160,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		if (lua::allow_yield(lj->self()))
 		{
-			uintptr_t vm = (uintptr_t)get_current_jass_vm();
+			uintptr_t vm = (uintptr_t)get_current_jass_vm_nofix();
 			if (vm && *(uintptr_t*)(vm + 0x34))
 			{
 				*(uintptr_t*)(vm + 0x20) -= jass::trampoline_size();

@@ -83,7 +83,7 @@ namespace monitor
 	static uintptr_t __cdecl fake_proc(BOOST_PP_ENUM_PARAMS(n, uint32_t p)) \
 	{ \
 			uintptr_t retval = base::c_call<uintptr_t>(real_proc BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, p)); \
-			uintptr_t vm = (uintptr_t)base::warcraft3::get_current_jass_vm(); \
+			uintptr_t vm = (uintptr_t)base::warcraft3::get_current_jass_vm_nofix(); \
 			handle_manager<type_name>::instance()[retval] = *(uintptr_t*)(vm + 0x20); \
 			return retval; \
 		} \
