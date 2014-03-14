@@ -130,6 +130,8 @@ event.register(event.EVENT_SAVE_MAP, false, function (event_data)
 	local save_option = {
 		-- 是否启用JassHelper
 		enable_jasshelper = (global_config:get_integer("ScriptCompiler.EnableJassHelper", 1) == 1),
+		-- 是否使用脚本模式编译
+		enable_jasshelper_scriptonly = (global_config:get_integer("ScriptCompiler.EnableJassHelperScriptOnly", 0) == 1),
 		-- 是否是调试模式
 		enable_jasshelper_debug = (global_config:get_integer("ScriptCompiler.EnableJassHelperDebug", 0) == 1),
 		-- 是否优化地图

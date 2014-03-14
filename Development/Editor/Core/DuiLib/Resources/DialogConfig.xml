@@ -36,7 +36,7 @@
         <RadioButton name="tab_4" group="TabSelect" text="系统关联"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
       </VerticalLayout>
       <TabLayout name="tabs" >
-        <VerticalLayout class="Background" inset="2,24,2,24" >
+        <VerticalLayout class="Background" inset="2,18,2,18" >
           <VerticalLayout height="140" >
             <Label text="地图版本" tooltip= "地图兼容性选项。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
@@ -46,7 +46,7 @@
               <RadioButton class="NormalRadioButton" text="同时保存双份"           width="200" group="MapSave" name="MapSave_3" tooltip="同时保存为新旧两个版本。和当前魔兽版本不同的版本会以不同的文件名保存。" />
             </VerticalLayout>
           </VerticalLayout>
-          <Control height="16" />
+          <Control height="12" />
           <VerticalLayout height="80" >
             <Label text="代码注入" tooltip="向地图中注入代码的方式。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
@@ -54,11 +54,12 @@
               <RadioButton class="NormalRadioButton" text="不自动注入代码"   width="200" group="ScriptInjection" name="ScriptInjection_1" tooltip="不会自动注入代码。 请用#include &quot;jass文件名&quot; 的方式来手动注入。" />
             </VerticalLayout>
           </VerticalLayout>
-          <Control height="16" />
-          <VerticalLayout height="140" >
+          <Control height="12" />
+          <VerticalLayout height="180" >
             <Label text="脚本编译器" tooltip="有关JassHelper、Cjass编译器的选项。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6"  >
               <CheckBox text="启用JassHelper编译器" width="200" name="EnableJassHelper" tooltip="启用JassHelper编译器。JassHelper编译器是YDWE功能的基础，如果去掉，将不能使用任何YDWE特有的触发动作。除非你是纯Jass地图编写者并且不喜欢vJass，否则请选择此项。" />
+              <CheckBox text="启用JassHelper兼容模式" width="200" name="EnableJassHelperScriptOnly" tooltip="如果地图保存时，JassHelper出错可以尝试启用此模式。" />
               <CheckBox text="启用脚本优化"         width="200" name="EnableJassHelperOptimization" tooltip="目前支持函数的内联。" />
               <CheckBox text="启用CJass编译器"      width="200" name="EnableCJass" tooltip="启用CJass编译器。开启此项，将会自动把智能导入、预处理器和逆天触发器插件关闭。" />
               <CheckBox text="地图调试模式"         width="200" name="EnableJassHelperDebug" tooltip="打开地图的调试模式。影响到debug关键字和代码优化。" />

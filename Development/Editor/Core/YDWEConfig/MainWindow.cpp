@@ -61,6 +61,7 @@ namespace
 		("ScriptInjection",                         Attribute(2))
 		("EnableJassHelper",                        Attribute("ScriptCompiler"))
 		("EnableJassHelperDebug",                   Attribute("ScriptCompiler"))
+		("EnableJassHelperScriptOnly",              Attribute("ScriptCompiler"))
 		("EnableJassHelperOptimization",            Attribute("ScriptCompiler"))
 		("EnableCJass",                             Attribute("ScriptCompiler"))
 		("LaunchOpenGL",                            Attribute("MapTest"))
@@ -167,6 +168,7 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["MapTest"]["LaunchDisableSecurityAccess"] = "0";	
 	table["ScriptCompiler"]["EnableJassHelper"] = "1";
 	table["ScriptCompiler"]["EnableJassHelperDebug"] = "0";
+	table["ScriptCompiler"]["EnableJassHelperScriptOnly"] = "0";
 	table["ScriptCompiler"]["EnableJassHelperOptimization"] = "1";
 	table["ScriptCompiler"]["EnableCJass"] = "0";
 	table["ScriptInjection"]["Option"] = "0";
@@ -325,6 +327,7 @@ void CMainWindow::DisableCJass(bool bEnable)
 
 void CMainWindow::EnableJassHelper(bool bEnable)
 {
+	ContrlSetEnabled("EnableJassHelperScriptOnly", bEnable);
 	ContrlSetEnabled("EnableJassHelperOptimization", bEnable);
 	ContrlSetEnabled("EnableJassHelperDebug", bEnable);
 	ContrlSetEnabled("EnableCJass", bEnable);
