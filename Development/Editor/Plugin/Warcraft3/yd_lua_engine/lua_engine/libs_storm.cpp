@@ -1,7 +1,7 @@
 #include "helper.h"
 #include "storm.h"
 #include <base/path/service.h>
-#include <base/path/filesystem_helper.h>
+#include <base/path/helper.h>
 #include <base/util/unicode.h>
 #include <boost/assign.hpp>
 

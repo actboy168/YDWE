@@ -145,7 +145,7 @@
     <ClCompile Include="base\i18n\libintl.cpp" />
     <ClCompile Include="base\i18n\mofile.cpp" />
     <ClCompile Include="base\path\detail\get_path.cpp" />
-    <ClCompile Include="base\path\filesystem_helper.cpp" />
+    <ClCompile Include="base\path\helper.cpp" />
     <ClCompile Include="base\path\service.cpp" />
     <ClCompile Include="base\util\console.cpp" />
     <ClCompile Include="base\util\detail\ansi_codecvt.cpp" />
@@ -217,7 +217,7 @@
     <ClInclude Include="base\lua\private.h" />
     <ClInclude Include="base\lua\state.h" />
     <ClInclude Include="base\path\detail\get_path.h" />
-    <ClInclude Include="base\path\filesystem_helper.h" />
+    <ClInclude Include="base\path\helper.h" />
     <ClInclude Include="base\path\self.h" />
     <ClInclude Include="base\path\service.h" />
     <ClInclude Include="base\thread\lock\guard.h" />
