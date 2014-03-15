@@ -46,7 +46,6 @@ def copy_all(configuration):
     copy_boost_dll('date_time',  configuration)
     copy_boost_dll('thread',     configuration)
     copy_boost_dll('chrono',     configuration)
-    copy_boost_dll('locale',     configuration)
     copy_boost_dll('log',        configuration)
     copy_lib_dll('Lua',          configuration)
     copy_lib_dll('StormLib',     configuration)

@@ -2,6 +2,7 @@
 
 #include <boost/locale/generator.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
 #include <boost/log/common.hpp>
 #include <boost/log/expressions.hpp>
 #include <boost/log/attributes.hpp>
@@ -21,8 +22,8 @@ namespace logging
 		{
 			using namespace boost::log;
 
-			typedef sinks::synchronous_sink< logging_backend > file_sink;
-			boost::shared_ptr<file_sink> sink(new file_sink(root_path));
+			typedef sinks::synchronous_sink<logging_backend> logging_sink;
+			boost::shared_ptr<logging_sink> sink = boost::make_shared<logging_sink>(root_path);
 
 			sink->set_formatter
 				(
@@ -32,8 +33,6 @@ namespace logging
 						% trivial::severity
 						% expressions::message
 				);
-
-			sink->imbue(boost::locale::generator()("en_US.UTF-8"));
 
 			core::get()->add_sink(sink);
 			core::get()->add_global_attribute("TimeStamp", attributes::local_clock());
