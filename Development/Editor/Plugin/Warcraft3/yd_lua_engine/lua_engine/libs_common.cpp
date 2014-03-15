@@ -13,75 +13,75 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int jass_call_null_function(lua_State* L)
 	{
-		jassbind* lj = (jassbind*)L;
-		printf("Wanring: %s isn't implemented.\n", lj->tostring(lua_upvalueindex(1)));
-		lj->pushnil();
+		lua::state* ls = (lua::state*)L;
+		printf("Wanring: %s isn't implemented.\n", ls->tostring(lua_upvalueindex(1)));
+		ls->pushnil();
 		return 1;
 	}
 
-	void jass_get_global_variable(jassbind* lj, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value)
+	void jass_get_global_variable(lua::state* ls, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value)
 	{
 		switch (opt)
 		{
 		case jass::OPCODE_VARIABLE_NOTHING:
 		case jass::OPCODE_VARIABLE_UNKNOWN:
 		case jass::OPCODE_VARIABLE_NULL:
-			lj->pushnil();
+			ls->pushnil();
 			break;
 		case jass::OPCODE_VARIABLE_CODE:
-			lj->push_code(value);
+			jassbind::push_code(ls, value);
 			break;
 		case jass::OPCODE_VARIABLE_INTEGER:
-			lj->push_integer(value);
+			jassbind::push_integer(ls, value);
 			break;
 		case jass::OPCODE_VARIABLE_REAL:
-			lj->push_real(value);
+			jassbind::push_real(ls, value);
 			break;
 		case jass::OPCODE_VARIABLE_STRING:
-			lj->push_string(get_jass_vm()->string_table->get(value));
+			jassbind::push_string(ls, get_jass_vm()->string_table->get(value));
 			break;
 		case jass::OPCODE_VARIABLE_HANDLE:
-			lj->push_handle(value);
+			jassbind::push_handle(ls, value);
 			break;
 		case jass::OPCODE_VARIABLE_BOOLEAN:
-			lj->push_boolean(value);
+			jassbind::push_boolean(ls, value);
 			break;
 		default:
-			lj->pushnil();
+			ls->pushnil();
 			break;
 		}
 	}
 
 	int jass_get(lua_State* L)
 	{
-		jassbind* lj = (jassbind*)L;
+		lua::state* ls = (lua::state*)L;
 
-		const char* name = lj->tostring(2);
+		const char* name = ls->tostring(2);
 
 		jass::func_value const* nf = jass::jass_func(name);
 		if (nf && nf->is_valid())
 		{
-			if (!lua::allow_yield(lj))
+			if (!lua::allow_yield(ls))
 			{
 				if ((0 == strcmp(name, "TriggerSleepAction"))
 					|| (0 == strcmp(name, "TriggerWaitForSound"))
 					|| (0 == strcmp(name, "TriggerSyncReady"))
 					|| (0 == strcmp(name, "SyncSelections")))
 				{
-					lj->pushstring(name);
-					lj->pushcclosure((lua::cfunction)jass_call_null_function, 1);
+					ls->pushstring(name);
+					ls->pushcclosure((lua::cfunction)jass_call_null_function, 1);
 					return 1;
 				}
 			}
 
-			lj->pushunsigned((uint32_t)(uintptr_t)nf);
-			lj->pushcclosure((lua::cfunction)jass_call_closure, 1);
+			ls->pushunsigned((uint32_t)(uintptr_t)nf);
+			ls->pushcclosure((lua::cfunction)jass_call_closure, 1);
 			return 1;
 		}
 
 		if (!is_gaming())
 		{
-			lj->pushnil();
+			ls->pushnil();
 			return 1;
 		}
 
@@ -90,7 +90,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		{
 			if (!gv.is_array())
 			{
-				jass_get_global_variable(lj, gv.type(), gv);
+				jass_get_global_variable(ls, gv.type(), gv);
 				return 1;
 			}
 			else
@@ -102,34 +102,34 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				case jass::OPCODE_VARIABLE_STRING_ARRAY:
 				case jass::OPCODE_VARIABLE_HANDLE_ARRAY:
 				case jass::OPCODE_VARIABLE_BOOLEAN_ARRAY:
-					return jarray_create(lj->self(), (uintptr_t)gv.ptr());
+					return jarray_create(ls->self(), (uintptr_t)gv.ptr());
 				default:
-					lj->pushnil();
+					ls->pushnil();
 					return 1;
 				}
 			}
 		}
 
-		lj->pushnil();
+		ls->pushnil();
 		return 1;
 	}
 
 	int jass_set(lua_State* L)
 	{
-		jassbind* lj = (jassbind*)L;
+		lua::state* ls = (lua::state*)L;
 
 		if (!is_gaming())
 		{
 			return 0;
 		}
 
-		const char* name = lj->tostring(2);
+		const char* name = ls->tostring(2);
 		jass::global_variable gv(name);
 		if (gv.is_vaild())
 		{
 			if (!gv.is_array())
 			{
-				gv = jass_read(lj, jass::opcode_type_to_var_type(gv.type()), 3);
+				gv = jass_read(ls, jass::opcode_type_to_var_type(gv.type()), 3);
 			}
 			else
 			{

@@ -167,7 +167,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return 0;
 		}
 
-		uintptr_t ret = jass_read((jassbind*)ls, result_vt, -1);
+		uintptr_t ret = jass_read(ls, result_vt, -1);
 		ls->pop(1);
 		return ret;
 	}

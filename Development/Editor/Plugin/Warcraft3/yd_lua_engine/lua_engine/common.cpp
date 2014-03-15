@@ -17,29 +17,29 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0 != get_jass_vm();
 	}
 
-	bool jass_push(jassbind* lj, jass::variable_type vt, uint32_t value)
+	bool jass_push(lua::state* ls, jass::variable_type vt, uint32_t value)
 	{
 		switch (vt)
 		{
 		case jass::TYPE_NOTHING:
 			return false;
 		case jass::TYPE_BOOLEAN:
-			lj->push_boolean(value);
+			jassbind::push_boolean(ls, value);
 			return true;
 		case jass::TYPE_CODE:
-			lj->push_code(value);
+			jassbind::push_code(ls, value);
 			return true;
 		case jass::TYPE_HANDLE:
-			lj->push_handle(value);
+			jassbind::push_handle(ls, value);
 			return true;
 		case jass::TYPE_INTEGER:
-			lj->push_integer(value);
+			jassbind::push_integer(ls, value);
 			return true;
 		case jass::TYPE_REAL:
-			lj->push_real(value);
+			jassbind::push_real(ls, value);
 			return true;
 		case jass::TYPE_STRING:
-			lj->push_string(value);
+			jassbind::push_string(ls, value);
 			return true;
 		default:
 			assert(false);
@@ -47,24 +47,24 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
-	uintptr_t jass_read(jassbind* lj, jass::variable_type opt, int idx)
+	uintptr_t jass_read(lua::state* ls, jass::variable_type opt, int idx)
 	{
 		switch (opt)
 		{
 		case jass::TYPE_NOTHING:
 			return 0;
 		case jass::TYPE_CODE:
-			return lj->read_code(idx);
+			return jassbind::read_code(ls, idx);
 		case jass::TYPE_INTEGER:
-			return lj->read_integer(idx);
+			return jassbind::read_integer(ls, idx);
 		case jass::TYPE_REAL:
-			return lj->read_real(idx);
+			return jassbind::read_real(ls, idx);
 		case jass::TYPE_STRING:
-			return lj->read_string(idx);
+			return jassbind::read_string(ls, idx);
 		case jass::TYPE_HANDLE:
-			return lj->read_handle(idx);
+			return jassbind::read_handle(ls, idx);
 		case jass::TYPE_BOOLEAN:
-			return lj->read_boolean(idx);
+			return jassbind::read_boolean(ls, idx);
 		default:
 			assert(false);
 			return 0;
@@ -84,13 +84,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	int jass_call_native_function(jassbind* lj, const jass::func_value* nf, uintptr_t func_address)
+	int jass_call_native_function(lua::state* ls, const jass::func_value* nf, uintptr_t func_address)
 	{
 		size_t param_size = nf->get_param().size();
 
-		if ((int)param_size > lj->gettop())
+		if ((int)param_size > ls->gettop())
 		{
-			lj->pushnil();
+			ls->pushnil();
 			return 1;
 		}
 
@@ -102,22 +102,22 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			switch (vt)
 			{
 			case jass::TYPE_BOOLEAN:
-				param.push(i, lj->read_boolean(i + 1));
+				param.push(i, jassbind::read_boolean(ls, i + 1));
 				break;
 			case jass::TYPE_CODE:
-				param.push(i, lj->read_code(i + 1));
+				param.push(i, jassbind::read_code(ls, i + 1));
 				break;
 			case jass::TYPE_HANDLE:
-				param.push(i, lj->read_handle(i + 1));
+				param.push(i, jassbind::read_handle(ls, i + 1));
 				break;
 			case jass::TYPE_INTEGER:
-				param.push(i, lj->read_integer(i + 1));
+				param.push(i, jassbind::read_integer(ls, i + 1));
 				break;
 			case jass::TYPE_REAL:
-				param.push_real(i, lj->read_real(i + 1));
+				param.push_real(i, jassbind::read_real(ls, i + 1));
 				break;
 			case jass::TYPE_STRING:
-				param.push(i, lj->tostring(i + 1));
+				param.push(i, ls->tostring(i + 1));
 				break;
 			default:
 				param.push(i, 0);
@@ -130,7 +130,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		uintptr_t retval = 0;
 		if (runtime::catch_crash)
 		{
-			retval = safe_jass_call(lj->self(), func_address, param.data(), param_size);
+			retval = safe_jass_call(ls->self(), func_address, param.data(), param_size);
 		}
 		else
 		{
@@ -143,28 +143,28 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			retval = get_jass_vm()->string_table->get(retval);
 		}
 
-		return jass_push(lj, nf->get_return(), retval) ? 1 : 0;
+		return jass_push(ls, nf->get_return(), retval) ? 1 : 0;
 	}
 
 	int jass_call_closure(lua_State* L)
 	{
-		jassbind* lj = (jassbind*)L;
+		lua::state* ls = (lua::state*)L;
 
 		if (!is_gaming())
 		{
-			lj->pushnil();
+			ls->pushnil();
 			return 1;
 		}
 
-		int result = jass_call_native_function(lj, (const jass::func_value*)lj->tounsigned(lua_upvalueindex(1)));
+		int result = jass_call_native_function(ls, (const jass::func_value*)ls->tounsigned(lua_upvalueindex(1)));
 
-		if (lua::allow_yield(lj))
+		if (lua::allow_yield(ls))
 		{
 			uintptr_t vm = (uintptr_t)get_current_jass_vm_nofix();
 			if (vm && *(uintptr_t*)(vm + 0x34))
 			{
 				*(uintptr_t*)(vm + 0x20) -= jass::trampoline_size();
-				return lua_yield(lj->self(), 0);
+				return lua_yield(ls->self(), 0);
 			}
 		}
 

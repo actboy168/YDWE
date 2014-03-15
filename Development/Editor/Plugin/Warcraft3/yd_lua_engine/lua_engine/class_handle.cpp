@@ -163,41 +163,44 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		lua_pop(L, 1);
 	}
 	
-	jass::jhandle_t jassbind::read_handle(int index)
+	namespace jassbind
 	{
-		if (0 == runtime::handle_level)
+		jass::jhandle_t read_handle(lua::state* ls, int index)
 		{
-			// unsigned
-			return (jass::jhandle_t)mybase::tounsigned(index);
+			if (0 == runtime::handle_level)
+			{
+				// unsigned
+				return (jass::jhandle_t)ls->tounsigned(index);
+			}
+			else if (2 == runtime::handle_level)
+			{
+				// userdata
+				return jhandle_ud_read(ls, index);
+			}
+			else
+			{
+				// lightuserdata
+				return jhandle_lud_read(ls, index);
+			}
 		}
-		else if (2 == runtime::handle_level)
-		{
-			// userdata
-			return jhandle_ud_read(this, index);
-		}
-		else
-		{
-			// lightuserdata
-			return jhandle_lud_read(this, index);
-		}
-	}
 
-	void jassbind::push_handle(jass::jhandle_t value)
-	{
-		if (0 == runtime::handle_level)
+		void push_handle(lua::state* ls, jass::jhandle_t value)
 		{
-			// unsigned
-			return mybase::pushunsigned(value);
-		}
-		else if (2 == runtime::handle_level)
-		{
-			// userdata
-			return jhandle_ud_push(this, value);
-		}
-		else
-		{
-			// lightuserdata
-			return jhandle_lud_push(this, value);
+			if (0 == runtime::handle_level)
+			{
+				// unsigned
+				return ls->pushunsigned(value);
+			}
+			else if (2 == runtime::handle_level)
+			{
+				// userdata
+				return jhandle_ud_push(ls, value);
+			}
+			else
+			{
+				// lightuserdata
+				return jhandle_lud_push(ls, value);
+			}
 		}
 	}
 }}}
