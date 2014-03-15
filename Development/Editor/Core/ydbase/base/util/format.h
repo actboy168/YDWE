@@ -598,13 +598,13 @@ inline std::wostream& standard_output(const wchar_t*) { return std::wcout; }
 #include <boost/preprocessor/repetition.hpp>
 #include <boost/preprocessor/punctuation/comma_if.hpp>
 
-#define DEFINE_FORMAT_ACCEPT(z, n, param) fmt_iter.accept(BOOST_PP_CAT(param, n));
-#define DEFINE_FORMAT_CREATER(z, n, unused) \
+#define BASE_FORMAT_DEFINE_ACCEPT(z, n, param) fmt_iter.accept(BOOST_PP_CAT(param, n));
+#define BASE_FORMAT_DEFINE_CREATER(z, n, unused) \
 	template <class CharT BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, class T)> \
 	void format(std::basic_ostream<CharT, std::char_traits<CharT>>& out, const CharT* fmt BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_BINARY_PARAMS(n, T, const& v)) \
 	{ \
 		format_detail::format_analyzer<CharT> fmt_iter(fmt); \
-		BOOST_PP_REPEAT(n, DEFINE_FORMAT_ACCEPT, v) \
+		BOOST_PP_REPEAT(n, BASE_FORMAT_DEFINE_ACCEPT, v) \
 		fmt_iter.finish(); \
 		fmt_iter.write(out); \
 	} \
@@ -612,7 +612,7 @@ inline std::wostream& standard_output(const wchar_t*) { return std::wcout; }
 	std::basic_string<CharT> format(const CharT* fmt BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_BINARY_PARAMS(n, T, const& v)) \
 	{ \
 		format_detail::format_analyzer<CharT> fmt_iter(fmt); \
-		BOOST_PP_REPEAT(n, DEFINE_FORMAT_ACCEPT, v) \
+		BOOST_PP_REPEAT(n, BASE_FORMAT_DEFINE_ACCEPT, v) \
 		fmt_iter.finish(); \
 		return std::move(fmt_iter.str()); \
 	} \
@@ -622,9 +622,9 @@ inline std::wostream& standard_output(const wchar_t*) { return std::wcout; }
 		format(format_detail::standard_output(fmt), fmt BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, v)); \
 	}
 
-BOOST_PP_REPEAT(16, DEFINE_FORMAT_CREATER, ~)
-#undef DEFINE_FORMAT_ACCEPT
-#undef DEFINE_FORMAT_CREATER
+BOOST_PP_REPEAT(16, BASE_FORMAT_DEFINE_CREATER, ~)
+#undef BASE_FORMAT_DEFINE_ACCEPT
+#undef BASE_FORMAT_DEFINE_CREATER
 #undef BASE_FORMAT_THROW_ERROR
 }
 
