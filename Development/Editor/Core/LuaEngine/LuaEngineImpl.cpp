@@ -12,16 +12,7 @@
 #include <base/file/stream.h>
 #include <base/util/format.h>
 #include <base/win/version.h>
-
-#pragma warning(push)
-#pragma warning(disable: 4231)
-#pragma warning(disable: 4251)
-#include <log4cxx/basicconfigurator.h>
-#include <log4cxx/propertyconfigurator.h>
-#include <log4cxx/helpers/exception.h>
-#include <log4cxx/helpers/properties.h>
-#include <log4cxx/helpers/fileinputstream.h>
-#pragma warning(pop)
+#include "logging.h"
 
 uintptr_t RealLuaPcall = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"luacore.dll"), "lua_pcallk");
 int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
@@ -45,44 +36,26 @@ int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
 
 LuaEngineImpl::LuaEngineImpl()
 	: state_(nullptr)
-	, logger_(nullptr)
+	, logger_()
 	, vaild_(false)
 { }
 
 LuaEngineImpl::~LuaEngineImpl()
 {
 	state_= nullptr;
-	logger_ = nullptr;
 	vaild_ = false;
 }
 
-bool LuaEngineImpl::InitializeLogger(boost::filesystem::path const& log_config)
+bool LuaEngineImpl::InitializeLogger(const boost::filesystem::path& root_path)
 {
-	log4cxx::helpers::Properties props;
-	try
+	if (!logging::initiate(root_path))
 	{
-		log4cxx::helpers::InputStreamPtr inputStream = new log4cxx::helpers::FileInputStream(log_config.c_str());
-		props.load(inputStream);
-	}
-	catch (log4cxx::helpers::IOException &)
-	{
-		log4cxx::BasicConfigurator::configure();
 		return false;
 	}
 
-	log4cxx::LogString log_file = props.getProperty(LOG4CXX_STR("log4j.appender.YDWELog.File"));
-	if (!log_file.empty())
-	{
-		if (!boost::filesystem::path(log_file).is_absolute())
-		{
-			props.setProperty(LOG4CXX_STR("log4j.appender.YDWELog.File"), (log_config.parent_path() / log_file).wstring());
-		}
-	}
+	logger_ = logging::get_logger("root");
 
-	log4cxx::PropertyConfigurator::configure(props);
-
-	logger_ = log4cxx::Logger::getRootLogger();
-	LOG4CXX_INFO(logger_, "------------------------------------------------------");
+	LOGGING_INFO(logger_) << "------------------------------------------------------";
 
 	return true;
 }
@@ -91,9 +64,9 @@ bool LuaEngineImpl::InitializeInfo()
 {
 	base::win::version_number vn = base::win::get_version_number();
 
-	LOG4CXX_INFO(logger_, base::format(L"YDWE Script engine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]));
-	LOG4CXX_INFO(logger_, "Compiled at " __TIME__ ", " __DATE__);
-	LOG4CXX_INFO(logger_, base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build));
+	LOGGING_INFO(logger_) << base::format("YDWE Script engine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]);
+	LOGGING_INFO(logger_) << "Compiled at " __TIME__ ", " __DATE__;
+	LOGGING_INFO(logger_) << base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
 
 	return true;
 }
@@ -106,23 +79,23 @@ bool LuaEngineImpl::InitializeLua()
 	state_ = luaL_newstate();
 	if (!state_)
 	{
-		LOG4CXX_FATAL(logger_, "Could not initialize script engine. Program may not work correctly!");
+		LOGGING_FATAL(logger_) << "Could not initialize script engine. Program may not work correctly!";
 		return false;
 	}
 
 	luaL_openlibs(state_);
 	luabind::open(state_);
-	LOG4CXX_DEBUG(logger_, "Initialize script engine successfully.");
+	LOGGING_DEBUG(logger_) << "Initialize script engine successfully.";
 
 	return true;
 }
 
-bool LuaEngineImpl::Initialize(boost::filesystem::path const& log_config)
+bool LuaEngineImpl::Initialize(const boost::filesystem::path& root_path)
 {
 	if (vaild_)
 		return true;
 
-	if (!InitializeLogger(log_config))
+	if (!InitializeLogger(root_path))
 	{
 		return false;
 	}
@@ -139,18 +112,18 @@ bool LuaEngineImpl::Initialize(boost::filesystem::path const& log_config)
 			return false;
 		}
 
-		LOG4CXX_INFO(logger_, "Script engine startup complete.");
+		LOGGING_INFO(logger_) << "Script engine startup complete.";
 		vaild_ = true;
 		return true;
 	}
 	catch (std::exception const& e)
 	{
-		LOG4CXX_ERROR(logger_, "exception: " << e.what());
+		LOGGING_ERROR(logger_) << "exception: " << e.what();
 		return false;
 	}
 	catch (...)
 	{
-		LOG4CXX_ERROR(logger_, "unknown exception.");
+		LOGGING_ERROR(logger_) << "unknown exception.";
 		return false;
 	}
 }
@@ -161,8 +134,7 @@ bool LuaEngineImpl::Uninitialize()
 	{
 		//lua_close(state_);
 		state_ = nullptr;
-		LOG4CXX_INFO(logger_, "Script engine has been shut down.");
-		logger_ = nullptr;
+		LOGGING_INFO(logger_) << "Script engine has been shut down.";
 		vaild_ = false;
 	}
 
@@ -201,16 +173,16 @@ bool LuaEngineImpl::LoadFile(boost::filesystem::path const& file_path)
 	}
 	catch (luabind::error const& e)
 	{
-		LOG4CXX_ERROR(logger_, "exception: " << lua_tostring(e.state(), -1));
+		LOGGING_ERROR(logger_) << "exception: " << lua_tostring(e.state(), -1);
 		lua_pop(e.state(), 1);   
 	}
 	catch (std::exception const& e)
 	{
-		LOG4CXX_ERROR(logger_, "exception: " << e.what());
+		LOGGING_ERROR(logger_) << "exception: " << e.what();
 	}
 	catch (...)
 	{
-		LOG4CXX_ERROR(logger_, "unknown exception.");
+		LOGGING_ERROR(logger_) << "unknown exception.";
 	}
 
 	return false;

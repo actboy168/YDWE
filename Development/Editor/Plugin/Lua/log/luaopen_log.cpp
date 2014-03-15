@@ -5,51 +5,40 @@
 #pragma warning(pop)
 
 #include <windows.h>
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4231)
-#endif
-#include <log4cxx/logger.h>
-#include <log4cxx/logmanager.h>
-#include <log4cxx/basicconfigurator.h>
-#include <log4cxx/propertyconfigurator.h>
-#include <log4cxx/helpers/exception.h>
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
+#include <LuaEngine\logging.h>
 
 namespace NLuaAPI { namespace NLog {
 
-	log4cxx::LoggerPtr gScriptLogger;
+	logging::logger lg;
 
 	static void LuaLogFatal(const std::string &str)
 	{
-		LOG4CXX_FATAL(gScriptLogger, str);
+		LOGGING_FATAL(lg) << str;
 	}
 
 	static void LuaLogError(const std::string &str)
 	{
-		LOG4CXX_ERROR(gScriptLogger, str);
+		LOGGING_ERROR(lg) << str;
 	}
 
 	static void LuaLogWarning(const std::string &str)
 	{
-		LOG4CXX_WARN(gScriptLogger, str);
+		LOGGING_WARNING(lg) << str;
 	}
 
 	static void LuaLogInfo(const std::string &str)
 	{
-		LOG4CXX_INFO(gScriptLogger, str);
+		LOGGING_INFO(lg) << str;
 	}
 
 	static void LuaLogDebug(const std::string &str)
 	{
-		LOG4CXX_DEBUG(gScriptLogger, str);
+		LOGGING_DEBUG(lg) << str;
 	}
 
 	static void LuaLogTrace(const std::string &str)
 	{
-		LOG4CXX_TRACE(gScriptLogger, str);
+		LOGGING_TRACE(lg) << str;
 	}
 }}
 
@@ -57,7 +46,7 @@ int luaopen_log(lua_State *pState)
 {
 	using namespace luabind;
 
-	NLuaAPI::NLog::gScriptLogger = log4cxx::Logger::getLogger(LOG4CXX_STR("YDScript"));
+	NLuaAPI::NLog::lg = logging::get_logger("lua");
 
 	module(pState, "log")
 	[

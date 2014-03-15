@@ -62,7 +62,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>event.def</ModuleDefinitionFile>
-      <AdditionalDependencies>luacore.lib;luabind.lib;log4cxx.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>luacore.lib;luabind.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,7 +82,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>event.def</ModuleDefinitionFile>
-      <AdditionalDependencies>luacore.lib;luabind.lib;log4cxx.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>luacore.lib;luabind.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -99,6 +99,9 @@
     <ClInclude Include="YDWELogger.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\LuaEngine\LuaEngine.vcxproj">
+      <Project>{42def9a2-d658-4984-aa00-073b9cc03552}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
