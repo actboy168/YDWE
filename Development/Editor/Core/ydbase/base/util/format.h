@@ -7,6 +7,7 @@
 #include <sstream>
 #include <type_traits>
 #include <base/util/hybrid_array.h>
+#include <base/util/unicode.h>
 
 #pragma warning(push)
 #pragma warning(disable:4702)
@@ -196,36 +197,17 @@ private:
 		return L"(null)";
 	}
 
-	void format_cast_string(const char_t* value)
+	void format_cast_string(const wchar_t* value);
+	void format_cast_string(const char* value);
+
+	template <class T>
+	void format_cast_string(T* value)
 	{
-		if (!value) 
-		{
-			format_cast_string(empty_string(value));
-			return ;
-		}
-
-		const char_t* first = value;
-		const char_t* next = first;
-
-		if (precision_ >= 0)
-		{
-			while (*next && precision_--) { ++next; }
-		}
-		else
-		{
-			while (*next) { ++next; }
-		}
-
-		format_value(first, next - first);
+		format_cast_string(const_cast<const T*>(value));
 	}
 
-	void format_cast_string(char_t* value)
-	{
-		format_cast_string(const_cast<const char_t*>(value));
-	}
-
-	template <size_t n>
-	void format_cast_string(const char_t (&value)[n])
+	template <class T, size_t n>
+	void format_cast_string(const T (&value)[n])
 	{
 		assert(n != 0);
 
@@ -239,14 +221,14 @@ private:
 		}
 	}
 
-	template <size_t n>
-	void format_cast_string(char_t (&value)[n])
+	template <class T, size_t n>
+	void format_cast_string(T(&value)[n])
 	{
-		format_cast_string(const_cast<const char_t*>(value));
+		format_cast_string(const_cast<const T*>(value));
 	}
 
-	template <class Traits>
-	void format_cast_string(const std::basic_string<char_t, Traits>& value)
+	template <class T>
+	void format_cast_string(const std::basic_string<T>& value)
 	{
 		format_value(value.c_str(), value.size());
 	}
@@ -548,6 +530,69 @@ private:
 	std::ptrdiff_t                  precision_;
 	char_t                          ch_;
 };
+
+template <>
+inline void format_analyzer<wchar_t, default_report_error>::format_cast_string(const wchar_t* value)
+{
+	if (!value)
+	{
+		format_cast_string(empty_string(value));
+		return;
+	}
+
+	const char_t* first = value;
+	const char_t* next = first;
+
+	if (precision_ >= 0)
+	{
+		while (*next && precision_--) { ++next; }
+	}
+	else
+	{
+		while (*next) { ++next; }
+	}
+
+	format_value(first, next - first);
+}
+
+template <>
+inline void format_analyzer<wchar_t, default_report_error>::format_cast_string(const char* value)
+{
+	std::wstring valstr = base::util::u2w(value);
+	format_cast_string(valstr.c_str());
+}
+
+template <>
+inline void format_analyzer<char, default_report_error>::format_cast_string(const char* value)
+{
+	if (!value)
+	{
+		format_cast_string(empty_string(value));
+		return;
+	}
+
+	const char_t* first = value;
+	const char_t* next = first;
+
+	if (precision_ >= 0)
+	{
+		while (*next && precision_--) { ++next; }
+	}
+	else
+	{
+		while (*next) { ++next; }
+	}
+
+	format_value(first, next - first);
+}
+
+template <>
+inline void format_analyzer<char, default_report_error>::format_cast_string(const wchar_t* value)
+{
+	std::string valstr = base::util::w2u(value);
+	format_cast_string(valstr.c_str());
+}
+
 
 inline std::ostream& standard_output(const char*) { return std::cout; }
 inline std::wostream& standard_output(const wchar_t*) { return std::wcout; }
