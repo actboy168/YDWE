@@ -72,7 +72,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				if (storm_path_valid(root_path, file_path))
 				{
 					std::fstream fs(file_path.c_str(), std::ios::binary | std::ios::out);
-					if (fs)
+					if (fs.is_open())
 					{
 						std::copy(buf_data, buf_data + buf_size, std::ostreambuf_iterator<char>(fs));
 						ls->pushboolean(1);
