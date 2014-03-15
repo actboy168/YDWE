@@ -153,7 +153,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			}
 
 			lj_->pushunsigned((uint32_t)(uintptr_t)this);
-			lj_->pushcclosure((lua::state::cfunction)jass_hook_real_function, 1);
+			lj_->pushcclosure((lua::cfunction)jass_hook_real_function, 1);
 
 			return safe_call_ref(lj_, lua_fake_func_, param_size + 1, nf_->get_return());
 		} 
@@ -241,11 +241,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			ls->newtable();
 			{
 				ls->pushstring("__index");
-				ls->pushcclosure((lua::state::cfunction)jass_hook_get, 0);
+				ls->pushcclosure((lua::cfunction)jass_hook_get, 0);
 				ls->rawset(-3);
 
 				ls->pushstring("__newindex");
-				ls->pushcclosure((lua::state::cfunction)jass_hook_set, 0);
+				ls->pushcclosure((lua::cfunction)jass_hook_set, 0);
 				ls->rawset(-3);
 			}
 			ls->setmetatable(-2);

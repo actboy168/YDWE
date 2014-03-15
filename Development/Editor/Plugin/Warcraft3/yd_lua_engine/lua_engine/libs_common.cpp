@@ -61,7 +61,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jass::func_value const* nf = jass::jass_func(name);
 		if (nf && nf->is_valid())
 		{
-			if (!lua::allow_yield(lj->self()))
+			if (!lua::allow_yield(lj))
 			{
 				if ((0 == strcmp(name, "TriggerSleepAction"))
 					|| (0 == strcmp(name, "TriggerWaitForSound"))
@@ -69,13 +69,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 					|| (0 == strcmp(name, "SyncSelections")))
 				{
 					lj->pushstring(name);
-					lj->pushcclosure((lua::state::cfunction)jass_call_null_function, 1);
+					lj->pushcclosure((lua::cfunction)jass_call_null_function, 1);
 					return 1;
 				}
 			}
 
 			lj->pushunsigned((uint32_t)(uintptr_t)nf);
-			lj->pushcclosure((lua::state::cfunction)jass_call_closure, 1);
+			lj->pushcclosure((lua::cfunction)jass_call_closure, 1);
 			return 1;
 		}
 
@@ -157,11 +157,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			ls->newtable();
 			{
 				ls->pushstring("__index");
-				ls->pushcclosure((lua::state::cfunction)jass_get, 0);
+				ls->pushcclosure((lua::cfunction)jass_get, 0);
 				ls->rawset(-3);
 
 				ls->pushstring("__newindex");
-				ls->pushcclosure((lua::state::cfunction)jass_set, 0);
+				ls->pushcclosure((lua::cfunction)jass_set, 0);
 				ls->rawset(-3);
 			}
 			ls->setmetatable(-2);

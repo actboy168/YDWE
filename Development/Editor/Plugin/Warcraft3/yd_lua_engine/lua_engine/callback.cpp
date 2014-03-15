@@ -10,7 +10,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	lua::state* get_mainthread(lua::state* thread)
 	{
-		lua_rawgeti(thread->self(), LUA_REGISTRYINDEX, LUA_RIDX_MAINTHREAD);
+		thread->rawgeti(LUA_REGISTRYINDEX, LUA_RIDX_MAINTHREAD);
 		lua::state* ml = (lua::state*)thread->tothread(-1);
 		thread->pop(1);
 		return ml;
@@ -56,7 +56,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			}
 		}
 
-		int error = lua_pcall(ls->self(), nargs, nresults, 0);
+		int error = ls->pcall(nargs, nresults, 0);
 		switch (error)
 		{
 		case LUA_OK:

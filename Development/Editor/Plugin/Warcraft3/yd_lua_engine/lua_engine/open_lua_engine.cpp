@@ -56,7 +56,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			ls->rawset(-3);
 
 			ls->pushstring("EnableConsole");
-			ls->pushcclosure((lua::state::cfunction)jass_enable_console, 0);
+			ls->pushcclosure((lua::cfunction)jass_enable_console, 0);
 			ls->rawset(-3);
 		}
 		ls->setglobal("jass_ext");
@@ -64,7 +64,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	void register_preload_lib(lua::state* ls, const char *name, lua::state::cfunction f)
+	void register_preload_lib(lua::state* ls, const char *name, lua::cfunction f)
 	{
 		ls->getfield(LUA_REGISTRYINDEX, "_PRELOAD");
 		ls->pushcclosure(f, 0);

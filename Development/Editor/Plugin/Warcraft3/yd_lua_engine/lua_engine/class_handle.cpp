@@ -53,7 +53,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			jass::jhandle_t* hptr = (jass::jhandle_t*)ls->newuserdata(sizeof(jass::jhandle_t));
 			*hptr = value;
 			jass::handle_add_ref(value);
-			luaL_setmetatable(ls->self(), LUA_JASS_HANDLE);
+			ls->setmetatable(LUA_JASS_HANDLE);
 
 			ls->pushunsigned(value);
 			ls->pushvalue(-2);

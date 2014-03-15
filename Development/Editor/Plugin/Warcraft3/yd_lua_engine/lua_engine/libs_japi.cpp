@@ -12,7 +12,7 @@ namespace base {
 		inline int convert_to_lua(state* ls, const warcraft3::jass::func_value& v)
 		{
 			ls->pushunsigned((uint32_t)(uintptr_t)&v);
-			ls->pushcclosure((lua::state::cfunction)warcraft3::lua_engine::jass_call_closure, 1);
+			ls->pushcclosure((lua::cfunction)warcraft3::lua_engine::jass_call_closure, 1);
 			return 1;
 		}
 	}
@@ -28,7 +28,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		if (nf)
 		{
 			ls->pushunsigned((uint32_t)(uintptr_t)nf);
-			ls->pushcclosure((lua::state::cfunction)jass_call_closure, 1);
+			ls->pushcclosure((lua::cfunction)jass_call_closure, 1);
 			return 1;
 		}
 

@@ -40,14 +40,14 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 	private:
 		int open_libs(lua::state* ls)
 		{
-			luaL_requiref(ls->self(), "_G",            luaopen_base, 1);      ls->pop(1);
-			luaL_requiref(ls->self(), LUA_LOADLIBNAME, luaopen_package, 1);   ls->pop(1);
-			luaL_requiref(ls->self(), LUA_COLIBNAME,   luaopen_coroutine, 1); ls->pop(1);
-			luaL_requiref(ls->self(), LUA_TABLIBNAME,  luaopen_table, 1);     ls->pop(1);
-			luaL_requiref(ls->self(), LUA_STRLIBNAME,  luaopen_string, 1);    ls->pop(1);
-			luaL_requiref(ls->self(), LUA_BITLIBNAME,  luaopen_bit32, 1);     ls->pop(1);
-			luaL_requiref(ls->self(), LUA_MATHLIBNAME, luaopen_math, 1);      ls->pop(1);
-			luaL_requiref(ls->self(), LUA_DBLIBNAME,   luaopen_debug, 1);     ls->pop(1);
+			ls->requiref("_G",            (lua::cfunction)luaopen_base, 1);      ls->pop(1);
+			ls->requiref(LUA_LOADLIBNAME, (lua::cfunction)luaopen_package, 1);   ls->pop(1);
+			ls->requiref(LUA_COLIBNAME,   (lua::cfunction)luaopen_coroutine, 1); ls->pop(1);
+			ls->requiref(LUA_TABLIBNAME,  (lua::cfunction)luaopen_table, 1);     ls->pop(1);
+			ls->requiref(LUA_STRLIBNAME,  (lua::cfunction)luaopen_string, 1);    ls->pop(1);
+			ls->requiref(LUA_BITLIBNAME,  (lua::cfunction)luaopen_bit32, 1);     ls->pop(1);
+			ls->requiref(LUA_MATHLIBNAME, (lua::cfunction)luaopen_math, 1);      ls->pop(1);
+			ls->requiref(LUA_DBLIBNAME,   (lua::cfunction)luaopen_debug, 1);     ls->pop(1);
 			
 			return 1;
 		}

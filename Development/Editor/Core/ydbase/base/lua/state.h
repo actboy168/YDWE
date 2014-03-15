@@ -3,13 +3,14 @@
 #include <base/config.h>
 #include <lua.hpp>
 
-namespace base { 
-namespace lua {
+namespace base { namespace lua {
+
+	struct state;
+
+	typedef int (__cdecl * cfunction)(state *);
 
 	struct state
 	{
-		typedef int (__cdecl * cfunction)(state *);
-
 		inline lua_State* self()
 		{
 			return (lua_State*)this;
@@ -355,6 +356,11 @@ namespace lua {
 			return lua_setmetatable(self(), objindex);
 		}
 
+		inline void setmetatable(const char *tname)
+		{
+			return luaL_setmetatable(self(), tname);
+		}
+
 		inline void setuservalue(int idx)
 		{
 			lua_setuservalue(self(), idx);
@@ -404,7 +410,11 @@ namespace lua {
 		{
 			return pcallk(nargs, nresults, errfunc, 0, NULL);
 		}
-
+		
+		inline void requiref(const char *modname, cfunction openf, int glb)
+		{
+			return luaL_requiref(self(), modname, (lua_CFunction)openf, glb);
+		}
 
 		inline void argcheck(bool cond, int narg, const char* extramsg)
 		{
@@ -425,5 +435,4 @@ namespace lua {
 			return lua_error(self());
 		}
 	};
-}
-}
+}}
