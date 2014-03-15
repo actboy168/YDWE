@@ -12,6 +12,13 @@
 #pragma warning(push)
 #pragma warning(disable:4702)
 
+#define BASE_FORMAT_THROW_ERROR(reason) \
+	do { \
+		assert(0 && (reason)); \
+		throw std::exception(reason); \
+		__pragma(warning(suppress: 4127)) \
+	} while (0)
+
 namespace base { namespace format_detail {
 
 template <class T>
@@ -72,7 +79,7 @@ public:
 		fmt_ = print_string_literal(fmt_);
 		if (*fmt_ != '\0')
 		{
-			throw_error("format: Too many conversion specifiers in format string");
+			BASE_FORMAT_THROW_ERROR("format: Too many conversion specifiers in format string");
 		}
 	}
 
@@ -94,12 +101,6 @@ public:
 	}
 
 private:
-	void throw_error(const char* reason)
-	{
-		assert(0 && reason);
-		throw std::exception(reason);
-	}
-
 	void format_value(const char_t* value, std::size_t len)
 	{
 		std::size_t prefixlen = 0;
@@ -233,7 +234,7 @@ private:
 	void format_cast_char(const T& /*value*/
 		, typename std::enable_if<!std::is_convertible<T, char>::value>::type* = 0)
 	{
-		throw_error("format: Cannot convert from argument type to char.");
+		BASE_FORMAT_THROW_ERROR("format: Cannot convert from argument type to char.");
 	}
 
 	template <class T>
@@ -247,7 +248,7 @@ private:
 	uint64_t convert_to_integer(const T& /*value*/
 		, typename std::enable_if<!std::is_convertible<T, uint64_t>::value && !std::is_convertible<T, void*>::value>::type* = 0) 
 	{
-		throw_error("format: Cannot convert from argument type to integer.");
+		BASE_FORMAT_THROW_ERROR("format: Cannot convert from argument type to integer.");
 		return 0;
 	}
 
@@ -288,7 +289,7 @@ private:
 	double convert_to_float(const T& /*value*/
 		, typename std::enable_if<!std::is_floating_point<T>::value>::type* = 0)
 	{
-		throw_error("format: Cannot convert from argument type to float.");
+		BASE_FORMAT_THROW_ERROR("format: Cannot convert from argument type to float.");
 		return 0.;
 	}
 
@@ -389,7 +390,7 @@ private:
 	{
 		if (*fmtStart != '%')
 		{
-			throw_error("format: Not enough conversion specifiers in format string");
+			BASE_FORMAT_THROW_ERROR("format: Not enough conversion specifiers in format string");
 			return fmtStart;
 		}
 
@@ -431,7 +432,7 @@ private:
 		if (*c == '*')
 		{
 			++c;
-			throw_error("format: * conversion spec not supported");
+			BASE_FORMAT_THROW_ERROR("format: * conversion spec not supported");
 		}
 
 		// 3) Parse precision
@@ -442,7 +443,7 @@ private:
 			if (*c == '*')
 			{
 				++c;
-				throw_error("format: * conversion spec not supported");
+				BASE_FORMAT_THROW_ERROR("format: * conversion spec not supported");
 			}
 			else
 			{
@@ -466,7 +467,7 @@ private:
 		// boost::format class for forging the way here).
 		if (*c == '\0')
 		{
-			throw_error("format: Conversion spec incorrectly terminated by end of string");
+			BASE_FORMAT_THROW_ERROR("format: Conversion spec incorrectly terminated by end of string");
 			return c;
 		}
 
@@ -510,7 +511,7 @@ private:
 			format_cast_string(value);
 			break;
 		case 'n':
-			throw_error("format: %n conversion spec not supported");
+			BASE_FORMAT_THROW_ERROR("format: %n conversion spec not supported");
 			break;
 		}
 
@@ -624,7 +625,7 @@ inline std::wostream& standard_output(const wchar_t*) { return std::wcout; }
 BOOST_PP_REPEAT(16, DEFINE_FORMAT_CREATER, ~)
 #undef DEFINE_FORMAT_ACCEPT
 #undef DEFINE_FORMAT_CREATER
-
+#undef BASE_FORMAT_THROW_ERROR
 }
 
 #pragma warning(pop)
