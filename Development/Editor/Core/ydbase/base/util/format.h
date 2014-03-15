@@ -14,15 +14,6 @@
 
 namespace base { namespace format_detail {
 
-struct default_report_error
-{
-	default_report_error(const char* reason)
-	{
-		assert(0 && reason);
-		throw std::exception(reason);
-	}
-};
-
 template <class T>
 inline int crt_snprintf(char* buf, size_t buf_size, const char* fmt, const T& value)
 {
@@ -37,7 +28,7 @@ inline int crt_snprintf(wchar_t* buf, size_t buf_size, const wchar_t* fmt, const
 	return _snwprintf(buf, buf_size, fmt, value);
 }
 
-template <class CharT, class ReportErrorT = default_report_error>
+template <class CharT>
 class format_analyzer
 {
 public:
@@ -81,7 +72,7 @@ public:
 		fmt_ = print_string_literal(fmt_);
 		if (*fmt_ != '\0')
 		{
-			ReportErrorT("format: Too many conversion specifiers in format string");
+			throw_error("format: Too many conversion specifiers in format string");
 		}
 	}
 
@@ -103,6 +94,11 @@ public:
 	}
 
 private:
+	void throw_error(const char* reason)
+	{
+		assert(0 && reason);
+		throw std::exception(reason);
+	}
 
 	void format_value(const char_t* value, std::size_t len)
 	{
@@ -237,7 +233,7 @@ private:
 	void format_cast_char(const T& /*value*/
 		, typename std::enable_if<!std::is_convertible<T, char>::value>::type* = 0)
 	{
-		ReportErrorT("format: Cannot convert from argument type to char.");
+		throw_error("format: Cannot convert from argument type to char.");
 	}
 
 	template <class T>
@@ -251,7 +247,7 @@ private:
 	uint64_t convert_to_integer(const T& /*value*/
 		, typename std::enable_if<!std::is_convertible<T, uint64_t>::value && !std::is_convertible<T, void*>::value>::type* = 0) 
 	{
-		ReportErrorT("format: Cannot convert from argument type to integer.");
+		throw_error("format: Cannot convert from argument type to integer.");
 		return 0;
 	}
 
@@ -292,7 +288,7 @@ private:
 	double convert_to_float(const T& /*value*/
 		, typename std::enable_if<!std::is_floating_point<T>::value>::type* = 0)
 	{
-		ReportErrorT("format: Cannot convert from argument type to float.");
+		throw_error("format: Cannot convert from argument type to float.");
 		return 0.;
 	}
 
@@ -393,7 +389,7 @@ private:
 	{
 		if (*fmtStart != '%')
 		{
-			ReportErrorT("format: Not enough conversion specifiers in format string");
+			throw_error("format: Not enough conversion specifiers in format string");
 			return fmtStart;
 		}
 
@@ -435,7 +431,7 @@ private:
 		if (*c == '*')
 		{
 			++c;
-			ReportErrorT("format: * conversion spec not supported");
+			throw_error("format: * conversion spec not supported");
 		}
 
 		// 3) Parse precision
@@ -446,7 +442,7 @@ private:
 			if (*c == '*')
 			{
 				++c;
-				ReportErrorT("format: * conversion spec not supported");
+				throw_error("format: * conversion spec not supported");
 			}
 			else
 			{
@@ -470,7 +466,7 @@ private:
 		// boost::format class for forging the way here).
 		if (*c == '\0')
 		{
-			ReportErrorT("format: Conversion spec incorrectly terminated by end of string");
+			throw_error("format: Conversion spec incorrectly terminated by end of string");
 			return c;
 		}
 
@@ -514,7 +510,7 @@ private:
 			format_cast_string(value);
 			break;
 		case 'n':
-			ReportErrorT("format: %n conversion spec not supported");
+			throw_error("format: %n conversion spec not supported");
 			break;
 		}
 
@@ -532,7 +528,7 @@ private:
 };
 
 template <>
-inline void format_analyzer<wchar_t, default_report_error>::format_cast_string(const wchar_t* value)
+inline void format_analyzer<wchar_t>::format_cast_string(const wchar_t* value)
 {
 	if (!value)
 	{
@@ -556,14 +552,14 @@ inline void format_analyzer<wchar_t, default_report_error>::format_cast_string(c
 }
 
 template <>
-inline void format_analyzer<wchar_t, default_report_error>::format_cast_string(const char* value)
+inline void format_analyzer<wchar_t>::format_cast_string(const char* value)
 {
 	std::wstring valstr = base::util::u2w(value);
 	format_cast_string(valstr.c_str());
 }
 
 template <>
-inline void format_analyzer<char, default_report_error>::format_cast_string(const char* value)
+inline void format_analyzer<char>::format_cast_string(const char* value)
 {
 	if (!value)
 	{
@@ -587,7 +583,7 @@ inline void format_analyzer<char, default_report_error>::format_cast_string(cons
 }
 
 template <>
-inline void format_analyzer<char, default_report_error>::format_cast_string(const wchar_t* value)
+inline void format_analyzer<char>::format_cast_string(const wchar_t* value)
 {
 	std::string valstr = base::util::w2u(value);
 	format_cast_string(valstr.c_str());
