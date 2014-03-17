@@ -175,7 +175,7 @@ void create_report(std::fstream& fs)
 
 	using namespace base::warcraft3;
 
-	hashtable::reverse_table* table = get_jass_vm()->handle_table->table;
+	hashtable::reverse_table* table = &((*get_jass_vm()->handle_table)->table);
 	for (auto it = table->begin(); it != table->end(); ++it)
 	{
 		ht.add_handle(it->index_, (uint32_t)table->at(3 * (it->index_ - 0x100000) + 1), (uint32_t)table->at(3 * (it->index_ - 0x100000)));
