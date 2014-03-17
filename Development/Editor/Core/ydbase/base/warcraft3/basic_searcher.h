@@ -10,6 +10,7 @@ namespace base { namespace warcraft3 {
 	public:
 		basic_searcher(HMODULE hModule);
 		uintptr_t base() const;
+		size_t    size() const;
 		uintptr_t search_string(const char* str, size_t length) const;
 		uintptr_t search_string(const char* str) const;
 		uintptr_t search_string_ptr(const char* str, size_t length) const;

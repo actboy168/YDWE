@@ -247,7 +247,7 @@ namespace base { namespace warcraft3 {
 	{
 		bool is_valid_ptr(uintptr_t ptr)
 		{
-			return (get_war3_searcher().base() & 0xFF000000) == (ptr & 0xFF000000);
+			return (ptr >= get_war3_searcher().base() && ptr < (get_war3_searcher().base() + get_war3_searcher().size()));
 		}
 	}
 
