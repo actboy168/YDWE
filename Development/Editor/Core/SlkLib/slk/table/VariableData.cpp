@@ -1,6 +1,6 @@
 #include <slk/table/VariableData.hpp>
 #include <string>
-#include <slk/utility/buffer.h>
+#include <base/util/buffer.h>
 #include <slk/utility/convert.h>
 #include <base/exception/exception.h>
 
@@ -27,7 +27,7 @@ namespace slk
 		this->_type = type;
 	}
 
-	void VariableData::LoadData(buffer_reader& reader)
+	void VariableData::LoadData(base::util::buffer_reader& reader)
 	{
 		// Get data
 		switch (_type)

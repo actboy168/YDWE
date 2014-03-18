@@ -27,7 +27,7 @@ namespace slk
 		public:
 			typedef std::vector<std::vector<std::string>> _Mybase;
 
-			SlkDataArray(buffer_reader& reader)
+			SlkDataArray(base::util::buffer_reader& reader)
 				: max_x_(0)
 				, max_y_(0)
 				, cur_x_(0)
@@ -253,7 +253,7 @@ namespace slk
 				return key.front();
 			}
 
-			void read(buffer_reader& reader)
+			void read(base::util::buffer_reader& reader)
 			{
 				bool is_found_b = false;
 				reader::utility::each_line(reader, [&](std::string_view& line)
@@ -292,7 +292,7 @@ namespace slk
 
 	}
 
-	void SlkReader::Read(buffer_reader& reader, SlkTable& table)
+	void SlkReader::Read(base::util::buffer_reader& reader, SlkTable& table)
 	{
 		if (!reader.read_ptr<SLK_HEADER>()->IsValid())
 		{

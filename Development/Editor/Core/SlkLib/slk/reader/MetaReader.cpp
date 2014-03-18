@@ -1,6 +1,6 @@
 #include <slk/reader/MetaReader.hpp>
 #include <slk/reader/SlkReader.hpp>
-#include <slk/utility/buffer.h>
+#include <base/util/buffer.h>
 #include <slk/table/MetaTable.hpp>
 #include <cassert>
 
@@ -120,7 +120,7 @@ namespace slk
 		}
 	}
 
-	void MetaReader::Read(buffer_reader& reader, MetaTable& table)
+	void MetaReader::Read(base::util::buffer_reader& reader, MetaTable& table)
 	{
 		SlkTable slkTable;
 		SlkReader::Read(reader, slkTable);

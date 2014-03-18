@@ -1,6 +1,6 @@
 
 #include <slk/ObjectManager.hpp>
-#include <slk/utility/buffer.h>
+#include <base/util/buffer.h>
 #include <slk/reader/ObjReader.hpp>
 #include <slk/reader/TxtReader.hpp>
 #include <slk/reader/IniReader.hpp>
@@ -118,9 +118,9 @@ namespace slk
 	}
 
 	template <class _Reader, class _Table>
-	void TableRead(_Table& table, buffer&& buf)
+	void TableRead(_Table& table, base::util::buffer&& buf)
 	{
-		buffer_reader reader(buf);
+		base::util::buffer_reader reader(buf);
 		_Reader::Read(reader, table);
 	}
 
@@ -129,10 +129,10 @@ namespace slk
 		, converter_(storm_)
 	{ }
 
-	buffer ObjectManager::load_file(const char* szFilename)
+	base::util::buffer ObjectManager::load_file(const char* szFilename)
 	{
 		InterfaceStorm::error_code ec = 0;
-		buffer buf(storm_.load(szFilename, ec));
+		base::util::buffer buf(storm_.load(szFilename, ec));
 		if (ec != 0 || buf.begin() == buf.end())
 		{
 			throw base::exception("Not found file %s.", szFilename);
@@ -140,9 +140,9 @@ namespace slk
 		return std::move(buf);
 	}
 
-	bool ObjectManager::save_file(const char* szFilename, buffer&& buf)
+	bool ObjectManager::save_file(const char* szFilename, base::util::buffer&& buf)
 	{
-		base::file::write_stream(szFilename).write(std::forward<buffer>(buf));
+		base::file::write_stream(szFilename).write(std::forward<base::util::buffer>(buf));
 		return false;
 	}
 	
@@ -535,8 +535,8 @@ namespace slk
 	bool ObjectManager::load(const char* filename, IniTable& table)
 	{
 		try {
-			buffer b = load_file(filename);
-			buffer_reader reader(b);
+			base::util::buffer b = load_file(filename);
+			base::util::buffer_reader reader(b);
 			IniReader::Read(reader, table);		
 		}
 		catch (base::exception const&) {
@@ -608,7 +608,7 @@ namespace slk
 			case OBJ_TYPE::ITEM:
 			case OBJ_TYPE::DESTRUCTABLE:
 			case OBJ_TYPE::BUFF:
-				return save_file(detail::FileList(type), ObjWriter::Write<buffer>(table));
+				return save_file(detail::FileList(type), ObjWriter::Write<base::util::buffer>(table));
 			default:
 				assert(false);
 				return false;
@@ -630,7 +630,7 @@ namespace slk
 			case OBJ_TYPE::DOODAD:
 			case OBJ_TYPE::ABILITY:
 			case OBJ_TYPE::UPGRADE:
-				return save_file(detail::FileList(type), ObjWriter::Write<buffer>(table));
+				return save_file(detail::FileList(type), ObjWriter::Write<base::util::buffer>(table));
 			default:
 				assert(false);
 				return false;

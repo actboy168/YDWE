@@ -4,7 +4,7 @@
 
 namespace slk
 {
-	void WesReader::Read(buffer_reader& reader, WesTable& table)
+	void WesReader::Read(base::util::buffer_reader& reader, WesTable& table)
 	{
 		bool is_WorldEditStrings = false;
 		reader::utility::remove_bom(reader);

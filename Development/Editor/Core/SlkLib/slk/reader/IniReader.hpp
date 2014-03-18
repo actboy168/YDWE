@@ -1,6 +1,6 @@
 #pragma once
 
-#include <slk/utility/buffer.h>
+#include <base/util/buffer.h>
 #include <slk/table/IniTable.hpp>
 
 namespace slk
@@ -8,6 +8,6 @@ namespace slk
 	class IniReader
 	{
 	public:
-		static void Read(buffer_reader& reader, IniTable& table);
+		static void Read(base::util::buffer_reader& reader, IniTable& table);
 	};
 }

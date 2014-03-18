@@ -16,7 +16,7 @@ namespace slk
 		};
 	}
 
-	void WtsReader::Read(buffer_reader& reader, WtsTable& table)
+	void WtsReader::Read(base::util::buffer_reader& reader, WtsTable& table)
 	{
 		WST_READER_STATE::STATE state = WST_READER_STATE::STATE_HEADER;
 		uint32_t key = 0;

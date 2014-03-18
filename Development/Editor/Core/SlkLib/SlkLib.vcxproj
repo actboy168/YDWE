@@ -122,7 +122,6 @@
     <ClInclude Include="slk\table\VariableData.hpp" />
     <ClInclude Include="slk\table\WesTable.hpp" />
     <ClInclude Include="slk\table\WtsTable.hpp" />
-    <ClInclude Include="slk\utility\buffer.h" />
     <ClInclude Include="slk\utility\convert.h" />
     <ClInclude Include="slk\utility\object_id.h" />
     <ClInclude Include="slk\utility\sequence.h" />

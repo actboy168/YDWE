@@ -1,16 +1,16 @@
 #pragma once
 
 #include <slk/utility/sequence.h>
-#include <slk/utility/buffer.h>
+#include <base/util/buffer.h>
 #include <functional>
 #include <base/util/string_view.h>
 
 namespace slk { namespace reader { namespace utility {
-	void remove_bom(buffer_reader& reader);
-	void each_line(buffer_reader& reader, std::function<void(std::string_view&)> callback);
+	void remove_bom(base::util::buffer_reader& reader);
+	void each_line(base::util::buffer_reader& reader, std::function<void(std::string_view&)> callback);
 
 	template <class TableT>
-	void ini_read(buffer_reader& reader, TableT& table)
+	void ini_read(base::util::buffer_reader& reader, TableT& table)
 	{
 		typename TableT::mapped_type* object = nullptr;
 		remove_bom(reader);
