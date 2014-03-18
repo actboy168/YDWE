@@ -4,6 +4,8 @@
 #include <memory>
 #include <base/util/noncopyable.h>
 
+namespace base { namespace lockfree { namespace details {
+
 #if defined(_MSC_VER)
 #	include <intrin.h>
 #	if defined(_M_IX86)
@@ -22,14 +24,8 @@
 #		pragma intrinsic( _InterlockedExchangePointer )
 #		pragma intrinsic( _InterlockedCompareExchangePointer )
 #	else
-#	   error "Microsoft Visual C++ compiler: unsupported processor architecture"
+#		error "Microsoft Visual C++ compiler: unsupported processor architecture"
 #	endif
-#else
-#   error "Unsupported compiler"
-#endif
-
-namespace base { namespace lockfree { namespace details {
-
 	template <typename T>
 	class atomic_ptr_t 
 		: private util::noncopyable
@@ -44,15 +40,31 @@ namespace base { namespace lockfree { namespace details {
 	private:
 		volatile T *ptr;
 	};
+#else
+#include <atomic>
+	template <typename T>
+	class atomic_ptr_t 
+		: private std::atomic<T*>
+	{
+		typedef std::atomic<T*> base_type;
+	public:
+		inline atomic_ptr_t () : base_type() { }
+		inline atomic_ptr_t (T *ptr_) : base_type(ptr_) { }
+		inline ~atomic_ptr_t () { }
+		inline void set  (T *ptr_) { base_type::store(ptr_); }
+		inline T *xchg (T *val) { return base_type::exchange(val); }
+		inline T *cas  (T *cmp, T *val) { bool suc = base_type::compare_exchange_strong(cmp, val); return cmp; }
+	};
+#endif
 
-	template <typename T, unsigned int _Size>
+	template <typename T, ::std::size_t _Size>
 	struct yqueue_chunk_t
 	{
 		T values [_Size];
 		yqueue_chunk_t<T, _Size>* next;
 	};
 
-	template <typename T, unsigned int _Size, class _Alloc>
+	template <typename T, ::std::size_t _Size, typename _Alloc>
 	class yqueue_alloc 
 		: public _Alloc::template rebind<yqueue_chunk_t<T, _Size> >::other
 	{
@@ -85,16 +97,16 @@ namespace base { namespace lockfree { namespace details {
 	//  N is granularity of the queue (how many pushes have to be done till
 	//  actual memory allocation is required).
 
-	template <typename T, unsigned int _Size = 256, class _Alloc = std::allocator<T>>
+	template <typename T, ::std::size_t _Size = 256, typename _Alloc = ::std::allocator<T>>
 	class yqueue
 		: protected yqueue_alloc<T, _Size, _Alloc>
 	{
 	public:
 		typedef yqueue_alloc<T, _Size, _Alloc> alloc;
-		typedef typename T                     value_type;
-		typedef typename T*                    pointer;		
-		typedef typename value_type&           reference;
-		typedef typename value_type const&     const_reference;
+		typedef T                              value_type;
+		typedef value_type*                    pointer;
+		typedef value_type&                    reference;
+		typedef value_type const&              const_reference;
 
 	protected:
 		using alloc::New;
