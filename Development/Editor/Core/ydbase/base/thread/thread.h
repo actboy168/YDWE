@@ -3,8 +3,9 @@
 #include <base/config.h>
 #include <Windows.h>
 #include <cstdint>
+#include <functional>
 #include <memory>
-#include <boost/intrusive_ptr.hpp>
+#include <base/thread/intrusive_ptr.h>
 #include <base/thread/thread_exception.h>
 
 namespace base
@@ -55,7 +56,7 @@ namespace base
 
 		thread();
 
-		template <typename C1>
+		template <class C1>
 		explicit thread(C1 c1)
 			: thread_info(make_thread_data(c1))
 		{
@@ -84,6 +85,6 @@ namespace base
 		}
 
 #pragma warning(suppress:4251)
-		boost::intrusive_ptr<thread_data_base> thread_info;
+		intrusive_ptr<thread_data_base> thread_info;
 	};
 }

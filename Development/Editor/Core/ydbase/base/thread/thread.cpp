@@ -123,7 +123,7 @@ namespace base
 			throw thread_resource_error(std::errc::resource_deadlock_would_occur, "thread: trying joining itself");
 		}
 
-		boost::intrusive_ptr<thread_data_base> local_thread_info = thread_info;
+		intrusive_ptr<thread_data_base> local_thread_info = thread_info;
 		if (!local_thread_info)
 		{
 			throw thread_resource_error(std::errc::invalid_argument, "thread: thread not joinable");
@@ -134,7 +134,7 @@ namespace base
 
 	thread::id thread::get_id() const
 	{
-		boost::intrusive_ptr<thread_data_base> local_thread_info = thread_info;
+		intrusive_ptr<thread_data_base> local_thread_info = thread_info;
 		return local_thread_info? local_thread_info->thread_id: 0;
 	}
 
