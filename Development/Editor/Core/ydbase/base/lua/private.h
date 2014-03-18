@@ -1,8 +1,8 @@
 #pragma once
 
 #include <base/config.h>
-#include <lua.hpp>
+#include <base/lua/state.h>
 
 namespace base { namespace lua {
-	_BASE_API bool allow_yield(lua_State* L);
+	_BASE_API bool allow_yield(state* ls);
 }}

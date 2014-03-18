@@ -312,15 +312,15 @@ void NativeInit()
 	uintptr_t pWeTextSectionBase = result->get<0>();
 	uint32_t weTextSectionLength = result->get<1>();
 
-	LOG4CXX_DEBUG(gInjectLogger, "WE native function initialization begins.");
+	LOGGING_DEBUG(lg) << "WE native function initialization begins.";
 
 	fpgWeTemplateStringTranslate = MemoryPatternSearch((void *)pWeTextSectionBase, weTextSectionLength, &gWeTemplateStringTranslatePattern[0], sizeof(gWeTemplateStringTranslatePattern));
-	LOG4CXX_TRACE(gInjectLogger, base::format("Found WeTranlateTemplateString at 0x%08X.", fpgWeTemplateStringTranslate));
+	LOGGING_TRACE(lg) << base::format("Found WeTranlateTemplateString at 0x%08X.", fpgWeTemplateStringTranslate);
 
 	fpgWeMessageShow = MemoryPatternSearch((void *)pWeTextSectionBase, weTextSectionLength, &gWeMessageShowPattern[0], sizeof(gWeMessageShowPattern));
-	LOG4CXX_TRACE(gInjectLogger, base::format("Found WeMessageShow at 0x%08X.", fpgWeMessageShow));
+	LOGGING_TRACE(lg) << base::format("Found WeMessageShow at 0x%08X.", fpgWeMessageShow);
 
-	LOG4CXX_DEBUG(gInjectLogger, "WE native function initialization finished.");
+	LOGGING_DEBUG(lg) << "WE native function initialization finished.";
 }
 
 } // namespace NYDWE

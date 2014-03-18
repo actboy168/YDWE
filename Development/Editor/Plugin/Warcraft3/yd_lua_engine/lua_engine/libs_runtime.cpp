@@ -236,11 +236,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			ls->newtable();
 			{
 				ls->pushstring("__index");
-				ls->pushcclosure((lua::state::cfunction)jass_runtime_get, 0);
+				ls->pushcclosure((lua::cfunction)jass_runtime_get, 0);
 				ls->rawset(-3);
 
 				ls->pushstring("__newindex");
-				ls->pushcclosure((lua::state::cfunction)jass_runtime_set, 0);
+				ls->pushcclosure((lua::cfunction)jass_runtime_set, 0);
 				ls->rawset(-3);
 			}
 			ls->setmetatable(-2);

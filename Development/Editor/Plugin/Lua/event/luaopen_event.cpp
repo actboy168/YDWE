@@ -103,13 +103,13 @@ namespace NYDWE {
 				return luabind::call_function<int>(func, event_data);
 			}
 			catch (luabind::error const& e) {
-				LOG4CXX_ERROR(NYDWE::gInjectLogger, "exception: \"" << e.what() << "\" " << lua_tostring(e.state(), -1));
+				LOGGING_ERROR(lg) << "exception: \"" << e.what() << "\" " << lua_tostring(e.state(), -1);
 			}
 			catch (std::exception const& e) {
-				LOG4CXX_ERROR(NYDWE::gInjectLogger, "exception: \"" << e.what() << "\"");
+				LOGGING_ERROR(lg) << "exception: \"" << e.what() << "\"";
 			}
 			catch (...) {
-				LOG4CXX_ERROR(NYDWE::gInjectLogger, "unknown exception");
+				LOGGING_ERROR(lg) << "unknown exception";
 			}
 		}
 
@@ -118,7 +118,7 @@ namespace NYDWE {
 
 	void LuaRegisterEvent(lua_State *pState, EVENT_ID evenetid, bool ignore_error, luabind::object const& func)
 	{
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, "RegisterEvent id: " << evenetid << " ignore_error: " << (ignore_error ? "true" : "false"));
+		LOGGING_TRACE(lg) << "RegisterEvent id: " << evenetid << " ignore_error: " << (ignore_error ? "true" : "false");
 
 		if (evenetid >= 0 && evenetid < EVENT_MAXIMUM)
 		{

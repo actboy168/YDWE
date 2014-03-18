@@ -1,7 +1,7 @@
 #include "helper.h"
 #include "storm.h"
 #include <base/path/service.h>
-#include <base/path/filesystem_helper.h>
+#include <base/path/helper.h>
 #include <base/util/unicode.h>
 #include <boost/assign.hpp>
 
@@ -72,7 +72,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				if (storm_path_valid(root_path, file_path))
 				{
 					std::fstream fs(file_path.c_str(), std::ios::binary | std::ios::out);
-					if (fs)
+					if (fs.is_open())
 					{
 						std::copy(buf_data, buf_data + buf_size, std::ostreambuf_iterator<char>(fs));
 						ls->pushboolean(1);

@@ -319,7 +319,7 @@ namespace base { namespace warcraft3 {
 
 	struct handle_table_t {
 		char unk[0x194];
-		hashtable::reverse_table* table; // 0x194
+		hashtable::reverse_table table; // 0x194
 	};
 
 	struct jass_vm_t
@@ -333,7 +333,7 @@ namespace base { namespace warcraft3 {
 		code_table_t*                code_table;		    //0x2888
 		char                         unk4[0x14];
 		uintptr_t                    set_handle_reference;	//0x28A0
-		handle_table_t*              handle_table;	        //0x28A4
+		handle_table_t**             handle_table;	        //0x28A4
 	};
 
 	_BASE_API jass_vm_t*                    get_jass_vm();

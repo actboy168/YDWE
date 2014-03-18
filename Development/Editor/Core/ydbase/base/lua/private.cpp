@@ -5,8 +5,8 @@ extern "C" {
 }
 
 namespace base { namespace lua {
-	bool allow_yield(lua_State* L)
+	bool allow_yield(state* ls)
 	{
-		return L->nny == 0;
+		return ls->self()->nny == 0;
 	}
 }}

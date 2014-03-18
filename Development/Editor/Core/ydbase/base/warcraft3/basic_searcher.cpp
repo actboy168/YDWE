@@ -29,6 +29,11 @@ namespace base { namespace warcraft3 {
 		return (uintptr_t)module_.module();
 	}
 
+	size_t basic_searcher::size() const
+	{
+		return module_.module_size();
+	}
+
 	uintptr_t basic_searcher::search_string_ptr(const char* str, size_t length) const
 	{
 		uintptr_t retval;

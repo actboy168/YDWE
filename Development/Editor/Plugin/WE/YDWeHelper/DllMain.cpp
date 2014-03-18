@@ -5,7 +5,7 @@
 
 namespace NYDWE
 {
-	log4cxx::LoggerPtr gInjectLogger;
+	logging::logger lg;
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
@@ -14,15 +14,14 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 	{
 		DisableThreadLibraryCalls(module);
 
-		NYDWE::gInjectLogger = log4cxx::Logger::getLogger(L"YDInject");
+		NYDWE::lg = logging::get_logger("inject");
 		NYDWE::NativeInit();
 		NYDWE::InstallHooks();
-		LOG4CXX_INFO(NYDWE::gInjectLogger, "EverEditor startup complete.");
+		LOGGING_INFO(NYDWE::lg) << "EverEditor startup complete.";
 	}
 	else if (reason == DLL_PROCESS_DETACH)
 	{
 		NYDWE::UninstallHooks();
-		NYDWE::gInjectLogger = NULL;
 	}
 
 	return TRUE;

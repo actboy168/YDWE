@@ -11,7 +11,7 @@
 #include <base/file/stream.h>
 #include <base/path/self.h>
 #include <base/path/service.h>
-#include <base/path/filesystem_helper.h>
+#include <base/path/helper.h>
 #include <base/util/unicode.h>
 #include <base/win/version.h>
 #include <base/win/file_version.h>

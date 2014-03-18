@@ -86,9 +86,6 @@
     <ClCompile Include="base\util\unicode.cpp">
       <Filter>base\util</Filter>
     </ClCompile>
-    <ClCompile Include="base\path\filesystem_helper.cpp">
-      <Filter>base\path</Filter>
-    </ClCompile>
     <ClCompile Include="base\path\service.cpp">
       <Filter>base\path</Filter>
     </ClCompile>
@@ -254,6 +251,9 @@
     <ClCompile Include="base\warcraft3\virtual_mpq.cpp">
       <Filter>base\warcraft3</Filter>
     </ClCompile>
+    <ClCompile Include="base\path\helper.cpp">
+      <Filter>base\path</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -261,9 +261,6 @@
     </ClInclude>
     <ClInclude Include="base\util\unicode.h">
       <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\path\filesystem_helper.h">
-      <Filter>base\path</Filter>
     </ClInclude>
     <ClInclude Include="base\path\service.h">
       <Filter>base\path</Filter>
@@ -538,6 +535,9 @@
     </ClInclude>
     <ClInclude Include="base\warcraft3\virtual_mpq.h">
       <Filter>base\warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="base\path\helper.h">
+      <Filter>base\path</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

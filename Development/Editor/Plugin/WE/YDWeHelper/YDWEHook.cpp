@@ -51,23 +51,23 @@ static bool InstallPatch(void *searchStart, boost::uint32_t searchLength, boost:
 	void *patchPoint = MemoryPatternSearch(searchStart, searchLength, patchPattern, patternLength);
 	if (patchPoint)
 	{
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found patch point: 0x%08X", reinterpret_cast<uintptr_t>(patchPoint)));
+		LOGGING_TRACE(lg) << base::format("Found patch point: 0x%08X", reinterpret_cast<uintptr_t>(patchPoint));
 
 		// Patch memory
 		bool patchResult = MemoryPatchAndVerify(patchPoint, patch, patchLength);
 		if (patchResult)
 		{
-			LOG4CXX_TRACE(NYDWE::gInjectLogger, "Patch memory success");
+			LOGGING_TRACE(lg) << "Patch memory success";
 			result = true;
 		}
 		else
 		{
-			LOG4CXX_ERROR(NYDWE::gInjectLogger, "Cannot make memory patch.");
+			LOGGING_ERROR(lg) << "Cannot make memory patch.";
 		}
 	}
 	else
 	{
-		LOG4CXX_ERROR(NYDWE::gInjectLogger, "Cannot find patch point.");
+		LOGGING_ERROR(lg) << "Cannot find patch point.";
 	}
 
 	return result;
@@ -87,11 +87,11 @@ static void InitSectionInfo()
 		pgWeTextSectionBase = (void *)result->get<0>();
 		gWeTextSectionLength = result->get<1>();
 
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("WE .text section start address: 0x%08X. length 0x%08X", pgWeTextSectionBase, gWeTextSectionLength));
+		LOGGING_TRACE(lg) << base::format("WE .text section start address: 0x%08X. length 0x%08X", pgWeTextSectionBase, gWeTextSectionLength);
 	}
 	else
 	{
-		LOG4CXX_ERROR(NYDWE::gInjectLogger, "Cannot get .text section info of WE.");
+		LOGGING_ERROR(lg) << "Cannot get .text section info of WE.";
 	}
 
 	result = pm.querySection(".data");
@@ -100,11 +100,11 @@ static void InitSectionInfo()
 		pgWeDataSectionBase = (void *)result->get<0>();
 		gWeDataSectionLength = result->get<1>();
 
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("WE .data section start address: 0x%08X. length 0x%08X", pgWeDataSectionBase, gWeDataSectionLength));
+		LOGGING_TRACE(lg) << base::format("WE .data section start address: 0x%08X. length 0x%08X", pgWeDataSectionBase, gWeDataSectionLength);
 	}
 	else
 	{
-		LOG4CXX_ERROR(NYDWE::gInjectLogger, "Cannot get .data section info of WE.");
+		LOGGING_ERROR(lg) << "Cannot get .data section info of WE.";
 	}
 }
 
@@ -339,21 +339,21 @@ static boost::uint32_t __fastcall DetourWeTriggerNameInputCharCheck(boost::uint3
 			is##name##HookInstalled = base::hook::inline_install(&pgTrue##name##, (uintptr_t)Detour##name##); \
 			if (is##name##HookInstalled) \
 			{ \
-				LOG4CXX_TRACE(NYDWE::gInjectLogger, #name " hook installation succeeded."); \
+				LOGGING_TRACE(lg) << #name " hook installation succeeded."; \
 			} \
 			else \
 			{ \
-				LOG4CXX_ERROR(NYDWE::gInjectLogger, #name " hook installation failed: " << GetLastError()); \
+				LOGGING_ERROR(lg) << #name " hook installation failed: " << GetLastError(); \
 			} \
 		} \
 		else \
 		{ \
-			LOG4CXX_ERROR(NYDWE::gInjectLogger, "Cannot find " #name "!"); \
+			LOGGING_ERROR(lg) << "Cannot find " #name "!"; \
 		} \
 	} \
 	else \
 	{ \
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, #name " hook already installed."); \
+		LOGGING_TRACE(lg) << #name " hook already installed."; \
 	}
 
 bool isWeUtf8ToAnsiHookInstalled;
@@ -372,30 +372,30 @@ void __fastcall DetourWeUtf8ToAnsi(const char* str)
 
 static void InitInlineHook()
 {
-	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "Start installing inline hooks.");
+	LOGGING_DEBUG(lg) << "Start installing inline hooks.";
 
 	pgTrueWeGetSystemParameter = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, 
 		&weGetSystemParameterPattern[0], sizeof(weGetSystemParameterPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeGetSystemParameter at 0x%08X.", pgTrueWeGetSystemParameter));
+	LOGGING_TRACE(lg) << base::format("Found WeGetSystemParameter at 0x%08X.", pgTrueWeGetSystemParameter);
 	INSTALL_INLINE_HOOK(WeGetSystemParameter)
 
 	pgTrueWeVerifyMapCellsLimit = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, 
 		gWeTextSectionLength, &weVerifyMapCellsLimitPattern[0], sizeof(weVerifyMapCellsLimitPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeVerifyMapCellsLimit at 0x%08X.", pgTrueWeVerifyMapCellsLimit));
+	LOGGING_TRACE(lg) << base::format("Found WeVerifyMapCellsLimit at 0x%08X.", pgTrueWeVerifyMapCellsLimit);
 	boost::uint32_t callOffset = aero::offset_element_sum<boost::uint32_t>(pgTrueWeVerifyMapCellsLimit, 6);
 	pgMapCellsGetUnknownGlobalFlag = aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, callOffset + 10);
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found GetUnkownFlag at 0x%08X.", pgMapCellsGetUnknownGlobalFlag));
+	LOGGING_TRACE(lg) << base::format("Found GetUnkownFlag at 0x%08X.", pgMapCellsGetUnknownGlobalFlag);
 	pgWeVerifyMapCellsLimitPatcher.reset(new CMemoryPatch(aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, 3), "\x90\x90", 2));
 	pgWeVerifyMapCellsLimitPatcher->patch();
 	INSTALL_INLINE_HOOK(WeVerifyMapCellsLimit)
 
 	pgTrueWeTriggerNameCheck = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, 
 		&weTriggerNameCheckPattern[0], sizeof(weTriggerNameCheckPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeTriggerNameCheck at 0x%08X.", pgTrueWeTriggerNameCheck));
+	LOGGING_TRACE(lg) << base::format("Found WeTriggerNameCheck at 0x%08X.", pgTrueWeTriggerNameCheck);
 	INSTALL_INLINE_HOOK(WeTriggerNameCheck)
 
 	pgTrueWeTriggerNameInputCharCheck = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, &weTriggerNameInputCharCheckPattern[0], sizeof(weTriggerNameInputCharCheckPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeTriggerNameInputCharCheck at 0x%08X.", pgTrueWeTriggerNameInputCharCheck));
+	LOGGING_TRACE(lg) << base::format("Found WeTriggerNameInputCharCheck at 0x%08X.", pgTrueWeTriggerNameInputCharCheck);
 	pgWeTriggerNameInputCharCheckPatcher.reset(new CMemoryPatch(
 		aero::pointer_sum<aero::pointer_type>(pgTrueWeTriggerNameInputCharCheck, 3),
 		"\x90\x90", 2)
@@ -404,26 +404,26 @@ static void InitInlineHook()
 	INSTALL_INLINE_HOOK(WeTriggerNameInputCharCheck)
 
 	pgTrueWeSetWindowCaption = (uintptr_t)0x00433A00;//MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, &weSetWindowCaptionPattern[0], sizeof(weSetWindowCaptionPattern));
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeSetWindowCaption at 0x%08X.", pgTrueWeSetWindowCaption));
+	LOGGING_TRACE(lg) << base::format("Found WeSetWindowCaption at 0x%08X.", pgTrueWeSetWindowCaption);
 	INSTALL_INLINE_HOOK(WeSetWindowCaption)
 
 	pgTrueWeSetMenuItem = (uintptr_t)0x0042AA10;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeSetMenuItem at 0x%08X.", pgTrueWeSetMenuItem));
+	LOGGING_TRACE(lg) << base::format("Found WeSetMenuItem at 0x%08X.", pgTrueWeSetMenuItem);
 	INSTALL_INLINE_HOOK(WeSetMenuItem)
 
 	pgTrueWeStringCompare = (uintptr_t)0x004D2D90;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeStringCompare at 0x%08X.", pgTrueWeStringCompare));
+	LOGGING_TRACE(lg) << base::format("Found WeStringCompare at 0x%08X.", pgTrueWeStringCompare);
 	INSTALL_INLINE_HOOK(WeStringCompare)
 
 	pgTrueWeTriggerEditorEditboxCopy = (uintptr_t)0x0071FE90;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found TriggerEditorEditboxCopy at 0x%08X.", pgTrueWeTriggerEditorEditboxCopy));
+	LOGGING_TRACE(lg) << base::format("Found TriggerEditorEditboxCopy at 0x%08X.", pgTrueWeTriggerEditorEditboxCopy);
 	INSTALL_INLINE_HOOK(WeTriggerEditorEditboxCopy)
 
 	pgTrueWeUtf8ToAnsi = (uintptr_t)0x00429CD0;
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, base::format("Found WeUtf8ToAnsi at 0x%08X.", pgTrueWeUtf8ToAnsi));
+	LOGGING_TRACE(lg) << base::format("Found WeUtf8ToAnsi at 0x%08X.", pgTrueWeUtf8ToAnsi);
 	INSTALL_INLINE_HOOK(WeUtf8ToAnsi)
 
-	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "Installing inline hooks complete.");
+	LOGGING_DEBUG(lg) << "Installing inline hooks complete.";
 }
 
 #undef INSTALL_INLINE_HOOK
@@ -433,16 +433,16 @@ static void InitInlineHook()
 	{ \
 		is##name##HookInstalled = \
 			!base::hook::inline_uninstall(&pgTrue##name, (uintptr_t)Detour##name); \
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, #name " hook uninstallation succeeded."); \
+		LOGGING_TRACE(lg) << #name " hook uninstallation succeeded."; \
 	} \
 	else \
 	{ \
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, #name " hook has not been installed. No need to uninstall."); \
+		LOGGING_TRACE(lg) << #name " hook has not been installed. No need to uninstall."; \
 	}
 
 static void UninstallInlineHook()
 {
-	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "Inline hook uninstallation begins!");
+	LOGGING_DEBUG(lg) << "Inline hook uninstallation begins!";
 
 	UNINSTALL_INLINE_HOOK(WeSetWindowCaption)
 
@@ -456,7 +456,7 @@ static void UninstallInlineHook()
 
 	UNINSTALL_INLINE_HOOK(WeGetSystemParameter)
 
-	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "Inline hook uninstallation finished!");
+	LOGGING_DEBUG(lg) << "Inline hook uninstallation finished!";
 }
 
 #undef UNINSTALL_INLINE_HOOK
@@ -507,26 +507,26 @@ BOOL WINAPI DetourWeGetSaveFileNameA(LPOPENFILENAMEA lpofn)
 #define INSTALL_STORM_IAT_HOOK(apiName) \
 	if (pgStormIatHooker.hook(#apiName, &pgTrue##apiName##, (uintptr_t)DetourStorm##apiName##)) \
 	{ \
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, "Storm " #apiName " IAT hook succeeded."); \
+		LOGGING_TRACE(lg) << "Storm " #apiName " IAT hook succeeded."; \
 	} \
 	else \
 	{ \
-		LOG4CXX_ERROR(NYDWE::gInjectLogger, "Storm " #apiName " IAT hook failed."); \
+		LOGGING_ERROR(lg) << "Storm " #apiName " IAT hook failed."; \
 	}
 
 #define INSTALL_WE_IAT_HOOK(apiName) \
 	if (pgWeIatHooker.hook(#apiName, &pgTrue##apiName##, (uintptr_t)DetourWe##apiName##)) \
 	{ \
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, "WE " #apiName " IAT hook succeeded."); \
+		LOGGING_TRACE(lg) << "WE " #apiName " IAT hook succeeded."; \
 	} \
 	else \
 	{ \
-		LOG4CXX_ERROR(NYDWE::gInjectLogger, "WE " #apiName " IAT hook failed."); \
+		LOGGING_ERROR(lg) << "WE " #apiName " IAT hook failed."; \
 	}
 
 static void InitIATHook()
 {
-	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "IAT hook initialization started.");
+	LOGGING_DEBUG(lg) << "IAT hook initialization started.";
 	
 	if (pgWeIatHooker.open_module(::GetModuleHandleW(NULL)))
 	{
@@ -536,7 +536,7 @@ static void InitIATHook()
 		}
 		else
 		{
-			LOG4CXX_ERROR(NYDWE::gInjectLogger, "Cannot find shell32.dll in WE.");
+			LOGGING_ERROR(lg) << "Cannot find shell32.dll in WE.";
 		}
 
 		if (pgWeIatHooker.open_dll("comdlg32.dll"))
@@ -546,15 +546,15 @@ static void InitIATHook()
 		}
 		else
 		{
-			LOG4CXX_ERROR(NYDWE::gInjectLogger, "Cannot find comdlg32.dll in WE.");
+			LOGGING_ERROR(lg) << "Cannot find comdlg32.dll in WE.";
 		}
 	}
 	else
 	{
-		LOG4CXX_ERROR(NYDWE::gInjectLogger, "WE initialize IAT hook failed.");
+		LOGGING_ERROR(lg) << "WE initialize IAT hook failed.";
 	}
 	
-	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "IAT hook initialization completed.");
+	LOGGING_DEBUG(lg) << "IAT hook initialization completed.";
 }
 
 #undef INSTALL_WE_IAT_HOOK
@@ -562,12 +562,12 @@ static void InitIATHook()
 
 static void UninstallIATHook()
 {
-	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "IAT hook cleanup started.");
+	LOGGING_DEBUG(lg) << "IAT hook cleanup started.";
 	pgWeIatHooker.release();
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, "WE IAT hook cleaned.");
+	LOGGING_TRACE(lg) << "WE IAT hook cleaned.";
 	pgStormIatHooker.release();
-	LOG4CXX_TRACE(NYDWE::gInjectLogger, "Storm.dll IAT hook cleaned.");
-	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "IAT hook cleanup completed.");
+	LOGGING_TRACE(lg) << "Storm.dll IAT hook cleaned.";
+	LOGGING_DEBUG(lg) << "IAT hook cleanup completed.";
 }
 
 static boost::uint8_t syntaxCheckPatch[] = 
@@ -725,33 +725,33 @@ static boost::uint8_t editorInstanceCheckPatch[] =
 
 static void InitPatches()
 {
-	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "Patches initialization started.");
+	LOGGING_DEBUG(lg) << "Patches initialization started.";
 
 	if (pgWeTextSectionBase && (gWeTextSectionLength > 0))
 	{
 		// Syntax check patch
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, "Installing syntax check patch");
+		LOGGING_TRACE(lg) << "Installing syntax check patch";
 		INSTALL_PATCH_CODEGEN(syntaxCheck);
 
 		// Auto disable trigger patch
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, "Installing auto disable patch");
+		LOGGING_TRACE(lg) << "Installing auto disable patch";
 		INSTALL_PATCH_CODEGEN(autoDisable);
 
 		// Enable trigger check patch
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, "Installing enable trigger check patch");
+		LOGGING_TRACE(lg) << "Installing enable trigger check patch";
 		INSTALL_PATCH_CODEGEN(enableTriggerCheck1);
 		INSTALL_PATCH_CODEGEN(enableTriggerCheck2);
 
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, "Installing doodad limit patch");
+		LOGGING_TRACE(lg) << "Installing doodad limit patch";
 		INSTALL_PATCH_CODEGEN(doodadLimit);
 
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, "Installing unit/item limit patch");
+		LOGGING_TRACE(lg) << "Installing unit/item limit patch";
 		INSTALL_PATCH_CODEGEN(unitItemLimit);
 
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, "Installing editor multi-instance patch");
+		LOGGING_TRACE(lg) << "Installing editor multi-instance patch";
 		INSTALL_PATCH_CODEGEN(editorInstanceCheck);
 
-		LOG4CXX_TRACE(NYDWE::gInjectLogger, "Installing attack table patch");
+		LOGGING_TRACE(lg) << "Installing attack table patch";
 
 
 		CPEMemoryFileInfo pm;
@@ -789,10 +789,10 @@ static void InitPatches()
 	}
 	else
 	{
-		LOG4CXX_ERROR(NYDWE::gInjectLogger, "Section info not correct. Cannot make patches");
+		LOGGING_ERROR(lg) << "Section info not correct. Cannot make patches";
 	}
 
-	LOG4CXX_DEBUG(NYDWE::gInjectLogger, "Patches initialization completed.");
+	LOGGING_DEBUG(lg) << "Patches initialization completed.";
 }
 
 } // namespace NGameHook

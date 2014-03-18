@@ -8,21 +8,11 @@
 #pragma once
 #endif
 
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4231)
-#endif
-#include <log4cxx/logger.h>
-#include <log4cxx/basicconfigurator.h>
-#include <log4cxx/propertyconfigurator.h>
-#include <log4cxx/helpers/exception.h>
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
+#include <LuaEngine\logging.h>
 
 namespace NYDWE
 {
-	extern log4cxx::LoggerPtr gInjectLogger;
+	extern logging::logger lg;
 }
 
 #endif // YDWE_LOGGER_H_INCLUDED

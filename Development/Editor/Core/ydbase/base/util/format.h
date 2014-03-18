@@ -7,20 +7,19 @@
 #include <sstream>
 #include <type_traits>
 #include <base/util/hybrid_array.h>
+#include <base/util/unicode.h>
 
 #pragma warning(push)
 #pragma warning(disable:4702)
 
-namespace base { namespace format_detail {
+#define BASE_FORMAT_THROW_ERROR(reason) \
+	do { \
+		assert(0 && (reason)); \
+		throw std::exception(reason); \
+		__pragma(warning(suppress: 4127)) \
+	} while (0)
 
-struct default_report_error
-{
-	default_report_error(const char* reason)
-	{
-		assert(0 && reason);
-		throw std::exception(reason);
-	}
-};
+namespace base { namespace format_detail {
 
 template <class T>
 inline int crt_snprintf(char* buf, size_t buf_size, const char* fmt, const T& value)
@@ -36,7 +35,7 @@ inline int crt_snprintf(wchar_t* buf, size_t buf_size, const wchar_t* fmt, const
 	return _snwprintf(buf, buf_size, fmt, value);
 }
 
-template <class CharT, class ReportErrorT = default_report_error>
+template <class CharT>
 class format_analyzer
 {
 public:
@@ -80,7 +79,7 @@ public:
 		fmt_ = print_string_literal(fmt_);
 		if (*fmt_ != '\0')
 		{
-			ReportErrorT("format: Too many conversion specifiers in format string");
+			BASE_FORMAT_THROW_ERROR("format: Too many conversion specifiers in format string");
 		}
 	}
 
@@ -102,7 +101,6 @@ public:
 	}
 
 private:
-
 	void format_value(const char_t* value, std::size_t len)
 	{
 		std::size_t prefixlen = 0;
@@ -196,36 +194,17 @@ private:
 		return L"(null)";
 	}
 
-	void format_cast_string(const char_t* value)
+	void format_cast_string(const wchar_t* value);
+	void format_cast_string(const char* value);
+
+	template <class T>
+	void format_cast_string(T* value)
 	{
-		if (!value) 
-		{
-			format_cast_string(empty_string(value));
-			return ;
-		}
-
-		const char_t* first = value;
-		const char_t* next = first;
-
-		if (precision_ >= 0)
-		{
-			while (*next && precision_--) { ++next; }
-		}
-		else
-		{
-			while (*next) { ++next; }
-		}
-
-		format_value(first, next - first);
+		format_cast_string(const_cast<const T*>(value));
 	}
 
-	void format_cast_string(char_t* value)
-	{
-		format_cast_string(const_cast<const char_t*>(value));
-	}
-
-	template <size_t n>
-	void format_cast_string(const char_t (&value)[n])
+	template <class T, size_t n>
+	void format_cast_string(const T (&value)[n])
 	{
 		assert(n != 0);
 
@@ -239,14 +218,14 @@ private:
 		}
 	}
 
-	template <size_t n>
-	void format_cast_string(char_t (&value)[n])
+	template <class T, size_t n>
+	void format_cast_string(T(&value)[n])
 	{
-		format_cast_string(const_cast<const char_t*>(value));
+		format_cast_string(const_cast<const T*>(value));
 	}
 
-	template <class Traits>
-	void format_cast_string(const std::basic_string<char_t, Traits>& value)
+	template <class T>
+	void format_cast_string(const std::basic_string<T>& value)
 	{
 		format_value(value.c_str(), value.size());
 	}
@@ -255,7 +234,7 @@ private:
 	void format_cast_char(const T& /*value*/
 		, typename std::enable_if<!std::is_convertible<T, char>::value>::type* = 0)
 	{
-		ReportErrorT("format: Cannot convert from argument type to char.");
+		BASE_FORMAT_THROW_ERROR("format: Cannot convert from argument type to char.");
 	}
 
 	template <class T>
@@ -269,7 +248,7 @@ private:
 	uint64_t convert_to_integer(const T& /*value*/
 		, typename std::enable_if<!std::is_convertible<T, uint64_t>::value && !std::is_convertible<T, void*>::value>::type* = 0) 
 	{
-		ReportErrorT("format: Cannot convert from argument type to integer.");
+		BASE_FORMAT_THROW_ERROR("format: Cannot convert from argument type to integer.");
 		return 0;
 	}
 
@@ -310,7 +289,7 @@ private:
 	double convert_to_float(const T& /*value*/
 		, typename std::enable_if<!std::is_floating_point<T>::value>::type* = 0)
 	{
-		ReportErrorT("format: Cannot convert from argument type to float.");
+		BASE_FORMAT_THROW_ERROR("format: Cannot convert from argument type to float.");
 		return 0.;
 	}
 
@@ -411,7 +390,7 @@ private:
 	{
 		if (*fmtStart != '%')
 		{
-			ReportErrorT("format: Not enough conversion specifiers in format string");
+			BASE_FORMAT_THROW_ERROR("format: Not enough conversion specifiers in format string");
 			return fmtStart;
 		}
 
@@ -453,7 +432,7 @@ private:
 		if (*c == '*')
 		{
 			++c;
-			ReportErrorT("format: * conversion spec not supported");
+			BASE_FORMAT_THROW_ERROR("format: * conversion spec not supported");
 		}
 
 		// 3) Parse precision
@@ -464,7 +443,7 @@ private:
 			if (*c == '*')
 			{
 				++c;
-				ReportErrorT("format: * conversion spec not supported");
+				BASE_FORMAT_THROW_ERROR("format: * conversion spec not supported");
 			}
 			else
 			{
@@ -488,7 +467,7 @@ private:
 		// boost::format class for forging the way here).
 		if (*c == '\0')
 		{
-			ReportErrorT("format: Conversion spec incorrectly terminated by end of string");
+			BASE_FORMAT_THROW_ERROR("format: Conversion spec incorrectly terminated by end of string");
 			return c;
 		}
 
@@ -532,7 +511,7 @@ private:
 			format_cast_string(value);
 			break;
 		case 'n':
-			ReportErrorT("format: %n conversion spec not supported");
+			BASE_FORMAT_THROW_ERROR("format: %n conversion spec not supported");
 			break;
 		}
 
@@ -549,6 +528,69 @@ private:
 	char_t                          ch_;
 };
 
+template <>
+inline void format_analyzer<wchar_t>::format_cast_string(const wchar_t* value)
+{
+	if (!value)
+	{
+		format_cast_string(empty_string(value));
+		return;
+	}
+
+	const char_t* first = value;
+	const char_t* next = first;
+
+	if (precision_ >= 0)
+	{
+		while (*next && precision_--) { ++next; }
+	}
+	else
+	{
+		while (*next) { ++next; }
+	}
+
+	format_value(first, next - first);
+}
+
+template <>
+inline void format_analyzer<wchar_t>::format_cast_string(const char* value)
+{
+	std::wstring valstr = base::util::u2w(value);
+	format_cast_string(valstr.c_str());
+}
+
+template <>
+inline void format_analyzer<char>::format_cast_string(const char* value)
+{
+	if (!value)
+	{
+		format_cast_string(empty_string(value));
+		return;
+	}
+
+	const char_t* first = value;
+	const char_t* next = first;
+
+	if (precision_ >= 0)
+	{
+		while (*next && precision_--) { ++next; }
+	}
+	else
+	{
+		while (*next) { ++next; }
+	}
+
+	format_value(first, next - first);
+}
+
+template <>
+inline void format_analyzer<char>::format_cast_string(const wchar_t* value)
+{
+	std::string valstr = base::util::w2u(value);
+	format_cast_string(valstr.c_str());
+}
+
+
 inline std::ostream& standard_output(const char*) { return std::cout; }
 inline std::wostream& standard_output(const wchar_t*) { return std::wcout; }
 }
@@ -556,13 +598,13 @@ inline std::wostream& standard_output(const wchar_t*) { return std::wcout; }
 #include <boost/preprocessor/repetition.hpp>
 #include <boost/preprocessor/punctuation/comma_if.hpp>
 
-#define DEFINE_FORMAT_ACCEPT(z, n, param) fmt_iter.accept(BOOST_PP_CAT(param, n));
-#define DEFINE_FORMAT_CREATER(z, n, unused) \
+#define BASE_FORMAT_DEFINE_ACCEPT(z, n, param) fmt_iter.accept(BOOST_PP_CAT(param, n));
+#define BASE_FORMAT_DEFINE_CREATER(z, n, unused) \
 	template <class CharT BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, class T)> \
 	void format(std::basic_ostream<CharT, std::char_traits<CharT>>& out, const CharT* fmt BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_BINARY_PARAMS(n, T, const& v)) \
 	{ \
 		format_detail::format_analyzer<CharT> fmt_iter(fmt); \
-		BOOST_PP_REPEAT(n, DEFINE_FORMAT_ACCEPT, v) \
+		BOOST_PP_REPEAT(n, BASE_FORMAT_DEFINE_ACCEPT, v) \
 		fmt_iter.finish(); \
 		fmt_iter.write(out); \
 	} \
@@ -570,7 +612,7 @@ inline std::wostream& standard_output(const wchar_t*) { return std::wcout; }
 	std::basic_string<CharT> format(const CharT* fmt BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_BINARY_PARAMS(n, T, const& v)) \
 	{ \
 		format_detail::format_analyzer<CharT> fmt_iter(fmt); \
-		BOOST_PP_REPEAT(n, DEFINE_FORMAT_ACCEPT, v) \
+		BOOST_PP_REPEAT(n, BASE_FORMAT_DEFINE_ACCEPT, v) \
 		fmt_iter.finish(); \
 		return std::move(fmt_iter.str()); \
 	} \
@@ -580,10 +622,10 @@ inline std::wostream& standard_output(const wchar_t*) { return std::wcout; }
 		format(format_detail::standard_output(fmt), fmt BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, v)); \
 	}
 
-BOOST_PP_REPEAT(16, DEFINE_FORMAT_CREATER, ~)
-#undef DEFINE_FORMAT_ACCEPT
-#undef DEFINE_FORMAT_CREATER
-
+BOOST_PP_REPEAT(16, BASE_FORMAT_DEFINE_CREATER, ~)
+#undef BASE_FORMAT_DEFINE_ACCEPT
+#undef BASE_FORMAT_DEFINE_CREATER
+#undef BASE_FORMAT_THROW_ERROR
 }
 
 #pragma warning(pop)

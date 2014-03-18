@@ -53,7 +53,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int jass_slk_object_index(lua::state* ls);
 	int jass_slk_object_pairs(lua::state* ls);
-	int jass_slk_create_proxy_table(lua::state* ls, lua::state::cfunction index_func, lua::state::cfunction pairs_func, uintptr_t upvalue);
+	int jass_slk_create_proxy_table(lua::state* ls, lua::cfunction index_func, lua::cfunction pairs_func, uintptr_t upvalue);
 }}
 
 namespace lua
@@ -99,7 +99,7 @@ namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	int jass_slk_create_proxy_table(lua::state* ls, lua::state::cfunction index_func, lua::state::cfunction pairs_func, uintptr_t upvalue)
+	int jass_slk_create_proxy_table(lua::state* ls, lua::cfunction index_func, lua::cfunction pairs_func, uintptr_t upvalue)
 	{
 		ls->newtable();
 		{

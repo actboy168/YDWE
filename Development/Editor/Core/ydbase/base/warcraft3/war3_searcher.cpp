@@ -247,7 +247,7 @@ namespace base { namespace warcraft3 {
 	{
 		bool is_valid_ptr(uintptr_t ptr)
 		{
-			return (get_war3_searcher().base() & 0xFF000000) == (ptr & 0xFF000000);
+			return (ptr >= get_war3_searcher().base() && ptr < (get_war3_searcher().base() + get_war3_searcher().size()));
 		}
 	}
 
@@ -282,7 +282,7 @@ namespace base { namespace warcraft3 {
 			return 0;
 		}
 
-		uintptr_t object = (uintptr_t)get_jass_vm()->handle_table->table->at(3 * (handle - 0x100000) + 1);
+		uintptr_t object = (uintptr_t)(*get_jass_vm()->handle_table)->table.at(3 * (handle - 0x100000) + 1);
 
 		if (!object)
 		{

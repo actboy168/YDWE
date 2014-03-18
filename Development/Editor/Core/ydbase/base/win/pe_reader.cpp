@@ -20,6 +20,11 @@ namespace base { namespace win {
 		return (HMODULE)(module_);
 	}
 
+	size_t pe_reader::module_size() const
+	{
+		return get_nt_headers()->OptionalHeader.SizeOfImage + get_nt_headers()->OptionalHeader.SizeOfHeaders;
+	}
+
 	uintptr_t pe_reader::rva_to_addr(uintptr_t rva) const
 	{
 		if (rva == 0) return 0;
