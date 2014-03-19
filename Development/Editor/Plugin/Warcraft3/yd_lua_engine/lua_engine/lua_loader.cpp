@@ -12,6 +12,7 @@
 #include <base/util/singleton.h>
 #include <base/util/format.h>
 #include <base/hook/fp_call.h>
+#include <boost/algorithm/string.hpp>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 
@@ -82,6 +83,19 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		if (cheat_s.compare(0, 4, "run ") == 0)
 		{
 			cheat_s = cheat_s.substr(4);
+			lua::state* ls = jass_state_s::instance().get();
+			ls->getglobal("require");
+			ls->pushlstring(cheat_s.c_str(), cheat_s.size());
+			safe_call(ls, 1, 1, true);
+		}
+		else if (cheat_s.compare(0, 9, "exec-lua:") == 0)
+		{
+			cheat_s = cheat_s.substr(9);
+			boost::algorithm::trim(cheat_s);
+			if (cheat_s.size() >= 2 && cheat_s[0] == '"' && cheat_s[cheat_s.size() - 1] == '"')
+			{
+				cheat_s = cheat_s.substr(1, cheat_s.size() - 2);
+			}
 			lua::state* ls = jass_state_s::instance().get();
 			ls->getglobal("require");
 			ls->pushlstring(cheat_s.c_str(), cheat_s.size());
