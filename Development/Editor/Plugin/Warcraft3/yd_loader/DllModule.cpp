@@ -158,8 +158,8 @@ void DllModule::LoadPlugins()
 
 		slk::IniTable table;
 		try {
-			slk::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<slk::buffer>();
-			slk::buffer_reader reader(buf);
+			base::util::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<base::util::buffer>();
+			base::util::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		}
 		catch(...) {
@@ -288,8 +288,8 @@ void DllModule::Attach()
 		ResetConfig(table);
 
 		try {
-			slk::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
-			slk::buffer_reader reader(buf);
+			base::util::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<base::util::buffer>();
+			base::util::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		} 
 		catch (...) {

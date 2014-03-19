@@ -188,8 +188,8 @@ bool CMainWindow::LoadConfig(slk::IniTable& table)
 	try
 	{
 		ResetConfig(table);
-		slk::buffer buf = base::file::read_stream(base::path::self().remove_filename() / L"EverConfig.cfg").read<slk::buffer>();
-		slk::buffer_reader reader(buf);
+		base::util::buffer buf = base::file::read_stream(base::path::self().remove_filename() / L"EverConfig.cfg").read<base::util::buffer>();
+		base::util::buffer_reader reader(buf);
 		slk::IniReader::Read(reader, table);
 	}
 	catch (...)
@@ -204,7 +204,7 @@ bool CMainWindow::SaveConfig(slk::IniTable const& table)
 {
 	try
 	{
-		base::file::write_stream(base::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
+		base::file::write_stream(base::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<base::util::buffer>(table));
 	}
 	catch (...)
 	{
@@ -444,8 +444,8 @@ void CMainWindow::InitPluginUI()
 
 		slk::IniTable table;
 		try {
-			slk::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<slk::buffer>();
-			slk::buffer_reader reader(buf);
+			base::util::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<base::util::buffer>();
+			base::util::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);	
 		}
 		catch(...) {
@@ -500,7 +500,7 @@ void CMainWindow::DonePluginUI()
 		}
 
 		fs::path plugin_path = m_ydwe_path.parent_path() / L"plugin" / L"warcraft3";
-		base::file::write_stream(plugin_path/ L"config.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
+		base::file::write_stream(plugin_path / L"config.cfg").write(slk::IniWriter::Write<base::util::buffer>(table));
 	}
 	catch (...) {
 	}
