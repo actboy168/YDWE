@@ -539,6 +539,9 @@
     <ClInclude Include="base\path\helper.h">
       <Filter>base\path</Filter>
     </ClInclude>
+    <ClInclude Include="base\thread\intrusive_ptr.h">
+      <Filter>base\thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

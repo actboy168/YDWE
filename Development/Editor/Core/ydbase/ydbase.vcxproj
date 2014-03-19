@@ -220,6 +220,7 @@
     <ClInclude Include="base\path\helper.h" />
     <ClInclude Include="base\path\self.h" />
     <ClInclude Include="base\path\service.h" />
+    <ClInclude Include="base\thread\intrusive_ptr.h" />
     <ClInclude Include="base\thread\lock\guard.h" />
     <ClInclude Include="base\thread\lock\spin.h" />
     <ClInclude Include="base\thread\thread.h" />
