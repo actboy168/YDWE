@@ -197,10 +197,14 @@ private:
 	void format_cast_string(const wchar_t* value);
 	void format_cast_string(const char* value);
 
-	template <class T>
-	void format_cast_string(T* value)
+	void format_cast_string(wchar_t* value)
 	{
-		format_cast_string(const_cast<const T*>(value));
+		format_cast_string(const_cast<const wchar_t*>(value));
+	}
+
+	void format_cast_string(char* value)
+	{
+		format_cast_string(const_cast<const char*>(value));
 	}
 
 	template <class T, size_t n>
