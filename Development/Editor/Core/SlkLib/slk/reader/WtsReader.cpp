@@ -29,11 +29,11 @@ namespace slk
 			{
 			case WST_READER_STATE::STATE_HEADER:
 				{
-					trim_left(line, ctype::is_space());
+					trim_left(line);
 					if (line.substr(0, 6) == "STRING")
 					{
 						line.remove_prefix(6);
-						trim(line, ctype::is_space());
+						trim(line);
 						key = Str2UInt(line);
 						state = WST_READER_STATE::STATE_BEGIN;
 					}
@@ -41,7 +41,7 @@ namespace slk
 				break;
 			case WST_READER_STATE::STATE_BEGIN:
 				{
-					trim_left(line, ctype::is_space());
+					trim_left(line);
 					if (!line.empty() && '{' == line[0])
 					{
 						state = WST_READER_STATE::STATE_BODY;
@@ -50,7 +50,7 @@ namespace slk
 				break;
 			case WST_READER_STATE::STATE_BODY:
 				{
-					std::string_view new_line = trim_left_copy(line, ctype::is_space());
+					std::string_view new_line = trim_left_copy(line);
 					if (new_line.empty() || ('}' != new_line[0]))
 					{
 						value.append(line.begin(), line.end());

@@ -22,26 +22,25 @@ namespace slk { namespace reader { namespace utility {
 				line.remove_prefix(pos);
 			}
 
-			trim_left(line, ctype::is_space());
+			trim_left(line);
 
 			if ((line.size() >= 2) && (line[0] == '['))
 			{
-				auto ItBeg = find_begin(line, char_equal(']'));
-				if (ItBeg != line.end())
+				size_t n = line.find_first_of(']');
+				if (n != std::string_view::npos)
 				{
-					object = &table[trim_copy(line.begin()+1, ItBeg).to_string()];
+					object = &table[trim_copy(line.begin() + 1, line.begin() + n).to_string()];
 				}
 			}
 			else
 			{
 				if (object)
 				{
-					auto ItBeg = find_begin(line, char_equal('='));
-
-					if (ItBeg != line.end())
+					size_t n = line.find_first_of('=');
+					if (n != std::string_view::npos)
 					{
-						std::string_view key = trim_copy(line.begin(), ItBeg);
-						std::string_view val = trim_copy(ItBeg+1, line.end());
+						std::string_view key = trim_copy(line.begin(), line.begin() + n);
+						std::string_view val = trim_copy(line.begin() + n + 1, line.end());
 						if (!val.empty() && !key.empty())
 						{
 							(*object)[key.to_string()] = val.to_string();

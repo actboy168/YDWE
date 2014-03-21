@@ -5,6 +5,7 @@
 #include <slk/InterfaceStorm.hpp>
 #include <slk/utility/sequence.h>
 #include <slk/utility/convert.h>
+#include <boost/algorithm/string.hpp>
 
 namespace slk
 {
@@ -102,7 +103,7 @@ namespace slk
 	public:
 		const std::string& Convert(const std::string& str) const
 		{
-			std::string tmp = trim_copy_string(str.cbegin(), str.cend());
+			std::string tmp = boost::algorithm::trim_copy(str);
 			if (tmp == "-")
 			{
 				static std::string s_dummy_zero = "0";

@@ -240,16 +240,15 @@ namespace slk
 
 			uint8_t read_type(std::string_view& line)
 			{
-				auto It = find_begin(line, char_equal(';'));
-
-				if (It == line.end())
+				size_t n = line.find_first_of(';');
+				if (n == std::string_view::npos)
 				{
 					return 0;
 				}
 
-				std::string_view key = trim_copy(line.begin(), It);
+				std::string_view key = trim_copy(line.begin(), line.begin()+n);
 
-				line.remove_prefix(It - line.begin() + 1);
+				line.remove_prefix(n + 1);
 				return key.front();
 			}
 
