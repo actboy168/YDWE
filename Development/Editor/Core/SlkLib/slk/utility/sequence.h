@@ -35,23 +35,6 @@ namespace slk
 		}
 	}
 
-	template <typename CharT>
-	struct basic_char_equal
-	{
-		CharT c_;
-
-		basic_char_equal(CharT Ch)
-			: c_(Ch)
-		{ }
-
-		bool operator()(CharT Ch) const
-		{
-			return c_ == Ch;
-		}
-	};
-	typedef basic_char_equal<char>    char_equal;
-	typedef basic_char_equal<wchar_t> wchar_equal;
-
 	inline void trim_left(std::string_view& Input)
 	{
 		std::string_view::iterator TrimBegin = detail::find_begin(Input.begin(), Input.end());
@@ -100,11 +83,23 @@ namespace slk
 		std::string_view::const_iterator TrimBegin = detail::find_begin(ItBegin, TrimEnd);
 		return std::move(make_string_view(TrimBegin, TrimEnd));
 	}
-	inline std::string_view trim_copy(const std::string_view& Input)
-	{
-		return std::move(trim_copy(Input.cbegin(), Input.cend()));
-	}
 
+	template <typename CharT>
+	struct basic_char_equal
+	{
+		CharT c_;
+
+		basic_char_equal(CharT Ch)
+			: c_(Ch)
+		{ }
+
+		bool operator()(CharT Ch) const
+		{
+			return c_ == Ch;
+		}
+	};
+	typedef basic_char_equal<char>    char_equal;
+	typedef basic_char_equal<wchar_t> wchar_equal;
 
 	template <typename ResultT, typename SequenceT, typename PredicateT>
 	inline ResultT& split(ResultT& Result, SequenceT const& Input, PredicateT IsFound)

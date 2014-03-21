@@ -7,47 +7,48 @@ namespace slk
 {
 	namespace detail
 	{
-		template <typename _Ty>
-		class basic_list_of : public std::deque<_Ty>
+		template <typename T>
+		class basic_list_of
+			: public std::deque<T>
 		{
 		public:
-			typedef basic_list_of<_Ty> _Myt;
-			typedef std::deque<_Ty>    _Mybase;
+			typedef basic_list_of<T> class_type;
+			typedef std::deque<T>    base_type;
 
 			basic_list_of()
-				: _Mybase()
+				: base_type()
 			{ }
 
 			template <typename P1>
 			basic_list_of(P1 val)
-				: _Mybase()
+				: base_type()
 			{
 				this->operator () (val);
 			}
 
 			template <typename P1, typename P2>
 			basic_list_of(P1 val1, P2 val2)
-				: _Mybase()
+				: base_type()
 			{
 				this->operator () (val1, val2);
 			}
 
 			template <typename P1>
-			_Myt& operator () ()
+			class_type& operator () ()
 			{
 				this->push_back(P1());
 				return *this;
 			}
 
 			template <typename P1>
-			_Myt& operator () (P1 val)
+			class_type& operator () (P1 val)
 			{
 				this->push_back(val);
 				return *this;
 			}
 
 			template <typename P1, typename P2>
-			_Myt& operator () (P1 val1, P2 val2)
+			class_type& operator () (P1 val1, P2 val2)
 			{
 				return this->operator () (std::make_pair(val1, val2));
 			}

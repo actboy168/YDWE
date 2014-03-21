@@ -94,7 +94,6 @@
     <ClCompile Include="slk\reader\WesReader.cpp" />
     <ClCompile Include="slk\reader\WtsReader.cpp" />
     <ClCompile Include="slk\table\VariableData.cpp" />
-    <ClCompile Include="slk\utility\sequence.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="slk\Converter.hpp" />

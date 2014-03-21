@@ -64,9 +64,6 @@
     <ClCompile Include="slk\reader\SlkReader.cpp">
       <Filter>slk\src\reader</Filter>
     </ClCompile>
-    <ClCompile Include="slk\utility\sequence.cpp">
-      <Filter>slk\src\utility</Filter>
-    </ClCompile>
     <ClCompile Include="slk\table\VariableData.cpp">
       <Filter>slk\src\table</Filter>
     </ClCompile>
