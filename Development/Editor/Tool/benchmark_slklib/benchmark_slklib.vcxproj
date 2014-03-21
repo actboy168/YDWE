@@ -96,13 +96,13 @@ echo "F" | xcopy "$(OpenSource)StormLib\Current\bin\$(PlatformName)\$(Configurat
 
 echo "F" | xcopy "$(OpenSource)StormLib\Current\lib\$(PlatformName)\$(ConfigurationName)\StormLib_dll.lib" "$(OutDir)StormLib_dll.lib" /d /y /e
 
-echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_filesystem-vc100-mt-gd-1_53.dll" "$(OutDir)boost_filesystem-vc100-mt-gd-1_53.dll" /d /y /e
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_filesystem-vc100-mt-gd-1_55.dll" "$(OutDir)boost_filesystem-vc100-mt-gd-1_55.dll" /d /y /e
 
-echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_system-vc100-mt-gd-1_53.dll" "$(OutDir)boost_system-vc100-mt-gd-1_53.dll" /d /y /e
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_system-vc100-mt-gd-1_55.dll" "$(OutDir)boost_system-vc100-mt-gd-1_55.dll" /d /y /e
 
-echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_timer-vc100-mt-gd-1_53.dll" "$(OutDir)boost_timer-vc100-mt-gd-1_53.dll" /d /y /e
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_timer-vc100-mt-gd-1_55.dll" "$(OutDir)boost_timer-vc100-mt-gd-1_55.dll" /d /y /e
 
-echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_chrono-vc100-mt-gd-1_53.dll" "$(OutDir)boost_chrono-vc100-mt-gd-1_53.dll" /d /y /e
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_chrono-vc100-mt-gd-1_55.dll" "$(OutDir)boost_chrono-vc100-mt-gd-1_55.dll" /d /y /e
 
 
 </Command>
@@ -138,17 +138,14 @@ echo "F" | xcopy "$(CoreBin)ydbase.pdb" "$(OutDir)ydbase.pdb" /d /y
 
 echo "F" | xcopy "$(CoreBin)ydbase.lib" "$(OutDir)ydbase.lib" /d /y
 
-echo "F" | xcopy "$(OpenSource)StormLib\Current\bin\$(PlatformName)\$(ConfigurationName)\StormLib.dll" "$(OutDir)StormLib.dll" /d /y
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_filesystem-vc100-mt-1_55.dll" "$(OutDir)boost_filesystem-vc100-mt-1_55.dll" /d /y /e
 
-echo "F" | xcopy "$(OpenSource)StormLib\Current\lib\$(PlatformName)\$(ConfigurationName)\StormLib_dll.lib" "$(OutDir)StormLib_dll.lib" /d /y
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_system-vc100-mt-1_55.dll" "$(OutDir)boost_system-vc100-mt-1_55.dll" /d /y /e
 
-echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_filesystem-vc100-mt-1_53.dll" "$(OutDir)boost_filesystem-vc100-mt-1_53.dll" /d /y
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_timer-vc100-mt-1_55.dll" "$(OutDir)boost_timer-vc100-mt-1_55.dll" /d /y /e
 
-echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_system-vc100-mt-1_53.dll" "$(OutDir)boost_system-vc100-mt-1_53.dll" /d /y
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_chrono-vc100-mt-1_55.dll" "$(OutDir)boost_chrono-vc100-mt-1_55.dll" /d /y /e
 
-echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_timer-vc100-mt-1_53.dll" "$(OutDir)boost_timer-vc100-mt-1_53.dll" /d /y
-
-echo "F" | xcopy "$(OpenSource)Boost\1.53\stage\lib\$(PlatformName)\boost_chrono-vc100-mt-1_53.dll" "$(OutDir)boost_chrono-vc100-mt-1_53.dll" /d /y
 </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>

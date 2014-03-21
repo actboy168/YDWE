@@ -8,6 +8,7 @@
 #include <base/exception/exception.h>
 #include <slk/ObjectManager.hpp>
 #include <slk/utility/sequence.h>
+#include <boost/algorithm/string.hpp>
 #include "InterfaceStormLib.h"
 
 void Item(slk::SlkTable& dota_slk)
@@ -46,7 +47,7 @@ inline ResultT& SplitHeroId(ResultT& Result, SequenceT& Input)
 
 	for (ForwardIteratorT It = InBegin; It != InEnd; ++It)
 	{
-		slk::trim(*It, slk::ctype::is_space());
+		boost::algorithm::trim(*It);
 	}
 	std::remove_if(Result.begin(), Result.end(), [](typename ResultT::reference& It){ return It.size() != 4;});
 
