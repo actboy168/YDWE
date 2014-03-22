@@ -36,15 +36,15 @@ namespace base { namespace hook { namespace detail {
 
 	uintptr_t export_address_table::get_proc_address_by_name(const char* proc_name)
 	{
-		uintptr_t* functions_address     = (uintptr_t*)image_.rva_to_addr(export_directory_ptr_->AddressOfFunctions);
-		uintptr_t* names_address         = (uintptr_t*)image_.rva_to_addr(export_directory_ptr_->AddressOfNames);
-		uintptr_t* name_ordinals_address = (uintptr_t*)image_.rva_to_addr(export_directory_ptr_->AddressOfNameOrdinals);
+		uint32_t* functions_address     = (uint32_t*)image_.rva_to_addr(export_directory_ptr_->AddressOfFunctions);
+		uint32_t* names_address         = (uint32_t*)image_.rva_to_addr(export_directory_ptr_->AddressOfNames);
+		uint16_t* name_ordinals_address = (uint16_t*)image_.rva_to_addr(export_directory_ptr_->AddressOfNameOrdinals);
 		for (uint32_t i = 0; i < export_directory_ptr_->NumberOfNames; ++i)
 		{
 			const char* function_name = (const char*)image_.rva_to_addr(names_address[i]);
 			if (0 == strcmp(function_name, proc_name))
 			{
-				return (uintptr_t)functions_address[name_ordinals_address[i]];
+				return (uintptr_t)&(functions_address[name_ordinals_address[i]]);
 			}
 		}
 
@@ -58,7 +58,7 @@ namespace base { namespace hook { namespace detail {
 			return 0;
 		}
 
-		uintptr_t* functions_address     = (uintptr_t*)image_.rva_to_addr(export_directory_ptr_->AddressOfFunctions);
-		return (uintptr_t)functions_address[ordinal - export_directory_ptr_->Base];
+		uint32_t* functions_address     = (uint32_t*)image_.rva_to_addr(export_directory_ptr_->AddressOfFunctions);
+		return (uintptr_t)&(functions_address[ordinal - export_directory_ptr_->Base]);
 	}
 }}}
