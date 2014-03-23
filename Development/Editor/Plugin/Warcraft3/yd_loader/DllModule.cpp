@@ -4,7 +4,7 @@
 #include <base/hook/fp_call.h>
 #include <base/file/stream.h>
 #include <base/hook/iat.h>
-#include <base/path/filesystem_helper.h>
+#include <base/path/helper.h>
 #include <base/path/service.h>
 #include <base/util/unicode.h>
 #include <base/warcraft3/command_line.h>
@@ -12,7 +12,7 @@
 #include <base/win/pe_reader.h>
 #include <slk/reader/IniReader.hpp>
 #include <slk/reader/IniReader.cpp>
-#include <slk/utility/sequence.cpp>
+//#include <slk/utility/sequence.cpp>
 #include <slk/reader/CommonReader.cpp>
 #include <map>
 
@@ -158,8 +158,8 @@ void DllModule::LoadPlugins()
 
 		slk::IniTable table;
 		try {
-			slk::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<slk::buffer>();
-			slk::buffer_reader reader(buf);
+			base::util::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<base::util::buffer>();
+			base::util::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		}
 		catch(...) {
@@ -288,8 +288,8 @@ void DllModule::Attach()
 		ResetConfig(table);
 
 		try {
-			slk::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
-			slk::buffer_reader reader(buf);
+			base::util::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<base::util::buffer>();
+			base::util::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		} 
 		catch (...) {

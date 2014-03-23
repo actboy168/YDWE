@@ -1,6 +1,6 @@
 #pragma once
 
-#include <slk/utility/buffer.h>
+#include <base/util/buffer.h>
 #include <slk/table/SlkTable.hpp>
 
 namespace slk

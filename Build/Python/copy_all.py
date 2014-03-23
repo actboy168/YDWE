@@ -29,10 +29,6 @@ def copy_lib_dll(name, configuration, version = 'Current'):
     
 def copy_lua_script():
     fs.copy_directory(path['Development'] / 'Editor' / 'Core' / 'Script' / 'lua', path['Result'] / 'share' / 'script', ['.lua'])
-    
-def copy_log_script():
-    fs.create_directories(path['Result'] / 'logs')
-    fs.copy_file(path['Development'] / 'Editor' / 'Core' / 'Script' / 'YDLogger.cfg', path['Result'] / 'logs' / 'YDLogger.cfg')
 
 def copy_boost_preprocessor():
     fs.copy_directory(path['OpenSource'] / 'Boost' / 'boost' / 'preprocessor', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor')
@@ -43,18 +39,18 @@ def copy_component():
 
 def copy_all(configuration):
     print('copy_all')
+    fs.create_directories(path['ResultCore'])
+    fs.create_directories(path['ResultCore'] / 'modules')
     copy_boost_dll('system',     configuration)
     copy_boost_dll('filesystem', configuration)
     copy_boost_dll('date_time',  configuration)
     copy_boost_dll('thread',     configuration)
-    copy_lib_dll('APR',          configuration)
-    copy_lib_dll('APR-Util',     configuration)
-    copy_lib_dll('Log4CXX',      configuration)
+    copy_boost_dll('chrono',     configuration)
+    copy_boost_dll('log',        configuration)
     copy_lib_dll('Lua',          configuration)
     copy_lib_dll('StormLib',     configuration)
     fs.copy_file(path['OpenSource'] / 'luaffi' / 'bin' / configuration / 'ffi.dll', path['ResultCore'] / 'modules' / 'ffi.dll')
     copy_lua_script()
-    copy_log_script()
     copy_boost_preprocessor()
     copy_component()
 

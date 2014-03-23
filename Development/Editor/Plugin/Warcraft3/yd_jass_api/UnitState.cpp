@@ -4,6 +4,7 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/version.h>
 #include <base/warcraft3/jass.h>
+#include <cassert>
 
 namespace base { namespace warcraft3 { namespace japi {
 	enum UNIT_STATE
@@ -246,12 +247,12 @@ namespace base { namespace warcraft3 { namespace japi {
 			return base::c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
 		}
 
-		war3_searcher&s = get_war3_searcher();
-		uintptr_t unit_object = s.unit_handle_to_object(unit_handle);
+		uintptr_t unit_object = handle_to_object(unit_handle);
 		if (!unit_object)
 		{
 			return 0;
 		}
+		assert('+w3u' == get_object_type(unit_object));
 
 		if (state_type == UNIT_STATE_LIFE_REGEN)
 		{
@@ -286,6 +287,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		    return jass::to_real((float)retval);
 		}
 
+		war3_searcher&s = get_war3_searcher();
 		unit_property* ptr = (unit_property*)*(uintptr_t*)(unit_object + 0x1E4 + (s.get_version() > version_124c ? 4: 0));
 		if (!ptr)
 		{
@@ -472,12 +474,12 @@ namespace base { namespace warcraft3 { namespace japi {
 			return;
 		}
 
-		war3_searcher&s = get_war3_searcher();
-		uintptr_t unit_object = s.unit_handle_to_object(unit_handle);
+		uintptr_t unit_object = handle_to_object(unit_handle);
 		if (!unit_object)
 		{
 			return ;
 		}
+		assert('+w3u' == get_object_type(unit_object));
 
 		if (state_type == UNIT_STATE_LIFE_REGEN)
 		{
@@ -527,6 +529,7 @@ namespace base { namespace warcraft3 { namespace japi {
 			return ;
 		}
 
+		war3_searcher&s = get_war3_searcher();
 		unit_property* ptr = (unit_property*)*(uintptr_t*)(unit_object + 0x1E4 + (s.get_version() > version_124c ? 4: 0));
 		if (!ptr)
 		{
@@ -660,29 +663,29 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	uint32_t _cdecl EXGetUnitObject(uint32_t unit_handle)
 	{
-		return get_war3_searcher().unit_handle_to_object(unit_handle);
+		return handle_to_object(unit_handle);
 	}
 
 	uint32_t __cdecl EXGetUnitId(uint32_t unit_handle)
 	{
-		war3_searcher&s = get_war3_searcher();
-		uintptr_t unit_object = s.unit_handle_to_object(unit_handle);
+		uintptr_t unit_object = handle_to_object(unit_handle);
 		if (!unit_object)
 		{
 			return 0;
 		}
+		assert('+w3u' == get_object_type(unit_object));
 		uint32_t retval = *(uint32_t*)(unit_object + 0x30);
 		return retval;
 	}
 
 	void __cdecl EXSetUnitId(uint32_t unit_handle, uint32_t value)
 	{
-		war3_searcher&s = get_war3_searcher();
-		uintptr_t unit_object = s.unit_handle_to_object(unit_handle);
+		uintptr_t unit_object = handle_to_object(unit_handle);
 		if (!unit_object)
 		{
 			return ;
 		}
+		assert('+w3u' == get_object_type(unit_object));
 		*(uint32_t*)(unit_object + 0x30) = value;
 	}
 

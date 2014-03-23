@@ -3,6 +3,7 @@
 #include <slk/converter/AttributeMeta.hpp>
 #include <slk/utility/sequence.h>
 #include <algorithm>
+#include <boost/algorithm/string.hpp>
 
 namespace slk
 {
@@ -20,7 +21,7 @@ namespace slk
 
 			for (ForwardIteratorT It = InBegin; It != InEnd; ++It)
 			{
-				trim(*It, ctype::is_space());
+				boost::algorithm::trim(*It);
 			}
 			std::remove_if(Result.begin(), Result.end(), [](typename ResultT::reference& It){ return It.size() != 4;});
 

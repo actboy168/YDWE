@@ -38,6 +38,9 @@ private:
 		if (0 == strcmp(src, "imagefile")) {
 			return "string";
 		}
+		if (0 == strcmp(src, "modelfile")) {
+			return "string";
+		}
 		if (0 == strcmp(src, "radian")) {
 			return "real";
 		}

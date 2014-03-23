@@ -3,19 +3,18 @@
 -- 本文件编码为UTF-8，在处理字符串时要注意使用iconv库转换
 --------------------------------------------------------------------------
 
--- 特别说明：本文件内容被分拆为多个较为简单的子文件，以保证结构清晰，阅读方便
-
-
 require "log"
 
 log.debug("********************* ydwe initialize start *********************")
 
-local real_require = require
-require = function (str, ...)
-	if not package.loaded[str] then
-		log.trace("Initializing '" .. str .. "'")
+do
+	local real_require = require
+	require = function (str, ...)
+		if not package.loaded[str] then
+			log.trace("Initializing '" .. str .. "'")
+		end
+		return real_require(str, ...)
 	end
-	return real_require(str, ...)
 end
 
 require "sys"

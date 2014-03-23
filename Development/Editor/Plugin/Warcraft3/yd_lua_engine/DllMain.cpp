@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "main/lua_loader.h"
+#include "lua_engine/lua_loader.h"
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID /*pReserved*/)
 {

@@ -1,30 +1,31 @@
 #pragma once
 
 #include <slk/port/config.h>
-#include <base/util/string_ref.h>
+#include <base/util/string_view.h>
+#include <ctype.h>
 
 namespace slk
 {
 	namespace detail
 	{
-		template <typename ForwardIteratorT, typename PredicateT>
-		ForwardIteratorT find_begin(ForwardIteratorT InBegin, ForwardIteratorT InEnd, PredicateT IsFound)
+		template <typename ForwardIteratorT>
+		ForwardIteratorT find_begin(ForwardIteratorT InBegin, ForwardIteratorT InEnd)
 		{
 			for (ForwardIteratorT It = InBegin; It != InEnd; ++It)
 			{
-				if (!IsFound(*It))
+				if (!isspace(*It))
 					return It;
 			}
 
 			return InEnd;
 		}
 
-		template <typename ForwardIteratorT, typename PredicateT>
-		ForwardIteratorT find_end(ForwardIteratorT InBegin, ForwardIteratorT InEnd, PredicateT IsFound)
+		template <typename ForwardIteratorT>
+		ForwardIteratorT find_end(ForwardIteratorT InBegin, ForwardIteratorT InEnd)
 		{
 			for (ForwardIteratorT It = InEnd; It != InBegin; )
 			{
-				if (!IsFound(*(--It)))
+				if (!isspace(*(--It)))
 				{
 					return ++It;
 				}
@@ -34,19 +35,53 @@ namespace slk
 		}
 	}
 
-	namespace ctype
+	inline void trim_left(std::string_view& Input)
 	{
-		struct SLKLIB_API is_space
-		{
-			template<class CharT>
-			bool operator()(CharT Ch) const;
-		};
+		std::string_view::iterator TrimBegin = detail::find_begin(Input.begin(), Input.end());
+		Input.remove_prefix(std::distance(Input.begin(), TrimBegin));
 	}
 
-	template<typename CharT>
-	bool is_space(CharT Ch)
+	inline void trim_right(std::string_view& Input)
 	{
-		return ctype::is_space()(Ch);
+		std::string_view::iterator TrimEnd = detail::find_end(Input.begin(), Input.end());
+		Input.remove_suffix(std::distance(TrimEnd, Input.end()));
+	}
+
+	inline void trim(std::string_view& Input)
+	{
+		trim_right(Input);
+		trim_left(Input);
+	}
+
+	template <typename Iterator>
+	std::string_view make_string_view(Iterator first, Iterator last)
+	{
+		if (first < last)
+		{
+			return std::string_view(first, std::distance(first, last));
+		}
+		else
+		{
+			return std::string_view();
+		}
+	}
+	inline std::string_view trim_left_copy(std::string_view& Input)
+	{
+		std::string_view::const_iterator TrimEnd = Input.end();
+		std::string_view::const_iterator TrimBegin = detail::find_begin(Input.begin(), Input.end());
+		return std::move(make_string_view(TrimBegin, TrimEnd));
+	}
+	inline std::string_view trim_right_copy(std::string_view& Input)
+	{
+		std::string_view::const_iterator TrimEnd = detail::find_end(Input.begin(), Input.end());
+		std::string_view::const_iterator TrimBegin = Input.begin();
+		return std::move(make_string_view(TrimBegin, TrimEnd));
+	}
+	inline std::string_view trim_copy(std::string_view::const_iterator ItBegin, std::string_view::const_iterator ItEnd)
+	{
+		std::string_view::const_iterator TrimEnd = detail::find_end(ItBegin, ItEnd);
+		std::string_view::const_iterator TrimBegin = detail::find_begin(ItBegin, TrimEnd);
+		return std::move(make_string_view(TrimBegin, TrimEnd));
 	}
 
 	template <typename CharT>
@@ -65,113 +100,6 @@ namespace slk
 	};
 	typedef basic_char_equal<char>    char_equal;
 	typedef basic_char_equal<wchar_t> wchar_equal;
-
-	template <typename SequenceT, typename PredicateT>
-	inline void trim_left(SequenceT& Input, PredicateT IsFound)
-	{
-		typename SequenceT::iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
-		Input.erase(Input.begin(), TrimBegin);
-	}
-
-	template <typename SequenceT, typename PredicateT>
-	inline void trim_right(SequenceT& Input, PredicateT IsFound)
-	{
-		typename SequenceT::iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
-		Input.erase(TrimEnd, Input.end());
-	}
-
-	template <typename PredicateT>
-	inline void trim_left(boost::string_ref& Input, PredicateT IsFound)
-	{
-		boost::string_ref::iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
-		Input.remove_prefix(std::distance(Input.begin(), TrimBegin));
-	}
-
-	template <typename PredicateT>
-	inline void trim_right(boost::string_ref& Input, PredicateT IsFound)
-	{
-		boost::string_ref::iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
-		Input.remove_suffix(std::distance(TrimEnd, Input.end()));
-	}
-
-	template <typename SequenceT, typename PredicateT>
-	inline void trim(SequenceT& Input, PredicateT IsFound)
-	{
-		trim_right(Input, IsFound);
-		trim_left(Input, IsFound);
-	}
-
-	template <typename SequenceT, typename PredicateT>
-	inline SequenceT trim_left_copy(SequenceT& Input, PredicateT IsFound)
-	{
-		typename SequenceT::const_iterator TrimEnd = Input.end();
-		typename SequenceT::const_iterator TrimBegin = detail::find_begin(Input.begin(), Input.end(), IsFound);
-		return std::move(SequenceT(TrimBegin, TrimEnd));
-	}
-
-	template <typename SequenceT, typename PredicateT>
-	inline SequenceT trim_right_copy(SequenceT& Input, PredicateT IsFound)
-	{
-		typename SequenceT::const_iterator TrimEnd = detail::find_end(Input.begin(), Input.end(), IsFound);
-		typename SequenceT::const_iterator TrimBegin = Input.begin();
-		return std::move(SequenceT(TrimBegin, TrimEnd));
-	}
-	 
-	template <typename SequenceT, typename PredicateT>
-	inline SequenceT trim_copy(typename SequenceT::const_iterator ItBegin, typename SequenceT::const_iterator ItEnd, PredicateT IsFound)
-	{
-		typename SequenceT::const_iterator TrimEnd = detail::find_end(ItBegin, ItEnd, IsFound);
-		typename SequenceT::const_iterator TrimBegin = detail::find_begin(ItBegin, TrimEnd, IsFound);
-		return std::move(SequenceT(TrimBegin, TrimEnd));
-	}
-
-	template <typename SequenceT, typename PredicateT>
-	inline SequenceT trim_copy(const SequenceT& Input, PredicateT IsFound)
-	{
-		return std::move(trim_copy<SequenceT, PredicateT>(Input.cbegin(), Input.cend(), IsFound));
-	}
-
-	template <typename SequenceT>
-	inline SequenceT trim_copy(const SequenceT& Input)
-	{
-		return std::move(trim_copy<SequenceT, decltype(ctype::is_space())>(Input.cbegin(), Input.cend(), ctype::is_space()));
-	}
-
-	template <typename SequenceT>
-	inline SequenceT trim_copy(typename SequenceT::const_iterator ItBegin, typename SequenceT::const_iterator ItEnd)
-	{
-		return std::move(trim_copy<SequenceT, decltype(ctype::is_space())>(ItBegin, ItEnd, ctype::is_space()));
-	}
-
-	template <typename SequenceT, typename PredicateT>
-	typename SequenceT::iterator find_begin(SequenceT& Input, PredicateT IsFound)
-	{
-		typename SequenceT::iterator InBegin = Input.begin();
-		typename SequenceT::iterator InEnd = Input.end();
-		for (typename SequenceT::iterator It = InBegin; It != InEnd; ++It)
-		{
-			if (IsFound(*It))
-				return It;
-		}
-
-		return InEnd;
-	}
-
-	template <typename SequenceT, typename PredicateT>
-	typename SequenceT::iterator find_end(SequenceT& Input, PredicateT IsFound)
-	{
-		typename SequenceT::iterator InBegin = Input.begin();
-		typename SequenceT::iterator InEnd = Input.end();
-		for (typename SequenceT::iterator It = InEnd; It != InBegin; )
-		{
-			if (IsFound(*(--It)))
-			{
-				return ++It;
-			}
-		}
-
-		return InEnd;
-	}
 
 	template <typename ResultT, typename SequenceT, typename PredicateT>
 	inline ResultT& split(ResultT& Result, SequenceT const& Input, PredicateT IsFound)

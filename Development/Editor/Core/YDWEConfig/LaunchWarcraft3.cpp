@@ -1,8 +1,7 @@
-
-#include <boost/filesystem.hpp>
+﻿#include <boost/filesystem.hpp>
 #include <base/file/stream.h>
 #include <base/path/service.h>
-#include <base/path/filesystem_helper.h>
+#include <base/path/helper.h>
 #include <base/win/env_variable.h>
 #include <base/win/process.h>
 #include <slk/reader/IniReader.hpp>
@@ -65,8 +64,8 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		table["MapTest"]["LaunchOpenGL"]   = "0";
 		table["MapTest"]["LaunchWindowed"] = "1";
 		try {
-			slk::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<slk::buffer>();
-			slk::buffer_reader reader(buf);
+			base::util::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<base::util::buffer>();
+			base::util::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		} 
 		catch (...) {

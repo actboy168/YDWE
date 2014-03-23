@@ -1,5 +1,5 @@
 #include "StdAfx.h"
-#include "../Utils/format.h"
+#include <base/util/format.h>
 
 namespace DuiLib {
 
@@ -83,14 +83,14 @@ DWORD TListInfoUI::GetDisabledBkColor() const
 	return dwDisabledBkColor;
 }
 
-void TListInfoUI::SetTextColor(DWORD dwTextColor)
+void TListInfoUI::SetTextColor(DWORD val)
 {
-	dwTextColor = dwTextColor;
+	dwTextColor = val;
 }
 
-void TListInfoUI::SetBkColor(DWORD dwBkColor)
+void TListInfoUI::SetBkColor(DWORD val)
 {
-	dwBkColor = dwBkColor;
+	dwBkColor = val;
 }
 
 void TListInfoUI::SetSelectedTextColor(DWORD dwTextColor)
@@ -1173,7 +1173,7 @@ void CListHeaderItemUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pst
     else if( wcscmp(pstrName, L"pushedimage") == 0 ) m_sPushedImage.reset(new CImage(pstrValue));
     else if( wcscmp(pstrName, L"focusedimage") == 0 ) m_sFocusedImage.reset(new CImage(pstrValue));
     else if( wcscmp(pstrName, L"sepimage") == 0 ) m_sSepImage.reset(new CImage(pstrValue));
-    else CControlUI::SetAttribute(pstrName, pstrValue);
+	else CLabelUI::SetAttribute(pstrName, pstrValue);
 }
 
 void CListHeaderItemUI::DoEvent(TEventUI& event)
@@ -1320,7 +1320,7 @@ void CListHeaderItemUI::PaintStatusImage(HDC hDC)
         rcThumb.bottom -= m_rcItem.top;
 
         if (!DrawImage(hDC, *m_sSepImage.get(), 
-			util::format(L"dest='%d,%d,%d,%d'", rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom).c_str()))
+			base::format(L"dest='%d,%d,%d,%d'", rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom).c_str()))
 		{
 			m_sSepImage.reset();
 		}
@@ -1516,7 +1516,7 @@ void CListElementUI::DoEvent(TEventUI& event)
 void CListElementUI::SetAttribute(const wchar_t* pstrName, const wchar_t* pstrValue)
 {
     if( wcscmp(pstrName, L"selected") == 0 ) Select();
-    else CControlUI::SetAttribute(pstrName, pstrValue);
+    else CLabelUI::SetAttribute(pstrName, pstrValue);
 }
 
 void CListElementUI::DrawItemBk(HDC hDC, const RECT& rcItem)
@@ -1564,9 +1564,8 @@ void CListElementUI::DrawItemBk(HDC hDC, const RECT& rcItem)
             if( !DrawImage(hDC, *m_sBkImage.get()) ) m_sBkImage.reset();
         }
     }
-
-    if (!m_sBkImage) {
-        if( !pInfo->sBkImage ) {
+	else {
+        if( pInfo->sBkImage ) {
             if( !DrawImage(hDC, *pInfo->sBkImage.get()) ) pInfo->sBkImage.reset();
             else return;
         }

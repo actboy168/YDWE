@@ -27,8 +27,8 @@ namespace NYDWE {
 	uintptr_t pgTrueWeWinMain;
 	boost::int32_t AERO_FP_CALL_STDCALL DetourWeWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine, boost::int32_t showCommand)
 	{
-		LOG4CXX_INFO(NYDWE::gInjectLogger, "Entering main program.");
-		LOG4CXX_DEBUG(NYDWE::gInjectLogger, "Command line: " << (commandLine ? commandLine : "NULL"));
+		LOGGING_INFO(lg) << "Entering main program.";
+		LOGGING_DEBUG(lg) << "Command line: " << (commandLine ? commandLine : "NULL");
 
 		// Initialize COM
 		HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
@@ -46,7 +46,7 @@ namespace NYDWE {
 		eventData.getDataStore().clear();
 		event_array[EVENT_WE_EXIT](eventData);
 
-		LOG4CXX_INFO(NYDWE::gInjectLogger, "Main program exit.");
+		LOGGING_INFO(lg) << "Main program exit.";
 
 		// Finish engine here to prevent .net module crash
 		// Before we stop the lua engine, we should stop hook
@@ -76,7 +76,6 @@ namespace NYDWE {
 			gIsInCompileProcess = false;
 		}
 
-		//LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("Storm CreateFile: %1%") % lpFileName);
 		return aero::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
 	}
 
@@ -85,7 +84,7 @@ namespace NYDWE {
 		std::string fileName(lpFileName);
 		if (boost::iends_with(fileName, "war3mapMap.blp"))
 		{
-			LOG4CXX_TRACE(NYDWE::gInjectLogger, "WE is about to compile maps.");
+			LOGGING_TRACE(lg) << "WE is about to compile maps.";
 			gIsInCompileProcess = true;
 		}
 		else if (gIsInCompileProcess && (
@@ -104,8 +103,6 @@ namespace NYDWE {
 			}
 		}
 
-
-		//LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("WE CreateFile: %1%") % lpFileName);
 		return aero::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
 	}
 
@@ -115,19 +112,16 @@ namespace NYDWE {
 	uintptr_t pgTrueCreateProcessA;
 	BOOL WINAPI DetourWeCreateProcessA(LPCSTR lpApplicationName, LPSTR lpCommandLine, LPSECURITY_ATTRIBUTES lpProcessAttributes, LPSECURITY_ATTRIBUTES lpThreadAttributes, BOOL bInheritHandles, DWORD dwCreationFlags, LPVOID lpEnvironment, LPCSTR lpCurrentDirectory, LPSTARTUPINFOA lpStartupInfo, LPPROCESS_INFORMATION lpProcessInformation)
 	{
-		//LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("ApplicationName: %1%") % lpApplicationName);
-		//LOG4CXX_TRACE(NYDWE::gInjectLogger, boost::format("CommandLine: %1%") % lpCommandLine);
-
 		std::cmatch matcher;
 		if (lpCommandLine && std::regex_match(lpCommandLine, matcher, gRegexCommandLine))
 		{
 			std::string currentWarcraftMap = (base::path::get(base::path::DIR_EXE).remove_filename() / matcher.str(1)).string();
-			LOG4CXX_TRACE(NYDWE::gInjectLogger, "Executing map " + currentWarcraftMap);
+			LOGGING_TRACE(lg) << "Executing map " + currentWarcraftMap;
 
 			CYDWEEventData eventData;
 			if (gIsInCompileProcess)
 			{
-				LOG4CXX_TRACE(NYDWE::gInjectLogger, "Need to compile...");
+				LOGGING_TRACE(lg) << "Need to compile...";
 
 				eventData.setEventData("map_path", currentWarcraftMap);
 
@@ -135,14 +129,14 @@ namespace NYDWE {
 				gIsInCompileProcess = false;
 				if (results_is_failed(results))
 				{
-					LOG4CXX_TRACE(NYDWE::gInjectLogger, "Save failed. Abort testing.");
+					LOGGING_TRACE(lg) << "Save failed. Abort testing.";
 					memset(lpProcessInformation, 0, sizeof(PROCESS_INFORMATION));
 					return FALSE;
 				}
 			}
 			else
 			{
-				LOG4CXX_TRACE(NYDWE::gInjectLogger, "No need to compile.");
+				LOGGING_TRACE(lg) << "No need to compile.";
 			}
 
 			eventData.getDataStore().clear();

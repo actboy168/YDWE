@@ -2,7 +2,7 @@
 
 <Styles>
   <Include source="scrollbar.xml" />
-  <Class name="Button" font="1" textcolor="#000000" hottextcolor="#FFFFFF" focusedtextcolor="#000000" pushedtextcolor="#77A8DE"
+  <Class name="Button" font="0" textcolor="#000000" hottextcolor="#FFFFFF" focusedtextcolor="#000000" pushedtextcolor="#77A8DE"
 		normalimage   = "file='Common/Button.png' corner='5,11,5,11' source='0, 0,96,24'"
 		hotimage      = "file='Common/Button.png' corner='5,11,5,11' source='0,24,96,48'"
 		pushedimage   = "file='Common/Button.png' corner='5,11,5,11' source='0,48,96,72'"
@@ -29,5 +29,5 @@
 		selecteddisabledimage = "file='Common/CheckButton/checkbox_tick_normal.png'    dest='0,5,15,20' fade='128'"
          
 	/>
-  <Class name="Label" height="20" textpadding="2,-4,2,-4" textcolor="#FFFFFFFF" disabledtextcolor="#FFA7A6AA" font="1" align="wrap" />
+  <Class name="Label" height="20" textpadding="2,-4,2,-4" textcolor="#FFFFFFFF" disabledtextcolor="#FFA7A6AA" font="0" align="wrap" />
 </Styles>

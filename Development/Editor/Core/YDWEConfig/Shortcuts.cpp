@@ -3,7 +3,7 @@
 #include <memory>
 #include <base/win/version.h>
 #include <base/path/service.h>
-#include <base/path/filesystem_helper.h>
+#include <base/path/helper.h>
 #include <base/com/unique_ptr.h>
 
 namespace Shortcuts

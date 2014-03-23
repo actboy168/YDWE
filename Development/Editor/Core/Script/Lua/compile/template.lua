@@ -1,7 +1,7 @@
 
 local select=select
 local setfenv=setfenv
-local loadstring=loadstring
+local load=load
 local string=string
 local table=table
 local stormlib = ar.stormlib
@@ -88,7 +88,7 @@ function template:do_compile(op)
 	__map_path__   = op.map_path
 	local env = setmetatable({import = map_file_import, StringHash = string_hash}, {__index = _G})
 	table.insert(lua_codes, "return table.concat(__jass_result__)")	
-	local f, err = loadstring(table.concat(lua_codes, '\n'), nil, 't', env)
+	local f, err = load(table.concat(lua_codes, '\n'), nil, 't', env)
 	if not f then
 		return f, err
 	end

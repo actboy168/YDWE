@@ -26,11 +26,13 @@ def Log():
     sys.stdout = RedirectLog(logname, sys.stdout)
 
 def move_include():
-    fs.copy_directory(
-          path['ProjectRoot'] / 'Build' / 'include'
-        , path['ResultRoot'] / 'include'
-        , ['.h']
-        , True)
+    inc = path['ProjectRoot'] / 'Build' / 'include'
+    if fs.exists(inc):
+        fs.copy_directory(
+              inc
+            , path['ResultRoot'] / 'include'
+            , ['.h']
+            , True)
 
 def build_clear(configuration):
     print ('build_clear') 

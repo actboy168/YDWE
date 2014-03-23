@@ -160,7 +160,6 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="UIlib.h" />
-    <ClInclude Include="Utils\format.h" />
     <ClInclude Include="Utils\FrameWindow.h" />
     <ClInclude Include="Utils\UIDelegate.h" />
     <ClInclude Include="Utils\UIFile.h" />
@@ -200,7 +199,7 @@
     <ProjectReference Include="..\ydgraph\ydgraph.vcxproj">
       <Project>{c371743b-ad12-4a31-82df-5a058083773f}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\YDWEBase\YDWEBase.vcxproj">
+    <ProjectReference Include="..\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
     <ProjectReference Include="..\ydzip\ydzip.vcxproj">

@@ -200,8 +200,8 @@ public:
     TFontInfo* GetDefaultFontInfo();
     void SetDefaultFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
     DWORD GetCustomFontCount() const;
-    HFONT AddFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
-    HFONT AddFontAt(int index, const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	size_t AddFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	size_t ReplaceFont(int index, const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
     HFONT GetFont(int index);
     HFONT GetFont(const wchar_t* pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
     bool FindFont(HFONT hFont);

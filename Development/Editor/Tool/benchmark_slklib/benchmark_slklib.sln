@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "benchmark_slklib", "benchmark_slklib.vcxproj", "{C371743B-AD12-4A31-82DF-5A058083773F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4AFFE3A0-639D-11E2-A80E-AB2BAF291A2F} = {4AFFE3A0-639D-11E2-A80E-AB2BAF291A2F}
@@ -10,7 +12,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SlkLib", "..\..\Core\SlkLib
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{54354818-AA65-49AF-B1EE-657D97FCD838}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YDWEBase", "..\..\Core\YDWEBase\YDWEBase.vcxproj", "{75B04C07-94D9-41E7-BBFD-E67F79BFF41A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ydbase", "..\..\Core\ydbase\ydbase.vcxproj", "{75B04C07-94D9-41E7-BBFD-E67F79BFF41A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

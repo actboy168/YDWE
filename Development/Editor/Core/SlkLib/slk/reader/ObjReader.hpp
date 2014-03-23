@@ -1,6 +1,6 @@
 #pragma once
 
-#include <slk/utility/buffer.h>
+#include <base/util/buffer.h>
 #include <slk/utility/object_id.h>
 #include <slk/table/ObjTable.hpp>
 
@@ -10,7 +10,7 @@ namespace slk
 	{
 	public:
 		template <class ObjTableT>
-		static void Read(buffer_reader& reader, ObjTableT& table)
+		static void Read(base::util::buffer_reader& reader, ObjTableT& table)
 		{
 			reader.read<W3OHeader>();
 			ReadOriginalTable(reader, table);
@@ -24,7 +24,7 @@ namespace slk
 		};
 
 		template <class ObjTableT>
-		static void ReadOriginalTable(buffer_reader& reader, ObjTableT& table)
+		static void ReadOriginalTable(base::util::buffer_reader& reader, ObjTableT& table)
 		{
 			// Original objects table
 			uint32_t nOriginalTableCount = reader.read<uint32_t>();
@@ -51,7 +51,7 @@ namespace slk
 		}
 
 		template <class ObjTableT>
-		static void ReadCustomTable(buffer_reader& reader, ObjTableT& table)
+		static void ReadCustomTable(base::util::buffer_reader& reader, ObjTableT& table)
 		{
 			// Custom objects table
 			uint32_t nCustomTableCount = reader.read<uint32_t>();
@@ -74,7 +74,7 @@ namespace slk
 		}
 
 		template <OBJECT_PARSER_OPTION Option>
-		static void ReadModData(buffer_reader& reader, ObjSingle<Option>& obj);
+		static void ReadModData(base::util::buffer_reader& reader, ObjSingle<Option>& obj);
 	};
 
 }

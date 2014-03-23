@@ -5,6 +5,7 @@
 #include <slk/InterfaceStorm.hpp>
 #include <slk/utility/sequence.h>
 #include <slk/utility/convert.h>
+#include <boost/algorithm/string.hpp>
 
 namespace slk
 {
@@ -32,10 +33,10 @@ namespace slk
 				initialized_ = true;
 
 				InterfaceStorm::error_code ec = 0;
-				buffer buf(storm_.load(Filename, ec));
+				base::util::buffer buf(storm_.load(Filename, ec));
 				if (ec == 0 && buf.begin() != buf.end())
 				{
-					buffer_reader reader(buf);
+					base::util::buffer_reader reader(buf);
 					Reader::Read(reader, table_);
 				}
 			}
@@ -102,7 +103,7 @@ namespace slk
 	public:
 		const std::string& Convert(const std::string& str) const
 		{
-			std::string tmp = trim_copy<std::string>(str.cbegin(), str.cend());
+			std::string tmp = boost::algorithm::trim_copy(str);
 			if (tmp == "-")
 			{
 				static std::string s_dummy_zero = "0";

@@ -3,7 +3,7 @@
 #include <slk/port/config.h>
 #include <string>
 #include <memory.h>
-#include <base/util/string_ref.h>
+#include <base/util/string_view.h>
 
 namespace slk
 {
@@ -33,7 +33,7 @@ namespace slk
 			}
 		}
 
-		object_id(const boost::string_ref& id)
+		object_id(const std::string_view& id)
 		{
 			if (id.size() >= 4)
 			{

@@ -3,6 +3,7 @@ require "filesystem"
 require "util"
 require "ar_stormlib"
 require "ar_storm"
+require "mpq_util"
 
 local stormlib = ar.stormlib
 local storm    = ar.storm
@@ -121,17 +122,42 @@ function jasshelper.do_compile(self, map_path, common_j_path, blizzard_j_path, o
 		parameter = parameter .. " --nopreprocessor"
 	end
 
-	-- 生成命令行
-	local command_line = string.format('"%s"%s "%s" "%s" "%s"',
-		self.exe_path:string(),
-		parameter,
-		common_j_path:string(),
-		blizzard_j_path:string(),
-		map_path:string()
-	)
+	if option.enable_jasshelper_scriptonly then
+		return mpq_util:update_file(map_path, 'war3map.j',
+			function (map_handle, in_script_path)
+				local out_script_path = fs.ydwe_path() / "logs" / "jasshelper.j"
+				
+				-- 生成命令行
+				local command_line = string.format('"%s"%s --scriptonly "%s" "%s" "%s" "%s"',
+					self.exe_path:string(),
+					parameter,
+					common_j_path:string(),
+					blizzard_j_path:string(),
+					in_script_path:string(),
+					out_script_path:string()
+				)
+				-- 执行并获取结果
+				if not sys.spawn(command_line, fs.ydwe_path(), true) then
+					return nil
+				end
 
-	-- 执行并获取结果
-	return sys.spawn(command_line, fs.ydwe_path(), true)
+				return out_script_path
+			end
+		)
+	else
+		-- 生成命令行
+		local command_line = string.format('"%s"%s "%s" "%s" "%s"',
+			self.exe_path:string(),
+			parameter,
+			common_j_path:string(),
+			blizzard_j_path:string(),
+			map_path:string()
+		)
+
+		-- 执行并获取结果
+		return sys.spawn(command_line, fs.ydwe_path(), true)
+	end
+	
 end
 
 function jasshelper.compile(self, map_path, option)	

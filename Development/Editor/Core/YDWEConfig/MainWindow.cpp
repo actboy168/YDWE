@@ -3,7 +3,7 @@
 #include <slk/utility/list_of.h>
 #include <slk/writer/IniWriter.hpp>
 #include <slk/reader/IniReader.cpp>
-#include <slk/utility/sequence.cpp>
+//#include <slk/utility/sequence.cpp>
 #include <slk/reader/CommonReader.cpp>
 #include "Regedit.h"
 #include "Shortcuts.h"
@@ -11,10 +11,26 @@
 #include <base/file/stream.h>
 #include <base/path/self.h>
 #include <base/path/service.h>
-#include <base/path/filesystem_helper.h>
+#include <base/path/helper.h>
 #include <base/util/unicode.h>
 #include <base/win/version.h>
 #include <base/win/file_version.h>
+#include <base/win/font/utility.h>
+
+std::wstring CComboUI_GetSelectText(DuiLib::CComboUI* pui)
+{
+	int i = pui->GetCurSel();
+	if (i < 0 || i >= pui->GetCount())
+	{
+		return std::wstring();
+	}
+	DuiLib::CListLabelElementUI* elem = dynamic_cast<DuiLib::CListLabelElementUI*>(pui->GetItemAt(i));
+	if (!elem)
+	{
+		return std::wstring();
+	}
+	return elem->GetText();
+}
 
 namespace 
 {
@@ -45,6 +61,7 @@ namespace
 		("ScriptInjection",                         Attribute(2))
 		("EnableJassHelper",                        Attribute("ScriptCompiler"))
 		("EnableJassHelperDebug",                   Attribute("ScriptCompiler"))
+		("EnableJassHelperScriptOnly",              Attribute("ScriptCompiler"))
 		("EnableJassHelperOptimization",            Attribute("ScriptCompiler"))
 		("EnableCJass",                             Attribute("ScriptCompiler"))
 		("LaunchOpenGL",                            Attribute("MapTest"))
@@ -130,7 +147,11 @@ void CMainWindow::InitWindow()
 	m_pAllowLocalFiles     = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"AllowLocalFiles"));
 	m_pWar3PatchList       = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(L"War3PatchList"));
 	m_pWar3PluginList      = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(L"War3PluginList"));
-	m_pWarcraft3Directory  = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(L"Warcraft3Directory"));	
+	m_pWarcraft3Directory  = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(L"Warcraft3Directory"));
+	m_pFontEnable          = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"FontEnable"));
+	m_pFontNames           = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(L"FontNames"));
+	m_pFontSizes           = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(L"FontSizes"));
+	m_pFontPreview         = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(L"FontPreview"));
 
 	m_pm.AddNotifier(this);
 }
@@ -147,6 +168,7 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["MapTest"]["LaunchDisableSecurityAccess"] = "0";	
 	table["ScriptCompiler"]["EnableJassHelper"] = "1";
 	table["ScriptCompiler"]["EnableJassHelperDebug"] = "0";
+	table["ScriptCompiler"]["EnableJassHelperScriptOnly"] = "0";
 	table["ScriptCompiler"]["EnableJassHelperOptimization"] = "1";
 	table["ScriptCompiler"]["EnableCJass"] = "0";
 	table["ScriptInjection"]["Option"] = "0";
@@ -156,6 +178,9 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["FeatureToggle"]["EnableManualNewId"] = "0";
 	table["FeatureToggle"]["EnableTriggerCopyEncodingAutoConversion"] = "1";
 	table["FeatureToggle"]["EnableShowInternalAttributeId"] = "0";
+	table["Font"]["Enable"] = "0";
+	table["Font"]["Name"] = "";
+	table["Font"]["Size"] = "12";
 }
 
 bool CMainWindow::LoadConfig(slk::IniTable& table)
@@ -163,8 +188,8 @@ bool CMainWindow::LoadConfig(slk::IniTable& table)
 	try
 	{
 		ResetConfig(table);
-		slk::buffer buf = base::file::read_stream(base::path::self().remove_filename() / L"EverConfig.cfg").read<slk::buffer>();
-		slk::buffer_reader reader(buf);
+		base::util::buffer buf = base::file::read_stream(base::path::self().remove_filename() / L"EverConfig.cfg").read<base::util::buffer>();
+		base::util::buffer_reader reader(buf);
 		slk::IniReader::Read(reader, table);
 	}
 	catch (...)
@@ -179,7 +204,7 @@ bool CMainWindow::SaveConfig(slk::IniTable const& table)
 {
 	try
 	{
-		base::file::write_stream(base::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
+		base::file::write_stream(base::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<base::util::buffer>(table));
 	}
 	catch (...)
 	{
@@ -218,6 +243,27 @@ void CMainWindow::ConfigToUI(slk::IniTable& table)
 		}
 	}
 
+	m_pFontEnable->Selected(table["Font"]["Enable"] == "0");
+	m_pFontEnable->Selected(table["Font"]["Enable"] != "0");
+
+	std::wstring font_name = base::util::u2w(table["Font"]["Name"]);
+	for (int i = 0; i < m_pFontNames->GetCount(); ++i)
+	{
+		if (font_name == ((DuiLib::CListLabelElementUI*)m_pFontNames->GetItemAt(i))->GetText())
+		{
+			m_pFontNames->SelectItem(i);
+			break;
+		}
+	}
+	std::wstring font_size = base::util::u2w(table["Font"]["Size"]);
+	for (int i = 0; i < m_pFontSizes->GetCount(); ++i)
+	{
+		if (font_size == ((DuiLib::CListLabelElementUI*)m_pFontSizes->GetItemAt(i))->GetText())
+		{
+			m_pFontSizes->SelectItem(i);
+			break;
+		}
+	}
 	m_pm.SendNotify(m_pEnableCJass, DUI_MSGTYPE_SELECTCHANGED);
 	m_pm.SendNotify(m_pEnableJassHelper, DUI_MSGTYPE_SELECTCHANGED);
 }
@@ -245,10 +291,14 @@ void CMainWindow::UIToConfig(slk::IniTable& table)
 			DuiLib::CCheckBoxUI* ctrl = m_controls[name];
 			if (ctrl)
 			{
-				table[attribute.Section()][name] = ctrl->IsSelected()? "1" : "0";;
+				table[attribute.Section()][name] = ctrl->IsSelected()? "1" : "0";
 			}
 		}
 	}
+
+	table["Font"]["Enable"] = m_pFontEnable->IsSelected() ? "1" : "0";
+	table["Font"]["Name"] = base::util::w2u(CComboUI_GetSelectText(m_pFontNames));
+	table["Font"]["Size"] = base::util::w2u(CComboUI_GetSelectText(m_pFontSizes));
 }
 
 void CMainWindow::EnableMapSave(bool bEnable)
@@ -277,6 +327,7 @@ void CMainWindow::DisableCJass(bool bEnable)
 
 void CMainWindow::EnableJassHelper(bool bEnable)
 {
+	ContrlSetEnabled("EnableJassHelperScriptOnly", bEnable);
 	ContrlSetEnabled("EnableJassHelperOptimization", bEnable);
 	ContrlSetEnabled("EnableJassHelperDebug", bEnable);
 	ContrlSetEnabled("EnableCJass", bEnable);
@@ -393,8 +444,8 @@ void CMainWindow::InitPluginUI()
 
 		slk::IniTable table;
 		try {
-			slk::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<slk::buffer>();
-			slk::buffer_reader reader(buf);
+			base::util::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<base::util::buffer>();
+			base::util::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);	
 		}
 		catch(...) {
@@ -449,7 +500,7 @@ void CMainWindow::DonePluginUI()
 		}
 
 		fs::path plugin_path = m_ydwe_path.parent_path() / L"plugin" / L"warcraft3";
-		base::file::write_stream(plugin_path/ L"config.cfg").write(slk::IniWriter::Write<slk::buffer>(table));
+		base::file::write_stream(plugin_path / L"config.cfg").write(slk::IniWriter::Write<base::util::buffer>(table));
 	}
 	catch (...) {
 	}
@@ -523,6 +574,19 @@ void CMainWindow::DonePatchUI(slk::IniTable& table)
 	}
 }
 
+void CMainWindow::InitFontUI()
+{
+	std::set<std::wstring> font_names = base::font::get_list();
+	
+	for (auto it = font_names.begin(); it != font_names.end(); ++it)
+	{
+		DuiLib::CListLabelElementUI* elem = new DuiLib::CListLabelElementUI;
+		elem->SetText(it->c_str());
+		elem->SetManager(m_pFontNames->GetManager(), m_pFontNames, false);
+		m_pFontNames->Add(elem);
+	}
+}
+
 void CMainWindow::UpdateWarcraft3Directory()
 {
 	if (m_pWarcraft3Directory)
@@ -547,6 +611,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 		{
 			slk::IniTable table;
 			if (!LoadConfig(table)) { ResetConfig(table); }
+			InitFontUI();
 			ConfigToUI(table);
 			InitRegistryUI();
 			InitOSHelpUI();
@@ -572,6 +637,25 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 				ContrlSetEnabled("LaunchFullWindowed",       bEnable);
 				ContrlSetEnabled("LaunchLockingMouse",       bEnable);
 				ContrlSetEnabled("LaunchFixedRatioWindowed", bEnable);
+			}
+			else if (m_pFontEnable && m_pFontEnable == msg.pSender)
+			{
+				bool bEnable = m_pFontEnable->IsSelected();
+				m_pFontNames->SetEnabled(bEnable);
+				m_pFontSizes->SetEnabled(bEnable);
+				m_pFontPreview->SetEnabled(bEnable);
+			}
+		}
+		else if (msg.sType == DUI_MSGTYPE_ITEMSELECT)
+		{
+			static size_t dynfont = m_pm.AddFont(L"system", 12, false, false, false);
+
+			if (msg.pSender == m_pFontNames || msg.pSender == m_pFontSizes)
+			{
+				try {
+					m_pm.ReplaceFont(dynfont, CComboUI_GetSelectText(m_pFontNames).c_str(), base::font::size_to_height(std::stoi(CComboUI_GetSelectText(m_pFontSizes))), false, false, false);
+				} catch (...) { }
+				m_pFontPreview->SetFont(dynfont);
 			}
 		}
 		else if (msg.sType == DUI_MSGTYPE_CLICK) 

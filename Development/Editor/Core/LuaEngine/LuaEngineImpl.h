@@ -2,19 +2,15 @@
 
 #include <boost/filesystem.hpp>
 #include <lua.hpp>
-#pragma warning(push)
-#pragma warning(disable: 4231)
-#pragma warning(disable: 4251)
-#include <log4cxx/logger.h>
-#pragma warning(pop)
+#include "logging.h"
 
 class LuaEngineImpl
 {
 public:
 	LuaEngineImpl();
 	~LuaEngineImpl();
-	bool Initialize(boost::filesystem::path const& log_config);
-	bool InitializeLogger(boost::filesystem::path const& log_config);
+	bool Initialize(const boost::filesystem::path& root_path);
+	bool InitializeLogger(const boost::filesystem::path& root_path);
 	bool InitializeInfo();
 	bool InitializeLua();
 	bool Uninitialize();
@@ -24,6 +20,6 @@ public:
 
 private:
 	lua_State*              state_;
-	log4cxx::LoggerPtr      logger_;
+	logging::logger         logger_;
 	bool                    vaild_;
 };

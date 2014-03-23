@@ -5,7 +5,7 @@
 
 namespace NYDWE
 {
-	log4cxx::LoggerPtr gInjectLogger;
+	logging::logger lg;
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
@@ -13,11 +13,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 	if (reason == DLL_PROCESS_ATTACH)
 	{
 		DisableThreadLibraryCalls(module);
-		NYDWE::gInjectLogger = log4cxx::Logger::getLogger(L"YDInject");
-	}
-	else if (reason == DLL_PROCESS_DETACH)
-	{
-		NYDWE::gInjectLogger = NULL;
+		NYDWE::lg = logging::get_logger("event");
 	}
 
 	return TRUE;

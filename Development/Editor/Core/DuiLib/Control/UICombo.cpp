@@ -105,7 +105,7 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         if (pDefaultAttributes)
 		{
             m_pLayout->ApplyAttributeTable(pDefaultAttributes);
-        }
+		}
         m_pLayout->SetInset(CDuiRect(1, 1, 1, 1));
         m_pLayout->SetBkColor(0xFFFFFFFF);
         m_pLayout->SetBorderColor(0xFFC6C7D2);
@@ -113,11 +113,12 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         m_pLayout->SetAutoDestroy(false);
         m_pLayout->EnableScrollBar();
         m_pLayout->ApplyAttributeList(m_pOwner->GetDropBoxAttributeList().c_str());
-        for( int i = 0; i < m_pOwner->GetCount(); i++ ) {
+		for (int i = 0; i < m_pOwner->GetCount(); i++) {
             m_pLayout->Add(static_cast<CControlUI*>(m_pOwner->GetItemAt(i)));
         }
-        m_pm.AttachDialog(m_pLayout);
-        
+		m_pm.AttachDialog(m_pLayout);
+		PostMessage(WM_PAINT);
+		PostMessage(WM_KEYDOWN, VK_SPACE);
         return 0;
     }
     else if( uMsg == WM_CLOSE ) {
@@ -176,13 +177,13 @@ void CComboWnd::EnsureVisible(int iIndex)
     m_pLayout->FindSelectable(m_pOwner->GetCurSel(), false);
     RECT rcItem = m_pLayout->GetItemAt(iIndex)->GetPos();
     RECT rcList = m_pLayout->GetPos();
-    CScrollBarUI* pHorizontalScrollBar = m_pLayout->GetHorizontalScrollBar();
-    if( pHorizontalScrollBar && pHorizontalScrollBar->IsVisible() ) rcList.bottom -= pHorizontalScrollBar->GetFixedHeight();
-    if( rcItem.top >= rcList.top && rcItem.bottom < rcList.bottom ) return;
-    int dx = 0;
-    if( rcItem.top < rcList.top ) dx = rcItem.top - rcList.top;
-    if( rcItem.bottom > rcList.bottom ) dx = rcItem.bottom - rcList.bottom;
-    Scroll(0, dx);
+	CScrollBarUI* pVerticalScrollBar = m_pLayout->GetVerticalScrollBar();
+	if (pVerticalScrollBar && pVerticalScrollBar->IsVisible()) rcList.bottom -= pVerticalScrollBar->GetFixedHeight();
+    if (rcItem.top >= rcList.top && rcItem.bottom < rcList.bottom) return;
+    int dy = 0;
+	if (rcItem.top < rcList.top) dy = rcItem.top - rcList.top;
+	if (rcItem.bottom > rcList.bottom) dy = rcItem.bottom - rcList.bottom;
+	Scroll(0, dy);
 }
 
 void CComboWnd::Scroll(int dx, int dy)
@@ -259,7 +260,7 @@ bool CComboUI::SelectItem(int iIndex, bool bTakeFocus)
     if( m_items.GetSize() == 0 ) return false;
     if( iIndex >= m_items.GetSize() ) iIndex = m_items.GetSize() - 1;
     CControlUI* pControl = static_cast<CControlUI*>(m_items[iIndex]);
-    if( !pControl || !pControl->IsVisible() || !pControl->IsEnabled() ) return false;
+    if( !pControl ) return false;
     IListItemUI* pListItem = dynamic_cast<IListItemUI*>(pControl);
     if( pListItem == NULL ) return false;
     m_iCurSel = iIndex;
@@ -298,7 +299,7 @@ bool CComboUI::Add(CControlUI* pControl)
 {
     IListItemUI* pListItem = dynamic_cast<IListItemUI*>(pControl);
     if( pListItem != NULL ) 
-    {
+	{
         pListItem->SetOwner(this);
         pListItem->SetIndex(m_items.GetSize());
     }
@@ -311,7 +312,8 @@ bool CComboUI::AddAt(CControlUI* pControl, int iIndex)
 
     // The list items should know about us
     IListItemUI* pListItem = dynamic_cast<IListItemUI*>(pControl);
-    if( pListItem != NULL ) {
+	if (pListItem != NULL) 
+	{
         pListItem->SetOwner(this);
         pListItem->SetIndex(iIndex);
     }

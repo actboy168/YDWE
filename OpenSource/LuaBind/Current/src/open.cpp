@@ -144,8 +144,24 @@ namespace
         lua_pushcclosure(L, &deprecated_super, 0);
         lua_setglobal(L, "super");
 
-        set_package_preload(L, "luabind.function_introspection", &bind_function_introspection);
+        //set_package_preload(L, "luabind.function_introspection", &bind_function_introspection);
     }
 
 } // namespace luabind
 
+extern "C" LUABIND_API int luaopen_luabind(lua_State* L)
+{
+	try
+	{
+		luabind::open(L);
+	}
+	catch (std::exception const& e)
+	{
+		return luaL_error(L, "luabind::open exception: %s.", e.what());
+	}
+	catch (...)
+	{
+		return luaL_error(L, "luabind::open unknown exception.");
+	}
+	return 0;
+}

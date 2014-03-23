@@ -27,7 +27,7 @@ namespace slk
 		public:
 			typedef std::vector<std::vector<std::string>> _Mybase;
 
-			SlkDataArray(buffer_reader& reader)
+			SlkDataArray(base::util::buffer_reader& reader)
 				: max_x_(0)
 				, max_y_(0)
 				, cur_x_(0)
@@ -74,7 +74,7 @@ namespace slk
 				cur_y_ = y;
 			}
 
-			void set_k(boost::string_ref&& val)
+			void set_k(std::string_view&& val)
 			{
 				if (cur_y_ == 1)
 				{
@@ -155,23 +155,23 @@ namespace slk
 				}
 			}
 
-			void read_line_b(boost::string_ref& line)
+			void read_line_b(std::string_view& line)
 			{
 				size_t x = 0, y = 0;
 
 				split_callback(line,
-					[&](boost::string_ref::const_iterator const& beg, boost::string_ref::const_iterator const& end)
+					[&](std::string_view::const_iterator const& beg, std::string_view::const_iterator const& end)
 				{
 					switch (*beg)
 					{
 					case 'X':
 						{
-							x = Str2UInt(trim_copy<boost::string_ref>(beg+1, end));
+							x = Str2UInt(trim_copy(beg+1, end));
 						}
 						break;
 					case 'Y':
 						{
-							y = Str2UInt(trim_copy<boost::string_ref>(beg+1, end));
+							y = Str2UInt(trim_copy(beg+1, end));
 						}
 						break;
 					default:
@@ -187,26 +187,26 @@ namespace slk
 				this->assign(x, y);
 			}
 
-			void read_line_c(boost::string_ref& line)
+			void read_line_c(std::string_view& line)
 			{
 				split_callback(line,
-					[&](boost::string_ref::const_iterator const& beg, boost::string_ref::const_iterator const& end)
+					[&](std::string_view::const_iterator const& beg, std::string_view::const_iterator const& end)
 				{
 					switch (*beg)
 					{
 					case 'X':
 						{
-							this->set_x(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
+							this->set_x(Str2UInt(trim_copy(beg+1, end)));
 						}
 						break;
 					case 'Y':
 						{
-							this->set_y(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
+							this->set_y(Str2UInt(trim_copy(beg+1, end)));
 						}
 						break;
 					case 'K':
 						{
-							this->set_k(trim_copy<boost::string_ref>(beg+1, end));
+							this->set_k(trim_copy(beg+1, end));
 						}
 						break;
 					default:
@@ -215,21 +215,21 @@ namespace slk
 				});
 			}
 
-			void read_line_f(boost::string_ref& line)
+			void read_line_f(std::string_view& line)
 			{
 				split_callback(line,
-					[&](boost::string_ref::const_iterator const& beg, boost::string_ref::const_iterator const& end)
+					[&](std::string_view::const_iterator const& beg, std::string_view::const_iterator const& end)
 				{
 					switch (*beg)
 					{
 					case 'X':
 						{
-							this->set_x(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
+							this->set_x(Str2UInt(trim_copy(beg+1, end)));
 						}
 						break;
 					case 'Y':
 						{
-							this->set_y(Str2UInt(trim_copy<boost::string_ref>(beg+1, end)));
+							this->set_y(Str2UInt(trim_copy(beg+1, end)));
 						}
 						break;
 					default:
@@ -238,25 +238,24 @@ namespace slk
 				});
 			}
 
-			uint8_t read_type(boost::string_ref& line)
+			uint8_t read_type(std::string_view& line)
 			{
-				auto It = find_begin(line, char_equal(';'));
-
-				if (It == line.end())
+				size_t n = line.find_first_of(';');
+				if (n == std::string_view::npos)
 				{
 					return 0;
 				}
 
-				boost::string_ref key = trim_copy<boost::string_ref>(line.begin(), It);
+				std::string_view key = trim_copy(line.begin(), line.begin()+n);
 
-				line.remove_prefix(It - line.begin() + 1);
+				line.remove_prefix(n + 1);
 				return key.front();
 			}
 
-			void read(buffer_reader& reader)
+			void read(base::util::buffer_reader& reader)
 			{
 				bool is_found_b = false;
-				reader::utility::each_line(reader, [&](boost::string_ref& line)
+				reader::utility::each_line(reader, [&](std::string_view& line)
 				{
 					uint8_t type = read_type(line);
 					if (!is_found_b)
@@ -292,7 +291,7 @@ namespace slk
 
 	}
 
-	void SlkReader::Read(buffer_reader& reader, SlkTable& table)
+	void SlkReader::Read(base::util::buffer_reader& reader, SlkTable& table)
 	{
 		if (!reader.read_ptr<SLK_HEADER>()->IsValid())
 		{

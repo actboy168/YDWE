@@ -94,7 +94,6 @@
     <ClCompile Include="slk\reader\WesReader.cpp" />
     <ClCompile Include="slk\reader\WtsReader.cpp" />
     <ClCompile Include="slk\table\VariableData.cpp" />
-    <ClCompile Include="slk\utility\sequence.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="slk\Converter.hpp" />
@@ -122,7 +121,6 @@
     <ClInclude Include="slk\table\VariableData.hpp" />
     <ClInclude Include="slk\table\WesTable.hpp" />
     <ClInclude Include="slk\table\WtsTable.hpp" />
-    <ClInclude Include="slk\utility\buffer.h" />
     <ClInclude Include="slk\utility\convert.h" />
     <ClInclude Include="slk\utility\object_id.h" />
     <ClInclude Include="slk\utility\sequence.h" />
@@ -133,7 +131,7 @@
     <ClInclude Include="slk\writer\TxtWriter.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\YDWEBase\YDWEBase.vcxproj">
+    <ProjectReference Include="..\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
   </ItemGroup>

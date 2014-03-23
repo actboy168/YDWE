@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Window size="400,540" caption="0,0,0,36" roundcorner="10,10" >
-  <Font name="幼圆" size="18" />
   <Font name="微软雅黑" size="18"  default="true" />
+  <Font name="幼圆" size="18" />
   <Font name="微软雅黑" size="14" />
   <Include source="styles.xml" />
 
   <Class name="Title" bkimage="file='Common/Button.png' corner='5,11,5,11' source='0,24,96,48'" />
   <Class name="LabelTitle" class="Title"  borderround="4,4" />
+  <Class name="ListLabelElement" />
   <Class name="Background" bkcolor="#FFFAFCFC" />
-  <Class name="TabSelect" font="1"
+  <Class name="TabSelect" font="0"
 		textcolor="#000000" selectedtextcolor="#FFFFFF" hottextcolor="#000000" focusedtextcolor="#000000" pushedtextcolor="#77A8DE" selectedpushedtextcolor="#77A8DE"
 		normalimage         = "file='Common/Button.png' corner='5,11,5,11' source='0, 0,96,24'"
 		selectedimage       = "file='Common/Button.png' corner='5,11,5,11' source='0,24,96,48'"
@@ -34,9 +35,8 @@
         <Control height="1" />
         <RadioButton name="tab_4" group="TabSelect" text="系统关联"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
       </VerticalLayout>
-
-		<TabLayout name="tabs" >
-        <VerticalLayout class="Background" inset="2,24,2,24" >
+      <TabLayout name="tabs" >
+        <VerticalLayout class="Background" inset="2,18,2,18" >
           <VerticalLayout height="140" >
             <Label text="地图版本" tooltip= "地图兼容性选项。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
@@ -46,7 +46,7 @@
               <RadioButton class="NormalRadioButton" text="同时保存双份"           width="200" group="MapSave" name="MapSave_3" tooltip="同时保存为新旧两个版本。和当前魔兽版本不同的版本会以不同的文件名保存。" />
             </VerticalLayout>
           </VerticalLayout>
-          <Control height="16" />
+          <Control height="12" />
           <VerticalLayout height="80" >
             <Label text="代码注入" tooltip="向地图中注入代码的方式。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
@@ -54,11 +54,12 @@
               <RadioButton class="NormalRadioButton" text="不自动注入代码"   width="200" group="ScriptInjection" name="ScriptInjection_1" tooltip="不会自动注入代码。 请用#include &quot;jass文件名&quot; 的方式来手动注入。" />
             </VerticalLayout>
           </VerticalLayout>
-          <Control height="16" />
-          <VerticalLayout height="140" >
+          <Control height="12" />
+          <VerticalLayout height="180" >
             <Label text="脚本编译器" tooltip="有关JassHelper、Cjass编译器的选项。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6"  >
               <CheckBox text="启用JassHelper编译器" width="200" name="EnableJassHelper" tooltip="启用JassHelper编译器。JassHelper编译器是YDWE功能的基础，如果去掉，将不能使用任何YDWE特有的触发动作。除非你是纯Jass地图编写者并且不喜欢vJass，否则请选择此项。" />
+              <CheckBox text="启用JassHelper兼容模式" width="200" name="EnableJassHelperScriptOnly" tooltip="如果地图保存时，JassHelper出错可以尝试启用此模式。" />
               <CheckBox text="启用脚本优化"         width="200" name="EnableJassHelperOptimization" tooltip="目前支持函数的内联。" />
               <CheckBox text="启用CJass编译器"      width="200" name="EnableCJass" tooltip="启用CJass编译器。开启此项，将会自动把智能导入、预处理器和逆天触发器插件关闭。" />
               <CheckBox text="地图调试模式"         width="200" name="EnableJassHelperDebug" tooltip="打开地图的调试模式。影响到debug关键字和代码优化。" />
@@ -98,11 +99,27 @@
           </VerticalLayout>
         </VerticalLayout>
         <VerticalLayout class="Background" inset="2,24,2,24" >
-          <VerticalLayout height="80" >
+          <VerticalLayout height="230" >
             <Label text="插件选项"  tooltip="一些可能存在兼容性问题的功能的开关。需要重启YDWE生效。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
               <CheckBox text="启用语法高亮插件(*)"     width="200" name="EnableTesh" tooltip="启用TESH，如果触发编辑器出现了崩溃等现象，请禁用此项。" />
               <CheckBox text="启用逆天触发器插件(*)"   width="200" name="EnableYDTrigger" tooltip="全面强化触发编辑器的功能。"  />
+              <CheckBox text="启用字体插件(*)" tooltip="设置YDWE的字体" width="200" name="FontEnable" />
+              <HorizontalLayout>
+                <Control width="20" />
+                <Combo name="FontNames" dropboxsize="0, 300" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" />
+                <Control width="20" />
+                <Combo name="FontSizes" width="60" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
+                  <ListLabelElement text="10" />
+                  <ListLabelElement text="11" />
+                  <ListLabelElement text="12" />
+                  <ListLabelElement text="13" />
+                  <ListLabelElement text="14" />
+                  <ListLabelElement text="15" />
+                  <ListLabelElement text="16" />
+                </Combo>
+              </HorizontalLayout>
+              <Label name="FontPreview" text="AaBbCc 0123456789 测试" textcolor="#FF000000" align="center" height="80" />
             </VerticalLayout>
           </VerticalLayout>
           <Control height="16" />

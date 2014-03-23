@@ -94,7 +94,7 @@
     <ClInclude Include="Windows7.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Core\YDWEBase\YDWEBase.vcxproj">
+    <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
   </ItemGroup>

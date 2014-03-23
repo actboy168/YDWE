@@ -1,47 +1,46 @@
 #pragma once
 
 #include <slk/utility/sequence.h>
-#include <slk/utility/buffer.h>
+#include <base/util/buffer.h>
 #include <functional>
-#include <base/util/string_ref.h>
+#include <base/util/string_view.h>
 
 namespace slk { namespace reader { namespace utility {
-	void remove_bom(buffer_reader& reader);
-	void each_line(buffer_reader& reader, std::function<void(boost::string_ref&)> callback);
+	void remove_bom(base::util::buffer_reader& reader);
+	void each_line(base::util::buffer_reader& reader, std::function<void(std::string_view&)> callback);
 
 	template <class TableT>
-	void ini_read(buffer_reader& reader, TableT& table)
+	void ini_read(base::util::buffer_reader& reader, TableT& table)
 	{
 		typename TableT::mapped_type* object = nullptr;
 		remove_bom(reader);
-		each_line(reader, [&](boost::string_ref& line)
+		each_line(reader, [&](std::string_view& line)
 		{
 			size_t pos = line.find("//");
-			if (pos != boost::string_ref::npos)
+			if (pos != std::string_view::npos)
 			{
 				line.remove_prefix(pos);
 			}
 
-			trim_left(line, ctype::is_space());
+			trim_left(line);
 
 			if ((line.size() >= 2) && (line[0] == '['))
 			{
-				auto ItBeg = find_begin(line, char_equal(']'));
-				if (ItBeg != line.end())
+				size_t n = line.find_first_of(']');
+				if (n != std::string_view::npos)
 				{
-					object = &table[trim_copy<boost::string_ref>(line.begin()+1, ItBeg).to_string()];
+					object = &table[trim_copy(line.begin() + 1, line.begin() + n).to_string()];
 				}
 			}
 			else
 			{
 				if (object)
 				{
-					auto ItBeg = find_begin(line, char_equal('='));
-
-					if (ItBeg != line.end())
+					size_t n = line.find_first_of('=');
+					if (n != std::string_view::npos)
 					{
-						boost::string_ref key = trim_copy<boost::string_ref>(line.begin(), ItBeg);
-						boost::string_ref val = trim_copy<boost::string_ref>(ItBeg+1, line.end());
+						std::string_view key = trim_copy(line.begin(), line.begin() + n);
+						std::string_view val = trim_copy(line.begin() + n + 1, line.end());
 						if (!val.empty() && !key.empty())
 						{
 							(*object)[key.to_string()] = val.to_string();

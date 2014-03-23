@@ -68,17 +68,19 @@ local function compile_map(map_path, option)
 				if not option.enable_cjass then
 					-- 根据注入选项进行处理（由于Lua的closure，此处可以访问“父”函数的局部变量）
 					if option.script_injection == 0 then
-						inject_code:compile(compile_t)
+						if not inject_code:compile(compile_t) then
+							return nil
+						end
+						compile_t.input = compile_t.output
 					end
 
 					-- Wave预处理
-					compile_t.input = compile_t.output
 					if not wave:compile(compile_t) then
 						return nil
 					end
+					compile_t.input = compile_t.output
 				end
 
-				compile_t.input = compile_t.output
 				if not template:compile(compile_t) then
 					return nil
 				end
@@ -128,6 +130,8 @@ event.register(event.EVENT_SAVE_MAP, false, function (event_data)
 	local save_option = {
 		-- 是否启用JassHelper
 		enable_jasshelper = (global_config:get_integer("ScriptCompiler.EnableJassHelper", 1) == 1),
+		-- 是否使用脚本模式编译
+		enable_jasshelper_scriptonly = (global_config:get_integer("ScriptCompiler.EnableJassHelperScriptOnly", 0) == 1),
 		-- 是否是调试模式
 		enable_jasshelper_debug = (global_config:get_integer("ScriptCompiler.EnableJassHelperDebug", 0) == 1),
 		-- 是否优化地图

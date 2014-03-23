@@ -15,9 +15,8 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 		try
 		{
 			std::locale::global(std::locale("", LC_CTYPE));
-
 			boost::filesystem::path root_path = base::path::self().remove_filename().remove_filename();
-			if (gLuaEngine.Initialize(root_path / L"logs" / L"YDLogger.cfg"))
+			if (gLuaEngine.Initialize(root_path / L"logs"))
 			{
 				gLuaEngine.SetPath(root_path / L"share" / L"script" / L"?.lua");
 				gLuaEngine.SetCPath(root_path / L"bin" / L"modules" / L"?.dll");

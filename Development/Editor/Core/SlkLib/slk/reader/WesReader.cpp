@@ -4,38 +4,37 @@
 
 namespace slk
 {
-	void WesReader::Read(buffer_reader& reader, WesTable& table)
+	void WesReader::Read(base::util::buffer_reader& reader, WesTable& table)
 	{
 		bool is_WorldEditStrings = false;
 		reader::utility::remove_bom(reader);
-		reader::utility::each_line(reader, [&](boost::string_ref& line)
+		reader::utility::each_line(reader, [&](std::string_view& line)
 		{
 			size_t pos = line.find("//");
-			if (pos != boost::string_ref::npos)
+			if (pos != std::string_view::npos)
 			{
 				line.remove_prefix(pos);
 			}
 
-			trim_left(line, ctype::is_space());
+			trim_left(line);
 
 			if ((line.size() >= 2) && (line[0] == '['))
 			{
-				auto ItBeg = find_begin(line, char_equal(']'));
-				if (ItBeg != line.end())
+				size_t n = line.find_first_of(']');
+				if (n != std::string_view::npos)
 				{
-					is_WorldEditStrings = "WorldEditStrings" == trim_copy<boost::string_ref>(line.begin()+1, ItBeg);
+					is_WorldEditStrings = "WorldEditStrings" == trim_copy(line.begin() + 1, line.begin() + n);
 				}
 			}
 			else
 			{
 				if (is_WorldEditStrings)
 				{
-					auto ItBeg = find_begin(line, char_equal('='));
-
-					if (ItBeg != line.end())
+					size_t n = line.find_first_of('=');
+					if (n != std::string_view::npos)
 					{
-						boost::string_ref key = trim_copy<boost::string_ref>(line.begin(), ItBeg);
-						boost::string_ref val = trim_copy<boost::string_ref>(ItBeg+1, line.end());
+						std::string_view key = trim_copy(line.begin(), line.begin() + n);
+						std::string_view val = trim_copy(line.begin() + n + 1, line.end());
 						if (!val.empty() && !key.empty())
 						{
 							table[key.to_string()] = val.to_string();
