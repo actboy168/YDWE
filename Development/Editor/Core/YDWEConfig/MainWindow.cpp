@@ -3,7 +3,6 @@
 #include <slk/utility/list_of.h>
 #include <slk/writer/IniWriter.hpp>
 #include <slk/reader/IniReader.cpp>
-#include <slk/utility/sequence.cpp>
 #include <slk/reader/CommonReader.cpp>
 #include "Regedit.h"
 #include "Shortcuts.h"
