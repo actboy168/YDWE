@@ -13,6 +13,8 @@ library YDWEYDWEJapiOther
 	native EXDisplayChat     takes player p, integer chat_recipient, string message returns nothing
 	native EXGetUnitId       takes unit u returns integer
 	native EXSetUnitId       takes unit u, integer id returns nothing
+	native EXRevealTrainingProcess takes boolean flag returns nothing
+	native EXGetGameBaseAdr  takes nothing returns integer
 
 	function YDWEDisplayChat takes player p, integer chat_recipient, string message returns nothing
 		call EXDisplayChat(p, chat_recipient, message)
@@ -26,6 +28,13 @@ library YDWEYDWEJapiOther
 		call EXSetUnitId(u, id)
 	endfunction
 	
+	function YDWERevealTrainingProcess takes boolean enable returns nothing
+		call EXRevealTrainingProcess(enable)
+	endfunction
+	
+	function YDWEGetGameBaseAdr takes nothing returns integer
+		return EXGetGameBaseAdr()
+	endfunction
 endlibrary
 
 #endif  /// YDWEYDWEJapiOtherIncluded
