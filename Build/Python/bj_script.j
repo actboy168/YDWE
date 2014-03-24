@@ -240,7 +240,7 @@ function YDWEReplaceUnitBJNull takes unit whichUnit, integer newUnitId, integer 
     set indexItem = null
     return bj_lastReplacedUnit
 endfunction
-	
+
 function YDWEEnumDestructablesInCircleBJFilterNull takes nothing returns boolean
     local real dx = GetDestructableX(GetFilterDestructable()) - GetLocationX(bj_enumDestructableCenter)
     local real dy = GetDestructableY(GetFilterDestructable()) - GetLocationY(bj_enumDestructableCenter)
@@ -549,15 +549,13 @@ endfunction
 
 function YDWEGetRandomSubGroupEnumNull takes nothing returns nothing
     if (bj_randomSubGroupWant > 0) then
-        if (bj_randomSubGroupWant >= bj_randomSubGroupTotal) or (GetRandomReal(0,1) < bj_randomSubGroupChance) then
+        if (bj_randomSubGroupWant >= bj_randomSubGroupTotal) or (GetRandomInt(1,bj_randomSubGroupTotal) <= bj_randomSubGroupWant) then
             // We either need every remaining unit, or the unit passed its chance check.
             call GroupAddUnit(bj_randomSubGroupGroup, GetEnumUnit())
             set bj_randomSubGroupWant = bj_randomSubGroupWant - 1
         endif
     endif
     set bj_randomSubGroupTotal = bj_randomSubGroupTotal - 1
-    // Fix by: xylign
-    set bj_randomSubGroupChance = bj_randomSubGroupWant / I2R(bj_randomSubGroupTotal)
 endfunction
 
 function YDWEGetRandomSubGroupNull takes integer count, group sourceGroup returns group
@@ -569,7 +567,6 @@ function YDWEGetRandomSubGroupNull takes integer count, group sourceGroup return
         return bj_randomSubGroupGroup
     endif
 
-    set bj_randomSubGroupChance = I2R(bj_randomSubGroupWant) / I2R(bj_randomSubGroupTotal)
     call ForGroup(sourceGroup, function YDWEGetRandomSubGroupEnumNull)
     return bj_randomSubGroupGroup
 endfunction
@@ -836,7 +833,7 @@ function YDWEBlightGoldMineForPlayerBJNull takes unit goldMine, player whichPlay
     local real    mineY
     local integer mineGold
     local unit    newMine
-    
+
     // Make sure we're replacing a Gold Mine and not some other type of unit.
     if GetUnitTypeId(goldMine) != 'ngol' then
         return null
@@ -957,7 +954,7 @@ function YDWESmartCameraPanBJNull takes player whichPlayer, location loc, real d
     if (GetLocalPlayer() == whichPlayer) then
         // Use only local code (no net traffic) within this block to avoid desyncs.
 		set dx = GetCameraTargetPositionX() - GetLocationX(loc)
-		set dy = GetCameraTargetPositionY() - GetLocationY(loc) 
+		set dy = GetCameraTargetPositionY() - GetLocationY(loc)
         set dist2 = dx * dx + dy * dy
         if (dist2 >= bj_SMARTPAN_TRESHOLD_SNAP*bj_SMARTPAN_TRESHOLD_SNAP) then
             // If the user is too far away, snap the camera.
@@ -979,11 +976,11 @@ function YDWEGetInventoryIndexOfItemTypeBJNull takes unit whichUnit, integer ite
 			if GetItemTypeId(UnitItemInSlot(whichUnit, index)) == itemId then
 				return index + 1
 			endif
-	
+
 			set index = index + 1
 			exitwhen index >= bj_MAX_INVENTORY
 		endloop
-	endif	
+	endif
     return 0
 endfunction
 
@@ -1009,10 +1006,10 @@ function YDWEUnitHasItemOfTypeBJNull takes unit whichUnit, integer itemId return
 			if GetItemTypeId(UnitItemInSlot(whichUnit, index)) == itemId then
 				return true
 			endif
-	
+
 			set index = index + 1
 			exitwhen index >= bj_MAX_INVENTORY
 		endloop
-	endif	
+	endif
     return false
 endfunction
