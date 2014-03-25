@@ -12,7 +12,6 @@
 #include <base/win/pe_reader.h>
 #include <slk/reader/IniReader.hpp>
 #include <slk/reader/IniReader.cpp>
-//#include <slk/utility/sequence.cpp>
 #include <slk/reader/CommonReader.cpp>
 #include <map>
 
