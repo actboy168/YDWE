@@ -244,7 +244,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_TYPE:
 			break;
 		default:
-			return base::c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
+			return c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
 		}
 
 		uintptr_t unit_object = handle_to_object(unit_handle);
@@ -470,7 +470,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_MAX_MANA:
 			break;
 		default:
-			base::c_call<void>(RealSetUnitState, unit_handle, state_type, value_ptr);
+			c_call<void>(RealSetUnitState, unit_handle, state_type, value_ptr);
 			return;
 		}
 
