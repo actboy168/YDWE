@@ -4,7 +4,7 @@
 #include <memory>
 #include <base/util/noncopyable.h>
 
-namespace base { namespace lockfree { namespace details {
+namespace base { namespace lockfree { namespace detail {
 
 #if defined(_MSC_VER)
 #	include <intrin.h>
@@ -57,67 +57,52 @@ namespace base { namespace lockfree { namespace details {
 	};
 #endif
 
-	template <typename T, ::std::size_t _Size>
-	struct yqueue_chunk_t
+	template <typename T, ::std::size_t N>
+	struct queue_chunk_t
 	{
-		T values [_Size];
-		yqueue_chunk_t<T, _Size>* next;
+		T values [N];
+		queue_chunk_t<T, N>* next;
 	};
 
-	template <typename T, ::std::size_t _Size, typename _Alloc>
-	class yqueue_alloc 
-		: public _Alloc::template rebind<yqueue_chunk_t<T, _Size> >::other
+	template <typename T, ::std::size_t N, typename Alloc>
+	class queue_alloc 
+		: public Alloc::template rebind<queue_chunk_t<T, N> >::other
 	{
 	public:
-		typedef yqueue_chunk_t<T, _Size>                        _Chunt;
-		typedef typename _Alloc::template rebind<_Chunt>::other _Base;
+		typedef queue_chunk_t<T, N>                                chunt_type;
+		typedef typename Alloc::template rebind<chunt_type>::other base_type;
 
 	public:
-		inline _Chunt*  New()
+		inline chunt_type*  New()
 		{
-			return _Base::allocate(1);
+			return base_type::allocate(1);
 		}
 
-		inline void Delete(_Chunt* p)
+		inline void Delete(chunt_type* p)
 		{
-			_Base::deallocate(p, 1);
+			base_type::deallocate(p, 1);
 		}
 	};
 
-	//  yqueue is an efficient queue implementation. The main goal is
-	//  to minimise number of allocations/deallocations needed. Thus yqueue
-	//  allocates/deallocates elements in batches of N.
-	//
-	//  yqueue allows one thread to use push/back function and another one 
-	//  to use pop/front functions. However, user must ensure that there's no
-	//  pop on the empty queue and that both threads don't access the same
-	//  element in unsynchronised manner.
-	//
-	//  T is the type of the object in the queue.
-	//  N is granularity of the queue (how many pushes have to be done till
-	//  actual memory allocation is required).
-
-	template <typename T, ::std::size_t _Size = 256, typename _Alloc = ::std::allocator<T>>
-	class yqueue
-		: protected yqueue_alloc<T, _Size, _Alloc>
+	template <typename T, ::std::size_t N = 256, typename Alloc = ::std::allocator<T>>
+	class queue
+		: protected queue_alloc<T, N, Alloc>
 	{
 	public:
-		typedef yqueue_alloc<T, _Size, _Alloc> alloc;
+		typedef queue_alloc<T, N, Alloc>       alloc_type;
 		typedef T                              value_type;
 		typedef value_type*                    pointer;
 		typedef value_type&                    reference;
 		typedef value_type const&              const_reference;
 
 	protected:
-		using alloc::New;
-		using alloc::Delete;
+		using alloc_type::New;
+		using alloc_type::Delete;
 
 	public:
-
-		//  Create the queue.
-		inline yqueue ()
+		inline queue ()
 		{
-			begin_chunk = New ();
+			begin_chunk = New();
 			assert (begin_chunk);
 			begin_pos = 0;
 			back_chunk = begin_chunk;
@@ -126,26 +111,23 @@ namespace base { namespace lockfree { namespace details {
 			end_pos = 0;
 		}
 
-		//  Destroy the queue.
-		inline ~yqueue ()
+		inline ~queue ()
 		{
 			for (;;) {
 				if (begin_chunk == end_chunk) {
 					Delete(begin_chunk);
 					break;
 				} 
-				chunk_t *o = begin_chunk;
+				chunt_type *o = begin_chunk;
 				begin_chunk = begin_chunk->next;
 				Delete(o);
 			}
 
-			chunk_t *sc = spare_chunk.xchg (nullptr);
+			chunt_type *sc = spare_chunk.xchg(nullptr);
 			if (sc)
 				Delete(sc);
 		}
 
-		//  Returns reference to the front element of the queue.
-		//  If the queue is empty, behaviour is undefined.
 		inline reference front ()
 		{
 			return begin_chunk->values [begin_pos];
@@ -156,8 +138,6 @@ namespace base { namespace lockfree { namespace details {
 			return begin_chunk->values [begin_pos];
 		}
 
-		//  Returns reference to the back element of the queue.
-		//  If the queue is empty, behaviour is undefined.
 		inline reference back ()
 		{
 			return back_chunk->values [back_pos];
@@ -168,16 +148,15 @@ namespace base { namespace lockfree { namespace details {
 			return back_chunk->values [back_pos];
 		}
 
-		//  Adds an element to the back end of the queue.
 		inline void push ()
 		{
 			back_chunk = end_chunk;
 			back_pos = end_pos;
 
-			if (++end_pos != _Size)
+			if (++end_pos != N)
 				return;
 
-			chunk_t *sc = spare_chunk.xchg (nullptr);
+			chunt_type *sc = spare_chunk.xchg(nullptr);
 			if (sc) {
 				end_chunk->next = sc;
 			} else {
@@ -188,18 +167,14 @@ namespace base { namespace lockfree { namespace details {
 			end_pos = 0;
 		}
 
-		//  Removes an element from the front end of the queue.
 		inline void pop ()
 		{
-			if (++ begin_pos == _Size) {
-				chunk_t *o = begin_chunk;
+			if (++ begin_pos == N) {
+				chunt_type *o = begin_chunk;
 				begin_chunk = begin_chunk->next;
 				begin_pos = 0;
 
-				//  'o' has been more recently used than spare_chunk,
-				//  so for cache reasons we'll get rid of the spare and
-				//  use 'o' as the spare.
-				chunk_t *cs = spare_chunk.xchg (o);
+				chunt_type *cs = spare_chunk.xchg(o);
 				if (cs)
 					Delete(cs);
 			}
@@ -208,8 +183,8 @@ namespace base { namespace lockfree { namespace details {
 		// 在pop线程调用，线程安全。
 		inline bool empty () const
 		{
-			volatile chunk_t* _back_chunk   = back_chunk;
-			volatile unsigned int _back_pos = back_pos;
+			volatile chunt_type* _back_chunk = back_chunk;
+			volatile unsigned int _back_pos  = back_pos;
 
 			if ((begin_chunk == _back_chunk) && (begin_pos == _back_pos))
 				return true;
@@ -218,43 +193,34 @@ namespace base { namespace lockfree { namespace details {
 		}
 
 	private:
-		//  Individual memory chunk to hold N elements.
-		typedef typename alloc::_Chunt chunk_t;
+		typedef typename alloc_type::chunt_type chunt_type;
 
-		//  Back position may point to invalid memory if the queue is empty,
-		//  while begin & end positions are always valid. Begin position is
-		//  accessed exclusively be queue reader (front/pop), while back and
-		//  end positions are accessed exclusively by queue writer (back/push).
-		chunk_t *    begin_chunk;
+		chunt_type*  begin_chunk;
 		unsigned int begin_pos;
-		chunk_t *    back_chunk;
+		chunt_type*  back_chunk;
 		unsigned int back_pos;
-		chunk_t *    end_chunk;
+		chunt_type*  end_chunk;
 		unsigned int end_pos;
 
-		//  People are likely to produce and consume at similar rates.  In
-		//  this scenario holding onto the most recently freed chunk saves
-		//  us from having to call malloc/free.
-		atomic_ptr_t<chunk_t> spare_chunk;
+		atomic_ptr_t<chunt_type> spare_chunk;
 
 	private:
-		yqueue(const yqueue&);
-		yqueue& operator=(const yqueue&);
+		queue(const queue&);
+		queue& operator=(const queue&);
 	};
 
 }
 
-template <typename T, unsigned int _Size = 256, class _Alloc = std::allocator<T>>
+template <typename T, unsigned int N = 256, class Alloc = std::allocator<T>>
 class queue 
 	: private util::noncopyable
 {
 public:
-	typedef queue<T, _Size, _Alloc>              _Myt;
-	typedef details::yqueue<T, _Size, _Alloc>    _Container;
-	typedef _Container                           container_type;
-	typedef typename _Container::value_type      value_type;
-	typedef typename _Container::reference       reference;
-	typedef typename _Container::const_reference const_reference;
+	typedef queue<T, N, Alloc>                       class_type;
+	typedef detail::queue<T, N, Alloc>               container_type;
+	typedef typename container_type::value_type      value_type;
+	typedef typename container_type::reference       reference;
+	typedef typename container_type::const_reference const_reference;
 
 	queue() 
 		: c() 
@@ -325,7 +291,6 @@ public:
 	}
 
 protected:
-	_Container c;
+	container_type c;
 };
 }}
-
