@@ -36,20 +36,36 @@ namespace
 	class Attribute
 	{
 	public:
+		enum e_type_t {
+			e_CheckBox,
+			e_RadioButton,
+			e_ComboBox,
+		};
+
 		Attribute(uint8_t count)
-			: m_section("Option")
+			: m_type(e_RadioButton)
+			, m_section("Option")
 			, m_count(count)
 		{ }
 
 		Attribute(std::string const& section)
-			: m_section(section)
+			: m_type(e_CheckBox)
+			, m_section(section)
 			, m_count(0)
 		{ }
 
+		Attribute(std::string const& section, e_type_t type)
+			: m_type(type)
+			, m_section(section)
+			, m_count(0)
+		{ }
+
+		e_type_t           Type() const { return m_type; }
 		std::string const& Section() const { return m_section; }
 		uint8_t            Count() const { return m_count; }
 
 	private:
+		e_type_t    m_type;
 		std::string m_section;
 		uint8_t     m_count;
 	};
@@ -63,7 +79,7 @@ namespace
 		("EnableJassHelperScriptOnly",              Attribute("ScriptCompiler"))
 		("EnableJassHelperOptimization",            Attribute("ScriptCompiler"))
 		("EnableCJass",                             Attribute("ScriptCompiler"))
-		("LaunchOpenGL",                            Attribute("MapTest"))
+		("LaunchRenderingEngine",                   Attribute("MapTest", Attribute::e_ComboBox))
 		("LaunchWindowed",                          Attribute("MapTest"))
 		("LaunchFullWindowed",                      Attribute("MapTest"))
 		("LaunchLockingMouse",                      Attribute("MapTest"))
@@ -74,7 +90,11 @@ namespace
 		("EnableYDTrigger",                         Attribute("ThirdPartyPlugin"))
 		("EnableManualNewId",                       Attribute("FeatureToggle"))
 		("EnableTriggerCopyEncodingAutoConversion", Attribute("FeatureToggle"))
-		("EnableShowInternalAttributeId",           Attribute("FeatureToggle"));
+		("EnableShowInternalAttributeId",           Attribute("FeatureToggle"))
+		("FontEnable",                              Attribute("Font"))
+		("FontName",                                Attribute("Font", Attribute::e_ComboBox))
+		("FontSize",                                Attribute("Font", Attribute::e_ComboBox))
+		;
 }
 
 CMainWindow::CMainWindow() 
@@ -121,7 +141,7 @@ void CMainWindow::InitWindow()
 	{
 		std::string const& name = it.first;
 		Attribute const& attribute = it.second;
-		if (attribute.Section() == "Option")
+		if (attribute.Type() == Attribute::e_RadioButton)
 		{
 			for (uint8_t i = 0; i < attribute.Count(); ++i)
 			{
@@ -129,15 +149,22 @@ void CMainWindow::InitWindow()
 				m_controls[radioname] = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(base::util::u2w(radioname).c_str()));
 			}
 		}
-		else
+		else if (attribute.Type() == Attribute::e_CheckBox)
 		{
 			m_controls[name] = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(base::util::u2w(name).c_str()));
+		}
+		else if (attribute.Type() == Attribute::e_ComboBox)
+		{
+			m_comboboxs[name] = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(base::util::u2w(name).c_str()));
 		}
 	}
 
 	m_pEnableJassHelper = m_controls["EnableJassHelper"];
 	m_pEnableCJass      = m_controls["EnableCJass"];
 	m_pLaunchWindowed   = m_controls["LaunchWindowed"];
+	m_pFontEnable       = m_controls["FontEnable"];
+	m_pFontName         = m_comboboxs["FontName"];
+	m_pFontSize         = m_comboboxs["FontSize"];
 
 	m_pFileAssociation_w3x = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"FileAssociation_w3x"));
 	m_pFileAssociation_w3m = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"FileAssociation_w3m"));
@@ -147,9 +174,6 @@ void CMainWindow::InitWindow()
 	m_pWar3PatchList       = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(L"War3PatchList"));
 	m_pWar3PluginList      = dynamic_cast<DuiLib::CVerticalLayoutUI*>(m_pm.FindControl(L"War3PluginList"));
 	m_pWarcraft3Directory  = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(L"Warcraft3Directory"));
-	m_pFontEnable          = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(L"FontEnable"));
-	m_pFontNames           = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(L"FontNames"));
-	m_pFontSizes           = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(L"FontSizes"));
 	m_pFontPreview         = dynamic_cast<DuiLib::CLabelUI*>(m_pm.FindControl(L"FontPreview"));
 
 	m_pm.AddNotifier(this);
@@ -159,7 +183,7 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 {
 	table["MapSave"]["Option"] = "0";
 	table["War3Patch"]["Option"] = "0";
-	table["MapTest"]["LaunchOpenGL"] = "0";
+	table["MapTest"]["LaunchRenderingEngine"] = "Direct3D 8";
 	table["MapTest"]["LaunchWindowed"] = "1";
 	table["MapTest"]["LaunchFullWindowed"] = "0";
 	table["MapTest"]["LaunchLockingMouse"] = "0";
@@ -177,9 +201,9 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["FeatureToggle"]["EnableManualNewId"] = "0";
 	table["FeatureToggle"]["EnableTriggerCopyEncodingAutoConversion"] = "1";
 	table["FeatureToggle"]["EnableShowInternalAttributeId"] = "0";
-	table["Font"]["Enable"] = "0";
-	table["Font"]["Name"] = "";
-	table["Font"]["Size"] = "12";
+	table["Font"]["FontEnable"] = "0";
+	table["Font"]["FontName"] = "";
+	table["Font"]["FontSize"] = "12";
 }
 
 bool CMainWindow::LoadConfig(slk::IniTable& table)
@@ -219,9 +243,9 @@ void CMainWindow::ConfigToUI(slk::IniTable& table)
 	{
 		std::string const& name = it.first;
 		Attribute const& attribute = it.second;
-		if (attribute.Section() == "Option")
+		if (attribute.Type() == Attribute::e_RadioButton)
 		{
-			int val = std::stoi(table[name]["Option"]);
+			int val = std::stoi(table[name][attribute.Section()]);
 
 			if ((val >= 0) && (unsigned int(val) < attribute.Count()))
 			{
@@ -232,37 +256,29 @@ void CMainWindow::ConfigToUI(slk::IniTable& table)
 				}
 			}
 		}
-		else
+		else if (attribute.Type() == Attribute::e_CheckBox)
 		{
 			DuiLib::CCheckBoxUI* ctrl = m_controls[name];
 			if (ctrl)
 			{
-				ctrl->Selected(table[attribute.Section()][name]  != "0");
+				ctrl->Selected(table[attribute.Section()][name] == "0");
+				ctrl->Selected(table[attribute.Section()][name] != "0");
+			}
+		}
+		else if (attribute.Type() == Attribute::e_ComboBox)
+		{
+			std::wstring font_name = base::util::u2w(table[attribute.Section()][name]);
+			for (int i = 0; i < m_comboboxs[name]->GetCount(); ++i)
+			{
+				if (font_name == ((DuiLib::CListLabelElementUI*)m_comboboxs[name]->GetItemAt(i))->GetText())
+				{
+					m_comboboxs[name]->SelectItem(i);
+					break;
+				}
 			}
 		}
 	}
 
-	m_pFontEnable->Selected(table["Font"]["Enable"] == "0");
-	m_pFontEnable->Selected(table["Font"]["Enable"] != "0");
-
-	std::wstring font_name = base::util::u2w(table["Font"]["Name"]);
-	for (int i = 0; i < m_pFontNames->GetCount(); ++i)
-	{
-		if (font_name == ((DuiLib::CListLabelElementUI*)m_pFontNames->GetItemAt(i))->GetText())
-		{
-			m_pFontNames->SelectItem(i);
-			break;
-		}
-	}
-	std::wstring font_size = base::util::u2w(table["Font"]["Size"]);
-	for (int i = 0; i < m_pFontSizes->GetCount(); ++i)
-	{
-		if (font_size == ((DuiLib::CListLabelElementUI*)m_pFontSizes->GetItemAt(i))->GetText())
-		{
-			m_pFontSizes->SelectItem(i);
-			break;
-		}
-	}
 	m_pm.SendNotify(m_pEnableCJass, DUI_MSGTYPE_SELECTCHANGED);
 	m_pm.SendNotify(m_pEnableJassHelper, DUI_MSGTYPE_SELECTCHANGED);
 }
@@ -273,7 +289,7 @@ void CMainWindow::UIToConfig(slk::IniTable& table)
 	{
 		std::string const& name = it.first;
 		Attribute const& attribute = it.second;
-		if (attribute.Section() == "Option")
+		if (attribute.Type() == Attribute::e_RadioButton)
 		{
 			for (uint8_t i = 0; i < attribute.Count(); ++i)
 			{
@@ -285,7 +301,7 @@ void CMainWindow::UIToConfig(slk::IniTable& table)
 				}
 			}
 		}
-		else
+		else if (attribute.Type() == Attribute::e_CheckBox)
 		{
 			DuiLib::CCheckBoxUI* ctrl = m_controls[name];
 			if (ctrl)
@@ -293,11 +309,11 @@ void CMainWindow::UIToConfig(slk::IniTable& table)
 				table[attribute.Section()][name] = ctrl->IsSelected()? "1" : "0";
 			}
 		}
+		else if (attribute.Type() == Attribute::e_ComboBox)
+		{
+			table[attribute.Section()][name] = base::util::w2u(CComboUI_GetSelectText(m_comboboxs[name]));
+		}
 	}
-
-	table["Font"]["Enable"] = m_pFontEnable->IsSelected() ? "1" : "0";
-	table["Font"]["Name"] = base::util::w2u(CComboUI_GetSelectText(m_pFontNames));
-	table["Font"]["Size"] = base::util::w2u(CComboUI_GetSelectText(m_pFontSizes));
 }
 
 void CMainWindow::EnableMapSave(bool bEnable)
@@ -581,8 +597,8 @@ void CMainWindow::InitFontUI()
 	{
 		DuiLib::CListLabelElementUI* elem = new DuiLib::CListLabelElementUI;
 		elem->SetText(it->c_str());
-		elem->SetManager(m_pFontNames->GetManager(), m_pFontNames, false);
-		m_pFontNames->Add(elem);
+		elem->SetManager(m_pFontName->GetManager(), m_pFontName, false);
+		m_pFontName->Add(elem);
 	}
 }
 
@@ -640,19 +656,19 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 			else if (m_pFontEnable && m_pFontEnable == msg.pSender)
 			{
 				bool bEnable = m_pFontEnable->IsSelected();
-				m_pFontNames->SetEnabled(bEnable);
-				m_pFontSizes->SetEnabled(bEnable);
+				m_pFontName->SetEnabled(bEnable);
+				m_pFontSize->SetEnabled(bEnable);
 				m_pFontPreview->SetEnabled(bEnable);
 			}
 		}
 		else if (msg.sType == DUI_MSGTYPE_ITEMSELECT)
 		{
-			static size_t dynfont = m_pm.AddFont(L"system", 12, false, false, false);
-
-			if (msg.pSender == m_pFontNames || msg.pSender == m_pFontSizes)
+			if (msg.pSender == m_pFontName || msg.pSender == m_pFontSize)
 			{
+				static size_t dynfont = m_pm.AddFont(L"system", 12, false, false, false);
+
 				try {
-					m_pm.ReplaceFont(dynfont, CComboUI_GetSelectText(m_pFontNames).c_str(), base::font::size_to_height(std::stoi(CComboUI_GetSelectText(m_pFontSizes))), false, false, false);
+					m_pm.ReplaceFont(dynfont, CComboUI_GetSelectText(m_pFontName).c_str(), base::font::size_to_height(std::stoi(CComboUI_GetSelectText(m_pFontSize))), false, false, false);
 				} catch (...) { }
 				m_pFontPreview->SetFont(dynfont);
 			}

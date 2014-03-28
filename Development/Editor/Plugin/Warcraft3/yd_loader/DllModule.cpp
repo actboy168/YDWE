@@ -4,6 +4,7 @@
 #include <base/hook/fp_call.h>
 #include <base/file/stream.h>
 #include <base/hook/iat.h>
+#include <base/hook/dyn_iat.h>
 #include <base/path/helper.h>
 #include <base/path/service.h>
 #include <base/util/unicode.h>
@@ -66,6 +67,23 @@ HWND WINAPI FakeCreateWindowExA(
 	return hWnd;
 }
 
+
+bool EnableDirect3D9(HMODULE gamedll)
+{
+	HMODULE d3dproxy = LoadLibraryW(L"d3d8proxy.dll");
+	if (!d3dproxy)
+	{
+		return false;
+	}
+
+	uintptr_t Direct3DCreate8 = (uintptr_t)GetProcAddress(d3dproxy, "Direct3DCreate8");
+	if (!Direct3DCreate8)
+	{
+		return false;
+	}
+	return base::hook::dyn_iat(gamedll, L"d3d8.dll", "Direct3DCreate8", Direct3DCreate8, 0);
+}
+
 HMODULE __stdcall FakeGameLoadLibraryA(LPCSTR lpFilePath)
 {
 	fs::path lib((const char*)lpFilePath);
@@ -105,6 +123,12 @@ HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
 
 			g_DllMod.LoadPlugins();
 
+
+			if (g_DllMod.IsEnableDirect3D9)
+			{
+				EnableDirect3D9(g_DllMod.hGameDll);
+			}
+
 			return g_DllMod.hGameDll;
 		}
 	}
@@ -118,6 +142,7 @@ DllModule::DllModule()
 	, IsFullWindowedMode(false)
 	, IsLockingMouse(false)
 	, IsFixedRatioWindowed(false)
+	, IsEnableDirect3D9(false)
 	, hGameDll(NULL)
 	, daemon_thread_()
 	, daemon_thread_exit_(false)
@@ -220,7 +245,7 @@ void ResetConfig(slk::IniTable& table)
 {
 	table["MapSave"]["Option"] = "0";
 	table["War3Patch"]["Option"] = "0";
-	table["MapTest"]["LaunchOpenGL"] = "0";
+	table["MapTest"]["LaunchRenderingEngine"] = "Direct3D 8";
 	table["MapTest"]["LaunchWindowed"] = "1";
 	table["MapTest"]["LaunchFullWindowed"] = "0";
 	table["MapTest"]["LaunchLockingMouse"] = "0";
@@ -298,6 +323,7 @@ void DllModule::Attach()
 		IsLockingMouse          = "0" != table["MapTest"]["LaunchLockingMouse"];
 		IsFixedRatioWindowed    = "0" != table["MapTest"]["LaunchFixedRatioWindowed"];
 		IsDisableSecurityAccess = "0" != table["MapTest"]["LaunchDisableSecurityAccess"];
+		IsEnableDirect3D9       = "Direct3D 9" == table["MapTest"]["LaunchRenderingEngine"];
 
 		try {
 			if (table["War3Patch"]["Option"] == "1")
