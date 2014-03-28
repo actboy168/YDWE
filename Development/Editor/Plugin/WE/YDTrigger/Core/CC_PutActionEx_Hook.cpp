@@ -159,8 +159,6 @@ void _fastcall
 			}
 			else
 			{
-				g_bYDWEEnumUnitsInRangeMultipleFlag = TRUE;
-
 				CC_PutBegin();
 				PUT_CONST("set ydl_group = CreateGroup()", 1);
 				PUT_CONST("call GroupEnumUnitsInRange(ydl_group, ", 0); 
@@ -173,6 +171,8 @@ void _fastcall
 				PUT_CONST("loop", 1);
 				CC_PutBegin();
 				PUT_CONST("set ydl_unit = FirstOfGroup(ydl_group)", 1);
+
+				g_bYDWEEnumUnitsInRangeMultipleFlag = TRUE;
 				PUT_CONST("exitwhen ydl_unit == null", 1);
 				PUT_CONST("call GroupRemoveUnit(ydl_group, ydl_unit)", 1);
 				CC_PutEnd();
