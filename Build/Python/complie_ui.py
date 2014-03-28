@@ -18,7 +18,7 @@ def Configuration():
     import sys
     if len(sys.argv) > 1:
         return sys.argv[1]
-    return 'Release'
+    return 'Debug'
 
 if __name__ == '__main__':
     util.path.ResetPath(Configuration())
