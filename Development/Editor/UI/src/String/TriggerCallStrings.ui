@@ -3449,7 +3449,6 @@ YDWEGetBoolexprID="获取 布尔表达式 的整数地址"
 YDWEGetBoolexprID="获取 ",~布尔表达式," 的整数地址"
 YDWEGetBoolexprIDHint="可以把一个布尔表达式转成整数，方便存入缓存或Hash表。"
 
-#include "../Other/detail/OrderString.ui"
 
 GetStoredBooleanBJ="读取布尔值"
 GetStoredBooleanBJ="从游戏缓存读取布尔值,名称: ",~文字," 类别: ",~Category," 缓存: ",~Game Cache
