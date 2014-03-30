@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Window size="400,540" caption="0,0,0,36" roundcorner="10,10" >
+<Window size="400,600" caption="0,0,0,36" roundcorner="10,10" >
   <Font name="微软雅黑" size="18"  default="true" />
   <Font name="幼圆" size="18" />
   <Font name="微软雅黑" size="14" />
@@ -66,11 +66,10 @@
             </VerticalLayout>
           </VerticalLayout>
         </VerticalLayout>
-        <VerticalLayout class="Background" inset="2,24,2,24" >
-          <VerticalLayout  height="200" >
+        <VerticalLayout class="Background" inset="2,18,2,18" >
+          <VerticalLayout height="170" >
             <Label text="常规选项" tooltip="有关测试地图时魔兽的一些调整选项。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
-              <CheckBox text="OpenGL模式启动魔兽" width="200" name="LaunchOpenGL"   tooltip="使魔兽使用OpenGL渲染引擎来渲染画面，默认是D3D。" />
               <CheckBox text="窗口化运行魔兽"     width="200" name="LaunchWindowed" tooltip="使魔兽以窗口化的方式启动。" />
               <HorizontalLayout>
                 <Control width="16" />
@@ -83,7 +82,19 @@
               <CheckBox text="阻止魔兽提升自身的访问限制" width="200" name="LaunchDisableSecurityAccess" tooltip="魔兽会提升自身的访问限制，阻止所有非管理员权限的进程访问它，Vista之后管理员权限需要UAC，很烦人不是吗。" />
             </VerticalLayout>
           </VerticalLayout>
-          <Control height="16" />
+          <VerticalLayout height="60" >
+            <Label text="渲染引擎" tooltip="有关测试地图时魔兽的一些调整选项。" class="LabelTitle" />
+            <Control height="12" />
+            <HorizontalLayout height="30" >
+              <Control width="16" />
+              <Combo name="LaunchRenderingEngine" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
+                <ListLabelElement text="Direct3D 8" />
+                <ListLabelElement text="Direct3D 9" />
+                <ListLabelElement text="OpenGL" />
+              </Combo>
+            </HorizontalLayout>
+          </VerticalLayout>
+          <Control height="12" />
           <VerticalLayout>
             <Label text="魔兽版本" tooltip="指定测试时的魔兽版本。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
@@ -107,9 +118,9 @@
               <CheckBox text="启用字体插件(*)" tooltip="设置YDWE的字体" width="200" name="FontEnable" />
               <HorizontalLayout>
                 <Control width="20" />
-                <Combo name="FontNames" dropboxsize="0, 300" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" />
+                <Combo name="FontName" dropboxsize="0, 300" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" />
                 <Control width="20" />
-                <Combo name="FontSizes" width="60" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
+                <Combo name="FontSize" width="60" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
                   <ListLabelElement text="10" />
                   <ListLabelElement text="11" />
                   <ListLabelElement text="12" />

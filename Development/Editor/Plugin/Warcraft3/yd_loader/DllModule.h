@@ -29,6 +29,7 @@ public:
 	bool     IsLockingMouse;
 	bool     IsFixedRatioWindowed;
 	bool     IsDisableSecurityAccess;
+	bool     IsEnableDirect3D9;
 	fs::path patch_path;
 	fs::path ydwe_path;
 

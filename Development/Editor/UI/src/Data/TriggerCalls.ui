@@ -3403,10 +3403,6 @@ YDWEGetBoolexprID=0,1,integer,boolexpr
 _YDWEGetBoolexprID_Defaults=_
 _YDWEGetBoolexprID_Category=TC_YDID
 
-#define DEFINE_CALL
-#include "../Other/detail/OrderData.ui"
-#undef  DEFINE_CALL
-
 GetStoredBooleanBJ=0,1,boolean,string,string,gamecache
 _GetStoredBooleanBJ_Defaults=_,"Category",GetLastCreatedGameCacheBJ
 _GetStoredBooleanBJ_Category=TC_YDHIDE

@@ -114,6 +114,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="base\hook\dyn_iat.cpp" />
     <ClCompile Include="base\lua\private.cpp" />
     <ClCompile Include="base\thread\thread.cpp" />
     <ClCompile Include="base\thread\thread_exception.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="base\hook\detail\memory_protect.h" />
     <ClInclude Include="base\hook\detail\replace_pointer.h" />
     <ClInclude Include="base\hook\detail\export_address_table.h" />
+    <ClInclude Include="base\hook\dyn_iat.h" />
     <ClInclude Include="base\hook\eat.h" />
     <ClInclude Include="base\hook\fp_call.h" />
     <ClInclude Include="base\hook\iat.h" />

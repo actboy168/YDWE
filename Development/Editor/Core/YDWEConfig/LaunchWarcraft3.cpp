@@ -61,7 +61,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		boost::filesystem::path inject_dll = ydwe_path / L"plugin" / L"warcraft3" / L"yd_loader.dll";
 
 		slk::IniTable table;
-		table["MapTest"]["LaunchOpenGL"]   = "0";
+		table["MapTest"]["LaunchRenderingEngine"]   = "Direct3D 8";
 		table["MapTest"]["LaunchWindowed"] = "1";
 		try {
 			base::util::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<base::util::buffer>();
@@ -71,7 +71,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		catch (...) {
 		}
 
-		if ("0" != table["MapTest"]["LaunchOpenGL"])
+		if ("OpenGL" == table["MapTest"]["LaunchRenderingEngine"])
 		{
 			cmd.add(L"opengl");
 		}

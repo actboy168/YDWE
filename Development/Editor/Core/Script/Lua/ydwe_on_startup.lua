@@ -232,7 +232,7 @@ event.register(event.EVENT_TEST_MAP, false, function (event_data)
 	local command_aux = ""
 
 	-- 是否OpenGL方式？
-	if global_config:get_integer("MapTest.LaunchOpenGL", 0) == 1 then
+	if global_config:get_string("MapTest.LaunchRenderingEngine", "Direct3D 8") == "OpenGL" then
 		command_aux = command_aux .. " -opengl"
 	end
 

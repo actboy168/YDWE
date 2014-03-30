@@ -41,6 +41,7 @@ public:
 
 private:
 	std::map<std::string, DuiLib::CCheckBoxUI*> m_controls;
+	std::map<std::string, DuiLib::CComboUI*>    m_comboboxs;
 
 	DuiLib::CCheckBoxUI*       m_pEnableJassHelper;
 	DuiLib::CCheckBoxUI*       m_pEnableCJass;
@@ -54,8 +55,8 @@ private:
 	DuiLib::CVerticalLayoutUI* m_pWar3PluginList;
 	DuiLib::CLabelUI*          m_pWarcraft3Directory;
 	DuiLib::CCheckBoxUI*       m_pFontEnable;
-	DuiLib::CComboUI*          m_pFontNames;
-	DuiLib::CComboUI*          m_pFontSizes;
+	DuiLib::CComboUI*          m_pFontName;
+	DuiLib::CComboUI*          m_pFontSize;
 	DuiLib::CLabelUI*          m_pFontPreview;
 
 	fs::path                m_ydwe_path;

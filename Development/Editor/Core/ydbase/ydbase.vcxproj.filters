@@ -254,6 +254,9 @@
     <ClCompile Include="base\path\helper.cpp">
       <Filter>base\path</Filter>
     </ClCompile>
+    <ClCompile Include="base\hook\dyn_iat.cpp">
+      <Filter>base\hook</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -541,6 +544,9 @@
     </ClInclude>
     <ClInclude Include="base\thread\intrusive_ptr.h">
       <Filter>base\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="base\hook\dyn_iat.h">
+      <Filter>base\hook</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
