@@ -3,36 +3,58 @@
 #include <base/config.h>
 #include <cassert>
 #include <cstdint>
+#include <stdexcept>
 #include <iostream>
 #include <sstream>
 #include <type_traits>
 #include <base/util/hybrid_array.h>
+
+#if !defined(BASE_FORMAT_DISABLE_UNICODE)
 #include <base/util/unicode.h>
+#endif
 
-#pragma warning(push)
-#pragma warning(disable:4702)
+#if defined(_MSC_VER)
+#	pragma warning(push)
+#	pragma warning(disable:4702)
+#endif
 
-#define BASE_FORMAT_THROW_ERROR(reason) \
-	do { \
-		assert(0 && (reason)); \
-		throw std::exception(reason); \
-		__pragma(warning(suppress: 4127)) \
-	} while (0)
+#if defined(_MSC_VER)
+#	define BASE_FORMAT_THROW_ERROR(reason) \
+		do { \
+			assert(0 && (reason)); \
+			throw std::logic_error(reason); \
+			__pragma(warning(suppress: 4127)) \
+		} while (0)
+#else
+#	define BASE_FORMAT_THROW_ERROR(reason) \
+		do { \
+			assert(0 && (reason)); \
+			throw std::logic_error(reason); \
+		} while (0)
+#endif
 
 namespace base { namespace format_detail {
 
 template <class T>
 inline int crt_snprintf(char* buf, size_t buf_size, const char* fmt, const T& value)
 {
-#pragma warning(suppress:4996)
+#if defined(_MSC_VER)
+#	pragma warning(suppress:4996)
 	return _snprintf(buf, buf_size, fmt, value);
+#else
+	return snprintf(buf, buf_size, fmt, value);
+#endif
 }
 
 template <class T>
 inline int crt_snprintf(wchar_t* buf, size_t buf_size, const wchar_t* fmt, const T& value)
 {
-#pragma warning(suppress:4996)
+#if defined(_MSC_VER)
+#	pragma warning(suppress:4996)
 	return _snwprintf(buf, buf_size, fmt, value);
+#else
+	return snwprintf(buf, buf_size, fmt, value);
+#endif
 }
 
 template <class CharT>
@@ -557,13 +579,6 @@ inline void format_analyzer<wchar_t>::format_cast_string(const wchar_t* value)
 }
 
 template <>
-inline void format_analyzer<wchar_t>::format_cast_string(const char* value)
-{
-	std::wstring valstr = base::util::u2w(value);
-	format_cast_string(valstr.c_str());
-}
-
-template <>
 inline void format_analyzer<char>::format_cast_string(const char* value)
 {
 	if (!value)
@@ -587,12 +602,23 @@ inline void format_analyzer<char>::format_cast_string(const char* value)
 	format_value(first, next - first);
 }
 
+#if !defined(BASE_FORMAT_DISABLE_UNICODE)
+
+template <>
+inline void format_analyzer<wchar_t>::format_cast_string(const char* value)
+{
+	std::wstring valstr = base::util::u2w(value);
+	format_cast_string(valstr.c_str());
+}
+
 template <>
 inline void format_analyzer<char>::format_cast_string(const wchar_t* value)
 {
 	std::string valstr = base::util::w2u(value);
 	format_cast_string(valstr.c_str());
 }
+#endif
+
 
 
 inline std::ostream& standard_output(const char*) { return std::cout; }
@@ -632,4 +658,6 @@ BOOST_PP_REPEAT(16, BASE_FORMAT_DEFINE_CREATER, ~)
 #undef BASE_FORMAT_THROW_ERROR
 }
 
-#pragma warning(pop)
+#if defined(_MSC_VER)
+#	pragma warning(pop)
+#endif

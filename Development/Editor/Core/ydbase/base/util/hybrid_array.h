@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <limits>
 #include <iterator>
+#include <stdexcept>
 #include <type_traits>
 
 namespace base { 
@@ -122,7 +123,7 @@ namespace util {
 		{ 
 			if (n >= size_)
 			{
-				throw out_of_range("hybrid_array"); 
+				throw std::out_of_range("hybrid_array"); 
 			}
 		}
 
