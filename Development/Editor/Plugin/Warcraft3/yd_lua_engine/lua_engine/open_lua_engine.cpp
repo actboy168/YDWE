@@ -1,6 +1,6 @@
 #include "open_lua_engine.h"
 #include "callback.h"
-#include "helper.h"
+#include "lua_helper.h"
 #include "class_real.h"
 #include "class_array.h"
 #include "class_handle.h"

@@ -65,14 +65,14 @@
     <ClCompile Include="lua_engine\callback.cpp">
       <Filter>lua_engine\main</Filter>
     </ClCompile>
-    <ClCompile Include="lua_engine\helper.cpp">
-      <Filter>lua_engine\main</Filter>
-    </ClCompile>
     <ClCompile Include="lua_engine\jassbind.cpp">
       <Filter>lua_engine\main</Filter>
     </ClCompile>
     <ClCompile Include="lua_engine\libs_storm.cpp">
       <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\lua_helper.cpp">
+      <Filter>lua_engine\main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,10 +106,10 @@
     <ClInclude Include="lua_engine\callback.h">
       <Filter>lua_engine\main</Filter>
     </ClInclude>
-    <ClInclude Include="lua_engine\helper.h">
+    <ClInclude Include="lua_engine\jassbind.h">
       <Filter>lua_engine\main</Filter>
     </ClInclude>
-    <ClInclude Include="lua_engine\jassbind.h">
+    <ClInclude Include="lua_engine\lua_helper.h">
       <Filter>lua_engine\main</Filter>
     </ClInclude>
   </ItemGroup>

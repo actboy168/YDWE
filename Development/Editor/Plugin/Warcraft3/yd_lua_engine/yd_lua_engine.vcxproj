@@ -92,7 +92,6 @@
     <ClCompile Include="lua_engine\class_handle.cpp" />
     <ClCompile Include="lua_engine\class_real.cpp" />
     <ClCompile Include="lua_engine\fix_math.cpp" />
-    <ClCompile Include="lua_engine\helper.cpp" />
     <ClCompile Include="lua_engine\jassbind.cpp" />
     <ClCompile Include="lua_engine\libs_common.cpp" />
     <ClCompile Include="lua_engine\libs_hook.cpp" />
@@ -100,6 +99,7 @@
     <ClCompile Include="lua_engine\libs_runtime.cpp" />
     <ClCompile Include="lua_engine\libs_slk.cpp" />
     <ClCompile Include="lua_engine\libs_storm.cpp" />
+    <ClCompile Include="lua_engine\lua_helper.cpp" />
     <ClCompile Include="lua_engine\lua_loader.cpp" />
     <ClCompile Include="lua_engine\open_lua_engine.cpp" />
     <ClCompile Include="lua_engine\common.cpp" />
@@ -114,9 +114,9 @@
     <ClInclude Include="lua_engine\class_handle.h" />
     <ClInclude Include="lua_engine\class_real.h" />
     <ClInclude Include="lua_engine\common.h" />
-    <ClInclude Include="lua_engine\helper.h" />
     <ClInclude Include="lua_engine\jassbind.h" />
     <ClInclude Include="lua_engine\libs_runtime.h" />
+    <ClInclude Include="lua_engine\lua_helper.h" />
     <ClInclude Include="lua_engine\lua_loader.h" />
     <ClInclude Include="lua_engine\open_lua_engine.h" />
     <ClInclude Include="lua_engine\slk_interface_storm.h" />

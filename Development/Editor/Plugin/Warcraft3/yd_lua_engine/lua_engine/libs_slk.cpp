@@ -1,4 +1,4 @@
-#include "helper.h"
+#include "lua_helper.h"
 #include <base/util/do_once.h>
 #include <base/util/string_view.h>
 #include <base/warcraft3/event.h>
