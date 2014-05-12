@@ -103,7 +103,7 @@ namespace base { namespace hook {
 
 		uintptr_t __stdcall getprocaddressa(HMODULE lib, const char* name)
 		{
-			uintptr_t old_funcion = std_call<uintptr_t>(getprocaddressa, name);
+			uintptr_t old_funcion = std_call<uintptr_t>(real::getprocaddressa, name);
 			return dyniatfunc.try_hook(lib, name, old_funcion);
 		}
 	}
