@@ -1,4 +1,4 @@
-#include "helper.h"
+#include "lua_helper.h"
 #include "storm.h"
 #include <cstring>
 #include <base/warcraft3/jass.h>

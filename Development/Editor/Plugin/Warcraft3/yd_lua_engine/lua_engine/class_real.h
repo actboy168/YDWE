@@ -1,6 +1,6 @@
 #pragma once
 
-#include "helper.h"
+#include "lua_helper.h"
 #include <base/warcraft3/jass.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {

@@ -1,5 +1,5 @@
 #include "callback.h"
-#include "helper.h"
+#include "lua_helper.h"
 #include "lua_loader.h"
 #include "storm.h"
 #include "open_lua_engine.h"
