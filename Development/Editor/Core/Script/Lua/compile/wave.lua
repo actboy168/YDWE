@@ -10,6 +10,15 @@ wave.plugin_include_path = fs.ydwe_path() / "plugin"
 wave.jass_include_path   = fs.ydwe_path() / "jass"
 wave.force_file_path     = wave.sys_include_path / "WaveForce.i"
 
+local function pathstring(path)
+	local str = path:string()
+	if str:sub(-1) == '\\' then
+		return '"' .. str .. ' "'
+	else
+		return '"' .. str .. '"'
+	end
+end
+
 -- 预处理代码
 -- op.input - 输入文件路径
 -- op.option - 预处理选项，table，支持的值有
@@ -20,10 +29,10 @@ wave.force_file_path     = wave.sys_include_path / "WaveForce.i"
 function wave:do_compile(op)
 	local cmd = ''
 	cmd = cmd .. '--autooutput '
-	cmd = cmd .. string.format('--sysinclude="%s" ', self.sys_include_path:string())
-	cmd = cmd .. string.format('--sysinclude="%s" ', self.plugin_include_path:string())
-	cmd = cmd .. string.format('--include="%s" ',    op.map_path:parent_path():string())
-	cmd = cmd .. string.format('--include="%s" ',    self.jass_include_path:string())
+	cmd = cmd .. string.format('--sysinclude=%s ', pathstring(self.sys_include_path))
+	cmd = cmd .. string.format('--sysinclude=%s ', pathstring(self.plugin_include_path))
+	cmd = cmd .. string.format('--include=%s ',    pathstring(op.map_path:parent_path()))
+	cmd = cmd .. string.format('--include=%s ',    pathstring(self.jass_include_path))
 	cmd = cmd .. string.format('--define=WARCRAFT_VERSION=%d ', 100 * op.option.runtime_version.major + op.option.runtime_version.minor)
 	cmd = cmd .. string.format('--define=YDWE_VERSION_STRING=\\"%s\\" ', tostring(ydwe_version))
 	if op.option.enable_jasshelper_debug then
@@ -40,7 +49,7 @@ function wave:do_compile(op)
 	end
 	cmd = cmd .. "--extended --c99 --preserve=2 --line=0 "
 
-	local command_line = string.format('"%s" %s "%s"', self.exe_path:string(), cmd, op.input:string())
+	local command_line = string.format('%s %s %s', pathstring(self.exe_path), cmd, pathstring(op.input))
 	-- 启动进程
 	local proc, out_rd, err_rd, in_wr = sys.spawn_pipe(command_line, nil)
 	if proc then
