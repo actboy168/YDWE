@@ -87,6 +87,7 @@
     <ClCompile Include="EventDamageData.cpp" />
     <ClCompile Include="UnitState.cpp" />
     <ClCompile Include="DisplayChat.cpp" />
+    <ClCompile Include="UtilFuncs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="yd_jass_api.def" />

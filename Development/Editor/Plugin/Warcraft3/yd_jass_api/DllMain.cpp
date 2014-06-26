@@ -6,6 +6,7 @@ void InitializeUnitState();
 void InitializeAbilityState();
 void InitializeEventDamageData();
 void InitializeDisplayChat();
+void InitializeUtilFuncs();
 }}}
 
 void Initialize()
@@ -14,6 +15,7 @@ void Initialize()
 	base::warcraft3::japi::InitializeAbilityState();
 	base::warcraft3::japi::InitializeEventDamageData();
 	base::warcraft3::japi::InitializeDisplayChat();
+	base::warcraft3::japi::InitializeUtilFuncs();
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID /*pReserved*/)
