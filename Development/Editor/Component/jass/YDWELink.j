@@ -25,6 +25,11 @@ library Link
         return bj_RADTODEG * Atan2(y1 - y, x1 - x)
     endfunction
 
+    function GetUnitZ takes unit u returns real
+      call MoveLocation(Loc, GetUnitX(u), GetUnitY(u))
+      return GetLocationZ(Loc) + GetUnitFlyHeight(u)
+    endfunction
+
     private struct Data
         real x1
         real y1
