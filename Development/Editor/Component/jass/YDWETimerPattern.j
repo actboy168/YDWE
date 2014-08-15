@@ -6,13 +6,13 @@
 library_once YDWETimerPattern initializer Init requires YDWEBase
 
 //***************************************************
-//* ∑ - Matrix 万能模板函数  
-//*-------------------- 
+//* ∑ - Matrix 万能模板函数
+//*--------------------
 //* 作者：Warft_TigerCN  代码优化：Fetrix_sai
 //***************************************************
 
     #define TIMER_PATTERN_RADIUS 120.0
-    
+
     private keyword Thread
 
     globals
@@ -30,9 +30,9 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
 
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     //                                       Timer Pattern Union                                              //
-    //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  
+    //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     private function SingleMagic takes unit sour, unit targ, real x, real y, real h, integer uid, integer aid, integer lv, integer order returns nothing
-        local unit dummy = CreateUnit(GetOwningPlayer(sour), uid, x, y, GetUnitFacing(sour)) 
+        local unit dummy = CreateUnit(GetOwningPlayer(sour), uid, x, y, GetUnitFacing(sour))
         call UnitApplyTimedLife(dummy, 'BHwe', 1.0)
         call UnitAddAbility(dummy, aid)
         call SetUnitAbilityLevel(dummy, aid, lv)
@@ -41,7 +41,7 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
         //debug call BJDebugMsg("Target order")
         set dummy = null
     endfunction
-    
+
     private function GetUnitZ takes unit u returns real
         call MoveLocation(yd_loc, GetUnitX(u), GetUnitY(u))
         return GetUnitFlyHeight(u) + GetLocationZ(yd_loc)
@@ -55,9 +55,9 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
         */ and IsUnitType(u, UNIT_TYPE_SLEEPING) == false     and GetUnitState(u, UNIT_STATE_LIFE) > 0.405    /*
         */ and IsUnitType(u, UNIT_TYPE_STRUCTURE) == false    and IsUnitIllusion(u) == false                  /*
         */ and IsUnitHidden(u) == false                       and IsUnitEnemy(u, GetOwningPlayer(caster))     /*
-        */ and IsUnitVisible(u, GetOwningPlayer(caster))     
+        */ and IsUnitVisible(u, GetOwningPlayer(caster))
     endfunction
-    
+
     private function TreeFilter takes nothing returns boolean
         local integer id = GetDestructableTypeId(GetFilterDestructable())
         return id == 'LTlt' or id == 'ATtr' or id == 'BTtw' or id == 'KTtw' /*
@@ -68,7 +68,7 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
           */or id == 'WTtw' or id == 'ATtc' or id == 'BTtc' or id == 'CTtc' /*
           */or id == 'ITtc' or id == 'NTtc' or id == 'ZTtc'
     endfunction
-    
+
     private function DamageFilter takes nothing returns boolean
         local unit   u = GetFilterUnit()
         local Thread d = tmp_data
@@ -90,7 +90,7 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
         set u = null
         return false
     endfunction
-             
+
     private function TreeKill takes nothing returns nothing
         local destructable d = GetEnumDestructable()
         if GetWidgetLife(d) > 0.405 then
@@ -98,7 +98,7 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
         endif
         set d = null
     endfunction
-    
+
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     //                                         Major Structure Code                                           //
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -106,7 +106,6 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
         YDVector3 des //destination
         YDVector3 pos //position
         YDVector3 vel //velocity
-        YDVector3 dec //decrement
         unit caster
         unit source
         unit target
@@ -126,24 +125,24 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
         string gsfx
         string wsfx
         string part
-        boolean recycle 
+        boolean recycle
         boolean killdest
         boolean volume
         group g
-        timer t 
-        
+        timer t
+
         static method operator [] takes handle h returns thistype
             return YDWEGetIntegerByString("YDWETimerPattern.", I2S(YDWEH2I(h)))
         endmethod
-        
+
         static method operator []= takes handle h, thistype value returns nothing
             call YDWESaveIntegerByString("YDWETimerPattern.", I2S(YDWEH2I(h)), value)
         endmethod
-        
+
         static method flush takes handle h returns nothing
             call YDWEFlushStoredIntegerByString("YDWETimerPattern.", I2S(YDWEH2I(h)))
         endmethod
-        
+
         method operator x= takes real value returns nothing
             set .pos.x = value
             call SetUnitX(.obj, value)
@@ -153,13 +152,13 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
             set .pos.y = value
             call SetUnitY(.obj, value)
         endmethod
-       
+
         method operator z= takes real value returns nothing
             set .pos.z = value
             call MoveLocation(yd_loc, .pos.x, .pos.y)
             call SetUnitFlyHeight(.obj, value - GetLocationZ(yd_loc), 0)
         endmethod
-           
+
         method onDestroy takes nothing returns nothing
             //debug call BJDebugMsg("|cff00ff00[YDWE] Timer Pattern : |r Knockback stopped!")
             call Thread.flush(.obj)
@@ -171,7 +170,6 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
             call .des.destroy()
             call .pos.destroy()
             call .vel.destroy()
-            call .dec.destroy()
             set .caster = null
             set .target = null
             set .obj = null
@@ -186,9 +184,9 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
             set .part = ""
         endmethod
     endstruct
-    
+
     private struct Parabola extends Thread
-    
+
         static method move takes nothing returns nothing
             local thistype this = Thread[GetExpiredTimer()]
             //local real vx = .des.x - .pos.x
@@ -212,7 +210,7 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
             //else
                 //set .switch = 0
             //endif
-            
+
             if .switch == 0 then
                 call SetUnitFlyHeight(.obj, GetUnitDefaultFlyHeight(.obj), 200.0)
                 call SetUnitTimeScale(.obj, 1)
@@ -221,21 +219,21 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
                 call this.destroy()
             endif
         endmethod
-    
+
         static method create takes unit source, unit object, real angle, real distance, real time, real interval, real high, real damage, string attach, string deff returns thistype
             local thistype this = thistype.allocate()
             local real vx = 0.0
             local real vy = 0.0
             local real vz = 0.0
-            set .pos = YDVector3.create()
             set .des = YDVector3.create()
+            set .pos = YDVector3.create()
             set .vel = YDVector3.create()
             set .pos.x = GetUnitX(object)
             set .pos.y = GetUnitY(object)
             set .pos.z = GetUnitZ(object)
             set .des.x = .pos.x + distance * Cos(angle)
             set .des.y = .pos.y + distance * Sin(angle)
-            call MoveLocation(yd_loc, .des.x, .des.y) 
+            call MoveLocation(yd_loc, .des.x, .des.y)
             set .des.z = GetLocationZ(yd_loc)
             if .pos.z > .des.z then
                 set high = high + .pos.z
@@ -261,18 +259,18 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
             set .g = CreateGroup()
             call UnitAddAbility(.obj, 'Amrf')
             call UnitRemoveAbility(.obj, 'Amrf')
-            call TimerStart(.t, interval, true, function thistype.move) 
+            call TimerStart(.t, interval, true, function thistype.move)
             call GroupAddUnit(.g, object)
             set Thread[object] = integer(this)
             set Thread[.t] = integer(this)
             return this
         endmethod
-    
+
     endstruct
-    
+
     // uniform speed
     private struct Linear extends Thread
-    
+
         static method move takes nothing returns nothing
             local thistype this = Thread[GetExpiredTimer()]
             if .step > .dist then
@@ -289,7 +287,7 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
             else
                 set .switch = 0
             endif
-            
+
             if .switch == 0 then
                 // YDWETriggerEvent
                 if .target != null then
@@ -305,9 +303,10 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
                 call this.destroy()
             endif
         endmethod
-    
+
         static method create takes unit source, unit object, real angle, real distance, real time, real interval, integer uid, integer aid, integer lv, integer orderid, string attach, string sfx returns thistype
             local thistype this = thistype.allocate()
+            set .des = YDVector3.create()
             set .pos = YDVector3.create()
             set .vel = YDVector3.create()
             set .step = distance
@@ -332,12 +331,12 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
             set Thread[.t] = integer(this)
             return this
         endmethod
-        
+
     endstruct
-    
+
     // Uniform deceleration
     private struct Deceleration extends Thread
-    
+
         static method move takes nothing returns nothing
             local thistype this = Thread[GetExpiredTimer()]
             local real xp = GetUnitX(.obj) + .dist * .vel.x
@@ -380,7 +379,7 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
             if .dist <= 0.0 or YDWECoordinateX(.pos.x) != .pos.x or YDWECoordinateY(.pos.y) != .pos.y then
                 set .switch = 0
             endif
-            
+
             if .switch == 0 then
                 call SetUnitFlyHeight(.obj, GetUnitDefaultFlyHeight(.obj), 200.0)
                 call SetUnitTimeScale(.obj, 1)
@@ -389,12 +388,13 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
                 call this.destroy()
             endif
         endmethod
-    
+
         static method create takes unit source, unit object, real angle, real distance, real time, real interval, real damage, boolean killtrees, boolean cycle, boolean path, string part, string geff, string weff returns thistype
             local thistype this = thistype.allocate() //thistype(Thread[object])
             local real vx = 0.0
             local real vy = 0.0
             local real l  = 0.0
+            set .des = YDVector3.create()
             set .pos = YDVector3.create()
             set .vel = YDVector3.create()
             set .vel.x = Cos(angle)
@@ -420,8 +420,8 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
             return this
         endmethod
     endstruct
-    
-    
+
+
     // Jump Attack PUI
     function YDWETimerPatternJumpAttack takes unit u, real face, real dis, real lasttime, real timeout, real high, real damage, string part, string dsfx returns nothing
         if u == null then
@@ -430,7 +430,7 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
         endif
         call Parabola.create(u, u, Deg2Rad(face), RMaxBJ(dis, 0), RMaxBJ(lasttime, 0), RMaxBJ(timeout, 0), high, damage, part, dsfx)
     endfunction
-       
+
     // Moon Priestess Arrow PUI
     function YDWETimerPatternMoonPriestessArrow takes unit u, real face, real dis, real lasttime, real timeout, integer lv, integer aid, integer uid, string order, string part, string dsfx returns nothing
         local unit sour = null
@@ -438,7 +438,7 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
             //debug call BJDebugMsg("|cff00ff00[YDWE] Timer Pattern : |r No object!")
             return
         endif
-        set sour = YDWEGetUnitByString(I2S(YDWEH2I(u)), "MoonPriestessArrow") 
+        set sour = YDWEGetUnitByString(I2S(YDWEH2I(u)), "MoonPriestessArrow")
         if sour == null then
             set sour = u
         endif
@@ -446,7 +446,7 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
         //call YDWEFlushMissionByString(I2S(YDWEH2I(u)))
         set sour = null
     endfunction
-    
+
     // Rush Slide PUI
     function YDWETimerPatternRushSlide takes unit u, real face, real dis, real lasttime, real timeout, real damage, boolean killtrees, boolean cycle, boolean path, string part, string gsfx, string wsfx returns nothing
         if u == null then
@@ -455,12 +455,12 @@ library_once YDWETimerPattern initializer Init requires YDWEBase
         endif
         call Deceleration.create(u, u, Deg2Rad(face), RMaxBJ(dis, 0), RMaxBJ(lasttime, 0), RMaxBJ(timeout, 0), damage, killtrees, cycle, path, part, gsfx, wsfx)
     endfunction
-    
+
     private function Init takes nothing returns nothing
         set Area  = Rect(-TIMER_PATTERN_RADIUS, -TIMER_PATTERN_RADIUS, TIMER_PATTERN_RADIUS, TIMER_PATTERN_RADIUS)
         set Bexpr = Filter(function TreeFilter)
     endfunction
-	
+
 	#undef TIMER_PATTERN_RADIUS
 endlibrary
 
