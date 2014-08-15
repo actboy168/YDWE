@@ -7,11 +7,11 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/lambda/lambda.hpp>
 #include <boost/scope_exit.hpp>
-#include <aero/aero.hpp>
 #include <base/path/service.h>
 #include <base/util/unicode.h>
 #include <base/hook/inline.h>
 #include <base/hook/iat.h>
+#include <base/hook/fp_call.h>
 
 #include "YDWEEvent.h"
 #include "YDWELogger.h"
@@ -25,7 +25,7 @@ namespace NYDWE {
 
 	bool isWeWinMainHookInstalled;
 	uintptr_t pgTrueWeWinMain;
-	int32_t AERO_FP_CALL_STDCALL DetourWeWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine, int32_t showCommand)
+	int32_t WINAPI DetourWeWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine, int32_t showCommand)
 	{
 		LOGGING_INFO(lg) << "Entering main program.";
 		LOGGING_DEBUG(lg) << "Command line: " << (commandLine ? commandLine : "NULL");
@@ -41,7 +41,7 @@ namespace NYDWE {
 			CYDWEEventData eventData;
 		event_array[EVENT_WE_START](eventData);
 
-		int32_t result = aero::std_call<int32_t>(pgTrueWeWinMain, instance, prevInstance, commandLine, showCommand);
+		int32_t result = base::std_call<int32_t>(pgTrueWeWinMain, instance, prevInstance, commandLine, showCommand);
 
 		eventData.getDataStore().clear();
 		event_array[EVENT_WE_EXIT](eventData);
@@ -76,7 +76,7 @@ namespace NYDWE {
 			gIsInCompileProcess = false;
 		}
 
-		return aero::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+		return base::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
 	}
 
 	HANDLE WINAPI DetourWeCreateFileA(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
@@ -103,7 +103,7 @@ namespace NYDWE {
 			}
 		}
 
-		return aero::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+		return base::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
 	}
 
 	/// Regex for extracting file path
@@ -152,7 +152,7 @@ namespace NYDWE {
 		else
 		{
 			// Retain original
-			return aero::std_call<BOOL>(pgTrueCreateProcessA,
+			return base::std_call<BOOL>(pgTrueCreateProcessA,
 				lpApplicationName,
 				lpCommandLine,
 				lpProcessAttributes,
@@ -181,7 +181,7 @@ namespace NYDWE {
 		if (!results_is_failed(results))
 		{
 			// All allowed
-			return aero::std_call<LRESULT>(pgTrueWeWindowProc, windowHandle, message, wParam, lParam);
+			return base::std_call<LRESULT>(pgTrueWeWindowProc, windowHandle, message, wParam, lParam);
 		}
 		else
 		{
@@ -192,7 +192,7 @@ namespace NYDWE {
 	uintptr_t pgTrueCreateWindowExA;
 	HWND WINAPI DetourWeCreateWindowExA(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName, DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu, HINSTANCE hInstance, LPVOID lpParam)
 	{
-		HWND result = aero::std_call<HWND>(pgTrueCreateWindowExA,
+		HWND result = base::std_call<HWND>(pgTrueCreateWindowExA,
 			dwExStyle,
 			lpClassName,
 			lpWindowName,
@@ -234,13 +234,13 @@ namespace NYDWE {
 			SetWindowLongA(gWeMainWindowHandle, GWL_WNDPROC, reinterpret_cast<LONG>(DetourWeWindowProc));
 		}
 
-		return aero::std_call<BOOL>(pgTrueSetMenu, hWnd, hMenu);
+		return base::std_call<BOOL>(pgTrueSetMenu, hWnd, hMenu);
 	}
 
 	uintptr_t pgTrueWeDialogProc;
 	INT_PTR CALLBACK DetourWeDialogProc(HWND dialogHandle, UINT message, WPARAM wParam, LPARAM lParam)
 	{
-		INT_PTR ret = aero::std_call<INT_PTR>(pgTrueWeDialogProc, dialogHandle, message, wParam, lParam);
+		INT_PTR ret = base::std_call<INT_PTR>(pgTrueWeDialogProc, dialogHandle, message, wParam, lParam);
 
 		if (message == WM_SETTEXT)
 		{
@@ -285,7 +285,7 @@ namespace NYDWE {
 			pgTrueWeDialogProc = (uintptr_t)lpDialogFunc;
 		}
 
-		return aero::std_call<HWND>(pgTrueCreateDialogIndirectParamA, hInstance, lpTemplate, hWndParent, DetourWeDialogProc, lParamInit);
+		return base::std_call<HWND>(pgTrueCreateDialogIndirectParamA, hInstance, lpTemplate, hWndParent, DetourWeDialogProc, lParamInit);
 	}
 
 	uintptr_t pgTrueWeNewObjectId;
@@ -341,7 +341,7 @@ namespace NYDWE {
 
 		// If all of the results are allowed, load it
 		if (!results_is_failed(results))
-			return aero::std_call<HPROVIDER>(pgTrueMssRIBLoadProviderLibrary, fileName);
+			return base::std_call<HPROVIDER>(pgTrueMssRIBLoadProviderLibrary, fileName);
 		else
 			return 0;
 	}
