@@ -44,7 +44,7 @@ namespace NGameHook
  * \param patchLength Length of the patch in bytes
  * \return Whether the patch succeeds.
  */
-static bool InstallPatch(void *searchStart, boost::uint32_t searchLength, boost::uint16_t *patchPattern, boost::uint32_t patternLength, boost::uint8_t *patch, boost::uint32_t patchLength)
+static bool InstallPatch(void *searchStart, uint32_t searchLength, uint16_t *patchPattern, uint32_t patternLength, uint8_t *patch, uint32_t patchLength)
 {
 	bool result = false;
 
@@ -263,9 +263,9 @@ BOOL __fastcall DetourWeTriggerEditorEditboxCopy(const char *source)
 static uintptr_t pgTrueWeGetSystemParameter;
 static bool isWeGetSystemParameterHookInstalled;
 
-static boost::int32_t __fastcall DetourWeGetSystemParameter(LPCSTR parentKey, LPCSTR childKey, boost::int32_t flag)
+static int32_t __fastcall DetourWeGetSystemParameter(LPCSTR parentKey, LPCSTR childKey, int32_t flag)
 {
-	boost::int32_t result = base::fast_call<boost::int32_t>(pgTrueWeGetSystemParameter, parentKey, childKey, flag);
+	int32_t result = base::fast_call<int32_t>(pgTrueWeGetSystemParameter, parentKey, childKey, flag);
 
 	if (strcmp(parentKey, "WorldEditMisc") == 0)
 	{
@@ -288,13 +288,13 @@ static void *pgMapCellsGetUnknownGlobalFlag;
 
 boost::scoped_ptr<CMemoryPatch> pgWeVerifyMapCellsLimitPatcher;
 
-static boost::int32_t __fastcall DetourWeVerifyMapCellsLimit(boost::int32_t flag)
+static int32_t __fastcall DetourWeVerifyMapCellsLimit(int32_t flag)
 {
-	boost::int32_t cellSideLimit;
+	int32_t cellSideLimit;
 
 	if (flag == -1)
 	{
-		flag = base::fast_call<boost::int32_t>(pgMapCellsGetUnknownGlobalFlag);
+		flag = base::fast_call<int32_t>(pgMapCellsGetUnknownGlobalFlag);
 	}
 
 	if (flag >= 1)
@@ -324,9 +324,9 @@ static bool isWeTriggerNameInputCharCheckHookInstalled;
 
 boost::scoped_ptr<CMemoryPatch> pgWeTriggerNameInputCharCheckPatcher;
 
-static boost::uint32_t __fastcall DetourWeTriggerNameInputCharCheck(boost::uint32_t c, boost::uint32_t flag)
+static uint32_t __fastcall DetourWeTriggerNameInputCharCheck(uint32_t c, uint32_t flag)
 {
-	//boost::uint32_t result = base::fast_call<boost::uint32_t>(pgTrueWeTriggerNameInputCharCheck, c, flag);
+	//uint32_t result = base::fast_call<uint32_t>(pgTrueWeTriggerNameInputCharCheck, c, flag);
 	//return result;
 	return 1;
 }
@@ -382,7 +382,7 @@ static void InitInlineHook()
 	pgTrueWeVerifyMapCellsLimit = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, 
 		gWeTextSectionLength, &weVerifyMapCellsLimitPattern[0], sizeof(weVerifyMapCellsLimitPattern));
 	LOGGING_TRACE(lg) << base::format("Found WeVerifyMapCellsLimit at 0x%08X.", pgTrueWeVerifyMapCellsLimit);
-	boost::uint32_t callOffset = aero::offset_element_sum<boost::uint32_t>(pgTrueWeVerifyMapCellsLimit, 6);
+	uint32_t callOffset = aero::offset_element_sum<uint32_t>(pgTrueWeVerifyMapCellsLimit, 6);
 	pgMapCellsGetUnknownGlobalFlag = aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, callOffset + 10);
 	LOGGING_TRACE(lg) << base::format("Found GetUnkownFlag at 0x%08X.", pgMapCellsGetUnknownGlobalFlag);
 	pgWeVerifyMapCellsLimitPatcher.reset(new CMemoryPatch(aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, 3), "\x90\x90", 2));
@@ -570,7 +570,7 @@ static void UninstallIATHook()
 	LOGGING_DEBUG(lg) << "IAT hook cleanup completed.";
 }
 
-static boost::uint8_t syntaxCheckPatch[] = 
+static uint8_t syntaxCheckPatch[] = 
 {
 	0x31, 0xC0,	//xor eax,eax (return 0)
 	0x90,
@@ -588,7 +588,7 @@ static boost::uint8_t syntaxCheckPatch[] =
 .text:005BC08C 89 5F 04                 mov     [edi+4], ebx
 .text:005BC08F FF 52 0C                 call    dword ptr [edx+0Ch]
 */
-static boost::uint16_t syntaxCheckPattern[] =
+static uint16_t syntaxCheckPattern[] =
 {
 	0xFF50,
 	0xFF8B, 0xFFCF,
@@ -603,7 +603,7 @@ static boost::uint16_t syntaxCheckPattern[] =
 .text:005CEFFC 8B 4D FC                       mov     ecx, [ebp+var_4]
 .text:005CEFFF 53                             push    ebx
 */
-static boost::uint16_t autoDisablePattern[] = 
+static uint16_t autoDisablePattern[] = 
 {
 	0xFFE8, 0x0068, 0x00FD, 0x00F4, 0x00FF,
 	0xFF85, 0xFFC0,
@@ -612,7 +612,7 @@ static boost::uint16_t autoDisablePattern[] =
 	0xFF53
 };
 
-static boost::uint8_t autoDisablePatch[] = 
+static uint8_t autoDisablePatch[] = 
 {
 	0x90, 0x90, 0x90, 0x90, 0x90
 };
@@ -626,7 +626,7 @@ static boost::uint8_t autoDisablePatch[] =
 .text:005C88FC C2 0C 00                       retn    0Ch
 .text:005C88FF 68 04 01 00 00                 push    104h
 */
-static boost::uint16_t enableTriggerCheck1Pattern[] = 
+static uint16_t enableTriggerCheck1Pattern[] = 
 {
 	0xFF75, 0xFF08, 
 	0xFF5F, 
@@ -637,7 +637,7 @@ static boost::uint16_t enableTriggerCheck1Pattern[] =
 	0xFF68, 0xFF04, 0xFF01, 0xFF00, 0xFF00
 };
 
-static boost::uint8_t enableTriggerCheck1Patch[] = 
+static uint8_t enableTriggerCheck1Patch[] = 
 {
 	0xEB		// jnz -> jmp
 };
@@ -652,7 +652,7 @@ static boost::uint8_t enableTriggerCheck1Patch[] =
 .text:005C88E6 8B E5                          mov     esp, ebp
 .text:005C88E8 5D                             pop     ebp
 */
-static boost::uint16_t enableTriggerCheck2Pattern[] = 
+static uint16_t enableTriggerCheck2Pattern[] = 
 {
 	0xFF56, 
 	0xFFE8, 0x00B0, 0x0062, 0x00F5, 0x00FF, 
@@ -664,7 +664,7 @@ static boost::uint16_t enableTriggerCheck2Pattern[] =
 	0xFF5D
 };
 
-static boost::uint8_t enableTriggerCheck2Patch[] = 
+static uint8_t enableTriggerCheck2Patch[] = 
 {
 	0x90, 
 	0x90, 0x90, 0x90, 0x90, 0x90,	// remove push && call
@@ -672,7 +672,7 @@ static boost::uint8_t enableTriggerCheck2Patch[] =
 	0xEB							// jnz -> jmp
 };
 
-static boost::uint16_t doodadLimitPattern[] = 
+static uint16_t doodadLimitPattern[] = 
 {
 	0xFF7E, 0xFF5C, 
 	0xFF53, 
@@ -684,12 +684,12 @@ static boost::uint16_t doodadLimitPattern[] =
 	0xFF03, 0xFFC7
 };
 
-static boost::uint8_t doodadLimitPatch[] = 
+static uint8_t doodadLimitPatch[] = 
 {
 	0xEB
 };
 
-static boost::uint16_t unitItemLimitPattern[] = 
+static uint16_t unitItemLimitPattern[] = 
 {
 	0xFF0F, 0xFF8E, 0x0000, 0xFF00, 0xFF00, 0xFF00, 
 	0xFF89, 0x0000, 0x0000, 
@@ -700,12 +700,12 @@ static boost::uint16_t unitItemLimitPattern[] =
 	0xFFF6, 0xFFC5, 0xFF04
 };
 
-static boost::uint8_t unitItemLimitPatch[] = 
+static uint8_t unitItemLimitPatch[] = 
 {
 	0xE9, 0xA0, 0x00, 0x00, 0x00, 0x90
 };
 
-static boost::uint16_t editorInstanceCheckPattern[] = 
+static uint16_t editorInstanceCheckPattern[] = 
 {
 	0xFF57, 0xFF51, 0xFF6A, 0xFF00, 0xFF6A, 0xFF01, 
 	0xFF6A, 0xFF00, 
@@ -716,7 +716,7 @@ static boost::uint16_t editorInstanceCheckPattern[] =
 	0xFF5F, 0xFFC3, 0xFF56
 };
 
-static boost::uint8_t editorInstanceCheckPatch[] = 
+static uint8_t editorInstanceCheckPatch[] = 
 {
 	0x33, 0xC0, 0xC3, 0x90
 };

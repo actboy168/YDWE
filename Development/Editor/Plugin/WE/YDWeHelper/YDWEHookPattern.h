@@ -2,7 +2,7 @@
 
 #include <boost/cstdint.hpp>
 
-boost::uint16_t weSetWindowCaptionPattern[] =
+uint16_t weSetWindowCaptionPattern[] =
 {
 	0x56FF,
 	0x8BFF, 0xF1FF,
@@ -46,7 +46,7 @@ boost::uint16_t weSetWindowCaptionPattern[] =
 .text:004D1DEC 8B 7D 0C                             mov     edi, [ebp+flag]
  */
 /// Pattern for finding WeGetSystemParameter
-boost::uint16_t weGetSystemParameterPattern[] =
+uint16_t weGetSystemParameterPattern[] =
 {
 	0xFF55,
 	0xFF8B, 0xFFEC,
@@ -90,7 +90,7 @@ boost::uint16_t weGetSystemParameterPattern[] =
 .text:004E1F0E C3                                   retn
 .text:004E1F0E                      sub_4E1EF0      endp
 */
-boost::uint16_t weVerifyMapCellsLimitPattern[] = 
+uint16_t weVerifyMapCellsLimitPattern[] = 
 {
 	0xFF83, 0xFFF9, 0xFFFF, 
 	0xFF75, 0xFF07, 
@@ -206,7 +206,7 @@ boost::uint16_t weVerifyMapCellsLimitPattern[] =
 .text:005A4BBF                trigger_name_validate endp
 */
 /// Pattern for finding WeTriggerNameCheck
-boost::uint16_t weTriggerNameCheckPattern[] =
+uint16_t weTriggerNameCheckPattern[] =
 {
 	0xFF55,
 	0xFF8B, 0xFFEC,
@@ -329,7 +329,7 @@ boost::uint16_t weTriggerNameCheckPattern[] =
 .text:0042E42C                char_verify     endp
  */
 /// Pattern for finding WeTriggerNameInputCharCheck
-boost::uint16_t weTriggerNameInputCharCheckPattern[] =
+uint16_t weTriggerNameInputCharCheckPattern[] =
 {
 	0xFF83, 0xFFF9, 0xFF20,
 	0xFF73, 0x0006,

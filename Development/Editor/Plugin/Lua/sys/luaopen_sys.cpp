@@ -303,10 +303,10 @@ namespace NLuaAPI { namespace NSys {
 		return properties.count(key);
 	}
 
-	static boost::int32_t LuaSysObjectIdStringToInt(const std::string &sid)
+	static int32_t LuaSysObjectIdStringToInt(const std::string &sid)
 	{
 		// Little endian
-		boost::int32_t result = 0;
+		int32_t result = 0;
 
 		if (sid.size() == sizeof(result))
 		{
@@ -315,11 +315,11 @@ namespace NLuaAPI { namespace NSys {
 		return result;
 	}
 
-	static std::string LuaSysObjectIdIntToString(boost::int32_t id)
+	static std::string LuaSysObjectIdIntToString(int32_t id)
 	{
 		char buffer[5];
 
-		*(boost::int32_t *)buffer = id;
+		*(int32_t *)buffer = id;
 		buffer[4] = '\0';
 		return buffer;
 	}

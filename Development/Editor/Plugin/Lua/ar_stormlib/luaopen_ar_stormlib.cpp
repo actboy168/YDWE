@@ -61,7 +61,7 @@ namespace NLuaAPI { namespace NMPQ {
 		return SFileGetLocale();
 	}
 
-	static boost::int32_t LuaMpqStormLibAddListFile(void *mpqHandle, const char *listFile)
+	static int32_t LuaMpqStormLibAddListFile(void *mpqHandle, const char *listFile)
 	{
 		return SFileAddListFile(
 			reinterpret_cast<HANDLE>(mpqHandle),
@@ -69,7 +69,7 @@ namespace NLuaAPI { namespace NMPQ {
 			);
 	}
 
-	static boost::int32_t LuaMpqStormLibGetAttributes(void *mpqHandle)
+	static int32_t LuaMpqStormLibGetAttributes(void *mpqHandle)
 	{
 		return SFileGetAttributes(reinterpret_cast<HANDLE>(mpqHandle));
 	}

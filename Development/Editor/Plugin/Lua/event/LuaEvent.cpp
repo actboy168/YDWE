@@ -25,7 +25,7 @@ namespace NYDWE {
 
 	bool isWeWinMainHookInstalled;
 	uintptr_t pgTrueWeWinMain;
-	boost::int32_t AERO_FP_CALL_STDCALL DetourWeWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine, boost::int32_t showCommand)
+	int32_t AERO_FP_CALL_STDCALL DetourWeWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine, int32_t showCommand)
 	{
 		LOGGING_INFO(lg) << "Entering main program.";
 		LOGGING_DEBUG(lg) << "Command line: " << (commandLine ? commandLine : "NULL");
@@ -41,7 +41,7 @@ namespace NYDWE {
 			CYDWEEventData eventData;
 		event_array[EVENT_WE_START](eventData);
 
-		boost::int32_t result = aero::std_call<boost::int32_t>(pgTrueWeWinMain, instance, prevInstance, commandLine, showCommand);
+		int32_t result = aero::std_call<int32_t>(pgTrueWeWinMain, instance, prevInstance, commandLine, showCommand);
 
 		eventData.getDataStore().clear();
 		event_array[EVENT_WE_EXIT](eventData);
