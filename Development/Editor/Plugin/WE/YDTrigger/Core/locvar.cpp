@@ -290,11 +290,19 @@ namespace locvar
 				locvar::do_set(OutClass, it.second.c_str(), it.first.c_str()
 					, state(CC_GUIID_YDWETimerStartMultiple, name, handle_string)
 					, [&]()
-					{ 
+				{
+					if (global.mother_id == CC_GUIID_YDWETimerStartMultiple)
+					{
+						locvar::do_get(OutClass, it.second.c_str(), it.first.c_str(), global);
+						//PUT_CONST(it.first.c_str(), 0);
+						//PUT_CONST("()", 0);
+					}
+					else
+					{
 						PUT_CONST(it.first.c_str(), 0);
 						PUT_CONST("()", 0);
 					}
-				);
+				});
 			}
 		}
 		register_var.erase(name);
