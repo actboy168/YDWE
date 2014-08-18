@@ -17,53 +17,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int jass_storm(lua::state* ls);
 	int fix_math(lua::state* ls);
 
-	int jass_enable_console(lua_State* /*L*/)
-	{
-		console::enable();
-		console::disable_close_button();
-		return 0;
-	}
-
-	int compatibility_layer(lua::state* ls)
-	{
-		ls->getglobal("require");
-		ls->pushstring("jass.common");
-		ls->pcall(1, 1, 0);
-		ls->setglobal("jass");
-
-		ls->getglobal("require");
-		ls->pushstring("jass.japi");
-		ls->pcall(1, 1, 0);
-		ls->setglobal("japi");
-
-		ls->getglobal("require");
-		ls->pushstring("jass.slk");
-		ls->pcall(1, 1, 0);
-		ls->setglobal("slk");
-
-		ls->newtable();
-		{
-			ls->pushstring("hook");
-			ls->getglobal("require");
-			ls->pushstring("jass.hook");
-			ls->pcall(1, 1, 0);
-			ls->rawset(-3);
-
-			ls->pushstring("runtime");
-			ls->getglobal("require");
-			ls->pushstring("jass.runtime");
-			ls->pcall(1, 1, 0);
-			ls->rawset(-3);
-
-			ls->pushstring("EnableConsole");
-			ls->pushcclosure((lua::cfunction)jass_enable_console, 0);
-			ls->rawset(-3);
-		}
-		ls->setglobal("jass_ext");
-
-		return 0;
-	}
-
 	void register_preload_lib(lua::state* ls, const char *name, lua::cfunction f)
 	{
 		ls->getfield(LUA_REGISTRYINDEX, "_PRELOAD");
@@ -88,8 +41,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		insert_searchers_table(ls);
 		fix_math(ls);
-
-		compatibility_layer(ls);
 
 		return 0;
 	}

@@ -80,15 +80,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		}
 
 		std::string cheat_s = cheat;
-		if (cheat_s.compare(0, 4, "run ") == 0)
-		{
-			cheat_s = cheat_s.substr(4);
-			lua::state* ls = jass_state_s::instance().get();
-			ls->getglobal("require");
-			ls->pushlstring(cheat_s.c_str(), cheat_s.size());
-			safe_call(ls, 1, 1, true);
-		}
-		else if (cheat_s.compare(0, 9, "exec-lua:") == 0)
+		if (cheat_s.compare(0, 9, "exec-lua:") == 0)
 		{
 			cheat_s = cheat_s.substr(9);
 			boost::algorithm::trim(cheat_s);
