@@ -76,6 +76,36 @@ function template:do_compile(op)
 	end
 	
 	local lua_codes = {''}
+	table.insert(lua_codes, [[
+		stormlib = ar.stormlib
+    
+	    local file_path = fs.ydwe_path() / "logs" / "mu.out"
+
+	    local update_j = {}
+	    
+	    local function update(file_name, func)
+	        if file_name == 'war3map.j' then
+	            table.insert(update_j, func)
+	        else
+	            if stormlib.has_file(__map_handle__, file_name) and
+	                stormlib.extract_file(__map_handle__, file_path, file_name)
+	            then
+	                local content = func(io.load(file_path))
+	                if content then
+	                    io.save(file_path, content)
+	                   	mpq_util:import_file(__map_handle__, file_path, file_name)
+                	end
+	            end
+	        end
+	    end
+
+	    local function do_update_j(content)
+	    	for _, func in ipairs(update_j) do
+		    	content = func(content) or content
+	    	end
+	    	return content
+    	end
+	]])
 	table.insert(lua_codes, "local __jass_result__ = {''}")
 	table.insert(lua_codes, "local function __jass_output__(str) table.insert(__jass_result__, str) end")
 	local r, err = pcall(precompile, code, '__jass_output__', lua_codes)
@@ -87,7 +117,7 @@ function template:do_compile(op)
 	__map_handle__ = op.map_handle
 	__map_path__   = op.map_path
 	local env = setmetatable({import = map_file_import, StringHash = string_hash}, {__index = _G})
-	table.insert(lua_codes, "return table.concat(__jass_result__)")	
+	table.insert(lua_codes, "return do_update_j(table.concat(__jass_result__))")	
 	local f, err = load(table.concat(lua_codes, '\n'), nil, 't', env)
 	if not f then
 		return f, err
