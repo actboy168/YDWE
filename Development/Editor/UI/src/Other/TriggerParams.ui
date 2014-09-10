@@ -683,6 +683,14 @@ UnitStateDamageMix=0,unitstate,ConvertUnitState(0x14),"攻击最小值 [JAPI]"
 UnitStateDamageMax=0,unitstate,ConvertUnitState(0x15),"攻击最大值 [JAPI]"
 UnitStateDamageRange=0,unitstate,ConvertUnitState(0x16),"攻击范围 [JAPI]"
 UnitStateArmor=0,unitstate,ConvertUnitState(0x20),"护甲 [JAPI]"
+UnitStateDamageInterval=0,unitstate,ConvertUnitState(0x25),"基础攻击间隔 [JAPI]"
+UnitStateArmorType=0,unitstate,ConvertUnitState(0x50),"护甲类型 [JAPI]"
+UnitStateRateOfFire=0,unitstate,ConvertUnitState(0x51),"射弹速率 [JAPI]"
+UnitStateAcquisitionRange=0,unitstate,ConvertUnitState(0x52),"主动攻击范围 [JAPI]"
+UnitStateLifeRegen=0,unitstate,ConvertUnitState(0x53),"生命回复速度 [JAPI]"
+UnitStateManaRegen=0,unitstate,ConvertUnitState(0x54),"魔法回复速度 [JAPI]"
+UnitStateWeaponType=0,unitstate,ConvertUnitState(0x59),"武器类型 [JAPI]"
+UnitStateAttackType=0,unitstate,ConvertUnitState(0x23),"攻击类型 [JAPI]"
 
 // UnitStatesSec
 UnitStateLifeSec=0,unitstatesec,UNIT_STATE_LIFE,WESTRING_USTATE_LIFE
@@ -693,6 +701,14 @@ UnitStateDamageBaseSec=0,unitstatesec,ConvertUnitState(0x12),"基础伤害 [JAPI]"
 UnitStateDamageBonusSec=0,unitstatesec,ConvertUnitState(0x13),"附加伤害 [JAPI]"
 UnitStateDamageRangeSec=0,unitstatesec,ConvertUnitState(0x16),"攻击范围 [JAPI]"
 UnitStateArmorSec=0,unitstatesec,ConvertUnitState(0x20),"护甲 [JAPI]"
+UnitStateDamageIntervalSec=0,unitstatesec,ConvertUnitState(0x25),"基础攻击间隔 [JAPI]"
+UnitStateArmorTypeSec=0,unitstatesec,ConvertUnitState(0x50),"护甲类型 [JAPI]"
+UnitStateRateOfFireSec=0,unitstatesec,ConvertUnitState(0x51),"射弹速率 [JAPI]"
+UnitStateAcquisitionRangeSec=0,unitstatesec,ConvertUnitState(0x52),"主动攻击范围 [JAPI]"
+UnitStateLifeRegenSec=0,unitstatesec,ConvertUnitState(0x53),"生命回复速度 [JAPI]"
+UnitStateManaRegeSecn=0,unitstatesec,ConvertUnitState(0x54),"魔法回复速度 [JAPI]"
+UnitStateWeaponTypeSec=0,unitstatesec,ConvertUnitState(0x59),"武器类型 [JAPI]"
+UnitStateAttackTypeSec=0,unitstatesec,ConvertUnitState(0x23),"攻击类型 [JAPI]"
 
 // Keyboard Event Types
 KeyEventTypeDepress=1,keyeventtype,bj_KEYEVENTTYPE_DEPRESS,WESTRING_KEYEVENTTYPE_DEPRESS
