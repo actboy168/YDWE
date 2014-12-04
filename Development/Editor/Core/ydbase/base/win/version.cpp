@@ -57,6 +57,9 @@ namespace base { namespace win {
 			case 3:
 				v = VERSION_WIN8_1;
 				break;
+			case 4:
+				v = VERSION_WIN10;
+				break;
 			default:
 				v = VERSION_WIN_LAST;
 				break;

@@ -13,6 +13,7 @@ namespace base { namespace win {
 		VERSION_WIN7,
 		VERSION_WIN8,
 		VERSION_WIN8_1,
+		VERSION_WIN10,
 		VERSION_WIN_LAST,
 	};
 
