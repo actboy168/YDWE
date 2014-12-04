@@ -132,7 +132,7 @@ namespace base { namespace lockfree {
 
 		void push(value_type&& val)
 		{
-			new(&back()) T(std::move(val));
+			new(&back()) T(::std::move(val));
 			do_push();
 		}
 

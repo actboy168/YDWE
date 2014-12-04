@@ -30,15 +30,15 @@ namespace base { namespace win {
 			GetTickCount64_t ptr_;
 
 		private:
-			static uint32_t             rollover_time;
-			static uint32_t             lastnow_time;
-			static thread::lock::spin<> gtc_lock;
+			static uint32_t     rollover_time;
+			static uint32_t     lastnow_time;
+			static lock::spin<> gtc_lock;
 
 			static uint64_t __stdcall custom()
 			{
 				uint32_t now = ::GetTickCount();
 
-				thread::lock::guard<thread::lock::spin<>>  lock(gtc_lock);
+				lock::guard<lock::spin<>>  lock(gtc_lock);
 
 				if ((now < lastnow_time) && ((lastnow_time - now) >(1 << 30)))
 				{
@@ -52,7 +52,7 @@ namespace base { namespace win {
 
 		uint32_t  get_tick_count::rollover_time = 0;
 		uint32_t  get_tick_count::lastnow_time = 0;
-		thread::lock::spin<> get_tick_count::gtc_lock;
+		lock::spin<> get_tick_count::gtc_lock;
 	}
 
 	uint64_t get_tick_count()

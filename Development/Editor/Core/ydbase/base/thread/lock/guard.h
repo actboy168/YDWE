@@ -2,7 +2,7 @@
 
 #include <base/util/noncopyable.h>
 
-namespace base { namespace thread { namespace lock {
+namespace base { namespace lock {
 
 	template <class T>
 	class guard
@@ -24,4 +24,4 @@ namespace base { namespace thread { namespace lock {
 		T& lock_;
 
 	};
-}}}
+}}

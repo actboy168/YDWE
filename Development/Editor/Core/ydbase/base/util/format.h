@@ -126,7 +126,7 @@ private:
 	void format_value(const char_t* value, std::size_t len)
 	{
 		std::size_t prefixlen = 0;
-		char_t prefix[2];
+		char_t prefix[2] = { 0 };
 
 		if (flags_ & FL_SIGNED)
 		{
