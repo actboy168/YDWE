@@ -22,7 +22,7 @@ namespace luabind
 
 		void to(lua_State* L, uint32_t const& value)
 		{
-			luaL_checkinteger(L, value);
+			lua_pushinteger(L, (lua_Integer)value);
 		}
 	};
 
