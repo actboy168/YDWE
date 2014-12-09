@@ -710,7 +710,8 @@ cfunction compile_callback(lua_State* L, int fidx, int ct_usr, const struct ctyp
             | call_rrp extern push_cdata, L_ARG, -1, mt
             get_pointer(Dst, ct, &reg);
             | mov [rax], rcx
-            | call_rr, extern lua_remove, L_ARG, -2
+            | call_rrr, extern lua_rotate, L_ARG, -2, -1
+            | call_rr, extern lua_settop, L_ARG, 0
         } else {
             switch (mt->type) {
             case INT64_TYPE:
