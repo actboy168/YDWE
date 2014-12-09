@@ -1,5 +1,5 @@
 /*
-** $Id: lparser.h,v 1.70.1.1 2013/04/12 18:48:47 roberto Exp $
+** $Id: lparser.h,v 1.73 2014/06/19 18:27:20 roberto Exp $
 ** Lua Parser
 ** See Copyright Notice in lua.h
 */
@@ -22,7 +22,8 @@ typedef enum {
   VTRUE,
   VFALSE,
   VK,		/* info = index of constant in `k' */
-  VKNUM,	/* nval = numerical value */
+  VKFLT,	/* nval = numerical float value */
+  VKINT,	/* nval = numerical integer value */
   VNONRELOC,	/* info = result register */
   VLOCAL,	/* info = local register */
   VUPVAL,       /* info = index of upvalue in 'upvalues' */
@@ -46,7 +47,8 @@ typedef struct expdesc {
       lu_byte vt;  /* whether 't' is register (VLOCAL) or upvalue (VUPVAL) */
     } ind;
     int info;  /* for generic use */
-    lua_Number nval;  /* for VKNUM */
+    lua_Number nval;  /* for VKFLT */
+    lua_Integer ival;    /* for VKINT */
   } u;
   int t;  /* patch list of `exit when true' */
   int f;  /* patch list of `exit when false' */
@@ -95,7 +97,6 @@ struct BlockCnt;  /* defined in lparser.c */
 /* state needed to generate code for a given function */
 typedef struct FuncState {
   Proto *f;  /* current function header */
-  Table *h;  /* table to find (and reuse) elements in `k' */
   struct FuncState *prev;  /* enclosing function */
   struct LexState *ls;  /* lexical state */
   struct BlockCnt *bl;  /* chain of current blocks */
@@ -112,8 +113,8 @@ typedef struct FuncState {
 } FuncState;
 
 
-LUAI_FUNC Closure *luaY_parser (lua_State *L, ZIO *z, Mbuffer *buff,
-                                Dyndata *dyd, const char *name, int firstchar);
+LUAI_FUNC LClosure *luaY_parser (lua_State *L, ZIO *z, Mbuffer *buff,
+                                 Dyndata *dyd, const char *name, int firstchar);
 
 
 #endif

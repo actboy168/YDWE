@@ -115,6 +115,7 @@
     <ClCompile Include="..\src\ltm.c" />
     <ClCompile Include="..\src\luac.c" />
     <ClCompile Include="..\src\lundump.c" />
+    <ClCompile Include="..\src\lutf8lib.c" />
     <ClCompile Include="..\src\lvm.c" />
     <ClCompile Include="..\src\lzio.c" />
   </ItemGroup>

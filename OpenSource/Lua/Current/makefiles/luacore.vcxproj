@@ -41,6 +41,7 @@
     <ClCompile Include="..\src\ltablib.c" />
     <ClCompile Include="..\src\ltm.c" />
     <ClCompile Include="..\src\lundump.c" />
+    <ClCompile Include="..\src\lutf8lib.c" />
     <ClCompile Include="..\src\lvm.c" />
     <ClCompile Include="..\src\lzio.c" />
   </ItemGroup>

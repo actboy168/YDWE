@@ -1,5 +1,5 @@
 /*
-** $Id: ldebug.c,v 2.90.1.3 2013/05/16 16:04:15 roberto Exp $
+** $Id: ldebug.c,v 2.101 2014/10/17 16:28:21 roberto Exp $
 ** Debug Interface
 ** See Copyright Notice in lua.h
 */
@@ -50,7 +50,7 @@ static int currentline (CallInfo *ci) {
 /*
 ** this function can be called asynchronous (e.g. during a signal)
 */
-LUA_API int lua_sethook (lua_State *L, lua_Hook func, int mask, int count) {
+LUA_API void lua_sethook (lua_State *L, lua_Hook func, int mask, int count) {
   if (func == NULL || mask == 0) {  /* turn off hooks? */
     mask = 0;
     func = NULL;
@@ -61,7 +61,6 @@ LUA_API int lua_sethook (lua_State *L, lua_Hook func, int mask, int count) {
   L->basehookcount = count;
   resethookcount(L);
   L->hookmask = cast_byte(mask);
-  return 1;
 }
 
 
@@ -272,7 +271,7 @@ LUA_API int lua_getinfo (lua_State *L, const char *what, lua_Debug *ar) {
   if (*what == '>') {
     ci = NULL;
     func = L->top - 1;
-    api_check(L, ttisfunction(func), "function expected");
+    api_check(ttisfunction(func), "function expected");
     what++;  /* skip the '>' */
     L->top--;  /* pop function */
   }
@@ -373,11 +372,6 @@ static int findsetreg (Proto *p, int lastpc, int reg) {
         }
         break;
       }
-      case OP_TEST: {
-        if (reg == a)  /* jumped code can change 'a' */
-          setreg = filterpc(pc, jmptarget);
-        break;
-      }
       default:
         if (testAMode(op) && reg == a)  /* any instruction that set A */
           setreg = filterpc(pc, jmptarget);
@@ -466,6 +460,7 @@ static const char *getfuncname (lua_State *L, CallInfo *ci, const char **name) {
     case OP_SUB: tm = TM_SUB; break;
     case OP_MUL: tm = TM_MUL; break;
     case OP_DIV: tm = TM_DIV; break;
+    case OP_IDIV: tm = TM_IDIV; break;
     case OP_MOD: tm = TM_MOD; break;
     case OP_POW: tm = TM_POW; break;
     case OP_UNM: tm = TM_UNM; break;
@@ -510,10 +505,9 @@ static const char *getupvalname (CallInfo *ci, const TValue *o,
 }
 
 
-l_noret luaG_typeerror (lua_State *L, const TValue *o, const char *op) {
+static const char *varinfo (lua_State *L, const TValue *o) {
+  const char *name;
   CallInfo *ci = L->ci;
-  const char *name = NULL;
-  const char *t = objtypename(o);
   const char *kind = NULL;
   if (isLua(ci)) {
     kind = getupvalname(ci, o, &name);  /* check whether 'o' is an upvalue */
@@ -521,26 +515,38 @@ l_noret luaG_typeerror (lua_State *L, const TValue *o, const char *op) {
       kind = getobjname(ci_func(ci)->p, currentpc(ci),
                         cast_int(o - ci->u.l.base), &name);
   }
-  if (kind)
-    luaG_runerror(L, "attempt to %s %s " LUA_QS " (a %s value)",
-                op, kind, name, t);
-  else
-    luaG_runerror(L, "attempt to %s a %s value", op, t);
+  return (kind) ? luaO_pushfstring(L, " (%s '%s')", kind, name) : "";
 }
 
 
-l_noret luaG_concaterror (lua_State *L, StkId p1, StkId p2) {
-  if (ttisstring(p1) || ttisnumber(p1)) p1 = p2;
-  lua_assert(!ttisstring(p1) && !ttisnumber(p1));
+l_noret luaG_typeerror (lua_State *L, const TValue *o, const char *op) {
+  const char *t = objtypename(o);
+  luaG_runerror(L, "attempt to %s a %s value%s", op, t, varinfo(L, o));
+}
+
+
+l_noret luaG_concaterror (lua_State *L, const TValue *p1, const TValue *p2) {
+  if (ttisstring(p1) || cvt2str(p1)) p1 = p2;
   luaG_typeerror(L, p1, "concatenate");
 }
 
 
 l_noret luaG_aritherror (lua_State *L, const TValue *p1, const TValue *p2) {
-  TValue temp;
-  if (luaV_tonumber(p1, &temp) == NULL)
-    p2 = p1;  /* first operand is wrong */
+  lua_Number temp;
+  if (!tonumber(p1, &temp))  /* first operand is wrong? */
+    p2 = p1;  /* now second is wrong */
   luaG_typeerror(L, p2, "perform arithmetic on");
+}
+
+
+/*
+** Error when both values are convertible to numbers, but not to integers
+*/
+l_noret luaG_tointerror (lua_State *L, const TValue *p1, const TValue *p2) {
+  lua_Integer temp;
+  if (!tointeger(p1, &temp))
+    p2 = p1;
+  luaG_runerror(L, "number%s has no integer representation", varinfo(L, p2));
 }
 
 
@@ -589,5 +595,38 @@ l_noret luaG_runerror (lua_State *L, const char *fmt, ...) {
   addinfo(L, luaO_pushvfstring(L, fmt, argp));
   va_end(argp);
   luaG_errormsg(L);
+}
+
+
+void luaG_traceexec (lua_State *L) {
+  CallInfo *ci = L->ci;
+  lu_byte mask = L->hookmask;
+  int counthook = ((mask & LUA_MASKCOUNT) && L->hookcount == 0);
+  if (counthook)
+    resethookcount(L);  /* reset count */
+  if (ci->callstatus & CIST_HOOKYIELD) {  /* called hook last time? */
+    ci->callstatus &= ~CIST_HOOKYIELD;  /* erase mark */
+    return;  /* do not call hook again (VM yielded, so it did not move) */
+  }
+  if (counthook)
+    luaD_hook(L, LUA_HOOKCOUNT, -1);  /* call count hook */
+  if (mask & LUA_MASKLINE) {
+    Proto *p = ci_func(ci)->p;
+    int npc = pcRel(ci->u.l.savedpc, p);
+    int newline = getfuncline(p, npc);
+    if (npc == 0 ||  /* call linehook when enter a new function, */
+        ci->u.l.savedpc <= L->oldpc ||  /* when jump back (loop), or when */
+        newline != getfuncline(p, pcRel(L->oldpc, p)))  /* enter a new line */
+      luaD_hook(L, LUA_HOOKLINE, newline);  /* call line hook */
+  }
+  L->oldpc = ci->u.l.savedpc;
+  if (L->status == LUA_YIELD) {  /* did hook yield? */
+    if (counthook)
+      L->hookcount = 1;  /* undo decrement to zero */
+    ci->u.l.savedpc--;  /* undo increment (resume will increment it again) */
+    ci->callstatus |= CIST_HOOKYIELD;  /* mark that it yielded */
+    ci->func = L->top - 1;  /* protect stack below results */
+    luaD_throw(L, LUA_YIELD);
+  }
 }
 

@@ -1,5 +1,5 @@
 /*
-** $Id: llex.h,v 1.72.1.1 2013/04/12 18:48:47 roberto Exp $
+** $Id: llex.h,v 1.76 2013/12/30 20:47:58 roberto Exp $
 ** Lexical Analyzer
 ** See Copyright Notice in lua.h
 */
@@ -26,8 +26,10 @@ enum RESERVED {
   TK_GOTO, TK_IF, TK_IN, TK_LOCAL, TK_NIL, TK_NOT, TK_OR, TK_REPEAT,
   TK_RETURN, TK_THEN, TK_TRUE, TK_UNTIL, TK_WHILE,
   /* other terminal symbols */
-  TK_CONCAT, TK_DOTS, TK_EQ, TK_GE, TK_LE, TK_NE, TK_DBCOLON, TK_EOS,
-  TK_NUMBER, TK_NAME, TK_STRING
+  TK_IDIV, TK_CONCAT, TK_DOTS, TK_EQ, TK_GE, TK_LE, TK_NE,
+  TK_SHL, TK_SHR,
+  TK_DBCOLON, TK_EOS,
+  TK_FLT, TK_INT, TK_NAME, TK_STRING
 };
 
 /* number of reserved words */
@@ -36,6 +38,7 @@ enum RESERVED {
 
 typedef union {
   lua_Number r;
+  lua_Integer i;
   TString *ts;
 } SemInfo;  /* semantics information */
 
@@ -58,6 +61,7 @@ typedef struct LexState {
   struct lua_State *L;
   ZIO *z;  /* input stream */
   Mbuffer *buff;  /* buffer for tokens */
+  Table *h;  /* to avoid collection/reuse strings */
   struct Dyndata *dyd;  /* dynamic structures used by the parser */
   TString *source;  /* current source name */
   TString *envn;  /* environment variable name */

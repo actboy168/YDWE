@@ -117,6 +117,9 @@
     <ClCompile Include="..\src\lapi.c">
       <Filter>core\source</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\lutf8lib.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\lapi.h">

@@ -1,5 +1,5 @@
 /*
-** $Id: lopcodes.h,v 1.142.1.1 2013/04/12 18:48:47 roberto Exp $
+** $Id: lopcodes.h,v 1.147 2014/10/20 18:29:55 roberto Exp $
 ** Opcodes for Lua virtual machine
 ** See Copyright Notice in lua.h
 */
@@ -187,16 +187,23 @@ OP_SELF,/*	A B C	R(A+1) := R(B); R(A) := R(B)[RK(C)]		*/
 OP_ADD,/*	A B C	R(A) := RK(B) + RK(C)				*/
 OP_SUB,/*	A B C	R(A) := RK(B) - RK(C)				*/
 OP_MUL,/*	A B C	R(A) := RK(B) * RK(C)				*/
-OP_DIV,/*	A B C	R(A) := RK(B) / RK(C)				*/
 OP_MOD,/*	A B C	R(A) := RK(B) % RK(C)				*/
 OP_POW,/*	A B C	R(A) := RK(B) ^ RK(C)				*/
+OP_DIV,/*	A B C	R(A) := RK(B) / RK(C)				*/
+OP_IDIV,/*	A B C	R(A) := RK(B) // RK(C)				*/
+OP_BAND,/*	A B C	R(A) := RK(B) & RK(C)				*/
+OP_BOR,/*	A B C	R(A) := RK(B) | RK(C)				*/
+OP_BXOR,/*	A B C	R(A) := RK(B) ~ RK(C)				*/
+OP_SHL,/*	A B C	R(A) := RK(B) << RK(C)				*/
+OP_SHR,/*	A B C	R(A) := RK(B) >> RK(C)				*/
 OP_UNM,/*	A B	R(A) := -R(B)					*/
+OP_BNOT,/*	A B	R(A) := ~R(B)					*/
 OP_NOT,/*	A B	R(A) := not R(B)				*/
 OP_LEN,/*	A B	R(A) := length of R(B)				*/
 
 OP_CONCAT,/*	A B C	R(A) := R(B).. ... ..R(C)			*/
 
-OP_JMP,/*	A sBx	pc+=sBx; if (A) close all upvalues >= R(A) + 1	*/
+OP_JMP,/*	A sBx	pc+=sBx; if (A) close all upvalues >= R(A - 1)	*/
 OP_EQ,/*	A B C	if ((RK(B) == RK(C)) ~= A) then pc++		*/
 OP_LT,/*	A B C	if ((RK(B) <  RK(C)) ~= A) then pc++		*/
 OP_LE,/*	A B C	if ((RK(B) <= RK(C)) ~= A) then pc++		*/

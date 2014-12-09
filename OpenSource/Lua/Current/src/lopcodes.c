@@ -1,5 +1,5 @@
 /*
-** $Id: lopcodes.c,v 1.49.1.1 2013/04/12 18:48:47 roberto Exp $
+** $Id: lopcodes.c,v 1.53 2013/12/30 20:47:58 roberto Exp $
 ** Opcodes for Lua virtual machine
 ** See Copyright Notice in lua.h
 */
@@ -31,10 +31,17 @@ LUAI_DDEF const char *const luaP_opnames[NUM_OPCODES+1] = {
   "ADD",
   "SUB",
   "MUL",
-  "DIV",
   "MOD",
   "POW",
+  "DIV",
+  "IDIV",
+  "BAND",
+  "BOR",
+  "BXOR",
+  "SHL",
+  "SHR",
   "UNM",
+  "BNOT",
   "NOT",
   "LEN",
   "CONCAT",
@@ -79,10 +86,17 @@ LUAI_DDEF const lu_byte luaP_opmodes[NUM_OPCODES] = {
  ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_ADD */
  ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_SUB */
  ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_MUL */
- ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_DIV */
  ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_MOD */
  ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_POW */
+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_DIV */
+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_IDIV */
+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_BAND */
+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_BOR */
+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_BXOR */
+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_SHL */
+ ,opmode(0, 1, OpArgK, OpArgK, iABC)		/* OP_SHR */
  ,opmode(0, 1, OpArgR, OpArgN, iABC)		/* OP_UNM */
+ ,opmode(0, 1, OpArgR, OpArgN, iABC)		/* OP_BNOT */
  ,opmode(0, 1, OpArgR, OpArgN, iABC)		/* OP_NOT */
  ,opmode(0, 1, OpArgR, OpArgN, iABC)		/* OP_LEN */
  ,opmode(0, 1, OpArgR, OpArgR, iABC)		/* OP_CONCAT */

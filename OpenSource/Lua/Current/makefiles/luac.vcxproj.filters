@@ -34,6 +34,7 @@
     <ClCompile Include="..\src\ltm.c" />
     <ClCompile Include="..\src\lvm.c" />
     <ClCompile Include="..\src\lzio.c" />
+    <ClCompile Include="..\src\lutf8lib.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\lapi.h" />
