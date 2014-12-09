@@ -1,5 +1,9 @@
 #pragma once
 
+#if !defined(LUA_COMPAT_APIINTCASTS)
+#define LUA_COMPAT_APIINTCASTS
+#endif
+
 #include <base/config.h>
 #include <lua.hpp>
 
@@ -401,14 +405,9 @@ namespace base { namespace lua {
 			return tolstring(idx, NULL);
 		}
 
-		inline int pcallk(int nargs, int nresults, int errfunc, int ctx, cfunction k)
-		{
-			return lua_pcallk(self(), nargs, nresults, errfunc, ctx, (lua_CFunction)k);
-		}
-
 		inline int pcall(int nargs, int nresults, int errfunc)
 		{
-			return pcallk(nargs, nresults, errfunc, 0, NULL);
+			return lua_pcallk(self(), nargs, nresults, errfunc, 0, NULL);
 		}
 		
 		inline void requiref(const char *modname, cfunction openf, int glb)
