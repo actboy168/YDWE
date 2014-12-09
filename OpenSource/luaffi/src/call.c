@@ -176,7 +176,9 @@ static void* reserve_code(struct jit* jit, lua_State* L, size_t sz)
         ADDFUNC(jit->lua_dll, lua_pushnil);
         ADDFUNC(jit->lua_dll, lua_callk);
         ADDFUNC(jit->lua_dll, lua_settop);
+#if LUA_VERSION_NUM < 503
         ADDFUNC(jit->lua_dll, lua_remove);
+#endif
 #undef ADDFUNC
 
         for (i = 0; extnames[i] != NULL; i++) {
