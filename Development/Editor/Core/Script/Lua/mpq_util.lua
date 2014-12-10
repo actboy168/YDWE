@@ -16,7 +16,7 @@ function mpq_util:import_file(mpq_handle, file_path, path_in_archive)
 		mpq_handle,
 		file_path,
 		path_in_archive,
-		bit32.bor(stormlib.MPQ_FILE_COMPRESS, stormlib.MPQ_FILE_REPLACEEXISTING),
+		stormlib.MPQ_FILE_COMPRESS | stormlib.MPQ_FILE_REPLACEEXISTING,
 		stormlib.MPQ_COMPRESSION_ZLIB,
 		stormlib.MPQ_COMPRESSION_ZLIB
 	) then

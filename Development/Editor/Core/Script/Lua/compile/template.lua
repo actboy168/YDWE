@@ -102,9 +102,9 @@ function template:compile(op)
 	local success, content = self:do_compile(op)
 	if not success then
 		if content then
-			gui.message_dialog(nil, content, _("Error"), bit32.bor(gui.MB_ICONERROR, gui.MB_OK))
+			gui.message_dialog(nil, content, _("Error"), gui.MB_ICONERROR | gui.MB_OK)
 		else
-			gui.message_dialog(nil, _("Unknown"), _("Error"), bit32.bor(gui.MB_ICONERROR, gui.MB_OK))
+			gui.message_dialog(nil, _("Unknown"), _("Error"), gui.MB_ICONERROR | gui.MB_OK)
 		end			
 		log.error("Template error processing: " .. tostring(content))
 		return false

@@ -100,7 +100,7 @@ event.register(event.EVENT_NEW_OBJECT_ID, false, function (event_data)
 				foregroundWindow,
 				_("You have entered an invalid ID. The ID must contain just 4 letters or digits. It cannot contain chars other than those in ASCII."),
 				_("YDWE"),
-				bit32.bor(gui.MB_ICONERROR, gui.MB_OK)
+				gui.MB_ICONERROR | gui.MB_OK
 			)
 		elseif object:custom_has(object_type, id_string) or object:original_has(event_data.class, id_string) then
 			log.trace("User input error(" .. tostring(id_string) .. ").")	
@@ -109,7 +109,7 @@ event.register(event.EVENT_NEW_OBJECT_ID, false, function (event_data)
 				foregroundWindow,
 				_("You have entered an invalid ID. This ID already exists."),
 				_("YDWE"),
-				bit32.bor(gui.MB_ICONERROR, gui.MB_OK)
+				gui.MB_ICONERROR | gui.MB_OK
 			)
 		else
 			-- 合法，转换为整数返回	
