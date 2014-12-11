@@ -32,11 +32,12 @@
 typedef bool _Bool;
 
 #else
+#if _MSC_VER < 1800	
 #pragma warning(disable:4244) /* conversion from int to _Bool */
 typedef unsigned char _Bool;
+#endif 
 #define bool _Bool
 #define true 1
 #define false 0
 #define __bool_true_false_are_defined 1
-
 #endif
