@@ -17,7 +17,7 @@ def rebuild(solution, configuration, platform = 'Win32'):
         #time.sleep(0.01) 
     sys.stdout.write(p.stdout.read())
 
-def setup_env():
+def setup_env(msvc_version):
     global vc_install_dir
     keys = ['LIB', 'LIBPATH', 'PATH', 'INCLUDE', 'VCINSTALLDIR']
     key_env = dict([(key, []) for key in keys])
@@ -25,7 +25,7 @@ def setup_env():
     for key in keys:
         rekeys[key] = re.compile('%s=(.*)' % key, re.I)
 
-    p = popen('"{0}" & set'.format(os.path.join(os.environ['VS100COMNTOOLS'], 'vsvars32.bat')))
+    p = popen('"{0}" & set'.format(os.path.join(os.environ['VS' + str(msvc_version) + 'COMNTOOLS'], 'vsvars32.bat')))
     for line in p.stdout.readlines():
         for k, v in rekeys.items():
             m = v.match(line)

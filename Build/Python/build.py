@@ -52,7 +52,7 @@ def build_move(configuration):
         , ['.pdb', '.exp', '.ilk', '.aps', '.lib']
         , False)
     
-def build_all(configuration):
+def build_all(msvc_version, configuration):
     from complie            import complie
     from build_anti_bj_leak import build_anti_bj_leak
     from copy_all           import copy_all
@@ -60,22 +60,22 @@ def build_all(configuration):
     from pack_ui            import pack_ui
     from pack_units         import pack_units
 
-    complie(configuration)
+    complie(msvc_version, configuration)
     build_anti_bj_leak()
-    copy_all(configuration)
+    copy_all(msvc_version, configuration)
     pack_skin()
     pack_ui('ydtrigger')
     pack_ui('ydwe')
     pack_units()
 
-def build(configuration):
+def build(msvc_version, configuration):
     Log()
     print('build')
     t = datetime.datetime.now()
     print ('build {0}'.format(t))
     build_clear(configuration)
     move_include()
-    build_all(configuration)
+    build_all(msvc_version, configuration)
     build_move(configuration)
     fs.remove_all(path['Result'] / 'plugin' / 'YDColorizer')
     print ('time {0}'.format(datetime.datetime.now() - t))
@@ -87,4 +87,4 @@ def Configuration():
 
 if __name__ == '__main__':
     util.path.ResetPath(Configuration())
-    build(Configuration())
+    build(120, Configuration())

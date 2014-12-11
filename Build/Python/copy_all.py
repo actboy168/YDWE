@@ -17,11 +17,11 @@ def get_boost_version():
         f.close()
     raise
 
-def copy_boost_dll(name, configuration):
+def copy_boost_dll(name, msvc_version, configuration):
     if configuration == 'Release':
-        filename = 'boost_' + name + '-vc100-mt-' + get_boost_version() + '.dll'
+        filename = 'boost_' + name + '-vc' + str(msvc_version) + '-mt-' + get_boost_version() + '.dll'
     else:
-        filename = 'boost_' + name + '-vc100-mt-gd-' + get_boost_version() + '.dll'
+        filename = 'boost_' + name + '-vc' + str(msvc_version) + '-mt-gd-' + get_boost_version() + '.dll'
     fs.copy_file(path['OpenSource'] / 'Boost' / 'stage' / 'lib' / filename, path['ResultCore'] / filename)
     
 def copy_lib_dll(name, configuration, version = 'Current'):
@@ -37,16 +37,16 @@ def copy_boost_preprocessor():
 def copy_component():
     fs.copy_directory(path['Development'] / 'Editor' / 'Component', path['Result'])
 
-def copy_all(configuration):
+def copy_all(msvc_version, configuration):
     print('copy_all')
     fs.create_directories(path['ResultCore'])
     fs.create_directories(path['ResultCore'] / 'modules')
-    copy_boost_dll('system',     configuration)
-    copy_boost_dll('filesystem', configuration)
-    copy_boost_dll('date_time',  configuration)
-    copy_boost_dll('thread',     configuration)
-    copy_boost_dll('chrono',     configuration)
-    copy_boost_dll('log',        configuration)
+    copy_boost_dll('system',     msvc_version, configuration)
+    copy_boost_dll('filesystem', msvc_version, configuration)
+    copy_boost_dll('date_time',  msvc_version, configuration)
+    copy_boost_dll('thread',     msvc_version, configuration)
+    copy_boost_dll('chrono',     msvc_version, configuration)
+    copy_boost_dll('log',        msvc_version, configuration)
     copy_lib_dll('Lua',          configuration)
     copy_lib_dll('StormLib',     configuration)
     fs.copy_file(path['OpenSource'] / 'luaffi' / 'bin' / configuration / 'ffi.dll', path['ResultCore'] / 'modules' / 'ffi.dll')
@@ -61,5 +61,5 @@ def Configuration():
 
 if __name__ == '__main__':
     util.path.ResetPath(Configuration())
-    copy_all(Configuration())
+    copy_all(120, Configuration())
 

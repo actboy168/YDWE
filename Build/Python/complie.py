@@ -25,10 +25,10 @@ def copy_crt_dll(configuration):
     if fs.exists(crt_dll_dir):
         fs.copy_directory(crt_dll_dir, path['ResultCore'], ['.dll'])
 
-def complie(configuration):
+def complie(msvc_version, configuration):
     print('complie')
     print('msvc.setup_env')
-    util.msvc.setup_env()
+    util.msvc.setup_env(msvc_version)
     print('rebuild opensource')
     util.msvc.rebuild(path['OpenSource']/ 'Lua' / 'Current' / 'makefiles' / 'luacore.sln', configuration)
     util.msvc.rebuild(path['OpenSource']/ 'luaffi' / 'makefiles' / 'luaffi.sln', configuration)
@@ -48,4 +48,4 @@ def Configuration():
 
 if __name__ == '__main__':
     util.path.ResetPath(Configuration())
-    complie(Configuration())
+    complie(120, Configuration())
