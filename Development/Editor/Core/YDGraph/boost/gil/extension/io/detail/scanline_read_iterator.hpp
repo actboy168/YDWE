@@ -76,7 +76,7 @@ private:
         return _pos == rhs._pos;
     }
 
-    reference dereference() const
+	typename Reader::reference dereference() const
     {
         if( _read_scanline == true )
         {
