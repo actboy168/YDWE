@@ -17,9 +17,9 @@ def run_bat(bat_path, cmd=None):
     for line in p.stdout.readlines():
         print(line)
 
-def copy_crt_dll(configuration):
+def copy_crt_dll(msvc_version, configuration):
     if configuration == 'Release':
-        crt_dll_dir = fs.path(util.msvc.vc_install_dir) / 'redist' / 'x86' / 'Microsoft.VC100.CRT'
+        crt_dll_dir = fs.path(util.msvc.vc_install_dir) / 'redist' / 'x86' / ('Microsoft.VC' + str(msvc_version) + '.CRT')
     else:
         return
     if fs.exists(crt_dll_dir):
@@ -38,7 +38,7 @@ def complie(msvc_version, configuration):
     util.msvc.rebuild(path['Development']/ 'Editor' / 'UI' / 'sln' / 'YDUI.sln', 'YDWE')
     util.msvc.rebuild(path['Development']/ 'Editor' / 'UI' / 'sln' / 'YDUI.sln', 'YDTrigger')
     print('copy crt dll')
-    copy_crt_dll(configuration)
+    copy_crt_dll(msvc_version, configuration)
 
 def Configuration():
     import sys
