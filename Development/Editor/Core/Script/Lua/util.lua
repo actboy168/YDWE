@@ -68,7 +68,15 @@ end
 
 function string.trim (self) 
   return self:gsub("^%s*(.-)%s*$", "%1")
-end 
+end
+
+function string.from_objectid (id)
+	return string.pack('>I4', id)
+end
+
+function string.to_objectid (str)
+	return string.unpack('>I4', str)
+end
 
 function sys.spawn_pipe (command_line, current_dir)		
 	local in_rd,  in_wr  = sys.open_pipe()

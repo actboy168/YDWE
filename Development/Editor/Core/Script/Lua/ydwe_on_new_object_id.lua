@@ -29,7 +29,7 @@ function object:original_has (this_, id_string_)
 
 	for i = 0, size-2 do
 		local id = ffi.cast('uint32_t*', ptr)[0]
-		if sys.object_id_int_to_string(id) == id_string_ then
+		if string.from_objectid(id) == id_string_ then
 			return true
 		end
 		ptr = ptr + 24
@@ -81,7 +81,7 @@ event.register(event.EVENT_NEW_OBJECT_ID, false, function (event_data)
 			foregroundWindow, 														-- 父窗口句柄
 			_("New Object Id"),														-- 标题栏
 			_("Please input new object ID, or cancel to use the default one."),		-- 提示语句
-			sys.object_id_int_to_string(default_id),								-- 文本编辑区初始文字
+			string.from_objectid(default_id),								-- 文本编辑区初始文字
 			_("OK"),																-- “确定”按钮文本
 			_("Cancel")																-- “取消"按钮文本
 		)
@@ -114,7 +114,7 @@ event.register(event.EVENT_NEW_OBJECT_ID, false, function (event_data)
 		else
 			-- 合法，转换为整数返回	
 			log.trace("Result " .. tostring(id_string))	
-			return sys.object_id_string_to_int(id_string)
+			return string.to_objectid(id_string)
 		end
 				
 	end

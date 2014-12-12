@@ -303,27 +303,6 @@ namespace NLuaAPI { namespace NSys {
 		return properties.count(key);
 	}
 
-	static int32_t LuaSysObjectIdStringToInt(const std::string &sid)
-	{
-		// Little endian
-		int32_t result = 0;
-
-		if (sid.size() == sizeof(result))
-		{
-			sid.copy((char *)&result, sizeof(result));
-		}
-		return result;
-	}
-
-	static std::string LuaSysObjectIdIntToString(int32_t id)
-	{
-		char buffer[5];
-
-		*(int32_t *)buffer = id;
-		buffer[4] = '\0';
-		return buffer;
-	}
-
 	static void LuaSysGetClipboardText(lua_State* pState)
 	{
 		HANDLE dataHandle;
@@ -534,8 +513,6 @@ int luaopen_sys(lua_State *pState)
 		// Misc
 		def("shell_execute", &NLuaAPI::NSys::LuaShellExecute),
 		def("get_module_version_info", &NLuaAPI::NSys::LuaGetVersionNumberString),
-		def("object_id_string_to_int", &NLuaAPI::NSys::LuaSysObjectIdStringToInt),
-		def("object_id_int_to_string", &NLuaAPI::NSys::LuaSysObjectIdIntToString),
 		def("get_foreground_window",   &NLuaAPI::NSys::LuaSysGetForegroundWindow),
 		
 		def("get_clipboard_text", &NLuaAPI::NSys::LuaSysGetClipboardText),
