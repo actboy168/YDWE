@@ -38,7 +38,7 @@ function wave:do_compile(op)
 	if op.option.enable_jasshelper_debug then
 		cmd = cmd .. '--define=DEBUG=1 '
 	end
-	if global_config:get_integer("ScriptInjection.Option", 0) == 0 then
+	if tonumber(global_config["ScriptInjection"]["Option"]) == 0 then
 		cmd = cmd .. "--define=SCRIPT_INJECTION=1 "
 	end
 	if not op.option.enable_yd_trigger then

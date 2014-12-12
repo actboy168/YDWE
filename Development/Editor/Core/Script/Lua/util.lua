@@ -67,7 +67,7 @@ function math.feq(a, b, eps)
 end
 
 function string.trim (self) 
-  return self:gsub("^%s*(.-)%s*$", "%1")
+	return self:gsub("^%s*(.-)%s*$", "%1")
 end
 
 function string.from_objectid (id)
@@ -137,4 +137,37 @@ function sys.spawn (command_line, current_dir, wait)
 	p = nil	
 	log.trace(string.format("Executed %s.", command_line))
 	return false
+end
+
+function sys.ini_load (path)
+	local f = io.open(path, "r")
+	local tbl = {}
+	local section = nil
+	if f then
+		for line in f:lines() do
+			if string.sub(line,1,1) == "[" then
+				section = string.trim(string.sub(line, 2, string.len(line) - 1 ))
+				tbl[section] = setmetatable({}, {__index = function () return '' end })
+			else
+				if string.trim(line) ~= "" then
+					local key = string.trim(string.sub(line, 1, string.find(line, "=") - 1))
+					local value = string.sub(line, string.find(line, "=") + 1)
+					tbl[section][key] = value or ""
+				end
+			end
+		end
+		f:close()
+	end
+	return setmetatable(tbl, {__index = function () return '' end })
+end
+
+function sys.ini_save (path, tbl)
+	local f = io.open(path, "w")
+	for section, kv in pairs(tbl) do
+		f:write("[" .. section .. "]\n")
+		for key, value in pairs(kv) do
+			f:write(string.trim(item) .. " = " .. string.trim(value) .. "\n")
+		end
+	end
+	f:close()
 end

@@ -110,7 +110,7 @@ local function check_war3_version()
 	log.trace("check_war3_version")
 
 	-- 检查“版本转换器”等造成的game.dll和war3patch.mpq不一致的问题
-	if global_config:get_integer("MapSave.Option", 0) == 0 then
+	if tonumber(global_config["MapSave"]["Option"]) == 0 then
 		-- 检测魔兽中包含的脚本文件所代表的版本
 		local script_war3_version, e = get_war3_version_from_script()
 
@@ -166,7 +166,7 @@ event.register(event.EVENT_WE_START, false, function (event_data)
 	log.debug("war3 version " .. tostring(war3_version))
 	
 	-- 刷新配置数据	
-	global_config:reload()
+	global_config_reload()
 
 	-- 检测UI和Units目录
 	check_conflicting_ui()
@@ -221,7 +221,7 @@ event.register(event.EVENT_TEST_MAP, false, function (event_data)
 	log.debug("********************* on test start *********************")
 
 	-- 刷新配置数据
-	global_config:reload()
+	global_config_reload()
 	
 	-- 获取当前测试的地图名
 	local map_path = fs.path(event_data.map_path)
@@ -232,12 +232,12 @@ event.register(event.EVENT_TEST_MAP, false, function (event_data)
 	local command_aux = ""
 
 	-- 是否OpenGL方式？
-	if global_config:get_string("MapTest.LaunchRenderingEngine", "Direct3D 8") == "OpenGL" then
+	if global_config["MapTest"]["LaunchRenderingEngine"] == "OpenGL" then
 		command_aux = command_aux .. " -opengl"
 	end
 
 	-- 是否窗口方式？
-	if global_config:get_integer("MapTest.LaunchWindowed", 1) == 1 then
+	if global_config["MapTest"]["LaunchWindowed"] ~= "0" then
 		command_aux = command_aux .. " -window"
 	end
 	

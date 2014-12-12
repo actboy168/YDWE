@@ -117,31 +117,31 @@ event.register(event.EVENT_SAVE_MAP, false, function (event_data)
 	log.debug("********************* on save start *********************")
 
 	-- 刷新配置数据
-	global_config:reload()
+	global_config_reload()
 
 	-- 当前保存的地图路径
 	local map_path = fs.path(event_data.map_path)
 	log.trace("Saving " .. map_path:string())
 
 	-- 获取保存类型
-	local save_type = global_config:get_integer("MapSave.Option", 0)
+	local save_type = tonumber(global_config["MapSave"]["Option"])
 
 	-- 获取保存选项
 	local save_option = {
 		-- 是否启用JassHelper
-		enable_jasshelper = (global_config:get_integer("ScriptCompiler.EnableJassHelper", 1) == 1),
+		enable_jasshelper = (global_config["ScriptCompiler"]["EnableJassHelper"] ~= "0"),
 		-- 是否使用脚本模式编译
-		enable_jasshelper_scriptonly = (global_config:get_integer("ScriptCompiler.EnableJassHelperScriptOnly", 0) == 1),
+		enable_jasshelper_scriptonly = (global_config["ScriptCompiler"]["EnableJassHelperScriptOnly"] == "1"),
 		-- 是否是调试模式
-		enable_jasshelper_debug = (global_config:get_integer("ScriptCompiler.EnableJassHelperDebug", 0) == 1),
+		enable_jasshelper_debug = (global_config["ScriptCompiler"]["EnableJassHelperDebug"] == "1"),
 		-- 是否优化地图
-		enable_jasshelper_optimization = (global_config:get_integer("ScriptCompiler.EnableJassHelperOptimization", 1) == 1),
+		enable_jasshelper_optimization = (global_config["ScriptCompiler"]["EnableJassHelperOptimization"] ~= "0"),
 		-- 是否启用cJass
-		enable_cjass = (global_config:get_integer("ScriptCompiler.EnableCJass", 0) == 1),
+		enable_cjass = (global_config["ScriptCompiler"]["EnableCJass"] == "1"),
 		-- 目标魔兽版本
 		runtime_version = determine_map_version(save_type, war3_version),
 		-- 代码注入选项
-		script_injection = global_config:get_integer("ScriptInjection.Option", 0),
+		script_injection = tonumber(global_config["ScriptInjection"]["Option"]),
 		-- 是否启用YDTrigger
 		enable_yd_trigger = plugin.loaders['YDTrigger'] ~= nil
 	}

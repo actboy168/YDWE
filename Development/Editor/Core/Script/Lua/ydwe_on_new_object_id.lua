@@ -63,10 +63,10 @@ event.register(event.EVENT_NEW_OBJECT_ID, false, function (event_data)
 	local object_type = event_data.object_type
 	local default_id = event_data.default_id
 	-- 刷新配置数据
-	global_config:reload()
+	global_config_reload()
 
 	-- 如果没有选择手动输入则直接返回
-	if global_config:get_integer("FeatureToggle.EnableManualNewId", 0) == 0 then
+	if tonumber(global_config["FeatureToggle"]["EnableManualNewId"]) == 0 then
 		log.trace("Disable.")
 		return default_id
 	end

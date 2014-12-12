@@ -1,24 +1,11 @@
 require "util"
 
-local _config = {}
+local _file = fs.ydwe_path() / "bin" / "EverConfig.cfg"
+local _object
 
-function _config:get_integer(key_name, default_value)
-	return self._object:get_integer(key_name, default_value)
+function global_config_reload()
+	_object = sys.ini_load(_file:string())
 end
+global_config_reload()
 
-function _config:get_string(key_name, default_value)
-	return self._object:get_string(key_name, default_value)
-end
-
-function _config:reload()
-	self._object:reload(self._file)
-end
-
-function _config:initialize()
-	self._file   = fs.ydwe_path() / "bin" / "EverConfig.cfg"
-	self._object = sys.config_property(self._file)
-end
-
-_config:initialize()
-
-global_config = _config
+global_config = _object

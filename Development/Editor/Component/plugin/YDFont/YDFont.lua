@@ -3,7 +3,7 @@ local ffi = require "ffi"
 local loader = {}
 	
 loader.load = function(path)
-	if global_config:get_integer("Font.Enable", 0) == 0 then
+	if global_config["Font"]["Enable"] ~= "1" then
 		log.warn('failed: enable font')
 		return false
 	end
@@ -20,7 +20,11 @@ loader.load = function(path)
 		bool SetFontByName(const char* name, size_t size);
 	]]
 
-	if not loader.dll.SetFontByName(global_config:get_string("Font.Name", "system"), global_config:get_integer("Font.Size", 12)) then
+	local name = global_config["Font"]["Name"]
+	local size = global_config["Font"]["Size"]
+	if name == '' then name = 'system' end
+	if size == '' then size = '12' end
+	if not loader.dll.SetFontByName(name, tonumber(size)) then
 		log.error('failed: in YDFont.dll!SetFontByName')
 		return  false
 	end

@@ -3,11 +3,11 @@ require "sys"
 local loader = {}
 	
 loader.load = function(path)
-	if global_config:get_integer("ScriptCompiler.EnableCJass", 0) ~= 0 then
+	if global_config["ScriptCompiler"]["EnableCJass"] == "1" then
 		log.warn('failed: enable cjass')
 		return false
 	end
-	if global_config:get_integer("ThirdPartyPlugin.EnableYDTrigger", 1) ~= 1 then
+	if global_config["ThirdPartyPlugin"]["EnableYDTrigger"] == "0" then
 		log.warn('failed: diable')
 		return false
 	end

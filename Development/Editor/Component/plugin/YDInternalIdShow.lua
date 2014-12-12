@@ -3,7 +3,7 @@ require "sys"
 local loader = {}
 	
 loader.load = function(path)
-	if global_config:get_integer("FeatureToggle.EnableShowInternalAttributeId", 0) ~= 1 then
+	if global_config["FeatureToggle"]["EnableShowInternalAttributeId"] ~= "1" then
 		log.warn('failed: diable')
 		return false
 	end

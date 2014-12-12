@@ -1,3 +1,4 @@
+require "util"
 
 plugin = {}
 plugin.loaders = {}
@@ -7,8 +8,8 @@ plugin.blacklist = { 'YDTileLimitBreaker', 'YDCustomObjectId', 'YDColorizer' }
 function plugin.load (self, plugin_config_path)
 	log.trace("Load plugin config " .. plugin_config_path:string())
 	
-	local plugin_config = sys.config_property(plugin_config_path)
-	local plugin_name = plugin_config:get_string('Info.PluginName', '')
+	local plugin_config = sys.ini_load(plugin_config_path:string())
+	local plugin_name = plugin_config['Info']['PluginName']
 	
 	if plugin_name == '' then
 		log.error("Cannot plugin name.")
@@ -27,12 +28,12 @@ function plugin.load (self, plugin_config_path)
 		return
 	end
 	
-	if 0 == plugin_config:get_integer('Load.Enable', 0) then
+	if 0 == tonumber(plugin_config['Load']['Enable']) then
 		log.debug("Diable " .. plugin_name .. ".")
 		return		
 	end
 	
-	local plugin_loader_path = plugin_config:get_string('Load.Loader', '')
+	local plugin_loader_path = plugin_config['Load']['Loader']
 	if plugin_loader_path == '' then
 		log.error("Cannot find " .. plugin_name .. "'s loader.")
 		return 
@@ -51,7 +52,7 @@ function plugin.load (self, plugin_config_path)
 	
 	self.loaders[plugin_name] = r
 
-	local plugin_dll_path = plugin_config:get_string('Load.Dll', '')
+	local plugin_dll_path = plugin_config['Load']['Dll']
 	if plugin_dll_path == '' then
 		log.error("Cannot find " .. plugin_name .. "'s dll.")
 		return 
