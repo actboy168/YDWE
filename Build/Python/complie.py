@@ -30,6 +30,8 @@ def complie(msvc_version, configuration):
     print('msvc.setup_env')
     util.msvc.setup_env(msvc_version)
     print('rebuild opensource')
+    util.msvc.rebuild(path['ThirdParty']/ 'Microsoft' / 'Detours' / 'Current' / 'sln' / 'Detours.sln', configuration)
+    util.msvc.rebuild(path['OpenSource']/ 'all.sln', 'Release')
     util.msvc.rebuild(path['OpenSource']/ 'Lua' / 'Current' / 'makefiles' / 'luacore.sln', configuration)
     util.msvc.rebuild(path['OpenSource']/ 'luaffi' / 'makefiles' / 'luaffi.sln', configuration)
     print('rebuild ydwe')
