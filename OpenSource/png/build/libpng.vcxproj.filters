@@ -8,4 +8,30 @@
       <UniqueIdentifier>{1c0e860e-1f26-4d01-8422-cbbeeb92f494}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\png.c" />
+    <ClCompile Include="..\src\pngerror.c" />
+    <ClCompile Include="..\src\pngget.c" />
+    <ClCompile Include="..\src\pngmem.c" />
+    <ClCompile Include="..\src\pngpread.c" />
+    <ClCompile Include="..\src\pngread.c" />
+    <ClCompile Include="..\src\pngrio.c" />
+    <ClCompile Include="..\src\pngrtran.c" />
+    <ClCompile Include="..\src\pngrutil.c" />
+    <ClCompile Include="..\src\pngset.c" />
+    <ClCompile Include="..\src\pngtrans.c" />
+    <ClCompile Include="..\src\pngwio.c" />
+    <ClCompile Include="..\src\pngwrite.c" />
+    <ClCompile Include="..\src\pngwtran.c" />
+    <ClCompile Include="..\src\pngwutil.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\png.h" />
+    <ClInclude Include="..\include\pngconf.h" />
+    <ClInclude Include="..\include\pngdebug.h" />
+    <ClInclude Include="..\include\pnginfo.h" />
+    <ClInclude Include="..\include\pnglibconf.h" />
+    <ClInclude Include="..\include\pngpriv.h" />
+    <ClInclude Include="..\include\pngstruct.h" />
+  </ItemGroup>
 </Project>

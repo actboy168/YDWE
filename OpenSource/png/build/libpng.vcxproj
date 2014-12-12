@@ -77,7 +77,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <DisableSpecificWarnings>4996;4127</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)..\include\;$(ProjectDir)..\..\zlib\include\</AdditionalIncludeDirectories>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <Optimization>Full</Optimization>
     </ClCompile>
     <Link>
