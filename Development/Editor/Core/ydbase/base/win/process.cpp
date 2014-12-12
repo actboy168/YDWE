@@ -64,15 +64,15 @@ namespace base { namespace win {
 #if 1
 				return create_process_use_detour(application, command_line, inherit_handle, creation_flags, current_directory, startup_info, process_information, dll_path.string().c_str());
 #else
-				bool result = create_process_use_system(application, command_line, creation_flags | CREATE_SUSPENDED, current_directory, startup_info, process_information);
+				bool result = create_process_use_system(application, command_line, inherit_handle, creation_flags | CREATE_SUSPENDED, current_directory, startup_info, process_information);
 
 				if (result) 
 				{
-					if (!detail::inject_dll(process_information->hProcess, process_information->hThread, dll_path.c_str()))
+					if (!hook::detail::inject_dll(process_information->hProcess, process_information->hThread, dll_path.c_str()))
 					{
 						result = false;
 					}
-					::ResumeThread(pi.hThread);
+					::ResumeThread(process_information->hThread);
 				}
 
 				return result;
