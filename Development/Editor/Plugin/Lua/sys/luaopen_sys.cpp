@@ -8,11 +8,6 @@
 #include <base/lua/luabind.h>
 #pragma warning(pop)
 #include <boost/filesystem.hpp>
-#include <boost/foreach.hpp>
-#include <boost/scoped_array.hpp>
-#include <boost/unordered_map.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
 #include <Windows.h>
 #include <base/win/process.h>
 #include <base/win/file_version.h>
@@ -20,7 +15,6 @@
 #include <io.h>
 
 namespace fs = boost::filesystem;
-namespace pt = boost::property_tree;
 
 namespace NLuaAPI { namespace NSys {
 
@@ -142,150 +136,6 @@ namespace NLuaAPI { namespace NSys {
 		version_table["revision"]    = fv.revision;
 		version_table["build"]       = fv.build;
 		version_table.push(pState);
-	}
-
-	class CPropertyConfiguration
-	{
-	public:
-		CPropertyConfiguration();
-		CPropertyConfiguration(const fs::path &configFile);
-
-	public:
-		boost::uint32_t getInteger(const std::string &key, boost::uint32_t defaultValue) const;
-		std::string getString(const std::string &key, const std::string &defaultValue) const;
-		CPropertyConfiguration &setInteger(const std::string &key, boost::uint32_t value);
-		CPropertyConfiguration &setString(const std::string &key, const std::string &value);
-		bool reload(const fs::path &configFile);
-		bool save(const fs::path &configFile) const;
-		void clear();
-
-		size_t size() const;
-		size_t erase(const std::string &key);
-		size_t count(const std::string &key) const;
-
-		void swap(CPropertyConfiguration &other);
-
-		friend bool operator==(const CPropertyConfiguration &l, const CPropertyConfiguration &r);
-		friend std::ostream &operator<<(std::ostream &os, const CPropertyConfiguration &mi);
-
-	private:
-		bool load(const fs::path &configFile);
-
-	private:
-		pt::ptree properties;
-	};
-
-	bool operator==(const CPropertyConfiguration &l, const CPropertyConfiguration &r)
-	{
-		return &l == &r || l.properties == r.properties;
-	}
-
-	std::ostream &operator<<(std::ostream &os, const CPropertyConfiguration &cfg)
-	{
-		os << "[" << std::endl;
-
-		BOOST_FOREACH(const pt::ptree::value_type &v, cfg.properties)
-		{
-			os << "\t" << v.first << " : " << v.second.data() << std::endl;
-		}
-
-		return os << "]";
-	}
-
-	CPropertyConfiguration::CPropertyConfiguration(): properties() {}
-
-	CPropertyConfiguration::CPropertyConfiguration(const fs::path &configFile)
-		: properties()
-	{
-		load(configFile);
-	}
-
-	boost::uint32_t CPropertyConfiguration::getInteger(const std::string &key, boost::uint32_t defaultValue) const
-	{
-		return properties.get(key, defaultValue);
-	}
-
-	std::string CPropertyConfiguration::getString(const std::string &key, const std::string &defaultValue) const
-	{
-		return properties.get(key, defaultValue);
-	}
-
-	bool CPropertyConfiguration::reload(const fs::path &configFile)
-	{
-		return load(configFile);
-	}
-
-	void CPropertyConfiguration::clear()
-	{
-		properties.clear();
-	}
-
-	bool CPropertyConfiguration::load(const fs::path &configFile)
-	{
-		if (fs::exists(configFile))
-		{
-			try
-			{
-				std::ifstream ifs(configFile.c_str());
-				pt::ini_parser::read_ini(ifs, properties);
-				return true;
-			}
-			catch (pt::ini_parser::ini_parser_error &)
-			{
-				return false;
-			}
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	bool CPropertyConfiguration::save(const fs::path &configFile) const
-	{
-		try
-		{
-			std::ofstream ofs(configFile.c_str());
-			pt::ini_parser::write_ini(ofs, properties);
-			return true;
-		}
-		catch (pt::ini_parser::ini_parser_error &)
-		{
-			return false;
-		}
-	}
-
-	CPropertyConfiguration &CPropertyConfiguration::setInteger(const std::string &key, boost::uint32_t value)
-	{
-		properties.put(key, value);
-		return *this;
-	}
-
-	CPropertyConfiguration &CPropertyConfiguration::setString(const std::string &key, const std::string &value)
-	{
-		properties.put(key, value);
-		return *this;
-	}
-
-	void CPropertyConfiguration::swap(CPropertyConfiguration &other)
-	{
-		if (this != &other)
-			properties.swap(other.properties);
-	}
-
-	size_t CPropertyConfiguration::size() const
-	{
-		return properties.size();
-	}
-
-	size_t CPropertyConfiguration::erase(const std::string &key)
-	{
-		return properties.erase(key);
-	}
-
-	size_t CPropertyConfiguration::count(const std::string &key) const
-	{
-		return properties.count(key);
 	}
 
 	static void LuaSysGetClipboardText(lua_State* pState)
@@ -455,25 +305,6 @@ int luaopen_sys(lua_State *pState)
 	// Bind sys
 	module(pState, "sys")
 	[
-		class_<NLuaAPI::NSys::CPropertyConfiguration>("config_property")
-			.def(constructor<>())
-			.def(constructor<const fs::path &>())
-			.def(constructor<const NLuaAPI::NSys::CPropertyConfiguration &>())
-			.def("get_integer", &NLuaAPI::NSys::CPropertyConfiguration::getInteger)
-			.def("get_string", &NLuaAPI::NSys::CPropertyConfiguration::getString)
-			.def("save", &NLuaAPI::NSys::CPropertyConfiguration::save)
-			.def("reload", &NLuaAPI::NSys::CPropertyConfiguration::reload)
-			.def("set_integer", &NLuaAPI::NSys::CPropertyConfiguration::setInteger)
-			.def("set_string", &NLuaAPI::NSys::CPropertyConfiguration::setString)
-			.def("swap", &NLuaAPI::NSys::CPropertyConfiguration::swap)
-			.def("clear", &NLuaAPI::NSys::CPropertyConfiguration::clear)
-			.def("size", &NLuaAPI::NSys::CPropertyConfiguration::size)
-			.def("erase", &NLuaAPI::NSys::CPropertyConfiguration::erase)
-			.def("count", &NLuaAPI::NSys::CPropertyConfiguration::count)
-			.def(const_self == const_self)
-			.def(tostring(const_self))
-		,
-
 		class_<base::win::process>("process")
 			.def(constructor<>())
 			.def("inject",      &base::win::process::inject)
