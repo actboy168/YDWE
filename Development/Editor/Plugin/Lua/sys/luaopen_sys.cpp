@@ -127,21 +127,6 @@ namespace NLuaAPI { namespace NSys {
 		FreeLibrary((HMODULE)lib);
 	}
 
-	static void LuaGetCurrentDirectory(lua_State *pState)
-	{
-		char buffer[MAX_PATH];
-		size_t size = GetCurrentDirectoryA(sizeof(buffer), buffer);
-		if (size)
-			lua_pushlstring(pState, buffer, size);
-		else
-			lua_pushnil(pState);
-	}
-
-	static bool LuaSetCurrentDirectory(const fs::path &directory)
-	{
-		return !!SetCurrentDirectoryA(directory.string().c_str());
-	}
-
 	static void *LuaShellExecute(const std::string &cmd)
 	{
 		return ShellExecuteA(NULL, 0, cmd.c_str(), 0, 0, SW_SHOW);
@@ -498,10 +483,6 @@ int luaopen_sys(lua_State *pState)
 			.def("wait",        (uint32_t (base::win::process::*)())&base::win::process::wait)
 			.def("close",       &base::win::process::close)
 		,
-
-		// Retrieve & set directories
-		def("get_current_dir", &NLuaAPI::NSys::LuaGetCurrentDirectory),
-		def("set_current_dir", &NLuaAPI::NSys::LuaSetCurrentDirectory),
 
 		// Hack functions
 		def("open_pipe", &NLuaAPI::NSys::LuaOpenPipe),
