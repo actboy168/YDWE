@@ -151,7 +151,7 @@ function sys.ini_load (path)
 			else
 				if string.trim(line) ~= "" then
 					local key = string.trim(string.sub(line, 1, string.find(line, "=") - 1))
-					local value = string.sub(line, string.find(line, "=") + 1)
+					local value = string.trim(string.sub(line, string.find(line, "=") + 1))
 					tbl[section][key] = value or ""
 				end
 			end
