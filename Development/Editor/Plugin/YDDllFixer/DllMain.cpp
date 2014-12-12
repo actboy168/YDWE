@@ -23,8 +23,13 @@ static fs::path GetModuleDirectory(HMODULE hModule)
 #ifdef _DEBUG
 
 const wchar_t* szDllList[] = {
+#if _MSC_VER == 1800
+	L"msvcr120d.dll",
+	L"msvcp120d.dll",
+#elif  
 	L"msvcr100d.dll",
 	L"msvcp100d.dll",
+#endif
 	L"zlibd1.dll",
 	L"StormLib.dll",
 	L"sfmpq.dll",
@@ -37,8 +42,13 @@ const wchar_t* szDllList[] = {
 #else
 
 const wchar_t* szDllList[] = {
+#if _MSC_VER == 1800 
+	L"msvcr120.dll",
+	L"msvcp120.dll",
+#elif  			 
 	L"msvcr100.dll",
 	L"msvcp100.dll",
+#endif
 	L"zlib1.dll",
 	L"StormLib.dll",
 	L"sfmpq.dll",

@@ -69,20 +69,27 @@ INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR 
 	PathAppendW(binaryPath, L"bin");
 
 #ifdef _DEBUG
-	PathAppendW(binaryPath, L"msvcr100d.dll");
-	HMODULE msvcr100 = LoadLibraryW(binaryPath);
-
-	PathRemoveFileSpecW(binaryPath);
-	PathAppendW(binaryPath, L"msvcp100d.dll");
-	HMODULE msvcp100 = LoadLibraryW(binaryPath);
-#else
-	PathAppendW(binaryPath, L"msvcr100.dll");
-	HMODULE msvcr100 = LoadLibraryW(binaryPath);
-
-	PathRemoveFileSpecW(binaryPath);
-	PathAppendW(binaryPath, L"msvcp100.dll");
-	HMODULE msvcp100 = LoadLibraryW(binaryPath);
+#if _MSC_VER == 1800  
+	wchar_t msvcr_dll[] = L"msvcr120d.dll";
+	wchar_t msvcp_dll[] = L"msvcp120d.dll";
+#else 
+	wchar_t msvcr_dll[] = L"msvcr100d.dll";
+	wchar_t msvcp_dll[] = L"msvcp100d.dll"; 
 #endif
+#else
+#if _MSC_VER == 1800  
+	wchar_t msvcr_dll[] = L"msvcr120.dll";
+	wchar_t msvcp_dll[] = L"msvcp120.dll";
+#else 
+	wchar_t msvcr_dll[] = L"msvcr100.dll";
+	wchar_t msvcp_dll[] = L"msvcp100.dll";
+#endif
+#endif
+	PathAppendW(binaryPath, msvcr_dll);
+	HMODULE msvcr100 = LoadLibraryW(binaryPath);
+	PathRemoveFileSpecW(binaryPath);
+	PathAppendW(binaryPath, msvcp_dll);
+	HMODULE msvcp100 = LoadLibraryW(binaryPath);
 
 	// ≥¢ ‘‘ÿ»ÎYDWEStartup.dll
 	HMODULE startupModule = LoadLibraryW(L"YDWEStartup.dll");
