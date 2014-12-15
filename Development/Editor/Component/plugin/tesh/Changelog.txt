@@ -1,0 +1,34 @@
+Trigger Editor Syntax Highlighting Changelog
+
+0.7.0.4	(Unofficial update by wd40bomber7)
+	- Added all 1.24 stuff
+	* Known bug: functions new to 1.24 will not display their parameter list for some reason.
+
+0.7.0.3 (Unofficial update by Van Damm)
+	- Added 'module', 'endmodule', 'implement', 'optional' keywords.
+	- Added 'thistype' type.
+
+0.7.0.2 (Unofficial update by Zoxc)
+	- Added the 'keyword' keyword.
+
+0.7.0.1 (Unofficial update by Zoxc)
+	- Moved 'type' and 'extends' to the long keyword list.
+	- Added 'library_once', 'operator', 'defaults', 'stub' and 'delegate' keywords.
+
+0.7
+	- Much faster, large triggers now completely fold almost instantly.
+	- Fold All button.
+	- Always Fold All option for specific triggers.
+	- Saves scroll position.
+	- Bug fixes, namely Ctrl+V and Ctrl+Z are no longer passed to the trigger editor.
+	- F3 is the Find Next button now.
+	- Function list can now be merged with the trigger editor as well.
+	- All constants defined in common.j and blizzard.j can be viewed through the function list.
+	- You can import your own functions by putting a .j file with them in the includes directory.
+	- AutoComplete can be made case-insensitive.
+	- Syntax check is now possible again, no vJass support though.
+	- More color customization.
+	- Styles are now saved in a separate INI file that can easily be modified outside the program itself, you can also use this to share your own "themes".
+
+0.6
+	 -Initial DLL version.
