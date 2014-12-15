@@ -20,8 +20,8 @@ class udp_port_manager
 
 public:
 	udp_port_manager()
-		: shm_(boost::interprocess::open_or_create, "ydwe.warcraft3.port_manager", 1024)
-		, named_mtx_(boost::interprocess::open_or_create, "ydwe.warcraft3.port_manager.mutex")
+		: shm_(boost::interprocess::open_or_create, "ydwe.warcraft3.port_manager.1", 1024)
+		, named_mtx_(boost::interprocess::open_or_create, "ydwe.warcraft3.port_manager.mutex.1")
 		, port_set_(shm_.find_or_construct<shm_set>("port_set")(std::less<uint16_t>(), shm_.get_segment_manager()))
 		, self_port_(0)
 		, self_socket_(INVALID_SOCKET)
