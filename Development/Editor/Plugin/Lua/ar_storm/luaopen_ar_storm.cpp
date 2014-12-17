@@ -97,47 +97,24 @@ namespace NLuaAPI { namespace NSTORM {
 		if (!pgStormSFileLoadFile || !pgStormSFileUnloadFile)
 			return false;
 
-		boost::uint8_t *fileContentBuffer;
-		boost::uint32_t size;
-		BOOL ret = FALSE;
-
-		BOOST_SCOPE_EXIT( (&ret) (&fileContentBuffer) )
-		{
-			if (ret)
-			{
-				base::std_call<BOOL>(pgStormSFileUnloadFile, fileContentBuffer);
-			}
-		} BOOST_SCOPE_EXIT_END;
-
-		ret = base::std_call<BOOL>(pgStormSFileLoadFile, pathInMpq.c_str(), &fileContentBuffer, &size, 0, NULL);
-
-		if (ret)
-		{
-			FILE *out = NULL;
-
-			BOOST_SCOPE_EXIT( (&out) )
-			{
-				if (out)
-				{
-					fclose(out);
-				}
-			} BOOST_SCOPE_EXIT_END;
-
-			out = fopen(filePath.string().c_str(), "wb");
-			if (out)
-			{
-				fwrite(fileContentBuffer, 1, size, out);
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
+		uint8_t* buf;
+		uint32_t buf_size;
+		if (!base::std_call<BOOL>(pgStormSFileLoadFile, pathInMpq.c_str(), &buf, &buf_size, 0, NULL))
 		{
 			return false;
 		}
+
+		FILE *out = fopen(filePath.string().c_str(), "wb");
+		if (!out)
+		{
+			base::std_call<BOOL>(pgStormSFileUnloadFile, buf);
+			return false;
+		}
+
+		fwrite(buf, 1, buf_size, out);
+		fclose(out);
+		base::std_call<BOOL>(pgStormSFileUnloadFile, buf);
+		return true;
 	}
 
 	static void LuaMpqNativeLoadFile(lua_State *pState, const std::string &pathInMpq)
@@ -166,7 +143,6 @@ namespace NLuaAPI { namespace NSTORM {
 		{
 			luabind::object(pState, true).push(pState);
 			luabind::object(pState, std::string(fileContentBuffer, size)).push(pState);
-			return ;
 		}
 		else
 		{
