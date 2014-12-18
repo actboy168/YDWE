@@ -139,7 +139,7 @@ namespace base { namespace warcraft3 {
 				, current_(nullptr)
 			{ }
 
-			explicit iterator(table<Node>* ptr)
+			explicit iterator(const table<Node>* ptr)
 				: ptr_(ptr)
 				, index_(0)
 				, current_(nullptr)
@@ -188,7 +188,7 @@ namespace base { namespace warcraft3 {
 			}
 
 		private:
-			table<Node>* ptr_;
+			const table<Node>* ptr_;
 			uint32_t     index_;
 			Node*        current_;
 		};
@@ -206,12 +206,12 @@ namespace base { namespace warcraft3 {
 			typedef table_t::iterator iterator;
 			table_t table_;
 
-			iterator begin()
+			iterator begin() const
 			{
 				return iterator(&table_);
 			}
 
-			iterator end()
+			iterator end() const
 			{
 				return iterator();
 			}
