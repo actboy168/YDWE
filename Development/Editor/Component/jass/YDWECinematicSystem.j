@@ -2,13 +2,8 @@
 #define YDWECinematicSystemIncluded
 
 #include "YDWEBase.j"
-#include "AntiBJLeak/detail/GetCurrentCameraSetup.j"
 
-#ifdef USE_BJ_ANTI_LEAK
-library YDWEScriptSystem requires YDWEBase, YDWEGetCurrentCameraSetupNull
-#else
 library YDWEScriptSystem requires YDWEBase
-#endif
 
 // ****************************************************************************
 // **
@@ -17,59 +12,59 @@ library YDWEScriptSystem requires YDWEBase
 // ****************************************************************************
 globals
 //ScriptSystem
-    unit array              YDWE_cinS_actor
-    camerasetup array       YDWE_cinS_camera
-    real array              YDWE_cinS_act_moveX
-    real array              YDWE_cinS_act_moveY
-    real array              YDWE_cinS_act_moveZ
-    real array              YDWE_cinS_act_moveVX
-    real array              YDWE_cinS_act_moveVY
-    real array              YDWE_cinS_act_moveVZ
-    real array              YDWE_cinS_act_moveAZ
-    real array              YDWE_cinS_act_moveTime
-    real array              YDWE_cinS_act_turnFi
-    real array              YDWE_cinS_act_turnVFi
-    real array              YDWE_cinS_act_turnTime
-    real array              YDWE_cinS_act_colourR
-    real array              YDWE_cinS_act_colourG
-    real array              YDWE_cinS_act_colourB
-    real array              YDWE_cinS_act_colourA
-    real array              YDWE_cinS_act_colourVR
-    real array              YDWE_cinS_act_colourVG
-    real array              YDWE_cinS_act_colourVB
-    real array              YDWE_cinS_act_colourVA
-    real array              YDWE_cinS_act_colourTime
-    real array              YDWE_cinS_act_sizeS
-    real array              YDWE_cinS_act_sizeVS
-    real array              YDWE_cinS_act_sizeTime
-    real array              YDWE_cinS_cam_startval
-    real array              YDWE_cinS_cam_startvel
-    real array              YDWE_cinS_cam_accprim
-    real array              YDWE_cinS_cam_accsec
-    real array              YDWE_cinS_cam_time
-    real array              YDWE_cinS_cam_endtime
-    group array             YDWE_cinS_act_groups
-    unit                    YDWE_cinS_cam_OvRxyzUnitPrim = null
-    real array              YDWE_cinS_cam_OvRoffset
-    real                    YDWE_cinS_cam_OvRxyzTime    = 0
-    real                    YDWE_cinS_cam_OvRxyzEndtime = 0
-    real                    YDWE_cinS_cam_OvRangTime    = 0
-    real                    YDWE_cinS_cam_OvRangEndtime = 0
-    unit                    YDWE_cinS_cam_OvRxyzUnitSec = null
-    unit                    YDWE_cinS_cam_OvRangUnitPrim = null
-    unit                    YDWE_cinS_cam_OvRangUnitSec = null
-    boolean                 YDWE_cinS_cam_OvRxyzSmooth  = false
-    boolean                 YDWE_cinS_cam_OvRangSmooth  = false
-    unit                    YDWE_cinS_cam_fadeUnit      = null
-    location                YDWE_cinS_tempPoint         = null
-    boolean                 YDWE_cinS_cam_ignoreTerrain = false
-    boolean                 YDWE_cinS_displaySubtitles  = true
-    integer                 YDWE_cinS_FadeFilterUnit  = 'e000'
-    real                    YDWE_cinS_ScriptSystemPeriod = 0.02  
-    real                    YDWE_cinS_ParticlePeriod = 0.02 
-    real                    YDWE_cinS_CameraPeriod = 0.02 	
+    private unit array              YDWE_cinS_actor
+    private camerasetup array       YDWE_cinS_camera
+    private real array              YDWE_cinS_act_moveX
+    private real array              YDWE_cinS_act_moveY
+    private real array              YDWE_cinS_act_moveZ
+    private real array              YDWE_cinS_act_moveVX
+    private real array              YDWE_cinS_act_moveVY
+    private real array              YDWE_cinS_act_moveVZ
+    private real array              YDWE_cinS_act_moveAZ
+    private real array              YDWE_cinS_act_moveTime
+    private real array              YDWE_cinS_act_turnFi
+    private real array              YDWE_cinS_act_turnVFi
+    private real array              YDWE_cinS_act_turnTime
+    private real array              YDWE_cinS_act_colourR
+    private real array              YDWE_cinS_act_colourG
+    private real array              YDWE_cinS_act_colourB
+    private real array              YDWE_cinS_act_colourA
+    private real array              YDWE_cinS_act_colourVR
+    private real array              YDWE_cinS_act_colourVG
+    private real array              YDWE_cinS_act_colourVB
+    private real array              YDWE_cinS_act_colourVA
+    private real array              YDWE_cinS_act_colourTime
+    private real array              YDWE_cinS_act_sizeS
+    private real array              YDWE_cinS_act_sizeVS
+    private real array              YDWE_cinS_act_sizeTime
+    private real array              YDWE_cinS_cam_startval
+    private real array              YDWE_cinS_cam_startvel
+    private real array              YDWE_cinS_cam_accprim
+    private real array              YDWE_cinS_cam_accsec
+    private real array              YDWE_cinS_cam_time
+    private real array              YDWE_cinS_cam_endtime
+    private group array             YDWE_cinS_act_groups
+    private unit                    YDWE_cinS_cam_OvRxyzUnitPrim = null
+    private real array              YDWE_cinS_cam_OvRoffset
+    private real                    YDWE_cinS_cam_OvRxyzTime    = 0
+    private real                    YDWE_cinS_cam_OvRxyzEndtime = 0
+    private real                    YDWE_cinS_cam_OvRangTime    = 0
+    private real                    YDWE_cinS_cam_OvRangEndtime = 0
+    private unit                    YDWE_cinS_cam_OvRxyzUnitSec = null
+    private unit                    YDWE_cinS_cam_OvRangUnitPrim = null
+    private unit                    YDWE_cinS_cam_OvRangUnitSec = null
+    private boolean                 YDWE_cinS_cam_OvRxyzSmooth  = false
+    private boolean                 YDWE_cinS_cam_OvRangSmooth  = false
+    private unit                    YDWE_cinS_cam_fadeUnit      = null
+    private location                YDWE_cinS_tempPoint         = null
+    private boolean                 YDWE_cinS_cam_ignoreTerrain = false
+    private boolean                 YDWE_cinS_displaySubtitles  = true
+    private integer                 YDWE_cinS_FadeFilterUnit  = 'e000'
+    private real                    YDWE_cinS_ScriptSystemPeriod = 0.02
+    private real                    YDWE_cinS_ParticlePeriod = 0.02
+    private real                    YDWE_cinS_CameraPeriod = 0.02
 endglobals
-    
+
 function YDWEScriptSystemPeriod takes real timeout returns nothing
     set YDWE_cinS_ScriptSystemPeriod=timeout
 endfunction
@@ -87,7 +82,7 @@ function YDWEFadeFilterUnit takes integer uid returns nothing
 endfunction
 
 //===========================================================================
-//ϵͳ-ScriptSystem 
+//ϵͳ-ScriptSystem
 //===========================================================================
 
 function YDWECinSInitTempPoint takes location point returns nothing
@@ -150,12 +145,12 @@ endfunction
 // ****************************************************************************
 
 function YDWECinematicCameraEnable takes nothing returns nothing
-    local trigger t = YDWEGetTriggerByString( "Globals", "CamTrig") 
+    local trigger t = YDWEGetTriggerByString( "Globals", "CamTrig")
     call EnableTrigger(t)
     set t = null
 endfunction
 function YDWECinematicCameraDisable takes nothing returns nothing
-    local trigger t = YDWEGetTriggerByString( "Globals", "CamTrig") 
+    local trigger t = YDWEGetTriggerByString( "Globals", "CamTrig")
     call DisableTrigger(t)
     set t = null
 endfunction
@@ -299,7 +294,7 @@ function YDWECameraMainLoop takes nothing returns nothing
             set s[25] = s[25] - 360
         endif
         set s[5] = ovrFactor * s[25] + (1-ovrFactor) * s[27]
-        
+
         if YDWE_cinS_cam_OvRangTime == YDWE_cinS_cam_OvRangEndtime then
             if YDWE_cinS_cam_OvRangUnitPrim==null then
                 set YDWE_cinS_cam_OvRangUnitSec = null
@@ -606,12 +601,21 @@ endfunction
 
 function YDWECameraSystemInit takes nothing returns nothing
     local trigger t = CreateTrigger()
+    local camerasetup cs = CreateCameraSetup()
     call TriggerRegisterTimerEvent(t, YDWE_cinS_CameraPeriod, true)
     call TriggerAddAction( t, function YDWECameraMainLoop )
-    call YDWESaveTriggerByString( "Globals", "CamTrig", t )    
+    call YDWESaveTriggerByString( "Globals", "CamTrig", t )
     set t = null
-
-    call YDWEApplyCameraInstantly( YDWEGetCurrentCameraSetupNull() )
+    call CameraSetupSetField(cs, CAMERA_FIELD_TARGET_DISTANCE, GetCameraField(CAMERA_FIELD_TARGET_DISTANCE), 0)
+    call CameraSetupSetField(cs, CAMERA_FIELD_FARZ,            GetCameraField(CAMERA_FIELD_FARZ),            0)
+    call CameraSetupSetField(cs, CAMERA_FIELD_ZOFFSET,         GetCameraField(CAMERA_FIELD_ZOFFSET),         0)
+    call CameraSetupSetField(cs, CAMERA_FIELD_ANGLE_OF_ATTACK, bj_RADTODEG * GetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK), 0)
+    call CameraSetupSetField(cs, CAMERA_FIELD_FIELD_OF_VIEW,   bj_RADTODEG * GetCameraField(CAMERA_FIELD_FIELD_OF_VIEW),   0)
+    call CameraSetupSetField(cs, CAMERA_FIELD_ROLL,            bj_RADTODEG * GetCameraField(CAMERA_FIELD_ROLL),            0)
+    call CameraSetupSetField(cs, CAMERA_FIELD_ROTATION,        bj_RADTODEG * GetCameraField(CAMERA_FIELD_ROTATION),        0)
+    call CameraSetupSetDestPosition(cs, GetCameraTargetPositionX(), GetCameraTargetPositionY(), 0)
+    call YDWEApplyCameraInstantly( cs )
+    set cs = null
     call YDWEApplyFog( 10000.0, 10000.0, 0.0,0.0,0.0, 0.0 )
     set YDWE_cinS_cam_fadeUnit = CreateUnit(Player(12), YDWE_cinS_FadeFilterUnit, 0,0,0)
     call YDWEFlyEnable(YDWE_cinS_cam_fadeUnit)
@@ -735,7 +739,7 @@ function YDWEUnitMove takes unit u, real destX, real destY, real duration, real 
 
         call MoveLocation(stupid, destX, destY)
         set z = GetLocationZ(stupid)-z
-            
+
         set YDWE_cinS_act_moveVZ[i] = ((g*duration/2)+(z/duration))*YDWE_cinS_ParticlePeriod
         set YDWE_cinS_act_moveAZ[i] = (-g*YDWE_cinS_ParticlePeriod*YDWE_cinS_ParticlePeriod)
     else
@@ -1267,7 +1271,7 @@ function YDWEActorAbilityLevel takes nothing returns nothing
         call SetUnitAbilityLevel( YDWE_cinS_actor[actID], abilityID, level )
       else
         call UnitRemoveAbility( YDWE_cinS_actor[actID], abilityID )
-    endif      
+    endif
     //set g=null
 endfunction
 
