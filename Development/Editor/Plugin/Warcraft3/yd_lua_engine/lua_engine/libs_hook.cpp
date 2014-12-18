@@ -17,24 +17,24 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	class jass_hook_helper : util::noncopyable
+	class jhook_helper : util::noncopyable
 	{
 	public:
-		jass_hook_helper()
+		jhook_helper()
 			: ls_(nullptr)
-			, real_func_(0)
 			, nf_(nullptr)
 			, name_()
-			, lua_fake_func_()
+			, real_func_(0)
+			, fake_func_(0)
 			, code_base_(0)
 		{ }
 
-		~jass_hook_helper()
+		~jhook_helper()
 		{
 			uninstall();
 		}
 
-		bool install(lua::state* ls, const jass::func_value* nf, const char* name, int lua_fake_func)
+		bool install(lua::state* ls, const jass::func_value* nf, const char* name, int fake_func)
 		{
 			if (real_func_)
 			{
@@ -44,7 +44,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			ls_ = ls;
 			nf_ = nf;
 			name_ = name;
-			lua_fake_func_ = lua_fake_func;
+			fake_func_ = fake_func;
 
 			if (!code_base_)
 			{
@@ -74,20 +74,20 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return true;
 		}
 
-		static jass_hook_helper* create()
+		static jhook_helper* create()
 		{
-			jass_hook_helper* helper = reinterpret_cast<jass_hook_helper*>(_aligned_malloc(sizeof (jass_hook_helper), 32));
+			jhook_helper* helper = reinterpret_cast<jhook_helper*>(_aligned_malloc(sizeof (jhook_helper), 32));
 			if (!helper)
 			{
 				throw std::bad_alloc();
 			}
-			new(helper)jass_hook_helper();
+			new(helper)jhook_helper();
 			return helper;
 		}
 
-		static void destroy(jass_hook_helper* helper)
+		static void destroy(jhook_helper* helper)
 		{
-			helper->~jass_hook_helper();
+			helper->~jhook_helper();
 			_aligned_free(helper);
 		}
 
@@ -97,7 +97,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			jmp_code_.clear();
 
 			uintptr_t code_base = (uintptr_t)jmp_code_.data();
-			uintptr_t fake_func_addr = horrible_cast<uintptr_t>(&jass_hook_helper::fake_function);
+			uintptr_t fake_func_addr = horrible_cast<uintptr_t>(&jhook_helper::fake_function);
 			{
 				using namespace hook::assembler;
 
@@ -122,7 +122,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		static int call_real_function(lua_State* L)
 		{
 			lua::state* ls = (lua::state*)L;
-			jass_hook_helper* helper = (jass_hook_helper*)(uintptr_t)ls->tounsigned(lua_upvalueindex(1));
+			jhook_helper* helper = (jhook_helper*)(uintptr_t)ls->tounsigned(lua_upvalueindex(1));
 			return jass_call_native_function(ls, helper->nf_, helper->real_func_);
 		}
 
@@ -145,7 +145,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			ls_->pushunsigned((uint32_t)(uintptr_t)this);
 			ls_->pushcclosure((lua::cfunction)call_real_function, 1);
 
-			return safe_call_ref(ls_, lua_fake_func_, param_size + 1, nf_->get_return());
+			return safe_call_ref(ls_, fake_func_, param_size + 1, nf_->get_return());
 		} 
 
 	private:
@@ -154,11 +154,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 #pragma warning(suppress:4201 4324)
 		} ;
 
-		lua::state*             ls_;           
-		uintptr_t               real_func_;
+		lua::state*             ls_;        
 		const jass::func_value* nf_;
 		std::string             name_;
-		int                     lua_fake_func_;
+		uintptr_t               real_func_;
+		int                     fake_func_;
 		uintptr_t               code_base_;
 	};
 
@@ -169,11 +169,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		ls->pushstring(name);
 		ls->rawget(-2);
 
-		jass_hook_helper* helper = 0;
+		jhook_helper* helper = 0;
 		if (ls->isnil(-1))
 		{
 			ls->pop(1);
-			helper = jass_hook_helper::create();
+			helper = jhook_helper::create();
 			intptr_t* ud = (intptr_t*)ls->newuserdata(sizeof(intptr_t));
 			*ud = (intptr_t)helper;
 			ls->setmetatable(LUA_JASS_HOOK);
@@ -181,7 +181,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		else
 		{
 			intptr_t* ud = (intptr_t*)ls->touserdata(-1);
-			helper = (jass_hook_helper*)*ud;
+			helper = (jhook_helper*)*ud;
 		}
 		helper->install(ls, nf, name, fake_func);
 		ls->pop(1);
@@ -197,8 +197,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		if (!ls->isnil(-1))
 		{
 			intptr_t* ud = (intptr_t*)ls->touserdata(-1);
-			jass_hook_helper* helper = (jass_hook_helper*)*ud;
-			jass_hook_helper::destroy(helper);
+			jhook_helper* helper = (jhook_helper*)*ud;
+			jhook_helper::destroy(helper);
 		}
 		ls->pop(1);
 		return 0;
@@ -237,8 +237,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		lua::state* ls = (lua::state*)L;
 		intptr_t* ud = (intptr_t*)ls->touserdata(1);;
-		jass_hook_helper* helper = (jass_hook_helper*)*ud;
-		jass_hook_helper::destroy(helper);
+		jhook_helper* helper = (jhook_helper*)*ud;
+		jhook_helper::destroy(helper);
 		return 0;
 	}
 
