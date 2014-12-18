@@ -8,10 +8,9 @@ namespace slk
 {
 	namespace detail
 	{
-		template <typename ForwardIteratorT>
-		ForwardIteratorT find_begin(ForwardIteratorT InBegin, ForwardIteratorT InEnd)
+		inline std::string_view::const_iterator find_begin(std::string_view::const_iterator InBegin, std::string_view::const_iterator InEnd)
 		{
-			for (ForwardIteratorT It = InBegin; It != InEnd; ++It)
+			for (std::string_view::const_iterator It = InBegin; It != InEnd; ++It)
 			{
 				if (!isspace((unsigned char)*It))
 					return It;
@@ -20,10 +19,9 @@ namespace slk
 			return InEnd;
 		}
 
-		template <typename ForwardIteratorT>
-		ForwardIteratorT find_end(ForwardIteratorT InBegin, ForwardIteratorT InEnd)
+		inline std::string_view::const_iterator find_end(std::string_view::const_iterator InBegin, std::string_view::const_iterator InEnd)
 		{
-			for (ForwardIteratorT It = InEnd; It != InBegin; )
+			for (std::string_view::const_iterator It = InEnd; It != InBegin;)
 			{
 				if (!isspace((unsigned char)*(--It)))
 				{
@@ -37,13 +35,13 @@ namespace slk
 
 	inline void trim_left(std::string_view& Input)
 	{
-		std::string_view::iterator TrimBegin = detail::find_begin(Input.begin(), Input.end());
+		std::string_view::const_iterator TrimBegin = detail::find_begin(Input.begin(), Input.end());
 		Input.remove_prefix(std::distance(Input.begin(), TrimBegin));
 	}
 
 	inline void trim_right(std::string_view& Input)
 	{
-		std::string_view::iterator TrimEnd = detail::find_end(Input.begin(), Input.end());
+		std::string_view::const_iterator TrimEnd = detail::find_end(Input.begin(), Input.end());
 		Input.remove_suffix(std::distance(TrimEnd, Input.end()));
 	}
 
