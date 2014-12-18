@@ -232,7 +232,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-
 	int jhook_gc(lua_State *L)
 	{
 		lua::state* ls = (lua::state*)L;

@@ -7,7 +7,8 @@
 #include <base/warcraft3/jass/func_value.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/global_variable.h>
-#include <base/lua/private.h>
+#include <base/lua/private.h> 
+#include <base/lua/make_range.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
@@ -150,6 +151,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
+	int jass_pairs(lua_State* L)
+	{
+		return lua::make_range((lua::state*)L, jass::jass_function);
+	}
+
 	int jass_common(lua::state* ls)
 	{
 		ls->newtable();
@@ -162,6 +168,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 				ls->pushstring("__newindex");
 				ls->pushcclosure((lua::cfunction)jass_set, 0);
+				ls->rawset(-3);
+
+				ls->pushstring("__pairs");
+				ls->pushcclosure((lua::cfunction)jass_pairs, 0);
 				ls->rawset(-3);
 			}
 			ls->setmetatable(-2);
