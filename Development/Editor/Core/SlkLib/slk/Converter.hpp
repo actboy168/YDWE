@@ -67,4 +67,12 @@ namespace slk
 		const std::string& Convert(const std::string& str) const;
 	};
 
+	struct Converter
+	{
+		WtsConverter          wts;
+		WesConverter          wes;
+		DefaultValueConverter def_val;
+
+		Converter(InterfaceStorm& storm);
+	};
 }
