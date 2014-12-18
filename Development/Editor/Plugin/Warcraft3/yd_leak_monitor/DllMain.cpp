@@ -188,13 +188,13 @@ void create_report(std::fstream& fs)
 
 		if (jass::OPCODE_VARIABLE_HANDLE == gv.type())
 		{
-			ht.add_gv_reference((uint32_t)gv, gv.ptr()->str_);
+			ht.add_gv_reference((uint32_t)gv, gv.name());
 		}
 		else if (jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type())
 		{
 			for (uint32_t i = 0; i < gv.array_size(); ++i)
 			{
-				ht.add_gv_reference(gv[i], base::format("%s[%d]", gv.ptr()->str_, i));
+				ht.add_gv_reference(gv[i], base::format("%s[%d]", gv.name(), i));
 			}
 		}
 	}

@@ -72,6 +72,7 @@ namespace base { namespace warcraft3 { namespace jass {
 		global_variable(hashtable::variable_node* ptr);
 		hashtable::variable_node*  ptr() const;
 		OPCODE_VARIABLE_TYPE       type() const;
+		const char*                name() const;
 		bool                       is_array() const;
 		bool                       is_vaild() const;
 		operator uint32_t&         ();

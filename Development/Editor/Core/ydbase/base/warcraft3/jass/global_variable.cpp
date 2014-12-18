@@ -21,7 +21,12 @@ namespace base { namespace warcraft3 { namespace jass {
 		assert(is_vaild());
 		return static_cast<OPCODE_VARIABLE_TYPE>(ptr_->type_);
 	}
-	
+
+	const char* global_variable::name() const
+	{
+		return ptr_->str_;
+	}
+
 	bool global_variable::is_array() const
 	{
 		switch (type())
