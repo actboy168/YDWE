@@ -19,30 +19,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int  jass_hook_real_function(lua_State* L);
 
-	template <class T>
-	struct aligned_delete
-	{
-		aligned_delete()
-		{ }
-
-
-#if _MSC_VER >= 1800
-		template<class T2, class = typename std::enable_if<std::is_convertible<T2 *, T *>::value, void>::type>
-#else
-		template<class T2>
-#endif
-		aligned_delete(const aligned_delete<T2>&)
-		{ }
-
-		void operator()(T* ptr) const
-		{
-			static_assert(0 < sizeof (T),
-			"can't delete an incomplete type");
-			ptr->~T();
-			_aligned_free(ptr);
-		}
-	};
-
 	class jass_hook_helper : util::noncopyable
 	{
 		friend 	int jass_hook_real_function(lua_State* L);
@@ -103,14 +79,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		static jass_hook_helper* create()
 		{
-			jass_hook_helper* ptr = reinterpret_cast<jass_hook_helper*>(_aligned_malloc(sizeof (jass_hook_helper), 32));
-			if (!ptr)
+			jass_hook_helper* helper = reinterpret_cast<jass_hook_helper*>(_aligned_malloc(sizeof (jass_hook_helper), 32));
+			if (!helper)
 			{
 				throw std::bad_alloc();
 			}
-
-			new(ptr)jass_hook_helper();
-			return ptr;
+			new(helper)jass_hook_helper();
+			return helper;
 		}
 
 		static void destroy(jass_hook_helper* helper)
