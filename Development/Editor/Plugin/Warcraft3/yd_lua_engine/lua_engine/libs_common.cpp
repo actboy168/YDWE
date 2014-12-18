@@ -20,38 +20,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	void jass_get_global_variable(lua::state* ls, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value)
-	{
-		switch (opt)
-		{
-		case jass::OPCODE_VARIABLE_NOTHING:
-		case jass::OPCODE_VARIABLE_UNKNOWN:
-		case jass::OPCODE_VARIABLE_NULL:
-			ls->pushnil();
-			break;
-		case jass::OPCODE_VARIABLE_CODE:
-			jassbind::push_code(ls, value);
-			break;
-		case jass::OPCODE_VARIABLE_INTEGER:
-			jassbind::push_integer(ls, value);
-			break;
-		case jass::OPCODE_VARIABLE_REAL:
-			jassbind::push_real(ls, value);
-			break;
-		case jass::OPCODE_VARIABLE_STRING:
-			jassbind::push_string(ls, get_jass_vm()->string_table->get(value));
-			break;
-		case jass::OPCODE_VARIABLE_HANDLE:
-			jassbind::push_handle(ls, value);
-			break;
-		case jass::OPCODE_VARIABLE_BOOLEAN:
-			jassbind::push_boolean(ls, value);
-			break;
-		default:
-			ls->pushnil();
-			break;
-		}
-	}
+	void jass_get_global_variable(lua::state* ls, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value);
 
 	int jass_get(lua_State* L)
 	{

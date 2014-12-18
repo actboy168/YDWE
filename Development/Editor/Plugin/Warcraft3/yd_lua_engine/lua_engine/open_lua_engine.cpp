@@ -9,7 +9,8 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	int jass_common(lua::state* ls);
+	int jass_common(lua::state* ls); 
+	int jass_globals(lua::state* ls);
 	int jass_japi(lua::state* ls);
 	int jass_hook(lua::state* ls);
 	int jass_runtime(lua::state* ls);
@@ -28,6 +29,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int open_lua_engine(lua::state* ls)
 	{
 		register_preload_lib(ls, "jass.common",  jass_common);
+		register_preload_lib(ls, "jass.globals", jass_globals);
 		register_preload_lib(ls, "jass.japi",    jass_japi);
 		register_preload_lib(ls, "jass.hook",    jass_hook);
 		register_preload_lib(ls, "jass.runtime", jass_runtime);

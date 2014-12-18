@@ -173,6 +173,9 @@
     <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lzio.c">
       <Filter>lua_core</Filter>
     </ClCompile>
+    <ClCompile Include="lua_engine\libs_globals.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua_engine\lua_loader.h">
