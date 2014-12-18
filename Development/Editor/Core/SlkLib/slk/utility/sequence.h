@@ -13,7 +13,7 @@ namespace slk
 		{
 			for (ForwardIteratorT It = InBegin; It != InEnd; ++It)
 			{
-				if (!isspace(*It))
+				if (!isspace((unsigned char)*It))
 					return It;
 			}
 
@@ -25,7 +25,7 @@ namespace slk
 		{
 			for (ForwardIteratorT It = InEnd; It != InBegin; )
 			{
-				if (!isspace(*(--It)))
+				if (!isspace((unsigned char)*(--It)))
 				{
 					return ++It;
 				}
