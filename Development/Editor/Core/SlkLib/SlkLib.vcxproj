@@ -84,6 +84,7 @@
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="slk\BaseAbilityList.cpp" />
+    <ClCompile Include="slk\Converter.cpp" />
     <ClCompile Include="slk\converter\AttributeMeta.cpp" />
     <ClCompile Include="slk\converter\ConvertTable.cpp" />
     <ClCompile Include="slk\ObjectManager.cpp" />

@@ -82,6 +82,9 @@
     <ClCompile Include="slk\reader\CommonReader.cpp">
       <Filter>slk\src\reader</Filter>
     </ClCompile>
+    <ClCompile Include="slk\Converter.cpp">
+      <Filter>slk\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="slk\port\config.h">
