@@ -17,11 +17,8 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	int  jass_hook_real_function(lua_State* L);
-
 	class jass_hook_helper : util::noncopyable
 	{
-		friend 	int jass_hook_real_function(lua_State* L);
 	public:
 		jass_hook_helper()
 			: ls_(nullptr)
@@ -100,7 +97,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			jmp_code_.clear();
 
 			uintptr_t code_base = (uintptr_t)jmp_code_.data();
-			uintptr_t fake_func_addr = horrible_cast<uintptr_t>(&jass_hook_helper::fake_func);
+			uintptr_t fake_func_addr = horrible_cast<uintptr_t>(&jass_hook_helper::fake_function);
 			{
 				using namespace hook::assembler;
 
@@ -122,7 +119,14 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return code_base;
 		}
 
-		uintptr_t fake_func(const uintptr_t* paramlist)
+		static int call_real_function(lua_State* L)
+		{
+			lua::state* ls = (lua::state*)L;
+			jass_hook_helper* helper = (jass_hook_helper*)(uintptr_t)ls->tounsigned(lua_upvalueindex(1));
+			return jass_call_native_function(ls, helper->nf_, helper->real_func_);
+		}
+
+		uintptr_t fake_function(const uintptr_t* paramlist)
 		{
 			size_t param_size = nf_->get_param().size();
 
@@ -139,7 +143,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			}
 
 			ls_->pushunsigned((uint32_t)(uintptr_t)this);
-			ls_->pushcclosure((lua::cfunction)jass_hook_real_function, 1);
+			ls_->pushcclosure((lua::cfunction)call_real_function, 1);
 
 			return safe_call_ref(ls_, lua_fake_func_, param_size + 1, nf_->get_return());
 		} 
@@ -157,14 +161,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		int                     lua_fake_func_;
 		uintptr_t               code_base_;
 	};
-
-	int jass_hook_real_function(lua_State* L)
-	{
-		lua::state* ls = (lua::state*)L;
-		jass_hook_helper* h = (jass_hook_helper*)(uintptr_t)ls->tounsigned(lua_upvalueindex(1));
-
-		return jass_call_native_function(ls, h->nf_, h->real_func_);
-	}
 
 #define LUA_JASS_HOOK "jhook_t"
 	int install_jass_hook(lua::state* ls, const jass::func_value* nf, const char* name, int fake_func)
