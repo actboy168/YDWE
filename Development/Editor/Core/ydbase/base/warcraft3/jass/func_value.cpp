@@ -1,7 +1,8 @@
 #include <base/warcraft3/jass/func_value.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/hashtable.h>
-#include <base/warcraft3/jass.h>
+#include <base/warcraft3/jass.h>	
+#include <base/util/do_once.h>
 #include <map>
 #include <string>
 
@@ -142,17 +143,23 @@ namespace base { namespace warcraft3 { namespace jass {
 		return jass::call(address_, param_list, param_.size());
 	}
 
+	func_mapping jass_function;
+	func_mapping japi_function;
+
 	func_value const* jass_func(const char* proc_name)
 	{
-		static func_mapping m = detail::initialize_mapping_from_register();
-
 		if (!proc_name)
 		{
 			return nullptr;
 		}
 
-		auto it = m.find(proc_name);
-		if (it != m.end() && it->second.is_valid())
+		DO_ONCE_NOTHREADSAFE()
+		{
+			jass_function = detail::initialize_mapping_from_register();
+		}
+
+		auto it = jass_function.find(proc_name);
+		if (it != jass_function.end() && it->second.is_valid())
 		{
 			return &(it->second);
 		}
@@ -160,7 +167,6 @@ namespace base { namespace warcraft3 { namespace jass {
 		return nullptr;
 	}
 
-	func_mapping japi_function;
 
 	func_value const* japi_func(const char* proc_name)
 	{

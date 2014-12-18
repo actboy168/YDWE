@@ -50,6 +50,7 @@ namespace base { namespace warcraft3 { namespace jass {
 	};
 
 	typedef std::unordered_map<std::string, func_value> func_mapping;
+	_BASE_API extern func_mapping jass_function;
 	_BASE_API extern func_mapping japi_function;
 
 	_BASE_API func_value const* jass_func(const char* proc_name);
