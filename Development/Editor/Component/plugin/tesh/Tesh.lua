@@ -3,7 +3,7 @@ require "sys"
 local loader = {}
 	
 loader.load = function(path)
-	if global_config["ThirdPartyPlugin"]["EnableTesh"] ~= "1" then
+	if global_config["ThirdPartyPlugin"]["EnableTesh"] == "0" then
 		log.warn('failed: diable')
 		return false
 	end
