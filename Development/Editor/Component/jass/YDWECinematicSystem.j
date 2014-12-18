@@ -112,7 +112,8 @@ function YDWECameraSetupAssign takes camerasetup cs, integer actID returns nothi
     set YDWE_cinS_camera[actID] = cs
 endfunction
 
-function YDWEActorAssign takes unit u, integer actID returns nothing
+function YDWEActorCreate takes player p, integer actID, integer unitType returns nothing
+    local unit u = CreateUnit(p, unitType, 0.0, 0.0, 0.0)
     call SetUnitUserData(u, actID)
     call YDWEFlyEnable(u)
     set YDWE_cinS_actor[actID] = u
@@ -120,22 +121,7 @@ function YDWEActorAssign takes unit u, integer actID returns nothing
     set YDWE_cinS_act_colourG[actID] = 100.0
     set YDWE_cinS_act_colourB[actID] = 100.0
     set YDWE_cinS_act_colourA[actID] = 100.0
-endfunction
-
-function YDWEActorCreate takes player p, integer actID, integer unitType returns unit
-    local unit u = CreateUnit(p, unitType, 0.0, 0.0, 0.0)
-    local integer h = YDWEH2I(u)
-    call YDWEActorAssign(u, actID)
     set u = null
-    return u
-endfunction
-
-function YDWEInitCinematicSystem takes nothing returns nothing
-    set YDWE_cinS_tempPoint=Location(0.0,0.0)
-    call ExecuteFunc("YDWEScriptSystemInit")
-    call ExecuteFunc("YDWECameraSystemInit")
-    call ExecuteFunc("YDWEParticleInit")
-    call ExecuteFunc("YDWESubtitlesInit")
 endfunction
 
 // ****************************************************************************
@@ -2012,6 +1998,14 @@ function YDWEScriptSystemInit takes nothing returns nothing
     call TriggerRegisterTimerEvent(t, YDWE_cinS_ScriptSystemPeriod, true)
     call TriggerAddAction( t, function YDWEScriptInterpreter )
     set t = null
+endfunction
+
+function YDWEInitCinematicSystem takes nothing returns nothing
+    set YDWE_cinS_tempPoint=Location(0.0,0.0)
+    call YDWEScriptSystemInit()
+    call YDWECameraSystemInit()
+    call YDWEParticleInit()
+    call YDWESubtitlesInit()
 endfunction
 
 endlibrary
