@@ -140,25 +140,26 @@ function sys.spawn (command_line, current_dir, wait)
 end
 
 function sys.ini_load (path)
-	local f = io.open(path, "r")
+	local f, e = io.open(path, "r")
+	if not f then
+		return nil, e
+	end
 	local tbl = {}
 	local section = nil
-	if f then
-		for line in f:lines() do
-			if string.sub(line,1,1) == "[" then
-				section = string.trim(string.sub(line, 2, string.len(line) - 1 ))
-				tbl[section] = setmetatable({}, {__index = function () return '' end })
-			else
-				if string.trim(line) ~= "" then
-					local key = string.trim(string.sub(line, 1, string.find(line, "=") - 1))
-					local value = string.trim(string.sub(line, string.find(line, "=") + 1))
-					tbl[section][key] = value or ""
-				end
+	for line in f:lines() do
+		if string.sub(line,1,1) == "[" then
+			section = string.trim(string.sub(line, 2, string.len(line) - 1 ))
+			tbl[section] = {}
+		else
+			if string.trim(line) ~= "" then
+				local key = string.trim(string.sub(line, 1, string.find(line, "=") - 1))
+				local value = string.trim(string.sub(line, string.find(line, "=") + 1))
+				tbl[section][key] = value or ""
 			end
 		end
-		f:close()
 	end
-	return setmetatable(tbl, {__index = function () return '' end })
+	f:close()
+	return tbl
 end
 
 function sys.ini_save (path, tbl)
