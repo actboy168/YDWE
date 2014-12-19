@@ -310,7 +310,7 @@ namespace locvar
 
 	bool trigger_data(DWORD This, DWORD OutClass, const char* name)
 	{
-		if (global.mother_id != CC_GUIID_YDWETimerStartMultiple)
+		if ((global.mother_id != CC_GUIID_YDWETimerStartMultiple) && (global.mother_id != (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple)))
 		{
 			return false;
 		}
