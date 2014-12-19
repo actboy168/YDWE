@@ -125,8 +125,6 @@ event.register(event.EVENT_SAVE_MAP, false, function (event_data)
 
 	-- 获取保存类型
 	local save_type = tonumber(global_config["MapSave"]["Option"])
-	local save_option = global_config["ScriptInjection"]["Option"]
-	if save_option == "" then save_option = "1" end
 
 	-- 获取保存选项
 	local save_option = {
@@ -143,7 +141,7 @@ event.register(event.EVENT_SAVE_MAP, false, function (event_data)
 		-- 目标魔兽版本
 		runtime_version = determine_map_version(save_type, war3_version),
 		-- 代码注入选项
-		script_injection = tonumber(save_option),
+		script_injection = tonumber(global_config["ScriptInjection"]["Option"]),
 		-- 是否启用YDTrigger
 		enable_yd_trigger = plugin.loaders['YDTrigger'] ~= nil
 	}
