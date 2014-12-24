@@ -1279,7 +1279,7 @@ ExplodeDontDont=0,explodedontoption,false,WESTRING_EXPLODEDONTOPTION_DONT
 
 // SuspendResume Option
 SuspendResumeSuspend=0,suspendresumeoption,true,WESTRING_SUSPENDRESUMEOPTION_SUSPEND
-SuspendResumeResume=0,suspendresumeoption,true,WESTRING_SUSPENDRESUMEOPTION_RESUME
+SuspendResumeResume=0,suspendresumeoption,false,WESTRING_SUSPENDRESUMEOPTION_RESUME
 
 SuspendResumeSuspend_R=0,suspendresumeoption_R,true,WESTRING_SUSPENDRESUMEOPTION_SUSPEND
 SuspendResumeResume_R=0,suspendresumeoption_R,false,WESTRING_SUSPENDRESUMEOPTION_RESUME

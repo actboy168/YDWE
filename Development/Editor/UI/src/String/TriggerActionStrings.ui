@@ -378,7 +378,7 @@ UnitSuspendDecayHint="只对已完成死亡动作的尸体有效."
 
 UnitSuspendDecayBJ="暂停尸体腐烂"
 UnitSuspendDecayBJ=~Suspend/Resume," 尸体腐烂对 ",~单位
-UnitSuspendDecayBJHint="只对已完成死亡动作的尸体有效. 该函数有Bug,不能恢复尸体腐烂状态,请使用新加函数."
+UnitSuspendDecayBJHint="只对已完成死亡动作的尸体有效."
 
 UnitResetCooldown="重置技能CD"
 UnitResetCooldown="重置 ",~单位," 的所有技能冷却时间"
@@ -3780,7 +3780,7 @@ UnitUseItemDestructableHint=
 
 BJDebugMsg="显示Debug消息 [C]"
 BJDebugMsg="显示Debug信息: ",~文字
-BJDebugMsgHint="对玩家发送持续60秒的信息. 一般用于地图调试.  (不会被记录在录象中)"
+BJDebugMsgHint="对玩家发送持续60秒的信息. 一般用于地图调试."
 
 DisplayTextToPlayer="对玩家显示文本消息(自动限时) [R]"
 DisplayTextToPlayer="对 ",~玩家," 在屏幕位移(",~X,",",~Y,")处显示文本: ",~文字

@@ -6672,7 +6672,7 @@ WESTRING_AEVAL_NST5=伤害延迟
 WESTRING_AEVAL_NCL1=施法持续时间  
 WESTRING_AEVAL_NCL1_HINT=单位在施放技能后的暂停时间，一般只有引导技能才需要
 WESTRING_AEVAL_NCL2=目标类型                                                       
-WESTRING_AEVAL_NCL2_HINT="没有:被动技能;无目标:点击后直接施放;单位目标:点击技能后需指定一个单位施放;点目标:需指定地面一点施放"
+WESTRING_AEVAL_NCL2_HINT="没有:无效选项;无目标:点击后直接施放;单位目标:点击技能后需指定一个单位施放;点目标:需指定地面一点施放"
 WESTRING_AEVAL_NCL3=选项                                                   
 WESTRING_AEVAL_NCL3_HINT="目标选取图像:勾选后使用该技能的准星会变成一个圆面;单独施放:当你施放该技能时，你选中的单位只有一个施放."
 WESTRING_AEVAL_NCL4=动作持续时间
@@ -6823,7 +6823,7 @@ WESTRING_GEVAL_GINH_HINT=转移单位所属同时能使玩家获得该单位的�
 WESTRING_GEVAL_GREQ=需求
 WESTRING_GEVAL_GRQC=需求值
 WESTRING_GEVAL_GRAC=种族
-WESTRING_GEVAL_GLOB=应用于所有单位
+WESTRING_GEVAL_GLOB=只应用于之后生产的单位
 
 // Upgrade Effect Fields
 WESTRING_EEVAL_ATDB=攻击骰子数奖励 - 基础
