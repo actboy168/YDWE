@@ -89,9 +89,6 @@
     <ClCompile Include="..\src\lua.c" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="luabind.vcxproj">
-      <Project>{506832ce-f522-43d8-867d-5c97a9d6552a}</Project>
-    </ProjectReference>
     <ProjectReference Include="luacore.vcxproj">
       <Project>{b84f7231-16ce-41d8-8c08-7b523ff4225b}</Project>
     </ProjectReference>
