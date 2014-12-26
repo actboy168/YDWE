@@ -1,13 +1,13 @@
 #include "jassbind.h"
 #include "class_array.h"
 #include "libs_runtime.h"
-#include "common.h"
+#include "common.h"	   
+#include "allow_yield.h"
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/jass/func_value.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/global_variable.h>
-#include <base/lua/private.h> 
 #include <base/lua/make_range.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {

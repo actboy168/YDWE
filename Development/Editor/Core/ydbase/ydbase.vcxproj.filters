@@ -239,9 +239,6 @@
     <ClCompile Include="base\warcraft3\command_line.cpp">
       <Filter>base\warcraft3</Filter>
     </ClCompile>
-    <ClCompile Include="base\lua\private.cpp">
-      <Filter>base\lua</Filter>
-    </ClCompile>
     <ClCompile Include="base\win\font\file.cpp">
       <Filter>base\win\font</Filter>
     </ClCompile>
@@ -520,9 +517,6 @@
     </ClInclude>
     <ClInclude Include="base\win\registry\predefined_keys.h">
       <Filter>base\win\registry</Filter>
-    </ClInclude>
-    <ClInclude Include="base\lua\private.h">
-      <Filter>base\lua</Filter>
     </ClInclude>
     <ClInclude Include="base\util\string_view.h">
       <Filter>base\util</Filter>

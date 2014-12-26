@@ -176,6 +176,9 @@
     <ClCompile Include="lua_engine\libs_globals.cpp">
       <Filter>lua_engine\library</Filter>
     </ClCompile>
+    <ClCompile Include="lua_engine\allow_yield.cpp">
+      <Filter>lua_engine\main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua_engine\lua_loader.h">
@@ -273,6 +276,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lzio.h">
       <Filter>lua_core</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\allow_yield.h">
+      <Filter>lua_engine\main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

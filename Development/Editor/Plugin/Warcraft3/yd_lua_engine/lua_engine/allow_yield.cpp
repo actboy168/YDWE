@@ -1,4 +1,4 @@
-#include <base/lua/private.h>
+#include "allow_yield.h"
 
 extern "C" {
 #include <lstate.h>

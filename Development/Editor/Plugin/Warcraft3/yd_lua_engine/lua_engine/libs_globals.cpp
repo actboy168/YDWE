@@ -7,7 +7,6 @@
 #include <base/warcraft3/jass/func_value.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/global_variable.h>
-#include <base/lua/private.h> 
 #include <base/lua/make_range.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {

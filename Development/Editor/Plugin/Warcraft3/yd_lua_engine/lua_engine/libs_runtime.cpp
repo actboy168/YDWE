@@ -1,7 +1,8 @@
 #include <base/lua/state.h>
-#include <base/util/console.h>
+#include <base/util/console.h> 
 #include <cstring>
-#include "libs_runtime.h"
+#include "libs_runtime.h" 
+#include "allow_yield.h"
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
@@ -218,6 +219,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		else if (strcmp("sleep", name) == 0)
 		{
 			ls->pushboolean(runtime::sleep);
+			return 1;
+		}
+		else if (strcmp("can_sleep", name) == 0)
+		{
+			ls->pushboolean(runtime::sleep && lua::allow_yield(ls));
 			return 1;
 		}
 		else if (strcmp("catch_crash", name) == 0)
