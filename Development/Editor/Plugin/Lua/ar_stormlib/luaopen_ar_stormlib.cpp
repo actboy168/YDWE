@@ -360,7 +360,7 @@ namespace NLuaAPI { namespace NMPQ {
 
 		~FindFile()
 		{
-			if (find_) SListFileFindClose(find_);
+			close();
 		}
 
 		bool start(HANDLE mpq)
@@ -374,6 +374,15 @@ namespace NLuaAPI { namespace NMPQ {
 			if (!find_) return false;
 			return SListFileFindNextFile(find_, &sfd_);
 		}
+
+		bool close()
+		{
+			if (!find_) return false; 
+			if (!SListFileFindClose(find_)) return false;
+			find_ = 0;
+			return true;
+		}
+
 		std::string current()
 		{
 			if (!find_) return std::string();
@@ -435,6 +444,7 @@ int luaopen_ar_stormlib(lua_State *pState)
 				.def("start",   &NLuaAPI::NMPQ::FindFile::start)
 				.def("next",    &NLuaAPI::NMPQ::FindFile::next)
 				.def("current", &NLuaAPI::NMPQ::FindFile::current)
+				.def("close",   &NLuaAPI::NMPQ::FindFile::close)
 		]
 	];
 
