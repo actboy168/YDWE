@@ -216,35 +216,6 @@ namespace NLuaAPI { namespace NMPQ {
 			);
 	}
 
-// 	static void *LuaMpqStormLibCreateFile(void *mpqHandle, const char *fileName, const NMPIR::mpir_integer &fileTimeMpir, boost::uint32_t fileSize, boost::uint32_t locale, boost::uint32_t flag)
-// 	{
-// 		HANDLE fileHandle;
-// 		mpz_class fileTimeBigInt(fileTimeMpir.get_mpz_class());
-// 		LARGE_INTEGER fileTime;
-// 
-// 		fileTime.LowPart = mpz_class(fileTimeBigInt & 0xFFFFFFFFU).get_ui();
-// 		fileTime.HighPart = mpz_class(fileTimeBigInt >> 32).get_ui();
-// 
-// 		BOOST_STATIC_ASSERT(sizeof(fileTime) == sizeof(FILETIME));
-// 
-// 		bool ret = SFileCreateFile(
-// 			reinterpret_cast<HANDLE>(mpqHandle),
-// 			fileName,
-// 			fileTime.QuadPart,
-// 			fileSize,
-// 			locale,
-// 			flag,
-// 			&fileHandle
-// 			);
-// 
-// 		if (!ret)
-// 		{
-// 			fileHandle = 0;
-// 		}
-// 
-// 		return fileHandle;
-// 	}
-
 	static bool LuaMpqStormLibWriteFile(void *fileHandle, const std::string &data, boost::uint32_t compression)
 	{
 		return SFileWriteFile(
@@ -343,7 +314,6 @@ namespace NLuaAPI { namespace NMPQ {
 		return SFileVerifyArchive(reinterpret_cast<HANDLE>(mpqHandle));
 	}
 
-
 	static void LuaMpqStormLibLoadFile(lua_State *pState, void* mpqHandle, const std::string &pathInMpq)
 	{
 		try
@@ -379,6 +349,41 @@ namespace NLuaAPI { namespace NMPQ {
 
 		luabind::object(pState, false).push(pState);
 	}
+
+	class FindFile
+	{
+	public:
+		FindFile()
+			: find_(0)
+			, sfd_()
+		{ }
+
+		~FindFile()
+		{
+			if (find_) SListFileFindClose(find_);
+		}
+
+		bool start(HANDLE mpq)
+		{
+			find_ = SListFileFindFirstFile(mpq, 0, "*", &sfd_);
+			return !!find_;
+		}
+
+		bool next()
+		{
+			if (!find_) return false;
+			return SListFileFindNextFile(find_, &sfd_);
+		}
+		std::string current()
+		{
+			if (!find_) return std::string();
+			return std::string(sfd_.cFileName);
+		}
+		
+	private:
+		HANDLE find_;
+		SFILE_FIND_DATA sfd_;
+	};
 }}
 
 int luaopen_ar_stormlib(lua_State *pState)
@@ -411,7 +416,6 @@ int luaopen_ar_stormlib(lua_State *pState)
 			def("add_file",               &NLuaAPI::NMPQ::LuaMpqStormLibAddFile),
 			def("add_wave",               &NLuaAPI::NMPQ::LuaMpqStormLibAddWave),
 			def("add_file_ex",            &NLuaAPI::NMPQ::LuaMpqStormLibAddFileEx),
-			//def("create_file",            &NLuaAPI::NMPQ::LuaMpqStormLibCreateFile),
 			def("write_file",             &NLuaAPI::NMPQ::LuaMpqStormLibWriteFile),
 			def("finish_file",            &NLuaAPI::NMPQ::LuaMpqStormLibFinishFile),
 			def("set_file_locale",        &NLuaAPI::NMPQ::LuaMpqStormLibSetFileLocale),
@@ -424,7 +428,13 @@ int luaopen_ar_stormlib(lua_State *pState)
 			def("flush_archive",          &NLuaAPI::NMPQ::LuaMpqStormLibFlushArchive),
 			def("verify_file",            &NLuaAPI::NMPQ::LuaMpqStormLibVerifyFile),
 			def("verify_archive",         &NLuaAPI::NMPQ::LuaMpqStormLibVerifyArchive),
-			def("load_file",              &NLuaAPI::NMPQ::LuaMpqStormLibLoadFile)
+			def("load_file",              &NLuaAPI::NMPQ::LuaMpqStormLibLoadFile),
+
+			class_<NLuaAPI::NMPQ::FindFile>("findfile")
+				.def(constructor<>())
+				.def("start",   &NLuaAPI::NMPQ::FindFile::start)
+				.def("next",    &NLuaAPI::NMPQ::FindFile::next)
+				.def("current", &NLuaAPI::NMPQ::FindFile::current)
 		]
 	];
 
