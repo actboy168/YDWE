@@ -1,6 +1,9 @@
 #include <base/util/console.h>
 #include <windows.h>
-#include <cstdio>
+#include <cstdio>	
+#include <thread>
+#include <base/lockfree/queue.h>  
+#include <boost/atomic/atomic.hpp>
 
 namespace base { namespace console {
 
@@ -21,7 +24,7 @@ namespace base { namespace console {
 			freopen_s(&new_file, "CONOUT$", "w", stderr);
 		}
 	}
-
+	
 	void disable()
 	{
 		::ShowWindow(::GetConsoleWindow(), SW_HIDE);
@@ -42,5 +45,55 @@ namespace base { namespace console {
 	void pause()
 	{
 		system("pause");
+	}
+
+
+	lockfree::queue<read_req_t*> queue;
+	boost::atomic_bool reading(false);
+
+	DWORD CALLBACK async_read_thread(void* data)
+	{
+		read_req_t* req = (read_req_t*)data;
+		DWORD read_bytes = 0;
+		if (::ReadConsoleW(req->handle, req->buffer, sizeof(req->buffer) / sizeof(req->buffer[0]) - 1, &read_bytes, NULL))
+		{
+			req->buffer[read_bytes] = L'\0';
+			req->overlapped.Internal = 0;
+			req->overlapped.InternalHigh = read_bytes;
+		}
+		else
+		{
+			req->overlapped.Internal = (ULONG_PTR)::GetLastError();
+		}
+		queue.push(req);
+		reading = false;
+		return 0;
+	}
+
+	bool read_post()
+	{
+		if (reading) return false;
+		console::read_req_t* req = new console::read_req_t;
+		req->handle = ::GetStdHandle(STD_INPUT_HANDLE);
+		bool suc = !!QueueUserWorkItem(async_read_thread, (void*)req, WT_EXECUTELONGFUNCTION);
+		if (suc)
+		{
+			reading = true;
+		}
+		else
+		{
+			delete req;
+		}
+		return suc;
+	}
+
+	bool read_try(read_req_t*& req)
+	{
+		return queue.try_pop(req);
+	}
+
+	void read_release(read_req_t* req)
+	{
+		delete req;
 	}
 }}

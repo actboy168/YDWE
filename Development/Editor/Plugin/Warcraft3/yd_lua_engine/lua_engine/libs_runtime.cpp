@@ -1,8 +1,10 @@
 #include <base/lua/state.h>
-#include <base/util/console.h> 
+#include <base/util/console.h>
+#include <base/util/unicode.h> 
 #include <cstring>
 #include "libs_runtime.h" 
 #include "allow_yield.h"
+#include "callback.h"
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
@@ -234,6 +236,28 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		return 0;
 	}
+	
+	int jass_runtime_console_read(lua::state* ls)
+	{
+		console::read_post();
+
+		console::read_req_t* req = 0;
+		if (console::read_try(req))
+		{
+			if (req->overlapped.Internal == 0)
+			{
+				if (ls->isfunction(1))
+				{
+					std::string temp_string = util::w2u(std::wstring_view(req->buffer, req->overlapped.InternalHigh), util::conv_method::replace | '?');
+					ls->pushvalue(1);
+					ls->pushlstring(temp_string.c_str(), temp_string.size());
+					safe_call(ls, 1, 0, true);
+				}
+			}
+			console::read_release(req);
+		}
+		return 0;
+	}
 
 	int jass_runtime(lua::state* ls)
 	{
@@ -250,6 +274,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				ls->rawset(-3);
 			}
 			ls->setmetatable(-2);
+
+			ls->pushstring("console_read");
+			ls->pushcclosure(jass_runtime_console_read, 0);
+			ls->rawset(-3);
+
 		}
 		return 1;
 	}
