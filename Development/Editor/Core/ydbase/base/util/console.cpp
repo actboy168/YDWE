@@ -2,8 +2,8 @@
 #include <windows.h>
 #include <cstdio>	
 #include <thread>
-#include <base/lockfree/queue.h>  
-#include <boost/atomic/atomic.hpp>
+#include <base/lockfree/queue.h> 
+#include <base/thread/lock/spin.h>
 
 namespace base { namespace console {
 
@@ -49,7 +49,7 @@ namespace base { namespace console {
 
 
 	lockfree::queue<read_req_t*> queue;
-	boost::atomic_bool reading(false);
+	lock::spin<> reading;
 
 	DWORD CALLBACK async_read_thread(void* data)
 	{
@@ -66,23 +66,20 @@ namespace base { namespace console {
 			req->overlapped.Internal = (ULONG_PTR)::GetLastError();
 		}
 		queue.push(req);
-		reading = false;
+		reading.unlock();
 		return 0;
 	}
 
 	bool read_post()
 	{
-		if (reading) return false;
+		if (!reading.try_lock()) return false;
 		console::read_req_t* req = new console::read_req_t;
 		req->handle = ::GetStdHandle(STD_INPUT_HANDLE);
 		bool suc = !!QueueUserWorkItem(async_read_thread, (void*)req, WT_EXECUTELONGFUNCTION);
-		if (suc)
-		{
-			reading = true;
-		}
-		else
+		if (!suc)
 		{
 			delete req;
+			reading.unlock();
 		}
 		return suc;
 	}
