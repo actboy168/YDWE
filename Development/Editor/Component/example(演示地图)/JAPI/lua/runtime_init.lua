@@ -1,9 +1,11 @@
-local runtime = require "jass.runtime"
+local console = require "jass.console"
 
 -- 开启一个调试窗口，用于显示调试信息，正式的版本请去掉。
 -- 注：若在本文件内有语法错误，这行代码就不会被执行，语法错误也无法显示。所以
 --    需要在一切都开始前，执行它；并确保本文件内没有错误。
-runtime.console = true
+console.enable = true
+
+local runtime = require "jass.runtime"
 
 -- 注册错误回调函数，当执行lua发生错误时，会调用此函数。
 -- 注：注册此函数会略微增加运行时消耗（即使没有发生错误）。
