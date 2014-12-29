@@ -1,10 +1,8 @@
 #include <base/lua/state.h>
 #include <base/util/console.h>
-#include <base/util/unicode.h> 
 #include <cstring>
 #include "libs_runtime.h" 
 #include "allow_yield.h"
-#include "callback.h"
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
@@ -12,14 +10,14 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		int  version = 2;
 		int  handle_level = 2;
-		bool console = false;
+		bool enable_console = false;
 		bool sleep = true;
 		bool catch_crash = true;
 
 		void initialize()
 		{
 			handle_level = 2;
-			console = false;
+			enable_console = false;
 			sleep = true;
 			catch_crash = true;
 		}
@@ -156,6 +154,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
+
 	int jass_runtime_set(lua_State* L)
 	{
 		lua::state* ls = (lua::state*)L;
@@ -171,8 +170,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		else if (strcmp("console", name) == 0)
 		{
-			runtime::console = !!ls->toboolean(3);
-			if (runtime::console)
+			runtime::enable_console = !!ls->toboolean(3);
+			if (runtime::enable_console)
 			{
 				console::enable();
 				console::disable_close_button();
@@ -215,7 +214,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		else if (strcmp("console", name) == 0)
 		{
-			ls->pushboolean(runtime::console);
+			ls->pushboolean(runtime::enable_console);
 			return 1;
 		}
 		else if (strcmp("sleep", name) == 0)
@@ -236,28 +235,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		return 0;
 	}
-	
-	int jass_runtime_console_read(lua::state* ls)
-	{
-		console::read_post();
-
-		console::read_req_t* req = 0;
-		if (console::read_try(req))
-		{
-			if (req->overlapped.Internal == 0)
-			{
-				if (ls->isfunction(1))
-				{
-					std::string temp_string = util::w2u(std::wstring_view(req->buffer, req->overlapped.InternalHigh), util::conv_method::replace | '?');
-					ls->pushvalue(1);
-					ls->pushlstring(temp_string.c_str(), temp_string.size());
-					safe_call(ls, 1, 0, true);
-				}
-			}
-			console::read_release(req);
-		}
-		return 0;
-	}
 
 	int jass_runtime(lua::state* ls)
 	{
@@ -274,11 +251,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				ls->rawset(-3);
 			}
 			ls->setmetatable(-2);
-
-			ls->pushstring("console_read");
-			ls->pushcclosure(jass_runtime_console_read, 0);
-			ls->rawset(-3);
-
 		}
 		return 1;
 	}

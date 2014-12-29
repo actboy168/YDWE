@@ -4,8 +4,8 @@
 #include "class_real.h"
 #include "class_array.h"
 #include "class_handle.h"
-#include <base/util/console.h>
-
+#include <base/util/console.h> 
+#include <base/util/unicode.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
@@ -16,6 +16,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int jass_runtime(lua::state* ls);
 	int jass_slk(lua::state* ls);
 	int jass_storm(lua::state* ls);
+	int jass_console(lua::state* ls);
 	int fix_math(lua::state* ls);
 
 	void register_preload_lib(lua::state* ls, const char *name, lua::cfunction f)
@@ -35,6 +36,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		register_preload_lib(ls, "jass.runtime", jass_runtime);
 		register_preload_lib(ls, "jass.slk",     jass_slk);
 		register_preload_lib(ls, "jass.storm",   jass_storm);
+		register_preload_lib(ls, "jass.console", jass_console);
 
 		jreal_make_mt(ls->self());
 		jhandle_ud_make_mt(ls->self());

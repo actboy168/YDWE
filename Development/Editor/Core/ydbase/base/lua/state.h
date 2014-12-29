@@ -409,6 +409,11 @@ namespace base { namespace lua {
 		{
 			return lua_pcallk(self(), nargs, nresults, errfunc, 0, NULL);
 		}
+
+		inline void call(int nargs, int nresults)
+		{
+			return lua_callk(self(), nargs, nresults, 0, NULL);
+		}
 		
 		inline void requiref(const char *modname, cfunction openf, int glb)
 		{

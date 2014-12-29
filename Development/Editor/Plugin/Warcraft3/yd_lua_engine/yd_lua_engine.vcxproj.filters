@@ -179,6 +179,9 @@
     <ClCompile Include="lua_engine\allow_yield.cpp">
       <Filter>lua_engine\main</Filter>
     </ClCompile>
+    <ClCompile Include="lua_engine\libs_console.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua_engine\lua_loader.h">
