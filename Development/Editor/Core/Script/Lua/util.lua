@@ -150,6 +150,7 @@ function sys.ini_load (path)
 		if string.sub(line,1,1) == "[" then
 			section = string.trim(string.sub(line, 2, string.len(line) - 1 ))
 			tbl[section] = {}
+		elseif string.sub(line,1,2) == "//" then
 		else
 			if string.trim(line) ~= "" then
 				local key = string.trim(string.sub(line, 1, string.find(line, "=") - 1))
