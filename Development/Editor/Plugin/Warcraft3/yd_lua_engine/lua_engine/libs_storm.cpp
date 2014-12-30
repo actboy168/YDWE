@@ -9,7 +9,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int storm_load(lua::state* ls)
 	{
-		const char* path = ls->tostring(1);
+		size_t path_size = 0;
+		const char* path = ls->tolstring(1, &path_size);
 
 		if (!path)
 		{
@@ -17,10 +18,19 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
+		std::string path_ansi;
+		try {
+			path_ansi = util::u2a(std::string_view(path, path_size), util::conv_method::stop);
+		}
+		catch (...) {
+			ls->pushnil();
+			return 1;
+		}
+
 		const void* buf_data = nullptr;
 		size_t      buf_size = 0;
 		storm&s = storm_s::instance();
-		if (!s.load_file(path, &buf_data, &buf_size))
+		if (!s.load_file(path_ansi.c_str(), &buf_data, &buf_size))
 		{
 			ls->pushnil();
 			return 1;
