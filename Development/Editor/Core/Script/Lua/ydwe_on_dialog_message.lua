@@ -1,6 +1,5 @@
-require "westrings"
-
-local WESTRING_MODIFYTEXTURES = westrings['WESTRING_MODIFYTEXTURES']
+local wes = sys.ini_load((fs.ydwe_path() / "share" / "mpq" / "ydwe" / "ui" / "worldeditstrings.txt"):string())
+local WESTRING_MODIFYTEXTURES = wes['WorldEditStrings']['WESTRING_MODIFYTEXTURES']
 local tiledialog = 0
 
 event.register(event.EVENT_DIALOG_MESSAGE, false, function (event_data)
