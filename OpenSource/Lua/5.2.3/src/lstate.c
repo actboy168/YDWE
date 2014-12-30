@@ -330,7 +330,7 @@ LUA_API lua_State *lua_newstate2 (lua_Alloc f, void *ud, unsigned int seed) {
 	g->frealloc = f;
 	g->ud = ud;
 	g->mainthread = L;
-	g->seed = (seed != 0 ? seed: makeseed(L));
+	g->seed = seed;
 	g->uvhead.u.l.prev = &g->uvhead;
 	g->uvhead.u.l.next = &g->uvhead;
 	g->gcrunning = 0;  /* no GC while building state */
