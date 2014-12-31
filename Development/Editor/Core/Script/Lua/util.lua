@@ -147,16 +147,15 @@ function sys.ini_load (path)
 	local tbl = {}
 	local section = nil
 	for line in f:lines() do
+		line = string.trim(line)
 		if string.sub(line,1,1) == "[" then
 			section = string.trim(string.sub(line, 2, string.len(line) - 1 ))
 			tbl[section] = {}
 		elseif string.sub(line,1,2) == "//" then
-		else
-			if string.trim(line) ~= "" then
-				local key = string.trim(string.sub(line, 1, string.find(line, "=") - 1))
-				local value = string.trim(string.sub(line, string.find(line, "=") + 1))
-				tbl[section][key] = value or ""
-			end
+		elseif line ~= "" then
+			local key = string.trim(string.sub(line, 1, string.find(line, "=") - 1))
+			local value = string.trim(string.sub(line, string.find(line, "=") + 1))
+			tbl[section][key] = value or ""
 		end
 	end
 	f:close()
