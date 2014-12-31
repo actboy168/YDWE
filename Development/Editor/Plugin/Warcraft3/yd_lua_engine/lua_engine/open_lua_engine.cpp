@@ -27,6 +27,23 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		ls->pop(1);
 	}
 
+	int fix_os(lua::state* ls)
+	{
+		ls->getglobal("os");
+		if (ls->istable(-1))
+		{
+			ls->pushstring("execute");   ls->pushnil(); ls->rawset(-3);
+			ls->pushstring("exit");      ls->pushnil(); ls->rawset(-3);
+			ls->pushstring("getenv");    ls->pushnil(); ls->rawset(-3);
+			ls->pushstring("remove");    ls->pushnil(); ls->rawset(-3);
+			ls->pushstring("rename");    ls->pushnil(); ls->rawset(-3);
+			ls->pushstring("setlocale"); ls->pushnil(); ls->rawset(-3);
+			ls->pushstring("tmpname");   ls->pushnil(); ls->rawset(-3);
+		}
+		ls->pop(1);
+		return 0;
+	}
+
 	int open_lua_engine(lua::state* ls)
 	{
 		register_preload_lib(ls, "jass.common",  jass_common);
@@ -45,6 +62,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		insert_searchers_table(ls);
 		fix_math(ls);
+		fix_os(ls);
 
 		return 0;
 	}

@@ -49,6 +49,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			ls->requiref(LUA_BITLIBNAME,  (lua::cfunction)luaopen_bit32, 1);     ls->pop(1);
 			ls->requiref(LUA_MATHLIBNAME, (lua::cfunction)luaopen_math, 1);      ls->pop(1);
 			ls->requiref(LUA_DBLIBNAME,   (lua::cfunction)luaopen_debug, 1);     ls->pop(1);
+			ls->requiref(LUA_OSLIBNAME,   (lua::cfunction)luaopen_os, 1);        ls->pop(1);
 			
 			return 1;
 		}
