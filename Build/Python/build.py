@@ -16,8 +16,11 @@ class RedirectLog:
         self.__logfile.close()
         
     def write(self, s):
-        self.__logfile.write(s)
-        self.__stdout.write(s)
+        try:
+            self.__logfile.write(s)
+            self.__stdout.write(s)
+        except:
+            pass
 
 def Log():
     logname = 'build.log'
