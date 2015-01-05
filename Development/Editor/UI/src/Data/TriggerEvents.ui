@@ -74,7 +74,7 @@ _TriggerRegisterLeaveRegion_Category=TC_UNIT
 
 TriggerRegisterUnitInRangeSimple=0,real,unit
 _TriggerRegisterUnitInRangeSimple_Defaults=256,_
-_TriggerRegisterUnitInRangeSimple_Defaults=0,_,_,_
+_TriggerRegisterUnitInRangeSimple_Limits=0,_,_,_
 _TriggerRegisterUnitInRangeSimple_Category=TC_UNIT
 
 TriggerRegisterUnitLifeEvent=0,unit,limitop,real
