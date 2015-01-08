@@ -152,7 +152,7 @@ DllModule::DllModule()
 
 void DllModule::ThreadStart()
 {
-	daemon_thread_.reset(new base::thread(boost::bind(&DllModule::ThreadFunc, this)));
+	daemon_thread_.reset(new base::thread(std::bind(&DllModule::ThreadFunc, this)));
 }
 
 void DllModule::ThreadStop()
