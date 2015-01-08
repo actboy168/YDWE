@@ -61,11 +61,12 @@ namespace NLuaAPI { namespace NMPQ {
 		return SFileGetLocale();
 	}
 
-	static int32_t LuaMpqStormLibAddListFile(void *mpqHandle, const char *listFile)
+	static int32_t LuaMpqStormLibAddListFile(void *mpqHandle, const std::wstring& wlistFile)
 	{
+		std::string listFile = base::util::w2a(wlistFile, base::util::conv_method::replace | '?');
 		return SFileAddListFile(
 			reinterpret_cast<HANDLE>(mpqHandle),
-			listFile
+			listFile.c_str()
 			);
 	}
 
@@ -79,36 +80,22 @@ namespace NLuaAPI { namespace NMPQ {
 		return SFileSetAttributes(reinterpret_cast<HANDLE>(mpqHandle), flags);
 	}
 
-	static bool LuaMpqStormLibUpdateFileAttributes(void *mpqHandle, const char *file)
+	static bool LuaMpqStormLibUpdateFileAttributes(void *mpqHandle, const std::wstring& wfile)
 	{
+		std::string file = base::util::w2a(wfile, base::util::conv_method::replace | '?');
 		return SFileUpdateFileAttributes(
 			reinterpret_cast<HANDLE>(mpqHandle),
-			file
+			file.c_str()
 			);
 	}
 
-	static bool LuaMpqStormLibOpenPatchArchive(void *mpqHandle, const char *patchMpqName, const char *patchPathPrefix, boost::uint32_t flags)
+	static void *LuaMpqStormLibOpenFileEx(void *mpqHandle, const std::wstring& wfilename, boost::uint32_t searchScope)
 	{
-		return SFileOpenPatchArchive(
-			reinterpret_cast<HANDLE>(mpqHandle),
-			patchMpqName,
-			patchPathPrefix,
-			flags
-			);
-	}
-
-	static bool LuaMpqStormLibIsPatchedArchive(void *mpqHandle)
-	{
-		return SFileIsPatchedArchive(reinterpret_cast<HANDLE>(mpqHandle));
-	}
-
-	static void *LuaMpqStormLibOpenFileEx(void *mpqHandle, const char *fileName, boost::uint32_t searchScope)
-	{
+		std::string filename = base::util::w2a(wfilename, base::util::conv_method::replace | '?');
 		HANDLE fileHandle;
-
 		bool ret = SFileOpenFileEx(
 			reinterpret_cast<HANDLE>(mpqHandle),
-			fileName,
+			filename.c_str(),
 			searchScope,
 			&fileHandle
 			);
@@ -172,44 +159,36 @@ namespace NLuaAPI { namespace NMPQ {
 		return SFileCloseFile(reinterpret_cast<HANDLE>(fileHandle));
 	}
 
-	static void LuaMpqStormLibGetFileName(lua_State *pState, void *fileHandle)
+	static bool LuaMpqStormLibAddFile(void *mpqHandle, const fs::path &srcPath, const std::wstring& wpathinmpq, boost::uint32_t flags)
 	{
-		char buffer[MAX_PATH];
-
-		bool result = SFileGetFileName(reinterpret_cast<HANDLE>(fileHandle), buffer);
-		if (result)
-			lua_pushfstring(pState, "%s", buffer);
-		else
-			lua_pushnil(pState);
-	}
-
-	static bool LuaMpqStormLibAddFile(void *mpqHandle, const fs::path &srcPath, const std::string &pathInMpq, boost::uint32_t flags)
-	{
+		std::string pathinmpq = base::util::w2a(wpathinmpq, base::util::conv_method::replace | '?');
 		return SFileAddFile(
 			reinterpret_cast<HANDLE>(mpqHandle),
 			srcPath.string().c_str(),
-			pathInMpq.c_str(),
+			pathinmpq.c_str(),
 			flags
 			);
 	}
 
-	static bool LuaMpqStormLibAddWave(void *mpqHandle, const fs::path &srcPath, const std::string &pathInMpq, boost::uint32_t flags, boost::uint32_t quality)
+	static bool LuaMpqStormLibAddWave(void *mpqHandle, const fs::path &srcPath, const std::wstring& wpathinmpq, boost::uint32_t flags, boost::uint32_t quality)
 	{
+		std::string pathinmpq = base::util::w2a(wpathinmpq, base::util::conv_method::replace | '?');
 		return SFileAddWave(
 			reinterpret_cast<HANDLE>(mpqHandle),
 			srcPath.string().c_str(),
-			pathInMpq.c_str(),
+			pathinmpq.c_str(),
 			flags,
 			quality
 			);
 	}
 
-	static bool LuaMpqStormLibAddFileEx(void *mpqHandle, const fs::path &srcPath, const std::string &pathInMpq, boost::uint32_t flags, boost::uint32_t compression, boost::uint32_t compressionNext)
+	static bool LuaMpqStormLibAddFileEx(void *mpqHandle, const fs::path &srcPath, const std::wstring& wpathinmpq, boost::uint32_t flags, boost::uint32_t compression, boost::uint32_t compressionNext)
 	{
+		std::string pathinmpq = base::util::w2a(wpathinmpq, base::util::conv_method::replace | '?');
 		return SFileAddFileEx(
 			reinterpret_cast<HANDLE>(mpqHandle),
 			srcPath.string().c_str(),
-			pathInMpq.c_str(),
+			pathinmpq.c_str(),
 			flags,
 			compression,
 			compressionNext
@@ -241,50 +220,54 @@ namespace NLuaAPI { namespace NMPQ {
 		return SFileSetDataCompression(compression);
 	}
 
-	static bool LuaMpqStormLibRemoveFile(void *mpqHandle, const std::string &pathInMpq, boost::uint32_t searchScope)
+	static bool LuaMpqStormLibRemoveFile(void *mpqHandle, const std::wstring &wpathinmpq, boost::uint32_t searchScope)
 	{
+		std::string pathinmpq = base::util::w2a(wpathinmpq, base::util::conv_method::replace | '?');
 		return SFileRemoveFile(
 			reinterpret_cast<HANDLE>(mpqHandle),
-			pathInMpq.c_str(),
+			pathinmpq.c_str(),
 			searchScope
 			);
 	}
 
-	static bool LuaMpqStormLibRenameFile(void *mpqHandle, const std::string &oldPathInMpq, const std::string &newPathInMpq)
+	static bool LuaMpqStormLibRenameFile(void *mpqHandle, const std::wstring &woldpathinmpq, const std::wstring & wnewpathinmpq)
 	{
+		std::string oldpathinmpq = base::util::w2a(woldpathinmpq, base::util::conv_method::replace | '?');
+		std::string newpathinmpq = base::util::w2a(wnewpathinmpq, base::util::conv_method::replace | '?');
 		return SFileRenameFile(
 			reinterpret_cast<HANDLE>(mpqHandle),
-			oldPathInMpq.c_str(),
-			newPathInMpq.c_str()
+			oldpathinmpq.c_str(),
+			newpathinmpq.c_str()
 			);
 	}
 
-	static bool LuaMpqStormLibExtractFile(void *mpqHandle, const fs::path &filePath, const std::string &pathInMpq)
+	static bool LuaMpqStormLibExtractFile(void *mpqHandle, const fs::path &filePath, const std::wstring& wpathinmpq)
 	{
+		std::string pathinmpq = base::util::w2a(wpathinmpq, base::util::conv_method::replace | '?');
 		return SFileExtractFile(
 			reinterpret_cast<HANDLE>(mpqHandle),
-			pathInMpq.c_str(),
+			pathinmpq.c_str(),
 			filePath.string().c_str(),
 			SFILE_OPEN_FROM_MPQ 
 			);
 	}
 
-	static bool LuaMpqStormLibHasFile(void *mpqHandle, const std::string &pathInMpq)
+	static bool LuaMpqStormLibHasFile(void *mpqHandle, const std::wstring& wpathinmpq)
 	{
+		std::string pathinmpq = base::util::w2a(wpathinmpq, base::util::conv_method::replace | '?');
 		return SFileHasFile(
 			reinterpret_cast<HANDLE>(mpqHandle),
-			const_cast<char *>(pathInMpq.c_str())
+			pathinmpq.c_str()
 			);
 	}
 
 	static bool LuaMpqStormLibCompactArchive(void *mpqHandle, const luabind::object &listFile)
 	{
-		boost::optional<std::string> optListFile;
-
+		boost::optional<std::wstring> optListFile = luabind::object_cast_nothrow<std::wstring>(listFile);
 		return SFileCompactArchive(
 			reinterpret_cast<HANDLE>(mpqHandle),
-			(optListFile = luabind::object_cast_nothrow<std::string>(listFile))
-			? optListFile->c_str()
+			(optListFile)
+			? base::util::w2a(*optListFile, base::util::conv_method::replace | '?').c_str() 
 			: NULL,
 			0
 			);
@@ -304,9 +287,10 @@ namespace NLuaAPI { namespace NMPQ {
 			);
 	}
 
-	static boost::uint32_t LuaMpqStormLibVerifyFile(void *mpqHandle, const char *fileName, boost::uint32_t flags)
+	static boost::uint32_t LuaMpqStormLibVerifyFile(void *mpqHandle, const std::wstring& wfilename, boost::uint32_t flags)
 	{
-		return SFileVerifyFile(reinterpret_cast<HANDLE>(mpqHandle), fileName, flags);
+		std::string filename = base::util::w2a(wfilename, base::util::conv_method::replace | '?');
+		return SFileVerifyFile(reinterpret_cast<HANDLE>(mpqHandle), filename.c_str(), flags);
 	}
 
 	static boost::uint32_t LuaMpqStormLibVerifyArchive(void *mpqHandle)
@@ -314,12 +298,13 @@ namespace NLuaAPI { namespace NMPQ {
 		return SFileVerifyArchive(reinterpret_cast<HANDLE>(mpqHandle));
 	}
 
-	static void LuaMpqStormLibLoadFile(lua_State *pState, void* mpqHandle, const std::string &pathInMpq)
+	static void LuaMpqStormLibLoadFile(lua_State *pState, void* mpqHandle, const std::wstring& wpathinmpq)
 	{
 		try
 		{
+			std::string pathinmpq = base::util::w2a(wpathinmpq, base::util::conv_method::replace | '?');
 			HANDLE fileHandle = NULL;
-			BOOL ret = SFileOpenFileEx(reinterpret_cast<HANDLE>(mpqHandle), pathInMpq.c_str(), 0, &fileHandle);
+			BOOL ret = SFileOpenFileEx(reinterpret_cast<HANDLE>(mpqHandle), pathinmpq.c_str(), 0, &fileHandle);
 
 			BOOST_SCOPE_EXIT( (ret) (&fileHandle) )
 			{
@@ -383,10 +368,10 @@ namespace NLuaAPI { namespace NMPQ {
 			return true;
 		}
 
-		std::string current()
+		std::wstring current()
 		{
-			if (!find_) return std::string();
-			return std::string(sfd_.cFileName);
+			if (!find_) return std::wstring();
+			return base::util::a2w(sfd_.cFileName, base::util::conv_method::replace | '?');
 		}
 		
 	private:
@@ -413,14 +398,11 @@ int luaopen_ar_stormlib(lua_State *pState)
 			def("get_attributes",         &NLuaAPI::NMPQ::LuaMpqStormLibGetAttributes),
 			def("set_attributes",         &NLuaAPI::NMPQ::LuaMpqStormLibSetAttributes),
 			def("update_file_attributes", &NLuaAPI::NMPQ::LuaMpqStormLibUpdateFileAttributes),
-			def("open_patch_archive",     &NLuaAPI::NMPQ::LuaMpqStormLibOpenPatchArchive),
-			def("is_patched_archive",     &NLuaAPI::NMPQ::LuaMpqStormLibIsPatchedArchive),
 			def("open_file_ex",           &NLuaAPI::NMPQ::LuaMpqStormLibOpenFileEx),
 			def("get_file_size",          &NLuaAPI::NMPQ::LuaMpqStormLibGetFileSize),
 			def("set_file_pointer",       &NLuaAPI::NMPQ::LuaMpqStormLibSetFilePointer),
 			def("read_file",              &NLuaAPI::NMPQ::LuaMpqStormLibReadFile),
 			def("close_file",             &NLuaAPI::NMPQ::LuaMpqStormLibCloseFile),
-			def("get_file_name",          &NLuaAPI::NMPQ::LuaMpqStormLibGetFileName),
 			def("remove_file",            &NLuaAPI::NMPQ::LuaMpqStormLibRemoveFile),
 			def("add_file",               &NLuaAPI::NMPQ::LuaMpqStormLibAddFile),
 			def("add_wave",               &NLuaAPI::NMPQ::LuaMpqStormLibAddWave),

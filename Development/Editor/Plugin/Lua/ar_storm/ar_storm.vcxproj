@@ -92,6 +92,11 @@
   <ItemGroup>
     <None Include="ar_storm.def" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">
+      <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

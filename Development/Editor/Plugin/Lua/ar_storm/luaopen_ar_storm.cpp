@@ -5,7 +5,8 @@
 #pragma warning(pop)
 #include <boost/filesystem.hpp>
 #include <boost/scope_exit.hpp>
-#include <base/hook/fp_call.h>
+#include <base/hook/fp_call.h>	
+#include <base/util/unicode.h>
 #include <Windows.h>
 
 namespace fs = boost::filesystem;
@@ -92,14 +93,15 @@ namespace NLuaAPI { namespace NSTORM {
 		return !!base::std_call<BOOL>(pgStormSFileExists, pathInMpq.c_str());
 	}
 
-	static bool LuaMpqNativeExtractFile(const fs::path &filePath, const std::string &pathInMpq)
+	static bool LuaMpqNativeExtractFile(const fs::path &filePath, const std::wstring &wpathinmpq)
 	{
 		if (!pgStormSFileLoadFile || !pgStormSFileUnloadFile)
 			return false;
 
+		std::string pathinmpq = base::util::w2a(wpathinmpq, base::util::conv_method::replace | '?');
 		uint8_t* buf;
 		uint32_t buf_size;
-		if (!base::std_call<BOOL>(pgStormSFileLoadFile, pathInMpq.c_str(), &buf, &buf_size, 0, NULL))
+		if (!base::std_call<BOOL>(pgStormSFileLoadFile, pathinmpq.c_str(), &buf, &buf_size, 0, NULL))
 		{
 			return false;
 		}
@@ -117,7 +119,7 @@ namespace NLuaAPI { namespace NSTORM {
 		return true;
 	}
 
-	static void LuaMpqNativeLoadFile(lua_State *pState, const std::string &pathInMpq)
+	static void LuaMpqNativeLoadFile(lua_State *pState, const std::wstring &wpathinmpq)
 	{
 		if (!pgStormSFileLoadFile || !pgStormSFileUnloadFile)
 		{
@@ -125,11 +127,11 @@ namespace NLuaAPI { namespace NSTORM {
 			return ;
 		}
 
+		std::string pathinmpq = base::util::w2a(wpathinmpq, base::util::conv_method::replace | '?');
 		char* fileContentBuffer;
 		uint32_t size;
 		BOOL ret = FALSE;
-
-		ret = base::std_call<BOOL>(pgStormSFileLoadFile, pathInMpq.c_str(), &fileContentBuffer, &size, 0, NULL);
+		ret = base::std_call<BOOL>(pgStormSFileLoadFile, pathinmpq.c_str(), &fileContentBuffer, &size, 0, NULL);
 
 		BOOST_SCOPE_EXIT( (&ret) (&fileContentBuffer) )
 		{

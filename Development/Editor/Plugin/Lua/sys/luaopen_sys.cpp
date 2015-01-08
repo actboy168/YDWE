@@ -121,9 +121,9 @@ namespace NLuaAPI { namespace NSys {
 		FreeLibrary((HMODULE)lib);
 	}
 
-	static void *LuaShellExecute(const std::string &cmd)
+	static void *LuaShellExecute(const std::wstring &cmd)
 	{
-		return ShellExecuteA(NULL, 0, cmd.c_str(), 0, 0, SW_SHOW);
+		return ShellExecuteW(NULL, 0, cmd.c_str(), 0, 0, SW_SHOW);
 	}
 
 	static void LuaGetVersionNumberString(lua_State *pState, const fs::path &module)
