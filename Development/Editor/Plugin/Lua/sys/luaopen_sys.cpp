@@ -310,17 +310,11 @@ int luaopen_sys(lua_State *pState)
 			.def("close",       &base::win::process::close)
 		,
 
-		// Hack functions
 		def("open_pipe", &NLuaAPI::NSys::LuaOpenPipe),
-		def("system", &system),
-
 		def("load_library", &NLuaAPI::NSys::LuaLoadLibrary),
 		def("unload_library", &NLuaAPI::NSys::LuaUnloadLibrary),
-
-		// Misc
 		def("shell_execute", &NLuaAPI::NSys::LuaShellExecute),
 		def("get_module_version_info", &NLuaAPI::NSys::LuaGetVersionNumberString),
-		
 		def("get_clipboard_text", &NLuaAPI::NSys::LuaSysGetClipboardText),
 		def("set_clipboard_text", &NLuaAPI::NSys::LuaSysSetClipboardText)
 	];
