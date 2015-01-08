@@ -7,7 +7,8 @@
 #include <boost/filesystem.hpp>
 #include <boost/optional.hpp>
 #include <cstdint>
-#include <array>
+#include <array>   
+#include <map>
 
 namespace base { namespace warcraft3 { namespace virtual_mpq {
 
@@ -38,6 +39,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 
 	namespace filesystem
 	{
+		std::map<std::string, watch_cb>	                   watch_map;
 		std::array<std::list<boost::filesystem::path>, 16> mpq_path;
 
 		void* SMemAlloc(size_t amount)
@@ -45,7 +47,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 			return base::std_call<void*>(real::SMemAlloc, amount, ".\\SFile.cpp", 4072, 0);
 		}
 
-		boost::optional<boost::filesystem::path> find_file(const char* filename)
+		boost::optional<boost::filesystem::path> find_file(const std::string& filename)
 		{
 			for (uint32_t priority = 15; priority != 0; --priority)
 			{
@@ -68,38 +70,62 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 			return true;
 		}
 
-		bool SFileLoadFile(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
+		bool try_watch(const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
+		{
+			std::string ifilename(filename.size(), 0);
+			std::transform(filename.begin(), filename.end(), ifilename.begin(), ::towlower);
+			auto it = watch_map.find(ifilename);
+			if (it == watch_map.end())
+			{
+				return false;
+			}
+			if (!it->second(ifilename, buffer_ptr, size_ptr, reserve_size))
+			{
+				return false;
+			}
+			return true;
+		}
+
+		bool try_open_path(const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
+		{
+			boost::optional<boost::filesystem::path> file_path = find_file(filename);
+			if (!file_path)
+			{
+				return false;
+			}
+			std::string buf = base::file::read_stream(file_path.get()).read<std::string>();
+			void* result = SMemAlloc(buf.size() + reserve_size);
+			if (!result)
+			{
+				return false;
+			}
+			memcpy(result, buf.data(), buf.size());
+			*buffer_ptr = result;
+			if (reserve_size) memset((unsigned char*)result + buf.size(), 0, reserve_size);
+			if (size_ptr) *size_ptr = buf.size();
+			return true;
+		}
+
+		bool SFileLoadFile(const char* szfilename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
 		{
 			try {
-				if (!buffer_ptr)
+				if (!buffer_ptr || !szfilename)
 				{
 					return false;
 				}
-
-				boost::optional<boost::filesystem::path> file_path = find_file(filename);
-				if (!file_path)
+				std::string filename = szfilename;
+				if (!try_watch(filename, buffer_ptr, size_ptr, reserve_size))
 				{
-					return false;
+					if (!try_open_path(filename, buffer_ptr, size_ptr, reserve_size))
+					{
+						return false;
+					}
 				}
-
-				std::string buf = base::file::read_stream(file_path.get()).read<std::string>();
-				void* result = SMemAlloc(buf.size() + reserve_size);
-				if (!result)
-				{
-					return false;
-				}
-
-				memcpy(result, buf.data(), buf.size());
-				*buffer_ptr = result;
-				if (reserve_size) memset((unsigned char*)result + buf.size(), 0, reserve_size);
-				if (size_ptr) *size_ptr = buf.size();
 				if (overlapped_ptr && overlapped_ptr->hEvent) ::SetEvent(overlapped_ptr->hEvent);
-
 				return true;
 
 			}
 			catch (...) {}
-
 			return false;
 		}
 
@@ -232,16 +258,6 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		//}
 	}
 
-	bool open_path(const boost::filesystem::path& p, uint32_t priority)
-	{
-		if (!boost::filesystem::exists(p))
-		{
-			return false;
-		}
-
-		return filesystem::open_path(p, priority);
-	}
-
 	bool initialize(HMODULE module_handle)
 	{
 		bool result = true;
@@ -269,5 +285,27 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 #undef 	IAT_HOOK
 
 		return result;
+	}
+
+	bool open_path(const boost::filesystem::path& p, uint32_t priority)
+	{
+		if (!boost::filesystem::exists(p))
+		{
+			return false;
+		}
+
+		return filesystem::open_path(p, priority);
+	}
+
+	void* storm_alloc(size_t n)
+	{
+		return filesystem::SMemAlloc(n);
+	}
+
+	void watch(const std::string& filename, watch_cb callback)
+	{
+		std::string ifilename(filename.size(), 0);
+		std::transform(filename.begin(), filename.end(), ifilename.begin(), ::towlower);
+		filesystem::watch_map[ifilename] = callback;
 	}
 }}}
