@@ -3,7 +3,8 @@
 #include <luabind/luabind.hpp>
 #include <base/lua/luabind.h>
 #pragma warning(pop)
-#include <base/exception/windows_exception.h>
+#include <base/exception/windows_exception.h>  
+#include <base/util/unicode.h>
 #include <Windows.h>
 #include <cstdint>
 #include "resource.h"
@@ -17,33 +18,33 @@ namespace NLuaAPI { namespace NGUI {
 		return CreateMenu();
 	}
 
-	static bool LuaGuiAppendMenu(void *hMenu, uint32_t flag, UINT_PTR newItemId, const char *newItemName)
+	static bool LuaGuiAppendMenu(void *hMenu, uint32_t flag, UINT_PTR newItemId, const std::wstring& newItemName)
 	{
-		return !! AppendMenuA(
+		return !! AppendMenuW(
 			reinterpret_cast<HMENU>(hMenu),
 			flag,
 			newItemId,
-			newItemName);
+			newItemName.c_str());
 	}
 
-	static bool LuaGuiInsertMenu(void *hMenu, uint32_t position, uint32_t flag, UINT_PTR newItemId, const char *newItemName)
+	static bool LuaGuiInsertMenu(void *hMenu, uint32_t position, uint32_t flag, UINT_PTR newItemId, const std::wstring& newItemName)
 	{
-		return !! InsertMenuA(
+		return !! InsertMenuW(
 			reinterpret_cast<HMENU>(hMenu),
 			position,
 			flag,
 			newItemId,
-			newItemName);
+			newItemName.c_str());
 	}
 
-	static bool LuaGuiModifyMenu(void *hMenu, uint32_t position, uint32_t flag, UINT_PTR newItemId, const char *newItemName)
+	static bool LuaGuiModifyMenu(void *hMenu, uint32_t position, uint32_t flag, UINT_PTR newItemId, const std::wstring& newItemName)
 	{
-		return !! ModifyMenuA(
+		return !! ModifyMenuW(
 			reinterpret_cast<HMENU>(hMenu),
 			position,
 			flag,
 			newItemId,
-			newItemName);
+			newItemName.c_str());
 	}
 
 	static bool LuaGuiDeleteMenu(void *hMenu, uint32_t position, uint32_t flag)
@@ -102,13 +103,13 @@ namespace NLuaAPI { namespace NGUI {
 		return GetSubMenu(reinterpret_cast<HMENU>(hMenu), position);
 	}
 
-	typedef boost::tuple<lua_State *, std::string, std::string,
-		std::string, std::string, std::string> TInputDialogInitInfo;
+	typedef boost::tuple<lua_State *, std::wstring, std::wstring,
+		std::wstring, std::wstring, std::wstring> TInputDialogInitInfo;
 
 	struct SInputInfo
 	{
 		bool isOkClicked;
-		char text[128 * 1024];
+		wchar_t text[128 * 1024];
 	};
 
 	static INT_PTR CALLBACK PromptForInputDialogProc(HWND dialogHandle, UINT message, WPARAM wParam, LPARAM lParam)
@@ -121,11 +122,11 @@ namespace NLuaAPI { namespace NGUI {
 			// Text initialization
 			TInputDialogInitInfo *pInfo = reinterpret_cast<TInputDialogInitInfo *>(lParam);
 
-			SetWindowTextA(dialogHandle, pInfo->get<1>().c_str());
-			SetDlgItemTextA(dialogHandle, IDC_PROMPT, pInfo->get<2>().c_str());
-			SetDlgItemTextA(dialogHandle, IDC_EDIT_CONTENT, pInfo->get<3>().c_str());
-			SetDlgItemTextA(dialogHandle, IDOK, pInfo->get<4>().c_str());
-			SetDlgItemTextA(dialogHandle, IDCANCEL, pInfo->get<5>().c_str());
+			SetWindowTextW(dialogHandle, pInfo->get<1>().c_str());
+			SetDlgItemTextW(dialogHandle, IDC_PROMPT, pInfo->get<2>().c_str());
+			SetDlgItemTextW(dialogHandle, IDC_EDIT_CONTENT, pInfo->get<3>().c_str());
+			SetDlgItemTextW(dialogHandle, IDOK, pInfo->get<4>().c_str());
+			SetDlgItemTextW(dialogHandle, IDCANCEL, pInfo->get<5>().c_str());
 		}
 		// Clicked button
 		else if (message == WM_COMMAND)
@@ -140,7 +141,7 @@ namespace NLuaAPI { namespace NGUI {
 				if (pInfo)
 				{
 					pInfo->isOkClicked = (id == IDOK);
-					GetDlgItemTextA(dialogHandle, IDC_EDIT_CONTENT, pInfo->text, sizeof(pInfo->text));
+					GetDlgItemTextW(dialogHandle, IDC_EDIT_CONTENT, pInfo->text, sizeof(pInfo->text));
 				}
 
 				EndDialog(dialogHandle, reinterpret_cast<INT_PTR>(pInfo));
@@ -154,7 +155,7 @@ namespace NLuaAPI { namespace NGUI {
 			if (pInfo)
 			{
 				pInfo->isOkClicked = false;
-				GetDlgItemTextA(dialogHandle, IDC_EDIT_CONTENT, pInfo->text, sizeof(pInfo->text));
+				GetDlgItemTextW(dialogHandle, IDC_EDIT_CONTENT, pInfo->text, sizeof(pInfo->text));
 			}
 
 			EndDialog(dialogHandle, reinterpret_cast<INT_PTR>(pInfo));
@@ -168,7 +169,7 @@ namespace NLuaAPI { namespace NGUI {
 		return result;
 	}
 
-	static void LuaGuiPromptForInput(lua_State *pState, void *parentWindowHandle, const std::string &caption, const std::string &prompt, const std::string &initialText, const std::string &okCaption, const std::string &cancelCaption)
+	static void LuaGuiPromptForInput(lua_State *pState, void *parentWindowHandle, const std::wstring &caption, const std::wstring &prompt, const std::wstring &initialText, const std::wstring &okCaption, const std::wstring &cancelCaption)
 	{
 		TInputDialogInitInfo dialogInitInfo(
 			pState, caption, prompt, initialText, okCaption, cancelCaption
@@ -189,20 +190,20 @@ namespace NLuaAPI { namespace NGUI {
 		else
 		{
 			luabind::object(pState, (bool)pInputInfo->isOkClicked).push(pState);
-			luabind::object(pState, pInputInfo->text).push(pState);
+			luabind::object(pState, std::wstring(pInputInfo->text)).push(pState);
 			free(pInputInfo);
 		}
 	}
 
-	static void LuaGuiChooseOpenFile(lua_State *pState, void *ownerWindow, const std::string &strFilter, const std::string &initialFile, const luabind::object &initialDir, const luabind::object &dialogTitle)
+	static void LuaGuiChooseOpenFile(lua_State *pState, void *ownerWindow, const std::wstring &strFilter, const std::wstring &initialFile, const luabind::object &initialDir, const luabind::object &dialogTitle)
 	{
-		boost::optional<std::string> optInitialDir, optTitle;
-		char buffer[MAX_PATH], fileTitle[MAX_PATH];
-		OPENFILENAMEA ofn;
+		boost::optional<std::wstring> optInitialDir, optTitle;
+		wchar_t buffer[MAX_PATH], fileTitle[MAX_PATH];
+		OPENFILENAMEW ofn;
 		BOOL result;
 
 		memset(&ofn, 0, sizeof(ofn));
-		strcpy_s(buffer, sizeof(buffer), initialFile.c_str());
+		wcscpy_s(buffer, sizeof(buffer), initialFile.c_str());
 
 		ofn.lStructSize = sizeof(ofn);
 		ofn.hwndOwner = reinterpret_cast<HWND>(ownerWindow);
@@ -212,21 +213,21 @@ namespace NLuaAPI { namespace NGUI {
 		ofn.nMaxFile = sizeof(buffer);
 		ofn.lpstrFileTitle = fileTitle;
 		ofn.nMaxFileTitle = sizeof(fileTitle);
-		ofn.lpstrInitialDir = (optInitialDir = luabind::object_cast_nothrow<std::string>(initialDir))
+		ofn.lpstrInitialDir = (optInitialDir = luabind::object_cast_nothrow<std::wstring>(initialDir))
 			? optInitialDir->c_str()
 			: NULL;
-		ofn.lpstrTitle = (optTitle = luabind::object_cast_nothrow<std::string>(dialogTitle))
+		ofn.lpstrTitle = (optTitle = luabind::object_cast_nothrow<std::wstring>(dialogTitle))
 			? optTitle->c_str()
 			: NULL;
 		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
-		result = GetOpenFileNameA(&ofn);
+		result = GetOpenFileNameW(&ofn);
 
 		lua_pushboolean(pState, result);
 		if (result)
 		{
-			lua_pushfstring(pState, "%s", buffer);
-			lua_pushfstring(pState, "%s", fileTitle);
+			luabind::object(pState, std::wstring(buffer)).push(pState);
+			luabind::object(pState, std::wstring(fileTitle)).push(pState);
 		}
 		else
 		{
@@ -235,15 +236,15 @@ namespace NLuaAPI { namespace NGUI {
 		}
 	}
 
-	static void LuaGuiChooseSaveFile(lua_State *pState, void *ownerWindow, const std::string &strFilter, const std::string &initialFile, const luabind::object &initialDir, const luabind::object &dialogTitle)
+	static void LuaGuiChooseSaveFile(lua_State *pState, void *ownerWindow, const std::wstring &strFilter, const std::wstring &initialFile, const luabind::object &initialDir, const luabind::object &dialogTitle)
 	{
-		boost::optional<std::string> optInitialDir, optTitle;
-		char buffer[MAX_PATH], fileTitle[MAX_PATH];
-		OPENFILENAMEA ofn;
+		boost::optional<std::wstring> optInitialDir, optTitle;
+		wchar_t buffer[MAX_PATH], fileTitle[MAX_PATH];
+		OPENFILENAMEW ofn;
 		BOOL result;
 
 		memset(&ofn, 0, sizeof(ofn));
-		strcpy_s(buffer, sizeof(buffer), initialFile.c_str());
+		wcscpy_s(buffer, sizeof(buffer), initialFile.c_str());
 
 		ofn.lStructSize = sizeof(ofn);
 		ofn.hwndOwner = reinterpret_cast<HWND>(ownerWindow);
@@ -253,21 +254,21 @@ namespace NLuaAPI { namespace NGUI {
 		ofn.nMaxFile = sizeof(buffer);
 		ofn.lpstrFileTitle = fileTitle;
 		ofn.nMaxFileTitle = sizeof(fileTitle);
-		ofn.lpstrInitialDir = (optInitialDir = luabind::object_cast_nothrow<std::string>(initialDir))
+		ofn.lpstrInitialDir = (optInitialDir = luabind::object_cast_nothrow<std::wstring>(initialDir))
 			? optInitialDir->c_str()
 			: NULL;
-		ofn.lpstrTitle = (optTitle = luabind::object_cast_nothrow<std::string>(dialogTitle))
+		ofn.lpstrTitle = (optTitle = luabind::object_cast_nothrow<std::wstring>(dialogTitle))
 			? optTitle->c_str()
 			: NULL;
 		ofn.Flags = OFN_PATHMUSTEXIST;
 
-		result = GetSaveFileNameA(&ofn);
+		result = GetSaveFileNameW(&ofn);
 
 		lua_pushboolean(pState, result);
 		if (result)
 		{
-			lua_pushfstring(pState, "%s", buffer);
-			lua_pushfstring(pState, "%s", fileTitle);
+			luabind::object(pState, std::wstring(buffer)).push(pState);
+			luabind::object(pState, std::wstring(fileTitle)).push(pState);
 		}
 		else
 		{
@@ -276,9 +277,9 @@ namespace NLuaAPI { namespace NGUI {
 		}
 	}
 
-	static int LuaGuiMessageDialog(void *window, const char *message, const char *caption, uint32_t type)
+	static int LuaGuiMessageDialog(void *window, const std::wstring& message, const std::wstring& caption, uint32_t type)
 	{
-		return MessageBoxA(reinterpret_cast<HWND>(window), message, caption, type);
+		return MessageBoxW(reinterpret_cast<HWND>(window), message.c_str(), caption.c_str(), type);
 	}
 
 	static bool LuaGuiEnableDlgItem(void *dialog, uint32_t item_id, bool enable)

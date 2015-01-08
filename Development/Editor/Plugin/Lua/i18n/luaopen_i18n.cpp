@@ -3,7 +3,8 @@
 #include <luabind/luabind.hpp>
 #include <base/lua/luabind.h>
 #pragma warning(pop)
-#include <base/i18n/libintl.h>
+#include <base/i18n/libintl.h>	
+#include <base/util/unicode.h>
 
 int luaopen_i18n(lua_State *pState)
 {

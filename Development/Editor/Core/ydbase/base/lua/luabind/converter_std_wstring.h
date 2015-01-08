@@ -18,7 +18,7 @@ namespace luabind
 
 		std::wstring from(lua_State* L, int index)
 		{
-			return base::util::a2w(std::string_view(lua_tostring(L, index), lua_rawlen(L, index)));
+			return base::util::u2w(std::string_view(lua_tostring(L, index), lua_rawlen(L, index)), base::util::conv_method::replace | '?');
 		}
 
 		void to(lua_State* L, std::wstring const& value)
