@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YDWE", "..\YDWE\YDWE.vcxproj", "{E25E1A38-134A-4727-A6A1-FF3A0A97A4C5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YDWEStartup", "..\YDWEStartup\YDWEStartup.vcxproj", "{DF7D1CF5-CD15-4EDE-A580-D8DCE78EC508}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YDWEInject", "..\YDWEInject\YDWEInject.vcxproj", "{1EF5F942-51A2-4E3B-AC19-D6E16CBF5852}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugin", "Plugin", "{6B1794EE-534E-4FFD-968A-349CF28D9F9E}"
 EndProject
@@ -80,7 +78,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YDWeHelper", "..\..\Plugin\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ydzip", "..\ydzip\ydzip.vcxproj", "{51369253-A42C-455D-8ADE-48D1C3C14663}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ydgraph", "..\ydgraph\ydgraph.vcxproj", "{C371743B-AD12-4A31-82DF-5A058083773F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ydgraph", "..\YDGraph\ydgraph.vcxproj", "{C371743B-AD12-4A31-82DF-5A058083773F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "virtual_mpq", "..\..\Plugin\Lua\virtual_mpq\virtual_mpq.vcxproj", "{CAE66E60-5452-11E3-8896-D7E313E4CF14}"
 EndProject
@@ -102,10 +100,6 @@ Global
 		{DF7D1CF5-CD15-4EDE-A580-D8DCE78EC508}.Debug|Win32.Build.0 = Debug|Win32
 		{DF7D1CF5-CD15-4EDE-A580-D8DCE78EC508}.Release|Win32.ActiveCfg = Release|Win32
 		{DF7D1CF5-CD15-4EDE-A580-D8DCE78EC508}.Release|Win32.Build.0 = Release|Win32
-		{1EF5F942-51A2-4E3B-AC19-D6E16CBF5852}.Debug|Win32.ActiveCfg = Debug|Win32
-		{1EF5F942-51A2-4E3B-AC19-D6E16CBF5852}.Debug|Win32.Build.0 = Debug|Win32
-		{1EF5F942-51A2-4E3B-AC19-D6E16CBF5852}.Release|Win32.ActiveCfg = Release|Win32
-		{1EF5F942-51A2-4E3B-AC19-D6E16CBF5852}.Release|Win32.Build.0 = Release|Win32
 		{80D9FEBF-9FBD-4FA9-BA9B-11D524028848}.Debug|Win32.ActiveCfg = Debug|Win32
 		{80D9FEBF-9FBD-4FA9-BA9B-11D524028848}.Debug|Win32.Build.0 = Debug|Win32
 		{80D9FEBF-9FBD-4FA9-BA9B-11D524028848}.Release|Win32.ActiveCfg = Release|Win32

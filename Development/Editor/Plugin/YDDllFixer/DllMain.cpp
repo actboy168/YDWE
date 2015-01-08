@@ -35,8 +35,7 @@ const wchar_t* szDllList[] = {
 	L"sfmpq.dll",
 	L"luacore.dll",
 	L"luabind.dll", // luacore.dll
-	L"LuaEngine.dll",
-	L"YDWEInject.dll", // always at last
+	L"LuaEngine.dll", // always at last
 };
 
 #else
@@ -54,11 +53,7 @@ const wchar_t* szDllList[] = {
 	L"sfmpq.dll",
 	L"luacore.dll",
 	L"luabind.dll", // luacore.dll
-	L"libapr-1.dll",
-	L"libaprutil-1.dll", // libapr-1.dll
-	L"log4cxx.dll", // libapr-1.dll, libaprutil-1.dll
-	L"LuaEngine.dll",
-	L"YDWEInject.dll", // always at last
+	L"LuaEngine.dll", // always at last
 };
 
 #endif
