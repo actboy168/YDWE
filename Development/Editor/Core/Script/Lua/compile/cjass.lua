@@ -7,12 +7,12 @@ cjass = {}
 cjass.path     = fs.ydwe_path() / "plugin" / "AdicHelper"
 cjass.exe_path = cjass.path / "AdicHelper.exe"
 
--- 使用cJass编译地图
--- map_path - 地图路径，fs.path对象
--- option - 附加编译选项, table，支持选项为：
---	enable_jasshelper_debug - 启用Debug模式，true/false
---	runtime_version - 魔兽版本
--- 返回：true编译成功，false编译失败
+-- 浣跨敤cJass缂栬瘧鍦板浘
+-- map_path - 鍦板浘璺緞锛宖s.path瀵硅薄
+-- option - 闄勫姞缂栬瘧閫夐」, table锛屾敮鎸侀�夐」涓猴細
+--	enable_jasshelper_debug - 鍚敤Debug妯″紡锛宼rue/false
+--	runtime_version - 榄斿吔鐗堟湰
+-- 杩斿洖锛歵rue缂栬瘧鎴愬姛锛宖alse缂栬瘧澶辫触
 function cjass.do_compile(self, map_path, option)
 	local parameter = option.runtime_version:is_new() and " /v24" or " /v23"
 					.. (option.enable_jasshelper_debug and " /dbg" or "")

@@ -86,7 +86,7 @@ function plugin.load (self, plugin_config_path)
 end
 
 function plugin.load_directory (self, plugin_dir)
-	-- ±éÀúÄ¿Â¼
+	-- éå†ç›®å½•
 	for full_path in plugin_dir:list_directory() do
 		if fs.is_directory(full_path) then
 			self:load_directory(full_path)

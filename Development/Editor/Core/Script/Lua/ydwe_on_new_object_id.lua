@@ -53,49 +53,49 @@ object:initialize()
 
 
 
--- ÔÚĞÂ½¨ÎïÌåµÄÊ±ºòµ÷ÓÃ£¬±¾º¯Êı¸ù¾İÓÃ»§µÄ²Ù×÷¾ö¶¨ĞÂIDÖµ
--- object_type - ÕûÊıÀàĞÍ£¬ÎïÌåµÄÀàĞÍ
--- default_id - ÕûÊıÀàĞÍ£¬ÏµÍ³Éú³ÉµÄID
--- ·µ»ØÖµ£ºĞÂ½¨ÎïÌåµÄ×îÖÕID£¬±ØĞëÊÇÕûÊıÀàĞÍ
+-- åœ¨æ–°å»ºç‰©ä½“çš„æ—¶å€™è°ƒç”¨ï¼Œæœ¬å‡½æ•°æ ¹æ®ç”¨æˆ·çš„æ“ä½œå†³å®šæ–°IDå€¼
+-- object_type - æ•´æ•°ç±»å‹ï¼Œç‰©ä½“çš„ç±»å‹
+-- default_id - æ•´æ•°ç±»å‹ï¼Œç³»ç»Ÿç”Ÿæˆçš„ID
+-- è¿”å›å€¼ï¼šæ–°å»ºç‰©ä½“çš„æœ€ç»ˆIDï¼Œå¿…é¡»æ˜¯æ•´æ•°ç±»å‹
 event.register(event.EVENT_NEW_OBJECT_ID, false, function (event_data)
 	log.debug("**************** on new object id start ****************")	
 		
 	local object_type = event_data.object_type
 	local default_id = event_data.default_id
-	-- Ë¢ĞÂÅäÖÃÊı¾İ
+	-- åˆ·æ–°é…ç½®æ•°æ®
 	global_config_reload()
 
-	-- Èç¹ûÃ»ÓĞÑ¡ÔñÊÖ¶¯ÊäÈëÔòÖ±½Ó·µ»Ø
+	-- å¦‚æœæ²¡æœ‰é€‰æ‹©æ‰‹åŠ¨è¾“å…¥åˆ™ç›´æ¥è¿”å›
 	if tonumber(global_config["FeatureToggle"]["EnableManualNewId"]) == 0 then
 		log.trace("Disable.")
 		return default_id
 	end
 	
-	-- »ñÈ¡µ±Ç°´°¿Ú
+	-- è·å–å½“å‰çª—å£
 	local foregroundWindow = gui.get_foreground_window()
 
-	-- Ñ­»·Ö±µ½ÊäÈëºÏ·¨»òÕß·ÅÆú
+	-- å¾ªç¯ç›´åˆ°è¾“å…¥åˆæ³•æˆ–è€…æ”¾å¼ƒ
 	while true do
-		-- ´ò¿ª¶Ô»°¿òÈÃÓÃ»§ÊäÈë
+		-- æ‰“å¼€å¯¹è¯æ¡†è®©ç”¨æˆ·è¾“å…¥
 		local ok, id_string = gui.prompt_for_input(
-			foregroundWindow, 														-- ¸¸´°¿Ú¾ä±ú
-			_("New Object Id"),														-- ±êÌâÀ¸
-			_("Please input new object ID, or cancel to use the default one."),		-- ÌáÊ¾Óï¾ä
-			string.from_objectid(default_id),								-- ÎÄ±¾±à¼­Çø³õÊ¼ÎÄ×Ö
-			_("OK"),																-- ¡°È·¶¨¡±°´Å¥ÎÄ±¾
-			_("Cancel")																-- ¡°È¡Ïû"°´Å¥ÎÄ±¾
+			foregroundWindow, 														-- çˆ¶çª—å£å¥æŸ„
+			_("New Object Id"),														-- æ ‡é¢˜æ 
+			_("Please input new object ID, or cancel to use the default one."),		-- æç¤ºè¯­å¥
+			string.from_objectid(default_id),								-- æ–‡æœ¬ç¼–è¾‘åŒºåˆå§‹æ–‡å­—
+			_("OK"),																-- â€œç¡®å®šâ€æŒ‰é’®æ–‡æœ¬
+			_("Cancel")																-- â€œå–æ¶ˆ"æŒ‰é’®æ–‡æœ¬
 		)
 		
-		-- ÓÃ»§µãÁËÈ·¶¨£¬ÑéÖ¤ÊäÈëÊÇ·ñºÏ·¨¡£Èç¹ûµãÁËÈ¡Ïû£¬Ê¹ÓÃÏµÍ³Ä¬ÈÏ
+		-- ç”¨æˆ·ç‚¹äº†ç¡®å®šï¼ŒéªŒè¯è¾“å…¥æ˜¯å¦åˆæ³•ã€‚å¦‚æœç‚¹äº†å–æ¶ˆï¼Œä½¿ç”¨ç³»ç»Ÿé»˜è®¤
 		if not ok then
 			log.trace("User cancel.")
 			return default_id
 		end
 		
-		-- ¼ì²éÊäÈëÊÇ·ñºÏ·¨£¨×Ö·û´®³¤¶ÈÊÇ·ñÎª4£©
+		-- æ£€æŸ¥è¾“å…¥æ˜¯å¦åˆæ³•ï¼ˆå­—ç¬¦ä¸²é•¿åº¦æ˜¯å¦ä¸º4ï¼‰
 		if #id_string ~= 4 then
 			log.trace("User input error(" .. tostring(id_string) .. ").")	
-			-- ÌáÊ¾´íÎó
+			-- æç¤ºé”™è¯¯
 			gui.message_dialog(
 				foregroundWindow,
 				_("You have entered an invalid ID. The ID must contain just 4 letters or digits. It cannot contain chars other than those in ASCII."),
@@ -104,7 +104,7 @@ event.register(event.EVENT_NEW_OBJECT_ID, false, function (event_data)
 			)
 		elseif object:custom_has(object_type, id_string) or object:original_has(event_data.class, id_string) then
 			log.trace("User input error(" .. tostring(id_string) .. ").")	
-			-- ÌáÊ¾´íÎó
+			-- æç¤ºé”™è¯¯
 			gui.message_dialog(
 				foregroundWindow,
 				_("You have entered an invalid ID. This ID already exists."),
@@ -112,7 +112,7 @@ event.register(event.EVENT_NEW_OBJECT_ID, false, function (event_data)
 				gui.MB_ICONERROR | gui.MB_OK
 			)
 		else
-			-- ºÏ·¨£¬×ª»»ÎªÕûÊı·µ»Ø	
+			-- åˆæ³•ï¼Œè½¬æ¢ä¸ºæ•´æ•°è¿”å›	
 			log.trace("Result " .. tostring(id_string))	
 			return string.to_objectid(id_string)
 		end
