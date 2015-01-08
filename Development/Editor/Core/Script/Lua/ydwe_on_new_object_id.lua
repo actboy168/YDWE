@@ -72,7 +72,7 @@ event.register(event.EVENT_NEW_OBJECT_ID, false, function (event_data)
 	end
 	
 	-- 获取当前窗口
-	local foregroundWindow = sys.get_foreground_window()
+	local foregroundWindow = gui.get_foreground_window()
 
 	-- 循环直到输入合法或者放弃
 	while true do

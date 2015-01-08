@@ -167,11 +167,6 @@ namespace NLuaAPI { namespace NSys {
 		}
 	}
 
-	static void* LuaSysGetForegroundWindow()
-	{
-		return (void*)::GetForegroundWindow();
-	}
-
 	static bool LuaSysSetClipboardText(const std::string &text)
 	{
 		HANDLE globalMemoryHandle;
@@ -325,7 +320,6 @@ int luaopen_sys(lua_State *pState)
 		// Misc
 		def("shell_execute", &NLuaAPI::NSys::LuaShellExecute),
 		def("get_module_version_info", &NLuaAPI::NSys::LuaGetVersionNumberString),
-		def("get_foreground_window",   &NLuaAPI::NSys::LuaSysGetForegroundWindow),
 		
 		def("get_clipboard_text", &NLuaAPI::NSys::LuaSysGetClipboardText),
 		def("set_clipboard_text", &NLuaAPI::NSys::LuaSysSetClipboardText)

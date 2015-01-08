@@ -285,6 +285,11 @@ namespace NLuaAPI { namespace NGUI {
 	{
 		return !!::EnableWindow(::GetDlgItem(reinterpret_cast<HWND>(dialog), item_id), enable? TRUE: FALSE);
 	}
+
+	static void* LuaGuiGetForegroundWindow()
+	{
+		return (void*)::GetForegroundWindow();
+	}
 }
 
 static int PointerToNumber(void* p)
@@ -315,7 +320,8 @@ int luaopen_gui(lua_State *pState)
 		def("choose_save_file",   &NLuaAPI::NGUI::LuaGuiChooseSaveFile),
 		def("prompt_for_input",   &NLuaAPI::NGUI::LuaGuiPromptForInput),
 		def("message_dialog",     &NLuaAPI::NGUI::LuaGuiMessageDialog),
-		def("enable_dialog_item", &NLuaAPI::NGUI::LuaGuiEnableDlgItem)
+		def("enable_dialog_item", &NLuaAPI::NGUI::LuaGuiEnableDlgItem),
+		def("get_foreground_window", &NLuaAPI::NGUI::LuaGuiGetForegroundWindow)
 	];
 
 	module(pState, "mem")
