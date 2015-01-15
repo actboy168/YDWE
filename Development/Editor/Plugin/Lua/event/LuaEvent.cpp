@@ -36,9 +36,9 @@ namespace NYDWE {
 		{
 			if (SUCCEEDED(hr))
 				CoUninitialize();
-		} BOOST_SCOPE_EXIT_END
+		} BOOST_SCOPE_EXIT_END;
 
-			CYDWEEventData eventData;
+		CYDWEEventData eventData;
 		event_array[EVENT_WE_START](eventData);
 
 		int32_t result = base::std_call<int32_t>(pgTrueWeWinMain, instance, prevInstance, commandLine, showCommand);
