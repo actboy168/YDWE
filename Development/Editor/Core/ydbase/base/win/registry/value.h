@@ -66,7 +66,7 @@ namespace base { namespace registry {
 
 		template <typename Result>
 		Result get(typename std::enable_if<
-			is_stringable<char_type, typename boost::decay<Result>::type>::value
+			is_stringable<char_type, typename std::decay<Result>::type>::value
 			, int>::type* = 0) const 
 		{
 			return std::move(reg_dispatch<Result>(get_string()));
@@ -74,7 +74,7 @@ namespace base { namespace registry {
 
 		template <class Result> 
 		Result get(typename std::enable_if<
-			!is_stringable<char_type, typename boost::decay<Result>::type>::value
+			!is_stringable<char_type, typename std::decay<Result>::type>::value
 			, int>::type* = 0) const
 		{
 			return get_<Result>();
@@ -320,7 +320,7 @@ namespace base { namespace registry {
 
 		template <typename Source>
 		bool set(Source value, typename std::enable_if<
-				is_stringable<char_type, typename boost::decay<Source>::type>::value
+				is_stringable<char_type, typename std::decay<Source>::type>::value
 			, int>::type* = 0)
 		{			
 			return set(reg_dispatch<string_type>(value));
