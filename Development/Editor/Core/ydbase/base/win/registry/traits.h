@@ -41,6 +41,7 @@ namespace base { namespace registry {
 		typedef LONG                 result_type;
 
 	public:
+		static result_type close       (hkey_type hkey);
 		static hkey_type   dup_key     (hkey_type hkey, REGSAM samDesired = KEY_ALL_ACCESS, result_type* result = NULL);
 		static result_type open_key    (hkey_type hkey, char_type const* sub_key_name, hkey_type* hkey_result, REGSAM samDesired = KEY_ALL_ACCESS);
 		static result_type create_key  (hkey_type hkey, char_type const* sub_key_name, hkey_type* hkey_result, REGSAM samDesired = KEY_ALL_ACCESS);
@@ -71,6 +72,11 @@ namespace base { namespace registry {
 		typedef LONG            result_type;
 
 	public:
+		static result_type close(hkey_type hkey)
+		{
+			return ::RegCloseKey(hkey);
+		}
+
 		static hkey_type dup_key(hkey_type hkey, REGSAM samDesired, result_type* result = NULL)
 		{
 			hkey_type   hkeyDup;
@@ -246,6 +252,10 @@ namespace base { namespace registry {
 		typedef LONG           result_type;
 
 	public:
+		static result_type close(hkey_type hkey)
+		{
+			return ::RegCloseKey(hkey);
+		}
 
 		static hkey_type dup_key(hkey_type hkey, REGSAM samDesired, result_type* result = NULL)
 		{

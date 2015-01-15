@@ -46,6 +46,10 @@ public:
 	REGSAM              access_mask    () const;
 	value_type&         value          (const string_type& valueName);
 	value_type&         operator[]     (const string_type& valueName);
+	string_type         reg_class      () const;
+	size_type           num_sub_keys   () const;
+	size_type           num_values     () const;
+	bool                has_sub_key    (const string_type& subKeyName);
 
 protected:							   
 	static hkey_type    open_key_      (hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
@@ -94,7 +98,7 @@ inline basic_base_key<C, T, V>::~basic_base_key() throw()
 {
 	if (m_hkey != NULL)
 	{
-		::RegCloseKey(m_hkey);
+		traits_type::close(m_hkey);
 	}
 }
 
@@ -190,6 +194,53 @@ inline typename basic_base_key<C, T, V>::value_type& basic_base_key<C, T, V>::op
 	return value(valueName);
 }
 
+template <typename C, typename T, typename V>
+inline typename basic_base_key<C, T, V>::string_type basic_base_key<C, T, V>::reg_class() const
+{
+	size_type   cch_key_class = 0;
+	result_type res = traits_type::query_info(m_hkey, NULL, &cch_key_class, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+	check_and_throw_exception("could not determine the key registry class", res);
+	std::dynarray<char_type> p(++cch_key_class);
+	res = traits_type::query_info(m_hkey, p.data(), &cch_key_class, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+	check_and_throw_exception("could not determine the key registry class", res);
+	return string_type(p.data(), cch_key_class);
+}
+
+template <typename C, typename T, typename V>
+inline typename basic_base_key<C, T, V>::size_type basic_base_key<C, T, V>::num_sub_keys() const
+{
+	uint32_t c_sub_keys;
+	result_type res = traits_type::query_info(m_hkey, NULL, NULL, &c_sub_keys, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+	check_and_throw_exception("could not determine the number of sub-keys", res);
+	return c_sub_keys;
+}
+
+template <typename C, typename T, typename V>
+inline typename basic_base_key<C, T, V>::size_type basic_base_key<C, T, V>::num_values() const
+{
+	uint32_t c_values;
+	result_type res = traits_type::query_info(m_hkey, NULL, NULL, NULL, NULL, NULL, &c_values, NULL, NULL, NULL, NULL);
+	check_and_throw_exception("could not determine the number of values", res);
+	return c_values;
+}
+
+template <typename C, typename T, typename V>
+inline bool basic_base_key<C, T, V>::has_sub_key(const string_type& subKeyName)
+{
+	hkey_type   hkey;
+	result_type res = traits_type::open_key(m_hkey, subKeyName.c_str(), &hkey, KEY_READ);
+
+	switch (res)
+	{
+	case ERROR_SUCCESS:
+		traits_type::close(hkey);
+	case ERROR_ACCESS_DENIED:
+		return true;
+	default:
+		return false;
+	}
+}
+
 template <typename C, typename T = reg_traits<C>, typename V = basic_read_value<C, T>>
 class basic_read_key
 	: public basic_base_key<C, T, V>
@@ -219,18 +270,12 @@ public:
 	basic_read_key                     (class_type const& rhs);
 
 public:
-	string_type         reg_class      () const;
-	size_type           num_sub_keys   () const;
-	size_type           num_values     () const;
-
-public:
 	template <typename KeyType>
 	KeyType open_sub_key(const string_type& subKeyName) const
 	{
 		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::fail_if_not_exists);
 	}
 
-	bool                has_sub_key    (const string_type& subKeyName);
 
 public:
 	static REGSAM       default_access_mask() { return KEY_READ; }
@@ -255,53 +300,6 @@ template <typename C, typename T, typename V>
 inline basic_read_key<C, T, V>::basic_read_key(class_type const& rhs)
 	: base_type(rhs)
 { }
-
-template <typename C, typename T, typename V>
-inline typename basic_read_key<C, T, V>::string_type basic_read_key<C, T, V>::reg_class() const
-{
-	size_type   cch_key_class   =   0;
-	result_type res             =   traits_type::query_info(m_hkey, NULL, &cch_key_class, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-	check_and_throw_exception("could not determine the key registry class", res);
-	std::dynarray<char_type> p(++cch_key_class);
-	res = traits_type::query_info(m_hkey, p.data(), &cch_key_class, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-	check_and_throw_exception("could not determine the key registry class", res);
-	return string_type(p.data(), cch_key_class);
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_read_key<C, T, V>::size_type basic_read_key<C, T, V>::num_sub_keys() const
-{
-	uint32_t c_sub_keys;
-	result_type res         =   traits_type::query_info(m_hkey, NULL, NULL, &c_sub_keys, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-	check_and_throw_exception("could not determine the number of sub-keys", res);
-	return c_sub_keys;
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_read_key<C, T, V>::size_type basic_read_key<C, T, V>::num_values() const
-{
-	uint32_t c_values;
-	result_type res         =   traits_type::query_info(m_hkey, NULL, NULL, NULL, NULL, NULL, &c_values, NULL, NULL, NULL, NULL);
-	check_and_throw_exception("could not determine the number of values", res);
-	return c_values;
-}
-
-template <typename C, typename T, typename V>
-inline bool basic_read_key<C, T, V>::has_sub_key(const string_type& subKeyName)
-{
-	hkey_type   hkey;
-	result_type res = traits_type::open_key(m_hkey, subKeyName.c_str(), &hkey, KEY_READ);
-
-	switch (res)
-	{
-	case ERROR_SUCCESS:
-		::RegCloseKey(hkey);
-	case ERROR_ACCESS_DENIED:
-		return true;
-	default:
-		return false;
-	}
-}
 
 template <typename C, typename T = reg_traits<C>, typename V = basic_write_value<C, T>>
 class basic_write_key
@@ -332,11 +330,6 @@ public:
 	basic_write_key                    (class_type const& rhs);
 
 public:
-	string_type         reg_class      () const;
-	size_type           num_sub_keys   () const;
-	size_type           num_values     () const;
-
-public:
   	template <typename KeyType>
   	KeyType create_sub_key(const string_type& subKeyName)
   	{
@@ -350,7 +343,6 @@ public:
 	}
 
 	bool                delete_sub_key (const string_type& subKeyName, bool deleteTree = false);
-	bool                has_sub_key    (const string_type& subKeyName);
 
 public:
 	static REGSAM       default_access_mask() { return KEY_WRITE | KEY_READ; }
@@ -390,23 +382,6 @@ inline bool basic_write_key<C, T, V>::delete_sub_key(const string_type& subKeyNa
 	default:
 		check_and_throw_exception("could not delete sub-key", res);
 	case ERROR_FILE_NOT_FOUND:
-		return false;
-	}
-}
-
-template <typename C, typename T, typename V>
-inline bool basic_write_key<C, T, V>::has_sub_key(const string_type& subKeyName)
-{
-	hkey_type   hkey;
-	result_type res = traits_type::open_key(m_hkey, subKeyName.c_str(), &hkey, KEY_READ);
-
-	switch (res)
-	{
-	case ERROR_SUCCESS:
-		::RegCloseKey(hkey);
-	case ERROR_ACCESS_DENIED:
-		return true;
-	default:
 		return false;
 	}
 }
