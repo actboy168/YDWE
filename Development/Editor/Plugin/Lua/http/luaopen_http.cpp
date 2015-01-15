@@ -33,8 +33,6 @@ static void http_open(lua_State* L, const std::string& url)
 
 int luaopen_http(lua_State *pState)
 {
-	MessageBoxA(0, 0, 0, 0);
-
 	using namespace luabind;
 
 	module(pState, "http")
