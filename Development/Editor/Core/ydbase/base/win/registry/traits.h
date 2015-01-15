@@ -1,32 +1,11 @@
 #pragma once
 
-#include <cstdint>
+#include <cassert>
+#include <cstdint> 
 #include <string>
-#include <boost/filesystem.hpp>
 #include <Windows.h>
 
 namespace base { namespace registry {
-
-	template <class char_type, class T>
-	struct is_stringable { static const bool value = false; };
-	
-	template <class char_type> struct is_stringable<char_type, std::vector<char_type>>       { static const bool value = true; };
-	template <class char_type> struct is_stringable<char_type, std::list<char_type>>         { static const bool value = true; };
-	template <class char_type> struct is_stringable<char_type, std::deque<char_type>>        { static const bool value = true; };
-	template <class char_type> struct is_stringable<char_type, boost::filesystem::path>      { static const bool value = true; };
-
-
-	template <class Target, class Source>
-	inline Target reg_dispatch(const Source& s)
-	{
-		return std::move(Target(std::begin(s), std::end(s)));
-	}
-
-	template <class Target>
-	inline Target reg_dispatch(const boost::filesystem::path& s)
-	{
-		return s.string<Target>();
-	}
 
 	template <class C>
 	struct reg_traits
