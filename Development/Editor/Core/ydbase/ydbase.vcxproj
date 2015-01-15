@@ -271,6 +271,9 @@
     <ClInclude Include="base\win\registry\key.h" />
     <ClInclude Include="base\win\registry\predefined_keys.h" />
     <ClInclude Include="base\win\registry\traits.h" />
+    <ClInclude Include="base\win\registry\v2\key.h" />
+    <ClInclude Include="base\win\registry\v2\predefined_keys.h" />
+    <ClInclude Include="base\win\registry\v2\value.h" />
     <ClInclude Include="base\win\registry\value.h" />
     <ClInclude Include="base\win\scoped_handle.h" />
     <ClInclude Include="base\win\version.h" />

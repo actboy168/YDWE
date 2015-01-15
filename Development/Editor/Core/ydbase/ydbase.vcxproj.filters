@@ -77,6 +77,9 @@
     <Filter Include="base\win\font">
       <UniqueIdentifier>{d3bb681c-bfad-45b8-b53a-094ab9bbc6bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\win\registry\v2">
+      <UniqueIdentifier>{85c678b3-3004-4133-8aeb-304f59f1ed12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -541,6 +544,15 @@
     </ClInclude>
     <ClInclude Include="base\hook\dyn_iat.h">
       <Filter>base\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="base\win\registry\v2\key.h">
+      <Filter>base\win\registry\v2</Filter>
+    </ClInclude>
+    <ClInclude Include="base\win\registry\v2\value.h">
+      <Filter>base\win\registry\v2</Filter>
+    </ClInclude>
+    <ClInclude Include="base\win\registry\v2\predefined_keys.h">
+      <Filter>base\win\registry\v2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
