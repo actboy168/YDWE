@@ -19,7 +19,7 @@ namespace NYDWE
 class CYDWEEventData
 {
 public:
-	typedef boost::variant<void *, bool, int, unsigned int, float, double, std::string, std::string> TEventDataItem;
+	typedef boost::variant<void *, bool, int, unsigned int, float, double, std::string, std::wstring> TEventDataItem;
 	typedef boost::unordered_map<std::string, TEventDataItem> TEventDataStore;
 
 public:

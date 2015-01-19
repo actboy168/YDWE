@@ -23,7 +23,7 @@ namespace luabind
 
 		void to(lua_State* L, std::wstring const& value)
 		{
-			std::string utf8_value = base::util::w2a(value);
+			std::string utf8_value = base::util::w2u(value, base::util::conv_method::replace | '?');
 			lua_pushlstring(L, utf8_value.data(), utf8_value.size());
 		}
 	};

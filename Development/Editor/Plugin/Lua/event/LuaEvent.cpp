@@ -96,7 +96,7 @@ namespace NYDWE {
 				p = p.parent_path().remove_filename() / p.filename();
 
 				CYDWEEventData eventData;
-				eventData.setEventData("map_path", p.string());
+				eventData.setEventData("map_path", p.wstring());
 				event_array[EVENT_PRE_SAVE_MAP](eventData);
 			}
 			catch (...) {				
@@ -115,15 +115,15 @@ namespace NYDWE {
 		std::cmatch matcher;
 		if (lpCommandLine && std::regex_match(lpCommandLine, matcher, gRegexCommandLine))
 		{
-			std::string currentWarcraftMap = (base::path::get(base::path::DIR_EXE).remove_filename() / matcher.str(1)).string();
-			LOGGING_TRACE(lg) << "Executing map " + currentWarcraftMap;
+			boost::filesystem::path currentWarcraftMap = base::path::get(base::path::DIR_EXE).remove_filename() / matcher.str(1);
+			LOGGING_TRACE(lg) << L"Executing map " << currentWarcraftMap.wstring();
 
 			CYDWEEventData eventData;
 			if (gIsInCompileProcess)
 			{
 				LOGGING_TRACE(lg) << "Need to compile...";
 
-				eventData.setEventData("map_path", currentWarcraftMap);
+				eventData.setEventData("map_path", currentWarcraftMap.wstring());
 
 				const std::vector<int> &results = event_array[EVENT_SAVE_MAP](eventData);
 				gIsInCompileProcess = false;
@@ -140,7 +140,7 @@ namespace NYDWE {
 			}
 
 			eventData.getDataStore().clear();
-			eventData.setEventData("map_path", currentWarcraftMap);
+			eventData.setEventData("map_path", currentWarcraftMap.wstring());
 			if (lpApplicationName)
 				eventData.setEventData("application_name", std::string(lpApplicationName));
 			if (lpCommandLine)

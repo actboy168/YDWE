@@ -21,35 +21,7 @@ namespace NYDWE {
 		void operator()(T &e) const
 		{
 			lua_pushlstring(pState_, key_.data(), key_.size());
-			lua_pushnumber(pState_, e);
-			lua_settable(pState_, -3);
-		}
-
-		template <>
-		void operator()<bool>(bool &e) const
-		{
-			lua_pushlstring(pState_, key_.data(), key_.size());
-			lua_pushboolean(pState_, e);
-			lua_settable(pState_, -3);
-		}
-
-		template <>
-		void operator()<std::string>(std::string &e) const
-		{
-			lua_pushlstring(pState_, key_.data(), key_.size());
-			lua_pushlstring(pState_, e.data(), e.size());
-			lua_settable(pState_, -3);
-		}
-
-		template <>
-		void operator()<void *>(void *&e) const
-		{
-			lua_pushlstring(pState_, key_.data(), key_.size());
-			if (e)
-				lua_pushlightuserdata(pState_, e);
-			else
-				lua_pushnil(pState_);
-
+			luabind::object(pState_, e).push(pState_);
 			lua_settable(pState_, -3);
 		}
 
