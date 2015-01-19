@@ -61,12 +61,11 @@ namespace NYDWE {
 	uintptr_t pgTrueCreateFileA;
 	HANDLE WINAPI DetourStormCreateFileA(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
 	{
-		std::string fileName(lpFileName);
-
+		std::wstring fileName = base::util::a2w(std::string_view(lpFileName), base::util::conv_method::replace | '?');
 		if (gIsInCompileProcess && (
-			boost::iends_with(fileName, ".w3x") ||
-			boost::iends_with(fileName, ".w3m")/* ||
-											   boost::iends_with(fileName, ".w3n") */ // Disabled because does not support campaign
+			boost::iends_with(fileName, L".w3x") ||
+			boost::iends_with(fileName, L".w3m")/* ||
+											   boost::iends_with(fileName, L".w3n") */ // Disabled because does not support campaign
 											   ))
 		{
 			CYDWEEventData eventData;
