@@ -265,15 +265,14 @@ namespace base { namespace registry { namespace v2 {
 	
 		if (data_size > 0)
 		{
-			std::dynarray<uint8_t> buffer(data_size);
-	
+			blob_type buffer(data_size);
 			data_size = buffer.size();
 			res = traits_type::query_value(m_key.handle(open_access::read), m_name.c_str(), dw, buffer.data(), data_size);
 			check_and_throw_exception("could not elicit binary value", res);
-			return blob_type(buffer.data(), buffer.size());
+			return buffer;
 		}
 	
-		return blob_type();
+		return blob_type(0);
 	}
 
 	template <typename C, typename T, typename K>

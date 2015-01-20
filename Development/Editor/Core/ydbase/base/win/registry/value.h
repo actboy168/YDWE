@@ -247,7 +247,7 @@ namespace base { namespace registry {
 			return blob_type(buffer.data(), buffer.size());
 		}
 
-		return blob_type();
+		return blob_type(0);
 	}
 
 	template <typename C, typename T>
