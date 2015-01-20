@@ -9,8 +9,9 @@ ydwe_version = sys.version {}
 war3_version = sys.war3_version {}
 
 local function set_triggereditor_color()
-	registry.SaveInt(registry.HKEY_CURRENT_USER, "Software\\Blizzard Entertainment\\WorldEdit\\Trigger Display Colors", "TC_YDHIDE",  0xffff0000)
-	registry.SaveInt(registry.HKEY_CURRENT_USER, "Software\\Blizzard Entertainment\\WorldEdit\\Trigger Display Colors", "TC_COMMENT", 0xff008000)
+	local reg = registry.current_user() / "Software\\Blizzard Entertainment\\WorldEdit\\Trigger Display Colors"
+	reg["TC_YDHIDE"] = { registry.REG_DWORD, 0xffff0000 }
+	reg["TC_COMMENT"] = { registry.REG_DWORD, 0xff008000 }
 end
 
 -- 检查魔兽目录下是否有可能引起冲突的文件夹

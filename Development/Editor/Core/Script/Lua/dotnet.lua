@@ -5,13 +5,15 @@ local function is_dotnet_installed()
 end
 
 local function is_dotnet_version_20_installed()
-	local err, value = registry.LoadInt(registry.HKEY_LOCAL_MACHINE, "Software\\Microsoft\\NET Framework Setup\\NDP\\v2.0.50727", "Install")
-	return (err == 0) and (value ~= 0)
+	local reg = registry.local_machine() / "Software\\Microsoft\\NET Framework Setup\\NDP\\v2.0.50727"
+	local value = reg["Install"]
+	return value and (value ~= 0)
 end
 
 local function is_dotnet_version_35_installed()
-	local err, value = registry.LoadInt(registry.HKEY_LOCAL_MACHINE, "Software\\Microsoft\\NET Framework Setup\\NDP\\v3.5", "Install")
-	return (err == 0) and (value ~= 0)
+	local reg = registry.local_machine() / "Software\\Microsoft\\NET Framework Setup\\NDP\\v3.5"
+	local value = reg["Install"]
+	return value and (value ~= 0)
 end
 
 dotnet = {}
