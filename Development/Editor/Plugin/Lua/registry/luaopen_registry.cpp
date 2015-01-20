@@ -2,6 +2,10 @@
 #include <base/win/registry/v2/key.h> 
 #include <base/util/unicode.h>
 
+
+#define RKEY_TRY() try   
+#define RKEY_TRY_END() catch (const std::exception& e) { lua_pushstring(L, e.what()); return lua_error(L); }
+
 namespace luawarp { namespace registry {
 
 	using namespace base::registry::v2;
@@ -46,70 +50,82 @@ namespace luawarp { namespace registry {
 		new (storage)key_w(*key);
 		return 1;
 	}
-	
+
 	int rkey_index(lua_State* L)
 	{
-		key_w*       self = rkey_read(L, 1);
-		std::wstring key  = rkey_read_wstring(L, 2);
-		key_w::value_type& value = self->value(key);
-		switch (value.type())
-		{		
-		case REG_DWORD:
-			lua_pushinteger(L, value.get_uint32_t());
+		RKEY_TRY()
+		{
+			key_w*       self = rkey_read(L, 1);
+			std::wstring key = rkey_read_wstring(L, 2);
+			key_w::value_type& value = self->value(key);
+			switch (value.type())
+			{
+			case REG_DWORD:
+				lua_pushinteger(L, value.get_uint32_t());
+				return 1;
+			case REG_QWORD:
+				lua_pushinteger(L, value.get_uint64_t());
+				return 1;
+			case REG_SZ:
+			case REG_EXPAND_SZ:
+				return rkey_push_wstring(L, value.get_string());
+			case REG_BINARY:
+				return rkey_push_blob(L, value.get_binary());
+			default:
+				break;
+			}
+			lua_pushnil(L);
 			return 1;
-		case REG_QWORD:
-			lua_pushinteger(L, value.get_uint64_t());
-			return 1;
-		case REG_SZ:
-		case REG_EXPAND_SZ:
-			return rkey_push_wstring(L, value.get_string());
-		case REG_BINARY:
-			return rkey_push_blob(L, value.get_binary());
-		default:
-			break;
 		}
-		lua_pushnil(L);
-		return 1;
+		RKEY_TRY_END();
 	}
 
 	int rkey_newindex(lua_State* L)
 	{
-		key_w*       self = rkey_read(L, 1);
-		std::wstring key  = rkey_read_wstring(L, 2);
-		key_w::value_type& value = self->value(key);
-		lua_geti(L, 3, 1);
-		lua_geti(L, 3, 2);
-		switch (lua_tointeger(L, -2))
+		RKEY_TRY()
 		{
-		case REG_DWORD:
-			value.set_uint32_t((uint32_t)lua_tointeger(L, -1));
-			break;
-		case REG_QWORD:
-			value.set_uint64_t(lua_tointeger(L, -1));
-			break;
-		case REG_SZ:
-		case REG_EXPAND_SZ:
-			value.set(rkey_read_wstring(L, -1));
-			break;
-		case REG_BINARY:
-		{
-			size_t buflen = 0;
-			const char* buf = lua_tolstring(L, -1, &buflen);
-			value.set((const void*)buf, buflen);
-			break;
+			key_w*       self = rkey_read(L, 1);
+			std::wstring key = rkey_read_wstring(L, 2);
+			key_w::value_type& value = self->value(key);
+			lua_geti(L, 3, 1);
+			lua_geti(L, 3, 2);
+			switch (lua_tointeger(L, -2))
+			{
+			case REG_DWORD:
+				value.set_uint32_t((uint32_t)lua_tointeger(L, -1));
+				break;
+			case REG_QWORD:
+				value.set_uint64_t(lua_tointeger(L, -1));
+				break;
+			case REG_SZ:
+			case REG_EXPAND_SZ:
+				value.set(rkey_read_wstring(L, -1));
+				break;
+			case REG_BINARY:
+			{
+							   size_t buflen = 0;
+							   const char* buf = lua_tolstring(L, -1, &buflen);
+							   value.set((const void*)buf, buflen);
+							   break;
+			}
+			default:
+				break;
+			}
+			return 0;
 		}
-		default:
-			break;
-		}
-		return 0;
+		RKEY_TRY_END();
 	}
 
 	int rkey_div(lua_State* L)
 	{
-		key_w*       self = rkey_read(L, 1);
-		std::wstring rht = rkey_read_wstring(L, 2);
-		key_w        ret = *self / rht;
-		return rkey_copy(L, 1, &ret);
+		RKEY_TRY()
+		{
+			key_w*       self = rkey_read(L, 1);
+			std::wstring rht = rkey_read_wstring(L, 2);
+			key_w        ret = *self / rht;
+			return rkey_copy(L, 1, &ret);
+		}
+		RKEY_TRY_END();
 	}
 
 	int rkey_gc(lua_State* L)
