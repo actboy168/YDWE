@@ -218,16 +218,10 @@
 */
 #if defined(LUA_BUILD_AS_DLL)	/* { */
 
-#if defined(__cplusplus)
-	#define LUA_API_EXTERN_C extern "C"
-#else
-	#define LUA_API_EXTERN_C
-#endif
-
 #if defined(LUA_CORE) || defined(LUA_LIB)	/* { */
-#define LUA_API LUA_API_EXTERN_C __declspec(dllexport)
+#define LUA_API __declspec(dllexport)
 #else						/* }{ */
-#define LUA_API LUA_API_EXTERN_C __declspec(dllimport)
+#define LUA_API __declspec(dllimport)
 #endif						/* } */
 
 #else				/* }{ */
