@@ -1,22 +1,21 @@
-#include <base/exception/detail/windows_category.h>
+#include <base/win/windows_category.h>
 #include <base/exception/detail/error_msg.h>
 #include <base/util/string_view.h>
 #include <base/util/unicode.h>
 #include <Windows.h>
-#include <sstream>
+#include <sstream>	
+#include <system_error>
 
-namespace base {
+namespace base { namespace win {
 
-namespace exception_detail
-{
-	const char* windows_category_impl::name() const 
+	const char* windows_category::name() const
 	{ 
 		return "windows"; 
 	}
 
-	std::string windows_category_impl::message(int error_code) const
+	std::string windows_category::message(int error_code) const
 	{
-		error_msg<wchar_t> buffer;
+		exception_detail::error_msg<wchar_t> buffer;
 		unsigned long result = ::FormatMessageW(
 			FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_IGNORE_INSERTS,
 			NULL,
@@ -42,7 +41,7 @@ namespace exception_detail
 		return std::move(util::w2u(str, util::conv_method::replace | '?'));
 	}
 
-	std::error_condition windows_category_impl::default_error_condition(int error_code) const
+	std::error_condition windows_category::default_error_condition(int error_code) const
 	{
 		const std::error_condition err_condition = std::system_category().default_error_condition(error_code);
 		const std::string err_condition_msg = err_condition.message();
@@ -53,6 +52,15 @@ namespace exception_detail
 
 		return std::error_condition(error_code, *this);
 	}
-}
 
-}
+	std::string error_message()
+	{
+		return error_message(GetLastError());
+	}
+
+	std::string error_message(int error_code)
+	{
+		static windows_category instance;
+		return instance.message(error_code);
+	}
+}}

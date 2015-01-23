@@ -194,9 +194,6 @@
     <ClCompile Include="base\exception\exception.cpp">
       <Filter>base\exception</Filter>
     </ClCompile>
-    <ClCompile Include="base\exception\detail\windows_category.cpp">
-      <Filter>base\exception\detail</Filter>
-    </ClCompile>
     <ClCompile Include="base\warcraft3\jass\global_variable.cpp">
       <Filter>base\warcraft3\jass</Filter>
     </ClCompile>
@@ -256,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="base\hook\dyn_iat.cpp">
       <Filter>base\hook</Filter>
+    </ClCompile>
+    <ClCompile Include="base\win\windows_category.cpp">
+      <Filter>base\win</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -412,9 +412,6 @@
     <ClInclude Include="base\exception\exception.h">
       <Filter>base\exception</Filter>
     </ClInclude>
-    <ClInclude Include="base\exception\detail\windows_category.h">
-      <Filter>base\exception\detail</Filter>
-    </ClInclude>
     <ClInclude Include="base\warcraft3\jass\global_variable.h">
       <Filter>base\warcraft3\jass</Filter>
     </ClInclude>
@@ -553,6 +550,9 @@
     </ClInclude>
     <ClInclude Include="base\win\registry\v2\predefined_keys.h">
       <Filter>base\win\registry\v2</Filter>
+    </ClInclude>
+    <ClInclude Include="base\win\windows_category.h">
+      <Filter>base\win</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
