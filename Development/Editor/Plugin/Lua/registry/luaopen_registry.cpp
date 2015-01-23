@@ -177,6 +177,5 @@ int luaopen_registry(lua_State* L)
 #undef LUA_PUSH_CONST
 
 	lua_setglobal(L, "registry");
-	lua_pop(L, 1);
 	return 0;
 }
