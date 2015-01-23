@@ -5,7 +5,10 @@
 #include <memory>
 #include <strsafe.h>
 #include <cassert>
-#include <detours.h>
+#if !defined(DISABLE_DETOURS)
+#include <detours.h>	  
+#pragma comment(lib, "detours.lib")
+#endif
 
 namespace base { namespace win {
 
@@ -28,6 +31,7 @@ namespace base { namespace win {
 				process_information);
 		}
 
+#if !defined(DISABLE_DETOURS)
 		bool create_process_use_detour(
 			const wchar_t*        application, 
 			wchar_t*              command_line,
@@ -47,7 +51,7 @@ namespace base { namespace win {
 				dll_path, 
 				NULL);
 		}
-
+#endif
 
 		bool create_process(
 			const wchar_t*                 application, 
@@ -61,7 +65,7 @@ namespace base { namespace win {
 		{
 			if (boost::filesystem::exists(dll_path))
 			{
-#if 1
+#if !defined(DISABLE_DETOURS)
 				return create_process_use_detour(application, command_line, inherit_handle, creation_flags, current_directory, startup_info, process_information, dll_path.string().c_str());
 #else
 				bool result = create_process_use_system(application, command_line, inherit_handle, creation_flags | CREATE_SUSPENDED, current_directory, startup_info, process_information);

@@ -1,4 +1,7 @@
 #include <base/hook/inline.h>
+
+#if !defined(DISABLE_DETOURS)
+
 #include <base/hook/detail/replace_pointer.h>
 #include <Windows.h>
 #include <detours.h>
@@ -54,3 +57,5 @@ namespace hook {
 	}
 }
 }
+
+#endif
