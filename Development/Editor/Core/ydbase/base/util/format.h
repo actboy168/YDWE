@@ -250,11 +250,16 @@ private:
 		format_cast_string(const_cast<const T*>(value));
 	}
 
+#if defined BASE_FORMAT_DISABLE_UNICODE
 	template <class T>
 	void format_cast_string(const std::basic_string<T>& value)
 	{
 		format_value(value.c_str(), value.size());
 	}
+#else 		
+	void format_cast_string(const std::basic_string<char>& value);
+	void format_cast_string(const std::basic_string<wchar_t>& value);
+#endif
 
 	template <class T>
 	void format_cast_char(const T& /*value*/
@@ -617,6 +622,33 @@ inline void format_analyzer<char>::format_cast_string(const wchar_t* value)
 	std::string valstr = base::util::w2u(value);
 	format_cast_string(valstr.c_str());
 }
+
+template <>
+inline void  format_analyzer<char>::format_cast_string(const std::basic_string<char>& value)
+{
+	format_value(value.c_str(), value.size());
+}
+
+template <>
+inline void format_analyzer<char>::format_cast_string(const std::basic_string<wchar_t>& value)
+{
+	std::string valstr = base::util::w2u(value);
+	format_value(valstr.c_str(), valstr.size());
+}
+
+template <>
+inline void  format_analyzer<wchar_t>::format_cast_string(const std::basic_string<char>& value)
+{
+	std::wstring valstr = base::util::u2w(value);
+	format_value(valstr.c_str(), valstr.size());
+}
+
+template <>
+inline void format_analyzer<wchar_t>::format_cast_string(const std::basic_string<wchar_t>& value)
+{
+	format_value(value.c_str(), value.size());
+}
+
 #endif
 
 
