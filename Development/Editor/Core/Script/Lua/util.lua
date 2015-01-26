@@ -167,7 +167,7 @@ function sys.ini_save (path, tbl)
 	for section, kv in pairs(tbl) do
 		f:write("[" .. section .. "]\n")
 		for key, value in pairs(kv) do
-			f:write(string.trim(item) .. " = " .. string.trim(value) .. "\n")
+			f:write(string.trim(key) .. " = " .. string.trim(value) .. "\n")
 		end
 	end
 	f:close()

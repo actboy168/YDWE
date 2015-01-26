@@ -4,7 +4,15 @@
 
 static bool VirtualMpqWatchCB(const luabind::object& func, const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
 {
-	luabind::object ret = luabind::call_function<luabind::object>(func, filename);
+	luabind::object ret;
+	try {
+		ret = luabind::call_function<luabind::object>(func, filename);
+	} catch (luabind::error const& e) {
+		const char* err = lua_tostring(e.state(), -1);
+		// todo: log
+		return false;
+	}
+
 	switch (luabind::type(ret))
 	{
 	case LUA_TSTRING:
@@ -17,7 +25,6 @@ static bool VirtualMpqWatchCB(const luabind::object& func, const std::string& fi
 	lua_State* L = ret.interpreter(); ret.push(L);
 	size_t buflen = 0;
 	const char* buf = lua_tolstring(L, -1, &buflen);
-	lua_pop(L, 1);
 	void* tmpbuf = base::warcraft3::virtual_mpq::storm_alloc(buflen + reserve_size);
 	if (!tmpbuf)
 	{
@@ -27,6 +34,7 @@ static bool VirtualMpqWatchCB(const luabind::object& func, const std::string& fi
 	*buffer_ptr = tmpbuf;
 	if (reserve_size) memset((unsigned char*)tmpbuf + buflen, 0, reserve_size);
 	if (size_ptr) *size_ptr = buflen;
+	lua_pop(L, 1);
 	return true;
 }
 
