@@ -199,4 +199,21 @@
       <Filter>doodads</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\src\Units\units\campaignupgradestrings.txt">
+      <Filter>units</Filter>
+    </Text>
+    <Text Include="..\src\Units\units\neutralupgradestrings.txt">
+      <Filter>units</Filter>
+    </Text>
+    <Text Include="..\src\Units\units\nightelfupgradestrings.txt">
+      <Filter>units</Filter>
+    </Text>
+    <Text Include="..\src\Units\units\orcupgradestrings.txt">
+      <Filter>units</Filter>
+    </Text>
+    <Text Include="..\src\Units\units\unitglobalstrings.txt">
+      <Filter>units</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
