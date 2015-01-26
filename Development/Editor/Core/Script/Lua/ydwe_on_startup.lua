@@ -180,11 +180,13 @@ event.register(event.EVENT_WE_START, false, function (event_data)
 
 	-- 载入Patch MPQ
 	mpq_util:load_mpq("units", 14)
-	mpq_util:load_mpq("ydwe", 14)
-	
+
 	-- 加载插件
 	plugin:load_all()
 
+	-- 初始化UI加载器
+	uiloader:initialize()
+	
 	-- 载入注入代码配置
 	inject_code:initialize()
 		

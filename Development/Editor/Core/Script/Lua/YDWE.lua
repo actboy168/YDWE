@@ -16,7 +16,7 @@ do
 		return real_require(str, ...)
 	end
 end
-
+			
 require "sys"
 require "filesystem"
 require "gui"
@@ -25,12 +25,12 @@ require "event"
 require "ar_stormlib"
 require "ar_storm"
 require "virtual_mpq"
-
 require "registry"
 require "version"
 require "localization"
 require "config"
 require "plugin"
+require "uiloader"
 
 require "ydwe_on_menu"
 require "ydwe_on_save"
