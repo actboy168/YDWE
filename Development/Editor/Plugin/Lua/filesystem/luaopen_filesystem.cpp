@@ -144,6 +144,7 @@ namespace NLuaAPI { namespace NFileSystemAdditional {
 	}
 }}
 
+extern "C" __declspec(dllexport) int luaopen_filesystem(lua_State* L);
 
 int luaopen_filesystem(lua_State *pState)
 {
@@ -249,4 +250,16 @@ int luaopen_filesystem(lua_State *pState)
 	LUA_AREA_CONSTANT(DIR_TASKBAR_PINS);
 
 	return 0;
+}
+
+#include <windows.h>
+
+BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
+{
+	if (reason == DLL_PROCESS_ATTACH)
+	{
+		DisableThreadLibraryCalls(module);
+	}
+
+	return TRUE;
 }
