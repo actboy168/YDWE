@@ -7,19 +7,21 @@ namespace logging
 {
 	struct logging_backend::implementation
 	{
-		boost::filesystem::path root_path_;
+		boost::filesystem::path root_;
+		std::wstring name_;
 		boost::filesystem::ofstream file_;
 		uintmax_t written_;
 
-		implementation(const boost::filesystem::path& root_path)
-			: root_path_(root_path)
+		implementation(const boost::filesystem::path& root, const std::wstring& name)
+			: root_(root)
+			, name_(name)
 			, file_()
 			, written_(0)
 		{ }
 	};
 
-	logging_backend::logging_backend(const boost::filesystem::path& root_path)
-		: impl_(new implementation(root_path))
+	logging_backend::logging_backend(const boost::filesystem::path& root, const std::wstring& name)
+		: impl_(new implementation(root, name))
 	{ }
 
 	logging_backend::~logging_backend()
@@ -38,11 +40,11 @@ namespace logging
 
 		if (!impl_->file_.is_open())
 		{
-			boost::filesystem::create_directories(impl_->root_path_);
-			impl_->file_.open(impl_->root_path_ / L"ydwe.log", std::ios_base::app | std::ios_base::out);
+			boost::filesystem::create_directories(impl_->root_);
+			impl_->file_.open(impl_->root_ / (impl_->name_ + L".log"), std::ios_base::app | std::ios_base::out);
 			if (!impl_->file_.is_open())
 			{
-				throw base::exception("Failed to open file '%s' for writing.", (impl_->root_path_ / L"ydwe.log").string().c_str());
+				throw base::exception("Failed to open file '%s' for writing.", (impl_->root_ / (impl_->name_ + L".log")).string().c_str());
 			}
 
 			impl_->written_ = static_cast<std::streamoff>(impl_->file_.tellp());
@@ -68,16 +70,16 @@ namespace logging
 		size_t i = 1;
 		for (; i < 10; ++i)
 		{
-			boost::filesystem::path p = impl_->root_path_ / base::format(L"ydwe%03d.log", i);
+			boost::filesystem::path p = impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i);
 			if (!boost::filesystem::exists(p))
 			{
 				break;
 			}
 		}
 		if (i == 10) i = 1;
-		boost::filesystem::rename(impl_->root_path_ / L"ydwe.log", impl_->root_path_ / base::format(L"ydwe%03d.log", i));
+		boost::filesystem::rename(impl_->root_ / (impl_->name_ + L".log"), impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i));
 
 		++i; if (i == 10) i = 1;
-		boost::filesystem::remove(impl_->root_path_ / base::format(L"ydwe%03d.log", i));
+		boost::filesystem::remove(impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i));
 	}
 }

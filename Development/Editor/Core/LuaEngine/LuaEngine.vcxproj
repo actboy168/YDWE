@@ -87,18 +87,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="logging.cpp" />
-    <ClCompile Include="logging_backend.cpp" />
     <ClCompile Include="LuaEngine.cpp" />
     <ClCompile Include="LuaEngineImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="logging.h" />
-    <ClInclude Include="logging_backend.h" />
     <ClInclude Include="LuaEngineImpl.h" />
     <ClInclude Include="LuaEngine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Plugin\Lua\log\log.vcxproj">
+      <Project>{52e72b20-ec48-11e2-a1df-239f3740374f}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>

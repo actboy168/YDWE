@@ -1,3 +1,0 @@
-LIBRARY "log"
-EXPORTS
-	luaopen_log

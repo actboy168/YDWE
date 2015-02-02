@@ -8,7 +8,7 @@
 #pragma once
 #endif
 
-#include <LuaEngine\logging.h>
+#include <../Plugin/Lua/log/logging.h>
 
 namespace NYDWE
 {

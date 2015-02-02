@@ -24,7 +24,7 @@ namespace logging
 	typedef boost::log::sources::severity_logger<boost::log::trivial::severity_level>  logger;
 	typedef boost::log::sources::wseverity_logger<boost::log::trivial::severity_level> wlogger;
 
-	LUAENGINE_API bool    initiate(const boost::filesystem::path& root_path);
+	LUAENGINE_API bool    initiate(const boost::filesystem::path& root, const std::wstring& name);
 	LUAENGINE_API logger  get_logger(const char* name);
 	LUAENGINE_API wlogger get_wlogger(const char* name);
 }

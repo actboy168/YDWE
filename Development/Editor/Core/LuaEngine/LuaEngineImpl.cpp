@@ -12,7 +12,6 @@
 #include <base/file/stream.h>
 #include <base/util/format.h>
 #include <base/win/version.h>
-#include "logging.h"
 
 uintptr_t RealLuaPcall = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"luacore.dll"), "lua_pcallk");
 int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
@@ -48,7 +47,7 @@ LuaEngineImpl::~LuaEngineImpl()
 
 bool LuaEngineImpl::InitializeLogger(const boost::filesystem::path& root_path)
 {
-	if (!logging::initiate(root_path))
+	if (!logging::initiate(root_path, L"ydwe"))
 	{
 		return false;
 	}

@@ -24,7 +24,7 @@ namespace logging
 		implementation* impl_;
 
 	public:
-		logging_backend(const boost::filesystem::path& root_path);
+		logging_backend(const boost::filesystem::path& root, const std::wstring& name);
 		~logging_backend();
 
 		void consume(record_view const& rec, string_type const& formatted_message);

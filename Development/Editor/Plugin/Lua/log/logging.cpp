@@ -16,14 +16,14 @@
 
 namespace logging
 {
-	bool initiate(const boost::filesystem::path& root_path)
+	bool initiate(const boost::filesystem::path& root, const std::wstring& name)
 	{
 		try
 		{
 			using namespace boost::log;
 
 			typedef sinks::synchronous_sink<logging_backend> logging_sink;
-			boost::shared_ptr<logging_sink> sink = boost::make_shared<logging_sink>(root_path);
+			boost::shared_ptr<logging_sink> sink = boost::make_shared<logging_sink>(root, name);
 
 			sink->set_formatter
 				(
