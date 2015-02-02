@@ -19,10 +19,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="logging.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="logging_backend.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

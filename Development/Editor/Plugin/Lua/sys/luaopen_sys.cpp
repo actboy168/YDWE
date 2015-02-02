@@ -12,7 +12,8 @@
 #include <base/win/process.h>
 #include <base/win/file_version.h>
 #include <fcntl.h>
-#include <io.h>
+#include <io.h>	  
+#include "NtQuerySystemProcessInformation.h"
 
 namespace fs = boost::filesystem;
 
@@ -291,6 +292,54 @@ namespace NLuaAPI { namespace NSys {
 		bool result = p.redirect(stdinput, stdoutput, stderror);
 		lua_pushboolean(pState, result);
 	}
+
+	static void LuaSysSleep(int ms)
+	{
+		Sleep(ms);
+	}
+	
+	static int LuaGetProcessList(lua_State* L)
+	{
+		lua_newtable(L);
+		bool suc = NtQuerySystemProcessInformation([=](DWORD ProcessId, PWSTR ImageName, USHORT ImageNameLength)
+		{
+			std::wstring name(ImageName, ImageNameLength / sizeof(wchar_t));
+			std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+			luabind::object(L, name).push(L);
+			luabind::object(L, ProcessId).push(L);
+			lua_settable(L, -3);
+		});
+		if (!suc) {
+			lua_pop(L, 1);
+			lua_pushnil(L);
+		}
+		return 1;
+	}
+
+	static int LuaKillProcess(lua_State* L, int processid)
+	{
+		HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, false, processid);
+		if (hProcess == NULL)
+		{
+			lua_pushboolean(L, 0);
+			return 1;
+		}
+		if (!TerminateProcess(hProcess, -1))
+		{
+			CloseHandle(hProcess);
+			lua_pushboolean(L, 0);
+			return 1;
+		}
+		if (WAIT_TIMEOUT == WaitForSingleObject(hProcess, 5000))
+		{
+			CloseHandle(hProcess);
+			lua_pushboolean(L, 0);
+			return 1;
+		}
+		CloseHandle(hProcess);
+		lua_pushboolean(L, 1);
+		return 1;
+	}
 }}
 
 extern "C" __declspec(dllexport) int luaopen_sys(lua_State* L);
@@ -318,7 +367,14 @@ int luaopen_sys(lua_State *pState)
 		def("shell_execute", &NLuaAPI::NSys::LuaShellExecute),
 		def("get_module_version_info", &NLuaAPI::NSys::LuaGetVersionNumberString),
 		def("get_clipboard_text", &NLuaAPI::NSys::LuaSysGetClipboardText),
-		def("set_clipboard_text", &NLuaAPI::NSys::LuaSysSetClipboardText)
+		def("set_clipboard_text", &NLuaAPI::NSys::LuaSysSetClipboardText),
+		def("sleep", &NLuaAPI::NSys::LuaSysSleep)
+	];
+
+	module(pState, "process")
+	[
+		def("list", &NLuaAPI::NSys::LuaGetProcessList),
+		def("kill", &NLuaAPI::NSys::LuaKillProcess)
 	];
 
 	return 0;
