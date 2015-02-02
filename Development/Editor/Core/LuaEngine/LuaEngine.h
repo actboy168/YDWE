@@ -2,16 +2,9 @@
 
 #include <boost/filesystem.hpp>
 
-
-#if defined(LUAENGINE_EXPORTS)
-#	define LUAENGINE_API __declspec(dllexport)
-#else
-#	define LUAENGINE_API __declspec(dllimport)
-#endif
-
 class LuaEngineImpl;
 
-class LUAENGINE_API LuaEngine
+class LuaEngine
 {
 public:
 	LuaEngine();
