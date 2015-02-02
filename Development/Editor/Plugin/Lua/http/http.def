@@ -1,3 +1,0 @@
-LIBRARY "http"
-EXPORTS
-	luaopen_http

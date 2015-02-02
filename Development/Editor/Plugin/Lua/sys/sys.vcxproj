@@ -63,7 +63,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>sys.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
       <AdditionalDependencies>luacore.lib;luabind.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -83,16 +84,13 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ModuleDefinitionFile>sys.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
       <AdditionalDependencies>luacore.lib;luabind.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="luaopen_sys.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="sys.def" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">

@@ -1,3 +1,0 @@
-LIBRARY "registry"
-EXPORTS
-	luaopen_registry

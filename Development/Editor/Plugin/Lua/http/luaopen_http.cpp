@@ -31,6 +31,8 @@ static void http_open(lua_State* L, const std::string& url)
 	}
 }
 
+extern "C" __declspec(dllexport) int luaopen_http(lua_State* L);
+
 int luaopen_http(lua_State *pState)
 {
 	using namespace luabind;
@@ -41,4 +43,16 @@ int luaopen_http(lua_State *pState)
 	];
 
 	return 0;
+}
+
+#include <windows.h>
+
+BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
+{
+	if (reason == DLL_PROCESS_ATTACH)
+	{
+		DisableThreadLibraryCalls(module);
+	}
+
+	return TRUE;
 }

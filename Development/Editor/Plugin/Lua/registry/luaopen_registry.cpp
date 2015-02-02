@@ -145,6 +145,8 @@ namespace luawarp { namespace registry {
 	}
 }}
 
+extern "C" __declspec(dllexport) int luaopen_registry(lua_State* L);
+
 int luaopen_registry(lua_State* L)
 {
 	using namespace luawarp;
@@ -178,4 +180,16 @@ int luaopen_registry(lua_State* L)
 
 	lua_setglobal(L, "registry");
 	return 0;
+}
+
+#include <windows.h>
+
+BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
+{
+	if (reason == DLL_PROCESS_ATTACH)
+	{
+		DisableThreadLibraryCalls(module);
+	}
+
+	return TRUE;
 }

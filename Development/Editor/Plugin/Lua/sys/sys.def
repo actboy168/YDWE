@@ -1,3 +1,0 @@
-LIBRARY "sys"
-EXPORTS
-	luaopen_sys
