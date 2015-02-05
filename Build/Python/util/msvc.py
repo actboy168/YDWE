@@ -13,7 +13,10 @@ def rebuild(solution, configuration, platform = 'Win32'):
     #p = popen('devenv "{0}" /Rebuild "{1}|{2}"'.format(solution, configuration, platform))
     p = popen('MSBuild "{0}" /m /v:m /t:rebuild /clp:ShowEventId /p:Configuration="{1}",Platform="{2}"'.format(solution, configuration, platform))
     while p.poll() == None:
-        sys.stdout.write(p.stdout.readline())
+        try:
+            sys.stdout.write(p.stdout.readline())
+        except:
+            pass
         #time.sleep(0.01) 
     sys.stdout.write(p.stdout.read())
 
