@@ -37,8 +37,6 @@ def complie(msvc_version, configuration):
     print('rebuild ydwe')
     util.msvc.rebuild(path['Development']/ 'Editor' / 'Core' / 'Solution' / 'YDWE.sln', configuration)    
     util.msvc.rebuild(path['Development']/ 'Editor' / 'Plugin' / 'YDColorizer' / 'YDColorizer.sln', configuration, 'Any CPU')
-    util.msvc.rebuild(path['Development']/ 'Editor' / 'UI' / 'sln' / 'YDUI.sln', 'YDWE')
-    util.msvc.rebuild(path['Development']/ 'Editor' / 'UI' / 'sln' / 'YDUI.sln', 'YDTrigger')
     print('copy crt dll')
     copy_crt_dll(msvc_version, configuration)
 
