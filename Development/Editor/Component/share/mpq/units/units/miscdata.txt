@@ -1,0 +1,94 @@
+[Misc]
+
+// Range around selected ground area to search for a target
+CloseEnoughRange=100
+
+// Radius of building blight dispel
+BuildingUnblightRadius=350
+
+// Radius of creep notification when a new building gets placed
+BuildingPlacementNotifyRadius=600
+
+// Radius of creep notification when a neutral building is in use
+NeutralUseNotifyRadius=900
+
+// the angle in degrees structures face
+BuildingAngle=270
+RootAngle=250
+
+// half angle in radians that a unit must meet to be facing his target
+AttackHalfAngle=0.5
+FoggedAttackRevealRadius=200.0
+DyingRevealRadius=500.0
+
+// death and decay impact gameplay, so duration is specified
+BoneDecayTime=88
+StructureDecayTime=30
+DecayTime=2
+DissipateTime=3
+CancelTime=6
+BulletDeathTime=5
+EffectDeathTime=5
+FogFlashTime=3
+CreepCampPathingCellDistance=26
+
+// follow ranges
+FollowRange=300
+StructureFollowRange=100
+FollowItemRange=1000
+
+// distance target can move between starting cast and spell effect
+SpellCastRangeBuffer=300
+
+// largest possible collision radius for any widget
+MaxCollisionRadius=200
+
+// rally point vertical offset when set on non-units
+RallyZOffset=200
+
+// duration of art animations that get scaled
+ScaledAnimTime=60
+
+// max random reaction delay (seconds)
+ReactionDelay=0.25
+
+// missile chance to miss if target is moving or on high ground
+ChanceToMiss=0.25
+
+// game-seconds per game-day
+DayLength=480
+Dawn=6
+Dusk=18
+
+// earth has a 24 hour day, how many does Azeroth have
+DayHours=24
+
+// maximum amount of gold a gold mine can have
+GoldMineMaxGold=1000000
+
+// this is the amount where a gold mine is considered low.
+LowGoldAmount=1500
+
+// the length that a mine is considered owned after the last peon leaves it.
+GoldMineOwnDuration=2.0
+
+// this is the speed units change visibility (smaller = "cloak" slower)
+InvisSpeed=0.4
+
+// All selection circles will have this added to their z coord
+SelectionCircleBaseZ=16
+
+// item shadow data
+ItemShadowFile=Shadow
+ItemShadowSize=120,120
+ItemShadowOffset=50,50
+
+// seconds between attack notifications
+AttackNotifyDelay=30.0
+AttackNotifyRange=1250
+
+// alliance resource trading increments
+TradingIncSmall=100
+TradingIncLarge=200
+
+MissDamageReduction=0.5

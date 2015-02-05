@@ -43,9 +43,6 @@ def build_clear(configuration):
     fs.remove_all(path['ResultRoot'] / 'obj' / configuration)
     fs.remove_all(path['ResultRoot'] / 'lib' / configuration)
     fs.remove_all(path['ProjectRoot'] / 'Build' / 'publish' / configuration)
-    fs.remove_all(path['Development'] / 'Editor' / 'UI' / 'bin')
-    fs.remove_all(path['Development'] / 'Editor' / 'UI' / 'out')
-    fs.remove_all(path['Development'] / 'Editor' / 'UI' / 'txt')
 
 def build_move(configuration):
     print ('build_move')
@@ -60,15 +57,12 @@ def build_all(msvc_version, configuration):
     from build_anti_bj_leak import build_anti_bj_leak
     from copy_all           import copy_all
     from pack_skin          import pack_skin
-    from pack_ui            import pack_ui
     from pack_units         import pack_units
 
     complie(msvc_version, configuration)
     build_anti_bj_leak()
     copy_all(msvc_version, configuration)
     pack_skin()
-    pack_ui('ydtrigger')
-    pack_ui('ydwe')
     pack_units()
 
 def build(msvc_version, configuration):

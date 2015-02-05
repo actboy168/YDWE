@@ -1,0 +1,1346 @@
+// Rune of the Watcher
+[APwt]
+Art=ReplaceableTextures\CommandButtons\BTNSentryWard.blp
+Buttonpos=0,2
+Order=evileye
+Effectsound=PowerupSound
+
+// glyph of fortification
+[AIgf]
+Effectsound=PowerupSound
+
+// glyph of ultravision
+[AIgu]
+Effectsound=PowerupSound
+
+// Blink (item)
+[AIbk]
+Art=ReplaceableTextures\CommandButtons\BTNBlink.blp
+Buttonpos=1,2
+Order=blink
+// Art to play at the new coordinate
+Areaeffectart=Abilities\Spells\NightElf\Blink\BlinkTarget.mdl
+// Art to leave behind at old coordinate
+Specialart=Abilities\Spells\NightElf\Blink\BlinkCaster.mdl
+
+// One time permanent strength gain ability, usually on a Tome
+[AIsm]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+Targetart=Abilities\Spells\Items\AIsm\AIsmTarget.mdl
+Targetattach=origin
+
+[AInm]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+Targetart=Abilities\Spells\Items\AIsm\AIsmTarget.mdl
+Targetattach=origin
+
+// One time permanent agility gain ability, usually on a tome
+[AIam]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+Targetart=Abilities\Spells\Items\AIam\AIamTarget.mdl
+Targetattach=origin
+
+[AIgm]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+Targetart=Abilities\Spells\Items\AIam\AIamTarget.mdl
+Targetattach=origin
+
+// short duration single target speed bonus
+[AIsp]
+Art=ReplaceableTextures\CommandButtons\BTNPotionRed.blp
+
+// continuous Attack Bonus
+[AIat]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AIt6]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AIt9]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AItc]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AItf]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+// item cyclone
+[AIcy]
+Art=ReplaceableTextures\CommandButtons\BTNCyclone.blp
+order=cyclone
+
+// continuous Defense Bonus
+[AIde]
+
+[AId1]
+
+[AId2]
+
+[AId3]
+
+[AId4]
+
+[AId5]
+
+[AId8]
+
+[AId7]
+
+[AId0]
+
+// area of effect damage of destructables
+[AIdm]
+Art=ReplaceableTextures\CommandButtons\BTNGoblinLandMine.blp
+
+// One time permanent hero experience gain, usually on a tome
+[AIem]
+Art=ReplaceableTextures\CommandButtons\BTNTomeBrown.blp
+Casterart=Abilities\Spells\Items\AIem\AIemTarget.mdl
+Casterattach=origin
+
+[AIe2]
+Art=ReplaceableTextures\CommandButtons\BTNManual3.blp
+Casterart=Abilities\Spells\Items\AIem\AIemTarget.mdl
+Casterattach=origin
+
+// Cloud of Fog
+[AIfg]
+Art=ReplaceableTextures\CommandButtons\BTNCloudOfFog.blp
+Order=cloudoffog
+
+// Flag ability
+[AIfl]
+Targetart=UI\Feedback\RallyPoint\RallyPoint.mdl
+Targetattach=hand,right
+
+// human flag
+[AIfm]
+Art=ReplaceableTextures\CommandButtons\BTNHumanCaptureFlag.blp
+Targetart=Objects\InventoryItems\HumanCaptureFlag\HumanCaptureFlag.mdl
+Targetattach=hand,right
+
+// night elf flag
+[AIfn]
+Art=ReplaceableTextures\CommandButtons\BTNNightElfCaptureFlag.blp
+Targetart=Objects\InventoryItems\NightElfCaptureFlag\NightElfCaptureFlag.mdl
+Targetattach=hand,right
+
+// orc flag
+[AIfo]
+Art=ReplaceableTextures\CommandButtons\BTNOrcCaptureFlag.blp
+Targetart=Objects\InventoryItems\OrcCaptureFlag\OrcCaptureFlag.mdl
+Targetattach=hand,right
+
+// undead flag
+[AIfe]
+Art=ReplaceableTextures\CommandButtons\BTNUndeadCaptureFlag.blp
+Targetart=Objects\InventoryItems\UndeadCaptureFlag\UndeadCaptureFlag.mdl
+Targetattach=hand,right
+
+// One time permanent hero level gain, usually on a tome
+[AIlm]
+Art=ReplaceableTextures\CommandButtons\BTNTomeRed.blp
+Casterart=Abilities\Spells\Items\AIlm\AIlmTarget.mdl
+Casterattach=origin
+
+// One time permanent intelligence gain, usually on a Tome
+[AIim]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+Targetart=Abilities\Spells\Items\AIim\AIimTarget.mdl
+Targetattach=origin
+
+[AItm]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+Targetart=Abilities\Spells\Items\AIim\AIimTarget.mdl
+Targetattach=origin
+
+// One time permanent agi/int/str gain
+[AIxm]
+Art=ReplaceableTextures\CommandButtons\BTNTomeRed.blp
+Targetart=Abilities\Spells\Items\AIlm\AIlmTarget.mdl
+Targetattach=origin
+
+// single shot one target healing (potions, typically)
+[AIhe]
+Targetart=Abilities\Spells\Items\AIhe\AIheTarget.mdl
+Targetattach=origin
+
+// single shot group area effect healing (scrolls, typically)
+[AIha]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfTownPortal.blp
+Targetart=Abilities\Spells\Items\AIhe\AIheTarget.mdl
+Targetattach=origin
+
+[AIhb]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfTownPortal.blp
+Targetart=Abilities\Spells\Items\AIhe\AIheTarget.mdl
+Targetattach=origin
+
+// single shot group area effect healing (powerup, lesser)
+[APh1]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfTownPortal.blp
+Targetart=Abilities\Spells\Items\AIhe\AIheTarget.mdl
+Targetattach=origin
+Effectsound=PowerupSound
+
+// single shot group area effect healing (powerup)
+[APh2]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfTownPortal.blp
+Targetart=Abilities\Spells\Items\AIhe\AIheTarget.mdl
+Targetattach=origin
+Effectsound=PowerupSound
+
+// single shot group area effect healing (powerup, greater)
+[APh3]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfTownPortal.blp
+Targetart=Abilities\Spells\Items\AIhe\AIheTarget.mdl
+Targetattach=origin
+Effectsound=PowerupSound
+
+// short duration single target invisibility (potion)
+[AIvi]
+Targetart=Abilities\Spells\Items\AIvi\AIviTarget.mdl
+Targetattach=chest
+
+// continuous invisibility (ring)
+[AIpi]
+
+// short duration single target invulnerability (potion)
+// brings up the invulnerability buff from CommonAbility
+[AIvu]
+Art=ReplaceableTextures\CommandButtons\BTNGreaterInvulneralbility.blp
+
+[AIvl]
+Art=ReplaceableTextures\CommandButtons\BTNLesserInvulneralbility.blp
+
+// single shot one target mana regain (potions, typically)
+[AIma]
+Targetart=Abilities\Spells\Items\AIma\AImaTarget.mdl
+Targetattach=origin
+
+// single shot group area effect mana regain (scrolls, typically)
+[AImr]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfProtection.blp
+Targetart=Abilities\Spells\Items\AIma\AImaTarget.mdl
+Targetattach=origin
+
+// single shot group area effect mana regain (rune)
+[APmr]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfProtection.blp
+Targetart=Abilities\Spells\Items\AIma\AImaTarget.mdl
+Targetattach=origin
+Effectsound=PowerupSound
+
+// single shot group area effect mana regain (rune, greater)
+[APmg]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfProtection.blp
+Targetart=Abilities\Spells\Items\AIma\AImaTarget.mdl
+Targetattach=origin
+Effectsound=PowerupSound
+
+// single shot one target life/mana restore (potion)
+[AIre]
+Art=ReplaceableTextures\CommandButtons\BTNPotionRed.blp
+Targetart=Abilities\Spells\Items\AIre\AIreTarget.mdl
+Targetattach=origin
+
+// single shot group area effect life/mana restore (scroll)
+[AIra]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfHealing.blp
+Targetart=Abilities\Spells\Items\AIre\AIreTarget.mdl
+Targetattach=origin
+
+// single shot group area effect life/mana restore (rune)
+[APra]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfHealing.blp
+Targetart=Abilities\Spells\Items\AIre\AIreTarget.mdl
+Targetattach=origin
+Effectsound=PowerupSound
+
+// area of effect application of a defensive buff (scroll of protection)
+[AIda]
+Art=ReplaceableTextures\CommandButtons\BTNScroll.blp
+Casterart=Abilities\Spells\Items\AIda\AIdaCaster.mdl
+
+// area of effect application of a defensive buff (scroll of protection) (with healing)
+[AIdb]
+Art=ReplaceableTextures\CommandButtons\BTNScroll.blp
+Casterart=Abilities\Spells\Items\AIda\AIdaCaster.mdl
+Targetart=Abilities\Spells\Items\AIre\AIreTarget.mdl
+Targetattach=origin
+
+// buff that AIda applies
+[Bdef]
+Spelldetail=1
+Buffart=ReplaceableTextures\CommandButtons\BTNScroll.blp
+Targetart=Abilities\Spells\Items\AIda\AIdaTarget.mdl
+Targetattach=overhead
+
+// area of effect detection (crystal ball)
+[AIta]
+Art=ReplaceableTextures\CommandButtons\BTNCrystalBall.blp
+Casterart=Abilities\Spells\Items\AIta\CrystalBallCaster.mdl
+Casterattach=overhead
+
+// area of effect application of a detected buff (dust of appearance)
+[AItb]
+Art=ReplaceableTextures\CommandButtons\BTNDustOfAppearance.blp
+Casterart=Abilities\Spells\Items\AItb\AItbTarget.mdl
+
+[Bdet]
+Buffart=ReplaceableTextures\CommandButtons\BTNDustOfAppearance.blp
+
+// continuous Mana regeneration (ring)
+[AIrm]
+Art=ReplaceableTextures\CommandButtons\BTNSobiMask.blp
+
+[AIfi]
+Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
+Missilespeed=900
+MissileHoming=1
+
+// Illusion generator
+[AIil]
+Art=ReplaceableTextures\CommandButtons\BTNWand.blp
+Targetart=Abilities\Spells\Items\AIil\AIilTarget.mdl
+Targetattach=origin
+
+[BIil]
+Buffart=ReplaceableTextures\CommandButtons\BTNWand.blp
+Specialart=Abilities\Spells\Orc\MirrorImage\MirrorImageDeathCaster.mdl
+
+// Dispel effect (powerup)
+[APdi]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+// Effectart, if specified, will play at the targeted x,y
+Effectart=Abilities\Spells\Items\AItb\AItbTarget.mdl
+// Targetart, if specified, will play on affected units in the area-of-effect.
+Targetart=Abilities\Spells\Human\DispelMagic\DispelMagicTarget.mdl
+Effectsound=PowerupSound
+
+// Dispel effect
+[AIdi]
+Art=ReplaceableTextures\CommandButtons\BTNWandSkull.blp
+// Effectart, if specified, will play at the targeted x,y
+Effectart=Abilities\Spells\Items\AItb\AItbTarget.mdl
+// Targetart, if specified, will play on affected units in the area-of-effect.
+Targetart=Abilities\Spells\Human\DispelMagic\DispelMagicTarget.mdl
+
+// dispel w/ cooldown
+[AIds]
+Art=ReplaceableTextures\CommandButtons\BTNStaffOfNegation.blp
+// Effectart, if specified, will play at the targeted x,y
+Effectart=Abilities\Spells\Items\AItb\AItbTarget.mdl
+// Targetart, if specified, will play on affected units in the area-of-effect.
+Targetart=Abilities\Spells\Human\DispelMagic\DispelMagicTarget.mdl
+
+// Hero attacks get fire damage bonus, persistent, Orb of Fire
+[AIfb]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfFire.blp
+Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
+Missilehoming=1
+Targetart=Abilities\Spells\Items\AIfb\AIfbTarget.mdl
+Targetattach=weapon
+Specialart=Abilities\Spells\Items\AIfb\AIfbSpecialArt.mdl
+Specialattach=chest
+
+// Hero attacks get lightning damage bonus, persistent, Orb of Lightning
+[AIll]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfLightning.blp
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilehoming=1
+Targetart=Abilities\Spells\Items\AIlb\AIlbTarget.mdl
+Targetattach=weapon
+Specialart=Abilities\Spells\Items\AIlb\AIlbSpecialArt.mdl
+Specialattach=chest
+
+// Hero attacks get lightning damage bonus, persistent, Orb of Lightning
+[AIlb]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfLightning.blp
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilehoming=1
+Targetart=Abilities\Spells\Items\AIlb\AIlbTarget.mdl
+Targetattach=weapon
+Specialart=Abilities\Spells\Items\AIlb\AIlbSpecialArt.mdl
+Specialattach=chest
+
+// Hero attacks get frost damage bonus, persistent, Orb of Frost
+[AIob]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfFrost.blp
+Missileart=Abilities\Weapons\LichMissile\LichMissile.mdl
+Targetart=Abilities\Spells\Items\AIob\AIobTarget.mdl
+Missilehoming=1
+Targetattach=weapon
+Specialart=Abilities\Spells\Items\AIob\AIobSpecialArt.mdl
+Specialattach=chest
+
+// Hero attacks get poison damage bonus, persistent, Orb of Venom
+[AIpb]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfVenom.blp
+Missileart=Abilities\Spells\Items\OrbVenom\OrbVenomMissile.mdl
+Missilehoming=1
+Targetart=Abilities\Spells\Items\OrbVenom\OrbVenom.mdl
+Targetattach=weapon
+Specialart=Abilities\Spells\Items\OrbVenom\OrbVenomSpecialArt.mdl
+Specialattach=chest
+
+// Hero attacks get corruption damage bonus, persistent, Orb of Corruption
+[AIcb]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfCorruption.blp
+Missileart=Abilities\Spells\Items\OrbCorruption\OrbCorruptionMissile.mdl
+Missilehoming=1
+Targetart=Abilities\Spells\Items\OrbCorruption\OrbCorruption.mdl
+Targetattach=weapon
+Specialart=Abilities\Spells\Items\OrbCorruption\OrbCorruptionSpecialArt.mdl
+Specialattach=chest
+
+[BIcb]
+Buffart=ReplaceableTextures\CommandButtons\BTNOrbOfCorruption.blp
+
+// Hero attacks get defilement/BA damage bonus, persistent, Orb of Defilement
+[AIdf]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+Missileart=Abilities\Weapons\AvengerMissile\AvengerMissile.mdl
+Missilehoming=1
+Targetart=Abilities\Spells\Items\OrbDarkness\OrbDarkness.mdl
+Targetattach=weapon
+//Specialart=Abilities\Spells\Items\OrbCorruption\OrbCorruptionSpecialArt.mdl
+//Specialattach=chest
+
+// Hero sight range increase, persistent, Telescope
+[AIsi]
+Art=ReplaceableTextures\CommandButtons\BTNTelescope.blp
+
+// Soul Gem Hero soul theft ability
+[AIso]
+Art=ReplaceableTextures\CommandButtons\BTNSoulGem.blp
+Effectart=Abilities\Spells\Items\AIso\AIsoTarget.mdl
+
+// Soul Gem Hero soul-carying ability - remove this to release the soul
+[Asou]
+Art=ReplaceableTextures\CommandButtons\BTNUsedSoulGem.blp
+
+// caster buff for AIso
+[BIsv]
+Buffart=ReplaceableTextures\CommandButtons\BTNUsedSoulGem.blp
+Targetart=Abilities\Spells\Items\AIso\BIsvTarget.mdl
+
+// daystone/nightstone
+[AIto]
+
+// magical acorn (tree restorer)
+[AIga]
+Effectart=Abilities\Spells\NightElf\NatureTouch\NatureTouchTarget.mdl
+
+// reincarnation (ankh)
+[AIrc]
+Art=ReplaceableTextures\CommandButtons\BTNAnkh.blp
+Effectart=Abilities\Spells\Orc\Reincarnation\ReincarnationTarget.mdl
+
+// recall (amulet)
+[AIrt]
+Art=ReplaceableTextures\CommandButtons\BTNAmulet.blp
+// Play the same effect on all recalled units. Since the targeted unit
+// will already play this effect, don't also play Targetart on that unit.
+Casterart=Abilities\Spells\Human\MassTeleport\MassTeleportCaster.mdl
+Targetart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+Specialart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+
+// teleport for items
+[AIte]
+Casterart=Abilities\Spells\Human\MassTeleport\MassTeleportCaster.mdl
+Targetart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+Specialart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+// Shouldn't show art at targeted coordinate, so don't use Effectart.
+Areaeffectart=Abilities\Spells\Human\MassTeleport\MassTeleportTo.mdl
+
+// town portal (scroll)
+[AItp]
+Art=ReplaceableTextures\CommandButtons\BTNScrollUber.blp
+Casterart=Abilities\Spells\Human\MassTeleport\MassTeleportCaster.mdl
+Targetart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+Specialart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+// Shouldn't show art at targeted coordinate, so don't use Effectart.
+Areaeffectart=Abilities\Spells\Human\MassTeleport\MassTeleportTo.mdl
+
+// scepter of mastery, command ability
+[AIco]
+Art=ReplaceableTextures\CommandButtons\BTNScepterOfMastery.blp
+Targetart=Abilities\Spells\Items\AIco\CrownOfCmndTarget.mdl
+Targetattach=head
+
+// figurine unit summon ability - red drake
+[AIfd]
+Art=ReplaceableTextures\CommandButtons\BTNRedDragon.blp
+Targetart=Abilities\Spells\Orc\FeralSpirit\feralspirittarget.mdl
+
+[BFig]
+Effectart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+
+// furbolg
+[AIff]
+Art=ReplaceableTextures\CommandButtons\BTNFurbolg.blp
+Targetart=Abilities\Spells\Orc\FeralSpirit\feralspirittarget.mdl
+
+// rock golem
+[AIfr]
+Art=ReplaceableTextures\CommandButtons\BTNRockGolem.blp
+Targetart=Abilities\Spells\Orc\FeralSpirit\feralspirittarget.mdl
+
+// doom guard
+[AIfu]
+Art=ReplaceableTextures\CommandButtons\BTNDoomGuard.blp
+Targetart=Abilities\Spells\Orc\FeralSpirit\feralspirittarget.mdl
+
+// felhound
+[AIfh]
+Art=ReplaceableTextures\CommandButtons\BTNFelHound.blp
+Targetart=Abilities\Spells\Orc\FeralSpirit\feralspirittarget.mdl
+
+// skeleton
+[AIfs]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
+Targetart=Abilities\Spells\Undead\RaiseSkeletonWarrior\RaiseSkeleton.mdl
+
+// Frost Revenant
+[AIir]
+Art=ReplaceableTextures\CommandButtons\BTNIceShard.blp
+Targetart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+
+// Ursa Warrior
+[AIuw]
+Art=ReplaceableTextures\CommandButtons\BTNAmuletOftheWild.blp
+Targetart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+
+// infernal
+[AIin]
+Art=ReplaceableTextures\CommandButtons\BTNInfernal.blp
+Effectart=Units\Demon\Infernal\InfernalBirth.mdl
+Order=inferno
+
+// place goblin land mine
+[AIpm]
+Art=ReplaceableTextures\CommandButtons\BTNGoblinLandMine.blp
+
+// permanent mana bonus
+[AImn]
+Casterart=
+
+// temporary max mana bonus
+[AImm]
+
+[AImb]
+
+[AImz]
+
+[AImv]
+
+[AIbm]
+
+[AI2m]
+
+// temporary attack speed increase
+[AIas]
+
+[AIsx]
+Art=ReplaceableTextures\CommandButtons\BTNGlove.blp
+
+//improved attack speed
+[AIs2]
+Art=ReplaceableTextures\CommandButtons\BTNGlove.blp
+
+// vampiric life steal ability
+[AIva]
+Art=ReplaceableTextures\CommandButtons\BTNMaskOfDeath.blp
+// target art played on hero carrying item
+Targetart=
+// special art played on hero when ability fires
+Specialart=Abilities\Spells\Undead\VampiricAura\VampiricAuraTarget.mdl
+Missileart=Abilities\Spells\Items\WandOfNeutralization\NeutralizationMissile.mdl
+
+// cloak of flames
+[AIcf]
+Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
+
+// Cloak of flames immolation buff
+[BIcf]
+Buffart=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
+Targetart=Abilities\Spells\NightElf\Immolation\ImmolationTarget.mdl
+Specialart=Abilities\Spells\NightElf\Immolation\ImmolationDamage.mdl
+Specialattach=head
+
+// regen
+[Arel]
+Art=ReplaceableTextures\CommandButtons\BTNRingSkull.blp
+
+// regen lesser
+[Arll]
+Art=ReplaceableTextures\CommandButtons\BTNHealthStone.blp
+
+[AIs2]
+Art=ReplaceableTextures\CommandButtons\BTNGauntletsOfOgrePower.blp
+
+[AIs6]
+Art=ReplaceableTextures\CommandButtons\BTNBelt.blp
+
+[AIa6]
+Art=ReplaceableTextures\CommandButtons\BTNBoots.blp
+
+[AIaz]
+
+[AIms]
+Art=ReplaceableTextures\CommandButtons\BTNBootsOfSpeed.blp
+
+[AIi6]
+Art=ReplaceableTextures\CommandButtons\BTNRobeOfTheMagi.blp
+
+[AIx2]
+Art=ReplaceableTextures\CommandButtons\BTNCirclet.blp
+
+[AIx5]
+Art=ReplaceableTextures\CommandButtons\BTNHelmutPurple.blp
+
+[AIh1]
+Art=ReplaceableTextures\CommandButtons\BTNPotionGreenSmall.blp
+Targetart=Abilities\Spells\Items\AIhe\AIheTarget.mdl
+Targetattach=origin
+
+[AIh2]
+Art=ReplaceableTextures\CommandButtons\BTNPotionGreen.blp
+Targetart=Abilities\Spells\Items\AIhe\AIheTarget.mdl
+Targetattach=origin
+
+// item healing wards
+[AIhw]
+Art=ReplaceableTextures\CommandButtons\BTNHealingWard.blp
+Order=healingward
+
+// item sentry wards
+[AIsw]
+Art=ReplaceableTextures\CommandButtons\BTNSentryWard.blp
+Order=evileye
+
+[AIv1]
+Targetart=Abilities\Spells\Items\AIvi\AIviTarget.mdl
+Targetattach=chest
+Art=ReplaceableTextures\CommandButtons\BTNLesserInvisibility.blp
+
+[AIv2]
+Targetart=Abilities\Spells\Items\AIvi\AIviTarget.mdl
+Targetattach=chest
+Art=ReplaceableTextures\CommandButtons\BTNGreaterInvisibility.blp
+
+[AIm1]
+Art=ReplaceableTextures\CommandButtons\BTNPotionBlueSmall.blp
+Casterart=Abilities\Spells\Items\AIma\AImaTarget.mdl
+Casterattach=origin
+
+[AIm2]
+Art=ReplaceableTextures\CommandButtons\BTNPotionBlueBig.blp
+Casterart=Abilities\Spells\Items\AIma\AImaTarget.mdl
+Casterattach=origin
+
+[AIuv]
+Art=ReplaceableTextures\CommandButtons\BTNTelescope.blp
+
+[AIls]
+Art=ReplaceableTextures\CommandButtons\BTNLightningShield.blp
+Order=lightningshield
+
+// item roar
+[AIrr]
+Art=ReplaceableTextures\CommandButtons\BTNBattleRoar.blp
+Casterart=Abilities\Spells\NightElf\BattleRoar\RoarCaster.mdl
+Order=roar
+
+// item evasion
+[AIev]
+Art=ReplaceableTextures\CommandButtons\BTNEvasion.blp
+
+// item magic immunity
+[AImx]
+Art=ReplaceableTextures\CommandButtons\BTNNecklace.blp
+
+[AIa2]
+Art=ReplaceableTextures\CommandButtons\BTNSlippersOfAgility.blp
+
+[AId2]
+Art=ReplaceableTextures\CommandButtons\BTNRingGreen.blp
+
+[AId3]
+Art=ReplaceableTextures\CommandButtons\BTNRingGreen.blp
+
+[AId4]
+Art=ReplaceableTextures\CommandButtons\BTNRingGreen.blp
+
+[AIl2]
+Art=ReplaceableTextures\CommandButtons\BTNPeriapt1.blp
+
+[AIi2]
+Art=ReplaceableTextures\CommandButtons\BTNMantleOfIntelligence.blp
+
+[AIcd]
+Art=ReplaceableTextures\CommandButtons\BTNDrum.blp
+
+[AIan]
+Art=ReplaceableTextures\CommandButtons\BTNAnimateDead.blp
+Specialart=Abilities\Spells\Undead\AnimateDead\AnimateDeadTarget.mdl
+Order=animatedead
+
+[AIrc]
+Art=ReplaceableTextures\CommandButtons\BTNReincarnation.blp
+Effectart=Abilities\Spells\Orc\Reincarnation\ReincarnationTarget.mdl
+
+[AIrs]
+Art=ReplaceableTextures\CommandButtons\BTNResurrection.blp
+Casterart=Abilities\Spells\Human\Resurrect\ResurrectCaster.mdl
+Targetart=Abilities\Spells\Human\Resurrect\ResurrectTarget.mdl
+Order=resurrection
+
+[APrl]
+Art=ReplaceableTextures\CommandButtons\BTNResurrection.blp
+Casterart=Abilities\Spells\Human\Resurrect\ResurrectCaster.mdl
+Targetart=Abilities\Spells\Human\Resurrect\ResurrectTarget.mdl
+Order=resurrection
+Effectsound=PowerupSound
+
+[APrr]
+Art=ReplaceableTextures\CommandButtons\BTNResurrection.blp
+Casterart=Abilities\Spells\Human\Resurrect\ResurrectCaster.mdl
+Targetart=Abilities\Spells\Human\Resurrect\ResurrectTarget.mdl
+Order=resurrection
+Effectsound=PowerupSound
+
+[AIrx]
+Art=ReplaceableTextures\CommandButtons\BTNResurrection.blp
+Casterart=Abilities\Spells\Human\Resurrect\ResurrectCaster.mdl
+Targetart=Abilities\Spells\Human\Resurrect\ResurrectTarget.mdl
+Order=resurrection
+
+// One time permanent attack damage gain
+[AIaa]
+Art=ReplaceableTextures\CommandButtons\BTNTomeRed.blp
+Casterart=Abilities\Spells\Items\AIlm\AIlmTarget.mdl
+Casterattach=origin
+
+// One time permanent life gain
+[AImi]
+Art=ReplaceableTextures\CommandButtons\BTNTomeRed.blp
+Casterart=Abilities\Spells\Items\AIlm\AIlmTarget.mdl
+Casterattach=origin
+
+[AImh]
+Art=ReplaceableTextures\CommandButtons\BTNManual.blp
+Casterart=Abilities\Spells\Items\AIlm\AIlmTarget.mdl
+Casterattach=origin
+
+[AIpx]
+Art=ReplaceableTextures\CommandButtons\BTNTomeRed.blp
+Casterart=Abilities\Spells\Items\AIlm\AIlmTarget.mdl
+Casterattach=origin
+
+[AIa1]
+Art=ReplaceableTextures\CommandButtons\BTNRingPurple.blp
+
+[AIx1]
+Art=ReplaceableTextures\CommandButtons\BTNGoldRing.blp
+
+[AIs1]
+Art=ReplaceableTextures\CommandButtons\BTNHammer.blp
+
+[AIi1]
+Art=ReplaceableTextures\CommandButtons\BTNShadowPact.blp
+
+// Flying Carpet
+[AIfc]
+Art=ReplaceableTextures\CommandButtons\BTNRavenForm.blp
+
+// Brilliance Aura (Item)
+[AIba]
+Art=ReplaceableTextures\CommandButtons\BTNBrilliance.blp
+Targetart=Abilities\Spells\Human\Brilliance\Brilliance.mdl
+Targetattach=origin
+
+// Devotion Aura (Item)
+[AIad]
+Art=ReplaceableTextures\CommandButtons\BTNDevotion.blp
+Targetart=Abilities\Spells\Human\DevotionAura\DevotionAura.mdl
+Targetattach=origin
+
+// Command Aura (Item)
+[AIcd]
+Art=ReplaceableTextures\PassiveButtons\PASBTNGnollCommandAura.blp
+Targetart=Abilities\Spells\Orc\WarDrums\DrumsCasterHeal.mdl
+Targetattach=origin
+
+// Trueshot Aura (Item)
+[AIar]
+Art=ReplaceableTextures\CommandButtons\BTNTrueShot.blp
+Targetart=Abilities\Spells\NightElf\TrueshotAura\TrueshotAura.mdl
+Targetattach=origin
+
+// Endurance Aura (Item)
+[AIae]
+Art=ReplaceableTextures\CommandButtons\BTNCommand.blp
+Targetart=Abilities\Spells\Orc\CommandAura\CommandAura.mdl
+Targetattach=origin
+
+// Unholy Aura (Item)
+[AIau]
+Art=ReplaceableTextures\CommandButtons\BTNUnholyAura.blp
+Targetart=Abilities\Spells\Undead\UnholyAura\UnholyAura.mdl
+Targetattach=origin
+
+// Vampiric Aura (Item)
+[AIav]
+Art=ReplaceableTextures\CommandButtons\BTNVampiricAura.blp
+Targetart=Abilities\Spells\Undead\VampiricAura\VampiricAura.mdl
+Targetattach=origin
+
+// Healing Salve
+[AIrl]
+Art=ReplaceableTextures\CommandButtons\BTNHealingSalve.blp
+Casterart=Abilities\Spells\Human\Heal\HealTarget.mdl
+Casterattach=origin
+Targetart=Abilities\Spells\Items\HealingSalve\HealingSalveTarget.mdl
+Targetattach=origin
+
+// Clarity Potion
+[AIpr]
+Art=ReplaceableTextures\CommandButtons\BTNPotionOfClarity.blp
+Casterart=Abilities\Spells\Items\AIma\AImaTarget.mdl
+Casterattach=origin
+
+[AIpl]
+Art=ReplaceableTextures\CommandButtons\BTNLesserClarityPotion.blp
+Casterart=Abilities\Spells\Items\AIma\AImaTarget.mdl
+Casterattach=origin
+
+// Generic Rejuv scroll/potion base uberalias
+[AIp1]
+Art=ReplaceableTextures\CommandButtons\BTNMinorRejuvPotion.blp
+
+
+[AIp2]
+Art=ReplaceableTextures\CommandButtons\BTNLesserRejuvPotion.blp
+
+[AIp3]
+Art=ReplaceableTextures\CommandButtons\BTNRejuvPotion.blp
+
+[AIp4]
+Art=ReplaceableTextures\CommandButtons\BTNGreaterRejuvPotion.blp
+
+[AIp5]
+Art=ReplaceableTextures\CommandButtons\BTNLesserRejuvScroll.blp
+Casterart=Abilities\Spells\Human\Heal\HealTarget.mdl
+Casterattach=origin
+
+[AIp6]
+Art=ReplaceableTextures\CommandButtons\BTNGreaterRejuvScroll.blp
+Casterart=Abilities\Spells\Human\Heal\HealTarget.mdl
+Casterattach=origin
+
+
+// Scroll of Regeneration
+[AIsl]
+Casterart=Abilities\Spells\Human\Heal\HealTarget.mdl
+Casterattach=origin
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfRegenerationGreen.blp
+
+// Regeneration (Life)
+[BIrl]
+Buffart=ReplaceableTextures\CommandButtons\BTNHealingSalve.blp
+//Targetart=Abilities\Spells\Items\ScrollOfRegeneration\Scroll_Regen_Target.mdl
+Targetart=Abilities\Spells\Other\ANrm\ANrmTarget.mdl
+Targetattach=origin
+
+// Regeneration (Mana)
+[BIrm]
+Buffart=ReplaceableTextures\CommandButtons\BTNPotionOfClarity.blp
+//Targetart=Abilities\Spells\Items\ClarityPotion\ClarityTarget.mdl
+Targetart=Abilities\Spells\Other\ANrl\ANrlTarget.mdl
+Targetattach=origin
+
+
+// Regeneration (Life & Mana)
+[BIrg]
+Buffart=ReplaceableTextures\CommandButtons\BTNGreaterRejuvScroll.blp
+//Targetart=Abilities\Spells\Items\ScrollOfRejuvenation\ScrollManaHealth.mdl
+Targetart=Abilities\Spells\Other\ANrl\ANrlTarget.mdl,Abilities\Spells\Other\ANrm\ANrmTarget.mdl
+Targetattach=origin
+Targetattach1=origin
+Targetattachcount=2
+
+// One time permanent gold gain
+[AIgo]
+Art=ReplaceableTextures\CommandButtons\BTNChestOfGold.blp
+Casterart=Abilities\Spells\Items\ResourceItems\ResourceEffectTarget.mdl
+Casterattach=origin
+Effectsound=ReceiveGold
+
+// One time permanent lumber gain
+[AIlu]
+Art=ReplaceableTextures\CommandButtons\BTNBundleOfLumber.blp
+Targetart=Abilities\Spells\Items\ResourceItems\ResourceEffectTarget.mdl
+Targetattach=origin
+Effectsound=ReceiveLumber
+
+// Flare Gun
+[AIfa]
+Art=ReplaceableTextures\CommandButtons\BTNFlare.blp
+Casterart=Abilities\Spells\Human\Flare\FlareCaster.mdl
+
+// Potion of Omniscience
+[AIrv]
+Art=ReplaceableTextures\CommandButtons\BTNPotionOfOmniscience.blp
+Casterart=Abilities\Spells\Items\PotionOfOmniscience\CrystalBallCaster.mdl
+Casterattach=overhead
+Effectsound=PowerupSound
+
+
+// Wand of Neutralization
+[AIdc]
+Art=ReplaceableTextures\CommandButtons\BTNWandOfNeutralization.blp
+Missileart=Abilities\Spells\Items\WandOfNeutralization\NeutralizationMissile.mdl
+Missilespeed=900
+MissileHoming=1
+
+// Spider Silk
+[AIwb]
+Art=ReplaceableTextures\CommandButtons\BTNWebOn.blp
+Missileart=Abilities\Spells\Undead\Web\Webmissile.mdl
+Missilespeed=1500
+MissileHoming=1
+
+// Monster Lure
+[AImo]
+Art=ReplaceableTextures\CommandButtons\BTNMonsterLure.blp
+
+// Random Item
+[AIri]
+Art=ReplaceableTextures\CommandButtons\BTNPhilosophersStone.blp
+
+// Blight Placement
+[Ablp]
+Art=ReplaceableTextures\CommandButtons\BTNSacrificialSkull.blp
+
+// mana steal
+[Aste]
+Art=ReplaceableTextures\CommandButtons\BTNWandOfManaSteal.blp
+Casterart=Abilities\Spells\Other\Drain\ManaDrainCaster.mdl
+Casterattach=chest
+Targetart=Abilities\Spells\Other\Drain\ManaDrainTarget.mdl
+Targetattach=chest
+
+// Change TOD
+[AIct]
+Art=ReplaceableTextures\CommandButtons\BTNMoonStone.blp
+
+// Vampiric Potion
+[AIpv]
+Art=ReplaceableTextures\CommandButtons\BTNPotionOfVampirism.blp
+Casterart=Abilities\Spells\Items\VampiricPotion\VampPotionCaster.mdl
+Casterattach=origin
+
+[BIpv]
+Buffart=ReplaceableTextures\CommandButtons\BTNPotionOfVampirism.blp
+
+// Spell Damage Reduction
+[AIsr]
+Art=ReplaceableTextures\CommandButtons\BTNRunedBracers.blp
+
+// Build Tiny Castle
+[AIbl]
+Art=ReplaceableTextures\CommandButtons\BTNTinyCastle.blp
+
+// Build Tiny Altar
+[AIbh]
+Art=ReplaceableTextures\CommandButtons\BTNAltarOfKings.blp
+
+// Build Tiny Great Hall
+[AIbg]
+Art=ReplaceableTextures\CommandButtons\BTNTownHall.blp
+
+// Build Tiny Scout Tower
+[AIbt]
+Art=ReplaceableTextures\CommandButtons\BTNHumanWatchTower.blp
+
+// Shadowsight
+[Ashs]
+Art=ReplaceableTextures\CommandButtons\BTNWandOfShadowSight.blp
+
+[Bshs]
+Buffart=ReplaceableTextures\CommandButtons\BTNWandOfShadowSight.blp
+// Don't show any buff art.
+
+// Tome of Retraining
+[Aret]
+Art=ReplaceableTextures\CommandButtons\BTNTomeOfRetraining.blp
+Casterart=Abilities\Spells\Items\TomeOfRetraining\TomeOfRetrainingCaster.mdl
+Casterattach=origin
+
+// Staff of Teleportation
+[AImt]
+Art=ReplaceableTextures\CommandButtons\BTNStaffOfTeleportation.blp
+// Shouldn't show art at targeted coordinate, so don't use Effectart.
+Areaeffectart=Abilities\Spells\Human\MassTeleport\MassTeleportTo.mdl
+Casterart=Abilities\Spells\Human\MassTeleport\MassTeleportCaster.mdl
+// The targeted unit shouldn't show an effect, so there is no Targetart.
+Specialart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+
+// Staff of Preservation
+[ANpr]
+Art=ReplaceableTextures\CommandButtons\BTNStaffOfPreservation.blp
+Casterart=Abilities\Spells\Human\MassTeleport\MassTeleportCaster.mdl
+Targetart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+Specialart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+
+// Mechanical Critter
+[Amec]
+Art=ReplaceableTextures\CommandButtons\BTNMechanicalCritter.blp
+Targetart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+
+// Spell Shield
+[ANss]
+Art=ReplaceableTextures\CommandButtons\BTNSpellShieldAmulet.blp
+Casterart=Abilities\Spells\Items\SpellShieldAmulet\SpellShieldCaster.mdl
+Casterattach=origin
+
+// Spell Shield (AOE)
+[ANse]
+Art=ReplaceableTextures\CommandButtons\BTNSpellShieldAmulet.blp
+Effectsound=PowerupSound
+
+[Bnss]
+Buffart=ReplaceableTextures\CommandButtons\BTNSpellShieldAmulet.blp
+Targetart=Abilities\Spells\Items\SpellShieldAmulet\SpellShieldCaster.mdl
+Targetattach=origin
+
+// Spell book
+[Aspb]
+Art=ReplaceableTextures\CommandButtons\BTNSpellBookBLS.blp
+
+// Raise Dead
+[AIrd]
+Art=ReplaceableTextures\CommandButtons\BTNRaiseDead.blp
+
+// Staff of Sanctuary
+[ANsa]
+Art=ReplaceableTextures\CommandButtons\BTNStaffOfSanctuary.blp
+Casterart=Abilities\Spells\Human\MassTeleport\MassTeleportCaster.mdl
+Targetart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+Specialart=Abilities\Spells\Human\MassTeleport\MassTeleportTarget.mdl
+
+[BNsa]
+Buffart=ReplaceableTextures\CommandButtons\BTNStaffOfSanctuary.blp
+Targetart=Abilities\Spells\Items\StaffOfSanctuary\Staff_Sanctuary_Target.mdl
+
+// Scroll of Haste
+[AIsa]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfHaste.blp
+// target art will be taken care of by buff Bspe, in commonabilityfunc
+
+// Rune of Speed
+[APsa]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfHaste.blp
+// target art will be taken care of by buff Bspe, in commonabilityfunc
+Effectsound=PowerupSound
+
+// Orb of Slow
+[AIsb]
+Art=ReplaceableTextures\CommandButtons\BTNOrbofSlowness.blp
+Missileart=Abilities\Weapons\ProcMissile\ProcMissile.mdl
+MissileHoming=1
+Targetart=Abilities\Spells\Items\OrbSlow\OrbSlow.mdl
+Targetattach=weapon
+//Specialart=
+
+[AIos]
+Art=ReplaceableTextures\CommandButtons\BTNSlow.blp
+Casterart=Abilities\Spells\Human\Slow\SlowCaster.mdl
+Order=slow
+
+// Orb of Darkness
+[ANbs]
+Art=ReplaceableTextures\CommandButtons\BTNTheBlackArrow.blp
+Buttonpos=1,2
+Missileart=Abilities\Spells\Other\BlackArrow\BlackArrowMissile.mdl
+Missilespeed=1050
+MissileHoming=1
+Order=blackarrow
+
+// Spirit Link (AOE)
+[Aspp]
+Art=ReplaceableTextures\CommandButtons\BTNSpiritLink.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Order=spiritlinkaoe
+Effectsound=PowerupSound
+LightningEffect=SPLK
+
+// Rebirth
+[AIrb]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+Effectsound=PowerupSound
+
+[BIrb]
+Buffart=ReplaceableTextures\CommandButtons\BTNRune.blp
+Effectart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+
+// Dark Summoning
+[AUds]
+Art=ReplaceableTextures\CommandButtons\BTNDarkSummoning.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNDarkSummoning.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+// leaving art
+Effectart=Abilities\Spells\Undead\Darksummoning\DarkSummonTarget.mdl
+// arrival art
+Targetart=Abilities\Spells\Undead\Darksummoning\DarkSummonTarget.mdl
+Missileart=Abilities\Spells\Undead\DarkSummoning\DarkSummonMissile.mdl
+Missilespeed=1500
+Order=darksummoning
+
+// anti-magic shield
+[AIxs]
+Art=ReplaceableTextures\CommandButtons\BTNSnazzyPotion.blp
+Order=antimagicshell
+
+[Aami]
+Order=antimagicshell
+
+// item divine shield
+[AIdv]
+Art=ReplaceableTextures\CommandButtons\BTNPotionOfDivinity.blp
+Order=divineshield
+
+// item silence
+[AIse]
+Art=ReplaceableTextures\CommandButtons\BTNStaffOfSilence.blp
+Order=silence
+
+// item purge
+[AIpg]
+Art=ReplaceableTextures\CommandButtons\BTNEntrapmentWard.blp
+Order=purge
+
+// item purge (shamanistic totem)
+[AIps]
+Art=ReplaceableTextures\CommandButtons\BTNEntrapmentWard.blp
+Order=purge
+Specialart=Abilities\Spells\Orc\Purge\PurgeBuffTarget.mdl
+Specialattach=origin
+
+//#RESTNOBETA
+[AItg]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AIth]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AIti]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AItj]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AItk]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AItl]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AItn]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AItx]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[AIh3]
+Art=ReplaceableTextures\CommandButtons\BTNHeartOfAszune.blp
+Targetart=Abilities\Spells\Items\AIhe\AIheTarget.mdl
+Targetattach=origin
+
+[AIhx]
+Art=ReplaceableTextures\CommandButtons\BTNHealOn.blp
+Targetart=Abilities\Spells\Items\AIhe\AIheTarget.mdl
+Targetattach=origin
+
+// orcish battle standard
+[AIfx]
+Art=ReplaceableTextures\CommandButtons\BTNOrcBattleStandard.blp
+Targetart=Objects\InventoryItems\BattleStandard\BattleStandard.mdl
+Targetattach=chest
+
+// Hero attacks get fire damage bonus, persistent, Orb of Gul'dan
+[AIgd]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfFire.blp
+Missileart=Abilities\Weapons\IllidanMissile\IllidanMissile.mdl
+Targetart=Abilities\Spells\Items\AIfb\AIfbTarget.mdl
+Targetattach=weapon
+Specialart=Abilities\Spells\Items\AIfb\AIfbSpecialArt.mdl
+Specialattach=chest
+
+// tiny blacksmith
+[AIbb]
+Art=ReplaceableTextures\CommandButtons\BTNBlacksmith.blp
+
+// tiny lumber mill
+[AIbr]
+Art=ReplaceableTextures\CommandButtons\BTNHumanLumberMill.blp
+
+// tiny farm
+[AIbf]
+Art=ReplaceableTextures\CommandButtons\BTNFarm.blp
+
+// tiny barracks
+[AIbs]
+Art=ReplaceableTextures\CommandButtons\BTNHumanBarracks.blp
+
+[AIdn]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+Missileart=Abilities\Weapons\VengeanceMissile\VengeanceMissile.mdl
+Targetart=Abilities\Spells\Items\OrbDarkness\OrbDarkness.mdl
+Targetattach=weapon
+
+// campaign item reanimation
+[AInd]
+Art=ReplaceableTextures\CommandButtons\BTNWandSkull.blp
+Specialart=Abilities\Spells\Undead\AnimateDead\AnimateDeadTarget.mdl
+Order=animatedead
+
+// item unholy frenzy
+[AIuf]
+Art=ReplaceableTextures\CommandButtons\BTNUnholyFrenzy.blp
+Order=unholyfrenzy
+
+// item control magic
+[AIcm]
+Art=ReplaceableTextures\CommandButtons\BTNSpellSteal.blp
+Order=spellsteal
+Targetart=Abilities\Spells\Human\SpellSteal\SpellStealTarget.mdl
+Targetattach=overhead
+Missileart=Abilities\Spells\Human\SpellSteal\SpellStealMissile.mdl
+Missilearc=0.15
+Missilespeed=1000
+MissileHoming=1
+
+// item death finger
+[AIfz]
+Art=ReplaceableTextures\CommandButtons\BTNCorpseExplode.blp
+Targetart=Abilities\Spells\Demon\DemonBoltImpact\DemonBoltImpact.mdl
+LightningEffect=AFOD
+
+// item death pact
+[AIdp]
+Art=ReplaceableTextures\CommandButtons\BTNDeathPact.blp
+Casterart=Abilities\Spells\Undead\DeathPact\DeathPactCaster.mdl
+Targetart=Abilities\Spells\Undead\DeathPact\DeathPactTarget.mdl
+Targetattach=origin
+Order=deathpact
+
+// item defend
+[AIdd]
+Art=ReplaceableTextures\CommandButtons\BTNDefend.blp
+Casterart=Abilities\Spells\Human\Defend\DefendCaster.mdl
+Order=defend
+
+// item Bash
+[AIbx]
+Art=ReplaceableTextures\PassiveButtons\PASBTNBash.blp
+Order=bash
+
+// item watery minion
+[AIwm]
+Art=ReplaceableTextures\CommandButtons\BTNMurgulTideWarrior.blp
+Targetart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+Order=wateryminion
+
+// item summon troll headhunter
+[AIsh]
+Art=ReplaceableTextures\CommandButtons\BTNSpiritWolf.blp
+Specialart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+Order=spiritwolf
+
+[BIsh]
+// buffart not shown
+Effectart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+
+// item regen aura
+[AIgx]
+Art=ReplaceableTextures\CommandButtons\BTNHealingWard.blp
+
+// item holy light
+[AIhl]
+Art=ReplaceableTextures\CommandButtons\BTNHolyBolt.blp
+Targetart=Abilities\Spells\Human\HolyBolt\HolyBoltSpecialArt.mdl
+Order=holybolt
+
+// item slow poison
+[AIsz]
+Art=ReplaceableTextures\CommandButtons\BTNDaggerOfEscape.blp
+
+// penguin squeek
+[AIpz]
+Art=ReplaceableTextures\CommandButtons\BTNPenguin.blp
+Effectsound=PenguinSqueek
+
+// item fire bonus
+[AIfw]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfFire.blp
+Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
+Missilehoming=1
+Targetart=Abilities\Spells\Items\AIfb\AIfbTarget.mdl
+Targetattach=weapon
+Specialart=Abilities\Spells\Items\AIfb\AIfbSpecialArt.mdl
+Specialattach=chest
+
+// item cold bonus
+[AIft]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfFrost.blp
+Missileart=Abilities\Weapons\LichMissile\LichMissile.mdl
+Missilehoming=1
+Targetart=Abilities\Spells\Items\AIob\AIobTarget.mdl
+Targetattach=weapon
+Specialart=Abilities\Spells\Items\AIob\AIobSpecialArt.mdl
+Specialattach=chest
+
+// item lightning bonus
+[AIlx]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfLightning.blp
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilehoming=1
+Targetart=Abilities\Spells\Items\AIlb\AIlbTarget.mdl
+Targetattach=weapon
+Specialart=Abilities\Spells\Items\AIlb\AIlbSpecialArt.mdl
+Specialattach=chest
+
+// purge part of lightning orb
+[AIlp]
+Art=ReplaceableTextures\CommandButtons\BTNPurge.blp
+
+// item critical strike
+[AIcs]
+Art=ReplaceableTextures\PassiveButtons\PASBTNCriticalStrike.blp
+
+// Passive Defense
+[AIdd]
+Art=ReplaceableTextures\CommandButtons\BTNDefend.blp
+Casterart=Abilities\Spells\Human\Defend\DefendCaster.mdl
+
+// item chain lightning
+[AIcl]
+Art=ReplaceableTextures\CommandButtons\BTNChainLightning.blp
+Missileart=Abilities\Spells\Orc\LightningBolt\LightningBoltMissile.mdl
+Missilespeed=1500
+Targetart=Abilities\Weapons\Bolt\BoltImpact.mdl
+Order=chainlightning
+LightningEffect=CLPB,CLSB
+
+// item berserk
+[AIxk]
+Art=ReplaceableTextures\CommandButtons\BTNBerserkForTrolls.blp
+order=berserk
+Casterart=Abilities\Spells\Orc\TrollBerserk\TrollBeserkerTarget.mdl
+Effectsound=BerserkerRage
