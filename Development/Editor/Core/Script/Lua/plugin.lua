@@ -3,7 +3,7 @@ require "util"
 plugin = {}
 plugin.loaders = {}
 plugin.path = fs.ydwe_path() / "plugin"
-plugin.blacklist = { 'YDTileLimitBreaker', 'YDCustomObjectId', 'YDColorizer' }
+plugin.blacklist = { 'YDTileLimitBreaker', 'YDCustomObjectId' }
 
 function plugin.load (self, plugin_config_path)
 	log.trace("Load plugin config " .. plugin_config_path:string())

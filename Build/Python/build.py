@@ -80,7 +80,6 @@ def build(msvc_version, configuration):
     move_include()
     build_all(msvc_version, configuration)
     build_move(configuration)
-    fs.remove_all(path['Result'] / 'plugin' / 'YDColorizer')
     print ('time {0}'.format(datetime.datetime.now() - t))
     
 def Configuration():
