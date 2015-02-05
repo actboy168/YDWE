@@ -94,6 +94,7 @@ end
 
 function loader:save_worldeditstrings(tbl)
 	local rt = {}
+	tbl['WorldEditStrings']['WESTRING_APPNAME'] = { 'YD WorldEdit [ ' .. tostring(ydwe_version) .. ' ]' }
 	loader:save_section(tbl, rt, 'WorldEditStrings')
 	return table.concat(rt, '\n')
 end
