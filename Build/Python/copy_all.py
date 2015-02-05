@@ -50,7 +50,6 @@ def copy_all(msvc_version, configuration):
     copy_lib_dll('Lua',          configuration)
     copy_lib_dll('StormLib',     configuration)
     fs.copy_file(path['OpenSource'] / 'luaffi' / 'bin' / configuration / 'ffi.dll', path['ResultCore'] / 'modules' / 'ffi.dll')
-    copy_lua_script()
     copy_boost_preprocessor()
     copy_component()
 
