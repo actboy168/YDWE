@@ -12,7 +12,22 @@ namespace YDColorizer
 {
     class AboutConfig
     {
-        private static byte[] ReadMpqFile(string lpszFileName)
+        private static string ReadLocalFile(string lpszFileName)
+        {
+            // TODO: 和ydwe的加载方式保持一致
+            string mpqdir = Config.GetThisMoudlePath() + "\\..\\..\\share\\mpq\\ydwe\\";
+            try
+            {
+                return File.ReadAllText(mpqdir + lpszFileName, Encoding.UTF8);
+            }
+            catch (Exception)
+            {
+                return null;
+
+            }
+        }
+
+        private static string ReadMpqFile(string lpszFileName)
         {
             IntPtr ptr_buf_ = IntPtr.Zero;
             int size_ = 0;
@@ -25,7 +40,7 @@ namespace YDColorizer
             byte[] buf_ = new byte[size_];
             Marshal.Copy(ptr_buf_, buf_, 0, size_);
             SFileUnloadFile(ptr_buf_);
-            return buf_;
+            return Encoding.UTF8.GetString(buf_);
         }
 
         private static string Format(string format_, string arg_)
@@ -40,12 +55,11 @@ namespace YDColorizer
         public static List<string> LoadSearchTitles()
         {
             List<string> dialogBoxTitles = new List<string>();
-            byte[] buf_ = ReadMpqFile("UI\\WorldEditStrings.txt");
-
-            if (buf_ != null)
+            //string text_ = ReadMpqFile("UI\\WorldEditStrings.txt");
+            string text_ = ReadLocalFile("UI\\WorldEditStrings.txt");
+            
+            if (text_ != null)
             {
-                string text_ = Encoding.UTF8.GetString(buf_);
-
                 // WESTRING_COD_TYPE_STRING=字符串
                 // WESTRING_UE_DLG_EDITVALUE=编辑单位值 - %s
                 // WESTRING_IE_DLG_EDITVALUE=编辑物品值 - %s
