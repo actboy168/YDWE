@@ -90,7 +90,7 @@ namespace NYDWE {
 
 	void LuaRegisterEvent(lua_State *pState, EVENT_ID evenetid, bool ignore_error, luabind::object const& func)
 	{
-		LOGGING_TRACE(lg) << "RegisterEvent id: " << evenetid << " ignore_error: " << (ignore_error ? "true" : "false");
+		LOGGING_TRACE(lg) << "RegisterEvent id: " << evenetid << " ignore: " << (ignore_error ? "true" : "false");
 
 		if (evenetid >= 0 && evenetid < EVENT_MAXIMUM)
 		{
