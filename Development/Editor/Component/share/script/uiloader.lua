@@ -107,8 +107,11 @@ function loader:config()
 		log.error('Open ' .. (root / 'config'):string() .. ' failed.')
 		return false
 	end
+	local enable_ydtrigger = global_config["ThirdPartyPlugin"]["EnableYDTrigger"] ~= "0"
 	for line in f:lines() do
-		table.insert(self.list, root / string.trim(line))
+		if enable_ydtrigger or (string.trim(line) ~= 'ydtrigger') then
+			table.insert(self.list, root / string.trim(line))
+		end
 	end
 	f:close()
 	return true
