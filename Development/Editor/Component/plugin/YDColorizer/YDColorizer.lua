@@ -2,7 +2,7 @@ local loader = {}
 	
 loader.load = function(path)
 	if global_config["ThirdPartyPlugin"]["EnableDotNetSupport"] ~= "1" then
-		log.warn('failed: diable')
+		log.warn('failed: disable')
 		return false
 	end
 	

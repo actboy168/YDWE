@@ -4,7 +4,7 @@ local loader = {}
 	
 loader.load = function(path)
 	if global_config["FeatureToggle"]["EnableShowInternalAttributeId"] ~= "1" then
-		log.warn('failed: diable')
+		log.warn('failed: disable')
 		return false
 	end
 	loader.dll = sys.load_library(path)

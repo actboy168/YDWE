@@ -34,7 +34,7 @@ function plugin.load (self, plugin_config_path)
 	end
 	
 	if 0 == tonumber(plugin_config['Load']['Enable']) then
-		log.debug("Diable " .. plugin_name .. ".")
+		log.debug("Disable " .. plugin_name .. ".")
 		return		
 	end
 	

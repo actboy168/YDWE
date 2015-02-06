@@ -8,7 +8,7 @@ loader.load = function(path)
 		return false
 	end
 	if global_config["ThirdPartyPlugin"]["EnableYDTrigger"] == "0" then
-		log.warn('failed: diable')
+		log.warn('failed: disable')
 		return false
 	end
 	
