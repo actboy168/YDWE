@@ -3,6 +3,23 @@ require "util"
 
 local loader = {}
 
+local function table_remove(a, k)
+	for i, v in ipairs(a) do
+		if v[1] == k then
+			table.remove(a, i)
+		end
+	end
+end
+
+local function table_append(a, b)
+	for _, v in ipairs(b) do
+		table_remove(a, v[1])
+	end
+	for _, v in ipairs(b) do
+		table.insert(a, v)
+	end
+end
+
 function loader:loadfile(path)
 	local f, e = io.open(path, "r")
 	if not f then
@@ -20,11 +37,7 @@ function loader:loadfile(path)
 			if first then
 				local key = string.sub(line, 1, first - 1)
 				local value = string.sub(line, first + 1) or ""
-				if tbl[section][key] then
-					table.insert(tbl[section][key], value)
-				else
-					tbl[section][key] = { value }
-				end
+				table.insert(tbl[section], { key, value })
 			end
 		end
 	end
@@ -41,15 +54,13 @@ function loader:merge(tbl, from)
 			if not tbl[section] then
 				tbl[section] = {}
 			end
-			for key, value in pairs(keyvalue) do
-				tbl[section][key] = value
-			end
+			table_append(tbl[section], keyvalue)
 		end
 	end
 	for section, keyvalue in pairs(rem) do
 		if tbl[section] then
-			for key, value in pairs(keyvalue) do
-				tbl[section][key] = nil
+			for key, _ in pairs(keyvalue) do
+				table_remove(tbl[section], key)
 			end
 		end
 	end
@@ -59,10 +70,8 @@ end
 function loader:save_section(tbl, rt, name)
 	if tbl[name] then
 		table.insert(rt, "[" .. name .. "]")
-		for key, values in pairs(tbl[name]) do
-			for _, value in ipairs(values) do
-				table.insert(rt, key .. "=" .. value)
-			end
+		for _, v in ipairs(tbl[name]) do
+			table.insert(rt, v[1] .. "=" .. v[2])
 		end
 	end
 end
