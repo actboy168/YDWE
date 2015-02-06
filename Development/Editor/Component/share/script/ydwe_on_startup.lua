@@ -268,7 +268,7 @@ end)
 -- 返回非负数表示允许载入，负数表示不允许。无特殊情况一般返回0
 
 event.register(event.EVENT_MSS_LOAD,  false, function (event_data)
-	log.debug("Loading provider " .. event_data.library_name)
+	log.debug("Loading provider " .. ansi_to_utf8(event_data.library_name))
 
 	-- 全部放行
 	return 0
