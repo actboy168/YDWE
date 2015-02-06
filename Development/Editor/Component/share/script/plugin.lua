@@ -8,7 +8,7 @@ plugin.blacklist = { 'YDTileLimitBreaker', 'YDCustomObjectId' }
 function plugin.load (self, plugin_config_path)
 	log.trace("Load plugin config " .. plugin_config_path:string())
 	
-	local plugin_config = sys.ini_load(plugin_config_path:string())
+	local plugin_config = sys.ini_load(plugin_config_path)
 	if not plugin_config then
 		log.error("Cannot found plugin config.")
 		return

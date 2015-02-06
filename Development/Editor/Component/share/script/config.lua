@@ -45,7 +45,7 @@ local tbl_index = {
 }
 
 function global_config_reload()
-	tbl = sys.ini_load(file:string())
+	tbl = sys.ini_load(file)
 	if not tbl then
 		tbl = {}
 	end

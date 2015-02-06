@@ -26,11 +26,21 @@ function fs.path.aux_filename(self, str)
 	return self:parent_path() / (self:stem():string() .. str .. self:extension():string())
 end
 
+io.__open = io.open
+function io.open(file_path, mode)
+	return io.__open(__(file_path:string()), mode)
+end
+
+io.__lines = io.lines
+function io.lines(file_path)
+	return io.__lines(__(file_path:string()))
+end
+
 -- 载入一个文件的内容
 -- file_path - 文件路径, 必须是fs.path类型
 -- 返回文件内容, nil表示出错
 function io.load(file_path)
-	local f, e = io.open(file_path:string(), "rb")
+	local f, e = io.open(file_path, "rb")
 
 	if f then
 		local content = f:read("*a")
@@ -46,7 +56,7 @@ end
 -- content - 文件内容,必须是字符串
 -- 返回true表示成功,false表示失败
 function io.save(file_path, content)
-	local f, e = io.open(file_path:string(), "wb")
+	local f, e = io.open(file_path, "wb")
 
 	if f then
 		f:write(content)

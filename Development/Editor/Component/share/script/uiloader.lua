@@ -102,7 +102,7 @@ end
 function loader:config()
 	self.list = {}
 	local root = fs.ydwe_path() / 'share' / 'mpq'
-	local f, err = io.open((root / 'config'):string())
+	local f, err = io.open(root / 'config')
 	if not f then
 		log.error('Open ' .. (root / 'config'):string() .. ' failed.')
 		return false
@@ -121,7 +121,7 @@ function loader:watch(name, callback)
 	end
 	local tbl = {}
 	for _, path in ipairs(self.list) do
-		local from = self:loadfile((path / name):string())
+		local from = self:loadfile(path / name)
 		if from then
 			tbl = self:merge(tbl, from)
 		end

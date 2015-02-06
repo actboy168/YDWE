@@ -67,7 +67,7 @@ end
 function wave:compile(op)
 	log.trace("Wave compilation start.")		
 	
-	local map_script_file = io.open(op.input:string(), "a+b")
+	local map_script_file = io.open(op.input, "a+b")
 	if map_script_file then
 		map_script_file:write("/**/\r\n")
 		map_script_file:close()

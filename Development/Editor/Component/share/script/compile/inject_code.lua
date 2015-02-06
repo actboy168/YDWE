@@ -78,7 +78,7 @@ function inject_code:do_inject(op, inject_code_path_table)
 		log.trace("Writing code to " .. op.output:filename():string())
 
 		-- 打开文件供写入（追加模式）
-		local map_script_file, e = io.open(op.output:string(), "a+b")
+		local map_script_file, e = io.open(op.output, "a+b")
 		if map_script_file then
 
 			-- 循环处理每个需要注入的文件
@@ -154,7 +154,7 @@ function inject_code:scan(config_dir)
 			local state = 0
 
 			-- 循环处理每一行
-			for line in io.lines(full_path:string()) do
+			for line in io.lines(full_path) do
 				-- 插入函数名
 				local trimed = line:trim()
 				if trimed ~= "" and trimed:sub(1, 1) ~= "#" then
