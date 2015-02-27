@@ -81,11 +81,11 @@ function string.trim (self)
 end
 
 function string.from_objectid (id)
-	return string.pack('>I4', id)
+	return string.pack('<I4', id)
 end
 
 function string.to_objectid (str)
-	return string.unpack('>I4', str)
+	return string.unpack('<I4', str)
 end
 
 function sys.spawn_pipe (command_line, current_dir)		

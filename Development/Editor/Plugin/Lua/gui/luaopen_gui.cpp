@@ -141,7 +141,7 @@ namespace NLuaAPI { namespace NGUI {
 				if (pInfo)
 				{
 					pInfo->isOkClicked = (id == IDOK);
-					GetDlgItemTextW(dialogHandle, IDC_EDIT_CONTENT, pInfo->text, sizeof(pInfo->text));
+					GetDlgItemTextW(dialogHandle, IDC_EDIT_CONTENT, pInfo->text, sizeof(pInfo->text) / sizeof(pInfo->text[0]));
 				}
 
 				EndDialog(dialogHandle, reinterpret_cast<INT_PTR>(pInfo));
@@ -155,7 +155,7 @@ namespace NLuaAPI { namespace NGUI {
 			if (pInfo)
 			{
 				pInfo->isOkClicked = false;
-				GetDlgItemTextW(dialogHandle, IDC_EDIT_CONTENT, pInfo->text, sizeof(pInfo->text));
+				GetDlgItemTextW(dialogHandle, IDC_EDIT_CONTENT, pInfo->text, sizeof(pInfo->text) / sizeof(pInfo->text[0]));
 			}
 
 			EndDialog(dialogHandle, reinterpret_cast<INT_PTR>(pInfo));
@@ -176,7 +176,7 @@ namespace NLuaAPI { namespace NGUI {
 			);
 
 		SInputInfo *pInputInfo = reinterpret_cast<SInputInfo *>(
-			::DialogBoxParamA(self_module, MAKEINTRESOURCEA(IDD_DIALOG_INPUT),
+			::DialogBoxParamW(self_module, MAKEINTRESOURCEW(IDD_DIALOG_INPUT),
 			reinterpret_cast<HWND>(parentWindowHandle), PromptForInputDialogProc,
 			reinterpret_cast<LPARAM>(&dialogInitInfo)
 			)
