@@ -8,7 +8,7 @@ public:
     CSplash();
     virtual ~CSplash();
 	void     Show();
-	int      Close();
+	bool     Close();
     int      DoLoop();
 	LRESULT  WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 			 

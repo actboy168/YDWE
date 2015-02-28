@@ -173,16 +173,16 @@ void CSplash::FreeResources()
 	m_hBitmap = NULL;
 }
 
-int CSplash::Close()
+bool CSplash::Close()
 {
 	if (m_hwnd)
 	{
 		::DestroyWindow(m_hwnd);
 		m_hwnd = 0;
 		::UnregisterClassW(s_SplashClassName.c_str(), ::GetModuleHandleW(NULL));
-		return 1;
+		return true;
 	}
-	return 0;
+	return false;
 }
 
 bool CSplash::SetTransparentColor(COLORREF col)
