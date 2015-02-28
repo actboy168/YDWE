@@ -87,12 +87,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="Splash.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="YDWEStartup.def" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Splash.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ydbase\ydbase.vcxproj">

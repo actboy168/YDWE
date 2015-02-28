@@ -6,7 +6,6 @@
 #include <boost/assign.hpp>
 #include <boost/foreach.hpp>
 #include <boost/exception/all.hpp>
-#include <CImg.h>
 #include <base/file/memory_mapped_file.h>
 #include <base/exception/system_exception.h>
 #include <base/exception/windows_exception.h>
@@ -18,6 +17,7 @@
 #include <base/win/process.h>
 #include <base/warcraft3/directory.h>
 #include <base/util/format.h>
+#include "Splash.h"
 
 namespace fs = boost::filesystem;
 
@@ -56,25 +56,16 @@ static void ShowSplash(fs::path const& ydwe_path)
 	fs::path splashPath = ydwe_path / L"bin" / L"splash.bmp";
 	if (fs::exists(splashPath))
 	{
-		FILE* f = _wfopen(splashPath.c_str(), L"rb");
-		if (f)
-		{
-			try {
-				base::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
-				cimg_library::CImg<uint8_t> splashImage = cimg_library::CImg<boost::uint8_t>::get_load_bmp(f);
-				uint8_t color[] = { 255, 255, 255 };
-				splashImage.draw_text(10, 10, base::format("YDWE %d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), color, 0, 1, 20);
-				cimg_library::CImgDisplay display(splashImage, "YDWE", 3, false, true);
-				display.move(
-					(cimg_library::CImgDisplay::screen_width() - display.width()) / 2,
-					(cimg_library::CImgDisplay::screen_height() - display.height()) / 2
-					).hide_mouse();
-				display.show();
-				Sleep(1000);
-				display.show_mouse();
-			} catch (...) { }
-			
-			fclose(f);
+		try {
+			base::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
+			CSplash display;
+			display.SetBitmap(splashPath.wstring().c_str());
+			display.SetTransparentColor(RGB(128, 128, 128));
+			display.SetText(base::format(L"YDWE %d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 10, 20);
+			display.Show();
+			Sleep(1000);
+			display.Close();
+		} catch (...) {
 		}
 	}
 }
