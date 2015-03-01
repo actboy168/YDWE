@@ -22,7 +22,8 @@ namespace locvar
 
 	guard::guard(int id, const char* name, const char* handle_string)
 		: old_(global)
-	{ 
+	{
+		current().last_mother_id     = global.mother_id;
 		current().prev_handle_string = current().handle_string;
 		current().mother_id          = id;
 		current().name               = name;
@@ -310,7 +311,12 @@ namespace locvar
 
 	bool trigger_data(DWORD This, DWORD OutClass, const char* name)
 	{
-		if ((global.mother_id != CC_GUIID_YDWETimerStartMultiple) && (global.mother_id != (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple)))
+		if (global.mother_id == (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple))
+		{
+			if (global.last_mother_id != CC_GUIID_YDWETimerStartMultiple)
+				return false;
+		}
+		else if ((global.mother_id != CC_GUIID_YDWETimerStartMultiple))
 		{
 			return false;
 		}

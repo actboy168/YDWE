@@ -12,6 +12,7 @@ namespace locvar
 			, name(nullptr)
 			, handle_string(nullptr)
 			, prev_handle_string(nullptr)
+			, last_mother_id(0)
 		{ }
 
 		state(uint32_t m, const char* n, const char* h)
@@ -19,12 +20,14 @@ namespace locvar
 			, name(n)
 			, handle_string(h)
 			, prev_handle_string(nullptr)
+			, last_mother_id(0)
 		{ }
 
 		uint32_t    mother_id;
 		const char* name;
 		const char* handle_string;
 		const char* prev_handle_string;
+		uint32_t   	last_mother_id;
 	};
 
 	class guard
