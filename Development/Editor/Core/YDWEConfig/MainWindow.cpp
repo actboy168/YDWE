@@ -195,7 +195,7 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["ScriptCompiler"]["EnableJassHelperOptimization"] = "1";
 	table["ScriptCompiler"]["EnableCJass"] = "0";
 	table["ScriptInjection"]["Option"] = "0";
-	table["ThirdPartyPlugin"]["EnableDotNetSupport"] = "1";
+	table["ThirdPartyPlugin"]["EnableDotNetSupport"] = "0";
 	table["ThirdPartyPlugin"]["EnableTesh"] = "1";
 	table["ThirdPartyPlugin"]["EnableYDTrigger"] = "1";
 	table["FeatureToggle"]["EnableManualNewId"] = "0";

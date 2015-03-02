@@ -28,7 +28,7 @@ local tbl_index = {
 		Option = "0"
 	},
 	ThirdPartyPlugin = {
-		EnableDotNetSupport = "1",
+		EnableDotNetSupport = "0",
 		EnableTesh = "1",
 		EnableYDTrigger = "1",
 	},
