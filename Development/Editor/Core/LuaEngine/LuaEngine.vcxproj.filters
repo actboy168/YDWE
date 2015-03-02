@@ -21,15 +21,9 @@
     <ClCompile Include="LuaEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LuaEngineImpl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LuaEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaEngineImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

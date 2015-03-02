@@ -88,10 +88,8 @@
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="LuaEngine.cpp" />
-    <ClCompile Include="LuaEngineImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LuaEngineImpl.h" />
     <ClInclude Include="LuaEngine.h" />
   </ItemGroup>
   <ItemGroup>
