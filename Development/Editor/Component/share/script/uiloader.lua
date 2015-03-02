@@ -15,8 +15,10 @@ local function table_append(a, b)
 	for _, v in ipairs(b) do
 		table_remove(a, v[1])
 	end
+	local pos = 1
 	for _, v in ipairs(b) do
-		table.insert(a, v)
+		table.insert(a, pos, v)
+		pos = pos + 1
 	end
 end
 
