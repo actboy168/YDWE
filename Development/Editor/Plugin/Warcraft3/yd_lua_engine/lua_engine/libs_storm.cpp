@@ -81,6 +81,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				
 				if (storm_path_valid(root_path, file_path))
 				{
+					boost::filesystem::create_directories(file_path.parent_path());
 					std::fstream fs(file_path.c_str(), std::ios::binary | std::ios::out);
 					if (fs.is_open())
 					{
