@@ -141,9 +141,9 @@ namespace NYDWE {
 			eventData.getDataStore().clear();
 			eventData.setEventData("map_path", currentWarcraftMap.wstring());
 			if (lpApplicationName)
-				eventData.setEventData("application_name", std::string(lpApplicationName));
+				eventData.setEventData("application_name", base::util::a2w(std::string_view(lpApplicationName), base::util::conv_method::replace | '?'));
 			if (lpCommandLine)
-				eventData.setEventData("command_line", std::string(lpCommandLine));
+				eventData.setEventData("command_line", base::util::a2w(std::string_view(lpCommandLine), base::util::conv_method::replace | '?'));
 
 			const std::vector<int> &results = event_array[EVENT_TEST_MAP](eventData);
 			return (!results_is_failed(results));

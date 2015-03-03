@@ -228,7 +228,7 @@ event.register(event.EVENT_TEST_MAP, false, function (event_data)
 	-- 获取当前测试的地图名
 	local map_path = fs.path(event_data.map_path)
 	log.debug("Testing " .. map_path:string())
-	log.debug("Testing " .. ansi_to_utf8(event_data.command_line))
+	log.debug("Testing " .. event_data.command_line)
 
 	-- 附加命令行
 	local command_aux = ""
@@ -256,7 +256,7 @@ event.register(event.EVENT_TEST_MAP, false, function (event_data)
 	local result = false
 	-- 启动魔兽开始测试...
 	local war3_helper_dll = fs.ydwe_path() / "plugin" / "warcraft3" / "yd_loader.dll"
-	result = sys.spawn_inject(ansi_to_utf8(event_data.application_name), new_command_line, nil, war3_helper_dll)
+	result = sys.spawn_inject(event_data.application_name, new_command_line, nil, war3_helper_dll)
 
 	log.debug("********************* on test end *********************")
 	if result then return 0 else return -1 end
