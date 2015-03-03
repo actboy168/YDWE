@@ -56,7 +56,7 @@ objecttype06_destructablecode=0,objecttype,YDWE_OBJECT_TYPE_DESTRUCTABLE,WESTRIN
 [TriggerEvents]
 YDWEDisableRegister=0,nothing
 _YDWEDisableRegister_Defaults=
-_YDWEDisableRegister_Category=TC_NOTHING
+_YDWEDisableRegister_Category=TC_YDET
 
 [TriggerActions]
 //YD Aganist Fate
