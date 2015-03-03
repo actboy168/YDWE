@@ -725,6 +725,23 @@ bool WINAPI SFileCreateFile(
             nError = ERROR_INVALID_PARAMETER;
     }
 
+    // The number of files must not overflow the maximum
+    // Example: size of block table: 0x41, size of hash table: 0x40
+    if(nError == ERROR_SUCCESS)
+    {
+        DWORD dwReservedFiles = ha->dwReservedFiles;
+
+        if(dwReservedFiles == 0)
+        {
+            dwReservedFiles += ha->dwFileFlags1 ? 1 : 0;
+            dwReservedFiles += ha->dwFileFlags2 ? 1 : 0;
+            dwReservedFiles += ha->dwFileFlags3 ? 1 : 0;
+        }
+
+        if((ha->dwFileTableSize + dwReservedFiles) > ha->dwMaxFileCount)
+            nError = ERROR_DISK_FULL;
+    }
+
     // Initiate the add file operation
     if(nError == ERROR_SUCCESS)
         nError = SFileAddFile_Init(ha, szArchivedName, FileTime, dwFileSize, lcLocale, dwFlags, (TMPQFile **)phFile);
