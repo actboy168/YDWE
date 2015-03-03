@@ -24,7 +24,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(YDWE)\Editor\Build\include;$(YDWE)\Editor\Core;$(YDWE)\Editor\Core\ydbase;$(YDWE)\Editor\Core\SlkLib;$(YDWE)\Editor\Core\YDWEVersion;$(OpenSource)\Aero\Current\include;$(OpenSource)\Boost;$(OpenSource)\Lua\Current\include;$(OpenSource)\LuaBind\Current\include;$(OpenSource)\StormLib\Current\src;$(ThirdParty)\Blizzard\Storm\Current\include;$(ThirdParty)\Microsoft\Detours\Current\include;$(ThirdParty)\RadGameTools\MSS\6.1a\Includes;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(YDWE)\Editor\Build\include;$(YDWE)\Editor\Core;$(YDWE)\Editor\Core\ydbase;$(YDWE)\Editor\Core\SlkLib;$(YDWE)\Editor\Core\YDWEVersion;$(OpenSource)\Boost;$(OpenSource)\Lua\Current\include;$(OpenSource)\LuaBind\Current\include;$(OpenSource)\StormLib\Current\src;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OpenSource)\Boost\stage\lib;$(OpenSource)\Lua\Current\lib\$(PlatformName)\$(ConfigurationName);$(OpenSource)\StormLib\Current\lib\$(PlatformName)\$(ConfigurationName);$(ThirdParty)\Blizzard\Storm\Current\lib\Win32\DebugRelease;$(ThirdParty)\Microsoft\Detours\Current\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
