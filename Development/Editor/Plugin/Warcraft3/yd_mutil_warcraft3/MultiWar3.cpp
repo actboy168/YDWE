@@ -149,18 +149,17 @@ int __stdcall fake_sendto(SOCKET s, const char FAR * buf, int len, int flags, co
 		
 		struct sockaddr_in* info_ptr = (struct sockaddr_in*)to;
 
-        if (info_ptr->sin_port == ::htons(6112) && info_ptr->sin_addr.S_un.S_addr == ::inet_addr("255.255.255.255"))
+        if ((info_ptr->sin_port == ::htons(6112)) 
+			&& (info_ptr->sin_addr.S_un.S_addr == ::inet_addr("255.255.255.255")))
 		{
 			g_udp_port_manager->each_other([&](uint16_t port)
 			{
-				if (port != 6112)
-				{
-					sockaddr_in sock_addr = *(sockaddr_in*)to;
-					sock_addr.sin_port = ::htons(port);
-					sock_addr.sin_addr.S_un.S_addr = ::inet_addr("127.0.0.1");
-					base::std_call<int>(real_sendto, s, (char*)buf, len, flags, (const sockaddr*)&sock_addr, sizeof(sockaddr_in));
-				}
+				sockaddr_in sock_addr = *(sockaddr_in*)to;
+				sock_addr.sin_port = ::htons(port);
+				sock_addr.sin_addr.S_un.S_addr = ::inet_addr("127.0.0.1");
+				base::std_call<int>(real_sendto, s, (char*)buf, len, flags, (const sockaddr*)&sock_addr, sizeof(sockaddr_in));
 			});
+			return len;
         }
     }
 
