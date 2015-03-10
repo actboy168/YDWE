@@ -277,8 +277,6 @@ namespace locvar
 
 		for each (auto it in register_var[name])
 		{
-			std::string v1 = it.first;
-			std::string v2 = it.second;
 			auto uiit = trigger_data_ui.find(it.first);
 			if (uiit == trigger_data_ui.end())
 			{
