@@ -85,12 +85,9 @@ namespace locvar
 
 		CC_PutBegin();
 
-		if (s.mother_id == (0x10000 | CC_GUIID_YDWETimerStartMultiple))
-		{
-			register_var[s.name].erase(var_name);
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, s.handle_string, SStrHash(var_name));
-		}
-		else if (s.mother_id == CC_GUIID_YDWETimerStartMultiple || s.mother_id == CC_GUIID_YDWERegisterTriggerMultiple)
+		if ((s.mother_id == (0x10000 | CC_GUIID_YDWETimerStartMultiple))
+			|| (s.mother_id == CC_GUIID_YDWETimerStartMultiple)
+			|| (s.mother_id == CC_GUIID_YDWERegisterTriggerMultiple))
 		{
 			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, s.handle_string, SStrHash(var_name));
 		}
@@ -118,6 +115,11 @@ namespace locvar
 		PUT_CONST(")", 1);
 
 		CC_PutEnd();
+
+		if (s.mother_id == (0x10000 | CC_GUIID_YDWETimerStartMultiple))
+		{
+			register_var[s.name].erase(var_name);
+		}
 	}
 
 	void get(DWORD This, DWORD OutClass, char* type_name)
@@ -275,6 +277,8 @@ namespace locvar
 
 		for each (auto it in register_var[name])
 		{
+			std::string v1 = it.first;
+			std::string v2 = it.second;
 			auto uiit = trigger_data_ui.find(it.first);
 			if (uiit == trigger_data_ui.end())
 			{
