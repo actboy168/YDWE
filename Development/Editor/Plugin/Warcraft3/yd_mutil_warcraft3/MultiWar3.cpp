@@ -140,7 +140,7 @@ int __stdcall fake_sendto(SOCKET s, const char FAR * buf, int len, int flags, co
 
     struct war3_packet* data_ptr = (struct war3_packet*)buf;
 
-    if (data_ptr->f7_ == 0xF7)
+	if (len >= sizeof(war3_packet) && data_ptr->f7_ == 0xF7)
     {
         if (data_ptr->cmd_ == 0x30)
 		{
