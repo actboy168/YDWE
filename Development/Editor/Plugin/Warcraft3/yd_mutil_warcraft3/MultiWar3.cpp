@@ -4,37 +4,27 @@
 #include <base/warcraft3/version.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
-#include <boost/interprocess/managed_shared_memory.hpp>
-#include <boost/interprocess/allocators/allocator.hpp> 
-#include <boost/interprocess/containers/set.hpp>
-#include <boost/interprocess/sync/named_mutex.hpp>
-#include <boost/interprocess/sync/scoped_lock.hpp> 
-#include <functional>
+#include <functional>  
+#include "file_set.h"
 
 #pragma comment(lib, "wsock32.lib")
 
 class udp_port_manager
 {
-	typedef boost::interprocess::allocator<uint16_t, boost::interprocess::managed_shared_memory::segment_manager> shm_uint16_allocator; 
-	typedef boost::interprocess::set<uint16_t, std::less<uint16_t>, shm_uint16_allocator> shm_set; 
-
 public:
 	udp_port_manager()
-		: shm_(boost::interprocess::open_or_create, "ydwe.warcraft3.port_manager.1", 1024)
-		, named_mtx_(boost::interprocess::open_or_create, "ydwe.warcraft3.port_manager.mutex.1")
-		, port_set_(shm_.find_or_construct<shm_set>("port_set")(std::less<uint16_t>(), shm_.get_segment_manager()))
+		: port_set_("ydwe.warcraft3.port_manager")
 		, self_port_(0)
 		, self_socket_(INVALID_SOCKET)
 	{ }
 
     void each_other(std::function<void(uint16_t)> func)
 	{
-		boost::interprocess::scoped_lock<boost::interprocess::named_mutex> lock(named_mtx_);
-        foreach (uint16_t port, *port_set_)
+        foreach (int port, port_set_.get())
         {
 			if (port != self_port_)
 			{
-				func(port);
+				func((uint16_t)port);
 			}
         }
 	}
@@ -43,23 +33,18 @@ public:
 	{
 		self_socket_ = s;
 		self_port_   = port;
-
-		boost::interprocess::scoped_lock<boost::interprocess::named_mutex> lock(named_mtx_);
-		port_set_->insert(self_port_);
+		port_set_.insert(self_port_);
 	}
 
 	void remove(SOCKET s)
 	{
 		if (self_socket_ == s && self_port_)
 		{
-			boost::interprocess::scoped_lock<boost::interprocess::named_mutex> lock(named_mtx_);
-			port_set_->erase(self_port_);
+			port_set_.erase(self_port_);
 		}
 	}
 
-	boost::interprocess::managed_shared_memory shm_; 
-	boost::interprocess::named_mutex           named_mtx_;
-	shm_set*                                   port_set_; 
+	file_set                                   port_set_;
 	uint16_t                                   self_port_;
 	SOCKET                                     self_socket_;
 };
