@@ -54,9 +54,13 @@ objecttype05_doodadcode=0,objecttype,YDWE_OBJECT_TYPE_DOODAD,WESTRING_OBJTAB_DOO
 objecttype06_destructablecode=0,objecttype,YDWE_OBJECT_TYPE_DESTRUCTABLE,WESTRING_OBJTAB_DESTRUCTABLES
 
 [TriggerEvents]
+MapInitializationEvent=0,nothing
+_MapInitializationEvent_Defaults=
+_MapInitializationEvent_Category=TC_NOTHING
+
 YDWEDisableRegister=0,nothing
 _YDWEDisableRegister_Defaults=
-_YDWEDisableRegister_Category=TC_YDET
+_YDWEDisableRegister_Category=TC_NOTHING
 
 [TriggerActions]
 //YD Aganist Fate
