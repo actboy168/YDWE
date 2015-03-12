@@ -9,10 +9,9 @@
 #include <boost/log/trivial.hpp>
 #include <boost/log/sources/logger.hpp>
 #include <boost/log/sources/severity_logger.hpp>
-#include <boost/log/sinks/sync_frontend.hpp>
 #include <boost/log/support/date_time.hpp>
-#include "logging_backend.h"
-
+#include "logging_backend.h" 
+#include "logging_frontend.h" 
 
 namespace logging
 {
@@ -22,7 +21,7 @@ namespace logging
 		{
 			using namespace boost::log;
 
-			typedef sinks::synchronous_sink<logging_backend> logging_sink;
+			typedef logging_frontend<logging_backend> logging_sink;
 			boost::shared_ptr<logging_sink> sink = boost::make_shared<logging_sink>(root, name);
 
 			sink->set_formatter

@@ -11,7 +11,7 @@ logging::logger lg;
 
 int llog_print(lua_State *L)
 {
-	boost::log::v2_mt_nt5::trivial::severity_level lv = (boost::log::v2_mt_nt5::trivial::severity_level)lua_tointeger(L, lua_upvalueindex(1));
+	boost::log::BOOST_LOG_VERSION_NAMESPACE::trivial::severity_level lv = (boost::log::BOOST_LOG_VERSION_NAMESPACE::trivial::severity_level)lua_tointeger(L, lua_upvalueindex(1));
 	int n = lua_gettop(L);
 	lua_getglobal(L, "tostring");
 	for (int i = 1; i <= n; i++)

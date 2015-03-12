@@ -1,6 +1,5 @@
 #pragma once
 
-#include <boost/log/sinks/sync_frontend.hpp>
 #include <boost/log/sinks/basic_sink_backend.hpp>
 #include <boost/log/core/record_view.hpp>
 #include <boost/filesystem.hpp>

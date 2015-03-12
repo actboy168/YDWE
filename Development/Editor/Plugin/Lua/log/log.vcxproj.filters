@@ -32,5 +32,8 @@
     <ClInclude Include="logging_backend.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="logging_frontend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
