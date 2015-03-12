@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/cstdint.hpp>
+#include <stdint.h>
 
 uint16_t weSetWindowCaptionPattern[] =
 {

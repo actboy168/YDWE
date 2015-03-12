@@ -5,10 +5,6 @@
 #include <functional>
 #include <regex>
 #include <aero/aero.hpp>
-#include <boost/algorithm/string.hpp>
-#include <boost/smart_ptr.hpp>
-#include <boost/lambda/lambda.hpp>
-#include <boost/scope_exit.hpp>
 #include <base/util/unicode.h>
 #include <base/hook/inline.h>
 #include <base/hook/iat_manager.h>
@@ -286,7 +282,7 @@ static uintptr_t pgTrueWeVerifyMapCellsLimit;
 static bool isWeVerifyMapCellsLimitHookInstalled;
 static void *pgMapCellsGetUnknownGlobalFlag;
 
-boost::scoped_ptr<CMemoryPatch> pgWeVerifyMapCellsLimitPatcher;
+std::unique_ptr<CMemoryPatch> pgWeVerifyMapCellsLimitPatcher;
 
 static int32_t __fastcall DetourWeVerifyMapCellsLimit(int32_t flag)
 {
@@ -322,7 +318,7 @@ static BOOL __fastcall DetourWeTriggerNameCheck(const char *triggerName, BOOL al
 static uintptr_t pgTrueWeTriggerNameInputCharCheck;
 static bool isWeTriggerNameInputCharCheckHookInstalled;
 
-boost::scoped_ptr<CMemoryPatch> pgWeTriggerNameInputCharCheckPatcher;
+std::unique_ptr<CMemoryPatch> pgWeTriggerNameInputCharCheckPatcher;
 
 static uint32_t __fastcall DetourWeTriggerNameInputCharCheck(uint32_t c, uint32_t flag)
 {

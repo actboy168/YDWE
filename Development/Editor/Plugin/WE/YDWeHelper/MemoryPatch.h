@@ -7,7 +7,7 @@
 #include <cstdint>
 #include <cstdlib>
 #include <string>
-#include <boost/utility.hpp>
+#include <base/util/noncopyable.h>
 
 namespace NYDWE
 {
@@ -90,7 +90,7 @@ bool MemoryEqual(void *first, void *last, uintptr_t length);
  */
 bool MemoryPatchAndVerify(void *patchPoint, uint8_t *patch, uintptr_t patchLength);
 
-class CMemoryPatch : boost::noncopyable
+class CMemoryPatch : base::util::noncopyable
 {
 public:
 	CMemoryPatch(void *patchPoint, void *patchDataBegin, void *patchDataEnd);
