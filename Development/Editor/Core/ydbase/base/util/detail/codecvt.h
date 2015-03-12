@@ -6,8 +6,7 @@
 #include <locale>
 #include <string>
 
-namespace base { 
-namespace util { namespace detail {
+namespace base { namespace detail {
 	typedef std::codecvt<wchar_t, char, std::mbstate_t> codecvt_type;
 
 	void convert(const char* from, const char* from_end, std::wstring& to, const codecvt_type& cvt, conv_method how);
@@ -35,4 +34,3 @@ namespace util { namespace detail {
 		return std::move(to);
 	}
 }}
-}

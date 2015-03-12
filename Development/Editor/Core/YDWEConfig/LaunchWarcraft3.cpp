@@ -64,8 +64,8 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		table["MapTest"]["LaunchRenderingEngine"]   = "Direct3D 8";
 		table["MapTest"]["LaunchWindowed"] = "1";
 		try {
-			base::util::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<base::util::buffer>();
-			base::util::buffer_reader reader(buf);
+			base::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<base::buffer>();
+			base::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		} 
 		catch (...) {

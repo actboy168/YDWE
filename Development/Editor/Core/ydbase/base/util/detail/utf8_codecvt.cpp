@@ -3,8 +3,7 @@
 #include <base/util/detail/utf8_codecvt.h>
 
 
-namespace base { 
-namespace util { namespace detail {
+namespace base { namespace detail {
 	namespace
 	{
 		bool invalid_continuing_octet(unsigned char octet_1) 
@@ -216,5 +215,4 @@ namespace util { namespace detail {
 		return static_cast<int>(from_next-from);
 	}
 	
-}} 
-}
+}}

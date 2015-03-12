@@ -27,7 +27,7 @@ namespace slk
 		this->_type = type;
 	}
 
-	void VariableData::LoadData(base::util::buffer_reader& reader)
+	void VariableData::LoadData(base::buffer_reader& reader)
 	{
 		// Get data
 		switch (_type)

@@ -30,7 +30,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR l
 	}
 	catch (std::exception const& e)
 	{
-		::MessageBoxW(NULL, base::util::u2w(e.what(), base::util::conv_method::replace | '?').c_str(), L"ERROR", MB_ICONERROR | MB_OK);
+		::MessageBoxW(NULL, base::u2w(e.what(), base::conv_method::replace | '?').c_str(), L"ERROR", MB_ICONERROR | MB_OK);
 	}
 	catch (...)
 	{

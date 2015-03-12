@@ -10,7 +10,7 @@ namespace win {
 
 	template <HANDLE NullHandle>
 	class scoped_handle 
-		: private util::noncopyable
+		: private noncopyable
 	{
 	public:
 		scoped_handle()

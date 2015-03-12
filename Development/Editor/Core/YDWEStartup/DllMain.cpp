@@ -22,7 +22,7 @@
 namespace fs = boost::filesystem;
 
 #define _(str)  base::i18n::gettext(str).to_string().c_str()
-#define __(str) base::util::u2w(base::i18n::gettext(str)).c_str()
+#define __(str) base::u2w(base::i18n::gettext(str)).c_str()
 
 static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boost::filesystem::path &fileSecond, std::error_code *pErrorCode = nullptr)
 {
@@ -224,11 +224,11 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 	}
 	catch (base::exception const& e)
 	{
-		MessageBoxW(NULL, base::util::u2w(e.what(), base::util::conv_method::replace | '?').c_str(), __("Error"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, base::u2w(e.what(), base::conv_method::replace | '?').c_str(), __("Error"), MB_OK | MB_ICONERROR);
 	}
 	catch (std::exception const& e)
 	{
-		MessageBoxW(NULL, base::util::a2w(e.what(), base::util::conv_method::replace | '?').c_str(), __("Error"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, base::a2w(e.what(), base::conv_method::replace | '?').c_str(), __("Error"), MB_OK | MB_ICONERROR);
 	}
 	catch (...)
 	{

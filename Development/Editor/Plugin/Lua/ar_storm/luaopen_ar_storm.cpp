@@ -98,7 +98,7 @@ namespace NLuaAPI { namespace NSTORM {
 		if (!pgStormSFileLoadFile || !pgStormSFileUnloadFile)
 			return false;
 
-		std::string pathinmpq = base::util::w2a(wpathinmpq, base::util::conv_method::replace | '?');
+		std::string pathinmpq = base::w2a(wpathinmpq, base::conv_method::replace | '?');
 		uint8_t* buf;
 		uint32_t buf_size;
 		if (!base::std_call<BOOL>(pgStormSFileLoadFile, pathinmpq.c_str(), &buf, &buf_size, 0, NULL))
@@ -127,7 +127,7 @@ namespace NLuaAPI { namespace NSTORM {
 			return ;
 		}
 
-		std::string pathinmpq = base::util::w2a(wpathinmpq, base::util::conv_method::replace | '?');
+		std::string pathinmpq = base::w2a(wpathinmpq, base::conv_method::replace | '?');
 		char* fileContentBuffer;
 		uint32_t size;
 		BOOL ret = FALSE;

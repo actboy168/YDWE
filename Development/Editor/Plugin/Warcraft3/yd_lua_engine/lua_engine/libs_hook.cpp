@@ -17,7 +17,7 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	class jhook_helper : util::noncopyable
+	class jhook_helper : noncopyable
 	{
 	public:
 		jhook_helper()

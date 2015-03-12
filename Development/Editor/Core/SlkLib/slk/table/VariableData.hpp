@@ -29,7 +29,7 @@ namespace slk
  		VariableData(VariableData const& that);
 		Type GetType() const;
 		void SetType(const Type& type);
-		void LoadData(base::util::buffer_reader& reader);
+		void LoadData(base::buffer_reader& reader);
 		std::string ToString() const;
 		void FromString(std::string const& str, Type type);
 

@@ -2,7 +2,7 @@
 
 #include <base/util/noncopyable.h>
 
-namespace base { namespace util {
+namespace base {
 	template <typename object_type>
 	struct singleton_nonthreadsafe 
 		: private noncopyable
@@ -47,4 +47,4 @@ namespace base { namespace util {
 	};
 	template <typename object_type>
 	typename singleton_threadsafe<object_type>::object_creator singleton_threadsafe<object_type>::create_object;
-}}
+}

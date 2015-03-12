@@ -10,7 +10,7 @@ namespace base {
 namespace win {
 
 	class event 
-		: private util::noncopyable
+		: private noncopyable
 		, private scoped_handle<NULL>
 	{
 	public:

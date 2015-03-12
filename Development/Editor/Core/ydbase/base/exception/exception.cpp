@@ -23,7 +23,7 @@ namespace base {
 		error_wmsg what = get_format_string(fmt, YD_VA_START(fmt));
 		if (what)
 		{
-			std::string temp_string = util::w2u(what.c_str(), util::conv_method::replace | '?');
+			std::string temp_string = w2u(what.c_str(), conv_method::replace | '?');
 
 			what_.alloc(temp_string.size() + 1);
 			if (what_)

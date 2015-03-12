@@ -57,6 +57,6 @@ namespace base { namespace win {
 
 	uint64_t get_tick_count()
 	{
-		return util::singleton_threadsafe<detail::get_tick_count>::instance().call();
+		return singleton_threadsafe<detail::get_tick_count>::instance().call();
 	}
 }}

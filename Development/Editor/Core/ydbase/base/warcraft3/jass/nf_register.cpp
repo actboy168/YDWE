@@ -7,12 +7,12 @@
 
 namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 
-	util::signal<void, uintptr_t> event_hook;
-	util::signal<void, void>      event_add;
-	uintptr_t                     thread_id          = 0;
-	uintptr_t                     stat               = 0;
-	uintptr_t                     real_storm_alloc   = 0;
-	uintptr_t                     real_tls_get_value = 0;
+	signal<void, uintptr_t> event_hook;
+	signal<void, void>      event_add;
+	uintptr_t               thread_id          = 0;
+	uintptr_t               stat               = 0;
+	uintptr_t               real_storm_alloc   = 0;
+	uintptr_t               real_tls_get_value = 0;
 
 	uintptr_t __stdcall fake_storm_alloc(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
 	{

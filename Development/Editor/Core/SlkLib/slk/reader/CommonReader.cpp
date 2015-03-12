@@ -5,7 +5,7 @@
 
 namespace slk { namespace reader { namespace utility {
 
-	void remove_bom(base::util::buffer_reader& reader)
+	void remove_bom(base::buffer_reader& reader)
 	{
 		std::error_code ec;
 		if ((0xEF == reader.read<uint8_t>(ec))
@@ -19,7 +19,7 @@ namespace slk { namespace reader { namespace utility {
 		}
 	}
 
-	void each_line(base::util::buffer_reader& reader, std::function<void(std::string_view&)> callback)
+	void each_line(base::buffer_reader& reader, std::function<void(std::string_view&)> callback)
 	{
 		std::error_code ec;
 		while (!ec)

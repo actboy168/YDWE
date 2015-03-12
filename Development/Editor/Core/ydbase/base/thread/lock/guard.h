@@ -6,7 +6,7 @@ namespace base { namespace lock {
 
 	template <class T>
 	class guard
-		: private util::noncopyable
+		: private noncopyable
 	{
 	public:
 		inline explicit guard(T& l)

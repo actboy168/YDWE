@@ -3,7 +3,6 @@
 #include <base/config.h>
 
 namespace base { 
-namespace util {
 	namespace detail {
 		struct do_once_flag_nonthreadsafe
 		{
@@ -22,7 +21,6 @@ namespace util {
 		};
 	}
 
-#define DO_ONCE_NOTHREADSAFE() static ::base::util::detail::do_once_flag_nonthreadsafe do_once_flag_ ## __LINE__; if (do_once_flag_ ## __LINE__.first())
+#define DO_ONCE_NOTHREADSAFE() static ::base::detail::do_once_flag_nonthreadsafe do_once_flag_ ## __LINE__; if (do_once_flag_ ## __LINE__.first())
 
-}
 }

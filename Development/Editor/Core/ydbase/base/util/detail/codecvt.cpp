@@ -6,8 +6,7 @@
 #include <base/util/dynarray.h>
 #include <Windows.h>
 
-namespace base { 
-namespace util { namespace detail {
+namespace base { namespace detail {
 	const std::size_t default_codecvt_buf_size = 256;
 
 	void convert_aux(const char* from, const char* from_end, wchar_t* to, wchar_t* to_end, std::wstring& target, const codecvt_type& cvt, conv_method how)
@@ -154,4 +153,4 @@ namespace util { namespace detail {
 			convert_aux(from, from_end, &*buf.begin(), &*buf.begin() + buf.size(), to, cvt, how);
 		}
 	}
-}}}
+}}

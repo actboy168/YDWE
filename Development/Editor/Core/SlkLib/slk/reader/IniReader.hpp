@@ -8,6 +8,6 @@ namespace slk
 	class IniReader
 	{
 	public:
-		static void Read(base::util::buffer_reader& reader, IniTable& table);
+		static void Read(base::buffer_reader& reader, IniTable& table);
 	};
 }

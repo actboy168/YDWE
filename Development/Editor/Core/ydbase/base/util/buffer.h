@@ -8,7 +8,6 @@
 #include <streambuf>
 
 namespace base { 
-namespace util {
 
 	class buffer
 		: private noncopyable
@@ -261,5 +260,4 @@ namespace util {
 		}
 	};		 
 #pragma warning(pop)
-}
 }

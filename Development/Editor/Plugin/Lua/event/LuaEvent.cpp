@@ -61,7 +61,7 @@ namespace NYDWE {
 	uintptr_t pgTrueCreateFileA;
 	HANDLE WINAPI DetourStormCreateFileA(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
 	{
-		std::wstring fileName = base::util::a2w(std::string_view(lpFileName), base::util::conv_method::replace | '?');
+		std::wstring fileName = base::a2w(std::string_view(lpFileName), base::conv_method::replace | '?');
 		if (gIsInCompileProcess && (
 			boost::iends_with(fileName, L".w3x") ||
 			boost::iends_with(fileName, L".w3m")/* ||
@@ -141,9 +141,9 @@ namespace NYDWE {
 			eventData.getDataStore().clear();
 			eventData.setEventData("map_path", currentWarcraftMap.wstring());
 			if (lpApplicationName)
-				eventData.setEventData("application_name", base::util::a2w(std::string_view(lpApplicationName), base::util::conv_method::replace | '?'));
+				eventData.setEventData("application_name", base::a2w(std::string_view(lpApplicationName), base::conv_method::replace | '?'));
 			if (lpCommandLine)
-				eventData.setEventData("command_line", base::util::a2w(std::string_view(lpCommandLine), base::util::conv_method::replace | '?'));
+				eventData.setEventData("command_line", base::a2w(std::string_view(lpCommandLine), base::conv_method::replace | '?'));
 
 			const std::vector<int> &results = event_array[EVENT_TEST_MAP](eventData);
 			return (!results_is_failed(results));

@@ -17,12 +17,12 @@ namespace luawarp { namespace registry {
 
 	std::wstring rkey_read_wstring(lua_State* L, int idx)
 	{
-		return base::util::u2w(std::string_view(lua_tostring(L, idx), lua_rawlen(L, idx)), base::util::conv_method::replace | '?');
+		return base::u2w(std::string_view(lua_tostring(L, idx), lua_rawlen(L, idx)), base::conv_method::replace | '?');
 	}
 	
 	int rkey_push_wstring(lua_State* L, const std::wstring& value)
 	{
-		std::string utf8_value = base::util::w2u(value, base::util::conv_method::replace | '?');
+		std::string utf8_value = base::w2u(value, base::conv_method::replace | '?');
 		lua_pushlstring(L, utf8_value.data(), utf8_value.size());
 		return 1;
 	}

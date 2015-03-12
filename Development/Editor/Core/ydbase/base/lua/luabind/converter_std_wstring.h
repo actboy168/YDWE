@@ -18,12 +18,12 @@ namespace luabind
 
 		std::wstring from(lua_State* L, int index)
 		{
-			return base::util::u2w(std::string_view(lua_tostring(L, index), lua_rawlen(L, index)), base::util::conv_method::replace | '?');
+			return base::u2w(std::string_view(lua_tostring(L, index), lua_rawlen(L, index)), base::conv_method::replace | '?');
 		}
 
 		void to(lua_State* L, std::wstring const& value)
 		{
-			std::string utf8_value = base::util::w2u(value, base::util::conv_method::replace | '?');
+			std::string utf8_value = base::w2u(value, base::conv_method::replace | '?');
 			lua_pushlstring(L, utf8_value.data(), utf8_value.size());
 		}
 	};

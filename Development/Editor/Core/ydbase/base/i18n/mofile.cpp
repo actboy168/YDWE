@@ -7,7 +7,7 @@ namespace i18n {
 
 	namespace detail
 	{
-		bool mofile_read_strings_array(util::buffer_reader& reader, uint32_t number_of_strings, uint32_t offset, std::string_view* result)
+		bool mofile_read_strings_array(buffer_reader& reader, uint32_t number_of_strings, uint32_t offset, std::string_view* result)
 		{
 			reader.seek(offset, std::ios::beg);
 
@@ -64,7 +64,7 @@ namespace i18n {
 
 	bool mofile::read()
 	{
-		util::buffer_reader reader(this->buffer_);
+		buffer_reader reader(this->buffer_);
 
 		uint32_t magic_number = reader.read<uint32_t>();
 		if ((magic_number != 0x950412DE) && (magic_number != 0xDE120495))
@@ -100,7 +100,7 @@ namespace i18n {
 	mofile* mofile::read(boost::filesystem::path const& filename)
 	{
 		try {
-			std::unique_ptr<mofile> mf(new mofile(file::read_stream(filename).read<util::buffer>()));
+			std::unique_ptr<mofile> mf(new mofile(file::read_stream(filename).read<buffer>()));
 			if (mf->read())
 			{
 				return mf.release();
@@ -115,7 +115,7 @@ namespace i18n {
 	mofile* mofile::read(const char* filename)
 	{
 		try {
-			std::unique_ptr<mofile> mf(new mofile(file::read_stream(filename).read<util::buffer>()));
+			std::unique_ptr<mofile> mf(new mofile(file::read_stream(filename).read<buffer>()));
 			if (mf->read())
 			{
 				return mf.release();

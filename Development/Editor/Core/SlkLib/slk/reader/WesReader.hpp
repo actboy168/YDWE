@@ -7,6 +7,6 @@ namespace slk
 {
 	struct WesReader
 	{
-		static void Read(base::util::buffer_reader& reader, WesTable& table);
+		static void Read(base::buffer_reader& reader, WesTable& table);
 	};
 }

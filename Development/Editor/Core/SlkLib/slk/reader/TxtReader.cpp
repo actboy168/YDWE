@@ -4,7 +4,7 @@
 
 namespace slk
 {
-	void TxtReader::Read(base::util::buffer_reader& reader, SlkTable& table)
+	void TxtReader::Read(base::buffer_reader& reader, SlkTable& table)
 	{
 		reader::utility::ini_read(reader, table);
 	}

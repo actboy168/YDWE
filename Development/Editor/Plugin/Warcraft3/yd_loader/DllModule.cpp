@@ -182,8 +182,8 @@ void DllModule::LoadPlugins()
 
 		slk::IniTable table;
 		try {
-			base::util::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<base::util::buffer>();
-			base::util::buffer_reader reader(buf);
+			base::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<base::buffer>();
+			base::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		}
 		catch(...) {
@@ -196,7 +196,7 @@ void DllModule::LoadPlugins()
 			try {
 				if (!fs::is_directory(*itr))
 				{
-					std::string utf8_name = base::util::w2u(itr->path().filename().wstring());
+					std::string utf8_name = base::w2u(itr->path().filename().wstring());
 
 					if ((! base::path::equal(itr->path().filename(), std::string(PluginName()) + ".dll"))
 						&& base::path::equal(itr->path().extension(), L".dll")
@@ -312,8 +312,8 @@ void DllModule::Attach()
 		ResetConfig(table);
 
 		try {
-			base::util::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<base::util::buffer>();
-			base::util::buffer_reader reader(buf);
+			base::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<base::buffer>();
+			base::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		} 
 		catch (...) {

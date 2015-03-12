@@ -12,7 +12,7 @@ namespace file {
 #pragma warning(disable:4275)
 
 	class _BASE_API stream
-		: private util::noncopyable
+		: private noncopyable
 	{
 	public:
 		stream(const char* filename, std::ios_base::openmode mode);
@@ -42,7 +42,7 @@ namespace file {
 	};
 
 	class _BASE_API write_stream
-		: private util::noncopyable
+		: private noncopyable
 	{
 	public:
 		write_stream(const char* filename);
@@ -62,7 +62,7 @@ namespace file {
 	};
 
 	class _BASE_API read_stream
-		: private util::noncopyable
+		: private noncopyable
 	{
 	public:
 		read_stream(const char* filename);

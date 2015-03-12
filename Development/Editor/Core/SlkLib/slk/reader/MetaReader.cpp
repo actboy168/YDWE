@@ -120,7 +120,7 @@ namespace slk
 		}
 	}
 
-	void MetaReader::Read(base::util::buffer_reader& reader, MetaTable& table)
+	void MetaReader::Read(base::buffer_reader& reader, MetaTable& table)
 	{
 		SlkTable slkTable;
 		SlkReader::Read(reader, slkTable);

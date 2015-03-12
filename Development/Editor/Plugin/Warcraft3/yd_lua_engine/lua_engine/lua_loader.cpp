@@ -67,7 +67,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 	private:
 		lua::state* state_;
 	};
-	typedef util::singleton_nonthreadsafe<jass_state> jass_state_s;
+	typedef singleton_nonthreadsafe<jass_state> jass_state_s;
 
 	uintptr_t RealCheat = 0;
 	void __cdecl FakeCheat(jass::jstring_t cheat_str)

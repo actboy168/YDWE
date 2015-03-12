@@ -7,8 +7,7 @@
 #include <stdexcept>
 #include <type_traits>
 
-namespace base { 
-namespace util {
+namespace base {
 
 	template <typename T, size_t SIZE>
 	class hybrid_array
@@ -137,5 +136,4 @@ namespace util {
 		value_type data_[SIZE];
 	};
 
-}
 }

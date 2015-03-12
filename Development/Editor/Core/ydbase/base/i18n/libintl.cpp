@@ -60,7 +60,7 @@ namespace base { namespace i18n {
 		std::map<std::string, std::unique_ptr<mofile>> mapping_;
 	};
 
-	typedef util::singleton_nonthreadsafe<manager> manager_s;
+	typedef singleton_nonthreadsafe<manager> manager_s;
 
 	std::wstring language_name(LCID locale_id)
 	{

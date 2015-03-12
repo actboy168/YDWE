@@ -10,7 +10,7 @@ namespace file {
 #pragma warning(push)
 #pragma warning(disable:4275)
 	class _BASE_API memory_mapped_file 
-		: private util::noncopyable
+		: private noncopyable
 	{
 	public:
 		memory_mapped_file(const wchar_t* file_name);

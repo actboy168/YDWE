@@ -140,12 +140,12 @@ namespace slk
 #pragma warning(push)
 #pragma warning(disable:4275)
 	class SLKLIB_API ObjectManager 
-		: private base::util::noncopyable
+		: private base::noncopyable
 	{
 	public:
 		ObjectManager(InterfaceStorm& that);
-		base::util::buffer load_file(const char* szFilename);
-		bool save_file(const char* szFilename, base::util::buffer&& buf);
+		base::buffer load_file(const char* szFilename);
+		bool save_file(const char* szFilename, base::buffer&& buf);
 		bool load_ability_profile(SlkTable& table);
 		bool load_ability(SlkTable& table);
 		bool load_buff(SlkTable& table);

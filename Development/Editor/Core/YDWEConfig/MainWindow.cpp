@@ -146,16 +146,16 @@ void CMainWindow::InitWindow()
 			for (uint8_t i = 0; i < attribute.Count(); ++i)
 			{
 				std::string radioname = name + "_" + std::to_string((long long)i);
-				m_controls[radioname] = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(base::util::u2w(radioname).c_str()));
+				m_controls[radioname] = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(base::u2w(radioname).c_str()));
 			}
 		}
 		else if (attribute.Type() == Attribute::e_CheckBox)
 		{
-			m_controls[name] = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(base::util::u2w(name).c_str()));
+			m_controls[name] = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(base::u2w(name).c_str()));
 		}
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
-			m_comboboxs[name] = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(base::util::u2w(name).c_str()));
+			m_comboboxs[name] = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(base::u2w(name).c_str()));
 		}
 	}
 
@@ -211,8 +211,8 @@ bool CMainWindow::LoadConfig(slk::IniTable& table)
 	try
 	{
 		ResetConfig(table);
-		base::util::buffer buf = base::file::read_stream(base::path::self().remove_filename() / L"EverConfig.cfg").read<base::util::buffer>();
-		base::util::buffer_reader reader(buf);
+		base::buffer buf = base::file::read_stream(base::path::self().remove_filename() / L"EverConfig.cfg").read<base::buffer>();
+		base::buffer_reader reader(buf);
 		slk::IniReader::Read(reader, table);
 	}
 	catch (...)
@@ -227,7 +227,7 @@ bool CMainWindow::SaveConfig(slk::IniTable const& table)
 {
 	try
 	{
-		base::file::write_stream(base::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<base::util::buffer>(table));
+		base::file::write_stream(base::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<base::buffer>(table));
 	}
 	catch (...)
 	{
@@ -267,7 +267,7 @@ void CMainWindow::ConfigToUI(slk::IniTable& table)
 		}
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
-			std::wstring font_name = base::util::u2w(table[attribute.Section()][name]);
+			std::wstring font_name = base::u2w(table[attribute.Section()][name]);
 			for (int i = 0; i < m_comboboxs[name]->GetCount(); ++i)
 			{
 				if (font_name == ((DuiLib::CListLabelElementUI*)m_comboboxs[name]->GetItemAt(i))->GetText())
@@ -311,7 +311,7 @@ void CMainWindow::UIToConfig(slk::IniTable& table)
 		}
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
-			table[attribute.Section()][name] = base::util::w2u(CComboUI_GetSelectText(m_comboboxs[name]));
+			table[attribute.Section()][name] = base::w2u(CComboUI_GetSelectText(m_comboboxs[name]));
 		}
 	}
 }
@@ -459,8 +459,8 @@ void CMainWindow::InitPluginUI()
 
 		slk::IniTable table;
 		try {
-			base::util::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<base::util::buffer>();
-			base::util::buffer_reader reader(buf);
+			base::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<base::buffer>();
+			base::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);	
 		}
 		catch(...) {
@@ -483,7 +483,7 @@ void CMainWindow::InitPluginUI()
 						node->SetAttribute(L"class", L"CheckBox");
 						node->SetAttribute(L"text", fv[L"FileDescription"]);
 						node->SetAttribute(L"tooltip", itr->path().filename().c_str());
-						node->Selected("0" != table["Enable"][base::util::w2u(itr->path().filename().wstring())]);
+						node->Selected("0" != table["Enable"][base::w2u(itr->path().filename().wstring())]);
 					}
 				}
 			}
@@ -510,12 +510,12 @@ void CMainWindow::DonePluginUI()
 			if (pCheckBox)
 			{
 				
-				table["Enable"][base::util::w2u(pCheckBox->GetToolTip())] = pCheckBox->IsSelected()? "1": "0";
+				table["Enable"][base::w2u(pCheckBox->GetToolTip())] = pCheckBox->IsSelected()? "1": "0";
 			}
 		}
 
 		fs::path plugin_path = m_ydwe_path.parent_path() / L"plugin" / L"warcraft3";
-		base::file::write_stream(plugin_path / L"config.cfg").write(slk::IniWriter::Write<base::util::buffer>(table));
+		base::file::write_stream(plugin_path / L"config.cfg").write(slk::IniWriter::Write<base::buffer>(table));
 	}
 	catch (...) {
 	}
@@ -581,7 +581,7 @@ void CMainWindow::DonePatchUI(slk::IniTable& table)
 			DuiLib::CRadioButtonUI* pRadioButton = dynamic_cast<DuiLib::CRadioButtonUI*>(pControl);
 			if (pRadioButton && pRadioButton->IsSelected())
 			{
-				table["War3Patch"]["DirName"] = base::util::w2u(fs::path(pRadioButton->GetToolTip()).filename().wstring());
+				table["War3Patch"]["DirName"] = base::w2u(fs::path(pRadioButton->GetToolTip()).filename().wstring());
 				return false;
 			}
 			return true;

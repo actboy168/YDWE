@@ -3,8 +3,7 @@
 #include <base/config.h>
 #include <locale>
 
-namespace base { 
-namespace util { namespace detail {
+namespace base { namespace detail {
 
 class utf8_codecvt_facet : public std::codecvt<wchar_t, char, std::mbstate_t>  
 {
@@ -24,4 +23,3 @@ protected:
 };
 
 }}
-}

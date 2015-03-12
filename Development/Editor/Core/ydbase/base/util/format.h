@@ -549,14 +549,14 @@ private:
 		return c+1;
 	}
 
-	util::hybrid_array<char_t, 512> buffer_;
-	util::hybrid_array<char_t, 16>  format_;
-	util::hybrid_array<char_t, 16>  temp_;
-	const char_t*                   fmt_;
-	std::size_t                     flags_;
-	std::ptrdiff_t                  width_;
-	std::ptrdiff_t                  precision_;
-	char_t                          ch_;
+	hybrid_array<char_t, 512> buffer_;
+	hybrid_array<char_t, 16>  format_;
+	hybrid_array<char_t, 16>  temp_;
+	const char_t*             fmt_;
+	std::size_t               flags_;
+	std::ptrdiff_t            width_;
+	std::ptrdiff_t            precision_;
+	char_t                    ch_;
 };
 
 template <>
@@ -612,14 +612,14 @@ inline void format_analyzer<char>::format_cast_string(const char* value)
 template <>
 inline void format_analyzer<wchar_t>::format_cast_string(const char* value)
 {
-	std::wstring valstr = base::util::u2w(value);
+	std::wstring valstr = base::u2w(value);
 	format_cast_string(valstr.c_str());
 }
 
 template <>
 inline void format_analyzer<char>::format_cast_string(const wchar_t* value)
 {
-	std::string valstr = base::util::w2u(value);
+	std::string valstr = base::w2u(value);
 	format_cast_string(valstr.c_str());
 }
 
@@ -632,14 +632,14 @@ inline void  format_analyzer<char>::format_cast_string(const std::basic_string<c
 template <>
 inline void format_analyzer<char>::format_cast_string(const std::basic_string<wchar_t>& value)
 {
-	std::string valstr = base::util::w2u(value);
+	std::string valstr = base::w2u(value);
 	format_value(valstr.c_str(), valstr.size());
 }
 
 template <>
 inline void  format_analyzer<wchar_t>::format_cast_string(const std::basic_string<char>& value)
 {
-	std::wstring valstr = base::util::u2w(value);
+	std::wstring valstr = base::u2w(value);
 	format_value(valstr.c_str(), valstr.size());
 }
 

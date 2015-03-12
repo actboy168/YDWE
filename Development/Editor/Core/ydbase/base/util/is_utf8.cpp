@@ -1,6 +1,6 @@
 #include <base/util/unicode.h>
 
-namespace base { namespace util {
+namespace base {
 
 	static const char g_trailing_bytes_for_utf8[] = {
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
@@ -13,7 +13,7 @@ namespace base { namespace util {
 		2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,  3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5
 	};
 
-	static bool is_legal_utf8(const unsigned char *source, size_t length) 
+	static bool is_legal_utf8(const unsigned char *source, size_t length)
 	{
 		unsigned char a;
 		const unsigned char *srcptr = source + length;
@@ -61,4 +61,4 @@ namespace base { namespace util {
 
 		return true;
 	}
-}}
+}

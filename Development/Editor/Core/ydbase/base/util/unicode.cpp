@@ -3,7 +3,7 @@
 #include <base/util/detail/utf8_codecvt.h>
 #include <base/util/detail/codecvt.h>
 
-namespace base { namespace util {
+namespace base {
 	std::locale utf8_locale(std::locale(), new detail::utf8_codecvt_facet);
 	const detail::codecvt_type* utf8_codecvt_facet_ptr(&std::use_facet<detail::codecvt_type>(utf8_locale));
 
@@ -64,4 +64,4 @@ namespace base { namespace util {
 		return std::move(w2u(a2w(from, how), how));
 	}
 
-}}
+}

@@ -35,7 +35,7 @@ namespace base { namespace registry {
 
 	template<typename C, typename T = reg_traits<C>>
 	class basic_read_value
-		: private util::noncopyable
+		: private noncopyable
 	{
 	public:
 		typedef C                                                 char_type;

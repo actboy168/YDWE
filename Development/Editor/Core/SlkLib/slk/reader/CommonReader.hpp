@@ -6,11 +6,11 @@
 #include <base/util/string_view.h>
 
 namespace slk { namespace reader { namespace utility {
-	void remove_bom(base::util::buffer_reader& reader);
-	void each_line(base::util::buffer_reader& reader, std::function<void(std::string_view&)> callback);
+	void remove_bom(base::buffer_reader& reader);
+	void each_line(base::buffer_reader& reader, std::function<void(std::string_view&)> callback);
 
 	template <class TableT>
-	void ini_read(base::util::buffer_reader& reader, TableT& table)
+	void ini_read(base::buffer_reader& reader, TableT& table)
 	{
 		typename TableT::mapped_type* object = nullptr;
 		remove_bom(reader);

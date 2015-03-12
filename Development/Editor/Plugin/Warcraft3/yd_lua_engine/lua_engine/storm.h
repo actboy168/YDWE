@@ -30,5 +30,5 @@ namespace base { namespace warcraft3 {
 		uintptr_t fn_sfile_exists_;
 	};
 
-	typedef util::singleton_nonthreadsafe<storm> storm_s;
+	typedef singleton_nonthreadsafe<storm> storm_s;
 }}

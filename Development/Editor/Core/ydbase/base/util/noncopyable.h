@@ -3,7 +3,6 @@
 #include <base/config.h>
 
 namespace base { 
-namespace util {
 	class noncopyable
 	{
 	protected:
@@ -13,5 +12,4 @@ namespace util {
 		noncopyable( const noncopyable& );
 		const noncopyable& operator=( const noncopyable& );
 	};
-}
 }

@@ -4,7 +4,7 @@
 namespace slk
 {
 	template <>
-	void ObjReader::ReadModData<ObjectWithOptinal>(base::util::buffer_reader& reader, ObjSingle<ObjectWithOptinal>& obj)
+	void ObjReader::ReadModData<ObjectWithOptinal>(base::buffer_reader& reader, ObjSingle<ObjectWithOptinal>& obj)
 	{
 		uint32_t nModCount = reader.read<uint32_t>();
 		for (uint32_t i = 0; i < nModCount; ++i)
@@ -41,7 +41,7 @@ namespace slk
 	}
 
 	template <>
-	void ObjReader::ReadModData<ObjectWithoutOptinal>(base::util::buffer_reader& reader, ObjSingle<ObjectWithoutOptinal>& obj)
+	void ObjReader::ReadModData<ObjectWithoutOptinal>(base::buffer_reader& reader, ObjSingle<ObjectWithoutOptinal>& obj)
 	{
 		uint32_t nModCount = reader.read<uint32_t>();
 		for (uint32_t i = 0; i < nModCount; ++i)

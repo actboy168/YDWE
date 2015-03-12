@@ -155,7 +155,7 @@ namespace base { namespace warcraft3 {
 
 	war3_searcher& get_war3_searcher()
 	{
-		return util::singleton_nonthreadsafe<war3_searcher>::instance();
+		return singleton_nonthreadsafe<war3_searcher>::instance();
 	}
 
 	struct mapping_objectid

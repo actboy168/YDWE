@@ -57,7 +57,7 @@ namespace base {  namespace warcraft3 { namespace lua_engine {
 			{
 				if (ls->isfunction(1))
 				{
-					std::string temp_string = util::w2u(std::wstring_view(req->buffer, req->overlapped.InternalHigh), util::conv_method::skip);
+					std::string temp_string = w2u(std::wstring_view(req->buffer, req->overlapped.InternalHigh), conv_method::skip);
 					ls->pushvalue(1);
 					ls->pushlstring(temp_string.c_str(), temp_string.size());
 					safe_call(ls, 1, 0, true);
@@ -70,7 +70,7 @@ namespace base {  namespace warcraft3 { namespace lua_engine {
 
 	void jass_console_write_string(const char* str, size_t len)
 	{
-		std::wstring temp_string = util::u2w(std::string_view(str, len), util::conv_method::skip);
+		std::wstring temp_string = u2w(std::string_view(str, len), conv_method::skip);
 		DWORD written_size;
 		WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), temp_string.c_str(), temp_string.size(), &written_size, 0);
 	}

@@ -51,7 +51,7 @@ FontManager::FontManager(const char* name, size_t size)
 		CLIP_DEFAULT_PRECIS,              //剪截精度
 		DEFAULT_QUALITY,                  //输出品质
 		DEFAULT_PITCH | FF_DONTCARE,      //倾斜度
-		base::util::u2a(name).c_str()     //字体
+		base::u2a(name).c_str()     //字体
 		);
 
 	if (font_ != NULL)

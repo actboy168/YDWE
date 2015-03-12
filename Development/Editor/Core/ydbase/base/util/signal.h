@@ -5,7 +5,7 @@
 #include <functional>
 #include <vector>
 
-namespace base { namespace util {
+namespace base {
 	template <class ResultT, class ParamT>
 	class signal
 	{
@@ -93,4 +93,4 @@ namespace base { namespace util {
 	private:
 		std::vector<std::function<void(void)>> funclist_;
 	};
-}}
+}

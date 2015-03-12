@@ -7,7 +7,7 @@ namespace base { namespace lock {
 
 	template <class BackoffT = back_off<0>>
 	class spin
-		: private util::noncopyable
+		: private noncopyable
 	{
 	public:
 		inline spin()

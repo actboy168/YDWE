@@ -10,7 +10,7 @@ namespace slk
 	{
 	public:
 		template <class ObjTableT>
-		static void Read(base::util::buffer_reader& reader, ObjTableT& table)
+		static void Read(base::buffer_reader& reader, ObjTableT& table)
 		{
 			reader.read<W3OHeader>();
 			ReadOriginalTable(reader, table);
@@ -24,7 +24,7 @@ namespace slk
 		};
 
 		template <class ObjTableT>
-		static void ReadOriginalTable(base::util::buffer_reader& reader, ObjTableT& table)
+		static void ReadOriginalTable(base::buffer_reader& reader, ObjTableT& table)
 		{
 			// Original objects table
 			uint32_t nOriginalTableCount = reader.read<uint32_t>();
@@ -51,7 +51,7 @@ namespace slk
 		}
 
 		template <class ObjTableT>
-		static void ReadCustomTable(base::util::buffer_reader& reader, ObjTableT& table)
+		static void ReadCustomTable(base::buffer_reader& reader, ObjTableT& table)
 		{
 			// Custom objects table
 			uint32_t nCustomTableCount = reader.read<uint32_t>();
@@ -74,7 +74,7 @@ namespace slk
 		}
 
 		template <OBJECT_PARSER_OPTION Option>
-		static void ReadModData(base::util::buffer_reader& reader, ObjSingle<Option>& obj);
+		static void ReadModData(base::buffer_reader& reader, ObjSingle<Option>& obj);
 	};
 
 }

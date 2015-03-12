@@ -20,7 +20,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		std::string path_ansi;
 		try {
-			path_ansi = util::u2a(std::string_view(path, path_size), util::conv_method::stop);
+			path_ansi = u2a(std::string_view(path, path_size), conv_method::stop);
 		}
 		catch (...) {
 			ls->pushnil();
@@ -77,7 +77,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			if (path && buf_data && buf_size)
 			{
 				boost::filesystem::path root_path = base::path::get(base::path::DIR_EXE).remove_filename();
-				boost::filesystem::path file_path = root_path / base::util::u2w(path);
+				boost::filesystem::path file_path = root_path / base::u2w(path);
 				
 				if (storm_path_valid(root_path, file_path))
 				{

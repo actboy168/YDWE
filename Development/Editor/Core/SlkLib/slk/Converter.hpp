@@ -31,10 +31,10 @@ namespace slk
 				initialized_ = true;
 
 				InterfaceStorm::error_code ec = 0;
-				base::util::buffer buf(storm_.load(Filename, ec));
+				base::buffer buf(storm_.load(Filename, ec));
 				if (ec == 0 && buf.begin() != buf.end())
 				{
-					base::util::buffer_reader reader(buf);
+					base::buffer_reader reader(buf);
 					Reader::Read(reader, table_);
 				}
 			}

@@ -109,7 +109,7 @@ static bool isWeSetWindowCaptionHookInstalled;
 
 BOOL __fastcall DetourWeSetWindowCaption(HWND hWnd, LPCSTR lpString)
 {
-	if ((!lpString) || base::util::is_utf8(lpString))
+	if ((!lpString) || base::is_utf8(lpString))
 	{
 		return base::fast_call<BOOL>(pgTrueWeSetWindowCaption, hWnd, lpString);
 	}
@@ -125,9 +125,9 @@ uint32_t __fastcall DetourWeSetMenuItem(uint32_t this_, uint32_t edx_, uint32_t 
 {
 	try
 	{
-		if ((str) && !base::util::is_utf8(str))
+		if ((str) && !base::is_utf8(str))
 		{
-			std::string tmp = base::util::a2u(str);
+			std::string tmp = base::a2u(str);
 			return base::this_call<uint32_t>(pgTrueWeSetMenuItem, this_, item, tmp.c_str(), hotkey);
 		}
 	}
@@ -192,7 +192,7 @@ int __fastcall DetourWeStringCompare(const char* a, const char* b, bool ignore_c
 			std::transform(b_str.begin(), b_str.end(), b_str.begin(), tolower);
 		}
 
-		return g_deflocale.compare(base::util::u2w(a_str), base::util::u2w(b_str));
+		return g_deflocale.compare(base::u2w(a_str), base::u2w(b_str));
 	}
 	catch (...)
 	{
@@ -247,7 +247,7 @@ BOOL __fastcall DetourWeTriggerEditorEditboxCopy(const char *source)
 	if (source)
 	{
 		try {
-			return WriteText(base::util::u2w(source));
+			return WriteText(base::u2w(source));
 		}
 		catch (...) {			
 		}
@@ -463,9 +463,9 @@ static base::hook::iat_manager pgWeIatHooker;
 static uintptr_t pgTrueSHBrowseForFolderA;
 PIDLIST_ABSOLUTE WINAPI DetourWeSHBrowseForFolderA(LPBROWSEINFOA lpbi)
 {
-	if (lpbi->lpszTitle && base::util::is_utf8(lpbi->lpszTitle))
+	if (lpbi->lpszTitle && base::is_utf8(lpbi->lpszTitle))
 	{
-		std::string tmp =  base::util::u2a(lpbi->lpszTitle);
+		std::string tmp =  base::u2a(lpbi->lpszTitle);
 		lpbi->lpszTitle = tmp.c_str();
 		return base::std_call<PIDLIST_ABSOLUTE>(pgTrueSHBrowseForFolderA, lpbi);
 	}
@@ -477,9 +477,9 @@ PIDLIST_ABSOLUTE WINAPI DetourWeSHBrowseForFolderA(LPBROWSEINFOA lpbi)
 static uintptr_t pgTrueGetOpenFileNameA;
 BOOL WINAPI DetourWeGetOpenFileNameA(LPOPENFILENAMEA lpofn)
 {
-	if (lpofn->lpstrTitle && base::util::is_utf8(lpofn->lpstrTitle))
+	if (lpofn->lpstrTitle && base::is_utf8(lpofn->lpstrTitle))
 	{
-		std::string tmp =  base::util::u2a(lpofn->lpstrTitle);
+		std::string tmp =  base::u2a(lpofn->lpstrTitle);
 		lpofn->lpstrTitle = tmp.c_str();
 		return base::std_call<BOOL>(pgTrueGetOpenFileNameA, lpofn);
 	}
@@ -490,9 +490,9 @@ BOOL WINAPI DetourWeGetOpenFileNameA(LPOPENFILENAMEA lpofn)
 static uintptr_t pgTrueGetSaveFileNameA;
 BOOL WINAPI DetourWeGetSaveFileNameA(LPOPENFILENAMEA lpofn)
 {
-	if (lpofn->lpstrTitle && base::util::is_utf8(lpofn->lpstrTitle))
+	if (lpofn->lpstrTitle && base::is_utf8(lpofn->lpstrTitle))
 	{
-		std::string tmp =  base::util::u2a(lpofn->lpstrTitle);
+		std::string tmp =  base::u2a(lpofn->lpstrTitle);
 		lpofn->lpstrTitle = tmp.c_str();
 		return base::std_call<BOOL>(pgTrueGetSaveFileNameA, lpofn);
 	}

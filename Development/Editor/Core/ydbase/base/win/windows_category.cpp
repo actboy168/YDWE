@@ -38,7 +38,7 @@ namespace base { namespace win {
 			str.remove_suffix(1);
 		}
 
-		return std::move(util::w2u(str, util::conv_method::replace | '?'));
+		return std::move(w2u(str, conv_method::replace | '?'));
 	}
 
 	std::error_condition windows_category::default_error_condition(int error_code) const

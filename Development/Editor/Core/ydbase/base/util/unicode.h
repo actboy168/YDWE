@@ -5,7 +5,7 @@
 #include <base/util/string_view.h>
 #include <cstdint>
 
-namespace base { namespace util {
+namespace base {
 	class conv_method
 	{
 	public:
@@ -42,4 +42,4 @@ namespace base { namespace util {
 	_BASE_API std::string  a2u(std::string_view  const& from, conv_method how = conv_method::stop);
 
 	_BASE_API bool is_utf8(const char *source);
-}}
+}

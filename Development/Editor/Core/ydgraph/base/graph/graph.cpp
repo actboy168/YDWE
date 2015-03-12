@@ -14,7 +14,7 @@ namespace base { namespace graph {
 		inline Image from_memory(char* ptr, size_t size, const FormatTag& settings)
 		{
 			Image img;
-			boost::gil::read_image(base::util::buffer_stream(ptr, ptr + size)
+			boost::gil::read_image(base::buffer_stream(ptr, ptr + size)
 				, img
 				, settings
 				);
