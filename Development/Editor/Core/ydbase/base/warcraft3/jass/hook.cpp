@@ -165,10 +165,10 @@ namespace warcraft3 { namespace jass {
 
 		void async_initialize()
 		{
-			nf_register::initialize();
-
 			DO_ONCE_NOTHREADSAFE()
 			{
+				nf_register::initialize();
+
 				nf_register::event_add.connect([&]()
 				{
 					static uintptr_t register_func = search_register_func();
