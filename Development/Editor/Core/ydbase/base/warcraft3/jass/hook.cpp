@@ -268,10 +268,17 @@ namespace warcraft3 { namespace jass {
 				result |= HOOK_MEMORY_TABLE;
 			}
 		}
-		
-		if ((flag & HOOK_ONCE_MEMORY_REGISTER) && (result == 0))
+
+		if (flag & HOOK_ONCE_MEMORY_REGISTER)
 		{
-			if (async_once_hook(proc_name, old_proc_ptr, new_proc))
+			if (result == 0)
+			{
+				if (async_once_hook(proc_name, old_proc_ptr, new_proc))
+				{
+					result |= HOOK_ONCE_MEMORY_REGISTER;
+				}
+			}
+			else
 			{
 				result |= HOOK_ONCE_MEMORY_REGISTER;
 			}
