@@ -177,6 +177,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			intptr_t* ud = (intptr_t*)ls->newuserdata(sizeof(intptr_t));
 			*ud = (intptr_t)helper;
 			ls->setmetatable(LUA_JASS_HOOK);
+
+			ls->pushstring(name);
+			ls->pushvalue(-2);
+			ls->rawset(-4);
 		}
 		else
 		{
