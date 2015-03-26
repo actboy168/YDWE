@@ -170,4 +170,12 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		return result;
 	}
+
+	lua::state* get_mainthread(lua::state* thread)
+	{
+		thread->rawgeti(LUA_REGISTRYINDEX, LUA_RIDX_MAINTHREAD);
+		lua::state* ml = (lua::state*)thread->tothread(-1);
+		thread->pop(1);
+		return ml;
+	}
 }}}

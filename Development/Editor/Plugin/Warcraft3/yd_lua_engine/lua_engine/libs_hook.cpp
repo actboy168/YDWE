@@ -41,7 +41,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				uninstall();
 			}
 
-			ls_ = ls;
+			ls_ = get_mainthread(ls);
 			nf_ = nf;
 			name_ = name;
 			fake_func_ = fake_func;

@@ -8,14 +8,6 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	lua::state* get_mainthread(lua::state* thread)
-	{
-		thread->rawgeti(LUA_REGISTRYINDEX, LUA_RIDX_MAINTHREAD);
-		lua::state* ml = (lua::state*)thread->tothread(-1);
-		thread->pop(1);
-		return ml;
-	}
-
 	void error_function(lua::state* ls, bool err_func)
 	{
 		if (err_func)
