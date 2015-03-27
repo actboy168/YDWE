@@ -44,7 +44,7 @@ namespace std {
         typedef const charT& const_reference;
         typedef const charT* const_iterator; // impl-defined
         typedef const_iterator iterator;
-        typedef reverse_iterator<const_iterator> const_reverse_iterator;
+        typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
         typedef const_reverse_iterator reverse_iterator;
         typedef size_t size_type;
         typedef ptrdiff_t difference_type;
@@ -567,7 +567,7 @@ namespace std {
         size_t operator()(const basic_string_view<charT, traits>& key) const
         {
             size_t h = 0;
-            for (const_iterator iter = key.cbegin(); iter != key.cend(); ++iter)
+            for (auto iter = key.cbegin(); iter != key.cend(); ++iter)
                 h = (h * 131) + *iter;
             return h;
         }

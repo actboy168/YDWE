@@ -2,21 +2,20 @@
 
 #include <base/util/detail/utf8_codecvt.h>
 
-
 namespace base { namespace detail {
 	namespace
 	{
-		bool invalid_continuing_octet(unsigned char octet_1) 
+		inline bool invalid_continuing_octet(unsigned char octet_1) 
 		{ 
 			return (octet_1 < 0x80|| 0xbf< octet_1); 
 		}
 
-		bool invalid_leading_octet(unsigned char octet_1) 
+		inline bool invalid_leading_octet(unsigned char octet_1) 
 		{ 
 			return (0x7f < octet_1 && octet_1 < 0xc0) || (octet_1 > 0xfd);
 		}
 
-		unsigned int get_octet_count(unsigned char   lead_octet)
+		inline unsigned int get_octet_count(unsigned char   lead_octet)
 		{
 			if (lead_octet <= 0x7f) 
 				return 1;
@@ -33,7 +32,7 @@ namespace base { namespace detail {
 				return 6;
 		}
 
-		unsigned int get_cont_octet_count(unsigned char lead_octet) 
+		inline unsigned int get_cont_octet_count(unsigned char lead_octet) 
 		{ 
 			return get_octet_count(lead_octet) - 1; 
 		}
@@ -91,13 +90,13 @@ namespace base { namespace detail {
 #endif
 		}
 
-		int get_cont_octet_out_count(wchar_t word) 
+		inline int get_cont_octet_out_count(wchar_t word) 
 		{
 			return get_cont_octet_out_count_impl<sizeof(wchar_t)>(word);
 		}
 	}
 
-	std::codecvt_base::result utf8_codecvt_facet::do_in(std::mbstate_t& /*state*/, const char* from, const char* from_end, const char*& from_next, wchar_t* to, wchar_t* to_end, wchar_t*& to_next) const
+	inline std::codecvt_base::result utf8_codecvt_facet::do_in(std::mbstate_t& /*state*/, const char* from, const char* from_end, const char*& from_next, wchar_t* to, wchar_t* to_end, wchar_t*& to_next) const
 	{
 		while (from != from_end && to != to_end)
 		{
@@ -148,7 +147,7 @@ namespace base { namespace detail {
 			return std::codecvt_base::partial;
 	}
 	
-	std::codecvt_base::result utf8_codecvt_facet::do_out(std::mbstate_t&, const wchar_t* from, const wchar_t* from_end, const wchar_t*& from_next, char* to, char* to_end, char*& to_next) const
+	inline std::codecvt_base::result utf8_codecvt_facet::do_out(std::mbstate_t&, const wchar_t* from, const wchar_t* from_end, const wchar_t*& from_next, char* to, char* to_end, char*& to_next) const
 	{
 		const wchar_t octet1_modifier_table[] = {
 			0x00, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc
@@ -194,13 +193,13 @@ namespace base { namespace detail {
 			return std::codecvt_base::partial;
 	}
 
-	std::codecvt_base::result utf8_codecvt_facet::do_unshift(std::mbstate_t&, char * from, char * /*to*/, char * & next) const 
+	inline std::codecvt_base::result utf8_codecvt_facet::do_unshift(std::mbstate_t&, char * from, char * /*to*/, char * & next) const 
 	{
 		next = from;
 		return ok;
 	}
 
-	int utf8_codecvt_facet::do_length(const std::mbstate_t &, const char* from, const char* from_end, std::size_t max_limit) const throw()
+	inline int utf8_codecvt_facet::do_length(const std::mbstate_t &, const char* from, const char* from_end, std::size_t max_limit) const throw()
 	{
 		int last_octet_count = 0;
 		std::size_t char_count = 0;

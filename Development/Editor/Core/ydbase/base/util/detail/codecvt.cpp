@@ -1,21 +1,19 @@
 #include <base/util/detail/codecvt.h>
 #include <array>
 #include <cassert>
-#include <memory>
-#include <base/exception/windows_exception.h>
+#include <memory>  
+#include <stdexcept>
 #include <base/util/dynarray.h>
-#include <Windows.h>
 
 namespace base { namespace detail {
 	const std::size_t default_codecvt_buf_size = 256;
 
-	void convert_aux(const char* from, const char* from_end, wchar_t* to, wchar_t* to_end, std::wstring& target, const codecvt_type& cvt, conv_method how)
+	inline void convert_aux(const char* from, const char* from_end, wchar_t* to, wchar_t* to_end, std::wstring& target, const codecvt_type& cvt, conv_method how)
 	{
 		std::mbstate_t state  = std::mbstate_t();
 		const char* from_next;
 		wchar_t* to_next;
-	
-		::SetLastError(ERROR_SUCCESS);
+
 		if (cvt.in(state, from, from_end, from_next, to, to_end, to_next) == std::codecvt_base::ok)
 		{
 			target.append(to, to_next);
@@ -23,8 +21,8 @@ namespace base { namespace detail {
 		}
 	
 		if (how.type() == conv_method::stop)
-		{
-			throw windows_exception("character conversion failed");
+		{				  
+			throw std::logic_error("character conversion failed");
 		}
 
 		from_next = from;
@@ -36,7 +34,7 @@ namespace base { namespace detail {
 				return;
 
 			const char* from_mid;
-			if (cvt.in(state, from_next, from_next + len, from_mid, to_buf, to_buf + _countof(to_buf), to_next) == std::codecvt_base::ok)
+			if (cvt.in(state, from_next, from_next + len, from_mid, to_buf, to_buf + sizeof(to_buf) / sizeof(to_buf[0]), to_next) == std::codecvt_base::ok)
 			{
 				assert(from_next + len == from_mid);
 				target.append(to_buf, to_next);
@@ -57,13 +55,12 @@ namespace base { namespace detail {
 		}
 	}
 
-	void convert_aux(const wchar_t* from, const wchar_t* from_end, char* to, char* to_end, std::string& target, const codecvt_type& cvt, conv_method how)
+	inline void convert_aux(const wchar_t* from, const wchar_t* from_end, char* to, char* to_end, std::string& target, const codecvt_type& cvt, conv_method how)
 	{
 		std::mbstate_t state  = std::mbstate_t();
 		const wchar_t* from_next;
 		char* to_next;
 
-		::SetLastError(ERROR_SUCCESS);
 		if (cvt.out(state, from, from_end, from_next, to, to_end, to_next) == std::codecvt_base::ok)
 		{
 			target.append(to, to_next);
@@ -72,7 +69,7 @@ namespace base { namespace detail {
 		
 		if (how.type() == conv_method::stop)
 		{
-			throw windows_exception("character conversion failed");
+			throw std::logic_error("character conversion failed");
 		}
 
 		from_next = from;
@@ -81,7 +78,7 @@ namespace base { namespace detail {
 			char to_buf[4];
 
 			const wchar_t* from_mid;
-			if (cvt.out(state, from_next, from_next + 1, from_mid, to_buf, to_buf + _countof(to_buf), to_next) == std::codecvt_base::ok)
+			if (cvt.out(state, from_next, from_next + 1, from_mid, to_buf, to_buf + sizeof(to_buf) / sizeof(to_buf[0]), to_next) == std::codecvt_base::ok)
 			{
 				assert(from_next + 1 == from_mid);
 				target.append(to_buf, to_next);
@@ -102,7 +99,7 @@ namespace base { namespace detail {
 		}
 	}
 
-	void convert(const char* from, const char* from_end, std::wstring& to, const codecvt_type& cvt, conv_method how)
+	inline void convert(const char* from, const char* from_end, std::wstring& to, const codecvt_type& cvt, conv_method how)
 	{
 		assert(from);
 
@@ -127,7 +124,7 @@ namespace base { namespace detail {
 		}
 	}
 
-	void convert(const wchar_t* from, const wchar_t* from_end, std::string& to, const codecvt_type& cvt, conv_method how)
+	inline void convert(const wchar_t* from, const wchar_t* from_end, std::string& to, const codecvt_type& cvt, conv_method how)
 	{
 		assert(from);
 
