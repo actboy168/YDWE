@@ -83,9 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="base\util\detail\codecvt.cpp">
-      <Filter>base\util\detail</Filter>
-    </ClCompile>
     <ClCompile Include="base\util\unicode.cpp">
       <Filter>base\util</Filter>
     </ClCompile>
@@ -196,12 +193,6 @@
     </ClCompile>
     <ClCompile Include="base\warcraft3\jass\global_variable.cpp">
       <Filter>base\warcraft3\jass</Filter>
-    </ClCompile>
-    <ClCompile Include="base\util\detail\ansi_codecvt.cpp">
-      <Filter>base\util\detail</Filter>
-    </ClCompile>
-    <ClCompile Include="base\util\detail\utf8_codecvt.cpp">
-      <Filter>base\util\detail</Filter>
     </ClCompile>
     <ClCompile Include="base\warcraft3\jass\trampoline_function.cpp">
       <Filter>base\warcraft3\jass</Filter>
@@ -559,5 +550,16 @@
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="base\util\detail\ansi_codecvt.inl">
+      <Filter>base\util\detail</Filter>
+    </None>
+    <None Include="base\util\detail\codecvt.inl">
+      <Filter>base\util\detail</Filter>
+    </None>
+    <None Include="base\util\detail\utf8_codecvt.inl">
+      <Filter>base\util\detail</Filter>
+    </None>
   </ItemGroup>
 </Project>

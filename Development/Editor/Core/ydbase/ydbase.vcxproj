@@ -150,9 +150,6 @@
     <ClCompile Include="base\path\helper.cpp" />
     <ClCompile Include="base\path\service.cpp" />
     <ClCompile Include="base\util\console.cpp" />
-    <ClCompile Include="base\util\detail\ansi_codecvt.cpp" />
-    <ClCompile Include="base\util\detail\codecvt.cpp" />
-    <ClCompile Include="base\util\detail\utf8_codecvt.cpp" />
     <ClCompile Include="base\util\is_utf8.cpp" />
     <ClCompile Include="base\util\unicode.cpp" />
     <ClCompile Include="base\warcraft3\detail\convert_real.cpp">
@@ -282,6 +279,11 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="base\util\detail\ansi_codecvt.inl" />
+    <None Include="base\util\detail\codecvt.inl" />
+    <None Include="base\util\detail\utf8_codecvt.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

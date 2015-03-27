@@ -1,8 +1,11 @@
 #include <base/util/unicode.h>
-#include <base/util/detail/codecvt.h>
+#include <base/util/detail/codecvt.h> 
+#include <base/util/detail/codecvt.inl>
 #include <base/util/detail/utf8_codecvt.h>
+#include <base/util/detail/utf8_codecvt.inl>
 #if !defined(BASE_UNICODE_DISABLE_ANSI)
-#include <base/util/detail/ansi_codecvt.h>
+#include <base/util/detail/ansi_codecvt.h> 
+#include <base/util/detail/ansi_codecvt.inl>
 #endif
 
 namespace base {
