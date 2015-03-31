@@ -13,7 +13,10 @@ int llog_print(lua_State *L)
 {
 	boost::log::BOOST_LOG_VERSION_NAMESPACE::trivial::severity_level lv = (boost::log::BOOST_LOG_VERSION_NAMESPACE::trivial::severity_level)lua_tointeger(L, lua_upvalueindex(1));
 	int n = lua_gettop(L);
-	lua_getglobal(L, "tostring");
+
+	luaL_Buffer b;
+	luaL_buffinit(L, &b);
+	lua_getglobal(L, "tostring"); 
 	for (int i = 1; i <= n; i++)
 	{
 		const char *s;
@@ -24,10 +27,14 @@ int llog_print(lua_State *L)
 		s = lua_tolstring(L, -1, &l);
 		if (s == NULL)
 			return luaL_error(L, "'tostring' must return a string to 'print'");
-		if (i>1) BOOST_LOG_SEV(lg, lv) << "\t";
-		BOOST_LOG_SEV(lg, lv) << std::string(s, l);
+		if (i>1) luaL_addchar(&b, '\t');
+		luaL_addlstring(&b, s, l);
 		lua_pop(L, 1);
 	}
+	luaL_pushresult(&b);
+	size_t l;
+	const char *s = lua_tolstring(L, -1, &l);
+	BOOST_LOG_SEV(lg, lv) << std::string(s, l);
 	return 0;
 }
 
