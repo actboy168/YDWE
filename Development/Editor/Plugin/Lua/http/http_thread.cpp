@@ -1,4 +1,4 @@
-#include "http_thread.h"
+﻿#include "http_thread.h"
 #include <boost/array.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
