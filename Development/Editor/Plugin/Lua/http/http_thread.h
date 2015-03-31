@@ -38,26 +38,27 @@ namespace http
 	class thread
 	{
 	public:
-		// ´´½¨httpÏß³Ì(²¢²»»á´´½¨OSÏß³Ì)
+		// åˆ›å»ºhttpçº¿ç¨‹(å¹¶ä¸ä¼šåˆ›å»ºOSçº¿ç¨‹)
 		thread();
 
-		// ÊÍ·ÅhttpÏß³Ì
+		// é‡Šæ”¾httpçº¿ç¨‹
 		~thread();
 
-		// Ôö¼ÓhttpÏß³ÌµÄÒıÓÃ£¬ÈÃÏß³Ì²»»áÒòÎªµ±Ç°Ã»ÓĞÇëÇó¾ÍÖÕÖ¹
+		// å¢åŠ httpçº¿ç¨‹çš„å¼•ç”¨ï¼Œè®©çº¿ç¨‹ä¸ä¼šå› ä¸ºå½“å‰æ²¡æœ‰è¯·æ±‚å°±ç»ˆæ­¢
 		void     push();
 
-		// ¼õÉÙhttpÏß³ÌµÄÒıÓÃ£¬ÈÃÏß³ÌÔÚµ±Ç°Ã»ÓĞÇëÇóÊ±¾ÍÖÕÖ¹
+		// å‡å°‘httpçº¿ç¨‹çš„å¼•ç”¨ï¼Œè®©çº¿ç¨‹åœ¨å½“å‰æ²¡æœ‰è¯·æ±‚æ—¶å°±ç»ˆæ­¢
 		void     pop();
 
-		// Ö´ĞĞhttpÏß³Ì£¬·Ç×èÈûÖ´ĞĞÒ»´Î
+		// æ‰§è¡Œhttpçº¿ç¨‹ï¼Œéé˜»å¡æ‰§è¡Œä¸€æ¬¡
 		size_t   poll_one();
 
-		// Ö´ĞĞhttpÏß³Ì£¬×èÈûÖ´ĞĞÒ»´Î
+		// æ‰§è¡Œhttpçº¿ç¨‹ï¼Œé˜»å¡æ‰§è¡Œä¸€æ¬¡
 		size_t   run_one();
 			 
-		// Òì²½·ÃÎÊhttp·şÎñÆ÷
-		task&    request(const std::string& url);
+		// å¼‚æ­¥è®¿é—®httpæœåŠ¡å™¨
+		task&    get(const std::string& url);
+		task&    post(const std::string& url, const std::string& body);
 
 	private:
 		boost::asio::io_service io_service;

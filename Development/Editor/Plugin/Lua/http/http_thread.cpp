@@ -4,13 +4,13 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <queue>
 
-// 支持http gzip
+// 鏀寔http gzip
 #define AVHTTP_ENABLE_ZLIB
-// 单线程执行io_service
+// 鍗曠嚎绋嬫墽琛宨o_service
 #define AVHTTP_DISABLE_THREAD
-// 禁用上传文件功能
+// 绂佺敤涓婁紶鏂囦欢鍔熻兘
 #define AVHTTP_DISABLE_FILE_UPLOAD
-// 禁用下载文件功能
+// 绂佺敤涓嬭浇鏂囦欢鍔熻兘
 #define AVHTTP_DISABLE_MULTI_DOWNLOAD
 #include <avhttp.hpp>
 
@@ -62,15 +62,27 @@ namespace http
 		{ }
 
 	public:
-		void init()
+		void initialize()
 		{
 			m_status.push(boost::bind(&ctask::async_read, shared_from_this(), boost::asio::placeholders::error));
 		}
 
-		void request(const std::string &url)
+		void get(const std::string& url)
 		{
+			initialize();
 			m_stream.check_certificate(false);
 			m_stream.async_open(url, boost::bind(&ctask::async_next, shared_from_this(), boost::asio::placeholders::error));
+		}
+
+		void post(const std::string& url, const std::string& body)
+		{
+			avhttp::request_opts options;
+			options.insert(avhttp::http_options::request_method, "POST");
+			options.insert(avhttp::http_options::request_body, body);
+			options.insert(avhttp::http_options::content_length, std::to_string(body.size()));
+			
+			m_stream.request_options(options);
+			get(url);
 		}
 
 		void async_next(const boost::system::error_code &ec)
@@ -174,11 +186,17 @@ namespace http
 		return io_service.poll_one();
 	}
 
-	task& thread::request(const std::string& url)
+	task& thread::get(const std::string& url)
 	{
 		boost::shared_ptr<ctask> t(new ctask(io_service));
-		t->init();
-		t->request(url);
+		t->get(url);
+		return t->get();
+	}
+
+	task& thread::post(const std::string& url, const std::string& body)
+	{
+		boost::shared_ptr<ctask> t(new ctask(io_service));
+		t->post(url, body);
 		return t->get();
 	}
 }
