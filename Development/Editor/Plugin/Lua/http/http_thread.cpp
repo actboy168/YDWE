@@ -11,7 +11,9 @@
 // 禁用上传文件功能
 #define AVHTTP_DISABLE_FILE_UPLOAD
 // 禁用下载文件功能
-#define AVHTTP_DISABLE_MULTI_DOWNLOAD
+#define AVHTTP_DISABLE_MULTI_DOWNLOAD  
+// 禁用日志
+#define DISABLE_LOGGER
 #include <avhttp.hpp>
 
 namespace http
