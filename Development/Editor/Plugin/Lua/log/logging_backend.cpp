@@ -53,6 +53,7 @@ namespace logging
 		impl_->file_.write(formatted_message.data(), static_cast<std::streamsize>(formatted_message.size()));
 		impl_->file_.put(static_cast<string_type::value_type>('\n'));
 		impl_->written_ += formatted_message.size() + 1;
+		impl_->file_.flush();
 	}
 
 	void logging_backend::flush()
