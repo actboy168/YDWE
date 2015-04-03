@@ -1,410 +1,243 @@
 #pragma once
 
-#include <base/win/registry/traits.h>
+#include <Windows.h>
+#include <string>
+#include <map>	
+#include <memory>
+#include <assert.h>	
+#include <base/win/registry/traits.h>   
 #include <base/win/registry/value.h>
-#include <base/win/registry/exception.h>
-#include <base/util/dynarray.h>
-#include <boost/detail/scoped_enum_emulation.hpp>
-#include <map>
 
 namespace base { namespace registry {
 
-BOOST_SCOPED_ENUM_START(open_option)
-{
-	none, 
-	fail_if_not_exists = none, 
-	create_if_not_exists,
-};
-BOOST_SCOPED_ENUM_END
-
-template <typename C, typename T, typename V>
-class basic_base_key
-{
-public:
-	typedef C                                 char_type;
-	typedef T                                 traits_type;
-	typedef V                                 value_type;
-	typedef basic_base_key<C, T, V>           class_type;
-	typedef typename traits_type::size_type   size_type;
-	typedef typename traits_type::string_type string_type;
-	typedef typename traits_type::hkey_type   hkey_type;
-	typedef typename traits_type::result_type result_type;
-	typedef std::map<string_type, value_type> value_map_type;
-
-public:
-	basic_base_key                     ();
-	basic_base_key                     (hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
-	basic_base_key                     (class_type const& rhs);
-	basic_base_key                     (class_type const& rhs, REGSAM accessMask);
-	virtual ~basic_base_key            () throw();
-	class_type&         operator =     (class_type const& rhs);
-	void                swap           (class_type& rhs) throw();
-
-public:
-	string_type const&  name           () const;
-	hkey_type           handle         () const;
-	REGSAM              access_mask    () const;
-	value_type&         value          (const string_type& valueName);
-	value_type&         operator[]     (const string_type& valueName);
-	string_type         reg_class      () const;
-	size_type           num_sub_keys   () const;
-	size_type           num_values     () const;
-	bool                has_sub_key    (const string_type& subKeyName);
-
-protected:							   
-	static hkey_type    open_key_      (hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
-	static hkey_type    dup_key_       (hkey_type hkey, REGSAM accessMask);
-
-protected:
-	string_type    m_name;
-	hkey_type      m_hkey;
-	REGSAM         m_accessMask;
-	value_map_type m_valueMap;
-};
-
-template <typename C, typename T, typename V>
-inline basic_base_key<C, T, V>::basic_base_key()
-	: m_name()
-	, m_hkey(NULL)
-	, m_accessMask(KEY_READ)
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_base_key<C, T, V>::basic_base_key(hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
-	: m_name(keyName)
-	, m_hkey(open_key_(hkeyParent, keyName, accessMask, option))
-	, m_accessMask(accessMask)
-	, m_valueMap()
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_base_key<C, T, V>::basic_base_key(class_type const& rhs)
-	: m_name(rhs.m_name)
-	, m_hkey(dup_key_(rhs.m_hkey, rhs.access_mask()))
-	, m_accessMask(rhs.m_accessMask)
-	, m_valueMap()
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_base_key<C, T, V>::basic_base_key(class_type const& rhs, REGSAM accessMask)
-	: m_name(rhs.m_name)
-	, m_hkey(dup_key_(rhs.m_hkey, accessMask))
-	, m_accessMask(accessMask)
-	, m_valueMap()
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_base_key<C, T, V>::~basic_base_key() throw()
-{
-	if (m_hkey != NULL)
+	namespace open_option 
 	{
-		traits_type::close(m_hkey);
-	}
-}
-
-template <typename C, typename T, typename V>
-inline void basic_base_key<C, T, V>::swap(class_type& rhs) throw()
-{
-	std::swap(m_name,        rhs.m_name);
-	std::swap(m_hkey,        rhs.m_hkey);
-	std::swap(m_accessMask,  rhs.m_accessMask);
-	std::swap(m_valueMap,    rhs.m_valueMap);
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_base_key<C, T, V>::hkey_type basic_base_key<C, T, V>::open_key_(hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
-{
-	if (option == open_option::fail_if_not_exists)
-	{
-		hkey_type   hkey;
-		result_type res = traits_type::open_key(hkeyParent, keyName.c_str(), &hkey, accessMask);
-		check_and_throw_exception("could not open key", res);
-		return hkey;
-	}
-	else
-	{
-		assert(option == open_option::create_if_not_exists);
-
-		static const char_type  s_emptyString[] = { '\0' };
-		hkey_type hbasekey;
-		hkey_type hkey;
-		result_type res = traits_type::open_key(hkeyParent, s_emptyString, &hbasekey, KEY_CREATE_SUB_KEY);
-		check_and_throw_exception("could not open key", res);
-		res = traits_type::create_key(hbasekey, keyName.c_str(), &hkey, accessMask);
-		check_and_throw_exception("could not create sub-key", res);
-		return hkey;
-	}
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_base_key<C, T, V>::hkey_type basic_base_key<C, T, V>::dup_key_(hkey_type hkey, REGSAM accessMask)
-{
-	if (NULL == hkey)
-	{
-		return NULL;
+		enum  open_option
+		{
+			none,
+			fail_if_not_exists = none,
+			create_if_not_exists,
+		};					  
+		typedef open_option t;
 	}
 
-	result_type res;
-	hkey_type   hkeyDup = traits_type::dup_key(hkey, accessMask, &res);
-	check_and_throw_exception("could not duplicate key", res);
-	return hkeyDup;
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_base_key<C, T, V>::class_type& basic_base_key<C, T, V>::operator =(class_type const& rhs)
-{
-	class_type  _this(rhs);
-	swap(_this);
-	return *this;
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_base_key<C, T, V>::string_type const& basic_base_key<C, T, V>::name() const
-{
-	return m_name;
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_base_key<C, T, V>::hkey_type basic_base_key<C, T, V>::handle() const
-{
-	return m_hkey;
-}
-
-template <typename C, typename T, typename V>
-inline REGSAM basic_base_key<C, T, V>::access_mask() const
-{
-	return m_accessMask;
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_base_key<C, T, V>::value_type& basic_base_key<C, T, V>::value(const string_type& valueName)
-{
-	auto it = m_valueMap.find(valueName);
-	if (it == m_valueMap.end())
+	namespace open_access 
 	{
-		m_valueMap.insert(std::make_pair(valueName, value_type(m_hkey, valueName)));
+		enum open_access
+		{
+			read = KEY_READ,
+			write = KEY_READ | KEY_WRITE,
+			none = read,
+		};
+		typedef open_access t;
 	}
 
-	return m_valueMap[valueName];
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_base_key<C, T, V>::value_type& basic_base_key<C, T, V>::operator[](const string_type& valueName)
-{
-	return value(valueName);
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_base_key<C, T, V>::string_type basic_base_key<C, T, V>::reg_class() const
-{
-	size_type   cch_key_class = 0;
-	result_type res = traits_type::query_info(m_hkey, NULL, &cch_key_class, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-	check_and_throw_exception("could not determine the key registry class", res);
-	std::dynarray<char_type> p(++cch_key_class);
-	res = traits_type::query_info(m_hkey, p.data(), &cch_key_class, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-	check_and_throw_exception("could not determine the key registry class", res);
-	return string_type(p.data(), cch_key_class);
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_base_key<C, T, V>::size_type basic_base_key<C, T, V>::num_sub_keys() const
-{
-	uint32_t c_sub_keys;
-	result_type res = traits_type::query_info(m_hkey, NULL, NULL, &c_sub_keys, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-	check_and_throw_exception("could not determine the number of sub-keys", res);
-	return c_sub_keys;
-}
-
-template <typename C, typename T, typename V>
-inline typename basic_base_key<C, T, V>::size_type basic_base_key<C, T, V>::num_values() const
-{
-	uint32_t c_values;
-	result_type res = traits_type::query_info(m_hkey, NULL, NULL, NULL, NULL, NULL, &c_values, NULL, NULL, NULL, NULL);
-	check_and_throw_exception("could not determine the number of values", res);
-	return c_values;
-}
-
-template <typename C, typename T, typename V>
-inline bool basic_base_key<C, T, V>::has_sub_key(const string_type& subKeyName)
-{
-	hkey_type   hkey;
-	result_type res = traits_type::open_key(m_hkey, subKeyName.c_str(), &hkey, KEY_READ);
-
-	switch (res)
+	template <typename C, typename T = reg_traits<C>>
+	class basic_key
 	{
-	case ERROR_SUCCESS:
-		traits_type::close(hkey);
-	case ERROR_ACCESS_DENIED:
-		return true;
-	default:
-		return false;
-	}
-}
+	public:
+		typedef C                                                  char_type;
+		typedef T                                                  traits_type;
+		typedef basic_key<C, T>                                    class_type;
+		typedef basic_value<C, T, class_type>                      value_type;
+		typedef typename traits_type::size_type                    size_type;
+		typedef typename traits_type::string_type                  string_type;
+		typedef typename traits_type::hkey_type                    hkey_type;
+		typedef typename traits_type::result_type                  result_type;
+		typedef std::map<string_type, std::unique_ptr<value_type>> value_map_type;
 
-template <typename C, typename T = reg_traits<C>, typename V = basic_read_value<C, T>>
-class basic_read_key
-	: public basic_base_key<C, T, V>
-{
-public:
-	typedef C                                 char_type;
-	typedef T                                 traits_type;
-	typedef V                                 value_type;
-	typedef basic_base_key<C, T, V>           base_type;
-	typedef basic_read_key<C, T, V>           class_type;
-	typedef typename traits_type::size_type   size_type;
-	typedef typename traits_type::string_type string_type;
-	typedef typename traits_type::hkey_type   hkey_type;
-	typedef typename traits_type::result_type result_type;
-	typedef std::map<string_type, value_type> value_map_type;
+		basic_key(hkey_type keybase)
+			: m_keybase(keybase)
+			, m_keypath()
+			, m_key(NULL)
+			, m_access(open_access::read)
+			, m_valuemap()
+		{ }
 
-public:
-	basic_read_key                     ();
-	basic_read_key                     (hkey_type hkeyParent, const string_type& keyName);
-	basic_read_key                     (hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
+		basic_key(hkey_type keybase, const string_type& keypath)
+			: m_keybase(keybase)
+			, m_keypath(keypath)
+			, m_key(NULL)
+			, m_access(open_access::read)
+			, m_valuemap()
+		{ }
 
-	template <typename KeyType>  
-	basic_read_key(KeyType const& keyParent, const string_type& keyName)
-		: base_type(keyParent.handle(), keyName, class_type::default_access_mask(), open_option::fail_if_not_exists)
-	{ }
+		basic_key(class_type const& rhs)
+			: m_keybase(rhs.m_keybase)
+			, m_keypath(rhs.m_keypath)
+			, m_key(rhs.m_key)
+			, m_access(rhs.m_access)
+			, m_valuemap()
+		{ }
 
-	basic_read_key                     (class_type const& rhs);
+		~basic_key() throw()
+		{
+			if (m_key != NULL)
+			{
+				traits_type::close(m_key);
+			}
+		}
 
-public:
-	template <typename KeyType>
-	KeyType open_sub_key(const string_type& subKeyName) const
+		class_type& operator=(class_type const& rhs)
+		{
+			class_type  _this(rhs);
+			swap(_this);
+			return *this;
+		}
+
+		void swap(class_type& rhs) throw()
+		{
+			std::swap(m_keybase, rhs.m_keybase);
+			std::swap(m_keypath, rhs.m_keypath);
+			std::swap(m_key, rhs.m_key);
+			std::swap(m_access, rhs.m_access);
+			std::swap(m_valuemap, rhs.m_valuemap);
+		}
+
+		class_type sub_key(const string_type& sub_key_name) const
+		{
+			static const char_type s_separator[] = { '\\' };
+			return class_type(m_keybase, m_keypath.empty() ? sub_key_name : m_keypath + s_separator + sub_key_name);
+		}
+
+		value_type& value(const string_type& value_name)
+		{
+			auto it = m_valuemap.find(value_name);
+			if (it == m_valuemap.end())
+			{
+				m_valuemap.insert(std::make_pair(value_name, std::unique_ptr<value_type>(new value_type(*this, value_name))));
+			}
+			return *(m_valuemap[value_name].get());
+		}
+
+		value_type& operator[](const string_type& value_name)
+		{
+			return value(value_name);
+		}
+
+		hkey_type handle(open_access::t access)
+		{
+			open_key_(access);
+			return m_key;
+		}
+
+		bool del(const string_type& subkey_name, bool delete_tree)
+		{
+			result_type res = delete_tree
+				? traits_type::delete_tree(handle(open_access::write), subkey_name.c_str())
+				: traits_type::delete_key(handle(open_access::write), subkey_name.c_str());
+			switch (res)
+			{
+			case ERROR_SUCCESS:
+				return true;
+			default:
+				check_and_throw_exception("could not delete sub-key", res);
+			case ERROR_FILE_NOT_FOUND:
+				return false;
+			}
+		}
+
+	protected:
+
+		bool open_key_(open_access::t access)
+		{
+			hkey_type key = NULL;
+			if (access == open_access::write)
+			{
+				open_option::t option = open_option::create_if_not_exists;
+				if (m_key)
+				{
+					if (m_access == open_access::write)
+					{
+						key = m_key;
+					}
+					else
+					{
+						close_key_();
+						key = open_key_(m_keybase, m_keypath, access, option);
+					}
+				}
+				else
+				{
+					key = open_key_(m_keybase, m_keypath, access, option);
+				}
+			}
+			else
+			{
+				assert(access == open_access::read);
+				open_option::t option = open_option::fail_if_not_exists;
+				if (m_key)
+				{
+					key = m_key;
+				}
+				else
+				{
+					key = open_key_(m_keybase, m_keypath, access, option);
+				}
+			}
+
+			if (!key) 
+				return false;
+			m_key = key;
+			m_access = access;
+			return true;
+		}
+
+		void close_key_()
+		{
+			traits_type::close(m_key);
+			m_key = NULL;
+			m_access = open_access::read;
+		}
+
+		static hkey_type open_key_(hkey_type key_parent, const string_type& key_name, open_access::t access_mask, open_option::t option)
+		{
+			if (option == open_option::fail_if_not_exists)
+			{
+				hkey_type   hkey;
+				result_type res = traits_type::open_key(key_parent, key_name.c_str(), &hkey, access_mask);
+				check_and_throw_exception("could not open key", res);
+				return hkey;
+			}
+			else
+			{
+				assert(option == open_option::create_if_not_exists);
+				static const char_type  s_empty_string[] = { '\0' };
+				hkey_type hbasekey;
+				hkey_type hkey;
+				result_type res = traits_type::open_key(key_parent, s_empty_string, &hbasekey, KEY_CREATE_SUB_KEY);
+				check_and_throw_exception("could not open key", res);
+				res = traits_type::create_key(hbasekey, key_name.c_str(), &hkey, access_mask);
+				check_and_throw_exception("could not create sub-key", res);
+				return hkey;
+			}
+		}
+
+		static hkey_type dup_key_(hkey_type hkey, open_access::t access_mask)
+		{
+			if (NULL == hkey) return NULL;
+			result_type res;
+			hkey_type   hkey_dup = traits_type::dup_key(hkey, access_mask, &res);
+			check_and_throw_exception("could not duplicate key", res);
+			return hkey_dup;
+		}
+
+	protected:
+		hkey_type      m_keybase;
+		string_type    m_keypath;
+		hkey_type      m_key;
+		open_access::t m_access;
+		value_map_type m_valuemap;
+	};
+
+	template <typename C, typename T>
+	inline basic_key<C, T> operator/(const basic_key<C, T>& lhs, const typename basic_key<C, T>::string_type& rhs)
 	{
-		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::fail_if_not_exists);
+		return lhs.sub_key(rhs);
 	}
 
-
-public:
-	static REGSAM       default_access_mask() { return KEY_READ; }
-};
-
-template <typename C, typename T, typename V>
-inline basic_read_key<C, T, V>::basic_read_key()
-	: base_type()
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_read_key<C, T, V>::basic_read_key(hkey_type hkeyParent, const string_type& keyName)
-	: base_type(hkeyParent, keyName, class_type::default_access_mask(), open_option::fail_if_not_exists)
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_read_key<C, T, V>::basic_read_key(hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
-	: base_type(hkeyParent, keyName, accessMask, option)
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_read_key<C, T, V>::basic_read_key(class_type const& rhs)
-	: base_type(rhs)
-{ }
-
-template <typename C, typename T = reg_traits<C>, typename V = basic_write_value<C, T>>
-class basic_write_key
-	: public basic_base_key<C, T, V>
-{
-public:
-	typedef C                                 char_type;
-	typedef T                                 traits_type;
-	typedef V                                 value_type;
-	typedef basic_base_key<C, T, V>           base_type;
-	typedef basic_write_key<C, T, V>          class_type;
-	typedef typename traits_type::size_type   size_type;
-	typedef typename traits_type::string_type string_type;
-	typedef typename traits_type::hkey_type   hkey_type;
-	typedef typename traits_type::result_type result_type;
-	typedef std::map<string_type, value_type> value_map_type;
-
-public:
-	basic_write_key                    ();
-	basic_write_key                    (hkey_type hkeyParent, const string_type& keyName);
-	basic_write_key                    (hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option);
-
-	template <typename KeyType>  
-	basic_write_key(KeyType const& keyParent, const string_type& keyName)
-		: base_type(keyParent.handle(), keyName, class_type::default_access_mask(), open_option::create_if_not_exists)
-	{ }
-
-	basic_write_key                    (class_type const& rhs);
-
-public:
-  	template <typename KeyType>
-  	KeyType create_sub_key(const string_type& subKeyName)
-  	{
-  		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::create_if_not_exists);
-  	}
-
-	template <typename KeyType>
-	KeyType open_sub_key(const string_type& subKeyName) const
-	{
-		return KeyType(m_hkey, subKeyName, KeyType::default_access_mask(), open_option::fail_if_not_exists);
-	}
-
-	bool                delete_sub_key (const string_type& subKeyName, bool deleteTree = false);
-
-public:
-	static REGSAM       default_access_mask() { return KEY_WRITE | KEY_READ; }
-};
-
-template <typename C, typename T, typename V>
-inline basic_write_key<C, T, V>::basic_write_key()
-	: base_type()
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_write_key<C, T, V>::basic_write_key(hkey_type hkeyParent, const string_type& keyName)
-	: base_type(hkeyParent, keyName, class_type::default_access_mask(), open_option::create_if_not_exists)
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_write_key<C, T, V>::basic_write_key(hkey_type hkeyParent, const string_type& keyName, REGSAM accessMask, BOOST_SCOPED_ENUM(open_option) option)
-	: base_type(hkeyParent, keyName, accessMask, option)
-{ }
-
-template <typename C, typename T, typename V>
-inline basic_write_key<C, T, V>::basic_write_key(class_type const& rhs)
-	: base_type(rhs)
-{ }
-
-template <typename C, typename T, typename V>
-inline bool basic_write_key<C, T, V>::delete_sub_key(const string_type& subKeyName, bool deleteTree /*= false*/)
-{
-	result_type res = deleteTree 
-			? traits_type::delete_tree(m_hkey, subKeyName.c_str()) 
-			: traits_type::delete_key(m_hkey, subKeyName.c_str());
-
-	switch(res)
-	{
-	case ERROR_SUCCESS:
-		return true;
-	default:
-		check_and_throw_exception("could not delete sub-key", res);
-	case ERROR_FILE_NOT_FOUND:
-		return false;
-	}
-}
-
-template <typename C, typename T, typename V>
-inline basic_read_key<C, T, V> operator/(const basic_read_key<C, T, V>& lhs, const typename basic_read_key<C, T, V>::string_type& rhs)  
-{ 
-	return lhs.open_sub_key<basic_read_key<C, T, V>>(rhs); 
-}
-
-template <typename C, typename T, typename V>
-inline basic_write_key<C, T, V> operator/(basic_write_key<C, T, V>& lhs, const typename basic_write_key<C, T, V>::string_type& rhs)  
-{ 
-	return lhs.create_sub_key<basic_write_key<C, T, V>>(rhs); 
-}
-
-typedef basic_read_key <char,    reg_traits<char>>    read_key_a;
-typedef basic_read_key <wchar_t, reg_traits<wchar_t>> read_key_w;
-typedef basic_write_key<char,    reg_traits<char>>    write_key_a;
-typedef basic_write_key<wchar_t, reg_traits<wchar_t>> write_key_w;
-typedef write_key_a                                   key_a;
-typedef write_key_w                                   key_w;
-
+	typedef basic_key<char>    key_a;
+	typedef basic_key<wchar_t> key_w;
 }}
 
 #include <base/win/registry/predefined_keys.h>

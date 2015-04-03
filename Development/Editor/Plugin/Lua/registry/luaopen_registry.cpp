@@ -1,5 +1,5 @@
 #include <lua.hpp>	  
-#include <base/win/registry/v2/key.h> 
+#include <base/win/registry/key.h> 
 #include <base/util/unicode.h>
 
 
@@ -8,7 +8,7 @@
 
 namespace luawarp { namespace registry {
 
-	using namespace base::registry::v2;
+	using namespace base::registry;
 
 	key_w* rkey_read(lua_State* L, int idx)
 	{

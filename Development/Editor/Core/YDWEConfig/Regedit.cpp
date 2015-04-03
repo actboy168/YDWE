@@ -9,7 +9,7 @@ std::wstring const& FileAssociation::Classes::name() const
 	return name_;
 }
 
-bool FileAssociation::Classes::has(base::registry::write_key_w& root, std::wstring const& command) const
+bool FileAssociation::Classes::has(base::registry::key_w& root, std::wstring const& command) const
 {
 	try {
 		return command == (root / name_ / L"shell\\open\\command")[L""].get<std::wstring>();
@@ -18,19 +18,19 @@ bool FileAssociation::Classes::has(base::registry::write_key_w& root, std::wstri
 	return false;
 }
 
-bool FileAssociation::Classes::remove(base::registry::write_key_w& root)
+bool FileAssociation::Classes::remove(base::registry::key_w& root)
 {
 	try {
-		return root.delete_sub_key(name_, true);
+		return root.del(name_, true);
 	} catch (base::registry::registry_exception const& ) { }
 
 	return false;
 }
 
-bool FileAssociation::Classes::set(base::registry::write_key_w const& root, std::wstring const& description, std::wstring const& icon_path, std::wstring const& command1, std::wstring const& command2)
+bool FileAssociation::Classes::set(base::registry::key_w const& root, std::wstring const& description, std::wstring const& icon_path, std::wstring const& command1, std::wstring const& command2)
 {
 	try {
-		base::registry::write_key_w reg(root, name_);
+		base::registry::key_w reg = root / name_;
 		reg[L""] = description;
 
 		(reg / L"DefaultIcon")[L""] = icon_path;
@@ -48,25 +48,25 @@ FileAssociation::Ext::Ext(std::wstring const& ext)
 	: ext_(ext)
 { }
 
-bool FileAssociation::Ext::has(base::registry::write_key_w& root, Classes const& c) const
+bool FileAssociation::Ext::has(base::registry::key_w& root, Classes const& c) const
 {
 	try {
-		return c.name() == (root / ext_)[L""].get<std::wstring>();
+		return c.name() == (root / ext_)[L""].get_string();
 	} catch (base::registry::registry_exception const& ) { }
 
 	return false;
 }
 
-bool FileAssociation::Ext::remove(base::registry::write_key_w& root)
+bool FileAssociation::Ext::remove(base::registry::key_w& root)
 {
 	try {
-		return root.delete_sub_key(ext_, true);
+		return root.del(ext_, true);
 	} catch (base::registry::registry_exception const& ) { }
 
 	return false;
 }
 
-bool FileAssociation::Ext::set(base::registry::write_key_w& root, Classes const& c)
+bool FileAssociation::Ext::set(base::registry::key_w& root, Classes const& c)
 {
 	try {
 		(root / ext_)[L""] = c.name();
@@ -75,7 +75,7 @@ bool FileAssociation::Ext::set(base::registry::write_key_w& root, Classes const&
 	return false;
 }
 
-bool FileAssociation::Ext::has_owl(base::registry::write_key_w& root) const
+bool FileAssociation::Ext::has_owl(base::registry::key_w& root) const
 {
 	try {
 		return (root / ext_)[L"Application"].has();
@@ -84,7 +84,7 @@ bool FileAssociation::Ext::has_owl(base::registry::write_key_w& root) const
 	return false;
 }
 
-bool FileAssociation::Ext::set_owl(base::registry::write_key_w& root)
+bool FileAssociation::Ext::set_owl(base::registry::key_w& root)
 {
 	try {
 		return (root / ext_)[L"Application"].del();
@@ -158,7 +158,7 @@ bool FileAssociation::set_classes()
 bool Registry::has(HKEY hkey, std::wstring const& name, std::wstring const& key)
 {
 	try {
-		return !!base::registry::read_key_w(hkey, name)[key].get<uint32_t>();
+		return !!base::registry::key_w(hkey, name)[key].get<uint32_t>();
 	} catch (base::registry::registry_exception const& ) { }
 
 	return false;
@@ -167,7 +167,7 @@ bool Registry::has(HKEY hkey, std::wstring const& name, std::wstring const& key)
 bool Registry::set(HKEY hkey, std::wstring const& name, std::wstring const& key, bool value)
 {
 	try {
-		base::registry::write_key_w(hkey, name)[key] = uint32_t(value);
+		base::registry::key_w(hkey, name)[key] = uint32_t(value);
 		return true;
 	} catch (base::registry::registry_exception const& ) { }
 

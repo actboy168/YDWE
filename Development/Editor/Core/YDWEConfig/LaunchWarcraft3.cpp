@@ -13,7 +13,7 @@ std::wstring get_test_map_path()
 {
 	std::wstring result = L"Maps\\Test\\WorldEditTestMap";
 	try {
-		result = base::registry::read_key_w(HKEY_CURRENT_USER, L"Software\\Blizzard Entertainment\\WorldEdit")[L"Test Map - Copy Location"].get<std::wstring>();
+		result = (base::registry::current_user() / L"Software\\Blizzard Entertainment\\WorldEdit")[L"Test Map - Copy Location"].get_string();
 	}
 	catch (base::registry::registry_exception const&) {}
 	return std::move(result);

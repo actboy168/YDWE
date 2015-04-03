@@ -10,8 +10,8 @@ namespace base { namespace warcraft3 { namespace directory {
 	bool read_current_user(boost::filesystem::path& result)
 	{
 		try {
-			registry::read_key_w warkey = registry::read_current_user() / L"Software\\Blizzard Entertainment\\Warcraft III";
-			result = (boost::filesystem::path)warkey[L"InstallPath"];
+			registry::key_w warkey = registry::current_user() / L"Software\\Blizzard Entertainment\\Warcraft III";
+			result = warkey[L"InstallPath"].get_string();
 			return true;
 		}
 		catch (...) {
@@ -25,8 +25,8 @@ namespace base { namespace warcraft3 { namespace directory {
 	{
 		try {
 			
-			registry::read_key_w warkey = registry::read_local_machine() / L"Software\\Blizzard Entertainment\\Warcraft III";
-			result = (boost::filesystem::path)warkey[L"InstallPath"];
+			registry::key_w warkey = registry::local_machine() / L"Software\\Blizzard Entertainment\\Warcraft III";
+			result = warkey[L"InstallPath"].get_string();
 			return true;
 		}
 		catch (...) {
@@ -58,8 +58,8 @@ namespace base { namespace warcraft3 { namespace directory {
 		}
 
 		try {
-			registry::write_key_w warkey = registry::write_current_user() / L"Software\\Blizzard Entertainment\\Warcraft III";
-			warkey[L"InstallPath"] = p;
+			registry::key_w warkey = registry::current_user() / L"Software\\Blizzard Entertainment\\Warcraft III";
+			warkey[L"InstallPath"] = p.wstring();
 			return true;
 		}
 		catch (...) {
