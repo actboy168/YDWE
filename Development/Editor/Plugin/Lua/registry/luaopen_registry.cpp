@@ -53,8 +53,7 @@ namespace luawarp { namespace registry {
 
 	int rkey_index(lua_State* L)
 	{
-		RKEY_TRY()
-		{
+		try {
 			key_w*       self = rkey_read(L, 1);
 			std::wstring key = rkey_read_wstring(L, 2);
 			key_w::value_type& value = self->value(key);
@@ -74,10 +73,10 @@ namespace luawarp { namespace registry {
 			default:
 				break;
 			}
-			lua_pushnil(L);
-			return 1;
+		} catch (const std::exception&) {
 		}
-		RKEY_TRY_END();
+		lua_pushnil(L);
+		return 1;
 	}
 
 	int rkey_newindex(lua_State* L)
