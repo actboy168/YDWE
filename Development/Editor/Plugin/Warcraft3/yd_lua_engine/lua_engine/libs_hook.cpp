@@ -25,7 +25,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			, nf_(nullptr)
 			, name_()
 			, real_func_(0)
-			, fake_func_(0)
+			, fake_func_(LUA_REFNIL)
 			, code_base_(0)
 		{ }
 
@@ -72,6 +72,19 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 			real_func_ = 0;
 			return true;
+		}
+
+		int pop_fake_function(lua::state* ls) const
+		{
+			if (real_func_)
+			{
+				runtime::callback_read(ls, fake_func_);
+			}
+			else
+			{
+				ls->pushnil();
+			}
+			return 1;
 		}
 
 		static jhook_helper* create()
@@ -232,7 +245,17 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int jass_hook_get(lua_State* L)
 	{
 		lua::state* ls = (lua::state*)L;
-		ls->pushnil();
+		const char* name = ls->tostring(2);
+
+		runtime::get_global_table(ls, "_JASS_HOOK_TABLE", false);
+		ls->pushstring(name);
+		ls->rawget(-2);
+
+		if (!ls->isnil(-1))
+		{
+			intptr_t* ud = (intptr_t*)ls->touserdata(-1);
+			((jhook_helper*)*ud)->pop_fake_function(ls);
+		}
 		return 1;
 	}
 
