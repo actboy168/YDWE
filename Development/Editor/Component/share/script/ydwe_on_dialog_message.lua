@@ -2,7 +2,7 @@ local wes = sys.ini_load(fs.ydwe_path() / "share" / "mpq" / "ydwe" / "ui" / "wor
 local WESTRING_MODIFYTEXTURES = wes['WorldEditStrings']['WESTRING_MODIFYTEXTURES']
 local tiledialog = 0
 
-event.register(event.EVENT_DIALOG_MESSAGE, false, function (event_data)
+function event.EVENT_DIALOG_MESSAG(event_data)
 	if event_data.message == gui.WM_SETTEXT then
 		if event_data.lparam  == WESTRING_MODIFYTEXTURES then
 			tiledialog = mem.pointer_to_number(event_data.handle)
@@ -18,4 +18,4 @@ event.register(event.EVENT_DIALOG_MESSAGE, false, function (event_data)
 		end
 	end
 	return 0
-end)
+end

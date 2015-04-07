@@ -57,7 +57,7 @@ object:initialize()
 -- object_type - 整数类型，物体的类型
 -- default_id - 整数类型，系统生成的ID
 -- 返回值：新建物体的最终ID，必须是整数类型
-event.register(event.EVENT_NEW_OBJECT_ID, false, function (event_data)
+function event.EVENT_NEW_OBJECT_ID(event_data)
 	log.debug("**************** on new object id start ****************")	
 		
 	local object_type = event_data.object_type
@@ -119,4 +119,4 @@ event.register(event.EVENT_NEW_OBJECT_ID, false, function (event_data)
 				
 	end
 	return 0
-end)
+end
