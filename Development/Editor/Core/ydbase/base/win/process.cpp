@@ -440,6 +440,15 @@ namespace base { namespace win {
 		return false;
 	}
 
+	int process::id() const
+	{
+		if (statue_ == PROCESS_STATUE_RUNNING)
+		{
+			return (int)pi_.dwProcessId;
+		}
+		return -1;
+	}
+
 	bool create_process(const boost::filesystem::path& application, const std::wstring& command_line, const boost::filesystem::path& current_directory, const boost::filesystem::path& inject_dll, PROCESS_INFORMATION* pi_ptr)
 	{
 		process p;

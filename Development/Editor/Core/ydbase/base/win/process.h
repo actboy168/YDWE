@@ -30,6 +30,7 @@ namespace base { namespace win {
 		bool     wait(uint32_t timeout);
 		bool     close();
 		bool     release(PROCESS_INFORMATION* pi_ptr);
+		int      id() const;
 
 	private:
 		uint32_t                statue_;
