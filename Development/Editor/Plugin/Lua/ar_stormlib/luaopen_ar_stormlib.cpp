@@ -24,7 +24,7 @@ namespace NLuaAPI { namespace NMPQ {
 		CreateInfo.dwMaxFileCount = dwMaxFileCount;
 
 		HANDLE mpqHandle;
-		if (!SFileCreateArchive2(mpqPath.string().c_str(), &CreateInfo, &mpqHandle))
+		if (!SFileCreateArchive2(mpqPath.c_str(), &CreateInfo, &mpqHandle))
 		{
 			mpqHandle = NULL;
 		}
@@ -37,7 +37,7 @@ namespace NLuaAPI { namespace NMPQ {
 		HANDLE mpqHandle;
 
 		bool ret = SFileOpenArchive(
-			mpqPath.string().c_str(),
+			mpqPath.c_str(),
 			priority,
 			flags,
 			&mpqHandle
@@ -164,7 +164,7 @@ namespace NLuaAPI { namespace NMPQ {
 		std::string pathinmpq = base::w2u(wpathinmpq, base::conv_method::replace | '?');
 		return SFileAddFile(
 			reinterpret_cast<HANDLE>(mpqHandle),
-			srcPath.string().c_str(),
+			srcPath.c_str(),
 			pathinmpq.c_str(),
 			flags
 			);
@@ -175,7 +175,7 @@ namespace NLuaAPI { namespace NMPQ {
 		std::string pathinmpq = base::w2u(wpathinmpq, base::conv_method::replace | '?');
 		return SFileAddWave(
 			reinterpret_cast<HANDLE>(mpqHandle),
-			srcPath.string().c_str(),
+			srcPath.c_str(),
 			pathinmpq.c_str(),
 			flags,
 			quality
@@ -187,7 +187,7 @@ namespace NLuaAPI { namespace NMPQ {
 		std::string pathinmpq = base::w2u(wpathinmpq, base::conv_method::replace | '?');
 		return SFileAddFileEx(
 			reinterpret_cast<HANDLE>(mpqHandle),
-			srcPath.string().c_str(),
+			srcPath.c_str(),
 			pathinmpq.c_str(),
 			flags,
 			compression,
@@ -247,7 +247,7 @@ namespace NLuaAPI { namespace NMPQ {
 		return SFileExtractFile(
 			reinterpret_cast<HANDLE>(mpqHandle),
 			pathinmpq.c_str(),
-			filePath.string().c_str(),
+			filePath.c_str(),
 			SFILE_OPEN_FROM_MPQ 
 			);
 	}

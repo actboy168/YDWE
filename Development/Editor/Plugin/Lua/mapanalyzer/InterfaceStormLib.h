@@ -81,7 +81,7 @@ public:
 		return false;
 	}
 
-	bool open_archive(std::string const& szArchivename, bool read_only = true)
+	bool open_archive(std::wstring const& szArchivename, bool read_only = true)
 	{
 		HANDLE hArchive;
 		bool b = SFileOpenArchive(szArchivename.c_str(), 0, read_only? MPQ_OPEN_READ_ONLY: 0, &hArchive);
