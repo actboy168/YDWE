@@ -25,6 +25,12 @@ def copy_crt_dll(msvc_version, configuration):
     if fs.exists(crt_dll_dir):
         fs.copy_directory(crt_dll_dir, path['ResultCore'], ['.dll'])
 
+def is_dev():
+    import sys
+    if len(sys.argv) > 3:
+        return 'Dev' == sys.argv[3]
+    return False
+
 def complie(msvc_version, configuration):
     print('complie')
     print('msvc.setup_env')
@@ -36,7 +42,8 @@ def complie(msvc_version, configuration):
     util.msvc.rebuild(path['OpenSource']/ 'Lua' / 'Current' / 'makefiles' / 'luacore.sln', configuration)
     util.msvc.rebuild(path['OpenSource']/ 'luaffi' / 'makefiles' / 'luaffi.sln', configuration)
     print('rebuild ydwe')
-    util.msvc.rebuild(path['Development']/ 'Editor' / 'Core' / 'Solution' / 'YDWE.sln', configuration)    
+    if not is_dev():
+        util.msvc.rebuild(path['Development']/ 'Editor' / 'Core' / 'Solution' / 'YDWE.sln', configuration)
     util.msvc.rebuild(path['Development']/ 'Editor' / 'Plugin' / 'YDColorizer' / 'YDColorizer.sln', configuration, 'Any CPU')
     print('copy crt dll')
     copy_crt_dll(msvc_version, configuration)
