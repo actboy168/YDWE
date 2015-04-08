@@ -6,9 +6,9 @@
 
 #include <cstddef>
 #include <string>
-#include <vector>
-#include <boost/signals2.hpp>
-#include <boost/unordered_map.hpp>
+#include <vector>	
+#include <unordered_map>
+#include <base/util/signal.h>
 #include <boost/optional.hpp>
 #include <boost/variant.hpp>
 
@@ -20,7 +20,7 @@ class CYDWEEventData
 {
 public:
 	typedef boost::variant<void *, bool, int, unsigned int, float, double, std::string, std::wstring> TEventDataItem;
-	typedef boost::unordered_map<std::string, TEventDataItem> TEventDataStore;
+	typedef std::unordered_map<std::string, TEventDataItem> TEventDataStore;
 
 public:
 	CYDWEEventData();
@@ -52,28 +52,7 @@ private:
 	TEventDataStore eventDataStore_;
 };
 
-template <typename TContainer>
-struct CAggregateEventReturnValue
-{
-	typedef TContainer result_type;
-
-	template<typename TInputIterator>
-	TContainer operator()(TInputIterator first, TInputIterator last) const
-	{
-		TContainer values;
-
-		while (first != last)
-		{
-			values.push_back(*first);
-			++first;
-		}
-
-		return std::move(values);
-	}
-};
-
-typedef boost::signals2::signal<int (CYDWEEventData &), CAggregateEventReturnValue<std::vector<int> > > TYDWEEvent;
-
+typedef base::signal<int, CYDWEEventData&> TYDWEEvent;
 
 enum EVENT_ID
 {
