@@ -19,14 +19,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v120_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v120_xp</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -64,7 +64,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>mapanalyzer.def</ModuleDefinitionFile>
-      <AdditionalDependencies>luacore.lib;luabind.lib;StormLib_dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>luacore.lib;luabind.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,7 +84,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>mapanalyzer.def</ModuleDefinitionFile>
-      <AdditionalDependencies>luacore.lib;luabind.lib;StormLib_dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>luacore.lib;luabind.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -93,9 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="mapanalyzer.def" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="InterfaceStormLib.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\SlkLib\SlkLib.vcxproj">

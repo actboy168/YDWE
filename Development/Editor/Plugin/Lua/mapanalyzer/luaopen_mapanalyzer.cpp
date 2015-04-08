@@ -10,7 +10,6 @@
 #include <slk/reader/SlkReader.hpp>
 #include <slk/reader/TxtReader.hpp>
 #include <slk/reader/IniReader.hpp>
-#include "InterfaceStormLib.h"
 
 namespace NLua { namespace TableWrap {
 
