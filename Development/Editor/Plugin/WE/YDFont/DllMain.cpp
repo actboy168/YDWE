@@ -1,4 +1,4 @@
-#include <Windows.h>
+﻿#include <Windows.h>
 #include <string>
 #include <memory>
 #include <base/hook/iat.h>
@@ -37,21 +37,21 @@ namespace fake
 FontManager::FontManager(const char* name, size_t size)
 : font_(NULL)
 {
-	font_ = ::CreateFontA(
-		base::font::size_to_height(size), //������߼��߶�
-		0,                                //�߼�ƽ���ַ�����
-		0,                                //��ˮƽ�ߵĽǶ�
-		0,                                //���߷�λ�Ƕ�
-		FW_DONTCARE,                      //���Σ�����
-		FALSE,                            //���Σ�б��
-		FALSE,                            //���Σ��»���
-		FALSE,                            //���Σ�����
-		DEFAULT_CHARSET,                  //�ַ���
-		OUT_DEFAULT_PRECIS,               //�������
-		CLIP_DEFAULT_PRECIS,              //���ؾ���
-		DEFAULT_QUALITY,                  //���Ʒ��
-		DEFAULT_PITCH | FF_DONTCARE,      //��б��
-		base::u2a(name).c_str()     //����
+	font_ = ::CreateFontW(
+		base::font::size_to_height(size), //字体的逻辑高度
+		0,                                //逻辑平均字符宽度
+		0,                                //与水平线的角度
+		0,                                //基线方位角度
+		FW_DONTCARE,                      //字形：常规
+		FALSE,                            //字形：斜体
+		FALSE,                            //字形：下划线
+		FALSE,                            //字形：粗体
+		DEFAULT_CHARSET,                  //字符集
+		OUT_DEFAULT_PRECIS,               //输出精度
+		CLIP_DEFAULT_PRECIS,              //剪截精度
+		DEFAULT_QUALITY,                  //输出品质
+		DEFAULT_PITCH | FF_DONTCARE,      //倾斜度
+		base::u2w(name, base::conv_method::replace | '?').c_str() //字体
 		);
 
 	if (font_ != NULL)
