@@ -31,9 +31,7 @@
     <ClInclude Include="minizip\iowin32.h" />
     <ClInclude Include="minizip\mztools.h" />
     <ClInclude Include="minizip\unzip.h" />
-    <ClInclude Include="minizip\zconf.h" />
     <ClInclude Include="minizip\zip.h" />
-    <ClInclude Include="minizip\zlib.h" />
     <ClInclude Include="zip_internal.h" />
     <ClInclude Include="zip_reader.h" />
   </ItemGroup>
