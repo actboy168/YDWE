@@ -39,7 +39,7 @@ end
 local function show_cjass_version()
 	local cjass_path = fs.ydwe_path() / "plugin" / "AdicHelper" / "AdicHelper.exe"
 	local command_line = cjass_path:string()
-	sys.spawn_dir(command_line, fs.ydwe_path())
+	sys.spawn(command_line, fs.ydwe_path())
 end
 
 -- 打开官网
