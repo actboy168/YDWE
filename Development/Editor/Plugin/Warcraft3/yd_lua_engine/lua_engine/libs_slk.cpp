@@ -51,9 +51,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	std::unique_ptr<slk_manager> slk_manager::s_ptr_;
 
-	int jass_slk_object_index(lua::state* ls);
-	int jass_slk_object_pairs(lua::state* ls);
-	int jass_slk_create_proxy_table(lua::state* ls, lua::cfunction index_func, lua::cfunction pairs_func, uintptr_t upvalue);
+	static int jass_slk_object_index(lua::state* ls);
+	static int jass_slk_object_pairs(lua::state* ls);
+	static int jass_slk_create_proxy_table(lua::state* ls, lua::cfunction index_func, lua::cfunction pairs_func, uintptr_t upvalue);
 }}
 
 namespace lua
@@ -94,12 +94,12 @@ namespace lua
 
 namespace warcraft3 { namespace lua_engine {
 	
-	int jass_slk_table_newindex(lua::state* /*ls*/)
+	static int jass_slk_table_newindex(lua::state* /*ls*/)
 	{
 		return 0;
 	}
 
-	int jass_slk_create_proxy_table(lua::state* ls, lua::cfunction index_func, lua::cfunction pairs_func, uintptr_t upvalue)
+	static int jass_slk_create_proxy_table(lua::state* ls, lua::cfunction index_func, lua::cfunction pairs_func, uintptr_t upvalue)
 	{
 		ls->newtable();
 		{
@@ -129,13 +129,13 @@ namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	int jass_slk_object_pairs(lua::state* ls)
+	static int jass_slk_object_pairs(lua::state* ls)
 	{
 		slk::SlkSingle* object_ptr = (slk::SlkSingle*)(uintptr_t)ls->tounsigned(lua_upvalueindex(1));
 		return lua::make_range(ls, *object_ptr);
 	}
 
-	int jass_slk_object_index(lua::state* ls)
+	static int jass_slk_object_index(lua::state* ls)
 	{
 		slk::SlkSingle* object_ptr = (slk::SlkSingle*)(uintptr_t)ls->tounsigned(lua_upvalueindex(1));
 		const char* key = ls->tostring(2);
@@ -149,14 +149,14 @@ namespace warcraft3 { namespace lua_engine {
 		return lua::convert_to_lua(ls, it->second);
 	}
 
-	int jass_slk_table_pairs(lua::state* ls)
+	static int jass_slk_table_pairs(lua::state* ls)
 	{
 		slk::ROBJECT_TYPE::ENUM type = (slk::ROBJECT_TYPE::ENUM)ls->tounsigned(lua_upvalueindex(1));
 		slk::SlkTable& table = slk_manager::instance().load(type);
 		return lua::make_range(ls, table);
 	}
 
-	int jass_slk_table_index(lua::state* ls)
+	static int jass_slk_table_index(lua::state* ls)
 	{
 		slk::ROBJECT_TYPE::ENUM type = (slk::ROBJECT_TYPE::ENUM)ls->tounsigned(lua_upvalueindex(1));
 		slk::object_id id;
@@ -185,7 +185,7 @@ namespace warcraft3 { namespace lua_engine {
 		return lua::convert_to_lua(ls, it->second);
 	}
 
-	int slk_create_table(lua::state* ls, const char* name, slk::ROBJECT_TYPE::ENUM type)
+	static int slk_create_table(lua::state* ls, const char* name, slk::ROBJECT_TYPE::ENUM type)
 	{
 		ls->pushstring(name);
 		jass_slk_create_proxy_table(ls, jass_slk_table_index, jass_slk_table_pairs, type);
