@@ -204,6 +204,7 @@ namespace warcraft3 { namespace lua_engine {
 			slk_create_table(ls, "upgrade", slk::ROBJECT_TYPE::UPGRADE);
 			slk_create_table(ls, "doodad", slk::ROBJECT_TYPE::DOODAD);
 			slk_create_table(ls, "destructable", slk::ROBJECT_TYPE::DESTRUCTABLE);
+			slk_create_table(ls, "misc", slk::ROBJECT_TYPE::MISC);
 		}
 		return 1;
 	}
