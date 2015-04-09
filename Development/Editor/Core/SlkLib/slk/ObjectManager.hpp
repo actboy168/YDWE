@@ -19,6 +19,7 @@ namespace slk
 			UPGRADE,
 			DOODAD,
 			DESTRUCTABLE,
+			MISC,
 			MAXIMUM,
 		};
 	}
@@ -118,6 +119,10 @@ namespace slk
 			UPGRADE_NEUTRAL_FUNC,
 			ITEM_STRINGS,
 			ITEM_FUNC,
+			MISC_UI_DATA,
+			MISC_UNITS_DATA,
+			MISC_UNITS_GAME,
+			MISC_WAR3MAP,
 			MAXIMUM,
 		};
 	}
@@ -154,6 +159,7 @@ namespace slk
 		bool load_upgrde(SlkTable& table);
 		bool load_doodad(SlkTable& table);
 		bool load_destructable(SlkTable& table);
+		bool load_misc(SlkTable& table);
 		bool load_base(ROBJECT_TYPE::ENUM type, SlkTable& table);
 		std::string const& convert_string(std::string const& str);
 		Converter& get_converter();

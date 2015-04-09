@@ -4,8 +4,6 @@ require "interface_storm"
 
 local mapanalyzer = mapanalyzer
 local setmetatable = setmetatable
-   
-
 local slk_mgr = {}
 
 function slk_mgr.initialize (self)
@@ -24,20 +22,11 @@ function slk_mgr.initialize (self)
 	self.table_type.item         = mapanalyzer.OBJECT_TYPE.ITEM
 	self.table_type.unit         = mapanalyzer.OBJECT_TYPE.UNIT
 	self.table_type.upgrade      = mapanalyzer.OBJECT_TYPE.UPGRADE
-	self.table_type.misc         = 7
-	         	
+	self.table_type.misc         = mapanalyzer.OBJECT_TYPE.MISC
+
 	self.cache = setmetatable({}, {
 		__index = function (table_, key_)
-			local v
-			if key_ == self.table_type.misc then
-				v = mapanalyzer.ini_table()
-				self.manager:load_file('ui\\miscdata.txt', v)
-				self.manager:load_file('units\\miscdata.txt', v)
-				self.manager:load_file('units\\miscgame.txt', v)
-				self.manager:load_file('war3mapmisc.txt', v)
-			else
-				v = self.manager:load(key_)
-			end
+			local v = self.manager:load(key_)
 			table_[key_] = v
 			return v
 		end
@@ -95,7 +84,7 @@ end
 function _slk_table._index (self, key)
 	return _slk_object.create(self:cache():get(key) or mapanalyzer.slk_object())
 end
-            
+
 function _slk_table.create (table_type)
 	return setmetatable(
 		{
@@ -105,66 +94,6 @@ function _slk_table.create (table_type)
 		}, 
 		{ 
 			__index = _slk_table._index,
-		})
-end
-
-
-local _misc_object = {}
-
-function _misc_object.factory (self)
-	local it = self._object:begin()
-	return function ()
-		if it:valid() then
-			return it:next()
-		end
-		return nil
-	end
-end
-
-function _misc_object._index (self, key)
-	return self._object:get(key) or ''
-end
-            
-function _misc_object.create (object)
-	return setmetatable(
-		{
-			_object = object,
-			factory = _misc_object.factory, 
-		}, 
-		{ 
-			__index = _misc_object._index 
-		})
-end
-
-local _misc_table = {}
-
-function _misc_table.cache (self)
-	return slk_mgr.cache[slk_mgr.table_type.misc]
-end
-
-function _misc_table.factory (self)
-	local it = self:cache():begin()
-	return function ()
-		if it:valid() then
-			local k, v = it:next()
-			return k, _misc_object.create(v)
-		end
-		return nil
-	end
-end
-
-function _misc_table._index (self, key)	
-	return _misc_object.create(self:cache():get(key) or mapanalyzer.ini_object())
-end
-            
-function _misc_table.create ()
-	return setmetatable(
-		{
-			factory = _misc_table.factory,
-			cache   = _misc_table.cache,
-		}, 
-		{ 
-			__index = _misc_table._index 
 		})
 end
 
@@ -178,7 +107,7 @@ function slk_interface.initialize (self)
 	self.item         = _slk_table.create(slk_mgr.table_type.item)
 	self.unit         = _slk_table.create(slk_mgr.table_type.unit)
 	self.upgrade      = _slk_table.create(slk_mgr.table_type.upgrade)
-	self.misc         = _misc_table.create()
+	self.misc         = _slk_table.create(slk_mgr.table_type.misc)
 		
 	-- deprecated
 	self.Ability      = self.ability     

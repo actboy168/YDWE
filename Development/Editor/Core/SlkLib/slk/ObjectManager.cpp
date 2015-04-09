@@ -92,6 +92,12 @@ namespace slk
 
 				"Units\\ItemStrings.txt",
 				"Units\\ItemFunc.txt",
+
+				"UI\\MiscData.txt",
+				"Units\\MiscData.txt",
+				"Units\\MiscGame.txt",
+				"war3mapmisc.txt",
+
 			};
 
 			return list[type];
@@ -276,6 +282,10 @@ namespace slk
 			case TXT_TYPE::UPGRADE_NEUTRAL_FUNC:
 			case TXT_TYPE::ITEM_STRINGS:
 			case TXT_TYPE::ITEM_FUNC:
+			case TXT_TYPE::MISC_UI_DATA:
+			case TXT_TYPE::MISC_UNITS_DATA:
+			case TXT_TYPE::MISC_UNITS_GAME:
+			case TXT_TYPE::MISC_WAR3MAP:
 				TableRead<TxtReader>(table, load_file(detail::FileList(type)));
 				break;
 			default:
@@ -424,6 +434,16 @@ namespace slk
 		return true;
 	}
 
+	bool ObjectManager::load_misc(SlkTable& table)
+	{
+		load(TXT_TYPE::MISC_UI_DATA, table);
+		load(TXT_TYPE::MISC_UNITS_DATA, table);
+		load(TXT_TYPE::MISC_UNITS_GAME, table);
+		load(TXT_TYPE::MISC_WAR3MAP, table);
+
+		return true;
+	}
+	
 	bool ObjectManager::load_base(ROBJECT_TYPE::ENUM type, SlkTable& table)
 	{
 		switch (type)
@@ -571,6 +591,8 @@ namespace slk
 		case ROBJECT_TYPE::ABILITY:
 		case ROBJECT_TYPE::UPGRADE:
 			return detail::ObjectManagerLoadObjectTable<ObjectWithOptinal>(*this, type, table);
+		case ROBJECT_TYPE::MISC:
+			return load_misc(table);
 		default:
 			assert(false);
 			return false;

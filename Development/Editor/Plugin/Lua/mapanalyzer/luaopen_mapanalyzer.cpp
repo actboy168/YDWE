@@ -95,62 +95,6 @@ namespace SlkTableWrap {
 
 }
 
-namespace IniObjectWrap {
-
-	void next(lua_State* pState, TableWrap::Iterator<slk::IniSingle>& it)
-	{
-		luabind::object(pState, it.cur_->first).push(pState);
-		luabind::object(pState, it.cur_->second).push(pState);
-		++it.cur_;
-	}
-
-	void get(lua_State* pState, slk::IniSingle const &table, std::string const &key)
-	{
-		auto const& It = table.find(key);
-		if (It == table.end())
-		{
-			lua_pushnil(pState);
-		}
-		else
-		{
-			luabind::object(pState, It->second).push(pState);
-		}
-	}
-
-	void set(slk::IniSingle &table, std::string const &key, std::string const &val)
-	{
-		table[key] = val;
-	}
-}
-
-namespace IniTableWrap {
-
-	void next(lua_State* pState, TableWrap::Iterator<slk::IniTable>& it)
-	{
-		luabind::object(pState, it.cur_->first).push(pState);
-		luabind::object(pState, it.cur_->second).push(pState);
-		++it.cur_;
-	}
-
-	void get(lua_State* pState, slk::IniTable const &table, std::string const &key)
-	{
-		auto const& It = table.find(key);
-		if (It == table.end())
-		{
-			lua_pushnil(pState);
-		}
-		else
-		{
-			luabind::object(pState, It->second).push(pState);
-		}
-	}
-
-	void set(slk::IniTable &table, std::string const &key, slk::IniSingle const &val)
-	{
-		table[key] = val;
-	}
-}
-
 struct InterfaceStormWrap : slk::InterfaceStorm, luabind::wrap_base
 {
 	bool has(std::string const& path) 
@@ -193,7 +137,8 @@ int luaopen_mapanalyzer(lua_State *pState)
 				value("BUFF",         slk::ROBJECT_TYPE::BUFF),
 				value("DOODAD",       slk::ROBJECT_TYPE::DOODAD),
 				value("ABILITY",      slk::ROBJECT_TYPE::ABILITY),
-				value("UPGRADE",      slk::ROBJECT_TYPE::UPGRADE)
+				value("UPGRADE",      slk::ROBJECT_TYPE::UPGRADE),
+				value("MISC",         slk::ROBJECT_TYPE::MISC)
 			]
 		,
 
@@ -223,36 +168,9 @@ int luaopen_mapanalyzer(lua_State *pState)
 			.def("begin", &NLua::TableWrap::begin<slk::SlkTable>)
 		,
 
-		class_<NLua::TableWrap::Iterator<slk::IniSingle>>("ini_object_iterator")
-			.def(constructor<slk::IniSingle &>())
-			.def("valid",  &NLua::TableWrap::Iterator<slk::IniSingle>::valid)
-			.def("next",   &NLua::IniObjectWrap::next)
-		,
-
-		class_<slk::IniSingle>("ini_object")
-			.def(constructor<>())
-			.def("get",   &NLua::IniObjectWrap::get)
-			.def("set",   &NLua::IniObjectWrap::set)
-			.def("begin", &NLua::TableWrap::begin<slk::IniSingle>)
-		,
-
-		class_<NLua::TableWrap::Iterator<slk::IniTable>>("ini_table_iterator")
-			.def(constructor<slk::IniTable &>())
-			.def("valid",  &NLua::TableWrap::Iterator<slk::IniTable>::valid)
-			.def("next",   &NLua::IniTableWrap::next)
-		,
-
-		class_<slk::IniTable>("ini_table")
-			.def(constructor<>())
-			.def("get",   &NLua::IniTableWrap::get)
-			.def("set",   &NLua::IniTableWrap::set)
-			.def("begin", &NLua::TableWrap::begin<slk::IniTable>)
-		,
-
 		class_<slk::ObjectManager>("manager2")
 			.def(constructor<slk::InterfaceStorm&>())
 			.def("load",      &slk::ObjectManager::load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>)
-			.def("load_file", &slk::ObjectManager::load<slk::IniTable>)
 			.def("convert",   &slk::ObjectManager::convert_string)
 	];
 
