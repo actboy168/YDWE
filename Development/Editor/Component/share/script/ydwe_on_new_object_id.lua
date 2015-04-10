@@ -10,18 +10,18 @@ local object = {}
 function object:initialize ()
 	self.interface = interface_stormlib()
 	self.interface:open_path(fs.ydwe_path() / "share" / "mpq" / "units")
-	self.manager = mapanalyzer.manager2(self.interface)	
+	self.manager = mapanalyzer.new(self.interface)	
 	self.object_type = {
-		[0] = mapanalyzer.OBJECT_TYPE.UNIT,
-		[1] = mapanalyzer.OBJECT_TYPE.ITEM,
-		[2] = mapanalyzer.OBJECT_TYPE.DESTRUCTABLE,
-		[3] = mapanalyzer.OBJECT_TYPE.DOODAD,
-		[4] = mapanalyzer.OBJECT_TYPE.ABILITY,
-		[5] = mapanalyzer.OBJECT_TYPE.BUFF,
-		[6] = mapanalyzer.OBJECT_TYPE.UPGRADE,
+		[0] = 'unit',
+		[1] = 'item',
+		[2] = 'destructable',
+		[3] = 'doodad',
+		[4] = 'ability',
+		[5] = 'buff',
+		[6] = 'upgrade',
 	}
 end
-			
+
 function object:original_has (this_, id_string_)
 	local this_ptr_ = ffi.cast('uint32_t*', this_)
 	local ptr  = this_ptr_[7] + 4
@@ -42,8 +42,7 @@ function object:custom_has (type_, id_string_)
 	if not self.object_type[type_] then
 		return false
 	end
-	local table_ = self.manager:load(self.object_type[type_])
-	if not table_:get(id_string_) then
+	if not self.manager[self.object_type[type_]][id_string_] then
 		return false
 	end
 	return true
