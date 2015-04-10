@@ -179,7 +179,6 @@
     <ClInclude Include="lua_engine\lua_helper.h" />
     <ClInclude Include="lua_engine\lua_loader.h" />
     <ClInclude Include="lua_engine\open_lua_engine.h" />
-    <ClInclude Include="lua_engine\slk_interface_storm.h" />
     <ClInclude Include="lua_engine\storm.h" />
   </ItemGroup>
   <ItemGroup>

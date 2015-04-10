@@ -1,33 +1,10 @@
-#include "lua_helper.h"
+#include "lua_helper.h"	 
+#include "storm.h"
 #include <base/lua/make_range.h>
 #include <slk/ObjectManager.hpp>
-#include "slk_interface_storm.h"
+#include <slk/InterfaceStorm.hpp>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
-
-	class slk_manager
-	{
-	public:
-		slk_manager()
-			: storm_()
-			, mgr_(storm_)
-		{ }
-
-		slk::SlkTable& load(slk::ROBJECT_TYPE::ENUM type)
-		{
-			return mgr_.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(type);
-		}
-
-		std::string const& convert_string(std::string const& str)
-		{
-			return mgr_.convert_string(str);
-		}
-
-	private:
-		slk_interface_storm storm_;
-		slk::ObjectManager  mgr_;
-	};
-
 	static int slk_object_index(lua::state* ls);
 	static int slk_object_pairs(lua::state* ls);
 	static int slk_create_proxy_table(lua::state* ls, lua::cfunction index_func, lua::cfunction pairs_func, uintptr_t upvalue);
@@ -71,31 +48,53 @@ namespace lua
 
 namespace warcraft3 { namespace lua_engine {
 
-	static int slk_manager_destroy(lua::state* ls)
+	class slk_manager
 	{
-		static_cast<slk_manager*>(ls->touserdata(1))->~slk_manager();
-		return 0;
-	}
+	public:
+		slk_manager(slk::InterfaceStorm& storm)
+			: mgr_(storm)
+		{ }
 
-	static int slk_manager_create(lua::state* ls)
-	{
-		slk_manager* mgr = (slk_manager*)ls->newuserdata(sizeof(slk_manager));
-		ls->newtable();
-		ls->pushcclosure(slk_manager_destroy, 0);
-		ls->setfield(-2, "__gc");
-		ls->setmetatable(-2);
-		new (mgr)slk_manager();
-		ls->setfield(LUA_REGISTRYINDEX, "_JASS_SLK_MGR");
-		return 0;
-	}
+		slk::SlkTable& load(slk::ROBJECT_TYPE::ENUM type)
+		{
+			return mgr_.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(type);
+		}
 
-	static slk_manager* slk_manager_get(lua::state* ls)
-	{
-		ls->getfield(LUA_REGISTRYINDEX, "_JASS_SLK_MGR");
-		slk_manager* mgr = (slk_manager*)ls->touserdata(-1);
-		ls->pop(1);
-		return mgr;
-	}
+		std::string const& convert_string(std::string const& str)
+		{
+			return mgr_.convert_string(str);
+		}
+
+
+		static int destroy(lua::state* ls)
+		{
+			static_cast<slk_manager*>(ls->touserdata(1))->~slk_manager();
+			return 0;
+		}
+
+		static int create(lua::state* ls, slk::InterfaceStorm& storm)
+		{
+			slk_manager* mgr = (slk_manager*)ls->newuserdata(sizeof(slk_manager));
+			ls->newtable();
+			ls->pushcclosure(slk_manager::destroy, 0);
+			ls->setfield(-2, "__gc");
+			ls->setmetatable(-2);
+			new (mgr)slk_manager(storm);
+			ls->setfield(LUA_REGISTRYINDEX, "_JASS_SLK_MGR");
+			return 0;
+		}
+
+		static slk_manager* get(lua::state* ls)
+		{
+			ls->getfield(LUA_REGISTRYINDEX, "_JASS_SLK_MGR");
+			slk_manager* mgr = (slk_manager*)ls->touserdata(-1);
+			ls->pop(1);
+			return mgr;
+		}
+
+	private:
+		slk::ObjectManager  mgr_;
+	};
 
 	static int slk_table_newindex(lua::state* /*ls*/)
 	{
@@ -155,7 +154,7 @@ namespace warcraft3 { namespace lua_engine {
 	static int slk_table_pairs(lua::state* ls)
 	{
 		slk::ROBJECT_TYPE::ENUM type = (slk::ROBJECT_TYPE::ENUM)ls->tounsigned(lua_upvalueindex(1));
-		slk::SlkTable& table = slk_manager_get(ls)->load(type);
+		slk::SlkTable& table = slk_manager::get(ls)->load(type);
 		return lua::make_range(ls, table);
 	}
 
@@ -177,7 +176,7 @@ namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
-		slk::SlkTable& table = slk_manager_get(ls)->load(type);
+		slk::SlkTable& table = slk_manager::get(ls)->load(type);
 		auto it = table.find(id);
 		if (it == table.end())
 		{
@@ -196,9 +195,48 @@ namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
+	class slk_interface_storm
+		: public slk::InterfaceStorm
+	{
+	public:
+		slk_interface_storm()
+			: s_()
+		{ }
+
+		bool has(std::string const& path)
+		{
+			return s_.has_file(path.c_str());
+		}
+
+		std::string load(std::string const& path, error_code& ec)
+		{
+			const void* buf_data = nullptr;
+			size_t      buf_size = 0;
+
+			if (!s_.load_file(path.c_str(), &buf_data, &buf_size))
+			{
+				ec = ERROR_FILE_NOT_FOUND;
+				return std::move(std::string());
+			}
+			std::string result((const char*)buf_data, ((const char*)buf_data) + buf_size);
+			s_.unload_file(buf_data);
+			return std::move(result);
+		}
+
+		static slk_interface_storm& instance()
+		{
+			static slk_interface_storm storm;
+			return storm;
+		}
+
+	private:
+		storm s_;
+	};
+
 	int jass_slk(lua::state* ls)
 	{
-		slk_manager_create(ls);
+
+		slk_manager::create(ls, slk_interface_storm::instance());
 
 		ls->newtable();
 		{

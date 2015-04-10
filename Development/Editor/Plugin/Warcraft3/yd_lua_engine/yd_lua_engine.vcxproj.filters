@@ -193,9 +193,6 @@
     <ClInclude Include="lua_engine\storm.h">
       <Filter>lua_engine\misc</Filter>
     </ClInclude>
-    <ClInclude Include="lua_engine\slk_interface_storm.h">
-      <Filter>lua_engine\misc</Filter>
-    </ClInclude>
     <ClInclude Include="lua_engine\libs_runtime.h">
       <Filter>lua_engine\library</Filter>
     </ClInclude>
