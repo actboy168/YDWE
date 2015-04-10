@@ -1,4 +1,3 @@
-#include "lua_helper.h"	 
 #include "storm.h"
 #include <base/lua/make_range.h>
 #include <slk/ObjectManager.hpp>
