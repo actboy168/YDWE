@@ -2,6 +2,7 @@
 
 #include <base/config.h>
 #include <base/lua/state.h>
+#include <utility>
 
 namespace base { namespace lua {
 	template <class T>
