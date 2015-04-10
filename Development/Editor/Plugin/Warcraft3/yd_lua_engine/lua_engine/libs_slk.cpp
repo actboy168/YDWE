@@ -167,7 +167,7 @@ namespace warcraft3 { namespace lua_engine {
 			id = slk::object_id(std::string_view(ls->tostring(2)));
 			break;
 		case LUA_TNUMBER:	
-			id = slk::object_id(ls->tounsigned(2));
+			id = slk::object_id((uint32_t)ls->tointeger(2));
 			break;
 		default:
 			ls->pushnil();
