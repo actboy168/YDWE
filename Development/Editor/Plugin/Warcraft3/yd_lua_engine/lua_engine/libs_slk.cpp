@@ -65,7 +65,6 @@ namespace warcraft3 { namespace lua_engine {
 			return mgr_.convert_string(str);
 		}
 
-
 		static int destroy(lua::state* ls)
 		{
 			static_cast<slk_manager*>(ls->touserdata(1))->~slk_manager();
@@ -235,7 +234,6 @@ namespace warcraft3 { namespace lua_engine {
 
 	int jass_slk(lua::state* ls)
 	{
-
 		slk_manager::create(ls, slk_interface_storm::instance());
 
 		ls->newtable();
