@@ -29,27 +29,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	private:
 		slk_interface_storm storm_;
 		slk::ObjectManager  mgr_;
-
-	public:
-		static slk_manager& instance()
-		{
-			if (!s_ptr_)
-			{
-				s_ptr_.reset(new slk_manager());
-				DO_ONCE_NOTHREADSAFE()
-				{
-					register_game_reset_event([](uintptr_t){ s_ptr_.reset(); });
-				}
-			}
-
-			return *s_ptr_;
-		}
-
-	private:
-		static std::unique_ptr<slk_manager> s_ptr_;
 	};
-
-	std::unique_ptr<slk_manager> slk_manager::s_ptr_;
 
 	static int slk_object_index(lua::state* ls);
 	static int slk_object_pairs(lua::state* ls);
@@ -93,7 +73,33 @@ namespace lua
 }
 
 namespace warcraft3 { namespace lua_engine {
-	
+
+	static int slk_manager_destroy(lua::state* ls)
+	{
+		static_cast<slk_manager*>(ls->touserdata(1))->~slk_manager();
+		return 0;
+	}
+
+	static int slk_manager_create(lua::state* ls)
+	{
+		slk_manager* mgr = (slk_manager*)ls->newuserdata(sizeof(slk_manager));
+		ls->newtable();
+		ls->pushcclosure(slk_manager_destroy, 0);
+		ls->setfield(-2, "__gc");
+		ls->setmetatable(-2);
+		new (mgr)slk_manager();
+		ls->setfield(LUA_REGISTRYINDEX, "_JASS_SLK_MGR");
+		return 0;
+	}
+
+	static slk_manager* slk_manager_get(lua::state* ls)
+	{
+		ls->getfield(LUA_REGISTRYINDEX, "_JASS_SLK_MGR");
+		slk_manager* mgr = (slk_manager*)ls->touserdata(-1);
+		ls->pop(1);
+		return mgr;
+	}
+
 	static int slk_table_newindex(lua::state* /*ls*/)
 	{
 		return 0;
@@ -152,7 +158,7 @@ namespace warcraft3 { namespace lua_engine {
 	static int slk_table_pairs(lua::state* ls)
 	{
 		slk::ROBJECT_TYPE::ENUM type = (slk::ROBJECT_TYPE::ENUM)ls->tounsigned(lua_upvalueindex(1));
-		slk::SlkTable& table = slk_manager::instance().load(type);
+		slk::SlkTable& table = slk_manager_get(ls)->load(type);
 		return lua::make_range(ls, table);
 	}
 
@@ -174,7 +180,7 @@ namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
-		slk::SlkTable& table = slk_manager::instance().load(type);
+		slk::SlkTable& table = slk_manager_get(ls)->load(type);
 		auto it = table.find(id);
 		if (it == table.end())
 		{
@@ -195,6 +201,8 @@ namespace warcraft3 { namespace lua_engine {
 
 	int jass_slk(lua::state* ls)
 	{
+		slk_manager_create(ls);
+
 		ls->newtable();
 		{
 			slk_create_table(ls, "ability", slk::ROBJECT_TYPE::ABILITY);
