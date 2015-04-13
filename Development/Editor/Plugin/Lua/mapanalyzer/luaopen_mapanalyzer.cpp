@@ -213,9 +213,9 @@ namespace warcraft3 { namespace lua_engine {
 		bool has(std::string const& path)
 		{
 			lua_rawgeti(L, LUA_REGISTRYINDEX, class_);
-			lua_pushvalue(L, -1);
+			lua_getfield(L, -1, "has");
+			lua_pushvalue(L, -2);
 			lua_pushlstring(L, path.c_str(), path.size());
-			lua_getfield(L, -3, "has");
 			int err = lua_pcall(L, 2, 1, 0);
 			if (err != LUA_OK)
 			{
@@ -230,9 +230,9 @@ namespace warcraft3 { namespace lua_engine {
 		std::string load(std::string const& path, error_code& ec)
 		{
 			lua_rawgeti(L, LUA_REGISTRYINDEX, class_);
-			lua_pushvalue(L, -1);
+			lua_getfield(L, -1, "load");
+			lua_pushvalue(L, -2);
 			lua_pushlstring(L, path.c_str(), path.size());
-			lua_getfield(L, -3, "load");
 			int err = lua_pcall(L, 2, 1, 0);
 			if (err != LUA_OK)
 			{
