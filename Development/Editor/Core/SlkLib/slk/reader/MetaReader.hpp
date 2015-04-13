@@ -7,6 +7,6 @@ namespace slk
 {
 	struct MetaReader
 	{
-		static void Read(base::buffer_reader& reader, MetaTable& table);
+		static void Read(base::buffer_reader& reader, MetaTable& table, bool /*create_if_not_exists*/);
 	};
 }

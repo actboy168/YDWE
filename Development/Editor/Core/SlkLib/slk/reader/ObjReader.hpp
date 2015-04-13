@@ -10,7 +10,7 @@ namespace slk
 	{
 	public:
 		template <class ObjTableT>
-		static void Read(base::buffer_reader& reader, ObjTableT& table)
+		static void Read(base::buffer_reader& reader, ObjTableT& table, bool /*create_if_not_exists*/)
 		{
 			reader.read<W3OHeader>();
 			ReadOriginalTable(reader, table);

@@ -5,6 +5,6 @@ namespace slk
 {
 	void IniReader::Read(base::buffer_reader& reader, IniTable& table)
 	{
-		reader::utility::ini_read(reader, table);
+		reader::utility::ini_read(reader, table, true);
 	}
 }

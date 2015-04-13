@@ -124,10 +124,10 @@ namespace slk
 	}
 
 	template <class _Reader, class _Table>
-	void TableRead(_Table& table, base::buffer&& buf)
+	void TableRead(_Table& table, base::buffer&& buf, bool create_if_not_exists)
 	{
 		base::buffer_reader reader(buf);
-		_Reader::Read(reader, table);
+		_Reader::Read(reader, table, create_if_not_exists);
 	}
 
 	ObjectManager::ObjectManager(InterfaceStorm& that)
@@ -163,7 +163,7 @@ namespace slk
 			case OBJ_TYPE::ITEM:
 			case OBJ_TYPE::DESTRUCTABLE:
 			case OBJ_TYPE::BUFF:
-				TableRead<ObjReader>(table, load_file(detail::FileList(type)));
+				TableRead<ObjReader>(table, load_file(detail::FileList(type)), true);
 				break;
 			default:
 				throw base::exception("Unknown object type %d.", type);
@@ -187,7 +187,7 @@ namespace slk
 			case OBJ_TYPE::DOODAD:
 			case OBJ_TYPE::ABILITY:
 			case OBJ_TYPE::UPGRADE:
-				TableRead<ObjReader>(table, load_file(detail::FileList(type)));
+				TableRead<ObjReader>(table, load_file(detail::FileList(type)), true);
 				break;
 			default:
 				throw base::exception("Unknown object type %d.", type);
@@ -219,7 +219,7 @@ namespace slk
 			case SLK_TYPE::UNIT_ABILITIES:
 			case SLK_TYPE::UNIT_WEAPONS:
 			case SLK_TYPE::ITEM_DATA:
-				TableRead<SlkReader>(table, load_file(detail::FileList(type)));
+				TableRead<SlkReader>(table, load_file(detail::FileList(type)), true);
 				break;
 			default:
 				throw base::exception("Unknown slk type %d.", type);
@@ -282,11 +282,13 @@ namespace slk
 			case TXT_TYPE::UPGRADE_NEUTRAL_FUNC:
 			case TXT_TYPE::ITEM_STRINGS:
 			case TXT_TYPE::ITEM_FUNC:
+				TableRead<TxtReader>(table, load_file(detail::FileList(type)), false);
+				break;
 			case TXT_TYPE::MISC_UI_DATA:
 			case TXT_TYPE::MISC_UNITS_DATA:
 			case TXT_TYPE::MISC_UNITS_GAME:
 			case TXT_TYPE::MISC_WAR3MAP:
-				TableRead<TxtReader>(table, load_file(detail::FileList(type)));
+				TableRead<TxtReader>(table, load_file(detail::FileList(type)), true);
 				break;
 			default:
 				throw base::exception("Unknown txt type %d.", type);
@@ -314,7 +316,7 @@ namespace slk
 			case META_SLK_TYPE::UPGRADE:
 			case META_SLK_TYPE::DOODAD:
 			case META_SLK_TYPE::DESTRUCTABLE:
-				TableRead<MetaReader>(table, load_file(detail::FileList(type)));
+				TableRead<MetaReader>(table, load_file(detail::FileList(type)), true);
 				break;
 			default:
 				throw base::exception("Unknown MetaSlk type %d.", type);
@@ -569,7 +571,7 @@ namespace slk
 	bool ObjectManager::load(const char* filename, SlkTable& table)
 	{
 		try {
-			TableRead<SlkReader>(table, load_file(filename));	
+			TableRead<SlkReader>(table, load_file(filename), true);	
 		}
 		catch (base::exception const&) {
 			return false;

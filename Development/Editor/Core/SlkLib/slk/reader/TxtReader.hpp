@@ -7,6 +7,6 @@ namespace slk
 {
 	struct SLKLIB_API TxtReader
 	{
-		static void Read(base::buffer_reader& reader, SlkTable& table);
+		static void Read(base::buffer_reader& reader, SlkTable& table, bool create_if_not_exists);
 	};
 }
