@@ -132,6 +132,7 @@
     <ClCompile Include="lua_engine\jassbind.cpp" />
     <ClCompile Include="lua_engine\libs_common.cpp" />
     <ClCompile Include="lua_engine\libs_console.cpp" />
+    <ClCompile Include="lua_engine\libs_debug.cpp" />
     <ClCompile Include="lua_engine\libs_globals.cpp" />
     <ClCompile Include="lua_engine\libs_hook.cpp" />
     <ClCompile Include="lua_engine\libs_japi.cpp" />

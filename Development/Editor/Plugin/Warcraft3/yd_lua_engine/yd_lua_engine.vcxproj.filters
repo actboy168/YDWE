@@ -182,6 +182,9 @@
     <ClCompile Include="lua_engine\libs_console.cpp">
       <Filter>lua_engine\library</Filter>
     </ClCompile>
+    <ClCompile Include="lua_engine\libs_debug.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua_engine\lua_loader.h">
