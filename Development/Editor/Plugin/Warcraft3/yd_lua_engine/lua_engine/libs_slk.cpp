@@ -106,7 +106,7 @@ namespace warcraft3 { namespace lua_engine {
 			ls->newtable();
 			{
 				ls->pushstring("__index");
-				ls->pushunsigned(upvalue);
+				ls->pushinteger(upvalue);
 				ls->pushcclosure(index_func, 1);
 				ls->rawset(-3);
 
@@ -115,14 +115,14 @@ namespace warcraft3 { namespace lua_engine {
 				ls->rawset(-3);
 
 				ls->pushstring("__pairs");
-				ls->pushunsigned(upvalue);
+				ls->pushinteger(upvalue);
 				ls->pushcclosure(pairs_func, 1);
 				ls->rawset(-3);
 			}
 			ls->setmetatable(-2);
 
 			ls->pushstring("factory");
-			ls->pushunsigned(upvalue);
+			ls->pushinteger(upvalue);
 			ls->pushcclosure(pairs_func, 1);
 			ls->rawset(-3);
 		}
@@ -131,13 +131,13 @@ namespace warcraft3 { namespace lua_engine {
 
 	static int slk_object_pairs(lua::state* ls)
 	{
-		slk::SlkSingle* object_ptr = (slk::SlkSingle*)(uintptr_t)ls->tounsigned(lua_upvalueindex(1));
+		slk::SlkSingle* object_ptr = (slk::SlkSingle*)(uintptr_t)ls->tointeger(lua_upvalueindex(1));
 		return lua::make_range(ls, *object_ptr);
 	}
 
 	static int slk_object_index(lua::state* ls)
 	{
-		slk::SlkSingle* object_ptr = (slk::SlkSingle*)(uintptr_t)ls->tounsigned(lua_upvalueindex(1));
+		slk::SlkSingle* object_ptr = (slk::SlkSingle*)(uintptr_t)ls->tointeger(lua_upvalueindex(1));
 		const char* key = ls->tostring(2);
 		auto it = object_ptr->find(key);
 		if (it == object_ptr->end())
@@ -151,14 +151,14 @@ namespace warcraft3 { namespace lua_engine {
 
 	static int slk_table_pairs(lua::state* ls)
 	{
-		slk::ROBJECT_TYPE::ENUM type = (slk::ROBJECT_TYPE::ENUM)ls->tounsigned(lua_upvalueindex(1));
+		slk::ROBJECT_TYPE::ENUM type = (slk::ROBJECT_TYPE::ENUM)ls->tointeger(lua_upvalueindex(1));
 		slk::SlkTable& table = slk_manager::get(ls)->load(type);
 		return lua::make_range(ls, table);
 	}
 
 	static int slk_table_index(lua::state* ls)
 	{
-		slk::ROBJECT_TYPE::ENUM type = (slk::ROBJECT_TYPE::ENUM)ls->tounsigned(lua_upvalueindex(1));
+		slk::ROBJECT_TYPE::ENUM type = (slk::ROBJECT_TYPE::ENUM)ls->tointeger(lua_upvalueindex(1));
 		slk::object_id id;
 
 		switch (ls->type(2))

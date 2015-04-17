@@ -53,11 +53,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		if (is_gaming())
 		{
-			jass::call("SetRandomSeed", ls->checkunsigned(1));
+			jass::call("SetRandomSeed", ls->tointeger(1));
 		}
 		else
 		{
-			srand(ls->checkunsigned(1));
+			srand(ls->tointeger(1));
 			(void)rand();
 		}
 

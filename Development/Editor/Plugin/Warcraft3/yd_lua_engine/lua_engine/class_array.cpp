@@ -15,7 +15,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		ls->pushvalue(1);
 		ls->pushstring("__value");
 		ls->rawget(-2);
-		jass::global_variable gv((hashtable::variable_node*)ls->checkunsigned(-1));
+		jass::global_variable gv((hashtable::variable_node*)ls->tointeger(-1));
 		ls->pop(2);
 		return std::move(gv);
 	}
@@ -54,7 +54,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int jarray_len(lua_State* L)
 	{
 		lua::state* ls = (lua::state*)L;
-		jass::global_variable gv((hashtable::variable_node*)ls->checkunsigned(lua_upvalueindex(1)));
+		jass::global_variable gv((hashtable::variable_node*)ls->tointeger(lua_upvalueindex(1)));
 		ls->pushinteger(gv.array_size());
 		return 1;
 	}

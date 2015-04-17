@@ -135,7 +135,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		static int call_real_function(lua_State* L)
 		{
 			lua::state* ls = (lua::state*)L;
-			jhook_helper* helper = (jhook_helper*)(uintptr_t)ls->tounsigned(lua_upvalueindex(1));
+			jhook_helper* helper = (jhook_helper*)(uintptr_t)ls->tointeger(lua_upvalueindex(1));
 			return jass_call_native_function(ls, helper->nf_, helper->real_func_);
 		}
 
@@ -155,7 +155,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				}
 			}
 
-			ls_->pushunsigned((uint32_t)(uintptr_t)this);
+			ls_->pushinteger((uint32_t)(uintptr_t)this);
 			ls_->pushcclosure((lua::cfunction)call_real_function, 1);
 
 			return safe_call_ref(ls_, fake_func_, param_size + 1, nf_->get_return());

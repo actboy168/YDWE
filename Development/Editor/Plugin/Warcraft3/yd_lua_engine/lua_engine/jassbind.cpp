@@ -28,14 +28,14 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		jass::jcode_t    read_code(lua::state* ls, int index)
 		{
-			if (ls->isnumber(index)) return ls->tounsigned(index);
+			if (ls->isnumber(index)) return ls->tointeger(index);
 			if (ls->isfunction(index)) return cfunction_to_code(ls, index);
 			return 0;
 		}
 
 		void             push_code(lua::state* ls, jass::jcode_t value)
 		{
-			ls->pushunsigned(value);
+			ls->pushinteger(value);
 		}
 
 		jass::jstring_t    read_string(lua::state* ls, int index)
