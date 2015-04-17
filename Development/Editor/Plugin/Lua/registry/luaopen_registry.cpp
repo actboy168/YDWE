@@ -86,31 +86,63 @@ namespace luawarp { namespace registry {
 			key_w*       self = rkey_read(L, 1);
 			std::wstring key = rkey_read_wstring(L, 2);
 			key_w::value_type& value = self->value(key);
-			lua_geti(L, 3, 1);
-			lua_geti(L, 3, 2);
-			switch (lua_tointeger(L, -2))
+			switch (lua_type(L, 3))
 			{
-			case REG_DWORD:
-				value.set_uint32_t((uint32_t)lua_tointeger(L, -1));
-				break;
-			case REG_QWORD:
-				value.set_uint64_t(lua_tointeger(L, -1));
-				break;
-			case REG_SZ:
-			case REG_EXPAND_SZ:
-				value.set(rkey_read_wstring(L, -1));
-				break;
-			case REG_BINARY:
+			case LUA_TSTRING:
+				value.set(rkey_read_wstring(L, 3));
+				return 0;
+			case LUA_TNUMBER:
+				value.set_uint32_t((uint32_t)lua_tointeger(L, 3));
+				return 0;
+			case LUA_TTABLE:
 			{
-							   size_t buflen = 0;
-							   const char* buf = lua_tolstring(L, -1, &buflen);
-							   value.set((const void*)buf, buflen);
-							   break;
-			}
+				lua_geti(L, 3, 1);
+				switch (lua_tointeger(L, -1))
+				{
+				case REG_DWORD:
+					lua_geti(L, 3, 2);
+					value.set_uint32_t((uint32_t)lua_tointeger(L, -1));
+					break;
+				case REG_QWORD:
+					lua_geti(L, 3, 2);
+					value.set_uint64_t(lua_tointeger(L, -1));
+					break;
+				case REG_EXPAND_SZ:
+				case REG_SZ:
+					lua_geti(L, 3, 2);
+					value.set(rkey_read_wstring(L, -1));
+					break;
+				case REG_MULTI_SZ:
+				{
+					int len = (int)luaL_len(L, 3);
+					std::wstring str = L"";
+					for (int i = 2; i <= len; ++i)
+					{
+						lua_geti(L, 3, i);
+						str += rkey_read_wstring(L, -1);
+						str.push_back(L'\0');
+						lua_pop(L, 1);
+					}
+					str.push_back(L'\0');
+					value.set(REG_MULTI_SZ, str.c_str(), str.size() * sizeof(wchar_t));
+					break;
+				}
+				case REG_BINARY:
+				{
+					lua_geti(L, 3, 2);
+					size_t buflen = 0;
+					const char* buf = lua_tolstring(L, -1, &buflen);
+					value.set((const void*)buf, buflen);
+					break;
+				}
+				default:
+					break;
+				}
+				return 0;
 			default:
-				break;
+				return 0;
 			}
-			return 0;
+			}
 		}
 		RKEY_TRY_END();
 	}
@@ -173,6 +205,7 @@ int luaopen_registry(lua_State* L)
 	LUA_PUSH_CONST(L, REG_QWORD);
 	LUA_PUSH_CONST(L, REG_SZ);
 	LUA_PUSH_CONST(L, REG_EXPAND_SZ);
+	LUA_PUSH_CONST(L, REG_MULTI_SZ);
 	LUA_PUSH_CONST(L, REG_BINARY);
 
 #undef LUA_PUSH_CONST

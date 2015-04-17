@@ -6,6 +6,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID /*pReserved*/)
 	if (reason == DLL_PROCESS_ATTACH)
 	{
 		::DisableThreadLibraryCalls(module);
+		MessageBoxA(0, 0, 0, 0);
 	}
 
 	return TRUE;

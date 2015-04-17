@@ -28,6 +28,8 @@ namespace base { namespace path {
 		DIR_USER_QUICK_LAUNCH,
 		DIR_DEFAULT_USER_QUICK_LAUNCH,
 		DIR_TASKBAR_PINS,
+		DIR_PERSONAL,
+		DIR_MYPICTURES,
 	};
 
 	_BASE_API boost::filesystem::path get(PATH_TYPE type);

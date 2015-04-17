@@ -87,8 +87,8 @@ namespace base { namespace registry {
 		bool                    set(const std::wstring& value);
 		bool                    set(const char*    value, size_type length);
 		bool                    set(const wchar_t* value, size_type length);
-		bool                    set(void const* value, size_type cbValue);
-		bool                    set(uint32_t type, void const* value, size_type cbValue);
+		bool                    set(void const* value, size_type length);
+		bool                    set(uint32_t type, void const* value, size_type length);
 
 		template <typename Source>
 		bool set(Source value, typename std::enable_if<
@@ -345,15 +345,15 @@ namespace base { namespace registry {
 	}
 
 	template <typename C, typename T, typename K>
-	inline bool basic_value<C, T, K>::set(void const* value, size_type cbValue)
+	inline bool basic_value<C, T, K>::set(void const* value, size_type length)
 	{
-		return set(REG_BINARY, value, cbValue);
+		return set(REG_BINARY, value, length);
 	}
 
 	template <typename C, typename T, typename K>
-	inline bool basic_value<C, T, K>::set(uint32_t type, void const* value, size_type cbValue)
+	inline bool basic_value<C, T, K>::set(uint32_t type, void const* value, size_type length)
 	{
-		result_type res = traits_type::set_value(m_key.handle(open_access::write), m_name.c_str(), type, value, cbValue);
+		result_type res = traits_type::set_value(m_key.handle(open_access::write), m_name.c_str(), type, value, length);
 		check_and_throw_exception("could not create value", res);
 		return ERROR_SUCCESS == res;
 	}
