@@ -174,6 +174,13 @@ namespace luawarp { namespace registry {
 	{
 		return rkey_create(L, lua_upvalueindex(1), HKEY_LOCAL_MACHINE);
 	}
+
+	int del(lua_State* L)
+	{
+		key_w* self = rkey_read(L, 1);
+		lua_pushboolean(L, self->del()? 1: 0);
+		return 1;
+	}
 }}
 
 extern "C" __declspec(dllexport) int luaopen_registry(lua_State* L);
@@ -184,6 +191,7 @@ int luaopen_registry(lua_State* L)
 	static luaL_Reg func[] = {
 		{ "current_user", registry::current_user },
 		{ "local_machine", registry::local_machine },
+		{ "del", registry::del },
 		{ NULL, NULL }
 	};
 	static luaL_Reg rkey_mt[] = {
