@@ -237,6 +237,8 @@ namespace locvar
 
 	void params(DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string)
 	{
+		std::set<std::string> paramlist;
+
 		{
 			locvar::guard _tmp_guard_((0x10000 | (int)CC_GUIID_YDWETimerStartMultiple), name, handle_string);
 
@@ -256,6 +258,7 @@ namespace locvar
 						{
 						case CC_GUIID_YDWESetAnyTypeLocalVariable:
 							{
+								paramlist.insert((const char*)&GetGUIVar_Value(nItemClass, 1));
 								BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, i+1);
 								locvar::set(nItemClass, OutClass, NewName);
 								break; 
@@ -277,6 +280,11 @@ namespace locvar
 
 		for each (auto it in register_var[name])
 		{
+			if (paramlist.find(it.first) != paramlist.end())
+			{
+				continue;
+			}
+
 			auto uiit = trigger_data_ui.find(it.first);
 			if (uiit == trigger_data_ui.end())
 			{
