@@ -182,7 +182,7 @@ namespace locvar
 			if (g_local_in_mainproc)
 			{
 				g_bDisableSaveLoadSystem = FALSE;
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, "YDL_LOCALVAR_STEPS")", SStrHash("TriggerRunSteps"));
+				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, " YDL_LOCALVAR_STEPS ")", SStrHash("TriggerRunSteps"));
 				PUT_CONST(buff, 1);
 			}
 		}
@@ -214,12 +214,12 @@ namespace locvar
 			g_bDisableSaveLoadSystem = FALSE;
 
 			CC_PutBegin();
-			BLZSStrPrintf(buff, 260, "local integer "YDL_LOCALVAR_STEPS" = YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X)", SStrHash("GlobalsTriggerRunSteps"));
+			BLZSStrPrintf(buff, 260, "local integer " YDL_LOCALVAR_STEPS " = YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X)", SStrHash("GlobalsTriggerRunSteps"));
 			PUT_CONST(buff, 1);
-			PUT_CONST("set "YDL_LOCALVAR_STEPS" = "YDL_LOCALVAR_STEPS" + 3", 1);
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, "YDL_LOCALVAR_STEPS")", SStrHash("GlobalsTriggerRunSteps"));
+			PUT_CONST("set " YDL_LOCALVAR_STEPS " = " YDL_LOCALVAR_STEPS " + 3", 1);
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, " YDL_LOCALVAR_STEPS ")", SStrHash("GlobalsTriggerRunSteps"));
 			PUT_CONST(buff, 1);
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, "YDL_LOCALVAR_STEPS")", SStrHash("TriggerRunSteps"));
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, " YDL_LOCALVAR_STEPS ")", SStrHash("TriggerRunSteps"));
 			PUT_CONST(buff, 1);
 			CC_PutEnd();
 		}
@@ -229,8 +229,8 @@ namespace locvar
 	{
 		if (g_local_in_mainproc)
 		{
-			CC_PutBegin();
-			PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetTriggeringTrigger())*"YDL_LOCALVAR_STEPS")", 1);
+			CC_PutBegin(); 
+			PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetTriggeringTrigger())*" YDL_LOCALVAR_STEPS ")", 1);
 			CC_PutEnd();
 		}
 	}
