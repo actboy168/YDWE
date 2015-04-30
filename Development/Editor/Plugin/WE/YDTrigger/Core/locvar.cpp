@@ -102,7 +102,7 @@ namespace locvar
 
 			if (g_local_in_mainproc)
 			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*"YDL_LOCALVAR_STEPS", 0x%08X, ", type_name, SStrHash(var_name));
+				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*" YDL_LOCALVAR_STEPS ", 0x%08X, ", type_name, SStrHash(var_name));
 			}
 			else
 			{
