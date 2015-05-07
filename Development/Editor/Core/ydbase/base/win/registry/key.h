@@ -49,14 +49,16 @@ namespace base { namespace registry {
 		basic_key(hkey_type keybase)
 			: m_keybase(keybase)
 			, m_keypath()
+			, m_keyname()
 			, m_key(NULL)
 			, m_access(open_access::read)
 			, m_valuemap()
 		{ }
 
-		basic_key(hkey_type keybase, const string_type& keypath)
+		basic_key(hkey_type keybase, const string_type& keypath, const string_type& keyname)
 			: m_keybase(keybase)
 			, m_keypath(keypath)
+			, m_keyname(keyname)
 			, m_key(NULL)
 			, m_access(open_access::read)
 			, m_valuemap()
@@ -65,6 +67,7 @@ namespace base { namespace registry {
 		basic_key(class_type const& rhs)
 			: m_keybase(rhs.m_keybase)
 			, m_keypath(rhs.m_keypath)
+			, m_keyname(rhs.m_keyname)
 			, m_key(rhs.m_key)
 			, m_access(rhs.m_access)
 			, m_valuemap()
@@ -89,6 +92,7 @@ namespace base { namespace registry {
 		{
 			std::swap(m_keybase, rhs.m_keybase);
 			std::swap(m_keypath, rhs.m_keypath);
+			std::swap(m_keyname, rhs.m_keyname);
 			std::swap(m_key, rhs.m_key);
 			std::swap(m_access, rhs.m_access);
 			std::swap(m_valuemap, rhs.m_valuemap);
@@ -97,7 +101,18 @@ namespace base { namespace registry {
 		class_type sub_key(const string_type& sub_key_name) const
 		{
 			static const char_type s_separator[] = { '\\' };
-			return class_type(m_keybase, m_keypath.empty() ? sub_key_name : m_keypath + s_separator + sub_key_name);
+			if (!m_keypath.empty())
+			{
+				return class_type(m_keybase, m_keypath + s_separator + m_keyname, sub_key_name);
+			}
+			else if (!m_keyname.empty())
+			{
+				return class_type(m_keybase, m_keyname, sub_key_name);
+			}
+			else
+			{
+				return class_type(m_keybase, string_type(), sub_key_name);
+			}
 		}
 
 		value_type& value(const string_type& value_name)
@@ -137,8 +152,30 @@ namespace base { namespace registry {
 			}
 		}
 
-	protected:
+		bool del()
+		{
+			hkey_type key = open_key_(m_keybase, m_keypath.c_str(), open_access::write, open_option::fail_if_not_exists);
+			if (key == NULL)
+			{
+				return false;
+			}
+			result_type res = traits_type::delete_tree(key, m_keyname.c_str());
+			bool suc = false;
+			switch (res)
+			{
+			case ERROR_SUCCESS:
+				suc = true;
+				break;
+			default:
+			case ERROR_FILE_NOT_FOUND:
+				suc = false;
+				break;
+			}
+			traits_type::close(key);
+			return suc;
+		}
 
+	protected:
 		bool open_key_(open_access::t access)
 		{
 			hkey_type key = NULL;
@@ -154,12 +191,12 @@ namespace base { namespace registry {
 					else
 					{
 						close_key_();
-						key = open_key_(m_keybase, m_keypath, access, option);
+						key = open_key_(m_keybase, key_name_(), access, option);
 					}
 				}
 				else
 				{
-					key = open_key_(m_keybase, m_keypath, access, option);
+					key = open_key_(m_keybase, key_name_(), access, option);
 				}
 			}
 			else
@@ -172,7 +209,7 @@ namespace base { namespace registry {
 				}
 				else
 				{
-					key = open_key_(m_keybase, m_keypath, access, option);
+					key = open_key_(m_keybase, key_name_(), access, option);
 				}
 			}
 
@@ -181,6 +218,12 @@ namespace base { namespace registry {
 			m_key = key;
 			m_access = access;
 			return true;
+		}
+
+		string_type key_name_()
+		{
+			static const char_type s_separator[] = { '\\' };
+			return m_keypath.empty() ? m_keyname : m_keypath + s_separator + m_keyname;
 		}
 
 		void close_key_()
@@ -225,6 +268,7 @@ namespace base { namespace registry {
 	protected:
 		hkey_type      m_keybase;
 		string_type    m_keypath;
+		string_type    m_keyname;
 		hkey_type      m_key;
 		open_access::t m_access;
 		value_map_type m_valuemap;

@@ -68,6 +68,12 @@ namespace base { namespace path {
 		case DIR_COMMON_DESKTOP:
 			ENSURE(::SHGetFolderPathW(NULL, CSIDL_COMMON_DESKTOPDIRECTORY, NULL, SHGFP_TYPE_CURRENT, buffer));
 			return std::move(boost::filesystem::path(buffer));
+		case DIR_PERSONAL:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(boost::filesystem::path(buffer));
+		case DIR_MYPICTURES:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_MYPICTURES, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(boost::filesystem::path(buffer));
 		case DIR_USER_QUICK_LAUNCH:
 			return std::move(detail::quick_launch_path(false));
 		case DIR_DEFAULT_USER_QUICK_LAUNCH:

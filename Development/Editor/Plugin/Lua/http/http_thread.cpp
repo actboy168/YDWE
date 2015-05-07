@@ -82,7 +82,6 @@ namespace http
 			options.insert(avhttp::http_options::request_method, "POST");
 			options.insert(avhttp::http_options::request_body, body);
 			options.insert(avhttp::http_options::content_length, std::to_string(body.size()));
-			
 			m_stream.request_options(options);
 			get(url);
 		}

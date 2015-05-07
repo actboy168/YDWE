@@ -163,7 +163,7 @@ local YDWE_MENU_ID_WARCRAFT3 = YDWE_MENU_ID_BASE + 9
 --	main_window_handle - 主窗口的handle
 --	main_menu_handle - 主菜单的handle
 -- 返回值：一律返回0
-event.register(event.EVENT_INIT_MENU, false, function (event_data)
+function event.EVENT_INIT_MENU(event_data)
 	log.debug("********************* on menuinit start *********************")
 
 	-- 处理一下Tile Limit Breaker插件
@@ -198,13 +198,13 @@ event.register(event.EVENT_INIT_MENU, false, function (event_data)
 	log.debug("********************* on menuinit end *********************")
 
 	return 0
-end)
+end
 
 -- 当WE的窗口过程收到消息时执行
 -- event_data - 事件参数，table，包含以下值
 --	handle, message, wparam, lparam，具体不解释
 -- 返回非负数会调用原窗口函数。返回负数则直接吃掉消息
-event.register(event.EVENT_WINDOW_MESSAGE, false,  function (event_data)
+function event.EVENT_WINDOW_MESSAGE(event_data)
 	-- 只处理菜单信息
 	if event_data.message == gui.WM_COMMAND then
 		-- 菜单ID（低16位）
@@ -235,4 +235,4 @@ event.register(event.EVENT_WINDOW_MESSAGE, false,  function (event_data)
 	end
 
 	return 0
-end)
+end

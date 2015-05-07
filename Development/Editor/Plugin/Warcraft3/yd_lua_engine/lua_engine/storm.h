@@ -2,7 +2,6 @@
 
 #include <Windows.h>
 #include <cstdint>
-#include <base/config.h>
 #include <base/util/singleton.h>
 
 namespace base { namespace warcraft3 {

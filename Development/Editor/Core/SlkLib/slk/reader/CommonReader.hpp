@@ -10,7 +10,7 @@ namespace slk { namespace reader { namespace utility {
 	void each_line(base::buffer_reader& reader, std::function<void(std::string_view&)> callback);
 
 	template <class TableT>
-	void ini_read(base::buffer_reader& reader, TableT& table)
+	void ini_read(base::buffer_reader& reader, TableT& table, bool create_if_not_exists)
 	{
 		typename TableT::mapped_type* object = nullptr;
 		remove_bom(reader);
@@ -29,7 +29,23 @@ namespace slk { namespace reader { namespace utility {
 				size_t n = line.find_first_of(']');
 				if (n != std::string_view::npos)
 				{
-					object = &table[trim_copy(line.begin() + 1, line.begin() + n).to_string()];
+					std::string_view section = trim_copy(line.begin() + 1, line.begin() + n);
+					if (create_if_not_exists)
+					{
+						object = &table[section.to_string()];
+					}
+					else
+					{
+						auto it = table.find(section.to_string());
+						if (it != table.end())
+						{
+							object = &(it->second);
+						}
+						else
+						{
+							object = 0;
+						}
+					}
 				}
 			}
 			else

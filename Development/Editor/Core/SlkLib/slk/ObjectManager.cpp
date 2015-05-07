@@ -92,6 +92,12 @@ namespace slk
 
 				"Units\\ItemStrings.txt",
 				"Units\\ItemFunc.txt",
+
+				"UI\\MiscData.txt",
+				"Units\\MiscData.txt",
+				"Units\\MiscGame.txt",
+				"war3mapmisc.txt",
+
 			};
 
 			return list[type];
@@ -118,10 +124,10 @@ namespace slk
 	}
 
 	template <class _Reader, class _Table>
-	void TableRead(_Table& table, base::buffer&& buf)
+	void TableRead(_Table& table, base::buffer&& buf, bool create_if_not_exists)
 	{
 		base::buffer_reader reader(buf);
-		_Reader::Read(reader, table);
+		_Reader::Read(reader, table, create_if_not_exists);
 	}
 
 	ObjectManager::ObjectManager(InterfaceStorm& that)
@@ -157,7 +163,7 @@ namespace slk
 			case OBJ_TYPE::ITEM:
 			case OBJ_TYPE::DESTRUCTABLE:
 			case OBJ_TYPE::BUFF:
-				TableRead<ObjReader>(table, load_file(detail::FileList(type)));
+				TableRead<ObjReader>(table, load_file(detail::FileList(type)), true);
 				break;
 			default:
 				throw base::exception("Unknown object type %d.", type);
@@ -181,7 +187,7 @@ namespace slk
 			case OBJ_TYPE::DOODAD:
 			case OBJ_TYPE::ABILITY:
 			case OBJ_TYPE::UPGRADE:
-				TableRead<ObjReader>(table, load_file(detail::FileList(type)));
+				TableRead<ObjReader>(table, load_file(detail::FileList(type)), true);
 				break;
 			default:
 				throw base::exception("Unknown object type %d.", type);
@@ -213,7 +219,7 @@ namespace slk
 			case SLK_TYPE::UNIT_ABILITIES:
 			case SLK_TYPE::UNIT_WEAPONS:
 			case SLK_TYPE::ITEM_DATA:
-				TableRead<SlkReader>(table, load_file(detail::FileList(type)));
+				TableRead<SlkReader>(table, load_file(detail::FileList(type)), true);
 				break;
 			default:
 				throw base::exception("Unknown slk type %d.", type);
@@ -246,6 +252,22 @@ namespace slk
 			case TXT_TYPE::UNIT_NIGHTELF_FUNC:
 			case TXT_TYPE::UNIT_ORC_FUNC:
 			case TXT_TYPE::UNIT_UNDEAD_FUNC:
+			case TXT_TYPE::UPGRADE_CAMPAIG_STRINGS:
+			case TXT_TYPE::UPGRADE_HUMAN_STRINGS:
+			case TXT_TYPE::UPGRADE_NEUTRAL_STRINGS:
+			case TXT_TYPE::UPGRADE_NIGHTELF_STRINGS:
+			case TXT_TYPE::UPGRADE_ORC_STRINGS:
+			case TXT_TYPE::UPGRADE_UNDEAD_STRINGS:
+			case TXT_TYPE::UPGRADE_CAMPAIG_FUNC:
+			case TXT_TYPE::UPGRADE_HUMAN_FUNC:
+			case TXT_TYPE::UPGRADE_NIGHTELF_FUNC:
+			case TXT_TYPE::UPGRADE_ORC_FUNC:
+			case TXT_TYPE::UPGRADE_UNDEAD_FUNC:
+			case TXT_TYPE::UPGRADE_NEUTRAL_FUNC:
+			case TXT_TYPE::ITEM_STRINGS:
+			case TXT_TYPE::ITEM_FUNC:
+				TableRead<TxtReader>(table, load_file(detail::FileList(type)), false);
+				break;
 			case TXT_TYPE::ABILITY_CAMPAIG_STRINGS:
 			case TXT_TYPE::ABILITY_COMMON_STRINGS:
 			case TXT_TYPE::ABILITY_HUMAN_STRINGS:
@@ -262,21 +284,11 @@ namespace slk
 			case TXT_TYPE::ABILITY_ORC_FUNC:
 			case TXT_TYPE::ABILITY_UNDEAD_FUNC:
 			case TXT_TYPE::ABILITY_ITEM_FUNC:
-			case TXT_TYPE::UPGRADE_CAMPAIG_STRINGS:
-			case TXT_TYPE::UPGRADE_HUMAN_STRINGS:
-			case TXT_TYPE::UPGRADE_NEUTRAL_STRINGS:
-			case TXT_TYPE::UPGRADE_NIGHTELF_STRINGS:
-			case TXT_TYPE::UPGRADE_ORC_STRINGS:
-			case TXT_TYPE::UPGRADE_UNDEAD_STRINGS:
-			case TXT_TYPE::UPGRADE_CAMPAIG_FUNC:
-			case TXT_TYPE::UPGRADE_HUMAN_FUNC:
-			case TXT_TYPE::UPGRADE_NIGHTELF_FUNC:
-			case TXT_TYPE::UPGRADE_ORC_FUNC:
-			case TXT_TYPE::UPGRADE_UNDEAD_FUNC:
-			case TXT_TYPE::UPGRADE_NEUTRAL_FUNC:
-			case TXT_TYPE::ITEM_STRINGS:
-			case TXT_TYPE::ITEM_FUNC:
-				TableRead<TxtReader>(table, load_file(detail::FileList(type)));
+			case TXT_TYPE::MISC_UI_DATA:
+			case TXT_TYPE::MISC_UNITS_DATA:
+			case TXT_TYPE::MISC_UNITS_GAME:
+			case TXT_TYPE::MISC_WAR3MAP:
+				TableRead<TxtReader>(table, load_file(detail::FileList(type)), true);
 				break;
 			default:
 				throw base::exception("Unknown txt type %d.", type);
@@ -304,7 +316,7 @@ namespace slk
 			case META_SLK_TYPE::UPGRADE:
 			case META_SLK_TYPE::DOODAD:
 			case META_SLK_TYPE::DESTRUCTABLE:
-				TableRead<MetaReader>(table, load_file(detail::FileList(type)));
+				TableRead<MetaReader>(table, load_file(detail::FileList(type)), true);
 				break;
 			default:
 				throw base::exception("Unknown MetaSlk type %d.", type);
@@ -424,6 +436,16 @@ namespace slk
 		return true;
 	}
 
+	bool ObjectManager::load_misc(SlkTable& table)
+	{
+		load(TXT_TYPE::MISC_UI_DATA, table);
+		load(TXT_TYPE::MISC_UNITS_DATA, table);
+		load(TXT_TYPE::MISC_UNITS_GAME, table);
+		load(TXT_TYPE::MISC_WAR3MAP, table);
+
+		return true;
+	}
+	
 	bool ObjectManager::load_base(ROBJECT_TYPE::ENUM type, SlkTable& table)
 	{
 		switch (type)
@@ -549,7 +571,7 @@ namespace slk
 	bool ObjectManager::load(const char* filename, SlkTable& table)
 	{
 		try {
-			TableRead<SlkReader>(table, load_file(filename));	
+			TableRead<SlkReader>(table, load_file(filename), true);	
 		}
 		catch (base::exception const&) {
 			return false;
@@ -571,6 +593,8 @@ namespace slk
 		case ROBJECT_TYPE::ABILITY:
 		case ROBJECT_TYPE::UPGRADE:
 			return detail::ObjectManagerLoadObjectTable<ObjectWithOptinal>(*this, type, table);
+		case ROBJECT_TYPE::MISC:
+			return load_misc(table);
 		default:
 			assert(false);
 			return false;

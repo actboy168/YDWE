@@ -6,7 +6,7 @@
 VOID ChangeGUIType_Set(DWORD This, DWORD EDX, DWORD unknow, int from, int to, size_t offset)
 {
 	char* type = (char*)&GetGUIVar_Value(This, from);
-	if ((type != NULL) && (BLZSStrLen(type) > offset))
+	if ((type != NULL) && (BLZSStrLen(type) > (int)offset))
 		SetGUIType(This, EDX, to, type+offset, unknow);
 }
 

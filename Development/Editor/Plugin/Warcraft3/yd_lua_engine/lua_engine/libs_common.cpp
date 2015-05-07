@@ -44,7 +44,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				}
 			}
 
-			ls->pushunsigned((uint32_t)(uintptr_t)nf);
+			ls->pushinteger((uint32_t)(uintptr_t)nf);
 			ls->pushcclosure((lua::cfunction)jass_call_closure, 1);
 			return 1;
 		}

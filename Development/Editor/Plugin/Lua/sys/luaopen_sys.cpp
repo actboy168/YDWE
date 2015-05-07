@@ -340,6 +340,20 @@ namespace NLuaAPI { namespace NSys {
 		lua_pushboolean(L, 1);
 		return 1;
 	}
+	static int LuaFindWindow(base::win::process& p, const std::wstring& name)
+	{
+		HWND hwnd = NULL;
+		while (NULL != (hwnd = FindWindowExW(0, hwnd, NULL, name.c_str())))
+		{
+			DWORD pid = 0;
+			GetWindowThreadProcessId(hwnd, &pid);
+			if (pid == p.id())
+			{
+				return (int)hwnd;
+			}
+		}
+		return 0;
+	}
 }}
 
 extern "C" __declspec(dllexport) int luaopen_sys(lua_State* L);
@@ -359,6 +373,7 @@ int luaopen_sys(lua_State *pState)
 			.def("create",      &NLuaAPI::NSys::LuaProcessCreate)
 			.def("wait",        (uint32_t (base::win::process::*)())&base::win::process::wait)
 			.def("close",       &base::win::process::close)
+			.def("id",          &base::win::process::id)
 		,
 
 		def("open_pipe", &NLuaAPI::NSys::LuaOpenPipe),
@@ -368,7 +383,8 @@ int luaopen_sys(lua_State *pState)
 		def("get_module_version_info", &NLuaAPI::NSys::LuaGetVersionNumberString),
 		def("get_clipboard_text", &NLuaAPI::NSys::LuaSysGetClipboardText),
 		def("set_clipboard_text", &NLuaAPI::NSys::LuaSysSetClipboardText),
-		def("sleep", &NLuaAPI::NSys::LuaSysSleep)
+		def("sleep", &NLuaAPI::NSys::LuaSysSleep),
+		def("find_window", &NLuaAPI::NSys::LuaFindWindow)
 	];
 
 	module(pState, "process")

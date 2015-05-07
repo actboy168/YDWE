@@ -125,11 +125,6 @@ namespace base { namespace lua {
 			luaL_checktype(self(), narg, t);
 		}
 
-		inline lua_Unsigned checkunsigned(int narg)
-		{
-			return luaL_checkunsigned(self(), narg);
-		}
-
 		inline lua_Integer checkinteger(int narg)
 		{
 			return luaL_checkinteger(self(), narg);
@@ -160,11 +155,6 @@ namespace base { namespace lua {
 			return lua_tointegerx(self(), idx, isnum);
 		}
 
-		inline lua_Unsigned tounsignedx(int idx, int *isnum)
-		{
-			return lua_tounsignedx(self(), idx, isnum);
-		}
-
 		inline lua_Number tonumber(int idx)
 		{
 			return lua_tonumberx(self(), idx, NULL);
@@ -173,11 +163,6 @@ namespace base { namespace lua {
 		inline lua_Integer tointeger(int idx)
 		{
 			return lua_tointegerx(self(), idx, NULL);
-		}
-
-		inline lua_Unsigned tounsigned(int idx)
-		{
-			return lua_tounsignedx(self(), idx, NULL);
 		}
 
 		inline int toboolean(int idx)
@@ -238,11 +223,6 @@ namespace base { namespace lua {
 		inline void pushinteger(lua_Integer n)
 		{
 			lua_pushinteger(self(), n);
-		}
-
-		inline void pushunsigned(lua_Unsigned n)
-		{
-			lua_pushunsigned(self(), n);
 		}
 
 		inline const char* pushlstring(const char *s, size_t l)

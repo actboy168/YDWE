@@ -35,9 +35,6 @@
     <ClInclude Include="minizip\crypt.h">
       <Filter>minizip\inc</Filter>
     </ClInclude>
-    <ClInclude Include="minizip\zlib.h">
-      <Filter>minizip\inc</Filter>
-    </ClInclude>
     <ClInclude Include="minizip\ioapi.h">
       <Filter>minizip\inc</Filter>
     </ClInclude>
@@ -48,9 +45,6 @@
       <Filter>minizip\inc</Filter>
     </ClInclude>
     <ClInclude Include="minizip\unzip.h">
-      <Filter>minizip\inc</Filter>
-    </ClInclude>
-    <ClInclude Include="minizip\zconf.h">
       <Filter>minizip\inc</Filter>
     </ClInclude>
     <ClInclude Include="minizip\zip.h">

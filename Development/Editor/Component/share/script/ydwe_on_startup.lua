@@ -155,7 +155,7 @@ end
 -- event_data - 事件参数
 -- 	暂无内容
 -- 返回值：返回非负数表示成功，负数表示失败
-event.register(event.EVENT_WE_START, false, function (event_data)
+function event.EVENT_WE_START(event_data)
 	log.debug("********************* on startup start *********************")
 	
 	-- 读取版本
@@ -198,12 +198,12 @@ event.register(event.EVENT_WE_START, false, function (event_data)
 	log.debug("********************* on startup end *********************")
 
 	return 0
-end)
+end
 
 -- 本函数在编辑器关闭时调用，可以在本函数中作一些清理工作
 -- event_data - 事件参数。table类型，暂时没有内容。
 -- 返回值：一定要返回0
-event.register(event.EVENT_WE_EXIT, false, function (event_data)
+function event.EVENT_WE_EXIT(event_data)
 	log.debug("********************* on exit start *********************")
 
 	plugin:unload_all()
@@ -211,7 +211,7 @@ event.register(event.EVENT_WE_EXIT, false, function (event_data)
 	log.debug("********************* on exit end *********************")
 
 	return 0
-end)
+end
 
 -- 本函数在测试地图时使用
 -- event_data - 事件参数，table，包含以下值
@@ -219,7 +219,7 @@ end)
 --	application_name - 应用程序名，字符串对象
 --	command_line - 命令行，字符串对象
 -- 返回：非负表示成功，负数表示失败。如成功且无特殊情况原则上应该返回0
-event.register(event.EVENT_TEST_MAP, false, function (event_data)
+function event.EVENT_TEST_MAP(event_data)
 	log.debug("********************* on test start *********************")
 
 	-- 刷新配置数据
@@ -260,16 +260,16 @@ event.register(event.EVENT_TEST_MAP, false, function (event_data)
 
 	log.debug("********************* on test end *********************")
 	if result then return 0 else return -1 end
-end)
+end
 
 -- 在WE载入MSS引擎解码器时调用，过滤载入的dll
 -- event_data - 事件参数，table，包含以下值
 --	library_name - 解码器路径，字符串
 -- 返回非负数表示允许载入，负数表示不允许。无特殊情况一般返回0
 
-event.register(event.EVENT_MSS_LOAD,  false, function (event_data)
+function event.EVENT_MSS_LOAD(event_data)
 	log.debug("Loading provider " .. ansi_to_utf8(event_data.library_name))
 
 	-- 全部放行
 	return 0
-end)
+end

@@ -156,7 +156,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
-		int result = jass_call_native_function(ls, (const jass::func_value*)ls->tounsigned(lua_upvalueindex(1)));
+		int result = jass_call_native_function(ls, (const jass::func_value*)ls->tointeger(lua_upvalueindex(1)));
 
 		if (lua::allow_yield(ls))
 		{

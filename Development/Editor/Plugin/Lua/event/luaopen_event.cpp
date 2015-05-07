@@ -98,6 +98,32 @@ namespace NYDWE {
 		}
 	}
 
+	int event_index(lua_State* L)
+	{
+		lua_pushnil(L);
+		return 1;
+	}
+
+	int event_newindex(lua_State* L)
+	{
+		const char* name = lua_tostring(L, 2);
+		lua_pushstring(L, "eid");
+		lua_rawget(L, 1);
+		lua_pushvalue(L, 2);
+		lua_rawget(L, -2);
+		if (!lua_isnil(L, -1))
+		{
+			EVENT_ID evenetid = (EVENT_ID)lua_tointeger(L, -1);
+			LuaRegisterEvent(L, evenetid, false, luabind::object(luabind::from_stack(L, 3)));
+			lua_pushboolean(L, 1);
+		}
+		else
+		{
+			lua_pushboolean(L, 0);
+		}
+		return 1;
+	}
+
 	void WeMessageShow(const char *message, int flag)
 	{
 		base::fast_call<void>(0x004D5900, message, flag);
@@ -106,36 +132,50 @@ namespace NYDWE {
 	void SetupEvent();
 }
 
-int luaopen_event(lua_State *pState)
+int luaopen_event(lua_State* L)
 {
 	NYDWE::SetupEvent();
 
+	lua_newtable(L);
+	{
+		lua_pushstring(L, "eid");
+		lua_newtable(L);
+		{
+#define REGISTER_EID(name) \
+	lua_pushstring(L, #name); \
+	lua_pushinteger(L, NYDWE:: ## name); \
+	lua_rawset(L, -3);	
+			REGISTER_EID(EVENT_WE_START);
+			REGISTER_EID(EVENT_WE_EXIT);
+			REGISTER_EID(EVENT_PRE_SAVE_MAP);
+			REGISTER_EID(EVENT_SAVE_MAP);
+			REGISTER_EID(EVENT_TEST_MAP);
+			REGISTER_EID(EVENT_INIT_MENU);
+			REGISTER_EID(EVENT_MSS_LOAD);
+			REGISTER_EID(EVENT_WINDOW_MESSAGE);
+			REGISTER_EID(EVENT_DIALOG_MESSAGE);
+			REGISTER_EID(EVENT_NEW_OBJECT_ID);
+#undef REGISTER_EID
+		}
+		lua_rawset(L, -3);
+
+		lua_newtable(L);
+		{
+			lua_pushstring(L, "__index");
+			lua_pushcclosure(L, NYDWE::event_index, 0);
+			lua_rawset(L, -3);
+			lua_pushstring(L, "__newindex");
+			lua_pushcclosure(L, NYDWE::event_newindex, 0);
+			lua_rawset(L, -3);
+		}
+		lua_setmetatable(L, -2);
+	}
+	lua_setglobal(L, "event");
+
 	using namespace luabind;
-
-	module(pState, "event")
-	[
-		def("register", &NYDWE::LuaRegisterEvent)		
-	];
-
-	module(pState, "we")
+	module(L, "we")
 	[
 		def("message_show", &NYDWE::WeMessageShow)
 	];
-
-	lua_getglobal(pState, "event");
-	object constantTable(from_stack(pState, -1));
-
-#define LUA_AREA_CONSTANT(name) constantTable[#name] = NYDWE:: ## name
-	LUA_AREA_CONSTANT(EVENT_WE_START);
-	LUA_AREA_CONSTANT(EVENT_WE_EXIT);	
-	LUA_AREA_CONSTANT(EVENT_PRE_SAVE_MAP);
-	LUA_AREA_CONSTANT(EVENT_SAVE_MAP);
-	LUA_AREA_CONSTANT(EVENT_TEST_MAP);
-	LUA_AREA_CONSTANT(EVENT_INIT_MENU);
-	LUA_AREA_CONSTANT(EVENT_MSS_LOAD);
-	LUA_AREA_CONSTANT(EVENT_WINDOW_MESSAGE);
-	LUA_AREA_CONSTANT(EVENT_DIALOG_MESSAGE);	
-	LUA_AREA_CONSTANT(EVENT_NEW_OBJECT_ID);
-
 	return 0;
 }

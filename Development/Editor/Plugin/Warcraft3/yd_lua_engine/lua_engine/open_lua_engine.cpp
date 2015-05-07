@@ -17,6 +17,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int jass_slk(lua::state* ls);
 	int jass_storm(lua::state* ls);
 	int jass_console(lua::state* ls);
+	int jass_debug(lua::state* ls);
 	int fix_math(lua::state* ls);
 
 	void register_preload_lib(lua::state* ls, const char *name, lua::cfunction f)
@@ -54,6 +55,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		register_preload_lib(ls, "jass.slk",     jass_slk);
 		register_preload_lib(ls, "jass.storm",   jass_storm);
 		register_preload_lib(ls, "jass.console", jass_console);
+		register_preload_lib(ls, "jass.debug",   jass_debug);
 
 		jreal_make_mt(ls->self());
 		jhandle_ud_make_mt(ls->self());

@@ -182,6 +182,9 @@
     <ClCompile Include="lua_engine\libs_console.cpp">
       <Filter>lua_engine\library</Filter>
     </ClCompile>
+    <ClCompile Include="lua_engine\libs_debug.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua_engine\lua_loader.h">
@@ -191,9 +194,6 @@
       <Filter>lua_engine\main</Filter>
     </ClInclude>
     <ClInclude Include="lua_engine\storm.h">
-      <Filter>lua_engine\misc</Filter>
-    </ClInclude>
-    <ClInclude Include="lua_engine\slk_interface_storm.h">
       <Filter>lua_engine\misc</Filter>
     </ClInclude>
     <ClInclude Include="lua_engine\libs_runtime.h">

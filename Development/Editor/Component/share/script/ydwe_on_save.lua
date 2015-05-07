@@ -113,7 +113,7 @@ end
 -- event_data - 事件参数。table类型，包含了以下成员
 --	map_path - 保存的地图路径，字符串类型
 -- 返回值：0和正数表示保存成功，负数表示保存失败。如果成功编译，一般返回0
-event.register(event.EVENT_SAVE_MAP, false, function (event_data)
+function event.EVENT_SAVE_MAP(event_data)
 	log.debug("********************* on save start *********************")
 
 	-- 刷新配置数据
@@ -181,12 +181,12 @@ event.register(event.EVENT_SAVE_MAP, false, function (event_data)
 	log.debug("********************* on save end *********************")
 
 	if result then return 0 else return -1 end
-end)
+end
 
 -- 本函数当保存地图时调用
 -- event_data - 事件参数。table类型，包含了以下成员
 --	map_path - 保存的地图路径，字符串类型
-event.register(event.EVENT_PRE_SAVE_MAP, false, function (event_data)
+function event.EVENT_PRE_SAVE_MAP(event_data)
 	log.debug("********************* on pre_save start *********************")
 	local map_path = fs.path(event_data.map_path)
 	log.trace("Saving " .. map_path:string())
@@ -211,4 +211,4 @@ event.register(event.EVENT_PRE_SAVE_MAP, false, function (event_data)
 		
 	log.debug("********************* on pre_save end *********************")
 	return 0
-end)
+end

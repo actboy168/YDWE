@@ -291,7 +291,7 @@ namespace slk
 
 	}
 
-	void SlkReader::Read(base::buffer_reader& reader, SlkTable& table)
+	void SlkReader::Read(base::buffer_reader& reader, SlkTable& table, bool /*create_if_not_exists*/)
 	{
 		if (!reader.read_ptr<SLK_HEADER>()->IsValid())
 		{
