@@ -30,7 +30,7 @@ namespace base { namespace registry {
 	template <typename C>
 	inline basic_key<C> operator/(const predefined_key& lhs, const C* rhs)
 	{
-		return basic_key<C>(lhs.handle(), basic_key<C>::string_type(), rhs);
+		return basic_key<C>(lhs.handle(), basic_key<C>::string_type(), rhs, open_access::none);
 	}
 
 	inline predefined_key current_user()

@@ -25,9 +25,11 @@ namespace base { namespace registry {
 	{
 		enum open_access
 		{
+			none = 0,
 			read = KEY_READ,
 			write = KEY_READ | KEY_WRITE,
-			none = read,
+			w32key = KEY_WOW64_32KEY,
+			w64key = KEY_WOW64_64KEY,
 		};
 		typedef open_access t;
 	}
@@ -46,21 +48,23 @@ namespace base { namespace registry {
 		typedef typename traits_type::result_type                  result_type;
 		typedef std::map<string_type, std::unique_ptr<value_type>> value_map_type;
 
-		basic_key(hkey_type keybase)
+		basic_key(hkey_type keybase, open_access::t accessfix = open_access::none)
 			: m_keybase(keybase)
 			, m_keypath()
 			, m_keyname()
 			, m_key(NULL)
 			, m_access(open_access::read)
+			, m_accessfix(accessfix)
 			, m_valuemap()
 		{ }
 
-		basic_key(hkey_type keybase, const string_type& keypath, const string_type& keyname)
+		basic_key(hkey_type keybase, const string_type& keypath, const string_type& keyname, open_access::t accessfix = open_access::none)
 			: m_keybase(keybase)
 			, m_keypath(keypath)
 			, m_keyname(keyname)
 			, m_key(NULL)
 			, m_access(open_access::read)
+			, m_accessfix(accessfix)
 			, m_valuemap()
 		{ }
 
@@ -70,6 +74,7 @@ namespace base { namespace registry {
 			, m_keyname(rhs.m_keyname)
 			, m_key(rhs.m_key)
 			, m_access(rhs.m_access)
+			, m_accessfix(rhs.m_accessfix)
 			, m_valuemap()
 		{ }
 
@@ -95,6 +100,7 @@ namespace base { namespace registry {
 			std::swap(m_keyname, rhs.m_keyname);
 			std::swap(m_key, rhs.m_key);
 			std::swap(m_access, rhs.m_access);
+			std::swap(m_accessfix, rhs.m_accessfix);
 			std::swap(m_valuemap, rhs.m_valuemap);
 		}
 
@@ -103,15 +109,15 @@ namespace base { namespace registry {
 			static const char_type s_separator[] = { '\\' };
 			if (!m_keypath.empty())
 			{
-				return class_type(m_keybase, m_keypath + s_separator + m_keyname, sub_key_name);
+				return class_type(m_keybase, m_keypath + s_separator + m_keyname, sub_key_name, m_accessfix);
 			}
 			else if (!m_keyname.empty())
 			{
-				return class_type(m_keybase, m_keyname, sub_key_name);
+				return class_type(m_keybase, m_keyname, sub_key_name, m_accessfix);
 			}
 			else
 			{
-				return class_type(m_keybase, string_type(), sub_key_name);
+				return class_type(m_keybase, string_type(), sub_key_name, m_accessfix);
 			}
 		}
 
@@ -154,7 +160,7 @@ namespace base { namespace registry {
 
 		bool del()
 		{
-			hkey_type key = open_key_(m_keybase, m_keypath.c_str(), open_access::write, open_option::fail_if_not_exists);
+			hkey_type key = open_key_(m_keybase, m_keypath.c_str(), open_access::write | m_accessfix, open_option::fail_if_not_exists);
 			if (key == NULL)
 			{
 				return false;
@@ -191,12 +197,12 @@ namespace base { namespace registry {
 					else
 					{
 						close_key_();
-						key = open_key_(m_keybase, key_name_(), access, option);
+						key = open_key_(m_keybase, key_name_(), access | m_accessfix, option);
 					}
 				}
 				else
 				{
-					key = open_key_(m_keybase, key_name_(), access, option);
+					key = open_key_(m_keybase, key_name_(), access | m_accessfix, option);
 				}
 			}
 			else
@@ -209,7 +215,7 @@ namespace base { namespace registry {
 				}
 				else
 				{
-					key = open_key_(m_keybase, key_name_(), access, option);
+					key = open_key_(m_keybase, key_name_(), access | m_accessfix, option);
 				}
 			}
 
@@ -233,7 +239,7 @@ namespace base { namespace registry {
 			m_access = open_access::read;
 		}
 
-		static hkey_type open_key_(hkey_type key_parent, const string_type& key_name, open_access::t access_mask, open_option::t option)
+		static hkey_type open_key_(hkey_type key_parent, const string_type& key_name, REGSAM access_mask, open_option::t option)
 		{
 			if (option == open_option::fail_if_not_exists)
 			{
@@ -271,6 +277,7 @@ namespace base { namespace registry {
 		string_type    m_keyname;
 		hkey_type      m_key;
 		open_access::t m_access;
+		open_access::t m_accessfix;
 		value_map_type m_valuemap;
 	};
 
