@@ -35,10 +35,15 @@ namespace luawarp { namespace registry {
 
 	int rkey_create(lua_State* L, int mt_idx, key_w::hkey_type keytype)
 	{
+		open_access::t accessfix = open_access::none;
+		if (lua_gettop(L) >= 1)
+		{
+			accessfix = (open_access::t)lua_tointeger(L, 1);
+		}
 		void* storage = lua_newuserdata(L, sizeof(key_w));
 		lua_pushvalue(L, mt_idx);
 		lua_setmetatable(L, -2);
-		new (storage)key_w(keytype);
+		new (storage)key_w(keytype, accessfix);
 		return 1;
 	}
 
@@ -215,6 +220,8 @@ int luaopen_registry(lua_State* L)
 	LUA_PUSH_CONST(L, REG_EXPAND_SZ);
 	LUA_PUSH_CONST(L, REG_MULTI_SZ);
 	LUA_PUSH_CONST(L, REG_BINARY);
+	LUA_PUSH_CONST(L, KEY_WOW64_32KEY);
+	LUA_PUSH_CONST(L, KEY_WOW64_64KEY);
 
 #undef LUA_PUSH_CONST
 
