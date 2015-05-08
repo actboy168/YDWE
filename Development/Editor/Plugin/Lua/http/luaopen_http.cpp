@@ -14,7 +14,7 @@ static int http_open(lua_State* L)
 	if (lua_gettop(L) >= 2)	{
 		size_t bodysize = 0;
 		const char* body = lua_tolstring(L, 2, &bodysize);
-		 http_thd.post(std::string(url, urlsize), std::string(body, bodysize))
+		http_thd.post(std::string(url, urlsize), std::string(body, bodysize))
 		.then([&](int code, const std::string& msg){
 			res_code = code;
 			res_msg = msg;
