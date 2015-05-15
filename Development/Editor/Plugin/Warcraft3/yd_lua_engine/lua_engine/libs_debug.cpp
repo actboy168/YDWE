@@ -45,9 +45,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	int jass_debug(lua::state* ls)
+	int jass_debug(lua_State* L)
 	{
-		lua_State* L = ls->self();
 		lua_newtable(L);
 		{
 			luaL_Reg lib[] = {

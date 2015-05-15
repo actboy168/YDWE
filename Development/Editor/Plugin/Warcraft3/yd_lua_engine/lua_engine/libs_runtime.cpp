@@ -1,4 +1,4 @@
-#include <base/lua/state.h>
+#include <lua.hpp>
 #include <base/util/console.h>
 #include <cstring>
 #include "libs_runtime.h" 
@@ -22,134 +22,134 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			catch_crash = true;
 		}
 
-		int set_err_function(lua::state* ls, int index)
+		int set_err_function(lua_State* L, int index)
 		{
-			if (ls->isfunction(index) || ls->isnil(index))
+			if (lua_isfunction(L, index) || lua_isnil(L, index))
 			{
-				ls->pushvalue(index);
-				ls->setfield(LUA_REGISTRYINDEX, "_JASS_ERROR_HANDLE");
+				lua_pushvalue(L, index);
+				lua_setfield(L, LUA_REGISTRYINDEX, "_JASS_ERROR_HANDLE");
 			}
 			return 0;
 		}
 
-		int get_err_function(lua::state* ls)
+		int get_err_function(lua_State* L)
 		{
-			ls->getfield(LUA_REGISTRYINDEX, "_JASS_ERROR_HANDLE");
+			lua_getfield(L, LUA_REGISTRYINDEX, "_JASS_ERROR_HANDLE");
 			return 1;
 		}
 
-		int get_global_table(lua::state* ls, const char* name, bool weak)
+		int get_global_table(lua_State* L, const char* name, bool weak)
 		{
-			ls->getfield(LUA_REGISTRYINDEX, name);
-			if (!ls->istable(-1))
+			lua_getfield(L, LUA_REGISTRYINDEX, name);
+			if (!lua_istable(L, -1))
 			{
-				ls->pop(1);
-				ls->newtable();
+				lua_pop(L, 1);
+				lua_newtable(L);
 				if (weak)
 				{
-					ls->newtable();
+					lua_newtable(L);
 					{
-						ls->pushstring("__mode");
-						ls->pushstring("kv");
-						ls->rawset(-3);
+						lua_pushstring(L, "__mode");
+						lua_pushstring(L, "kv");
+						lua_rawset(L, -3);
 					}
-					ls->setmetatable(-2);
+					lua_setmetatable(L, -2);
 				}
-				ls->pushvalue(-1);
-				ls->setfield(LUA_REGISTRYINDEX, name);
+				lua_pushvalue(L, -1);
+				lua_setfield(L, LUA_REGISTRYINDEX, name);
 			}
 			return 1;
 		}
 
-		int thread_get_table(lua::state* ls)
+		int thread_get_table(lua_State* L)
 		{
-			return get_global_table(ls, "_JASS_THREAD_TABLE", true);
+			return get_global_table(L, "_JASS_THREAD_TABLE", true);
 		}
 
-		int thread_create(lua::state* ls, int index)
+		int thread_create(lua_State* L, int index)
 		{
-			thread_get_table(ls);
-			ls->pushvalue(index);
-			ls->rawget(-2);
-			if (ls->isnil(-1))
+			thread_get_table(L);
+			lua_pushvalue(L, index);
+			lua_rawget(L, -2);
+			if (lua_isnil(L, -1))
 			{
-				ls->pop(1);
-				ls->newthread();
+				lua_pop(L, 1);
+				lua_newthread(L);
 			}
 			else
 			{
-				ls->pushvalue(index);
-				ls->pushnil();
-				ls->rawset(-4);
+				lua_pushvalue(L, index);
+				lua_pushnil(L);
+				lua_rawset(L, -4);
 			}
-			ls->remove(-2);
+			lua_remove(L, -2);
 			return 1;
 		}
 
-		int thread_save(lua::state* ls, int key, int value)
+		int thread_save(lua_State* L, int key, int value)
 		{
-			thread_get_table(ls);
-			ls->pushvalue(key);
-			ls->pushvalue(value);
-			ls->rawset(-3);
-			ls->pop(1);
+			thread_get_table(L);
+			lua_pushvalue(L, key);
+			lua_pushvalue(L, value);
+			lua_rawset(L, -3);
+			lua_pop(L, 1);
 			return 0;
 		}
 
-		int handle_ud_get_table(lua::state* ls)
+		int handle_ud_get_table(lua_State* L)
 		{
-			return get_global_table(ls, "_JASS_HANDLE_UD_TABLE", true);
+			return get_global_table(L, "_JASS_HANDLE_UD_TABLE", true);
 		}
 
-		int callback_get_table(lua::state* ls)
+		int callback_get_table(lua_State* L)
 		{
-			return get_global_table(ls, "_JASS_CALLBACK_TABLE", false);
+			return get_global_table(L, "_JASS_CALLBACK_TABLE", false);
 		}
 
-		int callback_push(lua::state* ls, int idx)
+		int callback_push(lua_State* L, int idx)
 		{
-			callback_get_table(ls);
+			callback_get_table(L);
 			
 			// read t[v]
-			ls->pushvalue(idx);
-			ls->rawget(-2);
-			if (ls->isnumber(-1))
+			lua_pushvalue(L, idx);
+			lua_rawget(L, -2);
+			if (lua_isnumber(L, -1))
 			{
-				int ret = ls->tointeger(-1);
-				ls->pop(2);
+				int ret = lua_tointeger(L, -1);
+				lua_pop(L, 2);
 				return ret;
 			}
-			ls->pop(1);
+			lua_pop(L, 1);
 
 			// free = t[0] + 1
-			ls->rawgeti(-1, 0);
-			int free = 1 + ls->tointeger(-1);
-			ls->pop(1);
+			lua_rawgeti(L, -1, 0);
+			int free = 1 + lua_tointeger(L, -1);
+			lua_pop(L, 1);
 
 			// t[0] = free
-			ls->pushinteger(free);
-			ls->rawseti(-2, 0);
+			lua_pushinteger(L, free);
+			lua_rawseti(L, -2, 0);
 
 
 			// t[free] = v
-			ls->pushvalue(idx);
-			ls->rawseti(-2, free);
+			lua_pushvalue(L, idx);
+			lua_rawseti(L, -2, free);
 
 			// t[v] = free
-			ls->pushvalue(idx);
-			ls->pushinteger(free);
-			ls->rawset(-3);
+			lua_pushvalue(L, idx);
+			lua_pushinteger(L, free);
+			lua_rawset(L, -3);
 
 			// pop t
-			ls->pop(1);
+			lua_pop(L, 1);
 			return free;
 		}
 
-		int callback_read(lua::state* ls, int ref)
+		int callback_read(lua_State* L, int ref)
 		{
-			callback_get_table(ls);
-			ls->rawgeti(-1, ref);
-			ls->remove(-2);
+			callback_get_table(L);
+			lua_rawgeti(L, -1, ref);
+			lua_remove(L, -2);
 			return 1;
 		}
 	}
@@ -157,20 +157,19 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int jass_runtime_set(lua_State* L)
 	{
-		lua::state* ls = (lua::state*)L;
-		const char* name = ls->tostring(2);
+		const char* name = lua_tostring(L, 2);
 
 		if (strcmp("error_handle", name) == 0)
 		{
-			runtime::set_err_function(ls, 3);
+			runtime::set_err_function(L, 3);
 		}
 		else if (strcmp("handle_level", name) == 0)
 		{
-			runtime::handle_level = ls->checkinteger(3);
+			runtime::handle_level = luaL_checkinteger(L, 3);
 		}
 		else if (strcmp("console", name) == 0)
 		{
-			runtime::enable_console = !!ls->toboolean(3);
+			runtime::enable_console = !!lua_toboolean(L, 3);
 			if (runtime::enable_console)
 			{
 				console::enable();
@@ -183,11 +182,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		else if (strcmp("sleep", name) == 0)
 		{
-			runtime::sleep = !!ls->toboolean(3);
+			runtime::sleep = !!lua_toboolean(L, 3);
 		}
 		else if (strcmp("catch_crash", name) == 0)
 		{
-			runtime::catch_crash = !!ls->toboolean(3);
+			runtime::catch_crash = !!lua_toboolean(L, 3);
 		}
 		
 		return 0;
@@ -195,62 +194,61 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int jass_runtime_get(lua_State* L)
 	{
-		lua::state* ls = (lua::state*)L;
-		const char* name = ls->tostring(2);
+		const char* name = lua_tostring(L, 2);
 
 		if (strcmp("version", name) == 0)
 		{
-			ls->pushinteger(runtime::version);
+			lua_pushinteger(L, runtime::version);
 			return 1;
 		}
 		else if (strcmp("error_handle", name) == 0)
 		{
-			return runtime::get_err_function(ls);
+			return runtime::get_err_function(L);
 		}
 		else if (strcmp("handle_level", name) == 0)
 		{
-			ls->pushinteger(runtime::handle_level);
+			lua_pushinteger(L, runtime::handle_level);
 			return 1;
 		}
 		else if (strcmp("console", name) == 0)
 		{
-			ls->pushboolean(runtime::enable_console);
+			lua_pushboolean(L, runtime::enable_console);
 			return 1;
 		}
 		else if (strcmp("sleep", name) == 0)
 		{
-			ls->pushboolean(runtime::sleep);
+			lua_pushboolean(L, runtime::sleep);
 			return 1;
 		}
 		else if (strcmp("can_sleep", name) == 0)
 		{
-			ls->pushboolean(runtime::sleep && lua::allow_yield(ls));
+			lua_pushboolean(L, runtime::sleep && lua::allow_yield(L));
 			return 1;
 		}
 		else if (strcmp("catch_crash", name) == 0)
 		{
-			ls->pushboolean(runtime::catch_crash);
+			lua_pushboolean(L, runtime::catch_crash);
 			return 1;
 		}
 
 		return 0;
 	}
 
-	int jass_runtime(lua::state* ls)
+	int jass_runtime(lua_State* L)
 	{
-		ls->newtable();
+		lua_newtable(L);
 		{
-			ls->newtable();
+			lua_newtable(L);
 			{
-				ls->pushstring("__index");
-				ls->pushcclosure((lua::cfunction)jass_runtime_get, 0);
-				ls->rawset(-3);
+				lua_pushstring(L, "__index");
+				lua_pushcclosure(L, jass_runtime_get, 0);
+				lua_rawset(L, -3);
 
-				ls->pushstring("__newindex");
-				ls->pushcclosure((lua::cfunction)jass_runtime_set, 0);
-				ls->rawset(-3);
+				lua_pushstring(L, "__newindex");
+				lua_pushcclosure(L, jass_runtime_set, 0);
+				lua_rawset(L, -3);
 			}
-			ls->setmetatable(-2);
+			lua_setmetatable(L, -2);
 		}
 		return 1;
 	}

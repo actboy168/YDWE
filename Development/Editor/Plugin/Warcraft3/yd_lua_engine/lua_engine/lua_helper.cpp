@@ -43,59 +43,59 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return L;
 	}
 
-	int __cdecl searcher_preload(lua::state* ls) 
+	int __cdecl searcher_preload(lua_State* L) 
 	{
-		const char *name = luaL_checkstring(ls->self(), 1);
-		ls->getfield(LUA_REGISTRYINDEX, "_PRELOAD");
-		ls->getfield(-1, name);
-		if (ls->isnil(-1))  /* not found? */
-			lua_pushfstring(ls->self(), "\n\tno field package.preload['%s']", name);
+		const char *name = luaL_checkstring(L, 1);
+		lua_getfield(L, LUA_REGISTRYINDEX, "_PRELOAD");
+		lua_getfield(L, -1, name);
+		if (lua_isnil(L, -1))  /* not found? */
+			lua_pushfstring(L, "\n\tno field package.preload['%s']", name);
 		return 1;
 	}
 
-	int __cdecl searcher_storm(lua::state* ls) 
+	int __cdecl searcher_storm(lua_State* L) 
 	{
-		const char* name   = luaL_checkstring(ls->self(), 1);
+		const char* name   = luaL_checkstring(L, 1);
 		const char* buffer = nullptr;
 		size_t      size   = 0;
 
 		storm& s = storm_s::instance();
 		if (s.load_file(name, (const void**)&buffer, &size))
 		{
-			int stat = (luaL_loadbuffer(ls->self(), buffer, size, name) == LUA_OK);
+			int stat = (luaL_loadbuffer(L, buffer, size, name) == LUA_OK);
 			s.unload_file(buffer);
 
 			if (stat) 
 			{
-				ls->pushstring(name);
+				lua_pushstring(L, name);
 				return 2;
 			}
 			else
 			{
-				return luaL_error(ls->self(), "error loading module " 
+				return luaL_error(L, "error loading module " 
 					LUA_QS " from file " 
 					LUA_QS ":\n\t%s", 
-					ls->tostring(1), name, ls->tostring(-1));
+					lua_tostring(L, 1), name, lua_tostring(L, -1));
 			}
 		}
 
 		return 1;
 	}
 
-	bool clear_searchers_table(lua::state* ls)
+	bool clear_searchers_table(lua_State* L)
 	{
-		ls->getfield(LUA_REGISTRYINDEX, "_LOADED"); 
-		ls->getfield(-1, LUA_LOADLIBNAME);
+		lua_getfield(L, LUA_REGISTRYINDEX, "_LOADED");
+		lua_getfield(L, -1, LUA_LOADLIBNAME);
 
-		if (ls->istable(-1)) 
+		if (lua_istable(L, -1))
 		{
-			ls->createtable(2, 0);
+			lua_createtable(L, 2, 0);
 
-			ls->pushvalue(-2);
-			ls->pushcclosure(searcher_preload, 1);
-			ls->rawseti(-2, 1);
+			lua_pushvalue(L, -2);
+			lua_pushcclosure(L, searcher_preload, 1);
+			lua_rawseti(L, -2, 1);
 
-			ls->setfield(-2, "searchers");
+			lua_setfield(L, -2, "searchers");
 
 			return true;
 		}
@@ -103,29 +103,29 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return false;
 	}
 
-	bool insert_searchers_table(lua::state* ls)
+	bool insert_searchers_table(lua_State* L)
 	{
-		ls->getfield(LUA_REGISTRYINDEX, "_LOADED"); 
-		ls->getfield(-1, LUA_LOADLIBNAME);
+		lua_getfield(L, LUA_REGISTRYINDEX, "_LOADED");
+		lua_getfield(L, -1, LUA_LOADLIBNAME);
 
-		if (ls->istable(-1)) 
+		if (lua_istable(L, -1))
 		{
-			ls->getfield(-1, "searchers");
+			lua_getfield(L, -1, "searchers");
 
-			if (ls->istable(-1)) 
+			if (lua_istable(L, -1))
 			{
-				lua_pushliteral(ls->self(), "");
+				lua_pushliteral(L, "");
 
 				for (int i = 1; ; i++) 
 				{
-					ls->rawgeti(-2, i);
-					if (ls->isnil(-1)) 
+					lua_rawgeti(L, -2, i);
+					if (lua_isnil(L, -1))
 					{
-						ls->pushcclosure(searcher_storm, 0);
-						ls->rawseti(-4, i);
+						lua_pushcclosure(L, searcher_storm, 0);
+						lua_rawseti(L, -4, i);
 						return true;
 					}
-					ls->pop(1);
+					lua_pop(L, 1);
 				}
 			}
 		}

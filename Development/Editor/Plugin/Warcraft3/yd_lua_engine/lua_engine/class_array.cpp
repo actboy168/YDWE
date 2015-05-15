@@ -8,54 +8,51 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 #define LUA_JASS_ARRAY "jarray_t"
 
-	void jass_get_global_variable(lua::state* ls, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value);
+	void jass_get_global_variable(lua_State* L, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value);
 
-	jass::global_variable jarray_value(lua::state* ls)
+	jass::global_variable jarray_value(lua_State* L)
 	{
-		ls->pushvalue(1);
-		ls->pushstring("__value");
-		ls->rawget(-2);
-		jass::global_variable gv((hashtable::variable_node*)ls->tointeger(-1));
-		ls->pop(2);
+		lua_pushvalue(L, 1);
+		lua_pushstring(L, "__value");
+		lua_rawget(L, -2);
+		jass::global_variable gv((hashtable::variable_node*)lua_tointeger(L, -1));
+		lua_pop(L, 2);
 		return std::move(gv);
 	}
 
 	int jarray_index(lua_State* L)
 	{
-		lua::state* ls = (lua::state*)L;
-		jass::global_variable gv = jarray_value(ls);
-		int32_t index = ls->checkinteger(2);
+		jass::global_variable gv = jarray_value(L);
+		int32_t index = luaL_checkinteger(L, 2);
 	
 		if (!gv.array_vaild(index))
 		{
-			ls->pushnil();
+			lua_pushnil(L);
 			return 1;
 		}
 	
-		jass_get_global_variable(ls, jass::opcode_type_remove_array(gv.type()), gv[index]);
+		jass_get_global_variable(L, jass::opcode_type_remove_array(gv.type()), gv[index]);
 		return 1;
 	}
 	
 	int jarray_newindex(lua_State* L)
 	{
-		lua::state* ls = (lua::state*)L;
-		jass::global_variable gv = jarray_value(ls);
-		int32_t index = ls->checkinteger(2);
+		jass::global_variable gv = jarray_value(L);
+		int32_t index = luaL_checkinteger(L, 2);
 	
 		if (!gv.array_vaild(index))
 		{
 			return 0;
 		}
 	
-		gv[index] = jass_read(ls, jass::opcode_type_to_var_type(gv.type()), 3);
+		gv[index] = jass_read(L, jass::opcode_type_to_var_type(gv.type()), 3);
 		return 0;
 	}
 	
 	int jarray_len(lua_State* L)
 	{
-		lua::state* ls = (lua::state*)L;
-		jass::global_variable gv((hashtable::variable_node*)ls->tointeger(lua_upvalueindex(1)));
-		ls->pushinteger(gv.array_size());
+		jass::global_variable gv((hashtable::variable_node*)lua_tointeger(L, lua_upvalueindex(1)));
+		lua_pushinteger(L, gv.array_size());
 		return 1;
 	}
 

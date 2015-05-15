@@ -11,46 +11,46 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	void jass_get_global_variable(lua::state* ls, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value)
+	void jass_get_global_variable(lua_State* L, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value)
 	{
 		switch (opt)
 		{
 		case jass::OPCODE_VARIABLE_NOTHING:
 		case jass::OPCODE_VARIABLE_UNKNOWN:
 		case jass::OPCODE_VARIABLE_NULL:
-			ls->pushnil();
+			lua_pushnil(L);
 			break;
 		case jass::OPCODE_VARIABLE_CODE:
-			jassbind::push_code(ls, value);
+			jassbind::push_code(L, value);
 			break;
 		case jass::OPCODE_VARIABLE_INTEGER:
-			jassbind::push_integer(ls, value);
+			jassbind::push_integer(L, value);
 			break;
 		case jass::OPCODE_VARIABLE_REAL:
-			jassbind::push_real(ls, value);
+			jassbind::push_real(L, value);
 			break;
 		case jass::OPCODE_VARIABLE_STRING:
-			jassbind::push_string(ls, get_jass_vm()->string_table->get(value));
+			jassbind::push_string(L, get_jass_vm()->string_table->get(value));
 			break;
 		case jass::OPCODE_VARIABLE_HANDLE:
-			jassbind::push_handle(ls, value);
+			jassbind::push_handle(L, value);
 			break;
 		case jass::OPCODE_VARIABLE_BOOLEAN:
-			jassbind::push_boolean(ls, value);
+			jassbind::push_boolean(L, value);
 			break;
 		default:
-			ls->pushnil();
+			lua_pushnil(L);
 			break;
 		}
 	}
 
-	int jass_get_global_variable(lua::state* ls, const jass::global_variable& gv)
+	int jass_get_global_variable(lua_State* L, const jass::global_variable& gv)
 	{
 		if (gv.is_vaild())
 		{
 			if (!gv.is_array())
 			{
-				jass_get_global_variable(ls, gv.type(), gv);
+				jass_get_global_variable(L, gv.type(), gv);
 				return 1;
 			}
 			else
@@ -62,25 +62,25 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				case jass::OPCODE_VARIABLE_STRING_ARRAY:
 				case jass::OPCODE_VARIABLE_HANDLE_ARRAY:
 				case jass::OPCODE_VARIABLE_BOOLEAN_ARRAY:
-					return jarray_create(ls->self(), (uintptr_t)gv.ptr());
+					return jarray_create(L, (uintptr_t)gv.ptr());
 				default:
-					ls->pushnil();
+					lua_pushnil(L);
 					return 1;
 				}
 			}
 		}
-		ls->pushnil();
+		lua_pushnil(L);
 		return 1;
 	}
 }}}
 
 namespace base { namespace lua {
 	template <>
-	inline int convert_to_lua(state* ls, const warcraft3::hashtable::variable_node& v)
+	inline int convert_to_lua(lua_State* L, const warcraft3::hashtable::variable_node& v)
 	{
 		warcraft3::jass::global_variable gv(const_cast<warcraft3::hashtable::variable_node*>(&v));
-		ls->pushstring(gv.name());
-		return 1 + warcraft3::lua_engine::jass_get_global_variable(ls, gv);
+		lua_pushstring(L, gv.name());
+		return 1 + warcraft3::lua_engine::jass_get_global_variable(L, gv);
 	}
 }}
 
@@ -88,34 +88,31 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int jglobals_get(lua_State* L)
 	{
-		lua::state* ls = (lua::state*)L;
 		if (!is_gaming())
 		{
-			ls->pushnil();
+			lua_pushnil(L);
 			return 1;
 		}
 
-		const char* name = ls->tostring(2);
+		const char* name = lua_tostring(L, 2);
 		jass::global_variable gv(name);
-		return jass_get_global_variable(ls, gv);
+		return jass_get_global_variable(L, gv);
 	}
 
 	int jglobals_set(lua_State* L)
 	{
-		lua::state* ls = (lua::state*)L;
-
 		if (!is_gaming())
 		{
 			return 0;
 		}
 
-		const char* name = ls->tostring(2);
+		const char* name = lua_tostring(L, 2);
 		jass::global_variable gv(name);
 		if (gv.is_vaild())
 		{
 			if (!gv.is_array())
 			{
-				gv = jass_read(ls, jass::opcode_type_to_var_type(gv.type()), 3);
+				gv = jass_read(L, jass::opcode_type_to_var_type(gv.type()), 3);
 			}
 			else
 			{
@@ -139,28 +136,28 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int jglobals_pairs(lua_State* L)
 	{
 		const hashtable::variable_table& vt = *(get_jass_vm()->global_table);
-		return lua::make_range((lua::state*)L, vt);
+		return lua::make_range(L, vt);
 	}
 
-	int jass_globals(lua::state* ls)
+	int jass_globals(lua_State* L)
 	{
-		ls->newtable();
+		lua_newtable(L);
 		{
-			ls->newtable();
+			lua_newtable(L);
 			{
-				ls->pushstring("__index");
-				ls->pushcclosure((lua::cfunction)jglobals_get, 0);
-				ls->rawset(-3);
+				lua_pushstring(L, "__index");
+				lua_pushcclosure(L, jglobals_get, 0);
+				lua_rawset(L, -3);
 
-				ls->pushstring("__newindex");
-				ls->pushcclosure((lua::cfunction)jglobals_set, 0);
-				ls->rawset(-3);
+				lua_pushstring(L, "__newindex");
+				lua_pushcclosure(L, jglobals_set, 0);
+				lua_rawset(L, -3);
 
-				ls->pushstring("__pairs");
-				ls->pushcclosure((lua::cfunction)jglobals_pairs, 0);
-				ls->rawset(-3);
+				lua_pushstring(L, "__pairs");
+				lua_pushcclosure(L, jglobals_pairs, 0);
+				lua_rawset(L, -3);
 			}
-			ls->setmetatable(-2);
+			lua_setmetatable(L, -2);
 		}
 		return 1;
 	}

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <base/lua/state.h>
+#include <lua.hpp>
 
 namespace base { namespace lua {
-	bool allow_yield(state* ls);
+	bool allow_yield(lua_State* L);
 }}

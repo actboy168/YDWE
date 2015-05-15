@@ -8,47 +8,47 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	void error_function(lua::state* ls, bool err_func)
+	void error_function(lua_State* L, bool err_func)
 	{
 		if (err_func)
 		{
-			runtime::get_err_function(ls);
-			if (ls->isfunction(-1))
+			runtime::get_err_function(L);
+			if (lua_isfunction(L, -1))
 			{
-				ls->pushvalue(-2);
-				safe_call(ls, 1, 0, false);
-				ls->pop(2);
+				lua_pushvalue(L, -2);
+				safe_call(L, 1, 0, false);
+				lua_pop(L, 2);
 				return;
 			}
 			else
 			{
-				ls->pop(1);
+				lua_pop(L, 1);
 			}
 		}
 
-		printf("Error: %s\n", ls->tostring(-1));
-		ls->pop(1);
+		printf("Error: %s\n", lua_tostring(L, -1));
+		lua_pop(L, 1);
 	}
 
-	int safe_call_not_sleep(lua::state* ls, int nargs, int nresults, bool err_func)
+	int safe_call_not_sleep(lua_State* L, int nargs, int nresults, bool err_func)
 	{
 		if (err_func)
 		{
-			runtime::get_err_function(ls);
-			if (ls->isfunction(-1))
+			runtime::get_err_function(L);
+			if (lua_isfunction(L, -1))
 			{
-				ls->insert(1);
-				int error = lua_pcall(ls->self(), nargs, nresults, 1);
-				ls->remove(1);
+				lua_insert(L, 1);
+				int error = lua_pcall(L, nargs, nresults, 1);
+				lua_remove(L, 1);
 				return error;
 			}
 			else
 			{
-				ls->pop(1);
+				lua_pop(L, 1);
 			}
 		}
 
-		int error = ls->pcall(nargs, nresults, 0);
+		int error = lua_pcall(L, nargs, nresults, 0);
 		switch (error)
 		{
 		case LUA_OK:
@@ -57,99 +57,99 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			assert("lua_pcall return LUA_YIELD" || false);
 			break;
 		default:
-			error_function(ls, false);
+			error_function(L, false);
 			break;
 		}
 		return error;
 	}
 
-	int safe_resume(lua::state* thread, lua::state* ls, int nargs, int& nresults)
+	int safe_resume(lua_State* thread, lua_State* L, int nargs, int& nresults)
 	{
-		if (!thread->checkstack(nargs + 1)) {
-			ls->pushstring("too many arguments to resume");
+		if (!lua_checkstack(thread, nargs + 1)) {
+			lua_pushstring(L, "too many arguments to resume");
 			nresults = 1;
 			return LUA_ERRERR;
 		}
-		ls->pushvalue(-nargs-1);
-		ls->xmove(thread, 1);
-		ls->xmove(thread, nargs);
-		int error = lua_resume(thread->self(), ls->self(), nargs);
+		lua_pushvalue(L, -nargs - 1);
+		lua_xmove(L, thread, 1);
+		lua_xmove(L, thread, nargs);
+		int error = lua_resume(thread, L, nargs);
 
 		if (error == LUA_OK || error == LUA_YIELD)
 		{
-			int nres = thread->gettop();
-			if (!ls->checkstack(nres + 1)) {
-				thread->pop(nres);
-				ls->pushstring("too many results to resume");
+			int nres = lua_gettop(thread);
+			if (!lua_checkstack(L, nres + 1)) {
+				lua_pop(thread, nres);
+				lua_pushstring(L, "too many results to resume");
 				nresults = 1;
 				return LUA_ERRERR;
 			}
-			thread->xmove(ls, nres);
+			lua_xmove(thread, L, nres);
 			nresults = nres;
 			return error;
 		}
 		else
 		{
-			thread->xmove(ls, 1);
+			lua_xmove(thread, L, 1);
 			nresults = 1;
 			return error;
 		}
 	}
 
-	int safe_call_has_sleep(lua::state* ls, int nargs, int /*nresults*/, bool err_func)
+	int safe_call_has_sleep(lua_State* L, int nargs, int /*nresults*/, bool err_func)
 	{
-		int func_idx = ls->gettop() - nargs;
-		runtime::thread_create(ls, func_idx);
-		lua::state* thread = ls->tothread(-1);
-		int thread_idx = ls->gettop() - (nargs + 1);
-		ls->insert(thread_idx);
+		int func_idx = lua_gettop(L) - nargs;
+		runtime::thread_create(L, func_idx);
+		lua_State* thread = lua_tothread(L, -1);
+		int thread_idx = lua_gettop(L) - (nargs + 1);
+		lua_insert(L, thread_idx);
 		func_idx++;
 
 		int nresults = 0;
-		int error = safe_resume(thread, ls, nargs, nresults);
+		int error = safe_resume(thread, L, nargs, nresults);
 
 		switch (error)
 		{
 		case LUA_OK:
 			break;
 		case LUA_YIELD:
-			runtime::thread_save(ls, func_idx, thread_idx);
+			runtime::thread_save(L, func_idx, thread_idx);
 			break;
 		default:
-			error_function(ls, err_func);
+			error_function(L, err_func);
 			break;
 		}
 
-		ls->remove(thread_idx);
+		lua_remove(L, thread_idx);
 		return error;
 	}
 
-	int safe_call(lua::state* ls, int nargs, int nresults, bool err_func)
+	int safe_call(lua_State* L, int nargs, int nresults, bool err_func)
 	{
 		if (runtime::sleep)
 		{
-			return safe_call_has_sleep(ls, nargs, nresults, err_func);
+			return safe_call_has_sleep(L, nargs, nresults, err_func);
 		}
 		else
 		{
-			return safe_call_not_sleep(ls, nargs, nresults, err_func);
+			return safe_call_not_sleep(L, nargs, nresults, err_func);
 		}
 	}
 
-	uintptr_t safe_call_ref(lua::state* ls, uint32_t ref, size_t nargs, jass::variable_type result_vt)
+	uintptr_t safe_call_ref(lua_State* L, uint32_t ref, size_t nargs, jass::variable_type result_vt)
 	{
-		int base = ls->gettop() - nargs + 1;
-		runtime::callback_read(ls, ref);
-		if (!ls->isfunction(-1))
+		int base = lua_gettop(L) - nargs + 1;
+		runtime::callback_read(L, ref);
+		if (!lua_isfunction(L, -1))
 		{
-			ls->pushstring("safe_call attempt to call (not a function)\n");
-			error_function(ls, true);
-			ls->pop(1);
+			lua_pushstring(L, "safe_call attempt to call (not a function)\n");
+			error_function(L, true);
+			lua_pop(L, 1);
 			return false;
 		}
-		ls->insert(base);
+		lua_insert(L, base);
 
-		if (safe_call(ls, nargs, (result_vt != jass::TYPE_NOTHING) ? 1 : 0, true) != LUA_OK)
+		if (safe_call(L, nargs, (result_vt != jass::TYPE_NOTHING) ? 1 : 0, true) != LUA_OK)
 		{
 			return 0;
 		}
@@ -159,25 +159,25 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return 0;
 		}
 
-		uintptr_t ret = jass_read(ls, result_vt, -1);
-		ls->pop(1);
+		uintptr_t ret = jass_read(L, result_vt, -1);
+		lua_pop(L, 1);
 		return ret;
 	}
 
 	uint32_t __fastcall jass_callback(uint32_t ls, uint32_t param)
 	{
-		return safe_call_ref((lua::state*)ls, param, 0, jass::TYPE_BOOLEAN);
+		return safe_call_ref((lua_State*)ls, param, 0, jass::TYPE_BOOLEAN);
 	}
 
-	uint32_t cfunction_to_code(lua::state* ls, uint32_t index)
+	uint32_t cfunction_to_code(lua_State* L, uint32_t index)
 	{
 		if (runtime::sleep)
 		{
-			return jass::trampoline_create(jass_callback, (uintptr_t)get_mainthread(ls), runtime::callback_push(ls, index));
+			return jass::trampoline_create(jass_callback, (uintptr_t)get_mainthread(L), runtime::callback_push(L, index));
 		}
 		else
 		{
-			return jass::trampoline_create(jass_callback, (uintptr_t)ls->self(), runtime::callback_push(ls, index));
+			return jass::trampoline_create(jass_callback, (uintptr_t)L, runtime::callback_push(L, index));
 		}
 	}
 }}}

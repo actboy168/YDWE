@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/lua/state.h>
+#include <lua.hpp>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 

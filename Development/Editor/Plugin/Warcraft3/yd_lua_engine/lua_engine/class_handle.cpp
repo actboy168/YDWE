@@ -37,66 +37,64 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 #define LUA_JASS_HANDLE "jhandle_t"
 
-	void jhandle_ud_push(lua::state* ls, jass::jhandle_t value)
+	void jhandle_ud_push(lua_State* L, jass::jhandle_t value)
 	{
 		if (!value)
 		{
-			return ls->pushnil();
+			return lua_pushnil(L);
 		}
 
-		runtime::handle_ud_get_table(ls);
-		ls->pushinteger(value);
-		ls->rawget(-2);
-		if (ls->isnil(-1))
+		runtime::handle_ud_get_table(L);
+		lua_pushinteger(L, value);
+		lua_rawget(L, -2);
+		if (lua_isnil(L, -1))
 		{
-			ls->pop(1);
-			jass::jhandle_t* hptr = (jass::jhandle_t*)ls->newuserdata(sizeof(jass::jhandle_t));
+			lua_pop(L, 1);
+			jass::jhandle_t* hptr = (jass::jhandle_t*)lua_newuserdata(L, sizeof(jass::jhandle_t));
 			*hptr = value;
 			jass::handle_add_ref(value);
-			ls->setmetatable(LUA_JASS_HANDLE);
+			luaL_setmetatable(L, LUA_JASS_HANDLE);
 
-			ls->pushinteger(value);
-			ls->pushvalue(-2);
-			ls->rawset(-4);
+			lua_pushinteger(L, value);
+			lua_pushvalue(L, -2);
+			lua_rawset(L, -4);
 		}
 
-		ls->remove(-2);
+		lua_remove(L, -2);
 		return;
 	}
 
-	jass::jhandle_t jhandle_ud_read(lua::state* ls, int index)
+	jass::jhandle_t jhandle_ud_read(lua_State* L, int index)
 	{
-		if (ls->isnil(index))
+		if (lua_isnil(L, index))
 		{
 			return 0; 
 		}
 		
-		jass::jhandle_t* hptr = ls->checkudata<jass::jhandle_t*>(index, LUA_JASS_HANDLE);
+		jass::jhandle_t* hptr = (jass::jhandle_t*)luaL_checkudata(L, index, LUA_JASS_HANDLE);
 		return *hptr;
 	}
 
 	int jhandle_ud_eq(lua_State *L)
 	{
-		lua::state* ls = (lua::state*)L;
-		jass::jhandle_t a = jhandle_ud_read(ls, 1);
-		jass::jhandle_t b = jhandle_ud_read(ls, 2);
-		ls->pushboolean(a == b);
+		jass::jhandle_t a = jhandle_ud_read(L, 1);
+		jass::jhandle_t b = jhandle_ud_read(L, 2);
+		lua_pushboolean(L, a == b);
 		return 1;
 	}
 
 	int jhandle_ud_tostring(lua_State *L)
 	{
-		return jhandle_tostring(L, jhandle_ud_read((lua::state*)L, 1));
+		return jhandle_tostring(L, jhandle_ud_read(L, 1));
 	}
 
 	int jhandle_ud_gc(lua_State *L)
 	{
-		lua::state* ls = (lua::state*)L;
-		jass::jhandle_t h = jhandle_ud_read(ls, 1);
-		runtime::handle_ud_get_table(ls);
-		ls->pushinteger(h);
-		ls->pushnil();
-		ls->rawset(-3);
+		jass::jhandle_t h = jhandle_ud_read(L, 1);
+		runtime::handle_ud_get_table(L);
+		lua_pushinteger(L, h);
+		lua_pushnil(L);
+		lua_rawset(L, -3);
 
 		jass::handle_release(h);
 		return 0;
@@ -120,33 +118,32 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 #endif
 	}
 
-	void jhandle_lud_push(lua::state* ls, jass::jhandle_t value)
+	void jhandle_lud_push(lua_State* L, jass::jhandle_t value)
 	{
 		if (!value)
 		{
-			return ls->pushnil();
+			return lua_pushnil(L);
 		}
 
-		return ls->pushlightuserdata((void*)value);
+		return lua_pushlightuserdata(L, (void*)value);
 	}
 
-	jass::jhandle_t jhandle_lud_read(lua::state* ls, int index)
+	jass::jhandle_t jhandle_lud_read(lua_State* L, int index)
 	{
-		return (jass::jhandle_t)ls->touserdata(index);
+		return (jass::jhandle_t)lua_touserdata(L, index);
 	}
 
 	int jhandle_lud_eq(lua_State *L)
 	{
-		lua::state* ls = (lua::state*)L;
-		jass::jhandle_t a = jhandle_lud_read(ls, 1);
-		jass::jhandle_t b = jhandle_lud_read(ls, 2);
-		ls->pushboolean(a == b);
+		jass::jhandle_t a = jhandle_lud_read(L, 1);
+		jass::jhandle_t b = jhandle_lud_read(L, 2);
+		lua_pushboolean(L, a == b);
 		return 1;
 	}
 
 	int jhandle_lud_tostring(lua_State *L)
 	{
-		return jhandle_tostring(L, jhandle_lud_read((lua::state*)L, 1));
+		return jhandle_tostring(L, jhandle_lud_read(L, 1));
 	}
 
 	void jhandle_lud_make_mt(lua_State *L)
@@ -165,41 +162,41 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	
 	namespace jassbind
 	{
-		jass::jhandle_t read_handle(lua::state* ls, int index)
+		jass::jhandle_t read_handle(lua_State* L, int index)
 		{
 			if (0 == runtime::handle_level)
 			{
 				// unsigned
-				return (jass::jhandle_t)ls->tointeger(index);
+				return (jass::jhandle_t)lua_tointeger(L, index);
 			}
 			else if (2 == runtime::handle_level)
 			{
 				// userdata
-				return jhandle_ud_read(ls, index);
+				return jhandle_ud_read(L, index);
 			}
 			else
 			{
 				// lightuserdata
-				return jhandle_lud_read(ls, index);
+				return jhandle_lud_read(L, index);
 			}
 		}
 
-		void push_handle(lua::state* ls, jass::jhandle_t value)
+		void push_handle(lua_State* L, jass::jhandle_t value)
 		{
 			if (0 == runtime::handle_level)
 			{
 				// unsigned
-				return ls->pushinteger(value);
+				return lua_pushinteger(L, value);
 			}
 			else if (2 == runtime::handle_level)
 			{
 				// userdata
-				return jhandle_ud_push(ls, value);
+				return jhandle_ud_push(L, value);
 			}
 			else
 			{
 				// lightuserdata
-				return jhandle_lud_push(ls, value);
+				return jhandle_lud_push(L, value);
 			}
 		}
 	}

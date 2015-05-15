@@ -1,45 +1,45 @@
 #pragma once
 
 #include <base/config.h>
-#include <base/lua/state.h>
-#include <utility>
+#include <utility> 
+#include <lua.hpp>
 
 namespace base { namespace lua {
 	template <class T>
-	int convert_to_lua(state* ls, const T& v);
+	int convert_to_lua(lua_State* L, const T& v);
 
 	template <class F, class S>
-	int convert_to_lua(state* ls, const std::pair<F, S>& v)
+	int convert_to_lua(lua_State* L, const std::pair<F, S>& v)
 	{
 		int nresult = 0;
-		nresult += convert_to_lua(ls, v.first);
-		nresult += convert_to_lua(ls, v.second);
+		nresult += convert_to_lua(L, v.first);
+		nresult += convert_to_lua(L, v.second);
 		return nresult;
 	}
 
 	template <class Iterator>
 	struct iterator
 	{
-		static int next(state* ls)
+		static int next(lua_State* L)
 		{
-			iterator* self = static_cast<iterator*>(ls->touserdata(lua_upvalueindex(1)));
+			iterator* self = static_cast<iterator*>(lua_touserdata(L, lua_upvalueindex(1)));
 
 			if (self->first_ != self->last_)
 			{
-				int nreslut = convert_to_lua(ls, *self->first_);
+				int nreslut = convert_to_lua(L, *self->first_);
 				++(self->first_);
 				return nreslut;
 			}
 			else
 			{
-				ls->pushnil();
+				lua_pushnil(L);
 				return 1;
 			}
 		}
 
-		static int destroy(state* ls)
+		static int destroy(lua_State* L)
 		{
-			static_cast<iterator*>(ls->touserdata(1))->~iterator();
+			static_cast<iterator*>(lua_touserdata(L, 1))->~iterator();
 			return 0;
 		}
 
@@ -53,21 +53,21 @@ namespace base { namespace lua {
 	};
 
 	template <class Iterator>
-	int make_range(state* ls, const Iterator& first, const Iterator& last)
+	int make_range(lua_State* L, const Iterator& first, const Iterator& last)
 	{
-		void* storage = ls->newuserdata(sizeof(iterator<Iterator>));
-		ls->newtable();
-		ls->pushcclosure(iterator<Iterator>::destroy, 0);
-		ls->setfield(-2, "__gc");
-		ls->setmetatable(-2);
-		ls->pushcclosure(iterator<Iterator>::next, 1);
+		void* storage = lua_newuserdata(L, sizeof(iterator<Iterator>));
+		lua_newtable(L);
+		lua_pushcclosure(L, iterator<Iterator>::destroy, 0);
+		lua_setfield(L, -2, "__gc");
+		lua_setmetatable(L, -2);
+		lua_pushcclosure(L, iterator<Iterator>::next, 1);
 		new (storage) iterator<Iterator>(first, last);
 		return 1;
 	}
 
 	template <class Container>
-	int make_range(state* ls, const Container& container)
+	int make_range(lua_State* L, const Container& container)
 	{
-		return make_range(ls, std::begin(container), std::end(container));
+		return make_range(L, std::begin(container), std::end(container));
 	}
 }}

@@ -7,14 +7,14 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	int storm_load(lua::state* ls)
+	int storm_load(lua_State* L)
 	{
 		size_t path_size = 0;
-		const char* path = ls->tolstring(1, &path_size);
+		const char* path = lua_tolstring(L, 1, &path_size);
 
 		if (!path)
 		{
-			ls->pushnil();
+			lua_pushnil(L);
 			return 1;
 		}
 
@@ -23,7 +23,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			path_ansi = u2a(std::string_view(path, path_size), conv_method::stop);
 		}
 		catch (...) {
-			ls->pushnil();
+			lua_pushnil(L);
 			return 1;
 		}
 
@@ -32,11 +32,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		storm&s = storm_s::instance();
 		if (!s.load_file(path_ansi.c_str(), &buf_data, &buf_size))
 		{
-			ls->pushnil();
+			lua_pushnil(L);
 			return 1;
 		}
 
-		ls->pushlstring((const char*)buf_data, buf_size);
+		lua_pushlstring(L, (const char*)buf_data, buf_size);
 		s.unload_file(buf_data);
 		return 1;
 
@@ -67,11 +67,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return false;
 	}
 
-	int storm_save(lua::state* ls)
+	int storm_save(lua_State* L)
 	{
-		const char* path = ls->tostring(1);
-		const char* buf_data = ls->tostring(2);
-		size_t      buf_size = ls->rawlen(2);
+		const char* path = lua_tostring(L, 1);
+		const char* buf_data = lua_tostring(L, 2);
+		size_t      buf_size = lua_rawlen(L, 2);
 
 		try {
 			if (path && buf_data && buf_size)
@@ -86,28 +86,28 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 					if (fs.is_open())
 					{
 						std::copy(buf_data, buf_data + buf_size, std::ostreambuf_iterator<char>(fs));
-						ls->pushboolean(1);
+						lua_pushboolean(L, 1);
 						return 1;
 					}
 				}
 			}
 		} catch (...) { }
 
-		ls->pushboolean(0);
+		lua_pushboolean(L, 0);
 		return 1;
 	}
 
-	int jass_storm(lua::state* ls)
+	int jass_storm(lua_State* L)
 	{
-		ls->newtable();
+		lua_newtable(L);
 		{
-			ls->pushstring("load");
-			ls->pushcclosure(storm_load, 0);
-			ls->rawset(-3);
+			lua_pushstring(L, "load");
+			lua_pushcclosure(L, storm_load, 0);
+			lua_rawset(L, -3);
 
-			ls->pushstring("save");
-			ls->pushcclosure(storm_save, 0);
-			ls->rawset(-3);
+			lua_pushstring(L, "save");
+			lua_pushcclosure(L, storm_save, 0);
+			lua_rawset(L, -3);
 		}
 		return 1;
 	}

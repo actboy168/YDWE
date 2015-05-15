@@ -8,75 +8,75 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	namespace jassbind
 	{
-		jass::jinteger_t read_integer(lua::state* ls, int index)
+		jass::jinteger_t read_integer(lua_State* L, int index)
 		{
-			if (ls->isnil(index)) return 0;
+			if (lua_isnil(L, index)) return 0;
 
-			if (ls->isnumber(index))
-				return ls->tointeger(index);
+			if (lua_isnumber(L, index))
+				return lua_tointeger(L, index);
 
-			if (ls->isboolean(index))
-				return ls->toboolean(index) ? 1 : 0;
+			if (lua_isboolean(L, index))
+				return lua_toboolean(L, index) ? 1 : 0;
 
 			return 0;
 		}
 
-		void             push_integer(lua::state* ls, jass::jinteger_t value)
+		void             push_integer(lua_State* L, jass::jinteger_t value)
 		{
-			ls->pushinteger(value);
+			lua_pushinteger(L, value);
 		}
 
-		jass::jcode_t    read_code(lua::state* ls, int index)
+		jass::jcode_t    read_code(lua_State* L, int index)
 		{
-			if (ls->isnumber(index)) return ls->tointeger(index);
-			if (ls->isfunction(index)) return cfunction_to_code(ls, index);
+			if (lua_isnumber(L, index)) return lua_tointeger(L, index);
+			if (lua_isfunction(L, index)) return cfunction_to_code(L, index);
 			return 0;
 		}
 
-		void             push_code(lua::state* ls, jass::jcode_t value)
+		void             push_code(lua_State* L, jass::jcode_t value)
 		{
-			ls->pushinteger(value);
+			lua_pushinteger(L, value);
 		}
 
-		jass::jstring_t    read_string(lua::state* ls, int index)
+		jass::jstring_t    read_string(lua_State* L, int index)
 		{
-			return jass::create_string(ls->tostring(index));
+			return jass::create_string(lua_tostring(L, index));
 		}
 
-		void             push_string(lua::state* ls, jass::jstring_t value)
+		void             push_string(lua_State* L, jass::jstring_t value)
 		{
-			ls->pushstring(jass::from_trigstring(jass::from_string(value)));
+			lua_pushstring(L, jass::from_trigstring(jass::from_string(value)));
 		}
 
-		jass::jboolean_t read_boolean(lua::state* ls, int index)
+		jass::jboolean_t read_boolean(lua_State* L, int index)
 		{
-			if (ls->isnil(index)) return 0;
+			if (lua_isnil(L, index)) return 0;
 
-			if (ls->isboolean(index))
-				return ls->toboolean(index) != 0;
+			if (lua_isboolean(L, index))
+				return lua_toboolean(L, index) != 0;
 			else
-				return ls->tonumber(index) != 0;
+				return lua_tonumber(L, index) != 0;
 		}
 
-		void             push_boolean(lua::state* ls, jass::jboolean_t value)
+		void             push_boolean(lua_State* L, jass::jboolean_t value)
 		{
-			ls->pushboolean(value != 0);
+			lua_pushboolean(L, value != 0);
 		}
 
-		jass::jreal_t    read_real(lua::state* ls, int index)
+		jass::jreal_t    read_real(lua_State* L, int index)
 		{
-			if (ls->isnil(index)) return 0;
-			return jass::to_real(jreal_read<float>(ls->self(), index));
+			if (lua_isnil(L, index)) return 0;
+			return jass::to_real(jreal_read<float>(L, index));
 		}
 
-		void             push_real(lua::state* ls, jass::jreal_t value)
+		void             push_real(lua_State* L, jass::jreal_t value)
 		{
-			ls->pushnumber(jass::from_real(value));
+			lua_pushnumber(L, jass::from_real(value));
 		}
 
-		void             push_real_precise(lua::state* ls, jass::jreal_t value)
+		void             push_real_precise(lua_State* L, jass::jreal_t value)
 		{
-			jreal_push(ls->self(), value);
+			jreal_push(L, value);
 		}
 	}
 }}}

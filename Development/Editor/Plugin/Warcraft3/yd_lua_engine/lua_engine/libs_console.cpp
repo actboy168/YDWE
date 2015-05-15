@@ -1,4 +1,4 @@
-#include <base/lua/state.h>
+#include <lua.hpp>
 #include <base/util/console.h>
 #include <base/util/unicode.h> 
 #include "callback.h"
@@ -12,12 +12,11 @@ namespace base {  namespace warcraft3 { namespace lua_engine {
 
 	int jass_console_set(lua_State* L)
 	{
-		lua::state* ls = (lua::state*)L;
-		const char* name = ls->tostring(2);
+		const char* name = lua_tostring(L, 2);
 
 		if (strcmp("enable", name) == 0)
 		{
-			runtime::enable_console = !!ls->toboolean(3);
+			runtime::enable_console = !!lua_toboolean(L, 3);
 			if (runtime::enable_console)
 			{
 				console::enable();
@@ -34,19 +33,18 @@ namespace base {  namespace warcraft3 { namespace lua_engine {
 
 	int jass_console_get(lua_State* L)
 	{
-		lua::state* ls = (lua::state*)L;
-		const char* name = ls->tostring(2);
+		const char* name = lua_tostring(L, 2);
 
 		if (strcmp("enable", name) == 0)
 		{
-			ls->pushboolean(runtime::enable_console);
+			lua_pushboolean(L, runtime::enable_console);
 			return 1;
 		}
 
 		return 0;
 	}
 
-	int jass_console_read(lua::state* ls)
+	int jass_console_read(lua_State* L)
 	{
 		console::read_post();
 	
@@ -55,12 +53,12 @@ namespace base {  namespace warcraft3 { namespace lua_engine {
 		{
 			if (req->overlapped.Internal == 0)
 			{
-				if (ls->isfunction(1))
+				if (lua_isfunction(L, 1))
 				{
 					std::string temp_string = w2u(std::wstring_view(req->buffer, req->overlapped.InternalHigh), conv_method::skip);
-					ls->pushvalue(1);
-					ls->pushlstring(temp_string.c_str(), temp_string.size());
-					safe_call(ls, 1, 0, true);
+					lua_pushvalue(L, 1);
+					lua_pushlstring(L, temp_string.c_str(), temp_string.size());
+					safe_call(L, 1, 0, true);
 				}
 			}
 			console::read_release(req);
@@ -75,51 +73,51 @@ namespace base {  namespace warcraft3 { namespace lua_engine {
 		WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), temp_string.c_str(), temp_string.size(), &written_size, 0);
 	}
 
-	int jass_console_write(lua::state* ls)
+	int jass_console_write(lua_State* L)
 	{
-		int n = ls->gettop();
+		int n = lua_gettop(L);
 		int i;
-		ls->getglobal("tostring");
+		lua_getglobal(L, "tostring");
 		for (i = 1; i <= n; i++) {
 			const char *s;
 			size_t l;
-			ls->pushvalue(-1);
-			ls->pushvalue(i);
-			ls->call(1, 1);
-			s = ls->tolstring(-1, &l);
+			lua_pushvalue(L, -1);
+			lua_pushvalue(L, i);
+			lua_call(L, 1, 1);
+			s = lua_tolstring(L, -1, &l);
 			if (s == NULL)
-				return luaL_error(ls->self(), LUA_QL("tostring") " must return a string to " LUA_QL("print"));
+				return luaL_error(L, LUA_QL("tostring") " must return a string to " LUA_QL("print"));
 			if (i>1) jass_console_write_string("\t", 1);
 			jass_console_write_string(s, l);
-			ls->pop(1);
+			lua_pop(L, 1);
 		}
 		jass_console_write_string("\n", 1);
 		return 0;
 	}
 
-	int jass_console(lua::state* ls)
+	int jass_console(lua_State* L)
 	{
-		ls->newtable();
+		lua_newtable(L);
 		{
-			ls->newtable();
+			lua_newtable(L);
 			{
-				ls->pushstring("__index");
-				ls->pushcclosure((lua::cfunction)jass_console_get, 0);
-				ls->rawset(-3);
+				lua_pushstring(L, "__index");
+				lua_pushcclosure(L, jass_console_get, 0);
+				lua_rawset(L, -3);
 	
-				ls->pushstring("__newindex");
-				ls->pushcclosure((lua::cfunction)jass_console_set, 0);
-				ls->rawset(-3);
+				lua_pushstring(L, "__newindex");
+				lua_pushcclosure(L, jass_console_set, 0);
+				lua_rawset(L, -3);
 			}
-			ls->setmetatable(-2);
+			lua_setmetatable(L, -2);
 	
-			ls->pushstring("read");
-			ls->pushcclosure(jass_console_read, 0);
-			ls->rawset(-3);
+			lua_pushstring(L, "read");
+			lua_pushcclosure(L, jass_console_read, 0);
+			lua_rawset(L, -3);
 
-			ls->pushstring("write");
-			ls->pushcclosure(jass_console_write, 0);
-			ls->rawset(-3);
+			lua_pushstring(L, "write");
+			lua_pushcclosure(L, jass_console_write, 0);
+			lua_rawset(L, -3);
 		}
 		return 1;
 	}

@@ -9,62 +9,62 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	int jass_common(lua::state* ls); 
-	int jass_globals(lua::state* ls);
-	int jass_japi(lua::state* ls);
-	int jass_hook(lua::state* ls);
-	int jass_runtime(lua::state* ls);
-	int jass_slk(lua::state* ls);
-	int jass_storm(lua::state* ls);
-	int jass_console(lua::state* ls);
-	int jass_debug(lua::state* ls);
-	int fix_math(lua::state* ls);
+	int jass_common(lua_State* L); 
+	int jass_globals(lua_State* L);
+	int jass_japi(lua_State* L);
+	int jass_hook(lua_State* L);
+	int jass_runtime(lua_State* L);
+	int jass_slk(lua_State* L);
+	int jass_storm(lua_State* L);
+	int jass_console(lua_State* L);
+	int jass_debug(lua_State* L);
+	int fix_math(lua_State* L);
 
-	void register_preload_lib(lua::state* ls, const char *name, lua::cfunction f)
+	void register_preload_lib(lua_State* L, const char *name, lua_CFunction f)
 	{
-		ls->getfield(LUA_REGISTRYINDEX, "_PRELOAD");
-		ls->pushcclosure(f, 0);
-		ls->setfield(-2, name);
-		ls->pop(1);
+		lua_getfield(L, LUA_REGISTRYINDEX, "_PRELOAD");
+		lua_pushcclosure(L, f, 0);
+		lua_setfield(L, -2, name);
+		lua_pop(L, 1);
 	}
 
-	int fix_os(lua::state* ls)
+	int fix_os(lua_State* L)
 	{
-		ls->getglobal("os");
-		if (ls->istable(-1))
+		lua_getglobal(L, "os");
+		if (lua_istable(L, -1))
 		{
-			ls->pushstring("execute");   ls->pushnil(); ls->rawset(-3);
-			ls->pushstring("exit");      ls->pushnil(); ls->rawset(-3);
-			ls->pushstring("getenv");    ls->pushnil(); ls->rawset(-3);
-			ls->pushstring("remove");    ls->pushnil(); ls->rawset(-3);
-			ls->pushstring("rename");    ls->pushnil(); ls->rawset(-3);
-			ls->pushstring("setlocale"); ls->pushnil(); ls->rawset(-3);
-			ls->pushstring("tmpname");   ls->pushnil(); ls->rawset(-3);
+			lua_pushstring(L, "execute");   lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "exit");      lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "getenv");    lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "remove");    lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "rename");    lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "setlocale"); lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "tmpname");   lua_pushnil(L); lua_rawset(L, -3);
 		}
-		ls->pop(1);
+		lua_pop(L, 1);
 		return 0;
 	}
 
-	int open_lua_engine(lua::state* ls)
+	int open_lua_engine(lua_State* L)
 	{
-		register_preload_lib(ls, "jass.common",  jass_common);
-		register_preload_lib(ls, "jass.globals", jass_globals);
-		register_preload_lib(ls, "jass.japi",    jass_japi);
-		register_preload_lib(ls, "jass.hook",    jass_hook);
-		register_preload_lib(ls, "jass.runtime", jass_runtime);
-		register_preload_lib(ls, "jass.slk",     jass_slk);
-		register_preload_lib(ls, "jass.storm",   jass_storm);
-		register_preload_lib(ls, "jass.console", jass_console);
-		register_preload_lib(ls, "jass.debug",   jass_debug);
+		register_preload_lib(L, "jass.common",  jass_common);
+		register_preload_lib(L, "jass.globals", jass_globals);
+		register_preload_lib(L, "jass.japi",    jass_japi);
+		register_preload_lib(L, "jass.hook",    jass_hook);
+		register_preload_lib(L, "jass.runtime", jass_runtime);
+		register_preload_lib(L, "jass.slk",     jass_slk);
+		register_preload_lib(L, "jass.storm",   jass_storm);
+		register_preload_lib(L, "jass.console", jass_console);
+		register_preload_lib(L, "jass.debug",   jass_debug);
 
-		jreal_make_mt(ls->self());
-		jhandle_ud_make_mt(ls->self());
-		jhandle_lud_make_mt(ls->self());
-		jarray_make_mt(ls->self());
+		jreal_make_mt(L);
+		jhandle_ud_make_mt(L);
+		jhandle_lud_make_mt(L);
+		jarray_make_mt(L);
 
-		insert_searchers_table(ls);
-		fix_math(ls);
-		fix_os(ls);
+		insert_searchers_table(L);
+		fix_math(L);
+		fix_os(L);
 
 		return 0;
 	}

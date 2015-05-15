@@ -4,7 +4,7 @@
 #include "storm.h"
 #include "open_lua_engine.h"
 #include "libs_runtime.h"
-#include <base/lua/state.h>
+#include <lua.hpp>
 #include <base/warcraft3/event.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/func_value.h>
@@ -26,46 +26,46 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			{
 				if (state_)
 				{
-					state_->close();
+					lua_close(state_);
 					state_ = nullptr;
 				}
 			});
 		}
 
-		lua::state* get()
+		lua_State* get()
 		{
 			if (!state_) state_ = initialize();
 			return state_;
 		}
 
 	private:
-		int open_libs(lua::state* ls)
+		int open_libs(lua_State* L)
 		{
-			ls->requiref("_G",            (lua::cfunction)luaopen_base, 1);      ls->pop(1);
-			ls->requiref(LUA_LOADLIBNAME, (lua::cfunction)luaopen_package, 1);   ls->pop(1);
-			ls->requiref(LUA_COLIBNAME,   (lua::cfunction)luaopen_coroutine, 1); ls->pop(1);
-			ls->requiref(LUA_TABLIBNAME,  (lua::cfunction)luaopen_table, 1);     ls->pop(1);
-			ls->requiref(LUA_STRLIBNAME,  (lua::cfunction)luaopen_string, 1);    ls->pop(1);
-			ls->requiref(LUA_BITLIBNAME,  (lua::cfunction)luaopen_bit32, 1);     ls->pop(1);
-			ls->requiref(LUA_MATHLIBNAME, (lua::cfunction)luaopen_math, 1);      ls->pop(1);
-			ls->requiref(LUA_DBLIBNAME,   (lua::cfunction)luaopen_debug, 1);     ls->pop(1);
-			ls->requiref(LUA_OSLIBNAME,   (lua::cfunction)luaopen_os, 1);        ls->pop(1);
+			luaL_requiref(L, "_G",            luaopen_base, 1);      lua_pop(L, 1);
+			luaL_requiref(L, LUA_LOADLIBNAME, luaopen_package, 1);   lua_pop(L, 1);
+			luaL_requiref(L, LUA_COLIBNAME,   luaopen_coroutine, 1); lua_pop(L, 1);
+			luaL_requiref(L, LUA_TABLIBNAME,  luaopen_table, 1);     lua_pop(L, 1);
+			luaL_requiref(L, LUA_STRLIBNAME,  luaopen_string, 1);    lua_pop(L, 1);
+			luaL_requiref(L, LUA_BITLIBNAME,  luaopen_bit32, 1);     lua_pop(L, 1);
+			luaL_requiref(L, LUA_MATHLIBNAME, luaopen_math, 1);      lua_pop(L, 1);
+			luaL_requiref(L, LUA_DBLIBNAME,   luaopen_debug, 1);     lua_pop(L, 1);
+			luaL_requiref(L, LUA_OSLIBNAME,   luaopen_os, 1);        lua_pop(L, 1);
 			
 			return 1;
 		}
 
-		lua::state* initialize()
+		lua_State* initialize()
 		{
-			lua::state* ls = (lua::state*)luaL_newstate2();
-			open_libs(ls);
-			clear_searchers_table(ls);
-			open_lua_engine(ls);
+			lua_State* L = luaL_newstate2();
+			open_libs(L);
+			clear_searchers_table(L);
+			open_lua_engine(L);
 			runtime::initialize();
-			return ls;
+			return L;
 		}
 
 	private:
-		lua::state* state_;
+		lua_State* state_;
 	};
 	typedef singleton_nonthreadsafe<jass_state> jass_state_s;
 
@@ -89,10 +89,10 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			{
 				cheat_s = cheat_s.substr(1, cheat_s.size() - 2);
 			}
-			lua::state* ls = jass_state_s::instance().get();
-			ls->getglobal("require");
-			ls->pushlstring(cheat_s.c_str(), cheat_s.size());
-			safe_call(ls, 1, 1, true);
+			lua_State* L = jass_state_s::instance().get();
+			lua_getglobal(L, "require");
+			lua_pushlstring(L, cheat_s.c_str(), cheat_s.size());
+			safe_call(L, 1, 1, true);
 		}
 
 		c_call<uint32_t>(RealCheat, cheat_str);
@@ -101,27 +101,27 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 
 	jass::jstring_t __cdecl EXExecuteScript(jass::jstring_t script)
 	{
-		lua::state* ls = jass_state_s::instance().get();
+		lua_State* L = jass_state_s::instance().get();
 
 		std::string str_script = format("return (%s)", jass::from_trigstring(jass::from_string(script)));
-		if (luaL_loadbuffer(ls->self(), str_script.c_str(), str_script.size(), str_script.c_str()) != LUA_OK)
+		if (luaL_loadbuffer(L, str_script.c_str(), str_script.size(), str_script.c_str()) != LUA_OK)
 		{
-			printf("%s\n", ls->tostring(-1));
-			ls->pop(1);
+			printf("%s\n", lua_tostring(L, -1));
+			lua_pop(L, 1);
 			return 0;
 		}
 
-		if (LUA_OK != safe_call(ls, 0, 1, true))
+		if (LUA_OK != safe_call(L, 0, 1, true))
 		{
 			return 0;
 		}
 
 		jass::jstring_t result = 0;
-		if (ls->isstring(-1))
+		if (lua_isstring(L, -1))
 		{
-			result = jass::create_string(ls->tostring(-1));
+			result = jass::create_string(lua_tostring(L, -1));
 		}
-		ls->pop(1);
+		lua_pop(L, 1);
 		return result;
 	}
 
