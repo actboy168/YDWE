@@ -1,7 +1,6 @@
 #include <base/util/console.h>
 #include <windows.h>
 #include <cstdio>	
-#include <thread>
 #include <base/lockfree/queue.h> 
 #include <base/thread/lock/spin.h>
 
