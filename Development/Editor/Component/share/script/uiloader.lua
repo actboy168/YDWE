@@ -114,6 +114,15 @@ function loader:save_worldeditstrings(tbl)
 	return table.concat(rt, '\n')
 end
 
+local function is_enable_japi()
+	local ok, result = pcall(function ()
+		local tbl = sys.ini_load(fs.ydwe_path() / 'plugin' / 'warcraft3' / 'config.cfg')
+		return tbl['Enable']['yd_jass_api.dll'] ~= '0'
+	end)
+	if not ok then return true end
+	return result
+end
+
 function loader:config()
 	self.list = {}
 	local root = fs.ydwe_path() / 'share' / 'mpq'
@@ -123,8 +132,13 @@ function loader:config()
 		return false
 	end
 	local enable_ydtrigger = global_config["ThirdPartyPlugin"]["EnableYDTrigger"] ~= "0"
+	local enable_japi = is_enable_japi()
 	for line in f:lines() do
-		if enable_ydtrigger or (string.trim(line) ~= 'ydtrigger') then
+		if not enable_ydtrigger and (string.trim(line) == 'ydtrigger') then
+			-- do nothing
+		elseif not enable_japi and (string.trim(line) == 'japi') then
+			-- do nothing
+		else
 			table.insert(self.list, root / string.trim(line))
 		end
 	end
