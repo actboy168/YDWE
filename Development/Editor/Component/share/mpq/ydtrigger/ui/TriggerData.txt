@@ -117,15 +117,6 @@ _YDWELoadAnyTypeDataByUserData_Defaults=_,_,_
 _YDWELoadAnyTypeDataByUserData_Category=TC_YDBF
 YDWEHaveSavedAnyTypeDataByUserData=0,1,boolean,typename,Null,typename,scriptcode
 _YDWEHaveSavedAnyTypeDataByUserData_Category=TC_YDBF
-YDWEGetObjectPropertyInteger=0,0,integer,objecttype,Null,string
-_YDWEGetObjectPropertyInteger_Defaults=objecttype00_abilcode,AHhb,"levels"
-_YDWEGetObjectPropertyInteger_Category=TC_YDBF
-YDWEGetObjectPropertyReal=0,0,real,objecttype,Null,string
-_YDWEGetObjectPropertyReal_Defaults=objecttype00_abilcode,AHhb,"Rng1"
-_YDWEGetObjectPropertyReal_Category=TC_YDBF
-YDWEGetObjectPropertyString=0,0,string,objecttype,Null,string
-_YDWEGetObjectPropertyString_Defaults=objecttype00_abilcode,AHhb,"Name"
-_YDWEGetObjectPropertyString_Category=TC_YDBF
 
 [remove:TriggerActions]
 YDWEWaitForLocalVariable=

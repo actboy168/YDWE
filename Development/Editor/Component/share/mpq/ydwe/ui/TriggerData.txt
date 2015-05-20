@@ -1072,24 +1072,10 @@ UnitStateLife=0,unitstate,UNIT_STATE_LIFE,WESTRING_USTATE_LIFE
 UnitStateMaxLife=0,unitstate,UNIT_STATE_MAX_LIFE,WESTRING_USTATE_MAXLIFE
 UnitStateMana=0,unitstate,UNIT_STATE_MANA,WESTRING_USTATE_MANA
 UnitStateMaxMana=0,unitstate,UNIT_STATE_MAX_MANA,WESTRING_USTATE_MAXMANA
-UnitStateDamageDice=0,unitstate,ConvertUnitState(0x10),"骰子数量 [JAPI]"
-UnitStateDamageSide=0,unitstate,ConvertUnitState(0x11),"骰子面数 [JAPI]"
-UnitStateDamageBase=0,unitstate,ConvertUnitState(0x12),"基础伤害 [JAPI]"
-UnitStateDamageBonus=0,unitstate,ConvertUnitState(0x13),"附加伤害 [JAPI]"
-UnitStateDamageMix=0,unitstate,ConvertUnitState(0x14),"攻击最小值 [JAPI]"
-UnitStateDamageMax=0,unitstate,ConvertUnitState(0x15),"攻击最大值 [JAPI]"
-UnitStateDamageRange=0,unitstate,ConvertUnitState(0x16),"攻击范围 [JAPI]"
-UnitStateArmor=0,unitstate,ConvertUnitState(0x20),"护甲 [JAPI]"
 
 // UnitStatesSec
 UnitStateLifeSec=0,unitstatesec,UNIT_STATE_LIFE,WESTRING_USTATE_LIFE
 UnitStateManaSec=0,unitstatesec,UNIT_STATE_MANA,WESTRING_USTATE_MANA
-UnitStateDamageDiceSec=0,unitstatesec,ConvertUnitState(0x10),"骰子数量 [JAPI]"
-UnitStateDamageSideSec=0,unitstatesec,ConvertUnitState(0x11),"骰子面数 [JAPI]"
-UnitStateDamageBaseSec=0,unitstatesec,ConvertUnitState(0x12),"基础伤害 [JAPI]"
-UnitStateDamageBonusSec=0,unitstatesec,ConvertUnitState(0x13),"附加伤害 [JAPI]"
-UnitStateDamageRangeSec=0,unitstatesec,ConvertUnitState(0x16),"攻击范围 [JAPI]"
-UnitStateArmorSec=0,unitstatesec,ConvertUnitState(0x20),"护甲 [JAPI]"
 
 // Keyboard Event Types
 KeyEventTypeDepress=1,keyeventtype,bj_KEYEVENTTYPE_DEPRESS,WESTRING_KEYEVENTTYPE_DEPRESS
@@ -4144,9 +4130,6 @@ YDWESetAttackDamageWeaponType=0,attacktype,damagetype,weapontype
 _YDWESetAttackDamageWeaponType_Defaults=AttackTypeNormal,DamageTypeNormal,WEAPON_TYPE_WHOKNOWS
 _YDWESetAttackDamageWeaponType_Category=TC_YDFC
 
-YDWESetEventDamage=0,real
-_YDWESetEventDamage_Defaults=0.
-_YDWESetEventDamage_Category=TC_YDFC
 
 YDWEFlyEnable=0,unit
 _YDWEFlyEnable_Defaults=GetTriggerUnit
@@ -4169,28 +4152,6 @@ _YDWEManaChange_Category=TC_YDFC
 // YDWEOpenObjectMerger=0,nothing
 // _YDWEOpenObjectMerger_Category=TC_YDFC
 
-//YD Game Data
-YDWERHSetGameWinner=0,integer
-_YDWERHSetGameWinner_Defaults=0
-_YDWERHSetGameWinner_Limits=0,15
-_YDWERHSetGameWinner_Category=TC_YDHIDE
-
-YDWERecordSetTitle=0,integer,string
-_YDWERecordSetTitle_Defaults=0,_,
-_YDWERecordSetTitle_Limits=0,7,_,_
-_YDWERecordSetTitle_Category=TC_YDSL
-
-YDWERecordSetI=0,player,string,integer
-_YDWERecordSetI_Defaults=Player00,_,5
-_YDWERecordSetI_Category=TC_YDSL
-
-YDWERecordSave=0,player
-_YDWERecordSave_Defaults=Player00
-_YDWERecordSave_Category=TC_YDSL
-
-YDWERecordClear=0,player
-_YDWERecordClear_Defaults=Player00
-_YDWERecordClear_Category=TC_YDSL
 
 //YD Load
 
@@ -5170,33 +5131,6 @@ SetUnitAbilityLevelSwapped=1,abilcode,unit,integer
 _SetUnitAbilityLevelSwapped_Defaults=_,GetTriggerUnit,1
 _SetUnitAbilityLevelSwapped_Limits=_,_,_,_,1,_
 _SetUnitAbilityLevelSwapped_Category=TC_UNIT
-
-YDWESetUnitAbilityState=1,unit,abilcode,AbilityState,real
-_YDWESetUnitAbilityState_Defaults=GetTriggerUnit,_,ABILITY_STATE_COOLDOWN,_
-_YDWESetUnitAbilityState_Category=TC_UNIT
-
-YDWESetUnitAbilityDataInteger=1,unit,abilcode,integer,AbilityDataInteger,integer
-_YDWESetUnitAbilityDataInteger_Defaults=GetTriggerUnit,_,1,ABILITY_DATA_COST,_
-_YDWESetUnitAbilityDataInteger_Limits=_,_,_,_,1,_,_,_,_,_
-_YDWESetUnitAbilityDataInteger_Category=TC_UNIT
-
-YDWESetUnitAbilityDataReal=1,unit,abilcode,integer,AbilityDataReal,real
-_YDWESetUnitAbilityDataReal_Defaults=GetTriggerUnit,_,1,ABILITY_DATA_COOL,_
-_YDWESetUnitAbilityDataReal_Limits=_,_,_,_,1,_,_,_,_,_
-_YDWESetUnitAbilityDataReal_Category=TC_UNIT
-
-YDWESetUnitAbilityDataString=1,unit,abilcode,integer,AbilityDataString,string
-_YDWESetUnitAbilityDataString_Defaults=GetTriggerUnit,_,1,ABILITY_DATA_TIP,_
-_YDWESetUnitAbilityDataString_Limits=_,_,_,_,1,_,_,_,_,_
-_YDWESetUnitAbilityDataString_Category=TC_UNIT
-
-
-
-
-
-
-
-
 
 
 IssueImmediateOrder=0,unit,unitordernotarg
@@ -7317,10 +7251,6 @@ RemovePlayer=0,player,playergameresult
 _RemovePlayer_Defaults=Player00,GameResultLose
 _RemovePlayer_Category=TC_PLAYER
 
-YDWEDisplayChat=0,player,ChatRecipient,StringExt
-_YDWEDisplayChat_Defaults=Player00,CHAT_RECIPIENT_ALL,_
-_YDWEDisplayChat_Category=TC_PLAYER
-
 // Player Group actions
 // Specially handled by the editor
 ForForceMultiple=1,force
@@ -8530,12 +8460,6 @@ _YDWEGetBooleanByInteger_Category=TC_YDLD
 YDWEGetBooleanByString=0,1,boolean,string,string
 _YDWEGetBooleanByString_Category=TC_YDLD
 
-YDWEPlatformIsInPlatform=0,1,boolean
-_YDWEPlatformIsInPlatform_Category=TC_YDFC
-
-//YDWEPlatformIsInRoom=0,1,boolean
-//_YDWEPlatformIsInRoom_Category=TC_YDFC
-
 YDWEIsItemSwitch=0,1,boolean,unit
 _YDWEIsItemSwitch_Defaults=GetTriggerUnit
 _YDWEIsItemSwitch_Category=TC_YDST
@@ -8974,10 +8898,6 @@ YDWEGetLocalVariableIntegerArray=0,1,integer,string,integer
 _YDWEGetLocalVariableIntegerArray_Defaults=_,1
 _YDWEGetLocalVariableIntegerArray_Limits=_,_,0,_
 _YDWEGetLocalVariableIntegerArray_Category=TC_YDLC
-
-YDWERecordGetI=0,1,integer,player,string
-_YDWERecordGetI_Defaults=Player00,EverguoIsHandsome
-_YDWERecordGetI_Category=TC_YDSL
 
 YDWE_PreloadSL_Get=0,1,integer,player,string,integer
 _YDWE_PreloadSL_Get_Defaults=Player00,_,_
@@ -9545,40 +9465,6 @@ GetUnitDefaultFlyHeight=0,1,real,unit
 _GetUnitDefaultFlyHeight_Defaults=GetTriggerUnit
 _GetUnitDefaultFlyHeight_Category=TC_UNIT
 
-YDWEGetUnitAbilityState=0,0,real,unit,abilcode,AbilityState
-_YDWEGetUnitAbilityState_Defaults=GetTriggerUnit,_,ABILITY_STATE_COOLDOWN
-_YDWEGetUnitAbilityState_Category=TC_UNIT
-
-YDWEGetUnitAbilityDataInteger=0,0,integer,unit,abilcode,integer,AbilityDataInteger
-_YDWEGetUnitAbilityDataInteger_Defaults=GetTriggerUnit,_,1,ABILITY_DATA_COST
-_YDWEGetUnitAbilityDataInteger_Limits=_,_,_,_,1,_,_,_,
-_YDWEGetUnitAbilityDataInteger_Category=TC_UNIT
-
-YDWEGetUnitAbilityDataReal=0,0,real,unit,abilcode,integer,AbilityDataReal
-_YDWEGetUnitAbilityDataReal_Defaults=GetTriggerUnit,_,1,ABILITY_DATA_COOL
-_YDWEGetUnitAbilityDataReal_Limits=_,_,_,_,1,_,_,_,
-_YDWEGetUnitAbilityDataReal_Category=TC_UNIT
-
-YDWEGetUnitAbilityDataString=0,0,string,unit,abilcode,integer,AbilityDataString
-_YDWEGetUnitAbilityDataString_Defaults=GetTriggerUnit,_,1,ABILITY_DATA_TIP
-_YDWEGetUnitAbilityDataString_Limits=_,_,_,_,1,_,_,_,
-_YDWEGetUnitAbilityDataString_Category=TC_UNIT
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 GetLastTransmissionDurationBJ=0,1,real
 _GetLastTransmissionDurationBJ_Defaults=
@@ -9711,30 +9597,6 @@ _GetSoundDurationBJ_Category=TC_SOUND
 GetSoundFileDurationBJ=0,1,real,musicfile
 _GetSoundFileDurationBJ_Defaults=GetLastPlayedMusic
 _GetSoundFileDurationBJ_Category=TC_SOUND
-
-YDWEIsEventPhysicalDamage=0,1,boolean
-_YDWEIsEventPhysicalDamage_Defaults=
-_YDWEIsEventPhysicalDamage_Category=TC_EVENTRESPONSE
-
-YDWEIsEventAttackDamage=0,1,boolean
-_YDWEIsEventAttackDamage_Defaults=
-_YDWEIsEventAttackDamage_Category=TC_EVENTRESPONSE
-
-YDWEIsEventRangedDamage=0,1,boolean
-_YDWEIsEventRangedDamage_Defaults=
-_YDWEIsEventRangedDamage_Category=TC_EVENTRESPONSE
-
-YDWEIsEventDamageType=0,1,boolean,damagetype
-_YDWEIsEventDamageType_Defaults=DamageTypeNormal
-_YDWEIsEventDamageType_Category=TC_EVENTRESPONSE
-
-YDWEIsEventWeaponType=0,1,boolean,weapontype
-_YDWEIsEventWeaponType_Defaults=WEAPON_TYPE_WHOKNOWS
-_YDWEIsEventWeaponType_Category=TC_EVENTRESPONSE
-
-YDWEIsEventAttackType=0,1,boolean,attacktype
-_YDWEIsEventAttackType_Defaults=AttackTypeNormal
-_YDWEIsEventAttackType_Category=TC_EVENTRESPONSE
 
 GetEventDamage=0,1,real
 _GetEventDamage_Defaults=

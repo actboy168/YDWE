@@ -944,23 +944,6 @@ SetUnitAbilityLevelSwapped="设置技能等级"
 SetUnitAbilityLevelSwapped="设置 ",~技能," 等级对 ",~单位," 为 ",~Level
 SetUnitAbilityLevelSwappedHint="改变死亡单位的光环技能会导致魔兽崩溃."
 
-YDWESetUnitAbilityState="设置技能属性 [JAPI]"
-YDWESetUnitAbilityState="设置 ",~单位," 的 ",~技能," 的 ",~状态," 为 ",~Value
-YDWESetUnitAbilityStateHint=""
-
-YDWESetUnitAbilityDataInteger="设置技能数据 (整数) [JAPI]"
-YDWESetUnitAbilityDataInteger="设置 ",~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据," 为 ",~Value
-YDWESetUnitAbilityDataIntegerHint=""
-
-YDWESetUnitAbilityDataReal="设置技能数据 (实数) [JAPI]"
-YDWESetUnitAbilityDataReal="设置 ",~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据," 为 ",~Value
-YDWESetUnitAbilityDataRealHint="数据A~数据I也就是物体编辑器里按Ctrl+D后看到的DataA~DataI"
-
-YDWESetUnitAbilityDataString="设置技能数据 (字符串) [JAPI]"
-YDWESetUnitAbilityDataString="设置 ",~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据," 为 ",~Value
-YDWESetUnitAbilityDataStringHint=""
-
-
 
 IssueImmediateOrder="发布命令(无目标)"
 IssueImmediateOrder="对 ",~单位," 发布 ",~Order," 命令"
@@ -2270,10 +2253,6 @@ YDWESetAttackDamageWeaponType="设置默认攻击|伤害|武器类型"
 YDWESetAttackDamageWeaponType="设置默认攻击类型为 ",~攻击类型,"，伤害类型为 ",~伤害类型,"，武器类型为 ",~武器类型
 YDWESetAttackDamageWeaponTypeHint="设置一些技能（如钩子、月神箭）需要用到的攻击|伤害|武器类型，系统会按设置的攻击|伤害|武器类型对目标造成伤害。"
 
-YDWESetEventDamage="设置伤害值 [JAPI]"
-YDWESetEventDamage="设置单位所受伤害为 ",~伤害值
-YDWESetEventDamageHint="修改伤害事件里的伤害值，不能在等待之后使用。"
-
 YDWEFlyEnable="设置单位可以飞行"
 YDWEFlyEnable="让单位 ",~地面单位," 变得可以飞行。"
 YDWEFlyEnableHint="让一个地面单位变得可以飞行，可以设置其飞行高度。"
@@ -2289,27 +2268,6 @@ YDWELifeChangeHint="如果修改后单位生命上限小于0，单位会立即�
 YDWEManaChange="设置单位魔法上限"
 YDWEManaChange="设置 ",~单位," 的魔法上限 ",~变化," ",~整数," ，关联技能为 ",~辅助技能
 YDWEManaChangeHint="如果修改后单位魔法上限小于0，单位的魔法栏将消失；关联技能的设置请参考example文件夹下的辅助地图。"
-
-//YD Game Data
-YDWERHSetGameWinner="设置联盟胜利 [JAPI]"
-YDWERHSetGameWinner="设置队伍(",~整数,")获胜"
-YDWERHSetGameWinnerHint="队伍1的ID为0，队伍2的ID为1。"
-
-YDWERecordSetTitle="服务器存档-设置平台积分项名称 [JAPI]"
-YDWERecordSetTitle="设置平台界面上第",~整数,"个积分项名称为〖",~战斗力,"〗"
-YDWERecordSetTitleHint="11平台RPG积分是用玩家服务器存档来模拟，这里可以设置需要显示在平台界面上的积分项名字，最多可显示8个积分项，每个积分项名字不超过3个汉字。"
-
-YDWERecordSetI="服务器存档-设置玩家存档数据 [JAPI]"
-YDWERecordSetI="设置",~玩家,"的服务器存档数据〖",~战斗力,"〗为",~整数
-YDWERecordSetIHint="设置玩家服务器存档里某个目录下的数据，如设置玩家一的战斗力为5。"
-
-YDWERecordSave="服务器存档-保存玩家存档数据 [JAPI]"
-YDWERecordSave="保存",~玩家,"当前所有存档数据"
-YDWERecordSaveHint="服务器存档数据必须保存后才能生效。"
-
-YDWERecordClear="服务器存档-清空玩家存档数据 [JAPI]"
-YDWERecordClear="清空",~玩家,"当前所有存档数据"
-YDWERecordClearHint="由于每个玩家最多只能存储100条左右的数据，假如超过上限，建议使用此功能清空全部数据，然后重新保存有用的数据。"
 
 //YD Load
 YDWEFlushMissionByInteger="清空 目录 (整数路径)"
@@ -3590,10 +3548,6 @@ SetPlayerNameHint=
 RemovePlayer="踢除玩家"
 RemovePlayer="踢除 ",~Player," ，玩家的游戏结果为 ",~文字
 RemovePlayerHint=
-
-YDWEDisplayChat="模拟玩家聊天 [JAPI]"
-YDWEDisplayChat="模拟 ",~Player," 在 ",~频道," 发言: ",~文字
-YDWEDisplayChatHint=
 
 // Player Group actions
 ForForceMultiple="选取玩家组内玩家做动作(多个动作)"
@@ -4916,14 +4870,6 @@ YDWEIsItemSwitch="单位切换背包[YDWE]"
 YDWEIsItemSwitch=~单位," 正在切换背包"
 YDWEIsItemSwitchHint="判断单位是否在切换背包，避免单位切换背包时触发获得和掉落物品事件。"
 
-YDWEPlatformIsInPlatform="地图在11平台上 [JAPI]"
-YDWEPlatformIsInPlatform="目前地图正在11平台上运行"
-YDWEPlatformIsInPlatformHint="判断地图是否在11平台上；此功能可以根据地图所在平台做出差异化操作。特别注意：此操作内含有等待。"
-
-//YDWEPlatformIsInRoom="地图在特殊房间中 [JAPI]"
-//YDWEPlatformIsInRoom="目前地图在11平台的特殊房间中"
-//YDWEPlatformIsInRoomHint="判断地图是否在11平台的特殊房间中；此功能是为了一些测试地图准备，让地图只能在某个房间建立。特别注意：此操作内含有等待。"
-
 IsDestructableAliveBJ="可破坏物存活"
 IsDestructableAliveBJ=~可破坏物," 是存活的"
 IsDestructableAliveBJHint=""
@@ -5379,10 +5325,6 @@ StringHashHint="获取一个对应该字符串的密钥，不同的字符串的�
 YDWE_PreloadSL_Get="获取存档数据"
 YDWE_PreloadSL_Get="从",~玩家,"获取 ※",~数据注释,"，","从","当","前","存","档","[",~数据项索引,"]","上","获","取"
 YDWE_PreloadSL_GetHint="从玩家本地存档上获取数据，需要填入正确的数据项索引，标签即该项数据的注释。"
-
-YDWERecordGetI="获取存档数据 [JAPI]"
-YDWERecordGetI="从",~玩家,"的服务器存档中读出〖",~数据名,"〗"
-YDWERecordGetIHint="从玩家服务器存档上获取数据，需要填入正确的数据名。"
 
 YDWEGetLocalVariableInteger="局部变量"
 YDWEGetLocalVariableInteger="local_",~i
@@ -5890,30 +5832,6 @@ GetDestructableY="可破坏物所在Y轴坐标 [R]"
 GetDestructableY=~可破坏物," 所在Y轴坐标"
 GetDestructableYHint
 
-YDWEIsEventPhysicalDamage="是物理伤害 [JAPI]"
-YDWEIsEventPhysicalDamage="单位所受伤害是物理伤害"
-YDWEIsEventPhysicalDamageHint="响应'受到伤害'单位事件,不能用在等待之后"
-
-YDWEIsEventAttackDamage="是攻击伤害 [JAPI]"
-YDWEIsEventAttackDamage="单位所受伤害是攻击伤害"
-YDWEIsEventAttackDamageHint="响应'受到伤害'单位事件,不能用在等待之后"
-
-YDWEIsEventRangedDamage="是远程伤害 [JAPI]"
-YDWEIsEventRangedDamage="单位所受伤害是远程伤害"
-YDWEIsEventRangedDamageHint="响应'受到伤害'单位事件,不能用在等待之后"
-
-YDWEIsEventDamageType="伤害类型 [JAPI]"
-YDWEIsEventDamageType="单位所受伤害的伤害类型是 ",~伤害类型
-YDWEIsEventDamageTypeHint="响应'受到伤害'单位事件,不能用在等待之后"
-
-YDWEIsEventWeaponType="武器类型 [JAPI]"
-YDWEIsEventWeaponType="单位所受伤害的武器类型是 ",~武器类型
-YDWEIsEventWeaponTypeHint="响应'受到伤害'单位事件,不能用在等待之后"
-
-YDWEIsEventAttackType="攻击类型 [JAPI]"
-YDWEIsEventAttackType="单位所受伤害的攻击类型是 ",~攻击类型
-YDWEIsEventAttackTypeHint="响应'受到伤害'单位事件,不能用在等待之后"
-
 GetEventDamage="伤害值"
 GetEventDamage="单位所受伤害"
 GetEventDamageHint="响应'受到伤害'单位事件,指代单位所受伤害."
@@ -6221,38 +6139,6 @@ GetUnitFlyHeightHint="飞行单位可以直接改变飞行高度. 其他单位�
 GetUnitDefaultFlyHeight="默认飞行高度"
 GetUnitDefaultFlyHeight=~单位," 的默认飞行高度"
 GetUnitDefaultFlyHeightHint="飞行单位可以直接改变飞行高度. 其他单位通过添加/删除 替换为飞行单位的变身技能(如乌鸦形态)之后,也能改变飞行高度."
-
-YDWEGetUnitAbilityState="技能属性 [JAPI]"
-YDWEGetUnitAbilityState=~单位," 的 ",~技能," 的 ",~状态
-YDWEGetUnitAbilityStateHint=""
-
-YDWEGetUnitAbilityDataInteger="技能数据 (整数) [JAPI]"
-YDWEGetUnitAbilityDataInteger=~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据
-YDWEGetUnitAbilityDataIntegerHint=""
-
-YDWEGetUnitAbilityDataReal="技能数据 (实数) [JAPI]"
-YDWEGetUnitAbilityDataReal=~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据
-YDWEGetUnitAbilityDataRealHint="数据A~数据I也就是物体编辑器里按Ctrl+D后看到的DataA~DataI"
-
-YDWEGetUnitAbilityDataString="技能数据 (字符串) [JAPI]"
-YDWEGetUnitAbilityDataString=~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据
-YDWEGetUnitAbilityDataStringHint=""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // returns hashtable
 LoadIntegerBJ="<1.24> 从哈希表提取整数"

@@ -60,15 +60,6 @@ YDWELoadAnyTypeDataByUserDataHint="从某个数据上获取自定义值，如获
 YDWEHaveSavedAnyTypeDataByUserData="自定义值 -- 是否存有"
 YDWEHaveSavedAnyTypeDataByUserData="[",~类型,"] ",~null," 拥有 [",~类型,"] "~属性
 YDWEHaveSavedAnyTypeDataByUserDataHint="判断某个数据的自定义值是否存在，如[单位] 恶魔猎手 拥有[物品] 圣剑。"
-YDWEGetObjectPropertyInteger="物体属性 (整数) [JAPI]"
-YDWEGetObjectPropertyInteger="[",~类型,"]",~物体," 的 ",~属性名,""
-YDWEGetObjectPropertyIntegerHint="属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
-YDWEGetObjectPropertyReal="物体属性 (实数) [JAPI]"
-YDWEGetObjectPropertyReal="[",~类型,"]",~物体," 的 ",~属性名,""
-YDWEGetObjectPropertyRealHint="属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
-YDWEGetObjectPropertyString="物体属性 (字符串) [JAPI]"
-YDWEGetObjectPropertyString="[",~类型,"]",~物体," 的 ",~属性名,""
-YDWEGetObjectPropertyStringHint="属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
 
 [remove:TriggerActionStrings]
 YDWEWaitForLocalVariable="等待(局部变量专用)[YDWE]"
