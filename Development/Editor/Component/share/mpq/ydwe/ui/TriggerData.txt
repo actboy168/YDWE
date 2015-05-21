@@ -11259,6 +11259,10 @@ _            _Defaults=_
 _            _Category=TC_NOTHING
 
 // returns timerdialog
+CreateTimerDialog=0,1,timerdialog,timer
+_CreateTimerDialog_Defaults=_
+_CreateTimerDialog_Category=TC_TIMER
+
 GetLastCreatedTimerDialogBJ=0,1,timerdialog
 _GetLastCreatedTimerDialogBJ_Defaults=
 _GetLastCreatedTimerDialogBJ_Category=TC_LAST
