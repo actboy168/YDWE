@@ -86,7 +86,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="auto_enter.cpp" />
     <ClCompile Include="FullWindowedMode.cpp" />
+    <ClCompile Include="game_status.cpp" />
     <ClCompile Include="LockingMouse.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="DllModule.cpp" />
@@ -95,8 +97,11 @@
     <None Include="yd_loader.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="auto_enter.h" />
     <ClInclude Include="DllModule.h" />
     <ClInclude Include="FullWindowedMode.h" />
+    <ClInclude Include="game_status.h" />
+    <ClInclude Include="war3_packet.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(YDWE)\Editor\Core\ydbase\ydbase.vcxproj">

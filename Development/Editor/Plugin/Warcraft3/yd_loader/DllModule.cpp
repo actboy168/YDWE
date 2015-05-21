@@ -15,6 +15,8 @@
 #include <slk/reader/IniReader.cpp>
 #include <slk/reader/CommonReader.cpp>
 #include <map>
+#include "auto_enter.h"
+#include "game_status.h"
 
 uintptr_t RealLoadLibraryA  = 0;
 uintptr_t RealGameLoadLibraryA  = 0;
@@ -46,6 +48,7 @@ HWND WINAPI FakeCreateWindowExA(
 		&& (NULL == g_DllMod.hWar3Wnd))
 	{
 		g_DllMod.hWar3Wnd = hWnd;
+		//auto_enter::initialize();
 		if (g_DllMod.IsFullWindowedMode)
 		{
 			fullWindowedMode.Start();
@@ -66,7 +69,6 @@ HWND WINAPI FakeCreateWindowExA(
 
 	return hWnd;
 }
-
 
 bool EnableDirect3D9(HMODULE gamedll)
 {
@@ -122,7 +124,7 @@ HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
 			base::std_call<BOOL>(RealSFileOpenArchive, (g_DllMod.patch_path / "Patch.mpq").string().c_str(), 9, 6, &hMpq);
 
 			g_DllMod.LoadPlugins();
-
+			auto_enter::game_status::initialize(g_DllMod.hGameDll);
 
 			if (g_DllMod.IsEnableDirect3D9)
 			{

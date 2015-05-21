@@ -24,12 +24,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="auto_enter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_status.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DllModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FullWindowedMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="war3_packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="auto_enter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_status.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
