@@ -2,7 +2,6 @@
 
 #include <base/config.h>
 #include <Windows.h>
-#include <list>
 
 namespace base { namespace hook {	
 	uintptr_t _BASE_API iat(HMODULE module_handle,      const char* dll_name, const char* api_name, uintptr_t new_function);
