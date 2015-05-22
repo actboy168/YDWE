@@ -48,7 +48,10 @@ HWND WINAPI FakeCreateWindowExA(
 		&& (NULL == g_DllMod.hWar3Wnd))
 	{
 		g_DllMod.hWar3Wnd = hWnd;
-		//auto_enter::initialize();
+		if (g_DllMod.IsAuto)
+		{
+			auto_enter::initialize();
+		}
 		if (g_DllMod.IsFullWindowedMode)
 		{
 			fullWindowedMode.Start();
@@ -141,6 +144,7 @@ HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
 DllModule::DllModule()
 	: hWar3Wnd(NULL)
 	, IsWindowMode(false)
+	, IsAuto(false)
 	, IsFullWindowedMode(false)
 	, IsLockingMouse(false)
 	, IsFixedRatioWindowed(false)
@@ -306,6 +310,10 @@ void DllModule::Attach()
 		else if (key == L"window")
 		{
 			IsWindowMode = true;
+		}
+		else if (key == L"auto")
+		{
+			IsAuto = true;
 		}
 	});
 

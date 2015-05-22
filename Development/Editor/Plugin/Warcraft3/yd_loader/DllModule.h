@@ -25,6 +25,7 @@ public:
 	HMODULE  hGameDll;
 	HWND     hWar3Wnd;
 	bool     IsWindowMode;
+	bool     IsAuto;
 	bool     IsFullWindowedMode;
 	bool     IsLockingMouse;
 	bool     IsFixedRatioWindowed;
