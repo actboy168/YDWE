@@ -64,15 +64,21 @@ namespace base { namespace warcraft3 {
 		result += app_;
 		result += L"\"";
 
+		if (has(L"window")) { result += L" -window"; }
+		if (has(L"opengl")) { result += L" -opengl"; }
+
 		foreach(auto it, *this)
 		{
-			result += L" -";
-			result += it.first;
-			if (!it.second.empty())
+			if (it.first != L"window" &&it.first != L"opengl")
 			{
-				result += L" \"";
-				result += it.second;
-				result += L"\"";
+				result += L" -";
+				result += it.first;
+				if (!it.second.empty())
+				{
+					result += L" \"";
+					result += it.second;
+					result += L"\"";
+				}
 			}
 		}
 
