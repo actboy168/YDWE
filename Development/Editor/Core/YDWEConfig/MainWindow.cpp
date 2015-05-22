@@ -84,7 +84,8 @@ namespace
 		("LaunchFullWindowed",                      Attribute("MapTest"))
 		("LaunchLockingMouse",                      Attribute("MapTest"))
 		("LaunchFixedRatioWindowed",                Attribute("MapTest"))
-		("LaunchDisableSecurityAccess",             Attribute("MapTest"))		
+		("LaunchDisableSecurityAccess",             Attribute("MapTest"))
+		("EnableHost",                              Attribute("MapTest"))
 		("EnableDotNetSupport",                     Attribute("ThirdPartyPlugin"))
 		("EnableTesh",                              Attribute("ThirdPartyPlugin"))
 		("EnableYDTrigger",                         Attribute("ThirdPartyPlugin"))
@@ -162,6 +163,7 @@ void CMainWindow::InitWindow()
 	m_pEnableJassHelper = m_controls["EnableJassHelper"];
 	m_pEnableCJass      = m_controls["EnableCJass"];
 	m_pLaunchWindowed   = m_controls["LaunchWindowed"];
+	m_pEnableHost       = m_controls["EnableHost"];
 	m_pFontEnable       = m_controls["FontEnable"];
 	m_pFontName         = m_comboboxs["FontName"];
 	m_pFontSize         = m_comboboxs["FontSize"];
@@ -188,7 +190,8 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["MapTest"]["LaunchFullWindowed"] = "0";
 	table["MapTest"]["LaunchLockingMouse"] = "0";
 	table["MapTest"]["LaunchFixedRatioWindowed"] = "1";
-	table["MapTest"]["LaunchDisableSecurityAccess"] = "0";	
+	table["MapTest"]["LaunchDisableSecurityAccess"] = "0";
+	table["MapTest"]["EnableHost"] = "0";
 	table["ScriptCompiler"]["EnableJassHelper"] = "1";
 	table["ScriptCompiler"]["EnableJassHelperDebug"] = "0";
 	table["ScriptCompiler"]["EnableJassHelperScriptOnly"] = "0";

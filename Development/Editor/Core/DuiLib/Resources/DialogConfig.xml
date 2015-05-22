@@ -29,11 +29,13 @@
         <Control height="1" />
         <RadioButton name="tab_1" group="TabSelect" text="测试"       textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
-        <RadioButton name="tab_2" group="TabSelect" text="编辑器插件" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <RadioButton name="tab_2" group="TabSelect" text="局域网测试" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
-        <RadioButton name="tab_3" group="TabSelect" text="魔兽插件"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <RadioButton name="tab_3" group="TabSelect" text="编辑器插件" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
-        <RadioButton name="tab_4" group="TabSelect" text="系统关联"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <RadioButton name="tab_4" group="TabSelect" text="魔兽插件"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <Control height="1" />
+        <RadioButton name="tab_5" group="TabSelect" text="系统关联"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
       </VerticalLayout>
       <TabLayout name="tabs" >
         <VerticalLayout class="Background" inset="2,18,2,18" >
@@ -106,6 +108,14 @@
                 <VerticalLayout name ="War3PatchList" enabled="false" vscrollbar="true" height="90" >
                 </VerticalLayout>
               </HorizontalLayout>
+            </VerticalLayout>
+          </VerticalLayout>
+        </VerticalLayout>
+        <VerticalLayout class="Background" inset="2,24,2,24" >
+          <VerticalLayout height="260" >
+            <Label text="局域网测试"  tooltip="" class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <CheckBox text="启用局域网测试"         width="200" name="EnableHost" tooltip="" />
             </VerticalLayout>
           </VerticalLayout>
         </VerticalLayout>
