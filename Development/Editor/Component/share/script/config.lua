@@ -1,7 +1,7 @@
 require "util"
 
 local file = fs.ydwe_path() / "bin" / "EverConfig.cfg"
-local tbl = nil
+
 local tbl_index = {
 	MapSave = {
 		Option = "0"
@@ -10,6 +10,7 @@ local tbl_index = {
 		Option = "0"
 	},
 	MapTest = {
+		EnableHost = "0",
 		LaunchRenderingEngine = "Direct3D 8",
 		LaunchWindowed = "1",
 		LaunchFullWindowed = "0",
@@ -45,12 +46,11 @@ local tbl_index = {
 }
 
 function global_config_reload()
-	tbl = sys.ini_load(file)
+	local tbl = sys.ini_load(file)
 	if not tbl then
 		tbl = {}
 	end
 	tbl = setmetatable(tbl, {__index = tbl_index})
+	global_config = tbl
 end
 global_config_reload()
-
-global_config = tbl
