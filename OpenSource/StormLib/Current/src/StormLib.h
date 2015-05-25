@@ -169,6 +169,7 @@ extern "C" {
 
 // Values for SFileOpenFile
 #define SFILE_OPEN_FROM_MPQ         0x00000000  // Open the file from the MPQ archive
+#define SFILE_OPEN_CHECK_EXISTS     0xFFFFFFFC  // Only check whether the file exists
 #define SFILE_OPEN_BASE_FILE        0xFFFFFFFD  // Reserved for StormLib internal use
 #define SFILE_OPEN_ANY_LOCALE       0xFFFFFFFE  // Reserved for StormLib internal use
 #define SFILE_OPEN_LOCAL_FILE       0xFFFFFFFF  // Open a local file
@@ -177,12 +178,18 @@ extern "C" {
 #define MPQ_FLAG_READ_ONLY          0x00000001  // If set, the MPQ has been open for read-only access
 #define MPQ_FLAG_CHANGED            0x00000002  // If set, the MPQ tables have been changed
 #define MPQ_FLAG_MALFORMED          0x00000004  // Malformed data structure detected (W3M map protectors)
-#define MPQ_FLAG_CHECK_SECTOR_CRC   0x00000008  // Checking sector CRC when reading files
-#define MPQ_FLAG_LISTFILE_INVALID   0x00000020  // If set, it means that the (listfile) has been invalidated
-#define MPQ_FLAG_ATTRIBUTES_INVALID 0x00000040  // If set, it means that the (attributes) has been invalidated
-#define MPQ_FLAG_SIGNATURE_INVALID  0x00000080  // If set, it means that the (signature) has been invalidated
-#define MPQ_FLAG_SAVING_TABLES      0x00000100  // If set, we are saving MPQ internal files and MPQ tables
-#define MPQ_FLAG_PATCH              0x00000200  // If set, this MPQ is a patch archive
+#define MPQ_FLAG_HASH_TABLE_CUT     0x00000008  // The hash table goes beyond EOF
+#define MPQ_FLAG_BLOCK_TABLE_CUT    0x00000010  // The hash table goes beyond EOF
+#define MPQ_FLAG_CHECK_SECTOR_CRC   0x00000020  // Checking sector CRC when reading files
+#define MPQ_FLAG_SAVING_TABLES      0x00000040  // If set, we are saving MPQ internal files and MPQ tables
+#define MPQ_FLAG_PATCH              0x00000080  // If set, this MPQ is a patch archive
+#define MPQ_FLAG_WAR3_MAP           0x00000100  // If set, this MPQ is a map for Warcraft III
+#define MPQ_FLAG_LISTFILE_NONE      0x00000200  // Set when no (listfile) was found in InvalidateInternalFiles
+#define MPQ_FLAG_LISTFILE_NEW       0x00000400  // Set when (listfile) invalidated by InvalidateInternalFiles
+#define MPQ_FLAG_ATTRIBUTES_NONE    0x00000800  // Set when no (attributes) was found in InvalidateInternalFiles
+#define MPQ_FLAG_ATTRIBUTES_NEW     0x00001000  // Set when (attributes) invalidated by InvalidateInternalFiles
+#define MPQ_FLAG_SIGNATURE_NONE     0x00002000  // Set when no (signature) was found in InvalidateInternalFiles
+#define MPQ_FLAG_SIGNATURE_NEW      0x00004000  // Set when (signature) invalidated by InvalidateInternalFiles
 
 // Values for TMPQArchive::dwSubType
 #define MPQ_SUBTYPE_MPQ             0x00000000  // The file is a MPQ file (Blizzard games)
@@ -208,6 +215,8 @@ extern "C" {
 #define MPQ_FILE_COMPRESS_MASK      0x0000FF00  // Mask for a file being compressed
 #define MPQ_FILE_EXISTS             0x80000000  // Set if file exists, reset when the file was deleted
 #define MPQ_FILE_REPLACEEXISTING    0x80000000  // Replace when the file exist (SFileAddFile)
+
+#define MPQ_FILE_EXISTS_MASK        0xF00000FF  // These must be either zero or MPQ_FILE_EXISTS
 
 #define MPQ_FILE_VALID_FLAGS     (MPQ_FILE_IMPLODE       |  \
                                   MPQ_FILE_COMPRESS      |  \
@@ -404,7 +413,7 @@ typedef enum _SFileInfoClass
     SFileMpqNumberOfFiles,                  // Number of files (DWORD)
     SFileMpqRawChunkSize,                   // Size of the raw data chunk for MD5
     SFileMpqStreamFlags,                    // Stream flags (DWORD)
-    SFileMpqIsReadOnly,                     // Nonzero if the MPQ is read only (DWORD)
+    SFileMpqFlags,                          // Nonzero if the MPQ is read only (DWORD)
 
     // Info classes for files
     SFileInfoPatchChain,                    // Chain of patches where the file is (TCHAR [])
@@ -424,46 +433,6 @@ typedef enum _SFileInfoClass
     SFileInfoEncryptionKey,                 // File encryption key
     SFileInfoEncryptionKeyRaw,              // Unfixed value of the file key
 } SFileInfoClass;
-
-//-----------------------------------------------------------------------------
-// Deprecated flags. These are going to be removed in next releases.
-
-/*
-
-STORMLIB_DEPRECATED_FLAG(DWORD, STREAM_PROVIDER_LINEAR, STREAM_PROVIDER_FLAT);
-STORMLIB_DEPRECATED_FLAG(DWORD, STREAM_PROVIDER_ENCRYPTED, STREAM_PROVIDER_MPQE);
-STORMLIB_DEPRECATED_FLAG(DWORD, MPQ_OPEN_ENCRYPTED, STREAM_PROVIDER_MPQE);
-STORMLIB_DEPRECATED_FLAG(DWORD, MPQ_OPEN_PARTIAL, STREAM_PROVIDER_PARTIAL);
-
-// MPQ_FILE_COMPRESSED is deprecated. Do not use.
-STORMLIB_DEPRECATED_FLAG(DWORD, MPQ_FILE_COMPRESSED, MPQ_FILE_COMPRESS_MASK);
-
-// Legacy values for file info classes. Included for backward compatibility, do not use.
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_ARCHIVE_NAME, SFileMpqFileName);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_ARCHIVE_SIZE, SFileMpqArchiveSize);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_MAX_FILE_COUNT, SFileMpqMaxFileCount);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_HASH_TABLE_SIZE, SFileMpqHashTableSize);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_BLOCK_TABLE_SIZE, SFileMpqBlockTableSize);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_SECTOR_SIZE, SFileMpqSectorSize);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_HASH_TABLE, SFileMpqHashTable);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_BLOCK_TABLE, SFileMpqBlockTable);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_NUM_FILES, SFileMpqNumberOfFiles);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_STREAM_FLAGS, SFileMpqStreamFlags);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_IS_READ_ONLY, SFileMpqIsReadOnly);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_HASH_INDEX, SFileInfoHashIndex);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_CODENAME1, SFileInfoNameHash1);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_CODENAME2, SFileInfoNameHash2);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_LOCALEID, SFileInfoLocale);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_BLOCKINDEX, SFileInfoFileIndex);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_FILE_SIZE, SFileInfoFileSize);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_COMPRESSED_SIZE, SFileInfoCompressedSize);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_FLAGS, SFileInfoFlags);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_POSITION, SFileInfoByteOffset);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_KEY, SFileInfoEncryptionKey);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_KEY_UNFIXED, SFileInfoEncryptionKeyRaw);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_FILETIME, SFileInfoFileTime);
-STORMLIB_DEPRECATED_FLAG(SFileInfoClass, SFILE_INFO_PATCH_CHAIN, SFileInfoPatchChain);
-*/
 
 //-----------------------------------------------------------------------------
 // Callback functions
@@ -685,31 +654,6 @@ typedef struct _TPatchInfo
     // Followed by the sector table (variable length)
 } TPatchInfo;
 
-// Header for PTCH files 
-typedef struct _TPatchHeader
-{
-    //-- PATCH header -----------------------------------
-    DWORD dwSignature;                          // 'PTCH'
-    DWORD dwSizeOfPatchData;                    // Size of the entire patch (decompressed)
-    DWORD dwSizeBeforePatch;                    // Size of the file before patch
-    DWORD dwSizeAfterPatch;                     // Size of file after patch
-    
-    //-- MD5 block --------------------------------------
-    DWORD dwMD5;                                // 'MD5_'
-    DWORD dwMd5BlockSize;                       // Size of the MD5 block, including the signature and size itself
-    BYTE md5_before_patch[0x10];                // MD5 of the original (unpached) file
-    BYTE md5_after_patch[0x10];                 // MD5 of the patched file
-
-    //-- XFRM block -------------------------------------
-    DWORD dwXFRM;                               // 'XFRM'
-    DWORD dwXfrmBlockSize;                      // Size of the XFRM block, includes XFRM header and patch data
-    DWORD dwPatchType;                          // Type of patch ('BSD0' or 'COPY')
-
-    // Followed by the patch data
-} TPatchHeader;
-
-#define SIZE_OF_XFRM_HEADER  0x0C
-
 // This is the combined file entry for maintaining file list in the MPQ.
 // This structure is combined from block table, hi-block table,
 // (attributes) file and from (listfile).
@@ -718,14 +662,11 @@ typedef struct _TFileEntry
     ULONGLONG FileNameHash;                     // Jenkins hash of the file name. Only used when the MPQ has BET table.
     ULONGLONG ByteOffset;                       // Position of the file content in the MPQ, relative to the MPQ header
     ULONGLONG FileTime;                         // FileTime from the (attributes) file. 0 if not present.
-    DWORD     dwHashIndex;                      // Index to the hash table. Only used when the MPQ has classic hash table
     DWORD     dwFileSize;                       // Decompressed size of the file
     DWORD     dwCmpSize;                        // Compressed size of the file (i.e., size of the file data in the MPQ)
     DWORD     dwFlags;                          // File flags (from block table)
-    USHORT    lcLocale;                         // Locale ID for the file
-    USHORT    wPlatform;                        // Platform ID for the file
     DWORD     dwCrc32;                          // CRC32 from (attributes) file. 0 if not present.
-    unsigned char md5[MD5_DIGEST_SIZE];         // File MD5 from the (attributes) file. 0 if not present.
+    BYTE      md5[MD5_DIGEST_SIZE];             // File MD5 from the (attributes) file. 0 if not present.
     char * szFileName;                          // File name. NULL if not known.
 } TFileEntry;
 
@@ -832,6 +773,19 @@ typedef struct _TMPQNamePrefix
     char szPatchPrefix[1];                      // Patch name prefix (variable length). If not empty, it always starts with backslash.
 } TMPQNamePrefix;
 
+// Structure for name cache
+typedef struct _TMPQNameCache
+{
+    DWORD FirstNameOffset;                      // Offset of the first name in the name list (in bytes)
+    DWORD FreeSpaceOffset;                      // Offset of the first free byte in the name cache (in bytes)
+    DWORD TotalCacheSize;                       // Size, in bytes, of the cache. Includes wildcard
+    DWORD SearchOffset;                         // Used by SListFileFindFirstFile
+
+    // Followed by search mask (ASCIIZ, '\0' if none)
+    // Followed by name cache (ANSI multistring)
+
+} TMPQNameCache;
+
 // Archive handle structure
 typedef struct _TMPQArchive
 {
@@ -839,6 +793,7 @@ typedef struct _TMPQArchive
 
     ULONGLONG      UserDataPos;                 // Position of user data (relative to the begin of the file)
     ULONGLONG      MpqPos;                      // MPQ header offset (relative to the begin of the file)
+    ULONGLONG      FileSize;                    // Size of the file at the moment of file open
 
     struct _TMPQArchive * haPatch;              // Pointer to patch archive, if any
     struct _TMPQArchive * haBase;               // Pointer to base ("previous version") archive, if any
@@ -881,22 +836,22 @@ typedef struct _TMPQFile
 {
     TFileStream  * pStream;                     // File stream. Only used on local files
     TMPQArchive  * ha;                          // Archive handle
+    TMPQHash     * pHashEntry;                  // Pointer to hash table entry, if the file was open using hash table
     TFileEntry   * pFileEntry;                  // File entry for the file
-    DWORD          dwFileKey;                   // Decryption key
-    DWORD          dwFilePos;                   // Current file position
     ULONGLONG      RawFilePos;                  // Offset in MPQ archive (relative to file begin)
     ULONGLONG      MpqFilePos;                  // Offset in MPQ archive (relative to MPQ header)
+    DWORD          dwHashIndex;                 // Hash table index (0xFFFFFFFF if not used)
+    DWORD          dwFileKey;                   // Decryption key
+    DWORD          dwFilePos;                   // Current file position
     DWORD          dwMagic;                     // 'FILE'
 
     struct _TMPQFile * hfPatch;                 // Pointer to opened patch file
-    TPatchHeader * pPatchHeader;                // Patch header. Only used if the file is a patch file
-    LPBYTE         pbFileData;                  // Data of the file (single unit files, patched files)
-    DWORD          cbFileData;                  // Size of file data
-    BYTE           FileDataMD5[MD5_DIGEST_SIZE];// MD5 hash of the loaded file data. Used during patch process
 
     TPatchInfo   * pPatchInfo;                  // Patch info block, preceding the sector table
-    DWORD        * SectorOffsets;               // Position of each file sector, relative to the begin of the file. Only for compressed files.
-    DWORD        * SectorChksums;               // Array of sector checksums (either ADLER32 or MD5) values for each file sector
+    LPDWORD        SectorOffsets;               // Position of each file sector, relative to the begin of the file. Only for compressed files.
+    LPDWORD        SectorChksums;               // Array of sector checksums (either ADLER32 or MD5) values for each file sector
+    LPBYTE         pbFileData;                  // Data of the file (single unit files, patched files)
+    DWORD          cbFileData;                  // Size of file data
     DWORD          dwCompression0;              // Compression that will be used on the first file sector
     DWORD          dwSectorCount;               // Number of sectors in the file
     DWORD          dwPatchedFileSize;           // Size of patched file. Used when saving patch file to the MPQ
@@ -921,7 +876,7 @@ typedef struct _SFILE_FIND_DATA
 {
     char   cFileName[MAX_PATH];                 // Full name of the found file
     char * szPlainName;                         // Plain name of the found file
-    DWORD  dwHashIndex;                         // Hash table index for the file
+    DWORD  dwHashIndex;                         // Hash table index for the file (HAH_ENTRY_FREE if no hash table)
     DWORD  dwBlockIndex;                        // Block table index for the file
     DWORD  dwFileSize;                          // File size in bytes
     DWORD  dwFileFlags;                         // MPQ file flags

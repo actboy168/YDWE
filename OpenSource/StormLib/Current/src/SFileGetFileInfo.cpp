@@ -143,7 +143,6 @@ bool WINAPI SFileGetFileInfo(
     TFileEntry * pFileEntry = NULL;
     ULONGLONG Int64Value = 0;
     ULONGLONG ByteOffset = 0;
-    TMPQHash * pHash;
     TMPQFile * hf = NULL;
     void * pvSrcFileInfo = NULL;
     DWORD cbSrcFileInfo = 0;
@@ -373,15 +372,11 @@ bool WINAPI SFileGetFileInfo(
 
         case SFileMpqHashTable:
             ha = IsValidMpqHandle(hMpqOrFile);
-            if(ha != NULL)
+            if(ha != NULL && ha->pHashTable != NULL)
             {
-                nInfoType = SFILE_INFO_TYPE_NOT_FOUND;
-                if(ha->pHashTable != NULL)
-                {
-                    pvSrcFileInfo = ha->pHashTable;
-                    cbSrcFileInfo = ha->pHeader->dwHashTableSize * sizeof(TMPQHash);
-                    nInfoType = SFILE_INFO_TYPE_DIRECT_POINTER;
-                }
+                pvSrcFileInfo = ha->pHashTable;
+                cbSrcFileInfo = ha->pHeader->dwHashTableSize * sizeof(TMPQHash);
+                nInfoType = SFILE_INFO_TYPE_DIRECT_POINTER;
             }
             break;
 
@@ -602,11 +597,11 @@ bool WINAPI SFileGetFileInfo(
             }
             break;
 
-        case SFileMpqIsReadOnly:
+        case SFileMpqFlags:
             ha = IsValidMpqHandle(hMpqOrFile);
             if(ha != NULL)
             {
-                dwInt32Value  = (ha->dwFlags & MPQ_FLAG_READ_ONLY) ? 1 : 0;
+                dwInt32Value  = ha->dwFlags;
                 pvSrcFileInfo = &dwInt32Value;
                 cbSrcFileInfo = sizeof(DWORD);
                 nInfoType = SFILE_INFO_TYPE_DIRECT_POINTER;
@@ -633,9 +628,9 @@ bool WINAPI SFileGetFileInfo(
 
         case SFileInfoHashEntry:
             hf = IsValidFileHandle(hMpqOrFile);
-            if(hf != NULL && hf->ha != NULL && hf->ha->pHashTable != NULL)
+            if(hf != NULL && hf->pHashEntry != NULL)
             {
-                pvSrcFileInfo = hf->ha->pHashTable + hf->pFileEntry->dwHashIndex;
+                pvSrcFileInfo = hf->pHashEntry;
                 cbSrcFileInfo = sizeof(TMPQHash);
                 nInfoType = SFILE_INFO_TYPE_DIRECT_POINTER;
             }
@@ -643,9 +638,9 @@ bool WINAPI SFileGetFileInfo(
 
         case SFileInfoHashIndex:
             hf = IsValidFileHandle(hMpqOrFile);
-            if(hf != NULL && hf->pFileEntry != NULL)
+            if(hf != NULL && hf->pHashEntry != NULL)
             {
-                pvSrcFileInfo = &hf->pFileEntry->dwHashIndex;
+                pvSrcFileInfo = &hf->dwHashIndex;
                 cbSrcFileInfo = sizeof(DWORD);
                 nInfoType = SFILE_INFO_TYPE_DIRECT_POINTER;
             }
@@ -653,10 +648,10 @@ bool WINAPI SFileGetFileInfo(
 
         case SFileInfoNameHash1:
             hf = IsValidFileHandle(hMpqOrFile);
-            if(hf != NULL && hf->ha != NULL && hf->ha->pHashTable != NULL)
+            if(hf != NULL && hf->pHashEntry != NULL)
             {
-                pHash = hf->ha->pHashTable + hf->pFileEntry->dwHashIndex;
-                pvSrcFileInfo = &pHash->dwName1;
+                dwInt32Value = hf->pHashEntry->dwName1;
+                pvSrcFileInfo = &dwInt32Value;
                 cbSrcFileInfo = sizeof(DWORD);
                 nInfoType = SFILE_INFO_TYPE_DIRECT_POINTER;
             }
@@ -664,10 +659,10 @@ bool WINAPI SFileGetFileInfo(
 
         case SFileInfoNameHash2:
             hf = IsValidFileHandle(hMpqOrFile);
-            if(hf != NULL && hf->ha != NULL && hf->ha->pHashTable != NULL)
+            if(hf != NULL && hf->pHashEntry != NULL)
             {
-                pHash = hf->ha->pHashTable + hf->pFileEntry->dwHashIndex;
-                pvSrcFileInfo = &pHash->dwName2;
+                dwInt32Value = hf->pHashEntry->dwName2;
+                pvSrcFileInfo = &dwInt32Value;
                 cbSrcFileInfo = sizeof(DWORD);
                 nInfoType = SFILE_INFO_TYPE_DIRECT_POINTER;
             }
@@ -685,9 +680,9 @@ bool WINAPI SFileGetFileInfo(
 
         case SFileInfoLocale:
             hf = IsValidFileHandle(hMpqOrFile);
-            if(hf != NULL && hf->pFileEntry != NULL)
+            if(hf != NULL && hf->pHashEntry != NULL)
             {
-                dwInt32Value = hf->pFileEntry->lcLocale;
+                dwInt32Value = hf->pHashEntry->lcLocale;
                 pvSrcFileInfo = &dwInt32Value;
                 cbSrcFileInfo = sizeof(DWORD);
                 nInfoType = SFILE_INFO_TYPE_DIRECT_POINTER;
@@ -902,6 +897,7 @@ static TFileHeader2Ext data2ext[] =
     {0x43424457, 0xFFFFFFFF, 0x00000000, 0x00000000, "dbc"},    // ??? .dbc
     {0x47585053, 0xFFFFFFFF, 0x00000000, 0x00000000, "bls"},    // WoW pixel shaders
     {0xE0FFD8FF, 0xFFFFFFFF, 0x00000000, 0x00000000, "jpg"},    // JPEG image
+    {0x503B4449, 0xFFFFFFFF, 0x3B4C5857, 0xFFFFFFFF, "slk"},    // SLK file (usually starts with "ID;PWXL;N;E")
     {0x00000000, 0x00000000, 0x00000000, 0x00000000, "xxx"},    // Default extension
     {0, 0, 0, 0, NULL}                                          // Terminator 
 };
@@ -954,10 +950,6 @@ bool WINAPI SFileGetFileName(HANDLE hFile, char * szFileName)
     TMPQFile * hf = (TMPQFile *)hFile;  // MPQ File handle
     int nError = ERROR_INVALID_HANDLE;
 
-    // Pre-zero the output buffer
-    if(szFileName != NULL)
-        *szFileName = 0;
-
     // Check valid parameters
     if(IsValidFileHandle(hFile))
     {
@@ -970,13 +962,12 @@ bool WINAPI SFileGetFileName(HANDLE hFile, char * szFileName)
             {
                 // If the file name is not there yet, create a pseudo name
                 if(pFileEntry->szFileName == NULL)
-                {
                     nError = CreatePseudoFileName(hFile, pFileEntry, szFileName);
-                }
-                else
+
+                // Copy the file name to the output buffer, if any
+                if(pFileEntry->szFileName && szFileName)
                 {
-                    if(szFileName != NULL)
-                        strcpy(szFileName, pFileEntry->szFileName);
+                    strcpy(szFileName, pFileEntry->szFileName);
                     nError = ERROR_SUCCESS;
                 }
             }

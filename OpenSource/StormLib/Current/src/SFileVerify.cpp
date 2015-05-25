@@ -442,6 +442,10 @@ static DWORD VerifyWeakSignature(
     int hash_idx = find_hash("md5");
     int result = 0;
 
+    // The signature might be zeroed out. In that case, we ignore it
+    if(!IsValidSignature(pSI->Signature))
+        return ERROR_WEAK_SIGNATURE_OK;
+
     // Calculate hash of the entire archive, skipping the (signature) file
     if(!CalculateMpqHashMd5(ha, pSI, Md5Digest))
         return ERROR_VERIFY_FAILED;
@@ -746,8 +750,8 @@ bool QueryMpqSignatureInfo(
             if(!FileStream_Read(ha->pStream, &pSI->BeginExclude, pSI->Signature, dwFileSize))
                 return false;
 
-            pSI->cbSignatureSize = dwFileSize;
             pSI->SignatureTypes |= SIGNATURE_TYPE_WEAK;
+            pSI->cbSignatureSize = dwFileSize;
             return true;
         }
     }
@@ -786,7 +790,9 @@ int SSignFileCreate(TMPQArchive * ha)
     if(ha->dwFileFlags3 != 0)
     {
         // The (signature) file must be non-encrypted and non-compressed
+        assert(ha->dwFlags & MPQ_FLAG_SIGNATURE_NEW);
         assert(ha->dwFileFlags3 == MPQ_FILE_EXISTS);
+        assert(ha->dwReservedFiles > 0);
 
         // Create the (signature) file file in the MPQ
         // Note that the file must not be compressed or encrypted
@@ -800,21 +806,15 @@ int SSignFileCreate(TMPQArchive * ha)
         // Write the empty signature file to the archive
         if(nError == ERROR_SUCCESS)
         {
-            // Write the empty zeroed fiel to the MPQ
+            // Write the empty zeroed file to the MPQ
             memset(EmptySignature, 0, sizeof(EmptySignature));
             nError = SFileAddFile_Write(hf, EmptySignature, (DWORD)sizeof(EmptySignature), 0);
-        }
+            SFileAddFile_Finish(hf);
 
-        // If the save process succeeded, we clear the MPQ_FLAG_ATTRIBUTE_INVALID flag
-        if(nError == ERROR_SUCCESS)
-        {
-            ha->dwFlags &= ~MPQ_FLAG_SIGNATURE_INVALID;
+            // Clear the invalid mark
+            ha->dwFlags &= ~(MPQ_FLAG_SIGNATURE_NEW | MPQ_FLAG_SIGNATURE_NONE);
             ha->dwReservedFiles--;
         }
-
-        // Free the file
-        if(hf != NULL)
-            SFileAddFile_Finish(hf);
     }
 
     return nError;
@@ -1044,7 +1044,7 @@ bool WINAPI SFileSignArchive(HANDLE hMpq, DWORD dwSignatureType)
     {
         // Turn the signature on. The signature will
         // be applied when the archive is closed
-        ha->dwFlags |= MPQ_FLAG_SIGNATURE_INVALID | MPQ_FLAG_CHANGED;
+        ha->dwFlags |= MPQ_FLAG_SIGNATURE_NEW | MPQ_FLAG_CHANGED;
         ha->dwFileFlags3 = MPQ_FILE_EXISTS;
         ha->dwReservedFiles++;
     }

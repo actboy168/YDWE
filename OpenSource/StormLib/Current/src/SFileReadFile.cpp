@@ -81,18 +81,18 @@ static int ReadMpqSectors(TMPQFile * hf, LPBYTE pbBuffer, DWORD dwByteOffset, DW
 //              return nError;
 //      }
 
-        // If the file is compressed, also allocate secondary buffer
-        pbInSector = pbRawSector = STORM_ALLOC(BYTE, dwBytesToRead);
-        if(pbRawSector == NULL)
-            return ERROR_NOT_ENOUGH_MEMORY;
-
         // Assign the temporary buffer as target for read operation
         dwRawSectorOffset = hf->SectorOffsets[dwSectorIndex];
         dwRawBytesToRead = hf->SectorOffsets[dwSectorIndex + dwSectorsToRead] - dwRawSectorOffset;
+
+        // If the file is compressed, also allocate secondary buffer
+        pbInSector = pbRawSector = STORM_ALLOC(BYTE, dwRawBytesToRead);
+        if(pbRawSector == NULL)
+            return ERROR_NOT_ENOUGH_MEMORY;
     }
 
     // Calculate raw file offset where the sector(s) are stored.
-    CalculateRawSectorOffset(RawFilePos, hf, dwRawSectorOffset);
+    RawFilePos = CalculateRawSectorOffset(hf, dwRawSectorOffset);
 
     // Set file pointer and read all required sectors
     if(FileStream_Read(ha->pStream, &RawFilePos, pbInSector, dwRawBytesToRead))
@@ -166,6 +166,10 @@ static int ReadMpqSectors(TMPQFile * hf, LPBYTE pbBuffer, DWORD dwByteOffset, DW
                 // Is the file compressed by Blizzard's multiple compression ?
                 if(pFileEntry->dwFlags & MPQ_FILE_COMPRESS)
                 {
+                    // Remember the last used compression
+                    hf->dwCompression0 = pbInSector[0];
+
+                    // Decompress the data
                     if(ha->pHeader->wFormatVersion >= MPQ_FORMAT_VERSION_2)
                         nResult = SCompDecompress2(pbOutSector, &cbOutSector, pbInSector, cbInSector);
                     else
@@ -289,6 +293,10 @@ static int ReadMpqFileSingleUnit(TMPQFile * hf, void * pvBuffer, DWORD dwFilePos
             // Is the file compressed by Blizzard's multiple compression ?
             if(pFileEntry->dwFlags & MPQ_FILE_COMPRESS)
             {
+                // Remember the last used compression
+                hf->dwCompression0 = pbRawData[0];
+
+                // Decompress the file
                 if(ha->pHeader->wFormatVersion >= MPQ_FORMAT_VERSION_2)
                     nResult = SCompDecompress2(hf->pbFileSector, &cbOutBuffer, pbRawData, cbInBuffer);
                 else
@@ -395,6 +403,7 @@ static int ReadMpkFileSingleUnit(TMPQFile * hf, void * pvBuffer, DWORD dwFilePos
         {
             int cbOutBuffer = (int)hf->dwDataSize;
 
+            hf->dwCompression0 = pbRawData[0];
             if(!SCompDecompressMpk(hf->pbFileSector, &cbOutBuffer, pbRawData, (int)pFileEntry->dwCmpSize))
                 nError = ERROR_FILE_CORRUPT;
         }
@@ -563,6 +572,7 @@ static int ReadMpqFileSectorFile(TMPQFile * hf, void * pvBuffer, DWORD dwFilePos
 
 static int ReadMpqFilePatchFile(TMPQFile * hf, void * pvBuffer, DWORD dwFilePos, DWORD dwToRead, LPDWORD pdwBytesRead)
 {
+    TMPQPatcher Patcher;
     DWORD dwBytesToRead = dwToRead;
     DWORD dwBytesRead = 0;
     int nError = ERROR_SUCCESS;
@@ -570,27 +580,26 @@ static int ReadMpqFilePatchFile(TMPQFile * hf, void * pvBuffer, DWORD dwFilePos,
     // Make sure that the patch file is loaded completely
     if(nError == ERROR_SUCCESS && hf->pbFileData == NULL)
     {
-        // Load the original file and store its content to "pbOldData"
-        hf->pbFileData = STORM_ALLOC(BYTE, hf->pFileEntry->dwFileSize);
-        hf->cbFileData = hf->pFileEntry->dwFileSize;
-        if(hf->pbFileData == NULL)
-            return ERROR_NOT_ENOUGH_MEMORY;
+        // Initialize patching process and allocate data
+        nError = Patch_InitPatcher(&Patcher, hf);
+        if(nError != ERROR_SUCCESS)
+            return nError;
 
-        // Read the file data
+        // Set the current data size
+        Patcher.cbFileData = hf->pFileEntry->dwFileSize;
+
+        // Initialize the patcher object with initial file data
         if(hf->pFileEntry->dwFlags & MPQ_FILE_SINGLE_UNIT)
-            nError = ReadMpqFileSingleUnit(hf, hf->pbFileData, 0, hf->cbFileData, &dwBytesRead);
+            nError = ReadMpqFileSingleUnit(hf, Patcher.pbFileData1, 0, Patcher.cbFileData, &dwBytesRead);
         else
-            nError = ReadMpqFileSectorFile(hf, hf->pbFileData, 0, hf->cbFileData, &dwBytesRead);
+            nError = ReadMpqFileSectorFile(hf, Patcher.pbFileData1, 0, Patcher.cbFileData, &dwBytesRead);
 
-        // Fix error code
-        if(nError == ERROR_SUCCESS && dwBytesRead != hf->cbFileData)
-            nError = ERROR_FILE_CORRUPT;
-
-        // Patch the file data
+        // Perform the patching process
         if(nError == ERROR_SUCCESS)
-            nError = PatchFileData(hf);
+            nError = Patch_Process(&Patcher, hf);
 
-        // Reset number of bytes read to zero
+        // Finalize the patcher structure
+        Patch_Finalize(&Patcher);
         dwBytesRead = 0;
     }
 
@@ -687,6 +696,9 @@ bool WINAPI SFileReadFile(HANDLE hFile, void * pvBuffer, DWORD dwToRead, LPDWORD
             return false;
         }
     }
+
+    // Clear the last used compression
+    hf->dwCompression0 = 0;
 
     // If the file is local file, read the data directly from the stream
     if(hf->pStream != NULL)
