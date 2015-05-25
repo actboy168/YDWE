@@ -1,4 +1,86 @@
 
+local function single_test(commandline, mappath)
+	return fs.war3_path():string() .. ' -loadfile "' .. mappath:string() .. '"' .. commandline
+end
+
+local function process_kills(proc)
+	local list = process.list()
+	local function kill_by_name(name)
+		local id = list[name:lower()]
+		if id ~= nil then
+			process.kill(id)
+		end
+	end
+	if type(proc) == 'string' then
+		kill_by_name(proc)
+	elseif type(proc) == 'table' then
+		for _, name in pairs(proc) do
+			kill_by_name(name)
+		end
+	end
+end
+
+local function process_create(command_line, current_dir)
+	local p = sys.process()
+	p:hide_window()
+	if not p:create(nil, command_line, current_dir) then
+		log.error(string.format("Executed %s failed", command_line))
+		return
+	end
+	p:close()
+	p = nil
+	log.trace(string.format("Executed %s.", command_line))
+end
+
+local function path_sub(a, b)
+	local i = a
+	local r = fs.path('')
+	while i ~= '' and i ~= b do
+		r = i:filename() / r
+		i = i:parent_path()
+	end
+	return r
+end
+
+local function host_copy_dll(curdir)
+	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'msvcp120.dll', curdir / 'msvcp120.dll', true)
+	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'msvcr120.dll', curdir / 'msvcr120.dll', true)
+	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'StormLib.dll', curdir / 'StormLib.dll', true)
+end
+
+local function host_save_config(curdir, mappath)
+	local reg = registry.current_user() / "Software\\Blizzard Entertainment\\Warcraft III\\String"
+	local tbl = {
+		--bot_mapcfgpath = '',
+		bot_mappath = mappath:parent_path():string(),
+		bot_defaultgamename = mappath:filename():string(),
+		bot_defaultownername = reg["userlocal"],
+		lan_war3version = war3_version.minor,
+		map_path = path_sub(mappath, fs.war3_path()):string(),
+		map_localpath = mappath:filename():string(),
+	}
+
+	if war3_version:is_new() then
+		tbl.bot_mapcfgpath = (fs.ydwe_path() / "jass" / "system" / "ht"):string()
+	else
+		tbl.bot_mapcfgpath = (fs.ydwe_path() / "jass" / "system" / "rb"):string()
+	end
+
+	local str = ''
+	for k, v in pairs(tbl) do
+		str = str .. tostring(k) .. ' = ' .. tostring(v) .. '\n'
+	end
+	io.save(curdir / 'ydhost.cfg', str)
+end
+
+local function host_test(commandline, mappath)
+	process_kills('ydhost')
+	local curdir = fs.ydwe_path() / 'plugin' / 'ydhost'
+	host_copy_dll(curdir)
+	host_save_config(curdir, mappath)
+	process_create(curdir / 'ydhost.exe', curdir)
+	return fs.war3_path():string() .. commandline .. ' -auto'
+end
 
 -- 本函数在测试地图时使用
 -- event_data - 事件参数，table，包含以下值
@@ -13,37 +95,36 @@ function event.EVENT_TEST_MAP(event_data)
 	global_config_reload()
 	
 	-- 获取当前测试的地图名
-	local map_path = fs.path(event_data.map_path)
-	log.debug("Testing " .. map_path:string())
+	local mappath = fs.path(event_data.map_path)
+	log.debug("Testing " .. mappath:string())
 	log.debug("Testing " .. event_data.command_line)
 
 	-- 附加命令行
-	local command_aux = ""
+	local commandline = ""
 
 	-- 是否OpenGL方式？
 	if global_config["MapTest"]["LaunchRenderingEngine"] == "OpenGL" then
-		command_aux = command_aux .. " -opengl"
+		commandline = commandline .. " -opengl"
 	end
 
 	-- 是否窗口方式？
 	if global_config["MapTest"]["LaunchWindowed"] ~= "0" then
-		command_aux = command_aux .. " -window"
+		commandline = commandline .. " -window"
 	end
-	
-	command_aux = command_aux .. ' -ydwe "' .. fs.ydwe_path():string() .. '"'
-	
-	local new_command_line
-	local b, e = event_data.command_line:find(' %-loadfile ')
-	if b then
-		new_command_line = event_data.command_line:sub(1, b-1) .. ' -loadfile "'.. event_data.command_line:sub(e+1, -1) .. '"' .. command_aux
+
+	commandline = commandline .. ' -ydwe "' .. fs.ydwe_path():string() .. '"'
+
+	log.debug("Testing " .. global_config["MapTest"]["EnableHost"])
+	if global_config["MapTest"]["EnableHost"] == "1" then
+		commandline = host_test(commandline, mappath)
 	else
-		new_command_line = event_data.command_line .. command_aux
+		commandline = single_test(commandline, mappath)
 	end
-	
+
 	local result = false
 	-- 启动魔兽开始测试...
 	local war3_helper_dll = fs.ydwe_path() / "plugin" / "warcraft3" / "yd_loader.dll"
-	result = sys.spawn_inject(event_data.application_name, new_command_line, nil, war3_helper_dll)
+	result = sys.spawn_inject(event_data.application_name, commandline, nil, war3_helper_dll)
 
 	log.debug("********************* on test end *********************")
 	if result then return 0 else return -1 end
