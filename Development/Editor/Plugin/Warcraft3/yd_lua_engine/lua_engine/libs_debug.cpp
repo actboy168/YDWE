@@ -1,6 +1,9 @@
-#include "lua_helper.h"	   
+#include "lua_helper.h"	  
+#include "jassbind.h" 
 #include <base/warcraft3/jass/func_value.h>	   
 #include <base/warcraft3/jass/global_variable.h>
+#include <base/warcraft3/war3_searcher.h>	  
+#include <base/util/format.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
@@ -45,6 +48,52 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
+	static int handledef(lua_State* L)
+	{
+		jass::jhandle_t h = jassbind::read_handle(L, 1);
+		if (h < 0x100000)
+		{
+			lua_pushnil(L);
+			return 1;
+		}
+		hashtable::reverse_table* table = &((*get_jass_vm()->handle_table)->table);
+		uint32_t object = (uint32_t)table->at(3 * (h - 0x100000) + 1);
+		uint32_t reference = (uint32_t)table->at(3 * (h - 0x100000));
+	
+		lua_newtable(L);
+		{
+			lua_pushliteral(L, "reference");
+			lua_pushinteger(L, reference);
+			lua_rawset(L, -3);
+
+			if (object)
+			{
+				char typestr[4] = { 0 };
+				uint32_t type = get_object_type(object);
+				typestr[0] = ((const char*)&type)[3];
+				typestr[1] = ((const char*)&type)[2];
+				typestr[2] = ((const char*)&type)[1];
+				typestr[3] = ((const char*)&type)[0];
+				lua_pushliteral(L, "type");
+				lua_pushlstring(L, typestr, 4);
+				lua_rawset(L, -3);
+			}
+		}
+		return 1;
+	}
+
+	static int h2i(lua_State* L)
+	{
+		lua_pushinteger(L, jassbind::read_handle(L, 1));
+		return 1;
+	}
+
+	static int i2h(lua_State* L)
+	{
+		jassbind::push_handle(L, lua_tointeger(L, 1));
+		return 1;
+	}
+
 	int jass_debug(lua_State* L)
 	{
 		lua_newtable(L);
@@ -52,6 +101,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			luaL_Reg lib[] = {
 				{ "functiondef", functiondef },
 				{ "globaldef", globaldef },
+				{ "handledef", handledef },
+				{ "h2i", h2i },
+				{ "i2h", i2h },
 				{ NULL, NULL },
 			};
 			luaL_setfuncs(L, lib, 0);
