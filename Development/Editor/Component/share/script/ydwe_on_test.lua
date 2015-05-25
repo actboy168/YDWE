@@ -114,7 +114,7 @@ function event.EVENT_TEST_MAP(event_data)
 
 	commandline = commandline .. ' -ydwe "' .. fs.ydwe_path():string() .. '"'
 
-	log.debug("Testing " .. global_config["MapTest"]["EnableHost"])
+	log.debug("Testing " .. tostring(global_config["MapTest"]["EnableHost"]))
 	if global_config["MapTest"]["EnableHost"] == "1" then
 		commandline = host_test(commandline, mappath)
 	else
