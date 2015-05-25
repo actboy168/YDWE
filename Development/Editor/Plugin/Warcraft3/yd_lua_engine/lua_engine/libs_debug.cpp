@@ -50,7 +50,16 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	static int handledef(lua_State* L)
 	{
-		jass::jhandle_t h = jassbind::read_handle(L, 1);
+		jass::jhandle_t h = 0;
+		if (lua_type(L, 1) == LUA_TNUMBER)
+		{
+			h = lua_tointeger(L, 1);
+		}
+		else
+		{
+			h = jassbind::read_handle(L, 1);
+		}
+
 		if (h < 0x100000)
 		{
 			lua_pushnil(L);
