@@ -34,6 +34,7 @@ require "uiloader"
 
 require "ydwe_on_menu"
 require "ydwe_on_save"
+require "ydwe_on_test"
 require "ydwe_on_startup"
 require "ydwe_on_dialog_message"
 require "ydwe_on_new_object_id"
