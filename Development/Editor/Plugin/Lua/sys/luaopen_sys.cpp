@@ -306,8 +306,26 @@ namespace NLuaAPI { namespace NSys {
 			std::wstring name(ImageName, ImageNameLength / sizeof(wchar_t));
 			std::transform(name.begin(), name.end(), name.begin(), ::tolower);
 			luabind::object(L, name).push(L);
-			luabind::object(L, ProcessId).push(L);
-			lua_settable(L, -3);
+
+			lua_pushvalue(L, -1);
+			lua_rawget(L, -3);
+			if (lua_isnoneornil(L, -1))
+			{
+				lua_pop(L, 1);
+				lua_newtable(L);
+				{
+					lua_pushinteger(L, ProcessId);
+					lua_rawseti(L, -2, 1);
+				}
+				lua_rawset(L, -3);
+			}
+			else
+			{
+				size_t n = lua_rawlen(L, -1);
+				lua_pushinteger(L, ProcessId);
+				lua_rawseti(L, -2, n + 1);
+				lua_pop(L, 2);
+			}
 		});
 		if (!suc) {
 			lua_pop(L, 1);

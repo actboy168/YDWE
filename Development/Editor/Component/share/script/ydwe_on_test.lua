@@ -6,9 +6,11 @@ end
 local function process_kills(proc)
 	local list = process.list()
 	local function kill_by_name(name)
-		local id = list[name:lower()]
-		if id ~= nil then
-			process.kill(id)
+		local ids = list[name:lower()]
+		if ids ~= nil then
+			for _, id in ipairs(ids) do
+				process.kill(id)
+			end
 		end
 	end
 	if type(proc) == 'string' then
