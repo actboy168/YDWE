@@ -3,8 +3,8 @@
 
 namespace base { namespace file {
 
-	file_mapping_handle::file_mapping_handle(file_handle const& file, LPSECURITY_ATTRIBUTES lpAttributes, uint32_t flProtect, uint64_t dwMaximumSize, const wchar_t* name)
-		: mybase(::CreateFileMappingW(file.get(), lpAttributes, flProtect, static_cast<DWORD>(dwMaximumSize >> 32), static_cast<DWORD>(dwMaximumSize), name))
+	file_mapping_handle::file_mapping_handle(HANDLE file, LPSECURITY_ATTRIBUTES lpAttributes, uint32_t flProtect, uint64_t dwMaximumSize, const wchar_t* name)
+		: mybase(::CreateFileMappingW(file, lpAttributes, flProtect, static_cast<DWORD>(dwMaximumSize >> 32), static_cast<DWORD>(dwMaximumSize), name))
 	{
 		if (!mybase::operator bool())
 		{

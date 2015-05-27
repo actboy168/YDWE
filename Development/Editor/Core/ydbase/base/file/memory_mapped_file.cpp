@@ -78,7 +78,7 @@ namespace base { namespace file {
 			return ;
 		}
 
-		file_mapping_handle map_(file_, NULL, PAGE_READONLY, map_size, NULL);
+		file_mapping_handle map_(file_.get(), NULL, PAGE_READONLY, map_size, NULL);
 
 		memory_    =   map_.create_view(FILE_MAP_READ, offset, request_size);
 		cb_        =   request_size;

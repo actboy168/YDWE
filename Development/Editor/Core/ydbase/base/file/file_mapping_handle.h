@@ -12,7 +12,7 @@ namespace base { namespace file {
 		typedef win::scoped_handle<NULL> mybase;
 
 	public:
-		file_mapping_handle(file_handle const& file, LPSECURITY_ATTRIBUTES lpAttributes, uint32_t flProtect, uint64_t dwMaximumSize, const wchar_t* name);
+		file_mapping_handle(HANDLE file, LPSECURITY_ATTRIBUTES lpAttributes, uint32_t flProtect, uint64_t dwMaximumSize, const wchar_t* name);
 		file_mapping_handle(uint32_t dwDesiredAccess, bool bInheritHandle, const wchar_t* name);
 		void* create_view(DWORD dwDesiredAccess, uint64_t dwFileOffset, size_t dwNumberOfBytesToMap);
 	};
