@@ -30,34 +30,33 @@ static std::wstring GetFileExtFromHandle(HANDLE hFile)
 uintptr_t real_GetFileSize = 0;
 DWORD __stdcall fake_GetFileSize(HANDLE file, LPDWORD lpFileSizeHigh)
 {
-	DWORD retval = base::std_call<DWORD>(real_GetFileSize, file, lpFileSizeHigh);
-	if (retval > 0)
+	DWORD sizehi = 0;
+	DWORD sizelo = base::std_call<DWORD>(real_GetFileSize, file, &sizehi);
+	if (sizelo > 0 || sizehi > 0)
 	{
 		std::wstring ext = GetFileExtFromHandle(file);
-		if (!ext.empty() && ext != L".w3x"&& ext != L".w3m")
+		if (!ext.empty() && (ext == L".w3x" || ext == L".w3m"))
 		{
-			return retval;
-		}
-
-		if (base::warcraft3::get_war3_searcher().get_version() >= base::warcraft3::version_124b)
-		{
-			if (retval > 0x7FFFFF)
+			if (base::warcraft3::get_war3_searcher().get_version() >= base::warcraft3::version_124b)
 			{
-				retval = 0x7FFFFF;
-				if (lpFileSizeHigh) *lpFileSizeHigh = 0;
+				if (sizelo > 0x7FFFFF || sizehi > 0)
+				{
+					sizelo = 0x7FFFFF;
+					sizehi = 0;
+				}
 			}
-		}
-		else
-		{
-			if (retval > 0x2FFFFF)
+			else
 			{
-				retval = 0x2FFFFF;
-				if (lpFileSizeHigh) *lpFileSizeHigh = 0;
+				if (sizelo > 0x2FFFFF || sizehi > 0)
+				{
+					sizelo = 0x2FFFFF;
+					sizehi = 0;
+				}
 			}
 		}
 	}
-
-	return retval;
+	if (lpFileSizeHigh) *lpFileSizeHigh = sizehi;
+	return sizelo;
 }
 
 void Initialize()
