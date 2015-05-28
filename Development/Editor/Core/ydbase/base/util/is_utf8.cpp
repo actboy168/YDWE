@@ -16,14 +16,23 @@ namespace base {
 	static bool is_legal_utf8(const unsigned char *source, size_t length)
 	{
 		unsigned char a;
-		const unsigned char *srcptr = source + length;
-		switch (length) 
+		const unsigned char *srcptr = source;
+		switch (length)
+		{
+		case 6: if (0 == *srcptr++) return false;
+		case 5: if (0 == *srcptr++) return false;
+		case 4: if (0 == *srcptr++) return false;
+		case 3: if (0 == *srcptr++) return false;
+		case 2: if (0 == *srcptr++) return false;
+		case 1: if (0 == *srcptr++) return false;
+		}
+		switch (length)
 		{
 		default: return false;
 		case 4: if ((a = (*--srcptr)) < 0x80 || a > 0xBF) return false;
 		case 3: if ((a = (*--srcptr)) < 0x80 || a > 0xBF) return false;
 		case 2: if ((a = (*--srcptr)) > 0xBF) return false;
-			switch (*source) 
+			switch (*source)
 			{
 			case 0xE0: if (a < 0xA0) return false; break;
 			case 0xED: if (a > 0x9F) return false; break;
@@ -37,28 +46,39 @@ namespace base {
 		return true;
 	}
 
-	bool is_utf8(const char *source) 
+	bool is_utf8(const char *source)
 	{
-		while (*source)
+		const unsigned char* cur = (const unsigned char*)source;
+		while (*cur)
 		{
-			const unsigned char *srcptr = (const unsigned char*)source;
-			unsigned short extra_bytes_to_read = g_trailing_bytes_for_utf8[*srcptr];
-			switch (extra_bytes_to_read) 
+			unsigned short next_n = g_trailing_bytes_for_utf8[*cur] + 1;
+			if (!is_legal_utf8(cur, next_n))
 			{
-			case 5: if (0 == *source++) return false;
-			case 4: if (0 == *source++) return false;
-			case 3: if (0 == *source++) return false;
-			case 2: if (0 == *source++) return false;
-			case 1: if (0 == *source++) return false;
-			case 0: if (0 == *source++) return false;
+				return false;
 			}
-
-			if (!is_legal_utf8(srcptr, extra_bytes_to_read+1)) 
-			{		
-				return false;		
-			}
+			cur += next_n;
 		}
+		return true;
+	}
 
+	bool is_utf8(const char *source, size_t length)
+	{
+		const unsigned char* begin = (const unsigned char*)source;
+		const unsigned char* end = begin + length;
+		const unsigned char* cur = begin;
+		while (cur < end)
+		{
+			unsigned short next_n = g_trailing_bytes_for_utf8[*cur] + 1;
+			if (0 == *cur || cur + next_n > end)
+			{
+				return false;
+			}
+			if (!is_legal_utf8(cur, next_n))
+			{
+				return false;
+			}
+			cur += next_n;
+		}
 		return true;
 	}
 }

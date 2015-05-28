@@ -45,4 +45,5 @@ namespace base {
 #endif
 
 	_BASE_API bool is_utf8(const char *source);
+	_BASE_API bool is_utf8(const char *source, size_t length);
 }
