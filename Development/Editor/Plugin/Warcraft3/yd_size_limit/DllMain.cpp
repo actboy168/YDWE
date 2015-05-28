@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <base/hook/fp_call.h> 
-#include <base/hook/inline.h>
+#include <base/hook/iat.h>
 #include <base/warcraft3/war3_searcher.h>  
 #include <base/warcraft3/version.h>
 #include <base/file/memory_mapped_file.h>
@@ -62,8 +62,7 @@ DWORD __stdcall fake_GetFileSize(HANDLE file, LPDWORD lpFileSizeHigh)
 
 void Initialize()
 {
-	real_GetFileSize = (uintptr_t)::GetFileSize;
-	base::hook::inline_install(&real_GetFileSize, (uintptr_t)fake_GetFileSize);
+	real_GetFileSize = base::hook::iat(L"storm.dll", "kernel32.dll", "GetFileSize", (uintptr_t)fake_GetFileSize);
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
