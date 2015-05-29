@@ -96,6 +96,8 @@ YDWEIsEventAttackType=0,1,boolean,attacktype
 _YDWEIsEventAttackType_Defaults=AttackTypeNormal
 _YDWEIsEventAttackType_Category=TC_EVENTRESPONSE
 
+YDWEGetObjectPropertyInteger=0,0,integer,objecttype,Null,string
+_YDWEGetObjectPropertyInteger_Defaults=objecttype00_abilcode,AHhb,"levels"
 _YDWEGetObjectPropertyInteger_Category=TC_YDBF
 YDWEGetObjectPropertyReal=0,0,real,objecttype,Null,string
 _YDWEGetObjectPropertyReal_Defaults=objecttype00_abilcode,AHhb,"Rng1"
