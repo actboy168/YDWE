@@ -126,7 +126,7 @@ end
 function loader:config()
 	self.list = {}
 	local root = fs.ydwe_path() / 'share' / 'mpq'
-	local f, err = io.open(root / 'config')
+	local f, err = io.open(root / 'config', 'r')
 	if not f then
 		log.error('Open ' .. (root / 'config'):string() .. ' failed.')
 		return false
