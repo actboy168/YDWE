@@ -249,7 +249,7 @@ namespace NYDWE {
 				eventData.setEventData("handle", dialogHandle);
 				eventData.setEventData("message", message);
 				eventData.setEventData("wparam", wParam);
-				eventData.setEventData("lparam", std::string((const char*)lParam));
+				eventData.setEventData("lparam", base::a2u((const char*)lParam));
 				const std::vector<int> &results = event_array[EVENT_DIALOG_MESSAGE](eventData);
 
 				if (results_is_failed(results))
