@@ -1,6 +1,7 @@
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
-#include <base/warcraft3/virtual_mpq.h>
+#include <base/warcraft3/virtual_mpq.h>	  
+#include <../Plugin/Lua/log/logging.h>
 
 static bool VirtualMpqWatchCB(const luabind::object& func, const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
 {
@@ -9,7 +10,7 @@ static bool VirtualMpqWatchCB(const luabind::object& func, const std::string& fi
 		ret = luabind::call_function<luabind::object>(func, filename);
 	} catch (luabind::error const& e) {
 		const char* err = lua_tostring(e.state(), -1);
-		// todo: log
+		LOGGING_ERROR(logging::get_logger("lua")) << err;
 		return false;
 	}
 
