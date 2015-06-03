@@ -1,0 +1,5 @@
+*.h   eol=crlf
+*.c   eol=crlf
+*.cpp eol=crlf
+*.j   eol=crlf
+*.lua eol=crlf
