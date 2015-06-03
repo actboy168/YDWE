@@ -28,7 +28,15 @@ end
 
 io.__open = io.open
 function io.open(file_path, mode)
-	return io.__open(__(file_path:string()), mode)
+	local f, e = io.__open(__(file_path:string()), mode)
+	if f then
+		if not mode or not mode:match('b') then
+			if f:read(3) ~= '\xEF\xBB\xBF' then
+				f:seek('set', 0)
+			end
+		end
+	end
+	return f, e
 end
 
 io.__lines = io.lines
