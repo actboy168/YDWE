@@ -5,9 +5,6 @@ require "compile.cjass"
 require "compile.jasshelper"
 require "mpq_util"
 
-local storm    = ar.storm
-local stormlib = ar.stormlib
-
 -- 确定应当把地图保存为适合老版本（< 1.24）还是新版本（>= 1.24）的
 -- 对于保存为双份，按照当前魔兽版本处理
 -- save_type - 保存类型，0到3的取值，意义同设置程序，从上到下依次为0到3

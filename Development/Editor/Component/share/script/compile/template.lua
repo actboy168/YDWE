@@ -1,10 +1,8 @@
 
 local select=select
-local setfenv=setfenv
 local load=load
 local string=string
 local table=table
-local stormlib = ar.stormlib
 
 local function result(...)
 	return select("#",...), select(1,...)
