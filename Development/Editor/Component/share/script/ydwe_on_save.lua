@@ -57,7 +57,7 @@ local function compile_map(map_path, option)
 					['map_path'] = map_path,
 					['map_handle'] = map_handle,
 					['inject_file'] = function (file_path, path_in_archive)
-						return mpq_util:import_file(map_handle, file_path, path_in_archive)
+						return map_handle:import(path_in_archive, file_path)
 					end,
 				}
 

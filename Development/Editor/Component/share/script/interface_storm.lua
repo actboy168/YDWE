@@ -1,4 +1,5 @@
 require "ar_stormlib"
+require "mpq_util"
 
 local _mt = {}
 
@@ -12,7 +13,7 @@ function _mt:attach_archive(handle)
 end
 
 function _mt:open_archive(file)
-	local handle = ar.stormlib.open_archive(file, 0, ar.stormlib.MPQ_OPEN_READ_ONLY)
+	local handle = mpq_util:stormlib(file, true)
 	if handle then
 		self:attach_archive(handle)
 	end
@@ -27,13 +28,13 @@ function _mt:open_path(file)
 end
 
 function _mt:has(filename)
-	for _, v in ipairs(self.paths) do
-		if fs.exists(v / filename) then
+	for _, path in ipairs(self.paths) do
+		if fs.exists(path / filename) then
 			return true
 		end
 	end
-	for _, v in ipairs(self.mpqs) do
-		if ar.stormlib.has_file(v, filename) then
+	for _, mpq in ipairs(self.mpqs) do
+		if mpq:has(filename) then
 			return true
 		end
 	end
@@ -42,18 +43,18 @@ function _mt:has(filename)
 end
 
 function _mt:load(filename)
-	for _, v in ipairs(self.paths) do
-		if fs.exists(v / filename) then
+	for _, path in ipairs(self.paths) do
+		if fs.exists(path / filename) then
 			local r, e =  io.load(v / filename)
 			if r then
 				return r
 			end
 		end
 	end
-	for _, v in ipairs(self.mpqs) do
-		local r, buffer = ar.stormlib.load_file(v, filename)
-		if r then
-			return buffer
+	for _, mpq in ipairs(self.mpqs) do
+		local buf = mpq:load(filename)
+		if buf then
+			return buf
 		end
 	end
 

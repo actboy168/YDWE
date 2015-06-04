@@ -4,30 +4,55 @@ local stormlib = ar.stormlib
 
 mpq_util = {}
 
--- 添加文件给地图
--- mpq_handle - 已经打开的地图handle
--- file_path - 需要加入的文件的路径，fs.path
--- path_in_archive - 地图压缩包中的路径，string
--- 返回值：true表示成功，false表示失败
-function mpq_util:import_file(mpq_handle, file_path, path_in_archive)
-	log.trace("mpq_util.import_file.")
+local stormlib_mt =  {}
+stormlib_mt.__index = {}
 
-	if stormlib.add_file_ex(
-		mpq_handle,
-		file_path,
-		path_in_archive,
-		stormlib.MPQ_FILE_COMPRESS | stormlib.MPQ_FILE_REPLACEEXISTING,
-		stormlib.MPQ_COMPRESSION_ZLIB,
-		stormlib.MPQ_COMPRESSION_ZLIB
-	) then
+function stormlib_mt.__index:import(path_in_archive, file_path)
+	log.trace("[stormlib]import file.")
+	local suc = stormlib.add_file_ex(
+			self.handle,
+			file_path,
+			path_in_archive,
+			stormlib.MPQ_FILE_COMPRESS | stormlib.MPQ_FILE_REPLACEEXISTING,
+			stormlib.MPQ_COMPRESSION_ZLIB,
+			stormlib.MPQ_COMPRESSION_ZLIB)
+	if suc then
 		log.trace("succeeded: import " .. path_in_archive)
 		return true
 	else
 		log.error("failed: import " .. file_path:string())
 		return false
 	end
+	return suc
+end
 
-	return result
+function stormlib_mt.__index:extract(path_in_archive, file_path)
+	local dir = file_path:parent_path()
+	if not fs.exists(dir) then
+		fs.create_directories(dir)
+	end
+	return stormlib.extract_file(self.handle, file_path, path_in_archive)
+end
+
+function stormlib_mt.__index:has(path_in_archive)
+	return stormlib.has_file(self.handle, path_in_archive)
+end
+
+function stormlib_mt.__index:close()
+	stormlib.close_archive(self.handle)
+end
+
+local function mpq_util:stormlib(path, read_only)
+	local obj = {}
+	if read_only then
+		obj.handle = ar.stormlib.open_archive(path, 0, ar.stormlib.MPQ_OPEN_READ_ONLY)
+	else
+		obj.handle = ar.stormlib.open_archive(path, 0, 0)
+	end
+	if not obj.handle then
+		return nil
+	end
+	return setmetatable(obj, stormlib_mt)
 end
 
 -- 从地图中解压出文件来然后调用回调函数更新
@@ -42,24 +67,24 @@ function mpq_util:update_file(map_path, path_in_archive, process_function)
 	log.trace("mpq_util.update_file.")
 
 	-- 打开MPQ（地图）
-	local mpq_handle = stormlib.open_archive(map_path, 0, 0)
-	if mpq_handle then
+	local mpq = mpq_util:stormlib(map_path)
+	if mpq then
 		-- 确定解压路径
 		local extract_file_path = fs.ydwe_path() / "logs" / "file.out"
 		-- 将文件解压
-		if stormlib.has_file(mpq_handle, path_in_archive) and
-			stormlib.extract_file(mpq_handle, extract_file_path, path_in_archive)
+		if mpq:has(path_in_archive) and
+			mpq:extract(path_in_archive, extract_file_path)
 		then
 			log.trace(path_in_archive .. " has been extracted from " .. map_path:filename():string())
 
 			-- 调用处理函数处理
-			local success, out_file_path = pcall(process_function, mpq_handle, extract_file_path)
+			local success, out_file_path = pcall(process_function, mpq, extract_file_path)
 			-- 如果函数正常结束（没有出错）
 			if success then
 				-- 如果函数成功完成任务
 				if out_file_path then
 					-- 替换文件
-					result = mpq_util:import_file(mpq_handle, out_file_path, path_in_archive)
+					result = mpq:import(path_in_archive, out_file_path)
 				else
 					-- 出现了错误
 					log.error("Processor function cannot complete its task.")
@@ -76,7 +101,7 @@ function mpq_util:update_file(map_path, path_in_archive, process_function)
 		end
 
 		-- 关闭地图
-		stormlib.close_archive(mpq_handle)
+		mpq:close()
 	else
 		log.error("Cannot open map archive " .. map_path:string())
 	end

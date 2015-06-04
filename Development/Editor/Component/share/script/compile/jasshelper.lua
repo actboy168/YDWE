@@ -38,25 +38,25 @@ function jasshelper.prepare_jass_libs(self, map_path, version)
 	local map_has_bj = false
 	
 	-- 从地图中解压缩两个重要文件到jasshelper目录（供语法检查用）
-	local mpq_handle = stormlib.open_archive(map_path, 0, stormlib.MPQ_OPEN_READ_ONLY)
-	if mpq_handle then
+	local mpq = mpq_util:stormlib(map_path, true)
+	if mpq then
 		-- 如果地图中导入了，优先使用地图的
-		if stormlib.has_file(mpq_handle, "common.j") then
-			stormlib.extract_file(mpq_handle, common_j_path, "common.j")
+		if mpq:has("common.j") then
+			mpq:extract("common.j", common_j_path)
 			map_has_cj = true
-		elseif stormlib.has_file(mpq_handle, "scripts\\common.j") then
-			stormlib.extract_file(mpq_handle, common_j_path, "scripts\\common.j")
+		elseif mpq:has("scripts\\common.j") then
+			mpq:extract("scripts\\common.j", common_j_path)
 			map_has_cj = true
 		end
 
-		if stormlib.has_file(mpq_handle, "blizzard.j") then
-			stormlib.extract_file(mpq_handle, blizzard_j_path, "blizzard.j")
+		if mpq:has("blizzard.j") then
+			mpq:extract("blizzard.j", blizzard_j_path)
 			map_has_bj = true
-		elseif stormlib.has_file(mpq_handle, "scripts\\blizzard.j") then
-			stormlib.extract_file(mpq_handle, blizzard_j_path, "scripts\\blizzard.j")
+		elseif mpq:has("scripts\\blizzard.j") then
+			mpq:extract("scripts\\blizzard.j", blizzard_j_path)
 			map_has_bj = true
 		end
-		stormlib.close_archive(mpq_handle)
+		mpq:close()
 	else
 		log.warn("Cannot open map archive, using default bj and cj instead.")
 	end
