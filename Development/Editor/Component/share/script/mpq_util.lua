@@ -42,7 +42,7 @@ function stormlib_mt.__index:close()
 	stormlib.close_archive(self.handle)
 end
 
-local function mpq_util:stormlib(path, read_only)
+function mpq_util:stormlib(path, read_only)
 	local obj = {}
 	if read_only then
 		obj.handle = ar.stormlib.open_archive(path, 0, ar.stormlib.MPQ_OPEN_READ_ONLY)
