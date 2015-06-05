@@ -180,6 +180,7 @@ function event.EVENT_WE_START(event_data)
 
 	-- 载入Patch MPQ
 	mpq_util:load_mpq("units", 14)
+	mpq_util:load_mpq("war3", 14)
 
 	-- 加载插件
 	plugin:load_all()
