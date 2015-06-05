@@ -73,7 +73,8 @@ namespace
 	std::map<std::string, Attribute> configAttribute = slk::list_of
 		("MapSave",                                 Attribute(4))
 		("War3Patch",                               Attribute(3))
-		("ScriptInjection",                         Attribute(2))
+		("ScriptInjection",                         Attribute(2)) 
+		("HostTest",                                Attribute(2))
 		("EnableJassHelper",                        Attribute("ScriptCompiler"))
 		("EnableJassHelperDebug",                   Attribute("ScriptCompiler"))
 		("EnableJassHelperScriptOnly",              Attribute("ScriptCompiler"))
@@ -198,6 +199,7 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["ScriptCompiler"]["EnableJassHelperOptimization"] = "1";
 	table["ScriptCompiler"]["EnableCJass"] = "0";
 	table["ScriptInjection"]["Option"] = "0";
+	table["HostTest"]["Option"] = "0";
 	table["ThirdPartyPlugin"]["EnableDotNetSupport"] = "0";
 	table["ThirdPartyPlugin"]["EnableTesh"] = "1";
 	table["ThirdPartyPlugin"]["EnableYDTrigger"] = "1";
@@ -333,6 +335,13 @@ void CMainWindow::EnableScriptInjection(bool bEnable)
 	ContrlSetEnabled("ScriptInjection_0", bEnable);
 	ContrlSetEnabled("ScriptInjection_1", bEnable);
 	if (!bEnable) ContrlSelected("ScriptInjection_1", true);
+}
+
+void CMainWindow::EnableHostTest(bool bEnable)
+{
+	ContrlSetEnabled("HostTest_0", bEnable);
+	ContrlSetEnabled("HostTest_1", bEnable);
+	if (!bEnable) ContrlSelected("HostTest_0", true);
 }
 
 void CMainWindow::DisableCJass(bool bEnable)
@@ -662,6 +671,11 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 				m_pFontName->SetEnabled(bEnable);
 				m_pFontSize->SetEnabled(bEnable);
 				m_pFontPreview->SetEnabled(bEnable);
+			}
+			else if (m_pEnableHost && m_pEnableHost == msg.pSender)
+			{
+				bool bEnable = m_pEnableHost->IsSelected();
+				EnableHostTest(bEnable);
 			}
 		}
 		else if (msg.sType == DUI_MSGTYPE_ITEMSELECT)

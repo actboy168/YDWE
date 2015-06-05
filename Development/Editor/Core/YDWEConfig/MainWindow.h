@@ -18,7 +18,8 @@ public:
 	void ContrlSelected(std::string const& name, bool bSelect);
 	void ContrlSetEnabled(std::string const& name, bool bEnable);
 	void EnableMapSave(bool bEnable);
-	void EnableScriptInjection(bool bEnable);
+	void EnableScriptInjection(bool bEnable); 
+	void EnableHostTest(bool bEnable);
 	void DisableCJass(bool bEnable);
 	void EnableJassHelper(bool bEnable);
 	void Notify(DuiLib::TNotifyUI& msg);

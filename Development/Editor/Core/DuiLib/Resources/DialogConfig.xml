@@ -116,6 +116,10 @@
             <Label text="局域网测试"  tooltip="" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
               <CheckBox text="启用局域网测试"         width="200" name="EnableHost" tooltip="" />
+                <VerticalLayout class="Background" inset="10,6,10,6" >
+                  <RadioButton class="NormalRadioButton" text="单人模式" width="200" group="HostTest" name="HostTest_0" tooltip="只会启动一个魔兽。" />
+                  <RadioButton class="NormalRadioButton" text="多人模式"   width="200" group="HostTest" name="HostTest_1" tooltip="启动和你的地图空位相同数量的魔兽。" />
+              </VerticalLayout>
             </VerticalLayout>
           </VerticalLayout>
         </VerticalLayout>
