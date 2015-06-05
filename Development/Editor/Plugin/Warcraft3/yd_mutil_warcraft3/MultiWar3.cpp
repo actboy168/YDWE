@@ -9,51 +9,10 @@
 
 #pragma comment(lib, "wsock32.lib")
 
-class udp_port_manager
-{
-public:
-	udp_port_manager()
-		: port_set_("ydwe.warcraft3.port_manager")
-		, self_port_(0)
-		, self_socket_(INVALID_SOCKET)
-	{ }
 
-    void each_other(std::function<void(uint16_t)> func)
-	{
-        foreach (int port, port_set_.get())
-        {
-			if (port != self_port_)
-			{
-				func((uint16_t)port);
-			}
-        }
-	}
-
-	void set_self(SOCKET s, uint16_t port)
-	{
-		self_socket_ = s;
-		self_port_   = port;
-		port_set_.insert(self_port_);
-	}
-
-	void remove(SOCKET s)
-	{
-		if (self_socket_ == s && self_port_)
-		{
-			port_set_.erase(self_port_);
-		}
-	}
-
-	file_set                                   port_set_;
-	uint16_t                                   self_port_;
-	SOCKET                                     self_socket_;
-};
-
-std::unique_ptr<udp_port_manager> g_udp_port_manager;
 uint16_t g_tcp_port;
 
 uintptr_t real_bind;
-uintptr_t real_closesocket;
 uintptr_t real_sendto;
 uintptr_t real_CreateEventA;
 
@@ -69,18 +28,9 @@ int __stdcall fake_bind(SOCKET s, const struct sockaddr FAR* name, int namelen)
 			if (((struct sockaddr_in*)name)->sin_port == 0xE017)
 			{
 				// udp && port == 6112
-				uint16_t udp_port  = ::ntohs(((struct sockaddr_in*)name)->sin_port);
-
-				for (;;)
-				{
-					if (base::std_call<int>(real_bind, s, name, namelen) != SOCKET_ERROR)
-					{
-						g_udp_port_manager->set_self(s, udp_port);
-						return 0;
-					}
-
-					((struct sockaddr_in*)name)->sin_port = ::htons(++udp_port);
-				}
+				BOOL optval = TRUE;
+				::setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (const char*)&optval, sizeof(optval));
+				return base::std_call<int>(real_bind, s, name, namelen);
 			}
 		}
 		else if (optVal == SOCK_STREAM)
@@ -107,13 +57,6 @@ int __stdcall fake_bind(SOCKET s, const struct sockaddr FAR* name, int namelen)
 	return base::std_call<int>(real_bind, s, name, namelen);
 }
 
-int __stdcall fake_closesocket(SOCKET s)
-{
-	g_udp_port_manager->remove(s);
-
-	return base::std_call<int>(real_closesocket, s);
-}
-
 int __stdcall fake_sendto(SOCKET s, const char FAR * buf, int len, int flags, const struct sockaddr FAR * to, int tolen)
 {
 	struct war3_packet
@@ -129,22 +72,10 @@ int __stdcall fake_sendto(SOCKET s, const char FAR * buf, int len, int flags, co
     {
         if (data_ptr->cmd_ == 0x30)
 		{
-			*(uint16_t*)(&buf[data_ptr->size_-2]) = g_tcp_port;
-        }
-		
-		struct sockaddr_in* info_ptr = (struct sockaddr_in*)to;
-
-        if ((info_ptr->sin_port == ::htons(6112)) 
-			&& (info_ptr->sin_addr.S_un.S_addr == ::inet_addr("255.255.255.255")))
-		{
-			g_udp_port_manager->each_other([&](uint16_t port)
-			{
-				sockaddr_in sock_addr = *(sockaddr_in*)to;
-				sock_addr.sin_port = ::htons(port);
-				sock_addr.sin_addr.S_un.S_addr = ::inet_addr("127.0.0.1");
-				base::std_call<int>(real_sendto, s, (char*)buf, len, flags, (const sockaddr*)&sock_addr, sizeof(sockaddr_in));
-			});
-			return len;
+			*(uint16_t*)(&buf[data_ptr->size_ - 2]) = g_tcp_port;
+			sockaddr_in addr = *(sockaddr_in*)to;
+			addr.sin_addr.S_un.S_addr = ::inet_addr("255.255.255.255");
+			return base::std_call<int>(real_sendto, s, (char*)buf, len, flags, (const sockaddr*)&addr, sizeof(sockaddr_in));
         }
     }
 
@@ -167,9 +98,7 @@ base::hook::iat_manager g_iat;
 
 void InitializeMutilWar3()
 {
-	try {
-		g_udp_port_manager.reset(new udp_port_manager());
-
+	try { 
 		HMODULE h = NULL;
 		if (base::warcraft3::get_war3_searcher().get_version() > base::warcraft3::version_121b)
 		{
@@ -187,7 +116,6 @@ void InitializeMutilWar3()
 				if (g_iat.open_dll("wsock32.dll"))
 				{
 					g_iat.hook((const char*)2,  &real_bind,         (uintptr_t)fake_bind);
-					g_iat.hook((const char*)3,  &real_closesocket,  (uintptr_t)fake_closesocket);
 					g_iat.hook((const char*)20, &real_sendto,       (uintptr_t)fake_sendto);
 				}
 
