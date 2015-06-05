@@ -2,7 +2,7 @@ require 'mpq_util'
 local w3iloader = require 'w3iloader'
 
 local function getplayernum(mappath)
-	local r, e = pcall(function()
+	local ok, result = pcall(function()
 		local map = mpq_util:stormlib(mappath, true)
 		if map then
 			local w3i = map:load('war3map.w3i')
@@ -22,7 +22,8 @@ local function getplayernum(mappath)
 		end
 		return 0
 	end)
-	return r or 0
+	if ok then return result end
+	return 0
 end
 
 
