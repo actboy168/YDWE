@@ -6,6 +6,9 @@ local tbl_index = {
 	MapSave = {
 		Option = "0"
 	},
+	HostTest = {
+		Option = "0"
+	},
 	War3Patch = {
 		Option = "0"
 	},

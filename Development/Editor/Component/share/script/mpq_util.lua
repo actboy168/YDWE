@@ -38,6 +38,14 @@ function stormlib_mt.__index:has(path_in_archive)
 	return stormlib.has_file(self.handle, path_in_archive)
 end
 
+function stormlib_mt.__index:load(path_in_archive)
+	local suc, buf = ar.stormlib.load_file(self.handle, path_in_archive)
+	if not suc then
+		return nil
+	end
+	return buf
+end
+
 function stormlib_mt.__index:close()
 	stormlib.close_archive(self.handle)
 end

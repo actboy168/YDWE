@@ -1,3 +1,30 @@
+require 'mpq_util'
+local w3iloader = require 'w3iloader'
+
+local function getplayernum(mappath)
+	local r, e = pcall(function()
+		local map = mpq_util:stormlib(mappath, true)
+		if map then
+			local w3i = map:load('war3map.w3i')
+			local tbl = w3iloader(w3i)
+			local n = 0
+			if tbl.map_flag & 32 == 0 then
+				n = tbl.player_count
+			else
+				for _, player in pairs(tbl.players) do
+					if player.type == 1 then
+						n = n + 1
+					end
+				end
+			end
+			map:close()
+			return n
+		end
+		return 0
+	end)
+	return r or 0
+end
+
 
 local function single_test(commandline, mappath)
 	return fs.war3_path():string() .. ' -loadfile "' .. mappath:string() .. '"' .. commandline
@@ -50,7 +77,7 @@ local function host_copy_dll(curdir)
 	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'StormLib.dll', curdir / 'StormLib.dll', true)
 end
 
-local function host_save_config(curdir, mappath)
+local function host_save_config(curdir, mappath, autostart)
 	local reg = registry.current_user() / "Software\\Blizzard Entertainment\\Warcraft III\\String"
 	local tbl = {
 		--bot_mapcfgpath = '',
@@ -60,6 +87,7 @@ local function host_save_config(curdir, mappath)
 		lan_war3version = war3_version.minor,
 		map_path = path_sub(mappath, fs.war3_path()):string(),
 		map_localpath = mappath:filename():string(),
+		bot_autostart = autostart,
 	}
 
 	if war3_version:is_new() then
@@ -76,12 +104,17 @@ local function host_save_config(curdir, mappath)
 end
 
 local function host_test(commandline, mappath)
-	process_kills('ydhost')
+	local host_test = tonumber(global_config["HostTest"]["Option"])
 	local curdir = fs.ydwe_path() / 'plugin' / 'ydhost'
+	process_kills('ydhost')
 	host_copy_dll(curdir)
-	host_save_config(curdir, mappath)
+	host_save_config(curdir, mappath, host_test + 1)
 	process_create(curdir / 'ydhost.exe', curdir)
-	return fs.war3_path():string() .. commandline .. ' -auto'
+	local cmd = fs.war3_path():string() .. commandline .. ' -auto'
+	if host_test == 0 then
+		return cmd, 1
+	end
+	return cmd, getplayernum(mappath)
 end
 
 -- 本函数在测试地图时使用
@@ -103,6 +136,7 @@ function event.EVENT_TEST_MAP(event_data)
 
 	-- 附加命令行
 	local commandline = ""
+	local n = 0
 
 	-- 是否OpenGL方式？
 	if global_config["MapTest"]["LaunchRenderingEngine"] == "OpenGL" then
@@ -118,15 +152,17 @@ function event.EVENT_TEST_MAP(event_data)
 
 	log.debug("Testing " .. tostring(global_config["MapTest"]["EnableHost"]))
 	if global_config["MapTest"]["EnableHost"] == "1" then
-		commandline = host_test(commandline, mappath)
+		commandline, n = host_test(commandline, mappath)
 	else
-		commandline = single_test(commandline, mappath)
+		commandline, n = single_test(commandline, mappath), 1
 	end
 
 	local result = false
 	-- 启动魔兽开始测试...
-	local war3_helper_dll = fs.ydwe_path() / "plugin" / "warcraft3" / "yd_loader.dll"
-	result = sys.spawn_inject(event_data.application_name, commandline, nil, war3_helper_dll)
+	for i = 1, n do
+		local war3_helper_dll = fs.ydwe_path() / "plugin" / "warcraft3" / "yd_loader.dll"
+		result = sys.spawn_inject(event_data.application_name, commandline, nil, war3_helper_dll)
+	end
 
 	log.debug("********************* on test end *********************")
 	if result then return 0 else return -1 end
