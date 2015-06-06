@@ -134,20 +134,20 @@ end
 
 -- 显示制作者和感谢信息
 function show_credit()
-	we.message_show("    ------------------------------------------------------------", 0)
-	we.message_show("           Welcome to YDWE, the best WE mod in China!           ", 0)
-	we.message_show("    ------------------------------------------------------------", 0)
-	we.message_show("    Program:    Actboy168, Aeris", 0)
-	we.message_show("    UI & Jass:  Everguo, Fetrix_sai, Syj2010syj, Warft_TigerCN, Xylign", 0)
-	we.message_show("    Art:        C kuhn", 0)
-	we.message_show("    Official Site: http://www.ydwe.net", 0)
-	we.message_show("    *** SPECIAL THANKS ***", 0)
-	we.message_show("    JassNewGenPack for ideas at www.wc3c.net", 0)
-	we.message_show("    Vexorian for his jasshelper compiler", 0)
-	we.message_show("    ADOLF and VD for their cjass compiler & TESH", 0)
-	we.message_show("    ...", 0)
-	we.message_show("    And all users & supporters, including", 0)
-	we.message_show("    YOU", 0)
+	we.message_show("    ------------------------------------------------------------")
+	we.message_show("           Welcome to YDWE, the best WE mod in China!           ")
+	we.message_show("    ------------------------------------------------------------")
+	we.message_show("    Program:    Actboy168, Aeris")
+	we.message_show("    UI & Jass:  Everguo, Fetrix_sai, Syj2010syj, Warft_TigerCN, Xylign")
+	we.message_show("    Art:        C kuhn")
+	we.message_show("    Official Site: http://www.ydwe.net")
+	we.message_show("    *** SPECIAL THANKS ***")
+	we.message_show("    JassNewGenPack for ideas at www.wc3c.net")
+	we.message_show("    Vexorian for his jasshelper compiler")
+	we.message_show("    ADOLF and VD for their cjass compiler & TESH")
+	we.message_show("    ...")
+	we.message_show("    And all users & supporters, including")
+	we.message_show("    YOU")
 end
 
 
@@ -180,7 +180,6 @@ function event.EVENT_WE_START(event_data)
 
 	-- 载入Patch MPQ
 	mpq_util:load_mpq("units", 14)
-	mpq_util:load_mpq("war3", 14)
 
 	-- 加载插件
 	plugin:load_all()

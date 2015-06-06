@@ -124,9 +124,10 @@ namespace NYDWE {
 		return 1;
 	}
 
-	void WeMessageShow(const char *message, int flag)
+
+	void WeMessageShow(const char *message)
 	{
-		base::fast_call<void>(0x004D5900, message, flag);
+		base::fast_call<void>(0x004D5900, message, 0);
 	}
 
 	void SetupEvent();
