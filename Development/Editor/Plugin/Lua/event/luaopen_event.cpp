@@ -7,7 +7,8 @@
 #include <boost/foreach.hpp>
 #include "YDWEEvent.h"
 #include "YDWELogger.h"
-#include <base/hook/fp_call.h>
+#include <base/hook/fp_call.h>	
+#include <base/hook/inline.h>
 #include <base/exception/exception.h>
 
 namespace NYDWE {
@@ -124,10 +125,18 @@ namespace NYDWE {
 		return 1;
 	}
 
-
-	void WeMessageShow(const char *message)
+	uintptr_t RealWeMessageShow = 0x004D5900;
+	int LuaWeMessageShow(lua_State* L)
 	{
-		base::fast_call<void>(0x004D5900, message, 0);
+		const char* message = lua_tostring(L, 1);
+		base::fast_call<void>(RealWeMessageShow, message, 0);
+		return 0;
+	}
+
+	void __fastcall FakeWeMessageShow(const char *message, int flag)
+	{
+		LOGGING_INFO(lg) << message;
+		base::fast_call<void>(RealWeMessageShow, message, flag);
 	}
 
 	void SetupEvent();
@@ -173,10 +182,14 @@ int luaopen_event(lua_State* L)
 	}
 	lua_setglobal(L, "event");
 
-	using namespace luabind;
-	module(L, "we")
-	[
-		def("message_show", &NYDWE::WeMessageShow)
-	];
+	base::hook::inline_install(&NYDWE::RealWeMessageShow, (uintptr_t)NYDWE::FakeWeMessageShow);
+
+	lua_newtable(L);
+	{
+		lua_pushstring(L, "message_show");
+		lua_pushcclosure(L, NYDWE::LuaWeMessageShow, 0);
+		lua_rawset(L, -3);
+	}
+	lua_setglobal(L, "we");
 	return 0;
 }
