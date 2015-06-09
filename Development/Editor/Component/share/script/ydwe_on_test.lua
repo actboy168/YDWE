@@ -28,7 +28,7 @@ end
 
 
 local function single_test(commandline, mappath)
-	return fs.war3_path():string() .. ' -loadfile "' .. mappath:string() .. '"' .. commandline
+	return '"' .. (fs.war3_path() / 'war3.exe'):string() .. '" -loadfile "' .. mappath:string() .. '"' .. commandline
 end
 
 local function process_kills(proc)
@@ -111,7 +111,7 @@ local function host_test(commandline, mappath)
 	host_copy_dll(curdir)
 	host_save_config(curdir, mappath, host_test + 1)
 	process_create(curdir / 'ydhost.exe', curdir)
-	local cmd = fs.war3_path():string() .. commandline .. ' -auto'
+	local cmd = '"' .. (fs.war3_path() / 'war3.exe'):string() .. '"' .. commandline .. ' -auto'
 	if host_test == 0 then
 		return cmd, 1
 	end
