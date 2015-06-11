@@ -81,7 +81,7 @@ bool EnableDirect3D9(HMODULE gamedll)
 	{
 		return false;
 	}
-	return base::hook::dyn_iat(gamedll, L"d3d8.dll", "Direct3DCreate8", Direct3DCreate8, 0);
+	return base::hook::dyn_iat(gamedll, L"d3d8.dll", "Direct3DCreate8", 0, Direct3DCreate8);
 }
 
 HMODULE __stdcall FakeGameLoadLibraryA(LPCSTR lpFilePath)
