@@ -361,9 +361,6 @@
     <ClInclude Include="base\warcraft3\jass.h">
       <Filter>base\warcraft3</Filter>
     </ClInclude>
-    <ClInclude Include="base\lua\state.h">
-      <Filter>base\lua</Filter>
-    </ClInclude>
     <ClInclude Include="base\win\process.h">
       <Filter>base\win</Filter>
     </ClInclude>
