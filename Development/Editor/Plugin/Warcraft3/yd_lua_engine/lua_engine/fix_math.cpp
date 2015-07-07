@@ -1,4 +1,3 @@
-#include "open_lua_engine.h"
 #include "callback.h"
 #include "lua_helper.h"
 #include "common.h"

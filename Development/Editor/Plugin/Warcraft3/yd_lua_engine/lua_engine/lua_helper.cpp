@@ -86,20 +86,17 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		lua_getfield(L, LUA_REGISTRYINDEX, "_LOADED");
 		lua_getfield(L, -1, LUA_LOADLIBNAME);
-
 		if (lua_istable(L, -1))
 		{
 			lua_createtable(L, 2, 0);
-
 			lua_pushvalue(L, -2);
 			lua_pushcclosure(L, searcher_preload, 1);
 			lua_rawseti(L, -2, 1);
-
 			lua_setfield(L, -2, "searchers");
-
+			lua_pop(L, 2);
 			return true;
 		}
-
+		lua_pop(L, 2);
 		return false;
 	}
 
@@ -107,30 +104,29 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		lua_getfield(L, LUA_REGISTRYINDEX, "_LOADED");
 		lua_getfield(L, -1, LUA_LOADLIBNAME);
-
-		if (lua_istable(L, -1))
+		if (!lua_istable(L, -1))
 		{
-			lua_getfield(L, -1, "searchers");
-
-			if (lua_istable(L, -1))
-			{
-				lua_pushliteral(L, "");
-
-				for (int i = 1; ; i++) 
-				{
-					lua_rawgeti(L, -2, i);
-					if (lua_isnil(L, -1))
-					{
-						lua_pushcclosure(L, searcher_storm, 0);
-						lua_rawseti(L, -4, i);
-						return true;
-					}
-					lua_pop(L, 1);
-				}
-			}
+			lua_pop(L, 2);
+			return false;
 		}
-
-		return false;
+		lua_getfield(L, -1, "searchers");
+		if (!lua_istable(L, -1))
+		{
+			lua_pop(L, 3);
+			return false;
+		}
+		for (int i = 1;; i++)
+		{
+			lua_rawgeti(L, -1, i);
+			if (lua_isnil(L, -1))
+			{
+				lua_pushcclosure(L, searcher_storm, 0);
+				lua_rawseti(L, -3, i);
+				lua_pop(L, 4);
+				return true;
+			}
+			lua_pop(L, 1);
+		}
 	}
 
 }}}
