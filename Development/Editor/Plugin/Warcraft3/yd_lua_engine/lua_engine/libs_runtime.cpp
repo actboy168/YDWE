@@ -121,15 +121,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			}
 			lua_pop(L, 1);
 
-			// free = t[0] + 1
-			lua_rawgeti(L, -1, 0);
-			int free = 1 + lua_tointeger(L, -1);
-			lua_pop(L, 1);
-
-			// t[0] = free
-			lua_pushinteger(L, free);
-			lua_rawseti(L, -2, 0);
-
+			int free = 1 + (int)lua_rawlen(L, -1);
 
 			// t[free] = v
 			lua_pushvalue(L, idx);
