@@ -45,7 +45,7 @@ end
 function _mt:load(filename)
 	for _, path in ipairs(self.paths) do
 		if fs.exists(path / filename) then
-			local r, e =  io.load(v / filename)
+			local r, e =  io.load(path / filename)
 			if r then
 				return r
 			end
