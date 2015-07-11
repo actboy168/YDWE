@@ -25,7 +25,7 @@ namespace DuiLib
 		void SetFont(int index);
 		int  GetFont() const;
 		RECT GetTextPadding() const;
-		void SetTextPadding(RECT rc);;
+		void SetTextPadding(RECT rc);
 
 		SIZE EstimateSize(SIZE szAvailable);
 		void DoEvent(TEventUI& event);

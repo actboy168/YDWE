@@ -111,7 +111,7 @@ namespace base { namespace warcraft3 {
 
 	uintptr_t next_opcode(uintptr_t address)
 	{
-		return address + hook::detail::next_opcode(address, nullptr);;
+		return address + hook::detail::next_opcode(address, nullptr);
 	}
 
 	uintptr_t next_opcode(uintptr_t address, uint8_t opcode, size_t length)

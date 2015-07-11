@@ -144,6 +144,6 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 
 const char *PluginName()
 {
-	::PathFileExistsW(L"");;
+	::PathFileExistsW(L"");
 	return "YDDllFixer";
 }

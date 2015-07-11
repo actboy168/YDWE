@@ -159,17 +159,17 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		//
 		//bool __stdcall SFileOpenArchive(const char* mpqname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
 		//{
-		//	return base::std_call<bool>(real::SFileOpenArchive, mpqname, priority, flags, mpq_handle_ptr);;
+		//	return base::std_call<bool>(real::SFileOpenArchive, mpqname, priority, flags, mpq_handle_ptr);
 		//}
 		//
 		//bool __stdcall SFileOpenFile(const char* filename, HANDLE* file_handle_ptr)
 		//{
-		//	return base::std_call<bool>(real::SFileOpenFile, filename, file_handle_ptr);;
+		//	return base::std_call<bool>(real::SFileOpenFile, filename, file_handle_ptr);
 		//}
 		//
 		//bool __stdcall SFileOpenFileEx(HANDLE mpq_handle, const char *filename, uint32_t search_scope, HANDLE* file_handle_ptr)
 		//{
-		//	return base::std_call<bool>(real::SFileOpenFileEx, mpq_handle, filename, search_scope, file_handle_ptr);;
+		//	return base::std_call<bool>(real::SFileOpenFileEx, mpq_handle, filename, search_scope, file_handle_ptr);
 		//}
 		//
 		//bool __stdcall SFileCloseFile(HANDLE file_handle)

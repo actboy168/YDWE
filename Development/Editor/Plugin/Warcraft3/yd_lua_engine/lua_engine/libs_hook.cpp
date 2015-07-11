@@ -258,7 +258,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int jhook_gc(lua_State *L)
 	{
-		intptr_t* ud = (intptr_t*)lua_touserdata(L, 1);;
+		intptr_t* ud = (intptr_t*)lua_touserdata(L, 1);
 		jhook_helper* helper = (jhook_helper*)*ud;
 		jhook_helper::destroy(helper);
 		return 0;

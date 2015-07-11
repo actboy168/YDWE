@@ -525,7 +525,7 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
                     if( m_hbmpBackground == NULL ) {
                         RECT rcClient = { 0 };
                         ::GetClientRect(m_hWndPaint, &rcClient);
-                        m_hDcBackground = ::CreateCompatibleDC(m_hDcPaint);;
+                        m_hDcBackground = ::CreateCompatibleDC(m_hDcPaint);
                         m_hbmpBackground = ::CreateCompatibleBitmap(m_hDcPaint, rcClient.right - rcClient.left, rcClient.bottom - rcClient.top); 
                         ASSERT(m_hDcBackground);
                         ASSERT(m_hbmpBackground);

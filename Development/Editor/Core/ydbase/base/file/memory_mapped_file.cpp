@@ -62,7 +62,7 @@ namespace base { namespace file {
 		}
 
 		uint64_t file_size = (static_cast<uint64_t>(size_high) << 32) | size_low;
-		uint64_t map_size = offset + request_size;;
+		uint64_t map_size = offset + request_size;
 
 		if (map_size < offset)
 		{
