@@ -91,6 +91,19 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
+	static int current_pos(lua_State* L)
+	{
+		jass::opcode* current_op = (jass::opcode *)base::warcraft3::get_current_jass_pos();
+		jass::opcode* op;
+		for (op = current_op; op->opcode_type != jass::OPTYPE_FUNCTION; --op)
+		{
+		}
+
+		lua_pushstring(L, jass::from_stringid(op->arg));
+		lua_pushinteger(L, current_op - op);
+		return 2;
+	}
+
 	static int h2i(lua_State* L)
 	{
 		lua_pushinteger(L, jassbind::read_handle(L, 1));
@@ -102,7 +115,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jassbind::push_handle(L, lua_tointeger(L, 1));
 		return 1;
 	}
-
+	
 	int jass_debug(lua_State* L)
 	{
 		lua_newtable(L);
@@ -111,6 +124,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				{ "functiondef", functiondef },
 				{ "globaldef", globaldef },
 				{ "handledef", handledef },
+				{ "current_pos", current_pos },
 				{ "h2i", h2i },
 				{ "i2h", i2h },
 				{ NULL, NULL },

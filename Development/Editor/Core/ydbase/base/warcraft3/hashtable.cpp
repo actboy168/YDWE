@@ -1,6 +1,7 @@
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/version.h>
+#include <base/warcraft3/version.h>		   
+#include <base/warcraft3/jass/opcode.h>
 #include <cstring>
 
 namespace base { namespace warcraft3 {
@@ -31,5 +32,11 @@ namespace base { namespace warcraft3 {
 	hashtable::native_func_table* get_native_function_hashtable()
 	{
 		return (hashtable::native_func_table*)(get_war3_searcher().get_instance(5)+0x18);
+	}
+
+	uintptr_t get_current_jass_pos()
+	{
+		uintptr_t vm = (uintptr_t)get_current_jass_vm_nofix();
+		return (uintptr_t)(*(jass::opcode**)(vm + 0x20) - 1);
 	}
 }}
