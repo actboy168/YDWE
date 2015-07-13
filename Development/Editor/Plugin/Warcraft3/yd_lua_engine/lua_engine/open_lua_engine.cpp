@@ -28,8 +28,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		lua_pop(L, 1);
 	}
 
-	int fix_os(lua_State* L)
+	int fix_baselib(lua_State* L)
 	{
+		fix_math(L);
+
 		lua_getglobal(L, "os");
 		if (lua_istable(L, -1))
 		{
@@ -40,6 +42,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			lua_pushstring(L, "rename");    lua_pushnil(L); lua_rawset(L, -3);
 			lua_pushstring(L, "setlocale"); lua_pushnil(L); lua_rawset(L, -3);
 			lua_pushstring(L, "tmpname");   lua_pushnil(L); lua_rawset(L, -3);
+		}
+		lua_pop(L, 1);
+
+		lua_getglobal(L, "package");
+		if (lua_istable(L, -1))
+		{
+			lua_pushstring(L, "loadlib");   lua_pushnil(L); lua_rawset(L, -3);
 		}
 		lua_pop(L, 1);
 		return 0;
@@ -63,8 +72,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jarray_make_mt(L);
 
 		insert_searchers_table(L);
-		fix_math(L);
-		fix_os(L);
+		fix_baselib(L);
 
 		return 0;
 	}
