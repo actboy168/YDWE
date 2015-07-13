@@ -49,6 +49,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		if (lua_istable(L, -1))
 		{
 			lua_pushstring(L, "loadlib");   lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "searchpath");lua_pushnil(L); lua_rawset(L, -3);
 		}
 		lua_pop(L, 1);
 		return 0;
