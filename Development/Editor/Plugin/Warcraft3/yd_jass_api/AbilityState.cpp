@@ -3,7 +3,8 @@
 #include <base/warcraft3/jass/hook.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/version.h>
-#include <base/warcraft3/war3_searcher.h>
+#include <base/warcraft3/war3_searcher.h>	
+#include <base/warcraft3/hashtable.h>
 #include <base/hook/inline.h>
 #include <array>
 #include <string>
@@ -643,6 +644,132 @@ namespace base { namespace warcraft3 { namespace japi {
 		return true;
 	}
 
+	enum BUFF_DATA_TYPE
+	{
+		BUFF_DATA_ART = 1,
+		BUFF_DATA_TIP,
+		BUFF_DATA_UBERTIP,
+	};
+
+
+	static uintptr_t search_buff_table()
+	{
+		uintptr_t base = get_war3_searcher().base();
+
+		war3_searcher& s = get_war3_searcher();
+		uintptr_t str = s.search_string_ptr("|cff00ff00", sizeof("|cff00ff00"));
+
+		uintptr_t ptr = 0;
+		if (s.get_version() > version_121b)
+		{
+			ptr = s.search_int_in_text(str);
+			uintptr_t prev = ptr;
+			for (; ptr; prev = ptr, ptr = s.search_int_in_text(str, prev + 1))
+				;
+			ptr = prev;
+		}
+		else
+		{
+			str = s.search_int_in_rdata(str);
+			ptr = s.search_int_in_text(str);
+			uintptr_t prev = ptr;
+			for (; ptr; prev = ptr, ptr = s.search_int_in_text(str, prev + 1))
+				;
+			ptr = prev;
+		}
+
+		uint32_t nop = s.get_version() > version_121b ? 0xCCCCCCCC : 0x90909090;
+		for (; nop != *(uint32_t*)ptr; --ptr)
+			;
+		ptr += 4;
+		if (s.get_version() > version_121b)
+		{
+			ptr = next_opcode(ptr, 0xB9, 5);
+			return *(uintptr_t*)(ptr + 1);
+		}
+		else
+		{
+			ptr = next_opcode(ptr, 0xA1, 5);
+			return *(uintptr_t*)(ptr + 1) - 0x24;
+		}
+	}
+
+	static uintptr_t get_buff_table()
+	{
+		static uintptr_t table = search_buff_table();
+		return table;
+	}
+
+	uint32_t  __cdecl EXGetBuffDataString(uint32_t code, uint32_t type)
+	{
+		typedef hashtable::table<> buff_table_t;
+		buff_table_t* table = (buff_table_t*)get_buff_table();
+		if (!table) {
+			return jass::create_string("");
+		}
+		hashtable::node* ptr = table->get(code);
+		if (!ptr) {
+			return jass::create_string("");
+		}
+
+		char* buf = 0;
+		switch (type) {
+		case BUFF_DATA_ART:
+			buf = (char*)ptr + 0x18;
+			break;
+		case BUFF_DATA_TIP:
+			buf = (char*)ptr + 0x11c;
+			break;
+		case BUFF_DATA_UBERTIP:
+			buf = (char*)ptr + 0x15c;
+			break;
+		}
+		if (!buf) {
+			return jass::create_string("");
+		}
+		return jass::create_string(buf);
+	}
+
+	bool  __cdecl EXSetBuffDataString(uint32_t code, uint32_t type, uint32_t value)
+	{
+		typedef hashtable::table<> buff_table_t;
+		buff_table_t* table = (buff_table_t*)get_buff_table();
+		if (!table) {
+			return false;
+		}
+		hashtable::node* ptr = table->get(code);
+		if (!ptr) {
+			return false;
+		}
+
+		char* buf = 0;
+		size_t len = 0;
+		switch (type) {
+		case BUFF_DATA_ART:
+			buf = (char*)ptr + 0x18;
+			len = 0x100;
+			break;
+		case BUFF_DATA_TIP:
+			buf = (char*)ptr + 0x11c;
+			len = 0x40;
+			break;
+		case BUFF_DATA_UBERTIP:
+			buf = (char*)ptr + 0x15c;
+			len = 0x100;
+			break;
+		}
+		if (!buf || !len) {
+			return false;
+		}
+		const char* value_str = jass::from_string(value);
+		size_t      value_len = strlen(value_str);
+		if (value_len > len - 1) {
+			value_len = len - 1;
+		}
+		strncpy_s(buf, value_len + 1, value_str, value_len);
+		return true;
+	}
+
 	void InitializeAbilityState()
 	{
 		jass::japi_add((uintptr_t)EXGetUnitAbilityById,    "EXGetUnitAbility",        "(Hunit;I)Hability;");
@@ -656,5 +783,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXSetAbilityDataInteger, "EXSetAbilityDataInteger", "(Hability;III)B");
 		jass::japi_add((uintptr_t)EXGetAbilityDataString,  "EXGetAbilityDataString",  "(Hability;II)S");
 		jass::japi_add((uintptr_t)EXSetAbilityDataString,  "EXSetAbilityDataString",  "(Hability;IIS)B");
+		jass::japi_add((uintptr_t)EXGetBuffDataString,     "EXGetBuffDataString",     "(II)S");
+		jass::japi_add((uintptr_t)EXSetBuffDataString,     "EXSetBuffDataString",     "(IIS)B");
 	}
 }}}
