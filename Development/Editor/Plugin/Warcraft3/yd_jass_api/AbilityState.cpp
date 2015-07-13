@@ -654,34 +654,18 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	static uintptr_t search_buff_table()
 	{
-		uintptr_t base = get_war3_searcher().base();
-
 		war3_searcher& s = get_war3_searcher();
 		uintptr_t str = s.search_string_ptr("|cff00ff00", sizeof("|cff00ff00"));
-
-		uintptr_t ptr = 0;
-		if (s.get_version() > version_121b)
-		{
-			ptr = s.search_int_in_text(str);
-			uintptr_t prev = ptr;
-			for (; ptr; prev = ptr, ptr = s.search_int_in_text(str, prev + 1))
-				;
-			ptr = prev;
-		}
-		else
+		if (s.get_version() <= version_121b)
 		{
 			str = s.search_int_in_rdata(str);
-			ptr = s.search_int_in_text(str);
-			uintptr_t prev = ptr;
-			for (; ptr; prev = ptr, ptr = s.search_int_in_text(str, prev + 1))
-				;
-			ptr = prev;
 		}
-
-		uint32_t nop = s.get_version() > version_121b ? 0xCCCCCCCC : 0x90909090;
-		for (; nop != *(uint32_t*)ptr; --ptr)
+		uintptr_t ptr = s.search_int_in_text(str);
+		uintptr_t prev = ptr;
+		for (; ptr; prev = ptr, ptr = s.search_int_in_text(str, prev + 1))
 			;
-		ptr += 4;
+		ptr = prev;
+		ptr = s.current_function(ptr);
 		if (s.get_version() > version_121b)
 		{
 			ptr = next_opcode(ptr, 0xB9, 5);

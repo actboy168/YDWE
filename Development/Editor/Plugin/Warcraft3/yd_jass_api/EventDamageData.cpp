@@ -16,11 +16,7 @@ uintptr_t searchUnitDamageFunc()
 
 	for (uintptr_t ptr = s.search_int_in_text(str); ptr; ptr = s.search_int_in_text(str, ptr+1))
 	{
-		uint32_t nop = s.get_version() > version_121b? 0xCCCCCCCC: 0x90909090;
-
-		uintptr_t func = ptr;
-		for (; nop != *(uint32_t*)func; --func)
-			;
+		uintptr_t func = s.current_function(ptr);
 		func += 4;
 
 		if (ptr - func > 1000)

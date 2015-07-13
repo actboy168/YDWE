@@ -40,6 +40,15 @@ namespace base { namespace warcraft3 {
 		return (0 != get_gameui(0,0));
 	}
 
+	uintptr_t war3_searcher::current_function(uintptr_t ptr)
+	{
+		static uint32_t nop = get_version() > version_121b ? 0xCCCCCCCC : 0x90909090;
+		for (; nop != *(uint32_t*)ptr; --ptr)
+			;
+		ptr += 4;
+		return ptr;
+	}
+
 	uint32_t war3_searcher::search_version() const
 	{
 		static const char warcraft3_version_string[] = "Warcraft III (build ";

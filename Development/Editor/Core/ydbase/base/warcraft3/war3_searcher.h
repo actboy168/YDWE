@@ -16,6 +16,7 @@ namespace base { namespace warcraft3 {
 		uint32_t  get_instance(uint32_t index);
 		uint32_t  get_gameui(uint32_t unk0, uint32_t unk1);
 		bool      is_gaming();
+		uintptr_t current_function(uintptr_t ptr);
 
 	private:
 		uint32_t  search_version() const;
