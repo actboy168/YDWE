@@ -4,6 +4,7 @@
 namespace base { namespace warcraft3 { namespace japi {
 	void InitializeUnitState();
 	void InitializeAbilityState();
+	void InitializeItemState();
 	void InitializeEventDamageData();
 	void InitializeDisplayChat();
 
@@ -11,6 +12,7 @@ namespace base { namespace warcraft3 { namespace japi {
 	{
 		InitializeUnitState();
 		InitializeAbilityState();
+		InitializeItemState();
 		InitializeEventDamageData();
 		InitializeDisplayChat();
 	}
