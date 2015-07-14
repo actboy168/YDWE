@@ -12,9 +12,7 @@
 
 namespace base { namespace warcraft3 { namespace japi {
 
-	uint32_t  __cdecl EXGetUnitObject(uint32_t unit_handle);
-
-	string_pool ability_string_pool;
+	string_pool_t string_pool;
 
 	template <class T, size_t kSize = 256>
 	class circular_queue : public std::array<T, kSize>
@@ -298,7 +296,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	uintptr_t GetUnitAbilityById(uint32_t unit_handle, uint32_t abil_code)
 	{
-		uintptr_t unit_ptr = EXGetUnitObject(unit_handle);
+		uintptr_t unit_ptr = handle_to_object(unit_handle);
 
 		if (unit_ptr)
 		{
@@ -327,7 +325,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	uintptr_t GetUnitAbilityByIndex(uint32_t unit_handle, uint32_t index)
 	{
-		uintptr_t unit_ptr = EXGetUnitObject(unit_handle);
+		uintptr_t unit_ptr = handle_to_object(unit_handle);
 
 		if (unit_ptr)
 		{
@@ -630,10 +628,10 @@ namespace base { namespace warcraft3 { namespace japi {
 			return false;
 		}
 
-		ability_string_pool.free((uintptr_t)*buf);
+		string_pool.free((uintptr_t)*buf);
 		const char* value_str = jass::from_string(value);
 		size_t      value_len = strlen(value_str);
-		uintptr_t   value_buf = ability_string_pool.malloc(value_len+1);
+		uintptr_t   value_buf = string_pool.malloc(value_len+1);
 
 		if (value_buf)
 		{

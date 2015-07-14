@@ -7,10 +7,10 @@
 
 namespace base { namespace warcraft3 { namespace japi {
 
-	class string_pool
+	class string_pool_t
 	{
 	public:
-		~string_pool()
+		~string_pool_t()
 		{
 			foreach(auto it, used_)
 			{
