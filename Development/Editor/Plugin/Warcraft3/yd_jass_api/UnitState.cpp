@@ -662,48 +662,8 @@ namespace base { namespace warcraft3 { namespace japi {
 		}
 	}
 
-	uint32_t hashid(uint32_t id)
-	{
-		static int box[] = {
-			0x098AA3D0C, 0x0F67BCA9E, 0x0C46CA84C, 0x02AC9D845,
-			0x09A1CF1DD, 0x06450148E, 0x08516213D, 0x0C0882BBF,
-			0x0F10C2A9C, 0x09D7CF013, 0x0CD845F5E, 0x01D4BD837,
-			0x01055F69A, 0x0A6A87DCD, 0x0312D8D9E, 0x0645A1CEC,
-		};
-		uint32_t hashlo = 0x7FED7FED;
-		uint32_t hashhi = 0xEEEEEEEE;
-		for (; id > 0; )
-		{
-			hashlo = (box[(id >> 4) & 0x0F] - box[id & 0x0F]) ^ (hashhi + hashlo);
-			hashhi = hashhi + (id & 0xFF) + 32 * hashhi + hashlo + 3;
-			id >>= 8;
-		}
-		return hashlo;
-	}
-
 	uint32_t _cdecl EXGetObject(uint32_t unit_handle)
 	{
-		struct item_ui_node : public hashtable::virtual_func_table, public hashtable::node
-		{
-			uint32_t unk0;
-			uint32_t unk1;
-			uint32_t unk2;
-			uint32_t unk3;
-			char**   name;
-		};
-
-		uintptr_t base = get_war3_searcher().base();
-		uint32_t op = hashid('I000');
-		typedef hashtable::table<item_ui_node> item_ui_table_t;
-		item_ui_table_t* table = (item_ui_table_t*)(base + 0x00ACC72C);
-		if (!table) {
-			return 0;
-		}
-		item_ui_node* ptr = table->get(op);
-		if (!ptr) {
-			//return 0;
-		}
-		//char* k = fast_call<char*>(base + 0x0032E720, 'I000', 0);
 		return handle_to_object(unit_handle);
 	}
 
@@ -711,7 +671,7 @@ namespace base { namespace warcraft3 { namespace japi {
 	{
 		jass::japi_hook("GetUnitState", &RealGetUnitState, (uintptr_t)FakeGetUnitState);
 		jass::japi_hook("SetUnitState", &RealSetUnitState, (uintptr_t)FakeSetUnitState);
-		jass::async_add((uintptr_t)EXGetObject, "EXGetObject", "(Hhandle;)I");
+		//jass::async_add((uintptr_t)EXGetObject, "EXGetObject", "(Hhandle;)I");
 	}
 
 }}}
