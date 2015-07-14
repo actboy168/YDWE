@@ -1,22 +1,12 @@
 #include <windows.h>
 
-
 namespace base { namespace warcraft3 { namespace japi {
-void InitializeUnitState();
-void InitializeAbilityState();
-void InitializeItemState();
-void InitializeEventDamageData();
-void InitializeDisplayChat();
-void InitializeUtilFuncs();
+	void initialize();
 }}}
 
 void Initialize()
 {
-	base::warcraft3::japi::InitializeUnitState();
-	base::warcraft3::japi::InitializeAbilityState();
-	base::warcraft3::japi::InitializeItemState();
-	base::warcraft3::japi::InitializeEventDamageData();
-	base::warcraft3::japi::InitializeDisplayChat();
+	base::warcraft3::japi::initialize();
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID /*pReserved*/)

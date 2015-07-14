@@ -87,6 +87,7 @@
     <ClCompile Include="AbilityState.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="EventDamageData.cpp" />
+    <ClCompile Include="Initialize.cpp" />
     <ClCompile Include="ItemState.cpp" />
     <ClCompile Include="UnitState.cpp" />
     <ClCompile Include="DisplayChat.cpp" />
