@@ -1,10 +1,11 @@
 #include <lua.hpp>
-#include <base/warcraft3/war3_searcher.h>		  
-#include <base/warcraft3/version.h>	
-#include <base/warcraft3/keyboard_code.h>		  
-#include <base/hook/inline.h>				  
-#include <base/hook/fp_call.h>	  
-#include "common.h"	  		  
+#include <base/warcraft3/war3_searcher.h>
+#include <base/warcraft3/version.h>
+#include <base/warcraft3/keyboard_code.h>	
+#include <base/warcraft3/player.h>
+#include <base/hook/inline.h>
+#include <base/hook/fp_call.h>
+#include "common.h"
 #include "callback.h"
 
 namespace base { namespace warcraft3 { namespace lua_engine {

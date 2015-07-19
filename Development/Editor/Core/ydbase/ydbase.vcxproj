@@ -120,6 +120,7 @@
     <ClCompile Include="base\thread\thread.cpp" />
     <ClCompile Include="base\thread\thread_exception.cpp" />
     <ClCompile Include="base\warcraft3\command_line.cpp" />
+    <ClCompile Include="base\warcraft3\player.cpp" />
     <ClCompile Include="base\warcraft3\virtual_mpq.cpp" />
     <ClCompile Include="base\win\font\file.cpp" />
     <ClCompile Include="base\win\font\utility.cpp" />
@@ -252,6 +253,7 @@
     <ClInclude Include="base\warcraft3\jass\trampoline_function.h" />
     <ClInclude Include="base\warcraft3\jass\opcode.h" />
     <ClInclude Include="base\warcraft3\jass\trampoline.h" />
+    <ClInclude Include="base\warcraft3\player.h" />
     <ClInclude Include="base\warcraft3\version.h" />
     <ClInclude Include="base\warcraft3\virtual_mpq.h" />
     <ClInclude Include="base\warcraft3\war3_searcher.h" />
@@ -281,6 +283,7 @@
     <None Include="base\util\detail\ansi_codecvt.inl" />
     <None Include="base\util\detail\codecvt.inl" />
     <None Include="base\util\detail\utf8_codecvt.inl" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

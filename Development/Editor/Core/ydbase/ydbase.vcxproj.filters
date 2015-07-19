@@ -245,6 +245,9 @@
     <ClCompile Include="base\win\windows_category.cpp">
       <Filter>base\win</Filter>
     </ClCompile>
+    <ClCompile Include="base\warcraft3\player.cpp">
+      <Filter>base\warcraft3</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -533,6 +536,9 @@
     <ClInclude Include="base\warcraft3\keyboard_code.h">
       <Filter>base\warcraft3</Filter>
     </ClInclude>
+    <ClInclude Include="base\warcraft3\player.h">
+      <Filter>base\warcraft3</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">
@@ -549,5 +555,6 @@
     <None Include="base\util\detail\utf8_codecvt.inl">
       <Filter>base\util\detail</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
