@@ -1,6 +1,7 @@
 #include <lua.hpp>
 #include <base/warcraft3/war3_searcher.h>		  
-#include <base/warcraft3/version.h>			  
+#include <base/warcraft3/version.h>	
+#include <base/warcraft3/keyboard_code.h>		  
 #include <base/hook/inline.h>				  
 #include <base/hook/fp_call.h>	  
 #include "common.h"	  		  
@@ -276,10 +277,29 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
+	static int init_keyboard(lua_State* L)
+	{
+		lua_newtable(L);
+#define SET_KEYBOARD(name) \
+		lua_pushinteger(L, WARK_ ## name);	\
+		lua_setfield(L, -2, #name)
+		SET_KEYBOARD_ALL();
+#undef SET_KEYBOARD
+		return 1;
+	}
+
 	int jass_message(lua_State* L)
 	{
 		lua_newtable(L);
 		{
+			lua_pushstring(L, "keyboard");
+			init_keyboard(L);
+			lua_rawset(L, -3);
+
+			lua_pushstring(L, "mouse");
+			lua_pushcclosure(L, lmouse, 0);
+			lua_rawset(L, -3);
+
 			lua_newtable(L);
 			{
 				lua_pushstring(L, "__index");
@@ -292,9 +312,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			}
 			lua_setmetatable(L, -2);
 
-			lua_pushstring(L, "mouse");
-			lua_pushcclosure(L, lmouse, 0);
-			lua_rawset(L, -3);
 		}
 		return 1;
 	}

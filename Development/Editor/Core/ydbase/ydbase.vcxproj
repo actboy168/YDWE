@@ -256,6 +256,7 @@
     <ClInclude Include="base\warcraft3\virtual_mpq.h" />
     <ClInclude Include="base\warcraft3\war3_searcher.h" />
     <ClInclude Include="base\warcraft3\directory.h" />
+    <ClInclude Include="base\warcraft3\keyboard_code.h" />
     <ClInclude Include="base\win\env_variable.h" />
     <ClInclude Include="base\win\event.h" />
     <ClInclude Include="base\win\file_version.h" />

@@ -530,6 +530,9 @@
     <ClInclude Include="base\win\windows_category.h">
       <Filter>base\win</Filter>
     </ClInclude>
+    <ClInclude Include="base\warcraft3\keyboard_code.h">
+      <Filter>base\warcraft3</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">
