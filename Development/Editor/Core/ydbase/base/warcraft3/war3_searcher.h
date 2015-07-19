@@ -51,4 +51,5 @@ namespace base { namespace warcraft3 {
 	_BASE_API uintptr_t   get_vfn_ptr(const char* name);
 	_BASE_API uint32_t    get_object_type(uintptr_t ptr);
 	_BASE_API uintptr_t   handle_to_object(uint32_t handle);
+	_BASE_API uint32_t    object_to_handle(uintptr_t obj);
 }}
