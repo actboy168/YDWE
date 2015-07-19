@@ -147,6 +147,24 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 2;
 	}
 
+	static int lselection(lua_State* L)
+	{
+		player::selection_t* slt = player::selection(player::local());
+		if (!slt || !slt->unit)
+		{
+			lua_pushnil(L);
+			return 1;
+		}
+		if (!slt)
+		{
+			lua_pushnil(L);
+			return 1;
+		}
+		uintptr_t handle = object_to_handle(slt->unit);
+		jassbind::push_handle(L, handle);
+		return 1;
+	}
+	
 	static lua_State* ML = 0;
 	static bool keyboard_event(lua_State* L, const char* type, keyboard_message_t* msg)
 	{
@@ -299,6 +317,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 			lua_pushstring(L, "mouse");
 			lua_pushcclosure(L, lmouse, 0);
+			lua_rawset(L, -3);
+
+			lua_pushstring(L, "selection");
+			lua_pushcclosure(L, lselection, 0);
 			lua_rawset(L, -3);
 
 			lua_newtable(L);
