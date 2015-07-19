@@ -48,6 +48,7 @@ namespace base { namespace warcraft3 {
 	_BASE_API war3_searcher& get_war3_searcher();
 	_BASE_API uintptr_t   find_objectid_64(const objectid_64& id);
 	_BASE_API const char* get_class_name(uintptr_t ptr);
+	_BASE_API uintptr_t   get_vfn_ptr(const char* name);
 	_BASE_API uint32_t    get_object_type(uintptr_t ptr);
 	_BASE_API uintptr_t   handle_to_object(uint32_t handle);
 }}

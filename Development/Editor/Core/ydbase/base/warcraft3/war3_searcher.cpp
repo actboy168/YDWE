@@ -278,6 +278,23 @@ namespace base { namespace warcraft3 {
 		return nullptr;
 	}
 
+	uintptr_t get_vfn_ptr(const char* name)
+	{
+		war3_searcher& s = get_war3_searcher();
+		uintptr_t ptr = s.search_string_ptr(name, strlen(name));
+		if (!ptr)
+			return 0;
+		ptr -= 0x08;
+		ptr = s.search_int_in_rdata(ptr);
+		if (!ptr)
+			return 0;
+		ptr -= 0x0C;
+		ptr = s.search_int_in_rdata(ptr);
+		if (!ptr)
+			return 0;
+		ptr += 0x04;
+		return ptr;
+	}
 
 	uint32_t get_object_type(uintptr_t ptr)
 	{
