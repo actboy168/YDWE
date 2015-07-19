@@ -255,7 +255,7 @@ namespace base { namespace warcraft3 {
 			typedef table_t::iterator iterator;
 
 			uint32_t            unk0_;
-			uint32_t            unk1_;
+			uint32_t            size;
 			reverse_node**      node_array_;
 			uint32_t            unk3_;
 			table_t             table_;
