@@ -47,7 +47,7 @@ HWND WINAPI FakeCreateWindowExA(
 		&& (0 == strcmp(lpWindowName, "Warcraft III"))
 		&& (NULL == g_DllMod.hWar3Wnd))
 	{
-		g_DllMod.hWar3Wnd = hWnd;
+		g_DllMod.SetWindow(hWnd);
 		if (g_DllMod.IsAuto)
 		{
 			auto_enter::initialize();
@@ -181,6 +181,19 @@ void DllModule::ThreadFunc()
 	}
 }
 
+void DllModule::SetWindow(HWND hwnd)
+{
+	hWar3Wnd = hwnd;
+	for (auto it = plugin_mapping.begin(); it != plugin_mapping.end(); ++it)
+	{
+		uintptr_t func = (uintptr_t)::GetProcAddress(it->second, "SetWindow");
+		if (func)
+		{
+			base::c_call<void>(func, hwnd);
+		}
+	}
+}
+
 void DllModule::LoadPlugins()
 {
 	try {
@@ -195,7 +208,6 @@ void DllModule::LoadPlugins()
 		catch(...) {
 		}
 
-		std::map<std::string, HMODULE> plugin_mapping;
 		fs::directory_iterator end_itr;
 		for (fs::directory_iterator itr(plugin_path); itr != end_itr; ++itr)
 		{

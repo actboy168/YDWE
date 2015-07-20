@@ -6,6 +6,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/atomic.hpp>
 #include <base/thread/thread.h>
+#include <map>
 
 namespace fs = boost::filesystem;
 
@@ -21,6 +22,7 @@ public:
 	void ThreadFunc();
 	void LoadPlugins();
 	bool SearchPatch(fs::path& result, std::wstring const& fv_str);
+	void SetWindow(HWND hwnd);
 
 	HMODULE  hGameDll;
 	HWND     hWar3Wnd;
@@ -37,6 +39,7 @@ public:
 private:
 	boost::shared_ptr<base::thread> daemon_thread_;
 	boost::atomic<bool>             daemon_thread_exit_;
+	std::map<std::string, HMODULE>  plugin_mapping;
 };
 
 extern DllModule g_DllMod;

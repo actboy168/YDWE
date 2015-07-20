@@ -10,6 +10,13 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
+	static HWND war3_window = NULL;
+
+	void set_window(HWND hwnd)
+	{
+		war3_window = hwnd;
+	}
+
 	struct message_t
 	{
 		uint32_t vfptr;
@@ -135,12 +142,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	static int lmouse(lua_State* L)
 	{
-		HWND hwnd = ::FindWindowW(L"Warcraft III", L"Warcraft III");
 		POINT pt = { 0 };
 		::GetCursorPos(&pt);
-		ScreenToClient(hwnd, &pt);
+		ScreenToClient(war3_window, &pt);
 		RECT rt;
-		::GetClientRect(hwnd, &rt);
+		::GetClientRect(war3_window, &rt);
 		float fx = 0.8 *((float)(pt.x - rt.left) / (rt.right - rt.left));
 		float fy = 0.6 *(1.0 - (float)(pt.y - rt.top) / (rt.bottom - rt.top));
 		float wx = 0, wy = 0;
