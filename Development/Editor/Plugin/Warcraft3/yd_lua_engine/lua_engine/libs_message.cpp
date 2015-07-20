@@ -72,8 +72,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		static void hook(uintptr_t filter)
 		{
-			fn_filter = filter;
-			fn_real = hook::replace_pointer(get(), (uintptr_t)fn_fake);
+			if (!fn_filter)
+			{
+				fn_filter = filter;
+				fn_real = hook::replace_pointer(get(), (uintptr_t)fn_fake);
+			}
 		}
 
 		static void unhook()
@@ -147,24 +150,179 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 2;
 	}
 
-	static int lselection(lua_State* L)
+	static uintptr_t get_select_unit()
 	{
 		player::selection_t* slt = player::selection(player::local());
 		if (!slt || !slt->unit)
 		{
-			lua_pushnil(L);
-			return 1;
+			return 0;
 		}
-		if (!slt)
+		return slt->unit;
+	}
+
+	static int lselection(lua_State* L)
+	{
+		uintptr_t unit = get_select_unit();
+		if (!unit)
 		{
 			lua_pushnil(L);
 			return 1;
 		}
-		uintptr_t handle = object_to_handle(slt->unit);
+		uintptr_t handle = object_to_handle(unit);
 		jassbind::push_handle(L, handle);
 		return 1;
 	}
-	
+
+	namespace order {
+		bool b_hook = false;
+		bool b_search = false;
+
+		namespace real {
+			uintptr_t immediate_order = 0;
+			uintptr_t point_order = 0;
+			uintptr_t target_order = 0;
+		}
+
+		namespace fake {
+			int __fastcall immediate_order(uint32_t order, uint32_t unk, uint32_t flags)
+			{
+				if (order >= 'A000')
+				{
+					printf("immediate_order, %c%c%c%c, %d, %X\n", ((char*)&order)[3], ((char*)&order)[2], ((char*)&order)[1], ((char*)&order)[0], unk, flags);
+				}
+				else
+				{
+					printf("immediate_order, %X, %d, %X\n", order, unk, flags);
+				}
+				return fast_call<int>(real::immediate_order, order, unk, flags);
+			}
+
+
+			int __fastcall point_order(uint32_t order, uint32_t unk, float* x, float* y, uint32_t flags)
+			{
+				if (order >= 'A000')
+				{
+					printf("point_order, %c%c%c%c, %X, %f, %f, %X\n", ((char*)&order)[3], ((char*)&order)[2], ((char*)&order)[1], ((char*)&order)[0], unk, *x, *y, flags);
+				}
+				else
+				{
+					printf("point_order, %X, %X, %f, %f, %X\n", order, unk, *x, *y, flags);
+				}
+				return fast_call<int>(real::point_order, order, unk, x, y, flags);
+			}
+
+			int __fastcall target_order(uint32_t order, uint32_t unk, float* x, float* y, uint32_t target, uint32_t flags)
+			{
+				if (order >= 'A000')
+				{
+					printf("target_order, %c%c%c%c, %X, %f, %f, %X, %X\n", ((char*)&order)[3], ((char*)&order)[2], ((char*)&order)[1], ((char*)&order)[0], unk, *x, *y, target, flags);
+				}
+				else
+				{
+					printf("target_order, %X, %X, %f, %f, %X, %X\n", order, unk, *x, *y, target, flags);
+				}
+				return fast_call<int>(real::target_order, order, unk, x, y, target, flags);
+			}
+		}
+
+		static void search()
+		{
+			if (b_search) {
+				return;
+			}
+			b_search = true;
+
+			war3_searcher& s = get_war3_searcher();
+			uintptr_t ptr = s.search_string("SimpleDestructableNameValue");
+			ptr += 4;
+			do
+			{
+				ptr = next_opcode(ptr, 0xC1, 3);
+				ptr += 3;
+			} while (*(uint16_t*)(ptr - 2) != 0x05E2);
+			ptr = next_opcode(ptr, 0xE8, 5);
+			real::immediate_order = convert_function(ptr);
+			ptr += 5;
+			ptr = next_opcode(ptr, 0xE8, 5);
+			real::point_order = convert_function(ptr);
+			ptr += 5;
+			ptr = next_opcode(ptr, 0xE8, 5);
+			ptr += 5;
+			ptr = next_opcode(ptr, 0xE8, 5);
+			real::target_order = convert_function(ptr);
+		}
+
+		static int limmediate(lua_State* L)
+		{
+			if (!get_select_unit()){
+				lua_pushboolean(L, 0);
+				return 1;
+			}
+			search();
+			uint32_t order = lua_tointeger(L, 1);
+			uint32_t flags = lua_tointeger(L, 2);
+			fast_call<int>(real::immediate_order, order, 0, flags);
+			lua_pushboolean(L, 1);
+			return 1;
+		}
+
+		static int lpoint(lua_State* L)
+		{
+			if (!get_select_unit()){
+				lua_pushboolean(L, 0);
+				return 1;
+			}
+			search();
+			uint32_t order = lua_tointeger(L, 1);
+			float x = lua_tonumber(L, 2);
+			float y = lua_tonumber(L, 3);
+			uint32_t flags = lua_tointeger(L, 4);
+			fast_call<int>(real::point_order, order, 0, &x, &y, flags);
+			lua_pushboolean(L, 1);
+			return 1;
+		}
+
+		static int ltarget(lua_State* L)
+		{
+			if (!get_select_unit()){
+				lua_pushboolean(L, 0);
+				return 1;
+			}
+			search();
+			uint32_t order = lua_tointeger(L, 1);
+			float x = lua_tonumber(L, 2);
+			float y = lua_tonumber(L, 3);
+			uint32_t target = jassbind::read_handle(L, 4);
+			uint32_t flags = lua_tointeger(L, 5);
+			if (target)
+			{
+				target = handle_to_object(target);
+			}
+			fast_call<int>(real::target_order, order, 0, &x, &y, target, flags);
+			lua_pushboolean(L, 1);
+			return 1;
+		}
+		
+		static void hook()
+		{
+			if (b_hook) {
+				return;
+			}
+			b_hook = true;
+			search();
+
+			hook::inline_install(&real::immediate_order, (uintptr_t)fake::immediate_order);
+			hook::inline_install(&real::point_order, (uintptr_t)fake::point_order);
+			hook::inline_install(&real::target_order, (uintptr_t)fake::target_order);
+		}
+
+		static int lenable_debug(lua_State* /*L*/)
+		{
+			hook();
+			return 0;
+		}
+	}
+
 	static lua_State* ML = 0;
 	static bool keyboard_event(lua_State* L, const char* type, keyboard_message_t* msg)
 	{
@@ -315,13 +473,24 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			init_keyboard(L);
 			lua_rawset(L, -3);
 
-			lua_pushstring(L, "mouse");
-			lua_pushcclosure(L, lmouse, 0);
-			lua_rawset(L, -3);
+			luaL_Reg func[] = {
+				{ "mouse", lmouse },
+				{ "selection", lselection },
+				{ NULL, NULL },
+			};
+			luaL_setfuncs(L, func, 0);
 
-			lua_pushstring(L, "selection");
-			lua_pushcclosure(L, lselection, 0);
-			lua_rawset(L, -3);
+			if (get_war3_searcher().get_version() >= version_124e)
+			{
+				luaL_Reg func[] = {
+					{ "order_immediate", order::limmediate },
+					{ "order_point", order::lpoint },
+					{ "order_target", order::ltarget },
+					{ "order_enable_debug", order::lenable_debug },
+					{ NULL, NULL },
+				};
+				luaL_setfuncs(L, func, 0);
+			}
 
 			lua_newtable(L);
 			{
