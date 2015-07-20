@@ -96,21 +96,33 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
-	int safe_call_has_sleep(lua_State* L, int nargs, int /*nresults*/, bool err_func)
+	int safe_call_has_sleep(lua_State* L, int nargs, int nresults, bool err_func)
 	{
 		int func_idx = lua_gettop(L) - nargs;
 		runtime::thread_create(L, func_idx);
 		lua_State* thread = lua_tothread(L, -1);
-		int thread_idx = lua_gettop(L) - (nargs + 1);
+		int thread_idx = func_idx;
 		lua_insert(L, thread_idx);
 		func_idx++;
 
-		int nresults = 0;
-		int error = safe_resume(thread, L, nargs, nresults);
-
+		int n = 0;
+		int error = safe_resume(thread, L, nargs, n);
 		switch (error)
 		{
 		case LUA_OK:
+		{
+			if (nresults > n)
+			{
+				for (int i = n; i < nresults; i++)
+				{
+					lua_pushnil(L);
+				}
+			}
+			else if (nresults < n)
+			{
+				lua_pop(L, n - nresults);
+			}
+		}
 			break;
 		case LUA_YIELD:
 			runtime::thread_save(L, func_idx, thread_idx);
@@ -120,6 +132,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			break;
 		}
 
+		lua_remove(L, func_idx);
 		lua_remove(L, thread_idx);
 		return error;
 	}
@@ -138,16 +151,15 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	uintptr_t safe_call_ref(lua_State* L, uint32_t ref, size_t nargs, jass::variable_type result_vt)
 	{
-		int base = lua_gettop(L) - nargs + 1;
 		runtime::callback_read(L, ref);
 		if (!lua_isfunction(L, -1))
 		{
 			lua_pushstring(L, "safe_call attempt to call (not a function)\n");
 			error_function(L, true);
-			lua_pop(L, 1);
+			lua_pop(L, (int)nargs + 1);
 			return false;
 		}
-		lua_insert(L, base);
+		lua_insert(L, -(int)nargs-1);
 
 		if (safe_call(L, nargs, (result_vt != jass::TYPE_NOTHING) ? 1 : 0, true) != LUA_OK)
 		{
