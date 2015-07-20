@@ -327,7 +327,7 @@ namespace base { namespace warcraft3 {
 	uint32_t object_to_handle(uintptr_t obj)
 	{
 		hashtable::reverse_table& table = (*get_jass_vm()->handle_table)->table;
-		for (uint32_t i = 1; i < table.size; i += 3)
+		for (uint32_t i = 1; i < table.size*3; i += 3)
 		{
 			if (obj == (uintptr_t)table.at(i))
 			{
