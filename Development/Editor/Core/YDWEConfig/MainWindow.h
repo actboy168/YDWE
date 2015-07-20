@@ -61,5 +61,6 @@ private:
 	DuiLib::CComboUI*          m_pFontSize;
 	DuiLib::CLabelUI*          m_pFontPreview;
 
-	fs::path                m_ydwe_path;
+	fs::path                   m_ydwe_path;
+	std::string                m_username;
 };

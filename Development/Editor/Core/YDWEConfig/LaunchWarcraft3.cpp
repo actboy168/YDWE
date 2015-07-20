@@ -63,12 +63,19 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		slk::IniTable table;
 		table["MapTest"]["LaunchRenderingEngine"]   = "Direct3D 8";
 		table["MapTest"]["LaunchWindowed"] = "1";
+		table["MapTest"]["UserName"] = "";
 		try {
 			base::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<base::buffer>();
 			base::buffer_reader reader(buf);
 			slk::IniReader::Read(reader, table);
 		} 
 		catch (...) {
+		}
+		std::string name = table["MapTest"]["UserName"];
+		if (name != "")
+		{
+			base::registry::key_a key(HKEY_CURRENT_USER, "Software\\Blizzard Entertainment\\Warcraft III", "String");
+			key["userlocal"].set((const void*)name.c_str(), name.size());
 		}
 
 		if ("OpenGL" == table["MapTest"]["LaunchRenderingEngine"])
