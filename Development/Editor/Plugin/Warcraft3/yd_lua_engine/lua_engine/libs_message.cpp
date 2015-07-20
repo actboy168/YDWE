@@ -350,7 +350,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		lua_insert(L, -2);
 		lua_pushvalue(L, -2);
-		if (safe_call(L, 1, 1, true) != LUA_OK)
+		if (safe_call_not_sleep(L, 1, 1, true) != LUA_OK)
 		{
 			lua_pop(L, 1);
 			return true;
@@ -391,7 +391,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		lua_insert(L, -2);
 		lua_pushvalue(L, -2);
-		if (safe_call(L, 1, 1, true) != LUA_OK)
+		if (safe_call_not_sleep(L, 1, 1, true) != LUA_OK)
 		{
 			lua_pop(L, 1);
 			return true;
