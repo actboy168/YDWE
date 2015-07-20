@@ -353,9 +353,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		lua_pop(L, 1);
 		if (ok && msg)
 		{
-			lua_getfield(L, -2, "code");
+			lua_getfield(L, -1, "code");
 			msg->keycode = lua_tointeger(L, -1);
-			lua_getfield(L, -3, "state");
+			lua_getfield(L, -2, "state");
 			msg->keystate = lua_tointeger(L, -1);
 			lua_pop(L, 2);
 		}
