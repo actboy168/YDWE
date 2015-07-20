@@ -401,19 +401,16 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		switch (msg->msgid)
 		{
 		case 0x40060064:
-			keyboard_event(ML, "key_down", (keyboard_message_t*)msg);
-			break;
+			return keyboard_event(ML, "key_down", (keyboard_message_t*)msg);
 		case 0x40060066:
-			keyboard_event(ML, "key_up", (keyboard_message_t*)msg);
+			return keyboard_event(ML, "key_up", (keyboard_message_t*)msg);
 			break;
 		case 0x40060067:
 			break;
 		case 0x1A0068:
-			mouse_event(ML, "mouse_down", (mouse_message_t*)msg);
-			break;
+			return mouse_event(ML, "mouse_down", (mouse_message_t*)msg);
 		case 0x400500C9:
-			mouse_event(ML, "mouse_up", 0);
-			break;
+			return mouse_event(ML, "mouse_up", 0);
 		default:
 			break;
 		}
