@@ -147,9 +147,9 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 		ScreenToClient(war3_window, &pt);
 		RECT rt;
 		::GetClientRect(war3_window, &rt);
-		float fx = 0.8 *((float)(pt.x - rt.left) / (rt.right - rt.left));
-		float fy = 0.6 *(1.0 - (float)(pt.y - rt.top) / (rt.bottom - rt.top));
-		float wx = 0, wy = 0;
+		float fx = 0.8f *((float)(pt.x - rt.left) / (rt.right - rt.left));
+		float fy = 0.6f *(1.0f - (float)(pt.y - rt.top) / (rt.bottom - rt.top));
+		float wx = 0.f, wy = 0.f;
 		convert_xy(fx, fy, wx, wy);
 		lua_pushnumber(L, wx);
 		lua_pushnumber(L, wy);
@@ -280,8 +280,8 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			}
 			search();
 			uint32_t order = lua_tointeger(L, 1);
-			float x = lua_tonumber(L, 2);
-			float y = lua_tonumber(L, 3);
+			float x = (float)lua_tonumber(L, 2);
+			float y = (float)lua_tonumber(L, 3);
 			uint32_t flags = lua_tointeger(L, 4);
 			fast_call<int>(real::point_order, order, 0, &x, &y, flags);
 			lua_pushboolean(L, 1);
@@ -296,8 +296,8 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			}
 			search();
 			uint32_t order = lua_tointeger(L, 1);
-			float x = lua_tonumber(L, 2);
-			float y = lua_tonumber(L, 3);
+			float x = (float)lua_tonumber(L, 2);
+			float y = (float)lua_tonumber(L, 3);
 			uint32_t target = jassbind::read_handle(L, 4);
 			uint32_t flags = lua_tointeger(L, 5);
 			if (target)
