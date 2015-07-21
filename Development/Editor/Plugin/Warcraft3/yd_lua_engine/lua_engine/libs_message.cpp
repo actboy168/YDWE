@@ -8,7 +8,7 @@
 #include "common.h"
 #include "callback.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine { namespace message {
 
 	static HWND war3_window = NULL;
 
@@ -468,7 +468,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	int jass_message(lua_State* L)
+	int open(lua_State* L)
 	{
 		lua_newtable(L);
 		{
@@ -510,4 +510,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		return 1;
 	}
-}}}
+}}}}

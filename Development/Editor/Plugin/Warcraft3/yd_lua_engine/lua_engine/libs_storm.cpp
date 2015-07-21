@@ -5,7 +5,7 @@
 #include <base/util/unicode.h>
 #include <boost/assign.hpp>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
 
 	int storm_load(lua_State* L)
 	{
@@ -29,7 +29,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		const void* buf_data = nullptr;
 		size_t      buf_size = 0;
-		storm&s = storm_s::instance();
+		storm_dll&s = storm_s::instance();
 		if (!s.load_file(path_ansi.c_str(), &buf_data, &buf_size))
 		{
 			lua_pushnil(L);
@@ -97,7 +97,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	int jass_storm(lua_State* L)
+	int open(lua_State* L)
 	{
 		lua_newtable(L);
 		{
@@ -111,4 +111,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		return 1;
 	}
-}}}
+}}}}

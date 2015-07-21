@@ -1,14 +1,10 @@
 #include <lua.hpp>
 #include <base/util/console.h>
-#include <base/util/unicode.h> 
+#include <base/util/unicode.h> 	  
+#include "libs_runtime.h"
 #include "callback.h"
 
-namespace base {  namespace warcraft3 { namespace lua_engine {
-
-	namespace runtime
-	{
-		extern bool enable_console;
-	}
+namespace base {  namespace warcraft3 { namespace lua_engine { namespace console {
 
 	int jass_console_set(lua_State* L)
 	{
@@ -19,12 +15,12 @@ namespace base {  namespace warcraft3 { namespace lua_engine {
 			runtime::enable_console = !!lua_toboolean(L, 3);
 			if (runtime::enable_console)
 			{
-				console::enable();
-				console::disable_close_button();
+				base::console::enable();
+				base::console::disable_close_button();
 			}
 			else
 			{
-				console::disable();
+				base::console::disable();
 			}
 		}
 
@@ -46,10 +42,10 @@ namespace base {  namespace warcraft3 { namespace lua_engine {
 
 	int jass_console_read(lua_State* L)
 	{
-		console::read_post();
+		base::console::read_post();
 	
-		console::read_req_t* req = 0;
-		if (console::read_try(req))
+		base::console::read_req_t* req = 0;
+		if (base::console::read_try(req))
 		{
 			if (req->overlapped.Internal == 0)
 			{
@@ -61,7 +57,7 @@ namespace base {  namespace warcraft3 { namespace lua_engine {
 					safe_call(L, 1, 0, true);
 				}
 			}
-			console::read_release(req);
+			base::console::read_release(req);
 		}
 		return 0;
 	}
@@ -95,7 +91,7 @@ namespace base {  namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	int jass_console(lua_State* L)
+	int open(lua_State* L)
 	{
 		lua_newtable(L);
 		{
@@ -121,4 +117,4 @@ namespace base {  namespace warcraft3 { namespace lua_engine {
 		}
 		return 1;
 	}
-}}}
+}}}}

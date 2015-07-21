@@ -5,7 +5,7 @@
 #include <base/warcraft3/war3_searcher.h>	  
 #include <base/util/format.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 
 	static int functiondef(lua_State* L)
 	{
@@ -116,7 +116,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 	
-	int jass_debug(lua_State* L)
+	int open(lua_State* L)
 	{
 		lua_newtable(L);
 		{
@@ -133,4 +133,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		return 1;
 	}
-}}}
+}}}}

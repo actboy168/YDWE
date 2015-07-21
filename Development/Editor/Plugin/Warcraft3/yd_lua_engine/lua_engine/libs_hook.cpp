@@ -15,7 +15,7 @@
 
 #define CACHE_ALIGN __declspec(align(32))
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine { namespace hook {
 
 	class jhook_helper : noncopyable
 	{
@@ -112,7 +112,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			uintptr_t code_base = (uintptr_t)jmp_code_.data();
 			uintptr_t fake_func_addr = horrible_cast<uintptr_t>(&jhook_helper::fake_function);
 			{
-				using namespace hook::assembler;
+				using namespace base::hook::assembler;
 
 				jmp_code_.push(esi);
 				jmp_code_.mov(esi, esp);
@@ -162,7 +162,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	private:
 		struct CACHE_ALIGN {
-			hook::assembler::writer<32> jmp_code_;
+			base::hook::assembler::writer<32> jmp_code_;
 #pragma warning(suppress:4201 4324)
 		} ;
 
@@ -280,7 +280,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 #endif
 	}
 
-	int jass_hook(lua_State* L)
+	int open(lua_State* L)
 	{
 		lua_newtable(L);
 		{
@@ -299,4 +299,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jhook_make_mt(L);
 		return 1;
 	}
-}}}
+}}}}

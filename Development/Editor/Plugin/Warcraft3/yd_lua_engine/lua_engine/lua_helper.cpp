@@ -59,7 +59,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		const char* buffer = nullptr;
 		size_t      size   = 0;
 
-		storm& s = storm_s::instance();
+		storm_dll& s = storm_s::instance();
 		if (s.load_file(name, (const void**)&buffer, &size))
 		{
 			int stat = (luaL_loadbuffer(L, buffer, size, name) == LUA_OK);

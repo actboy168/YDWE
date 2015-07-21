@@ -6,11 +6,11 @@
 
 namespace base { namespace warcraft3 {
 
-	class storm
+	class storm_dll
 	{
 	public:
-		storm();
-		~storm();
+		storm_dll();
+		~storm_dll();
 		bool load();
 		bool valid() const;
 		bool load_file(const char* file_name, const void** buffer_ptr, size_t* size_ptr);
@@ -29,5 +29,5 @@ namespace base { namespace warcraft3 {
 		uintptr_t fn_sfile_exists_;
 	};
 
-	typedef singleton_nonthreadsafe<storm> storm_s;
+	typedef singleton_nonthreadsafe<storm_dll> storm_s;
 }}

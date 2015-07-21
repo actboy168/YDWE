@@ -4,10 +4,7 @@
 #include "libs_runtime.h" 
 #include "allow_yield.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine {
-
-	namespace runtime
-	{
+namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime	{
 		int  version = 2;
 		int  handle_level = 2;
 		bool enable_console = false;
@@ -144,7 +141,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			lua_remove(L, -2);
 			return 1;
 		}
-	}
 
 
 	int jass_runtime_set(lua_State* L)
@@ -153,16 +149,16 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		if (strcmp("error_handle", name) == 0)
 		{
-			runtime::set_err_function(L, 3);
+			set_err_function(L, 3);
 		}
 		else if (strcmp("handle_level", name) == 0)
 		{
-			runtime::handle_level = luaL_checkinteger(L, 3);
+			handle_level = luaL_checkinteger(L, 3);
 		}
 		else if (strcmp("console", name) == 0)
 		{
-			runtime::enable_console = !!lua_toboolean(L, 3);
-			if (runtime::enable_console)
+			enable_console = !!lua_toboolean(L, 3);
+			if (enable_console)
 			{
 				console::enable();
 				console::disable_close_button();
@@ -174,11 +170,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		else if (strcmp("sleep", name) == 0)
 		{
-			runtime::sleep = !!lua_toboolean(L, 3);
+			sleep = !!lua_toboolean(L, 3);
 		}
 		else if (strcmp("catch_crash", name) == 0)
 		{
-			runtime::catch_crash = !!lua_toboolean(L, 3);
+			catch_crash = !!lua_toboolean(L, 3);
 		}
 		
 		return 0;
@@ -190,43 +186,43 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		if (strcmp("version", name) == 0)
 		{
-			lua_pushinteger(L, runtime::version);
+			lua_pushinteger(L, version);
 			return 1;
 		}
 		else if (strcmp("error_handle", name) == 0)
 		{
-			return runtime::get_err_function(L);
+			return get_err_function(L);
 		}
 		else if (strcmp("handle_level", name) == 0)
 		{
-			lua_pushinteger(L, runtime::handle_level);
+			lua_pushinteger(L, handle_level);
 			return 1;
 		}
 		else if (strcmp("console", name) == 0)
 		{
-			lua_pushboolean(L, runtime::enable_console);
+			lua_pushboolean(L, enable_console);
 			return 1;
 		}
 		else if (strcmp("sleep", name) == 0)
 		{
-			lua_pushboolean(L, runtime::sleep);
+			lua_pushboolean(L, sleep);
 			return 1;
 		}
 		else if (strcmp("can_sleep", name) == 0)
 		{
-			lua_pushboolean(L, runtime::sleep && lua::allow_yield(L));
+			lua_pushboolean(L, sleep && lua::allow_yield(L));
 			return 1;
 		}
 		else if (strcmp("catch_crash", name) == 0)
 		{
-			lua_pushboolean(L, runtime::catch_crash);
+			lua_pushboolean(L, catch_crash);
 			return 1;
 		}
 
 		return 0;
 	}
 
-	int jass_runtime(lua_State* L)
+	int open(lua_State* L)
 	{
 		lua_newtable(L);
 		{
@@ -245,4 +241,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-}}}
+}}}}

@@ -10,7 +10,13 @@
 #include <base/warcraft3/jass/global_variable.h>
 #include <base/lua/make_range.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine { 
+
+	namespace globals {
+		void jass_get_global_variable(lua_State* L, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value);
+	}
+
+	namespace common {
 
 	int jass_call_null_function(lua_State* L)
 	{
@@ -18,8 +24,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		lua_pushnil(L);
 		return 1;
 	}
-
-	void jass_get_global_variable(lua_State* L, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value);
 
 	int jass_get(lua_State* L)
 	{
@@ -57,7 +61,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		{
 			if (!gv.is_array())
 			{
-				jass_get_global_variable(L, gv.type(), gv);
+				globals::jass_get_global_variable(L, gv.type(), gv);
 				return 1;
 			}
 			else
@@ -120,7 +124,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return lua::make_range(L, jass::jass_function);
 	}
 
-	int jass_common(lua_State* L)
+	int open(lua_State* L)
 	{
 		lua_newtable(L);
 		{
@@ -142,4 +146,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		return 1;
 	}
-}}}
+}}}}

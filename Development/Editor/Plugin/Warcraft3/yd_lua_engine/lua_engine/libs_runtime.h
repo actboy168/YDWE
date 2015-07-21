@@ -2,12 +2,11 @@
 
 #include <lua.hpp>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
-	namespace runtime
-	{
+namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime {
 		extern int handle_level;
 		extern bool sleep;
 		extern bool catch_crash;
+		extern bool enable_console;
 
 		void initialize();
 
@@ -21,5 +20,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		int callback_push(lua_State* L, int idx);
 		int callback_read(lua_State* L, int ref);
-	}
-}}}
+}}}}

@@ -5,10 +5,11 @@
 #include <base/warcraft3/jass/global_variable.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
+	namespace globals {
+		void jass_get_global_variable(lua_State* L, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value);
+	}
 
 #define LUA_JASS_ARRAY "jarray_t"
-
-	void jass_get_global_variable(lua_State* L, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value);
 
 	jass::global_variable jarray_value(lua_State* L)
 	{
@@ -31,7 +32,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 	
-		jass_get_global_variable(L, jass::opcode_type_remove_array(gv.type()), gv[index]);
+		globals::jass_get_global_variable(L, jass::opcode_type_remove_array(gv.type()), gv[index]);
 		return 1;
 	}
 	

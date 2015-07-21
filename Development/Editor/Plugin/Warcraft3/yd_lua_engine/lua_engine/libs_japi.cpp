@@ -18,7 +18,7 @@ namespace base {
 	}
 }
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine { namespace japi {
 
 	int japi_index(lua_State* L)
 	{
@@ -46,7 +46,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return lua::make_range(L, jass::japi_function);
 	}
 
-	int jass_japi(lua_State* L)
+	int open(lua_State* L)
 	{
 		lua_newtable(L);
 		{
@@ -68,4 +68,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		return 1;
 	}
-}}}
+}}}}

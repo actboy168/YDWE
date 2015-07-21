@@ -9,16 +9,17 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
-	int jass_common(lua_State* L); 
-	int jass_globals(lua_State* L);
-	int jass_japi(lua_State* L);
-	int jass_hook(lua_State* L);
-	int jass_runtime(lua_State* L);
-	int jass_slk(lua_State* L);
-	int jass_storm(lua_State* L);
-	int jass_console(lua_State* L);
-	int jass_debug(lua_State* L);
-	int jass_message(lua_State* L);
+	namespace common { int open(lua_State* L); }
+	namespace globals { int open(lua_State* L); }
+	namespace japi { int open(lua_State* L); }
+	namespace hook { int open(lua_State* L); }
+	namespace runtime { int open(lua_State* L); }
+	namespace slk { int open(lua_State* L); }
+	namespace storm { int open(lua_State* L); }
+	namespace console { int open(lua_State* L); }
+	namespace debug { int open(lua_State* L); }
+	namespace message { int open(lua_State* L); }
+
 	int fix_math(lua_State* L);
 
 	void register_preload_lib(lua_State* L, const char *name, lua_CFunction f)
@@ -63,16 +64,16 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int open_lua_engine(lua_State* L)
 	{
-		register_preload_lib(L, "jass.common",  jass_common);
-		register_preload_lib(L, "jass.globals", jass_globals);
-		register_preload_lib(L, "jass.japi",    jass_japi);
-		register_preload_lib(L, "jass.hook",    jass_hook);
-		register_preload_lib(L, "jass.runtime", jass_runtime);
-		register_preload_lib(L, "jass.slk",     jass_slk);
-		register_preload_lib(L, "jass.storm",   jass_storm);
-		register_preload_lib(L, "jass.console", jass_console);
-		register_preload_lib(L, "jass.debug",   jass_debug);
-		register_preload_lib(L, "jass.message", jass_message);
+		register_preload_lib(L, "jass.common",  common::open);
+		register_preload_lib(L, "jass.globals", globals::open);
+		register_preload_lib(L, "jass.japi",    japi::open);
+		register_preload_lib(L, "jass.hook",    hook::open);
+		register_preload_lib(L, "jass.runtime", runtime::open);
+		register_preload_lib(L, "jass.slk",     slk::open);
+		register_preload_lib(L, "jass.storm",   storm::open);
+		register_preload_lib(L, "jass.console", console::open);
+		register_preload_lib(L, "jass.debug",   debug::open);
+		register_preload_lib(L, "jass.message", message::open);
 
 		jreal_make_mt(L);
 		jhandle_ud_make_mt(L);
