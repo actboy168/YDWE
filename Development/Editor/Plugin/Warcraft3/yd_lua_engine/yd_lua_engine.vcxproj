@@ -145,6 +145,7 @@
     <ClCompile Include="lua_engine\lua_loader.cpp" />
     <ClCompile Include="lua_engine\open_lua_engine.cpp" />
     <ClCompile Include="lua_engine\common.cpp" />
+    <ClCompile Include="lua_engine\sha_1.inl" />
     <ClCompile Include="lua_engine\storm.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +183,7 @@
     <ClInclude Include="lua_engine\lua_helper.h" />
     <ClInclude Include="lua_engine\lua_loader.h" />
     <ClInclude Include="lua_engine\open_lua_engine.h" />
+    <ClInclude Include="lua_engine\sha_1.h" />
     <ClInclude Include="lua_engine\storm.h" />
   </ItemGroup>
   <ItemGroup>

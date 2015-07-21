@@ -5,6 +5,9 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace bignum {
 
+#include "sha_1.h"	 
+#include "sha_1.inl"
+
 	namespace sbig {
 		static void Del(HANDLE big)
 		{
@@ -165,6 +168,19 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace bignum {
 		return 1;
 	}
 
+	static int lsha1(lua_State* L)
+	{
+		size_t len = 0;
+		const unsigned char* buf = (const unsigned char*)lua_tolstring(L, 1, &len);
+		unsigned char sha1out[SHA1HashSize] = { 0 };
+		SHA1Context context;
+		SHA1Reset(&context);
+		SHA1Input(&context, buf, len);
+		SHA1Result(&context, sha1out);
+		lua_pushlstring(L, (const char*)sha1out, SHA1HashSize);
+		return 1;
+	}
+	
 	int open(lua_State* L)
 	{
 		luaL_Reg meta[] = {
@@ -185,6 +201,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace bignum {
 			{ "new", lbig::new_ },
 			{ "bin", lbin },
 			{ "hex", lhex },
+			{ "sha1", lsha1 },
 			{ NULL, NULL },
 		};
 		luaL_setfuncs(L, lib, 0);
