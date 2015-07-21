@@ -19,6 +19,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	namespace console { int open(lua_State* L); }
 	namespace debug { int open(lua_State* L); }
 	namespace message { int open(lua_State* L); }
+	namespace bignum { int open(lua_State* L); }
 
 	int fix_math(lua_State* L);
 
@@ -74,6 +75,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		register_preload_lib(L, "jass.console", console::open);
 		register_preload_lib(L, "jass.debug",   debug::open);
 		register_preload_lib(L, "jass.message", message::open);
+		register_preload_lib(L, "jass.bignum",  bignum::open);
 
 		jreal_make_mt(L);
 		jhandle_ud_make_mt(L);
