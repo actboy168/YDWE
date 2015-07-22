@@ -17,7 +17,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			{
 				lua_pushvalue(L, -2);
 				safe_call(L, 1, 0, false);
-				lua_pop(L, 2);
+				lua_pop(L, 1);
 				return;
 			}
 			else
