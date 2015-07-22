@@ -248,6 +248,9 @@
     <ClCompile Include="base\warcraft3\player.cpp">
       <Filter>base\warcraft3</Filter>
     </ClCompile>
+    <ClCompile Include="base\warcraft3\message_dispatch.cpp">
+      <Filter>base\warcraft3</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -537,6 +540,9 @@
       <Filter>base\warcraft3</Filter>
     </ClInclude>
     <ClInclude Include="base\warcraft3\player.h">
+      <Filter>base\warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="base\warcraft3\message_dispatch.h">
       <Filter>base\warcraft3</Filter>
     </ClInclude>
   </ItemGroup>

@@ -120,6 +120,7 @@
     <ClCompile Include="base\thread\thread.cpp" />
     <ClCompile Include="base\thread\thread_exception.cpp" />
     <ClCompile Include="base\warcraft3\command_line.cpp" />
+    <ClCompile Include="base\warcraft3\message_dispatch.cpp" />
     <ClCompile Include="base\warcraft3\player.cpp" />
     <ClCompile Include="base\warcraft3\virtual_mpq.cpp" />
     <ClCompile Include="base\win\font\file.cpp" />
@@ -253,6 +254,7 @@
     <ClInclude Include="base\warcraft3\jass\trampoline_function.h" />
     <ClInclude Include="base\warcraft3\jass\opcode.h" />
     <ClInclude Include="base\warcraft3\jass\trampoline.h" />
+    <ClInclude Include="base\warcraft3\message_dispatch.h" />
     <ClInclude Include="base\warcraft3\player.h" />
     <ClInclude Include="base\warcraft3\version.h" />
     <ClInclude Include="base\warcraft3\virtual_mpq.h" />

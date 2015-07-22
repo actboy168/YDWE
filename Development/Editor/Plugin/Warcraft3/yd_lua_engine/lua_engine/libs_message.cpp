@@ -2,7 +2,8 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/version.h>
 #include <base/warcraft3/keyboard_code.h>	
-#include <base/warcraft3/player.h>
+#include <base/warcraft3/player.h>	  
+#include <base/warcraft3/message_dispatch.h>
 #include <base/hook/inline.h>
 #include <base/hook/fp_call.h>
 #include "common.h"
@@ -44,54 +45,6 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 		uint32_t unk0A;
 		uint32_t code;
 	};
-
-	namespace message_dispatch
-	{
-		static uintptr_t search()
-		{
-			war3_searcher& s = get_war3_searcher();
-			if (s.get_version() == version_120e)
-			{
-				return s.base() + 0x0070CD34;
-			}
-			uintptr_t ptr = s.search_string_ptr("QuickSave", sizeof("QuickSave"));
-			ptr += 0x44;
-			hook::replace_pointer(0, 0);
-			return ptr;
-		}
-
-		static uintptr_t get()
-		{
-			static uintptr_t ptr = search();
-			return ptr;
-		}
-
-		static uintptr_t fn_real = 0;
-		static uintptr_t fn_filter = 0;
-		static bool __fastcall fn_fake(uintptr_t cgameui, uintptr_t /*edx*/, message_t* msg)
-		{
-			if (!this_call<bool>(fn_filter, cgameui, msg))
-			{
-				return false;
-			}
-			return this_call<bool>(fn_real, cgameui, msg);
-		}
-
-		static void hook(uintptr_t filter)
-		{
-			if (!fn_filter)
-			{
-				fn_filter = filter;
-				fn_real = hook::replace_pointer(get(), (uintptr_t)fn_fake);
-			}
-		}
-
-		static void unhook()
-		{
-			hook::replace_pointer(get(), (uintptr_t)fn_real);
-			fn_filter = 0;
-		}
-	}
 
 	static uintptr_t search_convert_xy()
 	{
@@ -202,7 +155,6 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 				}
 				return fast_call<int>(real::immediate_order, order, unk, flags);
 			}
-
 
 			int __fastcall point_order(uint32_t order, uint32_t unk, float* x, float* y, uint32_t flags)
 			{
@@ -436,6 +388,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 
 	static int lset(lua_State* L)
 	{
+		static bool hook = false;
 		const char* name = lua_tostring(L, 2);
 		if (strcmp("hook", name) == 0)
 		{
@@ -444,11 +397,17 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 				lua_pushvalue(L, 3);
 				lua_setfield(L, LUA_REGISTRYINDEX, "_JASS_MESSAGE_HANDLE");
 				ML = get_mainthread(L);
-				message_dispatch::hook((uintptr_t)filter);
+				if (!hook) {
+					message_dispatch::add_filter((uintptr_t)filter);
+					hook = !hook;
+				}
 			}
 			else if (lua_isnil(L, 3))
 			{
-				message_dispatch::unhook();
+				if (hook) {
+					message_dispatch::remove_filter((uintptr_t)filter);
+					hook = !hook;
+				}
 				lua_pushnil(L);
 				lua_setfield(L, LUA_REGISTRYINDEX, "_JASS_MESSAGE_HANDLE");
 			}
