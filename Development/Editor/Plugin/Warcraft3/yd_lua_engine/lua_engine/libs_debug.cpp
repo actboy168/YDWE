@@ -91,7 +91,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 		return 1;
 	}
 
-	static int current_pos(lua_State* L)
+	static int currentpos(lua_State* L)
 	{
 		jass::opcode* current_op = (jass::opcode *)base::warcraft3::get_current_jass_pos();
 		jass::opcode* op;
@@ -102,6 +102,28 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 		lua_pushstring(L, jass::from_stringid(op->arg));
 		lua_pushinteger(L, current_op - op);
 		return 2;
+	}
+
+	static int handlemax(lua_State* L)
+	{
+		hashtable::reverse_table* table = &((*get_jass_vm()->handle_table)->table);
+		lua_pushinteger(L, table->size);
+		return 1;
+	}
+
+	static int handlecount(lua_State* L)
+	{
+		hashtable::reverse_table* table = &((*get_jass_vm()->handle_table)->table);
+		uint32_t n = 0;
+		for (uint32_t i = 1; i < table->size * 3; i += 3)
+		{
+			if (0 != (uintptr_t)table->at(i))
+			{
+				n++;
+			}
+		}
+		lua_pushinteger(L, n);
+		return 1;
 	}
 
 	static int h2i(lua_State* L)
@@ -124,7 +146,9 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 				{ "functiondef", functiondef },
 				{ "globaldef", globaldef },
 				{ "handledef", handledef },
-				{ "current_pos", current_pos },
+				{ "currentpos", currentpos },
+				{ "handlemax", handlemax },
+				{ "handlecount", handlecount },
 				{ "h2i", h2i },
 				{ "i2h", i2h },
 				{ NULL, NULL },
