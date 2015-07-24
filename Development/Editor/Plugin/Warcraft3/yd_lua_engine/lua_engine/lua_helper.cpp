@@ -64,16 +64,19 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			std::string name_ansi = u2a(std::string_view(name, size), conv_method::stop);
 			storm_dll& s = storm_s::instance();
 			size = 0;
-			if (s.load_file(name_ansi.c_str(), (const void**)&buffer, &size))
+			if (!s.load_file(name_ansi.c_str(), (const void**)&buffer, &size))
 			{
-				int stat = (luaL_loadbuffer(L, buffer, size, name) == LUA_OK);
-				s.unload_file(buffer);
+				lua_pushfstring(L, "\n\tno module " LUA_QS " in file " LUA_QS, name, name);
+				return 1;
+			}
 
-				if (stat)
-				{
-					lua_pushstring(L, name);
-					return 2;
-				}
+			int stat = (luaL_loadbuffer(L, buffer, size, name) == LUA_OK);
+			s.unload_file(buffer);
+
+			if (stat)
+			{
+				lua_pushstring(L, name);
+				return 2;
 			}
 		}
 		catch (...) {
