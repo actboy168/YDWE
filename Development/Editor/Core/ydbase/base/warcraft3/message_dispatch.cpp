@@ -43,6 +43,7 @@ namespace base { namespace warcraft3 { namespace message_dispatch {
 
 	void add_filter(uintptr_t filter)
 	{
+		filters.clear();
 		filters.push_back(filter);
 		if (!fn_real)
 		{
