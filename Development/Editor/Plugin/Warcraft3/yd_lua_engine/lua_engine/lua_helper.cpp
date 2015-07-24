@@ -1,6 +1,7 @@
 #include "lua_helper.h"
 #include "storm.h"
-#include <cstring>
+#include <cstring>	   
+#include <base/util/unicode.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/war3_searcher.h>
 
@@ -53,32 +54,70 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	int __cdecl searcher_storm(lua_State* L) 
+	int storm_load(lua_State* L)
 	{
-		const char* name   = luaL_checkstring(L, 1);
-		const char* buffer = nullptr;
-		size_t      size   = 0;
+		size_t path_size = 0;
+		const char* path = lua_tolstring(L, 1, &path_size);
 
-		storm_dll& s = storm_s::instance();
-		if (s.load_file(name, (const void**)&buffer, &size))
+		if (!path)
 		{
-			int stat = (luaL_loadbuffer(L, buffer, size, name) == LUA_OK);
-			s.unload_file(buffer);
-
-			if (stat) 
-			{
-				lua_pushstring(L, name);
-				return 2;
-			}
-			else
-			{
-				return luaL_error(L, "error loading module " 
-					LUA_QS " from file " 
-					LUA_QS ":\n\t%s", 
-					lua_tostring(L, 1), name, lua_tostring(L, -1));
-			}
+			lua_pushnil(L);
+			return 1;
 		}
 
+		std::string path_ansi;
+		try {
+			path_ansi = u2a(std::string_view(path, path_size), conv_method::stop);
+		}
+		catch (...) {
+			lua_pushnil(L);
+			return 1;
+		}
+
+		const void* buf_data = nullptr;
+		size_t      buf_size = 0;
+		storm_dll&s = storm_s::instance();
+		if (!s.load_file(path_ansi.c_str(), &buf_data, &buf_size))
+		{
+			lua_pushnil(L);
+			return 1;
+		}
+
+		lua_pushlstring(L, (const char*)buf_data, buf_size);
+		s.unload_file(buf_data);
+		return 1;
+
+	}
+
+	int __cdecl searcher_storm(lua_State* L) 
+	{
+		size_t      size = 0;
+		const char* name = luaL_checklstring(L, 1, &size);
+		const char* buffer = nullptr;
+
+		try {
+			std::string name_ansi = u2a(std::string_view(name, size), conv_method::stop);
+			storm_dll& s = storm_s::instance();
+			size = 0;
+			if (s.load_file(name_ansi.c_str(), (const void**)&buffer, &size))
+			{
+				int stat = (luaL_loadbuffer(L, buffer, size, name) == LUA_OK);
+				s.unload_file(buffer);
+
+				if (stat)
+				{
+					lua_pushstring(L, name);
+					return 2;
+				}
+			}
+		}
+		catch (...) {
+		}
+
+		return luaL_error(L, "error loading module "
+			LUA_QS " from file "
+			LUA_QS ":\n\t%s",
+			lua_tostring(L, 1), name, lua_tostring(L, -1));
 		return 1;
 	}
 
