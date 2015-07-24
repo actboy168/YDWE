@@ -54,41 +54,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	int storm_load(lua_State* L)
-	{
-		size_t path_size = 0;
-		const char* path = lua_tolstring(L, 1, &path_size);
-
-		if (!path)
-		{
-			lua_pushnil(L);
-			return 1;
-		}
-
-		std::string path_ansi;
-		try {
-			path_ansi = u2a(std::string_view(path, path_size), conv_method::stop);
-		}
-		catch (...) {
-			lua_pushnil(L);
-			return 1;
-		}
-
-		const void* buf_data = nullptr;
-		size_t      buf_size = 0;
-		storm_dll&s = storm_s::instance();
-		if (!s.load_file(path_ansi.c_str(), &buf_data, &buf_size))
-		{
-			lua_pushnil(L);
-			return 1;
-		}
-
-		lua_pushlstring(L, (const char*)buf_data, buf_size);
-		s.unload_file(buf_data);
-		return 1;
-
-	}
-
 	int __cdecl searcher_storm(lua_State* L) 
 	{
 		size_t      size = 0;
