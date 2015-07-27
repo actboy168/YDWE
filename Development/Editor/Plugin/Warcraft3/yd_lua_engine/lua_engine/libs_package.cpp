@@ -30,10 +30,17 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 
 	static int readable(const char *filename, bool is_local) {
 		if (is_local) {
-			FILE *f = fopen(filename, "r");  /* try to open file */
-			if (f == NULL) return 0;  /* open failed */
-			fclose(f);
-			return 1;
+			try {
+				boost::filesystem::path rootpath = base::path::get(base::path::DIR_EXE).remove_filename();
+				boost::filesystem::path filepath = rootpath / base::u2w(filename);
+				std::fstream fs(filepath.c_str(), std::ios::binary | std::ios::out);
+				if (fs.is_open())
+				{
+					return 1;
+				}
+			}
+			catch (...) {}
+			return 0;
 		}
 		else {
 			return storm_s::instance().has_file(filename) ? 1 : 0;
