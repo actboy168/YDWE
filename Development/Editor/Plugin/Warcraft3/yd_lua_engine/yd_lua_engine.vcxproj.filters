@@ -194,6 +194,9 @@
     <ClCompile Include="lua_engine\sha_1.inl">
       <Filter>lua_engine\misc</Filter>
     </ClCompile>
+    <ClCompile Include="lua_engine\libs_package.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua_engine\lua_loader.h">

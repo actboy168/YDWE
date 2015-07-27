@@ -5,7 +5,12 @@
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/war3_searcher.h>
 
+
 namespace base { namespace warcraft3 { namespace lua_engine {
+	namespace package {
+		int searcher_storm(lua_State *L);
+		int searcher_file(lua_State *L);
+	}
 
 	static void* l_alloc(void* /*ud*/, void* ptr, size_t /*osize*/, size_t nsize) 
 	{
@@ -54,41 +59,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 1;
 	}
 
-	int __cdecl searcher_storm(lua_State* L) 
-	{
-		size_t      size = 0;
-		const char* name = luaL_checklstring(L, 1, &size);
-		const char* buffer = nullptr;
-
-		try {
-			std::string name_ansi = u2a(std::string_view(name, size), conv_method::stop);
-			storm_dll& s = storm_s::instance();
-			size = 0;
-			if (!s.load_file(name_ansi.c_str(), (const void**)&buffer, &size))
-			{
-				lua_pushfstring(L, "\n\tno module " LUA_QS " in file " LUA_QS, name, name);
-				return 1;
-			}
-
-			int stat = (luaL_loadbuffer(L, buffer, size, name) == LUA_OK);
-			s.unload_file(buffer);
-
-			if (stat)
-			{
-				lua_pushstring(L, name);
-				return 2;
-			}
-		}
-		catch (...) {
-		}
-
-		return luaL_error(L, "error loading module "
-			LUA_QS " from file "
-			LUA_QS ":\n\t%s",
-			lua_tostring(L, 1), name, lua_tostring(L, -1));
-		return 1;
-	}
-
 	bool clear_searchers_table(lua_State* L)
 	{
 		lua_getfield(L, LUA_REGISTRYINDEX, "_LOADED");
@@ -116,6 +86,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			lua_pop(L, 2);
 			return false;
 		}
+		lua_pushstring(L, "?;?.lua");
+		lua_setfield(L, -2, "path");
 		lua_getfield(L, -1, "searchers");
 		if (!lua_istable(L, -1))
 		{
@@ -127,7 +99,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			lua_rawgeti(L, -1, i);
 			if (lua_isnil(L, -1))
 			{
-				lua_pushcclosure(L, searcher_storm, 0);
+				lua_pushvalue(L, -3);
+				lua_pushcclosure(L, package::searcher_file, 1);
+				lua_rawseti(L, -3, i);
+				lua_pushvalue(L, -3);
+				lua_pushcclosure(L, package::searcher_storm, 1);
 				lua_rawseti(L, -3, i);
 				lua_pop(L, 4);
 				return true;
