@@ -561,6 +561,5 @@
     <None Include="base\util\detail\utf8_codecvt.inl">
       <Filter>base\util\detail</Filter>
     </None>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

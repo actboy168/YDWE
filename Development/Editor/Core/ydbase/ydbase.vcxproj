@@ -285,7 +285,6 @@
     <None Include="base\util\detail\ansi_codecvt.inl" />
     <None Include="base\util\detail\codecvt.inl" />
     <None Include="base\util\detail\utf8_codecvt.inl" />
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
