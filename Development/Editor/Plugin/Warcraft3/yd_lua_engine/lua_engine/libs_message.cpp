@@ -124,7 +124,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 		uintptr_t unit = get_select_unit();
 		if (!unit)
 		{
-			lua_pushnil(L);
+			jassbind::push_handle(L, 0);
 			return 1;
 		}
 		uintptr_t handle = object_to_handle(unit);
