@@ -31,9 +31,8 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 	static int readable(const char *filename, bool is_local) {
 		if (is_local) {
 			try {
-				boost::filesystem::path rootpath = base::path::get(base::path::DIR_EXE).remove_filename();
-				boost::filesystem::path filepath = rootpath / base::u2w(filename);
-				std::fstream fs(filepath.c_str(), std::ios::binary | std::ios::out);
+				std::wstring wfilename = base::u2w(filename);
+				std::ifstream fs(wfilename.c_str(), std::ios::binary | std::ios::in);
 				if (fs.is_open())
 				{
 					return 1;
@@ -117,9 +116,8 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		if (filename == NULL) return 1;  /* module not found in this path */
 		int stat = 0;
 		try {
-			boost::filesystem::path rootpath = base::path::get(base::path::DIR_EXE).remove_filename();
-			boost::filesystem::path filepath = rootpath / base::u2w(filename);
-			std::string buffer = base::file::read_stream(filepath).read<std::string>();
+			std::wstring wfilename = base::u2w(filename);
+			std::string buffer = base::file::read_stream(wfilename).read<std::string>();
 			stat = (luaL_loadbuffer(L, buffer.c_str(), buffer.size(), name) == LUA_OK);
 		}
 		catch (...) {}

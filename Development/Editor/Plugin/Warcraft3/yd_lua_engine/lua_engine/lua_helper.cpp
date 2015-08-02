@@ -104,7 +104,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				lua_rawseti(L, -3, i);
 				lua_pushvalue(L, -3);
 				lua_pushcclosure(L, package::searcher_storm, 1);
-				lua_rawseti(L, -3, i);
+				lua_rawseti(L, -3, i + 1);
 				lua_pop(L, 4);
 				return true;
 			}
