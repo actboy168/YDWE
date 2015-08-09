@@ -137,6 +137,7 @@
     <ClCompile Include="lua_engine\libs_globals.cpp" />
     <ClCompile Include="lua_engine\libs_hook.cpp" />
     <ClCompile Include="lua_engine\libs_japi.cpp" />
+    <ClCompile Include="lua_engine\libs_log.cpp" />
     <ClCompile Include="lua_engine\libs_message.cpp" />
     <ClCompile Include="lua_engine\libs_package.cpp" />
     <ClCompile Include="lua_engine\libs_runtime.cpp" />
