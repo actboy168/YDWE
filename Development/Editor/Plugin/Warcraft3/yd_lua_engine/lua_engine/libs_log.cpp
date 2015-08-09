@@ -122,7 +122,7 @@ static const char *	log_timestr()
 	static char str[64] = { 0 };
 	long usec = 0;
 	struct tm t = log_datenow(&usec);
-	sprintf(str, "%04d-%02d-%02d %02d:%02d:%02d.%3ld", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec, usec / 1000);
+	sprintf(str, "%04d-%02d-%02d %02d:%02d:%02d.%03sd", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec, usec / 1000);
 	return str;
 }
 
