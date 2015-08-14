@@ -16,7 +16,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			if (lua_isfunction(L, -1))
 			{
 				lua_pushvalue(L, -2);
-				safe_call(L, 1, 0, false);
+				safe_call_not_sleep(L, 1, 0, false);
 				lua_pop(L, 1);
 				return;
 			}
@@ -128,7 +128,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			runtime::thread_save(L, func_idx, thread_idx);
 			break;
 		default:
-			error_function(L, err_func);
+			error_function(thread, err_func);
 			break;
 		}
 
