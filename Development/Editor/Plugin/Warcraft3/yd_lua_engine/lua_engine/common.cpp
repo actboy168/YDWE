@@ -71,13 +71,29 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
+	static const char* jass_function_name(uintptr_t func_address)
+	{
+		for (auto it = jass::jass_function.begin(); it != jass::jass_function.end(); ++it)
+		{
+			if (func_address == it->second.get_address())
+			{
+				return it->first.c_str();
+			}
+		}
+		return 0;
+	}
+
 	uintptr_t safe_jass_call(lua_State* L, uintptr_t func_address, const uintptr_t* param_list, size_t param_list_size)
 	{
 		__try {
 			return jass::call(func_address, param_list, param_list_size);
 		}
 		__except (EXCEPTION_EXECUTE_HANDLER){
-			lua_pushstring(L, "Call jass function crash.");
+			const char* name = jass_function_name(func_address);
+			if (!name) {
+				name = "unknown";
+			}
+			lua_pushfstring(L, "Call jass function crash.<%s>", name);
 			lua_error(L);
 		}
 
