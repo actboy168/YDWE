@@ -93,8 +93,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			if (!name) {
 				name = "unknown";
 			}
-			lua_pushfstring(L, "Call jass function crash.<%s>", name);
-			lua_error(L);
+			return luaL_error(L, "Call jass function crash.<%s>", name);
 		}
 
 		return 0;
