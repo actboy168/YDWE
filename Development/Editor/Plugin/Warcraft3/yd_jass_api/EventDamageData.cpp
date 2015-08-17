@@ -17,8 +17,6 @@ uintptr_t searchUnitDamageFunc()
 	for (uintptr_t ptr = s.search_int_in_text(str); ptr; ptr = s.search_int_in_text(str, ptr+1))
 	{
 		uintptr_t func = s.current_function(ptr);
-		func += 4;
-
 		if (ptr - func > 1000)
 		{
 			return s.search_int_in_rdata(func);
