@@ -3,8 +3,6 @@
 #include <locale>
 #include <windows.h>
 #include <boost/filesystem.hpp>
-#include <boost/assign.hpp>
-#include <boost/foreach.hpp>
 #include <boost/exception/all.hpp>
 #include <base/file/memory_mapped_file.h>
 #include <base/exception/system_exception.h>
@@ -109,7 +107,7 @@ static void MoveDetouredSystemDll(const fs::path &war3Directory)
 		return;
 	}
 
-	BOOST_FOREACH(const wchar_t *szDllName, szSystemDllList)
+	for (const wchar_t *szDllName : szSystemDllList)
 	{
 		try
 		{

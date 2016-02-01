@@ -10,7 +10,7 @@ namespace base { namespace com {
 		guard() 
 			: com_init_(S_OK) 
 		{ 
-			com_init_ = ::CoInitialize(NULL);
+			com_init_ = ::CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
 
 			if (com_init_ != RPC_E_CHANGED_MODE)
 			{

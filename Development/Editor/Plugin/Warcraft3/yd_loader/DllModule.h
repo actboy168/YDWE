@@ -3,10 +3,9 @@
 #include <windows.h>
 
 #include <boost/filesystem.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/atomic.hpp>
 #include <base/thread/thread.h>
-#include <map>
+#include <atomic>
+#include <map>	 
 
 namespace fs = boost::filesystem;
 
@@ -37,8 +36,8 @@ public:
 	fs::path ydwe_path;
 
 private:
-	boost::shared_ptr<base::thread> daemon_thread_;
-	boost::atomic<bool>             daemon_thread_exit_;
+	std::shared_ptr<base::thread>   daemon_thread_;
+	std::atomic<bool>               daemon_thread_exit_;
 	std::map<std::string, HMODULE>  plugin_mapping;
 };
 

@@ -5,13 +5,12 @@
 #include <functional>
 #include <regex>
 #include <boost/algorithm/string.hpp>
-#include <boost/lambda/lambda.hpp>
-#include <boost/scope_exit.hpp>
 #include <base/path/service.h>
 #include <base/util/unicode.h>
 #include <base/hook/inline.h>
 #include <base/hook/iat.h>
-#include <base/hook/fp_call.h>
+#include <base/hook/fp_call.h>	  
+#include <base/com/guard.h>
 
 #include "YDWEEvent.h"
 #include "YDWELogger.h"
@@ -30,13 +29,8 @@ namespace NYDWE {
 		LOGGING_INFO(lg) << "Entering main program.";
 		LOGGING_DEBUG(lg) << "Command line: " << (commandLine ? commandLine : "NULL");
 
-		// Initialize COM
-		HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
-		BOOST_SCOPE_EXIT( (hr) )
-		{
-			if (SUCCEEDED(hr))
-				CoUninitialize();
-		} BOOST_SCOPE_EXIT_END;
+		// Initialize COM	   
+		base::com::guard com;
 
 		CYDWEEventData eventData;
 		event_array[EVENT_WE_START](eventData);

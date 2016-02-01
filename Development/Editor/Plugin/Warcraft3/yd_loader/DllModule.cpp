@@ -1,6 +1,5 @@
 #include "DllModule.h"
 #include "FullWindowedMode.h"
-#include <boost/bind.hpp>
 #include <base/hook/fp_call.h>
 #include <base/file/stream.h>
 #include <base/hook/iat.h>
