@@ -93,7 +93,6 @@
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="LuaEvent.cpp" />
     <ClCompile Include="luaopen_event.cpp" />
-    <ClCompile Include="YDWEEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="event.def" />

@@ -19,6 +19,8 @@
 
 namespace NYDWE {
 
+	TEvent event_array[EVENT_MAXIMUM];
+
 	HWND  gWeMainWindowHandle;
 	HMENU gWeMainMenuHandle;
 
@@ -32,12 +34,12 @@ namespace NYDWE {
 		// Initialize COM	   
 		base::com::guard com;
 
-		CYDWEEventData eventData;
+		TEventData eventData;
 		event_array[EVENT_WE_START](eventData);
 
 		int32_t result = base::std_call<int32_t>(pgTrueWeWinMain, instance, prevInstance, commandLine, showCommand);
 
-		eventData.getDataStore().clear();
+		eventData.clear();
 		event_array[EVENT_WE_EXIT](eventData);
 
 		LOGGING_INFO(lg) << "Main program exit.";
@@ -62,8 +64,8 @@ namespace NYDWE {
 											   boost::iends_with(fileName, L".w3n") */ // Disabled because does not support campaign
 											   ))
 		{
-			CYDWEEventData eventData;
-			eventData.setEventData("map_path", fileName);
+			TEventData eventData;
+			eventData["map_path"] = fileName;
 			event_array[EVENT_SAVE_MAP](eventData);
 
 			gIsInCompileProcess = false;
@@ -88,8 +90,8 @@ namespace NYDWE {
 				boost::filesystem::path p(fileName);
 				p = p.parent_path().remove_filename() / p.filename();
 
-				CYDWEEventData eventData;
-				eventData.setEventData("map_path", p.wstring());
+				TEventData eventData;
+				eventData["map_path"] = p.wstring();
 				event_array[EVENT_PRE_SAVE_MAP](eventData);
 			}
 			catch (...) {				
@@ -111,16 +113,16 @@ namespace NYDWE {
 			boost::filesystem::path currentWarcraftMap = base::path::get(base::path::DIR_EXE).remove_filename() / matcher.str(1);
 			LOGGING_TRACE(lg) << L"Executing map " << currentWarcraftMap.wstring();
 
-			CYDWEEventData eventData;
+			TEventData eventData;
 			if (gIsInCompileProcess)
 			{
 				LOGGING_TRACE(lg) << "Need to compile...";
 
-				eventData.setEventData("map_path", currentWarcraftMap.wstring());
+				eventData["map_path"] = currentWarcraftMap.wstring();
 
-				const std::vector<int> &results = event_array[EVENT_SAVE_MAP](eventData);
+				int results = event_array[EVENT_SAVE_MAP](eventData);
 				gIsInCompileProcess = false;
-				if (results_is_failed(results))
+				if (results < 0)
 				{
 					LOGGING_TRACE(lg) << "Save failed. Abort testing.";
 					memset(lpProcessInformation, 0, sizeof(PROCESS_INFORMATION));
@@ -132,15 +134,15 @@ namespace NYDWE {
 				LOGGING_TRACE(lg) << "No need to compile.";
 			}
 
-			eventData.getDataStore().clear();
-			eventData.setEventData("map_path", currentWarcraftMap.wstring());
+			eventData.clear();
+			eventData["map_path"] = currentWarcraftMap.wstring();
 			if (lpApplicationName)
-				eventData.setEventData("application_name", base::a2w(std::string_view(lpApplicationName), base::conv_method::replace | '?'));
+				eventData["application_name"] = base::a2w(std::string_view(lpApplicationName), base::conv_method::replace | '?');
 			if (lpCommandLine)
-				eventData.setEventData("command_line", base::a2w(std::string_view(lpCommandLine), base::conv_method::replace | '?'));
+				eventData["command_line"] = base::a2w(std::string_view(lpCommandLine), base::conv_method::replace | '?');
 
-			const std::vector<int> &results = event_array[EVENT_TEST_MAP](eventData);
-			return (!results_is_failed(results));
+			int results = event_array[EVENT_TEST_MAP](eventData);
+			return results >= 0;
 		}
 		else
 		{
@@ -164,22 +166,18 @@ namespace NYDWE {
 	uintptr_t pgTrueWeWindowProc;
 	LRESULT CALLBACK DetourWeWindowProc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam)
 	{
-		CYDWEEventData eventData;
-		eventData.setEventData("handle", windowHandle);
-		eventData.setEventData("message", message);
-		eventData.setEventData("wparam", wParam);
-		eventData.setEventData("lparam", lParam);
+		TEventData eventData;
+		eventData["handle"] = windowHandle;
+		eventData["message"] = message;
+		eventData["wparam"] = wParam;
+		eventData["lparam"] = lParam;
 
-		const std::vector<int> &results = event_array[EVENT_WINDOW_MESSAGE](eventData);
-		if (!results_is_failed(results))
-		{
-			// All allowed
-			return base::std_call<LRESULT>(pgTrueWeWindowProc, windowHandle, message, wParam, lParam);
-		}
-		else
+		int results = event_array[EVENT_WINDOW_MESSAGE](eventData);
+		if (results < 0)
 		{
 			return 0;
 		}
+		return base::std_call<LRESULT>(pgTrueWeWindowProc, windowHandle, message, wParam, lParam);
 	}
 
 	uintptr_t pgTrueCreateWindowExA;
@@ -217,9 +215,9 @@ namespace NYDWE {
 			gWeMainMenuHandle = hMenu;
 
 			// Call menu initialization
-			CYDWEEventData eventData;
-			eventData.setEventData("main_window_handle", hWnd);
-			eventData.setEventData("main_menu_handle", hMenu);
+			TEventData eventData;
+			eventData["main_window_handle"] = hWnd;
+			eventData["main_menu_handle"] = hMenu;
 			event_array[EVENT_INIT_MENU](eventData);
 
 			// Hook window
@@ -239,14 +237,13 @@ namespace NYDWE {
 		{
 			if (lParam)
 			{
-				CYDWEEventData eventData;
-				eventData.setEventData("handle", dialogHandle);
-				eventData.setEventData("message", message);
-				eventData.setEventData("wparam", wParam);
-				eventData.setEventData("lparam", base::a2u((const char*)lParam));
-				const std::vector<int> &results = event_array[EVENT_DIALOG_MESSAGE](eventData);
-
-				if (results_is_failed(results))
+				TEventData eventData;
+				eventData["handle"] = dialogHandle;
+				eventData["message"] = message;
+				eventData["wparam"] = wParam;
+				eventData["lparam"] = base::a2u((const char*)lParam);
+				int results = event_array[EVENT_DIALOG_MESSAGE](eventData);
+				if (results < 0)
 				{
 					return 0;
 				}
@@ -254,14 +251,13 @@ namespace NYDWE {
 		}
 		else if (message == WM_COMMAND)
 		{
-			CYDWEEventData eventData;
-			eventData.setEventData("handle", dialogHandle);
-			eventData.setEventData("message", message);
-			eventData.setEventData("wparam", wParam);
-			eventData.setEventData("lparam", lParam);
-			const std::vector<int> &results = event_array[EVENT_DIALOG_MESSAGE](eventData);
-
-			if (results_is_failed(results))
+			TEventData eventData;
+			eventData["handle"] = dialogHandle;
+			eventData["message"] = message;
+			eventData["wparam"] = wParam;
+			eventData["lparam"] = lParam;
+			int results = event_array[EVENT_DIALOG_MESSAGE](eventData);
+			if (results < 0)
 			{
 				return 0;
 			}
@@ -288,18 +284,16 @@ namespace NYDWE {
 	{
 		uint32_t object_type = ((uint32_t(__fastcall*)(uintptr_t))(*(uintptr_t*)(*(uintptr_t*)this_ + 0x18)))(this_);
 
-		CYDWEEventData eventData;
-		eventData.setEventData("class", this_);
-		eventData.setEventData("object_type", object_type);
-		eventData.setEventData("default_id", default_id);
-		const std::vector<int> &results = event_array[EVENT_NEW_OBJECT_ID](eventData);
-
-		if (results_is_failed(results))
+		TEventData eventData;
+		eventData["class"] = this_;
+		eventData["object_type"] = object_type;
+		eventData["default_id"] = default_id;
+		int results = event_array[EVENT_NEW_OBJECT_ID](eventData);
+		if (results < 0)
 		{
 			return default_id;
 		}
-
-		return results.size() > 0 ? results[0] : default_id;
+		return results;
 	}
 
 	static void __declspec(naked) DetourWeNewObjectId()
@@ -328,15 +322,12 @@ namespace NYDWE {
 	uintptr_t pgTrueMssRIBLoadProviderLibrary;
 	static HPROVIDER AILCALL DetourMssRIBLoadProviderLibrary(C8 const FAR *fileName)
 	{
-		CYDWEEventData eventData;
-		eventData.setEventData("library_name", std::string(fileName));
-		const std::vector<int> &results = event_array[EVENT_MSS_LOAD](eventData);
-
-		// If all of the results are allowed, load it
-		if (!results_is_failed(results))
-			return base::std_call<HPROVIDER>(pgTrueMssRIBLoadProviderLibrary, fileName);
-		else
+		TEventData eventData;
+		eventData["library_name"] = std::string(fileName);
+		int results = event_array[EVENT_MSS_LOAD](eventData);
+		if (results < 0)
 			return 0;
+		return base::std_call<HPROVIDER>(pgTrueMssRIBLoadProviderLibrary, fileName);
 	}
 
 #define INSTALL_INLINE_HOOK(name) if (!is##name##HookInstalled) { if (pgTrue##name##) { is##name##HookInstalled = base::hook::inline_install(&pgTrue##name##, (uintptr_t)Detour##name##); }}

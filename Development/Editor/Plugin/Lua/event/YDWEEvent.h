@@ -1,8 +1,4 @@
-/*
- * Events definition
- */
-#ifndef YDWE_EVENT_H_INCLUDED
-#define YDWE_EVENT_H_INCLUDED
+#pragma once
 
 #include <cstddef>
 #include <string>
@@ -15,44 +11,9 @@
 namespace NYDWE
 {
 
-/// Event data
-class CYDWEEventData
-{
-public:
-	typedef boost::variant<void *, bool, int, unsigned int, float, double, std::string, std::wstring> TEventDataItem;
-	typedef std::unordered_map<std::string, TEventDataItem> TEventDataStore;
-
-public:
-	CYDWEEventData();
-
-public:
-	boost::optional<TEventDataItem &> getEventDataItem(const std::string &key);
-	void setEventDataItem(const std::string &key, const TEventDataItem &data);
-
-	TEventDataStore &getDataStore();
-
-	template <typename T>
-	T *getEventData()
-	{
-		TEventDataStore::iterator itr = eventDataStore_.find(key);
-
-		if (itr == eventDataStore_.end())
-			return NULL;
-
-		return boost::get<T>(&itr->second);
-	}
-	
-	template <typename T>
-	void setEventData(const std::string &key, const T &data)
-	{
-		eventDataStore_[key] = data;
-	}
-
-private:
-	TEventDataStore eventDataStore_;
-};
-
-typedef base::signal<int, CYDWEEventData&> TYDWEEvent;
+typedef boost::variant<void *, bool, int, unsigned int, float, double, std::string, std::wstring> TEventDataValue;
+typedef std::unordered_map<std::string, TEventDataValue> TEventData;
+typedef std::function<int(TEventData&)> TEvent;
 
 enum EVENT_ID
 {
@@ -69,19 +30,8 @@ enum EVENT_ID
 	EVENT_MAXIMUM,
 };
 
-extern TYDWEEvent event_array[EVENT_MAXIMUM];
+extern TEvent event_array[EVENT_MAXIMUM];
 
-namespace NGameHook 
-{
-	void SetupEvent();
-}
+void SetupEvent();
 
 }
-
-template <typename Result>
-bool results_is_failed(Result r)
-{
-	return (std::find_if(r.begin(), r.end(), [](Result::value_type const& e)->bool { return e < 0; }) != r.end());
-}
-
-#endif // YDWE_EVENT_H_INCLUDED

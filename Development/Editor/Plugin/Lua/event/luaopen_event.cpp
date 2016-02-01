@@ -30,15 +30,6 @@ namespace NYDWE {
 		const std::string &key_;
 	};
 
-	static void TranslateEventDataToLuaTable(lua_State *pState, CYDWEEventData &eventData)
-	{
-		lua_newtable(pState);
-		BOOST_FOREACH(auto e, eventData.getDataStore())
-		{
-			boost::apply_visitor(CEventDataTranslationVisitor(pState, e.first), e.second);
-		}
-	}
-
 	struct lua_stack_guard
 	{
 		lua_stack_guard(lua_State* pState)
@@ -55,12 +46,17 @@ namespace NYDWE {
 		int        idx_;
 	};
 
-	static int LuaOnSignal(lua_State *pState, CYDWEEventData &eventData, bool ignore_error, luabind::object const& func)
+	static int LuaOnSignal(lua_State* L, TEventData &eventData, bool ignore_error, luabind::object const& func)
 	{
-		lua_stack_guard tmp_guard(pState);
+		lua_stack_guard tmp_guard(L);
 
-		TranslateEventDataToLuaTable(pState, eventData);
-		luabind::object event_data(luabind::from_stack(pState, -1));
+		lua_newtable(L);
+		for (auto e : eventData)
+		{
+			boost::apply_visitor(CEventDataTranslationVisitor(L, e.first), e.second);
+		}
+
+		luabind::object event_data(luabind::from_stack(L, -1));
 
 		if (ignore_error) 
 		{
@@ -89,13 +85,13 @@ namespace NYDWE {
 		return -1;
 	}
 
-	void LuaRegisterEvent(lua_State *pState, EVENT_ID evenetid, bool ignore_error, luabind::object const& func)
+	void LuaRegisterEvent(lua_State* L, EVENT_ID evenetid, bool ignore_error, luabind::object const& func)
 	{
 		LOGGING_TRACE(lg) << "RegisterEvent id: " << evenetid << " ignore: " << (ignore_error ? "true" : "false");
 
 		if (evenetid >= 0 && evenetid < EVENT_MAXIMUM)
 		{
-			event_array[evenetid].connect       (std::bind(LuaOnSignal, pState, std::placeholders::_1, ignore_error, func));
+			event_array[evenetid] = std::bind(LuaOnSignal, L, std::placeholders::_1, ignore_error, func);
 		}
 	}
 
@@ -139,7 +135,6 @@ namespace NYDWE {
 		base::fast_call<void>(RealWeMessageShow, message, flag);
 	}
 
-	void SetupEvent();
 }
 
 int luaopen_event(lua_State* L)
