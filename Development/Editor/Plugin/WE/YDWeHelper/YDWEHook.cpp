@@ -10,16 +10,15 @@
 #include <base/hook/iat_manager.h>
 #include <base/hook/fp_call.h>
 #include <base/util/format.h>
+#include <base/win/pe_reader.h>
 
 #include <objbase.h>
 #include <windows.h>
 #include <Shlobj.h>
 
-#include "PEMemoryFileInfo.h"
 #include "MemoryPatternSearch.h"
 #include "MemoryPatch.h"
 
-#include "YDWEHookPattern.h"
 #include "YDWELogger.h"
 #include "YDWEHook.h"
 
@@ -76,12 +75,12 @@ static uintptr_t gWeDataSectionLength;
 
 static void InitSectionInfo()
 {
-	CPEMemoryFileInfo pm;
-	CPEMemoryFileInfo::TSectionInfoResult result = pm.querySection(".text");
-	if (result)
+	base::win::pe_reader module(NULL);
+	PIMAGE_SECTION_HEADER section = module.get_section_by_name(".text");
+	if (section)
 	{
-		pgWeTextSectionBase = (void *)result->get<0>();
-		gWeTextSectionLength = result->get<1>();
+		pgWeTextSectionBase = (void *)module.rva_to_addr(section->VirtualAddress);
+		gWeTextSectionLength = section->SizeOfRawData;
 
 		LOGGING_TRACE(lg) << base::format("WE .text section start address: 0x%08X. length 0x%08X", pgWeTextSectionBase, gWeTextSectionLength);
 	}
@@ -90,11 +89,11 @@ static void InitSectionInfo()
 		LOGGING_ERROR(lg) << "Cannot get .text section info of WE.";
 	}
 
-	result = pm.querySection(".data");
-	if (result)
+	section = module.get_section_by_name(".data");
+	if (section)
 	{
-		pgWeDataSectionBase = (void *)result->get<0>();
-		gWeDataSectionLength = result->get<1>();
+		pgWeDataSectionBase = (void *)module.rva_to_addr(section->VirtualAddress);
+		gWeDataSectionLength = section->SizeOfRawData;
 
 		LOGGING_TRACE(lg) << base::format("WE .data section start address: 0x%08X. length 0x%08X", pgWeDataSectionBase, gWeDataSectionLength);
 	}
@@ -370,54 +369,51 @@ static void InitInlineHook()
 {
 	LOGGING_DEBUG(lg) << "Start installing inline hooks.";
 
-	pgTrueWeGetSystemParameter = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, 
-		&weGetSystemParameterPattern[0], sizeof(weGetSystemParameterPattern));
+	pgTrueWeGetSystemParameter = (uintptr_t)0x004D1DB0;
 	LOGGING_TRACE(lg) << base::format("Found WeGetSystemParameter at 0x%08X.", pgTrueWeGetSystemParameter);
-	INSTALL_INLINE_HOOK(WeGetSystemParameter)
+	INSTALL_INLINE_HOOK(WeGetSystemParameter);
 
-	pgTrueWeVerifyMapCellsLimit = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, 
-		gWeTextSectionLength, &weVerifyMapCellsLimitPattern[0], sizeof(weVerifyMapCellsLimitPattern));
+	pgTrueWeVerifyMapCellsLimit =  (uintptr_t)0x004E1EF0;
 	LOGGING_TRACE(lg) << base::format("Found WeVerifyMapCellsLimit at 0x%08X.", pgTrueWeVerifyMapCellsLimit);
 	uint32_t callOffset = aero::offset_element_sum<uint32_t>(pgTrueWeVerifyMapCellsLimit, 6);
 	pgMapCellsGetUnknownGlobalFlag = aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, callOffset + 10);
 	LOGGING_TRACE(lg) << base::format("Found GetUnkownFlag at 0x%08X.", pgMapCellsGetUnknownGlobalFlag);
 	pgWeVerifyMapCellsLimitPatcher.reset(new CMemoryPatch(aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, 3), "\x90\x90", 2));
 	pgWeVerifyMapCellsLimitPatcher->patch();
-	INSTALL_INLINE_HOOK(WeVerifyMapCellsLimit)
+	INSTALL_INLINE_HOOK(WeVerifyMapCellsLimit);
 
-	pgTrueWeTriggerNameCheck = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, 
-		&weTriggerNameCheckPattern[0], sizeof(weTriggerNameCheckPattern));
+	pgTrueWeTriggerNameCheck = (uintptr_t)0x005A4B40;
 	LOGGING_TRACE(lg) << base::format("Found WeTriggerNameCheck at 0x%08X.", pgTrueWeTriggerNameCheck);
 	INSTALL_INLINE_HOOK(WeTriggerNameCheck)
 
-	pgTrueWeTriggerNameInputCharCheck = (uintptr_t)MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, &weTriggerNameInputCharCheckPattern[0], sizeof(weTriggerNameInputCharCheckPattern));
+	pgTrueWeTriggerNameInputCharCheck = (uintptr_t)0x0042E390;
 	LOGGING_TRACE(lg) << base::format("Found WeTriggerNameInputCharCheck at 0x%08X.", pgTrueWeTriggerNameInputCharCheck);
 	pgWeTriggerNameInputCharCheckPatcher.reset(new CMemoryPatch(
 		aero::pointer_sum<aero::pointer_type>(pgTrueWeTriggerNameInputCharCheck, 3),
 		"\x90\x90", 2)
 	);
 	pgWeTriggerNameInputCharCheckPatcher->patch();
-	INSTALL_INLINE_HOOK(WeTriggerNameInputCharCheck)
+	INSTALL_INLINE_HOOK(WeTriggerNameInputCharCheck);
 
-	pgTrueWeSetWindowCaption = (uintptr_t)0x00433A00;//MemoryPatternSearch(pgWeTextSectionBase, gWeTextSectionLength, &weSetWindowCaptionPattern[0], sizeof(weSetWindowCaptionPattern));
+	pgTrueWeSetWindowCaption = (uintptr_t)0x00433A00;
 	LOGGING_TRACE(lg) << base::format("Found WeSetWindowCaption at 0x%08X.", pgTrueWeSetWindowCaption);
-	INSTALL_INLINE_HOOK(WeSetWindowCaption)
+	INSTALL_INLINE_HOOK(WeSetWindowCaption);
 
 	pgTrueWeSetMenuItem = (uintptr_t)0x0042AA10;
 	LOGGING_TRACE(lg) << base::format("Found WeSetMenuItem at 0x%08X.", pgTrueWeSetMenuItem);
-	INSTALL_INLINE_HOOK(WeSetMenuItem)
+	INSTALL_INLINE_HOOK(WeSetMenuItem);
 
 	pgTrueWeStringCompare = (uintptr_t)0x004D2D90;
 	LOGGING_TRACE(lg) << base::format("Found WeStringCompare at 0x%08X.", pgTrueWeStringCompare);
-	INSTALL_INLINE_HOOK(WeStringCompare)
+	INSTALL_INLINE_HOOK(WeStringCompare);
 
 	pgTrueWeTriggerEditorEditboxCopy = (uintptr_t)0x0071FE90;
 	LOGGING_TRACE(lg) << base::format("Found TriggerEditorEditboxCopy at 0x%08X.", pgTrueWeTriggerEditorEditboxCopy);
-	INSTALL_INLINE_HOOK(WeTriggerEditorEditboxCopy)
+	INSTALL_INLINE_HOOK(WeTriggerEditorEditboxCopy);
 
 	pgTrueWeUtf8ToAnsi = (uintptr_t)0x00429CD0;
 	LOGGING_TRACE(lg) << base::format("Found WeUtf8ToAnsi at 0x%08X.", pgTrueWeUtf8ToAnsi);
-	INSTALL_INLINE_HOOK(WeUtf8ToAnsi)
+	INSTALL_INLINE_HOOK(WeUtf8ToAnsi);
 
 	LOGGING_DEBUG(lg) << "Installing inline hooks complete.";
 }
@@ -749,9 +745,8 @@ static void InitPatches()
 
 		LOGGING_TRACE(lg) << "Installing attack table patch";
 
-
-		CPEMemoryFileInfo pm;
-#define WE_ADDRESS(ADDR) ((uintptr_t)(ADDR) - 0x00400000 + pm.getBase())
+		base::win::pe_reader module(NULL);
+#define WE_ADDRESS(ADDR) ((uintptr_t)(ADDR) - 0x00400000 + (uintptr_t)module.module())
 		enum ATTACK_TABLE
 		{
 			WESTRING_UE_ATTACKTYPE_SPELLS = 0,

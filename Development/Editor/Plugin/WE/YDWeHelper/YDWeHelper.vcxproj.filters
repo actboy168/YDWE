@@ -21,16 +21,10 @@
     <ClCompile Include="YDWEHook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PEMemoryFileInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MemoryPatternSearch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MemoryPatch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="YDWEEditorNativeFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,20 +35,11 @@
     <ClInclude Include="MemoryPatternSearch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PEMemoryFileInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="YDWEHook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="YDWELogger.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="YDWEEditorNativeFunction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="YDWEHookPattern.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

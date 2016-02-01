@@ -1,7 +1,6 @@
 #include <windows.h>
 #include "YDWELogger.h"
 #include "YDWEHook.h"
-#include "YDWEEditorNativeFunction.h"
 
 namespace NYDWE
 {
@@ -15,7 +14,6 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 		DisableThreadLibraryCalls(module);
 
 		NYDWE::lg = logging::get_logger("inject");
-		NYDWE::NativeInit();
 		NYDWE::InstallHooks();
 		LOGGING_INFO(NYDWE::lg) << "EverEditor startup complete.";
 	}

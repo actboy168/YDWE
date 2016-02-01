@@ -93,8 +93,6 @@
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="MemoryPatch.cpp" />
     <ClCompile Include="MemoryPatternSearch.cpp" />
-    <ClCompile Include="PEMemoryFileInfo.cpp" />
-    <ClCompile Include="YDWEEditorNativeFunction.cpp" />
     <ClCompile Include="YDWEHook.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -111,10 +109,7 @@
   <ItemGroup>
     <ClInclude Include="MemoryPatch.h" />
     <ClInclude Include="MemoryPatternSearch.h" />
-    <ClInclude Include="PEMemoryFileInfo.h" />
-    <ClInclude Include="YDWEEditorNativeFunction.h" />
     <ClInclude Include="YDWEHook.h" />
-    <ClInclude Include="YDWEHookPattern.h" />
     <ClInclude Include="YDWELogger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
