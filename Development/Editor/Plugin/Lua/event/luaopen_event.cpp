@@ -4,7 +4,6 @@
 #include <luabind/luabind.hpp>
 #include <base/lua/luabind.h>
 #pragma warning(pop)
-#include <boost/foreach.hpp>
 #include "YDWEEvent.h"
 #include "YDWELogger.h"
 #include <base/hook/fp_call.h>	

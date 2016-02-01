@@ -1,11 +1,6 @@
 #pragma once
-
-#include <cstddef>
 #include <string>
-#include <vector>	
 #include <unordered_map>
-#include <base/util/signal.h>
-#include <boost/optional.hpp>
 #include <boost/variant.hpp>   
 
 namespace NYDWE
