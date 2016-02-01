@@ -5,7 +5,7 @@
 
 namespace logging
 {
-	struct logging_backend::implementation
+	struct backend::implementation
 	{
 		boost::filesystem::path root_;
 		std::wstring name_;
@@ -20,16 +20,22 @@ namespace logging
 		{ }
 	};
 
-	logging_backend::logging_backend(const boost::filesystem::path& root, const std::wstring& name)
+	backend::backend(const boost::filesystem::path& root, const std::wstring& name)
 		: impl_(new implementation(root, name))
 	{ }
 
-	logging_backend::~logging_backend()
+	backend::backend(backend&& that)
+		: impl_(that.impl_)
+	{
+		that.impl_ = 0;
+	}
+
+	backend::~backend()
 	{
 		delete impl_;
 	}
 
-	void logging_backend::consume(record_view const& rec, string_type const& formatted_message)
+	void backend::consume(string_type const& formatted_message)
 	{
 		if((impl_->file_.is_open() && (impl_->written_ + formatted_message.size() >= 512*1024) )
 			|| !impl_->file_.good()
@@ -56,13 +62,13 @@ namespace logging
 		impl_->file_.flush();
 	}
 
-	void logging_backend::flush()
+	void backend::flush()
 	{
 		if (impl_->file_.is_open())
 			impl_->file_.flush();
 	}
 
-	void logging_backend::rotate_file()
+	void backend::rotate_file()
 	{
 		impl_->file_.close();
 		impl_->file_.clear();

@@ -20,6 +20,6 @@ public:
 
 private:
 	lua_State*              state_;
-	logging::logger         logger_;
+	logging::logger*        logger_;
 	bool                    vaild_;
 };

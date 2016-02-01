@@ -4,7 +4,7 @@
 
 namespace NYDWE
 {
-	logging::logger lg;
+	logging::logger* lg;
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)

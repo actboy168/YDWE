@@ -12,7 +12,7 @@
 
 namespace NYDWE
 {
-	extern logging::logger lg;
+	extern logging::logger* lg;
 }
 
 #endif // YDWE_LOGGER_H_INCLUDED

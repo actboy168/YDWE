@@ -97,7 +97,9 @@
   <ItemGroup>
     <ClInclude Include="logging.h" />
     <ClInclude Include="logging_backend.h" />
-    <ClInclude Include="logging_frontend.h" />
+    <ClInclude Include="logging_datetime.h" />
+    <ClInclude Include="logging_logger.h" />
+    <ClInclude Include="logging_winapi.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">

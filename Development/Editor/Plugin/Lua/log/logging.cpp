@@ -11,50 +11,30 @@
 #include <boost/log/sources/severity_logger.hpp>
 #include <boost/log/support/date_time.hpp>
 #include "logging_backend.h" 
-#include "logging_frontend.h" 
 
 namespace logging
 {
-	bool initiate(const boost::filesystem::path& root, const std::wstring& name)
+	std::map<std::string, std::unique_ptr<logger>> loggers;
+	boost::filesystem::path                        loggers_root;
+	std::wstring                                   loggers_name;
+
+	bool initialize(const boost::filesystem::path& root, const std::wstring& name)
 	{
-		try
-		{
-			using namespace boost::log;
-
-			typedef logging_frontend<logging_backend> logging_sink;
-			boost::shared_ptr<logging_sink> sink = boost::make_shared<logging_sink>(root, name);
-
-			sink->set_formatter
-				(
-					expressions::format("%1% [%2%]-[%3%] %4%")
-						% expressions::format_date_time<boost::posix_time::ptime>("TimeStamp", "%Y-%m-%d %H:%M:%S")
-						% expressions::attr<std::string>("Module")
-						% trivial::severity
-						% expressions::message
-				);
-
-			core::get()->add_sink(sink);
-			core::get()->add_global_attribute("TimeStamp", attributes::local_clock());
-
-			return true;
-		}
-		catch (std::exception& )
-		{
-			return false;
-		}
+		loggers_root = root;
+		loggers_name = name;
+		return true;
 	}
 
-	logger get_logger(const char* name)
+	logger* get_logger(const char* name)
 	{
-		logger lg;
-		lg.add_attribute("Module", ::boost::log::attributes::make_constant(name));
-		return std::move(lg);
-	}
+		auto it = loggers.find(name);
+		if (it != loggers.end())
+		{
+			return it->second.get();
+		}
 
-	wlogger get_wlogger(const char* name)
-	{
-		wlogger lg;
-		lg.add_attribute("Module", ::boost::log::attributes::make_constant(name));
-		return std::move(lg);
+		loggers[name].reset(new logger(name, backend(loggers_root, loggers_name)));
+		logger* lg = loggers[name].get();
+		return lg;
 	}
 }

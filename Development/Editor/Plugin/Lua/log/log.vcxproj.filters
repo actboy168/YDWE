@@ -32,7 +32,13 @@
     <ClInclude Include="logging_backend.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="logging_frontend.h">
+    <ClInclude Include="logging_datetime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logging_logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logging_winapi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

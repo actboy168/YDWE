@@ -47,7 +47,7 @@ LuaEngine::~LuaEngine()
 
 bool LuaEngine::InitializeLogger(const boost::filesystem::path& root_path)
 {
-	if (!logging::initiate(root_path, L"ydwe"))
+	if (!logging::initialize(root_path, L"ydwe"))
 	{
 		return false;
 	}

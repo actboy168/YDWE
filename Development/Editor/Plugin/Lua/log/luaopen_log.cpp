@@ -7,11 +7,11 @@
 #include <windows.h>
 #include "logging.h"
 
-logging::logger lg;
+logging::logger* lg;
 
 int llog_print(lua_State *L)
 {
-	boost::log::BOOST_LOG_VERSION_NAMESPACE::trivial::severity_level lv = (boost::log::BOOST_LOG_VERSION_NAMESPACE::trivial::severity_level)lua_tointeger(L, lua_upvalueindex(1));
+	logging::level lv = (logging::level)lua_tointeger(L, lua_upvalueindex(1));
 	int n = lua_gettop(L);
 
 	luaL_Buffer b;
@@ -34,7 +34,7 @@ int llog_print(lua_State *L)
 	luaL_pushresult(&b);
 	size_t l;
 	const char *s = lua_tolstring(L, -1, &l);
-	BOOST_LOG_SEV(lg, lv) << std::string(s, l);
+	LOGGING_STREAM(*lg, lv) << std::string(s, l);
 	return 0;
 }
 
@@ -50,12 +50,12 @@ int luaopen_log(lua_State* L)
 	};
 
 	static llog_Reg func[] = {
-		{ "trace", boost::log::trivial::trace },
-		{ "debug", boost::log::trivial::debug },
-		{ "info",  boost::log::trivial::info },
-		{ "warn",  boost::log::trivial::warning },
-		{ "error", boost::log::trivial::error },
-		{ "fatal", boost::log::trivial::fatal },
+		{ "trace", logging::level::trace },
+		{ "debug", logging::level::debug },
+		{ "info",  logging::level::info },
+		{ "warn",  logging::level::warning },
+		{ "error", logging::level::error },
+		{ "fatal", logging::level::fatal },
 		{ NULL, NULL }
 	};
 
