@@ -109,6 +109,43 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 		return 2;
 	}
 
+	static int lbutton(lua_State* L)
+	{
+		struct AbilityData
+		{
+			uintptr_t  vft_ptr;
+			uintptr_t  ability_id;
+			uintptr_t  order_id;
+		};
+		struct CCommandButton
+		{
+			uintptr_t    vft_ptr;
+			uintptr_t    unk[0x63];
+			AbilityData* ability;   // offset 0x190
+		};
+
+		int x = (int)lua_tointeger(L, 1);
+		int y = (int)lua_tointeger(L, 2);
+		if (x < 0 || x >= 4 || y < 0 || y >= 3)
+		{
+			return 0;
+		}
+
+		war3_searcher& s = get_war3_searcher();
+		uint32_t cgameui = s.get_gameui(0, 0);
+		uintptr_t button_bar = (s.get_version() <= version_120e) ? *(uintptr_t*)(cgameui + 0x3BC) : *(uintptr_t*)(cgameui + 0x3C8);
+		uintptr_t button_array = *(uintptr_t*)(button_bar + 0x154);
+		CCommandButton* button = ((CCommandButton*)*(uintptr_t*)(*(uintptr_t*)(button_array + 0x10 * (y)+0x08) + 0x04 * (x)));
+		AbilityData* ability = button->ability;
+		if (!ability)
+		{
+			return 0;
+		}
+		lua_pushinteger(L, ability->ability_id);
+		lua_pushinteger(L, ability->order_id);
+		return 2;
+	}
+	
 	static uintptr_t get_select_unit()
 	{
 		player::selection_t* slt = player::selection(player::local());
@@ -260,11 +297,11 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			lua_pushboolean(L, 1);
 			return 1;
 		}
-		
-		static void hook()
+
+		static int lenable_debug(lua_State* /*L*/)
 		{
 			if (b_hook) {
-				return;
+				return 0;
 			}
 			b_hook = true;
 			search();
@@ -272,11 +309,6 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			hook::inline_install(&real::immediate_order, (uintptr_t)fake::immediate_order);
 			hook::inline_install(&real::point_order, (uintptr_t)fake::point_order);
 			hook::inline_install(&real::target_order, (uintptr_t)fake::target_order);
-		}
-
-		static int lenable_debug(lua_State* /*L*/)
-		{
-			hook();
 			return 0;
 		}
 	}
@@ -437,6 +469,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 
 			luaL_Reg func[] = {
 				{ "mouse", lmouse },
+				{ "button", lbutton },
 				{ "selection", lselection },
 				{ NULL, NULL },
 			};
