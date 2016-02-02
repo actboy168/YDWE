@@ -5,12 +5,12 @@
 #include <base/util/unicode.h>
 
 #define LOGGING_STREAM(lg, lvl) for (bool f = true; f; f = false) logging::make_record_pump((lg), (lvl)).stream()
-#define LOGGING_TRACE(lg)   LOGGING_STREAM((*lg), logging::trace)
-#define LOGGING_DEBUG(lg)   LOGGING_STREAM((*lg), logging::debug)
-#define LOGGING_INFO(lg)    LOGGING_STREAM((*lg), logging::info)
-#define LOGGING_WARNING(lg) LOGGING_STREAM((*lg), logging::warning)
-#define LOGGING_ERROR(lg)   LOGGING_STREAM((*lg), logging::error)
-#define LOGGING_FATAL(lg)   LOGGING_STREAM((*lg), logging::fatal)
+#define LOGGING_TRACE(lg)   LOGGING_STREAM(*(lg), logging::trace)
+#define LOGGING_DEBUG(lg)   LOGGING_STREAM(*(lg), logging::debug)
+#define LOGGING_INFO(lg)    LOGGING_STREAM(*(lg), logging::info)
+#define LOGGING_WARNING(lg) LOGGING_STREAM(*(lg), logging::warning)
+#define LOGGING_ERROR(lg)   LOGGING_STREAM(*(lg), logging::error)
+#define LOGGING_FATAL(lg)   LOGGING_STREAM(*(lg), logging::fatal)
 
 #if defined(LUAENGINE_EXPORTS)
 #	define LUAENGINE_API __declspec(dllexport)

@@ -75,7 +75,7 @@ static uintptr_t gWeDataSectionLength;
 
 static void InitSectionInfo()
 {
-	base::win::pe_reader module(NULL);
+	base::win::pe_reader module(GetModuleHandleW(NULL));
 	PIMAGE_SECTION_HEADER section = module.get_section_by_name(".text");
 	if (section)
 	{
@@ -745,7 +745,7 @@ static void InitPatches()
 
 		LOGGING_TRACE(lg) << "Installing attack table patch";
 
-		base::win::pe_reader module(NULL);
+		base::win::pe_reader module(GetModuleHandleW(NULL));
 #define WE_ADDRESS(ADDR) ((uintptr_t)(ADDR) - 0x00400000 + (uintptr_t)module.module())
 		enum ATTACK_TABLE
 		{
