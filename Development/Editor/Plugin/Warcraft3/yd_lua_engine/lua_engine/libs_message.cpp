@@ -115,7 +115,9 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 		{
 			uintptr_t  vft_ptr;
 			uintptr_t  ability_id;
-			uintptr_t  order_id;
+			uintptr_t  order_id;  
+			uintptr_t  unk;
+			uintptr_t  target_type;
 		};
 		struct CCommandButton
 		{
@@ -143,7 +145,8 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 		}
 		lua_pushinteger(L, ability->ability_id);
 		lua_pushinteger(L, ability->order_id);
-		return 2;
+		lua_pushinteger(L, ability->target_type & 0x3FF);
+		return 3;
 	}
 	
 	static uintptr_t get_select_unit()
