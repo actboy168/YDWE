@@ -346,6 +346,10 @@ IsTriggerQueueEmptyBJ="触发队列为空"
 IsTriggerQueueEmptyBJ="触发队列为空"
 IsTriggerQueueEmptyBJHint="可使用'触发器 - 添加到队列'和'触发器 - 移出队列'动作来操作触发队列."
 
+#define DEFINE_CALL
+#include "../Other/detail/OrderString.ui"
+#undef  DEFINE_CALL
+
 IsUnit="单位检查"
 IsUnit=~单位," 与 ",~单位,"相同"
 IsUnitHint="用来判断两个单位是否相等。"

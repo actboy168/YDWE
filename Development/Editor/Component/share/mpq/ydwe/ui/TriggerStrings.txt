@@ -5082,6 +5082,175 @@ IsTriggerQueueEmptyBJ="触发队列为空"
 IsTriggerQueueEmptyBJ="触发队列为空"
 IsTriggerQueueEmptyBJHint="可使用'触发器 - 添加到队列'和'触发器 - 移出队列'动作来操作触发队列."
 
+
+IssueImmediateOrder="发布命令(无目标)"
+IssueImmediateOrder="对 ",~单位," 发布 ",~Order," 命令"
+IssueImmediateOrderHint=
+
+IssuePointOrder="发布命令(指定坐标) [R]"
+IssuePointOrder="对 ",~单位," 发布 ",~Order," 命令到坐标:(",~X,",",~Y,")"
+IssuePointOrderHint=
+
+IssuePointOrderLoc="发布命令(指定点)"
+IssuePointOrderLoc="对 ",~单位," 发布 ",~Order," 命令到目标点: ",~指定点
+IssuePointOrderLocHint=
+
+IssueTargetOrder="发布命令(指定单位)"
+IssueTargetOrder="对 ",~单位," 发布 ",~Order," 命令到目标: ",~单位
+IssueTargetOrderHint=
+
+IssueTargetDestructableOrder="发布命令(指定可破坏物)"
+IssueTargetDestructableOrder="对 ",~单位," 发布 ",~Order," 命令到目标: ",~可破坏物
+IssueTargetDestructableOrderHint=
+
+IssueTargetItemOrder="发布命令(指定物品)"
+IssueTargetItemOrder="对 ",~单位," 发布 ",~Order," 命令到目标: ",~物品
+IssueTargetItemOrderHint=
+
+IssueImmediateOrderById="按ID发布命令(无目标) [R]"
+IssueImmediateOrderById="对 ",~单位," 发布 ",~Order," 命令"
+IssueImmediateOrderByIdHint=
+
+IssuePointOrderById="按ID发布命令(指定坐标) [R]"
+IssuePointOrderById="对 ",~单位," 发布 ",~Order," 命令到坐标:(",~X,",",~Y,")"
+IssuePointOrderByIdHint=
+
+IssuePointOrderByIdLoc="按ID发布命令(指定点) [R]"
+IssuePointOrderByIdLoc="对 ",~单位," 发布 ",~Order," 命令到目标点: ",~指定点
+IssuePointOrderByIdLocHint=
+
+IssueTargetOrderById="按ID发布命令(指定单位) [R]"
+IssueTargetOrderById="对 ",~单位," 发布 ",~Order," 命令到目标: ",~单位
+IssueTargetOrderByIdHint=
+
+IssueTargetDestructableOrderById="按ID发布命令(指定可破坏物) [R]"
+IssueTargetDestructableOrderById="对 ",~单位," 发布 ",~Order," 命令到目标: ",~可破坏物
+IssueTargetDestructableOrderByIdHint=
+
+IssueTargetItemOrderById="按ID发布命令(指定物品) [R]"
+IssueTargetItemOrderById="对 ",~单位," 发布 ",~Order," 命令到目标: ",~物品
+IssueTargetItemOrderByIdHint=
+
+IssueTrainOrderByIdBJ="发布训练/升级命令"
+IssueTrainOrderByIdBJ="命令 ",~单位," 建造/升级为 ",~单位类型
+IssueTrainOrderByIdBJHint="该升级是指A单位升级为B单位,而不是科技升级."
+
+IssueUpgradeOrderByIdBJ="发布研究科技命令"
+IssueUpgradeOrderByIdBJ="命令 ",~单位," 研究 ",~Tech-Type
+IssueUpgradeOrderByIdBJHint=
+
+IssueBuildOrderById="发布建造命令(指定坐标) [R]"
+IssueBuildOrderById="命令 ",~单位," 建造 ",~单位类型," 在坐标:(",~X,",",~Y,")"
+IssueBuildOrderByIdHint=
+
+IssueBuildOrderByIdLocBJ="发布建造命令(指定点)"
+IssueBuildOrderByIdLocBJ="命令 ",~单位," 建造 ",~单位类型," 在 ",~指定点
+IssueBuildOrderByIdLocBJHint=
+
+UnitDropItemPoint="发布丢弃物品命令(指定坐标) [R]"
+UnitDropItemPoint="命令 ",~单位," 丢弃物品 ",~物品," 到坐标:(",~X,",",~Y,")"
+UnitDropItemPointHint=
+
+UnitDropItemPointLoc="发布丢弃物品命令(指定点)"
+UnitDropItemPointLoc="命令 ",~单位," 丢弃物品 ",~物品," 到 ",~指定点
+UnitDropItemPointLocHint=
+
+UnitDropItemSlot="移动物品到物品栏 [R]"
+UnitDropItemSlot="命令 ",~单位," 移动 ",~物品," 到物品栏# ",~Index
+UnitDropItemSlotHint="只有当单位持有该物品时才有效. 注意: 该函数中物品栏编号从0-5,而不是1-6."
+
+UnitDropItemSlotBJ="移动物品到物品栏"
+UnitDropItemSlotBJ="命令 ",~单位," 移动 ",~物品," 到物品栏第 ",~Index," 格"
+UnitDropItemSlotBJHint="只有当单位持有该物品时才有效."
+
+UnitDropItemTargetBJ="发布给予物品命令"
+UnitDropItemTargetBJ="命令 ",~单位," 把 ",~物品," 给 ",~单位
+UnitDropItemTargetBJHint=
+
+IssueBuyUnitOrder="发布购买单位命令 [R]"
+IssueBuyUnitOrder="使 ",~玩家," 从 ",~单位," 处购买 ",~单位类型
+IssueBuyUnitOrderHint=
+
+IssueBuyItemOrder="发布购买物品命令 [R]"
+IssueBuyItemOrder="使 ",~玩家," 从 ",~单位," 处购买 ",~物品类型
+IssueBuyItemOrderHint="先让商店对玩家单位发布'中立商店 - 选择'命令,再使用该函数就能实现指定单位的购买物品了."
+
+IssueNeutralImmediateOrder="发布中介命令(无目标) [R]"
+IssueNeutralImmediateOrder="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令"
+IssueNeutralImmediateOrderHint="可以用来对非本玩家单位发布命令."
+
+IssueNeutralPointOrder="发布中介命令(指定坐标) [R]"
+IssueNeutralPointOrder="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到坐标:(",~X,",",~Y,")"
+IssueNeutralPointOrderHint="可以用来对非本玩家单位发布命令."
+
+IssueNeutralTargetOrder="发布中介命令(指定单位) [R]"
+IssueNeutralTargetOrder="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到目标: ",~单位
+IssueNeutralTargetOrderHint="可以用来对非本玩家单位发布命令."
+
+IssueNeutralTargetDestructableOrder="发布中介命令(指定可破坏物) [R]"
+IssueNeutralTargetDestructableOrder="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到目标: ",~可破坏物
+IssueNeutralTargetDestructableOrderHint="可以用来对非本玩家单位发布命令."
+
+IssueNeutralTargetItemOrder="发布中介命令(指定物品) [R]"
+IssueNeutralTargetItemOrder="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到目标: ",~物品
+IssueNeutralTargetItemOrderHint="可以用来对非本玩家单位发布命令."
+
+IssueNeutralImmediateOrderById="按ID发布中介命令(无目标) [R]"
+IssueNeutralImmediateOrderById="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令"
+IssueNeutralImmediateOrderByIdHint="可以用来对非本玩家单位发布命令."
+
+IssueNeutralPointOrderById="按ID发布中介命令(指定坐标) [R]"
+IssueNeutralPointOrderById="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到坐标:(",~X,",",~Y,")"
+IssueNeutralPointOrderByIdHint="可以用来对非本玩家单位发布命令."
+
+IssueNeutralTargetOrderById="按ID发布中介命令(指定单位) [R]"
+IssueNeutralTargetOrderById="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到目标: ",~单位
+IssueNeutralTargetOrderByIdHint="可以用来对非本玩家单位发布命令."
+
+IssueNeutralTargetDestructableOrderById="按ID发布中介命令(指定可破坏物) [R]"
+IssueNeutralTargetDestructableOrderById="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到目标: ",~可破坏物
+IssueNeutralTargetDestructableOrderByIdHint="可以用来对非本玩家单位发布命令."
+
+IssueNeutralTargetItemOrderById="按ID发布中介命令(指定物品) [R]"
+IssueNeutralTargetItemOrderById="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到目标: ",~物品
+IssueNeutralTargetItemOrderByIdHint="可以用来对非本玩家单位发布命令."
+
+YDWEIssueNeutralImmediateOrderById="自定义ID发布中介命令(无目标)"
+YDWEIssueNeutralImmediateOrderById="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令"
+YDWEIssueNeutralImmediateOrderByIdHint="可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
+
+YDWEIssueNeutralPointOrderById="自定义ID发布中介命令(指定坐标)"
+YDWEIssueNeutralPointOrderById="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到坐标:(",~X,",",~Y,")"
+YDWEIssueNeutralPointOrderByIdHint="可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
+
+YDWEIssueNeutralTargetOrderById="自定义ID发布中介命令(指定单位)"
+YDWEIssueNeutralTargetOrderById="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到目标: ",~单位
+YDWEIssueNeutralTargetOrderByIdHint="可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
+
+YDWEIssueNeutralTargetDestructableOrderById="自定义ID发布中介命令(指定可破坏物)"
+YDWEIssueNeutralTargetDestructableOrderById="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到目标: ",~可破坏物
+YDWEIssueNeutralTargetDestructableOrderByIdHint="可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
+
+YDWEIssueNeutralTargetItemOrderById="自定义ID发布中介命令(指定物品)"
+YDWEIssueNeutralTargetItemOrderById="使 ",~玩家," 对 ",~单位," 发布 ",~Order," 命令到目标: ",~物品
+YDWEIssueNeutralTargetItemOrderByIdHint="可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
+
+UnitDamagePoint="伤害区域 [R]"
+UnitDamagePoint="命令 ",~单位," 在 ",~Seconds," 秒后对半径为 ",~Size," 圆心为(",~X,",",~Y,")的范围造成 ",~Amount," 点伤害(",~是," 攻击伤害, ",~是,"远程攻击) 攻击类型: ",~AttackType," 伤害类型: ",~DamageType," 装甲类型: ",~WeaponType
+UnitDamagePointHint="该动作不会打断单位动作. 由该动作伤害/杀死单位同样正常触发'受到伤害'和'死亡'单位事件."
+
+UnitDamagePointLoc="伤害区域"
+UnitDamagePointLoc="命令 ",~单位," 在 ",~Seconds," 秒后对半径为 ",~Size," 圆心为 ",~指定点," 的范围造成",~Amount," 点伤害,攻击类型: ",~AttackType," 伤害类型: ",~DamageType
+UnitDamagePointLocHint="该动作不会打断单位动作. 由该动作伤害/杀死单位同样正常触发'受到伤害'和'死亡'单位事件."
+
+UnitDamageTarget="伤害目标 [R]"
+UnitDamageTarget="命令 ",~单位," 对 ",~Target," 造成 ",~Amount," 点伤害(",~是," 攻击伤害, ",~是,"远程攻击) 攻击类型: ",~AttackType," 伤害类型: ",~DamageType," 武器类型: ",~WeaponType
+UnitDamageTargetHint="该动作不会打断单位动作. 由该动作伤害/杀死单位同样正常触发'受到伤害'和'死亡'单位事件."
+
+UnitDamageTargetBJ="伤害目标"
+UnitDamageTargetBJ="命令 ",~单位," 对 ",~Target," 造成 ",~Amount," 点伤害,攻击类型: ",~AttackType," 伤害类型: ",~DamageType
+UnitDamageTargetBJHint="该动作不会打断单位动作. 由该动作伤害/杀死单位同样正常触发'受到伤害'和'死亡'单位事件."
+
 IsUnit="单位检查"
 IsUnit=~单位," 与 ",~单位,"相同"
 IsUnitHint="用来判断两个单位是否相等。"

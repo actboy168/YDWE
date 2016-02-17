@@ -90,6 +90,10 @@ IsTriggerQueueEmptyBJ=0,1,boolean
 _IsTriggerQueueEmptyBJ_Defaults=
 _IsTriggerQueueEmptyBJ_Category=TC_TRIGGER
 
+#define DEFINE_CALL
+#include "../Other/detail/OrderData.ui"
+#undef  DEFINE_CALL
+
 IsUnit=0,1,boolean,unit,unit
 _IsUnit_Defaults=GetTriggerUnit,GetLastCreatedUnit
 _IsUnit_Category=TC_UNIT
