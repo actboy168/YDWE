@@ -18,6 +18,22 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 		war3_window = hwnd;
 	}
 
+	struct AbilityData
+	{
+		uintptr_t  vft_ptr;
+		uintptr_t  ability_id;
+		uintptr_t  order_id;
+		uintptr_t  unk;
+		uintptr_t  target_type;
+	};
+
+	struct CCommandButton
+	{
+		uintptr_t    vft_ptr;
+		uintptr_t    unk[0x63];
+		AbilityData* ability;   // offset 0x190
+	};
+
 	struct message_t
 	{
 		uint32_t vfptr;
@@ -28,7 +44,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 	struct keyboard_message_t
 		: public message_t
 	{
-		uint32_t unk04;
+		uint32_t unk03;
 		uint32_t keycode;
 		uint8_t  keystate;
 	};
@@ -36,14 +52,29 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 	struct mouse_message_t
 		: public message_t
 	{
+		uint32_t unk03;
 		uint32_t unk04;
-		uint32_t unk05;
 		float rx;
 		float ry;
 		float wx;
 		float wy;
 		uint32_t unk0A;
 		uint32_t code;
+	};
+
+	struct ability_mouse_message_t
+		: public message_t
+	{
+		uint32_t unk03;
+		uint32_t unk04;
+		uint32_t unk05;
+		uint32_t unk06;
+		uint32_t unk07;
+		uint32_t unk08;
+		uint32_t code;
+		uint32_t unk0A;
+		uint32_t unk0B;
+		CCommandButton* button;
 	};
 
 	static uintptr_t search_convert_xy()
@@ -111,21 +142,6 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 
 	static int lbutton(lua_State* L)
 	{
-		struct AbilityData
-		{
-			uintptr_t  vft_ptr;
-			uintptr_t  ability_id;
-			uintptr_t  order_id;  
-			uintptr_t  unk;
-			uintptr_t  target_type;
-		};
-		struct CCommandButton
-		{
-			uintptr_t    vft_ptr;
-			uintptr_t    unk[0x63];
-			AbilityData* ability;   // offset 0x190
-		};
-
 		int x = (int)lua_tointeger(L, 1);
 		int y = (int)lua_tointeger(L, 2);
 		if (x < 0 || x >= 4 || y < 0 || y >= 3)
@@ -389,10 +405,46 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 		return !!ok;
 	}
 
+	static bool ability_mouse_event(lua_State* L, ability_mouse_message_t* msg)
+	{
+		lua_getfield(L, LUA_REGISTRYINDEX, "_JASS_MESSAGE_HANDLE");
+		if (!lua_isfunction(L, -1))
+		{
+			lua_pop(L, 1);
+			return true;
+		}
+		lua_newtable(L);
+		lua_pushstring(L, "mouse_ability");
+		lua_setfield(L, -2, "type");
+		if (msg && msg->button&& msg->button->ability)
+		{
+			lua_pushinteger(L, msg->code);
+			lua_setfield(L, -2, "code");
+			lua_pushinteger(L, msg->button->ability->ability_id);
+			lua_setfield(L, -2, "ability");
+			lua_pushinteger(L, msg->button->ability->order_id);
+			lua_setfield(L, -2, "order");
+		}
+		lua_insert(L, -2);
+		lua_pushvalue(L, -2);
+		if (safe_call_not_sleep(L, 1, 1, true) != LUA_OK)
+		{
+			lua_pop(L, 1);
+			return true;
+		}
+		int ok = lua_toboolean(L, -1);
+		lua_pop(L, 1);
+		lua_pop(L, 1);
+		return !!ok;
+	}
+
 	static bool __fastcall filter(uintptr_t /*cgameui*/, uintptr_t /*edx*/, message_t* msg)
 	{
 		switch (msg->msgid)
 		{
+		case 0x30064:
+			return ability_mouse_event(ML, (ability_mouse_message_t*)msg);
+			break;
 		case 0x40060064:
 			return keyboard_event(ML, "key_down", (keyboard_message_t*)msg);
 		case 0x40060066:
