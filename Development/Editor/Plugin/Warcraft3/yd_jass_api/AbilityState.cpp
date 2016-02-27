@@ -104,7 +104,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		ABILITY_DATA_UNTIP,				// string
 		ABILITY_DATA_RESEARCH_UBERTIP,  // string
 		ABILITY_DATA_UBERTIP,			// string
-		ABILITY_DATA_UNUBERTIP,			// string
+		ABILITY_DATA_UNUBERTIP,			// string 
+		ABILITY_DATA_UNART,	            // string	
+		ABILITY_DATA_RESEARCH_ART,      // string
 	};
 
 	template <class T>
@@ -127,8 +129,11 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	struct ability_ui
 	{
-		uintptr_t		           vf_table_;			//0x00
-		uint8_t		               unk_04_[0x78];	    //0x04
+		uintptr_t		           vf_table_;			//0x00	
+		uint8_t		               unk_04_[0x34];	    //0x04	   
+		char*		               unart;	            //0x38	
+		char*                      research_art;        //0x3C
+		uint8_t		               unk_3C_[0x3C];	    //0x40
 		ability_ui_elem<uint32_t>  hotkey_[3];          //0x7C
 		ability_ui_elem<char*>     array_[17];          //0xA0
 	};
@@ -586,7 +591,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	uint32_t  __cdecl EXGetAbilityDataString(uint32_t ability_handle, uint32_t level, uint32_t state_type)
 	{
-		if (state_type < ABILITY_DATA_NAME || state_type > ABILITY_DATA_UNUBERTIP)
+		if (state_type < ABILITY_DATA_NAME || state_type > ABILITY_DATA_RESEARCH_ART)
 		{
 			return jass::create_string("");
 		}
@@ -598,9 +603,21 @@ namespace base { namespace warcraft3 { namespace japi {
 			return jass::create_string("");
 		}
 
+		char** buf = 0;
+		switch (state_type)
+		{
+		case ABILITY_DATA_UNART:
+			buf = &ptr->unart;
+			break;
+		case ABILITY_DATA_RESEARCH_ART:
+			buf = &ptr->unart;
+			break;
+		default:
+			buf = ptr->array_[state_type - ABILITY_DATA_NAME].get(level);
+			break;
+		}
 
-		char** buf = ptr->array_[state_type-ABILITY_DATA_NAME].get(level);
-		if (!buf || !*buf) 
+		if (!buf || !*buf)
 		{
 			return jass::create_string("");
 		}
@@ -610,7 +627,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	bool      __cdecl EXSetAbilityDataString(uint32_t ability_handle, uint32_t level, uint32_t state_type, uint32_t value)
 	{
-		if (state_type < ABILITY_DATA_NAME || state_type > ABILITY_DATA_UNUBERTIP)
+		if (state_type < ABILITY_DATA_NAME || state_type > ABILITY_DATA_RESEARCH_ART)
 		{
 			return false;
 		}
@@ -622,7 +639,20 @@ namespace base { namespace warcraft3 { namespace japi {
 			return false;
 		}
 
-		char** buf = ptr->array_[state_type-ABILITY_DATA_NAME].get(level);
+		char** buf = 0;
+		switch (state_type)
+		{
+		case ABILITY_DATA_UNART:
+			buf = &ptr->unart;
+			break;
+		case ABILITY_DATA_RESEARCH_ART:
+			buf = &ptr->unart;
+			break;
+		default:
+			buf = ptr->array_[state_type - ABILITY_DATA_NAME].get(level);
+			break;
+		}
+
 		if (!buf || !*buf) 
 		{
 			return false;

@@ -1,10 +1,10 @@
-#ifndef YDWEAbilityStateIncluded 
+#ifndef YDWEAbilityStateIncluded
 #define YDWEAbilityStateIncluded
 
 library YDWEAbilityState
 	globals
 		private constant integer ABILITY_STATE_COOLDOWN         = 1
-		
+
 		private constant integer ABILITY_DATA_TARGS             = 100 // integer
 		private constant integer ABILITY_DATA_CAST              = 101 // real
 		private constant integer ABILITY_DATA_DUR               = 102 // real
@@ -23,7 +23,7 @@ library YDWEAbilityState
 		private constant integer ABILITY_DATA_DATA_H            = 115 // real
 		private constant integer ABILITY_DATA_DATA_I            = 116 // real
 		private constant integer ABILITY_DATA_UNITID            = 117 // integer
-		
+
 		private constant integer ABILITY_DATA_HOTKET            = 200 // integer
 		private constant integer ABILITY_DATA_UNHOTKET          = 201 // integer
 		private constant integer ABILITY_DATA_RESEARCH_HOTKEY   = 202 // integer
@@ -44,6 +44,8 @@ library YDWEAbilityState
 		private constant integer ABILITY_DATA_RESEARCH_UBERTIP  = 217 // string
 		private constant integer ABILITY_DATA_UBERTIP           = 218 // string
 		private constant integer ABILITY_DATA_UNUBERTIP         = 219 // string
+		private constant integer ABILITY_DATA_UNART             = 220 // string
+		private constant integer ABILITY_DATA_RESEARCH_ART      = 221 // string
 	endglobals
 
 	native EXGetUnitAbility        takes unit u, integer abilcode returns ability
@@ -57,15 +59,15 @@ library YDWEAbilityState
 	native EXSetAbilityDataInteger takes ability abil, integer level, integer data_type, integer value returns boolean
 	native EXGetAbilityDataString  takes ability abil, integer level, integer data_type returns string
 	native EXSetAbilityDataString  takes ability abil, integer level, integer data_type, string value returns boolean
-	
+
 	function YDWEGetUnitAbilityState takes unit u, integer abilcode, integer state_type returns real
 		return EXGetAbilityState(EXGetUnitAbility(u, abilcode), state_type)
 	endfunction
-	
+
 	function YDWEGetUnitAbilityDataInteger takes unit u, integer abilcode, integer level, integer data_type returns integer
 		return EXGetAbilityDataInteger(EXGetUnitAbility(u, abilcode), level, data_type)
 	endfunction
-	
+
 	function YDWEGetUnitAbilityDataReal takes unit u, integer abilcode, integer level, integer data_type returns real
 		return EXGetAbilityDataReal(EXGetUnitAbility(u, abilcode), level, data_type)
 	endfunction
@@ -73,15 +75,15 @@ library YDWEAbilityState
 	function YDWEGetUnitAbilityDataString takes unit u, integer abilcode, integer level, integer data_type returns string
 		return EXGetAbilityDataString(EXGetUnitAbility(u, abilcode), level, data_type)
 	endfunction
-	
+
 	function YDWESetUnitAbilityState takes unit u, integer abilcode, integer state_type, real value returns boolean
 		return EXSetAbilityState(EXGetUnitAbility(u, abilcode), state_type, value)
 	endfunction
-	
+
 	function YDWESetUnitAbilityDataInteger takes unit u, integer abilcode, integer level, integer data_type, integer value returns boolean
 		return EXSetAbilityDataInteger(EXGetUnitAbility(u, abilcode), level, data_type, value)
 	endfunction
-	
+
 	function YDWESetUnitAbilityDataReal takes unit u, integer abilcode, integer level, integer data_type, real value returns boolean
 		return EXSetAbilityDataReal(EXGetUnitAbility(u, abilcode), level, data_type, value)
 	endfunction
@@ -89,7 +91,7 @@ library YDWEAbilityState
 	function YDWESetUnitAbilityDataString takes unit u, integer abilcode, integer level, integer data_type, string value returns boolean
 		return EXSetAbilityDataString(EXGetUnitAbility(u, abilcode), level, data_type, value)
 	endfunction
-	
+
 endlibrary
 
 #endif  /// YDWEAbilityStateIncluded
