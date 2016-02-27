@@ -45,7 +45,6 @@ library YDWEAbilityState
 		private constant integer ABILITY_DATA_UBERTIP           = 218 // string
 		private constant integer ABILITY_DATA_UNUBERTIP         = 219 // string
 		private constant integer ABILITY_DATA_UNART             = 220 // string
-		private constant integer ABILITY_DATA_RESEARCH_ART      = 221 // string
 	endglobals
 
 	native EXGetUnitAbility        takes unit u, integer abilcode returns ability

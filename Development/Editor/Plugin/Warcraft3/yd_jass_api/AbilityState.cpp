@@ -106,7 +106,6 @@ namespace base { namespace warcraft3 { namespace japi {
 		ABILITY_DATA_UBERTIP,			// string
 		ABILITY_DATA_UNUBERTIP,			// string 
 		ABILITY_DATA_UNART,	            // string	
-		ABILITY_DATA_RESEARCH_ART,      // string
 	};
 
 	template <class T>
@@ -591,7 +590,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	uint32_t  __cdecl EXGetAbilityDataString(uint32_t ability_handle, uint32_t level, uint32_t state_type)
 	{
-		if (state_type < ABILITY_DATA_NAME || state_type > ABILITY_DATA_RESEARCH_ART)
+		if (state_type < ABILITY_DATA_NAME || state_type > ABILITY_DATA_UNART)
 		{
 			return jass::create_string("");
 		}
@@ -607,9 +606,6 @@ namespace base { namespace warcraft3 { namespace japi {
 		switch (state_type)
 		{
 		case ABILITY_DATA_UNART:
-			buf = &ptr->unart;
-			break;
-		case ABILITY_DATA_RESEARCH_ART:
 			buf = &ptr->unart;
 			break;
 		default:
@@ -627,7 +623,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	bool      __cdecl EXSetAbilityDataString(uint32_t ability_handle, uint32_t level, uint32_t state_type, uint32_t value)
 	{
-		if (state_type < ABILITY_DATA_NAME || state_type > ABILITY_DATA_RESEARCH_ART)
+		if (state_type < ABILITY_DATA_NAME || state_type > ABILITY_DATA_UNART)
 		{
 			return false;
 		}
@@ -643,9 +639,6 @@ namespace base { namespace warcraft3 { namespace japi {
 		switch (state_type)
 		{
 		case ABILITY_DATA_UNART:
-			buf = &ptr->unart;
-			break;
-		case ABILITY_DATA_RESEARCH_ART:
 			buf = &ptr->unart;
 			break;
 		default:
