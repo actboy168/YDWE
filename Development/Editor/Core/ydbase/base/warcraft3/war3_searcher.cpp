@@ -12,34 +12,34 @@ namespace base { namespace warcraft3 {
 		, get_instance_(search_get_instance())
 		, get_gameui_(search_get_gameui())
 	{ }
-
+	
 	war3_searcher::war3_searcher(HMODULE hGameDll)
 		: _Mybase(hGameDll)
 		, version_(search_version())
 		, get_instance_(search_get_instance())
 		, get_gameui_(search_get_gameui())
 	{ }
-
+	
 	uint32_t war3_searcher::get_version() const
 	{
 		return version_;
 	}
-
+	
 	uint32_t war3_searcher::get_instance(uint32_t index)
 	{
 		return ((uint32_t(_fastcall*)(uint32_t))get_instance_)(index);
 	}
-
+	
 	uint32_t war3_searcher::get_gameui(uint32_t unk0, uint32_t unk1)
 	{
 		return ((uint32_t(_fastcall*)(uint32_t, uint32_t))get_gameui_)(unk0, unk1);
 	}
-
+	
 	bool war3_searcher::is_gaming()
 	{
-		return (0 != get_gameui(0,0));
+		return (0 != get_gameui(0, 0));
 	}
-
+	
 	uintptr_t war3_searcher::current_function(uintptr_t ptr)
 	{
 		static uint32_t nop = get_version() > version_121b ? 0xCCCCCCCC : 0x90909090;
@@ -48,23 +48,27 @@ namespace base { namespace warcraft3 {
 		ptr += 4;
 		return ptr;
 	}
-
+	
 	uint32_t war3_searcher::search_version() const
 	{
 		static const char warcraft3_version_string[] = "Warcraft III (build ";
-
-		uintptr_t ptr; 
+	
+		uintptr_t ptr;
 		size_t size = sizeof(warcraft3_version_string) - 1;
 		ptr = search_string_ptr(warcraft3_version_string, size);
 		if (!ptr)
 		{
 			return 0;
 		}
-
-		return 1000*(((uint8_t*)ptr)[size]-'0') 
-			+ 100*(((uint8_t*)ptr)[size+1]-'0') 
-			+  10*(((uint8_t*)ptr)[size+2]-'0') 
-			+     (((uint8_t*)ptr)[size+3]-'0');
+		uint32_t n = 0;
+		ptr += size;
+		while (isdigit(*(uint8_t*)ptr))
+		{
+			n = n * 10 + *(uint8_t*)ptr - '0';
+			ptr++;
+		}
+	
+		return n;
 	}
 
 	uintptr_t war3_searcher::search_get_instance() const
