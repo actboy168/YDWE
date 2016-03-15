@@ -131,11 +131,22 @@ namespace NLuaAPI { namespace NSys {
 	{
 		lua_newtable(pState);
 		luabind::object version_table(luabind::from_stack(pState, -1));
-		base::win::simple_file_version fv(module.c_str());
-		version_table["major"]       = fv.major;
-		version_table["minor"]       = fv.minor;
-		version_table["revision"]    = fv.revision;
-		version_table["build"]       = fv.build;
+		base::win::simple_file_version fv(module.c_str(), L"FileVersion", L",");
+		if (fv.size >= 2)
+		{
+			version_table["major"] = fv.major;
+			version_table["minor"] = fv.minor;
+			version_table["revision"] = fv.revision;
+			version_table["build"] = fv.build;
+		}
+		else
+		{
+			base::win::simple_file_version fv(module.c_str(), L"FileVersion", L".");
+			version_table["major"] = fv.major;
+			version_table["minor"] = fv.minor;
+			version_table["revision"] = fv.revision;
+			version_table["build"] = fv.build;
+		}
 		version_table.push(pState);
 	}
 

@@ -129,6 +129,7 @@ namespace base { namespace win {
 			sfv.minor       = (version_array.size() > 1) ? stoi_no_throw(version_array[1]) : 0;
 			sfv.revision    = (version_array.size() > 2) ? stoi_no_throw(version_array[2]) : 0;
 			sfv.build       = (version_array.size() > 3) ? stoi_no_throw(version_array[3]) : 0;
+			sfv.size        = version_array.size();
 		}
 	}
 
@@ -137,6 +138,7 @@ namespace base { namespace win {
 		, minor(0)
 		, revision(0)
 		, build(0)
+		, size(0)
 	{ }
 
 	simple_file_version::simple_file_version(const wchar_t* module_path, const wchar_t* key, const wchar_t* pred)
