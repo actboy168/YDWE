@@ -17,9 +17,14 @@ namespace base { namespace warcraft3 { namespace message_dispatch {
 		{
 			return s.base() + 0x0070CD34;
 		}
-		uintptr_t ptr = s.search_string_ptr("QuickSave", sizeof("QuickSave"));
-		ptr += 0x44;
-		hook::replace_pointer(0, 0);
+		else if (s.get_version() < version_127a)
+		{
+			uintptr_t ptr = s.search_string_ptr("QuickSave", sizeof("QuickSave"));
+			ptr += 0x44;
+			return ptr;
+		}
+		uintptr_t ptr = s.search_string_ptr("d:\\buildserver\\3\\work-git\\warcraft3-repository\\war3\\source\\ui\\CMultiboard.h", sizeof("d:\\buildserver\\3\\work-git\\warcraft3-repository\\war3\\source\\ui\\CMultiboard.h"));
+		ptr += 0x80;
 		return ptr;
 	}
 

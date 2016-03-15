@@ -197,7 +197,11 @@ namespace base { namespace warcraft3 {
 		{
 			war3_searcher& s = get_war3_searcher();
 			uintptr_t ptr = 0;
-			if (s.get_version() > version_121b)
+			if (s.get_version() >= version_127a)
+			{
+				ptr = s.search_string("D:\\BuildServer\\3\\work-git\\warcraft3-repository\\Engine\\Source\\Tempest/tempest_thread.h");
+			}
+			else if (s.get_version() > version_121b)
 			{
 				ptr = s.search_string("e:\\Drive1\\temp\\buildwar3x\\Engine\\Source\\Tempest/tempest_thread.h");
 			}
