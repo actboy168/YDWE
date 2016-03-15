@@ -113,10 +113,21 @@ void InitializeMutilWar3()
 		{
 			if (g_iat.open_module(h))
 			{
-				if (g_iat.open_dll("wsock32.dll"))
+				if (base::warcraft3::get_war3_searcher().get_version() >= base::warcraft3::version_127a)
 				{
-					g_iat.hook((const char*)2,  &real_bind,         (uintptr_t)fake_bind);
-					g_iat.hook((const char*)20, &real_sendto,       (uintptr_t)fake_sendto);
+					if (g_iat.open_dll("ws2_32.dll"))
+					{
+						g_iat.hook((const char*)2, &real_bind, (uintptr_t)fake_bind);
+						g_iat.hook((const char*)20, &real_sendto, (uintptr_t)fake_sendto);
+					}
+				}
+				else
+				{
+					if (g_iat.open_dll("wsock32.dll"))
+					{
+						g_iat.hook((const char*)2, &real_bind, (uintptr_t)fake_bind);
+						g_iat.hook((const char*)20, &real_sendto, (uintptr_t)fake_sendto);
+					}
 				}
 
 				if (g_iat.open_dll("kernel32.dll"))

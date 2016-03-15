@@ -107,6 +107,13 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 		ptr = next_opcode(ptr, 0xE8, 5);
 		ptr += 5;
 		ptr = next_opcode(ptr, 0xE8, 5);
+		if (s.get_version() >= version_127a)
+		{
+			ptr += 5;
+			ptr = next_opcode(ptr, 0xE8, 5);
+			ptr += 5;
+			ptr = next_opcode(ptr, 0xE8, 5);
+		}
 		ptr = convert_function(ptr);
 		return ptr;
 	}
@@ -247,13 +254,22 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			b_search = true;
 
 			war3_searcher& s = get_war3_searcher();
-			uintptr_t ptr = s.search_string("SimpleDestructableNameValue");
-			ptr += 4;
-			do
+			uintptr_t ptr = 0;
+			if (s.get_version() >= version_127a)
 			{
-				ptr = next_opcode(ptr, 0xC1, 3);
-				ptr += 3;
-			} while (*(uint16_t*)(ptr - 2) != 0x05E2);
+				ptr = s.base() + 0x3AE4E0;
+			}
+			else
+			{
+				ptr = s.search_string("SimpleDestructableNameValue");
+				ptr += 4;
+				do
+				{
+					ptr = next_opcode(ptr, 0xC1, 3);
+					ptr += 3;
+				} while (*(uint16_t*)(ptr - 2) != 0x05E2);
+			}
+
 			ptr = next_opcode(ptr, 0xE8, 5);
 			real::immediate_order = convert_function(ptr);
 			ptr += 5;

@@ -47,8 +47,15 @@ LuaEngine::~LuaEngine()
 
 bool LuaEngine::InitializeLogger(const boost::filesystem::path& root_path)
 {
-	if (!logging::initialize(root_path, L"ydwe"))
+	HMODULE log = LoadLibraryW((root_path.parent_path() / L"bin" / L"modules" / L"log.dll").c_str());
+	if (!log)
 	{
+		return false;
+	}
+
+	if (!logging::initialize(root_path.c_str(), L"ydwe"))
+	{
+		printf("initialize error %d\n", GetLastError());
 		return false;
 	}
 

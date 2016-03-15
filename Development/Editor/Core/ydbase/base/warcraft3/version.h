@@ -45,6 +45,7 @@ namespace base { namespace warcraft3 {
 		version_124e = 6387,
 		version_125  = 6396,
 		version_125b = 6397,
-		version_126  = 6401,
+		version_126  = 6401,   
+		version_127a = 52240,
 	};
 }}
