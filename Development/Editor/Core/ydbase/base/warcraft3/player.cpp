@@ -12,7 +12,7 @@ namespace base { namespace warcraft3 { namespace player {
 		return ptr;
 	}
 
-	static uint32_t local_pid()
+	uint32_t local_pid()
 	{
 		return (uint32_t)(*(uint16_t*)(game_war3() + 0x28));
 	}

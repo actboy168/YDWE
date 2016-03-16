@@ -53,6 +53,7 @@ namespace base { namespace warcraft3 { namespace player {
 	};
 
 	_BASE_API uintptr_t from_id(uint32_t pid);
+	_BASE_API uint32_t  local_pid();
 	_BASE_API uintptr_t local();
 	_BASE_API selection_t* selection(uintptr_t player);
 }}}
