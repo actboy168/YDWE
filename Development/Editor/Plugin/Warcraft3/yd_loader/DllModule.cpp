@@ -17,6 +17,10 @@
 #include "auto_enter.h"
 #include "game_status.h"
 
+namespace scores { namespace rpg {
+	void hook();
+}}
+
 uintptr_t RealLoadLibraryA  = 0;
 uintptr_t RealGameLoadLibraryA  = 0;
 uintptr_t RealCreateWindowExA = 0;
@@ -132,6 +136,8 @@ HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
 			{
 				EnableDirect3D9(g_DllMod.hGameDll);
 			}
+
+			scores::rpg::hook();
 
 			return g_DllMod.hGameDll;
 		}

@@ -92,6 +92,7 @@
     <ClCompile Include="LockingMouse.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="DllModule.cpp" />
+    <ClCompile Include="war3_scores.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="yd_loader.def" />

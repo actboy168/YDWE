@@ -30,6 +30,9 @@
     <ClCompile Include="game_status.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="war3_scores.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DllModule.h">
