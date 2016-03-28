@@ -24,20 +24,36 @@ YDWERHSetGameWinner="设置队伍(",~整数,")获胜"
 YDWERHSetGameWinnerHint="队伍1的ID为0，队伍2的ID为1。"
 
 YDWERecordSetTitle="服务器存档-设置平台积分项名称 [JAPI]"
-YDWERecordSetTitle="设置平台界面上第",~整数,"个积分项名称为〖",~战斗力,"〗"
+YDWERecordSetTitle="服务器存档，平台界面上第",~整数,"个名称为〖",~战斗力,"〗"
 YDWERecordSetTitleHint="11平台RPG积分是用玩家服务器存档来模拟，这里可以设置需要显示在平台界面上的积分项名字，最多可显示8个积分项，每个积分项名字不超过3个汉字。"
 
 YDWERecordSetI="服务器存档-设置玩家存档数据 [JAPI]"
-YDWERecordSetI="设置",~玩家,"的服务器存档数据〖",~战斗力,"〗为",~整数
+YDWERecordSetI="服务器存档，",~玩家,"的〖",~战斗力,"〗=",~整数
 YDWERecordSetIHint="设置玩家服务器存档里某个目录下的数据，如设置玩家一的战斗力为5。"
 
 YDWERecordSave="服务器存档-保存玩家存档数据 [JAPI]"
-YDWERecordSave="保存",~玩家,"当前所有存档数据"
+YDWERecordSave="服务器存档，保存",~玩家,"所有数据"
 YDWERecordSaveHint="服务器存档数据必须保存后才能生效。"
 
 YDWERecordClear="服务器存档-清空玩家存档数据 [JAPI]"
-YDWERecordClear="清空",~玩家,"当前所有存档数据"
+YDWERecordClear="服务器存档，清空",~玩家,"所有数据"
 YDWERecordClearHint="由于每个玩家最多只能存储100条左右的数据，假如超过上限，建议使用此功能清空全部数据，然后重新保存有用的数据。"
+
+YDWERPGSetTitle="RPG积分-设置平台积分项名称 [JAPI]"
+YDWERPGSetTitle="RPG积分，平台界面上第",~整数,"个名称为〖",~战斗力,"〗,描述为〖",~战斗力,"〗"
+YDWERPGSetTitleHint="11平台RPG积分是用玩家，这里可以设置需要显示在平台界面上的积分项名字，最多可显示8个积分项，每个积分项名字不超过3个汉字。"
+
+YDWERPGSetKey="RPG积分-设置玩家积分数据 [JAPI]"
+YDWERPGSetKey="RPG积分，",~玩家,"的〖",~战斗力,"〗=",~整数
+YDWERPGSetKeyHint="修改积分数据，覆盖型。"
+
+YDWERPGAddKey="RPG积分-增加玩家积分数据 [JAPI]"
+YDWERPGAddKey="RPG积分，",~玩家,"的〖",~战斗力,"〗+=",~整数
+YDWERPGAddKeyHint="修改积分数据，累加型。名字需要是xx+1的形式，1表示一局这项最多可以增加的值。注意设置合理的值来避免刷分。"
+
+YDWERPGGameEnd="RPG积分-游戏结束 [JAPI]"
+YDWERPGGameEnd="RPG积分，游戏结束"
+YDWERPGGameEndHint="游戏结束，开始算分"
 
 YDWEDisplayChat="模拟玩家聊天 [JAPI]"
 YDWEDisplayChat="模拟 ",~Player," 在 ",~频道," 发言: ",~文字
@@ -80,6 +96,10 @@ YDWEIsEventAttackTypeHint="响应'受到伤害'单位事件,不能用在等待�
 YDWERecordGetI="获取存档数据 [JAPI]"
 YDWERecordGetI="从",~玩家,"的服务器存档中读出〖",~数据名,"〗"
 YDWERecordGetIHint="从玩家服务器存档上获取数据，需要填入正确的数据名。"
+
+YDWERPGGetKey="读取RPG积分 [JAPI]"
+YDWERPGGetKey="从",~玩家,"的RPG积分中读出〖",~数据名,"〗"
+YDWERPGGetKeyHint="从RPG积分上获取数据，需要填入正确的数据名。"
 
 YDWEGetObjectPropertyInteger="物体属性 (整数) [JAPI]"
 YDWEGetObjectPropertyInteger="[",~类型,"]",~物体," 的 ",~属性名,""

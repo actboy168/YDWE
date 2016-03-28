@@ -61,6 +61,23 @@ YDWERecordClear=0,player
 _YDWERecordClear_Defaults=Player00
 _YDWERecordClear_Category=TC_YDSL
 
+YDWERPGSetTitle=0,integer,string,string
+_YDWERPGSetTitle_Defaults=0,_,_
+_YDWERPGSetTitle_Limits=0,7,_,_,_,_
+_YDWERPGSetTitle_Category=TC_YDSL
+
+YDWERPGSetKey=0,player,string,integer
+_YDWERPGSetKey_Defaults=Player00,_,5
+_YDWERPGSetKey_Category=TC_YDSL
+
+YDWERPGAddKey=0,player,string,integer
+_YDWERPGAddKey_Defaults=Player00,_,5
+_YDWERPGAddKey_Category=TC_YDSL
+
+YDWERPGGameEnd=0
+_YDWERPGGameEnd_Defaults=
+_YDWERPGGameEnd_Category=TC_YDSL
+
 YDWEDisplayChat=0,player,ChatRecipient,StringExt
 _YDWEDisplayChat_Defaults=Player00,CHAT_RECIPIENT_ALL,_
 _YDWEDisplayChat_Category=TC_PLAYER
@@ -109,6 +126,10 @@ _YDWEGetObjectPropertyString_Category=TC_YDBF
 YDWERecordGetI=0,1,integer,player,string
 _YDWERecordGetI_Defaults=Player00,EverguoIsHandsome
 _YDWERecordGetI_Category=TC_YDSL
+
+YDWERPGGetKey=0,1,integer,player,string
+_YDWERPGGetKey_Defaults=Player00,EverguoIsHandsome
+_YDWERPGGetKey_Category=TC_YDSL
 
 YDWEGetUnitAbilityState=0,0,real,unit,abilcode,AbilityState
 _YDWEGetUnitAbilityState_Defaults=GetTriggerUnit,_,ABILITY_STATE_COOLDOWN
