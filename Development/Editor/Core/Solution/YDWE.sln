@@ -92,6 +92,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "registry", "..\..\Plugin\Lu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yd_size_limit", "..\..\Plugin\Warcraft3\yd_size_limit\yd_size_limit.vcxproj", "{4811DDBA-0B99-43BA-95C2-24B2A2D4CC07}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BlpConv", "..\BlpConv\BlpConv.vcxproj", "{5A6944D1-71B9-4B21-952A-E2E78C1EBF52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -250,6 +252,10 @@ Global
 		{4811DDBA-0B99-43BA-95C2-24B2A2D4CC07}.Debug|Win32.Build.0 = Debug|Win32
 		{4811DDBA-0B99-43BA-95C2-24B2A2D4CC07}.Release|Win32.ActiveCfg = Release|Win32
 		{4811DDBA-0B99-43BA-95C2-24B2A2D4CC07}.Release|Win32.Build.0 = Release|Win32
+		{5A6944D1-71B9-4B21-952A-E2E78C1EBF52}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5A6944D1-71B9-4B21-952A-E2E78C1EBF52}.Debug|Win32.Build.0 = Debug|Win32
+		{5A6944D1-71B9-4B21-952A-E2E78C1EBF52}.Release|Win32.ActiveCfg = Release|Win32
+		{5A6944D1-71B9-4B21-952A-E2E78C1EBF52}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -291,5 +297,6 @@ Global
 		{451278F5-1395-4639-B9F8-74C0146E77C3} = {ABD67588-6A9A-4ACF-8AF7-D941793740E1}
 		{22A3C830-343E-4C2F-9200-62D099D1FCDC} = {ABD67588-6A9A-4ACF-8AF7-D941793740E1}
 		{4811DDBA-0B99-43BA-95C2-24B2A2D4CC07} = {9E195292-7C13-4F56-A280-67C8A1B908DF}
+		{5A6944D1-71B9-4B21-952A-E2E78C1EBF52} = {918168E0-1677-4614-AEC7-B9CAD7DA3DEC}
 	EndGlobalSection
 EndGlobal

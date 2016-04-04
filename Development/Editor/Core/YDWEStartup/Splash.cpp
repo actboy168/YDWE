@@ -115,10 +115,11 @@ void CSplash::Show()
 	RegAndCreateWindow();
 }
 
+HBITMAP LoadBlp(HDC hdc, const wchar_t* filename);
+
 bool CSplash::SetBitmap(const wchar_t* filename)
 {
-	HBITMAP hBitmap = NULL;
-	hBitmap = (HBITMAP)::LoadImageW(0, filename, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	HBITMAP hBitmap = (HBITMAP)::LoadImageW(0, filename, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);  
 
 	FreeResources();
 

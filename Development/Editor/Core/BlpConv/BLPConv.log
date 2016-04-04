@@ -1,0 +1,8 @@
+﻿生成启动时间为 2016/3/30 10:39:47。
+     1>项目“E:\GitHub\YDWE\Development\Editor\Core\BLPConv\BLPConv.vcxproj”在节点 2 上(Build 个目标)。
+     1>C:\Program Files (x86)\MSBuild\12.0\bin\Microsoft.Common.CurrentVersion.targets(617,5): error : The OutputPath property is not set for project 'BLPConv.vcxproj'.  Please check to make sure that you have specified a valid combination of Configuration and Platform for this project.  Configuration='Debug'  Platform='Win32'.  This error may also appear if some other project is trying to follow a project-to-project reference to this project, this project has been unloaded or is not included in the solution, and the referencing project does not build using the same or an equivalent Configuration or Platform.
+     1>已完成生成项目“E:\GitHub\YDWE\Development\Editor\Core\BLPConv\BLPConv.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:00.00

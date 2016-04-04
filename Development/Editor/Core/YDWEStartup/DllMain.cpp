@@ -14,7 +14,10 @@
 #include <base/win/file_version.h>
 #include <base/win/process.h>
 #include <base/warcraft3/directory.h>
-#include <base/util/format.h>
+#include <base/util/format.h>	 
+#include <slk/reader/IniReader.hpp>
+#include <slk/reader/IniReader.cpp>
+#include <slk/reader/CommonReader.cpp>
 #include "Splash.h"
 
 namespace fs = boost::filesystem;
@@ -49,15 +52,44 @@ static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boo
 	}
 }
 
+bool Blp2Bmp(const wchar_t* blp, const wchar_t* bmp);
+
 static void ShowSplash(fs::path const& ydwe_path)
 {
-	fs::path splashPath = ydwe_path / L"bin" / L"splash.bmp";
-	if (fs::exists(splashPath))
+	fs::path bmp = ydwe_path / L"bin" / L"splash.bmp";
+	if (!fs::exists(bmp))
+	{
+		try {
+			slk::IniTable table;
+			base::buffer buf = base::file::read_stream(ydwe_path / L"share" / L"mpq" / L"units" / L"ui" / L"worldeditdata.txt").read<base::buffer>();
+			base::buffer_reader reader(buf);
+			slk::IniReader::Read(reader, table);
+
+			do {
+				fs::path blp = ydwe_path / L"share" / L"mpq" / L"units" / table["WorldEditArt"]["War3XLogo"];
+				if (fs::exists(blp))
+				{
+					if (Blp2Bmp(blp.wstring().c_str(), bmp.wstring().c_str()))
+						break;
+				}
+				blp = ydwe_path / L"share" / L"mpq" / L"units" / table["WorldEditArt"]["War3Logo"];
+				if (fs::exists(blp))
+				{
+					if (Blp2Bmp(blp.wstring().c_str(), bmp.wstring().c_str()))
+						break;
+				}
+			} while (false);
+		}
+		catch (...) {
+		}
+	}
+
+	if (fs::exists(bmp))
 	{
 		try {
 			base::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
 			CSplash display;
-			display.SetBitmap(splashPath.wstring().c_str());
+			display.SetBitmap(bmp.wstring().c_str());
 			display.SetTransparentColor(RGB(128, 128, 128));
 			display.SetText(base::format(L"YDWE %d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 10, 20);
 			display.Show();
