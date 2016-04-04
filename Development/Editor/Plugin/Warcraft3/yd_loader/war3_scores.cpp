@@ -115,7 +115,6 @@ namespace scores {
 
 		void hook()
 		{
-			MessageBoxA(0, 0, 0, 0);
 			jass::async_hook("InitGameCache", (uintptr_t*)&real::InitGameCache, (uintptr_t)fake::InitGameCache);
 			jass::async_hook("StoreInteger", (uintptr_t*)&real::StoreInteger, (uintptr_t)fake::StoreInteger);
 			jass::async_hook("GetStoredInteger", (uintptr_t*)&real::GetStoredInteger, (uintptr_t)fake::GetStoredInteger);
