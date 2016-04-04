@@ -25,9 +25,13 @@ namespace scores {
 			std::array<std::map<std::string, int32_t>, 12> current_map;
 			bool set(const char* table, const char* key, int32_t value)
 			{
-				if (!table || !key || (table[0] < 'A') || (table[0] > 'A' + 11))
+				if (!table || !key)
 				{
 					return false;
+				}
+				if ((table[0] < 'A') || (table[0] > 'A' + 11))
+				{
+					return true;
 				}
 				int playerid = table[0] - 'A';
 				if (table[1] == '=')
