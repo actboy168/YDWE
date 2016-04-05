@@ -6,7 +6,9 @@
 #include <BlpConv/BlpConv.h>
 #include <BlpConv/Blp.h>
 #include <algorithm>
+#include <map>
 #include <stdint.h>
+#include <base/util/console.h>
 
 namespace base { namespace warcraft3 { namespace japi {
 
@@ -70,6 +72,16 @@ namespace base { namespace warcraft3 { namespace japi {
 		return true;
 	}
 
+	std::string ToFileName(const std::string& file)
+	{
+		size_t pos = file.find_last_of('\\');
+		if (pos == std::string::npos)
+		{
+			return file;
+		}
+		return file.substr(pos, -1);
+	}
+
 	namespace real
 	{
 		uintptr_t SMemAlloc = 0;
@@ -84,7 +96,7 @@ namespace base { namespace warcraft3 { namespace japi {
 			return base::std_call<void*>(real::SMemAlloc, amount, ".\\SFile.cpp", 4072, 0);
 		}
 
-		bool disable_button_blp(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
+		bool disable_button_blp(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
 		{
 			const void* buffer = 0;
 			uint32_t size = 0;
@@ -109,37 +121,55 @@ namespace base { namespace warcraft3 { namespace japi {
 			*buffer_ptr = result;
 			if (reserve_size) memset((unsigned char*)result + output.GetSize(), 0, reserve_size);
 			if (size_ptr) *size_ptr = output.GetSize();
-			if (overlapped_ptr && overlapped_ptr->hEvent) ::SetEvent(overlapped_ptr->hEvent);
 			return true;
 		}
 
-		std::string lastfile;
+		static std::map<std::string, std::string> g_history;
+		static std::string g_lastfile;
 		bool __stdcall SFileLoadFile(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
 		{
 			if (!buffer_ptr || !filename)
 			{
 				return base::std_call<bool>(real::SFileLoadFile, filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
 			}
-			if (0 != strnicmp(filename, "replaceabletextures\\commandbuttonsdisabled\\dis", sizeof "replaceabletextures\\commandbuttonsdisabled\\dis" - 1))
-			{
-				lastfile = filename;
-				return base::std_call<bool>(real::SFileLoadFile, filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
-			}
-
+			printf("%s\n", filename);
 			bool suc = base::std_call<bool>(real::SFileLoadFile, filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
 			if (suc)
 			{
+				g_lastfile = filename;
 				return true;
 			}
-			suc = disable_button_blp(lastfile.c_str(), buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
-			lastfile = filename;
+#define DisString "replaceabletextures\\commandbuttonsdisabled\\dis"
+#define STRLEN(s) (sizeof(s) - 1)
+			if (0 == strnicmp(filename, DisString, STRLEN(DisString)))
+			{
+				if (0 != stricmp(ToFileName(g_lastfile).c_str(), filename + STRLEN(DisString)))
+				{
+					if (0 == strnicmp(filename, DisString "dis", STRLEN(DisString "dis")))
+					{
+						auto it = g_history.find(filename + STRLEN(DisString "dis"));
+						if (it != g_history.end())
+						{
+							suc = disable_button_blp(it->second.c_str(), buffer_ptr, size_ptr, reserve_size);
+						}
+					}
+				}
+				else
+				{
+					g_history[filename + STRLEN(DisString)] = g_lastfile;
+					suc = disable_button_blp(g_lastfile.c_str(), buffer_ptr, size_ptr, reserve_size);
+				}
+			}
+			g_lastfile = filename;
+			if (overlapped_ptr && overlapped_ptr->hEvent) ::SetEvent(overlapped_ptr->hEvent);
 			return suc;
 		}
 	}
 
 	void InitializeDisableButtonBlp()
 	{
-		MessageBox(0, 0, 0, 0);
+		base::console::enable();
+
 		HMODULE module_handle = ::GetModuleHandleW(L"Game.dll");
 		real::SMemAlloc       = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)401);   
 		real::SFileUnloadFile = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)280); 
