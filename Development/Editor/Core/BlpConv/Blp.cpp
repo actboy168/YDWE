@@ -149,7 +149,7 @@ bool BLP::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int
 		memcpy(&TargetBuffer[CurrentOffset], &((MipMapBufferList[i])[JpegHeaderSize]), Header.Size[i]);
 		CurrentOffset += Header.Size[i];
 	}
-	return false;
+	return true;
 }
 
 
@@ -228,9 +228,9 @@ bool BLP::LoadUncompressed(BLP_HEADER& Header, const BUFFER& SourceBuffer, BUFFE
 	static const int PALETTE_SIZE = 256;
 	BLP_RGBA const* Palette = reinterpret_cast<BLP_RGBA const*>(SourceBuffer.GetData(sizeof(BLP_HEADER)));
 	BLP_PIXEL const* SourcePixel = reinterpret_cast<BLP_PIXEL const*>(SourceBuffer.GetData(Header.Offset[0]));
-	BLP_RGBA* TargetPixel = reinterpret_cast<BLP_RGBA*>(TargetBuffer.GetData());
 	int Size = Header.Width * Header.Height;
 	TargetBuffer.Resize(Size * 4);
+	BLP_RGBA* TargetPixel = reinterpret_cast<BLP_RGBA*>(TargetBuffer.GetData());
 
 	switch(Header.PictureType)
 	{

@@ -33,6 +33,9 @@
     <ClCompile Include="Initialize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DisableButtonBlp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="yd_jass_api.def">
@@ -47,6 +50,9 @@
   <ItemGroup>
     <ClInclude Include="StringPool.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PasButton.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
