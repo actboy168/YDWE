@@ -3,6 +3,7 @@
 #include <boost/filesystem.hpp>
 #include <base/path/helper.h>	
 #include <base/file/stream.h> 
+#include <base/warcraft3/virtual_mpq.h> 
 #include <BlpConv/BlpConv.h>
 #include <BlpConv/Blp.h>
 #include <algorithm>
@@ -166,7 +167,9 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	void InitializeDisableButtonBlp()
 	{
+		// 会和虚拟mpq冲突，暂时的解决方法先把虚拟mpq加载起来
 		HMODULE module_handle = ::GetModuleHandleW(L"Game.dll");
+		virtual_mpq::initialize(module_handle);
 		real::SMemAlloc       = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)401);   
 		real::SFileUnloadFile = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)280); 
 		real::SFileLoadFile   = base::hook::iat(module_handle, "Storm.dll", (const char*)(279), (uintptr_t)fake::SFileLoadFile);

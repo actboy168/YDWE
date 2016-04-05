@@ -260,6 +260,10 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 
 	bool initialize(HMODULE module_handle)
 	{
+		static bool initialized = false;
+		if (initialized)
+			return true;
+		initialized = true;
 		bool result = true;
 		result = result && (0 != (real::SMemAlloc = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)401)));
 #define IAT_HOOK(ord, name) result = result && (0 != (real:: ## name = base::hook::iat(module_handle, "Storm.dll", (const char*)(ord), (uintptr_t)fake:: ## name ##)))
@@ -283,7 +287,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		//IAT_HOOK(293, SFileOpenFileAsArchive);
 		//IAT_HOOK(300, SFileOpenPathAsArchive);
 #undef 	IAT_HOOK
-
+		initialized = result;
 		return result;
 	}
 
