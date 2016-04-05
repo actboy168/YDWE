@@ -646,6 +646,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 			InitPluginUI();
 			UpdateWarcraft3Directory();
 			m_username = table["MapTest"]["UserName"];
+			m_virtualmpq = table["MapTest"]["VirtualMpq"];
 		}
 		else if (msg.sType == DUI_MSGTYPE_SELECTCHANGED) 
 		{
@@ -703,6 +704,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 				DonePatchUI(table);
 				DonePluginUI();
 				table["MapTest"]["UserName"] = m_username;
+				table["MapTest"]["VirtualMpq"] = m_virtualmpq;
 				SaveConfig(table);
 
 				::PostQuitMessage(0L);
@@ -716,6 +718,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 				slk::IniTable table;
 				ResetConfig(table);
 				table["MapTest"]["UserName"] = m_username;
+				table["MapTest"]["VirtualMpq"] = m_virtualmpq;
 				ConfigToUI(table);
 			}
 			else if (name == L"choose_war3_dir")

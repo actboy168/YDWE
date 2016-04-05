@@ -63,4 +63,5 @@ private:
 
 	fs::path                   m_ydwe_path;
 	std::string                m_username;
+	std::string                m_virtualmpq;
 };
