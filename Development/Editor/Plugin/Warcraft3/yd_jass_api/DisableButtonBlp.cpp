@@ -8,7 +8,6 @@
 #include <algorithm>
 #include <map>
 #include <stdint.h>
-#include <base/util/console.h>
 
 namespace base { namespace warcraft3 { namespace japi {
 
@@ -79,7 +78,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			return file;
 		}
-		return file.substr(pos, -1);
+		return file.substr(pos + 1, std::string::npos);
 	}
 
 	namespace real
@@ -132,7 +131,6 @@ namespace base { namespace warcraft3 { namespace japi {
 			{
 				return base::std_call<bool>(real::SFileLoadFile, filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
 			}
-			printf("%s\n", filename);
 			bool suc = base::std_call<bool>(real::SFileLoadFile, filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
 			if (suc)
 			{
@@ -168,8 +166,6 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	void InitializeDisableButtonBlp()
 	{
-		base::console::enable();
-
 		HMODULE module_handle = ::GetModuleHandleW(L"Game.dll");
 		real::SMemAlloc       = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)401);   
 		real::SFileUnloadFile = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)280); 
