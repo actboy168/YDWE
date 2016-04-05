@@ -198,37 +198,22 @@ bool BLP::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int* Width, int
 //+-----------------------------------------------------------------------------
 bool BLP::LoadCompressed(BLP_HEADER& Header, const BUFFER& SourceBuffer, BUFFER& TargetBuffer)
 {
-	BUFFER TempBuffer1;
-	BUFFER TempBuffer2;
+	BUFFER TempBuffer;
 	uint32_t  JpegHeaderSize;
 
 	memcpy(reinterpret_cast<char*>(&JpegHeaderSize), SourceBuffer.GetData(sizeof(BLP_HEADER)), sizeof(uint32_t));
 
-	TempBuffer2.Resize(Header.Size[0] + JpegHeaderSize);
+	TempBuffer.Resize(Header.Size[0] + JpegHeaderSize);
 
-	memcpy(TempBuffer2.GetData(0), SourceBuffer.GetData(sizeof(BLP_HEADER) + sizeof(uint32_t)), JpegHeaderSize);
-	memcpy(TempBuffer2.GetData(JpegHeaderSize), SourceBuffer.GetData(Header.Offset[0]), Header.Size[0]);
+	memcpy(TempBuffer.GetData(0), SourceBuffer.GetData(sizeof(BLP_HEADER) + sizeof(uint32_t)), JpegHeaderSize);
+	memcpy(TempBuffer.GetData(JpegHeaderSize), SourceBuffer.GetData(Header.Offset[0]), Header.Size[0]);
 
 	int Width;
 	int Height;
-	if(!Jpeg.Read(TempBuffer2, TempBuffer1, &Width, &Height))
+	if (!Jpeg.Read(TempBuffer, TargetBuffer, &Width, &Height))
 	{
 		LOG("Unable to load  blp file, BLP reading failed!");
 		return false;
-	}
-
-	TargetBuffer.Resize(TempBuffer1.GetSize());
-
-	uint32_t* SourcePixel = reinterpret_cast<uint32_t*>(TempBuffer1.GetData());
-	uint32_t* TargetPixel = reinterpret_cast<uint32_t*>(TargetBuffer.GetData());
-	//int Size = Width * Height;
-
-	for (int Y = 0; Y < Height; ++Y)
-	{
-		for (int X = 0; X < Width; ++X)
-		{
-			TargetPixel[X+Y*Width] = SourcePixel[X+(Height-1-Y)*Width];
-		}
 	}
 
 	return true;
@@ -240,83 +225,37 @@ bool BLP::LoadCompressed(BLP_HEADER& Header, const BUFFER& SourceBuffer, BUFFER&
 //+-----------------------------------------------------------------------------
 bool BLP::LoadUncompressed(BLP_HEADER& Header, const BUFFER& SourceBuffer, BUFFER& TargetBuffer)
 {
-	int i;
-	int Size;
-	const int PALETTE_SIZE = 256;
-	BLP_RGBA Palette[PALETTE_SIZE];
-	BLP_RGBA* TargetPixel;
-	BUFFER TempBuffer;
-
-	memcpy(reinterpret_cast<char*>(Palette), SourceBuffer.GetData(sizeof(BLP_HEADER)), (PALETTE_SIZE * 4));
-
-	Size = Header.Width * Header.Height;
-	TempBuffer.Resize(Size * 4);
+	static const int PALETTE_SIZE = 256;
+	BLP_RGBA const* Palette = reinterpret_cast<BLP_RGBA const*>(SourceBuffer.GetData(sizeof(BLP_HEADER)));
+	BLP_PIXEL const* SourcePixel = reinterpret_cast<BLP_PIXEL const*>(SourceBuffer.GetData(Header.Offset[0]));
+	BLP_RGBA* TargetPixel = reinterpret_cast<BLP_RGBA*>(TargetBuffer.GetData());
+	int Size = Header.Width * Header.Height;
+	TargetBuffer.Resize(Size * 4);
 
 	switch(Header.PictureType)
 	{
 	case 3:
 	case 4:
+		for (int i = 0; i < Size; i++)
 		{
-			BLP_PIXEL const* SourcePixel;
-
-			SourcePixel = reinterpret_cast<BLP_PIXEL const*>(SourceBuffer.GetData(sizeof(BLP_HEADER) + (PALETTE_SIZE * 4)));
-			TargetPixel = reinterpret_cast<BLP_RGBA*>(TempBuffer.GetData());
-
-			for(i = 0; i < Size; i++)
-			{
-				TargetPixel[i].Red = Palette[SourcePixel[i].Index].Red;
-				TargetPixel[i].Green = Palette[SourcePixel[i].Index].Green;
-				TargetPixel[i].Blue = Palette[SourcePixel[i].Index].Blue;
-			}
-
-			for(i = 0; i < Size; i++)
-			{
-				TargetPixel[i].Alpha = SourcePixel[Size + i].Index;
-			}
-
-			break;
+			TargetPixel[i] = Palette[SourcePixel[i].Index];
 		}
-
+		for (int i = 0; i < Size; i++)
+		{
+			TargetPixel[i].Alpha = SourcePixel[Size + i].Index;
+		}
+		break;
 	case 5:
+		for (int i = 0; i < Size; i++)
 		{
-			BLP_PIXEL const* SourcePixel;
-
-			SourcePixel = reinterpret_cast<BLP_PIXEL const*>(SourceBuffer.GetData(sizeof(BLP_HEADER) + (PALETTE_SIZE * 4)));
-			TargetPixel = reinterpret_cast<BLP_RGBA*>(TempBuffer.GetData());
-
-			for(i = 0; i < Size; i++)
-			{
-				TargetPixel[i].Red = Palette[SourcePixel[i].Index].Red;
-				TargetPixel[i].Green = Palette[SourcePixel[i].Index].Green;
-				TargetPixel[i].Blue = Palette[SourcePixel[i].Index].Blue;
-				TargetPixel[i].Alpha = 255 - Palette[SourcePixel[i].Index].Alpha;
-			}
-
-			break;
+			TargetPixel[i] = Palette[SourcePixel[i].Index];
+			TargetPixel[i].Alpha = 255 - TargetPixel[i].Alpha;
 		}
-
+		break;
 	default:
-		{
-			LOG("Unable to load  blp file, unknown picture type!");
-			return false;
-		}
+		LOG("Unable to load  blp file, unknown picture type!");
+		return false;
 	}
-
-	{
-		TargetBuffer.Resize(TempBuffer.GetSize());
-
-		uint32_t* SourcePixel = reinterpret_cast<uint32_t*>(TempBuffer.GetData());
-		uint32_t* TargetPixel = reinterpret_cast<uint32_t*>(TargetBuffer.GetData());
-
-		for (unsigned int Y = 0; Y < Header.Height; ++Y)
-		{
-			for (unsigned int X = 0; X < Header.Width; ++X)
-			{
-				TargetPixel[X+Y*Header.Width] = SourcePixel[X+(Header.Height-1-Y)*Header.Width];
-			}
-		}
-	}
-
 	return true;
 }
 

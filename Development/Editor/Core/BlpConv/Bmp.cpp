@@ -55,7 +55,17 @@ bool BMP::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int
 
 	memcpy(TargetBuffer.GetData(), &bmheader, sizeof(BITMAPFILEHEADER));
 	memcpy(TargetBuffer.GetData(sizeof(BITMAPFILEHEADER)), &(bmiHeader), sizeof(BITMAPINFOHEADER));
-	memcpy(TargetBuffer.GetData(bmheader.bfOffBits), SourceBuffer.GetData(), Size);
+
+	const uint32_t* SourcePixel = reinterpret_cast<const uint32_t*>(SourceBuffer.GetData());
+	uint32_t* TargetPixel = reinterpret_cast<uint32_t*>(TargetBuffer.GetData(bmheader.bfOffBits));
+	
+	for (int Y = 0; Y < Height; ++Y)
+	{
+		for (int X = 0; X < Width; ++X)
+		{
+			TargetPixel[X+Y*Width] = SourcePixel[X+(Height-1-Y)*Width];
+		}
+	}
 
 	return true;
 }

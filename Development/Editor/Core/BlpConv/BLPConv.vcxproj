@@ -104,7 +104,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Blp.cpp" />
-    <ClCompile Include="BlpConv..cpp" />
+    <ClCompile Include="BlpConv.cpp" />
     <ClCompile Include="Bmp.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Jpeg.cpp" />
