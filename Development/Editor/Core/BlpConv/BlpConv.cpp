@@ -93,10 +93,6 @@ namespace IMAGE
 				*ptr++ = clamp_channel_bits8(255 - (255 - pixel_a.Alpha) * (255 - pixel_b.Alpha) / 255);
 			}
 		}
-		//if (!BMP().Write(c.buffer, BlpC, c.width, c.height, 0))
-		//{
-		//	return false;
-		//}
 		if (!BLP().Write(c.buffer, BlpC, c.width, c.height, 95))
 		{
 			return false;
