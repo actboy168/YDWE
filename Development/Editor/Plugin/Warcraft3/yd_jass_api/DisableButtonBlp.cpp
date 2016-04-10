@@ -164,8 +164,34 @@ namespace base { namespace warcraft3 { namespace japi {
 				}
 				else
 				{
-					g_history[filename] = g_lastfilepath;
 					suc = disable_button_blp(g_lastfilepath.c_str(), buffer_ptr, size_ptr, reserve_size);
+					if (suc)
+					{
+						g_history[filename] = g_lastfilepath;
+					}
+					else
+					{
+						if (0 == strnicmp(g_lastfilepath.c_str(), DisString, StrLen(DisString)))
+						{
+							for (const char* cur = g_lastfilepath.c_str() + StrLen(DisString);; cur += 3)
+							{
+								auto it = g_history.find(cur);
+								if (it != g_history.end())
+								{
+									suc = disable_button_blp(it->second.c_str(), buffer_ptr, size_ptr, reserve_size);
+									if (suc)
+									{
+										g_history[filename] = it->second;
+									}
+									break;
+								}
+								if (0 != strnicmp(cur, "dis", 3))
+								{
+									break;
+								}
+							}
+						}
+					}
 				}
 			}
 			g_lastfilepath = filepath;
