@@ -75,6 +75,45 @@ namespace base { namespace warcraft3 { namespace japi {
 		return true;
 	}
 
+	bool BlpBlend(const IMAGE::BUFFER& input_a, const IMAGE::BUFFER& input_b, IMAGE::BUFFER& output)
+	{
+		int input_width = 0;
+		int input_height = 0;
+		IMAGE::BUFFER input_a_pic, input_b_pic, output_pic;
+		if (!IMAGE::BLP().Read(input_a, input_a_pic, &input_width, &input_height))
+		{
+			return false;
+		}
+		if (input_width != kBlpSize || input_height != kBlpSize)
+		{
+			return false;
+		}
+		if (!IMAGE::BLP().Read(input_b, input_b_pic, &input_width, &input_height))
+		{
+			return false;
+		}
+		if (input_width != kBlpSize || input_height != kBlpSize)
+		{
+			return false;
+		}
+		output_pic.Resize(kBlpSize * kBlpSize * 4);
+		unsigned char* ptr = output_pic.GetData();
+		for (size_t i = 0; i < kBlpSize * kBlpSize; ++i)
+		{
+			IMAGE::BLP_RGBA const& pixel_a = reinterpret_cast<IMAGE::BLP_RGBA*>(input_a_pic.GetData())[i];
+			IMAGE::BLP_RGBA const& pixel_b = reinterpret_cast<IMAGE::BLP_RGBA*>(input_b_pic.GetData())[i];
+			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Red + pixel_a.Red) / 255);
+			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Green + pixel_a.Green) / 255);
+			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Blue + pixel_a.Blue) / 255);
+			*ptr++ = clamp_channel_bits8(255 - (255 - pixel_a.Alpha) * (255 - pixel_b.Alpha) / 255);
+		}
+		if (!IMAGE::BLP().Write(output_pic, output, kBlpSize, kBlpSize, 95))
+		{
+			return false;
+		}
+		return true;
+	}
+
 	std::string ToFileName(const std::string& file)
 	{
 		size_t pos = file.find_last_of('\\');
@@ -94,22 +133,99 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	namespace fake
 	{
+		template <class T>
+		struct less : public std::binary_function<T, T, bool>
+		{
+			bool operator()(const T& lft, const T& rht) const
+			{
+				return (lft < _Right);
+			}
+		};
+
+		template <>
+		struct less<char> : public std::binary_function<char, char, bool>
+		{
+			bool operator()(const char& lft, const char& rht) const
+			{
+				return (tolower(static_cast<unsigned char>(lft)) < tolower(static_cast<unsigned char>(rht)));
+			}
+		};
+
+		template <>
+		struct less<std::string> : public std::binary_function<std::string, std::string, bool>
+		{
+			bool operator()(const std::string& lft, const std::string& rht) const
+			{
+				return std::lexicographical_compare(lft.begin(), lft.end(), rht.begin(), rht.end(), less<char>());
+			}
+		};
+
+		static std::map<std::string, std::string, less<std::string>> g_history;
+		static std::map<std::string, IMAGE::BUFFER, less<std::string>> g_virtualblp;
+		static std::string g_lastfilepath;
+
 		void* SMemAlloc(size_t amount)
 		{
 			return base::std_call<void*>(real::SMemAlloc, amount, ".\\SFile.cpp", 4072, 0);
 		}
 
-		bool disable_button_blp(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
+		bool read_virtual_button_blp(const char* filepath, IMAGE::BUFFER& blp)
 		{
-			const void* buffer = 0;
-			uint32_t size = 0;
-			if (!base::std_call<bool>(real::SFileLoadFile, filename, &buffer, &size, 0, 0))
+			auto it = g_virtualblp.find(filepath);
+			if (it == g_virtualblp.end())
 			{
 				return false;
 			}
-			IMAGE::BUFFER input((const char*)buffer, (const char*)buffer + size);
-			IMAGE::BUFFER output;
+			blp.Assign(it->second.begin(), it->second.end());
+			return true;
+		}
+
+		bool read_virtual_button_blp(const char* filepath, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
+		{
+			auto it = g_virtualblp.find(filepath);
+			if (it == g_virtualblp.end())
+			{
+				return false;
+			}
+			IMAGE::BUFFER& blp = it->second;
+			void* result = SMemAlloc(blp.GetSize() + reserve_size);
+			if (!result)
+			{
+				return false;
+			}
+			memcpy(result, blp.GetData(), blp.GetSize());
+			*buffer_ptr = result;
+			if (reserve_size) memset((unsigned char*)result + blp.GetSize(), 0, reserve_size);
+			if (size_ptr) *size_ptr = blp.GetSize();
+			if (overlapped_ptr && overlapped_ptr->hEvent) ::SetEvent(overlapped_ptr->hEvent);
+			return true;
+		}
+
+		bool read_button_blp(const char* filepath, IMAGE::BUFFER& blp)
+		{
+			if (read_virtual_button_blp(filepath, blp))
+			{
+				return true;
+			}
+			const void* buffer = 0;
+			uint32_t size = 0;
+			if (!base::std_call<bool>(real::SFileLoadFile, filepath, &buffer, &size, 0, 0))
+			{
+				return false;
+			}
+			blp.Assign((const char*)buffer, (const char*)buffer + size);
 			base::std_call<bool>(real::SFileUnloadFile, buffer);
+			return true;
+		}
+
+		bool disable_button_blp(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
+		{
+			IMAGE::BUFFER input;
+			IMAGE::BUFFER output;
+			if (!read_button_blp(filename, input))
+			{
+				return false;
+			}
 			if (!BlpDisable(input, output))
 			{
 				return false;
@@ -127,14 +243,18 @@ namespace base { namespace warcraft3 { namespace japi {
 			return true;
 		}
 
-		static std::map<std::string, std::string> g_history;
-		static std::string g_lastfilepath;
 		bool __stdcall SFileLoadFile(const char* filepath, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
 		{
 			if (!buffer_ptr || !filepath)
 			{
 				return base::std_call<bool>(real::SFileLoadFile, filepath, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
 			}
+			if (read_virtual_button_blp(filepath, buffer_ptr, size_ptr, reserve_size, overlapped_ptr))
+			{
+				g_lastfilepath = filepath;
+				return true;
+			}
+
 			bool suc = base::std_call<bool>(real::SFileLoadFile, filepath, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
 			if (suc)
 			{
@@ -206,6 +326,28 @@ namespace base { namespace warcraft3 { namespace japi {
 		fake::g_history[ToFileName(str_path)] = str_path;
 	}
 
+	jass::jboolean_t __cdecl EXBlendButtonIcon(jass::jstring_t input_a, jass::jstring_t intput_b, jass::jstring_t output)
+	{
+		std::string str_intput_a = jass::from_trigstring(jass::from_string(input_a));
+		std::string str_intput_b = jass::from_trigstring(jass::from_string(intput_b));
+		std::string str_output = jass::from_trigstring(jass::from_string(output));
+		IMAGE::BUFFER buf_input_a, buf_input_b, buf_output;
+		if (!fake::read_button_blp(str_intput_a.c_str(), buf_input_a))
+		{
+			return false;
+		}
+		if (!fake::read_button_blp(str_intput_b.c_str(), buf_input_b))
+		{
+			return false;
+		}
+		if (!BlpBlend(buf_input_a, buf_input_b, fake::g_virtualblp[str_output]))
+		{
+			fake::g_virtualblp.erase(str_output);
+			return false;
+		}
+		return true;
+	}
+	
 	void InitializeDisableButtonBlp()
 	{
 		// 会和虚拟mpq冲突，暂时的解决方法先把虚拟mpq加载起来
@@ -215,8 +357,10 @@ namespace base { namespace warcraft3 { namespace japi {
 		real::SFileUnloadFile = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)280); 
 		real::SFileLoadFile = base::hook::iat(module_handle, "Storm.dll", (const char*)(279), (uintptr_t)fake::SFileLoadFile);
 		jass::japi_add((uintptr_t)EXDclareButtonIcon, "EXDclareButtonIcon", "(S)V");
+		jass::japi_add((uintptr_t)EXBlendButtonIcon, "EXBlendButtonIcon", "(SSS)B");
 		register_game_reset_event([&](uintptr_t)
 		{
+			fake::g_virtualblp.clear();
 			fake::g_lastfilepath.clear();
 			fake::g_history.clear();
 		});

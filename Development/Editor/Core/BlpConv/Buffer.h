@@ -29,6 +29,12 @@ public:
 		: buffer_(begin, end)
 	{ }
 
+	template <class InputIterator>
+	void Assign(InputIterator begin, InputIterator end)
+	{
+		buffer_.assign(begin, end);
+	}
+
 	void Resize(size_t NewSize);
 	unsigned char*       GetData(size_t Index = 0);
 	const unsigned char* GetData(size_t Index = 0) const;
