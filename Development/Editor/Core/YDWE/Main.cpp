@@ -95,7 +95,7 @@ INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR 
 	HMODULE startupModule = LoadLibraryW(L"YDWEStartup.dll");
 	if (startupModule)
 	{
-		TPFStartup pfStartup = (TPFStartup)GetProcAddress(startupModule, "YDWEStartup");
+		TPFStartup pfStartup = reinterpret_cast<TPFStartup>(GetProcAddress(startupModule, "YDWEStartup"));
 		if (pfStartup)
 			exitCode = pfStartup(currentInstance, previousInstance, pCommandLine, showType);
 
