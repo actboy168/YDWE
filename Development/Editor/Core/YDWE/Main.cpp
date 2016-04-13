@@ -86,10 +86,10 @@ INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR 
 #endif
 #endif
 	PathAppendW(binaryPath, msvcr_dll);
-	HMODULE msvcr100 = LoadLibraryW(binaryPath);
+	HMODULE msvcr140 = LoadLibraryW(binaryPath);
 	PathRemoveFileSpecW(binaryPath);
 	PathAppendW(binaryPath, msvcp_dll);
-	HMODULE msvcp100 = LoadLibraryW(binaryPath);
+	HMODULE msvcp120 = LoadLibraryW(binaryPath);
 
 	// ≥¢ ‘‘ÿ»ÎYDWEStartup.dll
 	HMODULE startupModule = LoadLibraryW(L"YDWEStartup.dll");
@@ -102,10 +102,10 @@ INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR 
 		FreeLibrary(startupModule);
 	}
 
-	if (msvcp100)
-		FreeLibrary(msvcp100);
-	if (msvcr100)
-		FreeLibrary(msvcr100);
+	if (msvcp120)
+		FreeLibrary(msvcp120);
+	if (msvcr140)
+		FreeLibrary(msvcr140);
 
 	return exitCode;
 }
