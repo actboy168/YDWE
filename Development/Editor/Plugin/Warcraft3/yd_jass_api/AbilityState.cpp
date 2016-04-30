@@ -234,6 +234,10 @@ namespace base { namespace warcraft3 { namespace japi {
 
 			if (s_vft)
 			{
+				if (::IsBadReadPtr(reinterpret_cast<const void*>(this), sizeof(uintptr_t)))
+				{
+					return false;
+				}
 				return (s_vft == *(uintptr_t*)this);
 			}
 
