@@ -81,7 +81,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		path = lua_tostring(L, -1);
 		if (path == NULL)
 			luaL_error(L, LUA_QL("package.%s") " must be a string", pname);
-		return searchpath(L, name, path, "\0", dirsep, is_local);
+		return searchpath(L, name, path, ".", dirsep, is_local);
 	}
 
 	static int checkload(lua_State *L, int stat, const char *filename) {
