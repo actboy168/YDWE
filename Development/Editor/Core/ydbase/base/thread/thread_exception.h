@@ -14,8 +14,13 @@ namespace base
 	public:
 		thread_exception();
 		thread_exception(int sys_error_code);
+#if _MSC_VER <= 1600
+		thread_exception(std::generic_errno ev, const char* what_arg);
+		thread_exception(std::generic_errno ev, const std::string& what_arg);  
+#else
 		thread_exception(std::errc ev, const char* what_arg);
 		thread_exception(std::errc ev, const std::string& what_arg);
+#endif
 		~thread_exception() throw();
 		int native_error() const;
 	};
@@ -25,8 +30,13 @@ namespace base
 	{
 	public:
 		thread_resource_error();
+#if _MSC_VER <= 1600
+		thread_resource_error(std::generic_errno ev, const char* what_arg);
+		thread_resource_error(std::generic_errno ev, const std::string& what_arg);
+#else																
 		thread_resource_error(std::errc ev, const char* what_arg);
 		thread_resource_error(std::errc ev, const std::string& what_arg);
+#endif
 		~thread_resource_error() throw();
 	};
 #pragma warning(pop)
