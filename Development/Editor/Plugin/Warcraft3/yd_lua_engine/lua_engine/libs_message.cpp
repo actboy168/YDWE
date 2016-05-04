@@ -210,11 +210,11 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			{
 				if (order >= 'A000')
 				{
-					printf("immediate_order, %c%c%c%c, %d, %X\n", ((char*)&order)[3], ((char*)&order)[2], ((char*)&order)[1], ((char*)&order)[0], unk, flags);
+					printf("immediate_order, %c%c%c%c, %X, %X\n", ((char*)&order)[3], ((char*)&order)[2], ((char*)&order)[1], ((char*)&order)[0], unk, flags);
 				}
 				else
 				{
-					printf("immediate_order, %X, %d, %X\n", order, unk, flags);
+					printf("immediate_order, %X, %X, %X\n", order, unk, flags);
 				}
 				return fast_call<int>(real::immediate_order, order, unk, flags);
 			}
