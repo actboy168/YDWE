@@ -102,9 +102,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			IMAGE::BLP_RGBA const& pixel_a = reinterpret_cast<IMAGE::BLP_RGBA*>(input_a_pic.GetData())[i];
 			IMAGE::BLP_RGBA const& pixel_b = reinterpret_cast<IMAGE::BLP_RGBA*>(input_b_pic.GetData())[i];
-			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Red + pixel_a.Alpha * pixel_a.Red) / 255);
-			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Green + pixel_a.Alpha * pixel_a.Green) / 255);
-			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Blue + pixel_a.Alpha * pixel_a.Blue) / 255);
+			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Red + pixel_a.Red) / 255);
+			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Green + pixel_a.Green) / 255);
+			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Blue + pixel_a.Blue) / 255);
 			*ptr++ = clamp_channel_bits8(255 - (255 - pixel_a.Alpha) * (255 - pixel_b.Alpha) / 255);
 		}
 		if (!IMAGE::BLP().Write(output_pic, output, kBlpSize, kBlpSize, 95))
