@@ -10,14 +10,17 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		jass::jinteger_t read_integer(lua_State* L, int index)
 		{
-			if (lua_isnil(L, index)) return 0;
-
-			if (lua_isnumber(L, index))
-				return lua_tointeger(L, index);
-
-			if (lua_isboolean(L, index))
+			switch (lua_type(L, index))
+			{
+			case LUA_TBOOLEAN:
 				return lua_toboolean(L, index) ? 1 : 0;
-
+			case LUA_TNUMBER:
+				return (jass::jinteger_t)lua_tonumber(L, index);
+			case LUA_TNIL:
+			case LUA_TNONE:
+			default:
+				return 0;
+			}
 			return 0;
 		}
 

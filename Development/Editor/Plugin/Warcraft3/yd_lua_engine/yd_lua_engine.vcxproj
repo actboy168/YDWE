@@ -59,7 +59,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4996;4244;4702</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(OpenSource)\Lua\5.2.3\include;$(OpenSource)\Lua\5.2.3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OpenSource)\Lua\Current\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -78,7 +78,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4996;4244;4702</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(OpenSource)\Lua\5.2.3\include;$(OpenSource)\Lua\5.2.3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OpenSource)\Lua\Current\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -90,38 +90,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lapi.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lauxlib.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lbaselib.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lbitlib.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lcode.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lcorolib.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lctype.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\ldblib.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\ldebug.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\ldo.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\ldump.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lfunc.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lgc.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\linit.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\liolib.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\llex.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lmathlib.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lmem.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\loadlib.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lobject.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lopcodes.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\loslib.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lparser.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lstate.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lstring.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lstrlib.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\ltable.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\ltablib.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\ltm.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lundump.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lvm.c" />
-    <ClCompile Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lzio.c" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="lua_engine\allow_yield.cpp" />
     <ClCompile Include="lua_engine\callback.cpp" />
@@ -154,26 +122,6 @@
     <None Include="yd_lua_engine.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lapi.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lcode.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lctype.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\ldebug.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\ldo.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lfunc.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lgc.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\llex.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\llimits.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lmem.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lobject.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lopcodes.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lparser.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lstate.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lstring.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\ltable.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\ltm.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lundump.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lvm.h" />
-    <ClInclude Include="..\..\..\..\..\OpenSource\Lua\5.2.3\src\lzio.h" />
     <ClInclude Include="lua_engine\allow_yield.h" />
     <ClInclude Include="lua_engine\callback.h" />
     <ClInclude Include="lua_engine\class_array.h" />

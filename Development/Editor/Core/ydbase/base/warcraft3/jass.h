@@ -10,7 +10,7 @@ namespace base { namespace warcraft3 { namespace jass {
 	typedef uint32_t jboolean_t;
 	typedef uint32_t jcode_t;
 	typedef uint32_t jhandle_t;
-	typedef uint32_t jinteger_t;
+	typedef int32_t  jinteger_t;
 	typedef uint32_t jreal_t;
 	typedef uint32_t jstring_t;
 

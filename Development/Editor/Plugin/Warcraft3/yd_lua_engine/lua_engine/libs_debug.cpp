@@ -10,7 +10,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 	static int functiondef(lua_State* L)
 	{
 		lua_getupvalue(L, 1, 1);
-		uintptr_t ptr = (uintptr_t)lua_tounsigned(L, -1);
+		uintptr_t ptr = (uintptr_t)lua_tointeger(L, -1);
 		const warcraft3::jass::func_value* nf = (const warcraft3::jass::func_value*)ptr;
 		if (nf && nf->is_valid())
 		{

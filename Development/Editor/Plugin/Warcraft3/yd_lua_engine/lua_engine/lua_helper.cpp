@@ -27,7 +27,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	static int panic(lua_State *L) 
 	{
-		luai_writestringerror("PANIC: unprotected error in call to Lua API (%s)\n", lua_tostring(L, -1));
+		lua_writestringerror("PANIC: unprotected error in call to Lua API (%s)\n", lua_tostring(L, -1));
 		return 0;
 	}
 
