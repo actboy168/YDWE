@@ -606,6 +606,59 @@ namespace base { namespace warcraft3 { namespace japi {
 		}
 	}
 
+	static uintptr_t add_stun = 0;
+	static uintptr_t remove_stun = 0;
+
+	static void searchAddStun(uintptr_t ptr)
+	{
+		ptr = next_opcode(ptr, 0xE8, 5);
+		ptr += 0x05;
+		ptr = next_opcode(ptr, 0xE8, 5);
+		add_stun = convert_function(ptr);
+	}
+
+	static void searchRemoveStun(uintptr_t ptr)
+	{
+		ptr = next_opcode(ptr, 0xE8, 5);
+		ptr += 0x05;
+		ptr = next_opcode(ptr, 0xE8, 5);
+		remove_stun = convert_function(ptr);
+	}
+
+	static int searchPauseUnit()
+	{
+		uintptr_t ptr = get_war3_searcher().search_string("PauseUnit");
+		ptr = *(uintptr_t*)(ptr + 0x05);
+		ptr = next_opcode(ptr, 0xE8, 5);
+		ptr += 0x05;
+		ptr = next_opcode(ptr, 0xE8, 5);
+		ptr += 0x05;
+		ptr = next_opcode(ptr, 0xE8, 5);
+		searchAddStun(convert_function(ptr));
+		ptr += 0x05;
+		ptr = next_opcode(ptr, 0xE8, 5);
+		searchRemoveStun(convert_function(ptr));
+		return 0;
+	}
+
+	void _cdecl EXPauseUnit(jass::jhandle_t unit_handle, jass::jboolean_t flag)
+	{
+		uint32_t object = handle_to_object(unit_handle);
+		if (!object)
+		{
+			return ;
+		}
+		static int f = searchPauseUnit();
+		if (flag)
+		{
+			this_call<void>(add_stun, object, 0);
+		}
+		else
+		{
+			this_call<void>(remove_stun, object);
+		}
+	}
+
 	uint32_t _cdecl EXGetObject(uint32_t unit_handle)
 	{
 		return handle_to_object(unit_handle);
@@ -615,7 +668,7 @@ namespace base { namespace warcraft3 { namespace japi {
 	{
 		jass::japi_hook("GetUnitState", &RealGetUnitState, (uintptr_t)FakeGetUnitState);
 		jass::japi_hook("SetUnitState", &RealSetUnitState, (uintptr_t)FakeSetUnitState);
-		//jass::async_add((uintptr_t)EXGetObject, "EXGetObject", "(Hhandle;)I");
+		jass::japi_add((uintptr_t)EXPauseUnit, "EXPauseUnit", "(Hunit;B)V");
+		//jass::japi_add((uintptr_t)EXGetObject, "EXGetObject", "(Hhandle;)I");
 	}
-
 }}}
