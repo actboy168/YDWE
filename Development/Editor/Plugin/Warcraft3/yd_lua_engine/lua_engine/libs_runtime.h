@@ -1,12 +1,29 @@
 #pragma once
 
-#include <lua.hpp>
+#include <lua.hpp>	
+#include <stdint.h>	
+
+#define LUA_PERFTRACE(ID) \
+	::base::warcraft3::lua_engine::runtime::perftrace::guard guard_ ## __LINE__( ::base::warcraft3::lua_engine::runtime::perftrace:: ## ID)
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime {
 		extern int handle_level;
 		extern bool sleep;
 		extern bool catch_crash;
 		extern bool enable_console;
+
+		namespace perftrace {
+			static const size_t kJassCall = 0;
+			static const size_t kJassEvent = 1;
+
+			struct guard
+			{
+				guard(size_t id);
+				~guard();
+				int id_;
+				uint64_t start_;
+			};
+		}
 
 		void initialize();
 

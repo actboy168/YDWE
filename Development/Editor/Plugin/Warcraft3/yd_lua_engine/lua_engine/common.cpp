@@ -101,6 +101,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int jass_call_native_function(lua_State* L, const jass::func_value* nf, uintptr_t func_address)
 	{
+		LUA_PERFTRACE(kJassCall);
+
 		size_t param_size = nf->get_param().size();
 
 		if ((int)param_size > lua_gettop(L))

@@ -178,6 +178,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	uint32_t __fastcall jass_callback(uint32_t ls, uint32_t param)
 	{
+		LUA_PERFTRACE(kJassEvent);
 		return safe_call_ref((lua_State*)ls, param, 0, jass::TYPE_BOOLEAN);
 	}
 
