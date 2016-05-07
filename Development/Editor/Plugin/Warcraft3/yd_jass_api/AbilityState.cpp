@@ -669,6 +669,13 @@ namespace base { namespace warcraft3 { namespace japi {
 		return true;
 	}
 
+	bool __cdecl EXSetAbilityAEmeUnitID(uint32_t ability_handle, uint32_t value)
+	{
+		ability_data* ability_ptr = (ability_data*)ability_pool.at(ability_handle);
+		*(uint32_t*)((uintptr_t)ability_ptr + 0x63 * 4) = value;
+		return true;
+	}
+
 	enum BUFF_DATA_TYPE
 	{
 		BUFF_DATA_ART = 1,
@@ -791,8 +798,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXGetAbilityDataInteger, "EXGetAbilityDataInteger", "(Hability;II)I");
 		jass::japi_add((uintptr_t)EXSetAbilityDataInteger, "EXSetAbilityDataInteger", "(Hability;III)B");
 		jass::japi_add((uintptr_t)EXGetAbilityDataString,  "EXGetAbilityDataString",  "(Hability;II)S");
-		jass::japi_add((uintptr_t)EXSetAbilityDataString,  "EXSetAbilityDataString",  "(Hability;IIS)B");
+		jass::japi_add((uintptr_t)EXSetAbilityDataString,  "EXSetAbilityDataString",  "(Hability;IIS)B");	   
+		jass::japi_add((uintptr_t)EXSetAbilityAEmeUnitID,  "EXSetAbilityAEmeUnitID",  "(Hability;I)B");
 		jass::japi_add((uintptr_t)EXGetBuffDataString,     "EXGetBuffDataString",     "(II)S");
-		jass::japi_add((uintptr_t)EXSetBuffDataString,     "EXSetBuffDataString",     "(IIS)B");
+		jass::japi_add((uintptr_t)EXSetBuffDataString,     "EXSetBuffDataString",     "(IIS)B"); 
 	}
 }}}
