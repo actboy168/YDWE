@@ -61,11 +61,6 @@ YDWERecordClear=0,player
 _YDWERecordClear_Defaults=Player00
 _YDWERecordClear_Category=TC_YDSL
 
-YDWERPGSetTitle=0,integer,string,string
-_YDWERPGSetTitle_Defaults=0,_,_
-_YDWERPGSetTitle_Limits=0,7,_,_,_,_
-_YDWERPGSetTitle_Category=TC_YDSL
-
 YDWERPGSetKey=0,player,string,integer
 _YDWERPGSetKey_Defaults=Player00,_,5
 _YDWERPGSetKey_Category=TC_YDSL
