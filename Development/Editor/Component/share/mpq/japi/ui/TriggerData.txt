@@ -35,6 +35,18 @@ _YDWESetUnitAbilityDataString_Defaults=GetTriggerUnit,_,1,ABILITY_DATA_TIP,_
 _YDWESetUnitAbilityDataString_Limits=_,_,_,_,1,_,_,_,_,_
 _YDWESetUnitAbilityDataString_Category=TC_UNIT
 
+YDWEUnitTransform=1,unit,abilcode,unitcode
+_YDWEUnitTransform_Defaults=GetTriggerUnit,AEme,hfoo
+_YDWEUnitTransform_Category=TC_UNIT
+
+YDWEUnitAddStun=1,unit
+_YDWEUnitAddStun_Defaults=GetTriggerUnit
+_YDWEUnitAddStun_Category=TC_UNIT
+
+YDWEUnitRemoveStun=1,unit
+_YDWEUnitRemoveStun_Defaults=GetTriggerUnit
+_YDWEUnitRemoveStun_Category=TC_UNIT
+
 YDWESetEventDamage=0,real
 _YDWESetEventDamage_Defaults=0.
 _YDWESetEventDamage_Category=TC_YDFC

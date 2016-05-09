@@ -15,6 +15,18 @@ YDWESetUnitAbilityDataString="设置技能数据 (字符串) [JAPI]"
 YDWESetUnitAbilityDataString="设置 ",~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据," 为 ",~Value
 YDWESetUnitAbilityDataStringHint=""
 
+YDWEUnitTransform="单位变身 [JAPI]"
+YDWEUnitTransform=~单位," ",~技能,"为 ",~目标单位
+YDWEUnitTransformHint="技能请填恶魔猎手的变身<AEme>或其复制品"
+
+YDWEUnitAddStun="单位添加晕眩 [JAPI]"
+YDWEUnitAddStun=~单位," 添加晕眩"
+YDWEUnitAddStunHint=""
+
+YDWEUnitRemoveStun="单位移除晕眩 [JAPI]"
+YDWEUnitRemoveStun=~单位," 移除晕眩"
+YDWEUnitRemoveStunHint="别用来移风暴之锤之类的晕眩。因为它只会移除晕眩并不会异常晕眩的buff。"
+
 YDWESetEventDamage="设置伤害值 [JAPI]"
 YDWESetEventDamage="设置单位所受伤害为 ",~伤害值
 YDWESetEventDamageHint="修改伤害事件里的伤害值，不能在等待之后使用。"

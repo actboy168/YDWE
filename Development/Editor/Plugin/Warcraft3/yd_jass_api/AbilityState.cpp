@@ -672,6 +672,10 @@ namespace base { namespace warcraft3 { namespace japi {
 	bool __cdecl EXSetAbilityAEmeUnitID(uint32_t ability_handle, uint32_t value)
 	{
 		ability_data* ability_ptr = (ability_data*)ability_pool.at(ability_handle);
+		if (!ability_ptr)
+		{
+			return false;
+		}
 		*(uint32_t*)((uintptr_t)ability_ptr + 0x63 * 4) = value;
 		return true;
 	}
