@@ -669,7 +669,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		return true;
 	}
 
-	bool __cdecl EXSetAbilityAEmeUnitID(uint32_t ability_handle, uint32_t value)
+	bool __cdecl EXSetAbilityAEmeDataA(uint32_t ability_handle, uint32_t value)
 	{
 		ability_data* ability_ptr = (ability_data*)ability_pool.at(ability_handle);
 		if (!ability_ptr)
@@ -803,7 +803,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXSetAbilityDataInteger, "EXSetAbilityDataInteger", "(Hability;III)B");
 		jass::japi_add((uintptr_t)EXGetAbilityDataString,  "EXGetAbilityDataString",  "(Hability;II)S");
 		jass::japi_add((uintptr_t)EXSetAbilityDataString,  "EXSetAbilityDataString",  "(Hability;IIS)B");	   
-		jass::japi_add((uintptr_t)EXSetAbilityAEmeUnitID,  "EXSetAbilityAEmeUnitID",  "(Hability;I)B");
+		jass::japi_add((uintptr_t)EXSetAbilityAEmeDataA,   "EXSetAbilityAEmeDataA",   "(Hability;I)B");
 		jass::japi_add((uintptr_t)EXGetBuffDataString,     "EXGetBuffDataString",     "(II)S");
 		jass::japi_add((uintptr_t)EXSetBuffDataString,     "EXSetBuffDataString",     "(IIS)B"); 
 	}

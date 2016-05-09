@@ -91,16 +91,16 @@ library YDWEAbilityState
 		return EXSetAbilityDataString(EXGetUnitAbility(u, abilcode), level, data_type, value)
 	endfunction
 
-	native EXSetAbilityAEmeUnitID takes ability abil, integer unitid returns boolean
+	native EXSetAbilityAEmeDataA takes ability abil, integer unitid returns boolean
 	native EXPauseUnit takes unit u, boolean flag returns nothing
 
 	function YDWEUnitTransform takes unit u, integer abilcode, integer targetid returns nothing
 		call UnitAddAbility(u, abilcode)
 		call EXSetAbilityDataInteger(EXGetUnitAbility(u, abilcode), 1, ABILITY_DATA_UNITID, GetUnitTypeId(u))
-		call EXSetAbilityAEmeUnitID(EXGetUnitAbility(u, abilcode), GetUnitTypeId(u))
+		call EXSetAbilityAEmeDataA(EXGetUnitAbility(u, abilcode), GetUnitTypeId(u))
 		call UnitRemoveAbility(u, abilcode)
 		call UnitAddAbility(u, abilcode)
-		call EXSetAbilityAEmeUnitID(EXGetUnitAbility(u, abilcode), targetid)
+		call EXSetAbilityAEmeDataA(EXGetUnitAbility(u, abilcode), targetid)
 		call UnitRemoveAbility(u, abilcode)
 	endfunction
 
