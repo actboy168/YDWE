@@ -25,7 +25,7 @@ YDWEUnitAddStunHint=""
 
 YDWEUnitRemoveStun="单位移除晕眩 [JAPI]"
 YDWEUnitRemoveStun=~单位," 移除晕眩"
-YDWEUnitRemoveStunHint="别用来移风暴之锤之类的晕眩。因为它只会移除晕眩并不会异常晕眩的buff。"
+YDWEUnitRemoveStunHint="别用来移风暴之锤之类的晕眩。因为它只会移除晕眩并不会移除晕眩的buff。"
 
 YDWESetEventDamage="设置伤害值 [JAPI]"
 YDWESetEventDamage="设置单位所受伤害为 ",~伤害值
