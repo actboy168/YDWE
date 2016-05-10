@@ -57,8 +57,8 @@ namespace base { namespace warcraft3 { namespace jass {
 	_BASE_API const char* from_trigstring(const char* val);
 	_BASE_API const char* from_stringid  (uint32_t strid);
 
-	_BASE_API void        handle_add_ref (jhandle_t h);
-	_BASE_API void        handle_release (jhandle_t h);
+	_BASE_API void        handle_ref     (jhandle_t h);
+	_BASE_API void        handle_unref   (jhandle_t h);
 
 	_BASE_API uintptr_t   call           (const char* name, ...);
 	_BASE_API uintptr_t   call           (uintptr_t func_address, const uintptr_t* param_list, size_t param_list_size);

@@ -20,9 +20,6 @@
     <Filter Include="lua_engine\class">
       <UniqueIdentifier>{aee90470-d9bf-4dff-9e10-8f4b3519fde6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="lua_core">
-      <UniqueIdentifier>{4904a974-813d-4936-948a-f52537f9206a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />

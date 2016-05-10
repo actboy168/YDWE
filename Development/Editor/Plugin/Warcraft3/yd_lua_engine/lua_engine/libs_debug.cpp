@@ -137,7 +137,19 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 		jassbind::push_handle(L, lua_tointeger(L, 1));
 		return 1;
 	}
-	
+
+	static int handle_ref(lua_State* L)
+	{
+		jass::handle_ref(jassbind::read_handle(L, 1));
+		return 1;
+	}
+
+	static int handle_unref(lua_State* L)
+	{
+		jass::handle_unref(jassbind::read_handle(L, 1));
+		return 1;
+	}
+
 	int open(lua_State* L)
 	{
 		lua_newtable(L);
@@ -151,6 +163,8 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 				{ "handlecount", handlecount },
 				{ "h2i", h2i },
 				{ "i2h", i2h },
+				{ "handle_ref", handle_ref },
+				{ "handle_unref", handle_unref },
 				{ NULL, NULL },
 			};
 			luaL_setfuncs(L, lib, 0);

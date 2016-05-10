@@ -196,12 +196,12 @@ namespace base { namespace warcraft3 { namespace jass {
 		}
 	}
 
-	void handle_add_ref(jass::jhandle_t h)
+	void handle_ref(jass::jhandle_t h)
 	{
 		handle_set_ref(h, false);
 	}
 
-	void handle_release(jass::jhandle_t h)
+	void handle_unref(jass::jhandle_t h)
 	{
 		handle_set_ref(h, true);
 	}
