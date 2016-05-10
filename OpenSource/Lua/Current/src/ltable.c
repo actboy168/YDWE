@@ -134,7 +134,12 @@ static Node *mainposition (const Table *t, const TValue *key) {
       return hashpointer(t, fvalue(key));
     default:
       lua_assert(!ttisdeadkey(key));
-      return hashpointer(t, gcvalue(key));
+	  GCObject * gc = gcvalue(key);
+	  if (gc->gchash == 0)
+	  {
+		  return hashpointer(t, gc);
+	  }
+	  return hashint(t, ttype(key) * gc->gchash);
   }
 }
 

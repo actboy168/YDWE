@@ -259,6 +259,7 @@ LUA_API lua_State *lua_newthread (lua_State *L) {
   luaC_checkGC(L);
   /* create new thread */
   L1 = &cast(LX *, luaM_newobject(L, LUA_TTHREAD, sizeof(LX)))->l;
+  L1->gchash = 0;
   L1->marked = luaC_white(g);
   L1->tt = LUA_TTHREAD;
   /* link it on list 'allgc' */
@@ -303,6 +304,7 @@ LUA_API lua_State *lua_newstate (lua_Alloc f, void *ud) {
   L->next = NULL;
   L->tt = LUA_TTHREAD;
   g->currentwhite = bitmask(WHITE0BIT);
+  L->gchash = 0;
   L->marked = luaC_white(g);
   preinit_thread(L, g);
   g->frealloc = f;
@@ -349,6 +351,7 @@ LUA_API lua_State *lua_newstate2 (lua_Alloc f, void *ud, unsigned int seed) {
   L->next = NULL;
   L->tt = LUA_TTHREAD;
   g->currentwhite = bitmask(WHITE0BIT);
+  L->gchash = 0;
   L->marked = luaC_white(g);
   preinit_thread(L, g);
   g->frealloc = f;
@@ -389,5 +392,3 @@ LUA_API void lua_close (lua_State *L) {
   lua_lock(L);
   close_state(L);
 }
-
-

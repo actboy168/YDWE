@@ -1296,3 +1296,12 @@ LUA_API void lua_upvaluejoin (lua_State *L, int fidx1, int n1,
 }
 
 
+LUA_API void lua_setgchash(lua_State *L, int idx) {
+	StkId o;
+	lua_lock(L);
+	api_checknelems(L, 1);
+	o = index2addr(L, idx);
+	api_check(L, iscollectable(o), "gcvalue expected");
+	L->top--;
+	lua_unlock(L);
+}

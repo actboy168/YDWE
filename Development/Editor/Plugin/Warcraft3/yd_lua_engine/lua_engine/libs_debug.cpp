@@ -150,6 +150,12 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 		return 1;
 	}
 
+	static int gchash(lua_State* L)
+	{
+		lua_setgchash(L, 1);
+		return 0;
+	}
+
 	int open(lua_State* L)
 	{
 		lua_newtable(L);
@@ -165,6 +171,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 				{ "i2h", i2h },
 				{ "handle_ref", handle_ref },
 				{ "handle_unref", handle_unref },
+				{ "gchash", gchash },
 				{ NULL, NULL },
 			};
 			luaL_setfuncs(L, lib, 0);
