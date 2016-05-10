@@ -1302,6 +1302,8 @@ LUA_API void lua_setgchash(lua_State *L, int idx) {
 	api_checknelems(L, 1);
 	o = index2addr(L, idx);
 	api_check(L, iscollectable(o), "gcvalue expected");
+	api_check(L, ttisinteger(L->top), "integer expected");
+	gcvalue(o)->gchash = ivalue(L->top);
 	L->top--;
 	lua_unlock(L);
 }
