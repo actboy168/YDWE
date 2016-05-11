@@ -251,6 +251,9 @@
     <ClCompile Include="base\warcraft3\message_dispatch.cpp">
       <Filter>base\warcraft3</Filter>
     </ClCompile>
+    <ClCompile Include="base\hook\replace_import.cpp">
+      <Filter>base\hook</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -544,6 +547,9 @@
     </ClInclude>
     <ClInclude Include="base\warcraft3\message_dispatch.h">
       <Filter>base\warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="base\hook\replace_import.h">
+      <Filter>base\hook</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -117,6 +117,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base\hook\dyn_iat.cpp" />
+    <ClCompile Include="base\hook\replace_import.cpp" />
     <ClCompile Include="base\thread\thread.cpp" />
     <ClCompile Include="base\thread\thread_exception.cpp" />
     <ClCompile Include="base\warcraft3\command_line.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="base\hook\iat.h" />
     <ClInclude Include="base\hook\iat_manager.h" />
     <ClInclude Include="base\hook\inline.h" />
+    <ClInclude Include="base\hook\replace_import.h" />
     <ClInclude Include="base\i18n\libintl.h" />
     <ClInclude Include="base\i18n\mofile.h" />
     <ClInclude Include="base\lockfree\queue.h" />
