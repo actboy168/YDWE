@@ -243,23 +243,23 @@ namespace base { namespace warcraft3 { namespace japi {
 			return true;
 		}
 
-		bool __stdcall SFileLoadFile(const char* filepath, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
+		int __stdcall SFileLoadFile(const char* filepath, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
 		{
 			if (!buffer_ptr || !filepath)
 			{
-				return base::std_call<bool>(real::SFileLoadFile, filepath, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
+				return base::std_call<int>(real::SFileLoadFile, filepath, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
 			}
 			if (read_virtual_button_blp(filepath, buffer_ptr, size_ptr, reserve_size, overlapped_ptr))
 			{
 				g_lastfilepath = filepath;
-				return true;
+				return 1;
 			}
 
-			bool suc = base::std_call<bool>(real::SFileLoadFile, filepath, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
+			int suc = base::std_call<int>(real::SFileLoadFile, filepath, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
 			if (suc)
 			{
 				g_lastfilepath = filepath;
-				return true;
+				return suc;
 			}
 #define DisString "replaceabletextures\\commandbuttonsdisabled\\dis"
 #define StrLen(s) (sizeof(s) - 1)

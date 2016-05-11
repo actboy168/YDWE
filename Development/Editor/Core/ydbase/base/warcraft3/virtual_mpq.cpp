@@ -197,49 +197,49 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		//	return base::std_call<bool>(real::SFileGetArchiveName, mpq_handle, name, size);
 		//}
 
-		bool __stdcall SFileLoadFile(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
+		int __stdcall SFileLoadFile(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
 		{
 			if (filesystem::SFileLoadFile(filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr))
 			{
-				return true;
+				return 1;
 			}
 
-			return base::std_call<bool>(real::SFileLoadFile, filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
+			return base::std_call<int>(real::SFileLoadFile, filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
 		}
 
-		bool __stdcall SFileUnloadFile(void* buffer)
+		int __stdcall SFileUnloadFile(void* buffer)
 		{
-			return base::std_call<bool>(real::SFileUnloadFile, buffer);
+			return base::std_call<int>(real::SFileUnloadFile, buffer);
 		}
 
-		bool __stdcall SFileLoadFileEx(HANDLE mpq_handle, const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, uint32_t search_scope, OVERLAPPED* overlapped_ptr)
+		int __stdcall SFileLoadFileEx(HANDLE mpq_handle, const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, uint32_t search_scope, OVERLAPPED* overlapped_ptr)
 		{
 			if (mpq_handle == 0 && filesystem::SFileLoadFile(filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr))
 			{
-				return true;
+				return 1;
 			}
 
-			return base::std_call<bool>(real::SFileLoadFileEx, mpq_handle, filename, buffer_ptr, size_ptr, reserve_size, search_scope, overlapped_ptr);
+			return base::std_call<int>(real::SFileLoadFileEx, mpq_handle, filename, buffer_ptr, size_ptr, reserve_size, search_scope, overlapped_ptr);
 		}
 
-		bool __stdcall SFileFileExists(const char* filename)
+		int __stdcall SFileFileExists(const char* filename)
 		{
 			if (filesystem::SFileFileExists(filename))
 			{
-				return true;
+				return 1;
 			}
 
-			return base::std_call<bool>(real::SFileFileExists, filename);
+			return base::std_call<int>(real::SFileFileExists, filename);
 		}
 
-		bool __stdcall SFileFileExistsEx(HANDLE mpq_handle, const char* filename, uint32_t flags)
+		int __stdcall SFileFileExistsEx(HANDLE mpq_handle, const char* filename, uint32_t flags)
 		{
 			if (mpq_handle == 0 && filesystem::SFileFileExists(filename))
 			{
-				return true;
+				return 1;
 			}
 
-			return base::std_call<bool>(real::SFileFileExistsEx, mpq_handle, filename, flags);
+			return base::std_call<int>(real::SFileFileExistsEx, mpq_handle, filename, flags);
 		}
 
 		//bool __stdcall SFileReadFileEx(HANDLE file_handle, void* buffer, uint32_t size, uint32_t* size_ptr, uint32_t unk, OVERLAPPED* overlapped_ptr, uint32_t unk2)
