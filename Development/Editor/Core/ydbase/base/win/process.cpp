@@ -76,7 +76,11 @@ namespace base { namespace win {
 					{
 						result = false;
 					}
-					::ResumeThread(process_information->hThread);
+
+					if (!(creation_flags & CREATE_SUSPENDED))
+					{ 
+						::ResumeThread(process_information->hThread);
+					}
 				}
 
 				return result;
