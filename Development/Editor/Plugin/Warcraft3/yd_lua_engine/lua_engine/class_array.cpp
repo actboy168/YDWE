@@ -63,7 +63,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		luaL_getmetatable(L, LUA_JASS_ARRAY);
 		lua_setmetatable(L, -2);
 		lua_pushstring(L, "__value");
-		lua_tointeger(L, value);
+		lua_pushinteger(L, value);
 		lua_rawset(L, -3);
 		return 1;
 	}

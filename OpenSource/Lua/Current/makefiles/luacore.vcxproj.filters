@@ -197,5 +197,8 @@
     <ClInclude Include="..\include\lauxlib.h">
       <Filter>auxiliary-library</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\lprefix.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
