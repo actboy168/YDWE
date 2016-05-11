@@ -3,6 +3,7 @@
 #include <base/config.h>
 #include <boost/filesystem.hpp>
 #include <Windows.h>
+#include <map>
 
 namespace base { namespace win {
 
@@ -17,7 +18,8 @@ namespace base { namespace win {
 		
 		process();
 		~process();
-		bool     inject(const boost::filesystem::path& dll_path);
+		bool     inject(const boost::filesystem::path& dllpath);
+		bool     replace(const boost::filesystem::path& dllpath, const char* dllname);
 		bool     hide_window();
 		bool     redirect(HANDLE std_input, HANDLE std_output, HANDLE std_error);
 		bool     create(const boost::filesystem::path& application, const std::wstring& command_line, const boost::filesystem::path& current_directory);
@@ -35,6 +37,10 @@ namespace base { namespace win {
 	private:
 		uint32_t                statue_;
 		boost::filesystem::path inject_dll_;
+#pragma warning(push)
+#pragma warning(disable:4251)
+		std::map<std::string, boost::filesystem::path> replace_dll_;
+#pragma warning(pop)
 		STARTUPINFOW            si_;
 		PROCESS_INFORMATION     pi_;
 		bool                    inherit_handle_;

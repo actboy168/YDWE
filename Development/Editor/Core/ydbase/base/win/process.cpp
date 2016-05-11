@@ -1,6 +1,8 @@
 #include <base/win/process.h>
-#include <base/hook/detail/inject_dll.h>
-#include <base/util/dynarray.h>
+#include <base/hook/detail/inject_dll.h>   
+#include <base/hook/replace_import.h>
+#include <base/util/dynarray.h>	  
+#include <base/util/foreach.h>
 #include <Windows.h>
 #include <memory>
 #include <strsafe.h>
@@ -61,35 +63,48 @@ namespace base { namespace win {
 			const wchar_t*                 current_directory,
 			LPSTARTUPINFOW                 startup_info,
 			LPPROCESS_INFORMATION          process_information,
-			const boost::filesystem::path& dll_path)
+			const boost::filesystem::path& inject_dll,
+			const std::map<std::string, boost::filesystem::path>& replace_dll)
 		{
-			if (boost::filesystem::exists(dll_path))
+			bool need_pause = !replace_dll.empty();
+#if defined(DISABLE_DETOURS)  	
+			need_pause = need_pause || boost::filesystem::exists(inject_dll);
+#endif
+			bool suc = false;
+			if (boost::filesystem::exists(inject_dll))
 			{
 #if !defined(DISABLE_DETOURS)
-				return create_process_use_detour(application, command_line, inherit_handle, creation_flags, current_directory, startup_info, process_information, dll_path.string().c_str());
+				suc = create_process_use_detour(application, command_line, inherit_handle, need_pause ? (creation_flags | CREATE_SUSPENDED) : creation_flags, current_directory, startup_info, process_information, inject_dll.string().c_str());
 #else
-				bool result = create_process_use_system(application, command_line, inherit_handle, creation_flags | CREATE_SUSPENDED, current_directory, startup_info, process_information);
-
-				if (result) 
+				assert(need_pause);
+				suc = create_process_use_system(application, command_line, inherit_handle, creation_flags | CREATE_SUSPENDED, current_directory, startup_info, process_information);
+				if (suc) 
 				{
-					if (!hook::detail::inject_dll(process_information->hProcess, process_information->hThread, dll_path.c_str()))
-					{
-						result = false;
-					}
-
-					if (!(creation_flags & CREATE_SUSPENDED))
-					{ 
-						::ResumeThread(process_information->hThread);
-					}
+					hook::detail::inject_dll(process_information->hProcess, process_information->hThread, inject_dll.c_str());
 				}
-
-				return result;
 #endif
 			}
 			else
 			{
-				return create_process_use_system(application, command_line, inherit_handle, creation_flags, current_directory, startup_info, process_information);
+				suc = create_process_use_system(application, command_line, inherit_handle, need_pause ? (creation_flags | CREATE_SUSPENDED) : creation_flags, current_directory, startup_info, process_information);
 			}
+
+			if (suc && !replace_dll.empty())
+			{
+				foreach(auto it, replace_dll)
+				{
+					hook::ReplaceImport(process_information->hProcess, it.first.c_str(), it.second.string().c_str());
+				}
+			}
+
+			if (suc && need_pause)
+			{
+				if (!(creation_flags & CREATE_SUSPENDED))
+				{
+					::ResumeThread(process_information->hThread);
+				}
+			}
+			return suc;
 		}
 	}
 
@@ -149,14 +164,24 @@ namespace base { namespace win {
 		close();
 	}
 
-	bool process::inject(const boost::filesystem::path& dll_path)
+	bool process::inject(const boost::filesystem::path& dllpath)
 	{
 		if (statue_ == PROCESS_STATUE_READY)
 		{
-			inject_dll_ = dll_path;
+			inject_dll_ = dllpath;
 			return true;
 		}
 
+		return false;
+	}
+
+	bool process::replace(const boost::filesystem::path& dllpath, const char* dllname)
+	{
+		if (statue_ == PROCESS_STATUE_READY)
+		{
+			replace_dll_[dllname] = dllpath;
+			return true;
+		}
 		return false;
 	}
 
@@ -218,7 +243,7 @@ namespace base { namespace win {
 						inherit_handle_,
 						NORMAL_PRIORITY_CLASS, 
 						boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
-						&si_, &pi_, inject_dll_
+						&si_, &pi_, inject_dll_, replace_dll_
 					))
 				{
 					return false;
@@ -235,7 +260,7 @@ namespace base { namespace win {
 						inherit_handle_,
 						NORMAL_PRIORITY_CLASS, 
 						boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
-						&si_, &pi_, inject_dll_
+						&si_, &pi_, inject_dll_, replace_dll_
 						))
 				{
 					return false;
@@ -261,7 +286,7 @@ namespace base { namespace win {
 					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					nullptr, 
-					&si_, &pi_, inject_dll_
+					&si_, &pi_, inject_dll_, replace_dll_
 					))
 				{
 					return false;
@@ -278,7 +303,7 @@ namespace base { namespace win {
 					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					nullptr, 
-					&si_, &pi_, inject_dll_
+					&si_, &pi_, inject_dll_, replace_dll_
 					))
 				{
 					return false;
@@ -304,7 +329,7 @@ namespace base { namespace win {
 					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
-					&si_, &pi_, inject_dll_
+					&si_, &pi_, inject_dll_, replace_dll_
 					))
 				{
 					return false;
@@ -321,7 +346,7 @@ namespace base { namespace win {
 					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
-					&si_, &pi_, inject_dll_
+					&si_, &pi_, inject_dll_, replace_dll_
 					))
 				{
 					return false;
@@ -347,7 +372,7 @@ namespace base { namespace win {
 					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					nullptr, 
-					&si_, &pi_, inject_dll_
+					&si_, &pi_, inject_dll_, replace_dll_
 					))
 				{
 					return false;
@@ -364,7 +389,7 @@ namespace base { namespace win {
 					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
 					nullptr, 
-					&si_, &pi_, inject_dll_
+					&si_, &pi_, inject_dll_, replace_dll_
 					))
 				{
 					return false;

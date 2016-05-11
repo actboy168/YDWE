@@ -88,7 +88,21 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 			cmd.add(L"window");
 		}
 
+
 		base::win::process warcraft3_process;
+
+		try {
+			if (table["War3Patch"]["Option"] == "2")
+			{
+				boost::filesystem::path stormdll = ydwe_path / L"share" / L"patch" / table["War3Patch"]["DirName"] / L"Storm.dll";
+				if (boost::filesystem::exists(stormdll))
+				{
+					warcraft3_process.replace(stormdll, "Storm.dll");
+				}
+			}
+		}
+		catch (...) {
+		}
 
 		if (boost::filesystem::exists(inject_dll))
 		{
