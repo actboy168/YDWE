@@ -5,9 +5,11 @@
 #include <base/warcraft3/version.h>
 #include <base/warcraft3/jass.h>
 #include <cassert>	 
-#include <base/warcraft3/hashtable.h>
+#include <base/warcraft3/hashtable.h>  
+#include "StringPool.h"
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace base { namespace warcraft3 { namespace japi {	  
+
 	enum UNIT_STATE
 	{
 	    // original
@@ -664,10 +666,62 @@ namespace base { namespace warcraft3 { namespace japi {
 		return handle_to_object(unit_handle);
 	}
 
+	static uintptr_t search_get_unit_data()
+	{
+		uintptr_t ptr = get_war3_searcher().search_string("RegisterModel");
+		ptr += 4;
+		ptr = next_opcode(ptr, 0xE8, 5);
+		return convert_function(ptr);
+	}
+
+	static uintptr_t GetUnitData(jass::jinteger_t unitcode)
+	{
+		static uintptr_t get_unit_data = search_get_unit_data();
+		return fast_call<uintptr_t>(get_unit_data, unitcode);
+	}
+
+	jass::jstring_t _cdecl EXGetUnitString(jass::jinteger_t unitcode, jass::jinteger_t type)
+	{
+		uintptr_t ptr = GetUnitData(unitcode);
+		const char * result = (const char*)*(uintptr_t*)(ptr + type * 4);
+		if (!result || IsBadStringPtrA(result, 256))
+		{
+			return  jass::create_string("Default string");
+		}
+		return jass::create_string(result);
+	}
+
+	extern string_pool_t string_pool;
+
+	jass::jboolean_t _cdecl EXSetUnitString(jass::jinteger_t unitcode, jass::jinteger_t type, jass::jstring_t value)
+	{
+		uintptr_t ptr = GetUnitData(unitcode);
+		char ** result = (char**)(ptr + type * 4);
+		if (!*result || IsBadStringPtrA(*result, 256))
+		{
+			return  jass::jfalse;
+		}
+		const char* value_str = jass::from_string(value);
+		if (value_str)
+		{
+			size_t      value_len = strlen(value_str);
+			uintptr_t   value_buf = string_pool.malloc(value_len + 1);
+			*result = (char*)value_buf;
+			strncpy_s(*result, value_len + 1, value_str, value_len);
+		}
+		else
+		{
+			*result = 0;
+		}
+		return jass::jtrue;
+	}
+
 	void InitializeUnitState()
 	{
 		jass::japi_hook("GetUnitState", &RealGetUnitState, (uintptr_t)FakeGetUnitState);
 		jass::japi_hook("SetUnitState", &RealSetUnitState, (uintptr_t)FakeSetUnitState);
+		jass::japi_add((uintptr_t)EXGetUnitString, "EXGetUnitString", "(II)S");
+		jass::japi_add((uintptr_t)EXSetUnitString, "EXSetUnitString", "(IIS)B");
 		jass::japi_add((uintptr_t)EXPauseUnit, "EXPauseUnit", "(Hunit;B)V");
 		//jass::japi_add((uintptr_t)EXGetObject, "EXGetObject", "(Hhandle;)I");
 	}
