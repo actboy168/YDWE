@@ -672,14 +672,20 @@ namespace base { namespace warcraft3 { namespace japi {
 
 		string_pool.free((uintptr_t)*buf);
 		const char* value_str = jass::from_string(value);
-		size_t      value_len = strlen(value_str);
-		uintptr_t   value_buf = string_pool.malloc(value_len + 1);
-
-		if (value_buf)
+		if (value_str)
 		{
+			size_t      value_len = strlen(value_str);
+			uintptr_t   value_buf = string_pool.malloc(value_len + 1);
 			*buf = (char*)value_buf;
-			strncpy_s(*buf, value_len + 1, value_str, value_len);
-			//this_call<void>(0x6F021FB0, ability_pool.at(ability_handle));
+			if (value_buf)
+			{
+				strncpy_s(*buf, value_len + 1, value_str, value_len);
+				//this_call<void>(0x6F021FB0, ability_pool.at(ability_handle));
+			}
+		}
+		else
+		{
+			*buf = 0;
 		}
 		return jass::jtrue;
 	}

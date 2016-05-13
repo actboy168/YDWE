@@ -707,7 +707,10 @@ namespace base { namespace warcraft3 { namespace japi {
 			size_t      value_len = strlen(value_str);
 			uintptr_t   value_buf = string_pool.malloc(value_len + 1);
 			*result = (char*)value_buf;
-			strncpy_s(*result, value_len + 1, value_str, value_len);
+			if (value_buf)
+			{
+				strncpy_s(*result, value_len + 1, value_str, value_len);
+			}
 		}
 		else
 		{
