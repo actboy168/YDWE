@@ -14,6 +14,10 @@ namespace base { namespace warcraft3 { namespace jass {
 	typedef uint32_t jreal_t;
 	typedef uint32_t jstring_t;
 
+	const static jboolean_t jtrue = 1;
+	const static jboolean_t jfalse = 0;
+	const static jhandle_t jnull = 0;
+
 	class _BASE_API string_fake
 	{
 	public:

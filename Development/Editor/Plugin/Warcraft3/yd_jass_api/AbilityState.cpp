@@ -331,6 +331,25 @@ namespace base { namespace warcraft3 { namespace japi {
 		return 0;
 	}
 
+	static uintptr_t search_get_ability_ui_table()
+	{
+		war3_searcher& s = get_war3_searcher();
+		uintptr_t ptr = s.search_string("GetAbilityEffectById");
+		ptr = *(uintptr_t*)(ptr + 0x05);
+		ptr = next_opcode(ptr, 0xE8, 5);
+		ptr = convert_function(ptr);
+		ptr = next_opcode(ptr, 0xE8, 5);
+		ptr = convert_function(ptr);
+		ptr = next_opcode(ptr, 0xE8, 5);
+		return convert_function(ptr);
+	}
+
+	static ability_ui* GetAbilityUITableById(uintptr_t abilcode)
+	{
+		static uintptr_t get_ability_ui_table = search_get_ability_ui_table();
+		return this_call<ability_ui*>(get_ability_ui_table, abilcode);
+	}
+
 	uintptr_t GetUnitAbilityByIndex(uint32_t unit_handle, uint32_t index)
 	{
 		uintptr_t unit_ptr = handle_to_object(unit_handle);
@@ -592,14 +611,12 @@ namespace base { namespace warcraft3 { namespace japi {
 		return false;
 	}
 
-	uint32_t  __cdecl EXGetAbilityDataString(uint32_t ability_handle, uint32_t level, uint32_t state_type)
+	static jass::jstring_t GetAbilityString(ability_ui* ptr, jass::jinteger_t level, jass::jinteger_t type)
 	{
-		if (state_type < ABILITY_DATA_NAME || state_type > ABILITY_DATA_UNART)
+		if (type < ABILITY_DATA_NAME || type > ABILITY_DATA_UNART)
 		{
 			return jass::create_string("");
 		}
-
-		ability_ui* ptr = GetAbilityUITable(ability_pool.at(ability_handle));
 
 		if (!ptr)
 		{
@@ -607,13 +624,13 @@ namespace base { namespace warcraft3 { namespace japi {
 		}
 
 		char** buf = 0;
-		switch (state_type)
+		switch (type)
 		{
 		case ABILITY_DATA_UNART:
 			buf = &ptr->unart;
 			break;
 		default:
-			buf = ptr->array_[state_type - ABILITY_DATA_NAME].get(level);
+			buf = ptr->array_[type - ABILITY_DATA_NAME].get(level);
 			break;
 		}
 
@@ -625,40 +642,38 @@ namespace base { namespace warcraft3 { namespace japi {
 		return jass::create_string(*buf);
 	}
 
-	bool      __cdecl EXSetAbilityDataString(uint32_t ability_handle, uint32_t level, uint32_t state_type, uint32_t value)
+	static jass::jboolean_t SetAbilityString(ability_ui* ptr, jass::jinteger_t level, jass::jinteger_t type, jass::jstring_t value)
 	{
-		if (state_type < ABILITY_DATA_NAME || state_type > ABILITY_DATA_UNART)
+		if (type < ABILITY_DATA_NAME || type > ABILITY_DATA_UNART)
 		{
-			return false;
+			return jass::jfalse;
 		}
-
-		ability_ui* ptr = GetAbilityUITable(ability_pool.at(ability_handle));
 
 		if (!ptr)
 		{
-			return false;
+			return jass::jfalse;
 		}
 
 		char** buf = 0;
-		switch (state_type)
+		switch (type)
 		{
 		case ABILITY_DATA_UNART:
 			buf = &ptr->unart;
 			break;
 		default:
-			buf = ptr->array_[state_type - ABILITY_DATA_NAME].get(level);
+			buf = ptr->array_[type - ABILITY_DATA_NAME].get(level);
 			break;
 		}
 
-		if (!buf || !*buf) 
+		if (!buf || !*buf)
 		{
-			return false;
+			return jass::jfalse;
 		}
 
 		string_pool.free((uintptr_t)*buf);
 		const char* value_str = jass::from_string(value);
 		size_t      value_len = strlen(value_str);
-		uintptr_t   value_buf = string_pool.malloc(value_len+1);
+		uintptr_t   value_buf = string_pool.malloc(value_len + 1);
 
 		if (value_buf)
 		{
@@ -666,7 +681,17 @@ namespace base { namespace warcraft3 { namespace japi {
 			strncpy_s(*buf, value_len + 1, value_str, value_len);
 			//this_call<void>(0x6F021FB0, ability_pool.at(ability_handle));
 		}
-		return true;
+		return jass::jtrue;
+	}
+
+	jass::jstring_t  __cdecl EXGetAbilityDataString(jass::jhandle_t ability_handle, jass::jinteger_t level, jass::jinteger_t type)
+	{
+		return GetAbilityString(GetAbilityUITable(ability_pool.at(ability_handle)), level, type);
+	}
+
+	jass::jboolean_t  __cdecl EXSetAbilityDataString(jass::jhandle_t ability_handle, jass::jinteger_t level, jass::jinteger_t type, jass::jstring_t value)
+	{
+		return SetAbilityString(GetAbilityUITable(ability_pool.at(ability_handle)), level, type, value);
 	}
 
 	bool __cdecl EXSetAbilityAEmeDataA(uint32_t ability_handle, uint32_t value)
@@ -790,6 +815,16 @@ namespace base { namespace warcraft3 { namespace japi {
 		return true;
 	}
 
+	jass::jstring_t  __cdecl EXGetAbilityString(jass::jinteger_t abilcode, jass::jinteger_t level, jass::jinteger_t type)
+	{
+		return GetAbilityString(GetAbilityUITableById(abilcode), level, type);
+	}
+	
+	jass::jboolean_t  __cdecl EXSetAbilityString(jass::jinteger_t abilcode, jass::jinteger_t level, jass::jinteger_t type, jass::jstring_t value)
+	{
+		return SetAbilityString(GetAbilityUITableById(abilcode), level, type, value);
+	}
+
 	void InitializeAbilityState()
 	{
 		jass::japi_add((uintptr_t)EXGetUnitAbilityById,    "EXGetUnitAbility",        "(Hunit;I)Hability;");
@@ -802,9 +837,11 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXGetAbilityDataInteger, "EXGetAbilityDataInteger", "(Hability;II)I");
 		jass::japi_add((uintptr_t)EXSetAbilityDataInteger, "EXSetAbilityDataInteger", "(Hability;III)B");
 		jass::japi_add((uintptr_t)EXGetAbilityDataString,  "EXGetAbilityDataString",  "(Hability;II)S");
-		jass::japi_add((uintptr_t)EXSetAbilityDataString,  "EXSetAbilityDataString",  "(Hability;IIS)B");	   
+		jass::japi_add((uintptr_t)EXSetAbilityDataString,  "EXSetAbilityDataString",  "(Hability;IIS)B");
 		jass::japi_add((uintptr_t)EXSetAbilityAEmeDataA,   "EXSetAbilityAEmeDataA",   "(Hability;I)B");
 		jass::japi_add((uintptr_t)EXGetBuffDataString,     "EXGetBuffDataString",     "(II)S");
 		jass::japi_add((uintptr_t)EXSetBuffDataString,     "EXSetBuffDataString",     "(IIS)B"); 
+		jass::japi_add((uintptr_t)EXGetAbilityString,      "EXGetAbilityString",      "(III)S");
+		jass::japi_add((uintptr_t)EXSetAbilityString,      "EXSetAbilityString",      "(IIIS)B");	
 	}
 }}}
