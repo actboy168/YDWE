@@ -41,10 +41,6 @@
 
 #endif			/* } */
 
-#if defined(_DEBUG)
-#include <assert.h>
-#define lua_assert assert
-#endif
 
 #endif
 

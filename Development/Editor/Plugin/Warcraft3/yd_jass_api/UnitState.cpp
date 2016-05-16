@@ -680,18 +680,18 @@ namespace base { namespace warcraft3 { namespace japi {
 		return fast_call<uintptr_t>(get_unit_data, unitcode);
 	}
 
+	extern string_pool_t string_pool;
+
 	jass::jstring_t _cdecl EXGetUnitString(jass::jinteger_t unitcode, jass::jinteger_t type)
 	{
 		uintptr_t ptr = GetUnitData(unitcode);
-		const char * result = (const char*)*(uintptr_t*)(ptr + type * 4);
+		const char * result = *(const char**)(ptr + type * 4);
 		if (!result || IsBadStringPtrA(result, 256))
 		{
 			return  jass::create_string("Default string");
 		}
 		return jass::create_string(result);
 	}
-
-	extern string_pool_t string_pool;
 
 	jass::jboolean_t _cdecl EXSetUnitString(jass::jinteger_t unitcode, jass::jinteger_t type, jass::jstring_t value)
 	{
@@ -719,12 +719,91 @@ namespace base { namespace warcraft3 { namespace japi {
 		return jass::jtrue;
 	}
 
+	jass::jreal_t _cdecl EXGetUnitReal(jass::jinteger_t unitcode, jass::jinteger_t type)
+	{
+		uintptr_t ptr = GetUnitData(unitcode);
+		return jass::to_real(*(float*)(ptr + type * 4));
+	}
+
+	jass::jboolean_t _cdecl EXSetUnitReal(jass::jinteger_t unitcode, jass::jinteger_t type, jass::jreal_t* value)
+	{
+		uintptr_t ptr = GetUnitData(unitcode);
+		*(float*)(ptr + type * 4) = jass::from_real(*value);
+		return jass::jtrue;
+	}
+
+	jass::jinteger_t _cdecl EXGetUnitInteger(jass::jinteger_t unitcode, jass::jinteger_t type)
+	{
+		uintptr_t ptr = GetUnitData(unitcode);
+		return *(jass::jinteger_t*)(ptr + type * 4);
+	}
+
+	jass::jboolean_t _cdecl EXSetUnitInteger(jass::jinteger_t unitcode, jass::jinteger_t type, jass::jinteger_t value)
+	{
+		uintptr_t ptr = GetUnitData(unitcode);
+		*(jass::jinteger_t*)(ptr + type * 4) = value;
+		return jass::jtrue;
+	}
+
+	jass::jstring_t _cdecl EXGetUnitArrayString(jass::jinteger_t unitcode, jass::jinteger_t type, jass::jinteger_t index)
+	{
+		uintptr_t ptr = GetUnitData(unitcode);
+		jass::jinteger_t size = *(jass::jinteger_t*)(ptr + type * 4);
+		if (size <= 0)
+		{
+			return  jass::create_string("Default string");
+		}
+		const char * result = *(const char**)(*(uintptr_t*)(ptr + (type + 1) * 4) + index % size * 4);
+		if (!result || IsBadStringPtrA(result, 256))
+		{
+			return  jass::create_string("Default string");
+		}
+		return jass::create_string(result);
+	}
+
+	jass::jboolean_t _cdecl EXSetUnitArrayString(jass::jinteger_t unitcode, jass::jinteger_t type, jass::jinteger_t index, jass::jstring_t value)
+	{
+		uintptr_t ptr = GetUnitData(unitcode);
+		jass::jinteger_t size = *(jass::jinteger_t*)(ptr + type * 4);
+		if (size <= 0)
+		{
+			return  jass::jfalse;
+		}
+		char ** result = (char**)(*(uintptr_t*)(ptr + (type + 1) * 4) + index % size * 4);
+		if (!*result || IsBadStringPtrA(*result, 256))
+		{
+			return  jass::jfalse;
+		}
+		const char* value_str = jass::from_string(value);
+		if (value_str)
+		{
+			size_t      value_len = strlen(value_str);
+			uintptr_t   value_buf = string_pool.malloc(value_len + 1);
+			*result = (char*)value_buf;
+			if (value_buf)
+			{
+				strncpy_s(*result, value_len + 1, value_str, value_len);
+			}
+		}
+		else
+		{
+			*result = 0;
+		}
+		return jass::jtrue;
+	}
+
 	void InitializeUnitState()
 	{
 		jass::japi_hook("GetUnitState", &RealGetUnitState, (uintptr_t)FakeGetUnitState);
 		jass::japi_hook("SetUnitState", &RealSetUnitState, (uintptr_t)FakeSetUnitState);
-		jass::japi_add((uintptr_t)EXGetUnitString, "EXGetUnitString", "(II)S");
-		jass::japi_add((uintptr_t)EXSetUnitString, "EXSetUnitString", "(IIS)B");
+		jass::japi_add((uintptr_t)EXGetUnitString,       "EXGetUnitString",      "(II)S");
+		jass::japi_add((uintptr_t)EXSetUnitString,       "EXSetUnitString",      "(IIS)B");
+		jass::japi_add((uintptr_t)EXGetUnitReal,         "EXGetUnitReal",        "(II)R");
+		jass::japi_add((uintptr_t)EXSetUnitReal,         "EXSetUnitReal",        "(IIR)B");  
+		jass::japi_add((uintptr_t)EXGetUnitInteger,      "EXGetUnitInteger",     "(II)I");
+		jass::japi_add((uintptr_t)EXSetUnitInteger,      "EXSetUnitInteger",     "(III)B");   
+		jass::japi_add((uintptr_t)EXGetUnitArrayString,  "EXGetUnitArrayString", "(III)S");
+		jass::japi_add((uintptr_t)EXSetUnitArrayString,  "EXSetUnitArrayString", "(IIIS)B");
 		jass::japi_add((uintptr_t)EXPauseUnit, "EXPauseUnit", "(Hunit;B)V");
 		//jass::japi_add((uintptr_t)EXGetObject, "EXGetObject", "(Hhandle;)I");
 	}
