@@ -258,7 +258,11 @@ namespace base { namespace warcraft3 { namespace jass {
 
 		if (!nf) 
 		{
-			return 0;
+			nf = japi_func(name); 
+			if (!nf)
+			{
+				return 0;
+			}
 		}
 
 		return call(nf->get_address(), (const uintptr_t*)((va_list)_ADDRESSOF(name) + _INTSIZEOF(name)), nf->get_param().size());
