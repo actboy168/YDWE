@@ -1,5 +1,5 @@
 local CJ = require "jass.common"
-local BJ = require "blizzard.lua"
+local BJ = require "blizzard"
 
 local trig = CJ.CreateTrigger()
 BJ.TriggerRegisterAnyUnitEventBJ(trig, CJ.EVENT_PLAYER_UNIT_SPELL_EFFECT)
