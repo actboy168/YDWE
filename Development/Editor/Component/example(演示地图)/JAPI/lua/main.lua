@@ -1,13 +1,5 @@
 local CJ = require "jass.common"
-local BJ = require "blizzard"
-
-local function id2string(id)
-	return ('>I4'):pack(id)
-end
-
-local function string2id(str)
-	return ('>I4'):unpack(str)
-end
+local BJ = require "blizzard.lua"
 
 local trig = CJ.CreateTrigger()
 BJ.TriggerRegisterAnyUnitEventBJ(trig, CJ.EVENT_PLAYER_UNIT_SPELL_EFFECT)
@@ -17,7 +9,9 @@ BJ.TriggerRegisterAnyUnitEventBJ(trig, CJ.EVENT_PLAYER_UNIT_SPELL_EFFECT)
 -- zinc也有匿名函数，如果你使用过zinc，应该不会陌生。
 CJ.TriggerAddCondition(trig, CJ.Condition(
 	function ()
-		return id2string(CJ.GetSpellAbilityId()) == 'AHhb'
+		-- |xxxx|不是一个标准的lua语法，而是ydwe lua的扩展语法，值和jass里'xxxx'一样
+		-- 注意，在lua里'xxxx'是一个字符串，和"xxxx"一样。
+		return CJ.GetSpellAbilityId() == |AHhb| 
 	end
 ))
 CJ.TriggerAddAction(trig,
@@ -31,7 +25,7 @@ CJ.TriggerAddAction(trig,
 				if n == 8 then
 					CJ.DestroyTimer(CJ.GetExpiredTimer())
 				else
-					n = n + 1
+					n = n + 1						
 					CJ.SetUnitState(u, CJ.UNIT_STATE_LIFE, 10 + CJ.GetUnitState(u, CJ.UNIT_STATE_LIFE))
 					CJ.DestroyEffect(CJ.AddSpecialEffectTarget("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl", u, "overhead"))
 				end
