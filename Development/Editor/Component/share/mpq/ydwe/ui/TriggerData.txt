@@ -373,6 +373,7 @@ AbilityDataInteger=0,0,0,技能数据 (整数),integer
 AbilityDataReal=0,0,0,技能数据 (实数),integer
 AbilityDataString=0,0,0,技能数据 (字符串),integer
 ChatRecipient=0,0,0,频道类型,integer
+ItemDataString=0,0,0,物品数据 (字符串),integer
 
 
 //***************************************************************************
@@ -3262,6 +3263,10 @@ CHAT_RECIPIENT_ALL=0,ChatRecipient,0,所有人频道
 CHAT_RECIPIENT_ALLIES=0,ChatRecipient,1,盟友频道
 CHAT_RECIPIENT_OBSERVERS=0,ChatRecipient,2,观看者/裁判频道
 CHAT_RECIPIENT_PRIVATE=0,ChatRecipient,3,私人频道
+
+ITEM_DATA_ART=0,ItemDataString,1,图标
+ITEM_DATA_UBERTIP=0,ItemDataString,3,提示(扩展)
+ITEM_DATA_TIP=0,ItemDataString,4,提示
 
 
 

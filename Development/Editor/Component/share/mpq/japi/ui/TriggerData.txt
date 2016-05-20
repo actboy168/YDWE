@@ -95,6 +95,10 @@ YDWEDisplayChat=0,player,ChatRecipient,StringExt
 _YDWEDisplayChat_Defaults=Player00,CHAT_RECIPIENT_ALL,_
 _YDWEDisplayChat_Category=TC_PLAYER
 
+YDWESetItemDataString=1,itemcode,ItemDataString,string
+_YDWESetItemDataString_Defaults=ches,ITEM_DATA_TIP,_
+_YDWESetItemDataString_Category=TC_ITEM
+
 [TriggerCalls]
 YDWEPlatformIsInPlatform=0,1,boolean
 _YDWEPlatformIsInPlatform_Category=TC_YDFC
@@ -162,3 +166,7 @@ YDWEGetUnitAbilityDataString=0,0,string,unit,abilcode,integer,AbilityDataString
 _YDWEGetUnitAbilityDataString_Defaults=GetTriggerUnit,_,1,ABILITY_DATA_TIP
 _YDWEGetUnitAbilityDataString_Limits=_,_,_,_,1,_,_,_,
 _YDWEGetUnitAbilityDataString_Category=TC_UNIT
+
+YDWEGetItemDataString=0,0,string,itemcode,ItemDataString
+_YDWEGetItemDataString_Defaults=ches,ITEM_DATA_TIP
+_YDWEGetItemDataString_Category=TC_ITEM

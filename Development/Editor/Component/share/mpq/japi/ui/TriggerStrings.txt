@@ -67,6 +67,10 @@ YDWEDisplayChat="模拟玩家聊天 [JAPI]"
 YDWEDisplayChat="模拟 ",~Player," 在 ",~频道," 发言: ",~文字
 YDWEDisplayChatHint=
 
+YDWESetItemDataString="设置物品数据 (字符串) [JAPI]"
+YDWESetItemDataString="设置 ",~物品," 的 ",~数据," 为 ",~Value
+YDWESetItemDataStringHint=""
+
 [TriggerCallStrings]
 
 YDWEPlatformIsInPlatform="地图在11平台上 [JAPI]"
@@ -134,3 +138,7 @@ YDWEGetUnitAbilityDataRealHint="数据A~数据I也就是物体编辑器里按Ctr
 YDWEGetUnitAbilityDataString="技能数据 (字符串) [JAPI]"
 YDWEGetUnitAbilityDataString=~单位," 的 ",~技能," 第 ",~等级," 级的 ",~数据
 YDWEGetUnitAbilityDataStringHint=""
+
+YDWEGetItemDataString="物品数据 (字符串) [JAPI]"
+YDWEGetItemDataString=~物品," 的 ",~数据
+YDWEGetItemDataStringHint=""
