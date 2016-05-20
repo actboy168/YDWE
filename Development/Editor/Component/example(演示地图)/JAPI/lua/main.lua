@@ -11,7 +11,7 @@ CJ.TriggerAddCondition(trig, CJ.Condition(
 	function ()
 		-- |xxxx|不是一个标准的lua语法，而是ydwe lua的扩展语法，值和jass里'xxxx'一样
 		-- 注意，在lua里'xxxx'是一个字符串，和"xxxx"一样。
-		return CJ.GetSpellAbilityId() == |AHhb| 
+		return CJ.GetSpellAbilityId() == 1095264354 --'AHhb'
 	end
 ))
 CJ.TriggerAddAction(trig,
