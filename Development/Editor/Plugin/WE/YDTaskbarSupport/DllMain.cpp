@@ -9,10 +9,41 @@
 
 namespace fs = ::boost::filesystem;
 
-std::wstring const& CurrentAppID()
+static const wchar_t* namelist[] = {
+	L"俄刻阿诺斯级YDWE",
+	L"科俄斯级YDWE",
+	L"克利俄斯级YDWE",
+	L"许珀里翁级YDWE",
+	L"伊阿珀托斯级YDWE",
+	L"忒亚级YDWE",
+	L"瑞亚级YDWE",
+	L"忒弥斯级YDWE",
+	L"谟涅摩绪涅级YDWE",
+	L"福柏级YDWE",
+	L"忒堤斯级YDWE",
+	L"克洛诺斯级YDWE",
+};
+
+static const wchar_t* getCurrentAppID()
 {
-	static std::wstring strAppID = L"YDWE.WorldEdit." + std::to_wstring((long long)std::random_device()());
-	return strAppID;
+	size_t n = sizeof namelist / sizeof namelist[0];
+	size_t random = (size_t)std::random_device()();
+	for (size_t i = 0; i < n; ++i)
+	{
+		const wchar_t* name = namelist[(random + i) % n];
+		HANDLE mutex = CreateMutexW(NULL, TRUE, name);
+		if (mutex)
+		{
+			return name;
+		}
+		else if (GetLastError() != ERROR_ALREADY_EXISTS)
+		{
+			break;
+		}
+	}
+
+	static std::wstring	randomresult = L"YDWE.WorldEdit." + std::to_wstring((long long)random);
+	return randomresult.c_str();
 }
 
 bool JumpListAddRecentTask(JumpList& jumpList, fs::path const& ydweDirectory, fs::path const& filePath)
@@ -35,10 +66,16 @@ void Initialize()
 		return ;
 	}
 
-	windows7::SetCurrentProcessExplicitAppUserModelID(CurrentAppID().c_str());
+	const wchar_t* currentAppID = 0;
+	HRESULT hr = windows7::GetCurrentProcessExplicitAppUserModelID((wchar_t**)&currentAppID);
+	if (FAILED(hr) || !currentAppID)
+	{
+		currentAppID = getCurrentAppID();
+		windows7::SetCurrentProcessExplicitAppUserModelID(currentAppID);
+	}
 
 	JumpList jumpList;
-	jumpList.SetAppID(CurrentAppID().c_str());
+	jumpList.SetAppID(currentAppID);
 	if (jumpList.InitializeList())
 	{
 		fs::path ydweDirectory = base::path::get(base::path::DIR_MODULE).remove_filename().remove_filename();

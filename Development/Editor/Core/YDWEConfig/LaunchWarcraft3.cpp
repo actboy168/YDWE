@@ -7,7 +7,8 @@
 #include <slk/reader/IniReader.hpp>
 #include <base/warcraft3/directory.h>
 #include <base/warcraft3/command_line.h>
-#include <base/win/registry/key.h>
+#include <base/win/registry/key.h> 
+#include <base/hook/fp_call.h>
 
 std::wstring get_test_map_path()
 {
@@ -19,10 +20,26 @@ std::wstring get_test_map_path()
 	return std::move(result);
 }
 
+bool launch_taskbar_support(const boost::filesystem::path& ydwe_path)
+{
+	HMODULE hdll = LoadLibraryW((ydwe_path / L"plugin" / L"YDTaskbarSupport.dll").c_str());
+	if (hdll)
+	{
+		uintptr_t initialize = (uintptr_t)GetProcAddress(hdll, "Initialize");
+		if (initialize)
+		{
+			base::std_call<void>(initialize);
+			return true;
+		}
+	}
+	return false;
+}
+
 bool launch_warcraft3(base::warcraft3::command_line& cmd)
 {
 	try {
 		boost::filesystem::path ydwe_path = base::path::get(base::path::DIR_EXE).remove_filename().remove_filename();
+		launch_taskbar_support(ydwe_path);
 
 		base::win::env_variable ev(L"PATH");
 		std::wstring p;

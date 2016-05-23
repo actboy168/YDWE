@@ -15,6 +15,18 @@ namespace windows7
 		return base::std_call<HRESULT>(pSetCurrentProcessExplicitAppUserModelID, AppID);
 	}
 
+	HRESULT GetCurrentProcessExplicitAppUserModelID(PWSTR *AppID)
+	{
+		static void* pGetCurrentProcessExplicitAppUserModelID = ::GetProcAddress(::LoadLibraryW(L"Shell32.dll"), "GetCurrentProcessExplicitAppUserModelID");
+
+		if (pGetCurrentProcessExplicitAppUserModelID == NULL)
+		{
+			return E_FAIL;
+		}
+
+		return base::std_call<HRESULT>(pGetCurrentProcessExplicitAppUserModelID, AppID);
+	}
+	
 	HRESULT ShellCreateItemFromParsingName(PCWSTR pszPath, IBindCtx *pbc, const IID* riid, void **ppv)
 	{
 		static void* pSHCreateItemFromParsingName = ::GetProcAddress(::LoadLibraryW(L"Shell32.dll"), "SHCreateItemFromParsingName");
