@@ -52,11 +52,11 @@ YDWERecordClear="服务器存档，清空",~玩家,"所有数据"
 YDWERecordClearHint="由于每个玩家最多只能存储100条左右的数据，假如超过上限，建议使用此功能清空全部数据，然后重新保存有用的数据。"
 
 YDWERPGSetKey="RPG积分-设置玩家积分数据 [JAPI]"
-YDWERPGSetKey="RPG积分，",~玩家,"的〖",~战斗力,"〗=",~整数
+YDWERPGSetKey="RPG积分，",~玩家,"的〖",~战斗力,"〗= ",~整数
 YDWERPGSetKeyHint="修改积分数据，覆盖型。"
 
 YDWERPGAddKey="RPG积分-增加玩家积分数据 [JAPI]"
-YDWERPGAddKey="RPG积分，",~玩家,"的〖",~战斗力,"〗+=",~整数
+YDWERPGAddKey="RPG积分，",~玩家,"的〖",~战斗力,"〗+= ",~整数
 YDWERPGAddKeyHint="修改积分数据，累加型。名字需要是xx+1的形式，1表示一局这项最多可以增加的值。注意设置合理的值来避免刷分。"
 
 YDWERPGGameEnd="RPG积分-游戏结束 [JAPI]"
