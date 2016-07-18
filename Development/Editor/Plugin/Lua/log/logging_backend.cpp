@@ -33,10 +33,14 @@ namespace logging
 	backend::~backend()
 	{
 		delete impl_;
+		impl_ = 0;
 	}
 
 	void backend::consume(string_type const& formatted_message)
 	{
+		if (!impl_)
+			return;
+
 		if((impl_->file_.is_open() && (impl_->written_ + formatted_message.size() >= 512*1024) )
 			|| !impl_->file_.good()
 			)
@@ -64,12 +68,16 @@ namespace logging
 
 	void backend::flush()
 	{
+		if (!impl_)
+			return;
 		if (impl_->file_.is_open())
 			impl_->file_.flush();
 	}
 
 	void backend::rotate_file()
 	{
+		if (!impl_)
+			return;
 		impl_->file_.close();
 		impl_->file_.clear();
 		impl_->written_ = 0;
