@@ -38,7 +38,9 @@ namespace logging
 
 	void backend::consume(string_type const& formatted_message)
 	{
-		if (!impl_)
+		//if (!impl_)
+		
+		if (IsBadReadPtr(impl_, sizeof implementation))
 			return;
 
 		if((impl_->file_.is_open() && (impl_->written_ + formatted_message.size() >= 512*1024) )
