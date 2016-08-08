@@ -70,7 +70,8 @@ namespace logging
 
 	void backend::flush()
 	{
-		if (!impl_)
+		//if (!impl_)
+		if (IsBadReadPtr(impl_, sizeof implementation))
 			return;
 		if (impl_->file_.is_open())
 			impl_->file_.flush();
@@ -78,7 +79,8 @@ namespace logging
 
 	void backend::rotate_file()
 	{
-		if (!impl_)
+		//if (!impl_)
+		if (IsBadReadPtr(impl_, sizeof implementation))
 			return;
 		impl_->file_.close();
 		impl_->file_.clear();
