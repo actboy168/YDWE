@@ -33,6 +33,7 @@ namespace logging
 			return it->second;
 		}
 
+		loggers[name] = new logger(name, backend(loggers_root, loggers_name));
 		return loggers[name];
 	}
 }
