@@ -14,7 +14,7 @@
 
 namespace logging
 {
-	std::map<std::string, std::unique_ptr<logger>> loggers;
+	std::map<std::string, logger*> loggers;
 	boost::filesystem::path                        loggers_root;
 	std::wstring                                   loggers_name;
 
@@ -30,11 +30,9 @@ namespace logging
 		auto it = loggers.find(name);
 		if (it != loggers.end())
 		{
-			return it->second.get();
+			return it->second;
 		}
 
-		loggers[name].reset(new logger(name, backend(loggers_root, loggers_name)));
-		logger* lg = loggers[name].get();
-		return lg;
+		return loggers[name];
 	}
 }
