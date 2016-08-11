@@ -2,10 +2,21 @@
 #include "storm.h"
 #include <base/path/service.h>
 #include <base/path/helper.h>
-#include <base/util/unicode.h>
+#include <base/util/unicode.h>	
+#include <base/win/registry/key.h>	
+#include <base/file/stream.h>
 #include <boost/assign.hpp>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
+
+	static bool allow_local_files()
+	{
+		try {
+			return !!base::registry::key_w(HKEY_CURRENT_USER, L"", L"Software\\Blizzard Entertainment\\Warcraft III")[L"Allow Local Files"].get<uint32_t>();
+		}
+		catch (base::registry::registry_exception const&) {}
+		return false;
+	}
 
 	int storm_load(lua_State* L)
 	{
@@ -18,19 +29,26 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
 			return 1;
 		}
 
-		std::string path_ansi;
-		try {
-			path_ansi = u2a(std::string_view(path, path_size), conv_method::stop);
-		}
-		catch (...) {
-			lua_pushnil(L);
-			return 1;
+		if (allow_local_files())
+		{
+			try {
+				boost::filesystem::path filepath = base::path::get(base::path::DIR_EXE).remove_filename();
+				filepath /= u2w(std::string_view(path, path_size));
+				if (boost::filesystem::exists(filepath))
+				{
+					std::string buf = base::file::read_stream(filepath).read<std::string>();
+					lua_pushlstring(L, buf.data(), buf.size());
+					return 1;
+				}
+			}
+			catch (...) {
+			}
 		}
 
 		const void* buf_data = nullptr;
 		size_t      buf_size = 0;
 		storm_dll&s = storm_s::instance();
-		if (!s.load_file(path_ansi.c_str(), &buf_data, &buf_size))
+		if (!s.load_file(path, &buf_data, &buf_size))
 		{
 			lua_pushnil(L);
 			return 1;
