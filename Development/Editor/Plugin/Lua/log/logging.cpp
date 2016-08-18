@@ -1,16 +1,6 @@
 #include "logging.h"
-
-#include <boost/locale/generator.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/log/common.hpp>
-#include <boost/log/expressions.hpp>
-#include <boost/log/attributes.hpp>
-#include <boost/log/trivial.hpp>
-#include <boost/log/sources/logger.hpp>
-#include <boost/log/sources/severity_logger.hpp>
-#include <boost/log/support/date_time.hpp>
 #include "logging_backend.h" 
+#include <map>
 
 namespace logging
 {
