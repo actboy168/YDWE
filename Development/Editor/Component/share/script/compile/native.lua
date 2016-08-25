@@ -36,7 +36,7 @@ function native:inject(input, output)
 			inject[file] = self.file[file]
 		end
 	end
-	if #inject == 0 then
+	if not next(inject) then
 		return false
 	end
 	local global = { }
@@ -63,7 +63,7 @@ end
 
 function native:compile(op)
 	local native = fs.ydwe_path() / "jass" / "native"
-	if not fs.exists(native) or #self.list == 0 then
+	if not fs.exists(native) or not next(self.list) then
 		return
 	end
 	log.info('Native compilation start.')
