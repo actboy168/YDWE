@@ -3,6 +3,7 @@ require "compile.wave"
 require "compile.template"
 require "compile.cjass"
 require "compile.jasshelper"
+require "compile.native"
 require "mpq_util"
 
 -- 确定应当把地图保存为适合老版本（< 1.24）还是新版本（>= 1.24）的
@@ -42,6 +43,11 @@ local function compile_map(map_path, option)
 
 	log.trace("Save version " .. tostring(option.runtime_version))
 
+	local compile_t = {
+		['option'] = option,
+		['map_path'] = map_path,
+	}
+	
 	-- 如果JassHelper开启，执行正常编译
 	if option.enable_jasshelper then
 		result = mpq_util:update_file(map_path, "war3map.j",
@@ -50,17 +56,13 @@ local function compile_map(map_path, option)
 				-- 开始处理
 				log.trace("Processing " .. in_script_path:filename():string())
 
-				local compile_t = {
-					['input'] = in_script_path,
-					['output'] = nil,
-					['option'] = option,
-					['map_path'] = map_path,
-					['map_handle'] = map_handle,
-					['inject_file'] = function (file_path, path_in_archive)
-						return map_handle:import(path_in_archive, file_path)
-					end,
-				}
-
+				compile_t.input = in_script_path
+				compile_t.output = nil
+				compile_t.map_handle = map_handle
+				compile_t.inject_file = function (file_path, path_in_archive)
+					return map_handle:import(path_in_archive, file_path)
+				end
+				
 				-- 未启用用cJass
 				if not option.enable_cjass then
 					-- 根据注入选项进行处理（由于Lua的closure，此处可以访问“父”函数的局部变量）
@@ -98,6 +100,8 @@ local function compile_map(map_path, option)
 				result = jasshelper:compile(map_path, option)
 			end
 		end
+
+		native:compile(compile_t)
 	else
 		-- 只做语法检查
 		result = jasshelper:compile(map_path, option)
