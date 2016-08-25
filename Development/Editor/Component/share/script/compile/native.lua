@@ -36,7 +36,9 @@ function native:inject(input, output)
 			inject[file] = self.file[file]
 		end
 	end
-
+	if #inject == 0 then
+		return false
+	end
 	local global = { }
 	local func = { }
 	for _, buf in pairs(inject) do
