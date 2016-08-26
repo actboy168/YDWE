@@ -4,8 +4,6 @@ require "util"
 require "mpq_util"
 
 native = {}
-native.list = {}
-native.file = {}
 
 local function slice_cut(slice, pattern)
 	for i, s in ipairs(slice) do
@@ -62,8 +60,10 @@ function native:inject(input, output)
 end
 
 function native:compile(op)
-	local native = fs.ydwe_path() / "jass" / "native"
-	if not fs.exists(native) or not next(self.list) then
+	if not self:initialize() then
+		return
+	end
+	if not next(self.list) then
 		return
 	end
 	log.info('Native compilation start.')
@@ -103,12 +103,15 @@ end
 function native:initialize()
 	local native = fs.ydwe_path() / "jass" / "native"
 	if not fs.exists(native) then
-		return
+		return false
 	end
+	self.list = {}
+	self.file = {}
 	for fullpath in native:list_directory() do
 		if fs.is_directory(fullpath) then
 		elseif fullpath:extension():string() == ".j" then
 			self:scan(fullpath)
 		end
 	end
+	return true
 end
