@@ -529,7 +529,7 @@ private:
 			{
 				flags_ |= FL_FORCEHEX;
 			}
-			format_cast_integer<16>(convert_to_integer(value));
+			format_cast_integer<16>(*(uintptr_t*)&value);
 			break;
 		case 'A': case 'E': case 'F': case 'G':
 		case 'a': case 'e': case 'f': case 'g':
