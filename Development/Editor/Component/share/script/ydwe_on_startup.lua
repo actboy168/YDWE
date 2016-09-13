@@ -1,5 +1,4 @@
 require "compile.inject_code"
-require "compile.native"
 require "mpq_util"
 
 local storm    = ar.storm
@@ -191,7 +190,6 @@ function event.EVENT_WE_START(event_data)
 	
 	-- 载入注入代码配置
 	inject_code:initialize()
-	native:initialize()
 		
 	set_triggereditor_color()
 
