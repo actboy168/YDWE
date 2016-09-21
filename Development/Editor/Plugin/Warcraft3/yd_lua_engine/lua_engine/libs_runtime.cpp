@@ -10,7 +10,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime	
 	int  version = 3;
 	int  handle_level = 2;
 	bool enable_console = false;
-	bool sleep = true;
+	bool sleep = false;
 	bool catch_crash = true;
 
 	namespace perftrace {
@@ -24,7 +24,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime	
 	{
 		handle_level = 2;
 		enable_console = false;
-		sleep = true;
+		sleep = false;
 		catch_crash = true;
 
 		for (size_t i = 0; i < perftrace::kMaxId; ++i)
