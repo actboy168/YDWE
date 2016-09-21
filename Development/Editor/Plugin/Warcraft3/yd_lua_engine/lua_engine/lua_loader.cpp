@@ -3,7 +3,8 @@
 #include "lua_loader.h"
 #include "storm.h"
 #include "open_lua_engine.h"
-#include "libs_runtime.h"	
+#include "libs_runtime.h"
+#include "debugger.h"
 #include <lua.hpp>
 #include <base/warcraft3/event.h>
 #include <base/warcraft3/jass.h>
@@ -91,6 +92,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			lua_State* L = jass_state_s::instance().get();
 			lua_getglobal(L, "require");
 			lua_pushlstring(L, cheat_s.c_str(), cheat_s.size());
+			debugger_init(L);
 			safe_call(L, 1, 1, true);
 		}
 

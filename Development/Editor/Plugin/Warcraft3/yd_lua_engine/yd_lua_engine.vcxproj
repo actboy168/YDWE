@@ -96,6 +96,10 @@
     <ClCompile Include="lua_engine\class_array.cpp" />
     <ClCompile Include="lua_engine\class_handle.cpp" />
     <ClCompile Include="lua_engine\class_real.cpp" />
+    <ClCompile Include="lua_engine\debugger.cpp" />
+    <ClInclude Include="lua_engine\debugger.h">
+      <FileType>CppCode</FileType>
+    </ClInclude>
     <ClCompile Include="lua_engine\fix_math.cpp" />
     <ClCompile Include="lua_engine\jassbind.cpp" />
     <ClCompile Include="lua_engine\libs_common.cpp" />
