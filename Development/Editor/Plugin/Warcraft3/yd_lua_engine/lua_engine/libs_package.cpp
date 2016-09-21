@@ -103,7 +103,10 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		storm_dll& s = storm_s::instance();
 		size = 0;
 		s.load_file(filename, (const void**)&buffer, &size);
-		int stat = (luaL_loadbuffer(L, buffer, size, name) == LUA_OK);
+		lua_pushfstring(L, "@%s", filename);
+		int idx = lua_gettop(L);
+		int stat = (luaL_loadbuffer(L, buffer, size, lua_tostring(L, -1)) == LUA_OK);
+		lua_remove(L, idx);
 		s.unload_file(buffer);
 		return checkload(L, stat, filename);
 	}
@@ -118,7 +121,10 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		try {
 			std::wstring wfilename = base::u2w(filename);
 			std::string buffer = base::file::read_stream(wfilename).read<std::string>();
-			stat = (luaL_loadbuffer(L, buffer.c_str(), buffer.size(), name) == LUA_OK);
+			lua_pushfstring(L, "@%s", filename);
+			int idx = lua_gettop(L);
+			stat = (luaL_loadbuffer(L, buffer.c_str(), buffer.size(), lua_tostring(L, -1)) == LUA_OK);
+			lua_remove(L, idx);
 		}
 		catch (...) {}
 		return checkload(L, stat, filename);
