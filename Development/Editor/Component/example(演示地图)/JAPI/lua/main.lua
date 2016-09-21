@@ -4,13 +4,13 @@ local BJ = require "blizzard"
 local trig = CJ.CreateTrigger()
 BJ.TriggerRegisterAnyUnitEventBJ(trig, CJ.EVENT_PLAYER_UNIT_SPELL_EFFECT)
 
--- ÏÂÃæ´óÁ¿Ê¹ÓÃÁËº¯Êý¶¨ÒåºóÖ±½ÓÊ¹ÓÃµÄ¼¼ÇÉ£¬ÕâÑùÉõÖÁ²»ÐèÒª¸øº¯Êý°²Ò»¸öÃû×Ö£¬ËùÒÔ³ÆÖ®Îª¡®ÄäÃûº¯Êý¡¯¡£
--- ºÃ´¦ÊÇ´úÂë½á¹¹¸ü¼Ó½ôÃÜ£¬Ò²Ê¡È¥ÁË¸øº¯ÊýÏëÃû×ÖµÄ·³ÄÕ¡£
--- zincÒ²ÓÐÄäÃûº¯Êý£¬Èç¹ûÄãÊ¹ÓÃ¹ýzinc£¬Ó¦¸Ã²»»áÄ°Éú¡£
+-- ä¸‹é¢å¤§é‡ä½¿ç”¨äº†å‡½æ•°å®šä¹‰åŽç›´æŽ¥ä½¿ç”¨çš„æŠ€å·§ï¼Œè¿™æ ·ç”šè‡³ä¸éœ€è¦ç»™å‡½æ•°å®‰ä¸€ä¸ªåå­—ï¼Œæ‰€ä»¥ç§°ä¹‹ä¸ºâ€˜åŒ¿åå‡½æ•°â€™ã€‚
+-- å¥½å¤„æ˜¯ä»£ç ç»“æž„æ›´åŠ ç´§å¯†ï¼Œä¹ŸçœåŽ»äº†ç»™å‡½æ•°æƒ³åå­—çš„çƒ¦æ¼ã€‚
+-- zincä¹Ÿæœ‰åŒ¿åå‡½æ•°ï¼Œå¦‚æžœä½ ä½¿ç”¨è¿‡zincï¼Œåº”è¯¥ä¸ä¼šé™Œç”Ÿã€‚
 CJ.TriggerAddCondition(trig, CJ.Condition(
 	function ()
-		-- |xxxx|²»ÊÇÒ»¸ö±ê×¼µÄluaÓï·¨£¬¶øÊÇydwe luaµÄÀ©Õ¹Óï·¨£¬ÖµºÍjassÀï'xxxx'Ò»Ñù
-		-- ×¢Òâ£¬ÔÚluaÀï'xxxx'ÊÇÒ»¸ö×Ö·û´®£¬ºÍ"xxxx"Ò»Ñù¡£
+		-- |xxxx|ä¸æ˜¯ä¸€ä¸ªæ ‡å‡†çš„luaè¯­æ³•ï¼Œè€Œæ˜¯ydwe luaçš„æ‰©å±•è¯­æ³•ï¼Œå€¼å’Œjassé‡Œ'xxxx'ä¸€æ ·
+		-- æ³¨æ„ï¼Œåœ¨luaé‡Œ'xxxx'æ˜¯ä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œå’Œ"xxxx"ä¸€æ ·ã€‚
 		return CJ.GetSpellAbilityId() == 1095264354 --'AHhb'
 	end
 ))
@@ -18,8 +18,8 @@ CJ.TriggerAddAction(trig,
 	function () 
 		local u = CJ.GetSpellTargetUnit()
 		local n = 0
-		-- ÕâÀï¶¨ÒåµÄÁ½¸ö¾Ö²¿±äÁ¿£¬¿ÉÒÔÖ±½ÓÔÚÏÂÃæµÄ¼ÆÊ±Æ÷º¯ÊýÖ±½ÓÊ¹ÓÃ¡£µ±È»ÄãÒÀÈ»¿ÉÒÔÊ¹ÓÃhashtableÀ´´«µÝ(µ«²»ÍÆ¼ö)¡£
-		-- ÕâÊÇºÍjassµÄ×î´ó²î±ð¡£
+		-- è¿™é‡Œå®šä¹‰çš„ä¸¤ä¸ªå±€éƒ¨å˜é‡ï¼Œå¯ä»¥ç›´æŽ¥åœ¨ä¸‹é¢çš„è®¡æ—¶å™¨å‡½æ•°ç›´æŽ¥ä½¿ç”¨ã€‚å½“ç„¶ä½ ä¾ç„¶å¯ä»¥ä½¿ç”¨hashtableæ¥ä¼ é€’(ä½†ä¸æŽ¨è)ã€‚
+		-- è¿™æ˜¯å’Œjassçš„æœ€å¤§å·®åˆ«ã€‚
 		CJ.TimerStart(CJ.CreateTimer(), 1.00, true, 
 			function () 
 				if n == 8 then
@@ -31,5 +31,11 @@ CJ.TriggerAddAction(trig,
 				end
 			end
 		)
+	end
+)
+
+CJ.TimerStart(CJ.CreateTimer(), 0.1, true, 
+	function () 
+		print('ha!')
 	end
 )

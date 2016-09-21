@@ -1,4 +1,4 @@
--- ¼òÒ×µÄblizzard.lua£¬ÈôĞèÒªÍêÕûµÄblizzard.lua£¬¿ÉÒÔÊ¹ÓÃjass2lua¹¤¾ß£¬×ÔĞĞ×ª»»¡£
+-- ç®€æ˜“çš„blizzard.luaï¼Œè‹¥éœ€è¦å®Œæ•´çš„blizzard.luaï¼Œå¯ä»¥ä½¿ç”¨jass2luaå·¥å…·ï¼Œè‡ªè¡Œè½¬æ¢ã€‚
 
 local CJ = require "jass.common"
 local BJ = {}
