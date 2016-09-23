@@ -112,6 +112,17 @@ library YDWEAbilityState
 		call EXPauseUnit(u, false)
 	endfunction
 
+	native EXGetItemDataString takes integer itemcode, integer data_type returns string
+	native EXSetItemDataString takes integer itemcode, integer data_type, string value returns boolean
+
+	function YDWEGetItemDataString takes integer itemcode, integer data_type returns string
+		return EXGetItemDataString(itemcode, data_type)
+	endfunction
+
+	function YDWESetItemDataString takes integer itemcode, integer data_type, string value returns boolean
+		return EXSetItemDataString(itemcode, data_type, value)
+	endfunction
+
 endlibrary
 
 #endif  /// YDWEAbilityStateIncluded
