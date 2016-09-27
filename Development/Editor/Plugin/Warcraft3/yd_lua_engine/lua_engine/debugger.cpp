@@ -44,7 +44,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 	public:
 		debugger(lua_State* L)
-			: m_(base::path::self().remove_filename().remove_filename().remove_filename() / L"bin" / L"vscode-lua-debug.dll")
+			: m_(base::path::self().remove_filename().remove_filename().remove_filename() / L"bin" / L"vscode-debug.dll")
 			, handel_(0)
 			, update_(0)
 		{
