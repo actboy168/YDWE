@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <functional>
-#include <aero/aero.hpp>
 
 #include "MemoryPatternSearch.h"
 
@@ -15,9 +14,8 @@ struct CPatternSearchPredicate
 {
 	bool operator()(uint8_t b, uint16_t pattern) const
 	{
-		uint8_t m = aero::number_split<2, 1>(pattern);
-		uint8_t v = aero::number_split<2, 0>(pattern);
-
+		uint8_t m = (pattern >> 8) & (~uint8_t(-1));
+		uint8_t v = (pattern >> 0) & (~uint8_t(-1));
 		return (m & b) == (m & v);
 	}
 };
@@ -44,7 +42,7 @@ void *MemoryPatternSearch(void *searchStart, uintptr_t searchLength, uint16_t *p
 {
 	return MemoryPatternSearch(
 		searchStart,
-		aero::p_sum<aero::pointer_type>(searchStart, searchLength),
+		(unsigned char*)searchStart + searchLength,
 		&patchPattern[0],
 		&patchPattern[patternLength / sizeof(uint16_t)]
 	);

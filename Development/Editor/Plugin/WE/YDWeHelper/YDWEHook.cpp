@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <functional>
 #include <regex>
-#include <aero/aero.hpp>
 #include <base/util/unicode.h>
 #include <base/hook/inline.h>
 #include <base/hook/iat_manager.h>
@@ -279,7 +278,7 @@ static int32_t __fastcall DetourWeGetSystemParameter(LPCSTR parentKey, LPCSTR ch
 
 static uintptr_t pgTrueWeVerifyMapCellsLimit;
 static bool isWeVerifyMapCellsLimitHookInstalled;
-static void *pgMapCellsGetUnknownGlobalFlag;
+static uintptr_t pgMapCellsGetUnknownGlobalFlag;
 
 std::unique_ptr<CMemoryPatch> pgWeVerifyMapCellsLimitPatcher;
 
@@ -375,10 +374,10 @@ static void InitInlineHook()
 
 	pgTrueWeVerifyMapCellsLimit =  (uintptr_t)0x004E1EF0;
 	LOGGING_TRACE(lg) << base::format("Found WeVerifyMapCellsLimit at 0x%08X.", pgTrueWeVerifyMapCellsLimit);
-	uint32_t callOffset = aero::offset_element_sum<uint32_t>(pgTrueWeVerifyMapCellsLimit, 6);
-	pgMapCellsGetUnknownGlobalFlag = aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, callOffset + 10);
+	uint32_t callOffset = *(uint32_t*)(pgTrueWeVerifyMapCellsLimit + 6);
+	pgMapCellsGetUnknownGlobalFlag = pgTrueWeVerifyMapCellsLimit + callOffset + 10;
 	LOGGING_TRACE(lg) << base::format("Found GetUnkownFlag at 0x%08X.", pgMapCellsGetUnknownGlobalFlag);
-	pgWeVerifyMapCellsLimitPatcher.reset(new CMemoryPatch(aero::p_sum<void *>(pgTrueWeVerifyMapCellsLimit, 3), "\x90\x90", 2));
+	pgWeVerifyMapCellsLimitPatcher.reset(new CMemoryPatch((void*)(pgTrueWeVerifyMapCellsLimit + 3), "\x90\x90", 2));
 	pgWeVerifyMapCellsLimitPatcher->patch();
 	INSTALL_INLINE_HOOK(WeVerifyMapCellsLimit);
 
@@ -389,7 +388,7 @@ static void InitInlineHook()
 	pgTrueWeTriggerNameInputCharCheck = (uintptr_t)0x0042E390;
 	LOGGING_TRACE(lg) << base::format("Found WeTriggerNameInputCharCheck at 0x%08X.", pgTrueWeTriggerNameInputCharCheck);
 	pgWeTriggerNameInputCharCheckPatcher.reset(new CMemoryPatch(
-		aero::pointer_sum<aero::pointer_type>(pgTrueWeTriggerNameInputCharCheck, 3),
+		(void*)(pgTrueWeTriggerNameInputCharCheck + 3),
 		"\x90\x90", 2)
 	);
 	pgWeTriggerNameInputCharCheckPatcher->patch();
