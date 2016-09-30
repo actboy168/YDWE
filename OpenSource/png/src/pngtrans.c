@@ -1,8 +1,8 @@
 
 /* pngtrans.c - transforms the data in a row (used by both readers and writers)
  *
- * Last changed in libpng 1.6.15 [November 20, 2014]
- * Copyright (c) 1998-2014 Glenn Randers-Pehrson
+ * Last changed in libpng 1.6.24 [August 4, 2016]
+ * Copyright (c) 1998-2002,2004,2006-2016 Glenn Randers-Pehrson
  * (Version 0.96 Copyright (c) 1996, 1997 Andreas Dilger)
  * (Version 0.88 Copyright (c) 1995, 1996 Guy Eric Schalnat, Group 42, Inc.)
  *
@@ -30,7 +30,7 @@ png_set_bgr(png_structrp png_ptr)
 #endif
 
 #if defined(PNG_READ_SWAP_SUPPORTED) || defined(PNG_WRITE_SWAP_SUPPORTED)
-/* Turn on 16 bit byte swapping */
+/* Turn on 16-bit byte swapping */
 void PNGAPI
 png_set_swap(png_structrp png_ptr)
 {
@@ -172,13 +172,14 @@ png_set_filler(png_structrp png_ptr, png_uint_32 filler, int filler_loc)
                    * size!
                    */
                   png_app_error(png_ptr,
-                     "png_set_filler is invalid for low bit depth gray output");
+                      "png_set_filler is invalid for"
+                      " low bit depth gray output");
                   return;
                }
 
             default:
                png_app_error(png_ptr,
-                  "png_set_filler: inappropriate color type");
+                   "png_set_filler: inappropriate color type");
                return;
          }
 #     else
@@ -313,7 +314,7 @@ png_do_invert(png_row_infop row_info, png_bytep row)
 
 #ifdef PNG_16BIT_SUPPORTED
 #if defined(PNG_READ_SWAP_SUPPORTED) || defined(PNG_WRITE_SWAP_SUPPORTED)
-/* Swaps byte order on 16 bit depth images */
+/* Swaps byte order on 16-bit depth images */
 void /* PRIVATE */
 png_do_swap(png_row_infop row_info, png_bytep row)
 {
@@ -704,7 +705,7 @@ png_do_check_palette_indexes(png_structrp png_ptr, png_row_infop row_info)
              */
             for (; rp > png_ptr->row_buf; rp--)
             {
-              if (*rp >> padding != 0)
+              if ((*rp >> padding) != 0)
                  png_ptr->num_palette_max = 1;
               padding = 0;
             }
@@ -797,7 +798,7 @@ png_set_user_transform_info(png_structrp png_ptr, png_voidp
       (png_ptr->flags & PNG_FLAG_ROW_INIT) != 0)
    {
       png_app_error(png_ptr,
-            "info change after png_start_read_image or png_read_update_info");
+          "info change after png_start_read_image or png_read_update_info");
       return;
    }
 #endif
