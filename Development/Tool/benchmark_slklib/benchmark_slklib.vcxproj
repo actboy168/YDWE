@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InterfaceStormLib.h" />
+    <ClInclude Include="timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="benchmark_1.cpp" />
+    <ClCompile Include="benchmark_2.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\SlkLib\SlkLib.vcxproj">
+      <Project>{4affe3a0-639d-11e2-a80e-ab2baf291a2f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\ydbase\ydbase.vcxproj">
+      <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C371743B-AD12-4A31-82DF-5A058083773F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>benchmark_slklib</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)build\bin\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)build\obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)build\bin\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)build\obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;SFMPQ_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(OutDir)StormLib_dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(CoreBin)SlkLib.dll" "$(OutDir)SlkLib.dll" /d /y /e
+
+xcopy "$(CoreBin)SlkLib.pdb" "$(OutDir)SlkLib.pdb" /d /y /e
+
+xcopy "$(CoreBin)SlkLib.lib" "$(OutDir)SlkLib.lib" /d /y /e
+
+xcopy "$(CoreBin)YDWEBase.dll" "$(OutDir)ydbase.dll" /d /y /e
+
+xcopy "$(CoreBin)YDWEBase.pdb" "$(OutDir)ydbase.pdb" /d /y /e
+
+xcopy "$(CoreBin)YDWEBase.lib" "$(OutDir)ydbase.lib" /d /y /e
+
+echo "F" | xcopy "$(OpenSource)StormLib\Current\bin\$(PlatformName)\$(ConfigurationName)\StormLib.dll" "$(OutDir)StormLib.dll" /d /y /e
+
+echo "F" | xcopy "$(OpenSource)StormLib\Current\lib\$(PlatformName)\$(ConfigurationName)\StormLib_dll.lib" "$(OutDir)StormLib_dll.lib" /d /y /e
+
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_filesystem-vc100-mt-gd-1_55.dll" "$(OutDir)boost_filesystem-vc100-mt-gd-1_55.dll" /d /y /e
+
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_system-vc100-mt-gd-1_55.dll" "$(OutDir)boost_system-vc100-mt-gd-1_55.dll" /d /y /e
+
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_timer-vc100-mt-gd-1_55.dll" "$(OutDir)boost_timer-vc100-mt-gd-1_55.dll" /d /y /e
+
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_chrono-vc100-mt-gd-1_55.dll" "$(OutDir)boost_chrono-vc100-mt-gd-1_55.dll" /d /y /e
+
+
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;SFMPQ_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>$(OutDir)StormLib_dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PreBuildEvent>
+      <Command>echo "F" | xcopy "$(CoreBin)SlkLib.dll" "$(OutDir)SlkLib.dll" /d /y
+
+echo "F" | xcopy "$(CoreBin)SlkLib.pdb" "$(OutDir)SlkLib.pdb" /d /y
+
+echo "F" | xcopy "$(CoreBin)SlkLib.lib" "$(OutDir)SlkLib.lib" /d /y
+
+echo "F" | xcopy "$(CoreBin)ydbase.dll" "$(OutDir)ydbase.dll" /d /y
+
+echo "F" | xcopy "$(CoreBin)ydbase.pdb" "$(OutDir)ydbase.pdb" /d /y
+
+echo "F" | xcopy "$(CoreBin)ydbase.lib" "$(OutDir)ydbase.lib" /d /y
+
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_filesystem-vc100-mt-1_55.dll" "$(OutDir)boost_filesystem-vc100-mt-1_55.dll" /d /y /e
+
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_system-vc100-mt-1_55.dll" "$(OutDir)boost_system-vc100-mt-1_55.dll" /d /y /e
+
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_timer-vc100-mt-1_55.dll" "$(OutDir)boost_timer-vc100-mt-1_55.dll" /d /y /e
+
+echo "F" | xcopy "$(OpenSource)Boost\stage\lib\boost_chrono-vc100-mt-1_55.dll" "$(OutDir)boost_chrono-vc100-mt-1_55.dll" /d /y /e
+
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

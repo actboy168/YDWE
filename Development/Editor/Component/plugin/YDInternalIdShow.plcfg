@@ -1,6 +1,0 @@
-[Info]
-PluginName = YDInternalIdShow
-[Load]
-Enable = 1
-Loader = YDInternalIdShow.lua
-Dll    = YDInternalIdShow.dll

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <YDWE>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))</YDWE>
+    <OpenSource>$(YDWE)\..\OpenSource\</OpenSource>
+    <ThirdParty>$(YDWE)\..\ThirdParty\</ThirdParty>
+    <BuildDir>$(YDWE)\Build\</BuildDir>
+    <BuildObjDir>$(BuildDir)obj\$(Configuration)\</BuildObjDir>
+    <BuildBinDir>$(BuildDir)bin\$(Configuration)\</BuildBinDir>
+    <CoreBin>$(BuildBinDir)bin\</CoreBin>
+    <CoreObj>$(BuildObjDir)Core\$(ProjectName)\</CoreObj>
+    <LuaPluginBin>$(BuildBinDir)bin\modules\</LuaPluginBin>
+    <LuaPluginObj>$(BuildObjDir)Lua\$(ProjectName)\</LuaPluginObj>
+    <Warcraft3PluginBin>$(BuildBinDir)plugin\warcraft3\</Warcraft3PluginBin>
+    <Warcraft3PluginObj>$(BuildObjDir)Warcraft3\$(ProjectName)\</Warcraft3PluginObj>
+    <WEPluginBin>$(BuildBinDir)plugin\</WEPluginBin>
+    <WEPluginObj>$(BuildObjDir)WE\$(ProjectName)\</WEPluginObj>
+    <UIObj>$(BuildDir)obj\UI\$(ProjectName)\$(Configuration)\</UIObj>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(CoreBin)</OutDir>
+    <IntDir>$(CoreObj)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\SlkLib;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Boost;$(OpenSource)\Lua\Current\include;$(OpenSource)\LuaBind\Current\include;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(OpenSource)\Boost\stage\lib;$(OpenSource)\Lua\Current\lib\$(PlatformName)\$(ConfigurationName);$(OpenSource)\StormLib\Current\lib\$(PlatformName)\$(ConfigurationName);$(ThirdParty)\Blizzard\Storm\Current\lib\Win32\DebugRelease;$(ThirdParty)\Microsoft\Detours\Current\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ResourceCompile>
+      <IgnoreStandardIncludePath>
+      </IgnoreStandardIncludePath>
+    </ResourceCompile>
+    <ResourceCompile>
+      <ShowProgress>
+      </ShowProgress>
+      <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core\YDWEVersion;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="YDWE">
+      <Value>$(YDWE)</Value>
+    </BuildMacro>
+    <BuildMacro Include="OpenSource">
+      <Value>$(OpenSource)</Value>
+    </BuildMacro>
+    <BuildMacro Include="ThirdParty">
+      <Value>$(ThirdParty)</Value>
+    </BuildMacro>
+    <BuildMacro Include="BuildDir">
+      <Value>$(BuildDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="BuildObjDir">
+      <Value>$(BuildObjDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="BuildBinDir">
+      <Value>$(BuildBinDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="CoreBin">
+      <Value>$(CoreBin)</Value>
+    </BuildMacro>
+    <BuildMacro Include="CoreObj">
+      <Value>$(CoreObj)</Value>
+    </BuildMacro>
+    <BuildMacro Include="LuaPluginBin">
+      <Value>$(LuaPluginBin)</Value>
+    </BuildMacro>
+    <BuildMacro Include="LuaPluginObj">
+      <Value>$(LuaPluginObj)</Value>
+    </BuildMacro>
+    <BuildMacro Include="Warcraft3PluginBin">
+      <Value>$(Warcraft3PluginBin)</Value>
+    </BuildMacro>
+    <BuildMacro Include="Warcraft3PluginObj">
+      <Value>$(Warcraft3PluginObj)</Value>
+    </BuildMacro>
+    <BuildMacro Include="WEPluginBin">
+      <Value>$(WEPluginBin)</Value>
+    </BuildMacro>
+    <BuildMacro Include="WEPluginObj">
+      <Value>$(WEPluginObj)</Value>
+    </BuildMacro>
+    <BuildMacro Include="UIObj">
+      <Value>$(UIObj)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

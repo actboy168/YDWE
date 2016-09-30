@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C7375FD0-FFEB-44EC-BC9F-BDDBFE9C922B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>YDTrigger</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120_xp</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(WEPluginBin)</OutDir>
+    <IntDir>$(WEPluginObj)</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(WEPluginBin)</OutDir>
+    <IntDir>$(WEPluginObj)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;YDTRIGGER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ThirdParty)\Blizzard\Storm\Current\include;$(ThirdParty)\Microsoft\Detours\Current\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ModuleDefinitionFile>YDTrigger.def</ModuleDefinitionFile>
+      <AdditionalDependencies>Storm.lib;Detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MinSpace</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;YDTRIGGER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ThirdParty)\Blizzard\Storm\Current\include;$(ThirdParty)\Microsoft\Detours\Current\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ModuleDefinitionFile>YDTrigger.def</ModuleDefinitionFile>
+      <AdditionalDependencies>Storm.lib;Detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="CC_Main_Hook.cpp" />
+    <ClCompile Include="ChangeGUIType_Hook.cpp" />
+    <ClCompile Include="Common.cpp" />
+    <ClCompile Include="ConvertString\ConvertString.cpp" />
+    <ClCompile Include="ConvertString\gb2py.cpp" />
+    <ClCompile Include="ConvertTriggerName_Hook.cpp" />
+    <ClCompile Include="Core\CC_CountBlock.cpp" />
+    <ClCompile Include="Core\CC_PutActionEx_Hook.cpp" />
+    <ClCompile Include="Core\CC_PutBlock_Action.cpp" />
+    <ClCompile Include="Core\CC_PutBlock_Condition.cpp" />
+    <ClCompile Include="Core\CC_PutBlock_Event.cpp" />
+    <ClCompile Include="Core\CC_PutConditionEx.cpp" />
+    <ClCompile Include="Core\CC_PutEventRegisterEx.cpp" />
+    <ClCompile Include="Core\CC_PutExternFuncEx.cpp" />
+    <ClCompile Include="Core\CC_PutLocal.cpp" />
+    <ClCompile Include="Core\CC_PutTrigger_Hook.cpp" />
+    <ClCompile Include="Core\CC_PutVar_Code.cpp" />
+    <ClCompile Include="Core\CC_PutVar_Other_Hook.cpp" />
+    <ClCompile Include="Core\CC_Put_endglobalsHook.cpp" />
+    <ClCompile Include="Core\CC_Put_globalsHook.cpp" />
+    <ClCompile Include="Core\CC_SP_UserData.cpp" />
+    <ClCompile Include="Core\CC_VarType.cpp" />
+    <ClCompile Include="Core\GetVarType.cpp" />
+    <ClCompile Include="Core\locvar.cpp" />
+    <ClCompile Include="Core\SaveLoadCheck.cpp" />
+    <ClCompile Include="Core\trigger_data_ui.cpp" />
+    <ClCompile Include="CreateYDTriggerImportFile.cpp" />
+    <ClCompile Include="Detours\detoured.cpp" />
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="GetGlobalVarName_Hook.cpp" />
+    <ClCompile Include="Hashtable\GUIID_Table.cpp" />
+    <ClCompile Include="Hashtable\Hashtable.cpp" />
+    <ClCompile Include="Hook.cpp" />
+    <ClCompile Include="SetGUIId_Hook.cpp" />
+    <ClCompile Include="SetGUI_Hook.cpp" />
+    <ClCompile Include="ShowError.cpp" />
+    <ClCompile Include="Storm\StringHash.cpp" />
+    <ClCompile Include="TriggerParameterDialog_FuncList_Hook.cpp" />
+    <ClCompile Include="TriggerParameterDialog_Type_Hook.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="YDTrigger.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="ConvertString\ConvertString.h" />
+    <ClInclude Include="Core\locvar.h" />
+    <ClInclude Include="Core\CC_GUIID.h" />
+    <ClInclude Include="Core\CC_Include.h" />
+    <ClInclude Include="Core\CC_Put.h" />
+    <ClInclude Include="Core\CC_SP_UserData.h" />
+    <ClInclude Include="Core\CC_VarType.h" />
+    <ClInclude Include="Detours\detoured.h" />
+    <ClInclude Include="Hashtable\GUIID_Table.h" />
+    <ClInclude Include="Hashtable\Hashtable.h" />
+    <ClInclude Include="Hook.h" />
+    <ClInclude Include="Storm\StormAdapter.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="version.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,6 +1,0 @@
-[Info]
-PluginName = YDColorizer
-[Load]
-Enable = 1
-Loader = YDColorizer.lua
-Dll    = YDColorizer.dll

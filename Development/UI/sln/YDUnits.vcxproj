@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="YDTrigger|Win32">
+      <Configuration>YDTrigger</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="YDWE|Win32">
+      <Configuration>YDWE</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\Units\doodads\doodadmetadata.slk" />
+    <None Include="..\src\Units\doodads\doodads.slk" />
+    <None Include="..\src\Units\ui\loading-yuexie.blp" />
+    <None Include="..\src\Units\ui\miscdata.txt" />
+    <None Include="..\src\Units\ui\uniteditordata.txt" />
+    <None Include="..\src\Units\ui\worldeditdata.txt" />
+    <None Include="..\src\Units\units\abilitybuffdata.slk" />
+    <None Include="..\src\Units\units\abilitybuffmetadata.slk" />
+    <None Include="..\src\Units\units\abilitydata.slk" />
+    <None Include="..\src\Units\units\abilitymetadata.slk" />
+    <None Include="..\src\Units\units\campaignabilityfunc.txt" />
+    <None Include="..\src\Units\units\campaignabilitystrings.txt" />
+    <None Include="..\src\Units\units\campaignunitfunc.txt" />
+    <None Include="..\src\Units\units\campaignunitstrings.txt" />
+    <None Include="..\src\Units\units\commandstrings.txt" />
+    <None Include="..\src\Units\units\commonabilityfunc.txt" />
+    <None Include="..\src\Units\units\commonabilitystrings.txt" />
+    <None Include="..\src\Units\units\destructabledata.slk" />
+    <None Include="..\src\Units\units\destructablemetadata.slk" />
+    <None Include="..\src\Units\units\humanabilityfunc.txt" />
+    <None Include="..\src\Units\units\humanabilitystrings.txt" />
+    <None Include="..\src\Units\units\humanunitfunc.txt" />
+    <None Include="..\src\Units\units\humanunitstrings.txt" />
+    <None Include="..\src\Units\units\humanupgradefunc.txt" />
+    <None Include="..\src\Units\units\humanupgradestrings.txt" />
+    <None Include="..\src\Units\units\itemabilityfunc.txt" />
+    <None Include="..\src\Units\units\itemabilitystrings.txt" />
+    <None Include="..\src\Units\units\itemdata.slk" />
+    <None Include="..\src\Units\units\itemfunc.txt" />
+    <None Include="..\src\Units\units\itemstrings.txt" />
+    <None Include="..\src\Units\units\miscdata.txt" />
+    <None Include="..\src\Units\units\miscgame.txt" />
+    <None Include="..\src\Units\units\miscmetadata.slk" />
+    <None Include="..\src\Units\units\miscmetadata.slk.bak" />
+    <None Include="..\src\Units\units\neutralabilityfunc.txt" />
+    <None Include="..\src\Units\units\neutralabilitystrings.txt" />
+    <None Include="..\src\Units\units\neutralunitfunc.txt" />
+    <None Include="..\src\Units\units\neutralunitstrings.txt" />
+    <None Include="..\src\Units\units\nightelfabilityfunc.txt" />
+    <None Include="..\src\Units\units\nightelfabilitystrings.txt" />
+    <None Include="..\src\Units\units\nightelfunitfunc.txt" />
+    <None Include="..\src\Units\units\nightelfunitstrings.txt" />
+    <None Include="..\src\Units\units\orcabilityfunc.txt" />
+    <None Include="..\src\Units\units\orcabilitystrings.txt" />
+    <None Include="..\src\Units\units\orcunitfunc.txt" />
+    <None Include="..\src\Units\units\orcunitstrings.txt" />
+    <None Include="..\src\Units\units\orcupgradefunc.txt" />
+    <None Include="..\src\Units\units\undeadabilityfunc.txt" />
+    <None Include="..\src\Units\units\undeadabilitystrings.txt" />
+    <None Include="..\src\Units\units\undeadunitfunc.txt" />
+    <None Include="..\src\Units\units\undeadunitstrings.txt" />
+    <None Include="..\src\Units\units\undeadupgradefunc.txt" />
+    <None Include="..\src\Units\units\undeadupgradestrings.txt" />
+    <None Include="..\src\Units\units\unitabilities.slk" />
+    <None Include="..\src\Units\units\unitbalance.slk" />
+    <None Include="..\src\Units\units\unitdata.slk" />
+    <None Include="..\src\Units\units\unitmetadata.slk" />
+    <None Include="..\src\Units\units\unitui.slk" />
+    <None Include="..\src\Units\units\unitweapons.slk" />
+    <None Include="..\src\Units\units\upgradedata.slk" />
+    <None Include="..\src\Units\units\upgradeeffectmetadata.slk" />
+    <None Include="..\src\Units\units\upgrademetadata.slk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\src\Units\units\campaignupgradestrings.txt" />
+    <Text Include="..\src\Units\units\neutralupgradestrings.txt" />
+    <Text Include="..\src\Units\units\nightelfupgradestrings.txt" />
+    <Text Include="..\src\Units\units\orcupgradestrings.txt" />
+    <Text Include="..\src\Units\units\unitglobalstrings.txt" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2871C9ED-420D-4296-835D-0FAC3579B8F5}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>YDUnits</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='YDTrigger|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='YDWE|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='YDTrigger|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='YDWE|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='YDTrigger|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
+    <PreLinkEventUseInBuild>true</PreLinkEventUseInBuild>
+    <CustomBuildBeforeTargets>
+    </CustomBuildBeforeTargets>
+    <IntDir>$(UIObj)</IntDir>
+    <OutDir>$(UIObj)</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='YDWE|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CustomBuildAfterTargets />
+    <IntDir>$(UIObj)</IntDir>
+    <OutDir>$(UIObj)</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='YDTrigger|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>
+      </PreprocessorDefinitions>
+      <UseUnicodeForAssemblerListing>
+      </UseUnicodeForAssemblerListing>
+      <UndefineAllPreprocessorDefinitions>true</UndefineAllPreprocessorDefinitions>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <PreprocessToFile>true</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>true</PreprocessSuppressLineNumbers>
+      <PreprocessKeepComments>true</PreprocessKeepComments>
+      <BrowseInformationFile>$(IntDir)</BrowseInformationFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent />
+    <Lib />
+    <BuildLog />
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <BuildLog />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='YDWE|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>DISABLE_YDTRIGGER</PreprocessorDefinitions>
+      <UseUnicodeForAssemblerListing>
+      </UseUnicodeForAssemblerListing>
+      <UndefineAllPreprocessorDefinitions>true</UndefineAllPreprocessorDefinitions>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <PreprocessToFile>true</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>true</PreprocessSuppressLineNumbers>
+      <PreprocessKeepComments>true</PreprocessKeepComments>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent />
+    <Lib />
+    <BuildLog />
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <BuildLog />
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

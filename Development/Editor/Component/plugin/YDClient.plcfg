@@ -1,6 +1,0 @@
-[Info]
-PluginName = YDClient
-[Load]
-Enable = 1
-Loader = YDClient.lua
-Dll    = YDClient.dll
