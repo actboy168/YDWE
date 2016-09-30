@@ -57,13 +57,11 @@ def build_all(msvc_version, configuration):
     from build_anti_bj_leak import build_anti_bj_leak
     from copy_all           import copy_all
     from pack_skin          import pack_skin
-    from pack_units         import pack_units
 
     complie(msvc_version, configuration)
     build_anti_bj_leak()
     copy_all(msvc_version, configuration)
     pack_skin()
-    pack_units()
 
 def build(msvc_version, configuration):
     Log()

@@ -1,7 +1,0 @@
-#include "Include.h"
-
-#include "String/TriggerEventStrings.ui"
-#include "String/TriggerConditionStrings.ui"
-#include "String/TriggerActionStrings.ui"
-#include "String/TriggerCallStrings.ui"
-#include "String/AIFunctionStrings.ui"
