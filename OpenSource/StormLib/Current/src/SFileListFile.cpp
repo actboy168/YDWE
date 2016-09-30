@@ -350,7 +350,7 @@ static int SListFileCreateNodeForAllLocales(TMPQArchive * ha, const char * szFil
         while(pHash != NULL)
         {
             // Allocate file name for the file entry
-            AllocateFileName(ha, ha->pFileTable + pHash->dwBlockIndex, szFileName);
+            AllocateFileName(ha, ha->pFileTable + MPQ_BLOCK_INDEX(pHash), szFileName);
 
             // Now find the next language version of the file
             pHash = GetNextHashEntry(ha, pFirstHash, pHash);
@@ -543,7 +543,7 @@ static bool DoListFileSearch(TListFileCache * pCache, SFILE_FIND_DATA * lpFindFi
             if(nLength != 0 && CheckWildCard(szFileName, pCache->szWildCard))
             {
                 if(nLength >= sizeof(lpFindFileData->cFileName))
-                    nLength = sizeof(lpFindFileData->cFileName);
+                    nLength = sizeof(lpFindFileData->cFileName) - 1;
 
                 memcpy(lpFindFileData->cFileName, szFileName, nLength);
                 lpFindFileData->cFileName[nLength] = 0;

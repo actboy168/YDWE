@@ -178,7 +178,7 @@ bool WINAPI SFileCreateArchive2(const TCHAR * szMpqName, PSFILE_CREATE_MPQ pCrea
     }
 
     // If file count is not zero, initialize the hash table size
-    dwHashTableSize = GetHashTableSizeForFileCount(pCreateInfo->dwMaxFileCount + dwReservedFiles);
+    dwHashTableSize = GetNearestPowerOfTwo(pCreateInfo->dwMaxFileCount + dwReservedFiles);
 
     // Retrieve the file size and round it up to 0x200 bytes
     FileStream_GetSize(pStream, &MpqPos);
@@ -202,7 +202,7 @@ bool WINAPI SFileCreateArchive2(const TCHAR * szMpqName, PSFILE_CREATE_MPQ pCrea
     if(nError == ERROR_SUCCESS)
     {
         memset(ha, 0, sizeof(TMPQArchive));
-        ha->pfnHashString   = HashString;
+        ha->pfnHashString   = HashStringSlash;
         ha->pStream         = pStream;
         ha->dwSectorSize    = pCreateInfo->dwSectorSize;
         ha->UserDataPos     = MpqPos;

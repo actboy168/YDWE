@@ -158,30 +158,28 @@ bool WINAPI SFileOpenArchive(
     TFileEntry * pFileEntry;
     ULONGLONG FileSize = 0;             // Size of the file
     LPBYTE pbHeaderBuffer = NULL;       // Buffer for searching MPQ header
+    DWORD dwStreamFlags = (dwFlags & STREAM_FLAGS_MASK);
     bool bIsWarcraft3Map = false;
     int nError = ERROR_SUCCESS;   
 
     // Verify the parameters
     if(szMpqName == NULL || *szMpqName == 0 || phMpq == NULL)
-        nError = ERROR_INVALID_PARAMETER;
+    {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return false;
+    }
 
     // One time initialization of MPQ cryptography
     InitializeMpqCryptography();
     dwPriority = dwPriority;
 
+    // If not forcing MPQ v 1.0, also use file bitmap
+    dwStreamFlags |= (dwFlags & MPQ_OPEN_FORCE_MPQ_V1) ? 0 : STREAM_FLAG_USE_BITMAP;
+
     // Open the MPQ archive file
-    if(nError == ERROR_SUCCESS)
-    {
-        DWORD dwStreamFlags = (dwFlags & STREAM_FLAGS_MASK);
-
-        // If not forcing MPQ v 1.0, also use file bitmap
-        dwStreamFlags |= (dwFlags & MPQ_OPEN_FORCE_MPQ_V1) ? 0 : STREAM_FLAG_USE_BITMAP;
-
-        // Initialize the stream
-        pStream = FileStream_OpenFile(szMpqName, dwStreamFlags);
-        if(pStream == NULL)
-            nError = GetLastError();
-    }
+    pStream = FileStream_OpenFile(szMpqName, dwStreamFlags);
+    if(pStream == NULL)
+        return false;
 
     // Check the file size. There must be at least 0x20 bytes
     if(nError == ERROR_SUCCESS)
@@ -211,19 +209,19 @@ bool WINAPI SFileOpenArchive(
     {
         ULONGLONG SearchOffset = 0;
         ULONGLONG EndOfSearch = FileSize;
-        DWORD dwStreamFlags = 0;
+        DWORD dwStrmFlags = 0;
         DWORD dwHeaderSize;
         DWORD dwHeaderID;
         bool bSearchComplete = false;
 
         memset(ha, 0, sizeof(TMPQArchive));
-        ha->pfnHashString = HashString;
+        ha->pfnHashString = HashStringSlash;
         ha->pStream = pStream;
         pStream = NULL;
 
         // Set the archive read only if the stream is read-only
-        FileStream_GetFlags(ha->pStream, &dwStreamFlags);
-        ha->dwFlags |= (dwStreamFlags & STREAM_FLAG_READ_ONLY) ? MPQ_FLAG_READ_ONLY : 0;
+        FileStream_GetFlags(ha->pStream, &dwStrmFlags);
+        ha->dwFlags |= (dwStrmFlags & STREAM_FLAG_READ_ONLY) ? MPQ_FLAG_READ_ONLY : 0;
 
         // Also remember if we shall check sector CRCs when reading file
         ha->dwFlags |= (dwFlags & MPQ_OPEN_CHECK_SECTOR_CRC) ? MPQ_FLAG_CHECK_SECTOR_CRC : 0;
@@ -367,6 +365,13 @@ bool WINAPI SFileOpenArchive(
             ha->pUserData = NULL;
         }
 
+        // Anti-overflow. If the hash table size in the header is
+        // higher than 0x10000000, it would overflow in 32-bit version
+        // Observed in the malformed Warcraft III maps
+        // Example map: MPQ_2016_v1_ProtectedMap_TableSizeOverflow.w3x
+        ha->pHeader->dwBlockTableSize = (ha->pHeader->dwBlockTableSize & BLOCK_INDEX_MASK);
+        ha->pHeader->dwHashTableSize = (ha->pHeader->dwHashTableSize & BLOCK_INDEX_MASK);
+
         // Both MPQ_OPEN_NO_LISTFILE or MPQ_OPEN_NO_ATTRIBUTES trigger read only mode
         if(dwFlags & (MPQ_OPEN_NO_LISTFILE | MPQ_OPEN_NO_ATTRIBUTES))
             ha->dwFlags |= MPQ_FLAG_READ_ONLY;
@@ -430,7 +435,7 @@ bool WINAPI SFileOpenArchive(
         if(pFileEntry != NULL)
         {
             // Just remember that the archive is weak-signed
-            assert(pFileEntry->dwFlags == MPQ_FILE_EXISTS);
+            assert((pFileEntry->dwFlags & MPQ_FILE_EXISTS) != 0);
             ha->dwFileFlags3 = pFileEntry->dwFlags;
         }
 
@@ -450,7 +455,8 @@ bool WINAPI SFileOpenArchive(
     // Free the header buffer
     if(pbHeaderBuffer != NULL)
         STORM_FREE(pbHeaderBuffer);
-    *phMpq = ha;
+    if(phMpq != NULL)
+        *phMpq = ha;
     return (nError == ERROR_SUCCESS);
 }
 

@@ -13,15 +13,7 @@
 #include "StormCommon.h"
 
 //-----------------------------------------------------------------------------
-// Defines
-
-#define LISTFILE_CACHE_SIZE 0x1000
-
-//-----------------------------------------------------------------------------
 // Private structure used for file search (search handle)
-
-struct TMPQSearch;
-typedef int (*MPQSEARCH)(TMPQSearch *, SFILE_FIND_DATA *);
 
 // Used by searching in MPQ archives
 struct TMPQSearch
@@ -146,7 +138,7 @@ static bool FileWasFoundBefore(
         }
 
         // Calculate the hash to the table
-        dwNameHash = HashString(szRealFileName, MPQ_HASH_NAME_A);
+        dwNameHash = ha->pfnHashString(szRealFileName, MPQ_HASH_NAME_A);
         dwStartIndex = dwIndex = (dwNameHash % hs->dwSearchTableItems);
 
         // The file might have been found before
@@ -185,7 +177,7 @@ static TFileEntry * FindPatchEntry(TMPQArchive * ha, TFileEntry * pFileEntry)
 {
     TFileEntry * pPatchEntry = NULL;
     TFileEntry * pTempEntry;
-    char szFileName[MAX_PATH];
+    char szFileName[MAX_PATH+1];
 
     // Go while there are patches
     while(ha->haPatch != NULL)
@@ -196,8 +188,8 @@ static TFileEntry * FindPatchEntry(TMPQArchive * ha, TFileEntry * pFileEntry)
 
         // Prepare the prefix for the file name
         if(ha->pPatchPrefix != NULL)
-            strcpy(szFileName, ha->pPatchPrefix->szPatchPrefix);
-        strcat(szFileName, pFileEntry->szFileName);
+            StringCopyA(szFileName, ha->pPatchPrefix->szPatchPrefix, MAX_PATH);
+        StringCatA(szFileName, pFileEntry->szFileName, MAX_PATH);
 
         // Try to find the file there
         pTempEntry = GetFileEntryExact(ha, szFileName, 0, NULL);
@@ -280,7 +272,7 @@ static bool DoMPQSearch_FileEntry(
                     }
 
                     // Fill the file name and plain file name
-                    strcpy(lpFindFileData->cFileName, szFileName + nPrefixLength);
+                    StringCopyA(lpFindFileData->cFileName, szFileName + nPrefixLength, MAX_PATH-1);
                     lpFindFileData->szPlainName = (char *)GetPlainFileName(lpFindFileData->cFileName);
                     return true;
                 }
@@ -307,7 +299,7 @@ static int DoMPQSearch_HashTable(TMPQSearch * hs, SFILE_FIND_DATA * lpFindFileDa
         if(IsValidHashEntry(ha, pHash))
         {
             // Check if this file entry should be included in the search result
-            if(DoMPQSearch_FileEntry(hs, lpFindFileData, ha, pHash, ha->pFileTable + pHash->dwBlockIndex))
+            if(DoMPQSearch_FileEntry(hs, lpFindFileData, ha, pHash, ha->pFileTable + MPQ_BLOCK_INDEX(pHash)))
                 return ERROR_SUCCESS;
         }
     }
