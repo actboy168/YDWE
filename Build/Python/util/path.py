@@ -25,8 +25,8 @@ path['ProjectRoot']  = BuildRoot()
 path['Development']  = path['ProjectRoot'] / 'Development'
 path['OpenSource']   = path['ProjectRoot'] / 'OpenSource'
 path['ThirdParty']   = path['ProjectRoot'] / 'ThirdParty'
-path['CoreRoot']     = path['Development'] / 'Editor' / 'Core'
-path['ResultRoot']   = path['Development'] / 'Editor' / 'Build'
+path['CoreRoot']     = path['Development'] / 'Core'
+path['ResultRoot']   = path['Development'] / 'Build'
 path['UIObj']        = path['ResultRoot'] / 'obj' / 'UI' / 'YDUI'
 
 def ResetPath(configuration):    

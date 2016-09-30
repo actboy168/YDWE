@@ -1,0 +1,18 @@
+32 icon "main.ico"
+64 cursor discardable "x.cur"
+
+1 versioninfo
+fileversion 1,4,1,5
+productversion 1,4,1,5
+fileos 0x00000004
+filetype 0x00000001 {
+	block "StringFileInfo" {
+		block "040904e4" {
+			value "CompanyName", "ADX\0"
+			value "FileDescription", "cJass parser and optimizer\0"
+		}
+	}
+	block "VarFileInfo" {
+		value "Translation",0x0409, 0x04e4
+	}
+}

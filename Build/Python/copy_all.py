@@ -28,14 +28,14 @@ def copy_lib_dll(name, configuration, version = 'Current'):
     fs.copy_directory(path['OpenSource'] / name / version / 'bin' / 'Win32' / configuration, path['ResultCore'], ['.dll'])
     
 def copy_lua_script():
-    fs.copy_directory(path['Development'] / 'Editor' / 'Core' / 'Script' / 'lua', path['Result'] / 'share' / 'script', ['.lua'])
+    fs.copy_directory(path['Development'] / 'Core' / 'Script' / 'lua', path['Result'] / 'share' / 'script', ['.lua'])
 
 def copy_boost_preprocessor():
     fs.copy_directory(path['OpenSource'] / 'Boost' / 'boost' / 'preprocessor', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor')
     fs.copy_file(path['OpenSource'] / 'Boost' / 'boost' / 'preprocessor.hpp', path['ResultPlugin'] / 'wave' / 'include' / 'boost' / 'preprocessor.hpp')
     
 def copy_component():
-    fs.copy_directory(path['Development'] / 'Editor' / 'Component', path['Result'])
+    fs.copy_directory(path['Development'] / 'Component', path['Result'])
 
 def copy_all(msvc_version, configuration):
     print('copy_all')

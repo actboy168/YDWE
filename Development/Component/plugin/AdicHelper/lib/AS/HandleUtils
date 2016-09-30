@@ -1,0 +1,36 @@
+//***************************************************************************
+//*
+//*     <lib> HandleUtils v1    by AppleSheep
+//*
+//***************************************************************************
+
+#guard AS_HandleUtils
+
+hashtable HandleUtils_Hash = InitHashtable()
+
+#define HandleUtils(TypeName,type,Create,StopUse) = {
+    library_once TypeName##Utils
+
+        private key key_##type
+
+        private integer Index = 0
+        private integer Line  = 0
+
+        type New##TypeName() {
+            if Line == 0
+                return Create
+            endif
+            return Load##TypeName##Handle(HandleUtils_Hash,key_##type,Line)
+        }
+
+        nothing Release##TypeName(type v) {
+            Save##TypeName##Handle(HandleUtils_Hash,key_##type,++Line,v)
+            StopUse
+        }
+
+    endlibrary
+}
+
+//HandleUtils( Timer, timer, CreateTimer(), PauseTimer(v) )
+//HandleUtils( Group, group, CreateGroup(), GroupClear(v) )
+

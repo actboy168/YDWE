@@ -1,0 +1,1124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>Grimex Documentation</title>
+
+<style type="text/css">
+<!--
+  body
+  {
+  	background: #FFFFFF;
+  	color: #000000;
+  	font: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  	margin: 5px 10px 10px 10px;
+  	padding: 0px;
+  }
+  a:link
+  {
+  	color: #736636;
+  }
+  a:visited
+  {
+  	color: #BCA88F;
+  }
+  a:hover, a:active
+  {
+  	color: #F7BE10;
+  }
+  .page
+  {
+  	background: #000000;
+  	color: #FFFFFF;
+  }
+  td, th, p, li
+  {
+  	font: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  }
+  .tborder
+  {
+  	background: #000000;
+  	color: #000000;
+  	border: 1px solid #BCA88F;
+  }
+  .tcat
+  {
+  	background: #312121;
+  	color: #FFFFFF;
+  	font: bold 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  }
+  .tcat a:link
+  {
+  	color: #ffffff;
+  	text-decoration: none;
+  }
+  .tcat a:visited
+  {
+  	color: #ffffff;
+  	text-decoration: none;
+  }
+  .tcat a:hover, .tcat a:active
+  {
+  	color: #F7BE10;
+  	text-decoration: underline;
+  }
+  .thead
+  {
+  	background: #554132;
+  	color: #FFFFFF;
+  	font: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  }
+  .thead a:link
+  {
+  	color: #FFFFFF;
+  }
+  .thead a:visited
+  {
+  	color: #FFFFFF;
+  }
+  .thead a:hover, .thead a:active
+  {
+  	color: #F7BE10;
+  }
+  .tfoot
+  {
+  	background: #554132;
+  	color: #FFFFFF;
+  }
+  .tfoot a:link
+  {
+  	color: #D3C6B6;
+  }
+  .tfoot a:visited
+  {
+  	color: #BCA88F;
+  }
+  .tfoot a:hover, .tfoot a:active
+  {
+  	color: #F7BE10;
+  }
+  .alt1, .alt1Active
+  {
+  	background: #332C29;
+  	color: #CCCCCC;
+  }
+  .alt2, .alt2Active
+  {
+  	background: #222222;
+  	color: #CCCCCC;
+  }
+  td.inlinemod
+  {
+  	background: #715746;
+  	color: #FFFFFF;
+  }
+  .wysiwyg
+  {
+  	background: #332C29;
+  	color: #CCCCCC;
+  	font: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  }
+  textarea, .bginput
+  {
+  	background: #312C29;
+  	color: #F7BE10;
+  	font: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  	border: 1px solid #000000;
+  	padding: 2px;
+  }
+  .button
+  {
+  	font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  }
+  select
+  {
+  	background: #312C29;
+  	color: #CCCCCC;
+  	font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  	border: 1px solid #000000;
+  	padding: 1px;
+  }
+  option, optgroup
+  {
+  	font-size: 11px;
+  	font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  }
+  .smallfont
+  {
+  	font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  }
+  .time
+  {
+  	color: #B8A26E;
+  }
+  .navbar
+  {
+  	font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  }
+  .highlight
+  {
+  	background: #F7BE10;
+  	color: #000000;
+  	font-weight: bold;
+  }
+  .fjsel
+  {
+  	background: #3E5C92;
+  	color: #E0E0F6;
+  }
+  .fjdpth0
+  {
+  	background: #F7F7F7;
+  	color: #000000;
+  }
+  .panel
+  {
+  	background: #222222;
+  	color: #CCCCCC;
+  	padding: 10px;
+  	border: 0px outset #808080;
+  }
+  .panelsurround
+  {
+  	background: #332C29;
+  	color: #CCCCCC;
+  }
+  legend
+  {
+  	background: transparent;
+  	color: #D3C6B6;
+  	font: 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+  	font-weight: bold;
+  	padding: 2px;
+  }
+
+  .bigusername { font-size: 14pt; }
+  td.thead, div.thead { padding: 4px; }
+  .pagenav a { text-decoration: none; }
+  .pagenav td { padding: 2px 4px 2px 4px; }
+  .fieldset { margin-bottom: 6px; border: 1px outset #808080; }
+  .fieldset, .fieldset td, .fieldset p, .fieldset li { font-size: 11px;}
+  table.fieldset { border: 0px; }
+  div.fieldset { border: 0px; }
+  form { display: inline; }
+  label { cursor: default; }
+  .normal { font-weight: normal; }
+  .inlineimg { vertical-align: middle; }
+
+	p.setin { margin: 5px 20px 20px; }
+  div.jassblockstart { padding-left: 3%; margin-top:5px; padding-right:1%; width:99%; }
+  span.jassblock { font-size: 13px ; background:#FFFFFF ; color:#000000; font-family:monospace; padding-left: 5px; padding-right: 5px; }
+  div.jassblock { margin-top:5px; border:1px inset gray; width:99%; overflow:auto; background:#FFFFFF ; color:#000000; font-style:normal; }
+  pre.jass { margin:5px; font-weight:bold; } 
+  span.Jword { font-weight:bold; color:#000000; font-style:normal; }
+  span.Jword2 { font-weight:bold; color: #000077; font-style:normal; }
+  span.Jtype { color: #0055AA; font-weight:bold; font-style:normal; }
+  span.Jname { color: #000000; font-weight:normal; font-style:normal; }
+  span.Jnum { color: #000077; font-weight:normal; font-style:normal; }
+  span.Jcomment { color: #008800; font-weight:normal; font-style:normal; }
+  span.Jpreprocessor { color: #888888; font-weight:bold; font-style:normal; }
+  span.Jstring { color: #006000; font-style:italic; font-weight:normal; }
+  span.Jerror { color: #FFFFFF; background:#FF0000; }
+  span.Jhighlight { background:#FFFFCC; }
+  
+  .dtreed { font-family: Tahoma, Arial; font-size: 11px; padding:5px; margin:2px; white-space: nowrap; overflow: auto; }
+  .dtreed span { font-size: 11px; font-style: normal; }
+  .dtreed img { border: 0px; vertical-align: middle; }
+  .dtree { font-family: Tahoma, Arial; font-size: 11px; color: #000; background-color:#FFFFFF; margin-top:0px; border:1px solid #999999; white-space: nowrap; width: 97%; overflow: auto; }
+  .dtree img { border: 0px; vertical-align: middle; }
+  .dtree span { font-size: 11px; font-style: normal; }
+	
+  visiblenode { }
+  invisiblenode { visibility:hidden; position:absolute; }
+-->
+</style>
+
+<script type="text/javascript">
+//<![CDATA[
+ function ExpandCollapseNode(xcp_button,pimg,ming)
+ {
+     if (xcp_button==null) return true;
+     xcp_div=xcp_button.parentNode.getElementsByTagName("div")[0];
+     xcp_img=xcp_button.getElementsByTagName("img")[0];
+     if (xcp_div.style.visibility=="hidden")
+     {
+         xcp_div.style.visibility="inherit";
+         xcp_div.style.position="static";
+         xcp_img.src=ming;
+         xcp_img.setAttribute("alt","Collapse");
+         xcp_img.setAttribute("title","Collapse");
+     }
+     else
+     {
+         xcp_div.style.visibility="hidden";
+         xcp_div.style.position="absolute";
+         xcp_img.src=pimg;
+         xcp_img.setAttribute("alt","Expand");
+         xcp_img.setAttribute("title","Expand");
+     }
+     return false;
+ }
+ 
+ function ExpandCollapseJass(xcp_img, heival)
+ {
+     if (xcp_img==null) return true;
+     xcp_div=xcp_img.parentNode.parentNode.getElementsByTagName("div")[1];
+     xcp_pre=xcp_div.getElementsByTagName("pre")[0];
+     if (xcp_pre.style.visibility=="hidden")
+     {
+         xcp_div.style.height=heival;
+         xcp_pre.style.visibility="inherit";
+         xcp_pre.style.position="static";
+         xcp_img.src="img/minus.gif";
+         xcp_img.setAttribute("alt","Collapse");
+         xcp_img.setAttribute("title","Collapse");
+     }
+     else
+     {
+         xcp_div.style.height="10px";
+         xcp_pre.style.visibility="hidden";
+         xcp_pre.style.position="absolute";
+         xcp_img.src="img/plus.gif";
+         xcp_img.setAttribute("alt","Expand");
+         xcp_img.setAttribute("title","Expand");
+     }
+     return false;
+ }
+ 
+ function ToggleHiddenInfo(xcp_img)
+ {
+ 		 if (xcp_img.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display != '') {
+		 		 xcp_img.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = '';
+         xcp_img.src="img/minus.gif";
+         xcp_img.setAttribute("alt","Collapse");
+         xcp_img.setAttribute("title","Collapse");
+		 } else {
+		 	   xcp_img.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = 'none';
+				 xcp_img.src="img/plus.gif";
+         xcp_img.setAttribute("alt","Expand");
+         xcp_img.setAttribute("title","Expand");
+		 }
+ }
+//]]>
+</script>
+
+</head>
+<body>
+
+<h1>Grim Extension Pack 1.0b</h1>
+
+<p>The Grimoire Extension Pack, or short Grimex, is a set of tools that integrates nicely into Grimoire/Jass NewGen.
+These tools can also be used standalone by calling them from the command line, batch scripts or custom programs.
+Included in this documentation are also a bunch of core Grimoire hacks, that many people might not know about.</p>
+
+<h2>Table of content</h2>
+
+<ul>
+		<li><a href="#quick">Quickstart</a></li>
+		<li><a href="#fi">File Importer</a></li>
+		<li><a href="#pm">Path Mapper</a></li>
+		<li><a href="#ts">Tile Setter</a></li>
+		<li><a href="#fe">File Exporter</a></li>
+		<li><a href="#om">Object Merger</a></li>
+ 		<li><a href="#cm">Constant Merger</a></li>
+		<li><a href="#tm">Trigger Merger</a></li>
+		<li><a href="#pg">Patch Generator</a></li>
+		<li><a href="#grim">Grimoire Addons</a></li>
+		<li><a href="#appendix">Appendix</a></li>
+		<li><a href="#credits">Credits</a></li>
+</ul>
+
+<!--
+<br>
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Expand" alt="Expand" src="img/plus.gif" onclick="return ExpandCollapseJass(this,'8em')">  JASS:</div><div class="jassblock" style="height: 10px;"><pre style="visibility: hidden; position: absolute;" class="jass"><span class="Jword">globals</span>
+    <span class="Jtype">timer</span> <span class="Jname">Tim</span> = <span class="Jname">CreateTimer</span>()
+    <span class="Jname">Knockback_Data</span> <span class="Jtype">array</span> <span class="Jname">Ar</span>
+
+    <span class="Jhighlight"><span class="Jtype">integer</span> <span class="Jname">Total</span> = <span class="Jnum">0</span></span>
+<span class="Jword">endglobals</span></pre></div></div>
+<br>
+
+<br>
+<div class="jassblockstart"><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external FileImporter CMDBTNMyIcon.bmp MyIcon.blp AUTBTNOtherIcon.tga OtherIcon.blp PASBTNNewIcon.jpg NewIcon.blp</span>
+</pre></div></div><br>
+<br>
+-->
+
+<!--
+<br>
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'8em')">  JASS:</div><div class="jassblock" style="height: 8em;"><pre style="visibility: inherit; position: static;" class="jass"><span class="Jword">globals</span>
+    <span class="Jtype">timer</span> <span class="Jname">Tim</span> = <span class="Jname">CreateTimer</span>()
+    <span class="Jname">Knockback_Data</span> <span class="Jtype">array</span> <span class="Jname">Ar</span>
+
+    <span class="Jhighlight"><span class="Jtype">integer</span> <span class="Jname">Total</span> = <span class="Jnum">0</span></span>
+<span class="Jword">endglobals</span></pre></div></div>
+<br>
+-->
+
+<!--
+<br>
+<span style="font-size: 11px;">
+<div style="margin: 5px 20px 20px;">
+			<div class="smallfont" style="margin-bottom: 2px;">
+					 <img title="Expand" alt="Expand" src="img/plus.gif" onclick="return ToggleHiddenInfo(this)">  <b>Hidden Information:</b>
+			</div>
+			<p></p>
+			<div class="alt2" style="border: 1px solid rgb(209, 215, 220); margin: 0px; padding: 6px;">
+			<div style="display: none;">
+					 This is the hidden text, that you have now revealed.
+			</div>
+			</div>
+</div>
+</span>
+<br>
+-->
+
+<h2><a name="quick"></a>Quickstart</h2>
+
+<p class="setin">This section contains a list of expected parameters for each tool that is part of the Grim Extension pack. People who are using the tools from command line will need these parameters. Also the arguments for a vJASS external call can be derived from these usage instructions. So whoever is familiar with command line will probably find this section enough to get started.</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  File Importer:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">map.w3x lookuppaths ( directory | { diskfilepath archivefilename } )</span>
+</pre></div></div><br>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  Path Mapper:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">map.w3x lookuppaths (checkflags | checktiles) applyflags [checkmode] [applymode]</span>
+</pre></div></div><br>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  Tile Setter:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">map.w3x lookuppaths tileset tilelist</span>
+</pre></div></div><br>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  File Exporter:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">map.w3x lookuppaths [targetdir]</span>
+</pre></div></div><br>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'62px')">  Object Merger:</div><div class="jassblock" style="height: 62px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">map.w3x lookuppaths [ m | r | i ] mergefile { moremergefiles }
+map.w3x lookuppaths ( w3u | w3t | w3b | w3d | w3a | w3h | w3q ) originalid newid { changeid [ level | variation ] value }</span>
+</pre></div></div><br>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  Constant Merger:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">map.w3x lookuppaths mergefile { moremergefiles }</span>
+</pre></div></div><br>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  Trigger Merger:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">map.w3x lookuppaths { war3map.wtg | war3map.wct }</span>
+</pre></div></div><br>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  Patch Generator:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">script.lua lookuppaths patchname { flags }</span>
+</pre></div></div><br>
+
+<p class="setin">For all tools the first argument is the path of the map being modified and the second parameter is a list of lookup directories that is used to resolve relative paths of other files passed in. You can pass  <b>""</b> if you're not using relative paths. Otherwise this is a string of all the paths separated by a <b>;</b> and with <b>\</b> replaced by <b>/</b>. If any of the paths contains a space then simply put the whole list in brackets. For example the lookup paths could be <b>"C:/MyMap/;./jass/"</b>.</p>
+
+<p class="setin">Remember that all this is beta software, there may still be bugs. In case something goes wrong, simply make use of JassHelper's backups and report bugs at the forums at <a href="http://www.wc3campaigns.net">www.wc3campaigns.net</a>!</p>
+
+<p class="setin">Since the version <b>1.0 of Grim Extensions</b> all included tools can now be controlled with lua-scripts as well. This makes them even more powerful, flexible and usually a lot faster. To make use of this feature, instead of the usual parameters you have to pass one or more lua files (with the extension .lua) to the tool:</p>
+	
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  All Tools:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">map.w3x lookuppaths script.lua { more.lua }</span>
+</pre></div></div><br>
+
+<p class="setin">Check out the LUA scripts in the <b>grimext/samples/</b> folder to find out how the scripting language works and which functions are available.</p>
+
+
+<h2><a name="fi"></a>File Importer</h2>
+
+<p class="setin">The File Importer plugin enables you to import a <a href="#filist">list of files</a> or simply a <a href="#fifolder">folder including all subdirectories</a> into your map.
+It can also <a href="#ficonvert">auto-convert</a> images to BLP format and MDL files to MDX due to its integration of BLPaletter and MDLXConverter.
+Additionally it will add appropriate <a href="#fiborders">icon borders and resize</a> icons based on a naming convention.</p>
+
+<p class="setin">When working on a map it is useful to keep all imports that are still being worked on in a folder that gets auto-imported by the File Importer tool as soon as the map is saved.
+That way the map always contains an <a href="#fiuptodate">up-to-date</a> version of all your custom files. While working on a model or texture you can test your work ingame within seconds, without the hassle of having to convert and import the files manually.
+When distributing a system that requires imported files, an <a href="#fifolder">external call</a> to the File Importer in the system's script will make sure that the required files are properly imported. An example would be the <b>Dummy.mdx</b> model from the caster system.</p>
+
+<p class="setin">There are two ways to use the File Importer. From the menu you can click <b>Extensions/Import Directory</b> and select the directory that you want to import or you add a vJASS external call to your JASS script.
+The selected directory will then be imported into the map including the directory structure of all subdirectories.
+The imported files wil generally use the same path that they have inside the imported folder.
+The second option is using a vJASS external call, here's an example that will import the contents of <b>C:\MyMap</b>:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="fifolder"></a>//! external FileImporter C:\MyMap</span>
+</pre></div></div><br>
+
+<p class="setin"><a name="fiuptodate"></a>These external calls are evaluated whenever the map is saved, so the up-to-date files from that directory will always replace older imported files in the map.
+Relative paths to the map's directory and the lookup paths defined under <b>[lookupfolders]</b> in <b>mapcompiler.conf</b> (the JassHelper configuration file) are automatically resolved:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external FileImporter ..\MyMap</span>
+</pre></div></div><br>
+
+<p class="setin">If you don't want to import a whole directory, but only a few files, then you can use <b>Extensions\Import Files</b> from the menu and select the files you want to import. When using an external call to import specific files you'll have to specify a list of pairs of source file and target file names. The target file name is the name that it should have inside the map:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="filist"></a>//! external FileImporter F:\Files\AbilityData.slk Units\AbilityData.slk</span>
+</pre></div></div><br>
+
+<p class="setin">Note how you only need to change the file extension of the imported path to make use of the auto-convert function:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  vJASS:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="ficonvert"></a>//! external FileImporter ..\MyMap\DiscoStu.mdl Models\DiscoStu.mdx ..\MyMap\Textures\Stu.tga Textures\Stu.blp</span>
+</pre></div></div><br>
+
+<p class="setin">When importing a whole directory, auto-convert will attempt to convert all files with a .jpg, .bmp, .tga or .mdl extension. If the conversion is successful the resulting file will be imported using the same path with only the extension changed to .blp or .mdx. Otherwise the original file is imported using its original path.
+You can explicitely overrule this attempt by keeping the same extension in the imported path, although it doesn't make much sense:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external FileImporter ..\MyMap\DiscoStu.mdl Models\DiscoStu.mdl</span>
+</pre></div></div><br>
+
+<p class="setin"><a name="fiborders"></a>Finally there's a naming convention that will add icon borders to images with a certain prefix in the filename.</p>
+
+<ul>
+<li><b>infocard-</b> attack/armor type icons</li>
+<li><b>level-infocard-</b> same but with levels (caster upgrade art)</li>
+<li><b>CMD</b> normal icon</li>
+<li><b>PAS</b> passive icon</li>
+<li><b>AUT</b> autocast icon</li>
+</ul>
+
+<p class="setin">The icons in the following example will get a normal/autocast/passive icon border:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  vJASS:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external FileImporter CMDBTNMyIcon.bmp MyIcon.blp AUTBTNOtherIcon.tga OtherIcon.blp PASBTNNewIcon.jpg NewIcon.blp</span>
+</pre></div></div><br>
+
+<p class="setin">The imported path for icons doesn't matter, they will end up in <b>ReplaceableTextures\CommandButtons\BTNMyIcon.blp</b>, <b>ReplaceableTextures\AutocastButtons\BTNOtherIcon.blp</b> and <b>ReplaceableTextures\PassiveButtons\BTNNewIcon.blp</b> and a disabled version will automatically be put in <b>ReplaceableTextures\CommandButtonsDisabled\DISIconName.blp</b>.
+Now let's combine the prefixes to make use of a shared disabled icon:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external FileImporter AUTPASCMDSharedIcon.tga SharedIcon.blp</span>
+</pre></div></div><br>
+
+<p class="setin">This will create a normal, a passive and an autocast version of the same icon and put the shared disabled version in <b>ReplaceableTextures\CommandButtonsDisabled\DISSharedIcon.blp</b>.
+Finally we can put attack/armor type borders and caster upgrade borders around our icons:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  vJASS:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external FileImporter ..\MyMap\infocard-chaos-damage.tga InterfaceTextures\infocard-chaos-damage.blp ..\MyMap\level-infocard-undead-caster.tga InterfaceTextures\level-infocard-undead-caster.blp</span>
+</pre></div></div><br>
+
+<p class="setin">As you can see, the <b>infocard-</b> and <b>level-infocard-</b> prefixes do the magic here. Since infocard icons do not have disabled versions, the imported path will not be changed in this case.
+If an icon doesn't have the appropriate size, it will be resized automatically by the tool. If you use a custom icon style in your map or mod, you can customize the borders and overlays used by the tool. You'll find them as TGA files inside the directory where the Extensions are installed to.
+Also remember that the tool will never try to modify BLP files, the auto-bordering and resizing is only applied to BMP, TGA and JPG images.</p>
+
+<h3>Known Issues</h3>
+
+<p class="setin">If you want the imported files to show up in the import manager you need to close and reopen the map WITHOUT manually saving it. When using the tool from the menu this step is MANDATORY.</p>
+
+<h3>LUA Benefits</h3>
+
+<p class="setin">You can specify a callback function which provides the compression details for each auto-converted image.
+And of course you can speed up single file imports a lot, because this is now just one external call.</p>
+
+
+<h2><a name="pm"></a>Path Mapper</h2>
+
+<p class="setin">The Path Mapper plugin enables you to post-process the pathing map of your map after saving it.
+It's good for changing the walkability/flyability/buildability of <a href="#pmtiles">specific tiles</a> or of <a href="#pmmasks">terrain cells</a> that meet some other certain creteria.
+This allows for a number of tricks like making cliffs walkable or for example in Project Revolution we used it in combination with the 'Placement Prevented By' field to make refineries only buildable on geysirs.</p>
+
+<a name="pmtiles"></a>
+<p class="setin">The following example makes the map unwalkable where Lordaeron Summer Dirt, Lordaeron Summer Grass or Lordaeron Summer Dark Grass is:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="pmsample1"></a>//! external PathMapper LdrtLgrsLgrd 2 |</span>
+</pre></div></div><br>
+
+<p class="setin">Here is another example that sets the pathing to normal ground where tiles other than Lordaeron Summer Dirt are:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="pmsample2"></a>//! external PathMapper Ldrt 40 !</span>
+</pre></div></div><br>
+
+<p class="setin">To be able to use it you'll need a bit more information. First of all you'll need to know the tile ids, which you can obtain from <b>TerrainArt\Terrain.slk</b> or from <a href="#tilelist">this list.</a>
+Then you'll need the <a href="#pmflags">pathability flag table</a> to determine which values you want to apply to the pathing map.
+
+<a name="pmflags"></a>
+<ul>
+<li><b>01</b> 0=unused</li>
+<li><b>02</b> 1=no walk 0=walk ok</li>
+<li><b>04</b> 1=no fly 0=fly ok</li>
+<li><b>08</b> 1=no build 0=build ok</li>
+<li><b>10</b> 0=unused</li>
+<li><b>20</b> 1=blight 0=normal</li>
+<li><b>40</b> 1=no water 0=water</li>
+<li><b>80</b> 1=unpathable 0=normal</li>
+</ul>
+
+<p class="setin">The flag values here are hexadecimal and need to be added up to combine the flags, the mask argument for the tool also needs to be hexadecimal. Internally the pathing map is stored in a grid of 32x32 cells. That means that the smallest unit in the editor, a 128x128 cell is split up into 16 pathing cells, each of which is assigned a value from the above flag table. With this tool you're able to change this value for each of the cells. Here are some examples that you will typically find in a pathing map.</p>
+
+<a name="pmexamples"></a>
+<ul>
+<li><b>00</b> bridge doodad</li>
+<li><b>08</b> shallow water</li>
+<li><b>0A</b> deep water</li>
+<li><b>40</b> normal ground</li>
+<li><b>48</b> water ramp, unbuildable grounds, unbuildable parts of doodads</li>
+<li><b>CA</b> cliff edges, solid parts of doodads</li>
+<li><b>CE</b> map boundaries</li>
+</ul>
+
+<p class="setin">Now to modify the pathing map, you'll need a way to specify which cells will be changed and a way to apply flag values to the existing value of each cell. For the latter there are four different apply modes that you can use.</p>
+
+<a name="pmchangemodes"></a>
+<ul>
+<li><b>|</b> binary or -> flag is added</li>
+<li><b>&</b> binary and -> common flags remain</li>
+<li><b>^</b> binary xor -> common flags are removed</li>
+<li><b>default</b> set -> value is overwritten</li>
+</ul>
+
+<p class="setin">So in the <a href="#pmsample1">first example</a> only the no-walk-bit is set with a binary or and nothing else is changed.
+If you don't specify an apply mode, the old values are completely replaced by the value you specify.
+Like in the <a href="#pmsample2">second example</a> where it's set to normal ground. Check modes here can be either match or mismatch.
+
+<a name="pmmatchmodes"></a>
+<ul>
+<li><b>!</b> mismatch -> apply if tile is not listed</li>
+<li><b>default</b> match -> apply if tile is listed</li>
+</ul>
+
+<p class="setin">In the <a href="#pmsample1">first example</a> <b>!</b> is used to change the pathing for all tiles that are not Lordaeron Summer Dirt.
+If you don't set this parameter the normal mode will apply the change for all specified tiles.</p>
+
+<a name="pmmasks"></a>
+<p class="setin">Instead of the tile of each cell you can also compare the current pathability value to decide which cell needs to be updated. When comparing to a pathability mask, the following compare modes can be specified.</p>
+
+<a name="pmcomparemodes"></a>
+<ul>
+<li><b>1</b> all bits that are set in the mask must be set for a cell to be updated, other flags may be set too</li>
+<li><b>0</b> all bits that are set in the mask can be set, but don't have to, other flags must not be set for a cell to be updated</li>
+<li><b>default</b> the value of a point must be equal to the mask to be updated
+</ul>
+
+<p class="setin"><a href="#pmchangemodes">Apply modes</a> in this case are again <b>|</b>, <b>&</b>, and <b>^</b>. In the next example map boundaries are made walkable by removing the no-walk-bit with a binary and:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="pmsample3"></a>//! external PathMapper CE FD 1 &</span>
+</pre></div></div><br>
+
+<p class="setin">In this next example areas that have either the no-walk or the no-fly bit set, are made walkable and flyable:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="pmsample4"></a>//! external PathMapper A F5 0 &</span>
+</pre></div></div><br>
+
+<h3>Known Issues</h3>
+
+<p class="setin">If you ever decide to add walkability to a tile that is normally unwalkable, please note that this will update ALL cells that have this tile. That means that units will also be able to walk over cliffs, doodads and possibly water and the camera bounds when those are covered with the specified tile.
+In such cases can use the pathing configuration that is part of UMSWE instead of this tool.</p>
+
+<h3>LUA Benefits</h3>
+
+<p class="setin">You can specify callback functions for the condition that a cell needs to meet to be updated and for the update action, making it a lot more flexible and faster.
+Also the tool becomes a lot more user friendly, because you can save yourself the hassle of bitwise flag operations.</p>
+
+
+<h2><a name="ts"></a>Tile Setter</h2>
+
+<p class="setin">The Tile Setter plugin allows you to edit the tileset of your maps similar to the already existing option in the world editor. The only major difference is that this tool extends the tile limit to 16. This will make the old tileset editor of WEU obsolete. You can also change the base tileset with this tool, in case you want to switch to a different water/cliff look.</p>
+
+<p class="setin">Using it is quite simple, just click <b>Extensions\Edit Tileset</b> from the menu, then a graphical tile picker will pop up. At the bottom it shows the base tileset of your map and a list tiles currently present in your map like so:
+	
+<br><br><img title="Tile Picker" src="img/tilepicker.gif" alt="Tile Picker" class="setin"><br><br>
+	
+By clicking on the tile icons you can add/remove it to/from your map. The max is 16 tiles for each map. When you're satisfied with your changes click the ok button to apply them, then close and reopen your map without resaving it, and your new tiles should show up in the terrain palette.
+The configuration dialog might spit out a warning if you removed or replaced cliff tiles with non-cliff tiles. This can only cause problems if the removed/replaced tile has actually been used for cliffs in your map, otherwise it's safe to ignore the warning.</p>
+
+<p class="setin">You shouldn't ever need to use the Tile Setter from a vJASS external call, but in case you can think of any situation where this could be useful, here's an example that changes the terrain of your map into the Lordaeron Summer tileset. Use this <a href="#tilesetlist">tileset list</a> and this <a href="#tilelist">this list of tiles</a> as a reference for your calls:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external TileSetter L LdrtLdroLdrgLrokLgrsLgrd</span>
+</pre></div></div><br>
+
+<h3>Known Issues</h3>
+
+<p class="setin">Do NOT replace cliff tiles that are actually used as cliffs in your map. Please remove those cliffs from your terrain before exchanging the tile to prevent possible problems, unless you know what you're doing.</p>
+
+<h3>LUA Benefits</h3>
+
+<p class="setin">You can edit your tile list programmatically and use several functions to query details about each tile.</p>
+
+
+<h2><a name="fe"></a>File Exporter</h2>
+
+<p class="setin">The File Exporter plugin simply exports all files inside a map to a specified folder. It will also rebuild the folder structure from inside the map in the specified target directory. That way the target directory can the again be used as the source directory for the <a href="#fi">File Importer</a> plugin.
+This can be useful to copy the files from a system that is distributed through a demo map to your own map. For example one could export all contents of the <a href="http://www.wc3campaigns.net/showthread.php?t=78635" target="_blank">Ultimate Terraining Map</a> and import them all into a custom map using the <a href="#fi">File Importer</a> and <a href="#om">Object Merger</a> plugins with just a few clicks.
+Or it can be used to copy the terrain, units, doodads, sounds, regions, or cameras from one map to another map.</p>
+
+<p class="setin">To get all files extracted simply click <b>Extensions\Export Files</b> in the menu and select the target directory. This will essentially extract all files listed in the import manager, but also some internal files that contain special data. For each category of files the tool creates a separate subdirectory in the target directory, here's the list:</p>
+
+<a name="fefolders"></a>
+<ul>
+<li><b>Imports\</b> All imports from the import manager go here. The folder structure of those imported files is recreated within this directory and it can then be used as the input directory for the <a href="#fi">File Importer</a> plugin to get the files into some other map.</li>
+<li><b>Constants\</b> If you have customized the gameplay constants, the game interface or the test map settings, then the files that contain this information are put here. The directory can be used as the input folder for the <a href="#cm">Constant Merger</a> plugin to get these changes into other maps. The <a href="#cmfiles">list here</a> explains what each file does.</li>
+<li><b>Objects\</b> If you have used the object editor to customize units, abilites, items, buffs, upgrades, doodads or destructables, all these changes will be put into this directory. The directory can then be used as the input folder for the <a href="#om">Object Merger</a> plugin to get the changes into other maps. The <a href="#omfiles">list here</a> explains more about the file extensions and their meaning.</li>
+<li><b>Triggers\</b> Trigger data, variables and custom text content from your map goes here. Later this directory can be used as the input folder for the <a href="#tm">Trigger Merger</a> plugin to import the trigger data into other maps.</li>
+<li><b>Environment\</b> Other internal content from your map like the terrain, placed units and doodads, sound definitions from the sound editor, regions, cameras, the minimap and minimap preview will be put here. Each of them is put into a separate file and using the <a href="#fi">File Importer</a> plugin, you can put them into other maps. The following list explains what each file contains.</li> 
+</ul>
+
+<a name="fefiles"></a>
+<ul>
+<li><b>war3map.w3e</b> terrain file</li>
+<li><b>war3map.shd</b> shadows</li>
+<li><b>war3map.mmp</b> icons for the minimap</li>
+<li><b>war3map.wpm</b> pathing map</li>
+<li><b>war3map.doo</b> placed doodads</li>
+<li><b>war3mapUnits.doo</b> placed units and items</li>
+<li><b>war3mapMap.blp</b> minimap image</li>
+<li><b>war3mapMap.tga</b> alternate file name for the minimap image</li>
+<li><b>war3mapPreview.tga</b> minimap preview image</li>
+<li><b>war3map.w3r</b> region definitions</li>
+<li><b>war3map.w3c</b> camera definitions</li>
+<li><b>war3map.w3s</b> sound definitions</li>
+</ul>
+
+<p class="setin">On a final note, all files that are used as input for the <a href="#om">Object Merger</a>, <a href="#tm">Trigger Merger</a> or <a href="#cm">Constant Merger</a> plugins should have been exported using this File Exporter plugin or by the export function of the WE before.
+That is because it takes care of inlinig TRIGSTR references when exporting the files, which prevents strings from getting lost when importing those files into other maps. If the files however had been exported using a normal MPQ viewer, the strings will not be inlined properly and may get lost. Also if you ever want to use the File Exporter in a vJASS external call, here's an example that exports all files to <b>C:\MyMap</b>:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external FileExporter C:\MyMap</span>
+</pre></div></div><br>
+
+<h3>Known Issues</h3>
+
+<p class="setin">None so far.</p>
+
+<h3>LUA Benefits</h3>
+
+<p class="setin">You can also export single files to specific directories.</p>
+
+
+<h2><a name="om"></a>Object Merger</h2>
+
+<p class="setin">There are two basic use cases for the Object Merger plugin. First of all it can import object editor data, but it won't replace the existing data, instead it will <a href="#ommerge">merge the existing and the imported data</a>, there are different modes available that control how collisions of object ids are handled. This can be useful for distributing systems that require certain objects, like for example the caster unit from the caster system. A vJASS external call to this tool will make sure that the required unit exists in the map. Also in a team people can work separately on certain aspects of the map and later merge their work this way.
+The other use case is <a href="#omgenerate">generating larger amounts of similar objects</a> using vJASS external calls. Again this is useful to distribute systems that require object data. I'm thinking of systems like Bonus Mod which requires a number of bonus abilites. Finally it allows you to specify custom rawcodes for your objects, although this is conveniently possible with a <a href="#oehack">Grimoire hack</a> already.</p>
+
+<p class="setin">When merging or generating object data, the first thing you'll have to know is what type of objects each file extension is associated with. Here's the list:</p>
+
+<a name="omextensions"></a>
+<ul>
+<li><b>w3u</b> units</li>
+<li><b>w3t</b> items</li>
+<li><b>w3b</b> destructables</li>
+<li><b>w3d</b> doodads</li>
+<li><b>w3a</b> abilities</li>
+<li><b>w3h</b> buffs</li>
+<li><b>w3q</b> upgrades</li>
+</ul>
+
+<a name="ommerge"></a>
+<p class="setin">To merge object data there are three different modes available how collisions can be handled. Each of them is available from the menu as well as from vJASS external calls.</p>
+<ul>
+<li><b>m</b> merge changes for objects with the same rawcode, this is the default (<b>Extensions\Merge Object Editor Data</b>)
+<li><b>r</b> replace existing objects with the imported objects in case of equal rawcodes (<b>Extensions\Replace Object Editor Data</b>)
+<li><b>i</b> a clean import, that generates new ids for imported objects if their id is already used (<b>Extensions\Import Object Editor Data</b>)
+</ul>
+
+<p class="setin">When using one of the menu entries a popup wil ask you to select all input files that you want to add to the map.
+All the input files need to be of the sime type of course, you cannot mix unit and ability definitions for example. Our first example shows how to import custom unit data that was previously exported by the <a href="#fe">File Exporter</a> plugin using a vJASS external call:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="omsample0"></a>//! external ObjectMerger Objects\war3map.w3u</span>
+</pre></div></div><br>
+
+<p class="setin">The above is the same as the following call that explicitely defines how collisions should be handled, because <b>m</b> is the default mode:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external ObjectMerger m Objects\war3map.w3u</span>
+</pre></div></div><br>
+
+<p class="setin">It's important that the merged files have been exported with the WE's export function or the <a href="#fe">File Exporter</a> tool and not using an MPQ viewer, because otherwise string references may get lost. The second example shows how to import several files of the same type (extension) with one call. In case of collisions the existing object will be completely replaced (<b>r</b> parameter):</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="omsample1"></a>//! external ObjectMerger r myabilities.w3a D:\war3\moreabilities.w3a evenmoreabilities.w3a</span>
+</pre></div></div><br>
+
+<a name="omgenerate"></a>
+<p class="setin">Ok, with this tool you can also create new objects using a vJASS external call instead of the object editor. I'll start with a few examples and then explain the parameters. This one creates a copy of the glaive upgrade with 2 levels and a different icon on the second level:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  vJASS:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="omsample2"></a>//! external ObjectMerger w3q Remg Rgl2 glvl 2 gar1 2 "ReplaceableTextures\CommandButtons\BTNImpale.blp"</span>
+</pre></div></div><br>
+
+<p class="setin">Here's one that creates a new armor bonus ability that gives a bonus of 64 at level 1, the second call then creates a new item based on the existing protective ring item. It is assigned the new ability and a new name:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  vJASS:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="omsample3"></a>//! external ObjectMerger w3a AId1 Ad64 Idef 1 64
+//! external ObjectMerger ObjectMerger w3t rde1 Id64 iabi Ad64 unam "Protective Ring (+64)"</span>
+</pre></div></div><br>
+
+<p class="setin">This next example makes a copy of the fence doodad (NOfl), changes it so it has three variations and then tints the first variation all blue, the second variation all green and the third variation red:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  vJASS:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="omsample4"></a>//! external ObjectMerger w3d NOfl Dfen dvar 3 dvr1 1 0 dvg1 1 0 dvr1 2 0 dvb1 2 0 dvg1 3 0 dvb1 3 0</span>
+</pre></div></div><br>
+
+<p class="setin">This last example creates a chaos ability to morph into a peasant. Apparently Warcraft doesn't mind abilities having the same id as units, so I gave the ability hpea as id:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'28px')">  vJASS:</div><div class="jassblock" style="height: 28px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor"><a name="omsample5"></a>//! external ObjectMerger w3a Sca1 hpea anam "My Chaos" ansf (Peasant) achd 0 Cha1 1 hpea</span>
+</pre></div></div><br>
+
+<p class="setin">Now let's use the last example to take a closer look at the parameters. First of all you'll need to specify the type of object that you want to create. This is done by putting the file extension of this type as the first parameter, use this <a href="#omextensions">table</a> as a reference.
+The example has <b>w3a</b> which means we're creating an ability. The next parameter is the rawcode of the base object that we want to copy, this can be a standard object or also a custom object that you previously created in the object editor or with a previous call to this Object Merger tool. To find out the rawcode of an object use <b>View/Display Values as Raw Data</b> from the object editor menu.
+The third parameter is the id that the created object should have, you're free to choose any 4-letter-id that isn't already used by an object of the same type.
+Then follows a list of pairs or triples that specifies the changes you want to apply to the base object. The first pair here is <b>anam "My Chaos"</b> which sets the name of the created ability to My Chaos. The left part of such pairs is a 4-letter-change-id that determines which field should be updated, the right side is the new value.
+The next one sets the editor suffix, as you can see the quotes are not needed if the string doesn't contain spaces. Then the check tech dependencies flag is set to false. You'll notice that booleans are simply represented by 1 (true) and 0 (false).
+Finally there's also an example for a change triple. This is needed for fields that can be changed per level. In this case the target unit id for the chaos morph is set to <b>hpea</b> for level 1. If you're not sure if a field requires a pair or a triple, you can test it by increasing the level of the base ability in the object editor and looking if the field repeats for multiple levels.
+Upgrades also use levels for some fields as you can see in the <a href="#omsample2">first example</a> where the icon is changed for level 2 of the upgrade. Doodad variations work similar. In <a href="#omsample4">the third example</a> such triples are used to change the tinting values of the 3 variations of the created doodad.
+All other object types like units, items, buffs and destructables only use pairs and never triples because they don't have levels.</p>
+
+<p class="setin">At this point you may wonder where to look up all those change ids. The answer is that with Grimoires <a href="#oehack">object editor hack</a> the ids of each change will be shown in brackets. Make sure that <b>View\Display Values as Raw Data</b> is disabled when you want to view these ids. Alternatively you can look up the ids in the appropriate <b>MetaData.slk</b> file for the respective object type.
+On a note about the inner workings, all vJASS external calls get evaluated whenever the map is saved. That means whenever you save the Object Merger will create the same objects that will overwrite each other over and over again, which isn't necessary, so after the first time you save you can technically remove the external call again.</p>
+
+<h3>Known Issues</h3>
+
+<p class="setin">Be careful when choosing the ids of your generated objects. Don't use ids that already exist, this can overwrite your existing objects. If you want the new objects to show up in the object editor you need to close and reopen the map WITHOUT manually saving it. When using the tool from the menu this step is MANDATORY. Also do only merge object files that have been exported with the <a href="#fe">File Exporter</a> tool to <b>Objects\</b> or the export object data function of the world editor. Otherwise TRIGSTR references could be missing.</p>
+
+<h3>LUA Benefits</h3>
+
+<p class="setin">First of all you can speed it up a lot, because you can create all your objects in a single external call.
+Then there are some additional functions available which you can use to reset objects, reset changes and apply changes to specific objects, all custom, all original, all modified original, or all unmodified original objects with a single script call.
+Also you can use LUA to program custom formulas to generate your object ids and for autofill-like needs.</p>
+
+
+<h2><a name="cm"></a>Constant Merger</h2>
+
+<p class="setin">The Constant Merger plugin works quite similar to the <a href="#om">Object Merger</a> tool, but instead of object editor data it imports customizations to the gameplay constants, the game interface settings and certain test map settings. If one of your system requires a specific change to the game interface or gameplay constants you can use a vJASS external call to this tool so that the required changes are automatically applied to a map that uses your system when it is saved. For example you might want to change the chat recipient prefixes for a chat system or you might want to customize the experience gain table for a levelup system.</p>
+
+<p class="setin">Usually you will want to import customizations that were exported previously from another map by using the <a href="#fe">File Exporter</a> tool. All files that it places inside the <b>Constants\</b> folder after the export can be handled by the Constant Merger. There are three types of files that can be handled:</p>
+
+<a name="cmtypes"></a>
+<ul>
+<li><b>war3mapMisc.txt</b> gameplay constants</li>
+<li><b>war3mapSkin.txt</b> game interface settings</li>
+<li><b>war3mapExtra.txt</b> test map settings (the only occurrance where I've actually seen this file is, when you select an external object data source in the test map tab of the map properties dialog)</li>
+</ul>
+
+<p class="setin">You can merge several files of the same type with a single Constant Merger call, but do NOT mix different types in a single call. This tool is also available from the menu <b>Extensions\Merge Constants Data</b> which pops up a file selection dialog. The other option is a vJASS external call like in this example:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  vJASS:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external ConstantMerger C:\MyMap\Constants\war3mapSkin.txt ..\otherInterfaceStuff.txt</span>
+</pre></div></div><br>
+
+<h3>Known Issues</h3>
+
+<p class="setin">If you want your changes to show up in the editor you need to close and reopen the map WITHOUT manually saving it. When using the tool from the menu this step is MANDATORY. Also do only merge files that have been exported with the <a href="#fe">File Exporter</a> tool to the <b>Constants\</b> folder. Otherwise TRIGSTR references could be missing.</p>
+
+<h3>LUA Benefits</h3>
+
+<p class="setin">It's also possible to set values from within the LUA script, not only by merging files.</p>
+
+
+<h2><a name="tm"></a>Trigger Merger</h2>
+
+<p class="setin">The Trigger Merger plugin is capable of adding the trigger data form another map to your map. That means it can import variables, GUI triggers and also the custom text triggers and header. So technically it is now possible to distribute GUI trigger systems that are easy to import into any map.</p>
+
+<p class="setin">Use it with caution though, since variables and triggers that have the same name like existing variables/triggers will overwrite them. So if you're developing a system that you want to distribute this way you'd better use a unique prefix for your variables and triggers to prevent possible conflicts. Also the custom text header of the imported trigger data will be put into a new custom text trigger, so that the existing custom text header of your map won't be touched.
+The input for the tool is pair of <b>wtg</b> and <b>wct</b> files. You only need to specify one of the two as the input file, the tool will look for a file with the same path and name and only the extension changed and use it as the second input file. The easiest way to obtain a <b>wtg</b> and <b>wct</b> file is by using the <a href="#fe">File Exporter</a> tool which will put the trigger data into the <b>Triggers\</b> subfolder of the export target folder. Trigger files that have been exported using a MPQ viewer shouldn't be used as input files, because they will be missing TRIGSTR references.</p>
+
+<p class="setin">Again it's possible to use it from the menu using <b>Extensions\Merge Trigger Data</b> and then selecting one of the two input files in the file browser, or from a vJASS external call. Here's an example that will add the triggers from an external file to your map:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  vJASS:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external TriggerMerger C:\MyMap\Triggers\war3map.wtg</span>
+</pre></div></div><br>
+
+<p class="setin">You can also merge the trigger data of several maps with a single call, simply list all the files that you want to merge as parameters of the external call. However you should always only list one file of a wtg/wct pair, never both in the same call:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  vJASS:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">//! external TriggerMerger C:\MyMap\Triggers\war3map.wtg C:\OtherMap\Triggers\war3map.wct</span>
+</pre></div></div><br>
+
+<h3>Known Issues</h3>
+
+<p class="setin">If you want the imported triggers to show up in the editor you need to close and reopen the map WITHOUT manually saving it. When using the tool from the menu this step is MANDATORY. Also do only merge files that have been exported with the <a href="#fe">File Exporter</a> tool to the <b>Triggers\</b> folder. Otherwise TRIGSTR references will be missing.
+The tool also doesn't check for duplicate JASS functions, so if two imported custom text headers both contain the H2I function this will of course cause compile errors and needs to be manually fixed. Also if the imported data contains references to generated unit, destructable, item, sound, region or camera variables those will be lost in the target map.</p>
+
+<h3>LUA Benefits</h3>
+
+<p class="setin">You can register global GUI variables from within the script without having to merge files.</p>
+
+
+<h2><a name="pg"></a>Patch Generator</h2>
+
+<p class="setin">The Patch Generator has been created to produce World Editor patches, specifically to port UMSWE to NewGen.
+UMSWE has been implemented entirely in LUA scripts which are interpreted by this Patch Generator tool.
+This means you can use the Patch Generator to produce your own MPQ patches for the World Editor or the Warcraft 3 game.
+Check out the LUA scripts in the <b>umswe\</b> subfolder of your NewGen directory for sample scripts. Here's how you call the tool from the command line:</p>
+
+<div class="jassblockstart"><div class="smallfont" style="margin-bottom: 2px;"><img title="Collapse" alt="Collapse" src="img/minus.gif" onclick="return ExpandCollapseJass(this,'45px')">  Patch Generator:</div><div class="jassblock" style="height: 45px;"><pre style="visibility: inherit; position: static;" class="jass">
+<span class="Jpreprocessor">script.lua lookuppaths patchname { flags }</span>
+</pre></div></div><br>
+
+<p class="setin">The first parameter is the script you want to run, the second as usual is a list of directories used to lookup file paths that cannot be resolved.
+The third parameter is the name of your patch, a txt file with this name is created in the <b>logs/</b> subfolder of NewGen when you run this tool.
+Then you can pass a list of options which will be registered as global boolean variables in the LUA space. This is useful so you can use the same LUA script to turn a patch on and off with only the passed option changed.
+For example you could pass in <b>"enable=1"</b> or <b>"enable=0"</b> and in the script you can use <b>if enable then</b> to act depending on that option.
+Again, the UMSWE scripts are good samples to learn from.</p>
+
+
+<h2><a name="grim"></a>Grimoire Addons</h2>
+
+<h3><a name="reg"></a>Registry Fixes</h3>
+
+<p class="setin">Via <b>Extensions\Enable Local Files</b> you can enable and disable local files on your system. When it's on Warcraft will load files from local folders with a higher priority than the files from the mpqs. This enables you to override war3patch.mpq with your own files, without messing with the mpq for rapid testing purposes.
+Local files means that inside your Warcraft directory you could place a <b>Units\</b> subfolder and for example put a custom <b>AbilityMetaData.slk</b> file in there that will be loaded instead of the file from the mpqs. This way it's also possible to override files that normally don't load when imported into a map (like all the meta data files or <b>CliffTypes.slk</b>).</p>
+
+<p class="setin">Using <b>Extensions\Register Shell Extensions</b> you can add items to the context menu of Warcraft maps and campaigns. When this is enabled and you right click a map or campaign the context menu that pops up will show a <b>Play Fullscreen</b> and <b>Play Windowed</b> option:
+
+<br><br><img title="Shell Extension" src="img/contextmenu.gif" alt="Example" class="setin"></p>
+
+<h3>No Limits Integration</h3>
+
+<p class="setin">This is an improved version of the old No Limits patch that is integrated in Grimoire that removes unit, item, doodad and map size limits. With the menu entry <b>Grimoire\Disable WE Limits</b> you can enable and disable this feature.
+Additionally the possibility to create epic 480 x 480 maps has been added to the editor. But watch out, some people have told me about blight not working properly in maps that large. As you can see the hack is directly integrated into the create map dialog:
+
+<br><br><img title="Map Size Hack" src="img/mapsizehack.gif" alt="Example" class="setin"></p>
+
+<h3>Test Map Hack</h3>
+
+<p class="setin">The menu entry <b>Grimoire\Customize Test Map Settings</b> will show the following configuration dialog:
+
+<br><br><img title="Test Map Hack" src="img/testmap.gif" alt="Example" class="setin"><br><br>
+
+As you can see it allows to speed up the game speed for your tests (just like you normally speed up replays) by a factor of up to 25. It can also disable fog of war and the victory and defeat conditions for your test runs in case you are testing a melee map. Additionally you can play around with player colors, add computer controlled players for your tests and assign custom handicaps and even ai scripts.
+However make sure that <b>Use Custom Forces</b> is disabled in the force properties of your map, otherwise the test map settings will not work. With the upper left checkbox you can also enable and disable the custom test map settings. When it's disable the map starts as usual when clicking the test map button, otherwise the custom settings will be applied.</p>
+
+<h3>Object Editor Hack</h3>
+
+<p class="setin">Finally there's a new hack that allows you to specify custom rawcodes for new objects in the object editor. It can be enabled and disabled with the <b>Grimoire\Enable Object Editor Hack</b> menu entry. Additionally all object properties will also show their internal rawcode in brackets. You will need those if you want to use the <a href="om">Object Merger</a> tool in your map. Here's a screenshot of the hack in action:
+
+<br><br><img title="Object Editor Hack" src="img/oehack.gif" alt="Example" class="setin"><br><br>
+
+By the way this hack can be used to create copies of non-hero units and even buildings which are heros. This is done by simply capitalizing the first character of the new unit id.</p>
+
+<h2><a name="appendix"></a>Appendix</h2>
+
+<h3><a name="tilesetlist">Tileset List</a></h3>
+
+<ul>
+<li><b>A</b> Ashenvale</li>
+<li><b>B</b> Barrens</li>
+<li><b>C</b> Felwood</li>
+<li><b>D</b> Dungeon</li>
+<li><b>F</b> Lordaeron Fall</li>
+<li><b>G</b> Underground</li>
+<li><b>L</b> Lordaeron Summer</li>
+<li><b>N</b> Northrend</li>
+<li><b>Q</b> Village Fall</li>
+<li><b>V</b> Village</li>
+<li><b>W</b> Lordaeron Winter</li>
+<li><b>X</b> Dalaran</li>
+<li><b>Y</b> Cityscape</li>
+<li><b>Z</b> Sunken Ruins</li>
+<li><b>I</b> Icecrown</li>
+<li><b>J</b> Dalaran Ruins</li>
+<li><b>O</b> Outland</li>
+<li><b>K</b> Black Citadel</li>
+</ul>
+
+<h3><a name="tilelist">Tile Id List</a></h3>
+
+<ul>
+<li><b>Ldrt</b> Lordaeron Summer Dirt (cliff)</li>
+<li><b>Ldro</b> Lordaeron Summer Rough Dirt</li>
+<li><b>Ldrg</b> Lordaeron Summer Grassy Dirt</li>
+<li><b>Lrok</b> Lordaeron Summer Rock</li>
+<li><b>Lgrs</b> Lordaeron Summer Grass (cliff)</li>
+<li><b>Lgrd</b> Lordaeron Summer Dark Grass</li>
+<li><b>Fdrt</b> Lordaeron Fall Dirt (cliff)</li>
+<li><b>Fdro</b> Lordaeron Fall Rough Dirt</li>
+<li><b>Fdrg</b> Lordaeron Fall Grassy Dirt</li>
+<li><b>Frok</b> Lordaeron Fall Rock</li>
+<li><b>Fgrs</b> Lordaeron Fall Grass (cliff)</li>
+<li><b>Fgrd</b> Lordaeron Fall Dark Grass</li>
+<li><b>Wdrt</b> Lordaeron Winter Dirt</li>
+<li><b>Wdro</b> Lordaeron Winter Rough Dirt</li>
+<li><b>Wsng</b> Lordaeron Winter Grassy Snow</li>
+<li><b>Wrok</b> Lordaeron Winter Rock</li>
+<li><b>Wgrs</b> Lordaeron Winter Grass (cliff)</li>
+<li><b>Wsnw</b> Lordaeron Winter Snow (cliff)</li>
+<li><b>Bdrt</b> Barrens Dirt</li>
+<li><b>Bdrh</b> Barrens Rough Dirt</li>
+<li><b>Bdrr</b> Barrens Pebbles</li>
+<li><b>Bdrg</b> Barrens Grassy Dirt</li>
+<li><b>Bdsr</b> Barrens Desert (cliff)</li>
+<li><b>Bdsd</b> Barrens Dark Desert</li>
+<li><b>Bflr</b> Barrens Rock</li>
+<li><b>Bgrr</b> Barrens Grass (cliff)</li>
+<li><b>Adrt</b> Ashenvale Dirt (cliff)</li>
+<li><b>Adrd</b> Ashenvale Rough Dirt</li>
+<li><b>Agrs</b> Ashenvale Grass (cliff)</li>
+<li><b>Arck</b> Ashenvale Rock</li>
+<li><b>Agrd</b> Ashenvale Lumpy Grass</li>
+<li><b>Avin</b> Ashenvale Vines</li>
+<li><b>Adrg</b> Ashenvale Grassy  Dirt</li>
+<li><b>Alvd</b> Ashenvale Leaves</li>
+<li><b>Cdrt</b> Felwood Dirt (cliff)</li>
+<li><b>Cdrd</b> Felwood Rough Dirt</li>
+<li><b>Cpos</b> Felwood Poison</li>
+<li><b>Crck</b> Felwood Rock</li>
+<li><b>Cvin</b> Felwood Vines</li>
+<li><b>Cgrs</b> Felwood Grass (cliff)</li>
+<li><b>Clvg</b> Felwood Leaves</li>
+<li><b>Ndrt</b> Northrend Dirt (cliff)</li>
+<li><b>Ndrd</b> Northrend Dark Dirt</li>
+<li><b>Nrck</b> Northrend Rock</li>
+<li><b>Ngrs</b> Northrend Grass</li>
+<li><b>Nice</b> Northrend Ice</li>
+<li><b>Nsnw</b> Northrend Snow (cliff)</li>
+<li><b>Nsnr</b> Northrend Rocky Snow</li>
+<li><b>Ydrt</b> Cityscape Dirt (cliff)</li>
+<li><b>Ydtr</b> Cityscape Rough Dirt</li>
+<li><b>Yblm</b> Cityscape Black Marble</li>
+<li><b>Ybtl</b> Cityscape Brick</li>
+<li><b>Ysqd</b> Cityscape Square Tiles (cliff)</li>
+<li><b>Yrtl</b> Cityscape Round Tiles</li>
+<li><b>Ygsb</b> Cityscape Grass</li>
+<li><b>Yhdg</b> Cityscape Grass Trim</li>
+<li><b>Ywmb</b> Cityscape White Marble</li>
+<li><b>Vdrt</b> Village Dirt (cliff)</li>
+<li><b>Vdrr</b> Village Rough Dirt</li>
+<li><b>Vcrp</b> Village Crops</li>
+<li><b>Vcbp</b> Village Cobble Path</li>
+<li><b>Vstp</b> Village Stone Path</li>
+<li><b>Vgrs</b> Village Short Grass</li>
+<li><b>Vrck</b> Village Rocks</li>
+<li><b>Vgrt</b> Village Thick Grass (cliff)</li>
+<li><b>Qdrt</b> Village Fall Dirt (cliff)</li>
+<li><b>Qdrr</b> Village Fall Rough Dirt</li>
+<li><b>Qcrp</b> Village Fall Crops</li>
+<li><b>Qcbp</b> Village Fall Cobble Path</li>
+<li><b>Qstp</b> Village Fall Stone Path</li>
+<li><b>Qgrs</b> Village Fall Short Grass</li>
+<li><b>Qrck</b> Village Fall Rocks</li>
+<li><b>Qgrt</b> Village Fall Thick Grass (cliff)</li>
+<li><b>Xdrt</b> Dalaran Dirt (cliff)</li>
+<li><b>Xdtr</b> Dalaran Rough Dirt</li>
+<li><b>Xblm</b> Dalaran Black Marble</li>
+<li><b>Xbtl</b> Dalaran Brick</li>
+<li><b>Xsqd</b> Dalaran Square Tiles (cliff)</li>
+<li><b>Xrtl</b> Dalaran Round Tiles</li>
+<li><b>Xgsb</b> Dalaran Grass</li>
+<li><b>Xhdg</b> Dalaran Grass Trim</li>
+<li><b>Xwmb</b> Dalaran White Marble</li>
+<li><b>Ddrt</b> Dungeon Dirt (cliff)</li>
+<li><b>Dbrk</b> Dungeon Brick</li>
+<li><b>Drds</b> Dungeon Red Stone</li>
+<li><b>Dlvc</b> Dungeon Lava Cracks</li>
+<li><b>Dlav</b> Dungeon Lava</li>
+<li><b>Ddkr</b> Dungeon Dark Rock</li>
+<li><b>Dgrs</b> Dungeon Grey Stones</li>
+<li><b>Dsqd</b> Dungeon Square Tiles (cliff)</li>
+<li><b>Gdrt</b> Underground Dirt (cliff)</li>
+<li><b>Gbrk</b> Underground Brick</li>
+<li><b>Grds</b> Underground Red Stone</li>
+<li><b>Glvc</b> Underground Lava Cracks</li>
+<li><b>Glav</b> Underground Lava</li>
+<li><b>Gdkr</b> Underground Dark Rock</li>
+<li><b>Ggrs</b> Underground Grey Stones</li>
+<li><b>Gsqd</b> Underground Square Tiles (cliff)</li>
+<li><b>Zdrt</b> Sunken Ruins Dirt (cliff)</li>
+<li><b>Zdtr</b> Sunken Ruins Rough Dirt</li>
+<li><b>Zdrg</b> Sunken Ruins Grassy  Dirt</li>
+<li><b>Zbks</b> Sunken Ruins Small Bricks</li>
+<li><b>Zsan</b> Sunken Ruins Sand</li>
+<li><b>Zbkl</b> Sunken Ruins Large Bricks (cliff)</li>
+<li><b>Ztil</b> Sunken Ruins RoundTiles</li>
+<li><b>Zgrs</b> Sunken Ruins Grass</li>
+<li><b>Zvin</b> Sunken Ruins Dark Grass</li>
+<li><b>Idrt</b> Icecrown Dirt</li>
+<li><b>Idtr</b> Icecrown Rough Dirt</li>
+<li><b>Idki</b> Icecrown Dark Ice</li>
+<li><b>Ibkb</b> Icecrown Black Bricks</li>
+<li><b>Irbk</b> Icecrown Runed Bricks (cliff)</li>
+<li><b>Itbk</b> Icecrown Tiled Bricks</li>
+<li><b>Iice</b> Icecrown Ice</li>
+<li><b>Ibsq</b> Icecrown Black Squares</li>
+<li><b>Isnw</b> Icecrown Snow (cliff)</li>
+<li><b>Odrt</b> Outland Dirt</li>
+<li><b>Odtr</b> Outland Light Dirt</li>
+<li><b>Osmb</b> Outland Rough Dirt (cliff)</li>
+<li><b>Ofst</b> Outland Cracked Dirt</li>
+<li><b>Olgb</b> Outland Flat Stones</li>
+<li><b>Orok</b> Outland Rock</li>
+<li><b>Ofsl</b> Outland Light Flat Stone</li>
+<li><b>Oaby</b> Outland Abyss (cliff)</li>
+<li><b>Kdrt</b> Black Citadel Dirt (cliff)</li>
+<li><b>Kfsl</b> Black Citadel Light Dirt</li>
+<li><b>Kdtr</b> Black Citadel Rough Dirt</li>
+<li><b>Kfst</b> Black Citadel Flat Stones</li>
+<li><b>Ksmb</b> Black Citadel Small Bricks</li>
+<li><b>Klgb</b> Black Citadel Large Bricks</li>
+<li><b>Ksqt</b> Black Citadel Square Tiles</li>
+<li><b>Kdkt</b> Black Citadel Dark Tiles (cliff)</li>
+<li><b>Jdrt</b> Dalaran Ruins Dirt (cliff)</li>
+<li><b>Jdtr</b> Dalaran Ruins Rough Dirt</li>
+<li><b>Jblm</b> Dalaran Ruins Black Marble</li>
+<li><b>Jbtl</b> Dalaran Ruins Brick</li>
+<li><b>Jsqd</b> Dalaran Ruins Square Tiles (cliff)</li>
+<li><b>Jrtl</b> Dalaran Ruins Round Tiles</li>
+<li><b>Jgsb</b> Dalaran Ruins Grass</li>
+<li><b>Jhdg</b> Dalaran Ruins Grass Trim</li>
+<li><b>Jwmb</b> Dalaran Ruins White Marble</li>
+<li><b>cAc2</b> Ashenvale Dirt (non-cliff)</li>
+<li><b>cAc1</b> Ashenvale Grass (non-cliff)</li>
+<li><b>cBc2</b> Barrens Desert (non-cliff)</li>
+<li><b>cBc1</b> Barrens Grass (non-cliff)</li>
+<li><b>cKc1</b> Black Citadel Dirt (non-cliff)</li>
+<li><b>cKc2</b> Black Citadel Dark Tiles (non-cliff)</li>
+<li><b>cYc2</b> Cityscape Dirt (non-cliff)</li>
+<li><b>cYc1</b> Cityscape Square Tiles (non-cliff)</li>
+<li><b>cXc2</b> Dalaran Dirt (non-cliff)</li>
+<li><b>cXc1</b> Dalaran Square Tiles (non-cliff)</li>
+<li><b>cJc2</b> Dalaran Ruins Dirt (non-cliff)</li>
+<li><b>cJc1</b> Dalaran Ruins Square Tiles (non-cliff)</li>
+<li><b>cDc2</b> Dungeon Dirt (non-cliff)</li>
+<li><b>cDc1</b> Dungeon Square Tiles (non-cliff)</li>
+<li><b>cCc2</b> Felwood Dirt (non-cliff)</li>
+<li><b>cCc1</b> Felwood Grass (non-cliff)</li>
+<li><b>cIc2</b> Icecrown Runed Bricks (non-cliff)</li>
+<li><b>cIc1</b> Icecrown Snow (non-cliff)</li>
+<li><b>cFc2</b> Lordaeron Fall Dirt (non-cliff)</li>
+<li><b>cFc1</b> Lordaeron Fall Grass (non-cliff)</li>
+<li><b>cLc2</b> Lordaeron Summer Dirt (non-cliff)</li>
+<li><b>cLc1</b> Lordaeron Summer Grass (non-cliff)</li>
+<li><b>cWc2</b> Lordaeron Winter Grass (non-cliff)</li>
+<li><b>cWc1</b> Lordaeron Winter Snow (non-cliff)</li>
+<li><b>cNc2</b> Northrend Dirt (non-cliff)</li>
+<li><b>cNc1</b> Northrend Snow (non-cliff)</li>
+<li><b>cOc1</b> Outland Abyss (non-cliff)</li>
+<li><b>cOc2</b> Outland Rough Dirt (non-cliff)</li>
+<li><b>cZc2</b> Sunken Ruins Dirt (non-cliff)</li>
+<li><b>cZc1</b> Sunken Ruins Large Bricks (non-cliff)</li>
+<li><b>cGc2</b> Underground Dirt (non-cliff)</li>
+<li><b>cGc1</b> Underground Square Tiles (non-cliff)</li>
+<li><b>cVc2</b> Village Dirt (non-cliff)</li>
+<li><b>cVc1</b> Village Thick Grass (non-cliff)</li>
+<li><b>cQc2</b> Village Fall Dirt (non-cliff)</li>
+<li><b>cQc1</b> Village Fall Thick Grass (non-cliff)</li>
+</ul>
+
+<h2><a name="credits"></a>Credits</h2>
+
+<p class="setin">Here I'd like to thank everyone who has contributed in the creation and testing of the Grim Extension Pack and the Jass NewGen Pack as a whole. Special thanks go to the following people:</p>
+
+<ul>
+<li><b>PipeDream</b> for Grimoire and valuable tips</li>
+<li><b>MindWorX</b> found out that the test map settings can be customized</li>
+<li><b>Guessed</b> provided the source code for his MDLX Converter</li>
+<li><b>Vexorian</b> made JassHelper have external tool support</li>
+<li><b>StonedStoopid</b> as the original creator of the no limits patch</li>
+<li><b>Zepir</b> for countless hours of research and work on the file format specs</li>
+<li><b>ShadowFlare</b> for her great SFmpq library</li>
+<li><b><a href="http://www.wc3campaigns.net">Wc3Campaigns</a></b> for hosting and a I used their tauren theme for this</li>
+</ul>
+
+<p class="setin">Have fun,
+PitzerMike</p>
+
+</body>
+</html>

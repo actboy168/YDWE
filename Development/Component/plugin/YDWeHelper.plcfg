@@ -1,0 +1,6 @@
+[Info]
+PluginName = YDWeHelper
+[Load]
+Enable = 1
+Loader = DefaultPluginLoader.lua
+Dll    = YDWeHelper.dll

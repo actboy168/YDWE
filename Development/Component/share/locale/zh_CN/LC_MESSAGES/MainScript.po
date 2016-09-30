@@ -1,0 +1,196 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YDWE Main Script\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-11 14:20+0800\n"
+"PO-Revision-Date: 2013-10-11 14:21+0800\n"
+"Last-Translator: \n"
+"Language-Team: YDWE <417214250@qq.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\\..\\..\\..\\..\\Core\\Script\\Lua\n"
+"X-Poedit-SearchPath-1: ..\\..\\..\\..\\..\\Component\\plugin\n"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:55
+msgid "Export file"
+msgstr "导出文件"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:56
+msgid ""
+"Please enter the file path to export. Currently you can export only one file "
+"each time"
+msgstr "请输入需要导出的文件路径。当前仅支持每次导出一个文件。"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:58
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:105
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_new_object_id.lua:85
+msgid "OK"
+msgstr "确定"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:59
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:106
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_new_object_id.lua:86
+msgid "Cancel"
+msgstr "取消"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:70
+msgid "Save file"
+msgstr "保存文件"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:79
+msgid "The file you have entered does not exist."
+msgstr "你输入的文件不存在"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:80
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:120
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:129
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_new_object_id.lua:102
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_new_object_id.lua:111
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_save.lua:196
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_startup.lua:30
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_startup.lua:52
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_startup.lua:125
+msgid "YDWE"
+msgstr "YDWE"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:102
+msgid "Lua Test"
+msgstr "执行Lua代码"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:103
+msgid "Please enter the lua script to execute"
+msgstr "请输入需要执行的Lua脚本代码"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:119
+msgid "Error occured when executing code: "
+msgstr "执行代码时发生错误:"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:128
+msgid "There are syntax errors in your code."
+msgstr "你输入的代码中有语法错误。"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:179
+msgid "&YDWE"
+msgstr "YDWE(&Y)"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:182
+msgid "YDWE &Config"
+msgstr "YDWE配置(&C)"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:183
+msgid "Launch &Warcraft3"
+msgstr "启动魔兽(&W)"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:184
+msgid "Show las&t compile result"
+msgstr "显示上一次编译的结果(&T)"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:185
+msgid "Show J&assHelper version"
+msgstr "显示JassHelper的版本(&A)"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:186
+msgid "Show c&Jass version"
+msgstr "显示cJass的版本(&J)"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:187
+msgid "Launch YDWE &official website"
+msgstr "打开YDWE官方网站(&O)"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:188
+msgid "&Export WE file"
+msgstr "导出WE文件(&E)"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:189
+msgid "UTF-8 to &native"
+msgstr "剪贴板UTF-8转码(&N)"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:190
+msgid "&Lua Test"
+msgstr "执行Lua代码(&L)"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_menu.lua:191
+msgid "Cre&dits"
+msgstr "致谢(&D)"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_new_object_id.lua:82
+msgid "New Object Id"
+msgstr "新物体的ID"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_new_object_id.lua:83
+msgid "Please input new object ID, or cancel to use the default one."
+msgstr "请输入新物体的ID值（4个字母数字）。或者选择取消使用默认值。"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_new_object_id.lua:101
+msgid ""
+"You have entered an invalid ID. The ID must contain just 4 letters or "
+"digits. It cannot contain chars other than those in ASCII."
+msgstr ""
+"你输入的ID值不合法。ID必须包含恰好4个字符，不能是除了ASCII码以外的其他字符，"
+"特别是汉字。"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_new_object_id.lua:110
+msgid "You have entered an invalid ID. This ID already exists."
+msgstr "你输入的ID已经存在。"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_save.lua:195
+#, c-format
+msgid "Whether to remove the read-only attribute from \"%s\"?"
+msgstr "地图 \"%s\" 带有只读属性，是否去掉地图中的只读属性?"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_startup.lua:30
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_startup.lua:52
+#, c-format
+msgid ""
+"YDWE has detected that there is a directory named \"%s\" located in Warcraft "
+"3 installation directory. It may prevent YDWE from working. Do you want to "
+"delete it?"
+msgstr ""
+"YDWE检测到魔兽的安装路径下存在一个名为\"%s\"的文件夹。它可能影响YDWE运行，是"
+"否删除?"
+
+#: ..\..\..\..\..\Core\Script\Lua/ydwe_on_startup.lua:124
+msgid ""
+"YDWE has detected that your game.dll and war3patch.mpq mismatch. It may be "
+"caused by the so called \"Warcraft Version Converter\". This situation will "
+"cause a failure on saving and testing maps. It is strongly recommended to "
+"use the offical patched provided by Blizzard."
+msgstr ""
+"检测到您的魔兽Game.dll和War3Patch.mpq的版本不一致，这可能是由版本转换器造成"
+"的，这会导致您无法保存和测试地图，强烈建议您使用正确的魔兽补丁还原您的魔兽。"
+
+#: ..\..\..\..\..\Core\Script\Lua/compile/template.lua:107
+#: ..\..\..\..\..\Core\Script\Lua/compile/template.lua:109
+#: ..\..\..\..\..\Core\Script\Lua/compile/wave.lua:83
+#: ..\..\..\..\..\Core\Script\Lua/compile/wave.lua:85
+msgid "Error"
+msgstr "错误"
+
+#: ..\..\..\..\..\Core\Script\Lua/compile/template.lua:109
+msgid "Unknown"
+msgstr "未知"
+
+#: ..\..\..\..\..\Core\Script\Lua/compile/wave.lua:82
+#, c-format
+msgid ""
+"Preprocessor failed with message:\n"
+"stdout:%s\n"
+"stderr: %s"
+msgstr ""
+"预处理出现错误，信息:\n"
+"stdout:%s\n"
+"stderr: %s"
+
+#: ..\..\..\..\..\Core\Script\Lua/compile/wave.lua:85
+msgid "Cannot start preprocessor process."
+msgstr "无法启动预处理进程"
+
+#~ msgid "&Set file association"
+#~ msgstr "设置文件关联(&S)"
+
+#~ msgid "Preprocessor failed."
+#~ msgstr "预处理失败"

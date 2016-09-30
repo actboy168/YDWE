@@ -28,7 +28,7 @@ def convert_file(from_ptah, to_path, file_name):
 def pack_ui(name):
     print('pack_ui ' + name)
     stormlib_path = path['OpenSource'] / 'StormLib' / 'Current' / 'bin' / 'Win32' / 'Release' / 'StormLib.dll'
-    from_path     = path['Development']  / 'Editor' / 'UI' / 'txt' / name
+    from_path     = path['Development'] / 'UI' / 'txt' / name
     to_path       = path['Result']     / 'share' / 'mpq' / name
 
     fs.remove_all(from_path)

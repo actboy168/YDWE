@@ -43,8 +43,8 @@ def complie(msvc_version, configuration):
     util.msvc.rebuild(path['OpenSource']/ 'luaffi' / 'makefiles' / 'luaffi.sln', configuration)
     print('rebuild ydwe')
     if not is_dev():
-        util.msvc.rebuild(path['Development']/ 'Editor' / 'Core' / 'Solution' / 'YDWE.sln', configuration)
-    util.msvc.rebuild(path['Development']/ 'Editor' / 'Plugin' / 'YDColorizer' / 'YDColorizer.sln', configuration, 'Any CPU')
+        util.msvc.rebuild(path['Development'] / 'Core' / 'Solution' / 'YDWE.sln', configuration)
+    util.msvc.rebuild(path['Development'] / 'Plugin' / 'YDColorizer' / 'YDColorizer.sln', configuration, 'Any CPU')
     print('copy crt dll')
     copy_crt_dll(msvc_version, configuration)
 
