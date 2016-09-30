@@ -92,7 +92,7 @@
     <None Include="yd_leak_monitor.def" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="$(YDWE)\Editor\Core\ydbase\ydbase.vcxproj">
+    <ProjectReference Include="$(YDWE)\Core\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
   </ItemGroup>

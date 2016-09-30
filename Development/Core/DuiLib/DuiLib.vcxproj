@@ -62,7 +62,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <Optimization>MinSpace</Optimization>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(YDWE)\Editor\Core\YDGraph;$(YDWE)\Editor\Core\ydzip;$(OpenSource)zlib\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(YDWE)\Core\YDGraph;$(YDWE)\Core\ydzip;$(OpenSource)zlib\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <BaseAddress>
@@ -93,7 +93,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(YDWE)\Editor\Core\YDGraph;$(YDWE)\Editor\Core\ydzip;$(OpenSource)zlib\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(YDWE)\Core\YDGraph;$(YDWE)\Core\ydzip;$(OpenSource)zlib\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
     <Bscmake>
