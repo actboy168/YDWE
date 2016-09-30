@@ -10,8 +10,8 @@
 #pragma warning(pop)
 #include <boost/filesystem.hpp>
 #include <boost/iterator/iterator_facade.hpp>
-#include <boost/scoped_array.hpp>
 #include <base/path/service.h>
+
 namespace fs = boost::filesystem;
 
 namespace NLuaAPI { namespace NFileSystemAdditional {

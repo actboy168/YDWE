@@ -5,7 +5,6 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
 #include <functional>  
-#include "file_set.h"
 
 #pragma comment(lib, "wsock32.lib")
 

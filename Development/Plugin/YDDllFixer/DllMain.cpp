@@ -1,14 +1,28 @@
+#include <deque>
+#include <filesystem>
 #include <utility>
-#include <boost/foreach.hpp>
-#include <boost/filesystem.hpp>
 #include <windows.h>
 #include <Shlwapi.h>
 
-namespace fs = boost::filesystem;
+namespace fs = std::tr2::sys;
 
-static fs::path GetModuleDirectory(HMODULE hModule)
+template <class _String, class _Traits>
+inline fs::basic_path<_String, _Traits> operator/(const fs::basic_path<_String, _Traits>& _Left, const _String& _Right)
 {
-	fs::path result(L".");
+	fs::basic_path<_String, _Traits> _Ans = _Left;
+	return _Ans /= fs::basic_path<_String, _Traits>(_Right);
+}
+
+template <class _String, class _Traits>
+inline fs::basic_path<_String, _Traits> operator/(const fs::basic_path<_String, _Traits>& _Left, const typename _String::value_type* _Right)
+{
+	fs::basic_path<_String, _Traits> _Ans = _Left;
+	return _Ans /= fs::basic_path<_String, _Traits>(_Right);
+}
+
+static fs::wpath GetModuleDirectory(HMODULE hModule)
+{
+	fs::wpath result(L".");
 	wchar_t buffer[MAX_PATH];
 
 	if (::GetModuleFileNameW(hModule, buffer, sizeof(buffer) / sizeof(buffer[0])))
@@ -60,22 +74,21 @@ const wchar_t* szDllList[] = {
 
 #endif
 
-HMODULE hDllArray[sizeof(szDllList) / sizeof(szDllList[0])];
+std::deque<HMODULE> hDllArray;
 
-void PreloadDll(const fs::path &ydweDirectory)
+void PreloadDll(const fs::wpath &ydweDirectory)
 {
 	if (!ydweDirectory.empty())
 	{
-		fs::path binPath = ydweDirectory.parent_path() / L"bin";
+		fs::wpath binPath = ydweDirectory.parent_path() / L"bin";
 
 		wchar_t buffer[MAX_PATH];
 		::GetCurrentDirectoryW(sizeof(buffer) / sizeof(buffer[0]), buffer);
-		::SetCurrentDirectoryW(binPath.c_str());
-
-		HMODULE *pMod = hDllArray;
-		BOOST_FOREACH(const wchar_t *szDllName, szDllList)
+		::SetCurrentDirectoryW(binPath.string().c_str());
+		 
+		for (const wchar_t *szDllName: szDllList)
 		{
-			*(pMod++) = ::LoadLibraryW((binPath / szDllName).c_str());
+			hDllArray.push_front(::LoadLibraryW((binPath / szDllName).string().c_str()));
 		}
 
 		::SetCurrentDirectoryW(buffer);
@@ -84,27 +97,27 @@ void PreloadDll(const fs::path &ydweDirectory)
 
 void PostfreeDll()
 {
-	BOOST_REVERSE_FOREACH(HMODULE hDll, hDllArray)
+	for (HMODULE hDll : hDllArray)
 	{
 		if (hDll)
 			::FreeLibrary(hDll);
 	}
 }
 
-static void RestoreDetouredSystemDll(const fs::path &war3Directory)
+static void RestoreDetouredSystemDll(const fs::wpath &war3Directory)
 {
-	fs::path backupPath = war3Directory / L"ydwe_backups_system_dll";
+	fs::wpath backupPath = war3Directory / L"ydwe_backups_system_dll";
 
 	try
 	{
-		fs::directory_iterator endItr;
-		for (fs::directory_iterator itr(backupPath); itr != endItr; ++itr)
+		fs::wdirectory_iterator endItr;
+		for (fs::wdirectory_iterator itr(backupPath); itr != endItr; ++itr)
 		{
 			try
 			{
-				if (!fs::is_directory(*itr))
+				if (!fs::is_directory(itr->path()))
 				{
-					fs::rename(*itr, war3Directory / itr->path().filename());
+					fs::rename(itr->path(), war3Directory / itr->path().filename());
 				}
 			}
 			catch(...)
@@ -128,8 +141,8 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 	{
 		::DisableThreadLibraryCalls(module);
 
-		fs::path war3Directory = GetModuleDirectory(NULL);
-		fs::path ydweDirectory = GetModuleDirectory(module);
+		fs::wpath war3Directory = GetModuleDirectory(NULL);
+		fs::wpath ydweDirectory = GetModuleDirectory(module);
 
 		PreloadDll(ydweDirectory);
 		RestoreDetouredSystemDll(war3Directory);
