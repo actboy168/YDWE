@@ -60,7 +60,7 @@ namespace YDColorizer
             {
                 base.WndProc(ref m);
             }
-            catch(AccessViolationException ex)
+            catch(AccessViolationException )
             {
             }
         }

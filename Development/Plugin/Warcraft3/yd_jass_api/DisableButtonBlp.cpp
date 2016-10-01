@@ -263,10 +263,10 @@ namespace base { namespace warcraft3 { namespace japi {
 			}
 #define DisString "replaceabletextures\\commandbuttonsdisabled\\dis"
 #define StrLen(s) (sizeof(s) - 1)
-			if (0 == strnicmp(filepath, DisString, StrLen(DisString)))
+			if (0 == _strnicmp(filepath, DisString, StrLen(DisString)))
 			{
 				const char* filename = filepath + StrLen(DisString);
-				if (0 != stricmp(ToFileName(g_lastfilepath).c_str(), filename))
+				if (0 != _stricmp(ToFileName(g_lastfilepath).c_str(), filename))
 				{
 					for (const char* cur = filename;; cur += 3)
 					{
@@ -276,7 +276,7 @@ namespace base { namespace warcraft3 { namespace japi {
 							suc = disable_button_blp(it->second.c_str(), buffer_ptr, size_ptr, reserve_size);
 							break;
 						}
-						if (0 != strnicmp(cur, "dis", 3))
+						if (0 != _strnicmp(cur, "dis", 3))
 						{
 							break;
 						}
@@ -291,7 +291,7 @@ namespace base { namespace warcraft3 { namespace japi {
 					}
 					else
 					{
-						if (0 == strnicmp(g_lastfilepath.c_str(), DisString, StrLen(DisString)))
+						if (0 == _strnicmp(g_lastfilepath.c_str(), DisString, StrLen(DisString)))
 						{
 							for (const char* cur = g_lastfilepath.c_str() + StrLen(DisString);; cur += 3)
 							{
@@ -305,7 +305,7 @@ namespace base { namespace warcraft3 { namespace japi {
 									}
 									break;
 								}
-								if (0 != strnicmp(cur, "dis", 3))
+								if (0 != _strnicmp(cur, "dis", 3))
 								{
 									break;
 								}

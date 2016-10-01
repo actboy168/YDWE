@@ -1107,7 +1107,7 @@ namespace base { namespace hook {
 				goto finish;
 			}
 
-			if (stricmp(szTemp, lpOldDll) == 0) {
+			if (_stricmp(szTemp, lpOldDll) == 0) {
 				piid[i].Name = obBase + obStr;
 			}
 			if (piid[i].OriginalFirstThunk == 0 && piid[i].FirstThunk == 0) {

@@ -90,7 +90,6 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(YDWE)\Core\YDGraph;$(YDWE)\Core\ydzip;$(OpenSource)zlib\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
