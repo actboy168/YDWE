@@ -14,8 +14,8 @@ struct CPatternSearchPredicate
 {
 	bool operator()(uint8_t b, uint16_t pattern) const
 	{
-		uint8_t m = (pattern >> 8) & (~uint8_t(-1));
-		uint8_t v = (pattern >> 0) & (~uint8_t(-1));
+		uint8_t m = (pattern >> 8) & uint8_t(-1);
+		uint8_t v = (pattern >> 0) & uint8_t(-1);
 		return (m & b) == (m & v);
 	}
 };
