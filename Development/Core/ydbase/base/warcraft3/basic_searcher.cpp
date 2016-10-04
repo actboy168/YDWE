@@ -1,6 +1,8 @@
 #include <base/warcraft3/basic_searcher.h>
 #include <base/warcraft3/detail/memory_search.h>
-#include <base/hook/detail/disassembly.h>
+extern "C" {
+#include <base/hook/udis86/udis86.h>
+}
 
 namespace base { namespace warcraft3 {
 
@@ -111,39 +113,22 @@ namespace base { namespace warcraft3 {
 
 	uintptr_t next_opcode(uintptr_t address)
 	{
-		return address + hook::detail::next_opcode(address, nullptr);
+		ud_t ud_obj;
+		ud_init(&ud_obj, 32);
+		ud_set_input_buffer(&ud_obj, (uint8_t*)address, (size_t)-1);
+		return address + ud_decode(&ud_obj);
 	}
 
 	uintptr_t next_opcode(uintptr_t address, uint8_t opcode, size_t length)
 	{
+		ud_t ud_obj;
+		ud_init(&ud_obj, 32);
+		ud_set_input_buffer(&ud_obj, (uint8_t*)address, (size_t)-1);
 		size_t size = 0;
 		do
 		{
-			uint8_t* op = nullptr;
-			size = hook::detail::next_opcode(address, &op);
-			if ((size == length) && (op[0] == opcode)) break;
-			address += size;
-		} while (size);
-
-		return address;
-	}
-
-	uintptr_t next_opcode(uintptr_t address, uint8_t opcode[], size_t n)
-	{
-		size_t size = 0;
-		do
-		{
-			uint8_t* op = nullptr;
-			size = hook::detail::next_opcode(address, &op);
-
-			for (size_t i = 0; i < n; ++i)
-			{
-				if (op[0] == opcode[i])
-				{
-					return address;
-				}
-			}
-
+			size = ud_decode(&ud_obj);
+			if ((size == length) && (*(uint8_t*)address == opcode)) break;
 			address += size;
 		} while (size);
 

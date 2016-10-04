@@ -40,5 +40,4 @@ namespace base { namespace warcraft3 {
 	_BASE_API uintptr_t convert_function(uintptr_t address);
 	_BASE_API uintptr_t next_opcode(uintptr_t address);
 	_BASE_API uintptr_t next_opcode(uintptr_t address, uint8_t opcode, size_t length);
-	_BASE_API uintptr_t next_opcode(uintptr_t address, uint8_t opcode[], size_t n);
 }}

@@ -77,6 +77,9 @@
     <Filter Include="base\win\font">
       <UniqueIdentifier>{d3bb681c-bfad-45b8-b53a-094ab9bbc6bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\hook\udis86">
+      <UniqueIdentifier>{f23ecf6d-f199-4948-9430-68c1c5ec48c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -136,9 +139,6 @@
     </ClCompile>
     <ClCompile Include="base\warcraft3\detail\string_hash.cpp">
       <Filter>base\warcraft3\detail</Filter>
-    </ClCompile>
-    <ClCompile Include="base\hook\detail\disassembly.cpp">
-      <Filter>base\hook\detail</Filter>
     </ClCompile>
     <ClCompile Include="base\warcraft3\detail\memory_search.cpp">
       <Filter>base\warcraft3\detail</Filter>
@@ -254,6 +254,15 @@
     <ClCompile Include="base\hook\replace_import.cpp">
       <Filter>base\hook</Filter>
     </ClCompile>
+    <ClCompile Include="base\hook\udis86\udis86_itab.c">
+      <Filter>base\hook\udis86</Filter>
+    </ClCompile>
+    <ClCompile Include="base\hook\udis86\udis86.c">
+      <Filter>base\hook\udis86</Filter>
+    </ClCompile>
+    <ClCompile Include="base\hook\udis86\udis86_decode.c">
+      <Filter>base\hook\udis86</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -336,9 +345,6 @@
     </ClInclude>
     <ClInclude Include="base\warcraft3\detail\string_hash.h">
       <Filter>base\warcraft3\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="base\hook\detail\disassembly.h">
-      <Filter>base\hook\detail</Filter>
     </ClInclude>
     <ClInclude Include="base\warcraft3\detail\memory_search.h">
       <Filter>base\warcraft3\detail</Filter>
@@ -550,6 +556,21 @@
     </ClInclude>
     <ClInclude Include="base\hook\replace_import.h">
       <Filter>base\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="base\hook\udis86\udis86_itab.h">
+      <Filter>base\hook\udis86</Filter>
+    </ClInclude>
+    <ClInclude Include="base\hook\udis86\udis86_types.h">
+      <Filter>base\hook\udis86</Filter>
+    </ClInclude>
+    <ClInclude Include="base\hook\udis86\udis86_udint.h">
+      <Filter>base\hook\udis86</Filter>
+    </ClInclude>
+    <ClInclude Include="base\hook\udis86\udis86.h">
+      <Filter>base\hook\udis86</Filter>
+    </ClInclude>
+    <ClInclude Include="base\hook\udis86\udis86_decode.h">
+      <Filter>base\hook\udis86</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

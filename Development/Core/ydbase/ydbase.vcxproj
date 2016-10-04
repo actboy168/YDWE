@@ -118,6 +118,9 @@
   <ItemGroup>
     <ClCompile Include="base\hook\dyn_iat.cpp" />
     <ClCompile Include="base\hook\replace_import.cpp" />
+    <ClCompile Include="base\hook\udis86\udis86.c" />
+    <ClCompile Include="base\hook\udis86\udis86_decode.c" />
+    <ClCompile Include="base\hook\udis86\udis86_itab.c" />
     <ClCompile Include="base\thread\thread.cpp" />
     <ClCompile Include="base\thread\thread_exception.cpp" />
     <ClCompile Include="base\warcraft3\command_line.cpp" />
@@ -137,7 +140,6 @@
     <ClCompile Include="base\file\file_mapping_handle.cpp" />
     <ClCompile Include="base\file\memory_mapped_file.cpp" />
     <ClCompile Include="base\file\stream.cpp" />
-    <ClCompile Include="base\hook\detail\disassembly.cpp" />
     <ClCompile Include="base\hook\detail\import_address_table.cpp" />
     <ClCompile Include="base\hook\detail\inject_dll.cpp" />
     <ClCompile Include="base\hook\detail\memory_protect.cpp" />
@@ -195,7 +197,6 @@
     <ClInclude Include="base\hook\assembler\operand.h" />
     <ClInclude Include="base\hook\assembler\writer.h" />
     <ClInclude Include="base\hook\assembler\register.h" />
-    <ClInclude Include="base\hook\detail\disassembly.h" />
     <ClInclude Include="base\hook\detail\import_address_table.h" />
     <ClInclude Include="base\hook\detail\inject_dll.h" />
     <ClInclude Include="base\hook\detail\memory_protect.h" />
@@ -208,6 +209,11 @@
     <ClInclude Include="base\hook\iat_manager.h" />
     <ClInclude Include="base\hook\inline.h" />
     <ClInclude Include="base\hook\replace_import.h" />
+    <ClInclude Include="base\hook\udis86\udis86.h" />
+    <ClInclude Include="base\hook\udis86\udis86_decode.h" />
+    <ClInclude Include="base\hook\udis86\udis86_itab.h" />
+    <ClInclude Include="base\hook\udis86\udis86_types.h" />
+    <ClInclude Include="base\hook\udis86\udis86_udint.h" />
     <ClInclude Include="base\i18n\libintl.h" />
     <ClInclude Include="base\i18n\mofile.h" />
     <ClInclude Include="base\lockfree\queue.h" />
