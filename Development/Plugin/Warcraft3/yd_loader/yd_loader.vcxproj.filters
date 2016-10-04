@@ -33,6 +33,9 @@
     <ClCompile Include="war3_scores.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WideScreenSupport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DllModule.h">

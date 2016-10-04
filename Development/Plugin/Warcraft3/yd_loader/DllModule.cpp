@@ -21,6 +21,11 @@ namespace scores { namespace rpg {
 	void hook();
 }}
 
+namespace WideScreen
+{
+	void initialize();
+}
+
 uintptr_t RealLoadLibraryA  = 0;
 uintptr_t RealGameLoadLibraryA  = 0;
 uintptr_t RealCreateWindowExA = 0;
@@ -119,6 +124,8 @@ HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
 					return g_DllMod.hGameDll;
 				}
 			}
+
+			WideScreen::initialize();
 
 			RealCreateWindowExA  = base::hook::iat(L"Game.dll", "user32.dll", "CreateWindowExA", (uintptr_t)FakeCreateWindowExA);
 			if (g_DllMod.IsDisableSecurityAccess)
