@@ -17,8 +17,9 @@ local tbl_index = {
 		LaunchRenderingEngine = "Direct3D 8",
 		LaunchWindowed = "1",
 		LaunchFullWindowed = "0",
+		LaunchWideScreenSupport = "1",
 		LaunchLockingMouse = "0",
-		LaunchFixedRatioWindowed = "1",
+		LaunchFixedRatioWindowed = "0",
 		LaunchDisableSecurityAccess = "0",
 	},
 	ScriptCompiler = {

@@ -85,6 +85,7 @@ namespace
 		("LaunchFullWindowed",                      Attribute("MapTest"))
 		("LaunchLockingMouse",                      Attribute("MapTest"))
 		("LaunchFixedRatioWindowed",                Attribute("MapTest"))
+		("LaunchWideScreenSupport",                 Attribute("MapTest"))
 		("LaunchDisableSecurityAccess",             Attribute("MapTest"))
 		("EnableHost",                              Attribute("MapTest"))
 		("EnableDotNetSupport",                     Attribute("ThirdPartyPlugin"))
@@ -164,6 +165,8 @@ void CMainWindow::InitWindow()
 	m_pEnableJassHelper = m_controls["EnableJassHelper"];
 	m_pEnableCJass      = m_controls["EnableCJass"];
 	m_pLaunchWindowed   = m_controls["LaunchWindowed"];
+	m_pLaunchWideScreenSupport = m_controls["LaunchWideScreenSupport"];
+	m_pLaunchFixedRatioWindowed = m_controls["LaunchFixedRatioWindowed"];
 	m_pEnableHost       = m_controls["EnableHost"];
 	m_pFontEnable       = m_controls["FontEnable"];
 	m_pFontName         = m_comboboxs["FontName"];
@@ -189,8 +192,9 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["MapTest"]["LaunchRenderingEngine"] = "Direct3D 8";
 	table["MapTest"]["LaunchWindowed"] = "1";
 	table["MapTest"]["LaunchFullWindowed"] = "0";
+	table["MapTest"]["LaunchWideScreenSupport"] = "1";
 	table["MapTest"]["LaunchLockingMouse"] = "0";
-	table["MapTest"]["LaunchFixedRatioWindowed"] = "1";
+	table["MapTest"]["LaunchFixedRatioWindowed"] = "0";
 	table["MapTest"]["LaunchDisableSecurityAccess"] = "0";
 	table["MapTest"]["EnableHost"] = "0";
 	table["ScriptCompiler"]["EnableJassHelper"] = "1";
@@ -678,6 +682,16 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 			{
 				bool bEnable = m_pEnableHost->IsSelected();
 				EnableHostTest(bEnable);
+			}
+			else if (m_pLaunchWideScreenSupport && m_pLaunchWideScreenSupport == msg.pSender)
+			{
+				bool bEnable = m_pLaunchWideScreenSupport->IsSelected();
+				ContrlSelected("LaunchFixedRatioWindowed", !bEnable);
+			}
+			else if (m_pLaunchFixedRatioWindowed && m_pLaunchFixedRatioWindowed == msg.pSender)
+			{
+				bool bEnable = m_pLaunchFixedRatioWindowed->IsSelected();
+				ContrlSelected("LaunchWideScreenSupport", !bEnable);
 			}
 		}
 		else if (msg.sType == DUI_MSGTYPE_ITEMSELECT)

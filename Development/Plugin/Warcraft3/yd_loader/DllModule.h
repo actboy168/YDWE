@@ -30,6 +30,7 @@ public:
 	bool     IsFullWindowedMode;
 	bool     IsLockingMouse;
 	bool     IsFixedRatioWindowed;
+	bool     IsWideScreenSupport;
 	bool     IsDisableSecurityAccess;
 	bool     IsEnableDirect3D9;
 	fs::path patch_path;

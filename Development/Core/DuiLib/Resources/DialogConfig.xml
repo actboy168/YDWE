@@ -69,7 +69,7 @@
           </VerticalLayout>
         </VerticalLayout>
         <VerticalLayout class="Background" inset="2,18,2,18" >
-          <VerticalLayout height="170" >
+          <VerticalLayout height="200" >
             <Label text="常规选项" tooltip="有关测试地图时魔兽的一些调整选项。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
               <CheckBox text="窗口化运行魔兽"     width="200" name="LaunchWindowed" tooltip="使魔兽以窗口化的方式启动。" />
@@ -80,7 +80,8 @@
                   <CheckBox text="锁定鼠标"       width="200" name="LaunchLockingMouse"       tooltip="让鼠标无法移动到窗口外。" />
                   <CheckBox text="固定窗口比例"   width="200" name="LaunchFixedRatioWindowed" tooltip="让窗口保持4：3的比例。" />
                 </VerticalLayout>
-              </HorizontalLayout>
+                </HorizontalLayout>
+              <CheckBox text="自适应分辨率" width="200" name="LaunchWideScreenSupport" tooltip="让魔兽自动适应当前分辨率，而不是拉伸。" />
               <CheckBox text="阻止魔兽提升自身的访问限制" width="200" name="LaunchDisableSecurityAccess" tooltip="魔兽会提升自身的访问限制，阻止所有非管理员权限的进程访问它，Vista之后管理员权限需要UAC，很烦人不是吗。" />
             </VerticalLayout>
           </VerticalLayout>

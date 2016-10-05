@@ -47,6 +47,8 @@ private:
 	DuiLib::CCheckBoxUI*       m_pEnableJassHelper;
 	DuiLib::CCheckBoxUI*       m_pEnableCJass;
 	DuiLib::CCheckBoxUI*       m_pLaunchWindowed;
+	DuiLib::CCheckBoxUI*       m_pLaunchWideScreenSupport;
+	DuiLib::CCheckBoxUI*       m_pLaunchFixedRatioWindowed;
 	DuiLib::CCheckBoxUI*       m_pEnableHost;
 	DuiLib::CCheckBoxUI*       m_pFileAssociation_w3x;
 	DuiLib::CCheckBoxUI*       m_pFileAssociation_w3m;

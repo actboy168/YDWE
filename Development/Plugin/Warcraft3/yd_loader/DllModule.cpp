@@ -125,7 +125,10 @@ HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
 				}
 			}
 
-			WideScreen::initialize();
+			if (g_DllMod.IsWideScreenSupport)
+			{
+				WideScreen::initialize();
+			}
 
 			RealCreateWindowExA  = base::hook::iat(L"Game.dll", "user32.dll", "CreateWindowExA", (uintptr_t)FakeCreateWindowExA);
 			if (g_DllMod.IsDisableSecurityAccess)
@@ -278,8 +281,9 @@ void ResetConfig(slk::IniTable& table)
 	table["MapTest"]["LaunchRenderingEngine"] = "Direct3D 8";
 	table["MapTest"]["LaunchWindowed"] = "1";
 	table["MapTest"]["LaunchFullWindowed"] = "0";
+	table["MapTest"]["LaunchWideScreenSupport"] = "1";
 	table["MapTest"]["LaunchLockingMouse"] = "0";
-	table["MapTest"]["LaunchFixedRatioWindowed"] = "1";
+	table["MapTest"]["LaunchFixedRatioWindowed"] = "0";
 	table["MapTest"]["LaunchDisableSecurityAccess"] = "0";	
 	table["ScriptCompiler"]["EnableJassHelper"] = "1";
 	table["ScriptCompiler"]["EnableJassHelperDebug"] = "0";
@@ -357,6 +361,7 @@ void DllModule::Attach()
 		IsFullWindowedMode      = "0" != table["MapTest"]["LaunchFullWindowed"];
 		IsLockingMouse          = "0" != table["MapTest"]["LaunchLockingMouse"];
 		IsFixedRatioWindowed    = "0" != table["MapTest"]["LaunchFixedRatioWindowed"];
+		IsWideScreenSupport     = "0" != table["MapTest"]["LaunchWideScreenSupport"];
 		IsDisableSecurityAccess = "0" != table["MapTest"]["LaunchDisableSecurityAccess"];
 		IsEnableDirect3D9       = "Direct3D 9" == table["MapTest"]["LaunchRenderingEngine"];
 
