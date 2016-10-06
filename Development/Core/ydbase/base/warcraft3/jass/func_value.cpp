@@ -138,9 +138,15 @@ namespace base { namespace warcraft3 { namespace jass {
 		return address_;
 	}
 
-	uintptr_t func_value::call(uintptr_t param_list[]) const
+	uintptr_t func_value::call(const uintptr_t* param) const
 	{
-		return jass::call(address_, param_list, param_.size());
+		return jass::call(address_, param, param_.size());
+	}
+
+	uintptr_t func_value::call(const call_param& param) const
+	{
+		assert(param.size() == param_.size());
+		return call(param.data());
 	}
 
 	func_mapping jass_function;

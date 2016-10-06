@@ -1,8 +1,8 @@
 #pragma once
 
 #include <base/config.h>
+#include <base/util/dynarray.h>
 #include <cstdint>
-#include <vector>
 
 namespace base { namespace warcraft3 { namespace jass {
 
@@ -45,11 +45,13 @@ namespace base { namespace warcraft3 { namespace jass {
 		size_t           size() const;
 
 	private:
+		call_param(const call_param&);
+		const call_param& operator=(const call_param&);
 #pragma warning(push)
 #pragma warning(disable: 4251)
-		std::vector<uintptr_t>   param_buffer_;
-		std::vector<jreal_t>     real_buffer_;
-		std::vector<string_fake> string_buffer_;
+		std::dynarray<uintptr_t>   param_buffer_;
+		std::dynarray<jreal_t>     real_buffer_;
+		std::dynarray<string_fake> string_buffer_;
 #pragma warning(pop)
 	};
 

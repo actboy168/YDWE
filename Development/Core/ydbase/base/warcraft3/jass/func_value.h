@@ -7,6 +7,8 @@
 
 namespace base { namespace warcraft3 { namespace jass {
 
+	class call_param;
+
 	enum variable_type
 	{
 		TYPE_NONE    = 0,
@@ -38,8 +40,9 @@ namespace base { namespace warcraft3 { namespace jass {
 			assert(param_.size() == param_count);
 		}
 
-		uintptr_t call(uintptr_t param_list[]) const;
-
+		uintptr_t call(const uintptr_t* param) const;
+		uintptr_t call(const call_param& param) const;
+		
 	private:
 		variable_type              return_;
 #pragma warning(push)
