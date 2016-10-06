@@ -36,8 +36,6 @@ int llog_print(lua_State *L)
 	return 0;
 }
 
-extern "C" __declspec(dllexport) int luaopen_log(lua_State* L);
-
 int luaopen_log(lua_State* L)
 {
 	lg = logging::get_logger("lua");
@@ -64,19 +62,5 @@ int luaopen_log(lua_State* L)
 		lua_pushcclosure(L, llog_print, 1);
 		lua_setfield(L, -2, l->name);
 	}
-
-	lua_setglobal(L, "log");
-	return 0;
-}
-
-#include <windows.h>
-
-BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
-{
-	if (reason == DLL_PROCESS_ATTACH)
-	{
-		DisableThreadLibraryCalls(module);
-	}
-
-	return TRUE;
+	return 1;
 }

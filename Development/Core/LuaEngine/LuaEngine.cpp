@@ -13,6 +13,8 @@
 #include <base/util/format.h>
 #include <base/win/version.h>
 
+int luaopen_log(lua_State* L);
+
 uintptr_t RealLuaPcall = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"luacore.dll"), "lua_pcallk");
 int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
 {
@@ -47,12 +49,6 @@ LuaEngine::~LuaEngine()
 
 bool LuaEngine::InitializeLogger(const boost::filesystem::path& root_path)
 {
-	HMODULE log = LoadLibraryW((root_path.parent_path() / L"bin" / L"modules" / L"log.dll").c_str());
-	if (!log)
-	{
-		return false;
-	}
-
 	if (!logging::initialize(root_path.c_str(), L"ydwe"))
 	{
 		printf("initialize error %d\n", GetLastError());
@@ -91,6 +87,8 @@ bool LuaEngine::InitializeLua()
 
 	luaL_openlibs(state_);
 	luabind::open(state_);
+	luaL_requiref(state_, "log", luaopen_log, 1);
+	lua_pop(state_, 1);
 	LOGGING_DEBUG(logger_) << "Initialize script engine successfully.";
 
 	return true;

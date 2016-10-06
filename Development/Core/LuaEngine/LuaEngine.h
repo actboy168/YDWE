@@ -2,7 +2,7 @@
 
 #include <boost/filesystem.hpp>
 #include <lua.hpp>
-#include <../Plugin/Lua/log/logging.h>
+#include "logging.h"
 
 class LuaEngine
 {

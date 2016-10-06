@@ -1,7 +1,7 @@
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
 #include <base/warcraft3/virtual_mpq.h>	  
-#include <../Plugin/Lua/log/logging.h>
+#include <LuaEngine/logging.h>
 
 static bool VirtualMpqWatchCB(const luabind::object& func, const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
 {
