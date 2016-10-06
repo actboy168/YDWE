@@ -98,10 +98,10 @@ namespace base { namespace warcraft3 { namespace jass {
 		return convert_function(ptr);
 	}
 
-	uintptr_t create_string(const char* val)
+	jstring_t create_string(const char* val)
 	{
 		static uintptr_t s_create_string = search_create_string();
-		return ((uintptr_t(_fastcall*)(const char*))s_create_string)(val);
+		return ((jstring_t(_fastcall*)(const char*))s_create_string)(val);
 	}
 
 	namespace detail
@@ -227,6 +227,13 @@ namespace base { namespace warcraft3 { namespace jass {
 	}
 
 	template <> _BASE_API
+	void call_param::push<bool>(size_t i, bool value)
+	{
+		assert(i < param_buffer_.size());
+		param_buffer_[i] = value? 1: 0;
+	}
+
+	template <> _BASE_API
 	void call_param::push<float>(size_t i, float value)
 	{
 		push_real(i, to_real(value));
@@ -252,19 +259,20 @@ namespace base { namespace warcraft3 { namespace jass {
 		return param_buffer_.data();
 	}
 
+	size_t           call_param::size() const
+	{
+		return param_buffer_.size();
+	}
+
 	uintptr_t  call(const char* name, ...)
 	{
-		func_value const* nf = jass_func(name);
-
-		if (!nf) 
-		{
-			nf = japi_func(name); 
-			if (!nf)
-			{
+		func_value const* nf = japi_func(name);
+		if (!nf) {
+			nf = jass_func(name);
+			if (!nf) {
 				return 0;
 			}
 		}
-
 		return call(nf->get_address(), (const uintptr_t*)((va_list)_ADDRESSOF(name) + _INTSIZEOF(name)), nf->get_param().size());
 	}
 

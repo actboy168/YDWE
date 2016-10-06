@@ -42,6 +42,7 @@ namespace base { namespace warcraft3 { namespace jass {
 		template <class T> void push(size_t i, T value);
 		void push_real(size_t i, jreal_t value);
 		const uintptr_t* data() const;
+		size_t           size() const;
 
 	private:
 #pragma warning(push)
@@ -57,7 +58,7 @@ namespace base { namespace warcraft3 { namespace jass {
 	_BASE_API const char* from_string    (jstring_t val);
 	_BASE_API string_fake to_string      (const char* val);
 
-	_BASE_API uintptr_t   create_string  (const char* val);
+	_BASE_API jstring_t   create_string  (const char* val);
 	_BASE_API const char* from_trigstring(const char* val);
 	_BASE_API const char* from_stringid  (uint32_t strid);
 

@@ -269,8 +269,7 @@ uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 							uint32_t x = 0;
 							uint32_t y = 0;
 							std::string msg = base::w2u(base::format(L"*泄漏检测报告*已经保存到：%s", report.wstring()));
-							jass::string_fake msgid = jass::to_string(msg.c_str());
-							jass::call("DisplayTextToPlayer", base::warcraft3::jass::call("GetLocalPlayer"), &x, &y, (jass::jstring_t)msgid);
+							jass::call("DisplayTextToPlayer", jass::call("GetLocalPlayer"), &x, &y, (jass::jstring_t)jass::to_string(msg.c_str()));
 						}
 						return 1;
 					}
