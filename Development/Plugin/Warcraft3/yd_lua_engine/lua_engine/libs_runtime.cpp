@@ -3,8 +3,7 @@
 #include <base/util/format.h>	  
 #include <array>
 #include <cstring>
-#include "libs_runtime.h" 
-#include "allow_yield.h" 
+#include "libs_runtime.h"
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime	{
 	int  version = 3;
@@ -226,7 +225,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime	
 		}
 		else if (strcmp("can_sleep", name) == 0)
 		{
-			lua_pushboolean(L, sleep && lua::allow_yield(L));
+			lua_pushboolean(L, sleep && lua_isyieldable(L));
 			return 1;
 		}
 		else if (strcmp("catch_crash", name) == 0)

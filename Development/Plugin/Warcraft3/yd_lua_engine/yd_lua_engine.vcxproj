@@ -91,7 +91,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="lua_engine\allow_yield.cpp" />
     <ClCompile Include="lua_engine\callback.cpp" />
     <ClCompile Include="lua_engine\class_array.cpp" />
     <ClCompile Include="lua_engine\class_handle.cpp" />
@@ -126,7 +125,6 @@
     <None Include="yd_lua_engine.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lua_engine\allow_yield.h" />
     <ClInclude Include="lua_engine\callback.h" />
     <ClInclude Include="lua_engine\class_array.h" />
     <ClInclude Include="lua_engine\class_handle.h" />

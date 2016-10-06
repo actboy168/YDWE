@@ -1,8 +1,7 @@
 #include "jassbind.h"
 #include "class_array.h"
 #include "libs_runtime.h"
-#include "common.h"	   
-#include "allow_yield.h"
+#include "common.h"
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/jass/func_value.h>
@@ -32,7 +31,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jass::func_value const* nf = jass::jass_func(name);
 		if (nf && nf->is_valid())
 		{
-			if (!lua::allow_yield(L))
+			if (!lua_isyieldable(L))
 			{
 				if ((0 == strcmp(name, "TriggerSleepAction"))
 					|| (0 == strcmp(name, "TriggerWaitForSound"))

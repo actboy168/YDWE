@@ -77,9 +77,6 @@
     <ClCompile Include="lua_engine\libs_globals.cpp">
       <Filter>lua_engine\library</Filter>
     </ClCompile>
-    <ClCompile Include="lua_engine\allow_yield.cpp">
-      <Filter>lua_engine\main</Filter>
-    </ClCompile>
     <ClCompile Include="lua_engine\libs_console.cpp">
       <Filter>lua_engine\library</Filter>
     </ClCompile>
@@ -137,9 +134,6 @@
       <Filter>lua_engine\main</Filter>
     </ClInclude>
     <ClInclude Include="lua_engine\lua_helper.h">
-      <Filter>lua_engine\main</Filter>
-    </ClInclude>
-    <ClInclude Include="lua_engine\allow_yield.h">
       <Filter>lua_engine\main</Filter>
     </ClInclude>
     <ClInclude Include="lua_engine\sha_1.h">

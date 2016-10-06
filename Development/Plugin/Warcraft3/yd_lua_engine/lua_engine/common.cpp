@@ -2,8 +2,7 @@
 #include "jassbind.h"
 #include "class_handle.h"
 #include "class_array.h"
-#include "libs_runtime.h" 
-#include "allow_yield.h"
+#include "libs_runtime.h"
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/jass.h>
@@ -173,7 +172,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		int result = jass_call_native_function(L, (const jass::func_value*)lua_tointeger(L, lua_upvalueindex(1)));
 
-		if (lua::allow_yield(L))
+		if (lua_isyieldable(L))
 		{
 			uintptr_t vm = (uintptr_t)get_current_jass_vm_nofix();
 			if (vm && *(uintptr_t*)(vm + 0x34))
