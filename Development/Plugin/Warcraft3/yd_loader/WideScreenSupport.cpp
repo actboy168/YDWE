@@ -66,6 +66,13 @@ namespace WideScreen
 		ptr = convert_function(ptr);
 
 		ptr = next_opcode(ptr, 0xE8, 5);
+
+		if (s.get_version() >= version_127a)
+		{
+			ptr += 5;
+			ptr = next_opcode(ptr, 0xE8, 5);
+		}
+
 		ptr = convert_function(ptr);
 		return ptr;
 	}
