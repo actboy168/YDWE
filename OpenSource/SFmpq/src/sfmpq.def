@@ -1,0 +1,11 @@
+LIBRARY "sfmpq"
+EXPORTS
+	MpqCompactArchive
+	MpqDeleteFile
+	MpqCloseUpdatedArchive
+	MpqAddFileToArchiveEx
+	MpqOpenArchiveForUpdate
+	SFileGetFileSize=StormLib.SFileGetFileSize
+	SFileReadFile=StormLib.SFileReadFile
+	SFileCloseFile=StormLib.SFileCloseFile
+	SFileOpenFileEx=StormLib.SFileOpenFileEx
