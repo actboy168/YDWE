@@ -18,7 +18,10 @@ namespace NLuaAPI { namespace NMPQ {
 		CreateInfo.cbSize         = sizeof(SFILE_CREATE_MPQ);
 		CreateInfo.dwMpqVersion   = MPQ_FORMAT_VERSION_1;
 		CreateInfo.dwStreamFlags  = STREAM_PROVIDER_FLAT | BASE_PROVIDER_FILE;
-		CreateInfo.dwAttrFlags    = 0;
+		CreateInfo.dwFileFlags1   = MPQ_FILE_EXISTS;
+		CreateInfo.dwFileFlags2   = MPQ_FILE_EXISTS;
+		CreateInfo.dwFileFlags3   = MPQ_FILE_EXISTS;
+		CreateInfo.dwAttrFlags    = MPQ_ATTRIBUTE_CRC32 | MPQ_ATTRIBUTE_FILETIME | MPQ_ATTRIBUTE_MD5;
 		CreateInfo.dwSectorSize   = 0x10000;
 		CreateInfo.dwRawChunkSize = 0;
 		CreateInfo.dwMaxFileCount = dwMaxFileCount;
