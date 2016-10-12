@@ -1,5 +1,5 @@
 #!/bin/sh
-make test || exit
+make || exit
 rm -rf test_includes
 mkdir -p test_includes
 for f in /usr/include/*.h
