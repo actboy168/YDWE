@@ -216,8 +216,6 @@ int luaopen_filesystem(lua_State *pState)
 		def("set_current_path", (void (*)(const fs::path &))&fs::current_path),
 		def("current_path", (fs::path (*)())&fs::current_path),
 		def("initial_path", (fs::path (*)())&fs::initial_path),
-		def("extension", (std::string (*)(const fs::path &))&fs::extension),
-		def("basename", (std::string (*)(const fs::path &))&fs::basename),
 		def("system_complete", (fs::path (*)(const fs::path &))&fs::system_complete),
 		def("canonical", (fs::path (*)(const fs::path &, const fs::path &))&fs::canonical),
 		def("copy_file", NLuaAPI::NFileSystemAdditional::LuaCopyFile),
