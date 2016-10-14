@@ -41,6 +41,7 @@ def copy_all(msvc_version, configuration):
     print('copy_all')
     fs.create_directories(path['ResultCore'])
     fs.create_directories(path['ResultCore'] / 'modules')
+    fs.create_directories(path['ResultPlugin'] / 'jasshelper' / 'bin')
     copy_boost_dll('system',     msvc_version, configuration)
     copy_boost_dll('filesystem', msvc_version, configuration)
     copy_lib_dll('Lua',          configuration)
