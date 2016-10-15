@@ -1,7 +1,7 @@
 #pragma once
 
 #include <base/config.h>
-#include <base/util/dynarray.h>
+#include <vector>
 #include <cstdint>
 
 namespace base { namespace warcraft3 { namespace jass {
@@ -49,9 +49,10 @@ namespace base { namespace warcraft3 { namespace jass {
 		const call_param& operator=(const call_param&);
 #pragma warning(push)
 #pragma warning(disable: 4251)
-		std::dynarray<uintptr_t>   param_buffer_;
-		std::dynarray<jreal_t>     real_buffer_;
-		std::dynarray<string_fake> string_buffer_;
+		// 为什么用dynarray会有问题？
+		std::vector<uintptr_t>   param_buffer_;
+		std::vector<jreal_t>     real_buffer_;
+		std::vector<string_fake> string_buffer_;
 #pragma warning(pop)
 	};
 

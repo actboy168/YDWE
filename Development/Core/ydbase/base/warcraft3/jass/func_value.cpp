@@ -4,7 +4,8 @@
 #include <base/warcraft3/jass.h>	
 #include <base/util/do_once.h>
 #include <map>
-#include <string>
+#include <string>  
+#include <assert.h>
 
 namespace base { namespace warcraft3 { namespace jass {
 
