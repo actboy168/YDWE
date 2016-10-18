@@ -10,6 +10,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	namespace package {
 		int searcher_storm(lua_State *L);
 		int searcher_file(lua_State *L);
+		int searcher_dll(lua_State *L);
 	}
 
 	static void* l_alloc(void* /*ud*/, void* ptr, size_t /*osize*/, size_t nsize) 
@@ -86,8 +87,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			lua_pop(L, 2);
 			return false;
 		}
-		lua_pushstring(L, "?;?.lua");
+		lua_pushstring(L, "?.lua");
 		lua_setfield(L, -2, "path");
+		lua_pushstring(L, "?.dll");
+		lua_setfield(L, -2, "cpath");
 		lua_getfield(L, -1, "searchers");
 		if (!lua_istable(L, -1))
 		{
@@ -105,6 +108,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				lua_pushvalue(L, -3);
 				lua_pushcclosure(L, package::searcher_storm, 1);
 				lua_rawseti(L, -3, i + 1);
+				lua_pushvalue(L, -3);
+				lua_pushcclosure(L, package::searcher_dll, 1);
+				lua_rawseti(L, -3, i + 2);
 				lua_pop(L, 4);
 				return true;
 			}

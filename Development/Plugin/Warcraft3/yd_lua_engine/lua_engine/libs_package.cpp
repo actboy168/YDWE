@@ -5,6 +5,7 @@
 #include <base/path/helper.h>
 #include <base/file/stream.h>
 #include "storm.h"
+#include "common.h"
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace package {
 #if !defined (LUA_PATH_SEP)
@@ -128,5 +129,100 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		}
 		catch (...) {}
 		return checkload(L, stat, filename);
+	}
+
+	static HMODULE loaddll_frommemory(const char* str, size_t len) {
+		char tmpname[L_tmpnam];
+		if (!tmpnam(tmpname)) {
+			return 0;
+		}
+		FILE* f = fopen(tmpname, "wb");
+		if (!f) {
+			return 0;
+		}
+		if (1 != fwrite(str, len, 1, f)) {
+			fclose(f);
+			return 0;
+		}
+		fclose(f);
+		HMODULE h = LoadLibraryExA(tmpname, 0, 0);
+		DeleteFileA(tmpname);
+		return h;
+	}
+	static HMODULE loaddll(const char *filename) {
+		static bignum::rsa rsa;
+		storm_dll& s = storm_s::instance();
+		const char* sign = 0;
+		size_t signsize = 0;
+		if (!s.load_file((std::string(filename) + ".sign").c_str(), (const void**)&sign, &signsize)) {
+			return 0;
+		}
+		const char* dll = 0;
+		size_t dllsize = 0;
+		if (!s.load_file(filename, (const void**)&dll, &dllsize)) {
+			s.unload_file(sign);
+			return 0;
+		}
+		if (!rsa.check(dll, dllsize, sign, signsize)) {
+			s.unload_file(sign);
+			s.unload_file(dll);
+			return 0;
+		}
+		HMODULE h = loaddll_frommemory(dll, dllsize);
+		s.unload_file(sign);
+		s.unload_file(dll);
+		return h;
+	}	
+	static void pusherror(lua_State *L) {
+		int error = GetLastError();
+		char buffer[128];
+		if (FormatMessageA(FORMAT_MESSAGE_IGNORE_INSERTS | FORMAT_MESSAGE_FROM_SYSTEM,
+			NULL, error, 0, buffer, sizeof(buffer) / sizeof(char), NULL))
+			lua_pushstring(L, buffer);
+		else
+			lua_pushfstring(L, "system error %d\n", error);
+	}
+	static int lookforfunc(lua_State *L, const char *path, const char *sym) {
+		void *reg = loaddll(path);
+		if (reg == NULL) {
+			pusherror(L); 
+			return 1;
+		}
+		if (*sym == '*') { 
+			lua_pushboolean(L, 1);
+			return 0;
+		}
+		else {
+			lua_CFunction f = (lua_CFunction)GetProcAddress((HMODULE)reg, sym);
+			if (f == NULL) {
+				pusherror(L);
+				return 2;
+			}
+			lua_pushcfunction(L, f); 
+			return 0; 
+		}
+	}
+	static int loadfunc(lua_State *L, const char *filename, const char *modname) {
+		const char *openfunc;
+		const char *mark;
+		modname = luaL_gsub(L, modname, ".", "_");
+		mark = strchr(modname, *LUA_IGMARK);
+		if (mark) {
+			int stat;
+			openfunc = lua_pushlstring(L, modname, mark - modname);
+			openfunc = lua_pushfstring(L, "luaopen_%s", openfunc);
+			stat = lookforfunc(L, filename, openfunc);
+			if (stat != 2) return stat;
+			modname = mark + 1;
+		}
+		openfunc = lua_pushfstring(L, "luaopen_%s", modname);
+		return lookforfunc(L, filename, openfunc);
+	}
+	int searcher_dll(lua_State *L) {
+		size_t      size = 0;
+		const char *name = luaL_checklstring(L, 1, &size);
+		const char *filename = findfile(L, name, "cpath", LUA_CSUBSEP, false);
+		if (filename == NULL) return 1;
+		return checkload(L, (loadfunc(L, filename, name) == 0), filename);
 	}
 }}}}
