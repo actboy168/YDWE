@@ -82,6 +82,7 @@ GUIID_Table_Init()
   GUIID_Table_Put(YDWEForLoopLocVarIndex);
   GUIID_Table_Put(YDWECustomScriptCode);
   GUIID_Table_Put(YDWEEnumUnitsInRangeMultiple);
+  GUIID_Table_Put(YDWERegionMultiple);
 
   GUIID_Table_Put(YDWEActivateTrigger);
   GUIID_Table_Put(GetEnumUnit);

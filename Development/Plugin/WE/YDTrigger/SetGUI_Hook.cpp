@@ -14,6 +14,7 @@ GetGUICount_Hook(DWORD This)
         return 3;
     case CC_GUIID_YDWEEnumUnitsInRangeMultiple:
     case CC_GUIID_YDWEForLoopLocVarMultiple:
+	case CC_GUIID_YDWERegionMultiple:
         return 1;
     }
 
@@ -49,6 +50,10 @@ GetGUIString_Hook(DWORD This, DWORD EDX, int index, char* buff, int len)
         {
             return GetWEString("WESTRING_TRIGSUBFUNC_FORLOOPACTIONS", buff, len, 0);
         }
+	case CC_GUIID_YDWERegionMultiple: 
+        {
+            return GetWEString("WESTRING_ACTIONS", buff, len, 0);
+        }
     }
 
     return GetGUIString(This, EDX, index, buff, len);
@@ -62,6 +67,7 @@ GetGUIIcon_Hook(DWORD This, DWORD EDX, int index)
     case CC_GUIID_YDWEEnumUnitsInRangeMultiple:
     case CC_GUIID_YDWETimerStartMultiple:
     case CC_GUIID_YDWEForLoopLocVarMultiple:
+	case CC_GUIID_YDWERegionMultiple:
         {
             return CC_GUI_TYPE_ACTION;
         }

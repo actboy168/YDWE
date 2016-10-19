@@ -196,6 +196,9 @@ void _fastcall
 			CC_PutActionEx_ForLoop(This, OutClass, name, *(DWORD*)(This+0x138));
 			break;
 		}
+	case CC_GUIID_YDWERegionMultiple:
+		CC_PutBlock_Action(This, OutClass, name, 0);
+		break;
 	case CC_GUIID_ReturnAction:
 		{
 			locvar::return_before(This, OutClass);

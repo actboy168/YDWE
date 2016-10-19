@@ -28,6 +28,7 @@ enum GUIID_User_Defined
   CC_GUIID_YDWEGetObjectPropertyInteger,
   CC_GUIID_YDWEGetObjectPropertyReal,
   CC_GUIID_YDWEGetObjectPropertyString,
+  CC_GUIID_YDWERegionMultiple,
 };
 //--------------------------------------------------------
 //  WE_Defined_ID

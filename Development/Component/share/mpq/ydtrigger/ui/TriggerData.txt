@@ -64,6 +64,9 @@ _YDWEDisableRegister_Category=TC_NOTHING
 
 [TriggerActions]
 //YD Aganist Fate
+YDWERegionMultiple=0,scriptcode
+_YDWERegionMultiple_Defaults=_
+_YDWERegionMultiple_Category=TC_COMMENT
 YDWEEnumUnitsInRangeMultiple=0,real,real,real
 _YDWEEnumUnitsInRangeMultiple_Defaults=0,0,512
 _YDWEEnumUnitsInRangeMultiple_Limits=_,_,_,_,_,_,0,_,_,_

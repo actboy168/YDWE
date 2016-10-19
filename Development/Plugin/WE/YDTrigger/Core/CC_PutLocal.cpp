@@ -110,6 +110,9 @@ void _fastcall
 			CC_PutLocal_LocalVar(OutClass, CC_TYPE_integer, "ydul", ((char*)&GetGUIVar_Value(nItemClass, 0)));
 			CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, -1);
 			break;
+		case CC_GUIID_YDWERegionMultiple:
+			CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, -1);
+			break;
 		case CC_GUIID_EnumDestructablesInRectAllMultiple:
 		case CC_GUIID_EnumDestructablesInCircleBJMultiple:
 		case CC_GUIID_EnumItemsInRectBJMultiple:
