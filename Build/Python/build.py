@@ -54,12 +54,12 @@ def build_move(configuration):
     
 def build_all(msvc_version, configuration):
     from complie            import complie
-    from build_anti_bj_leak import build_anti_bj_leak
+    #from build_anti_bj_leak import build_anti_bj_leak
     from copy_all           import copy_all
     from pack_skin          import pack_skin
 
     complie(msvc_version, configuration)
-    build_anti_bj_leak()
+    #build_anti_bj_leak()
     copy_all(msvc_version, configuration)
     pack_skin()
 
