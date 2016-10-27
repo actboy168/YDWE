@@ -6,7 +6,7 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/iterator.hpp>
 
-#include <minizip/unzip.h>
+#include <unzip.h>
 
 #if defined(YDWE_ZIP_EXPORTS)
 #	define _ZIP_API __declspec(dllexport)

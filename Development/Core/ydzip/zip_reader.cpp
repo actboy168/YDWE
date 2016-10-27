@@ -4,8 +4,8 @@
 #include <fstream>
 #include <boost/filesystem/detail/utf8_codecvt_facet.hpp>
 #include <base/exception/windows_exception.h>
-#include <minizip/unzip.h>
-#include <minizip/iowin32.h>
+#include <unzip.h>
+#include <iowin32.h>
 
 namespace zip {
 

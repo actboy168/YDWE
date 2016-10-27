@@ -5,10 +5,10 @@
 #include <boost/filesystem/detail/utf8_codecvt_facet.hpp>
 namespace fs = ::boost::filesystem;
 
-#include <minizip/unzip.h>
-#include <minizip/zip.h>
-#include <minizip/ioapi.h>
-#include <minizip/iowin32.h>
+#include <unzip.h>
+#include <zip.h>
+#include <ioapi.h>
+#include <iowin32.h>
 
 namespace
 {
