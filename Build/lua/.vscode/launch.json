@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "test",
+            "type": "lua",
+            "request": "launch",
+            "program": "${workspaceRoot}/make.lua",
+            "stopOnEntry": true,
+            "cwd": "${workspaceRoot}/luabuild/bin/",
+            "luadll": "${workspaceRoot}/luabuild/bin/luacore.dll",
+            "path": "",
+            "cpath": "",
+            "arg": [
+                "${workspaceRoot}",
+                "Debug"
+            ],
+            "console" : "ansi"
+        }
+    ]
+}

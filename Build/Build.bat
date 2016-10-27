@@ -1,3 +1,5 @@
-@echo off
-"%~dp0..\OpenSource\Python\2.7.2\python.exe" "%~dp0Python\build.py" %1 %2 %3
+@echo OFF
+CD lua\luabuild\bin
+lua "..\..\make.lua" "%~dp0lua" %1 %2 %3
+CD ..\..\..
 @pause
