@@ -37,6 +37,9 @@
       <UniqueIdentifier>{38c49da3-b1a5-4e9f-a1c4-3468d0853336}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
+    <Filter Include="zip">
+      <UniqueIdentifier>{71588c84-7bf3-4c99-b052-8e4a1ecf15f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StdAfx.cpp">
@@ -146,6 +149,12 @@
     </ClCompile>
     <ClCompile Include="Utils\FrameWindow.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zip_internal.cpp">
+      <Filter>zip</Filter>
+    </ClCompile>
+    <ClCompile Include="zip\zip_reader.cpp">
+      <Filter>zip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +271,12 @@
     </ClInclude>
     <ClInclude Include="Utils\FrameWindow.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zip_internal.h">
+      <Filter>zip</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\zip_reader.h">
+      <Filter>zip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

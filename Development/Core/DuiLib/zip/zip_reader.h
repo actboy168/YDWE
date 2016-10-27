@@ -16,7 +16,7 @@
 
 namespace zip 
 {
-	class _ZIP_API reader 
+	class reader 
 	{
 	public:
 		reader();
@@ -41,7 +41,7 @@ namespace zip
 		void operator=(const reader&);
 	};
 
-	class _ZIP_API reader::entry
+	class reader::entry
 	{
 	public:
 		entry(const unzFile* zf_ptr);
@@ -69,9 +69,9 @@ namespace zip
 
 	namespace detail
 	{
-		_ZIP_API void zip_reader_iterator_construct(reader::iterator& it, const unzFile* zf_ptr, std::error_code* ec);
-		_ZIP_API void zip_reader_iterator_increment(reader::iterator& it);
-		_ZIP_API reader::entry& zip_reader_iterator_dereference(const reader::iterator& it);
+		void zip_reader_iterator_construct(reader::iterator& it, const unzFile* zf_ptr, std::error_code* ec);
+		void zip_reader_iterator_increment(reader::iterator& it);
+		reader::entry& zip_reader_iterator_dereference(const reader::iterator& it);
 	}
 
 	class reader::iterator

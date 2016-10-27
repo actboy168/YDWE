@@ -62,7 +62,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <Optimization>MinSpace</Optimization>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(YDWE)\Core\YDGraph;$(YDWE)\Core\ydzip;$(OpenSource)zlib\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(YDWE)\Core\YDGraph;$(OpenSource)zlib\include\;$(OpenSource)minizip\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <BaseAddress>
@@ -71,6 +71,7 @@
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalDependencies>$(OpenSource)\minizip\bin\$(Configuration)\minizip.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -92,7 +93,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(YDWE)\Core\YDGraph;$(YDWE)\Core\ydzip;$(OpenSource)zlib\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(YDWE)\Core\YDGraph;$(OpenSource)zlib\include\;$(OpenSource)minizip\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link />
     <Bscmake>
@@ -103,7 +104,7 @@
       <SubSystem>Windows</SubSystem>
       <BaseAddress>
       </BaseAddress>
-      <AdditionalDependencies>$(OpenSource)\ZLib\lib\zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(OpenSource)\minizip\bin\$(Configuration)\minizip.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -152,6 +153,14 @@
     <ClCompile Include="Control\UISlider.cpp" />
     <ClCompile Include="Control\UIText.cpp" />
     <ClCompile Include="Control\UITreeView.cpp" />
+    <ClCompile Include="zip\zip_internal.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="zip\zip_reader.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Control\UICheckBox.h" />
@@ -192,6 +201,8 @@
     <ClInclude Include="Control\UISlider.h" />
     <ClInclude Include="Control\UIText.h" />
     <ClInclude Include="Control\UITreeView.h" />
+    <ClInclude Include="zip\zip_internal.h" />
+    <ClInclude Include="zip\zip_reader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc" />
@@ -202,9 +213,6 @@
     </ProjectReference>
     <ProjectReference Include="..\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\ydzip\ydzip.vcxproj">
-      <Project>{51369253-a42c-455d-8ade-48d1c3c14663}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
