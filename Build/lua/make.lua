@@ -18,10 +18,13 @@ end
 require 'luabind'
 require 'filesystem'
 local zip = require 'zip'
+local uni = require 'unicode'
 local filelock = require 'filelock'
+local buildroot = fs.path(uni.a2u(arg[1])) / '..'
 
-local l = filelock('lua-build.lock')
-l:lock()
+local oklock = filelock(buildroot / 'ok.lock')
+
+oklock:unlock()
 
 -- Step.1 初始化
 local msvc = require 'msvc'
@@ -137,7 +140,7 @@ copy_directory(path.Result, path.Build / 'publish' / configuration,
     end
 )
 
-l:unlock()
+oklock:lock()
 
 local time = math.floor(os.clock())
 print(('time: %d:%02d'):format(time//60, time%60))
