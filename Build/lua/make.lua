@@ -133,5 +133,5 @@ copy_directory(path.Result, path.Build / 'publish' / configuration,
     end
 )
 
-local time = os.clock()
-print(('time: %d:%02d'):format(time/60, time%60))
+local time = math.floor(os.clock())
+print(('time: %d:%02d'):format(time//60, time%60))
