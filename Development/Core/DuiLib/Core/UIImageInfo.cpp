@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 
-#include <base/graph/graph.h>
+#include "../zip/png_utils.h"
 
 namespace DuiLib
 {
@@ -22,10 +22,10 @@ namespace DuiLib
 		}
 
 		try {
-			using namespace base;
-			graph::image_t img = graph::from_png((char*)buf.ptrData.get(), buf.nSize);
-			std::pair<HBITMAP, bool> result = graph::to_bitmap(img, NULL, mask);
-			return new CImageInfo(result.first, img.width(), img.height(), result.second);
+			png_utils::img_t img = png_utils::load((const char*)buf.ptrData.get(), buf.nSize);
+			if (img.bmp) {
+				return new CImageInfo(img.bmp, img.w, img.h, true);
+			}
 		}
 		catch (...) {
 		}

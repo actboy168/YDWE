@@ -156,6 +156,9 @@
     <ClCompile Include="zip\zip_reader.cpp">
       <Filter>zip</Filter>
     </ClCompile>
+    <ClCompile Include="zip\png_utils.cpp">
+      <Filter>zip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdAfx.h">
@@ -276,6 +279,9 @@
       <Filter>zip</Filter>
     </ClInclude>
     <ClInclude Include="zip\zip_reader.h">
+      <Filter>zip</Filter>
+    </ClInclude>
+    <ClInclude Include="zip\png_utils.h">
       <Filter>zip</Filter>
     </ClInclude>
   </ItemGroup>
