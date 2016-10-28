@@ -3,5 +3,7 @@
 struct lua_State;
 
 namespace base { namespace warcraft3 { namespace lua_engine {
-	void debugger_init(lua_State* L);
+	class debugger;
+	debugger* debugger_create(lua_State* L);
+	void      debugger_close(debugger* dbg);
 }}}

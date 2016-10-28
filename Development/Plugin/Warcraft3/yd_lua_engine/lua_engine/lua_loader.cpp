@@ -15,7 +15,10 @@
 #include <base/hook/fp_call.h>
 #include <boost/algorithm/string.hpp>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
+namespace base { namespace warcraft3 { namespace lua_engine {
+	class debugger;
+namespace lua_loader {
+
 
 	class jass_state
 	{
@@ -25,6 +28,11 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		{
 			register_game_reset_event([this](uintptr_t)
 			{
+				if (dbg_)
+				{
+					debugger_close(dbg_);
+					dbg_ = nullptr;
+				}
 				if (state_)
 				{
 					lua_close(state_);
@@ -36,6 +44,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		lua_State* get()
 		{
 			if (!state_) state_ = initialize();
+			dbg_ = debugger_create(state_);
 			return state_;
 		}
 
@@ -65,7 +74,8 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		}
 
 	private:
-		lua_State* state_;
+		lua_State* state_; 
+		debugger* dbg_;
 	};
 	typedef singleton_nonthreadsafe<jass_state> jass_state_s;
 
@@ -92,7 +102,6 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			lua_State* L = jass_state_s::instance().get();
 			lua_getglobal(L, "require");
 			lua_pushlstring(L, cheat_s.c_str(), cheat_s.size());
-			debugger_init(L);
 			safe_call(L, 1, 1, true);
 		}
 

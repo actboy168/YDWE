@@ -5,7 +5,7 @@
 #include <base/warcraft3/event.h>	 
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/trampoline_function.h>  
-#include <base/hook/fp_call.h>
+#include <base/hook/fp_call.h>	
 #include <lua.hpp>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
@@ -88,13 +88,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		intptr_t update_;
 	};
 
-	void debugger_init(lua_State* L)
+	debugger* debugger_create(lua_State* L)
 	{
-		debugger* dbg = new debugger(L);
-		register_game_reset_event([&](uintptr_t)
-		{
-			delete dbg;
-			dbg = 0;
-		});
+		return new debugger(L);
+	}
+
+	void debugger_close(debugger* dbg)
+	{
+		delete dbg;
 	}
 }}}
