@@ -4,7 +4,6 @@
 #include <base/lua/luabind.h>
 #pragma warning(pop)			  	  		
 #include <base/filesystem.h>
-#include <boost/scope_exit.hpp>
 #include <base/hook/fp_call.h>	
 #include <base/util/unicode.h>
 #include <Windows.h>
@@ -121,33 +120,22 @@ namespace NLuaAPI { namespace NSTORM {
 	{
 		if (!pgStormSFileLoadFile || !pgStormSFileUnloadFile)
 		{
-			luabind::object(pState, false).push(pState);
+			lua_pushboolean(pState, false);
 			return ;
 		}
 
 		std::string pathinmpq = base::w2a(wpathinmpq, base::conv_method::replace | '?');
 		char* fileContentBuffer;
 		uint32_t size;
-		BOOL ret = FALSE;
-		ret = base::std_call<BOOL>(pgStormSFileLoadFile, pathinmpq.c_str(), &fileContentBuffer, &size, 0, NULL);
-
-		BOOST_SCOPE_EXIT( (&ret) (&fileContentBuffer) )
+		if (!base::std_call<BOOL>(pgStormSFileLoadFile, pathinmpq.c_str(), &fileContentBuffer, &size, 0, NULL))
 		{
-			if (ret)
-			{
-				base::std_call<BOOL>(pgStormSFileUnloadFile, fileContentBuffer);
-			}
-		} BOOST_SCOPE_EXIT_END;
-
-		if (ret)
-		{
-			luabind::object(pState, true).push(pState);
-			luabind::object(pState, std::string(fileContentBuffer, size)).push(pState);
+			lua_pushboolean(pState, false);
+			return;
 		}
-		else
-		{
-			luabind::object(pState, false).push(pState);
-		}
+
+		lua_pushboolean(pState, true);
+		lua_pushlstring(pState, fileContentBuffer, size);
+		base::std_call<BOOL>(pgStormSFileUnloadFile, fileContentBuffer);
 	}
 
 	uint32_t LuaStormStringHash(const char* str)
