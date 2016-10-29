@@ -19,7 +19,7 @@ static std::wstring GetFileExtFromHandle(HANDLE hFile)
 		std::array<wchar_t, MAX_PATH + 1> filename;
 		if (GetMappedFileNameW(GetCurrentProcess(), (void*)mapper.memory(), filename.data(), MAX_PATH))
 		{
-			std::wstring ext = boost::filesystem::path(filename.data()).extension().wstring();
+			std::wstring ext = fs::path(filename.data()).extension().wstring();
 			std::transform(ext.begin(), ext.end(), ext.begin(), tolower);
 			return ext;
 		}

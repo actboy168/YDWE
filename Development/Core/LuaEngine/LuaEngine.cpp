@@ -47,7 +47,7 @@ LuaEngine::~LuaEngine()
 	vaild_ = false;
 }
 
-bool LuaEngine::InitializeLogger(const boost::filesystem::path& root_path)
+bool LuaEngine::InitializeLogger(const fs::path& root_path)
 {
 	if (!logging::initialize(root_path.c_str(), L"ydwe"))
 	{
@@ -94,7 +94,7 @@ bool LuaEngine::InitializeLua()
 	return true;
 }
 
-bool LuaEngine::Initialize(const boost::filesystem::path& root_path)
+bool LuaEngine::Initialize(const fs::path& root_path)
 {
 	if (vaild_)
 		return true;
@@ -145,7 +145,7 @@ bool LuaEngine::Uninitialize()
 	return true;
 }
 
-bool LuaEngine::LoadFile(boost::filesystem::path const& file_path)
+bool LuaEngine::LoadFile(fs::path const& file_path)
 {
 	if (!vaild_)
 	{
@@ -192,7 +192,7 @@ bool LuaEngine::LoadFile(boost::filesystem::path const& file_path)
 	return false;
 }
 
-bool LuaEngine::SetPath(boost::filesystem::path const& path)
+bool LuaEngine::SetPath(fs::path const& path)
 {
 	std::string path_str;
 	try {
@@ -209,7 +209,7 @@ bool LuaEngine::SetPath(boost::filesystem::path const& path)
 	return true;
 }
 
-bool LuaEngine::SetCPath(boost::filesystem::path const& cpath)
+bool LuaEngine::SetCPath(fs::path const& cpath)
 {
 	std::string cpath_str;
 	try {

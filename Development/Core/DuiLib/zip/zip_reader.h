@@ -20,7 +20,7 @@ namespace zip
 		reader();
 		~reader();
 
-		bool Open(const boost::filesystem::path& zip_file_path);
+		bool Open(const fs::path& zip_file_path);
 		bool OpenFromString(const std::string& data);
 		void Close();
 
@@ -48,7 +48,7 @@ namespace zip
 
 		bool is_vaild() const { return !file_path_.empty(); }
 		const unzFile& zip_file() const { assert(zf_ptr_ != nullptr); return *zf_ptr_; }
-		const boost::filesystem::path& file_path() const { assert(is_vaild()); return file_path_; }
+		const fs::path& file_path() const { assert(is_vaild()); return file_path_; }
 		uint64_t original_size() const { assert(is_vaild()); return original_size_; }
 		bool is_directory() const { assert(is_vaild()); return is_directory_; }
 		bool is_unsafe() const { assert(is_vaild()); return is_unsafe_; }
@@ -56,7 +56,7 @@ namespace zip
 
 	private:
 		const unzFile* zf_ptr_;
-		boost::filesystem::path file_path_;
+		fs::path file_path_;
 		uint64_t original_size_;
 		bool     is_directory_;
 		bool     is_unsafe_;

@@ -383,7 +383,7 @@ namespace NLua { namespace CLR {
 			: object_(appdomain.get(), assembly.c_str(), type.c_str())
 		{ }
 
-		Object(AppDomain& appdomain, boost::filesystem::path const& assembly, std::wstring const& type)
+		Object(AppDomain& appdomain, fs::path const& assembly, std::wstring const& type)
 			: object_(appdomain.get(), assembly.c_str(), type.c_str())
 		{ }
 
@@ -415,7 +415,7 @@ int luaopen_clr(lua_State *pState)
 		,
 		class_<NLua::CLR::Object>("object")
 			.def(constructor<NLua::CLR::AppDomain&, std::wstring const&, std::wstring const&>())
-			.def(constructor<NLua::CLR::AppDomain&, boost::filesystem::path const&, std::wstring const&>())
+			.def(constructor<NLua::CLR::AppDomain&, fs::path const&, std::wstring const&>())
 			.def("call",       &NLua::CLR::Object::call)
 			.def("error_code", &NLua::CLR::Object::error_code)
 	];

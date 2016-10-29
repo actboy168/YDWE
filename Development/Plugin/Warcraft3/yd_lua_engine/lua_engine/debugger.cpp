@@ -12,7 +12,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	class module {
 	public:
-		module(const boost::filesystem::path& path)
+		module(const fs::path& path)
 			: handle_(LoadLibraryW(path.c_str()))
 		{ }
 

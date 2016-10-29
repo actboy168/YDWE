@@ -5,10 +5,10 @@
 namespace logging
 {
 	std::map<std::string, logger*> loggers;
-	boost::filesystem::path                        loggers_root;
+	fs::path                        loggers_root;
 	std::wstring                                   loggers_name;
 
-	bool initialize(const boost::filesystem::path& root, const std::wstring& name)
+	bool initialize(const fs::path& root, const std::wstring& name)
 	{
 		loggers_root = root;
 		loggers_name = name;

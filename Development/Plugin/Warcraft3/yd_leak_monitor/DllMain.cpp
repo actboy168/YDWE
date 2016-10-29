@@ -257,7 +257,7 @@ uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 			{
 				std::fstream fs;
 				try {
-					boost::filesystem::path report = base::path::self().remove_filename().remove_filename().remove_filename() / L"logs" / L"leak_moniter_report.txt";
+					fs::path report = base::path::self().remove_filename().remove_filename().remove_filename() / L"logs" / L"leak_moniter_report.txt";
 
 					std::fstream fs(report.c_str(), std::ios::out);
 					if (fs.is_open())

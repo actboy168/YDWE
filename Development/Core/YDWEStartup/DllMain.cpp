@@ -23,7 +23,7 @@
 #define _(str)  base::i18n::gettext(str).to_string().c_str()
 #define __(str) base::u2w(base::i18n::gettext(str)).c_str()
 
-static bool FileContentEqual(const boost::filesystem::path &fileFirst, const boost::filesystem::path &fileSecond, std::error_code *pErrorCode = nullptr)
+static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSecond, std::error_code *pErrorCode = nullptr)
 {
 	try
 	{

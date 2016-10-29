@@ -20,7 +20,7 @@ std::wstring get_test_map_path()
 	return std::move(result);
 }
 
-bool launch_taskbar_support(const boost::filesystem::path& ydwe_path)
+bool launch_taskbar_support(const fs::path& ydwe_path)
 {
 	HMODULE hdll = LoadLibraryW((ydwe_path / L"plugin" / L"YDTaskbarSupport.dll").c_str());
 	if (hdll)
@@ -38,7 +38,7 @@ bool launch_taskbar_support(const boost::filesystem::path& ydwe_path)
 bool launch_warcraft3(base::warcraft3::command_line& cmd)
 {
 	try {
-		boost::filesystem::path ydwe_path = base::path::get(base::path::DIR_EXE).remove_filename().remove_filename();
+		fs::path ydwe_path = base::path::get(base::path::DIR_EXE).remove_filename().remove_filename();
 		launch_taskbar_support(ydwe_path);
 
 		base::win::env_variable ev(L"PATH");
@@ -46,7 +46,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		p += (ydwe_path / L"bin").c_str();    p += L";"; 
 		ev.set(p + ev.get());
 
-		boost::filesystem::path war3_path;
+		fs::path war3_path;
 		if (!base::warcraft3::directory::get(nullptr, war3_path))
 		{
 			return false;
@@ -59,14 +59,14 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		//
 		if (cmd.has(L"loadfile"))
 		{
-			boost::filesystem::path loadfile = cmd[L"loadfile"];
+			fs::path loadfile = cmd[L"loadfile"];
 
 			// war3将非.w3g后缀名的文件当地图处理
 			if (!base::path::equal(loadfile.extension(), L".w3g"))
 			{
-				boost::filesystem::path test_map_path = get_test_map_path() + loadfile.extension().wstring();
+				fs::path test_map_path = get_test_map_path() + loadfile.extension().wstring();
 				try {
-					boost::filesystem::copy_file(loadfile, war3_path / test_map_path, boost::filesystem::copy_option::overwrite_if_exists);
+					fs::copy_file(loadfile, war3_path / test_map_path, fs::copy_option::overwrite_if_exists);
 					cmd[L"loadfile"] = test_map_path.wstring();
 				}
 				catch (...) {
@@ -75,7 +75,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		}
 
 		war3_path = war3_path / L"war3.exe";
-		boost::filesystem::path inject_dll = ydwe_path / L"plugin" / L"warcraft3" / L"yd_loader.dll";
+		fs::path inject_dll = ydwe_path / L"plugin" / L"warcraft3" / L"yd_loader.dll";
 
 		slk::IniTable table;
 		table["MapTest"]["LaunchRenderingEngine"]   = "Direct3D 8";
@@ -111,8 +111,8 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		try {
 			if (table["War3Patch"]["Option"] == "2")
 			{
-				boost::filesystem::path stormdll = ydwe_path / L"share" / L"patch" / table["War3Patch"]["DirName"] / L"Storm.dll";
-				if (boost::filesystem::exists(stormdll))
+				fs::path stormdll = ydwe_path / L"share" / L"patch" / table["War3Patch"]["DirName"] / L"Storm.dll";
+				if (fs::exists(stormdll))
 				{
 					warcraft3_process.replace(stormdll, "Storm.dll");
 				}
@@ -121,7 +121,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		catch (...) {
 		}
 
-		if (boost::filesystem::exists(inject_dll))
+		if (fs::exists(inject_dll))
 		{
 			cmd.add(L"ydwe", ydwe_path.wstring());
 			warcraft3_process.inject(inject_dll);			

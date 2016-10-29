@@ -7,7 +7,7 @@
 extern "C" IMAGE_DOS_HEADER __ImageBase;
 
 namespace base { namespace path {
-	inline boost::filesystem::path self()
+	inline fs::path self()
 	{
 		return std::move(detail::module_path(reinterpret_cast<HMODULE>(&__ImageBase)));
 	}

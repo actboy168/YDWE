@@ -15,7 +15,7 @@ namespace i18n {
 	class mofile : public noncopyable
 	{
 	public:
-		static mofile* read(boost::filesystem::path const& filename);
+		static mofile* read(fs::path const& filename);
 		static mofile* read(const char* filename);
 
 	private:

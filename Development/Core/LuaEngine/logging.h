@@ -28,6 +28,6 @@ namespace logging
 {
 	typedef logger_t<sync_frontend<backend>>  logger;
 
-	LUAENGINE_API bool    initialize(const boost::filesystem::path& root, const std::wstring& name);
+	LUAENGINE_API bool    initialize(const fs::path& root, const std::wstring& name);
 	LUAENGINE_API logger* get_logger(const char* name);
 }

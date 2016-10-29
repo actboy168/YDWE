@@ -87,7 +87,7 @@ namespace NYDWE {
 			boost::iends_with(fileName, ".w3m")))
 		{
 			try {
-				boost::filesystem::path p(fileName);
+				fs::path p(fileName);
 				p = p.parent_path().remove_filename() / p.filename();
 
 				TEventData eventData;
@@ -110,7 +110,7 @@ namespace NYDWE {
 		std::cmatch matcher;
 		if (lpCommandLine && std::regex_match(lpCommandLine, matcher, gRegexCommandLine))
 		{
-			boost::filesystem::path currentWarcraftMap = base::path::get(base::path::DIR_EXE).remove_filename() / matcher.str(1);
+			fs::path currentWarcraftMap = base::path::get(base::path::DIR_EXE).remove_filename() / matcher.str(1);
 			LOGGING_TRACE(lg) << L"Executing map " << currentWarcraftMap.wstring();
 
 			TEventData eventData;

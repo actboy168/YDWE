@@ -127,7 +127,7 @@ namespace base { namespace font {
 		return std::move(std::string());
 	}
 
-	std::string get_name(const boost::filesystem::path& fil_path)
+	std::string get_name(const fs::path& fil_path)
 	{
 		try
 		{

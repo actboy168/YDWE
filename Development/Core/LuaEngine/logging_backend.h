@@ -22,7 +22,7 @@ namespace logging
 		implementation* impl_;
 
 	public:
-		backend(const boost::filesystem::path& root, const std::wstring& name);
+		backend(const fs::path& root, const std::wstring& name);
 		backend(backend&&);
 		~backend();
 

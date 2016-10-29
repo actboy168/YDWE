@@ -5,5 +5,5 @@
 #include <base/filesystem.h>
 
 namespace base { namespace font {
-	std::string get_name(const boost::filesystem::path& fil_path);
+	std::string get_name(const fs::path& fil_path);
 }}

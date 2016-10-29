@@ -63,15 +63,15 @@ namespace base { namespace win {
 			const wchar_t*                 current_directory,
 			LPSTARTUPINFOW                 startup_info,
 			LPPROCESS_INFORMATION          process_information,
-			const boost::filesystem::path& inject_dll,
-			const std::map<std::string, boost::filesystem::path>& replace_dll)
+			const fs::path& inject_dll,
+			const std::map<std::string, fs::path>& replace_dll)
 		{
 			bool need_pause = !replace_dll.empty();
 #if defined(DISABLE_DETOURS)  	
-			need_pause = need_pause || boost::filesystem::exists(inject_dll);
+			need_pause = need_pause || fs::exists(inject_dll);
 #endif
 			bool suc = false;
-			if (boost::filesystem::exists(inject_dll))
+			if (fs::exists(inject_dll))
 			{
 #if !defined(DISABLE_DETOURS)
 				suc = create_process_use_detour(application, command_line, inherit_handle, need_pause ? (creation_flags | CREATE_SUSPENDED) : creation_flags, current_directory, startup_info, process_information, inject_dll.string().c_str());
@@ -164,7 +164,7 @@ namespace base { namespace win {
 		close();
 	}
 
-	bool process::inject(const boost::filesystem::path& dllpath)
+	bool process::inject(const fs::path& dllpath)
 	{
 		if (statue_ == PROCESS_STATUE_READY)
 		{
@@ -175,7 +175,7 @@ namespace base { namespace win {
 		return false;
 	}
 
-	bool process::replace(const boost::filesystem::path& dllpath, const char* dllname)
+	bool process::replace(const fs::path& dllpath, const char* dllname)
 	{
 		if (statue_ == PROCESS_STATUE_READY)
 		{
@@ -231,18 +231,18 @@ namespace base { namespace win {
 		return false;
 	}
 
-	bool process::create(const boost::filesystem::path& application, const std::wstring& command_line, const boost::filesystem::path& current_directory)
+	bool process::create(const fs::path& application, const std::wstring& command_line, const fs::path& current_directory)
 	{
 		if (statue_ == PROCESS_STATUE_READY)
 		{
 			if (command_line.empty())
 			{
 				if (!detail::create_process(
-						boost::filesystem::exists(application) ? application.c_str(): nullptr, 
+						fs::exists(application) ? application.c_str(): nullptr, 
 						nullptr,
 						inherit_handle_,
 						NORMAL_PRIORITY_CLASS, 
-						boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
+						fs::exists(current_directory) ? current_directory.c_str(): nullptr, 
 						&si_, &pi_, inject_dll_, replace_dll_
 					))
 				{
@@ -255,11 +255,11 @@ namespace base { namespace win {
 				wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
 
 				if (!detail::create_process(
-						boost::filesystem::exists(application) ? application.c_str(): nullptr, 
+						fs::exists(application) ? application.c_str(): nullptr, 
 						command_line_buffer.data(),
 						inherit_handle_,
 						NORMAL_PRIORITY_CLASS, 
-						boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
+						fs::exists(current_directory) ? current_directory.c_str(): nullptr, 
 						&si_, &pi_, inject_dll_, replace_dll_
 						))
 				{
@@ -274,14 +274,14 @@ namespace base { namespace win {
 		return false;
 	}
 
-	bool process::create(const boost::filesystem::path& application, const std::wstring& command_line)
+	bool process::create(const fs::path& application, const std::wstring& command_line)
 	{
 		if (statue_ == PROCESS_STATUE_READY)
 		{
 			if (command_line.empty())
 			{
 				if (!detail::create_process(
-					boost::filesystem::exists(application) ? application.c_str(): nullptr, 
+					fs::exists(application) ? application.c_str(): nullptr, 
 					nullptr,
 					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
@@ -298,7 +298,7 @@ namespace base { namespace win {
 				wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
 
 				if (!detail::create_process(
-					boost::filesystem::exists(application) ? application.c_str(): nullptr, 
+					fs::exists(application) ? application.c_str(): nullptr, 
 					command_line_buffer.data(),
 					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
@@ -317,7 +317,7 @@ namespace base { namespace win {
 		return false;
 	}
 
-	bool process::create(const std::wstring& command_line, const boost::filesystem::path& current_directory)
+	bool process::create(const std::wstring& command_line, const fs::path& current_directory)
 	{
 		if (statue_ == PROCESS_STATUE_READY)
 		{
@@ -328,7 +328,7 @@ namespace base { namespace win {
 					nullptr,
 					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
-					boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
+					fs::exists(current_directory) ? current_directory.c_str(): nullptr, 
 					&si_, &pi_, inject_dll_, replace_dll_
 					))
 				{
@@ -345,7 +345,7 @@ namespace base { namespace win {
 					command_line_buffer.data(),
 					inherit_handle_,
 					NORMAL_PRIORITY_CLASS, 
-					boost::filesystem::exists(current_directory) ? current_directory.c_str(): nullptr, 
+					fs::exists(current_directory) ? current_directory.c_str(): nullptr, 
 					&si_, &pi_, inject_dll_, replace_dll_
 					))
 				{
@@ -478,7 +478,7 @@ namespace base { namespace win {
 		return -1;
 	}
 
-	bool create_process(const boost::filesystem::path& application, const std::wstring& command_line, const boost::filesystem::path& current_directory, const boost::filesystem::path& inject_dll, PROCESS_INFORMATION* pi_ptr)
+	bool create_process(const fs::path& application, const std::wstring& command_line, const fs::path& current_directory, const fs::path& inject_dll, PROCESS_INFORMATION* pi_ptr)
 	{
 		process p;
 

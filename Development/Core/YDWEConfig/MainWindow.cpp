@@ -622,7 +622,7 @@ void CMainWindow::UpdateWarcraft3Directory()
 {
 	if (m_pWarcraft3Directory)
 	{
-		boost::filesystem::path result;
+		fs::path result;
 		if (base::warcraft3::directory::read(result))
 		{
 			m_pWarcraft3Directory->SetText(result.c_str());

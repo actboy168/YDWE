@@ -9,7 +9,7 @@
 void Initialize()
 {
 	base::warcraft3::virtual_mpq::initialize(::GetModuleHandleW(L"Game.dll"));
-	boost::filesystem::path ydwe_path = base::path::self().remove_filename().remove_filename().remove_filename();
+	fs::path ydwe_path = base::path::self().remove_filename().remove_filename().remove_filename();
 	slk::IniTable table;
 	table["MapTest"]["VirtualMpq"] = "share/mpq/war3";
 	try {

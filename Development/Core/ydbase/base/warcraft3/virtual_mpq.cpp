@@ -40,30 +40,30 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 	namespace filesystem
 	{
 		std::map<std::string, watch_cb>	                   watch_map;
-		std::array<std::list<boost::filesystem::path>, 16> mpq_path;
+		std::array<std::list<fs::path>, 16> mpq_path;
 
 		void* SMemAlloc(size_t amount)
 		{
 			return base::std_call<void*>(real::SMemAlloc, amount, ".\\SFile.cpp", 4072, 0);
 		}
 
-		boost::optional<boost::filesystem::path> find_file(const std::string& filename)
+		boost::optional<fs::path> find_file(const std::string& filename)
 		{
 			for (uint32_t priority = 15; priority != 0; --priority)
 			{
 				foreach(auto it, mpq_path[priority])
 				{
-					if (boost::filesystem::exists(it / filename))
+					if (fs::exists(it / filename))
 					{
-						return boost::optional<boost::filesystem::path>(it / filename);
+						return boost::optional<fs::path>(it / filename);
 					}
 				}
 			}
 
-			return boost::optional<boost::filesystem::path>();
+			return boost::optional<fs::path>();
 		}
 
-		bool open_path(const boost::filesystem::path& p, uint32_t priority)
+		bool open_path(const fs::path& p, uint32_t priority)
 		{
 			if (priority > 15) priority = 15;
 			mpq_path[priority].push_front(p);
@@ -88,7 +88,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 
 		bool try_open_path(const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
 		{
-			boost::optional<boost::filesystem::path> file_path = find_file(filename);
+			boost::optional<fs::path> file_path = find_file(filename);
 			if (!file_path)
 			{
 				return false;
@@ -291,9 +291,9 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		return result;
 	}
 
-	bool open_path(const boost::filesystem::path& p, uint32_t priority)
+	bool open_path(const fs::path& p, uint32_t priority)
 	{
-		if (!boost::filesystem::exists(p))
+		if (!fs::exists(p))
 		{
 			return false;
 		}

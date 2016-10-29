@@ -186,7 +186,7 @@ namespace auto_enter { namespace game_status {
 		if (!open_map_flag && archive_name && !map_path.empty())
 		{
 			try {
-				if (base::path::equal(boost::filesystem::path(map_path).filename(), boost::filesystem::path(archive_name).filename()))
+				if (base::path::equal(fs::path(map_path).filename(), fs::path(archive_name).filename()))
 				{
 					open_map_flag = true;
 				}

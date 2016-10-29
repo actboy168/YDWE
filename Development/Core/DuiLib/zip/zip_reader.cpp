@@ -145,7 +145,7 @@ namespace zip {
 		Close();
 	}
 
-	bool reader::Open(const boost::filesystem::path& zip_file_path) 
+	bool reader::Open(const fs::path& zip_file_path) 
 	{
 		// Use of "Unsafe" function does not look good, but there is no way to do
 		// this safely on Linux. See file_util.h for details.

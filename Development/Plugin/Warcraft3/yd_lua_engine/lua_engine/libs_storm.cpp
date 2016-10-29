@@ -32,9 +32,9 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
 		if (allow_local_files())
 		{
 			try {
-				boost::filesystem::path filepath = base::path::get(base::path::DIR_EXE).remove_filename();
+				fs::path filepath = base::path::get(base::path::DIR_EXE).remove_filename();
 				filepath /= u2w(std::string_view(path, path_size));
-				if (boost::filesystem::exists(filepath))
+				if (fs::exists(filepath))
 				{
 					std::string buf = base::file::read_stream(filepath).read<std::string>();
 					lua_pushlstring(L, buf.data(), buf.size());
@@ -60,7 +60,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
 
 	}
 
-	bool storm_path_valid(const boost::filesystem::path& root_path, const boost::filesystem::path& file_path)
+	bool storm_path_valid(const fs::path& root_path, const fs::path& file_path)
 	{
 		static std::set<std::wstring> s_blacklist = boost::assign::list_of
 			(L"mix")(L"asi")(L"m3d")(L"flt")(L"flt")
@@ -75,7 +75,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
 			return false;
 		}
 
-		for (boost::filesystem::path p = file_path.parent_path(); !p.empty(); p = p.parent_path())
+		for (fs::path p = file_path.parent_path(); !p.empty(); p = p.parent_path())
 		{
 			if (base::path::equal(p, root_path))
 			{
@@ -94,12 +94,12 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
 		try {
 			if (path && buf_data && buf_size)
 			{
-				boost::filesystem::path root_path = base::path::get(base::path::DIR_EXE).remove_filename();
-				boost::filesystem::path file_path = root_path / base::u2w(path);
+				fs::path root_path = base::path::get(base::path::DIR_EXE).remove_filename();
+				fs::path file_path = root_path / base::u2w(path);
 				
 				if (storm_path_valid(root_path, file_path))
 				{
-					boost::filesystem::create_directories(file_path.parent_path());
+					fs::create_directories(file_path.parent_path());
 					std::fstream fs(file_path.c_str(), std::ios::binary | std::ios::out);
 					if (fs.is_open())
 					{

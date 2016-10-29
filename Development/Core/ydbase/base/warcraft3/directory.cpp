@@ -7,7 +7,7 @@
 
 namespace base { namespace warcraft3 { namespace directory {
 
-	bool read_current_user(boost::filesystem::path& result)
+	bool read_current_user(fs::path& result)
 	{
 		try {
 			registry::key_w warkey = registry::current_user() / L"Software\\Blizzard Entertainment\\Warcraft III";
@@ -21,7 +21,7 @@ namespace base { namespace warcraft3 { namespace directory {
 	}
 
 	// War3 1.26会自动将自身路径写入注册表，但写入的位置是HKEY_LOCAL_MACHINE
-	bool read_all_users(boost::filesystem::path& result)
+	bool read_all_users(fs::path& result)
 	{
 		try {
 			
@@ -35,13 +35,13 @@ namespace base { namespace warcraft3 { namespace directory {
 		return false;
 	}
 
-	bool validate(boost::filesystem::path const& p)
+	bool validate(fs::path const& p)
 	{
 		static const std::list<std::wstring> file_list = boost::assign::list_of(L"war3.exe")(L"game.dll")(L"war3.mpq")(L"war3patch.mpq")(L"storm.dll");
 
 		foreach(const std::wstring &file_name, file_list)
 		{
-			if (!boost::filesystem::exists(p / file_name))
+			if (!fs::exists(p / file_name))
 			{
 				return false;
 			}
@@ -50,9 +50,9 @@ namespace base { namespace warcraft3 { namespace directory {
 		return true;
 	}
 
-	bool write(boost::filesystem::path const& p)
+	bool write(fs::path const& p)
 	{
-		if (!boost::filesystem::exists(p))
+		if (!fs::exists(p))
 		{
 			return false;
 		}
@@ -68,9 +68,9 @@ namespace base { namespace warcraft3 { namespace directory {
 		return false;
 	}
 
-	bool read(boost::filesystem::path& result)
+	bool read(fs::path& result)
 	{
-		boost::filesystem::path retval;
+		fs::path retval;
 		if (read_current_user(retval) && validate(retval))
 		{
 			result = retval;
@@ -110,7 +110,7 @@ namespace base { namespace warcraft3 { namespace directory {
 		return true;
 	}
 
-	bool choose(const wchar_t* title, boost::filesystem::path& result)
+	bool choose(const wchar_t* title, fs::path& result)
 	{
 		std::wstring retval;
 		if (!open_file_dialog(title, L"war3.exe\0war3.exe\0", NULL, &retval))
@@ -118,13 +118,13 @@ namespace base { namespace warcraft3 { namespace directory {
 			return false;
 		}
 
-		result = boost::filesystem::path(retval).parent_path();
+		result = fs::path(retval).parent_path();
 		return true;
 	}
 
 	bool choose(const wchar_t* title)
 	{
-		boost::filesystem::path retval;
+		fs::path retval;
 		if (choose(title, retval) && validate(retval))
 		{
 			return write(retval);
@@ -134,11 +134,11 @@ namespace base { namespace warcraft3 { namespace directory {
 	}
 
 
-	bool get(const wchar_t* title, boost::filesystem::path& war3_path)
+	bool get(const wchar_t* title, fs::path& war3_path)
 	{
 		while (!read(war3_path))
 		{
-			boost::filesystem::path result;
+			fs::path result;
 			if (!choose(title, result))
 			{
 				return false;

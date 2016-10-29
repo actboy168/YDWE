@@ -90,7 +90,7 @@ namespace base { namespace i18n {
 		return std::move(language_name(MAKELCID(lang_id, SORT_DEFAULT)));
 	}
 
-	bool bindtextdomain(const char* domain, boost::filesystem::path const& mofile_path)
+	bool bindtextdomain(const char* domain, fs::path const& mofile_path)
 	{
 		if (!domain)
 		{

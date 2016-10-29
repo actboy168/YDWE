@@ -64,7 +64,7 @@ namespace file {
 		}
 	}
 
-	write_stream::write_stream(const boost::filesystem::path& filename)
+	write_stream::write_stream(const fs::path& filename)
 		: file_(filename.c_str(), std::ios_base::out)
 	{
 		if (!file_.is_open())
@@ -109,7 +109,7 @@ namespace file {
 		}
 	}
 
-	read_stream::read_stream(const boost::filesystem::path& filename)
+	read_stream::read_stream(const fs::path& filename)
 		: file_(filename.c_str(), std::ios_base::in)
 	{
 		if (!file_.is_open())

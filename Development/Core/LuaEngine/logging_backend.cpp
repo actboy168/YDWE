@@ -6,12 +6,12 @@ namespace logging
 {
 	struct backend::implementation
 	{
-		boost::filesystem::path root_;
+		fs::path root_;
 		std::wstring name_;
 		std::ofstream file_;
 		uintmax_t written_;
 
-		implementation(const boost::filesystem::path& root, const std::wstring& name)
+		implementation(const fs::path& root, const std::wstring& name)
 			: root_(root)
 			, name_(name)
 			, file_()
@@ -19,7 +19,7 @@ namespace logging
 		{ }
 	};
 
-	backend::backend(const boost::filesystem::path& root, const std::wstring& name)
+	backend::backend(const fs::path& root, const std::wstring& name)
 		: impl_(new implementation(root, name))
 	{ }
 
@@ -49,7 +49,7 @@ namespace logging
 
 		if (!impl_->file_.is_open())
 		{
-			boost::filesystem::create_directories(impl_->root_);
+			fs::create_directories(impl_->root_);
 			impl_->file_.open((impl_->root_ / (impl_->name_ + L".log")).c_str(), std::ios_base::app | std::ios_base::out);
 			if (!impl_->file_.is_open())
 			{
@@ -84,16 +84,16 @@ namespace logging
 		size_t i = 1;
 		for (; i < 10; ++i)
 		{
-			boost::filesystem::path p = impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i);
-			if (!boost::filesystem::exists(p))
+			fs::path p = impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i);
+			if (!fs::exists(p))
 			{
 				break;
 			}
 		}
 		if (i == 10) i = 1;
-		boost::filesystem::rename(impl_->root_ / (impl_->name_ + L".log"), impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i));
+		fs::rename(impl_->root_ / (impl_->name_ + L".log"), impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i));
 
 		++i; if (i == 10) i = 1;
-		boost::filesystem::remove(impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i));
+		fs::remove(impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i));
 	}
 }

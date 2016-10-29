@@ -32,5 +32,5 @@ namespace base { namespace path {
 		DIR_MYPICTURES,
 	};
 
-	_BASE_API boost::filesystem::path get(PATH_TYPE type);
+	_BASE_API fs::path get(PATH_TYPE type);
 }}

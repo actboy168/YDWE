@@ -97,7 +97,7 @@ namespace i18n {
 		return true;
 	}
 
-	mofile* mofile::read(boost::filesystem::path const& filename)
+	mofile* mofile::read(fs::path const& filename)
 	{
 		try {
 			std::unique_ptr<mofile> mf(new mofile(file::read_stream(filename).read<buffer>()));

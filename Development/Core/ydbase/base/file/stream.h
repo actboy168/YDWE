@@ -49,7 +49,7 @@ namespace file {
 		write_stream(const std::string& filename);
 		write_stream(const wchar_t* filename);
 		write_stream(const std::wstring& filename);
-		write_stream(const boost::filesystem::path& filename);
+		write_stream(const fs::path& filename);
 		
 		template <class SequenceT>
 		void write(SequenceT buf)
@@ -69,7 +69,7 @@ namespace file {
 		read_stream(const std::string& filename);
 		read_stream(const wchar_t* filename);
 		read_stream(const std::wstring& filename);
-		read_stream(const boost::filesystem::path& filename);
+		read_stream(const fs::path& filename);
 
 		template <class SequenceT>
 		SequenceT read()
