@@ -24,8 +24,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int jarray_index(lua_State* L)
 	{
 		jass::global_variable gv = jarray_value(L);
-		int32_t index = luaL_checkinteger(L, 2);
-	
+		int32_t index = (int32_t)luaL_checkinteger(L, 2);
+
 		if (!gv.array_vaild(index))
 		{
 			lua_pushnil(L);
@@ -39,7 +39,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int jarray_newindex(lua_State* L)
 	{
 		jass::global_variable gv = jarray_value(L);
-		int32_t index = luaL_checkinteger(L, 2);
+		int32_t index = (int32_t)luaL_checkinteger(L, 2);
 	
 		if (!gv.array_vaild(index))
 		{
