@@ -1,16 +1,9 @@
 #pragma once
 
-#include <string>				
 #include <base/filesystem.h>
-#include <boost/iterator.hpp>
-
+#include <string>				
+#include <iterator>
 #include <unzip.h>
-
-#if defined(YDWE_ZIP_EXPORTS)
-#	define _ZIP_API __declspec(dllexport)
-#else
-#	define _ZIP_API __declspec(dllimport)
-#endif
 
 namespace zip 
 {
@@ -73,7 +66,7 @@ namespace zip
 	}
 
 	class reader::iterator
-		: public boost::iterator_facade<iterator, entry, boost::single_pass_traversal_tag>
+		: public std::iterator<std::input_iterator_tag, entry>
 	{
 	public:
 		iterator()
@@ -95,26 +88,38 @@ namespace zip
 		~iterator() 
 		{ }
 
-	private:
-		friend class boost::iterator_core_access;
-		friend void detail::zip_reader_iterator_construct(iterator& it, const unzFile* zf_ptr, std::error_code* ec);
-		friend void detail::zip_reader_iterator_increment(iterator& it);
-		friend entry& detail::zip_reader_iterator_dereference(const iterator& it);
-
-		void   increment() 
+		reference operator*() const
 		{
-			detail::zip_reader_iterator_increment(*this);
+			return detail::zip_reader_iterator_dereference(*this);
 		}
 
-		bool   equal(const iterator& other) const
+		iterator operator++(int)
+		{
+			auto result = *this;
+			++(*this);
+			return result;
+		}
+
+		iterator& operator++()
+		{
+			detail::zip_reader_iterator_increment(*this);
+			return *this;
+		}
+
+		bool operator==(const iterator& other) const
 		{
 			return impl_ == other.impl_;
 		}
 
-		entry& dereference() const
+		bool operator!=(const iterator& other) const
 		{
-			return detail::zip_reader_iterator_dereference(*this);
+			return !operator==(other);
 		}
+
+	private:
+		friend void detail::zip_reader_iterator_construct(iterator& it, const unzFile* zf_ptr, std::error_code* ec);
+		friend void detail::zip_reader_iterator_increment(iterator& it);
+		friend entry& detail::zip_reader_iterator_dereference(const iterator& it);
 
 		struct iterator_impl
 		{
