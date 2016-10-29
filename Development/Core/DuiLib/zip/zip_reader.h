@@ -1,9 +1,7 @@
 #pragma once
 
-#include <string>
-#include <boost/filesystem.hpp>
-
-#include <boost/filesystem/path.hpp>
+#include <string>				
+#include <base/filesystem.h>
 #include <boost/iterator.hpp>
 
 #include <unzip.h>

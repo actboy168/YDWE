@@ -1,9 +1,8 @@
 #include "zip_internal.h"
 
-#include <algorithm>
-#include <boost/filesystem.hpp>
+#include <algorithm>			
+#include <base/filesystem.h>
 #include <boost/filesystem/detail/utf8_codecvt_facet.hpp>
-namespace fs = ::boost::filesystem;
 
 #include <unzip.h>
 #include <zip.h>

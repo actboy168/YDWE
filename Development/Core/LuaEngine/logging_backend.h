@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/filesystem.hpp>
+#include <base/filesystem.h>
 
 #if defined(LUAENGINE_EXPORTS)
 #	define LUAENGINE_API __declspec(dllexport)

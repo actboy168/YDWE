@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/filesystem.hpp>
+#include <base/filesystem.h>
 #include <lua.hpp>
 #include "logging.h"
 

@@ -3,8 +3,8 @@
 #include <base/file/stream.h>
 #include <base/hook/iat.h>
 #include <base/hook/inline.h>
-#include <base/util/foreach.h>
-#include <boost/filesystem.hpp>
+#include <base/util/foreach.h>	  	  		
+#include <base/filesystem.h>
 #include <boost/optional.hpp>
 #include <cstdint>
 #include <array>   

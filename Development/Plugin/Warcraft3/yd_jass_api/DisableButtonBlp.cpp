@@ -1,6 +1,6 @@
 #include <base/hook/iat.h>
-#include <base/hook/fp_call.h> 	
-#include <boost/filesystem.hpp>
+#include <base/hook/fp_call.h> 	 	  		
+#include <base/filesystem.h>
 #include <base/path/helper.h>	
 #include <base/file/stream.h> 
 #include <base/warcraft3/virtual_mpq.h>  

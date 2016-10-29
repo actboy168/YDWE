@@ -3,8 +3,8 @@
 #include <base/hook/iat.h>
 #include <base/warcraft3/war3_searcher.h>  
 #include <base/warcraft3/version.h>
-#include <base/file/memory_mapped_file.h>
-#include <boost/filesystem.hpp>
+#include <base/file/memory_mapped_file.h>  	  		
+#include <base/filesystem.h>
 #include <Psapi.h>
 #include <array>
 

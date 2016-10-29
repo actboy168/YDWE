@@ -572,6 +572,9 @@
     <ClInclude Include="base\hook\udis86\udis86_decode.h">
       <Filter>base\hook\udis86</Filter>
     </ClInclude>
+    <ClInclude Include="base\filesystem.h">
+      <Filter>base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

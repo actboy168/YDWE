@@ -58,9 +58,8 @@
 #include <assert.h>
 #include <crtdbg.h>
 #include <malloc.h>
-#include <objbase.h>
-#include <boost/filesystem.hpp>
-namespace fs = boost::filesystem;
+#include <objbase.h>			  
+#include <base/filesystem.h>
 
 #include "Utils/Utils.h"
 #include "Utils/UIDelegate.h"

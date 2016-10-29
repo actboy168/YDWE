@@ -2,14 +2,12 @@
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
 #include <base/lua/luabind.h>
-#pragma warning(pop)
-#include <boost/filesystem.hpp>
+#pragma warning(pop)			  	  		
+#include <base/filesystem.h>
 #include <boost/scope_exit.hpp>
 #include <base/hook/fp_call.h>	
 #include <base/util/unicode.h>
 #include <Windows.h>
-
-namespace fs = boost::filesystem;
 
 namespace NLuaAPI { namespace NSTORM {
 

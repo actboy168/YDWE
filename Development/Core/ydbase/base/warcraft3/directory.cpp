@@ -1,6 +1,6 @@
 #include <base/warcraft3/directory.h>
-#include <boost/assign.hpp>
-#include <boost/filesystem.hpp>
+#include <boost/assign.hpp>		  	  		
+#include <base/filesystem.h>
 #include <base/win/registry/key.h>
 #include <base/win/registry/value.h> 
 #include <base/util/foreach.h>

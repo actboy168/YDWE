@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/filesystem.hpp>
+#include <base/filesystem.h>
 #include <base/config.h>
 #include <base/util/noncopyable.h>
 #include <fstream>

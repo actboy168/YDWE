@@ -7,12 +7,10 @@
 #include <luabind/return_reference_to_policy.hpp>
 #include <luabind/iterator_policy.hpp>
 #include <base/lua/luabind.h>
-#pragma warning(pop)
-#include <boost/filesystem.hpp>
+#pragma warning(pop)	  		
+#include <base/filesystem.h>
 #include <boost/iterator/iterator_facade.hpp>
 #include <base/path/service.h>
-
-namespace fs = boost::filesystem;
 
 namespace NLuaAPI { namespace NFileSystemAdditional {
 

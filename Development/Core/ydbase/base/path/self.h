@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/filesystem.hpp>
+#include <base/filesystem.h>
 #include <base/path/detail/get_path.h>
 
 // http://blogs.msdn.com/oldnewthing/archive/2004/10/25/247180.aspx

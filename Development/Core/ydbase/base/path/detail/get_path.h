@@ -1,8 +1,8 @@
 #pragma once
 
 #include <base/config.h>
-#include <Windows.h>
-#include <boost/filesystem.hpp>
+#include <Windows.h>			  		
+#include <base/filesystem.h>
 
 namespace base { namespace path { namespace detail {
 	boost::filesystem::path quick_launch_path(bool default_user);

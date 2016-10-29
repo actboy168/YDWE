@@ -1,13 +1,11 @@
 #include <windows.h>
 #include <random>
-#include <string>
-#include <boost/filesystem.hpp>
+#include <string>				 	  		
+#include <base/filesystem.h>
 #include <base/win/version.h>
 #include <base/path/service.h>
 #include "Windows7.h"
 #include "JumpList.h"
-
-namespace fs = ::boost::filesystem;
 
 static const wchar_t* namelist[] = {
 	L"¶í¿Ì°¢ÅµË¹¼¶YDWE",

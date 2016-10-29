@@ -1,7 +1,7 @@
 #pragma once
 
-#include <base/config.h>
-#include <boost/filesystem.hpp>
+#include <base/config.h>			  		
+#include <base/filesystem.h>
 
 namespace base {
 namespace warcraft3 { namespace directory {

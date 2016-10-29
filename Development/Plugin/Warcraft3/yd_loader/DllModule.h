@@ -2,12 +2,10 @@
 
 #include <windows.h>
 
-#include <boost/filesystem.hpp>
+#include <base/filesystem.h>
 #include <base/thread/thread.h>
 #include <atomic>
 #include <map>	 
-
-namespace fs = boost::filesystem;
 
 class DllModule
 {

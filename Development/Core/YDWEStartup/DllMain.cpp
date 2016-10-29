@@ -2,7 +2,7 @@
 #include <utility>
 #include <locale>
 #include <windows.h>
-#include <boost/filesystem.hpp>
+#include <base/filesystem.h>
 #include <boost/exception/all.hpp>
 #include <base/file/memory_mapped_file.h>
 #include <base/exception/system_exception.h>
@@ -19,8 +19,6 @@
 #include <slk/reader/IniReader.cpp>
 #include <slk/reader/CommonReader.cpp>
 #include "Splash.h"
-
-namespace fs = boost::filesystem;
 
 #define _(str)  base::i18n::gettext(str).to_string().c_str()
 #define __(str) base::u2w(base::i18n::gettext(str)).c_str()

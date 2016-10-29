@@ -2,8 +2,8 @@
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
 #include <base/lua/luabind.h>
-#pragma warning(pop)
-#include <boost/filesystem.hpp>
+#pragma warning(pop)				 	  		
+#include <base/filesystem.h>
 
 #include <windows.h>
 #include <mscoree.h>

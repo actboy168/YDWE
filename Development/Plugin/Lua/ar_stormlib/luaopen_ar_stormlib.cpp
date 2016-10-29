@@ -4,12 +4,10 @@
 #include <lua.hpp>
 #include <luabind/luabind.hpp>
 #include <base/lua/luabind.h>
-#pragma warning(pop)
-#include <boost/filesystem.hpp>
+#pragma warning(pop)			  	  		
+#include <base/filesystem.h>
 #include <boost/scoped_array.hpp>
 #include <boost/scope_exit.hpp>
-
-namespace fs = boost::filesystem;
 
 namespace NLuaAPI { namespace NMPQ {
 	static void *LuaMpqStormLibCreateArchive(const fs::path &mpqPath, boost::uint32_t /*dwFlags*/, boost::uint32_t dwMaxFileCount)

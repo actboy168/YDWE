@@ -6,16 +6,14 @@
 #include <luabind/operator.hpp>
 #include <luabind/return_reference_to_policy.hpp>
 #include <base/lua/luabind.h>
-#pragma warning(pop)
-#include <boost/filesystem.hpp>
+#pragma warning(pop)			 	  		
+#include <base/filesystem.h>
 #include <Windows.h>
 #include <base/win/process.h>
 #include <base/win/file_version.h>
 #include <fcntl.h>
 #include <io.h>	  
 #include "NtQuerySystemProcessInformation.h"
-
-namespace fs = boost::filesystem;
 
 namespace NLuaAPI { namespace NSys {
 

@@ -190,6 +190,7 @@
     <ClInclude Include="base\exception\seh_exception.h" />
     <ClInclude Include="base\exception\system_exception.h" />
     <ClInclude Include="base\exception\windows_exception.h" />
+    <ClInclude Include="base\filesystem.h" />
     <ClInclude Include="base\file\memory_mapped_file.h" />
     <ClInclude Include="base\file\file_handle.h" />
     <ClInclude Include="base\file\file_mapping_handle.h" />
