@@ -9,8 +9,8 @@
 #include <base/lua/luabind.h>
 #pragma warning(pop)	  		
 #include <base/filesystem.h>
-#include <boost/iterator/iterator_facade.hpp>
 #include <base/path/service.h>
+#include <iterator>
 
 namespace NLuaAPI { namespace NFileSystemAdditional {
 
@@ -44,9 +44,10 @@ namespace NLuaAPI { namespace NFileSystemAdditional {
 	}
 	
 	class directory_iterator
-		: public boost::iterator_facade<directory_iterator, fs::path, boost::single_pass_traversal_tag, fs::path const&>
+		: public std::iterator<std::input_iterator_tag, const fs::path>
 	{
-		typedef boost::iterator_facade<directory_iterator, fs::path, boost::single_pass_traversal_tag, fs::path const&> mybase;
+		typedef directory_iterator iterator;
+
 	public:
 		directory_iterator()
 		{ }
@@ -69,23 +70,19 @@ namespace NLuaAPI { namespace NFileSystemAdditional {
 		~directory_iterator() 
 		{ }
 
-		directory_iterator& increment(boost::system::error_code& ec)
-		{
-			itr_.increment(ec);
-			return *this;
-		}
-
-	private:
-		fs::directory_iterator itr_;
-
-		friend class boost::iterator_core_access;
-
-		mybase::reference dereference() const 
+		reference operator*() const
 		{
 			return itr_->path();
 		}
 
-		void increment() 
+		iterator operator++(int)
+		{
+			auto result = *this;
+			++(*this);
+			return result;
+		}
+
+		iterator& operator++()
 		{
 			boost::system::error_code ec;
 			itr_.increment(ec);
@@ -93,12 +90,21 @@ namespace NLuaAPI { namespace NFileSystemAdditional {
 			{
 				itr_ = fs::directory_iterator();
 			}
+			return *this;
 		}
 
-		bool equal(const directory_iterator& rhs) const
+		bool operator==(const iterator& other) const
 		{
-			return itr_ == rhs.itr_;
+			return itr_ == other.itr_;
 		}
+
+		bool operator!=(const iterator& other) const
+		{
+			return !operator==(other);
+		}
+
+	private:
+		fs::directory_iterator itr_;
 	};
 
 	class directory_container
