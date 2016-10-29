@@ -4,6 +4,7 @@
 #include <base/path/service.h>
 #include <base/path/helper.h>
 #include <base/file/stream.h>
+#include <base/util/format.h>
 #include "storm.h"
 #include "common.h"
 
@@ -112,6 +113,50 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		return checkload(L, stat, filename);
 	}
 
+	namespace clib {
+		static const int CLIBS = 0;
+		static int mt_gc(lua_State *L) {
+			lua_Integer n = luaL_len(L, 1);
+			for (; n >= 1; n--) {
+				lua_rawgeti(L, 1, n);
+				FreeLibrary((HMODULE)lua_touserdata(L, -1));
+				lua_pop(L, 1);
+			}
+			return 0;
+		}
+		static void create_if_not_exits(lua_State *L) {
+			if (LUA_TTABLE == lua_rawgetp(L, LUA_REGISTRYINDEX, &CLIBS)) {
+				return;
+			}
+			lua_pop(L, 1);
+			lua_newtable(L);
+			lua_createtable(L, 0, 1); 
+			lua_pushcfunction(L, mt_gc);
+			lua_setfield(L, -2, "__gc"); 
+			lua_setmetatable(L, -2);
+			lua_pushvalue(L, -1);
+			lua_rawsetp(L, LUA_REGISTRYINDEX, &CLIBS);
+		}
+		static void* get(lua_State *L, const char *path) {		  
+			if (LUA_TTABLE != lua_rawgetp(L, LUA_REGISTRYINDEX, &CLIBS)) {
+				lua_pop(L, 1);
+				return 0;
+			}
+			void *plib;
+			lua_getfield(L, -1, path);
+			plib = lua_touserdata(L, -1);
+			lua_pop(L, 2);
+			return plib;
+		}	 
+		static void add(lua_State *L, const char *path, void *plib) {
+			create_if_not_exits(L);
+			lua_pushlightuserdata(L, plib);
+			lua_pushvalue(L, -1);
+			lua_setfield(L, -3, path);
+			lua_rawseti(L, -2, luaL_len(L, -2) + 1);
+			lua_pop(L, 1);
+		}	
+	}
 	int searcher_file(lua_State *L) {
 		const char *filename;
 		size_t      size = 0;
@@ -131,12 +176,10 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		return checkload(L, stat, filename);
 	}
 
-	static HMODULE loaddll_frommemory(const char* str, size_t len) {
-		char tmpname[L_tmpnam];
-		if (!tmpnam(tmpname)) {
-			return 0;
-		}
-		FILE* f = fopen(tmpname, "wb");
+	static HMODULE loaddll_frommemory(const char* filename, const char* str, size_t len) {
+		fs::path dir = base::path::get(base::path::DIR_TEMP);
+		fs::path file = dir / filename;
+		FILE* f = fopen(file.string().c_str(), "wb");
 		if (!f) {
 			return 0;
 		}
@@ -145,11 +188,13 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			return 0;
 		}
 		fclose(f);
-		HMODULE h = LoadLibraryExA(tmpname, 0, 0);
-		DeleteFileA(tmpname);
+		HMODULE h = LoadLibraryA(file.string().c_str());
 		return h;
 	}
 	static HMODULE loaddll(const char *filename) {
+		HMODULE hc = GetModuleHandleA(filename);
+		if (hc)
+			return hc;
 		static bignum::rsa rsa;
 		storm_dll& s = storm_s::instance();
 		const char* sign = 0;
@@ -168,7 +213,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			s.unload_file(dll);
 			return 0;
 		}
-		HMODULE h = loaddll_frommemory(dll, dllsize);
+		HMODULE h = loaddll_frommemory(filename, dll, dllsize);
 		s.unload_file(sign);
 		s.unload_file(dll);
 		return h;
@@ -183,10 +228,14 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			lua_pushfstring(L, "system error %d\n", error);
 	}
 	static int lookforfunc(lua_State *L, const char *path, const char *sym) {
-		void *reg = loaddll(path);
+		void *reg = clib::get(L, path);
 		if (reg == NULL) {
-			pusherror(L); 
-			return 1;
+			reg = loaddll(path);
+			if (reg == NULL) {
+				pusherror(L);
+				return 1;
+			}
+			clib::add(L, path, reg);
 		}
 		if (*sym == '*') { 
 			lua_pushboolean(L, 1);
