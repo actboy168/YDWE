@@ -3,7 +3,6 @@
 #include <locale>
 #include <windows.h>
 #include <base/filesystem.h>
-#include <boost/exception/all.hpp>
 #include <base/file/memory_mapped_file.h>
 #include <base/exception/system_exception.h>
 #include <base/exception/windows_exception.h>

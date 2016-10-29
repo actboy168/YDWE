@@ -1,4 +1,3 @@
-#include <boost/exception/all.hpp>
 #include <windows.h>
 #include "MainWindow.h"
 #include <base/com/guard.h>
@@ -34,7 +33,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR l
 	}
 	catch (...)
 	{
-		::MessageBoxA(NULL, boost::current_exception_diagnostic_information().c_str(), "ERROR", MB_ICONERROR | MB_OK);
+		MessageBoxW(NULL, L"Unknown error", L"ERROR", MB_OK | MB_ICONERROR);
 	}
 
     return 0;
