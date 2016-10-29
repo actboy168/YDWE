@@ -1,5 +1,4 @@
 #include "logging_backend.h"
-#include <boost/filesystem/fstream.hpp>
 #include <base/util/format.h>
 #include <base/exception/exception.h>
 
@@ -9,7 +8,7 @@ namespace logging
 	{
 		boost::filesystem::path root_;
 		std::wstring name_;
-		boost::filesystem::ofstream file_;
+		std::ofstream file_;
 		uintmax_t written_;
 
 		implementation(const boost::filesystem::path& root, const std::wstring& name)
@@ -51,7 +50,7 @@ namespace logging
 		if (!impl_->file_.is_open())
 		{
 			boost::filesystem::create_directories(impl_->root_);
-			impl_->file_.open(impl_->root_ / (impl_->name_ + L".log"), std::ios_base::app | std::ios_base::out);
+			impl_->file_.open((impl_->root_ / (impl_->name_ + L".log")).c_str(), std::ios_base::app | std::ios_base::out);
 			if (!impl_->file_.is_open())
 			{
 				throw base::exception("Failed to open file '%s' for writing.", (impl_->root_ / (impl_->name_ + L".log")).string().c_str());
