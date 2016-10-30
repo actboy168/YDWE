@@ -9,8 +9,6 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/util/format.h>
 #include <base/util/unicode.h>
-#include <boost/preprocessor/repetition.hpp>
-#include <boost/preprocessor/punctuation/comma_if.hpp>
 #include <map>
 #include <fstream>
 
@@ -67,6 +65,7 @@ namespace monitor
 		}
 	};
 
+#if 0
 	template <const char* type_name, size_t param, const char* porc_name>
 	class creater;
 
@@ -91,27 +90,86 @@ namespace monitor
 	template <const char* type_name, const char* porc_name> uintptr_t creater<type_name, n, porc_name>::real_proc = 0;
 
 	BOOST_PP_REPEAT(5, DEFINE_CLASS_CREATER, ~)
+#endif
+	template <const char* type_name, const char* porc_name, size_t param>
+	struct creater_;
 
 	template <const char* type_name, const char* porc_name>
-	struct destroyer
+	struct creater_ <type_name, porc_name, 0>
 	{
-	public:
-		static void initialize()
+		static uintptr_t real;
+		static uintptr_t __cdecl fake()
 		{
-			base::warcraft3::jass::async_hook(porc_name, &real_proc, (uintptr_t)fake_proc);
-		}
-
-	private:
-		static uintptr_t real_proc;
-		static void __cdecl fake_proc(uintptr_t h)
-		{
-			handle_manager<type_name>::instance().erase(h);
-			base::c_call<void>(real_proc, h);
+			uintptr_t retval = base::c_call<uintptr_t>(real);
+			handle_manager<type_name>::instance()[retval] = base::warcraft3::get_current_jass_pos();
+			return retval;
 		}
 	};
+	template <const char* type_name, const char* porc_name>
+	struct creater_ <type_name, porc_name, 1> {
+		static uintptr_t real;
+		static uintptr_t __cdecl fake(intptr_t a1)
+		{
+			uintptr_t retval = base::c_call<uintptr_t>(real, a1);
+			handle_manager<type_name>::instance()[retval] = base::warcraft3::get_current_jass_pos();
+			return retval;
+		}
+	};
+	template <const char* type_name, const char* porc_name>
+	struct creater_ <type_name, porc_name, 2> {
+		static uintptr_t real;
+		static uintptr_t __cdecl fake(intptr_t a1, intptr_t a2)
+		{
+			uintptr_t retval = base::c_call<uintptr_t>(real, a1, a2);
+			handle_manager<type_name>::instance()[retval] = base::warcraft3::get_current_jass_pos();
+			return retval;
+		}
+	};
+	template <const char* type_name, const char* porc_name>
+	struct creater_ <type_name, porc_name, 3> {
+		static uintptr_t real;
+		static uintptr_t __cdecl fake(intptr_t a1, intptr_t a2, intptr_t a3)
+		{
+			uintptr_t retval = base::c_call<uintptr_t>(real, a1, a2, a3);
+			handle_manager<type_name>::instance()[retval] = base::warcraft3::get_current_jass_pos();
+			return retval;
+		}
+	};
+	template <const char* type_name, const char* porc_name>
+	struct creater_ <type_name, porc_name, 4> {
+		static uintptr_t real;
+		static uintptr_t __cdecl fake(intptr_t a1, intptr_t a2, intptr_t a3, intptr_t a4)
+		{
+			uintptr_t retval = base::c_call<uintptr_t>(real, a1, a2, a3, a4);
+			handle_manager<type_name>::instance()[retval] = base::warcraft3::get_current_jass_pos();
+			return retval;
+		}
+	};
+	template <const char* type_name, const char* porc_name> uintptr_t creater_<type_name, porc_name, 0>::real = 0;
+	template <const char* type_name, const char* porc_name> uintptr_t creater_<type_name, porc_name, 1>::real = 0;
+	template <const char* type_name, const char* porc_name> uintptr_t creater_<type_name, porc_name, 2>::real = 0;
+	template <const char* type_name, const char* porc_name> uintptr_t creater_<type_name, porc_name, 3>::real = 0;
+	template <const char* type_name, const char* porc_name> uintptr_t creater_<type_name, porc_name, 4>::real = 0;
+
+	template <const char* type_name, size_t param, const char* porc_name>
+	void creater() {
+		base::warcraft3::jass::async_hook(porc_name, &creater_<type_name, porc_name, param>::real, (uintptr_t)creater_<type_name, porc_name, param>::fake);
+	}
+
+	template <const char* type_name>
+	struct destroyer_ {
+		static uintptr_t real;
+		static void __cdecl fake(uintptr_t h) {
+			handle_manager<type_name>::instance().erase(h);
+			base::c_call<void>(real, h);
+		}
+	};
+	template <const char* type_name> uintptr_t destroyer_<type_name>::real = 0;
 
 	template <const char* type_name, const char* porc_name>
-	uintptr_t destroyer<type_name, porc_name>::real_proc = 0;
+	void destroyer() {
+		base::warcraft3::jass::async_hook(porc_name, &destroyer_<type_name>::real, (uintptr_t)destroyer_<type_name>::fake);
+	}
 }
 
 struct handle_info_t
@@ -308,40 +366,40 @@ uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 
 void Initialize()
 {
-	monitor::creater  <commonj::location, 1, commonj::CameraSetupGetDestPositionLoc>::initialize();
-	monitor::creater  <commonj::location, 1, commonj::GetCameraEyePositionLoc>::initialize();
-	monitor::creater  <commonj::location, 1, commonj::GetCameraTargetPositionLoc>::initialize();
-	monitor::creater  <commonj::location, 0, commonj::GetOrderPointLoc>::initialize();
-	monitor::creater  <commonj::location, 0, commonj::GetSpellTargetLoc>::initialize();
-	monitor::creater  <commonj::location, 1, commonj::GetStartLocationLoc>::initialize();
-	monitor::creater  <commonj::location, 1, commonj::GetUnitLoc>::initialize();
-	monitor::creater  <commonj::location, 1, commonj::GetUnitRallyPoint>::initialize();
-	monitor::creater  <commonj::location, 2, commonj::Location>::initialize();
-	monitor::destroyer<commonj::location, commonj::RemoveLocation>::initialize();
+	monitor::creater  <commonj::location, 1, commonj::CameraSetupGetDestPositionLoc>();
+	monitor::creater  <commonj::location, 1, commonj::GetCameraEyePositionLoc>();
+	monitor::creater  <commonj::location, 1, commonj::GetCameraTargetPositionLoc>();
+	monitor::creater  <commonj::location, 0, commonj::GetOrderPointLoc>();
+	monitor::creater  <commonj::location, 0, commonj::GetSpellTargetLoc>();
+	monitor::creater  <commonj::location, 1, commonj::GetStartLocationLoc>();
+	monitor::creater  <commonj::location, 1, commonj::GetUnitLoc>();
+	monitor::creater  <commonj::location, 1, commonj::GetUnitRallyPoint>();
+	monitor::creater  <commonj::location, 2, commonj::Location>();
+	monitor::destroyer<commonj::location, commonj::RemoveLocation>();
 
-	monitor::creater  <commonj::effect,   3, commonj::AddSpecialEffect>::initialize();
-	monitor::creater  <commonj::effect,   2, commonj::AddSpecialEffectLoc>::initialize();
-	monitor::creater  <commonj::effect,   3, commonj::AddSpecialEffectTarget>::initialize();
-	monitor::creater  <commonj::effect,   4, commonj::AddSpellEffect>::initialize();
-	monitor::creater  <commonj::effect,   3, commonj::AddSpellEffectLoc>::initialize();
-	monitor::creater  <commonj::effect,   4, commonj::AddSpellEffectById>::initialize();
-	monitor::creater  <commonj::effect,   3, commonj::AddSpellEffectByIdLoc>::initialize();
-	monitor::creater  <commonj::effect,   4, commonj::AddSpellEffectTarget>::initialize();
-	monitor::creater  <commonj::effect,   4, commonj::AddSpellEffectTargetById>::initialize();
-	monitor::destroyer<commonj::effect, commonj::DestroyEffect>::initialize();
+	monitor::creater  <commonj::effect,   3, commonj::AddSpecialEffect>();
+	monitor::creater  <commonj::effect,   2, commonj::AddSpecialEffectLoc>();
+	monitor::creater  <commonj::effect,   3, commonj::AddSpecialEffectTarget>();
+	monitor::creater  <commonj::effect,   4, commonj::AddSpellEffect>();
+	monitor::creater  <commonj::effect,   3, commonj::AddSpellEffectLoc>();
+	monitor::creater  <commonj::effect,   4, commonj::AddSpellEffectById>();
+	monitor::creater  <commonj::effect,   3, commonj::AddSpellEffectByIdLoc>();
+	monitor::creater  <commonj::effect,   4, commonj::AddSpellEffectTarget>();
+	monitor::creater  <commonj::effect,   4, commonj::AddSpellEffectTargetById>();
+	monitor::destroyer<commonj::effect, commonj::DestroyEffect>();
 
-	monitor::creater  <commonj::group,    0, commonj::CreateGroup>::initialize();
-	monitor::destroyer<commonj::group, commonj::DestroyGroup>::initialize();
+	monitor::creater  <commonj::group,    0, commonj::CreateGroup>();
+	monitor::destroyer<commonj::group, commonj::DestroyGroup>();
 
-	monitor::creater  <commonj::region,   0, commonj::CreateRegion>::initialize();
-	monitor::destroyer<commonj::region, commonj::RemoveRegion>::initialize();
+	monitor::creater  <commonj::region,   0, commonj::CreateRegion>();
+	monitor::destroyer<commonj::region, commonj::RemoveRegion>();
 
-	monitor::creater  <commonj::rect,     4, commonj::Rect>::initialize();
-	monitor::creater  <commonj::rect,     2, commonj::RectFromLoc>::initialize();
-	monitor::destroyer<commonj::rect, commonj::RemoveRect>::initialize();
+	monitor::creater  <commonj::rect,     4, commonj::Rect>();
+	monitor::creater  <commonj::rect,     2, commonj::RectFromLoc>();
+	monitor::destroyer<commonj::rect, commonj::RemoveRect>();
 
-	monitor::creater  <commonj::force,    0, commonj::CreateForce>::initialize();
-	monitor::destroyer<commonj::force, commonj::DestroyForce>::initialize();
+	monitor::creater  <commonj::force,    0, commonj::CreateForce>();
+	monitor::destroyer<commonj::force, commonj::DestroyForce>();
 
 	base::warcraft3::jass::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
 }
