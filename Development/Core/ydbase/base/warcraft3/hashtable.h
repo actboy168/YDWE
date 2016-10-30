@@ -3,7 +3,7 @@
 #include <base/config.h>
 #include <cstdint>
 #include <base/warcraft3/detail/string_hash.h>
-#include <boost/iterator/iterator_facade.hpp>
+#include <iterator>
 #include <cstring>
 
 namespace base { namespace warcraft3 {
@@ -130,7 +130,7 @@ namespace base { namespace warcraft3 {
 
 		template <class Node>
 		class table<Node>::iterator
-			: public boost::iterator_facade<iterator, Node, boost::single_pass_traversal_tag>
+			: public std::iterator<std::input_iterator_tag, Node>
 		{
 		public:
 			iterator()
@@ -144,22 +144,36 @@ namespace base { namespace warcraft3 {
 				, index_(0)
 				, current_(nullptr)
 			{
-				increment();
+				operator++();
 			}
 
 			~iterator()
 			{ }
-			
-		private:
-			friend class boost::iterator_core_access;
 
-			void   increment()
+			reference operator*() const
+			{
+				return *current_;
+			}
+
+			pointer operator->() const
+			{
+				return current_;
+			}
+
+			iterator operator++(int)
+			{
+				auto result = *this;
+				++(*this);
+				return result;
+			}
+
+			iterator& operator++()
 			{
 				if (!current_)
 				{
 					if (index_ > ptr_->mask_)
 					{
-						return;
+						return *this;
 					}
 
 					current_ = ptr_->entry_[index_].end_;
@@ -173,18 +187,19 @@ namespace base { namespace warcraft3 {
 				{
 					index_++;
 					current_ = nullptr;
-					return increment();
+					return operator++();
 				}
+				return *this;
 			}
 
-			bool   equal(const iterator& other) const
+			bool operator==(const iterator& other) const
 			{
 				return current_ == other.current_;
 			}
 
-			Node& dereference() const
+			bool operator!=(const iterator& other) const
 			{
-				return *current_;
+				return !operator==(other);
 			}
 
 		private:
