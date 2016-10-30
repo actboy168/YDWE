@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <functional>
 #include <regex>
-#include <boost/algorithm/string.hpp>
 #include <base/path/service.h>
 #include <base/util/unicode.h>
 #include <base/hook/inline.h>
@@ -58,11 +57,8 @@ namespace NYDWE {
 	HANDLE WINAPI DetourStormCreateFileA(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
 	{
 		std::wstring fileName = base::a2w(std::string_view(lpFileName), base::conv_method::replace | '?');
-		if (gIsInCompileProcess && (
-			boost::iends_with(fileName, L".w3x") ||
-			boost::iends_with(fileName, L".w3m")/* ||
-											   boost::iends_with(fileName, L".w3n") */ // Disabled because does not support campaign
-											   ))
+		std::wstring_view fileExt(fileName.data() + fileName.size() - 4, 4);
+		if (gIsInCompileProcess && (fileExt == L".w3x" || fileExt == L".w3m"))
 		{
 			TEventData eventData;
 			eventData["map_path"] = fileName;

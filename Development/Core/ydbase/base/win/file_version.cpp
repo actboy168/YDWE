@@ -1,6 +1,5 @@
 #include <base/win/file_version.h>
-
-#include <boost/algorithm/string.hpp>
+#include <base/util/string_algorithm.h>
 #include <base/util/format.h>
 #include <base/path/detail/get_path.h>
 #include <vector>
@@ -121,14 +120,14 @@ namespace base { namespace win {
 			return 0;
 		}
 
-		void create_simple_file_version(simple_file_version& sfv, const std::wstring& version_string, const wchar_t* pred)
+		void create_simple_file_version(simple_file_version& sfv, const std::wstring_view& version_string, const wchar_t pred)
 		{
-			std::vector<std::wstring> version_array;
-			boost::algorithm::split(version_array, version_string, boost::algorithm::is_any_of(pred));
-			sfv.major       = (version_array.size() > 0) ? stoi_no_throw(version_array[0]) : 0;
-			sfv.minor       = (version_array.size() > 1) ? stoi_no_throw(version_array[1]) : 0;
-			sfv.revision    = (version_array.size() > 2) ? stoi_no_throw(version_array[2]) : 0;
-			sfv.build       = (version_array.size() > 3) ? stoi_no_throw(version_array[3]) : 0;
+			std::vector<std::wstring_view> version_array;
+			base::algorithm::split(version_array, version_string, pred);
+			sfv.major       = (version_array.size() > 0) ? stoi_no_throw(version_array[0].to_string()) : 0;
+			sfv.minor       = (version_array.size() > 1) ? stoi_no_throw(version_array[1].to_string()) : 0;
+			sfv.revision    = (version_array.size() > 2) ? stoi_no_throw(version_array[2].to_string()) : 0;
+			sfv.build       = (version_array.size() > 3) ? stoi_no_throw(version_array[3].to_string()) : 0;
 			sfv.size        = version_array.size();
 		}
 	}
@@ -141,12 +140,12 @@ namespace base { namespace win {
 		, size(0)
 	{ }
 
-	simple_file_version::simple_file_version(const wchar_t* module_path, const wchar_t* key, const wchar_t* pred)
+	simple_file_version::simple_file_version(const wchar_t* module_path, const wchar_t* key, const wchar_t pred)
 	{
 		create_simple_file_version(*this, file_version(module_path)[key], pred);
 	}
 
-	simple_file_version::simple_file_version(HMODULE module_handle, const wchar_t* key, const wchar_t* pred)
+	simple_file_version::simple_file_version(HMODULE module_handle, const wchar_t* key, const wchar_t pred)
 	{
 		create_simple_file_version(*this, file_version(module_handle)[key], pred);
 	}

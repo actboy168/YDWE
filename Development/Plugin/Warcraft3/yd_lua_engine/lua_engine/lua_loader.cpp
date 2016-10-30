@@ -13,7 +13,8 @@
 #include <base/util/singleton.h>
 #include <base/util/format.h>
 #include <base/hook/fp_call.h>
-#include <boost/algorithm/string.hpp>
+#include <base/util/string_view.h>	
+#include <base/util/string_algorithm.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 	class debugger;
@@ -90,18 +91,19 @@ namespace lua_loader {
 			return ;
 		}
 
-		std::string cheat_s = cheat;
-		if (cheat_s.compare(0, 9, "exec-lua:") == 0)
+		std::string_view cheat_s = cheat;
+		
+		if (cheat_s.substr(0, 9) == "exec-lua:")
 		{
 			cheat_s = cheat_s.substr(9);
-			boost::algorithm::trim(cheat_s);
+			algorithm::trim(cheat_s);
 			if (cheat_s.size() >= 2 && cheat_s[0] == '"' && cheat_s[cheat_s.size() - 1] == '"')
 			{
 				cheat_s = cheat_s.substr(1, cheat_s.size() - 2);
 			}
 			lua_State* L = jass_state_s::instance().get();
 			lua_getglobal(L, "require");
-			lua_pushlstring(L, cheat_s.c_str(), cheat_s.size());
+			lua_pushlstring(L, cheat_s.data(), cheat_s.size());
 			safe_call(L, 1, 1, true);
 		}
 

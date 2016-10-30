@@ -245,6 +245,7 @@
     <ClInclude Include="base\util\hybrid_array.h" />
     <ClInclude Include="base\util\signal.h" />
     <ClInclude Include="base\util\singleton.h" />
+    <ClInclude Include="base\util\string_algorithm.h" />
     <ClInclude Include="base\util\string_view.h" />
     <ClInclude Include="base\util\unicode.h" />
     <ClInclude Include="base\util\noncopyable.h" />

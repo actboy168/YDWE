@@ -44,8 +44,8 @@ namespace win {
 	{
 	public:
 		simple_file_version();
-		simple_file_version(const wchar_t* module_path, const wchar_t* key = L"FileVersion", const wchar_t* pred = L",");
-		simple_file_version(HMODULE module_handle, const wchar_t* key = L"FileVersion", const wchar_t* pred = L",");
+		simple_file_version(const wchar_t* module_path, const wchar_t* key = L"FileVersion", const wchar_t pred = L',');
+		simple_file_version(HMODULE module_handle, const wchar_t* key = L"FileVersion", const wchar_t pred = L',');
 
 		uint32_t major;
 		uint32_t minor;
