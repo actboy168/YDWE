@@ -1,5 +1,4 @@
-#include <base/warcraft3/directory.h>
-#include <boost/assign.hpp>		  	  		
+#include <base/warcraft3/directory.h>	  	  		
 #include <base/filesystem.h>
 #include <base/win/registry/key.h>
 #include <base/win/registry/value.h> 
@@ -37,16 +36,11 @@ namespace base { namespace warcraft3 { namespace directory {
 
 	bool validate(fs::path const& p)
 	{
-		static const std::list<std::wstring> file_list = boost::assign::list_of(L"war3.exe")(L"game.dll")(L"war3.mpq")(L"war3patch.mpq")(L"storm.dll");
-
-		foreach(const std::wstring &file_name, file_list)
-		{
-			if (!fs::exists(p / file_name))
-			{
-				return false;
-			}
-		}
-
+		if (!fs::exists(p / L"war3.exe")) return false;
+		if (!fs::exists(p / L"game.dll")) return false;
+		if (!fs::exists(p / L"war3.mpq")) return false;
+		if (!fs::exists(p / L"war3patch.mpq")) return false;
+		if (!fs::exists(p / L"storm.dll")) return false;
 		return true;
 	}
 
