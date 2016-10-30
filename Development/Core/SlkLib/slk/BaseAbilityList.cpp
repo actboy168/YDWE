@@ -1,11 +1,11 @@
-#include <slk/utility/list_of.h>
+#include <base/util/list_of.h>
 #include <slk/utility/object_id.h>
 #include <map>
 
 namespace slk
 {
 	std::map<object_id, object_id> g_BaseAbilityList = 
-		list_of('ANdr', 'AHdr')
+		base::list_of('ANdr', 'AHdr')
 				('ANfa', 'AHca')
 				('AOsw', 'AOwd')
 				('ANc1', 'ANcs')

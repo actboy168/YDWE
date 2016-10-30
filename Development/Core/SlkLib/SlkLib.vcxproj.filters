@@ -105,9 +105,6 @@
     <ClInclude Include="slk\utility\convert.h">
       <Filter>slk\inc\utility</Filter>
     </ClInclude>
-    <ClInclude Include="slk\utility\list_of.h">
-      <Filter>slk\inc\utility</Filter>
-    </ClInclude>
     <ClInclude Include="slk\converter\ConvertTable.hpp">
       <Filter>slk\inc\converter</Filter>
     </ClInclude>

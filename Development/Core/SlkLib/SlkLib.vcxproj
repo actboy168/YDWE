@@ -127,7 +127,6 @@
     <ClInclude Include="slk\utility\convert.h" />
     <ClInclude Include="slk\utility\object_id.h" />
     <ClInclude Include="slk\utility\sequence.h" />
-    <ClInclude Include="slk\utility\list_of.h" />
     <ClInclude Include="slk\writer\IniWriter.hpp" />
     <ClInclude Include="slk\writer\ObjWriter.hpp" />
     <ClInclude Include="slk\writer\SlkWriter.hpp" />

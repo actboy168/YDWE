@@ -4,8 +4,9 @@
 #include <base/path/helper.h>
 #include <base/util/unicode.h>	
 #include <base/win/registry/key.h>	
-#include <base/file/stream.h>
-#include <boost/assign.hpp>
+#include <base/file/stream.h> 
+#include <base/util/list_of.h>
+#include <set>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
 
@@ -62,7 +63,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
 
 	bool storm_path_valid(const fs::path& root_path, const fs::path& file_path)
 	{
-		static std::set<std::wstring> s_blacklist = boost::assign::list_of
+		static std::set<std::wstring> s_blacklist = base::list_of
 			(L"mix")(L"asi")(L"m3d")(L"flt")(L"flt")
 			(L"exe")(L"dll")
 			;

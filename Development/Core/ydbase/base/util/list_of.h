@@ -1,9 +1,8 @@
 #pragma once
 
-#include <slk/port/config.h>
 #include <deque>
 
-namespace slk
+namespace base
 {
 	namespace detail
 	{
