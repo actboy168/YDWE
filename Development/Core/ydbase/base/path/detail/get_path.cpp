@@ -40,7 +40,7 @@ namespace base { namespace path { namespace detail {
 	//
 	fs::path temp_path() 
 	{
-		boost::optional<std::wstring> result;
+		std::optional<std::wstring> result;
 		result = win::env_variable(L"TMP").get_nothrow();
 		if (result && !result->empty())
 		{

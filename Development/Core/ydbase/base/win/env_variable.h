@@ -1,7 +1,7 @@
 #pragma once
 
 #include <base/config.h>
-#include <boost/optional.hpp>
+#include <base/util/optional.h>
 #include <string>
 
 namespace base { namespace win {
@@ -13,7 +13,7 @@ namespace base { namespace win {
 		env_variable(std::wstring const& name);
 		env_variable(std::wstring&& name);
 		std::wstring                  get();
-		boost::optional<std::wstring> get_nothrow() throw();
+		std::optional<std::wstring> get_nothrow() throw();
 		bool                          set(std::wstring const& value);
 		bool                          del();
 

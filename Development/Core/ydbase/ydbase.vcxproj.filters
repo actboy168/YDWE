@@ -581,6 +581,9 @@
     <ClInclude Include="base\util\list_of.h">
       <Filter>base\util</Filter>
     </ClInclude>
+    <ClInclude Include="base\util\optional.h">
+      <Filter>base\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

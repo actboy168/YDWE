@@ -4,8 +4,8 @@
 #include <base/hook/iat.h>
 #include <base/hook/inline.h>
 #include <base/util/foreach.h>	  	  		
-#include <base/filesystem.h>
-#include <boost/optional.hpp>
+#include <base/filesystem.h>   
+#include <base/util/optional.h>
 #include <cstdint>
 #include <array>   
 #include <map>
@@ -47,7 +47,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 			return base::std_call<void*>(real::SMemAlloc, amount, ".\\SFile.cpp", 4072, 0);
 		}
 
-		boost::optional<fs::path> find_file(const std::string& filename)
+		std::optional<fs::path> find_file(const std::string& filename)
 		{
 			for (uint32_t priority = 15; priority != 0; --priority)
 			{
@@ -55,12 +55,12 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 				{
 					if (fs::exists(it / filename))
 					{
-						return boost::optional<fs::path>(it / filename);
+						return std::optional<fs::path>(it / filename);
 					}
 				}
 			}
 
-			return boost::optional<fs::path>();
+			return std::optional<fs::path>();
 		}
 
 		bool open_path(const fs::path& p, uint32_t priority)
@@ -88,7 +88,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 
 		bool try_open_path(const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
 		{
-			boost::optional<fs::path> file_path = find_file(filename);
+			std::optional<fs::path> file_path = find_file(filename);
 			if (!file_path)
 			{
 				return false;
