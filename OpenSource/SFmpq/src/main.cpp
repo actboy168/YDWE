@@ -52,19 +52,21 @@ BOOL WINAPI MpqCloseUpdatedArchive(HANDLE hMpq, DWORD dwUnknown)
 
 BOOL WINAPI MpqAddFileToArchiveEx(HANDLE hMpq, LPCSTR szFileName, LPCSTR szArchivedName, DWORD dwFlags, DWORD dwCompressionType, DWORD dwCompressLevel)
 {
+	if (dwFlags & 0x00000001) {
+		dwFlags &= ~0x00000001;
+		dwFlags |= MPQ_FILE_REPLACEEXISTING;
+	}
 	return SFileAddFileEx(hMpq, AnsiToWide(szFileName).c_str(), szArchivedName, dwFlags, dwCompressionType, dwCompressionType);
 }
 
 HANDLE WINAPI MpqOpenArchiveForUpdate(LPCSTR szFileName, DWORD dwFlags, DWORD dwMaximumFilesInArchive)
 {
 	HANDLE hMpq = 0;
-	if (SFileCreateArchive(AnsiToWide(szFileName).c_str(), dwFlags, dwMaximumFilesInArchive, &hMpq))
+	if (SFileOpenArchive(AnsiToWide(szFileName).c_str(), 0, 0, &hMpq))
 	{
-		return hMpq;
-	}
-	if (SFileOpenArchive(AnsiToWide(szFileName).c_str(), 0, dwFlags, &hMpq))
-	{
-		SFileSetMaxFileCount(hMpq, dwMaximumFilesInArchive);
+		if (dwMaximumFilesInArchive > SFileGetMaxFileCount(hMpq)) {
+			SFileSetMaxFileCount(hMpq, dwMaximumFilesInArchive);
+		}
 		return hMpq;
 	}
 	return 0;
