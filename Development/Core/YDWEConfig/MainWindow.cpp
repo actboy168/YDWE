@@ -1,6 +1,6 @@
 ﻿#include "MainWindow.h"
 #include <slk/reader/IniReader.hpp>
-#include <slk/utility/list_of.h>
+#include <base/util/list_of.h>
 #include <slk/writer/IniWriter.hpp>
 #include <slk/reader/IniReader.cpp>
 #include <slk/reader/CommonReader.cpp>
@@ -70,7 +70,7 @@ namespace
 		uint8_t     m_count;
 	};
 
-	std::map<std::string, Attribute> configAttribute = slk::list_of
+	std::map<std::string, Attribute> configAttribute = base::list_of
 		("MapSave",                                 Attribute(4))
 		("War3Patch",                               Attribute(3))
 		("ScriptInjection",                         Attribute(2)) 
