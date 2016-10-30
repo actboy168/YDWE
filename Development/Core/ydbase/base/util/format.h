@@ -115,12 +115,23 @@ public:
 		return std::move(std::basic_string<CharT>(buffer_.begin(), buffer_.end()));
 	}
 
+	void accept() { }
+
 	template <class T>
 	void accept(const T& value)
 	{
 		fmt_ = print_string_literal(fmt_);
 		fmt_ = print_string_format(fmt_, value);
 	}
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1800	
+	template <class Arg, class... Args>
+	void accept(const Arg& arg, const Args& ... args)
+	{
+		accept(arg);
+		accept(args...);
+	}
+#endif
 
 private:
 	void format_value(const char_t* value, std::size_t len)
@@ -657,6 +668,7 @@ inline std::ostream& standard_output(const char*) { return std::cout; }
 inline std::wostream& standard_output(const wchar_t*) { return std::wcout; }
 }
 
+#if defined(_MSC_VER) && _MSC_VER < 1800
 #include <boost/preprocessor/repetition.hpp>
 #include <boost/preprocessor/punctuation/comma_if.hpp>
 
@@ -688,6 +700,30 @@ BOOST_PP_REPEAT(16, BASE_FORMAT_DEFINE_CREATER, ~)
 #undef BASE_FORMAT_DEFINE_ACCEPT
 #undef BASE_FORMAT_DEFINE_CREATER
 #undef BASE_FORMAT_THROW_ERROR
+#else	
+	template <class CharT, class... Args>
+	void format(std::basic_ostream<CharT, std::char_traits<CharT>>& out, const CharT* fmt, const Args& ... args)
+	{
+		format_detail::format_analyzer<CharT> fmt_iter(fmt);
+		fmt_iter.accept(args...);
+		fmt_iter.finish();
+		fmt_iter.write(out); 
+	}
+	template <class CharT, class... Args>
+	std::basic_string<CharT> format(const CharT* fmt, const Args& ... args)
+	{
+		format_detail::format_analyzer<CharT> fmt_iter(fmt);
+		fmt_iter.accept(args...);
+		fmt_iter.finish();
+		return std::move(fmt_iter.str());
+	}
+	template <class CharT, class... Args>
+	void printf(const CharT* fmt, const Args& ... args)
+	{
+		format(format_detail::standard_output(fmt), fmt, args...);
+	}
+#endif
+
 }
 
 #if defined(_MSC_VER)
