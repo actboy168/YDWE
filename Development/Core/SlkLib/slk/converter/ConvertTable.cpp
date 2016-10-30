@@ -1,9 +1,9 @@
 
 #include <slk/converter/ConvertTable.hpp>
 #include <slk/converter/AttributeMeta.hpp>
-#include <slk/utility/sequence.h>
+#include <slk/utility/sequence.h>	
+#include <base/util/string_algorithm.h>
 #include <algorithm>
-#include <boost/algorithm/string.hpp>
 
 namespace slk
 {
@@ -21,7 +21,7 @@ namespace slk
 
 			for (ForwardIteratorT It = InBegin; It != InEnd; ++It)
 			{
-				boost::algorithm::trim(*It);
+				base::algorithm::trim(*It);
 			}
 			std::remove_if(Result.begin(), Result.end(), [](typename ResultT::reference& It){ return It.size() != 4;});
 

@@ -707,7 +707,7 @@ namespace slk
 		return meta_map_; 
 	}
 
-	std::string const& ObjectManager::convert_string(std::string const& str)
+	std::string_view ObjectManager::convert_string(std::string_view const& str)
 	{
 		return converter_.def_val.Convert(converter_.wes.Convert(str));
 	}

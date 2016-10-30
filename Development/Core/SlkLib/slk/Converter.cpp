@@ -5,7 +5,7 @@
 #include <slk/InterfaceStorm.hpp>
 #include <slk/utility/sequence.h>
 #include <slk/utility/convert.h>
-#include <boost/algorithm/string.hpp>
+#include <base/util/string_algorithm.h>
 
 namespace slk
 {
@@ -35,13 +35,13 @@ namespace slk
 		: _Mybase(storm)
 	{ }
 
-	const std::string& WesConverter::Convert(const std::string& str)
+	std::string_view WesConverter::Convert(const std::string_view& str)
 	{
 		_Mybase::initialize("UI\\WorldEditStrings.txt");
 
 		if (0 == str.compare(0, _countof("WESTRING_") - 1, "WESTRING_"))
 		{
-			auto It = _Mybase::table_.find(str);
+			auto It = _Mybase::table_.find(str.to_string());
 			if (It != _Mybase::table_.end())
 			{
 				return It->second;
@@ -52,17 +52,18 @@ namespace slk
 	}
 
 
-	const std::string& DefaultValueConverter::Convert(const std::string& str) const
+	std::string_view DefaultValueConverter::Convert(const std::string_view& str) const
 	{
-		std::string tmp = boost::algorithm::trim_copy(str);
+		std::string_view tmp = str;
+		base::algorithm::trim(tmp);
 		if (tmp == "-")
 		{
-			static std::string s_dummy_zero = "0";
+			static std::string_view s_dummy_zero = "0";
 			return s_dummy_zero;
 		}
 		else if (tmp == "_")
 		{
-			static std::string s_dummy_empty = "";
+			static std::string_view s_dummy_empty = "";
 			return s_dummy_empty;
 		}
 

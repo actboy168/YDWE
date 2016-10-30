@@ -58,13 +58,13 @@ namespace slk
 		typedef BaseConverter<WesTable, WesReader> _Mybase;
 	public:
 		WesConverter(InterfaceStorm& storm);
-		const std::string& Convert(const std::string& str);
+		std::string_view Convert(const std::string_view& str);
 	};
 
 	class SLKLIB_API DefaultValueConverter 
 	{
 	public:
-		const std::string& Convert(const std::string& str) const;
+		std::string_view Convert(const std::string_view& str) const;
 	};
 
 	struct Converter

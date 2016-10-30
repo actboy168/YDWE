@@ -73,14 +73,13 @@ namespace NYDWE {
 	HANDLE WINAPI DetourWeCreateFileA(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
 	{
 		std::string fileName(lpFileName);
-		if (boost::iends_with(fileName, "war3mapMap.blp"))
+		std::string_view fileExt(fileName.data() + fileName.size() - 4, 4);
+		if (std::string_view(fileName.data() + fileName.size() - 14, 14) == "war3mapMap.blp")
 		{
 			LOGGING_TRACE(lg) << "WE is about to compile maps.";
 			gIsInCompileProcess = true;
 		}
-		else if (gIsInCompileProcess && (
-			boost::iends_with(fileName, ".w3x") ||
-			boost::iends_with(fileName, ".w3m")))
+		else if (gIsInCompileProcess && (fileName == ".w3x" || fileName == ".w3m"))
 		{
 			try {
 				fs::path p(fileName);

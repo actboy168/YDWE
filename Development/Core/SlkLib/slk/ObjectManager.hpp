@@ -161,7 +161,7 @@ namespace slk
 		bool load_destructable(SlkTable& table);
 		bool load_misc(SlkTable& table);
 		bool load_base(ROBJECT_TYPE::ENUM type, SlkTable& table);
-		std::string const& convert_string(std::string const& str);
+		std::string_view convert_string(std::string_view const& str);
 		Converter& get_converter();
 
 		template <class Table>             bool   load(const char* filename, Table& table);

@@ -59,7 +59,7 @@ namespace warcraft3 { namespace lua_engine {
 			return mgr_.load_singleton<slk::ROBJECT_TYPE::ENUM, slk::SlkTable>(type);
 		}
 
-		std::string const& convert_string(std::string const& str)
+		std::string_view convert_string(std::string_view const& str)
 		{
 			return mgr_.convert_string(str);
 		}
