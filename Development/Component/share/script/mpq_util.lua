@@ -1,6 +1,6 @@
 
 local storm    = ar.storm
-local stormlib = ar.stormlib
+local stormlib = require 'ffi.stormlib'
 
 mpq_util = {}
 
@@ -9,13 +9,7 @@ stormlib_mt.__index = {}
 
 function stormlib_mt.__index:import(path_in_archive, file_path)
 	log.trace("[stormlib]import file.")
-	local suc = stormlib.add_file_ex(
-			self.handle,
-			file_path,
-			path_in_archive,
-			stormlib.MPQ_FILE_COMPRESS | stormlib.MPQ_FILE_REPLACEEXISTING,
-			stormlib.MPQ_COMPRESSION_ZLIB,
-			stormlib.MPQ_COMPRESSION_ZLIB)
+	local suc = self.handle:add_file(path_in_archive, file_path)
 	if suc then
 		log.trace("succeeded: import " .. path_in_archive)
 		return true
@@ -31,32 +25,24 @@ function stormlib_mt.__index:extract(path_in_archive, file_path)
 	if not fs.exists(dir) then
 		fs.create_directories(dir)
 	end
-	return stormlib.extract_file(self.handle, file_path, path_in_archive)
+	return self.handle:extract(path_in_archive, file_path)
 end
 
 function stormlib_mt.__index:has(path_in_archive)
-	return stormlib.has_file(self.handle, path_in_archive)
+	return self.handle:has_file(path_in_archive)
 end
 
 function stormlib_mt.__index:load(path_in_archive)
-	local suc, buf = ar.stormlib.load_file(self.handle, path_in_archive)
-	if not suc then
-		return nil
-	end
-	return buf
+	return self.handle:load_file(path_in_archive)
 end
 
 function stormlib_mt.__index:close()
-	stormlib.close_archive(self.handle)
+	self.handle:close()
 end
 
-function mpq_util:stormlib(path, read_only)
+function mpq_util:stormlib(path, readonly)
 	local obj = {}
-	if read_only then
-		obj.handle = ar.stormlib.open_archive(path, 0, ar.stormlib.MPQ_OPEN_READ_ONLY)
-	else
-		obj.handle = ar.stormlib.open_archive(path, 0, 0)
-	end
+	obj.handle = stormlib.open(path, readonly)
 	if not obj.handle then
 		return nil
 	end

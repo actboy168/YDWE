@@ -3,7 +3,6 @@ require "compile.native"
 require "mpq_util"
 
 local storm    = ar.storm
-local stormlib = ar.stormlib
 
 -- 版本信息
 ydwe_version = sys.version {}
