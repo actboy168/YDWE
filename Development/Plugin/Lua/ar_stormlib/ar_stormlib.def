@@ -1,3 +1,0 @@
-LIBRARY "ar_stormlib"
-EXPORTS
-	luaopen_ar_stormlib
