@@ -33,8 +33,10 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
 		if (allow_local_files())
 		{
 			try {
-				fs::path filepath = base::path::get(base::path::DIR_EXE).remove_filename();
-				filepath /= u2w(std::string_view(path, path_size));
+				fs::path filepath = u2w(std::string_view(path, path_size));
+				if (!filepath.is_absolute()) {
+					filepath = base::path::get(base::path::DIR_EXE).remove_filename() / filepath;
+				}
 				if (fs::exists(filepath))
 				{
 					std::string buf = base::file::read_stream(filepath).read<std::string>();
