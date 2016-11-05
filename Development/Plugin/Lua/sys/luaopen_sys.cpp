@@ -109,22 +109,6 @@ namespace NLuaAPI { namespace NSys {
 		}
 	}
 
-	static void *LuaLoadLibrary(const luabind::object& name_object)
-	{
-		std::wstring name = detail::cast_wstring(name_object);
-		return LoadLibraryW(name.c_str());
-	}
-
-	static void LuaUnloadLibrary(void *lib)
-	{
-		FreeLibrary((HMODULE)lib);
-	}
-
-	static void *LuaShellExecute(const std::wstring &cmd)
-	{
-		return ShellExecuteW(NULL, 0, cmd.c_str(), 0, 0, SW_SHOW);
-	}
-
 	static void LuaGetVersionNumberString(lua_State *pState, const fs::path &module)
 	{
 		lua_newtable(pState);
@@ -146,61 +130,6 @@ namespace NLuaAPI { namespace NSys {
 			version_table["build"] = fv.build;
 		}
 		version_table.push(pState);
-	}
-
-	static void LuaSysGetClipboardText(lua_State* pState)
-	{
-		HANDLE dataHandle;
-
-		if (OpenClipboard(NULL))
-		{
-			if ((dataHandle = GetClipboardData(CF_TEXT)))
-			{
-				LPSTR data = (LPSTR)GlobalLock(dataHandle);
-				if (data)
-					lua_pushstring(pState, data);
-				else
-					lua_pushnil(pState);
-
-				GlobalUnlock(dataHandle);
-			}
-			else
-			{
-				lua_pushnil(pState);
-			}
-
-			CloseClipboard();
-		}
-		else
-		{
-			lua_pushnil(pState);
-		}
-	}
-
-	static bool LuaSysSetClipboardText(const std::string &text)
-	{
-		HANDLE globalMemoryHandle;
-		LPSTR pGlobalMemory;
-		bool result = false;
-		size_t size = text.size();
-
-		if (OpenClipboard(NULL))
-		{
-			if ((globalMemoryHandle = GlobalAlloc(GHND, size + 1)))
-			{
-				if ((pGlobalMemory = (LPSTR)GlobalLock(globalMemoryHandle)))
-				{
-					pGlobalMemory[text.copy(pGlobalMemory, size)] = '\0';
-					GlobalUnlock(globalMemoryHandle);
-					EmptyClipboard();
-					result = !!SetClipboardData(CF_TEXT, globalMemoryHandle);
-				}
-			}
-
-			CloseClipboard();
-		}
-
-		return result;
 	}
 
 #define tolstream(L, idx)	((luaL_Stream*)luaL_checkudata(L, idx, LUA_FILEHANDLE))
@@ -301,11 +230,6 @@ namespace NLuaAPI { namespace NSys {
 		bool result = p.redirect(stdinput, stdoutput, stderror);
 		lua_pushboolean(pState, result);
 	}
-
-	static void LuaSysSleep(int ms)
-	{
-		Sleep(ms);
-	}
 	
 	static int LuaGetProcessList(lua_State* L)
 	{
@@ -367,20 +291,6 @@ namespace NLuaAPI { namespace NSys {
 		lua_pushboolean(L, 1);
 		return 1;
 	}
-	static int LuaFindWindow(base::win::process& p, const std::wstring& name)
-	{
-		HWND hwnd = NULL;
-		while (NULL != (hwnd = FindWindowExW(0, hwnd, NULL, name.c_str())))
-		{
-			DWORD pid = 0;
-			GetWindowThreadProcessId(hwnd, &pid);
-			if (pid == p.id())
-			{
-				return (int)hwnd;
-			}
-		}
-		return 0;
-	}
 }}
 
 extern "C" __declspec(dllexport) int luaopen_sys(lua_State* L);
@@ -404,14 +314,7 @@ int luaopen_sys(lua_State *pState)
 		,
 
 		def("open_pipe", &NLuaAPI::NSys::LuaOpenPipe),
-		def("load_library", &NLuaAPI::NSys::LuaLoadLibrary),
-		def("unload_library", &NLuaAPI::NSys::LuaUnloadLibrary),
-		def("shell_execute", &NLuaAPI::NSys::LuaShellExecute),
-		def("get_module_version_info", &NLuaAPI::NSys::LuaGetVersionNumberString),
-		def("get_clipboard_text", &NLuaAPI::NSys::LuaSysGetClipboardText),
-		def("set_clipboard_text", &NLuaAPI::NSys::LuaSysSetClipboardText),
-		def("sleep", &NLuaAPI::NSys::LuaSysSleep),
-		def("find_window", &NLuaAPI::NSys::LuaFindWindow)
+		def("get_module_version_info", &NLuaAPI::NSys::LuaGetVersionNumberString)
 	];
 
 	module(pState, "process")
