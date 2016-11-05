@@ -1,14 +1,12 @@
 #pragma once
-#include <string>
-#include <unordered_map>
-#include <boost/variant.hpp>   
+
+#include <luabind/luabind.hpp>
 
 namespace NYDWE
 {
 
-typedef boost::variant<void *, bool, int, unsigned int, float, double, std::string, std::wstring> TEventDataValue;
-typedef std::unordered_map<std::string, TEventDataValue> TEventData;
-typedef std::function<int(TEventData&)> TEvent;
+typedef std::function<void(luabind::object&)> TEventData;
+typedef std::function<int(TEventData)> TEvent;
 
 enum EVENT_ID
 {

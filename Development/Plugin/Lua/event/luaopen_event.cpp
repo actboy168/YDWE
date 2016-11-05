@@ -12,23 +12,6 @@
 
 namespace NYDWE {
 
-	struct CEventDataTranslationVisitor : public boost::static_visitor<>
-	{
-		CEventDataTranslationVisitor(lua_State *pState, const std::string &key)
-			: pState_(pState), key_(key) {}
-
-		template <typename T>
-		void operator()(T &e) const
-		{
-			lua_pushlstring(pState_, key_.data(), key_.size());
-			luabind::object(pState_, e).push(pState_);
-			lua_settable(pState_, -3);
-		}
-
-		lua_State *pState_;
-		const std::string &key_;
-	};
-
 	struct lua_stack_guard
 	{
 		lua_stack_guard(lua_State* pState)
@@ -45,17 +28,13 @@ namespace NYDWE {
 		int        idx_;
 	};
 
-	static int LuaOnSignal(lua_State* L, TEventData &eventData, bool ignore_error, luabind::object const& func)
+	static int LuaOnSignal(lua_State* L, TEventData eventData, bool ignore_error, luabind::object const& func)
 	{
 		lua_stack_guard tmp_guard(L);
 
 		lua_newtable(L);
-		for (auto e : eventData)
-		{
-			boost::apply_visitor(CEventDataTranslationVisitor(L, e.first), e.second);
-		}
-
 		luabind::object event_data(luabind::from_stack(L, -1));
+		eventData(event_data);
 
 		if (ignore_error) 
 		{

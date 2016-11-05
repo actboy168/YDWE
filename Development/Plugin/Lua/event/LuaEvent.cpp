@@ -9,7 +9,8 @@
 #include <base/hook/inline.h>
 #include <base/hook/iat.h>
 #include <base/hook/fp_call.h>	  
-#include <base/com/guard.h>
+#include <base/com/guard.h>	 
+#include <base/lua/luabind.h>
 
 #include "YDWEEvent.h"
 #include "YDWELogger.h"
@@ -33,13 +34,14 @@ namespace NYDWE {
 		// Initialize COM	   
 		base::com::guard com;
 
-		TEventData eventData;
-		event_array[EVENT_WE_START](eventData);
+		event_array[EVENT_WE_START]([&](luabind::object&){
+		});
 
 		int32_t result = base::std_call<int32_t>(pgTrueWeWinMain, instance, prevInstance, commandLine, showCommand);
 
-		eventData.clear();
-		event_array[EVENT_WE_EXIT](eventData);
+		event_array[EVENT_WE_EXIT]([&](luabind::object&){
+
+		});
 
 		LOGGING_INFO(lg) << "Main program exit.";
 
@@ -60,10 +62,9 @@ namespace NYDWE {
 		std::wstring_view fileExt(fileName.data() + fileName.size() - 4, 4);
 		if (gIsInCompileProcess && (fileExt == L".w3x" || fileExt == L".w3m"))
 		{
-			TEventData eventData;
-			eventData["map_path"] = fileName;
-			event_array[EVENT_SAVE_MAP](eventData);
-
+			event_array[EVENT_SAVE_MAP]([&](luabind::object& data){
+				data["map_path"] = fileName;
+			});
 			gIsInCompileProcess = false;
 		}
 
@@ -85,9 +86,9 @@ namespace NYDWE {
 				fs::path p(fileName);
 				p = p.parent_path().remove_filename() / p.filename();
 
-				TEventData eventData;
-				eventData["map_path"] = p.wstring();
-				event_array[EVENT_PRE_SAVE_MAP](eventData);
+				event_array[EVENT_PRE_SAVE_MAP]([&](luabind::object& data){
+					data["map_path"] = p.wstring();
+				});
 			}
 			catch (...) {				
 			}
@@ -108,14 +109,14 @@ namespace NYDWE {
 			fs::path currentWarcraftMap = base::path::get(base::path::DIR_EXE).remove_filename() / matcher.str(1);
 			LOGGING_TRACE(lg) << L"Executing map " << currentWarcraftMap.wstring();
 
-			TEventData eventData;
 			if (gIsInCompileProcess)
 			{
 				LOGGING_TRACE(lg) << "Need to compile...";
 
-				eventData["map_path"] = currentWarcraftMap.wstring();
+				int results = event_array[EVENT_SAVE_MAP]([&](luabind::object& data){
+					data["map_path"] = currentWarcraftMap.wstring();
+				});
 
-				int results = event_array[EVENT_SAVE_MAP](eventData);
 				gIsInCompileProcess = false;
 				if (results < 0)
 				{
@@ -129,14 +130,13 @@ namespace NYDWE {
 				LOGGING_TRACE(lg) << "No need to compile.";
 			}
 
-			eventData.clear();
-			eventData["map_path"] = currentWarcraftMap.wstring();
-			if (lpApplicationName)
-				eventData["application_name"] = base::a2w(std::string_view(lpApplicationName), base::conv_method::replace | '?');
-			if (lpCommandLine)
-				eventData["command_line"] = base::a2w(std::string_view(lpCommandLine), base::conv_method::replace | '?');
-
-			int results = event_array[EVENT_TEST_MAP](eventData);
+			int results = event_array[EVENT_TEST_MAP]([&](luabind::object& data){
+				data["map_path"] = currentWarcraftMap.wstring();
+				if (lpApplicationName)
+					data["application_name"] = base::a2w(std::string_view(lpApplicationName), base::conv_method::replace | '?');
+				if (lpCommandLine)
+					data["command_line"] = base::a2w(std::string_view(lpCommandLine), base::conv_method::replace | '?');
+			});
 			return results >= 0;
 		}
 		else
@@ -161,13 +161,12 @@ namespace NYDWE {
 	uintptr_t pgTrueWeWindowProc;
 	LRESULT CALLBACK DetourWeWindowProc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam)
 	{
-		TEventData eventData;
-		eventData["handle"] = windowHandle;
-		eventData["message"] = message;
-		eventData["wparam"] = wParam;
-		eventData["lparam"] = lParam;
-
-		int results = event_array[EVENT_WINDOW_MESSAGE](eventData);
+		int results = event_array[EVENT_WINDOW_MESSAGE]([&](luabind::object& data){
+			data["handle"] = (void*)windowHandle;
+			data["message"] = message;
+			data["wparam"] = wParam;
+			data["lparam"] = lParam;
+		});
 		if (results < 0)
 		{
 			return 0;
@@ -206,14 +205,11 @@ namespace NYDWE {
 	{
 		if (hWnd == gWeMainWindowHandle)
 		{
-			// Main window menu
 			gWeMainMenuHandle = hMenu;
-
-			// Call menu initialization
-			TEventData eventData;
-			eventData["main_window_handle"] = hWnd;
-			eventData["main_menu_handle"] = hMenu;
-			event_array[EVENT_INIT_MENU](eventData);
+			int results = event_array[EVENT_INIT_MENU]([&](luabind::object& data){
+				data["main_window_handle"] = (void*)hWnd;
+				data["main_menu_handle"] = (void*)hMenu;
+			});
 
 			// Hook window
 			pgTrueWeWindowProc = (decltype(pgTrueWeWindowProc))GetWindowLongPtrA(gWeMainWindowHandle, GWL_WNDPROC);
@@ -232,12 +228,12 @@ namespace NYDWE {
 		{
 			if (lParam)
 			{
-				TEventData eventData;
-				eventData["handle"] = dialogHandle;
-				eventData["message"] = message;
-				eventData["wparam"] = wParam;
-				eventData["lparam"] = base::a2u((const char*)lParam);
-				int results = event_array[EVENT_DIALOG_MESSAGE](eventData);
+				int results = event_array[EVENT_DIALOG_MESSAGE]([&](luabind::object& data){
+					data["handle"] = (void*)dialogHandle;
+					data["message"] = message;
+					data["wparam"] = wParam;
+					data["lparam"] = base::a2u((const char*)lParam);
+				});
 				if (results < 0)
 				{
 					return 0;
@@ -246,12 +242,12 @@ namespace NYDWE {
 		}
 		else if (message == WM_COMMAND)
 		{
-			TEventData eventData;
-			eventData["handle"] = dialogHandle;
-			eventData["message"] = message;
-			eventData["wparam"] = wParam;
-			eventData["lparam"] = lParam;
-			int results = event_array[EVENT_DIALOG_MESSAGE](eventData);
+			int results = event_array[EVENT_DIALOG_MESSAGE]([&](luabind::object& data){
+				data["handle"] = (void*)dialogHandle;
+				data["message"] = message;
+				data["wparam"] = wParam;
+				data["lparam"] = lParam;
+			});
 			if (results < 0)
 			{
 				return 0;
@@ -279,11 +275,11 @@ namespace NYDWE {
 	{
 		uint32_t object_type = ((uint32_t(__fastcall*)(uintptr_t))(*(uintptr_t*)(*(uintptr_t*)this_ + 0x18)))(this_);
 
-		TEventData eventData;
-		eventData["class"] = this_;
-		eventData["object_type"] = object_type;
-		eventData["default_id"] = default_id;
-		int results = event_array[EVENT_NEW_OBJECT_ID](eventData);
+		int results = event_array[EVENT_NEW_OBJECT_ID]([&](luabind::object& data){
+			data["class"] = this_;
+			data["object_type"] = object_type;
+			data["default_id"] = default_id;
+		});
 		if (results < 0)
 		{
 			return default_id;
@@ -317,9 +313,9 @@ namespace NYDWE {
 	uintptr_t pgTrueMssRIBLoadProviderLibrary;
 	static HPROVIDER AILCALL DetourMssRIBLoadProviderLibrary(C8 const FAR *fileName)
 	{
-		TEventData eventData;
-		eventData["library_name"] = std::string(fileName);
-		int results = event_array[EVENT_MSS_LOAD](eventData);
+		int results = event_array[EVENT_MSS_LOAD]([&](luabind::object& data){
+			data["library_name"] = std::string(fileName);
+		});
 		if (results < 0)
 			return 0;
 		return base::std_call<HPROVIDER>(pgTrueMssRIBLoadProviderLibrary, fileName);
