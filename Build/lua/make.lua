@@ -77,6 +77,7 @@ if fs.exists(path.Build / 'include'/ 'version') then
 #endif // YDWE_VERSION_H_INCLUDED
 	]]):format(major, minor, revised, build))
 	f:close()
+	print(('build %d.%d.%d.%d'):format(major, minor, revised, build))
 end
 
 -- Step.4 编译
