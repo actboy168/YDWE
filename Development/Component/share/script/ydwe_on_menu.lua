@@ -11,7 +11,7 @@ local main_window_handle = nil
 local function launch_config()
 	local config_program = fs.ydwe_path() / "bin" / "YDWEConfig.exe"
 	local command_line = string.format('"%s"', config_program:string())
-	sys.shell_execute(command_line)
+	sys.spawn(command_line, fs.ydwe_path())
 end
 
 -- 启动魔兽
@@ -44,7 +44,7 @@ end
 
 -- 打开官网
 local function open_offical_site()
-	sys.shell_execute("http://www.ydwe.net")
+	os.execute('explorer "http://www.ydwe.net"')
 end
 
 -- 导出WE文件
