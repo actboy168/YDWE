@@ -157,9 +157,9 @@ function event.EVENT_SAVE_MAP(event_data)
 	if save_type == 3 then
 		-- 决定第二份的路径
 		if save_option.runtime_version:is_new() then
-			map_path_aux = map_path:aux_filename("hashtable")
+			map_path_aux = fs.aux_filename(map_path, "hashtable")
 		else
-			map_path_aux = map_path:aux_filename("returnbug")
+			map_path_aux = fs.aux_filename(map_path, "returnbug")
 		end
 
 		log.trace("Making copy of the original map.")

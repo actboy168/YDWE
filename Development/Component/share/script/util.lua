@@ -22,7 +22,7 @@ end
 
 -- 给路径末尾，扩展名前添加内容
 -- 效果：("abc.w3x", "def") -> "abcdef.w3x"
-function fs.path.aux_filename(self, str)
+function fs.aux_filename(self, str)
 	return self:parent_path() / (self:stem():string() .. str .. self:extension():string())
 end
 

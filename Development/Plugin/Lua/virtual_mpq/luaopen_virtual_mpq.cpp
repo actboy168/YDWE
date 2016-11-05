@@ -1,5 +1,6 @@
 #include <lua.hpp>
-#include <luabind/luabind.hpp>
+#include <luabind/luabind.hpp>	   
+#include <base/lua/luabind.h>
 #include <base/warcraft3/virtual_mpq.h>	  
 #include <LuaEngine/logging.h>
 

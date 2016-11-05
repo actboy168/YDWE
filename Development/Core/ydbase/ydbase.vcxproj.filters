@@ -584,6 +584,9 @@
     <ClInclude Include="base\util\optional.h">
       <Filter>base\util</Filter>
     </ClInclude>
+    <ClInclude Include="base\lua\luabind\converter_fs_path.h">
+      <Filter>base\lua\luabind</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

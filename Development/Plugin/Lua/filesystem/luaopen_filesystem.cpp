@@ -1,235 +1,409 @@
-
 #pragma warning(push, 3)
 #include <lua.hpp>
-#include <luabind/luabind.hpp>
-#include <luabind/object.hpp>
-#include <luabind/operator.hpp>
-#include <luabind/return_reference_to_policy.hpp>
-#include <luabind/iterator_policy.hpp>
-#include <base/lua/luabind.h>
 #pragma warning(pop)	  		
 #include <base/filesystem.h>
 #include <base/path/service.h>
-#include <iterator>
+#include <base/util/unicode.h>	
+#include <base/lua/make_range.h>
 
-namespace NLuaAPI { namespace NFileSystemAdditional {
+#define FS_TRY     try {   
+#define FS_TRY_END } catch (const std::exception& e) { lua_pushstring(L, base::a2u(e.what()).c_str()); return lua_error(L); }
 
-	void LuaCopyFile(const fs::path &fromPath, const fs::path &toPath, bool overwritten)
+namespace luafs {
+	static std::wstring lua_towstring(lua_State* L, int idx)
 	{
-		fs::copy_file(fromPath, toPath, overwritten ? fs::copy_option::overwrite_if_exists : fs::copy_option::fail_if_exists);
+		size_t len = 0;
+		const char* buf = luaL_checklstring(L, idx, &len);
+		return base::u2w(std::string_view(buf, len), base::conv_method::replace | '?');
 	}
 
-	void LuaPermissions(lua_State *pState, fs::path const& p, const luabind::object& prms_obj)
+	static void lua_pushwstring(lua_State* L, const std::wstring& str)
 	{
-		switch (luabind::type(prms_obj))
+		std::string utf8 = base::w2u(str, base::conv_method::replace | '?');
+		lua_pushlstring(L, utf8.data(), utf8.size());
+	}
+
+	namespace path {
+		class directory_container
 		{
-		case LUA_TNUMBER:
-			{
-				boost::optional<uint32_t> prms_opt = luabind::object_cast_nothrow<uint32_t>(prms_obj);
-				if (prms_opt)
+		public:
+			directory_container(directory_container const& that) : p_(that.p_) { }
+			directory_container(fs::path const& that) : p_(that) { }
+			fs::directory_iterator cbegin() const {
+				boost::system::error_code ec;
+				auto r = fs::directory_iterator(p_, ec);
+				if (!!ec)
 				{
-					fs::permissions(p, static_cast<fs::perms>(prms_opt.get()));
+					return fs::directory_iterator();
 				}
+				return r;
 			}
-			break;
-		case LUA_TNIL:
-			{
-				fs::perms prms = fs::status(p).permissions();
-				lua_pushnumber(pState, static_cast<uint32_t>(prms));
+			fs::directory_iterator begin() const { return cbegin(); }
+			fs::directory_iterator begin()       { return cbegin(); }
+			fs::directory_iterator end() const   { return fs::directory_iterator(); }
+			fs::directory_iterator end()         { return fs::directory_iterator(); }
+		private:
+		private:
+			const fs::path& p_;
+		};
+
+		static void* newudata(lua_State* L)
+		{
+			void* storage = lua_newuserdata(L, sizeof(fs::path));
+			luaL_getmetatable(L, "filesystem");
+			lua_setmetatable(L, -2);
+			return storage;
+		}
+
+		fs::path& to(lua_State* L, int idx)
+		{
+			return *(fs::path*)luaL_checkudata(L, idx, "filesystem");
+		}
+
+		static int constructor_(lua_State* L)
+		{
+			void* storage = newudata(L);
+			new (storage)fs::path();
+			return 1;
+		}
+
+		static int constructor_(lua_State* L, const std::wstring& path)
+		{
+			void* storage = newudata(L);
+			new (storage)fs::path(path);
+			return 1;
+		}
+
+		static int constructor_(lua_State* L, std::wstring&& path)
+		{
+			void* storage = newudata(L);
+			new (storage)fs::path(std::forward<std::wstring>(path));
+			return 1;
+		}
+
+		static int constructor_(lua_State* L, const fs::path& path)
+		{
+			void* storage = newudata(L);
+			new (storage)fs::path(path);
+			return 1;
+		}
+
+		static int constructor_(lua_State* L, fs::path&& path)
+		{
+			void* storage = newudata(L);
+			new (storage)fs::path(std::forward<fs::path>(path));
+			return 1;
+		}
+
+		static int constructor(lua_State* L)
+		{
+			FS_TRY;
+			if (lua_gettop(L) == 0) {
+				return constructor_(L);
 			}
-			break;
-		default:
-			break;
+			switch (lua_type(L, 1)) {
+			case LUA_TSTRING:
+				return constructor_(L, lua_towstring(L, 1));
+			case LUA_TUSERDATA:
+				return constructor_(L, to(L, 1));
+			}
+			luaL_checktype(L, 1, LUA_TSTRING);
+			return 0;
+			FS_TRY_END;
+		}
+
+		static int string(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			lua_pushwstring(L, self.wstring());
+			return 1;
+			FS_TRY_END;
+		}
+
+		static int filename(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			return constructor_(L, std::move(self.filename()));
+			FS_TRY_END;
+		}
+
+		static int parent_path(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			return constructor_(L, std::move(self.parent_path()));
+			FS_TRY_END;
+		}
+
+		static int stem(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			return constructor_(L, std::move(self.stem()));
+			FS_TRY_END;
+		}
+
+		static int extension(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			return constructor_(L, std::move(self.extension()));
+			FS_TRY_END;
+		}
+
+		static int is_absolute(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			lua_pushboolean(L, self.is_absolute());
+			return 1;
+			FS_TRY_END;
+		}
+
+		static int is_relative(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			lua_pushboolean(L, self.is_relative());
+			return 1;
+			FS_TRY_END;
+		}
+
+		static int remove_filename(lua_State* L)
+		{
+			FS_TRY;
+			fs::path& self = path::to(L, 1);
+			self.remove_filename();
+			return 1;
+			FS_TRY_END;
+		}
+
+		static int replace_extension(lua_State* L)
+		{
+			FS_TRY;
+			fs::path& self = path::to(L, 1);
+			switch (lua_type(L, 2)) {
+			case LUA_TSTRING:
+				self.replace_extension(lua_towstring(L, 2));
+				lua_settop(L, 1);
+				return 1;
+			case LUA_TUSERDATA:
+				self.replace_extension(to(L, 2));
+				lua_settop(L, 1);
+				return 1;
+			}
+			luaL_checktype(L, 2, LUA_TSTRING);
+			return 0;
+			FS_TRY_END;
+		}
+
+		static int list_directory(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);  
+			base::lua::make_range(L, directory_container(self));
+			lua_pushnil(L);
+			lua_pushnil(L);
+			return 3;
+			FS_TRY_END;
+		}
+
+		static int mt_div(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			switch (lua_type(L, 2)) {
+			case LUA_TSTRING:
+				return constructor_(L, std::move(self / lua_towstring(L, 2)));
+			case LUA_TUSERDATA:
+				return constructor_(L, std::move(self / to(L, 2)));
+			}
+			luaL_checktype(L, 2, LUA_TSTRING);
+			return 0;
+			FS_TRY_END;
+		}
+
+		static int mt_eq(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			const fs::path& rht = path::to(L, 2);
+			lua_pushboolean(L, self == rht);
+			return 1;
+			FS_TRY_END;
+		}
+
+		static int mt_gc(lua_State* L)
+		{
+			FS_TRY;
+			fs::path& self = path::to(L, 1);
+			self.~path();
+			return 0;
+			FS_TRY_END;
+		}
+
+		static int mt_tostring(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			lua_pushwstring(L, self.wstring());
+			return 1;
+			FS_TRY_END;
 		}
 	}
-	
-	class directory_iterator
-		: public std::iterator<std::input_iterator_tag, const fs::path>
+
+	static int exists(lua_State* L)
 	{
-		typedef directory_iterator iterator;
+		FS_TRY;
+		const fs::path& p = path::to(L, 1);
+		lua_pushboolean(L, fs::exists(p));
+		return 1; 
+		FS_TRY_END;
+	}
 
-	public:
-		directory_iterator()
-		{ }
-
-		explicit directory_iterator(const fs::path& p)
-			: itr_()
-		{
-			boost::system::error_code ec;
-			itr_ = fs::directory_iterator(p, ec);
-			if (!!ec)
-			{
-				itr_ = fs::directory_iterator();
-			}
-		}
-
-		directory_iterator(const fs::path& p, boost::system::error_code& ec)
-			: itr_(p, ec)
-		{ }
-
-		~directory_iterator() 
-		{ }
-
-		reference operator*() const
-		{
-			return itr_->path();
-		}
-
-		iterator operator++(int)
-		{
-			auto result = *this;
-			++(*this);
-			return result;
-		}
-
-		iterator& operator++()
-		{
-			boost::system::error_code ec;
-			itr_.increment(ec);
-			if (!!ec)
-			{
-				itr_ = fs::directory_iterator();
-			}
-			return *this;
-		}
-
-		bool operator==(const iterator& other) const
-		{
-			return itr_ == other.itr_;
-		}
-
-		bool operator!=(const iterator& other) const
-		{
-			return !operator==(other);
-		}
-
-	private:
-		fs::directory_iterator itr_;
-	};
-
-	class directory_container
+	static int is_directory(lua_State* L)
 	{
-	public:
-		directory_container(directory_container const& that)
-			: p_(that.p_)
-		{ }
+		FS_TRY;
+		const fs::path& p = path::to(L, 1);
+		lua_pushboolean(L, fs::is_directory(p));
+		return 1;
+		FS_TRY_END;
+	}
 
-		directory_container(fs::path const& that)
-			: p_(that)
-		{ }
-
-		directory_iterator begin()
-		{
-			return directory_iterator(p_);
-		}
-
-		directory_iterator begin() const
-		{
-			return directory_iterator(p_);
-		}
-
-		directory_iterator end()
-		{
-			return directory_iterator();
-		}
-
-		directory_iterator end() const
-		{
-			return directory_iterator();
-		}
-
-	private:
-		fs::path p_;
-	};
-
-	directory_container LuaDirectoryFactory(fs::path const& p)
+	static int create_directory(lua_State* L)
 	{
-		return directory_container(p);
+		FS_TRY;
+		const fs::path& p = path::to(L, 1);
+		lua_pushboolean(L, fs::create_directory(p));
+		return 1;
+		FS_TRY_END;
+	}
+
+	static int create_directories(lua_State* L)
+	{
+		FS_TRY;
+		const fs::path& p = path::to(L, 1);
+		lua_pushboolean(L, fs::create_directories(p));
+		return 1;
+		FS_TRY_END;
+	}
+
+	static int rename(lua_State* L)
+	{
+		FS_TRY;
+		const fs::path& from = path::to(L, 1);
+		const fs::path& to = path::to(L, 2);
+		fs::rename(from, to);
+		return 0;
+		FS_TRY_END;
+	}
+
+	static int remove(lua_State* L)
+	{
+		FS_TRY;
+		const fs::path& p = path::to(L, 1);
+		lua_pushboolean(L, fs::remove(p));
+		return 1;
+		FS_TRY_END;
+	}
+
+	static int remove_all(lua_State* L)
+	{
+		FS_TRY;
+		const fs::path& p = path::to(L, 1);
+		lua_pushinteger(L, fs::remove_all(p));
+		return 1;
+		FS_TRY_END;
+	}
+
+	static int current_path(lua_State* L)
+	{
+		FS_TRY;
+		if (lua_gettop(L) == 0) {
+			return path::constructor_(L, std::move(fs::current_path()));
+		}
+		const fs::path& p = path::to(L, 1);
+		fs::current_path(p);
+		return 0;
+		FS_TRY_END;
+	}
+
+	static int copy_file(lua_State* L)
+	{
+		FS_TRY;
+		const fs::path& from = path::to(L, 1);
+		const fs::path& to = path::to(L, 2);
+		bool overwritten = !!lua_toboolean(L, 3);
+		fs::copy_file(from, to, overwritten ? fs::copy_option::overwrite_if_exists : fs::copy_option::fail_if_exists);
+		return 0;
+		FS_TRY_END;
+	}
+
+	static int get(lua_State* L)
+	{
+		FS_TRY;
+		lua_Integer option = luaL_checkinteger(L, 1);
+		return path::constructor_(L, std::move(base::path::get(base::path::PATH_TYPE(option))));
+		FS_TRY_END;
+	}
+}
+ 
+namespace base { namespace lua {
+	template <>
+	int convert_to_lua(lua_State* L, const fs::directory_entry& v)
+	{
+		luafs::path::constructor_(L, v.path());
+		return 1;
 	}
 }}
 
-extern "C" __declspec(dllexport) int luaopen_filesystem(lua_State* L);
-
-int luaopen_filesystem(lua_State *pState)
+extern "C" __declspec(dllexport)
+int luaopen_filesystem(lua_State* L)
 {
-	using namespace luabind;
+	static luaL_Reg mt[] = {
+		{ "string", luafs::path::string },
+		{ "filename", luafs::path::filename },
+		{ "parent_path", luafs::path::parent_path },
+		{ "stem", luafs::path::stem },
+		{ "extension", luafs::path::extension },
+		{ "is_absolute", luafs::path::is_absolute },
+		{ "is_relative", luafs::path::is_relative },
+		{ "remove_filename", luafs::path::remove_filename },
+		{ "replace_extension", luafs::path::replace_extension },
+		{ "list_directory", luafs::path::list_directory },
+		{ "__div", luafs::path::mt_div },
+		{ "__eq", luafs::path::mt_eq },
+		{ "__gc", luafs::path::mt_gc },
+		{ "__tostring", luafs::path::mt_tostring },
+		{ NULL, NULL }
+	};
+	luaL_newmetatable(L, "filesystem");
+	luaL_setfuncs(L, mt, 0);
+	lua_pushvalue(L, -1);
+	lua_setfield(L, -2, "__index");
 
-	// Bind filesystem
-	module(pState, "fs")
-	[
-		class_<fs::path>("path")
-			.def(constructor<>())
-			.def(constructor<const std::wstring &>())
-			.def(constructor<const fs::path &>())
-			.def("string", (std::wstring (fs::path::*)() const)&fs::path::string)
-			.def("generic_string", (std::wstring (fs::path::*)() const)&fs::path::generic_string)
-			.def("native", &fs::path::native)
-			.def("filename", &fs::path::filename)
-			.def("root_path", &fs::path::root_path)
-			.def("root_name", &fs::path::root_name)
-			.def("root_directory", &fs::path::root_directory)
-			.def("relative_path", &fs::path::relative_path)
-			.def("parent_path", &fs::path::parent_path)
-			.def("stem", &fs::path::stem)
-			.def("extension", &fs::path::extension)
-			.def("clear", &fs::path::clear)
-			.def("swap", &fs::path::swap)
-			.def("empty", &fs::path::empty)
-			.def("is_absolute", &fs::path::is_absolute)
-			.def("is_relative", &fs::path::is_relative)
-			.def("has_root_path", &fs::path::has_root_path)
-			.def("has_root_name", &fs::path::has_root_name)
-			.def("has_root_directory", &fs::path::has_root_directory)
-			.def("has_relative_path", &fs::path::has_relative_path)
-			.def("has_filename", &fs::path::has_filename)
-			.def("has_parent_path", &fs::path::has_parent_path)
-			.def("has_stem", &fs::path::has_stem)
-			.def("has_extension", &fs::path::has_extension)
-			.def("make_preferred", &fs::path::make_preferred, return_reference_to(_1))
-			.def("remove_filename", &fs::path::remove_filename, return_reference_to(_1))
-			.def("replace_extension", &fs::path::replace_extension, return_reference_to(_1))
-			.def("permissions", NLuaAPI::NFileSystemAdditional::LuaPermissions)
-			.def("list_directory", &NLuaAPI::NFileSystemAdditional::LuaDirectoryFactory, return_stl_iterator)
-			.def(const_self / const_self)
-			.def(other<const std::wstring &>() / const_self)
-			.def(const_self / other<const std::wstring &>())
-			.def(const_self == const_self)
-			.def(other<const std::wstring &>() == const_self)
-			.def(const_self == other<const std::wstring &>())
-			.def(const_self < const_self)
-			.def(other<const std::wstring &>() < const_self)
-			.def(const_self < other<const std::wstring &>())
-			.def(const_self <= const_self)
-			.def(other<const std::wstring &>() <= const_self)
-			.def(const_self <= other<const std::wstring &>())
-			.def(tostring(const_self))
-		,
-		
-		def("exists", (bool (*)(const fs::path &))&fs::exists),
-		def("is_directory", (bool (*)(const fs::path &))&fs::is_directory),
-		def("is_regular_file", (bool (*)(const fs::path &))&fs::is_regular_file),
-		def("is_empty", (bool (*)(const fs::path &))&fs::is_empty),
-		def("is_other", (bool (*)(const fs::path &))&fs::is_other),
-		def("file_size", (boost::uintmax_t (*)(const fs::path &))&fs::file_size),
-		def("create_directory", (bool (*)(const fs::path &))&fs::create_directory),
-		def("create_directories", (bool (*)(const fs::path &))&fs::create_directories),
-		def("remove", (bool (*)(const fs::path &))&fs::remove),
-		def("remove_all", (boost::uintmax_t (*)(const fs::path &))&fs::remove_all),
-		def("rename", (void (*)(const fs::path &, const fs::path &))&fs::rename),
-		def("equivalent", (bool (*)(const fs::path &, const fs::path &))&fs::equivalent),
-		def("set_current_path", (void (*)(const fs::path &))&fs::current_path),
-		def("current_path", (fs::path (*)())&fs::current_path),
-		def("initial_path", (fs::path (*)())&fs::initial_path),
-		def("system_complete", (fs::path (*)(const fs::path &))&fs::system_complete),
-		def("canonical", (fs::path (*)(const fs::path &, const fs::path &))&fs::canonical),
-		def("copy_file", NLuaAPI::NFileSystemAdditional::LuaCopyFile),
-		def("get", (fs::path (*)(uint32_t))&base::path::get)
-	];
+	static luaL_Reg f[] = {
+		{ "path", luafs::path::constructor },
+		{ "exists", luafs::exists },
+		{ "is_directory", luafs::is_directory },
+		{ "create_directory", luafs::create_directory },
+		{ "create_directories", luafs::create_directories },
+		{ "rename", luafs::rename },
+		{ "remove", luafs::remove },
+		{ "remove_all", luafs::remove_all },
+		{ "current_path", luafs::current_path },
+		{ "copy_file", luafs::copy_file },
+		{ "get", luafs::get },
+		{ NULL, NULL }
+	};	
+	lua_newtable(L);
+	luaL_setfuncs(L, f, 0);
 
-	lua_getglobal(pState, "fs");
-	object constantTable(from_stack(pState, -1));
-
-#define LUA_AREA_CONSTANT(name) constantTable[#name] = base::path:: ## name
+#define LUA_AREA_CONSTANT(val) \
+	lua_pushinteger(L, base::path:: ## val); \
+	lua_setfield(L, -2, # val);
 
 	LUA_AREA_CONSTANT(DIR_EXE);
 	LUA_AREA_CONSTANT(DIR_MODULE);
@@ -244,7 +418,7 @@ int luaopen_filesystem(lua_State *pState)
 	LUA_AREA_CONSTANT(DIR_COMMON_APP_DATA);
 	LUA_AREA_CONSTANT(DIR_PROFILE);
 	LUA_AREA_CONSTANT(DIR_LOCAL_APP_DATA);
-	LUA_AREA_CONSTANT(DIR_SOURCE_ROOT); 
+	LUA_AREA_CONSTANT(DIR_SOURCE_ROOT);
 	LUA_AREA_CONSTANT(DIR_USER_DESKTOP);
 	LUA_AREA_CONSTANT(DIR_COMMON_DESKTOP);
 	LUA_AREA_CONSTANT(DIR_USER_QUICK_LAUNCH);
@@ -253,6 +427,7 @@ int luaopen_filesystem(lua_State *pState)
 	LUA_AREA_CONSTANT(DIR_PERSONAL);
 	LUA_AREA_CONSTANT(DIR_MYPICTURES);
 
+	lua_setglobal(L, "fs");
 	return 0;
 }
 
@@ -264,6 +439,5 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 	{
 		DisableThreadLibraryCalls(module);
 	}
-
 	return TRUE;
 }

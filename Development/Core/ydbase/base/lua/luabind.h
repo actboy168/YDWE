@@ -3,7 +3,8 @@
 #include <base/lua/luabind/converter_pvoid.h>
 #include <base/lua/luabind/converter_std_wstring.h>
 #include <base/lua/luabind/converter_std_string_view.h>
-#include <base/lua/luabind/converter_uint32_t.h>
+#include <base/lua/luabind/converter_uint32_t.h>	 
+#include <base/lua/luabind/converter_fs_path.h>
 
 namespace base { namespace lua {
    template <class T>
