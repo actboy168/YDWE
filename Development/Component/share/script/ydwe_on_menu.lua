@@ -84,16 +84,6 @@ local function file_export()
 	end
 end
 
--- 编码转换
-local function encoding_conversion()
-	local str = sys.get_clipboard_text()
-	if str then
-		str = __(str)
-		if str then sys.set_clipboard_text(str) end
-	end
-end
-
-
 -- Lua测试
 local function lua_test()
 	-- 打开对话框让用户输入
@@ -149,8 +139,6 @@ local YDWE_MENU_ID_SHOW_CJASS_VERSION = YDWE_MENU_ID_BASE + 3
 local YDWE_MENU_ID_OFFICIAL_SITE = YDWE_MENU_ID_BASE + 4
 -- 导出文件菜单ID
 local YDWE_MENU_ID_FILE_EXPORT = YDWE_MENU_ID_BASE + 5
--- 编码转换菜单ID
-local YDWE_MENU_ID_ENCODING_CONVERSION = YDWE_MENU_ID_BASE + 6
 -- 感谢信息显示菜单ID
 local YDWE_MENU_ID_SHOW_CREDIT = YDWE_MENU_ID_BASE + 7
 -- Lua测试菜单ID
@@ -186,7 +174,6 @@ function event.EVENT_INIT_MENU(event_data)
 	gui.append_menu(ydwe_menu_handle, gui.MF_STRING, YDWE_MENU_ID_SHOW_CJASS_VERSION, _("Show c&Jass version"))
 	gui.append_menu(ydwe_menu_handle, gui.MF_STRING, YDWE_MENU_ID_OFFICIAL_SITE, _("Launch YDWE &official website"))
 	gui.append_menu(ydwe_menu_handle, gui.MF_STRING, YDWE_MENU_ID_FILE_EXPORT, _("&Export WE file"))
-	gui.append_menu(ydwe_menu_handle, gui.MF_STRING, YDWE_MENU_ID_ENCODING_CONVERSION, _("UTF-8 to &native"))
 	gui.append_menu(ydwe_menu_handle, gui.MF_STRING, YDWE_MENU_ID_LUA_TEST, _("&Lua Test"))
 	gui.append_menu(ydwe_menu_handle, gui.MF_STRING, YDWE_MENU_ID_SHOW_CREDIT, _("Cre&dits"))
 
@@ -223,8 +210,6 @@ function event.EVENT_WINDOW_MESSAGE(event_data)
 			open_offical_site()
 		elseif menu_id == YDWE_MENU_ID_FILE_EXPORT then
 			file_export()
-		elseif menu_id == YDWE_MENU_ID_ENCODING_CONVERSION then
-			encoding_conversion()
 		elseif menu_id == YDWE_MENU_ID_SHOW_CREDIT then
 			show_credit()
 		elseif menu_id == YDWE_MENU_ID_LUA_TEST then
