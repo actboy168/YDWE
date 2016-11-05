@@ -52,9 +52,31 @@ fs.remove_all(path.Development / 'Build' / 'lib' / configuration)
 fs.remove_all(path.Build / 'publish' / configuration)
 
 -- Step.3 版本信息
-if fs.exists(path.Build / 'include'/ 'YDWEVersion.h') then
+local function split(str, p)
+	local rt = {}
+	str:gsub('[^'..p..']+', function (w) table.insert(rt, w) end)
+	return rt
+end
+if fs.exists(path.Build / 'include'/ 'version') then
     fs.create_directories(path.Development / 'Build' / 'include')
-    fs.copy_file(path.Build / 'include' /  'YDWEVersion.h', path.Development / 'Build' / 'include' / 'YDWEVersion.h', true)
+	local f = assert(io.open(uni.u2a((path.Build / 'include'/ 'version'):string()), 'r'))
+	local version = f:read 'a'
+	f:close()
+	local major, minor, revised, build = table.unpack(split(version, '.'))
+	local major, minor, revised, build = tonumber(major), tonumber(minor), tonumber(revised), tonumber(build)
+	local f = assert(io.open(uni.u2a((path.Development / 'Build' / 'include' / 'YDWEVersion.h'):string()), 'w'))
+	f:write(([[
+#ifndef YDWE_VERSION_H_INCLUDED
+#define YDWE_VERSION_H_INCLUDED
+
+#define YDWE_VERSION_MAJOR %d
+#define YDWE_VERSION_MINOR %d
+#define YDWE_VERSION_REVISED %d
+#define YDWE_VERSION_BUILD %d
+
+#endif // YDWE_VERSION_H_INCLUDED
+	]]):format(major, minor, revised, build))
+	f:close()
 end
 
 -- Step.4 编译
