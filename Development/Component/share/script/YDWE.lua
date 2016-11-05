@@ -30,6 +30,7 @@ require "localization"
 require "config"
 require "plugin"
 require "uiloader"
+require "ffi.loadlibrary"
 
 require "ydwe_on_menu"
 require "ydwe_on_save"
