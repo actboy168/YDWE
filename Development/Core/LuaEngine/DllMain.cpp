@@ -18,9 +18,16 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 			fs::path root_path = base::path::self().remove_filename().remove_filename();
 			if (gLuaEngine.Initialize(root_path / L"logs"))
 			{
-				gLuaEngine.SetPath(root_path / L"share" / L"script" / L"?.lua");
 				gLuaEngine.SetCPath(root_path / L"bin" / L"modules" / L"?.dll");
-				gLuaEngine.LoadFile(root_path / L"share" / L"script" / L"YDWE.lua");
+				fs::path dev_script = root_path.parent_path().remove_filename().remove_filename() / L"Component" / L"share" / L"script";
+				if (fs::exists(dev_script)) {
+					gLuaEngine.SetPath(dev_script / L"?.lua");
+					gLuaEngine.LoadFile(dev_script / L"YDWE.lua");
+				}
+				else {
+					gLuaEngine.SetPath(root_path / L"share" / L"script" / L"?.lua");
+					gLuaEngine.LoadFile(root_path / L"share" / L"script" / L"YDWE.lua");
+				}
 			}
 		}
 		catch (...)
