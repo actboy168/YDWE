@@ -28,7 +28,10 @@ local function execute(command)
     for line in f:lines() do
         print(line)
     end
-    f:close()
+    local ok = f:close()
+    if not ok then
+        error(("execute failed: %q"):format(command)
+    end
 end	
 
 local mt = {}
