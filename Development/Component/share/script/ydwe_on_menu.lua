@@ -71,12 +71,7 @@ local function file_export()
 				storm.extract_file(fs.path(file), file_path_string)
 			end
 		else
-			gui.message_dialog(
-				main_window_handle,
-				_("The file you have entered does not exist."),
-				_("YDWE"),
-				gui.MB_ICONERROR | gui.MB_OK
-			)
+			gui.error_message(nil, _("The file you have entered does not exist."))
 		end
 	end
 end
@@ -101,41 +96,14 @@ local function lua_test()
 			if ok then
 				log.trace("Code execution OK. Result: " .. tostring(result))
 			else
-				gui.message_dialog(
-					main_window_handle,
-					_("Error occured when executing code: ") .. tostring(result),
-					_("YDWE"),
-					gui.MB_ICONERROR | gui.MB_OK
-				)
+				gui.error_message(nil, _("Error occured when executing code: ") .. tostring(result))
 				log.warn("Code execution failed. Error: " .. tostring(result))
 			end
 		else
-			gui.message_dialog(
-				main_window_handle,
-				_("There are syntax errors in your code."),
-				_("YDWE"),
-				gui.MB_ICONERROR | gui.MB_OK
-			)
+			gui.error_message(nil, _("There are syntax errors in your code."))
 			log.warn("Syntax error found in the code.")
 		end
 	end
-end
-
-local generate_id = 48886
-local message_map = {}
-
-local mt = {}
-mt.__index = mt
-function mt:add(name, callback)
-	message_map[generate_id] = callback
-	gui.append_menu(self.handle, gui.MF_STRING, generate_id, name)
-	generate_id = generate_id + 1
-end
-
-function gui.menu(main_menu, name)
-	local handle = gui.create_menu()
-	gui.append_menu(main_menu, gui.MF_STRING | gui.MF_POPUP, mem.pointer_to_number(handle), name)
-	return setmetatable({handle = handle}, mt)
 end
 
 -- 初始化菜单
@@ -170,23 +138,6 @@ function event.EVENT_INIT_MENU(event_data)
 	main_window_handle = event_data.main_window_handle
 
 	log.debug("********************* on menuinit end *********************")
-
-	return 0
-end
-
--- 当WE的窗口过程收到消息时执行
--- event_data - 事件参数，table，包含以下值
---	handle, message, wparam, lparam，具体不解释
--- 返回非负数会调用原窗口函数。返回负数则直接吃掉消息
-function event.EVENT_WINDOW_MESSAGE(event_data)
-	-- 只处理菜单信息
-	if event_data.message == gui.WM_COMMAND then
-		-- 菜单ID（低16位）
-		local menu_id = (event_data.wparam & 0xFFFF)
-		if message_map[menu_id] then
-			message_map[menu_id]()
-		end
-	end
 
 	return 0
 end

@@ -31,6 +31,7 @@ require "config"
 require "plugin"
 require "uiloader"
 require "ffi.loadlibrary"
+require "ffi.gui"
 
 require "ydwe_on_menu"
 require "ydwe_on_save"

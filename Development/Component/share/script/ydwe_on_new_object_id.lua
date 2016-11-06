@@ -95,21 +95,11 @@ function event.EVENT_NEW_OBJECT_ID(event_data)
 		if #id_string ~= 4 then
 			log.trace("User input error(" .. tostring(id_string) .. ").")	
 			-- 提示错误
-			gui.message_dialog(
-				foregroundWindow,
-				_("You have entered an invalid ID. The ID must contain just 4 letters or digits. It cannot contain chars other than those in ASCII."),
-				_("YDWE"),
-				gui.MB_ICONERROR | gui.MB_OK
-			)
+			gui.error_message(foregroundWindow, _("You have entered an invalid ID. The ID must contain just 4 letters or digits. It cannot contain chars other than those in ASCII."))
 		elseif object:custom_has(object_type, id_string) or object:original_has(event_data.class, id_string) then
 			log.trace("User input error(" .. tostring(id_string) .. ").")	
 			-- 提示错误
-			gui.message_dialog(
-				foregroundWindow,
-				_("You have entered an invalid ID. This ID already exists."),
-				_("YDWE"),
-				gui.MB_ICONERROR | gui.MB_OK
-			)
+			gui.error_message(foregroundWindow, _("You have entered an invalid ID. This ID already exists."))
 		else
 			-- 合法，转换为整数返回	
 			log.trace("Result " .. tostring(id_string))	

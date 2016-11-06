@@ -28,7 +28,7 @@ local function check_conflicting_ui()
 	end
 	
 	if found then
-		if gui.message_dialog(nil, string.format(_("YDWE has detected that there is a directory named \"%s\" located in Warcraft 3 installation directory. It may prevent YDWE from working. Do you want to delete it?"), 'UI'), _("YDWE"), gui.MB_ICONQUESTION | gui.MB_YESNO) == gui.IDYES then
+		if gui.yesno_message(nil, string.format(_("YDWE has detected that there is a directory named \"%s\" located in Warcraft 3 installation directory. It may prevent YDWE from working. Do you want to delete it?"), 'UI'), _("YDWE"), gui.MB_ICONQUESTION | gui.MB_YESNO) == gui.IDYES then
 			for index, file in ipairs(file_list) do			
 				log.debug("remove file " .. (fs.war3_path() / file):string())
 				pcall(fs.remove_all, fs.war3_path() / file)
@@ -50,7 +50,7 @@ local function check_conflicting_units()
 	end
 	
 	if found then
-		if gui.message_dialog(nil, string.format(_("YDWE has detected that there is a directory named \"%s\" located in Warcraft 3 installation directory. It may prevent YDWE from working. Do you want to delete it?"), 'Units'), _("YDWE"), gui.MB_ICONQUESTION | gui.MB_YESNO) == gui.IDYES then		
+		if gui.yesno_message(nil, _("YDWE has detected that there is a directory named \"%s\" located in Warcraft 3 installation directory. It may prevent YDWE from working. Do you want to delete it?"), 'Units') then		
 			for file in units_dir:list_directory() do	
 				if not fs.is_directory(file) then
 					log.debug("remove file " .. file:string())
@@ -120,12 +120,7 @@ local function check_war3_version()
 		else
 			-- 二者如果不一致，则提示
 			if war3_version:is_new() ~= script_war3_version:is_new() then
-				gui.message_dialog(
-					nil,
-					_("YDWE has detected that your game.dll and war3patch.mpq mismatch. It may be caused by the so called \"Warcraft Version Converter\". This situation will cause a failure on saving and testing maps. It is strongly recommended to use the offical patched provided by Blizzard."),
-					_("YDWE"),
-					gui.MB_ICONQUESTION | gui.MB_OK
-				)
+				gui.error_message(nil, _("YDWE has detected that your game.dll and war3patch.mpq mismatch. It may be caused by the so called \"Warcraft Version Converter\". This situation will cause a failure on saving and testing maps. It is strongly recommended to use the offical patched provided by Blizzard."))
 			end
 		end
 	end
