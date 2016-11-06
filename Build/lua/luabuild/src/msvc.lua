@@ -30,7 +30,7 @@ local function execute(command)
     end
     local ok = f:close()
     if not ok then
-        error(("execute failed: %q"):format(command)
+        error(("execute failed: %q"):format(command))
     end
 end	
 
