@@ -132,8 +132,22 @@ local function copy_directory(from, to, filter)
 	end
 end
 
+local function copy_crt_dll()
+    if configuration ~= 'Release' then
+        return
+    end
+    local crt_path = fs.path(msvc.path) / 'redist' / 'x86' / ('Microsoft.VC' .. msvc.version .. '.CRT')
+    if fs.exists(crt_path) then
+        copy_directory(crt_path, path.Result / 'bin', function(path)
+            local ext = path:extension():string():lower()
+            return ext == '.dll'
+        end)
+    end
+end
+
 fs.create_directories(path.Result / 'bin' / 'modules')
 fs.create_directories(path.Result / 'plugin' / 'jasshelper' / 'bin')
+copy_crt_dll()
 copy_boost_dll('system')
 copy_boost_dll('filesystem')
 fs.copy_file(path.OpenSource / 'Lua' / 'current' / 'bin' / 'Win32' / configuration / 'luacore.dll', path.Result / 'bin' / 'luacore.dll', true)
