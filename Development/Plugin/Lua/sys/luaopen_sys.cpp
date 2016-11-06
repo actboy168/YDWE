@@ -19,25 +19,30 @@ namespace NLuaAPI { namespace NSys {
 
 	namespace detail
 	{
-
-		boost::optional<fs::path> cast_path_opt(const luabind::object &object)
+		std::optional<fs::path> cast_path_opt(const luabind::object &object)
 		{
-			boost::optional<fs::path> path_opt;
+			std::optional<fs::path> path_opt;
 
 			switch (luabind::type(object))
 			{
 			case LUA_TSTRING:
+			{
+				boost::optional<std::wstring> opt = luabind::object_cast_nothrow<std::wstring>(object);
+				if (opt)
 				{
-					boost::optional<std::wstring> str_opt = luabind::object_cast_nothrow<std::wstring>(object);
-					if (str_opt)
-					{
-						path_opt = fs::path(str_opt.get());
-					}
+					path_opt = fs::path(opt.get());
 				}
-				break;
+			}
+			break;
 			case LUA_TUSERDATA:
-				path_opt = luabind::object_cast_nothrow<fs::path>(object);
-				break;
+			{
+				boost::optional<fs::path> opt = luabind::object_cast_nothrow<fs::path>(object);
+				if (opt)
+				{
+					path_opt = opt.get();
+				}
+			}
+			break;
 			default:
 				break;
 			}
@@ -45,24 +50,30 @@ namespace NLuaAPI { namespace NSys {
 			return std::move(path_opt);
 		}
 
-		boost::optional<std::wstring> cast_wstring_opt(const luabind::object &object)
+		std::optional<std::wstring> cast_wstring_opt(const luabind::object &object)
 		{
-			boost::optional<std::wstring> str_opt;
+			std::optional<std::wstring> str_opt;
 
 			switch (luabind::type(object))
 			{
 			case LUA_TSTRING:
-				str_opt = luabind::object_cast_nothrow<std::wstring>(object);
+			{
+				boost::optional<std::wstring> opt = luabind::object_cast_nothrow<std::wstring>(object);
+				if (opt)
+				{
+					str_opt = opt.get();
+				}
+			}
 				break;
 			case LUA_TUSERDATA:
+			{
+				boost::optional<fs::path> opt = luabind::object_cast_nothrow<fs::path>(object);
+				if (opt)
 				{
-					boost::optional<fs::path> path_opt = luabind::object_cast_nothrow<fs::path>(object);
-					if (path_opt)
-					{
-						str_opt = path_opt->wstring();
-					}
+					str_opt = opt->wstring();
 				}
-				break;
+			}
+			break;
 			default:
 				break;
 			}
@@ -72,13 +83,13 @@ namespace NLuaAPI { namespace NSys {
 
 		fs::path cast_path(const luabind::object &object)
 		{
-			boost::optional<fs::path> path_opt = cast_path_opt(object);
+			std::optional<fs::path> path_opt = cast_path_opt(object);
 			return path_opt ? std::move(path_opt.get()) : std::move(fs::path());
 		}
 
 		std::wstring cast_wstring(const luabind::object &object)
 		{
-			boost::optional<std::wstring> str_opt = cast_wstring_opt(object);
+			std::optional<std::wstring> str_opt = cast_wstring_opt(object);
 			return str_opt ? std::move(str_opt.get()) : std::move(std::wstring());
 		}
 
@@ -191,35 +202,11 @@ namespace NLuaAPI { namespace NSys {
 
 	static void LuaProcessCreate(lua_State *pState, base::win::process& p, const luabind::object &application_object, const luabind::object &commandline_object, const luabind::object &currentdirectory_object)
 	{
-		boost::optional<fs::path> application_opt      = detail::cast_path_opt(application_object);
-		std::wstring              commandline          = detail::cast_wstring(commandline_object);
-		boost::optional<fs::path> currentdirectory_opt = detail::cast_path_opt(currentdirectory_object);
-
-		bool result = false;
-		if (application_opt)
-		{
-			if (currentdirectory_opt)
-			{
-				result = p.create(application_opt.get(), commandline, currentdirectory_opt.get());
-			}
-			else
-			{
-				result = p.create(application_opt.get(), commandline);
-			}
-		}
-		else
-		{
-			if (currentdirectory_opt)
-			{
-				result = p.create(std::optional<fs::path>(), commandline, currentdirectory_opt.get());
-			}
-			else
-			{
-				result = p.create(std::optional<fs::path>(), commandline);
-			}
-		}
-
-		lua_pushboolean(pState, result);
+		lua_pushboolean(pState, p.create(
+			detail::cast_path_opt(application_object),
+			detail::cast_wstring(commandline_object),
+			detail::cast_path_opt(currentdirectory_object)
+		));
 	}
 
 	static void LuaProcessRedirect(lua_State *pState, base::win::process& p, const luabind::object &stdinput_object, const luabind::object &stdoutput_object, const luabind::object &stderror_object)
