@@ -1,7 +1,8 @@
 #pragma once
 
 #include <base/config.h>		   	  		
-#include <base/filesystem.h>
+#include <base/filesystem.h>   	   	  		
+#include <base/util/optional.h>
 #include <Windows.h>
 #include <map>
 
@@ -22,10 +23,7 @@ namespace base { namespace win {
 		bool     replace(const fs::path& dllpath, const char* dllname);
 		bool     hide_window();
 		bool     redirect(HANDLE std_input, HANDLE std_output, HANDLE std_error);
-		bool     create(const fs::path& application, const std::wstring& command_line, const fs::path& current_directory);
-		bool     create(const fs::path& application, const std::wstring& command_line);
-		bool     create(const std::wstring& command_line, const fs::path& current_directory);
-		bool     create(const std::wstring& command_line);
+		bool     create(const std::optional<fs::path>& application, const std::wstring& command_line, const std::optional<fs::path>& current_directory = std::optional<fs::path>());
 		bool     is_running();
 		bool     kill(uint32_t timeout);
 		uint32_t wait();

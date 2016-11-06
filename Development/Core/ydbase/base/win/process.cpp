@@ -231,175 +231,27 @@ namespace base { namespace win {
 		return false;
 	}
 
-	bool process::create(const fs::path& application, const std::wstring& command_line, const fs::path& current_directory)
+	bool process::create(const std::optional<fs::path>& application, const std::wstring& command_line, const std::optional<fs::path>& current_directory)
 	{
 		if (statue_ == PROCESS_STATUE_READY)
 		{
-			if (command_line.empty())
-			{
-				if (!detail::create_process(
-						fs::exists(application) ? application.c_str(): nullptr, 
-						nullptr,
-						inherit_handle_,
-						NORMAL_PRIORITY_CLASS, 
-						fs::exists(current_directory) ? current_directory.c_str(): nullptr, 
-						&si_, &pi_, inject_dll_, replace_dll_
-					))
-				{
-					return false;
-				}
-			}
-			else
-			{
-				std::dynarray<wchar_t> command_line_buffer(command_line.size()+1);
-				wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
+			std::dynarray<wchar_t> command_line_buffer(command_line.size() + 1);
+			wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
 
-				if (!detail::create_process(
-						fs::exists(application) ? application.c_str(): nullptr, 
-						command_line_buffer.data(),
-						inherit_handle_,
-						NORMAL_PRIORITY_CLASS, 
-						fs::exists(current_directory) ? current_directory.c_str(): nullptr, 
-						&si_, &pi_, inject_dll_, replace_dll_
-						))
-				{
-					return false;
-				}
+			if (!detail::create_process(
+				application? application.get().c_str(): nullptr,
+				command_line_buffer.data(),
+				inherit_handle_,
+				NORMAL_PRIORITY_CLASS,
+				current_directory ? current_directory.get().c_str() : nullptr,
+				&si_, &pi_, inject_dll_, replace_dll_
+				))
+			{
+				return false;
 			}
-
 			statue_ = PROCESS_STATUE_RUNNING;
 			return true;
 		}
-
-		return false;
-	}
-
-	bool process::create(const fs::path& application, const std::wstring& command_line)
-	{
-		if (statue_ == PROCESS_STATUE_READY)
-		{
-			if (command_line.empty())
-			{
-				if (!detail::create_process(
-					fs::exists(application) ? application.c_str(): nullptr, 
-					nullptr,
-					inherit_handle_,
-					NORMAL_PRIORITY_CLASS, 
-					nullptr, 
-					&si_, &pi_, inject_dll_, replace_dll_
-					))
-				{
-					return false;
-				}
-			}
-			else
-			{
-				std::dynarray<wchar_t> command_line_buffer(command_line.size()+1);
-				wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
-
-				if (!detail::create_process(
-					fs::exists(application) ? application.c_str(): nullptr, 
-					command_line_buffer.data(),
-					inherit_handle_,
-					NORMAL_PRIORITY_CLASS, 
-					nullptr, 
-					&si_, &pi_, inject_dll_, replace_dll_
-					))
-				{
-					return false;
-				}
-			}
-
-			statue_ = PROCESS_STATUE_RUNNING;
-			return true;
-		}
-
-		return false;
-	}
-
-	bool process::create(const std::wstring& command_line, const fs::path& current_directory)
-	{
-		if (statue_ == PROCESS_STATUE_READY)
-		{
-			if (command_line.empty())
-			{
-				if (!detail::create_process(
-					nullptr, 
-					nullptr,
-					inherit_handle_,
-					NORMAL_PRIORITY_CLASS, 
-					fs::exists(current_directory) ? current_directory.c_str(): nullptr, 
-					&si_, &pi_, inject_dll_, replace_dll_
-					))
-				{
-					return false;
-				}
-			}
-			else
-			{
-				std::dynarray<wchar_t> command_line_buffer(command_line.size()+1);
-				wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
-
-				if (!detail::create_process(
-					nullptr, 
-					command_line_buffer.data(),
-					inherit_handle_,
-					NORMAL_PRIORITY_CLASS, 
-					fs::exists(current_directory) ? current_directory.c_str(): nullptr, 
-					&si_, &pi_, inject_dll_, replace_dll_
-					))
-				{
-					return false;
-				}
-			}
-
-			statue_ = PROCESS_STATUE_RUNNING;
-			return true;
-		}
-
-		return false;
-	}
-
-	bool process::create(const std::wstring& command_line)	
-	{
-		if (statue_ == PROCESS_STATUE_READY)
-		{
-			if (command_line.empty())
-			{
-				if (!detail::create_process(
-					nullptr, 
-					nullptr, 
-					inherit_handle_,
-					NORMAL_PRIORITY_CLASS, 
-					nullptr, 
-					&si_, &pi_, inject_dll_, replace_dll_
-					))
-				{
-					return false;
-				}
-			}
-			else
-			{
-				std::dynarray<wchar_t> command_line_buffer(command_line.size()+1);
-				wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
-
-				if (!detail::create_process(
-					nullptr, 
-					command_line_buffer.data(),
-					inherit_handle_,
-					NORMAL_PRIORITY_CLASS, 
-					nullptr, 
-					&si_, &pi_, inject_dll_, replace_dll_
-					))
-				{
-					return false;
-				}
-			}
-
-			statue_ = PROCESS_STATUE_RUNNING;
-			return true;
-		}
-
 		return false;
 	}
 

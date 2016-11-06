@@ -211,11 +211,11 @@ namespace NLuaAPI { namespace NSys {
 		{
 			if (currentdirectory_opt)
 			{
-				result = p.create(commandline, currentdirectory_opt.get());
+				result = p.create(std::optional<fs::path>(), commandline, currentdirectory_opt.get());
 			}
 			else
 			{
-				result = p.create(commandline);
+				result = p.create(std::optional<fs::path>(), commandline);
 			}
 		}
 
