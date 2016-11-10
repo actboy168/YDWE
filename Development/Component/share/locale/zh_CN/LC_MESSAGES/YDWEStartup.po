@@ -2,51 +2,52 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YDWEStartup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-11 14:18+0800\n"
-"PO-Revision-Date: 2013-10-11 14:19+0800\n"
+"POT-Creation-Date: 2016-11-10 10:33+0800\n"
+"PO-Revision-Date: 2016-11-10 10:33+0800\n"
 "Last-Translator: \n"
 "Language-Team: YDWE <417214250@qq.com>\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
-"X-Poedit-Basepath: .\n"
+"X-Poedit-Basepath: ../../../../../Core/YDWEStartup\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: ..\\..\\..\\..\\..\\Core\\YDWEStartup\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: ..\..\..\..\..\Core\YDWEStartup/DllMain.cpp:165
+#: DllMain.cpp:184
 msgid "Error YDWE directory."
 msgstr ""
 "YDWE路径含有非法的字符，这可能是由于你的操作系统区域并非简体中文而YDWE路径里"
 "却包含了简体中文导致的。如果你不明白上述原因，请将YDWE放到英文路径下，再次尝"
 "试。"
 
-#: ..\..\..\..\..\Core\YDWEStartup/DllMain.cpp:169
+#: DllMain.cpp:188
 msgid "Please choose your Warcraft 3 installation directory"
 msgstr "请选择你的《魔兽争霸III》目录"
 
-#: ..\..\..\..\..\Core\YDWEStartup/DllMain.cpp:183
+#: DllMain.cpp:202
 msgid "Cannot delete YDDllFixer.dll in war3 directory."
 msgstr "War3目录有有YDDllFixer.dll并且无法删除，这会导致YDWE无法启动。"
 
-#: ..\..\..\..\..\Core\YDWEStartup/DllMain.cpp:191
+#: DllMain.cpp:210
 msgid "Cannot delete YDDllFixer.dll in ydwe directory."
 msgstr "YDWE目录有有YDDllFixer.dll并且无法删除，这会导致YDWE无法启动。"
 
-#: ..\..\..\..\..\Core\YDWEStartup/DllMain.cpp:208
+#: DllMain.cpp:230
 msgid "Cannot find main executable file of world editor in YDWE/bin directory."
 msgstr "YDWE/bin文件夹下找不到WE的主程序，请确认YDWE文件的完整性。"
 
-#: ..\..\..\..\..\Core\YDWEStartup/DllMain.cpp:218
+#: DllMain.cpp:240
 msgid "Failed to launch world editor."
 msgstr "启动WE失败。"
 
-#: ..\..\..\..\..\Core\YDWEStartup/DllMain.cpp:235
-#: ..\..\..\..\..\Core\YDWEStartup/DllMain.cpp:239
+#: DllMain.cpp:257 DllMain.cpp:261 DllMain.cpp:265
 msgid "Error"
 msgstr "错误"
 
-#: ..\..\..\..\..\Core\YDWEStartup/DllMain.cpp:239
+#: DllMain.cpp:265
 msgid "Unknown error"
 msgstr "未知错误"
 
