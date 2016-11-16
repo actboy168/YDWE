@@ -193,7 +193,10 @@ namespace Shortcuts
 	{
 		try
 		{
-			if (base::win::get_version() >= base::win::VERSION_WIN7)
+			if (base::win::get_version() >= base::win::VERSION_WIN10)
+			{
+			}
+			else if (base::win::get_version() >= base::win::VERSION_WIN7)
 			{
 				fs::path shortcut_path = base::path::get(base::path::DIR_TEMP) / target_path.filename().replace_extension(L".lnk");
 
@@ -225,7 +228,11 @@ namespace Shortcuts
 		try
 		{
 			fs::path taskbar_path;
-			if (base::win::get_version() >= base::win::VERSION_WIN7)
+			if (base::win::get_version() >= base::win::VERSION_WIN10)
+			{
+				return false;
+			}
+			else if (base::win::get_version() >= base::win::VERSION_WIN7)
 			{
 				taskbar_path = base::path::get(base::path::DIR_TASKBAR_PINS);
 			}

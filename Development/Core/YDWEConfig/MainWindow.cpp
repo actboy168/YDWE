@@ -419,6 +419,12 @@ void CMainWindow::InitOSHelpUI()
 		if (m_pShortcuts_taskbar)
 			m_pShortcuts_taskbar->Selected(Shortcuts::Taskbar::Has(m_ydwe_path));
 	}
+
+	if (base::win::get_version() >= base::win::VERSION_WIN10)
+	{
+		if (m_pShortcuts_taskbar)
+			m_pShortcuts_taskbar->SetEnabled(false);
+	}
 }
 
 void CMainWindow::DoneOSHelpUI()
