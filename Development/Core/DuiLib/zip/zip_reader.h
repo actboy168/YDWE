@@ -3,6 +3,7 @@
 #include <base/filesystem.h>
 #include <string>				
 #include <iterator>
+#include <assert.h>
 #include <unzip.h>
 
 namespace zip 

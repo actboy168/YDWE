@@ -13,4 +13,6 @@
 *.sln.cache
 *.db
 *.DS_Store
+*.sqlite
+*/.vs/
 Development/Editor/Component/jass/japi/YDWEJapiOther.j

@@ -60,6 +60,7 @@
 #include <malloc.h>
 #include <objbase.h>			  
 #include <base/filesystem.h>
+#include <functional>
 
 #include "Utils/Utils.h"
 #include "Utils/UIDelegate.h"
