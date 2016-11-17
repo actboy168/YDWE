@@ -28,7 +28,7 @@ oklock:unlock()
 
 -- Step.1 初始化
 local msvc = require 'msvc'
-if not msvc:initialize(120) then
+if not msvc:initialize(150) then
     error('Cannot found Visual Studio Toolset.')
 end
 
@@ -88,7 +88,6 @@ msvc:rebuild(path.OpenSource / 'minizip' / 'project' / 'minizip.sln', configurat
 msvc:rebuild(path.OpenSource / 'all.sln', 'Release')
 msvc:rebuild(path.OpenSource / 'Lua' / 'Current' / 'makefiles' / 'luacore.sln', configuration)
 msvc:rebuild(path.OpenSource / 'luaffi' / 'makefiles' / 'luaffi.sln', configuration)
-msvc:rebuild(path.Development / 'Plugin' / 'YDColorizer' / 'YDColorizer.sln', configuration, 'Any CPU')
 if not dev then
     msvc:rebuild(path.Development / 'Core' / 'Solution' / 'YDWE.sln', configuration)
 end
@@ -148,8 +147,10 @@ end
 fs.create_directories(path.Result / 'bin' / 'modules')
 fs.create_directories(path.Result / 'plugin' / 'jasshelper' / 'bin')
 copy_crt_dll()
-copy_boost_dll('system')
-copy_boost_dll('filesystem')
+if tonumber(msvc.version) < 150 then
+	copy_boost_dll('system')
+	copy_boost_dll('filesystem')
+end
 fs.copy_file(path.OpenSource / 'Lua' / 'current' / 'bin' / 'Win32' / configuration / 'luacore.dll', path.Result / 'bin' / 'luacore.dll', true)
 fs.copy_file(path.OpenSource / 'Lua' / 'current' / 'bin' / 'Win32' / configuration / 'luabind.dll', path.Result / 'bin' / 'luabind.dll', true)
 fs.copy_file(path.OpenSource / 'StormLib' / 'current' / 'bin' / 'Win32' / configuration / 'StormLib.dll', path.Result / 'bin' / 'StormLib.dll', true)

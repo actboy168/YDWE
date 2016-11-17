@@ -39,21 +39,31 @@ local mt = {}
 local need = { LIB = true, LIBPATH = true, PATH = true, INCLUDE = true, VCINSTALLDIR = true }
 
 function mt:initialize(version)
-    local msvc = os.getenv(('VS%dCOMNTOOLS'):format(version))
-    if not msvc then
-        return false
+	local msvc
+    local bat
+    if version >= 150 then
+	    msvc = [[C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/Tools]]
+    	bat = "VsDevCmd.bat"
+	else
+    	local msvc = os.getenv(('VS%dCOMNTOOLS'):format(version))
+    	if not msvc then
+    	    return false
+    	end
+		bat = "vsvars32.bat"
     end
-    local f = io.popen(('"%s/vsvars32.bat" & set'):format(msvc), 'r')
+    local f = io.popen(('"%s/%s" & set'):format(msvc, bat), 'r')
     for line in f:lines() do
         local name, value = parse_env(line)
-        local name = name:upper()
-        if need[name] then
-            if name ~= 'VCINSTALLDIR' then
-                addenv(name, value)
-            else
-                self.path = value
-            end
-        end
+        if name and value then
+        	local name = name:upper()
+        	if need[name] then
+        	    if name ~= 'VCINSTALLDIR' then
+        	        addenv(name, value)
+        	    else
+        	        self.path = value
+        	    end
+        	end
+    	end
     end
     f:close()
     if not self.path then
