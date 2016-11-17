@@ -66,7 +66,11 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 			{
 				fs::path test_map_path = get_test_map_path() + loadfile.extension().wstring();
 				try {
+#if _MSC_VER >= 1910
+					fs::copy_file(loadfile, war3_path / test_map_path, fs::copy_options::overwrite_existing);
+#else
 					fs::copy_file(loadfile, war3_path / test_map_path, fs::copy_option::overwrite_if_exists);
+#endif
 					cmd[L"loadfile"] = test_map_path.wstring();
 				}
 				catch (...) {

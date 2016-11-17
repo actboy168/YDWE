@@ -3,7 +3,7 @@
 
 namespace base { namespace path {
 
-	static fs::path path_normalize(const fs::path& p)
+	fs::path normalize(const fs::path& p)
 	{
 		fs::path result = p.root_path();
 		std::deque<std::string> stack;
@@ -29,8 +29,8 @@ namespace base { namespace path {
 	{
 		fs::path lpath(lhs);
 		fs::path rpath(rhs);
-		const fs::path::value_type* l(path_normalize(lpath).c_str());
-		const fs::path::value_type* r(path_normalize(rpath).c_str());
+		const fs::path::value_type* l(normalize(lpath).c_str());
+		const fs::path::value_type* r(normalize(rpath).c_str());
 		while ((tolower(*l) == tolower(*r) || (*l == L'\\' && *r == L'/') || (*l == L'/' && *r == L'\\')) && *l) 
 		{ 
 			++l; ++r; 
