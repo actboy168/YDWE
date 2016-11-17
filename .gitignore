@@ -14,5 +14,5 @@
 *.db
 *.DS_Store
 *.sqlite
-*/.vs/
+*.vs/
 Development/Editor/Component/jass/japi/YDWEJapiOther.j
