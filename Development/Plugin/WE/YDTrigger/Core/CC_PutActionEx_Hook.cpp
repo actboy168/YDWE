@@ -266,7 +266,7 @@ void _fastcall
 			CC_PutBlock_Event(This, OutClass, name, 0, YDL_TRIGGER);
 
 			CC_PutBegin();
-			BLZSStrPrintf(buff, 260, "call TriggerAddCondition("YDL_TRIGGER", Condition(function %sConditions))", name);
+			BLZSStrPrintf(buff, 260, "call TriggerAddCondition(" YDL_TRIGGER ", Condition(function %sConditions))", name);
 			PUT_CONST(buff, 1); 
 			CC_PutEnd();
 

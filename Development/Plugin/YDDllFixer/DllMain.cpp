@@ -3,26 +3,11 @@
 #include <utility>
 #include <windows.h>
 #include <Shlwapi.h>
+#include <base/filesystem.h>
 
-namespace fs = std::tr2::sys;
-
-template <class _String, class _Traits>
-inline fs::basic_path<_String, _Traits> operator/(const fs::basic_path<_String, _Traits>& _Left, const _String& _Right)
+static fs::path GetModuleDirectory(HMODULE hModule)
 {
-	fs::basic_path<_String, _Traits> _Ans = _Left;
-	return _Ans /= fs::basic_path<_String, _Traits>(_Right);
-}
-
-template <class _String, class _Traits>
-inline fs::basic_path<_String, _Traits> operator/(const fs::basic_path<_String, _Traits>& _Left, const typename _String::value_type* _Right)
-{
-	fs::basic_path<_String, _Traits> _Ans = _Left;
-	return _Ans /= fs::basic_path<_String, _Traits>(_Right);
-}
-
-static fs::wpath GetModuleDirectory(HMODULE hModule)
-{
-	fs::wpath result(L".");
+	fs::path result(L".");
 	wchar_t buffer[MAX_PATH];
 
 	if (::GetModuleFileNameW(hModule, buffer, sizeof(buffer) / sizeof(buffer[0])))
@@ -37,10 +22,11 @@ static fs::wpath GetModuleDirectory(HMODULE hModule)
 #ifdef _DEBUG
 
 const wchar_t* szDllList[] = {
-#if _MSC_VER == 1800
+#if _MSC_VER == 1910
+#elif _MSC_VER == 1800
 	L"msvcr120d.dll",
 	L"msvcp120d.dll",
-#elif  
+#else  
 	L"msvcr100d.dll",
 	L"msvcp100d.dll",
 #endif
@@ -55,7 +41,8 @@ const wchar_t* szDllList[] = {
 #else
 
 const wchar_t* szDllList[] = {
-#if _MSC_VER == 1800 
+#if _MSC_VER == 1910
+#elif _MSC_VER == 1800
 	L"msvcr120.dll",
 	L"msvcp120.dll",
 #elif  			 
@@ -74,19 +61,19 @@ const wchar_t* szDllList[] = {
 
 std::deque<HMODULE> hDllArray;
 
-void PreloadDll(const fs::wpath &ydweDirectory)
+void PreloadDll(const fs::path &ydweDirectory)
 {
 	if (!ydweDirectory.empty())
 	{
-		fs::wpath binPath = ydweDirectory.parent_path() / L"bin";
+		fs::path binPath = ydweDirectory.parent_path() / L"bin";
 
 		wchar_t buffer[MAX_PATH];
 		::GetCurrentDirectoryW(sizeof(buffer) / sizeof(buffer[0]), buffer);
-		::SetCurrentDirectoryW(binPath.string().c_str());
+		::SetCurrentDirectoryW(binPath.wstring().c_str());
 		 
 		for (const wchar_t *szDllName: szDllList)
 		{
-			hDllArray.push_front(::LoadLibraryW((binPath / szDllName).string().c_str()));
+			hDllArray.push_front(::LoadLibraryW((binPath / szDllName).wstring().c_str()));
 		}
 
 		::SetCurrentDirectoryW(buffer);
@@ -102,14 +89,14 @@ void PostfreeDll()
 	}
 }
 
-static void RestoreDetouredSystemDll(const fs::wpath &war3Directory)
+static void RestoreDetouredSystemDll(const fs::path &war3Directory)
 {
-	fs::wpath backupPath = war3Directory / L"ydwe_backups_system_dll";
+	fs::path backupPath = war3Directory / L"ydwe_backups_system_dll";
 
 	try
 	{
-		fs::wdirectory_iterator endItr;
-		for (fs::wdirectory_iterator itr(backupPath); itr != endItr; ++itr)
+		fs::directory_iterator endItr;
+		for (fs::directory_iterator itr(backupPath); itr != endItr; ++itr)
 		{
 			try
 			{
@@ -139,8 +126,8 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 	{
 		::DisableThreadLibraryCalls(module);
 
-		fs::wpath war3Directory = GetModuleDirectory(NULL);
-		fs::wpath ydweDirectory = GetModuleDirectory(module);
+		fs::path war3Directory = GetModuleDirectory(NULL);
+		fs::path ydweDirectory = GetModuleDirectory(module);
 
 		PreloadDll(ydweDirectory);
 		RestoreDetouredSystemDll(war3Directory);

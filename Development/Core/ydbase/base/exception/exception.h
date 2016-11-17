@@ -7,6 +7,8 @@
 
 namespace base { 
 
+#pragma warning(push)
+#pragma warning(disable:4275)
 	class _BASE_API exception : public std::exception
 	{
 	public:
@@ -27,5 +29,5 @@ namespace base {
 #pragma warning(suppress:4251)
 		error_msg  what_;
 	};
-
+#pragma warning(pop)
 }

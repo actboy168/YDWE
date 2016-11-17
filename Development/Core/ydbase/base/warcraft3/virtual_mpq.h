@@ -2,6 +2,7 @@
 
 #include <base/config.h>			  		
 #include <base/filesystem.h>
+#include <functional>
 #include <Windows.h>
 
 namespace base { namespace warcraft3 { namespace virtual_mpq {

@@ -8,7 +8,7 @@
 
 namespace base { namespace win {
 
-	const char* windows_category::name() const
+	const char* windows_category::name() const noexcept
 	{ 
 		return "windows"; 
 	}
@@ -41,7 +41,7 @@ namespace base { namespace win {
 		return std::move(w2u(str, conv_method::replace | '?'));
 	}
 
-	std::error_condition windows_category::default_error_condition(int error_code) const
+	std::error_condition windows_category::default_error_condition(int error_code) const noexcept
 	{
 		const std::error_condition err_condition = std::system_category().default_error_condition(error_code);
 		const std::string err_condition_msg = err_condition.message();

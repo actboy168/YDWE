@@ -1,6 +1,7 @@
 #include <base/path/service.h>
 
 #include <windows.h>
+#include <assert.h>
 #include <base/exception/windows_exception.h>
 #include <base/path/detail/get_path.h>
 #pragma warning(push)

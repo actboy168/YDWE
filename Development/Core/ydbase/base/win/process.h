@@ -34,9 +34,9 @@ namespace base { namespace win {
 
 	private:
 		uint32_t                statue_;
-		fs::path inject_dll_;
 #pragma warning(push)
 #pragma warning(disable:4251)
+		fs::path inject_dll_;
 		std::map<std::string, fs::path> replace_dll_;
 #pragma warning(pop)
 		STARTUPINFOW            si_;
