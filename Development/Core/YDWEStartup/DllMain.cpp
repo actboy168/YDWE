@@ -28,7 +28,7 @@ static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSeco
 	{
 		if (pErrorCode)
 		{
-			pErrorCode->assign(boost::system::errc::success, std::generic_category());
+			pErrorCode->assign(0, std::generic_category());
 		}
 
 		base::file::memory_mapped_file mapperFirst(fileFirst.c_str());
@@ -112,8 +112,11 @@ static void CheckedCopyFile(const fs::path &source, const fs::path &destination)
 				return;
 		}
 	}
-
+#if _MSC_VER >= 1910
+	fs::copy_file(source, destination, fs::copy_options::overwrite_existing);
+#else
 	fs::copy_file(source, destination, fs::copy_option::overwrite_if_exists);
+#endif
 }
 
 const wchar_t* szSystemDllList[] = {
@@ -181,7 +184,7 @@ static void DoTask()
 
 	if (gExecutableDirectory != fs::path(gExecutableDirectory.string()))
 	{
-		BOOST_THROW_EXCEPTION(std::domain_error(_("Error YDWE directory.")));
+		throw std::domain_error(_("Error YDWE directory."));
 	}
 
 	fs::path gWarcraftDirectory;
@@ -199,7 +202,7 @@ static void DoTask()
 	{
 		if (!fs::remove(gWarcraftDirectory / L"YDDllFixer.dll"))
 		{
-			BOOST_THROW_EXCEPTION(std::domain_error(_("Cannot delete YDDllFixer.dll in war3 directory.")));
+			throw std::domain_error(_("Cannot delete YDDllFixer.dll in war3 directory."));
 		}
 	}
 
@@ -207,7 +210,7 @@ static void DoTask()
 	{
 		if (!fs::remove(gExecutableDirectory / L"YDDllFixer.dll"))
 		{
-			BOOST_THROW_EXCEPTION(std::domain_error(_("Cannot delete YDDllFixer.dll in ydwe directory.")));
+			throw std::domain_error(_("Cannot delete YDDllFixer.dll in ydwe directory."));
 		}
 	}
 
@@ -227,7 +230,7 @@ static void DoTask()
 	}
 	else
 	{
-		BOOST_THROW_EXCEPTION(std::domain_error(_("Cannot find main executable file of world editor in YDWE/bin directory.")));
+		throw std::domain_error(_("Cannot find main executable file of world editor in YDWE/bin directory."));
 	}
 
 	CreateDotNetConfig(gWarcraftDirectory / L"worldeditydwe.exe.config");

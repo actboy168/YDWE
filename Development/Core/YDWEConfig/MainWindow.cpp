@@ -563,7 +563,7 @@ void CMainWindow::InitPatchUI(slk::IniTable& table)
 				fs::path patch_mpq = patch / L"Patch.mpq";
 				if (fs::exists(game_dll) && fs::exists(patch_mpq))
 				{
-					patch.normalize();
+					patch = base::path::normalize(patch);
 					base::win::file_version versionInfo(game_dll.c_str());
 
 					DuiLib::CRadioButtonUI* node = new DuiLib::CRadioButtonUI;

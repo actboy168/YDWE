@@ -1,6 +1,7 @@
 #include "logging_backend.h"
 #include <base/util/format.h>
 #include <base/exception/exception.h>
+#include <fstream>
 
 namespace logging
 {

@@ -8,6 +8,10 @@
 
 #define COMPILER_RW_BARRIER  _ReadWriteBarrier()
 
+#if _MSC_VER >= 1910
+void __nop(void);
+#endif
+
 namespace base { namespace lock { namespace os {
 
 	inline void sleep0()

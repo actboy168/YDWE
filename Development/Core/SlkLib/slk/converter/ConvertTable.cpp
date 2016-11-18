@@ -46,9 +46,9 @@ namespace slk
 
 			slkObj["code"] = objObj.GetBaseId().to_string();
 
-			foreach(auto& it, attrTable)
+			foreach(auto& it2, attrTable)
 			{
-				AttributeMeta<ObjectWithoutOptinal>(it.second, metaTable, converter).Set(slkObj);
+				AttributeMeta<ObjectWithoutOptinal>(it2.second, metaTable, converter).Set(slkObj);
 			}
 		}
 	}
@@ -70,14 +70,14 @@ namespace slk
 
 			slkObj["code"] = objObj.GetBaseId().to_string();
 
-			foreach(auto& it, attrTable)
+			foreach(auto& it2, attrTable)
 			{
 				//ObjectId attrId = it.first;
-				AttributeCatalog const& attrCatalog = it.second;
+				AttributeCatalog const& attrCatalog = it2.second;
 
-				foreach(auto& it, attrCatalog)
+				foreach(auto& it3, attrCatalog)
 				{
-					AttributeMeta<ObjectWithOptinal>(it.second, metaTable, converter).Set(slkObj);
+					AttributeMeta<ObjectWithOptinal>(it3.second, metaTable, converter).Set(slkObj);
 				}
 			}
 		}
@@ -94,9 +94,9 @@ namespace slk
 
 			slkObj["code"] = objObj.GetBaseId().to_string();
 
-			foreach(auto& it, attrTable)
+			foreach(auto& it2, attrTable)
 			{
-				AttributeMeta<ObjectWithoutOptinal>(it.second, metaTable, converter).Set(slkObj);
+				AttributeMeta<ObjectWithoutOptinal>(it2.second, metaTable, converter).Set(slkObj);
 			}
 		}
 	}
@@ -112,14 +112,14 @@ namespace slk
 
 			slkObj["code"] = objObj.GetBaseId().to_string();
 
-			foreach(auto& it, attrTable)
+			foreach(auto& it2, attrTable)
 			{
 				//ObjectId attrId = it.first;
-				AttributeCatalog const& attrCatalog = it.second;
+				AttributeCatalog const& attrCatalog = it2.second;
 
-				foreach(auto& it, attrCatalog)
+				foreach(auto& it3, attrCatalog)
 				{
-					AttributeMeta<ObjectWithOptinal>(it.second, metaTable, converter).Set(slkObj);
+					AttributeMeta<ObjectWithOptinal>(it3.second, metaTable, converter).Set(slkObj);
 				}
 			}
 		}

@@ -23,6 +23,13 @@ namespace slk
 			return *this;
 		}
 
+	private:
+		BaseConverter<Table, Reader>& operator =(BaseConverter<Table, Reader>&& that)
+#if _MSC_VER >= 1910
+			= delete
+#endif
+			;
+
 	protected:
 		void initialize(const char Filename[])
 		{

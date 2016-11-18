@@ -212,15 +212,15 @@ namespace base { namespace registry {
 
 					if (0 != size)
 					{
-						std::dynarray<char_type> buffer(1 + size);
+						std::dynarray<char_type> buffer2(1 + size);
 
-						if (0 == traits_type::expand_environment_strings(ret.c_str(), &buffer[0], size))
+						if (0 == traits_type::expand_environment_strings(ret.c_str(), &buffer2[0], size))
 						{
 							check_and_throw_exception("could not expand environment strings", ::GetLastError());
 						}
 						else
 						{
-							ret.assign(buffer.data(), size);
+							ret.assign(buffer2.data(), size);
 						}
 					}
 				}

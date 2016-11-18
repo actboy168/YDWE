@@ -9,3 +9,8 @@
 #		define _BASE_API __declspec(dllimport)
 #	endif
 #endif
+
+#if _MSC_VER >= 1910
+#else
+#define noexcept
+#endif
