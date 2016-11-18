@@ -170,7 +170,7 @@ zip(path.Development / 'Core' / 'DuiLib' / 'Resources', path.Result / 'bin' / 's
 )
 
 -- Step.7 复制到publish
-local ignore = { ['.pdb'] = true, ['.exp'] = true, ['.ilk'] = true, ['.aps'] = true, ['.lib'] = true }
+local ignore = { ['.pdb'] = true, ['.exp'] = true, ['.ilk'] = true, ['.aps'] = true, ['.lib'] = true, ['.ipdb'] = true, ['.iobj'] = true }
 copy_directory(path.Result, path.Build / 'publish' / configuration, 
     function(path)
         local ext = path:extension():string():lower()

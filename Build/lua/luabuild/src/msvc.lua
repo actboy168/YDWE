@@ -74,7 +74,7 @@ function mt:fullversion()
     local f = assert(io.open(uni.u2a(verfile:string()), 'r'))
 	local r = f:read 'a'
     f:close()
-    return r
+    return strtrim(r)
 end
 
 function mt:crtpath()
