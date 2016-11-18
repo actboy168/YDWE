@@ -135,9 +135,9 @@ local function copy_crt_dll()
     if configuration ~= 'Release' then
         return
     end
-    local crt_path = fs.path(msvc.path) / 'redist' / 'x86' / ('Microsoft.VC' .. msvc.version .. '.CRT')
-    if fs.exists(crt_path) then
-        copy_directory(crt_path, path.Result / 'bin', function(path)
+    local crtpath = msvc:crtpath()
+    if fs.exists(crtpath) then
+        copy_directory(crtpath, path.Result / 'bin', function(path)
             local ext = path:extension():string():lower()
             return ext == '.dll'
         end)
