@@ -79,7 +79,7 @@ local function host_copy_dll(curdir)
 end
 
 local function host_save_config(curdir, mappath, autostart)
-	local reg = registry.current_user() / "Software\\Blizzard Entertainment\\Warcraft III\\String"
+	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\Warcraft III\String]]
 	local tbl = {
 		--bot_mapcfgpath = '',
 		bot_mappath = mappath:parent_path():string(),

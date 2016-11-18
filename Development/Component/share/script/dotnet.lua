@@ -5,13 +5,13 @@ local function is_dotnet_installed()
 end
 
 local function is_dotnet_version_20_installed()
-	local reg = registry.local_machine() / "Software\\Microsoft\\NET Framework Setup\\NDP\\v2.0.50727"
+	local reg = registry.open [[HKEY_LOCAL_MACHINE\Software\Microsoft\NET Framework Setup\NDP\v2.0.50727]]
 	local value = reg["Install"]
 	return value and (value ~= 0)
 end
 
 local function is_dotnet_version_35_installed()
-	local reg = registry.local_machine() / "Software\\Microsoft\\NET Framework Setup\\NDP\\v3.5"
+	local reg = registry.open [[HKEY_LOCAL_MACHINE\Software\Microsoft\NET Framework Setup\NDP\v3.5]]
 	local value = reg["Install"]
 	return value and (value ~= 0)
 end

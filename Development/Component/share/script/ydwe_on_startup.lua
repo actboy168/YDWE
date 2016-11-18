@@ -9,7 +9,7 @@ ydwe_version = sys.version {}
 war3_version = sys.war3_version {}
 
 local function set_triggereditor_color()
-	local reg = registry.current_user() / "Software\\Blizzard Entertainment\\WorldEdit\\Trigger Display Colors"
+	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\WorldEdit\Trigger Display Colors]]
 	reg["TC_YDHIDE"] = { registry.REG_DWORD, 0xffff0000 }
 	reg["TC_COMMENT"] = { registry.REG_DWORD, 0xff008000 }
 end

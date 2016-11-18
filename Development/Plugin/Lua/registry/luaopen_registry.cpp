@@ -17,7 +17,9 @@ namespace luawarp { namespace registry {
 
 	std::wstring rkey_read_wstring(lua_State* L, int idx)
 	{
-		return base::u2w(std::string_view(lua_tostring(L, idx), lua_rawlen(L, idx)), base::conv_method::replace | '?');
+		size_t len = 0;
+		const char* str = luaL_checklstring(L, idx, &len);
+		return base::u2w(std::string_view(str, len), base::conv_method::replace | '?');
 	}
 	
 	int rkey_push_wstring(lua_State* L, const std::wstring& value)
@@ -33,18 +35,13 @@ namespace luawarp { namespace registry {
 		return 1;
 	}
 
-	int rkey_create(lua_State* L, int mt_idx, key_w::hkey_type keytype)
+	key_w* rkey_create(lua_State* L, key_w::hkey_type keytype, open_access::t access)
 	{
-		open_access::t accessfix = open_access::none;
-		if (lua_gettop(L) >= 1)
-		{
-			accessfix = (open_access::t)lua_tointeger(L, 1);
-		}
-		void* storage = lua_newuserdata(L, sizeof(key_w));
-		lua_pushvalue(L, mt_idx);
+		key_w* storage = (key_w*)lua_newuserdata(L, sizeof(key_w));
+		lua_pushvalue(L, lua_upvalueindex(1));
 		lua_setmetatable(L, -2);
-		new (storage)key_w(keytype, accessfix);
-		return 1;
+		new (storage)key_w(keytype, access);
+		return storage;
 	}
 
 	int rkey_copy(lua_State* L, int ud_idx, const key_w* key)
@@ -172,12 +169,48 @@ namespace luawarp { namespace registry {
 
 	int current_user(lua_State* L)
 	{
-		return rkey_create(L, lua_upvalueindex(1), HKEY_CURRENT_USER);
+		open_access::t access = open_access::none;
+		if (lua_gettop(L) >= 1)
+		{
+			access = (open_access::t)lua_tointeger(L, 1);
+		}
+		rkey_create(L, HKEY_CURRENT_USER, access);
+		return 1;
 	}
 
 	int local_machine(lua_State* L)
 	{
-		return rkey_create(L, lua_upvalueindex(1), HKEY_LOCAL_MACHINE);
+		open_access::t access = open_access::none;
+		if (lua_gettop(L) >= 1)
+		{
+			access = (open_access::t)lua_tointeger(L, 1);
+		}
+		rkey_create(L, HKEY_LOCAL_MACHINE, access);
+		return 1;
+	}
+
+	int open(lua_State* L)
+	{
+		std::wstring key = rkey_read_wstring(L, 1);
+		size_t pos = key.find(L'\\');
+		if (pos == -1) {
+			return 0;
+		}
+		std::wstring base =  key.substr(0, pos);
+		key_w::hkey_type basetype;
+		if (base == L"HKEY_LOCAL_MACHINE") {
+			basetype = HKEY_LOCAL_MACHINE;
+		}
+		else if (base == L"HKEY_CURRENT_USER") {
+			basetype = HKEY_CURRENT_USER;
+		}
+		else {
+			return 0;
+		}
+		std::wstring sub = key.substr(pos + 1);
+		key_w* rkey = rkey_create(L, basetype, open_access::none);
+		key_w ret = *rkey / sub;
+		return rkey_copy(L, lua_absindex(L, -1), &ret);
 	}
 
 	int del(lua_State* L)
@@ -196,6 +229,7 @@ int luaopen_registry(lua_State* L)
 	static luaL_Reg func[] = {
 		{ "current_user", registry::current_user },
 		{ "local_machine", registry::local_machine },
+		{ "open", registry::open },
 		{ "del", registry::del },
 		{ NULL, NULL }
 	};
