@@ -9,7 +9,7 @@ namespace i18n {
 	{
 		bool mofile_read_strings_array(buffer_reader& reader, uint32_t number_of_strings, uint32_t offset, std::string_view* result)
 		{
-			reader.seek(offset, std::ios::beg);
+			reader.seek(offset, buffer_reader::beg);
 
 			std::dynarray<uint32_t> strings_lengths(number_of_strings);
 
@@ -39,7 +39,7 @@ namespace i18n {
 				return false;
 			}
 
-			reader.seek(first_offset, std::ios::beg);
+			reader.seek(first_offset, buffer_reader::beg);
 
 			std::string_view string_array(reader.reads_ptr(string_array_size), string_array_size);
 
@@ -47,7 +47,7 @@ namespace i18n {
 			for (uint32_t i = 0; i < number_of_strings; i++)
 			{
 				size_t len = strings_lengths[i] + 1;
-				result[i] = std::string_view(iter, len);
+				result[i] = std::string_view(&*iter, len);
 				iter += len;
 			}
 

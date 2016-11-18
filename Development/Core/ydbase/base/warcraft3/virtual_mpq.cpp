@@ -93,7 +93,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 			{
 				return false;
 			}
-			std::string buf = base::file::read_stream(file_path.get()).read<std::string>();
+			std::string buf = base::file::read_stream(*file_path).read<std::string>();
 			void* result = SMemAlloc(buf.size() + reserve_size);
 			if (!result)
 			{

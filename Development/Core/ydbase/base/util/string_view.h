@@ -1,5 +1,11 @@
 #pragma once
 
+#if _HAS_CXX17
+
+#include <string_view>
+
+#else
+
 #include <cassert>
 #include <cstddef>
 #include <stdexcept>
@@ -585,3 +591,5 @@ namespace std {
 #undef BASE_CONSTEXPR
 #undef BASE_NOEXCEPT
 #undef BASE_CONSTEXPR_OR_CONST
+
+#endif

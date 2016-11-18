@@ -171,11 +171,15 @@ namespace base {
 			return std::move(read<std::string>(ec));
 		}
 
-		void seek(size_t offset, std::ios::seek_dir dir)
+		static  const int beg = 0;
+		static  const int end = 1;
+		static  const int cur = 2;
+
+		void seek(size_t offset, int dir)
 		{
 			switch (dir)
 			{
-			case  std::ios::beg:
+			case beg:
 				{
 					if (max_size_ < offset)
 					{
@@ -184,7 +188,7 @@ namespace base {
 					next_ = first_ + offset;
 				}
 				break;
-			case  std::ios::cur:
+			case cur:
 				{
 					if (size_ < offset)
 					{
@@ -193,7 +197,7 @@ namespace base {
 					next_ = next_ + offset;
 				}
 				break;
-			case  std::ios::end:
+			case end:
 				{
 					if (max_size_ < offset)
 					{

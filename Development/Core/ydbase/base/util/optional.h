@@ -1,8 +1,13 @@
 #pragma once
 
-#include <type_traits>
+#if _HAS_CXX17
 
-#if defined(_MSC_VER) && _MSC_VER < 1800
+#include <optional>
+
+#else
+
+#include <type_traits>
+#if _MSC_VER < 1800
 #include <boost/preprocessor/repetition.hpp>
 #include <boost/preprocessor/punctuation/comma_if.hpp>
 #include <boost/preprocessor/stringize.hpp>
@@ -14,7 +19,7 @@ namespace std {
 	class optional
 	{
 		typedef  typename std::aligned_storage<sizeof(T), std::alignment_of<T>::value>::type data_t;
-		
+
 	public:
 		optional()
 			: initialized_(false)
@@ -43,7 +48,7 @@ namespace std {
 				Assign(other);
 		}
 
-		optional(optional&& other) 
+		optional(optional&& other)
 			: initialized_(false)
 		{
 			if (other.initialized_)
@@ -135,7 +140,7 @@ namespace std {
 		{
 			new (&data_) T();
 			initialized_ = true;
-		} 
+		}
 		template <typename T1>
 		void Create(T1 t1)
 		{
@@ -205,3 +210,4 @@ namespace std {
 		data_t data_;
 	};
 }
+#endif

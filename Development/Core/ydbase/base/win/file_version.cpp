@@ -109,10 +109,10 @@ namespace base { namespace win {
 
 	namespace
 	{
-		int stoi_no_throw(std::wstring const& str)
+		int stoi_no_throw(std::wstring_view const& str)
 		{
 			try {
-				return std::stoi(str);
+				return std::stoi(std::wstring(str.data(), str.size()));
 			}
 			catch (...) {
 			}
@@ -124,11 +124,11 @@ namespace base { namespace win {
 		{
 			std::vector<std::wstring_view> version_array;
 			base::algorithm::split(version_array, version_string, pred);
-			sfv.major       = (version_array.size() > 0) ? stoi_no_throw(version_array[0].to_string()) : 0;
-			sfv.minor       = (version_array.size() > 1) ? stoi_no_throw(version_array[1].to_string()) : 0;
-			sfv.revision    = (version_array.size() > 2) ? stoi_no_throw(version_array[2].to_string()) : 0;
-			sfv.build       = (version_array.size() > 3) ? stoi_no_throw(version_array[3].to_string()) : 0;
-			sfv.size        = version_array.size();
+			sfv.major = (version_array.size() > 0) ? stoi_no_throw(version_array[0]) : 0;
+			sfv.minor = (version_array.size() > 1) ? stoi_no_throw(version_array[1]) : 0;
+			sfv.revision = (version_array.size() > 2) ? stoi_no_throw(version_array[2]) : 0;
+			sfv.build = (version_array.size() > 3) ? stoi_no_throw(version_array[3]) : 0;
+			sfv.size = version_array.size();
 		}
 	}
 

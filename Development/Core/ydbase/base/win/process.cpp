@@ -239,11 +239,11 @@ namespace base { namespace win {
 			wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
 
 			if (!detail::create_process(
-				application? application.get().c_str(): nullptr,
+				application? application->c_str(): nullptr,
 				command_line_buffer.data(),
 				inherit_handle_,
 				NORMAL_PRIORITY_CLASS,
-				current_directory ? current_directory.get().c_str() : nullptr,
+				current_directory ? current_directory->c_str() : nullptr,
 				&si_, &pi_, inject_dll_, replace_dll_
 				))
 			{
