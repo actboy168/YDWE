@@ -79,7 +79,7 @@ end
 
 function mt:crtpath()
     if self.version >= 150 then
-	    return self.__path / 'VC' / 'Redist' / 'MSVC' / fullversion() / 'x86' / ('Microsoft.VC' .. self.version .. '.CRT')
+	    return self.__path / 'VC' / 'Redist' / 'MSVC' / self:fullversion() / 'x86' / ('Microsoft.VC' .. self.version .. '.CRT')
     else
 	    return self.__path / 'VC' / 'Redist' / 'x86' / ('Microsoft.VC' .. self.version .. '.CRT')
     end
