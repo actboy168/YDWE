@@ -137,10 +137,15 @@ local function copy_crt_dll()
     end
     local crtpath = msvc:crtpath()
     if fs.exists(crtpath) then
-        copy_directory(crtpath, path.Result / 'bin', function(path)
-            local ext = path:extension():string():lower()
-            return ext == '.dll'
-        end)
+        if tonumber(msvc.version) < 150 then
+            copy_directory(crtpath, path.Result / 'bin', function(path)
+                local ext = path:extension():string():lower()
+                return ext == '.dll'
+            end)
+        else
+            fs.copy_file(crtpath / 'msvcp140.dll', path.Result / 'bin' / 'msvcp140.dll', true)
+            fs.copy_file(crtpath / 'vcruntime140.dll', path.Result / 'bin' / 'vcruntime140.dll', true)
+        end
     end
 end
 
