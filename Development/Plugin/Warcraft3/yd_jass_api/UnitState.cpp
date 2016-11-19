@@ -8,6 +8,8 @@
 #include <base/warcraft3/hashtable.h>  
 #include "StringPool.h"
 
+#define M_PI       3.14159265358979323846   // pi
+
 namespace base { namespace warcraft3 { namespace japi {	  
 
 	enum UNIT_STATE
@@ -792,6 +794,22 @@ namespace base { namespace warcraft3 { namespace japi {
 		return jass::jtrue;
 	}
 
+	jass::jnothing_t _cdecl EXSetUnitFacing(jass::jhandle_t unit, jass::jreal_t* pangle)
+	{
+		uint32_t object = handle_to_object(unit);
+		if (!object)
+		{
+			return;
+		}
+		uintptr_t obj = find_objectid_64(*(objectid_64*)(object + 0xA0));
+		if (!obj) {
+			return;
+		}
+
+		float angle = jass::from_real(*pangle) * float(M_PI / 180.);
+		*(float*)(*(uint32_t*)(obj + 0x28) + 0xA4) = angle;
+	}
+
 	void InitializeUnitState()
 	{
 		jass::japi_hook("GetUnitState", &RealGetUnitState, (uintptr_t)FakeGetUnitState);
@@ -804,7 +822,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXSetUnitInteger,      "EXSetUnitInteger",     "(III)B");   
 		jass::japi_add((uintptr_t)EXGetUnitArrayString,  "EXGetUnitArrayString", "(III)S");
 		jass::japi_add((uintptr_t)EXSetUnitArrayString,  "EXSetUnitArrayString", "(IIIS)B");
-		jass::japi_add((uintptr_t)EXPauseUnit, "EXPauseUnit", "(Hunit;B)V");
+		jass::japi_add((uintptr_t)EXPauseUnit,           "EXPauseUnit",          "(Hunit;B)V");
+		jass::japi_add((uintptr_t)EXSetUnitFacing,       "EXSetUnitFacing",      "(Hunit;R)V");
+
 		//jass::japi_add((uintptr_t)EXGetObject, "EXGetObject", "(Hhandle;)I");
 	}
 }}}
