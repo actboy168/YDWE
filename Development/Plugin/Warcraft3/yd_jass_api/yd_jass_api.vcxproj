@@ -89,6 +89,7 @@
     <ClCompile Include="AbilityState.cpp" />
     <ClCompile Include="DisableButtonBlp.cpp" />
     <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EventDamageData.cpp" />
     <ClCompile Include="Initialize.cpp" />
     <ClCompile Include="ItemState.cpp" />

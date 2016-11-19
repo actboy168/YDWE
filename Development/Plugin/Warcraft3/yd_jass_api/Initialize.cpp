@@ -8,6 +8,7 @@ namespace base { namespace warcraft3 { namespace japi {
 	void InitializeEventDamageData();
 	void InitializeDisplayChat();
 	void InitializeDisableButtonBlp();
+	void InitializeEffect();
 
 	void initialize()
 	{
@@ -17,5 +18,6 @@ namespace base { namespace warcraft3 { namespace japi {
 		InitializeEventDamageData();
 		InitializeDisplayChat();
 		InitializeDisableButtonBlp();
+		InitializeEffect();
 	}
 }}}
