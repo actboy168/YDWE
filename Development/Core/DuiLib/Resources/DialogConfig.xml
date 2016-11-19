@@ -137,6 +137,8 @@
                 <Combo name="FontName" dropboxsize="0, 300" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" />
                 <Control width="20" />
                 <Combo name="FontSize" width="60" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
+                  <ListLabelElement text="8" />
+                  <ListLabelElement text="9" />
                   <ListLabelElement text="10" />
                   <ListLabelElement text="11" />
                   <ListLabelElement text="12" />
@@ -144,6 +146,8 @@
                   <ListLabelElement text="14" />
                   <ListLabelElement text="15" />
                   <ListLabelElement text="16" />
+                  <ListLabelElement text="17" />
+                  <ListLabelElement text="18" />
                 </Combo>
               </HorizontalLayout>
               <Label name="FontPreview" text="AaBbCc 0123456789 测试" textcolor="#FF000000" align="center" height="80" />
