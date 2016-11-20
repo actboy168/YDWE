@@ -810,6 +810,16 @@ namespace base { namespace warcraft3 { namespace japi {
 		*(float*)(*(uint32_t*)(obj + 0x28) + 0xA4) = angle;
 	}
 
+	jass::jnothing_t _cdecl EXGhostUnit(jass::jhandle_t unit)
+	{
+		uint32_t uobj = handle_to_object(unit);
+		if (!uobj)
+		{
+			return;
+		}
+		this_call<void>(*(uint32_t*)(*(uint32_t*)uobj + 0x15C), uobj, 8, 16);
+	}
+
 	void InitializeUnitState()
 	{
 		jass::japi_hook("GetUnitState", &RealGetUnitState, (uintptr_t)FakeGetUnitState);
@@ -823,8 +833,8 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXGetUnitArrayString,  "EXGetUnitArrayString", "(III)S");
 		jass::japi_add((uintptr_t)EXSetUnitArrayString,  "EXSetUnitArrayString", "(IIIS)B");
 		jass::japi_add((uintptr_t)EXPauseUnit,           "EXPauseUnit",          "(Hunit;B)V");
+		jass::japi_add((uintptr_t)EXGhostUnit,           "EXGhostUnit",          "(Hunit;)V");
 		jass::japi_add((uintptr_t)EXSetUnitFacing,       "EXSetUnitFacing",      "(Hunit;R)V");
-
 		//jass::japi_add((uintptr_t)EXGetObject, "EXGetObject", "(Hhandle;)I");
 	}
 }}}
