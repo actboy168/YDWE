@@ -1,6 +1,7 @@
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/warcraft3/war3_searcher.h>
+#include <base/hook/fp_call.h>
 
 #define M_PI       3.14159265358979323846   // pi
 
@@ -202,6 +203,16 @@ namespace base { namespace warcraft3 { namespace japi {
 		};
 	}
 
+	jass::jnothing_t __cdecl EXSetEffectSpeed(jass::jhandle_t effect, jass::jreal_t* pspeed)
+	{
+		uintptr_t obj = handle_to_object(effect);
+		if (!obj) {
+			return;
+		}
+		uintptr_t eff = *(uintptr_t*)(obj + 0x28);
+		this_call<void>(*(uintptr_t*)(*(uintptr_t*)eff+0x28), eff, jass::from_real(*pspeed));
+	}
+
 	void InitializeEffect()
 	{
 		jass::japi_add((uintptr_t)EXSetEffectXY,      "EXSetEffectXY",      "(Heffect;RR)V");
@@ -209,14 +220,13 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXGetEffectX,       "EXGetEffectX",       "(Heffect;)R");
 		jass::japi_add((uintptr_t)EXGetEffectY,       "EXGetEffectY",       "(Heffect;)R");
 		jass::japi_add((uintptr_t)EXGetEffectZ,       "EXGetEffectZ",       "(Heffect;)R");
-
 		jass::japi_add((uintptr_t)EXSetEffectSize,    "EXSetEffectSize",    "(Heffect;R)V");
 		jass::japi_add((uintptr_t)EXGetEffectSize,    "EXGetEffectSize",    "(Heffect;)R");
-
-		jass::japi_add((uintptr_t)EXEffectMatRotateX, "EXEffectMatRotateX",  "(Heffect;R)V");
-		jass::japi_add((uintptr_t)EXEffectMatRotateY, "EXEffectMatRotateY",  "(Heffect;R)V");
-		jass::japi_add((uintptr_t)EXEffectMatRotateZ, "EXEffectMatRotateZ",  "(Heffect;R)V");
-		jass::japi_add((uintptr_t)EXEffectMatScale,   "EXEffectMatScale",    "(Heffect;RRR)V");
-		jass::japi_add((uintptr_t)EXEffectMatReset,   "EXEffectMatReset",    "(Heffect;)V");
+		jass::japi_add((uintptr_t)EXEffectMatRotateX, "EXEffectMatRotateX", "(Heffect;R)V");
+		jass::japi_add((uintptr_t)EXEffectMatRotateY, "EXEffectMatRotateY", "(Heffect;R)V");
+		jass::japi_add((uintptr_t)EXEffectMatRotateZ, "EXEffectMatRotateZ", "(Heffect;R)V");
+		jass::japi_add((uintptr_t)EXEffectMatScale,   "EXEffectMatScale",   "(Heffect;RRR)V");
+		jass::japi_add((uintptr_t)EXEffectMatReset,   "EXEffectMatReset",   "(Heffect;)V");
+		jass::japi_add((uintptr_t)EXSetEffectSpeed,   "EXSetEffectSpeed",   "(Heffect;R)V");
 	}
 }}}
