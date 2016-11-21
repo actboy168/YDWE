@@ -10697,7 +10697,7 @@ GetLastMovedItemInItemSlot=0,1,item
 _GetLastMovedItemInItemSlot_Category=TC_LAST
 
 GetLastCombinedItem=0,1,item
-_YDWEGetLastCombinedItem_Category=TC_LAST
+_GetLastCombinedItem_Category=TC_LAST
 
 UnitDropItem=0,1,item,unit,itemcode
 _UnitDropItem_Defaults=GetTriggerUnit,texp
@@ -11410,8 +11410,8 @@ _GetLastCreatedMultiboard_Category=TC_LAST
 YDWEGetMultiboardByInteger=0,1,multiboard,integer,integer
 _YDWEGetMultiboardByInteger_Category=TC_YDLD
 
-YDWEGetMultiboardByString=0,1,multiboard,string,string
-_YDWEGetmultiboardByString_Category=TC_YDLD
+YDWEGetMultiBoardByString=0,1,multiboard,string,string
+_YDWEGetMultiBoardByString_Category=TC_YDLD
 
 // returns multiboarditem
 MultiboardGetItem=1,0,multiboarditem,multiboard,integer,integer
@@ -11421,8 +11421,8 @@ _MultiboardGetItem_Category=TC_NOTHING
 YDWEGetMultiboardItemByInteger=0,1,multiboarditem,integer,integer
 _YDWEGetMultiboardItemByInteger_Category=TC_YDLD
 
-YDWEGetMultiboardItemByString=0,1,multiboarditem,string,string
-_YDWEGetmultiboardItemByString_Category=TC_YDLD
+YDWEGetMultiBoardItemByString=0,1,multiboarditem,string,string
+_YDWEGetMultiBoardItemByString_Category=TC_YDLD
 
 // returns timer
 CreateTimer=0,1,timer
