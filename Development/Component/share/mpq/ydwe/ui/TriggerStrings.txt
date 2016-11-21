@@ -7854,11 +7854,11 @@ YDWEGetEffectByStringHint="通过输入的路径，系统会根据当前魔兽�
 //AddLightning
 
 AddLightning="新建闪电效果 [R]"
-AddLightning="新建闪电效果: ",~闪电效果," (",~Boolean,"检查可见性) 起始点:("~X,",",~Y,") 终结点:(",~X,",",~Y,")"
+AddLightning="新建闪电效果: ",~闪电效果," (",~Boolean,"检查可见性) 起始点:(",~X,",",~Y,") 终结点:(",~X,",",~Y,")"
 AddLightningHint="会创建闪电效果. 允许检查可见性则在起始点和终结点都不可见时将不创建闪电效果."
 
 AddLightningEx="新建闪电效果(指定Z轴) [R]"
-AddLightningEx="新建闪电效果: ",~闪电效果," (",~Boolean,"检查可见性) 起始点:("~X,",",~Y,",",~Z,") 终结点:(",~X,",",~Y,",",~Z,")"
+AddLightningEx="新建闪电效果: ",~闪电效果," (",~Boolean,"检查可见性) 起始点:(",~X,",",~Y,",",~Z,") 终结点:(",~X,",",~Y,",",~Z,")"
 AddLightningExHint="会创建闪电效果. 允许检查可见性则在起始点和终结点都不可见时将不创建闪电效果."
 
 GetLastCreatedLightningBJ="最后创建的闪电效果"
