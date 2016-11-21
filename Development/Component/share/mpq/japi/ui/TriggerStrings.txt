@@ -71,6 +71,46 @@ YDWESetItemDataString="设置物品数据 (字符串) [JAPI]"
 YDWESetItemDataString="设置 ",~物品," 的 ",~数据," 为 ",~Value
 YDWESetItemDataStringHint=""
 
+YDWESetEffectLoc="移动 [JAPI]"
+YDWESetEffectLoc="移动 ",~特效," 到",~点
+YDWESetEffectLocHint=""
+
+EXSetEffectXY="移动 [JAPI]"
+EXSetEffectXY="移动 ",~特效," 到（ ",~X,", ",~X," ）"
+EXSetEffectXYHint=""
+
+EXSetEffectZ="设置高度 [JAPI]"
+EXSetEffectZ="设置 ",~特效," 的高度为 ",~高度
+EXSetEffectZHint=""
+
+EXSetEffectSize="设置大小 [JAPI]"
+EXSetEffectSize="设置 ",~特效," 的大小为 ",~大小
+EXSetEffectSizeHint=""
+
+EXSetEffectSpeed="设置动画速度 [JAPI]"
+EXSetEffectSpeed="设置 ",~特效," 的动画速度为 ",~动画速度
+EXSetEffectSpeedHint=""
+
+EXEffectMatReset="重置变换 [JAPI]"
+EXEffectMatReset="重置 ",~特效
+EXEffectMatResetHint="清空所有的旋转和缩放，重置为初始状态。"
+
+EXEffectMatRotateX="绕X轴旋转 [JAPI]"
+EXEffectMatRotateX=~特效," 绕X轴旋转 ",~度
+EXEffectMatRotateXHint="多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
+
+EXEffectMatRotateY="绕Y轴旋转 [JAPI]"
+EXEffectMatRotateY=~特效," 绕Y轴旋转 ",~度
+EXEffectMatRotateYHint="多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
+
+EXEffectMatRotateZ="绕Z轴旋转 [JAPI]"
+EXEffectMatRotateZ=~特效," 绕Z轴旋转 ",~度
+EXEffectMatRotateZHint="多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
+
+EXEffectMatScale="缩放 [JAPI]"
+EXEffectMatScale="设置 ",~特效," 的X轴缩放[ ",~缩放," ]，Y轴缩放[ ",~缩放," ]，Z轴缩放[ ",~缩放," ]。"
+EXEffectMatScaleHint="多次调用，效果会叠加，不想叠加需要先重置为初始状态。设置为2,2,2时相当于大小变为2倍。设置为负数时，就是镜像翻转。"
+
 [TriggerCallStrings]
 
 YDWEPlatformIsInPlatform="地图在11平台上 [JAPI]"
@@ -142,3 +182,19 @@ YDWEGetUnitAbilityDataStringHint=""
 YDWEGetItemDataString="物品数据 (字符串) [JAPI]"
 YDWEGetItemDataString=~物品," 的 ",~数据
 YDWEGetItemDataStringHint=""
+
+EXGetEffectX="X轴坐标 [JAPI]"
+EXGetEffectX=~特效," 的X轴坐标"
+EXGetEffectXHint=""
+
+EXGetEffectY="Y轴坐标 [JAPI]"
+EXGetEffectY=~特效," 的Y轴坐标"
+EXGetEffectYHint=""
+
+EXGetEffectZ="高度 [JAPI]"
+EXGetEffectZ=~特效," 的高度"
+EXGetEffectZHint=""
+
+EXGetEffectSize="大小 [JAPI]"
+EXGetEffectSize=~特效," 的大小"
+EXGetEffectSizeHint=""
