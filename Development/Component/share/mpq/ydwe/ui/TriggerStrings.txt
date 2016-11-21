@@ -3242,7 +3242,7 @@ AttachSoundToUnitBJHint="该动作仅用于3D音效."
 
 SetSoundPosition="设置3D音效位置(指定坐标) [R]"
 SetSoundPosition="设置 ",~3D音效," 的播放位置为(",~X,",",~Y,"), Z轴高度为 ",~Z
-SetSoundPosition="该动作仅用于3D音效."
+SetSoundPositionHint="该动作仅用于3D音效."
 
 SetSoundPositionLocBJ="设置3D音效位置(指定点)"
 SetSoundPositionLocBJ="设置 ",~3D音效," 的播放位置为 ",~指定点," Z轴高度为 ",~Z
@@ -6624,11 +6624,11 @@ LoadButtonHandleHint="如果不存在则返回空"
 
 LoadTextTagHandleBJ="<1.24> 从哈希表提取漂浮文字"
 LoadTextTagHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取漂浮文字"
-LoadTextTagHandleBJ="如果不存在则返回空"
+LoadTextTagHandleBJHint="如果不存在则返回空"
 
 LoadTextTagHandle="<1.24> 从哈希表提取漂浮文字 [C]"
 LoadTextTagHandle="在 ",~Hashtable," 的主索引 ",~Value," 子索引 ",~Value," 内提取漂浮文字"
-LoadTextTagHandle="如果不存在则返回空"
+LoadTextTagHandleHint="如果不存在则返回空"
 
 LoadLightningHandleBJ="<1.24> 从哈希表提取闪电效果"
 LoadLightningHandleBJ="在子索引 ",~Value," 主索引 ",~Value," 的 ",~Hashtable," 内提取闪电效果"
@@ -7911,7 +7911,7 @@ TerrainDeformCraterHint="深度可取负数. 永久地形变化在保存游戏�
 
 TerrainDeformRipple="新建地形变化:波纹 [R]"
 TerrainDeformRipple="新建的波纹变形. 中心坐标:(",~X,",",~Y,") 最终半径: ",~Radius," 深度: ",~Depth," 持续时间: ",~Duration," 毫秒, 变化次数: ",~Count," 面波数: ",~SpaceWave," 总波数: ",~TimeWave," 初始半径率: ",~数值," 变化类型: ",~Type
-TerrainDeformRipple="初始半径率=初始半径/最终半径."
+TerrainDeformRippleHint="初始半径率=初始半径/最终半径."
 
 TerrainDeformWave="新建地形变化:冲击波 [R]"
 TerrainDeformWave="新建的冲击波变形. 起始坐标:(",~X,",",~Y,") 波方向:(",~X,",",~Y,") 波距离: ",~distance," 波速度: ",~speed," 波半径: ",~radius," 深度: ",~Depth," 变形效果持续时间: ",~Delay," 毫秒, 变化次数: ",~Count

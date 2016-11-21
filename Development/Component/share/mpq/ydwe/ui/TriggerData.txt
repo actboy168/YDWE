@@ -11342,7 +11342,7 @@ _YDWEGetQuestItemByString_Category=TC_YDLD
 
 // returns dialog
 DialogCreate=0,1,dialog
-_GetClickedDialogBJ_Category=TC_DIALOG
+_DialogCreate_Category=TC_DIALOG
 
 GetClickedDialogBJ=0,1,dialog
 _GetClickedDialogBJ_Defaults=
