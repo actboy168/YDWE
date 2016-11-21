@@ -11407,8 +11407,8 @@ GetLastCreatedMultiboard=1,0,multiboard
 _GetLastCreatedMultiboard_Defaults=
 _GetLastCreatedMultiboard_Category=TC_LAST
 
-YDWEGetMultiboardByInteger=0,1,multiboard,integer,integer
-_YDWEGetMultiboardByInteger_Category=TC_YDLD
+YDWEGetMultiBoardByInteger=0,1,multiboard,integer,integer
+_YDWEGetMultiBoardByInteger_Category=TC_YDLD
 
 YDWEGetMultiBoardByString=0,1,multiboard,string,string
 _YDWEGetMultiBoardByString_Category=TC_YDLD
@@ -11418,8 +11418,8 @@ MultiboardGetItem=1,0,multiboarditem,multiboard,integer,integer
 _MultiboardGetItem_Defaults=bj_lastCreatedMultiboard,0,0
 _MultiboardGetItem_Category=TC_NOTHING
 
-YDWEGetMultiboardItemByInteger=0,1,multiboarditem,integer,integer
-_YDWEGetMultiboardItemByInteger_Category=TC_YDLD
+YDWEGetMultiBoardItemByInteger=0,1,multiboarditem,integer,integer
+_YDWEGetMultiBoardItemByInteger_Category=TC_YDLD
 
 YDWEGetMultiBoardItemByString=0,1,multiboarditem,string,string
 _YDWEGetMultiBoardItemByString_Category=TC_YDLD
