@@ -5481,8 +5481,8 @@ _GroupTrainOrderByIdBJ_ScriptName=GroupImmediateOrderById
 
 // Ubersplat actions
 CreateUbersplatBJ=1,location,ubersplattype,real,real,real,real,allowdontoption,allowdontoption
-_CreateUberSplatBJ_Defaults=_,UbersplatTypeNGOL,100,100,100,0,AllowDontDont,AllowDontDont
-_CreateUberSplatBJ_Category=TC_UBERSPLAT
+_CreateUbersplatBJ_Defaults=_,UbersplatTypeNGOL,100,100,100,0,AllowDontDont,AllowDontDont
+_CreateUbersplatBJ_Category=TC_UBERSPLAT
 
 DestroyUbersplat=1,ubersplat
 _DestroyUbersplat_Defaults=GetLastCreatedUbersplat
@@ -9159,8 +9159,8 @@ _YDWEI2UnitId_Defaults=_
 _YDWEI2UnitId_Category=TC_YDFC
 
 YDWEI2ItemId=0,1,itemcode,integer
-_DWEI2ItemId_Defaults=_
-_DWEI2ItemId_Category=TC_YDFC
+_YDWEI2ItemId_Defaults=_
+_YDWEI2ItemId_Category=TC_YDFC
 
 YDWES2Id=0,1,integer,string
 _YDWES2Id_Defaults=spsh
