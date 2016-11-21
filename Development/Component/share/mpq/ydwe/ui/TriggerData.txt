@@ -5515,7 +5515,7 @@ _SetUbersplatRenderAlways_Category=TC_UBERSPLAT
 
 // Location actions
 MoveLocation=0,location,real,real
-_MoveLocation=_,0,0
+_MoveLocation_Defaults=_,0,0
 _MoveLocation_Category=TC_LOCATION
 
 RemoveLocation=0,location
@@ -7995,7 +7995,7 @@ _SaveTriggerConditionHandleBJ_Defaults=_,_,_,GetLastCreatedHashtableBJ
 _SaveTriggerConditionHandleBJ_Category=TC_HASHTABLE
 
 SaveTriggerConditionHandle=0,hashtable,integer,integer,triggercondition
-_SaveTriggerConditionHandle=GetLastCreatedHashtableBJ,_,_,_
+_SaveTriggerConditionHandle_Defaults=GetLastCreatedHashtableBJ,_,_,_
 _SaveTriggerConditionHandle_Category=TC_HASHTABLE
 
 SaveTriggerActionHandleBJ=0,triggeraction,integer,integer,hashtable
@@ -8003,7 +8003,7 @@ _SaveTriggerActionHandleBJ_Defaults=_,_,_,GetLastCreatedHashtableBJ
 _SaveTriggerActionHandleBJ_Category=TC_HASHTABLE
 
 SaveTriggerActionHandle=0,hashtable,integer,integer,triggeraction
-_SaveTriggerActionHandle=GetLastCreatedHashtableBJ,_,_,_
+_SaveTriggerActionHandle_Defaults=GetLastCreatedHashtableBJ,_,_,_
 _SaveTriggerActionHandle_Category=TC_HASHTABLE
 
 SaveTriggerEventHandleBJ=0,event,integer,integer,hashtable
@@ -8011,7 +8011,7 @@ _SaveTriggerEventHandleBJ_Defaults=_,_,_,GetLastCreatedHashtableBJ
 _SaveTriggerEventHandleBJ_Category=TC_HASHTABLE
 
 SaveTriggerEventHandle=0,hashtable,integer,integer,event
-_SaveTriggerEventHandle=GetLastCreatedHashtableBJ,_,_,_
+_SaveTriggerEventHandle_Defaults=GetLastCreatedHashtableBJ,_,_,_
 _SaveTriggerEventHandle_Category=TC_HASHTABLE
 
 SaveForceHandleBJ=0,force,integer,integer,hashtable
@@ -8474,7 +8474,7 @@ _  _Defaults=_
 _  _Category=TC_NOTHING
 
 YDWEIsTriggerEventId=0,1,boolean,eventid
-_YDWEIsTriggerEventId=TC_NOTHING
+_YDWEIsTriggerEventId_Defaults=TC_NOTHING
 
  UnitAddAbility=0,1,boolean,unit,abilcode
 _ UnitAddAbility_Defaults=GetTriggerUnit,_
@@ -9063,7 +9063,7 @@ _HaveStoredValue_Category=TC_GAMECACHE
 WaygateIsActiveBJ=0,1,boolean,unit
 _WaygateIsActiveBJ_Defaults=_
 _WaygateIsActiveBJ_Category=TC_NEUTRALBUILDING
-_WaygateIsActiveBJ_Script=WaygateIsActive
+_WaygateIsActiveBJ_ScriptName=WaygateIsActive
 
 LoadBooleanBJ=0,1,boolean,integer,integer,hashtable
 _LoadBooleanBJ_Defaults=_,_,GetLastCreatedHashtableBJ
@@ -11358,7 +11358,7 @@ _YDWEGetDialogByString_Category=TC_YDLD
 
 // returns button
 DialogAddButton=0,1,button,dialog,StringExt,hotkeyint
-_DialogAddButton=_Defaults=GetClickedDialogBJ,_,HotKeyNull
+_DialogAddButton_Defaults=_Defaults=GetClickedDialogBJ,_,HotKeyNull
 _DialogAddButton_Category=TC_NOTHING
 
 GetLastCreatedButtonBJ=0,1,button
@@ -11602,7 +11602,7 @@ _LoadTriggerConditionHandleBJ_Defaults=_,_,GetLastCreatedHashtableBJ
 _LoadTriggerConditionHandleBJ_Category=TC_HASHTABLE
 
 LoadTriggerConditionHandle=0,1,triggercondition,hashtable,integer,integer
-_LoadTriggerConditionHandle=GetLastCreatedHashtableBJ,_,_
+_LoadTriggerConditionHandle_DefaultsGetLastCreatedHashtableBJ,_,_
 _LoadTriggerConditionHandle_Category=TC_HASHTABLE
 
 LoadTriggerActionHandleBJ=0,1,triggeraction,integer,integer,hashtable
@@ -11610,7 +11610,7 @@ _LoadTriggerActionHandleBJ_Defaults=_,_,GetLastCreatedHashtableBJ
 _LoadTriggerActionHandleBJ_Category=TC_HASHTABLE
 
 LoadTriggerActionHandle=0,1,triggeraction,hashtable,integer,integer
-_LoadTriggerActionHandle=GetLastCreatedHashtableBJ,_,_
+_LoadTriggerActionHandle_Defaults=GetLastCreatedHashtableBJ,_,_
 _LoadTriggerActionHandle_Category=TC_HASHTABLE
 
 LoadTriggerEventHandleBJ=0,1,event,integer,integer,hashtable
@@ -11618,7 +11618,7 @@ _LoadTriggerEventHandleBJ_Defaults=_,_,GetLastCreatedHashtableBJ
 _LoadTriggerEventHandleBJ_Category=TC_HASHTABLE
 
 LoadTriggerEventHandle=0,1,event,hashtable,integer,integer
-_LoadTriggerEventHandle=GetLastCreatedHashtableBJ,_,_
+_LoadTriggerEventHandle_Defaults=GetLastCreatedHashtableBJ,_,_
 _LoadTriggerEventHandle_Category=TC_HASHTABLE
 
 LoadForceHandleBJ=0,1,force,integer,integer,hashtable
