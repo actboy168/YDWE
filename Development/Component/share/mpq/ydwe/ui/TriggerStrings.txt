@@ -29,7 +29,7 @@ MapInitializationEventHint="该事件发生在读取地图时."
 // Game events
 
 TriggerRegisterVariableEvent="实数变量事件"
-TriggerRegisterVariableEvent=~变量" 的值 ",~Operation," ",~值
+TriggerRegisterVariableEvent=~变量," 的值 ",~Operation," ",~值
 TriggerRegisterVariableEventHint="这个事件只适用于实数类型的变量."
 
 TriggerRegisterGameLoadedEventBJ="游戏读档"
