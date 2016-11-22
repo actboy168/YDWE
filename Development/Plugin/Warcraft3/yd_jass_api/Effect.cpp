@@ -205,7 +205,7 @@ namespace base { namespace warcraft3 { namespace japi {
 			{ 0, 1, 0 },
 			{ 0, 0, 1 },
 		};
-		mat *= m;
+		mat = m;
 	}
 
 	jass::jnothing_t __cdecl EXSetEffectSpeed(jass::jhandle_t effect, jass::jreal_t* pspeed)
