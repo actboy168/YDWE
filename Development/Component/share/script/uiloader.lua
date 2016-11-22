@@ -1,32 +1,11 @@
 require "registry"
 require "util"
+local ui = require 'ui-builder.init'
 
 local loader = {}
 
-local function table_remove(a, k)
-	for i, v in ipairs(a) do
-		if v[1] == k then
-			table.remove(a, i)
-		end
-	end
-end
-
-local function table_append(a, b)
-	for _, v in ipairs(b) do
-		table_remove(a, v[1])
-	end
-	local pos = 1
-	for _, v in ipairs(b) do
-		table.insert(a, pos, v)
-		pos = pos + 1
-	end
-end
-
 function loader:loadfile(path)
-	local f, e = io.open(path, "r")
-	if not f then
-		return nil, e
-	end
+	local f = assert(io.open(path, "r"))
 	local tbl = {}
 	local section = nil
 	for line in f:lines() do
@@ -45,73 +24,6 @@ function loader:loadfile(path)
 	end
 	f:close()
 	return tbl
-end
-
-function loader:merge(tbl, from)
-	local rem = {}
-	for section, keyvalue in pairs(from) do
-		if string.sub(section, 1, 7) == 'remove:' then
-			rem[string.sub(section, 8, -1)] = keyvalue
-		else
-			if not tbl[section] then
-				tbl[section] = {}
-			end
-			table_append(tbl[section], keyvalue)
-		end
-	end
-	for section, keyvalue in pairs(rem) do
-		if tbl[section] then
-			for key, _ in pairs(keyvalue) do
-				table_remove(tbl[section], key)
-			end
-		end
-	end
-	return tbl
-end
-
-function loader:save_section(tbl, rt, name)
-	if tbl[name] then
-		table.insert(rt, "[" .. name .. "]")
-		for _, v in ipairs(tbl[name]) do
-			table.insert(rt, v[1] .. "=" .. v[2])
-		end
-	end
-end
-
-function loader:save_triggerdata(tbl)
-	local rt = {}
-	loader:save_section(tbl, rt, 'TriggerCategories')
-	loader:save_section(tbl, rt, 'TriggerTypes')
-	loader:save_section(tbl, rt, 'TriggerTypeDefaults')
-	loader:save_section(tbl, rt, 'TriggerParams')
-	loader:save_section(tbl, rt, 'TriggerEvents')
-	loader:save_section(tbl, rt, 'TriggerConditions')
-	loader:save_section(tbl, rt, 'TriggerActions')
-	loader:save_section(tbl, rt, 'TriggerCalls')
-	loader:save_section(tbl, rt, 'DefaultTriggerCategories')
-	loader:save_section(tbl, rt, 'DefaultTriggers')
-	return table.concat(rt, '\n')
-end
-
-function loader:save_triggerstrings(tbl)
-	local rt = {}
-	loader:save_section(tbl, rt, 'TriggerEventStrings')
-	loader:save_section(tbl, rt, 'TriggerConditionStrings')
-	loader:save_section(tbl, rt, 'TriggerActionStrings')
-	loader:save_section(tbl, rt, 'TriggerCallStrings')
-	loader:save_section(tbl, rt, 'AIFunctionStrings')
-	return table.concat(rt, '\n')
-end
-
-function loader:save_worldeditstrings(tbl)
-	local rt = {}
-	tbl = self:merge(tbl, {
-		WorldEditStrings = {
-			{ 'WESTRING_APPNAME', 'YD WorldEdit [ ' .. tostring(ydwe_version) .. ' ]' }
-		}
-	})
-	loader:save_section(tbl, rt, 'WorldEditStrings')
-	return table.concat(rt, '\n')
 end
 
 local function is_enable_japi()
@@ -146,26 +58,67 @@ function loader:config()
 	return true
 end
 
-function loader:watch(name, callback)
-	log.trace("virtual_mpq '" .. name .. "'")
+local data, string
+function loader:triggerdata(name, callback)
+	log.trace("virtual_mpq 'triggerdata'")
 	if #self.list == 0 then
 		return nil
 	end
-	local tbl = {}
+	local t = nil
 	for _, path in ipairs(self.list) do
-		local from = self:loadfile(path / name)
+		local from = ui.old_reader(path / 'ui')
 		if from then
-			tbl = self:merge(tbl, from)
+			t = ui.merge(t, from)
 		end
 	end
-	return callback(self, tbl)
+	data, string =  ui.old_writer(t)
+	return data
+end
+
+function loader:triggerstrings(name, callback)
+	log.trace("virtual_mpq 'triggerstrings'")
+	if #self.list == 0 then
+		return nil
+	end
+	local r = string
+	data, string = nil, nil
+	return r
+end
+
+local function table_append(a, b)
+	for _, bv in ipairs(b) do
+		for i, av in ipairs(a) do
+			if av[1] == bv[1] then
+				table.remove(a, i)
+			end
+		end
+	end
+	local pos = 1
+	for _, v in ipairs(b) do
+		table.insert(a, pos, v)
+		pos = pos + 1
+	end
+end
+
+function loader:worldeditstrings()
+	log.trace("virtual_mpq 'worldeditstrings'")
+	local tbl = self:loadfile(fs.ydwe_path() / 'share' / 'mpq' / 'units' / 'ui' / 'WorldEditStrings.txt')
+	table_append(tbl.WorldEditStrings, {
+		{ 'WESTRING_APPNAME', 'YD WorldEdit [ ' .. tostring(ydwe_version) .. ' ]' }
+	})
+	local rt = {}
+	table.insert(rt, "[WorldEditStrings]")
+	for _, v in ipairs(tbl.WorldEditStrings) do
+		table.insert(rt, v[1] .. "=" .. v[2])
+	end
+	return table.concat(rt, '\n')
 end
 
 function loader:initialize()
 	self:config()
-	virtual_mpq.watch('UI\\TriggerData.txt',      function (str) return self:watch(str, self.save_triggerdata) end)
-	virtual_mpq.watch('UI\\TriggerStrings.txt',   function (str) return self:watch(str, self.save_triggerstrings) end)
-	virtual_mpq.watch('UI\\WorldEditStrings.txt', function (str) return self:watch(str, self.save_worldeditstrings) end)
+	virtual_mpq.watch('UI\\TriggerData.txt',      function (name) return self:triggerdata() end)
+	virtual_mpq.watch('UI\\TriggerStrings.txt',   function (name) return self:triggerstrings() end)
+	virtual_mpq.watch('UI\\WorldEditStrings.txt', function (name) return self:worldeditstrings() end)
 end
 
 uiloader = loader
