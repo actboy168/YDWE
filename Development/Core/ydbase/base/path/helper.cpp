@@ -1,4 +1,5 @@
 #include <base/path/helper.h>
+#include <base/util/foreach.h>
 #include <deque>
 
 namespace base { namespace path {
@@ -7,7 +8,7 @@ namespace base { namespace path {
 	{
 		fs::path result = p.root_path();
 		std::deque<std::string> stack;
-		for (auto e : p.relative_path()) {
+		foreach (auto e, p.relative_path()) {
 			if (e == ".." && !stack.empty() && stack.back() != "..") {
 				stack.pop_back();
 			}
@@ -15,7 +16,7 @@ namespace base { namespace path {
 				stack.push_back(e.string());
 			}
 		}
-		for (auto e : stack) {
+		foreach (auto e, stack) {
 			result /= e;
 		}
 		std::string ret = result.string();

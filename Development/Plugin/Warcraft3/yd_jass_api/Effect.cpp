@@ -135,11 +135,12 @@ namespace base { namespace warcraft3 { namespace japi {
 		}
 		float angle = jass::from_real(*pangle) * float(M_PI / 180.);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
-		mat *= qmatrix<float>::value_type{
+		qmatrix<float>::value_type m = {
 			{ 1, 0, 0 },
 			{ 0, cos(angle), sin(angle) },
 			{ 0, -sin(angle), cos(angle) },
 		};
+		mat *= m;
 	}
 
 	jass::jnothing_t __cdecl EXEffectMatRotateY(jass::jhandle_t effect, jass::jreal_t* pangle)
@@ -150,11 +151,12 @@ namespace base { namespace warcraft3 { namespace japi {
 		}
 		float angle = jass::from_real(*pangle) * float(M_PI / 180.);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
-		mat *= qmatrix<float>::value_type{
+		qmatrix<float>::value_type m = {
 			{ cos(angle), 0, -sin(angle) },
 			{ 0, 1, 0 },
 			{ sin(angle), 0, cos(angle) },
 		};
+		mat *= m;
 	}
 
 	jass::jnothing_t __cdecl EXEffectMatRotateZ(jass::jhandle_t effect, jass::jreal_t* pangle)
@@ -165,11 +167,12 @@ namespace base { namespace warcraft3 { namespace japi {
 		}
 		float angle = jass::from_real(*pangle) * float(M_PI / 180.);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
-		mat *= qmatrix<float>::value_type{
+		qmatrix<float>::value_type m = {
 			{ cos(angle), sin(angle), 0 },
 			{ -sin(angle), cos(angle), 0 },
 			{ 0, 0, 1 },
 		};
+		mat *= m;
 	}
 
 	jass::jnothing_t __cdecl EXEffectMatScale(jass::jhandle_t effect, jass::jreal_t* px, jass::jreal_t* py, jass::jreal_t* pz)
@@ -182,11 +185,12 @@ namespace base { namespace warcraft3 { namespace japi {
 		float y = jass::from_real(*py);
 		float z = jass::from_real(*pz);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
-		mat *= qmatrix<float>::value_type{
+		qmatrix<float>::value_type m = {
 			{ x, 0, 0 },
 			{ 0, y, 0 },
 			{ 0, 0, z },
 		};
+		mat *= m;
 	}
 
 	jass::jnothing_t __cdecl EXEffectMatReset(jass::jhandle_t effect)
@@ -196,11 +200,12 @@ namespace base { namespace warcraft3 { namespace japi {
 			return;
 		}
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
-		mat = qmatrix<float>::value_type{
+		qmatrix<float>::value_type m = {
 			{ 1, 0, 0 },
 			{ 0, 1, 0 },
 			{ 0, 0, 1 },
 		};
+		mat *= m;
 	}
 
 	jass::jnothing_t __cdecl EXSetEffectSpeed(jass::jhandle_t effect, jass::jreal_t* pspeed)
