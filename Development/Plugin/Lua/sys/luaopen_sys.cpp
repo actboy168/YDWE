@@ -1,143 +1,21 @@
 
 #pragma warning(push, 3)
 #include <lua.hpp>
-#include <luabind/luabind.hpp>
-#include <luabind/object.hpp>
-#include <luabind/operator.hpp>
-#include <luabind/return_reference_to_policy.hpp>
-#include <base/lua/luabind.h>
 #pragma warning(pop)			 	  		
 #include <base/filesystem.h>
 #include <Windows.h>
 #include <base/win/process.h>
 #include <base/win/file_version.h>
+#include <base/util/unicode.h>
 #include <fcntl.h>
 #include <io.h>	  
 #include "NtQuerySystemProcessInformation.h"
 
-namespace NLuaAPI { namespace NSys {
-
-	namespace detail
-	{
-		std::optional<fs::path> cast_path_opt(const luabind::object &object)
-		{
-			std::optional<fs::path> path_opt;
-
-			switch (luabind::type(object))
-			{
-			case LUA_TSTRING:
-			{
-				boost::optional<std::wstring> opt = luabind::object_cast_nothrow<std::wstring>(object);
-				if (opt)
-				{
-					path_opt = fs::path(opt.get());
-				}
-			}
-			break;
-			case LUA_TUSERDATA:
-			{
-				boost::optional<fs::path> opt = luabind::object_cast_nothrow<fs::path>(object);
-				if (opt)
-				{
-					path_opt = opt.get();
-				}
-			}
-			break;
-			default:
-				break;
-			}
-
-			return std::move(path_opt);
-		}
-
-		std::optional<std::wstring> cast_wstring_opt(const luabind::object &object)
-		{
-			std::optional<std::wstring> str_opt;
-
-			switch (luabind::type(object))
-			{
-			case LUA_TSTRING:
-			{
-				boost::optional<std::wstring> opt = luabind::object_cast_nothrow<std::wstring>(object);
-				if (opt)
-				{
-					str_opt = opt.get();
-				}
-			}
-				break;
-			case LUA_TUSERDATA:
-			{
-				boost::optional<fs::path> opt = luabind::object_cast_nothrow<fs::path>(object);
-				if (opt)
-				{
-					str_opt = opt->wstring();
-				}
-			}
-			break;
-			default:
-				break;
-			}
-
-			return std::move(str_opt);
-		}
-
-		fs::path cast_path(const luabind::object &object)
-		{
-			std::optional<fs::path> path_opt = cast_path_opt(object);
-			return path_opt ? std::move(path_opt.get()) : std::move(fs::path());
-		}
-
-		std::wstring cast_wstring(const luabind::object &object)
-		{
-			std::optional<std::wstring> str_opt = cast_wstring_opt(object);
-			return str_opt ? std::move(str_opt.get()) : std::move(std::wstring());
-		}
-
-		HANDLE cast_file_handle(const luabind::object &object)
-		{
-			boost::optional<HANDLE> handle_opt;
-
-			switch (luabind::type(object))
-			{
-			case LUA_TUSERDATA:
-				{
-					boost::optional<void*> ptr_opt = luabind::object_cast_nothrow<void*>(object);
-					if (ptr_opt)
-					{
-						void* ptr = ptr_opt.get();
-						if (ptr)
-						{
-							handle_opt = (HANDLE)_get_osfhandle(fileno(*(FILE **)ptr));
-						}
-					}
-				}
-				break;
-			default:
-				break;
-			}
-
-			return handle_opt ? handle_opt.get() : NULL;
-		}
-	}
-
-	static void LuaProcessCreate(lua_State *pState, base::win::process& p, const luabind::object &application_object, const luabind::object &commandline_object, const luabind::object &currentdirectory_object)
-	{
-		lua_pushboolean(pState, p.create(
-			detail::cast_path_opt(application_object),
-			detail::cast_wstring(commandline_object),
-			detail::cast_path_opt(currentdirectory_object)
-		));
-	}
-
-	static void LuaProcessRedirect(lua_State *pState, base::win::process& p, const luabind::object &stdinput_object, const luabind::object &stdoutput_object, const luabind::object &stderror_object)
-	{
-		HANDLE stdinput  = detail::cast_file_handle(stdinput_object);
-		HANDLE stdoutput = detail::cast_file_handle(stdoutput_object);
-		HANDLE stderror  = detail::cast_file_handle(stderror_object);
-		bool result = p.redirect(stdinput, stdoutput, stderror);
-		lua_pushboolean(pState, result);
-	}
-}}
+static void lua_pushwstring(lua_State* L, const std::wstring& str)
+{
+	std::string ustr = base::w2u(str, base::conv_method::replace | '?');
+	lua_pushlstring(L, ustr.data(), ustr.size());
+}
 
 #define tolstream(L, idx)	((luaL_Stream*)luaL_checkudata(L, idx, LUA_FILEHANDLE))
 
@@ -229,8 +107,8 @@ static int LuaGetProcessList(lua_State* L)
 	{
 		std::wstring name(ImageName, ImageNameLength / sizeof(wchar_t));
 		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
-		luabind::object(L, name).push(L);
 
+		lua_pushwstring(L, name);
 		lua_pushvalue(L, -1);
 		lua_rawget(L, -3);
 		if (lua_isnoneornil(L, -1))
@@ -283,33 +161,156 @@ static int LuaKillProcess(lua_State* L)
 	return 1;
 }
 
+namespace process {
+
+	static void* newudata(lua_State* L)
+	{
+		void* storage = lua_newuserdata(L, sizeof(fs::path));
+		luaL_getmetatable(L, "process");
+		lua_setmetatable(L, -2);
+		return storage;
+	}
+
+	base::win::process& to(lua_State* L, int idx)
+	{
+		return *(base::win::process*)luaL_checkudata(L, idx, "process");
+	}
+
+	HANDLE cast_file_handle(lua_State* L, int idx)
+	{
+		if (LUA_TUSERDATA == lua_type(L, idx))
+		{
+			luaL_Stream* p = tolstream(L, idx);
+			if (p)
+			{
+				return (HANDLE)_get_osfhandle(fileno(p->f));
+			}
+		}
+		return NULL;
+	}
+
+	std::wstring luaL_checkwstring(lua_State* L, int idx)
+	{
+		size_t len = 0;
+		const char* str = luaL_checklstring(L, idx, &len);
+		return base::u2w(std::string_view(str, len), base::conv_method::replace | '?');
+	}
+
+	std::optional<fs::path> cast_path_opt(lua_State* L, int idx)
+	{
+		switch (lua_type(L, idx))
+		{
+		case LUA_TSTRING:
+			return fs::path(luaL_checkwstring(L, idx));
+		case LUA_TUSERDATA:
+			return *(fs::path*)luaL_checkudata(L, idx, "filesystem");
+		default:
+			break;
+		}
+		return std::optional<fs::path>();
+	}
+
+	std::wstring cast_wstring(lua_State* L, int idx)
+	{
+		switch (lua_type(L, idx))
+		{
+		case LUA_TSTRING:
+			return fs::path(luaL_checkwstring(L, idx));
+		default:
+			break;
+		}
+		return std::wstring();
+	}
+
+	int constructor(lua_State* L)
+	{
+		void* storage = newudata(L);
+		new (storage)base::win::process();
+		return 1;
+	}
+
+	int inject(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		bool ok = self.inject(*(fs::path*)luaL_checkudata(L, 2, "filesystem"));
+		lua_pushboolean(L, ok);
+		return 1;
+	}
+
+	int hide_window(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		bool ok = self.hide_window();
+		lua_pushboolean(L, ok);
+		return 1;
+	}
+
+	int redirect(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		bool ok = self.redirect(cast_file_handle(L, 2), cast_file_handle(L, 3), cast_file_handle(L, 4));
+		lua_pushboolean(L, ok);
+		return 1;
+	}
+
+	int create(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		bool ok = self.create(cast_path_opt(L, 2), cast_wstring(L, 3), cast_path_opt(L, 4));
+		lua_pushboolean(L, ok);
+		return 1;
+	}
+
+	int wait(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		lua_pushinteger(L, (lua_Integer)self.wait());
+		return 1;
+	}
+
+	int close(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		bool ok = self.close();
+		lua_pushboolean(L, ok);
+		return 1;
+	}
+
+	int id(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		lua_pushinteger(L, (lua_Integer)self.id());
+		return 1;
+	}
+}
+
 extern "C" __declspec(dllexport) int luaopen_sys(lua_State* L);
 
 int luaopen_sys(lua_State* L)
 {
-	using namespace luabind;
+	static luaL_Reg mt[] = {
+		{ "inject", process::inject },
+		{ "hide_window", process::hide_window },
+		{ "redirect", process::redirect },
+		{ "create", process::create },
+		{ "wait", process::wait },
+		{ "close", process::close },
+		{ "id", process::id },
+		{ NULL, NULL }
+	};
+	luaL_newmetatable(L, "process");
+	luaL_setfuncs(L, mt, 0);
+	lua_pushvalue(L, -1);
+	lua_setfield(L, -2, "__index");
 
-	// Bind sys
-	module(L, "sys")
-	[
-		class_<base::win::process>("process")
-			.def(constructor<>())
-			.def("inject",      &base::win::process::inject)
-			.def("hide_window", &base::win::process::hide_window)
-			.def("redirect",    &NLuaAPI::NSys::LuaProcessRedirect)
-			.def("create",      &NLuaAPI::NSys::LuaProcessCreate)
-			.def("wait",        (uint32_t (base::win::process::*)())&base::win::process::wait)
-			.def("close",       &base::win::process::close)
-			.def("id",          &base::win::process::id)
-	];
-
-	lua_getglobal(L, "sys");
 	luaL_Reg l2[] = {
+		{ "process", process::constructor },
 		{ "open_pipe", LuaOpenPipe },
 		{ "get_module_version_info", LuaGetVersionNumberString },
 		{ NULL, NULL },
 	};
-	luaL_setfuncs(L, l2, 0);
+	luaL_newlib(L, l2);
+	lua_setglobal(L, "sys");
 
 	luaL_Reg l3[] = {
 		{ "list", LuaGetProcessList },
