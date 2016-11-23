@@ -208,13 +208,15 @@ function event.EVENT_WE_EXIT(event_data)
 	return 0
 end
 
+local uni = require 'ffi.unicode'
+
 -- 在WE载入MSS引擎解码器时调用，过滤载入的dll
 -- event_data - 事件参数，table，包含以下值
 --	library_name - 解码器路径，字符串
 -- 返回非负数表示允许载入，负数表示不允许。无特殊情况一般返回0
 
 function event.EVENT_MSS_LOAD(event_data)
-	log.debug("Loading provider " .. ansi_to_utf8(event_data.library_name))
+	log.debug("Loading provider " .. uni.a2u(event_data.library_name))
 
 	-- 全部放行
 	return 0
