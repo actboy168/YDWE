@@ -28,49 +28,26 @@ namespace NYDWE {
 		int        idx_;
 	};
 
-	static int LuaOnSignal(lua_State* L, TEventData eventData, bool ignore_error, luabind::object const& func)
+	static int LuaOnSignal(lua_State* L, TEventData eventData, luabind::object const& func)
 	{
-		lua_stack_guard tmp_guard(L);
+		lua_stack_guard guard(L);
 
 		lua_newtable(L);
 		luabind::object event_data(luabind::from_stack(L, -1));
 		eventData(event_data);
-
-		if (ignore_error) 
-		{
-			try {
-				return luabind::call_function<int>(func, event_data);
-			}
-			catch (...) {
-			}
+		try {
+			return luabind::call_function<int>(func, event_data);
 		}
-		else
-		{
-			try {
-				return luabind::call_function<int>(func, event_data);
-			}
-			catch (luabind::error const& e) {
-				LOGGING_ERROR(lg) << "exception: \"" << e.what() << "\" " << lua_tostring(e.state(), -1);
-			}
-			catch (std::exception const& e) {
-				LOGGING_ERROR(lg) << "exception: \"" << e.what() << "\"";
-			}
-			catch (...) {
-				LOGGING_ERROR(lg) << "unknown exception";
-			}
+		catch (luabind::error const& e) {
+			LOGGING_ERROR(lg) << "exception: \"" << e.what() << "\" " << lua_tostring(e.state(), -1);
 		}
-
+		catch (std::exception const& e) {
+			LOGGING_ERROR(lg) << "exception: \"" << e.what() << "\"";
+		}
+		catch (...) {
+			LOGGING_ERROR(lg) << "unknown exception";
+		}
 		return -1;
-	}
-
-	void LuaRegisterEvent(lua_State* L, EVENT_ID evenetid, bool ignore_error, luabind::object const& func)
-	{
-		LOGGING_TRACE(lg) << "RegisterEvent id: " << evenetid << " ignore: " << (ignore_error ? "true" : "false");
-
-		if (evenetid >= 0 && evenetid < EVENT_MAXIMUM)
-		{
-			event_array[evenetid] = std::bind(LuaOnSignal, L, std::placeholders::_1, ignore_error, func);
-		}
 	}
 
 	int event_index(lua_State* L)
@@ -85,17 +62,18 @@ namespace NYDWE {
 		lua_pushstring(L, "eid");
 		lua_rawget(L, 1);
 		lua_pushvalue(L, 2);
-		lua_rawget(L, -2);
-		if (!lua_isnil(L, -1))
-		{
-			EVENT_ID evenetid = (EVENT_ID)lua_tointeger(L, -1);
-			LuaRegisterEvent(L, evenetid, false, luabind::object(luabind::from_stack(L, 3)));
-			lua_pushboolean(L, 1);
-		}
-		else
-		{
+		if (LUA_TNIL == lua_rawget(L, -2)) {
 			lua_pushboolean(L, 0);
+			return 1;
 		}
+
+		EVENT_ID evenetid = (EVENT_ID)lua_tointeger(L, -1);
+		LOGGING_TRACE(lg) << "RegisterEvent id: " << evenetid;
+		if (evenetid >= 0 && evenetid < EVENT_MAXIMUM)
+		{
+			event_array[evenetid] = std::bind(LuaOnSignal, L, std::placeholders::_1, luabind::object(luabind::from_stack(L, 3)));
+		}
+		lua_pushboolean(L, 1);
 		return 1;
 	}
 
@@ -112,7 +90,6 @@ namespace NYDWE {
 		LOGGING_INFO(lg) << message;
 		base::fast_call<void>(RealWeMessageShow, message, flag);
 	}
-
 }
 
 int luaopen_event(lua_State* L)
