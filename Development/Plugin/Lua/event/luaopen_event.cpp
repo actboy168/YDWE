@@ -59,11 +59,8 @@ namespace NYDWE {
 
 	int event_newindex(lua_State* L)
 	{
-		const char* name = lua_tostring(L, 2);
-		lua_pushstring(L, "eid");
-		lua_rawget(L, 1);
 		lua_pushvalue(L, 2);
-		if (LUA_TNIL == lua_rawget(L, -2)) {
+		if (LUA_TNIL == lua_rawget(L, lua_upvalueindex(1))) {
 			lua_pushboolean(L, 0);
 			return 1;
 		}
@@ -99,34 +96,34 @@ int luaopen_event(lua_State* L)
 
 	lua_newtable(L);
 	{
-		lua_pushstring(L, "eid");
-		lua_newtable(L);
-		{
 #define REGISTER_EID(name) \
 	lua_pushstring(L, #name); \
 	lua_pushinteger(L, NYDWE:: ## name); \
 	lua_rawset(L, -3);	
-			REGISTER_EID(EVENT_WE_START);
-			REGISTER_EID(EVENT_WE_EXIT);
-			REGISTER_EID(EVENT_PRE_SAVE_MAP);
-			REGISTER_EID(EVENT_SAVE_MAP);
-			REGISTER_EID(EVENT_TEST_MAP);
-			REGISTER_EID(EVENT_INIT_MENU);
-			REGISTER_EID(EVENT_MSS_LOAD);
-			REGISTER_EID(EVENT_WINDOW_MESSAGE);
-			REGISTER_EID(EVENT_DIALOG_MESSAGE);
-			REGISTER_EID(EVENT_NEW_OBJECT_ID);
+		REGISTER_EID(EVENT_WE_START);
+		REGISTER_EID(EVENT_WE_EXIT);
+		REGISTER_EID(EVENT_PRE_SAVE_MAP);
+		REGISTER_EID(EVENT_SAVE_MAP);
+		REGISTER_EID(EVENT_TEST_MAP);
+		REGISTER_EID(EVENT_INIT_MENU);
+		REGISTER_EID(EVENT_MSS_LOAD);
+		REGISTER_EID(EVENT_WINDOW_MESSAGE);
+		REGISTER_EID(EVENT_DIALOG_MESSAGE);
+		REGISTER_EID(EVENT_NEW_OBJECT_ID);
 #undef REGISTER_EID
-		}
-		lua_rawset(L, -3);
+	}
 
+	lua_newtable(L);
+	{
 		lua_newtable(L);
 		{
 			lua_pushstring(L, "__index");
-			lua_pushcclosure(L, NYDWE::event_index, 0);
+			lua_pushvalue(L, -4);
+			lua_pushcclosure(L, NYDWE::event_index, 1);
 			lua_rawset(L, -3);
 			lua_pushstring(L, "__newindex");
-			lua_pushcclosure(L, NYDWE::event_newindex, 0);
+			lua_pushvalue(L, -4);
+			lua_pushcclosure(L, NYDWE::event_newindex, 1);
 			lua_rawset(L, -3);
 		}
 		lua_setmetatable(L, -2);
