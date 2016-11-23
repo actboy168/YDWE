@@ -28,7 +28,7 @@ local function check_conflicting_ui()
 	end
 	
 	if found then
-		if gui.yesno_message(nil, string.format(_("YDWE has detected that there is a directory named \"%s\" located in Warcraft 3 installation directory. It may prevent YDWE from working. Do you want to delete it?"), 'UI'), _("YDWE"), gui.MB_ICONQUESTION | gui.MB_YESNO) == gui.IDYES then
+		if gui.yesno_message(nil, string.format(_("YDWE has detected that there is a directory named \"%s\" located in Warcraft 3 installation directory. It may prevent YDWE from working. Do you want to delete it?"), 'UI'), _("YDWE")) then
 			for index, file in ipairs(file_list) do			
 				log.debug("remove file " .. (fs.war3_path() / file):string())
 				pcall(fs.remove_all, fs.war3_path() / file)
