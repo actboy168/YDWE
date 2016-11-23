@@ -1,6 +1,20 @@
+local ffi = require 'ffi'
+ffi.cdef[[
+	int MessageBoxW(unsigned int hWnd, const wchar_t* lpText, const wchar_t* lpCaption, unsigned int uType);
+]]
 
+local uni = require 'ffi.unicode'
 local generate_id = 48886
 local message_map = {}
+
+gui.MB_ICONQUESTION = 0x00000020
+gui.MB_OK = 0x00000000
+gui.MB_YESNO = 0x00000004
+gui.IDOK = 1
+gui.MF_STRING = 0x00000000
+gui.MF_POPUP = 0x00000010
+gui.WM_COMMAND = 0x0111
+gui.WM_SETTEXT = 0x000C
 
 local mt = {}
 mt.__index = mt
@@ -32,10 +46,17 @@ function event.EVENT_WINDOW_MESSAGE(event_data)
 	return 0
 end
 
+local function messagebox(hwnd, text, caption, type)
+	local wtext = uni.u2w(text)
+	local wcaption = uni.u2w(caption)
+	-- todo: remove mem.pointer_to_number
+	return ffi.C.MessageBoxW(mem.pointer_to_number(hwnd), wtext, wcaption, type)
+end
+
 function gui.error_message(hwnd, fmt, ...)
-    return gui.message_dialog(hwnd, fmt:format(...), _("Error") ,gui.MB_ICONQUESTION | gui.MB_OK)
+    return messagebox(hwnd, fmt:format(...), _("Error") ,gui.MB_ICONQUESTION | gui.MB_OK)
 end
 
 function gui.yesno_message(hwnd, fmt, ...)
-    return gui.message_dialog(hwnd, fmt:format(...), _("YDWE"), gui.MB_ICONQUESTION | gui.MB_YESNO) == gui.IDYES
+    return messagebox(hwnd, fmt:format(...), _("YDWE"), gui.MB_ICONQUESTION | gui.MB_YESNO) == gui.IDYES
 end
