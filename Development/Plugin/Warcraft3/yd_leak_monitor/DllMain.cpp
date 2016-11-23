@@ -313,7 +313,6 @@ uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 		{
 			if (strcmp(str + LEAK_MONITOR_SIZE, "create_report") == 0)
 			{
-				std::fstream fs;
 				try {
 					fs::path report = base::path::self().remove_filename().remove_filename().remove_filename() / L"logs" / L"leak_moniter_report.txt";
 
