@@ -8,29 +8,13 @@
 #include <base/hook/inline.h>
 #include <base/exception/exception.h>
 #include <base/lua/object.h>
+#include <base/lua/guard.h>
 
 namespace NYDWE {
 
-	struct lua_stack_guard
-	{
-		lua_stack_guard(lua_State* pState)
-			: state_(pState)
-			, idx_(lua_gettop(state_))
-		{ }
-
-		~lua_stack_guard()
-		{
-			lua_settop(state_, idx_);
-		}
-
-		lua_State* state_;
-		int        idx_;
-	};
-
 	static int LuaOnSignal(lua_State* L, TEventData eventData, const base::lua::object& func)
 	{
-		lua_stack_guard guard(L);
-
+		base::lua::guard guard(L);
 
 		try {
 			func.push();

@@ -218,6 +218,7 @@
     <ClInclude Include="base\i18n\libintl.h" />
     <ClInclude Include="base\i18n\mofile.h" />
     <ClInclude Include="base\lockfree\queue.h" />
+    <ClInclude Include="base\lua\guard.h" />
     <ClInclude Include="base\lua\luabind.h" />
     <ClInclude Include="base\lua\luabind\converter_fs_path.h" />
     <ClInclude Include="base\lua\luabind\converter_std_string_view.h" />
