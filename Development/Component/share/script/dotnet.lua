@@ -21,7 +21,7 @@ dotnet = {}
 function dotnet:load (path, entry)
     local suc, res = pcall(
 		function()
-			return clr.object(self.default_appdomain, path, entry)
+			return clr.object(path, entry)
 		end
 	)
     if suc then
@@ -61,13 +61,6 @@ function dotnet:initialize ()
 			return false
 		end
 		log.debug(".net component loaded successfully.")
-	
-		self.default_appdomain = clr.appdomain()
-		if not self.default_appdomain:vaild() then
-			log.error("Failed to create appdomain")
-			return false
-		end
-		
 		self.initialized = true
 	end
 	return true

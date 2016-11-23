@@ -163,14 +163,6 @@ static int LuaKillProcess(lua_State* L)
 
 namespace process {
 
-	static void* newudata(lua_State* L)
-	{
-		void* storage = lua_newuserdata(L, sizeof(fs::path));
-		luaL_getmetatable(L, "process");
-		lua_setmetatable(L, -2);
-		return storage;
-	}
-
 	base::win::process& to(lua_State* L, int idx)
 	{
 		return *(base::win::process*)luaL_checkudata(L, idx, "process");
@@ -224,7 +216,9 @@ namespace process {
 
 	int constructor(lua_State* L)
 	{
-		void* storage = newudata(L);
+		void* storage = lua_newuserdata(L, sizeof(base::win::process));
+		luaL_getmetatable(L, "process");
+		lua_setmetatable(L, -2);
 		new (storage)base::win::process();
 		return 1;
 	}

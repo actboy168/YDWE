@@ -344,81 +344,71 @@ namespace clr_helper { namespace runtime {
 	};
 }
 
-namespace NLua { namespace CLR {
+namespace clr {
 
-	class AppDomain
+	CComPtr<mscorlib::_AppDomain> appdomain_;
+
+	std::wstring luaL_checkwstring(lua_State* L, int idx)
 	{
-	public:
-		AppDomain()
-			: ptr_(clr_helper::runtime::create_appdomain(nullptr))
-		{ }
+		size_t len = 0;
+		const char* str = luaL_checklstring(L, idx, &len);
+		return base::u2w(std::string_view(str, len), base::conv_method::replace | '?');
+	}
 
-		AppDomain(std::wstring const& version)
-			: ptr_(clr_helper::runtime::create_appdomain(version.c_str()))
-		{ }
-
-		mscorlib::_AppDomain const* get() const
-		{
-			return ptr_;
-		}
-
-		mscorlib::_AppDomain* get()
-		{
-			return ptr_;
-		}
-
-		bool vaild() const
-		{
-			return !!ptr_;
-		}
-
-	private:
-		CComPtr<mscorlib::_AppDomain> ptr_;
-	};
-
-	class Object
+	clr_helper::object& to(lua_State* L, int idx)
 	{
-	public:
-		Object(AppDomain& appdomain, std::wstring const& assembly, std::wstring const& type)
-			: object_(appdomain.get(), assembly.c_str(), type.c_str())
-		{ }
+		return *(clr_helper::object*)luaL_checkudata(L, idx, "clr-object");
+	}
 
-		Object(AppDomain& appdomain, fs::path const& assembly, std::wstring const& type)
-			: object_(appdomain.get(), assembly.c_str(), type.c_str())
-		{ }
+	int constructor(lua_State* L)
+	{
+		fs::path& assembly = *(fs::path*)luaL_checkudata(L, 1, "filesystem");
+		std::wstring type = luaL_checkwstring(L, 2);
+		void* storage = lua_newuserdata(L, sizeof(clr_helper::object));
+		luaL_getmetatable(L, "clr-object");
+		lua_setmetatable(L, -2);
+		new (storage)clr_helper::object(appdomain_, assembly.c_str(), type.c_str());
+		return 1;
+	}
 
-		uint32_t call(std::wstring const& name)
-		{
-			return (uint32_t)(object_.call(name.c_str()));
-		}
+	int call(lua_State* L)
+	{
+		clr_helper::object& self = to(L, 1);
+		std::wstring name = luaL_checkwstring(L, 2);
+		lua_pushinteger(L, (lua_Integer)self.call(name.c_str()));
+		return 1;
+	}
 
-		uint32_t error_code() const
-		{
-			return object_.error_code();
-		}
+	int error_code(lua_State* L)
+	{
+		clr_helper::object& self = to(L, 1);
+		lua_pushinteger(L, (lua_Integer)self.error_code());
+		return 1;
+	}
+}
 
-	private:
-		clr_helper::object object_;
-	};
-}}
-
-int luaopen_clr(lua_State *pState)
+int luaopen_clr(lua_State* L)
 {
-	using namespace luabind;
+	clr::appdomain_ = clr_helper::runtime::create_appdomain(nullptr);
+	if (!clr::appdomain_) {
+		return luaL_error(L, "init clr failded.");
+	}
 
-	module(pState, "clr")
-	[
-		class_<NLua::CLR::AppDomain>("appdomain")
-			.def(constructor<>())
-			.def(constructor<const std::wstring&>())
-			.def("vaild", &NLua::CLR::AppDomain::vaild)
-		,
-		class_<NLua::CLR::Object>("object")
-			.def(constructor<NLua::CLR::AppDomain&, std::wstring const&, std::wstring const&>())
-			.def(constructor<NLua::CLR::AppDomain&, fs::path const&, std::wstring const&>())
-			.def("call",       &NLua::CLR::Object::call)
-			.def("error_code", &NLua::CLR::Object::error_code)
-	];
+	static luaL_Reg mt[] = {
+		{ "call", clr::call },
+		{ "error_code", clr::error_code },
+		{ NULL, NULL }
+	};
+	luaL_newmetatable(L, "clr-object");
+	luaL_setfuncs(L, mt, 0);
+	lua_pushvalue(L, -1);
+	lua_setfield(L, -2, "__index");
 
+	static luaL_Reg l[] = {
+		{ "object", clr::constructor },
+		{ NULL, NULL },
+	};
+	luaL_newlib(L, l);
+	lua_setglobal(L, "clr");
 	return 0;
 }
