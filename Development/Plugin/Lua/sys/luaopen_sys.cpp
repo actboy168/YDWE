@@ -120,86 +120,6 @@ namespace NLuaAPI { namespace NSys {
 		}
 	}
 
-	static void LuaGetVersionNumberString(lua_State *pState, const fs::path &module)
-	{
-		lua_newtable(pState);
-		luabind::object version_table(luabind::from_stack(pState, -1));
-		base::win::simple_file_version fv(module.c_str(), L"FileVersion", L',');
-		if (fv.size >= 2)
-		{
-			version_table["major"] = fv.major;
-			version_table["minor"] = fv.minor;
-			version_table["revision"] = fv.revision;
-			version_table["build"] = fv.build;
-		}
-		else
-		{
-			base::win::simple_file_version fv(module.c_str(), L"FileVersion", L'.');
-			version_table["major"] = fv.major;
-			version_table["minor"] = fv.minor;
-			version_table["revision"] = fv.revision;
-			version_table["build"] = fv.build;
-		}
-		version_table.push(pState);
-	}
-
-#define tolstream(L, idx)	((luaL_Stream*)luaL_checkudata(L, idx, LUA_FILEHANDLE))
-
-	static luaL_Stream* LuaNewFile(lua_State* pState) 
-	{
-
-		luaL_Stream *p = (luaL_Stream*)lua_newuserdata(pState, sizeof(luaL_Stream));
-		p->closef = NULL;
-		luaL_setmetatable(pState, LUA_FILEHANDLE);
-		return p;
-	}
-
-	static int LuaFileClose(lua_State* pState)
-	{
-		luaL_Stream* p = tolstream(pState, 1);
-		int ok = fclose(p->f);
-		int en = errno;  /* calls to Lua API may change this value */
-		if (ok)
-		{
-			lua_pushboolean(pState, 1);
-			return 1;
-		}
-		else 
-		{
-			lua_pushnil(pState);
-			lua_pushfstring(pState, "%s", strerror(en));
-			lua_pushinteger(pState, en);
-			return 3;
-		}
-	}
-
-	static void LuaOpenFileForHandle(lua_State* pState, HANDLE h, int dmode, const char* mode)
-	{
-		luaL_Stream* pf = LuaNewFile(pState);
-		pf->f      = _fdopen(_open_osfhandle((long)h, dmode), mode);
-		pf->closef = &LuaFileClose;
-	}
-	
-	static void LuaOpenPipe(lua_State *pState)
-	{
-		SECURITY_ATTRIBUTES sa;
-		sa.nLength = sizeof(SECURITY_ATTRIBUTES);
-		sa.bInheritHandle = TRUE;
-		sa.lpSecurityDescriptor = NULL;
-
-		HANDLE read_pipe, write_pipe;
-		if (!::CreatePipe(&read_pipe, &write_pipe, &sa, 0))
-		{
-			lua_pushnil(pState);
-			lua_pushnil(pState);
-			return ;
-		}
-		::SetHandleInformation(read_pipe,  HANDLE_FLAG_INHERIT, 0);
-		::SetHandleInformation(write_pipe, HANDLE_FLAG_INHERIT, 0);
-		LuaOpenFileForHandle(pState, read_pipe,  _O_RDONLY | _O_TEXT, "rt");
-		LuaOpenFileForHandle(pState, write_pipe, _O_WRONLY | _O_TEXT, "wt");
-	}
-
 	static void LuaProcessCreate(lua_State *pState, base::win::process& p, const luabind::object &application_object, const luabind::object &commandline_object, const luabind::object &currentdirectory_object)
 	{
 		lua_pushboolean(pState, p.create(
@@ -217,77 +137,160 @@ namespace NLuaAPI { namespace NSys {
 		bool result = p.redirect(stdinput, stdoutput, stderror);
 		lua_pushboolean(pState, result);
 	}
-	
-	static int LuaGetProcessList(lua_State* L)
-	{
-		lua_newtable(L);
-		bool suc = NtQuerySystemProcessInformation([=](DWORD ProcessId, PWSTR ImageName, USHORT ImageNameLength)
-		{
-			std::wstring name(ImageName, ImageNameLength / sizeof(wchar_t));
-			std::transform(name.begin(), name.end(), name.begin(), ::tolower);
-			luabind::object(L, name).push(L);
+}}
 
-			lua_pushvalue(L, -1);
-			lua_rawget(L, -3);
-			if (lua_isnoneornil(L, -1))
-			{
-				lua_pop(L, 1);
-				lua_newtable(L);
-				{
-					lua_pushinteger(L, ProcessId);
-					lua_rawseti(L, -2, 1);
-				}
-				lua_rawset(L, -3);
-			}
-			else
-			{
-				size_t n = lua_rawlen(L, -1);
-				lua_pushinteger(L, ProcessId);
-				lua_rawseti(L, -2, n + 1);
-				lua_pop(L, 2);
-			}
-		});
-		if (!suc) {
-			lua_pop(L, 1);
-			lua_pushnil(L);
-		}
-		return 1;
-	}
+#define tolstream(L, idx)	((luaL_Stream*)luaL_checkudata(L, idx, LUA_FILEHANDLE))
 
-	static int LuaKillProcess(lua_State* L, int processid)
+static luaL_Stream* LuaNewFile(lua_State* L)
+{
+
+	luaL_Stream *p = (luaL_Stream*)lua_newuserdata(L, sizeof(luaL_Stream));
+	p->closef = NULL;
+	luaL_setmetatable(L, LUA_FILEHANDLE);
+	return p;
+}
+
+static int LuaFileClose(lua_State* L)
+{
+	luaL_Stream* p = tolstream(L, 1);
+	int ok = fclose(p->f);
+	int en = errno;  /* calls to Lua API may change this value */
+	if (ok)
 	{
-		HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, false, processid);
-		if (hProcess == NULL)
-		{
-			lua_pushboolean(L, 0);
-			return 1;
-		}
-		if (!TerminateProcess(hProcess, -1))
-		{
-			CloseHandle(hProcess);
-			lua_pushboolean(L, 0);
-			return 1;
-		}
-		if (WAIT_TIMEOUT == WaitForSingleObject(hProcess, 5000))
-		{
-			CloseHandle(hProcess);
-			lua_pushboolean(L, 0);
-			return 1;
-		}
-		CloseHandle(hProcess);
 		lua_pushboolean(L, 1);
 		return 1;
 	}
-}}
+	else
+	{
+		lua_pushnil(L);
+		lua_pushfstring(L, "%s", strerror(en));
+		lua_pushinteger(L, en);
+		return 3;
+	}
+}
+
+static void LuaOpenFileForHandle(lua_State* L, HANDLE h, int dmode, const char* mode)
+{
+	luaL_Stream* pf = LuaNewFile(L);
+	pf->f = _fdopen(_open_osfhandle((long)h, dmode), mode);
+	pf->closef = &LuaFileClose;
+}
+
+static int LuaOpenPipe(lua_State* L)
+{
+	SECURITY_ATTRIBUTES sa;
+	sa.nLength = sizeof(SECURITY_ATTRIBUTES);
+	sa.bInheritHandle = TRUE;
+	sa.lpSecurityDescriptor = NULL;
+
+	HANDLE read_pipe, write_pipe;
+	if (!::CreatePipe(&read_pipe, &write_pipe, &sa, 0))
+	{
+		lua_pushnil(L);
+		lua_pushnil(L);
+		return 2;
+	}
+	::SetHandleInformation(read_pipe, HANDLE_FLAG_INHERIT, 0);
+	::SetHandleInformation(write_pipe, HANDLE_FLAG_INHERIT, 0);
+	LuaOpenFileForHandle(L, read_pipe, _O_RDONLY | _O_TEXT, "rt");
+	LuaOpenFileForHandle(L, write_pipe, _O_WRONLY | _O_TEXT, "wt");
+	return 2;
+}
+
+static int LuaGetVersionNumberString(lua_State* L)
+{
+	const fs::path& module = *(fs::path*)luaL_checkudata(L, 1, "filesystem");
+	base::win::simple_file_version fv(module.c_str(), L"FileVersion", L',');
+	if (fv.size < 2)
+	{
+		fv = base::win::simple_file_version(module.c_str(), L"FileVersion", L'.');
+	}
+
+	lua_newtable(L);
+	lua_pushstring(L, "major");
+	lua_pushinteger(L, fv.major);
+	lua_rawset(L, -3);
+	lua_pushstring(L, "minor");
+	lua_pushinteger(L, fv.minor);
+	lua_rawset(L, -3);
+	lua_pushstring(L, "revision");
+	lua_pushinteger(L, fv.revision);
+	lua_rawset(L, -3);
+	lua_pushstring(L, "build");
+	lua_pushinteger(L, fv.build);
+	lua_rawset(L, -3);
+	return 1;
+}
+
+static int LuaGetProcessList(lua_State* L)
+{
+	lua_newtable(L);
+	bool suc = NtQuerySystemProcessInformation([=](DWORD ProcessId, PWSTR ImageName, USHORT ImageNameLength)
+	{
+		std::wstring name(ImageName, ImageNameLength / sizeof(wchar_t));
+		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+		luabind::object(L, name).push(L);
+
+		lua_pushvalue(L, -1);
+		lua_rawget(L, -3);
+		if (lua_isnoneornil(L, -1))
+		{
+			lua_pop(L, 1);
+			lua_newtable(L);
+			{
+				lua_pushinteger(L, ProcessId);
+				lua_rawseti(L, -2, 1);
+			}
+			lua_rawset(L, -3);
+		}
+		else
+		{
+			size_t n = lua_rawlen(L, -1);
+			lua_pushinteger(L, ProcessId);
+			lua_rawseti(L, -2, n + 1);
+			lua_pop(L, 2);
+		}
+	});
+	if (!suc) {
+		lua_pop(L, 1);
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+static int LuaKillProcess(lua_State* L)
+{
+	HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, false, (int)luaL_checkinteger(L, 1));
+	if (hProcess == NULL)
+	{
+		lua_pushboolean(L, 0);
+		return 1;
+	}
+	if (!TerminateProcess(hProcess, -1))
+	{
+		CloseHandle(hProcess);
+		lua_pushboolean(L, 0);
+		return 1;
+	}
+	if (WAIT_TIMEOUT == WaitForSingleObject(hProcess, 5000))
+	{
+		CloseHandle(hProcess);
+		lua_pushboolean(L, 0);
+		return 1;
+	}
+	CloseHandle(hProcess);
+	lua_pushboolean(L, 1);
+	return 1;
+}
 
 extern "C" __declspec(dllexport) int luaopen_sys(lua_State* L);
 
-int luaopen_sys(lua_State *pState)
+int luaopen_sys(lua_State* L)
 {
 	using namespace luabind;
 
 	// Bind sys
-	module(pState, "sys")
+	module(L, "sys")
 	[
 		class_<base::win::process>("process")
 			.def(constructor<>())
@@ -298,22 +301,25 @@ int luaopen_sys(lua_State *pState)
 			.def("wait",        (uint32_t (base::win::process::*)())&base::win::process::wait)
 			.def("close",       &base::win::process::close)
 			.def("id",          &base::win::process::id)
-		,
-
-		def("open_pipe", &NLuaAPI::NSys::LuaOpenPipe),
-		def("get_module_version_info", &NLuaAPI::NSys::LuaGetVersionNumberString)
 	];
 
-	module(pState, "process")
-	[
-		def("list", &NLuaAPI::NSys::LuaGetProcessList),
-		def("kill", &NLuaAPI::NSys::LuaKillProcess)
-	];
+	lua_getglobal(L, "sys");
+	luaL_Reg l2[] = {
+		{ "open_pipe", LuaOpenPipe },
+		{ "get_module_version_info", LuaGetVersionNumberString },
+		{ NULL, NULL },
+	};
+	luaL_setfuncs(L, l2, 0);
 
+	luaL_Reg l3[] = {
+		{ "list", LuaGetProcessList },
+		{ "kill", LuaKillProcess },
+		{ NULL, NULL },
+	};
+	luaL_newlib(L, l3);
+	lua_setglobal(L, "process");
 	return 0;
 }
-
-#include <windows.h>
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 {
