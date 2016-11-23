@@ -10,7 +10,7 @@
 #include <base/hook/iat.h>
 #include <base/hook/fp_call.h>	  
 #include <base/com/guard.h>	 
-#include <base/lua/luabind.h>
+#include <lua.hpp>
 
 #include "YDWEEvent.h"
 #include "YDWELogger.h"
@@ -19,6 +19,18 @@
 
 namespace NYDWE {
 
+	void lua_pushwstring(lua_State* L, const std::wstring& str)
+	{
+		std::string ustr = base::w2u(str, base::conv_method::replace | '?');
+		lua_pushlstring(L, ustr.data(), ustr.size());
+	}
+
+	void lua_pushastring(lua_State* L, const char* str)
+	{
+		std::string ustr = base::a2u(str, base::conv_method::replace | '?');
+		lua_pushlstring(L, ustr.data(), ustr.size());
+	}
+	
 	TEvent event_array[EVENT_MAXIMUM];
 
 	HWND  gWeMainWindowHandle;
@@ -34,12 +46,12 @@ namespace NYDWE {
 		// Initialize COM	   
 		base::com::guard com;
 
-		event_array[EVENT_WE_START]([&](luabind::object&){
+		event_array[EVENT_WE_START]([&](lua_State* L, int idx){
 		});
 
 		int32_t result = base::std_call<int32_t>(pgTrueWeWinMain, instance, prevInstance, commandLine, showCommand);
 
-		event_array[EVENT_WE_EXIT]([&](luabind::object&){
+		event_array[EVENT_WE_EXIT]([&](lua_State* L, int idx){
 
 		});
 
@@ -62,8 +74,10 @@ namespace NYDWE {
 		std::wstring_view fileExt(fileName.data() + fileName.size() - 4, 4);
 		if (gIsInCompileProcess && (fileExt == L".w3x" || fileExt == L".w3m"))
 		{
-			event_array[EVENT_SAVE_MAP]([&](luabind::object& data){
-				data["map_path"] = fileName;
+			event_array[EVENT_SAVE_MAP]([&](lua_State* L, int idx){
+				lua_pushstring(L, "map_path");
+				lua_pushwstring(L, fileName);
+				lua_settable(L, idx);
 			});
 			gIsInCompileProcess = false;
 		}
@@ -86,8 +100,10 @@ namespace NYDWE {
 				fs::path p(fileName);
 				p = p.parent_path().remove_filename() / p.filename();
 
-				event_array[EVENT_PRE_SAVE_MAP]([&](luabind::object& data){
-					data["map_path"] = p.wstring();
+				event_array[EVENT_PRE_SAVE_MAP]([&](lua_State* L, int idx){
+					lua_pushstring(L, "map_path");
+					lua_pushwstring(L, p.wstring());
+					lua_settable(L, idx);
 				});
 			}
 			catch (...) {				
@@ -113,8 +129,10 @@ namespace NYDWE {
 			{
 				LOGGING_TRACE(lg) << "Need to compile...";
 
-				int results = event_array[EVENT_SAVE_MAP]([&](luabind::object& data){
-					data["map_path"] = currentWarcraftMap.wstring();
+				int results = event_array[EVENT_SAVE_MAP]([&](lua_State* L, int idx){
+					lua_pushstring(L, "map_path");
+					lua_pushwstring(L, currentWarcraftMap.wstring());
+					lua_settable(L, idx);
 				});
 
 				gIsInCompileProcess = false;
@@ -130,12 +148,22 @@ namespace NYDWE {
 				LOGGING_TRACE(lg) << "No need to compile.";
 			}
 
-			int results = event_array[EVENT_TEST_MAP]([&](luabind::object& data){
-				data["map_path"] = currentWarcraftMap.wstring();
-				if (lpApplicationName)
-					data["application_name"] = base::a2w(std::string_view(lpApplicationName), base::conv_method::replace | '?');
-				if (lpCommandLine)
-					data["command_line"] = base::a2w(std::string_view(lpCommandLine), base::conv_method::replace | '?');
+			int results = event_array[EVENT_TEST_MAP]([&](lua_State* L, int idx){
+				lua_pushstring(L, "map_path");
+				lua_pushwstring(L, currentWarcraftMap.wstring());
+				lua_settable(L, idx);
+
+				if (lpApplicationName) {
+					lua_pushstring(L, "application_name");
+					lua_pushastring(L, lpApplicationName);
+					lua_settable(L, idx);
+				}
+
+				if (lpCommandLine) {
+					lua_pushstring(L, "command_line");
+					lua_pushastring(L, lpCommandLine);
+					lua_settable(L, idx);
+				}
 			});
 			return results >= 0;
 		}
@@ -161,12 +189,21 @@ namespace NYDWE {
 	uintptr_t pgTrueWeWindowProc;
 	LRESULT CALLBACK DetourWeWindowProc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam)
 	{
-		int results = event_array[EVENT_WINDOW_MESSAGE]([&](luabind::object& data){
-			data["handle"] = (void*)windowHandle;
-			data["message"] = message;
-			data["wparam"] = wParam;
-			data["lparam"] = lParam;
+		int results = event_array[EVENT_WINDOW_MESSAGE]([&](lua_State* L, int idx){
+			lua_pushstring(L, "handle");
+			lua_pushinteger(L, (lua_Integer)windowHandle);
+			lua_settable(L, idx);
+			lua_pushstring(L, "message");
+			lua_pushinteger(L, (lua_Integer)message);
+			lua_settable(L, idx);
+			lua_pushstring(L, "wparam");
+			lua_pushinteger(L, (lua_Integer)wParam);
+			lua_settable(L, idx);
+			lua_pushstring(L, "lparam");
+			lua_pushinteger(L, (lua_Integer)lParam);
+			lua_settable(L, idx);
 		});
+
 		if (results < 0)
 		{
 			return 0;
@@ -206,9 +243,13 @@ namespace NYDWE {
 		if (hWnd == gWeMainWindowHandle)
 		{
 			gWeMainMenuHandle = hMenu;
-			int results = event_array[EVENT_INIT_MENU]([&](luabind::object& data){
-				data["main_window_handle"] = (uint64_t)hWnd;
-				data["main_menu_handle"] = (uint64_t)hMenu;
+			int results = event_array[EVENT_INIT_MENU]([&](lua_State* L, int idx){
+				lua_pushstring(L, "main_window_handle");
+				lua_pushinteger(L, (lua_Integer)hWnd);
+				lua_settable(L, idx);
+				lua_pushstring(L, "main_menu_handle");
+				lua_pushinteger(L, (lua_Integer)hMenu);
+				lua_settable(L, idx);
 			});
 
 			// Hook window
@@ -228,11 +269,19 @@ namespace NYDWE {
 		{
 			if (lParam)
 			{
-				int results = event_array[EVENT_DIALOG_MESSAGE]([&](luabind::object& data){
-					data["handle"] = (uint64_t)dialogHandle;
-					data["message"] = message;
-					data["wparam"] = wParam;
-					data["lparam"] = base::a2u((const char*)lParam);
+				int results = event_array[EVENT_DIALOG_MESSAGE]([&](lua_State* L, int idx){
+					lua_pushstring(L, "handle");
+					lua_pushinteger(L, (lua_Integer)dialogHandle);
+					lua_settable(L, idx);
+					lua_pushstring(L, "message");
+					lua_pushinteger(L, (lua_Integer)message);
+					lua_settable(L, idx);
+					lua_pushstring(L, "wparam");
+					lua_pushinteger(L, (lua_Integer)wParam);
+					lua_settable(L, idx);
+					lua_pushstring(L, "lparam");
+					lua_pushastring(L, (const char*)lParam);
+					lua_settable(L, idx);
 				});
 				if (results < 0)
 				{
@@ -242,11 +291,19 @@ namespace NYDWE {
 		}
 		else if (message == WM_COMMAND)
 		{
-			int results = event_array[EVENT_DIALOG_MESSAGE]([&](luabind::object& data){
-				data["handle"] = (uint64_t)dialogHandle;
-				data["message"] = message;
-				data["wparam"] = wParam;
-				data["lparam"] = lParam;
+			int results = event_array[EVENT_DIALOG_MESSAGE]([&](lua_State* L, int idx){
+				lua_pushstring(L, "handle");
+				lua_pushinteger(L, (lua_Integer)dialogHandle);
+				lua_settable(L, idx);
+				lua_pushstring(L, "message");
+				lua_pushinteger(L, (lua_Integer)message);
+				lua_settable(L, idx);
+				lua_pushstring(L, "wparam");
+				lua_pushinteger(L, (lua_Integer)wParam);
+				lua_settable(L, idx);
+				lua_pushstring(L, "lparam");
+				lua_pushinteger(L, (lua_Integer)lParam);
+				lua_settable(L, idx);
 			});
 			if (results < 0)
 			{
@@ -275,10 +332,16 @@ namespace NYDWE {
 	{
 		uint32_t object_type = ((uint32_t(__fastcall*)(uintptr_t))(*(uintptr_t*)(*(uintptr_t*)this_ + 0x18)))(this_);
 
-		int results = event_array[EVENT_NEW_OBJECT_ID]([&](luabind::object& data){
-			data["class"] = this_;
-			data["object_type"] = object_type;
-			data["default_id"] = default_id;
+		int results = event_array[EVENT_NEW_OBJECT_ID]([&](lua_State* L, int idx){
+			lua_pushstring(L, "class");
+			lua_pushinteger(L, (lua_Integer)this_);
+			lua_settable(L, idx);
+			lua_pushstring(L, "object_type");
+			lua_pushinteger(L, (lua_Integer)object_type);
+			lua_settable(L, idx);
+			lua_pushstring(L, "default_id");
+			lua_pushinteger(L, (lua_Integer)default_id);
+			lua_settable(L, idx);
 		});
 		if (results < 0)
 		{
@@ -313,8 +376,10 @@ namespace NYDWE {
 	uintptr_t pgTrueMssRIBLoadProviderLibrary;
 	static HPROVIDER AILCALL DetourMssRIBLoadProviderLibrary(C8 const FAR *fileName)
 	{
-		int results = event_array[EVENT_MSS_LOAD]([&](luabind::object& data){
-			data["library_name"] = std::string(fileName);
+		int results = event_array[EVENT_MSS_LOAD]([&](lua_State* L, int idx){
+			lua_pushstring(L, "library_name");
+			lua_pushastring(L, fileName);
+			lua_settable(L, idx);
 		});
 		if (results < 0)
 			return 0;

@@ -1,11 +1,9 @@
 #pragma once
 
-#include <luabind/luabind.hpp>
-
 namespace NYDWE
 {
 
-typedef std::function<void(luabind::object&)> TEventData;
+typedef std::function<void(lua_State* L, int idx)> TEventData;
 typedef std::function<int(TEventData)> TEvent;
 
 enum EVENT_ID

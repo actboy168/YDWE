@@ -33,9 +33,10 @@ namespace NYDWE {
 		lua_stack_guard guard(L);
 
 		lua_newtable(L);
-		luabind::object event_data(luabind::from_stack(L, -1));
-		eventData(event_data);
+		eventData(L, lua_absindex(L, -1));
+
 		try {
+			luabind::object event_data(luabind::from_stack(L, -1));
 			return luabind::call_function<int>(func, event_data);
 		}
 		catch (luabind::error const& e) {
