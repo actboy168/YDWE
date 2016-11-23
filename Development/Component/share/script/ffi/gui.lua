@@ -1,6 +1,11 @@
 local ffi = require 'ffi'
 ffi.cdef[[
+	unsigned int CreateMenu();
+	int AppendMenuW(unsigned int hMenu, unsigned int uFlags, unsigned int uIDNewltem, const wchar_t* lpNewltem);
 	int MessageBoxW(unsigned int hWnd, const wchar_t* lpText, const wchar_t* lpCaption, unsigned int uType);
+	unsigned int GetForegroundWindow();
+	unsigned int GetDlgItem(unsigned int hDlg, int nIDDlgItem);
+	int EnableWindow(unsigned int hWnd, int bEnable);
 ]]
 
 local uni = require 'ffi.unicode'
@@ -20,13 +25,15 @@ local mt = {}
 mt.__index = mt
 function mt:add(name, callback)
 	message_map[generate_id] = callback
-	gui.append_menu(self.handle, gui.MF_STRING, generate_id, name)
+	local wname = uni.u2w(name)
+	ffi.C.AppendMenuW(self.handle, gui.MF_STRING, generate_id, wname)
 	generate_id = generate_id + 1
 end
 
 function gui.menu(main_menu, name)
-	local handle = gui.create_menu()
-	gui.append_menu(main_menu, gui.MF_STRING | gui.MF_POPUP, mem.pointer_to_number(handle), name)
+	local handle = ffi.C.CreateMenu()
+	local wname = uni.u2w(name)
+	ffi.C.AppendMenuW(main_menu, gui.MF_STRING | gui.MF_POPUP, handle, wname)
 	return setmetatable({handle = handle}, mt)
 end
 
@@ -49,8 +56,7 @@ end
 local function messagebox(hwnd, text, caption, type)
 	local wtext = uni.u2w(text)
 	local wcaption = uni.u2w(caption)
-	-- todo: remove mem.pointer_to_number
-	return ffi.C.MessageBoxW(mem.pointer_to_number(hwnd), wtext, wcaption, type)
+	return ffi.C.MessageBoxW(hwnd, wtext, wcaption, type)
 end
 
 function gui.error_message(hwnd, fmt, ...)
@@ -59,4 +65,12 @@ end
 
 function gui.yesno_message(hwnd, fmt, ...)
     return messagebox(hwnd, fmt:format(...), _("YDWE"), gui.MB_ICONQUESTION | gui.MB_YESNO) == gui.IDYES
+end
+
+function gui.get_foreground_window()
+	return ffi.C.GetForegroundWindow()
+end
+
+function gui.enable_dialog_item(hwnd, id, enable)
+	return ffi.C.EnableWindow(ffi.C.GetDlgItem(hwnd, id), enable)
 end

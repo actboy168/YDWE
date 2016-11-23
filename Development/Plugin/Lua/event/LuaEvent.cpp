@@ -207,8 +207,8 @@ namespace NYDWE {
 		{
 			gWeMainMenuHandle = hMenu;
 			int results = event_array[EVENT_INIT_MENU]([&](luabind::object& data){
-				data["main_window_handle"] = (void*)hWnd;
-				data["main_menu_handle"] = (void*)hMenu;
+				data["main_window_handle"] = (uint64_t)hWnd;
+				data["main_menu_handle"] = (uint64_t)hMenu;
 			});
 
 			// Hook window
@@ -229,7 +229,7 @@ namespace NYDWE {
 			if (lParam)
 			{
 				int results = event_array[EVENT_DIALOG_MESSAGE]([&](luabind::object& data){
-					data["handle"] = (void*)dialogHandle;
+					data["handle"] = (uint64_t)dialogHandle;
 					data["message"] = message;
 					data["wparam"] = wParam;
 					data["lparam"] = base::a2u((const char*)lParam);
@@ -243,7 +243,7 @@ namespace NYDWE {
 		else if (message == WM_COMMAND)
 		{
 			int results = event_array[EVENT_DIALOG_MESSAGE]([&](luabind::object& data){
-				data["handle"] = (void*)dialogHandle;
+				data["handle"] = (uint64_t)dialogHandle;
 				data["message"] = message;
 				data["wparam"] = wParam;
 				data["lparam"] = lParam;

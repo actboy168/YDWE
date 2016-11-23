@@ -44,38 +44,6 @@ local function open_offical_site()
 	os.execute('explorer "http://www.ydwe.net"')
 end
 
--- 导出WE文件
-local function file_export()
-	-- 打开对话框让用户输入
-	local ok, file_path_string = gui.prompt_for_input(
-		main_window_handle, 																		-- 父窗口句柄
-		_("Export file"),														-- 标题栏
-		_("Please enter the file path to export. Currently you can export only one file each time"),																				-- 提示语句
-		"",																		-- 文本编辑区初始文字
-		_("OK"),																-- “确定”按钮文本
-		_("Cancel")																-- “取消"按钮文本
-	)
-
-	if ok then
-		if storm.has_file(file_path_string) then
-			-- 弹出选择保存文件对话框
-			local ok, file = gui.choose_save_file(
-				main_window_handle, 														-- HWND
-				"*.*\0*.*\0", 											-- Filter
-				fs.path(file_path_string):filename():string(),					-- Initial file name
-				nil, 													-- Initial Dir
-				_("Save file")											-- Title
-			)
-			if ok then
-				-- 解压文件
-				storm.extract_file(fs.path(file), file_path_string)
-			end
-		else
-			gui.error_message(nil, _("The file you have entered does not exist."))
-		end
-	end
-end
-
 -- Lua测试
 local function lua_test()
 	-- 打开对话框让用户输入
@@ -128,12 +96,8 @@ function event.EVENT_INIT_MENU(event_data)
 	menu:add(_("Show J&assHelper version"), show_jasshelper_version)
 	menu:add(_("Show c&Jass version"), show_cjass_version)
 	menu:add(_("Launch YDWE &official website"), open_offical_site)
-	menu:add(_("&Export WE file"), file_export)
 	menu:add(_("&Lua Test"), lua_test)
 	menu:add(_("Cre&dits"), show_credit)
-
-	-- 刷新菜单
-	gui.draw_menu_bar(event_data.main_window_handle)
 
 	main_window_handle = event_data.main_window_handle
 
