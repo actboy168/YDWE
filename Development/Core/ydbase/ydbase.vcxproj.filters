@@ -587,6 +587,9 @@
     <ClInclude Include="base\lua\luabind\converter_fs_path.h">
       <Filter>base\lua\luabind</Filter>
     </ClInclude>
+    <ClInclude Include="base\lua\object.h">
+      <Filter>base\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

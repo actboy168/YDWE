@@ -1,14 +1,13 @@
 
 #pragma warning(push, 3)
 #include <lua.hpp>
-#include <luabind/luabind.hpp>
-#include <base/lua/luabind.h>
 #pragma warning(pop)
 #include "YDWEEvent.h"
 #include "YDWELogger.h"
 #include <base/hook/fp_call.h>	
 #include <base/hook/inline.h>
 #include <base/exception/exception.h>
+#include <base/lua/object.h>
 
 namespace NYDWE {
 
@@ -28,19 +27,19 @@ namespace NYDWE {
 		int        idx_;
 	};
 
-	static int LuaOnSignal(lua_State* L, TEventData eventData, luabind::object const& func)
+	static int LuaOnSignal(lua_State* L, TEventData eventData, const base::lua::object& func)
 	{
 		lua_stack_guard guard(L);
 
-		lua_newtable(L);
-		eventData(L, lua_absindex(L, -1));
 
 		try {
-			luabind::object event_data(luabind::from_stack(L, -1));
-			return luabind::call_function<int>(func, event_data);
-		}
-		catch (luabind::error const& e) {
-			LOGGING_ERROR(lg) << "exception: \"" << e.what() << "\" " << lua_tostring(e.state(), -1);
+			func.push();
+			lua_newtable(L);
+			eventData(L, lua_absindex(L, -1));
+			if (LUA_OK != lua_pcall(L, 1, 1, 0)) {
+				throw std::exception(lua_tostring(L, -1));
+			}
+			return (int)lua_tointeger(L, -1);
 		}
 		catch (std::exception const& e) {
 			LOGGING_ERROR(lg) << "exception: \"" << e.what() << "\"";
@@ -69,7 +68,7 @@ namespace NYDWE {
 		LOGGING_TRACE(lg) << "RegisterEvent id: " << evenetid;
 		if (evenetid >= 0 && evenetid < EVENT_MAXIMUM)
 		{
-			event_array[evenetid] = std::bind(LuaOnSignal, L, std::placeholders::_1, luabind::object(luabind::from_stack(L, 3)));
+			event_array[evenetid] = std::bind(LuaOnSignal, L, std::placeholders::_1, base::lua::object(L, 3));
 		}
 		lua_pushboolean(L, 1);
 		return 1;
