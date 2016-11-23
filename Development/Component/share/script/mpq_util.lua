@@ -1,5 +1,5 @@
 
-local storm    = ar.storm
+local storm    = require 'ffi.storm'
 local stormlib = require 'ffi.stormlib'
 
 mpq_util = {}
@@ -117,7 +117,7 @@ function mpq_util:load_mpq(mpqname, priority)
 	
 	mpq = fs.ydwe_path() / "share" / "mpq" / (mpqname .. ".mpq")
 	if fs.exists(mpq) then
-		result = storm.open_archive(mpq, priority)
+		result = storm.open(mpq, priority)
 		if result then
 			log.debug("Loaded " .. mpq:filename():string())
 		else

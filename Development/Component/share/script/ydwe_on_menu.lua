@@ -1,5 +1,4 @@
 
-local storm = ar.storm
 
 -- 主窗口句柄
 local main_window_handle = nil

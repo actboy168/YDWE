@@ -1,11 +1,8 @@
 require "sys"
 require "filesystem"
 require "util"
-require "ar_storm"
 require "mpq_util"
-
-
-local storm    = ar.storm
+local storm = require 'ffi.storm'
 
 jasshelper = {}
 

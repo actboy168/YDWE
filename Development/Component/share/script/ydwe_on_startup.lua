@@ -2,8 +2,6 @@ require "compile.inject_code"
 require "compile.native"
 require "mpq_util"
 
-local storm    = ar.storm
-
 -- 版本信息
 ydwe_version = sys.version {}
 war3_version = sys.war3_version {}

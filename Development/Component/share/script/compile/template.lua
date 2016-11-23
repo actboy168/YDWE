@@ -3,6 +3,7 @@ local select=select
 local load=load
 local string=string
 local table=table
+local storm = require 'ffi.storm'
 
 local function result(...)
 	return select("#",...), select(1,...)
@@ -61,7 +62,7 @@ local function map_file_import(path_in_archive)
 end
 
 local function string_hash(str)
-	return string.format('0x%08X', ar.storm.string_hash(str))
+	return string.format('0x%08X', storm.string_hash(str))
 end
 
 template = {}
