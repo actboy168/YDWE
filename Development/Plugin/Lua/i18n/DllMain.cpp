@@ -1,5 +1,4 @@
 #include <lua.hpp>
-#include <luabind/luabind.hpp>
 #include <windows.h>
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)

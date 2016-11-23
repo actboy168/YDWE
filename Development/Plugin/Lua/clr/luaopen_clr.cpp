@@ -1,10 +1,9 @@
 #pragma warning(push, 3)
 #include <lua.hpp>
-#include <luabind/luabind.hpp>
-#include <base/lua/luabind.h>
 #pragma warning(pop)				 	  		
 #include <base/filesystem.h>
-
+#include <base/util/unicode.h>
+#include <functional>
 #include <windows.h>
 #include <mscoree.h>
 #include <metahost.h>

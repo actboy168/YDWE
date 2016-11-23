@@ -32,8 +32,7 @@ const wchar_t* szDllList[] = {
 #endif
 	L"zlibd1.dll",
 	L"StormLib.dll",
-	L"luacore.dll",
-	L"luabind.dll", // luacore.dll	 
+	L"luacore.dll", 
 	L"ydbase.dll",
 	L"LuaEngine.dll", // always at last
 };
@@ -51,8 +50,7 @@ const wchar_t* szDllList[] = {
 #endif
 	L"zlib1.dll",
 	L"StormLib.dll",
-	L"luacore.dll",
-	L"luabind.dll", // luacore.dll 		
+	L"luacore.dll",	
 	L"ydbase.dll",
 	L"LuaEngine.dll", // always at last
 };

@@ -5,7 +5,6 @@
 #include <base/filesystem.h>
 #include <base/exception/exception.h>
 #include <base/hook/inline.h>
-#include <base/lua/luabind.h>
 #include <base/path/service.h>
 #include <base/path/self.h>
 #include <base/win/file_version.h>
@@ -86,7 +85,6 @@ bool LuaEngine::InitializeLua()
 	}
 
 	luaL_openlibs(state_);
-	luabind::open(state_);
 	luaL_requiref(state_, "log", luaopen_log, 1);
 	lua_pop(state_, 1);
 	LOGGING_DEBUG(logger_) << "Initialize script engine successfully.";
@@ -145,6 +143,12 @@ bool LuaEngine::Uninitialize()
 	return true;
 }
 
+struct luaerror {
+	luaerror(lua_State* l) : m_l(l) {}
+	lua_State* m_l;
+	lua_State* state() const { return m_l; }
+};
+
 bool LuaEngine::LoadFile(fs::path const& file_path)
 {
 	if (!vaild_)
@@ -165,17 +169,17 @@ bool LuaEngine::LoadFile(fs::path const& file_path)
 		std::vector<char> buffer = base::file::read_stream(file_path).read<std::vector<char>>();
 		if (luaL_loadbuffer(state_, buffer.data(), buffer.size(), name.c_str()))
 		{
-			throw luabind::error(state_);
+			throw luaerror(state_);
 		}
 
 		if (lua_pcall(state_, 0, LUA_MULTRET, 0))
 		{
-			throw luabind::error(state_);
+			throw luaerror(state_);
 		}
 
 		return true;
 	}
-	catch (luabind::error const& e)
+	catch (luaerror const& e)
 	{
 		LOGGING_ERROR(logger_) << "exception: " << lua_tostring(e.state(), -1);
 		lua_pop(e.state(), 1);

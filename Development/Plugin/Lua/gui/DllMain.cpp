@@ -1,5 +1,4 @@
 #include <lua.hpp>
-#include <luabind/luabind.hpp>
 #include <windows.h>
 
 HMODULE self_module = NULL;
