@@ -214,6 +214,36 @@ namespace luafs {
 			FS_TRY_END;
 		}
 
+		static int permissions(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			lua_pushinteger(L, lua_Integer(fs::status(self).permissions()));
+			return 1;
+			FS_TRY_END;
+		}
+
+		static int add_permissions(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			fs::perms perms = fs::perms::mask & fs::perms(luaL_checkinteger(L, 2));
+			fs::permissions(self, fs::perms::add_perms | perms);
+			return 0;
+			FS_TRY_END;
+		}
+
+		static int remove_permissions(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& self = path::to(L, 1);
+			fs::perms perms = fs::perms::mask & fs::perms(luaL_checkinteger(L, 2));
+			fs::permissions(self, fs::perms::remove_perms | perms);
+			return 0;
+			return 1;
+			FS_TRY_END;
+		}
+
 		static int mt_div(lua_State* L)
 		{
 			FS_TRY;
@@ -381,6 +411,9 @@ int luaopen_filesystem(lua_State* L)
 		{ "remove_filename", luafs::path::remove_filename },
 		{ "replace_extension", luafs::path::replace_extension },
 		{ "list_directory", luafs::path::list_directory },
+		{ "permissions", luafs::path::permissions },
+		{ "add_permissions", luafs::path::add_permissions },
+		{ "remove_permissions", luafs::path::remove_permissions },
 		{ "__div", luafs::path::mt_div },
 		{ "__eq", luafs::path::mt_eq },
 		{ "__gc", luafs::path::mt_gc },

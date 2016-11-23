@@ -80,7 +80,7 @@ namespace NYDWE {
 			LOGGING_TRACE(lg) << "WE is about to compile maps.";
 			gIsInCompileProcess = true;
 		}
-		else if (gIsInCompileProcess && (fileName == ".w3x" || fileName == ".w3m"))
+		else if (gIsInCompileProcess && (fileExt == ".w3x" || fileExt == ".w3m"))
 		{
 			try {
 				fs::path p(fileName);
