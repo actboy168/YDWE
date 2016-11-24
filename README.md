@@ -15,4 +15,3 @@ YDWE是一个用于制作《魔兽争霸III》(英文名 Warcraft3，下面简�
 1. ucrt的本地部署
 2. appveyor不支持msvc2017
 3. 部分不在ydwe里的工程还未使用msvc2017编译
-4. boost没有完全支持msvc2017
