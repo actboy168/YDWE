@@ -1,4 +1,4 @@
-local wes = sys.ini_load(fs.ydwe_path() / "share" / "mpq" / "ydwe" / "ui" / "worldeditstrings.txt")
+local wes = sys.ini_load(fs.ydwe_path() / "share" / "mpq" / "units" / "ui" / "worldeditstrings.txt")
 local WESTRING_MODIFYTEXTURES = wes['WorldEditStrings']['WESTRING_MODIFYTEXTURES']
 local tiledialog = 0
 
