@@ -19,7 +19,7 @@
 #include <slk/reader/CommonReader.cpp>
 #include "Splash.h"
 
-#define _(str)  base::i18n::gettext(str).to_string().c_str()
+#define _(str)  base::i18n::gettext(str).data()
 #define __(str) base::u2w(base::i18n::gettext(str)).c_str()
 
 static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSecond, std::error_code *pErrorCode = nullptr)

@@ -84,7 +84,7 @@ namespace slk
 						val.remove_suffix(1);
 					}
 
-					tag_[cur_x_-1] = val.to_string();
+					tag_[cur_x_-1] = std::string(val.data(), val.size());
 				}
 				else if (cur_x_ == 1)
 				{
@@ -98,7 +98,7 @@ namespace slk
 				}
 				else
 				{
-					(*this)[cur_x_-1][cur_y_-1] = val.to_string();
+					(*this)[cur_x_-1][cur_y_-1] = std::string(val.data(), val.size());
 				}
 			}
 

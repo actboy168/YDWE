@@ -32,11 +32,11 @@ namespace slk { namespace reader { namespace utility {
 					std::string_view section = trim_copy(line.begin() + 1, line.begin() + n);
 					if (create_if_not_exists)
 					{
-						object = &table[section.to_string()];
+						object = &table[std::string(section.data(), section.size())];
 					}
 					else
 					{
-						auto it = table.find(section.to_string());
+						auto it = table.find(std::string(section.data(), section.size()));
 						if (it != table.end())
 						{
 							object = &(it->second);
@@ -59,7 +59,7 @@ namespace slk { namespace reader { namespace utility {
 						std::string_view val = trim_copy(line.begin() + n + 1, line.end());
 						if (!val.empty() && !key.empty())
 						{
-							(*object)[key.to_string()] = val.to_string();
+							(*object)[std::string(key.data(), key.size())] = std::string(val.data(), val.size());
 						}
 					}
 				}

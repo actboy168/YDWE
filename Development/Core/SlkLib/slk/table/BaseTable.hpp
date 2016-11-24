@@ -8,7 +8,7 @@ namespace slk
 	namespace ignore_case {
 
 		template <class T>
-		struct less : public std::binary_function<T, T, bool>
+		struct less
 		{
 			bool operator()(const T& lft, const T& rht) const
 			{
@@ -17,7 +17,7 @@ namespace slk
 		};
 
 		template <>
-		struct less<char> : public std::binary_function<char, char, bool>
+		struct less<char>
 		{
 			bool operator()(const char& lft, const char& rht) const
 			{
@@ -26,7 +26,7 @@ namespace slk
 		};
 
 		template <>
-		struct less<std::string> : public std::binary_function<std::string, std::string, bool>
+		struct less<std::string>
 		{
 			bool operator()(const std::string& lft, const std::string& rht) const
 			{
@@ -35,7 +35,7 @@ namespace slk
 		};
 
 		template <class T>
-		struct equal_to : public std::binary_function<T, T, bool>
+		struct equal_to
 		{
 			bool operator()(const T& lft, const T& rht) const
 			{
@@ -44,7 +44,7 @@ namespace slk
 		};
 
 		template <>
-		struct equal_to<char> : public std::binary_function<char, char, bool>
+		struct equal_to<char>
 		{
 			bool operator()(const char& lft, const char& rht) const
 			{
@@ -53,7 +53,7 @@ namespace slk
 		};
 
 		template <>
-		struct equal_to<std::string> : public std::binary_function<std::string, std::string, bool>
+		struct equal_to<std::string>
 		{
 			bool operator()(const std::string& lft, const std::string& rht) const
 			{
@@ -74,7 +74,7 @@ namespace slk
 		class hash;
 
 		template<>
-		class hash<std::string> : public std::unary_function<std::string, size_t>
+		class hash<std::string>
 		{
 		public:
 			typedef std::string _Kty;
@@ -100,7 +100,7 @@ namespace slk
 
 	namespace detail {
 		template <class _Kty>
-		class hash : public std::unary_function<_Kty, size_t>
+		class hash
 		{
 		public:
 			size_t operator()(const _Kty& _Keyval) const
@@ -122,7 +122,7 @@ namespace slk
 		};
 
 		template<>
-		class hash<std::string> : public std::unary_function<std::string, size_t>
+		class hash<std::string>
 		{
 		public:
 			typedef std::string _Kty;

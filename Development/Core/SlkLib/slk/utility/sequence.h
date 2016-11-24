@@ -56,7 +56,7 @@ namespace slk
 	{
 		if (first < last)
 		{
-			return std::string_view(first, std::distance(first, last));
+			return std::string_view(&*first, std::distance(first, last));
 		}
 		else
 		{

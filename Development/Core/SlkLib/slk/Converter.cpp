@@ -41,7 +41,7 @@ namespace slk
 
 		if (0 == str.compare(0, _countof("WESTRING_") - 1, "WESTRING_"))
 		{
-			auto It = _Mybase::table_.find(str.to_string());
+			auto It = _Mybase::table_.find(std::string(str.data(), str.size()));
 			if (It != _Mybase::table_.end())
 			{
 				return It->second;

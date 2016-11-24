@@ -134,7 +134,7 @@ namespace base { namespace warcraft3 { namespace japi {
 	namespace fake
 	{
 		template <class T>
-		struct less : public std::binary_function<T, T, bool>
+		struct less
 		{
 			bool operator()(const T& lft, const T& rht) const
 			{
@@ -143,7 +143,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		};
 
 		template <>
-		struct less<char> : public std::binary_function<char, char, bool>
+		struct less<char>
 		{
 			bool operator()(const char& lft, const char& rht) const
 			{
@@ -152,7 +152,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		};
 
 		template <>
-		struct less<std::string> : public std::binary_function<std::string, std::string, bool>
+		struct less<std::string>
 		{
 			bool operator()(const std::string& lft, const std::string& rht) const
 			{

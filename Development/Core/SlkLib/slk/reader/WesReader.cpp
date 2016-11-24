@@ -37,7 +37,7 @@ namespace slk
 						std::string_view val = trim_copy(line.begin() + n + 1, line.end());
 						if (!val.empty() && !key.empty())
 						{
-							table[key.to_string()] = val.to_string();
+							table[std::string(key.data(), key.size())] = std::string(val.data(), val.size());
 						}
 					}
 				}
