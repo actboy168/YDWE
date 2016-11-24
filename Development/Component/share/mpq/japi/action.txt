@@ -235,7 +235,7 @@ default = "ITEM_DATA_TIP"
 type = string
 
 [YDWESetEffectLoc]
-title = "移动 [JAPI]"
+title = "移动到点 [JAPI]"
 description = "移动 ${特效} 到${点}"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -246,8 +246,8 @@ default = "bj_lastCreatedEffect"
 type = location
 
 [EXSetEffectXY]
-title = "移动 [JAPI]"
-description = "移动 ${特效} 到（ ${X}, ${X} ）"
+title = "移动到坐标 [JAPI]"
+description = "移动 ${特效} 到（ ${X}, ${Y} ）"
 comment = ""
 category = TC_SPECIALEFFECT
 [[.args]]
@@ -307,38 +307,38 @@ default = "bj_lastCreatedEffect"
 
 [EXEffectMatRotateX]
 title = "绕X轴旋转 [JAPI]"
-description = "${特效} 绕X轴旋转 ${度}"
+description = "${特效} 绕X轴旋转 ${度} 度"
 comment = "多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
 category = TC_SPECIALEFFECT
 [[.args]]
 type = effect
 default = "bj_lastCreatedEffect"
 [[.args]]
-type = real
+type = degree
 default = "0"
 
 [EXEffectMatRotateY]
 title = "绕Y轴旋转 [JAPI]"
-description = "${特效} 绕Y轴旋转 ${度}"
+description = "${特效} 绕Y轴旋转 ${度} 度"
 comment = "多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
 category = TC_SPECIALEFFECT
 [[.args]]
 type = effect
 default = "bj_lastCreatedEffect"
 [[.args]]
-type = real
+type = degree
 default = "0"
 
 [EXEffectMatRotateZ]
 title = "绕Z轴旋转 [JAPI]"
-description = "${特效} 绕Z轴旋转 ${度}"
+description = "${特效} 绕Z轴旋转 ${度} 度"
 comment = "多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
 category = TC_SPECIALEFFECT
 [[.args]]
 type = effect
 default = "bj_lastCreatedEffect"
 [[.args]]
-type = real
+type = degree
 default = "0"
 
 [EXEffectMatScale]
