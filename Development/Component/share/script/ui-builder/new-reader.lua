@@ -12,6 +12,10 @@ local function switch(value)
 end
 
 function mt:read_ui(type, path)
+	local f = io.open(path, "r")
+    if not f then
+        return
+    end
     local lastkey
     local last
     local function savelast()
@@ -38,7 +42,6 @@ function mt:read_ui(type, path)
             last = value
         end,
     })
-	local f = assert(io.open(path, "r"))
     local buf = f:read 'a'
     f:close()
     lni(buf, type, t)
@@ -95,7 +98,10 @@ function mt:parse(section, key, value)
 end
 
 function mt:read_define(path)
-	local f = assert(io.open(path, "r"))
+	local f = io.open(path, "r")
+    if not f then
+        return
+    end
 	local section = nil
 	for line in f:lines() do
 		if line:sub(1,1) == "[" then
