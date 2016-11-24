@@ -2,6 +2,11 @@ require "registry"
 require "util"
 local ui = require 'ui-builder.init'
 
+local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" / "share" / "mpq"
+if not fs.exists(root) then
+	root = fs.ydwe_path() / 'share' / 'mpq'
+end
+
 local loader = {}
 
 function loader:loadfile(path)
@@ -37,11 +42,6 @@ end
 
 function loader:config()
 	self.list = {}
-	
-	local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" / "share" / "mpq"
-	if not fs.exists(root) then
-		root = fs.ydwe_path() / 'share' / 'mpq'
-	end
 	local f, err = io.open(root / 'config', 'r')
 	if not f then
 		log.error('Open ' .. (root / 'config'):string() .. ' failed.')
@@ -108,7 +108,7 @@ end
 
 function loader:worldeditstrings()
 	log.trace("virtual_mpq 'worldeditstrings'")
-	local tbl = self:loadfile(fs.ydwe_path() / 'share' / 'mpq' / 'units' / 'ui' / 'WorldEditStrings.txt')
+	local tbl = self:loadfile(root / 'units' / 'ui' / 'WorldEditStrings.txt')
 	table_append(tbl.WorldEditStrings, {
 		{ 'WESTRING_APPNAME', 'YD WorldEdit [ ' .. tostring(ydwe_version) .. ' ]' }
 	})
