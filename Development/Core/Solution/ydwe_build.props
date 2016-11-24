@@ -24,7 +24,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\SlkLib;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Boost;$(OpenSource)\Lua\Current\include;$(OpenSource)\LuaBind\Current\include;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\SlkLib;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Boost;$(OpenSource)\Lua\Current\include;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OpenSource)\Boost\stage\lib;$(OpenSource)\Lua\Current\lib\$(PlatformName)\$(ConfigurationName);$(OpenSource)\StormLib\Current\lib\$(PlatformName)\$(ConfigurationName);$(ThirdParty)\Blizzard\Storm\Current\lib\Win32\DebugRelease;$(ThirdParty)\Microsoft\Detours\Current\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
