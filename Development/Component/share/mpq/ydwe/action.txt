@@ -4197,9 +4197,9 @@ default = "EnableDisableDisable"
 type = unit
 
 [SetUnitFacing]
-title = "设置单位面向角度(立即) [R]"
+title = "设置单位面向角度 [R]"
 description = "设置 ${单位} 的面向角度为 ${Angle} 度"
-comment = "面向角度采用角度制,0度为正东方向,90度为正北方向."
+comment = "面向角度采用角度制,0度为正东方向,90度为正北方向。速度等于单位的转身速度。"
 category = TC_UNIT
 [[.args]]
 type = unit
@@ -4210,7 +4210,7 @@ default = "RealUnitFacing"
 [SetUnitFacingTimed]
 title = "设置单位面向角度(指定时间)"
 description = "设置 ${单位} 的面向角度为 ${Angle} 度,使用时间 ${Time} 秒"
-comment = "面向角度采用角度制,0度为正东方向,90度为正北方向."
+comment = "面向角度采用角度制,0度为正东方向,90度为正北方向。不能超过单位的转身速度。"
 category = TC_UNIT
 [[.args]]
 type = unit
