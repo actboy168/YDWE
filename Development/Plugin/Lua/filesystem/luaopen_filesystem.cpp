@@ -269,7 +269,7 @@ namespace luafs {
 			FS_TRY_END;
 		}
 
-		static int mt_gc(lua_State* L)
+		static int destructor(lua_State* L)
 		{
 			FS_TRY;
 			fs::path& self = path::to(L, 1);
@@ -416,7 +416,7 @@ int luaopen_filesystem(lua_State* L)
 		{ "remove_permissions", luafs::path::remove_permissions },
 		{ "__div", luafs::path::mt_div },
 		{ "__eq", luafs::path::mt_eq },
-		{ "__gc", luafs::path::mt_gc },
+		{ "__gc", luafs::path::destructor },
 		{ "__tostring", luafs::path::mt_tostring },
 		{ NULL, NULL }
 	};

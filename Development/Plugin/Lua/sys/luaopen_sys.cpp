@@ -223,6 +223,13 @@ namespace process {
 		return 1;
 	}
 
+	static int destructor(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		self.~process();
+		return 0;
+	}
+
 	int inject(lua_State* L)
 	{
 		base::win::process& self = to(L, 1);
@@ -290,6 +297,7 @@ int luaopen_sys(lua_State* L)
 		{ "wait", process::wait },
 		{ "close", process::close },
 		{ "id", process::id },
+		{ "__gc", process::destructor },
 		{ NULL, NULL }
 	};
 	luaL_newmetatable(L, "process");

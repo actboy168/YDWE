@@ -370,6 +370,13 @@ namespace clr {
 		return 1;
 	}
 
+	static int destructor(lua_State* L)
+	{
+		clr_helper::object& self = to(L, 1);
+		self.~object();
+		return 0;
+	}
+
 	int call(lua_State* L)
 	{
 		clr_helper::object& self = to(L, 1);
@@ -396,6 +403,7 @@ int luaopen_clr(lua_State* L)
 	static luaL_Reg mt[] = {
 		{ "call", clr::call },
 		{ "error_code", clr::error_code },
+		{ "__gc", clr::destructor },
 		{ NULL, NULL }
 	};
 	luaL_newmetatable(L, "clr-object");
