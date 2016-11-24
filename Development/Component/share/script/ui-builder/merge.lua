@@ -42,7 +42,7 @@ local function merge_ui(type, a, b)
 		if aui[k] then
 			table_remove(aca[aui[k].category], aui[k])
 		end
-        aui[k] = v
+        aui[k] = bv
 	end
     local pos = 1
     for _, category in ipairs(bca) do
