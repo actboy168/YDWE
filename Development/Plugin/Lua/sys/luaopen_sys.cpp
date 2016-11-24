@@ -207,7 +207,11 @@ namespace process {
 		switch (lua_type(L, idx))
 		{
 		case LUA_TSTRING:
-			return fs::path(luaL_checkwstring(L, idx));
+			return luaL_checkwstring(L, idx);
+		case LUA_TUSERDATA: {
+			fs::path& p = *(fs::path*)luaL_checkudata(L, idx, "filesystem");
+			return p.wstring();
+		}
 		default:
 			break;
 		}
