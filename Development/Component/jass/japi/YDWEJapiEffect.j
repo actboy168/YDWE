@@ -1,7 +1,7 @@
 #ifndef YDWEEffectIncluded
 #define YDWEEffectIncluded
 
-library YDWEEffect
+library YDWEJapiEffect
 	native EXGetEffectX takes effect e returns real
 	native EXGetEffectY takes effect e returns real
 	native EXGetEffectZ takes effect e returns real
