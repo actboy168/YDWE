@@ -1355,7 +1355,7 @@ default = "0"
 
 [PolarProjectionBJ]
 title = "极坐标位移点"
-description = "从 \"~指定点 开始,距离 ${Distance} ,方向为 ${Angle} 度的位移处"
+description = "从 ${指定点} 开始,距离 ${Distance} ,方向为 ${Angle} 度的位移处"
 comment = "会创建点."
 category = TC_NOTHING
 returns = location
