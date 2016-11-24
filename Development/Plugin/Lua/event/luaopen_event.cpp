@@ -82,7 +82,9 @@ int luaopen_event(lua_State* L)
 #define REGISTER_EID(name) \
 	lua_pushstring(L, #name); \
 	lua_pushinteger(L, NYDWE:: ## name); \
-	lua_rawset(L, -3);	
+	lua_rawset(L, -3); \
+    NYDWE::event_array[NYDWE:: ## name] = [](NYDWE::TEventData eventData)->int{ return -1; };
+
 		REGISTER_EID(EVENT_WE_START);
 		REGISTER_EID(EVENT_WE_EXIT);
 		REGISTER_EID(EVENT_PRE_SAVE_MAP);
