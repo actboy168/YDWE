@@ -3,6 +3,7 @@ local function table_remove(a, k)
 	for i, v in ipairs(a) do
 		if v == k then
 			table.remove(a, i)
+			break
 		end
 	end
 end
@@ -12,6 +13,7 @@ local function table_append(a, b)
 		for i, av in ipairs(a) do
 			if av[1] == bv[1] then
 				table.remove(a, i)
+				break
 			end
 		end
 	end
