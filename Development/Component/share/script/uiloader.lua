@@ -37,7 +37,11 @@ end
 
 function loader:config()
 	self.list = {}
-	local root = fs.ydwe_path() / 'share' / 'mpq'
+	
+	local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" / "share" / "mpq"
+	if not fs.exists(root) then
+		root = fs.ydwe_path() / 'share' / 'mpq'
+	end
 	local f, err = io.open(root / 'config', 'r')
 	if not f then
 		log.error('Open ' .. (root / 'config'):string() .. ' failed.')
