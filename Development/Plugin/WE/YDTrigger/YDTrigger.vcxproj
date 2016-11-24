@@ -65,6 +65,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>YDTrigger.def</ModuleDefinitionFile>
       <AdditionalDependencies>Storm.lib;Detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ThirdParty)\Blizzard\Storm\Current\lib\Win32\DebugRelease;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,6 +86,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>YDTrigger.def</ModuleDefinitionFile>
       <AdditionalDependencies>Storm.lib;Detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ThirdParty)\Blizzard\Storm\Current\lib\Win32\DebugRelease;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

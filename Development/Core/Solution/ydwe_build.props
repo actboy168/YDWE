@@ -16,7 +16,6 @@
     <Warcraft3PluginObj>$(BuildObjDir)Warcraft3\$(ProjectName)\</Warcraft3PluginObj>
     <WEPluginBin>$(BuildBinDir)plugin\</WEPluginBin>
     <WEPluginObj>$(BuildObjDir)WE\$(ProjectName)\</WEPluginObj>
-    <UIObj>$(BuildDir)obj\UI\$(ProjectName)\$(Configuration)\</UIObj>
   </PropertyGroup>
   <PropertyGroup>
     <OutDir>$(CoreBin)</OutDir>
@@ -24,10 +23,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\SlkLib;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Boost;$(OpenSource)\Lua\Current\include;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\SlkLib;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Lua\Current\include;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(OpenSource)\Boost\stage\lib;$(OpenSource)\Lua\Current\lib\$(PlatformName)\$(ConfigurationName);$(OpenSource)\StormLib\Current\lib\$(PlatformName)\$(ConfigurationName);$(ThirdParty)\Blizzard\Storm\Current\lib\Win32\DebugRelease;$(ThirdParty)\Microsoft\Detours\Current\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OpenSource)\Lua\Current\lib\$(PlatformName)\$(ConfigurationName);$(OpenSource)\StormLib\Current\lib\$(PlatformName)\$(ConfigurationName);$(ThirdParty)\Microsoft\Detours\Current\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ResourceCompile>
       <IgnoreStandardIncludePath>
@@ -81,9 +80,6 @@
     </BuildMacro>
     <BuildMacro Include="WEPluginObj">
       <Value>$(WEPluginObj)</Value>
-    </BuildMacro>
-    <BuildMacro Include="UIObj">
-      <Value>$(UIObj)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>
