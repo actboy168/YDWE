@@ -115,11 +115,11 @@ end
 
 function mt:read(path)
     self:reset()
-    self:read_define(path .. [[\define.txt]])
-    self:read_ui('event', path .. [[\event.txt]])
-    self:read_ui('condition', path .. [[\condition.txt]])
-    self:read_ui('action', path .. [[\action.txt]])
-    self:read_ui('call', path .. [[\call.txt]])
+    self:read_define(path / [[define.txt]])
+    self:read_ui('event', path / [[event.txt]])
+    self:read_ui('condition', path / [[condition.txt]])
+    self:read_ui('action', path / [[action.txt]])
+    self:read_ui('call', path / [[call.txt]])
 end
 
 return function(path)
