@@ -110,11 +110,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>"$(ProjectDir)..\..\Lua\Current\bin\Win32\Release\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X32WIN -o "$(ProjectDir)..\src\call_x86.h"  "$(ProjectDir)..\src\call_x86.dasc"
-"$(ProjectDir)..\..\Lua\Current\bin\Win32\Release\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X64 -o  "$(ProjectDir)..\src\call_x64.h"  "$(ProjectDir)..\src\call_x86.dasc"
-"$(ProjectDir)..\..\Lua\Current\bin\Win32\Release\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X64 -D X64WIN -o  "$(ProjectDir)..\src\call_x64win.h"  "$(ProjectDir)..\src\call_x86.dasc"
-"$(ProjectDir)..\..\Lua\Current\bin\Win32\Release\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -o  "$(ProjectDir)..\src\call_arm.h"  "$(ProjectDir)..\src\call_arm.dasc"
-</Command>
+      <Command>"$(ProjectDir)..\..\Lua\Current\bin\Win32\$(Configuration)\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X32WIN -o "$(ProjectDir)..\src\call_x86.h"  "$(ProjectDir)..\src\call_x86.dasc"
+"$(ProjectDir)..\..\Lua\Current\bin\Win32\$(Configuration)\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X64 -o  "$(ProjectDir)..\src\call_x64.h"  "$(ProjectDir)..\src\call_x86.dasc"
+"$(ProjectDir)..\..\Lua\Current\bin\Win32\$(Configuration)\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X64 -D X64WIN -o  "$(ProjectDir)..\src\call_x64win.h"  "$(ProjectDir)..\src\call_x86.dasc"
+"$(ProjectDir)..\..\Lua\Current\bin\Win32\$(Configuration)\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -o  "$(ProjectDir)..\src\call_arm.h"  "$(ProjectDir)..\src\call_arm.dasc"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

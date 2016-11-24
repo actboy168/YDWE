@@ -82,7 +82,7 @@ end
 
 -- Step.4 编译
 msvc:rebuild(path.ThirdParty / 'Microsoft' / 'Detours' / 'Current' / 'sln' / 'Detours.sln', configuration)
-msvc:rebuild(path.OpenSource / 'all.sln', 'Release')
+msvc:rebuild(path.OpenSource / 'all.sln', configuration)
 if not dev then
     msvc:rebuild(path.Development / 'Core' / 'Solution' / 'YDWE.sln', configuration)
 end
@@ -158,8 +158,6 @@ fs.copy_file(path.OpenSource / 'minizip' / 'bin' / configuration / 'minizip.dll'
 fs.copy_file(path.OpenSource / 'luaffi' / 'bin' / configuration / 'ffi.dll', path.Result / 'bin' / 'modules' / 'ffi.dll', true)
 fs.copy_file(path.OpenSource / 'sfmpq' / 'bin' / configuration / 'sfmpq.dll', path.Result / 'plugin' / 'jasshelper' / 'sfmpq.dll', true)
 fs.copy_file(path.OpenSource / 'sfmpq' / 'bin' / configuration / 'sfmpq.dll', path.Result / 'plugin' / 'jasshelper' / 'bin' / 'sfmpq.dll', true)
-copy_directory(path.OpenSource / 'Boost' / 'boost' / 'preprocessor', path.Result / 'plugin' / 'wave' / 'include' / 'boost' / 'preprocessor')
-fs.copy_file(path.OpenSource / 'Boost' / 'boost' / 'preprocessor.hpp', path.Result / 'plugin' / 'wave' / 'include' / 'boost' / 'preprocessor.hpp', true)
 copy_directory(path.Development / 'Component', path.Result)
 
 -- Step.6 打包皮肤
