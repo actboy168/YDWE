@@ -1,0 +1,7 @@
+[YDWEDisableRegister]
+title = "休眠 [YDWE]"
+description = "休眠"
+comment = "休眠后，当前触发器不会在读取地图时进行注册，需要手动激活."
+category = TC_NOTHING
+[[.args]]
+type = nothing

@@ -66,7 +66,11 @@ function loader:triggerdata(name, callback)
 	end
 	local t = nil
 	for _, path in ipairs(self.list) do
-		t = ui.merge(t, ui.old_reader(path / 'ui'))
+		if fs.exists(path / 'ui') then
+			t = ui.merge(t, ui.old_reader(path / 'ui'))
+		else
+			t = ui.merge(t, ui.new_reader(path))
+		end
 	end
 	data, string =  ui.old_writer(t)
 	return data

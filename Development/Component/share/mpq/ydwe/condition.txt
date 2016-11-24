@@ -1,0 +1,547 @@
+[OperatorCompareBoolean]
+title = "布尔表达式"
+description = "${表达式A} ${Operator} ${表达式B}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = boolean
+default = "IsUnitType"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = boolean
+default = "true"
+
+["             "]
+title = "自定义代码 [C]"
+description = "代码: ${Jass代码}"
+comment = "条件内不可输入局部变量,如有必要,可用全局变量或GetTriggerUnit()之类的代替"
+category = TC_CONDITION
+[[.args]]
+type = scriptcode
+
+[OperatorCompareTrigger]
+title = "触发"
+description = "${触发} ${Operator} ${触发}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = trigger
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = trigger
+
+[OperatorCompareUnit]
+title = "单位"
+description = "${Value} ${Operator} ${单位}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = unit
+
+[OperatorCompareUnitCode]
+title = "单位类型"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = unitcode
+default = "GetUnitTypeId"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = unitcode
+default = "hfoo"
+
+[OperatorCompareTerrainType]
+title = "地形"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = terraintype
+default = "GetTerrainTypeBJ"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = terraintype
+default = "TerrainTypeLdrt"
+
+[OperatorComparePoint]
+title = "点 [R]"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = location
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = location
+
+[OperatorCompareDialog]
+title = "对话框 [R]"
+description = "${对话框} ${Operator} ${对话框}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = dialog
+default = "GetClickedDialogBJ"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = dialog
+
+[OperatorCompareButton]
+title = "对话框按钮"
+description = "${对话框按钮} ${Operator} ${对话框按钮}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = button
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = button
+
+[OperatorCompareMeleeDifficulty]
+title = "对战AI难度"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = aidifficulty
+default = "GetAIDifficulty"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = aidifficulty
+default = "AIDifficultyNormal"
+
+[OperatorCompareAbilityId]
+title = "技能"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = abilcode
+default = "GetSpellAbilityId"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = abilcode
+default = "AUan"
+
+[OperatorCompareTimer]
+title = "计时器 [R]"
+description = "${计时器} ${Operator} ${计时器}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = timer
+default = "GetExpiredTimer"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = timer
+
+[OperatorCompareTechCode]
+title = "科技研究"
+description = "${Value} ${Operator} ${科技}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = techcode
+default = "GetResearched"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = techcode
+
+[OperatorCompareDestructible]
+title = "可破坏物"
+description = "${可破坏物} ${Operator} ${可破坏物}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = destructable
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = destructable
+
+[OperatorCompareDestructableCode]
+title = "可破坏物类型"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = destructablecode
+default = "GetDestructableTypeId"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = destructablecode
+default = "LTlt"
+
+[OperatorCompareTrackable]
+title = "可追踪物 [R]"
+description = "${值} ${Operator} ${值}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = trackable
+default = "GetTriggeringTrackable"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = trackable
+default = "GetTriggeringTrackable"
+
+[OperatorCompareOrderCode]
+title = "命令ID"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = ordercode
+default = "GetIssuedOrderIdBJ"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = ordercode
+default = "String2OrderIdBJ"
+
+[OperatorCompareBuffId]
+title = "魔法效果"
+description = "${魔法效果} ${Operator} ${魔法效果}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = buffcode
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = buffcode
+
+[OperatorCompareRegion]
+title = "区域(矩形) [R]"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = rect
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = rect
+
+[OperatorCompareRegionR]
+title = "区域(不规则) [R]"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = region
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = region
+
+[OperatorCompareReal]
+title = "实数"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = real
+default = "10"
+[[.args]]
+type = ComparisonOperator
+default = "OperatorGreaterEq"
+[[.args]]
+type = real
+default = "10"
+
+[OperatorCompareDegree]
+title = "角度"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = degree
+default = "10"
+[[.args]]
+type = ComparisonOperator
+default = "OperatorGreaterEq"
+[[.args]]
+type = degree
+default = "10"
+
+[OperatorCompareRadian]
+title = "弧度"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = radian
+default = "10"
+[[.args]]
+type = ComparisonOperator
+default = "OperatorGreaterEq"
+[[.args]]
+type = radian
+default = "10"
+
+[OperatorComparePlayer]
+title = "玩家"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = player
+default = "GetOwningPlayer"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = player
+default = "Player00"
+
+[OperatorComparePlayerColor]
+title = "玩家颜色"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = playercolor
+default = "GetPlayerColor"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = playercolor
+default = "Color00"
+
+[OperatorComparePlayerControl]
+title = "玩家控制者"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = mapcontrol
+default = "GetPlayerController"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = mapcontrol
+default = "MapControlUser"
+
+[OperatorComparePlayerSlotStatus]
+title = "玩家游戏状态"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = playerslotstate
+default = "GetPlayerSlotState"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = playerslotstate
+default = "PlayerSlotStatePlaying"
+
+[OperatorCompareItem]
+title = "物品"
+description = "${物品} ${Operator} ${物品}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = item
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = item
+
+[OperatorCompareItemType]
+title = "物品分类"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = itemtype
+default = "GetItemType"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = itemtype
+default = "ItemTypePowerup"
+
+[OperatorCompareItemCode]
+title = "物品类型"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = itemcode
+default = "GetItemTypeId"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = itemcode
+default = "texp"
+
+[OperatorCompareHeroSkill]
+title = "学习技能"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = heroskillcode
+default = "GetLearnedSkillBJ"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = heroskillcode
+default = "HeroSkillBlizzard"
+
+[OperatorCompareGameDifficulty]
+title = "游戏难度"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = gamedifficulty
+default = "GetGameDifficulty"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = gamedifficulty
+default = "GameDifficultyNormal"
+
+[OperatorCompareGameSpeed]
+title = "游戏速度"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = gamespeed
+default = "GetGameSpeed"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = gamespeed
+default = "GameSpeedNormal"
+
+[OperatorCompareInteger]
+title = "整数"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = integer
+default = "0"
+[[.args]]
+type = ComparisonOperator
+default = "OperatorEqual"
+[[.args]]
+type = integer
+default = "0"
+
+[OperatorCompareRace]
+title = "种族"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = race
+default = "GetPlayerRace"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = race
+default = "RaceHuman"
+
+[OperatorCompareString]
+title = "字符串"
+description = "${Value} ${Operator} ${字符串}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = string
+default = "GetEventPlayerChatString"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = string
+
+[GetBooleanAnd]
+title = "And"
+description = "${条件 1} 且 ${条件 2}"
+comment = "条件1 和条件2 均成立."
+category = TC_CONDITION
+[[.args]]
+type = boolcall
+[[.args]]
+type = boolcall
+
+[GetBooleanOr]
+title = "Or"
+description = "${条件 1} or ${条件 2}"
+comment = "条件1 和条件2 任意成立."
+category = TC_CONDITION
+[[.args]]
+type = boolcall
+[[.args]]
+type = boolcall
+
+[AndMultiple]
+title = "And, 多项条件"
+description = "And - 所有条件成立"
+comment = "用该功能添加的条件必须为主体之下."
+category = TC_CONDITION
+[[.args]]
+type = nothing
+
+[OrMultiple]
+title = "Or, 多项条件"
+description = "Or - 任意条件成立"
+comment = "用该功能添加的条件必须为主体之下."
+category = TC_CONDITION
+[[.args]]
+type = nothing

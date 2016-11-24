@@ -1,0 +1,54 @@
+[YDWECustomScriptCode]
+title = "自定义代码"
+description = "${Jass 代码}"
+comment = "可以在任何有返回值的地方输入一行代码. 比如: 杀死(自定义代码：GetTriggerUnit())。"
+category = TC_YDBF
+returns = AnyReturnType
+[[.args]]
+type = scriptcode
+
+[YDWEGetAnyTypeLocalVariable]
+title = "局部变量 -- 读取"
+description = "loc_${变量名}"
+comment = "可以获取到任意类型的局部变量。"
+category = TC_YDBF
+returns = AnyReturnType
+[[.args]]
+type = scriptcode
+
+[YDWEForLoopLocVarIndex]
+title = "局部变量 -- 读取(循环数)"
+description = "loop_${变量名}"
+comment = "用来获取当前循环中的循环数，是个真正的Jass局部变量。"
+category = TC_YDBF
+returns = integer
+[[.args]]
+type = scriptcode
+
+[YDWELoadAnyTypeDataByUserData]
+title = "自定义值 -- 读取"
+description = "获取 [${类型}] ${null} 的 ${属性}"
+comment = "从某个数据上获取自定义值，如获取[单位] 恶魔猎手 的 命中率 。"
+category = TC_YDBF
+returns = AnyReturnType
+[[.args]]
+type = typename
+[[.args]]
+type = Null
+[[.args]]
+type = scriptcode
+
+[YDWEHaveSavedAnyTypeDataByUserData]
+title = "自定义值 -- 是否存有"
+description = "[${类型}] ${null} 拥有 [${类型}] \"~属性"
+comment = "判断某个数据的自定义值是否存在，如[单位] 恶魔猎手 拥有[物品] 圣剑。"
+category = TC_YDBF
+returns = boolean
+[[.args]]
+type = typename
+[[.args]]
+type = Null
+[[.args]]
+type = typename
+[[.args]]
+type = scriptcode
