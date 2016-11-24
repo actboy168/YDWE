@@ -82,12 +82,7 @@ end
 
 -- Step.4 编译
 msvc:rebuild(path.ThirdParty / 'Microsoft' / 'Detours' / 'Current' / 'sln' / 'Detours.sln', configuration)
---msvc:rebuild(path.OpenSource / 'StormLib' / 'Current' / 'StormLib.sln', configuration)
-msvc:rebuild(path.OpenSource / 'sfmpq' / 'project' / 'sfmpq.sln', configuration)
-msvc:rebuild(path.OpenSource / 'minizip' / 'project' / 'minizip.sln', configuration)
 msvc:rebuild(path.OpenSource / 'all.sln', 'Release')
-msvc:rebuild(path.OpenSource / 'Lua' / 'Current' / 'makefiles' / 'luacore.sln', configuration)
-msvc:rebuild(path.OpenSource / 'luaffi' / 'makefiles' / 'luaffi.sln', configuration)
 if not dev then
     msvc:rebuild(path.Development / 'Core' / 'Solution' / 'YDWE.sln', configuration)
 end

@@ -27,8 +27,9 @@
     <ClInclude Include="..\src\msvc\stdint.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B84F7231-16CE-41D8-8C08-7B523FF4225B}</ProjectGuid>
+    <ProjectGuid>{076A366B-6B75-4D35-A6A9-CA680F0771E3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -54,16 +55,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\obj\$(Configuration)\</IntDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\bin\$(Configuration)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\obj\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\obj\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\obj\$(Configuration)\</IntDir>
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\bin\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
