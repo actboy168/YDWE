@@ -369,3 +369,30 @@ type = unit
 [[.args]]
 type = degree
 default = "RealUnitFacing"
+
+[EXSetUnitMoveType]
+title = "设置单位的移动类型 [JAPI]"
+description = "设置 ${单位} 的移动类型为 ${Value}"
+comment = ""
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = MoveType
+default = "MoveType06"
+
+[EXSetUnitCollisionType]
+title = "设置单位的碰撞类型 [JAPI]"
+description = "${启用/禁用} ${单位} 对 ${碰撞} 的碰撞"
+comment = ""
+category = TC_UNIT
+[[.args]]
+type = onoffoption
+default = "OnOffOff"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = CollisionType
+default = "CollisionType01"

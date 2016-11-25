@@ -810,7 +810,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		*(float*)(*(uint32_t*)(obj + 0x28) + 0xA4) = angle;
 	}
 
-	jass::jnothing_t _cdecl EXSetUnitCollisionType(jass::jhandle_t unit, jass::jinteger_t type)
+	jass::jnothing_t _cdecl EXSetUnitCollisionType(jass::jboolean_t enable, jass::jhandle_t unit, jass::jinteger_t type)
 	{
 		uint32_t uobj = handle_to_object(unit);
 		if (!uobj)
@@ -822,7 +822,13 @@ namespace base { namespace warcraft3 { namespace japi {
 		obj = *(uint32_t *)(obj + 0x98);
 		if (obj)
 		{
-			*(uint32_t *)(obj + 0x34) = type & 0xFFFFFF;
+			type = (1 << type) & 0xFFFFFF;
+			if (enable) {
+				*(uint32_t *)(obj + 0x34) &= type;
+			}
+			else {
+				*(uint32_t *)(obj + 0x34) |= ~type;
+			}
 		}
 	}
 
@@ -855,7 +861,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXGetUnitArrayString,   "EXGetUnitArrayString",   "(III)S");
 		jass::japi_add((uintptr_t)EXSetUnitArrayString,   "EXSetUnitArrayString",   "(IIIS)B");
 		jass::japi_add((uintptr_t)EXPauseUnit,            "EXPauseUnit",            "(Hunit;B)V");
-		jass::japi_add((uintptr_t)EXSetUnitCollisionType, "EXSetUnitCollisionType", "(Hunit;I)V");
+		jass::japi_add((uintptr_t)EXSetUnitCollisionType, "EXSetUnitCollisionType", "(BHunit;I)V");
 		jass::japi_add((uintptr_t)EXSetUnitMoveType,      "EXSetUnitMoveType",      "(Hunit;I)V");
 		jass::japi_add((uintptr_t)EXSetUnitFacing,        "EXSetUnitFacing",        "(Hunit;R)V");
 		//jass::japi_add((uintptr_t)EXGetObject, "EXGetObject", "(Hhandle;)I");

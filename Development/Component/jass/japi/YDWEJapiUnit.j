@@ -3,8 +3,9 @@
 
 library YDWEJapiUnit
 	native EXSetUnitFacing takes unit u, real angle returns nothing
-	native EXGhostUnit takes unit u returns nothing
 	native EXPauseUnit takes unit u, boolean flag returns nothing
+	native EXSetUnitCollisionType takes unit u, boolean enable, integer t returns nothing
+	native EXSetUnitMoveType takes unit u, integer t returns nothing
 
 	function YDWEUnitAddStun takes unit u returns nothing
 		call EXPauseUnit(u, true)
