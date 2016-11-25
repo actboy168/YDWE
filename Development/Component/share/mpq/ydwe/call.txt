@@ -1,3 +1,179 @@
+[OperatorIntegerAdd]
+title = "加 < ﹢ >"
+description = "${整数} + ${整数}"
+comment = ""
+category = TC_MATH
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[OperatorIntegerSubtract]
+title = "减 < ﹣ >"
+description = "${整数} - ${整数}"
+comment = ""
+category = TC_MATH
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[OperatorIntegerMultiply]
+title = "乘 < × >"
+description = "${整数} × ${整数}"
+comment = ""
+category = TC_MATH
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[OperatorIntegerDivide]
+title = "除 < ÷ >"
+description = "${整数} ÷ ${整数}"
+comment = ""
+category = TC_MATH
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[OperatorRealAdd]
+title = "加 < ﹢ >"
+description = "${实数} + ${实数}"
+comment = ""
+category = TC_MATH
+returns = real
+[[.args]]
+type = real
+[[.args]]
+type = real
+
+[OperatorRealSubtract]
+title = "减 < ﹣ >"
+description = "${实数} - ${实数}"
+comment = ""
+category = TC_MATH
+returns = real
+[[.args]]
+type = real
+[[.args]]
+type = real
+
+[OperatorRealMultiply]
+title = "乘 < × >"
+description = "${实数} × ${实数}"
+comment = ""
+category = TC_MATH
+returns = real
+[[.args]]
+type = real
+[[.args]]
+type = real
+
+[OperatorRealDivide]
+title = "除 < ÷ >"
+description = "${实数} ÷ ${实数}"
+comment = ""
+category = TC_MATH
+returns = real
+[[.args]]
+type = real
+[[.args]]
+type = real
+
+[OperatorDegreeAdd]
+title = "加 < ﹢ >"
+description = "${角度} + ${角度}"
+comment = ""
+category = TC_MATH
+returns = degree
+[[.args]]
+type = degree
+[[.args]]
+type = degree
+
+[OperatorDegreeSubtract]
+title = "减 < ﹣ >"
+description = "${角度} - ${角度}"
+comment = ""
+category = TC_MATH
+returns = degree
+[[.args]]
+type = degree
+[[.args]]
+type = degree
+
+[OperatorDegreeMultiply]
+title = "乘 < × >"
+description = "${角度} × ${实数}"
+comment = ""
+category = TC_MATH
+returns = degree
+[[.args]]
+type = degree
+[[.args]]
+type = real
+
+[OperatorDegreeDivide]
+title = "除 < ÷ >"
+description = "${角度} ÷ ${实数}"
+comment = ""
+category = TC_MATH
+returns = degree
+[[.args]]
+type = degree
+[[.args]]
+type = real
+
+[OperatorRadianAdd]
+title = "加 < ﹢ >"
+description = "${弧度} ﹢ ${弧度}"
+comment = ""
+category = TC_MATH
+returns = radian
+[[.args]]
+type = radian
+[[.args]]
+type = real
+
+[OperatorRadianSubtract]
+title = "减 < ﹣ >"
+description = "${弧度} ﹣ ${弧度}"
+comment = ""
+category = TC_MATH
+returns = radian
+[[.args]]
+type = radian
+[[.args]]
+type = real
+
+[OperatorRadianMultiply]
+title = "乘 < × >"
+description = "${弧度} × ${实数}"
+comment = ""
+category = TC_MATH
+returns = radian
+[[.args]]
+type = radian
+[[.args]]
+type = real
+
+[OperatorRadianDivide]
+title = "除 < ÷ >"
+description = "${弧度} ÷ ${实数}"
+comment = ""
+category = TC_MATH
+returns = radian
+[[.args]]
+type = radian
+[[.args]]
+type = real
+
 [YDWEGetLocalVariableBoolean]
 title = "局部变量"
 description = "local_${bl}"
@@ -8410,182 +8586,6 @@ returns = integer
 type = integer
 [[.args]]
 type = integer
-
-[OperatorIntegerAdd]
-title = "加 < ﹢ >"
-description = "${整数} + ${整数}"
-comment = ""
-category = TC_MATH
-returns = integer
-[[.args]]
-type = integer
-[[.args]]
-type = integer
-
-[OperatorIntegerSubtract]
-title = "减 < ﹣ >"
-description = "${整数} - ${整数}"
-comment = ""
-category = TC_MATH
-returns = integer
-[[.args]]
-type = integer
-[[.args]]
-type = integer
-
-[OperatorIntegerMultiply]
-title = "乘 < × >"
-description = "${整数} × ${整数}"
-comment = ""
-category = TC_MATH
-returns = integer
-[[.args]]
-type = integer
-[[.args]]
-type = integer
-
-[OperatorIntegerDivide]
-title = "除 < ÷ >"
-description = "${整数} ÷ ${整数}"
-comment = ""
-category = TC_MATH
-returns = integer
-[[.args]]
-type = integer
-[[.args]]
-type = integer
-
-[OperatorRealAdd]
-title = "加 < ﹢ >"
-description = "${实数} + ${实数}"
-comment = ""
-category = TC_MATH
-returns = real
-[[.args]]
-type = real
-[[.args]]
-type = real
-
-[OperatorRealSubtract]
-title = "减 < ﹣ >"
-description = "${实数} - ${实数}"
-comment = ""
-category = TC_MATH
-returns = real
-[[.args]]
-type = real
-[[.args]]
-type = real
-
-[OperatorRealMultiply]
-title = "乘 < × >"
-description = "${实数} × ${实数}"
-comment = ""
-category = TC_MATH
-returns = real
-[[.args]]
-type = real
-[[.args]]
-type = real
-
-[OperatorRealDivide]
-title = "除 < ÷ >"
-description = "${实数} ÷ ${实数}"
-comment = ""
-category = TC_MATH
-returns = real
-[[.args]]
-type = real
-[[.args]]
-type = real
-
-[OperatorDegreeAdd]
-title = "加 < ﹢ >"
-description = "${角度} + ${角度}"
-comment = ""
-category = TC_MATH
-returns = degree
-[[.args]]
-type = degree
-[[.args]]
-type = degree
-
-[OperatorDegreeSubtract]
-title = "减 < ﹣ >"
-description = "${角度} - ${角度}"
-comment = ""
-category = TC_MATH
-returns = degree
-[[.args]]
-type = degree
-[[.args]]
-type = degree
-
-[OperatorDegreeMultiply]
-title = "乘 < × >"
-description = "${角度} × ${实数}"
-comment = ""
-category = TC_MATH
-returns = degree
-[[.args]]
-type = degree
-[[.args]]
-type = real
-
-[OperatorDegreeDivide]
-title = "除 < ÷ >"
-description = "${角度} ÷ ${实数}"
-comment = ""
-category = TC_MATH
-returns = degree
-[[.args]]
-type = degree
-[[.args]]
-type = real
-
-[OperatorRadianAdd]
-title = "加 < ﹢ >"
-description = "${弧度} ﹢ ${弧度}"
-comment = ""
-category = TC_MATH
-returns = radian
-[[.args]]
-type = radian
-[[.args]]
-type = real
-
-[OperatorRadianSubtract]
-title = "减 < ﹣ >"
-description = "${弧度} ﹣ ${弧度}"
-comment = ""
-category = TC_MATH
-returns = radian
-[[.args]]
-type = radian
-[[.args]]
-type = real
-
-[OperatorRadianMultiply]
-title = "乘 < × >"
-description = "${弧度} × ${实数}"
-comment = ""
-category = TC_MATH
-returns = radian
-[[.args]]
-type = radian
-[[.args]]
-type = real
-
-[OperatorRadianDivide]
-title = "除 < ÷ >"
-description = "${弧度} ÷ ${实数}"
-comment = ""
-category = TC_MATH
-returns = radian
-[[.args]]
-type = radian
-[[.args]]
-type = real
 
 [GetRandomReal]
 title = "随机实数"
