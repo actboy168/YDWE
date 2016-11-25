@@ -818,11 +818,11 @@ namespace base { namespace warcraft3 { namespace japi {
 			return;
 		}
 
-		uintptr_t obj = find_objectid_64(*(objectid_64*)(uobj + 0x164 + 0x08));
+		uintptr_t obj = find_objectid_64(*(objectid_64*)(uobj + 0x16C));
 		obj = *(uint32_t *)(obj + 0x98);
 		if (obj)
 		{
-			*(uint32_t *)(obj + 0x34) ^= (type ^ *(uint32_t *)(obj + 0x34)) & 0xFFFFFF;
+			*(uint32_t *)(obj + 0x34) = type & 0xFFFFFF;
 		}
 	}
 
@@ -834,12 +834,11 @@ namespace base { namespace warcraft3 { namespace japi {
 			return;
 		}
 
-		uintptr_t obj = find_objectid_64(*(objectid_64*)(uobj + 0x164 + 0x08));
+		uintptr_t obj = find_objectid_64(*(objectid_64*)(uobj + 0x16C));
 		obj = *(uint32_t *)(obj + 0xA8);
 		if (obj)
 		{
-			type = (type << 24) | (type & 0xFFFFFF);
-			*(uint32_t*)(obj + 0x9C) = type;
+			*(uint32_t*)(obj + 0x9C) = (type << 24) | (type & 0xFFFFFF);
 		}
 	}
 
