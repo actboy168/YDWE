@@ -8411,6 +8411,94 @@ type = integer
 [[.args]]
 type = integer
 
+[OperatorIntegerAdd]
+title = "加 < ﹢ >"
+description = "${整数} + ${整数}"
+comment = ""
+category = TC_MATH
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[OperatorIntegerSubtract]
+title = "减 < ﹣ >"
+description = "${整数} - ${整数}"
+comment = ""
+category = TC_MATH
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[OperatorIntegerMultiply]
+title = "乘 < × >"
+description = "${整数} × ${整数}"
+comment = ""
+category = TC_MATH
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[OperatorIntegerDivide]
+title = "除 < ÷ >"
+description = "${整数} ÷ ${整数}"
+comment = ""
+category = TC_MATH
+returns = integer
+[[.args]]
+type = integer
+[[.args]]
+type = integer
+
+[OperatorRealAdd]
+title = "加 < ﹢ >"
+description = "${实数} + ${实数}"
+comment = ""
+category = TC_MATH
+returns = real
+[[.args]]
+type = real
+[[.args]]
+type = real
+
+[OperatorRealSubtract]
+title = "减 < ﹣ >"
+description = "${实数} - ${实数}"
+comment = ""
+category = TC_MATH
+returns = real
+[[.args]]
+type = real
+[[.args]]
+type = real
+
+[OperatorRealMultiply]
+title = "乘 < × >"
+description = "${实数} × ${实数}"
+comment = ""
+category = TC_MATH
+returns = real
+[[.args]]
+type = real
+[[.args]]
+type = real
+
+[OperatorRealDivide]
+title = "除 < ÷ >"
+description = "${实数} ÷ ${实数}"
+comment = ""
+category = TC_MATH
+returns = real
+[[.args]]
+type = real
+[[.args]]
+type = real
+
 [OperatorDegreeAdd]
 title = "加 < ﹢ >"
 description = "${角度} + ${角度}"
