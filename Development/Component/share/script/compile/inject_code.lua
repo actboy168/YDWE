@@ -5,8 +5,13 @@ inject_code = {}
 inject_code.new_table = {}
 inject_code.old_table = {}
 
+local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component"
+if not fs.exists(root) then
+	root = fs.ydwe_path()
+end
+
 function inject_code:inject_file(op, path_in_archive)
-	op.inject_file(fs.ydwe_path() / "share" / "mpq" / "units" / path_in_archive, path_in_archive)
+	op.inject_file(root / "share" / "mpq" / "units" / path_in_archive, path_in_archive)
 end
 
 -- 侦测需要注入哪些代码
@@ -28,7 +33,7 @@ function inject_code:detect(op)
 
 		-- 检查是否有需要注入的函数
 		local all_table = op.option.runtime_version:is_new() and self.new_table or self.old_table		
-		local GeneralBounsSystemFile = fs.ydwe_path() / "jass" / "YDWEGeneralBounsSystem.j"
+		local GeneralBounsSystemFile = root / "jass" / "YDWEGeneralBounsSystem.j"
 
 		for file, function_table in pairs(all_table) do	
 		    if GeneralBounsSystemFile:string() == file:string() then
@@ -196,6 +201,6 @@ function inject_code:scan(config_dir)
 end
 
 function inject_code:initialize()
-	local counter = self:scan(fs.ydwe_path() / "jass")
+	local counter = self:scan(root / "jass")
 	log.trace(string.format("Scanned file: %d", counter))
 end
