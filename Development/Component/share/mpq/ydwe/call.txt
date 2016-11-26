@@ -9827,7 +9827,7 @@ type = integer
 
 [YDWEAbilityId2OrderId]
 title = "技能的命令ID"
-description = "${技能} 的 ${类型} 命令"
+description = "${技能} 的 ${类型}"
 comment = "技能ID一定要用常量"
 category = TC_CONVERSION
 returns = ordercode
