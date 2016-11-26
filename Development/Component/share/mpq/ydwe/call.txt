@@ -3985,7 +3985,7 @@ default = "GetTriggerUnit"
 
 [UnitCanSleepPerm]
 title = "允许控制睡眠状态"
-description = "允许控制 \"~单位 的睡眠状态"
+description = "允许控制 ${单位} 的睡眠状态"
 comment = "即该单位拥有'一直睡眠'技能."
 script_name = UnitCanSleepPerm
 category = TC_UNIT
@@ -6177,7 +6177,7 @@ type = string
 
 [HaveStoredValue]
 title = "缓存项存在"
-description = "名称为 \"~文字 的 ${Type} 类缓存项被保存在类别: ${Category} 缓存: ${Game Cache}"
+description = "名称为 ${文字} 的 ${Type} 类缓存项被保存在类别: ${Category} 缓存: ${Game Cache}"
 comment = ""
 category = TC_GAMECACHE
 use_in_event = 0

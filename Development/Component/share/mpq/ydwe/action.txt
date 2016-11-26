@@ -1292,30 +1292,6 @@ category = TC_MATH
 type = integer
 min = 0
 
-[YDWESetAttackDamageWeaponType]
-title = "设置默认攻击|伤害|武器类型 [YDWE]"
-description = "设置默认攻击类型为 ${攻击类型}，伤害类型为 ${伤害类型}，武器类型为 ${武器类型}"
-comment = "设置一些技能（如钩子、月神箭）需要用到的攻击|伤害|武器类型，系统会按设置的攻击|伤害|武器类型对目标造成伤害。"
-category = TC_UNIT
-[[.args]]
-type = attacktype
-default = "AttackTypeNormal"
-[[.args]]
-type = damagetype
-default = "DamageTypeNormal"
-[[.args]]
-type = weapontype
-default = "WEAPON_TYPE_WHOKNOWS"
-
-[YDWEFlyEnable]
-title = "设置单位可以飞行 [YDWE]"
-description = "让单位 ${地面单位} 变得可以飞行。"
-comment = "让一个地面单位变得可以飞行，可以设置其飞行高度。"
-category = TC_UNIT
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-
 [YDWESetMapLimitCoordinate]
 title = "设置地图边界坐标 [YDWE]"
 description = "设置地图的边界坐标为 ( X坐标最小值 ${实数}，X坐标最大值 ${实数}，Y坐标最小值 ${实数}，Y坐标最大值 ${实数} )"
@@ -1333,44 +1309,6 @@ default = "GetCameraBoundMinY"
 [[.args]]
 type = real
 default = "GetCameraBoundMaxY"
-
-[YDWELifeChange]
-title = "设置单位生命上限 [YDWE]"
-description = "设置 ${单位} 的生命上限 ${变化} ${整数} ，关联技能为 ${辅助技能}"
-comment = "如果修改后单位生命上限小于0，单位会立即死亡；关联技能的设置请参考example文件夹下的辅助地图。"
-category = TC_UNIT
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = unitstatechangetype
-default = "unitstatechangetypeA"
-[[.args]]
-type = integer
-default = "300"
-min = 0
-max = 99999
-[[.args]]
-type = abilcode
-
-[YDWEManaChange]
-title = "设置单位魔法上限 [YDWE]"
-description = "设置 ${单位} 的魔法上限 ${变化} ${整数} ，关联技能为 ${辅助技能}"
-comment = "如果修改后单位魔法上限小于0，单位的魔法栏将消失；关联技能的设置请参考example文件夹下的辅助地图。"
-category = TC_UNIT
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = unitstatechangetype
-default = "unitstatechangetypeA"
-[[.args]]
-type = integer
-default = "300"
-min = 0
-max = 99999
-[[.args]]
-type = abilcode
 
 [YDWEFlushMissionByInteger]
 title = "清空 目录 (整数路径)"
@@ -4155,6 +4093,53 @@ type = unit
 type = real
 default = "384"
 min = 0
+
+[YDWEFlyEnable]
+title = "设置单位可以飞行 [YDWE]"
+description = "让单位 ${地面单位} 变得可以飞行。"
+comment = "让一个地面单位变得可以飞行，可以设置其飞行高度。"
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+
+[YDWELifeChange]
+title = "设置单位生命上限 [YDWE]"
+description = "设置 ${单位} 的生命上限 ${变化} ${整数} ，关联技能为 ${辅助技能}"
+comment = "如果修改后单位生命上限小于0，单位会立即死亡；关联技能的设置请参考example文件夹下的辅助地图。"
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = unitstatechangetype
+default = "unitstatechangetypeA"
+[[.args]]
+type = integer
+default = "300"
+min = 0
+max = 99999
+[[.args]]
+type = abilcode
+
+[YDWEManaChange]
+title = "设置单位魔法上限 [YDWE]"
+description = "设置 ${单位} 的魔法上限 ${变化} ${整数} ，关联技能为 ${辅助技能}"
+comment = "如果修改后单位魔法上限小于0，单位的魔法栏将消失；关联技能的设置请参考example文件夹下的辅助地图。"
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = unitstatechangetype
+default = "unitstatechangetypeA"
+[[.args]]
+type = integer
+default = "300"
+min = 0
+max = 99999
+[[.args]]
+type = abilcode
 
 [SetRescueUnitColorChangeBJ]
 title = "设置营救颜色(单位)"
@@ -12891,7 +12876,7 @@ max = 2
 
 [SetCreepCampFilterState]
 title = "设置小地图中立生物显示"
-description = "小地图 \"~Show/Hide 中立生物"
+description = "小地图 ${Show/Hide} 中立生物"
 comment = "相当于游戏中Alt+R功能."
 category = TC_GAME
 [[.args]]
@@ -14823,3 +14808,18 @@ default = "\"Category\""
 [[.args]]
 type = gamecache
 default = "GetLastCreatedGameCacheBJ"
+
+[YDWESetAttackDamageWeaponType]
+title = "设置默认攻击|伤害|武器类型 [YDWE]"
+description = "设置默认攻击类型为 ${攻击类型}，伤害类型为 ${伤害类型}，武器类型为 ${武器类型}"
+comment = "设置一些技能（如钩子、月神箭）需要用到的攻击|伤害|武器类型，系统会按设置的攻击|伤害|武器类型对目标造成伤害。"
+category = TC_UNIT
+[[.args]]
+type = attacktype
+default = "AttackTypeNormal"
+[[.args]]
+type = damagetype
+default = "DamageTypeNormal"
+[[.args]]
+type = weapontype
+default = "WEAPON_TYPE_WHOKNOWS"
