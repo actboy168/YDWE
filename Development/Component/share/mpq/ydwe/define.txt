@@ -1825,6 +1825,7 @@ OrderCodeMoveItem4=1,ordercodeitarg,852006,移动物品到第5格
 OrderCodeMoveItem5=1,ordercodeitarg,852007,移动物品到第6格
 OrderCodeRandomItem=1,ordercodeitarg,852622,物品技能 - 随机物品
 OrderCodeStop=0,ordercodenotarg,851972,WESTRING_UNITORDERNOTARG_STOP
+OrderCodeStun=0,ordercodeutarg,851973,昏迷
 OrderCodeHoldPosition=0,ordercodenotarg,851993,WESTRING_UNITORDERNOTARG_HOLDPOSITION
 OrderCodeAutoHarvestGold=0,ordercodenotarg,852021,WESTRING_UNITORDERNOTARG_AUTOHARVESTGOLD
 OrderCodeAutoHarvestLumber=0,ordercodenotarg,852022,WESTRING_UNITORDERNOTARG_AUTOHARVESTLUMBER
