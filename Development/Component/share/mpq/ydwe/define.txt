@@ -306,6 +306,7 @@ AbilityDataReal=0,0,0,技能数据 (实数),integer
 AbilityDataString=0,0,0,技能数据 (字符串),integer
 ChatRecipient=0,0,0,频道类型,integer
 ItemDataString=0,0,0,物品数据 (字符串),integer
+YArithmeticOperator=0,0,0,WESTRING_TRIGTYPE_ArithmeticOperator
 
 [TriggerTypeDefaults]
 boolean=false,WESTRING_FALSE
@@ -355,6 +356,10 @@ OperatorAdd=0,ArithmeticOperator,"+",WESTRING_ARITHMETICOPERATOR_ADD
 OperatorSubtract=0,ArithmeticOperator,"-",WESTRING_ARITHMETICOPERATOR_SUBTRACT
 OperatorMultiply=0,ArithmeticOperator,"*",WESTRING_ARITHMETICOPERATOR_MULTIPLY
 OperatorDivide=0,ArithmeticOperator,"/",WESTRING_ARITHMETICOPERATOR_DIVIDE
+YOperatorAdd=0,YArithmeticOperator,"+",WESTRING_ARITHMETICOPERATOR_ADD
+YOperatorSubtract=0,YArithmeticOperator,"-",WESTRING_ARITHMETICOPERATOR_SUBTRACT
+YOperatorMultiply=0,YArithmeticOperator,"*",WESTRING_ARITHMETICOPERATOR_MULTIPLY
+YOperatorDivide=0,YArithmeticOperator,"/",WESTRING_ARITHMETICOPERATOR_DIVIDE
 OperatorEqual=0,ComparisonOperator,"==",WESTRING_COMPARISONOPERATOR_EQUAL
 OperatorNotEqual=0,ComparisonOperator,"!=",WESTRING_COMPARISONOPERATOR_NOTEQUAL
 OperatorGreater=0,ComparisonOperator,">",WESTRING_COMPARISONOPERATOR_GREATER

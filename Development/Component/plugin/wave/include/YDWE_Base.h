@@ -16,6 +16,10 @@
 #define OperatorRealMultiply(a,b)    ((a)*(b))
 #define OperatorRealDivide(a,b)      ((a)/(b))
 
+#define YDWEOperatorInt3(a1,op1,a2,op2,a3) ((a1)op1(a2)op2(a3))
+#define YDWEOperatorReal3(a1,op1,a2,op2,a3) ((a1)op1(a2)op2(a3))
+#define YDWEOperatorString3(a1,a2,a3) ((a1)+(a2)+(a3))
+
 #define YDWER2Rad(a) (a)
 #define YDWER2Deg(a) (a)
 #define YDWEDeg2R(a) (a)
