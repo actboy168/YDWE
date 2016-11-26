@@ -8077,7 +8077,7 @@ category = TC_YDST
 returns = string
 [[.args]]
 type = integer
-default = "spsh"
+default = "'spsh'"
 
 [YDWEGetPlayerColorString]
 title = "附加上玩家颜色"
