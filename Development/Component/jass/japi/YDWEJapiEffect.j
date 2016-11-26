@@ -16,7 +16,7 @@ library YDWEJapiEffect
 	native EXEffectMatReset takes effect e returns nothing
 	native EXSetEffectSpeed takes effect e, real speed returns nothing
 
-	function YDWESetEffectLoc takes effect e, Location loc returns nothing
+	function YDWESetEffectLoc takes effect e, location loc returns nothing
 		call EXSetEffectXY(e, GetLocationX(loc), GetLocationY(loc))
 	endfunction
 endlibrary
