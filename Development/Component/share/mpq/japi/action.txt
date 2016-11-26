@@ -111,7 +111,7 @@ default = "GetTriggerUnit"
 title = "设置伤害值 [JAPI]"
 description = "设置单位所受伤害为 ${伤害值}"
 comment = "修改伤害事件里的伤害值，不能在等待之后使用。"
-category = TC_YDFC
+category = TC_EVENTRESPONSE
 [[.args]]
 type = real
 default = "0."

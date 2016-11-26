@@ -7796,21 +7796,21 @@ max = 16
 title = "计时器系统-获取游戏当前时间"
 description = "获取游戏当前时间"
 comment = "获得从游戏开始到目前流逝的时间，以秒为单位。"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 
 [YDWETimerSystemGetRunIndex]
 title = "计时器系统-获取中心计时器当前执行索引"
 description = "获取中心计时器当前执行索引"
 comment = "获得中心计时器运行触发器或函数目前为止的执行次数。"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 
 [YDWEGetUnitItemSoftId]
 title = "物品在物品栏中的位置[YDWE]"
 description = "获取 ${单位} 物品栏中 ${物品} 的位置"
 comment = "返回物品所在单位物品栏中的位置，为1-6之间的某个值；若单位身上不存在该物品，则返回0。"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 [[.args]]
 type = unit
@@ -7823,7 +7823,7 @@ default = "GetManipulatedItem"
 title = "显示单位类型为整数[YDWE]"
 description = "显示<${单位类型}>为整数"
 comment = "单位类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 [[.args]]
 type = unitcode
@@ -7832,7 +7832,7 @@ type = unitcode
 title = "显示物品类型为整数[YDWE]"
 description = "显示<${物品类型}>为整数"
 comment = "物品类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 [[.args]]
 type = itemcode
@@ -7841,7 +7841,7 @@ type = itemcode
 title = "显示技能类型为整数[YDWE]"
 description = "显示<${技能类型}>为整数"
 comment = "技能类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 [[.args]]
 type = abilcode
@@ -7850,7 +7850,7 @@ type = abilcode
 title = "显示命令ID为整数[YDWE]"
 description = "显示<${命令ID}>为整数"
 comment = "命令ID本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 [[.args]]
 type = ordercode
@@ -7859,7 +7859,7 @@ type = ordercode
 title = "转换整数为单位Id [YDWE]"
 description = "转换 ${整数} 为单位Id"
 comment = "将一个整数转换成单位ID，如输入1751543663，将转成步兵的ID。"
-category = TC_YDFC
+category = TC_YDST
 returns = unitcode
 [[.args]]
 type = integer
@@ -7868,7 +7868,7 @@ type = integer
 title = "转换整数为物品Id [YDWE]"
 description = "转换 ${整数} 为物品Id"
 comment = "将一个整数转换成物品ID，如输入1936749416，将转成魔法护盾的ID。"
-category = TC_YDFC
+category = TC_YDST
 returns = itemcode
 [[.args]]
 type = integer
@@ -7877,7 +7877,7 @@ type = integer
 title = "转换字符串为Id [YDWE]"
 description = "需要转换成ID的字符串为：${字符窜}"
 comment = "将一个字符串转换成单位、物品等目标的ID；如spsh转换后为'spsh'，届时可以通过聊天输入字符串来创建单位或物品。"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 [[.args]]
 type = string
@@ -7887,7 +7887,7 @@ default = "spsh"
 title = "转换字符串为单位Id [YDWE]"
 description = "需要转换成单位Id的字符窜为：${字符窜}"
 comment = "将一个字符窜转换成单位ID，如输入hfoo，将转成步兵的ID。"
-category = TC_YDFC
+category = TC_YDST
 returns = unitcode
 [[.args]]
 type = string
@@ -7897,7 +7897,7 @@ default = "hfoo"
 title = "转换字符串为物品Id [YDWE]"
 description = "需要转换成物品Id的字符串为：${字符窜}"
 comment = "将一个字符串转换成物品ID，如输入spsh，将转成魔法护盾的ID。"
-category = TC_YDFC
+category = TC_YDST
 returns = itemcode
 [[.args]]
 type = string
@@ -7907,7 +7907,7 @@ default = "spsh"
 title = "获取 黄金消耗 (单位类型)"
 description = "获取 ${单位} 建造时消耗的黄金"
 comment = "本触发只能获取普通单位建造时消耗的黄金，若填入英雄单位，将会获得固定值425"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 [[.args]]
 type = unitcode
@@ -7917,7 +7917,7 @@ default = "hfoo"
 title = "获取 木头消耗 (单位类型)"
 description = "获取 ${单位} 建造时消耗的木头"
 comment = "本触发只能获取普通单位建造时消耗的木头，若填入英雄单位，将会获得固定值100"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 [[.args]]
 type = unitcode
@@ -7927,7 +7927,7 @@ default = "hfoo"
 title = "获取 建造时间 (单位类型)"
 description = "获取 ${单位} 建造时需要的时间"
 comment = "本触发只能获取普通单位建造时需要的时间，若填入英雄单位，将会获得固定值55"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 [[.args]]
 type = unitcode
@@ -7937,7 +7937,7 @@ default = "hfoo"
 title = "获取 消耗人口 (单位)"
 description = "获取 ${单位} 建造时消耗的人口"
 comment = "本触发只能获取普通单位建造时消耗的人口，若填入英雄单位，将会获得固定值5"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 [[.args]]
 type = unit
@@ -7947,7 +7947,7 @@ default = "GetTriggerUnit"
 title = "获取 提供人口 (单位)"
 description = "获取 ${单位} 建造后提供的人口"
 comment = "本触发只能获取普通单位建造后提供的人口，若填入英雄单位，将会获得固定值0"
-category = TC_YDFC
+category = TC_YDST
 returns = integer
 [[.args]]
 type = unit
@@ -7957,7 +7957,7 @@ default = "GetTriggerUnit"
 title = "修正X坐标 [YDWE]"
 description = "需要修正的X坐标为：${实数}"
 comment = "设修正X坐标，强制它大于地图边界最小值，小于地图边界最大值，避免弹出游戏错误。"
-category = TC_YDFC
+category = TC_YDST
 returns = real
 [[.args]]
 type = real
@@ -7966,7 +7966,7 @@ type = real
 title = "修正Y坐标 [YDWE]"
 description = "需要修正的Y坐标为：${实数}"
 comment = "设修正Y坐标，强制它大于地图边界最小值，小于地图边界最大值，避免弹出游戏错误。"
-category = TC_YDFC
+category = TC_YDST
 returns = real
 [[.args]]
 type = real
@@ -7975,7 +7975,7 @@ type = real
 title = "两个单位之间的距离 [YDWE]"
 description = "从${单位}到${单位}的距离"
 comment = "获取两个单位之间的距离。"
-category = TC_YDFC
+category = TC_YDST
 returns = real
 [[.args]]
 type = unit
@@ -7988,8 +7988,8 @@ default = "GetLastCreatedUnit"
 title = "两个单位之间的角度 [YDWE]"
 description = "从${单位}到${单位}的角度"
 comment = "获取两个单位之间的角度。"
-category = TC_YDFC
-returns = degree
+category = TC_YDST
+returns = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -8001,7 +8001,7 @@ default = "GetLastCreatedUnit"
 title = "获取单位护甲<Rising_Dusk制作>"
 description = "获取 ${单位} 的护甲值，关联技能为 ${辅助技能}"
 comment = "可以获取单位的护甲值；需要保证混乱攻击对所有护甲均为100%伤害。关联技能的设置请参考example文件夹下的辅助地图。"
-category = TC_YDFC
+category = TC_YDST
 returns = real
 [[.args]]
 type = unit
@@ -8013,7 +8013,7 @@ type = abilcode
 title = "转换Id为字符串"
 description = "需要转换的Id为：${整数}"
 comment = "将一个单位、物品等目标的Id转换成字符串；如'spsh'转换后为spsh。"
-category = TC_YDFC
+category = TC_YDST
 returns = string
 [[.args]]
 type = integer
@@ -8023,7 +8023,7 @@ default = "spsh"
 title = "附加上玩家颜色"
 description = "|c[${玩家}]${Start}|r"
 comment = ""
-category = TC_YDFC
+category = TC_YDST
 returns = string
 [[.args]]
 type = player
@@ -8035,21 +8035,21 @@ type = string
 title = "获取最后结束施放特殊技能的单位"
 description = "获取最后结束施放特殊技能的单位"
 comment = "响应单位释放特殊技能事件，当技能释放完毕后，可以获取最后施放特殊技能的单位。"
-category = TC_YDFC
+category = TC_YDST
 returns = unit
 
 [GetLastAbilityTargetUnit]
 title = "获取最后被特殊技能命中的单位"
 description = "获取最后被特殊技能命中的单位"
 comment = "响应单位释放可以命中目标的特殊技能事件，如钩子、月神箭；当技能命中目标后，可以获取最后被特殊技能命中的单位。"
-category = TC_YDFC
+category = TC_YDST
 returns = unit
 
 [YDWEInitHashtable]
 title = "新建哈希表(YDWE)"
 description = "新建哈希表"
 comment = "获得一个新哈希表。"
-category = TC_YDFC
+category = TC_YDST
 use_in_event = 0
 returns = hashtable
 

@@ -2,7 +2,7 @@
 title = "地图在11平台上 [JAPI]"
 description = "目前地图正在11平台上运行"
 comment = "判断地图是否在11平台上；此功能可以根据地图所在平台做出差异化操作。特别注意：此操作内含有等待。"
-category = TC_YDFC
+category = TC_NOTHING
 returns = boolean
 
 [YDWEIsEventPhysicalDamage]
@@ -60,7 +60,7 @@ default = "AttackTypeNormal"
 title = "物体属性 (整数) [JAPI]"
 description = "[${类型}]${物体} 的 ${属性名}"
 comment = "属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
-category = TC_YDAB
+category = TC_UNIT
 use_in_event = 0
 returns = integer
 [[.args]]
@@ -77,7 +77,7 @@ default = "\"levels\""
 title = "物体属性 (实数) [JAPI]"
 description = "[${类型}]${物体} 的 ${属性名}"
 comment = "属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
-category = TC_YDAB
+category = TC_UNIT
 use_in_event = 0
 returns = real
 [[.args]]
@@ -94,7 +94,7 @@ default = "\"Rng1\""
 title = "物体属性 (字符串) [JAPI]"
 description = "[${类型}]${物体} 的 ${属性名}"
 comment = "属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
-category = TC_YDAB
+category = TC_UNIT
 use_in_event = 0
 returns = string
 [[.args]]

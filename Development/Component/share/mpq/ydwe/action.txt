@@ -334,7 +334,7 @@ type = unit
 title = "跳跃函数"
 description = "命令 ${单位} 向 ${方向} 方向跳跃，距离为 ${距离} ，持续 ${时间} 秒，刷新周期 ${I}，最大高度 ${高度}。"
 comment = "当最大高度设置为0，则为普通的移动。"
-category = TC_YDAB
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -364,7 +364,7 @@ min = 0
 title = "肉钩<钩肥大战>"
 description = "让单位 ${单位} 向 ${点} 放出一条钩子，钩头为 ${钩头}，链条为 ${链条}，最远距离可达 ${实数}，链条间距为 ${实数}，对敌对单位造成伤害 ${实数}，刷新周期为 ${实数}。"
 comment = "            钩肥大战里的钩子，由Ors和Everguo优化代码。请务必从演示地图里复制钩子和钩条单位，算我求大家了-.-"
-category = TC_YDAB
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -396,7 +396,7 @@ min = 0.01
 title = "跳劈函数<Warft_TigerCN制作>"
 description = "命令 ${单位} 向 ${方向} 方向跳劈，距离为 ${距离} ，持续时间 ${时间}，刷新周期 ${I}，最大高度 ${高度}，对途经敌人造成伤害值 ${伤害量}，在敌人的 ${部位} 附加特效 ${特效}。"
 comment = "当伤害值设置为0，则敌人身上不出现特效。代码由Fetrix_sai修改。"
-category = TC_YDAB
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -435,7 +435,7 @@ type = modelfile
 title = "月神箭<Warft_TigerCN制作>"
 description = "命令 ${单位} 向 ${方向} 方向飞行，距离为 ${距离} ，持续 ${时间} 秒，刷新周期 ${I}，生成带有 ${整数} 级 ${技能} 的 ${辅助单位}，对目标施放 ${技能} ，在目标的 ${部位} 附加 ${特效}。"
 comment = "                                                           由辅助单位给目标添加眩晕等状态。代码由Fetrix_sai修改。"
-category = TC_YDAB
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -477,7 +477,7 @@ type = modelfile
 title = "冲锋<Warft_TigerCN制作>"
 description = "命令 ${单位} 向 ${方向} 方向冲锋，射程为 ${距离} ，持续 ${时间} 秒，刷新周期 ${I}，对途经敌人伤害值 ${实数}，摧毁树木 ${布尔}，不计算碰撞 ${布尔}，无视地形 ${布尔} ，在目标的 ${部位} 附加 ${特效}(地面)，附加 ${特效}(水中)"
 comment = "                                                                                                 代码由Fetrix_sai修改"
-category = TC_YDAB
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -523,7 +523,7 @@ type = modelfile
 title = "万能环绕函数<Fetrix_sai制作>"
 description = "命令 ${单位} 围绕 ${单位} 环绕，角速度为 ${实数}，离心速度为 ${实数}，提升速度为 ${实数}，持续 ${实数} 秒\"\"，\"\"刷\"\"新\"\"周\"\"期\"\"为 ${实数} 秒"
 comment = "角速度为正，顺时针旋转，反之逆时针；离心速度为正，远离目标，反之靠近；提升速度为正，则高度上升，反之下降。"
-category = TC_YDAB
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetLastCreatedUnit"
@@ -1293,10 +1293,10 @@ type = integer
 min = 0
 
 [YDWESetAttackDamageWeaponType]
-title = "设置默认攻击|伤害|武器类型"
+title = "设置默认攻击|伤害|武器类型 [YDWE]"
 description = "设置默认攻击类型为 ${攻击类型}，伤害类型为 ${伤害类型}，武器类型为 ${武器类型}"
 comment = "设置一些技能（如钩子、月神箭）需要用到的攻击|伤害|武器类型，系统会按设置的攻击|伤害|武器类型对目标造成伤害。"
-category = TC_YDFC
+category = TC_UNIT
 [[.args]]
 type = attacktype
 default = "AttackTypeNormal"
@@ -1308,19 +1308,19 @@ type = weapontype
 default = "WEAPON_TYPE_WHOKNOWS"
 
 [YDWEFlyEnable]
-title = "设置单位可以飞行"
+title = "设置单位可以飞行 [YDWE]"
 description = "让单位 ${地面单位} 变得可以飞行。"
 comment = "让一个地面单位变得可以飞行，可以设置其飞行高度。"
-category = TC_YDFC
+category = TC_UNIT
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
 
 [YDWESetMapLimitCoordinate]
-title = "设置地图边界坐标"
+title = "设置地图边界坐标 [YDWE]"
 description = "设置地图的边界坐标为 ( X坐标最小值 ${实数}，X坐标最大值 ${实数}，Y坐标最小值 ${实数}，Y坐标最大值 ${实数} )"
 comment = "边界坐标的设置会影响钩子、跳跃等技能在地图边界处的表现形式；默认的边界坐标是镜头范围的边界,新手慎用本设置!"
-category = TC_YDFC
+category = TC_RECT
 [[.args]]
 type = real
 default = "GetCameraBoundMinX"
@@ -1335,10 +1335,10 @@ type = real
 default = "GetCameraBoundMaxY"
 
 [YDWELifeChange]
-title = "设置单位生命上限"
+title = "设置单位生命上限 [YDWE]"
 description = "设置 ${单位} 的生命上限 ${变化} ${整数} ，关联技能为 ${辅助技能}"
 comment = "如果修改后单位生命上限小于0，单位会立即死亡；关联技能的设置请参考example文件夹下的辅助地图。"
-category = TC_YDFC
+category = TC_UNIT
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -1354,10 +1354,10 @@ max = 99999
 type = abilcode
 
 [YDWEManaChange]
-title = "设置单位魔法上限"
+title = "设置单位魔法上限 [YDWE]"
 description = "设置 ${单位} 的魔法上限 ${变化} ${整数} ，关联技能为 ${辅助技能}"
 comment = "如果修改后单位魔法上限小于0，单位的魔法栏将消失；关联技能的设置请参考example文件夹下的辅助地图。"
-category = TC_YDFC
+category = TC_UNIT
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -2493,7 +2493,7 @@ default = "GetLastCreatedQuestItemBJ"
 title = "创建环绕单位<wataloo添加>"
 description = "围绕 ${单位} 创建 ${单位类型} 共 ${n}个 ，旋转半径 ${R}，持续 ${T} 秒，刷新周期 ${I}，旋转角速度每个周期 ${S}。"
 comment = "刷新周期越小动画越连续，但也越耗资源"
-category = TC_YDSE
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -2524,7 +2524,7 @@ default = "1"
 title = "生成丝带<thody制作>"
 description = "在 ${单位} 身上生成丝带，特效单位类型为 ${单位类型}，数目为 ${整数}，角度偏移 ${实数}，间距为 ${实数}，持续时间为 ${实数}，刷新周期为 ${实数}，初始高度为 ${实数}，高度等差为 ${实数}，模型尺寸初始为 ${实数}，尺寸等差为 ${实数}。"
 comment = "  好看的丝带~"
-category = TC_YDSE
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
