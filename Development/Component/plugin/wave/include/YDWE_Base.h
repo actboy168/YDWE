@@ -63,7 +63,11 @@
 #define YDWEConverItemcodeToInt(a)   (a)
 #define YDWEConverAbilcodeToInt(a)   (a)
 #define YDWEConverOrdercodeToInt(a)  (a)
-
+#define YDWEUOrderId2OrderId(a)      (a)
+#define YDWEPOrderId2OrderId(a)      (a)
+#define YDWEDOrderId2OrderId(a)      (a)
+#define YDWEIOrderId2OrderId(a)      (a)
+#define YDWENOrderId2OrderId(a)      (a)
 #define YDWEI2UnitId(a)              (a)
 #define YDWEI2ItemId(a)              (a)
 
@@ -71,3 +75,6 @@
 #define YDWECreateQuestItem(whichQuest, description)             CreateQuestItemBJ(whichQuest, description)
 
 #define YDWEAbilityId2OrderId(abilcode, type) <?=ability2order(#abilcode, (type))?>
+
+
+

@@ -9837,3 +9837,48 @@ default = 'AHbz'
 [[.args]]
 type = OrderType
 default = OrderTypeOrder
+
+[YDWEUOrderId2OrderId]
+title = "单位目标命令"
+description = "${命令}"
+comment = ""
+category = TC_CONVERSION
+returns = ordercode
+[[.args]]
+type = ordercodeutarg
+
+[YDWEPOrderId2OrderId]
+title = "点目标命令"
+description = "${命令}"
+comment = ""
+category = TC_CONVERSION
+returns = ordercode
+[[.args]]
+type = ordercodeptarg
+
+[YDWEDOrderId2OrderId]
+title = "可破坏物目标命令"
+description = "${命令}"
+comment = ""
+category = TC_CONVERSION
+returns = ordercode
+[[.args]]
+type = ordercodedtarg
+
+[YDWEIOrderId2OrderId]
+title = "物品目标命令"
+description = "${命令}"
+comment = ""
+category = TC_CONVERSION
+returns = ordercode
+[[.args]]
+type = ordercodeitarg
+
+[YDWENOrderId2OrderId]
+title = "无目标命令"
+description = "${命令}"
+comment = ""
+category = TC_CONVERSION
+returns = ordercode
+[[.args]]
+type = ordercodenotarg
