@@ -1,11 +1,10 @@
 #include <windows.h>
 #define __STORMLIB_SELF__
 #include <StormLib.h>
-#include <aero/function/fp_call.hpp>
+#include <base/hook/fp_call.h>
 #include <base/hook/iat.h>
 #include <base/hook/inline.h>
-#include <boost/filesystem.hpp>
-#include <boost/filesystem/path.hpp>
+#include <base/filesystem.h>
 #include <cstdint>
 
 namespace wrap
@@ -37,97 +36,97 @@ namespace wrap
 	{
 		bool __stdcall SFileEnableDirectAccess(uint32_t flags)
 		{
-			return aero::std_call<bool>(real::SFileEnableDirectAccess, flags);
+			return base::std_call<bool>(real::SFileEnableDirectAccess, flags);
 		}
 
 		bool __stdcall SFileGetFileArchive(HANDLE file_handle, HANDLE* mpq_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileGetFileArchive, file_handle, mpq_handle_ptr);
+			return base::std_call<bool>(real::SFileGetFileArchive, file_handle, mpq_handle_ptr);
 		}
 
 		LCID __stdcall SFileSetLocale(LCID locale)
 		{
-			return aero::std_call<LCID>(real::SFileSetLocale, locale);
+			return base::std_call<LCID>(real::SFileSetLocale, locale);
 		}
 
 		bool __stdcall SFileOpenArchive(const char* mpqname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileOpenArchive, mpqname, priority, flags, mpq_handle_ptr);
+			return base::std_call<bool>(real::SFileOpenArchive, mpqname, priority, flags, mpq_handle_ptr);
 		}
 
 		bool __stdcall SFileOpenFile(const char* filename, HANDLE* file_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileOpenFile, filename, file_handle_ptr);
+			return base::std_call<bool>(real::SFileOpenFile, filename, file_handle_ptr);
 		}
 
 		bool __stdcall SFileOpenFileEx(HANDLE mpq_handle, const char *filename, uint32_t search_scope, HANDLE* file_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileOpenFileEx, mpq_handle, filename, search_scope, file_handle_ptr);
+			return base::std_call<bool>(real::SFileOpenFileEx, mpq_handle, filename, search_scope, file_handle_ptr);
 		}
 
 		bool __stdcall SFileCloseFile(HANDLE file_handle)
 		{
-			return aero::std_call<bool>(real::SFileCloseFile, file_handle);
+			return base::std_call<bool>(real::SFileCloseFile, file_handle);
 		}
 
 		uint32_t __stdcall SFileGetFileSize(HANDLE file_handle, uint32_t* file_size_high_ptr)
 		{
-			return aero::std_call<uint32_t>(real::SFileGetFileArchive, file_handle, file_size_high_ptr);
+			return base::std_call<uint32_t>(real::SFileGetFileArchive, file_handle, file_size_high_ptr);
 		}
 
 		bool __stdcall SFileReadFile(HANDLE file_handle, void* buffer, uint32_t size, uint32_t* size_ptr, uint32_t unk)
 		{
-			return aero::std_call<bool>(real::SFileReadFile, file_handle, buffer, size, size_ptr, unk);
+			return base::std_call<bool>(real::SFileReadFile, file_handle, buffer, size, size_ptr, unk);
 		}
 
 		uint32_t __stdcall SFileSetFilePointer(HANDLE file_handle, uint32_t pos, uint32_t* pos_high, uint32_t method)
 		{
-			return aero::std_call<uint32_t>(real::SFileSetFilePointer, file_handle, pos, pos_high, method);
+			return base::std_call<uint32_t>(real::SFileSetFilePointer, file_handle, pos, pos_high, method);
 		}
 
 		bool __stdcall SFileGetArchiveName(HANDLE mpq_handle, char* name, uint32_t size)
 		{
-			return aero::std_call<bool>(real::SFileGetArchiveName, mpq_handle, name, size);
+			return base::std_call<bool>(real::SFileGetArchiveName, mpq_handle, name, size);
 		}
 
 		bool __stdcall SFileLoadFile(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
 		{
-			return aero::std_call<bool>(real::SFileLoadFile, filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
+			return base::std_call<bool>(real::SFileLoadFile, filename, buffer_ptr, size_ptr, reserve_size, overlapped_ptr);
 		}
 
 		bool __stdcall SFileUnloadFile(void* buffer)
 		{
-			return aero::std_call<bool>(real::SFileUnloadFile, buffer);
+			return base::std_call<bool>(real::SFileUnloadFile, buffer);
 		}
 
 		bool __stdcall SFileLoadFileEx(HANDLE mpq_handle, const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, uint32_t search_scope, OVERLAPPED* overlapped_ptr)
 		{
-			return aero::std_call<bool>(real::SFileLoadFileEx, mpq_handle, filename, buffer_ptr, size_ptr, reserve_size, search_scope, overlapped_ptr);
+			return base::std_call<bool>(real::SFileLoadFileEx, mpq_handle, filename, buffer_ptr, size_ptr, reserve_size, search_scope, overlapped_ptr);
 		}
 
 		bool __stdcall SFileFileExists(const char* filename)
 		{
-			return aero::std_call<bool>(real::SFileFileExists, filename);
+			return base::std_call<bool>(real::SFileFileExists, filename);
 		}
 
 		bool __stdcall SFileFileExistsEx(HANDLE mpq_handle, const char* filename, uint32_t flags)
 		{
-			return aero::std_call<bool>(real::SFileFileExistsEx, mpq_handle, filename, flags);
+			return base::std_call<bool>(real::SFileFileExistsEx, mpq_handle, filename, flags);
 		}
 
 		bool __stdcall SFileReadFileEx(HANDLE file_handle, void* buffer, uint32_t size, uint32_t* size_ptr, uint32_t unk, OVERLAPPED* overlapped_ptr, uint32_t unk2)
 		{
-			return aero::std_call<bool>(real::SFileReadFileEx, file_handle, buffer, size, size_ptr, unk, overlapped_ptr, unk2);
+			return base::std_call<bool>(real::SFileReadFileEx, file_handle, buffer, size, size_ptr, unk, overlapped_ptr, unk2);
 		}
 
 		bool __stdcall SFileOpenFileAsArchive(HANDLE handle, const char* filename, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileOpenFileAsArchive, handle, filename, priority, flags, mpq_handle_ptr);
+			return base::std_call<bool>(real::SFileOpenFileAsArchive, handle, filename, priority, flags, mpq_handle_ptr);
 		}
 
 		bool __stdcall SFileOpenPathAsArchive(HANDLE handle, const char* pathname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
 		{
-			return aero::std_call<bool>(real::SFileOpenPathAsArchive, handle, pathname, priority, flags, mpq_handle_ptr);
+			return base::std_call<bool>(real::SFileOpenPathAsArchive, handle, pathname, priority, flags, mpq_handle_ptr);
 		}
 	}
 }
@@ -135,14 +134,14 @@ namespace wrap
 class stormlib_builder
 {
 public:
-	stormlib_builder(const boost::filesystem::path& target, const boost::filesystem::path& source)
+	stormlib_builder(const fs::path& target, const fs::path& source)
 		: handle_(NULL)
 		, source_(source)
 	{
 		SFILE_CREATE_MPQ CreateInfo = {0};
 		CreateInfo.cbSize         = sizeof(SFILE_CREATE_MPQ);
 		CreateInfo.dwMpqVersion   = MPQ_FORMAT_VERSION_1;
-		CreateInfo.dwStreamFlags  = STREAM_PROVIDER_LINEAR | BASE_PROVIDER_FILE;
+		CreateInfo.dwStreamFlags  = STREAM_PROVIDER_FLAT | BASE_PROVIDER_FILE;
 		CreateInfo.dwAttrFlags    = 0;
 		CreateInfo.dwSectorSize   = 0x10000;
 		CreateInfo.dwRawChunkSize = 0;
@@ -163,7 +162,7 @@ public:
 		}
 	}
 
-	bool add(const boost::filesystem::path& target, const boost::filesystem::path& source)
+	bool add(const fs::path& target, const fs::path& source)
 	{
 		if (!handle_)
 			return false;
@@ -178,14 +177,14 @@ public:
 			);
 	}
 
-	static uint32_t get_file_count(const boost::filesystem::path& p)
+	static uint32_t get_file_count(const fs::path& p)
 	{
 		uint32_t sum = 0;
 		try {
-			boost::filesystem::recursive_directory_iterator end_itr;
-			for (boost::filesystem::recursive_directory_iterator itr(p); itr != end_itr; ++itr)
+			fs::recursive_directory_iterator end_itr;
+			for (fs::recursive_directory_iterator itr(p); itr != end_itr; ++itr)
 			{
-				if (!boost::filesystem::is_directory(*itr))
+				if (!fs::is_directory(*itr))
 				{
 					sum++;
 				}
@@ -199,12 +198,12 @@ public:
 		return n;
 	}
 
-	static boost::filesystem::path path_sub(const boost::filesystem::path& lft, const boost::filesystem::path& rht)
+	static fs::path path_sub(const fs::path& lft, const fs::path& rht)
 	{
-		boost::filesystem::path::iterator lft_itr =  lft.begin();
-		boost::filesystem::path::iterator lft_end =  lft.end();
-		boost::filesystem::path::iterator rht_itr =  rht.begin();
-		boost::filesystem::path::iterator rht_end =  rht.end();
+		fs::path::iterator lft_itr =  lft.begin();
+		fs::path::iterator lft_end =  lft.end();
+		fs::path::iterator rht_itr =  rht.begin();
+		fs::path::iterator rht_end =  rht.end();
 
 		while ((lft_itr != lft_end) && (rht_itr != rht_end))
 		{
@@ -217,7 +216,7 @@ public:
 			++rht_itr;
 		}
 
-		boost::filesystem::path result;
+		fs::path result;
 		for (; lft_itr != lft_end; ++lft_itr)
 		{
 			result /= *lft_itr;
@@ -227,7 +226,7 @@ public:
 
 private:
 	HANDLE handle_;
-	boost::filesystem::path source_;
+	fs::path source_;
 };
 
 struct we_import_file
@@ -248,11 +247,12 @@ struct we_import_info
 uintptr_t real_we_create_map = 0x0055D720;
 bool __fastcall fake_we_create_map(uintptr_t this_, uintptr_t /*edx_*/, const char* name, bool is_tft)
 {
-	//return aero::this_call<bool>(real_we_create_map, this_, name, is_tft);
+	return base::this_call<bool>(real_we_create_map, this_, name, is_tft);
+	/*
 	try {
-		boost::filesystem::path target(name);
-		boost::filesystem::path source = target.parent_path();
-		boost::filesystem::path source_mpq(source.wstring().substr(0, source.wstring().size()-4));
+		fs::path target(name);
+		fs::path source = target.parent_path();
+		fs::path source_mpq(source.wstring().substr(0, source.wstring().size()-4));
 
 		if (is_tft)
 		{
@@ -263,15 +263,15 @@ bool __fastcall fake_we_create_map(uintptr_t this_, uintptr_t /*edx_*/, const ch
 			target.replace_extension(L".w3m");
 		}
 
-		aero::this_call<void>(0x005261D0, *((uint32_t*)this_+3734));
+		base::this_call<void>(0x005261D0, *((uint32_t*)this_+3734));
 
 		stormlib_builder sb(target, source);
 	
-		boost::filesystem::recursive_directory_iterator end_itr;
-		for (boost::filesystem::recursive_directory_iterator itr(source); itr != end_itr; ++itr)
+		fs::recursive_directory_iterator end_itr;
+		for (fs::recursive_directory_iterator itr(source); itr != end_itr; ++itr)
 		{
 			try {
-				if (!boost::filesystem::is_directory(*itr) && (itr->path() != target))
+				if (!fs::is_directory(*itr) && (itr->path() != target))
 				{
 					sb.add(stormlib_builder::path_sub(itr->path(), source), itr->path());
 				}
@@ -280,13 +280,14 @@ bool __fastcall fake_we_create_map(uintptr_t this_, uintptr_t /*edx_*/, const ch
 			}
 		}
 
-		aero::std_call<uintptr_t>(0x00405240, (source/ L"war3map.j").string().c_str());
+		base::std_call<uintptr_t>(0x00405240, (source/ L"war3map.j").string().c_str());
 		return true;
 	}
 	catch (...) {
 	}
 	
 	return false;
+	*/
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
