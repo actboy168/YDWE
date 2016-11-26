@@ -3107,7 +3107,7 @@ default = "UnitOrderSmartItem"
 type = item
 
 [IssueImmediateOrderById]
-title = "按ID发布命令(无目标) [R]"
+title = "发布命令(无目标)(ID)"
 description = "对 ${单位} 发布 ${Order} 命令"
 comment = ""
 category = TC_UNIT
@@ -3120,7 +3120,7 @@ type = ordercodenotarg
 default = "OrderCodeStop"
 
 [IssuePointOrderById]
-title = "按ID发布命令(指定坐标) [R]"
+title = "发布命令(指定坐标)(ID)"
 description = "对 ${单位} 发布 ${Order} 命令到坐标:(${X},${Y})"
 comment = ""
 category = TC_UNIT
@@ -3139,7 +3139,7 @@ type = real
 default = "0"
 
 [IssuePointOrderByIdLoc]
-title = "按ID发布命令(指定点) [R]"
+title = "发布命令(指定点)(ID)"
 description = "对 ${单位} 发布 ${Order} 命令到目标点: ${指定点}"
 comment = ""
 category = TC_UNIT
@@ -3154,7 +3154,7 @@ default = "OrderCodeMove"
 type = location
 
 [IssueTargetOrderById]
-title = "按ID发布命令(指定单位) [R]"
+title = "发布命令(指定单位)(ID)"
 description = "对 ${单位} 发布 ${Order} 命令到目标: ${单位}"
 comment = ""
 category = TC_UNIT
@@ -3169,7 +3169,7 @@ default = "OrderCodeAttackUnit"
 type = unit
 
 [IssueTargetDestructableOrderById]
-title = "按ID发布命令(指定可破坏物) [R]"
+title = "发布命令(指定可破坏物)(ID)"
 description = "对 ${单位} 发布 ${Order} 命令到目标: ${可破坏物}"
 comment = ""
 script_name = IssueTargetOrderById
@@ -3185,7 +3185,7 @@ default = "OrderCodeHarvestDestructible"
 type = destructable
 
 [IssueTargetItemOrderById]
-title = "按ID发布命令(指定物品) [R]"
+title = "发布命令(指定物品)(ID)"
 description = "对 ${单位} 发布 ${Order} 命令到目标: ${物品}"
 comment = ""
 script_name = IssueTargetOrderById
@@ -3197,6 +3197,291 @@ default = "GetTriggerUnit"
 [[.args]]
 type = ordercodeitarg
 default = "OrderCodeSmartItem"
+[[.args]]
+type = item
+
+[IssueNeutralImmediateOrder]
+title = "发布中介命令(无目标)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令"
+comment = "可以用来对非本玩家单位发布命令."
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = unitordernotarg
+default = "UnitOrderStop"
+
+[IssueNeutralPointOrder]
+title = "发布中介命令(指定坐标)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到坐标:(${X},${Y})"
+comment = "可以用来对非本玩家单位发布命令."
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = unitorderptarg
+default = "UnitOrderNeutralDetectAOE"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+
+[IssueNeutralTargetOrder]
+title = "发布中介命令(指定单位)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${单位}"
+comment = "可以用来对非本玩家单位发布命令."
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = unitorderutarg
+default = "UnitOrderNeutralInterAct"
+[[.args]]
+type = unit
+
+[IssueNeutralTargetDestructableOrder]
+title = "发布中介命令(指定可破坏物)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${可破坏物}"
+comment = "可以用来对非本玩家单位发布命令."
+script_name = IssueNeutralTargetOrder
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = unitorderdtarg
+default = "UnitOrderHarvestDestructible"
+[[.args]]
+type = destructable
+
+[IssueNeutralTargetItemOrder]
+title = "发布中介命令(指定物品)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${物品}"
+comment = "可以用来对非本玩家单位发布命令."
+script_name = IssueNeutralTargetOrder
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = unitorderitarg
+default = "UnitOrderSmartItem"
+[[.args]]
+type = item
+
+[IssueNeutralImmediateOrderById]
+title = "发布中介命令(无目标)(ID)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令"
+comment = "可以用来对非本玩家单位发布命令."
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = ordercodenotarg
+default = "OrderCodeStop"
+
+[IssueNeutralPointOrderById]
+title = "发布中介命令(指定坐标)(ID)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到坐标:(${X},${Y})"
+comment = "可以用来对非本玩家单位发布命令."
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = ordercodeptarg
+default = "OrderCodeNeutralDetectAOE"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+
+[IssueNeutralTargetOrderById]
+title = "发布中介命令(指定单位)(ID)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${单位}"
+comment = "可以用来对非本玩家单位发布命令."
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = ordercodeutarg
+default = "OrderCodeNeutralInterAct"
+[[.args]]
+type = unit
+
+[IssueNeutralTargetDestructableOrderById]
+title = "发布中介命令(指定可破坏物)(ID)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${可破坏物}"
+comment = "可以用来对非本玩家单位发布命令."
+script_name = IssueNeutralTargetOrderById
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = ordercodedtarg
+default = "OrderCodeHarvestDestructible"
+[[.args]]
+type = destructable
+
+[IssueNeutralTargetItemOrderById]
+title = "发布中介命令(指定物品)(ID)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${物品}"
+comment = "可以用来对非本玩家单位发布命令."
+script_name = IssueNeutralTargetOrderById
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = ordercodeitarg
+default = "OrderCodeSmartItem"
+[[.args]]
+type = item
+
+[YDWEIssueNeutralImmediateOrderById]
+title = "发布中介命令(无目标)(自定义ID)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令"
+comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
+script_name = IssueNeutralImmediateOrderById
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = integer
+default = "851972"
+
+[YDWEIssueNeutralPointOrderById]
+title = "发布中介命令(指定坐标)(自定义ID)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到坐标:(${X},${Y})"
+comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
+script_name = IssueNeutralPointOrderById
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = integer
+default = "851983"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+
+[YDWEIssueNeutralTargetOrderById]
+title = "发布中介命令(指定单位)(自定义ID)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${单位}"
+comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
+script_name = IssueNeutralTargetOrderById
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = integer
+default = "851983"
+[[.args]]
+type = unit
+
+[YDWEIssueNeutralTargetDestructableOrderById]
+title = "发布中介命令(指定可破坏物)(自定义ID)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${可破坏物}"
+comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
+script_name = IssueNeutralTargetOrderById
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = integer
+default = "851983"
+[[.args]]
+type = destructable
+
+[YDWEIssueNeutralTargetItemOrderById]
+title = "发布中介命令(指定物品)(自定义ID)"
+description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${物品}"
+comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
+script_name = IssueNeutralTargetOrderById
+category = TC_UNIT
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = integer
+default = "851983"
 [[.args]]
 type = item
 
@@ -3381,291 +3666,6 @@ default = "GetTriggerUnit"
 [[.args]]
 type = itemcode
 default = "ckng"
-
-[IssueNeutralImmediateOrder]
-title = "发布中介命令(无目标) [R]"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令"
-comment = "可以用来对非本玩家单位发布命令."
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = unitordernotarg
-default = "UnitOrderStop"
-
-[IssueNeutralPointOrder]
-title = "发布中介命令(指定坐标) [R]"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到坐标:(${X},${Y})"
-comment = "可以用来对非本玩家单位发布命令."
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = unitorderptarg
-default = "UnitOrderNeutralDetectAOE"
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "0"
-
-[IssueNeutralTargetOrder]
-title = "发布中介命令(指定单位) [R]"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${单位}"
-comment = "可以用来对非本玩家单位发布命令."
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = unitorderutarg
-default = "UnitOrderNeutralInterAct"
-[[.args]]
-type = unit
-
-[IssueNeutralTargetDestructableOrder]
-title = "发布中介命令(指定可破坏物) [R]"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${可破坏物}"
-comment = "可以用来对非本玩家单位发布命令."
-script_name = IssueNeutralTargetOrder
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = unitorderdtarg
-default = "UnitOrderHarvestDestructible"
-[[.args]]
-type = destructable
-
-[IssueNeutralTargetItemOrder]
-title = "发布中介命令(指定物品) [R]"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${物品}"
-comment = "可以用来对非本玩家单位发布命令."
-script_name = IssueNeutralTargetOrder
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = unitorderitarg
-default = "UnitOrderSmartItem"
-[[.args]]
-type = item
-
-[IssueNeutralImmediateOrderById]
-title = "按ID发布中介命令(无目标) [R]"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令"
-comment = "可以用来对非本玩家单位发布命令."
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = ordercodenotarg
-default = "OrderCodeStop"
-
-[IssueNeutralPointOrderById]
-title = "按ID发布中介命令(指定坐标) [R]"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到坐标:(${X},${Y})"
-comment = "可以用来对非本玩家单位发布命令."
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = ordercodeptarg
-default = "OrderCodeNeutralDetectAOE"
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "0"
-
-[IssueNeutralTargetOrderById]
-title = "按ID发布中介命令(指定单位) [R]"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${单位}"
-comment = "可以用来对非本玩家单位发布命令."
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = ordercodeutarg
-default = "OrderCodeNeutralInterAct"
-[[.args]]
-type = unit
-
-[IssueNeutralTargetDestructableOrderById]
-title = "按ID发布中介命令(指定可破坏物) [R]"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${可破坏物}"
-comment = "可以用来对非本玩家单位发布命令."
-script_name = IssueNeutralTargetOrderById
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = ordercodedtarg
-default = "OrderCodeHarvestDestructible"
-[[.args]]
-type = destructable
-
-[IssueNeutralTargetItemOrderById]
-title = "按ID发布中介命令(指定物品) [R]"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${物品}"
-comment = "可以用来对非本玩家单位发布命令."
-script_name = IssueNeutralTargetOrderById
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = ordercodeitarg
-default = "OrderCodeSmartItem"
-[[.args]]
-type = item
-
-[YDWEIssueNeutralImmediateOrderById]
-title = "自定义ID发布中介命令(无目标)"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令"
-comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
-script_name = IssueNeutralImmediateOrderById
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = integer
-default = "851972"
-
-[YDWEIssueNeutralPointOrderById]
-title = "自定义ID发布中介命令(指定坐标)"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到坐标:(${X},${Y})"
-comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
-script_name = IssueNeutralPointOrderById
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = integer
-default = "851983"
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "0"
-
-[YDWEIssueNeutralTargetOrderById]
-title = "自定义ID发布中介命令(指定单位)"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${单位}"
-comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
-script_name = IssueNeutralTargetOrderById
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = integer
-default = "851983"
-[[.args]]
-type = unit
-
-[YDWEIssueNeutralTargetDestructableOrderById]
-title = "自定义ID发布中介命令(指定可破坏物)"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${可破坏物}"
-comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
-script_name = IssueNeutralTargetOrderById
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = integer
-default = "851983"
-[[.args]]
-type = destructable
-
-[YDWEIssueNeutralTargetItemOrderById]
-title = "自定义ID发布中介命令(指定物品)"
-description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${物品}"
-comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
-script_name = IssueNeutralTargetOrderById
-category = TC_UNIT
-returns = boolean
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = integer
-default = "851983"
-[[.args]]
-type = item
 
 [UnitDamagePoint]
 title = "伤害区域 [R]"
