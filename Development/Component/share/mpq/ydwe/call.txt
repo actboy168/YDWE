@@ -5550,9 +5550,9 @@ type = playerscore
 default = "PlayerScoreTotal"
 
 [GetConvertedPlayerId]
-title = "玩家索引"
-description = "${Player} 的玩家索引号"
-comment = "玩家索引取值1-16."
+title = "玩家ID"
+description = "${Player} 的玩家ID"
+comment = "玩家ID取值1-16."
 category = TC_PLAYER
 returns = integer
 [[.args]]
@@ -5560,9 +5560,9 @@ type = player
 default = "GetTriggerPlayer"
 
 [GetPlayerId]
-title = "玩家索引 [R]"
-description = "${Player} 的玩家索引号"
-comment = "玩家索引取值0-15，玩家一的索引号为0"
+title = "玩家ID - 1 [R]"
+description = "${Player} 的玩家ID - 1"
+comment = "玩家ID取值1-16."
 category = TC_PLAYER
 returns = integer
 [[.args]]
@@ -7781,9 +7781,9 @@ type = unitcode
 default = "hfoo"
 
 [ConvertedPlayer]
-title = "转换玩家索引号为玩家"
+title = "转换玩家ID为玩家"
 description = "玩家 ${Player Index}"
-comment = "玩家索引号取值1-16."
+comment = "玩家ID取值1-16."
 category = TC_CONVERSION
 returns = player
 [[.args]]
