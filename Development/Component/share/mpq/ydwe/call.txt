@@ -3402,7 +3402,7 @@ default = "Player00"
 type = unit
 default = "GetTriggerUnit"
 [[.args]]
-type = integer
+type = ordercode
 default = "851972"
 
 [YDWEIssueNeutralPointOrderById]
@@ -3419,7 +3419,7 @@ default = "Player00"
 type = unit
 default = "GetTriggerUnit"
 [[.args]]
-type = integer
+type = ordercode
 default = "851983"
 [[.args]]
 type = real
@@ -3442,7 +3442,7 @@ default = "Player00"
 type = unit
 default = "GetTriggerUnit"
 [[.args]]
-type = integer
+type = ordercode
 default = "851983"
 [[.args]]
 type = unit
@@ -3461,7 +3461,7 @@ default = "Player00"
 type = unit
 default = "GetTriggerUnit"
 [[.args]]
-type = integer
+type = ordercode
 default = "851983"
 [[.args]]
 type = destructable
@@ -3480,7 +3480,7 @@ default = "Player00"
 type = unit
 default = "GetTriggerUnit"
 [[.args]]
-type = integer
+type = ordercode
 default = "851983"
 [[.args]]
 type = item
@@ -9815,3 +9815,12 @@ default = "\"Category\""
 [[.args]]
 type = gamecache
 default = "GetLastCreatedGameCacheBJ"
+
+[YDWEConvert]
+title = "命令ID"
+description = "${ID}"
+comment = ""
+category = TC_CONVERSION
+returns = ordercode
+[[.args]]
+type = integer

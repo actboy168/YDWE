@@ -55,6 +55,7 @@
 #define YDWEGetDialogID(a)           YDWEH2I(a)
 #define YDWEGetButtonID(a)           YDWEH2I(a)
 
+#define YDWEConvert(a) (a)
 #define YDWEGetUnitTypeID(a)         (a)
 #define YDWEGetAbilityTypeID(a)      (a)
 #define YDWEGetItemTypeID(a)         (a)
