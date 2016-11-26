@@ -307,6 +307,7 @@ AbilityDataString=0,0,0,技能数据 (字符串),integer
 ChatRecipient=0,0,0,频道类型,integer
 ItemDataString=0,0,0,物品数据 (字符串),integer
 YArithmeticOperator=0,0,0,WESTRING_TRIGTYPE_ArithmeticOperator
+OrderType=0,0,0,命令类型
 
 [TriggerTypeDefaults]
 boolean=false,WESTRING_FALSE
@@ -2586,6 +2587,10 @@ CHAT_RECIPIENT_PRIVATE=0,ChatRecipient,3,私人频道
 ITEM_DATA_ART=0,ItemDataString,1,图标
 ITEM_DATA_UBERTIP=0,ItemDataString,3,提示(扩展)
 ITEM_DATA_TIP=0,ItemDataString,4,提示
+OrderTypeOrder=0,OrderType,`Order`,使用
+OrderTypeUnorder=0,OrderType,`Unorder`,关闭
+OrderTypeOrderon=0,OrderType,`Orderon`,激活
+OrderTypeOrderoff=0,OrderType,`Orderoff`,取消激活
 
 [DefaultTriggerCategories]
 NumCategories=1
@@ -2638,7 +2643,7 @@ GetUnitCountDone="已完成 ",~单位类型," 的总数"
 GetUnitCountDoneHint="不包括包括正在建造的单位."
 GetTownUnitCount="单位总数(指定基地)"
 GetTownUnitCount=~单位类型," 的总数在#",~Town," 基地(只取已完成单位: ",~Option,")"
-GetTownUnitCountHint="
+GetTownUnitCountHint=""
 GetMinesOwned="拥有金矿数量"
 GetMinesOwned="拥有金矿数量"
 GetMinesOwnedHint="AI玩家正在使用的金矿数量."

@@ -69,3 +69,5 @@
 
 #define YDWECreateQuest(questType, title, description, iconPath) CreateQuestBJ(questType, title, description, iconPath)
 #define YDWECreateQuestItem(whichQuest, description)             CreateQuestItemBJ(whichQuest, description)
+
+#define YDWEAbilityId2OrderId(abilcode, type) <?=ability2order(#abilcode, (type))?>

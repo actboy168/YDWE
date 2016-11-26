@@ -3403,7 +3403,7 @@ type = unit
 default = "GetTriggerUnit"
 [[.args]]
 type = ordercode
-default = "851972"
+default = YDWEAbilityId2OrderId
 
 [YDWEIssueNeutralPointOrderById]
 title = "发布中介命令(指定坐标)(自定义ID)"
@@ -3420,7 +3420,7 @@ type = unit
 default = "GetTriggerUnit"
 [[.args]]
 type = ordercode
-default = "851983"
+default = YDWEAbilityId2OrderId
 [[.args]]
 type = real
 default = "0"
@@ -3443,7 +3443,7 @@ type = unit
 default = "GetTriggerUnit"
 [[.args]]
 type = ordercode
-default = "851983"
+default = YDWEAbilityId2OrderId
 [[.args]]
 type = unit
 
@@ -3462,7 +3462,7 @@ type = unit
 default = "GetTriggerUnit"
 [[.args]]
 type = ordercode
-default = "851983"
+default = YDWEAbilityId2OrderId
 [[.args]]
 type = destructable
 
@@ -3481,7 +3481,7 @@ type = unit
 default = "GetTriggerUnit"
 [[.args]]
 type = ordercode
-default = "851983"
+default = YDWEAbilityId2OrderId
 [[.args]]
 type = item
 
@@ -9824,3 +9824,16 @@ category = TC_CONVERSION
 returns = ordercode
 [[.args]]
 type = integer
+
+[YDWEAbilityId2OrderId]
+title = "技能的命令ID"
+description = "${技能} 的 ${类型} 命令"
+comment = "技能ID一定要用常量"
+category = TC_CONVERSION
+returns = ordercode
+[[.args]]
+type = abilcode
+default = 'AHbz'
+[[.args]]
+type = OrderType
+default = OrderTypeOrder
