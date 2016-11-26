@@ -7980,8 +7980,8 @@ default = "512"
 min = 0
 
 [StartTimerBJ]
-title = "启动计时器"
-description = "启动 ${Timer},应用计时方式: ${One-Shot/Repeating},计时周期为 ${Time} 秒"
+title = "运行计时器"
+description = "运行 ${计时器}，模式: ${模式}，周期: ${时间} 秒"
 comment = ""
 category = TC_TIMER
 [[.args]]
@@ -8005,7 +8005,7 @@ default = "bj_lastStartedTimer"
 
 [TimerStart]
 title = "运行计时器 [C]"
-description = "立即运行 ${计时器} 时间设置: ${Time} 秒,是否循环: ${false/true} ,运行函数: ${function name}"
+description = "运行 ${计时器}，周期: ${时间} 秒，模式: ${模式}，运行函数: ${函数}"
 comment = "等同于TimerStart"
 category = TC_TIMER
 [[.args]]

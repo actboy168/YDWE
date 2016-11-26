@@ -64,7 +64,7 @@ default = "10"
 
 [YDWETimerStartMultiple]
 title = "计时器   -- 运行"
-description = "立即运行 ${计时器} 时间设置: ${time} 秒，是否循环: ${false/true}"
+description = "运行 ${计时器}，周期: ${时间} 秒，模式: ${模式}"
 comment = "让计时器运行多个动作。计时器内不能使用等待。"
 category = TC_YDBF
 [[.args]]
