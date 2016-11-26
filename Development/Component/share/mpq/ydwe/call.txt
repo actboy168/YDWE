@@ -174,6 +174,15 @@ type = radian
 [[.args]]
 type = real
 
+[YDWEIsTriggerEventId]
+title = "判断触发的事件 [YDWE]"
+description = "当前触发的事件为 ${事件}"
+comment = "任意单位事件 等于 玩家单位事件，指定单位事件 等于 单位事件"
+category = TC_NOTHING
+returns = boolean
+[[.args]]
+type = eventid
+
 [YDWEGetLocalVariableBoolean]
 title = "局部变量"
 description = "local_${bl}"
