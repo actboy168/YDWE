@@ -50,7 +50,7 @@ type = Null
 
 [YDWEForLoopLocVarMultiple]
 title = "局部变量 -- 循环"
-description = "循环动作[loop_${局部变量名}]从 ${开始} 到 ${结束}, 运行 (Loop - 动作)"
+description = "循环 loop_${局部变量名} 从 ${开始} 到 ${结束}"
 comment = ""
 category = TC_YDBF
 [[.args]]

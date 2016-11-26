@@ -135,7 +135,7 @@ default = "DoNothing"
 
 [ForLoopAMultiple]
 title = "使用循环整数A (做多项动作)"
-description = "循环动作[循环整数A]从 ${开始} 到 ${结束}, 运行 (Loop - 动作)"
+description = "循环 循环整数A 从 ${开始} 到 ${结束}"
 comment = "后一个整数一定要比前一个整数要大."
 category = TC_FORLOOP
 [[.args]]
@@ -147,7 +147,7 @@ default = "10"
 
 [ForLoopBMultiple]
 title = "使用循环整数B (做多项动作)"
-description = "循环动作[循环整数B]从 ${开始} 到 ${结束}, 运行 (Loop - 动作)"
+description = "循环 循环整数B 从 ${开始} 到 ${结束}"
 comment = "后一个整数一定要比前一个整数要大."
 category = TC_FORLOOP
 [[.args]]
@@ -159,7 +159,7 @@ default = "10"
 
 [ForLoopVarMultiple]
 title = "使用整数变量 (做多项动作)"
-description = "循环动作[${整数变量}]从 ${开始} 到 ${结束}, 运行 (Loop - 动作)"
+description = "循环 ${整数变量} 从 ${开始} 到 ${结束}"
 comment = "后一个整数一定要比前一个整数要大."
 category = TC_FORLOOP
 [[.args]]
@@ -173,7 +173,7 @@ default = "10"
 
 [ForLoopA]
 title = "使用循环整数A (做动作)"
-description = "循环动作[循环整数A]从 ${开始} 到 ${结束}, 运行 ${运作}"
+description = "循环 循环整数A 从 ${开始} 到 ${结束}, 运行 ${动作}"
 comment = "后一个整数一定要比前一个整数要大."
 category = TC_FORLOOP
 [[.args]]
@@ -188,7 +188,7 @@ default = "DoNothing"
 
 [ForLoopB]
 title = "使用循环整数B (做动作)"
-description = "循环动作[循环整数B]从 ${开始} 到 ${结束}, 运行 ${运作}"
+description = "循环 循环整数B 从 ${开始} 到 ${结束}, 运行 ${动作}"
 comment = "后一个整数一定要比前一个整数要大."
 category = TC_FORLOOP
 [[.args]]
@@ -203,7 +203,7 @@ default = "DoNothing"
 
 [ForLoopVar]
 title = "使用整数变量 (做动作)"
-description = "循环动作[${整数变量}]从 ${开始} 到 ${结束}, do ${Action}"
+description = "循环 ${整数变量} 从 ${开始} 到 ${结束}, do ${动作}"
 comment = "后一个整数一定要比前一个整数要大."
 category = TC_FORLOOP
 [[.args]]
