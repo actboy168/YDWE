@@ -85,7 +85,12 @@ function template:do_compile(op)
 	package.loaded['slk'] = nil
 	__map_handle__ = op.map_handle
 	__map_path__   = op.map_path
-	local env = setmetatable({import = map_file_import, StringHash = string_hash}, {__index = _G})
+	local env = {
+		import = map_file_import, 
+		StringHash = string_hash,
+		ability2order = require 'computed.ability2order',
+	}
+	setmetatable(env, {__index = _G})
 	table.insert(lua_codes, "return table.concat(__jass_result__)")	
 	local f, err = load(table.concat(lua_codes, '\n'), nil, 't', env)
 	if not f then
