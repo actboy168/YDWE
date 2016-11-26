@@ -16,6 +16,18 @@ returns = AnyReturnType
 [[.args]]
 type = scriptcode
 
+[YDWEGetAnyTypeLocalArray]
+title = "局部变量 -- 读取数组"
+description = "loc_${变量名}[${索引}]"
+comment = "可以获取到任意类型的局部变量数组。"
+category = TC_YDBF
+returns = AnyReturnType
+[[.args]]
+type = scriptcode
+[[.args]]
+type = integer
+default = 0
+
 [YDWEForLoopLocVarIndex]
 title = "局部变量 -- 读取(循环数)"
 description = "loop_${变量名}"

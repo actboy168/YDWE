@@ -208,10 +208,11 @@ void _fastcall
 			break;
 		}
 	case CC_GUIID_YDWESetAnyTypeLocalVariable:
-		{
-			locvar::set(This, OutClass, name);
-			break;  
-		}
+		locvar::set(This, OutClass, name);
+		break;
+	case CC_GUIID_YDWESetAnyTypeLocalArray:
+		locvar::set_array(This, OutClass, name);
+		break;
 	case CC_GUIID_YDWETimerStartMultiple:
 		{   
 			CC_PutBegin();

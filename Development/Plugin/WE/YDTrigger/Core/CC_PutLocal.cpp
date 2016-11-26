@@ -66,6 +66,7 @@ void _fastcall
 			switch (*(DWORD*)(nVarClass+0x138))
 			{
 			case CC_GUIID_YDWEGetAnyTypeLocalVariable:
+			case CC_GUIID_YDWEGetAnyTypeLocalArray:
 				if (isSearchHashLocal)
 				{
 					g_local_in_mainproc = TRUE;
@@ -136,6 +137,7 @@ void _fastcall
 			CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, 0);
 			break; 
 		case CC_GUIID_YDWESetAnyTypeLocalVariable:
+		case CC_GUIID_YDWESetAnyTypeLocalArray:
 			if (isSearchHashLocal)
 			{
 				g_local_in_mainproc = TRUE;

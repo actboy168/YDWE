@@ -39,7 +39,11 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
       CC_PutVar(nItemClass, EDX, OutClass, NewName, 0, type, 1);
       return;
     case CC_GUIID_YDWEGetAnyTypeLocalVariable:
-		locvar::get(nItemClass, OutClass, (char*)(This+0x0C));
+		locvar::get(nItemClass, OutClass, (char*)(This + 0x0C));
+		return;
+	case CC_GUIID_YDWEGetAnyTypeLocalArray:
+		BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index + 1);
+		locvar::get_array(nItemClass, OutClass, NewName, (char*)(This+0x0C));
 		return;
     case CC_GUIID_YDWELoadAnyTypeDataByUserData:
       CC_Put_YDWELoadAnyTypeDataByUserData(nItemClass, OutClass, name, (char*)(This+0x0C));

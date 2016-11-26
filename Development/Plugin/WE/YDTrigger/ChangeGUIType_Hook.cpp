@@ -18,6 +18,9 @@ void _fastcall
 	case CC_GUIID_YDWESetAnyTypeLocalVariable:
 		ChangeGUIType_Set(This, EDX, unknow, 0, 2, 11);
 		break;
+	case CC_GUIID_YDWESetAnyTypeLocalArray:
+		ChangeGUIType_Set(This, EDX, unknow, 0, 3, 11);
+		break;
 	case CC_GUIID_YDWESaveAnyTypeDataByUserData:
 		ChangeGUIType_Set(This, EDX, unknow, 0, 1, 11);
 		ChangeGUIType_Set(This, EDX, unknow, 3, 4, 11);

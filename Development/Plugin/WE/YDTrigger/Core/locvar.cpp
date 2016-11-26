@@ -137,6 +137,114 @@ namespace locvar
 		}
 	}
 
+	void do_get_array(DWORD OutClass, const char* type_name, const char* var_name, const state& s, std::function<void(void)> index)
+	{
+		g_bDisableSaveLoadSystem = FALSE;
+		unsigned int hash = SStrHash(var_name);
+		hash = ((hash >> 24) & 0xFF) | (((hash >> 16) & 0xFF) << 8) | (((hash >> 8) & 0xFF) << 16) | ((hash & 0xFF) << 24);
+
+		char buff[260];
+
+		if ((s.mother_id == (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple)) && (s.prev_handle_string != nullptr))
+		{
+			register_var[s.name][var_name] = type_name;
+			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X", type_name, s.prev_handle_string, hash);
+		}
+		else if ((s.mother_id == CC_GUIID_YDWETimerStartMultiple) || (s.mother_id == CC_GUIID_YDWERegisterTriggerMultiple))
+		{
+			register_var[s.name][var_name] = type_name;
+			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X", type_name, s.handle_string, hash);
+		}
+		else
+		{
+			if (!SaveLoadCheck_Set(var_name, (LPCSTR)type_name))
+			{
+				char tmp[260];
+				Utf8toAscii((char*)var_name, tmp, 260);
+				ShowErrorN(OutClass, "WESTRING_ERROR_YDTRIGGER_LOCVAR", tmp, (LPCSTR)type_name, tmp, SaveLoadCheck_Get(var_name));
+			}
+
+			if (g_local_in_mainproc)
+			{
+				BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*" YDL_LOCALVAR_STEPS ", 0x%08X", type_name, hash);
+			}
+			else
+			{
+				BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X", type_name, SStrHash("TriggerRunSteps"), hash);
+			}
+		}
+
+		PUT_CONST(buff, 0);
+		PUT_CONST("+", 0);
+		index();
+		PUT_CONST(")", 0);
+	}
+
+	void do_set_array(DWORD OutClass, const char* type_name, const char* var_name, const state& s, std::function<void(void)> index, std::function<void(void)> func)
+	{
+		g_bDisableSaveLoadSystem = FALSE;
+		unsigned int hash = SStrHash(var_name);
+		hash = ((hash >> 24) & 0xFF) | (((hash >> 16) & 0xFF) << 8) | (((hash >> 8) & 0xFF) << 16) | ((hash & 0xFF) << 24);
+
+		char buff[260];
+
+		CC_PutBegin();
+
+		if ((s.mother_id == (0x10000 | CC_GUIID_YDWETimerStartMultiple))
+			|| (s.mother_id == CC_GUIID_YDWETimerStartMultiple)
+			|| (s.mother_id == CC_GUIID_YDWERegisterTriggerMultiple))
+		{
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X", type_name, s.handle_string, hash);
+		}
+		else
+		{
+			if (!SaveLoadCheck_Set(var_name, type_name))
+			{
+				char tmp[260];
+				Utf8toAscii((char*)var_name, tmp, 260);
+				ShowErrorN(OutClass, "WESTRING_ERROR_YDTRIGGER_LOCVAR", tmp, type_name, tmp, SaveLoadCheck_Get(var_name));
+			}
+
+			if (g_local_in_mainproc)
+			{
+				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*" YDL_LOCALVAR_STEPS ", 0x%08X", type_name, hash);
+			}
+			else
+			{
+				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X", type_name, SStrHash("TriggerRunSteps"), hash);
+			}
+		}
+
+		PUT_CONST(buff, 0);
+		PUT_CONST("+", 0);
+		index();
+		PUT_CONST(",", 0);
+		func();
+		PUT_CONST(")", 1);
+
+		CC_PutEnd();
+
+		if (s.mother_id == (0x10000 | CC_GUIID_YDWETimerStartMultiple))
+		{
+			//register_var[s.name].erase(var_name);
+		}
+	}
+
+	void get_array(DWORD This, DWORD OutClass, char* name, char* type_name)
+	{
+		do_get_array(OutClass, type_name, (LPCSTR)&GetGUIVar_Value(This, 0), global, [&]() { PUT_VAR(This, 1); });
+	}
+
+	void set_array(DWORD This, DWORD OutClass, char* name)
+	{
+		int var_type = GetVarType(This, 0);
+
+		if ((CC_TYPE__begin < var_type) && (var_type < CC_TYPE__end))
+		{
+			do_set_array(OutClass, TypeName[var_type], (LPCSTR)&GetGUIVar_Value(This, 1), global, [&]() { PUT_VAR(This, 2); }, [&]() { PUT_VAR(This, 3); });
+		}
+	}
+
 	void flush_in_timer(DWORD This, DWORD OutClass)
 	{
 		if (global.mother_id == CC_GUIID_YDWETimerStartMultiple)
@@ -257,10 +365,17 @@ namespace locvar
 						switch (*(DWORD*)(nItemClass+0x138))
 						{
 						case CC_GUIID_YDWESetAnyTypeLocalVariable:
+						{
+							paramlist.insert((const char*)&GetGUIVar_Value(nItemClass, 1));
+							BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, i + 1);
+							locvar::set(nItemClass, OutClass, NewName);
+							break;
+						}
+						case CC_GUIID_YDWESetAnyTypeLocalArray:
 							{
 								paramlist.insert((const char*)&GetGUIVar_Value(nItemClass, 1));
 								BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, i+1);
-								locvar::set(nItemClass, OutClass, NewName);
+								locvar::set_array(nItemClass, OutClass, NewName);
 								break; 
 							}
 						case CC_GUIID_YDWETimerStartMultiple:

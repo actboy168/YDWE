@@ -69,6 +69,8 @@ GUIID_Table_Init()
   //---------------------------------------------
   GUIID_Table_Put(YDWESetAnyTypeLocalVariable);
   GUIID_Table_Put(YDWEGetAnyTypeLocalVariable);
+  GUIID_Table_Put(YDWESetAnyTypeLocalArray);
+  GUIID_Table_Put(YDWEGetAnyTypeLocalArray);
   GUIID_Table_Put(YDWESaveAnyTypeDataByUserData);
   GUIID_Table_Put(YDWELoadAnyTypeDataByUserData);
   GUIID_Table_Put(YDWEHaveSavedAnyTypeDataByUserData);

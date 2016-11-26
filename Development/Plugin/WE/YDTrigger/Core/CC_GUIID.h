@@ -7,6 +7,8 @@ enum GUIID_User_Defined
 {
   CC_GUIID_YDWESetAnyTypeLocalVariable = CC_GUIID_USER_DEFINE,
   CC_GUIID_YDWEGetAnyTypeLocalVariable,
+  CC_GUIID_YDWESetAnyTypeLocalArray,
+  CC_GUIID_YDWEGetAnyTypeLocalArray,
   CC_GUIID_YDWESaveAnyTypeDataByUserData,
   CC_GUIID_YDWELoadAnyTypeDataByUserData,
   CC_GUIID_YDWEHaveSavedAnyTypeDataByUserData,

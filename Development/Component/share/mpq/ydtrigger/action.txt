@@ -33,6 +33,21 @@ type = scriptcode
 [[.args]]
 type = Null
 
+[YDWESetAnyTypeLocalArray]
+title = "局部变量 -- 设置数组"
+description = "设置 [${类型}] loc_${变量名}[${索引}] = ${null}"
+comment = "设置局部变量数组，注意: 数组不能穿透逆天计时器、逆天触发器"
+category = TC_YDBF
+[[.args]]
+type = typename
+[[.args]]
+type = scriptcode
+[[.args]]
+type = integer
+default = 0
+[[.args]]
+type = Null
+
 [YDWEForLoopLocVarMultiple]
 title = "局部变量 -- 循环"
 description = "循环动作[loop_${局部变量名}]从 ${开始} 到 ${结束}, 运行 (Loop - 动作)"
