@@ -316,7 +316,7 @@ default = "Player00"
 [TriggerRegisterPlayerAllianceChange]
 title = "联盟状态更改(指定项目)"
 description = "${Player} 更改 ${Alliance Type} 设置"
-comment = ""
+comment = "当改变项目为【共享单位】时，(触发玩家)会不生效，此时不建议使用【任意玩家】事件。"
 category = TC_PLAYER
 [[.args]]
 type = player
