@@ -221,7 +221,7 @@ void _fastcall
 			PUT_CONST("", 1);
 			CC_PutEnd();
 
-			locvar::params(This, OutClass, name, 0, YDL_TIMER, (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple));
+			locvar::params(This, OutClass, name, 0, YDL_TIMER, CC_GUIID_YDWETimerStartMultiple);
 
 			CC_PutBegin();
 			PUT_CONST("call TimerStart(" YDL_TIMER ", ", 0);
@@ -277,7 +277,7 @@ void _fastcall
 			PUT_CONST("", 1);
 			CC_PutEnd();
 
-			locvar::params(This, OutClass, name, 1, YDL_TRIGGER, (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple));
+			locvar::params(This, OutClass, name, 1, YDL_TRIGGER, CC_GUIID_YDWERegisterTriggerMultiple);
 
 			// Event  
 			CC_PutBlock_Event(This, OutClass, name, 0, YDL_TRIGGER);
