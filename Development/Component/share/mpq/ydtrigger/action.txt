@@ -1,6 +1,6 @@
 [YDWERegionMultiple]
 title = "收纳盒"
-description = ">>>>>>>>${注释文本}<<<<<<<<"
+description = "-------- ${注释文本} --------"
 comment = ""
 category = TC_COMMENT
 [[.args]]
