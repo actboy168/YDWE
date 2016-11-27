@@ -2,85 +2,89 @@
 #include "Storm/StormAdapter.h"
 #include "Common.h"
 #include "Core/CC_GUIID.h"
+#include <algorithm>
+#include <map>
+#include <vector>
+
+struct multiple 
+{
+	int icon;
+	std::string name;
+};
+
+typedef std::vector<multiple> multiples;
+typedef std::map<int, multiples> multiples_mgr;
+
+static multiples_mgr mgr = {
+	{
+		CC_GUIID_YDWETimerStartMultiple,
+		{
+			{ CC_GUI_TYPE_ACTION, "WESTRING_PARAMETERS" },
+			{ CC_GUI_TYPE_ACTION, "WESTRING_ACTIONS" },
+		}
+	},
+	{
+		CC_GUIID_YDWERegisterTriggerMultiple,
+		{
+			{ CC_GUI_TYPE_EVENT, "WESTRING_EVENTS" },
+			{ CC_GUI_TYPE_ACTION, "WESTRING_PARAMETERS" },
+			{ CC_GUI_TYPE_ACTION, "WESTRING_ACTIONS" },
+		}
+	},
+	{
+		CC_GUIID_YDWEEnumUnitsInRangeMultiple,
+		{
+			{ CC_GUI_TYPE_ACTION, "WESTRING_ACTIONS" },
+		}
+	},
+	{
+		CC_GUIID_YDWEForLoopLocVarMultiple,
+		{
+			{ CC_GUI_TYPE_ACTION, "WESTRING_TRIGSUBFUNC_FORLOOPACTIONS" },
+		}
+	},
+	{
+		CC_GUIID_YDWERegionMultiple,
+		{
+			{ CC_GUI_TYPE_ACTION, "WESTRING_ACTIONS" },
+		}
+	},
+};
 
 int _fastcall
 GetGUICount_Hook(DWORD This)
 {
-    switch (*(DWORD*)(This+0x138))
-    {
-    case CC_GUIID_YDWETimerStartMultiple:
-        return 2;
-    case CC_GUIID_YDWERegisterTriggerMultiple:
-        return 3;
-    case CC_GUIID_YDWEEnumUnitsInRangeMultiple:
-    case CC_GUIID_YDWEForLoopLocVarMultiple:
-	case CC_GUIID_YDWERegionMultiple:
-        return 1;
-    }
-
-    return GetGUICount(This);
+	uint32_t ui = *(uint32_t*)(This + 0x138);
+	auto it = mgr.find(ui);
+	if (it == mgr.end())
+	{
+		return GetGUICount(This);
+	}
+	return it->second.size();
 }
 
 int _fastcall
 GetGUIString_Hook(DWORD This, DWORD EDX, int index, char* buff, int len)
 {
-    switch (*(DWORD*)(This+0x138))
-    {
-    case CC_GUIID_YDWETimerStartMultiple:
-        {
-            if (index == 0)
-                return GetWEString("WESTRING_PARAMETERS", buff, len, 0);
-            else
-                return GetWEString("WESTRING_ACTIONS", buff, len, 0);
-        }
-    case CC_GUIID_YDWERegisterTriggerMultiple:
-		{
-			if (index == 0)
-				return GetWEString("WESTRING_EVENTS", buff, len, 0);
-			else if (index == 1)
-				return GetWEString("WESTRING_PARAMETERS", buff, len, 0);
-            else
-                return GetWEString("WESTRING_ACTIONS", buff, len, 0);
-        }
-    case CC_GUIID_YDWEEnumUnitsInRangeMultiple:
-        {
-            return GetWEString("WESTRING_ACTIONS", buff, len, 0);
-        }
-    case CC_GUIID_YDWEForLoopLocVarMultiple:
-        {
-            return GetWEString("WESTRING_TRIGSUBFUNC_FORLOOPACTIONS", buff, len, 0);
-        }
-	case CC_GUIID_YDWERegionMultiple: 
-        {
-            return GetWEString("WESTRING_ACTIONS", buff, len, 0);
-        }
-    }
-
-    return GetGUIString(This, EDX, index, buff, len);
+	uint32_t ui = *(uint32_t*)(This + 0x138);
+	auto it = mgr.find(ui);
+	if (it == mgr.end())
+	{
+		return GetGUIString(This, EDX, index, buff, len);
+	}
+	index = (std::min)(index, (int)it->second.size()-1);
+	return GetWEString(it->second[index].name.c_str(), buff, len, 0);
 }
 
 int _fastcall
 GetGUIIcon_Hook(DWORD This, DWORD EDX, int index)
 {
-    switch (*(DWORD*)(This+0x138))
-    {
-    case CC_GUIID_YDWEEnumUnitsInRangeMultiple:
-    case CC_GUIID_YDWETimerStartMultiple:
-    case CC_GUIID_YDWEForLoopLocVarMultiple:
-	case CC_GUIID_YDWERegionMultiple:
-        {
-            return CC_GUI_TYPE_ACTION;
-        }
-    case CC_GUIID_YDWERegisterTriggerMultiple:
-		{
-			if (index == 0)
-				return CC_GUI_TYPE_EVENT;
-			else if (index == 1)
-                return CC_GUI_TYPE_ACTION;
-            else
-                return CC_GUI_TYPE_ACTION;
-        }
-    }
-
-    return GetGUIIcon(This, EDX, index);
+	uint32_t ui = *(uint32_t*)(This + 0x138);
+	auto it = mgr.find(ui);
+	if (it == mgr.end())
+	{
+		return GetGUIIcon(This, EDX, index);
+	}
+	index = (std::min)(index, (int)it->second.size() - 1);
+	return it->second[index].icon;
 }
