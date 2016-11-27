@@ -370,11 +370,11 @@ void DllModule::Attach()
 			{
 				if (table["MapSave"]["Option"] == "1")
 				{
-					SearchPatch(patch_path, L"1.20.4.6074");
+					SearchPatch(patch_path, L"1, 20, 4, 6074");
 				}
 				else if (table["MapSave"]["Option"] == "2")
 				{
-					SearchPatch(patch_path, L"1.24.4.6387");
+					SearchPatch(patch_path, L"1, 24, 4, 6387");
 				}
 			}
 			else if (table["War3Patch"]["Option"] == "2")
