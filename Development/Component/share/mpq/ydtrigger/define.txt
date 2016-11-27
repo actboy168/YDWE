@@ -4,6 +4,7 @@ TC_YDLC=变量[YDWE],ReplaceableTextures\WorldEditUI\Editor-ScriptVariable.blp,1
 [TriggerTypes]
 typename=1,0,0,参数类型,string
 objecttype=1,0,0,物体类型,string
+tirggerexecute=1,0,0,运行触发器,boolean
 
 [TriggerParams]
 typename01_integer=0,typename,1,整数
@@ -51,3 +52,5 @@ objecttype03_itemcode=0,objecttype,YDWE_OBJECT_TYPE_ITEM,WESTRING_OBJTAB_ITEMS
 objecttype04_techcode=0,objecttype,YDWE_OBJECT_TYPE_UPGRADE,WESTRING_OBJTAB_UPGRADES
 objecttype05_doodadcode=0,objecttype,YDWE_OBJECT_TYPE_DOODAD,WESTRING_OBJTAB_DOODADS
 objecttype06_destructablecode=0,objecttype,YDWE_OBJECT_TYPE_DESTRUCTABLE,WESTRING_OBJTAB_DESTRUCTABLES
+tirggerexecute_notcondition=0,tirggerexecute,false,无视条件
+tirggerexecute_hascondition=0,tirggerexecute,true,检查条件

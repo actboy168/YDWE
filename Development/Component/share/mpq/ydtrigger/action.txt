@@ -103,6 +103,17 @@ category = TC_YDBF
 [[.args]]
 type = nothing
 
+[YDWEExecuteTriggerMultiple]
+title = "触发器   -- 运行"
+description = "运行 ${触发器}， ${条件}"
+comment = ""
+category = TC_YDBF
+[[.args]]
+type = trigger
+[[.args]]
+type = tirggerexecute
+default = "tirggerexecute_notcondition"
+
 [YDWESaveAnyTypeDataByUserData]
 title = "自定义值 -- 设置"
 description = "设置 [${类型}] ${null} 的 ${属性} 为 [${类型}]${null}"
