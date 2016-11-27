@@ -108,9 +108,9 @@ type = string
 default = "\"Name\""
 
 [YDWERecordGetI]
-title = "获取RPG存档数据 [JAPI]"
-description = "从${玩家}的RPG存档中读出〖${数据名}〗"
-comment = "从玩家RPG存档上获取数据，需要填入正确的数据名。"
+title = "获取11RPG存档 [JAPI]"
+description = "从${玩家}的11RPG存档中读出〖${数据名}〗"
+comment = "从玩家11RPG存档上获取数据，需要填入正确的数据名。"
 category = TC_YDSL
 returns = integer
 [[.args]]
@@ -121,9 +121,9 @@ type = string
 default = "EverguoIsHandsome"
 
 [YDWERPGGetKey]
-title = "读取RPG积分 [JAPI]"
-description = "从${玩家}的RPG积分中读出〖${数据名}〗"
-comment = "从RPG积分上获取数据，需要填入正确的数据名。"
+title = "读取11RPG积分 [JAPI]"
+description = "从${玩家}的11RPG积分中读出〖${数据名}〗"
+comment = "从11RPG积分上获取数据，需要填入正确的数据名。"
 category = TC_YDSL
 returns = integer
 [[.args]]

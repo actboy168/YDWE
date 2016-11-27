@@ -128,9 +128,9 @@ min = 0
 max = 15
 
 [YDWERecordSetTitle]
-title = "RPG存档-设置平台积分项名称 [JAPI]"
-description = "RPG存档，平台界面上第${整数}个名称为〖${战斗力}〗"
-comment = "11平台RPG积分是用玩家RPG存档来模拟，这里可以设置需要显示在平台界面上的积分项名字，最多可显示8个积分项，每个积分项名字不超过3个汉字。"
+title = "11RPG存档-设置平台积分项名称 [JAPI]"
+description = "11RPG存档，平台界面上第${整数}个名称为〖${战斗力}〗"
+comment = "这里可以设置需要显示在平台界面上的积分项名字，最多可显示8个积分项，每个积分项名字不超过3个汉字。"
 category = TC_YDSL
 [[.args]]
 type = integer
@@ -141,9 +141,9 @@ max = 7
 type = string
 
 [YDWERecordSetI]
-title = "RPG存档-设置玩家存档数据 [JAPI]"
-description = "RPG存档，${玩家}的〖${战斗力}〗=${整数}"
-comment = "设置玩家RPG存档里某个目录下的数据，如设置玩家一的战斗力为5。"
+title = "11RPG存档-设置玩家存档数据 [JAPI]"
+description = "11RPG存档，${玩家}的〖${战斗力}〗=${整数}"
+comment = "设置玩家11RPG存档里某个目录下的数据，如设置玩家一的战斗力为5。"
 category = TC_YDSL
 [[.args]]
 type = player
@@ -155,17 +155,17 @@ type = integer
 default = "5"
 
 [YDWERecordSave]
-title = "RPG存档-保存玩家存档数据 [JAPI]"
-description = "RPG存档，保存${玩家}所有数据"
-comment = "RPG存档数据必须保存后才能生效。"
+title = "11RPG存档-保存玩家存档数据 [JAPI]"
+description = "11RPG存档，保存${玩家}所有数据"
+comment = "11RPG存档数据必须保存后才能生效。"
 category = TC_YDSL
 [[.args]]
 type = player
 default = "Player00"
 
 [YDWERecordClear]
-title = "RPG存档-清空玩家存档数据 [JAPI]"
-description = "RPG存档，清空${玩家}所有数据"
+title = "11RPG存档-清空玩家存档数据 [JAPI]"
+description = "11RPG存档，清空${玩家}所有数据"
 comment = "由于每个玩家最多只能存储100条左右的数据，假如超过上限，建议使用此功能清空全部数据，然后重新保存有用的数据。"
 category = TC_YDSL
 [[.args]]
@@ -173,8 +173,8 @@ type = player
 default = "Player00"
 
 [YDWERPGSetKey]
-title = "RPG积分-设置玩家积分数据 [JAPI]"
-description = "RPG积分，${玩家}的〖${战斗力}〗= ${整数}"
+title = "11RPG积分-设置玩家积分数据 [JAPI]"
+description = "11RPG积分，${玩家}的〖${战斗力}〗= ${整数}"
 comment = "修改积分数据，覆盖型。"
 category = TC_YDSL
 [[.args]]
@@ -187,8 +187,8 @@ type = integer
 default = "5"
 
 [YDWERPGAddKey]
-title = "RPG积分-增加玩家积分数据 [JAPI]"
-description = "RPG积分，${玩家}的〖${战斗力}〗+= ${整数}"
+title = "11RPG积分-增加玩家积分数据 [JAPI]"
+description = "11RPG积分，${玩家}的〖${战斗力}〗+= ${整数}"
 comment = "修改积分数据，累加型。名字需要是xx+1的形式，1表示一局这项最多可以增加的值。注意设置合理的值来避免刷分。"
 category = TC_YDSL
 [[.args]]
@@ -201,8 +201,8 @@ type = integer
 default = "5"
 
 [YDWERPGGameEnd]
-title = "RPG积分-游戏结束 [JAPI]"
-description = "RPG积分，游戏结束"
+title = "11RPG积分-游戏结束 [JAPI]"
+description = "11RPG积分，游戏结束"
 comment = "游戏结束，开始算分"
 category = TC_YDSL
 
