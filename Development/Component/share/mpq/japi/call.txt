@@ -108,9 +108,9 @@ type = string
 default = "\"Name\""
 
 [YDWERecordGetI]
-title = "获取存档数据 [JAPI]"
-description = "从${玩家}的服务器存档中读出〖${数据名}〗"
-comment = "从玩家服务器存档上获取数据，需要填入正确的数据名。"
+title = "获取RPG存档数据 [JAPI]"
+description = "从${玩家}的RPG存档中读出〖${数据名}〗"
+comment = "从玩家RPG存档上获取数据，需要填入正确的数据名。"
 category = TC_YDSL
 returns = integer
 [[.args]]
