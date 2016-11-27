@@ -1287,7 +1287,7 @@ default = "GetCurrentCameraBoundsMapRectBJ"
 title = "设置随机种子"
 description = "设置随机种子数为：${整数}"
 comment = "设置游戏的随机种子，随机种子会影响随机整数，攻击骰子之类的随机数。"
-category = TC_MATH
+category = TC_NOTHING
 [[.args]]
 type = integer
 min = 0
