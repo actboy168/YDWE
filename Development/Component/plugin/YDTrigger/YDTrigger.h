@@ -39,6 +39,8 @@
 #  define YDWESaveTriggerName(t,s) DoNothing()
 #
 #  include <YDTrigger/Common/switch.h>
+#  include <YDTrigger/Common/if.h>
+#
 #  define YDWEGetObjectProperty(object_type, object_id, property)            \
      YDTRIGGER_COMMON_SWITCH(YDWE_GET_OBJECT_PROPERTY_ ## object_type, (     \
        EXExecuteScript("(require'jass.slk').ability["      + I2S(object_id) + "]." + property), \
@@ -61,4 +63,9 @@
 #  define YDWE_GET_OBJECT_PROPERTY_YDWE_OBJECT_TYPE_DOODAD       5
 #  define YDWE_GET_OBJECT_PROPERTY_YDWE_OBJECT_TYPE_DESTRUCTABLE 6
 #
+#  define YDTriggerExecuteTrigger(trig, check) \
+        YDTRIGGER_COMMON_IF(check,\
+            DoNothing() YDNL if TriggerEvaluate(trig) then YDNL call TriggerExecute(trig) YDNL endif, \
+            TriggerExecute(trig) \
+        )
 #endif

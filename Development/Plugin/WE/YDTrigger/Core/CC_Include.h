@@ -13,5 +13,6 @@
 #define STRING_YDWE_LOCAL "ydl_"
 #define YDL_TIMER         STRING_YDWE_LOCAL"timer"
 #define YDL_TRIGGER       STRING_YDWE_LOCAL"trigger"
+#define YDL_TRIGGERSTEP   STRING_YDWE_LOCAL"triggerstep"
 
 #endif

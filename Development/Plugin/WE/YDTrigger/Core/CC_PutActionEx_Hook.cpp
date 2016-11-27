@@ -216,15 +216,15 @@ void _fastcall
 	case CC_GUIID_YDWETimerStartMultiple:
 		{   
 			CC_PutBegin();
-			PUT_CONST("set "YDL_TIMER" = ", 0);
+			PUT_CONST("set " YDL_TIMER " = ", 0);
 			PUT_VAR(This, 0);
 			PUT_CONST("", 1);
 			CC_PutEnd();
 
-			locvar::params(This, OutClass, name, 0, YDL_TIMER);
+			locvar::params(This, OutClass, name, 0, YDL_TIMER, (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple));
 
 			CC_PutBegin();
-			PUT_CONST("call TimerStart("YDL_TIMER", ", 0);
+			PUT_CONST("call TimerStart(" YDL_TIMER ", ", 0);
 			PUT_VAR(This, 1);
 			PUT_CONST(", ", 0);
 			PUT_VAR(This, 2);
@@ -234,6 +234,22 @@ void _fastcall
 
 			break;
 		}
+	case CC_GUIID_YDWEExecuteTriggerMultiple:
+	{
+		CC_PutBegin();
+		PUT_CONST("set " YDL_TRIGGER " = ", 0);
+		PUT_VAR(This, 0);
+		PUT_CONST("", 1);
+		PUT_CONST("set " YDL_TRIGGERSTEP " = YDTriggerH2I(" YDL_TRIGGER ")*(YDTriggerGetEx(integer, YDTriggerH2I(" YDL_TRIGGER "), 0xCFDE6C76) + 3)", 1);
+		CC_PutEnd();
+		locvar::params(This, OutClass, name, 0, YDL_TRIGGER, CC_GUIID_YDWEExecuteTriggerMultiple);
+		CC_PutBegin();
+		PUT_CONST("call YDTriggerExecuteTrigger(" YDL_TRIGGER ",", 0);
+		PUT_VAR(This, 1);
+		PUT_CONST(")", 1);
+		CC_PutEnd();
+		break;
+	}
 	case CC_GUIID_YDWETimerStartFlush:
 		locvar::flush_in_timer(This, OutClass);
 		break;
@@ -256,12 +272,12 @@ void _fastcall
 	case CC_GUIID_YDWERegisterTriggerMultiple:
 		{
 			CC_PutBegin();
-			PUT_CONST("set "YDL_TRIGGER" = ", 0);
+			PUT_CONST("set " YDL_TRIGGER " = ", 0);
 			PUT_VAR(This, 0);
 			PUT_CONST("", 1);
 			CC_PutEnd();
 
-			locvar::params(This, OutClass, name, 1, YDL_TRIGGER);
+			locvar::params(This, OutClass, name, 1, YDL_TRIGGER, (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple));
 
 			// Event  
 			CC_PutBlock_Event(This, OutClass, name, 0, YDL_TRIGGER);

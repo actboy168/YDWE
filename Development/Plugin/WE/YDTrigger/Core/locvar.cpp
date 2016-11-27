@@ -91,6 +91,10 @@ namespace locvar
 		{
 			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, s.handle_string, SStrHash(var_name));
 		}
+		else if (s.mother_id == CC_GUIID_YDWEExecuteTriggerMultiple)
+		{
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, " YDL_TRIGGERSTEP ", 0x%08X, ", type_name, SStrHash(var_name));
+		}
 		else
 		{
 			if (!SaveLoadCheck_Set(var_name, type_name))
@@ -195,6 +199,10 @@ namespace locvar
 			|| (s.mother_id == CC_GUIID_YDWERegisterTriggerMultiple))
 		{
 			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X", type_name, s.handle_string, hash);
+		}
+		else if (s.mother_id == CC_GUIID_YDWEExecuteTriggerMultiple)
+		{
+			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, " YDL_TRIGGERSTEP ", 0x%08X", type_name, SStrHash(var_name));
 		}
 		else
 		{
@@ -343,12 +351,12 @@ namespace locvar
 		}
 	}
 
-	void params(DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string)
+	void params(DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string, int id)
 	{
 		std::set<std::string> paramlist;
 
 		{
-			locvar::guard _tmp_guard_((0x10000 | (int)CC_GUIID_YDWETimerStartMultiple), name, handle_string);
+			locvar::guard _tmp_guard_(id, name, handle_string);
 
 			DWORD nItemCount, i;
 			DWORD nItemClass;
@@ -378,6 +386,7 @@ namespace locvar
 								locvar::set_array(nItemClass, OutClass, NewName);
 								break; 
 							}
+						case CC_GUIID_YDWEExecuteTriggerMultiple:
 						case CC_GUIID_YDWETimerStartMultiple:
 						case CC_GUIID_YDWERegisterTriggerMultiple:
 							ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ILLEGAL_PARAMETER");

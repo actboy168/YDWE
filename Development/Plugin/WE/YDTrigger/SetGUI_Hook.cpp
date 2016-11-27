@@ -49,6 +49,12 @@ static multiples_mgr mgr = {
 			{ CC_GUI_TYPE_ACTION, "WESTRING_ACTIONS" },
 		}
 	},
+	{
+		CC_GUIID_YDWEExecuteTriggerMultiple,
+		{
+			{ CC_GUI_TYPE_ACTION, "WESTRING_PARAMETERS" },
+		}
+	},
 };
 
 int _fastcall
