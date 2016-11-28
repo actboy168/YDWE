@@ -14,7 +14,14 @@ namespace lua
 	template <>
 	int convert_to_lua(lua_State* L, const std::string& v)
 	{
-		lua_pushstring(L, v.c_str());
+		lua_pushlstring(L, v.data(), v.size());
+		return 1;
+	}
+
+	template <>
+	int convert_to_lua(lua_State* L, const std::string_view& v)
+	{
+		lua_pushlstring(L, v.data(), v.size());
 		return 1;
 	}
 
@@ -146,7 +153,7 @@ namespace warcraft3 { namespace lua_engine {
 			return 1;
 		}
 
-		return lua::convert_to_lua(L, it->second);
+		return lua::convert_to_lua(L, slk_manager::get(L)->convert_string(it->second.to_string()));
 	}
 
 	static int slk_table_pairs(lua_State* L)
