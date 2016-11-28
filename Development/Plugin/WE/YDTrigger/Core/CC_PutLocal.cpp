@@ -135,7 +135,7 @@ void _fastcall
 		case CC_GUIID_YDWEExecuteTriggerMultiple:
 			CC_PutLocal_LocalVar(OutClass, CC_TYPE_integer, "ydl", "triggerstep");
 			CC_PutLocal_LocalVar(OutClass, CC_TYPE_trigger, "ydl", "trigger");
-			CC_PutLocal_Search(nItemClass, OutClass, isSearchHashLocal, 0);
+			CC_PutLocal_Search(nItemClass, OutClass, false, 0);
 			break;
 		case CC_GUIID_YDWERegisterTriggerMultiple:
 			CC_PutLocal_LocalVar( OutClass, CC_TYPE_trigger, "ydl", "trigger");
