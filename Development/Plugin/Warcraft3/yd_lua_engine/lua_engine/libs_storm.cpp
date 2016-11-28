@@ -99,7 +99,8 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
 			{
 				fs::path root_path = base::path::get(base::path::DIR_EXE).remove_filename();
 				fs::path file_path = root_path / base::u2w(path);
-				
+
+				file_path = base::path::normalize(file_path);
 				if (storm_path_valid(root_path, file_path))
 				{
 					fs::create_directories(file_path.parent_path());
