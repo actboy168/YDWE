@@ -2,9 +2,22 @@
 #include <lua.hpp>
 #pragma warning(pop)	  		
 #include <base/filesystem.h>
+
+#define YDWE_BASE_INLINE
 #include <base/path/service.h>
 #include <base/util/unicode.h>	
 #include <base/lua/make_range.h>
+
+#if defined(YDWE_BASE_INLINE)
+#include <base/path/service.cpp>
+#include <base/path/detail/get_path.cpp>
+#include <base/util/unicode.cpp>
+#include <base/exception/exception.cpp>
+#include <base/exception/system_exception.cpp>
+#include <base/exception/windows_exception.cpp>
+#include <base/win/windows_category.cpp>
+#include <base/win/env_variable.cpp>
+#endif
 
 #define FS_TRY     try {   
 #define FS_TRY_END } catch (const std::exception& e) { lua_pushstring(L, base::a2u(e.what()).c_str()); return lua_error(L); }
