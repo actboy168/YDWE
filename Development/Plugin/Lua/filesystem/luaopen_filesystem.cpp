@@ -3,7 +3,7 @@
 #pragma warning(pop)	  		
 #include <base/filesystem.h>
 
-#define YDWE_BASE_INLINE
+//#define YDWE_BASE_INLINE
 #include <base/path/service.h>
 #include <base/util/unicode.h>	
 #include <base/lua/make_range.h>
