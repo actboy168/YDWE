@@ -75,6 +75,20 @@ static int LuaOpenPipe(lua_State* L)
 	return 2;
 }
 
+static int LuaPeekPipe(lua_State* L)
+{
+	luaL_Stream* p = tolstream(L, 1);
+	if (p) {
+		DWORD rlen = 0;
+		if (PeekNamedPipe((HANDLE)_get_osfhandle(_fileno(p->f)), 0, 0, 0, &rlen, 0)) {
+			lua_pushinteger(L, rlen);
+			return 1;
+		}
+	}
+	lua_pushinteger(L, 0);
+	return 1;
+}
+
 static int LuaGetVersionNumberString(lua_State* L)
 {
 	const fs::path& module = *(fs::path*)luaL_checkudata(L, 1, "filesystem");
@@ -312,6 +326,7 @@ int luaopen_sys(lua_State* L)
 	luaL_Reg l2[] = {
 		{ "process", process::constructor },
 		{ "open_pipe", LuaOpenPipe },
+		{ "peek_pipe", LuaPeekPipe },
 		{ "get_module_version_info", LuaGetVersionNumberString },
 		{ NULL, NULL },
 	};
