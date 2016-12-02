@@ -301,6 +301,13 @@ namespace process {
 		lua_pushinteger(L, (lua_Integer)self.id());
 		return 1;
 	}
+
+	int is_running(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		lua_pushboolean(L, self.is_running());
+		return 1;
+	}
 }
 
 extern "C" __declspec(dllexport) int luaopen_sys(lua_State* L);
@@ -315,6 +322,7 @@ int luaopen_sys(lua_State* L)
 		{ "wait", process::wait },
 		{ "close", process::close },
 		{ "id", process::id },
+		{ "is_running", process::is_running },
 		{ "__gc", process::destructor },
 		{ NULL, NULL }
 	};
