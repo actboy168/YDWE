@@ -9,6 +9,12 @@ jasshelper = {}
 jasshelper.path     = fs.ydwe_path() / "plugin" / "jasshelper"
 jasshelper.exe_path = jasshelper.path / "jasshelper.exe"
 
+local config = [[
+[jasscompiler]
+%q
+"$COMMONJ $BLIZZARDJ $WAR3MAPJ"
+]]
+
 
 -- 根据版本获取YDWE自带的Jass库函数（bj和cj）路径
 -- version - 魔兽版本，数
@@ -103,6 +109,8 @@ end
 function jasshelper.do_compile(self, map_path, common_j_path, blizzard_j_path, option)
 	local parameter = ""
 
+	io.save(jasshelper.path / 'jasshelper.conf', config:format((jasshelper.path / 'pjass.exe'):string()))
+	
 	-- 需要做vJass编译？
 	if option.enable_jasshelper then
 		-- debug选项（--debug）
