@@ -131,7 +131,7 @@ namespace base { namespace win {
 		{
 			if (exit_code(process) == STILL_ACTIVE) 
 			{
-				return wait(process, 0);
+				return !wait(process, 0);
 			}
 
 			return false;
