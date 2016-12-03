@@ -109,7 +109,7 @@ end
 function jasshelper.do_compile(self, map_path, common_j_path, blizzard_j_path, option)
 	local parameter = ""
 
-	io.save(jasshelper.path / 'jasshelper.conf', config:format((jasshelper.path / 'pjass.exe'):string()))
+	io.save(jasshelper.path / 'jasshelper.conf', config:format('pjass.exe'))
 	
 	-- 需要做vJass编译？
 	if option.enable_jasshelper then
