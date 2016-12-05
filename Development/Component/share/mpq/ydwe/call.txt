@@ -296,6 +296,7 @@ min = 0
 [YDWEGetLocalVariableRect]
 title = "局部变量"
 description = "local_${rt}"
+comment = "获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 category = TC_YDLC
 returns = rect
 [[.args]]
@@ -449,6 +450,7 @@ min = 0
 [YDWEGetLocalVariableEffect]
 title = "局部变量"
 description = "local_${e}"
+comment = "获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
 category = TC_YDLC
 returns = effect
 [[.args]]
@@ -7603,6 +7605,7 @@ returns = integer
 [R2I]
 title = "转换实数为整数"
 description = "转换 ${Real} 为整数"
+comment = "舍弃小数部分."
 category = TC_CONVERSION
 returns = integer
 [[.args]]

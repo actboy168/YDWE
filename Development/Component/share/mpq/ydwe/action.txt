@@ -4487,6 +4487,7 @@ default = "GetTriggerUnit"
 [DecUnitAbilityLevel]
 title = "降低技能等级 [R]"
 description = "使 ${单位} 的 ${技能} 等级降低1级"
+comment = "改变死亡单位的光环技能会导致魔兽崩溃."
 category = TC_UNIT
 [[.args]]
 type = unit
@@ -5650,6 +5651,7 @@ default = "OrderCodeStop"
 [GroupPointOrderById]
 title = "发布命令(指定坐标)(ID)"
 description = "对 ${单位组}发布 ${Order} 命令,目标点:(${X},${Y})"
+comment = "最多只能对单位组中12个单位发布命令."
 category = TC_UNITGROUP
 [[.args]]
 type = group
