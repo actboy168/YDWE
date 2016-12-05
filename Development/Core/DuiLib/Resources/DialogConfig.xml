@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Window size="400,600" caption="0,0,0,36" roundcorner="10,10" >
+<Window size="400,620" caption="0,0,0,36" roundcorner="10,10" >
   <Font name="微软雅黑" size="18"  default="true" />
   <Font name="幼圆" size="18" />
   <Font name="微软雅黑" size="14" />
@@ -57,7 +57,7 @@
             </VerticalLayout>
           </VerticalLayout>
           <Control height="12" />
-          <VerticalLayout height="180" >
+          <VerticalLayout height="170" >
             <Label text="脚本编译器" tooltip="有关JassHelper、Cjass编译器的选项。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6"  >
               <CheckBox text="启用JassHelper编译器" width="200" name="EnableJassHelper" tooltip="启用JassHelper编译器。JassHelper编译器是YDWE功能的基础，如果去掉，将不能使用任何YDWE特有的触发动作。除非你是纯Jass地图编写者并且不喜欢vJass，否则请选择此项。" />
@@ -66,6 +66,14 @@
               <CheckBox text="启用CJass编译器"      width="200" name="EnableCJass" tooltip="启用CJass编译器。开启此项，将会自动把智能导入、预处理器和逆天触发器插件关闭。" />
               <CheckBox text="地图调试模式"         width="200" name="EnableJassHelperDebug" tooltip="打开地图的调试模式。影响到debug关键字和代码优化。" />
             </VerticalLayout>
+          </VerticalLayout>
+          <Control height="12" />
+          <VerticalLayout height="80" >
+            <Label text="语法检查器" tooltip="有关PJass的选项。" class="LabelTitle" />
+            <HorizontalLayout height="40" inset="10,6,10,6" >
+              <RadioButton class="NormalRadioButton" text="最新" width="80" group="PJass" name="PJass_0" tooltip="" />
+              <RadioButton class="NormalRadioButton" text="经典" width="80" group="PJass" name="PJass_1" tooltip="" />
+            </HorizontalLayout>
           </VerticalLayout>
         </VerticalLayout>
         <VerticalLayout class="Background" inset="2,18,2,18" >

@@ -289,6 +289,7 @@ void ResetConfig(slk::IniTable& table)
 	table["ScriptCompiler"]["EnableJassHelperDebug"] = "0";
 	table["ScriptCompiler"]["EnableJassHelperOptimization"] = "1";
 	table["ScriptCompiler"]["EnableCJass"] = "0";
+	table["PJass"]["Option"] = "0";
 	table["ScriptInjection"]["Option"] = "0";
 	table["HostTest"]["Option"] = "0";
 	table["ThirdPartyPlugin"]["EnableDotNetSupport"] = "1";

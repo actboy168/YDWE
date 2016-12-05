@@ -144,7 +144,9 @@ function event.EVENT_SAVE_MAP(event_data)
 		-- 代码注入选项
 		script_injection = tonumber(global_config["ScriptInjection"]["Option"]),
 		-- 是否启用YDTrigger
-		enable_yd_trigger = plugin.loaders['YDTrigger'] ~= nil
+		enable_yd_trigger = plugin.loaders['YDTrigger'] ~= nil,
+		-- pjass的版本
+		pjass = global_config["PJass"]["Option"],
 	}
 
 	-- cjass和脚本注入不能共存

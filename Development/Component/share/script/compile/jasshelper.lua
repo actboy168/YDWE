@@ -108,8 +108,6 @@ end
 -- 返回：true编译成功，false编译失败
 function jasshelper.do_compile(self, map_path, common_j_path, blizzard_j_path, option)
 	local parameter = ""
-
-	io.save(jasshelper.path / 'jasshelper.conf', config:format('pjass.exe'))
 	
 	-- 需要做vJass编译？
 	if option.enable_jasshelper then
@@ -167,5 +165,12 @@ end
 function jasshelper.compile(self, map_path, option)	
 	log.trace("JassHelper compilation start.")	
 	local common_j_path, blizzard_j_path = self:prepare_jass_libs(map_path, option.runtime_version)
-	return self:do_compile(map_path, common_j_path, blizzard_j_path, option)
+	if option.pjass == '1' then
+		io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-classic.exe'))
+	else
+		io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-latest.exe'))
+	end
+	local res = self:do_compile(map_path, common_j_path, blizzard_j_path, option)
+	fs.remove(fs.ydwe_path() / 'jasshelper.conf')
+	return res
 end

@@ -29,6 +29,9 @@ local tbl_index = {
 		EnableJassHelperOptimization = "1",
 		EnableCJass = "0",
 	},
+	PJass = {
+		Option = "0"
+	},
 	ScriptInjection = {
 		Option = "0"
 	},

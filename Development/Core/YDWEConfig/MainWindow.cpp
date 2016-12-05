@@ -80,6 +80,7 @@ namespace
 		("EnableJassHelperScriptOnly",              Attribute("ScriptCompiler"))
 		("EnableJassHelperOptimization",            Attribute("ScriptCompiler"))
 		("EnableCJass",                             Attribute("ScriptCompiler"))
+		("PJass",                                   Attribute(2))
 		("LaunchRenderingEngine",                   Attribute("MapTest", Attribute::e_ComboBox))
 		("LaunchWindowed",                          Attribute("MapTest"))
 		("LaunchFullWindowed",                      Attribute("MapTest"))
@@ -202,6 +203,7 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["ScriptCompiler"]["EnableJassHelperScriptOnly"] = "0";
 	table["ScriptCompiler"]["EnableJassHelperOptimization"] = "1";
 	table["ScriptCompiler"]["EnableCJass"] = "0";
+	table["PJass"]["Option"] = "0";
 	table["ScriptInjection"]["Option"] = "0";
 	table["HostTest"]["Option"] = "0";
 	table["ThirdPartyPlugin"]["EnableDotNetSupport"] = "0";
