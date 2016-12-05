@@ -2075,6 +2075,14 @@ category = TC_NOTHING
 use_in_event = 0
 returns = itempool
 
+[YDWEGetLastPoolAbstractedItem]
+title = "最后从物品池里取出的物品[YDWE]"
+description = "最后从物品池里取出的物品"
+comment = "该物品必须是由YDWE提供的<选择放置物品>动作生成，不然无法获取。"
+category = TC_NOTHING
+use_in_event = 0
+returns = item
+
 [GetItemType]
 title = "指定物品的分类"
 description = "${物品} 的分类"
@@ -8202,6 +8210,14 @@ comment = "响应'技能施放'单位事件. 注意技能施放结束将无法�
 category = TC_EVENTRESPONSE
 use_in_event = 0
 returns = location
+
+[CreateRegion]
+title = "新建区域 [R]"
+description = "新建区域"
+comment = "会创建一个新的不规则区域,如果不往该区域添加点或地区,则该区域无效果."
+category = TC_REGION
+use_in_event = 0
+returns = region
 
 [GetTriggeringRegion]
 title = "触发区域 [R]"
