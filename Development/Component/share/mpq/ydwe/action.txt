@@ -1299,16 +1299,12 @@ comment = "边界坐标的设置会影响钩子、跳跃等技能在地图边界
 category = TC_RECT
 [[.args]]
 type = real
-default = "GetCameraBoundMinX"
 [[.args]]
 type = real
-default = "GetCameraBoundMaxX"
 [[.args]]
 type = real
-default = "GetCameraBoundMinY"
 [[.args]]
 type = real
-default = "GetCameraBoundMaxY"
 
 [YDWEFlushMissionByInteger]
 title = "清空 目录 (整数路径)"
