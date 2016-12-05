@@ -1,5 +1,5 @@
 Microsoft Research Detours Package
-Express Version 3.0 Build_316
+Express Version 3.0 Build_339
 
 DISCLAIMER AND LICENSE:
 =======================
@@ -48,7 +48,7 @@ to that contained in the file samples\slept\NORMAL.TXT.
 4. CHANGES IN VERSION 3.0:
 ==========================
 The following major changes were made in Detours 3.0 from Detours 2.x:
- * Support for mixing 32-bit and 64-bit processes.
+ * Support for scenarios that mix both 32-bit and 64-bit processes.
  * Support for ARM processors (in addition to support for X86, X64, and IA64).
  * Removal of the detoured.dll marker binary.
  * Compatibility improvements, especially on x64 processors.
@@ -283,7 +283,7 @@ DetourFinishHelperProcess()  - Completes the operations of a helper process.
 All Detours functions are compatible with all versions of Microsoft Windows
 Operating Systems with the supported service packs installed. This includes
 Windows XP, Windows Server 2003, Windows Server 2003 R2, Windows Vista,
-Windows Server 2008, Windows 7, Windows Server 2008 R2, and "Windows 8".
+Windows Server 2008, Windows 7, Windows Server 2008 R2, and Windows 8.
 
 
 7. MANIFEST:
