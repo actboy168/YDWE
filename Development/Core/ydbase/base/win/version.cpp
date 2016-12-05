@@ -55,16 +55,15 @@ namespace base { namespace win {
 				v = VERSION_WIN8;
 				break;
 			case 3:
+			default:
 				v = VERSION_WIN8_1;
 				break;
-			case 4:
-				v = VERSION_WIN10;
-				break;
-			default:
-				v = VERSION_WIN_LAST;
-				break;
 			}
-		} 
+		}
+		else if (vn.major == 10)
+		{
+			v = VERSION_WIN10;
+		}
 		else if (vn.major > 6) 
 		{
 			v = VERSION_WIN_LAST;
