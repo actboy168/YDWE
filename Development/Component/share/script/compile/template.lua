@@ -106,7 +106,7 @@ function template:compile(op)
 	local success, content = self:do_compile(op)
 	if not success then
 		if content then
-			gui.error_message(nil, content)
+			gui.error_message(nil, __(content))
 		else
 			gui.error_message(nil, _("Unknown"))
 		end			
