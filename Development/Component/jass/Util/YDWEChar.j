@@ -7,7 +7,7 @@ library YDWEChar
 	/// 1.20ÏÂ0xFFÓĞbug 
 	/// 
     globals
-		private constant string originstr = #include "charlist.h"
+		#include "charlist.h"
 	endglobals
 	
     public function chr takes integer n returns string
