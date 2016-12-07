@@ -2,12 +2,17 @@ require "sys"
 require "filesystem"
 require "util"
 
+local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component"
+if not fs.exists(root) then
+	root = fs.ydwe_path()
+end
+
 wave = {}
 wave.path                = fs.ydwe_path() / "plugin" / "wave"
 wave.exe_path            = wave.path / "Wave.exe"
 wave.sys_include_path    = wave.path / "include"
 wave.plugin_include_path = fs.ydwe_path() / "plugin"
-wave.jass_include_path   = fs.ydwe_path() / "jass"
+wave.jass_include_path   = root / "jass"
 wave.force_file_path     = wave.sys_include_path / "WaveForce.i"
 
 local function pathstring(path)
