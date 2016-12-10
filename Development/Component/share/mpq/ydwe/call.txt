@@ -8060,7 +8060,7 @@ title = "两个单位之间的角度 [YDWE]"
 description = "从${单位}到${单位}的角度"
 comment = "获取两个单位之间的角度。"
 category = TC_YDST
-returns = TC_YDST
+returns = degree
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
