@@ -30,7 +30,7 @@ io.__open = io.open
 function io.open(file_path, mode)
 	local f, e = io.__open(__(file_path:string()), mode)
 	if f then
-		if not mode or not mode:match('b') then
+		if not mode or (not mode:match('b') and mode:match('r'))  then
 			if f:read(3) ~= '\xEF\xBB\xBF' then
 				f:seek('set', 0)
 			end
