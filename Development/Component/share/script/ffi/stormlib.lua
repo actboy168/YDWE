@@ -35,10 +35,38 @@ ffi.cdef[[
 
 	unsigned long GetLastError();
 ]]
+ffi.cdef[[
+    struct SYSTEMTIME {
+        unsigned short wYear;
+        unsigned short wMonth;
+        unsigned short wDayOfWeek;
+        unsigned short wDay;
+        unsigned short wHour;
+        unsigned short wMinute;
+        unsigned short wSecond;
+        unsigned short wMilliseconds;
+    };
+    struct FILETIME {
+        unsigned long dwLowDateTime;
+        unsigned long dwHighDateTime;
+    };
+    void GetSystemTime(struct SYSTEMTIME* lpSystemTime);
+    int SystemTimeToFileTime(const struct SYSTEMTIME* lpSystemTime, struct FILETIME*lpFileTime);
+]]
 
 local uni = require 'ffi.unicode'
-local current_filetime = require 'ffi.current_filetime'
 local stormlib = ffi.load('stormlib')
+
+local function current_filetime()
+    local systemtime = ffi.new('struct SYSTEMTIME')
+    local filetime = ffi.new('struct FILETIME')
+    ffi.C.GetSystemTime(systemtime)
+    if not ffi.C.SystemTimeToFileTime(systemtime, filetime) then
+        return 0
+    end
+    return filetime.dwLowDateTime | (filetime.dwHighDateTime << 32)
+end
+
 
 local wfile = {}
 wfile.__index = wfile
@@ -187,7 +215,7 @@ end
 function archive:__pairs()
 	local content = self:load_file('(listfile)')
 	if not content then
-		print('(listfile)导出失败')
+		error('(listfile)导出失败')
 		return
 	end
 	if content:sub(1, 3) == '\xEF\xBB\xBF' then
@@ -232,5 +260,8 @@ function m.create(path, filecount)
 		return nil
 	end
 	return setmetatable({ handle = phandle[0] }, archive)
+end
+function m.attach(handle)
+	return setmetatable({ handle = handle }, archive)
 end
 return m
