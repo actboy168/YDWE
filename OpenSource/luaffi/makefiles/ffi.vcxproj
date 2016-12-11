@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -27,20 +27,21 @@
     <ClInclude Include="..\src\msvc\stdint.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B84F7231-16CE-41D8-8C08-7B523FF4225B}</ProjectGuid>
+    <ProjectGuid>{076A366B-6B75-4D35-A6A9-CA680F0771E3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v141_xp</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -54,16 +55,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\obj\$(Configuration)\</IntDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\bin\$(Configuration)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\obj\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\obj\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\obj\$(Configuration)\</IntDir>
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\bin\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -109,11 +110,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>"$(ProjectDir)..\..\Lua\Current\bin\Win32\Release\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X32WIN -o "$(ProjectDir)..\src\call_x86.h"  "$(ProjectDir)..\src\call_x86.dasc"
-"$(ProjectDir)..\..\Lua\Current\bin\Win32\Release\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X64 -o  "$(ProjectDir)..\src\call_x64.h"  "$(ProjectDir)..\src\call_x86.dasc"
-"$(ProjectDir)..\..\Lua\Current\bin\Win32\Release\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X64 -D X64WIN -o  "$(ProjectDir)..\src\call_x64win.h"  "$(ProjectDir)..\src\call_x86.dasc"
-"$(ProjectDir)..\..\Lua\Current\bin\Win32\Release\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -o  "$(ProjectDir)..\src\call_arm.h"  "$(ProjectDir)..\src\call_arm.dasc"
-</Command>
+      <Command>"$(ProjectDir)..\..\Lua\Current\bin\Win32\$(Configuration)\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X32WIN -o "$(ProjectDir)..\src\call_x86.h"  "$(ProjectDir)..\src\call_x86.dasc"
+"$(ProjectDir)..\..\Lua\Current\bin\Win32\$(Configuration)\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X64 -o  "$(ProjectDir)..\src\call_x64.h"  "$(ProjectDir)..\src\call_x86.dasc"
+"$(ProjectDir)..\..\Lua\Current\bin\Win32\$(Configuration)\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -D X64 -D X64WIN -o  "$(ProjectDir)..\src\call_x64win.h"  "$(ProjectDir)..\src\call_x86.dasc"
+"$(ProjectDir)..\..\Lua\Current\bin\Win32\$(Configuration)\lua.exe" "$(ProjectDir)..\src\dynasm\dynasm.lua" -LNE -o  "$(ProjectDir)..\src\call_arm.h"  "$(ProjectDir)..\src\call_arm.dasc"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

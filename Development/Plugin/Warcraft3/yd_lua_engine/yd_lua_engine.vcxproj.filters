@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{6f78e772-33da-4e0e-bc51-84b6af6f46d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua_engine">
+      <UniqueIdentifier>{611a9770-2902-4c6c-8c25-32f68f87f996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua_engine\misc">
+      <UniqueIdentifier>{a7c4e92a-b015-446f-8994-c017c1d15c35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua_engine\main">
+      <UniqueIdentifier>{F5DAD6D0-9FF8-11E2-B745-232E312CC9AE}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="lua_engine\library">
+      <UniqueIdentifier>{44be37c9-e7b9-41f5-9f41-3b70173f2561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lua_engine\class">
+      <UniqueIdentifier>{aee90470-d9bf-4dff-9e10-8f4b3519fde6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="lua_engine\fix_math.cpp">
+      <Filter>lua_engine\main</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\lua_loader.cpp">
+      <Filter>lua_engine\main</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\open_lua_engine.cpp">
+      <Filter>lua_engine\main</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\storm.cpp">
+      <Filter>lua_engine\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_common.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_hook.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_japi.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_runtime.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_slk.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\common.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\class_array.cpp">
+      <Filter>lua_engine\class</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\class_handle.cpp">
+      <Filter>lua_engine\class</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\class_real.cpp">
+      <Filter>lua_engine\class</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\callback.cpp">
+      <Filter>lua_engine\main</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\jassbind.cpp">
+      <Filter>lua_engine\main</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_storm.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\lua_helper.cpp">
+      <Filter>lua_engine\main</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_globals.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_console.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_debug.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_message.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_bignum.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\sha_1.inl">
+      <Filter>lua_engine\misc</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_package.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_log.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\debugger.cpp">
+      <Filter>lua_engine\main</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lua_engine\lua_loader.h">
+      <Filter>lua_engine\main</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\open_lua_engine.h">
+      <Filter>lua_engine\main</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\storm.h">
+      <Filter>lua_engine\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\libs_runtime.h">
+      <Filter>lua_engine\library</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\common.h">
+      <Filter>lua_engine\library</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\class_array.h">
+      <Filter>lua_engine\class</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\class_handle.h">
+      <Filter>lua_engine\class</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\class_real.h">
+      <Filter>lua_engine\class</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\callback.h">
+      <Filter>lua_engine\main</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\jassbind.h">
+      <Filter>lua_engine\main</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\lua_helper.h">
+      <Filter>lua_engine\main</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\sha_1.h">
+      <Filter>lua_engine\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\debugger.h">
+      <Filter>lua_engine\main</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="yd_lua_engine.def">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="version.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

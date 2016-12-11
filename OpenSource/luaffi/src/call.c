@@ -1,5 +1,10 @@
 /* vim: ts=4 sw=4 sts=4 et tw=78
- * Copyright (c) 2011 James R. McKaskill. See license in ffi.h
+ * Portions copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+ * Portions copyright (c) 2011 James R. McKaskill.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
  */
 #include "ffi.h"
 
@@ -9,10 +14,10 @@ static void* reserve_code(struct jit* jit, lua_State* L, size_t sz);
 static void commit_code(struct jit* jit, void* p, size_t sz);
 
 static void push_int(lua_State* L, int val)
-{ lua_pushnumber(L, val); }
+{ lua_pushinteger(L, val); }
 
 static void push_uint(lua_State* L, unsigned int val)
-{ lua_pushnumber(L, val); }
+{ lua_pushinteger(L, val); }
 
 static void push_float(lua_State* L, float val)
 { lua_pushnumber(L, val); }
@@ -165,6 +170,7 @@ static void* reserve_code(struct jit* jit, lua_State* L, size_t sz)
         ADDFUNC(NULL, push_cdata);
         ADDFUNC(NULL, push_int);
         ADDFUNC(NULL, push_uint);
+        ADDFUNC(NULL, lua_pushinteger);
         ADDFUNC(NULL, push_float);
         ADDFUNC(jit->kernel32_dll, SetLastError);
         ADDFUNC(jit->kernel32_dll, GetLastError);
@@ -176,11 +182,7 @@ static void* reserve_code(struct jit* jit, lua_State* L, size_t sz)
         ADDFUNC(jit->lua_dll, lua_pushnil);
         ADDFUNC(jit->lua_dll, lua_callk);
         ADDFUNC(jit->lua_dll, lua_settop);
-#if LUA_VERSION_NUM < 503
         ADDFUNC(jit->lua_dll, lua_remove);
-#else		 
-		ADDFUNC(jit->lua_dll, lua_rotate);
-#endif
 #undef ADDFUNC
 
         for (i = 0; extnames[i] != NULL; i++) {

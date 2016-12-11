@@ -30,7 +30,7 @@ static DWORD FindHashIndex(TMPQArchive * ha, DWORD dwFileIndex)
     pHashTableEnd = ha->pHashTable + ha->pHeader->dwHashTableSize;
     for(pHash = ha->pHashTable; pHash < pHashTableEnd; pHash++)
     {
-        if(pHash->dwBlockIndex == dwFileIndex)
+        if(MPQ_BLOCK_INDEX(pHash) == dwFileIndex)
         {
             // Duplicate hash entry found
             if(dwFirstIndex != HASH_ENTRY_FREE)
@@ -309,8 +309,10 @@ bool WINAPI SFileOpenFileEx(HANDLE hMpq, const char * szFileName, DWORD dwSearch
     {
         if(pFileEntry == NULL || (pFileEntry->dwFlags & MPQ_FILE_EXISTS) == 0)
             nError = ERROR_FILE_NOT_FOUND;
-        if(pFileEntry != NULL && pFileEntry->dwFlags & ~MPQ_FILE_VALID_FLAGS)
-            nError = ERROR_NOT_SUPPORTED;
+
+        // Ignore unknown loading flags (example: MPQ_2016_v1_WME4_4.w3x)
+//      if(pFileEntry != NULL && pFileEntry->dwFlags & ~MPQ_FILE_VALID_FLAGS)
+//          nError = ERROR_NOT_SUPPORTED;
     }
 
     // Did the caller just wanted to know if the file exists?

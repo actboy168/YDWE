@@ -1,1 +1,1 @@
-call "%~dp0..\Development\Editor\Core\Solution\YDWE.sln"
+call "%~dp0..\Development\Core\Solution\YDWE.sln"

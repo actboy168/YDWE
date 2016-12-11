@@ -187,7 +187,6 @@ TMPQHash * LoadSqpHashTable(TMPQArchive * ha)
     TSQPHash * pSqpHashEnd;
     TSQPHash * pSqpHash;
     TMPQHash * pMpqHash;
-    DWORD dwBlockIndex;
     int nError = ERROR_SUCCESS;
 
     // Load the hash table
@@ -203,8 +202,7 @@ TMPQHash * LoadSqpHashTable(TMPQArchive * ha)
             if(pSqpHash->dwBlockIndex != HASH_ENTRY_FREE)
             {
                 // Check block index against the size of the block table
-                dwBlockIndex = pSqpHash->dwBlockIndex;
-                if(pHeader->dwBlockTableSize <= dwBlockIndex && dwBlockIndex < HASH_ENTRY_DELETED)
+                if(pHeader->dwBlockTableSize <= MPQ_BLOCK_INDEX(pSqpHash) && pSqpHash->dwBlockIndex < HASH_ENTRY_DELETED)
                     nError = ERROR_FILE_CORRUPT;
 
                 // We do not support nonzero locale and platform ID
@@ -216,9 +214,9 @@ TMPQHash * LoadSqpHashTable(TMPQArchive * ha)
                 pMpqHash->dwName2 = pSqpHash->dwName2;
 
                 // Store the rest. Note that this must be done last,
-                // because pSqpHash->dwBlockIndex corresponds to pMpqHash->dwName2
-                pMpqHash->dwBlockIndex = dwBlockIndex;
-                pMpqHash->wPlatform = 0;
+                // because block index corresponds to pMpqHash->dwName2
+                pMpqHash->dwBlockIndex = MPQ_BLOCK_INDEX(pSqpHash);
+                pMpqHash->Platform = 0;
                 pMpqHash->lcLocale = 0;
             }
         }
@@ -525,7 +523,7 @@ TMPQHash * LoadMpkHashTable(TMPQArchive * ha)
     if(pMpkHash != NULL)
     {
         // Calculate the hash table size as if it was real MPQ hash table
-        pHeader->dwHashTableSize = GetHashTableSizeForFileCount(pHeader->dwHashTableSize);
+        pHeader->dwHashTableSize = GetNearestPowerOfTwo(pHeader->dwHashTableSize);
         pHeader->HashTableSize64 = pHeader->dwHashTableSize * sizeof(TMPQHash);
 
         // Now allocate table that will serve like a true MPQ hash table,
@@ -546,7 +544,7 @@ TMPQHash * LoadMpkHashTable(TMPQArchive * ha)
 
                 // Copy the MPK hash entry to the hash table
                 pHash->dwBlockIndex = pMpkHash[i].dwBlockIndex;
-                pHash->wPlatform = 0;
+                pHash->Platform = 0;
                 pHash->lcLocale = 0;
                 pHash->dwName1 = pMpkHash[i].dwName2;
                 pHash->dwName2 = pMpkHash[i].dwName3;

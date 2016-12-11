@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="slk">
+      <UniqueIdentifier>{3239f7e5-6015-42e5-aab7-88b8c374affb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\inc">
+      <UniqueIdentifier>{0ee5f575-2c3f-42b4-9b5f-2165ab709f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\inc\converter">
+      <UniqueIdentifier>{3ff544df-600f-4bbf-b39f-d9cfc9301497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\inc\table">
+      <UniqueIdentifier>{dbe76096-9f2c-4d7c-95d7-83900d06c3eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\inc\writer">
+      <UniqueIdentifier>{d3630bde-165c-4448-82f6-5b505feda97d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\inc\reader">
+      <UniqueIdentifier>{7e4e1b57-8199-41d3-aa57-aa81cb3dcbeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\inc\port">
+      <UniqueIdentifier>{f55be4dc-9827-44aa-a70c-e0faf26a36dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\inc\utility">
+      <UniqueIdentifier>{072967a5-ebe6-4899-b215-929a1a2a8ec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\src">
+      <UniqueIdentifier>{513597aa-a0ba-40cb-a618-c86639cd58ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\src\reader">
+      <UniqueIdentifier>{8217c1ba-f51d-4022-8c7b-8b28b54faac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\src\utility">
+      <UniqueIdentifier>{b517acfe-dc9f-44bb-9628-3ec2c08d3566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\src\table">
+      <UniqueIdentifier>{7508960c-69dd-411d-87e7-0ea752097066}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="slk\src\converter">
+      <UniqueIdentifier>{dcc37706-6ecc-4f43-a646-e4f8ce175280}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="slk\reader\WtsReader.cpp">
+      <Filter>slk\src\reader</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\reader\WesReader.cpp">
+      <Filter>slk\src\reader</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\reader\TxtReader.cpp">
+      <Filter>slk\src\reader</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\reader\ObjReader.cpp">
+      <Filter>slk\src\reader</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\reader\MetaReader.cpp">
+      <Filter>slk\src\reader</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\reader\IniReader.cpp">
+      <Filter>slk\src\reader</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\reader\SlkReader.cpp">
+      <Filter>slk\src\reader</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\table\VariableData.cpp">
+      <Filter>slk\src\table</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\converter\ConvertTable.cpp">
+      <Filter>slk\src\converter</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\BaseAbilityList.cpp">
+      <Filter>slk\src</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\ObjectManager.cpp">
+      <Filter>slk\src</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\converter\AttributeMeta.cpp">
+      <Filter>slk\src\converter</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\reader\CommonReader.cpp">
+      <Filter>slk\src\reader</Filter>
+    </ClCompile>
+    <ClCompile Include="slk\Converter.cpp">
+      <Filter>slk\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="slk\port\config.h">
+      <Filter>slk\inc\port</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\port\port_gcc.h">
+      <Filter>slk\inc\port</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\port\port_msvc.h">
+      <Filter>slk\inc\port</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\utility\sequence.h">
+      <Filter>slk\inc\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\utility\object_id.h">
+      <Filter>slk\inc\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\utility\convert.h">
+      <Filter>slk\inc\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\converter\ConvertTable.hpp">
+      <Filter>slk\inc\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\table\Attribute.hpp">
+      <Filter>slk\inc\table</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\table\BaseTable.hpp">
+      <Filter>slk\inc\table</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\table\MetaTable.hpp">
+      <Filter>slk\inc\table</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\table\ObjTable.hpp">
+      <Filter>slk\inc\table</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\table\SlkTable.hpp">
+      <Filter>slk\inc\table</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\table\VariableData.hpp">
+      <Filter>slk\inc\table</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\table\WesTable.hpp">
+      <Filter>slk\inc\table</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\table\WtsTable.hpp">
+      <Filter>slk\inc\table</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\writer\IniWriter.hpp">
+      <Filter>slk\inc\writer</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\writer\ObjWriter.hpp">
+      <Filter>slk\inc\writer</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\writer\SlkWriter.hpp">
+      <Filter>slk\inc\writer</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\writer\TxtWriter.hpp">
+      <Filter>slk\inc\writer</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\reader\IniReader.hpp">
+      <Filter>slk\inc\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\reader\MetaReader.hpp">
+      <Filter>slk\inc\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\reader\ObjReader.hpp">
+      <Filter>slk\inc\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\reader\SlkReader.hpp">
+      <Filter>slk\inc\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\reader\TxtReader.hpp">
+      <Filter>slk\inc\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\reader\WesReader.hpp">
+      <Filter>slk\inc\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\reader\WtsReader.hpp">
+      <Filter>slk\inc\reader</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\ObjectManager.hpp">
+      <Filter>slk\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\InterfaceStorm.hpp">
+      <Filter>slk\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\Converter.hpp">
+      <Filter>slk\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\table\IniTable.hpp">
+      <Filter>slk\inc\table</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\converter\AttributeMeta.hpp">
+      <Filter>slk\inc\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="slk\reader\CommonReader.hpp">
+      <Filter>slk\inc\reader</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

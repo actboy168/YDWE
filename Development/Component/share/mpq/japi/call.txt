@@ -1,0 +1,268 @@
+[YDWEPlatformIsInPlatform]
+title = "地图在11平台上 [JAPI]"
+description = "目前地图正在11平台上运行"
+comment = "判断地图是否在11平台上；此功能可以根据地图所在平台做出差异化操作。特别注意：此操作内含有等待。"
+category = TC_NOTHING
+returns = boolean
+
+[YDWEIsEventPhysicalDamage]
+title = "是物理伤害 [JAPI]"
+description = "单位所受伤害是物理伤害"
+comment = "响应'受到伤害'单位事件,不能用在等待之后"
+category = TC_EVENTRESPONSE
+returns = boolean
+
+[YDWEIsEventAttackDamage]
+title = "是攻击伤害 [JAPI]"
+description = "单位所受伤害是攻击伤害"
+comment = "响应'受到伤害'单位事件,不能用在等待之后"
+category = TC_EVENTRESPONSE
+returns = boolean
+
+[YDWEIsEventRangedDamage]
+title = "是远程伤害 [JAPI]"
+description = "单位所受伤害是远程伤害"
+comment = "响应'受到伤害'单位事件,不能用在等待之后"
+category = TC_EVENTRESPONSE
+returns = boolean
+
+[YDWEIsEventDamageType]
+title = "伤害类型 [JAPI]"
+description = "单位所受伤害的伤害类型是 ${伤害类型}"
+comment = "响应'受到伤害'单位事件,不能用在等待之后"
+category = TC_EVENTRESPONSE
+returns = boolean
+[[.args]]
+type = damagetype
+default = "DamageTypeNormal"
+
+[YDWEIsEventWeaponType]
+title = "武器类型 [JAPI]"
+description = "单位所受伤害的武器类型是 ${武器类型}"
+comment = "响应'受到伤害'单位事件,不能用在等待之后"
+category = TC_EVENTRESPONSE
+returns = boolean
+[[.args]]
+type = weapontype
+default = "WEAPON_TYPE_WHOKNOWS"
+
+[YDWEIsEventAttackType]
+title = "攻击类型 [JAPI]"
+description = "单位所受伤害的攻击类型是 ${攻击类型}"
+comment = "响应'受到伤害'单位事件,不能用在等待之后"
+category = TC_EVENTRESPONSE
+returns = boolean
+[[.args]]
+type = attacktype
+default = "AttackTypeNormal"
+
+[YDWEGetObjectPropertyInteger]
+title = "物体属性 (整数) [JAPI]"
+description = "[${类型}]${物体} 的 ${属性名}"
+comment = "属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
+category = TC_UNIT
+use_in_event = 0
+returns = integer
+[[.args]]
+type = objecttype
+default = "objecttype00_abilcode"
+[[.args]]
+type = Null
+default = "AHhb"
+[[.args]]
+type = string
+default = "\"levels\""
+
+[YDWEGetObjectPropertyReal]
+title = "物体属性 (实数) [JAPI]"
+description = "[${类型}]${物体} 的 ${属性名}"
+comment = "属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
+category = TC_UNIT
+use_in_event = 0
+returns = real
+[[.args]]
+type = objecttype
+default = "objecttype00_abilcode"
+[[.args]]
+type = Null
+default = "AHhb"
+[[.args]]
+type = string
+default = "\"Rng1\""
+
+[YDWEGetObjectPropertyString]
+title = "物体属性 (字符串) [JAPI]"
+description = "[${类型}]${物体} 的 ${属性名}"
+comment = "属性名也就是物体编辑器里按Ctrl+D后看到的英文名"
+category = TC_UNIT
+use_in_event = 0
+returns = string
+[[.args]]
+type = objecttype
+default = "objecttype00_abilcode"
+[[.args]]
+type = Null
+default = "AHhb"
+[[.args]]
+type = string
+default = "\"Name\""
+
+[YDWERecordGetI]
+title = "获取11RPG存档 [JAPI]"
+description = "从${玩家}的11RPG存档中读出〖${数据名}〗"
+comment = "从玩家11RPG存档上获取数据，需要填入正确的数据名。"
+category = TC_YDSL
+returns = integer
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = string
+default = "EverguoIsHandsome"
+
+[YDWERPGGetKey]
+title = "读取11RPG积分 [JAPI]"
+description = "从${玩家}的11RPG积分中读出〖${数据名}〗"
+comment = "从11RPG积分上获取数据，需要填入正确的数据名。"
+category = TC_YDSL
+returns = integer
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = string
+default = "EverguoIsHandsome"
+
+[YDWEGetUnitAbilityState]
+title = "技能属性 [JAPI]"
+description = "${单位} 的 ${技能} 的 ${状态}"
+comment = ""
+category = TC_UNIT
+use_in_event = 0
+returns = real
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = AbilityState
+default = "ABILITY_STATE_COOLDOWN"
+
+[YDWEGetUnitAbilityDataInteger]
+title = "技能数据 (整数) [JAPI]"
+description = "${单位} 的 ${技能} 第 ${等级} 级的 ${数据}"
+comment = ""
+category = TC_UNIT
+use_in_event = 0
+returns = integer
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = integer
+default = "1"
+min = 1
+[[.args]]
+type = AbilityDataInteger
+default = "ABILITY_DATA_COST"
+
+[YDWEGetUnitAbilityDataReal]
+title = "技能数据 (实数) [JAPI]"
+description = "${单位} 的 ${技能} 第 ${等级} 级的 ${数据}"
+comment = "数据A~数据I也就是物体编辑器里按Ctrl+D后看到的DataA~DataI"
+category = TC_UNIT
+use_in_event = 0
+returns = real
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = integer
+default = "1"
+min = 1
+[[.args]]
+type = AbilityDataReal
+default = "ABILITY_DATA_COOL"
+
+[YDWEGetUnitAbilityDataString]
+title = "技能数据 (字符串) [JAPI]"
+description = "${单位} 的 ${技能} 第 ${等级} 级的 ${数据}"
+comment = ""
+category = TC_UNIT
+use_in_event = 0
+returns = string
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = integer
+default = "1"
+min = 1
+[[.args]]
+type = AbilityDataString
+default = "ABILITY_DATA_TIP"
+
+[YDWEGetItemDataString]
+title = "物品数据 (字符串) [JAPI]"
+description = "${物品} 的 ${数据}"
+comment = ""
+category = TC_ITEM
+use_in_event = 0
+returns = string
+[[.args]]
+type = itemcode
+default = "ches"
+[[.args]]
+type = ItemDataString
+default = "ITEM_DATA_TIP"
+
+[EXGetEffectX]
+title = "X轴坐标 [JAPI]"
+description = "${特效} 的X轴坐标"
+comment = ""
+category = TC_SPECIALEFFECT
+use_in_event = 0
+returns = real
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+
+[EXGetEffectY]
+title = "Y轴坐标 [JAPI]"
+description = "${特效} 的Y轴坐标"
+comment = ""
+category = TC_SPECIALEFFECT
+use_in_event = 0
+returns = real
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+
+[EXGetEffectZ]
+title = "高度 [JAPI]"
+description = "${特效} 的高度"
+comment = ""
+category = TC_SPECIALEFFECT
+use_in_event = 0
+returns = real
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+
+[EXGetEffectSize]
+title = "大小 [JAPI]"
+description = "${特效} 的大小"
+comment = ""
+category = TC_SPECIALEFFECT
+use_in_event = 0
+returns = real
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"

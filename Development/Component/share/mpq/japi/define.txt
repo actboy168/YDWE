@@ -1,0 +1,39 @@
+
+[TriggerTypes]
+MoveType=0,0,0,移动类型,integer
+CollisionType=0,0,0,碰撞类型,integer
+
+[TriggerParams]
+UnitStateDamageDice=0,unitstate,ConvertUnitState(0x10),"骰子数量 [JAPI]"
+UnitStateDamageSide=0,unitstate,ConvertUnitState(0x11),"骰子面数 [JAPI]"
+UnitStateDamageBase=0,unitstate,ConvertUnitState(0x12),"基础伤害 [JAPI]"
+UnitStateDamageBonus=0,unitstate,ConvertUnitState(0x13),"附加伤害 [JAPI]"
+UnitStateDamageMix=0,unitstate,ConvertUnitState(0x14),"攻击最小值 [JAPI]"
+UnitStateDamageMax=0,unitstate,ConvertUnitState(0x15),"攻击最大值 [JAPI]"
+UnitStateDamageRange=0,unitstate,ConvertUnitState(0x16),"攻击范围 [JAPI]"
+UnitStateDamageCool=0,unitstate,ConvertUnitState(0x25),"攻击间隔 [JAPI]"
+UnitStateAttackSpeed=0,unitstate,ConvertUnitState(0x51),"攻击速度 [JAPI]"
+UnitStateArmor=0,unitstate,ConvertUnitState(0x20),"护甲 [JAPI]"
+UnitStateDamageDiceSec=0,unitstatesec,ConvertUnitState(0x10),"骰子数量 [JAPI]"
+UnitStateDamageSideSec=0,unitstatesec,ConvertUnitState(0x11),"骰子面数 [JAPI]"
+UnitStateDamageBaseSec=0,unitstatesec,ConvertUnitState(0x12),"基础伤害 [JAPI]"
+UnitStateDamageBonusSec=0,unitstatesec,ConvertUnitState(0x13),"附加伤害 [JAPI]"
+UnitStateDamageRangeSec=0,unitstatesec,ConvertUnitState(0x16),"攻击范围 [JAPI]"
+UnitStateDamageCoolSec=0,unitstatesec,ConvertUnitState(0x25),"攻击间隔 [JAPI]"
+UnitStateAttackSpeedSec=0,unitstatesec,ConvertUnitState(0x51),"攻击速度 [JAPI]"
+UnitStateArmorSec=0,unitstatesec,ConvertUnitState(0x20),"护甲 [JAPI]"
+UnitStateMaxLifeSec=0,unitstatesec,UNIT_STATE_MAX_LIFE,"最大生命值 [JAPI]"
+UnitStateMaxManaSec=0,unitstatesec,UNIT_STATE_MAX_MANA,"最大魔法值 [JAPI]"
+
+MoveType01=0,MoveType,0x00,"没有"
+MoveType02=0,MoveType,0x01,"无法移动"
+MoveType03=0,MoveType,0x02,WESTRING_UE_MOVETYPE_FOOT
+MoveType04=0,MoveType,0x04,WESTRING_UE_MOVETYPE_FLY
+MoveType05=0,MoveType,0x08,"地雷"
+MoveType06=0,MoveType,0x10,"疾风步"
+MoveType07=0,MoveType,0x20,"未知"
+MoveType08=0,MoveType,0x40,WESTRING_UE_MOVETYPE_FLOAT
+MoveType09=0,MoveType,0x80,WESTRING_UE_MOVETYPE_AMPH
+
+CollisionType01=0,CollisionType,1,"单位"
+CollisionType03=0,CollisionType,3,"建筑"

@@ -70,6 +70,7 @@
 /* 04.12.13  9.00  Lad  Unit tests, bug fixes                                */
 /* 27.08.14  9.10  Lad  Signing archives with weak digital signature         */
 /* 25.11.14  9.11  Lad  Fixed bug reading & creating HET table               */
+/* 18.09.15  9.20  Lad  Release 9.20                                         */
 /*****************************************************************************/
 
 #ifndef __STORMLIB_H__
@@ -134,8 +135,8 @@ extern "C" {
 //-----------------------------------------------------------------------------
 // Defines
 
-#define STORMLIB_VERSION                0x090B  // Current version of StormLib (9.11)
-#define STORMLIB_VERSION_STRING         "9.11"  // String version of StormLib version
+#define STORMLIB_VERSION                0x0914  // Current version of StormLib (9.20)
+#define STORMLIB_VERSION_STRING         "9.20"  // String version of StormLib version
 
 #define ID_MPQ                      0x1A51504D  // MPQ archive header ID ('MPQ\x1A')
 #define ID_MPQ_USERDATA             0x1B51504D  // MPQ userdata entry ('MPQ\x1B')
@@ -149,6 +150,7 @@ extern "C" {
 #define ERROR_MARKED_FOR_DELETE          10005  // The file was marked as "deleted" in the MPQ
 #define ERROR_FILE_INCOMPLETE            10006  // The required file part is missing
 #define ERROR_UNKNOWN_FILE_NAMES         10007  // A name of at least one file is unknown
+#define ERROR_CANT_FIND_PATCH_PREFIX     10008  // StormLib was unable to find patch prefix for the patches
 
 // Values for SFileCreateArchive
 #define HASH_TABLE_SIZE_MIN         0x00000004  // Verified: If there is 1 file, hash table size is 4
@@ -211,12 +213,11 @@ extern "C" {
 #define MPQ_FILE_DELETE_MARKER      0x02000000  // File is a deletion marker. Used in MPQ patches, indicating that the file no longer exists.
 #define MPQ_FILE_SECTOR_CRC         0x04000000  // File has checksums for each sector.
                                                 // Ignored if file is not compressed or imploded.
-
-#define MPQ_FILE_COMPRESS_MASK      0x0000FF00  // Mask for a file being compressed
+#define MPQ_FILE_SIGNATURE          0x10000000  // Present on STANDARD.SNP\(signature). The only occurence ever observed
 #define MPQ_FILE_EXISTS             0x80000000  // Set if file exists, reset when the file was deleted
 #define MPQ_FILE_REPLACEEXISTING    0x80000000  // Replace when the file exist (SFileAddFile)
 
-#define MPQ_FILE_EXISTS_MASK        0xF00000FF  // These must be either zero or MPQ_FILE_EXISTS
+#define MPQ_FILE_COMPRESS_MASK      0x0000FF00  // Mask for a file being compressed
 
 #define MPQ_FILE_VALID_FLAGS     (MPQ_FILE_IMPLODE       |  \
                                   MPQ_FILE_COMPRESS      |  \
@@ -226,7 +227,15 @@ extern "C" {
                                   MPQ_FILE_SINGLE_UNIT   |  \
                                   MPQ_FILE_DELETE_MARKER |  \
                                   MPQ_FILE_SECTOR_CRC    |  \
+                                  MPQ_FILE_SIGNATURE     |  \
                                   MPQ_FILE_EXISTS)
+
+// We need to mask out the upper 4 bits of the block table index.
+// This is because it gets shifted out when calculating block table offset
+// BlockTableOffset = pHash->dwBlockIndex << 0x04
+// Malformed MPQ maps may contain block indexes like 0x40000001 or 0xF0000023
+#define BLOCK_INDEX_MASK          0x0FFFFFFF
+#define MPQ_BLOCK_INDEX(pHash) (pHash->dwBlockIndex & BLOCK_INDEX_MASK)
 
 // Compression types for multiple compressions
 #define MPQ_COMPRESSION_HUFFMANN          0x01  // Huffmann compression (used on WAVE files only)
@@ -432,6 +441,7 @@ typedef enum _SFileInfoClass
     SFileInfoFlags,                         // File flags from (DWORD)
     SFileInfoEncryptionKey,                 // File encryption key
     SFileInfoEncryptionKeyRaw,              // Unfixed value of the file key
+    SFileInfoCRC32,                         // CRC32 of the file
 } SFileInfoClass;
 
 //-----------------------------------------------------------------------------
@@ -607,12 +617,13 @@ typedef struct _TMPQHash
 
     // The platform the file is used for. 0 indicates the default platform.
     // No other values have been observed.
-    // Note: wPlatform is actually just BYTE, but since it has never been used, we don't care.
-    USHORT wPlatform;
+    BYTE   Platform;
+    BYTE   Reserved;
 
 #else
 
-    USHORT wPlatform;
+    BYTE   Platform;
+    BYTE   Reserved;
     USHORT lcLocale;
 
 #endif

@@ -1,0 +1,431 @@
+[MapInitializationEvent]
+title = "地图初始化"
+description = "地图初始化"
+comment = "该事件发生在读取地图时."
+category = TC_NOTHING
+[[.args]]
+type = nothing
+
+[YDWESyStemAnyUnitDamagedRegistTrigger]
+title = "任意单位伤害事件"
+description = "任意单位 接受伤害"
+comment = "若触发器动作里有对单位造成伤害动作，会引起死循环，最好加入条件判断或在伤害前关闭当前触发器。不推荐新手使用。"
+category = TC_YDET
+
+[YDWESyStemItemUnmovableRegistTrigger]
+title = "任意单位移动物品事件"
+description = "任意单位 移动物品栏里的物品"
+comment = "若触发器动作里有移动物品的动作，会引起死循环，最好将移动物品的动作放到别的触发器内或移动物品前关闭当前触发器。"
+category = TC_YDET
+
+[YDWESyStemItemCombineRegistTrigger]
+title = "任意单位合成物品事件"
+description = "任意单位 合成一件物品"
+comment = "用来响应物品合成系统，当有物品被合成时，可以用‘最后合成的物品’捕捉到；合成该物品的单位则可用‘触发单位’捕捉到"
+category = TC_YDET
+
+[YDWESyStemAbilityCastingOverRegistTrigger]
+title = "任意单位施放特殊技能结束"
+description = "任意单位施放特殊技能 ${特殊技能} 结束"
+comment = "用来响应跳跃、环绕、钩子等YDWE提供的特殊技能，可用‘最后结束施放特殊技能的单位’来捕捉施放技能单位"
+category = TC_YDET
+[[.args]]
+type = abilevent
+default = "abileventA"
+
+[TriggerRegisterUnitEvent]
+title = "指定单位事件"
+description = "${指定单位} ${事件}"
+comment = ""
+category = TC_UNIT
+[[.args]]
+type = unit
+[[.args]]
+type = unitevent
+default = "UnitEventDeath"
+
+[TriggerRegisterPlayerUnitEventSimple]
+title = "玩家单位事件"
+description = "${Player} 的单位 ${Event}"
+comment = ""
+category = TC_UNIT
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = playerunitevent
+default = "PlayerUnitEventDeath"
+
+[TriggerRegisterAnyUnitEventBJ]
+title = "任意单位事件"
+description = "任意单位 ${Event}"
+comment = ""
+category = TC_UNIT
+[[.args]]
+type = playerunitevent
+default = "PlayerUnitEventDeath"
+
+[TriggerRegisterEnterRectSimple]
+title = "单位进入矩形区域"
+description = "任意单位进入 ${矩形区域}"
+comment = "使用'事件响应 - 进入的单位'来响应进入该区域的单位. 事实上是创建不规则区域，并注册单位进入不规则区域事件,所以之后改动该矩形区域对事件不会产生任何影响."
+category = TC_UNIT
+[[.args]]
+type = rect
+
+[TriggerRegisterLeaveRectSimple]
+title = "单位离开矩形区域"
+description = "任意单位离开 ${矩形区域}"
+comment = "使用'事件响应 - 离开的单位'来响应离开该区域的单位. 事实上是创建不规则区域，并注册单位离开不规则区域事件,所以之后改动该矩形区域对事件不会产生任何影响."
+category = TC_UNIT
+[[.args]]
+type = rect
+
+[TriggerRegisterEnterRegionSimple]
+title = "单位进入不规则区域 [R]"
+description = "任意单位进入 ${区域}"
+comment = "使用'事件响应 - 进入的单位'来响应进入该区域的单位. 该事件需要在其他触发为其添加."
+category = TC_UNIT
+[[.args]]
+type = region
+
+[TriggerRegisterLeaveRegionSimple]
+title = "单位离开不规则区域 [R]"
+description = "任意单位离开 ${区域}"
+comment = "使用'事件响应 - 离开的单位'来响应离开该区域的单位. 该事件需要在其他触发为其添加."
+category = TC_UNIT
+[[.args]]
+type = region
+
+[TriggerRegisterEnterRegion]
+title = "单位进入不规则区域(指定条件) [R]"
+description = "单位进入 ${区域} 并满足 ${条件}"
+comment = "使用'事件响应 - 进入的单位'来响应进入该区域的单位. 该事件需要在其他触发为其添加."
+category = TC_UNIT
+[[.args]]
+type = region
+[[.args]]
+type = boolexpr
+default = "BoolExprNull"
+
+[TriggerRegisterLeaveRegion]
+title = "单位离开不规则区域(指定条件) [R]"
+description = "单位离开 ${区域} 并满足 ${条件}"
+comment = "使用'事件响应 - 离开的单位'来响应离开该区域的单位. 该事件需要在其他触发为其添加."
+category = TC_UNIT
+[[.args]]
+type = region
+[[.args]]
+type = boolexpr
+default = "BoolExprNull"
+
+[TriggerRegisterUnitInRangeSimple]
+title = "进入指定单位的范围"
+description = "任意单位进入 ${范围} 以 ${Unit} 为中心的范围内"
+comment = "通过 '事件响应 - 触发单位' 来获取进入范围的单位."
+category = TC_UNIT
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = unit
+
+[TriggerRegisterUnitLifeEvent]
+title = "生命值变化"
+description = "${指定单位} 的生命值变为 ${Operation} ${Value}"
+comment = "从不成立变为成立时触发该事件. 注意:该参照值在注册事件时即被确定为常量,是不会变动的."
+category = TC_UNIT
+[[.args]]
+type = unit
+[[.args]]
+type = limitop
+default = "LimitOpLessThan"
+[[.args]]
+type = real
+default = "50"
+
+[TriggerRegisterUnitManaEvent]
+title = "魔法值变化"
+description = "${指定单位} 的魔法值变为${Operation} ${Value}"
+comment = "从不成立变为成立时触发该事件. 注意:该参照值在注册事件时即被确定为常量,是不会变动的."
+category = TC_UNIT
+[[.args]]
+type = unit
+[[.args]]
+type = limitop
+default = "LimitOpLessThan"
+[[.args]]
+type = real
+default = "50"
+
+[TriggerRegisterDialogEventBJ]
+title = "对话框被点击"
+description = "${对话框} 被点击"
+comment = "通过 '事件响应 - 被点击的对话框' 操作事件中的对话框."
+script_name = TriggerRegisterDialogEvent
+category = TC_DIALOG
+[[.args]]
+type = dialog
+
+[TriggerRegisterDialogButtonEvent]
+title = "对话框按钮被点击 [R]"
+description = "${对话框按钮} 被点击"
+comment = "指定对话框按钮被点击,该事件一般需要在其他触发为其添加."
+category = TC_DIALOG
+[[.args]]
+type = button
+
+[TriggerRegisterDeathEvent]
+title = "可破坏物死亡"
+description = "${可破坏物} 死亡"
+comment = "使用'事件响应 - 死亡的可破坏物'来获取死亡物体."
+category = TC_DESTRUCT
+[[.args]]
+type = destructable
+
+[TriggerRegisterDestDeathInRegionEvent]
+title = "可破坏物在区域内死亡(矩形区域)"
+description = "可破坏物在 ${矩形区域} 内死亡"
+comment = "默认该事件只能监视最多64个可破坏物. 可以使用'设置 bj_destInRegionDiesCount'来设置该值. 不建议新手使用该触发."
+category = TC_DESTRUCT
+[[.args]]
+type = rect
+
+[TriggerRegisterTrackableHitEvent]
+title = "鼠标点击可追踪物 [R]"
+description = "鼠标点击 ${可追踪物}"
+comment = ""
+category = TC_TRACKABLE
+[[.args]]
+type = trackable
+
+[TriggerRegisterTrackableTrackEvent]
+title = "鼠标移动到追踪对象 [R]"
+description = "鼠标移动到 ${可追踪物}"
+comment = ""
+category = TC_TRACKABLE
+[[.args]]
+type = trackable
+
+[TriggerRegisterTimerEventSingle]
+title = "游戏计时(单次)"
+description = "当游戏逝去 ${Time} 秒"
+comment = "从事件开始的那一刻开始计时."
+category = TC_TIME
+[[.args]]
+type = real
+default = "5"
+min = 0
+
+[TriggerRegisterTimerEventPeriodic]
+title = "游戏计时(循环)"
+description = "每当游戏逝去 ${Time} 秒"
+comment = "从事件开始的那一刻开始计时,直到计时完毕后双重新开始计时."
+category = TC_TIME
+[[.args]]
+type = real
+default = "2"
+min = 0
+
+[TriggerRegisterTimerExpireEventBJ]
+title = "计时器到期"
+description = "${计时器} 到期"
+comment = "当计时器到0时触发该事件. 循环计时器可以多次触发该事件. 使用'事件响应 - 到期的计时器'来获取该计时器."
+script_name = TriggerRegisterTimerExpireEvent
+category = TC_TIME
+[[.args]]
+type = timer
+
+[TriggerRegisterPlayerChatEvent]
+title = "输入聊天信息"
+description = "${玩家} 输入 ${Text} ,信息过滤方式 ${Match Type}"
+comment = "事件ID是(096)"
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = string
+[[.args]]
+type = chatmatchtype
+default = "ChatMatchTypeExact"
+
+[TriggerRegisterPlayerEventEndCinematic]
+title = "按下Esc键"
+description = "${玩家} 按下Esc键(跳过电影)"
+comment = "该事件在玩家按下'Escape'键时触发(可能是玩家要跳过当前所播放的电影)."
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+
+[TriggerRegisterPlayerSelectionEventBJ]
+title = "选择单位事件"
+description = "${玩家} ${Selects/Deselects} 一个单位"
+comment = "通过'事件回应 - 触发单位' 操作被玩家选择的单位."
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = seldeseloption
+default = "SelDeselOptionSel"
+
+[TriggerRegisterPlayerKeyEventBJ]
+title = "键盘事件"
+description = "${玩家} ${Presses/Releases} ${Key} "
+comment = "目前游戏只支持'Up/Down/Left/Right'四个方向键."
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = keyeventtype
+default = "KeyEventTypeDepress"
+[[.args]]
+type = keyeventkey
+default = "KeyEventKeyLeft"
+
+[TriggerRegisterPlayerStateEvent]
+title = "属性事件"
+description = "${玩家} 的 ${Property} 属性 ${Operation} ${值}"
+comment = ""
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = playerstate
+default = "PlayerStateGold"
+[[.args]]
+type = limitop
+default = "LimitOpGreaterThanOrEqual"
+[[.args]]
+type = real
+default = "1000"
+
+[TriggerRegisterPlayerEventAllianceChanged]
+title = "联盟状态事件(任意状态)"
+description = "${玩家} 改变联盟状态设定"
+comment = ""
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+
+[TriggerRegisterPlayerAllianceChange]
+title = "联盟状态更改(指定项目)"
+description = "${Player} 更改 ${Alliance Type} 设置"
+comment = "当改变项目为【共享单位】时，(触发玩家)会不生效，此时不建议使用【任意玩家】事件。"
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = alliancetype
+default = "AllianceTypePassive"
+
+[TriggerRegisterPlayerEventVictory]
+title = "游戏胜利"
+description = "${玩家} 胜利后离开游戏"
+comment = ""
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+
+[TriggerRegisterPlayerEventDefeat]
+title = "游戏失败"
+description = "${玩家} 失败后离开游戏"
+comment = ""
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+
+[TriggerRegisterPlayerEventLeave]
+title = "离开游戏"
+description = "${玩家} 离开游戏"
+comment = "这个事件通过玩家离开游戏来开启."
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+
+[TriggerRegisterItemDeathEvent]
+title = "物品被破坏 [R]"
+description = "${物品} 被破坏"
+comment = ""
+script_name = TriggerRegisterDeathEvent
+category = TC_ITEM
+[[.args]]
+type = item
+
+[TriggerRegisterGameStateEventTimeOfDay]
+title = "游戏时间事件"
+description = "当游戏时间 ${Operation} ${时间}"
+comment = "游戏时间采用24小时制.早上从6:00开始,下午从18:00开始."
+category = TC_GAME
+[[.args]]
+type = limitop
+default = "LimitOpEqual"
+[[.args]]
+type = real
+default = "12"
+min = 0
+max = 24
+
+[TriggerRegisterVariableEvent]
+title = "实数变量事件"
+description = "${变量} 的值 ${Operation} ${值}"
+comment = "这个事件只适用于实数类型的变量."
+category = TC_GAME
+[[.args]]
+type = VarAsString_Real
+[[.args]]
+type = limitop
+default = "LimitOpEqual"
+[[.args]]
+type = real
+default = "0"
+
+[TriggerRegisterGameLoadedEventBJ]
+title = "游戏读档"
+description = "读取游戏存档"
+comment = "当游戏读取完毕时,该事件生效."
+category = TC_GAME
+[[.args]]
+type = nothing
+
+[TriggerRegisterGameSavedEventBJ]
+title = "游戏存档"
+description = "保存游戏存档"
+comment = "在切入保存游戏界面前,该事件生效."
+category = TC_GAME
+[[.args]]
+type = nothing
+
+[TriggerRegisterShowSkillEventBJ]
+title = "英雄技能按钮被点击"
+description = "英雄技能按钮被点击"
+comment = ""
+category = TC_GAME
+[[.args]]
+type = nothing
+
+[TriggerRegisterBuildSubmenuEventBJ]
+title = "建造建筑按钮被点击"
+description = "建造建筑按钮被点击"
+comment = ""
+category = TC_GAME
+[[.args]]
+type = nothing
+
+[TriggerRegisterGameEvent]
+title = "比赛游戏事件"
+description = "该游戏将在 ${Event Type} 后结束"
+comment = "该事件只出现在Battle.net的自动匹配游戏."
+category = TC_GAME
+[[.args]]
+type = gameevent
+default = "GameEventTourneyNow"

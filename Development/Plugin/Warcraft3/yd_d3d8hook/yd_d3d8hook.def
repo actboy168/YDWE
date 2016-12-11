@@ -1,0 +1,5 @@
+LIBRARY "yd_size_limit"
+EXPORTS
+	PluginName
+	Initialize
+

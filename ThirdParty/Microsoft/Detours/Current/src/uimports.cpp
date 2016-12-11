@@ -2,7 +2,7 @@
 //
 //  Add DLLs to a module import table (uimports.cpp of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_316.
+//  Microsoft Research Detours Package, Version 3.0 Build_339.
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -10,21 +10,31 @@
 //  (once for each supported module format).
 //
 
+#if DETOURS_VERSION != 30001
+#error detours.h version mismatch
+#endif
+
 // UpdateImports32 aka UpdateImports64
 static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
                               HMODULE hModule,
-                              LPCSTR *plpDlls,
+                              __in_ecount(nDlls) LPCSTR *plpDlls,
                               DWORD nDlls)
 {
     BOOL fSucceeded = FALSE;
+    DWORD cbNew = 0;
+
     BYTE * pbNew = NULL;
     DWORD i;
+    SIZE_T cbRead;
+    DWORD n;
 
     PBYTE pbModule = (PBYTE)hModule;
 
     IMAGE_DOS_HEADER idh;
     ZeroMemory(&idh, sizeof(idh));
-    if (!ReadProcessMemory(hProcess, pbModule, &idh, sizeof(idh), NULL)) {
+    if (!ReadProcessMemory(hProcess, pbModule, &idh, sizeof(idh), &cbRead)
+        || cbRead < sizeof(idh)) {
+
         DETOUR_TRACE(("ReadProcessMemory(idh@%p..%p) failed: %d\n",
                       pbModule, pbModule + sizeof(idh), GetLastError()));
 
@@ -39,7 +49,8 @@ static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
     IMAGE_NT_HEADERS_XX inh;
     ZeroMemory(&inh, sizeof(inh));
 
-    if (!ReadProcessMemory(hProcess, pbModule + idh.e_lfanew, &inh, sizeof(inh), NULL)) {
+    if (!ReadProcessMemory(hProcess, pbModule + idh.e_lfanew, &inh, sizeof(inh), &cbRead)
+        || cbRead < sizeof(inh)) {
         DETOUR_TRACE(("ReadProcessMemory(inh@%p..%p) failed: %d\n",
                       pbModule + idh.e_lfanew,
                       pbModule + idh.e_lfanew + sizeof(inh),
@@ -59,7 +70,6 @@ static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
     inh.BOUND_DIRECTORY.Size = 0;
 
     // Find the size of the mapped file.
-    DWORD dwFileSize = 0;
     DWORD dwSec = idh.e_lfanew +
         FIELD_OFFSET(IMAGE_NT_HEADERS_XX, OptionalHeader) +
         inh.FileHeader.SizeOfOptionalHeader;
@@ -69,7 +79,9 @@ static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
         ZeroMemory(&ish, sizeof(ish));
 
         if (!ReadProcessMemory(hProcess, pbModule + dwSec + sizeof(ish) * i, &ish,
-                               sizeof(ish), NULL)) {
+                               sizeof(ish), &cbRead)
+            || cbRead < sizeof(ish)) {
+
             DETOUR_TRACE(("ReadProcessMemory(ish@%p..%p) failed: %d\n",
                           pbModule + dwSec + sizeof(ish) * i,
                           pbModule + dwSec + sizeof(ish) * (i + 1),
@@ -87,37 +99,27 @@ static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
             inh.IAT_DIRECTORY.VirtualAddress = ish.VirtualAddress;
             inh.IAT_DIRECTORY.Size = ish.SizeOfRawData;
         }
-
-        // Find the end of the file...
-        if (dwFileSize < ish.PointerToRawData + ish.SizeOfRawData) {
-            dwFileSize = ish.PointerToRawData + ish.SizeOfRawData;
-        }
     }
-    DETOUR_TRACE(("dwFileSize = %08x\n", dwFileSize));
-
-#if IGNORE_CHECKSUMS
-    // Find the current checksum.
-    WORD wBefore = ComputeChkSum(hProcess, pbModule, &inh);
-    DETOUR_TRACE(("ChkSum: %04x + %08x => %08x\n", wBefore, dwFileSize, wBefore + dwFileSize));
-#endif
 
     DETOUR_TRACE(("     Imports: %p..%p\n",
                   (DWORD_PTR)pbModule + inh.IMPORT_DIRECTORY.VirtualAddress,
                   (DWORD_PTR)pbModule + inh.IMPORT_DIRECTORY.VirtualAddress +
                   inh.IMPORT_DIRECTORY.Size));
 
+    DWORD nOldDlls = inh.IMPORT_DIRECTORY.Size / sizeof(IMAGE_IMPORT_DESCRIPTOR);
     DWORD obRem = sizeof(IMAGE_IMPORT_DESCRIPTOR) * nDlls;
-    DWORD obTab = PadToDwordPtr(obRem +
-                                inh.IMPORT_DIRECTORY.Size +
-                                sizeof(IMAGE_IMPORT_DESCRIPTOR));
+    DWORD obOld = obRem + sizeof(IMAGE_IMPORT_DESCRIPTOR) * nOldDlls;
+    DWORD obTab = PadToDwordPtr(obOld);
     DWORD obDll = obTab + sizeof(DWORD_XX) * 4 * nDlls;
     DWORD obStr = obDll;
-    DWORD cbNew = obStr;
-    DWORD n;
+    cbNew = obStr;
     for (n = 0; n < nDlls; n++) {
         cbNew += PadToDword((DWORD)strlen(plpDlls[n]) + 1);
     }
 
+    _Analysis_assume_(cbNew >
+                      sizeof(IMAGE_IMPORT_DESCRIPTOR) * (nDlls + nOldDlls)
+                      + sizeof(DWORD_XX) * 4 * nDlls);
     pbNew = new BYTE [cbNew];
     if (pbNew == NULL) {
         DETOUR_TRACE(("new BYTE [cbNew] failed.\n"));
@@ -142,31 +144,26 @@ static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
         goto finish;
     }
 
+    PIMAGE_IMPORT_DESCRIPTOR piid = (PIMAGE_IMPORT_DESCRIPTOR)pbNew;
+    DWORD_XX *pt;
+
     DWORD obBase = (DWORD)(pbNewIid - pbModule);
     DWORD dwProtect = 0;
+
     if (inh.IMPORT_DIRECTORY.VirtualAddress != 0) {
         // Read the old import directory if it exists.
-#if 0
-        if (!VirtualProtectEx(hProcess,
-                              pbModule + inh.IMPORT_DIRECTORY.VirtualAddress,
-                              inh.IMPORT_DIRECTORY.Size, PAGE_EXECUTE_READWRITE, &dwProtect)) {
-            DETOUR_TRACE(("VirtualProtectEx(import) write failed: %d\n", GetLastError()));
-            goto finish;
-        }
-#endif
         DETOUR_TRACE(("IMPORT_DIRECTORY perms=%x\n", dwProtect));
 
         if (!ReadProcessMemory(hProcess,
                                pbModule + inh.IMPORT_DIRECTORY.VirtualAddress,
-                               pbNew + obRem,
-                               inh.IMPORT_DIRECTORY.Size, NULL)) {
+                               &piid[nDlls],
+                               nOldDlls * sizeof(IMAGE_IMPORT_DESCRIPTOR), &cbRead)
+            || cbRead < nOldDlls * sizeof(IMAGE_IMPORT_DESCRIPTOR)) {
+
             DETOUR_TRACE(("ReadProcessMemory(imports) failed: %d\n", GetLastError()));
             goto finish;
         }
     }
-
-    PIMAGE_IMPORT_DESCRIPTOR piid = (PIMAGE_IMPORT_DESCRIPTOR)pbNew;
-    DWORD_XX *pt;
 
     for (n = 0; n < nDlls; n++) {
         HRESULT hrRet = StringCchCopyA((char*)pbNew + obStr, cbNew - obStr, plpDlls[n]);
@@ -201,8 +198,10 @@ static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
 
         obStr += PadToDword((DWORD)strlen(plpDlls[n]) + 1);
     }
+    _Analysis_assume_(obStr <= cbNew);
 
-    for (i = 0; i < nDlls + (inh.IMPORT_DIRECTORY.Size / sizeof(*piid)); i++) {
+#if 0
+    for (i = 0; i < nDlls + nOldDlls; i++) {
         DETOUR_TRACE(("%8d. Look=%08x Time=%08x Fore=%08x Name=%08x Addr=%08x\n",
                       i,
                       piid[i].OriginalFirstThunk,
@@ -214,6 +213,7 @@ static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
             break;
         }
     }
+#endif
 
     if (!WriteProcessMemory(hProcess, pbNewIid, pbNew, obStr, NULL)) {
         DETOUR_TRACE(("WriteProcessMemory(iid) failed: %d\n", GetLastError()));
@@ -235,19 +235,14 @@ static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
     inh.IMPORT_DIRECTORY.Size = cbNew;
 
     /////////////////////// Update the NT header for the new import directory.
-    /////////////////////////////// Update the DOS header to fix the checksum.
     //
-    if (!VirtualProtectEx(hProcess, pbModule, inh.OptionalHeader.SizeOfHeaders,
-                          PAGE_EXECUTE_READWRITE, &dwProtect)) {
+    if (!DetourVirtualProtectSameExecuteEx(hProcess, pbModule, inh.OptionalHeader.SizeOfHeaders,
+                                           PAGE_EXECUTE_READWRITE, &dwProtect)) {
         DETOUR_TRACE(("VirtualProtectEx(inh) write failed: %d\n", GetLastError()));
         goto finish;
     }
 
-#if IGNORE_CHECKSUMS
-    idh.e_res[0] = 0;
-#else
     inh.OptionalHeader.CheckSum = 0;
-#endif // IGNORE_CHECKSUMS
 
     if (!WriteProcessMemory(hProcess, pbModule, &idh, sizeof(idh), NULL)) {
         DETOUR_TRACE(("WriteProcessMemory(idh) failed: %d\n", GetLastError()));
@@ -263,36 +258,12 @@ static BOOL UPDATE_IMPORTS_XX(HANDLE hProcess,
                   pbModule + idh.e_lfanew,
                   pbModule + idh.e_lfanew + sizeof(inh)));
 
-#if IGNORE_CHECKSUMS
-    WORD wDuring = ComputeChkSum(hProcess, pbModule, &inh);
-    DETOUR_TRACE(("ChkSum: %04x + %08x => %08x\n", wDuring, dwFileSize, wDuring + dwFileSize));
-
-    idh.e_res[0] = detour_sum_minus(idh.e_res[0], detour_sum_minus(wDuring, wBefore));
-
-    if (!WriteProcessMemory(hProcess, pbModule, &idh, sizeof(idh), NULL)) {
-        DETOUR_TRACE(("WriteProcessMemory(idh) failed: %d\n", GetLastError()));
-        goto finish;
-    }
-#endif // IGNORE_CHECKSUMS
-
     if (!VirtualProtectEx(hProcess, pbModule, inh.OptionalHeader.SizeOfHeaders,
                           dwProtect, &dwProtect)) {
         DETOUR_TRACE(("VirtualProtectEx(idh) restore failed: %d\n", GetLastError()));
         goto finish;
     }
 
-#if IGNORE_CHECKSUMS
-    WORD wAfter = ComputeChkSum(hProcess, pbModule, &inh);
-    DETOUR_TRACE(("ChkSum: %04x + %08x => %08x\n", wAfter, dwFileSize, wAfter + dwFileSize));
-    DETOUR_TRACE(("Before: %08x, After: %08x\n", wBefore + dwFileSize, wAfter + dwFileSize));
-
-    if (wBefore != wAfter) {
-        DETOUR_TRACE(("Restore of checksum failed %04x != %04x.\n", wBefore, wAfter));
-        goto finish;
-    }
-#endif // IGNORE_CHECKSUMS
-
     fSucceeded = TRUE;
     goto finish;
 }
-

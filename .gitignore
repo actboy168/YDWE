@@ -11,5 +11,8 @@
 *.opensdf
 *.ipch
 *.sln.cache
-Thumbs.db
+*.db
 *.DS_Store
+*.sqlite
+*.vs/
+OpenSource/Boost/

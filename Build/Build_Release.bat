@@ -1,1 +1,2 @@
-call "%~dp0Build.bat" Release "%~dp0build.log"
+call "%~dp0Build.bat" Release
+@PAUSE

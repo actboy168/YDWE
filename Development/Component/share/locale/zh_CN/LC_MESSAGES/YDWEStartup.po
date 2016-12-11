@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YDWEStartup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-10 10:33+0800\n"
+"PO-Revision-Date: 2016-11-10 10:33+0800\n"
+"Last-Translator: \n"
+"Language-Team: YDWE <417214250@qq.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: ../../../../../Core/YDWEStartup\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: DllMain.cpp:184
+msgid "Error YDWE directory."
+msgstr ""
+"YDWE路径含有非法的字符，这可能是由于你的操作系统区域并非简体中文而YDWE路径里"
+"却包含了简体中文导致的。如果你不明白上述原因，请将YDWE放到英文路径下，再次尝"
+"试。"
+
+#: DllMain.cpp:188
+msgid "Please choose your Warcraft 3 installation directory"
+msgstr "请选择你的《魔兽争霸III》目录"
+
+#: DllMain.cpp:202
+msgid "Cannot delete YDDllFixer.dll in war3 directory."
+msgstr "War3目录有有YDDllFixer.dll并且无法删除，这会导致YDWE无法启动。"
+
+#: DllMain.cpp:210
+msgid "Cannot delete YDDllFixer.dll in ydwe directory."
+msgstr "YDWE目录有有YDDllFixer.dll并且无法删除，这会导致YDWE无法启动。"
+
+#: DllMain.cpp:230
+msgid "Cannot find main executable file of world editor in YDWE/bin directory."
+msgstr "YDWE/bin文件夹下找不到WE的主程序，请确认YDWE文件的完整性。"
+
+#: DllMain.cpp:240
+msgid "Failed to launch world editor."
+msgstr "启动WE失败。"
+
+#: DllMain.cpp:257 DllMain.cpp:261 DllMain.cpp:265
+msgid "Error"
+msgstr "错误"
+
+#: DllMain.cpp:265
+msgid "Unknown error"
+msgstr "未知错误"
+
+#~ msgid "Cannot find YDWE directory."
+#~ msgstr "找不到YDWE的文件夹（卧槽，诡异啊，赶紧报告作者）"
+
+#~ msgid ""
+#~ "Cannot find some important files(war3.exe, game.dll, etc.) in your "
+#~ "Warcraft 3 directory. Please make sure you have copied the fixer to you "
+#~ "Warcraft 3 directory and run it."
+#~ msgstr ""
+#~ "你选择的魔兽的文件夹里面缺少几个重要的文件（war3.exe, game.dll等等），请确"
+#~ "认你选择的确实是魔兽的文件夹。"
+
+#~ msgid ""
+#~ "Cannot find Warcraft 3 installation path. Please check if your registry "
+#~ "contains enough information about your Warcraft 3. Use registry fixer if "
+#~ "needed."
+#~ msgstr "找不到魔兽安装路径，请检查注册表信息是否正确。"
+
+#~ msgid "Cannot find YDWEInject.dll in YDWE/bin directory."
+#~ msgstr ""
+#~ "YDWE/bin文件夹下面没有重要文件YDWEInject.dll，请确认你的YDWE文件的完整性。"

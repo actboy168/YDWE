@@ -1,0 +1,183 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YDWE Main Script\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-10 10:31+0800\n"
+"PO-Revision-Date: 2016-11-10 10:32+0800\n"
+"Last-Translator: \n"
+"Language-Team: YDWE <417214250@qq.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: ../../../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-SearchPath-0: plugin\n"
+"X-Poedit-SearchPath-1: share/script\n"
+
+#: share/script/compile/template.lua:105
+msgid "Unknown"
+msgstr "未知"
+
+#: share/script/compile/wave.lua:85
+#, lua-format
+msgid ""
+"Preprocessor failed with message:\n"
+"stdout:%s\n"
+"stderr: %s"
+msgstr ""
+"预处理出现错误，信息:\n"
+"stdout:%s\n"
+"stderr: %s"
+
+#: share/script/compile/wave.lua:87
+msgid "Cannot start preprocessor process."
+msgstr "无法启动预处理进程"
+
+#: share/script/ffi/gui.lua:36
+msgid "Error"
+msgstr "错误"
+
+#: share/script/ffi/gui.lua:40 share/script/ydwe_on_startup.lua:31
+msgid "YDWE"
+msgstr "YDWE"
+
+#: share/script/ydwe_on_menu.lua:52
+msgid "Export file"
+msgstr "导出文件"
+
+#: share/script/ydwe_on_menu.lua:53
+msgid ""
+"Please enter the file path to export. Currently you can export only one file "
+"each time"
+msgstr "请输入需要导出的文件路径。当前仅支持每次导出一个文件。"
+
+#: share/script/ydwe_on_menu.lua:55 share/script/ydwe_on_menu.lua:87
+#: share/script/ydwe_on_new_object_id.lua:84
+msgid "OK"
+msgstr "确定"
+
+#: share/script/ydwe_on_menu.lua:56 share/script/ydwe_on_menu.lua:88
+#: share/script/ydwe_on_new_object_id.lua:85
+msgid "Cancel"
+msgstr "取消"
+
+#: share/script/ydwe_on_menu.lua:67
+msgid "Save file"
+msgstr "保存文件"
+
+#: share/script/ydwe_on_menu.lua:74
+msgid "The file you have entered does not exist."
+msgstr "你输入的文件不存在"
+
+#: share/script/ydwe_on_menu.lua:84
+msgid "Lua Test"
+msgstr "执行Lua代码"
+
+#: share/script/ydwe_on_menu.lua:85
+msgid "Please enter the lua script to execute"
+msgstr "请输入需要执行的Lua脚本代码"
+
+#: share/script/ydwe_on_menu.lua:99
+msgid "Error occured when executing code: "
+msgstr "执行代码时发生错误:"
+
+#: share/script/ydwe_on_menu.lua:103
+msgid "There are syntax errors in your code."
+msgstr "你输入的代码中有语法错误。"
+
+#: share/script/ydwe_on_menu.lua:124
+msgid "&YDWE"
+msgstr "YDWE(&Y)"
+
+#: share/script/ydwe_on_menu.lua:125
+msgid "YDWE &Config"
+msgstr "YDWE配置(&C)"
+
+#: share/script/ydwe_on_menu.lua:126
+msgid "Launch &Warcraft3"
+msgstr "启动魔兽(&W)"
+
+#: share/script/ydwe_on_menu.lua:127
+msgid "Show las&t compile result"
+msgstr "显示上一次编译的结果(&T)"
+
+#: share/script/ydwe_on_menu.lua:128
+msgid "Show J&assHelper version"
+msgstr "显示JassHelper的版本(&A)"
+
+#: share/script/ydwe_on_menu.lua:129
+msgid "Show c&Jass version"
+msgstr "显示cJass的版本(&J)"
+
+#: share/script/ydwe_on_menu.lua:130
+msgid "Launch YDWE &official website"
+msgstr "打开YDWE官方网站(&O)"
+
+#: share/script/ydwe_on_menu.lua:131
+msgid "&Export WE file"
+msgstr "导出WE文件(&E)"
+
+#: share/script/ydwe_on_menu.lua:132
+msgid "&Lua Test"
+msgstr "执行Lua代码(&L)"
+
+#: share/script/ydwe_on_menu.lua:133
+msgid "Cre&dits"
+msgstr "致谢(&D)"
+
+#: share/script/ydwe_on_new_object_id.lua:81
+msgid "New Object Id"
+msgstr "新物体的ID"
+
+#: share/script/ydwe_on_new_object_id.lua:82
+msgid "Please input new object ID, or cancel to use the default one."
+msgstr "请输入新物体的ID值（4个字母数字）。或者选择取消使用默认值。"
+
+#: share/script/ydwe_on_new_object_id.lua:98
+msgid ""
+"You have entered an invalid ID. The ID must contain just 4 letters or "
+"digits. It cannot contain chars other than those in ASCII."
+msgstr ""
+"你输入的ID值不合法。ID必须包含恰好4个字符，不能是除了ASCII码以外的其他字符，"
+"特别是汉字。"
+
+#: share/script/ydwe_on_new_object_id.lua:102
+msgid "You have entered an invalid ID. This ID already exists."
+msgstr "你输入的ID已经存在。"
+
+#: share/script/ydwe_on_save.lua:198
+#, lua-format
+msgid "Whether to remove the read-only attribute from \"%s\"?"
+msgstr "地图 \"%s\" 带有只读属性，是否去掉地图中的只读属性?"
+
+#: share/script/ydwe_on_startup.lua:31 share/script/ydwe_on_startup.lua:53
+#, lua-format
+msgid ""
+"YDWE has detected that there is a directory named \"%s\" located in Warcraft "
+"3 installation directory. It may prevent YDWE from working. Do you want to "
+"delete it?"
+msgstr ""
+"YDWE检测到魔兽的安装路径下存在一个名为\"%s\"的文件夹。它可能影响YDWE运行，是"
+"否删除?"
+
+#: share/script/ydwe_on_startup.lua:123
+msgid ""
+"YDWE has detected that your game.dll and war3patch.mpq mismatch. It may be "
+"caused by the so called \"Warcraft Version Converter\". This situation will "
+"cause a failure on saving and testing maps. It is strongly recommended to "
+"use the offical patched provided by Blizzard."
+msgstr ""
+"检测到您的魔兽Game.dll和War3Patch.mpq的版本不一致，这可能是由版本转换器造成"
+"的，这会导致您无法保存和测试地图，强烈建议您使用正确的魔兽补丁还原您的魔兽。"
+
+#~ msgid "UTF-8 to &native"
+#~ msgstr "剪贴板UTF-8转码(&N)"
+
+#~ msgid "&Set file association"
+#~ msgstr "设置文件关联(&S)"
+
+#~ msgid "Preprocessor failed."
+#~ msgstr "预处理失败"

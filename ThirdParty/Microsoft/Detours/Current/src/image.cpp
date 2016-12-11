@@ -2,84 +2,104 @@
 //
 //  Image manipulation functions (image.cpp of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_316.
+//  Microsoft Research Detours Package, Version 3.0 Build_339.
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
 //  Used for for payloads, byways, and imports.
 //
 
+#if _MSC_VER >= 1900
+#pragma warning(push)
+#pragma warning(disable:4091) // empty typedef
+#endif
+#define _CRT_STDIO_ARBITRARY_WIDE_SPECIFIERS 1
+#define _ARM_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE 1
 #include <windows.h>
-#if (_MSC_VER < 1310)
-#else
+#if _MSC_VER >= 1310
+#pragma warning(push)
+#if _MSC_VER > 1400
+#pragma warning(disable:6102 6103) // /analyze warnings
+#endif
 #include <strsafe.h>
+#pragma warning(pop)
 #endif
 
 #if (_MSC_VER < 1299)
 #pragma warning(disable: 4710)
-#else
 #endif
 
-//#define DETOUR_DEBUG 1
+// #define DETOUR_DEBUG 1
 #define DETOURS_INTERNAL
 
 #include "detours.h"
+
+#if DETOURS_VERSION != 30001
+#error detours.h version mismatch
+#endif
+
+#if _MSC_VER >= 1900
+#pragma warning(pop)
+#endif
 
 namespace Detour
 {
 //////////////////////////////////////////////////////////////////////////////
 //
 #ifndef _STRSAFE_H_INCLUDED_
-static inline HRESULT StringCchLengthA(const char* psz, size_t cchMax, size_t* pcch)
+_Must_inspect_result_
+static inline HRESULT StringCchLengthA(
+    _In_reads_or_z_(cchMax) LPCSTR psz,
+    _In_
+    _In_range_(1, STRSAFE_MAX_CCH) size_t cchMax,
+    _Out_opt_
+    _Deref_out_range_(<, cchMax)
+    _Deref_out_range_(<=, _String_length_(psz))
+    _Out_ size_t* pcch)
 {
     HRESULT hr = S_OK;
     size_t cchMaxPrev = cchMax;
 
-    if (cchMax > 2147483647)
-    {
+    if (cchMax > 2147483647) {
         return ERROR_INVALID_PARAMETER;
     }
 
-    while (cchMax && (*psz != '\0'))
-    {
+    while (cchMax && (*psz != '\0')) {
         psz++;
         cchMax--;
     }
 
-    if (cchMax == 0)
-    {
+    if (cchMax == 0) {
         // the string is longer than cchMax
         hr = ERROR_INVALID_PARAMETER;
     }
 
-    if (SUCCEEDED(hr) && pcch)
-    {
+    if (SUCCEEDED(hr) && pcch) {
         *pcch = cchMaxPrev - cchMax;
     }
 
     return hr;
 }
 
-
-static inline HRESULT StringCchCopyA(char* pszDest, size_t cchDest, const char* pszSrc)
+_Must_inspect_result_
+static inline HRESULT StringCchCopyA(
+    _Out_writes_(cchDest) _Always_(_Post_z_) LPSTR pszDest,
+    _In_ size_t cchDest,
+    _In_ LPCSTR pszSrc)
 {
     HRESULT hr = S_OK;
 
-    if (cchDest == 0)
-    {
+    if (cchDest == 0) {
         // can not null terminate a zero-byte dest buffer
         hr = ERROR_INVALID_PARAMETER;
     }
-    else
-    {
-        while (cchDest && (*pszSrc != '\0'))
-        {
+    else {
+        while (cchDest && (*pszSrc != '\0')) {
             *pszDest++ = *pszSrc++;
             cchDest--;
         }
 
-        if (cchDest == 0)
-        {
+        if (cchDest == 0) {
             // we are going to truncate pszDest
             pszDest--;
             hr = ERROR_INVALID_PARAMETER;
@@ -91,20 +111,22 @@ static inline HRESULT StringCchCopyA(char* pszDest, size_t cchDest, const char* 
     return hr;
 }
 
-static inline HRESULT StringCchCatA(char* pszDest, size_t cchDest, const char* pszSrc)
+_Must_inspect_result_
+static inline HRESULT StringCchCatA(
+    _Out_writes_(cchDest) _Always_(_Post_z_) LPSTR pszDest,
+    _In_ size_t cchDest,
+    _In_ LPCSTR pszSrc)
 {
     HRESULT hr;
     size_t cchDestCurrent;
 
-    if (cchDest > 2147483647)
-    {
+    if (cchDest > 2147483647){
         return ERROR_INVALID_PARAMETER;
     }
 
     hr = StringCchLengthA(pszDest, cchDest, &cchDestCurrent);
 
-    if (SUCCEEDED(hr))
-    {
+    if (SUCCEEDED(hr) && cchDestCurrent < cchDest) {
         hr = StringCchCopyA(pszDest + cchDestCurrent,
                             cchDest - cchDestCurrent,
                             pszSrc);
@@ -139,6 +161,7 @@ protected:
     BOOL                    SizeTo(DWORD cbData);
 
 protected:
+    _Field_size_(m_cbAlloc)
     PBYTE                   m_pbData;
     DWORD                   m_cbData;
     DWORD                   m_cbAlloc;
@@ -157,6 +180,7 @@ public:
     CImageImportFile *      m_pNextFile;
     BOOL                    m_fByway;
 
+    _Field_size_(m_nImportNames)
     CImageImportName *      m_pImportNames;
     DWORD                   m_nImportNames;
 
@@ -164,8 +188,8 @@ public:
     DWORD                   m_rvaFirstThunk;
 
     DWORD                   m_nForwarderChain;
-    PCHAR                   m_pszOrig;
-    PCHAR                   m_pszName;
+    LPCSTR                  m_pszOrig;
+    LPCSTR                  m_pszName;
 };
 
 class CImageImportName
@@ -181,8 +205,8 @@ public:
     WORD        m_nHint;
     ULONG       m_nOrig;
     ULONG       m_nOrdinal;
-    PCHAR       m_pszOrig;
-    PCHAR       m_pszName;
+    LPCSTR      m_pszOrig;
+    LPCSTR      m_pszName;
 };
 
 class CImage
@@ -238,7 +262,7 @@ protected:
                                                DWORD *pnThunks,
                                                DWORD *pnChars);
 
-    CImageImportFile *      NewByway(__in_z PCHAR pszName);
+    CImageImportFile *      NewByway(_In_ LPCSTR pszName);
 
 private:
     DWORD                   m_dwValidSignature;
@@ -267,6 +291,7 @@ private:
     DWORD                   m_nOutputVirtSize;
     DWORD                   m_nOutputFileAddr;
 
+    _Field_size_(m_cbOutputBuffer)
     PBYTE                   m_pbOutputBuffer;
     DWORD                   m_cbOutputBuffer;
 
@@ -304,56 +329,39 @@ static inline DWORD QuadAlign(DWORD a)
     return Align(a, 8);
 }
 
-static PCHAR DuplicateString(__in_z PCHAR pszIn)
+static LPCSTR DuplicateString(_In_ LPCSTR pszIn)
 {
-    if (pszIn) {
-        UINT nIn = (UINT)strlen(pszIn);
-        PCHAR pszOut = new CHAR [nIn + 1];
-        if (pszOut == NULL) {
-            SetLastError(ERROR_OUTOFMEMORY);
-        }
-        else {
-            CopyMemory(pszOut, pszIn, nIn + 1);
-        }
-        return pszOut;
-    }
-    return NULL;
-}
-
-static PCHAR ReplaceString(__deref_out PCHAR *ppsz, __in_z PCHAR pszIn)
-{
-    if (ppsz == NULL) {
+    if (pszIn == NULL) {
         return NULL;
     }
 
-    UINT nIn;
-    if (*ppsz != NULL) {
-        if (strcmp(*ppsz, pszIn) == 0) {
-            return *ppsz;
-        }
-        nIn = (UINT)strlen(pszIn);
-
-        if (strlen(*ppsz) == nIn) {
-            CopyMemory(*ppsz, pszIn, nIn + 1);
-            return *ppsz;
-        }
-        else {
-            delete[] *ppsz;
-            *ppsz = NULL;
-        }
-    }
-    else {
-        nIn = (UINT)strlen(pszIn);
+    size_t cch;
+    HRESULT hr = StringCchLengthA(pszIn, 8192, &cch);
+    if (FAILED(hr)) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return NULL;
     }
 
-    *ppsz = new CHAR [nIn + 1];
-    if (*ppsz == NULL) {
+    PCHAR pszOut = new NOTHROW CHAR [cch + 1];
+    if (pszOut == NULL) {
         SetLastError(ERROR_OUTOFMEMORY);
+        return NULL;
     }
-    else {
-        CopyMemory(*ppsz, pszIn, nIn + 1);
+
+    hr = StringCchCopyA(pszOut, cch + 1, pszIn);
+    if (FAILED(hr)) {
+        delete[] pszOut;
+        return NULL;
     }
-    return *ppsz;
+
+    return pszOut;
+}
+
+static VOID ReleaseString(_In_opt_ LPCSTR psz)
+{
+    if (psz != NULL) {
+        delete[] psz;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -448,7 +456,7 @@ BOOL CImageData::SizeTo(DWORD cbData)
         return TRUE;
     }
 
-    PBYTE pbNew = new BYTE [cbData];
+    PBYTE pbNew = new NOTHROW BYTE [cbData];
     if (pbNew == NULL) {
         SetLastError(ERROR_OUTOFMEMORY);
         return FALSE;
@@ -698,7 +706,7 @@ private:
     DWORD           m_nCharVirtAddr;
 
 public:
-    CImageChars(CImage *pImage, DWORD nCharsMax, DWORD *pnAddr)
+    CImageChars(CImage *pImage, _In_ DWORD nCharsMax, _Out_ DWORD *pnAddr)
     {
         m_pImage = pImage;
         m_nChars = 0;
@@ -707,7 +715,7 @@ public:
         *pnAddr = m_nCharVirtAddr;
     }
 
-    PCHAR Allocate(__in_z PCHAR pszString, DWORD *pnVirtAddr)
+    LPCSTR Allocate(_In_ LPCSTR pszString, _Out_ DWORD *pnVirtAddr)
     {
         DWORD nLen = (DWORD)strlen(pszString) + 1;
         nLen += (nLen & 1);
@@ -718,7 +726,7 @@ public:
         }
 
         *pnVirtAddr = m_nCharVirtAddr;
-        HRESULT hrRet = StringCchCopyA(m_pChars,m_nCharsMax, pszString);
+        HRESULT hrRet = StringCchCopyA(m_pChars, m_nCharsMax, pszString);
 
         if (FAILED(hrRet)) {
             return NULL;
@@ -733,7 +741,7 @@ public:
         return pszString;
     }
 
-    PCHAR Allocate(PCHAR pszString, DWORD nHint, DWORD *pnVirtAddr)
+    LPCSTR Allocate(_In_ LPCSTR pszString, _In_ DWORD nHint, _Out_ DWORD *pnVirtAddr)
     {
         DWORD nLen = (DWORD)strlen(pszString) + 1 + sizeof(USHORT);
         nLen += (nLen & 1);
@@ -891,7 +899,7 @@ BOOL CImage::SizeOutputBuffer(DWORD cbData)
         }
         cbData = FileAlign(cbData);
 
-        PBYTE pOutput = new BYTE [cbData];
+        PBYTE pOutput = new NOTHROW BYTE [cbData];
         if (pOutput == NULL) {
             SetLastError(ERROR_OUTOFMEMORY);
             return FALSE;
@@ -1080,6 +1088,13 @@ BOOL CImage::Read(HANDLE hFile)
     m_nPrePE = 0;
     m_cbPrePE = QuadAlign(pDosHeader->e_lfanew);
 
+    if (m_nPeOffset > m_nFileSize ||
+        m_nPeOffset + sizeof(m_NtHeader) > m_nFileSize) {
+
+        SetLastError(ERROR_BAD_EXE_FORMAT);
+        return FALSE;
+    }
+
     CopyMemory(&m_DosHeader, m_pMap + m_nPrePE, sizeof(m_DosHeader));
 
     /////////////////////////////////////////////////////// Process PE Header.
@@ -1100,8 +1115,7 @@ BOOL CImage::Read(HANDLE hFile)
 
     ///////////////////////////////////////////////// Process Section Headers.
     //
-    if (m_NtHeader.FileHeader.NumberOfSections > (sizeof(m_SectionHeaders) /
-                                                  sizeof(m_SectionHeaders[0]))) {
+    if (m_NtHeader.FileHeader.NumberOfSections > ARRAYSIZE(m_SectionHeaders)) {
         SetLastError(ERROR_EXE_MARKED_INVALID);
         return FALSE;
     }
@@ -1114,6 +1128,8 @@ BOOL CImage::Read(HANDLE hFile)
     DWORD rvaOriginalImageDirectory = 0;
     DWORD rvaDetourBeg = 0;
     DWORD rvaDetourEnd = 0;
+
+    _Analysis_assume_(m_NtHeader.FileHeader.NumberOfSections <= ARRAYSIZE(m_SectionHeaders));
 
     for (n = 0; n < m_NtHeader.FileHeader.NumberOfSections; n++) {
         if (strcmp((PCHAR)m_SectionHeaders[n].Name, ".detour") == 0) {
@@ -1164,7 +1180,7 @@ BOOL CImage::Read(HANDLE hFile)
             goto fail;
         }
 
-        CImageImportFile *pImportFile = new CImageImportFile;
+        CImageImportFile *pImportFile = new NOTHROW CImageImportFile;
         if (pImportFile == NULL) {
             SetLastError(ERROR_OUTOFMEMORY);
             goto fail;
@@ -1224,7 +1240,7 @@ BOOL CImage::Read(HANDLE hFile)
 
         if (pAddrThunk && nNames) {
             pImportFile->m_nImportNames = nNames;
-            pImportFile->m_pImportNames = new CImageImportName [nNames];
+            pImportFile->m_pImportNames = new NOTHROW CImageImportName [nNames];
             if (pImportFile->m_pImportNames == NULL) {
                 SetLastError(ERROR_OUTOFMEMORY);
                 goto fail;
@@ -1334,7 +1350,7 @@ BOOL CImage::Read(HANDLE hFile)
         }
     }
 
-    m_pImageData = new CImageData(pbData, cbData);
+    m_pImageData = new NOTHROW CImageData(pbData, cbData);
     if (m_pImageData == NULL) {
         SetLastError(ERROR_OUTOFMEMORY);
     }
@@ -1344,7 +1360,7 @@ fail:
     return FALSE;
 }
 
-static inline BOOL strneq(__in_z PCHAR pszOne, __in_z PCHAR pszTwo)
+static inline BOOL strneq(_In_ LPCSTR pszOne, _In_ LPCSTR pszTwo)
 {
     if (pszOne == pszTwo) {
         return FALSE;
@@ -1409,9 +1425,9 @@ BOOL CImage::CheckImportsNeeded(DWORD *pnTables, DWORD *pnThunks, DWORD *pnChars
 
 //////////////////////////////////////////////////////////////////////////////
 //
-CImageImportFile * CImage::NewByway(__in_z PCHAR pszName)
+CImageImportFile * CImage::NewByway(_In_ LPCSTR pszName)
 {
-    CImageImportFile *pImportFile = new CImageImportFile;
+    CImageImportFile *pImportFile = new NOTHROW CImageImportFile;
     if (pImportFile == NULL) {
         SetLastError(ERROR_OUTOFMEMORY);
         goto fail;
@@ -1455,13 +1471,13 @@ BOOL CImage::EditImports(PVOID pContext,
 
     while ((pImportFile = *ppLastFile) != NULL) {
 
-        if (pfBywayCallback) {
-            PCHAR pszFile = NULL;
-            if (!(*pfBywayCallback)(pContext, pszFile, &pszFile)) {
+        if (pfBywayCallback != NULL) {
+            LPCSTR pszFile = NULL;
+            if (!(*pfBywayCallback)(pContext, NULL, &pszFile)) {
                 goto fail;
             }
 
-            if (pszFile) {
+            if (pszFile != NULL) {
                 // Insert a new Byway.
                 CImageImportFile *pByway = NewByway(pszFile);
                 if (pByway == NULL) {
@@ -1476,64 +1492,85 @@ BOOL CImage::EditImports(PVOID pContext,
         }
 
         if (pImportFile->m_fByway) {
-            if (pfBywayCallback) {
-                PCHAR pszFile = pImportFile->m_pszName;
+            if (pfBywayCallback != NULL) {
+                LPCSTR pszFile = NULL;
 
-                if (!(*pfBywayCallback)(pContext, pszFile, &pszFile)) {
+                if (!(*pfBywayCallback)(pContext, pImportFile->m_pszName, &pszFile)) {
                     goto fail;
                 }
 
-                if (pszFile) {                          // Replace? Byway
-                    if (ReplaceString(&pImportFile->m_pszName, pszFile) == NULL) {
-                        goto fail;
+                if (pszFile != NULL) {
+                    // Replace? Byway
+                    if (pszFile != pImportFile->m_pszName) {
+                        LPCSTR pszLast = pImportFile->m_pszName;
+                        pImportFile->m_pszName = DuplicateString(pszFile);
+                        ReleaseString(pszLast);
+
+                        if (pImportFile->m_pszName == NULL) {
+                            goto fail;
+                        }
                     }
                 }
                 else {                                  // Delete Byway
                     *ppLastFile = pImportFile->m_pNextFile;
                     pImportFile->m_pNextFile = NULL;
                     delete pImportFile;
-                    pImportFile = *ppLastFile;
                     m_nImportFiles--;
                     continue;                           // Retry after delete.
                 }
             }
         }
         else {
-            if (pfFileCallback) {
-                PCHAR pszFile = pImportFile->m_pszName;
+            if (pfFileCallback != NULL) {
+                LPCSTR pszFile = NULL;
 
-                if (!(*pfFileCallback)(pContext, pImportFile->m_pszOrig,
-                                       pszFile, &pszFile)) {
+                if (!(*pfFileCallback)(pContext,
+                                       pImportFile->m_pszOrig,
+                                       pImportFile->m_pszName,
+                                       &pszFile)) {
                     goto fail;
                 }
 
                 if (pszFile != NULL) {
-                    if (ReplaceString(&pImportFile->m_pszName, pszFile) == NULL) {
-                        goto fail;
+                    if (pszFile != pImportFile->m_pszName) {
+                        LPCSTR pszLast = pImportFile->m_pszName;
+                        pImportFile->m_pszName = DuplicateString(pszFile);
+                        ReleaseString(pszLast);
+
+                        if (pImportFile->m_pszName == NULL) {
+                            goto fail;
+                        }
                     }
                 }
             }
 
-            if (pfSymbolCallback) {
+            if (pfSymbolCallback != NULL) {
                 for (DWORD n = 0; n < pImportFile->m_nImportNames; n++) {
                     CImageImportName *pImportName = &pImportFile->m_pImportNames[n];
 
-                    PCHAR pszName = pImportName->m_pszName;
-                    ULONG nOrdinal = pImportName->m_nOrdinal;
+                    LPCSTR pszName = NULL;
+                    ULONG nOrdinal = 0;
                     if (!(*pfSymbolCallback)(pContext,
                                              pImportName->m_nOrig,
-                                             nOrdinal,
+                                             pImportName->m_nOrdinal,
                                              &nOrdinal,
                                              pImportName->m_pszOrig,
-                                             pszName,
+                                             pImportName->m_pszName,
                                              &pszName)) {
                         goto fail;
                     }
 
                     if (pszName != NULL) {
-                        pImportName->m_nOrdinal = 0;
-                        if (ReplaceString(&pImportName->m_pszName, pszName) == NULL) {
-                            goto fail;
+                        if (pszName != pImportName->m_pszName) {
+                            pImportName->m_nOrdinal = 0;
+
+                            LPCSTR pszLast = pImportName->m_pszName;
+                            pImportName->m_pszName = DuplicateString(pszName);
+                            ReleaseString(pszLast);
+
+                            if (pImportName->m_pszName == NULL) {
+                                goto fail;
+                            }
                         }
                     }
                     else if (nOrdinal != 0) {
@@ -1553,12 +1590,12 @@ BOOL CImage::EditImports(PVOID pContext,
     }
 
     for (;;) {
-        if (pfBywayCallback) {
-            PCHAR pszFile = NULL;
+        if (pfBywayCallback != NULL) {
+            LPCSTR pszFile = NULL;
             if (!(*pfBywayCallback)(pContext, NULL, &pszFile)) {
                 goto fail;
             }
-            if (pszFile) {
+            if (pszFile != NULL) {
                 // Insert a new Byway.
                 CImageImportFile *pByway = NewByway(pszFile);
                 if (pByway == NULL) {
@@ -1574,7 +1611,7 @@ BOOL CImage::EditImports(PVOID pContext,
         break;
     }
 
-    if (pfCommitCallback) {
+    if (pfCommitCallback != NULL) {
         if (!(*pfCommitCallback)(pContext)) {
             goto fail;
         }
@@ -1677,9 +1714,18 @@ BOOL CImage::Write(HANDLE hFile)
         m_nNextFileAddr = Max(m_SectionHeaders[n].PointerToRawData +
                               m_SectionHeaders[n].SizeOfRawData,
                               m_nNextFileAddr);
+#if 0
         m_nNextVirtAddr = Max(m_SectionHeaders[n].VirtualAddress +
                               m_SectionHeaders[n].Misc.VirtualSize,
                               m_nNextVirtAddr);
+#else
+        m_nNextVirtAddr = Max(m_SectionHeaders[n].VirtualAddress +
+                              (m_SectionHeaders[n].Misc.VirtualSize
+                               ? m_SectionHeaders[n].Misc.VirtualSize
+                               : SectionAlign(m_SectionHeaders[n].SizeOfRawData)),
+                              m_nNextVirtAddr);
+#endif
+
         m_nExtraOffset = Max(m_nNextFileAddr, m_nExtraOffset);
 
         if (!AlignFileData(hFile)) {
@@ -1688,6 +1734,12 @@ BOOL CImage::Write(HANDLE hFile)
     }
 
     if (fNeedDetourSection || !m_pImageData->IsEmpty()) {
+
+        if (m_NtHeader.FileHeader.NumberOfSections >= ARRAYSIZE(m_SectionHeaders)) {
+            SetLastError(ERROR_EXE_MARKED_INVALID);
+            return FALSE;
+        }
+
         ////////////////////////////////////////////// Insert .detour Section.
         //
         DWORD nSection = m_NtHeader.FileHeader.NumberOfSections++;
@@ -2009,12 +2061,12 @@ BOOL CImage::Write(HANDLE hFile)
 
 };                                                      // namespace Detour
 
-
 //////////////////////////////////////////////////////////////////////////////
 //
-PDETOUR_BINARY WINAPI DetourBinaryOpen(HANDLE hFile)
+PDETOUR_BINARY WINAPI DetourBinaryOpen(_In_ HANDLE hFile)
 {
-    Detour::CImage *pImage = new Detour::CImage;
+    Detour::CImage *pImage = new NOTHROW
+        Detour::CImage;
     if (pImage == NULL) {
         SetLastError(ERROR_OUTOFMEMORY);
         return FALSE;
@@ -2028,7 +2080,8 @@ PDETOUR_BINARY WINAPI DetourBinaryOpen(HANDLE hFile)
     return (PDETOUR_BINARY)pImage;
 }
 
-BOOL WINAPI DetourBinaryWrite(PDETOUR_BINARY pdi, HANDLE hFile)
+BOOL WINAPI DetourBinaryWrite(_In_ PDETOUR_BINARY pdi,
+                              _In_ HANDLE hFile)
 {
     Detour::CImage *pImage = Detour::CImage::IsValid(pdi);
     if (pImage == NULL) {
@@ -2038,12 +2091,15 @@ BOOL WINAPI DetourBinaryWrite(PDETOUR_BINARY pdi, HANDLE hFile)
     return pImage->Write(hFile);
 }
 
-PVOID WINAPI DetourBinaryEnumeratePayloads(PDETOUR_BINARY pdi,
-                                           GUID *pGuid,
-                                           DWORD *pcbData,
-                                           DWORD *pnIterator)
+_Writable_bytes_(*pcbData)
+_Readable_bytes_(*pcbData)
+_Success_(return != NULL)
+PVOID WINAPI DetourBinaryEnumeratePayloads(_In_ PDETOUR_BINARY pBinary,
+                                           _Out_opt_ GUID *pGuid,
+                                           _Out_ DWORD *pcbData,
+                                           _Inout_ DWORD *pnIterator)
 {
-    Detour::CImage *pImage = Detour::CImage::IsValid(pdi);
+    Detour::CImage *pImage = Detour::CImage::IsValid(pBinary);
     if (pImage == NULL) {
         return FALSE;
     }
@@ -2051,11 +2107,14 @@ PVOID WINAPI DetourBinaryEnumeratePayloads(PDETOUR_BINARY pdi,
     return pImage->DataEnum(pGuid, pcbData, pnIterator);
 }
 
-PVOID WINAPI DetourBinaryFindPayload(PDETOUR_BINARY pdi,
-                                     REFGUID rguid,
-                                     DWORD *pcbData)
+_Writable_bytes_(*pcbData)
+_Readable_bytes_(*pcbData)
+_Success_(return != NULL)
+PVOID WINAPI DetourBinaryFindPayload(_In_ PDETOUR_BINARY pBinary,
+                                     _In_ REFGUID rguid,
+                                     _Out_ DWORD *pcbData)
 {
-    Detour::CImage *pImage = Detour::CImage::IsValid(pdi);
+    Detour::CImage *pImage = Detour::CImage::IsValid(pBinary);
     if (pImage == NULL) {
         return FALSE;
     }
@@ -2063,23 +2122,23 @@ PVOID WINAPI DetourBinaryFindPayload(PDETOUR_BINARY pdi,
     return pImage->DataFind(rguid, pcbData);
 }
 
-PVOID WINAPI DetourBinarySetPayload(PDETOUR_BINARY pdi,
-                                    REFGUID rguid,
-                                    PVOID pvData,
-                                    DWORD cbData)
+PVOID WINAPI DetourBinarySetPayload(_In_ PDETOUR_BINARY pBinary,
+                                    _In_ REFGUID rguid,
+                                    _In_reads_opt_(cbData) PVOID pvData,
+                                    _In_ DWORD cbData)
 {
-    Detour::CImage *pImage = Detour::CImage::IsValid(pdi);
+    Detour::CImage *pImage = Detour::CImage::IsValid(pBinary);
     if (pImage == NULL) {
-        return FALSE;
+        return NULL;
     }
 
     return pImage->DataSet(rguid, (PBYTE)pvData, cbData);
 }
 
-BOOL WINAPI DetourBinaryDeletePayload(PDETOUR_BINARY pdi,
-                                      REFGUID rguid)
+BOOL WINAPI DetourBinaryDeletePayload(_In_ PDETOUR_BINARY pBinary,
+                                      _In_ REFGUID rguid)
 {
-    Detour::CImage *pImage = Detour::CImage::IsValid(pdi);
+    Detour::CImage *pImage = Detour::CImage::IsValid(pBinary);
     if (pImage == NULL) {
         return FALSE;
     }
@@ -2087,9 +2146,9 @@ BOOL WINAPI DetourBinaryDeletePayload(PDETOUR_BINARY pdi,
     return pImage->DataDelete(rguid);
 }
 
-BOOL WINAPI DetourBinaryPurgePayloads(PDETOUR_BINARY pdi)
+BOOL WINAPI DetourBinaryPurgePayloads(_In_ PDETOUR_BINARY pBinary)
 {
-    Detour::CImage *pImage = Detour::CImage::IsValid(pdi);
+    Detour::CImage *pImage = Detour::CImage::IsValid(pBinary);
     if (pImage == NULL) {
         return FALSE;
     }
@@ -2099,49 +2158,49 @@ BOOL WINAPI DetourBinaryPurgePayloads(PDETOUR_BINARY pdi)
 
 //////////////////////////////////////////////////////////////////////////////
 //
-static BOOL CALLBACK ResetBywayCallback(PVOID pContext,
-                                        __in_z PCHAR pszFile,
-                                        __deref PCHAR *ppszOutFile)
+static BOOL CALLBACK ResetBywayCallback(_In_opt_ PVOID pContext,
+                                        _In_opt_ LPCSTR pszFile,
+                                        _Outptr_result_maybenull_ LPCSTR *ppszOutFile)
 {
-    (void)pContext;
-    (void)pszFile;
+    UNREFERENCED_PARAMETER(pContext);
+    UNREFERENCED_PARAMETER(pszFile);
 
     *ppszOutFile = NULL;
     return TRUE;
 }
 
-static BOOL CALLBACK ResetFileCallback(PVOID pContext,
-                                       __in_z PCHAR pszOrigFile,
-                                       __in_z PCHAR pszFile,
-                                       __deref PCHAR *ppszOutFile)
+static BOOL CALLBACK ResetFileCallback(_In_opt_ PVOID pContext,
+                                       _In_ LPCSTR pszOrigFile,
+                                       _In_ LPCSTR pszFile,
+                                       _Outptr_result_maybenull_ LPCSTR *ppszOutFile)
 {
-    (void)pContext;
-    (void)pszFile;
+    UNREFERENCED_PARAMETER(pContext);
+    UNREFERENCED_PARAMETER(pszFile);
 
     *ppszOutFile = pszOrigFile;
     return TRUE;
 }
 
-static BOOL CALLBACK ResetSymbolCallback(PVOID pContext,
-                                         ULONG nOrigOrdinal,
-                                         ULONG nOrdinal,
-                                         ULONG *pnOutOrdinal,
-                                         __in_z PCHAR pszOrigSymbol,
-                                         __in_z PCHAR pszSymbol,
-                                         __deref PCHAR *ppszOutSymbol)
+static BOOL CALLBACK ResetSymbolCallback(_In_opt_ PVOID pContext,
+                                         _In_ ULONG nOrigOrdinal,
+                                         _In_ ULONG nOrdinal,
+                                         _Out_ ULONG *pnOutOrdinal,
+                                         _In_opt_ LPCSTR pszOrigSymbol,
+                                         _In_opt_ LPCSTR pszSymbol,
+                                         _Outptr_result_maybenull_ LPCSTR *ppszOutSymbol)
 {
-    (void)pContext;
-    (void)nOrdinal;
-    (void)pszSymbol;
+    UNREFERENCED_PARAMETER(pContext);
+    UNREFERENCED_PARAMETER(nOrdinal);
+    UNREFERENCED_PARAMETER(pszSymbol);
 
     *pnOutOrdinal = nOrigOrdinal;
     *ppszOutSymbol = pszOrigSymbol;
     return TRUE;
 }
 
-BOOL WINAPI DetourBinaryResetImports(PDETOUR_BINARY pdi)
+BOOL WINAPI DetourBinaryResetImports(_In_ PDETOUR_BINARY pBinary)
 {
-    Detour::CImage *pImage = Detour::CImage::IsValid(pdi);
+    Detour::CImage *pImage = Detour::CImage::IsValid(pBinary);
     if (pImage == NULL) {
         return FALSE;
     }
@@ -2155,28 +2214,28 @@ BOOL WINAPI DetourBinaryResetImports(PDETOUR_BINARY pdi)
 
 //////////////////////////////////////////////////////////////////////////////
 //
-BOOL WINAPI DetourBinaryEditImports(PDETOUR_BINARY pdi,
-                                    PVOID pContext,
-                                    PF_DETOUR_BINARY_BYWAY_CALLBACK pfBywayCallback,
-                                    PF_DETOUR_BINARY_FILE_CALLBACK pfFileCallback,
-                                    PF_DETOUR_BINARY_SYMBOL_CALLBACK pfSymbolCallback,
-                                    PF_DETOUR_BINARY_COMMIT_CALLBACK pfCommitCallback)
+BOOL WINAPI DetourBinaryEditImports(_In_ PDETOUR_BINARY pBinary,
+                                    _In_opt_ PVOID pContext,
+                                    _In_opt_ PF_DETOUR_BINARY_BYWAY_CALLBACK pfByway,
+                                    _In_opt_ PF_DETOUR_BINARY_FILE_CALLBACK pfFile,
+                                    _In_opt_ PF_DETOUR_BINARY_SYMBOL_CALLBACK pfSymbol,
+                                    _In_opt_ PF_DETOUR_BINARY_COMMIT_CALLBACK pfCommit)
 {
-    Detour::CImage *pImage = Detour::CImage::IsValid(pdi);
+    Detour::CImage *pImage = Detour::CImage::IsValid(pBinary);
     if (pImage == NULL) {
         return FALSE;
     }
 
     return pImage->EditImports(pContext,
-                               pfBywayCallback,
-                               pfFileCallback,
-                               pfSymbolCallback,
-                               pfCommitCallback);
+                               pfByway,
+                               pfFile,
+                               pfSymbol,
+                               pfCommit);
 }
 
-BOOL WINAPI DetourBinaryClose(PDETOUR_BINARY pdi)
+BOOL WINAPI DetourBinaryClose(_In_ PDETOUR_BINARY pBinary)
 {
-    Detour::CImage *pImage = Detour::CImage::IsValid(pdi);
+    Detour::CImage *pImage = Detour::CImage::IsValid(pBinary);
     if (pImage == NULL) {
         return FALSE;
     }

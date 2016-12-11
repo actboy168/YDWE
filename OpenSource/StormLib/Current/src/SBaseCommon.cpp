@@ -93,10 +93,60 @@ unsigned char AsciiToUpperTable_Slash[256] =
 };
 
 //-----------------------------------------------------------------------------
+// Safe string functions
+
+void StringCopyA(char * dest, const char * src, size_t nMaxChars)
+{
+    size_t nLength = strlen(src);
+
+    // Don't copy more than nMaxChars
+    nLength = STORMLIB_MIN(nLength, nMaxChars);
+    memcpy(dest, src, nLength);
+    dest[nLength] = 0;
+}
+
+void StringCatA(char * dest, const char * src, size_t nMaxChars)
+{
+    size_t nLength1 = strlen(dest);
+    size_t nLength2 = strlen(src);
+
+    // Don't copy more than nMaxChars
+    if(nLength1 < nMaxChars)
+    {
+        nLength2 = STORMLIB_MIN(nLength2, (nMaxChars - nLength1));
+        memcpy(dest + nLength1, src, nLength2);
+        dest[nLength1 + nLength2] = 0;
+    }
+}
+
+void StringCopyT(TCHAR * dest, const TCHAR * src, size_t nMaxChars)
+{
+    size_t nLength = _tcslen(src);
+
+    // Don't copy more than nMaxChars
+    nLength = STORMLIB_MIN(nLength, nMaxChars);
+    memcpy(dest, src, (nLength * sizeof(TCHAR)));
+    dest[nLength] = 0;
+}
+
+void StringCatT(TCHAR * dest, const TCHAR * src, size_t nMaxChars)
+{
+    size_t nLength1 = _tcslen(dest);
+    size_t nLength2 = _tcslen(src);
+
+    // Don't copy more than nMaxChars
+    if(nLength1 < nMaxChars)
+    {
+        nLength2 = STORMLIB_MIN(nLength2, (nMaxChars - nLength1));
+        memcpy(dest + nLength1, src, (nLength2 * sizeof(TCHAR)));
+        dest[nLength1 + nLength2] = 0;
+    }
+}
+
+//-----------------------------------------------------------------------------
 // Storm hashing functions
 
 #define STORM_BUFFER_SIZE       0x500
-
 #define HASH_INDEX_MASK(ha) (ha->pHeader->dwHashTableSize ? (ha->pHeader->dwHashTableSize - 1) : 0)
 
 static DWORD StormBuffer[STORM_BUFFER_SIZE];    // Buffer for the decryption engine
@@ -141,6 +191,22 @@ void InitializeMpqCryptography()
     }
 }
 
+//
+// Note: Implementation of this function in WorldEdit.exe and storm.dll
+// incorrectly treats the character as signed, which leads to the 
+// a buffer underflow if the character in the file name >= 0x80:
+// The following steps happen when *pbKey == 0xBF and dwHashType == 0x0000
+// (calculating hash index)
+//
+// 1) Result of AsciiToUpperTable_Slash[*pbKey++] is sign-extended to 0xffffffbf
+// 2) The "ch" is added to dwHashType (0xffffffbf + 0x0000 => 0xffffffbf)
+// 3) The result is used as index to the StormBuffer table,
+// thus dereferences a random value BEFORE the begin of StormBuffer.
+//
+// As result, MPQs containing files with non-ANSI characters will not work between
+// various game versions and localizations. Even WorldEdit, after importing a file
+// with Korean characters in the name, cannot open the file back.
+// 
 DWORD HashString(const char * szFileName, DWORD dwHashType)
 {
     LPBYTE pbKey   = (BYTE *)szFileName;
@@ -204,7 +270,22 @@ DWORD HashStringLower(const char * szFileName, DWORD dwHashType)
 //-----------------------------------------------------------------------------
 // Calculates the hash table size for a given amount of files
 
-DWORD GetHashTableSizeForFileCount(DWORD dwFileCount)
+// Returns the nearest higher power of two.
+// If the value is already a power of two, returns the same value
+DWORD GetNearestPowerOfTwo(DWORD dwFileCount)
+{
+    dwFileCount --;
+
+    dwFileCount |= dwFileCount >> 1;
+    dwFileCount |= dwFileCount >> 2;
+    dwFileCount |= dwFileCount >> 4;
+    dwFileCount |= dwFileCount >> 8;
+    dwFileCount |= dwFileCount >> 16;
+
+    return dwFileCount + 1;
+}
+/*
+DWORD GetNearestPowerOfTwo(DWORD dwFileCount)
 {
     DWORD dwPowerOfTwo = HASH_TABLE_SIZE_MIN;
 
@@ -218,7 +299,7 @@ DWORD GetHashTableSizeForFileCount(DWORD dwFileCount)
         dwPowerOfTwo <<= 1;
     return dwPowerOfTwo;
 }
-
+*/
 //-----------------------------------------------------------------------------
 // Calculates a Jenkin's Encrypting and decrypting MPQ file data
 
@@ -577,7 +658,7 @@ TMPQHash * GetFirstHashEntry(TMPQArchive * ha, const char * szFileName)
         TMPQHash * pHash = ha->pHashTable + dwIndex;
 
         // If the entry matches, we found it.
-        if(pHash->dwName1 == dwName1 && pHash->dwName2 == dwName2 && pHash->dwBlockIndex < ha->dwFileTableSize)
+        if(pHash->dwName1 == dwName1 && pHash->dwName2 == dwName2 && MPQ_BLOCK_INDEX(pHash) < ha->dwFileTableSize)
             return pHash;
 
         // If that hash entry is a free entry, it means we haven't found the file
@@ -612,7 +693,7 @@ TMPQHash * GetNextHashEntry(TMPQArchive * ha, TMPQHash * pFirstHash, TMPQHash * 
         pHash = ha->pHashTable + dwIndex;
 
         // If the entry matches, we found it.
-        if(pHash->dwName1 == dwName1 && pHash->dwName2 == dwName2 && pHash->dwBlockIndex < ha->dwFileTableSize)
+        if(pHash->dwName1 == dwName1 && pHash->dwName2 == dwName2 && MPQ_BLOCK_INDEX(pHash) < ha->dwFileTableSize)
             return pHash;
 
         // If that hash entry is a free entry, it means we haven't found the file
@@ -640,7 +721,7 @@ TMPQHash * AllocateHashEntry(
         pHash->dwName1      = dwName1;
         pHash->dwName2      = dwName2;
         pHash->lcLocale     = (USHORT)lcLocale;
-        pHash->wPlatform    = 0;
+        pHash->Platform     = 0;
         pHash->dwBlockIndex = (DWORD)(pFileEntry - ha->pFileTable);
     }
 

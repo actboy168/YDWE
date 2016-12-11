@@ -406,13 +406,13 @@ void THTreeItem::RemoveItem()
  
 THuffmannTree::THuffmannTree(bool bCompression)
 {
-    // TODO: Obsolete, delete this!!
-//  InitializeHTListHead(&ItemLinks);
     pFirst = pLast = LIST_HEAD();
- 
     MinValidValue = 1;
     ItemsUsed = 0;
- 
+    bIsCmp0 = 0;
+
+    memset(ItemsByByte, 0, sizeof(ItemsByByte));
+
     // If we are going to decompress data, we need to invalidate all item links
     // We do so by zeroing their ValidValue, so it becomes lower MinValidValue
     if(bCompression == false)
@@ -740,7 +740,8 @@ unsigned int THuffmannTree::DecodeOneByte(TInputStream * is)
         else
         {
             // Limit the quick-decompress item to lower amount of bits
-            ItemLinkIndex &= (0xFFFFFFFF >> (32 - BitCount));
+            // Coverity fix 84457: (x >> 32) has undefined behavior
+            ItemLinkIndex = (BitCount != 0) ? ItemLinkIndex & (0xFFFFFFFF >> (32 - BitCount)) : 0;
             while(ItemLinkIndex < LINK_ITEM_COUNT)
             {
                 // Fill the quick-decompress item

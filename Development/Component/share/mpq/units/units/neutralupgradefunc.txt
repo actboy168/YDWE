@@ -1,0 +1,8 @@
+// Non-race-specific upgrades
+// glyph of fortification
+[Rgfo]
+Art=ReplaceableTextures\CommandButtons\BTNGlyph.blp,ReplaceableTextures\CommandButtons\BTNGlyph.blp,ReplaceableTextures\CommandButtons\BTNGlyph.blp
+
+// glyph of ultravision
+[Rguv]
+Art=ReplaceableTextures\CommandButtons\BTNGlyph.blp
