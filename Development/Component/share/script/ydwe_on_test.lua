@@ -1,11 +1,11 @@
-require 'mpq_util'
+local stormlib = require 'ffi.stormlib'
 local w3iloader = require 'w3iloader'
 
 local function getplayernum(mappath)
 	local ok, result = pcall(function()
-		local map = mpq_util:stormlib(mappath, true)
+		local map = stormlib.open(mappath, true)
 		if map then
-			local w3i = map:load('war3map.w3i')
+			local w3i = map:load_file('war3map.w3i')
 			local tbl = w3iloader(w3i)
 			local n = 0
 			if tbl.map_flag & 32 == 0 then

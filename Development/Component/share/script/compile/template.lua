@@ -46,7 +46,8 @@ end
 local function map_file_import(path_in_archive)
 	return function (buf, is_path)		
 		if is_path then
-			__map_handle__:import(path_in_archive, __map_path__:parent_path() / buf)
+			log.trace("[stormlib]import file", path_in_archive)
+			__map_handle__:add_file(path_in_archive, __map_path__:parent_path() / buf)
 			return
 		else
 			local temp_file_path = fs.ydwe_path() / "logs" / "import" / path_in_archive
@@ -55,7 +56,8 @@ local function map_file_import(path_in_archive)
 				log.error("failed: save " .. temp_file_path:string())
 				return
 			end
-			__map_handle__:import(path_in_archive, temp_file_path)
+			log.trace("[stormlib]import file", path_in_archive)
+			__map_handle__:add_file(path_in_archive, temp_file_path)
 			return
 		end
 	end

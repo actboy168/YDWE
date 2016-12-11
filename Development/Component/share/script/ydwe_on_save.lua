@@ -60,7 +60,8 @@ local function compile_map(map_path, option)
 				compile_t.output = nil
 				compile_t.map_handle = map_handle
 				compile_t.inject_file = function (file_path, path_in_archive)
-					return map_handle:import(path_in_archive, file_path)
+					log.trace("[stormlib]import file", path_in_archive)
+					return map_handle:add_file(path_in_archive, file_path)
 				end
 				
 				-- 未启用用cJass

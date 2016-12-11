@@ -4,51 +4,6 @@ local stormlib = require 'ffi.stormlib'
 
 mpq_util = {}
 
-local stormlib_mt =  {}
-stormlib_mt.__index = {}
-
-function stormlib_mt.__index:import(path_in_archive, file_path)
-	log.trace("[stormlib]import file.")
-	local suc = self.handle:add_file(path_in_archive, file_path)
-	if suc then
-		log.trace("succeeded: import " .. path_in_archive)
-		return true
-	else
-		log.error("failed: import " .. file_path:string())
-		return false
-	end
-	return suc
-end
-
-function stormlib_mt.__index:extract(path_in_archive, file_path)
-	local dir = file_path:parent_path()
-	if not fs.exists(dir) then
-		fs.create_directories(dir)
-	end
-	return self.handle:extract(path_in_archive, file_path)
-end
-
-function stormlib_mt.__index:has(path_in_archive)
-	return self.handle:has_file(path_in_archive)
-end
-
-function stormlib_mt.__index:load(path_in_archive)
-	return self.handle:load_file(path_in_archive)
-end
-
-function stormlib_mt.__index:close()
-	self.handle:close()
-end
-
-function mpq_util:stormlib(path, readonly)
-	local obj = {}
-	obj.handle = stormlib.open(path, readonly)
-	if not obj.handle then
-		return nil
-	end
-	return setmetatable(obj, stormlib_mt)
-end
-
 -- 从地图中解压出文件来然后调用回调函数更新
 -- map_path - 地图路径，fs.path
 -- path_in_archive - 地图压缩包中的路径，string
@@ -61,12 +16,12 @@ function mpq_util:update_file(map_path, path_in_archive, process_function)
 	log.trace("mpq_util.update_file.")
 
 	-- 打开MPQ（地图）
-	local mpq = mpq_util:stormlib(map_path)
+	local mpq = stormlib.open(map_path)
 	if mpq then
 		-- 确定解压路径
 		local extract_file_path = fs.ydwe_path() / "logs" / "file.out"
 		-- 将文件解压
-		if mpq:has(path_in_archive) and
+		if mpq:has_file(path_in_archive) and
 			mpq:extract(path_in_archive, extract_file_path)
 		then
 			log.trace(path_in_archive .. " has been extracted from " .. map_path:filename():string())
@@ -78,7 +33,7 @@ function mpq_util:update_file(map_path, path_in_archive, process_function)
 				-- 如果函数成功完成任务
 				if out_file_path then
 					-- 替换文件
-					result = mpq:import(path_in_archive, out_file_path)
+					result = mpq:add_file(path_in_archive, out_file_path)
 				else
 					-- 出现了错误
 					log.error("Processor function cannot complete its task.")

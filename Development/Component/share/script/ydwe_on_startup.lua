@@ -1,6 +1,6 @@
 require "compile.inject_code"
 require "compile.native"
-require "mpq_util"
+local stormlib = require 'ffi.stormlib'
 
 -- 版本信息
 ydwe_version = sys.version {}
@@ -78,11 +78,11 @@ end
 local function get_war3_version_from_script()
 	local err = "Cannot extract file from warcraft"
 	local common_j_path = fs.ydwe_path() / "logs" / "common.j"
-	local mpq = mpq_util:stormlib(fs.war3_path() / 'War3Patch.mpq', true)
+	local mpq = stormlib.open(fs.war3_path() / 'War3Patch.mpq', true)
 	if mpq then
-		if mpq:has("common.j") then
+		if mpq:has_file("common.j") then
 			mpq:extract("common.j", common_j_path)
-		elseif mpq:has("scripts\\common.j") then
+		elseif mpq:has_file("scripts\\common.j") then
 			mpq:extract("scripts\\common.j", common_j_path)
 		else
 			return war3_version, err

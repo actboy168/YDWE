@@ -1,4 +1,4 @@
-require "mpq_util"
+local stormlib = require 'ffi.stormlib'
 
 local _mt = {}
 
@@ -12,7 +12,7 @@ function _mt:attach_archive(handle)
 end
 
 function _mt:open_archive(file)
-	local handle = mpq_util:stormlib(file, true)
+	local handle = stormlib.open(file, true)
 	if handle then
 		self:attach_archive(handle)
 	end
@@ -33,7 +33,7 @@ function _mt:has(filename)
 		end
 	end
 	for _, mpq in ipairs(self.mpqs) do
-		if mpq:has(filename) then
+		if mpq:has_file(filename) then
 			return true
 		end
 	end
@@ -51,7 +51,7 @@ function _mt:load(filename)
 		end
 	end
 	for _, mpq in ipairs(self.mpqs) do
-		local buf = mpq:load(filename)
+		local buf = mpq:load_file(filename)
 		if buf then
 			return buf
 		end

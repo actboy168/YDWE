@@ -54,6 +54,7 @@ ffi.cdef[[
     int SystemTimeToFileTime(const struct SYSTEMTIME* lpSystemTime, struct FILETIME*lpFileTime);
 ]]
 
+require 'filesystem'
 local uni = require 'ffi.unicode'
 local stormlib = ffi.load('stormlib')
 
@@ -147,6 +148,10 @@ end
 function archive:extract(name, path)
 	if self.handle == 0 then
 		return false
+	end
+	local dir = path:parent_path()
+	if not fs.exists(dir) then
+		fs.create_directories(dir)
 	end
 	local wpath = uni.u2w(path:string())
 	return stormlib.SFileExtractFile(self.handle, name, wpath,

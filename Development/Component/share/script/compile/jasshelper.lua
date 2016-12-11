@@ -3,6 +3,7 @@ require "filesystem"
 require "util"
 require "mpq_util"
 local storm = require 'ffi.storm'
+local stormlib = require 'ffi.stormlib'
 
 jasshelper = {}
 
@@ -40,21 +41,21 @@ function jasshelper.prepare_jass_libs(self, map_path, version)
 	local map_has_bj = false
 	
 	-- 从地图中解压缩两个重要文件到jasshelper目录（供语法检查用）
-	local mpq = mpq_util:stormlib(map_path, true)
+	local mpq = stormlib.open(map_path, true)
 	if mpq then
 		-- 如果地图中导入了，优先使用地图的
-		if mpq:has("common.j") then
+		if mpq:has_file("common.j") then
 			mpq:extract("common.j", common_j_path)
 			map_has_cj = true
-		elseif mpq:has("scripts\\common.j") then
+		elseif mpq:has_file("scripts\\common.j") then
 			mpq:extract("scripts\\common.j", common_j_path)
 			map_has_cj = true
 		end
 
-		if mpq:has("blizzard.j") then
+		if mpq:has_file("blizzard.j") then
 			mpq:extract("blizzard.j", blizzard_j_path)
 			map_has_bj = true
-		elseif mpq:has("scripts\\blizzard.j") then
+		elseif mpq:has_file("scripts\\blizzard.j") then
 			mpq:extract("scripts\\blizzard.j", blizzard_j_path)
 			map_has_bj = true
 		end
