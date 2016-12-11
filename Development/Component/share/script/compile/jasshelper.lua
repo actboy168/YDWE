@@ -13,7 +13,7 @@ jasshelper.exe_path = jasshelper.path / "jasshelper.exe"
 local config = [[
 [jasscompiler]
 %q
-"$COMMONJ $BLIZZARDJ $WAR3MAPJ"
+"%s$COMMONJ $BLIZZARDJ $WAR3MAPJ"
 ]]
 
 
@@ -167,9 +167,13 @@ function jasshelper.compile(self, map_path, option)
 	log.trace("JassHelper compilation start.")	
 	local common_j_path, blizzard_j_path = self:prepare_jass_libs(map_path, option.runtime_version)
 	if option.pjass == '1' then
-		io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-classic.exe'))
+		io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-classic.exe', ''))
 	else
-		io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-latest.exe'))
+		if option.runtime_version:is_new() then
+			io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-latest.exe', ''))
+		else
+			io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-latest.exe', '+rb '))
+		end
 	end
 	local res = self:do_compile(map_path, common_j_path, blizzard_j_path, option)
 	fs.remove(fs.ydwe_path() / 'jasshelper.conf')
