@@ -67,7 +67,7 @@ namespace base { namespace warcraft3 {
 			n = n * 10 + *(uint8_t*)ptr - '0';
 			ptr++;
 		}
-	
+		if (n == 52240) { n = version_127a; }
 		return n;
 	}
 
@@ -197,13 +197,9 @@ namespace base { namespace warcraft3 {
 		{
 			war3_searcher& s = get_war3_searcher();
 			uintptr_t ptr = 0;
-			if (s.get_version() >= version_127a)
+			if (s.get_version() > version_121b)
 			{
-				ptr = s.search_string("D:\\BuildServer\\3\\work-git\\warcraft3-repository\\Engine\\Source\\Tempest/tempest_thread.h");
-			}
-			else if (s.get_version() > version_121b)
-			{
-				ptr = s.search_string("e:\\Drive1\\temp\\buildwar3x\\Engine\\Source\\Tempest/tempest_thread.h");
+				ptr = s.search_string_part("Engine\\Source\\Tempest/tempest_thread.h");
 			}
 			else
 			{

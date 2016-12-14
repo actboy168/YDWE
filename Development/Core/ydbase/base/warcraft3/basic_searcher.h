@@ -14,6 +14,8 @@ namespace base { namespace warcraft3 {
 		uintptr_t search_string(const char* str, size_t length) const;
 		uintptr_t search_string(const char* str) const;
 		uintptr_t search_string_ptr(const char* str, size_t length) const;
+		uintptr_t search_string_part(const char* str) const;
+		uintptr_t search_string_ptr_part(const char* str, size_t length) const;
 		uintptr_t search_int(uint32_t value) const;
 		uintptr_t search_int(uint32_t value, uintptr_t beg) const;
 
