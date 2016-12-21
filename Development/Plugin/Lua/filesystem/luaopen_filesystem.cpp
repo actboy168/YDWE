@@ -277,7 +277,7 @@ namespace luafs {
 			FS_TRY;
 			const fs::path& self = path::to(L, 1);
 			const fs::path& rht = path::to(L, 2);
-			lua_pushboolean(L, self == rht);
+			lua_pushboolean(L, fs::equivalent(self, rht));
 			return 1;
 			FS_TRY_END;
 		}
@@ -392,6 +392,31 @@ namespace luafs {
 		FS_TRY_END;
 	}
 
+	static int absolute(lua_State* L)
+	{
+		FS_TRY;
+		const fs::path& p = path::to(L, 1);
+		if (lua_gettop(L) == 1) {
+			return path::constructor_(L, std::move(fs::absolute(p)));
+		}
+		const fs::path& base = path::to(L, 2);
+		return path::constructor_(L, std::move(fs::absolute(p, base)));
+		FS_TRY_END;
+	}
+
+	static int canonical(lua_State* L)
+	{
+		FS_TRY;
+		const fs::path& p = path::to(L, 1);;
+		if (lua_gettop(L) == 1) {
+			return path::constructor_(L, std::move(fs::canonical(p)));
+		}
+		const fs::path& base = path::to(L, 2);
+		return path::constructor_(L, std::move(fs::canonical(p, base)));
+		return 0;
+		FS_TRY_END;
+	}
+
 	static int get(lua_State* L)
 	{
 		FS_TRY;
@@ -449,6 +474,8 @@ int luaopen_filesystem(lua_State* L)
 		{ "remove_all", luafs::remove_all },
 		{ "current_path", luafs::current_path },
 		{ "copy_file", luafs::copy_file },
+		{ "absolute", luafs::absolute },
+		{ "canonical", luafs::canonical },
 		{ "get", luafs::get },
 		{ NULL, NULL }
 	};	
