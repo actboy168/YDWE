@@ -119,27 +119,27 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		case 4:
 			break;
 		case 2:
-			show_error(vm, "Hit opcode limit.");
+			show_error(vm, "超过了字节码限制");
 			break;
 		case 6:
 		{
 			jass::opcode* op = current_opcode(vm);
 			if (op->opcode_type == jass::OPTYPE_PUSH)
 			{
-				show_error(vm, base::format("Stack [0x02X] used without having been initialized.", op->r3));
+				show_error(vm, base::format("栈 [0x02X] 没有初始化就使用", op->r3));
 			}
 			else
 			{
 				assert(op->opcode_type == jass::OPTYPE_GETVAR);
-				show_error(vm, base::format("Variable '%s' used without having been initialized.", jass::from_stringid(op->arg)));
+				show_error(vm, base::format("变量 '%s' 没有初始化就使用", jass::from_stringid(op->arg)));
 			}
 			break;
 		}
 		case 7:
-			show_error(vm, "Division by zero.");
+			show_error(vm, "使用零作为除数");
 			break;
 		default:
-			show_error(vm, base::format("Unknown error code(%d).", result));
+			show_error(vm, base::format("未知错误 (%d).", result));
 			break;
 		}
 		return result;
