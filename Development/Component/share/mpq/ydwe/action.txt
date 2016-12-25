@@ -12611,6 +12611,7 @@ category = TC_GAME
 [[.args]]
 type = real
 default = "0"
+min = 0
 
 [SetTimeOfDayScalePercentBJ]
 title = "设置昼夜时间流逝速度"
@@ -12620,6 +12621,7 @@ category = TC_GAME
 [[.args]]
 type = real
 default = "0"
+min = 0
 
 [UseTimeOfDayBJ]
 title = "开启/关闭 昼夜交替"
