@@ -76,6 +76,33 @@ namespace base { namespace warcraft3 {
 		return search_string(str, strlen(str)+1);
 	}
 
+	uintptr_t basic_searcher::search_string_ptr_part(const char* str, size_t length) const
+	{
+		uintptr_t ptr = search_string_ptr(str, length);
+		if (!ptr)
+		{
+			return 0;
+		}
+		for (; *(unsigned char*)ptr; --ptr)
+		{
+		}
+		ptr++;
+		return ptr;
+	}
+
+	uintptr_t basic_searcher::search_string_part(const char* str) const
+	{
+		uintptr_t ptr = search_string_ptr(str, strlen(str) + 1);
+		if (!ptr)
+		{
+			return 0;
+		}
+		for (;*(unsigned char*)ptr;--ptr)
+		{ }
+		ptr++;
+		return detail::search_int(text_beg_, text_end_, (uint32_t)ptr);
+	}
+
 	uintptr_t basic_searcher::search_int_in_text(uint32_t value) const
 	{
 		return detail::search_int(text_beg_, text_end_, (uint32_t)value);

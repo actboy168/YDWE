@@ -23,7 +23,7 @@ namespace base { namespace warcraft3 { namespace message_dispatch {
 			ptr += 0x44;
 			return ptr;
 		}
-		uintptr_t ptr = s.search_string_ptr("d:\\buildserver\\3\\work-git\\warcraft3-repository\\war3\\source\\ui\\CMultiboard.h", sizeof("d:\\buildserver\\3\\work-git\\warcraft3-repository\\war3\\source\\ui\\CMultiboard.h"));
+		uintptr_t ptr = s.search_string_ptr_part("war3\\source\\ui\\CMultiboard.h", sizeof("war3\\source\\ui\\CMultiboard.h"));
 		ptr += 0x80;
 		return ptr;
 	}

@@ -99,7 +99,7 @@ function template:do_compile(op)
 		return f, err
 	end
 	
-	return pcall(f)
+	return xpcall(f, function(msg) return debug.traceback(msg) end)
 end
 
 function template:compile(op)
@@ -108,7 +108,12 @@ function template:compile(op)
 	local success, content = self:do_compile(op)
 	if not success then
 		if content then
-			gui.error_message(nil, __(content))
+			local msg = content
+			local pos = content:find 'stack traceback:'
+			if pos then
+				msg = msg:sub(1, pos-1)
+			end
+			gui.error_message(nil, __(msg))
 		else
 			gui.error_message(nil, _("Unknown"))
 		end			

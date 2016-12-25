@@ -35,6 +35,7 @@ return {
     ACfr = 0xD00D0,
     ACfs = 0xD0208,
     ACfu = 0xD0101,
+    AChv = 0xD0215,
     AChw = 0xD008D,
     AChx = 0xD0216,
     ACif = 0xD0062,

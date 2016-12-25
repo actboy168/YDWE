@@ -72,13 +72,14 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		return *(struct jass::opcode**)(vm + 0x20) - 1;
 	}
 
-	void show_pos(struct jass::opcode* current_op)
+	struct jass::opcode* show_pos(struct jass::opcode* current_op)
 	{
 		struct jass::opcode *op;
 		for (op = current_op; op->opcode_type != jass::OPTYPE_FUNCTION; --op)
 		{ }
 
 		std::cout << "    [" << jass::from_stringid(op->arg) << ":" << current_op  - op << "]" << std::endl;
+		return op;
 	}
 
 	void show_error(uint32_t vm, const std::string& msg)
@@ -95,7 +96,10 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		jass::opcode* op = current_opcode(vm);
 		while (op)
 		{
-			show_pos(op);
+			op = show_pos(op);
+			if (op->arg == 1) {
+				break;
+			}
 			stack = *(uintptr_t*)(stack + 0x04);
 			uintptr_t code = *(uintptr_t*)(*(uintptr_t*)(stack + 4 * *(uintptr_t*)(stack + 0x8C) + 0x08) + 0x20);
 			op = (jass::opcode*)(*(uintptr_t*)(*(uintptr_t*)(vm + 0x2858)) + code * 4);
@@ -115,27 +119,27 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		case 4:
 			break;
 		case 2:
-			show_error(vm, "Hit opcode limit.");
+			show_error(vm, "超过了字节码限制");
 			break;
 		case 6:
 		{
 			jass::opcode* op = current_opcode(vm);
 			if (op->opcode_type == jass::OPTYPE_PUSH)
 			{
-				show_error(vm, base::format("Stack [0x02X] used without having been initialized.", op->r3));
+				show_error(vm, base::format("栈 [0x02X] 没有初始化就使用", op->r3));
 			}
 			else
 			{
 				assert(op->opcode_type == jass::OPTYPE_GETVAR);
-				show_error(vm, base::format("Variable '%s' used without having been initialized.", jass::from_stringid(op->arg)));
+				show_error(vm, base::format("变量 '%s' 没有初始化就使用", jass::from_stringid(op->arg)));
 			}
 			break;
 		}
 		case 7:
-			show_error(vm, "Division by zero.");
+			show_error(vm, "使用零作为除数");
 			break;
 		default:
-			show_error(vm, base::format("Unknown error code(%d).", result));
+			show_error(vm, base::format("未知错误 (%d).", result));
 			break;
 		}
 		return result;
