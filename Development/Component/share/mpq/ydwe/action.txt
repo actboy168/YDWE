@@ -2854,6 +2854,7 @@ default = "0"
 [[.args]]
 type = real
 default = "0"
+min = 0
 
 [YDWEScriptActFaceReset]
 title = "重置单位身体朝向<Anitarf制作>"
