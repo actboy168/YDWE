@@ -2889,7 +2889,7 @@ category = TC_NOTHING
 returns = button
 [[.args]]
 type = dialog
-default = "_Defaults=GetClickedDialogBJ"
+default = "GetClickedDialogBJ"
 [[.args]]
 type = StringExt
 [[.args]]
@@ -6702,6 +6702,7 @@ category = TC_HASHTABLE
 returns = triggercondition
 [[.args]]
 type = hashtable
+default = "GetLastCreatedHashtableBJ"
 [[.args]]
 type = integer
 [[.args]]
