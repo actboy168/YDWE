@@ -2864,21 +2864,21 @@ type = real
 default = "0"
 [[.args]]
 type = real
-default = "0"
+default = "1024"
 min = 0.01
 [[.args]]
 type = real
-default = "0"
+default = "-96"
 [[.args]]
 type = real
-default = "1024"
+default = "96"
 [[.args]]
 type = integer
-default = "-96"
+default = "4000"
 min = 1
 [[.args]]
 type = integer
-default = "96"
+default = "100"
 min = 1
 
 [DialogAddButton]
