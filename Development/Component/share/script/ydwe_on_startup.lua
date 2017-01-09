@@ -6,7 +6,9 @@ local stormlib = require 'ffi.stormlib'
 ydwe_version = sys.version {}
 war3_version = sys.war3_version {}
 
-local function set_triggereditor_color()
+local function initialize_reg()
+	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\WorldEdit]]
+	reg["Has Been Run"] = { registry.REG_DWORD, 1 }
 	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\WorldEdit\Trigger Display Colors]]
 	reg["TC_YDHIDE"] = { registry.REG_DWORD, 0xffff0000 }
 	reg["TC_COMMENT"] = { registry.REG_DWORD, 0xff008000 }
@@ -185,7 +187,7 @@ function event.EVENT_WE_START(event_data)
 	inject_code:initialize()
 	native:initialize()
 		
-	set_triggereditor_color()
+	initialize_reg()
 
 	-- 显示感谢信息
 	show_credit()
