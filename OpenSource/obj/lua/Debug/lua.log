@@ -1,0 +1,4 @@
+﻿  lua.c
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(1190,5): warning MSB8012: TargetPath(E:\GitHub\YDWE\OpenSource\Lua\makefiles\..\lib\Debug\lua.exe) does not match the Linker's OutputFile property value (E:\GitHub\YDWE\OpenSource\Lua\bin\Win32\Debug\lua.exe). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+  lua.vcxproj -> E:\GitHub\YDWE\OpenSource\Lua\makefiles\..\lib\Debug\lua.exe
+  lua.vcxproj -> ..\lib\Debug\lua.pdb (Partial PDB)

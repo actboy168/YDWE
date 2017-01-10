@@ -23,10 +23,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\SlkLib;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Lua\Current\src;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\SlkLib;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Lua\src;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(OpenSource)\Lua\Current\lib\$(PlatformName)\$(ConfigurationName);$(OpenSource)\StormLib\Current\lib\$(PlatformName)\$(ConfigurationName);$(ThirdParty)\Microsoft\Detours\Current\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OpenSource)\Lua\lib\$(PlatformName)\$(ConfigurationName);$(OpenSource)\StormLib\Current\lib\$(PlatformName)\$(ConfigurationName);$(ThirdParty)\Microsoft\Detours\Current\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ResourceCompile>
       <IgnoreStandardIncludePath>
