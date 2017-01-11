@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="standard-library">
+      <UniqueIdentifier>{f34c2e27-2156-4494-8a4d-1dc1a9abb597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="auxiliary-library">
+      <UniqueIdentifier>{62ddc178-2948-47ea-9f84-9e33cb177c33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{e40bdbc7-044a-49fb-9541-72993f6cd3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\include">
+      <UniqueIdentifier>{2daad005-c4c8-42e6-b277-04e42095acca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\source">
+      <UniqueIdentifier>{a863b2c9-f0b9-4629-a09b-16910e89d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{f434a2c0-6756-4d82-b216-3d6c1bd69783}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\ldblib.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lcorolib.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lbaselib.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lbitlib.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lauxlib.c">
+      <Filter>auxiliary-library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\liolib.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lmathlib.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\loadlib.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\loslib.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lutf8lib.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lapi.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lcode.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lctype.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ldebug.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ldo.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ldump.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lfunc.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lgc.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\linit.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\llex.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lmem.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lobject.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lopcodes.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lparser.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lstate.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lstring.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lstrlib.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ltable.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ltm.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lundump.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lvm.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lzio.c">
+      <Filter>core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ltablib.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\lua.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\luaconf.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lualib.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lauxlib.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lapi.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lcode.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lctype.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ldebug.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ldo.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lfunc.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lgc.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\llex.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\llimits.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lmem.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lobject.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lopcodes.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lparser.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lprefix.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lstate.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lstring.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ltable.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ltm.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lundump.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lvm.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lzio.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

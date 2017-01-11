@@ -20,15 +20,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "minizip", "minizip\project\
 		{60F89955-91C6-3A36-8000-13C592FEC2DF} = {60F89955-91C6-3A36-8000-13C592FEC2DF}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luacore", "Lua\makefiles\luacore.vcxproj", "{B84F7231-16CE-41D8-8C08-7B523FF4225B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffi", "luaffi\makefiles\ffi.vcxproj", "{076A366B-6B75-4D35-A6A9-CA680F0771E3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B84F7231-16CE-41D8-8C08-7B523FF4225B} = {B84F7231-16CE-41D8-8C08-7B523FF4225B}
 		{76338556-5419-494A-A4C6-D79090629054} = {76338556-5419-494A-A4C6-D79090629054}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "Lua\makefiles\lua.vcxproj", "{76338556-5419-494A-A4C6-D79090629054}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "Lua\build\lua.vcxproj", "{76338556-5419-494A-A4C6-D79090629054}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luacore", "Lua\build\luacore.vcxproj", "{B84F7231-16CE-41D8-8C08-7B523FF4225B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,12 +83,6 @@ Global
 		{2C90064D-9DE4-45AE-8D09-E6F18BDCD4C1}.Release|Win32.ActiveCfg = Release|Win32
 		{2C90064D-9DE4-45AE-8D09-E6F18BDCD4C1}.Release|Win32.Build.0 = Release|Win32
 		{2C90064D-9DE4-45AE-8D09-E6F18BDCD4C1}.Release|x64.ActiveCfg = Release|Win32
-		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Debug|Win32.Build.0 = Debug|Win32
-		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Debug|x64.ActiveCfg = Debug|Win32
-		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Release|Win32.ActiveCfg = Release|Win32
-		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Release|Win32.Build.0 = Release|Win32
-		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Release|x64.ActiveCfg = Release|Win32
 		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Debug|Win32.ActiveCfg = Debug|Win32
 		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Debug|Win32.Build.0 = Debug|Win32
 		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Debug|x64.ActiveCfg = Debug|Win32
@@ -101,6 +95,12 @@ Global
 		{76338556-5419-494A-A4C6-D79090629054}.Release|Win32.ActiveCfg = Release|Win32
 		{76338556-5419-494A-A4C6-D79090629054}.Release|Win32.Build.0 = Release|Win32
 		{76338556-5419-494A-A4C6-D79090629054}.Release|x64.ActiveCfg = Release|Win32
+		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Debug|Win32.Build.0 = Debug|Win32
+		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Debug|x64.ActiveCfg = Debug|Win32
+		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Release|Win32.ActiveCfg = Release|Win32
+		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Release|Win32.Build.0 = Release|Win32
+		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
