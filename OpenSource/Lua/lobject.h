@@ -1,5 +1,5 @@
 /*
-** $Id: lobject.h,v 2.116 2015/11/03 18:33:10 roberto Exp $
+** $Id: lobject.h,v 2.116 2015/11/03 18:33:10 roberto Exp roberto $
 ** Type definitions for Lua objects
 ** See Copyright Notice in lua.h
 */
@@ -77,7 +77,6 @@ typedef struct GCObject GCObject;
 ** included in other objects)
 */
 #define CommonHeader	GCObject *next; lu_byte tt; lu_byte marked; lua_Integer gchash
-
 
 /*
 ** Common type has only the common header
@@ -407,7 +406,7 @@ typedef struct LocVar {
 typedef struct Proto {
   CommonHeader;
   lu_byte numparams;  /* number of fixed parameters */
-  lu_byte is_vararg;  /* 2: declared vararg; 1: uses vararg */
+  lu_byte is_vararg;
   lu_byte maxstacksize;  /* number of registers needed by this function */
   int sizeupvalues;  /* size of 'upvalues' */
   int sizek;  /* size of 'k' */
