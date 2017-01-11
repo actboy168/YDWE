@@ -151,8 +151,7 @@ if tonumber(msvc.version) < 150 then
 	copy_boost_dll('system')
 	copy_boost_dll('filesystem')
 end
-fs.copy_file(path.OpenSource / 'Lua' / 'current' / 'bin' / 'Win32' / configuration / 'luacore.dll', path.Result / 'bin' / 'luacore.dll', true)
-fs.copy_file(path.OpenSource / 'Lua' / 'current' / 'bin' / 'Win32' / configuration / 'luabind.dll', path.Result / 'bin' / 'luabind.dll', true)
+fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / configuration / 'luacore.dll', path.Result / 'bin' / 'luacore.dll', true)
 fs.copy_file(path.OpenSource / 'StormLib' / 'current' / 'bin' / 'Win32' / configuration / 'StormLib.dll', path.Result / 'bin' / 'StormLib.dll', true)
 fs.copy_file(path.OpenSource / 'minizip' / 'bin' / configuration / 'minizip.dll', path.Result / 'bin' / 'minizip.dll', true)
 fs.copy_file(path.OpenSource / 'luaffi' / 'bin' / configuration / 'ffi.dll', path.Result / 'bin' / 'modules' / 'ffi.dll', true)
