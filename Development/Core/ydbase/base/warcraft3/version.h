@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 namespace base { namespace warcraft3 {
 	enum VERSION
