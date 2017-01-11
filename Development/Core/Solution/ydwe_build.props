@@ -26,7 +26,7 @@
       <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\SlkLib;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Lua;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(OpenSource)Lua\build\bin\lib\$(ConfigurationName);$(OpenSource)StormLib\Current\lib\$(PlatformName)\$(ConfigurationName);$(ThirdParty)Microsoft\Detours\Current\lib\$(PlatformName)\$(ConfigurationName;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OpenSource)Lua\build\bin\$(ConfigurationName);$(OpenSource)StormLib\Current\lib\$(PlatformName)\$(ConfigurationName);$(ThirdParty)Microsoft\Detours\Current\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ResourceCompile>
       <IgnoreStandardIncludePath>

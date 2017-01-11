@@ -6,6 +6,7 @@
 #include <iterator>
 #include <stdexcept>
 #include <type_traits>
+#include <memory>
 
 namespace base {
 
