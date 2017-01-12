@@ -9,15 +9,7 @@
 #include "common.h"
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace package {
-#if !defined (LUA_PATH_SEP)
-#define LUA_PATH_SEP		";"
-#endif
-#if !defined (LUA_PATH_MARK)
-#define LUA_PATH_MARK		"?"
-#endif
-#if !defined (LUA_EXEC_DIR)
-#define LUA_EXEC_DIR		"!"
-#endif
+
 #if !defined (LUA_IGMARK)
 #define LUA_IGMARK		"-"
 #endif

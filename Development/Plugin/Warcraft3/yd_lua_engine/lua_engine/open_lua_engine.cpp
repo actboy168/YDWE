@@ -26,7 +26,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	void register_preload_lib(lua_State* L, const char *name, lua_CFunction f)
 	{
-		lua_getfield(L, LUA_REGISTRYINDEX, "_PRELOAD");
+		lua_getfield(L, LUA_REGISTRYINDEX, LUA_PRELOAD_TABLE);
 		lua_pushcclosure(L, f, 0);
 		lua_setfield(L, -2, name);
 		lua_pop(L, 1);

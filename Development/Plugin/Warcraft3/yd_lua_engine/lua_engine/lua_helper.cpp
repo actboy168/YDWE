@@ -53,7 +53,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	int __cdecl searcher_preload(lua_State* L) 
 	{
 		const char *name = luaL_checkstring(L, 1);
-		lua_getfield(L, LUA_REGISTRYINDEX, "_PRELOAD");
+		lua_getfield(L, LUA_REGISTRYINDEX, LUA_PRELOAD_TABLE);
 		lua_getfield(L, -1, name);
 		if (lua_isnil(L, -1))  /* not found? */
 			lua_pushfstring(L, "\n\tno field package.preload['%s']", name);
@@ -62,7 +62,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	bool clear_searchers_table(lua_State* L)
 	{
-		lua_getfield(L, LUA_REGISTRYINDEX, "_LOADED");
+		lua_getfield(L, LUA_REGISTRYINDEX, LUA_LOADED_TABLE);
 		lua_getfield(L, -1, LUA_LOADLIBNAME);
 		if (lua_istable(L, -1))
 		{
@@ -80,7 +80,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	bool insert_searchers_table(lua_State* L)
 	{
-		lua_getfield(L, LUA_REGISTRYINDEX, "_LOADED");
+		lua_getfield(L, LUA_REGISTRYINDEX, LUA_LOADED_TABLE);
 		lua_getfield(L, -1, LUA_LOADLIBNAME);
 		if (!lua_istable(L, -1))
 		{
