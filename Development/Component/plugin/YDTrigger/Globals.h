@@ -1,7 +1,7 @@
 # /*
-#  *  YDTriggerר�ú�
+#  *  YDTrigger专用宏
 #  *  
-#  *  ȫ�ֱ�������
+#  *  全局变量部分
 #  *
 #  *  By actboy168
 #  *

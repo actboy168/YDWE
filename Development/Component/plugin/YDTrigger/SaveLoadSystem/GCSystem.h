@@ -1,5 +1,5 @@
 # /*
-#  *  ÒıÈëYDTrigger´æ´¢ÏµÍ³ (ĞèÒªVJassµÄÖ§³Ö)
+#  *  å¼•å…¥YDTriggerå­˜å‚¨ç³»ç»Ÿ (éœ€è¦VJassçš„æ”¯æŒ)
 #  *  
 #  *  By actboy168
 #  *
@@ -17,7 +17,7 @@ library YDTriggerSaveLoadSystem initializer Init
 globals
 #    ifndef YDWE_GAMECACHE_DEFVAR
 #    define YDWE_GAMECACHE_DEFVAR
-       gamecache YDTRIGGER_GAMECACHE 
+       gamecache YDHASH_HANDLE 
 #    endif
 endglobals
 #
@@ -26,7 +26,7 @@ endglobals
 	private function Init takes nothing returns nothing
 #  	 ifndef YDWE_GAMECACHE_INITVAR
 #  	 define YDWE_GAMECACHE_INITVAR
-		set YDTRIGGER_GAMECACHE = InitGameCache("YDWE.wav")
+		set YDHASH_HANDLE = InitGameCache("YDWE.wav")
 #    endif
 	endfunction
 #

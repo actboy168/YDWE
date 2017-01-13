@@ -240,7 +240,7 @@ void _fastcall
 		PUT_CONST("set " YDL_TRIGGER " = ", 0);
 		PUT_VAR(This, 0);
 		PUT_CONST("", 1);
-		PUT_CONST("set " YDL_TRIGGERSTEP " = YDTriggerH2I(" YDL_TRIGGER ")*(YDTriggerGetEx(integer, YDTriggerH2I(" YDL_TRIGGER "), 0xCFDE6C76) + 3)", 1);
+		PUT_CONST("YDLocalExecuteTrigger()", 1);
 		CC_PutEnd();
 		locvar::params(This, OutClass, name, 0, YDL_TRIGGER, CC_GUIID_YDWEExecuteTriggerMultiple);
 		CC_PutBegin();

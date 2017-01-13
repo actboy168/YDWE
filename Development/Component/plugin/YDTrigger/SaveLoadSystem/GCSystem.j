@@ -11,10 +11,10 @@ function YDTRIGGER_S2I takes string s returns  integer
   return 0
 endfunction
      
-#define YDTRIGGER_GET_PROC(type)                                               YDNL \
-  function YDTRIGGER_GET_##type takes string table, string key returns type YDNL \
-    return GetStoredInteger(YDTRIGGER_GAMECACHE, table, key)                   YDNL \
-    return null                                                                YDNL \
+#define YDTRIGGER_GET_PROC(type)                                                          YDNL \
+  function YDTRIGGER_GET_##type takes gamecache gc, string table, string key returns type YDNL \
+    return GetStoredInteger(gc, table, key)                                               YDNL \
+    return null                                                                           YDNL \
   endfunction
      
 YDTRIGGER_GET_PROC(timer)

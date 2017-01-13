@@ -1,7 +1,7 @@
 # /*
-#  *  YDTrigger×¨ÓÃ´æ´¢ÏµÍ³
+#  *  YDTriggerä¸“ç”¨å­˜å‚¨ç³»ç»Ÿ
 #  *  
-#  *  set ºÍ get µÄÊµÏÖ
+#  *  set å’Œ get çš„å®žçŽ°
 #  *
 #  *  By actboy168
 #  *
@@ -13,31 +13,31 @@
 #
 # /*
 #  *  
-#  *  GameCache°æ Common
+#  *  GameCacheç‰ˆ Common
 #  *
 #  */
 #
-#  define YDTRIGGER_GAMECACHE                           YDGC
+#  define YDHASH_HANDLE                           YDGC
 #
 # /*
 #  *  
-#  *  GameCache°æ Clear
+#  *  GameCacheç‰ˆ Clear
 #  *
 #  */
 #
-#  define YDTriggerClearAll()                           FlushGameCache(YDTRIGGER_GAMECACHE)
-#  define YDTriggerClearTable(table)                    FlushStoredMission(YDTRIGGER_GAMECACHE, I2S(table))
-#  define YDTriggerClearTableByString(table)            FlushStoredMission(YDTRIGGER_GAMECACHE, table)
+#  define YDHashClearAll(handle)                             FlushGameCache(handle)
+#  define YDHashClearTable(handle, table)                    FlushStoredMission(handle, I2S(table))
+#  define YDHashClearTableByString(handle, table)            FlushStoredMission(handle, table)
 #
 # /*
 #  *  
-#  *  GameCache°æ Set
+#  *  GameCacheç‰ˆ Set
 #  *
 #  */
 #
-#  define YDTriggerSet(type, table, key, value)         YDTRIGGER_SET_##type##(I2S(table), I2S(key), value)
-#  define YDTriggerSetEx(type, table, key, value)       YDTRIGGER_SET_##type##(I2S(table), #key, value)
-#  define YDTriggerSetByString(type, table, key, value) YDTRIGGER_SET_##type##(table, key, value) 
+#  define YDHashSetEx(handle, type, table, key, value)       YDTRIGGER_SET_##type##(handle, I2S(table), I2S(key), value)
+#  define YDHashSet(handle, type, table, key, value)         YDTRIGGER_SET_##type##(handle, I2S(table), #key, value)
+#  define YDHashSetByString(handle, type, table, key, value) YDTRIGGER_SET_##type##(handle, table, key, value) 
 #                                                                         
 #  define YDTRIGGER_SET_integer                         YDTRIGGER_GCSET_INTEGER
 #  define YDTRIGGER_SET_real                            YDTRIGGER_GCSET_REAL
@@ -81,21 +81,21 @@
 #  define YDTRIGGER_SET_imagefile                       YDTRIGGER_GCSET_STRING
 #  define YDTRIGGER_SET_modelfile                       YDTRIGGER_GCSET_STRING
 #
-#  define YDTRIGGER_GCSET_HANDLE(table, key, value)     StoreInteger(YDTRIGGER_GAMECACHE, table, key, YDTRIGGER_H2I(value))
-#  define YDTRIGGER_GCSET_INTEGER(table, key, value)    StoreInteger(YDTRIGGER_GAMECACHE, table, key, value)
-#  define YDTRIGGER_GCSET_REAL(table, key, value)       StoreReal(YDTRIGGER_GAMECACHE, table, key, value)
-#  define YDTRIGGER_GCSET_BOOLEAN(table, key, value)    StoreBoolean(YDTRIGGER_GAMECACHE, table, key, value)
-#  define YDTRIGGER_GCSET_STRING(table, key, value)     StoreString(YDTRIGGER_GAMECACHE, table, key, value)
+#  define YDTRIGGER_GCSET_HANDLE(handle, table, key, value)  StoreInteger(handle, table, key, YDTRIGGER_H2I(value))
+#  define YDTRIGGER_GCSET_INTEGER(handle, table, key, value) StoreInteger(handle, table, key, value)
+#  define YDTRIGGER_GCSET_REAL(handle, table, key, value)    StoreReal(handle, table, key, value)
+#  define YDTRIGGER_GCSET_BOOLEAN(handle, table, key, value) StoreBoolean(handle, table, key, value)
+#  define YDTRIGGER_GCSET_STRING(handle, table, key, value)  StoreString(handle, table, key, value)
 #
 # /*
 #  *  
-#  *  GameCache°æ Get
+#  *  GameCacheç‰ˆ Get
 #  *
 #  */
 #
-#  define YDTriggerGet(type, table, key)                YDTRIGGER_GET_##type##(I2S(table), I2S(key)) 
-#  define YDTriggerGetEx(type, table, key)              YDTRIGGER_GET_##type##(I2S(table), #key) 
-#  define YDTriggerGetByString(type, table, key)        YDTRIGGER_GET_##type##(table, key) 
+#  define YDTriggerGet(handle, type, table, key)         YDTRIGGER_GET_##type##(handle, I2S(table), I2S(key)) 
+#  define YDTriggerGetEx(handle, type, table, key)       YDTRIGGER_GET_##type##(handle, I2S(table), #key) 
+#  define YDTriggerGetByString(handle, type, table, key) YDTRIGGER_GET_##type##(handle, table, key) 
 #
 #  define YDTRIGGER_GET_integer                         YDTRIGGER_GCGET_INTEGER
 #  define YDTRIGGER_GET_real                            YDTRIGGER_GCGET_REAL
@@ -110,9 +110,9 @@
 #  define YDTRIGGER_GET_imagefile                       YDTRIGGER_GCGET_STRING
 #  define YDTRIGGER_GET_modelfile                       YDTRIGGER_GCGET_STRING
 #
-#  define YDTRIGGER_GCGET_INTEGER(table, key)           GetStoredInteger(YDTRIGGER_GAMECACHE, table, key)
-#  define YDTRIGGER_GCGET_REAL(table, key)              GetStoredReal(YDTRIGGER_GAMECACHE, table, key)
-#  define YDTRIGGER_GCGET_BOOLEAN(table, key)           GetStoredBoolean(YDTRIGGER_GAMECACHE, table, key)
-#  define YDTRIGGER_GCGET_STRING(table, key)            GetStoredString(YDTRIGGER_GAMECACHE, table, key)
+#  define YDTRIGGER_GCGET_INTEGER(handle, table, key)   GetStoredInteger(handle, table, key)
+#  define YDTRIGGER_GCGET_REAL(handle, table, key)      GetStoredReal(handle, table, key)
+#  define YDTRIGGER_GCGET_BOOLEAN(handle, table, key)   GetStoredBoolean(handle, table, key)
+#  define YDTRIGGER_GCGET_STRING(handle, table, key)    GetStoredString(handle, table, key)
 #
 #endif

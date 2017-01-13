@@ -1,7 +1,7 @@
 # /*
-#  *  YDTrigger×¨ÓÃ´æ´¢ÏµÍ³
+#  *  YDTriggerä¸“ç”¨å­˜å‚¨ç³»ç»Ÿ
 #  *  
-#  *  set ºÍ get µÄÊµÏÖ
+#  *  set å’Œ get çš„å®žçŽ°
 #  *
 #  *  By actboy168
 #  *
@@ -12,36 +12,36 @@
 #
 # /*
 #  *  
-#  *  HashTable°æ Common
+#  *  HashTableç‰ˆ Common
 #  *
 #  */
 #   
-#  define YDTRIGGER_HASHTABLE                           YDHT
+#  define YDHASH_HANDLE                           YDHT
 #
 # /*
 #  *  
-#  *  HashTable°æ Clear
+#  *  HashTableç‰ˆ Clear
 #  *
 #  */
 #
-#  define YDTriggerClearAll()                           FlushParentHashtable(YDTRIGGER_HASHTABLE)
-#  define YDTriggerClearTable(table)                    FlushChildHashtable(YDTRIGGER_HASHTABLE, table)
-#  define YDTriggerClearTableByString(table)            FlushChildHashtable(YDTRIGGER_HASHTABLE, StringHash(table))
+#  define YDHashClearAll(handle)                             FlushParentHashtable(handle)
+#  define YDHashClearTable(handle, table)                    FlushChildHashtable(handle, table)
+#  define YDHashClearTableByString(handle, table)            FlushChildHashtable(handle, StringHash(table))
 #
 # /*
 #  *  
-#  *  HashTable°æ Set & Get
+#  *  HashTableç‰ˆ Set & Get
 #  *
 #  */
 #                                               
-#  define YDTriggerSet(type, table, key, value)         YDTRIGGER_##type##(SET)(YDTRIGGER_HASHTABLE, table, key, value)
-#  define YDTriggerGet(type, table, key)                YDTRIGGER_##type##(GET)(YDTRIGGER_HASHTABLE, table, key)
+#  define YDHashSet(handle, type, table, key, value)         YDTRIGGER_##type##(SET)(handle, table, key, value)
+#  define YDHashGet(handle, type, table, key)                YDTRIGGER_##type##(GET)(handle, table, key)
 #
-#  define YDTriggerSetEx(type, table, key, value)       YDTriggerSet(type, table, key, value)
-#  define YDTriggerGetEx(type, table, key)              YDTriggerGet(type, table, key) 
+#  define YDHashSetEx(handle, type, table, key, value)       YDHashSet(handle, type, table, key, value)
+#  define YDHashGetEx(handle, type, table, key)              YDHashGet(handle, type, table, key) 
 # 
-#  define YDTriggerSetByString(type, table, key, value) YDTRIGGER_##type##(SET)(YDTRIGGER_HASHTABLE, StringHash(table), StringHash(key), value)
-#  define YDTriggerGetByString(type, table, key)        YDTRIGGER_##type##(GET)(YDTRIGGER_HASHTABLE, StringHash(table), StringHash(key))
+#  define YDHashSetByString(handle, type, table, key, value) YDTRIGGER_##type##(SET)(handle, StringHash(table), StringHash(key), value)
+#  define YDHashGetByString(handle, type, table, key)        YDTRIGGER_##type##(GET)(handle, StringHash(table), StringHash(key))
 # 
 #  define YDTRIGGER_HTSET(Type)                         Save##Type
 #  define YDTRIGGER_HTGET(Type)                         Load##Type

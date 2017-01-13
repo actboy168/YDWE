@@ -14,10 +14,10 @@ CC_Put_YDWESaveAnyTypeDataByUserData(DWORD This, DWORD OutClass, char* name)
   {
     g_bDisableSaveLoadSystem = FALSE;
 
-    BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerAny2I(%s, ", TypeName[nValueType], TypeName[nKeyType]);
+    BLZSStrPrintf(buff, 260, "call YDUserDataSet(%s, ", TypeName[nKeyType]);
     PUT_CONST(buff, 0);
     PUT_VAR(This, 1);
-    BLZSStrPrintf(buff, 260, "), 0x%08X, ", SStrHash((char*)&GetGUIVar_Value(This, 2)));
+    BLZSStrPrintf(buff, 260, ", \"%s\", %s, ", (char*)&GetGUIVar_Value(This, 2), TypeName[nValueType]);
     PUT_CONST(buff, 0);
     PUT_VAR(This, 4);
     PUT_CONST(")", 1);
@@ -34,10 +34,10 @@ CC_Put_YDWELoadAnyTypeDataByUserData(DWORD This, DWORD OutClass, char* name, cha
   {
     g_bDisableSaveLoadSystem = FALSE;
 
-    BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerAny2I(%s, ", type_name, TypeName[nKeyType]);
+    BLZSStrPrintf(buff, 260, "YDUserDataGet(%s, ", TypeName[nKeyType]);
     PUT_CONST(buff, 0);
     PUT_VAR(This, 1);
-    BLZSStrPrintf(buff, 260, "), 0x%08X)", SStrHash((char*)&GetGUIVar_Value(This, 2)));
+    BLZSStrPrintf(buff, 260, ", \"%s\", %s)", (char*)&GetGUIVar_Value(This, 2), type_name);
     PUT_CONST(buff, 0);
   }
 }
@@ -54,10 +54,10 @@ CC_Put_YDWEHaveSavedAnyTypeDataByUserData(DWORD This, DWORD OutClass, char* name
   {
     g_bDisableSaveLoadSystem = FALSE;
 
-    BLZSStrPrintf(buff, 260, "YDTriggerHas(%s, YDTriggerAny2I(%s, ", TypeName[nValueType], TypeName[nKeyType]);
+    BLZSStrPrintf(buff, 260, "YDUserDataHas(%s, ", TypeName[nKeyType]);
     PUT_CONST(buff, 0);
     PUT_VAR(This, 1);
-    BLZSStrPrintf(buff, 260, "), 0x%08X)", SStrHash((char*)&GetGUIVar_Value(This, 3)));
+    BLZSStrPrintf(buff, 260, ", \"%s\", %s)", (char*)&GetGUIVar_Value(This, 3), TypeName[nValueType]);
     PUT_CONST(buff, 0);
   }
 }
@@ -74,10 +74,10 @@ CC_Put_YDWEFlushAnyTypeDataByUserData(DWORD This, DWORD OutClass, char* name)
   {
     g_bDisableSaveLoadSystem = FALSE;
 
-    BLZSStrPrintf(buff, 260, "call YDTriggerClear(%s, YDTriggerAny2I(%s, ", TypeName[nValueType], TypeName[nKeyType]);
+    BLZSStrPrintf(buff, 260, "call YDUserDataClear(%s, ", TypeName[nKeyType]);
     PUT_CONST(buff, 0);
     PUT_VAR(This, 1);
-    BLZSStrPrintf(buff, 260, "), 0x%08X)", SStrHash((char*)&GetGUIVar_Value(This, 3)));
+    BLZSStrPrintf(buff, 260, ", \"%s\", %s)", (char*)&GetGUIVar_Value(This, 3), TypeName[nValueType]);
     PUT_CONST(buff, 1);
   }
 }
@@ -92,9 +92,9 @@ CC_Put_YDWEFlushAllByUserData(DWORD This, DWORD OutClass, char* name)
   {
     g_bDisableSaveLoadSystem = FALSE;
 
-    BLZSStrPrintf(buff, 260, "call YDTriggerClearTable(YDTriggerAny2I(%s, ", TypeName[nKeyType]);
+    BLZSStrPrintf(buff, 260, "call YDUserDataClearTable(%s, ", TypeName[nKeyType]);
     PUT_CONST(buff, 0);
     PUT_VAR(This, 1);
-    PUT_CONST("))", 1);
+    PUT_CONST(")", 1);
   }
 }

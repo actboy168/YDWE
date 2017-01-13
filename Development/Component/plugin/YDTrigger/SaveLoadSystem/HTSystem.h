@@ -1,5 +1,5 @@
 # /*
-#  *  ÒıÈëYDTrigger´æ´¢ÏµÍ³ (ĞèÒªVJassµÄÖ§³Ö)
+#  *  å¼•å…¥YDTriggerå­˜å‚¨ç³»ç»Ÿ (éœ€è¦VJassçš„æ”¯æŒ)
 #  *  
 #  *  By actboy168
 #  *
@@ -17,14 +17,14 @@ library YDTriggerSaveLoadSystem initializer Init
 globals
 #    ifndef YDWE_HASHTABLE_DEFVAR
 #    define YDWE_HASHTABLE_DEFVAR
-       hashtable YDTRIGGER_HASHTABLE
+       hashtable YDHASH_HANDLE
 #    endif
 endglobals
 #
 	private function Init takes nothing returns nothing
 #    ifndef YDWE_HASHTABLE_INITVAR
 #    define YDWE_HASHTABLE_INITVAR
-		set YDTRIGGER_HASHTABLE = InitHashtable()    
+		set YDHASH_HANDLE = InitHashtable()    
 #    endif
 	endfunction
 #

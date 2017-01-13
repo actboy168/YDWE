@@ -1,5 +1,5 @@
 # /*
-#  *  YDTriggerר�ú�
+#  *  YDTrigger专用宏
 #  *  
 #  *  By actboy168
 #  *
@@ -10,6 +10,7 @@
 #
 #  ifndef DISABLE_SAVE_LOAD_SYSTEM
 #      include <YDTrigger/ImportSaveLoadSystem.h>
+#      include <YDTrigger/Hash.h>
 #  endif
 #
 #  ifdef  USE_BJ_OPTIMIZATION 

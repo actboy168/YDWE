@@ -10,8 +10,6 @@ extern BOOL g_local_in_mainproc;
 
 int _fastcall Utf8toAscii(char src[], char dst[], unsigned int limit);
 
-#define YDL_LOCALVAR_STEPS "ydl_localvar_step"
-
 namespace locvar
 {
 	extern std::map<std::string, std::string> trigger_data_ui;
@@ -49,12 +47,22 @@ namespace locvar
 		if ((s.mother_id == (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple)) && (s.prev_handle_string != nullptr))
 		{
 			register_var[s.name][var_name] = type_name;
-			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, s.prev_handle_string, SStrHash(var_name));
+			if (0 == strcmp(s.prev_handle_string, "GetExpiredTimer()")) {
+				BLZSStrPrintf(buff, 260, "YDLocal3Get(%s, \"%s\")", type_name, var_name);
+			}
+			else {
+				BLZSStrPrintf(buff, 260, "YDLocal4Get(%s, \"%s\")", type_name, var_name);
+			}
 		}
 		else if ((s.mother_id == CC_GUIID_YDWETimerStartMultiple) || (s.mother_id == CC_GUIID_YDWERegisterTriggerMultiple))
 		{
 			register_var[s.name][var_name] = type_name;
-			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X)", type_name, s.handle_string, SStrHash(var_name));
+			if (0 == strcmp(s.handle_string, "GetExpiredTimer()")) {
+				BLZSStrPrintf(buff, 260, "YDLocal3Get(%s, \"%s\")", type_name, var_name);
+			}
+			else {
+				BLZSStrPrintf(buff, 260, "YDLocal4Get(%s, \"%s\")", type_name, var_name);
+			}
 		}
 		else
 		{
@@ -67,11 +75,11 @@ namespace locvar
 
 			if (g_local_in_mainproc)
 			{
-				BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*" YDL_LOCALVAR_STEPS ", 0x%08X)", type_name, SStrHash(var_name));
+				BLZSStrPrintf(buff, 260, "YDLocal1Get(%s, \"%s\")", type_name, var_name);
 			}
 			else
 			{
-				BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X)", type_name, SStrHash("TriggerRunSteps"), SStrHash(var_name));
+				BLZSStrPrintf(buff, 260, "YDLocal2Get(%s, \"%s\")", type_name, var_name);
 			}
 		}
 
@@ -90,11 +98,16 @@ namespace locvar
 			|| (id == CC_GUIID_YDWETimerStartMultiple)
 			|| (id == CC_GUIID_YDWERegisterTriggerMultiple))
 		{
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X, ", type_name, s.handle_string, SStrHash(var_name));
+			if (0 == strcmp(s.handle_string, "GetExpiredTimer()")) {
+				BLZSStrPrintf(buff, 260, "call YDLocal3Set(%s, \"%s\", ", type_name, var_name);
+			}
+			else {
+				BLZSStrPrintf(buff, 260, "call YDLocal4Set(%s, \"%s\", ", type_name, var_name);
+			}
 		}
 		else if (id == CC_GUIID_YDWEExecuteTriggerMultiple)
 		{
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, " YDL_TRIGGERSTEP ", 0x%08X, ", type_name, SStrHash(var_name));
+			BLZSStrPrintf(buff, 260, "call YDLocal5Set(%s, \"%s\", ", type_name, var_name);
 		}
 		else
 		{
@@ -107,11 +120,11 @@ namespace locvar
 
 			if (g_local_in_mainproc)
 			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*" YDL_LOCALVAR_STEPS ", 0x%08X, ", type_name, SStrHash(var_name));
+				BLZSStrPrintf(buff, 260, "call YDLocal1Set(%s, \"%s\", ", type_name, var_name);
 			}
 			else
 			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X, ", type_name, SStrHash("TriggerRunSteps"), SStrHash(var_name));
+				BLZSStrPrintf(buff, 260, "call YDLocal2Set(%s, \"%s\", ", type_name, var_name);
 			}
 		}
 
@@ -153,12 +166,22 @@ namespace locvar
 		if ((s.mother_id == (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple)) && (s.prev_handle_string != nullptr))
 		{
 			register_var[s.name][var_name] = type_name;
-			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X", type_name, s.prev_handle_string, hash);
+			if (0 == strcmp(s.prev_handle_string, "GetExpiredTimer()")) {
+				BLZSStrPrintf(buff, 260, "YDLocal3ArrayGet(%s, \"%s\", ", type_name, var_name);
+			}
+			else {
+				BLZSStrPrintf(buff, 260, "YDLocal4ArrayGet(%s, \"%s\", ", type_name, var_name);
+			}
 		}
 		else if ((s.mother_id == CC_GUIID_YDWETimerStartMultiple) || (s.mother_id == CC_GUIID_YDWERegisterTriggerMultiple))
 		{
 			register_var[s.name][var_name] = type_name;
-			BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(%s), 0x%08X", type_name, s.handle_string, hash);
+			if (0 == strcmp(s.handle_string, "GetExpiredTimer()")) {
+				BLZSStrPrintf(buff, 260, "YDLocal3ArrayGet(%s, \"%s\", ", type_name, var_name);
+			}
+			else {
+				BLZSStrPrintf(buff, 260, "YDLocal4ArrayGet(%s, \"%s\", ", type_name, var_name);
+			}
 		}
 		else
 		{
@@ -171,16 +194,15 @@ namespace locvar
 
 			if (g_local_in_mainproc)
 			{
-				BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*" YDL_LOCALVAR_STEPS ", 0x%08X", type_name, hash);
+				BLZSStrPrintf(buff, 260, "YDLocal1ArrayGet(%s, \"%s\", ", type_name, var_name);
 			}
 			else
 			{
-				BLZSStrPrintf(buff, 260, "YDTriggerGetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X", type_name, SStrHash("TriggerRunSteps"), hash);
+				BLZSStrPrintf(buff, 260, "YDLocal2ArrayGet(%s, \"%s\", ", type_name, var_name);
 			}
 		}
 
 		PUT_CONST(buff, 0);
-		PUT_CONST("+", 0);
 		index();
 		PUT_CONST(")", 0);
 	}
@@ -200,11 +222,16 @@ namespace locvar
 			|| (id == CC_GUIID_YDWETimerStartMultiple)
 			|| (id == CC_GUIID_YDWERegisterTriggerMultiple))
 		{
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(%s), 0x%08X", type_name, s.handle_string, hash);
+			if (0 == strcmp(s.handle_string, "GetExpiredTimer()")) {
+				BLZSStrPrintf(buff, 260, "call YDLocal3ArraySet(%s, \"%s\", ", type_name, var_name);
+			}
+			else {
+				BLZSStrPrintf(buff, 260, "call YDLocal4ArraySet(%s, \"%s\", ", type_name, var_name);
+			}
 		}
 		else if (id == CC_GUIID_YDWEExecuteTriggerMultiple)
 		{
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, " YDL_TRIGGERSTEP ", 0x%08X", type_name, SStrHash(var_name));
+			BLZSStrPrintf(buff, 260, "call YDLocal5ArraySet(%s, \"%s\", ", type_name, var_name);
 		}
 		else
 		{
@@ -217,16 +244,15 @@ namespace locvar
 
 			if (g_local_in_mainproc)
 			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*" YDL_LOCALVAR_STEPS ", 0x%08X", type_name, hash);
+				BLZSStrPrintf(buff, 260, "call YDLocal1ArraySet(%s, \"%s\", ", type_name, var_name);
 			}
 			else
 			{
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(%s, YDTriggerH2I(GetTriggeringTrigger())*YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X), 0x%08X", type_name, SStrHash("TriggerRunSteps"), hash);
+				BLZSStrPrintf(buff, 260, "call YDLocal2ArraySet(%s, \"%s\", ", type_name, var_name);
 			}
 		}
 
 		PUT_CONST(buff, 0);
-		PUT_CONST("+", 0);
 		index();
 		PUT_CONST(",", 0);
 		func();
@@ -262,7 +288,7 @@ namespace locvar
 			g_bDisableSaveLoadSystem = FALSE;
 
 			CC_PutBegin();
-			PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetExpiredTimer()))", 1);
+			PUT_CONST("call YDHashClearTable(YDHashH2I(GetExpiredTimer()))", 1);
 			PUT_CONST("call DestroyTimer(GetExpiredTimer())", 1);
 			CC_PutEnd();
 		}
@@ -279,7 +305,7 @@ namespace locvar
 			g_bDisableSaveLoadSystem = FALSE;
 
 			CC_PutBegin();
-			PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetTriggeringTrigger()))", 1);
+			PUT_CONST("call YDHashClearTable(YDHashH2I(GetTriggeringTrigger()))", 1);
 			PUT_CONST("call DestroyTrigger(GetTriggeringTrigger())", 1);
 			CC_PutEnd();
 		}
@@ -295,13 +321,10 @@ namespace locvar
 		if (global.mother_id != CC_GUIID_YDWETimerStartMultiple
 			&& global.mother_id != CC_GUIID_YDWERegisterTriggerMultiple)
 		{
-			char buff[260];
-
 			if (g_local_in_mainproc)
 			{
 				g_bDisableSaveLoadSystem = FALSE;
-				BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, " YDL_LOCALVAR_STEPS ")", SStrHash("TriggerRunSteps"));
-				PUT_CONST(buff, 1);
+				PUT_CONST("call YDLocalReset()", 1);
 			}
 		}
 		else
@@ -325,20 +348,12 @@ namespace locvar
 
 	void construct(DWORD OutClass)
 	{
-		char buff[260];
-
 		if (g_local_in_mainproc)
 		{
 			g_bDisableSaveLoadSystem = FALSE;
 
 			CC_PutBegin();
-			BLZSStrPrintf(buff, 260, "local integer " YDL_LOCALVAR_STEPS " = YDTriggerGetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X)", SStrHash("GlobalsTriggerRunSteps"));
-			PUT_CONST(buff, 1);
-			PUT_CONST("set " YDL_LOCALVAR_STEPS " = " YDL_LOCALVAR_STEPS " + 3", 1);
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, " YDL_LOCALVAR_STEPS ")", SStrHash("GlobalsTriggerRunSteps"));
-			PUT_CONST(buff, 1);
-			BLZSStrPrintf(buff, 260, "call YDTriggerSetEx(integer, YDTriggerH2I(GetTriggeringTrigger()), 0x%08X, " YDL_LOCALVAR_STEPS ")", SStrHash("TriggerRunSteps"));
-			PUT_CONST(buff, 1);
+			PUT_CONST("YDLocalInitialize()", 1);
 			CC_PutEnd();
 		}
 	}
@@ -348,7 +363,7 @@ namespace locvar
 		if (g_local_in_mainproc)
 		{
 			CC_PutBegin(); 
-			PUT_CONST("call YDTriggerClearTable(YDTriggerH2I(GetTriggeringTrigger())*" YDL_LOCALVAR_STEPS ")", 1);
+			PUT_CONST("call YDLocalRelease()", 1);
 			CC_PutEnd();
 		}
 	}
