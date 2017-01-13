@@ -1,7 +1,7 @@
 # /*
-#  *  YDTriggerר�ô洢ϵͳ
+#  *  YDTrigger专用存储系统
 #  *  
-#  *  has �� clear ��ʵ��
+#  *  has 和 clear 的实现
 #  *
 #  *  By actboy168
 #  *
@@ -11,8 +11,8 @@
 #define INCLUDE_YDTRIGGER_HAS_AND_CLEAR_H
 #
 #    if WARCRAFT_VERSION >= 124
-#      define YDTriggerClear(type, table, key)              YDTRIGGER_HC_##type##(CLEAR)(YDTRIGGER_HASHTABLE, table, key)
-#      define YDTriggerHas(type, table, key)                YDTRIGGER_HC_##type##(HAS)(YDTRIGGER_HASHTABLE, table, key)
+#      define YDHashClear(handle, type, table, key)         YDTRIGGER_HC_##type##(CLEAR)(handle, table, key)
+#      define YDHashHas(handle, type, table, key)           YDTRIGGER_HC_##type##(HAS)(handle, table, key)
 #
 #      define YDTRIGGER_CLEAR(Type)                         RemoveSaved##Type
 #      define YDTRIGGER_HAS(Type)                           HaveSaved##Type
@@ -20,8 +20,8 @@
 #      define RemoveSavedHandleDummy(ht, table, key)        RemoveSavedHandle(ht, table, key)
 #      define HaveSavedHandleDummy(ht, table, key)          HaveSavedHandle(ht, table, key)
 #    else
-#      define YDTriggerClear(type, table, key)              YDTRIGGER_HC_##type##(CLEAR)(YDTRIGGER_GAMECACHE, I2S(table), #key)
-#      define YDTriggerHas(type, table, key)                YDTRIGGER_HC_##type##(HAS)(YDTRIGGER_GAMECACHE, I2S(table), #key)
+#      define YDHashClear(handle, type, table, key)         YDTRIGGER_HC_##type##(CLEAR)(handle, I2S(table), #key)
+#      define YDHashHas(handle, type, table, key)           YDTRIGGER_HC_##type##(HAS)(handle, I2S(table), #key)
 #
 #      define YDTRIGGER_CLEAR(Type)                         FlushStored##Type
 #      define YDTRIGGER_HAS(Type)                           HaveStored##Type
