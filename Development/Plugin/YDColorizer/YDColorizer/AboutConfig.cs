@@ -15,7 +15,7 @@ namespace YDColorizer
         private static string ReadLocalFile(string lpszFileName)
         {
             // TODO: 和ydwe的加载方式保持一致
-            string mpqdir = Config.GetThisMoudlePath() + "\\..\\..\\share\\mpq\\ydwe\\";
+            string mpqdir = Config.GetThisMoudlePath() + "\\..\\..\\share\\mpq\\units\\";
             try
             {
                 return File.ReadAllText(mpqdir + lpszFileName, Encoding.UTF8);
