@@ -47,22 +47,12 @@ namespace locvar
 		if ((s.mother_id == (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple)) && (s.prev_handle_string != nullptr))
 		{
 			register_var[s.name][var_name] = type_name;
-			if (0 == strcmp(s.prev_handle_string, "GetExpiredTimer()")) {
-				BLZSStrPrintf(buff, 260, "YDLocal3Get(%s, \"%s\")", type_name, var_name);
-			}
-			else {
-				BLZSStrPrintf(buff, 260, "YDLocal4Get(%s, \"%s\")", type_name, var_name);
-			}
+			BLZSStrPrintf(buff, 260, "YDLocalGet(%s, %s, \"%s\")", s.prev_handle_string, type_name, var_name);
 		}
 		else if ((s.mother_id == CC_GUIID_YDWETimerStartMultiple) || (s.mother_id == CC_GUIID_YDWERegisterTriggerMultiple))
 		{
 			register_var[s.name][var_name] = type_name;
-			if (0 == strcmp(s.handle_string, "GetExpiredTimer()")) {
-				BLZSStrPrintf(buff, 260, "YDLocal3Get(%s, \"%s\")", type_name, var_name);
-			}
-			else {
-				BLZSStrPrintf(buff, 260, "YDLocal4Get(%s, \"%s\")", type_name, var_name);
-			}
+			BLZSStrPrintf(buff, 260, "YDLocalGet(%s, %s, \"%s\")", s.handle_string, type_name, var_name);
 		}
 		else
 		{
@@ -98,12 +88,7 @@ namespace locvar
 			|| (id == CC_GUIID_YDWETimerStartMultiple)
 			|| (id == CC_GUIID_YDWERegisterTriggerMultiple))
 		{
-			if (0 == strcmp(s.handle_string, "GetExpiredTimer()")) {
-				BLZSStrPrintf(buff, 260, "call YDLocal3Set(%s, \"%s\", ", type_name, var_name);
-			}
-			else {
-				BLZSStrPrintf(buff, 260, "call YDLocal4Set(%s, \"%s\", ", type_name, var_name);
-			}
+			BLZSStrPrintf(buff, 260, "call YDLocalSet(%s, %s, \"%s\", ", s.handle_string, type_name, var_name);
 		}
 		else if (id == CC_GUIID_YDWEExecuteTriggerMultiple)
 		{
@@ -166,22 +151,12 @@ namespace locvar
 		if ((s.mother_id == (0x10000 | (int)CC_GUIID_YDWETimerStartMultiple)) && (s.prev_handle_string != nullptr))
 		{
 			register_var[s.name][var_name] = type_name;
-			if (0 == strcmp(s.prev_handle_string, "GetExpiredTimer()")) {
-				BLZSStrPrintf(buff, 260, "YDLocal3ArrayGet(%s, \"%s\", ", type_name, var_name);
-			}
-			else {
-				BLZSStrPrintf(buff, 260, "YDLocal4ArrayGet(%s, \"%s\", ", type_name, var_name);
-			}
+			BLZSStrPrintf(buff, 260, "YDLocalArrayGet(%s, %s, \"%s\", ", s.prev_handle_string, type_name, var_name);
 		}
 		else if ((s.mother_id == CC_GUIID_YDWETimerStartMultiple) || (s.mother_id == CC_GUIID_YDWERegisterTriggerMultiple))
 		{
 			register_var[s.name][var_name] = type_name;
-			if (0 == strcmp(s.handle_string, "GetExpiredTimer()")) {
-				BLZSStrPrintf(buff, 260, "YDLocal3ArrayGet(%s, \"%s\", ", type_name, var_name);
-			}
-			else {
-				BLZSStrPrintf(buff, 260, "YDLocal4ArrayGet(%s, \"%s\", ", type_name, var_name);
-			}
+			BLZSStrPrintf(buff, 260, "YDLocalArrayGet(%s, %s, \"%s\", ", s.handle_string, type_name, var_name);
 		}
 		else
 		{
@@ -222,12 +197,7 @@ namespace locvar
 			|| (id == CC_GUIID_YDWETimerStartMultiple)
 			|| (id == CC_GUIID_YDWERegisterTriggerMultiple))
 		{
-			if (0 == strcmp(s.handle_string, "GetExpiredTimer()")) {
-				BLZSStrPrintf(buff, 260, "call YDLocal3ArraySet(%s, \"%s\", ", type_name, var_name);
-			}
-			else {
-				BLZSStrPrintf(buff, 260, "call YDLocal4ArraySet(%s, \"%s\", ", type_name, var_name);
-			}
+			BLZSStrPrintf(buff, 260, "call YDLocalArraySet(%s, %s, \"%s\", ", s.handle_string, type_name, var_name);
 		}
 		else if (id == CC_GUIID_YDWEExecuteTriggerMultiple)
 		{
@@ -288,7 +258,7 @@ namespace locvar
 			g_bDisableSaveLoadSystem = FALSE;
 
 			CC_PutBegin();
-			PUT_CONST("call YDHashClearTable(YDHashH2I(GetExpiredTimer()))", 1);
+			PUT_CONST("call YDLocal3Release()", 1);
 			PUT_CONST("call DestroyTimer(GetExpiredTimer())", 1);
 			CC_PutEnd();
 		}
@@ -305,7 +275,7 @@ namespace locvar
 			g_bDisableSaveLoadSystem = FALSE;
 
 			CC_PutBegin();
-			PUT_CONST("call YDHashClearTable(YDHashH2I(GetTriggeringTrigger()))", 1);
+			PUT_CONST("call YDLocal4Release()", 1);
 			PUT_CONST("call DestroyTrigger(GetTriggeringTrigger())", 1);
 			CC_PutEnd();
 		}
@@ -363,7 +333,7 @@ namespace locvar
 		if (g_local_in_mainproc)
 		{
 			CC_PutBegin(); 
-			PUT_CONST("call YDLocalRelease()", 1);
+			PUT_CONST("call YDLocal1Release()", 1);
 			CC_PutEnd();
 		}
 	}
