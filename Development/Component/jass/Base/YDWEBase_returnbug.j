@@ -3,9 +3,9 @@
 //Return bug
 //===========================================================================
 globals
-//È«¾Ö»º´æ 
-#ifndef YDWE_GAMECACHE_DEFVAR
-#define YDWE_GAMECACHE_DEFVAR
+//È«ï¿½Ö»ï¿½ï¿½ï¿½ 
+#ifndef YDWE_HASH_DEFVAR
+#define YDWE_HASH_DEFVAR
 	gamecache YDGC = null  
 #endif  
 endglobals
@@ -163,7 +163,7 @@ function GetHandleId takes handle h returns integer
     return 0
 endfunction
 
-//Çå¿Õ
+//ï¿½ï¿½ï¿½ï¿½
 function YDWEFlushAllData takes nothing returns nothing
     call FlushGameCache(YDGC)
 endfunction

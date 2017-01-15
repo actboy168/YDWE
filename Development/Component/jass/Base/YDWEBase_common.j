@@ -241,13 +241,13 @@ endfunction
 
 function InitializeYD takes nothing returns nothing
 #if WARCRAFT_VERSION >= 124
-#  ifndef YDWE_HASHTABLE_INITVAR
-#  define YDWE_HASHTABLE_INITVAR
+#  ifndef YDWE_HASH_INITVAR
+#  define YDWE_HASH_INITVAR
      set YDHT=InitHashtable()   
 #  endif
 #else
-#  ifndef YDWE_GAMECACHE_INITVAR
-#  define YDWE_GAMECACHE_INITVAR
+#  ifndef YDWE_HASH_INITVAR
+#  define YDWE_HASH_INITVAR
      call FlushGameCache(InitGameCache("YDWE.wav"))
      set YDGC=InitGameCache("YDWE.wav") 
 #  endif 

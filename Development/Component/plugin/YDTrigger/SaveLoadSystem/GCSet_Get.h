@@ -13,14 +13,6 @@
 #
 # /*
 #  *  
-#  *  GameCache版 Common
-#  *
-#  */
-#
-#  define YDHASH_HANDLE                           YDGC
-#
-# /*
-#  *  
 #  *  GameCache版 Clear
 #  *
 #  */

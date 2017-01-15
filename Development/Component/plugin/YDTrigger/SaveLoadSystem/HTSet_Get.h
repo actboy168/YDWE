@@ -12,14 +12,6 @@
 #
 # /*
 #  *  
-#  *  HashTable版 Common
-#  *
-#  */
-#   
-#  define YDHASH_HANDLE                           YDHT
-#
-# /*
-#  *  
 #  *  HashTable版 Clear
 #  *
 #  */

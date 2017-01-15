@@ -3,9 +3,9 @@
 //HashTable
 //===========================================================================
 globals
-//È«¾Ö¹þÏ£±í 
-#ifndef YDWE_HASHTABLE_DEFVAR
-#define YDWE_HASHTABLE_DEFVAR
+//È«ï¿½Ö¹ï¿½Ï£ï¿½ï¿½ 
+#ifndef YDWE_HASH_DEFVAR
+#define YDWE_HASH_DEFVAR
 	hashtable YDHT = null
 #endif  
 endglobals
@@ -18,7 +18,7 @@ function YDWEH2I takes handle h returns integer
 endfunction
 
 
-//Çå¿Õ
+//ï¿½ï¿½ï¿½ï¿½
 function YDWEFlushAllData takes nothing returns nothing
     call FlushParentHashtable(YDHT)
 endfunction
