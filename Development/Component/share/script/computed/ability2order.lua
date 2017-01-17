@@ -1,4 +1,3 @@
-local ability = require 'slk'.ability
 local order_list = require 'computed.order_list'
 local order_id = require 'computed.order_id'
 
@@ -11,6 +10,7 @@ return function (skill, type)
             return 0
         end
     end
+	local ability = require 'slk'.ability
     if not ability[skill] then
         return 0
     end
