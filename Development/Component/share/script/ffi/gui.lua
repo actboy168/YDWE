@@ -63,6 +63,10 @@ function gui.error_message(hwnd, fmt, ...)
     return messagebox(hwnd, fmt:format(...), _("Error") ,gui.MB_ICONQUESTION | gui.MB_OK)
 end
 
+function gui.message(hwnd, fmt, ...)
+    return messagebox(hwnd, fmt:format(...), _("YDWE") ,gui.MB_ICONQUESTION | gui.MB_OK)
+end
+
 function gui.yesno_message(hwnd, fmt, ...)
     return messagebox(hwnd, fmt:format(...), _("YDWE"), gui.MB_ICONQUESTION | gui.MB_YESNO) == gui.IDYES
 end
