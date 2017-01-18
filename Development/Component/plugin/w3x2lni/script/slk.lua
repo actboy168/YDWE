@@ -1,17 +1,24 @@
+(function()
+    local exepath = package.cpath:sub(1, (package.cpath:find(';') or 0)-6)
+    package.path = package.path .. ';' .. exepath .. '..\\script\\?.lua'
+end)()
+
 require 'filesystem'
 local uni = require 'ffi.unicode'
-
-local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" 
-if not fs.exists(root) then
-	root = fs.ydwe_path()
-end
-
-package.path = package.path .. ';' .. uni.u2a((root / 'plugin' / 'w3x2lni' / 'script' / '?.lua'):string())
 local w2l = require 'w3x2lni'
-w2l:initialize(root / 'plugin' / 'w3x2lni')
-w2l.mpq = root / 'share' / 'mpq' / 'units'
+w2l:initialize()
 
 function message(...)
+end
+
+local log = {}
+function log.debug(...)
+    print(...)
+end
+
+local gui = {}
+function gui.message(...)
+    print(select(2, ...))
 end
 
 local slk
@@ -488,6 +495,133 @@ function slk_proxy:initialize(mappath)
     ar:close()
 end
 
-slk_proxy:initialize(__map_handle__.handle)
+local clock = os.clock()
+local mappath = fs.path(uni.a2u(arg[1]))
+slk_proxy:initialize(mappath)
+print('time:', os.clock() - clock)
 
-return slk_proxy
+local clock = os.clock()
+
+print(slk_proxy.unit.h000.Ubertip)
+assert(slk_proxy.ability.AHhb.Tip1 == '111,222"333')
+assert(slk_proxy.ability.A00A.Cool3 == 65.0)
+assert(slk_proxy.ability.Ainf.targs1 == 'air,ground,friend,neutral,self')
+assert(slk_proxy.ability.A011.Cool == 1)
+assert(slk_proxy.ability.A011.Tip == '激活神圣护甲(|cffffcc00D|r) - [|cffffcc00等级 1|r]')
+assert(slk_proxy.ability.A011.Cost1 == 0)
+assert(slk_proxy.ability.A011.Cost2 == 25)
+assert(slk_proxy.ability.A011.Buttonpos == 1)
+assert(slk_proxy.ability.A011.Buttonpos2 == 2)
+
+--for k, v in pairs(slk_proxy.ability.AEim) do
+--    print(k, v)
+--end
+
+--for id, abil in pairs(slk_proxy.ability) do
+--    print(id, abil.DataA1)
+--end
+
+slk_proxy.ability.AHds:new 'A123'
+slk_proxy.ability.A123.Order = 'tsukiko'
+slk_proxy.ability.A123.Dur3 = 123
+slk_proxy.ability.A123.levels = '9.9'
+slk_proxy.ability.A123.Ubertip2 = ('1'):rep(1022) .. 'ABCDEF'
+slk_proxy.ability.A123.Hotkey = 'D'
+slk_proxy.ability.A123.Cost = 111
+slk_proxy.ability.A123.Cost2 = 133
+slk_proxy.ability.A123.Cost3 = 25
+slk_proxy.ability.A123.Cost5 = 25
+slk_proxy.ability.A123.Cost6 = 123
+slk_proxy.ability.A123.Buttonpos = 3
+slk_proxy.ability.A123.Buttonpos2 = 1
+assert(obj.ability.A123)
+assert(obj.ability.A123.order == 'tsukiko')
+assert(obj.ability.A123.dur[3] == 123)
+assert(obj.ability.A123.levels == 9)
+assert(obj.ability.A123.ubertip[2] == ('1'):rep(1022) .. 'A')
+assert(obj.ability.A123.hotkey == nil)
+assert(obj.ability.A123.cost[1] == 111)
+assert(obj.ability.A123.cost[2] == 133)
+assert(obj.ability.A123.cost[3] == nil)
+assert(obj.ability.A123.cost[5] == nil)
+assert(obj.ability.A123.cost[6] == 123)
+assert(obj.ability.A123['buttonpos:1'] == 3)
+assert(obj.ability.A123['buttonpos:2'] == 1)
+assert(slk_proxy.ability.A123.Order == '')
+
+slk_proxy.ability.A234.Order = 'tsukiko'
+assert(not obj.ability.A234)
+
+slk_proxy.ability.AHhb.Areaeffectart = '666'
+slk_proxy.ability.AHhb.race = 'unknow'
+assert(obj.ability.AHhb.areaeffectart == 'xxxxxx')
+assert(obj.ability.AHhb.race == nil)
+assert(slk_proxy.ability.AHhb.race == 'human')
+
+slk_proxy.ability.AHbz:new 'AHbz'
+slk_proxy.ability.AHbz.race = 'unknow'
+assert(obj.ability.AHbz.race == 'unknow')
+assert(slk_proxy.ability.AHbz.race == 'human')
+
+slk_proxy.ability.AHhb:new 'AHhb'
+slk_proxy.ability.AHhb.race = 'unknow'
+assert(obj.ability.AHhb.race == nil)
+assert(slk_proxy.ability.AHhb.race == 'human')
+
+slk_proxy.ability.AHds:new 'A123'
+assert(obj.ability.A123.order == 'tsukiko')
+
+local new_obj = slk_proxy.unit.Hpal:new '测试1'
+new_obj.Name = '测试1'
+assert(new_obj:get_id() == 'H001')
+assert(obj.unit.H001.name == '测试1')
+
+local new_obj = slk_proxy.unit.Hpal:new '测试2'
+new_obj.Name = '测试2'
+assert(new_obj:get_id() == 'H002')
+assert(obj.unit.H002.name == '测试2')
+
+local new_obj = slk_proxy.unit.Hpal:new '测试1'
+new_obj.Name = '测试3'
+assert(new_obj:get_id() == '')
+
+local clock2 = os.clock()
+for i = 1, 1000 do
+    local new_obj = slk_proxy.ability.Ainf:new('心灵之火' .. i)
+    new_obj.DataB1 = 5 * i
+end
+print('write: ', os.clock() - clock2)
+
+local output = mappath:parent_path() / (mappath:stem():string() .. '_mod.w3x')
+local output2 = mappath:parent_path() / (mappath:stem():string() .. '_mod2.w3x')
+fs.copy_file(mappath, output, true)
+local clock1 = os.clock()
+slk_proxy:refresh(output)
+print('copy:', os.clock() - clock1)
+print('time:', os.clock() - clock)
+
+local clock = os.clock()
+slk_proxy:initialize(output)
+
+local new_obj = slk_proxy.unit.Hpal:new '测试3'
+assert(new_obj:get_id() == 'H003')
+
+local new_obj = slk_proxy.unit.Hpal:new '测试2'
+assert(new_obj:get_id() == 'H002')
+
+local clock2 = os.clock()
+for i = 1, 1000 do
+    local new_obj = slk_proxy.ability.Ainf:new('心灵之火' .. i)
+    new_obj.DataB1 = 5 * i
+end
+print('write: ', os.clock() - clock2)
+
+fs.copy_file(output, output2, true)
+local clock1 = os.clock()
+slk_proxy:refresh(output2)
+print('copy:', os.clock() - clock1)
+print('time:', os.clock() - clock)
+
+slk_proxy:initialize(output2)
+assert(obj.ability.A123 == nil)
+assert(obj.ability.A002 == nil)

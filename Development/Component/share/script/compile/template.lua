@@ -99,7 +99,12 @@ function template:do_compile(op)
 		return f, err
 	end
 	
-	return xpcall(f, function(msg) return debug.traceback(msg) end)
+	local suc, content = xpcall(f, function(msg) return debug.traceback(msg) end)
+	if not suc then
+    	return false, content
+    end
+    require('slk'):refresh(__map_handle__.handle)
+    return true, content
 end
 
 function template:compile(op)
