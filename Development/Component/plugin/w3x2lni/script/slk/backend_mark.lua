@@ -265,7 +265,7 @@ local function mark_jass(slk, list, flag)
     end
     if flag.item then
         for _, obj in pairs(slk.item) do
-            if obj.pickRandom == 1 then
+            if obj.pickrandom == 1 then
                 current_root = {obj._id, "保留的随机物品'%s'[%s]引用了它"}
                 mark_known_type(slk, 'item', obj._id)
             end
@@ -284,7 +284,7 @@ local function mark_marketplace(slk, flag)
             message('-report|4简化', '保留市场物品')
             message('-tip', ("使用了市场'%s'[%s]"):format(obj.name, obj._id))
             for _, obj in pairs(slk.item) do
-                if obj.pickRandom == 1 and obj.sellable == 1 then
+                if obj.pickrandom == 1 and obj.sellable == 1 then
                     current_root = {obj._id, "保留的市场物品'%s'[%s]引用了它"}
                     mark_known_type(slk, 'item', obj._id)
                 end

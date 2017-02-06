@@ -127,7 +127,11 @@ local function update_then_merge(w2l, slks, objs, lnis, slk)
         end
         slk[type] = w2l:frontend_merge(type, data, obj)
         if report then
-            for _, data in ipairs(report) do
+            for i = 1, 10 do
+                local data = report[i]
+                if not data then
+                    break
+                end
                 local displayname = get_displayname(slk[type][data[1]])
                 message('-report|6不支持的物编数据', ('%s %s %s'):format(displaytype[type], data[1], displayname))
                 message('-tip', ('[%s]: %s'):format(data[2], data[3]))

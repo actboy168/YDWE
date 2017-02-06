@@ -81,7 +81,9 @@ local concat_types = {
 local cant_empty = {
     unam = true,
     utub = true,
+    ua1z = true,
     gnam = true,
+    aart = true,
     atp1 = true,
 }
 

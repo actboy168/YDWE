@@ -309,6 +309,7 @@ return function (w2l, archive, slk)
 
     message('转换脚本...')
     w2l:backend_convertjass(archive, slk.wts)
+    w2l:backend_convertwtg(archive, slk.wts)
     progress(0.92)
 
     message('转换其他文件...')

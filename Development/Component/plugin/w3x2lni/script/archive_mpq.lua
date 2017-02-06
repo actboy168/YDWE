@@ -113,9 +113,6 @@ return function (input, read)
         end
     else
         handle = stormlib.open(input)
-        if not handle then
-            return nil
-        end
     end
     return setmetatable({ handle = handle, read = read }, mt)
 end

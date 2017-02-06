@@ -22,7 +22,9 @@ local function search_imp(map)
         local name
         for i = 1, count do
             _, name, index = ('c1z'):unpack(buf, index)
-            map:get(name)
+            if not map:get(name) then
+                map:get('war3mapimported\\' .. name)
+            end            
         end
     end
 end

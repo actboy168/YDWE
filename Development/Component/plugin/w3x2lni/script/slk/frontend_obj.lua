@@ -61,9 +61,6 @@ local function read_obj(chunk, type)
     if name == '\0\0\0\0' then
         name = parent
     end
-    if not default[parent] then
-        force_slk = true
-    end
     local obj = {
         _id = name,
         _parent = parent,
@@ -74,6 +71,12 @@ local function read_obj(chunk, type)
     local count = unpack 'l'
     for i = 1, count do
         read_data(obj)
+    end
+    if name == '\0\0\0\0' then
+        return nil
+    end
+    if not default[parent] then
+        force_slk = true
     end
     chunk[name] = obj
     return obj

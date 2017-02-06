@@ -131,6 +131,7 @@ local function add_values(names, skeys, slk_name)
                 add(x, y+1, value)
             elseif slk_name == 'units\\unitabilities.slk' and key == 'auto'
                 or slk_name == 'units\\unitbalance.slk' and (key == 'Primary' or key == 'preventPlace' or key == 'requirePlace')
+                or slk_name == 'units\\unitui.slk' and key == 'file'
                 or slk_name == 'units\\destructabledata.slk' and key == 'texFile'
             then
                 add(x, y+1, '_')
