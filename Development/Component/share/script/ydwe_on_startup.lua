@@ -8,7 +8,17 @@ war3_version = sys.war3_version {}
 
 local function initialize_reg()
 	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\WorldEdit]]
+	-- 不弹用户协议
 	reg["Has Been Run"] = { registry.REG_DWORD, 1 }
+	if not reg["Visible UI Elements"] then
+		-- 关掉刷子表
+		reg["Visible UI Elements"] = { registry.REG_DWORD, 0x2B }
+	end
+	if not reg["New Map On Startup"] then
+		-- 启动时不创建新地图
+		reg["New Map On Startup"] = { registry.REG_DWORD, 0 }
+	end
+	-- 某些UI的颜色
 	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\WorldEdit\Trigger Display Colors]]
 	reg["TC_YDHIDE"] = { registry.REG_DWORD, 0xffff0000 }
 	reg["TC_COMMENT"] = { registry.REG_DWORD, 0xff008000 }
