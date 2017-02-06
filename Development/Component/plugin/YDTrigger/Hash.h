@@ -21,7 +21,7 @@
     set ydl_localvar_step = ydl_localvar_step + 3                                                              YDNL\
     call YDHashSet(YDLOC, integer, YDHashH2I(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)           YDNL\
     call YDHashSet(YDLOC, integer, YDHashH2I(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
-#define YDLocalExecuteTrigger(trg)                 set ydl_triggerstep = YDHashH2I(trg)*(YDHashGet(integer, YDHashH2I(trg), 0xCFDE6C76) + 3)
+#define YDLocalExecuteTrigger(trg)                 set ydl_triggerstep = YDHashH2I(trg)*(YDHashGet(YDLOC, integer, YDHashH2I(trg), 0xCFDE6C76) + 3)
 #define YDLocalReset()                             YDHashSet(YDLOC, integer, YDHashH2I(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 # // 1.
 #define YDLOCAL_1                                  YDHashH2I(GetTriggeringTrigger())*ydl_localvar_step
@@ -31,7 +31,7 @@
 #define YDLocal1ArrayGet(type, name, index)        YDHashGet(YDLOC, type, YDLOCAL_1, <?=StringHash(name)?> + (index))
 #define YDLocal1Release()                          YDHashClearTable(YDLOC, YDLOCAL_1)
 # // 2.
-#define YDLOCAL_2                                  YDHashH2I(GetTriggeringTrigger())*YDHashGet(integer, YDHashH2I(GetTriggeringTrigger()), 0xECE825E7)
+#define YDLOCAL_2                                  YDHashH2I(GetTriggeringTrigger())*YDHashGet(YDLOC, integer, YDHashH2I(GetTriggeringTrigger()), 0xECE825E7)
 #define YDLocal2Set(type, name, value)             YDHashSet(YDLOC, type, YDLOCAL_2, <?=StringHash(name)?>, value)
 #define YDLocal2ArraySet(type, name, index, value) YDHashSet(YDLOC, type, YDLOCAL_2, <?=StringHash(name)?> + (index), value)
 #define YDLocal2Get(type, name)                    YDHashGet(YDLOC, type, YDLOCAL_2, <?=StringHash(name)?>)

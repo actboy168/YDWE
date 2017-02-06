@@ -82,63 +82,63 @@ endfunction
 
 //删除单位
 private function RemoveUnit_CallBack takes nothing returns nothing
-    call RemoveUnit(YDTriggerGet(unit, TimerHandle, CurrentIndex))
-    call YDTriggerClear(unit, TimerHandle, CurrentIndex)
+    call RemoveUnit(YDHashGet(YDHASH_HANDLE, unit, TimerHandle, CurrentIndex))
+    call YDHashClear(YDHASH_HANDLE, unit, TimerHandle, CurrentIndex)
 endfunction
 
 function YDWETimerRemoveUnit takes real time, unit u returns nothing
-    call YDTriggerSet(unit, TimerHandle, NewTask(time, fnRemoveUnit), u)
+    call YDHashSet(YDHASH_HANDLE, unit, TimerHandle, NewTask(time, fnRemoveUnit), u)
 endfunction
 
 //摧毁计时器
 private function DestroyTimer_CallBack takes nothing returns nothing
-    call DestroyTimer(YDTriggerGet(timer, TimerHandle, CurrentIndex))
-    call YDTriggerClear(timer, TimerHandle, CurrentIndex)
+    call DestroyTimer(YDHashGet(YDHASH_HANDLE, timer, TimerHandle, CurrentIndex))
+    call YDHashClear(YDHASH_HANDLE, timer, TimerHandle, CurrentIndex)
 endfunction
 
 function YDWETimerDestroyTimer takes real time, timer t returns nothing
-    call YDTriggerSet(timer, TimerHandle, NewTask(time, fnDestroyTimer), t)
+    call YDHashSet(YDHASH_HANDLE, timer, TimerHandle, NewTask(time, fnDestroyTimer), t)
 endfunction
 
 //删除物品
 private function RemoveItem_CallBack takes nothing returns nothing
-    call RemoveItem(YDTriggerGet(item, TimerHandle, CurrentIndex))
-    call YDTriggerClear(item, TimerHandle, CurrentIndex)
+    call RemoveItem(YDHashGet(YDHASH_HANDLE, item, TimerHandle, CurrentIndex))
+    call YDHashClear(YDHASH_HANDLE, item, TimerHandle, CurrentIndex)
 endfunction
 
 function YDWETimerRemoveItem takes real time, item it returns nothing
-    call YDTriggerSet(item, TimerHandle, NewTask(time, fnRemoveItem), it)
+    call YDHashSet(YDHASH_HANDLE, item, TimerHandle, NewTask(time, fnRemoveItem), it)
 endfunction
 
 //删除特效
 private function DestroyEffect_CallBack takes nothing returns nothing
-    call DestroyEffect(YDTriggerGet(effect, TimerHandle, CurrentIndex))
-    call YDTriggerClear(effect, TimerHandle, CurrentIndex)
+    call DestroyEffect(YDHashGet(YDHASH_HANDLE, effect, TimerHandle, CurrentIndex))
+    call YDHashClear(YDHASH_HANDLE, effect, TimerHandle, CurrentIndex)
 endfunction
 
 function YDWETimerDestroyEffect takes real time, effect e returns nothing
-    call YDTriggerSet(effect, TimerHandle, NewTask(time, fnDestroyEffect), e)
+    call YDHashSet(YDHASH_HANDLE, effect, TimerHandle, NewTask(time, fnDestroyEffect), e)
 endfunction
 
 //删除闪电特效
 private function DestroyLightning_CallBack takes nothing returns nothing
-    call DestroyLightning(YDTriggerGet(lightning, TimerHandle, CurrentIndex))
-    call YDTriggerClear(lightning, TimerHandle, CurrentIndex)
+    call DestroyLightning(YDHashGet(YDHASH_HANDLE, lightning, TimerHandle, CurrentIndex))
+    call YDHashClear(YDHASH_HANDLE, lightning, TimerHandle, CurrentIndex)
 endfunction
 
 function YDWETimerDestroyLightning takes real time, lightning lt returns nothing
 	local integer i = NewTask(time, fnDestroyLightning)
-    call YDTriggerSet(lightning, TimerHandle, i, lt)
+    call YDHashSet(YDHASH_HANDLE, lightning, TimerHandle, i, lt)
 endfunction
 
 //运行触发器
 private function RunTrigger_CallBack takes nothing returns nothing
-    call TriggerExecute(YDTriggerGet(trigger, TimerHandle, CurrentIndex))
-    call YDTriggerClear(trigger, TimerHandle, CurrentIndex)
+    call TriggerExecute(YDHashGet(YDHASH_HANDLE, trigger, TimerHandle, CurrentIndex))
+    call YDHashClear(YDHASH_HANDLE, trigger, TimerHandle, CurrentIndex)
 endfunction
 
 function YDWETimerRunTrigger takes real time, trigger trg returns nothing
-    call YDTriggerSet(trigger, TimerHandle, NewTask(time, fnRunTrigger), trg)
+    call YDHashSet(YDHASH_HANDLE, trigger, TimerHandle, NewTask(time, fnRunTrigger), trg)
 endfunction
 
 //删除漂浮文字
@@ -172,7 +172,7 @@ endfunction
 //初始化函数
 private function Init takes nothing returns nothing
     set Timer = CreateTimer()
-	set TimerHandle	= YDTriggerAny2I(timer, Timer)
+	set TimerHandle	= YDHashAny2I(timer, Timer)
 	set CurrentTime      = 0
 	set TaskListHead     = 0
 	set TaskListNext[0]  = -1
@@ -206,9 +206,9 @@ endfunction
 #define INDEX_TIMES    $D0003
 
 private function RunPeriodicTriggerFunction takes nothing returns nothing
-    local integer tid = YDTriggerAny2I(timer, GetExpiredTimer())
-    local trigger trg = YDTriggerGet(trigger, tid, INDEX_TRIGGER)
-	call YDTriggerSetByString(integer, I2S(YDTriggerAny2I(trigger, trg)), "RunIndex", YDTriggerGet(integer, tid, INDEX_RUNINDEX))
+    local integer tid = YDHashAny2I(timer, GetExpiredTimer())
+    local trigger trg = YDHashGet(YDHASH_HANDLE, trigger, tid, INDEX_TRIGGER)
+	call YDHashSetByString(YDHASH_HANDLE, integer, I2S(YDHashAny2I(trigger, trg)), "RunIndex", YDHashGet(YDHASH_HANDLE, integer, tid, INDEX_RUNINDEX))
     if TriggerEvaluate(trg) then
         call TriggerExecute(trg)
     endif
@@ -216,19 +216,19 @@ private function RunPeriodicTriggerFunction takes nothing returns nothing
 endfunction
 
 private function RunPeriodicTriggerFunctionByTimes takes nothing returns nothing
-    local integer tid = YDTriggerAny2I(timer, GetExpiredTimer())
-    local trigger trg = YDTriggerGet(trigger, tid, INDEX_TRIGGER)
-    local integer times = YDTriggerGet(integer, tid, INDEX_TIMES)
-	call YDTriggerSetByString(integer, I2S(YDTriggerAny2I(trigger, trg)), "RunIndex", YDTriggerGet(integer, tid, INDEX_RUNINDEX))
+    local integer tid = YDHashAny2I(timer, GetExpiredTimer())
+    local trigger trg = YDHashGet(YDHASH_HANDLE, trigger, tid, INDEX_TRIGGER)
+    local integer times = YDHashGet(YDHASH_HANDLE, integer, tid, INDEX_TIMES)
+	call YDHashSetByString(YDHASH_HANDLE, integer, I2S(YDHashAny2I(trigger, trg)), "RunIndex", YDHashGet(YDHASH_HANDLE, integer, tid, INDEX_RUNINDEX))
     if TriggerEvaluate(trg) then
         call TriggerExecute(trg)
     endif
     set times = times - 1
     if times > 0 then
-		call YDTriggerSet(integer, tid, INDEX_TIMES, times)
+		call YDHashSet(YDHASH_HANDLE, integer, tid, INDEX_TIMES, times)
       else
         call DestroyTimer(GetExpiredTimer())
-        call YDTriggerClearTable(tid)
+        call YDHashClearTable(YDHASH_HANDLE, tid)
     endif
     set trg = null
 endfunction
@@ -241,18 +241,18 @@ function YDWETimerRunPeriodicTrigger takes real timeout, trigger trg, boolean b,
         return
       else
         set t = CreateTimer()
-		set tid = YDTriggerAny2I(timer, t)
+		set tid = YDHashAny2I(timer, t)
     endif
     set TimerSystem_RunIndex = TimerSystem_RunIndex + 1
-	call YDTriggerSet(trigger, tid, INDEX_TRIGGER, trg)
-	call YDTriggerSet(integer, tid, INDEX_RUNINDEX, TimerSystem_RunIndex)
-	set index = YDTriggerGet(integer, YDTriggerAny2I(trigger, trg), 'YDTS'+data)
+	call YDHashSet(YDHASH_HANDLE, trigger, tid, INDEX_TRIGGER, trg)
+	call YDHashSet(YDHASH_HANDLE, integer, tid, INDEX_RUNINDEX, TimerSystem_RunIndex)
+	set index = YDHashGet(YDHASH_HANDLE, integer, YDHashAny2I(trigger, trg), 'YDTS'+data)
     set index = index + 1
-	call YDTriggerSet(integer, YDTriggerAny2I(trigger, trg), 'YDTS'+data, index)
-	call YDTriggerSet(timer, YDTriggerAny2I(trigger, trg), ('YDTS'+data)*index, t)
+	call YDHashSet(YDHASH_HANDLE, integer, YDHashAny2I(trigger, trg), 'YDTS'+data, index)
+	call YDHashSet(YDHASH_HANDLE, timer, YDHashAny2I(trigger, trg), ('YDTS'+data)*index, t)
 	
     if b == false then
-		call YDTriggerSet(integer, tid, INDEX_TIMES, times)
+		call YDHashSet(YDHASH_HANDLE, integer, tid, INDEX_TIMES, times)
         call TimerStart(t, timeout, true, function RunPeriodicTriggerFunctionByTimes)
       else
         call TimerStart(t, timeout, true, function RunPeriodicTriggerFunction)
@@ -261,19 +261,19 @@ function YDWETimerRunPeriodicTrigger takes real timeout, trigger trg, boolean b,
 endfunction
 
 function YDWETimerRunPeriodicTriggerOver takes trigger trg, integer data returns nothing
-	local integer trgid = YDTriggerAny2I(trigger, trg)
-    local integer index = YDTriggerGet(integer, trgid, 'YDTS'+data)
+	local integer trgid = YDHashAny2I(trigger, trg)
+    local integer index = YDHashGet(YDHASH_HANDLE, integer, trgid, 'YDTS'+data)
     local timer t
     loop
         exitwhen index <= 0
-        set t = YDTriggerGet(timer, trgid, ('YDTS'+data)*index)
+        set t = YDHashGet(YDHASH_HANDLE, timer, trgid, ('YDTS'+data)*index)
         call DestroyTimer(t)
-        call YDTriggerClearTable(YDTriggerAny2I(timer, t))
-		call YDTriggerClear(timer, trgid, ('YDTS'+data)*index)
+        call YDHashClearTable(YDHASH_HANDLE, YDHashAny2I(timer, t))
+		call YDHashClear(YDHASH_HANDLE, timer, trgid, ('YDTS'+data)*index)
         set index = index - 1
     endloop
 	
-    call YDTriggerClear(integer, trgid, 'YDTS'+data)
+    call YDHashClear(YDHASH_HANDLE, integer, trgid, 'YDTS'+data)
     set t = null
 endfunction
 
