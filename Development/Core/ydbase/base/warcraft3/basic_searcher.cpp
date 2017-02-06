@@ -97,9 +97,9 @@ namespace base { namespace warcraft3 {
 		{
 			return 0;
 		}
-		for (;*(unsigned char*)ptr;--ptr)
+		for (;*(unsigned char*)ptr != ':';--ptr)
 		{ }
-		ptr++;
+		ptr--;
 		return detail::search_int(text_beg_, text_end_, (uint32_t)ptr);
 	}
 
