@@ -21,6 +21,46 @@ globals
     private integer array MinBonus
 endglobals
 
+<?
+local idx = {
+'0','1','2','3','4','5','6','7','8','9',
+'a','b','c','d','e','f','g',
+'h','i','j','k','l','m','n',
+}
+local slk = require 'slk'
+for i = 1, 24 do
+	local o = slk.ability.AItx:new('YDb'..idx[i])
+	local v = 2^(i-1)
+	if i == 24 then
+		v = -v
+	end
+	o.DataA1 = v
+end
+for i = 1, 13 do
+	local o = slk.ability.AId0:new('YDc'..idx[i])
+	local v = 2^(i-1)
+	if i == 13 then
+		v = -v
+	end
+	o.DataA1 = v
+end
+for i = 1, 16 do
+	local o = slk.ability.AIlz:new('YDl'..idx[i])
+	local v = 2^(i-1)
+	o.levels = 3
+	o.DataA1 = 0
+	o.DataA2 = v
+	o.DataA3 = -v
+end
+for i = 1, 16 do
+	local o = slk.ability.AImz:new('YDm'..idx[i])
+	local v = 2^(i-1)
+	o.levels = 3
+	o.DataA1 = 0
+	o.DataA2 = v
+	o.DataA3 = -v
+end
+?>
 //以下函数仅仅是让技能ID出现在代码里，不然SLK优化器会删除这些技能
 private function DisplayAllAbilityId takes nothing returns nothing
     local integer aid=0

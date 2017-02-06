@@ -22,7 +22,6 @@ end
 function inject_code:detect(op)	
 	-- 结果变量
 	local inject_code = nil
-	local inject_slk = false
 	
 	-- 读入所有文本
 	local s, e = io.load(op.input)
@@ -33,35 +32,18 @@ function inject_code:detect(op)
 
 		-- 检查是否有需要注入的函数
 		local all_table = op.option.runtime_version:is_new() and self.new_table or self.old_table		
-		local GeneralBounsSystemFile = root / "jass" / "YDWEGeneralBounsSystem.j"
 
 		for file, function_table in pairs(all_table) do	
-		    if GeneralBounsSystemFile:string() == file:string() then
-				for _, function_name in ipairs(function_table) do
-					if s:find(function_name) then
-					    inject_slk = true
-						table.insert(inject_code, file)
-						break
-					end
-				end
-			else
-				for _, function_name in ipairs(function_table) do
-					if s:find(function_name) then
-						table.insert(inject_code, file)
-						break
-					end
+			for _, function_name in ipairs(function_table) do
+				if s:find(function_name) then
+					table.insert(inject_code, file)
+					break
 				end
 			end
 		end
 	else
 		log.error("Error occured when opening map script.")
 		log.error(e)
-	end
-
-	if inject_slk then
-		self:inject_file(op, "units\\abilitydata.slk")
-		--会掉线
-		--self:inject_file(op, "units\\abilitymetadata.slk")
 	end
 	
 	return inject_code
