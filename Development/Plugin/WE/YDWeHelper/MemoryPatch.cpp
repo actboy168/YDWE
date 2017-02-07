@@ -49,20 +49,6 @@ bool MemoryPatchAndVerify(void *first, void *last, void *result)
 		&& MemoryEqual(first, last, result);
 }
 
-void *MemoryPatch(void *patchPoint, uint8_t *patch, uint32_t patchLength)
-{
-	return MemoryPatch(
-		&patch[0],
-		&patch[patchLength],
-		patchPoint
-	);
-}
-
-bool MemoryEqual(void *first, void *last, uintptr_t length)
-{
-	return MemoryEqual(first, last, (char *)first + length); 
-}
-
 bool MemoryPatchAndVerify(void *patchPoint, uint8_t *patch, uint32_t patchLength)
 {
 	return MemoryPatchAndVerify(
