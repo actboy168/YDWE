@@ -42,6 +42,18 @@ function storm.extract_file(path, name)
     return io.save(path, buf)
 end
 
+function storm.load_file(name)
+	local aname = uni.u2a(name)
+	local pbuf = ffi.new('void*[1]', 0)
+	local plen = ffi.new('uint32_t[1]', 0)
+    if not SFileLoadFile(aname, pbuf, plen, 0, nil) then
+        return false
+    end
+    local buf = ffi.string(pbuf[0], plen[0])
+    SFileUnloadFile(pbuf[0])
+    return buf
+end
+
 function storm.has_file(name)
     return SFileExists(name)
 end

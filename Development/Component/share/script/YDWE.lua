@@ -29,6 +29,7 @@ require "localization"
 require "config"
 require "plugin"
 require "uiloader"
+require "check_object"
 require "ffi.loadlibrary"
 require "ffi.gui"
 
