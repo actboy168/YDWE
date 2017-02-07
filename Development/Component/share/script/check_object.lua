@@ -3,7 +3,7 @@ if not fs.exists(root) then
 	root = fs.ydwe_path()
 end
 
-require 'utility'
+require 'util'
 local w3xparser = require 'w3xparser'
 local lni       = require 'lni-c'
 
