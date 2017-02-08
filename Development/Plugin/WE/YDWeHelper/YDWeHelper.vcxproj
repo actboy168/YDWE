@@ -94,7 +94,6 @@
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="MemoryPatch.cpp" />
-    <ClCompile Include="MemoryPatternSearch.cpp" />
     <ClCompile Include="YDWEHook.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -110,7 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemoryPatch.h" />
-    <ClInclude Include="MemoryPatternSearch.h" />
     <ClInclude Include="YDWEHook.h" />
     <ClInclude Include="YDWELogger.h" />
   </ItemGroup>

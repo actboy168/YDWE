@@ -21,18 +21,12 @@
     <ClCompile Include="YDWEHook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MemoryPatternSearch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MemoryPatch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemoryPatch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MemoryPatternSearch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="YDWEHook.h">

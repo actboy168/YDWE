@@ -15,7 +15,6 @@
 #include <windows.h>
 #include <Shlobj.h>
 
-#include "MemoryPatternSearch.h"
 #include "MemoryPatch.h"
 
 #include "YDWELogger.h"
@@ -25,47 +24,6 @@ namespace NYDWE
 {
 namespace NGameHook
 {
-
-/** \brief Install patch
- *
- * Install patch
- *
- * \param searchStart Search start address
- * \param searchLength Length of the search
- * \param patchPattern Pattern of the code to search
- * \param patternLength Length of the pattern in bytes
- * \param patch Code used to patch
- * \param patchLength Length of the patch in bytes
- * \return Whether the patch succeeds.
- */
-static bool InstallPatch(void *searchStart, uint32_t searchLength, uint16_t *patchPattern, uint32_t patternLength, uint8_t *patch, uint32_t patchLength)
-{
-	bool result = false;
-
-	void *patchPoint = MemoryPatternSearch(searchStart, searchLength, patchPattern, patternLength);
-	if (patchPoint)
-	{
-		LOGGING_TRACE(lg) << base::format("Found patch point: 0x%08X", reinterpret_cast<uintptr_t>(patchPoint));
-
-		// Patch memory
-		bool patchResult = MemoryPatchAndVerify(patchPoint, patch, patchLength);
-		if (patchResult)
-		{
-			LOGGING_TRACE(lg) << "Patch memory success";
-			result = true;
-		}
-		else
-		{
-			LOGGING_ERROR(lg) << "Cannot make memory patch.";
-		}
-	}
-	else
-	{
-		LOGGING_ERROR(lg) << "Cannot find patch point.";
-	}
-
-	return result;
-}
 
 static bool InstallPatch(const char* name, uintptr_t address, uint8_t *patch, uint32_t patchLength)
 {
@@ -589,37 +547,7 @@ static uint8_t syntaxCheckPatch[] =
 	0x90
 };
 
-/*
-.text:005BC089 50                       push    eax
-.text:005BC08A 8B CF                    mov     ecx, edi
-.text:005BC08C 89 5F 04                 mov     [edi+4], ebx
-.text:005BC08F FF 52 0C                 call    dword ptr [edx+0Ch]
-*/
-static uint16_t syntaxCheckPattern[] =
-{
-	0xFF50,
-	0xFF8B, 0xFFCF,
-	0xFF89, 0xFF5F, 0xFF04,
-	0xFFFF, 0xFF52, 0xFF0C
-};
-
 static uintptr_t autoDisableAddress = 0x005CEFF3;
-
-/*
-.text:005CEFF3 E8 68 FD F4 FF                 call    sub_51ED60
-.text:005CEFF8 85 C0                          test    eax, eax
-.text:005CEFFA 75 09                          jnz     short loc_5CF005
-.text:005CEFFC 8B 4D FC                       mov     ecx, [ebp+var_4]
-.text:005CEFFF 53                             push    ebx
-*/
-static uint16_t autoDisablePattern[] = 
-{
-	0xFFE8, 0x0068, 0x00FD, 0x00F4, 0x00FF,
-	0xFF85, 0xFFC0,
-	0xFF75, 0xFF09,
-	0xFF8B, 0xFF4D, 0xFFFC,
-	0xFF53
-};
 
 static uint8_t autoDisablePatch[] = 
 {
@@ -628,54 +556,12 @@ static uint8_t autoDisablePatch[] =
 
 static uintptr_t enableTriggerCheck1Address = 0x005C88F5;
 
-/*
-.text:005C88F5 75 08                          jnz     short loc_5C88FF
-.text:005C88F7 5F                             pop     edi
-.text:005C88F8 5E                             pop     esi
-.text:005C88F9 8B E5                          mov     esp, ebp
-.text:005C88FB 5D                             pop     ebp
-.text:005C88FC C2 0C 00                       retn    0Ch
-.text:005C88FF 68 04 01 00 00                 push    104h
-*/
-static uint16_t enableTriggerCheck1Pattern[] = 
-{
-	0xFF75, 0xFF08, 
-	0xFF5F, 
-	0xFF5E, 
-	0xFF8B, 0xFFE5, 
-	0xFF5D, 
-	0xFFC2, 0xFF0C, 0xFF00, 
-	0xFF68, 0xFF04, 0xFF01, 0xFF00, 0xFF00
-};
-
 static uint8_t enableTriggerCheck1Patch[] = 
 {
 	0xEB		// jnz -> jmp
 };
 
 static uintptr_t enableTriggerCheck2Address = 0x005C88DA;
-
-/*
-.text:005C88DA 56                             push    esi
-.text:005C88DB E8 B0 62 F5 FF                 call    sub_51EB90
-.text:005C88E0 85 C0                          test    eax, eax
-.text:005C88E2 75 08                          jnz     short loc_5C88EC
-.text:005C88E4 5F                             pop     edi
-.text:005C88E5 5E                             pop     esi
-.text:005C88E6 8B E5                          mov     esp, ebp
-.text:005C88E8 5D                             pop     ebp
-*/
-static uint16_t enableTriggerCheck2Pattern[] = 
-{
-	0xFF56, 
-	0xFFE8, 0x00B0, 0x0062, 0x00F5, 0x00FF, 
-	0xFF85, 0xFFC0, 
-	0xFF75, 0xFF08, 
-	0xFF5F, 
-	0xFF5E, 
-	0xFF8B, 0xFFE5,
-	0xFF5D
-};
 
 static uint8_t enableTriggerCheck2Patch[] = 
 {
@@ -687,35 +573,12 @@ static uint8_t enableTriggerCheck2Patch[] =
 
 static uintptr_t doodadLimitAddress = 0x0054CAD8;
 
-static uint16_t doodadLimitPattern[] = 
-{
-	0xFF7E, 0xFF5C, 
-	0xFF53, 
-	0xFF57, 
-	0xFF33, 0xFFFF, 
-	0xFF8B, 0x0000, 
-	0xFF8B, 0xFF46, 0x0000, 
-	0xFF8B, 0xFF8C, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
-	0xFF03, 0xFFC7
-};
-
 static uint8_t doodadLimitPatch[] = 
 {
 	0xEB
 };
 
 static uintptr_t unitItemLimitAddress = 0x00554B7B;
-
-static uint16_t unitItemLimitPattern[] = 
-{
-	0xFF0F, 0xFF8E, 0x0000, 0xFF00, 0xFF00, 0xFF00, 
-	0xFF89, 0x0000, 0x0000, 
-	0xFF89, 0x0000, 0x0000, 
-	0xFF8B, 0xFF43, 0x0000, 
-	0xFF8B, 0xFF8C, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
-	0xFF03, 0xFFC7, 
-	0xFFF6, 0xFFC5, 0xFF04
-};
 
 static uint8_t unitItemLimitPatch[] = 
 {
@@ -724,23 +587,11 @@ static uint8_t unitItemLimitPatch[] =
 
 static uintptr_t editorInstanceCheckAddress = 0x00435870;
 
-static uint16_t editorInstanceCheckPattern[] = 
-{
-	0xFF57, 0xFF51, 0xFF6A, 0xFF00, 0xFF6A, 0xFF01, 
-	0xFF6A, 0xFF00, 
-	0xFFFF, 0xFF15, 0x0000, 0x0000, 0x0000, 0x0000, 
-	0xFF8B, 0xFFF8, 
-	0xFF85, 0xFFFF, 
-	0xFF75, 0x0000, 
-	0xFF5F, 0xFFC3, 0xFF56
-};
-
 static uint8_t editorInstanceCheckPatch[] = 
 {
 	0x33, 0xC0, 0xC3, 0x90
 };
 
-#define INSTALL_PATCH_CODEGEN(name) InstallPatch(pgWeTextSectionBase, gWeTextSectionLength, name## Pattern, sizeof(name## Pattern), name## Patch, sizeof(name## Patch))
 #define INSTALL_PATCH(name) InstallPatch(#name, name## Address, name## Patch, sizeof(name## Patch))
 
 static void InitPatches()
