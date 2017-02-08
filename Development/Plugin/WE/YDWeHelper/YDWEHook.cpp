@@ -67,6 +67,20 @@ static bool InstallPatch(void *searchStart, uint32_t searchLength, uint16_t *pat
 	return result;
 }
 
+static bool InstallPatch(const char* name, uintptr_t address, uint8_t *patch, uint32_t patchLength)
+{
+	bool ok = MemoryPatchAndVerify((void*)address, patch, patchLength);
+	if (ok)
+	{
+		LOGGING_TRACE(lg) << base::format("Patch %s in 0x%08X success.", name, address);
+	}
+	else
+	{
+		LOGGING_ERROR(lg) << base::format("Patch %s in 0x%08X failed.", name, address);
+	}
+	return ok;
+}
+
 static void *pgWeTextSectionBase;
 static uintptr_t gWeTextSectionLength;
 static void *pgWeDataSectionBase;
@@ -561,6 +575,8 @@ static void UninstallIATHook()
 	LOGGING_DEBUG(lg) << "IAT hook cleanup completed.";
 }
 
+static uintptr_t syntaxCheckAddress = 0x005BC089;
+
 static uint8_t syntaxCheckPatch[] = 
 {
 	0x31, 0xC0,	//xor eax,eax (return 0)
@@ -587,6 +603,8 @@ static uint16_t syntaxCheckPattern[] =
 	0xFFFF, 0xFF52, 0xFF0C
 };
 
+static uintptr_t autoDisableAddress = 0x005CEFF3;
+
 /*
 .text:005CEFF3 E8 68 FD F4 FF                 call    sub_51ED60
 .text:005CEFF8 85 C0                          test    eax, eax
@@ -607,6 +625,8 @@ static uint8_t autoDisablePatch[] =
 {
 	0x90, 0x90, 0x90, 0x90, 0x90
 };
+
+static uintptr_t enableTriggerCheck1Address = 0x005C88F5;
 
 /*
 .text:005C88F5 75 08                          jnz     short loc_5C88FF
@@ -632,6 +652,8 @@ static uint8_t enableTriggerCheck1Patch[] =
 {
 	0xEB		// jnz -> jmp
 };
+
+static uintptr_t enableTriggerCheck2Address = 0x005C88DA;
 
 /*
 .text:005C88DA 56                             push    esi
@@ -663,6 +685,8 @@ static uint8_t enableTriggerCheck2Patch[] =
 	0xEB							// jnz -> jmp
 };
 
+static uintptr_t doodadLimitAddress = 0x0054CAD8;
+
 static uint16_t doodadLimitPattern[] = 
 {
 	0xFF7E, 0xFF5C, 
@@ -680,6 +704,8 @@ static uint8_t doodadLimitPatch[] =
 	0xEB
 };
 
+static uintptr_t unitItemLimitAddress = 0x00554B7B;
+
 static uint16_t unitItemLimitPattern[] = 
 {
 	0xFF0F, 0xFF8E, 0x0000, 0xFF00, 0xFF00, 0xFF00, 
@@ -695,6 +721,8 @@ static uint8_t unitItemLimitPatch[] =
 {
 	0xE9, 0xA0, 0x00, 0x00, 0x00, 0x90
 };
+
+static uintptr_t editorInstanceCheckAddress = 0x00435870;
 
 static uint16_t editorInstanceCheckPattern[] = 
 {
@@ -713,6 +741,7 @@ static uint8_t editorInstanceCheckPatch[] =
 };
 
 #define INSTALL_PATCH_CODEGEN(name) InstallPatch(pgWeTextSectionBase, gWeTextSectionLength, name## Pattern, sizeof(name## Pattern), name## Patch, sizeof(name## Patch))
+#define INSTALL_PATCH(name) InstallPatch(#name, name## Address, name## Patch, sizeof(name## Patch))
 
 static void InitPatches()
 {
@@ -722,25 +751,25 @@ static void InitPatches()
 	{
 		// Syntax check patch
 		LOGGING_TRACE(lg) << "Installing syntax check patch";
-		INSTALL_PATCH_CODEGEN(syntaxCheck);
+		INSTALL_PATCH(syntaxCheck);
 
 		// Auto disable trigger patch
 		LOGGING_TRACE(lg) << "Installing auto disable patch";
-		INSTALL_PATCH_CODEGEN(autoDisable);
+		INSTALL_PATCH(autoDisable);
 
 		// Enable trigger check patch
 		LOGGING_TRACE(lg) << "Installing enable trigger check patch";
-		INSTALL_PATCH_CODEGEN(enableTriggerCheck1);
-		INSTALL_PATCH_CODEGEN(enableTriggerCheck2);
+		INSTALL_PATCH(enableTriggerCheck1);
+		INSTALL_PATCH(enableTriggerCheck2);
 
 		LOGGING_TRACE(lg) << "Installing doodad limit patch";
-		INSTALL_PATCH_CODEGEN(doodadLimit);
+		INSTALL_PATCH(doodadLimit);
 
 		LOGGING_TRACE(lg) << "Installing unit/item limit patch";
-		INSTALL_PATCH_CODEGEN(unitItemLimit);
+		INSTALL_PATCH(unitItemLimit);
 
 		LOGGING_TRACE(lg) << "Installing editor multi-instance patch";
-		INSTALL_PATCH_CODEGEN(editorInstanceCheck);
+		INSTALL_PATCH(editorInstanceCheck);
 
 		LOGGING_TRACE(lg) << "Installing attack table patch";
 
