@@ -51,9 +51,13 @@ local function unpack_data(name)
         except = type
     end
     if type ~= except then
-        check_bufs[#check_bufs+1] = string_sub(unpack_buf, buf_pos, unpack_pos - 5)
-        check_bufs[#check_bufs+1] = string_pack('l', except)
-        buf_pos = unpack_pos
+        if type == 3 or except == 3 then
+            except = type
+        else
+            check_bufs[#check_bufs+1] = string_sub(unpack_buf, buf_pos, unpack_pos - 5)
+            check_bufs[#check_bufs+1] = string_pack('l', except)
+            buf_pos = unpack_pos
+        end
     end
     if has_level then
         unpack 'll'
@@ -74,13 +78,10 @@ local function unpack_data(name)
         local format, newvalue
         if except == 0 then
             format = 'l'
-            newvalue = math_floor(tonumber(value) or 0)
+            newvalue = math_floor(value)
         elseif except == 1 or except == 2 then
             format = 'f'
-            newvalue = (tonumber(value) or 0) + 0.0
-        else
-            format = 'z'
-            newvalue = tostring(value)
+            newvalue = value + 0.0
         end
         check_bufs[#check_bufs+1] = string_pack(format, newvalue)
         buf_pos = unpack_pos
