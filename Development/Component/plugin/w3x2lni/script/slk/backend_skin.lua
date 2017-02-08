@@ -8,7 +8,7 @@ local function add_obj(w2l, name, obj, lines, wts)
     lines[#lines+1] = '[' .. name .. ']'
     for _, key in ipairs(keys) do
         local value = obj[key]
-        value = w2l:load_wts(wts, value)
+        value = w2l:load_wts(wts, value):gsub('\r\n', '|n'):gsub('[\r\n]', '|n')
         lines[#lines+1] = key .. '=' .. value
     end
 end

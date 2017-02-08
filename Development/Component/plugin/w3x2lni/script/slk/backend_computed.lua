@@ -17,7 +17,7 @@ local function get_displayname(o)
     else
         name = o.name or ''
     end
-    return displaytype[o._type], o._id, name:sub(1, 100):gsub('\r\n', ' ')
+    return displaytype[o._type], o._id, (name:sub(1, 100):gsub('\r\n', ' '))
 end
 
 local function get_displayname_by_id(slk, id)

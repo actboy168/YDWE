@@ -120,7 +120,7 @@ end
 
 local function txt_read_data(name, obj, key, meta, txt)
     if meta.index then
-        local value = txt and txt[meta.key]
+        local value = txt and txt[meta.key] or meta.default
         obj[key] = txt_to_type(meta.type, value and value[meta.index])
         return
     end
@@ -145,7 +145,7 @@ local function txt_read_data(name, obj, key, meta, txt)
         return
     end
 
-    local value = txt and txt[key]
+    local value = txt and txt[key] or meta.default
     if not value or #value == 0 then
         local value = txt_to_type(meta.type)
         if not value then

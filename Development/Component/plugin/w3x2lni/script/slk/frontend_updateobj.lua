@@ -2,6 +2,7 @@ local w2l
 local has_level
 local metadata
 local reports
+local reports2
 
 local pairs = pairs
 local string_sub = string.sub
@@ -32,6 +33,10 @@ end
 local function update_obj(name, type, obj, data)
     local parent = obj._parent
     local temp = data[parent]
+    if not temp then
+        reports2[#reports2+1] = {('底板不存在: %s [%s:%s]'):format(type, name, parent)}
+        return nil
+    end
     local code = temp._code
     local new_obj = {}
     obj._code = code
@@ -42,6 +47,10 @@ local function update_obj(name, type, obj, data)
         for key, meta in pairs(metadata[code]) do
             update_data(key, meta, obj, new_obj)
         end
+    end
+    if type == 'ability' and w2l.config.target_format == 'slk' and not next(new_obj) then
+        reports2[#reports2+1] = {('技能被移除: %s'):format(name), '自定义技能没有修改任何属性的话会被魔兽移除'}
+        return nil
     end
     for k, v in pairs(obj) do
         if string_sub(k, 1, 1) == '_' then
@@ -64,8 +73,9 @@ return function (w2l_, type, chunk, data)
     has_level = w2l.info.key.max_level[type]
     metadata = w2l:metadata()
     reports = {}
+    reports2 = {}
     for name, obj in pairs(chunk) do
         chunk[name] = update_obj(name, type, obj, data)
     end
-    return reports
+    return reports, reports2
 end

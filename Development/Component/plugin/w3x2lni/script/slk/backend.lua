@@ -57,6 +57,8 @@ local displaytype = {
     item = '物品',
     buff = '魔法效果',
     upgrade = '科技',
+    doodad = '装饰物',
+    destructable = '可破坏物',
 }
 
 local function get_displayname(o)
@@ -68,7 +70,7 @@ local function get_displayname(o)
     else
         name = o.name or ''
     end
-    return o._id, name:sub(1, 100):gsub('\r\n', ' ')
+    return o._id, (name:sub(1, 100):gsub('\r\n', ' '))
 end
 
 local function get_displayname_by_id(slk, id)
@@ -173,6 +175,8 @@ local function remove_unuse(w2l, slk)
         report_list(slk, origin_list, 'item', 5)
         report_list(slk, origin_list, 'buff', 1)
         report_list(slk, origin_list, 'upgrade', 1)
+        report_list(slk, origin_list, 'destructable', 1)
+        report_list(slk, origin_list, 'doodad', 1)
     end
     if unuse_custom > 0 then
         message('-report|4简化', ('简化掉的自定义对象数: %d/%d'):format(unuse_custom, total_custom))
@@ -181,6 +185,8 @@ local function remove_unuse(w2l, slk)
         report_list(slk, custom_list, 'item', 5)
         report_list(slk, custom_list, 'buff', 1)
         report_list(slk, custom_list, 'upgrade', 1)
+        report_list(slk, custom_list, 'destructable', 1)
+        report_list(slk, custom_list, 'doodad', 1)
     end
 end
 
@@ -273,28 +279,33 @@ return function (w2l, archive, slk)
     end
     progress(0.1)
 
-    progress:start(0.2)
+    progress:start(0.1)
     message('清理数据...')
     w2l:backend_searchparent(slk)
-    w2l:backend_cleanobj(slk)
     progress:finish()
 
     if w2l.config.remove_unuse_object then
         message('标记简化对象...')
         w2l:backend_mark(archive, slk)
-        progress(0.3)
+        progress(0.2)
     end
+
     if w2l.config.target_format == 'slk' then
         message('计算描述中的公式...')
         w2l:backend_computed(slk)
-        progress(0.4)
+        progress(0.3)
     end
+
     if w2l.config.remove_unuse_object then
         message('移除简化对象...')
-        progress:start(0.7)
+        progress:start(0.5)
         remove_unuse(w2l, slk)
         progress:finish()
     end
+
+    progress:start(0.7)
+    w2l:backend_cleanobj(slk)
+    progress:finish()
     
     progress:start(0.9)
     message('转换物编文件...')

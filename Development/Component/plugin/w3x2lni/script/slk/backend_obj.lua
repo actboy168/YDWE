@@ -147,7 +147,7 @@ local function is_enable_obj(obj, remove_unuse_object)
     if remove_unuse_object and not obj._mark then
         return false
     end
-    if obj._id ~= obj._parent then
+    if not obj._slk and obj._id ~= obj._parent then
         return true
     end
     for key, value in pairs(obj) do

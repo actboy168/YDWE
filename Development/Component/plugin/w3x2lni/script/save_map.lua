@@ -119,7 +119,7 @@ return function (w2l, output_ar, w3i, input_ar)
     output_ar:set('(signature)', false)
     output_ar:set('(attributes)', false)
 
-    if not w2l.config.remove_we_only then
+    if not w2l.config.remove_we_only and output_ar:get_type() == 'mpq' then
         save_imp(w2l, output_ar)
     end
 

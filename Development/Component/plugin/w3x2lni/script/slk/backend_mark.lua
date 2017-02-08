@@ -71,6 +71,7 @@ local slk
 local buffmap
 local search
 local mark_known_type
+local mark_known_type_no_child
 local report_once = {}
 local current_root = {'', '%s%s'}
 
@@ -83,7 +84,7 @@ local function get_displayname(o)
     else
         name = o.name or ''
     end
-    return o._id, name:sub(1, 100):gsub('\r\n', ' ')
+    return o._id, (name:sub(1, 100):gsub('\r\n', ' '))
 end
 
 local function get_displayname_by_id(slk, id)
@@ -126,18 +127,18 @@ local function mark_value(slk, type, value)
     if type == 'upgrade,unit' then
         if std_type(value) == 'string' then
             for _, name in ipairs(split(value)) do
-                if not mark_known_type(slk, 'unit', name) then
-                    if not mark_known_type(slk, 'upgrade', name) then
-                        if not mark_known_type(slk, 'misc', name) then
+                if not mark_known_type_no_child(slk, 'unit', name) then
+                    if not mark_known_type_no_child(slk, 'upgrade', name) then
+                        if not mark_known_type_no_child(slk, 'misc', name) then
                             report('简化时没有找到对象:', name)
                         end
                     end
                 end
             end
         else
-            if not mark_known_type(slk, 'unit', value) then
-                if not mark_known_type(slk, 'upgrade', value) then
-                    if not mark_known_type(slk, 'misc', value) then
+            if not mark_known_type_no_child(slk, 'unit', value) then
+                if not mark_known_type_no_child(slk, 'upgrade', value) then
+                    if not mark_known_type_no_child(slk, 'misc', value) then
                         report('简化时没有找到对象:', value)
                     end
                 end
@@ -173,6 +174,24 @@ local function mark_list(slk, o, list)
             mark_value(slk, type, value)
         end
     end
+end
+
+function mark_known_type_no_child(slk, type, name)
+    local o = slk[type][name]
+    if not o then
+        local o = slk.txt[name:lower()]
+        if o then
+            o._mark = current_root
+            report('引用未分类对象: ', ('%s 期望分类：%s'):format(name:lower(), type))
+            return true
+        end
+        return false
+    end
+    if o._mark then
+        return true
+    end
+    o._mark = current_root
+    return true
 end
 
 local function mark_known_type2(slk, type, name)

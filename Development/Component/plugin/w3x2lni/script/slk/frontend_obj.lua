@@ -72,9 +72,6 @@ local function read_obj(chunk, type)
     for i = 1, count do
         read_data(obj)
     end
-    if name == '\0\0\0\0' then
-        return nil
-    end
     if not default[parent] then
         force_slk = true
     end
