@@ -1,26 +1,29 @@
-require "mapanalyzer"
 require "filesystem"
 require "util"
 require "localization"
-require "interface_storm"
 local ffi = require "ffi"
+local lni = require 'lni-c'
+
+local path = fs.ydwe_path() / 'plugin' / 'w3x2lni' / 'script' / 'prebuilt' / 'default'
+local default = {}
+local function get_default(type)
+	if not default[type] then
+		default[type] = lni(io.load(path / (type .. '.ini')))
+	end
+	return default[type]
+end
 
 local object = {}
 
-function object:initialize ()
-	self.interface = interface_stormlib()
-	self.interface:open_path(fs.ydwe_path() / "share" / "mpq" / "units")
-	self.manager = mapanalyzer.new(self.interface)	
-	self.object_type = {
-		[0] = 'unit',
-		[1] = 'item',
-		[2] = 'destructable',
-		[3] = 'doodad',
-		[4] = 'ability',
-		[5] = 'buff',
-		[6] = 'upgrade',
-	}
-end
+local object_type = {
+	[0] = 'unit',
+	[1] = 'item',
+	[2] = 'destructable',
+	[3] = 'doodad',
+	[4] = 'ability',
+	[5] = 'buff',
+	[6] = 'upgrade',
+}
 
 function object:original_has (this_, id_string_)
 	local this_ptr_ = ffi.cast('uint32_t*', this_)
@@ -39,17 +42,14 @@ function object:original_has (this_, id_string_)
 end
 
 function object:custom_has (type_, id_string_)
-	if not self.object_type[type_] then
+	if not object_type[type_] then
 		return false
 	end
-	if not self.manager[self.object_type[type_]][id_string_] then
+	if not get_default(object_type[type_])[id_string_] then
 		return false
 	end
 	return true
 end
-
-object:initialize()
-
 
 
 -- 在新建物体的时候调用，本函数根据用户的操作决定新ID值
