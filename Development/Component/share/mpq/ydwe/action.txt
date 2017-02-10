@@ -3494,7 +3494,7 @@ default = "hfoo"
 [[.args]]
 type = location
 [[.args]]
-type = real
+type = degree
 default = "0"
 
 [KillUnit]
