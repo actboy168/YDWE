@@ -10150,7 +10150,7 @@ C;X2;K"ANfd"
 C;X3;K"Finger of Pain"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -10234,7 +10234,7 @@ C;X2;K"ANfd"
 C;X3;K"Finger of Pain (2,1 Button)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -13415,7 +13415,7 @@ C;X2;K"Aadm"
 C;X3;K"Abolish Magic"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -13498,7 +13498,7 @@ C;X2;K"Aadm"
 C;X3;K"Abolish Magic(naga)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"naga"
@@ -13581,7 +13581,7 @@ C;X2;K"Aadm"
 C;X3;K"Abolish Magic (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -13664,7 +13664,7 @@ C;X2;K"Aadm"
 C;X3;K"Abolish Magic (Creep, 1,2 pos)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -13747,7 +13747,7 @@ C;X2;K"Aabs"
 C;X3;K"Absorb Mana"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -13830,7 +13830,7 @@ C;X2;K"Aaha"
 C;X3;K"Acolyte Harvest"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -13995,8 +13995,8 @@ C;X1;Y164;K"Aalr"
 C;X2;K"Aalr"
 C;X3;K"Alarm"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -14079,7 +14079,7 @@ C;X2;K"Aall"
 C;X3;K"Allied Building"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -14162,7 +14162,7 @@ C;X2;K"Aast"
 C;X3;K"Ancestral Spirit"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -14245,7 +14245,7 @@ C;X2;K"ACad"
 C;X3;K"Animate Dead (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -14329,7 +14329,7 @@ C;X2;K"Aams"
 C;X3;K"Anti-magic Shield"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -14413,7 +14413,7 @@ C;X2;K"Aams"
 C;X3;K"Anti-magic Shield (Matrix)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -14497,7 +14497,7 @@ C;X2;K"Aams"
 C;X3;K"Anti-magic Shield (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -14580,8 +14580,8 @@ C;X1;Y171;K"Aatk"
 C;X2;K"Aatk"
 C;X3;K"Attack"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -14664,7 +14664,7 @@ C;X2;K"AHab"
 C;X3;K"Aura - Brilliance (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -14748,7 +14748,7 @@ C;X2;K"AOac"
 C;X3;K"Aura - Command (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -14832,7 +14832,7 @@ C;X2;K"AHad"
 C;X3;K"Aura - Devotion (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -14916,7 +14916,7 @@ C;X2;K"AOae"
 C;X3;K"Aura - Endurance (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -15000,7 +15000,7 @@ C;X2;K"Aapl"
 C;X3;K"Aura - Plague (Abomination)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -15085,7 +15085,7 @@ C;X2;K"Aapl"
 C;X3;K"Aura - Plague (Plague Ward)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -15169,7 +15169,7 @@ C;X2;K"Aapl"
 C;X3;K"Aura - Plague (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -15254,7 +15254,7 @@ C;X2;K"Aapl"
 C;X3;K"Aura - Plague (Creep gfx)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -15338,7 +15338,7 @@ C;X2;K"Aoar"
 C;X3;K"Aura - Regeneration (Ward)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -15422,7 +15422,7 @@ C;X2;K"Aabr"
 C;X3;K"Aura - Regeneration (Statue)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -15506,7 +15506,7 @@ C;X2;K"Aasl"
 C;X3;K"Aura - Slow"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"naga"
@@ -15590,7 +15590,7 @@ C;X2;K"AEar"
 C;X3;K"Aura - Trueshot (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -15674,7 +15674,7 @@ C;X2;K"Aakb"
 C;X3;K"Aura - War Drums"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -15758,7 +15758,7 @@ C;X2;K"Aave"
 C;X3;K"Avenger Form"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -15842,7 +15842,7 @@ C;X2;K"Aawa"
 C;X3;K"Awaken"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -15925,7 +15925,7 @@ C;X2;K"Abof"
 C;X3;K"Balls of Fire"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -16010,7 +16010,7 @@ C;X2;K"AHbn"
 C;X3;K"Banish(Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"hero"
 C;X9;K"creeps"
@@ -16095,7 +16095,7 @@ C;X2;K"AHbh"
 C;X3;K"Bash (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -16179,7 +16179,7 @@ C;X2;K"AHbh"
 C;X3;K"Bash (Beastmaster Bear)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -16263,7 +16263,7 @@ C;X2;K"AHbh"
 C;X3;K"Bash (maul , SP Bear, level 3)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -16347,7 +16347,7 @@ C;X2;K"Abtl"
 C;X3;K"Battlestations"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -16430,7 +16430,7 @@ C;X2;K"Abtl"
 C;X3;K"Battlestations (Chaos)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -16513,7 +16513,7 @@ C;X2;K"Abrf"
 C;X3;K"Bearform"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -16597,7 +16597,7 @@ C;X2;K"Absk"
 C;X3;K"Beserk"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -16681,7 +16681,7 @@ C;X2;K"Acha"
 C;X3;K"Berserker Upgrade"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -16765,7 +16765,7 @@ C;X2;K"ANba"
 C;X3;K"Black Arrow (melee, creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -16850,7 +16850,7 @@ C;X2;K"Abli"
 C;X3;K"Blight Dispel (Small)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -16933,7 +16933,7 @@ C;X2;K"Abli"
 C;X3;K"Blight Dispel (Large)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -17016,7 +17016,7 @@ C;X2;K"Abli"
 C;X3;K"Blight Growth (Small)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -17099,7 +17099,7 @@ C;X2;K"Abli"
 C;X3;K"Blight Growth (Large)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -17182,7 +17182,7 @@ C;X2;K"Abgm"
 C;X3;K"Blighted Gold mine"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -17348,7 +17348,7 @@ C;X2;K"AHbz"
 C;X3;K"Blizzard (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -17433,7 +17433,7 @@ C;X2;K"Ablo"
 C;X3;K"Bloodlust"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -17517,7 +17517,7 @@ C;X2;K"Ablo"
 C;X3;K"Bloodlust (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -17601,7 +17601,7 @@ C;X2;K"Ablo"
 C;X3;K"Bloodlust (creep, Hotkey B)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -17685,7 +17685,7 @@ C;X2;K"ANbf"
 C;X3;K"Breath of Fire(Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -17772,7 +17772,7 @@ C;X2;K"ACbf"
 C;X3;K"Breath of Frost(Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -17858,8 +17858,8 @@ C;X1;Y210;K"ANbu"
 C;X2;K"ANbu"
 C;X3;K"Build (Neutral)"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -17941,8 +17941,8 @@ C;X1;Y211;K"AHbu"
 C;X2;K"AHbu"
 C;X3;K"Build (Human)"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -18024,8 +18024,8 @@ C;X1;Y212;K"AObu"
 C;X2;K"AObu"
 C;X3;K"Build (Orc)"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -18107,8 +18107,8 @@ C;X1;Y213;K"AEbu"
 C;X2;K"AEbu"
 C;X3;K"Build (Night Elf)"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -18190,8 +18190,8 @@ C;X1;Y214;K"AUbu"
 C;X2;K"AUbu"
 C;X3;K"Build (Undead)"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -18273,8 +18273,8 @@ C;X1;Y215;K"AGbu"
 C;X2;K"AGbu"
 C;X3;K"Build (Naga)"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -18357,7 +18357,7 @@ C;X2;K"Abur"
 C;X3;K"Burrow"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -18441,7 +18441,7 @@ C;X2;K"Abur"
 C;X3;K"Burrow(scarab lvl 2)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -18525,7 +18525,7 @@ C;X2;K"Abur"
 C;X3;K"Burrow(scarab lvl 3)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -18609,7 +18609,7 @@ C;X2;K"Abur"
 C;X3;K"Burrow(Barbed Arachnathid)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -18693,7 +18693,7 @@ C;X2;K"Abdt"
 C;X3;K"Burrow Detection (Flyers)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -18776,7 +18776,7 @@ C;X2;K"Acan"
 C;X3;K"Cannibalize"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -18859,7 +18859,7 @@ C;X2;K"Acan"
 C;X3;K"Cannibalize (Abomination)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -18942,7 +18942,7 @@ C;X2;K"Acan"
 C;X3;K"Cannibalize (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -19025,7 +19025,7 @@ C;X2;K"Abun"
 C;X3;K"Cargo Hold (Burrow)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -19108,7 +19108,7 @@ C;X2;K"Advc"
 C;X3;K"Cargo Hold (Devour)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -19191,7 +19191,7 @@ C;X2;K"Amtc"
 C;X3;K"Cargo Hold (Meat Wagon)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -19274,7 +19274,7 @@ C;X2;K"Acar"
 C;X3;K"Cargo Hold (Ship)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -19357,7 +19357,7 @@ C;X2;K"Acar"
 C;X3;K"Cargo Hold (Tank)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -19440,7 +19440,7 @@ C;X2;K"Acar"
 C;X3;K"Cargo Hold (Transport)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -19523,7 +19523,7 @@ C;X2;K"Aenc"
 C;X3;K"Cargo Hold (Gold Mine)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -19606,7 +19606,7 @@ C;X2;K"Achd"
 C;X3;K"Cargo Hold Death"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -19689,7 +19689,7 @@ C;X2;K"AUcs"
 C;X3;K"Carrion Swarm (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -19773,7 +19773,7 @@ C;X2;K"AUcs"
 C;X3;K"Crushing Wave"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -19857,7 +19857,7 @@ C;X2;K"AUcs"
 C;X3;K"Crushing Wave (Dragon Turtle)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -19941,7 +19941,7 @@ C;X2;K"AUcs"
 C;X3;K"Crushing Wave (Lesser)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -20025,7 +20025,7 @@ C;X2;K"AOcl"
 C;X3;K"Chain Lightning (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -20108,7 +20108,7 @@ C;X2;K"AIdc"
 C;X3;K"Chain Dispel"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -20191,7 +20191,7 @@ C;X2;K"Acha"
 C;X3;K"Chaos (Grunt)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -20275,7 +20275,7 @@ C;X2;K"Acha"
 C;X3;K"Chaos (Raider)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -20359,7 +20359,7 @@ C;X2;K"Acha"
 C;X3;K"Chaos (Shaman)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -20443,7 +20443,7 @@ C;X2;K"Acha"
 C;X3;K"Chaos (Kodo)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -20527,7 +20527,7 @@ C;X2;K"Acha"
 C;X3;K"Chaos (Peon)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -20611,7 +20611,7 @@ C;X2;K"Acha"
 C;X3;K"Chaos (Grom)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -20695,7 +20695,7 @@ C;X2;K"Achl"
 C;X3;K"Chaos Cargo Load"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -20779,7 +20779,7 @@ C;X2;K"ANch"
 C;X3;K"Charm"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -20863,7 +20863,7 @@ C;X2;K"ANca"
 C;X3;K"Cleaving Attack (Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -20949,7 +20949,7 @@ C;X2;K"Aclf"
 C;X3;K"Cloud of Fog"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -21034,7 +21034,7 @@ C;X2;K"AHca"
 C;X3;K"Cold Arrows (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -21118,7 +21118,7 @@ C;X2;K"Acmg"
 C;X3;K"Control Magic"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -21202,7 +21202,7 @@ C;X2;K"Acpf"
 C;X3;K"Corporeal Form"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -21286,7 +21286,7 @@ C;X2;K"Acor"
 C;X3;K"Corrosive Breath"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -21369,7 +21369,7 @@ C;X2;K"Acoa"
 C;X3;K"Couple (Archer)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -21453,7 +21453,7 @@ C;X2;K"Acoh"
 C;X3;K"Couple (Hippogryph)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -21537,7 +21537,7 @@ C;X2;K"Acoi"
 C;X3;K"Couple Instant (Archer)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -21621,7 +21621,7 @@ C;X2;K"Acoi"
 C;X3;K"Couple Instant (Hippogryph)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -21704,8 +21704,8 @@ C;X1;Y256;K"ACsp"
 C;X2;K"ACsp"
 C;X3;K"Creep Sleep"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -21788,7 +21788,7 @@ C;X2;K"Acri"
 C;X3;K"Cripple"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -21872,7 +21872,7 @@ C;X2;K"Acri"
 C;X3;K"Cripple (Warlock)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -21956,7 +21956,7 @@ C;X2;K"Acri"
 C;X3;K"Cripple (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -22040,7 +22040,7 @@ C;X2;K"AOcr"
 C;X3;K"Critical Strike (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -22123,7 +22123,7 @@ C;X2;K"Acrs"
 C;X3;K"Curse"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -22207,7 +22207,7 @@ C;X2;K"Acrs"
 C;X3;K"Curse (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -22291,7 +22291,7 @@ C;X2;K"Acyc"
 C;X3;K"Cyclone"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -22375,7 +22375,7 @@ C;X2;K"Acyc"
 C;X3;K"Cyclone (naga)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"naga"
@@ -22459,7 +22459,7 @@ C;X2;K"Acyc"
 C;X3;K"Cyclone (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -22543,7 +22543,7 @@ C;X2;K"Acyc"
 C;X3;K"Cyclone (Cenarius)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -22627,7 +22627,7 @@ C;X2;K"AUdc"
 C;X3;K"Death Coil (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -22710,7 +22710,7 @@ C;X2;K"Adda"
 C;X3;K"Death Damage (sapper)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -22793,7 +22793,7 @@ C;X2;K"Adda"
 C;X3;K"Death Damage (mine)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -22876,7 +22876,7 @@ C;X2;K"Adda"
 C;X3;K"Death Damage (mine BIG)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -22959,7 +22959,7 @@ C;X2;K"Adec"
 C;X3;K"Decouple"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -23042,7 +23042,7 @@ C;X2;K"Adef"
 C;X3;K"Defend"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -23125,7 +23125,7 @@ C;X2;K"Adet"
 C;X3;K"Detect (Sentry Ward)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -23208,7 +23208,7 @@ C;X2;K"Atru"
 C;X3;K"Detect (Shade)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -23291,7 +23291,7 @@ C;X2;K"Atru"
 C;X3;K"Detect (general)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -23374,7 +23374,7 @@ C;X2;K"Atru"
 C;X3;K"Detect(War Eagle)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -23457,7 +23457,7 @@ C;X2;K"Agyv"
 C;X3;K"Detect (Gyrocopter)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -23540,7 +23540,7 @@ C;X2;K"Adts"
 C;X3;K"Detect (Magic Sentinel)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -23623,7 +23623,7 @@ C;X2;K"Adtn"
 C;X3;K"Detonate"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -23706,7 +23706,7 @@ C;X2;K"Adev"
 C;X3;K"Devour"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -23790,7 +23790,7 @@ C;X2;K"ACdv"
 C;X3;K"Devour (Dragon Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -23874,7 +23874,7 @@ C;X2;K"Advm"
 C;X3;K"Devour Magic"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -23957,7 +23957,7 @@ C;X2;K"Advm"
 C;X3;K"Devour Magic(creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -24040,7 +24040,7 @@ C;X2;K"Adch"
 C;X3;K"Disenchant(old)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -24123,7 +24123,7 @@ C;X2;K"Adis"
 C;X3;K"Disenchant(new)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -24206,7 +24206,7 @@ C;X2;K"Adis"
 C;X3;K"Dispel Magic"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -24289,7 +24289,7 @@ C;X2;K"Adis"
 C;X3;K"Dispel Magic (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -24372,7 +24372,7 @@ C;X2;K"AHds"
 C;X3;K"Divine Shield (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -24456,7 +24456,7 @@ C;X2;K"AHdr"
 C;X3;K"Drain Life(Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -24541,7 +24541,7 @@ C;X2;K"Adri"
 C;X3;K"Drop Instant"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -24624,7 +24624,7 @@ C;X2;K"Adro"
 C;X3;K"Drop"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -24707,7 +24707,7 @@ C;X2;K"Adro"
 C;X3;K"Drop"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -24789,8 +24789,8 @@ C;X1;Y293;K"Atdp"
 C;X2;K"Atdp"
 C;X3;K"Drop Pilot"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -24873,7 +24873,7 @@ C;X2;K"Aeat"
 C;X3;K"Eat Tree"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -24957,7 +24957,7 @@ C;X2;K"AIdd"
 C;X3;K"Elune's Grace"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -25040,7 +25040,7 @@ C;X2;K"Aens"
 C;X3;K"Ensnare(Naga)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"naga"
@@ -25124,7 +25124,7 @@ C;X2;K"Aens"
 C;X3;K"Ensnare"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -25208,7 +25208,7 @@ C;X2;K"Aens"
 C;X3;K"Ensnare (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -25292,7 +25292,7 @@ C;X2;K"Aent"
 C;X3;K"Entangle"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -25376,7 +25376,7 @@ C;X2;K"Aegm"
 C;X3;K"Entangled Gold Mine"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -25459,7 +25459,7 @@ C;X2;K"AEer"
 C;X3;K"Entangling Roots (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -25543,7 +25543,7 @@ C;X2;K"AEer"
 C;X3;K"Entangling Seaweed"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -25627,7 +25627,7 @@ C;X2;K"Aetl"
 C;X3;K"Ethereal"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -25710,7 +25710,7 @@ C;X2;K"Aetf"
 C;X3;K"Ethereal Form"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -25794,7 +25794,7 @@ C;X2;K"AEev"
 C;X3;K"Evasion (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -25877,7 +25877,7 @@ C;X2;K"AEev"
 C;X3;K"Evasion (creep 100%)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -25960,7 +25960,7 @@ C;X2;K"Aexh"
 C;X3;K"Exhume"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -26044,7 +26044,7 @@ C;X2;K"ANfy"
 C;X3;K"Factory"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -26129,7 +26129,7 @@ C;X2;K"Afae"
 C;X3;K"Faerie Fire"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -26213,7 +26213,7 @@ C;X2;K"Afae"
 C;X3;K"Faerie Fire"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -26297,7 +26297,7 @@ C;X2;K"Afae"
 C;X3;K"Faerie Fire (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -26381,7 +26381,7 @@ C;X2;K"Afbk"
 C;X3;K"Feedback"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -26464,7 +26464,7 @@ C;X2;K"Afbk"
 C;X3;K"Feedback(Arcane Tower)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -26547,7 +26547,7 @@ C;X2;K"Afbk"
 C;X3;K"Feedback (Spirit Beast)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -26630,7 +26630,7 @@ C;X2;K"AOsf"
 C;X3;K"Feral Spirit (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -26714,7 +26714,7 @@ C;X2;K"AOsf"
 C;X3;K"Feral Spirit (creep - pig)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -26972,7 +26972,7 @@ C;X2;K"ANfd"
 C;X3;K"Finger of Death"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -27055,7 +27055,7 @@ C;X2;K"ANfb"
 C;X3;K"Fire Bolt (warlock)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -27138,7 +27138,7 @@ C;X2;K"ANfb"
 C;X3;K"Fire Bolt (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -27221,7 +27221,7 @@ C;X2;K"Aflk"
 C;X3;K"Flak Cannon"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -27304,7 +27304,7 @@ C;X2;K"Afla"
 C;X3;K"Flare"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -27388,7 +27388,7 @@ C;X2;K"AHfs"
 C;X3;K"Flame Strike (Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -27474,7 +27474,7 @@ C;X2;K"AHfs"
 C;X3;K"Flame Strike (Improved Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -27560,7 +27560,7 @@ C;X2;K"AEfn"
 C;X3;K"Force of Nature (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -27645,7 +27645,7 @@ C;X2;K"ANfl"
 C;X3;K"Forked Lightning(creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -27729,7 +27729,7 @@ C;X2;K"Afsh"
 C;X3;K"Frag Shards"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -27812,7 +27812,7 @@ C;X2;K"Afrz"
 C;X3;K"Freezing Breath"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -27896,7 +27896,7 @@ C;X2;K"Afzy"
 C;X3;K"Frenzy"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -27980,7 +27980,7 @@ C;X2;K"AUfa"
 C;X3;K"Frost Armor (creep,old)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -28064,7 +28064,7 @@ C;X2;K"AUfu"
 C;X3;K"Frost Armor (creep,autocast)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -28148,7 +28148,7 @@ C;X2;K"AUfu"
 C;X3;K"Frost Armor (Autocast, Naga)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"naga"
@@ -28233,7 +28233,7 @@ C;X2;K"Afra"
 C;X3;K"Frost Attack"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -28317,7 +28317,7 @@ C;X2;K"Afra"
 C;X3;K"Frost Attack (1,2)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -28401,7 +28401,7 @@ C;X2;K"Afrb"
 C;X3;K"Frost Breath"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -28485,7 +28485,7 @@ C;X2;K"AUfn"
 C;X3;K"Frost Nova (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -28569,7 +28569,7 @@ C;X2;K"AHtb"
 C;X3;K"Frost Bolt"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -28654,7 +28654,7 @@ C;X2;K"Agho"
 C;X3;K"Ghost"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -28737,7 +28737,7 @@ C;X2;K"Aeth"
 C;X3;K"Ghost (Visible)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -28820,7 +28820,7 @@ C;X2;K"Agld"
 C;X3;K"Gold Mine"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -28903,7 +28903,7 @@ C;X2;K"Agra"
 C;X3;K"Grab Tree"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -28987,7 +28987,7 @@ C;X2;K"Agyd"
 C;X3;K"Graveyard"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -29071,7 +29071,7 @@ C;X2;K"Agyb"
 C;X3;K"Gyrocopter Bombs"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -29154,7 +29154,7 @@ C;X2;K"Assk"
 C;X3;K"Hardened Skin"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -29237,7 +29237,7 @@ C;X2;K"Assk"
 C;X3;K"Hardened Skin(Naga Turtle)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"naga"
@@ -29320,7 +29320,7 @@ C;X2;K"Ahar"
 C;X3;K"Harvest"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -29403,7 +29403,7 @@ C;X2;K"Ahar"
 C;X3;K"Harvest (naga)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -29486,7 +29486,7 @@ C;X2;K"Ahrl"
 C;X3;K"Harvest Lumber"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -29569,7 +29569,7 @@ C;X2;K"Ahrl"
 C;X3;K"Harvest Lumber (shredder)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -29652,7 +29652,7 @@ C;X2;K"Ahrl"
 C;X3;K"Harvest Lumber (Arch ghouls)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -29735,7 +29735,7 @@ C;X2;K"Ahea"
 C;X3;K"Heal"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -29819,7 +29819,7 @@ C;X2;K"Anhe"
 C;X3;K"Heal (Creep Normal)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -29903,7 +29903,7 @@ C;X2;K"Anhe"
 C;X3;K"Heal (Creep Normal)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -29987,7 +29987,7 @@ C;X2;K"Anhe"
 C;X3;K"Heal (Creep High)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -30071,7 +30071,7 @@ C;X2;K"Ahwd"
 C;X3;K"Healing Ward"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -30156,7 +30156,7 @@ C;X2;K"Ahwd"
 C;X3;K"Healing Ward (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -30241,7 +30241,7 @@ C;X2;K"AOhw"
 C;X3;K"Healing Wave(Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -30325,7 +30325,7 @@ C;X2;K"Aroa"
 C;X3;K"null roar (summoner)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"naga"
@@ -30408,8 +30408,8 @@ C;X1;Y360;K"AHer"
 C;X2;K"AHer"
 C;X3;K"Hero"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -30492,7 +30492,7 @@ C;X2;K"AOhx"
 C;X3;K"Hex (Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -30576,7 +30576,7 @@ C;X2;K"ANht"
 C;X3;K"Howl of Terror"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -30660,7 +30660,7 @@ C;X2;K"AEim"
 C;X3;K"Immolation (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -30744,7 +30744,7 @@ C;X2;K"AUim"
 C;X3;K"Impale(Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -30828,7 +30828,7 @@ C;X2;K"Aimp"
 C;X3;K"Impaling Bolt"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -30911,7 +30911,7 @@ C;X2;K"Ainf"
 C;X3;K"Inner Fire"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -30995,7 +30995,7 @@ C;X2;K"Ainf"
 C;X3;K"Inner Fire (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -31079,7 +31079,7 @@ C;X2;K"Aivs"
 C;X3;K"Invisibility"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -31163,7 +31163,7 @@ C;X2;K"AInv"
 C;X3;K"Inventory"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -31246,7 +31246,7 @@ C;X2;K"AInv"
 C;X3;K"Inventory (Pack Mule)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -31329,7 +31329,7 @@ C;X2;K"AInv"
 C;X3;K"Inventory(2 slot unit) Orc"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -31412,7 +31412,7 @@ C;X2;K"AInv"
 C;X3;K"Inventory(2 slot unit) Human"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -31495,7 +31495,7 @@ C;X2;K"AInv"
 C;X3;K"Inventory(2 slot unit) Night Elf"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -31578,7 +31578,7 @@ C;X2;K"AInv"
 C;X3;K"Inventory(2 slot unit) Undead"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -31661,7 +31661,7 @@ C;X2;K"Avul"
 C;X3;K"Invulnerable"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -31744,7 +31744,7 @@ C;X2;K"Alit"
 C;X3;K"Lightning Attack"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -31827,7 +31827,7 @@ C;X2;K"Alsh"
 C;X3;K"Lightning Shield"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -31911,7 +31911,7 @@ C;X2;K"Alsh"
 C;X3;K"Lightning Shield (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -31995,7 +31995,7 @@ C;X2;K"Aliq"
 C;X3;K"Liquid Fire"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -32079,7 +32079,7 @@ C;X2;K"Aloa"
 C;X3;K"Load"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -32162,7 +32162,7 @@ C;X2;K"Aloa"
 C;X3;K"Load (Burrow)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -32245,7 +32245,7 @@ C;X2;K"Aloa"
 C;X3;K"Load (Entangled Gold Mine)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -32328,7 +32328,7 @@ C;X2;K"Aloa"
 C;X3;K"Load (Navies)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -32410,8 +32410,8 @@ C;X1;Y384;K"Atlp"
 C;X2;K"Atlp"
 C;X3;K"Load Pilot"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -32493,8 +32493,8 @@ C;X1;Y385;K"Aloc"
 C;X2;K"Aloc"
 C;X3;K"Locust"
 C;X4;K1
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -32577,7 +32577,7 @@ C;X2;K"Amdf"
 C;X3;K"Magic Defense"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -32660,7 +32660,7 @@ C;X2;K"Amim"
 C;X3;K"Magic Immunity"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -32743,7 +32743,7 @@ C;X2;K"Amim"
 C;X3;K"Magic Immunity (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -32826,7 +32826,7 @@ C;X2;K"Amim"
 C;X3;K"Magic Immunity (Archimonde)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -32909,7 +32909,7 @@ C;X2;K"Amim"
 C;X3;K"Magic Immunity (Dragons)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -32992,7 +32992,7 @@ C;X2;K"Amls"
 C;X3;K"Aerial Shackles"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -33076,7 +33076,7 @@ C;X2;K"Ambt"
 C;X3;K"Mana Battery"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -33159,7 +33159,7 @@ C;X2;K"Ambt"
 C;X3;K"Mana Battery (Obsidian Statue)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -33242,7 +33242,7 @@ C;X2;K"AEmb"
 C;X3;K"Mana Burn (demon)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -33325,7 +33325,7 @@ C;X2;K"AEmb"
 C;X3;K"Mana Burn (demon)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -33408,7 +33408,7 @@ C;X2;K"AEmb"
 C;X3;K"Mana Burn (Hotkey B)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -33491,7 +33491,7 @@ C;X2;K"Amfl"
 C;X3;K"Mana Flare"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -33575,7 +33575,7 @@ C;X2;K"ANms"
 C;X3;K"Mana Shield(Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -33660,7 +33660,7 @@ C;X2;K"Amed"
 C;X3;K"Meat Drop"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -33743,7 +33743,7 @@ C;X2;K"Amel"
 C;X3;K"Meat Load"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -33826,7 +33826,7 @@ C;X2;K"Amil"
 C;X3;K"Militia"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -33909,7 +33909,7 @@ C;X2;K"Amic"
 C;X3;K"Militia Conversion"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -33992,7 +33992,7 @@ C;X2;K"ANmr"
 C;X3;K"Mind Rot"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -34076,7 +34076,7 @@ C;X2;K"Amin"
 C;X3;K"Mine"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -34159,7 +34159,7 @@ C;X2;K"ANmo"
 C;X3;K"Monsoon(creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"hero"
 C;X9;K"creeps"
@@ -34244,7 +34244,7 @@ C;X2;K"Amgl"
 C;X3;K"Moon Glaive"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -34327,7 +34327,7 @@ C;X2;K"Amgl"
 C;X3;K"Moon Glaive (No research)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -34409,8 +34409,8 @@ C;X1;Y408;K"Amov"
 C;X2;K"Amov"
 C;X3;K"Move"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -34493,7 +34493,7 @@ C;X2;K"Aneu"
 C;X3;K"Neutral Building"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -34576,7 +34576,7 @@ C;X2;K"Aneu"
 C;X3;K"Neutral Building (any unit)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -34659,7 +34659,7 @@ C;X2;K"Andt"
 C;X3;K"Neutral Detection (Reveal ability)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -34743,7 +34743,7 @@ C;X2;K"Aarm"
 C;X3;K"Neutral Regen (mana only)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -34826,7 +34826,7 @@ C;X2;K"Aoar"
 C;X3;K"Neutral Regen (health only)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -34909,7 +34909,7 @@ C;X2;K"AAns"
 C;X3;K"Neutral Spell"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -34992,7 +34992,7 @@ C;X2;K"Ansp"
 C;X3;K"Neutral Spies"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -35075,7 +35075,7 @@ C;X2;K"Afak"
 C;X3;K"Orb of Annihilation"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -35158,7 +35158,7 @@ C;X2;K"Afak"
 C;X3;K"Orb of Annihilation (Quill Spray)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -35240,8 +35240,8 @@ C;X1;Y418;K"Afir"
 C;X2;K"Afir"
 C;X3;K"On Fire"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -35323,8 +35323,8 @@ C;X1;Y419;K"Afih"
 C;X2;K"Afih"
 C;X3;K"On Fire (Human)"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -35406,8 +35406,8 @@ C;X1;Y420;K"Afio"
 C;X2;K"Afio"
 C;X3;K"On Fire (Orc)"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -35489,8 +35489,8 @@ C;X1;Y421;K"Afin"
 C;X2;K"Afin"
 C;X3;K"On Fire (Night Elf)"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -35572,8 +35572,8 @@ C;X1;Y422;K"Afiu"
 C;X2;K"Afiu"
 C;X3;K"On Fire (Undead)"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -35656,7 +35656,7 @@ C;X2;K"ANpa"
 C;X3;K"Parasite"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"naga"
@@ -35741,7 +35741,7 @@ C;X2;K"ANpa"
 C;X3;K"Parasite(eredar)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -35826,7 +35826,7 @@ C;X2;K"ANpi"
 C;X3;K"Permanent Immolation"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -35910,7 +35910,7 @@ C;X2;K"ANpi"
 C;X3;K"Permanent Immolation (flying)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -35994,7 +35994,7 @@ C;X2;K"Apig"
 C;X3;K"Permanent Immolation (graphic)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -36078,7 +36078,7 @@ C;X2;K"Apiv"
 C;X3;K"Permanent Invisibility"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -36161,7 +36161,7 @@ C;X2;K"Apsh"
 C;X3;K"Phase Shift"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -36245,7 +36245,7 @@ C;X2;K"Aphx"
 C;X3;K"Phoenix"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -36329,7 +36329,7 @@ C;X2;K"Apxf"
 C;X3;K"PhoenixFire"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -36411,7 +36411,7 @@ C;X2;K"Apts"
 C;X3;K"Plague Toss"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -36495,7 +36495,7 @@ C;X2;K"Apoi"
 C;X3;K"Poison Attack"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -36579,7 +36579,7 @@ C;X2;K"Aply"
 C;X3;K"Polymorph"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -36663,7 +36663,7 @@ C;X2;K"Aply"
 C;X3;K"Polymorph (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -36747,7 +36747,7 @@ C;X2;K"Apos"
 C;X3;K"Possession"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -36830,7 +36830,7 @@ C;X2;K"Apos"
 C;X3;K"Possession (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -36913,7 +36913,7 @@ C;X2;K"Aps2"
 C;X3;K"Possession (Channeling)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -36997,7 +36997,7 @@ C;X2;K"Awar"
 C;X3;K"Pulverize"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -37080,7 +37080,7 @@ C;X2;K"Awar"
 C;X3;K"Pulverize (Sea Giant)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -37163,7 +37163,7 @@ C;X2;K"Apit"
 C;X3;K"Purchase Item"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -37247,7 +37247,7 @@ C;X2;K"Aprg"
 C;X3;K"Purge"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -37331,7 +37331,7 @@ C;X2;K"Aprg"
 C;X3;K"Purge"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -37415,7 +37415,7 @@ C;X2;K"Aprg"
 C;X3;K"Purge (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -37499,7 +37499,7 @@ C;X2;K"ANrf"
 C;X3;K"Rain of Fire (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -37584,7 +37584,7 @@ C;X2;K"ANrf"
 C;X3;K"Rain of Fire (creep,greater)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -37669,7 +37669,7 @@ C;X2;K"Arai"
 C;X3;K"Raise Dead"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -37756,7 +37756,7 @@ C;X2;K"Arai"
 C;X3;K"Raise Dead (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -37841,7 +37841,7 @@ C;X2;K"ARal"
 C;X3;K"Rally"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -37924,7 +37924,7 @@ C;X2;K"Arav"
 C;X3;K"Raven Form (Druid)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -38008,7 +38008,7 @@ C;X2;K"Arav"
 C;X3;K"Raven Form (Medivh)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -38092,7 +38092,7 @@ C;X2;K"ACrn"
 C;X3;K"Reincarnation (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -38260,7 +38260,7 @@ C;X2;K"Arbr"
 C;X3;K"Reinforced Burrows"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -38343,7 +38343,7 @@ C;X2;K"Arej"
 C;X3;K"Rejuvination"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -38427,7 +38427,7 @@ C;X2;K"Arej"
 C;X3;K"Rejuvination (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -38511,7 +38511,7 @@ C;X2;K"Arej"
 C;X3;K"Rejuvination (Furbolg)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -38595,7 +38595,7 @@ C;X2;K"Aren"
 C;X3;K"Renew"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -38678,7 +38678,7 @@ C;X2;K"Arep"
 C;X3;K"Repair (Human)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -38761,7 +38761,7 @@ C;X2;K"Arep"
 C;X3;K"Repair (Orc)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -38844,7 +38844,7 @@ C;X2;K"Arpb"
 C;X3;K"Replenish (Life & Mana)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -38928,7 +38928,7 @@ C;X2;K"Arpl"
 C;X3;K"Replenish (Life)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -39012,7 +39012,7 @@ C;X2;K"Arpm"
 C;X3;K"Replenish (Mana)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -39096,7 +39096,7 @@ C;X2;K"Arsk"
 C;X3;K"Resistant Skin"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -39179,7 +39179,7 @@ C;X2;K"Arsk"
 C;X3;K"Resistant Skin (creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -39262,7 +39262,7 @@ C;X2;K"Arsk"
 C;X3;K"Resistant Skin(3,1 pos, creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -39345,7 +39345,7 @@ C;X2;K"Arst"
 C;X3;K"Restoration"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -39428,7 +39428,7 @@ C;X2;K"Artn"
 C;X3;K"Return (Gold)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -39511,7 +39511,7 @@ C;X2;K"Artn"
 C;X3;K"Return (Gold & Lumber)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -39594,7 +39594,7 @@ C;X2;K"Artn"
 C;X3;K"Return (Lumber)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -39677,7 +39677,7 @@ C;X2;K"AIta"
 C;X3;K"Reveal(Arcane Tower)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -39761,7 +39761,7 @@ C;X2;K"Arng"
 C;X3;K"Revenge"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -39844,7 +39844,7 @@ C;X2;K"Arev"
 C;X3;K"Revive"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -39927,7 +39927,7 @@ C;X2;K"Aroa"
 C;X3;K"Roar"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -40011,7 +40011,7 @@ C;X2;K"Aroa"
 C;X3;K"Roar"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -40095,7 +40095,7 @@ C;X2;K"Aroa"
 C;X3;K"Roar (creep) -- Skeletal Orc"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -40179,7 +40179,7 @@ C;X2;K"Aroa"
 C;X3;K"Roar (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -40263,7 +40263,7 @@ C;X2;K"Aroc"
 C;X3;K"Rocket Attack"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -40346,7 +40346,7 @@ C;X2;K"Aroo"
 C;X3;K"Root (Ancients)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -40429,7 +40429,7 @@ C;X2;K"Aroo"
 C;X3;K"Root (Ancient Protector)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -40512,7 +40512,7 @@ C;X2;K"Asac"
 C;X3;K"Sacrifice (Sacrificial Pit)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -40595,7 +40595,7 @@ C;X2;K"Asal"
 C;X3;K"Pillage"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -40678,7 +40678,7 @@ C;X2;K"Alam"
 C;X3;K"Sacrifice (Acolyte)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -40761,7 +40761,7 @@ C;X2;K"AHfa"
 C;X3;K"Searing Arrows (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -40844,7 +40844,7 @@ C;X2;K"Asds"
 C;X3;K"Self Destruct"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -40927,7 +40927,7 @@ C;X2;K"Asds"
 C;X3;K"Self Destruct (Clockwerk Goblins)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -41010,7 +41010,7 @@ C;X2;K"Asds"
 C;X3;K"Self Destruct 2 (Clockwerk Goblins)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -41093,7 +41093,7 @@ C;X2;K"Asds"
 C;X3;K"Self Destruct 3 (Clockwerk Goblins)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -41176,7 +41176,7 @@ C;X2;K"Asid"
 C;X3;K"Sell Item"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -41259,7 +41259,7 @@ C;X2;K"Asud"
 C;X3;K"Sell Unit"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -41342,7 +41342,7 @@ C;X2;K"Aesn"
 C;X3;K"Sentinel"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -41426,7 +41426,7 @@ C;X2;K"Aesn"
 C;X3;K"Sentinel (no research)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -41510,7 +41510,7 @@ C;X2;K"Aeye"
 C;X3;K"Sentry Ward"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -41595,7 +41595,7 @@ C;X2;K"AOwd"
 C;X3;K"Serpent Ward (tentacle, Forgotten one)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -41681,7 +41681,7 @@ C;X2;K"Ashm"
 C;X3;K"Shadow Meld"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -41764,7 +41764,7 @@ C;X2;K"Ashm"
 C;X3;K"Shadow Meld (Instant)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -41847,7 +41847,7 @@ C;X2;K"Ahid"
 C;X3;K"Shadow Meld (Akama)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -41930,7 +41930,7 @@ C;X2;K"AEsh"
 C;X3;K"Shadow Strike(Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -42015,7 +42015,7 @@ C;X2;K"AOsh"
 C;X3;K"Shockwave (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -42099,7 +42099,7 @@ C;X2;K"AOsh"
 C;X3;K"Shockwave (Trap)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -42270,7 +42270,7 @@ C;X2;K"ANsi"
 C;X3;K"Silence(Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -42355,7 +42355,7 @@ C;X2;K"AHdr"
 C;X3;K"Siphon Mana (Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -42440,7 +42440,7 @@ C;X2;K"AUsl"
 C;X3;K"Sleep (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -42524,7 +42524,7 @@ C;X2;K"Asla"
 C;X3;K"Sleep Always"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -42607,7 +42607,7 @@ C;X2;K"Aslo"
 C;X3;K"Slow"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -42691,7 +42691,7 @@ C;X2;K"Aslo"
 C;X3;K"Slow (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -42775,7 +42775,7 @@ C;X2;K"Aspo"
 C;X3;K"Slow Poison"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -42859,7 +42859,7 @@ C;X2;K"Asod"
 C;X3;K"Spawn Skeleton"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -42942,7 +42942,7 @@ C;X2;K"Assp"
 C;X3;K"Spawn Spiderling"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -43025,7 +43025,7 @@ C;X2;K"Aspd"
 C;X3;K"Spawn Spider"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -43108,7 +43108,7 @@ C;X2;K"Aspd"
 C;X3;K"Spawn Hydra"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -43191,7 +43191,7 @@ C;X2;K"Aspd"
 C;X3;K"Spawn Hydra Hatchling"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -43274,7 +43274,7 @@ C;X2;K"Asps"
 C;X3;K"Spell Steal"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -43357,7 +43357,7 @@ C;X2;K"Asph"
 C;X3;K"Sphere"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -43440,7 +43440,7 @@ C;X2;K"Asph"
 C;X3;K"Sphere (SoV Level 1)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -43523,7 +43523,7 @@ C;X2;K"Asph"
 C;X3;K"Sphere (SoV Level 2)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -43606,7 +43606,7 @@ C;X2;K"Asph"
 C;X3;K"Sphere (SoV Level 3)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -43689,7 +43689,7 @@ C;X2;K"Asph"
 C;X3;K"Sphere (SoV Level 4)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -43772,7 +43772,7 @@ C;X2;K"Asph"
 C;X3;K"Sphere (SoV Level 5)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -43855,7 +43855,7 @@ C;X2;K"Asph"
 C;X3;K"Sphere (SoV Level 6)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -43938,7 +43938,7 @@ C;X2;K"Aspa"
 C;X3;K"Spider Attack"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -44021,7 +44021,7 @@ C;X2;K"Aspi"
 C;X3;K"Spiked Barricades"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -44104,7 +44104,7 @@ C;X2;K"Aspl"
 C;X3;K"Spirit Link"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -44188,7 +44188,7 @@ C;X2;K"Astd"
 C;X3;K"Stand Down"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -44271,7 +44271,7 @@ C;X2;K"Asta"
 C;X3;K"Stasis Trap"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -44356,7 +44356,7 @@ C;X2;K"Astn"
 C;X3;K"Stone Form"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -44440,7 +44440,7 @@ C;X2;K"Asth"
 C;X3;K"Storm Hammers"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -44523,7 +44523,7 @@ C;X2;K"ANsu"
 C;X3;K"Submerge (Myrmidon)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -44607,7 +44607,7 @@ C;X2;K"ANsu"
 C;X3;K"Submerge (Royal Guard)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -44691,7 +44691,7 @@ C;X2;K"ANsu"
 C;X3;K"Submerge (Snap Dragon)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -44860,7 +44860,7 @@ C;X2;K"AHwe"
 C;X3;K"Summon Sea Elemental"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"hero"
 C;X9;K"creeps"
@@ -44944,8 +44944,8 @@ C;X1;Y534;K"Attu"
 C;X2;K"Attu"
 C;X3;K"Tank Turret"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -45028,7 +45028,7 @@ C;X2;K"Acha"
 C;X3;K"Tank Upgrade"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"human"
@@ -45112,7 +45112,7 @@ C;X2;K"Atau"
 C;X3;K"Taunt"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -45195,7 +45195,7 @@ C;X2;K"Atau"
 C;X3;K"Taunt(Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -45278,7 +45278,7 @@ C;X2;K"AUts"
 C;X3;K"Thorny Shield (Creep)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -45362,7 +45362,7 @@ C;X2;K"AUts"
 C;X3;K"Thorny Shield (Dragon Turtle)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -45446,7 +45446,7 @@ C;X2;K"AEah"
 C;X3;K"Thorns Aura (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -45530,7 +45530,7 @@ C;X2;K"ACtb"
 C;X3;K"Thunder Bolt (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -45614,7 +45614,7 @@ C;X2;K"ACtc"
 C;X3;K"Thunder Clap (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -45698,7 +45698,7 @@ C;X2;K"ACtc"
 C;X3;K"Thunder Clap (Thunder Lizard)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -45782,7 +45782,7 @@ C;X2;K"Atdg"
 C;X3;K"TornadoDamage"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"naga"
@@ -45829,7 +45829,7 @@ C;X2;K"Atsp"
 C;X3;K"TornadoSpin"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"naga"
@@ -45873,7 +45873,7 @@ C;X2;K"Atwa"
 C;X3;K"TornadoWander"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"naga"
@@ -45914,8 +45914,8 @@ C;X1;Y547;K"Atol"
 C;X2;K"Atol"
 C;X3;K"Tree of life (for attaching art)"
 C;X4;K0
-C;X5;K0
-C;X6;K0
+C;X5;K1
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -45998,7 +45998,7 @@ C;X2;K"Ault"
 C;X3;K"Ultravision"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -46081,7 +46081,7 @@ C;X2;K"AUau"
 C;X3;K"Unholy Aura (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -46165,7 +46165,7 @@ C;X2;K"Auhf"
 C;X3;K"Unholy Frenzy"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -46249,7 +46249,7 @@ C;X2;K"Auhf"
 C;X3;K"Unholy Frenzy (Warlock)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -46333,7 +46333,7 @@ C;X2;K"Auhf"
 C;X3;K"Unholy Frenzy (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -46417,7 +46417,7 @@ C;X2;K"Auco"
 C;X3;K"Unstable Concoction"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -46500,7 +46500,7 @@ C;X2;K"Auns"
 C;X3;K"Unsummon"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -46583,7 +46583,7 @@ C;X2;K"AIva"
 C;X3;K"Vampiric attack"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -46666,7 +46666,7 @@ C;X2;K"AUav"
 C;X3;K"Vampiric Aura (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -46750,7 +46750,7 @@ C;X2;K"Avng"
 C;X3;K"Vengeance"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -46834,7 +46834,7 @@ C;X2;K"Awan"
 C;X3;K"Wander"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -46917,7 +46917,7 @@ C;X2;K"AOws"
 C;X3;K"War Stomp (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -47001,7 +47001,7 @@ C;X2;K"AOws"
 C;X3;K"War Stomp (sea giant)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -47085,7 +47085,7 @@ C;X2;K"AOws"
 C;X3;K"War Stomp (hydra)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -47253,7 +47253,7 @@ C;X2;K"Awha"
 C;X3;K"Wisp Harvest"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"nightelf"
@@ -47336,7 +47336,7 @@ C;X2;K"Awha"
 C;X3;K"Wisp Harvest (Invulnerable)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -47419,7 +47419,7 @@ C;X2;K"Aven"
 C;X3;K"Venom Spears"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"orc"
@@ -47503,7 +47503,7 @@ C;X2;K"Aven"
 C;X3;K"Venom Spears (Creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -47587,7 +47587,7 @@ C;X2;K"Awrp"
 C;X3;K"Warp"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"other"
@@ -47670,7 +47670,7 @@ C;X2;K"Aweb"
 C;X3;K"Web"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"undead"
@@ -47754,7 +47754,7 @@ C;X2;K"Aweb"
 C;X3;K"Web (creep)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K0
 C;X8;K"unit"
 C;X9;K"creeps"
@@ -47853,7 +47853,7 @@ C;X2;K"AIab"
 C;X3;K"AgilityBonus (+1)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -47936,7 +47936,7 @@ C;X2;K"AIab"
 C;X3;K"AgilityBonus (+3)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48019,7 +48019,7 @@ C;X2;K"AIab"
 C;X3;K"AgilityBonus (+4)   "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48102,7 +48102,7 @@ C;X2;K"AIab"
 C;X3;K"AgilityBonus (+6)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48185,7 +48185,7 @@ C;X2;K"AIab"
 C;X3;K"Crown of Kings (All + 5)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48268,7 +48268,7 @@ C;X2;K"AIab"
 C;X3;K"(All + 1)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48351,7 +48351,7 @@ C;X2;K"AIab"
 C;X3;K"(All + 2)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48434,7 +48434,7 @@ C;X2;K"AIab"
 C;X3;K"StrengthBonus (+1)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48517,7 +48517,7 @@ C;X2;K"AIab"
 C;X3;K"StrengthBonus (+3)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48600,7 +48600,7 @@ C;X2;K"AIab"
 C;X3;K"StrengthBonus (+4)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48683,7 +48683,7 @@ C;X2;K"AIab"
 C;X3;K"StrengthBonus (+6)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48766,7 +48766,7 @@ C;X2;K"AIab"
 C;X3;K"IntelligenceBonus (+1)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48849,7 +48849,7 @@ C;X2;K"AIab"
 C;X3;K"IntelligenceBonus (+3)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -48932,7 +48932,7 @@ C;X2;K"AIab"
 C;X3;K"IntelligenceBonus (+4)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49015,7 +49015,7 @@ C;X2;K"AIab"
 C;X3;K"IntelligenceBonus (+6)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49098,7 +49098,7 @@ C;X2;K"AIxm"
 C;X3;K"Permanent All + 1"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49181,7 +49181,7 @@ C;X2;K"AIam"
 C;X3;K"AgilityMod          "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49264,7 +49264,7 @@ C;X2;K"AIim"
 C;X3;K"IntelligenceMod     "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49347,7 +49347,7 @@ C;X2;K"AIsm"
 C;X3;K"StrengthMod         "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49430,7 +49430,7 @@ C;X2;K"AIam"
 C;X3;K"AgilityMod +2"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49513,7 +49513,7 @@ C;X2;K"AIim"
 C;X3;K"IntelligenceMod +2"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49596,7 +49596,7 @@ C;X2;K"AIsm"
 C;X3;K"StrengthMod +2"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49679,7 +49679,7 @@ C;X2;K"AIaa"
 C;X3;K"AttackMod"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49762,7 +49762,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus         "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49845,7 +49845,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus         "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -49928,7 +49928,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus         "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50011,7 +50011,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus         "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50094,7 +50094,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus         "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50177,7 +50177,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus +1"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50260,7 +50260,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus +2"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50343,7 +50343,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus +4"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50426,7 +50426,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus +5"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50509,7 +50509,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus +7"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50592,7 +50592,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus +8"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50675,7 +50675,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus +10"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50758,7 +50758,7 @@ C;X2;K"AIva"
 C;X3;K"Vampiric attack"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50841,7 +50841,7 @@ C;X2;K"AEbl"
 C;X3;K"Blink (Item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -50924,7 +50924,7 @@ C;X2;K"AIbl"
 C;X3;K"Build Tiny Castle"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51008,7 +51008,7 @@ C;X2;K"AIbl"
 C;X3;K"Build Tiny Great Hall"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51092,7 +51092,7 @@ C;X2;K"AIbl"
 C;X3;K"Build Tiny Scout Tower"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51176,7 +51176,7 @@ C;X2;K"AIbl"
 C;X3;K"Build Tiny Blacksmith"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51260,7 +51260,7 @@ C;X2;K"AIbl"
 C;X3;K"Build Tiny Farm"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51344,7 +51344,7 @@ C;X2;K"AIbl"
 C;X3;K"Build Tiny Lumber Mill"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51428,7 +51428,7 @@ C;X2;K"AIbl"
 C;X3;K"Build Tiny Barracks"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51512,7 +51512,7 @@ C;X2;K"AIbl"
 C;X3;K"Build Tiny Altar"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51596,7 +51596,7 @@ C;X2;K"Acyc"
 C;X3;K"Cyclone"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51680,7 +51680,7 @@ C;X2;K"AIde"
 C;X3;K"DefenseBonus (+1)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51763,7 +51763,7 @@ C;X2;K"AIde"
 C;X3;K"DefenseBonus (+2)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51846,7 +51846,7 @@ C;X2;K"AIde"
 C;X3;K"DefenseBonus (+3)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -51929,7 +51929,7 @@ C;X2;K"AIde"
 C;X3;K"DefenseBonus (+4)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52012,7 +52012,7 @@ C;X2;K"AIde"
 C;X3;K"DefenseBonus (+5)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52095,7 +52095,7 @@ C;X2;K"AIgl"
 C;X3;K"FortificationGlyph"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52179,7 +52179,7 @@ C;X2;K"AIgl"
 C;X3;K"UltraVisionGlyph"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52264,7 +52264,7 @@ C;X2;K"AIem"
 C;X3;K"ExperienceMod       "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52347,7 +52347,7 @@ C;X2;K"AIem"
 C;X3;K"ExperienceMod greater"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52430,7 +52430,7 @@ C;X2;K"AIfs"
 C;X3;K"FigurineRedDrake    "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52514,7 +52514,7 @@ C;X2;K"AIfs"
 C;X3;K"FigurineFurbolg"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52598,7 +52598,7 @@ C;X2;K"AIfs"
 C;X3;K"FigurineRockGolem   "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52682,7 +52682,7 @@ C;X2;K"AIfs"
 C;X3;K"FigurineDoomGuard   "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52766,7 +52766,7 @@ C;X2;K"AIfs"
 C;X3;K"FigurineFelHound    "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52850,7 +52850,7 @@ C;X2;K"AIfs"
 C;X3;K"FigurineSkeleton    "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -52934,7 +52934,7 @@ C;X2;K"AIfs"
 C;X3;K"FigurineIceRevenant"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53018,7 +53018,7 @@ C;X2;K"AIfs"
 C;X3;K"FigurineUrsaWarrior"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53102,7 +53102,7 @@ C;X2;K"AIfl"
 C;X3;K"Flag                "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53185,7 +53185,7 @@ C;X2;K"AIfm"
 C;X3;K"Flag (Human)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53268,7 +53268,7 @@ C;X2;K"AIfo"
 C;X3;K"Flag (Orc)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53351,7 +53351,7 @@ C;X2;K"AIfn"
 C;X3;K"Flag (Night Elf)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53434,7 +53434,7 @@ C;X2;K"AIfe"
 C;X3;K"Flag (Undead)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53517,7 +53517,7 @@ C;X2;K"AIfl"
 C;X3;K"Flag (Orc Battle Standard)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53600,7 +53600,7 @@ C;X2;K"AIfa"
 C;X3;K"FlareGun"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53684,7 +53684,7 @@ C;X2;K"AUin"
 C;X3;K"ItemInferno"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53769,7 +53769,7 @@ C;X2;K"AIlm"
 C;X3;K"LevelMod       "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53852,7 +53852,7 @@ C;X2;K"AIlp"
 C;X3;K"LightningPurge"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -53936,7 +53936,7 @@ C;X2;K"AIml"
 C;X3;K"MaxLifeBonus (Least)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54019,7 +54019,7 @@ C;X2;K"AIml"
 C;X3;K"MaxLifeBonus (Lesser)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54102,7 +54102,7 @@ C;X2;K"AIml"
 C;X3;K"MaxLifeBonus (Greater)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54185,7 +54185,7 @@ C;X2;K"AIms"
 C;X3;K"MoveSpeedBonus      "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54268,7 +54268,7 @@ C;X2;K"ANbs"
 C;X3;K"Orb of Darkness (Black Arrow)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54354,7 +54354,7 @@ C;X2;K"AIsb"
 C;X3;K"Orb of Darkness"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54438,7 +54438,7 @@ C;X2;K"AIcb"
 C;X3;K"Orb of Corruption"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54522,7 +54522,7 @@ C;X2;K"AIfb"
 C;X3;K"Shadow Orb Ability"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54605,7 +54605,7 @@ C;X2;K"AIfb"
 C;X3;K"Orb of Fire"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54688,7 +54688,7 @@ C;X2;K"AIfb"
 C;X3;K"Orb of Guldan"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54771,7 +54771,7 @@ C;X2;K"AIzb"
 C;X3;K"Orb of Freezing"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54855,7 +54855,7 @@ C;X2;K"AIob"
 C;X3;K"Orb of Frost"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -54939,7 +54939,7 @@ C;X2;K"AIsb"
 C;X3;K"Orb of Lightning"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55023,7 +55023,7 @@ C;X2;K"AIlb"
 C;X3;K"Orb of Lightning(old)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55106,7 +55106,7 @@ C;X2;K"AIsb"
 C;X3;K"Orb of Spells"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55190,7 +55190,7 @@ C;X2;K"AIpb"
 C;X3;K"Orb of Venom"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55273,7 +55273,7 @@ C;X2;K"Apo2"
 C;X3;K"Orb of Venom (Poison Attack)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55357,7 +55357,7 @@ C;X2;K"ACad"
 C;X3;K"Animate Dead (item, special)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55441,7 +55441,7 @@ C;X2;K"Arel"
 C;X3;K"Regen Life"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55524,7 +55524,7 @@ C;X2;K"Arel"
 C;X3;K"Regen Life"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55607,7 +55607,7 @@ C;X2;K"AIsi"
 C;X3;K"SightBonus          "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55690,7 +55690,7 @@ C;X2;K"Aslo"
 C;X3;K"Slow"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55774,7 +55774,7 @@ C;X2;K"AIso"
 C;X3;K"SoulTrap            "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55857,7 +55857,7 @@ C;X2;K"Asou"
 C;X3;K"SoulPossession"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -55941,7 +55941,7 @@ C;X2;K"AIcf"
 C;X3;K"ItemCloakOfFlames"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56025,7 +56025,7 @@ C;X2;K"AIco"
 C;X3;K"ItemCommand         "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56108,7 +56108,7 @@ C;X2;K"AIdm"
 C;X3;K"ItemDamageAoe       "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56191,7 +56191,7 @@ C;X2;K"AIda"
 C;X3;K"ItemDefenseAoe      "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56275,7 +56275,7 @@ C;X2;K"AIda"
 C;X3;K"ItemDefenseAoe (+ Healing)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56359,7 +56359,7 @@ C;X2;K"AIta"
 C;X3;K"ItemDetectAoe       "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56444,7 +56444,7 @@ C;X2;K"AIdi"
 C;X3;K"ItemDispelAoe       "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56527,7 +56527,7 @@ C;X2;K"AIdi"
 C;X3;K"ItemDispelAoeWithCooldown"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56610,7 +56610,7 @@ C;X2;K"AIdi"
 C;X3;K"PowerupDispelAoe       "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56693,7 +56693,7 @@ C;X2;K"AIhe"
 C;X3;K"ItemHeal (Lesser)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56776,7 +56776,7 @@ C;X2;K"AIhe"
 C;X3;K"ItemHeal (Greater)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56859,7 +56859,7 @@ C;X2;K"AIhe"
 C;X3;K"ItemHeal (Least)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -56942,7 +56942,7 @@ C;X2;K"AIha"
 C;X3;K"ItemHealAoe         "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57025,7 +57025,7 @@ C;X2;K"AIha"
 C;X3;K"ItemHealAoeGreater"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57108,7 +57108,7 @@ C;X2;K"AIha"
 C;X3;K"PowerupHealAoeLesser"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57191,7 +57191,7 @@ C;X2;K"AIha"
 C;X3;K"PowerupHealAoe"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57274,7 +57274,7 @@ C;X2;K"AIha"
 C;X3;K"PowerupHealAoeGreater"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57357,7 +57357,7 @@ C;X2;K"Ahwd"
 C;X3;K"Healing Ward"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57442,7 +57442,7 @@ C;X2;K"Aeye"
 C;X3;K"Sentry Ward"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57527,7 +57527,7 @@ C;X2;K"AIil"
 C;X3;K"ItemIllusion        "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57611,7 +57611,7 @@ C;X2;K"AIvi"
 C;X3;K"ItemInvis (Lesser)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57695,7 +57695,7 @@ C;X2;K"AIvi"
 C;X3;K"ItemInvis (Greater)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57779,7 +57779,7 @@ C;X2;K"AIvu"
 C;X3;K"ItemInvul           "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57863,7 +57863,7 @@ C;X2;K"AIvu"
 C;X3;K"ItemInvul           "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -57947,7 +57947,7 @@ C;X2;K"AIma"
 C;X3;K"ItemManaRestore (Lesser)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58030,7 +58030,7 @@ C;X2;K"AIma"
 C;X3;K"ItemManaRestore (Greater)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58113,7 +58113,7 @@ C;X2;K"AImr"
 C;X3;K"ItemManaRestoreAoe  "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58196,7 +58196,7 @@ C;X2;K"AImr"
 C;X3;K"RuneManaRestoreAoe"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58279,7 +58279,7 @@ C;X2;K"AImr"
 C;X3;K"RuneManaRestoreGreaterAoe"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58362,7 +58362,7 @@ C;X2;K"AIpm"
 C;X3;K"ItemPlaceMine       "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58446,7 +58446,7 @@ C;X2;K"AIrt"
 C;X3;K"ItemRecall"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58529,7 +58529,7 @@ C;X2;K"AIrm"
 C;X3;K"ItemRegenMana       "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58612,7 +58612,7 @@ C;X2;K"AIrm"
 C;X3;K"ItemRegenMana lesser"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58695,7 +58695,7 @@ C;X2;K"AIrc"
 C;X3;K"ItemReincarnation   "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58779,7 +58779,7 @@ C;X2;K"AIre"
 C;X3;K"ItemRestore         "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58862,7 +58862,7 @@ C;X2;K"AIra"
 C;X3;K"ItemRestoreAoe      "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -58945,7 +58945,7 @@ C;X2;K"AIra"
 C;X3;K"RuneRestoreAoe"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59028,7 +59028,7 @@ C;X2;K"AIsp"
 C;X3;K"ItemSpeed"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59112,7 +59112,7 @@ C;X2;K"AIsa"
 C;X3;K"ItemSpeedAoe"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59196,7 +59196,7 @@ C;X2;K"AIsa"
 C;X3;K"RuneSpeedAoe"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59280,7 +59280,7 @@ C;X2;K"AItp"
 C;X3;K"ItemTownPortal      "
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59363,7 +59363,7 @@ C;X2;K"AHad"
 C;X3;K"ItemAuraDevotion"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59447,7 +59447,7 @@ C;X2;K"AOac"
 C;X3;K"ItemAuraCommand"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59531,7 +59531,7 @@ C;X2;K"AHab"
 C;X3;K"ItemAuraBrilliance"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59615,7 +59615,7 @@ C;X2;K"AUav"
 C;X3;K"ItemAuraVampiric"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59699,7 +59699,7 @@ C;X2;K"AEar"
 C;X3;K"ItemAuraTrueshot"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59783,7 +59783,7 @@ C;X2;K"AOae"
 C;X3;K"ItemAuraEndurance"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59867,7 +59867,7 @@ C;X2;K"AUau"
 C;X3;K"ItemAuraUnholy"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -59951,7 +59951,7 @@ C;X2;K"Ault"
 C;X3;K"ItemUltravision"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60035,7 +60035,7 @@ C;X2;K"Alsh"
 C;X3;K"Lightning Shield"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60119,7 +60119,7 @@ C;X2;K"Aami"
 C;X3;K"Anti-magic Shield"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60203,7 +60203,7 @@ C;X2;K"AIan"
 C;X3;K"Animate Dead"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60287,7 +60287,7 @@ C;X2;K"AIrs"
 C;X3;K"Resurrection"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60370,7 +60370,7 @@ C;X2;K"Aroa"
 C;X3;K"Roar"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60454,7 +60454,7 @@ C;X2;K"AEev"
 C;X3;K"Evasion"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60537,7 +60537,7 @@ C;X2;K"Amim"
 C;X3;K"Magic Immunity"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60620,7 +60620,7 @@ C;X2;K"AImi"
 C;X3;K"Permanent Hit point Bonus"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60703,7 +60703,7 @@ C;X2;K"AImm"
 C;X3;K"MaxManaBonus (Least)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60786,7 +60786,7 @@ C;X2;K"AImm"
 C;X3;K"MaxManaBonus (Most)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60869,7 +60869,7 @@ C;X2;K"AIas"
 C;X3;K"Attack Speed Increase"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -60952,7 +60952,7 @@ C;X2;K"AIas"
 C;X3;K"Attack Speed Increase(greater)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61035,7 +61035,7 @@ C;X2;K"AIrg"
 C;X3;K"Potion of Life Regen"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61119,7 +61119,7 @@ C;X2;K"AIrg"
 C;X3;K"Potion of Mana Regen(greater)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61203,7 +61203,7 @@ C;X2;K"AIrg"
 C;X3;K"Scroll of Life Regen"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61287,7 +61287,7 @@ C;X2;K"AIrg"
 C;X3;K"Potion of Mana Regen(lesser)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61371,7 +61371,7 @@ C;X2;K"AIrg"
 C;X3;K"Potion of Rejuv I"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61455,7 +61455,7 @@ C;X2;K"AIrg"
 C;X3;K"Potion of Rejuv II"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61539,7 +61539,7 @@ C;X2;K"AIrg"
 C;X3;K"Potion of Rejuv III"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61623,7 +61623,7 @@ C;X2;K"AIrg"
 C;X3;K"Potion of Rejuv IV"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61707,7 +61707,7 @@ C;X2;K"AIrg"
 C;X3;K"Scroll of Rejuv I"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61791,7 +61791,7 @@ C;X2;K"AIrg"
 C;X3;K"Scroll of Rejuv II"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61875,7 +61875,7 @@ C;X2;K"AIgo"
 C;X3;K"GiveGold       "
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -61958,7 +61958,7 @@ C;X2;K"AIlu"
 C;X3;K"GiveLumber       "
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62041,7 +62041,7 @@ C;X2;K"AIrv"
 C;X3;K"ItemRevealMap"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62125,7 +62125,7 @@ C;X2;K"AIdc"
 C;X3;K"ItemDispelChain"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62208,7 +62208,7 @@ C;X2;K"AIwb"
 C;X3;K"ItemWeb"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62292,7 +62292,7 @@ C;X2;K"AImo"
 C;X3;K"ItemMonsterLure"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62377,7 +62377,7 @@ C;X2;K"AIct"
 C;X3;K"ItemChangeTOD"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62461,7 +62461,7 @@ C;X2;K"AIri"
 C;X3;K"ItemRandomItem"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62544,7 +62544,7 @@ C;X2;K"AIsr"
 C;X3;K"Runed Bracers"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62627,7 +62627,7 @@ C;X2;K"Ablp"
 C;X3;K"BlightPlacement"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62710,7 +62710,7 @@ C;X2;K"AIpv"
 C;X3;K"ItemPotionVampirism"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62794,7 +62794,7 @@ C;X2;K"Aste"
 C;X3;K"ManaSteal"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62877,7 +62877,7 @@ C;X2;K"Amec"
 C;X3;K"MechanicalCritter"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -62961,7 +62961,7 @@ C;X2;K"Ashs"
 C;X3;K"ShadowSight"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63045,7 +63045,7 @@ C;X2;K"ANpr"
 C;X3;K"Preservation"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63128,7 +63128,7 @@ C;X2;K"ANsa"
 C;X3;K"Sanctuary"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63212,7 +63212,7 @@ C;X2;K"ANss"
 C;X3;K"Spell Shield"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63296,7 +63296,7 @@ C;X2;K"ANse"
 C;X3;K"Spell Shield AOE"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63380,7 +63380,7 @@ C;X2;K"Aret"
 C;X3;K"Retrain"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63463,7 +63463,7 @@ C;X2;K"AHmt"
 C;X3;K"Staff o' Teleportation"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63546,7 +63546,7 @@ C;X2;K"Aspb"
 C;X3;K"Spell Book"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63629,7 +63629,7 @@ C;X2;K"AIrd"
 C;X3;K"Raise Dead (Item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63714,7 +63714,7 @@ C;X2;K"AItb"
 C;X3;K"Dust of Appearance"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63798,7 +63798,7 @@ C;X2;K"AHds"
 C;X3;K"Divine Shield (Item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63882,7 +63882,7 @@ C;X2;K"ANsi"
 C;X3;K"Silence(Item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -63967,7 +63967,7 @@ C;X2;K"Aprg"
 C;X3;K"Purge(orb)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64051,7 +64051,7 @@ C;X2;K"Aprg"
 C;X3;K"Purge(Totem, SP)"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64135,7 +64135,7 @@ C;X2;K"Aclf"
 C;X3;K"Cloud of Fog (Item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64220,7 +64220,7 @@ C;X2;K"AHre"
 C;X3;K"Rune of Lesser Resurrection"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64303,7 +64303,7 @@ C;X2;K"AHre"
 C;X3;K"Rune of Greater Resurrection"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64386,7 +64386,7 @@ C;X2;K"AIrb"
 C;X3;K"Rune of Rebirth"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64470,7 +64470,7 @@ C;X2;K"Aspl"
 C;X3;K"Rune of Spirit Link"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64554,7 +64554,7 @@ C;X2;K"AUds"
 C;X3;K"Dark Summoning"
 C;X4;K0
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64637,7 +64637,7 @@ C;X2;K"Aeye"
 C;X3;K"Rune of the Watcher"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64722,7 +64722,7 @@ C;X2;K"Auhf"
 C;X3;K"Unholy Frenzy (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64806,7 +64806,7 @@ C;X2;K"AIde"
 C;X3;K"DefenseBonus (+10)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64889,7 +64889,7 @@ C;X2;K"Acmg"
 C;X3;K"Control Magic (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -64973,7 +64973,7 @@ C;X2;K"AImm"
 C;X3;K"MaxManaBonus (Leastest)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65056,7 +65056,7 @@ C;X2;K"ANfd"
 C;X3;K"Finger of Death (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65139,7 +65139,7 @@ C;X2;K"AUdp"
 C;X3;K"Death Pact (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65222,7 +65222,7 @@ C;X2;K"AImm"
 C;X3;K"MaxManaBonus (Leastest, Really)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65305,7 +65305,7 @@ C;X2;K"AImi"
 C;X3;K"Permanent Hit point Bonus (small)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65388,7 +65388,7 @@ C;X2;K"AIdd"
 C;X3;K"Defend (Item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65471,7 +65471,7 @@ C;X2;K"AIde"
 C;X3;K"DefenseBonus (+8)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65554,7 +65554,7 @@ C;X2;K"AIde"
 C;X3;K"DefenseBonus (+7)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65637,7 +65637,7 @@ C;X2;K"AIml"
 C;X3;K"MaxLifeBonus (Leastest)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65720,7 +65720,7 @@ C;X2;K"AIhe"
 C;X3;K"ItemHeal (Leastest)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65803,7 +65803,7 @@ C;X2;K"AIab"
 C;X3;K"AgilityBonus (+10)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65886,7 +65886,7 @@ C;X2;K"AHre"
 C;X3;K"Resurrection - Item"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -65969,7 +65969,7 @@ C;X2;K"AHbh"
 C;X3;K"Bash (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66053,7 +66053,7 @@ C;X2;K"AIat"
 C;X3;K"AttackBonus +20"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66136,7 +66136,7 @@ C;X2;K"ANwm"
 C;X3;K"Watery Minion (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66221,7 +66221,7 @@ C;X2;K"AIsh"
 C;X3;K"Summon Headhunter (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66306,7 +66306,7 @@ C;X2;K"AImm"
 C;X3;K"200 mana bonus"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66389,7 +66389,7 @@ C;X2;K"Aoar"
 C;X3;K"Aura - Regeneration (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66473,7 +66473,7 @@ C;X2;K"AHhb"
 C;X3;K"Holy Light (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66556,7 +66556,7 @@ C;X2;K"Aspo"
 C;X3;K"Slow Poison (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66640,7 +66640,7 @@ C;X2;K"AIha"
 C;X3;K"Penguin Squeek"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66723,7 +66723,7 @@ C;X2;K"AIfb"
 C;X3;K"Searing Blade - fire melee"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66806,7 +66806,7 @@ C;X2;K"AIob"
 C;X3;K"Frostguard - frost melee"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66890,7 +66890,7 @@ C;X2;K"AIsb"
 C;X3;K"Shaman Claws - lightning melee"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -66974,7 +66974,7 @@ C;X2;K"AOcr"
 C;X3;K"Critical Strike (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -67057,7 +67057,7 @@ C;X2;K"AOcl"
 C;X3;K"Chain Lightning (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -67140,7 +67140,7 @@ C;X2;K"AIab"
 C;X3;K"(All + 3)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -67223,7 +67223,7 @@ C;X2;K"AIab"
 C;X3;K"(All + 4)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
@@ -67306,7 +67306,7 @@ C;X2;K"Absk"
 C;X3;K"Beserk (item)"
 C;X4;K1
 C;X5;K1
-C;X6;K0
+C;X6;K1
 C;X7;K1
 C;X8;K"item"
 C;X9;K"other"
