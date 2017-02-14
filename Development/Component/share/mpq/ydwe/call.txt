@@ -1,3 +1,137 @@
+[R2I]
+title = "转换实数为整数"
+description = "转换 ${Real} 为整数"
+comment = "舍弃小数部分."
+category = TC_CONV
+returns = integer
+[[.args]]
+type = real
+default = "GetUnitStateSwap"
+
+[S2I]
+title = "转换字符串为整数"
+description = "转换 ${String} 为整数"
+comment = ""
+category = TC_CONV
+returns = integer
+[[.args]]
+type = string
+default = "GetEventPlayerChatString"
+
+[I2R]
+title = "转换整数为实数"
+description = "转换 ${Integer} 为实数"
+comment = ""
+category = TC_CONV
+returns = real
+[[.args]]
+type = integer
+default = "GetUnitPointValueByType"
+
+[S2R]
+title = "转换字符串为实数"
+description = "转换 ${String} 为实数"
+comment = ""
+category = TC_CONV
+returns = real
+[[.args]]
+type = string
+default = "GetEventPlayerChatString"
+
+[Deg2Rad]
+title = "转换角度为弧度"
+description = "转换角度 ${Degrees} 为弧度"
+comment = ""
+category = TC_CONV
+returns = radian
+[[.args]]
+type = degree
+default = "0"
+
+[Rad2Deg]
+title = "转换弧度为角度"
+description = "转换弧度 ${Radians} 为角度"
+comment = ""
+category = TC_CONV
+returns = degree
+[[.args]]
+type = radian
+default = "0"
+
+[YDWEDeg2R]
+title = "转换角度为实数"
+description = "转换角度 ${Degrees} 为实数"
+comment = ""
+category = TC_CONV
+returns = real
+[[.args]]
+type = degree
+
+[YDWERad2R]
+title = "转换弧度为实数"
+description = "转换弧度 ${Radians} 为实数"
+comment = ""
+category = TC_CONV
+returns = real
+[[.args]]
+type = radian
+
+[YDWER2Deg]
+title = "转换实数为角度"
+description = "转换实数 ${Real} 为角度"
+comment = ""
+category = TC_CONV
+returns = degree
+[[.args]]
+type = real
+
+[YDWER2Rad]
+title = "转换实数为弧度"
+description = "转换实数 ${Real} 为弧度"
+comment = ""
+category = TC_CONV
+returns = radian
+[[.args]]
+type = real
+
+[I2S]
+title = "转换整数为字符串"
+description = "转换 ${Integer} 为字符串"
+comment = ""
+category = TC_CONV
+returns = string
+[[.args]]
+type = integer
+default = "GetConvertedPlayerId"
+
+[R2S]
+title = "转换实数为字符串"
+description = "转换 ${Real} 为字符串"
+comment = ""
+category = TC_CONV
+returns = string
+[[.args]]
+type = real
+default = "GetUnitStateSwap"
+
+[R2SW]
+title = "格式转换实数为字符串"
+description = "转换 ${Real} 为字符串,最小宽度: ${Width} ,小数位数: ${Precision}"
+comment = "如: 转换(1.234, 7, 2)后为''   1.23''. 转换(1.234, 2, 5)后为''1.23400''."
+category = TC_CONV
+returns = string
+[[.args]]
+type = real
+default = "GetUnitStateSwap"
+[[.args]]
+type = integer
+default = "1"
+min = 0
+[[.args]]
+type = integer
+default = "2"
+min = 0
+
 [OperatorIntegerAdd]
 title = "加 < ﹢ > [New!]"
 description = "${整数} + ${整数}"
@@ -7610,140 +7744,6 @@ description = "循环整数B"
 comment = ""
 category = TC_FORLOOP
 returns = integer
-
-[R2I]
-title = "转换实数为整数"
-description = "转换 ${Real} 为整数"
-comment = "舍弃小数部分."
-category = TC_CONVERSION
-returns = integer
-[[.args]]
-type = real
-default = "GetUnitStateSwap"
-
-[S2I]
-title = "转换字符串为整数"
-description = "转换 ${String} 为整数"
-comment = ""
-category = TC_CONVERSION
-returns = integer
-[[.args]]
-type = string
-default = "GetEventPlayerChatString"
-
-[I2R]
-title = "转换整数为实数"
-description = "转换 ${Integer} 为实数"
-comment = ""
-category = TC_CONVERSION
-returns = real
-[[.args]]
-type = integer
-default = "GetUnitPointValueByType"
-
-[S2R]
-title = "转换字符串为实数"
-description = "转换 ${String} 为实数"
-comment = ""
-category = TC_CONVERSION
-returns = real
-[[.args]]
-type = string
-default = "GetEventPlayerChatString"
-
-[Deg2Rad]
-title = "转换角度为弧度"
-description = "转换角度 ${Degrees} 为弧度"
-comment = ""
-category = TC_CONVERSION
-returns = radian
-[[.args]]
-type = degree
-default = "0"
-
-[Rad2Deg]
-title = "转换弧度为角度"
-description = "转换弧度 ${Radians} 为角度"
-comment = ""
-category = TC_CONVERSION
-returns = degree
-[[.args]]
-type = radian
-default = "0"
-
-[YDWEDeg2R]
-title = "转换角度为实数"
-description = "转换角度 ${Degrees} 为实数"
-comment = ""
-category = TC_CONVERSION
-returns = real
-[[.args]]
-type = degree
-
-[YDWERad2R]
-title = "转换弧度为实数"
-description = "转换弧度 ${Radians} 为实数"
-comment = ""
-category = TC_CONVERSION
-returns = real
-[[.args]]
-type = radian
-
-[YDWER2Deg]
-title = "转换实数为角度"
-description = "转换实数 ${Real} 为角度"
-comment = ""
-category = TC_CONVERSION
-returns = degree
-[[.args]]
-type = real
-
-[YDWER2Rad]
-title = "转换实数为弧度"
-description = "转换实数 ${Real} 为弧度"
-comment = ""
-category = TC_CONVERSION
-returns = radian
-[[.args]]
-type = real
-
-[I2S]
-title = "转换整数为字符串"
-description = "转换 ${Integer} 为字符串"
-comment = ""
-category = TC_CONVERSION
-returns = string
-[[.args]]
-type = integer
-default = "GetConvertedPlayerId"
-
-[R2S]
-title = "转换实数为字符串"
-description = "转换 ${Real} 为字符串"
-comment = ""
-category = TC_CONVERSION
-returns = string
-[[.args]]
-type = real
-default = "GetUnitStateSwap"
-
-[R2SW]
-title = "格式转换实数为字符串"
-description = "转换 ${Real} 为字符串,最小宽度: ${Width} ,小数位数: ${Precision}"
-comment = "如: 转换(1.234, 7, 2)后为''   1.23''. 转换(1.234, 2, 5)后为''1.23400''."
-category = TC_CONVERSION
-returns = string
-[[.args]]
-type = real
-default = "GetUnitStateSwap"
-[[.args]]
-type = integer
-default = "1"
-min = 0
-[[.args]]
-type = integer
-default = "2"
-min = 0
 
 [OrderId2StringBJ]
 title = "转换命令ID为字符串"
