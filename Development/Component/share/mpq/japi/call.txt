@@ -224,7 +224,7 @@ type = ItemDataString
 default = "ITEM_DATA_TIP"
 
 [EXGetEffectX]
-title = "X轴坐标 [JAPI]"
+title = "X轴坐标 [JAPI] [New!]"
 description = "${特效} 的X轴坐标"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -235,7 +235,7 @@ type = effect
 default = "bj_lastCreatedEffect"
 
 [EXGetEffectY]
-title = "Y轴坐标 [JAPI]"
+title = "Y轴坐标 [JAPI] [New!]"
 description = "${特效} 的Y轴坐标"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -246,7 +246,7 @@ type = effect
 default = "bj_lastCreatedEffect"
 
 [EXGetEffectZ]
-title = "高度 [JAPI]"
+title = "高度 [JAPI] [New!]"
 description = "${特效} 的高度"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -257,7 +257,7 @@ type = effect
 default = "bj_lastCreatedEffect"
 
 [EXGetEffectSize]
-title = "大小 [JAPI]"
+title = "大小 [JAPI] [New!]"
 description = "${特效} 的大小"
 comment = ""
 category = TC_SPECIALEFFECT

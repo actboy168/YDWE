@@ -4910,7 +4910,7 @@ default = "OrderCodeSmartItem"
 type = item
 
 [YDWEIssueNeutralImmediateOrderById]
-title = "发布中介命令(无目标)(自定义ID)"
+title = "发布中介命令(无目标)(自定义ID) [New!]"
 description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令"
 comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
 script_name = IssueNeutralImmediateOrderById
@@ -4926,7 +4926,7 @@ type = ordercode
 default = YDWEAbilityId2OrderId
 
 [YDWEIssueNeutralPointOrderById]
-title = "发布中介命令(指定坐标)(自定义ID)"
+title = "发布中介命令(指定坐标)(自定义ID) [New!]"
 description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到坐标:(${X},${Y})"
 comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
 script_name = IssueNeutralPointOrderById
@@ -4948,7 +4948,7 @@ type = real
 default = "0"
 
 [YDWEIssueNeutralTargetOrderById]
-title = "发布中介命令(指定单位)(自定义ID)"
+title = "发布中介命令(指定单位)(自定义ID) [New!]"
 description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${单位}"
 comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
 script_name = IssueNeutralTargetOrderById
@@ -4984,7 +4984,7 @@ default = "851983"
 type = destructable
 
 [YDWEIssueNeutralTargetItemOrderById]
-title = "发布中介命令(指定物品)(自定义ID)"
+title = "发布中介命令(指定物品)(自定义ID) [New!]"
 description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${物品}"
 comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
 script_name = IssueNeutralTargetOrderById
