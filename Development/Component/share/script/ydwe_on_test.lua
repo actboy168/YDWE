@@ -133,7 +133,7 @@ end
 local function host_test(commandline, mappath)
 	local host_test = tonumber(global_config["HostTest"]["Option"])
 	local curdir = fs.ydwe_path() / 'plugin' / 'ydhost'
-	process_kills('ydhost')
+	process_kills('ydhost.exe')
 	host_copy_dll(curdir)
 	host_save_config(curdir, mappath, host_test + 1)
 	process_create(curdir / 'ydhost.exe', curdir)
