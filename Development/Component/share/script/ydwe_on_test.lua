@@ -78,20 +78,46 @@ local function host_copy_dll(curdir)
 	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'StormLib.dll', curdir / 'StormLib.dll', true)
 end
 
+local function get_war3_version()
+	if global_config["War3Patch"]["Option"] == "1" then
+		if global_config["MapSave"]["Option"] == "1" then
+			return sys.war3_version {
+				major    = 1,
+				minor    = 20,
+				revision = 4,
+				build    = 6074,
+			}
+		else
+			return sys.war3_version {
+				major    = 1,
+				minor    = 24,
+				revision = 4,
+				build    = 6387,
+			}
+		end
+	elseif global_config["War3Patch"]["Option"] == "2" then
+		return sys.war3_version {
+			file = fs.ydwe_path() / 'share' / 'patch' / global_config["War3Patch"]["DirName"] / 'Game.dll'
+		}
+	end
+	return war3_version
+end
+
 local function host_save_config(curdir, mappath, autostart)
+	local ver = get_war3_version()
 	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\Warcraft III\String]]
 	local tbl = {
 		--bot_mapcfgpath = '',
 		bot_mappath = mappath:parent_path():string(),
 		bot_defaultgamename = mappath:filename():string(),
 		bot_defaultownername = reg["userlocal"],
-		lan_war3version = war3_version.minor,
+		lan_war3version = ver.minor,
 		map_path = path_sub(mappath, fs.war3_path()):string(),
 		map_localpath = mappath:filename():string(),
 		bot_autostart = autostart,
 	}
 
-	if war3_version:is_new() then
+	if ver:is_new() then
 		tbl.bot_mapcfgpath = (fs.ydwe_path() / "jass" / "system" / "ht"):string()
 	else
 		tbl.bot_mapcfgpath = (fs.ydwe_path() / "jass" / "system" / "rb"):string()
