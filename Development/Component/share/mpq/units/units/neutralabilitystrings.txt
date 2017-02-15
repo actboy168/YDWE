@@ -1565,7 +1565,6 @@ Hotkey=B
 Researchtip="学习霹雳闪电(|cffffcc00B|r)，等级 %d"
 Researchhotkey=B
 EditorSuffix= (中立敌对)
-WEtip="造成法术攻击，火焰伤害(魔法伤害)"
 
 //spawn skeleton
 [Asod]
