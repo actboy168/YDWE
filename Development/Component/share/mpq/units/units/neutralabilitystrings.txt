@@ -433,7 +433,7 @@ Unhotkey=Q
 // Blink (beastmaster bear)
 [ANbl]
 Name=闪烁
-EditorSuffix=(中立)
+EditorSuffix=(中立的)
 Tip=闪烁(|cffffcc00B|r)
 Ubertip="将熊传送到附近的某个区域,使得它能在战斗中自由来去。"
 Hotkey=B
@@ -448,7 +448,7 @@ Ubertip="召唤一道压制魔法能量流，可以弹跳<Ache,DataC1>次，在�
 // Burrow (Barbed Arachnathid)
 [Abu5]
 Name=钻地
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=钻地(|cffffcc00B|r)
 Untip=钻出地面(|cffffcc00B|r)
 Ubertip="阿卡那瑟德钻入地面而消失不见。"
@@ -469,7 +469,7 @@ Unhotkey=R
 // Siphon Mana
 [ACsm]
 Name=魔法吸吮
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=魔法吸吮(|cffffcc00N|r) 
 Ubertip="从一个敌人身上吸收魔法能量给血魔法师，每秒吸取<ACsm,DataB1>点魔法值。|n持续<ACsm,Dur1>秒。"
 Hotkey=N
@@ -478,7 +478,7 @@ Hotkey=N
 // Devour Magic
 [ACde]
 Name=吞噬魔法
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip="吞噬魔法(|cffffcc00D|r)"
 Ubertip="吸收一定范围内所有单位身上的魔法效果。每个单位给予破坏者<Advm,DataA1>点的生命值和<Advm,DataB1>点魔法值。|n|cffffcc00对召唤出来的单位造成<Advm,DataE1>点的伤害。|r"
 Hotkey=D
@@ -524,7 +524,7 @@ Buffubertip="该单位受到火焰雨的攻击，它将不断受到伤害。"
 // Rain of Fire (greater, creep)
 [ACrg]
 Name=火焰雨
-EditorSuffix= (中立敌对 1)
+EditorSuffix= (中立但是带有敌意 1)
 Tip=火焰雨(|cffffcc00F|r)
 Ubertip="召唤出一阵阵的火焰雨来对一定区域内的敌人造成伤害。每阵火焰雨能造成<ACrg,DataB1>点的初始伤害。随后在<ACrg,Dur1>秒内能造成每秒<ACrg,DataE1>点的伤害。|n持续<ACrg,DataA1>阵。"
 Hotkey=F
@@ -582,7 +582,7 @@ Researchhotkey=T
 // Howl of Terror
 [Acht]
 Name=恐怖嚎叫
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=恐怖嚎叫(|cffffcc00W|r) 
 Ubertip="发出恐怖的嚎叫，降低周围敌单位的攻击力<Acht,DataA1,%>%，<Acht,Dur1>秒。"
 Hotkey=W
@@ -603,7 +603,7 @@ Researchhotkey=C
 // Cleaving Attack
 [ACce]
 Name=分裂攻击
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=分裂攻击
 Ubertip="该生物的攻击力量对主目标附近的敌人都造成<ACce,DataA1,%>%的伤害力。"
 
@@ -643,7 +643,7 @@ Buffubertip="我是一个熊猫人元素 ，崇拜我吧。"
 // Wind Walk (pandaren)
 [ANwk]
 Name=疾风步
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=疾风步(|cffffcc00W|r)
 Ubertip="允许熊猫人隐形，移动速度快<ANwk,DataB1,%>%。如果熊猫人攻击某单位它就会显形，这次攻击将会增加<ANwk,DataC1> 。"
 Hotkey=W
@@ -651,7 +651,7 @@ Hotkey=W
 // Taunt
 [ANta]
 Name=嘲讽
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=嘲讽(|cffffcc00T|r)
 Ubertip="最近的<ANta,DataA1>个单位会强迫攻击这个单位。"
 Hotkey=T
@@ -659,7 +659,7 @@ Hotkey=T
 // Banish (Creep)
 [ACbn]
 Name=驱散
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=驱逐(|cffffcc00B|r)
 Ubertip="将一个非机械单位变为气态并减缓其移动速度<ACbn,DataA1,%>%，<ACbn,Dur1>秒。气态生物无法攻击，但他们可以施放魔法，而某些魔法也可以对他们产生极大的作用。"
 Hotkey=B
@@ -678,7 +678,7 @@ Researchhotkey=D
 // Life Drain (Creep)
 [ACdr]
 Name=生命汲取
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=生命汲取(|cffffcc00R|r) 
 Ubertip="汲取目标单位一定点数的生命值并将其给予黑暗游侠<ACdr,DataA1>生命值/秒。|n持续<ACdr,Dur1>秒。"
 Hotkey=R
@@ -978,7 +978,7 @@ Buffubertip="召唤出来的单位会受到驱逐魔法的伤害。"
 // Black Arrow
 [ACbk]
 Name=黑暗之箭
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=黑暗之箭(|cffffcc00B|r) 
 Ubertip="增加<ACbk,DataA1>点伤害力。被黑暗之箭杀死的单位会变成骷髅。"
 Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
@@ -988,7 +988,7 @@ Hotkey=B
 // Charm (Creep)
 [ACch]
 Name=符咒
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=符咒(|cffffcc00R|r)
 Ubertip="控制某个敌方单位。|n符咒不能被用在英雄和等级高于<ACch,DataA1>的中立单位上。"
 Hotkey=R
@@ -1077,7 +1077,7 @@ Name=治疗守卫
 Tip=治疗守卫(|cffffcc00E|r)
 Ubertip="召唤出一个不能移动的治疗守卫。能以每秒<Aoar,DataA1,%>%的速度来恢复周围非机械单位的生命值。|n持续<AChw,Dur1>秒。"
 Hotkey=E
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 
 // Rejuvenation (Furbolg)
 [ACr2]
@@ -1105,14 +1105,14 @@ Name=复仇
 // general detect invis
 [Adtg]
 Name=真实视域
-EditorSuffix= (中立 1)
+EditorSuffix= (中立的 1)
 Tip=真实视域
 Ubertip="显示周围的隐形单位。"
 
 // general detect invis (War eagle)
 [ANtr]
 Name=真实视域
-EditorSuffix= (中立 2)
+EditorSuffix= (中立的 2)
 Tip=真实视域
 Ubertip="显示周围的隐形单位。"
 
@@ -1202,7 +1202,7 @@ Hotkey=F
 Researchtip=学习痛苦之指(|cffffcc00F|r)
 Researchubertip="能残忍地杀害敌人的单位或者猛烈地破坏敌人的建筑物。"
 Researchhotkey=F
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 
 [ACf3]
 Name=痛苦之指
@@ -1212,7 +1212,7 @@ Hotkey=F
 Researchtip=学习痛苦之指(|cffffcc00F|r)
 Researchubertip="能残忍地杀害敌人的单位或者猛烈地破坏敌人的建筑物。"
 Researchhotkey=F
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 
 [Afod]
 Name=死亡之指
@@ -1222,7 +1222,7 @@ Hotkey=F
 Researchtip=学习死亡之指(|cffffcc00F|r)
 Researchubertip="能立刻杀死某个生物或者摧毁某个建筑物。"
 Researchhotkey=F
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 
 [ANdp]
 Name=黑暗之门
@@ -1258,7 +1258,7 @@ EditorSuffix= (巴那泽尔)
 // Creep Devotion Aura
 [ACav]
 Name=专注光环
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=专注光环
 Ubertip="提高周围单位<ACav,DataA1>点的护甲。"
 
@@ -1314,13 +1314,13 @@ Name=吞噬货物
 // permanent immolation
 [ANpi]
 Name=永久的献祭
-EditorSuffix= (中立敌对 1)
+EditorSuffix= (中立但是带有敌意 1)
 Tip=永久的献祭
 Ubertip="对周围的敌人每秒造成<ANpi,DataA1>点伤害。"
 
 [Apig]
 Name=永久的献祭
-EditorSuffix= (中立敌对 2)
+EditorSuffix= (中立但是带有敌意 2)
 Tip=永久的献祭
 Ubertip="烧伤附近的敌人，造成每秒<Apig,DataA1>点伤害。
 
@@ -1398,7 +1398,7 @@ Ubertip="召唤出一地狱火恶魔从天而降，对一定区域内的敌人�
 Hotkey=I
 Researchtip=学习地狱火(|cffffcc00I|r)
 Researchhotkey=I
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Globalmessage=
 Globalsound=
 
@@ -1436,7 +1436,7 @@ Unhotkey=F
 // Neutral Unit Healing
 [Anhe]
 Name=医疗
-EditorSuffix= (中立敌对 1)
+EditorSuffix= (中立但是带有敌意 1)
 Tip=医疗(|cffffcc00E|r)
 Ubertip="医疗一个非机械友军单位。"
 Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
@@ -1460,7 +1460,7 @@ Name=雷霆一击
 Tip=雷霆一击(|cffffcc00L|r)
 Ubertip="震击地面，对周围的敌方地面单位造成<ACtc,DataA1>点的伤害。并减慢其移动和攻击速度。"
 Hotkey=L
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 
 [BCtc]
 Bufftip=雷霆一击
@@ -1491,7 +1491,7 @@ Hotkey=B
 // Creep Bloodlust (B hotkey version)
 [ACbb]
 Name=嗜血术
-EditorSuffix= (中立敌对 2)
+EditorSuffix= (中立但是带有敌意 2)
 Tip=嗜血术(|cffffcc00B|r)
 Ubertip="在<ACbb,Dur1>秒内增加目标单位<ACbb,DataA1,%>%的攻击速度和<ACbb,DataB1,%>%的移动速度。"
 Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
@@ -1516,7 +1516,7 @@ Buffubertip="该单位处于狂热中，其攻击速率和移动速度都增加�
 // Creep Bloodlust
 [ACbl]
 Name=嗜血术
-EditorSuffix= (中立敌对 1)
+EditorSuffix= (中立但是带有敌意 1)
 Tip=嗜血术(|cffffcc00L|r)
 Ubertip="在<ACbl,Dur1>秒内增加目标单位<ACbl,DataA1,%>%的攻击速度和<ACbl,DataB1,%>%的移动速度。"
 Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
@@ -1534,7 +1534,7 @@ Hotkey=E
 // Dragon Creep Devour
 [ACdv]
 Name=吞噬
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=吞噬(|cffffcc00D|r)
 Ubertip="吞噬某个敌方单位，对其造成每秒<Advc,DataB1>点的伤害。如果吞噬者在咀嚼目标单位的过程中被杀，那么被吞噬的单位会从其口中跳出来。"
 Hotkey=D
@@ -1563,7 +1563,7 @@ Ubertip="对敌人投掷出一道霹雳闪电将其击晕。"
 Hotkey=B
 Researchtip="学习霹雳闪电(|cffffcc00B|r)，等级 %d"
 Researchhotkey=B
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 
 //spawn skeleton
 [Asod]
@@ -1573,12 +1573,12 @@ EditorSuffix= (黑暗之箭)
 // spawn spiderlings (nerubian) on death
 [Assp]
 Name=小蜘蛛
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 
 // spawn spiders on death
 [Aspd]
 Name=小蜘蛛
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 
 // spawn hydra on death
 [Aspy]
@@ -1611,32 +1611,32 @@ Name=操纵死尸
 Tip=操纵死尸(|cffffcc00D|r)
 Ubertip="复活<ACad,DataA1>个阵亡单位。持续时间为<ACad,Dur1>秒。"
 Hotkey=D
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 [ACrn]
 Name=重生
 Tip=重生
 ubertip="当被杀时，该单位自动会复活。重生有<ACrn,Cool1>秒的施放/攻击间隔时间。"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // creep (demon) mana burn
 [Ambd]
 Name=法力燃烧
-EditorSuffix= (中立敌对 1)
+EditorSuffix= (中立但是带有敌意 1)
 Tip=法力燃烧(|cffffcc00N|r)
 Ubertip="射出一道能量波从而消耗掉目标单位<Ambb,DataA1>点的魔法值。目标单位的魔法值在燃烧的过程中，也会对其造成同等数量的伤害值。"
 Hotkey=N
 
 [Amnb]
 Name=法力燃烧
-EditorSuffix= (中立敌对 2)
+EditorSuffix= (中立但是带有敌意 2)
 Tip=法力燃烧(|cffffcc00N|r)
 Ubertip="射出一道能量波从而消耗掉目标单位<Ambb,DataA1>点的魔法值。目标单位的魔法值在燃烧的过程中，也会对其造成同等数量的伤害值。"
 Hotkey=N
 
 [Ambb]
 Name=法力燃烧
-EditorSuffix= (中立敌对 3)
+EditorSuffix= (中立但是带有敌意 3)
 Tip=法力燃烧(|cffffcc00B|r)
 Ubertip="射出一道能量波从而消耗掉目标单位<Ambb,DataA1>点的魔法值。目标单位的魔法值在燃烧的过程中，也会对其造成同等数量的伤害值。"
 Hotkey=B
@@ -1676,12 +1676,12 @@ Name=返回
 // invulnerable
 [Avul]
 Name=无敌的
-EditorSuffix= (中立)
+EditorSuffix= (中立的)
 
 // critter wander
 [Awan]
 Name=游荡者
-EditorSuffix= (中立)
+EditorSuffix= (中立的)
 
 // Malganis dark summoning
 [AUmd]
@@ -1701,11 +1701,11 @@ Buffubertip="该单位处于魔法恢复光环的作用之下，因此其魔法�
 
 [ACnr]
 Name=生命恢复光环
-EditorSuffix= (中立)
+EditorSuffix= (中立的)
 
 [ANre]
 Name=生命恢复光环
-EditorSuffix= (中立)
+EditorSuffix= (中立的)
 
 // meat wagon cargo hold
 [Sch2]
@@ -1742,7 +1742,7 @@ EditorSuffix=(大矿)
 
 // animate dead
 [Aand]
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // anti-magic shield
 [ACam]
@@ -1750,33 +1750,33 @@ Name=反魔法外壳
 Tip=反魔法外壳(|cffffcc00N|r)
 Ubertip="使目标单位对所有魔法免疫。|n持续<ACam,Dur1>秒。"
 Hotkey=N
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // brilliance aura
 [ACba]
 Name=辉煌光环
 Tip=辉煌光环
 Ubertip="增加周围单位每秒<ACba,DataA1>点的魔法恢复速度。"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // bash
 [ACbh]
 Name=重击
-EditorSuffix= (中立敌对 1)
+EditorSuffix= (中立但是带有敌意 1)
 Tip=重击
 Ubertip="给予<ACbh,DataA1>%的概率能造成<ACbh,DataC1>点的额外伤害，并在<ACbh,Dur1>秒内击晕敌人。"
 
 // bash
 [ANbh]
 Name=重击
-EditorSuffix= (中立敌对 2)
+EditorSuffix= (中立但是带有敌意 2)
 Tip=重击
 Ubertip="给予<ANbh,DataA1>%的概率能造成<ANbh,DataC1>点的额外伤害并在<ANbh,Dur1>秒内击晕敌人。"
 
 // bash
 [ANb2]
 Name=大锤
-EditorSuffix= (中立敌对 3)
+EditorSuffix= (中立但是带有敌意 3/大锤)
 Tip=大锤
 Ubertip="使得有<ANb2,DataA1>%的概率让一次进攻能施放出<ANb2,DataC1>点的额外伤害，并能在<ANb2,Dur1>秒内让对手处于昏晕状态。"
 
@@ -1784,7 +1784,7 @@ Ubertip="使得有<ANb2,DataA1>%的概率让一次进攻能施放出<ANb2,DataC1
 
 // devotion aura
 [ACad]
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // disease cloud/plague
 [Aap1]
@@ -1794,17 +1794,17 @@ EditorSuffix=(憎恶)
 EditorSuffix=(瘟疫守卫)
 
 [Aap3]
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 [Aap4]
-EditorSuffix=(中立敌对 无伤害)
+EditorSuffix=(中立但是带有敌意且没有攻击力)
 
 // trueshot aura
 [ACat]
 Name=强击光环
 Tip=强击光环
 Ubertip="提高周围友军单位<ACat,DataA1,%>%的远程攻击力。"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // Blight
 [Abli]
@@ -1830,7 +1830,7 @@ Name=暴风雪
 Tip=暴风雪(|cffffcc00B|r)
 Ubertip="召唤出<ACbz,DataA1>阵冰片波从天而降，每阵冰片波能造成<ACbz,DataB1>点的伤害。"
 Hotkey=B
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 
 // cannibalize
@@ -1839,7 +1839,7 @@ Name=吞食尸体
 Tip=吞食尸体(|cffffcc00C|r)
 Ubertip="吞食一个附近的尸体，每秒治疗<ACcn,DataA1>生命值。"
 Hotkey=C
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // carrion swarm
 [ACca]
@@ -1847,7 +1847,7 @@ Name=腐臭蜂群
 Tip=腐臭蜂群(|cffffcc00C|r)
 Ubertip="释放出一群怪异的生物对一条线上的敌人造成<ACca,DataA1>点的伤害。最大伤害值能达到<ACca,DataB1>点。"
 Hotkey=C
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // chain lightning
 [ACcl]
@@ -1855,7 +1855,7 @@ Name=闪电链
 Tip=闪电链(|cffffcc00C|r)
 Ubertip="投掷出一道闪电对第一个敌人造成<ACcl,DataA1>点的伤害，闪电一共跳跃<ACcl,DataB1>次。每次闪电的攻击力会随着跳跃次数增加而递减。"
 Hotkey=C
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // cold arrows
 [ACcw]
@@ -1866,7 +1866,7 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=C
 Unhotkey=C
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // cripple
 [ACcr]
@@ -1874,14 +1874,14 @@ Name=残废
 Tip=残废(|cffffcc00C|r)
 Ubertip="减慢目标单位<ACcr,DataC1,%>%的攻击力并减慢其<ACcr,DataA1,%>%的移动速度和<ACcr,DataB1,%>%的攻击速度。|n持续<ACcr,Dur1>秒。"
 Hotkey=C
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // critical strike
 [ACct]
 Name=致命一击
 Tip=致命一击
 Ubertip="给予<ACct,DataA1>%的概率使得该单位能施放出常规攻击<ACct,DataB1>倍的伤害值。"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // curse
 [ACcs]
@@ -1892,7 +1892,7 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。"
 Hotkey=C
 Unhotkey=C
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // cyclone
 [ACcy]
@@ -1900,7 +1900,7 @@ Name=飓风
 Tip=飓风(|cffffcc00C|r)
 Ubertip="将目标单位投掷到空中，使其不能移动，攻击和施放任何的魔法技能。而且其他单位也不能在这期间攻击它。|n持续<ACcy,Dur1>秒。"
 Hotkey=C
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 [SCc1]
 Name=飓风
@@ -1923,7 +1923,7 @@ Hotkey=D
 Researchtip="学习死亡凋零(|cffffcc00D|r)"
 Researchubertip="对有效范围内的单位每秒造成相当于<SNdd,DataA1,%>%生命值的伤害，也能摧毁树木。"
 Researchhotkey=D
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // death coil
 [ACdc]
@@ -1931,7 +1931,7 @@ Name=死亡缠绕
 Tip=死亡缠绕(|cffffcc00C|r)
 Ubertip="能治愈某个友军单位<ACdc,DataA1>点生命值，并对某个敌方单位造成一半数值的伤害。"
 Hotkey=C
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // detection
 [Adt1]
@@ -1949,7 +1949,7 @@ Name=驱逐魔法
 Tip=驱逐魔法(|cffffcc00D|r)
 UberTip="驱逐一定范围内所有魔法效果。|n|cffffcc00对召唤出来的单位造成<Adsm,DataB1>点的伤害。|r"
 Hotkey=D
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // auto-dispel magic
 [ACdm]
@@ -1960,7 +1960,7 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=B
 Unhotkey=B
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // auto-dispel magic (button pos 1,2)
 [ACd2]
@@ -1981,7 +1981,7 @@ Ubertip="能在<ACds,Dur1>秒内使得该单位对所有的攻击和魔法免疫
 Untip=取消神圣护甲(|cffffcc00D|r)
 Hotkey=D
 Unhotkey=D
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // super earthquake
 [SNeq]
@@ -1992,14 +1992,14 @@ Hotkey=E
 Researchtip="学习地震(|cffffcc00E|r)"
 Researchubertip="使大地摇动，对建筑物造成每秒<SNeq,DataB1>点的伤害并能让处于有效范围内的单位减速<SNeq,DataC1,%>%。持续<SNeq,Dur1>秒。"
 Researchhotkey=E
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // endurance aura
 [SCae]
 Name=耐久光环
 Tip=耐久光环
 Ubertip="增加周围单位<SCae,DataA1,%>%的移动速度和<SCae,DataB1,%>%的攻击速度。","增加周围单位<SCae,DataA2,%>%的移动速度和<SCae,DataB2,%>%的攻击速度。","增加周围单位<SCae,DataA3,%>%的移动速度和<SCae,DataB3,%>%的攻击速度。"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // ensnare
 [ACen]
@@ -2007,12 +2007,12 @@ Name=诱捕
 Tip=诱捕(|cffffcc00E|r)
 Ubertip="将敌方的某个空中单位捕获到地面能动弹。被诱捕的空中单位能像地面单位一样遭到攻击。|n持续<ACen,Dur1>秒。"
 Hotkey=E
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // entangling roots
 [Aenr]
 Name=纠缠根须
-EditorSuffix= (中立敌对 1)
+EditorSuffix= (中立但是带有敌意 1)
 Tip=纠缠根须(|cffffcc00E|r)
 Ubertip="从地面冒出根须使目标在<Aenr,Dur1>秒内不能动弹，并对其造成每秒<Aenr,DataA1>点的伤害。"
 Hotkey=E
@@ -2022,13 +2022,13 @@ Hotkey=E
 Name=闪避
 Tip=闪避
 Ubertip="给予<ACev,DataA1,%>%的概率来躲避掉敌人的攻击"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 [ACes]
 Name=闪避
 Tip=闪避
 Ubertip="给予<ACes,DataA1,%>%的概率来躲避掉敌人的攻击。"
-EditorSuffix=(中立敌对 100%)
+EditorSuffix=(中立但是带有敌意 100%)
 
 // faerie fire
 [ACff]
@@ -2039,7 +2039,7 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=R
 Unhotkey=R
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // feral spirit
 [ACsf]
@@ -2047,7 +2047,7 @@ Name=野兽幽魂
 Tip=野兽幽魂(|cffffcc00T|r)
 Ubertip="能召唤出<ACsf,DataB1>条幽灵狼来。|n持续<ACsf,Dur1>秒。|n|n|cffffcc00能攻击地面单位。|r"
 Hotkey=T
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // spirit pig
 [ACs9]
@@ -2055,7 +2055,7 @@ Name=野兽幽魂
 Tip=野兽幽魂(|cffffcc00T|r)
 Ubertip="能召唤出<ACs9,DataB1>个野猪幽灵来。|n持续<ACs9,Dur1>秒。|n|n|cffffcc00能攻击地面单位。|r"
 Hotkey=T
-EditorSuffix="(中立敌对,野猪)"
+EditorSuffix="(中立但是带有敌意，野猪)"
 
 // firebolt
 [ACfb]
@@ -2063,7 +2063,7 @@ Name=霹雳闪电
 Tip=霹雳闪电(|cffffcc00B|r)
 Ubertip="对敌人投掷出一道霹雳闪电将其击晕。"
 Hotkey=B
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // force of nature
 [ACfr]
@@ -2071,7 +2071,7 @@ Name=自然之力
 Tip=自然之力(|cffffcc00F|r)
 Ubertip="将一小块区域内的树木转化成<ACfr,DataA1>个树人。|n持续<ACfr,Dur1>秒。|n|n|cffffcc00能攻击地面单位。|r"
 Hotkey=F
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // frost armor (old, creep)
 [ACfa]
@@ -2079,7 +2079,7 @@ Name=霜冻护甲
 Tip=霜冻护甲(|cffffcc00F|r)
 Ubertip="霜冻护甲能增加目标单位<ACfa,DataB1>点的护甲防御，攻击该单位的近战型敌人也会在<ACfa,Dur1>秒内减速。|n持续<ACfa,DataA1>秒。"
 Hotkey=F
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 
 // frost armor (new, creep, autocast)
 [ACf2]
@@ -2089,7 +2089,7 @@ Ubertip="霜冻护甲能增加目标单位<ACfa,DataB1>点的护甲防御，攻�
 Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=F
-EditorSuffix= (自动施放) (中立敌对)
+EditorSuffix= (自动施放) (中立但是带有敌意)
 
 // frost armor (autocast)
 [ACfu]
@@ -2099,7 +2099,7 @@ Ubertip="使目标身上具有一层霜冻保护。这保护层能增加<ACfu,Da
 Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=F
-EditorSuffix= (自动施放) (中立敌对)
+EditorSuffix= (自动施放) (中立但是带有敌意)
 
 // frost nova
 [ACfn]
@@ -2107,7 +2107,7 @@ Name=霜冻新星
 Tip=霜冻新星(|cffffcc00N|r)
 Ubertip="用一阵霜冻来攻击目标单位，造成<ACfn,DataB1>点的常规伤害和<ACfn,DataA1>点的霜冻新星伤害。并在<ACfn,Dur1>秒内减慢被攻击单位的速度。"
 Hotkey=N
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // archimonde's ghouls harvest lumber
 [Ahr2]
@@ -2134,7 +2134,7 @@ EditorSuffix=(地精正在采集木材)
 // heal
 [Anh1]
 Name=医疗
-EditorSuffix=(中立敌对 2)
+EditorSuffix=(中立但是带有敌意 2)
 Tip=医疗(|cffffcc00E|r)
 Ubertip="医疗一个非机械友军单位。"
 Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
@@ -2144,7 +2144,7 @@ Unhotkey=E
 
 [Anh2]
 Name=医疗
-EditorSuffix=(中立敌对 3)
+EditorSuffix=(中立但是带有敌意  3)
 Tip=医疗(|cffffcc00E|r)
 Ubertip="医疗一个非机械友军单位。"
 Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
@@ -2154,7 +2154,7 @@ Unhotkey=E
 
 // healing ward
 [AChd]
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // immolation
 [ACim]
@@ -2165,7 +2165,7 @@ Unubertip="取消献祭来停止对魔法的消耗。"
 Hotkey=L
 Untip=取消献祭(|cffffcc00L|r)
 Unhotkey=L
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 [ACma]
 EditorSuffix=(总是有效)
@@ -2179,7 +2179,7 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=F
 Unhotkey=F
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // lightning shield
 [ACls]
@@ -2187,7 +2187,7 @@ Name=闪电护盾
 Tip=闪电护盾(|cffffcc00L|r)
 Ubertip="在目标单位周围形成一个带电护罩，能对其周围的单位造成每秒<ACls,DataA1>点的伤害。|n持续<ACls,Dur1>秒。"
 Hotkey=L
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // load, orc burrow
 [Sloa]
@@ -2210,7 +2210,7 @@ EditorSuffix= (船只)
 Name=魔法免疫
 Tip=魔法免疫
 Ubertip="让目标单位对所有魔法免疫。"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 [ACm2]
 Name=魔法免疫
@@ -2230,7 +2230,7 @@ Name=变形术
 Tip=变形术(|cffffcc00O|r)
 Ubertip="使得敌人的一个单位变成一头小绵羊，保有原有的生命值和防御，但是会使其丧失攻击力。|n不能被用在英雄身上。|n持续<ACpy,Dur1>秒。"
 Hotkey=O
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // possession
 [ACps]
@@ -2238,14 +2238,14 @@ Name=占据
 Tip=占据(|cffffcc00O|r)
 Ubertip="占据目标单位的灵魂，但是同时也会摧毁施放者的身体。|n占据魔法不能用在飞行单位，英雄和高于<ACps,DataA1>级的野生单位身上。"
 Hotkey=O
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // pulverize
 [ACpv]
 Name=粉碎
 Tip=粉碎
 Ubertip="给予<ACpv,DataA1>%的概率能对周围的单位造成<ACpv,DataB1>点的伤害。"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // purge
 [ACpu]
@@ -2253,12 +2253,12 @@ Name=净化
 Tip=净化(|cffffcc00G|r)
 Ubertip="去除目标单位上的所有魔法效果，并以<ACpu,DataA1>分之1的速度来减慢其移动速度。目标单位会在<ACpu,Dur1>秒内慢慢恢复自己的速度。|n|cffffcc00对召唤出来的单位造成<ACpu,DataC1>点的伤害。|r"
 Hotkey=G
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // rain of fire
 [ACrf]
 Name=火焰雨
-EditorSuffix= (中立敌对 2)
+EditorSuffix= (中立但是带有敌意 2)
 Tip=火焰雨(|cffffcc00F|r)
 Ubertip="召唤出一阵阵的火焰雨，每阵能造成<ACrf,DataB1>点的伤害。|n持续<ACrf,DataA1>阵。"
 Hotkey=F
@@ -2272,7 +2272,7 @@ Ubertip="从一具尸体中召唤出<ACrd,DataA1>个骷髅战士。"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。"
 Hotkey=R
 Unhotkey=R
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // rejuvenation
 [ACrj]
@@ -2280,7 +2280,7 @@ Name=生命恢复
 Tip=生命恢复(|cffffcc00E|r)
 Ubertip="在<ACrj,Dur1>秒内治疗目标友方单位<ACrj,DataA1>生命值。"
 Hotkey=E
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // human repair
 [Ahrp]
@@ -2299,7 +2299,7 @@ Name=咆哮
 Tip=咆哮(|cffffcc00R|r)
 Ubertip="增加周围友军单位<ACro,DataA1,%>%的攻击力。|n持续<ACro,Dur1>秒。"
 Hotkey=R
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // roar skeletal orc champion
 [ACr1]
@@ -2339,7 +2339,7 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=R
 Unhotkey=R
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // sell items
 [Asid]
@@ -2359,7 +2359,7 @@ Name=震荡波
 Tip=震荡波(|cffffcc00W|r)
 Ubertip="一道强劲的震荡波能对一直线上的敌人造成<ACsh,DataA1>点的伤害。"
 Hotkey=W
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 [ACst]
 Name=震荡波
@@ -2374,25 +2374,25 @@ Name=睡眠
 Tip=睡眠(|cffffcc00L|r)
 Ubertip="让目标单位在<ACsl,Dur1>秒内处于睡眠状态。如果该单位遭到攻击就会自动醒来。"
 Hotkey=L
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // slow
 [ACsw]
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // thorns aura
 [ACah]
 Name=荆棘光环
 Tip=荆棘光环
 Ubertip="给周围单位提供荆棘光环的保护，如果近战型的敌人来攻击它们就会受到每次相当于自身<ACah,DataA1,%>%攻击力的伤害。"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // unholy aura
 [ACua]
 Name=邪恶光环
 Tip=邪恶光环
 Ubertip="提高周围单位<ACua,DataA1,%>%的移动速度和<ACua,DataB1,%>%的生命值恢复速度。"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // unholy frenzy
 [ACuf]
@@ -2400,7 +2400,7 @@ Name=邪恶狂热
 Tip=邪恶狂热(|cffffcc00U|r)
 Ubertip="增加目标单位<Auhf,DataA1,%>%的攻击速度，但是每秒也会消耗目标<ACuf,DataB1>点的生命值。|n持续<ACuf,Dur1>秒。"
 Hotkey=U
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // vampiric attack
 [SCva]
@@ -2412,34 +2412,34 @@ EditorSuffix= (霜之哀伤)
 Name=吸血光环
 Tip=吸血光环
 Ubertip="周围的单位能将他们自己对敌人<ACvp,DataA1,%>%的伤害值转化成自己的生命值。"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // war stomp
 [Awrs]
 Name=战争践踏
-EditorSuffix= (中立敌对 1) 
+EditorSuffix= (中立但是带有敌意 1) 
 Tip=战争践踏(|cffffcc00T|r)
 Ubertip="重击地面，对周围的地面单位造成<Awrs,DataA1>点的伤害并使其在<Awrs,Dur1>秒内保持眩晕状态。"
 Hotkey=T
-EditorSuffix=(中立敌对) 
+EditorSuffix=(中立但是带有敌意) 
 
 // war stomp (Ancient Hydra)
 [Awrh]
 Name=战争践踏
-EditorSuffix= (中立敌对 2) 
+EditorSuffix= (中立但是带有敌意 2) 
 Tip=战争践踏(|cffffcc00T|r)
 Ubertip="重击地面，对周围的地面单位造成<Awrh,DataA1点的伤害并使其在<Awrh,Dur1>秒内保持眩晕状态。"
 Hotkey=T
-EditorSuffix=(中立敌对) 
+EditorSuffix=(中立但是带有敌意) 
 
 // war stomp (Sea Giant)
 [Awrg]
 Name=战争践踏
-EditorSuffix= (中立敌对 3) 
+EditorSuffix= (中立但是带有敌意 3) 
 Tip=战争践踏(|cffffcc00T|r)
 Ubertip="重击地面，对周围的地面单位造成<Awrg,DataA1>点的伤害并使其在<Awrg,Dur1>秒内保持眩晕状态。"
 Hotkey=T
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // Pulverize (sea giant)
 [ACpv]
@@ -2452,7 +2452,7 @@ Ubertip="给予<ACpv,DataA1>%的概率能对周围的单位造成<ACpv,DataB1>�
 Name=浸毒武器
 Tip=浸毒武器
 Ubertip="每秒能造成<ACvs,DataA1>点的毒性伤害。|n持续<ACvs,Dur1>秒。"
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // web
 [ACwb]
@@ -2463,7 +2463,7 @@ Ubertip="将目标单位用一张网来捕获到地面，从而地面上的单�
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。"
 Hotkey=W
 Unhotkey=W
-EditorSuffix=(中立敌对)
+EditorSuffix=(中立但是带有敌意)
 
 // Crushing Wave
 [ACcv]
@@ -2511,14 +2511,14 @@ Ubertip="对周围敌方的飞行单位造成每秒<Apmf,DataA1>点的伤害。"
 // neutral version of resistant skin
 [ACrk]
 Name=抗性皮肤
-EditorSuffix= (中立敌对 1)
+EditorSuffix= (中立但是带有敌意 1)
 Tip=抗性皮肤
 Ubertip="减少负面魔法的持续时间，使单位对某些魔法免疫。"
 
 // neutral version of resistant skin (altered button pos)
 [ACsk]
 Name=抗性皮肤
-EditorSuffix= (中立敌对 2)
+EditorSuffix= (中立但是带有敌意 2)
 Tip=抗性皮肤
 Ubertip="减少负面魔法的持续时间，使单位对某些魔法免疫。"
 
@@ -2536,7 +2536,7 @@ Researchhotkey=F
 // Forked Lightning
 [ACfl]
 Name=叉状闪电
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=叉状闪电(|cffffcc00R|r)
 Ubertip="召唤一道锥形闪电伤害女海巫面前的多个敌人，至多<ACfl,DataB1>个敌单位，<ACfl,DataA1>点伤害。"
 Hotkey=R

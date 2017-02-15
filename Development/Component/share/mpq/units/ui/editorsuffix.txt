@@ -1,3 +1,11 @@
+[BNva]
+EditorName=火山爆发(区域)
+[XNvc]
+EditorName=火山爆发(效果)
+[XNcs]
+EditorName=火箭群(效果)
+[XNhs]
+EditorName=医疗气雾(效果)
 [AIlp]
 EditorSuffix=(1)(法球施放)
 [AIos]
@@ -30,12 +38,241 @@ EditorSuffix=(中立敌对 2)
 EditorSuffix=(中立敌对 1)
 [Bpig]
 EditorSuffix=(中立敌对 2)
-[BNva]
-EditorName=火山爆发(区域)
-[XNvc]
-EditorName=火山爆发(效果)
-[XNcs]
-EditorName=火箭群(效果)
-[XNhs]
-EditorName=医疗气雾(效果)
-
+[Awan]
+EditorSuffix=(中立)
+[Avul]
+EditorSuffix=(中立)
+[ANbl]
+EditorSuffix=(中立)
+[ANtr]
+EditorSuffix=(中立 2)
+[Adtg]
+EditorSuffix=(中立 1)
+[ACnr]
+EditorSuffix=(中立)
+[ANre]
+EditorSuffix=(中立)
+[ANb2]
+EditorSuffix=(中立敌对 3)
+[ACbc]
+EditorSuffix=(中立敌对)
+[ACde]
+EditorSuffix=(中立敌对)
+[ANfs]
+EditorSuffix=(中立敌对 2)
+[ACss]
+EditorSuffix=(中立敌对)
+[ACmi]
+EditorSuffix=(中立敌对)
+[Acht]
+EditorSuffix=(中立敌对)
+[AChx]
+EditorSuffix=(中立敌对)
+[Aand]
+EditorSuffix=(中立敌对)
+[ACrk]
+EditorSuffix=(中立敌对 1)
+[ANfb]
+EditorSuffix=(中立敌对)
+[ACcs]
+EditorSuffix=(中立敌对)
+[ACls]
+EditorSuffix=(中立敌对)
+[SNdd]
+EditorSuffix=(中立敌对)
+[Anh1]
+EditorSuffix=(中立敌对 2)
+[ACat]
+EditorSuffix=(中立敌对)
+[ANin]
+EditorSuffix=(中立敌对)
+[Apig]
+EditorSuffix=(中立敌对 2)
+[ACce]
+EditorSuffix=(中立敌对)
+[Abu5]
+EditorSuffix=(中立敌对)
+[ACsl]
+EditorSuffix=(中立敌对)
+[ANpi]
+EditorSuffix=(中立敌对 1)
+[ACct]
+EditorSuffix=(中立敌对)
+[ACba]
+EditorSuffix=(中立敌对)
+[Amnb]
+EditorSuffix=(中立敌对 2)
+[ACwb]
+EditorSuffix=(中立敌对)
+[ACmf]
+EditorSuffix=(中立敌对)
+[ACif]
+EditorSuffix=(中立敌对)
+[ACrf]
+EditorSuffix=(中立敌对 2)
+[ACch]
+EditorSuffix=(中立敌对)
+[ACbb]
+EditorSuffix=(中立敌对 2)
+[ACad]
+EditorSuffix=(中立敌对)
+[ACpv]
+EditorSuffix=(中立敌对)
+[ACrn]
+EditorSuffix=(中立敌对)
+[ACdm]
+EditorSuffix=(中立敌对)
+[ACav]
+EditorSuffix=(中立敌对)
+[AChv]
+EditorSuffix=(中立敌对)
+[ACsw]
+EditorSuffix=(中立敌对)
+[Aenw]
+EditorSuffix=(中立敌对 2)
+[ACsk]
+EditorSuffix=(中立敌对 2)
+[ACen]
+EditorSuffix=(中立敌对)
+[AChd]
+EditorSuffix=(中立敌对)
+[ACbn]
+EditorSuffix=(中立敌对)
+[Awrg]
+EditorSuffix=(中立敌对 3) 
+[ANwk]
+EditorSuffix=(中立敌对)
+[ACfu]
+EditorSuffix=(自动施放) (中立敌对)
+[ACro]
+EditorSuffix=(中立敌对)
+[ACfl]
+EditorSuffix=(中立敌对)
+[ACsa]
+EditorSuffix=(中立敌对)
+[SNeq]
+EditorSuffix=(中立敌对)
+[ACvs]
+EditorSuffix=(中立敌对)
+[ANbh]
+EditorSuffix=(中立敌对 2)
+[ACvp]
+EditorSuffix=(中立敌对)
+[Adsm]
+EditorSuffix=(中立敌对)
+[ACsh]
+EditorSuffix=(中立敌对)
+[ACes]
+EditorSuffix=(中立敌对 100%)
+[ACua]
+EditorSuffix=(中立敌对)
+[ACsm]
+EditorSuffix=(中立敌对)
+[ACah]
+EditorSuffix=(中立敌对)
+[ACfs]
+EditorSuffix=(中立敌对)
+[AChw]
+EditorSuffix=(中立敌对)
+[ACuf]
+EditorSuffix=(中立敌对)
+[ACfn]
+EditorSuffix=(中立敌对)
+[ACs9]
+EditorSuffix=(中立敌对 野猪)
+[ACf2]
+EditorSuffix=(自动施放) (中立敌对)
+[ACrj]
+EditorSuffix=(中立敌对)
+[ACrd]
+EditorSuffix=(中立敌对)
+[SCae]
+EditorSuffix=(中立敌对)
+[ACpu]
+EditorSuffix=(中立敌对)
+[Aspd]
+EditorSuffix=(中立敌对)
+[ACps]
+EditorSuffix=(中立敌对)
+[ACpy]
+EditorSuffix=(中立敌对)
+[Ambb]
+EditorSuffix=(中立敌对 3)
+[ACim]
+EditorSuffix=(中立敌对)
+[ACbk]
+EditorSuffix=(中立敌对)
+[Anh2]
+EditorSuffix=(中立敌对 3)
+[ACdc]
+EditorSuffix=(中立敌对)
+[ACfa]
+EditorSuffix=(中立敌对)
+[ACtc]
+EditorSuffix=(中立敌对)
+[ACfr]
+EditorSuffix=(中立敌对)
+[ACfb]
+EditorSuffix=(中立敌对)
+[ACsf]
+EditorSuffix=(中立敌对)
+[ACff]
+EditorSuffix=(中立敌对)
+[ACev]
+EditorSuffix=(中立敌对)
+[Ambd]
+EditorSuffix=(中立敌对 1)
+[ACds]
+EditorSuffix=(中立敌对)
+[ACcy]
+EditorSuffix=(中立敌对)
+[ACcr]
+EditorSuffix=(中立敌对)
+[ACcw]
+EditorSuffix=(中立敌对)
+[ACcl]
+EditorSuffix=(中立敌对)
+[ACca]
+EditorSuffix=(中立敌对)
+[ACcn]
+EditorSuffix=(中立敌对)
+[Aenr]
+EditorSuffix=(中立敌对 1)
+[ACdr]
+EditorSuffix=(中立敌对)
+[Aap4]
+EditorSuffix=(中立敌对 无伤害)
+[Aap3]
+EditorSuffix=(中立敌对)
+[Awrh]
+EditorSuffix=(中立敌对 2) 
+[ACbh]
+EditorSuffix=(中立敌对 1)
+[ACbz]
+EditorSuffix=(中立敌对)
+[Awrs]
+EditorSuffix=(中立敌对 1) 
+[ACdv]
+EditorSuffix=(中立敌对)
+[ACf3]
+EditorSuffix=(中立敌对)
+[ACam]
+EditorSuffix=(中立敌对)
+[ANta]
+EditorSuffix=(中立敌对)
+[ACbl]
+EditorSuffix=(中立敌对 1)
+[ACrg]
+EditorSuffix=(中立敌对 1)
+[Assp]
+EditorSuffix=(中立敌对)
+[ACmp]
+EditorSuffix=(中立敌对)
+[Afod]
+EditorSuffix=(中立敌对)
+[Anhe]
+EditorSuffix=(中立敌对 1)
+[ACfd]
+EditorSuffix=(中立敌对)
+[ACsi]
+EditorSuffix=(中立敌对)
