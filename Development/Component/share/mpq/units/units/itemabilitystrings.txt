@@ -201,6 +201,7 @@ Name=力量上升驱散
 // Hero attacks get fire damage bonus, persistent, Orb of Fire
 [AIfb]
 Name=能带有火焰伤害的物品
+
 // Hero attacks get lightning damage bonus, persistent, Orb of Lightning
 [AIlb]
 Name=能带有闪电伤害的物品
@@ -212,7 +213,7 @@ Name=能带有黑箭攻击伤害的物品
 // purge portion of lightning orb
 [AIlp]
 Name=带有净化效果的物品
-EditorSuffix= (1)(法球施放)
+EditorSuffix= (1)
 
 // Hero attacks get frost damage bonus, persistent, Orb of Frost
 [AIob]
@@ -314,7 +315,6 @@ EditorSuffix=(较小的)
 // vampiric life steal ability
 [AIva]
 Name=能盗取生命值的物品
-
 
 // cloak of flames immolation
 [AIcf]
@@ -848,12 +848,11 @@ Name=减速之球
 [AIll]
 Name=闪电之球(新的)
 
-
 [AIos]
 Name=减速
 Tip=减速(|cffffcc00W|r)
 Ubertip="减慢目标单位<AIos,DataB1,%>%的攻击速度和<AIos,DataA1,%>%的移动速度。|n持续<AIos,Dur1>秒。"
-EditorSuffix= (法球施放)
+EditorSuffix= (圆球视野)
 
 // Orb of Darkness
 [ANbs]
@@ -948,6 +947,7 @@ Name=物品兽族战斗标准
 [AIgd]
 Name=能带有火焰伤害的物品
 EditorSuffix= (古尔丹)
+
 
 // tiny altar of kings
 [AIbh]

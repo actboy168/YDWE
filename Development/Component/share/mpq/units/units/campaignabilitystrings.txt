@@ -139,6 +139,7 @@ Tip=诱捕(|cffffcc00E|r)
 Ubertip="能将一个目标空中单位固定在地面上，使其在<Aens,Dur1>秒内不能移动。被诱捕的空中单位可以当作地面单位进行攻击。"
 Hotkey=E
 
+
 // Frost Armor (Autocast, Naga)
 [ACfu]
 Name=霜冻护甲
@@ -162,7 +163,6 @@ Unhotkey=R
 [BNpa]
 Bufftip="寄生虫"
 Buffubertip="这个单位已被寄生虫侵扰，它将随着时间逝去而受伤害，如果在它死时仍然在被折磨，一个单位将会从它的尸体上诞生。"
-
 
 // Parasite Minion
 [BNpm]
@@ -191,6 +191,7 @@ Name=通魔
 Tip=通魔(|cffffcc00C|r)
 Ubertip="通向强大的守卫魔法力量。"
 Hotkey=C
+
 
 //orc campaign abilities
 
@@ -223,7 +224,7 @@ Tip=惊吓(|cffffcc00E|r) - [|cffffcc00等级 1|r],惊吓(|cffffcc00E|r) - [|cff
 Ubertip="召唤出雷霆蜥蜴来爆炸在敌方单位的头上。每个爆炸的雷霆蜥蜴能造成<Arsp,DataC1>点伤害。|n持续<Arsp,Dur1>秒。","召唤出雷霆蜥蜴来爆炸在敌方单位的头上。每个爆炸的雷霆蜥蜴能造成<Arsp,DataC2>点伤害。|n持续<Arsp,Dur2>秒。"
 Hotkey=E
 Researchtip=学习惊吓(|cffffcc00E|r) - [|cffffcc00等级 %d|r]
-Researchubertip="召唤出雷霆蜥蜴来爆炸在敌方单位的头上。|n|n|cffffcc00等级 1|r -每个爆炸的雷霆蜥蜴能造成<Arsp,DataC1>点伤害。|n|cffffcc00等级 2|r -每个爆炸的雷霆蜥蜴能造成<Arsp,DataC2>点伤害。|n|n持续<Arsp,Dur2>秒。"
+Researchubertip="唤出雷霆蜥蜴来爆炸在敌方单位的头上。|n|n|cffffcc00等级 1|r -每个爆炸的雷霆蜥蜴能造成<Arsp,DataC1>点伤害。|n|cffffcc00等级 2|r -每个爆炸的雷霆蜥蜴能造成<Arsp,DataC2>点伤害。|n|n持续<Arsp,Dur2>秒。"
 Researchhotkey=E
 EditorSuffix=(雷克萨)
 
@@ -369,6 +370,7 @@ Researchtip="学习战争践踏(|cffffcc00T|r) - [|cffffcc00等级 %d|r]。"
 Researchubertip="震击地面，击晕周围的地面单位。|n|n|cffffcc00等级 1|r - <AOw2,DataA1>点伤害，昏晕状态持续<AOw2,Dur1>秒。|n|n|cffffcc00等级 2|r - <AOw2,DataA2>点伤害，昏晕状态持续<AOw2,Dur2>秒。|n|n|cffffcc00等级 3|r - <AOw2,DataA3>点伤害，昏晕状态持续<AOw2,Dur3>秒。|n|n|cffffcc00等级 4|r - <AOw2,DataA4>点伤害，昏晕状态持续<AOw2,Dur4>秒。"
 Hotkey=T
 Researchhotkey=T
+
 
 // Voodoo Spirits
 [AOls]

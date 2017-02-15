@@ -96,7 +96,7 @@ Ubertip="小型的远程攻击飞行单位。|n|n|cffffcc00能攻击地面和空
 Hotkey=W
 
 [nbdr]
-Name=黑幼龙 
+Name=红幼龙
 Tip=召唤黑幼龙( |cffffcc00W|r)
 Ubertip="小型的远程攻击飞行单位。|n|n|cffffcc00能攻击地面和空中单位。|r"
 Hotkey=W

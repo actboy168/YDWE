@@ -195,13 +195,11 @@ Name=粉碎
 Tip=粉碎
 Ubertip="给予<Awar,DataA1>%的概率使得攻击能对周围的单位造成<Awar,DataB1>点的伤害。"
 
-
 [Abtl]
 Name=战斗位置
 Tip=战斗位置(|cffffcc00B|r)
 Ubertip="使得附近的苦工跑入地洞从而对来犯的敌人进行反击。"
 Hotkey=B
-
 
 [Astd]
 Name=卸载苦工
@@ -215,7 +213,6 @@ Name=诱捕
 Tip=诱捕(|cffffcc00E|r)
 Ubertip="能将一个目标空中单位固定在地面上，使其在<Aens,Dur1>秒内不能移动。"
 Hotkey=E
-
 
 // Ensnare buff on ground units
 [Beng]
@@ -406,7 +403,6 @@ Hotkey=W
 Researchtip="学习疾步风(|cffffcc00W|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="使得剑圣在一定时间内隐形并加快移动速度，如果此时进行攻击的话，那么就不再隐形但会造成更多的伤害。|n|n|cffffcc00等级 1|r -消耗<AOwk,Cost1>点魔法，加快<AOwk,DataB1,%>%的移动速度，增加<AOwk,DataC1>点的伤害，持续<AOwk,Dur1>秒。|n|cffffcc00等级 2|r -消耗<AOwk,Cost2>点魔法，加快<AOwk,DataB2,%>%的移动速度，增加<AOwk,DataC2>点的伤害，持续<AOwk,Dur2>秒。|n|cffffcc00等级 3|r -消耗<AOwk,Cost3>点魔法，加快<AOwk,DataB3,%>%的移动速度，增加<AOwk,DataC3>点的伤害，持续<AOwk,Dur3>秒。"
 Researchhotkey=W
-
 
 [BOwk]
 Bufftip=疾步风

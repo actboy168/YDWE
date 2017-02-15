@@ -389,7 +389,7 @@ Researchhotkey=T
 
 [BNtm]
 Bufftip=点金术
-Buffubertip="这个单位受到了点金术的作用。将会变成金币。影响范围可以对群体有效，但是只有一个投射物。"
+Buffubertip="这个单位受到了点金术的作用。将会变成金币。"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -418,6 +418,7 @@ EditorSuffix= (龙卷风)
 [Atwa]
 Name=龙卷风漫步者
 EditorSuffix= (龙卷风)
+
 
 // Orb of Annihilation (Quill Spray)
 [ANak]
@@ -472,6 +473,7 @@ EditorSuffix= (中立敌对)
 Tip=魔法吸吮(|cffffcc00N|r) 
 Ubertip="从一个敌人身上吸收魔法能量给血魔法师，每秒吸取<ACsm,DataB1>点魔法值。|n持续<ACsm,Dur1>秒。"
 Hotkey=N
+
 
 // Devour Magic
 [ACde]
@@ -609,20 +611,19 @@ Ubertip="该生物的攻击力量对主目标附近的敌人都造成<ACce,DataA
 [ANdo]
 Name=魔鬼缠身
 Tip=魔鬼缠身(|cffffcc00D|r)
-Ubertip="对一个目标宣布魔鬼缠身。遭受审判的单位不能施放任何魔法并且每秒受到<ANdo,DataA1>点伤害直到他死去。在他死亡时，一个末日守卫将会从他的尸体上诞生。魔鬼缠身不能被驱散或取消。"
+Ubertip="使一个目标遭到魔鬼缠身。被折磨的单位不能施放任何魔法并且每秒受到<ANdo,DataA1>点伤害直到他死去。在他死亡时，一个巨大的魔鬼将会从他的尸体上诞生。魔鬼缠身不能被驱散或取消。"
 Hotkey=D
 Researchtip="学习魔鬼缠身(|cffffcc00D|r)"
-Researchubertip="对一个目标宣布魔鬼缠身。遭受审判的单位不能施放任何魔法并且每秒受到<ANdo,DataA1>点伤害直到他死去。在他死亡时，一个末日守卫将会从他的尸体上诞生。魔鬼缠身不能被驱散或取消。"
+Researchubertip="使一个目标遭到魔鬼缠身。被折磨的单位不能施放任何魔法并且每秒受到<ANdo,DataA1>点伤害直到他死去。在他死亡时，一个巨大的魔鬼将会从他的尸体上诞生。魔鬼缠身不能被驱散或取消。"
 Researchhotkey=D
-
 
 [BNdo]
 Bufftip=魔鬼缠身
-Buffubertip="该单位正遭受魔鬼缠身的摧残；它不能施放任何魔法并将会持续受到伤害直到死亡，一个末日守卫会在他死亡时诞生。魔鬼缠身不能被驱散或取消。"
+Buffubertip="这个单位受到魔鬼缠身的折磨；它不能施放任何魔法也将会持续受到伤害直到死亡，一个魔鬼将会从他的尸体上诞生。魔鬼缠身不能被驱散或取消。"
 
 [BNdi]
 Bufftip=魔鬼缠身
-Buffubertip="该单位正遭受魔鬼缠身的摧残；它将会持续受到伤害直到死亡，一个末日守卫会在他死亡时诞生。魔鬼缠身不能被驱散或取消。"
+Buffubertip="这个单位受到魔鬼缠身的折磨；它将会持续受到伤害直到死亡，一个魔鬼将会从他的尸体上诞生。魔鬼缠身不能被驱散或取消。"
 EditorSuffix= (奴)
 
 // Storm, Earth, and Fire
@@ -662,6 +663,7 @@ EditorSuffix= (中立敌对)
 Tip=驱逐(|cffffcc00B|r)
 Ubertip="将一个非机械单位变为气态并减缓其移动速度<ACbn,DataA1,%>%，<ACbn,Dur1>秒。气态生物无法攻击，但他们可以施放魔法，而某些魔法也可以对他们产生极大的作用。"
 Hotkey=B
+
 
 // Life Drain 
 [ANdr]
@@ -721,10 +723,10 @@ Ubertip="让该单位能为英雄携带物品。物品在处于该单位物品�
 Name=召唤熊
 Tip=召唤熊(|cffffcc00G|r) - [|cffffcc00等级 1|r],召唤熊(|cffffcc00G|r) - [|cffffcc00等级 2|r],召唤熊(|cffffcc00G|r) - [|cffffcc00等级 3|r]
 Ubertip="召唤一头威力强大，生命值<ngz1,realHP>点的熊来攻击你的敌人。|n持续<ANsg,Dur1>秒。","召唤一头威力强大，生命值<ngz2,realHP>点的熊来攻击你的敌人，具有重击的技能。|n持续<ANsg,Dur2>秒。","召唤一头威力强大，生命值<ngz3,realHP>点的熊来攻击你的敌人，具有重击和闪烁的技能。|n持续<ANsg,Dur3>秒。"
-Hotkey=B
+Hotkey=G
 Researchtip=学习召唤熊(|cffffcc00G|r) - [|cffffcc00等级 %d|r]
 Researchubertip="召唤一头威力强大的熊来攻击你的敌人。|n持续<ANsg,Dur1>秒。|n|n|cffffcc00等级 1|r - <ngz1,realHP>点生命值，<ngz1,mindmg1>到<ngz1,maxdmg1>点攻击力。|n|n|cffffcc00等级 2|r - <ngz2,realHP>点生命值，<ngz2,mindmg1>到<ngz2,maxdmg1>点攻击力，具有重击技能。|n|n|cffffcc00等级 3|r - <ngz3,realHP>点生命值，<ngz3,mindmg1>到<ngz3,maxdmg1>点攻击力，具有重击和闪烁的技能。"
-Researchhotkey=B
+Researchhotkey=G
 
 [BNsg]
 Bufftip=熊
@@ -771,7 +773,7 @@ Researchhotkey=T
 // Hex
 [AChx]
 Name=妖术
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=妖术(|cffffcc00X|r)
 Ubertip="在<AChx,Dur1>秒内将敌方的某个单位变成某种小动物。"
 Hotkey=X
@@ -779,7 +781,7 @@ Hotkey=X
 // Entangling Roots Seaweed Version (Creep)
 [Aenw]
 Name=纠缠根须
-EditorSuffix= (中立敌对 2)
+EditorSuffix= (中立但是带有敌意 2)
 Tip=纠缠根须(|cffffcc00E|r)
 Ubertip="从地下伸出缠绕的根须将目标在<Aenw,Dur1>秒内固定住，并对其造成每秒<Aenw,DataA1>点的伤害。"
 Hotkey=E
@@ -787,7 +789,7 @@ Hotkey=E
 // Healing Wave (Creep)
 [AChv]
 Name=医疗波
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=医疗波(|cffffcc00E|r)
 Ubertip="召唤出一道能跳跃<AChv,DataB1>次的医疗能量波。增加第一个目标<AChv,DataA1> 点的生命值，每次跳跃都将削弱这道能量波的医疗能力。"
 Hotkey=E
@@ -795,26 +797,24 @@ Hotkey=E
 // Silence(Creep)
 [ACsi]
 Name=沉默魔法
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=沉默魔法(|cffffcc00E|r)
 Ubertip="在<ACsi,Dur1>秒内阻止一定区域内所有敌人施放魔法。"
 Hotkey=E
 
-
 // Mana Shield(Creep)
 [ACmf]
 Name=魔法护盾
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=魔法护盾(|cffffcc00N|r)
 Ubertip="激活可以每点魔力可以吸收<ACmf,DataA1>伤害力的护盾。"
 Untip=取消魔法护盾(|cffffcc00N|r)
 Hotkey=N
 Unhotkey=N
 
-
 // Shadow Strike
 [ACss]
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=暗影突袭(|cffffcc00D|r)
 Ubertip="投掷出一把毒性的匕首，能对敌方单位造成巨大的伤害。最初造成<ACss,DataE1>点的伤害，随后每<ACss,Cast1>秒造成<ACss,DataA1>点的伤害。持续<ACss,Dur1>秒。在短时间内匕首上的毒性效果能减慢目标单位的攻击速度和移动速度。"
 Hotkey=D
@@ -840,7 +840,7 @@ Buffubertip="该单位遭到了霜冻闪电的攻击，因此会持续地受到�
 // Breath of Fire (Creep)
 [ACbc]
 Name=火焰呼吸
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=火焰呼吸(|cffffcc00F|r) 
 Ubertip="对敌人呼出带有攻击力的火焰，造成<ACbc,DataA1>点伤害力。"
 Hotkey=F
@@ -848,7 +848,7 @@ Hotkey=F
 // Flame Strike
 [ACfs]
 Name=烈焰风暴
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=烈焰风暴(|cffffcc00F|r)
 Ubertip="召唤出一道巨大的火焰，持续时间为2秒，每秒对敌方的地面单位造成45点的伤害。在火焰慢慢熄灭的过程中，敌方单位将持续受到极度轻微的伤害。"
 Hotkey=F
@@ -856,7 +856,7 @@ Hotkey=F
 // Flame Strike
 [ANfs]
 Name=烈焰风暴
-EditorSuffix= (中立敌对 2)
+EditorSuffix= (中立但是带有敌意 2)
 Tip=烈焰风暴(|cffffcc00F|r)
 Ubertip="召唤出一道巨大的火焰，持续时间为3秒，每秒对敌方的地面单位造成75点的伤害。在火焰慢慢熄灭的过程中，敌方单位将持续受到极度轻微的伤害。"
 Hotkey=F
@@ -864,7 +864,7 @@ Hotkey=F
 // Impale
 [ACmp]
 Name=穿刺
-EditorSuffix= (中立敌对)
+EditorSuffix= (中立但是带有敌意)
 Tip=穿刺(|cffffcc00E|r)
 Ubertip="震击地面，发出一道直线力量之波，造成<ACmp,DataA1>点伤害力，并将敌地面单位抛入空中，使其晕眩<ACmp,Dur1>秒。"
 Hotkey=E
@@ -1261,7 +1261,6 @@ Name=专注光环
 EditorSuffix= (中立敌对)
 Tip=专注光环
 Ubertip="提高周围单位<ACav,DataA1>点的护甲。"
-WEtip="魔法效果不同的同种光环可以叠加"
 
 // Cargo Hold Death
 [Achd]
@@ -1370,7 +1369,7 @@ Tip=用%d木材交换%d黄金( |cffffcc00G|r)
 Hotkey=G
 
 [ANre]
-Name=魔法恢复光环
+Name=生命恢复光环
 
 [ANrl]
 Name=生命值恢复速度
@@ -1573,7 +1572,6 @@ WEtip="造成法术攻击，火焰伤害(魔法伤害)"
 Name=产卵之骨
 EditorSuffix= (黑暗之箭)
 
-
 // spawn spiderlings (nerubian) on death
 [Assp]
 Name=小蜘蛛
@@ -1665,7 +1663,7 @@ Name=金矿能力
 
 // goblin mine
 [Amin]
-Name=地雷引爆
+Name=金矿 - 爆炸了
 EditorSuffix= (地精地雷)
 
 // permanent invis
@@ -1707,7 +1705,7 @@ Name=生命恢复光环
 EditorSuffix= (中立)
 
 [ANre]
-Name=魔法恢复光环
+Name=生命恢复光环
 EditorSuffix= (中立)
 
 // meat wagon cargo hold
@@ -1778,9 +1776,9 @@ Ubertip="给予<ANbh,DataA1>%的概率能造成<ANbh,DataC1>点的额外伤害�
 
 // bash
 [ANb2]
-Name=重击
+Name=大锤
 EditorSuffix= (中立敌对 3)
-Tip=重击
+Tip=大锤
 Ubertip="使得有<ANb2,DataA1>%的概率让一次进攻能施放出<ANb2,DataC1>点的额外伤害，并能在<ANb2,Dur1>秒内让对手处于昏晕状态。"
 
 
@@ -2522,6 +2520,7 @@ Name=抗性皮肤
 EditorSuffix= (中立敌对 2)
 Tip=抗性皮肤
 Ubertip="减少负面魔法的持续时间，使单位对某些魔法免疫。"
+
 
 // Forked Lightning
 [ANfl]

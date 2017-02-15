@@ -1,10 +1,10 @@
 ﻿//allied building
 [Aall]
-Name=共享商店，联盟建筑物
+Name=共享商店，联盟建筑物。
 
 //burrow detection, fliers
 [Abdt]
-Name=钻地探测
+Name=地洞探测
 EditorSuffix= (飞行单位，废弃的)
 
 //purchase (shop)
@@ -98,7 +98,7 @@ Researchubertip="通过附加的火焰伤害来增加女祭司的攻击力。|n|
 Researchhotkey=R
 
 [AEbu]
-Name=建造 (暗夜精灵)
+Name=建造 (暗夜精灵族)
 
 [AGbu]
 Name=建造(娜迦)
@@ -128,19 +128,19 @@ Name=警报
 Name=攻击
 
 [Afih]
-Name=着火(人族)
+Name=开火 (人族)
 
 [Afin]
-Name=着火(暗夜精灵)
+Name=开火 (暗夜精灵族)
 
 [Afio]
-Name=着火(兽族)
+Name=开火 (兽族)
 
 [Afir]
-Name=着火
+Name=开火
 
 [Afiu]
-Name=着火(不死族)
+Name=开火 (不死族)
 
 [Aloc]
 Name=蝗虫
@@ -149,13 +149,13 @@ Name=蝗虫
 Name=移动
 
 [Atdp]
-Name=卸载驾驶员
+Name=放下驾驶员
 
 [Atlp]
 Name=装载驾驶员
 
 [Attu]
-Name=坦克围城
+Name=小塔
 
 // Stun buff
 [BSTN]

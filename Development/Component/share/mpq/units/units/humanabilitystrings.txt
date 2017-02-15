@@ -80,13 +80,11 @@ Name=碎片攻击
 Tip=碎片攻击
 Ubertip="迫击炮小队使用碎片攻击的迫击炮，将会增加其对无护甲和中型护甲单位的伤害。"
 
-
 // Barrage
 [Aroc]
 Name=弹幕攻击
 Tip=弹幕攻击
 Ubertip="对周围的敌方空中单位进行强有力的弹幕攻击。每次发射能造成<hrtt,mindmg2> - <hrtt,maxdmg2>点的伤害。"
-
 
 // Tank upgrade
 [Srtt]
@@ -196,7 +194,6 @@ Ubertip="使得飞行机器能攻击地面单位。"
 Name=风暴战锤
 Tip=风暴战锤
 Ubertip="让狮鹫骑士的战锤能进行弹射，从而对多个敌人造成伤害。"
-
 
 // Flying Machine Vision
 [Agyv]

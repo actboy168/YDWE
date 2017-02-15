@@ -542,6 +542,7 @@ Researchtip="学习荆棘光环(|cffffcc00R|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="该光环能给予周围的友军单位一个具有攻击力的护盾保护，敌人对这些单位进行一次近战攻击就会受到一定的伤害。|n|n|cffffcc00等级 1|r - 返回<AEah,DataA1,%>%的伤害。|n|cffffcc00等级 2|r - 返回<AEah,DataA2,%>%的伤害。|n|cffffcc00等级 3|r - 返回<AEah,DataA3,%>%的伤害。"
 Researchhotkey=R
 
+
 [BEah]
 Bufftip=荆棘光环
 Buffubertip="该单位处在荆棘光环的作用之下，因此近战单位攻击它会受到伤害。"

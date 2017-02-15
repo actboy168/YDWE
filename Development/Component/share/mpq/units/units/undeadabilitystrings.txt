@@ -153,7 +153,6 @@ Researchtip="学习尖刺外壳(|cffffcc00S|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="在地穴领主的身上形成一层带有尖刺的保护壳，增加其防御能力并能弹射敌人的近战攻击。|n|n|cffffcc00等级 1|r - 弹射<AUts,DataA1,%>%的伤害，增加<AUts,DataC1>点护甲。|n|cffffcc00等级 2|r -  弹射<AUts,DataA2,%>%的伤害，增加<AUts,DataC2>点护甲。|n|cffffcc00等级 3|r -  弹射<AUts,DataA3,%>%点的伤害，增加<AUts,DataC3>点护甲。"
 Researchhotkey=S
 
-
 // Carrion Beetles
 [AUcb]
 Name=腐尸甲虫
@@ -459,7 +458,7 @@ Name=占据
 Tip=占据(|cffffcc00O|r)
 Ubertip="将目标单位和女妖震晕<Aps2,Dur1>秒，在这个期间，女妖将受到额外的伤害。女妖会将永久地控制目标单位，但是与此同时，施法者的身体也将会被毁掉。|n占据魔法不能被使用在飞行单位，英雄和级别高于<Aps2,DataA1>的野生单位身上。"
 Hotkey=O
-EditorSuffix= (引导)
+EditorSuffix= (通魔)
 
 [Bpos]
 Bufftip=占据
@@ -544,7 +543,7 @@ Name=吸血光环
 Tip=吸血光环 - [|cffffcc00等级 1|r],吸血光环 - [|cffffcc00等级 2|r],吸血光环 - [|cffffcc00等级 3|r]
 Ubertip="附近的单位可以将<AUav,DataA1,%>%对敌人的伤害值转成自己的生命值。","附近的单位可以将<AUav,DataA2,%>%对敌人的伤害值转成自己的生命值。","附近的单位可以将<AUav,DataA3,%>%对敌人的伤害值转成自己的生命值。"
 Researchtip="学习吸血光环(|cffffcc00V|r) - [|cffffcc00等级 %d|r]"
-Researchubertip="使附近的单位在近战攻击时可以将对敌人的伤害值转成自己的生命值|n|n|cffffcc00等级 1|r -将<AUav,DataA1,%>%对敌人的伤害值转成自己的生命值。|n|cffffcc00等级 2|r -将<AUav,DataA2,%>%对敌人的伤害值转成自己的生命值。|n|cffffcc00等级 3|r -将<AUav,DataA1,%>%对敌人的伤害值转成自己的生命值。"
+Researchubertip="能对敌人进行一轮冰冻攻击，对其造成一定伤害并使其减速。|n|n|cffffcc00等级 1|r -<AUfn,DataB1>点常规伤害，<AUfn,DataA1>点新星伤害。|n|cffffcc00等级 2|r -<AUfn,DataB2>点常规伤害，<AUfn,DataA2>点新星伤害。|n|cffffcc00等级 3|r -<AUfn,DataB3>点常规伤害，<AUfn,DataA3>点新星伤害。"
 Researchhotkey=V
 
 [BUav]
