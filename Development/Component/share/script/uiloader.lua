@@ -120,14 +120,44 @@ function loader:worldeditstrings()
 	return table.concat(rt, '\n')
 end
 
+local txt = (require 'w3xparser').txt
+local lni = require 'lni-c'
+local info = lni(io.load(fs.ydwe_path() / 'plugin' / 'w3x2lni' / 'script' / 'info.ini'))
+
+local function stringify(t)
+	local buf = {}
+	for id, o in pairs(t) do
+		buf[#buf+1] = ('[%s]'):format(id)
+		for k, v in pairs(o) do
+			for i = 1, #v do
+				if v[i]:find(',', 1, true) then
+					v[i] = '"' .. v[i] .. '"'
+				end
+			end
+			buf[#buf+1] = ('%s=%s'):format(k, table.concat(v, ','))
+		end
+	end
+	return table.concat(buf, '\r\n')
+end
+
 function loader:initialize()
 	self:config()
 	virtual_mpq.watch('UI\\TriggerData.txt',      function (name) return self:triggerdata() end)
 	virtual_mpq.watch('UI\\TriggerStrings.txt',   function (name) return self:triggerstrings() end)
 	virtual_mpq.watch('UI\\WorldEditStrings.txt', function (name) return self:worldeditstrings() end)
 	
-	virtual_mpq.watch('Units\\NeutralUpgradeStrings.txt', function (name)
-		return io.load(io.load(root / 'units' / 'ui' / 'ydwetip.txt' .. root / 'units' / name))
+	for _, filename in ipairs(info.txt) do
+		if info.txt[1] ~= filename then
+			virtual_mpq.watch(filename, function () return '' end)
+		end
+	end
+	virtual_mpq.watch(info.txt[1], function (name)
+		local t = {}
+		for _, filename in pairs(info.txt) do
+			txt(io.load(root / 'units' / filename), filename, t)
+		end
+		txt(io.load(root / 'units' / 'ui' / 'ydwetip.txt'), 'ydwetip', t)
+		return stringify(t)
 	end)
 end
 
