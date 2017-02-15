@@ -1488,7 +1488,6 @@ Tip=狂暴愤怒(|cffffcc00B|r)
 Ubertip="在<ACbr,Dur1>秒内提高<ACbr,DataA1,%>%的攻击速度。"
 Hotkey=B
 
-
 // Creep Bloodlust (B hotkey version)
 [ACbb]
 Name=嗜血术
@@ -1642,6 +1641,7 @@ Tip=法力燃烧(|cffffcc00B|r)
 Ubertip="射出一道能量波从而消耗掉目标单位<Ambb,DataA1>点的魔法值。目标单位的魔法值在燃烧的过程中，也会对其造成同等数量的伤害值。"
 Hotkey=B
 
+
 // AOE damage upon death
 [Adda]
 Name=范围性攻击伤害
@@ -1781,6 +1781,7 @@ Tip=大锤
 Ubertip="使得有<ANb2,DataA1>%的概率让一次进攻能施放出<ANb2,DataC1>点的额外伤害，并能在<ANb2,Dur1>秒内让对手处于昏晕状态。"
 
 
+
 // devotion aura
 [ACad]
 EditorSuffix=(中立敌对)
@@ -1830,6 +1831,7 @@ Tip=暴风雪(|cffffcc00B|r)
 Ubertip="召唤出<ACbz,DataA1>阵冰片波从天而降，每阵冰片波能造成<ACbz,DataB1>点的伤害。"
 Hotkey=B
 EditorSuffix=(中立敌对)
+
 
 // cannibalize
 [ACcn]
@@ -1969,7 +1971,7 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=B
 Unhotkey=B
-EditorSuffix="(中立敌对,位置2)"
+EditorSuffix="(中立的单位但是是敌对的，第二位置)"
 
 // divine shield
 [ACds]
@@ -2545,11 +2547,11 @@ Hotkey=R
 
 [BNpi]
 EditorName=永久的献祭
-EditorSuffix= (中立敌对1)
+EditorSuffix= (中立的单位但是是敌对的1)
 
 [Bpig]
 EditorName=永久的献祭
-EditorSuffix= (中立敌对 2)
+EditorSuffix= (中立的单位但是是敌对的 2)
 
 [BNsl]
 EditorName=灵魂保存
@@ -2588,13 +2590,13 @@ EditorName=能更改时间的物品
 EditorName=季风(效果)
 
 [BNva]
-EditorName=火山爆发(区域)
+EditorName=Volcano (Area)
 
 [XNvc]
-EditorName=火山爆发(效果)
+EditorName=Volcano (Effect)
 
 [XNcs]
-EditorName=火箭群(效果)
+EditorName=Cluster Rockets (Effect)
 
 [XNhs]
-EditorName=医疗气雾(效果)
+EditorName=Healing Spray (Effect)
