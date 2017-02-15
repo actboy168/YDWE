@@ -157,6 +157,18 @@ function loader:initialize()
 			txt(io.load(root / 'units' / filename), filename, t)
 		end
 		txt(io.load(root / 'units' / 'ui' / 'ydwetip.txt'), 'ydwetip', t)
+		
+		local replace = {}
+		txt(io.load(root / 'units' / 'ui' / 'editorsuffix.txt'), 'editorsuffix', replace)
+		for id, o in pairs(replace) do
+			if not t[id] then
+				t[id] = o
+			else
+				for k, v in pairs(o) do
+					t[id][k] = v
+				end
+			end
+		end
 		return stringify(t)
 	end)
 end

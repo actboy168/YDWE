@@ -1,0 +1,26 @@
+[AIlp]
+EditorSuffix= (1)(法球施放)
+[AIos]
+EditorSuffix= (法球施放)
+[AChx]
+EditorSuffix= (中立敌对)
+[Aenw]
+EditorSuffix= (中立敌对 2)
+[AChv]
+EditorSuffix= (中立敌对)
+[ACsi]
+EditorSuffix= (中立敌对)
+[ACmf]
+EditorSuffix= (中立敌对)
+[ACss]
+EditorSuffix= (中立敌对)
+[ACbc]
+EditorSuffix= (中立敌对)
+[ACfs]
+EditorSuffix= (中立敌对)
+[ANfs]
+EditorSuffix= (中立敌对 2)
+[ACmp]
+EditorSuffix= (中立敌对)
+[Aps2]
+EditorSuffix= (引导)
