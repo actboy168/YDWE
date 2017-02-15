@@ -125,6 +125,10 @@ function loader:initialize()
 	virtual_mpq.watch('UI\\TriggerData.txt',      function (name) return self:triggerdata() end)
 	virtual_mpq.watch('UI\\TriggerStrings.txt',   function (name) return self:triggerstrings() end)
 	virtual_mpq.watch('UI\\WorldEditStrings.txt', function (name) return self:worldeditstrings() end)
+	
+	virtual_mpq.watch('Units\\NeutralUpgradeStrings.txt', function (name)
+		return io.load(io.load(root / 'units' / 'ui' / 'ydwetip.txt' .. root / 'units' / name))
+	end)
 end
 
 uiloader = loader

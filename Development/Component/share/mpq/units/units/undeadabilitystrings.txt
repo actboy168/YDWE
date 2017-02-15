@@ -73,7 +73,6 @@ Untip="|cffc3dbff|cffc3dbff点击右键以启动自动施放功能。|r|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=O
 Unhotkey=O
-YDWEtip="只对武器类型为箭矢(溅射)的单位有效。1级纯法球效果，开启时覆盖其他法球效果。改变溅射数据的部分是1级类攻击特效。"
 
 // Devour Magic
 [Advm]
@@ -81,14 +80,12 @@ Name=吞噬魔法
 Tip="吞噬魔法(|cffffcc00D|r)"
 Ubertip="吸收一定范围内所有单位身上的魔法效果。每个单位给予破坏者<Advm,DataA1>点的生命值和<Advm,DataB1>点魔法值。|n|cffffcc00对召唤出来的单位造成<Advm,DataE1>点的伤害。|r"
 Hotkey=D
-YDWEtip="对召唤单位和类别为召唤的单位造成法术攻击，魔法伤害"
 
 // Aura of Blight
 [Aabr]
 Name=荒芜光环
 Tip=荒芜光环
 Ubertip="让周围不死族友军单位加快其生命值恢复速度。不能和荒芜光环一起发挥作用。"
-YDWEtip="魔法效果不同的同种光环可以叠加"
 
 [Babr]
 Bufftip=荒芜光环
@@ -143,7 +140,6 @@ Hotkey=E
 Researchtip="学习穿刺(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="以地穴领主的巨爪震击地面，射出一道直线形尖刺蔓藤，造成极大伤害并将其轨迹上的敌地面单位抛入空中。|n|n|cffffcc00等级 1|r - <AUim,DataC1>伤害力，<AUim,Dur1>秒晕眩。|n|cffffcc00等级 2|r - <AUim,DataC2> 伤害力，<AUim,Dur2>秒晕眩。|n|cffffcc00等级 3|r - <AUim,DataC3>伤害力，<AUim,Dur3>秒晕眩。"
 Researchhotkey=E
-YDWEtip="造成法术攻击，力量伤害(魔法伤害)。对被缠绕住的单位无效。对飞行单位无效。"
 
 [BUim]
 Bufftip=穿刺
@@ -156,7 +152,6 @@ Ubertip="增加地穴领主<AUts,DataC1>点的护甲并能将敌人<AUts,DataA1,
 Researchtip="学习尖刺外壳(|cffffcc00S|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="在地穴领主的身上形成一层带有尖刺的保护壳，增加其防御能力并能弹射敌人的近战攻击。|n|n|cffffcc00等级 1|r - 弹射<AUts,DataA1,%>%的伤害，增加<AUts,DataC1>点护甲。|n|cffffcc00等级 2|r -  弹射<AUts,DataA2,%>%的伤害，增加<AUts,DataC2>点护甲。|n|cffffcc00等级 3|r -  弹射<AUts,DataA3,%>%点的伤害，增加<AUts,DataC3>点护甲。"
 Researchhotkey=S
-YDWEtip="该技能的科技需求项无效。反射造成法术攻击，防御伤害(魔法伤害)。反射的是原始攻击数值"
 
 
 // Carrion Beetles
@@ -184,7 +179,6 @@ Hotkey=L
 Researchtip="学习蝗虫群(|cffffcc00L|r)"
 Researchubertip="召唤出一群蝗虫来攻击敌人。在它们啃咬敌人的血肉的时候，会将其转化为一种能量物质，在蝗虫返回到地穴领主身边的时候该物质能恢复地穴领主的生命值。|n持续 <AUls,HeroDur1> 秒。"
 Researchhotkey=L
-YDWEtip="造成的伤害依赖于其召唤的单位的攻击，召唤出的单位如果没有蝗虫技能可能不会主动巡逻"
 
 [BUlo]
 Bufftip=蝗虫群
@@ -199,7 +193,6 @@ Name=真实视域
 Tip=真实视域
 Ubertip="显示周围的隐形单位。"
 EditorSuffix= (阴影)
-YDWEtip="真实视域可以超出视野，但是添加负视野的技能不会使视野小于真实视域"
 
 // Acolyte Harvest
 [Aaha]
@@ -218,7 +211,6 @@ Name=反召唤建筑
 Tip=反召唤建筑物(|cffffcc00U|r)
 Ubertip="反召唤建筑物可以取回<Auns,DataA1,%>%的花费资源。"
 Hotkey=U
-YDWEtip="该技能造成法术攻击，破坏伤害(加强伤害)。返回资源率为100%则可能回收时不造成伤害。"
 
 [Buns]
 Bufftip=反召唤
@@ -252,7 +244,6 @@ Name=吞食尸体
 Tip=吞食尸体(|cffffcc00C|r)
 Ubertip="消耗周围的某个尸体来以每秒<Acan,DataA1>点的速度恢复自己的生命值。"
 Hotkey=C
-YDWEtip="只会寻找默认范围内的尸体"
 
 // Cannibalize
 [Acn2]
@@ -260,12 +251,10 @@ Name=吞食尸体
 Tip=吞食尸体(|cffffcc00C|r)
 Ubertip="吞食一个附近的尸体，每秒治疗<Acn2,DataA1>点生命值。"
 Hotkey=C
-YDWEtip="只会寻找默认范围内的尸体"
 
 // Spider Attack
 [Aspa]
 Name=蜘蛛攻击
-YDWEtip="只能产生小蜘蛛的投射物。5级空法球+独立攻击特效，被更高级或者后获得的同级攻击特效覆盖。"
 // This ability modifies the unit's attack.
 
 [Bspa]
@@ -280,7 +269,6 @@ Ubertip="将目标单位用一张网来捕获到地面，从而地面上的单�
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。"
 Hotkey=W
 Unhotkey=W
-YDWEtip="不能对不可移动单位使用"
 
 // Web buff on ground units
 [Bweb]
@@ -326,33 +314,28 @@ Hotkey=D
 Name=疾病云雾
 Tip=疾病云雾
 Ubertip="用疾病来感染周围的敌人。疾病云雾每秒能对敌人造成<Aap1,DataB1>点的伤害。|n持续<Aap1,DataA1>秒。"
-YDWEtip="对单位类型为不死族的单位无效。造成法术攻击，疾病伤害(不计算护甲的物理伤害)"
 
 [Aap1]
 Name=疾病云雾
 Tip=疾病云雾
 Ubertip="用疾病来感染周围的敌人。疾病云雾每秒能对敌人造成<Aap1,DataB1>点的伤害。|n持续<Aap1,DataA1>秒。"
-YDWEtip="对单位类型为不死族的单位无效。造成法术攻击，疾病伤害(不计算护甲的物理伤害)"
 
 // Disease Cloud
 [Aap2]
 Name=疾病云雾
 EditorSuffix= (瘟疫守卫)
-YDWEtip="对单位类型为不死族的单位无效。造成法术攻击，疾病伤害(不计算护甲的物理伤害)"
 
 [Aap3]
 Name=疾病云雾
 Tip=疾病云雾
 Ubertip="用疾病来感染周围的敌人。疾病云雾每秒能对敌人造成<Aap3,DataB1>点的伤害。|n持续<Aap3,DataA1>秒。"
 EditorSuffix= (中立敌对)
-YDWEtip="对单位类型为不死族的单位无效。造成法术攻击，疾病伤害(不计算护甲的物理伤害)"
 
 [Aap4]
 Name=疾病云雾
 Tip=疾病云雾
 Ubertip="用疾病来感染周围的敌人。疾病云雾每秒能对敌人造成<Aap3,DataB1>点的伤害。|n持续<Aap3,DataA1>秒。"
 EditorSuffix= (中立敌对 无伤害)
-YDWEtip="对单位类型为不死族的单位无效。造成法术攻击，疾病伤害(不计算护甲的物理伤害)"
 
 [Bapl]
 Bufftip=疾病
@@ -364,12 +347,10 @@ Name=疾病云雾
 Tip=疾病云雾
 Ubertip="在每次攻击的时候都能释放出疾病云雾。疾病云雾每秒能对敌人造成<Aap1,DataB1>点的伤害。|n持续<Aap1,DataA1>秒。"
 EditorSuffix= (绞肉车)
-YDWEtip="该技能可以在攻击时召唤单位，召唤出的单位无法被选中但是可以被伤害。瘟疫对单位类型为不死族的单位无效。5级空法球+独立攻击特效，被更高级或者后获得的同级攻击特效覆盖。"
 
 // Frost Breath
 [Afrb]
 Name=霜冻呼吸
-YDWEtip="5级空法球+独立攻击特效，被更高级或者后获得的同级攻击特效覆盖。减速数值可以在游戏平衡性常数中修改"
 // This ability modifies the unit's attack.
 
 // Frost Attack
@@ -377,21 +358,18 @@ YDWEtip="5级空法球+独立攻击特效，被更高级或者后获得的同级
 Name=霜之攻击
 Tip=霜之攻击
 Ubertip="给单位的攻击增加冰冻效果，可以减慢敌单位的移动速度。"
-YDWEtip="5级空法球+独立攻击特效，被更高级或者后获得的同级攻击特效覆盖。减速数值可以在游戏平衡性常数中修改"
 
 // Frost Attack (1,2 button pos version)
 [Afr2]
 Name=霜冻攻击
 Tip=霜冻攻击
 Ubertip="在单位攻击的基础上增加冰冻效果，能减慢敌人的移动速度。"
-YDWEtip="5级空法球+独立攻击特效，被更高级或者后获得的同级攻击特效覆盖。减速数值可以在游戏平衡性常数中修改"
 
 // Freezing Breath
 [Afrz]
 Name=冰冻喷吐
 Tip=冰冻喷吐
 Ubertip="用在建筑物上时，能在段时间内使其失去应有的功效。|n持续<Afrz,Dur1>秒。"
-YDWEtip="武器类型为箭矢(溅射)时，是4级空法球+独立攻击特效，覆盖低级的法球效果，被更高级或者后获得的同级攻击特效覆盖。武器类型为箭矢时，是4级空法球+类攻击特效，还会对目标立即增加一次攻击伤害，该次攻击也会附加其他法球效果，多个冰冻喷吐的增加攻击次数可以叠加(bug)。"
 
 [Bfrz]
 Bufftip=冰冻喷吐
@@ -417,7 +395,6 @@ Name=邪恶狂热
 Tip=邪恶狂热(|cffffcc00U|r)
 Ubertip="增加目标单位<Auhf,DataA1,%>%的攻击速度，但是每秒也会消耗目标<Auhf,DataB1>点的生命值。|n持续<Auhf,Dur1>秒。"
 Hotkey=U
-YDWEtip="造成法术攻击，死亡伤害(魔法伤害)"
 
 // Unholy Frenzy (Warlock)
 [Suhf]
@@ -426,7 +403,6 @@ Tip=邪恶狂热(|cffffcc00U|r)
 Ubertip="增加目标单位<Suhf,DataA1,%>%的攻击速度，但是每秒也会消耗目标<Suhf,DataB1>点的生命值。|n持续<Suhf,Dur1>秒。"
 Hotkey=U
 EditorSuffix= (巫师)
-YDWEtip="造成法术攻击，死亡伤害(魔法伤害)"
 
 [Buhf]
 Bufftip=邪恶狂热
@@ -460,7 +436,6 @@ Tip=反魔法外壳(|cffffcc00N|r)
 Ubertip="建立一道屏障，使得目标单位能少受<Aam2,DataC1>点的魔法伤害。|n持续<Aam2,Dur1>秒。"
 Hotkey=N
 EditorSuffix= (魔法抗性)
-YDWEtip="只能吸收法术攻击和魔法攻击的伤害，另外，不能吸收伤害类型为通用的伤害。"
 
 [Bams]
 Bufftip=反魔法外壳
@@ -499,7 +474,6 @@ Hotkey=C
 Researchtip="学习死亡缠绕(|cffffcc00C|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="能治疗友军的某个不死单位或者伤害敌人的某个单位。|n|n|cffffcc00等级 1|r - 恢复<AUdc,DataA1>点生命值。|n|cffffcc00等级 2|r - 恢复<AUdc,DataA2>点生命值。|n|cffffcc00等级 3|r - 恢复<AUdc,DataA3>点生命值。"
 Researchhotkey=C
-YDWEtip="对单位类别为不死族的敌方单位和非不死族的友军单位无效。造成法术攻击，死亡伤害(魔法伤害)"
 
 // Unholy Aura
 [AUau]
@@ -509,7 +483,6 @@ Ubertip="增加周围友军单位<AUau,DataA1,%>%的移动速度和生命恢复�
 Researchtip="学习邪恶光环(|cffffcc00U|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="增加周围友军单位的移动速度和生命恢复速度。|n|n|cffffcc00等级 1|r - 增加<AUau,DataA1,%>%的移动速度和小幅度的生命恢复速度。|n|cffffcc00等级 2|r - 增加<AUau,DataA2,%>%的移动速度和中等幅度的生命恢复速度。|n|cffffcc00等级 3|r - 增加<AUau,DataA3,%>%的移动速度和大幅度的生命恢复速度。"
 Researchhotkey=U
-YDWEtip="魔法效果不同的同种光环可以叠加"
 
 [BUau]
 Bufftip=邪恶光环
@@ -524,7 +497,6 @@ Hotkey=E
 Researchtip="学习死亡契约(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="杀死一个友军单位，将其一定百分比的生命值转成死亡骑士的生命值。|n|n|cffffcc00等级 1|r - 转化<AUdp,DataB1,%>%。|n|cffffcc00等级 2|r -转化 <AUdp,DataB2,%>%。|n|cffffcc00等级 3|r - 转化<AUdp,DataB3,%>%。"
 Researchhotkey=E
-YDWEtip="对单位类别为不死族的敌方单位和非不死族的友军单位无效"
 
 // Animate Dead
 [AUan]
@@ -537,7 +509,6 @@ Researchubertip="复活<AUan,DataA1>个阵亡单位，持续时间为<AUan,Dur1>
 Researchhotkey=D
 Globalmessage=
 Globalsound=
-YDWEtip="被复活的单位将属于施法者控制。修改目标允许后对存活单位也有效。"
 
 [BUan]
 Bufftip=操纵死尸
@@ -552,7 +523,6 @@ Hotkey=C
 Researchtip="学习腐臭蜂群(|cffffcc00C|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="放出一群蝙蝠和昆虫对一线上的敌人造成一定的伤害。|n|n|cffffcc00等级 1|r - 对每个单位造成<AUcs,DataA1>点的伤害。|n|cffffcc00等级 2|r - 对每个单位造成<AUcs,DataA2>点的伤害。|n|cffffcc00等级 3|r - 对每个单位造成<AUcs,DataA3>点的伤害。"
 Researchhotkey=C
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 // Sleep
 [AUsl]
@@ -576,7 +546,6 @@ Ubertip="附近的单位可以将<AUav,DataA1,%>%对敌人的伤害值转成自�
 Researchtip="学习吸血光环(|cffffcc00V|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="使附近的单位在近战攻击时可以将对敌人的伤害值转成自己的生命值|n|n|cffffcc00等级 1|r -将<AUav,DataA1,%>%对敌人的伤害值转成自己的生命值。|n|cffffcc00等级 2|r -将<AUav,DataA2,%>%对敌人的伤害值转成自己的生命值。|n|cffffcc00等级 3|r -将<AUav,DataA1,%>%对敌人的伤害值转成自己的生命值。"
 Researchhotkey=V
-YDWEtip="魔法效果不同的同种光环可以叠加"
 
 [BUav]
 Bufftip=吸血光环
@@ -591,7 +560,6 @@ Hotkey=N
 Researchtip="学习霜冻新星(|cffffcc00N|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="能对敌人进行一轮冰冻攻击，对其造成一定伤害并使其减速。|n|n|cffffcc00等级 1|r -<AUfn,DataB1>点常规伤害，<AUfn,DataA1>点新星伤害。|n|cffffcc00等级 2|r -<AUfn,DataB2>点常规伤害，<AUfn,DataA2>点新星伤害。|n|cffffcc00等级 3|r -<AUfn,DataB3>点常规伤害，<AUfn,DataA3>点新星伤害。"
 Researchhotkey=N
-YDWEtip="造成法术攻击，冰冻伤害(魔法伤害)，减速数值可以在游戏平衡性常数中修改"
 
 // Frost Armor
 [AUfa]
@@ -602,7 +570,6 @@ Hotkey=F
 Researchtip="学习霜冻护甲(|cffffcc00F|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="使目标身上具有一层霜冻保护。这保护层能增加一定的护甲并使近战攻击该目标的敌人在一定时间内减速。|n|n|cffffcc00等级 1|r - 增加<AUfa,DataB1>点护甲。|n|cffffcc00等级 2|r - 增加<AUfa,DataB2>点护甲。|n|cffffcc00等级 3|r - 增加<AUfa,DataB3>点护甲。"
 Researchhotkey=F
-YDWEtip="只能使非远程攻击者减速，减速数值可以在游戏平衡性常数中修改"
 
 // Frost Armor (Autocast)
 [AUfu]
@@ -616,7 +583,6 @@ Hotkey=F
 Researchtip="学习霜冻护甲(|cffffcc00F|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="使目标身上具有一层霜冻保护。这保护层能增加一定的护甲并使近战攻击该目标的敌人在一定时间内减速。|n|n|cffffcc00等级 1|r - 增加<AUfu,DataB1>点护甲。|n|cffffcc00等级 2|r - 增加<AUfu,DataB2>点护甲。|n|cffffcc00等级 3|r - 增加<AUfu,DataB3>点护甲。"
 Researchhotkey=F
-YDWEtip="只能使非远程攻击者减速，减速数值可以在游戏平衡性常数中修改"
 
 [BUfa]
 Bufftip=霜冻护甲
@@ -631,7 +597,6 @@ Hotkey=R
 Researchtip="学习黑暗仪式(|cffffcc00R|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="牺牲一个友军单位来将其一定百分比的生命值转化成巫妖的魔法值。|n|n|cffffcc00等级 1|r - 转化<AUdr,DataA1,%>%的生命值。|n|cffffcc00等级 2|r - 转化<AUdr,DataA2,%>%的生命值。|n|cffffcc00等级 3|r - 转化<AUdr,DataA3,%>%的生命值。"
 Researchhotkey=R
-YDWEtip="对单位类别为不死族的敌方单位和非不死族的友军单位无效"
 
 // Death And Decay
 [AUdd]
@@ -642,7 +607,6 @@ Hotkey=D
 Researchtip="学习死亡凋零(|cffffcc00D|r)"
 Researchubertip="能以每秒<AUdd,DataA1,%>%的速度来消耗有效范围内一切单位和建筑物的生命值。也能摧毁树木。|n持续<AUdd,Dur1>秒。"
 Researchhotkey=D
-YDWEtip="造成法术攻击，通用伤害。多个死亡凋零不能叠加。"
 
 [BUdd]
 Bufftip=死亡凋零
@@ -685,7 +649,6 @@ Hotkey=N
 Researchtip=学习地狱火(|cffffcc00N|r)
 Researchubertip="召唤出一地狱火恶魔从天而降，对地面上的敌人造成<AUin,DataA1>点的伤害，并在<AUin,Dur1>秒内使其处于昏晕状态。地狱火恶魔持续<AUin,DataB1>秒。"
 Researchhotkey=N
-YDWEtip="造成法术攻击，力量伤害(魔法伤害)，伤害来源是召唤出的单位，没有则无伤害。会导致召唤出的单位的蝗虫技能失效。"
 
 //----------------------------------------------------
 // Buffs with no in-game text

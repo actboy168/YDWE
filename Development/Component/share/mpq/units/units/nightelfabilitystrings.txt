@@ -39,7 +39,6 @@ Untip="|cffc3dbff|cffc3dbff点击右键以启动自动施放功能。|r|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=E
 Unhotkey=E
-YDWEtip="变相移动其实只是处于隐身状态。"
 
 [Bpsh]
 Bufftip=变相移动
@@ -56,37 +55,31 @@ Hotkey=E
 [Asp1]
 Name=球体
 EditorSuffix= (复仇之魂-等级 1)
-YDWEtip="该技能能够给单位绑定模型，该模型会在单位攻击或施法时播放死亡动画，魔法施放冷却时间过后才会重新创建，并播放该模型的诞生动画。单位死亡则特效消失。另外，该技能能在单位施放技能至发动技能期间，向目标释放投射物，投射物到达时间等同于单位的施法前摇。"
 
 // Sphere
 [Asp2]
 Name=球体
 EditorSuffix= (复仇之魂-等级 2)
-YDWEtip="该技能能够给单位绑定模型，该模型会在单位攻击或施法时播放死亡动画，魔法施放冷却时间过后才会重新创建，并播放该模型的诞生动画。单位死亡则特效消失。另外，该技能能在单位施放技能至发动技能期间，向目标释放投射物，投射物到达时间等同于单位的施法前摇。"
 
 // Sphere
 [Asp3]
 Name=球体
 EditorSuffix= (复仇之魂-等级 3)
-YDWEtip="该技能能够给单位绑定模型，该模型会在单位攻击或施法时播放死亡动画，魔法施放冷却时间过后才会重新创建，并播放该模型的诞生动画。单位死亡则特效消失。另外，该技能能在单位施放技能至发动技能期间，向目标释放投射物，投射物到达时间等同于单位的施法前摇。"
 
 // Sphere
 [Asp4]
 Name=球体
 EditorSuffix= (复仇之魂-等级 4)
-YDWEtip="该技能能够给单位绑定模型，该模型会在单位攻击或施法时播放死亡动画，魔法施放冷却时间过后才会重新创建，并播放该模型的诞生动画。单位死亡则特效消失。另外，该技能能在单位施放技能至发动技能期间，向目标释放投射物，投射物到达时间等同于单位的施法前摇。"
 
 // Sphere
 [Asp5]
 Name=球体
 EditorSuffix= (复仇之魂-等级 5)
-YDWEtip="该技能能够给单位绑定模型，该模型会在单位攻击或施法时播放死亡动画，魔法施放冷却时间过后才会重新创建，并播放该模型的诞生动画。单位死亡则特效消失。另外，该技能能在单位施放技能至发动技能期间，向目标释放投射物，投射物到达时间等同于单位的施法前摇。"
 
 // Sphere
 [Asp6]
 Name=球体
 EditorSuffix= (复仇之魂-等级 6)
-YDWEtip="该技能能够给单位绑定模型，该模型会在单位攻击或施法时播放死亡动画，魔法施放冷却时间过后才会重新创建，并播放该模型的诞生动画。单位死亡则特效消失。另外，该技能能在单位施放技能至发动技能期间，向目标释放投射物，投射物到达时间等同于单位的施法前摇。"
 
 // War Club
 [Agra]
@@ -101,7 +94,6 @@ Name=硬化皮肤
 Tip=硬化皮肤
 Ubertip="降低所有施加在山岭巨人身上的伤害<Assk,DataC1>点。攻击不能低于<Assk,DataB1>点。"
 Hotkey=K
-YDWEtip="直接减少攻击伤害的攻击力，在计算护甲之前。只对攻击伤害有效。"
 
 // Resistant Skin
 [Arsk]
@@ -109,7 +101,6 @@ Name=抗性皮肤
 Tip=抗性皮肤
 Ubertip="降低负性魔法的持续时间，并让山岭巨人对某些特定魔法免疫。"
 Hotkey=E
-YDWEtip="使受到技能的持续时间按照英雄持续时间计算"
 
 // Taunt
 [Atau]
@@ -141,7 +132,6 @@ Hotkey=F
 Researchtip="学习刀阵旋风(|cffffcc00F|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="守望者对周围的敌人发射出锋利的尖刀进行伤害。|n|n|cffffcc00等级 1|r - 对每个目标造成<AEfk,DataA1>点伤害。|n|cffffcc00等级 2|r - 对每个目标造成<AEfk,DataA2>点伤害。|n|cffffcc00等级 3|r - 对每个目标造成<AEfk,DataA3>点伤害。"
 Researchhotkey=F
-YDWEtip="无视施法前摇。造成法术攻击，强化伤害(加强伤害)"
 
 // Shadow Strike
 [AEsh]
@@ -152,7 +142,6 @@ Hotkey=D
 Researchtip="学习暗影突袭(|cffffcc00D|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="投掷出一把毒性的匕首，能对敌方的地面单位造成巨大的伤害。最初造成很大的伤害，随后每秒造成一定的伤害。匕首上的毒素能在短时间内减慢目标单位的攻击速度和移动速度。|n|n|cffffcc00等级 1|r - <AEsh,DataE1> 点初始伤害，<AEsh,DataA1> 点持续伤害。 |n|cffffcc00等级 2|r - <AEsh,DataE2>点初始伤害，<AEsh,DataA2>点持续伤害。 |n|cffffcc00等级 3|r - <AEsh,DataE3>点初始伤害，<AEsh,DataA3>点持续伤害。."
 Researchhotkey=D
-YDWEtip="初始伤害是法术攻击，慢性毒药伤害(加强伤害)。持续伤害是法术攻击，暗影突袭伤害(魔法伤害)。多个暗影突袭叠加时，伤害取剩余伤害较高的那个，而伤害间隔则取最短的那个。"
 
 // Shadow Strike Non Stack Buff
 [BEsh]
@@ -195,20 +184,17 @@ Hotkey=L
 Name=月刃
 Tip=月刃
 Ubertip="使得女猎手的月刃剑能在攻击的时候进行弹射，从而伤害到敌人其他的单位。"
-YDWEtip="这是一个无效果的被动技能，仅仅具有一个图标，可用来做一些触发制作的被动技能的图标"
 
 [Amgr]
 Name=月刃
 EditorSuffix= (娜萨)
 Tip=月刃
 Ubertip="使得女猎手的月刃剑能在攻击的时候进行弹射，从而伤害到敌人其他的单位。"
-YDWEtip="这是一个无效果的被动技能，仅仅具有一个图标，可用来做一些触发制作的被动技能的图标"
 
 [Aspo]
 Name=慢性毒药
 Tip=慢性毒药
 Ubertip="慢性毒药攻击能造成每秒<Aspo,DataA1>点的伤害，并在<Aspo,Dur1>秒内减慢敌人<Aspo,DataB1,%>%的移动速度和<Aspo,DataC1,%>%的攻击速度。"
-YDWEtip="3级空法球+独立攻击特效，覆盖低级的法球效果和攻击特效，被高级的攻击特效覆盖。只在武器类型为普通，立即或箭矢时单体有效"
 
 // Slow Poison Non Stack Buff
 [Bspo]
@@ -299,7 +285,6 @@ Name=爆炸
 Tip=爆炸(|cffffcc00D|r)
 Ubertip="会毁灭掉小精灵，但可以消除一定范围内所有的魔法效果并会吸收周围每个单位<Adtn,DataA1>点的魔法值。|n|cffffcc00对召唤出来的单位造成<Adtn,DataB1>点的伤害。|r"
 Hotkey=D
-YDWEtip="对召唤单位伤害是法术攻击，魔法伤害。"
 
 // Wisp Healing
 [Awhe]
@@ -361,7 +346,6 @@ Hotkey=F
 Untip=恢复暗夜精灵族状态(|cffffcc00F|r)
 Unubertip="让德鲁伊变为暗夜精灵形态。"
 Unhotkey=F
-YDWEtip="给任何单位添加风暴之鸦并立即删除，能使该单位可以被触发修改单位高度(动画)"
 
 [Sra2]
 EditorSuffix= (可选的)
@@ -375,7 +359,6 @@ Untip="|cffc3dbff点击右键以启动自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=B
 Unhotkey=B
-YDWEtip="对召唤单位伤害是法术攻击，魔法伤害。"
 
 // Spell Immunity
 [Amim]
@@ -392,7 +375,6 @@ Name=夜视能力
 Name=艾鲁尼之优雅
 Tip=艾鲁尼之优雅
 Ubertip="减少来自穿刺攻击的伤害到原来的<Aegr,DataA1,%>%，并减少来自魔法攻击的伤害到原来的<Aegr,DataE1,%>%。"
-YDWEtip="多个艾鲁尼的优雅的魔法抗性乘法叠加.伤害增加效果是1级类法球效果，被后获得的1级法球效果覆盖，和类法球效果完美叠加。"
 
 // Mount Hippogryph
 [Acoa]
@@ -440,7 +422,6 @@ Hotkey=U
 Name=腐蚀喷吐
 Tip=腐蚀喷吐
 Ubertip="能喷出一团腐蚀性液体，对破坏建筑物特别的有效。"
-YDWEtip="这是一个无效果的技能"
 
 [Bcor]
 Bufftip=腐蚀喷吐
@@ -455,7 +436,6 @@ Hotkey=B
 Researchtip="学习法力燃烧(|cffffcc00B|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="射出一道能量波来消耗掉目标单位一定的魔法值，目标单位的魔法值在燃烧的过程中,也会对其造成同等数量的伤害值。|n|n|cffffcc00等级 1|r - 消耗掉目标<AEmb,DataA1>点魔法。|n|cffffcc00等级 2|r - 消耗掉目标<AEmb,DataA2>点魔法。|n|cffffcc00等级 3|r - 消耗掉目标<AEmb,DataA3>点魔法。"
 Researchhotkey=B
-YDWEtip="造成法术攻击，魔法伤害。伤害值取决于被燃烧的魔法值"
 
 // Immolation
 [AEim]
@@ -469,7 +449,6 @@ Unhotkey=L
 Researchtip="学习献祭(|cffffcc00L|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="让恶魔猎手处于火焰的包围之中，并对周围的敌方地面单位造成一定的伤害。|n该技能会持续地消耗魔法值。|n|n|cffffcc00等级 1|r - 每秒<AEim,DataA1>点的伤害。|n|cffffcc00等级 2|r - 每秒<AEim,DataA2>点的伤害。|n|cffffcc00等级 3|r - 每秒<AEim,DataA3>点的伤害。"
 Researchhotkey=L
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)"
 
 [BEim]
 Bufftip=献祭
@@ -495,7 +474,6 @@ Researchubertip="让恶魔猎手变身为一个威力巨大的恶魔。该恶魔
 Researchhotkey=T
 Globalmessage=
 Globalsound=
-YDWEtip="在开启和结束时，变身都会释放一次"
 
 // Illidan Metamorphosis
 [AEIl]
@@ -509,7 +487,6 @@ Researchhotkey=T
 EditorSuffix= (尤迪安)
 Globalmessage=
 Globalsound=
-YDWEtip="在开启和结束时，变身都会释放一次"
 
 // Illidan Metamorphosis
 [AEvi]
@@ -523,7 +500,6 @@ Researchhotkey=T
 EditorSuffix= (邪恶的尤迪安)
 Globalmessage=
 Globalsound=
-YDWEtip="在开启和结束时，变身都会释放一次"
 
 [BEme]
 Bufftip=变身
@@ -538,7 +514,6 @@ Hotkey=E
 Researchtip="学习纠缠根须(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="从地下伸出缠绕的根须将目标暂时固定，并造成持续伤害。|n|n|cffffcc00等级 1|r - <AEer,DataA1>伤害/秒，持续<AEer,Dur1>秒。|n|cffffcc00等级 2|r - <AEer,DataA2>伤害/秒，持续<AEer,Dur2>秒。|n|cffffcc00等级 3|r - <AEer,DataA3>伤害/秒，持续<AEer,Dur3>秒。"
 Researchhotkey=E
-YDWEtip="造成法术攻击，植物伤害(魔法伤害)。不能对飞行单位使用。"
 
 [BEer]
 Bufftip=纠缠根须
@@ -566,7 +541,6 @@ Ubertip="该光环能给予周围的友军单位一个具有攻击力的护盾�
 Researchtip="学习荆棘光环(|cffffcc00R|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="该光环能给予周围的友军单位一个具有攻击力的护盾保护，敌人对这些单位进行一次近战攻击就会受到一定的伤害。|n|n|cffffcc00等级 1|r - 返回<AEah,DataA1,%>%的伤害。|n|cffffcc00等级 2|r - 返回<AEah,DataA2,%>%的伤害。|n|cffffcc00等级 3|r - 返回<AEah,DataA3,%>%的伤害。"
 Researchhotkey=R
-YDWEtip="魔法效果不同的同种光环可以叠加.造成法术攻击，植物伤害(魔法伤害)。反弹值为计算抗性和护甲前的初始伤害值。"
 
 [BEah]
 Bufftip=荆棘光环
@@ -610,7 +584,6 @@ Unhotkey=R
 Researchtip="学习灼热之箭(|cffffcc00R|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="通过附加的火焰伤害来增加女祭司的攻击力。|n|n|cffffcc00等级 1|r - 增加<AHfa,DataA1>点的伤害。|n|cffffcc00等级 2|r - 增加<AHfa,DataA2>点的伤害。|n|cffffcc00等级 3|r - 增加<AHfa,DataA3>点的伤害。"
 Researchhotkey=R
-YDWEtip="1级纯法球效果，开启时覆盖其他法球效果及其带来的攻击伤害提升"
 
 // Trueshot Aura
 [AEar]
@@ -620,7 +593,6 @@ Ubertip="一种能增加周围友军单位<AEar,DataA1,%>%远程攻击力的光�
 Researchtip="学习强击光环(|cffffcc00T|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="一种能增加周围友军单位远程攻击力的光环。|n|n|cffffcc00等级 1|r - 增加<AEar,DataA1,%>%的远程攻击力。|n|cffffcc00等级 2|r - 增加<AEar,DataA2,%>%的远程攻击力。|n|cffffcc00等级 3|r - 增加<AEar,DataA3,%>%的远程攻击力。"
 Researchhotkey=T
-YDWEtip="魔法效果不同的同种光环可以叠加"
 
 [BEar]
 Bufftip=强击光环
@@ -635,7 +607,6 @@ Hotkey=F
 Researchtip=学习群星坠落(|cffffcc00F|r)
 Researchubertip="召唤出一阵阵的流星雨，每阵流星雨对敌人造成<AEsf,DataA1>点的伤害。|n持续<AEsf,Dur1>秒。"
 Researchhotkey=F
-YDWEtip="造成法术攻击，通用伤害"
 
 // beefy starfall - campaign spell
 [AEsb]
@@ -647,7 +618,6 @@ Researchtip=学习群星坠落(|cffffcc00F|r)
 Researchubertip="召唤出一阵阵的流星雨，每阵流星雨对敌人造成<AEsb,DataA1>点的伤害。|n持续<AEsb,Dur1>秒。"
 Researchhotkey=F
 EditorSuffix= (更加强大的)
-YDWEtip="造成法术攻击，通用伤害"
 
 // Faerie Fire
 [Afae]
@@ -733,7 +703,6 @@ Buffubertip="该单位具有咆哮技能，因此其攻击力得到了加强。"
 
 [Alit]
 Name=闪电攻击
-YDWEtip="能使单位的攻击变成瞬间的闪电效果。5级空法球效果+类攻击特效，被更高级的攻击特效覆盖。"
 
 // used by creep ability
 [Bbar]

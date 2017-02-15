@@ -11,7 +11,6 @@ Ubertip="每次攻击都带有火焰伤害。第一次攻击的伤害值是<ANic
 Researchubertip="每次攻击都带有火焰伤害。第一次攻击将带有一定的附加伤害，第二次攻击的附加伤害会是第一次的两倍，第三次为三倍，以此类推。|n|n如果某个单位是遭到这个攻击而死去的，那么他的燃灰会对周围的单位造成一定程度的伤害。|n|n|cffffcc00等级 1|r - <ANic,DataA1> 附加伤害，<ANic,DataB1> 燃灰伤害。|n|cffffcc00等级 2|r - <ANic,DataA2> 附加伤害， <ANic,DataB2>燃灰伤害。|n|cffffcc00等级 3|r - <ANic,DataA3>附加伤害，<ANic,DataB3>燃灰伤害。"
 Hotkey=C
 Researchhotkey=C
-YDWEtip="1级空法球+独立攻击特效，覆盖低级的法球效果和攻击特效，被后获得的同级攻击特效覆盖。武器类型为普通，立即或箭矢时单体有效，武器类型为箭矢(溅射)时造成范围特效(取决于技能的影响范围)，武器类型为箭矢(穿透)或箭矢(弹射)时，特效导致弹射失效。其他武器类型特效失效。自定义的燃灰技能的附加攻击伤害无效。增加伤害的效果只对原先不为0的伤害有效。叠加伤害只记录叠加层数和每层伤害，每次保留受到的较大的每层伤害。"
 
 // Incinerate (Arrow)
 [ANia]
@@ -25,7 +24,6 @@ Unubertip="|cffc3dbff|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=C
 Researchhotkey=C
 EditorSuffix= (箭矢)
-YDWEtip="开启时是1级空法球+独立攻击特效，覆盖低级的法球效果和攻击特效，被后获得的同级攻击特效覆盖。武器类型为普通，立即或箭矢时单体有效，武器类型为箭矢(溅射)时造成范围特效(取决于技能的影响范围)，武器类型为箭矢(穿透)或箭矢(弹射)时，特效导致弹射失效。其他武器类型特效失效。自定义的燃灰技能的附加攻击伤害无效。增加伤害的效果只对原先不为0的伤害有效。叠加伤害只记录叠加层数和每层伤害，每次保留受到的较大的每层伤害。"
 
 [BNic]
 Bufftip=燃灰
@@ -40,7 +38,6 @@ Ubertip="让一个单位处于烈焰的包围之中，对其造成每秒<ANso,Da
 Researchubertip="让火焰包围敌人，让其在一段时间之内持续受到伤害，并阻止其施放任何魔法和减少其<ANso,DataC1,%>%的攻击力。 |n|n|cffffcc00等级 1|r - 100 点伤害， 持续<ANso,Dur1>秒。|n|cffffcc00等级 2|r - 225 点伤害， 持续 <ANso,Dur2>秒。|n|cffffcc00等级 3|r - 375 点伤害， 持续<ANso,Dur3>秒。|n|n灵魂燃烧在英雄身上持续的时间会减半。"
 Hotkey=B
 Researchhotkey=B
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)。使目标沉默"
 
 [BNso]
 Bufftip=灵魂燃烧
@@ -55,7 +52,6 @@ Ubertip="召唤出一个炎魔。在炎魔攻击的时候，它能吸收目标�
 Researchubertip="召唤出一个炎魔。在炎魔攻击的时候，它能吸收目标的生命，并将其转换成自己的能量，最终裂变成两个炎魔。|n持续<ANlm,Dur1> 秒。|n|n|cffffcc00等级 1|r - <nlv1,realHP> 生命值，<nlv1,mindmg1> - <nlv1,maxdmg1> 攻击力。|n|cffffcc00等级 2|r - <nlv2,realHP> 生命值，<nlv2,mindmg1> - <nlv2,maxdmg1> 攻击力。|n|cffffcc00等级 3|r - <nlv3,realHP> 生命值，<nlv3,mindmg1> - <nlv3,maxdmg1> 攻击力。|n|n|cffffcc00能攻击地面和空中单位。|r
 Hotkey=W
 Researchhotkey=W
-YDWEtip="游戏平衡性常数中可修改该技能每代的染色数据。默认数据中分裂超过三代后无染色，可自行修改。"
 
 [BNlm]
 Bufftip=炎魔
@@ -70,7 +66,6 @@ Ubertip="让大地陷入火山爆发的状态。在<ANvc,DataC1>秒内，一共<
 Researchubertip="让大地陷入火山爆发的状态。在<ANvc,DataC1>秒内，一共<ANvc,DataA1>个灼热的熔岩会喷向周围的单位，对每个目标造成<ANvc,DataE1> 的伤害，并在<ANvc,Dur1> 秒内让其处于昏晕状态。对于建筑物来说，他们受到的伤害将是正常单位的<ANvc,DataD1>倍。|n持续35 秒。"
 Hotkey=V
 Researchhotkey=V
-YDWEtip="造成法术攻击，普通伤害。按住shift打开可破坏物ID项可以修改召唤的可破坏物类型，默认为Volc"
 
 [BNvc]
 Bufftip=火山爆发
@@ -135,7 +130,6 @@ Ubertip="对某个区域用火箭进行攻击，对周围的地面单位造成35
 Researchubertip="对某个区域用火箭进行攻击，使目标在<ANcs,Dur1> 秒内处于昏晕状态，并对其造成一定程度的伤害。|n|n|cffffcc00等级 1|r - 35 攻击力。|n|cffffcc00等级 2|r - 65 攻击力。|n|cffffcc00等级 3|r - 100 攻击力。"
 Hotkey=R
 Researchhotkey=R
-YDWEtip="造成法术攻击，力量伤害(魔法伤害)。修改该技能的buff为其他buff会导致无伤害，只能修改原buff的数据。"
 
 // 火箭群
 [ANc1]
@@ -147,7 +141,6 @@ Researchubertip="对某个区域用火箭进行攻击，使目标在<ANc1,Dur1> 
 Hotkey=R
 Researchhotkey=R
 EditorSuffix= (Upgrade Level 1)
-YDWEtip="造成法术攻击，力量伤害(魔法伤害)。修改该技能的buff为其他buff会导致无伤害，只能修改原buff的数据。"
 
 // Cluster Rockets
 [ANc2]
@@ -159,7 +152,6 @@ Researchubertip="对某个区域用火箭进行攻击，使目标在<ANc2,Dur1> 
 Hotkey=R
 Researchhotkey=R
 EditorSuffix= (Upgrade Level 2)
-YDWEtip="造成法术攻击，力量伤害(魔法伤害)。修改该技能的buff为其他buff会导致无伤害，只能修改原buff的数据。"
 
 // Cluster Rockets
 [ANc3]
@@ -171,7 +163,6 @@ Researchubertip="对某个区域用火箭进行攻击，使目标在<ANc3,Dur1> 
 Hotkey=R
 Researchhotkey=R
 EditorSuffix= (Upgrade Level 3)
-YDWEtip="造成法术攻击，力量伤害(魔法伤害)。修改该技能的buff为其他buff会导致无伤害，只能修改原buff的数据。"
 
 [BNcs]
 Bufftip=火箭群
@@ -186,7 +177,6 @@ Ubertip="改进修补匠的技能，增加其<ANeg,DataB1>点的攻击力和提�
 Researchubertip="提高修补匠的技能。|n|n|cffffcc00火箭群|r - 大区域|n|cffffcc00口袋工厂|r – 能更快地建造出人工地精。|n|cffffcc00机器人地精|r – 增加护甲和力量。 |n|n同时提高攻击力和加快修补匠的移动速度。|n|n|cffffcc00等级 1|r - +<ANeg,DataB1> 攻击力, +<ANeg,DataA1,%>% 移动速度。|n|cffffcc00等级 2|r - +<ANeg,DataB2> 攻击力, +<ANeg,DataA2,%>% 移动速度。|n|cffffcc00等级 3|r - +<ANeg,DataB3> 攻击力, +<ANeg,DataA3,%>% 移动速度。"
 Hotkey=E
 Researchhotkey=E
-YDWEtip="英雄需要拥有能被替换掉的原技能.在地图初始化时禁用原技能并添加工程升级即可给英雄添加一个可学习的技能。将原技能和替换技能在工程升级的数据栏中反过来填，然后添加并删除这个工程升级则能在隐藏图标的基础上替换技能。对单位无效并且会报错。"
 
 [BNeg]
 Bufftip=工程升级
@@ -203,7 +193,6 @@ Researchubertip="让修补匠变成一个机器人地精，具有以下的一些
 Hotkey=B
 Unhotkey=T
 Researchhotkey=B
-YDWEtip="在开启和结束时，变身都会释放一次"
 
 // Robo-Goblin
 [ANg1]
@@ -218,7 +207,6 @@ Hotkey=B
 Unhotkey=T
 Researchhotkey=B
 EditorSuffix= (Upgrade Level 1)
-YDWEtip="在开启和结束时，变身都会释放一次"
 
 // Robo-Goblin
 [ANg2]
@@ -233,7 +221,6 @@ Hotkey=B
 Unhotkey=T
 Researchhotkey=B
 EditorSuffix= (Upgrade Level 2)
-YDWEtip="在开启和结束时，变身都会释放一次"
 
 // Robo-Goblin
 [ANg3]
@@ -248,7 +235,6 @@ Hotkey=B
 Unhotkey=T
 Researchhotkey=B
 EditorSuffix= (Upgrade Level 3)
-YDWEtip="在开启和结束时，变身都会释放一次"
 
 // Demolish
 [ANde]
@@ -256,7 +242,6 @@ Name=粉碎
 Tip="粉碎"
 Ubertip="使得对于建筑物的攻击加<ANde,DataB1>倍的伤害。"
 Hotkey=
-YDWEtip="4级类法球效果，被高级的法球效果覆盖，和类法球效果完美叠加。多个粉碎乘法叠加。"
 
 // Demolish
 [ANd1]
@@ -265,7 +250,6 @@ Tip="粉碎 - 升级 等级 1"
 Ubertip="使得对于建筑物的攻击加<ANd1,DataB1>倍的伤害。"
 Hotkey=
 EditorSuffix= (Upgrade Level 1)
-YDWEtip="4级类法球效果，被高级的法球效果覆盖，和类法球效果完美叠加。多个粉碎乘法叠加。"
 
 // Demolish
 [ANd2]
@@ -274,7 +258,6 @@ Tip="粉碎 - 升级 等级 2"
 Ubertip="使得对于建筑物的攻击加<ANd2,DataB1>倍的伤害。"
 Hotkey=
 EditorSuffix= (Upgrade Level 2)
-YDWEtip="4级类法球效果，被高级的法球效果覆盖，和类法球效果完美叠加。多个粉碎乘法叠加。"
 
 // Demolish
 [ANd3]
@@ -283,7 +266,6 @@ Tip="粉碎 - 升级 等级 3"
 Ubertip="使得对于建筑物的攻击加<ANd3,DataB1>倍的伤害。"
 Hotkey=
 EditorSuffix= (Upgrade Level 3)
-YDWEtip="4级类法球效果，被高级的法球效果覆盖，和类法球效果完美叠加。多个粉碎乘法叠加。"
 
 [ANfy]
 Name=工厂
@@ -326,7 +308,6 @@ Unubertip="|cffc3dbff|cffc3dbff点击右键以取消自动施放功能。|r|r"
 Hotkey=B
 Unhotkey=B
 EditorSuffix=(时钟 地精-等级 1)
-YDWEtip="造成法术攻击，普通伤害"
 
 // Kaboom! (Clockwerk goblin level 2)
 [Asd2]
@@ -338,7 +319,6 @@ Unubertip="|cffc3dbff|cffc3dbff点击右键以取消自动施放功能。|r|r"
 Hotkey=B
 Unhotkey=B
 EditorSuffix= (时钟 地精-等级 2)
-YDWEtip="造成法术攻击，普通伤害"
 
 // Kaboom! (Clockwerk goblin level 3)
 [Asd3]
@@ -350,7 +330,6 @@ Unubertip="|cffc3dbff|cffc3dbff点击右键以取消自动施放功能。|r|r"
 Hotkey=B
 Unhotkey=B
 EditorSuffix= (时钟 地精-等级 3)
-YDWEtip="造成法术攻击，普通伤害"
 
 //-----------------------------------------------------------------------------
 // ALCHEMIST
@@ -365,7 +344,6 @@ Ubertip="喷出 <ANhs,DataF1> 阵医疗迷雾。每阵迷雾能医治<ANhs,DataA
 Researchubertip="喷出迷雾对一定区域的单位进行治疗。|n|n|cffffcc00等级 1|r - <ANhs,DataF1> 阵迷雾，每阵迷雾能医治<ANhs,DataA1>点伤害。|n|cffffcc00等级 2|r - <ANhs,DataF2>阵迷雾，每阵迷雾能医治<ANhs,DataA2>点伤害。 |n|cffffcc00等级 3|r - <ANhs,DataF3>阵迷雾，每阵迷雾能医治<ANhs,DataA3>点伤害。"
 Hotkey=E
 Researchhotkey=E
-YDWEtip="负值治疗能造成法术攻击，通用伤害"
 
 [BNhs]
 Bufftip=医疗气雾
@@ -380,7 +358,6 @@ Ubertip="投掷出一瓶酸性液体，然后对其周围的单位同时也造�
 Researchubertip="向目标扔出一瓶酸液。在冲击之下，酸液瓶会被打碎，对周围的敌人造成一定程度的伤害。|n|n减少护甲，对于首个目标造成持续高伤害。对于周围的目标造成的伤害会稍小一些。|n持续 <ANab,Dur1>秒。|n|n|cffffcc00等级 1|r - 每秒最大<ANab,DataD1>点伤害。减少<ANab,DataC1>点护甲。|n|cffffcc00等级 2|r - 每秒最大<ANab,DataD2>点伤害。减少<ANab,DataC2>点护甲。|n|cffffcc00Level 3|r - 每秒最大<ANab,DataD3>点伤害。减少<ANab,DataC3>点护甲。"
 Hotkey=B
 Researchhotkey=B
-YDWEtip="造成法术攻击，暗影突袭伤害(魔法伤害)"
 
 [BNab]
 Bufftip=酸性炸弹
@@ -395,7 +372,6 @@ Ubertip="炼金术士让其食人魔进入了一种狂暴的状态，从而提�
 Researchubertip="炼金术士让其食人魔进入了一种狂暴的状态，从而提高了<ANcr,DataE1,%>%的移动速度和一定的攻击速度。|n持续<ANcr,HeroDur1> 秒。|n|n|cffffcc00等级 1|r – 提高<ANcr,DataF1,%>%的攻击速度。|n|cffffcc00等级 2|r – 提高<ANcr,DataF2,%>% 的攻击速度。|n|cffffcc00等级 3|r – 提高<ANcr,DataF3,%>% 的攻击速度。"
 Hotkey=R
 Researchhotkey=R
-YDWEtip="在开启和结束时，变身都会释放一次"
 
 [BNcr]
 Bufftip=化学风暴
@@ -410,7 +386,6 @@ Ubertip="立刻杀死某个单位，然后将其变成金币，补充到你的�
 Researchubertip="立刻杀死某个单位，然后将其变成金币，补充到你的国库中。|n点金术不能被用在英雄和高于等级<ANtm,DataC1>的野外生物上。"
 Hotkey=T
 Researchhotkey=T
-YDWEtip="目标允许中勾上无敌则可以完美杀死无敌单位"
 
 [BNtm]
 Bufftip=点金术
@@ -431,22 +406,18 @@ Name=防御浮雕
 [Aasl]
 Name=减速光环
 EditorSuffix= (龙卷风)
-YDWEtip="被该光环影响的单位在获得光环效果时会受到0点伤害。多个减速光环的buff可以叠加"
 
 [Atdg]
 Name=建筑物破坏光环
 EditorSuffix= (龙卷风)
-YDWEtip="造成法术攻击，力量伤害(魔法伤害)"
 
 [Atsp]
 Name=龙卷旋风
 EditorSuffix= (龙卷风)
-YDWEtip="该技能能吹起附近的单位"
 
 [Atwa]
 Name=龙卷风漫步者
 EditorSuffix= (龙卷风)
-YDWEtip="有这个技能的单位能比一般单位更加贴身地跟随目标。一旦离开影响区域就会死亡"
 
 // Orb of Annihilation (Quill Spray)
 [ANak]
@@ -457,7 +428,6 @@ Untip="|cffc3dbff|cffc3dbff点击右键以激活自动施放功能。|r|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=Q
 Unhotkey=Q
-YDWEtip="只对武器类型为箭矢(溅射)的单位有效。1级纯法球效果，开启时覆盖其他法球效果。改变溅射数据的部分是1级类攻击特效。"
 
 // Blink (beastmaster bear)
 [ANbl]
@@ -494,7 +464,6 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=R
 Unhotkey=R
-YDWEtip="法术攻击，毒药伤害(加强伤害)"
 
 // Siphon Mana
 [ACsm]
@@ -503,7 +472,6 @@ EditorSuffix= (中立敌对)
 Tip=魔法吸吮(|cffffcc00N|r) 
 Ubertip="从一个敌人身上吸收魔法能量给血魔法师，每秒吸取<ACsm,DataB1>点魔法值。|n持续<ACsm,Dur1>秒。"
 Hotkey=N
-YDWEtip="吸取生命部分造成法术攻击，魔法伤害。能否向友军转移魔法和生命取决于游戏平衡性常数"
 
 // Devour Magic
 [ACde]
@@ -512,7 +480,6 @@ EditorSuffix= (中立敌对)
 Tip="吞噬魔法(|cffffcc00D|r)"
 Ubertip="吸收一定范围内所有单位身上的魔法效果。每个单位给予破坏者<Advm,DataA1>点的生命值和<Advm,DataB1>点魔法值。|n|cffffcc00对召唤出来的单位造成<Advm,DataE1>点的伤害。|r"
 Hotkey=D
-YDWEtip="对召唤单位造成法术攻击，魔法伤害"
 
 
 // Hardened Skin
@@ -521,7 +488,6 @@ Name=硬化皮肤
 Tip=硬化皮肤
 Ubertip="减少所有对此单位的伤害<Ansk,DataC1>。伤害值不能低于<Ansk,DataB1>。"
 Hotkey=K
-YDWEtip="直接减少攻击伤害的攻击力，在计算护甲之前。只对攻击伤害有效。"
 
 // Mana Shield
 [ANms]
@@ -534,7 +500,6 @@ Unhotkey=N
 Researchtip="学习魔法护盾(|cffffcc00N|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="建立一个护盾，用女海巫的魔法能量来吸收伤害。|n|n|cffffcc00等级 1|r - 每一点魔法能量能吸收1点的伤害。|n|cffffcc00等级 2|r -每一点魔法能量能吸收1.5点的伤害。|n|cffffcc00等级 3|r - 每一点魔法能量能吸收2点的伤害。"
 Researchhotkey=N
-YDWEtip="魔法护盾的开关不会打断单位当前指令。持续时间项可以决定每次开启多久自动关闭。"
 
 [BNms]
 Bufftip=魔法护盾
@@ -549,7 +514,6 @@ Hotkey=F
 Researchtip=学习火焰雨(|cffffcc00F|r) - [|cffffcc00等级 %d|r]
 Researchhotkey=F
 Researchubertip="召唤来一阵阵的火焰雨从天而降从而对一定范围内的敌人造成伤害，每阵火焰雨在对敌人造成初始伤害之后，在随后的<ANrf,Dur1>秒内还会对其造成持续性的伤害。|n|n|cffffcc00等级 1|r -<ANrf,DataB1>点伤害，<ANrf,DataA1>阵火焰雨，每秒<ANrf,DataE1>点伤害。|n|cffffcc00等级 2|r -<ANrf,DataB2>点伤害，<ANrf,DataA2>阵火焰雨，每秒<ANrf,DataE2>点伤害。|n|cffffcc00等级 3|r -<ANrf,DataB3>点伤害，<ANrf,DataA3>阵火焰雨，每秒<ANrf,DataE1>点伤害。"
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)"
 
 [BNrd]
 Bufftip=火焰雨
@@ -562,7 +526,6 @@ EditorSuffix= (中立敌对 1)
 Tip=火焰雨(|cffffcc00F|r)
 Ubertip="召唤出一阵阵的火焰雨来对一定区域内的敌人造成伤害。每阵火焰雨能造成<ACrg,DataB1>点的初始伤害。随后在<ACrg,Dur1>秒内能造成每秒<ACrg,DataE1>点的伤害。|n持续<ACrg,DataA1>阵。"
 Hotkey=F
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)"
 
 // Frost Arrows
 [ANfa]
@@ -576,7 +539,6 @@ Unhotkey=R
 Researchtip="学习霜冻之箭(|cffffcc00R|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="每次攻击带有冰冻效果，造成额外的伤害。使敌人单位减慢攻击和移动速度。 |n|n|cffffcc00等级 1|r - <ANfa,DataB1,%>% 攻击速度, <ANfa,DataC1,%>% 移动速度, <ANfa,DataA1> 点额外伤害。 |n|cffffcc00等级 2|r - <ANfa,DataB2,%>% 攻击速度， <ANfa,DataC2,%>% 移动速度，<ANfa,DataA2>点额外伤害。 |n|cffffcc00等级 3|r - <ANfa,DataB3,%>% 攻击速度， <ANfa,DataC3,%>% 移动速度，<ANfa,DataA3>点额外伤害。"
 Researchhotkey=R
-YDWEtip="1级法球效果(增加攻击伤害)+非独立攻击特效，被后获得的的1级法球效果或攻击特效覆盖，覆盖低级的法球效果和攻击特效。武器类型为箭矢时对单体有效，武器类型为箭矢(溅射)时造成范围特效(取决于技能的影响范围)。其他武器类型特效失效。"
 
 // Cold Arrows
 [AHca]
@@ -590,7 +552,6 @@ Unhotkey=C
 Researchtip="学习冰冻冷箭(|cffffcc00C|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="每次攻击带有冰冻效果，使敌人单位减慢攻击和移动。|n|n|cffffcc00等级 1|r - <AHca,DataB1,%>%攻击速度，<AHca,DataC1,%>%移动速度，持续<AHca,Dur1>秒。|n|cffffcc00等级 2|r - <AHca,DataB2,%>%攻击速度，<AHca,DataC2,%>%移动速度，持续<AHca,Dur2>秒。|n|cffffcc00等级 3|r - <AHca,DataB3,%>%攻击速度，<AHca,DataC3,%>%移动速度，持续<AHca,Dur3>秒。"
 Researchhotkey=C
-YDWEtip="1级法球效果(增加攻击伤害)+非独立攻击特效，被后获得的的1级法球效果或攻击特效覆盖，覆盖低级的法球效果和攻击特效。武器类型为箭矢时对单体有效，武器类型为箭矢(溅射)时造成范围特效(取决于技能的影响范围)。其他武器类型特效失效。"
 
 [BHca]
 Bufftip=冰冻冷箭
@@ -636,7 +597,6 @@ Ubertip="深渊魔王使用如下方式攻击，<ANca,DataA1,%>%的伤害施加�
 Researchtip="学习分裂攻击(|cffffcc00C|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="深渊魔王同时对多个敌人单位造成伤害。|n|n|cffffcc00等级 1|r - <ANca,DataA1,%>%溅射伤害。|n|cffffcc00等级 2|r - <ANca,DataA2,%>%溅射伤害。|n|cffffcc00等级 3|r - <ANca,DataA3,%>%溅射伤害。"
 Researchhotkey=C
-YDWEtip="1级类攻击特效，被后获得的的1级法球效果覆盖，覆盖低级的法球效果。造成原攻击类型强化伤害(加强伤害)。多个分裂攻击加法叠加。只在武器类型为普通或立即时有效。"
 
 // Cleaving Attack
 [ACce]
@@ -644,7 +604,6 @@ Name=分裂攻击
 EditorSuffix= (中立敌对)
 Tip=分裂攻击
 Ubertip="该生物的攻击力量对主目标附近的敌人都造成<ACce,DataA1,%>%的伤害力。"
-YDWEtip="1级类攻击特效，被后获得的的1级法球效果覆盖，覆盖低级的法球效果。造成原攻击类型强化伤害(加强伤害)。多个分裂攻击加法叠加。只在武器类型为普通或立即时有效。"
 
 // Doom
 [ANdo]
@@ -655,7 +614,6 @@ Hotkey=D
 Researchtip="学习魔鬼缠身(|cffffcc00D|r)"
 Researchubertip="对一个目标宣布魔鬼缠身。遭受审判的单位不能施放任何魔法并且每秒受到<ANdo,DataA1>点伤害直到他死去。在他死亡时，一个末日守卫将会从他的尸体上诞生。魔鬼缠身不能被驱散或取消。"
 Researchhotkey=D
-YDWEtip="造成法术攻击，通用伤害。能禁止目标单位的主动技能和很多被动技能的效果。"
 
 
 [BNdo]
@@ -676,7 +634,6 @@ Hotkey=E
 Researchtip="学习火土风暴(|cffffcc00E|r)"
 Researchubertip="熊猫酒仙分身成3元素形体，制造出3个特殊的战士。他们中任何一个在召唤时限内还活着，熊猫酒仙就会再生。"
 Researchhotkey=E
-YDWEtip="施法单位将在原地被隐藏。"
 
 [BNef]
 Bufftip="熊猫人元素"
@@ -689,7 +646,6 @@ EditorSuffix= (中立敌对)
 Tip=疾风步(|cffffcc00W|r)
 Ubertip="允许熊猫人隐形，移动速度快<ANwk,DataB1,%>%。如果熊猫人攻击某单位它就会显形，这次攻击将会增加<ANwk,DataC1> 。"
 Hotkey=W
-YDWEtip="单位武器类型为普通或立即时，破隐一击不占用法球效果，是1级类攻击特效，其他武器类型破隐一击属于1级类法球，被法球效果覆盖，能和其他类法球叠加，因此处于疾风步期间攻击不会暴击。 "
 
 // Taunt
 [ANta]
@@ -706,7 +662,6 @@ EditorSuffix= (中立敌对)
 Tip=驱逐(|cffffcc00B|r)
 Ubertip="将一个非机械单位变为气态并减缓其移动速度<ACbn,DataA1,%>%，<ACbn,Dur1>秒。气态生物无法攻击，但他们可以施放魔法，而某些魔法也可以对他们产生极大的作用。"
 Hotkey=B
-YDWEtip="虚无单位会受到魔法攻击，任意伤害的伤害，以及法术攻击，魔法类或通用类伤害的伤害。"
 
 // Life Drain 
 [ANdr]
@@ -717,7 +672,6 @@ Hotkey=D
 Researchtip="学习生命汲取(|cffffcc00D|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="汲取目标单位一定点数的生命值并将其给予黑暗游侠。|n持续<ANdr,Dur1>秒。|n|n|cffffcc00等级 1|r - 每秒汲取<ANdr,DataA1>点。|n|cffffcc00等级 2|r - 每秒汲取<ANdr,DataA2>点。|n|cffffcc00等级 3|r - 每秒汲取<ANdr,DataA3>点。 " 
 Researchhotkey=D
-YDWEtip="吸取生命部分造成法术攻击，魔法伤害。能否向友军转移魔法和生命取决于游戏平衡性常数"
 
 // Life Drain (Creep)
 [ACdr]
@@ -726,7 +680,6 @@ EditorSuffix= (中立敌对)
 Tip=生命汲取(|cffffcc00R|r) 
 Ubertip="汲取目标单位一定点数的生命值并将其给予黑暗游侠<ACdr,DataA1>生命值/秒。|n持续<ACdr,Dur1>秒。"
 Hotkey=R
-YDWEtip="吸取生命部分造成法术攻击，魔法伤害。能否向友军转移魔法和生命取决于游戏平衡性常数"
 
 // Breath of Fire
 [ANbf]
@@ -737,7 +690,6 @@ Hotkey=F
 Researchtip="学习火焰呼吸(|cffffcc00F|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="对敌人吐出一道火焰，在一开始对其就造成伤害之后，如果对方身上有醉酒云雾的话那还能在一定时间内持续地对其造成伤害。|n持续<ANbf,Dur1>秒。 |n|n|cffffcc00等级 1|r -最初造成<ANbf,DataA1>点的伤害，随后造成每秒<ANbf,DataE1>点的伤害。|n|cffffcc00等级 2|r -最初造成<ANbf,DataA2>点的伤害，随后造成每秒<ANbf,DataE2>点的伤害。|n|cffffcc00等级 3|r -最初造成<ANbf,DataA3>点的伤害，随后造成每秒<ANbf,DataE3>点的伤害。"
 Researchhotkey=F
-YDWEtip="初始伤害是法术攻击，音速伤害(魔法伤害)，持续伤害是法术攻击，火焰伤害(魔法伤害)。只对身上中了以醉酒云雾为模板的技能所施加的魔法效果的单位，才能造成持续伤害的魔法效果"
 
 // Unit Inventory (2 slot)
 [Aiun]
@@ -815,7 +767,6 @@ Hotkey=T
 Researchtip=学习惊吓(|cffffcc00T|r)
 Researchubertip="召唤成群的狂暴雷蜥蜴轰炸驯兽师的敌人。每个轰炸的蜥蜴造成<ANst,DataC1>伤害，持续<ANst,Dur1>秒。"
 Researchhotkey=T
-YDWEtip="造成法术攻击，通用伤害。击中单位后的溅血模型无法更改，除非更改原版技能的数据"
 
 // Hex
 [AChx]
@@ -832,7 +783,6 @@ EditorSuffix= (中立敌对 2)
 Tip=纠缠根须(|cffffcc00E|r)
 Ubertip="从地下伸出缠绕的根须将目标在<Aenw,Dur1>秒内固定住，并对其造成每秒<Aenw,DataA1>点的伤害。"
 Hotkey=E
-YDWEtip="造成法术攻击，植物伤害(魔法伤害)，对飞行单位无效。"
 
 // Healing Wave (Creep)
 [AChv]
@@ -841,7 +791,6 @@ EditorSuffix= (中立敌对)
 Tip=医疗波(|cffffcc00E|r)
 Ubertip="召唤出一道能跳跃<AChv,DataB1>次的医疗能量波。增加第一个目标<AChv,DataA1> 点的生命值，每次跳跃都将削弱这道能量波的医疗能力。"
 Hotkey=E
-YDWEtip="负值治疗能造成法术攻击，闪电伤害(魔法伤害)"
 
 // Silence(Creep)
 [ACsi]
@@ -850,7 +799,6 @@ EditorSuffix= (中立敌对)
 Tip=沉默魔法(|cffffcc00E|r)
 Ubertip="在<ACsi,Dur1>秒内阻止一定区域内所有敌人施放魔法。"
 Hotkey=E
-YDWEtip="如果单位没有被沉默魔法技能禁止其中的某项能力，也不会受到减速效果的影响。比如禁止魔法的沉默作用于无魔法技能的单位时无效果。"
 
 
 // Mana Shield(Creep)
@@ -862,7 +810,6 @@ Ubertip="激活可以每点魔力可以吸收<ACmf,DataA1>伤害力的护盾。"
 Untip=取消魔法护盾(|cffffcc00N|r)
 Hotkey=N
 Unhotkey=N
-YDWEtip="魔法护盾的开关不会打断单位当前指令。持续时间项可以决定每次开启多久自动关闭。"
 
 
 // Shadow Strike
@@ -871,7 +818,6 @@ EditorSuffix= (中立敌对)
 Tip=暗影突袭(|cffffcc00D|r)
 Ubertip="投掷出一把毒性的匕首，能对敌方单位造成巨大的伤害。最初造成<ACss,DataE1>点的伤害，随后每<ACss,Cast1>秒造成<ACss,DataA1>点的伤害。持续<ACss,Dur1>秒。在短时间内匕首上的毒性效果能减慢目标单位的攻击速度和移动速度。"
 Hotkey=D
-YDWEtip="初始伤害是法术攻击，慢性毒药伤害(加强伤害)。持续伤害是法术攻击，暗影突袭伤害(魔法伤害)。多个暗影突袭叠加时，伤害取剩余伤害较高的那个，而伤害间隔则取最短的那个。"
 
 // Frost Bolt
 [ACcb]
@@ -879,7 +825,6 @@ Name=霜冻闪电
 Tip=冰霜之箭(|cffffcc00F|r)
 Ubertip="向敌人投掷出一冰块碎片，对其造成<ACcb,DataA1>点的伤害并使其在<ACcb,Dur1>秒内处于昏晕状态。"
 Hotkey=F
-YDWEtip="造成法术攻击，音速伤害(魔法伤害)"
 
 // Breath of Frost(Creep)
 [ACbf]
@@ -887,7 +832,6 @@ Name=霜冻闪电
 Tip=霜冻闪电(|cffffcc00F|r)
 Ubertip="吐出带有攻击力的冰霜，最初造成<ACbf,DataA1>点的伤害，随后在<ACbf,Dur1>秒内对目标单位造成每秒<ACbf,DataE1>点的伤害。"
 Hotkey=F
-YDWEtip="初始伤害是法术攻击，音速伤害(魔法伤害)，持续伤害是法术攻击，火焰伤害(魔法伤害)。无需醉酒云雾即可产生持续伤害效果。"
 
 [BCbf]
 Bufftip=霜冻闪电
@@ -900,7 +844,6 @@ EditorSuffix= (中立敌对)
 Tip=火焰呼吸(|cffffcc00F|r) 
 Ubertip="对敌人呼出带有攻击力的火焰，造成<ACbc,DataA1>点伤害力。"
 Hotkey=F
-YDWEtip="初始伤害是法术攻击，音速伤害(魔法伤害)，持续伤害是法术攻击，火焰伤害(魔法伤害)。只对身上中了以醉酒云雾为模板的技能所施加的魔法效果的单位，才能造成持续伤害的魔法效果"
 
 // Flame Strike
 [ACfs]
@@ -909,7 +852,6 @@ EditorSuffix= (中立敌对)
 Tip=烈焰风暴(|cffffcc00F|r)
 Ubertip="召唤出一道巨大的火焰，持续时间为2秒，每秒对敌方的地面单位造成45点的伤害。在火焰慢慢熄灭的过程中，敌方单位将持续受到极度轻微的伤害。"
 Hotkey=F
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)。该技能的魔法施放时间比较特殊，在施法时间中打断技能也会消耗魔法和进入冷却。"
 
 // Flame Strike
 [ANfs]
@@ -918,7 +860,6 @@ EditorSuffix= (中立敌对 2)
 Tip=烈焰风暴(|cffffcc00F|r)
 Ubertip="召唤出一道巨大的火焰，持续时间为3秒，每秒对敌方的地面单位造成75点的伤害。在火焰慢慢熄灭的过程中，敌方单位将持续受到极度轻微的伤害。"
 Hotkey=F
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)。该技能的魔法施放时间比较特殊，在施法时间中打断技能也会消耗魔法和进入冷却。"
 
 // Impale
 [ACmp]
@@ -927,7 +868,6 @@ EditorSuffix= (中立敌对)
 Tip=穿刺(|cffffcc00E|r)
 Ubertip="震击地面，发出一道直线力量之波，造成<ACmp,DataA1>点伤害力，并将敌地面单位抛入空中，使其晕眩<ACmp,Dur1>秒。"
 Hotkey=E
-YDWEtip="造成法术攻击，力量伤害(魔法伤害)。对被缠绕住的单位无效。对飞行单位无效。"
 
 // Inventory
 [AInv]
@@ -939,7 +879,6 @@ EditorSuffix= (英雄)
 Name=尖刺外壳
 Tip=尖刺外壳
 Ubertip="海龟身上的尖刺能将敌人<ANth,DataA1,%>%的攻击力化为对敌人的伤害。"
-YDWEtip="该技能的科技需求项无效。反射造成法术攻击，防御伤害(魔法伤害)。反射的是原始攻击数值"
 
 // Spiked Shell, 2,2 button pos, dragon turtle
 [ANt2]
@@ -947,7 +886,6 @@ Name=尖刺外壳
 Tip=尖刺外壳
 Ubertip="海龟身上的尖刺能将敌人<ANth,DataA1,%>%的攻击力化为对敌人的伤害。"
 EditorSuffix="(2,2 按钮)"
-YDWEtip="该技能的科技需求项无效。反射造成法术攻击，防御伤害(魔法伤害)。反射的是原始攻击数值"
 
 // Mind Rot
 [ANmr]
@@ -955,7 +893,6 @@ Name=心灵腐烂
 Tip=心灵腐烂(|cffffcc00R|r)
 Ubertip="在<ANmr,Dur1>秒消耗目标单位<ANmr,DataA1>点的魔法值。"
 Hotkey=R
-YDWEtip="该技能能持续消耗目标的魔法值直到时间结束，魔法耗尽或者被驱散。"
 
 [BNmr]
 Bufftip=心灵腐烂
@@ -976,7 +913,6 @@ Hotkey=F
 Researchtip="学习火焰呼吸(|cffffcc00F|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="对敌人吐出一道火焰，在一开始对其就造成伤害之后，如果对方身上有醉酒云雾的话那还能在一定时间内持续地对其造成伤害。|n持续<ANbf,Dur1>秒。 |n|n|cffffcc00等级 1|r -最初造成<ANbf,DataA1>点的伤害，随后造成每秒<ANbf,DataE1>点的伤害。|n|cffffcc00等级 2|r -最初造成<ANbf,DataA2>点的伤害，随后造成每秒<ANbf,DataE2>点的伤害。|n|cffffcc00等级 3|r -最初造成<ANbf,DataA3>点的伤害，随后造成每秒<ANbf,DataE3>点的伤害。"
 Researchhotkey=F
-YDWEtip="初始伤害是法术攻击，音速伤害(魔法伤害)，持续伤害是法术攻击，火焰伤害(魔法伤害)。只对身上中了以醉酒云雾为模板的技能所施加的魔法效果的单位，才能造成持续伤害的魔法效果"
 
 [BNbf]
 Bufftip=火焰呼吸
@@ -990,7 +926,6 @@ Ubertip="给予<ANdb,DataD1,%>%的概率来躲避敌人的攻击和<ANdb,DataA1>
 Researchtip="学习醉拳(|cffffcc00B|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="给予一定的概率来躲避来自敌人的攻击和<ANdb,DataA1>%的概率来施放额外的攻击伤害。|n|n|cffffcc00等级 1|r - <ANdb,DataD1,%>%的概率躲避攻击，施放<ANdb,DataB1>倍于普通伤害的攻击。|n|cffffcc00等级 2|r - <ANdb,DataD2,%>%的概率躲避攻击，施放<ANdb,DataB2>倍于普通伤害的攻击。|n|cffffcc00等级 3|r - <ANdb,DataD3,%>%的概率躲避攻击，施放<ANdb,DataB3>倍于普通伤害的攻击。"
 Researchhotkey=B
-YDWEtip="不触发时不占用法球和攻击特效。伤害倍击部分是1级类法球。武器类型为普通或立即时，重击部分是1级类攻击特效，眩晕无视魔免但是是法术攻击力量伤害(魔法伤害)。武器类型为箭矢时，重击部分是1级攻击特效。武器类型为箭矢(溅射)时可以范围击晕，非终极技能的重击眩晕不能对魔免生效但是伤害附加算在原攻击中。武器类型为箭矢(弹射)或(直线)时，重击会致弹射失效。武器类型为炮火或炮火(直线)时，武器类型导致重击的攻击特效失效。多个致命一击触发概率互相独立，同时触发时红字不是真正伤害值，而是取后获得的倍率。"
 
 // Drunken Haze
 [ANdh]
@@ -1001,7 +936,6 @@ Hotkey=D
 Researchtip="学习醉酒云雾(|cffffcc00D|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="使敌方单位被酒精溅湿，造成其移动速度减慢，并使其攻击容易落空。当单位被施以醉酒云雾后再被火焰吐息积中，他们会被点燃并随着时间的流逝而受到伤害。|n持续<ANdh,Dur1>秒钟 |n|n|cffffcc00等级1|r - <ANdh,DataC1,%>%移动速度减缓，<ANdh,DataB1,%>%落空机率。|n|cffffcc00等级2|r - <ANdh,DataC2,%>%移动速度减缓，<ANdh,DataB2,%>%落空机率。|n|cffffcc00等级3|r - <ANdh,DataC3,%>%移动速度减缓，<ANdh,DataB3,%>%落空机率。"
 Researchhotkey=D
-YDWEtip="火焰呼吸为模板的技能能点燃该技能所施加的魔法效果，使其受到持续伤害"
 
 [BNdh]
 Bufftip=醉酒云雾
@@ -1016,7 +950,6 @@ Hotkey=E
 Researchtip="学习沉默魔法(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="阻止一定范围内的所有敌人施放魔法。魔法的效果范围和持续时间会随着等级的增加而增加。|n|n|cffffcc00等级 1|r - 小范围，持续<ANsi,Dur1>秒。|n|cffffcc00等级 2|r - 中等范围，持续<ANsi,Dur2>秒。|n|cffffcc00等级 3|r - 大型范围，持续<ANsi,Dur3>秒。"
 Researchhotkey=E
-YDWEtip="如果单位没有被沉默魔法技能禁止其中的某项能力，也不会受到减速效果的影响。比如禁止魔法的沉默作用于无魔法技能的单位时无效果。"
 
 [BNsi]
 Bufftip=沉默魔法
@@ -1033,7 +966,6 @@ Hotkey=B
 Researchtip="学习黑暗之箭(|cffffcc00B|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="增加额外的攻击力。被黑暗之箭射死的单位会变成骷髅兵。|n|n|cffffcc00等级 1|r - 增加<ANba,DataA1>点攻击力，骷髅兵具有<ndr1,RealHP>点生命值。|n|cffffcc00等级 2|r - 增加<ANba,DataA2>点攻击力，骷髅兵具有<ndr2,RealHP>点生命值。|n|cffffcc00等级 3|r - 增加<ANba,DataA3>点攻击力，骷髅兵具有<ndr3,RealHP>点生命值。"
 Researchhotkey=B
-YDWEtip="武器类型为箭矢(非溅射，穿透或弹射)时，1级法球效果(增加攻击伤害)+非独立攻击特效，被后获得的的1级法球效果或攻击特效覆盖，覆盖低级的法球效果和攻击特效。另外该技能有bug，在武器类型为普通或立即时，变为1级类攻击特效，并且成为被动技能！"
 
 [BNba]
 Bufftip=黑暗之箭
@@ -1052,7 +984,6 @@ Ubertip="增加<ACbk,DataA1>点伤害力。被黑暗之箭杀死的单位会变�
 Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=B
-YDWEtip="武器类型为箭矢(非溅射，穿透或弹射)时，1级法球效果(增加攻击伤害)+非独立攻击特效，被后获得的的1级法球效果或攻击特效覆盖，覆盖低级的法球效果和攻击特效。另外该技能有bug，在武器类型为普通或立即时，变为1级类攻击特效，并且成为被动技能！"
 
 // Charm (Creep)
 [ACch]
@@ -1081,7 +1012,6 @@ Hotkey=N
 Researchtip="学习季风(|cffffcc00N|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="在一小块区域内召唤出闪电风暴对敌人造成<ANmo,DataA1>点的伤害。|n持续<ANmo,Dur1>秒。|n|n|cffffcc00等级 1|r - 小型的区域。|n|cffffcc00等级 2|r - 中等大小的区域。|n|cffffcc00等级 3|r - 大型的区域。"
 Researchhotkey=N
-YDWEtip="造成法术攻击，通用伤害"
 
 [BNmo]
 Bufftip=季风
@@ -1096,7 +1026,6 @@ Hotkey=N
 Researchtip="学习季风(|cffffcc00N|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="在一小块区域内召唤出闪电风暴对敌人造成<ANmo,DataA1>点的伤害。|n持续<ANmo,Dur1>秒。|n|n|cffffcc00等级 1|r - 小型的区域。|n|cffffcc00等级 2|r - 中等大小的区域。|n|cffffcc00等级 3|r - 大型的区域。"
 Researchhotkey=N
-YDWEtip="造成法术攻击，通用伤害"
 
 // Watery Minion
 [ANwm]
@@ -1179,7 +1108,6 @@ Name=真实视域
 EditorSuffix= (中立 1)
 Tip=真实视域
 Ubertip="显示周围的隐形单位。"
-YDWEtip="真实视域可以超出视野，但是添加负视野的技能不会使视野小于真实视域"
 
 // general detect invis (War eagle)
 [ANtr]
@@ -1187,7 +1115,6 @@ Name=真实视域
 EditorSuffix= (中立 2)
 Tip=真实视域
 Ubertip="显示周围的隐形单位。"
-YDWEtip="真实视域可以超出视野，但是添加负视野的技能不会使视野小于真实视域"
 
 // blighted gold mine
 [Abgm]
@@ -1200,12 +1127,10 @@ Name=缠绕金矿技能
 // tree of life art attachment
 [Atol]
 Name=生命之树升级技能
-YDWEtip="该技能能够给单位绑定模型,单位死亡模型消失"
 
 // waygate ability
 [Awrp]
 Name=传送门技能
-YDWEtip="传送门技能始终无视敌我都可以使用。"
 
 // Dark Conversion
 [ANdc]
@@ -1258,7 +1183,6 @@ Researchtip=学习地狱火(|cffffcc00N|r)
 Researchubertip="召唤出一个地狱火恶魔从天而降，对一定区域内敌方的地面单位造成<SNin,DataA1>点的伤害并使其在<SNin,Dur1>秒内处于昏晕状态。地狱火恶魔持续<SNin,DataB1>秒。"
 Researchhotkey=N
 EditorSuffix= (提科恩迪斯)
-YDWEtip="造成法术攻击，力量伤害(魔法伤害)，伤害来源是召唤出的单位，没有则无伤害。会导致召唤出的单位的蝗虫技能失效。"
 
 [ANfd]
 Name=死亡之指
@@ -1269,7 +1193,6 @@ Researchtip=学习死亡之指(|cffffcc00F|r)
 Researchubertip="能立刻杀死某个生物或者摧毁某个建筑物。完全地摧毁它。"
 Researchhotkey=F
 EditorSuffix= (阿克蒙德)
-YDWEtip="造成法术攻击，魔法伤害。该技能始终可以对魔法免疫单位使用，但未必有伤害"
 
 [ACfd]
 Name=痛苦之指
@@ -1280,8 +1203,6 @@ Researchtip=学习痛苦之指(|cffffcc00F|r)
 Researchubertip="能残忍地杀害敌人的单位或者猛烈地破坏敌人的建筑物。"
 Researchhotkey=F
 EditorSuffix= (中立敌对)
-YDWEtip="造成法术攻击，魔法伤害"
-YDWEtip="造成法术攻击，魔法伤害。该技能始终可以对魔法免疫单位使用，但未必有伤害"
 
 [ACf3]
 Name=痛苦之指
@@ -1292,7 +1213,6 @@ Researchtip=学习痛苦之指(|cffffcc00F|r)
 Researchubertip="能残忍地杀害敌人的单位或者猛烈地破坏敌人的建筑物。"
 Researchhotkey=F
 EditorSuffix= (中立敌对)
-YDWEtip="造成法术攻击，魔法伤害。该技能始终可以对魔法免疫单位使用，但未必有伤害"
 
 [Afod]
 Name=死亡之指
@@ -1303,7 +1223,6 @@ Researchtip=学习死亡之指(|cffffcc00F|r)
 Researchubertip="能立刻杀死某个生物或者摧毁某个建筑物。"
 Researchhotkey=F
 EditorSuffix= (中立敌对)
-YDWEtip="造成法术攻击，魔法伤害。该技能始终可以对魔法免疫单位使用，但未必有伤害"
 
 [ANdp]
 Name=黑暗之门
@@ -1347,7 +1266,6 @@ WEtip="魔法效果不同的同种光环可以叠加"
 // Cargo Hold Death
 [Achd]
 Name=运输船保持原位
-YDWEtip="保持货物使单位能够容纳别的单位，可以配合装载类技能和卸载类技能的使用"
 
 [Bchd]
 Bufftip=击晕
@@ -1360,7 +1278,6 @@ Tip=装载(|cffffcc00L|r)
 Ubertip="装载一个指定的友方地面单位。"
 Hotkey=L
 EditorSuffix= (地精飞艇)
-YDWEtip="该技能配合保持货物类技能才能使用，也就是有'容量'的单位才能装载或吞噬其他单位。可以搭配卸载类技能。"
 
 // Cargo Unload
 [Adro]
@@ -1370,7 +1287,6 @@ Tip=卸载全部(|cffffcc00U|r)
 Ubertip="在指定区域卸载全部单位。"
 Hotkey=U
 EditorSuffix= (地精飞艇) 
-YDWEtip="该技能配合保持货物类技能才能使用，可以将当前装载的单位卸载出来。点目标技能。"
 
 [Sdro]
 Name=卸载
@@ -1378,7 +1294,6 @@ EditorSuffix= (海上运输船)
 Tip=卸载全部(|cffffcc00U|r)
 Ubertip="在指定区域卸载全部单位。"
 Hotkey=U
-YDWEtip="该技能配合保持货物类技能才能使用，可以将当前装载的单位卸载出来。点目标技能。"
 
 // Cargo Unload (Instant)
 [Adri]
@@ -1387,7 +1302,6 @@ Tip=卸载全部(|cffffcc00U|r)
 Ubertip="卸载全部单位。"
 Hotkey=U
 EditorSuffix= (被缠绕的金矿)
-YDWEtip="该技能配合保持货物类技能才能使用，可以将当前装载的单位立即在原地卸载出来。无目标技能。"
 
 [Asla]
 Name=一直睡眠
@@ -1397,7 +1311,6 @@ Ubertip="催眠单位，直到被唤醒。"
 // devour cargo hold
 [Advc]
 Name=吞噬货物
-YDWEtip="吞噬货物使单位能够容纳别的单位，可以配合装载类技能和卸载类技能的使用。造成法术攻击，酸性伤害(加强伤害)"
 
 // permanent immolation
 [ANpi]
@@ -1405,19 +1318,16 @@ Name=永久的献祭
 EditorSuffix= (中立敌对 1)
 Tip=永久的献祭
 Ubertip="对周围的敌人每秒造成<ANpi,DataA1>点伤害。"
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)"
 
 [Apig]
 Name=永久的献祭
 EditorSuffix= (中立敌对 2)
 Tip=永久的献祭
 Ubertip="烧伤附近的敌人，造成每秒<Apig,DataA1>点伤害。
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)"
 
 // bunker, orc burrow cargo hold
 [Abun]
 Name=货物保持 (兽族地洞)
-YDWEtip="吞噬货物使单位能够容纳别的单位，可以配合装载类技能和卸载类技能的使用。该技能能使单位失去攻击能力直到装载其他单位"
 
 // chaos orc burrow battle stations
 [Sbtl]
@@ -1426,12 +1336,10 @@ Tip=战备状态(|cffffcc00B|r)
 Ubertip="使得附近的苦工跑入地洞从而对来犯的敌人进行反击。"
 Hotkey=B
 EditorSuffix= (混乱的兽族地洞)
-YDWEtip="该技能配合保持货物类技能才能使用，也就是有'容量'的单位才能装载或吞噬其他单位。可以搭配卸载类技能。无目标技能。"
 
 // cargo hold, generic
 [Acar]
 Name=货物保持
-YDWEtip="吞噬货物使单位能够容纳别的单位，可以配合装载类技能和卸载类技能的使用。"
 
 // Neutral Spell
 [AAns]
@@ -1439,7 +1347,6 @@ Name=收费
 Tip=收费( |cffffcc00G|r)
 Ubertip="向某个玩家收取固定数额的金子和木材。"
 Hotkey=G
-YDWEtip="该技能可以做出需要消耗资源才能施展的技能。"
 
 // Reveal
 [Andt]
@@ -1495,7 +1402,6 @@ Researchhotkey=I
 EditorSuffix= (中立敌对)
 Globalmessage=
 Globalsound=
-YDWEtip="造成法术攻击，力量伤害(魔法伤害)，伤害来源是召唤出的单位，没有则无伤害。会导致召唤出的单位的蝗虫技能失效。"
 
 [BNin]
 Bufftip=地狱火
@@ -1517,7 +1423,6 @@ Unubertip="|cffc3dbff|cffc3dbff点击右键以取消自动施放功能。|r|r"
 Hotkey=B
 Unhotkey=B
 EditorSuffix= (地精工兵)
-YDWEtip="造成法术攻击，普通伤害"
 
 // Medivh Crow Form
 [Amrf]
@@ -1557,7 +1462,6 @@ Tip=雷霆一击(|cffffcc00L|r)
 Ubertip="震击地面，对周围的敌方地面单位造成<ACtc,DataA1>点的伤害。并减慢其移动和攻击速度。"
 Hotkey=L
 EditorSuffix= (中立敌对)
-YDWEtip="造成法术攻击，音速伤害(魔法伤害)"
 
 [BCtc]
 Bufftip=雷霆一击
@@ -1570,7 +1474,6 @@ Tip=雷霆一击(|cffffcc00L|r)
 Ubertip="震击地面，对周围的敌方地面单位造成<ACt2,DataA1>点的伤害。并减慢其移动和攻击速度。"
 Hotkey=L
 EditorSuffix= (雷霆蜥蜴)
-YDWEtip="造成法术攻击，音速伤害(魔法伤害)"
 
 // Creep Storm Bolt
 [ACtb]
@@ -1578,7 +1481,6 @@ Name=投石
 Tip=投石(|cffffcc00B|r)
 Ubertip="一块巨石被投向敌人，对其造成<ACtb,DataA1>点的伤害并在<ACtb,Dur1>秒内使其处于昏晕状态。"
 Hotkey=B
-YDWEtip="造成法术攻击，音速伤害(魔法伤害)"
 
 // Creep Berserker Rage
 [ACbr]
@@ -1608,7 +1510,6 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=F
 Unhotkey=F
-YDWEtip="该技能无需指定目标便对自己使用。"
 
 [Bfzy]
 Bufftip=狂热
@@ -1631,7 +1532,6 @@ Name=诱捕
 Tip=诱捕(|cffffcc00E|r)
 Ubertip="将敌方的某个空中单位捕获到地面能动弹。被诱捕的空中单位能像地面单位一样遭到攻击。|n持续<ACen,Dur1>秒。"
 Hotkey=E
-YDWEtip="移动速度为0的单位不能被诱捕"
 
 // Dragon Creep Devour
 [ACdv]
@@ -1640,7 +1540,6 @@ EditorSuffix= (中立敌对)
 Tip=吞噬(|cffffcc00D|r)
 Ubertip="吞噬某个敌方单位，对其造成每秒<Advc,DataB1>点的伤害。如果吞噬者在咀嚼目标单位的过程中被杀，那么被吞噬的单位会从其口中跳出来。"
 Hotkey=D
-YDWEtip="造成伤害是法术攻击，酸性伤害(加强伤害)。事实上伤害是由吞噬货物技能给予的，该技能起到一个'装载'的作用，吞噬的单位也可以被卸载。"
 
 // Creep Sleep
 [ACsp]
@@ -1657,7 +1556,6 @@ Hotkey=R
 Unhotkey=R
 Researchhotkey=R
 EditorSuffix= (玛诺洛斯)
-YDWEtip="会被重生的死亡不会触发单位死亡事件"
 
 // Creep Firebolt (like storm bolt, only fiery)
 [ANfb]
@@ -1674,7 +1572,6 @@ WEtip="造成法术攻击，火焰伤害(魔法伤害)"
 [Asod]
 Name=产卵之骨
 EditorSuffix= (黑暗之箭)
-YDWEtip="武器类型为箭矢(非溅射，穿透或弹射)时，1级法球效果(增加攻击伤害)+非独立攻击特效，被后获得的的1级法球效果或攻击特效覆盖，覆盖低级的法球效果和攻击特效。另外该技能有bug，在武器类型为普通或立即时，变为1级类攻击特效，并且成为被动技能！"
 
 
 // spawn spiderlings (nerubian) on death
@@ -1699,7 +1596,6 @@ Name=诞生刺蛇幼虫
 Name=命令光环
 Tip=命令光环
 Ubertip="增加附近单位的攻击力。"
-YDWEtip="魔法效果不同的同种光环可以叠加"
 
 [Boac]
 Bufftip=命令光环
@@ -1709,7 +1605,6 @@ Buffubertip="该单位处于命令光环的作用之下，因此其攻击力得�
 Name=命令光环
 Tip=命令光环
 Ubertip="增加附近单位的攻击力。"
-YDWEtip="魔法效果不同的同种光环可以叠加"
 
 [Btlf]
 Bufftip=定时的生命
@@ -1721,14 +1616,12 @@ Tip=操纵死尸(|cffffcc00D|r)
 Ubertip="复活<ACad,DataA1>个阵亡单位。持续时间为<ACad,Dur1>秒。"
 Hotkey=D
 EditorSuffix=(中立敌对)
-YDWEtip="被复活的单位将属于施法者控制。修改目标允许后对存活单位也有效。"
 
 [ACrn]
 Name=重生
 Tip=重生
 ubertip="当被杀时，该单位自动会复活。重生有<ACrn,Cool1>秒的施放/攻击间隔时间。"
 EditorSuffix=(中立敌对)
-YDWEtip="会被重生的死亡不会触发单位死亡事件。该技能(ACrn)有bug,在此技能冷却期间，若单位处于变身状态（妖术、恶魔变身等），且变身剩余时间大于重生延迟，则目标在播放完死亡动画后，会被系统删除。"
 
 // creep (demon) mana burn
 [Ambd]
@@ -1737,7 +1630,6 @@ EditorSuffix= (中立敌对 1)
 Tip=法力燃烧(|cffffcc00N|r)
 Ubertip="射出一道能量波从而消耗掉目标单位<Ambb,DataA1>点的魔法值。目标单位的魔法值在燃烧的过程中，也会对其造成同等数量的伤害值。"
 Hotkey=N
-YDWEtip="造成法术攻击，魔法伤害。伤害值取决于被燃烧的魔法值"
 
 [Amnb]
 Name=法力燃烧
@@ -1745,7 +1637,6 @@ EditorSuffix= (中立敌对 2)
 Tip=法力燃烧(|cffffcc00N|r)
 Ubertip="射出一道能量波从而消耗掉目标单位<Ambb,DataA1>点的魔法值。目标单位的魔法值在燃烧的过程中，也会对其造成同等数量的伤害值。"
 Hotkey=N
-YDWEtip="造成法术攻击，魔法伤害。伤害值取决于被燃烧的魔法值"
 
 [Ambb]
 Name=法力燃烧
@@ -1753,13 +1644,11 @@ EditorSuffix= (中立敌对 3)
 Tip=法力燃烧(|cffffcc00B|r)
 Ubertip="射出一道能量波从而消耗掉目标单位<Ambb,DataA1>点的魔法值。目标单位的魔法值在燃烧的过程中，也会对其造成同等数量的伤害值。"
 Hotkey=B
-YDWEtip="造成法术攻击，魔法伤害。伤害值取决于被燃烧的魔法值"
 
 // AOE damage upon death
 [Adda]
 Name=范围性攻击伤害
 EditorSuffix= (工兵)
-YDWEtip="造成法术攻击，普通伤害"
 
 // ghost (shade)
 [Agho]
@@ -1778,7 +1667,6 @@ Name=金矿能力
 [Amin]
 Name=地雷引爆
 EditorSuffix= (地精地雷)
-YDWEtip="该技能使得单位可以隐身，但是该单位即使是飞行单位也会有地面碰撞，且无论如何不能通过不可建造地面"
 
 // permanent invis
 [Apiv]
@@ -1817,7 +1705,6 @@ Buffubertip="该单位处于魔法恢复光环的作用之下，因此其魔法�
 [ACnr]
 Name=生命恢复光环
 EditorSuffix= (中立)
-YDWEtip="该技能能够给单位绑定模型，该模型的队伍颜色随单位队伍颜色而变化，单位死亡则模型消失"
 
 [ANre]
 Name=魔法恢复光环
@@ -1827,25 +1714,21 @@ EditorSuffix= (中立)
 [Sch2]
 Name=保持原位
 EditorSuffix=(绞肉车)
-YDWEtip="吞噬货物使单位能够容纳别的单位，可以配合装载类技能和卸载类技能的使用。"
 
 // transport cargo hold
 [Sch3]
 Name=保持原位
 EditorSuffix= (地精飞艇)
-YDWEtip="吞噬货物使单位能够容纳别的单位，可以配合装载类技能和卸载类技能的使用。"
 
 // Tank cargo hold
 [Sch4]
 Name=保持原位
 EditorSuffix= (罐)
-YDWEtip="吞噬货物使单位能够容纳别的单位，可以配合装载类技能和卸载类技能的使用。"
 
 // Boat cargo hold
 [Sch5]
 Name=保持原位
 EditorSuffix= (船)
-YDWEtip="吞噬货物使单位能够容纳别的单位，可以配合装载类技能和卸载类技能的使用。"
 
 [Argd]
 Name=送回黄金
@@ -1859,7 +1742,6 @@ Name=送回木材
 [Amnz]
 Name=范围性攻击伤害
 EditorSuffix=(大矿)
-YDWEtip="造成法术攻击，普通伤害"
 
 // animate dead
 [Aand]
@@ -1879,7 +1761,6 @@ Name=辉煌光环
 Tip=辉煌光环
 Ubertip="增加周围单位每秒<ACba,DataA1>点的魔法恢复速度。"
 EditorSuffix=(中立敌对)
-YDWEtip="魔法效果不同的同种光环可以叠加"
 
 // bash
 [ACbh]
@@ -1887,7 +1768,6 @@ Name=重击
 EditorSuffix= (中立敌对 1)
 Tip=重击
 Ubertip="给予<ACbh,DataA1>%的概率能造成<ACbh,DataC1>点的额外伤害，并在<ACbh,Dur1>秒内击晕敌人。"
-YDWEtip="不触发时不占用法球和攻击特效。伤害倍击部分是1级类法球。武器类型为普通或立即时，重击部分是1级类攻击特效，眩晕无视魔免但是是法术攻击力量伤害(魔法伤害)。武器类型为箭矢时，重击部分是1级攻击特效。武器类型为箭矢(溅射)时可以范围击晕，非终极技能的重击眩晕不能对魔免生效但是伤害附加算在原攻击中。武器类型为箭矢(弹射)或(直线)时，重击会致弹射失效。武器类型为炮火或炮火(直线)时，武器类型导致重击的攻击特效失效。多个致命一击触发概率互相独立，同时触发时红字不是真正伤害值，而是取后获得的倍率。"
 
 // bash
 [ANbh]
@@ -1895,7 +1775,6 @@ Name=重击
 EditorSuffix= (中立敌对 2)
 Tip=重击
 Ubertip="给予<ANbh,DataA1>%的概率能造成<ANbh,DataC1>点的额外伤害并在<ANbh,Dur1>秒内击晕敌人。"
-YDWEtip="不触发时不占用法球和攻击特效。伤害倍击部分是1级类法球。武器类型为普通或立即时，重击部分是1级类攻击特效，眩晕无视魔免但是是法术攻击力量伤害(魔法伤害)。武器类型为箭矢时，重击部分是1级攻击特效。武器类型为箭矢(溅射)时可以范围击晕，非终极技能的重击眩晕不能对魔免生效但是伤害附加算在原攻击中。武器类型为箭矢(弹射)或(直线)时，重击会致弹射失效。武器类型为炮火或炮火(直线)时，武器类型导致重击的攻击特效失效。多个致命一击触发概率互相独立，同时触发时红字不是真正伤害值，而是取后获得的倍率。"
 
 // bash
 [ANb2]
@@ -1903,7 +1782,6 @@ Name=重击
 EditorSuffix= (中立敌对 3)
 Tip=重击
 Ubertip="使得有<ANb2,DataA1>%的概率让一次进攻能施放出<ANb2,DataC1>点的额外伤害，并能在<ANb2,Dur1>秒内让对手处于昏晕状态。"
-YDWEtip="不触发时不占用法球和攻击特效。伤害倍击部分是1级类法球。武器类型为普通或立即时，重击部分是1级类攻击特效，眩晕无视魔免但是是法术攻击力量伤害(魔法伤害)。武器类型为箭矢时，重击部分是1级攻击特效。武器类型为箭矢(溅射)时可以范围击晕，非终极技能的重击眩晕不能对魔免生效但是伤害附加算在原攻击中。武器类型为箭矢(弹射)或(直线)时，重击会致弹射失效。武器类型为炮火或炮火(直线)时，武器类型导致重击的攻击特效失效。多个致命一击触发概率互相独立，同时触发时红字不是真正伤害值，而是取后获得的倍率。"
 
 
 // devotion aura
@@ -1929,7 +1807,6 @@ Name=强击光环
 Tip=强击光环
 Ubertip="提高周围友军单位<ACat,DataA1,%>%的远程攻击力。"
 EditorSuffix=(中立敌对)
-YDWEtip="魔法效果不同的同种光环可以叠加"
 
 // Blight
 [Abli]
@@ -1938,20 +1815,16 @@ Name=荒芜之地
 // blight dispel
 [Abds]
 Name=小型荒芜之地驱散
-YDWEtip="只在获得技能时进行一次地表改变"
 
 [Abdl]
 Name=大型荒芜之地驱散
-YDWEtip="只在获得技能时进行一次地表改变"
 
 // blight growth
 [Abgs]
 Name=小型荒芜之地蔓延
-YDWEtip="只在获得技能时进行一次地表改变"
 
 [Abgl]
 Name=大型荒芜之地蔓延
-YDWEtip="只在获得技能时进行一次地表改变"
 
 // blizzard
 [ACbz]
@@ -1960,7 +1833,6 @@ Tip=暴风雪(|cffffcc00B|r)
 Ubertip="召唤出<ACbz,DataA1>阵冰片波从天而降，每阵冰片波能造成<ACbz,DataB1>点的伤害。"
 Hotkey=B
 EditorSuffix=(中立敌对)
-YDWEtip="造成法术攻击，冰冻伤害(魔法伤害)"
 
 // cannibalize
 [ACcn]
@@ -1969,7 +1841,6 @@ Tip=吞食尸体(|cffffcc00C|r)
 Ubertip="吞食一个附近的尸体，每秒治疗<ACcn,DataA1>生命值。"
 Hotkey=C
 EditorSuffix=(中立敌对)
-YDWEtip="只会寻找默认范围内的尸体"
 
 // carrion swarm
 [ACca]
@@ -1978,7 +1849,6 @@ Tip=腐臭蜂群(|cffffcc00C|r)
 Ubertip="释放出一群怪异的生物对一条线上的敌人造成<ACca,DataA1>点的伤害。最大伤害值能达到<ACca,DataB1>点。"
 Hotkey=C
 EditorSuffix=(中立敌对)
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 // chain lightning
 [ACcl]
@@ -1987,7 +1857,6 @@ Tip=闪电链(|cffffcc00C|r)
 Ubertip="投掷出一道闪电对第一个敌人造成<ACcl,DataA1>点的伤害，闪电一共跳跃<ACcl,DataB1>次。每次闪电的攻击力会随着跳跃次数增加而递减。"
 Hotkey=C
 EditorSuffix=(中立敌对)
-YDWEtip="造成法术攻击，闪电伤害(魔法伤害)。闪电链仍然在弹射时无法再次使用闪电链技能。"
 
 // cold arrows
 [ACcw]
@@ -1999,7 +1868,6 @@ Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=C
 Unhotkey=C
 EditorSuffix=(中立敌对)
-YDWEtip="法球效果+非独立攻击特效，不能和其他法球效果和攻击特效叠加"
 
 // cripple
 [ACcr]
@@ -2015,7 +1883,6 @@ Name=致命一击
 Tip=致命一击
 Ubertip="给予<ACct,DataA1>%的概率使得该单位能施放出常规攻击<ACct,DataB1>倍的伤害值。"
 EditorSuffix=(中立敌对)
-YDWEtip="不触发时不占用法球和攻击特效。伤害倍击部分是1级类法球。武器类型为普通或立即时，重击部分是1级类攻击特效，眩晕无视魔免但是是法术攻击力量伤害(魔法伤害)。武器类型为箭矢时，重击部分是1级攻击特效。武器类型为箭矢(溅射)时可以范围击晕，非终极技能的重击眩晕不能对魔免生效但是伤害附加算在原攻击中。武器类型为箭矢(弹射)或(直线)时，重击会致弹射失效。武器类型为炮火或炮火(直线)时，武器类型导致重击的攻击特效失效。多个致命一击触发概率互相独立，同时触发时红字不是真正伤害值，而是取后获得的倍率。"
 
 // curse
 [ACcs]
@@ -2047,7 +1914,6 @@ EditorSuffix=(赛纳留斯)
 [Amnx]
 Name=范围性攻击伤害
 EditorSuffix=(地精地雷)
-YDWEtip="造成法术攻击，普通伤害。"
 
 // super death and decay
 [SNdd]
@@ -2059,7 +1925,6 @@ Researchtip="学习死亡凋零(|cffffcc00D|r)"
 Researchubertip="对有效范围内的单位每秒造成相当于<SNdd,DataA1,%>%生命值的伤害，也能摧毁树木。"
 Researchhotkey=D
 EditorSuffix=(中立敌对)
-YDWEtip="造成法术攻击，通用伤害。多个死亡凋零不能叠加。"
 
 // death coil
 [ACdc]
@@ -2068,7 +1933,6 @@ Tip=死亡缠绕(|cffffcc00C|r)
 Ubertip="能治愈某个友军单位<ACdc,DataA1>点生命值，并对某个敌方单位造成一半数值的伤害。"
 Hotkey=C
 EditorSuffix=(中立敌对)
-YDWEtip="对单位类别为不死族的敌方单位和非不死族的友军单位无效。造成法术攻击，死亡伤害(魔法伤害)"
 
 // detection
 [Adt1]
@@ -2087,7 +1951,6 @@ Tip=驱逐魔法(|cffffcc00D|r)
 UberTip="驱逐一定范围内所有魔法效果。|n|cffffcc00对召唤出来的单位造成<Adsm,DataB1>点的伤害。|r"
 Hotkey=D
 EditorSuffix=(中立敌对)
-YDWEtip="对召唤单位造成法术攻击，魔法伤害"
 
 // auto-dispel magic
 [ACdm]
@@ -2099,7 +1962,6 @@ Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=B
 Unhotkey=B
 EditorSuffix=(中立敌对)
-YDWEtip="对召唤单位造成法术攻击，魔法伤害"
 
 // auto-dispel magic (button pos 1,2)
 [ACd2]
@@ -2111,7 +1973,6 @@ Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=B
 Unhotkey=B
 EditorSuffix="(中立敌对,位置2)"
-YDWEtip="对召唤单位造成法术攻击，魔法伤害"
 
 // divine shield
 [ACds]
@@ -2122,7 +1983,6 @@ Untip=取消神圣护甲(|cffffcc00D|r)
 Hotkey=D
 Unhotkey=D
 EditorSuffix=(中立敌对)
-YDWEtip="不会打断单位的当前任何动作包括持续施法，可在眩晕，昏迷中捕捉到技能命令的发布"
 
 // super earthquake
 [SNeq]
@@ -2134,7 +1994,6 @@ Researchtip="学习地震(|cffffcc00E|r)"
 Researchubertip="使大地摇动，对建筑物造成每秒<SNeq,DataB1>点的伤害并能让处于有效范围内的单位减速<SNeq,DataC1,%>%。持续<SNeq,Dur1>秒。"
 Researchhotkey=E
 EditorSuffix=(中立敌对)
-YDWEtip="造成法术攻击，通用伤害。伤害只对建筑物有效。"
 
 // endurance aura
 [SCae]
@@ -2142,7 +2001,6 @@ Name=耐久光环
 Tip=耐久光环
 Ubertip="增加周围单位<SCae,DataA1,%>%的移动速度和<SCae,DataB1,%>%的攻击速度。","增加周围单位<SCae,DataA2,%>%的移动速度和<SCae,DataB2,%>%的攻击速度。","增加周围单位<SCae,DataA3,%>%的移动速度和<SCae,DataB3,%>%的攻击速度。"
 EditorSuffix=(中立敌对)
-YDWEtip="魔法效果不同的同种光环可以叠加"
 
 // ensnare
 [ACen]
@@ -2151,7 +2009,6 @@ Tip=诱捕(|cffffcc00E|r)
 Ubertip="将敌方的某个空中单位捕获到地面能动弹。被诱捕的空中单位能像地面单位一样遭到攻击。|n持续<ACen,Dur1>秒。"
 Hotkey=E
 EditorSuffix=(中立敌对)
-YDWEtip="不能对不可移动单位使用"
 
 // entangling roots
 [Aenr]
@@ -2160,7 +2017,6 @@ EditorSuffix= (中立敌对 1)
 Tip=纠缠根须(|cffffcc00E|r)
 Ubertip="从地面冒出根须使目标在<Aenr,Dur1>秒内不能动弹，并对其造成每秒<Aenr,DataA1>点的伤害。"
 Hotkey=E
-YDWEtip="造成法术攻击，植物伤害(魔法伤害)。不能对飞行单位使用。"
 
 // evasion
 [ACev]
@@ -2209,7 +2065,6 @@ Tip=霹雳闪电(|cffffcc00B|r)
 Ubertip="对敌人投掷出一道霹雳闪电将其击晕。"
 Hotkey=B
 EditorSuffix=(中立敌对)
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)"
 
 // force of nature
 [ACfr]
@@ -2226,7 +2081,6 @@ Tip=霜冻护甲(|cffffcc00F|r)
 Ubertip="霜冻护甲能增加目标单位<ACfa,DataB1>点的护甲防御，攻击该单位的近战型敌人也会在<ACfa,Dur1>秒内减速。|n持续<ACfa,DataA1>秒。"
 Hotkey=F
 EditorSuffix= (中立敌对)
-YDWEtip="只能使非远程攻击者减速，减速数值可以在游戏平衡性常数中修改"
 
 // frost armor (new, creep, autocast)
 [ACf2]
@@ -2237,7 +2091,6 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=F
 EditorSuffix= (自动施放) (中立敌对)
-YDWEtip="只能使非远程攻击者减速，减速数值可以在游戏平衡性常数中修改"
 
 // frost armor (autocast)
 [ACfu]
@@ -2248,7 +2101,6 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=F
 EditorSuffix= (自动施放) (中立敌对)
-YDWEtip="只能使非远程攻击者减速，减速数值可以在游戏平衡性常数中修改"
 
 // frost nova
 [ACfn]
@@ -2257,7 +2109,6 @@ Tip=霜冻新星(|cffffcc00N|r)
 Ubertip="用一阵霜冻来攻击目标单位，造成<ACfn,DataB1>点的常规伤害和<ACfn,DataA1>点的霜冻新星伤害。并在<ACfn,Dur1>秒内减慢被攻击单位的速度。"
 Hotkey=N
 EditorSuffix=(中立敌对)
-YDWEtip="造成法术攻击，冰冻伤害(魔法伤害)，减速数值可以在游戏平衡性常数中修改"
 
 // archimonde's ghouls harvest lumber
 [Ahr2]
@@ -2316,7 +2167,6 @@ Hotkey=L
 Untip=取消献祭(|cffffcc00L|r)
 Unhotkey=L
 EditorSuffix=(中立敌对)
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)"
 
 [ACma]
 EditorSuffix=(总是有效)
@@ -2339,7 +2189,6 @@ Tip=闪电护盾(|cffffcc00L|r)
 Ubertip="在目标单位周围形成一个带电护罩，能对其周围的单位造成每秒<ACls,DataA1>点的伤害。|n持续<ACls,Dur1>秒。"
 Hotkey=L
 EditorSuffix=(中立敌对)
-YDWEtip="不能对飞行单位使用，伤害始终无视敌我，造成法术攻击，闪电伤害(魔法伤害)"
 
 // load, orc burrow
 [Sloa]
@@ -2398,7 +2247,6 @@ Name=粉碎
 Tip=粉碎
 Ubertip="给予<ACpv,DataA1>%的概率能对周围的单位造成<ACpv,DataB1>点的伤害。"
 EditorSuffix=(中立敌对)
-YDWEtip="多个粉碎攻击独立完美叠加。范围以自身为圆心。造成伤害是法术攻击，强化伤害(加强伤害)"
 
 // purge
 [ACpu]
@@ -2407,7 +2255,6 @@ Tip=净化(|cffffcc00G|r)
 Ubertip="去除目标单位上的所有魔法效果，并以<ACpu,DataA1>分之1的速度来减慢其移动速度。目标单位会在<ACpu,Dur1>秒内慢慢恢复自己的速度。|n|cffffcc00对召唤出来的单位造成<ACpu,DataC1>点的伤害。|r"
 Hotkey=G
 EditorSuffix=(中立敌对)
-YDWEtip="对召唤单位造成法术攻击，音速伤害(魔法伤害)"
 
 // rain of fire
 [ACrf]
@@ -2416,7 +2263,6 @@ EditorSuffix= (中立敌对 2)
 Tip=火焰雨(|cffffcc00F|r)
 Ubertip="召唤出一阵阵的火焰雨，每阵能造成<ACrf,DataB1>点的伤害。|n持续<ACrf,DataA1>阵。"
 Hotkey=F
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)"
 
 // raise dead
 [ACrd]
@@ -2495,8 +2341,6 @@ Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=R
 Unhotkey=R
 EditorSuffix=(中立敌对)
-YDWEtip="纯法球效果，不能和其他法球效果叠加"
-YDWEtip="1级纯法球效果，开启时覆盖其他法球效果及其带来的攻击伤害提升"
 
 // sell items
 [Asid]
@@ -2517,7 +2361,6 @@ Tip=震荡波(|cffffcc00W|r)
 Ubertip="一道强劲的震荡波能对一直线上的敌人造成<ACsh,DataA1>点的伤害。"
 Hotkey=W
 EditorSuffix=(中立敌对)
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 [ACst]
 Name=震荡波
@@ -2525,7 +2368,6 @@ Tip=震荡波(|cffffcc00W|r)
 Ubertip="一道强劲的震荡波能对一直线上的敌人造成<ACst,DataA1>点的伤害。"
 Hotkey=W
 EditorSuffix=(陷阱)
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 // sleep
 [ACsl]
@@ -2545,7 +2387,6 @@ Name=荆棘光环
 Tip=荆棘光环
 Ubertip="给周围单位提供荆棘光环的保护，如果近战型的敌人来攻击它们就会受到每次相当于自身<ACah,DataA1,%>%攻击力的伤害。"
 EditorSuffix=(中立敌对)
-YDWEtip="魔法效果不同的同种光环可以叠加.造成法术攻击，植物伤害(魔法伤害)。反弹值为计算抗性和护甲前的初始伤害值。"
 
 // unholy aura
 [ACua]
@@ -2553,7 +2394,6 @@ Name=邪恶光环
 Tip=邪恶光环
 Ubertip="提高周围单位<ACua,DataA1,%>%的移动速度和<ACua,DataB1,%>%的生命值恢复速度。"
 EditorSuffix=(中立敌对)
-YDWEtip="魔法效果不同的同种光环可以叠加"
 
 // unholy frenzy
 [ACuf]
@@ -2562,13 +2402,11 @@ Tip=邪恶狂热(|cffffcc00U|r)
 Ubertip="增加目标单位<Auhf,DataA1,%>%的攻击速度，但是每秒也会消耗目标<ACuf,DataB1>点的生命值。|n持续<ACuf,Dur1>秒。"
 Hotkey=U
 EditorSuffix=(中立敌对)
-YDWEtip="造成法术攻击，死亡伤害(魔法伤害)"
 
 // vampiric attack
 [SCva]
 Name=窃取生命
 EditorSuffix= (霜之哀伤)
-YDWEtip="2级纯法球，覆盖低级的法球效果，被高级的法球效果覆盖。攻击幻象时不占用法球效果。另外，该技能是少有的几个能和炮火以及炮火(直线)的武器类型兼容的技能，但是只有单体效果。"
 
 // vampiric aura
 [ACvp]
@@ -2576,7 +2414,6 @@ Name=吸血光环
 Tip=吸血光环
 Ubertip="周围的单位能将他们自己对敌人<ACvp,DataA1,%>%的伤害值转化成自己的生命值。"
 EditorSuffix=(中立敌对)
-YDWEtip="魔法效果不同的同种光环可以叠加。只对武器类型为普通或立即的单位有效。"
 
 // war stomp
 [Awrs]
@@ -2586,7 +2423,6 @@ Tip=战争践踏(|cffffcc00T|r)
 Ubertip="重击地面，对周围的地面单位造成<Awrs,DataA1>点的伤害并使其在<Awrs,Dur1>秒内保持眩晕状态。"
 Hotkey=T
 EditorSuffix=(中立敌对) 
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 // war stomp (Ancient Hydra)
 [Awrh]
@@ -2596,7 +2432,6 @@ Tip=战争践踏(|cffffcc00T|r)
 Ubertip="重击地面，对周围的地面单位造成<Awrh,DataA1点的伤害并使其在<Awrh,Dur1>秒内保持眩晕状态。"
 Hotkey=T
 EditorSuffix=(中立敌对) 
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 // war stomp (Sea Giant)
 [Awrg]
@@ -2606,14 +2441,12 @@ Tip=战争践踏(|cffffcc00T|r)
 Ubertip="重击地面，对周围的地面单位造成<Awrg,DataA1>点的伤害并使其在<Awrg,Dur1>秒内保持眩晕状态。"
 Hotkey=T
 EditorSuffix=(中立敌对)
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 // Pulverize (sea giant)
 [ACpv]
 Name=粉碎
 Tip=粉碎
 Ubertip="给予<ACpv,DataA1>%的概率能对周围的单位造成<ACpv,DataB1>点的伤害。"
-YDWEtip="多个粉碎攻击独立完美叠加。范围以自身为圆心。造成伤害是法术攻击，强化伤害(加强伤害)"
 
 // venom spears
 [ACvs]
@@ -2621,7 +2454,6 @@ Name=浸毒武器
 Tip=浸毒武器
 Ubertip="每秒能造成<ACvs,DataA1>点的毒性伤害。|n持续<ACvs,Dur1>秒。"
 EditorSuffix=(中立敌对)
-YDWEtip="4级空法球+独立攻击特效，覆盖低级的法球效果和攻击特效，被高级的攻击特效覆盖。只在武器类型为普通，立即或箭矢时单体有效"
 
 // web
 [ACwb]
@@ -2633,7 +2465,6 @@ Unubertip="|cffc3dbff点击右键以取消自动施放功能。"
 Hotkey=W
 Unhotkey=W
 EditorSuffix=(中立敌对)
-YDWEtip="不能对无法移动的单位使用"
 
 // Crushing Wave
 [ACcv]
@@ -2641,7 +2472,6 @@ Name=冲击波
 Tip=冲击波(|cffffcc00C|r) 
 Ubertip="发射出一道巨大的能量波，对一线上的敌人造成<ACcv,DataA1>点的伤害，总共能造成<ACcv,DataB1>点的伤害。"
 Hotkey=C
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 // Crushing Wave (dragon turtle)
 [ACc2]
@@ -2650,7 +2480,6 @@ Tip=冲击波(|cffffcc00C|r)
 Ubertip="发射出一道巨大的能量波，对一直线上的每个敌方地面单位造成<ACc2,DataA1>点的伤害。总共会造成<ACc2,DataB1>点的伤害。"
 Hotkey=C
 EditorSuffix=(较小的)
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 // Crushing Wave (lesser version)
 [ACc3]
@@ -2659,7 +2488,6 @@ Tip=冲击波(|cffffcc00C|r)
 Ubertip="发射出一道巨大的能量波，对一直线上的每个敌方地面单位造成<ACc3,DataA1>点的伤害。总共会造成<ACc3,DataB1>点的伤害。"
 Hotkey=C
 EditorSuffix=(较小的)
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 // summon sea elemental
 [ACwe]
@@ -2680,7 +2508,6 @@ Name=凤凰火焰
 Tip=凤凰火焰
 EditorSuffix=(飞行单位)
 Ubertip="对周围敌方的飞行单位造成每秒<Apmf,DataA1>点的伤害。"
-YDWEtip="造成法术攻击，火焰伤害(魔法伤害)"
 
 // neutral version of resistant skin
 [ACrk]
@@ -2688,7 +2515,6 @@ Name=抗性皮肤
 EditorSuffix= (中立敌对 1)
 Tip=抗性皮肤
 Ubertip="减少负面魔法的持续时间，使单位对某些魔法免疫。"
-YDWEtip="使受到技能的持续时间按照英雄持续时间计算"
 
 // neutral version of resistant skin (altered button pos)
 [ACsk]
@@ -2696,7 +2522,6 @@ Name=抗性皮肤
 EditorSuffix= (中立敌对 2)
 Tip=抗性皮肤
 Ubertip="减少负面魔法的持续时间，使单位对某些魔法免疫。"
-YDWEtip="使受到技能的持续时间按照英雄持续时间计算"
 
 // Forked Lightning
 [ANfl]
@@ -2707,7 +2532,6 @@ Hotkey=F
 Researchtip="学习叉状闪电(|cffffcc00F|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="召唤一道锥形闪电伤害女海巫面前的多个敌人。|n|n|cffffcc00等级 1|r - <ANfl,DataA1>伤害/单位。|n|cffffcc00等级 2|r - <ANfl,DataA2>伤害/单位。|n|cffffcc00等级 3|r - <ANfl,DataA3>伤害力/单位。"
 Researchhotkey=F
-YDWEtip="造成法术攻击，闪电伤害(魔法伤害)"
 
 // Forked Lightning
 [ACfl]
@@ -2716,7 +2540,6 @@ EditorSuffix= (中立敌对)
 Tip=叉状闪电(|cffffcc00R|r)
 Ubertip="召唤一道锥形闪电伤害女海巫面前的多个敌人，至多<ACfl,DataB1>个敌单位，<ACfl,DataA1>点伤害。"
 Hotkey=R
-YDWEtip="造成法术攻击，闪电伤害(魔法伤害)"
 
 //----------------------------------------------------
 // Buffs with no in-game text

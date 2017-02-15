@@ -48,7 +48,6 @@ Hotkey=W
 Researchtip="学习震荡波(|cffffcc00W|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="从英雄身上发射出一道威力巨大的能量波，从而对一直线上的敌人地面单位造成一定的伤害。|n|n|cffffcc00等级 1|r - <AOsh,DataA1>点伤害。|n|cffffcc00等级 2|r - <AOsh,DataA2>点伤害。|n|cffffcc00等级 3|r - <AOsh,DataA3>点伤害。"
 Researchhotkey=W
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 // Feral Spirit
 [ACs8]
@@ -70,14 +69,12 @@ Researchubertip="当被杀时，该英雄自动会复活。重生有<ANr2,Cool1>
 Researchhotkey=R
 Globalmessage=
 Globalsound=
-YDWEtip="会被重生的死亡不会触发单位死亡事件"
 
 // Feedback
 [Afbb]
 Name=反馈
 Tip=反馈
 Ubertip="灵兽每次攻击抵消<Afbb,DataA1>点魔力。这些魔力值燃烧，对被攻击单位造成伤害。"
-YDWEtip="武器类型为普通或立即时,反馈的消魔效果是4级纯法球，被更高级的法球效果覆盖。武器类型为箭矢时，反馈是4级空法球+非独立特效，被更高级的法球效果或攻击特效覆盖。其他武器类型反馈失效。"
 
 
 // Auto-Dispel Magic
@@ -89,7 +86,6 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=B
 Unhotkey=B
-YDWEtip="造成法术攻击，魔法伤害"
 
 // Submerge
 [Asb1]
@@ -142,7 +138,6 @@ Name=诱捕
 Tip=诱捕(|cffffcc00E|r)
 Ubertip="能将一个目标空中单位固定在地面上，使其在<Aens,Dur1>秒内不能移动。被诱捕的空中单位可以当作地面单位进行攻击。"
 Hotkey=E
-YDWEtip="不能对不可移动单位使用"
 
 // Frost Armor (Autocast, Naga)
 [ACfu]
@@ -153,7 +148,6 @@ Ubertip="霜冻护甲能增加目标单位<ACfu,DataB1>点的护甲防御，攻�
 Untip="|cffc3dbff点击右键以取消自动施放功能。"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。"
 Hotkey=F
-YDWEtip="只能使非远程攻击者减速，减速数值可以在游戏平衡性常数中修改"
 
 // Parasite
 [ANpa]
@@ -164,7 +158,6 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=R
 Unhotkey=R
-YDWEtip="法术攻击，毒药伤害(加强伤害)"
 
 [BNpa]
 Bufftip="寄生虫"
@@ -198,7 +191,6 @@ Name=通魔
 Tip=通魔(|cffffcc00C|r)
 Ubertip="通向强大的守卫魔法力量。"
 Hotkey=C
-YDWEtip="可作为大多数主动技能的模板，可以被魔法护盾护身符抵挡"
 
 //orc campaign abilities
 
@@ -234,7 +226,6 @@ Researchtip=学习惊吓(|cffffcc00E|r) - [|cffffcc00等级 %d|r]
 Researchubertip="召唤出雷霆蜥蜴来爆炸在敌方单位的头上。|n|n|cffffcc00等级 1|r -每个爆炸的雷霆蜥蜴能造成<Arsp,DataC1>点伤害。|n|cffffcc00等级 2|r -每个爆炸的雷霆蜥蜴能造成<Arsp,DataC2>点伤害。|n|n持续<Arsp,Dur2>秒。"
 Researchhotkey=E
 EditorSuffix=(雷克萨)
-YDWEtip="造成法术攻击，通用伤害"
 
 // Battle Roar
 [ANbr]
@@ -259,7 +250,6 @@ Hotkey=T
 Researchtip=学习风暴之锤(|cffffcc00T|r) - [|cffffcc00等级 %d|r]
 Researchubertip="向目标投掷一巨大的魔法斧，对其造成一定伤害并使其处于眩晕状态。|n|n|cffffcc00等级 1|r - <ANsb,DataA1>点伤害, <ANsb,Dur1>秒眩晕状态。|n|cffffcc00等级 2|r - <ANsb,DataA2>点伤害, <ANsb,Dur2>秒眩晕状态。|n|cffffcc00等级 3|r - <ANsb,DataA3>点伤害, <ANsb,Dur3>秒眩晕状态。|n|cffffcc00等级 4|r - <ANsb,DataA4>点伤害, <ANsb,Dur4>秒眩晕状态。"
 Researchhotkey=T
-YDWEtip="造成法术攻击，音速伤害(魔法伤害)"
 
 // Breath of Fire (Chen)
 [ANcf]
@@ -271,7 +261,6 @@ Researchtip="学习火焰呼吸(|cffffcc00F|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="对敌人吐出一道火焰，在一开始对其就造成伤害之后，如果对方身上有醉酒云雾的话那还能在一定时间内持续地对其造成伤害。|n持续<ANcf,Dur1>秒。|n|n|cffffcc00等级 1|r - 最初造成<ANcf,DataA1>点的伤害随后造成每秒<ANcf,DataE1>点的伤害。|n|cffffcc00等级 2|r - 最初造成<ANcf,DataA2>点的伤害随后造成每秒<ANcf,DataE2>点的伤害。|n|cffffcc00等级 3|r - 最初造成<ANcf,DataA3>点的伤害随后造成每秒<ANcf,DataE3>点的伤害。|n|cffffcc00等级 4|r - 最初造成<ANcf,DataA4>点的伤害随后造成每秒<ANcf,DataE4>点的伤害。"
 Researchhotkey=F
 EditorSuffix=(陈)
-YDWEtip="初始伤害是法术攻击，音速伤害(魔法伤害)，持续伤害是法术攻击，火焰伤害(魔法伤害)。只对身上中了以醉酒云雾为模板的技能所施加的魔法效果的单位，才能造成持续伤害的魔法效果"
 
 // Drunken Brawler (Chen)
 [Acdb]
@@ -280,10 +269,8 @@ Tip=醉拳 - [|cffffcc00等级 1|r],醉拳 - [|cffffcc00等级 2|r],醉拳 - [|c
 Ubertip="给予<Acdb,DataD1,%>%的概率来躲避攻击和<Acdb,DataA1>%的概率来施放出<Acdb,DataB1>倍于常规攻击的伤害。","给予<Acdb,DataD2,%>%的概率来躲避攻击和<Acdb,DataA2>%的概率来施放出<Acdb,DataB2>倍于常规攻击的伤害。","给予<Acdb,DataD3,%>%的概率来躲避攻击和<Acdb,DataA3>%的概率来施放出<Acdb,DataB3>倍于常规攻击的伤害。","给予<Acdb,DataD4,%>%的概率来躲避攻击和<Acdb,DataA4>%的概率来施放出<Acdb,DataB4>倍于常规攻击的伤害。"
 Researchtip="学习醉拳(|cffffcc00B|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="给予一定的概率来躲避攻击和<Acdb,DataA1>%的概率来对敌人造成额外的伤害。|n|n|cffffcc00等级 1|r -<Acdb,DataD1,%>%的概率来躲避攻击，<Acdb,DataB1>倍于常规攻击的额外伤害。|n|cffffcc00等级 2|r -<Acdb,DataD2,%>%的概率来躲避攻击，<Acdb,DataB2>倍于常规攻击的额外伤害。|n|cffffcc00等级 3|r -<Acdb,DataD3,%>%的概率来躲避攻击，<Acdb,DataB3>倍于常规攻击的额外伤害。|n|cffffcc00等级 4|r -<Acdb,DataD4,%>%的概率来躲避攻击，<Acdb,DataB4>倍于常规攻击的额外伤害。"
-YDWEtip=""
 Researchhotkey=B
 EditorSuffix=(陈)
-YDWEtip="不触发时不占用法球和攻击特效。伤害倍击部分是1级类法球。武器类型为普通或立即时，重击部分是1级类攻击特效，眩晕无视魔免但是是法术攻击力量伤害(魔法伤害)。武器类型为箭矢时，重击部分是1级攻击特效。武器类型为箭矢(溅射)时可以范围击晕，非终极技能的重击眩晕不能对魔免生效但是伤害附加算在原攻击中。武器类型为箭矢(弹射)或(直线)时，重击会致弹射失效。武器类型为炮火或炮火(直线)时，武器类型导致重击的攻击特效失效。多个致命一击触发概率互相独立，同时触发时红字不是真正伤害值，而是取后获得的倍率。"
 
 // Drunken Haze (Chen)
 [Acdh]
@@ -295,7 +282,6 @@ Researchtip="学习醉酒云雾(|cffffcc00D|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="用酒精浸透目标单位，减慢其移送速度，并使其有一定的概率不能击中其他单位。带有醉酒云雾的单位遭到火焰呼吸攻击的话，那么就会自动引燃身上的酒精从而持续受到火焰的伤害。|n持续<Acdh,Dur1>秒。|n|n|cffffcc00等级 1|r - 减慢<Acdh,DataC1,%>%的移动速度，<Acdh,DataB1,%>%的概率不能击中其他单位。|n|cffffcc00等级 2|r - 减慢<Acdh,DataC2,%>%的移动速度，<Acdh,DataB2,%>%的概率不能击中其他单位。|n|cffffcc00等级 3|r - 减慢<Acdh,DataC3,%>%的移动速度，<Acdh,DataB3,%>%的概率不能击中其他单位。|n|cffffcc00等级 4|r - 减慢<Acdh,DataC4,%>%的移动速度，<Acdh,DataB4,%>%的概率不能击中其他单位。"
 Researchhotkey=D
 EditorSuffix=(陈)
-YDWEtip="火焰呼吸为模板的技能能点燃该技能所施加的魔法效果，使其受到持续伤害"
 
 // Storm, Earth, and Fire
 [Acef]
@@ -318,7 +304,6 @@ Researchtip="学习医疗波(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="召唤出一道能进行跳跃的医疗能量波，每次跳跃都会削弱医疗波的医疗能力。|n|n|cffffcc00等级 1|r - 恢复<ANhw,DataA1>点生命值，跳跃<ANhw,DataB1>次。|n|cffffcc00等级 2|r - 恢复<ANhw,DataA2>点生命值，跳跃<ANhw,DataB2>次。|n|cffffcc00等级 3|r - 恢复<ANhw,DataA3>点生命值，跳跃<ANhw,DataB3>次。|n|cffffcc00等级 4|r - 恢复<ANhw,DataA4>点生命值，跳跃<ANhw,DataB4>次。"
 Researchhotkey=E
 EditorSuffix=(洛克汗)
-YDWEtip="负值治疗能造成法术攻击，闪电伤害(魔法伤害)"
 
 // Hex (rokhan)
 [ANhx]
@@ -351,7 +336,6 @@ Researchtip="学习耐久光环(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="增加周围单位的移动和攻击速度。|n|n|cffffcc00等级 1|r - <AOr2,DataA1,%>%的移动速度和<AOr2,DataB1,%>%的攻击速度。|n|cffffcc00等级 2|r - <AOr2,DataA2,%>%的移动速度和<AOr2,DataB2,%>%的攻击速度。|n|cffffcc00等级 3|r - <AOr2,DataA3,%>%的移动速度和<AOr2,DataB3,%>%的攻击速度。|n|cffffcc00等级 4|r - <AOr2,DataA4,%>%的移动速度和<AOr2,DataB4,%>%的攻击速度。"
 Researchhotkey=E
 EditorSuffix=(卡林)
-YDWEtip="魔法效果不同的同种光环可以叠加"
 
 // Shockwave (Cairne)
 [AOs2]
@@ -363,7 +347,6 @@ Researchtip="学习震荡波(|cffffcc00W|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="发射出一道向前的能量波，对一直线上的敌人造成一定的伤害。|n|n|cffffcc00等级 1|r - <AOs2,DataA1>点伤害。|n|cffffcc00等级 2|r - <AOs2,DataA2>点伤害。|n|cffffcc00等级 3|r - <AOs2,DataA3>点伤害。|n|cffffcc00等级 4|r - <AOs2,DataA4>点伤害。"
 Researchhotkey=W
 EditorSuffix=(卡林)
-YDWEtip="该技能不会对友军生效，造成法术攻击，音速伤害(魔法伤害)"
 
 // Reincarnation (Cairne)
 [AOr3]
@@ -376,7 +359,6 @@ Researchhotkey=R
 Globalmessage=
 Globalsound=
 EditorSuffix=(卡林)
-YDWEtip="会被重生的死亡不会触发单位死亡事件"
 
 // War Stomp (Chieftan)
 [AOw2]
@@ -387,7 +369,6 @@ Researchtip="学习战争践踏(|cffffcc00T|r) - [|cffffcc00等级 %d|r]。"
 Researchubertip="震击地面，击晕周围的地面单位。|n|n|cffffcc00等级 1|r - <AOw2,DataA1>点伤害，昏晕状态持续<AOw2,Dur1>秒。|n|n|cffffcc00等级 2|r - <AOw2,DataA2>点伤害，昏晕状态持续<AOw2,Dur2>秒。|n|n|cffffcc00等级 3|r - <AOw2,DataA3>点伤害，昏晕状态持续<AOw2,Dur3>秒。|n|n|cffffcc00等级 4|r - <AOw2,DataA4>点伤害，昏晕状态持续<AOw2,Dur4>秒。"
 Hotkey=T
 Researchhotkey=T
-YDWEtip="造成法术攻击，音速伤害(魔法伤害)"
 
 // Voodoo Spirits
 [AOls]
@@ -398,4 +379,3 @@ Hotkey=V
 Researchtip="学习巫毒幽魂(|cffffcc00V|r) - [|cffffcc00等级 %d|r]"
 Researchubertip="召唤出愤怒的幽灵来汲取敌人的生命值，幽灵能将汲取到的生命值补充到洛克汗的身上。|n|n|cffffcc00等级 1|r — <AOls,DataA1> 个幽灵。 |n|cffffcc00等级 2|r — <AOls,DataA2>幽灵。|n|n持续<AOls,HeroDur1>秒。"
 Researchhotkey=V
-YDWEtip="造成的伤害依赖于其召唤的单位的攻击，召唤出的单位如果没有蝗虫技能可能不会主动巡逻"

@@ -83,7 +83,6 @@ Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
 Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
 Hotkey=R
 Unhotkey=R
-YDWEtip="使用命令ID为852024，激活命令为852025，取消命令为852026"
 
 // Abilities that need names in the editor
 [AEpa]
@@ -97,7 +96,6 @@ Unhotkey=R
 Researchtip="学习毒箭(|cffffcc00R|r)- [|cffffcc00等级 %d|r]"
 Researchubertip="通过附加的火焰伤害来增加女祭司的攻击力。|n|n|cffffcc00等级 1|r -增加<AHfa,DataA1>点伤害。|n|cffffcc00等级 2|r –增加 <AHfa,DataA2>点伤害。 |n|cffffcc00等级 3|r – 增加<AHfa,DataA3>点伤害。"
 Researchhotkey=R
-YDWEtip="1级法球效果(增加攻击伤害)+非独立攻击特效，被后获得的的1级法球效果或攻击特效覆盖，覆盖低级的法球效果和攻击特效。持续伤害是法术攻击，毒药伤害(魔法伤害)。武器类型为箭矢时对单体有效，武器类型为箭矢(溅射)时造成范围特效(取决于技能的影响范围)。"
 
 [AEbu]
 Name=建造 (暗夜精灵)
@@ -107,7 +105,6 @@ Name=建造(娜迦)
 
 [AHbu]
 Name=建造(人族)
-YDWEtip="命令ID为851995"
 
 [AHer]
 Name=英雄
