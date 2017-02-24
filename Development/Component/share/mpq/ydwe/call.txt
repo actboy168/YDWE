@@ -4093,9 +4093,8 @@ type = unit
 default = "GetTriggerUnit"
 
 [IsUnitAliveBJ]
-title = "单位存活"
-description = "${单位} 是存活的"
-comment = "实际上该函数是判断单位血量是否>0."
+title = "单位生命值大于零"
+description = "${单位} 生命值大于零"
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -4103,9 +4102,8 @@ type = unit
 default = "GetTriggerUnit"
 
 [IsUnitDeadBJ]
-title = "单位死亡"
-description = "${单位} 处于死亡状态"
-comment = "实际上该函数是判断单位血量是否<=0."
+title = "单位生命值不大于零"
+description = "${单位} 生命值不大于零"
 category = TC_UNIT
 returns = boolean
 [[.args]]
