@@ -46,7 +46,7 @@ library YDWEAttackWaveTimer requires YDWEBase
 		call YDWESaveRealByString( "AttackWave"+I2S(YDWEH2I(t)), "x2", x2)        
 		call YDWESaveRealByString( "AttackWave"+I2S(YDWEH2I(t)), "y2", y2)
 		call YDWESaveRealByString( "AttackWave"+I2S(YDWEH2I(t)), "face", face)  
-		call YDWESaveIntegerByString( "AttackWaveLastTimer", "Timer", YDWEH2I(t))
+		call YDWESaveTimerByString( "AttackWaveLastTimer", "Timer", t)
 		call YDWESaveStringByString( "AttackWave"+I2S(YDWEH2I(t)), "Store", "AttackWave"+I2S(unitid)+R2S(x1)+R2S(y1)+R2S(timeout))
 		call TimerStart(t,timeout,true,function AttackWaveProc) 
 		call RemoveLocation(whichLocation)   
