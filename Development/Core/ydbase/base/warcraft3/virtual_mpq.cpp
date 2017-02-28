@@ -39,8 +39,17 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 
 	namespace filesystem
 	{
-		std::map<std::string, watch_cb>	                   watch_map;
+		event_cb	                        event;
+		std::map<std::string, watch_cb>	    watch_map;
 		std::array<std::list<fs::path>, 16> mpq_path;
+
+		void dispatch_event(const std::string& name, const std::string& data)
+		{
+			if (event)
+			{
+				event(name, data);
+			}
+		}
 
 		void* SMemAlloc(size_t amount)
 		{
@@ -252,10 +261,11 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		//	return base::std_call<bool>(real::SFileOpenFileAsArchive, handle, filename, priority, flags, mpq_handle_ptr);
 		//}
 		//
-		//bool __stdcall SFileOpenPathAsArchive(HANDLE handle, const char* pathname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
-		//{
-		//	return base::std_call<bool>(real::SFileOpenPathAsArchive, handle, pathname, priority, flags, mpq_handle_ptr);
-		//}
+		bool __stdcall SFileOpenPathAsArchive(HANDLE handle, const char* pathname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
+		{
+			filesystem::dispatch_event("open path as archive", pathname);
+			return base::std_call<bool>(real::SFileOpenPathAsArchive, handle, pathname, priority, flags, mpq_handle_ptr);
+		}
 	}
 
 	bool initialize(HMODULE module_handle)
@@ -285,7 +295,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		IAT_HOOK(289, SFileFileExistsEx);
 		//IAT_HOOK(291, SFileReadFileEx);
 		//IAT_HOOK(293, SFileOpenFileAsArchive);
-		//IAT_HOOK(300, SFileOpenPathAsArchive);
+		IAT_HOOK(300, SFileOpenPathAsArchive);
 #undef 	IAT_HOOK
 		initialized = result;
 		return result;
@@ -311,5 +321,10 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		std::string ifilename(filename.size(), 0);
 		std::transform(filename.begin(), filename.end(), ifilename.begin(), ::towlower);
 		filesystem::watch_map[ifilename] = callback;
+	}
+
+	void  event(event_cb callback)
+	{
+		filesystem::event = callback;
 	}
 }}}

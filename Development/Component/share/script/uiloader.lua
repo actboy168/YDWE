@@ -171,6 +171,9 @@ function loader:initialize()
 		end
 		return stringify(t)
 	end)
+	virtual_mpq.event(function(_, name)
+		log.info('OpenPathAsArchive', name)
+	end)
 end
 
 uiloader = loader

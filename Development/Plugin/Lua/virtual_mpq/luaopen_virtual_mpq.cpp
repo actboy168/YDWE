@@ -54,14 +54,38 @@ static int VirtualMpqWatch(lua_State* L)
 	return 0;
 }
 
+static void VirtualMpqEventCB(const base::lua::object& func, const std::string& name, const std::string& data)
+{
+	lua_State* L = func.l();
+	base::lua::guard guard(L);
+
+	try {
+		func.push();
+		lua_pushlstring(L, name.data(), name.size());
+		lua_pushlstring(L, data.data(), data.size());
+		if (LUA_OK != lua_pcall(L, 2, 0, 0)) {
+			throw std::exception(lua_tostring(L, -1));
+		}
+	}
+	catch (const std::exception& e) {
+		LOGGING_ERROR(logging::get_logger("lua")) << e.what();
+	}
+}
+
+static int VirtualMpqEvent(lua_State* L)
+{
+	base::warcraft3::virtual_mpq::event(std::bind(VirtualMpqEventCB, base::lua::object(L, 1), std::placeholders::_1, std::placeholders::_2));
+	return 0;
+}
+
 int luaopen_virtual_mpq(lua_State* L)
 {
-	//MessageBox(0, 0, 0, 0);
 	base::warcraft3::virtual_mpq::initialize(::GetModuleHandleW(NULL));
 
 	luaL_Reg l[] = {
 		{ "open_path", VirtualMpqOpenPath },
 		{ "watch", VirtualMpqWatch },
+		{ "event", VirtualMpqEvent },
 		{ NULL, NULL },
 	};
 	luaL_newlib(L, l);
