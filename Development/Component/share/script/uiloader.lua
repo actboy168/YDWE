@@ -1,6 +1,10 @@
 require "registry"
 require "util"
 local ui = require 'ui-builder.init'
+local txt = (require 'w3xparser').txt
+local ini = (require 'w3xparser').ini
+local lni = require 'lni-c'
+local info = lni(io.load(fs.ydwe_path() / 'plugin' / 'w3x2lni' / 'script' / 'info.ini'))
 
 local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" / "share" / "mpq"
 if not fs.exists(root) then
@@ -8,28 +12,6 @@ if not fs.exists(root) then
 end
 
 local loader = {}
-
-function loader:loadfile(path)
-	local f = assert(io.open(path, "r"))
-	local tbl = {}
-	local section = nil
-	for line in f:lines() do
-		if string.sub(line,1,1) == "[" then
-			section = string.sub(line, 2, string.len(line) - 1)
-			tbl[section] = {}
-		elseif string.sub(line,1,2) == "//" then
-		elseif line ~= "" then
-			local first = string.find(line, "=")
-			if first then
-				local key = string.sub(line, 1, first - 1)
-				local value = string.sub(line, first + 1) or ""
-				table.insert(tbl[section], { key, value })
-			end
-		end
-	end
-	f:close()
-	return tbl
-end
 
 local function is_enable_japi()
 	local ok, result = pcall(function ()
@@ -90,39 +72,17 @@ function loader:triggerstrings(name, callback)
 	return r
 end
 
-local function table_append(a, b)
-	for _, bv in ipairs(b) do
-		for i, av in ipairs(a) do
-			if av[1] == bv[1] then
-				table.remove(a, i)
-				break
-			end
-		end
-	end
-	local pos = 1
-	for _, v in ipairs(b) do
-		table.insert(a, pos, v)
-		pos = pos + 1
-	end
-end
-
 function loader:worldeditstrings()
 	log.trace("virtual_mpq 'worldeditstrings'")
-	local tbl = self:loadfile(root / 'units' / 'ui' / 'WorldEditStrings.txt')
-	table_append(tbl.WorldEditStrings, {
-		{ 'WESTRING_APPNAME', 'YD WorldEdit [ ' .. tostring(ydwe_version) .. ' ]' }
-	})
-	local rt = {}
-	table.insert(rt, "[WorldEditStrings]")
-	for _, v in ipairs(tbl.WorldEditStrings) do
-		table.insert(rt, v[1] .. "=" .. v[2])
+	local t = ini(io.load(root / 'units' / 'ui' / 'WorldEditStrings.txt'), 'WorldEditStrings')
+	t.WorldEditStrings.WESTRING_APPNAME = 'YD WorldEdit [ ' .. tostring(ydwe_version) .. ' ]'
+	local str = {}
+	str[#str+1] = "[WorldEditStrings]"
+	for k, v in pairs(t.WorldEditStrings) do
+		str[#str+1] = k .. "=" .. v
 	end
-	return table.concat(rt, '\n')
+	return table.concat(str, '\n')
 end
-
-local txt = (require 'w3xparser').txt
-local lni = require 'lni-c'
-local info = lni(io.load(fs.ydwe_path() / 'plugin' / 'w3x2lni' / 'script' / 'info.ini'))
 
 local function stringify(t)
 	local buf = {}
