@@ -1,6 +1,6 @@
 ID;PWXL;N;E
-B;Y36;X19;D0
-C;Y1;X1;K"ID"
+B;X19;Y36;D0
+C;X1;Y1;K"ID"
 C;X2;K"field"
 C;X3;K"slk"
 C;X4;K"index"
@@ -19,7 +19,7 @@ C;X16;K"maxVal"
 C;X17;K"forceNonNeg"
 C;X18;K"version"
 C;X19;K"section"
-C;Y2;X1;K"dnam"
+C;X1;Y2;K"dnam"
 C;X2;K"Name"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -35,7 +35,7 @@ C;X14;K0
 C;X16;K"TTName"
 C;X17;K0
 C;X18;K1
-C;Y3;X1;K"dcat"
+C;X1;Y3;K"dcat"
 C;X2;K"category"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -50,7 +50,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y4;X1;K"dtil"
+C;X1;Y4;K"dtil"
 C;X2;K"tilesets"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -66,7 +66,7 @@ C;X14;K0
 C;X16;K"TTDesc"
 C;X17;K0
 C;X18;K1
-C;Y5;X1;K"dtsp"
+C;X1;Y5;K"dtsp"
 C;X2;K"tilesetSpecific"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -80,7 +80,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y6;X1;K"dfil"
+C;X1;Y6;K"dfil"
 C;X2;K"file"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -97,7 +97,7 @@ C;X14;K0
 C;X16;K"TTDesc"
 C;X17;K0
 C;X18;K1
-C;Y7;X1;K"dsnd"
+C;X1;Y7;K"dsnd"
 C;X2;K"soundLoop"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -112,7 +112,7 @@ C;X14;K1
 C;X16;K"TTDesc"
 C;X17;K0
 C;X18;K1
-C;Y8;X1;K"dsel"
+C;X1;Y8;K"dsel"
 C;X2;K"selSize"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -129,7 +129,7 @@ C;X15;K0
 C;X16;K99999
 C;X17;K1
 C;X18;K1
-C;Y9;X1;K"ddes"
+C;X1;Y9;K"ddes"
 C;X2;K"defScale"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -146,7 +146,7 @@ C;X15;K0.01
 C;X16;K100
 C;X17;K1
 C;X18;K1
-C;Y10;X1;K"dmis"
+C;X1;Y10;K"dmis"
 C;X2;K"minScale"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -163,7 +163,7 @@ C;X15;K0.01
 C;X16;K100
 C;X17;K1
 C;X18;K1
-C;Y11;X1;K"dmas"
+C;X1;Y11;K"dmas"
 C;X2;K"maxScale"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -180,7 +180,7 @@ C;X15;K0.01
 C;X16;K100
 C;X17;K1
 C;X18;K1
-C;Y12;X1;K"dcpr"
+C;X1;Y12;K"dcpr"
 C;X2;K"canPlaceRandScale"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -194,7 +194,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y13;X1;K"duch"
+C;X1;Y13;K"duch"
 C;X2;K"useClickHelper"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -209,7 +209,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y14;X1;K"dimc"
+C;X1;Y14;K"dimc"
 C;X2;K"ignoreModelClick"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -223,7 +223,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y15;X1;K"dmap"
+C;X1;Y15;K"dmap"
 C;X2;K"maxPitch"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -240,7 +240,7 @@ C;X15;K0
 C;X16;K99999
 C;X17;K1
 C;X18;K1
-C;Y16;X1;K"dmar"
+C;X1;Y16;K"dmar"
 C;X2;K"maxRoll"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -257,7 +257,7 @@ C;X15;K0
 C;X16;K99999
 C;X17;K1
 C;X18;K1
-C;Y17;X1;K"dvis"
+C;X1;Y17;K"dvis"
 C;X2;K"visRadius"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -273,7 +273,7 @@ C;X15;K0
 C;X16;K99999
 C;X17;K1
 C;X18;K1
-C;Y18;X1;K"dwlk"
+C;X1;Y18;K"dwlk"
 C;X2;K"walkable"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -287,7 +287,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y19;X1;K"dvar"
+C;X1;Y19;K"dvar"
 C;X2;K"numVar"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -304,7 +304,7 @@ C;X15;K1
 C;X16;K10
 C;X17;K0
 C;X18;K1
-C;Y20;X1;K"donc"
+C;X1;Y20;K"donc"
 C;X2;K"onCliffs"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -318,7 +318,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y21;X1;K"donw"
+C;X1;Y21;K"donw"
 C;X2;K"onWater"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -332,7 +332,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y22;X1;K"dflt"
+C;X1;Y22;K"dflt"
 C;X2;K"floats"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -347,7 +347,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y23;X1;K"dshd"
+C;X1;Y23;K"dshd"
 C;X2;K"shadow"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -361,7 +361,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y24;X1;K"dshf"
+C;X1;Y24;K"dshf"
 C;X2;K"showInFog"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -375,7 +375,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y25;X1;K"danf"
+C;X1;Y25;K"danf"
 C;X2;K"animInFog"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -389,7 +389,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y26;X1;K"dfxr"
+C;X1;Y26;K"dfxr"
 C;X2;K"fixedRot"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -406,7 +406,7 @@ C;X15;K-1
 C;X16;K360
 C;X17;K0
 C;X18;K1
-C;Y27;X1;K"dptx"
+C;X1;Y27;K"dptx"
 C;X2;K"pathTex"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -422,7 +422,7 @@ C;X13;K0
 C;X14;K1
 C;X17;K0
 C;X18;K1
-C;Y28;X1;K"dsmm"
+C;X1;Y28;K"dsmm"
 C;X2;K"showInMM"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -436,7 +436,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y29;X1;K"dumc"
+C;X1;Y29;K"dumc"
 C;X2;K"useMMColor"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -451,7 +451,7 @@ C;X13;K0
 C;X14;K0
 C;X17;K0
 C;X18;K1
-C;Y30;X1;K"dmmr"
+C;X1;Y30;K"dmmr"
 C;X2;K"MMRed"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -468,7 +468,7 @@ C;X15;K0
 C;X16;K255
 C;X17;K0
 C;X18;K1
-C;Y31;X1;K"dmmg"
+C;X1;Y31;K"dmmg"
 C;X2;K"MMGreen"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -485,7 +485,7 @@ C;X15;K0
 C;X16;K255
 C;X17;K0
 C;X18;K1
-C;Y32;X1;K"dmmb"
+C;X1;Y32;K"dmmb"
 C;X2;K"MMBlue"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -502,7 +502,7 @@ C;X15;K0
 C;X16;K255
 C;X17;K0
 C;X18;K1
-C;Y33;X1;K"dvr1"
+C;X1;Y33;K"dvr1"
 C;X2;K"vertR"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -519,7 +519,7 @@ C;X15;K0
 C;X16;K255
 C;X17;K0
 C;X18;K1
-C;Y34;X1;K"dvg1"
+C;X1;Y34;K"dvg1"
 C;X2;K"vertG"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -536,7 +536,7 @@ C;X15;K0
 C;X16;K255
 C;X17;K0
 C;X18;K1
-C;Y35;X1;K"dvb1"
+C;X1;Y35;K"dvb1"
 C;X2;K"vertB"
 C;X3;K"DoodadData"
 C;X4;K0
@@ -553,7 +553,7 @@ C;X15;K0
 C;X16;K255
 C;X17;K0
 C;X18;K1
-C;Y36;X1;K"dusr"
+C;X1;Y36;K"dusr"
 C;X2;K"UserList"
 C;X3;K"DoodadData"
 C;X4;K0

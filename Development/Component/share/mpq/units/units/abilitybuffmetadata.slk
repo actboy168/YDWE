@@ -1,6 +1,6 @@
 ID;PWXL;N;E
-B;Y28;X23;D0
-C;Y1;X1;K"ID"
+B;X23;Y28;D0
+C;X1;Y1;K"ID"
 C;X2;K"field"
 C;X3;K"slk"
 C;X4;K"index"
@@ -18,7 +18,7 @@ C;X15;K"maxVal"
 C;X16;K"forceNonNeg"
 C;X17;K"version"
 C;X18;K"section"
-C;Y2;X1;K"fnam"
+C;X1;Y2;K"fnam"
 C;X2;K"EditorName"
 C;X3;K"Profile"
 C;X4;K-1
@@ -32,7 +32,7 @@ C;X13;K1
 C;X15;K"TTName"
 C;X16;K0
 C;X17;K1
-C;Y3;X1;K"fnsf"
+C;X1;Y3;K"fnsf"
 C;X2;K"EditorSuffix"
 C;X3;K"Profile"
 C;X4;K-1
@@ -46,7 +46,7 @@ C;X13;K1
 C;X15;K50
 C;X16;K0
 C;X17;K1
-C;Y4;X1;K"ftip"
+C;X1;Y4;K"ftip"
 C;X2;K"Bufftip"
 C;X3;K"Profile"
 C;X4;K-1
@@ -60,7 +60,7 @@ C;X13;K1
 C;X15;K"TTDesc"
 C;X16;K0
 C;X17;K1
-C;Y5;X1;K"fube"
+C;X1;Y5;K"fube"
 C;X2;K"Buffubertip"
 C;X3;K"Profile"
 C;X4;K-1
@@ -74,7 +74,7 @@ C;X13;K1
 C;X15;K"TTUber"
 C;X16;K0
 C;X17;K1
-C;Y6;X1;K"feff"
+C;X1;Y6;K"feff"
 C;X2;K"isEffect"
 C;X3;K"AbilityBuffData"
 C;X4;K-1
@@ -88,7 +88,7 @@ C;X13;K0
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y7;X1;K"frac"
+C;X1;Y7;K"frac"
 C;X2;K"race"
 C;X3;K"AbilityBuffData"
 C;X4;K-1
@@ -102,7 +102,7 @@ C;X13;K1
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y8;X1;K"fart"
+C;X1;Y8;K"fart"
 C;X2;K"Buffart"
 C;X3;K"Profile"
 C;X4;K-1
@@ -116,7 +116,7 @@ C;X12;K1
 C;X13;K1
 C;X16;K0
 C;X17;K1
-C;Y9;X1;K"ftat"
+C;X1;Y9;K"ftat"
 C;X2;K"TargetArt"
 C;X3;K"Profile"
 C;X4;K-1
@@ -129,7 +129,7 @@ C;X13;K1
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y10;X1;K"fsat"
+C;X1;Y10;K"fsat"
 C;X2;K"SpecialArt"
 C;X3;K"Profile"
 C;X4;K-1
@@ -142,7 +142,7 @@ C;X13;K1
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y11;X1;K"feat"
+C;X1;Y11;K"feat"
 C;X2;K"EffectArt"
 C;X3;K"Profile"
 C;X4;K-1
@@ -155,7 +155,7 @@ C;X13;K1
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y12;X1;K"flig"
+C;X1;Y12;K"flig"
 C;X2;K"LightningEffect"
 C;X3;K"Profile"
 C;X4;K-1
@@ -167,7 +167,7 @@ C;X12;K1
 C;X13;K1
 C;X16;K0
 C;X17;K1
-C;Y13;X1;K"fmat"
+C;X1;Y13;K"fmat"
 C;X2;K"Missileart"
 C;X3;K"Profile"
 C;X4;K-1
@@ -180,7 +180,7 @@ C;X13;K1
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y14;X1;K"fmsp"
+C;X1;Y14;K"fmsp"
 C;X2;K"Missilespeed"
 C;X3;K"Profile"
 C;X4;K-1
@@ -195,7 +195,7 @@ C;X15;K10000
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y15;X1;K"fmac"
+C;X1;Y15;K"fmac"
 C;X2;K"Missilearc"
 C;X3;K"Profile"
 C;X4;K-1
@@ -210,7 +210,7 @@ C;X15;K1
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y16;X1;K"fmho"
+C;X1;Y16;K"fmho"
 C;X2;K"MissileHoming"
 C;X3;K"Profile"
 C;X4;K-1
@@ -223,7 +223,7 @@ C;X13;K0
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y17;X1;K"ftac"
+C;X1;Y17;K"ftac"
 C;X2;K"Targetattachcount"
 C;X3;K"Profile"
 C;X4;K-1
@@ -238,7 +238,7 @@ C;X15;K6
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y18;X1;K"fta0"
+C;X1;Y18;K"fta0"
 C;X2;K"Targetattach"
 C;X3;K"Profile"
 C;X4;K-1
@@ -252,7 +252,7 @@ C;X15;K32
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y19;X1;K"fta1"
+C;X1;Y19;K"fta1"
 C;X2;K"Targetattach1"
 C;X3;K"Profile"
 C;X4;K-1
@@ -266,7 +266,7 @@ C;X15;K32
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y20;X1;K"fta2"
+C;X1;Y20;K"fta2"
 C;X2;K"Targetattach2"
 C;X3;K"Profile"
 C;X4;K-1
@@ -280,7 +280,7 @@ C;X15;K32
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y21;X1;K"fta3"
+C;X1;Y21;K"fta3"
 C;X2;K"Targetattach3"
 C;X3;K"Profile"
 C;X4;K-1
@@ -294,7 +294,7 @@ C;X15;K32
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y22;X1;K"fta4"
+C;X1;Y22;K"fta4"
 C;X2;K"Targetattach4"
 C;X3;K"Profile"
 C;X4;K-1
@@ -308,7 +308,7 @@ C;X15;K32
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y23;X1;K"fta5"
+C;X1;Y23;K"fta5"
 C;X2;K"Targetattach5"
 C;X3;K"Profile"
 C;X4;K-1
@@ -322,7 +322,7 @@ C;X15;K32
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y24;X1;K"feft"
+C;X1;Y24;K"feft"
 C;X2;K"Effectattach"
 C;X3;K"Profile"
 C;X4;K-1
@@ -336,7 +336,7 @@ C;X15;K32
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y25;X1;K"fspt"
+C;X1;Y25;K"fspt"
 C;X2;K"Specialattach"
 C;X3;K"Profile"
 C;X4;K-1
@@ -350,7 +350,7 @@ C;X15;K32
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y26;X1;K"fefs"
+C;X1;Y26;K"fefs"
 C;X2;K"Effectsound"
 C;X3;K"Profile"
 C;X4;K-1
@@ -363,7 +363,7 @@ C;X13;K1
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y27;X1;K"fefl"
+C;X1;Y27;K"fefl"
 C;X2;K"Effectsoundlooped"
 C;X3;K"Profile"
 C;X4;K-1
@@ -376,7 +376,7 @@ C;X13;K1
 C;X16;K0
 C;X17;K1
 C;X23;K1
-C;Y28;X1;K"fspd"
+C;X1;Y28;K"fspd"
 C;X2;K"Spelldetail"
 C;X3;K"Profile"
 C;X4;K-1

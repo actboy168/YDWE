@@ -1,6 +1,6 @@
 ID;PWXL;N;E
-B;Y56;X21;D0
-C;Y1;X1;K"ID"
+B;X21;Y56;D0
+C;X1;Y1;K"ID"
 C;X2;K"effectID"
 C;X3;K"comment"
 C;X4;K"dataType"
@@ -21,7 +21,7 @@ C;X18;K"sort"
 C;X19;K"changeFlags"
 C;X20;K"category"
 C;X21;K"section"
-C;Y2;X1;K"atdb"
+C;X1;Y2;K"atdb"
 C;X2;K"ratd"
 C;X3;K"Attack Dice"
 C;X4;K"Base"
@@ -31,7 +31,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y3;X1;K"atdm"
+C;X1;Y3;K"atdm"
 C;X2;K"ratd"
 C;X3;K"Attack Dice"
 C;X4;K"Mod"
@@ -41,7 +41,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y4;X1;K"levb"
+C;X1;Y4;K"levb"
 C;X2;K"rlev"
 C;X3;K"Spell Level"
 C;X4;K"Base"
@@ -51,7 +51,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y5;X1;K"levm"
+C;X1;Y5;K"levm"
 C;X2;K"rlev"
 C;X3;K"Spell Level"
 C;X4;K"Mod"
@@ -61,7 +61,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y6;X1;K"levc"
+C;X1;Y6;K"levc"
 C;X2;K"rlev"
 C;X3;K"Spell Level"
 C;X4;K"Code"
@@ -69,7 +69,7 @@ C;X5;K"WESTRING_EEVAL_LEVC"
 C;X6;K"abilCode"
 C;X9;K0
 C;X10;K1
-C;Y7;X1;K"hpxb"
+C;X1;Y7;K"hpxb"
 C;X2;K"rhpx"
 C;X3;K"Hit Points"
 C;X4;K"Base"
@@ -79,7 +79,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y8;X1;K"hpxm"
+C;X1;Y8;K"hpxm"
 C;X2;K"rhpx"
 C;X3;K"Hit Points"
 C;X4;K"Mod"
@@ -89,7 +89,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y9;X1;K"mnxb"
+C;X1;Y9;K"mnxb"
 C;X2;K"rmnx"
 C;X3;K"Mana Points"
 C;X4;K"Base"
@@ -99,7 +99,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y10;X1;K"mnxm"
+C;X1;Y10;K"mnxm"
 C;X2;K"rmnx"
 C;X3;K"Mana Points"
 C;X4;K"Mod"
@@ -109,7 +109,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y11;X1;K"mvxb"
+C;X1;Y11;K"mvxb"
 C;X2;K"rmvx"
 C;X3;K"Movement Speed"
 C;X4;K"Base"
@@ -119,7 +119,7 @@ C;X7;K-400
 C;X8;K400
 C;X9;K0
 C;X10;K1
-C;Y12;X1;K"mvxm"
+C;X1;Y12;K"mvxm"
 C;X2;K"rmvx"
 C;X3;K"Movement Speed"
 C;X4;K"Mod"
@@ -129,7 +129,7 @@ C;X7;K-400
 C;X8;K400
 C;X9;K0
 C;X10;K1
-C;Y13;X1;K"mnrb"
+C;X1;Y13;K"mnrb"
 C;X2;K"rmnr"
 C;X3;K"Mana Regen"
 C;X4;K"Base"
@@ -139,7 +139,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y14;X1;K"mnrm"
+C;X1;Y14;K"mnrm"
 C;X2;K"rmnr"
 C;X3;K"Mana Regen"
 C;X4;K"Mod"
@@ -149,7 +149,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y15;X1;K"hpob"
+C;X1;Y15;K"hpob"
 C;X2;K"rhpo"
 C;X3;K"Hit Points %"
 C;X4;K"Base"
@@ -159,7 +159,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y16;X1;K"hpom"
+C;X1;Y16;K"hpom"
 C;X2;K"rhpo"
 C;X3;K"Hit Points %"
 C;X4;K"Mod"
@@ -169,7 +169,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y17;X1;K"manb"
+C;X1;Y17;K"manb"
 C;X2;K"rman"
 C;X3;K"Mana Points %"
 C;X4;K"Base"
@@ -179,7 +179,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y18;X1;K"manm"
+C;X1;Y18;K"manm"
 C;X2;K"rman"
 C;X3;K"Mana Points %"
 C;X4;K"Mod"
@@ -189,7 +189,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y19;X1;K"movb"
+C;X1;Y19;K"movb"
 C;X2;K"rmov"
 C;X3;K"Movement Speed %"
 C;X4;K"Base"
@@ -199,7 +199,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y20;X1;K"movm"
+C;X1;Y20;K"movm"
 C;X2;K"rmov"
 C;X3;K"Movement Speed %"
 C;X4;K"Mod"
@@ -209,7 +209,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y21;X1;K"atxb"
+C;X1;Y21;K"atxb"
 C;X2;K"ratx"
 C;X3;K"Attack Damage"
 C;X4;K"Base"
@@ -219,7 +219,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y22;X1;K"atxm"
+C;X1;Y22;K"atxm"
 C;X2;K"ratx"
 C;X3;K"Attack Damage"
 C;X4;K"Mod"
@@ -229,7 +229,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y23;X1;K"lumb"
+C;X1;Y23;K"lumb"
 C;X2;K"rlum"
 C;X3;K"Lumber"
 C;X4;K"Base"
@@ -239,7 +239,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y24;X1;K"lumm"
+C;X1;Y24;K"lumm"
 C;X2;K"rlum"
 C;X3;K"Lumber"
 C;X4;K"Mod"
@@ -249,7 +249,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y25;X1;K"atrb"
+C;X1;Y25;K"atrb"
 C;X2;K"ratr"
 C;X3;K"Attack Range"
 C;X4;K"Base"
@@ -259,7 +259,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y26;X1;K"atrm"
+C;X1;Y26;K"atrm"
 C;X2;K"ratr"
 C;X3;K"Attack Range"
 C;X4;K"Mod"
@@ -269,7 +269,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y27;X1;K"atsb"
+C;X1;Y27;K"atsb"
 C;X2;K"rats"
 C;X3;K"Attack Speed"
 C;X4;K"Base"
@@ -279,7 +279,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y28;X1;K"atsm"
+C;X1;Y28;K"atsm"
 C;X2;K"rats"
 C;X3;K"Attack Speed"
 C;X4;K"Mod"
@@ -289,7 +289,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y29;X1;K"spib"
+C;X1;Y29;K"spib"
 C;X2;K"rspi"
 C;X3;K"Spiked Barricade Damage"
 C;X4;K"Base"
@@ -299,7 +299,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y30;X1;K"spim"
+C;X1;Y30;K"spim"
 C;X2;K"rspi"
 C;X3;K"Spiked Barricade Damage"
 C;X4;K"Mod"
@@ -309,7 +309,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y31;X1;K"hprb"
+C;X1;Y31;K"hprb"
 C;X2;K"rhpr"
 C;X3;K"Hit Point Regeneration"
 C;X4;K"Base"
@@ -319,7 +319,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y32;X1;K"hprm"
+C;X1;Y32;K"hprm"
 C;X2;K"rhpr"
 C;X3;K"Hit Point Regeneration"
 C;X4;K"Mod"
@@ -329,7 +329,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y33;X1;K"sigb"
+C;X1;Y33;K"sigb"
 C;X2;K"rsig"
 C;X3;K"Sight Range"
 C;X4;K"Base"
@@ -339,7 +339,7 @@ C;X7;K-1800
 C;X8;K1800
 C;X9;K0
 C;X10;K1
-C;Y34;X1;K"sigm"
+C;X1;Y34;K"sigm"
 C;X2;K"rsig"
 C;X3;K"Sight Range"
 C;X4;K"Mod"
@@ -349,7 +349,7 @@ C;X7;K-1800
 C;X8;K1800
 C;X9;K0
 C;X10;K1
-C;Y35;X1;K"atcb"
+C;X1;Y35;K"atcb"
 C;X2;K"ratc"
 C;X3;K"Attack Target Count"
 C;X4;K"Base"
@@ -359,7 +359,7 @@ C;X7;K-10000
 C;X8;K10000
 C;X9;K0
 C;X10;K1
-C;Y36;X1;K"atcm"
+C;X1;Y36;K"atcm"
 C;X2;K"ratc"
 C;X3;K"Attack Target Count"
 C;X4;K"Mod"
@@ -369,7 +369,7 @@ C;X7;K-10000
 C;X8;K10000
 C;X9;K0
 C;X10;K1
-C;Y37;X1;K"adlb"
+C;X1;Y37;K"adlb"
 C;X2;K"radl"
 C;X3;K"Attack Damage Loss"
 C;X4;K"Base"
@@ -379,7 +379,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y38;X1;K"adlm"
+C;X1;Y38;K"adlm"
 C;X2;K"radl"
 C;X3;K"Attack Damage Loss"
 C;X4;K"Mod"
@@ -389,7 +389,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y39;X1;K"minb"
+C;X1;Y39;K"minb"
 C;X2;K"rmin"
 C;X3;K"Gold Harvest"
 C;X4;K"Base"
@@ -399,7 +399,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y40;X1;K"minm"
+C;X1;Y40;K"minm"
 C;X2;K"rmin"
 C;X3;K"Gold Harvest"
 C;X4;K"Mod"
@@ -409,7 +409,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y41;X1;K"raib"
+C;X1;Y41;K"raib"
 C;X2;K"rrai"
 C;X3;K"Raise Dead Duration"
 C;X4;K"Base"
@@ -419,7 +419,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y42;X1;K"raim"
+C;X1;Y42;K"raim"
 C;X2;K"rrai"
 C;X3;K"Raise Dead Duration"
 C;X4;K"Mod"
@@ -429,7 +429,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y43;X1;K"entb"
+C;X1;Y43;K"entb"
 C;X2;K"rent"
 C;X3;K"Entangle Gold Amount"
 C;X4;K"Base"
@@ -439,7 +439,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y44;X1;K"entm"
+C;X1;Y44;K"entm"
 C;X2;K"rent"
 C;X3;K"Entangle Gold Amount"
 C;X4;K"Mod"
@@ -449,7 +449,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y45;X1;K"enwb"
+C;X1;Y45;K"enwb"
 C;X2;K"renw"
 C;X3;K"Enable Weapons"
 C;X4;K"Base"
@@ -459,7 +459,7 @@ C;X7;K0
 C;X8;K3
 C;X9;K0
 C;X10;K1
-C;Y46;X1;K"audb"
+C;X1;Y46;K"audb"
 C;X2;K"raud"
 C;X3;K"Aura Radius"
 C;X4;K"Base"
@@ -469,7 +469,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y47;X1;K"audm"
+C;X1;Y47;K"audm"
 C;X2;K"raud"
 C;X3;K"Aura Radius"
 C;X4;K"Mod"
@@ -479,7 +479,7 @@ C;X7;K-100
 C;X8;K100
 C;X9;K0
 C;X10;K1
-C;Y48;X1;K"asdb"
+C;X1;Y48;K"asdb"
 C;X2;K"rasd"
 C;X3;K"Attack Spill Distance"
 C;X4;K"Base"
@@ -489,7 +489,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y49;X1;K"asdm"
+C;X1;Y49;K"asdm"
 C;X2;K"rasd"
 C;X3;K"Attack Spill Distance"
 C;X4;K"Mod"
@@ -499,7 +499,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y50;X1;K"asrb"
+C;X1;Y50;K"asrb"
 C;X2;K"rasr"
 C;X3;K"Attack Spill Radius"
 C;X4;K"Base"
@@ -509,7 +509,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y51;X1;K"asrm"
+C;X1;Y51;K"asrm"
 C;X2;K"rasr"
 C;X3;K"Attack Spill Radius"
 C;X4;K"Mod"
@@ -519,7 +519,7 @@ C;X7;K-100000
 C;X8;K100000
 C;X9;K0
 C;X10;K1
-C;Y52;X1;K"roob"
+C;X1;Y52;K"roob"
 C;X2;K"rroo"
 C;X3;K"Rooted Weapons"
 C;X4;K"Base"
@@ -529,7 +529,7 @@ C;X7;K0
 C;X8;K3
 C;X9;K0
 C;X10;K1
-C;Y53;X1;K"urob"
+C;X1;Y53;K"urob"
 C;X2;K"ruro"
 C;X3;K"Rooted Weapons"
 C;X4;K"Base"
@@ -539,7 +539,7 @@ C;X7;K0
 C;X8;K3
 C;X9;K0
 C;X10;K1
-C;Y54;X1;K"uart"
+C;X1;Y54;K"uart"
 C;X2;K"rart"
 C;X3;K"Armor Type"
 C;X4;K"Base"
@@ -547,7 +547,7 @@ C;X5;K"WESTRING_EEVAL_UART"
 C;X6;K"defenseTypeInt"
 C;X9;K0
 C;X10;K1
-C;Y55;X1;K"utma"
+C;X1;Y55;K"utma"
 C;X2;K"rtma"
 C;X3;K"Tech Max Allowed"
 C;X4;K"Base"
@@ -555,7 +555,7 @@ C;X5;K"WESTRING_EEVAL_UTMA"
 C;X6;K"techAvail"
 C;X9;K0
 C;X10;K1
-C;Y56;X1;K"ttma"
+C;X1;Y56;K"ttma"
 C;X2;K"rtma"
 C;X3;K"Tech Max Allowed"
 C;X4;K"Code"
