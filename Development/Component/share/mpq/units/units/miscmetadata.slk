@@ -1,6 +1,6 @@
 ID;PWXL;N;E
-B;X19;Y300;D0
-C;X1;Y1;K"ID"
+B;Y300;X19;D0
+C;Y1;X1;K"ID"
 C;X2;K"field"
 C;X3;K"slk"
 C;X4;K"section"
@@ -19,7 +19,7 @@ C;X16;K"version"
 C;X17;K"InBeta"
 C;X18;K"changeFlags"
 C;X19;K"category"
-C;X1;Y2;K"gexp"
+C;Y2;X1;K"gexp"
 C;X2;K"GlobalExperience"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -32,7 +32,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y3;K"bgxp"
+C;Y3;X1;K"bgxp"
 C;X2;K"BuildingKillsGiveExp"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -45,7 +45,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y4;K"mhdx"
+C;Y4;X1;K"mhdx"
 C;X2;K"MaxLevelHeroesDrainExp"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -58,7 +58,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y5;K"dbst"
+C;Y5;X1;K"dbst"
 C;X2;K"DisplayBuildingStatus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -71,7 +71,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y6;K"dein"
+C;Y6;X1;K"dein"
 C;X2;K"DisplayEnemyInventory"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -84,7 +84,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y7;K"mhel"
+C;Y7;X1;K"mhel"
 C;X2;K"MaxHeroLevel"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -99,7 +99,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y8;K"mule"
+C;Y8;X1;K"mule"
 C;X2;K"MaxUnitLevel"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -114,7 +114,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y9;K"mxpn"
+C;Y9;X1;K"mxpn"
 C;X2;K"NeedHeroXP"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -129,7 +129,7 @@ C;X14;K2000000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y10;K"xpn1"
+C;Y10;X1;K"xpn1"
 C;X2;K"NeedHeroXPFormulaA"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -144,7 +144,7 @@ C;X14;K10
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y11;K"xpn2"
+C;Y11;X1;K"xpn2"
 C;X2;K"NeedHeroXPFormulaB"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -159,7 +159,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y12;K"xpn3"
+C;Y12;X1;K"xpn3"
 C;X2;K"NeedHeroXPFormulaC"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -174,7 +174,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y13;K"mhrc"
+C;Y13;X1;K"mhrc"
 C;X2;K"HeroMaxReviveCostGold"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -189,7 +189,7 @@ C;X14;K1000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y14;K"mhrl"
+C;Y14;X1;K"mhrl"
 C;X2;K"HeroMaxReviveCostLumber"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -204,7 +204,7 @@ C;X14;K1000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y15;K"mhrt"
+C;Y15;X1;K"mhrt"
 C;X2;K"HeroMaxReviveTime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -219,7 +219,7 @@ C;X14;K1000000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y16;K"mhac"
+C;Y16;X1;K"mhac"
 C;X2;K"HeroMaxAwakenCostGold"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -234,7 +234,7 @@ C;X14;K1000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y17;K"mhal"
+C;Y17;X1;K"mhal"
 C;X2;K"HeroMaxAwakenCostLumber"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -249,7 +249,7 @@ C;X14;K1000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y18;K"hrms"
+C;Y18;X1;K"hrms"
 C;X2;K"HeroReviveManaStart"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -262,7 +262,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y19;K"hrmf"
+C;Y19;X1;K"hrmf"
 C;X2;K"HeroReviveManaFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -277,7 +277,7 @@ C;X14;K1
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y20;K"hrlf"
+C;Y20;X1;K"hrlf"
 C;X2;K"HeroReviveLifeFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -292,7 +292,7 @@ C;X14;K1
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y21;K"hams"
+C;Y21;X1;K"hams"
 C;X2;K"HeroAwakenManaStart"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -305,7 +305,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y22;K"hamf"
+C;Y22;X1;K"hamf"
 C;X2;K"HeroAwakenManaFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -320,7 +320,7 @@ C;X14;K1
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y23;K"half"
+C;Y23;X1;K"half"
 C;X2;K"HeroAwakenLifeFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -335,7 +335,7 @@ C;X14;K1
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y24;K"bubr"
+C;Y24;X1;K"bubr"
 C;X2;K"BuildingUnblightRadius"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -350,7 +350,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y25;K"bcnr"
+C;Y25;X1;K"bcnr"
 C;X2;K"BuildingPlacementNotifyRadius"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -365,7 +365,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y26;K"nunr"
+C;Y26;X1;K"nunr"
 C;X2;K"NeutralUseNotifyRadius"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -380,7 +380,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y27;K"farr"
+C;Y27;X1;K"farr"
 C;X2;K"FoggedAttackRevealRadius"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -395,7 +395,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y28;K"dfrr"
+C;Y28;X1;K"dfrr"
 C;X2;K"DyingRevealRadius"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -410,7 +410,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y29;K"bdet"
+C;Y29;X1;K"bdet"
 C;X2;K"BoneDecayTime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -425,7 +425,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y30;K"sdet"
+C;Y30;X1;K"sdet"
 C;X2;K"StructureDecayTime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -440,7 +440,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y31;K"dect"
+C;Y31;X1;K"dect"
 C;X2;K"DecayTime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -455,7 +455,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y32;K"dist"
+C;Y32;X1;K"dist"
 C;X2;K"DissipateTime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -470,7 +470,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y33;K"folr"
+C;Y33;X1;K"folr"
 C;X2;K"FollowRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -485,7 +485,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y34;K"fols"
+C;Y34;X1;K"fols"
 C;X2;K"StructureFollowRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -500,7 +500,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y35;K"foli"
+C;Y35;X1;K"foli"
 C;X2;K"FollowItemRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -515,7 +515,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y36;K"scrb"
+C;Y36;X1;K"scrb"
 C;X2;K"SpellCastRangeBuffer"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -530,7 +530,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y37;K"read"
+C;Y37;X1;K"read"
 C;X2;K"ReactionDelay"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -545,7 +545,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y38;K"chtm"
+C;Y38;X1;K"chtm"
 C;X2;K"ChanceToMiss"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -560,7 +560,7 @@ C;X14;K1
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y39;K"dayl"
+C;Y39;X1;K"dayl"
 C;X2;K"DayLength"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -575,7 +575,7 @@ C;X14;K1000000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y40;K"dawn"
+C;Y40;X1;K"dawn"
 C;X2;K"Dawn"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -590,7 +590,7 @@ C;X14;K1000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y41;K"dusk"
+C;Y41;X1;K"dusk"
 C;X2;K"Dusk"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -605,7 +605,7 @@ C;X14;K1000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y42;K"dayh"
+C;Y42;X1;K"dayh"
 C;X2;K"DayHours"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -620,7 +620,7 @@ C;X14;K1000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y43;K"gmmg"
+C;Y43;X1;K"gmmg"
 C;X2;K"GoldMineMaxGold"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -635,7 +635,7 @@ C;X14;K1000000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y44;K"hexr"
+C;Y44;X1;K"hexr"
 C;X2;K"HeroExpRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -650,7 +650,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y45;K"rbfg"
+C;Y45;X1;K"rbfg"
 C;X2;K"ReviveBaseFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -665,7 +665,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y46;K"rlfg"
+C;Y46;X1;K"rlfg"
 C;X2;K"ReviveLevelFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -680,7 +680,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y47;K"rbfl"
+C;Y47;X1;K"rbfl"
 C;X2;K"ReviveBaseLumberFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -695,7 +695,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y48;K"rlfl"
+C;Y48;X1;K"rlfl"
 C;X2;K"ReviveLumberLevelFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -710,7 +710,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y49;K"rmaf"
+C;Y49;X1;K"rmaf"
 C;X2;K"ReviveMaxFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -725,7 +725,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y50;K"rbft"
+C;Y50;X1;K"rbft"
 C;X2;K"ReviveTimeFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -740,7 +740,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y51;K"rmtf"
+C;Y51;X1;K"rmtf"
 C;X2;K"ReviveMaxTimeFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -755,7 +755,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y52;K"awbf"
+C;Y52;X1;K"awbf"
 C;X2;K"AwakenBaseFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -770,7 +770,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y53;K"awlf"
+C;Y53;X1;K"awlf"
 C;X2;K"AwakenLevelFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -785,7 +785,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y54;K"awbl"
+C;Y54;X1;K"awbl"
 C;X2;K"AwakenBaseLumberFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -800,7 +800,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y55;K"awll"
+C;Y55;X1;K"awll"
 C;X2;K"AwakenLumberLevelFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -815,7 +815,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y56;K"awmf"
+C;Y56;X1;K"awmf"
 C;X2;K"AwakenMaxFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -830,7 +830,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y57;K"loga"
+C;Y57;X1;K"loga"
 C;X2;K"LowGoldAmount"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -845,7 +845,7 @@ C;X14;K1000000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y58;K"gmod"
+C;Y58;X1;K"gmod"
 C;X2;K"GoldMineOwnDuration"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -860,7 +860,7 @@ C;X14;K1000000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y59;K"invs"
+C;Y59;X1;K"invs"
 C;X2;K"InvisSpeed"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -875,7 +875,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y60;K"from"
+C;Y60;X1;K"from"
 C;X2;K"FrostMoveSpeedDecrease"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -890,7 +890,7 @@ C;X14;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y61;K"froa"
+C;Y61;X1;K"froa"
 C;X2;K"FrostAttackSpeedDecrease"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -905,7 +905,7 @@ C;X14;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y62;K"gnxp"
+C;Y62;X1;K"gnxp"
 C;X2;K"GrantNormalXP"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -920,7 +920,7 @@ C;X14;K2000000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y63;K"gnxa"
+C;Y63;X1;K"gnxa"
 C;X2;K"GrantNormalXPFormulaA"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -935,7 +935,7 @@ C;X14;K10
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y64;K"gnxb"
+C;Y64;X1;K"gnxb"
 C;X2;K"GrantNormalXPFormulaB"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -950,7 +950,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y65;K"gnxc"
+C;Y65;X1;K"gnxc"
 C;X2;K"GrantNormalXPFormulaC"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -965,7 +965,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y66;K"ghxp"
+C;Y66;X1;K"ghxp"
 C;X2;K"GrantHeroXP"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -980,7 +980,7 @@ C;X14;K2000000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y67;K"ghfa"
+C;Y67;X1;K"ghfa"
 C;X2;K"GrantHeroXPFormulaA"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -995,7 +995,7 @@ C;X14;K10
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y68;K"ghfb"
+C;Y68;X1;K"ghfb"
 C;X2;K"GrantHeroXPFormulaB"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1010,7 +1010,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y69;K"ghfc"
+C;Y69;X1;K"ghfc"
 C;X2;K"GrantHeroXPFormulaC"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1025,7 +1025,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y70;K"hfxp"
+C;Y70;X1;K"hfxp"
 C;X2;K"HeroFactorXP"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1040,7 +1040,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y71;K"satb"
+C;Y71;X1;K"satb"
 C;X2;K"StrAttackBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1055,7 +1055,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y72;K"shpb"
+C;Y72;X1;K"shpb"
 C;X2;K"StrHitPointBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1070,7 +1070,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y73;K"sreb"
+C;Y73;X1;K"sreb"
 C;X2;K"StrRegenBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1085,7 +1085,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y74;K"imab"
+C;Y74;X1;K"imab"
 C;X2;K"IntManaBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1100,7 +1100,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y75;K"imrb"
+C;Y75;X1;K"imrb"
 C;X2;K"IntRegenBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1115,7 +1115,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y76;K"adeb"
+C;Y76;X1;K"adeb"
 C;X2;K"AgiDefenseBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1130,7 +1130,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y77;K"adba"
+C;Y77;X1;K"adba"
 C;X2;K"AgiDefenseBase"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1145,7 +1145,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y78;K"amvb"
+C;Y78;X1;K"amvb"
 C;X2;K"AgiMoveBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1160,7 +1160,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y79;K"aasb"
+C;Y79;X1;K"aasb"
 C;X2;K"AgiAttackSpeedBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1174,7 +1174,7 @@ C;X14;K10
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y80;K"drop"
+C;Y80;X1;K"drop"
 C;X2;K"DropItemRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1189,7 +1189,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y81;K"give"
+C;Y81;X1;K"give"
 C;X2;K"GiveItemRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1204,7 +1204,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y82;K"pick"
+C;Y82;X1;K"pick"
 C;X2;K"PickupItemRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1219,7 +1219,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y83;K"pair"
+C;Y83;X1;K"pair"
 C;X2;K"PawnItemRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1234,7 +1234,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y84;K"paif"
+C;Y84;X1;K"paif"
 C;X2;K"PawnItemRate"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1249,7 +1249,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y85;K"cfhr"
+C;Y85;X1;K"cfhr"
 C;X2;K"CallForHelp"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1264,7 +1264,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y86;K"cfhc"
+C;Y86;X1;K"cfhc"
 C;X2;K"CreepCallForHelp"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1279,7 +1279,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y87;K"defa"
+C;Y87;X1;K"defa"
 C;X2;K"DefenseArmor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1294,7 +1294,7 @@ C;X14;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y88;K"ctno"
+C;Y88;X1;K"ctno"
 C;X2;K"DamageBonusNormal"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1309,7 +1309,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y89;K"ctpi"
+C;Y89;X1;K"ctpi"
 C;X2;K"DamageBonusPierce"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1324,7 +1324,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y90;K"ctsi"
+C;Y90;X1;K"ctsi"
 C;X2;K"DamageBonusSiege"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1339,7 +1339,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y91;K"ctma"
+C;Y91;X1;K"ctma"
 C;X2;K"DamageBonusMagic"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1354,7 +1354,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y92;K"ctch"
+C;Y92;X1;K"ctch"
 C;X2;K"DamageBonusChaos"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1369,7 +1369,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y93;K"ctsp"
+C;Y93;X1;K"ctsp"
 C;X2;K"DamageBonusSpells"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1384,7 +1384,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y94;K"cthe"
+C;Y94;X1;K"cthe"
 C;X2;K"DamageBonusHero"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1399,7 +1399,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y95;K"guad"
+C;Y95;X1;K"guad"
 C;X2;K"GuardDistance"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1414,7 +1414,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y96;K"guam"
+C;Y96;X1;K"guam"
 C;X2;K"MaxGuardDistance"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1429,7 +1429,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y97;K"guat"
+C;Y97;X1;K"guat"
 C;X2;K"GuardReturnTime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1444,7 +1444,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y98;K"rrco"
+C;Y98;X1;K"rrco"
 C;X2;K"ConstructionRefundRate"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1459,7 +1459,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y99;K"rrre"
+C;Y99;X1;K"rrre"
 C;X2;K"ResearchRefundRate"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1474,7 +1474,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y100;K"rrhr"
+C;Y100;X1;K"rrhr"
 C;X2;K"ReviveRefundRate"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1489,7 +1489,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y101;K"rrtu"
+C;Y101;X1;K"rrtu"
 C;X2;K"TrainRefundRate"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1504,7 +1504,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y102;K"rrbu"
+C;Y102;X1;K"rrbu"
 C;X2;K"UpgradeRefundRate"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1519,7 +1519,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y103;K"ande"
+C;Y103;X1;K"ande"
 C;X2;K"AttackNotifyDelay"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1534,7 +1534,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y104;K"anra"
+C;Y104;X1;K"anra"
 C;X2;K"AttackNotifyRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1549,7 +1549,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y105;K"tras"
+C;Y105;X1;K"tras"
 C;X2;K"TradingIncSmall"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1564,7 +1564,7 @@ C;X14;K1000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y106;K"tral"
+C;Y106;X1;K"tral"
 C;X2;K"TradingIncLarge"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1579,7 +1579,7 @@ C;X14;K1000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y107;K"hals"
+C;Y107;X1;K"hals"
 C;X2;K"HeroAbilityLevelSkip"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1594,7 +1594,7 @@ C;X14;K5
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y108;K"cldr"
+C;Y108;X1;K"cldr"
 C;X2;K"ConstructionLifeDrainRate"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1609,7 +1609,7 @@ C;X14;K100000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y109;K"bang"
+C;Y109;X1;K"bang"
 C;X2;K"BuildingAngle"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1624,7 +1624,7 @@ C;X14;K360
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y110;K"rang"
+C;Y110;X1;K"rang"
 C;X2;K"RootAngle"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1639,7 +1639,7 @@ C;X14;K360
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y111;K"budt"
+C;Y111;X1;K"budt"
 C;X2;K"BulletDeathTime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1654,7 +1654,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y112;K"efdt"
+C;Y112;X1;K"efdt"
 C;X2;K"EffectDeathTime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1669,7 +1669,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y113;K"cadt"
+C;Y113;X1;K"cadt"
 C;X2;K"CancelTime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1684,7 +1684,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y114;K"ffdt"
+C;Y114;X1;K"ffdt"
 C;X2;K"FogFlashTime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1699,7 +1699,7 @@ C;X14;K100000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y115;K"mcor"
+C;Y115;X1;K"mcor"
 C;X2;K"MaxCollisionRadius"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1714,7 +1714,7 @@ C;X14;K1024
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y116;K"rzof"
+C;Y116;X1;K"rzof"
 C;X2;K"RallyZOffset"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1729,7 +1729,7 @@ C;X14;K2048
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y117;K"sant"
+C;Y117;X1;K"sant"
 C;X2;K"ScaledAnimTime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1744,7 +1744,7 @@ C;X14;K1000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y118;K"skif"
+C;Y118;X1;K"skif"
 C;X2;K"SummonedKillFactor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1759,7 +1759,7 @@ C;X14;K1000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y119;K"fcap"
+C;Y119;X1;K"fcap"
 C;X2;K"FoodCeiling"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1774,7 +1774,7 @@ C;X14;K300
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y120;K"upku"
+C;Y120;X1;K"upku"
 C;X2;K"UpkeepUsage"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1789,7 +1789,7 @@ C;X14;K300
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y121;K"upkg"
+C;Y121;X1;K"upkg"
 C;X2;K"UpkeepGoldTax"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1804,7 +1804,7 @@ C;X14;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y122;K"upkw"
+C;Y122;X1;K"upkw"
 C;X2;K"UpkeepLumberTax"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1819,7 +1819,7 @@ C;X14;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y123;K"edbo"
+C;Y123;X1;K"edbo"
 C;X2;K"EtherealDamageBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1834,7 +1834,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y124;K"ehbo"
+C;Y124;X1;K"ehbo"
 C;X2;K"EtherealHealBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1849,7 +1849,7 @@ C;X14;K10000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y125;K"mxus"
+C;Y125;X1;K"mxus"
 C;X2;K"MaxUnitSpeed"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1864,7 +1864,7 @@ C;X14;K522
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y126;K"mnus"
+C;Y126;X1;K"mnus"
 C;X2;K"MinUnitSpeed"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1879,7 +1879,7 @@ C;X14;K522
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y127;K"mxbs"
+C;Y127;X1;K"mxbs"
 C;X2;K"MaxBldgSpeed"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1894,7 +1894,7 @@ C;X14;K522
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y128;K"mnbs"
+C;Y128;X1;K"mnbs"
 C;X2;K"MinBldgSpeed"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1909,7 +1909,7 @@ C;X14;K522
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y129;K"mdre"
+C;Y129;X1;K"mdre"
 C;X2;K"MissDamageReduction"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1924,7 +1924,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y130;K"cccr"
+C;Y130;X1;K"cccr"
 C;X2;K"CreepCampPathingCellDistance"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -1939,7 +1939,7 @@ C;X14;K128
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y131;K"hero"
+C;Y131;X1;K"hero"
 C;X2;K"DependencyOr"
 C;X3;K"Profile"
 C;X4;K"HERO"
@@ -1952,7 +1952,7 @@ C;X12;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y132;K"talt"
+C;Y132;X1;K"talt"
 C;X2;K"DependencyOr"
 C;X3;K"Profile"
 C;X4;K"TALT"
@@ -1965,7 +1965,7 @@ C;X12;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y133;K"twn1"
+C;Y133;X1;K"twn1"
 C;X2;K"DependencyOr"
 C;X3;K"Profile"
 C;X4;K"TWN1"
@@ -1978,7 +1978,7 @@ C;X12;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y134;K"twn2"
+C;Y134;X1;K"twn2"
 C;X2;K"DependencyOr"
 C;X3;K"Profile"
 C;X4;K"TWN2"
@@ -1991,7 +1991,7 @@ C;X12;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y135;K"twn3"
+C;Y135;X1;K"twn3"
 C;X2;K"DependencyOr"
 C;X3;K"Profile"
 C;X4;K"TWN3"
@@ -2004,7 +2004,7 @@ C;X12;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y136;K"twn4"
+C;Y136;X1;K"twn4"
 C;X2;K"DependencyOr"
 C;X3;K"Profile"
 C;X4;K"TWN4"
@@ -2017,7 +2017,7 @@ C;X12;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y137;K"twn5"
+C;Y137;X1;K"twn5"
 C;X2;K"DependencyOr"
 C;X3;K"Profile"
 C;X4;K"TWN5"
@@ -2030,7 +2030,7 @@ C;X12;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y138;K"twn6"
+C;Y138;X1;K"twn6"
 C;X2;K"DependencyOr"
 C;X3;K"Profile"
 C;X4;K"TWN6"
@@ -2043,7 +2043,7 @@ C;X12;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y139;K"twn7"
+C;Y139;X1;K"twn7"
 C;X2;K"DependencyOr"
 C;X3;K"Profile"
 C;X4;K"TWN7"
@@ -2056,7 +2056,7 @@ C;X12;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y140;K"twn8"
+C;Y140;X1;K"twn8"
 C;X2;K"DependencyOr"
 C;X3;K"Profile"
 C;X4;K"TWN8"
@@ -2069,7 +2069,7 @@ C;X12;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y141;K"twn9"
+C;Y141;X1;K"twn9"
 C;X2;K"DependencyOr"
 C;X3;K"Profile"
 C;X4;K"TWN9"
@@ -2082,7 +2082,7 @@ C;X12;K1
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y142;K"txp1"
+C;Y142;X1;K"txp1"
 C;X2;K"XPFactor"
 C;X3;K"Profile"
 C;X4;K"TWN1"
@@ -2097,7 +2097,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y143;K"txp2"
+C;Y143;X1;K"txp2"
 C;X2;K"XPFactor"
 C;X3;K"Profile"
 C;X4;K"TWN2"
@@ -2112,7 +2112,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y144;K"txp3"
+C;Y144;X1;K"txp3"
 C;X2;K"XPFactor"
 C;X3;K"Profile"
 C;X4;K"TWN3"
@@ -2127,7 +2127,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y145;K"txp4"
+C;Y145;X1;K"txp4"
 C;X2;K"XPFactor"
 C;X3;K"Profile"
 C;X4;K"TWN4"
@@ -2142,7 +2142,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y146;K"txp5"
+C;Y146;X1;K"txp5"
 C;X2;K"XPFactor"
 C;X3;K"Profile"
 C;X4;K"TWN5"
@@ -2157,7 +2157,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y147;K"txp6"
+C;Y147;X1;K"txp6"
 C;X2;K"XPFactor"
 C;X3;K"Profile"
 C;X4;K"TWN6"
@@ -2172,7 +2172,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y148;K"txp7"
+C;Y148;X1;K"txp7"
 C;X2;K"XPFactor"
 C;X3;K"Profile"
 C;X4;K"TWN7"
@@ -2187,7 +2187,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y149;K"txp8"
+C;Y149;X1;K"txp8"
 C;X2;K"XPFactor"
 C;X3;K"Profile"
 C;X4;K"TWN8"
@@ -2202,7 +2202,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y150;K"txp9"
+C;Y150;X1;K"txp9"
 C;X2;K"XPFactor"
 C;X3;K"Profile"
 C;X4;K"TWN9"
@@ -2217,7 +2217,7 @@ C;X14;K100
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y151;K"eqnh"
+C;Y151;X1;K"eqnh"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K"HERO"
@@ -2231,7 +2231,7 @@ C;X14;K"TTDesc"
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y152;K"eqna"
+C;Y152;X1;K"eqna"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K"TALT"
@@ -2245,7 +2245,7 @@ C;X14;K"TTDesc"
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y153;K"eqn1"
+C;Y153;X1;K"eqn1"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K"TWN1"
@@ -2259,7 +2259,7 @@ C;X14;K"TTDesc"
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y154;K"eqn2"
+C;Y154;X1;K"eqn2"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K"TWN2"
@@ -2273,7 +2273,7 @@ C;X14;K"TTDesc"
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y155;K"eqn3"
+C;Y155;X1;K"eqn3"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K"TWN3"
@@ -2287,7 +2287,7 @@ C;X14;K"TTDesc"
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y156;K"eqn4"
+C;Y156;X1;K"eqn4"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K"TWN4"
@@ -2301,7 +2301,7 @@ C;X14;K"TTDesc"
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y157;K"eqn5"
+C;Y157;X1;K"eqn5"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K"TWN5"
@@ -2315,7 +2315,7 @@ C;X14;K"TTDesc"
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y158;K"eqn6"
+C;Y158;X1;K"eqn6"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K"TWN6"
@@ -2329,7 +2329,7 @@ C;X14;K"TTDesc"
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y159;K"eqn7"
+C;Y159;X1;K"eqn7"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K"TWN7"
@@ -2343,7 +2343,7 @@ C;X14;K"TTDesc"
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y160;K"eqn8"
+C;Y160;X1;K"eqn8"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K"TWN8"
@@ -2357,7 +2357,7 @@ C;X14;K"TTDesc"
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y161;K"eqn9"
+C;Y161;X1;K"eqn9"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K"TWN9"
@@ -2371,7 +2371,7 @@ C;X14;K"TTDesc"
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y162;K"mird"
+C;Y162;X1;K"mird"
 C;X2;K"MagicImmunesResistDamage"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2384,7 +2384,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y163;K"mirt"
+C;Y163;X1;K"mirt"
 C;X2;K"MagicImmunesResistThorns"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2397,7 +2397,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y164;K"mirl"
+C;Y164;X1;K"mirl"
 C;X2;K"MagicImmunesResistLeech"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2410,7 +2410,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y165;K"miru"
+C;Y165;X1;K"miru"
 C;X2;K"MagicImmunesResistUltimates"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2423,7 +2423,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y166;K"cyst"
+C;Y166;X1;K"cyst"
 C;X2;K"CycloneStasis"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2436,7 +2436,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y167;K"dcal"
+C;Y167;X1;K"dcal"
 C;X2;K"DepCheckAlias"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2449,7 +2449,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y168;K"mtcl"
+C;Y168;X1;K"mtcl"
 C;X2;K"MassTeleportCluster"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2462,7 +2462,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y169;K"dscl"
+C;Y169;X1;K"dscl"
 C;X2;K"DarkSummoningCluster"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2475,7 +2475,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y170;K"tpcl"
+C;Y170;X1;K"tpcl"
 C;X2;K"TownPortalCluster"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2488,7 +2488,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y171;K"arcl"
+C;Y171;X1;K"arcl"
 C;X2;K"AmuletOfRecallCluster"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2501,7 +2501,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y172;K"mlcl"
+C;Y172;X1;K"mlcl"
 C;X2;K"MorphLandClosest"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2514,7 +2514,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y173;K"madi"
+C;Y173;X1;K"madi"
 C;X2;K"MorphAlternateDisable"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2527,7 +2527,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y174;K"isdd"
+C;Y174;X1;K"isdd"
 C;X2;K"InvulnSummonDispelDamage"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2540,7 +2540,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y175;K"cdrp"
+C;Y175;X1;K"cdrp"
 C;X2;K"ConstructionDamageRefundPenalty"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2553,7 +2553,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y176;K"udrp"
+C;Y176;X1;K"udrp"
 C;X2;K"UpgradeDamageRefundPenalty"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2566,7 +2566,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y177;K"ambo"
+C;Y177;X1;K"ambo"
 C;X2;K"AllowMultiBounce"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2579,7 +2579,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y178;K"eima"
+C;Y178;X1;K"eima"
 C;X2;K"EnsnareIsMagic"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2592,7 +2592,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y179;K"wima"
+C;Y179;X1;K"wima"
 C;X2;K"WebIsMagic"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2605,7 +2605,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y180;K"igab"
+C;Y180;X1;K"igab"
 C;X2;K"IllusionsGetAttackBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2618,7 +2618,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y181;K"iasb"
+C;Y181;X1;K"iasb"
 C;X2;K"IllusionsGetAttackSpeedBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2631,7 +2631,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y182;K"igmb"
+C;Y182;X1;K"igmb"
 C;X2;K"IllusionsGetMoveSpeedBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2644,7 +2644,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y183;K"igdb"
+C;Y183;X1;K"igdb"
 C;X2;K"IllusionsGetDefenseBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2657,7 +2657,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y184;K"icrl"
+C;Y184;X1;K"icrl"
 C;X2;K"IllusionsCanRestoreLife"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2670,7 +2670,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y185;K"icrm"
+C;Y185;X1;K"icrm"
 C;X2;K"IllusionsCanRestoreMana"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2683,7 +2683,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y186;K"ibau"
+C;Y186;X1;K"ibau"
 C;X2;K"IllusionsBestowAuras"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2696,7 +2696,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y187;K"igau"
+C;Y187;X1;K"igau"
 C;X2;K"IllusionsGetAutocast"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2709,7 +2709,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y188;K"inba"
+C;Y188;X1;K"inba"
 C;X2;K"InvisibleUnitsBestowAuras"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2722,7 +2722,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y189;K"puba"
+C;Y189;X1;K"puba"
 C;X2;K"PolymorphedUnitsBestowAuras"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2735,7 +2735,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y190;K"buba"
+C;Y190;X1;K"buba"
 C;X2;K"BurrowedUnitsBestowAuras"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2748,7 +2748,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y191;K"auba"
+C;Y191;X1;K"auba"
 C;X2;K"AnimatedUnitsBestowAuras"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2761,7 +2761,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y192;K"fhba"
+C;Y192;X1;K"fhba"
 C;X2;K"FlyingHeroesBestowAuras"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2774,7 +2774,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y193;K"msbs"
+C;Y193;X1;K"msbs"
 C;X2;K"MoveSpeedBonusesStack"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2787,7 +2787,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y194;K"dueb"
+C;Y194;X1;K"dueb"
 C;X2;K"DrainUsesEtheralBonus"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2800,7 +2800,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y195;K"dtli"
+C;Y195;X1;K"dtli"
 C;X2;K"DrainTransfersLife"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2813,7 +2813,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y196;K"dtma"
+C;Y196;X1;K"dtma"
 C;X2;K"DrainTransfersMana"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2826,7 +2826,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y197;K"dgbl"
+C;Y197;X1;K"dgbl"
 C;X2;K"DrainGivesBonusLife"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2839,7 +2839,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y198;K"dgbm"
+C;Y198;X1;K"dgbm"
 C;X2;K"DrainGivesBonusMana"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2852,7 +2852,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y199;K"edba"
+C;Y199;X1;K"edba"
 C;X2;K"EtherealDamageBonusAlly"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2865,7 +2865,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y200;K"cdav"
+C;Y200;X1;K"cdav"
 C;X2;K"CanDeactivateAvatar"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2878,7 +2878,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y201;K"cdaf"
+C;Y201;X1;K"cdaf"
 C;X2;K"CanDeactivateAvengerForm"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2891,7 +2891,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y202;K"cdbs"
+C;Y202;X1;K"cdbs"
 C;X2;K"CanDeactivateBarkskin"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2904,7 +2904,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y203;K"cdbf"
+C;Y203;X1;K"cdbf"
 C;X2;K"CanDeactivateBearForm"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2917,7 +2917,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y204;K"cdbm"
+C;Y204;X1;K"cdbm"
 C;X2;K"CanDeactivateBladestorm"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2930,7 +2930,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y205;K"cdbu"
+C;Y205;X1;K"cdbu"
 C;X2;K"CanDeactivateBurrow"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2943,7 +2943,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y206;K"cdca"
+C;Y206;X1;K"cdca"
 C;X2;K"CanDeactivateCallToArms"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2956,7 +2956,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y207;K"cdcr"
+C;Y207;X1;K"cdcr"
 C;X2;K"CanDeactivateChemicalRage"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2969,7 +2969,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y208;K"cdcf"
+C;Y208;X1;K"cdcf"
 C;X2;K"CanDeactivateCorporealForm"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2982,7 +2982,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y209;K"cdde"
+C;Y209;X1;K"cdde"
 C;X2;K"CanDeactivateDefend"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -2995,7 +2995,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y210;K"cdds"
+C;Y210;X1;K"cdds"
 C;X2;K"CanDeactivateDivineShield"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3008,7 +3008,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y211;K"cdim"
+C;Y211;X1;K"cdim"
 C;X2;K"CanDeactivateImmolation"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3021,7 +3021,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y212;K"cdmf"
+C;Y212;X1;K"cdmf"
 C;X2;K"CanDeactivateManaFlare"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3034,7 +3034,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y213;K"cdms"
+C;Y213;X1;K"cdms"
 C;X2;K"CanDeactivateManaShield"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3047,7 +3047,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y214;K"cdme"
+C;Y214;X1;K"cdme"
 C;X2;K"CanDeactivateMetamorphosis"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3060,7 +3060,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y215;K"cdrf"
+C;Y215;X1;K"cdrf"
 C;X2;K"CanDeactivateRavenForm"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3073,7 +3073,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y216;K"cdrg"
+C;Y216;X1;K"cdrg"
 C;X2;K"CanDeactivateRoboGoblin"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3086,7 +3086,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y217;K"cdsf"
+C;Y217;X1;K"cdsf"
 C;X2;K"CanDeactivateStoneForm"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3099,7 +3099,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y218;K"cdsu"
+C;Y218;X1;K"cdsu"
 C;X2;K"CanDeactivateSubmerge"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3112,7 +3112,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y219;K"cdww"
+C;Y219;X1;K"cdww"
 C;X2;K"CanDeactivateWindWalk"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3125,7 +3125,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y220;K"ruco"
+C;Y220;X1;K"ruco"
 C;X2;K"RelativeUpgradeCost"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3138,7 +3138,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y221;K"dede"
+C;Y221;X1;K"dede"
 C;X2;K"DefendDeflection"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3151,7 +3151,7 @@ C;X12;K0
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y222;K"isar"
+C;Y222;X1;K"isar"
 C;X2;K"ItemSaleAggroRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3166,7 +3166,7 @@ C;X14;K1000000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y223;K"usar"
+C;Y223;X1;K"usar"
 C;X2;K"UnitSaleAggroRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3181,7 +3181,7 @@ C;X14;K1000000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y224;K"asar"
+C;Y224;X1;K"asar"
 C;X2;K"AbilSaleAggroRange"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3196,7 +3196,7 @@ C;X14;K1000000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y225;K"itsf"
+C;Y225;X1;K"itsf"
 C;X2;K"ItemShadowFile"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3209,7 +3209,7 @@ C;X11;K1
 C;X12;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y226;K"itso"
+C;Y226;X1;K"itso"
 C;X2;K"ItemShadowOffset"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3224,7 +3224,7 @@ C;X14;K1000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y227;K"itss"
+C;Y227;X1;K"itss"
 C;X2;K"ItemShadowSize"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3239,7 +3239,7 @@ C;X14;K1000000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y228;K"fbdr"
+C;Y228;X1;K"fbdr"
 C;X2;K"FadeBuffMinDuration"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3254,7 +3254,7 @@ C;X14;K1000000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y229;K"fbna"
+C;Y229;X1;K"fbna"
 C;X2;K"FadeBuffMinAlpha"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3269,7 +3269,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y230;K"fbxa"
+C;Y230;X1;K"fbxa"
 C;X2;K"FadeBuffMaxAlpha"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3284,7 +3284,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y231;K"cstc"
+C;Y231;X1;K"cstc"
 C;X2;K"CriticalStrikeTextColor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3299,7 +3299,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y232;K"csth"
+C;Y232;X1;K"csth"
 C;X2;K"CriticalStrikeTextHeight"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3314,7 +3314,7 @@ C;X14;K0.5
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y233;K"cstv"
+C;Y233;X1;K"cstv"
 C;X2;K"CriticalStrikeTextVelocity"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3329,7 +3329,7 @@ C;X14;K10
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y234;K"cstl"
+C;Y234;X1;K"cstl"
 C;X2;K"CriticalStrikeTextLifetime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3344,7 +3344,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y235;K"cstf"
+C;Y235;X1;K"cstf"
 C;X2;K"CriticalStrikeTextFadeStart"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3359,7 +3359,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y236;K"mbtc"
+C;Y236;X1;K"mbtc"
 C;X2;K"ManaBurnTextColor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3374,7 +3374,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y237;K"mbth"
+C;Y237;X1;K"mbth"
 C;X2;K"ManaBurnTextHeight"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3389,7 +3389,7 @@ C;X14;K0.5
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y238;K"mbtv"
+C;Y238;X1;K"mbtv"
 C;X2;K"ManaBurnTextVelocity"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3404,7 +3404,7 @@ C;X14;K10
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y239;K"mbtl"
+C;Y239;X1;K"mbtl"
 C;X2;K"ManaBurnTextLifetime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3419,7 +3419,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y240;K"mbtf"
+C;Y240;X1;K"mbtf"
 C;X2;K"ManaBurnTextFadeStart"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3434,7 +3434,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y241;K"mstc"
+C;Y241;X1;K"mstc"
 C;X2;K"MissTextColor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3449,7 +3449,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y242;K"msth"
+C;Y242;X1;K"msth"
 C;X2;K"MissTextHeight"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3464,7 +3464,7 @@ C;X14;K0.5
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y243;K"mstv"
+C;Y243;X1;K"mstv"
 C;X2;K"MissTextVelocity"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3479,7 +3479,7 @@ C;X14;K10
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y244;K"mstl"
+C;Y244;X1;K"mstl"
 C;X2;K"MissTextLifetime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3494,7 +3494,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y245;K"mstf"
+C;Y245;X1;K"mstf"
 C;X2;K"MissTextFadeStart"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3509,7 +3509,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y246;K"sstc"
+C;Y246;X1;K"sstc"
 C;X2;K"ShadowStrikeTextColor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3524,7 +3524,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y247;K"ssth"
+C;Y247;X1;K"ssth"
 C;X2;K"ShadowStrikeTextHeight"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3539,7 +3539,7 @@ C;X14;K0.5
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y248;K"sstv"
+C;Y248;X1;K"sstv"
 C;X2;K"ShadowStrikeTextVelocity"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3554,7 +3554,7 @@ C;X14;K10
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y249;K"sstl"
+C;Y249;X1;K"sstl"
 C;X2;K"ShadowStrikeTextLifetime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3569,7 +3569,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y250;K"sstf"
+C;Y250;X1;K"sstf"
 C;X2;K"ShadowStrikeTextFadeStart"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3584,7 +3584,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y251;K"botc"
+C;Y251;X1;K"botc"
 C;X2;K"BountyTextColor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3599,7 +3599,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y252;K"both"
+C;Y252;X1;K"both"
 C;X2;K"BountyTextHeight"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3614,7 +3614,7 @@ C;X14;K0.5
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y253;K"botv"
+C;Y253;X1;K"botv"
 C;X2;K"BountyTextVelocity"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3629,7 +3629,7 @@ C;X14;K10
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y254;K"botl"
+C;Y254;X1;K"botl"
 C;X2;K"BountyTextLifetime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3644,7 +3644,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y255;K"botf"
+C;Y255;X1;K"botf"
 C;X2;K"BountyTextFadeStart"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3659,7 +3659,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y256;K"lmtc"
+C;Y256;X1;K"lmtc"
 C;X2;K"LumberTextColor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3674,7 +3674,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y257;K"lmth"
+C;Y257;X1;K"lmth"
 C;X2;K"LumberTextHeight"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3689,7 +3689,7 @@ C;X14;K0.5
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y258;K"lmtv"
+C;Y258;X1;K"lmtv"
 C;X2;K"LumberTextVelocity"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3704,7 +3704,7 @@ C;X14;K10
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y259;K"lmtl"
+C;Y259;X1;K"lmtl"
 C;X2;K"LumberTextLifetime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3719,7 +3719,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y260;K"lmtf"
+C;Y260;X1;K"lmtf"
 C;X2;K"LumberTextFadeStart"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3734,7 +3734,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y261;K"gdtc"
+C;Y261;X1;K"gdtc"
 C;X2;K"GoldTextColor"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3749,7 +3749,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y262;K"gdth"
+C;Y262;X1;K"gdth"
 C;X2;K"GoldTextHeight"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3764,7 +3764,7 @@ C;X14;K0.5
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y263;K"gdtv"
+C;Y263;X1;K"gdtv"
 C;X2;K"GoldTextVelocity"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3779,7 +3779,7 @@ C;X14;K10
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y264;K"gdtl"
+C;Y264;X1;K"gdtl"
 C;X2;K"GoldTextLifetime"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3794,7 +3794,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y265;K"gdtf"
+C;Y265;X1;K"gdtf"
 C;X2;K"GoldTextFadeStart"
 C;X3;K"Profile"
 C;X4;K"Misc"
@@ -3809,7 +3809,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y266;K"qito"
+C;Y266;X1;K"qito"
 C;X2;K"QuestIndicatorTimeout"
 C;X3;K"Profile"
 C;X4;K"QuestIndicatorTimeout"
@@ -3824,7 +3824,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y267;K"mrgx"
+C;Y267;X1;K"mrgx"
 C;X2;K"MeleeRangeMax"
 C;X3;K"Profile"
 C;X4;K"InfoPanel"
@@ -3839,7 +3839,7 @@ C;X14;K10000
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y268;K"atkf"
+C;Y268;X1;K"atkf"
 C;X2;K"AttackFast"
 C;X3;K"Profile"
 C;X4;K"InfoPanel"
@@ -3854,7 +3854,7 @@ C;X14;K100
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y269;K"atkn"
+C;Y269;X1;K"atkn"
 C;X2;K"AttackAverage"
 C;X3;K"Profile"
 C;X4;K"InfoPanel"
@@ -3869,7 +3869,7 @@ C;X14;K100
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y270;K"atks"
+C;Y270;X1;K"atks"
 C;X2;K"AttackSlow"
 C;X3;K"Profile"
 C;X4;K"InfoPanel"
@@ -3884,7 +3884,7 @@ C;X14;K100
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y271;K"akvs"
+C;Y271;X1;K"akvs"
 C;X2;K"AttackVerySlow"
 C;X3;K"Profile"
 C;X4;K"InfoPanel"
@@ -3899,7 +3899,7 @@ C;X14;K100
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y272;K"spdf"
+C;Y272;X1;K"spdf"
 C;X2;K"SpeedFast"
 C;X3;K"Profile"
 C;X4;K"InfoPanel"
@@ -3914,7 +3914,7 @@ C;X14;K522
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y273;K"spdn"
+C;Y273;X1;K"spdn"
 C;X2;K"SpeedAverage"
 C;X3;K"Profile"
 C;X4;K"InfoPanel"
@@ -3929,7 +3929,7 @@ C;X14;K522
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y274;K"spds"
+C;Y274;X1;K"spds"
 C;X2;K"SpeedSlow"
 C;X3;K"Profile"
 C;X4;K"InfoPanel"
@@ -3944,7 +3944,7 @@ C;X14;K522
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y275;K"spvs"
+C;Y275;X1;K"spvs"
 C;X2;K"SpeedVerySlow"
 C;X3;K"Profile"
 C;X4;K"InfoPanel"
@@ -3959,7 +3959,7 @@ C;X14;K522
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y276;K"iwzo"
+C;Y276;X1;K"iwzo"
 C;X2;K"ImageWalkableZOffset"
 C;X3;K"Profile"
 C;X4;K"SelectionCircle"
@@ -3974,7 +3974,7 @@ C;X14;K1000000
 C;X15;K0
 C;X16;K1
 C;X17;K0
-C;X1;Y277;K"crfd"
+C;Y277;X1;K"crfd"
 C;X2;K"ColorFriend"
 C;X3;K"Profile"
 C;X4;K"SelectionCircle"
@@ -3989,7 +3989,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y278;K"crem"
+C;Y278;X1;K"crem"
 C;X2;K"ColorEnemy"
 C;X3;K"Profile"
 C;X4;K"SelectionCircle"
@@ -4004,7 +4004,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y279;K"picr"
+C;Y279;X1;K"picr"
 C;X2;K"PingColor"
 C;X3;K"Profile"
 C;X4;K"PingColor"
@@ -4019,7 +4019,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y280;K"pacr"
+C;Y280;X1;K"pacr"
 C;X2;K"PingAttackColor"
 C;X3;K"Profile"
 C;X4;K"PingColor"
@@ -4034,7 +4034,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y281;K"pvcr"
+C;Y281;X1;K"pvcr"
 C;X2;K"PingAdvisorColor"
 C;X3;K"Profile"
 C;X4;K"PingColor"
@@ -4049,7 +4049,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y282;K"ppcr"
+C;Y282;X1;K"ppcr"
 C;X2;K"PingWaypointColor"
 C;X3;K"Profile"
 C;X4;K"PingColor"
@@ -4064,7 +4064,7 @@ C;X14;K255
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y283;K"ttna"
+C;Y283;X1;K"ttna"
 C;X2;K"ToolTipName"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4079,7 +4079,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y284;K"ttds"
+C;Y284;X1;K"ttds"
 C;X2;K"ToolTipDesc"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4094,7 +4094,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y285;K"ttcs"
+C;Y285;X1;K"ttcs"
 C;X2;K"ToolTipCost"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4109,7 +4109,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y286;K"cedb"
+C;Y286;X1;K"cedb"
 C;X2;K"ChatEditBar"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4124,7 +4124,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y287;K"cbnb"
+C;Y287;X1;K"cbnb"
 C;X2;K"CommandButtonNumber"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4139,7 +4139,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y288;K"wftm"
+C;Y288;X1;K"wftm"
 C;X2;K"WorldFrameTopMessage"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4154,7 +4154,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y289;K"wfum"
+C;Y289;X1;K"wfum"
 C;X2;K"WorldFrameUnitMessage"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4169,7 +4169,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y290;K"wfcm"
+C;Y290;X1;K"wfcm"
 C;X2;K"WorldFrameChatMessage"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4184,7 +4184,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y291;K"invy"
+C;Y291;X1;K"invy"
 C;X2;K"Inventory"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4199,7 +4199,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y292;K"ptst"
+C;Y292;X1;K"ptst"
 C;X2;K"PortraitStats"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4214,7 +4214,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y293;K"utpn"
+C;Y293;X1;K"utpn"
 C;X2;K"UnitTipPlayerName"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4229,7 +4229,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y294;K"utds"
+C;Y294;X1;K"utds"
 C;X2;K"UnitTipDesc"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4244,7 +4244,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y295;K"ssnn"
+C;Y295;X1;K"ssnn"
 C;X2;K"ScoreScreenNormal"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4259,7 +4259,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y296;K"ssnl"
+C;Y296;X1;K"ssnl"
 C;X2;K"ScoreScreenLarge"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4274,7 +4274,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y297;K"ssnt"
+C;Y297;X1;K"ssnt"
 C;X2;K"ScoreScreenTeam"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4289,7 +4289,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y298;K"wfmg"
+C;Y298;X1;K"wfmg"
 C;X2;K"WorldFrameMessage"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4304,7 +4304,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y299;K"ldbd"
+C;Y299;X1;K"ldbd"
 C;X2;K"LeaderBoard"
 C;X3;K"Profile"
 C;X4;K"FontHeights"
@@ -4319,7 +4319,7 @@ C;X14;K0.032
 C;X15;K1
 C;X16;K1
 C;X17;K0
-C;X1;Y300;K"caoa"
+C;Y300;X1;K"caoa"
 C;X2;K"LavaSpawnColor"
 C;X3;K"Profile"
 C;X4;K"Misc"

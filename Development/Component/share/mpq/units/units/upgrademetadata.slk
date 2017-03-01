@@ -1,6 +1,6 @@
 ID;PWXL;N;E
-B;X22;Y38;D0
-C;X1;Y1;K"ID"
+B;Y38;X22;D0
+C;Y1;X1;K"ID"
 C;X2;K"field"
 C;X3;K"slk"
 C;X4;K"index"
@@ -22,7 +22,7 @@ C;X19;K"maxVal"
 C;X20;K"forceNonNeg"
 C;X21;K"version"
 C;X22;K"section"
-C;X1;Y2;K"gnam"
+C;Y2;X1;K"gnam"
 C;X2;K"Name"
 C;X3;K"Profile"
 C;X4;K0
@@ -40,7 +40,7 @@ C;X17;K1
 C;X19;K"TTName"
 C;X20;K0
 C;X21;K1
-C;X1;Y3;K"gnsf"
+C;Y3;X1;K"gnsf"
 C;X2;K"EditorSuffix"
 C;X3;K"Profile"
 C;X4;K0
@@ -58,7 +58,7 @@ C;X17;K1
 C;X19;K50
 C;X20;K0
 C;X21;K1
-C;X1;Y4;K"grac"
+C;Y4;X1;K"grac"
 C;X2;K"race"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -75,7 +75,7 @@ C;X16;K0
 C;X17;K1
 C;X20;K0
 C;X21;K1
-C;X1;Y5;K"gtp1"
+C;Y5;X1;K"gtp1"
 C;X2;K"Tip"
 C;X3;K"Profile"
 C;X4;K0
@@ -93,7 +93,7 @@ C;X17;K1
 C;X19;K"TTDesc"
 C;X20;K0
 C;X21;K1
-C;X1;Y6;K"gub1"
+C;Y6;X1;K"gub1"
 C;X2;K"Ubertip"
 C;X3;K"Profile"
 C;X4;K0
@@ -111,7 +111,7 @@ C;X17;K1
 C;X19;K"TTUber"
 C;X20;K0
 C;X21;K1
-C;X1;Y7;K"ghk1"
+C;Y7;X1;K"ghk1"
 C;X2;K"Hotkey"
 C;X3;K"Profile"
 C;X4;K0
@@ -127,7 +127,7 @@ C;X16;K1
 C;X17;K1
 C;X20;K0
 C;X21;K1
-C;X1;Y8;K"gbpx"
+C;Y8;X1;K"gbpx"
 C;X2;K"Buttonpos"
 C;X3;K"Profile"
 C;X4;K0
@@ -145,7 +145,7 @@ C;X18;K0
 C;X19;K3
 C;X20;K0
 C;X21;K1
-C;X1;Y9;K"gbpy"
+C;Y9;X1;K"gbpy"
 C;X2;K"Buttonpos"
 C;X3;K"Profile"
 C;X4;K1
@@ -163,7 +163,7 @@ C;X18;K0
 C;X19;K2
 C;X20;K0
 C;X21;K1
-C;X1;Y10;K"gar1"
+C;Y10;X1;K"gar1"
 C;X2;K"Art"
 C;X3;K"Profile"
 C;X4;K0
@@ -182,7 +182,7 @@ C;X17;K1
 C;X19;K200
 C;X20;K0
 C;X21;K1
-C;X1;Y11;K"gcls"
+C;Y11;X1;K"gcls"
 C;X2;K"class"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -199,7 +199,7 @@ C;X17;K1
 C;X19;K50
 C;X20;K0
 C;X21;K1
-C;X1;Y12;K"glvl"
+C;Y12;X1;K"glvl"
 C;X2;K"maxlevel"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -218,7 +218,7 @@ C;X18;K1
 C;X19;K100
 C;X20;K0
 C;X21;K1
-C;X1;Y13;K"gglb"
+C;Y13;X1;K"gglb"
 C;X2;K"goldbase"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -236,7 +236,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y14;K"gglm"
+C;Y14;X1;K"gglm"
 C;X2;K"goldmod"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -254,7 +254,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y15;K"glmb"
+C;Y15;X1;K"glmb"
 C;X2;K"lumberbase"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -272,7 +272,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y16;K"glmm"
+C;Y16;X1;K"glmm"
 C;X2;K"lumbermod"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -290,7 +290,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y17;K"gtib"
+C;Y17;X1;K"gtib"
 C;X2;K"timebase"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -308,7 +308,7 @@ C;X18;K0
 C;X19;K300
 C;X20;K0
 C;X21;K1
-C;X1;Y18;K"gtim"
+C;Y18;X1;K"gtim"
 C;X2;K"timemod"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -326,7 +326,7 @@ C;X18;K0
 C;X19;K300
 C;X20;K0
 C;X21;K1
-C;X1;Y19;K"gef1"
+C;Y19;X1;K"gef1"
 C;X2;K"effect1"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -343,7 +343,7 @@ C;X16;K1
 C;X17;K1
 C;X20;K0
 C;X21;K1
-C;X1;Y20;K"gba1"
+C;Y20;X1;K"gba1"
 C;X2;K"base1"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -362,7 +362,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y21;K"gmo1"
+C;Y21;X1;K"gmo1"
 C;X2;K"mod1"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -381,7 +381,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y22;K"gco1"
+C;Y22;X1;K"gco1"
 C;X2;K"code1"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -400,7 +400,7 @@ C;X18;K0
 C;X19;K32
 C;X20;K0
 C;X21;K1
-C;X1;Y23;K"gef2"
+C;Y23;X1;K"gef2"
 C;X2;K"effect2"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -417,7 +417,7 @@ C;X16;K1
 C;X17;K1
 C;X20;K0
 C;X21;K1
-C;X1;Y24;K"gba2"
+C;Y24;X1;K"gba2"
 C;X2;K"base2"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -436,7 +436,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y25;K"gmo2"
+C;Y25;X1;K"gmo2"
 C;X2;K"mod2"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -455,7 +455,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y26;K"gco2"
+C;Y26;X1;K"gco2"
 C;X2;K"code2"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -474,7 +474,7 @@ C;X18;K0
 C;X19;K32
 C;X20;K0
 C;X21;K1
-C;X1;Y27;K"gef3"
+C;Y27;X1;K"gef3"
 C;X2;K"effect3"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -491,7 +491,7 @@ C;X16;K1
 C;X17;K1
 C;X20;K0
 C;X21;K1
-C;X1;Y28;K"gba3"
+C;Y28;X1;K"gba3"
 C;X2;K"base3"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -510,7 +510,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y29;K"gmo3"
+C;Y29;X1;K"gmo3"
 C;X2;K"mod3"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -529,7 +529,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y30;K"gco3"
+C;Y30;X1;K"gco3"
 C;X2;K"code3"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -548,7 +548,7 @@ C;X18;K0
 C;X19;K32
 C;X20;K0
 C;X21;K1
-C;X1;Y31;K"gef4"
+C;Y31;X1;K"gef4"
 C;X2;K"effect4"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -565,7 +565,7 @@ C;X16;K1
 C;X17;K1
 C;X20;K0
 C;X21;K1
-C;X1;Y32;K"gba4"
+C;Y32;X1;K"gba4"
 C;X2;K"base4"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -584,7 +584,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y33;K"gmo4"
+C;Y33;X1;K"gmo4"
 C;X2;K"mod4"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -603,7 +603,7 @@ C;X18;K0
 C;X19;K99999
 C;X20;K0
 C;X21;K1
-C;X1;Y34;K"gco4"
+C;Y34;X1;K"gco4"
 C;X2;K"code4"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -622,7 +622,7 @@ C;X18;K0
 C;X19;K32
 C;X20;K0
 C;X21;K1
-C;X1;Y35;K"ginh"
+C;Y35;X1;K"ginh"
 C;X2;K"inherit"
 C;X3;K"UpgradeData"
 C;X4;K-1
@@ -638,7 +638,7 @@ C;X16;K1
 C;X17;K0
 C;X20;K0
 C;X21;K1
-C;X1;Y36;K"greq"
+C;Y36;X1;K"greq"
 C;X2;K"Requires"
 C;X3;K"Profile"
 C;X4;K-1
@@ -654,7 +654,7 @@ C;X16;K1
 C;X17;K1
 C;X20;K0
 C;X21;K1
-C;X1;Y37;K"grqc"
+C;Y37;X1;K"grqc"
 C;X2;K"Requiresamount"
 C;X3;K"Profile"
 C;X4;K-1
@@ -670,7 +670,7 @@ C;X16;K0
 C;X17;K1
 C;X20;K0
 C;X21;K1
-C;X1;Y38;K"glob"
+C;Y38;X1;K"glob"
 C;X2;K"global"
 C;X3;K"UpgradeData"
 C;X4;K-1
