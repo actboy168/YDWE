@@ -140,6 +140,30 @@ function loader:initialize()
 		end
 		return stringify_slk(t, 'alias')
 	end)
+	virtual_mpq.watch('units\\abilitybuffdata.slk', function ()
+		local t = slk(io.load(root / 'units' / 'units' / 'abilitybuffdata.slk'), 'abilitybuffdata.slk')
+		local function insert(code, sort, race)
+			t[code] = {
+				code = code,
+				comments = 'YDWE',
+				isEffect = 0,
+				version = 1,
+				useInEditor = 1,
+				sort = sort,
+				race = race,
+				InBeta = 1
+			}
+		end
+		insert('Bdbl')
+		insert('Bdbm')
+		insert('BHtb')
+		insert('Bsta')
+		insert('Bdbb')
+		insert('BIpb')
+		insert('BIpd')
+		insert('Btlf')
+		return stringify_slk(t, 'alias')
+	end)
 	virtual_mpq.event(function(_, name)
 		log.info('OpenPathAsArchive', name)
 	end)
