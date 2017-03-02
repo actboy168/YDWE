@@ -94,7 +94,7 @@ Requires=unp1,ugrv
 [Ruex]
 Art=ReplaceableTextures\CommandButtons\BTNExhumeCorpses.blp
 Buttonpos=0,2
-Requires=unp1
+Requires=unp2
 
 [Rupm]
 Art=ReplaceableTextures\CommandButtons\BTNPackBeast.blp

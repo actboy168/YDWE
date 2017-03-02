@@ -27,7 +27,7 @@ Requires2=ofrt
 
 [Rwdm]
 Art=ReplaceableTextures\CommandButtons\BTNDrum.blp
-Buttonpos=2,2
+Buttonpos=1,2
 Requires=ofrt,ofor
 
 // Pillage (formerly salvage)
@@ -52,7 +52,7 @@ Buttonpos=0,2
 
 [Rovs]
 Art=ReplaceableTextures\CommandButtons\BTNEnvenomedSpear.blp
-Buttonpos=1,1
+Buttonpos=2,1
 Requires=ofrt
 
 [Rowd]
@@ -84,7 +84,7 @@ Requires=ostr,ofor
 
 [Rolf]
 Art=ReplaceableTextures\CommandButtons\BTNLiquidFire.blp
-Buttonpos=2,1
+Buttonpos=2,2
 Requires=ofrt,ovln
 
 [Ropm]

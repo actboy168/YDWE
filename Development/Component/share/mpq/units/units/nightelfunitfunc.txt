@@ -15,7 +15,6 @@ Buttonpos=3,0
 Missileart=Abilities\Weapons\AncientProtectorMissile\AncientProtectorMissile.mdl
 Missilearc=0.10
 Missilespeed=750
-MissileHoming=0,1
 BuildingSoundLabel=NightElfGrowingLoop
 LoopingSoundFadeIn=512
 LoopingSoundFadeOut=512

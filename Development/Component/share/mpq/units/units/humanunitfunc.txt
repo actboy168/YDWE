@@ -118,7 +118,7 @@ Specialart=Objects\Spawnmodels\Human\HCancelDeath\HCancelDeath.mdl
 [hdhw]
 Requires=hvlt
 Art=ReplaceableTextures\CommandButtons\BTNDragonHawk.blp
-Buttonpos=0,0
+Buttonpos=1,0
 Missileart=Abilities\Weapons\DragonHawkMissile\DragonHawkMissile.mdl
 Missilearc=0.15
 Missilespeed=1100
@@ -139,7 +139,7 @@ Buttonpos=0,0
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
 
 [hgra]
-Requires=hkee,hlum
+Requires=hcas,hlum
 Trains=hgry,hdhw
 Researches=Rhhb,Rhcd
 Art=ReplaceableTextures\CommandButtons\BTNGryphonAviary.blp
@@ -382,9 +382,8 @@ Missilespeed=1300
 Attachmentanimprops=medium
 
 [hgry]
-Requires=hcas
 Art=ReplaceableTextures\CommandButtons\BTNGryphonRider.blp
-Buttonpos=1,0
+Buttonpos=0,0
 Missileart=Abilities\Weapons\GryphonRiderMissile\GryphonRiderMissile.mdl
 Missilearc=0.15
 Missilespeed=1100
