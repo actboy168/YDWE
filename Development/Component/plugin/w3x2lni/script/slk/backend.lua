@@ -170,30 +170,34 @@ local function remove_unuse(w2l, slk)
     end
     if total_origin - unuse_origin > 0 then
         message('-report|4简化', ('保留的默认对象数: %d/%d'):format(total_origin - unuse_origin, total_origin))
-        report_list(slk, origin_list, 'unit', 5)
-        report_list(slk, origin_list, 'ability', 5)
-        report_list(slk, origin_list, 'item', 5)
-        report_list(slk, origin_list, 'buff', 1)
-        report_list(slk, origin_list, 'upgrade', 1)
-        report_list(slk, origin_list, 'destructable', 1)
-        report_list(slk, origin_list, 'doodad', 1)
+        report_list(slk, origin_list, 'unit', 10)
+        report_list(slk, origin_list, 'ability', 10)
+        report_list(slk, origin_list, 'item', 10)
+        report_list(slk, origin_list, 'buff', 10)
+        report_list(slk, origin_list, 'upgrade', 3)
+        report_list(slk, origin_list, 'destructable', 3)
+        report_list(slk, origin_list, 'doodad', 3)
     end
     if unuse_custom > 0 then
         message('-report|4简化', ('简化掉的自定义对象数: %d/%d'):format(unuse_custom, total_custom))
-        report_list(slk, custom_list, 'unit', 5)
-        report_list(slk, custom_list, 'ability', 5)
-        report_list(slk, custom_list, 'item', 5)
-        report_list(slk, custom_list, 'buff', 1)
-        report_list(slk, custom_list, 'upgrade', 1)
-        report_list(slk, custom_list, 'destructable', 1)
-        report_list(slk, custom_list, 'doodad', 1)
+        report_list(slk, custom_list, 'unit', 10)
+        report_list(slk, custom_list, 'ability', 10)
+        report_list(slk, custom_list, 'item', 10)
+        report_list(slk, custom_list, 'buff', 10)
+        report_list(slk, custom_list, 'upgrade', 3)
+        report_list(slk, custom_list, 'destructable', 3)
+        report_list(slk, custom_list, 'doodad', 3)
     end
 end
 
 local function to_slk(w2l, archive, slk)
     local report = { n = 0 }
     local object = {}
-    for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'destructable'} do
+    local slk_list = {'ability', 'buff', 'unit', 'item', 'upgrade', 'destructable'}
+    if w2l.config.slk_doodad then
+        slk_list[#slk_list+1] = 'doodad'
+    end
+    for _, type in ipairs(slk_list) do
         local data = slk[type]
         object[type] = {}
         for _, slk in ipairs(w2l.info.slk[type]) do

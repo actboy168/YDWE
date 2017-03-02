@@ -14,6 +14,8 @@ local prebuilt_metadata = require 'prebuilt.prebuilt_metadata'
 local prebuilt_keydata = require 'prebuilt.prebuilt_keydata'
 local prebuilt_search = require 'prebuilt.prebuilt_search'
 local prebuilt_miscnames = require 'prebuilt.prebuilt_miscnames'
+local w3xparser = require 'w3xparser'
+local slk = w3xparser.slk
 
 w2l:initialize()
 
@@ -66,6 +68,50 @@ local function prebuilt_typedefine(w2l)
     io.save(w2l.defined / 'typedefine.ini', table.concat(f, '\r\n'))
 end
 
+local function insert_buff(t, code, sort, race)
+	t[code] = {
+		code = code,
+		comments = 'YDWE',
+		isEffect = 0,
+		version = 1,
+		useInEditor = 1,
+		sort = sort,
+		race = race,
+		InBeta = 1
+	}
+end
+
+local function build_slk()
+	local hook
+	function w2l:parse_slk(buf)
+		if hook then
+			local r = slk(buf)
+			hook(r)
+			hook = nil
+			return r
+		end
+		return slk(buf)
+	end
+	local ar = archive(w2l.mpq)
+	local slk = w2l:frontend_slk(function(name)
+		if name == 'units\\abilitybuffdata.slk' then
+			function hook(t)
+				insert_buff(t, 'Bdbl', 'hero', 'human') 
+				insert_buff(t, 'Bdbm', 'hero', 'human')
+				insert_buff(t, 'BHtb', 'unit', 'other')
+				insert_buff(t, 'Bsta', 'unit', 'orc')
+				insert_buff(t, 'Bdbb', 'hero', 'human')
+				insert_buff(t, 'BIpb', 'item', 'other')
+				insert_buff(t, 'BIpd', 'item', 'other')
+				insert_buff(t, 'Btlf', 'unit', 'other')
+			end
+		end
+		return ar:get(name)
+	end)
+	w2l:frontend_misc(ar, slk)
+	return slk
+end
+
 local function set_config()
     local config = w2l.config
     -- 转换后的目标格式(lni, obj, slk)
@@ -102,12 +148,7 @@ local function main()
     prebuilt_keydata(w2l)
     prebuilt_search(w2l)
 
-    -- 生成模板lni
-    local ar = archive(w2l.mpq)
-    local slk = w2l:frontend_slk(function(name)
-        return ar:get(name)
-    end)
-    w2l:frontend_misc(ar, slk)
+	local slk = build_slk()
     message('正在生成default')
     for _, ttype in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
         local data = slk[ttype]

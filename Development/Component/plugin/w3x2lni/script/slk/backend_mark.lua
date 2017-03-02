@@ -205,10 +205,13 @@ local function mark_known_type2(slk, type, name)
         end
         return false
     end
-    if o._mark then
+    if not o._mark then
+        o._mark = current_root
+    end
+    if o._mark_child then
         return true
     end
-    o._mark = current_root
+    o._mark_child = true
     mark_list(slk, o, search[type])
     if o._code then
         mark_list(slk, o, search[o._code])

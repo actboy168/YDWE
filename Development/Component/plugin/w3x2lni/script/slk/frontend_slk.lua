@@ -47,16 +47,16 @@ local function slk_read_data(obj, key, meta, data)
         local t = {}
         if slk_type == 'doodad' then
             for i = 1, 10 do
-                t[i] = slk_to_type(type, data[('%s%02d'):format(key, i)]) or ''
+                t[i] = slk_to_type(type, data[('%s%02d'):format(meta.field, i)]) or ''
             end
         else
             for i = 1, 4 do
-                t[i] = slk_to_type(type, data[key..i]) or ''
+                t[i] = slk_to_type(type, data[meta.field..i]) or ''
             end
         end
         obj[key] = t
     else
-        obj[key] = slk_to_type(meta.type, data[key])
+        obj[key] = slk_to_type(meta.type, data[meta.field])
     end
 end
 
@@ -198,7 +198,6 @@ local function txt_set_level(txt)
 end
 
 return function(w2l_, loader)
-    -- TODO: SLK的key不能无视大小写
     w2l = w2l_
     metadata = w2l:metadata()
     keydata = w2l:keydata()

@@ -135,12 +135,16 @@ function mt:refresh_wts(wts)
     return table.concat(lines, '\r\n\r\n')
 end
 
+local function get_exepath()
+    return fs.path(uni.a2u(package.cpath:sub(1, (package.cpath:find(';') or 0)-6))):remove_filename():remove_filename()
+end
+
 function mt:initialize(root)
     if self.initialized then
         return
     end
     self.initialized = true
-    self.root = root or fs.path(uni.a2u(arg[0])):remove_filename()
+    self.root = root or get_exepath()
     self.template = self.root / 'template'
     self.mpq = self.root / 'script' / 'mpq'
     self.prebuilt = self.root / 'script' / 'prebuilt'

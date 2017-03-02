@@ -39,14 +39,14 @@ end
 
 local function is_enable(meta, type)
     if type == 'unit' then
-        if meta.usehero == 1 or meta.useunit == 1 or meta.usebuilding == 1 or meta.usecreep == 1 then
+        if meta.useHero == 1 or meta.useUnit == 1 or meta.useBuilding == 1 or meta.useCreep == 1 then
             return true
         else
             return false
         end
     end
     if type == 'item' then
-        if meta['useitem'] == 1 then
+        if meta.useItem == 1 then
             return true
         else
             return false
@@ -57,14 +57,15 @@ end
 
 local function create_keydata(w2l, type, keydata)
     local metadata = w2l:parse_slk(io.load(w2l.mpq / w2l.info.metadata[type]))
+    metadata.Ytip = nil
     for id, meta in pairs(metadata) do
-        if is_enable(meta, type) and not meta.usespecific or meta.section then
+        if is_enable(meta, type) and not meta.useSpecific or meta.section then
             local key = get_key(w2l, type, id)
             local filename = meta.slk:lower()
             if filename == 'profile' then
                 filename = type
             else
-                filename = 'units\\' .. meta.slk:lower() .. '.slk'
+                filename = 'units\\' .. filename .. '.slk'
                 if type == 'doodad' then
                     filename = 'doodads\\doodads.slk'
                 end

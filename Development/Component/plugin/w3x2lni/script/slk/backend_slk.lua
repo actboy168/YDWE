@@ -94,7 +94,9 @@ local slk_keys = {
     ['units\\unitweapons.slk']      = {
         'unitWeapID','acquire','atkType1','atkType2','backSw1','backSw2','castbsw','castpt','cool1','cool2','damageLoss1','damageLoss2','dice1','dice2','dmgplus1','dmgplus2','dmgpt1','dmgpt2','dmgUp1','dmgUp2','Farea1','Farea2','Harea1','Harea2','Hfact1','Hfact2','impactSwimZ','impactZ','launchSwimZ','launchX','launchY','launchZ','minRange','Qarea1','Qarea2','Qfact1','Qfact2','rangeN1','rangeN2','RngBuff1','RngBuff2','showUI1','showUI2','sides1','sides2','spillDist1','spillDist2','spillRadius1','spillRadius2','splashTargs1','splashTargs2','targCount1','targCount2','targs1','targs2','weapsOn','weapTp1','weapTp2','weapType1','weapType2',
     },
-    --['doodads\\doodads.slk']        = 'doodID',
+    ['doodads\\doodads.slk']        = {
+        'doodID','file','Name','doodClass','soundLoop','selSize','defScale','minScale','maxScale','maxPitch','maxRoll','visRadius','walkable','numVar','floats','shadow','showInFog','animInFog','fixedRot','pathTex','showInMM','useMMColor','MMRed','MMGreen','MMBlue','vertR01','vertG01','vertB01','vertR02','vertG02','vertB02','vertR03','vertG03','vertB03','vertR04','vertG04','vertB04','vertR05','vertG05','vertB05','vertR06','vertG06','vertB06','vertR07','vertG07','vertB07','vertR08','vertG08','vertB08','vertR09','vertG09','vertB09','vertR10','vertG10','vertB10',
+    },
 }
 
 local function add_end()
@@ -133,6 +135,7 @@ local function add_values(names, skeys, slk_name)
                 or slk_name == 'units\\unitbalance.slk' and (key == 'Primary' or key == 'preventPlace' or key == 'requirePlace')
                 or slk_name == 'units\\unitui.slk' and key == 'file'
                 or slk_name == 'units\\destructabledata.slk' and key == 'texFile'
+                or slk_name == 'units\\abilitydata.slk' and (key == 'targs1' or key == 'targs2' or key == 'targs3' or key == 'targs4')
             then
                 add(x, y+1, '_')
             elseif slk_name == 'units\\upgradedata.slk' and key == 'used' then

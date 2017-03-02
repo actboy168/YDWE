@@ -112,14 +112,14 @@ end
 
 local function is_enable(meta, type)
     if type == 'unit' then
-        if meta.usehero == 1 or meta.useunit == 1 or meta.usebuilding == 1 or meta.usecreep == 1 then
+        if meta.useHero == 1 or meta.useUnit == 1 or meta.useBuilding == 1 or meta.useCreep == 1 then
             return true
         else
             return false
         end
     end
     if type == 'item' then
-        if meta['useitem'] == 1 then
+        if meta.useItem == 1 then
             return true
         else
             return false
@@ -133,7 +133,7 @@ local function create_search(w2l, type, search)
     local metadata = w2l:parse_slk(io.load(w2l.mpq / w2l.info.metadata[type]))
     for id, meta in pairs(metadata) do
         if is_enable(meta, type) then
-            local objs = meta.usespecific or meta.section
+            local objs = meta.useSpecific or meta.section
             if objs then
                 for name in objs:gmatch '%w+' do
                     local code = get_codemapped(w2l, name)
@@ -149,7 +149,9 @@ local function create_search(w2l, type, search)
                 end
             else
                 local key = get_key(w2l, type, id)
-                search[type][key] = enable_type[meta.type]
+                if key then
+                    search[type][key] = enable_type[meta.type]
+                end
             end
         end
     end
