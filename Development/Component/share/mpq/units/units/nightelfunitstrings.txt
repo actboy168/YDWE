@@ -57,7 +57,6 @@ Name=被缠绕的金矿
 Tip=缠绕金矿( |cffffcc00G|r)
 Ubertip="冒出一些根须缠绕在金矿上，使得小精灵能采集资源。"
 
-
 [ewsp]
 Name=小精灵
 Hotkey=W
@@ -121,7 +120,7 @@ Ubertip="灵活的远程攻击单位，能学习到哨兵和月刃技能。|n|n|
 Name=弓箭手
 Hotkey=A
 Tip=训练弓箭手(|cffffcc00A|r)
-Ubertip="基本的远程攻击单位。拥有艾鲁尼之优雅技能。能学习到射击术，硬弓和驯服角鹰兽这三项技能。|n|n|cffffcc00能攻击地面和空中单位。|r "
+Ubertip="基本的远程攻击单位。能学习到射击术，硬弓和驯服角鹰兽这三项技能。|n|n|cffffcc00能攻击地面和空中单位。|r"
 
 [edry]
 Name=树妖
@@ -174,6 +173,12 @@ Hotkey=A
 Tip=建造长者祭坛(|cffffcc00A|r)
 Ubertip="能召唤新的英雄和复活阵亡的英雄。"
 
+[eden]
+Name=奇迹古树
+Hotkey=D
+Tip=建造奇迹古树(|cffffcc00D|r)
+Ubertip="建造出一个能出售物品的商店。商店内的物品是由你的生命之树的升级情况(生命之树, 远古之树, 永恒之树)和你所拥有的建筑物种类而定的。|n|n|cffffcc00能攻击地面单位。|r"
+
 [eaoe]
 Name=知识古树
 Hotkey=L
@@ -191,14 +196,6 @@ Name=风之古树
 Hotkey=W
 Tip=建造风之古树(|cffffcc00W|r)
 Ubertip="能生产出：角鹰兽，猛禽德鲁伊和精灵龙。|n还包括对角鹰兽和猛禽德鲁伊的各类升级。比如猛禽之痕和训练角鹰兽。|n|n|cffffcc00能攻击地面单位。|r"
-
-
-[eden]
-Name=奇迹古树
-Hotkey=D
-Tip=建造奇迹古树(|cffffcc00d|r)
-Ubertip="建造一个可以出售物品的商店。物品的类型取决于你的生命之树的升级情况(生命之树,远古之树,永恒之树)以及你当前所拥有的建筑物种类。|n|n|cffffcc00能攻击地面单位。|r"
-
 
 [edos]
 Name=奇美拉栖木

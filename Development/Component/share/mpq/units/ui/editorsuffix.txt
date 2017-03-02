@@ -276,3 +276,7 @@ EditorSuffix=(中立敌对 1)
 EditorSuffix=(中立敌对)
 [ACsi]
 EditorSuffix=(中立敌对)
+[nbal]
+EditorSuffix=(标准)
+[nba2]
+EditorSuffix=(召唤的)
