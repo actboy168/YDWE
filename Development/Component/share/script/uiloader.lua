@@ -1,8 +1,10 @@
 require "registry"
 require "util"
+local stringify_slk = require 'stringify_slk'
 local ui = require 'ui-builder.init'
 local txt = (require 'w3xparser').txt
 local ini = (require 'w3xparser').ini
+local slk = (require 'w3xparser').slk
 local lni = require 'lni-c'
 local info = lni(io.load(fs.ydwe_path() / 'plugin' / 'w3x2lni' / 'script' / 'info.ini'))
 
@@ -84,7 +86,7 @@ function loader:worldeditstrings()
 	return table.concat(str, '\n')
 end
 
-local function stringify(t)
+local function stringify_txt(t)
 	local buf = {}
 	for id, o in pairs(t) do
 		buf[#buf+1] = ('[%s]'):format(id)
@@ -111,7 +113,7 @@ function loader:initialize()
 			virtual_mpq.watch(filename, function () return '' end)
 		end
 	end
-	virtual_mpq.watch(info.txt[1], function (name)
+	virtual_mpq.watch(info.txt[1], function ()
 		local t = {}
 		for _, filename in pairs(info.txt) do
 			txt(io.load(root / 'units' / filename), filename, t)
@@ -129,7 +131,14 @@ function loader:initialize()
 				end
 			end
 		end
-		return stringify(t)
+		return stringify_txt(t)
+	end)
+	virtual_mpq.watch('units\\abilitydata.slk', function ()
+		local t = slk(io.load(root / 'units' / 'units' / 'abilitydata.slk'), 'abilitydata.slk')
+		for _, o in pairs(t) do
+			o.useInEditor = 1
+		end
+		return stringify_slk(t, 'alias')
 	end)
 	virtual_mpq.event(function(_, name)
 		log.info('OpenPathAsArchive', name)
