@@ -6,6 +6,8 @@
 #include <base/util/buffer.h>
 #include <base/util/unicode.h>
 #include <base/path/helper.h>
+#include <base/warcraft3/war3_searcher.h>
+#include <base/warcraft3/version.h>
 #include <deque>	
 #include "game_status.h"
 #include "war3_packet.h"
@@ -220,11 +222,13 @@ namespace auto_enter { namespace game_status {
 
 	void initialize(HMODULE gamedll)
 	{
-		real_connect  = base::hook::iat(gamedll, "wsock32.dll", (const char*)4 /*"connect"*/,  (uintptr_t)fake_connect);
-		real_recvfrom = base::hook::iat(gamedll, "wsock32.dll", (const char*)17/*"recvfrom"*/, (uintptr_t)fake_recvfrom);
-		real_sendto   = base::hook::iat(gamedll, "wsock32.dll", (const char*)20/*"sendto"*/,   (uintptr_t)fake_sendto);
+		auto& s = base::warcraft3::get_war3_searcher();
+		const char* dllname = s.get_version() >= base::warcraft3::version_127a? "ws2_32.dll" : "wsock32.dll";
+		real_connect = base::hook::iat(gamedll, dllname, (const char*)4 /*"connect"*/, (uintptr_t)fake_connect);
+		real_recvfrom = base::hook::iat(gamedll, dllname, (const char*)17/*"recvfrom"*/, (uintptr_t)fake_recvfrom);
+		real_sendto = base::hook::iat(gamedll, dllname, (const char*)20/*"sendto"*/, (uintptr_t)fake_sendto);
 
-		real_sfile_open_archive    = base::hook::iat(gamedll, "Storm.dll", (const char*)266, (uintptr_t)fake_sfile_open_archive);
+		real_sfile_open_archive = base::hook::iat(gamedll, "Storm.dll", (const char*)266, (uintptr_t)fake_sfile_open_archive);
 		real_sfile_open_archive_ex = base::hook::iat(gamedll, "Storm.dll", (const char*)293, (uintptr_t)fake_sfile_open_archive_ex);
 	}
 }}
