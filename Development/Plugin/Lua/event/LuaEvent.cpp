@@ -123,7 +123,7 @@ namespace NYDWE {
 		if (lpCommandLine && std::regex_match(lpCommandLine, matcher, gRegexCommandLine))
 		{
 			fs::path currentWarcraftMap = base::path::get(base::path::DIR_EXE).remove_filename() / matcher.str(1);
-			LOGGING_TRACE(lg) << L"Executing map " << currentWarcraftMap.wstring();
+			LOGGING_TRACE(lg) << "Executing map " << currentWarcraftMap.wstring();
 
 			if (gIsInCompileProcess)
 			{
