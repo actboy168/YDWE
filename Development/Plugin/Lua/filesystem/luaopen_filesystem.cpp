@@ -417,6 +417,16 @@ namespace luafs {
 		FS_TRY_END;
 	}
 
+	static int last_write_time(lua_State* L)
+	{
+		FS_TRY;
+		const fs::path& p = path::to(L, 1);
+		fs::file_time_type time = fs::last_write_time(p);
+		lua_pushinteger(L, time.time_since_epoch().count());
+		return 1;
+		FS_TRY_END;
+	}
+	
 	static int get(lua_State* L)
 	{
 		FS_TRY;
@@ -476,6 +486,7 @@ int luaopen_filesystem(lua_State* L)
 		{ "copy_file", luafs::copy_file },
 		{ "absolute", luafs::absolute },
 		{ "canonical", luafs::canonical },
+		{ "last_write_time", luafs::last_write_time },
 		{ "get", luafs::get },
 		{ NULL, NULL }
 	};	

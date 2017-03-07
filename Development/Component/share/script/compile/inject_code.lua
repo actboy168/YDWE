@@ -103,7 +103,7 @@ end
 function inject_code:scan(config_dir)
 	local counter = 0
 	log.trace("Scanning for inject files in " .. config_dir:string())
-
+	local once = {}
 	-- 遍历目录
 	for full_path in config_dir:list_directory() do		
 		if fs.is_directory(full_path) then
@@ -147,31 +147,28 @@ function inject_code:scan(config_dir)
 			-- 插入全局表中（替换文件扩展名）
 			local substitution = full_path
 			substitution = substitution:replace_extension(fs.path(".j"))
-			local once = {}
-			for _, fname in ipairs(old_table) do
-				if self.old_table[fname] then
-					if not once[fname] then
+			local function insert(file, a, b)
+				for _, fname in ipairs(a) do
+					if b[fname] then
+						local unuse = file
 						log.warn('注入函数['..fname..']重复定义')
-						log.warn('	生效', self.old_table[fname])
-						log.warn('	失效', substitution)
-						once[fname] = true
+						if fs.last_write_time(file) > fs.last_write_time(b[fname]) then
+							unuse = b[fname]
+							b[fname] = file
+						end
+						if not once[fname] then
+							log.warn('注入函数['..fname..']重复定义')
+							log.warn('	生效', b[fname], fs.last_write_time(b[fname]))
+							log.warn('	失效', unuse, fs.last_write_time(unuse) )
+							once[fname] = true
+						end
+					else
+						b[fname] = file
 					end
-				else
-					self.old_table[fname] = substitution
 				end
 			end
-			for _, fname in ipairs(new_table) do
-				if self.new_table[fname] then
-					if not once[fname] then
-						log.warn('注入函数['..fname..']重复定义')
-						log.warn('	生效', self.new_table[fname])
-						log.warn('	失效', substitution)
-						once[fname] = true
-					end
-				else
-					self.new_table[fname] = substitution
-				end
-			end
+			insert(substitution, old_table, self.old_table)
+			insert(substitution, new_table, self.new_table)
 			counter = counter + 1
 		end
 	end
