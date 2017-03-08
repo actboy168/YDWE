@@ -95,7 +95,6 @@ namespace base { namespace ini {
 		bool error(const char* fmt, const Args& ... args)
 		{
 			throw exception(fmt, args...);
-			return false;
 		}
 
 		bool parse_comment()
@@ -146,7 +145,6 @@ namespace base { namespace ini {
 							return true;
 						}
 					}
-					return true;
 				case '\n':
 				case '\r':
 				case '\0':

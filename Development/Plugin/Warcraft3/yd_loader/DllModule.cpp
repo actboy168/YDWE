@@ -10,9 +10,7 @@
 #include <base/warcraft3/command_line.h>
 #include <base/win/file_version.h>
 #include <base/win/pe_reader.h>
-#include <slk/reader/IniReader.hpp>
-#include <slk/reader/IniReader.cpp>
-#include <slk/reader/CommonReader.cpp>
+#include <base/util/ini.h>
 #include <map>
 #include "auto_enter.h"
 #include "game_status.h"
@@ -214,11 +212,10 @@ void DllModule::LoadPlugins()
 	try {
 		fs::path plugin_path = ydwe_path / L"plugin" / L"warcraft3";
 
-		slk::IniTable table;
+		base::ini::table table;
 		try {
-			base::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<base::buffer>();
-			base::buffer_reader reader(buf);
-			slk::IniReader::Read(reader, table);
+			auto buf = base::file::read_stream(plugin_path / L"config.cfg").read<std::string>();
+			base::ini::read(table, buf.c_str());
 		}
 		catch(...) {
 		}
@@ -274,7 +271,7 @@ void DllModule::LoadPlugins()
 	}
 }
 
-void ResetConfig(slk::IniTable& table)
+void ResetConfig(base::ini::table& table)
 {
 	table["MapSave"]["Option"] = "0";
 	table["War3Patch"]["Option"] = "0";
@@ -348,16 +345,16 @@ void DllModule::Attach()
 	});
 
 	try {
-		slk::IniTable table;
+		base::ini::table table;
 		ResetConfig(table);
 
 		try {
-			base::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<base::buffer>();
-			base::buffer_reader reader(buf);
-			slk::IniReader::Read(reader, table);
-		} 
+			auto buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<std::string>();
+			base::ini::read(table, buf.c_str());
+		}
 		catch (...) {
 		}
+
 
 		IsFullWindowedMode      = "0" != table["MapTest"]["LaunchFullWindowed"];
 		IsLockingMouse          = "0" != table["MapTest"]["LaunchLockingMouse"];

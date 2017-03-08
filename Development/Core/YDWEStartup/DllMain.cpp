@@ -14,9 +14,7 @@
 #include <base/win/process.h>
 #include <base/warcraft3/directory.h>
 #include <base/util/format.h>	 
-#include <slk/reader/IniReader.hpp>
-#include <slk/reader/IniReader.cpp>
-#include <slk/reader/CommonReader.cpp>
+#include <base/util/ini.h>
 #include "Splash.h"
 
 #define _(str)  base::i18n::gettext(str).data()
@@ -57,10 +55,9 @@ static void ShowSplash(fs::path const& ydwe_path)
 	if (!fs::exists(bmp))
 	{
 		try {
-			slk::IniTable table;
-			base::buffer buf = base::file::read_stream(ydwe_path / L"share" / L"mpq" / L"units" / L"ui" / L"worldeditdata.txt").read<base::buffer>();
-			base::buffer_reader reader(buf);
-			slk::IniReader::Read(reader, table);
+			base::ini::table table;
+			auto buf = base::file::read_stream(ydwe_path / L"share" / L"mpq" / L"units" / L"ui" / L"worldeditdata.txt").read<std::string>();
+			base::ini::read(table, buf.c_str());
 
 			do {
 				fs::path blp = ydwe_path / L"share" / L"mpq" / L"units" / table["WorldEditArt"]["War3XLogo"];
