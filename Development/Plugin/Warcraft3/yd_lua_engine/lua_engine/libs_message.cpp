@@ -538,13 +538,15 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			init_keyboard(L);
 			lua_rawset(L, -3);
 
-			luaL_Reg func[] = {
-				{ "mouse", lmouse },
-				{ "button", lbutton },
-				{ "selection", lselection },
-				{ NULL, NULL },
-			};
-			luaL_setfuncs(L, func, 0);
+			{
+				luaL_Reg func[] = {
+					{ "mouse", lmouse },
+					{ "button", lbutton },
+					{ "selection", lselection },
+					{ NULL, NULL },
+				};
+				luaL_setfuncs(L, func, 0);
+			}
 
 			if (get_war3_searcher().get_version() >= version_124e)
 			{
