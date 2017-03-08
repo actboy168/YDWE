@@ -6,16 +6,7 @@
 #include <map>
 #include <string>
 #include <vector>
-
-#if defined(_MSC_VER)
-#	define foreach(VAL, COL) \
-	__pragma(warning(push)) \
-	__pragma(warning(disable: 4239)) \
-	for each (VAL in COL) \
-	__pragma(warning(pop))
-#else
-#	define foreach(VAL, COL) for (VAL : COL)
-#endif
+#include <base/util/foreach.h>
 
 namespace DuiLib
 {
