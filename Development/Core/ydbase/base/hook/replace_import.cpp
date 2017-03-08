@@ -1135,8 +1135,8 @@ namespace base { namespace hook {
 			CopyMemory(&clr, &der.clr, sizeof(clr));
 			clr.Flags &= 0xfffffffe;    // Clear the IL_ONLY flag.
 
-			DWORD dwProtect;
-			if (!VirtualProtectEx(hProcess, der.pclr, sizeof(clr), PAGE_READWRITE, &dwProtect)) {
+			DWORD dwProtect2;
+			if (!VirtualProtectEx(hProcess, der.pclr, sizeof(clr), PAGE_READWRITE, &dwProtect2)) {
 				DETOUR_TRACE(("VirtualProtectEx(clr) write failed: %d\n", GetLastError()));
 				return FALSE;
 			}
@@ -1146,7 +1146,7 @@ namespace base { namespace hook {
 				return FALSE;
 			}
 
-			if (!VirtualProtectEx(hProcess, der.pclr, sizeof(clr), dwProtect, &dwProtect)) {
+			if (!VirtualProtectEx(hProcess, der.pclr, sizeof(clr), dwProtect2, &dwProtect2)) {
 				DETOUR_TRACE(("VirtualProtectEx(clr) restore failed: %d\n", GetLastError()));
 				return FALSE;
 			}
