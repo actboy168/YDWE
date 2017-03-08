@@ -4,7 +4,7 @@
 #include <base/path/helper.h>
 #include <base/win/env_variable.h>
 #include <base/win/process.h>
-#include <slk/reader/IniReader.hpp>
+#include <base/util/ini.h>
 #include <base/warcraft3/directory.h>
 #include <base/warcraft3/command_line.h>
 #include <base/win/registry/key.h> 
@@ -81,14 +81,13 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		war3_path = war3_path / L"war3.exe";
 		fs::path inject_dll = ydwe_path / L"plugin" / L"warcraft3" / L"yd_loader.dll";
 
-		slk::IniTable table;
+		base::ini::table table;
 		table["MapTest"]["LaunchRenderingEngine"]   = "Direct3D 8";
 		table["MapTest"]["LaunchWindowed"] = "1";
 		table["MapTest"]["UserName"] = "";
 		try {
-			base::buffer buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<base::buffer>();
-			base::buffer_reader reader(buf);
-			slk::IniReader::Read(reader, table);
+			auto buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<std::string>();
+			base::ini::read(table, buf.c_str());
 		} 
 		catch (...) {
 		}

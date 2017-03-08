@@ -1,8 +1,7 @@
 #pragma once
 
 #include <DuiLib/UIlib.h>
-
-namespace slk { class IniTable; }
+#include <base/util/ini.h>
 
 class CMainWindow : public DuiLib::CFrameWindow, public DuiLib::INotifyUI
 {
@@ -24,17 +23,17 @@ public:
 	void EnableJassHelper(bool bEnable);
 	void Notify(DuiLib::TNotifyUI& msg);
 
-	void ResetConfig(slk::IniTable& table);
-	bool LoadConfig(slk::IniTable& table);
-	bool SaveConfig(slk::IniTable const& table);
-	void ConfigToUI(slk::IniTable& table);
-	void UIToConfig(slk::IniTable& table);
+	void ResetConfig(base::ini::table& table);
+	bool LoadConfig(base::ini::table& table);
+	bool SaveConfig(base::ini::table const& table);
+	void ConfigToUI(base::ini::table& table);
+	void UIToConfig(base::ini::table& table);
 	void InitOSHelpUI();
 	void DoneOSHelpUI();
 	void InitRegistryUI();
 	void DoneRegistryUI();	
-	void InitPatchUI(slk::IniTable& table);
-	void DonePatchUI(slk::IniTable& table);
+	void InitPatchUI(base::ini::table& table);
+	void DonePatchUI(base::ini::table& table);
 	void InitPluginUI();
 	void DonePluginUI();
 	void InitFontUI();

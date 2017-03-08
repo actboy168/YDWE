@@ -593,6 +593,9 @@
     <ClInclude Include="base\lua\guard.h">
       <Filter>base\lua</Filter>
     </ClInclude>
+    <ClInclude Include="base\util\ini.h">
+      <Filter>base\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

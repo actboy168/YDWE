@@ -1,9 +1,4 @@
 ﻿#include "MainWindow.h"
-#include <slk/reader/IniReader.hpp>
-#include <base/util/list_of.h>
-#include <slk/writer/IniWriter.hpp>
-#include <slk/reader/IniReader.cpp>
-#include <slk/reader/CommonReader.cpp>
 #include "Regedit.h"
 #include "Shortcuts.h"
 #include <base/warcraft3/directory.h>
@@ -15,6 +10,8 @@
 #include <base/win/version.h>
 #include <base/win/file_version.h>
 #include <base/win/font/utility.h>
+#include <base/util/list_of.h>
+#include <base/util/ini.h>
 
 std::wstring CComboUI_GetSelectText(DuiLib::CComboUI* pui)
 {
@@ -186,7 +183,7 @@ void CMainWindow::InitWindow()
 	m_pm.AddNotifier(this);
 }
 
-void CMainWindow::ResetConfig(slk::IniTable& table)
+void CMainWindow::ResetConfig(base::ini::table& table)
 {
 	table["MapSave"]["Option"] = "0";
 	table["War3Patch"]["Option"] = "0";
@@ -217,14 +214,13 @@ void CMainWindow::ResetConfig(slk::IniTable& table)
 	table["Font"]["FontSize"] = "12";
 }
 
-bool CMainWindow::LoadConfig(slk::IniTable& table)
+bool CMainWindow::LoadConfig(base::ini::table& table)
 {
 	try
 	{
 		ResetConfig(table);
-		base::buffer buf = base::file::read_stream(base::path::self().remove_filename() / L"EverConfig.cfg").read<base::buffer>();
-		base::buffer_reader reader(buf);
-		slk::IniReader::Read(reader, table);
+		auto buf = base::file::read_stream(base::path::self().remove_filename() / L"EverConfig.cfg").read<std::string>();
+		base::ini::read(table, buf.c_str());
 	}
 	catch (...)
 	{
@@ -234,11 +230,11 @@ bool CMainWindow::LoadConfig(slk::IniTable& table)
 	return true;
 }
 
-bool CMainWindow::SaveConfig(slk::IniTable const& table)
+bool CMainWindow::SaveConfig(base::ini::table const& table)
 {
 	try
 	{
-		base::file::write_stream(base::path::self().remove_filename() / L"EverConfig.cfg").write(slk::IniWriter::Write<base::buffer>(table));
+		base::file::write_stream(base::path::self().remove_filename() / L"EverConfig.cfg").write(base::ini::write(table));
 	}
 	catch (...)
 	{
@@ -248,7 +244,7 @@ bool CMainWindow::SaveConfig(slk::IniTable const& table)
 	return true;
 }
 
-void CMainWindow::ConfigToUI(slk::IniTable& table)
+void CMainWindow::ConfigToUI(base::ini::table& table)
 {
 	foreach(auto it, configAttribute)
 	{
@@ -294,7 +290,7 @@ void CMainWindow::ConfigToUI(slk::IniTable& table)
 	m_pm.SendNotify(m_pEnableJassHelper, DUI_MSGTYPE_SELECTCHANGED);
 }
 
-void CMainWindow::UIToConfig(slk::IniTable& table)
+void CMainWindow::UIToConfig(base::ini::table& table)
 {
 	foreach(auto it, configAttribute)
 	{
@@ -481,11 +477,10 @@ void CMainWindow::InitPluginUI()
 	try {
 		fs::path plugin_path = m_ydwe_path.parent_path() / L"plugin" / L"warcraft3";
 
-		slk::IniTable table;
+		base::ini::table table;
 		try {
-			base::buffer buf = base::file::read_stream(plugin_path / L"config.cfg").read<base::buffer>();
-			base::buffer_reader reader(buf);
-			slk::IniReader::Read(reader, table);	
+			auto buf = base::file::read_stream(plugin_path / L"config.cfg").read<std::string>();
+			base::ini::read(table, buf.c_str());	
 		}
 		catch(...) {
 		}
@@ -525,7 +520,7 @@ void CMainWindow::DonePluginUI()
 		return ;
 
 	try {
-		slk::IniTable table;
+		base::ini::table table;
 
 		for (int i = 0; i < m_pWar3PluginList->GetCount(); ++i) 
 		{
@@ -539,13 +534,13 @@ void CMainWindow::DonePluginUI()
 		}
 
 		fs::path plugin_path = m_ydwe_path.parent_path() / L"plugin" / L"warcraft3";
-		base::file::write_stream(plugin_path / L"config.cfg").write(slk::IniWriter::Write<base::buffer>(table));
+		base::file::write_stream(plugin_path / L"config.cfg").write(base::ini::write(table));
 	}
 	catch (...) {
 	}
 }
 
-void CMainWindow::InitPatchUI(slk::IniTable& table)
+void CMainWindow::InitPatchUI(base::ini::table& table)
 {
 	if (!m_pWar3PatchList)
 		return;
@@ -596,7 +591,7 @@ void CMainWindow::InitPatchUI(slk::IniTable& table)
 	}
 }
 
-void CMainWindow::DonePatchUI(slk::IniTable& table)
+void CMainWindow::DonePatchUI(base::ini::table& table)
 {
 	if (m_pWar3PatchList && m_controls["War3Patch_2"] && m_controls["War3Patch_2"]->IsSelected())
 	{
@@ -648,7 +643,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 	{
 		if (msg.sType == DUI_MSGTYPE_WINDOWINIT)
 		{
-			slk::IniTable table;
+			base::ini::table table;
 			if (!LoadConfig(table)) { ResetConfig(table); }
 			InitFontUI();
 			ConfigToUI(table);
@@ -719,7 +714,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 			std::wstring const& name = msg.pSender->GetName();
 			if (name == L"ok") 
 			{
-				slk::IniTable table;
+				base::ini::table table;
 				UIToConfig(table);
 				DoneRegistryUI();
 				DoneOSHelpUI();
@@ -737,7 +732,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 			}
 			else if (name == L"reset")
 			{
-				slk::IniTable table;
+				base::ini::table table;
 				ResetConfig(table);
 				table["MapTest"]["UserName"] = m_username;
 				table["MapTest"]["VirtualMpq"] = m_virtualmpq;
