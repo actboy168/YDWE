@@ -133,6 +133,54 @@ default = "Player00"
 type = string
 default = "EverguoIsHandsome"
 
+[YDWERPGBillingGetStatus]
+title = "11RPG计费 - 读取状态 [JAPI] [New!]"
+description = "11RPG计费 - 从${玩家}的中读取状态〖${状态名}〗"
+category = TC_YDSL
+returns = integer
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = string
+default = "EverguoIsHandsome"
+
+[YDWERPGBillingGetItem]
+title = "11RPG计费 - 读取道具 [JAPI] [New!]"
+description = "11RPG计费 - 从${玩家}的中读取道具〖${道具名}〗"
+category = TC_YDSL
+returns = integer
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = string
+default = "EverguoIsHandsome"
+
+[YDWERPGBillingHasStatus]
+title = "11RPG计费 - 存在状态 [JAPI] [New!]"
+description = "11RPG计费 - ${玩家}的中存在状态〖${状态名}〗"
+category = TC_YDSL
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = string
+default = "EverguoIsHandsome"
+
+[YDWERPGBillingHasItem]
+title = "11RPG计费 - 存在道具 [JAPI] [New!]"
+description = "11RPG计费 - 从${玩家}的中存在道具〖${道具名}〗"
+category = TC_YDSL
+returns = boolean
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = string
+default = "EverguoIsHandsome"
+
 [YDWEGetUnitAbilityState]
 title = "技能属性 [JAPI]"
 description = "${单位} 的 ${技能} 的 ${状态}"
