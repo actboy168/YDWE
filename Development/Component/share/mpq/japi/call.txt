@@ -109,7 +109,7 @@ default = "\"Name\""
 
 [YDWERecordGetI]
 title = "11RPG存档 - 获取 [JAPI]"
-description = "11RPG存档 - 从${玩家}的中读取〖${数据名}〗"
+description = "11RPG存档 - 读取${玩家}中的〖${数据名}〗"
 comment = "从玩家11RPG存档上获取数据，需要填入正确的数据名。"
 category = TC_YDSL
 returns = integer
@@ -122,7 +122,7 @@ default = "EverguoIsHandsome"
 
 [YDWERPGGetKey]
 title = "11RPG积分 - 读取 [JAPI]"
-description = "11RPG积分 - 从${玩家}的中读取〖${数据名}〗"
+description = "11RPG积分 - 读取${玩家}中的〖${数据名}〗"
 comment = "从11RPG积分上获取数据，需要填入正确的数据名。"
 category = TC_YDSL
 returns = integer
@@ -135,7 +135,7 @@ default = "EverguoIsHandsome"
 
 [YDWERPGBillingGetStatus]
 title = "11RPG计费 - 读取状态 [JAPI] [New!]"
-description = "11RPG计费 - 从${玩家}的中读取状态〖${状态名}〗"
+description = "11RPG计费 - 读取${玩家}中的状态〖${状态名}〗"
 category = TC_YDSL
 returns = integer
 [[.args]]
@@ -147,7 +147,7 @@ default = "EverguoIsHandsome"
 
 [YDWERPGBillingGetItem]
 title = "11RPG计费 - 读取道具 [JAPI] [New!]"
-description = "11RPG计费 - 从${玩家}的中读取道具〖${道具名}〗"
+description = "11RPG计费 - 读取${玩家}中的道具〖${道具名}〗"
 category = TC_YDSL
 returns = integer
 [[.args]]
@@ -159,7 +159,7 @@ default = "EverguoIsHandsome"
 
 [YDWERPGBillingHasStatus]
 title = "11RPG计费 - 存在状态 [JAPI] [New!]"
-description = "11RPG计费 - ${玩家}的中存在状态〖${状态名}〗"
+description = "11RPG计费 - ${玩家}中存在状态〖${状态名}〗"
 category = TC_YDSL
 returns = boolean
 [[.args]]
@@ -171,7 +171,7 @@ default = "EverguoIsHandsome"
 
 [YDWERPGBillingHasItem]
 title = "11RPG计费 - 存在道具 [JAPI] [New!]"
-description = "11RPG计费 - 从${玩家}的中存在道具〖${道具名}〗"
+description = "11RPG计费 - ${玩家}中存在道具〖${道具名}〗"
 category = TC_YDSL
 returns = boolean
 [[.args]]
