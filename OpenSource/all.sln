@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "zlib\build\zlib.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFmpq", "SFmpq\project\SFmpq.vcxproj", "{9FD838AC-A5A2-4A24-8166-105BA0D8A973}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StormLib_dll", "StormLib\Current\StormLib_dll.vcxproj", "{CB385198-50B1-4CF4-883B-11F042DED6AA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StormLib_dll", "StormLib\StormLib_dll.vcxproj", "{CB385198-50B1-4CF4-883B-11F042DED6AA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "minizip", "minizip\project\minizip.vcxproj", "{2C90064D-9DE4-45AE-8D09-E6F18BDCD4C1}"
 	ProjectSection(ProjectDependencies) = postProject
