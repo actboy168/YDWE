@@ -6,10 +6,6 @@ require "filesystem"
 fs.__ydwe_path = fs.get(fs.DIR_MODULE):remove_filename():remove_filename()
 log.debug('ydwe path ' .. fs.__ydwe_path:string())
 
--- 根据ydweworldedit.exe的路径计算
-fs.__war3_path = fs.get(fs.DIR_EXE):remove_filename()
-log.debug('war3 path ' .. fs.__war3_path:string())
-
 
 function fs.ydwe_path()
 	return fs.__ydwe_path
