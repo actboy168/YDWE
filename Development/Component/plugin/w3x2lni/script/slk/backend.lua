@@ -338,6 +338,14 @@ return function (w2l, archive, slk)
     end
     progress(0.96)
 
+    if w2l.config.target_format == 'lni' then
+        local buf = archive:get 'war3map.imp'
+        if buf then
+            archive:set('war3map.imp', false)
+            archive:set('war3map.imp.ini', w2l:backend_imp(archive, buf))
+        end
+    end
+
     message('重新生成字符串...')
     local content = w2l:refresh_wts(slk.wts)
     if #content > 0 then

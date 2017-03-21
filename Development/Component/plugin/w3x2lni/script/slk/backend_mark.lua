@@ -268,7 +268,7 @@ local function mark_jass(slk, list, flag)
             mark(slk, name)
         end
     end
-    local maptile = slk.w3i['地形']['地形类型']
+    local maptile = slk.w3i and slk.w3i['地形']['地形类型'] or '*'
     for _, obj in pairs(slk.unit) do
         -- 随机建筑
         if flag.building and obj.isbldg == 1 and obj.nbrandom == 1 then

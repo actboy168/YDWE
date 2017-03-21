@@ -39,7 +39,7 @@ local function search_mpq(map)
     local total = map:number_of_files()
     
     for i, searcher in ipairs(searchers) do
-        searcher(map)
+        pcall(searcher, map)
         if map.read_count == total then
             return true
         end
@@ -68,7 +68,7 @@ local function search_dir(map)
     end)
 end
 
-local function save_imp(w2l, output_ar)
+local function save_imp(w2l, output_ar, imp_buf)
     local impignore = {}
     for _, name in ipairs(w2l.info.pack.impignore) do
         impignore[name] = true
@@ -77,6 +77,15 @@ local function save_imp(w2l, output_ar)
     for name, buf in pairs(output_ar) do
         if buf and not impignore[name] then
             imp[#imp+1] = name
+        end
+    end
+    if imp_buf then
+        local imp_lni = w2l:parse_lni(imp_buf)
+        for _, name in ipairs(imp_lni.import) do
+            local name = name:lower()
+            if impignore[name] then
+                imp[#imp+1] = name
+            end
         end
     end
     table.sort(imp)
@@ -119,8 +128,13 @@ return function (w2l, output_ar, w3i, input_ar)
     output_ar:set('(signature)', false)
     output_ar:set('(attributes)', false)
 
+    local imp = input_ar:get 'war3map.imp.ini'
+    if w2l.config.target_format ~= 'lni' then
+        output_ar:set('war3map.imp.ini', false)
+    end
+
     if not w2l.config.remove_we_only and output_ar:get_type() == 'mpq' then
-        save_imp(w2l, output_ar)
+        save_imp(w2l, output_ar, imp)
     end
 
     if not output_ar:save(w3i, w2l.config.remove_we_only) then

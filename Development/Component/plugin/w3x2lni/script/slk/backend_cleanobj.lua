@@ -6,6 +6,7 @@ local keydata
 local is_remove_same
 local w2l
 local default
+local metadata
 
 local function sortpairs(t)
     local sort = {}
@@ -26,7 +27,7 @@ local function sortpairs(t)
     end
 end
 
-local function remove_same(key, data, default, obj, ttype)
+local function remove_same_as_slk(key, data, default, obj, ttype)
     local dest = default[key]
     if type(dest) == 'table' then
         local new_data = {}
@@ -55,13 +56,61 @@ local function remove_same(key, data, default, obj, ttype)
     end
 end
 
+local function remove_same_as_txt(key, data, default, obj, ttype)
+    local dest = default[key]
+    if type(dest) == 'table' then
+        local new_data = {}
+        local last
+        for i = 1, #data do
+            local default
+            if i > #dest then
+                default = last
+            else
+                default = dest[i]
+            end
+            if data[i] ~= default then
+                new_data[i] = data[i]
+            end
+            last = data[i]
+        end
+        if not next(new_data) then
+            obj[key] = new_data
+            return
+        end
+        if is_remove_same then
+            obj[key] = new_data
+        end
+    else
+        if data == dest then
+            obj[key] = nil
+        end
+    end
+end
+
 local function clean_obj(name, obj, type, default)
     local parent = obj._parent
     local max_level = obj._max_level
     local default = default[parent]
-    for key, data in pairs(obj) do
-        if key:sub(1, 1) ~= '_' then
-            remove_same(key, data, default, obj, type)
+    for key, meta in pairs(metadata[type]) do
+        local data = obj[key]
+        if data then
+            if meta.profile then
+                remove_same_as_txt(key, data, default, obj, type)
+            else
+                remove_same_as_slk(key, data, default, obj, type)
+            end 
+        end
+    end
+    if metadata[obj._code] then
+        for key, meta in pairs(metadata[obj._code]) do
+            local data = obj[key]
+            if data then
+                if meta.profile then
+                    remove_same_as_txt(key, data, default, obj, type)
+                else
+                    remove_same_as_slk(key, data, default, obj, type)
+                end 
+            end
         end
     end
 end
@@ -83,6 +132,7 @@ return function (w2l_, slk)
     keydata = w2l:keydata()
     default = w2l:get_default()
     is_remove_same = w2l.config.remove_same
+    metadata = w2l:metadata()
     if w2l.config.target_format == 'slk' then
         if not w2l.config.slk_doodad then
             local type = 'doodad'

@@ -8,6 +8,23 @@ local pairs = pairs
 local string_sub = string.sub
 local string_find = string.find
 
+local function concat(tbl)
+    if type(tbl) ~= 'table' then
+        return tostring(tbl)
+    end
+    local max = 0
+    for i, v in pairs(tbl) do
+        if i > max then
+            max = i
+        end
+    end
+    local strs = {}
+    for i = 1, max do
+        strs[i] = tostring(tbl[i])
+    end
+    return table.concat(strs, ',')
+end
+
 local function update_data(key, meta, obj, new_obj)
     local id = meta.id
     local value = obj[id]
@@ -56,7 +73,7 @@ local function update_obj(name, type, obj, data)
         if string_sub(k, 1, 1) == '_' then
             new_obj[k] = v
         else
-            reports[#reports+1] = {name, k, table.concat(v, ','):sub(1, 1000):gsub('\r\n', ' ')}
+            reports[#reports+1] = {name, k, concat(v, ','):sub(1, 1000):gsub('\r\n', ' ')}
         end
     end
     if has_level then

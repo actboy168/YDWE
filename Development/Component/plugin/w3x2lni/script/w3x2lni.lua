@@ -185,6 +185,7 @@ local convertors = {
     'backend_skin',
     'backend_searchparent',
     'backend_cleanobj',
+    'backend_imp',
 }
 
 for _, name in ipairs(convertors) do
