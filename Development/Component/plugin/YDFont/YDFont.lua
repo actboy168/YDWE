@@ -5,7 +5,7 @@ local loader = {}
 	
 loader.load = function(path)
 	if global_config["Font"]["FontEnable"] ~= "1" then
-		log.warn('failed: enable font')
+		log.warn('failed: disable')
 		return false
 	end
 	
