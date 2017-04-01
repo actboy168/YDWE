@@ -96,7 +96,7 @@ end
 -- 包含右大括号的字符串存在wts里会解析出错
 -- 超过256字节的字符串存在二进制里会崩溃
 
-function mt:load_wts(wts, content, max, reason)
+function mt:load_wts(wts, content, max, reason, fmter)
     if not wts then
         return content
     end
@@ -107,6 +107,9 @@ function mt:load_wts(wts, content, max, reason)
             return
         end
         local text = str_data.text
+        if fmter then
+            text = fmter(text)
+        end
         if max and #text > max then
             return self:save_wts(wts, text, reason)
         end

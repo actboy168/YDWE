@@ -4,7 +4,9 @@ local w2l
 local wts
 
 local function fwts(str)
-    return w2l:load_wts(wts, str, 1023, '脚本里的文本长度超过1023字符'):gsub('\\', '\\\\'):gsub('"', '\\"')
+    return w2l:load_wts(wts, str, 1023, '脚本里的文本长度超过1023字符', function(str)
+        return str:gsub('\\', '\\\\'):gsub('"', '\\"')
+    end)
 end
 
 lpeg.locale(lpeg)
