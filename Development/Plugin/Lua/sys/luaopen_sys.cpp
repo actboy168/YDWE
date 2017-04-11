@@ -7,6 +7,7 @@
 #include <base/win/process.h>
 #include <base/win/file_version.h>
 #include <base/util/unicode.h>
+#include <base/util/console.h>
 #include <fcntl.h>
 #include <io.h>	  
 #include "NtQuerySystemProcessInformation.h"
@@ -175,6 +176,19 @@ static int LuaKillProcess(lua_State* L)
 	return 1;
 }
 
+static int LuaConsole(lua_State* L)
+{
+	if (lua_toboolean(L, 1))
+	{
+		base::console::enable();
+	}
+	else
+	{
+		base::console::disable();
+	}
+	return 0;
+}
+
 namespace process {
 
 	base::win::process& to(lua_State* L, int idx)
@@ -336,6 +350,7 @@ int luaopen_sys(lua_State* L)
 		{ "open_pipe", LuaOpenPipe },
 		{ "peek_pipe", LuaPeekPipe },
 		{ "get_module_version_info", LuaGetVersionNumberString },
+		{ "console", LuaConsole },
 		{ NULL, NULL },
 	};
 	luaL_newlib(L, l2);
