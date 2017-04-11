@@ -51,6 +51,12 @@ local function merge_ui(type, a, b)
             pos = pos + 1
             aca[category] = bca[category]
         else
+			for i, v in ipairs(aca) do
+				if v == category then
+					pos = i + 1
+					break
+				end
+			end
 			local a, b = aca[category], bca[category]
 			local pos = 1
 			for _, v in ipairs(b) do
