@@ -23,9 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="lua_engine\fix_math.cpp">
-      <Filter>lua_engine\main</Filter>
-    </ClCompile>
     <ClCompile Include="lua_engine\lua_loader.cpp">
       <Filter>lua_engine\main</Filter>
     </ClCompile>
@@ -99,6 +96,9 @@
       <Filter>lua_engine\library</Filter>
     </ClCompile>
     <ClCompile Include="lua_engine\debugger.cpp">
+      <Filter>lua_engine\main</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\fix_baselib.cpp">
       <Filter>lua_engine\main</Filter>
     </ClCompile>
   </ItemGroup>

@@ -58,10 +58,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	int fix_math(lua_State* L)
+	int fix_baselib(lua_State* L)
 	{
-		lua_getglobal(L, "math");
-		if (lua_istable(L, -1))
+		if (lua_getglobal(L, "math") == LUA_TTABLE)
 		{
 			lua_pushstring(L, "random");
 			lua_pushcclosure(L, fix_math_random, 0);
@@ -72,6 +71,43 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			lua_rawset(L, -3);
 		}
 		lua_pop(L, 1);
+
+		if (lua_getglobal(L, "io") == LUA_TTABLE)
+		{
+			lua_pushstring(L, "lines");     lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "popen");     lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "tmpfile");   lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "input");     lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "output");    lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "open");      lua_pushnil(L); lua_rawset(L, -3);
+		}
+		lua_pop(L, 1);
+
+		if (lua_getglobal(L, "os") == LUA_TTABLE)
+		{
+			lua_pushstring(L, "execute");   lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "exit");      lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "getenv");    lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "remove");    lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "rename");    lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "setlocale"); lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "tmpname");   lua_pushnil(L); lua_rawset(L, -3);
+		}
+		lua_pop(L, 1);
+
+		if (lua_getglobal(L, "package") == LUA_TTABLE)
+		{
+			lua_pushstring(L, "loadlib");   lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "searchpath"); lua_pushnil(L); lua_rawset(L, -3);
+		}
+		lua_pop(L, 1);
+
+		lua_pushnil(L);
+		lua_setglobal(L, "debug");
+		lua_pushnil(L);
+		lua_setglobal(L, "dofile");
+		lua_pushnil(L);
+		lua_setglobal(L, "loadfile");
 		return 0;
 	}
 }}}
