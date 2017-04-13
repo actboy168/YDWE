@@ -13,7 +13,7 @@ namespace base { namespace win {
 		env_variable(std::wstring const& name);
 		env_variable(std::wstring&& name);
 		std::wstring                  get();
-		std::optional<std::wstring> get_nothrow() throw();
+		std::wstring                  get_nothrow() throw();
 		bool                          set(std::wstring const& value);
 		bool                          del();
 
