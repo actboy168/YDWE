@@ -195,7 +195,7 @@ local function create_object(t, ttype, name)
         if level > t._max_level then
             return get_default(value) or ''
         end
-        return value[level]
+        return value[level] or ''
     end
     function mt:__newindex(key, nvalue)
         local objt = obj[ttype][name]
@@ -239,6 +239,7 @@ local function create_object(t, ttype, name)
         if not t then
             return function() end
         end
+        local nkey
         local key
         local level
         return function ()
@@ -248,26 +249,28 @@ local function create_object(t, ttype, name)
                 if t._max_level <= level then
                     level = nil
                 end
-                return key .. olevel, t[key][olevel]
+                return key .. olevel, t[nkey][olevel] or ''
             end
-            local nkey = next(t, key)
+            nkey = next(t, nkey)
+            local meta
             while true do
                 if not nkey then
                     return
                 end
-                if nkey:sub(1, 1) ~= '_' then
+                meta = get_meta(nkey, metadata[ttype], t._code and metadata[t._code])
+                if meta then
                     break
                 end
                 nkey = next(t, nkey)
             end
-            key = nkey
-            if type(t[key]) ~= 'table' then
-                return key, t[key]
+            key = meta.field:gsub(':', '')
+            if type(t[nkey]) ~= 'table' then
+                return key, t[nkey] or ''
             end
             if t._max_level > 1 then
                 level = 1
             end
-            return key .. 1, t[key][1]
+            return key .. 1, t[nkey][1] or ''
         end
     end
     local o = {}
