@@ -50,24 +50,10 @@ namespace lua_loader {
 		}
 
 	private:
-		int open_libs(lua_State* L)
-		{
-			luaL_requiref(L, "_G",            luaopen_base, 1);      lua_pop(L, 1);
-			luaL_requiref(L, LUA_LOADLIBNAME, luaopen_package, 1);   lua_pop(L, 1);
-			luaL_requiref(L, LUA_COLIBNAME,   luaopen_coroutine, 1); lua_pop(L, 1);
-			luaL_requiref(L, LUA_TABLIBNAME,  luaopen_table, 1);     lua_pop(L, 1);
-			luaL_requiref(L, LUA_STRLIBNAME,  luaopen_string, 1);    lua_pop(L, 1);
-			luaL_requiref(L, LUA_MATHLIBNAME, luaopen_math, 1);      lua_pop(L, 1);
-			luaL_requiref(L, LUA_DBLIBNAME,   luaopen_debug, 1);     lua_pop(L, 1);
-			luaL_requiref(L, LUA_OSLIBNAME,   luaopen_os, 1);        lua_pop(L, 1);
-			
-			return 1;
-		}
-
 		lua_State* initialize()
 		{
 			lua_State* L = luaL_newstate2();
-			open_libs(L);
+			luaL_openlibs(L);
 			clear_searchers_table(L);
 			open_lua_engine(L);
 			runtime::initialize();
