@@ -7,20 +7,20 @@ namespace base { namespace path {
 	fs::path normalize(const fs::path& p)
 	{
 		fs::path result = p.root_path();
-		std::deque<std::string> stack;
+		std::deque<std::wstring> stack;
 		foreach (auto e, p.relative_path()) {
-			if (e == ".." && !stack.empty() && stack.back() != "..") {
+			if (e == L".." && !stack.empty() && stack.back() != L"..") {
 				stack.pop_back();
 			}
-			else if (e != ".") {
-				stack.push_back(e.string());
+			else if (e != L".") {
+				stack.push_back(e.wstring());
 			}
 		}
 		foreach (auto e, stack) {
 			result /= e;
 		}
-		std::string ret = result.string();
-		std::string tmp;
+		std::wstring ret = result.wstring();
+		std::wstring tmp;
 		tmp.resize(ret.size());
 		std::transform(ret.begin(), ret.end(), tmp.begin(), tolower);
 		return tmp;
