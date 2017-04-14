@@ -40,7 +40,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		register_preload_lib(L, "jass.hook",    hook::open);
 		register_preload_lib(L, "jass.runtime", runtime::open);
 		register_preload_lib(L, "jass.slk",     slk::open);
-		register_preload_lib(L, "jass.storm",   storm::open);
 		register_preload_lib(L, "jass.console", console::open);
 		register_preload_lib(L, "jass.debug",   debug::open);
 		register_preload_lib(L, "jass.message", message::open);
@@ -54,6 +53,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		insert_searchers_table(L);
 		fix_baselib(L);
+
+		// deprecated
+		register_preload_lib(L, "jass.storm", storm::open);
 
 		return 0;
 	}
