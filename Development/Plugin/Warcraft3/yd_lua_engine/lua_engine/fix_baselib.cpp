@@ -156,7 +156,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return false;
 	}
 
-	static bool can_write(const char* filename)
+	static bool can_write(const char* filename, luaL_Stream* p, const char* mode)
 	{
 		static std::set<std::wstring> s_blacklist = list_of(L"mix")(L"asi")(L"m3d")(L"flt")(L"flt")(L"exe")(L"dll");
 		try {
@@ -170,11 +170,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			{
 				return false;
 			}
-			for (fs::path p = filepath.parent_path(); !p.empty(); p = p.parent_path())
+			for (fs::path path = filepath.parent_path(); !path.empty(); path = path.parent_path())
 			{
-				if (path::equal(p, rootpath))
+				if (path::equal(path, rootpath))
 				{
 					fs::create_directories(filepath.parent_path());
+					p->f = fopen(filepath.string().c_str(), mode);
+					p->closef = &io_fclose;
 					return true;
 				}
 			}
@@ -196,12 +198,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			}
 		}
 		else {
-			if (!can_write(filename)) {
+			if (!can_write(filename, p, mode)) {
 				errno = EACCES;
 				return 0;
 			}
-			p->f = fopen(filename, mode);
-			p->closef = &io_fclose;
 		}
 		return p;
 	}
