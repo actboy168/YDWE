@@ -1,26 +1,26 @@
 local stormlib = require 'ffi.stormlib'
-local w3iloader = require 'w3iloader'
+local w2l = require 'w3x2lni'
 
 local function getplayernum(mappath)
 	local ok, result = pcall(function()
 		local map = stormlib.open(mappath, true)
-		if map then
-			local w3i = map:load_file('war3map.w3i')
-			local tbl = w3iloader(w3i)
-			local n = 0
-			if tbl.map_flag & 32 == 0 then
-				n = tbl.player_count
-			else
-				for _, player in pairs(tbl.players) do
-					if player.type == 1 then
-						n = n + 1
-					end
+		if not map then
+    		return 0
+		end
+		local w3i = map:load_file('war3map.w3i')
+		local tbl = w2l:read_w3i(w3i)
+		local n = 0
+		if tbl['选项']['自定义玩家分组'] == 0 then
+			n = tbl['玩家']['玩家数量']
+		else
+			for i = 1, tbl['玩家']['玩家数量'] do
+    			if tbl['玩家'..i]['类型'] == 1 then
+					n = n + 1
 				end
 			end
-			map:close()
-			return n
 		end
-		return 0
+		map:close()
+		return n
 	end)
 	if ok then return result end
 	return 0
