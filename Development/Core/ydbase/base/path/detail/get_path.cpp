@@ -40,17 +40,17 @@ namespace base { namespace path { namespace detail {
 	//
 	fs::path temp_path() 
 	{
-		std::optional<std::wstring> result;
+		std::wstring result;
 		result = win::env_variable(L"TMP").get_nothrow();
-		if (result && !result->empty())
+		if (!result.empty())
 		{
-			return std::move(fs::path(*result));
+			return std::move(fs::path(result));
 		}
 
 		result = win::env_variable(L"TEMP").get_nothrow();
-		if (result && !result->empty())
+		if (!result.empty())
 		{
-			return std::move(fs::path(*result));
+			return std::move(fs::path(result));
 		}
 
 		std::dynarray<wchar_t> buffer(::GetTempPathW(0, nullptr));
