@@ -1,11 +1,11 @@
 require "sys"
 require "filesystem"
+local uni = require 'ffi.unicode'
 
 
 -- 根据ydwebase.dll的路径计算
 fs.__ydwe_path = fs.get(fs.DIR_MODULE):remove_filename():remove_filename()
 log.debug('ydwe path ' .. fs.__ydwe_path:string())
-
 
 function fs.ydwe_path()
 	return fs.__ydwe_path
@@ -14,6 +14,14 @@ end
 function fs.war3_path()
 	return fs.__war3_path
 end
+
+
+local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" 
+if not fs.exists(root) then
+	root = fs.ydwe_path()
+end
+
+package.path = package.path .. ';' .. uni.u2a((root / 'plugin' / 'w3x2lni' / 'script' / '?.lua'):string())
 
 
 -- 给路径末尾，扩展名前添加内容

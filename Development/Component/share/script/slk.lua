@@ -1,12 +1,8 @@
-require 'filesystem'
-local uni = require 'ffi.unicode'
-
 local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" 
 if not fs.exists(root) then
 	root = fs.ydwe_path()
 end
 
-package.path = package.path .. ';' .. uni.u2a((root / 'plugin' / 'w3x2lni' / 'script' / '?.lua'):string())
 local w2l = require 'w3x2lni'
 w2l:initialize(root / 'plugin' / 'w3x2lni')
 w2l.mpq = root / 'share' / 'mpq' / 'units'
