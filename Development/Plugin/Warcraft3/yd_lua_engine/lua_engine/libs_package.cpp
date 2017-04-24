@@ -27,7 +27,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			try {
 				std::wstring wfilename = base::u2w(filename);
 				std::ifstream fs(wfilename.c_str(), std::ios::binary | std::ios::in);
-				if (fs.is_open())
+				if (fs)
 				{
 					return 1;
 				}
