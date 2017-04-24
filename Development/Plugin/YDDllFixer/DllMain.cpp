@@ -19,34 +19,10 @@ static fs::path GetModuleDirectory(HMODULE hModule)
 	return std::move(result);
 }
 
-#ifdef _DEBUG
-
 const wchar_t* szDllList[] = {
-#if _MSC_VER == 1910
-#elif _MSC_VER == 1800
-	L"msvcr120d.dll",
-	L"msvcp120d.dll",
-#else  
-	L"msvcr100d.dll",
-	L"msvcp100d.dll",
-#endif
-	L"zlibd1.dll",
-	L"StormLib.dll",
-	L"luacore.dll", 
-	L"ydbase.dll",
-	L"LuaEngine.dll", // always at last
-};
-
-#else
-
-const wchar_t* szDllList[] = {
-#if _MSC_VER == 1910
-#elif _MSC_VER == 1800
-	L"msvcr120.dll",
-	L"msvcp120.dll",
-#elif  			 
-	L"msvcr100.dll",
-	L"msvcp100.dll",
+#if !_DEBUG
+	L"vcruntime140.dll",
+	L"msvcp140.dll",
 #endif
 	L"zlib1.dll",
 	L"StormLib.dll",
@@ -54,8 +30,6 @@ const wchar_t* szDllList[] = {
 	L"ydbase.dll",
 	L"LuaEngine.dll", // always at last
 };
-
-#endif
 
 std::deque<HMODULE> hDllArray;
 
