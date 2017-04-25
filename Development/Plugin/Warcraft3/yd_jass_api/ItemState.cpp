@@ -73,7 +73,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	static uint32_t hashid(uint32_t id)
 	{
-		static int box[] = {
+		static uint32_t box[] = {
 			0x098AA3D0C, 0x0F67BCA9E, 0x0C46CA84C, 0x02AC9D845,
 			0x09A1CF1DD, 0x06450148E, 0x08516213D, 0x0C0882BBF,
 			0x0F10C2A9C, 0x09D7CF013, 0x0CD845F5E, 0x01D4BD837,
