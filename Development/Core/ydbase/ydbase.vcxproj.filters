@@ -596,6 +596,15 @@
     <ClInclude Include="base\util\ini.h">
       <Filter>base\util</Filter>
     </ClInclude>
+    <ClInclude Include="base\thread\lock\backoff.h">
+      <Filter>base\thread\lock</Filter>
+    </ClInclude>
+    <ClInclude Include="base\thread\lock\os_linux.h">
+      <Filter>base\thread\lock</Filter>
+    </ClInclude>
+    <ClInclude Include="base\thread\lock\os_win32.h">
+      <Filter>base\thread\lock</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

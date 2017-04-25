@@ -24,6 +24,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Lua;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OpenSource)Lua\build\bin\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

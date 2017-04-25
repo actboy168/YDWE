@@ -55,7 +55,6 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level4</WarningLevel>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -65,6 +64,7 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <AdditionalIncludeDirectories>$(ThirdParty)\Microsoft\Detours\Current\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PreprocessorDefinitions>YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <BaseAddress>
@@ -89,7 +89,6 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <WarningLevel>Level4</WarningLevel>
@@ -99,6 +98,7 @@
       </DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ThirdParty)\Microsoft\Detours\Current\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PreprocessorDefinitions>YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link />
     <Bscmake>
@@ -236,7 +236,10 @@
     <ClInclude Include="base\path\self.h" />
     <ClInclude Include="base\path\service.h" />
     <ClInclude Include="base\thread\intrusive_ptr.h" />
+    <ClInclude Include="base\thread\lock\backoff.h" />
     <ClInclude Include="base\thread\lock\guard.h" />
+    <ClInclude Include="base\thread\lock\os_linux.h" />
+    <ClInclude Include="base\thread\lock\os_win32.h" />
     <ClInclude Include="base\thread\lock\spin.h" />
     <ClInclude Include="base\thread\thread.h" />
     <ClInclude Include="base\thread\thread_exception.h" />
