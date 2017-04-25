@@ -58,15 +58,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;YDTRIGGER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ThirdParty)\Blizzard\Storm\Current\include;$(ThirdParty)\Microsoft\Detours\Current\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ThirdParty)\Blizzard\Storm\Current\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>YDTrigger.def</ModuleDefinitionFile>
-      <AdditionalDependencies>Storm.lib;Detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ThirdParty)\Blizzard\Storm\Current\lib\Win32\DebugRelease;$(ThirdParty)Microsoft\Detours\Current\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Storm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ThirdParty)\Blizzard\Storm\Current\lib\Win32\DebugRelease;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -78,7 +78,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;YDTRIGGER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ThirdParty)\Blizzard\Storm\Current\include;$(ThirdParty)\Microsoft\Detours\Current\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ThirdParty)\Blizzard\Storm\Current\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -87,8 +87,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>YDTrigger.def</ModuleDefinitionFile>
-      <AdditionalDependencies>Storm.lib;Detours.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ThirdParty)\Blizzard\Storm\Current\lib\Win32\DebugRelease;$(ThirdParty)Microsoft\Detours\Current\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Storm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ThirdParty)\Blizzard\Storm\Current\lib\Win32\DebugRelease;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -119,7 +119,6 @@
     <ClCompile Include="Core\SaveLoadCheck.cpp" />
     <ClCompile Include="Core\trigger_data_ui.cpp" />
     <ClCompile Include="CreateYDTriggerImportFile.cpp" />
-    <ClCompile Include="Detours\detoured.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="GetGlobalVarName_Hook.cpp" />
     <ClCompile Include="Hashtable\GUIID_Table.cpp" />
@@ -144,7 +143,6 @@
     <ClInclude Include="Core\CC_Put.h" />
     <ClInclude Include="Core\CC_SP_UserData.h" />
     <ClInclude Include="Core\CC_VarType.h" />
-    <ClInclude Include="Detours\detoured.h" />
     <ClInclude Include="Hashtable\GUIID_Table.h" />
     <ClInclude Include="Hashtable\Hashtable.h" />
     <ClInclude Include="Hook.h" />
@@ -152,6 +150,11 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">
+      <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

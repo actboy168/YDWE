@@ -1,8 +1,7 @@
 #include <windows.h>
-#include <detours.h>
-#include "Detours/detoured.h"
 #include "Storm/StormAdapter.h"
 #include "Common.h"
+#include <base/hook/inline.h>
 
 void _fastcall CC_PutTrigger_Hook(DWORD This, DWORD EDX, DWORD OutClass);
 void _fastcall CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD index, DWORD type);
@@ -62,46 +61,40 @@ void All_Hook()
 {
   Hook_Init();
 
-  DetourTransactionBegin();
-  DetourUpdateThread(GetCurrentThread());
-    DetourAttach((PVOID*)&CC_PutTrigger, CC_PutTrigger_Hook);
-    DetourAttach((PVOID*)&CC_PutVar_Other, CC_PutVar_Other_Hook);
-    DetourAttach((PVOID*)&GetGUICount, GetGUICount_Hook);
-    DetourAttach((PVOID*)&GetGUIString, GetGUIString_Hook);
-    DetourAttach((PVOID*)&GetGUIIcon, GetGUIIcon_Hook);
-    DetourAttach((PVOID*)&SetGUIId, SetGUIId_Hook);
-    DetourAttach((PVOID*)&CC_Main, CC_Main_Hook);
-    DetourAttach((PVOID*)&CC_Put_globals, CC_Put_globals_Hook);
-    DetourAttach((PVOID*)&CC_Put_endglobals, CC_Put_endglobals_Hook);
-    //DetourAttach((PVOID*)&ConvertTriggerName, ConvertTriggerName_Hook);
-    //DetourAttach((PVOID*)&GetGlobalVarName, GetGlobalVarName_Hook);
-    DetourAttach((PVOID*)&ChangeGUIType, ChangeGUIType_Hook);
+  base::hook::inline_install((uintptr_t*)&CC_PutTrigger, (uintptr_t)CC_PutTrigger_Hook);
+  base::hook::inline_install((uintptr_t*)&CC_PutVar_Other, (uintptr_t)CC_PutVar_Other_Hook);
+  base::hook::inline_install((uintptr_t*)&GetGUICount, (uintptr_t)GetGUICount_Hook);
+  base::hook::inline_install((uintptr_t*)&GetGUIString, (uintptr_t)GetGUIString_Hook);
+  base::hook::inline_install((uintptr_t*)&GetGUIIcon, (uintptr_t)GetGUIIcon_Hook);
+  base::hook::inline_install((uintptr_t*)&SetGUIId, (uintptr_t)SetGUIId_Hook);
+  base::hook::inline_install((uintptr_t*)&CC_Main, (uintptr_t)CC_Main_Hook);
+  base::hook::inline_install((uintptr_t*)&CC_Put_globals, (uintptr_t)CC_Put_globals_Hook);
+  base::hook::inline_install((uintptr_t*)&CC_Put_endglobals, (uintptr_t)CC_Put_endglobals_Hook);
+  //base::hook::inline_install((uintptr_t*)&ConvertTriggerName, (uintptr_t)ConvertTriggerName_Hook);
+  //base::hook::inline_install((uintptr_t*)&GetGlobalVarName, (uintptr_t)GetGlobalVarName_Hook);
+  base::hook::inline_install((uintptr_t*)&ChangeGUIType, (uintptr_t)ChangeGUIType_Hook);
   
-    TriggerParameterDialog_FuncList_Hook();
-	TriggerParameterDialog_Type_Hook();
-  DetourTransactionCommit();
+  TriggerParameterDialog_FuncList_Hook();
+  TriggerParameterDialog_Type_Hook();
 }
 
 void All_Unhook()
-{ 
-  DetourTransactionBegin();
-  DetourUpdateThread(GetCurrentThread());
-    DetourDetach((PVOID*)&CC_PutTrigger, CC_PutTrigger_Hook);
-    DetourDetach((PVOID*)&CC_PutVar_Other, CC_PutVar_Other_Hook);
-    DetourDetach((PVOID*)&GetGUICount, GetGUICount_Hook);
-    DetourDetach((PVOID*)&GetGUIString, GetGUIString_Hook);
-    DetourDetach((PVOID*)&GetGUIIcon, GetGUIIcon_Hook);
-    DetourDetach((PVOID*)&SetGUIId, SetGUIId_Hook);
-    DetourDetach((PVOID*)&CC_Main, CC_Main_Hook);
-    DetourDetach((PVOID*)&CC_Put_globals, CC_Put_globals_Hook);
-    DetourDetach((PVOID*)&CC_Put_endglobals, CC_Put_endglobals_Hook);
-    //DetourDetach(&(PVOID)ConvertTriggerName, ConvertTriggerName_Hook);
-    //DetourDetach((PVOID*)&GetGlobalVarName, GetGlobalVarName_Hook);
-    DetourDetach((PVOID*)&ChangeGUIType, ChangeGUIType_Hook);
+{
+	base::hook::inline_uninstall((uintptr_t*)&CC_PutTrigger, (uintptr_t)CC_PutTrigger_Hook);
+    base::hook::inline_uninstall((uintptr_t*)&CC_PutVar_Other, (uintptr_t)CC_PutVar_Other_Hook);
+    base::hook::inline_uninstall((uintptr_t*)&GetGUICount, (uintptr_t)GetGUICount_Hook);
+    base::hook::inline_uninstall((uintptr_t*)&GetGUIString, (uintptr_t)GetGUIString_Hook);
+    base::hook::inline_uninstall((uintptr_t*)&GetGUIIcon, (uintptr_t)GetGUIIcon_Hook);
+    base::hook::inline_uninstall((uintptr_t*)&SetGUIId, (uintptr_t)SetGUIId_Hook);
+    base::hook::inline_uninstall((uintptr_t*)&CC_Main, (uintptr_t)CC_Main_Hook);
+    base::hook::inline_uninstall((uintptr_t*)&CC_Put_globals, (uintptr_t)CC_Put_globals_Hook);
+    base::hook::inline_uninstall((uintptr_t*)&CC_Put_endglobals, (uintptr_t)CC_Put_endglobals_Hook);
+    //base::hook::inline_uninstall((uintptr_t*)ConvertTriggerName, (uintptr_t)ConvertTriggerName_Hook);
+    //base::hook::inline_install((uintptr_t*)&GetGlobalVarName, (uintptr_t)GetGlobalVarName_Hook);
+    base::hook::inline_uninstall((uintptr_t*)&ChangeGUIType, (uintptr_t)ChangeGUIType_Hook);
 
     TriggerParameterDialog_FuncList_Unhook();
 	TriggerParameterDialog_Type_Unhook();
-  DetourTransactionCommit();
 }
 
 // Hook global var

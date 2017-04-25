@@ -63,6 +63,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YDTaskbarSupport", "..\..\Plugin\WE\YDTaskbarSupport\YDTaskbarSupport.vcxproj", "{B7C5713A-81F3-4518-A036-0312773BD50B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YDTrigger", "..\..\Plugin\WE\YDTrigger\YDTrigger.vcxproj", "{C7375FD0-FFEB-44EC-BC9F-BDDBFE9C922B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{75B04C07-94D9-41E7-BBFD-E67F79BFF41A} = {75B04C07-94D9-41E7-BBFD-E67F79BFF41A}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YDWeHelper", "..\..\Plugin\WE\YDWeHelper\YDWeHelper.vcxproj", "{980A7A33-CC57-4E0E-8F2C-3285C8CAED84}"
 EndProject

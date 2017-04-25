@@ -1,9 +1,8 @@
 #include <windows.h>
-#include <detours.h>
-#include "Detours/detoured.h"
 #include "Storm/StormAdapter.h"
 #include "Common.h"
 #include "Hook.h"
+#include <base/hook/inline.h>
 
 APIInfo g_TPD_type_info1;
 APIInfo g_TPD_type_info2;
@@ -89,7 +88,7 @@ void TriggerParameterDialog_Type_Hook()
     HookOne(&g_TPD_type_info2);
 
     TPD_Type = (TPD_TypeProc) WE_ADDRESS(0x00687650);
-    DetourAttach((PVOID*)&TPD_Type, TPD_Type_Hook);
+	base::hook::inline_install((uintptr_t*)&TPD_Type, (uintptr_t)TPD_Type_Hook);
 }
 
 void TriggerParameterDialog_Type_Unhook()
@@ -97,5 +96,5 @@ void TriggerParameterDialog_Type_Unhook()
     UnhookOne(&g_TPD_type_info1);
     UnhookOne(&g_TPD_type_info2);
 
-    DetourDetach((PVOID*)&TPD_Type, TPD_Type_Hook);
+	base::hook::inline_uninstall((uintptr_t*)&TPD_Type, (uintptr_t)TPD_Type_Hook);
 }

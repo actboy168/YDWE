@@ -25,9 +25,6 @@
     <Filter Include="ConvertString">
       <UniqueIdentifier>{1076fe86-466a-4e7c-ba82-7a5b7e3c18a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Detours">
-      <UniqueIdentifier>{2faddd93-b08f-418d-8b92-fb15d5a55acc}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp">
@@ -138,9 +135,6 @@
     <ClCompile Include="ConvertString\gb2py.cpp">
       <Filter>ConvertString</Filter>
     </ClCompile>
-    <ClCompile Include="Detours\detoured.cpp">
-      <Filter>Detours</Filter>
-    </ClCompile>
     <ClCompile Include="Core\locvar.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -181,9 +175,6 @@
     </ClInclude>
     <ClInclude Include="ConvertString\ConvertString.h">
       <Filter>ConvertString</Filter>
-    </ClInclude>
-    <ClInclude Include="Detours\detoured.h">
-      <Filter>Detours</Filter>
     </ClInclude>
     <ClInclude Include="Core\locvar.h">
       <Filter>Core</Filter>

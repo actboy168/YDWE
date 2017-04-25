@@ -2,7 +2,6 @@
 #include <Shlwapi.h>
 #pragma comment(lib, "Shlwapi.lib")
 
-#include "Detours/detoured.h"
 #include "Storm/StormAdapter.h"
 #include "HashTable/GUIID_Table.h"
 #include "Common.h"
@@ -54,7 +53,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
   case DLL_THREAD_ATTACH:
     {
       DisableThreadLibraryCalls(hModule);
-      Detoured_Init(hModule); 
 	  SetDllPath(hModule);
       GUIID_Table_Create();
       GUIID_Table_Init();
