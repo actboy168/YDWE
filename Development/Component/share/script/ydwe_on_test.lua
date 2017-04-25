@@ -1,5 +1,6 @@
 local stormlib = require 'ffi.stormlib'
 local w2l = require 'w3x2lni'
+local mapdump = require 'mapdump'
 
 local function getplayernum(mappath)
 	local ok, result = pcall(function()
@@ -73,9 +74,8 @@ local function path_sub(a, b)
 end
 
 local function host_copy_dll(curdir)
-	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'msvcp120.dll', curdir / 'msvcp120.dll', true)
-	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'msvcr120.dll', curdir / 'msvcr120.dll', true)
-	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'StormLib.dll', curdir / 'StormLib.dll', true)
+	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'vcruntime140.dll', curdir / 'vcruntime140.dll', true)
+	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'msvcp140.dll', curdir / 'msvcp140.dll', true)
 end
 
 local function get_war3_version()
@@ -105,24 +105,29 @@ end
 
 local function host_save_config(curdir, mappath, autostart)
 	local ver = get_war3_version()
-	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\Warcraft III\String]]
-	local tbl = {
-		--bot_mapcfgpath = '',
-		bot_mappath = mappath:parent_path():string(),
-		bot_defaultgamename = mappath:filename():string(),
-		bot_defaultownername = reg["userlocal"],
-		lan_war3version = ver.minor,
-		map_path = path_sub(mappath, fs.war3_path()):string(),
-		map_localpath = mappath:filename():string(),
-		bot_autostart = autostart,
-	}
-
+	local jasspath
 	if ver:is_new() then
-		tbl.bot_mapcfgpath = (fs.ydwe_path() / "jass" / "system" / "ht"):string()
+		jasspath = fs.ydwe_path() / "jass" / "system" / "ht"
 	else
-		tbl.bot_mapcfgpath = (fs.ydwe_path() / "jass" / "system" / "rb"):string()
+		jasspath = fs.ydwe_path() / "jass" / "system" / "rb"
 	end
-
+	local of = io.open(curdir / 'map.cfg', 'wb')
+	local ok, e = pcall(mapdump, mappath, jasspath,
+		function(s)
+			of:write(s .. '\n') 
+		end
+	)
+	of:close()
+	if not ok then
+		log.error('')
+	end
+	local tbl = {
+		lan_war3version = ver.minor,
+		bot_defaultgamename = mappath:filename():string(),
+		bot_autostart = autostart,
+		bot_mappath = path_sub(mappath, fs.war3_path()):string(),
+		bot_mapcfgpath = 'map.cfg',
+	}
 	local str = ''
 	for k, v in pairs(tbl) do
 		str = str .. tostring(k) .. ' = ' .. tostring(v) .. '\n'
