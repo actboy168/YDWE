@@ -2,7 +2,7 @@
 
 #include <yvals.h>
 
-#if defined(_HAS_CXX17)
+#if _HAS_CXX17
 
 #include <string_view>
 
