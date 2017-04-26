@@ -23,9 +23,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Lua;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OpenSource)Lua\build\bin\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
