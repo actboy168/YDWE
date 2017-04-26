@@ -25,9 +25,11 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(YDWE)\Build\include;$(YDWE)\Core;$(YDWE)\Core\ydbase;$(YDWE)\Core\YDWEVersion;$(OpenSource)\Lua;%(AdditionalLibraryDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(OpenSource)Lua\build\bin\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <ResourceCompile>
       <IgnoreStandardIncludePath>
