@@ -17,7 +17,7 @@ unsigned char convert_to_alnum[0x100] = {
 #define ConvertToAlnum(n) convert_to_alnum[(n)]
 
 void _fastcall
-ConvertString_Default(char* src, char* dst, unsigned int limit)
+ConvertString_Default(const char* src, char* dst, unsigned int limit)
 {
   unsigned int i, j, n;
   unsigned int addup = 0;
@@ -55,7 +55,7 @@ ConvertString_Default(char* src, char* dst, unsigned int limit)
 
 
 void _fastcall
-ConvertString(char* src, char* dst, unsigned int limit)
+ConvertString(const char* src, char* dst, unsigned int limit)
 {
   ConvertString_Default(src, dst, limit);
 }

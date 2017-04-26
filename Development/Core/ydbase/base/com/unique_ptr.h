@@ -58,7 +58,7 @@ public:
 		HRESULT hr = ::CoCreateInstance(clsid, outer, context, *interface_id, reinterpret_cast<void**>(&val_ptr));
 		if (SUCCEEDED(hr))
 		{
-			reset(val_ptr);
+			mybase::reset(val_ptr);
 		}
 		return hr;
 	}
@@ -66,12 +66,12 @@ public:
 	template <class Query>
 	HRESULT QueryInterface(Query** p) 
 	{
-		return get()->QueryInterface(p);
+		return mybase::get()->QueryInterface(p);
 	}
 
 	HRESULT QueryInterface(const IID& iid, void** obj) 
 	{
-		return get()->QueryInterface(iid, obj);
+		return mybase::get()->QueryInterface(iid, obj);
 	}
 
 	HRESULT QueryFrom(IUnknown* object) 
@@ -80,7 +80,7 @@ public:
 		HRESULT hr = object->QueryInterface(&val_ptr);
 		if (SUCCEEDED(hr))
 		{
-			reset(val_ptr);
+			mybase::reset(val_ptr);
 		}
 		return hr;
 	}

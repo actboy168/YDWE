@@ -5,9 +5,9 @@
 
 typedef int  (_fastcall* CC_VoidProc)(void);
 typedef int  (_fastcall* CC_PutConstProc)(DWORD OutClass, const char* string, DWORD Endl);
-typedef int  (_fastcall* CC_PutStringProc)(DWORD OutClass, DWORD EDX, char* string, DWORD Endl);
+typedef int  (_fastcall* CC_PutStringProc)(DWORD OutClass, DWORD EDX, const char* string, DWORD Endl);
 typedef int  (_fastcall* CC_PutVarProc)(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Index, DWORD Type, DWORD Endl);
-typedef int  (_fastcall* CC_PutEventRegisterProc)(DWORD This, DWORD EDX, DWORD OutClass, char* triggername, char* name, DWORD index);
+typedef int  (_fastcall* CC_PutEventRegisterProc)(DWORD This, DWORD EDX, DWORD OutClass, const char* triggername, const char* name, DWORD index);
 typedef int  (_fastcall* CC_GetGUINameProc)(DWORD This, DWORD EDX, char* buff, int len);
 typedef int  (_fastcall* GetTriggerVarProc)(DWORD This, DWORD EDX, char* buff, int len);
 typedef int  (_fastcall* GetTriggerName_InitTrigProc)(DWORD This, DWORD EDX, char* buff, int len);

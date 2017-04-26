@@ -78,7 +78,7 @@ enum VARTYPE_User_Defined
   CC_TYPE__end,
 };
 
-extern char* TypeName[];
+extern const char* TypeName[];
 
 DWORD GetVarType(DWORD This, DWORD index);
 

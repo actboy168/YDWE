@@ -93,9 +93,6 @@
     <ClInclude Include="slk\port\port_gcc.h">
       <Filter>slk\inc\port</Filter>
     </ClInclude>
-    <ClInclude Include="slk\port\port_msvc.h">
-      <Filter>slk\inc\port</Filter>
-    </ClInclude>
     <ClInclude Include="slk\utility\sequence.h">
       <Filter>slk\inc\utility</Filter>
     </ClInclude>

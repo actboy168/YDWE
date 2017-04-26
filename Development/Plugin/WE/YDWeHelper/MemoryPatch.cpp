@@ -63,7 +63,7 @@ CMemoryPatch::CMemoryPatch(void *patchPoint, void *patchDataBegin, void *patchDa
 	, restoreData_((const char *)patchPoint, std::distance((const char *)patchDataBegin, (const char *)patchDataEnd))
 	, isPatched_(false) {}
 
-CMemoryPatch::CMemoryPatch(void *patchPoint, void *patchData, size_t patchDataLength)
+CMemoryPatch::CMemoryPatch(void *patchPoint, const void *patchData, size_t patchDataLength)
 	: patchPoint_(patchPoint), patchData_((const char *)patchData, patchDataLength)
 	, restoreData_((const char *)patchPoint, patchDataLength)
 	, isPatched_(false) {}

@@ -107,7 +107,7 @@ CC_PutTrigger_ECA_ExternProc(DWORD This, DWORD OutClass)
   PUT_CONST("", 1);
 }
 
-void _fastcall CC_PutEventRegisterEx(DWORD This, DWORD OutClass, char* triggername, char* name, DWORD index);
+void _fastcall CC_PutEventRegisterEx(DWORD This, DWORD OutClass, const char* triggername, const char* name, DWORD index);
 
 void _fastcall CC_PutTrigger_ECA(DWORD This, DWORD OutClass, char* triggername)
 {

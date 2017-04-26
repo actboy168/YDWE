@@ -106,11 +106,13 @@ namespace DuiLib
 #pragma warning(disable:4251)
 	template <class T> class UILIB_API CStdStringPtrMap : public std::map<std::wstring, T*>
 	{
-	public:	
+	public:
+		typedef std::map<std::wstring, T*> mybase;
+
 		T* Find(const wchar_t* key) const
 		{
-			auto it = find(key);
-			if (it == end()) 
+			auto it = mybase::find(key);
+			if (it == mybase::end())
 				return nullptr;
 			else
 				return it->second;
@@ -118,14 +120,14 @@ namespace DuiLib
 
 		bool Insert(const wchar_t* key, T* pData)
 		{
-			return insert(std::make_pair(key, pData)).second;
+			return mybase::insert(std::make_pair(key, pData)).second;
 		}
 
 		bool Remove(const wchar_t* key)
 		{
-			auto it = find(key);
-			if (it == end()) return false;
-			erase(it);
+			auto it = mybase::find(key);
+			if (it == mybase::end()) return false;
+			mybase::erase(it);
 			return true;
 		}
 	};

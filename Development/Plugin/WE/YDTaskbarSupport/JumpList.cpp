@@ -2,6 +2,7 @@
 #include "Windows7.h"					
 #include <Propvarutil.h>
 #include <cassert>
+#include <base/util/foreach.h>
 
 #pragma comment(lib, "Shlwapi.lib")
 
@@ -403,7 +404,7 @@ BOOL JumpList::CommitList()
 		return FALSE;
 	}
 
-	for each (auto it in m_mapDestinations)
+	foreach (auto it, m_mapDestinations)
 	{
 		std::wstring const& strCategory = it.first;
 		IObjectCollection* pColl = it.second;
@@ -534,7 +535,7 @@ IObjectCollection* JumpList::CheckRemovedItems(IObjectCollection* pColl)
 
 void JumpList::ClearAllDestinations()
 {
-	for each (auto it in m_mapDestinations)
+	foreach (auto it, m_mapDestinations)
 	{
 		IObjectCollection* pColl = it.second;
 

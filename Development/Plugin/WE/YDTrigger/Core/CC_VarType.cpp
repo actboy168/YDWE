@@ -1,6 +1,6 @@
 
 
-char* TypeName[] = {
+const char* TypeName[] = {
   "",
   "integer",
   "real",

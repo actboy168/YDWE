@@ -133,6 +133,11 @@ namespace base { namespace warcraft3 {
 			: public std::iterator<std::input_iterator_tag, Node>
 		{
 		public:
+			typedef std::iterator<std::input_iterator_tag, Node> mybase;
+			typedef typename mybase::reference reference;
+			typedef typename mybase::pointer   pointer;
+
+		public:
 			iterator()
 				: ptr_(nullptr)
 				, index_(0)

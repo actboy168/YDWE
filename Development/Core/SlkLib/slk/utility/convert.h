@@ -4,6 +4,7 @@
 #include <array>
 #include <string>
 #include <cassert>
+#include <base/util/foreach.h>
 
 namespace slk
 {

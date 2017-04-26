@@ -10,7 +10,7 @@
 
 namespace fs = std::experimental::filesystem;
 
-std::string w2u(std::wstring& wstr)
+std::string w2u(const std::wstring& wstr)
 {
 	return std::move(std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(wstr));
 }

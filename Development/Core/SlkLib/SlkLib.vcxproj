@@ -110,7 +110,6 @@
     <ClInclude Include="slk\ObjectManager.hpp" />
     <ClInclude Include="slk\port\config.h" />
     <ClInclude Include="slk\port\port_gcc.h" />
-    <ClInclude Include="slk\port\port_msvc.h" />
     <ClInclude Include="slk\reader\CommonReader.hpp" />
     <ClInclude Include="slk\reader\IniReader.hpp" />
     <ClInclude Include="slk\reader\MetaReader.hpp" />

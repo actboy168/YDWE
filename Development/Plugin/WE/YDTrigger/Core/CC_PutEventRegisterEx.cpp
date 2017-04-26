@@ -23,7 +23,7 @@ BOOL _fastcall CC_PutAction_SearchVar(DWORD This, DWORD OutClass)
 	return FALSE;
 }
 
-void _fastcall CC_PutEventRegisterEx(DWORD This, DWORD OutClass, char* triggername, char* name, DWORD index)
+void _fastcall CC_PutEventRegisterEx(DWORD This, DWORD OutClass, const char* triggername, const char* name, DWORD index)
 {
 	if (*(DWORD*)(This+0x13C) != 0)
 	{

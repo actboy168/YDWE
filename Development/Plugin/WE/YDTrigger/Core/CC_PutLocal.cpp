@@ -4,7 +4,7 @@
 typedef struct _tag_LocalVarList
 {
 	enum VARTYPE_User_Defined type;
-	char* name;
+	const char* name;
 }
 LocalVarList;
 
@@ -13,7 +13,7 @@ int  g_local_var_list_top;
 BOOL g_local_in_mainproc;
 
 int _fastcall
-	CC_PutLocal_SaveAndCheck(DWORD OutClass, enum VARTYPE_User_Defined type, char* name)
+	CC_PutLocal_SaveAndCheck(DWORD OutClass, enum VARTYPE_User_Defined type, const char* name)
 {
 	int i;
 
@@ -36,7 +36,7 @@ int _fastcall
 }
 
 void _fastcall
-	CC_PutLocal_LocalVar(DWORD OutClass, enum VARTYPE_User_Defined type, char* prefix, char* name)
+	CC_PutLocal_LocalVar(DWORD OutClass, enum VARTYPE_User_Defined type, const char* prefix, const char* name)
 {
 	char buff[260];
 	char name_covert[260];

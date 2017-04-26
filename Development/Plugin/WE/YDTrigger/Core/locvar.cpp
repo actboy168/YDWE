@@ -4,6 +4,7 @@
 #include <set>
 #include <string>
 #include <functional>
+#include <base/util/foreach.h>
 
 extern BOOL g_bDisableSaveLoadSystem;
 extern BOOL g_local_in_mainproc;
@@ -338,7 +339,7 @@ namespace locvar
 		}
 	}
 
-	void params(DWORD This, DWORD OutClass, char* name, DWORD index, char* handle_string, int id)
+	void params(DWORD This, DWORD OutClass, const char* name, DWORD index, const char* handle_string, int id)
 	{
 		std::set<std::string> paramlist;
 
@@ -389,7 +390,7 @@ namespace locvar
 			}
 		}
 
-		for each (auto it in register_var[name])
+		foreach (auto it, register_var[name])
 		{
 			if (paramlist.find(it.first) != paramlist.end())
 			{

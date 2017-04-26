@@ -20,6 +20,3 @@ namespace std
 		return s.str();
 	}
 }
-
-#define foreach(VAL, COL) for (VAL : COL)
-

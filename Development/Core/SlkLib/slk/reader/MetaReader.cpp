@@ -3,6 +3,7 @@
 #include <base/util/buffer.h>
 #include <slk/table/MetaTable.hpp>
 #include <cassert>
+#include <base/util/foreach.h>
 
 namespace slk
 {

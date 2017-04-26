@@ -381,7 +381,7 @@ void _fastcall
 }
 
 void _fastcall
-	CC_PutAction(DWORD This, DWORD OutClass, char* name, DWORD index, DWORD Endl)
+	CC_PutAction(DWORD This, DWORD OutClass, const char* name, DWORD index, DWORD Endl)
 {
 	char NewName[260];
 	BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index+1);

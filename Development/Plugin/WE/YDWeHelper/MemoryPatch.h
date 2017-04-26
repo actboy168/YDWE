@@ -27,7 +27,7 @@ class CMemoryPatch : base::noncopyable
 {
 public:
 	CMemoryPatch(void *patchPoint, void *patchDataBegin, void *patchDataEnd);
-	CMemoryPatch(void *patchPoint, void *patchData, size_t patchDataLength);
+	CMemoryPatch(void *patchPoint, const void *patchData, size_t patchDataLength);
 	~CMemoryPatch();
 
 public:
