@@ -29,11 +29,6 @@
     <ClCompile Include="..\src\zip.c" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\StormLib\Current\StormLib_dll.vcxproj">
-      <Project>{cb385198-50b1-4cf4-883b-11f042ded6aa}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\src\minizip.def" />
   </ItemGroup>
   <ItemGroup>
