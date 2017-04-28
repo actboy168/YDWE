@@ -26,6 +26,7 @@ return function (input, jass, write)
     end
 	local w2l = require 'w3x2lni'
     local info = w2l:read_w3i(map:load_file 'war3map.w3i')
+    map:close()
     local map_options = (info['选项']['对战地图'] << 2)
         | (info['选项']['自定义玩家分组'] << 5)
         | (info['选项']['自定义队伍'] << 6)
