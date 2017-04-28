@@ -309,6 +309,14 @@ namespace process {
 		return 1;
 	}
 
+	int kill(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		bool ok = self.kill(5000);
+		lua_pushboolean(L, ok);
+		return 1;
+	}
+
 	int id(lua_State* L)
 	{
 		base::win::process& self = to(L, 1);
@@ -335,6 +343,7 @@ int luaopen_sys(lua_State* L)
 		{ "create", process::create },
 		{ "wait", process::wait },
 		{ "close", process::close },
+		{ "kill", process::kill },
 		{ "id", process::id },
 		{ "is_running", process::is_running },
 		{ "__gc", process::destructor },
