@@ -48,5 +48,7 @@ namespace base { namespace warcraft3 {
 		version_126  = 6401,   
 		version_127a = 7000,//实际是52240，愚蠢的blz
 		version_127b = 7085,
+		version_128 =  7205,
+		version_128b = 7365,
 	};
 }}
