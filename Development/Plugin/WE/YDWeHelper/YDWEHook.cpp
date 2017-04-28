@@ -39,41 +39,6 @@ static bool InstallPatch(const char* name, uintptr_t address, uint8_t *patch, ui
 	return ok;
 }
 
-static void *pgWeTextSectionBase;
-static uintptr_t gWeTextSectionLength;
-static void *pgWeDataSectionBase;
-static uintptr_t gWeDataSectionLength;
-
-static void InitSectionInfo()
-{
-	base::win::pe_reader module(GetModuleHandleW(NULL));
-	PIMAGE_SECTION_HEADER section = module.get_section_by_name(".text");
-	if (section)
-	{
-		pgWeTextSectionBase = (void *)module.rva_to_addr(section->VirtualAddress);
-		gWeTextSectionLength = section->SizeOfRawData;
-
-		LOGGING_TRACE(lg) << base::format("WE .text section start address: 0x%08X. length 0x%08X", pgWeTextSectionBase, gWeTextSectionLength);
-	}
-	else
-	{
-		LOGGING_ERROR(lg) << "Cannot get .text section info of WE.";
-	}
-
-	section = module.get_section_by_name(".data");
-	if (section)
-	{
-		pgWeDataSectionBase = (void *)module.rva_to_addr(section->VirtualAddress);
-		gWeDataSectionLength = section->SizeOfRawData;
-
-		LOGGING_TRACE(lg) << base::format("WE .data section start address: 0x%08X. length 0x%08X", pgWeDataSectionBase, gWeDataSectionLength);
-	}
-	else
-	{
-		LOGGING_ERROR(lg) << "Cannot get .data section info of WE.";
-	}
-}
-
 static uintptr_t pgTrueWeSetWindowCaption;
 static bool isWeSetWindowCaptionHookInstalled;
 
@@ -598,69 +563,63 @@ static void InitPatches()
 {
 	LOGGING_DEBUG(lg) << "Patches initialization started.";
 
-	if (pgWeTextSectionBase && (gWeTextSectionLength > 0))
-	{
-		// Syntax check patch
-		LOGGING_TRACE(lg) << "Installing syntax check patch";
-		INSTALL_PATCH(syntaxCheck);
 
-		// Auto disable trigger patch
-		LOGGING_TRACE(lg) << "Installing auto disable patch";
-		INSTALL_PATCH(autoDisable);
+	// Syntax check patch
+	LOGGING_TRACE(lg) << "Installing syntax check patch";
+	INSTALL_PATCH(syntaxCheck);
 
-		// Enable trigger check patch
-		LOGGING_TRACE(lg) << "Installing enable trigger check patch";
-		INSTALL_PATCH(enableTriggerCheck1);
-		INSTALL_PATCH(enableTriggerCheck2);
+	// Auto disable trigger patch
+	LOGGING_TRACE(lg) << "Installing auto disable patch";
+	INSTALL_PATCH(autoDisable);
 
-		LOGGING_TRACE(lg) << "Installing doodad limit patch";
-		INSTALL_PATCH(doodadLimit);
+	// Enable trigger check patch
+	LOGGING_TRACE(lg) << "Installing enable trigger check patch";
+	INSTALL_PATCH(enableTriggerCheck1);
+	INSTALL_PATCH(enableTriggerCheck2);
 
-		LOGGING_TRACE(lg) << "Installing unit/item limit patch";
-		INSTALL_PATCH(unitItemLimit);
+	LOGGING_TRACE(lg) << "Installing doodad limit patch";
+	INSTALL_PATCH(doodadLimit);
 
-		LOGGING_TRACE(lg) << "Installing editor multi-instance patch";
-		INSTALL_PATCH(editorInstanceCheck);
+	LOGGING_TRACE(lg) << "Installing unit/item limit patch";
+	INSTALL_PATCH(unitItemLimit);
 
-		LOGGING_TRACE(lg) << "Installing attack table patch";
+	LOGGING_TRACE(lg) << "Installing editor multi-instance patch";
+	INSTALL_PATCH(editorInstanceCheck);
 
-		base::win::pe_reader module(GetModuleHandleW(NULL));
+	LOGGING_TRACE(lg) << "Installing attack table patch";
+
+	base::win::pe_reader module(GetModuleHandleW(NULL));
 #define WE_ADDRESS(ADDR) ((uintptr_t)(ADDR) - 0x00400000 + (uintptr_t)module.module())
-		enum ATTACK_TABLE
-		{
-			WESTRING_UE_ATTACKTYPE_SPELLS = 0,
-			WESTRING_UE_ATTACKTYPE_NORMAL,
-			WESTRING_UE_ATTACKTYPE_PIERCE,
-			WESTRING_UE_ATTACKTYPE_SIEGE,
-			WESTRING_UE_ATTACKTYPE_MAGIC,
-			WESTRING_UE_ATTACKTYPE_CHAOS,
-			WESTRING_UE_ATTACKTYPE_HERO,
-		};
-		uintptr_t attack_table_string[] = {
-			WE_ADDRESS(0x007DF394),
-			WE_ADDRESS(0x007DF374),
-			WE_ADDRESS(0x007DF354),
-			WE_ADDRESS(0x007DF334),
-			WE_ADDRESS(0x007DF314),
-			WE_ADDRESS(0x007DF2F4),
-			WE_ADDRESS(0x007DF2D8),
-		};
+	enum ATTACK_TABLE
+	{
+		WESTRING_UE_ATTACKTYPE_SPELLS = 0,
+		WESTRING_UE_ATTACKTYPE_NORMAL,
+		WESTRING_UE_ATTACKTYPE_PIERCE,
+		WESTRING_UE_ATTACKTYPE_SIEGE,
+		WESTRING_UE_ATTACKTYPE_MAGIC,
+		WESTRING_UE_ATTACKTYPE_CHAOS,
+		WESTRING_UE_ATTACKTYPE_HERO,
+	};
+	uintptr_t attack_table_string[] = {
+		WE_ADDRESS(0x007DF394),
+		WE_ADDRESS(0x007DF374),
+		WE_ADDRESS(0x007DF354),
+		WE_ADDRESS(0x007DF334),
+		WE_ADDRESS(0x007DF314),
+		WE_ADDRESS(0x007DF2F4),
+		WE_ADDRESS(0x007DF2D8),
+	};
 
-		uintptr_t ptr = WE_ADDRESS(0x00784488);
-		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_NORMAL]); ptr += 4;
-		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_PIERCE]); ptr += 4;
-		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_SIEGE]);  ptr += 4;
-		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_MAGIC]);  ptr += 4;
-		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_CHAOS]);  ptr += 4;
-		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_SPELLS]); ptr += 4;
-		base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_HERO]);   ptr += 4;
+	uintptr_t ptr = WE_ADDRESS(0x00784488);
+	base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_NORMAL]); ptr += 4;
+	base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_PIERCE]); ptr += 4;
+	base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_SIEGE]);  ptr += 4;
+	base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_MAGIC]);  ptr += 4;
+	base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_CHAOS]);  ptr += 4;
+	base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_SPELLS]); ptr += 4;
+	base::hook::replace_pointer(ptr, attack_table_string[WESTRING_UE_ATTACKTYPE_HERO]);   ptr += 4;
 
 #undef WE_ADDRESS
-	}
-	else
-	{
-		LOGGING_ERROR(lg) << "Section info not correct. Cannot make patches";
-	}
 
 	LOGGING_DEBUG(lg) << "Patches initialization completed.";
 }
@@ -671,9 +630,6 @@ static void InitPatches()
 
 void InstallHooks()
 {
-	// Init section information
-	NGameHook::InitSectionInfo();
-
 	// Install hooks
 	NGameHook::InitInlineHook();
 	NGameHook::InitIATHook();
