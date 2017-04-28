@@ -74,12 +74,12 @@ namespace NYDWE {
 		std::wstring_view fileExt(fileName.data() + fileName.size() - 4, 4);
 		if (gIsInCompileProcess && (fileExt == L".w3x" || fileExt == L".w3m"))
 		{
+			gIsInCompileProcess = false;
 			event_array[EVENT_SAVE_MAP]([&](lua_State* L, int idx){
 				lua_pushstring(L, "map_path");
 				lua_pushwstring(L, fileName);
 				lua_settable(L, idx);
 			});
-			gIsInCompileProcess = false;
 		}
 
 		return base::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
@@ -91,8 +91,15 @@ namespace NYDWE {
 		std::string_view fileExt(fileName.data() + fileName.size() - 4, 4);
 		if (std::string_view(fileName.data() + fileName.size() - 14, 14) == "war3mapMap.blp")
 		{
-			LOGGING_TRACE(lg) << "WE is about to compile maps.";
-			gIsInCompileProcess = true;
+			if (dwCreationDisposition == OPEN_EXISTING)
+			{
+				LOGGING_TRACE(lg) << "WE is about to compile maps.";
+				gIsInCompileProcess = true;
+			}
+			else
+			{
+				gIsInCompileProcess = false;
+			}
 		}
 		else if (gIsInCompileProcess && (fileExt == ".w3x" || fileExt == ".w3m"))
 		{
