@@ -72,7 +72,7 @@ local function read_obj(chunk, type)
     for i = 1, count do
         read_data(obj)
     end
-    if not default[parent] then
+    if not default or not default[parent] then
         force_slk = true
     end
     chunk[name] = obj

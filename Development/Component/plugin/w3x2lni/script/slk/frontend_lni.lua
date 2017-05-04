@@ -14,7 +14,7 @@ local function add_obj(type, name, level_key, obj)
     new_obj._max_level = obj[level_key]
     new_obj._type = type
     new_obj._obj = true
-    if not default[new_obj._parent] then
+    if not default or not default[new_obj._parent] then
         force_slk = true
     end
     return new_obj

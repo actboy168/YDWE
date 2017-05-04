@@ -20,6 +20,47 @@ local hexs
 local wts
 local ttype
 
+local displaytype = {
+    unit = '单位',
+    ability = '技能',
+    item = '物品',
+    buff = '魔法效果',
+    upgrade = '科技',
+    doodad = '装饰物',
+    destructable = '可破坏物',
+}
+
+local function get_displayname(o)
+    local name
+    if o._type == 'buff' then
+        name = o.bufftip or o.editorname or ''
+    elseif o._type == 'upgrade' then
+        name = o.name[1] or ''
+    else
+        name = o.name or ''
+    end
+    return o._id, (name:sub(1, 100):gsub('\r\n', ' '))
+end
+
+local function format_value(value)
+    if type(value) == 'table' then
+        local tbl = {}
+        for i = 1, 4 do
+            if value[i] then
+                tbl[i] = ('[%d]: %s'):format(i, tostring(value[i]):sub(1, 25):gsub('\r\n', ' '))
+            end
+        end
+        return table_concat(tbl, ' ')
+    else
+        return tostring(tip):sub(1, 100):gsub('\r\n', ' ')
+    end
+end
+
+local function report(reason, obj, key, tip)
+    message('-report|6无效的物编数据', ('%s %s %s'):format(displaytype[ttype], get_displayname(obj)))
+    message('-tip', ('[%s]: %s'):format(key, format_value(tip)))
+end
+
 local function write(format, ...)
     hexs[#hexs+1] = (format):pack(...)
 end
@@ -121,7 +162,11 @@ local function write_object(chunk, name, obj)
     for _, key in ipairs(keys) do
         local data = obj[key]
         if data then
-            write_data(key, obj[key], metas[key])
+            if metas[key] then
+                write_data(key, obj[key], metas[key])
+            else
+                report('-report|6无效的物编数据', obj, key, obj[key])
+            end
         end
     end
 end
@@ -198,5 +243,5 @@ return function (w2l_, type, data, wts_)
     write_head()
     write_chunk(origin_id, data, 0, max)
     write_chunk(user_id, data, #origin_id, max)
-    return table_concat(hexs)
+    return table_concat(hexs), report
 end

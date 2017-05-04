@@ -24,9 +24,9 @@ local esc  = P'\\'
 local num  = R'09'
 local str1 = esc * P(1) + (1-quo)
 local str  = quo * (nl1 + str1)^0 * quo
-local wst  = quo * ('TRIGSTR_' * num^3 / fwts) * quo
+local wst  = quo * Cs('TRIGSTR_' * num^3 / fwts) * quo
 
-local pjass = Cs((nl + wst + str + 1)^0)
+local pjass = (nl + wst + str + 1)^0
 
 return function (w2l_, archive, wts_)
     local name = 'war3map.j'

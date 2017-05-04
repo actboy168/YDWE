@@ -153,7 +153,7 @@ end
 
 return function(w2l, archive, slk)
     --读取字符串
-    slk.wts = w2l:frontend_wts(archive)
+    slk.wts = w2l:frontend_wts(archive:get('war3map.wts'))
     progress(0.2)
 
     message('读取obj...')

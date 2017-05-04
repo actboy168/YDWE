@@ -51,8 +51,7 @@ local function search_string(buf)
     return result
 end
 
-return function (w2l, archive)
-    local buf = archive:get('war3map.wts')
+return function (w2l, buf)
     local tbl = { mark = {} }
     if not buf then
         return tbl

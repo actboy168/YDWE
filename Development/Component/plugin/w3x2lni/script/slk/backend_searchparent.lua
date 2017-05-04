@@ -52,7 +52,7 @@ local function find_para(name, obj, default, type)
     if obj._parent and default[obj._parent] then
         return obj._parent
     end
-    if default[name] then
+    if default[name] and default[name]._code == obj._code then
         return name
     end
     local code = obj['_code']
@@ -119,7 +119,6 @@ local function parse_obj(name, obj, default, config, ttype)
     end
 
     obj._parent = parent
-    obj._code = default[parent]._code
 end
 
 local function processing(w2l, type, chunk)

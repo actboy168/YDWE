@@ -69,17 +69,14 @@ function mt:editstring(str)
 end
 
 local function create_default(w2l)
-    return {
-        ability      = lni(io.load(w2l.default / 'ability.ini')),
-        buff         = lni(io.load(w2l.default / 'buff.ini')),
-        unit         = lni(io.load(w2l.default / 'unit.ini')),
-        item         = lni(io.load(w2l.default / 'item.ini')),
-        upgrade      = lni(io.load(w2l.default / 'upgrade.ini')),
-        doodad       = lni(io.load(w2l.default / 'doodad.ini')),
-        destructable = lni(io.load(w2l.default / 'destructable.ini')),
-        txt          = lni(io.load(w2l.default / 'txt.ini')),
-        misc         = lni(io.load(w2l.default / 'misc.ini')),
-    }
+    local default = {}
+    for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'txt', 'misc'} do
+        local str = io.load(w2l.default / (name .. '.ini'))
+        if str then
+            default[name] = lni(str)
+        end
+    end
+    return default
 end
 
 function mt:get_default(create)
