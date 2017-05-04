@@ -2,6 +2,34 @@ local stormlib = require 'ffi.stormlib'
 local w2l = require 'w3x2lni'
 local mapdump = require 'mapdump'
 
+local mt = {}
+mt.__index = mt
+
+function mt:process_create(command_line, current_dir)
+	if self.h then
+		self.h:kill()
+		self.h = nil
+	end
+
+	local p = sys.process()
+	p:hide_window()
+	if not p:create(nil, command_line, current_dir) then
+		log.error('Executed failed: ', command_line)
+		return
+	end
+	log.trace('Executed: ', command_line)
+	self.h = p
+end
+
+function mt:__gc()
+	if self.h then
+		self.h:kill()
+		self.h = nil
+	end
+end
+
+local ydhost = setmetatable({}, mt)
+
 local function getplayernum(mappath)
 	local ok, result = pcall(function()
 		local map = stormlib.open(mappath, true)
@@ -30,37 +58,6 @@ end
 
 local function single_test(commandline, mappath)
 	return '"' .. (fs.war3_path() / 'war3.exe'):string() .. '" -loadfile "' .. mappath:string() .. '"' .. commandline
-end
-
-local function process_kills(proc)
-	local list = process.list()
-	local function kill_by_name(name)
-		local ids = list[name:lower()]
-		if ids ~= nil then
-			for _, id in ipairs(ids) do
-				process.kill(id)
-			end
-		end
-	end
-	if type(proc) == 'string' then
-		kill_by_name(proc)
-	elseif type(proc) == 'table' then
-		for _, name in pairs(proc) do
-			kill_by_name(name)
-		end
-	end
-end
-
-local function process_create(command_line, current_dir)
-	local p = sys.process()
-	p:hide_window()
-	if not p:create(nil, command_line, current_dir) then
-		log.error(string.format("Executed %s failed", command_line))
-		return
-	end
-	p:close()
-	p = nil
-	log.trace(string.format("Executed %s.", command_line))
 end
 
 local function path_sub(a, b)
@@ -138,10 +135,9 @@ end
 local function host_test(commandline, mappath)
 	local host_test = tonumber(global_config["HostTest"]["Option"])
 	local curdir = fs.ydwe_path() / 'plugin' / 'ydhost'
-	process_kills('ydhost.exe')
 	host_copy_dll(curdir)
 	host_save_config(curdir, mappath, host_test + 1)
-	process_create(curdir / 'ydhost.exe', curdir)
+	ydhost:process_create(curdir / 'ydhost.exe', curdir)
 	local cmd = '"' .. (fs.war3_path() / 'war3.exe'):string() .. '"' .. commandline .. ' -auto'
 	if host_test == 0 then
 		return cmd, 1
