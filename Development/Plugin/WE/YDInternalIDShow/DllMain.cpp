@@ -2,79 +2,73 @@
 #include <base/hook/fp_call.h>
 #include <base/hook/inline.h>
 
-namespace NYDWEPlugin
-{
-
-static uintptr_t fpgSlkStringGet;
-static BOOL __fastcall SlkStringGetHook(void *thisObject, void *dummy, int rowId, size_t index, char *buffer, size_t bufferSize)
-{
-	BOOL result = base::this_call<BOOL>(fpgSlkStringGet, thisObject, rowId, index, buffer, bufferSize);
-
-	void *pNode;
-	__asm
+namespace base { namespace hook {
+	template <class T>
+	struct inline_helper
 	{
-		mov		eax, thisObject;
-		mov		edx, [eax + 400];
-		mov		eax, index;
-		imul	eax, 108;
-		add		eax, edx;
-		mov		pNode, eax;
-	}
+		static uintptr_t real;
+		static bool hook(uintptr_t address) { real = address; return hook(); }
+		static bool hook() { return inline_install(&T::real, (uintptr_t)T::fake); }
+		static bool unhook() { return inline_uninstall(&T::real, (uintptr_t)T::fake); }
+	};
+	template <class T>
+	uintptr_t inline_helper<T>::real = 0;
+}}
 
-	char *fileName = (char *)thisObject + 8;
-	char *itemName = (char *)pNode + 8;
 
-	size_t length = strlen(buffer);
-	if (length + 7 <= bufferSize &&
-		strcmp(itemName, "displayName") == 0 && (
-			strcmp(fileName, "Units\\AbilityMetaData") == 0 ||
-			strcmp(fileName, "Units\\UnitMetaData") == 0 ||
-			strcmp(fileName, "Units\\AbilityBuffMetaData") == 0 ||
-			strcmp(fileName, "Units\\UpgradeMetaData") == 0 ||
-			strcmp(fileName, "Units\\DestructableMetaData") == 0 ||
-			strcmp(fileName, "Doodads\\DoodadMetaData") == 0
-		)
-	)
+struct SlkStringGet
+	: public base::hook::inline_helper<SlkStringGet>
+{
+	static BOOL __fastcall fake(void *thisObject, void *dummy, int rowId, size_t index, char *buffer, size_t bufferSize)
 	{
-		buffer[length] = '[';
-		*(int *)&buffer[length + 1] = rowId;
-		buffer[length + 5] = ']';
-		buffer[length + 6] = 0;
+		BOOL result = base::this_call<BOOL>(real, thisObject, rowId, index, buffer, bufferSize);
+
+		void *pNode;
+		__asm
+		{
+			mov		eax, thisObject;
+			mov		edx, [eax + 400];
+			mov		eax, index;
+			imul	eax, 108;
+			add		eax, edx;
+			mov		pNode, eax;
+		}
+
+		char *fileName = (char *)thisObject + 8;
+		char *itemName = (char *)pNode + 8;
+
+		size_t length = strlen(buffer);
+		if (length + 7 <= bufferSize &&
+			strcmp(itemName, "displayName") == 0 && (
+				strcmp(fileName, "Units\\AbilityMetaData") == 0 ||
+				strcmp(fileName, "Units\\UnitMetaData") == 0 ||
+				strcmp(fileName, "Units\\AbilityBuffMetaData") == 0 ||
+				strcmp(fileName, "Units\\UpgradeMetaData") == 0 ||
+				strcmp(fileName, "Units\\DestructableMetaData") == 0 ||
+				strcmp(fileName, "Doodads\\DoodadMetaData") == 0
+				)
+			)
+		{
+			buffer[length] = '[';
+			*(int *)&buffer[length + 1] = rowId;
+			buffer[length + 5] = ']';
+			buffer[length + 6] = 0;
+		}
+
+		return result;
 	}
-
-	return result;
-}
-
-static void InitHook()
-{
-	fpgSlkStringGet = (uintptr_t)0x00515670;
-
-	base::hook::inline_install(&fpgSlkStringGet, (uintptr_t)SlkStringGetHook);
-}
-
-static void CleanHook()
-{
-	base::hook::inline_uninstall(&fpgSlkStringGet, (uintptr_t)SlkStringGetHook);
-}
-
-HMODULE gSelfModule;
-
-} // namespace NYDWEPlugin
+};
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 {
-	using namespace NYDWEPlugin;
-
 	switch (reason)
 	{
 	case DLL_PROCESS_ATTACH:
 		DisableThreadLibraryCalls(module);
-		gSelfModule = module;
-
-		InitHook();
+		SlkStringGet::hook(0x00515670);
 		break;
 	case DLL_PROCESS_DETACH:
-		CleanHook();
+		SlkStringGet::unhook();
 		break;
 	default:
 		break;
