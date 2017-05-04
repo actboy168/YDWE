@@ -15,7 +15,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 
 		NYDWE::lg = logging::get_logger("inject");
 		NYDWE::InstallHooks();
-		LOGGING_INFO(NYDWE::lg) << "EverEditor startup complete.";
+		LOGGING_INFO(NYDWE::lg) << "YDWE startup complete.";
 	}
 	else if (reason == DLL_PROCESS_DETACH)
 	{
