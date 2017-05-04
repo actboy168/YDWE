@@ -134,7 +134,7 @@ bool LuaEngine::Uninitialize()
 {
 	if (vaild_)
 	{
-		//lua_close(state_);
+		lua_close(state_);
 		state_ = nullptr;
 		LOGGING_INFO(logger_) << "Script engine has been shut down.";
 		vaild_ = false;
