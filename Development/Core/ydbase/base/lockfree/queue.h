@@ -52,16 +52,16 @@ namespace base { namespace lockfree {
 		: public Alloc::template rebind<queue_chunk<T, N> >::other
 	{
 	public:
-		typedef queue_chunk<T, N>                                  chunt_type;
-		typedef typename Alloc::template rebind<chunt_type>::other base_type;
+		typedef queue_chunk<T, N>                                  chunk_type;
+		typedef typename Alloc::template rebind<chunk_type>::other base_type;
 
 	public:
-		inline chunt_type*  allocate()
+		chunk_type*  allocate()
 		{
 			return base_type::allocate(1);
 		}
 
-		inline void deallocate(chunt_type* p)
+		void deallocate(chunk_type* p)
 		{
 			base_type::deallocate(p, 1);
 		}
@@ -73,61 +73,62 @@ namespace base { namespace lockfree {
 	{
 	public:
 		typedef queue_alloc<T, N, Alloc>        alloc_type;
-		typedef typename alloc_type::chunt_type chunt_type;
+		typedef typename alloc_type::chunk_type chunk_type;
 		typedef T                               value_type;
 		typedef value_type*                     pointer;
 		typedef value_type&                     reference;
 		typedef value_type const&               const_reference;
 
 	public:
-		inline queue ()
+		queue()
+			: begin_chunk(alloc_type::allocate())
+			, begin_pos(0)
+			, back_chunk(begin_chunk)
+			, back_pos(0)
+			, end_chunk(begin_chunk)
+			, end_pos(0)
+			, spare_chunk()
 		{
-			begin_chunk = alloc_type::allocate();
 			assert (begin_chunk);
-			begin_pos = 0;
-			back_chunk = begin_chunk;
-			back_pos = 0;
-			end_chunk = begin_chunk;
-			end_pos = 0;
 			do_push();
 			assert(empty());
 		}
 
-		inline ~queue ()
+		~queue()
 		{
 			for (;;) {
 				if (begin_chunk == end_chunk) {
 					alloc_type::deallocate(begin_chunk);
 					break;
 				}
-				chunt_type *o = begin_chunk;
+				chunk_type *o = begin_chunk;
 				begin_chunk = begin_chunk->next;
 				alloc_type::deallocate(o);
 			}
 
-			chunt_type *sc = spare_chunk.exchange(nullptr);
+			chunk_type *sc = spare_chunk.exchange(nullptr);
 			if (sc)
 				alloc_type::deallocate(sc);
 		}
 
-		inline reference front ()
+		reference front()
 		{
-			return begin_chunk->values [begin_pos];
+			return begin_chunk->values[begin_pos];
 		}
 
-		inline const_reference front () const
+		const_reference front() const
 		{
-			return begin_chunk->values [begin_pos];
+			return begin_chunk->values[begin_pos];
 		}
 
-		inline reference back ()
+		reference back()
 		{
-			return back_chunk->values [back_pos];
+			return back_chunk->values[back_pos];
 		}
 
-		inline const_reference back () const
+		const_reference back() const
 		{
-			return back_chunk->values [back_pos];
+			return back_chunk->values[back_pos];
 		}
 
 		void push(value_type&& val)
@@ -159,7 +160,7 @@ namespace base { namespace lockfree {
 			return true;
 		}
 
-		inline void do_push ()
+		void do_push()
 		{
 			back_chunk = end_chunk;
 			back_pos = end_pos;
@@ -167,7 +168,7 @@ namespace base { namespace lockfree {
 			if (++end_pos != N)
 				return;
 
-			chunt_type *sc = spare_chunk.exchange(nullptr);
+			chunk_type *sc = spare_chunk.exchange(nullptr);
 			if (sc) {
 				end_chunk->next = sc;
 			} else {
@@ -178,23 +179,23 @@ namespace base { namespace lockfree {
 			end_pos = 0;
 		}
 
-		inline void do_pop ()
+		void do_pop()
 		{
 			if (++ begin_pos == N) {
-				chunt_type *o = begin_chunk;
+				chunk_type *o = begin_chunk;
 				begin_chunk = begin_chunk->next;
 				begin_pos = 0;
 
-				chunt_type *cs = spare_chunk.exchange(o);
+				chunk_type *cs = spare_chunk.exchange(o);
 				if (cs)
 					alloc_type::deallocate(cs);
 			}
 		}
 
 		// It's safe in pop thread.
-		inline bool empty () const
+		bool empty() const
 		{
-			volatile chunt_type* _back_chunk = back_chunk;
+			volatile chunk_type* _back_chunk = back_chunk;
 			volatile size_t      _back_pos   = back_pos;
 
 			if ((begin_chunk == _back_chunk) && (begin_pos == _back_pos))
@@ -204,14 +205,14 @@ namespace base { namespace lockfree {
 		}
 
 	private:
-		chunt_type* begin_chunk;
+		chunk_type* begin_chunk;
 		size_t      begin_pos;
-		chunt_type* back_chunk;
+		chunk_type* back_chunk;
 		size_t      back_pos;
-		chunt_type* end_chunk;
+		chunk_type* end_chunk;
 		size_t      end_pos;
 
-		atomic<chunt_type*> spare_chunk;
+		atomic<chunk_type*> spare_chunk;
 
 	private:
 		queue(const queue&);
