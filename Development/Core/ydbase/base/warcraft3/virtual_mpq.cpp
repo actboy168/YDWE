@@ -14,6 +14,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 
 	namespace real
 	{
+		uintptr_t SFileCloseArchive = 0;
 		uintptr_t SFileCloseFile = 0;
 		uintptr_t SFileEnableDirectAccess = 0;
 		uintptr_t SFileGetFileArchive = 0;
@@ -39,6 +40,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 
 	namespace filesystem
 	{
+		HANDLE                              top_mpq = 0;
 		event_cb	                        event;
 		std::map<std::string, watch_cb>	    watch_map;
 		std::array<std::list<fs::path>, 16> mpq_path;
@@ -122,6 +124,10 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 				{
 					return false;
 				}
+				if (top_mpq && base::std_call<bool>(real::SFileFileExistsEx, top_mpq, szfilename, 0))
+				{
+					return false;
+				}
 				std::string filename = szfilename;
 				if (!try_watch(filename, buffer_ptr, size_ptr, reserve_size))
 				{
@@ -166,10 +172,6 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		//	return base::std_call<LCID>(real::SFileSetLocale, locale);
 		//}
 		//
-		//bool __stdcall SFileOpenArchive(const char* mpqname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
-		//{
-		//	return base::std_call<bool>(real::SFileOpenArchive, mpqname, priority, flags, mpq_handle_ptr);
-		//}
 		//
 		//bool __stdcall SFileOpenFile(const char* filename, HANDLE* file_handle_ptr)
 		//{
@@ -205,6 +207,25 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		//{
 		//	return base::std_call<bool>(real::SFileGetArchiveName, mpq_handle, name, size);
 		//}
+
+		bool __stdcall SFileOpenArchive(const char* mpqname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
+		{
+			bool ok = base::std_call<bool>(real::SFileOpenArchive, mpqname, priority, flags, mpq_handle_ptr);
+			if (mpq_handle_ptr && priority == 16 && ok)
+			{
+				filesystem::top_mpq = *mpq_handle_ptr;
+			}
+			return ok;
+		}
+
+		bool __stdcall SFileCloseArchive(HANDLE mpq_handle)
+		{
+			if (filesystem::top_mpq == mpq_handle)
+			{
+				filesystem::top_mpq = 0;
+			}
+			return base::std_call<bool>(real::SFileCloseArchive, mpq_handle);
+		}
 
 		int __stdcall SFileLoadFile(const char* filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size, OVERLAPPED* overlapped_ptr)
 		{
@@ -277,11 +298,12 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		bool result = true;
 		result = result && (0 != (real::SMemAlloc = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"Storm.dll"), (const char*)401)));
 #define IAT_HOOK(ord, name) result = result && (0 != (real:: ## name = base::hook::iat(module_handle, "Storm.dll", (const char*)(ord), (uintptr_t)fake:: ## name ##)))
+		IAT_HOOK(252, SFileCloseArchive);
 		//IAT_HOOK(253, SFileCloseFile);
 		//IAT_HOOK(263, SFileEnableDirectAccess);
 		//IAT_HOOK(264, SFileGetFileArchive);
 		//IAT_HOOK(265, SFileGetFileSize);
-		//IAT_HOOK(266, SFileOpenArchive);
+		IAT_HOOK(266, SFileOpenArchive);
 		//IAT_HOOK(267, SFileOpenFile);
 		//IAT_HOOK(268, SFileOpenFileEx);
 		//IAT_HOOK(269, SFileReadFile);
