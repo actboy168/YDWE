@@ -447,7 +447,7 @@ end
 local slk_proxy = {}
 
 function slk_proxy:refresh(mappath)
-    if not used then
+    if not next(used) then
         return
     end
     create_report()
@@ -463,7 +463,7 @@ function slk_proxy:refresh(mappath)
     ar:close()
 end
 
-function slk_proxy:initialize(mappath)
+local function initialize(mappath)
     slk = {}
     obj = {}
     used = {}
@@ -487,6 +487,6 @@ function slk_proxy:initialize(mappath)
     ar:close()
 end
 
-slk_proxy:initialize(__map_handle__.handle)
+initialize(__map_handle__.handle)
 
 return slk_proxy

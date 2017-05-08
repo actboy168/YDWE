@@ -103,7 +103,9 @@ function template:do_compile(op)
 	if not suc then
     	return false, content
     end
-    require('slk'):refresh(__map_handle__.handle)
+    if package.loaded['slk'] then
+        package.loaded['slk']:refresh(__map_handle__.handle)
+    end
     return true, content
 end
 
