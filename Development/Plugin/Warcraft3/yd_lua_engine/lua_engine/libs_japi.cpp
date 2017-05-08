@@ -22,7 +22,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace japi {
 
 	int japi_index(lua_State* L)
 	{
-		const char* name = lua_tostring(L, 2);
+		const char* name = luaL_checkstring(L, 2);
 
 		jass::func_value const* nf = jass::japi_func(name);
 		if (nf)

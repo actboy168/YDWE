@@ -91,7 +91,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return 0;
 		}
 
-		const char* name = lua_tostring(L, 2);
+		const char* name = luaL_checkstring(L, 2);
 		jass::global_variable gv(name);
 		if (gv.is_vaild())
 		{
