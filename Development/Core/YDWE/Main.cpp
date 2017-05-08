@@ -37,14 +37,6 @@ INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR 
 	// 拷贝到待增加路径字符串
 	newPathEnvironmentVariable.append(binaryPath);
 
-	// plugin文件夹路径
-	PathRemoveFileSpecW(binaryPath);
-	PathAppendW(binaryPath, L"plugin");
-
-	// 拷贝到待增加路径字符串
-	newPathEnvironmentVariable.append(L";");
-	newPathEnvironmentVariable.append(binaryPath);
-
 	/* 设置PATH环境变量 */
 	// 获取环境变量
 	pathEnvironmentVariable[0] = L'\0';
