@@ -61,4 +61,5 @@ namespace base { namespace warcraft3 { namespace jass {
 	/*_BASE_API*/ bool japi_func_add(const char* proc_name, uintptr_t new_proc);
 	/*_BASE_API*/ bool japi_func_add(const char* proc_name, uintptr_t new_proc, const char* param);
 	/*_BASE_API*/ bool japi_func_remove(const char* proc_name);
+	_BASE_API func_mapping initialize_mapping(const char* startfunc);
 }}}

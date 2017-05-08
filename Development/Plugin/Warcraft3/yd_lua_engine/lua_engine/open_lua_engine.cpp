@@ -21,6 +21,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	namespace message { int open(lua_State* L); }
 	namespace bignum { int open(lua_State* L); }
 	namespace log { int open(lua_State* L); }
+	namespace ai { int open(lua_State* L); }
 
 	int fix_baselib(lua_State* L);
 
@@ -45,6 +46,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		register_preload_lib(L, "jass.message", message::open);
 		register_preload_lib(L, "jass.bignum",  bignum::open);	
 		register_preload_lib(L, "jass.log",     log::open);
+		register_preload_lib(L, "jass.ai",      ai::open);
 
 		jreal_make_mt(L);
 		jhandle_ud_make_mt(L);

@@ -96,6 +96,7 @@
     </ClInclude>
     <ClCompile Include="lua_engine\fix_baselib.cpp" />
     <ClCompile Include="lua_engine\jassbind.cpp" />
+    <ClCompile Include="lua_engine\libs_ai.cpp" />
     <ClCompile Include="lua_engine\libs_common.cpp" />
     <ClCompile Include="lua_engine\libs_console.cpp" />
     <ClCompile Include="lua_engine\libs_bignum.cpp" />

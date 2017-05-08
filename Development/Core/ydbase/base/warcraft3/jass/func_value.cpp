@@ -57,21 +57,22 @@ namespace base { namespace warcraft3 { namespace jass {
 		};
 #pragma pack(pop)
 
-		func_mapping initialize_mapping_from_register()
+	}
+
+	func_mapping initialize_mapping(const char* startfunc)
+	{
+		func_mapping m;
+
+		uintptr_t start = get_war3_searcher().search_string(startfunc);
+		if (start)
 		{
-			func_mapping m;
-
-			uintptr_t ptr_Deg2Rad = get_war3_searcher().search_string("Deg2Rad");
-			if (ptr_Deg2Rad)
+			for (detail::asm_register_native_function* ptr = (detail::asm_register_native_function*)(start - 6); ptr->verify(); ++ptr)
 			{
-				for (asm_register_native_function* ptr = (asm_register_native_function*)(ptr_Deg2Rad - 6); ptr->verify(); ++ptr)
-				{
-					m.insert(std::make_pair(ptr->get_name(), func_value(ptr->get_param(), ptr->get_address())));
-				}
+				m.insert(std::make_pair(ptr->get_name(), func_value(ptr->get_param(), ptr->get_address())));
 			}
-
-			return std::move(m);
 		}
+
+		return std::move(m);
 	}
 
 	func_value::func_value()
@@ -162,7 +163,7 @@ namespace base { namespace warcraft3 { namespace jass {
 
 		DO_ONCE_NOTHREADSAFE()
 		{
-			jass_function = detail::initialize_mapping_from_register();
+			jass_function = initialize_mapping("Deg2Rad");
 		}
 
 		auto it = jass_function.find(proc_name);
