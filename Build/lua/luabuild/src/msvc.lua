@@ -89,6 +89,11 @@ function mt:crtpath()
     end
 end
 
+function mt:sdkpath()
+	local reg = registry.open [[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots]]
+    return fs.path(reg.KitsRoot10)
+end
+
 function mt:rebuild(solution, configuration, platform)
     execute(('MSBuild "%s" /m /v:m /t:rebuild /clp:ShowEventId /p:Configuration="%s",Platform="%s"'):format(solution:string(), configuration or 'Release', platform or 'Win32'))
 end
