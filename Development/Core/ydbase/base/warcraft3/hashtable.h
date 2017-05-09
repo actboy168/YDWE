@@ -357,9 +357,7 @@ namespace base { namespace warcraft3 {
 	};
 
 	_BASE_API jass_vm_t*                    get_jass_vm();
-	_BASE_API jass_vm_t*                    get_jass_vm_nofix();
-	_BASE_API jass_vm_t*                    get_current_jass_vm();
-	_BASE_API jass_vm_t*                    get_current_jass_vm_nofix();
+	_BASE_API uintptr_t                     get_jass_thread();
 	_BASE_API hashtable::native_func_table* get_native_function_hashtable();
 	_BASE_API uintptr_t                     get_current_jass_pos();
 }}

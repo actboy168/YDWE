@@ -174,10 +174,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		if (lua_isyieldable(L))
 		{
-			uintptr_t vm = (uintptr_t)get_current_jass_vm_nofix();
-			if (vm && *(uintptr_t*)(vm + 0x34))
+			uintptr_t thread = get_jass_thread();
+			if (thread && *(uintptr_t*)(thread + 0x34))
 			{
-				*(uintptr_t*)(vm + 0x20) -= jass::trampoline_size();
+				*(uintptr_t*)(thread + 0x20) -= jass::trampoline_size();
 				return lua_yield(L, 0);
 			}
 		}
