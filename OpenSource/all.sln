@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.25914.0
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jpeg", "jpeg\build\jpeg.vcxproj", "{019DBD2A-273D-4BA4-BF86-B5EFE2ED76B1}"
 EndProject
@@ -29,6 +29,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "Lua\build\lua.vcxproj", "{76338556-5419-494A-A4C6-D79090629054}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luacore", "Lua\build\luacore.vcxproj", "{B84F7231-16CE-41D8-8C08-7B523FF4225B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lpeg", "lpeg\project\lpeg.vcxproj", "{632037EE-EBB5-49DB-B142-B4EA00B17B34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,12 @@ Global
 		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Release|Win32.ActiveCfg = Release|Win32
 		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Release|Win32.Build.0 = Release|Win32
 		{B84F7231-16CE-41D8-8C08-7B523FF4225B}.Release|x64.ActiveCfg = Release|Win32
+		{632037EE-EBB5-49DB-B142-B4EA00B17B34}.Debug|Win32.ActiveCfg = Debug|Win32
+		{632037EE-EBB5-49DB-B142-B4EA00B17B34}.Debug|Win32.Build.0 = Debug|Win32
+		{632037EE-EBB5-49DB-B142-B4EA00B17B34}.Debug|x64.ActiveCfg = Debug|Win32
+		{632037EE-EBB5-49DB-B142-B4EA00B17B34}.Release|Win32.ActiveCfg = Release|Win32
+		{632037EE-EBB5-49DB-B142-B4EA00B17B34}.Release|Win32.Build.0 = Release|Win32
+		{632037EE-EBB5-49DB-B142-B4EA00B17B34}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
