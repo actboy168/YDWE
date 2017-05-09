@@ -26,6 +26,7 @@ namespace lua_loader {
 	public:
 		jass_state()
 			: state_(nullptr)
+			, dbg_(nullptr)
 		{
 			register_game_reset_event([this](uintptr_t)
 			{
@@ -45,7 +46,7 @@ namespace lua_loader {
 		lua_State* get()
 		{
 			if (!state_) state_ = initialize();
-			dbg_ = debugger_create(state_);
+			if (!dbg_) dbg_ = debugger_create(state_);
 			return state_;
 		}
 
