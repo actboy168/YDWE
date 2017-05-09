@@ -30,8 +30,8 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime 
 		int get_err_function(lua_State* L);
 		int get_global_table(lua_State* L, const char* name, bool weak);
 
-		int thread_create(lua_State* L, int index);
-		int thread_save(lua_State* L, int key, int value);
+		int thread_create(lua_State* L, int key, void* thread);
+		int thread_save(lua_State* L, int key, void* thread, int value);
 
 		int handle_ud_get_table(lua_State* L);
 

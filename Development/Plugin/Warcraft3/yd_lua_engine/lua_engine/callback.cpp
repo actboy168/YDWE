@@ -3,6 +3,7 @@
 #include "libs_runtime.h"
 #include "common.h"
 #include <base/warcraft3/jass/trampoline_function.h>
+#include <base/warcraft3/hashtable.h>
 #include <Windows.h>
 #include <cassert>
 
@@ -96,10 +97,16 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 	}
 
+	void* get_jass_thread()
+	{
+		return (void*)get_current_jass_vm_nofix();
+	}
+
 	int safe_call_has_sleep(lua_State* L, int nargs, int nresults, bool err_func)
 	{
+		void* jassthread = get_jass_thread();
 		int func_idx = lua_gettop(L) - nargs;
-		runtime::thread_create(L, func_idx);
+		runtime::thread_create(L, func_idx, jassthread);
 		lua_State* thread = lua_tothread(L, -1);
 		int thread_idx = func_idx;
 		lua_insert(L, thread_idx);
@@ -125,7 +132,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 			break;
 		case LUA_YIELD:
-			runtime::thread_save(L, func_idx, thread_idx);
+			runtime::thread_save(L, func_idx, jassthread, thread_idx);
 			break;
 		default:
 			error_function(thread, err_func);

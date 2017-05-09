@@ -78,33 +78,57 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime	
 		return get_global_table(L, "_JASS_THREAD_TABLE", true);
 	}
 
-	int thread_create(lua_State* L, int index)
+	int thread_create(lua_State* L, int key, void* thread)
 	{
 		thread_get_table(L);
-		lua_pushvalue(L, index);
-		lua_rawget(L, -2);
-		if (lua_isnil(L, -1))
+		lua_pushvalue(L, key);
+		if (lua_rawget(L, -2) != LUA_TTABLE)
 		{
-			lua_pop(L, 1);
+			lua_pop(L, 2);
 			lua_newthread(L);
+			return 1;
 		}
-		else
+		if (lua_rawgetp(L, -1, thread) != LUA_TTHREAD)
 		{
-			lua_pushvalue(L, index);
-			lua_pushnil(L);
-			lua_rawset(L, -4);
+			lua_pop(L, 3);
+			lua_newthread(L);
+			return 1;
 		}
+
+		lua_pushnil(L);
+		lua_rawsetp(L, -3, thread);
+
+		lua_pushnil(L);
+		if (lua_next(L, -2))
+		{
+			lua_pop(L, 2);
+			lua_remove(L, -2);
+			lua_remove(L, -2);
+			return 1;
+		}
+
+		lua_pushvalue(L, key);
+		lua_rawset(L, -4);
+		lua_remove(L, -2);
 		lua_remove(L, -2);
 		return 1;
 	}
 
-	int thread_save(lua_State* L, int key, int value)
+	int thread_save(lua_State* L, int key, void* thread, int value)
 	{
 		thread_get_table(L);
 		lua_pushvalue(L, key);
+		if (lua_rawget(L, -2) != LUA_TTABLE)
+		{
+			lua_pop(L, 1);
+			lua_newtable(L);
+			lua_pushvalue(L, key);
+			lua_pushvalue(L, -2);
+			lua_rawset(L, -4);
+		}
 		lua_pushvalue(L, value);
-		lua_rawset(L, -3);
-		lua_pop(L, 1);
+		lua_rawsetp(L, -2, thread);
+		lua_pop(L, 2);
 		return 0;
 	}
 
