@@ -262,8 +262,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		lua_pop(L, 1);
 
 		lua_pushnil(L);
-		lua_setglobal(L, "debug");
-		lua_pushnil(L);
 		lua_setglobal(L, "dofile");
 		lua_pushnil(L);
 		lua_setglobal(L, "loadfile");
