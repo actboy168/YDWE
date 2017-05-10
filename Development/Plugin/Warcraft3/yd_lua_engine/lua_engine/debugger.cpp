@@ -2,9 +2,7 @@
 
 #include <Windows.h>
 #include <base/path/self.h>	  
-#include <base/warcraft3/event.h>	 
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/trampoline_function.h>  
+#include <base/warcraft3/event.h>
 #include <base/hook/fp_call.h>	
 #include <lua.hpp>
 
@@ -33,25 +31,23 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	class debugger
 	{
 	public:
-		debugger(lua_State* L)
+		debugger()
 			: m_(L"vscode-debug.dll")
 			, handel_(0)
 			, create_(0)
 			, close_(0)
-			, update_(0)
 		{
 			if (!m_.handle())
 				return;
 			create_ = m_.api("vscode_debugger_create");
 			close_ = m_.api("vscode_debugger_close");
-			update_ = m_.api("vscode_debugger_update");
-			if (!create_ || !close_ || !update_)
+			attach_lua_ = m_.api("vscode_debugger_attach_lua");
+			detach_lua_ = m_.api("vscode_debugger_detach_lua");
+			if (!create_ || !close_ || !attach_lua_ || !detach_lua_)
 				return;
-			handel_ = base::c_call<void*>(create_, L, "127.0.0.1", 4278);
+			handel_ = base::c_call<void*>(create_, "127.0.0.1", 4278, 0);
 			if (!handel_)
 				return;
-			jass::jreal_t t = jass::to_real(0.1f);
-			jass::call("TimerStart", jass::call("CreateTimer"), &t, true, jass::trampoline_create(debugger::static_update, (uint32_t)(uintptr_t)this, 0));
 		}
 
 		~debugger()
@@ -62,19 +58,22 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			handel_ = 0;
 		}
 
-		void update()
+		void attach_lua(lua_State* L)
 		{
 			if (!handel_)
 				return;
-			if (!update_)
+			if (!attach_lua_)
 				return;
-			base::c_call<void>(update_, handel_);
+			base::c_call<void*>(attach_lua_, handel_, L);
 		}
 
-		static uint32_t __fastcall static_update(uint32_t dbg, uint32_t)
+		void detach_lua(lua_State* L)
 		{
-			((debugger*)dbg)->update();
-			return 0;
+			if (!handel_)
+				return;
+			if (!detach_lua_)
+				return;
+			base::c_call<void*>(detach_lua_, handel_, L);
 		}
 
 	private:
@@ -82,16 +81,27 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		void*  handel_;
 		intptr_t create_;
 		intptr_t close_;
-		intptr_t update_;
+		intptr_t attach_lua_;
+		intptr_t detach_lua_;
 	};
 
-	debugger* debugger_create(lua_State* L)
+	debugger* debugger_create()
 	{
-		return new debugger(L);
+		return new debugger();
 	}
 
 	void debugger_close(debugger* dbg)
 	{
 		delete dbg;
+	}
+
+	void debugger_attach_lua(debugger* dbg, lua_State* L)
+	{
+		dbg->attach_lua(L);
+	}
+
+	void debugger_detach_lua(debugger* dbg, lua_State* L)
+	{
+		dbg->detach_lua(L);
 	}
 }}}

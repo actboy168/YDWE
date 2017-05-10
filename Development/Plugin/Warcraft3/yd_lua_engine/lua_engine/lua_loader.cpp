@@ -32,9 +32,9 @@ namespace lua_loader {
 			{
 				if (dbg_)
 				{
-					debugger_close(dbg_);
-					dbg_ = nullptr;
+					debugger_detach_lua(dbg_, state_);
 				}
+
 				if (state_)
 				{
 					lua_close(state_);
@@ -45,8 +45,11 @@ namespace lua_loader {
 
 		lua_State* get()
 		{
-			if (!state_) state_ = initialize();
-			if (!dbg_) dbg_ = debugger_create(state_);
+			if (!state_) {
+				state_ = initialize();
+				if (!dbg_) dbg_ = debugger_create();
+				debugger_attach_lua(dbg_, state_);
+			}
 			return state_;
 		}
 
