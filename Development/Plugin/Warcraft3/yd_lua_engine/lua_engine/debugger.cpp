@@ -5,7 +5,7 @@
 namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger {
 	int open(lua_State* L)
 	{
-		HMODULE m = LoadLibraryW(L"vscode-debug.dll");
+		HMODULE m = LoadLibraryW(L"debugger.dll");
 		if (!m) {
 			return 0;
 		}
