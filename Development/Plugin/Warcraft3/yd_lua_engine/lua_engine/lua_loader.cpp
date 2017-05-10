@@ -16,25 +16,16 @@
 #include <base/util/string_view.h>	
 #include <base/util/string_algorithm.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
-	class debugger;
-namespace lua_loader {
-
+namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 
 	class jass_state
 	{
 	public:
 		jass_state()
 			: state_(nullptr)
-			, dbg_(nullptr)
 		{
 			register_game_reset_event([this](uintptr_t)
 			{
-				if (dbg_)
-				{
-					debugger_detach_lua(dbg_, state_);
-				}
-
 				if (state_)
 				{
 					lua_close(state_);
@@ -47,8 +38,12 @@ namespace lua_loader {
 		{
 			if (!state_) {
 				state_ = initialize();
-				if (!dbg_) dbg_ = debugger_create();
-				debugger_attach_lua(dbg_, state_);
+				luaL_dostring(state_, R"(
+local dbg = require 'jass.debugger'
+if dbg then
+	dbg.start('127.0.0.1', 4278)
+end
+)");
 			}
 			return state_;
 		}
@@ -66,7 +61,6 @@ namespace lua_loader {
 
 	private:
 		lua_State* state_; 
-		debugger* dbg_;
 	};
 	typedef singleton_nonthreadsafe<jass_state> jass_state_s;
 
