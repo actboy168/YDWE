@@ -4,6 +4,7 @@
 #include <string>
 #include <memory.h>
 #include <base/util/string_view.h>
+#include <stdint.h>
 
 namespace slk
 {

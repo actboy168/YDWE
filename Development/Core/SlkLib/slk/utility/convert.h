@@ -5,6 +5,7 @@
 #include <string>
 #include <cassert>
 #include <base/util/foreach.h>
+#include <stdint.h>
 
 namespace slk
 {

@@ -3,6 +3,7 @@
 #include <slk/port/config.h>
 #include <string>
 #include <base/util/buffer.h>
+#include <stdint.h>
 
 namespace slk
 {

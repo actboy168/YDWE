@@ -1,9 +1,10 @@
 #pragma once
 
 #include <base/config.h>
-#include <cstdint>
+#include <stdint.h>
 #include <vector>
 #include <unordered_map>
+#include <string>
 
 namespace base { namespace warcraft3 { namespace jass {
 
