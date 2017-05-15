@@ -38,12 +38,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		{
 			if (!state_) {
 				state_ = initialize();
-				luaL_dostring(state_, R"(
-local dbg = require 'jass.debugger'
-if dbg then
-	dbg.start('127.0.0.1', 4278)
-end
-)");
+				luaL_dostring(state_, "(require 'jass.debugger').listen('127.0.0.1', 4278)");
 			}
 			return state_;
 		}
