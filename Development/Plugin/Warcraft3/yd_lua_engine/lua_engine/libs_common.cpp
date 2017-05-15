@@ -17,13 +17,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	namespace common {
 
-	int jass_call_null_function(lua_State* L)
-	{
-		printf("Wanring: %s isn't implemented.\n", lua_tostring(L, lua_upvalueindex(1)));
-		lua_pushnil(L);
-		return 1;
-	}
-
 	int jass_get(lua_State* L)
 	{
 		const char* name = lua_tostring(L, 2);
@@ -31,19 +24,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jass::func_value const* nf = jass::jass_func(name);
 		if (nf && nf->is_valid())
 		{
-			if (!lua_isyieldable(L))
-			{
-				if ((0 == strcmp(name, "TriggerSleepAction"))
-					|| (0 == strcmp(name, "TriggerWaitForSound"))
-					|| (0 == strcmp(name, "TriggerSyncReady"))
-					|| (0 == strcmp(name, "SyncSelections")))
-				{
-					lua_pushstring(L, name);
-					lua_pushcclosure(L, jass_call_null_function, 1);
-					return 1;
-				}
-			}
-
 			lua_pushinteger(L, (uint32_t)(uintptr_t)nf);
 			lua_pushcclosure(L, jass_call_closure, 1);
 			return 1;
@@ -123,8 +103,23 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return lua::make_range(L, jass::jass_function);
 	}
 
+	static void init_sleep_function(const char* name)
+	{
+		auto it = jass::jass_function.find(name);
+		if (it == jass::jass_function.end() || !it->second.is_valid())
+		{
+			return;
+		}
+		it->second.set_sleep(true);
+	}
+
 	int open(lua_State* L)
 	{
+		init_sleep_function("TriggerSleepAction");
+		init_sleep_function("TriggerWaitForSound");
+		init_sleep_function("TriggerSyncReady");
+		init_sleep_function("SyncSelections");
+
 		lua_newtable(L);
 		{
 			lua_newtable(L);

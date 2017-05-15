@@ -102,6 +102,13 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		LUA_PERFTRACE(kJassCall);
 
+		if (!lua_isyieldable(L) && nf->has_sleep())
+		{
+			printf("Wanring: %s is disable.\n", lua_tostring(L, lua_upvalueindex(1)));
+			lua_pushnil(L);
+			return 1;
+		}
+
 		size_t param_size = nf->get_param().size();
 
 		if ((int)param_size > lua_gettop(L))
@@ -169,9 +176,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			lua_pushnil(L);
 			return 1;
 		}
-
 		int result = jass_call_native_function(L, (const jass::func_value*)lua_tointeger(L, lua_upvalueindex(1)));
-
 		if (lua_isyieldable(L))
 		{
 			uintptr_t thread = get_jass_thread();
@@ -181,7 +186,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				return lua_yield(L, 0);
 			}
 		}
-
 		return result;
 	}
 

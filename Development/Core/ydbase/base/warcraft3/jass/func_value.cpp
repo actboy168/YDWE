@@ -79,12 +79,14 @@ namespace base { namespace warcraft3 { namespace jass {
 		: return_(TYPE_NONE)
 		, param_()
 		, address_(0)
+		, has_sleep_(false)
 	{ }
 
 	func_value::func_value(const char* param, uintptr_t address)
 		: return_(TYPE_NONE)
 		, param_()
 		, address_(address)
+		, has_sleep_(false)
 	{
 		if (!param || param[0] != '(')
 		{
@@ -118,6 +120,7 @@ namespace base { namespace warcraft3 { namespace jass {
 		: return_(that.return_)
 		, param_(that.param_)
 		, address_(address)
+		, has_sleep_(false)
 	{ }
 
 	bool func_value::is_valid() const
@@ -149,6 +152,16 @@ namespace base { namespace warcraft3 { namespace jass {
 	{
 		assert(param.size() == param_.size());
 		return call(param.data());
+	}
+
+	bool func_value::has_sleep() const
+	{
+		return has_sleep_;
+	}
+
+	void func_value::set_sleep(bool v)
+	{
+		has_sleep_ = v;
 	}
 
 	func_mapping jass_function;

@@ -32,6 +32,8 @@ namespace base { namespace warcraft3 { namespace jass {
 		std::vector<variable_type> const& get_param()   const;
 		variable_type const&              get_return()  const;
 		uintptr_t                         get_address() const;
+		bool                              has_sleep() const;
+		void                              set_sleep(bool v);
 
 		template <class R>
 		void call_assert(size_t param_count) const
@@ -51,6 +53,7 @@ namespace base { namespace warcraft3 { namespace jass {
 		std::vector<variable_type> param_;
 #pragma warning(pop)
 		uintptr_t                  address_;
+		bool                       has_sleep_;
 	};
 
 	typedef std::unordered_map<std::string, func_value> func_mapping;
