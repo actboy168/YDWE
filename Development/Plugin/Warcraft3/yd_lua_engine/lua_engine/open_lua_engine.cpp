@@ -23,7 +23,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	namespace log { int open(lua_State* L); }
 	namespace ai { int open(lua_State* L); }
 	namespace debugger { int open(lua_State* L); }
-
+	namespace selector { int open(lua_State* L); }
+	
 	int fix_baselib(lua_State* L);
 
 	void register_preload_lib(lua_State* L, const char *name, lua_CFunction f)
@@ -49,7 +50,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		register_preload_lib(L, "jass.log",     log::open);
 		register_preload_lib(L, "jass.ai",      ai::open);
 		register_preload_lib(L, "jass.debugger", debugger::open);
-
+		register_preload_lib(L, "jass.selector", selector::open);
+		
 		jreal_make_mt(L);
 		jhandle_ud_make_mt(L);
 		jhandle_lud_make_mt(L);

@@ -108,6 +108,7 @@
     <ClCompile Include="lua_engine\libs_message.cpp" />
     <ClCompile Include="lua_engine\libs_package.cpp" />
     <ClCompile Include="lua_engine\libs_runtime.cpp" />
+    <ClCompile Include="lua_engine\libs_selector.cpp" />
     <ClCompile Include="lua_engine\libs_slk.cpp" />
     <ClCompile Include="lua_engine\libs_storm.cpp" />
     <ClCompile Include="lua_engine\lua_helper.cpp" />
