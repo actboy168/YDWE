@@ -89,7 +89,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace selector
 	{
 		assert(IsVaildUnit(u));
 		uint32_t unitid = *(uint32_t*)(u + 0x30);
-		return isupper(unitid >> 24);
+		return !!isupper(unitid >> 24);
 	}
 
 	static int hero(lua_State* L)
