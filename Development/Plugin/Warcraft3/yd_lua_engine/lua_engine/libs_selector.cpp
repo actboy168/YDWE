@@ -1,5 +1,6 @@
 #include <lua.hpp>
 #include <base/warcraft3/war3_searcher.h>
+#include <base/util/foreach.h>
 #include <assert.h>
 #include "jassbind.h"
 
@@ -99,7 +100,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace selector
 			return 1;
 		}
 		lua_Integer n = 0;
-		for (unit_t u : unitarray)
+		foreach(unit_t u, unitarray)
 		{
 			if (IsVaildUnit(u) && IsHero(u))
 			{
