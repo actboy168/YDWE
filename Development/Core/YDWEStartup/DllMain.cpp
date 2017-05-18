@@ -212,9 +212,6 @@ static void DoTask()
 		}
 	}
 
-	CheckedCopyFile(gExecutableDirectory / L"bin" / "msvcp120.dll", gWarcraftDirectory / "msvcp120.dll");
-	CheckedCopyFile(gExecutableDirectory / L"bin" / "msvcr120.dll", gWarcraftDirectory / "msvcr120.dll");
-
 	// Prefered path
 	fs::path worldeditPreferredPath = gWarcraftDirectory / L"worldeditydwe.exe";
 	// Attached path
