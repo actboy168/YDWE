@@ -1,6 +1,8 @@
 #include <base/warcraft3/command_line.h>
 #include <base/util/foreach.h>
+#include <base/util/list_of.h>
 #include <Windows.h>
+#include <set>
 
 namespace base { namespace warcraft3 {
 
@@ -51,38 +53,48 @@ namespace base { namespace warcraft3 {
 	command_line::command_line()
 		: app_()
 	{
-		app_ = parse([this](std::wstring const& key, std::wstring const& val){
+		app_ = parse([this](std::wstring const& key, std::wstring const& val) {
 			add(key, val);
 		});
 	}
 
+	static std::wstring get_str(const std::pair<std::wstring, std::wstring>& item)
+	{
+		std::wstring r = L" -" + item.first;
+		if (!item.second.empty())
+		{
+			r += L" \"" + item.second + L"\"";
+		}
+		return r;
+	}
+
+	static std::set<std::wstring> knowns =
+#if _MSC_VER < 1800
+		base::list_of(L"window")(L"opengl")(L"loadfile")
+#else
+	{
+		L"window", L"opengl", L"loadfile"
+	}
+#endif
+	;
+
 	std::wstring command_line::str() const
 	{
-		std::wstring result;
+		std::wstring result = L"\"" + app_ + L"\"";
+		std::wstring unknown = L"";
 
-		result += L"\"";
-		result += app_;
-		result += L"\"";
-
-		if (has(L"window")) { result += L" -window"; }
-		if (has(L"opengl")) { result += L" -opengl"; }
-
-		foreach(auto it, *this)
+		foreach(auto item, *this)
 		{
-			if (it.first != L"window" &&it.first != L"opengl")
+			if (knowns.find(item.first) != knowns.end())
 			{
-				result += L" -";
-				result += it.first;
-				if (!it.second.empty())
-				{
-					result += L" \"";
-					result += it.second;
-					result += L"\"";
-				}
+				result += get_str(item);
+			}
+			else
+			{
+				unknown += get_str(item);
 			}
 		}
-
-		return std::move(result);
+		return result + unknown;
 	}
 
 	bool command_line::app(const std::wstring& v)
