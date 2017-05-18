@@ -38,13 +38,13 @@ bool launch_taskbar_support(const fs::path& ydwe_path)
 bool launch_warcraft3(base::warcraft3::command_line& cmd)
 {
 	try {
-		fs::path ydwe_path = base::path::get(base::path::DIR_EXE).remove_filename().remove_filename();
+		fs::path ydwe_path = base::path::get(base::path::DIR_EXE).remove_filename();
 		launch_taskbar_support(ydwe_path);
 
-		base::win::env_variable ev(L"PATH");
-		std::wstring p;
-		p += (ydwe_path / L"bin").c_str();    p += L";"; 
-		ev.set(p + ev.get());
+		//base::win::env_variable ev(L"PATH");
+		//std::wstring p;
+		//p += (ydwe_path / L"bin").c_str();    p += L";"; 
+		//ev.set(p + ev.get());
 
 		fs::path war3_path;
 		if (!base::warcraft3::directory::get(nullptr, war3_path))

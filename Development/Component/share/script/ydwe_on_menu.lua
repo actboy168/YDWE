@@ -12,7 +12,7 @@ end
 
 -- 启动魔兽
 local function launch_warcraft3()
-	local config_program = fs.ydwe_path() / "bin" / "YDWEConfig.exe"
+	local config_program = fs.ydwe_path() / "ydwe.exe"
 	local command_line = string.format('"%s" -launchwar3', config_program:string())
 	sys.spawn(command_line, fs.ydwe_path())
 end

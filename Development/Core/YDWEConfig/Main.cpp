@@ -2,19 +2,9 @@
 #include "MainWindow.h"
 #include <base/com/guard.h>
 #include <base/util/unicode.h>
-#include <base/warcraft3/command_line.h>
 
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR lpCmdLine, int nCmdShow)
 {
-	base::warcraft3::command_line cmd;
-	
-	if (cmd.has(L"launchwar3"))
-	{
-		bool launch_warcraft3(base::warcraft3::command_line&);
-		launch_warcraft3(cmd);
-		return 1;
-	}
-
 	try
 	{
 		base::com::guard com;

@@ -81,6 +81,7 @@
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="BlpConv.cpp" />
+    <ClCompile Include="LaunchWarcraft3.cpp" />
     <ClCompile Include="Splash.cpp" />
   </ItemGroup>
   <ItemGroup>

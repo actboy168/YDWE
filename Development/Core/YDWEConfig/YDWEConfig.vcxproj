@@ -74,7 +74,6 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Regedit.cpp" />
     <ClCompile Include="Shortcuts.cpp" />
-    <ClCompile Include="LaunchWarcraft3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DuiLib\DuiLib.vcxproj">
