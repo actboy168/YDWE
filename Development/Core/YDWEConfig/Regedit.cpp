@@ -101,7 +101,7 @@ FileAssociation::FileAssociation(fs::path const& ydwe_path)
 	, ext_w3m_(L".w3m")
 	, icon_path_(ydwe_path.parent_path() / L"bin" / L"logo.ico")
 	, command1_(L"\"" + ydwe_path.wstring() + L"\" -loadfile \"%1\"")
-	, command2_(L"\"" + (ydwe_path.parent_path() / L"bin" / L"ydweconfig.exe").wstring() + L"\" -launchwar3 -loadfile \"%1\"")
+	, command2_(L"\"" + (ydwe_path.parent_path() / L"ydwe.exe").wstring() + L"\" -war3 -loadfile \"%1\"")
 { }
 
 bool FileAssociation::has_w3x()

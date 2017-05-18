@@ -248,7 +248,7 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 {
 	base::warcraft3::command_line cmd;
 
-	if (cmd.has(L"launchwar3"))
+	if (cmd.has(L"war3"))
 	{
 		bool launch_warcraft3(base::warcraft3::command_line&);
 		launch_warcraft3(cmd);

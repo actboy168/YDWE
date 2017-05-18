@@ -131,7 +131,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		}
 
 		cmd.app(war3_path.wstring());
-		cmd.del(L"launchwar3");
+		cmd.del(L"war3");
 		return warcraft3_process.create(war3_path, cmd.str());
 	}
 	catch (...) {
