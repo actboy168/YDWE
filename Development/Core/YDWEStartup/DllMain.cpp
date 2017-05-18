@@ -249,7 +249,7 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 	{
 		bool launch_warcraft3(base::warcraft3::command_line&);
 		launch_warcraft3(cmd);
-		return 1;
+		return 0;
 	}
 
 	INT exitCode = -1;
