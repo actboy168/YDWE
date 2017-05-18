@@ -95,9 +95,6 @@
     <ClCompile Include="lua_engine\libs_log.cpp">
       <Filter>lua_engine\library</Filter>
     </ClCompile>
-    <ClCompile Include="lua_engine\debugger.cpp">
-      <Filter>lua_engine\main</Filter>
-    </ClCompile>
     <ClCompile Include="lua_engine\fix_baselib.cpp">
       <Filter>lua_engine\main</Filter>
     </ClCompile>
@@ -105,6 +102,9 @@
       <Filter>lua_engine\library</Filter>
     </ClCompile>
     <ClCompile Include="lua_engine\libs_selector.cpp">
+      <Filter>lua_engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_engine\libs_debugger.cpp">
       <Filter>lua_engine\library</Filter>
     </ClCompile>
   </ItemGroup>
@@ -144,9 +144,6 @@
     </ClInclude>
     <ClInclude Include="lua_engine\sha_1.h">
       <Filter>lua_engine\misc</Filter>
-    </ClInclude>
-    <ClInclude Include="lua_engine\debugger.h">
-      <Filter>lua_engine\main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
