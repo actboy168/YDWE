@@ -1,31 +1,15 @@
-/*
- * YDWE启动
- */
-#include <assert.h>
-#include <stdlib.h>
-#include <string.h>
-#include <string>
-#include <locale>
 #include <windows.h>
 #include <shlwapi.h>
+#include <string>
 
-typedef INT (WINAPI *TPFStartup)(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR pCommandLine, INT showType);
-
-/** \brief 主函数
- *
- * 主启动函数。负责调用启动DLL的启动函数
- */
-INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR pCommandLine, INT showType)
+void InstallEnv(HINSTANCE module)
 {
-	INT exitCode = -1;
-
 	/* 获得几个要加到Path的文件夹路径 */
 	wchar_t binaryPath[MAX_PATH];
-	wchar_t pathEnvironmentVariable[32767 /* http://msdn.microsoft.com/en-us/library/windows/desktop/ms683188.aspx */ ];
-	std::wstring newPathEnvironmentVariable;
+	wchar_t pathEnvironmentVariable[32767 /* http://msdn.microsoft.com/en-us/library/windows/desktop/ms683188.aspx */];
 
 	// 当前exe路径
-	GetModuleFileNameW(currentInstance, binaryPath, sizeof(binaryPath) / sizeof(binaryPath[0]));
+	GetModuleFileNameW(module, binaryPath, sizeof(binaryPath) / sizeof(binaryPath[0]));
 	PathRemoveBlanksW(binaryPath);
 	PathUnquoteSpacesW(binaryPath);
 	PathRemoveBackslashW(binaryPath);
@@ -35,7 +19,7 @@ INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR 
 	PathAppendW(binaryPath, L"bin");
 
 	// 拷贝到待增加路径字符串
-	newPathEnvironmentVariable.append(binaryPath);
+	std::wstring newPathEnvironmentVariable = binaryPath;
 
 	/* 设置PATH环境变量 */
 	// 获取环境变量
@@ -53,41 +37,23 @@ INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR 
 
 	// 设置环境变量
 	SetEnvironmentVariableW(L"PATH", pathEnvironmentVariable);
+}
 
-	/* 载入CRT的Dll，防止Dll冲突 */
+typedef INT (WINAPI *TPFStartup)(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR pCommandLine, INT showType);
 
-	// 再次得到bin文件夹路径
-	PathRemoveFileSpecW(binaryPath);
-	PathAppendW(binaryPath, L"bin");
+INT WINAPI WinMain(HINSTANCE currentInstance, HINSTANCE previousInstance, LPSTR pCommandLine, INT showType)
+{
+	InstallEnv(currentInstance);
 
-#if !_DEBUG
-	wchar_t msvcr_dll[] = L"vcruntime140.dll";
-	wchar_t msvcp_dll[] = L"msvcp140.dll";
-
-	PathAppendW(binaryPath, msvcr_dll);
-	HMODULE msvcr100 = LoadLibraryW(binaryPath);
-	PathRemoveFileSpecW(binaryPath);
-	PathAppendW(binaryPath, msvcp_dll);
-	HMODULE msvcp100 = LoadLibraryW(binaryPath);
-#endif
-
-	// 尝试载入YDWEStartup.dll
-	HMODULE startupModule = LoadLibraryW(L"YDWEStartup.dll");
-	if (startupModule)
+	INT res = -1;
+	HMODULE m = LoadLibraryW(L"YDWEStartup.dll");
+	if (m)
 	{
-		TPFStartup pfStartup = (TPFStartup)GetProcAddress(startupModule, "YDWEStartup");
-		if (pfStartup)
-			exitCode = pfStartup(currentInstance, previousInstance, pCommandLine, showType);
-
-		FreeLibrary(startupModule);
+		TPFStartup pfStartup = (TPFStartup)GetProcAddress(m, "YDWEStartup");
+		if (pfStartup) {
+			res = pfStartup(currentInstance, previousInstance, pCommandLine, showType);
+		}
+		FreeLibrary(m);
 	}
-
-#if !_DEBUG
-	if (msvcp100)
-		FreeLibrary(msvcp100);
-	if (msvcr100)
-		FreeLibrary(msvcr100);
-#endif
-
-	return exitCode;
+	return res;
 }
