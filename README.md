@@ -7,8 +7,9 @@ YDWE是一个用于制作《魔兽争霸III》(英文名 Warcraft3，下面简�
 ## 编译
 
 1. msvc2017
-2. 执行/Build/Build_Release.bat
-3. 编译好的文件可以在/Build/publish/Release/找到
+2. windows sdk 10.0.15063.0
+3. 执行/Build/Build_Release.bat
+4. 编译好的文件可以在/Build/publish/Release/找到
 
 
 ## 其他引用的项目
