@@ -1,0 +1,4 @@
+Debug/*
+Release/*
+!/Debug/clr_interop.lib
+!/Release/clr_interop.lib
