@@ -81,7 +81,7 @@ function loader:worldeditstrings()
 	local str = {}
 	str[#str+1] = "[WorldEditStrings]"
 	for k, v in pairs(t.WorldEditStrings) do
-		str[#str+1] = k .. "=" .. v
+		str[#str+1] = k .. '="' .. v .. '"'
 	end
 	return table.concat(str, '\n')
 end
