@@ -2,7 +2,7 @@
 #define YDWEGeneralBounsSystemIncluded
 
 //===========================================================================
-//ĞŞ¸ÄÉúÃü
+//ä¿®æ”¹ç”Ÿå‘½
 //===========================================================================
 
 #include "YDWEBase.j"
@@ -19,6 +19,8 @@ globals
     private constant integer BONUS_TYPES = 4
     private integer array MaxBonus
     private integer array MinBonus
+    private unit array Units
+    private integer UnitCount = 0
 endglobals
 
 <?
@@ -61,7 +63,7 @@ for i = 1, 16 do
 	o.DataA3 = -v
 end
 ?>
-//ÒÔÏÂº¯Êı½ö½öÊÇÈÃ¼¼ÄÜID³öÏÖÔÚ´úÂëÀï£¬²»È»SLKÓÅ»¯Æ÷»áÉ¾³ıÕâĞ©¼¼ÄÜ
+//ä»¥ä¸‹å‡½æ•°ä»…ä»…æ˜¯è®©æŠ€èƒ½IDå‡ºç°åœ¨ä»£ç é‡Œï¼Œä¸ç„¶SLKä¼˜åŒ–å™¨ä¼šåˆ é™¤è¿™äº›æŠ€èƒ½
 private function DisplayAllAbilityId takes nothing returns nothing
     local integer aid=0
     set aid='YDl0'
@@ -152,7 +154,7 @@ endfunction
         local integer i=ABILITY_COUNT[bonusType+1]- 2
         local integer a=ABILITY_NUM[bonusType]
         if value>65535 or value<=0 then
-            debug call BJDebugMsg("ÊäÈëÊı¾İÎŞĞ§")
+            debug call BJDebugMsg("è¾“å…¥æ•°æ®æ— æ•ˆ")
             return false
         endif
 
@@ -161,7 +163,7 @@ endfunction
           elseif bonusType == 1 then
             set state=UNIT_STATE_MAX_MANA
           else
-            debug call BJDebugMsg("ÎŞĞ§×´Ì¬")
+            debug call BJDebugMsg("æ— æ•ˆçŠ¶æ€")
             return false
         endif
         set v=v-R2I(GetUnitState(u, state))
@@ -189,7 +191,7 @@ endfunction
 
 private function UnitSetBonus takes unit u, integer bonusType, integer ammount returns boolean
     local integer i
-    //ÉèÖÃÊôĞÔÎª0²»½øĞĞLoop
+    //è®¾ç½®å±æ€§ä¸º0ä¸è¿›è¡ŒLoop
     if  ammount==0 then
         call UnitClearBonus(u,bonusType)
         return false
@@ -224,6 +226,13 @@ private function UnitSetBonus takes unit u, integer bonusType, integer ammount r
 
         set i = i - 1
     endloop
+
+    if not YDWEGetBooleanByString(I2S(YDWEH2I(u)),"bonusMark") then
+        call YDWESaveBooleanByString(I2S(YDWEH2I(u)),"bonusMark", true)
+        set UnitCount = UnitCount + 1
+        set Units[UnitCount] = u
+    endif
+
     return true
 endfunction
 
@@ -245,6 +254,26 @@ endfunction
 
 private function UnitAddBonus takes unit u, integer bonusType, integer ammount returns boolean
     return UnitSetBonus(u, bonusType, UnitGetBonus(u, bonusType) + ammount)
+endfunction
+
+private function FlushUnits takes nothing returns nothing
+    local integer i = UnitCount
+    local string h
+    loop
+        exitwhen i < 1
+        if GetUnitTypeId(Units[i]) == 0 then
+            set h = I2S(YDWEH2I(Units[i]))
+            call YDWESaveIntegerByString(h,"bonusType0",0)
+            call YDWESaveIntegerByString(h,"bonusType1",0)
+            call YDWESaveIntegerByString(h,"bonusType2",0)
+            call YDWESaveIntegerByString(h,"bonusType3",0)
+            call YDWESaveBooleanByString(h,"bonusMark",false)
+            set Units[i] = Units[UnitCount]
+            set Units[UnitCount] = null
+            set UnitCount = UnitCount - 1
+        endif
+        set i = i - 1
+    endloop
 endfunction
 
 function YDWEUnitSetBonus takes unit u, integer bonusType, integer ammount returns nothing
@@ -363,7 +392,7 @@ private function Initialize takes nothing returns nothing
         set n=n+1
         exitwhen n>=4
     endloop
-    //Ô¤¶Á¼¼ÄÜ
+    //é¢„è¯»æŠ€èƒ½
     if PRELOAD_ABILITYS then
         set u = CreateUnit(Player(15), PRELOAD_DUMMY_UNIT, 0, 0, 0)
         set i = 0
@@ -375,6 +404,8 @@ private function Initialize takes nothing returns nothing
         call RemoveUnit(u)
         set u = null
     endif
+    //å›æ”¶æ•°æ®
+    call TimerStart(CreateTimer(), 10, true, function FlushUnits)
 endfunction
 
 function YDWELifeChange takes unit u,integer mod,integer ch,integer id returns nothing
@@ -422,7 +453,7 @@ function YDWELifeChange takes unit u,integer mod,integer ch,integer id returns n
 endfunction
 
 //===========================================================================
-//ĞŞ¸ÄÄ§·¨
+//ä¿®æ”¹é­”æ³•
 //===========================================================================
 function YDWEManaChange takes unit u,integer mod,integer ch,integer id returns nothing
     local integer a
