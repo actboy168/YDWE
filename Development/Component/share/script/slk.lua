@@ -25,10 +25,13 @@ local function try_value(t, key)
     if not t then
         return nil, nil, nil
     end
+    key = key:lower()
+    if key == 'code' then
+        return 'code', t._code, nil
+    end
     if key:sub(1, 1) == '_' then
         return nil, nil, nil
     end
-    key = key:lower()
     local value = t[key]
     if value then
         if type(value) == 'table' then
@@ -248,6 +251,9 @@ local function create_object(t, ttype, name)
                 return key .. olevel, t[nkey][olevel] or ''
             end
             nkey = next(t, nkey)
+            if nkey == '_code' then
+                return 'code', t._code
+            end
             local meta
             while true do
                 if not nkey then
