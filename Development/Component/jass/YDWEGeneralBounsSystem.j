@@ -126,6 +126,7 @@ private function DisplayAllAbilityId takes nothing returns nothing
     set aid='YDbc'
     set aid='YDbd'
     set aid='YDbe'
+    set aid='YDbf'
     set aid='YDbg'
     set aid='YDbh'
     set aid='YDbi'
