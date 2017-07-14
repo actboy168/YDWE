@@ -280,3 +280,5 @@ EditorSuffix=(中立敌对)
 EditorSuffix=(标准)
 [nba2]
 EditorSuffix=(召唤的)
+[Opgh]
+EditorSuffix= (恶魔附体)
