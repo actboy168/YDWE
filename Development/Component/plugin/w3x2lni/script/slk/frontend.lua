@@ -43,8 +43,11 @@ local function load_obj(w2l, archive, wts)
 end
 
 local function load_lni(w2l, archive)
-    local count = 0
     local lnis = {}
+    if not w2l.config.read_lni then
+        return lnis
+    end
+    local count = 0
     for type, name in pairs(w2l.info.lni) do
         count = count + 1
         local buf = archive:get(name)
@@ -56,7 +59,7 @@ local function load_lni(w2l, archive)
         end
     end
 
-     local buf = archive:get('war3map.txt.ini')
+    local buf = archive:get('war3map.txt.ini')
     if buf then
         lnis['txt'] = w2l:parse_lni(buf, 'txt')
         archive:set('war3map.txt.ini', false)
