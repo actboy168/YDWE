@@ -158,48 +158,57 @@ function mt:initialize(root)
 end
 
 -- 加载脚本
-local convertors = {
-    'frontend', 
-    'frontend_wts',
-    'frontend_slk', 
-    'frontend_lni', 
-    'frontend_obj',
-    'frontend_misc',
-    'frontend_updateobj',
-    'frontend_updatelni',
-    'frontend_merge',
-    'backend',
-    'backend_mark',
-    'backend_lni',
-    'backend_slk',
-    'backend_txt',
-    'backend_obj',
-    'backend_searchjass',
-    'backend_convertjass',
-    'backend_convertwtg',
-    'backend_searchdoo',
-    'backend_computed',
-    'backend_extra_txt',
-    'backend_txtlni',
-    'backend_misc',
-    'backend_skin',
-    'backend_searchparent',
-    'backend_cleanobj',
-    'backend_imp',
-    'backend_optimizejass',
+local slk_convertors = {
+    ['frontend']             = true,
+    ['frontend_wts']         = true,
+    ['frontend_slk']         = true,
+    ['frontend_lni']         = true,
+    ['frontend_obj']         = true,
+    ['frontend_misc']        = true,
+    ['frontend_updateobj']   = true,
+    ['frontend_updatelni']   = true,
+    ['frontend_merge']       = true,
+    ['backend']              = true,
+    ['backend_mark']         = true,
+    ['backend_lni']          = true,
+    ['backend_slk']          = true,
+    ['backend_txt']          = true,
+    ['backend_obj']          = true,
+    ['backend_searchjass']   = true,
+    ['backend_convertjass']  = true,
+    ['backend_convertwtg']   = true,
+    ['backend_searchdoo']    = true,
+    ['backend_computed']     = true,
+    ['backend_extra_txt']    = true,
+    ['backend_txtlni']       = true,
+    ['backend_misc']         = true,
+    ['backend_skin']         = true,
+    ['backend_searchparent'] = true,
+    ['backend_cleanobj']     = true,
+    ['backend_imp']          = true,
+    ['backend_optimizejass'] = true,
 }
 
-for _, name in ipairs(convertors) do
-    mt[name] = require('slk.' .. name)
-end
-
-local convertors = {
-    'lni2w3i', 'read_w3i', 'w3i2lni',
-    'create_unitsdoo',
+local other_convertors = {
+    ['lni2w3i']         = true,
+    ['read_w3i']        = true,
+    ['w3i2lni']         = true,
+    ['create_unitsdoo'] = true,
 }
 
-for _, name in ipairs(convertors) do
-    mt[name] = require('other.' .. name)
-end
+setmetatable(mt, {
+    __index = function(self, name)
+        if slk_convertors[name] then
+            local res = require('slk.' .. name)
+            self[name] = res
+            return res
+        elseif other_convertors[name] then
+            local res = require('other.' .. name)
+            self[name] = res
+            return res
+        end
+        return nil
+    end,
+})
 
 return mt
