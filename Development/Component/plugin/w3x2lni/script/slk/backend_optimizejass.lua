@@ -1,5 +1,5 @@
-local parser    = require 'parser'
-local optimizer = require 'optimizer'
+local parser    = require 'parser.init'
+local optimizer = require 'optimizer.init'
 
 local function create_report(report, title, type, max)
     local msgs = report[type]
