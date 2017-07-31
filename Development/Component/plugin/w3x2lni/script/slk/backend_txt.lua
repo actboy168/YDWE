@@ -44,10 +44,9 @@ local function to_type(tp, value)
     end
 end
 
-local function get_index_data(tp, ...)
+local function get_index_data(tp, l, n)
     local null
-    local l = table.pack(...)
-    for i = l.n, 1, -1 do
+    for i = n, 1, -1 do
         local v = to_type(tp, l[i])
         if v then
             l[i] = v
@@ -76,7 +75,7 @@ local function add_data(obj, meta, value, keyval)
     if meta.index then
         -- TODO: 有点奇怪的写法
         if meta.index == 1 then
-            local value = get_index_data(meta.type, obj[meta.key..':1'], obj[meta.key..':2'])
+            local value = get_index_data(meta.type, {obj[meta.key..':1'], obj[meta.key..':2']}, 2)
             if not value then
                 if meta.cantempty then
                     value = ','
@@ -142,7 +141,7 @@ local function add_data(obj, meta, value, keyval)
         if #value == 0 then
             return
         end
-        value = get_index_data(meta.type, table_unpack(value))
+        value = get_index_data(meta.type, value, #value)
     else
         value = to_type(meta.type, value)
     end

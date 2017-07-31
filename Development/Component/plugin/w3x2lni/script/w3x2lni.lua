@@ -186,6 +186,7 @@ local convertors = {
     'backend_searchparent',
     'backend_cleanobj',
     'backend_imp',
+    'backend_optimizejass',
 }
 
 for _, name in ipairs(convertors) do

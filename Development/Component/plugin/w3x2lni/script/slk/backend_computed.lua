@@ -73,6 +73,7 @@ end
 local function computed_value(slk, str, name, field)
     -- TODO: 魔兽计算这个太特殊了，我想我放弃完全模拟了
     local id, key, per = table.unpack(split(str))
+    id = id:sub(1, 4)
     local o = slk.ability[id]
            or slk.unit[id]
            or slk.item[id]

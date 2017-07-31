@@ -329,14 +329,14 @@ return function (w2l, archive, slk)
 
     message('转换其他文件...')
     archive:set('war3mapmisc.txt', w2l:backend_misc(slk.misc, slk.txt, slk.wts))
-    progress(0.94)
+    progress(0.93)
 
     local buf = archive:get 'war3mapskin.txt'
     if buf then
         local skin = w2l:parse_ini(buf)
         archive:set('war3mapskin.txt', w2l:backend_skin(skin, slk.wts))
     end
-    progress(0.96)
+    progress(0.94)
 
     if w2l.config.target_format == 'lni' then
         local buf = archive:get 'war3map.imp'
@@ -352,6 +352,12 @@ return function (w2l, archive, slk)
         archive:set('war3map.wts', content)
     else
         archive:set('war3map.wts', false)
+    end
+    progress(0.95)
+
+    if w2l.config.optimize_jass then
+        message('优化脚本...')
+        w2l:backend_optimizejass(archive)
     end
     progress(1)
 end

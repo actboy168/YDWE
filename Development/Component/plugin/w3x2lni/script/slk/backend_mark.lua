@@ -279,7 +279,7 @@ local function mark_jass(slk, list, flag)
         end
         -- 随机单位
         if flag.creeps and obj.isbldg == 0 then
-            if obj.race == 'creeps' and obj.tilesets and (obj.tilesets == '*' or obj.tilesets:find(maptile)) then
+            if obj.race == 'creeps' and obj.tilesets and (obj.tilesets == '*' or obj.tilesets:find(maptile)) and obj.special == 0 then
                 current_root = {obj._id, "保留的野怪单位'%s'[%s]引用了它"}
                 mark_known_type(slk, 'unit', obj._id)
             end
