@@ -372,6 +372,8 @@ local function set_config()
     config.target_format = 'obj'
     -- 是否分析slk文件
     config.read_slk = false
+    -- 是否分析lni文件
+    config.read_lni = false
     -- 分析slk时寻找id最优解的次数,0表示无限,寻找次数越多速度越慢
     config.find_id_times = 0
     -- 移除与模板完全相同的数据
