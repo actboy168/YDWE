@@ -20,7 +20,7 @@ local Cs = lpeg.Cs
 local num  = R'09'
 local wst  = Cs('TRIGSTR_' * num^3 / fwts * P'\0')
 
-local pwtg = (wst + 1)^0
+local pwtg = Cs((wst + 1)^0)
 
 return function (w2l_, archive, wts_)
     local name = 'war3map.wtg'

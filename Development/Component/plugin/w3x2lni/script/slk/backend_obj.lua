@@ -57,7 +57,7 @@ local function format_value(value)
 end
 
 local function report(reason, obj, key, tip)
-    message('-report|6无效的物编数据', ('%s %s %s'):format(displaytype[ttype], get_displayname(obj)))
+    message('-report|6%s', ('%s %s %s'):format(reason, displaytype[ttype], get_displayname(obj)))
     message('-tip', ('[%s]: %s'):format(key, format_value(tip)))
 end
 
@@ -116,6 +116,10 @@ local function write_data(key, data, meta)
 end
 
 local function write_object(chunk, name, obj)
+    if #name ~= 4 then
+        message('-report|6无效的物编对象', ('[%s] %s'):format(name, '对象ID不合法'))
+        return
+    end
     local keys = {}
     local metas = {}
     for key in pairs(obj) do
