@@ -56,7 +56,7 @@ bool BLP::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int
 	MipMapBufferList.resize(MAX_NR_OF_BLP_MIP_MAPS);
 
 	Header.Compression = 0;
-	Header.Flags = 8;
+	Header.AlphaBits = 8;
 	Header.Width = Width;
 	Header.Height = Height;
 	Header.PictureType = 4;
@@ -231,29 +231,43 @@ bool BLP::LoadUncompressed(BLP_HEADER& Header, const BUFFER& SourceBuffer, BUFFE
 	int Size = Header.Width * Header.Height;
 	TargetBuffer.Resize(Size * 4);
 	BLP_RGBA* TargetPixel = reinterpret_cast<BLP_RGBA*>(TargetBuffer.GetData());
-
-	switch(Header.PictureType)
+	BLP_PIXEL const* SourceAlpha = SourcePixel + Size;
+	switch (Header.AlphaBits)
 	{
-	case 3:
+	case 0:
+		for (int i = 0; i < Size; i++)
+		{
+			TargetPixel[i] = Palette[SourcePixel[i]];
+			TargetPixel[i].Alpha = 255;
+		}
+		break;
+	case 1:
+		for (int i = 0; i < Size; i++)
+		{
+			TargetPixel[i] = Palette[SourcePixel[i]];
+			TargetPixel[i].Alpha = (SourceAlpha[i >> 3] & (1 << (i & 7))) ? 1 : 0;
+		}
+		break;
 	case 4:
 		for (int i = 0; i < Size; i++)
 		{
-			TargetPixel[i] = Palette[SourcePixel[i].Index];
-		}
-		for (int i = 0; i < Size; i++)
-		{
-			TargetPixel[i].Alpha = SourcePixel[Size + i].Index;
+			TargetPixel[i] = Palette[SourcePixel[i]];
+			switch (i & 1) 
+			{
+			case 0: TargetPixel[i].Alpha = SourceAlpha[i >> 1] & 0x0F; break;
+			case 1: TargetPixel[i].Alpha = (SourceAlpha[i >> 1] & 0xF0) >> 4; break;
+			}
 		}
 		break;
-	case 5:
+	case 8:
 		for (int i = 0; i < Size; i++)
 		{
-			TargetPixel[i] = Palette[SourcePixel[i].Index];
-			TargetPixel[i].Alpha = 255 - TargetPixel[i].Alpha;
+			TargetPixel[i] = Palette[SourcePixel[i]];
+			TargetPixel[i].Alpha = SourceAlpha[i];
 		}
 		break;
 	default:
-		LOG("Unable to load  blp file, unknown picture type!");
+		LOG("Unable to load  blp file, unknown alpha bits!");
 		return false;
 	}
 	return true;

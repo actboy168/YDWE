@@ -24,7 +24,7 @@ struct BLP_HEADER
 	{
 		MagicNumber= '1PLB';
 		Compression = 0;
-		Flags = 0;
+		AlphaBits = 0;
 		Width = 0;
 		Height = 0;
 		PictureType = 0;
@@ -35,7 +35,7 @@ struct BLP_HEADER
 
 	uint32_t MagicNumber;
 	uint32_t Compression;
-	uint32_t Flags;
+	uint32_t AlphaBits;
 	uint32_t Width;
 	uint32_t Height;
 	uint32_t PictureType;
@@ -59,10 +59,7 @@ struct BLP_RGBA
 //+-----------------------------------------------------------------------------
 //| Blp pixel structure
 //+-----------------------------------------------------------------------------
-struct BLP_PIXEL
-{
-	uint8_t Index;
-};
+typedef uint8_t BLP_PIXEL;
 
 //+-----------------------------------------------------------------------------
 //| Blp class
