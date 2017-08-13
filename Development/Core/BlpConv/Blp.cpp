@@ -234,6 +234,7 @@ bool BLP::LoadUncompressed(BLP_HEADER& Header, const BUFFER& SourceBuffer, BUFFE
 	BLP_PIXEL const* SourceAlpha = SourcePixel + Size;
 	switch (Header.AlphaBits)
 	{
+	default:
 	case 0:
 		for (int i = 0; i < Size; i++)
 		{
@@ -266,9 +267,6 @@ bool BLP::LoadUncompressed(BLP_HEADER& Header, const BUFFER& SourceBuffer, BUFFE
 			TargetPixel[i].Alpha = SourceAlpha[i];
 		}
 		break;
-	default:
-		LOG("Unable to load  blp file, unknown alpha bits!");
-		return false;
 	}
 	return true;
 }
