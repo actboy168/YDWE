@@ -57,7 +57,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jhandle_lud_make_mt(L);
 		jarray_make_mt(L);
 
-		insert_searchers_table(L);
 		fix_baselib(L);
 
 		// deprecated

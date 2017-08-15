@@ -47,7 +47,6 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		{
 			lua_State* L = luaL_newstate2();
 			luaL_openlibs(L);
-			clear_searchers_table(L);
 			open_lua_engine(L);
 			runtime::initialize();
 			return L;
