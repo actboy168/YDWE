@@ -84,7 +84,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		bool try_watch(const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
 		{
 			std::string ifilename(filename.size(), 0);
-			std::transform(filename.begin(), filename.end(), ifilename.begin(), ::towlower);
+			std::transform(filename.begin(), filename.end(), ifilename.begin(), [](unsigned char c) { return (unsigned char)tolower(c); });
 			auto it = watch_map.find(ifilename);
 			if (it == watch_map.end())
 			{
@@ -341,7 +341,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 	void watch(const std::string& filename, watch_cb callback)
 	{
 		std::string ifilename(filename.size(), 0);
-		std::transform(filename.begin(), filename.end(), ifilename.begin(), ::towlower);
+		std::transform(filename.begin(), filename.end(), ifilename.begin(), [](unsigned char c) { return (unsigned char)tolower(c); });
 		filesystem::watch_map[ifilename] = callback;
 	}
 
