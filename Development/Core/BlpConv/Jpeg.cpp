@@ -81,16 +81,13 @@ bool JPEG::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, in
 	return true;
 }
 
-
 //+-----------------------------------------------------------------------------
 //| Reads JPEG data
 //+-----------------------------------------------------------------------------
-bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int* Width, int* Height)
+bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, bool ignoreAlpha, int* Width, int* Height)
 {
-	int i;
 	int Stride;
 	int Offset;
-	char Opaque;
 	JSAMPARRAY Pointer;
 	jpeg_decompress_struct Info;
 	jpeg_error_mgr ErrorManager;
@@ -113,30 +110,34 @@ bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int* Width, in
 	Offset = 0;
 
 	Pointer = (*Info.mem->alloc_sarray)(reinterpret_cast<j_common_ptr>(&Info), JPOOL_IMAGE, Stride, 1);
-	while(Info.output_scanline < Info.output_height)
+	while (Info.output_scanline < Info.output_height)
 	{
 		jpeg_read_scanlines(&Info, Pointer, 1);
 		memcpy(TargetBuffer.GetData(Offset), Pointer[0], Stride);
 		Offset += Stride;
 	}
-
 	jpeg_finish_decompress(&Info);
 
-	(*reinterpret_cast<uint8_t*>(&Opaque)) = 255;
-
-	if(Info.output_components == 3)
+	if (Info.output_components == 3)
 	{
-		for(i = (Info.output_width * Info.output_height - 1); i >= 0; i--)
+		for (int i = (Info.output_width * Info.output_height - 1); i >= 0; i--)
 		{
-			TargetBuffer[(i * 4) + 3] = Opaque;
+			TargetBuffer[(i * 4) + 3] = (char)(unsigned char)0xFF;
 			TargetBuffer[(i * 4) + 2] = TargetBuffer[(i * 3) + 2];
 			TargetBuffer[(i * 4) + 1] = TargetBuffer[(i * 3) + 1];
 			TargetBuffer[(i * 4) + 0] = TargetBuffer[(i * 3) + 0];
 		}
 	}
+	else if (ignoreAlpha)
+	{
+		for (unsigned int i = 0; i < Info.output_width * Info.output_height; ++i)
+		{
+			TargetBuffer[(i * 4) + 3] = (char)(unsigned char)0xFF;
+		}
+	}
 
-	if(Width != NULL) (*Width) = Info.output_width;
-	if(Height != NULL) (*Height) = Info.output_height;
+	if (Width != NULL) (*Width) = Info.output_width;
+	if (Height != NULL) (*Height) = Info.output_height;
 
 	jpeg_destroy_decompress(&Info);
 

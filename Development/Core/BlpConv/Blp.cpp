@@ -210,7 +210,7 @@ bool BLP::LoadCompressed(BLP_HEADER& Header, const BUFFER& SourceBuffer, BUFFER&
 
 	int Width;
 	int Height;
-	if (!Jpeg.Read(TempBuffer, TargetBuffer, &Width, &Height))
+	if (!Jpeg.Read(TempBuffer, TargetBuffer, Header.AlphaBits == 0, &Width, &Height))
 	{
 		LOG("Unable to load  blp file, BLP reading failed!");
 		return false;
