@@ -14,13 +14,13 @@ BOOL GetYDTriggerImportFilePath(OUT LPTSTR lpszDest)
 BOOL CreateYDTriggerImportFile()
 {
   TCHAR szYDTriggerImportFilePath[MAX_PATH];
-  FILE* fp;
+  FILE* fp = NULL;
 
   if (!GetYDTriggerImportFilePath(szYDTriggerImportFilePath))
     return FALSE;
 
-  fp = _tfopen(szYDTriggerImportFilePath, TEXT("w"));
-  if (NULL == fp)
+  errno_t err = _tfopen_s(&fp, szYDTriggerImportFilePath, TEXT("w"));
+  if (err != 0 || NULL == fp)
     return FALSE;
 
   fprintf(fp, "#ifndef INCLUDE_IMPORT_H\n");

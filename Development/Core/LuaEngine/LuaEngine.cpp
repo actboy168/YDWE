@@ -26,7 +26,7 @@ int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
 	__except (xp = GetExceptionInformation(), EXCEPTION_EXECUTE_HANDLER)
 	{
 		char buf[256];
-		sprintf(buf, "SEH exception: '0x%08X'", xp->ExceptionRecord->ExceptionCode);
+		sprintf_s(buf, "SEH exception: '0x%08X'", xp->ExceptionRecord->ExceptionCode);
 		lua_pushstring(L, buf);
 		return LUA_ERRRUN;
 	}
