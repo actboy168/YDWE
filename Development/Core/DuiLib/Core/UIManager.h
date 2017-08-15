@@ -359,7 +359,10 @@ private:
 	CStdStringPtrMap<CAttributesList> m_DefaultAttrHash;
     //
     static HINSTANCE m_hInstance;
+#pragma warning(push)
+#pragma warning(disable:4251)
     static fs::path m_pStrResourceZip;
+#pragma warning(pop)
     static HANDLE m_hResourceZip;
     static CStdPtrArray m_aPreMessages;
 
