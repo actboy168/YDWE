@@ -27,8 +27,8 @@ struct BLP_HEADER
 		AlphaBits = 0;
 		Width = 0;
 		Height = 0;
-		PictureType = 0;
-		PictureSubType = 0;
+		Unknown1 = 0;
+		Unknown2 = 0;
 		memset(Offset, 0, MAX_NR_OF_BLP_MIP_MAPS * sizeof(uint32_t));
 		memset(Size, 0, MAX_NR_OF_BLP_MIP_MAPS * sizeof(uint32_t));
 	}
@@ -38,8 +38,8 @@ struct BLP_HEADER
 	uint32_t AlphaBits;
 	uint32_t Width;
 	uint32_t Height;
-	uint32_t PictureType;
-	uint32_t PictureSubType;
+	uint32_t Unknown1;
+	uint32_t Unknown2;
 	uint32_t Offset[MAX_NR_OF_BLP_MIP_MAPS];
 	uint32_t Size[MAX_NR_OF_BLP_MIP_MAPS];
 };

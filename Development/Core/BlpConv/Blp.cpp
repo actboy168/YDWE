@@ -59,8 +59,8 @@ bool BLP::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int
 	Header.AlphaBits = 8;
 	Header.Width = Width;
 	Header.Height = Height;
-	Header.PictureType = 4;
-	Header.PictureSubType = 1;
+	Header.Unknown1 = 4;
+	Header.Unknown2 = 1;
 
 	NrOfMipMaps = 0;
 
