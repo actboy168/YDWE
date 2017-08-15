@@ -102,16 +102,25 @@ namespace base {
 			{
 				grow(size_ + num_elements);
 			}
-			std::uninitialized_copy(first, last, ptr_ + size_);
+			uninitialized_copy(first, last, ptr_ + size_);
 			size_ += num_elements;
 		}
 
 	private:
+		void uninitialized_copy(const_iterator first, const_iterator last, iterator dest)
+		{
+			const char * const first_ch = const_cast<const char *>(reinterpret_cast<const volatile char *>(first));
+			const char * const last_ch = const_cast<const char *>(reinterpret_cast<const volatile char *>(last));
+			char * const dest_ch = const_cast<char *>(reinterpret_cast<volatile char *>(dest));
+			const size_t count = last_ch - first_ch;
+			std::memmove(dest_ch, first_ch, count);
+		}
+
 		void grow(size_type size) 
 		{
 			capacity_ = (std::max)(size, capacity_ + capacity_ / 2);
 			pointer p = new value_type[capacity_];
-			std::uninitialized_copy(ptr_, ptr_ + size_, p);
+			uninitialized_copy(ptr_, ptr_ + size_, p);
 			if (ptr_ != data_)
 			{
 				delete [] ptr_;
