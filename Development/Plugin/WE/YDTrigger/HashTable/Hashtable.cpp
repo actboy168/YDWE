@@ -7,9 +7,9 @@
 unsigned int
 get_hash_code(const char* name, unsigned int len)
 {
-  register unsigned char* p = (unsigned char *) name;
-  register unsigned int l = len;
-  register unsigned int h = len;
+  unsigned char* p = (unsigned char *) name;
+  unsigned int l = len;
+  unsigned int h = len;
 
   while (l-- > 0)
     h = h ^ ((h<<5) + (h>>2) + *p++);

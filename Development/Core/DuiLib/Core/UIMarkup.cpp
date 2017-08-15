@@ -253,7 +253,7 @@ bool CMarkup::LoadFromMem(BYTE* pByte, DWORD dwSize, int encoding)
 
                 for ( DWORD nSwap = 0 ; nSwap < dwSize ; nSwap ++ )
                 {
-                    register CHAR nTemp = pByte[ ( nSwap << 1 ) + 0 ];
+                    CHAR nTemp = pByte[ ( nSwap << 1 ) + 0 ];
                     pByte[ ( nSwap << 1 ) + 0 ] = pByte[ ( nSwap << 1 ) + 1 ];
                     pByte[ ( nSwap << 1 ) + 1 ] = nTemp;
                 }

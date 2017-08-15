@@ -30,7 +30,7 @@
 #include "udis86_itab.h"
 
 extern void ud_init(struct ud* u, uint8_t m);
-extern void ud_set_input_buffer(register struct ud* u, const uint8_t* buf, size_t len);
+extern void ud_set_input_buffer(struct ud* u, const uint8_t* buf, size_t len);
 extern unsigned int ud_decode(struct ud*);
 
 #endif
