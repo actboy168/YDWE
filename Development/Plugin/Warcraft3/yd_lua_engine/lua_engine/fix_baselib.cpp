@@ -74,6 +74,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		int searcher_file(lua_State *L);
 		int searcher_dll(lua_State *L);
 		int searcher_storm(lua_State *L);
+		const char *searchpath(lua_State *L, const char *name, const char *path, const char *sep, const char *dirsep);
 	}
 
 	int package_searchers(lua_State* L)
@@ -91,6 +92,15 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		lua_pushcclosure(L, package::searcher_dll, 1);
 		lua_rawseti(L, -2, 4);
 		return 1;
+	}
+
+	int package_searchpath(lua_State* L)
+	{
+		const char* f = package::searchpath(L, luaL_checkstring(L, 1), luaL_checkstring(L, 2), luaL_optstring(L, 3, "."), luaL_optstring(L, 4, LUA_DIRSEP));
+		if (f != NULL) return 1;
+		lua_pushnil(L);
+		lua_insert(L, -2);
+		return 2;
 	}
 
 	static int io_fclose(lua_State *L) {
@@ -281,10 +291,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		if (lua_getglobal(L, "package") == LUA_TTABLE)
 		{
 			lua_pushstring(L, "loadlib");   lua_pushnil(L); lua_rawset(L, -3);
-			lua_pushstring(L, "searchpath"); lua_pushnil(L); lua_rawset(L, -3);
-			lua_pushstring(L, "searchers"); package_searchers(L); lua_rawset(L, -3);
-			lua_pushstring(L, "path"); lua_pushstring(L, "?.lua"); lua_rawset(L, -3);
-			lua_pushstring(L, "cpath"); lua_pushstring(L, "?.dll"); lua_rawset(L, -3);
+			lua_pushstring(L, "searchpath"); lua_pushcclosure(L, package_searchpath, 0); lua_rawset(L, -3);
+			lua_pushstring(L, "searchers"); package_searchers(L);  lua_rawset(L, -3);
+			lua_pushstring(L, "path");      lua_pushstring(L, "?.lua"); lua_rawset(L, -3);
+			lua_pushstring(L, "cpath");     lua_pushstring(L, "?.dll"); lua_rawset(L, -3);
 		}
 		lua_pop(L, 1);
 

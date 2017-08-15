@@ -69,13 +69,13 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		return NULL;  /* not found */
 	}
 
-	static const char *findfile(lua_State *L, const char *name, const char *pname, const char *dirsep, bool is_local) {
+	static const char *findfile(lua_State *L, const char *name, const char *pname, bool is_local) {
 		const char *path;
 		lua_getfield(L, lua_upvalueindex(1), pname);
 		path = lua_tostring(L, -1);
 		if (path == NULL)
 			luaL_error(L, LUA_QL("package.%s") " must be a string", pname);
-		return searchpath(L, name, path, ".", dirsep, is_local);
+		return searchpath(L, name, path, ".", LUA_DIRSEP, is_local);
 	}
 
 	static int checkload(lua_State *L, int stat, const char *filename) {
@@ -91,7 +91,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		const char *filename;
 		size_t      size = 0;
 		const char *name = luaL_checklstring(L, 1, &size);
-		filename = findfile(L, name, "path", LUA_LSUBSEP, false);
+		filename = findfile(L, name, "path", false);
 		if (filename == NULL) return 1;  /* module not found in this path */
 		const char* buffer = nullptr;
 		storm_dll& s = storm_s::instance();
@@ -153,7 +153,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		const char *filename;
 		size_t      size = 0;
 		const char *name = luaL_checklstring(L, 1, &size);
-		filename = findfile(L, name, "path", LUA_LSUBSEP, true);
+		filename = findfile(L, name, "path", true);
 		if (filename == NULL) return 1;  /* module not found in this path */
 		int stat = 0;
 		try {
@@ -262,7 +262,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 	int searcher_dll(lua_State *L) {
 		size_t      size = 0;
 		const char *name = luaL_checklstring(L, 1, &size);
-		const char *filename = findfile(L, name, "cpath", LUA_CSUBSEP, false);
+		const char *filename = findfile(L, name, "cpath", false);
 		if (filename == NULL) return 1;
 		return checkload(L, (loadfunc(L, filename, name) == 0), filename);
 	}	
@@ -272,5 +272,13 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		if (lua_getfield(L, -1, name)  == LUA_TNIL)
 			lua_pushfstring(L, "\n\tno field package.preload['%s']", name);
 		return 1;
+	}
+	const char *searchpath(lua_State *L, const char *name, const char *path, const char *sep, const char *dirsep) {
+		const char* r = searchpath(L, name, path, sep, dirsep, true);
+		if (r) {
+			return r;
+		}
+		lua_pop(L, 1);
+		return searchpath(L, name, path, sep, dirsep, false);
 	}
 }}}}
