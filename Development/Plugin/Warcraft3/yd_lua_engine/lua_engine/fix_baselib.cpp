@@ -70,23 +70,26 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	}
 
 	namespace package {
-		int searcher_storm(lua_State *L);
+		int searcher_preload(lua_State *L);
 		int searcher_file(lua_State *L);
 		int searcher_dll(lua_State *L);
+		int searcher_storm(lua_State *L);
 	}
 
 	int package_searchers(lua_State* L)
 	{
 		lua_newtable(L);
-		lua_pushvalue(L, -3);
-		lua_pushcclosure(L, package::searcher_file, 1);
+		lua_pushcclosure(L, package::searcher_preload, 0);
 		lua_rawseti(L, -2, 1);
 		lua_pushvalue(L, -3);
-		lua_pushcclosure(L, package::searcher_storm, 1);
+		lua_pushcclosure(L, package::searcher_file, 1);
 		lua_rawseti(L, -2, 2);
 		lua_pushvalue(L, -3);
-		lua_pushcclosure(L, package::searcher_dll, 1);
+		lua_pushcclosure(L, package::searcher_storm, 1);
 		lua_rawseti(L, -2, 3);
+		lua_pushvalue(L, -3);
+		lua_pushcclosure(L, package::searcher_dll, 1);
+		lua_rawseti(L, -2, 4);
 		return 1;
 	}
 

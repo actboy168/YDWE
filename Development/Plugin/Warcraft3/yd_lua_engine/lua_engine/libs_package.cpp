@@ -265,5 +265,12 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		const char *filename = findfile(L, name, "cpath", LUA_CSUBSEP, false);
 		if (filename == NULL) return 1;
 		return checkload(L, (loadfunc(L, filename, name) == 0), filename);
+	}	
+	int searcher_preload(lua_State* L) {
+		const char *name = luaL_checkstring(L, 1);
+		lua_getfield(L, LUA_REGISTRYINDEX, LUA_PRELOAD_TABLE);
+		if (lua_getfield(L, -1, name)  == LUA_TNIL)
+			lua_pushfstring(L, "\n\tno field package.preload['%s']", name);
+		return 1;
 	}
 }}}}
