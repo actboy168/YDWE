@@ -2,7 +2,7 @@
 //| Included files
 //+-----------------------------------------------------------------------------
 #include "Jpeg.h"
-
+#include <algorithm>
 
 namespace IMAGE 
 {
@@ -84,14 +84,10 @@ bool JPEG::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, in
 //+-----------------------------------------------------------------------------
 //| Reads JPEG data
 //+-----------------------------------------------------------------------------
-bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, bool ignoreAlpha, int* Width, int* Height)
+bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int Width, unsigned int Height)
 {
-	int Stride;
-	int Offset;
-	JSAMPARRAY Pointer;
 	jpeg_decompress_struct Info;
 	jpeg_error_mgr ErrorManager;
-
 	Info.err = jpeg_std_error(&ErrorManager);
 
 	jpeg_create_decompress(&Info);
@@ -99,45 +95,61 @@ bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, bool ignoreAlp
 	jpeg_read_header(&Info, true);
 	jpeg_start_decompress(&Info);
 
-	if((Info.output_components != 3) && (Info.output_components != 4))
+	if ((Info.output_components != 3) && (Info.output_components != 4))
 	{
 		LOG("Nr of channels must be 3 or 4!");
 		return false;
 	}
 
-	TargetBuffer.Resize(Info.output_width * Info.output_height * 4);
-	Stride = Info.output_width * Info.output_components;
-	Offset = 0;
+	TargetBuffer.Resize(Width * Height * 4);
+	JSAMPARRAY buffer = (*Info.mem->alloc_sarray)(reinterpret_cast<j_common_ptr>(&Info), JPOOL_IMAGE, Info.output_width * Info.output_components, 1);
 
-	Pointer = (*Info.mem->alloc_sarray)(reinterpret_cast<j_common_ptr>(&Info), JPOOL_IMAGE, Stride, 1);
-	while (Info.output_scanline < Info.output_height)
+	struct rgba_t
 	{
-		jpeg_read_scanlines(&Info, Pointer, 1);
-		memcpy(TargetBuffer.GetData(Offset), Pointer[0], Stride);
-		Offset += Stride;
-	}
-	jpeg_finish_decompress(&Info);
+		uint8_t r;
+		uint8_t g;
+		uint8_t b;
+		uint8_t a;
+	};
 
-	if (Info.output_components == 3)
+	rgba_t* output = reinterpret_cast<rgba_t*>(TargetBuffer.GetData());
+	unsigned int minw = (std::min)(Width, Info.output_width);
+	for (unsigned int y = 0; y < Height; ++y)
 	{
-		for (int i = (Info.output_width * Info.output_height - 1); i >= 0; i--)
+		if (Info.output_scanline < Info.output_height)
 		{
-			TargetBuffer[(i * 4) + 3] = (char)(unsigned char)0xFF;
-			TargetBuffer[(i * 4) + 2] = TargetBuffer[(i * 3) + 2];
-			TargetBuffer[(i * 4) + 1] = TargetBuffer[(i * 3) + 1];
-			TargetBuffer[(i * 4) + 0] = TargetBuffer[(i * 3) + 0];
-		}
-	}
-	else if (ignoreAlpha)
-	{
-		for (unsigned int i = 0; i < Info.output_width * Info.output_height; ++i)
-		{
-			TargetBuffer[(i * 4) + 3] = (char)(unsigned char)0xFF;
-		}
-	}
+			jpeg_read_scanlines(&Info, buffer, 1);
 
-	if (Width != NULL) (*Width) = Info.output_width;
-	if (Height != NULL) (*Height) = Info.output_height;
+			if (Info.output_components == 3)
+			{
+				for (unsigned int x = 0; x < minw; ++x)
+				{
+					output[0].r = buffer[0][3 * x + 0];
+					output[0].g = buffer[0][3 * x + 1];
+					output[0].b = buffer[0][3 * x + 2];
+					output[0].a = 255;
+					output++;
+				}
+			}
+			else
+			{
+				memcpy(output, buffer[0], minw * sizeof rgba_t);
+				output += minw;
+			}
+
+			if (minw < Width)
+			{
+				memset(output, 0, (Width - minw) * sizeof rgba_t);
+				output += (Width - minw);
+			}
+		}
+		else
+		{
+			memset(output, 0, Width * sizeof rgba_t);
+			output += Width;
+		}
+
+	}
 
 	jpeg_destroy_decompress(&Info);
 

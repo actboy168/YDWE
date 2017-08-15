@@ -75,7 +75,7 @@ public:
 	~JPEG();
 
 	bool Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int Height, int Quality);
-	bool Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, bool ignoreAlpha, int* Width = NULL, int* Height = NULL);
+	bool Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int Width, unsigned int Height);
 
 protected:
 	static void SetMemorySource(jpeg_decompress_struct* Info, unsigned char* Buffer, size_t Size);
