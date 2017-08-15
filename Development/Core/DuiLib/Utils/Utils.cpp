@@ -272,7 +272,7 @@ namespace DuiLib
 
 	CWaitCursor::CWaitCursor()
 	{
-		m_hOrigCursor = ::SetCursor(::LoadCursor(NULL, IDC_WAIT));
+		m_hOrigCursor = ::SetCursor(::LoadCursorW(NULL, IDC_WAIT));
 	}
 
 	CWaitCursor::~CWaitCursor()

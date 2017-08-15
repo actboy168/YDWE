@@ -98,7 +98,7 @@ namespace DuiLib
 			// return;
 		}
 		if( event.Type == UIEVENT_SETCURSOR ) {
-			::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_HAND)));
+			::SetCursor(::LoadCursorW(NULL, IDC_HAND));
 			return;
 		}
 		CLabelUI::DoEvent(event);

@@ -41,7 +41,7 @@ namespace DuiLib
 		if( event.Type == UIEVENT_SETCURSOR ) {
 			for( int i = 0; i < m_nLinks; i++ ) {
 				if( ::PtInRect(&m_rcLinks[i], event.ptMouse) ) {
-					::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_HAND)));
+					::SetCursor(::LoadCursorW(NULL, MAKEINTRESOURCEW(IDC_HAND)));
 					return;
 				}
 			}
