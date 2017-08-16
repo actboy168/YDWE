@@ -169,21 +169,13 @@ bool BLP::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int* Width, int
 
 	switch(Header.Compression)
 	{
-	case 0:
-		{
-			if(!LoadCompressed(Header, SourceBuffer, TargetBuffer)) return false;
-			break;
-		}
-	case 1:
-		{
-			if(!LoadUncompressed(Header, SourceBuffer, TargetBuffer)) return false;
-			break;
-		}
 	default:
-		{
-			LOG("Unable to load  blp file, unknown compression method!");
-			return false;
-		}
+	case 0:
+		if (!LoadCompressed(Header, SourceBuffer, TargetBuffer)) return false;
+		break;
+	case 1:
+		if (!LoadUncompressed(Header, SourceBuffer, TargetBuffer)) return false;
+		break;
 	}
 
 	if(Width != NULL) (*Width) = Header.Width;
