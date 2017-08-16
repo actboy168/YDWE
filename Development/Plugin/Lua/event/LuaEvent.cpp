@@ -105,9 +105,9 @@ namespace NYDWE {
 		{
 			try {
 				fs::path p(fileName);
-				p = p.parent_path().remove_filename() / p.filename();
+				//p = p.parent_path().remove_filename() / p.filename();
 
-				event_array[EVENT_PRE_SAVE_MAP]([&](lua_State* L, int idx){
+				event_array[EVENT_SAVE_MAP]([&](lua_State* L, int idx){
 					lua_pushstring(L, "map_path");
 					lua_pushwstring(L, p.wstring());
 					lua_settable(L, idx);
