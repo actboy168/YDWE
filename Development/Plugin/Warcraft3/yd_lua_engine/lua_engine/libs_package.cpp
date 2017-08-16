@@ -33,11 +33,8 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 				}
 			}
 			catch (...) {}
-			return 0;
 		}
-		else {
-			return storm_s::instance().has_file(filename) ? 1 : 0;
-		}
+		return storm_s::instance().has_file(filename) ? 1 : 0;
 	}
 
 	static const char *pushnexttemplate(lua_State *L, const char *path) {
@@ -50,7 +47,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		return l;
 	}
 
-	static const char *searchpath(lua_State *L, const char *name, const char *path, const char *sep, const char *dirsep, bool is_local) {
+	const char *searchpath(lua_State *L, const char *name, const char *path, const char *sep, const char *dirsep, bool is_local = true) {
 		luaL_Buffer msg;  /* to build error message */
 		luaL_buffinit(L, &msg);
 		if (*sep != '\0')  /* non-empty separator? */
@@ -87,21 +84,37 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			return luaL_error(L, "error loading module " LUA_QS " from file " LUA_QS ":\n\t%s", lua_tostring(L, 1), filename, lua_tostring(L, -1));
 	}
 
-	int searcher_storm(lua_State *L) {
+	int searcher_lua(lua_State *L) {
 		const char *filename;
 		size_t      size = 0;
 		const char *name = luaL_checklstring(L, 1, &size);
-		filename = findfile(L, name, "path", false);
+		filename = findfile(L, name, "path", true);
 		if (filename == NULL) return 1;  /* module not found in this path */
-		const char* buffer = nullptr;
-		storm_dll& s = storm_s::instance();
-		size = 0;
-		s.load_file(filename, (const void**)&buffer, &size);
 		lua_pushfstring(L, "@%s", filename);
 		int idx = lua_gettop(L);
-		int stat = (luaL_loadbuffer(L, buffer, size, lua_tostring(L, -1)) == LUA_OK);
+		int stat = 0;
+
+		try {
+			std::wstring wfilename = base::u2w(filename);
+			std::ifstream fs(wfilename.c_str(), std::ios::binary | std::ios::in);
+			if (fs)
+			{
+				std::string buffer = std::move(std::string((std::istreambuf_iterator<char>(fs)), (std::istreambuf_iterator<char>())));
+				stat = (luaL_loadbuffer(L, buffer.c_str(), buffer.size(), lua_tostring(L, -1)) == LUA_OK);
+			}
+			else
+			{
+				const char* buf = nullptr;
+				size_t len = 0;
+				storm_dll& s = storm_s::instance();
+				s.load_file(filename, (const void**)&buf, &len);
+				stat = (luaL_loadbuffer(L, buf, len, lua_tostring(L, -1)) == LUA_OK);
+				s.unload_file(buf);
+			}
+		}
+		catch (...) {}
+
 		lua_remove(L, idx);
-		s.unload_file(buffer);
 		return checkload(L, stat, filename);
 	}
 
@@ -122,14 +135,14 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			}
 			lua_pop(L, 1);
 			lua_newtable(L);
-			lua_createtable(L, 0, 1); 
+			lua_createtable(L, 0, 1);
 			lua_pushcfunction(L, mt_gc);
-			lua_setfield(L, -2, "__gc"); 
+			lua_setfield(L, -2, "__gc");
 			lua_setmetatable(L, -2);
 			lua_pushvalue(L, -1);
 			lua_rawsetp(L, LUA_REGISTRYINDEX, &CLIBS);
 		}
-		static void* get(lua_State *L, const char *path) {		  
+		static void* get(lua_State *L, const char *path) {
 			if (LUA_TTABLE != lua_rawgetp(L, LUA_REGISTRYINDEX, &CLIBS)) {
 				lua_pop(L, 1);
 				return 0;
@@ -139,7 +152,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			plib = lua_touserdata(L, -1);
 			lua_pop(L, 2);
 			return plib;
-		}	 
+		}
 		static void add(lua_State *L, const char *path, void *plib) {
 			create_if_not_exits(L);
 			lua_pushlightuserdata(L, plib);
@@ -147,25 +160,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			lua_setfield(L, -3, path);
 			lua_rawseti(L, -2, luaL_len(L, -2) + 1);
 			lua_pop(L, 1);
-		}	
-	}
-	int searcher_file(lua_State *L) {
-		const char *filename;
-		size_t      size = 0;
-		const char *name = luaL_checklstring(L, 1, &size);
-		filename = findfile(L, name, "path", true);
-		if (filename == NULL) return 1;  /* module not found in this path */
-		int stat = 0;
-		try {
-			std::wstring wfilename = base::u2w(filename);
-			std::string buffer = base::file::read_stream(wfilename).read<std::string>();
-			lua_pushfstring(L, "@%s", filename);
-			int idx = lua_gettop(L);
-			stat = (luaL_loadbuffer(L, buffer.c_str(), buffer.size(), lua_tostring(L, -1)) == LUA_OK);
-			lua_remove(L, idx);
 		}
-		catch (...) {}
-		return checkload(L, stat, filename);
 	}
 
 	static HMODULE loaddll_frommemory(const char* filename, const char* str, size_t len) {
@@ -272,13 +267,5 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		if (lua_getfield(L, -1, name)  == LUA_TNIL)
 			lua_pushfstring(L, "\n\tno field package.preload['%s']", name);
 		return 1;
-	}
-	const char *searchpath(lua_State *L, const char *name, const char *path, const char *sep, const char *dirsep) {
-		const char* r = searchpath(L, name, path, sep, dirsep, true);
-		if (r) {
-			return r;
-		}
-		lua_pop(L, 1);
-		return searchpath(L, name, path, sep, dirsep, false);
 	}
 }}}}

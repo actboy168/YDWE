@@ -71,10 +71,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	namespace package {
 		int searcher_preload(lua_State *L);
-		int searcher_file(lua_State *L);
+		int searcher_lua(lua_State *L);
 		int searcher_dll(lua_State *L);
-		int searcher_storm(lua_State *L);
-		const char *searchpath(lua_State *L, const char *name, const char *path, const char *sep, const char *dirsep);
+		const char *searchpath(lua_State *L, const char *name, const char *path, const char *sep, const char *dirsep, bool is_local = true);
 	}
 
 	int package_searchers(lua_State* L)
@@ -83,14 +82,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		lua_pushcclosure(L, package::searcher_preload, 0);
 		lua_rawseti(L, -2, 1);
 		lua_pushvalue(L, -3);
-		lua_pushcclosure(L, package::searcher_file, 1);
+		lua_pushcclosure(L, package::searcher_lua, 1);
 		lua_rawseti(L, -2, 2);
 		lua_pushvalue(L, -3);
-		lua_pushcclosure(L, package::searcher_storm, 1);
-		lua_rawseti(L, -2, 3);
-		lua_pushvalue(L, -3);
 		lua_pushcclosure(L, package::searcher_dll, 1);
-		lua_rawseti(L, -2, 4);
+		lua_rawseti(L, -2, 3);
 		return 1;
 	}
 
