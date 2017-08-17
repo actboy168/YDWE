@@ -1,40 +1,151 @@
-//+-----------------------------------------------------------------------------
-//| Included files
-//+-----------------------------------------------------------------------------
 #include "Jpeg.h"
 #include <algorithm>
 
-namespace IMAGE 
+#pragma warning(push)
+#pragma warning(disable:4005)
+extern "C"
 {
+#include <jpeglib.h>
+}
+#pragma warning(pop)
 
-//+-----------------------------------------------------------------------------
-//| Global objects
-//+-----------------------------------------------------------------------------
-JPEG Jpeg;
+namespace IMAGE { namespace JPEG {
 
+struct JPEG_SOURCE_MANAGER
+{
+	JPEG_SOURCE_MANAGER()
+	{
+		SourceBuffer = NULL;
+		SourceBufferSize = 0;
+		Buffer = NULL;
+	}
 
-//+-----------------------------------------------------------------------------
-//| Constructor
-//+-----------------------------------------------------------------------------
-JPEG::JPEG()
+	jpeg_source_mgr Manager;
+	const JOCTET* SourceBuffer;
+	size_t SourceBufferSize;
+	const JOCTET* Buffer;
+};
+
+struct JPEG_DESTINATION_MANAGER
+{
+	JPEG_DESTINATION_MANAGER()
+	{
+		DestinationBuffer = NULL;
+		DestinationBufferSize = 0;
+		Buffer = NULL;
+	}
+
+	jpeg_destination_mgr Manager;
+	JOCTET* DestinationBuffer;
+	size_t DestinationBufferSize;
+	JOCTET* Buffer;
+};
+
+static void SourceInit(jpeg_decompress_struct* /*Info*/)
 {
 	//Empty
 }
 
+static boolean SourceFill(jpeg_decompress_struct* Info)
+{
+	JPEG_SOURCE_MANAGER* SourceManager;
 
-//+-----------------------------------------------------------------------------
-//| Destructor
-//+-----------------------------------------------------------------------------
-JPEG::~JPEG()
+	SourceManager = reinterpret_cast<JPEG_SOURCE_MANAGER*>(Info->src);
+
+	SourceManager->Buffer = SourceManager->SourceBuffer;
+	SourceManager->Manager.next_input_byte = SourceManager->Buffer;
+	SourceManager->Manager.bytes_in_buffer = SourceManager->SourceBufferSize;
+
+	return true;
+}
+
+static void SourceSkip(jpeg_decompress_struct* Info, long NrOfBytes)
+{
+	JPEG_SOURCE_MANAGER* SourceManager;
+
+	SourceManager = reinterpret_cast<JPEG_SOURCE_MANAGER*>(Info->src);
+
+	if(NrOfBytes > 0)
+	{
+		while(NrOfBytes > static_cast<long>(SourceManager->Manager.bytes_in_buffer))
+		{
+			NrOfBytes -= static_cast<long>(SourceManager->Manager.bytes_in_buffer);
+			SourceFill(Info);
+		}
+
+		SourceManager->Manager.next_input_byte += NrOfBytes;
+		SourceManager->Manager.bytes_in_buffer -= NrOfBytes;
+	}
+}
+
+static void SourceTerminate(jpeg_decompress_struct* /*Info*/)
 {
 	//Empty
 }
 
+static void DestinationInit(jpeg_compress_struct* Info)
+{
+	JPEG_DESTINATION_MANAGER* DestinationManager;
 
-//+-----------------------------------------------------------------------------
-//| Writes JPEG data
-//+-----------------------------------------------------------------------------
-bool JPEG::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int Height, int Quality)
+	DestinationManager = reinterpret_cast<JPEG_DESTINATION_MANAGER*>(Info->dest);
+
+	DestinationManager->Buffer = DestinationManager->DestinationBuffer;
+	DestinationManager->Manager.next_output_byte = DestinationManager->Buffer;
+	DestinationManager->Manager.free_in_buffer = DestinationManager->DestinationBufferSize;
+}
+
+static boolean DestinationEmpty(jpeg_compress_struct* Info)
+{
+	JPEG_DESTINATION_MANAGER* DestinationManager;
+
+	DestinationManager = reinterpret_cast<JPEG_DESTINATION_MANAGER*>(Info->dest);
+
+	DestinationManager->Manager.next_output_byte = DestinationManager->Buffer;
+	DestinationManager->Manager.free_in_buffer = DestinationManager->DestinationBufferSize;
+
+	return true;
+}
+
+static void DestinationTerminate(jpeg_compress_struct* /*Info*/)
+{
+	//Empty
+}
+
+static void SetMemorySource(jpeg_decompress_struct* Info, const JOCTET* Buffer, size_t Size)
+{
+	JPEG_SOURCE_MANAGER* SourceManager;
+
+	Info->src = reinterpret_cast<jpeg_source_mgr*>((*Info->mem->alloc_small)(reinterpret_cast<j_common_ptr>(Info), JPOOL_PERMANENT, sizeof(JPEG_SOURCE_MANAGER)));
+	SourceManager = reinterpret_cast<JPEG_SOURCE_MANAGER*>(Info->src);
+
+	SourceManager->Buffer = reinterpret_cast<JOCTET*>((*Info->mem->alloc_small)(reinterpret_cast<j_common_ptr>(Info), JPOOL_PERMANENT, Size * sizeof(JOCTET)));
+	SourceManager->SourceBuffer = Buffer;
+	SourceManager->SourceBufferSize = Size;
+	SourceManager->Manager.init_source = SourceInit;
+	SourceManager->Manager.fill_input_buffer = SourceFill;
+	SourceManager->Manager.skip_input_data = SourceSkip;
+	SourceManager->Manager.resync_to_restart = jpeg_resync_to_restart;
+	SourceManager->Manager.term_source = SourceTerminate;
+	SourceManager->Manager.bytes_in_buffer = 0;
+	SourceManager->Manager.next_input_byte = NULL;
+}
+
+static void SetMemoryDestination(jpeg_compress_struct* Info, JOCTET* Buffer, size_t Size)
+{
+	JPEG_DESTINATION_MANAGER* DestinationManager;
+
+	Info->dest = reinterpret_cast<jpeg_destination_mgr*>((*Info->mem->alloc_small)(reinterpret_cast<j_common_ptr>(Info), JPOOL_PERMANENT, sizeof(JPEG_DESTINATION_MANAGER)));
+	DestinationManager = reinterpret_cast<JPEG_DESTINATION_MANAGER*>(Info->dest);
+
+	DestinationManager->Buffer = NULL;
+	DestinationManager->DestinationBuffer = Buffer;
+	DestinationManager->DestinationBufferSize = Size;
+	DestinationManager->Manager.init_destination = DestinationInit;
+	DestinationManager->Manager.empty_output_buffer = DestinationEmpty;
+	DestinationManager->Manager.term_destination = DestinationTerminate;
+}
+
+bool Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int Height, int Quality)
 {
 	int Stride;
 	int RealSize;
@@ -63,7 +174,7 @@ bool JPEG::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, in
 	jpeg_start_compress(&Info, true);
 
 	Stride = Width * 4;
-	while(Info.next_scanline < Info.image_height)
+	while (Info.next_scanline < Info.image_height)
 	{
 		Pointer[0] = (JSAMPROW)(SourceBuffer.data() + Info.next_scanline * Stride);
 		jpeg_write_scanlines(&Info, Pointer, 1);
@@ -81,10 +192,7 @@ bool JPEG::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, in
 	return true;
 }
 
-//+-----------------------------------------------------------------------------
-//| Reads JPEG data
-//+-----------------------------------------------------------------------------
-bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int Width, unsigned int Height)
+bool Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int Width, unsigned int Height)
 {
 	jpeg_decompress_struct Info;
 	jpeg_error_mgr ErrorManager;
@@ -156,144 +264,4 @@ bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int W
 	return true;
 }
 
-
-//+-----------------------------------------------------------------------------
-//| Sets the memory source
-//+-----------------------------------------------------------------------------
-void JPEG::SetMemorySource(jpeg_decompress_struct* Info, const JOCTET* Buffer, size_t Size)
-{
-	JPEG_SOURCE_MANAGER* SourceManager;
-
-	Info->src = reinterpret_cast<jpeg_source_mgr*>((*Info->mem->alloc_small)(reinterpret_cast<j_common_ptr>(Info), JPOOL_PERMANENT, sizeof(JPEG_SOURCE_MANAGER)));
-	SourceManager = reinterpret_cast<JPEG_SOURCE_MANAGER*>(Info->src);
-
-	SourceManager->Buffer = reinterpret_cast<JOCTET*>((*Info->mem->alloc_small)(reinterpret_cast<j_common_ptr>(Info), JPOOL_PERMANENT, Size * sizeof(JOCTET)));
-	SourceManager->SourceBuffer = Buffer;
-	SourceManager->SourceBufferSize = Size;
-	SourceManager->Manager.init_source = SourceInit;
-	SourceManager->Manager.fill_input_buffer = SourceFill;
-	SourceManager->Manager.skip_input_data = SourceSkip;
-	SourceManager->Manager.resync_to_restart = jpeg_resync_to_restart;
-	SourceManager->Manager.term_source = SourceTerminate;
-	SourceManager->Manager.bytes_in_buffer = 0;
-	SourceManager->Manager.next_input_byte = NULL;
-}
-
-
-//+-----------------------------------------------------------------------------
-//| Sets the memory destination
-//+-----------------------------------------------------------------------------
-void JPEG::SetMemoryDestination(jpeg_compress_struct* Info, JOCTET* Buffer, size_t Size)
-{
-	JPEG_DESTINATION_MANAGER* DestinationManager;
-
-	Info->dest = reinterpret_cast<jpeg_destination_mgr*>((*Info->mem->alloc_small)(reinterpret_cast<j_common_ptr>(Info), JPOOL_PERMANENT, sizeof(JPEG_DESTINATION_MANAGER)));
-	DestinationManager = reinterpret_cast<JPEG_DESTINATION_MANAGER*>(Info->dest);
-
-	DestinationManager->Buffer = NULL;
-	DestinationManager->DestinationBuffer = Buffer;
-	DestinationManager->DestinationBufferSize = Size;
-	DestinationManager->Manager.init_destination = DestinationInit;
-	DestinationManager->Manager.empty_output_buffer = DestinationEmpty;
-	DestinationManager->Manager.term_destination = DestinationTerminate;
-}
-
-
-//+-----------------------------------------------------------------------------
-//| Initiates the memory source
-//+-----------------------------------------------------------------------------
-void JPEG::SourceInit(jpeg_decompress_struct* /*Info*/)
-{
-	//Empty
-}
-
-
-//+-----------------------------------------------------------------------------
-//| Fills the memory source
-//+-----------------------------------------------------------------------------
-boolean JPEG::SourceFill(jpeg_decompress_struct* Info)
-{
-	JPEG_SOURCE_MANAGER* SourceManager;
-
-	SourceManager = reinterpret_cast<JPEG_SOURCE_MANAGER*>(Info->src);
-
-	SourceManager->Buffer = SourceManager->SourceBuffer;
-	SourceManager->Manager.next_input_byte = SourceManager->Buffer;
-	SourceManager->Manager.bytes_in_buffer = SourceManager->SourceBufferSize;
-
-	return true;
-}
-
-
-//+-----------------------------------------------------------------------------
-//| Skips the memory source
-//+-----------------------------------------------------------------------------
-void JPEG::SourceSkip(jpeg_decompress_struct* Info, long NrOfBytes)
-{
-	JPEG_SOURCE_MANAGER* SourceManager;
-
-	SourceManager = reinterpret_cast<JPEG_SOURCE_MANAGER*>(Info->src);
-
-	if(NrOfBytes > 0)
-	{
-		while(NrOfBytes > static_cast<long>(SourceManager->Manager.bytes_in_buffer))
-		{
-			NrOfBytes -= static_cast<long>(SourceManager->Manager.bytes_in_buffer);
-			SourceFill(Info);
-		}
-
-		SourceManager->Manager.next_input_byte += NrOfBytes;
-		SourceManager->Manager.bytes_in_buffer -= NrOfBytes;
-	}
-}
-
-
-//+-----------------------------------------------------------------------------
-//| Terminates the memory source
-//+-----------------------------------------------------------------------------
-void JPEG::SourceTerminate(jpeg_decompress_struct* /*Info*/)
-{
-	//Empty
-}
-
-
-//+-----------------------------------------------------------------------------
-//| Initiates the memory destination
-//+-----------------------------------------------------------------------------
-void JPEG::DestinationInit(jpeg_compress_struct* Info)
-{
-	JPEG_DESTINATION_MANAGER* DestinationManager;
-
-	DestinationManager = reinterpret_cast<JPEG_DESTINATION_MANAGER*>(Info->dest);
-
-	DestinationManager->Buffer = DestinationManager->DestinationBuffer;
-	DestinationManager->Manager.next_output_byte = DestinationManager->Buffer;
-	DestinationManager->Manager.free_in_buffer = DestinationManager->DestinationBufferSize;
-}
-
-
-//+-----------------------------------------------------------------------------
-//| Empties the memory destination
-//+-----------------------------------------------------------------------------
-boolean JPEG::DestinationEmpty(jpeg_compress_struct* Info)
-{
-	JPEG_DESTINATION_MANAGER* DestinationManager;
-
-	DestinationManager = reinterpret_cast<JPEG_DESTINATION_MANAGER*>(Info->dest);
-
-	DestinationManager->Manager.next_output_byte = DestinationManager->Buffer;
-	DestinationManager->Manager.free_in_buffer = DestinationManager->DestinationBufferSize;
-
-	return true;
-}
-
-
-//+-----------------------------------------------------------------------------
-//| Terminates the memory destination
-//+-----------------------------------------------------------------------------
-void JPEG::DestinationTerminate(jpeg_compress_struct* /*Info*/)
-{
-	//Empty
-}
-
-}
+}}

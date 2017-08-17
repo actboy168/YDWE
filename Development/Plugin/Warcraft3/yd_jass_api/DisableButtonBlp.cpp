@@ -18,6 +18,14 @@ namespace base { namespace warcraft3 { namespace japi {
 #include "PasButton.h"
 	};
 
+	struct rgba_t
+	{
+		uint8_t Red;
+		uint8_t Green;
+		uint8_t Blue;
+		uint8_t Alpha;
+	};
+
 	static inline unsigned char clamp_channel_bits8(int c)
 	{
 		if (c > 255)
@@ -33,7 +41,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		int input_width = 0;
 		int input_height = 0;
 		IMAGE::BUFFER input_pic, output_pic;
-		if (!IMAGE::BLP().Read(input, input_pic, &input_width, &input_height))
+		if (!IMAGE::BLP::Read(input, input_pic, &input_width, &input_height))
 		{
 			return false;
 		}
@@ -46,8 +54,8 @@ namespace base { namespace warcraft3 { namespace japi {
 		bool enable = false;
 		for (size_t i = 0; i < kBlpSize * kBlpSize; ++i)
 		{
-			IMAGE::BLP_RGBA const& pixel_a = reinterpret_cast<IMAGE::BLP_RGBA*>(kPasButton)[i];
-			IMAGE::BLP_RGBA const& pixel_b = reinterpret_cast<IMAGE::BLP_RGBA*>(input_pic.data())[i];
+			rgba_t const& pixel_a = reinterpret_cast<rgba_t*>(kPasButton)[i];
+			rgba_t const& pixel_b = reinterpret_cast<rgba_t*>(input_pic.data())[i];
 			*ptr = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Red + pixel_a.Red) / (255 * 2));
 			if (*ptr++ > 63) enable = true;
 			*ptr = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Green + pixel_a.Green) / (255 * 2));
@@ -67,7 +75,7 @@ namespace base { namespace warcraft3 { namespace japi {
 				ptr++;
 			}
 		}
-		if (!IMAGE::BLP().Write(output_pic, output, kBlpSize, kBlpSize, 95))
+		if (!IMAGE::BLP::Write(output_pic, output, kBlpSize, kBlpSize, 95))
 		{
 			return false;
 		}
@@ -79,7 +87,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		int input_width = 0;
 		int input_height = 0;
 		IMAGE::BUFFER input_a_pic, input_b_pic, output_pic;
-		if (!IMAGE::BLP().Read(input_a, input_a_pic, &input_width, &input_height))
+		if (!IMAGE::BLP::Read(input_a, input_a_pic, &input_width, &input_height))
 		{
 			return false;
 		}
@@ -87,7 +95,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			return false;
 		}
-		if (!IMAGE::BLP().Read(input_b, input_b_pic, &input_width, &input_height))
+		if (!IMAGE::BLP::Read(input_b, input_b_pic, &input_width, &input_height))
 		{
 			return false;
 		}
@@ -99,14 +107,14 @@ namespace base { namespace warcraft3 { namespace japi {
 		unsigned char* ptr = output_pic.data();
 		for (size_t i = 0; i < kBlpSize * kBlpSize; ++i)
 		{
-			IMAGE::BLP_RGBA const& pixel_a = reinterpret_cast<IMAGE::BLP_RGBA*>(input_a_pic.data())[i];
-			IMAGE::BLP_RGBA const& pixel_b = reinterpret_cast<IMAGE::BLP_RGBA*>(input_b_pic.data())[i];
+			rgba_t const& pixel_a = reinterpret_cast<rgba_t*>(input_a_pic.data())[i];
+			rgba_t const& pixel_b = reinterpret_cast<rgba_t*>(input_b_pic.data())[i];
 			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Red + pixel_a.Alpha * pixel_a.Red) / 255);
 			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Green + pixel_a.Alpha * pixel_a.Green) / 255);
 			*ptr++ = clamp_channel_bits8(((255 - pixel_a.Alpha) * pixel_b.Blue + pixel_a.Alpha * pixel_a.Blue) / 255);
 			*ptr++ = clamp_channel_bits8(255 - (255 - pixel_a.Alpha) * (255 - pixel_b.Alpha) / 255);
 		}
-		if (!IMAGE::BLP().Write(output_pic, output, kBlpSize, kBlpSize, 95))
+		if (!IMAGE::BLP::Write(output_pic, output, kBlpSize, kBlpSize, 95))
 		{
 			return false;
 		}

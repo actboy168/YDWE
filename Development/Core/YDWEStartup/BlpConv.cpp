@@ -16,12 +16,12 @@ namespace IMAGE
 	{
 		picture_t pic;
 
-		if (!BLP().Read(SourceBuffer, pic.buffer, &pic.width, &pic.height))
+		if (!BLP::Read(SourceBuffer, pic.buffer, &pic.width, &pic.height))
 		{
 			return false;
 		}
 
-		if (!BMP().Write(pic.buffer, TargetBuffer, pic.width, pic.height, 0))
+		if (!BMP::Write(pic.buffer, TargetBuffer, pic.width, pic.height, 0))
 		{
 			return false;
 		}
@@ -33,12 +33,12 @@ namespace IMAGE
 	{
 		picture_t pic;
 
-		if (!BMP().Read(SourceBuffer, pic.buffer, &pic.width, &pic.height))
+		if (!BMP::Read(SourceBuffer, pic.buffer, &pic.width, &pic.height))
 		{
 			return false;
 		}
 
-		if (!BLP().Write(pic.buffer, TargetBuffer, pic.width, pic.height, 100))
+		if (!BLP::Write(pic.buffer, TargetBuffer, pic.width, pic.height, 100))
 		{
 			return false;
 		}

@@ -1,34 +1,10 @@
-//+-----------------------------------------------------------------------------
-//| Included files
-//+-----------------------------------------------------------------------------
 #include "Bmp.h"
 #include <windows.h>
 
-namespace IMAGE 
-{
 
-//+-----------------------------------------------------------------------------
-//| Constructor
-//+-----------------------------------------------------------------------------
-BMP::BMP()
-{
-	//Empty
-}
+namespace IMAGE { namespace BMP {
 
-
-//+-----------------------------------------------------------------------------
-//| Destructor
-//+-----------------------------------------------------------------------------
-BMP::~BMP()
-{
-	//Empty
-}
-
-
-//+-----------------------------------------------------------------------------
-//| Writes BMP data
-//+-----------------------------------------------------------------------------
-bool BMP::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int Height, int /*Quality*/)
+bool Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int Height, int /*Quality*/)
 {
 	int Size = Width * Height * 4;
   
@@ -36,20 +12,17 @@ bool BMP::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int
 	bmiHeader.biSize           = sizeof(BITMAPINFOHEADER);   
 	bmiHeader.biWidth          = Width;   
 	bmiHeader.biHeight         = Height;   
-	bmiHeader.biCompression    = BI_RGB;   
-
+	bmiHeader.biCompression    = BI_RGB;
 	bmiHeader.biClrUsed        = 0;   
 	bmiHeader.biClrImportant   = 0;   
 	bmiHeader.biPlanes         = 1;   
 	bmiHeader.biBitCount       = 32;   
 	bmiHeader.biSizeImage      = Size;   
 
-
 	BITMAPFILEHEADER bmheader = {0}; 
 	bmheader.bfType      = 'MB';   
 	bmheader.bfOffBits   = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER); 
 	bmheader.bfSize      = bmheader.bfOffBits+Size;
-
 
 	TargetBuffer.resize(bmheader.bfSize);
 
@@ -70,14 +43,10 @@ bool BMP::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int
 	return true;
 }
 
-
-//+-----------------------------------------------------------------------------
-//| Reads BMP data
-//+-----------------------------------------------------------------------------
-bool BMP::Read(const BUFFER& /*SourceBuffer*/, BUFFER& /*TargetBuffer*/, int* /*Width*/, int* /*Height*/)
+bool Read(const BUFFER& /*SourceBuffer*/, BUFFER& /*TargetBuffer*/, int* /*Width*/, int* /*Height*/)
 {
 	// todo
 	return false;
 }
 
-}
+}}
