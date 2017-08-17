@@ -1,6 +1,6 @@
 [WorldEditStrings]
 
-WESTRING_APPNAME=YD WorldEdit
+WESTRING_APPNAME=YDWE
 //=======DWE
 WESTRING_TRIGCAT_DEBUG=侦错
 WESTRING_TRIGCAT_OBSOLETE=废弃的
@@ -1633,19 +1633,19 @@ WESTRING_OLTYPE_ITEM=物品
 
 WESTRING_ABOUTTITLE=关于《魔兽争霸III》地图编辑器
 WESTRING_ABOUT_VERSION=版本
-WESTRING_ABOUT_COPYRIGHT= 欢迎访问月协WE之家www.ydwe.net   
-WESTRING_ABOUT_LINK=Blizzard Entertainment       月协 
+WESTRING_ABOUT_COPYRIGHT=欢迎访问www.ydwe.net
+WESTRING_ABOUT_LINK=Blizzard Entertainment
 
 WESTRING_LICENSETITLE=《魔兽争霸III》地图编辑器 - 最终用户协议
 WESTRING_LICENSE_AGREE=同意
 WESTRING_LICENSE_DISAGREE=拒绝
 WESTRING_LICENSE_DOYOUAGREE=您是否同意以上用户协议
 
-WESTRING_WELCOMETITLE=欢迎使用YD WorldEdit
-WESTRING_WELCOME_LARGETEXT=YD WorldEdit
-WESTRING_WELCOME_SMALLTEXT1="这是一个由月协出品且功能异常YD的编辑器,即便你对JASS一无所知。也可以通过它来轻松使用各种优秀的JASS技能或系统演示，为了熟悉这款加强编辑器中的新增的功能,请访问www.ydwe.net查询。"
-WESTRING_WELCOME_SMALLTEXT2="注意:月协的加强WE制作小组会不断收集该款编辑器的反馈意见，如果你希望加入你喜欢的功能或更多更好的技能或系统演示，请去www.ydwe.net或百度的魔兽地图编辑器贴吧留言。"
-WESTRING_WELCOME_LEGALTEXT="如果您使用这个编辑器无法打开别的UI所做的地图，请去www.ydwe.net反馈我们；我们会尽量做到UI的兼容。"
+WESTRING_WELCOMETITLE=欢迎使用YDWE
+WESTRING_WELCOME_LARGETEXT=欢迎使用YDWE
+WESTRING_WELCOME_SMALLTEXT1="这个编辑器是个威力强大的工具，可以让使用者调整魔兽争霸Ⅲ游戏中几乎各方面的功能，为了熟悉编辑器中的诸项功能，我们强烈的建议你加载预先制作的地图，做为参考。"
+WESTRING_WELCOME_SMALLTEXT2="请注意: 虽然我们不会对编辑器提供任何直接的帮助，但是你可以前往魔兽地图编辑器贴吧，那里的人们会回答关于编辑器功能的问题或者帮助你解决在使用编辑器时遇到的困难。"
+WESTRING_WELCOME_LEGALTEXT="在使用这个程序时，你同意受到最终用户协议中的各项条款约束，这份合约可以在魔兽争霸Ⅲ安装目录中的「license.txt」文件档中找到。"
 
 // Colors
 WESTRING_COLOR_CUSTOM=自定义

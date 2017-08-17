@@ -86,9 +86,9 @@ static void ShowSplash(fs::path const& ydwe_path)
 			CSplash display;
 			display.SetBitmap(bmp.wstring().c_str());
 			display.SetTransparentColor(RGB(128, 128, 128));
-			display.SetText(base::format(L"YDWE %d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 10, 20);
+			display.SetText(base::format(L"%d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 8, 16);
 			display.Show();
-			Sleep(1000);
+			Sleep(5000);
 			display.Close();
 		} catch (...) {
 		}
