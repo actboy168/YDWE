@@ -47,11 +47,11 @@ bool JPEG::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, in
 	Info.err = jpeg_std_error(&ErrorManager);
 
 	DummySize = ((Width * Height * 4) * 2) + 10000;
-	TempBuffer.Resize(DummySize);
+	TempBuffer.resize(DummySize);
 
 	jpeg_create_compress(&Info);
 
-	SetMemoryDestination(&Info, TempBuffer.GetData(), TempBuffer.GetSize());
+	SetMemoryDestination(&Info, TempBuffer.data(), TempBuffer.size());
 
 	Info.image_width = Width;
 	Info.image_height = Height;
@@ -65,16 +65,16 @@ bool JPEG::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, in
 	Stride = Width * 4;
 	while(Info.next_scanline < Info.image_height)
 	{
-		Pointer[0] = reinterpret_cast<JSAMPROW>(const_cast<unsigned char*>(SourceBuffer.GetData(Info.next_scanline * Stride)));
+		Pointer[0] = (JSAMPROW)(SourceBuffer.data() + Info.next_scanline * Stride);
 		jpeg_write_scanlines(&Info, Pointer, 1);
 	}
 
 	jpeg_finish_compress(&Info);
 
 	RealSize = DummySize - static_cast<int>(Info.dest->free_in_buffer);
-	TargetBuffer.Resize(RealSize);
+	TargetBuffer.resize(RealSize);
 
-	memcpy(TargetBuffer.GetData(), TempBuffer.GetData(), RealSize);
+	memcpy(TargetBuffer.data(), TempBuffer.data(), RealSize);
 
 	jpeg_destroy_compress(&Info);
 
@@ -91,7 +91,7 @@ bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int W
 	Info.err = jpeg_std_error(&ErrorManager);
 
 	jpeg_create_decompress(&Info);
-	SetMemorySource(&Info, const_cast<unsigned char*>(SourceBuffer.GetData()), SourceBuffer.GetSize());
+	SetMemorySource(&Info, SourceBuffer.data(), SourceBuffer.size());
 	jpeg_read_header(&Info, true);
 	jpeg_start_decompress(&Info);
 
@@ -101,7 +101,7 @@ bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int W
 		return false;
 	}
 
-	TargetBuffer.Resize(Width * Height * 4);
+	TargetBuffer.resize(Width * Height * 4);
 	JSAMPARRAY buffer = (*Info.mem->alloc_sarray)(reinterpret_cast<j_common_ptr>(&Info), JPOOL_IMAGE, Info.output_width * Info.output_components, 1);
 
 	struct rgba_t
@@ -112,7 +112,7 @@ bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int W
 		uint8_t a;
 	};
 
-	rgba_t* output = reinterpret_cast<rgba_t*>(TargetBuffer.GetData());
+	rgba_t* output = reinterpret_cast<rgba_t*>(TargetBuffer.data());
 	unsigned int minw = (std::min)(Width, Info.output_width);
 	for (unsigned int y = 0; y < Height; ++y)
 	{
@@ -160,7 +160,7 @@ bool JPEG::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int W
 //+-----------------------------------------------------------------------------
 //| Sets the memory source
 //+-----------------------------------------------------------------------------
-void JPEG::SetMemorySource(jpeg_decompress_struct* Info, unsigned char* Buffer, size_t Size)
+void JPEG::SetMemorySource(jpeg_decompress_struct* Info, const JOCTET* Buffer, size_t Size)
 {
 	JPEG_SOURCE_MANAGER* SourceManager;
 
@@ -183,7 +183,7 @@ void JPEG::SetMemorySource(jpeg_decompress_struct* Info, unsigned char* Buffer, 
 //+-----------------------------------------------------------------------------
 //| Sets the memory destination
 //+-----------------------------------------------------------------------------
-void JPEG::SetMemoryDestination(jpeg_compress_struct* Info, unsigned char* Buffer, size_t Size)
+void JPEG::SetMemoryDestination(jpeg_compress_struct* Info, JOCTET* Buffer, size_t Size)
 {
 	JPEG_DESTINATION_MANAGER* DestinationManager;
 

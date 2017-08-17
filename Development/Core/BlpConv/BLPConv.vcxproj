@@ -103,7 +103,6 @@
     <ClCompile Include="Blp.cpp" />
     <ClCompile Include="BlpConv.cpp" />
     <ClCompile Include="Bmp.cpp" />
-    <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Jpeg.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -111,7 +110,6 @@
     <ClInclude Include="BlpConv.h" />
     <ClInclude Include="Bmp.h" />
     <ClInclude Include="Buffer.h" />
-    <ClInclude Include="Definitions.h" />
     <ClInclude Include="Jpeg.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

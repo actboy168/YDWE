@@ -40,9 +40,9 @@ struct JPEG_SOURCE_MANAGER
 	}
 
 	jpeg_source_mgr Manager;
-	unsigned char* SourceBuffer;
+	const JOCTET* SourceBuffer;
 	size_t SourceBufferSize;
-	JOCTET* Buffer;
+	const JOCTET* Buffer;
 };
 
 
@@ -59,7 +59,7 @@ struct JPEG_DESTINATION_MANAGER
 	}
 
 	jpeg_destination_mgr Manager;
-	unsigned char* DestinationBuffer;
+	JOCTET* DestinationBuffer;
 	size_t DestinationBufferSize;
 	JOCTET* Buffer;
 };
@@ -78,8 +78,8 @@ public:
 	bool Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int Width, unsigned int Height);
 
 protected:
-	static void SetMemorySource(jpeg_decompress_struct* Info, unsigned char* Buffer, size_t Size);
-	static void SetMemoryDestination(jpeg_compress_struct* Info, unsigned char* Buffer, size_t Size);
+	static void SetMemorySource(jpeg_decompress_struct* Info, const JOCTET* Buffer, size_t Size);
+	static void SetMemoryDestination(jpeg_compress_struct* Info, JOCTET* Buffer, size_t Size);
 
 	static void SourceInit(jpeg_decompress_struct* Info);
 	static boolean SourceFill(jpeg_decompress_struct* Info);

@@ -86,11 +86,11 @@ bool BLP::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int
 	CurrentOffset = sizeof(BLP_HEADER) + sizeof(uint32_t) + JpegHeaderSize;
 	for (i = 0; i < NrOfMipMaps; i++)
 	{
-		TempBuffer.Resize(CurrentWidth * CurrentHeight * 4);
+		TempBuffer.resize(CurrentWidth * CurrentHeight * 4);
 
 		Index = 0;
 		BufferIndex = 0;
-		Pointer = reinterpret_cast<const unsigned char*>(SourceBuffer.GetData());
+		Pointer = reinterpret_cast<const unsigned char*>(SourceBuffer.data());
 
 		for (Y = 0; Y < static_cast<int32_t>(CurrentHeight); Y++)
 		{
@@ -108,7 +108,7 @@ bool BLP::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int
 			return FALSE;
 		}
 
-		TextureSize = MipMapBufferList[i].GetSize();
+		TextureSize = MipMapBufferList[i].size();
 
 		Header.Offset[i] = CurrentOffset;
 		Header.Size[i] = TextureSize - JpegHeaderSize;
@@ -124,11 +124,11 @@ bool BLP::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int
 	TotalSize = sizeof(BLP_HEADER) + sizeof(uint32_t) + JpegHeaderSize;
 	for (i = 0; i < NrOfMipMaps; i++)
 	{
-		if (MipMapBufferList[i].GetSize() <= 0) break;
+		if (MipMapBufferList[i].size() <= 0) break;
 		TotalSize += Header.Size[i];
 	}
 
-	TargetBuffer.Resize(TotalSize);
+	TargetBuffer.resize(TotalSize);
 
 	CurrentOffset = 0;
 
@@ -144,7 +144,7 @@ bool BLP::Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int
 
 	for (i = 1; i < NrOfMipMaps; i++)
 	{
-		if (MipMapBufferList[i].GetSize() <= 0) break;
+		if (MipMapBufferList[i].size() <= 0) break;
 
 		memcpy(&TargetBuffer[CurrentOffset], &((MipMapBufferList[i])[JpegHeaderSize]), Header.Size[i]);
 		CurrentOffset += Header.Size[i];
@@ -160,7 +160,7 @@ bool BLP::Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int* Width, int
 {
 	BLP_HEADER Header;
 
-	memcpy(reinterpret_cast<char*>(&Header), SourceBuffer.GetData(), sizeof(BLP_HEADER));
+	memcpy(reinterpret_cast<char*>(&Header), SourceBuffer.data(), sizeof(BLP_HEADER));
 	if (Header.MagicNumber != '1PLB')
 	{
 		LOG("The file is not a BLP file!");
@@ -193,12 +193,12 @@ bool BLP::LoadCompressed(BLP_HEADER& Header, const BUFFER& SourceBuffer, BUFFER&
 	BUFFER TempBuffer;
 	uint32_t  JpegHeaderSize;
 
-	memcpy(reinterpret_cast<char*>(&JpegHeaderSize), SourceBuffer.GetData(sizeof(BLP_HEADER)), sizeof(uint32_t));
+	memcpy(reinterpret_cast<char*>(&JpegHeaderSize), SourceBuffer.data() + sizeof(BLP_HEADER), sizeof(uint32_t));
 
-	TempBuffer.Resize(Header.Size[0] + JpegHeaderSize);
+	TempBuffer.resize(Header.Size[0] + JpegHeaderSize);
 
-	memcpy(TempBuffer.GetData(0), SourceBuffer.GetData(sizeof(BLP_HEADER) + sizeof(uint32_t)), JpegHeaderSize);
-	memcpy(TempBuffer.GetData(JpegHeaderSize), SourceBuffer.GetData(Header.Offset[0]), Header.Size[0]);
+	memcpy(TempBuffer.data(), SourceBuffer.data() + sizeof(BLP_HEADER) + sizeof(uint32_t), JpegHeaderSize);
+	memcpy(TempBuffer.data() + JpegHeaderSize, SourceBuffer.data() + Header.Offset[0], Header.Size[0]);
 
 	if (!Jpeg.Read(TempBuffer, TargetBuffer, Header.Width, Header.Height))
 	{
@@ -216,11 +216,11 @@ bool BLP::LoadCompressed(BLP_HEADER& Header, const BUFFER& SourceBuffer, BUFFER&
 bool BLP::LoadUncompressed(BLP_HEADER& Header, const BUFFER& SourceBuffer, BUFFER& TargetBuffer)
 {
 	static const int PALETTE_SIZE = 256;
-	BLP_RGBA const* Palette = reinterpret_cast<BLP_RGBA const*>(SourceBuffer.GetData(sizeof(BLP_HEADER)));
-	BLP_PIXEL const* SourcePixel = reinterpret_cast<BLP_PIXEL const*>(SourceBuffer.GetData(Header.Offset[0]));
+	BLP_RGBA const* Palette = reinterpret_cast<BLP_RGBA const*>(SourceBuffer.data() + sizeof(BLP_HEADER));
+	BLP_PIXEL const* SourcePixel = reinterpret_cast<BLP_PIXEL const*>(SourceBuffer.data() + Header.Offset[0]);
 	int Size = Header.Width * Header.Height;
-	TargetBuffer.Resize(Size * 4);
-	BLP_RGBA* TargetPixel = reinterpret_cast<BLP_RGBA*>(TargetBuffer.GetData());
+	TargetBuffer.resize(Size * 4);
+	BLP_RGBA* TargetPixel = reinterpret_cast<BLP_RGBA*>(TargetBuffer.data());
 	BLP_PIXEL const* SourceAlpha = SourcePixel + Size;
 	switch (Header.AlphaBits)
 	{
