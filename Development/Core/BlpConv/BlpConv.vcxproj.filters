@@ -4,13 +4,11 @@
     <ClCompile Include="Jpeg.cpp" />
     <ClCompile Include="Bmp.cpp" />
     <ClCompile Include="Blp.cpp" />
-    <ClCompile Include="BlpConv.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="Jpeg.h" />
     <ClInclude Include="Bmp.h" />
     <ClInclude Include="Blp.h" />
-    <ClInclude Include="BlpConv.h" />
   </ItemGroup>
 </Project>

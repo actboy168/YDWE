@@ -101,13 +101,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Blp.cpp" />
-    <ClCompile Include="BlpConv.cpp" />
     <ClCompile Include="Bmp.cpp" />
     <ClCompile Include="Jpeg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blp.h" />
-    <ClInclude Include="BlpConv.h" />
     <ClInclude Include="Bmp.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="Jpeg.h" />
