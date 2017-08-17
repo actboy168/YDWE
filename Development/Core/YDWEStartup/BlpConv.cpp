@@ -1,7 +1,6 @@
 #include <Windows.h>
 #include <base/file/stream.h>
-#include <BlpConv/Blp.h>
-#include <BlpConv/Bmp.h>
+#include <BlpConv/BlpConv.h>
 
 namespace IMAGE
 {

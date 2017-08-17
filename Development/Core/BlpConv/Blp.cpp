@@ -1,8 +1,9 @@
-#include "Blp.h"
-#include "Jpeg.h" 	
+#include "BlpConv.h"
 #include <algorithm> 
 #include <sstream>  
 #include <vector>
+
+#define LOG(s)
 
 namespace IMAGE { namespace BLP {
 

@@ -1,6 +1,5 @@
-#include "Bmp.h"
+#include "BlpConv.h"
 #include <windows.h>
-
 
 namespace IMAGE { namespace BMP {
 

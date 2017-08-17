@@ -105,10 +105,7 @@
     <ClCompile Include="Jpeg.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Blp.h" />
-    <ClInclude Include="Bmp.h" />
-    <ClInclude Include="Buffer.h" />
-    <ClInclude Include="Jpeg.h" />
+    <ClInclude Include="BlpConv.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

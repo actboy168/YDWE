@@ -1,4 +1,4 @@
-#include "Jpeg.h"
+#include "BlpConv.h"
 #include <algorithm>
 
 #pragma warning(push)
@@ -8,6 +8,8 @@ extern "C"
 #include <jpeglib.h>
 }
 #pragma warning(pop)
+
+#define LOG(s)
 
 namespace IMAGE { namespace JPEG {
 
