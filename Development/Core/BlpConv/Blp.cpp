@@ -5,7 +5,7 @@
 
 #define LOG(s)
 
-namespace IMAGE { namespace BLP {
+namespace image { namespace blp {
 
 const int MAX_NR_OF_BLP_MIP_MAPS = 16;
 
@@ -43,7 +43,7 @@ static bool LoadCompressed(BLP_HEADER& Header, const buffer& input, pixels& outp
 	temp.resize(Header.Size[0] + JpegHeaderSize);
 	memcpy(temp.data(), input.data() + sizeof(BLP_HEADER) + sizeof(uint32_t), JpegHeaderSize);
 	memcpy(temp.data() + JpegHeaderSize, input.data() + Header.Offset[0], Header.Size[0]);
-	return JPEG::Read(temp, output, Header.Width, Header.Height);
+	return jpeg::read(temp, output, Header.Width, Header.Height);
 }
 
 static bool LoadUncompressed(BLP_HEADER& Header, const buffer& input, pixels& output)
@@ -94,7 +94,7 @@ static bool LoadUncompressed(BLP_HEADER& Header, const buffer& input, pixels& ou
 	return true;
 }
 
-bool Write(const pixels& input, buffer& output, int Width, int Height, int Quality)
+bool write(const pixels& input, buffer& output, int Width, int Height, int Quality)
 {
 	int32_t i;
 	int32_t X;
@@ -161,7 +161,7 @@ bool Write(const pixels& input, buffer& output, int Width, int Height, int Quali
 			}
 		}
 
-		if (!JPEG::Write(temp, MipMapBufferList[i], CurrentWidth, CurrentHeight, Quality))
+		if (!jpeg::write(temp, MipMapBufferList[i], CurrentWidth, CurrentHeight, Quality))
 		{
 			return false;
 		}
@@ -210,7 +210,7 @@ bool Write(const pixels& input, buffer& output, int Width, int Height, int Quali
 	return true;
 }
 
-bool Read(const buffer& input, pixels& output, int* Width, int* Height)
+bool read(const buffer& input, pixels& output, int* Width, int* Height)
 {
 	BLP_HEADER Header;
 

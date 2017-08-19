@@ -2,7 +2,7 @@
 
 #include <vector>
 
-namespace IMAGE {
+namespace image {
 	struct rgba
 	{
 		uint8_t r;
@@ -13,16 +13,16 @@ namespace IMAGE {
 	typedef std::vector<uint8_t> buffer;
 	typedef std::vector<rgba> pixels;
 
-	namespace BLP {
-		bool Write(const pixels& input, buffer& output, int Width, int Height, int Quality);
-		bool Read(const buffer& input, pixels& output, int* Width = NULL, int* Height = NULL);
+	namespace blp {
+		bool write(const pixels& input, buffer& output, int Width, int Height, int Quality);
+		bool read(const buffer& input, pixels& output, int* Width = NULL, int* Height = NULL);
 	}
-	namespace BMP {
-		bool Write(const pixels& input, buffer& output, int Width, int Height, int Quality);
-		bool Read(const buffer& input, pixels& output, int* Width = NULL, int* Height = NULL);
+	namespace bmp {
+		bool write(const pixels& input, buffer& output, int Width, int Height, int Quality);
+		bool read(const buffer& input, pixels& output, int* Width = NULL, int* Height = NULL);
 	}
-	namespace JPEG {
-		bool Write(const pixels& input, buffer& output, int Width, int Height, int Quality);
-		bool Read(const buffer& input, pixels& output, unsigned int Width, unsigned int Height);
+	namespace jpeg {
+		bool write(const pixels& input, buffer& output, int Width, int Height, int Quality);
+		bool read(const buffer& input, pixels& output, unsigned int Width, unsigned int Height);
 	}
 }

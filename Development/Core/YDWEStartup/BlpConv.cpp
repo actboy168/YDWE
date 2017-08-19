@@ -2,7 +2,7 @@
 #include <base/file/stream.h>
 #include <BlpConv/BlpConv.h>
 
-namespace IMAGE
+namespace image
 {
 	struct picture_t
 	{
@@ -15,12 +15,12 @@ namespace IMAGE
 	{
 		picture_t pic;
 
-		if (!BLP::Read(SourceBuffer, pic.pixels, &pic.width, &pic.height))
+		if (!blp::read(SourceBuffer, pic.pixels, &pic.width, &pic.height))
 		{
 			return false;
 		}
 
-		if (!BMP::Write(pic.pixels, TargetBuffer, pic.width, pic.height, 0))
+		if (!bmp::write(pic.pixels, TargetBuffer, pic.width, pic.height, 0))
 		{
 			return false;
 		}
@@ -32,12 +32,12 @@ namespace IMAGE
 	{
 		picture_t pic;
 
-		if (!BMP::Read(SourceBuffer, pic.pixels, &pic.width, &pic.height))
+		if (!bmp::read(SourceBuffer, pic.pixels, &pic.width, &pic.height))
 		{
 			return false;
 		}
 
-		if (!BLP::Write(pic.pixels, TargetBuffer, pic.width, pic.height, 100))
+		if (!blp::write(pic.pixels, TargetBuffer, pic.width, pic.height, 100))
 		{
 			return false;
 		}
@@ -48,9 +48,9 @@ namespace IMAGE
 
 bool Blp2Bmp(const wchar_t* blp, const wchar_t* bmp)
 {
-	IMAGE::buffer input = base::file::read_stream(blp).read<IMAGE::buffer>();
-	IMAGE::buffer output;
-	if (!IMAGE::Blp2Bmp(input, output))
+	image::buffer input = base::file::read_stream(blp).read<image::buffer>();
+	image::buffer output;
+	if (!image::Blp2Bmp(input, output))
 	{
 		return false;
 	}	   

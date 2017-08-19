@@ -11,7 +11,7 @@ extern "C"
 
 #define LOG(s)
 
-namespace IMAGE { namespace JPEG {
+namespace image { namespace jpeg {
 
 struct JPEG_SOURCE_MANAGER
 {
@@ -147,7 +147,7 @@ static void SetMemoryDestination(jpeg_compress_struct* Info, JOCTET* Buffer, siz
 	DestinationManager->Manager.term_destination = DestinationTerminate;
 }
 
-bool Write(const pixels& input, buffer& output, int Width, int Height, int Quality)
+bool write(const pixels& input, buffer& output, int Width, int Height, int Quality)
 {
 	int Stride;
 	int RealSize;
@@ -194,7 +194,7 @@ bool Write(const pixels& input, buffer& output, int Width, int Height, int Quali
 	return true;
 }
 
-bool Read(const buffer& input, pixels& output, unsigned int Width, unsigned int Height)
+bool read(const buffer& input, pixels& output, unsigned int Width, unsigned int Height)
 {
 	jpeg_decompress_struct Info;
 	jpeg_error_mgr ErrorManager;

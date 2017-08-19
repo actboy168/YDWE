@@ -1,9 +1,9 @@
 #include "BlpConv.h"
 #include <windows.h>
 
-namespace IMAGE { namespace BMP {
+namespace image { namespace bmp {
 
-bool Write(const pixels& input, buffer& output, int Width, int Height, int /*Quality*/)
+bool write(const pixels& input, buffer& output, int Width, int Height, int /*Quality*/)
 {
 	int Size = Width * Height * 4;
   
@@ -42,7 +42,7 @@ bool Write(const pixels& input, buffer& output, int Width, int Height, int /*Qua
 	return true;
 }
 
-bool Read(const buffer& /*input*/, pixels& /*output*/, int* /*Width*/, int* /*Height*/)
+bool read(const buffer& /*input*/, pixels& /*output*/, int* /*Width*/, int* /*Height*/)
 {
 	// todo
 	return false;
