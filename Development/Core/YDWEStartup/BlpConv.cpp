@@ -7,8 +7,8 @@ namespace image
 	struct picture_t
 	{
 		pixels pixels;
-		int    width;
-		int    height;
+		unsigned int width;
+		unsigned int height;
 	};
 
 	bool Blp2Bmp(const buffer& SourceBuffer, buffer& TargetBuffer)
@@ -20,7 +20,15 @@ namespace image
 			return false;
 		}
 
-		if (!bmp::write(pic.pixels, TargetBuffer, pic.width, pic.height, 0))
+		for (unsigned int x = 0; x < pic.width; ++x)
+		{
+			for (unsigned int y = 0; y < pic.height / 2 + 1; ++y)
+			{
+				std::swap(pic.pixels[x + y * pic.width], pic.pixels[x + (pic.height - 1 - y) * pic.width]);
+			}
+		}
+
+		if (!bmp::write(pic.pixels, TargetBuffer, pic.width, pic.height))
 		{
 			return false;
 		}
@@ -32,7 +40,7 @@ namespace image
 	{
 		picture_t pic;
 
-		if (!bmp::read(SourceBuffer, pic.pixels, &pic.width, &pic.height))
+		if (!bmp::read(SourceBuffer, pic.pixels, pic.width, pic.height))
 		{
 			return false;
 		}

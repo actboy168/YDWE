@@ -210,7 +210,7 @@ bool write(const pixels& input, buffer& output, int Width, int Height, int Quali
 	return true;
 }
 
-bool read(const buffer& input, pixels& output, int* Width, int* Height)
+bool read(const buffer& input, pixels& output, unsigned int* Width, unsigned int* Height)
 {
 	BLP_HEADER Header;
 

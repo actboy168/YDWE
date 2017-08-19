@@ -30,8 +30,8 @@ namespace base { namespace warcraft3 { namespace japi {
 	static const size_t kBlpSize = 64;
 	bool BlpDisable(const image::buffer& input, image::buffer& output)
 	{
-		int input_width = 0;
-		int input_height = 0;
+		unsigned int input_width = 0;
+		unsigned int input_height = 0;
 		image::pixels input_pic, output_pic;
 		if (!image::blp::read(input, input_pic, &input_width, &input_height))
 		{
@@ -77,8 +77,8 @@ namespace base { namespace warcraft3 { namespace japi {
 
 	bool BlpBlend(const image::buffer& input_a, const image::buffer& input_b, image::buffer& output)
 	{
-		int input_width = 0;
-		int input_height = 0;
+		unsigned int input_width = 0;
+		unsigned int input_height = 0;
 		image::pixels input_a_pic, input_b_pic, output_pic;
 		if (!image::blp::read(input_a, input_a_pic, &input_width, &input_height))
 		{
