@@ -17,14 +17,14 @@ struct JPEG_SOURCE_MANAGER
 {
 	JPEG_SOURCE_MANAGER()
 	{
-		SourceBuffer = NULL;
-		SourceBufferSize = 0;
+		input = NULL;
+		inputSize = 0;
 		Buffer = NULL;
 	}
 
 	jpeg_source_mgr Manager;
-	const JOCTET* SourceBuffer;
-	size_t SourceBufferSize;
+	const JOCTET* input;
+	size_t inputSize;
 	const JOCTET* Buffer;
 };
 
@@ -54,9 +54,9 @@ static boolean SourceFill(jpeg_decompress_struct* Info)
 
 	SourceManager = reinterpret_cast<JPEG_SOURCE_MANAGER*>(Info->src);
 
-	SourceManager->Buffer = SourceManager->SourceBuffer;
+	SourceManager->Buffer = SourceManager->input;
 	SourceManager->Manager.next_input_byte = SourceManager->Buffer;
-	SourceManager->Manager.bytes_in_buffer = SourceManager->SourceBufferSize;
+	SourceManager->Manager.bytes_in_buffer = SourceManager->inputSize;
 
 	return true;
 }
@@ -121,8 +121,8 @@ static void SetMemorySource(jpeg_decompress_struct* Info, const JOCTET* Buffer, 
 	SourceManager = reinterpret_cast<JPEG_SOURCE_MANAGER*>(Info->src);
 
 	SourceManager->Buffer = reinterpret_cast<JOCTET*>((*Info->mem->alloc_small)(reinterpret_cast<j_common_ptr>(Info), JPOOL_PERMANENT, Size * sizeof(JOCTET)));
-	SourceManager->SourceBuffer = Buffer;
-	SourceManager->SourceBufferSize = Size;
+	SourceManager->input = Buffer;
+	SourceManager->inputSize = Size;
 	SourceManager->Manager.init_source = SourceInit;
 	SourceManager->Manager.fill_input_buffer = SourceFill;
 	SourceManager->Manager.skip_input_data = SourceSkip;
@@ -147,12 +147,12 @@ static void SetMemoryDestination(jpeg_compress_struct* Info, JOCTET* Buffer, siz
 	DestinationManager->Manager.term_destination = DestinationTerminate;
 }
 
-bool Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int Height, int Quality)
+bool Write(const pixels& input, buffer& output, int Width, int Height, int Quality)
 {
 	int Stride;
 	int RealSize;
 	int DummySize;
-	BUFFER TempBuffer;
+	buffer TempBuffer;
 	JSAMPROW Pointer[1];
 	jpeg_compress_struct Info;
 	jpeg_error_mgr ErrorManager;
@@ -178,30 +178,30 @@ bool Write(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, int Width, int Heig
 	Stride = Width * 4;
 	while (Info.next_scanline < Info.image_height)
 	{
-		Pointer[0] = (JSAMPROW)(SourceBuffer.data() + Info.next_scanline * Stride);
+		Pointer[0] = (JSAMPROW)((const uint8_t*)input.data() + Info.next_scanline * Stride);
 		jpeg_write_scanlines(&Info, Pointer, 1);
 	}
 
 	jpeg_finish_compress(&Info);
 
 	RealSize = DummySize - static_cast<int>(Info.dest->free_in_buffer);
-	TargetBuffer.resize(RealSize);
+	output.resize(RealSize);
 
-	memcpy(TargetBuffer.data(), TempBuffer.data(), RealSize);
+	memcpy(output.data(), TempBuffer.data(), RealSize);
 
 	jpeg_destroy_compress(&Info);
 
 	return true;
 }
 
-bool Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int Width, unsigned int Height)
+bool Read(const buffer& input, pixels& output, unsigned int Width, unsigned int Height)
 {
 	jpeg_decompress_struct Info;
 	jpeg_error_mgr ErrorManager;
 	Info.err = jpeg_std_error(&ErrorManager);
 
 	jpeg_create_decompress(&Info);
-	SetMemorySource(&Info, SourceBuffer.data(), SourceBuffer.size());
+	SetMemorySource(&Info, input.data(), input.size());
 	jpeg_read_header(&Info, true);
 	jpeg_start_decompress(&Info);
 
@@ -211,18 +211,10 @@ bool Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int Width, 
 		return false;
 	}
 
-	TargetBuffer.resize(Width * Height * 4);
+	output.resize(Width * Height);
 	JSAMPARRAY buffer = (*Info.mem->alloc_sarray)(reinterpret_cast<j_common_ptr>(&Info), JPOOL_IMAGE, Info.output_width * Info.output_components, 1);
 
-	struct rgba_t
-	{
-		uint8_t r;
-		uint8_t g;
-		uint8_t b;
-		uint8_t a;
-	};
-
-	rgba_t* output = reinterpret_cast<rgba_t*>(TargetBuffer.data());
+	rgba* out = output.data();
 	unsigned int minw = (std::min)(Width, Info.output_width);
 	for (unsigned int y = 0; y < Height; ++y)
 	{
@@ -234,29 +226,29 @@ bool Read(const BUFFER& SourceBuffer, BUFFER& TargetBuffer, unsigned int Width, 
 			{
 				for (unsigned int x = 0; x < minw; ++x)
 				{
-					output[0].r = buffer[0][3 * x + 0];
-					output[0].g = buffer[0][3 * x + 1];
-					output[0].b = buffer[0][3 * x + 2];
-					output[0].a = 255;
-					output++;
+					out[0].r = buffer[0][3 * x + 0];
+					out[0].g = buffer[0][3 * x + 1];
+					out[0].b = buffer[0][3 * x + 2];
+					out[0].a = 255;
+					out++;
 				}
 			}
 			else
 			{
-				memcpy(output, buffer[0], minw * sizeof rgba_t);
-				output += minw;
+				memcpy(out, buffer[0], minw * sizeof rgba);
+				out += minw;
 			}
 
 			if (minw < Width)
 			{
-				memset(output, 0, (Width - minw) * sizeof rgba_t);
-				output += (Width - minw);
+				memset(out, 0, (Width - minw) * sizeof rgba);
+				out += (Width - minw);
 			}
 		}
 		else
 		{
-			memset(output, 0, Width * sizeof rgba_t);
-			output += Width;
+			memset(out, 0, Width * sizeof rgba);
+			out += Width;
 		}
 
 	}

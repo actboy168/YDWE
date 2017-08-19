@@ -6,21 +6,21 @@ namespace IMAGE
 {
 	struct picture_t
 	{
-		BUFFER buffer;
+		pixels pixels;
 		int    width;
 		int    height;
 	};
 
-	bool Blp2Bmp(const BUFFER& SourceBuffer, BUFFER& TargetBuffer)
+	bool Blp2Bmp(const buffer& SourceBuffer, buffer& TargetBuffer)
 	{
 		picture_t pic;
 
-		if (!BLP::Read(SourceBuffer, pic.buffer, &pic.width, &pic.height))
+		if (!BLP::Read(SourceBuffer, pic.pixels, &pic.width, &pic.height))
 		{
 			return false;
 		}
 
-		if (!BMP::Write(pic.buffer, TargetBuffer, pic.width, pic.height, 0))
+		if (!BMP::Write(pic.pixels, TargetBuffer, pic.width, pic.height, 0))
 		{
 			return false;
 		}
@@ -28,16 +28,16 @@ namespace IMAGE
 		return true;
 	}
 
-	bool Bmp2Blp(const BUFFER& SourceBuffer, BUFFER& TargetBuffer)
+	bool Bmp2Blp(const buffer& SourceBuffer, buffer& TargetBuffer)
 	{
 		picture_t pic;
 
-		if (!BMP::Read(SourceBuffer, pic.buffer, &pic.width, &pic.height))
+		if (!BMP::Read(SourceBuffer, pic.pixels, &pic.width, &pic.height))
 		{
 			return false;
 		}
 
-		if (!BLP::Write(pic.buffer, TargetBuffer, pic.width, pic.height, 100))
+		if (!BLP::Write(pic.pixels, TargetBuffer, pic.width, pic.height, 100))
 		{
 			return false;
 		}
@@ -48,8 +48,8 @@ namespace IMAGE
 
 bool Blp2Bmp(const wchar_t* blp, const wchar_t* bmp)
 {
-	IMAGE::BUFFER input = base::file::read_stream(blp).read<IMAGE::BUFFER>();
-	IMAGE::BUFFER output;
+	IMAGE::buffer input = base::file::read_stream(blp).read<IMAGE::buffer>();
+	IMAGE::buffer output;
 	if (!IMAGE::Blp2Bmp(input, output))
 	{
 		return false;
