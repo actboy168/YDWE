@@ -49,49 +49,38 @@ static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSeco
 }
 
 bool Blp2Bmp(const wchar_t* blp, const wchar_t* bmp);
+bool Bmp2Blp(const wchar_t* bmp, const wchar_t* blp);
 
 static void ShowSplash(fs::path const& ydwe_path)
 {
 	fs::path bmp = ydwe_path / L"bin" / L"splash.bmp";
 	if (!fs::exists(bmp))
-	{
-		try {
-			base::ini::table table;
-			auto buf = base::file::read_stream(ydwe_path / L"share" / L"mpq" / L"units" / L"ui" / L"worldeditdata.txt").read<std::string>();
-			base::ini::read(table, buf.c_str());
+		return;
 
-			do {
-				fs::path blp = ydwe_path / L"share" / L"mpq" / L"units" / table["WorldEditArt"]["War3XLogo"];
-				if (fs::exists(blp))
-				{
-					if (Blp2Bmp(blp.wstring().c_str(), bmp.wstring().c_str()))
-						break;
-				}
-				blp = ydwe_path / L"share" / L"mpq" / L"units" / table["WorldEditArt"]["War3Logo"];
-				if (fs::exists(blp))
-				{
-					if (Blp2Bmp(blp.wstring().c_str(), bmp.wstring().c_str()))
-						break;
-				}
-			} while (false);
-		}
-		catch (...) {
+	try {
+		base::ini::table table;
+		auto buf = base::file::read_stream(ydwe_path / L"share" / L"mpq" / L"units" / L"ui" / L"worldeditdata.txt").read<std::string>();
+		base::ini::read(table, buf.c_str());
+		fs::path blp = ydwe_path / L"share" / L"mpq" / L"units" / table["WorldEditArt"]["War3XLogo"];
+		if (!fs::exists(blp))
+		{
+			Bmp2Blp(bmp.wstring().c_str(), blp.wstring().c_str());
 		}
 	}
+	catch (...) {
+	}
 
-	if (fs::exists(bmp))
-	{
-		try {
-			base::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
-			CSplash display;
-			display.SetBitmap(bmp.wstring().c_str());
-			display.SetTransparentColor(RGB(128, 128, 128));
-			display.SetText(base::format(L"%d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 8, 16);
-			display.Show();
-			Sleep(5000);
-			display.Close();
-		} catch (...) {
-		}
+	try {
+		base::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
+		CSplash display;
+		display.SetBitmap(bmp.wstring().c_str());
+		display.SetTransparentColor(RGB(128, 128, 128));
+		display.SetText(base::format(L"%d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 8, 16);
+		display.Show();
+		Sleep(5000);
+		display.Close();
+	}
+	catch (...) {
 	}
 }
 

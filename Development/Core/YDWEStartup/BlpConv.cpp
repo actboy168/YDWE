@@ -45,6 +45,14 @@ namespace image
 			return false;
 		}
 
+		for (unsigned int x = 0; x < pic.width; ++x)
+		{
+			for (unsigned int y = 0; y < pic.height / 2 + 1; ++y)
+			{
+				std::swap(pic.pixels[x + y * pic.width], pic.pixels[x + (pic.height - 1 - y) * pic.width]);
+			}
+		}
+
 		if (!blp::write(pic.pixels, TargetBuffer, pic.width, pic.height, 100))
 		{
 			return false;
@@ -63,5 +71,17 @@ bool Blp2Bmp(const wchar_t* blp, const wchar_t* bmp)
 		return false;
 	}	   
 	base::file::write_stream(bmp).write(output);
+	return true;
+}
+
+bool Bmp2Blp(const wchar_t* bmp, const wchar_t* blp)
+{
+	image::buffer input = base::file::read_stream(bmp).read<image::buffer>();
+	image::buffer output;
+	if (!image::Bmp2Blp(input, output))
+	{
+		return false;
+	}
+	base::file::write_stream(blp).write(output);
 	return true;
 }
