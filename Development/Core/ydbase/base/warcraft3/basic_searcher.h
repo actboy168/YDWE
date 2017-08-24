@@ -2,6 +2,7 @@
 
 #include <base/config.h>
 #include <base/win/pe_reader.h>
+#include <utility>
 
 namespace base { namespace warcraft3 {
 
@@ -25,6 +26,8 @@ namespace base { namespace warcraft3 {
 		uintptr_t search_int_in_rdata(uint32_t value, uintptr_t beg) const;
 		uintptr_t search_int_in_data (uint32_t value) const;
 		uintptr_t search_int_in_data (uint32_t value, uintptr_t beg) const;
+
+		std::pair<uintptr_t, uintptr_t> text() const;
 
 	private:
 		void initialize();

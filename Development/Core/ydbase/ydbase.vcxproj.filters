@@ -263,6 +263,9 @@
     <ClCompile Include="base\hook\udis86\udis86_decode.c">
       <Filter>base\hook\udis86</Filter>
     </ClCompile>
+    <ClCompile Include="base\hook\patch.cpp">
+      <Filter>base\hook</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -604,6 +607,9 @@
     </ClInclude>
     <ClInclude Include="base\thread\lock\os_win32.h">
       <Filter>base\thread\lock</Filter>
+    </ClInclude>
+    <ClInclude Include="base\hook\patch.h">
+      <Filter>base\hook</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

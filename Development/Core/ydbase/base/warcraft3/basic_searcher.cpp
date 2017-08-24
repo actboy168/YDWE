@@ -133,6 +133,11 @@ namespace base { namespace warcraft3 {
 		return detail::search_int(beg, data_end_, (uint32_t)value);
 	}
 
+	std::pair<uintptr_t, uintptr_t> basic_searcher::text() const
+	{
+		return std::make_pair(text_beg_, text_end_);
+	}
+
 	uintptr_t convert_function(uintptr_t address)
 	{
 		return address + *(uintptr_t*) (address+1) + 5;

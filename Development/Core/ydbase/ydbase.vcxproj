@@ -117,6 +117,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base\hook\dyn_iat.cpp" />
+    <ClCompile Include="base\hook\patch.cpp" />
     <ClCompile Include="base\hook\replace_import.cpp" />
     <ClCompile Include="base\hook\udis86\udis86.c" />
     <ClCompile Include="base\hook\udis86\udis86_decode.c" />
@@ -209,6 +210,7 @@
     <ClInclude Include="base\hook\iat.h" />
     <ClInclude Include="base\hook\iat_manager.h" />
     <ClInclude Include="base\hook\inline.h" />
+    <ClInclude Include="base\hook\patch.h" />
     <ClInclude Include="base\hook\replace_import.h" />
     <ClInclude Include="base\hook\udis86\udis86.h" />
     <ClInclude Include="base\hook\udis86\udis86_decode.h" />
