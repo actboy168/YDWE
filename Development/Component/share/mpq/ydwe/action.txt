@@ -6154,7 +6154,7 @@ max = 100
 
 [UnitAddIndicator]
 title = "闪动指示器(对单位) [R]"
-description = "对 ${单位} 闪动指示器,使用颜色:(${Red}%, ${Green}%, ${Blue}%) Alpha通道值: ${Transparency}"
+description = "对 ${单位} 闪动指示器,使用颜色:(${Red}, ${Green}, ${Blue}) Alpha通道值: ${Transparency}"
 comment = "颜色格式为(红,绿,蓝). Alpha通道值0为不可见. 颜色值和Alpha通道值取值范围为0-255."
 script_name = AddIndicator
 category = TC_CINEMATIC
@@ -6211,7 +6211,7 @@ max = 100
 
 [DestructableAddIndicator]
 title = "闪动指示器(对可破坏物) [R]"
-description = "对 ${可破坏物} 闪动指示器,使用颜色:(${Red}%, ${Green}%, ${Blue}%) Alpha通道值: ${Transparency}"
+description = "对 ${可破坏物} 闪动指示器,使用颜色:(${Red}, ${Green}, ${Blue}) Alpha通道值: ${Transparency}"
 comment = "颜色格式为(红,绿,蓝). Alpha通道值0为不可见. 颜色值和Alpha通道值取值范围为0-255."
 script_name = AddIndicator
 category = TC_CINEMATIC
