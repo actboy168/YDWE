@@ -29,9 +29,13 @@ namespace base { namespace warcraft3 { namespace japi {
 		uint32_t unk2;
 		uint32_t unk3;
 		char**   name;	   // 540
-		uint32_t unk4[135];
+		char*    description;
+		uint32_t unk4[134];
 		char**   art;	   // 760 
-		uint32_t unk5[7];
+		uint32_t unk5[4];
+		char**   tip;
+		uint32_t unk6;
+		uint32_t unk7;
 		char**   ubertip;  // 780
 	};
 	typedef hashtable::table<item_ui_node> item_ui_table_t;
@@ -111,6 +115,12 @@ namespace base { namespace warcraft3 { namespace japi {
 		case ITEM_DATA_NAME:
 			buf = ptr->name;
 			break;
+		case ITEM_DATA_TIP:
+			buf = ptr->tip;
+			break;
+		case ITEM_DATA_DESCRIPTION:
+			buf = &(ptr->description);
+			break;
 		}
 		if (!buf || !*buf)
 		{
@@ -139,6 +149,12 @@ namespace base { namespace warcraft3 { namespace japi {
 			break;
 		case ITEM_DATA_NAME:
 			buf = ptr->name;
+			break;
+		case ITEM_DATA_TIP:
+			buf = ptr->tip;
+			break;
+		case ITEM_DATA_DESCRIPTION:
+			buf = &(ptr->description);
 			break;
 		}
 
