@@ -50,9 +50,6 @@
     <Filter Include="base\lua">
       <UniqueIdentifier>{b74a47f0-eb1f-4c6c-9b1c-210bcabbb9d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\lua\luabind">
-      <UniqueIdentifier>{6535210c-7245-4b51-af4f-870f46a6359a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\i18n">
       <UniqueIdentifier>{5337e579-9ee0-4e9b-807d-3339cda61c96}</UniqueIdentifier>
     </Filter>
@@ -382,15 +379,6 @@
     <ClInclude Include="base\win\process.h">
       <Filter>base\win</Filter>
     </ClInclude>
-    <ClInclude Include="base\lua\luabind\converter_pvoid.h">
-      <Filter>base\lua\luabind</Filter>
-    </ClInclude>
-    <ClInclude Include="base\lua\luabind\converter_std_wstring.h">
-      <Filter>base\lua\luabind</Filter>
-    </ClInclude>
-    <ClInclude Include="base\lua\luabind.h">
-      <Filter>base\lua</Filter>
-    </ClInclude>
     <ClInclude Include="base\i18n\mofile.h">
       <Filter>base\i18n</Filter>
     </ClInclude>
@@ -506,9 +494,6 @@
     <ClInclude Include="base\hook\fp_call.h">
       <Filter>base\hook</Filter>
     </ClInclude>
-    <ClInclude Include="base\lua\luabind\converter_uint32_t.h">
-      <Filter>base\lua\luabind</Filter>
-    </ClInclude>
     <ClInclude Include="base\warcraft3\command_line.h">
       <Filter>base\warcraft3</Filter>
     </ClInclude>
@@ -523,9 +508,6 @@
     </ClInclude>
     <ClInclude Include="base\util\string_view.h">
       <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\lua\luabind\converter_std_string_view.h">
-      <Filter>base\lua\luabind</Filter>
     </ClInclude>
     <ClInclude Include="base\win\font\file.h">
       <Filter>base\win\font</Filter>
@@ -586,9 +568,6 @@
     </ClInclude>
     <ClInclude Include="base\util\optional.h">
       <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\lua\luabind\converter_fs_path.h">
-      <Filter>base\lua\luabind</Filter>
     </ClInclude>
     <ClInclude Include="base\lua\object.h">
       <Filter>base\lua</Filter>
