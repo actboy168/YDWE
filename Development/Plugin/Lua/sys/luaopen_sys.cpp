@@ -10,7 +10,6 @@
 #include <base/util/console.h>
 #include <fcntl.h>
 #include <io.h>	  
-#include "NtQuerySystemProcessInformation.h"
 
 static void lua_pushwstring(lua_State* L, const std::wstring& str)
 {
@@ -112,67 +111,6 @@ static int LuaGetVersionNumberString(lua_State* L)
 	lua_pushstring(L, "build");
 	lua_pushinteger(L, fv.build);
 	lua_rawset(L, -3);
-	return 1;
-}
-
-static int LuaGetProcessList(lua_State* L)
-{
-	lua_newtable(L);
-	bool suc = NtQuerySystemProcessInformation([=](DWORD ProcessId, PWSTR ImageName, USHORT ImageNameLength)
-	{
-		std::wstring name(ImageName, ImageNameLength / sizeof(wchar_t));
-		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
-
-		lua_pushwstring(L, name);
-		lua_pushvalue(L, -1);
-		lua_rawget(L, -3);
-		if (lua_isnoneornil(L, -1))
-		{
-			lua_pop(L, 1);
-			lua_newtable(L);
-			{
-				lua_pushinteger(L, ProcessId);
-				lua_rawseti(L, -2, 1);
-			}
-			lua_rawset(L, -3);
-		}
-		else
-		{
-			size_t n = lua_rawlen(L, -1);
-			lua_pushinteger(L, ProcessId);
-			lua_rawseti(L, -2, n + 1);
-			lua_pop(L, 2);
-		}
-	});
-	if (!suc) {
-		lua_pop(L, 1);
-		lua_pushnil(L);
-	}
-	return 1;
-}
-
-static int LuaKillProcess(lua_State* L)
-{
-	HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, false, (int)luaL_checkinteger(L, 1));
-	if (hProcess == NULL)
-	{
-		lua_pushboolean(L, 0);
-		return 1;
-	}
-	if (!TerminateProcess(hProcess, -1))
-	{
-		CloseHandle(hProcess);
-		lua_pushboolean(L, 0);
-		return 1;
-	}
-	if (WAIT_TIMEOUT == WaitForSingleObject(hProcess, 5000))
-	{
-		CloseHandle(hProcess);
-		lua_pushboolean(L, 0);
-		return 1;
-	}
-	CloseHandle(hProcess);
-	lua_pushboolean(L, 1);
 	return 1;
 }
 
@@ -364,14 +302,6 @@ int luaopen_sys(lua_State* L)
 	};
 	luaL_newlib(L, l2);
 	lua_setglobal(L, "sys");
-
-	luaL_Reg l3[] = {
-		{ "list", LuaGetProcessList },
-		{ "kill", LuaKillProcess },
-		{ NULL, NULL },
-	};
-	luaL_newlib(L, l3);
-	lua_setglobal(L, "process");
 	return 0;
 }
 
