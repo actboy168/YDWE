@@ -210,6 +210,7 @@ GCObject *luaC_newobj (lua_State *L, int tt, size_t sz) {
   GCObject *o = cast(GCObject *, luaM_newobject(L, novariant(tt), sz));
   if (tt == LUA_TTABLE || tt == LUA_TUSERDATA) {
 	  o->gchash = g->hash++;
+	  if (o->gchash == 0) o->gchash++;
   }
   else {
 	  o->gchash = 0;
