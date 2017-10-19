@@ -259,7 +259,7 @@ LUA_API lua_State *lua_newthread (lua_State *L) {
   luaC_checkGC(L);
   /* create new thread */
   L1 = &cast(LX *, luaM_newobject(L, LUA_TTHREAD, sizeof(LX)))->l;
-  L1->gchash = 0;
+  L1->gchash = g->hash++;
   L1->marked = luaC_white(g);
   L1->tt = LUA_TTHREAD;
   /* link it on list 'allgc' */
@@ -304,13 +304,14 @@ LUA_API lua_State *lua_newstate (lua_Alloc f, void *ud) {
   L->next = NULL;
   L->tt = LUA_TTHREAD;
   g->currentwhite = bitmask(WHITE0BIT);
-  L->gchash = 0;
   L->marked = luaC_white(g);
   preinit_thread(L, g);
   g->frealloc = f;
   g->ud = ud;
   g->mainthread = L;
   g->seed = makeseed(L);
+  g->hash = g->seed;
+  L->gchash = g->hash++;
   g->gcrunning = 0;  /* no GC while building state */
   g->GCestimate = 0;
   g->strt.size = g->strt.nuse = 0;
@@ -351,13 +352,14 @@ LUA_API lua_State *lua_newstate2 (lua_Alloc f, void *ud, unsigned int seed) {
   L->next = NULL;
   L->tt = LUA_TTHREAD;
   g->currentwhite = bitmask(WHITE0BIT);
-  L->gchash = 0;
   L->marked = luaC_white(g);
   preinit_thread(L, g);
   g->frealloc = f;
   g->ud = ud;
   g->mainthread = L;
   g->seed = seed;
+  g->hash = g->seed;
+  L->gchash = g->hash++;
   g->gcrunning = 0;  /* no GC while building state */
   g->GCestimate = 0;
   g->strt.size = g->strt.nuse = 0;

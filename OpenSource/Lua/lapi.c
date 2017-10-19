@@ -1294,16 +1294,3 @@ LUA_API void lua_upvaluejoin (lua_State *L, int fidx1, int n1,
   if (upisopen(*up1)) (*up1)->u.open.touched = 1;
   luaC_upvalbarrier(L, *up1);
 }
-
-
-LUA_API void lua_setgchash(lua_State *L, int idx) {
-	StkId o;
-	lua_lock(L);
-	api_checknelems(L, 1);
-	o = index2addr(L, idx);
-	api_check(L, iscollectable(o), "gcvalue expected");
-	api_check(L, ttisinteger(L->top-1), "integer expected");
-	gcvalue(o)->gchash = ivalue(L->top-1);
-	L->top--;
-	lua_unlock(L);
-}

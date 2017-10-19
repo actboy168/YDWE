@@ -144,7 +144,6 @@ extern const char lua_ident[];
 */
 LUA_API lua_State *(lua_newstate) (lua_Alloc f, void *ud);
 LUA_API lua_State *(lua_newstate2) (lua_Alloc f, void *ud, unsigned int seed);
-LUA_API void       (lua_setgchash) (lua_State *L, int idx);
 LUA_API void       (lua_close) (lua_State *L);
 LUA_API lua_State *(lua_newthread) (lua_State *L);
 

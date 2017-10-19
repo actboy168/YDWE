@@ -152,7 +152,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 
 	static int gchash(lua_State* L)
 	{
-		lua_setgchash(L, 1);
+		// 已经没用了
 		return 0;
 	}
 
