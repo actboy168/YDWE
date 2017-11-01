@@ -963,6 +963,7 @@ local map_op = {
   xchg_2 =	"Rrqdw:90R|rRqdw:90r|rm:87rM|mr:87Rm",
   cbw_0 =	"6698",
   cwde_0 =	"98",
+  cbq_0 = "99",
   cdqe_0 =	"4898",
   cwd_0 =	"6699",
   cdq_0 =	"99",

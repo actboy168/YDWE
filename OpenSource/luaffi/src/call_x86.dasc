@@ -50,6 +50,12 @@
 | mov rcx, arg0
 | call func
 |.endmacro
+|.macro call_rrR, func, arg0, arg1, arg2
+| mov64 r8, arg2
+| mov rdx, arg1
+| mov rcx, arg0
+| call func
+|.endmacro
 |
 |.macro call_rp, func, arg0, arg1
 | mov64 rdx, arg1
@@ -115,6 +121,12 @@
 | mov rdi, arg0
 | call func
 |.endmacro
+|.macro call_rrR, func, arg0, arg1, arg2
+| mov64 rdx, arg2
+| mov rsi, arg1
+| mov rdi, arg0
+| call func
+|.endmacro
 |
 |.macro call_rp, func, arg0, arg1
 | mov64 rsi, arg1
@@ -153,6 +165,15 @@
 |.endmacro
 |.macro call_rrr, func, arg0, arg1, arg2
 | mov dword [rsp+8], arg2
+| mov dword [rsp+4], arg1
+| mov dword [rsp], arg0
+| call func
+|.endmacro
+|.macro call_rrR, func, arg0, arg1, arg2
+| mov rax, arg2
+| cbq
+| mov dword [rsp+12], rdx
+| mov dword [rsp+8], rax
 | mov dword [rsp+4], arg1
 | mov dword [rsp], arg0
 | call func
@@ -702,13 +723,13 @@ cfunction compile_callback(lua_State* L, int fidx, int ct_usr, const struct ctyp
     | mov64 L_ARG, L
 
     /* get the upval table */
-    | call_rrr extern lua_rawgeti, L_ARG, LUA_REGISTRYINDEX, ref
+    | call_rrR extern lua_rawgeti, L_ARG, LUA_REGISTRYINDEX, ref
 
     /* get the lua function */
     lua_pushvalue(L, fidx);
     lua_rawseti(L, -2, ++num_upvals);
     assert(num_upvals == CALLBACK_FUNC_USR_IDX);
-    | call_rrr extern lua_rawgeti, L_ARG, -1, num_upvals
+    | call_rrR extern lua_rawgeti, L_ARG, -1, num_upvals
 
 #if !defined _WIN64 && !defined __amd64__
     lua_rawgeti(L, ct_usr, 0);
@@ -733,7 +754,7 @@ cfunction compile_callback(lua_State* L, int fidx, int ct_usr, const struct ctyp
             /* on the lua stack in the callback:
              * upval tbl, lua func, i-1 args
              */
-            | call_rrr extern lua_rawgeti, L_ARG, -i-1, num_upvals-1
+            | call_rrR extern lua_rawgeti, L_ARG, -i-1, num_upvals-1
             | call_rrp extern push_cdata, L_ARG, -1, mt
             get_pointer(Dst, ct, &reg);
             | mov [rax], rcx
@@ -874,7 +895,7 @@ cfunction compile_callback(lua_State* L, int fidx, int ct_usr, const struct ctyp
         lua_getuservalue(L, -1);
         lua_rawseti(L, -3, ++num_upvals); /* usr value */
         lua_rawseti(L, -2, ++num_upvals); /* mt */
-        | call_rrr extern lua_rawgeti, L_ARG, -2, num_upvals-1
+        | call_rrR extern lua_rawgeti, L_ARG, -2, num_upvals-1
         | call_rrrp extern check_typed_pointer, L_ARG, -2, -1, mt
         | mov [rsp+32], rax
         | call_rr extern lua_settop, L_ARG, -4
@@ -886,7 +907,7 @@ cfunction compile_callback(lua_State* L, int fidx, int ct_usr, const struct ctyp
             lua_getuservalue(L, -1);
             lua_rawseti(L, -3, ++num_upvals); /* usr value */
             lua_rawseti(L, -2, ++num_upvals); /* mt */
-            | call_rrr extern lua_rawgeti, L_ARG, -2, num_upvals-1
+            | call_rrR extern lua_rawgeti, L_ARG, -2, num_upvals-1
             | call_rrrp, extern check_enum, L_ARG, -2, -1, mt
             | mov [rsp+32], eax
             | call_rr extern lua_settop, L_ARG, -4
