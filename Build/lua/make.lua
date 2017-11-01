@@ -81,7 +81,7 @@ if fs.exists(path.Build / 'include'/ 'version') then
 end
 
 -- Step.4 编译
-msvc:rebuild(path.ThirdParty / 'Microsoft' / 'Detours' / 'Current' / 'sln' / 'Detours.sln', configuration)
+msvc:rebuild(path.ThirdParty / 'Microsoft' / 'Detours' / 'sln' / 'Detours.sln', configuration)
 msvc:rebuild(path.OpenSource / 'all.sln', configuration)
 if not dev then
     msvc:rebuild(path.Development / 'Core' / 'Solution' / 'YDWE.sln', configuration)
