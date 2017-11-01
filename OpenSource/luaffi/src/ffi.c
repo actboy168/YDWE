@@ -2574,6 +2574,12 @@ static int cdata_tostring(lua_State* L)
         lua_pushfstring(L, "cdata<%s>: %p", lua_tostring(L, -1), *(void**) p);
         return 1;
 
+	case FUNCTION_TYPE:
+		push_type_name(L, -1, &ct);
+		lua_pushfstring(L, "cdata<%s>: %p", lua_tostring(L, -1), *(void**)p);
+		return 1;
+
+
     case INTPTR_TYPE:
         lua_pushfstring(L, "%p", *(uintptr_t*) p);
         return 1;
