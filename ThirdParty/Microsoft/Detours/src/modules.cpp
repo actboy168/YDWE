@@ -2,7 +2,7 @@
 //
 //  Module Enumeration Functions (modules.cpp of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_339.
+//  Microsoft Research Detours Package, Version 3.0 Build_343.
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -668,7 +668,7 @@ struct _DETOUR_ENUMERATE_IMPORTS_THUNK_CONTEXT
 static
 BOOL
 CALLBACK
-DetourEnumerateImportsThunk(_In_opt_ PVOID VoidContext,
+DetourEnumerateImportsThunk(_In_ PVOID VoidContext,
                             _In_ DWORD nOrdinal,
                             _In_opt_ PCSTR pszFunc,
                             _In_opt_ PVOID* ppvFunc)
@@ -828,9 +828,9 @@ PVOID WINAPI DetourFindPayload(_In_opt_ HMODULE hModule,
 
                 if (pcbData) {
                     *pcbData = pSection->cbBytes - sizeof(*pSection);
-                    SetLastError(NO_ERROR);
-                    return (PBYTE)(pSection + 1);
                 }
+                SetLastError(NO_ERROR);
+                return (PBYTE)(pSection + 1);
             }
 
             pbData = (PBYTE)pSection + pSection->cbBytes;

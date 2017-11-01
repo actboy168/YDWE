@@ -11,6 +11,8 @@ ROOT = .
 !include "$(ROOT)\system.mak"
 
 all:
+    cd "$(MAKEDIR)"
+	@if exist "$(MAKEDIR)\core\makefile" cd "$(MAKEDIR)\core" && $(MAKE) /NOLOGO /$(MAKEFLAGS)
     cd "$(MAKEDIR)\src"
     @$(MAKE) /NOLOGO /$(MAKEFLAGS)
     cd "$(MAKEDIR)\samples"
@@ -19,6 +21,8 @@ all:
     cd "$(MAKEDIR)"
 
 clean:
+    cd "$(MAKEDIR)"
+	@if exist "$(MAKEDIR)\core\makefile" cd "$(MAKEDIR)\core" && $(MAKE) /NOLOGO /$(MAKEFLAGS) clean
     cd "$(MAKEDIR)\src"
     @$(MAKE) /NOLOGO /$(MAKEFLAGS) clean
     cd "$(MAKEDIR)\samples"
@@ -27,6 +31,8 @@ clean:
     cd "$(MAKEDIR)"
 
 realclean: clean
+    cd "$(MAKEDIR)"
+	@if exist "$(MAKEDIR)\core\makefile" cd "$(MAKEDIR)\core" && $(MAKE) /NOLOGO /$(MAKEFLAGS) realclean
     cd "$(MAKEDIR)\src"
     @$(MAKE) /NOLOGO /$(MAKEFLAGS) realclean
     cd "$(MAKEDIR)\samples"
@@ -39,6 +45,7 @@ realclean: clean
     -rmdir /q /s dist 2> nul
     -del docsrc\detours.chm 2> nul
     -del /q *.msi 2>nul
+    -del /q /f /s *~ 2>nul
 
 test:
     cd "$(MAKEDIR)\samples"

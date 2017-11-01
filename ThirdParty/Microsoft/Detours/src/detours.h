@@ -2,7 +2,7 @@
 //
 //  Core Detours Functionality (detours.h of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_339.
+//  Microsoft Research Detours Package, Version 3.0 Build_343.
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -994,9 +994,9 @@ __declspec(align(16)) struct DETOUR_IA64_BUNDLE
 #endif // DETOURS_IA64
 
 #ifdef DETOURS_ARM
-#error Feature not supported in this release.
 
-
+#define DETOURS_PFUNC_TO_PBYTE(p)  ((PBYTE)(((ULONG_PTR)(p)) & ~(ULONG_PTR)1))
+#define DETOURS_PBYTE_TO_PFUNC(p)  ((PBYTE)(((ULONG_PTR)(p)) | (ULONG_PTR)1))
 
 #endif // DETOURS_ARM
 
