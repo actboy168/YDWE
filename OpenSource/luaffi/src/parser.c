@@ -1590,6 +1590,7 @@ static struct ctype* parse_function(lua_State* L, struct parser* P, int ct_usr, 
     ct->align_mask = min(FUNCTION_ALIGN_MASK, P->align_mask);
     ct->type = FUNCTION_TYPE;
     ct->is_defined = 1;
+	ct->calling_convention = ret->calling_convention;
 
     if (name->type == TOK_NIL) {
         for (;;) {
