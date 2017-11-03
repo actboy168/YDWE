@@ -146,16 +146,9 @@ bool LuaEngine::LoadFile(fs::path const& file_path)
 
 bool LuaEngine::SetPath(fs::path const& path)
 {
-	std::string path_str;
-	try {
-		path_str = path.string();
-	}
-	catch (...) {
-		return false;
-	}
-
+	if (!L) return false;
 	lua_getglobal(L, "package");
-	lua_pushstring(L, path_str.c_str());
+	lua_pushstring(L, path.string().c_str());
 	lua_setfield(L, -2, "path");
 	lua_pop(L, 1);
 	return true;
@@ -163,16 +156,9 @@ bool LuaEngine::SetPath(fs::path const& path)
 
 bool LuaEngine::SetCPath(fs::path const& cpath)
 {
-	std::string cpath_str;
-	try {
-		cpath_str = cpath.string();
-	}
-	catch (...) {
-		return false;
-	}
-
+	if (!L) return false;
 	lua_getglobal(L, "package");
-	lua_pushstring(L, cpath_str.c_str());
+	lua_pushstring(L, cpath.string().c_str());
 	lua_setfield(L, -2, "cpath");
 	lua_pop(L, 1);
 	return true;
