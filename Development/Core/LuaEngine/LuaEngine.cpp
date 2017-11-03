@@ -44,9 +44,9 @@ LuaEngine::~LuaEngine()
 	L = nullptr;
 }
 
-bool LuaEngine::Initialize(const fs::path& root_path)
+bool LuaEngine::Initialize(const fs::path& root, const std::wstring& name)
 {
-	if (!logging::initialize(root_path.c_str(), L"ydwe"))
+	if (!logging::initialize(root.c_str(), name))
 	{
 		printf("initialize error %d\n", GetLastError());
 		return false;
@@ -108,13 +108,13 @@ struct luaerror {
 	lua_State* state() const { return m_l; }
 };
 
-bool LuaEngine::LoadFile(fs::path const& file_path)
+bool LuaEngine::LoadFile(fs::path const& file)
 {
 	try
 	{
 		if (!L) return false;
-		std::string name = file_path.string();
-		std::vector<char> buffer = base::file::read_stream(file_path).read<std::vector<char>>();
+		std::string name = file.string();
+		std::vector<char> buffer = base::file::read_stream(file).read<std::vector<char>>();
 		if (luaL_loadbuffer(L, buffer.data(), buffer.size(), name.c_str()))
 		{
 			throw luaerror(L);

@@ -219,6 +219,7 @@ static void DoTask()
 
 	CreateDotNetConfig(gWarcraftDirectory / L"worldeditydwe.exe.config");
 
+	SetEnvironmentVariableW(L"ydwe-process-name", L"ydwe");
 	base::win::process worldedit_process;
 	bool result = worldedit_process.create(worldeditPreferredPath, std::wstring(::GetCommandLineW()));
 

@@ -109,6 +109,8 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		}
 
 
+		SetEnvironmentVariableW(L"ydwe-process-name", L"war3");
+
 		base::win::process warcraft3_process;
 
 		try {

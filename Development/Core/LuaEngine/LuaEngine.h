@@ -9,11 +9,11 @@ class LuaEngine
 public:
 	LuaEngine();
 	~LuaEngine();
-	bool Initialize(const fs::path& root_path);
+	bool Initialize(const fs::path& root, const std::wstring& name);
 	bool Uninitialize();
 	bool SetPath(fs::path const& path);
 	bool SetCPath(fs::path const& cpath);
-	bool LoadFile(fs::path const& file_path);
+	bool LoadFile(fs::path const& file);
 
 private:
 	lua_State*              L;
