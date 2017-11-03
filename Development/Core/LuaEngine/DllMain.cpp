@@ -42,7 +42,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 					ydwe = ydwedev / L"Component";
 				}
 				gLuaEngine.SetPath(ydwe / L"share" / L"script" / name / L"?.lua");
-				gLuaEngine.LoadFile(ydwe / L"share" / L"script" / name / L"main.lua");
+				gLuaEngine.Require("main");
 			}
 		}
 		catch (...)

@@ -1,14 +1,11 @@
-#include <Windows.h>
 #include "LuaEngine.h"
-#include <cstdint>
-#include <base/hook/fp_call.h>		 	  		
+#include <Windows.h>
+#include <stdint.h>
+#include <base/hook/fp_call.h>	  		
 #include <base/filesystem.h>
-#include <base/exception/exception.h>
 #include <base/hook/inline.h>
-#include <base/path/service.h>
 #include <base/path/self.h>
 #include <base/win/file_version.h>
-#include <base/file/stream.h>
 #include <base/util/format.h>
 #include <base/win/version.h>
 
@@ -36,7 +33,7 @@ int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
 
 LuaEngine::LuaEngine()
 	: L(nullptr)
-	, logger_()
+	, lg()
 { }
 
 LuaEngine::~LuaEngine()
@@ -51,15 +48,15 @@ bool LuaEngine::Initialize(const fs::path& root, const std::wstring& name)
 		printf("initialize error %d\n", GetLastError());
 		return false;
 	}
-	logger_ = logging::get_logger("root");
-	LOGGING_INFO(logger_) << "------------------------------------------------------";
+	lg = logging::get_logger("root");
+	LOGGING_INFO(lg) << "------------------------------------------------------";
 
 	try
 	{
 		base::win::version_number vn = base::win::get_version_number();
-		LOGGING_INFO(logger_) << base::format("YDWE Script engine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]);
-		LOGGING_INFO(logger_) << "Compiled at " __TIME__ ", " __DATE__;
-		LOGGING_INFO(logger_) << base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
+		LOGGING_INFO(lg) << base::format("YDWE Script engine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]);
+		LOGGING_INFO(lg) << "Compiled at " __TIME__ ", " __DATE__;
+		LOGGING_INFO(lg) << base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
 
 #ifndef _DEBUG
 		base::hook::inline_install(&RealLuaPcall, (uintptr_t)FakeLuaPcall);
@@ -67,25 +64,25 @@ bool LuaEngine::Initialize(const fs::path& root, const std::wstring& name)
 		L = luaL_newstate();
 		if (!L)
 		{
-			LOGGING_FATAL(logger_) << "Could not initialize script engine. Program may not work correctly!";
+			LOGGING_FATAL(lg) << "Could not initialize script engine. Program may not work correctly!";
 			return false;
 		}
 
 		luaL_openlibs(L);
 		luaL_requiref(L, "log", luaopen_log, 1);
 		lua_pop(L, 1);
-		LOGGING_DEBUG(logger_) << "Initialize script engine successfully.";
+		LOGGING_DEBUG(lg) << "Initialize script engine successfully.";
 		return true;
 	}
 	catch (std::exception const& e)
 	{
-		LOGGING_ERROR(logger_) << "exception: " << e.what();
+		LOGGING_ERROR(lg) << "exception: " << e.what();
 		Uninitialize();
 		return false;
 	}
 	catch (...)
 	{
-		LOGGING_ERROR(logger_) << "unknown exception.";
+		LOGGING_ERROR(lg) << "unknown exception.";
 		Uninitialize();
 		return false;
 	}
@@ -97,51 +94,23 @@ bool LuaEngine::Uninitialize()
 	{
 		lua_close(L);
 		L = nullptr;
-		LOGGING_INFO(logger_) << "Script engine has been shut down.";
+		LOGGING_INFO(lg) << "Script engine has been shut down.";
 	}
 	return true;
 }
 
-struct luaerror {
-	luaerror(lua_State* l) : m_l(l) {}
-	lua_State* m_l;
-	lua_State* state() const { return m_l; }
-};
-
-bool LuaEngine::LoadFile(fs::path const& file)
+bool LuaEngine::Require(const char* file)
 {
-	try
+	if (!L) return false;
+	lua_getglobal(L, "require");
+	lua_pushstring(L, file);
+	if (LUA_OK != lua_pcall(L, 1, 0, 0))
 	{
-		if (!L) return false;
-		std::string name = file.string();
-		std::vector<char> buffer = base::file::read_stream(file).read<std::vector<char>>();
-		if (luaL_loadbuffer(L, buffer.data(), buffer.size(), name.c_str()))
-		{
-			throw luaerror(L);
-		}
-
-		if (lua_pcall(L, 0, LUA_MULTRET, 0))
-		{
-			throw luaerror(L);
-		}
-
-		return true;
+		LOGGING_ERROR(lg) << "exception: " << lua_tostring(L, -1);
+		lua_pop(L, 1);
+		return false;
 	}
-	catch (luaerror const& e)
-	{
-		LOGGING_ERROR(logger_) << "exception: " << lua_tostring(e.state(), -1);
-		lua_pop(e.state(), 1);
-	}
-	catch (std::exception const& e)
-	{
-		LOGGING_ERROR(logger_) << "exception: " << e.what();
-	}
-	catch (...)
-	{
-		LOGGING_ERROR(logger_) << "unknown exception.";
-	}
-
-	return false;
+	return true;
 }
 
 bool LuaEngine::SetPath(fs::path const& path)

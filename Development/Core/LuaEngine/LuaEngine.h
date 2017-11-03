@@ -13,9 +13,9 @@ public:
 	bool Uninitialize();
 	bool SetPath(fs::path const& path);
 	bool SetCPath(fs::path const& cpath);
-	bool LoadFile(fs::path const& file);
+	bool Require(const char* file);
 
 private:
 	lua_State*              L;
-	logging::logger*        logger_;
+	logging::logger*        lg;
 };
