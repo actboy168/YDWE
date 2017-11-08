@@ -54,7 +54,7 @@ bool LuaEngine::Initialize(const fs::path& root, const std::wstring& name)
 	try
 	{
 		base::win::version_number vn = base::win::get_version_number();
-		LOGGING_INFO(lg) << base::format("YDWE Script engine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]);
+		LOGGING_INFO(lg) << base::format("LuaEngine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]);
 		LOGGING_INFO(lg) << "Compiled at " __TIME__ ", " __DATE__;
 		LOGGING_INFO(lg) << base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
 
@@ -64,14 +64,14 @@ bool LuaEngine::Initialize(const fs::path& root, const std::wstring& name)
 		L = luaL_newstate();
 		if (!L)
 		{
-			LOGGING_FATAL(lg) << "Could not initialize script engine. Program may not work correctly!";
+			LOGGING_FATAL(lg) << "Could not initialize LuaEngine. Program may not work correctly!";
 			return false;
 		}
 
 		luaL_openlibs(L);
 		luaL_requiref(L, "log", luaopen_log, 1);
 		lua_pop(L, 1);
-		LOGGING_DEBUG(lg) << "Initialize script engine successfully.";
+		LOGGING_DEBUG(lg) << "Initialize LuaEngine successfully.";
 		return true;
 	}
 	catch (std::exception const& e)
@@ -94,7 +94,7 @@ bool LuaEngine::Uninitialize()
 	{
 		lua_close(L);
 		L = nullptr;
-		LOGGING_INFO(lg) << "Script engine has been shut down.";
+		LOGGING_INFO(lg) << "LuaEngine has been shut down.";
 	}
 	return true;
 }
