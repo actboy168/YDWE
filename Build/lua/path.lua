@@ -14,4 +14,4 @@ local function GetDirectoryNameOfFileAbove(p, f)
     end
 end
 
-return GetDirectoryNameOfFileAbove(fs.current_path(), 'build.root')
+return GetDirectoryNameOfFileAbove(fs.current_path(), 'LICENSE.txt')
