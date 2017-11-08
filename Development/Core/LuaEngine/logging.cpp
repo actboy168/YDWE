@@ -8,11 +8,10 @@ namespace logging
 	fs::path                        loggers_root;
 	std::wstring                                   loggers_name;
 
-	bool initialize(const fs::path& root, const std::wstring& name)
+	void initialize(const fs::path& root, const std::wstring& name)
 	{
 		loggers_root = root;
 		loggers_name = name;
-		return true;
 	}
 
 	logger* get_logger(const char* name)

@@ -43,11 +43,7 @@ LuaEngine::~LuaEngine()
 
 bool LuaEngine::Initialize(const fs::path& root, const std::wstring& name)
 {
-	if (!logging::initialize(root.c_str(), name))
-	{
-		printf("initialize error %d\n", GetLastError());
-		return false;
-	}
+	logging::initialize(root.c_str(), name);
 	lg = logging::get_logger("root");
 	LOGGING_INFO(lg) << "------------------------------------------------------";
 
