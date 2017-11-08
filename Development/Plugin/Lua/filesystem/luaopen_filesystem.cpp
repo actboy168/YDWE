@@ -413,7 +413,6 @@ namespace luafs {
 		}
 		const fs::path& base = path::to(L, 2);
 		return path::constructor_(L, std::move(fs::canonical(p, base)));
-		return 0;
 		FS_TRY_END;
 	}
 
