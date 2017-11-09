@@ -109,11 +109,11 @@ bool LuaEngine::Require(const char* file)
 	return true;
 }
 
-bool LuaEngine::SetPath(fs::path const& path)
+bool LuaEngine::SetPath(fs::path const& p1, fs::path const& p2)
 {
 	if (!L) return false;
 	lua_getglobal(L, "package");
-	lua_pushstring(L, path.string().c_str());
+	lua_pushstring(L, (p1.string() + ";" + p2.string()).c_str());
 	lua_setfield(L, -2, "path");
 	lua_pop(L, 1);
 	return true;

@@ -11,7 +11,7 @@ public:
 	~LuaEngine();
 	bool Initialize(const fs::path& root, const std::wstring& name);
 	bool Uninitialize();
-	bool SetPath(fs::path const& path);
+	bool SetPath(fs::path const& p1, fs::path const& p2);
 	bool SetCPath(fs::path const& cpath);
 	bool Require(const char* file);
 

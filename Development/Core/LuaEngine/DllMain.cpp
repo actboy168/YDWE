@@ -41,7 +41,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 				if (fs::exists(ydwedev / "build.root")) {
 					ydwe = ydwedev / L"Component";
 				}
-				gLuaEngine.SetPath(ydwe / L"share" / L"script" / name / L"?.lua");
+				gLuaEngine.SetPath(ydwe / L"share" / L"script" / "common" / L"?.lua", ydwe / L"share" / L"script" / name / L"?.lua");
 				gLuaEngine.Require("main");
 			}
 		}
