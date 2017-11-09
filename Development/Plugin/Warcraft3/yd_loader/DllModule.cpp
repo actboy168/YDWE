@@ -196,14 +196,6 @@ void DllModule::ThreadFunc()
 void DllModule::SetWindow(HWND hwnd)
 {
 	hWar3Wnd = hwnd;
-	for (auto it = plugin_mapping.begin(); it != plugin_mapping.end(); ++it)
-	{
-		uintptr_t func = (uintptr_t)::GetProcAddress(it->second, "SetWindow");
-		if (func)
-		{
-			base::c_call<void>(func, hwnd);
-		}
-	}
 }
 
 void DllModule::LoadPlugins()

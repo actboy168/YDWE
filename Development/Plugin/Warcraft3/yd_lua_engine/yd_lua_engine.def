@@ -1,4 +1,3 @@
 LIBRARY "yd_lua_engine"
 EXPORTS
 	Initialize
-	SetWindow
