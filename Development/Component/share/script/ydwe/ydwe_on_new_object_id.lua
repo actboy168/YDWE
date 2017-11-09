@@ -13,6 +13,14 @@ local function get_default(type)
 	return default[type]
 end
 
+local function from_objectid (id)
+	return string.pack('<I4', id)
+end
+
+local function to_objectid (str)
+	return string.unpack('<I4', str)
+end
+
 local object = {}
 
 local object_type = {
@@ -32,7 +40,7 @@ function object:original_has (this_, id_string_)
 
 	for i = 0, size-2 do
 		local id = ffi.cast('uint32_t*', ptr)[0]
-		if string.from_objectid(id) == id_string_ then
+		if from_objectid(id) == id_string_ then
 			return true
 		end
 		ptr = ptr + 24
@@ -80,7 +88,7 @@ function event.EVENT_NEW_OBJECT_ID(event_data)
 			foregroundWindow, 														-- 父窗口句柄
 			_("New Object Id"),														-- 标题栏
 			_("Please input new object ID, or cancel to use the default one."),		-- 提示语句
-			string.from_objectid(default_id),								-- 文本编辑区初始文字
+			from_objectid(default_id),							                	-- 文本编辑区初始文字
 			_("OK"),																-- “确定”按钮文本
 			_("Cancel")																-- “取消"按钮文本
 		)
@@ -103,7 +111,7 @@ function event.EVENT_NEW_OBJECT_ID(event_data)
 		else
 			-- 合法，转换为整数返回	
 			log.trace("Result " .. tostring(id_string))	
-			return string.to_objectid(id_string)
+			return to_objectid(id_string)
 		end
 				
 	end

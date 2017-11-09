@@ -1,7 +1,7 @@
+require "log"
 require "sys"
 require "filesystem"
 local uni = require 'ffi.unicode'
-
 
 -- 根据ydwebase.dll的路径计算
 fs.__ydwe_path = fs.get(fs.DIR_MODULE):remove_filename():remove_filename()
@@ -13,21 +13,6 @@ end
 
 function fs.war3_path()
 	return fs.__war3_path
-end
-
-
-local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" 
-if not fs.exists(root) then
-	root = fs.ydwe_path()
-end
-
-package.path = package.path .. ';' .. uni.u2a((root / 'plugin' / 'w3x2lni' / 'script' / '?.lua'):string())
-
-
--- 给路径末尾，扩展名前添加内容
--- 效果：("abc.w3x", "def") -> "abcdef.w3x"
-function fs.aux_filename(self, str)
-	return self:parent_path() / (self:stem():string() .. str .. self:extension():string())
 end
 
 io.__open = io.open
@@ -79,25 +64,8 @@ function io.save(file_path, content)
 	end
 end
 
--- 比较2个浮点数是否相等
--- a, b - 要比较的2个浮点数
--- eps - 精确度阈值
--- 返回值：true表示2个数的差在精确阈值内（相等），false表明不在阈值内
-function math.feq(a, b, eps)
-	if not eps then eps = 1e-10 end
-	return math.abs(a - b) < eps
-end
-
 function string.trim (self) 
 	return self:gsub("^%s*(.-)%s*$", "%1")
-end
-
-function string.from_objectid (id)
-	return string.pack('<I4', id)
-end
-
-function string.to_objectid (str)
-	return string.unpack('<I4', str)
 end
 
 function sys.spawn_pipe (command_line, current_dir)		

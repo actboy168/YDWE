@@ -16,11 +16,19 @@ do
 		return real_require(str, ...)
 	end
 end
-			
+
+require "util"
 require "sys"
 require "filesystem"
 require "gui"
-require "util"
+
+local uni = require "ffi.unicode"
+local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" 
+if not fs.exists(root) then
+	root = fs.ydwe_path()
+end
+package.path = package.path .. ';' .. uni.u2a((root / 'plugin' / 'w3x2lni' / 'script' / '?.lua'):string())
+
 require "event"
 require "virtual_mpq"
 require "registry"

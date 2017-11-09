@@ -6,6 +6,12 @@ require "compile.jasshelper"
 require "compile.native"
 require "mpq_util"
 
+-- 给路径末尾，扩展名前添加内容
+-- 效果：("abc.w3x", "def") -> "abcdef.w3x"
+local function aux_filename(self, str)
+	return self:parent_path() / (self:stem():string() .. str .. self:extension():string())
+end
+
 -- 确定应当把地图保存为适合老版本（< 1.24）还是新版本（>= 1.24）的
 -- 对于保存为双份，按照当前魔兽版本处理
 -- save_type - 保存类型，0到3的取值，意义同设置程序，从上到下依次为0到3
@@ -160,9 +166,9 @@ function event.EVENT_SAVE_MAP(event_data)
 	if save_type == 3 then
 		-- 决定第二份的路径
 		if save_option.runtime_version:is_new() then
-			map_path_aux = fs.aux_filename(map_path, "hashtable")
+			map_path_aux = aux_filename(map_path, "hashtable")
 		else
-			map_path_aux = fs.aux_filename(map_path, "returnbug")
+			map_path_aux = aux_filename(map_path, "returnbug")
 		end
 
 		log.trace("Making copy of the original map.")
