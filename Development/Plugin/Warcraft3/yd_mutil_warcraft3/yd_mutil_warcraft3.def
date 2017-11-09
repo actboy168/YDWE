@@ -1,5 +1,4 @@
 LIBRARY "yd_mutil_warcraft3"
 EXPORTS
-	PluginName
 	Initialize
 

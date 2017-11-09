@@ -1,4 +1,3 @@
 LIBRARY "yd_leak_monitor"
 EXPORTS
-	PluginName
 	Initialize

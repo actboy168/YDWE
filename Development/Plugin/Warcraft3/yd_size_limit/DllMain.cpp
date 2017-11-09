@@ -43,8 +43,3 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 
 	return TRUE;
 }
-
-const char *PluginName()
-{
-	return "yd_size_limit";
-}

@@ -1,3 +1,2 @@
 LIBRARY "YDClient"
 EXPORTS
-	PluginName

@@ -1,4 +1,3 @@
 LIBRARY "yd_jass_debug"
 EXPORTS
-	PluginName
 	Initialize

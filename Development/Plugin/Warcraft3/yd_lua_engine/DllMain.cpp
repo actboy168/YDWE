@@ -24,8 +24,3 @@ void SetWindow(HWND hwnd)
 {
 	base::warcraft3::lua_engine::message::set_window(hwnd);
 }
-
-const char *PluginName()
-{
-	return "yd_lua_engine";
-}

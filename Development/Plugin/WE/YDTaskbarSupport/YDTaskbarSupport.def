@@ -1,4 +1,3 @@
 LIBRARY "YDTaskbarSupport"
 EXPORTS
 	Initialize
-	PluginName

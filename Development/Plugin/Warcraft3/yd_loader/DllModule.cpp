@@ -31,7 +31,6 @@ uintptr_t RealSFileOpenArchive = (uintptr_t)::GetProcAddress(LoadLibraryW(L"Stor
 
 FullWindowedMode fullWindowedMode;
 
-const char *PluginName();
 void LockingMouse();
 
 HWND WINAPI FakeCreateWindowExA(
@@ -228,7 +227,7 @@ void DllModule::LoadPlugins()
 				{
 					std::string utf8_name = base::w2u(itr->path().filename().wstring());
 
-					if ((! base::path::equal(itr->path().filename(), std::string(PluginName()) + ".dll"))
+					if ((! base::path::equal(itr->path().filename(), L"yd_loader.dll"))
 						&& base::path::equal(itr->path().extension(), L".dll")
 						&& ("0" != table["Enable"][utf8_name]))
 					{
@@ -247,11 +246,8 @@ void DllModule::LoadPlugins()
 		for (auto it = plugin_mapping.begin(); it != plugin_mapping.end(); )
 		{
 			HMODULE            module = it->second;
-			uintptr_t fPluginName = (uintptr_t)::GetProcAddress(module, "PluginName");
 			uintptr_t fInitialize = (uintptr_t)::GetProcAddress(module, "Initialize");
-			if (fPluginName 
-				&& fInitialize
-				&& (it->first == std::string(base::c_call<const char *>(fPluginName)) + ".dll"))
+			if (fInitialize)
 			{
 				++it;
 			}

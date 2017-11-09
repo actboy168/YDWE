@@ -1,3 +1,2 @@
 LIBRARY "YDWeHelper"
 EXPORTS
-	PluginName

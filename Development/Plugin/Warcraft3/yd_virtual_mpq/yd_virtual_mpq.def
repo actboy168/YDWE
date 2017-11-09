@@ -1,4 +1,3 @@
 LIBRARY "yd_virtual_mpq"
 EXPORTS
-	PluginName
 	Initialize
