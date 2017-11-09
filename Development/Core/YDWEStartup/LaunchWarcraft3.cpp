@@ -79,7 +79,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		}
 
 		war3_path = war3_path / L"war3.exe";
-		fs::path inject_dll = ydwe_path / L"plugin" / L"warcraft3" / L"yd_loader.dll";
+		fs::path inject_dll = ydwe_path / L"bin" / L"LuaEngine.dll";
 
 		base::ini::table table;
 		table["MapTest"]["LaunchRenderingEngine"]   = "Direct3D 8";
