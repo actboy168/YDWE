@@ -1,5 +1,3 @@
-require "util"
-
 local file = fs.ydwe_path() / "bin" / "EverConfig.cfg"
 
 local tbl_index = {

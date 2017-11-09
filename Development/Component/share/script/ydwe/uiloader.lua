@@ -1,5 +1,4 @@
 require "registry"
-require "util"
 local stringify_slk = require 'stringify_slk'
 local ui = require 'ui-builder.init'
 local txt = (require 'w3xparser').txt

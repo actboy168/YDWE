@@ -1,5 +1,4 @@
 require "i18n"
-require "util"
 local uni = require 'ffi.unicode'
 
 function _(str)

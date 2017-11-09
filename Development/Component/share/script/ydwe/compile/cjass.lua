@@ -1,6 +1,5 @@
 require "sys"
 require "filesystem"
-require "util"
 
 cjass = {}
 

@@ -1,5 +1,3 @@
-require "util"
-
 plugin = {}
 plugin.loaders = {}
 plugin.path = fs.ydwe_path() / "plugin"

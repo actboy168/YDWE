@@ -1,5 +1,4 @@
 require "filesystem"
-require "util"
 require "localization"
 local ffi = require "ffi"
 local lni = require 'lni-c'

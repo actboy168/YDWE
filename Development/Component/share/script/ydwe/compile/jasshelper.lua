@@ -1,6 +1,5 @@
 require "sys"
 require "filesystem"
-require "util"
 require "mpq_util"
 local storm = require 'ffi.storm'
 local stormlib = require 'ffi.stormlib'

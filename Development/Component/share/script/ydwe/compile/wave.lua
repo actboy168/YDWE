@@ -1,6 +1,5 @@
 require "sys"
 require "filesystem"
-require "util"
 
 local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component"
 if not fs.exists(root) then
