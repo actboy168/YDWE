@@ -95,12 +95,19 @@ bool LuaEngine::Uninitialize()
 	return true;
 }
 
+static int errorfunc(lua_State* L)
+{
+	luaL_traceback(L, L, lua_tostring(L, 1), 0);
+	return 1;
+}
+
 bool LuaEngine::Require(const char* file)
 {
 	if (!L) return false;
+	lua_pushcfunction(L, errorfunc);
 	lua_getglobal(L, "require");
 	lua_pushstring(L, file);
-	if (LUA_OK != lua_pcall(L, 1, 0, 0))
+	if (LUA_OK != lua_pcall(L, 1, 0, -3))
 	{
 		LOGGING_ERROR(lg) << "exception: " << lua_tostring(L, -1);
 		lua_pop(L, 1);
