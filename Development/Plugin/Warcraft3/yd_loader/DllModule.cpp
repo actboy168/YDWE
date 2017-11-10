@@ -75,21 +75,6 @@ HWND WINAPI FakeCreateWindowExA(
 	return hWnd;
 }
 
-bool EnableDirect3D9(HMODULE gamedll)
-{
-	HMODULE d3dproxy = LoadLibraryW(L"d3d8proxy.dll");
-	if (!d3dproxy)
-	{
-		return false;
-	}
-
-	uintptr_t Direct3DCreate8 = (uintptr_t)GetProcAddress(d3dproxy, "Direct3DCreate8");
-	if (!Direct3DCreate8)
-	{
-		return false;
-	}
-	return base::hook::dyn_iat(gamedll, L"d3d8.dll", "Direct3DCreate8", 0, Direct3DCreate8);
-}
 
 DllModule::DllModule()
 	: hWar3Wnd(NULL)
@@ -98,7 +83,6 @@ DllModule::DllModule()
 	, IsFullWindowedMode(false)
 	, IsLockingMouse(false)
 	, IsFixedRatioWindowed(false)
-	, IsEnableDirect3D9(false)
 	, hGameDll(NULL)
 	, daemon_thread_()
 	, daemon_thread_exit_(false)
@@ -195,7 +179,6 @@ void DllModule::Attach()
 		IsLockingMouse          = "0" != table["MapTest"]["LaunchLockingMouse"];
 		IsFixedRatioWindowed    = "0" != table["MapTest"]["LaunchFixedRatioWindowed"];
 		IsWideScreenSupport     = "0" != table["MapTest"]["LaunchWideScreenSupport"];
-		IsEnableDirect3D9       = "Direct3D 9" == table["MapTest"]["LaunchRenderingEngine"];
 	} 
 	catch (...) {
 	}
@@ -210,11 +193,6 @@ void DllModule::Attach()
 	RealCreateWindowExA = base::hook::iat(L"Game.dll", "user32.dll", "CreateWindowExA", (uintptr_t)FakeCreateWindowExA);
 
 	auto_enter::game_status::initialize(g_DllMod.hGameDll);
-
-	if (g_DllMod.IsEnableDirect3D9)
-	{
-		EnableDirect3D9(g_DllMod.hGameDll);
-	}
 
 	scores::rpg::hook();
 }

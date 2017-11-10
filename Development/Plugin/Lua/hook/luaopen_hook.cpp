@@ -148,6 +148,36 @@ static int hookIAT(lua_State* L) {
 	return hookInterface(L, infIAT);
 }
 
+static int hookC2lua(lua_State* L) {
+	luaL_checktype(L, 1, LUA_TSTRING);
+	luaL_checktype(L, 2, LUA_TNUMBER);
+	lua_rawgetp(L, lua_upvalueindex(1), &FFI_NEW);
+	if (lua_type(L, -1) != LUA_TFUNCTION) {
+		return luaL_error(L, "No initialization.");
+	}
+	uintptr_t fp = (uintptr_t)luaL_checkinteger(L, 2);
+	lua_pushvalue(L, 1);
+	lua_pushnil(L);
+	lua_call(L, 2, 1);
+	uintptr_t cd = (uintptr_t)lua_touserdata(L, -1);
+	*(uintptr_t*)(cd + 16) = fp;
+	return 1;
+}
+
+static int hookLua2c(lua_State* L) {
+	luaL_checktype(L, 1, LUA_TSTRING);
+	lua_rawgetp(L, lua_upvalueindex(1), &FFI_NEW);
+	if (lua_type(L, -1) != LUA_TFUNCTION) {
+		return luaL_error(L, "No initialization.");
+	}
+	lua_pushvalue(L, 1);
+	lua_pushvalue(L, 2);
+	lua_call(L, 2, 1);
+	uintptr_t cd = (uintptr_t)lua_touserdata(L, -1);
+	lua_pushinteger(L, *(uintptr_t*)(cd + 16));
+	return 1;
+}
+
 extern "C" __declspec(dllexport)
 int luaopen_hook(lua_State* L)
 {
@@ -163,6 +193,8 @@ int luaopen_hook(lua_State* L)
 		{ "initialize", hookInitialize },
 		{ "inline", hookInline },
 		{ "iat", hookIAT },
+		{ "c2lua", hookC2lua },
+		{ "lua2c", hookLua2c },
 		{ NULL, NULL }
 	};
 	luaL_newlibtable(L, lib);

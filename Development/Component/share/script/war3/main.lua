@@ -2,27 +2,13 @@ require 'utiliy'
 require 'config'
 require 'ffi.loadlibrary'
 local ffi = require 'ffi'
-local hk = require 'hook'
 local event = require 'ev'
 local storm = require 'ffi.storm'
-hk.initialize(ffi.new)
-
-local function sandbox_iat(define, module, dll, api, f)
-    local h
-    h = hk.iat(define, module, dll, api, function(...)
-        local ok, e = xpcall(f, debug.traceback, h, ...)
-        if ok then
-            return e
-        end
-        log.error(e)
-        return h(...)
-    end)
-    return h
-end
+local hook = require 'ffi.hook'
 
 local _, patch = global_config_war3_version()
 
-sandbox_iat('void*(__stdcall*)(const char*)', 'War3.exe', 'kernel32.dll', 'LoadLibraryA', function (rLoadLibraryA, dllname)
+hook.iat('void*(__stdcall*)(const char*)', 'War3.exe', 'kernel32.dll', 'LoadLibraryA', function (rLoadLibraryA, dllname)
     dllname = ffi.string(dllname)
     log.info('LoadLibraryA', dllname)
     if dllname:lower() == 'game.dll' then
@@ -57,7 +43,6 @@ event.on('GameDll加载', function ()
             libs[#libs+1] = sys.load_library(file)
         end
     end
-    local name, up = debug.getupvalue(ffi.C.GetProcAddress, 1)
     for _, lib in ipairs(libs) do
         local init = sys.get_proc_address(lib, 'Initialize', 'void(__stdcall*)()')
         if init then
@@ -68,12 +53,28 @@ end)
 
 if '0' ~= global_config.MapTest.LaunchDisableSecurityAccess then
     event.on('GameDll加载', function()
-        sandbox_iat('void*(__stdcall*)(const char*)', 'Game.dll', 'kernel32.dll', 'LoadLibraryA', function (rLoadLibraryA, dllname)
+        hook.iat('void*(__stdcall*)(const char*)', 'Game.dll', 'kernel32.dll', 'LoadLibraryA', function (rLoadLibraryA, dllname)
             dllname = ffi.string(dllname)
             if dllname:lower() == 'advapi32.dll' then
                 return nil
             end
             return rLoadLibraryA(dllname)
+        end)
+    end)
+end
+
+if 'Direct3D 9' == global_config.MapTest.LaunchRenderingEngine then
+    event.on('GameDll加载', function()
+        local d3d8proxy = sys.load_library 'd3d8proxy.dll'
+        if not d3d8proxy then
+            return
+        end
+        local d3d8create = sys.get_proc_address(d3d8proxy, 'Direct3DCreate8', 'void*(__stdcall*)(unsigned int)')
+        if not d3d8create then
+            return
+        end
+        hook.dyn_iat('void*(__stdcall*)(unsigned int)', 'game.dll', "d3d8.dll", "Direct3DCreate8", function(rDirect3DCreate8, ver)
+            return d3d8create(ver)
         end)
     end)
 end
