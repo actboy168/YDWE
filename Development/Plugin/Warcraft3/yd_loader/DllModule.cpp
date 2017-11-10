@@ -24,10 +24,8 @@ namespace WideScreen
 	void initialize();
 }
 
-uintptr_t RealLoadLibraryA  = 0;
 uintptr_t RealGameLoadLibraryA  = 0;
 uintptr_t RealCreateWindowExA = 0;
-uintptr_t RealSFileOpenArchive = (uintptr_t)::GetProcAddress(LoadLibraryW(L"Storm.dll"), (LPCSTR)266);
 
 FullWindowedMode fullWindowedMode;
 
@@ -103,54 +101,6 @@ HMODULE __stdcall FakeGameLoadLibraryA(LPCSTR lpFilePath)
 	}
 
 	return base::std_call<HMODULE>(RealGameLoadLibraryA, lpFilePath);
-}
-
-HMODULE __stdcall FakeLoadLibraryA(LPCSTR lpFilePath)
-{
-	fs::path lib((const char*)lpFilePath);
-	if (lib == "Game.dll")
-	{
-		if (!g_DllMod.hGameDll)
-		{
-			g_DllMod.hGameDll = ::LoadLibraryW((g_DllMod.patch_path / L"Game.dll").c_str());
-			if (!g_DllMod.hGameDll)
-			{
-				g_DllMod.hGameDll = ::LoadLibraryW(L"Game.dll");
-				if (!g_DllMod.hGameDll)
-				{
-					return g_DllMod.hGameDll;
-				}
-			}
-
-			if (g_DllMod.IsWideScreenSupport)
-			{
-				WideScreen::initialize();
-			}
-
-			RealCreateWindowExA  = base::hook::iat(L"Game.dll", "user32.dll", "CreateWindowExA", (uintptr_t)FakeCreateWindowExA);
-			if (g_DllMod.IsDisableSecurityAccess)
-			{
-				RealGameLoadLibraryA = base::hook::iat(L"Game.dll", "kernel32.dll", "LoadLibraryA", (uintptr_t)FakeGameLoadLibraryA);
-			}
-
-			HANDLE hMpq;
-			base::std_call<BOOL>(RealSFileOpenArchive, (g_DllMod.patch_path / "Patch.mpq").string().c_str(), 9, 6, &hMpq);
-
-			g_DllMod.LoadPlugins();
-			auto_enter::game_status::initialize(g_DllMod.hGameDll);
-
-			if (g_DllMod.IsEnableDirect3D9)
-			{
-				EnableDirect3D9(g_DllMod.hGameDll);
-			}
-
-			scores::rpg::hook();
-
-			return g_DllMod.hGameDll;
-		}
-	}
-
-	return base::std_call<HMODULE>(RealLoadLibraryA, lpFilePath);
 }
 
 DllModule::DllModule()
@@ -285,36 +235,6 @@ void ResetConfig(base::ini::table& table)
 	table["FeatureToggle"]["EnableShowInternalAttributeId"] = "0";
 }
 
-bool DllModule::SearchPatch(fs::path& result, std::wstring const& fv_str)
-{
-	try {
-		fs::directory_iterator end_itr;
-		for (fs::directory_iterator itr(ydwe_path / L"share" / L"patch"); itr != end_itr; ++itr)
-		{
-			try {
-				if (fs::is_directory(*itr))
-				{
-					if (fs::exists(*itr / "Game.dll") && fs::exists(*itr / "Patch.mpq"))
-					{
-						base::win::file_version fv((*itr / "Game.dll").c_str());
-						if (fv_str == fv[L"FileVersion"])
-						{
-							result = *itr;
-							return true;
-						}
-					}
-				}
-			}
-			catch(...) {
-			}
-		}
-	}
-	catch(...) {
-	}
-
-	return false;
-}
-
 void DllModule::Attach()
 {
 	base::warcraft3::command_line::parse([&](std::wstring const& key, std::wstring const& val){
@@ -350,31 +270,32 @@ void DllModule::Attach()
 		IsWideScreenSupport     = "0" != table["MapTest"]["LaunchWideScreenSupport"];
 		IsDisableSecurityAccess = "0" != table["MapTest"]["LaunchDisableSecurityAccess"];
 		IsEnableDirect3D9       = "Direct3D 9" == table["MapTest"]["LaunchRenderingEngine"];
-
-		try {
-			if (table["War3Patch"]["Option"] == "1")
-			{
-				if (table["MapSave"]["Option"] == "1")
-				{
-					SearchPatch(patch_path, L"1, 20, 4, 6074");
-				}
-				else if (table["MapSave"]["Option"] == "2")
-				{
-					SearchPatch(patch_path, L"1, 24, 4, 6387");
-				}
-			}
-			else if (table["War3Patch"]["Option"] == "2")
-			{
-				patch_path = ydwe_path / L"share" / L"patch"/ table["War3Patch"]["DirName"];
-			}
-		}
-		catch (...) {
-		}
 	} 
 	catch (...) {
 	}
 
-	RealLoadLibraryA  = base::hook::iat(L"War3.exe", "kernel32.dll", "LoadLibraryA", (uintptr_t)FakeLoadLibraryA);
+	g_DllMod.hGameDll = GetModuleHandleW(L"Game.dll");
+
+	if (g_DllMod.IsWideScreenSupport)
+	{
+		WideScreen::initialize();
+	}
+
+	RealCreateWindowExA = base::hook::iat(L"Game.dll", "user32.dll", "CreateWindowExA", (uintptr_t)FakeCreateWindowExA);
+	if (g_DllMod.IsDisableSecurityAccess)
+	{
+		RealGameLoadLibraryA = base::hook::iat(L"Game.dll", "kernel32.dll", "LoadLibraryA", (uintptr_t)FakeGameLoadLibraryA);
+	}
+
+	g_DllMod.LoadPlugins();
+	auto_enter::game_status::initialize(g_DllMod.hGameDll);
+
+	if (g_DllMod.IsEnableDirect3D9)
+	{
+		EnableDirect3D9(g_DllMod.hGameDll);
+	}
+
+	scores::rpg::hook();
 }
 
 void DllModule::Detach()
