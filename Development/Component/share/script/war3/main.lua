@@ -65,3 +65,15 @@ event.on('GameDll加载', function ()
         end
     end
 end)
+
+if '0' ~= global_config.MapTest.LaunchDisableSecurityAccess then
+    event.on('GameDll加载', function()
+        sandbox_iat('void*(__stdcall*)(const char*)', 'Game.dll', 'kernel32.dll', 'LoadLibraryA', function (rLoadLibraryA, dllname)
+            dllname = ffi.string(dllname)
+            if dllname:lower() == 'advapi32.dll' then
+                return nil
+            end
+            return rLoadLibraryA(dllname)
+        end)
+    end)
+end

@@ -27,7 +27,6 @@ public:
 	bool     IsLockingMouse;
 	bool     IsFixedRatioWindowed;
 	bool     IsWideScreenSupport;
-	bool     IsDisableSecurityAccess;
 	bool     IsEnableDirect3D9;
 	fs::path ydwe_path;
 

@@ -24,7 +24,6 @@ namespace WideScreen
 	void initialize();
 }
 
-uintptr_t RealGameLoadLibraryA  = 0;
 uintptr_t RealCreateWindowExA = 0;
 
 FullWindowedMode fullWindowedMode;
@@ -90,17 +89,6 @@ bool EnableDirect3D9(HMODULE gamedll)
 		return false;
 	}
 	return base::hook::dyn_iat(gamedll, L"d3d8.dll", "Direct3DCreate8", 0, Direct3DCreate8);
-}
-
-HMODULE __stdcall FakeGameLoadLibraryA(LPCSTR lpFilePath)
-{
-	fs::path lib((const char*)lpFilePath);
-	if (lib == "advapi32.dll")
-	{
-		return NULL;
-	}
-
-	return base::std_call<HMODULE>(RealGameLoadLibraryA, lpFilePath);
 }
 
 DllModule::DllModule()
@@ -207,7 +195,6 @@ void DllModule::Attach()
 		IsLockingMouse          = "0" != table["MapTest"]["LaunchLockingMouse"];
 		IsFixedRatioWindowed    = "0" != table["MapTest"]["LaunchFixedRatioWindowed"];
 		IsWideScreenSupport     = "0" != table["MapTest"]["LaunchWideScreenSupport"];
-		IsDisableSecurityAccess = "0" != table["MapTest"]["LaunchDisableSecurityAccess"];
 		IsEnableDirect3D9       = "Direct3D 9" == table["MapTest"]["LaunchRenderingEngine"];
 	} 
 	catch (...) {
@@ -221,10 +208,6 @@ void DllModule::Attach()
 	}
 
 	RealCreateWindowExA = base::hook::iat(L"Game.dll", "user32.dll", "CreateWindowExA", (uintptr_t)FakeCreateWindowExA);
-	if (g_DllMod.IsDisableSecurityAccess)
-	{
-		RealGameLoadLibraryA = base::hook::iat(L"Game.dll", "kernel32.dll", "LoadLibraryA", (uintptr_t)FakeGameLoadLibraryA);
-	}
 
 	auto_enter::game_status::initialize(g_DllMod.hGameDll);
 
