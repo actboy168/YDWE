@@ -1,4 +1,5 @@
 require "i18n"
+require "filesystem"
 local uni = require 'ffi.unicode'
 
 function _(str)

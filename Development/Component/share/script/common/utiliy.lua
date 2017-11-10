@@ -15,6 +15,8 @@ function fs.war3_path()
 	return fs.__war3_path
 end
 
+require "localization"
+
 io.__open = io.open
 function io.open(file_path, mode)
 	local f, e = io.__open(__(file_path:string()), mode)

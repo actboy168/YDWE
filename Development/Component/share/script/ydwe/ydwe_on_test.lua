@@ -75,33 +75,8 @@ local function host_copy_dll(curdir)
 	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'msvcp140.dll', curdir / 'msvcp140.dll', true)
 end
 
-local function get_war3_version()
-	if global_config["War3Patch"]["Option"] == "1" then
-		if global_config["MapSave"]["Option"] == "1" then
-			return sys.war3_version {
-				major    = 1,
-				minor    = 20,
-				revision = 4,
-				build    = 6074,
-			}
-		else
-			return sys.war3_version {
-				major    = 1,
-				minor    = 24,
-				revision = 4,
-				build    = 6387,
-			}
-		end
-	elseif global_config["War3Patch"]["Option"] == "2" then
-		return sys.war3_version {
-			file = fs.ydwe_path() / 'share' / 'patch' / global_config["War3Patch"]["DirName"] / 'Game.dll'
-		}
-	end
-	return war3_version
-end
-
 local function host_save_config(curdir, mappath, autostart)
-	local ver = get_war3_version()
+	local ver = global_config_war3_version()
 	local jasspath
 	if ver:is_new() then
 		jasspath = fs.ydwe_path() / "jass" / "system" / "ht"
