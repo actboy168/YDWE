@@ -17,7 +17,6 @@ public:
 	void ThreadStart();
 	void ThreadStop();
 	void ThreadFunc();
-	void LoadPlugins();
 	void SetWindow(HWND hwnd);
 
 	HMODULE  hGameDll;

@@ -1,7 +1,10 @@
 local ffi = require 'ffi'
 ffi.cdef[[
-	void* LoadLibraryW(const wchar_t* lpLibFileName);
-	int FreeLibrary(void* hLibModule);
+    typedef void (*ffi_anyfunc)();
+	void* LoadLibraryA(const char* libname);
+	void* LoadLibraryW(const wchar_t* libname);
+    int   FreeLibrary(void* lib);
+    ffi_anyfunc GetProcAddress(void* lib, const char* name);
 ]]
 
 local uni = require 'ffi.unicode'
@@ -13,4 +16,8 @@ end
 
 function sys.unload_library(module)
 	return ffi.C.FreeLibrary(module)
+end
+
+function sys.get_proc_address(lib, name, define)
+    return ffi.cast(define, ffi.C.GetProcAddress(lib, name))
 end

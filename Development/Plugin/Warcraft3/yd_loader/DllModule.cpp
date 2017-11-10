@@ -148,67 +148,6 @@ void DllModule::SetWindow(HWND hwnd)
 	hWar3Wnd = hwnd;
 }
 
-void DllModule::LoadPlugins()
-{
-	try {
-		fs::path plugin_path = ydwe_path / L"plugin" / L"warcraft3";
-
-		base::ini::table table;
-		try {
-			auto buf = base::file::read_stream(plugin_path / L"config.cfg").read<std::string>();
-			base::ini::read(table, buf.c_str());
-		}
-		catch(...) {
-		}
-
-		fs::directory_iterator end_itr;
-		for (fs::directory_iterator itr(plugin_path); itr != end_itr; ++itr)
-		{
-			try {
-				if (!fs::is_directory(*itr))
-				{
-					std::string utf8_name = base::w2u(itr->path().filename().wstring());
-
-					if ((! base::path::equal(itr->path().filename(), L"yd_loader.dll"))
-						&& base::path::equal(itr->path().extension(), L".dll")
-						&& ("0" != table["Enable"][utf8_name]))
-					{
-						HMODULE module = ::LoadLibraryW(itr->path().c_str());
-						if (module)
-						{
-							plugin_mapping.insert(std::make_pair(utf8_name, module));
-						}
-					}
-				}
-			}
-			catch(...) {
-			}
-		}
-
-		for (auto it = plugin_mapping.begin(); it != plugin_mapping.end(); )
-		{
-			HMODULE            module = it->second;
-			uintptr_t fInitialize = (uintptr_t)::GetProcAddress(module, "Initialize");
-			if (fInitialize)
-			{
-				++it;
-			}
-			else
-			{
-				::FreeLibrary(module);
-				plugin_mapping.erase(it++);
-			}
-		}
-
-		for (auto it = plugin_mapping.begin(); it != plugin_mapping.end(); ++it)
-		{
-			base::c_call<void>(::GetProcAddress(it->second, "Initialize"));
-		}
-	}
-	catch(...) {
-	}
-}
-
 void ResetConfig(base::ini::table& table)
 {
 	table["MapSave"]["Option"] = "0";
@@ -287,7 +226,6 @@ void DllModule::Attach()
 		RealGameLoadLibraryA = base::hook::iat(L"Game.dll", "kernel32.dll", "LoadLibraryA", (uintptr_t)FakeGameLoadLibraryA);
 	}
 
-	g_DllMod.LoadPlugins();
 	auto_enter::game_status::initialize(g_DllMod.hGameDll);
 
 	if (g_DllMod.IsEnableDirect3D9)

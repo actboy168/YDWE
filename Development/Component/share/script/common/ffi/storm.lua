@@ -1,9 +1,7 @@
 local ffi = require 'ffi'
-ffi.cdef[[
-	uint32_t LoadLibraryA(const char* lpFileName);
-    typedef void (*ffi_anyfunc)();
-	ffi_anyfunc GetProcAddress(uint32_t hModule, uint32_t ord);
+require 'ffi.loadlibrary'
 
+ffi.cdef[[
     typedef bool (*__stdcall SFileOpenArchive)(const char* szArchivename, unsigned long dwPriority, unsigned long dwFlags, uint32_t* handle);
     typedef bool (*__stdcall SFileLoadFile)(const char* filename, const void** pbuf, uint32_t* plen, uint32_t reservelen, void* overlapped_ptr);
     typedef bool (*__stdcall SFileUnloadFile)(const void* buf);
@@ -13,11 +11,11 @@ ffi.cdef[[
 
 local uni = require 'ffi.unicode'
 local storm = ffi.C.LoadLibraryA('storm.dll')
-local SFileOpenArchive = ffi.cast('SFileOpenArchive', ffi.C.GetProcAddress(storm, 266))
-local SFileLoadFile = ffi.cast('SFileLoadFile', ffi.C.GetProcAddress(storm, 279))
-local SFileUnloadFile = ffi.cast('SFileUnloadFile', ffi.C.GetProcAddress(storm, 280))
-local SFileExists = ffi.cast('SFileExists', ffi.C.GetProcAddress(storm, 288))
-local SStrHash = ffi.cast('SStrHash', ffi.C.GetProcAddress(storm, 590))
+local SFileOpenArchive = ffi.cast('SFileOpenArchive', ffi.C.GetProcAddress(storm, ffi.cast('const char*', 266)))
+local SFileLoadFile = ffi.cast('SFileLoadFile', ffi.C.GetProcAddress(storm, ffi.cast('const char*', 279)))
+local SFileUnloadFile = ffi.cast('SFileUnloadFile', ffi.C.GetProcAddress(storm, ffi.cast('const char*', 280)))
+local SFileExists = ffi.cast('SFileExists', ffi.C.GetProcAddress(storm, ffi.cast('const char*', 288)))
+local SStrHash = ffi.cast('SStrHash', ffi.C.GetProcAddress(storm, ffi.cast('const char*', 590)))
 
 local storm = {}
 
