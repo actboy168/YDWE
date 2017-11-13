@@ -57,7 +57,7 @@ end
 
 
 local function single_test(commandline, mappath)
-	return '"' .. (fs.war3_path() / 'war3.exe'):string() .. '" -loadfile "' .. mappath:string() .. '"' .. commandline
+	return '"' .. (fs.ydwe_path() / 'ydwe.exe'):string() .. '" -war3 -loadfile "' .. mappath:string() .. '"' .. commandline
 end
 
 local function path_sub(a, b)
@@ -113,7 +113,7 @@ local function host_test(commandline, mappath)
 	host_copy_dll(curdir)
 	host_save_config(curdir, mappath, host_test + 1)
 	ydhost:process_create(curdir / 'ydhost.exe', curdir)
-	local cmd = '"' .. (fs.war3_path() / 'war3.exe'):string() .. '"' .. commandline .. ' -auto'
+	local cmd = '"' .. (fs.ydwe_path() / 'ydwe.exe'):string() .. '" -war3 ' .. commandline .. ' -auto'
 	if host_test == 0 then
 		return cmd, 1
 	end
@@ -141,18 +141,6 @@ function event.EVENT_TEST_MAP(event_data)
 	local commandline = ""
 	local n = 0
 
-	-- 是否OpenGL方式？
-	if global_config["MapTest"]["LaunchRenderingEngine"] == "OpenGL" then
-		commandline = commandline .. " -opengl"
-	end
-
-	-- 是否窗口方式？
-	if global_config["MapTest"]["LaunchWindowed"] ~= "0" then
-		commandline = commandline .. " -window"
-	end
-
-	commandline = commandline .. ' -ydwe "' .. fs.ydwe_path():string() .. '"'
-
 	log.debug("Testing " .. tostring(global_config["MapTest"]["EnableHost"]))
 	if global_config["MapTest"]["EnableHost"] == "1" then
 		commandline, n = host_test(commandline, mappath)
@@ -163,8 +151,7 @@ function event.EVENT_TEST_MAP(event_data)
 	local result = false
 	-- 启动魔兽开始测试...
 	for i = 1, n do
-		local war3_helper_dll = fs.ydwe_path() / "plugin" / "warcraft3" / "yd_loader.dll"
-		result = sys.spawn_inject(event_data.application_name, commandline, nil, war3_helper_dll)
+		result = sys.spawn(fs.ydwe_path() / 'ydwe.exe', commandline)
 	end
 
 	log.debug("********************* on test end *********************")
