@@ -31,9 +31,14 @@ int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
 	return results;
 }
 
+static int errorfunc(lua_State* L)
+{
+	luaL_traceback(L, L, lua_tostring(L, 1), 0);
+	return 1;
+}
+
 LuaEngine::LuaEngine()
 	: L(nullptr)
-	, lg()
 { }
 
 LuaEngine::~LuaEngine()
@@ -41,10 +46,13 @@ LuaEngine::~LuaEngine()
 	L = nullptr;
 }
 
-bool LuaEngine::Initialize(const fs::path& root, const std::wstring& name)
+bool LuaEngine::Initialize(const std::wstring& name)
 {
-	logging::initialize(root.c_str(), name);
-	lg = logging::get_logger("root");
+	fs::path ydwe = base::path::self().remove_filename().remove_filename();
+
+	logging::manager* mgr = new logging::manager((ydwe / L"logs").c_str(), name);
+
+	logging::logger* lg = mgr->get_logger("root");
 	LOGGING_INFO(lg) << "------------------------------------------------------";
 
 	try
@@ -58,16 +66,36 @@ bool LuaEngine::Initialize(const fs::path& root, const std::wstring& name)
 		base::hook::inline_install(&RealLuaPcall, (uintptr_t)FakeLuaPcall);
 #endif
 		L = luaL_newstate();
+
 		if (!L)
 		{
 			LOGGING_FATAL(lg) << "Could not initialize LuaEngine. Program may not work correctly!";
 			return false;
 		}
 
+		logging::set_manager(L, mgr);
+
 		luaL_openlibs(L);
 		luaL_requiref(L, "log", luaopen_log, 1);
 		lua_pop(L, 1);
 		LOGGING_DEBUG(lg) << "Initialize LuaEngine successfully.";
+
+		SetCPath(ydwe / L"bin" / L"modules" / L"?.dll");
+		fs::path ydwedev = ydwe.parent_path().remove_filename().remove_filename();
+		if (fs::exists(ydwedev / "build.root")) {
+			ydwe = ydwedev / L"Component";
+		}
+		SetPath(ydwe / L"share" / L"script" / "common" / L"?.lua", ydwe / L"share" / L"script" / name / L"?.lua");
+
+		lua_pushcfunction(L, errorfunc);
+		lua_getglobal(L, "require");
+		lua_pushstring(L, "main");
+		if (LUA_OK != lua_pcall(L, 1, 0, -3))
+		{
+			LOGGING_ERROR(lg) << "exception: " << lua_tostring(L, -1);
+			lua_pop(L, 1);
+			return false;
+		}
 		return true;
 	}
 	catch (std::exception const& e)
@@ -88,30 +116,13 @@ bool LuaEngine::Uninitialize()
 {
 	if (L)
 	{
+		logging::manager* mgr = logging::get_manager(L);
 		lua_close(L);
 		L = nullptr;
-		LOGGING_INFO(lg) << "LuaEngine has been shut down.";
-	}
-	return true;
-}
-
-static int errorfunc(lua_State* L)
-{
-	luaL_traceback(L, L, lua_tostring(L, 1), 0);
-	return 1;
-}
-
-bool LuaEngine::Require(const char* file)
-{
-	if (!L) return false;
-	lua_pushcfunction(L, errorfunc);
-	lua_getglobal(L, "require");
-	lua_pushstring(L, file);
-	if (LUA_OK != lua_pcall(L, 1, 0, -3))
-	{
-		LOGGING_ERROR(lg) << "exception: " << lua_tostring(L, -1);
-		lua_pop(L, 1);
-		return false;
+		if (mgr) {
+			LOGGING_INFO(mgr->get_logger("root")) << "LuaEngine has been shut down.";
+			delete mgr;
+		}
 	}
 	return true;
 }

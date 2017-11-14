@@ -1,10 +1,8 @@
 #include <Windows.h>
-#include <locale>						  		
-#include <base/filesystem.h>
-#include <base/path/self.h>
-#include <base/util/dynarray.h>
+#include <locale>
 #include <array>
-#include "../LuaEngine/LuaEngine.h"
+#include <base/util/dynarray.h>
+#include "LuaEngine.h"
 
 LuaEngine gLuaEngine;
 
@@ -33,17 +31,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 		{
 			std::locale::global(std::locale("", LC_CTYPE));
 			std::wstring name = getenv(L"ydwe-process-name");
-			fs::path ydwe = base::path::self().remove_filename().remove_filename();
-			if (gLuaEngine.Initialize(ydwe / L"logs", name))
-			{
-				gLuaEngine.SetCPath(ydwe / L"bin" / L"modules" / L"?.dll");
-				fs::path ydwedev = ydwe.parent_path().remove_filename().remove_filename();
-				if (fs::exists(ydwedev / "build.root")) {
-					ydwe = ydwedev / L"Component";
-				}
-				gLuaEngine.SetPath(ydwe / L"share" / L"script" / "common" / L"?.lua", ydwe / L"share" / L"script" / name / L"?.lua");
-				gLuaEngine.Require("main");
-			}
+			gLuaEngine.Initialize(name);
 		}
 		catch (...)
 		{

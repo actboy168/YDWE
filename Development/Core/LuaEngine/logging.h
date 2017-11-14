@@ -3,6 +3,9 @@
 #include "logging_backend.h"
 #include "logging_logger.h"	 
 #include <base/util/unicode.h>
+#include <map>
+
+struct lua_State;
 
 #define LOGGING_STREAM(lg, lvl) for (bool f = true; f; f = false) logging::make_record_pump((lg), (lvl)).stream()
 #define LOGGING_TRACE(lg)   LOGGING_STREAM(*(lg), logging::trace)
@@ -28,6 +31,31 @@ namespace logging
 {
 	typedef logger_t<sync_frontend<backend>>  logger;
 
-	LUAENGINE_API void    initialize(const fs::path& root, const std::wstring& name);
-	LUAENGINE_API logger* get_logger(const char* name);
+	struct manager {
+		manager(const fs::path& root, const std::wstring& name)
+			: m_root(root)
+			, m_name(name)
+		{ }
+
+		logger* get_logger(const char* name)
+		{
+			auto it = m_loggers.find(name);
+			if (it != m_loggers.end())
+			{
+				return it->second;
+			}
+
+			m_loggers[name] = new logger(name, backend(m_root, m_name));
+			return m_loggers[name];
+		}
+
+		std::map<std::string, logger*> m_loggers;
+		fs::path                       m_root;
+		std::wstring                   m_name;
+	};
+
+	LUAENGINE_API void     set_manager(lua_State* L, manager* mgr);
+	LUAENGINE_API manager* get_manager(lua_State* L);
+	LUAENGINE_API logger*  get_logger(lua_State* L, const char* name);
+	LUAENGINE_API logger*  get_logger(const char* name);
 }

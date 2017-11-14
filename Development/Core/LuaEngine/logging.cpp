@@ -1,28 +1,46 @@
 #include "logging.h"
 #include "logging_backend.h" 
 #include <map>
+#include <lua.hpp>
 
 namespace logging
 {
-	std::map<std::string, logger*> loggers;
-	fs::path                        loggers_root;
-	std::wstring                                   loggers_name;
+	static int LOGGING;
 
-	void initialize(const fs::path& root, const std::wstring& name)
+	lua_State* lastL = nullptr;
+
+	void set_manager(lua_State* L, manager* mgr)
 	{
-		loggers_root = root;
-		loggers_name = name;
+		lua_pushlightuserdata(L, mgr);
+		lua_rawsetp(L, LUA_REGISTRYINDEX, &LOGGING);
+		lastL = L;
+	}
+
+	manager* get_manager(lua_State* L)
+	{
+		if (LUA_TLIGHTUSERDATA != lua_rawgetp(L, LUA_REGISTRYINDEX, &LOGGING)) {
+			lua_pop(L, 1);
+			return nullptr;
+		}
+		manager* res = static_cast<manager*>(lua_touserdata(L, -1));
+		lua_pop(L, 1);
+		return res;
+	}
+
+	logger* get_logger(lua_State* L, const char* name)
+	{
+		manager* mgr = get_manager(L);
+		if (mgr) {
+			return mgr->get_logger(name);
+		}
+		return nullptr;
 	}
 
 	logger* get_logger(const char* name)
 	{
-		auto it = loggers.find(name);
-		if (it != loggers.end())
-		{
-			return it->second;
+		if (!lastL) {
+			return nullptr;
 		}
-
-		loggers[name] = new logger(name, backend(loggers_root, loggers_name));
-		return loggers[name];
+		return get_logger(lastL, name);
 	}
 }

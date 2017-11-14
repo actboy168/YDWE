@@ -5,11 +5,10 @@
 #include <windows.h>
 #include "logging.h"
 
-logging::logger* lg;
-
 int llog_print(lua_State *L)
 {
-	logging::level lv = (logging::level)lua_tointeger(L, lua_upvalueindex(1));
+	logging::logger* lg = (logging::logger*)lua_touserdata(L, lua_upvalueindex(1));
+	logging::level lv = (logging::level)lua_tointeger(L, lua_upvalueindex(2));
 	int n = lua_gettop(L);
 
 	luaL_Buffer b;
@@ -38,7 +37,7 @@ int llog_print(lua_State *L)
 
 int luaopen_log(lua_State* L)
 {
-	lg = logging::get_logger("lua");
+	logging::logger* lg = logging::get_logger(L, "lua");
 
 	struct llog_Reg {
 		const char *name;
@@ -58,8 +57,9 @@ int luaopen_log(lua_State* L)
 	luaL_newlibtable(L, func);
 	for (const llog_Reg* l = func; l->name != NULL; l++)
 	{
+		lua_pushlightuserdata(L, lg);
 		lua_pushinteger(L, l->upvalue);
-		lua_pushcclosure(L, llog_print, 1);
+		lua_pushcclosure(L, llog_print, 2);
 		lua_setfield(L, -2, l->name);
 	}
 	return 1;

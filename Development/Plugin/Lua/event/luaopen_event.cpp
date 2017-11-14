@@ -12,6 +12,8 @@
 
 namespace NYDWE {
 
+	logging::logger* lg;
+
 	static int LuaOnSignal(lua_State* L, TEventData eventData, const base::lua::object& func)
 	{
 		base::lua::guard guard(L);
@@ -75,6 +77,7 @@ namespace NYDWE {
 
 int luaopen_event(lua_State* L)
 {
+	NYDWE::lg = logging::get_logger(L, "event");
 	NYDWE::SetupEvent();
 
 	lua_newtable(L);
