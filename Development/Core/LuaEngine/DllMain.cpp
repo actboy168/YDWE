@@ -4,7 +4,7 @@
 #include <base/util/dynarray.h>
 #include "LuaEngine.h"
 
-LuaEngine gLuaEngine;
+lua_State* L = nullptr;
 
 std::wstring getenv(const wchar_t* varname)
 {
@@ -31,7 +31,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 		{
 			std::locale::global(std::locale("", LC_CTYPE));
 			std::wstring name = getenv(L"ydwe-process-name");
-			gLuaEngine.Initialize(name);
+			L = LuaEngineCreate(name.c_str());
 		}
 		catch (...)
 		{
@@ -40,7 +40,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 	}
 	else if (reason == DLL_PROCESS_DETACH)
 	{
-		gLuaEngine.Uninitialize();
+		if (L) LuaEngineDestory(L);
 	}
 
 	return TRUE;
