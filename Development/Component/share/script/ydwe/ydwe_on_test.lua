@@ -151,7 +151,7 @@ function event.EVENT_TEST_MAP(event_data)
 	local result = false
 	-- 启动魔兽开始测试...
 	for i = 1, n do
-		result = sys.spawn(fs.ydwe_path() / 'ydwe.exe', commandline)
+		result = sys.spawn_inject(fs.ydwe_path() / 'ydwe.exe', commandline)
 	end
 
 	log.debug("********************* on test end *********************")
