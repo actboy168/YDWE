@@ -85,6 +85,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "maphash", "..\..\Plugin\Lua
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hook", "..\..\Plugin\Lua\hook\hook.vcxproj", "{5F15996A-FEFE-4E38-B20E-EE768DA4E557}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "thread", "..\..\Plugin\Lua\thread\thread.vcxproj", "{9C715443-4409-46E8-B87B-C611CC3C1D7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -223,6 +225,10 @@ Global
 		{5F15996A-FEFE-4E38-B20E-EE768DA4E557}.Debug|Win32.Build.0 = Debug|Win32
 		{5F15996A-FEFE-4E38-B20E-EE768DA4E557}.Release|Win32.ActiveCfg = Release|Win32
 		{5F15996A-FEFE-4E38-B20E-EE768DA4E557}.Release|Win32.Build.0 = Release|Win32
+		{9C715443-4409-46E8-B87B-C611CC3C1D7A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9C715443-4409-46E8-B87B-C611CC3C1D7A}.Debug|Win32.Build.0 = Debug|Win32
+		{9C715443-4409-46E8-B87B-C611CC3C1D7A}.Release|Win32.ActiveCfg = Release|Win32
+		{9C715443-4409-46E8-B87B-C611CC3C1D7A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -259,6 +265,7 @@ Global
 		{5A6944D1-71B9-4B21-952A-E2E78C1EBF52} = {918168E0-1677-4614-AEC7-B9CAD7DA3DEC}
 		{2FD4CE30-FF7E-4B7F-806C-293D165E285F} = {ABD67588-6A9A-4ACF-8AF7-D941793740E1}
 		{5F15996A-FEFE-4E38-B20E-EE768DA4E557} = {ABD67588-6A9A-4ACF-8AF7-D941793740E1}
+		{9C715443-4409-46E8-B87B-C611CC3C1D7A} = {ABD67588-6A9A-4ACF-8AF7-D941793740E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2384391F-A0A4-4E20-8F5C-E7AD0F7A9720}

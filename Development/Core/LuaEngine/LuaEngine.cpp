@@ -37,6 +37,17 @@ static int errorfunc(lua_State* L)
 	return 1;
 }
 
+std::wstring str_replace(const wchar_t* str, wchar_t src, wchar_t dst)
+{
+	std::wstring s(str);
+	wchar_t ary_dst[] = { dst, 0 };
+	for (size_t pos = 0; (pos = s.find(src, pos)) != std::wstring::npos; pos++)
+	{
+		s.replace(pos, 1, ary_dst);
+	}
+	return s;
+}
+
 lua_State* LuaEngineCreate(const wchar_t* name)
 {
 	fs::path ydwe = base::path::self().remove_filename().remove_filename();
@@ -82,7 +93,7 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 		}
 
 		fs::path p1 = ydwe / L"share" / L"script" / "common" / L"?.lua";
-		fs::path p2 = ydwe / L"share" / L"script" / name / L"?.lua";
+		fs::path p2 = ydwe / L"share" / L"script" / str_replace(name, L'.', L'/') / L"?.lua";
 		lua_getglobal(L, "package");
 		lua_pushstring(L, (p1.string() + ";" + p2.string()).c_str());
 		lua_setfield(L, -2, "path");
