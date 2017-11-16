@@ -134,8 +134,9 @@ bool LuaEngineStart(lua_State* L)
 	{
 		logging::manager* mgr = logging::get_manager(L);
 		LOGGING_ERROR(mgr->get_logger("root")) << "exception: " << lua_tostring(L, -1);
-		lua_pop(L, 1);
+		lua_pop(L, 2);
 		return false;
 	}
+	lua_pop(L, 1);
 	return true;
 }
