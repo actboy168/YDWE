@@ -83,6 +83,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="luaopen_thread.cpp" />
+    <ClCompile Include="serialize.c" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\LuaEngine\LuaEngine.vcxproj">

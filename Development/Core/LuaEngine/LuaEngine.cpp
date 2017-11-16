@@ -98,17 +98,6 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 		lua_pushstring(L, (p1.string() + ";" + p2.string()).c_str());
 		lua_setfield(L, -2, "path");
 		lua_pop(L, 1);
-
-		lua_pushcfunction(L, errorfunc);
-		lua_getglobal(L, "require");
-		lua_pushstring(L, "main");
-		if (LUA_OK != lua_pcall(L, 1, 0, -3))
-		{
-			LOGGING_ERROR(lg) << "exception: " << lua_tostring(L, -1);
-			lua_pop(L, 1);
-			LuaEngineDestory(L);
-			return nullptr;
-		}
 		return L;
 	}
 	catch (std::exception const& e)
@@ -134,4 +123,19 @@ void LuaEngineDestory(lua_State* L)
 		LOGGING_INFO(mgr->get_logger("root")) << "LuaEngine has been shut down.";
 		delete mgr;
 	}
+}
+
+bool LuaEngineStart(lua_State* L)
+{
+	lua_pushcfunction(L, errorfunc);
+	lua_getglobal(L, "require");
+	lua_pushstring(L, "main");
+	if (LUA_OK != lua_pcall(L, 1, 0, -3))
+	{
+		logging::manager* mgr = logging::get_manager(L);
+		LOGGING_ERROR(mgr->get_logger("root")) << "exception: " << lua_tostring(L, -1);
+		lua_pop(L, 1);
+		return false;
+	}
+	return true;
 }

@@ -32,6 +32,9 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 			std::locale::global(std::locale("", LC_CTYPE));
 			std::wstring name = getenv(L"ydwe-process-name");
 			L = LuaEngineCreate(name.c_str());
+			if (L) {
+				LuaEngineStart(L);
+			}
 		}
 		catch (...)
 		{
