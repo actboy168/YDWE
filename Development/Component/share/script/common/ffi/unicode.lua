@@ -22,16 +22,16 @@ local function a2w(input)
 end
 
 local function w2u(wstr, wlen)
-    local len = ffi.C.WideCharToMultiByte(CP_UTF8, 0, wstr, wlen, nil, 0, nil, nil)
+    local len = ffi.C.WideCharToMultiByte(CP_UTF8, 0, wstr, wlen or -1, nil, 0, nil, nil)
     local str = ffi.new('char[?]', len+1)
-    ffi.C.WideCharToMultiByte(CP_UTF8, 0, wstr, wlen, str, len, nil, nil)
+    ffi.C.WideCharToMultiByte(CP_UTF8, 0, wstr, wlen or -1, str, len, nil, nil)
     return ffi.string(str)
 end
 
 local function w2a(wstr, wlen)
-    local len = ffi.C.WideCharToMultiByte(CP_ACP, 0, wstr, wlen, nil, 0, nil, nil)
+    local len = ffi.C.WideCharToMultiByte(CP_ACP, 0, wstr, wlen or -1, nil, 0, nil, nil)
     local str = ffi.new('char[?]', len)
-    ffi.C.WideCharToMultiByte(CP_ACP, 0, wstr, wlen, str, len, nil, nil)
+    ffi.C.WideCharToMultiByte(CP_ACP, 0, wstr, wlen or -1, str, len, nil, nil)
     return ffi.string(str)
 end
 
