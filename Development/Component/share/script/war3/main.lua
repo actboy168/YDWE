@@ -21,7 +21,7 @@ hook.iat('void*(__stdcall*)(const char*)', 'War3.exe', 'kernel32.dll', 'LoadLibr
         if not lib then
             lib = rLoadLibraryA(dllname)
         end
-        event.emit('GameDll加载')
+        event.emit_once('GameDll加载')
         return lib
     end
     return rLoadLibraryA(dllname)
@@ -33,7 +33,7 @@ event.on('GameDll加载', function ()
         lpWindowName = ffi.string(lpWindowName)
         local res = rCreateWindowExA(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam)
         if lpClassName == 'Warcraft III' and lpWindowName == 'Warcraft III' then
-            event.emit('窗口初始化', res)
+            event.emit_once('窗口初始化', res)
         end
         return res
     end)

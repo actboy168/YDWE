@@ -41,6 +41,7 @@ function trg:remove()
     event.clean[self] = true
 end
 
+local _onces = {}
 local _events = {}
 local ev = {}
 
@@ -68,6 +69,14 @@ function ev.emit(name, ...)
         event.clean = nil
     end
     return res
+end
+
+function ev.emit_once(name, ...)
+    if _onces[name] then
+        return
+    end
+    _onces[name] = true
+    return ev.emit(name, ...)
 end
 
 function ev.on(name, f)
