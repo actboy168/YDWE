@@ -14,9 +14,6 @@ public:
 
 	void Attach();
 	void Detach();
-	void ThreadStart();
-	void ThreadStop();
-	void ThreadFunc();
 	void SetWindow(HWND hwnd);
 
 	HMODULE  hGameDll;
@@ -24,15 +21,9 @@ public:
 	bool     IsWindowMode;
 	bool     IsAuto;
 	bool     IsFullWindowedMode;
-	bool     IsLockingMouse;
 	bool     IsFixedRatioWindowed;
 	bool     IsWideScreenSupport;
 	fs::path ydwe_path;
-
-private:
-	std::shared_ptr<base::thread>   daemon_thread_;
-	std::atomic<bool>               daemon_thread_exit_;
-	std::map<std::string, HMODULE>  plugin_mapping;
 };
 
 extern DllModule g_DllMod;

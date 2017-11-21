@@ -1,6 +1,7 @@
 require 'utiliy'
 require 'config'
 require 'ffi.loadlibrary'
+local getCommandLine = require 'getCommandLine'
 local ffi = require 'ffi'
 local event = require 'ev'
 local storm = require 'ffi.storm'
@@ -77,4 +78,14 @@ if 'Direct3D 9' == global_config.MapTest.LaunchRenderingEngine then
             return d3d8create(ver)
         end)
     end)
+end
+
+if '0' ~= global_config.MapTest.LaunchLockingMouse then
+    local cmd = getCommandLine()
+    if cmd.window then
+        local thd = require 'thread'
+        local channel = require 'channel'
+        local c = channel()
+        thd.thread('war3.window', c)
+    end
 end

@@ -28,8 +28,6 @@ uintptr_t RealCreateWindowExA = 0;
 
 FullWindowedMode fullWindowedMode;
 
-void LockingMouse();
-
 HWND WINAPI FakeCreateWindowExA(
 	DWORD dwExStyle,
 	LPCSTR lpClassName,
@@ -69,7 +67,6 @@ HWND WINAPI FakeCreateWindowExA(
 				}
 			}
 		}
-		g_DllMod.ThreadStart();
 	}
 
 	return hWnd;
@@ -81,39 +78,9 @@ DllModule::DllModule()
 	, IsWindowMode(false)
 	, IsAuto(false)
 	, IsFullWindowedMode(false)
-	, IsLockingMouse(false)
 	, IsFixedRatioWindowed(false)
 	, hGameDll(NULL)
-	, daemon_thread_()
-	, daemon_thread_exit_(false)
 { }
-
-
-
-void DllModule::ThreadStart()
-{
-	daemon_thread_.reset(new base::thread(std::bind(&DllModule::ThreadFunc, this)));
-}
-
-void DllModule::ThreadStop()
-{
-	try {
-		if (daemon_thread_)
-		{
-			daemon_thread_exit_ = true;
-			daemon_thread_->join();
-			daemon_thread_.reset();
-		}
-	} catch (...) { }
-}
-
-void DllModule::ThreadFunc()
-{
-	for (;!daemon_thread_exit_; base::this_thread::sleep_for(10))
-	{
-		LockingMouse();
-	}
-}
 
 void DllModule::SetWindow(HWND hwnd)
 {
@@ -176,7 +143,6 @@ void DllModule::Attach()
 
 
 		IsFullWindowedMode      = "0" != table["MapTest"]["LaunchFullWindowed"];
-		IsLockingMouse          = "0" != table["MapTest"]["LaunchLockingMouse"];
 		IsFixedRatioWindowed    = "0" != table["MapTest"]["LaunchFixedRatioWindowed"];
 		IsWideScreenSupport     = "0" != table["MapTest"]["LaunchWideScreenSupport"];
 	} 

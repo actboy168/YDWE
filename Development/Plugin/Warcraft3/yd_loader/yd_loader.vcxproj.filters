@@ -17,9 +17,6 @@
     <ClCompile Include="DllModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LockingMouse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FullWindowedMode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

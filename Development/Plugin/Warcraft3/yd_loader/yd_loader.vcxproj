@@ -85,7 +85,6 @@
     <ClCompile Include="auto_enter.cpp" />
     <ClCompile Include="FullWindowedMode.cpp" />
     <ClCompile Include="game_status.cpp" />
-    <ClCompile Include="LockingMouse.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="DllModule.cpp" />
     <ClCompile Include="war3_scores.cpp" />
