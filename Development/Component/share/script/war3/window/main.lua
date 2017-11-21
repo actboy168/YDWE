@@ -24,10 +24,8 @@ ffi.cdef[[
     int __stdcall ClipCursor(const struct RECT* lpRect);
 ]]
 
-local findWarWindow = require 'findWarWindow'
-
 local c = channel(arg[1])
-local war3window
+local war3window = arg[2]
 local enable = false
 
 local function IsForegroundWindow()
@@ -44,12 +42,6 @@ local function PtInRect(rect, pt)
 end
 
 local function lock_mouse()
-    if not war3window then
-        war3window = findWarWindow()
-        if not war3window then
-            return
-        end
-    end
     if IsForegroundWindow() then
         local rect = ffi.new('struct RECT')
         local pt = ffi.new('struct POINT')

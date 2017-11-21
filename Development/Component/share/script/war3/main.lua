@@ -28,6 +28,18 @@ hook.iat('void*(__stdcall*)(const char*)', 'War3.exe', 'kernel32.dll', 'LoadLibr
 end)
 
 event.on('GameDll加载', function ()
+    hook.iat('int(__stdcall*)(int,const char*, const char*,int,int,int,int,int,int,int,int,int)', 'Game.dll', 'user32.dll', 'CreateWindowExA', function    (rCreateWindowExA, dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam)
+        lpClassName = ffi.string(lpClassName)
+        lpWindowName = ffi.string(lpWindowName)
+        local res = rCreateWindowExA(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam)
+        if lpClassName == 'Warcraft III' and lpWindowName == 'Warcraft III' then
+            event.emit('窗口初始化', res)
+        end
+        return res
+    end)
+end)
+
+event.on('GameDll加载', function ()
     sys.load_library(fs.ydwe_path() / 'plugin' / 'warcraft3' / 'yd_loader.dll')
 end)
 
@@ -83,9 +95,11 @@ end
 if '0' ~= global_config.MapTest.LaunchLockingMouse then
     local cmd = getCommandLine()
     if cmd.window then
-        local thd = require 'thread'
-        local channel = require 'channel'
-        local c = channel()
-        thd.thread('war3.window', c)
+        event.on('窗口初始化', function(window)
+            local thd = require 'thread'
+            local channel = require 'channel'
+            local c = channel()
+            thd.thread('war3.window', c, window)
+        end)
     end
 end
