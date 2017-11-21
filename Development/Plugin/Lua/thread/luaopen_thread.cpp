@@ -2,7 +2,8 @@
 #include <lua.hpp>
 #pragma warning(pop)
 #include <Windows.h>
-#include <filesystem>
+#include <queue>
+#include <mutex>
 #include <process.h>
 #include <base/util/unicode.h>
 #include "LuaEngine/LuaEngine.h"
@@ -13,7 +14,6 @@ extern "C" {
 }
 
 namespace thread {
-
 
 	class luathread {
 	public:
@@ -80,7 +80,7 @@ namespace thread {
 		return *(luathread*)luaL_checkudata(L, idx, "thread");
 	}
 
-	int constructor(lua_State* L)
+	static int constructor(lua_State* L)
 	{
 		void* storage = lua_newuserdata(L, sizeof(luathread));
 		luaL_getmetatable(L, "thread");
@@ -97,18 +97,126 @@ namespace thread {
 	}
 }
 
+namespace channel {
+
+	struct message_queue
+	: public std::queue<void*>
+	{
+	};
+
+	struct mgr {
+		std::map<int, message_queue*> m_hmap;
+		int                           m_hmax = 0;
+		std::mutex                    m_mtx;
+		typedef std::scoped_lock<std::mutex> lock;
+
+		std::mutex& mutex() {
+			return m_mtx;
+		}
+
+		int open() {
+			++m_hmax;
+			m_hmap[m_hmax] = new message_queue;
+			return m_hmax;
+		}
+
+		void close(int id) {
+			auto it = m_hmap.find(id);
+			if (it == m_hmap.end()) {
+				return;
+			}
+			delete it->second;
+			m_hmap.erase(it);
+
+		}
+
+		message_queue* get(int id) {
+			auto it = m_hmap.find(id);
+			if (it == m_hmap.end()) {
+				return nullptr;
+			}
+			return it->second;
+		}
+	};
+
+	mgr chanmgr;
+
+	static int constructor(lua_State* L)
+	{
+		mgr::lock lock(chanmgr.mutex());
+		lua_pushinteger(L, chanmgr.open());
+		return 1;
+	}
+	static int close(lua_State* L)
+	{
+		mgr::lock lock(chanmgr.mutex());
+		chanmgr.close((int)luaL_checkinteger(L, 1));
+		return 0;
+	}
+	static int send(lua_State* L)
+	{
+		int id = (int)luaL_checkinteger(L, 1);
+		lua_pushcfunction(L, seri_pack);
+		lua_replace(L, 1);
+		int top = lua_gettop(L);
+		lua_call(L, top - 1, 1);
+		void * msg = lua_touserdata(L, 1);
+
+		mgr::lock lock(chanmgr.mutex());
+		message_queue* mq = chanmgr.get(id);
+		if (!mq) {
+			return 0;
+		}
+		mq->push(msg);
+		return 0;
+	}
+	static int recv(lua_State* L)
+	{
+		void* msg;
+		{
+			mgr::lock lock(chanmgr.mutex());
+			message_queue* mq = chanmgr.get((int)luaL_checkinteger(L, 1));
+			if (!mq) {
+				return 0;
+			}
+			if (mq->empty()) {
+				lua_pushboolean(L, 0);
+				return 1;
+			}
+			msg = mq->front();
+			mq->pop();
+		}
+
+		lua_settop(L, 0);
+		lua_pushboolean(L, 1);
+		lua_pushcfunction(L, seri_unpack);
+		lua_pushlightuserdata(L, msg);
+		lua_call(L, 1, LUA_MULTRET);
+		return lua_gettop(L);
+	}
+}
+
 extern "C" __declspec(dllexport)
 int luaopen_thread(lua_State* L)
 {
-	static luaL_Reg mt[] = {
+	static luaL_Reg thread[] = {
 		{ "__gc", thread::destructor },
 		{ NULL, NULL }
 	};
 	luaL_newmetatable(L, "thread");
-	luaL_setfuncs(L, mt, 0);
+	luaL_setfuncs(L, thread, 0);
 	lua_pushvalue(L, -1);
 	lua_setfield(L, -2, "__index");
-	lua_pushcfunction(L, thread::constructor);
+
+	static luaL_Reg api[] = {
+		{ "thread", thread::constructor },
+		{ "channel", channel::constructor },
+		{ "close", channel::close },
+		{ "send", channel::send },
+		{ "recv", channel::recv },
+		{ NULL, NULL }
+	};
+	luaL_newlib(L, api);
 	return 1;
 }
 
