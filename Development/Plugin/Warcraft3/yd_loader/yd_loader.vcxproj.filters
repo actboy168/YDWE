@@ -17,9 +17,6 @@
     <ClCompile Include="DllModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FullWindowedMode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="auto_enter.cpp">
       <Filter>Source Files</Filter>
@@ -36,9 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DllModule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FullWindowedMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="war3_packet.h">

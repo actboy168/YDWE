@@ -18,10 +18,7 @@ public:
 
 	HMODULE  hGameDll;
 	HWND     hWar3Wnd;
-	bool     IsWindowMode;
 	bool     IsAuto;
-	bool     IsFullWindowedMode;
-	bool     IsFixedRatioWindowed;
 	bool     IsWideScreenSupport;
 	fs::path ydwe_path;
 };

@@ -103,3 +103,5 @@ if '0' ~= global_config.MapTest.LaunchLockingMouse then
         end)
     end
 end
+
+require 'full_window'

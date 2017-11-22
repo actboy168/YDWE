@@ -1,5 +1,4 @@
 #include "DllModule.h"
-#include "FullWindowedMode.h"
 #include <base/hook/fp_call.h>
 #include <base/file/stream.h>
 #include <base/hook/iat.h>
@@ -26,8 +25,6 @@ namespace WideScreen
 
 uintptr_t RealCreateWindowExA = 0;
 
-FullWindowedMode fullWindowedMode;
-
 HWND WINAPI FakeCreateWindowExA(
 	DWORD dwExStyle,
 	LPCSTR lpClassName,
@@ -52,21 +49,6 @@ HWND WINAPI FakeCreateWindowExA(
 		{
 			auto_enter::initialize();
 		}
-		if (g_DllMod.IsFullWindowedMode)
-		{
-			fullWindowedMode.Start();
-		}
-		else
-		{
-			if (g_DllMod.IsFixedRatioWindowed)
-			{
-				RECT r;
-				if (::GetWindowRect(hWnd, &r))
-				{
-					FullWindowedMode::FixedRatio(hWnd, r.right - r.left, r.bottom - r.top);
-				}
-			}
-		}
 	}
 
 	return hWnd;
@@ -75,10 +57,7 @@ HWND WINAPI FakeCreateWindowExA(
 
 DllModule::DllModule()
 	: hWar3Wnd(NULL)
-	, IsWindowMode(false)
 	, IsAuto(false)
-	, IsFullWindowedMode(false)
-	, IsFixedRatioWindowed(false)
 	, hGameDll(NULL)
 { }
 
@@ -120,10 +99,6 @@ void DllModule::Attach()
 		{
 			ydwe_path = val;
 		}
-		else if (key == L"window")
-		{
-			IsWindowMode = true;
-		}
 		else if (key == L"auto")
 		{
 			IsAuto = true;
@@ -142,8 +117,6 @@ void DllModule::Attach()
 		}
 
 
-		IsFullWindowedMode      = "0" != table["MapTest"]["LaunchFullWindowed"];
-		IsFixedRatioWindowed    = "0" != table["MapTest"]["LaunchFixedRatioWindowed"];
 		IsWideScreenSupport     = "0" != table["MapTest"]["LaunchWideScreenSupport"];
 	} 
 	catch (...) {
