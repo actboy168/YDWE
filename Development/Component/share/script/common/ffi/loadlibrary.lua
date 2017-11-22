@@ -1,11 +1,11 @@
 local ffi = require 'ffi'
 ffi.cdef[[
     typedef void (*ffi_anyfunc)();
-	void* LoadLibraryA(const char* libname);
-	void* LoadLibraryW(const wchar_t* libname);
-	void* GetModuleHandleW(const wchar_t* libname);
-    int   FreeLibrary(void* lib);
-    ffi_anyfunc GetProcAddress(void* lib, const char* name);
+    int LoadLibraryA(const char* libname);
+    int LoadLibraryW(const wchar_t* libname);
+    int GetModuleHandleW(const wchar_t* libname);
+    int FreeLibrary(int lib);
+    ffi_anyfunc GetProcAddress(int lib, const char* name);
 ]]
 
 local uni = require 'ffi.unicode'

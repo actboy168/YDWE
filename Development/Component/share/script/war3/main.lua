@@ -9,7 +9,7 @@ local hook = require 'ffi.hook'
 
 local _, patch = global_config_war3_version()
 
-hook.iat('void*(__stdcall*)(const char*)', 'War3.exe', 'kernel32.dll', 'LoadLibraryA', function (rLoadLibraryA, dllname)
+hook.iat('int(__stdcall*)(const char*)', 'War3.exe', 'kernel32.dll', 'LoadLibraryA', function (rLoadLibraryA, dllname)
     dllname = ffi.string(dllname)
     log.info('LoadLibraryA', dllname)
     if dllname:lower() == 'game.dll' then
@@ -21,7 +21,7 @@ hook.iat('void*(__stdcall*)(const char*)', 'War3.exe', 'kernel32.dll', 'LoadLibr
         if not lib then
             lib = rLoadLibraryA(dllname)
         end
-        event.emit_once('GameDll加载')
+        event.emit_once('GameDll加载', lib)
         return lib
     end
     return rLoadLibraryA(dllname)
@@ -66,7 +66,7 @@ end)
 
 if '0' ~= global_config.MapTest.LaunchDisableSecurityAccess then
     event.on('GameDll加载', function()
-        hook.iat('void*(__stdcall*)(const char*)', 'Game.dll', 'kernel32.dll', 'LoadLibraryA', function (rLoadLibraryA, dllname)
+        hook.iat('int(__stdcall*)(const char*)', 'Game.dll', 'kernel32.dll', 'LoadLibraryA', function (rLoadLibraryA, dllname)
             dllname = ffi.string(dllname)
             if dllname:lower() == 'advapi32.dll' then
                 return nil

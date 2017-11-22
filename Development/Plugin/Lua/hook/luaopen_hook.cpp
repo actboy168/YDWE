@@ -88,10 +88,21 @@ static void infInline(lua_State* L, hook_t* h) {
 
 static void infIAT(lua_State* L, hook_t* h) {
 	h->type = hook_t::type::IAT;
-	std::wstring modulename = lua_towstring(L, 2);
-	const char* dllename = luaL_checkstring(L, 3);
-	const char* apiename = luaL_checkstring(L, 4);
-	h->real = base::hook::iat(modulename.c_str(), dllename, apiename, h->fake);
+	const char* dllname = luaL_checkstring(L, 3);
+	const char* apiname = nullptr;
+	if (lua_isinteger(L, 4)) {
+		apiname = (const char*)luaL_checkinteger(L, 4);
+	}
+	else {
+		apiname = luaL_checkstring(L, 4);
+	}
+	if (lua_isinteger(L, 2)) {
+		h->real = base::hook::iat((HMODULE)luaL_checkinteger(L, 2), dllname, apiname, h->fake);
+	}
+	else {
+		std::wstring modulename = lua_towstring(L, 2);
+		h->real = base::hook::iat(modulename.c_str(), dllname, apiname, h->fake);
+	}
 }
 
 typedef void(*infHook)(lua_State* L, hook_t* h);

@@ -2,10 +2,16 @@
 #include <lua.hpp>
 #pragma warning(pop)
 #include <Windows.h>
+#include <base/warcraft3/war3_searcher.h>
 
 namespace WideScreen
 {
 	void initialize(HWND War3Wnd);
+}
+
+static int version(lua_State* L) {
+	lua_pushinteger(L, base::warcraft3::get_war3_searcher().get_version());
+	return 1;
 }
 
 static int support_widescreen(lua_State* L) {
@@ -17,6 +23,7 @@ extern "C" __declspec(dllexport)
 int luaopen_war3patch(lua_State* L)
 {
 	static luaL_Reg api[] = {
+		{ "version", version },
 		{ "support_widescreen", support_widescreen },
 		{ NULL, NULL }
 	};
