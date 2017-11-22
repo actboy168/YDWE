@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8989AA40-7E17-11E2-AFF1-D54745EF2D0D}</ProjectGuid>
+    <ProjectGuid>{F39F96F0-FF40-42D3-B83D-789BF373B06F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>yd_loader</RootNamespace>
+    <RootNamespace>war3patch</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -44,66 +44,54 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(Warcraft3PluginBin)</OutDir>
-    <IntDir>$(Warcraft3PluginObj)</IntDir>
+    <OutDir>$(LuaPluginBin)</OutDir>
+    <IntDir>$(LuaPluginObj)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(Warcraft3PluginBin)</OutDir>
-    <IntDir>$(Warcraft3PluginObj)</IntDir>
+    <OutDir>$(LuaPluginBin)</OutDir>
+    <IntDir>$(LuaPluginObj)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <ModuleDefinitionFile>yd_loader.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <AdditionalDependencies>luacore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ModuleDefinitionFile>yd_loader.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <AdditionalDependencies>luacore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="auto_enter.cpp" />
-    <ClCompile Include="game_status.cpp" />
-    <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="DllModule.cpp" />
-    <ClCompile Include="war3_scores.cpp" />
+    <ClCompile Include="luaopen_war3patch.cpp" />
+    <ClCompile Include="WideScreenSupport.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="yd_loader.def" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="auto_enter.h" />
-    <ClInclude Include="DllModule.h" />
-    <ClInclude Include="game_status.h" />
-    <ClInclude Include="war3_packet.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="$(YDWE)\Core\ydbase\ydbase.vcxproj">
+    <ProjectReference Include="..\..\..\Core\LuaEngine\LuaEngine.vcxproj">
+      <Project>{42def9a2-d658-4984-aa00-073b9cc03552}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

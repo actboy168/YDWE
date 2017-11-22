@@ -104,4 +104,11 @@ if '0' ~= global_config.MapTest.LaunchLockingMouse then
     end
 end
 
+if '0' ~= global_config.MapTest.LaunchWideScreenSupport then
+    event.on('窗口初始化', function(window)
+        local war3 = require 'war3patch'
+        war3.support_widescreen(window)
+    end)
+end
+
 require 'full_window'

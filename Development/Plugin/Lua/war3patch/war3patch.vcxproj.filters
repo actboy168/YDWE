@@ -11,10 +11,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="luaopen_thread.cpp">
+    <ClCompile Include="luaopen_war3patch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="serialize.c">
+    <ClCompile Include="WideScreenSupport.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

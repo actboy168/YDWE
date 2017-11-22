@@ -18,11 +18,6 @@ namespace scores { namespace rpg {
 	void hook();
 }}
 
-namespace WideScreen
-{
-	void initialize();
-}
-
 uintptr_t RealCreateWindowExA = 0;
 
 HWND WINAPI FakeCreateWindowExA(
@@ -66,68 +61,16 @@ void DllModule::SetWindow(HWND hwnd)
 	hWar3Wnd = hwnd;
 }
 
-void ResetConfig(base::ini::table& table)
-{
-	table["MapSave"]["Option"] = "0";
-	table["War3Patch"]["Option"] = "0";
-	table["MapTest"]["LaunchRenderingEngine"] = "Direct3D 8";
-	table["MapTest"]["LaunchWindowed"] = "1";
-	table["MapTest"]["LaunchFullWindowed"] = "0";
-	table["MapTest"]["LaunchWideScreenSupport"] = "1";
-	table["MapTest"]["LaunchLockingMouse"] = "0";
-	table["MapTest"]["LaunchFixedRatioWindowed"] = "0";
-	table["MapTest"]["LaunchDisableSecurityAccess"] = "0";	
-	table["ScriptCompiler"]["EnableJassHelper"] = "1";
-	table["ScriptCompiler"]["EnableJassHelperDebug"] = "0";
-	table["ScriptCompiler"]["EnableJassHelperOptimization"] = "1";
-	table["ScriptCompiler"]["EnableCJass"] = "0";
-	table["PJass"]["Option"] = "0";
-	table["ScriptInjection"]["Option"] = "0";
-	table["HostTest"]["Option"] = "0";
-	table["ThirdPartyPlugin"]["EnableDotNetSupport"] = "1";
-	table["ThirdPartyPlugin"]["EnableTesh"] = "1";
-	table["ThirdPartyPlugin"]["EnableYDTrigger"] = "1";
-	table["FeatureToggle"]["EnableManualNewId"] = "0";
-	table["FeatureToggle"]["EnableTriggerCopyEncodingAutoConversion"] = "1";
-	table["FeatureToggle"]["EnableShowInternalAttributeId"] = "0";
-}
-
 void DllModule::Attach()
 {
-	base::warcraft3::command_line::parse([&](std::wstring const& key, std::wstring const& val){
-		if (key == L"ydwe")
-		{
-			ydwe_path = val;
-		}
-		else if (key == L"auto")
+	base::warcraft3::command_line::parse([&](std::wstring const& key, std::wstring const&){
+		if (key == L"auto")
 		{
 			IsAuto = true;
 		}
 	});
 
-	try {
-		base::ini::table table;
-		ResetConfig(table);
-
-		try {
-			auto buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<std::string>();
-			base::ini::read(table, buf.c_str());
-		}
-		catch (...) {
-		}
-
-
-		IsWideScreenSupport     = "0" != table["MapTest"]["LaunchWideScreenSupport"];
-	} 
-	catch (...) {
-	}
-
 	g_DllMod.hGameDll = GetModuleHandleW(L"Game.dll");
-
-	if (g_DllMod.IsWideScreenSupport)
-	{
-		WideScreen::initialize();
-	}
 
 	RealCreateWindowExA = base::hook::iat(L"Game.dll", "user32.dll", "CreateWindowExA", (uintptr_t)FakeCreateWindowExA);
 

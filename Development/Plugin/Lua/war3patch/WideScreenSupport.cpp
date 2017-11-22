@@ -3,16 +3,16 @@
 #include <base/hook/inline.h>
 #include <base/hook/fp_call.h>
 #include <stdint.h>
-#include "DllModule.h"
 
 namespace WideScreen 
 {
+	static HWND hWar3Wnd = NULL;
 	static uintptr_t fake = 0;
 
 	static int __fastcall real(int32_t ecx, int32_t edx, float a2, float a3, float a4, float a5)
 	{
 		RECT r;
-		if (::GetWindowRect(g_DllMod.hWar3Wnd, &r))
+		if (::GetWindowRect(hWar3Wnd, &r))
 		{
 			float fWideScreenMul = ((float)(r.right - r.left) / (float)(r.bottom - r.top)) / (4.0f / 3.0f);
 			a2 *= fWideScreenMul;
@@ -77,8 +77,10 @@ namespace WideScreen
 		return ptr;
 	}
 
-	void initialize()
+	void initialize(HWND War3Wnd)
 	{
+		hWar3Wnd = War3Wnd;
+
 		static uintptr_t address = search();
 		fake = address;
 		base::hook::inline_install(&fake, (uintptr_t)real);

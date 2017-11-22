@@ -19,8 +19,6 @@ public:
 	HMODULE  hGameDll;
 	HWND     hWar3Wnd;
 	bool     IsAuto;
-	bool     IsWideScreenSupport;
-	fs::path ydwe_path;
 };
 
 extern DllModule g_DllMod;
