@@ -4,15 +4,7 @@ if not fs.exists(root) then
 end
 
 local stormlib = require 'ffi.stormlib'
-local loader = require 'loader'
-local sandbox = require 'sandbox'
-local w2l = sandbox('w3x2lni', {
-    ['w3xparser'] = require 'w3xparser',
-    ['lni-c']     = require 'lni-c',
-    ['lpeg']      = require 'lpeg',
-    ['loader']    = require 'loader',
-    ['io']        = { open = function(filename, mode) return f end },
-})
+local w2l = require 'w3x2lni_in_sandbox'
 
 local slk
 local obj
@@ -490,16 +482,16 @@ local function initialize(mappath)
     if not map then
         return
     end
-    function loader:on_mpq_load(filename)
+    function w2l:on_mpq_load(filename)
         return io.load(root / 'share' / 'mpq' / 'units' / filename)
     end
-    function loader:on_map_load(filename)
+    function w2l:on_map_load(filename)
         return map:load_file(filename)
     end
-    function loader:on_map_save(filename, buf)
+    function w2l:on_map_save(filename, buf)
         return map:save_file(filename, buf)
     end
-    function loader:on_map_remove(filename)
+    function w2l:on_map_remove(filename)
         return map:remove_file(filename)
     end
     w2l:set_config(get_config())
