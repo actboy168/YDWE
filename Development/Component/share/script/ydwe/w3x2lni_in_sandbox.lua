@@ -9,34 +9,6 @@ local w2l = sandbox('w3x2lni', {
     ['io']        = { open = function(filename) return io.open(fs.path(filename)) end },
 })
 
-function loader:mpq_load(filename)
-    if self.on_mpq_load then
-        return self:on_mpq_load(filename)
-    end
-    return nil
-end
-
-function loader:map_load(filename)
-    if self.on_map_load then
-        return self:on_map_load(filename)
-    end
-    return nil
-end
-
-function loader:map_save(filename, buf)
-    if self.on_map_save then
-        return self:on_map_save(filename, buf)
-    end
-    return false
-end
-
-function loader:map_remove(filename)
-    if self.on_map_remove then
-        return self:on_map_remove(filename)
-    end
-    return false
-end
-
 local mt = {}
 setmetatable(mt, mt)
 
@@ -54,10 +26,8 @@ function mt:__index(key)
 end
 
 function mt:__newindex(key, value)
-    if key == 'on_mpq_load' or key == 'on_map_load' or key == 'on_map_save' or key == 'on_map_remove' then
+    if key == 'mpq_load' or key == 'map_load' or key == 'map_save' or key == 'map_remove' then
         loader[key] = value
-    else
-        w2l[key] = value
     end
 end
 

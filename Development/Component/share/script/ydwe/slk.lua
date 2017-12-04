@@ -482,16 +482,16 @@ local function initialize(mappath)
     if not map then
         return
     end
-    function w2l:on_mpq_load(filename)
+    function w2l:mpq_load(filename)
         return io.load(root / 'share' / 'mpq' / 'units' / filename)
     end
-    function w2l:on_map_load(filename)
+    function w2l:map_load(filename)
         return map:load_file(filename)
     end
-    function w2l:on_map_save(filename, buf)
+    function w2l:map_save(filename, buf)
         return map:save_file(filename, buf)
     end
-    function w2l:on_map_remove(filename)
+    function w2l:map_remove(filename)
         return map:remove_file(filename)
     end
     w2l:set_config(get_config())
