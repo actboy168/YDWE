@@ -7,7 +7,6 @@ local w3xparser = require 'w3xparser'
 local lni       = require 'lni-c'
 
 local w2l      = root / 'plugin' / 'w3x2lni'
-local mpq      = root / 'share' / 'mpq' / 'units'
 local defined  = w2l / 'defined'
 
 local info       = lni(assert(io.load(w2l / 'info.ini')), 'info.ini')
