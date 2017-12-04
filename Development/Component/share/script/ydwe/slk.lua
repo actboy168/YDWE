@@ -4,7 +4,6 @@ if not fs.exists(root) then
 end
 
 local stormlib = require 'ffi.stormlib'
-local w2l = require 'w3x2lni_in_sandbox'
 
 local slk
 local obj
@@ -451,6 +450,25 @@ local function create_report()
     end
 end
 
+local function w3x2lni(map)
+    local loader = {}
+    function loader:mpq_load(filename)
+        return io.load(root / 'share' / 'mpq' / 'units' / filename)
+    end
+    function loader:map_load(filename)
+        return map:load_file(filename)
+    end
+    function loader:map_save(filename, buf)
+        return map:save_file(filename, buf)
+    end
+    function loader:map_remove(filename)
+        return map:remove_file(filename)
+    end
+    local w2l = (require 'w3x2lni_in_sandbox')(loader)
+    w2l:set_config(get_config())
+    return w2l
+end
+
 local slk_proxy = {}
 
 function slk_proxy:refresh(mappath)
@@ -459,6 +477,7 @@ function slk_proxy:refresh(mappath)
     end
     create_report()
     local map = stormlib.attach(mappath)
+    local w2l = w3x2lni(map)
     for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
         if used[name] then
             local buf = w2l:backend_obj(name, obj[name])
@@ -482,19 +501,7 @@ local function initialize(mappath)
     if not map then
         return
     end
-    function w2l:mpq_load(filename)
-        return io.load(root / 'share' / 'mpq' / 'units' / filename)
-    end
-    function w2l:map_load(filename)
-        return map:load_file(filename)
-    end
-    function w2l:map_save(filename, buf)
-        return map:save_file(filename, buf)
-    end
-    function w2l:map_remove(filename)
-        return map:remove_file(filename)
-    end
-    w2l:set_config(get_config())
+    local w2l = w3x2lni(map)
     w2l:frontend(slk)
     default = w2l:get_default()
     metadata = w2l:metadata()

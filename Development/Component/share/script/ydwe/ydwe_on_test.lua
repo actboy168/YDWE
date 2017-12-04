@@ -1,5 +1,5 @@
 local stormlib = require 'ffi.stormlib'
-local w2l = require 'w3x2lni_in_sandbox'
+local w2l = (require 'w3x2lni_in_sandbox')()
 
 local mapdump = require 'mapdump'
 

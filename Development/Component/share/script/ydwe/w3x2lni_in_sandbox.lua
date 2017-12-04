@@ -9,26 +9,14 @@ local w2l = sandbox('w3x2lni', {
     ['io']        = { open = function(filename) return io.open(fs.path(filename)) end },
 })
 
-local mt = {}
-setmetatable(mt, mt)
-
-function mt:__index(key)
-    local value = w2l[key]
-    if type(value) == 'function' then
-        return function (obj, ...)
-            if obj == self then
-                obj = w2l
-            end
-            return value(obj, ...)
+return function (new_loader)
+    for k in pairs(loader) do
+        loader[k] = nil
+    end
+    if new_loader then
+        for k, v in pairs(new_loader) do
+            loader[k] = v
         end
     end
-    return value
+    return w2l
 end
-
-function mt:__newindex(key, value)
-    if key == 'mpq_load' or key == 'map_load' or key == 'map_save' or key == 'map_remove' then
-        loader[key] = value
-    end
-end
-
-return mt
