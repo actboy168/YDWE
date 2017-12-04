@@ -181,10 +181,10 @@ function mt:set_config(config)
     self.mpq = self.config.mpq
     if self.config.version == 'Melee' then
         self.agent = self.mpq
-        self.default = self.mpq .. '\\prebuilt\\Melee'
+        self.default = 'prebuilt\\' .. self.mpq .. '\\Melee'
     else
         self.agent = self.mpq .. '\\Custom_V1'
-        self.default = self.mpq .. '\\prebuilt\\Custom'
+        self.default = 'prebuilt\\' .. self.mpq .. '\\Custom'
     end
 end
 
