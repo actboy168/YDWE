@@ -27,7 +27,7 @@ local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / 
 if not fs.exists(root) then
 	root = fs.ydwe_path()
 end
-package.path = package.path .. ';' .. uni.u2a((root / 'plugin' / 'w3x2lni' / 'script' / '?.lua'):string())
+package.path = package.path .. ';' .. uni.u2a((root / 'plugin' / '?' / 'init.lua'):string())
 
 require "event"
 require "virtual_mpq"

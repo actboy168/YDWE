@@ -24,7 +24,15 @@ return function (input, jass, write)
     if not map then
         return error('Couldn\'t open map.')
     end
-	local w2l = require 'w3x2lni'
+    local sandbox = require 'sandbox'
+    local w2l = sandbox('w3x2lni', {
+        ['w3xparser'] = require 'w3xparser',
+        ['lni-c']     = require 'lni-c',
+        ['lpeg']      = require 'lpeg',
+        ['loader']    = require 'loader',
+        ['io']        = { open = function(filename) return io.open(fs.path(filename)) end },
+    })
+    
     local info = w2l:read_w3i(map:load_file 'war3map.w3i')
     map:close()
     local map_options = (info['选项']['对战地图'] << 2)

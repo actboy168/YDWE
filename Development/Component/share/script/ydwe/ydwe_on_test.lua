@@ -1,5 +1,13 @@
 local stormlib = require 'ffi.stormlib'
-local w2l = require 'w3x2lni'
+local sandbox = require 'sandbox'
+local w2l = sandbox('w3x2lni', {
+    ['w3xparser'] = require 'w3xparser',
+    ['lni-c']     = require 'lni-c',
+    ['lpeg']      = require 'lpeg',
+    ['loader']    = require 'loader',
+    ['io']        = { open = function(filename) return io.open(fs.path(filename)) end },
+})
+
 local mapdump = require 'mapdump'
 
 local mt = {}

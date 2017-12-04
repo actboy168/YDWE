@@ -30,6 +30,7 @@ ffi.cdef[[
 	bool SFileReadFile(uint32_t hFile, void* lpBuffer, unsigned long dwToRead, unsigned long* pdwRead, void* lpOverlapped);
 	unsigned long SFileGetFileSize(uint32_t hFile, unsigned long* pdwFileSizeHigh);
 	bool SFileCloseFile(uint32_t hFile);
+    bool SFileRemoveFile(uint32_t hMpq, const char* szFileName, unsigned long dwSearchScope);
 
 	unsigned long SFileGetLocale();
 
