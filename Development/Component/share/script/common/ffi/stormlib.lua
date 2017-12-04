@@ -166,6 +166,13 @@ function archive:has_file(name)
 	return stormlib.SFileHasFile(self.handle, name)
 end
 
+function archive:remove_file(name)
+	if self.handle == 0 then
+		return false
+	end
+	return stormlib.SFileRemoveFile(self.handle, name, 0)
+end
+
 function archive:open_file(name)
 	if self.handle == 0 then
 		return nil

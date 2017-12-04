@@ -344,7 +344,11 @@ local function mark_lua(w2l, slk)
         return loader:map_load(filename)
     end
     function archive:set(filename, buf)
-        return loader:map_save(filename, buf)
+        if buf then
+            return loader:map_save(filename, buf)
+        else
+            return loader:map_remove(filename)
+        end
     end
     local env = {
         archive  = archive,

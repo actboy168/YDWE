@@ -11,7 +11,7 @@ local function load_slk(w2l, force_slk)
         return w2l:frontend_slk(function(name)
             local buf = loader:map_load(name)
             if buf then
-                loader:map_save(name, false)
+                loader:map_remove(name)
                 return buf
             end
             return loader:mpq_load(w2l.agent .. '\\' .. name) or loader:mpq_load(w2l.mpq .. '\\' .. name)
@@ -36,7 +36,7 @@ local function load_obj(w2l, wts)
             if force then
                 force_slk = true
             end
-            loader:map_save(name, false)
+            loader:map_remove(name)
         end
     end
     return objs, force_slk
@@ -55,14 +55,14 @@ local function load_lni(w2l)
             print('正在转换', name)
             lnis[type] = w2l:frontend_lni(type, buf, name)
             progress(count / 7)
-            loader:map_save(name, false)
+            loader:map_remove(name)
         end
     end
 
     local buf = loader:map_load('war3map.txt.ini')
     if buf then
         lnis['txt'] = w2l:parse_lni(buf, 'war3map.txt.ini')
-        loader:map_save('war3map.txt.ini', false)
+        loader:map_remove('war3map.txt.ini')
     end
     return lnis
 end
@@ -70,7 +70,7 @@ end
 local function load_w3i(w2l, slk)
     local buf = loader:map_load 'war3map.w3i.ini'
     if buf and w2l.config.read_lni then
-        loader:map_save('war3map.w3i.ini', false)
+        loader:map_remove('war3map.w3i.ini')
         return w2l:parse_lni(buf, 'war3map.w3i.ini')
     else
         buf = loader:map_load 'war3map.w3i'

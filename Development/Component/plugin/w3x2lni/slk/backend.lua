@@ -251,7 +251,7 @@ return function (w2l, slk)
     if slk.w3i then
         if w2l.config.target_format == 'lni' then
             loader:map_save('war3map.w3i.ini', w2l:w3i2lni(slk.w3i), slk.wts)
-            loader:map_save('war3map.w3i', false)
+            loader:map_remove('war3map.w3i')
         else
             loader:map_save('war3map.w3i', w2l:lni2w3i(slk.w3i, slk.wts))
         end
@@ -318,7 +318,7 @@ return function (w2l, slk)
     if w2l.config.target_format == 'lni' then
         local buf = loader:map_load 'war3map.imp'
         if buf then
-            loader:map_save('war3map.imp', false)
+            loader:map_remove('war3map.imp')
             loader:map_save('war3map.imp.ini', w2l:backend_imp(buf))
         end
     end
@@ -328,7 +328,7 @@ return function (w2l, slk)
     if #content > 0 then
         loader:map_save('war3map.wts', content)
     else
-        loader:map_save('war3map.wts', false)
+        loader:map_remove('war3map.wts')
     end
     progress(0.95)
 
