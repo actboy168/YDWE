@@ -3,7 +3,7 @@ require "localization"
 local ffi = require "ffi"
 local lni = require 'lni-c'
 
-local path = fs.ydwe_path() / 'plugin' / 'w3x2lni' / 'script' / 'prebuilt' / 'default'
+local path = fs.ydwe_path() / 'share' / 'mpq' / 'units' / 'prebuilt' / 'Custom'
 local default = {}
 local function get_default(type)
 	if not default[type] then

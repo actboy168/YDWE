@@ -5,7 +5,7 @@ local txt = (require 'w3xparser').txt
 local ini = (require 'w3xparser').ini
 local slk = (require 'w3xparser').slk
 local lni = require 'lni-c'
-local info = lni(io.load(fs.ydwe_path() / 'plugin' / 'w3x2lni' / 'script' / 'info.ini'))
+local info = lni(io.load(fs.ydwe_path() / 'plugin' / 'w3x2lni' / 'info.ini'))
 
 local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" / "share" / "mpq"
 if not fs.exists(root) then

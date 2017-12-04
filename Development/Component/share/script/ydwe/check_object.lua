@@ -8,10 +8,10 @@ local lni       = require 'lni-c'
 
 local w2l      = root / 'plugin' / 'w3x2lni'
 local mpq      = root / 'share' / 'mpq' / 'units'
-local prebuilt = w2l / 'script' / 'prebuilt'
+local defined  = w2l / 'defined'
 
-local info       = lni(assert(io.load(w2l / 'script' / 'info.ini')), 'info')
-local typedefine = lni(assert(io.load(prebuilt / 'defined' / 'typedefine.ini')), 'defined')
+local info       = lni(assert(io.load(w2l / 'info.ini')), 'info.ini')
+local typedefine = lni(assert(io.load(defined / 'typedefine.ini')), 'typedefine.ini')
 
 local select        = select
 local tonumber      = tonumber
