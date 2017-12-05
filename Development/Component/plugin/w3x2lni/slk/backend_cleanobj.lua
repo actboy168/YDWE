@@ -1,4 +1,3 @@
-local progress = require 'progress'
 local pairs = pairs
 
 local keydata
@@ -136,15 +135,15 @@ return function (w2l_, slk)
         if not w2l.config.slk_doodad then
             local type = 'doodad'
             clean_objs(type, slk[type])
-            progress(0.5)
+            w2l.progress(0.5)
         end
     else
         for i, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
             clean_objs(type, slk[type])
-            progress(i / 8)
+            w2l.progress(i / 8)
         end
     end
     local type = 'misc'
     clean_misc(type, slk[type])
-    progress(1)
+    w2l.progress(1)
 end

@@ -1,4 +1,4 @@
-local loader = require 'loader'
+local w2l
 local std_type = type
 local mustuse =  {
     ability = {
@@ -120,8 +120,8 @@ local function report(type, id)
         return
     end
     report_once[type][id] = true
-    print('-report|4简化', type, id)
-    print('-tip', format_marktip(slk, current_root))
+    w2l.message('-report|4简化', type, id)
+    w2l.message('-tip', format_marktip(slk, current_root))
 end
 
 local function mark_value(slk, type, value)
@@ -304,8 +304,8 @@ local function mark_marketplace(slk, flag)
         -- 是否使用了市场
         if obj._mark and obj._name == 'marketplace' then
             search_marketplace = true
-            print('-report|4简化', '保留市场物品')
-            print('-tip', ("使用了市场'%s'[%s]"):format(obj.name, obj._id))
+            w2l.message('-report|4简化', '保留市场物品')
+            w2l.message('-tip', ("使用了市场'%s'[%s]"):format(obj.name, obj._id))
             for _, obj in pairs(slk.item) do
                 if obj.pickrandom == 1 and obj.sellable == 1 then
                     current_root = {obj._id, "保留的市场物品'%s'[%s]引用了它"}
@@ -335,19 +335,19 @@ local function mark_doo(w2l, slk)
 end
 
 local function mark_lua(w2l, slk)
-    local buf = loader:map_load('reference.lua')
+    local buf = w2l:map_load('reference.lua')
     if not buf then
         return
     end
     local archive = {}
     function archive:get(filename)
-        return loader:map_load(filename)
+        return w2l:map_load(filename)
     end
     function archive:set(filename, buf)
         if buf then
-            return loader:map_save(filename, buf)
+            return w2l:map_save(filename, buf)
         else
-            return loader:map_remove(filename)
+            return w2l:map_remove(filename)
         end
     end
     local env = {
@@ -389,7 +389,8 @@ local function mark_lua(w2l, slk)
     end
 end
 
-return function(w2l, slk_)
+return function(w2l_, slk_)
+    w2l = w2l_
     slk = slk_
     if not search then
         search = w2l:defined 'search'

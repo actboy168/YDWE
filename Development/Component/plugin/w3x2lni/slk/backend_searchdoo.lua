@@ -1,5 +1,3 @@
-local loader = require 'loader'
-
 local unpack_buf
 local unpack_pos
 
@@ -13,7 +11,7 @@ local function unpack(str)
 end
 
 return function(w2l)
-    local buf = loader:map_load('war3map.doo')
+    local buf = w2l:map_load('war3map.doo')
     if not buf then
         return
     end

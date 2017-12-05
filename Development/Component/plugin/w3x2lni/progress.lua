@@ -1,52 +1,61 @@
 local mt = {}
-setmetatable(mt, mt)
 
-local level = 0
-local current = 0
-local min_rate = 0
-local max_rate = 1
-local min = {}
-local max = {}
-local progress = 0
+mt.__index = mt
 
-local function send_progress()
-    local newprogress = current * (max_rate - min_rate) + min_rate
-    if progress + 0.01 < newprogress then
-        print('-progress', newprogress)
-        progress = newprogress
+mt.level = 0
+mt.current = 0
+mt.min_rate = 0
+mt.max_rate = 1
+mt.progress = 0
+mt.message = print
+
+function mt:send_progress()
+    local newprogress = self.current * (self.max_rate - self.min_rate) + self.min_rate
+    if self.progress + 0.01 < newprogress then
+        self.message('-progress', newprogress)
+        self.progress = newprogress
     end
 end
 
-local function refresh_rate()
-    min_rate = 0
-    max_rate = 1
-    for i = level, 1, -1 do
-        min_rate = min_rate * (max[i] - min[i]) + min[i]
-        max_rate = max_rate * (max[i] - min[i]) + min[i]
+function mt:refresh_rate()
+    self.min_rate = 0
+    self.max_rate = 1
+    for i = self.level, 1, -1 do
+        self.min_rate = self.min_rate * (self.max[i] - self.min[i]) + self.min[i]
+        self.max_rate = self.max_rate * (self.max[i] - self.min[i]) + self.min[i]
     end
 end
 
 -- 开启新任务,新任务完成时当前任务的完成进度
 function mt:start(n)
-    level = level + 1
-    min[level] = current
-    max[level] = n
-    current = 0
-    refresh_rate()
+    self.level = self.level + 1
+    self.min[self.level] = self.current
+    self.max[self.level] = n
+    self.current = 0
+    self:refresh_rate()
 end
 
 -- 完成当前任务
 function mt:finish()
-    current = max[level]
-    level = level - 1
-    refresh_rate()
-    send_progress()
+    self.current = self.max[self.level]
+    self.level = self.level - 1
+    self:refresh_rate()
+    self:send_progress()
 end
 
 -- 设置当前任务进度
 function mt:__call(n)
-    current = n
-    send_progress()
+    self.current = n
+    self:send_progress()
 end
 
-return mt
+function mt:set_messager(messager)
+    self.message = messager
+end
+
+return function ()
+    local self = setmetatable({}, mt)
+    self.min = {}
+    self.max = {}
+    return self
+end

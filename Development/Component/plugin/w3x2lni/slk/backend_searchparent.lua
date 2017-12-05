@@ -1,4 +1,3 @@
-local progress = require 'progress'
 local type = type
 local pairs = pairs
 local os_clock = os.clock
@@ -120,7 +119,7 @@ local function parse_obj(name, obj, default, config, ttype)
     obj._parent = parent
 end
 
-local function processing(w2l, type, chunk)
+local function processing(type, chunk)
     local default = w2l:get_default()[type]
     local config = w2l.config
     local names = {}
@@ -131,19 +130,19 @@ local function processing(w2l, type, chunk)
 
     revert_list = nil
     unit_list = nil
-    progress(0.1)
+    w2l.progress(0.1)
     
-    progress:start(1)
+    w2l.progress:start(1)
     local clock = os_clock()
     for i, name in ipairs(names) do
         parse_obj(name, chunk[name], default, config, type)
         if os_clock() - clock >= 0.1 then
             clock = os_clock()
-            print(('搜索最优模板[%s] (%d/%d)'):format(chunk[name]._id, i, #names))
-            progress(i / #names)
+            w2l.message(('搜索最优模板[%s] (%d/%d)'):format(chunk[name]._id, i, #names))
+            w2l.progress(i / #names)
         end
     end
-    progress:finish()
+    w2l.progress:finish()
 end
 
 return function (w2l_, slk)
@@ -151,8 +150,8 @@ return function (w2l_, slk)
     local count = 0
     for type, name in pairs(w2l.info.obj) do
         count = count + 1
-        progress:start(count / 7)
-        processing(w2l, type, slk[type])
-        progress:finish()
+        w2l.progress:start(count / 7)
+        processing(type, slk[type])
+        w2l.progress:finish()
     end
 end

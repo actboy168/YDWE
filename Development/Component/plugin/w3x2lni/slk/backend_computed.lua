@@ -1,3 +1,5 @@
+local w2l
+
 local displaytype = {
     unit = '单位',
     ability = '技能',
@@ -79,8 +81,8 @@ local function computed_value(slk, str, name, field)
            or slk.item[id]
            or slk.upgrade[id]
     if not o then
-        print('-report|5公式计算失败', get_displayname_by_id(slk, name))
-        print('-tip', ('%s: <%s>'):format(field, str))
+        w2l.message('-report|5公式计算失败', get_displayname_by_id(slk, name))
+        w2l.message('-tip', ('%s: <%s>'):format(field, str))
         return
     end
     key = key:lower()
@@ -110,8 +112,8 @@ local function computed_value(slk, str, name, field)
         end
         return math.floor(res)
     end
-    print('-report|5公式计算失败', get_displayname_by_id(slk, id))
-    print('-tip', ('%s: <%s>'):format(field, str))
+    w2l.message('-report|5公式计算失败', get_displayname_by_id(slk, id))
+    w2l.message('-tip', ('%s: <%s>'):format(field, str))
     return res
 end
 
@@ -119,7 +121,8 @@ local function computed(slk, input, id, key)
     return input:gsub('<([^>]*)>', function(str) return computed_value(slk, str, id, key) end)
 end
 
-return function(w2l, slk)
+return function(w2l_, slk)
+    w2l = w2l_
     local remove_unuse = w2l.config.remove_unuse_object
     for _, o in pairs(slk.ability) do
         if remove_unuse and not o._mark then

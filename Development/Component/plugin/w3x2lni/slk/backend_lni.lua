@@ -1,4 +1,3 @@
-local progress = require 'progress'
 local table_insert = table.insert
 local table_sort = table.sort
 local math_type = math.type
@@ -32,7 +31,7 @@ local function format_value(tp, value)
     elseif tp == 1 or tp == 2 then
         return ('%.4f'):format(value)
     elseif tp == 3 then
-        value = w2l:editstring(value)
+        value = w2l:get_editstring(value)
         if value:match '[\n\r]' then
             return ('[=[\r\n%s]=]'):format(value)
         else
@@ -59,7 +58,7 @@ local function write_data(meta, data, lines)
         key = ('%q'):format(key)
     end
     if meta.displayname then
-        lines[#lines+1] = {'-- %s', w2l:editstring(meta.displayname):gsub('^%s*(.-)%s*$', '%1')}
+        lines[#lines+1] = {'-- %s', w2l:get_editstring(meta.displayname):gsub('^%s*(.-)%s*$', '%1')}
     end
     if not len then
         lines[#lines+1] = {'%s = %s', key, format_value(meta.type, data)}
@@ -160,8 +159,8 @@ local function write_table(slk)
         write_obj(list[i], obj)
         if os_clock() - clock >= 0.1 then
             clock = os_clock()
-            print(('正在转换%s: [%s] (%d/%d)'):format(ttype, obj._id, i, #list))
-            progress(i / #list)
+            w2l.message(('正在转换%s: [%s] (%d/%d)'):format(ttype, obj._id, i, #list))
+            w2l.progress(i / #list)
         end
     end
 end

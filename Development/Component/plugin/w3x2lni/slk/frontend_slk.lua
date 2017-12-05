@@ -1,4 +1,3 @@
-local progress = require 'progress'
 local w3xparser = require 'w3xparser'
 
 local math_floor = math.floor
@@ -95,8 +94,8 @@ local function slk_read(table, slk, keys, meta, update_level)
             if not obj._max_level or obj._max_level == 0 then
                 obj._max_level = 1
             elseif obj._max_level and obj._max_level > 10000 then
-                print('-report|9其他', ('对象等级太高[%s][%d]'):format(name, obj._max_level))
-                print('-tip', '可能会影响此工具的性能')
+                w2l.message('-report|9其他', ('对象等级太高[%s][%d]'):format(name, obj._max_level))
+                w2l.message('-tip', '可能会影响此工具的性能')
             end
         end
     end
@@ -208,14 +207,14 @@ return function(w2l_, loader)
     local txt = {}
     local used = {}
     local count = 0
-    progress:start(0.3)
+    w2l.progress:start(0.3)
     for _, filename in pairs(w2l.info.txt) do
         w2l:parse_txt(loader(filename), filename, txt)
     end
-    progress:finish()
+    w2l.progress:finish()
     
     local count = 0
-    progress:start(1)
+    w2l.progress:start(1)
     for type, names in pairs(w2l.info.slk) do
         local level_key = w2l.info.key.max_level[type]
         slk_type = type
@@ -244,10 +243,10 @@ return function(w2l_, loader)
             txt_read(datas[type], txt, used, keys, meta)
         end
         count = count + 1
-        progress(count / 7)
+        w2l.progress(count / 7)
     end
     txt_set_level(txt)
-    progress:finish()
+    w2l.progress:finish()
 
     -- 此单位只在一张单位slk里定义,是无效单位
     datas.unit.nrmf = nil

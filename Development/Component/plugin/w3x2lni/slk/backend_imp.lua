@@ -1,4 +1,4 @@
-local loader = require 'loader'
+local w2l
 
 local function parse_imp(buf)
     local list = {}
@@ -7,9 +7,9 @@ local function parse_imp(buf)
     for i = 1, count do
         _, name, index = ('c1z'):unpack(buf, index)
         local name = name:lower()
-        if loader:map_load(name) then
+        if w2l:map_load(name) then
             list[#list+1] = name
-        elseif loader:map_load('war3mapimported\\' .. name) then
+        elseif w2l:map_load('war3mapimported\\' .. name) then
             list[#list+1] = 'war3mapimported\\' .. name
         end
     end
@@ -29,6 +29,7 @@ local function convert_imp(list)
 end
 
 return function (w2l_, buf)
+    w2l = w2l_
     local list = parse_imp(buf)
     local buf = convert_imp(list)
     return buf

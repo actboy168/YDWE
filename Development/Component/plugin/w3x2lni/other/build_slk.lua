@@ -1,4 +1,3 @@
-local loader = require 'loader'
 local w2l
 
 local abilitybuffdata = {
@@ -106,7 +105,7 @@ return function (_w2l)
                 merge_slk(t, abilitybuffdata)
 			end
 		end
-		return loader:mpq_load(w2l.agent .. '\\' .. name) or loader:mpq_load(w2l.mpq .. '\\' .. name)
+		return w2l:mpq_load(w2l.agent .. '\\' .. name) or w2l:mpq_load(w2l.mpq .. '\\' .. name)
 	end)
 
 	local hook

@@ -1,6 +1,5 @@
 local lpeg = require 'lpeg'
 local w3xparser = require 'w3xparser'
-local loader = require 'loader'
 local wtonumber = w3xparser.tonumber
 local ids
 local marks
@@ -79,16 +78,16 @@ local function fbj(id)
     end
     if need_mark[id] then
         if need_mark[id] == 'creeps' and not marks.creeps then
-            print('-report|4简化', '保留野怪单位')
-            print('-tip', ("脚本里的'%s'引用了它"):format(id))
+            w2l.message('-report|4简化', '保留野怪单位')
+            w2l.message('-tip', ("脚本里的'%s'引用了它"):format(id))
         end
         if need_mark[id] == 'building' and not marks.building then
-            print('-report|4简化', '保留野怪建筑')
-            print('-tip', ("脚本里的'%s'引用了它"):format(id))
+            w2l.message('-report|4简化', '保留野怪建筑')
+            w2l.message('-tip', ("脚本里的'%s'引用了它"):format(id))
         end
         if need_mark[id] == 'item' and not marks.item then
-            print('-report|4简化', '保留可随机物品')
-            print('-tip', ("脚本里的'%s'引用了它"):format(id))
+            w2l.message('-report|4简化', '保留可随机物品')
+            w2l.message('-tip', ("脚本里的'%s'引用了它"):format(id))
         end
         marks[need_mark[id]] = true
     end
@@ -126,10 +125,11 @@ end
 local word = sp * (real + int + str + id) * sp
 local pjass = (ign + word + S'=+-*/><!()[],' + err'syntax error')^0
 
-return function (w2l)
-    local buf = loader:map_load('war3map.j')
+return function (w2l_)
+    w2l = w2l_
+    local buf = w2l:map_load('war3map.j')
     if not buf then
-        buf = loader:map_load('scripts\\war3map.j')
+        buf = w2l:map_load('scripts\\war3map.j')
         if not buf then
             return
         end
