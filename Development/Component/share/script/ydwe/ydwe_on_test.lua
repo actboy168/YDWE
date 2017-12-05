@@ -1,5 +1,5 @@
 local stormlib = require 'ffi.stormlib'
-local w2l = (require 'w3x2lni_in_sandbox')()
+local w3x2lni = require 'w3x2lni_in_sandbox'
 
 local mapdump = require 'mapdump'
 
@@ -38,6 +38,7 @@ local function getplayernum(mappath)
     		return 0
 		end
 		local w3i = map:load_file('war3map.w3i')
+		local w2l = w3x2lni()
 		local tbl = w2l:read_w3i(w3i)
 		local n = 0
 		if tbl['选项']['自定义玩家分组'] == 0 then

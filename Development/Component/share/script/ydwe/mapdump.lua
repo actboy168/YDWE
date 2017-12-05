@@ -1,4 +1,3 @@
-
 local function tohex(n)
     return (n & 0xFF)
     ..' '..((n >> 8) & 0xFF)
@@ -24,8 +23,8 @@ return function (input, jass, write)
     if not map then
         return error('Couldn\'t open map.')
     end
-    local w2l = (require 'w3x2lni_in_sandbox')()
-    
+    local w3x2lni = require 'w3x2lni_in_sandbox'
+    local w2l = w3x2lni()
     local info = w2l:read_w3i(map:load_file 'war3map.w3i')
     map:close()
     local map_options = (info['选项']['对战地图'] << 2)
