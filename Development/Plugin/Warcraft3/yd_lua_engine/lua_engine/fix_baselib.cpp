@@ -13,8 +13,25 @@
 #include <Windows.h>
 #include <io.h>
 #include "storm.h"
+#include "lua_memfile.h"
+
 
 namespace base { namespace warcraft3 { namespace lua_engine {
+
+	int IFileCreate(const char* filename, unsigned char** data, size_t* size)
+	{
+		if (storm_s::instance().load_file(filename, (const void**)data, size))
+		{
+			return 0;
+		}
+		return ENOENT;
+	}
+
+	int IFileClose(unsigned char* data, size_t /*size*/)
+	{
+		storm_s::instance().unload_file(data);
+		return 0;
+	}
 
 	int math_random(lua_State* L)
 	{
@@ -105,26 +122,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return luaL_fileresult(L, (res == 0), NULL);
 	}
 
-	static int io_fclose_and_delete(lua_State *L) {
-		luaL_Stream *p = ((luaL_Stream *)luaL_checkudata(L, 1, LUA_FILEHANDLE));
-		wchar_t path[MAX_PATH] = { 0 };
-		uintptr_t func = (uintptr_t)GetProcAddress(GetModuleHandleW(L"kernel32.dll"), "GetFinalPathNameByHandleW");
-		if (func)
-		{
-			HANDLE hfile = (HANDLE)_get_osfhandle(fileno(p->f));
-			if (std_call<DWORD>(func, hfile, path, MAX_PATH, VOLUME_NAME_DOS) >= MAX_PATH)
-			{
-				path[0] = L'\0';
-			}
-		}
-		int res = fclose(p->f);
-		if (path[0])
-		{
-			DeleteFileW(path);
-		}
-		return luaL_fileresult(L, (res == 0), NULL);
-	}
-
 	static bool allow_local_files()
 	{
 		try {
@@ -134,10 +131,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return false;
 	}
 
-	static bool can_read(const char* filename, luaL_Stream* p, const char* mode)
-	{
+	static int create_readfile(lua_State *L, const char* mode) {
 		if (allow_local_files())
 		{
+			const char *filename = luaL_checkstring(L, 1);
 			try {
 				fs::path filepath = u2w(filename);
 				if (!filepath.is_absolute()) {
@@ -145,45 +142,17 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 				}
 				if (fs::exists(filepath))
 				{
+					luaL_Stream *p = (luaL_Stream *)lua_newuserdata(L, sizeof(luaL_Stream));
+					luaL_setmetatable(L, LUA_FILEHANDLE);
 					p->f = fopen(filepath.string().c_str(), mode);
 					p->closef = &io_fclose;
-					return true;
+					return 1;
 				}
 			}
 			catch (...) {
 			}
 		}
-
-		try {
-			const void* buf = nullptr;
-			size_t      len = 0;
-			storm_dll&s = storm_s::instance();
-			if (!s.load_file(filename, &buf, &len))
-			{
-				return false;
-			}
-
-			fs::path file = path::get(path::DIR_TEMP) / filename;
-			fs::create_directories(file.parent_path());
-			FILE* tmp = fopen(file.string().c_str(), "wb");
-			if (!tmp) {
-				return false;
-			}
-			if (1 != fwrite(buf, len, 1, tmp)) {
-				fclose(tmp);
-				return false;
-			}
-			fclose(tmp);
-			s.unload_file(buf);
-
-			p->f = fopen(file.string().c_str(), mode);
-			p->closef = &io_fclose_and_delete;
-			return true;
-		}
-		catch (...) {
-		}
-
-		return false;
+		return memfile::open(L, IFileCreate, IFileClose);
 	}
 
 	static bool can_write(const char* filename, luaL_Stream* p, const char* mode)
@@ -216,24 +185,24 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return false;
 	}
 
-	static luaL_Stream* createfile(lua_State *L, const char* filename, const char* mode) {
+	static int create_writefile(lua_State *L, const char* mode) {
+		const char *filename = luaL_checkstring(L, 1);
 		luaL_Stream *p = (luaL_Stream *)lua_newuserdata(L, sizeof(luaL_Stream));
 		luaL_setmetatable(L, LUA_FILEHANDLE);
 		p->closef = 0;
 		p->f = 0;
+		if (!can_write(filename, p, mode)) {
+			errno = EACCES;
+			return luaL_fileresult(L, 0, filename);
+		}
+		return (p == NULL || p->f == NULL) ? luaL_fileresult(L, 0, filename) : 1;
+	}
+
+	static int createfile(lua_State *L, const char* mode) {
 		if (mode[0] == 'r') {
-			if (!can_read(filename, p, mode)) {
-				errno = ENOENT;
-				return 0;
-			}
+			return create_readfile(L, mode);
 		}
-		else {
-			if (!can_write(filename, p, mode)) {
-				errno = EACCES;
-				return 0;
-			}
-		}
-		return p;
+		return create_writefile(L, mode);
 	}
 
 	static int l_checkmode(const char *mode) {
@@ -245,15 +214,15 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int io_open(lua_State* L)
 	{
-		const char *filename = luaL_checkstring(L, 1);
 		const char *mode = luaL_optstring(L, 2, "r");
 		luaL_argcheck(L, l_checkmode(mode), 2, "invalid mode");
-		luaL_Stream *p = createfile(L, filename, mode);
-		return (p == NULL || p->f == NULL) ? luaL_fileresult(L, 0, filename) : 1;
+		return createfile(L, mode);
 	}
 
 	int fix_baselib(lua_State* L)
 	{
+		memfile::initialize(L);
+
 		if (lua_getglobal(L, "math") == LUA_TTABLE)
 		{
 			lua_pushstring(L, "random");     lua_pushcclosure(L, math_random, 0);     lua_rawset(L, -3);

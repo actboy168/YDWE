@@ -107,6 +107,9 @@
     <ClCompile Include="lua_engine\libs_debugger.cpp">
       <Filter>lua_engine\library</Filter>
     </ClCompile>
+    <ClCompile Include="lua_engine\lua_memfile.cpp">
+      <Filter>lua_engine\misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lua_engine\lua_loader.h">
@@ -143,6 +146,9 @@
       <Filter>lua_engine\main</Filter>
     </ClInclude>
     <ClInclude Include="lua_engine\sha_1.h">
+      <Filter>lua_engine\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\lua_memfile.h">
       <Filter>lua_engine\misc</Filter>
     </ClInclude>
   </ItemGroup>
