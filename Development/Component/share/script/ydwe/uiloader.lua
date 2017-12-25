@@ -5,12 +5,14 @@ local txt = (require 'w3xparser').txt
 local ini = (require 'w3xparser').ini
 local slk = (require 'w3xparser').slk
 local lni = require 'lni-c'
-local info = lni(io.load(fs.ydwe_path() / 'plugin' / 'w3x2lni' / 'info.ini'))
 
-local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" / "share" / "mpq"
-if not fs.exists(root) then
-	root = fs.ydwe_path() / 'share' / 'mpq'
+local ydwe = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component"
+if not fs.exists(ydwe) then
+	ydwe = fs.ydwe_path()
 end
+
+local root = ydwe / 'share' / 'mpq'
+local info = lni(io.load(ydwe / 'plugin' / 'w3x2lni' / 'info.ini'))
 
 local loader = {}
 
