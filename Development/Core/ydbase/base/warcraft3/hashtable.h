@@ -3,7 +3,6 @@
 #include <base/config.h>
 #include <cstdint>
 #include <base/warcraft3/detail/string_hash.h>
-#include <iterator>
 #include <cstring>
 
 namespace base { namespace warcraft3 {
@@ -130,12 +129,11 @@ namespace base { namespace warcraft3 {
 
 		template <class Node>
 		class table<Node>::iterator
-			: public std::iterator<std::input_iterator_tag, Node>
 		{
 		public:
-			typedef std::iterator<std::input_iterator_tag, Node> mybase;
-			typedef typename mybase::reference reference;
-			typedef typename mybase::pointer   pointer;
+			typedef Node value_type;
+			typedef value_type& reference;
+			typedef value_type* pointer;
 
 		public:
 			iterator()

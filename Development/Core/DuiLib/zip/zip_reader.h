@@ -1,8 +1,7 @@
 #pragma once
 
 #include <base/filesystem.h>
-#include <string>				
-#include <iterator>
+#include <string>
 #include <assert.h>
 #include <unzip.h>
 
@@ -67,9 +66,12 @@ namespace zip
 	}
 
 	class reader::iterator
-		: public std::iterator<std::input_iterator_tag, entry>
 	{
 	public:
+		typedef entry value_type;
+		typedef value_type& reference;
+		typedef value_type* pointer;
+
 		iterator()
 			: impl_()
 		{ }
