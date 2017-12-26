@@ -89,31 +89,6 @@ static int LuaPeekPipe(lua_State* L)
 	return 1;
 }
 
-static int LuaGetVersionNumberString(lua_State* L)
-{
-	const fs::path& module = *(fs::path*)luaL_checkudata(L, 1, "filesystem");
-	base::win::simple_file_version fv(module.c_str(), L"FileVersion", L',');
-	if (fv.size < 2)
-	{
-		fv = base::win::simple_file_version(module.c_str(), L"FileVersion", L'.');
-	}
-
-	lua_newtable(L);
-	lua_pushstring(L, "major");
-	lua_pushinteger(L, fv.major);
-	lua_rawset(L, -3);
-	lua_pushstring(L, "minor");
-	lua_pushinteger(L, fv.minor);
-	lua_rawset(L, -3);
-	lua_pushstring(L, "revision");
-	lua_pushinteger(L, fv.revision);
-	lua_rawset(L, -3);
-	lua_pushstring(L, "build");
-	lua_pushinteger(L, fv.build);
-	lua_rawset(L, -3);
-	return 1;
-}
-
 static int LuaConsole(lua_State* L)
 {
 	if (lua_toboolean(L, 1))
@@ -296,7 +271,6 @@ int luaopen_sys(lua_State* L)
 		{ "process", process::constructor },
 		{ "open_pipe", LuaOpenPipe },
 		{ "peek_pipe", LuaPeekPipe },
-		{ "get_module_version_info", LuaGetVersionNumberString },
 		{ "console", LuaConsole },
 		{ NULL, NULL },
 	};

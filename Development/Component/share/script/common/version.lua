@@ -1,4 +1,5 @@
 require "sys"
+local file_version = require 'file_version'
 
 local _version__index = {
 }
@@ -45,9 +46,9 @@ local _version__mt = {
 local _version_initialize = function (c)
 	if c.file then
 		if type(c.file) == 'string' then
-			return sys.get_module_version_info(fs.path(c.file))
+			return file_version(c.file)
 		else
-			return sys.get_module_version_info(c.file)
+			return file_version(c.file:string())
 		end
 	end
 	
