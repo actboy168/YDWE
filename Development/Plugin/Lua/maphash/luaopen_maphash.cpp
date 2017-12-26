@@ -5,19 +5,19 @@
 #include "sha1.h"
 #include "rolc.h"
 
+#define YDWE_BASE_INLINE
+#define BASE_UNICODE_DISABLE_ANSI
+#include <base/util/unicode.h>
+#include <base/util/unicode.cpp>
+
 #define __STORMLIB_SELF__
 #include <StormLib.h>
 
 namespace fs = std::experimental::filesystem;
 
-std::string w2u(const std::wstring& wstr)
-{
-	return std::move(std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(wstr));
-}
-
 int file_error(lua_State* L, fs::path const& path)
 {
-	return luaL_error(L, "%s: %s", w2u(path.wstring()).c_str(), strerror(ENOENT));
+	return luaL_error(L, "%s: %s", base::w2u(path.wstring()).c_str(), strerror(ENOENT));
 }
 
 size_t sfsize(HANDLE file)
