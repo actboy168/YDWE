@@ -119,11 +119,11 @@ local str  = quo * (nl1 + str1)^0 * quo
 local id   = R('az', 'AZ') * R('az', 'AZ', '09', '__')^0 / fbj
 
 local function err(str)
-    return ((1-nl)^1 + P(1)) / function(c) error(('line[%d]: %s:\n===========================\n%s\n==========================='):format(line_count, str, c)) end
+    return ((1-nl)^1 + P(1)) / function(c) error(('\n\n%s\n\n第 %d 行：\n===========================\n%s\n===========================\n'):format(str, line_count, c)) end
 end
 
 local word = sp * (real + int + str + id) * sp
-local pjass = (ign + word + S'=+-*/><!()[],' + err'syntax error')^0
+local pjass = (ign + word + S'=+-*/><!()[],' + err'语法错误，可能是地图保存失败了。')^0
 
 return function (w2l_)
     w2l = w2l_
