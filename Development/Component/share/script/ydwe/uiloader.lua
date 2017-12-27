@@ -57,9 +57,13 @@ function loader:triggerdata(name, callback)
 	local t = nil
 	for _, path in ipairs(self.list) do
 		if fs.exists(path / 'ui') then
-			t = ui.merge(t, ui.old_reader(path / 'ui'))
+			t = ui.merge(t, ui.old_reader(function(filename)
+				return io.load(path / 'ui' / filename)
+			end))
 		else
-			t = ui.merge(t, ui.new_reader(path))
+			t = ui.merge(t, ui.new_reader(function(filename)
+				return io.load(path / filename)
+			end))
 		end
 	end
 	data, string =  ui.old_writer(t)
