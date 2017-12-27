@@ -11,12 +11,6 @@
 #include <fcntl.h>
 #include <io.h>	  
 
-static void lua_pushwstring(lua_State* L, const std::wstring& str)
-{
-	std::string ustr = base::w2u(str, base::conv_method::replace | '?');
-	lua_pushlstring(L, ustr.data(), ustr.size());
-}
-
 #define tolstream(L, idx)	((luaL_Stream*)luaL_checkudata(L, idx, LUA_FILEHANDLE))
 
 static luaL_Stream* LuaNewFile(lua_State* L)
@@ -87,19 +81,6 @@ static int LuaPeekPipe(lua_State* L)
 	}
 	lua_pushinteger(L, 0);
 	return 1;
-}
-
-static int LuaConsole(lua_State* L)
-{
-	if (lua_toboolean(L, 1))
-	{
-		base::console::enable();
-	}
-	else
-	{
-		base::console::disable();
-	}
-	return 0;
 }
 
 namespace process {
@@ -271,7 +252,6 @@ int luaopen_sys(lua_State* L)
 		{ "process", process::constructor },
 		{ "open_pipe", LuaOpenPipe },
 		{ "peek_pipe", LuaPeekPipe },
-		{ "console", LuaConsole },
 		{ NULL, NULL },
 	};
 	luaL_newlib(L, l2);
