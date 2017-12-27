@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="luaopen_sys.cpp">
+    <ClCompile Include="luaopen_process.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

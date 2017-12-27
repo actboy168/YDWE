@@ -1,4 +1,3 @@
-require "sys"
 local file_version = require 'file_version'
 
 local _version__index = {

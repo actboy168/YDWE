@@ -1,6 +1,9 @@
 require "log"
-require "sys"
 require "filesystem"
+local process = require "process"
+
+sys = {}
+
 local uni = require 'ffi.unicode'
 
 -- 根据ydwebase.dll的路径计算
@@ -70,26 +73,8 @@ function string.trim (self)
 	return self:gsub("^%s*(.-)%s*$", "%1")
 end
 
-function sys.spawn_pipe (command_line, current_dir)		
-	local in_rd,  in_wr  = sys.open_pipe()
-	local out_rd, out_wr = sys.open_pipe()
-	local err_rd, err_wr = sys.open_pipe()
-	local p = sys.process()
-	p:hide_window()
-	p:redirect(in_rd, out_wr, err_wr)
-	if not p:create(nil, command_line, current_dir) then
-		log.error(string.format("Executed %s failed", command_line))
-		return nil
-	end	
-	in_rd:close()
-	out_wr:close()
-	err_wr:close()
-	log.trace(string.format("Executed %s.", command_line))
-	return p, out_rd, err_rd, in_wr
-end
-
 function sys.spawn_inject (application, command_line, current_dir, inject_dll)		
-	local p = sys.process()
+	local p = process()
 	
 	if inject_dll then
 		if type(inject_dll) == "string" then
@@ -111,7 +96,7 @@ function sys.spawn_inject (application, command_line, current_dir, inject_dll)
 end
 
 function sys.spawn (command_line, current_dir, wait)	
-	local p = sys.process()
+	local p = process()
 	if not p:create(nil, command_line, current_dir) then
 		log.error(string.format("Executed %s failed", command_line))
 		return false

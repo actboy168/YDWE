@@ -2,6 +2,7 @@ local stormlib = require 'ffi.stormlib'
 local w3x2lni = require 'w3x2lni_in_sandbox'
 
 local mapdump = require 'mapdump'
+local process = require 'process'
 
 local mt = {}
 mt.__index = mt
@@ -12,7 +13,7 @@ function mt:process_create(command_line, current_dir)
 		self.h = nil
 	end
 
-	local p = sys.process()
+	local p = process()
 	p:hide_window()
 	if not p:create(nil, command_line, current_dir) then
 		log.error('Executed failed: ', command_line)
