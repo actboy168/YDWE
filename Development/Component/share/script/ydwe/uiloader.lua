@@ -1,10 +1,11 @@
 require "registry"
 local stringify_slk = require 'stringify_slk'
-local ui = require 'ui-builder.init'
 local txt = (require 'w3xparser').txt
 local ini = (require 'w3xparser').ini
 local slk = (require 'w3xparser').slk
 local lni = require 'lni-c'
+local w3x2lni = require 'w3x2lni_in_sandbox'
+local ui = w3x2lni().ui_builder
 
 local ydwe = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component"
 if not fs.exists(ydwe) then
