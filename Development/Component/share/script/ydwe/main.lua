@@ -18,7 +18,6 @@ do
 end
 
 require "utiliy"
-require "sys"
 require "filesystem"
 require "gui"
 

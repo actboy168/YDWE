@@ -1,5 +1,5 @@
-require "sys"
 require "filesystem"
+local process = require "process"
 
 local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component"
 if not fs.exists(root) then
@@ -55,17 +55,20 @@ function wave:do_compile(op)
 
 	local command_line = string.format('%s %s %s', pathstring(self.exe_path), cmd, pathstring(op.input))
 	-- 启动进程
-	local proc, out_rd, err_rd, in_wr = sys.spawn_pipe(command_line, nil)
-	if proc then
-		local out = out_rd:read("*a")
-		local err = err_rd:read("*a")
-		local exit_code = proc:wait()
-		proc:close()
-		proc = nil
-		return exit_code, out, err
-	else
+	local p = process()
+	p:hide_window()
+	local stdout, stderr = p:std_output(), p:std_error()
+	if not p:create(nil, command_line, nil) then
+		log.error(string.format("Executed %s failed", command_line))
 		return -1, nil, nil
 	end
+	log.trace(string.format("Executed %s.", command_line))
+    local out = stdout:read 'a'
+    local err = stderr:read 'a'
+    local exit_code = p:wait()
+    p:close()
+    p = nil
+    return exit_code, out, err
 end
 
 function wave:compile(op)

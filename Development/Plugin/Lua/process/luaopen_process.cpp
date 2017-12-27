@@ -11,79 +11,84 @@
 #include <fcntl.h>
 #include <io.h>	  
 
-#define tolstream(L, idx)	((luaL_Stream*)luaL_checkudata(L, idx, LUA_FILEHANDLE))
+namespace process {
+	namespace pipe {
 
-static luaL_Stream* LuaNewFile(lua_State* L)
-{
+		static luaL_Stream* to(lua_State* L, int idx)
+		{
+			return ((luaL_Stream*)luaL_checkudata(L, idx, LUA_FILEHANDLE));
+		}
 
-	luaL_Stream *p = (luaL_Stream*)lua_newuserdata(L, sizeof(luaL_Stream));
-	p->closef = NULL;
-	luaL_setmetatable(L, LUA_FILEHANDLE);
-	return p;
-}
+		static int close(lua_State* L)
+		{
+			luaL_Stream* p = to(L, 1);
+			int ok = fclose(p->f);
+			int en = errno;  /* calls to Lua API may change this value */
+			if (ok)
+			{
+				lua_pushboolean(L, 1);
+				return 1;
+			}
+			else
+			{
+				lua_pushnil(L);
+				lua_pushfstring(L, "%s", strerror(en));
+				lua_pushinteger(L, en);
+				return 3;
+			}
+		}
 
-static int LuaFileClose(lua_State* L)
-{
-	luaL_Stream* p = tolstream(L, 1);
-	int ok = fclose(p->f);
-	int en = errno;  /* calls to Lua API may change this value */
-	if (ok)
-	{
-		lua_pushboolean(L, 1);
-		return 1;
-	}
-	else
-	{
-		lua_pushnil(L);
-		lua_pushfstring(L, "%s", strerror(en));
-		lua_pushinteger(L, en);
-		return 3;
-	}
-}
+		static std::pair<HANDLE, HANDLE> open(lua_State* L)
+		{
+			SECURITY_ATTRIBUTES sa;
+			sa.nLength = sizeof(SECURITY_ATTRIBUTES);
+			sa.bInheritHandle = TRUE;
+			sa.lpSecurityDescriptor = NULL;
+			HANDLE read_pipe, write_pipe;
+			if (!::CreatePipe(&read_pipe, &write_pipe, &sa, 0))
+			{
+				return std::make_pair(read_pipe, write_pipe);
+			}
+			::SetHandleInformation(read_pipe, HANDLE_FLAG_INHERIT, 0);
+			::SetHandleInformation(write_pipe, HANDLE_FLAG_INHERIT, 0);
+			return std::make_pair(read_pipe, write_pipe);
+		}
 
-static void LuaOpenFileForHandle(lua_State* L, HANDLE h, int dmode, const char* mode)
-{
-	luaL_Stream* pf = LuaNewFile(L);
-	pf->f = _fdopen(_open_osfhandle((long)h, dmode), mode);
-	pf->closef = &LuaFileClose;
-}
+		static int push(lua_State* L, HANDLE h, int dmode, const char* mode)
+		{
+			luaL_Stream* pf = (luaL_Stream*)lua_newuserdata(L, sizeof(luaL_Stream));
+			pf->closef = NULL;
+			luaL_setmetatable(L, LUA_FILEHANDLE);
+			pf->f = _fdopen(_open_osfhandle((long)h, dmode), mode);
+			pf->closef = &close;
+			return 1;
+		}
 
-static int LuaOpenPipe(lua_State* L)
-{
-	SECURITY_ATTRIBUTES sa;
-	sa.nLength = sizeof(SECURITY_ATTRIBUTES);
-	sa.bInheritHandle = TRUE;
-	sa.lpSecurityDescriptor = NULL;
+		static int push(lua_State* L, HANDLE h, char type)
+		{
+			if (!h) {
+				return 0;
+			}
+			if (type == 'r') {
+				return push(L, h, _O_RDONLY | _O_TEXT, "rt");
+			}
+			return push(L, h, _O_WRONLY | _O_TEXT, "wt");
+		}
 
-	HANDLE read_pipe, write_pipe;
-	if (!::CreatePipe(&read_pipe, &write_pipe, &sa, 0))
-	{
-		lua_pushnil(L);
-		lua_pushnil(L);
-		return 2;
-	}
-	::SetHandleInformation(read_pipe, HANDLE_FLAG_INHERIT, 0);
-	::SetHandleInformation(write_pipe, HANDLE_FLAG_INHERIT, 0);
-	LuaOpenFileForHandle(L, read_pipe, _O_RDONLY | _O_TEXT, "rt");
-	LuaOpenFileForHandle(L, write_pipe, _O_WRONLY | _O_TEXT, "wt");
-	return 2;
-}
-
-static int LuaPeekPipe(lua_State* L)
-{
-	luaL_Stream* p = tolstream(L, 1);
-	if (p) {
-		DWORD rlen = 0;
-		if (PeekNamedPipe((HANDLE)_get_osfhandle(_fileno(p->f)), 0, 0, 0, &rlen, 0)) {
-			lua_pushinteger(L, rlen);
+		static int peek(lua_State* L, int idx)
+		{
+			luaL_Stream* p = to(L, 1);
+			if (p) {
+				DWORD rlen = 0;
+				if (PeekNamedPipe((HANDLE)_get_osfhandle(_fileno(p->f)), 0, 0, 0, &rlen, 0)) {
+					lua_pushinteger(L, rlen);
+					return 1;
+				}
+			}
+			lua_pushinteger(L, 0);
 			return 1;
 		}
 	}
-	lua_pushinteger(L, 0);
-	return 1;
-}
-
-namespace process {
 
 	base::win::process& to(lua_State* L, int idx)
 	{
@@ -94,7 +99,7 @@ namespace process {
 	{
 		if (LUA_TUSERDATA == lua_type(L, idx))
 		{
-			luaL_Stream* p = tolstream(L, idx);
+			luaL_Stream* p = pipe::to(L, idx);
 			if (p)
 			{
 				return (HANDLE)_get_osfhandle(fileno(p->f));
@@ -172,14 +177,6 @@ namespace process {
 		return 1;
 	}
 
-	int redirect(lua_State* L)
-	{
-		base::win::process& self = to(L, 1);
-		bool ok = self.redirect(cast_file_handle(L, 2), cast_file_handle(L, 3), cast_file_handle(L, 4));
-		lua_pushboolean(L, ok);
-		return 1;
-	}
-
 	int create(lua_State* L)
 	{
 		base::win::process& self = to(L, 1);
@@ -224,16 +221,71 @@ namespace process {
 		lua_pushboolean(L, self.is_running());
 		return 1;
 	}
+
+	int std_input(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		auto[rd, wr] = pipe::open(L);
+		if (!rd || !wr) {
+			return 0;
+		}
+		if (!self.redirect(rd, NULL, NULL)) {
+			::CloseHandle(rd);
+			::CloseHandle(wr);
+			return 0;
+		}
+		::CloseHandle(rd);
+		return pipe::push(L, wr, 'w');
+	}
+
+	int std_output(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		auto [rd, wr] = pipe::open(L);
+		if (!rd || !wr) {
+			return 0;
+		}
+		if (!self.redirect(NULL, wr, NULL)) {
+			::CloseHandle(rd);
+			::CloseHandle(wr);
+			return 0;
+		}
+		::CloseHandle(wr);
+		return pipe::push(L, rd, 'r');
+	}
+
+	int std_error(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		auto[rd, wr] = pipe::open(L);
+		if (!rd || !wr) {
+			return 0;
+		}
+		if (!self.redirect(NULL, NULL, wr)) {
+			::CloseHandle(rd);
+			::CloseHandle(wr);
+			return 0;
+		}
+		::CloseHandle(wr);
+		return pipe::push(L, rd, 'r');
+	}
+
+	int peek(lua_State* L)
+	{
+		return pipe::peek(L, 2);
+	}
 }
 
-extern "C" __declspec(dllexport) int luaopen_sys(lua_State* L);
-
-int luaopen_sys(lua_State* L)
+extern "C" __declspec(dllexport)
+int luaopen_process(lua_State* L)
 {
 	static luaL_Reg mt[] = {
 		{ "inject", process::inject },
 		{ "hide_window", process::hide_window },
-		{ "redirect", process::redirect },
+		{ "std_input", process::std_input },
+		{ "std_output", process::std_output },
+		{ "std_error", process::std_error },
+		{ "peek", process::peek },
 		{ "create", process::create },
 		{ "wait", process::wait },
 		{ "close", process::close },
@@ -247,16 +299,8 @@ int luaopen_sys(lua_State* L)
 	luaL_setfuncs(L, mt, 0);
 	lua_pushvalue(L, -1);
 	lua_setfield(L, -2, "__index");
-
-	luaL_Reg l2[] = {
-		{ "process", process::constructor },
-		{ "open_pipe", LuaOpenPipe },
-		{ "peek_pipe", LuaPeekPipe },
-		{ NULL, NULL },
-	};
-	luaL_newlib(L, l2);
-	lua_setglobal(L, "sys");
-	return 0;
+	lua_pushcfunction(L, process::constructor);
+	return 1;
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)

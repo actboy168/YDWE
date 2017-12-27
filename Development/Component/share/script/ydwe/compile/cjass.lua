@@ -1,4 +1,3 @@
-require "sys"
 require "filesystem"
 
 cjass = {}
