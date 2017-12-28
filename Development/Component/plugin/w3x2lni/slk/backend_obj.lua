@@ -115,10 +115,6 @@ local function write_data(key, data, meta)
 end
 
 local function write_object(chunk, name, obj)
-    if #name ~= 4 then
-        w2l.message('-report|6无效的物编对象', ('[%s] %s'):format(name, '对象ID不合法'))
-        return
-    end
     local keys = {}
     local metas = {}
     for key in pairs(obj) do
@@ -219,7 +215,9 @@ local function sort_chunk(chunk, remove_unuse_object)
     local origin = {}
     local user = {}
     for name, obj in pairs(chunk) do
-        if is_enable_obj(obj, remove_unuse_object) then
+        if #name ~= 4 then
+            w2l.message('-report|6无效的物编对象', ('[%s] %s'):format(name, '对象ID不合法'))
+        elseif is_enable_obj(obj, remove_unuse_object) then
             local parent = obj._slk_id or obj._parent
             if (name == parent or obj._slk) and not obj._slk_id then
                 origin[#origin+1] = name

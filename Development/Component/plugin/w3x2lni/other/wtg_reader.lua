@@ -5,9 +5,16 @@ local chunk
 local unpack_index
 local read_eca
 local fix
-local fix_step
 local retry_point
 local abort
+
+local fix_step
+local trigger_types
+local preset_map
+local fixed_preset
+local var_map
+local unknowtypes
+local unknowindex
 
 local function fix_arg(n)
     n = n or #fix_step
@@ -56,9 +63,18 @@ local function try_fix(tp, name)
     return fix.ui[tp][name]
 end
 
-local unknowtypes
 local function new_unknow()
-    local name = ('未知类型%03d'):format(#unknowtypes + 1)
+    local name
+    if not trigger_types then
+        trigger_types = {}
+        for _, typedef in ipairs(state.ui.define.TriggerTypes) do
+            trigger_types[typedef[1]] = true
+        end
+    end
+    repeat 
+        unknowindex = unknowindex + 1
+        name = ('未知类型%03d'):format(unknowindex)
+    until not trigger_types[name]
     table.insert(unknowtypes, name)
     return name
 end
@@ -130,8 +146,6 @@ local arg_type_map = {
     [3]  = 'constant',
 }
 
-local preset_map
-local fixed_preset
 local function get_valid(name, ui_type)
     if ui_type == 'boolean' then
         return false
@@ -171,7 +185,6 @@ local function get_preset_type(name, ui_type, ui_guess_level)
     end
 end
 
-local var_map
 local function get_var_type(name)
     if not var_map then
         var_map = {}
@@ -473,9 +486,14 @@ return function (w2l_, wtg_, state_)
         },
     }
     fix_step = {}
-    fixed_preset = {}
-    unknowtypes = {}
     chunk = {}
+
+    trigger_types = nil
+    preset_map = nil
+    fixed_preset = {}
+    var_map = nil
+    unknowtypes = {}
+    unknowindex = 0
 
     read_head()
     read_categories()
