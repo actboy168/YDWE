@@ -42,7 +42,8 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 	{
 		HANDLE                              top_mpq = 0;
 		event_cb	                        event;
-		std::map<std::string, watch_cb>	    watch_map;
+		std::map<std::string, watch_cb>	    watchs;
+		std::map<std::string, watch_cb>	    force_watchs;
 		std::array<std::list<fs::path>, 16> mpq_path;
 
 		void dispatch_event(const std::string& name, const std::string& data)
@@ -81,20 +82,24 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 			return true;
 		}
 
+		bool try_force_watch(const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
+		{
+			auto it = force_watchs.find(filename);
+			if (it == force_watchs.end())
+			{
+				return false;
+			}
+			return it->second(filename, buffer_ptr, size_ptr, reserve_size);
+		}
+
 		bool try_watch(const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
 		{
-			std::string ifilename(filename.size(), 0);
-			std::transform(filename.begin(), filename.end(), ifilename.begin(), [](unsigned char c) { return (unsigned char)tolower(c); });
-			auto it = watch_map.find(ifilename);
-			if (it == watch_map.end())
+			auto it = watchs.find(filename);
+			if (it == watchs.end())
 			{
 				return false;
 			}
-			if (!it->second(ifilename, buffer_ptr, size_ptr, reserve_size))
-			{
-				return false;
-			}
-			return true;
+			return it->second(filename, buffer_ptr, size_ptr, reserve_size);
 		}
 
 		bool try_open_path(const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
@@ -124,20 +129,29 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 				{
 					return false;
 				}
+				std::string filename = szfilename;
+				std::string ifilename(filename.size(), 0);
+				std::transform(filename.begin(), filename.end(), ifilename.begin(), [](unsigned char c) { return (unsigned char)tolower(c); });
+				if (try_force_watch(ifilename, buffer_ptr, size_ptr, reserve_size))
+				{
+					if (overlapped_ptr && overlapped_ptr->hEvent) ::SetEvent(overlapped_ptr->hEvent);
+					return true;
+				}
 				if (top_mpq && base::std_call<bool>(real::SFileFileExistsEx, top_mpq, szfilename, 0))
 				{
 					return false;
 				}
-				std::string filename = szfilename;
-				if (!try_watch(filename, buffer_ptr, size_ptr, reserve_size))
+				if (try_watch(ifilename, buffer_ptr, size_ptr, reserve_size))
 				{
-					if (!try_open_path(filename, buffer_ptr, size_ptr, reserve_size))
-					{
-						return false;
-					}
+					if (overlapped_ptr && overlapped_ptr->hEvent) ::SetEvent(overlapped_ptr->hEvent);
+					return true;
 				}
-				if (overlapped_ptr && overlapped_ptr->hEvent) ::SetEvent(overlapped_ptr->hEvent);
-				return true;
+				if (try_open_path(filename, buffer_ptr, size_ptr, reserve_size))
+				{
+					if (overlapped_ptr && overlapped_ptr->hEvent) ::SetEvent(overlapped_ptr->hEvent);
+					return true;
+				}
+				return false;
 
 			}
 			catch (...) {}
@@ -338,11 +352,16 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		return filesystem::SMemAlloc(n);
 	}
 
-	void watch(const std::string& filename, watch_cb callback)
+	void watch(const std::string& filename, watch_cb callback, bool force)
 	{
 		std::string ifilename(filename.size(), 0);
 		std::transform(filename.begin(), filename.end(), ifilename.begin(), [](unsigned char c) { return (unsigned char)tolower(c); });
-		filesystem::watch_map[ifilename] = callback;
+		if (force) {
+			filesystem::force_watchs[ifilename] = callback;
+		}
+		else {
+			filesystem::watchs[ifilename] = callback;
+		}
 	}
 
 	void  event(event_cb callback)

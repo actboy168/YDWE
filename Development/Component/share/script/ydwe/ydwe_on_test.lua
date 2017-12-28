@@ -123,6 +123,18 @@ local function host_test(commandline, mappath)
 	return cmd, getplayernum(mappath)
 end
 
+local function process_create(application, command_line)
+	local p = process()
+	if not p:create(application, command_line, nil) then
+		log.error(string.format("Executed %s failed", command_line))
+		return false
+	end
+	p:close()
+	p = nil
+	log.trace(string.format("Executed %s.", command_line))
+	return true
+end
+
 -- 本函数在测试地图时使用
 -- event_data - 事件参数，table，包含以下值
 --	map_path - 保存的地图路径，字符串类型
@@ -154,7 +166,7 @@ function event.EVENT_TEST_MAP(event_data)
 	local result = false
 	-- 启动魔兽开始测试...
 	for i = 1, n do
-		result = sys.spawn_inject(fs.ydwe_path() / 'ydwe.exe', commandline)
+		result = process_create(fs.ydwe_path() / 'ydwe.exe', commandline)
 	end
 
 	log.debug("********************* on test end *********************")

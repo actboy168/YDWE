@@ -1,4 +1,4 @@
-require "sys"
+local ll = require "ffi.load_library"
 
 local loader = {}
 	
@@ -7,13 +7,13 @@ loader.load = function(path)
 		log.warn('failed: disable')
 		return false
 	end
-	loader.dll = sys.load_library(path)
+	loader.dll = ll.load_library(path)
 	return loader.dll ~= nil
 end
 
 loader.unload = function()
 	if loader.dll then
-		sys.unload_library(loader.dll)
+		ll.unload_library(loader.dll)
 		loader.dll = nil
 	end
 end

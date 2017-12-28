@@ -13,6 +13,6 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 	_BASE_API bool  initialize(HMODULE module_handle);
 	_BASE_API bool  open_path(const fs::path& p, uint32_t priority);
 	_BASE_API void* storm_alloc(size_t n);
-	_BASE_API void  watch(const std::string& filename, watch_cb callback);
+	_BASE_API void  watch(const std::string& filename, watch_cb callback, bool force);
 	_BASE_API void  event(event_cb callback);
 }}}

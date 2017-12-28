@@ -1,6 +1,6 @@
 require 'utiliy'
 require 'config'
-require 'ffi.loadlibrary'
+local ll = require 'ffi.loadlibrary'
 local getCommandLine = require 'getCommandLine'
 local ffi = require 'ffi'
 local event = require 'ev'
@@ -15,7 +15,7 @@ hook.iat('int(__stdcall*)(const char*)', 'War3.exe', 'kernel32.dll', 'LoadLibrar
     if dllname:lower() == 'game.dll' then
         local lib
         if patch then
-            lib = sys.load_library(patch / 'game.dll')
+            lib = ll.load_library(patch / 'game.dll')
             storm.open(patch / 'patch.mpq', 9)
         end
         if not lib then
@@ -40,7 +40,7 @@ event.on('GameDll加载', function ()
 end)
 
 event.on('GameDll加载', function ()
-    sys.load_library(fs.ydwe_path() / 'plugin' / 'warcraft3' / 'yd_loader.dll')
+    ll.load_library(fs.ydwe_path() / 'plugin' / 'warcraft3' / 'yd_loader.dll')
 end)
 
 event.on('GameDll加载', function ()
@@ -53,11 +53,11 @@ event.on('GameDll加载', function ()
         and file:extension():string():lower() == '.dll'
         and cfg.Enable[file:filename():string()] ~= '0'
         then
-            libs[#libs+1] = sys.load_library(file)
+            libs[#libs+1] = ll.load_library(file)
         end
     end
     for _, lib in ipairs(libs) do
-        local init = sys.get_proc_address(lib, 'Initialize', 'void(__stdcall*)()')
+        local init = ll.get_proc_address(lib, 'Initialize', 'void(__stdcall*)()')
         if init then
             init()
         end
@@ -78,11 +78,11 @@ end
 
 if 'Direct3D 9' == global_config.MapTest.LaunchRenderingEngine then
     event.on('GameDll加载', function()
-        local d3d8proxy = sys.load_library 'd3d8proxy.dll'
+        local d3d8proxy = ll.load_library 'd3d8proxy.dll'
         if not d3d8proxy then
             return
         end
-        local d3d8create = sys.get_proc_address(d3d8proxy, 'Direct3DCreate8', 'void*(__stdcall*)(unsigned int)')
+        local d3d8create = ll.get_proc_address(d3d8proxy, 'Direct3DCreate8', 'void*(__stdcall*)(unsigned int)')
         if not d3d8create then
             return
         end
