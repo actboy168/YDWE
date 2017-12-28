@@ -66,7 +66,7 @@ function loader:new_config(map_name)
 	return table.concat(lines, '\n')
 end
 
-local state, data, string
+local state, data, string, unknowui
 function loader:triggerdata(name, callback)
 	log.trace("virtual_mpq 'triggerdata'")
 	if #self.list == 0 then
@@ -74,14 +74,19 @@ function loader:triggerdata(name, callback)
 	end
 	state = nil
 	for _, path in ipairs(self.list) do
+		local new_state
 		if fs.exists(path / 'ui') then
-			state = ui.merge(state, ui.old_reader(function(filename)
+			new_state = ui.old_reader(function(filename)
 				return io.load(path / 'ui' / filename)
-			end))
+			end)
 		else
-			state = ui.merge(state, ui.new_reader(function(filename)
+			new_state = ui.new_reader(function(filename)
 				return io.load(path / filename)
-			end))
+			end)
+		end
+		state = ui.merge(state, new_state)
+		if path:filename():string() == 'unknowui' then
+			unknowui = new_state
 		end
 	end
 	data, string =  ui.old_writer(state)
@@ -200,8 +205,9 @@ function loader:initialize()
 
 		log.debug('war3map.wtg error, try fix.')
 		local _, fix = w2l:wtg_reader(wtg, state)
+		unknowui = ui.merge(unknowui, fix)
 		local map_name = 'unknowui'
-		local bufs = {ui.new_writer(fix)}
+		local bufs = {ui.new_writer(unknowui)}
 
 		fs.create_directories(root / map_name)
 		io.save(root / map_name / 'define.txt',    bufs[1])
