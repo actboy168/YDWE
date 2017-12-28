@@ -50,7 +50,15 @@ static int VirtualMpqWatch(lua_State* L)
 {
 	size_t len = 0;
 	const char* str = luaL_checklstring(L, 1, &len);
-	base::warcraft3::virtual_mpq::watch(std::string(str, len), std::bind(VirtualMpqWatchCB, base::lua::object(L, 2), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	base::warcraft3::virtual_mpq::watch(std::string(str, len), std::bind(VirtualMpqWatchCB, base::lua::object(L, 2), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4), false);
+	return 0;
+}
+
+static int VirtualMpqForceWatch(lua_State* L)
+{
+	size_t len = 0;
+	const char* str = luaL_checklstring(L, 1, &len);
+	base::warcraft3::virtual_mpq::watch(std::string(str, len), std::bind(VirtualMpqWatchCB, base::lua::object(L, 2), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4), true);
 	return 0;
 }
 
@@ -85,6 +93,7 @@ int luaopen_virtual_mpq(lua_State* L)
 	luaL_Reg l[] = {
 		{ "open_path", VirtualMpqOpenPath },
 		{ "watch", VirtualMpqWatch },
+		{ "force_watch", VirtualMpqForceWatch },
 		{ "event", VirtualMpqEvent },
 		{ NULL, NULL },
 	};
