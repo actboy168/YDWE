@@ -73,28 +73,6 @@ function string.trim (self)
 	return self:gsub("^%s*(.-)%s*$", "%1")
 end
 
-function sys.spawn_inject (application, command_line, current_dir, inject_dll)		
-	local p = process()
-	
-	if inject_dll then
-		if type(inject_dll) == "string" then
-			p:inject(fs.path(inject_dll))
-		else 
-			p:inject(inject_dll)
-		end
-	end
-	
-	if not p:create(application, command_line, current_dir) then
-		log.error(string.format("Executed %s failed", command_line))
-		return false
-	end
-	
-	p:close()
-	p = nil
-	log.trace(string.format("Executed %s.", command_line))
-	return true
-end
-
 function sys.spawn (command_line, current_dir, wait)	
 	local p = process()
 	if not p:create(nil, command_line, current_dir) then
