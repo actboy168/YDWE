@@ -5,7 +5,9 @@ local ini = (require 'w3xparser').ini
 local slk = (require 'w3xparser').slk
 local lni = require 'lni-c'
 local w3x2lni = require 'w3x2lni_in_sandbox'
-local ui = w3x2lni().ui_builder
+local w2l = w3x2lni()
+local ui = w2l.ui_builder
+local storm = require 'ffi.storm'
 
 local ydwe = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component"
 if not fs.exists(ydwe) then
@@ -48,25 +50,41 @@ function loader:config()
 	return true
 end
 
-local data, string
+function loader:new_config(map_name)
+	local lines = {}
+	local f = io.open(root / 'config', 'r')
+	if not f then
+		return nil
+	end
+	for line in f:lines() do
+		if string.trim(line) == map_name then
+			return nil
+		end
+		table.insert(lines, line)
+	end
+	table.insert(lines, map_name)
+	return table.concat(lines, '\n')
+end
+
+local state, data, string
 function loader:triggerdata(name, callback)
 	log.trace("virtual_mpq 'triggerdata'")
 	if #self.list == 0 then
 		return nil
 	end
-	local t = nil
+	state = nil
 	for _, path in ipairs(self.list) do
 		if fs.exists(path / 'ui') then
-			t = ui.merge(t, ui.old_reader(function(filename)
+			state = ui.merge(state, ui.old_reader(function(filename)
 				return io.load(path / 'ui' / filename)
 			end))
 		else
-			t = ui.merge(t, ui.new_reader(function(filename)
+			state = ui.merge(state, ui.new_reader(function(filename)
 				return io.load(path / filename)
 			end))
 		end
 	end
-	data, string =  ui.old_writer(t)
+	data, string =  ui.old_writer(state)
 	return data
 end
 
@@ -169,6 +187,33 @@ function loader:initialize()
 		insert('BIpd', 'item', 'other')
 		insert('Btlf', 'unit', 'other')
 		return stringify_slk(t, 'alias')
+	end)
+	virtual_mpq.force_watch('war3map.wtg', function ()
+		local wtg = storm.load_file('war3map.wtg')
+		if not wtg then
+			return nil
+		end
+		local suc = w2l:wtg_checker(wtg, state)
+		if suc then
+			return wtg
+		end
+
+		log.debug('war3map.wtg error, try fix.')
+		local _, fix = w2l:wtg_reader(wtg, state)
+		local map_name = 'unknowui'
+		local bufs = {ui.new_writer(fix)}
+
+		fs.create_directories(root / map_name)
+		io.save(root / map_name / 'define.txt',    bufs[1])
+		io.save(root / map_name / 'event.txt',     bufs[2])
+		io.save(root / map_name / 'condition.txt', bufs[3])
+		io.save(root / map_name / 'action.txt',    bufs[4])
+		io.save(root / map_name / 'call.txt',      bufs[5])
+		local config = self:new_config(map_name)
+		if config then
+			io.save(root / 'config', config)
+		end
+		return wtg
 	end)
 	virtual_mpq.event(function(_, name)
 		log.info('OpenPathAsArchive', name)
