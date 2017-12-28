@@ -28,6 +28,10 @@ local function is_enable_japi()
 	return result
 end
 
+local function is_enable_unknowui()
+	return true
+end
+
 function loader:config()
 	self.list = {}
 	local f, err = io.open(root / 'config', 'r')
@@ -47,6 +51,9 @@ function loader:config()
 		end
 	end
 	f:close()
+	if is_enable_unknowui() then
+		table.insert(self.list, root / 'unknowui')
+	end
 	return true
 end
 
@@ -174,8 +181,8 @@ function loader:initialize()
 	end)
 	virtual_mpq.force_watch('war3map.wtg', function ()
 		local wtg = storm.load_file('war3map.wtg')
-		if not wtg then
-			return nil
+		if not wtg or not is_enable_unknowui() then
+			return wtg
 		end
 		local suc = w2l:wtg_checker(wtg, state)
 		if suc then
