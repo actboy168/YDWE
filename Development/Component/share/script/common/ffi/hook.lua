@@ -29,7 +29,7 @@ function hook.dyn_iat(define, module, dll, api, f)
             name = ffi.string(name)
             for _, l in ipairs(list) do
                 local dll, api, f = l[1], l[2], l[3]
-                if lib == sys.get_module_handle(dll) and name == api then
+                if lib == ll.get_module_handle(dll) and name == api then
                     local res = list.rGetProcAddress(lib, name)
                     l[4] = hk.c2lua(define, res)
                     return hk.lua2c(define, f)
