@@ -1,4 +1,4 @@
-local ll = require "ffi.load_library"
+local ll = require "ffi.loadlibrary"
 
 local loader = {}
 	
