@@ -1,9 +1,12 @@
 local w2l
 local wtg
-local state
+local ui
 local index
 local read_eca
 local _, a, b, c
+
+local ipairs = ipairs
+local string_unpack = string.unpack
 
 local type_map = {
     [0] = 'event',
@@ -14,9 +17,10 @@ local type_map = {
 
 local arg_count
 local function get_ui_arg_count(type, name)
-    if not arg_count[name] then
-        local ui = state.ui[type][name]
-        local count = 0
+    local count = arg_count[name]
+    if not count then
+        local ui = ui[type][name]
+        count = 0
         if ui.args then
             for _, arg in ipairs(ui.args) do
                 if arg.type ~= 'nothing' then
@@ -26,78 +30,82 @@ local function get_ui_arg_count(type, name)
         end
         arg_count[name] = count
     end
-    return arg_count[name]
+    return count
 end
 
 local function read_head()
-    _, _, index = ('c4l'):unpack(wtg, index)
+    index = index + 8
 end
 
 local function read_category()
-    _, _, _, index = ('lzl'):unpack(wtg, index)
+    _, _, _, index = string_unpack('lzl', wtg, index)
 end
 
 local function read_categories()
-    a, index = ('l'):unpack(wtg, index)
+    a, index = string_unpack('l', wtg, index)
     for i = 1, a do
         read_category()
     end
 end
 
 local function read_var()
-    _, _, _, _, _, _, _, index = ('zzllllz'):unpack(wtg, index)
+    _, _, _, _, _, _, _, index = string_unpack('zzllllz', wtg, index)
 end
 
 local function read_vars()
-    _, a, index = ('ll'):unpack(wtg, index)
+    _, a, index = string_unpack('ll', wtg, index)
     for i = 1, a do
         read_var()
     end
 end
 
 local function read_arg()
-    _, _, a, index = ('lzl'):unpack(wtg, index)
+    _, a, b, index = string_unpack('zll', wtg, index + 4)
 
     if a == 1 then
-        read_eca(false)
+        read_eca(false, b)
+        b, index = string_unpack('l', wtg, index + 4)
     end
 
-    b, index = ('l'):unpack(wtg, index)
     if b == 1 then
         read_arg()
     end
     return arg
 end
 
-function read_eca(is_child)
-    a, index = ('l'):unpack(wtg, index)
-    if is_child then
-        _, index = ('l'):unpack(wtg, index)
+function read_eca(is_child, a)
+    if a then
+        b, _, index = string_unpack('zl', wtg, index)
+    else
+        if is_child then
+            a, _, b, _, index = string_unpack('llzl', wtg, index)
+        else
+            a, b, _, index = string_unpack('lzl', wtg, index)
+        end
     end
-    b, _, index = ('zl'):unpack(wtg, index)
 
     local count = get_ui_arg_count(type_map[a], b)
     for i = 1, count do
         read_arg()
     end
-    c, index = ('l'):unpack(wtg, index)
-    return c
 end
 
-local function read_ecas(count, is_child)
-    for i = 1, count do
-        local child_count = read_eca(is_child)
-        read_ecas(child_count, true)
+local function read_ecas(is_child)
+    a, index = string_unpack('l', wtg, index)
+    for i = 1, a do
+        read_eca(is_child)
+        read_ecas(true)
     end
 end
 
 local function read_trigger()
-    _, _, _, _, _, _, _, _, a, index = ('zzlllllll'):unpack(wtg, index)
-    read_ecas(a, false)
+    _, _, index = string_unpack('zz', wtg, index)
+    index = index + 24
+    read_ecas(false)
 end
 
 local function read_triggers()
-    a, index = ('l'):unpack(wtg, index)
+    a, index = string_unpack('l', wtg, index)
     for i = 1, a do
         read_trigger()
     end
@@ -112,7 +120,7 @@ end
 
 return function (w2l_, wtg_, state_)
     wtg = wtg_
-    state = state_
+    ui = state_.ui
     arg_count = {}
     index = 1
 
