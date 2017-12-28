@@ -50,22 +50,6 @@ function loader:config()
 	return true
 end
 
-function loader:new_config(map_name)
-	local lines = {}
-	local f = io.open(root / 'config', 'r')
-	if not f then
-		return nil
-	end
-	for line in f:lines() do
-		if string.trim(line) == map_name then
-			return nil
-		end
-		table.insert(lines, line)
-	end
-	table.insert(lines, map_name)
-	return table.concat(lines, '\n')
-end
-
 local state, data, string
 function loader:triggerdata(name, callback)
 	log.trace("virtual_mpq 'triggerdata'")
@@ -209,10 +193,6 @@ function loader:initialize()
 		io.save(root / map_name / 'condition.txt', bufs[3])
 		io.save(root / map_name / 'action.txt',    bufs[4])
 		io.save(root / map_name / 'call.txt',      bufs[5])
-		local config = self:new_config(map_name)
-		if config then
-			io.save(root / 'config', config)
-		end
 		return wtg
 	end)
 	virtual_mpq.event(function(_, name)
