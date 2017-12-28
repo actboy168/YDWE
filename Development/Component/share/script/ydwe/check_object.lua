@@ -9,8 +9,8 @@ local lni       = require 'lni-c'
 local w2l      = root / 'plugin' / 'w3x2lni'
 local defined  = w2l / 'defined'
 
-local info     = lni(assert(io.load(w2l / 'info.ini')), 'info.ini')
-local metadata = lni(assert(io.load(defined / 'metadata.ini')), 'metadata.ini')
+local info       = lni(assert(io.load(w2l / 'info.ini')), 'info.ini')
+local typedefine = lni(assert(io.load(defined / 'typedefine.ini')), 'typedefine.ini')
 
 local select        = select
 local tonumber      = tonumber
@@ -26,8 +26,8 @@ local buf_pos
 local unpack_buf
 local unpack_pos
 local has_level
+local metadata
 local check_bufs
-local meta
 
 local function set_pos(...)
     unpack_pos = select(-1, ...)
@@ -41,7 +41,13 @@ end
 local function unpack_data(name)
     local id, type = unpack 'c4l'
     local id = string_unpack('z', id)
-    local except = meta[id] or type
+    local except
+    local meta = metadata[id]
+    if meta then
+        except = typedefine[string_lower(meta.type)] or 3
+    else
+        except = type
+    end
     if type ~= except then
         if type == 3 or except == 3 then
             except = type
@@ -105,8 +111,8 @@ local function check(type, buf)
     unpack_pos = 1
     unpack_buf = buf
     has_level  = info.key.max_level[type]
+    metadata   = w3xparser.slk(io.load(mpq / info.metadata[type]))
     check_bufs = {}
-    meta = metadata[type]
 
     unpack_head()
     unpack_chunk()
