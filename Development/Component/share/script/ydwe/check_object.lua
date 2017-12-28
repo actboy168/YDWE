@@ -8,7 +8,7 @@ local lni       = require 'lni-c'
 
 local w2l      = root / 'plugin' / 'w3x2lni'
 local defined  = w2l / 'defined'
-local mpq      = root / 'share' / 'mpq' / 'units' / 'units'
+local mpq      = root / 'share' / 'mpq' / 'units'
 
 local info       = lni(assert(io.load(w2l / 'info.ini')), 'info.ini')
 local typedefine = lni(assert(io.load(defined / 'typedefine.ini')), 'typedefine.ini')
@@ -112,7 +112,11 @@ local function check(type, buf)
     unpack_pos = 1
     unpack_buf = buf
     has_level  = info.key.max_level[type]
-    metadata   = w3xparser.slk(io.load(mpq / info.metadata[type]))
+    if type == 'doodad' then
+        metadata   = w3xparser.slk(io.load(mpq / 'doodads' / info.metadata[type]))
+    else
+        metadata   = w3xparser.slk(io.load(mpq / 'units' / info.metadata[type]))
+    end
     check_bufs = {}
 
     unpack_head()
