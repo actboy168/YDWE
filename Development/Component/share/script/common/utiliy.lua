@@ -135,9 +135,14 @@ ffi.cdef[[
     int  __stdcall GetCurrentProcess();
 ]]
 
-function sys.reboot()
-	local p = process()
-	if not p:create(nil, uni.w2u(ffi.C.GetCommandLineW()), fs.current_path()) then
+function sys.reboot(map)
+    local p = process()
+    local ydwe = fs.get(fs.DIR_EXE)
+    local cmd = '"'.. ydwe:string() .. '"'
+    if map then
+        cmd = cmd .. ' -loadfile "' .. map .. '"'
+    end
+	if not p:create(ydwe, cmd, fs.current_path()) then
 		return
 	end
     p:close()

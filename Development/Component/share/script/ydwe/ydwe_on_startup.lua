@@ -231,3 +231,8 @@ function event.EVENT_MSS_LOAD(event_data)
 	-- 全部放行
 	return 0
 end
+
+local event = require 'ev'
+virtual_mpq.event(function(name, ...)
+    event.emit('virtual_mpq: ' .. name, ...)
+end)

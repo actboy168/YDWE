@@ -6,6 +6,7 @@
 #include <base/util/foreach.h>	  	  		
 #include <base/filesystem.h>   
 #include <base/util/optional.h>
+#include <base/util/unicode.h>
 #include <cstdint>
 #include <array>   
 #include <map>
@@ -228,6 +229,11 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 			if (mpq_handle_ptr && priority == 16 && ok)
 			{
 				filesystem::top_mpq = *mpq_handle_ptr;
+				try {
+					filesystem::dispatch_event("open map", base::a2u(mpqname).c_str());
+				}
+				catch (...) {
+				}
 			}
 			return ok;
 		}
