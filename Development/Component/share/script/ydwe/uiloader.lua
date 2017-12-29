@@ -178,33 +178,37 @@ function loader:initialize()
 		insert('BIpd', 'item', 'other')
 		insert('Btlf', 'unit', 'other')
 		return stringify_slk(t, 'alias')
-	end)
-	virtual_mpq.force_watch('war3map.wtg', function ()
-		local wtg = storm.load_file('war3map.wtg')
-		if not wtg or not is_enable_unknowui() then
-			return wtg
-		end
-		local suc = w2l:wtg_checker(wtg, state)
-		if suc then
-			return wtg
-		end
-
-		log.debug('war3map.wtg error, try fix.')
-		local _, fix = w2l:wtg_reader(wtg, state)
-		local map_name = 'unknowui'
-		local bufs = {ui.new_writer(fix)}
-
-		fs.create_directories(root / map_name)
-		io.save(root / map_name / 'define.txt',    bufs[1])
-		io.save(root / map_name / 'event.txt',     bufs[2])
-		io.save(root / map_name / 'condition.txt', bufs[3])
-		io.save(root / map_name / 'action.txt',    bufs[4])
-		io.save(root / map_name / 'call.txt',      bufs[5])
-		return wtg
-	end)
+    end)
 	virtual_mpq.event(function(_, name)
 		log.info('OpenPathAsArchive', name)
 	end)
+    if is_enable_unknowui() then
+	    virtual_mpq.force_watch('war3map.wtg', function ()
+	    	local wtg = storm.load_file('war3map.wtg')
+	    	if not wtg then
+	    		return
+	    	end
+	    	if w2l:wtg_checker(wtg, state) then
+	    		return
+	    	end
+
+            if not gui.yesno_message(nil, _('检测到地图使用了未知的UI，YDWE可以尝试帮你识别未知的UI，是否继续？(会重启YDWE)')) then
+                return
+            end
+
+	    	log.debug('war3map.wtg error, try fix.')
+	    	local _, fix = w2l:wtg_reader(wtg, state)
+            local bufs = {ui.new_writer(fix)}
+            local dir = fs.ydwe_path() / 'share' / 'mpq' / 'unknowui'
+	    	fs.create_directories(dir)
+	    	io.save(dir / 'define.txt',    bufs[1])
+	    	io.save(dir / 'event.txt',     bufs[2])
+	    	io.save(dir / 'condition.txt', bufs[3])
+	    	io.save(dir / 'action.txt',    bufs[4])
+            io.save(dir / 'call.txt',      bufs[5])
+            sys.reboot()
+        end)
+    end
 end
 
 uiloader = loader

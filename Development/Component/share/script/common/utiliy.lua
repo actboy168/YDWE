@@ -73,7 +73,7 @@ function string.trim (self)
 	return self:gsub("^%s*(.-)%s*$", "%1")
 end
 
-function sys.spawn (command_line, current_dir, wait)	
+function sys.spawn (command_line, current_dir, wait)
 	local p = process()
 	if not p:create(nil, command_line, current_dir) then
 		log.error(string.format("Executed %s failed", command_line))
@@ -126,4 +126,21 @@ function sys.ini_save (path, tbl)
 		end
 	end
 	f:close()
+end
+
+local ffi = require 'ffi'
+ffi.cdef[[
+    const wchar_t* __stdcall GetCommandLineW();
+    bool __stdcall TerminateProcess(int hProcess, unsigned int uExitCode);
+    int  __stdcall GetCurrentProcess();
+]]
+
+function sys.reboot()
+	local p = process()
+	if not p:create(nil, uni.w2u(ffi.C.GetCommandLineW()), fs.current_path()) then
+		return
+	end
+    p:close()
+    ffi.C.TerminateProcess(ffi.C.GetCurrentProcess(), 0)
+	return
 end
