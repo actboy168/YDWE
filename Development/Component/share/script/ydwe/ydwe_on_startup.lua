@@ -21,6 +21,7 @@ local function initialize_reg()
 	-- 某些UI的颜色
 	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\WorldEdit\Trigger Display Colors]]
 	reg["TC_YDHIDE"] = { registry.REG_DWORD, 0xffff0000 }
+	reg["TC_UNKNOWUI"] = { registry.REG_DWORD, 0xffff0000 }
 	reg["TC_COMMENT"] = { registry.REG_DWORD, 0xff008000 }
 end
 
