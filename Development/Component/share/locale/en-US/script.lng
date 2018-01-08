@@ -1,0 +1,50 @@
+[UNKNOWN]
+Unknown
+[ERROR]
+Error
+[YDWE]
+YDWE
+[OK]
+OK
+[CANCEL]
+Cancel
+[PREPEOCESSOR_FAILED]
+Preprocessor failed with message:
+stdout: %s
+stderr: %s
+[PREPEOCESSOR_LAUNCH_FAILED]
+Cannot start preprocessor process.
+[EXPORT_FILE]
+Export file
+[SAVE_FILE]
+Save file
+[MENU_YDWE]
+&YDWE
+[MENU_CONIFG]
+&Config
+[MENU_LAUNCH_WAR3]
+Launch &Warcraft3
+[MENU_SHOW_LAST_COMPILE_RESULT]
+Show las&t compile result
+[MENU_SHOW_JASSHELPER_VERSION]
+Show J&assHelper version
+[MENU_SHOW_CJASS_VERSION]
+Show c&Jass version
+[MENU_OPEN_OFFICIAL_SITE]
+Open YDWE &official site
+[MENU_CREDITS]
+Cre&dits
+[NEW_OBJECT_ID]
+New Object ID
+[INPUT_OBJECT_ID]
+Please input new object ID, or cancel to use the default one.
+[ERROR_OBJECT_ID]
+You have entered an invalid ID. The ID must contain just 4 letters or digits. It cannot contain chars other than those in ASCII. 
+[EXISTS_OBJECT_ID]
+You have entered an invalid ID. This ID already exists.
+[REMOVE_MAP_READONLY]
+Whether to remove the read-only attribute from "%s"?
+[DELETE_DANGER_DIR]
+YDWE has detected that there is a directory named "%s" located in Warcraft 3 installation directory. It may prevent YDWE from working. Do you want to delete it?
+[ERROR_WAR3_VERSION]
+YDWE has detected that your game.dll and war3patch.mpq mismatch. It may be caused by the so called "Warcraft Version Converter". This situation will cause a failure on saving and testing maps. It is strongly recommended to use the offical patched provided by Blizzard.

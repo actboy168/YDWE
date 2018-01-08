@@ -60,7 +60,7 @@ local function messagebox(hwnd, text, caption, type)
 end
 
 function gui.error_message(hwnd, fmt, ...)
-    return messagebox(hwnd, fmt:format(...), _("Error") ,gui.MB_ICONQUESTION | gui.MB_OK)
+    return messagebox(hwnd, fmt:format(...), _("ERROR") ,gui.MB_ICONQUESTION | gui.MB_OK)
 end
 
 function gui.message(hwnd, fmt, ...)

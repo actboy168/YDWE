@@ -58,14 +58,14 @@ function event.EVENT_INIT_MENU(event_data)
 		end
 	end
 
-	local menu = gui.menu(event_data.main_menu_handle, _("&YDWE"))
-	menu:add(_("YDWE &Config"), launch_config)
-	menu:add(_("Launch &Warcraft3"), launch_warcraft3)
-	menu:add(_("Show las&t compile result"), show_last_error)
-	menu:add(_("Show J&assHelper version"), show_jasshelper_version)
-	menu:add(_("Show c&Jass version"), show_cjass_version)
-	menu:add(_("Launch YDWE &official website"), open_offical_site)
-	menu:add(_("Cre&dits"), show_credit)
+	local menu = gui.menu(event_data.main_menu_handle, _("MENU_YDWE"))
+	menu:add(_("MENU_CONIFG"), launch_config)
+	menu:add(_("MENU_LAUNCH_WAR3"), launch_warcraft3)
+	menu:add(_("MENU_SHOW_LAST_COMPILE_RESULT"), show_last_error)
+	menu:add(_("MENU_SHOW_JASSHELPER_VERSION"), show_jasshelper_version)
+	menu:add(_("MENU_SHOW_CJASS_VERSION"), show_cjass_version)
+	menu:add(_("MENU_OPEN_OFFICIAL_SITE"), open_offical_site)
+	menu:add(_("MENU_CREDITS"), show_credit)
 
 	main_window_handle = event_data.main_window_handle
 

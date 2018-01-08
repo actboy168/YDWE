@@ -88,9 +88,9 @@ function wave:compile(op)
 	-- 退出码0代表成功
 	if exit_code ~= 0 then
 		if out and err then
-			gui.error_message(nil, _("Preprocessor failed with message:\nstdout:%s\nstderr: %s"), out, err)
+			gui.error_message(nil, _("PREPEOCESSOR_FAILED"), out, err)
 		else
-			gui.error_message(nil, _("Cannot start preprocessor process."))
+			gui.error_message(nil, _("PREPEOCESSOR_LAUNCH_FAILED"))
 		end
 		return false
 	end

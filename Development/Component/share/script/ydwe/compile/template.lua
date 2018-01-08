@@ -122,7 +122,7 @@ function template:compile(op)
 			end
 			gui.error_message(nil, __(msg))
 		else
-			gui.error_message(nil, _("Unknown"))
+			gui.error_message(nil, _("UNKNOWN"))
 		end			
 		log.error("Template error processing: " .. tostring(content))
 		return false
