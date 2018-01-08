@@ -118,6 +118,11 @@ local function stringify_txt(t)
 	return table.concat(buf, '\r\n')
 end
 
+local units_path = fs.path 'units'
+local function load_mpq(filename)
+	return io.load(root / units_path / filename) or io.load(root / 'units' / filename)
+end
+
 function loader:initialize()
 	self:config()
 	virtual_mpq.watch('UI\\TriggerData.txt',      function (name) return self:triggerdata() end)
@@ -132,7 +137,7 @@ function loader:initialize()
 	virtual_mpq.watch(info.txt[1], function ()
 		local t = {}
 		for _, filename in pairs(info.txt) do
-			txt(io.load(root / 'units' / filename), filename, t)
+			txt(load_mpq(filename), filename, t)
 		end
 		txt(io.load(root / 'units' / 'ui' / 'ydwetip.txt'), 'ydwetip', t)
 		
@@ -150,14 +155,14 @@ function loader:initialize()
 		return stringify_txt(t)
 	end)
 	virtual_mpq.watch('units\\abilitydata.slk', function ()
-		local t = slk(io.load(root / 'units' / 'units' / 'abilitydata.slk'), 'abilitydata.slk')
+		local t = slk(load_mpq('units/abilitydata.slk'), 'abilitydata.slk')
 		for _, o in pairs(t) do
 			o.useInEditor = 1
 		end
 		return stringify_slk(t, 'alias')
 	end)
 	virtual_mpq.watch('units\\abilitybuffdata.slk', function ()
-		local t = slk(io.load(root / 'units' / 'units' / 'abilitybuffdata.slk'), 'abilitybuffdata.slk')
+		local t = slk(load_mpq('units/abilitybuffdata.slk'), 'abilitybuffdata.slk')
 		local function insert(code, sort, race)
 			t[code] = {
 				code = code,
@@ -182,6 +187,7 @@ function loader:initialize()
     end)
 	event.on('virtual_mpq: open path as archive', function(name)
 		log.info('OpenPathAsArchive', name)
+		units_path = fs.path 'units' / 'Custom_V1'
 	end)
     if is_enable_unknowui() then
         local ignore_once = nil

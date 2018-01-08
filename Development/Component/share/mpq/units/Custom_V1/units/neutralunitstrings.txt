@@ -23,7 +23,7 @@ Ubertip="轻型的远程攻击单位。 |n|n|cffffcc00能攻击地面和空中�
 [nsce]
 Name=骷髅战士
 Tip=雇佣骷髅战士
-Ubertip="轻型的近战单位。 |n|n|cffffcc00能攻击地面和空中单位。|r"
+Ubertip="轻型的近战单位。|n|n|cffffcc00能攻击地面和空中单位。|r"
 
 [nskg]
 Name=巨型骷髅战士
@@ -500,7 +500,7 @@ Ubertip="轻型飞行单位，能投掷出尖羽毛。|n|n|cffffcc00能攻击地
 Name=鹰身女妖巫婆
 Tip=雇用鹰身女妖巫婆(|cffffcc00W|r)
 Hotkey=W
-Ubertip="飞行单位，能施放出闪电进行攻击，也能施放精灵之火。|n|n|cffffcc00能攻击地面和空中单位。|r "
+Ubertip="飞行单位，能施放出闪电进行攻击，也能施放精灵之火和驱魔技能。|n|n|cffffcc00能攻击地面和空中单位。|r"
 
 [nhrh]
 Name=女妖风暴巫师
@@ -1131,14 +1131,12 @@ Ubertip="重型近战单位，被熊熊的火焰包围着，能对周围的地�
 Name=毁灭守卫
 Tip=召唤毁灭守卫
 Ubertip="重型远程攻击单位，具有驱魔，战争践踏，残废术和火焰雨这四项技能。|n|n|cffffcc00能攻击地面和空中单位。|r"
-EditorSuffix=(标准)
 
-//doom guard, summoned
+//summoned doom guard
 [nba2]
 Name=毁灭守卫
 Tip=召唤毁灭守卫
-Ubertip="重型的远程攻击单位。能施放驱逐魔法，战争践踏，残废和火焰雨这几项技能。|n|n|cffffcc00能攻击地面和空中单位。|r "
-EditorSuffix=(召唤的)
+Ubertip="重型的远程攻击单位。能施放驱逐魔法，战争践踏，残废和火焰雨这几项技能。|n|n|cffffcc00能攻击地面和空中单位。|r"
 
 
 [nglm]
@@ -1406,7 +1404,50 @@ Tip=召唤地(|cffffcc00E|r)
 Ubertip="强健的地之熊猫战士。有抗性皮肤及魔法免疫。可以施放粉碎和嘲讽技能。|n|n|cffffcc00攻击陆地单位。|r"
 Hotkey=E
 
-// neutral heroes
+[Nbrn]
+Name=黑暗游侠
+Propernames=纳拉-迈步,阿恩雅-恒歌,安瑟斯-日弓,斯里-死步,西恩迪-鹰矛,米拉-破凋,阿摩拉-鹰眼,斯勒恩-鬼歌,索门德-菲佐
+Hotkey=R
+Tip=召唤黑暗游侠(|cffffcc00R|r)
+Ubertip="灵巧型的英雄，擅长于与对手周旋。能学习到沉默魔法，黑暗之箭，生命汲取和符咒这四项技能。|n|n|cffffcc00能攻击地面和空中单位。|r"
+Revivetip=复活黑暗游侠(|cffffcc00R|r)
+Awakentip=复活黑暗游侠(|cffffcc00R|r)
+
+[ndr1]
+Name=小黑暗之奴
+Tip=召唤黑暗之奴
+
+[ndr2]
+Name=黑暗之奴
+Tip=召唤黑暗之奴
+
+[ndr3]
+Name=大黑暗之奴
+Tip=召唤黑暗之奴
+
+[Nfir]
+Name=火焰巨魔
+Propernames=拉格尔,哈特斯,布雷泽,海特富莱,沃尔卡,富莱夏尔,卡尔,斯莫,辛格尔
+Hotkey=O
+Tip=(|cffffcc00o|r)召唤火焰巨魔
+Ubertip="神秘型英雄，擅长于破坏魔法并施放出巨大的火焰攻击力。能学习到燃灰、灵魂燃烧、召唤炎魔和火山爆发技能。|n|n|cffffcc00能攻击地面和空中单位。|r"
+Revivetip=(|cffffcc00o|r)复活火焰巨魔
+Awakentip=(|cffffcc00o|r)复活火焰巨魔
+
+//lava spawn1
+[nlv1]
+Name=炎魔
+EditorSuffix= (等级 1)
+
+//lava spawn2
+[nlv2]
+Name=炎魔
+EditorSuffix= (等级 2)
+
+//lava spawn3
+[nlv3]
+Name=炎魔
+EditorSuffix= (等级 3)
 
 //alchemist
 [Nalc]
@@ -1461,7 +1502,7 @@ Ubertip="敏捷性的英雄，特别擅长于战斗和承受攻击。能学习�
 Revivetip= (|cffffcc00Z|r)复活修补匠
 Awakentip=(|cffffcc00Z|r)复活修补匠
 
-// Tinker (morph / 机器人地精)
+// Tinker (morph / robo-goblin)
 [Nrob]
 Name=修补匠
 Propernames=盖茨,力克特,美卡,特克,普拉格,拉斯特
@@ -1515,27 +1556,6 @@ Tip= (|cffffcc00F|r)召唤口袋工厂
 Ubertip="工厂能生产出人工地精。"
 Hotkey=F
 EditorSuffix= (Level 3)
-
-[Nbrn]
-Name=黑暗游侠
-Propernames=纳拉-迈步,阿恩雅-恒歌,安瑟斯-日弓,斯里-死步,西恩迪-鹰矛,米拉-破凋,阿摩拉-鹰眼,斯勒恩-鬼歌,索门德-菲佐
-Hotkey=R
-Tip=召唤黑暗游侠(|cffffcc00R|r)
-Ubertip="灵巧型的英雄，擅长于与对手周旋。能学习到沉默魔法，黑暗之箭，生命汲取和符咒这四项技能。|n|n|cffffcc00能攻击地面和空中单位。|r"
-Revivetip=复活黑暗游侠(|cffffcc00R|r)
-Awakentip=复活黑暗游侠(|cffffcc00R|r)
-
-[ndr1]
-Name=小黑暗之奴
-Tip=召唤黑暗之奴
-
-[ndr2]
-Name=黑暗之奴
-Tip=召唤黑暗之奴
-
-[ndr3]
-Name=大黑暗之奴
-Tip=召唤黑暗之奴
 
 [nskk]
 Name=小蜥蜴
@@ -1796,30 +1816,6 @@ Tip=召唤娜迦女海巫(|cffffcc00G|r)
 Ubertip="一位神秘的英雄，擅长于远距离战斗。能学习到叉状闪电、霜冻之箭、魔法护盾和龙卷风。|n|n|cffffcc00能攻击地面和空中单位。|r"
 Revivetip=复活娜迦女海巫(|cffffcc00G|r)
 Awakentip=复活娜迦女海巫(|cffffcc00G|r)
-
-[Nfir]
-Name=火焰巨魔
-Propernames=拉格尔,哈特斯,布雷泽,海特富莱,沃尔卡,富莱夏尔,卡尔,斯莫,辛格尔
-Hotkey=O
-Tip=(|cffffcc00o|r)召唤火焰巨魔
-Ubertip="神秘型英雄，擅长于破坏魔法并施放出巨大的火焰攻击力。能学习到燃灰、灵魂燃烧、召唤炎魔和火山爆发技能。|n|n|cffffcc00能攻击地面和空中单位。|r"
-Revivetip=(|cffffcc00o|r)复活火焰巨魔
-Awakentip=(|cffffcc00o|r)复活火焰巨魔
-
-//lava spawn1
-[nlv1]
-Name=炎魔
-EditorSuffix= (等级 1)
-
-//lava spawn2
-[nlv2]
-Name=炎魔
-EditorSuffix= (等级 2)
-
-//lava spawn3
-[nlv3]
-Name=炎魔
-EditorSuffix= (等级 3)
 
 [Nplh]
 Name=深渊魔王

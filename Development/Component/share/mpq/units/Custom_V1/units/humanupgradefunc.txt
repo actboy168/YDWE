@@ -81,7 +81,7 @@ Requires1=hcas
 [Rhri]
 Art=ReplaceableTextures\CommandButtons\BTNDwarvenLongRifle.blp
 Buttonpos=1,2
-Requires=hkee
+Requires=harm
 
 [Rhse]
 Art=ReplaceableTextures\CommandButtons\BTNMagicalSentry.blp
@@ -93,9 +93,9 @@ Buttonpos=1,2
 Requires=hkee
 
 [Rhhb]
-Requires=hcas
 Art=ReplaceableTextures\CommandButtons\BTNStormHammer.blp
-Buttonpos=1,2
+Buttonpos=0,2
+Requires=
 
 [Rhrt]
 Art=ReplaceableTextures\CommandButtons\BTNScatterRockets.blp
@@ -118,7 +118,6 @@ Buttonpos=1,1
 Requires=hcas
 
 [Rhcd]
-Requires=hcas
 Art=ReplaceableTextures\CommandButtons\BTNCloudOfFog.blp
-Buttonpos=0,2
+Buttonpos=1,2
 Requires=hvlt

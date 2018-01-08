@@ -1,6 +1,6 @@
 // permits dependencies upon heroes
 [HERO]
-DependencyOr=Hamg,Hblm,Hmkg,Hpal,Obla,Ofar,Oshd,Otch,Edem,Ekee,Emoo,Ewar,Ucrl,Udea,Udre,Ulic,Npbm,Nbrn,Nngs,Nplh,Nbst,Nalc,Ntin,Nfir
+DependencyOr=Hamg,Hblm,Hmkg,Hpal,Obla,Ofar,Oshd,Otch,Edem,Ekee,Emoo,Ewar,Ucrl,Udea,Udre,Ulic,Npbm,Nbrn,Nngs,Nplh,Nbst
 
 [nwad]
 Art=ReplaceableTextures\CommandButtons\BTNSentryWard.blp
@@ -16,14 +16,15 @@ Missilespeed=900
 [nske]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
 
-// skeletal archer (summoned)
+
+// skeletal archer (Summoned)
 [nsca]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletonArcher.blp
 Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
 Missilearc=0.15
 Missilespeed=900
 
-// skeleton (summoned)
+// skeleton (Summoned)
 [nsce]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
 
@@ -1000,7 +1001,7 @@ Sellunits=npfl,ndrm,nvdw,ndrd
 // Tavern
 [ntav]
 Art=ReplaceableTextures\CommandButtons\BTNTavern.blp
-Sellunits=Nalc,Ntin,Nfir,Nngs,Nbrn,Npbm,Nplh,Nbst
+Sellunits=Nngs,Nbrn,Npbm,Nplh,Nbst
 
 // Fountain of Power
 [nmoo]
@@ -1384,7 +1385,6 @@ MissileHoming=1
 Attachmentanimprops=medium
 Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
 
-//summoned doomguard
 [nba2]
 Art=ReplaceableTextures\CommandButtons\BTNDoomGuard.blp
 Missileart=Abilities\Weapons\DemonHunterMissile\DemonHunterMissile.mdl
@@ -1583,6 +1583,72 @@ Attachmentanimprops=medium
 Art=ReplaceableTextures\CommandButtons\BTNEarthBrewmaster.blp
 Attachmentanimprops=medium
 
+// Dark Ranger
+[Nbrn]
+Art=ReplaceableTextures\CommandButtons\BTNBansheeRanger.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Buttonpos=1,1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-bansheeranger.blp
+
+[ndr1]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
+
+[ndr2]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
+
+[ndr3]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
+
+// Firelord
+[Nfir]
+Art=ReplaceableTextures\CommandButtons\BTNHeroAvatarOfFlame.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Buttonpos=3,1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Missileart=Abilities\Weapons\LordofFlameMissile\LordofFlameMissile.mdl
+Missilearc=0.08
+MissileHoming=1
+Missilespeed=1200
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-avatarofflame.blp
+
+//lava spawn 1
+[nlv1]
+Art=ReplaceableTextures\CommandButtons\BTNLavaSpawn.blp
+Missileart=Abilities\Weapons\LavaSpawnMissile\LavaSpawnMissile.mdl
+Missilearc=0.15
+MissileHoming=1
+Missilespeed=1000
+Attachmentanimprops=medium
+
+//lava spawn 2
+[nlv2]
+Art=ReplaceableTextures\CommandButtons\BTNLavaSpawn.blp
+Missileart=Abilities\Weapons\LavaSpawnMissile\LavaSpawnMissile.mdl
+Missilearc=0.15
+MissileHoming=1
+Missilespeed=1000
+Attachmentanimprops=medium
+
+//lava spawn 3
+[nlv3]
+Art=ReplaceableTextures\CommandButtons\BTNLavaSpawn.blp
+Missileart=Abilities\Weapons\LavaSpawnMissile\LavaSpawnMissile.mdl
+Missilearc=0.15
+MissileHoming=1
+Missilespeed=1000
+Attachmentanimprops=medium
+
+
 // Alchemist
 [Nalc]
 Art=ReplaceableTextures\CommandButtons\BTNHeroAlchemist.blp
@@ -1673,7 +1739,7 @@ Missilespeed=900
 Buttonpos=2,2
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
 Attachmentanimprops=large
-Attachmentlinkprops=alternate
+Attachmentlinkprops=alternate 
 Boneprops=alternate
 ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-tinker.blp
 
@@ -1697,7 +1763,7 @@ Attachmentanimprops=medium
 Art=ReplaceableTextures\CommandButtons\BTNClockWerkGoblin.blp
 Attachmentanimprops=medium
 
-// pocket factory (level 1)
+// pocket factory (Level 1)
 [nfac]
 Art=ReplaceableTextures\CommandButtons\BTNPocketFactory.blp
 Attachmentanimprops=medium
@@ -1707,35 +1773,10 @@ Attachmentanimprops=medium
 Art=ReplaceableTextures\CommandButtons\BTNPocketFactory.blp
 Attachmentanimprops=medium
 
-// pocket factory (level 3)
+// pocket factory (Level 3)
 [nfa2]
 Art=ReplaceableTextures\CommandButtons\BTNPocketFactory.blp
 Attachmentanimprops=medium
-
-
-
-// Dark Ranger
-[Nbrn]
-Art=ReplaceableTextures\CommandButtons\BTNBansheeRanger.blp
-Requirescount=3
-Requires=TALT
-Requires1=TWN2,TALT
-Requires2=TWN3,TALT
-Buttonpos=1,1
-Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
-Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
-Missilearc=0.15
-Missilespeed=900
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-bansheeranger.blp
-
-[ndr1]
-Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
-
-[ndr2]
-Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
-
-[ndr3]
-Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
 
 // Skink critter
 [nskk]
@@ -2116,50 +2157,6 @@ Missilearc=0.08
 Missilespeed=1200
 ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-seawitch.blp
 
-// Firelord
-[Nfir]
-Art=ReplaceableTextures\CommandButtons\BTNHeroAvatarOfFlame.blp
-Requirescount=3
-Requires=TALT
-Requires1=TWN2,TALT
-Requires2=TWN3,TALT
-Buttonpos=3,1
-Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
-Missileart=Abilities\Weapons\LordofFlameMissile\LordofFlameMissile.mdl
-Missilearc=0.08
-MissileHoming=1
-Missilespeed=1200
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-avatarofflame.blp
-
-//lava spawn 1
-[nlv1]
-Art=ReplaceableTextures\CommandButtons\BTNLavaSpawn.blp
-Missileart=Abilities\Weapons\LavaSpawnMissile\LavaSpawnMissile.mdl
-Missilearc=0.15
-MissileHoming=1
-Missilespeed=1000
-Attachmentanimprops=medium
-
-//lava spawn 2
-[nlv2]
-Art=ReplaceableTextures\CommandButtons\BTNLavaSpawn.blp
-Missileart=Abilities\Weapons\LavaSpawnMissile\LavaSpawnMissile.mdl
-Missilearc=0.15
-MissileHoming=1
-Missilespeed=1000
-Attachmentanimprops=medium
-
-//lava spawn 3
-[nlv3]
-Art=ReplaceableTextures\CommandButtons\BTNLavaSpawn.blp
-Missileart=Abilities\Weapons\LavaSpawnMissile\LavaSpawnMissile.mdl
-Missilearc=0.15
-MissileHoming=1
-Missilespeed=1000
-Attachmentanimprops=medium
-
-
-
 // neutral hireable pit lord
 [Nplh]
 Art=ReplaceableTextures\CommandButtons\BTNPitLord.blp
@@ -2171,7 +2168,6 @@ Requires=TALT
 Requires1=TWN2,TALT
 Requires2=TWN3,TALT
 ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-pitlord.blp
-
 
 // Beastmaster
 [Nbst]
