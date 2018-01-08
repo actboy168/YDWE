@@ -43,36 +43,6 @@ local function open_offical_site()
 	os.execute('explorer "http://www.ydwe.net"')
 end
 
--- Lua测试
-local function lua_test()
-	-- 打开对话框让用户输入
-	local ok, script_string = gui.prompt_for_input(
-		main_window_handle, 													-- 父窗口句柄
-		_("Lua Test"),															-- 标题栏
-		_("Please enter the lua script to execute"),							-- 提示语句
-		"",																		-- 文本编辑区初始文字
-		_("OK"),																-- “确定”按钮文本
-		_("Cancel")																-- “取消"按钮文本
-	)
-
-	if ok then
-		log.trace("Execute code: " .. script_string)
-		local code = load(script_string)
-		if code then
-			local ok, result = pcall(code)
-			if ok then
-				log.trace("Code execution OK. Result: " .. tostring(result))
-			else
-				gui.error_message(nil, _("Error occured when executing code: ") .. tostring(result))
-				log.warn("Code execution failed. Error: " .. tostring(result))
-			end
-		else
-			gui.error_message(nil, _("There are syntax errors in your code."))
-			log.warn("Syntax error found in the code.")
-		end
-	end
-end
-
 -- 初始化菜单
 -- event_data - 事件参数，table，包含以下值
 --	main_window_handle - 主窗口的handle
@@ -95,7 +65,6 @@ function event.EVENT_INIT_MENU(event_data)
 	menu:add(_("Show J&assHelper version"), show_jasshelper_version)
 	menu:add(_("Show c&Jass version"), show_cjass_version)
 	menu:add(_("Launch YDWE &official website"), open_offical_site)
-	menu:add(_("&Lua Test"), lua_test)
 	menu:add(_("Cre&dits"), show_credit)
 
 	main_window_handle = event_data.main_window_handle
