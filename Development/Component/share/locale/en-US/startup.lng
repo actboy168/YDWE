@@ -1,0 +1,14 @@
+[CHOOSE_WAR3_DIR]
+Please choose your Warcraft 3 installation directory
+[ERROR_DEL_YDDLLFIXER]
+Cannot delete YDDllFixer.dll in war3 directory.
+[ERROR_WE_EXE]
+Cannot find main executable file of world editor in YDWE/bin directory.
+[ERROR_LAUNCH_WE]
+Failed to launch world editor.
+[ERROR_UNKNOWN]
+Unknown error
+[ERROR]
+Error
+[ERROR_YDWE_DIR]
+Error YDWE directory.

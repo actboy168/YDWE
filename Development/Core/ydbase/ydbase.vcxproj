@@ -122,6 +122,7 @@
     <ClCompile Include="base\hook\udis86\udis86.c" />
     <ClCompile Include="base\hook\udis86\udis86_decode.c" />
     <ClCompile Include="base\hook\udis86\udis86_itab.c" />
+    <ClCompile Include="base\i18n-2\gettext.cpp" />
     <ClCompile Include="base\thread\thread.cpp" />
     <ClCompile Include="base\thread\thread_exception.cpp" />
     <ClCompile Include="base\warcraft3\command_line.cpp" />
@@ -217,6 +218,8 @@
     <ClInclude Include="base\hook\udis86\udis86_itab.h" />
     <ClInclude Include="base\hook\udis86\udis86_types.h" />
     <ClInclude Include="base\hook\udis86\udis86_udint.h" />
+    <ClInclude Include="base\i18n-2\gettext.h" />
+    <ClInclude Include="base\i18n-2\lng.h" />
     <ClInclude Include="base\i18n\libintl.h" />
     <ClInclude Include="base\i18n\mofile.h" />
     <ClInclude Include="base\lockfree\queue.h" />

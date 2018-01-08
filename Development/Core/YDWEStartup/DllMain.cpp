@@ -7,8 +7,9 @@
 #include <base/exception/system_exception.h>
 #include <base/exception/windows_exception.h>
 #include <base/file/stream.h>
-#include <base/i18n/libintl.h>
+#include <base/i18n-2/gettext.h>
 #include <base/path/service.h>
+#include <base/path/helper.h>
 #include <base/util/unicode.h>
 #include <base/win/file_version.h>
 #include <base/win/process.h>
@@ -18,8 +19,8 @@
 #include <base/util/ini.h>
 #include "Splash.h"
 
-#define _(str)  base::i18n::gettext(str).data()
-#define __(str) base::u2w(base::i18n::gettext(str)).c_str()
+#define _(str)  base::i18n::v2::get_text(str).data()
+#define __(str) base::u2w(base::i18n::v2::get_text(str)).c_str()
 
 static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSecond, std::error_code *pErrorCode = nullptr)
 {
@@ -166,16 +167,16 @@ static void DoTask()
 {
 	fs::path gExecutableDirectory = base::path::get(base::path::DIR_EXE).remove_filename();
 
-	base::i18n::textdomain("YDWEStartup");
-	base::i18n::bindtextdomain("YDWEStartup", gExecutableDirectory / L"share" / L"locale");
+	base::i18n::v2::initialize(base::path::ydwe(true) / L"share" / L"locale");
+	base::i18n::v2::set_domain(L"startup");
 
 	if (gExecutableDirectory != fs::path(gExecutableDirectory.string()))
 	{
-		throw std::domain_error(_("Error YDWE directory."));
+		throw std::domain_error(_("ERROR_YDWE_DIR"));
 	}
 
 	fs::path gWarcraftDirectory;
-	if (!base::warcraft3::directory::get(__("Please choose your Warcraft 3 installation directory"), gWarcraftDirectory))
+	if (!base::warcraft3::directory::get(__("CHOOSE_WAR3_DIR"), gWarcraftDirectory))
 	{
 		return ;
 	}
@@ -189,7 +190,7 @@ static void DoTask()
 	{
 		if (!fs::remove(gWarcraftDirectory / L"YDDllFixer.dll"))
 		{
-			throw std::domain_error(_("Cannot delete YDDllFixer.dll in war3 directory."));
+			throw std::domain_error(_("ERROR_DEL_YDDLLFIXER"));
 		}
 	}
 
@@ -197,7 +198,7 @@ static void DoTask()
 	{
 		if (!fs::remove(gExecutableDirectory / L"YDDllFixer.dll"))
 		{
-			throw std::domain_error(_("Cannot delete YDDllFixer.dll in ydwe directory."));
+			throw std::domain_error(_("ERROR_DEL_YDDLLFIXER"));
 		}
 	}
 
@@ -214,7 +215,7 @@ static void DoTask()
 	}
 	else
 	{
-		throw std::domain_error(_("Cannot find main executable file of world editor in YDWE/bin directory."));
+		throw std::domain_error(_("ERROR_WE_EXE"));
 	}
 
 	CreateDotNetConfig(gWarcraftDirectory / L"worldeditydwe.exe.config");
@@ -225,7 +226,7 @@ static void DoTask()
 
 	if (!result)
 	{
-		throw base::windows_exception(_("Failed to launch world editor."));
+		throw base::windows_exception(_("ERROR_LAUNCH_WE"));
 	}
 
 	ShowSplash(gExecutableDirectory);
@@ -251,15 +252,15 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 	}
 	catch (base::exception const& e)
 	{
-		MessageBoxW(NULL, base::u2w(e.what(), base::conv_method::replace | '?').c_str(), __("Error"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, base::u2w(e.what(), base::conv_method::replace | '?').c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
 	}
 	catch (std::exception const& e)
 	{
-		MessageBoxW(NULL, base::a2w(e.what(), base::conv_method::replace | '?').c_str(), __("Error"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, base::a2w(e.what(), base::conv_method::replace | '?').c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
 	}
 	catch (...)
 	{
-		MessageBoxW(NULL, __("Unknown error"), __("Error"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, __("ERROR_UNKNOWN"), __("ERROR"), MB_OK | MB_ICONERROR);
 	}
 
 	return exitCode;

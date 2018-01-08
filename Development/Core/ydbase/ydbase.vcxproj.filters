@@ -77,6 +77,9 @@
     <Filter Include="base\hook\udis86">
       <UniqueIdentifier>{f23ecf6d-f199-4948-9430-68c1c5ec48c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\i18n-2">
+      <UniqueIdentifier>{84787b93-89af-4757-b2f5-8507c8e7cc78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -262,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="base\hook\patch.cpp">
       <Filter>base\hook</Filter>
+    </ClCompile>
+    <ClCompile Include="base\i18n-2\gettext.cpp">
+      <Filter>base\i18n-2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -589,6 +595,12 @@
     </ClInclude>
     <ClInclude Include="base\hook\patch.h">
       <Filter>base\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="base\i18n-2\lng.h">
+      <Filter>base\i18n-2</Filter>
+    </ClInclude>
+    <ClInclude Include="base\i18n-2\gettext.h">
+      <Filter>base\i18n-2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

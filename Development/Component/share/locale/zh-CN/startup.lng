@@ -1,0 +1,16 @@
+[CHOOSE_WAR3_DIR]
+请选择你的《魔兽争霸III》目录
+[ERROR_DEL_YDDLLFIXER]
+War3目录有有YDDllFixer.dll并且无法删除，这会导致YDWE无法启动。
+[ERROR_WE_EXE]
+YDWE/bin文件夹下找不到WE的主程序，请确认YDWE文件的完整性。
+[ERROR_LAUNCH_WE]
+启动WE失败。
+[ERROR_UNKNOWN]
+未知错误
+[ERROR]
+错误
+[ERROR_YDWE_DIR]
+YDWE路径含有非法的字符，这可能是由于你的操作系统区域并非简体中文而YDWE路径里
+却包含了简体中文导致的。如果你不明白上述原因，请将YDWE放到英文路径下，再次尝
+试。
