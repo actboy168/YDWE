@@ -87,7 +87,7 @@ MissileHoming=1
 Attachmentanimprops=large
 
 [ugar]
-Requires=ugrv,unp1
+Requires=ugrv,unp2
 DependencyOr=ugrm
 // do NOT put a similar DependencyOr under ugrm
 Art=ReplaceableTextures\CommandButtons\BTNGargoyle.blp
@@ -189,9 +189,9 @@ Buttonpos=0,2
 BuildingSoundLabel=UndeadBuildingConstructionLoop
 LoopingSoundFadeIn=512
 LoopingSoundFadeOut=512
-Missileart=Abilities\Weapons\ZigguratFrostMissile\ZigguratFrostMissile.mdl
-Missilearc=0.00
-Missilespeed=1200
+Missileart=Abilities\Weapons\ZigguratMissile\ZigguratMissile.mdl
+Missilearc=0.15
+Missilespeed=900
 MissileHoming=1
 Specialart=Objects\Spawnmodels\Undead\UCancelDeath\UCancelDeath.mdl
 Attachmentanimprops=large
@@ -206,9 +206,9 @@ Buttonpos=0,2
 BuildingSoundLabel=UndeadBuildingConstructionLoop
 LoopingSoundFadeIn=512
 LoopingSoundFadeOut=512
-Missileart=Abilities\Weapons\ZigguratFrostMissile\ZigguratFrostMissile.mdl
-Missilearc=0.00
-Missilespeed=1200
+Missileart=Abilities\Weapons\ZigguratMissile\ZigguratMissile.mdl
+Missilearc=0.15
+Missilespeed=900
 MissileHoming=1
 Specialart=Objects\Spawnmodels\Undead\UCancelDeath\UCancelDeath.mdl
 Attachmentanimprops=large
@@ -241,7 +241,7 @@ Attachmentanimprops=medium
 [utom]
 Art=ReplaceableTextures\CommandButtons\BTNTombOfRelics.blp
 Buttonpos=2,2
-Makeitems=rnec,dust,skul,phea,pman,stwp,ocor,shea
+Makeitems=rnec,plcl,skul,phea,pman,stwp,ocor,shea
 Specialart=Objects\Spawnmodels\Undead\UCancelDeath\UCancelDeath.mdl
 Attachmentanimprops=medium
 

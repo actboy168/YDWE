@@ -6,12 +6,12 @@ XPFactor=0
 //townhall teir 2 dependency
 [TWN2]
 DependencyOr=hkee,ostr,etoa,unp1
-XPFactor=0.15,0
+XPFactor=0
 
 //townhall teir 3 dependency
 [TWN3]
 DependencyOr=hcas,ofrt,etoe,unp2
-XPFactor=0.30,0
+XPFactor=0
 
 //altar dependency
 [TALT]
@@ -693,7 +693,7 @@ Buttonpos=1,2
 
 // Scroll of Speed
 [shas]
-Buttonpos=2,0
+Buttonpos=1,0
 Art=ReplaceableTextures\CommandButtons\BTNScrollOfHaste.blp
 
 // Dust of Appearance

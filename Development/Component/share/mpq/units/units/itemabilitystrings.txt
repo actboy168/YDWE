@@ -1,4 +1,4 @@
-﻿// Item abilities are generally activated via the inventory UI and not through their own hotkeys
+// Item abilities are generally activated via the inventory UI and not through their own hotkeys
 
 // Rune of the Watcher
 [APwt]

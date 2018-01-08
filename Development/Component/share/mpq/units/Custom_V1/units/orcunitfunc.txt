@@ -154,7 +154,7 @@ Art=ReplaceableTextures\CommandButtons\BTNHealingWard.blp
 [okod]
 Requires=ofor
 Art=ReplaceableTextures\CommandButtons\BTNKotoBeast.blp
-Buttonpos=2,0
+Buttonpos=1,0
 Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
 Missilearc=0.15
 Missilespeed=1200
@@ -262,7 +262,7 @@ Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
 Attachmentanimprops=medium
 
 [otbr]
-Requires=ovln
+Requires=ofrt,ovln
 Art=ReplaceableTextures\CommandButtons\BTNTrollBatRider.blp
 Buttonpos=3,0
 Missileart=Abilities\Weapons\BatTrollMissile\BatTrollMissile.mdl
@@ -310,8 +310,9 @@ LoopingSoundFadeOut=512
 Specialart=Objects\Spawnmodels\Human\HCancelDeath\HCancelDeath.mdl
 
 [owyv]
+Requires=ofrt
 Art=ReplaceableTextures\CommandButtons\BTNWyvernRider.blp
-Buttonpos=1,0
+Buttonpos=2,0
 Missileart=abilities\weapons\WyvernSpear\WyvernSpearMissile.mdl
 Missilearc=0.15
 Missilespeed=1200
@@ -325,7 +326,7 @@ Art=ReplaceableTextures\CommandButtons\BTNStasisTrap.blp
 Attachmentanimprops=medium
 Art=ReplaceableTextures\CommandButtons\BTNVoodooLounge.blp
 Buttonpos=1,2
-Makeitems=shas,hslv,plcl,phea,pman,stwp,tgrh,oli2
+Makeitems=shas,hslv,dust,phea,pman,stwp,tgrh,oli2
 BuildingSoundLabel=OrcBuildingConstructionLoop
 LoopingSoundFadeIn=512
 LoopingSoundFadeOut=512
