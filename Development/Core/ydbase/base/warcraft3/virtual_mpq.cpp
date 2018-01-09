@@ -42,6 +42,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 	namespace filesystem
 	{
 		HANDLE                              top_mpq = 0;
+		HANDLE                              war3_mpq = 0;
 		event_cb	                        event;
 		std::map<std::string, watch_cb>	    watchs;
 		std::map<std::string, watch_cb>	    force_watchs;
@@ -233,13 +234,19 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		bool __stdcall SFileOpenArchive(const char* mpqname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
 		{
 			bool ok = base::std_call<bool>(real::SFileOpenArchive, mpqname, priority, flags, mpq_handle_ptr);
-			if (mpq_handle_ptr && priority == 16 && ok)
+			if (ok && mpq_handle_ptr)
 			{
-				filesystem::top_mpq = *mpq_handle_ptr;
-				try {
-					filesystem::dispatch_event("open map", base::a2u(mpqname).c_str());
+				if (priority == 16)
+				{
+					filesystem::top_mpq = *mpq_handle_ptr;
+					try {
+						filesystem::dispatch_event("open map", base::a2u(mpqname).c_str());
+					}
+					catch (...) {
+					}
 				}
-				catch (...) {
+				else if (_stricmp("war3.mpq", mpqname) == 0) {
+					filesystem::war3_mpq = *mpq_handle_ptr;
 				}
 			}
 			return ok;
@@ -250,6 +257,10 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 			if (filesystem::top_mpq == mpq_handle)
 			{
 				filesystem::top_mpq = 0;
+			}
+			else if (filesystem::war3_mpq == mpq_handle)
+			{
+				filesystem::war3_mpq = 0;
 			}
 			return base::std_call<bool>(real::SFileCloseArchive, mpq_handle);
 		}
@@ -311,7 +322,10 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		//
 		bool __stdcall SFileOpenPathAsArchive(HANDLE handle, const char* pathname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
 		{
-			filesystem::dispatch_event("open path as archive", pathname);
+			if (filesystem::war3_mpq && handle == filesystem::war3_mpq) 
+			{
+				filesystem::dispatch_event("open path as archive", pathname);
+			}
 			return base::std_call<bool>(real::SFileOpenPathAsArchive, handle, pathname, priority, flags, mpq_handle_ptr);
 		}
 	}
