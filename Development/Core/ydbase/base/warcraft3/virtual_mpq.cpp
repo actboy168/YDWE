@@ -83,6 +83,13 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 			return true;
 		}
 
+		bool close_path(const fs::path& p, uint32_t priority)
+		{
+			if (priority > 15) priority = 15;
+			std::remove_if(mpq_path[priority].begin(), mpq_path[priority].end(), [&](const fs::path& o)->bool { return o == p; });
+			return true;
+		}
+
 		bool try_force_watch(const std::string& filename, const void** buffer_ptr, uint32_t* size_ptr, uint32_t reserve_size)
 		{
 			auto it = force_watchs.find(filename);
@@ -351,6 +358,11 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		}
 
 		return filesystem::open_path(p, priority);
+	}
+
+	bool  close_path(const fs::path& p, uint32_t priority)
+	{
+		return filesystem::close_path(p, priority);
 	}
 
 	void* storm_alloc(size_t n)

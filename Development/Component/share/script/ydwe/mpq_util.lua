@@ -62,25 +62,8 @@ end
 -- mpqname - MPQ的文件名
 -- 返回值：MPQ句柄
 function mpq_util:load_mpq(mpqname, priority)
-	local result = 0
-	local mpq = fs.ydwe_path() / "share" / "mpq" / mpqname
-
+	local mpq = fs.ydwe_path() / "share" / mpqname
 	if fs.exists(mpq) then
 		virtual_mpq.open_path(mpq, priority)
-		return result
 	end
-	
-	mpq = fs.ydwe_path() / "share" / "mpq" / (mpqname .. ".mpq")
-	if fs.exists(mpq) then
-		result = storm.open(mpq, priority)
-		if result then
-			log.debug("Loaded " .. mpq:filename():string())
-		else
-			log.error("Cannot load " .. mpq:filename():string())
-		end
-	else
-		log.error("Cannot find " .. mpq:filename():string())
-	end
-
-	return result
 end

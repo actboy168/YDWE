@@ -134,12 +134,12 @@ local function initialize()
 		for _, filename in pairs(info.txt) do
 			txt(load_mpq(filename), filename, t)
         end
-        local ydwetip = load_mpq('ydwe' / 'ydwetip.txt')
+        local ydwetip = load_mpq('ydwe/ydwetip.txt')
         if ydwetip then
             txt(ydwetip, 'ydwetip', t)
         end
         
-        local editorsuffix = load_mpq('ydwe' / 'editorsuffix.txt')
+        local editorsuffix = load_mpq('ydwe/editorsuffix.txt')
         if editorsuffix then
 		    local replace = {}
 		    txt(editorsuffix, 'editorsuffix', replace)

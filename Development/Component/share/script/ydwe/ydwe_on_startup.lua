@@ -186,8 +186,9 @@ function event.EVENT_WE_START(event_data)
 	check_war3_version()	
 
 	-- 载入Patch MPQ
-	mpq_util:load_mpq("units", 14)
-	mpq_util:load_mpq("war3", 14)
+	mpq_util:load_mpq("mpq", 14)
+    mpq_util:load_mpq("mpq/war3", 14)
+    mpq_util:load_mpq("mpq/" .. (require "i18n").get_language(), 14)
 
 	-- 加载插件
 	plugin:load_all()
