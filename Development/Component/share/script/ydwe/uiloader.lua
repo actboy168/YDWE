@@ -139,10 +139,10 @@ function loader:initialize()
 		for _, filename in pairs(info.txt) do
 			txt(load_mpq(filename), filename, t)
 		end
-		txt(io.load(ydwe / 'share' / 'mpq' / 'ui' / 'ydwetip.txt'), 'ydwetip', t)
+		txt(io.load(ydwe / 'share' / 'mpq' / 'ydwe' / 'ydwetip.txt'), 'ydwetip', t)
 		
 		local replace = {}
-		txt(io.load(ydwe / 'share' / 'mpq' / 'ui' / 'editorsuffix.txt'), 'editorsuffix', replace)
+		txt(io.load(ydwe / 'share' / 'mpq' / 'ydwe' / 'editorsuffix.txt'), 'editorsuffix', replace)
 		for id, o in pairs(replace) do
 			if not t[id] then
 				t[id] = o
