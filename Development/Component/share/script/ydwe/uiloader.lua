@@ -10,10 +10,7 @@ local w2l = w3x2lni()
 local ui = w2l.ui_builder
 local storm = require 'ffi.storm'
 
-local ydwe = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component"
-if not fs.exists(ydwe) then
-	ydwe = fs.ydwe_path()
-end
+local ydwe = fs.ydwe_devpath()
 
 local root = ydwe / 'share' / 'ui'
 local info = lni(io.load(ydwe / 'plugin' / 'w3x2lni' / 'info.ini'))

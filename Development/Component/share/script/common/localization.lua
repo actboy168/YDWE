@@ -11,5 +11,5 @@ if not fs.exists(ydwe) then
 	ydwe = fs.ydwe_path()
 end
 
-i18n.initialize(ydwe / "share" / "locale")
+i18n.initialize(fs.ydwe_devpath() / "share" / "locale")
 i18n.set_domain("script")

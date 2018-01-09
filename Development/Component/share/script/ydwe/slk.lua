@@ -1,7 +1,4 @@
-local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" 
-if not fs.exists(root) then
-	root = fs.ydwe_path()
-end
+local root = fs.ydwe_devpath()
 
 local w3x2lni = require 'w3x2lni_in_sandbox'
 local stormlib = require 'ffi.stormlib'

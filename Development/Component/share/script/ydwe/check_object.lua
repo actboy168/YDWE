@@ -1,7 +1,4 @@
-local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component" 
-if not fs.exists(root) then
-	root = fs.ydwe_path()
-end
+local root = fs.ydwe_devpath()
 
 local w3xparser = require 'w3xparser'
 local lni       = require 'lni-c'

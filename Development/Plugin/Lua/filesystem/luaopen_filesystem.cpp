@@ -5,11 +5,13 @@
 
 //#define YDWE_BASE_INLINE
 #include <base/path/service.h>
+#include <base/path/helper.h>
 #include <base/util/unicode.h>	
 #include <base/lua/make_range.h>
 
 #if defined(YDWE_BASE_INLINE)
 #include <base/path/service.cpp>
+#include <base/path/helper.cpp>
 #include <base/path/detail/get_path.cpp>
 #include <base/util/unicode.cpp>
 #include <base/exception/exception.cpp>
@@ -433,6 +435,13 @@ namespace luafs {
 		return path::constructor_(L, std::move(base::path::get(base::path::PATH_TYPE(option))));
 		FS_TRY_END;
 	}
+
+	static int ydwe(lua_State* L)
+	{
+		FS_TRY;
+		return path::constructor_(L, std::move(base::path::ydwe(lua_toboolean(L, 1))));
+		FS_TRY_END;
+	}
 }
  
 namespace base { namespace lua {
@@ -487,6 +496,7 @@ int luaopen_filesystem(lua_State* L)
 		{ "canonical", luafs::canonical },
 		{ "last_write_time", luafs::last_write_time },
 		{ "get", luafs::get },
+		{ "ydwe", luafs::ydwe },
 		{ NULL, NULL }
 	};	
 	lua_newtable(L);

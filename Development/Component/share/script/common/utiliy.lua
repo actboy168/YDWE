@@ -6,12 +6,19 @@ sys = {}
 
 local uni = require 'ffi.unicode'
 
--- 根据ydwebase.dll的路径计算
-fs.__ydwe_path = fs.get(fs.DIR_MODULE):remove_filename():remove_filename()
+fs.__ydwe_path = fs.ydwe(false)
+fs.__ydwe_devpath = fs.ydwe(true)
 log.debug('ydwe path ' .. fs.__ydwe_path:string())
+if fs.__ydwe_path ~= fs.__ydwe_devpath then
+    log.debug('ydwe dev path ' .. fs.__ydwe_devpath:string())
+end
 
 function fs.ydwe_path()
 	return fs.__ydwe_path
+end
+
+function fs.ydwe_devpath()
+	return fs.__ydwe_devpath
 end
 
 function fs.war3_path()

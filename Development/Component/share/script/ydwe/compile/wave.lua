@@ -1,10 +1,7 @@
 require "filesystem"
 local process = require "process"
 
-local root = fs.ydwe_path():parent_path():remove_filename():remove_filename() / "Component"
-if not fs.exists(root) then
-	root = fs.ydwe_path()
-end
+local root = fs.ydwe_devpath()
 
 wave = {}
 wave.path                = fs.ydwe_path() / "plugin" / "wave"
