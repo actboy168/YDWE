@@ -187,9 +187,12 @@ local function initialize()
 		insert('Btlf', 'unit', 'other')
 		return stringify_slk(t, 'alias')
     end)
-	event.on('virtual_mpq: open path as archive', function(name)
+	event.on('virtual_mpq: open path', function(name)
 		log.info('OpenPathAsArchive', name)
 		mpq_path = fs.path 'share' / 'mpq' / 'Custom_V1'
+	end)
+	event.on('virtual_mpq: close path', function(name)
+		log.info('ClosePathAsArchive', name)
 	end)
     if is_enable_unknowui() then
         local ignore_once = nil

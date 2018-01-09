@@ -42,7 +42,8 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 	namespace filesystem
 	{
 		HANDLE                              top_mpq = 0;
-		HANDLE                              war3_mpq = 0;
+		HANDLE                              war3x_mpq = 0;
+		std::map<HANDLE, std::string>       path_mpqs;
 		event_cb	                        event;
 		std::map<std::string, watch_cb>	    watchs;
 		std::map<std::string, watch_cb>	    force_watchs;
@@ -245,8 +246,8 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 					catch (...) {
 					}
 				}
-				else if (_stricmp("war3.mpq", mpqname) == 0) {
-					filesystem::war3_mpq = *mpq_handle_ptr;
+				else if (_stricmp("war3x.mpq", mpqname) == 0) {
+					filesystem::war3x_mpq = *mpq_handle_ptr;
 				}
 			}
 			return ok;
@@ -258,9 +259,18 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 			{
 				filesystem::top_mpq = 0;
 			}
-			else if (filesystem::war3_mpq == mpq_handle)
+			else if (filesystem::war3x_mpq == mpq_handle)
 			{
-				filesystem::war3_mpq = 0;
+				filesystem::war3x_mpq = 0;
+			}
+			else 
+			{
+				auto it = filesystem::path_mpqs.find(mpq_handle);
+				if (it != filesystem::path_mpqs.end()) {
+					std::string name = it->second;
+					filesystem::path_mpqs.erase(it);
+					filesystem::dispatch_event("close path", name);
+				}
 			}
 			return base::std_call<bool>(real::SFileCloseArchive, mpq_handle);
 		}
@@ -322,11 +332,16 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		//
 		bool __stdcall SFileOpenPathAsArchive(HANDLE handle, const char* pathname, uint32_t priority, uint32_t flags, HANDLE* mpq_handle_ptr)
 		{
-			if (filesystem::war3_mpq && handle == filesystem::war3_mpq) 
+			bool ok = base::std_call<bool>(real::SFileOpenPathAsArchive, handle, pathname, priority, flags, mpq_handle_ptr);
+			if (ok && mpq_handle_ptr)
 			{
-				filesystem::dispatch_event("open path as archive", pathname);
+				if (filesystem::war3x_mpq && handle == filesystem::war3x_mpq)
+				{
+					filesystem::path_mpqs[*mpq_handle_ptr] = pathname;
+					filesystem::dispatch_event("open path", pathname);
+				}
 			}
-			return base::std_call<bool>(real::SFileOpenPathAsArchive, handle, pathname, priority, flags, mpq_handle_ptr);
+			return ok;
 		}
 	}
 
