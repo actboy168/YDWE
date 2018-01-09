@@ -118,8 +118,9 @@ local function stringify_txt(t)
 	return table.concat(buf, '\r\n')
 end
 
+local mpq_path = fs.path 'share' / 'mpq'
 local function load_mpq(filename)
-	return io.load(ydwe / 'share' / 'mpq' / filename) or io.load(ydwe / 'share' / 'units' / filename)
+	return io.load(ydwe / mpq_path / filename) or io.load(ydwe / 'share' / 'mpq' / filename)
 end
 
 function loader:initialize()
@@ -186,7 +187,7 @@ function loader:initialize()
     end)
 	event.on('virtual_mpq: open path as archive', function(name)
 		log.info('OpenPathAsArchive', name)
-		units_path = fs.path 'units' / 'Custom_V1'
+		mpq_path = fs.path 'share' / 'mpq' / 'Custom_V1'
 	end)
     if is_enable_unknowui() then
         local ignore_once = nil
