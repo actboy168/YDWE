@@ -85,11 +85,11 @@ function event.EVENT_NEW_OBJECT_ID(event_data)
 		-- 打开对话框让用户输入
 		local ok, id_string = gui.prompt_for_input(
 			foregroundWindow, 														-- 父窗口句柄
-			_("NEW_OBJECT_ID"),														-- 标题栏
-			_("INPUT_OBJECT_ID"),		-- 提示语句
+			LNG.NEW_OBJECT_ID,														-- 标题栏
+			LNG.INPUT_OBJECT_ID,		-- 提示语句
 			from_objectid(default_id),							                	-- 文本编辑区初始文字
-			_("OK"),																-- “确定”按钮文本
-			_("CANCEL")																-- “取消"按钮文本
+			LNG.OK,																-- “确定”按钮文本
+			LNG.CANCEL																-- “取消"按钮文本
 		)
 		
 		-- 用户点了确定，验证输入是否合法。如果点了取消，使用系统默认
@@ -102,11 +102,11 @@ function event.EVENT_NEW_OBJECT_ID(event_data)
 		if #id_string ~= 4 then
 			log.trace("User input error(" .. tostring(id_string) .. ").")	
 			-- 提示错误
-			gui.error_message(foregroundWindow, _("ERROR_OBJECT_ID"))
+			gui.error_message(foregroundWindow, LNG.ERROR_OBJECT_ID)
 		elseif object:custom_has(object_type, id_string) or object:original_has(event_data.class, id_string) then
 			log.trace("User input error(" .. tostring(id_string) .. ").")	
 			-- 提示错误
-			gui.error_message(foregroundWindow, _("EXISTS_OBJECT_ID"))
+			gui.error_message(foregroundWindow, LNG.EXISTS_OBJECT_ID)
 		else
 			-- 合法，转换为整数返回	
 			log.trace("Result " .. tostring(id_string))	

@@ -39,7 +39,7 @@ local function check_conflicting_ui()
 	end
 	
 	if found then
-		if gui.yesno_message(nil, string.format(_("DELETE_DANGER_DIR"), 'UI'), _("YDWE")) then
+		if gui.yesno_message(nil, string.format(LNG.DELETE_DANGER_DIR, 'UI'), LNG.YDWE) then
 			for index, file in ipairs(file_list) do			
 				log.debug("remove file " .. (fs.war3_path() / file):string())
 				pcall(fs.remove_all, fs.war3_path() / file)
@@ -61,7 +61,7 @@ local function check_conflicting_units()
 	end
 	
 	if found then
-		if gui.yesno_message(nil, _("DELETE_DANGER_DIR"), 'Units') then		
+		if gui.yesno_message(nil, LNG.DELETE_DANGER_DIR, 'Units') then		
 			for file in units_dir:list_directory() do	
 				if not fs.is_directory(file) then
 					log.debug("remove file " .. file:string())
@@ -131,7 +131,7 @@ local function check_war3_version()
 		else
 			-- 二者如果不一致，则提示
 			if war3_version:is_new() ~= script_war3_version:is_new() then
-				gui.error_message(nil, _("ERROR_WAR3_VERSION"))
+				gui.error_message(nil, LNG.ERROR_WAR3_VERSION)
 			end
 		end
 	end

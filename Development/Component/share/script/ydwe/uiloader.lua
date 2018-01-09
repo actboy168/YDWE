@@ -202,7 +202,7 @@ function loader:initialize()
 	    	if w2l:wtg_checker(wtg, state) then
 	    		return
 	    	end
-            if not gui.yesno_message(nil, _('检测到地图使用了未知的UI，YDWE可以尝试帮你识别未知的UI，是否继续？(会重启YDWE)')) then
+            if not gui.yesno_message(nil, LNG.PARSE_UNKNOWN_UI) then
                 return
             end
 	    	local _, fix = w2l:wtg_reader(wtg, state)

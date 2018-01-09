@@ -54,6 +54,5 @@ int luaopen_i18n(lua_State* L)
 		{ NULL, NULL },
 	};
 	luaL_newlib(L, l);
-	lua_setglobal(L, "i18n");
-	return 0;
+	return 1;
 }

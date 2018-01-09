@@ -60,15 +60,15 @@ local function messagebox(hwnd, text, caption, type)
 end
 
 function gui.error_message(hwnd, fmt, ...)
-    return messagebox(hwnd, fmt:format(...), _("ERROR") ,gui.MB_ICONQUESTION | gui.MB_OK)
+    return messagebox(hwnd, fmt:format(...), LNG.ERROR ,gui.MB_ICONQUESTION | gui.MB_OK)
 end
 
 function gui.message(hwnd, fmt, ...)
-    return messagebox(hwnd, fmt:format(...), _("YDWE") ,gui.MB_ICONQUESTION | gui.MB_OK)
+    return messagebox(hwnd, fmt:format(...), LNG.YDWE ,gui.MB_ICONQUESTION | gui.MB_OK)
 end
 
 function gui.yesno_message(hwnd, fmt, ...)
-    return messagebox(hwnd, fmt:format(...), _("YDWE"), gui.MB_ICONQUESTION | gui.MB_YESNO) == gui.IDYES
+    return messagebox(hwnd, fmt:format(...), LNG.YDWE, gui.MB_ICONQUESTION | gui.MB_YESNO) == gui.IDYES
 end
 
 function gui.get_foreground_window()

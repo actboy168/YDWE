@@ -204,7 +204,7 @@ function event.EVENT_PRE_SAVE_MAP(event_data)
 	-- 如果地图文件带有只读属性，则先询问是否去掉只读属性
 	-- 128 == 0200 S_IWUSR
 	if fs.exists(map_path) and 0 == (map_path:permissions() & 128) then		
-		if gui.yesno_message(nil, _("REMOVE_MAP_READONLY"), map_path:string()) then
+		if gui.yesno_message(nil, LNG.REMOVE_MAP_READONLY, map_path:string()) then
 			log.trace("Remove the read-only attribute.")
 			map_path:add_permissions(128)
 		else
