@@ -67,7 +67,7 @@ end
 function mt:get_editstring(str)
     -- TODO: WESTRING不区分大小写，不过我们把WorldEditStrings.txt改了，暂时不会出现问题
     if not self.editstring then
-        self.editstring = ini(self:mpq_load(self.mpq .. '\\UI\\WorldEditStrings.txt'))['WorldEditStrings']
+        self.editstring = ini(self:mpq_loader('UI\\WorldEditStrings.txt'))['WorldEditStrings']
     end
     if not self.editstring[str] then
         return str
@@ -178,16 +178,44 @@ function mt:__index(name)
     return nil
 end
 
+local function new_path()
+    local mt = {}
+    local paths = {'\\'}
+    function mt:insert(path)
+        local max = #paths
+        table.insert(paths, '\\' .. path .. '\\')
+        for i = 2, max do
+            table.insert(paths, '\\' .. path .. paths[i])
+        end
+    end
+    function mt:each_path(callback)
+        for i = #paths, 1, -1 do
+            local res = callback(paths[i])
+            if res then
+                return res
+            end
+        end
+    end
+    return mt
+end
+
 function mt:set_config(config)
     self.config = config
     self.mpq = self.config.mpq
+    self.path = new_path()
     if self.config.version == 'Melee' then
-        self.agent = self.mpq
         self.default = self.mpq .. '\\Melee'
     else
-        self.agent = self.mpq .. '\\Custom_V1'
+        self.path:insert 'Custom_V1'
         self.default = self.mpq .. '\\Custom'
     end
+    self.path:insert(config.lang)
+end
+
+function mt:mpq_loader(filename)
+    return self.path:each_path(function(path)
+        return self:mpq_load(self.mpq .. path .. filename)
+    end)
 end
 
 function mt:set_messager(messager)
