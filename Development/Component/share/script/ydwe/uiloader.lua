@@ -59,6 +59,33 @@ local function load_mpq(filename)
 	return io.load(ydwe / 'share' / 'mpq' / lang / filename) or io.load(ydwe / 'share' / 'mpq' / filename)
 end
 
+local function stringify_txt(t)
+	local buf = {}
+	for id, o in pairs(t) do
+		buf[#buf+1] = ('[%s]'):format(id)
+		for k, v in pairs(o) do
+			for i = 1, #v do
+				if v[i]:find(',', 1, true) then
+					v[i] = '"' .. v[i] .. '"'
+				end
+			end
+			buf[#buf+1] = ('%s=%s'):format(k, table.concat(v, ','))
+		end
+	end
+	return table.concat(buf, '\r\n')
+end
+
+local function stringify_ini(t)
+	local buf = {}
+	for id, o in pairs(t) do
+		buf[#buf+1] = ('[%s]'):format(id)
+		for k, v in pairs(o) do
+			buf[#buf+1] = ('%s=%s'):format(k, v)
+		end
+	end
+	return table.concat(buf, '\r\n')
+end
+
 local state, data, string
 local function load_triggerdata(name, callback)
 	log.trace("virtual_mpq 'triggerdata'")
@@ -103,27 +130,34 @@ local function load_worldeditstrings()
 	return table.concat(str, '\n')
 end
 
-local function stringify_txt(t)
-	local buf = {}
-	for id, o in pairs(t) do
-		buf[#buf+1] = ('[%s]'):format(id)
-		for k, v in pairs(o) do
-			for i = 1, #v do
-				if v[i]:find(',', 1, true) then
-					v[i] = '"' .. v[i] .. '"'
-				end
-			end
-			buf[#buf+1] = ('%s=%s'):format(k, table.concat(v, ','))
-		end
-	end
-	return table.concat(buf, '\r\n')
+local function load_worldeditdata()
+	log.trace("virtual_mpq 'worldeditdata'")
+    local newt = ini(load_mpq('ui/WorldEditData.txt'), 'WorldEditData')
+    local ydwewedata = load_mpq('ydwe/WorldEditData.txt')
+    if ydwewedata then
+        local t = ini(ydwewedata, 'ydwe/WorldEditData')
+        if t then
+            for id, o in pairs(t) do
+                local newo = newt[id]
+                if not newo then
+                    newo = {}
+                    newt[id] = newo
+                end
+                for k, v in pairs(o) do
+                    newo[k] = v
+                end
+            end
+        end
+    end
+	return stringify_ini(newt)
 end
 
 local function initialize()
 	load_config()
-	virtual_mpq.watch('UI\\TriggerData.txt',      function (name) return load_triggerdata() end)
-	virtual_mpq.watch('UI\\TriggerStrings.txt',   function (name) return load_triggerstrings() end)
-	virtual_mpq.watch('UI\\WorldEditStrings.txt', function (name) return load_worldeditstrings() end)
+	virtual_mpq.watch('UI\\TriggerData.txt',      load_triggerdata)
+	virtual_mpq.watch('UI\\TriggerStrings.txt',   load_triggerstrings)
+	virtual_mpq.watch('UI\\WorldEditStrings.txt', load_worldeditstrings)
+	virtual_mpq.watch('UI\\WorldEditData.txt',    load_worldeditdata)
 	
 	for _, filename in ipairs(info.txt) do
 		if info.txt[1] ~= filename then
@@ -137,13 +171,13 @@ local function initialize()
         end
         local ydwetip = load_mpq('ydwe/ydwetip.txt')
         if ydwetip then
-            txt(ydwetip, 'ydwetip', t)
+            txt(ydwetip, 'ydwe/ydwetip', t)
         end
         
         local editorsuffix = load_mpq('ydwe/editorsuffix.txt')
         if editorsuffix then
 		    local replace = {}
-		    txt(editorsuffix, 'editorsuffix', replace)
+		    txt(editorsuffix, 'ydwe/editorsuffix', replace)
 		    for id, o in pairs(replace) do
 		    	if not t[id] then
 		    		t[id] = o
