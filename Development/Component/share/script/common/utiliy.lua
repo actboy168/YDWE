@@ -22,7 +22,7 @@ require "localization"
 
 io.__open = io.open
 function io.open(file_path, mode)
-	local f, e = io.__open(__(file_path:string()), mode)
+	local f, e = io.__open(uni.u2a(file_path:string()), mode)
 	if f then
 		if not mode or (not mode:match('b') and mode:match('r'))  then
 			if f:read(3) ~= '\xEF\xBB\xBF' then
@@ -35,7 +35,7 @@ end
 
 io.__lines = io.lines
 function io.lines(file_path)
-	return io.__lines(__(file_path:string()))
+	return io.__lines(uni.u2a(file_path:string()))
 end
 
 -- 载入一个文件的内容

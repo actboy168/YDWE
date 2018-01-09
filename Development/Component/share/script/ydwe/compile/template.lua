@@ -4,6 +4,7 @@ local load=load
 local string=string
 local table=table
 local storm = require 'ffi.storm'
+local uni = require 'ffi.unicode'
 
 local function result(...)
 	return select("#",...), select(1,...)
@@ -120,7 +121,7 @@ function template:compile(op)
 			if pos then
 				msg = msg:sub(1, pos-1)
 			end
-			gui.error_message(nil, __(msg))
+			gui.error_message(nil, uni.u2a(msg))
 		else
 			gui.error_message(nil, _("UNKNOWN"))
 		end			
