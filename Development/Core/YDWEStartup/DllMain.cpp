@@ -60,12 +60,17 @@ static void ShowSplash(fs::path const& ydwe_path)
 
 	try {
 		base::ini::table table;
-		auto buf = base::file::read_stream(ydwe_path / L"share" / L"mpq" / L"units" / L"ui" / L"worldeditdata.txt").read<std::string>();
-		base::ini::read(table, buf.c_str());
-		fs::path blp = ydwe_path / L"share" / L"mpq" / L"units" / table["WorldEditArt"]["War3XLogo"];
-		if (!fs::exists(blp))
+		fs::path dir = ydwe_path / L"share" / L"mpq" / "ReplaceableTextures" / "WorldEditUI";
+		fs::create_directories(dir);
+		fs::path blp1 = dir / "WarcraftIIILogo.blp";
+		if (!fs::exists(blp1))
 		{
-			Bmp2Blp(bmp.wstring().c_str(), blp.wstring().c_str());
+			Bmp2Blp(bmp.wstring().c_str(), blp1.wstring().c_str());
+		}
+		fs::path blp2 = dir / "WarcraftIIIFTLogo.blp";
+		if (!fs::exists(blp2))
+		{
+			fs::copy_file(blp1, blp2);
 		}
 	}
 	catch (...) {

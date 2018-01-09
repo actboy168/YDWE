@@ -884,8 +884,8 @@ ToolBarIcon_CE_EditMap=ReplaceableTextures\WorldEditUI\Editor-Toolbar-EditMap
 ToolBarIcon_CE_ExportMap=ReplaceableTextures\WorldEditUI\Editor-Toolbar-ExportMap
 
 // Misc art
-War3Logo=UI\Logo.blp
-War3XLogo=UI\Logo.blp
+War3Logo=ReplaceableTextures\WorldEditUI\WarcraftIIILogo
+War3XLogo=ReplaceableTextures\WorldEditUI\WarcraftIIIFTLogo
 BlizzardLogo=ReplaceableTextures\WorldEditUI\BlizzardLogo
 
 [WorldEditSounds]
