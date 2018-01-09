@@ -53,6 +53,12 @@ local function load_config()
 	return true
 end
 
+local lang = (require "i18n").get_language()
+local mpq_path = fs.path 'share' / 'mpq'
+local function load_mpq(filename)
+	return io.load(ydwe / 'share' / 'mpq' / lang / filename) or io.load(ydwe / 'share' / 'mpq' / filename)
+end
+
 local state, data, string
 local function load_triggerdata(name, callback)
 	log.trace("virtual_mpq 'triggerdata'")
@@ -87,7 +93,7 @@ end
 
 local function load_worldeditstrings()
 	log.trace("virtual_mpq 'worldeditstrings'")
-	local t = ini(io.load(ydwe / 'share' / 'mpq' / 'ui' / 'WorldEditStrings.txt'), 'WorldEditStrings')
+	local t = ini(load_mpq('ui/WorldEditStrings.txt'), 'WorldEditStrings')
 	t.WorldEditStrings.WESTRING_APPNAME = t.WorldEditStrings.WESTRING_APPNAME .. ' [ ' .. tostring(ydwe_version) .. ' ]'
 	local str = {}
 	str[#str+1] = "[WorldEditStrings]"
@@ -111,11 +117,6 @@ local function stringify_txt(t)
 		end
 	end
 	return table.concat(buf, '\r\n')
-end
-
-local mpq_path = fs.path 'share' / 'mpq'
-local function load_mpq(filename)
-	return io.load(ydwe / mpq_path / filename) or io.load(ydwe / 'share' / 'mpq' / filename)
 end
 
 local function initialize()

@@ -1,0 +1,261 @@
+[oalt]
+Name=Altar of Storms
+Hotkey=A
+Tip=Build |cffffcc00A|rltar of Storms
+Ubertip="Summons Heroes. Revives slain Heroes."
+
+[oang]
+Name=Ancestral Guardian
+
+[obar]
+Name=Barracks
+Hotkey=B
+Tip=Build |cffffcc00B|rarracks
+Ubertip="Primary troop production building. Trains Grunts, Headhunters and Demolishers. |nAlso contains the Berserker Strength, Berserker, Troll Regeneration, and Burning Oil upgrades."
+
+[obea]
+Name=Beastiary
+Hotkey=E
+Tip=Build B|cffffcc00e|rastiary
+Ubertip="Trains Raiders, Kodo Beasts, Troll Batriders, and Wind Riders. |nAlso contains the Ensnare, Envenomed Spears, Liquid Fire and War Drums upgrades."
+
+[Obla]
+Name=Blademaster
+Propernames=Tojara,Nikoro,Kajind,Mikasa,Samuro,Akinos,Mazuru,Yozshura,Daisho,Kigami,Arashicage,Moogul the Sly,Jubei
+Hotkey=B
+Tip=Summon |cffffcc00B|rlademaster
+Ubertip="Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. |n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive |cffffcc00B|rlademaster
+Awakentip=Revive |cffffcc00B|rlademaster
+
+[ocat]
+Name=Demolisher
+Hotkey=D
+Tip=Train |cffffcc00D|remolisher
+Ubertip="Long-range siege weaponry. Effective against buildings but slow and vulnerable. Can learn the Burning Oil ability. |n|n|cffffcc00Attacks land units and trees.|r"
+
+[odoc]
+Name=Troll Witch Doctor
+Hotkey=W
+Tip=Train Troll |cffffcc00W|ritch Doctor
+Ubertip="Supporting spellcaster. Can initially cast Sentry Ward, which summons an invisible detector. Can also learn Stasis Trap and Healing Ward. |n|n|cffffcc00Attacks land and air units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Sentry Ward","- Sentry Ward|n- Stasis Trap","- Sentry Ward|n- Stasis Trap|n- Healing Ward"
+
+[otot]
+Name=Stasis Trap
+
+[oeye]
+Name=Sentry Ward
+
+[Ofar]
+Name=Far Seer
+Propernames=Gar'dal Grimsight,Negal Fireye,Kazil Darkeye,Magis Coldeye,Bale Bleakstare,Gorr Grimwolf,Kag'ar Winterfang,Nazgrel,Morg Wolfsong,Kazragore,Fenris'ar Gul
+Hotkey=F
+Tip=Summon |cffffcc00F|rar Seer
+Ubertip="Mystical Hero, effective at ranged attacks and scouting. Can learn Chain Lightning, Far Sight, Feral Spirit and Earthquake. |n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive |cffffcc00F|rar Seer
+Awakentip=Revive |cffffcc00F|rar Seer
+
+[ofor]
+Name=War Mill
+Hotkey=M
+Tip=Build War |cffffcc00M|rill
+Ubertip="Serves as a drop-off point for harvested lumber. |nAlso contains upgrades for improved armor, melee weapons, ranged weapons, Reinforced Defenses, and Spiked Barricades."
+
+[ofrt]
+Name=Fortress
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Fortress
+Ubertip="Upgrade to Fortress to enable the production of additional types of structures and units."
+
+[ogre]
+Name=Great Hall
+Hotkey=H
+Tip=Build Great |cffffcc00H|rall
+Ubertip="Primary structure, used to train Peons and receive gathered resources. Can be upgraded to Stronghold and then Fortress to enable the production of additional types of structures and units."
+
+[ogru]
+Name=Grunt
+Hotkey=G
+Tip=Train |cffffcc00G|rrunt
+Ubertip="Brutish Orc warrior. Can learn Berserker Strength. |n|n|cffffcc00Attacks land units.|r"
+
+[ohun]
+Name=Troll Headhunter
+Hotkey=T
+Tip=Train |cffffcc00T|rroll Headhunter
+Ubertip="Versatile spear-thrower, effective against air units. Can learn Troll Regeneration. Can be upgraded to Troll Berserker, which has the Berserk ability. |n|n|cffffcc00Attacks land and air units.|r "
+
+[otbk]
+Name=Troll Berserker
+Hotkey=T
+Tip=Train |cffffcc00T|rroll Berserker
+Ubertip="Versatile spear-thrower, effective against air units. Has the Berserk ability, which allows it to deal more damage, but take more damage when attacked. Can learn Troll Regeneration. |n|n|cffffcc00Attacks land and air units.|r "
+
+[ohwd]
+Name=Healing Ward
+
+[okod]
+Name=Kodo Beast
+Hotkey=K
+Tip=Train |cffffcc00K|rodo Beast
+Ubertip="Lumbering war beast, mounted by an Orcish drummer. Has the abilities War Drums, and Devour. War Drums gives friendly units nearby a bonus to attack damage. Devour allows the Kodo to eat a target enemy unit. Can gain the War Drums Upgrade. |n|n|cffffcc00Attacks land and air units.|r"
+
+[osld]
+Name=Spirit Lodge
+Hotkey=S
+Tip=Build |cffffcc00S|rpirit Lodge
+Ubertip="Spellcaster production building. Trains Shaman, Witch Doctors, and Spirit Walkers. |nAlso contains spell upgrades for Shaman, Witch Doctors, and Spirit Walkers."
+
+[opeo]
+Name=Peon
+Hotkey=P
+Tip=Train |cffffcc00P|reon
+Ubertip="Basic worker unit. Can harvest gold and lumber, build structures, and Repair. Can also go inside Orc Burrows to give it an attack. |n|n|cffffcc00Attacks land units and trees.|r"
+
+[orai]
+Name=Raider
+Hotkey=R
+Tip=Train |cffffcc00R|raider
+Ubertip="Highly mobile wolf rider. Effective against buildings. Can learn the Ensnare ability. |n|n|cffffcc00Attacks land units.|r"
+
+[oshm]
+Name=Shaman
+Hotkey=S
+Tip=Train |cffffcc00S|rhaman
+Ubertip="Primary spellcaster. Can initially cast Purge, which slows and dispels positive and negative buffs. Can also learn Lightning Shield and Bloodlust. |n|n|cffffcc00Attacks land and air units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Purge","- Purge|n- Lightning Shield","- Purge|n- Lightning Shield|n- Bloodlust"
+
+[ostr]
+Name=Stronghold
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Stronghold
+Ubertip="Upgrade to Stronghold to enable the production of additional types of structures and units."
+
+[osw1]
+Name=Spirit Wolf
+EditorSuffix= (Level 1)
+
+[osw2]
+Name=Dire Wolf
+EditorSuffix= (Level 2)
+
+[osw3]
+Name=Shadow Wolf
+EditorSuffix= (Level 3)
+
+[osp1]
+Name=Serpent Ward
+EditorSuffix= (Level 1)
+
+[osp2]
+Name=Serpent Ward
+EditorSuffix= (Level 2)
+
+[osp3]
+Name=Serpent Ward
+EditorSuffix= (Level 3)
+
+[otau]
+Name=Tauren
+Hotkey=T
+Tip=Train |cffffcc00T|rauren
+Ubertip="Mighty warrior. Can learn the Pulverize ability. |n|n|cffffcc00Attacks land units.|r"
+
+[otbr]
+Name=Troll Batrider
+Hotkey=B
+Tip=Train Troll |cffffcc00B|ratrider
+Ubertip="Light flying unit with incredible perception. Good at destroying buildings. Has the Unstable Concoction ability, which allows the Troll Batrider to explode, dealing damage to nearby enemy air units. Can learn Liquid Fire, and Troll Regeneration. |n|n|cffffcc00Attacks land units.|r"
+
+[Oshd]
+Name=Shadow Hunter
+Propernames=Zul'kis,Zul'abar,Zul'rajas,Zul'maran,Jo Jo Headshrinker,Shaka-zahn,Shakti-lar,Mezil-kree
+Hotkey=H
+Tip=Summon Shadow |cffffcc00H|runter
+Ubertip="Cunning Hero, adept at healing magics and voodoo curses. Can learn Healing Wave, Hex, Serpent Ward and Big Bad Voodoo. |n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive Shadow |cffffcc00H|runter
+Awakentip=Revive Shadow |cffffcc00H|runter
+
+[Otch]
+Name=Tauren Chieftain
+Propernames=Marn Thunderhorn,Tygore Dusthoof,Tam Windtotem,Durn Harpyslayer,Kam Ghoststeer,Kel Stonebull,Mull Stormhoof,Grok Bloodhorn,Malar Plainstrider,Taur Runetotem
+Hotkey=T
+Tip=Summon |cffffcc00T|rauren Chieftain
+Ubertip="Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Shockwave, War Stomp, Endurance Aura and Reincarnation. |n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive |cffffcc00T|rauren Chieftain
+Awakentip=Revive |cffffcc00T|rauren Chieftain
+
+[otrb]
+Name=Orc Burrow
+Hotkey=O
+Tip=Build |cffffcc00O|rrc Burrow
+Ubertip="Provides food, which increases the maximum number of units that can be trained. Peons can garrison inside to attack enemy units. Can learn the Reinforced Defenses upgrade. |n|n|cffffcc00Attacks land and air units.|r"
+
+[orbr]
+Name=Reinforced Orc Burrow
+Hotkey=O
+Tip=Build Reinforced |cffffcc00O|rrc Burrow
+Ubertip="Provides food, which increases the maximum number of units that can be trained. Peons can garrison inside to attack enemy units. |n|n|cffffcc00Attacks land and air units.|r"
+
+[otto]
+Name=Tauren Totem
+Hotkey=T
+Tip=Build |cffffcc00T|rauren Totem
+Ubertip="Trains Tauren. |nAlso contains the Pulverize upgrade."
+
+[ovln]
+Name=Voodoo Lounge
+Hotkey=V
+Tip=Build |cffffcc00V|roodoo Lounge
+Ubertip="Creates a shop with purchasable items. The items available depend upon what level of upgrade your Great Hall has (Great Hall, Stronghold, or Fortress) and which buildings you have."
+
+[owyv]
+Name=Wind Rider
+Hotkey=W
+Tip=Train |cffffcc00W|rind Rider
+Ubertip="Highly mobile flying creature. Excellent at scouting. Can learn Envenomed Spears. |n|n|cffffcc00Attacks land and air units.|r"
+
+[owtw]
+Name=Watch Tower
+Hotkey=W
+Tip=Build |cffffcc00W|ratch Tower
+Ubertip="Defensive structure. Can learn the Reinforced Defenses upgrade. |n|n|cffffcc00Attacks land and air units.|r"
+
+[ospw]
+DependencyOr=ospm
+Name=Spirit Walker
+Hotkey=T
+Tip=Train Spiri|cffffcc00t|r Walker
+Ubertip="Mystical Tauren caster. Has Ethereal Form, which allows him to avoid physical damage. Also has Spirit Link, which allows units to distribute incoming damage. Can learn Disenchant, and Ancestral Spirit. |n|n|cffffcc00Attacks land and air units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Ethereal Form|n- Spirit Link","- Ethereal Form|n- Spirit Link|n- Disenchant","- Ethereal Form|n- Spirit Link|n- Disenchant|n- Ancestral Spirit"
+
+[ospm]
+Name=Spirit Walker
+Hotkey=T
+Tip=Train Spiri|cffffcc00t|r Walker
+Ubertip="Mystical Tauren caster. Has Ethereal Form, which allows him to avoid physical damage. Also has Spirit Link, which allows units to distribute incoming damage. Can learn Disenchant, and Ancestral Spirit. |n|n|cffffcc00Attacks land and air units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Ethereal Form|n- Spirit Link","- Ethereal Form|n- Spirit Link|n- Disenchant","- Ethereal Form|n- Spirit Link|n- Disenchant|n- Ancestral Spirit"
+EditorSuffix= (Ethereal)
+//#RESTNOBETA
+[oshy]
+Name=Orc Shipyard
+Tip=Build Orc Shipyard
+Ubertip="Boat construction facility. Produces Orc Transport Ships, Orc Frigates, and Orc Battleships."
+Description=Sells boats.
+
+[obot]
+Name=Orc Transport Ship
+Hotkey=T
+Tip=Hire |cffffcc00T|rransport Ship
+Ubertip="A sturdy transport ship capable of carrying units over the sea."
+
+[odes]
+Name=Orc Frigate
+Hotkey=F
+Tip=Hire |cffffcc00F|rrigate
+Ubertip="A versatile attack ship good at destroying air attackers. |n|n|cffffcc00Attacks land and air units.|r"

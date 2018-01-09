@@ -1,0 +1,35 @@
+[Rnsw]
+Name=Naga Siren Adept Training,Naga Siren Master Training
+Tip=Research |cffffcc00N|raga Siren Adept Training,Research |cffffcc00N|raga Siren Master Training
+Ubertip="Increases Naga Sirens' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Frost Armor.","Increases Naga Sirens' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Cyclone."
+Hotkey=N,N
+
+[Rnen]
+Name=Ensnare
+Tip=Research E|cffffcc00n|rsnare
+Ubertip="Enables Naga Myrmidons to use the Ensnare ability. Ensnare causes a target enemy unit to be bound to the ground so that it cannot move. Air units that are ensnared can be attacked as though they were land units."
+Hotkey=N
+
+[Rnsi]
+Name=Abolish Magic
+Tip=Research A|cffffcc00b|rolish Magic
+Ubertip="Gives the Couatl the ability to dispel positive buffs from enemy units, and negative buffs from friendly units. |nDamages summoned units."
+Hotkey=B
+
+[Rnam]
+Name=Coral Scales,Chitinous Scales,Razorspine Scales
+Tip=Upgrade to Coral S|cffffcc00c|rales,Upgrade to Chitinous S|cffffcc00c|rales,Upgrade to Razorspine S|cffffcc00c|rales
+Ubertip="Increases the armor of Naga attack units.","Further increases the armor of Naga attack units.","Further increases the the armor of Naga attack units."
+Hotkey=C,C,C
+
+[Rnat]
+Name=Coral Blades,Chitinous Blades,Razorspine Blades
+Tip=Upgrade to Coral |cffffcc00B|rlades,Upgrade to Chitinous |cffffcc00B|rlades,Upgrade to Razorspine |cffffcc00B|rlades
+Ubertip="Increases the attack damage of Naga attack units.","Further increases the attack damage of Naga attack units.","Further increases the attack damage of Naga attack units."
+Hotkey=B,B,B
+
+[Rnsb]
+Name=Submerge
+Tip=Research S|cffffcc00u|rbmerge
+Ubertip="Gives Naga Myrmidons and Snap Dragons the ability to submerge under water, hiding them from view."
+Hotkey=U

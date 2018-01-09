@@ -1,0 +1,10 @@
+// Non-race-specific upgrades
+// glyph of fortification
+[Rgfo]
+Name=Glyph of Fortification,Glyph of Fortification,Glyph of Fortification
+EditorSuffix= (Upgrade 1), (Upgrade 2), (Upgrade 3)
+
+// glyph of ultravision
+[Rguv]
+Name=Glyph of Ultravision
+EditorSuffix= (Upgrade)

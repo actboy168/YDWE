@@ -1,0 +1,372 @@
+[CmdMove]
+Tip=|cffffcc00M|rove
+Ubertip="Orders your units to move to the target area while ignoring enemy units and attacks. Issuing a move order onto a target unit will cause your unit to follow the target using move orders."
+Hotkey=M
+
+[CmdAttack]
+Tip=|cffffcc00A|rttack
+Ubertip="Orders your units to move to the target area and attack any enemy units they see on the way. If you order them to attack a specific unit, your units will ignore other enemy units and will attack the targeted unit until it is destroyed."
+Hotkey=A
+
+[CmdAttackGround]
+Tip=Attack |cffffcc00G|rround
+Ubertip="Orders your units to fire at the targeted area of ground until they are told to stop or are given another order."
+Hotkey=G
+
+[CmdBuild]
+Tip=|cffffcc00B|ruild Structure
+Ubertip="Brings up a list of the available buildings that you may choose to construct."
+Hotkey=B
+
+[CmdBuildHuman]
+Tip=|cffffcc00B|ruild Structure
+Ubertip="Brings up a list of the available buildings that you may choose to construct."
+Hotkey=B
+
+[CmdBuildOrc]
+Tip=|cffffcc00B|ruild Structure
+Ubertip="Brings up a list of the available buildings that you may choose to construct."
+Hotkey=B
+
+[CmdBuildNightElf]
+Tip=Create |cffffcc00B|ruilding
+Ubertip="Brings up a list of the available buildings that you may choose to create."
+Hotkey=B
+
+[CmdBuildUndead]
+Tip=Summon |cffffcc00B|ruilding
+Ubertip="Brings up a list of the available buildings that you may choose to summon."
+Hotkey=B
+
+[CmdBuildNaga]
+Tip=|cffffcc00B|ruild Structure
+Ubertip="Brings up a list of the available buildings that you may choose to construct."
+Hotkey=B
+
+[CmdCancel]
+Tip=Cancel (|cffffcc00ESC|r)
+Ubertip="Drops the current un-issued order and allows you to select a different order."
+Hotkey=512
+
+[CmdCancelBuild]
+Tip=Cancel (|cffffcc00ESC|r)
+Ubertip="Drops the current un-issued order and allows you to select a different order."
+Hotkey=512
+
+[CmdCancelTrain]
+Tip=Cancel (|cffffcc00ESC|r)
+Ubertip="Stops training the current unit."
+Hotkey=512
+
+[CmdCancelRevive]
+Tip=Cancel (|cffffcc00ESC|r)
+Ubertip="Stops reviving the current unit."
+Hotkey=512
+
+[CmdHoldPos]
+Tip=|cffffcc00H|rold Position
+Ubertip="Orders your units to stand where they are and attack units that are within range. When on Hold Position your units will not chase down enemy units that run away, nor move to engage ranged attackers."
+Hotkey=H
+
+[CmdPatrol]
+Tip=|cffffcc00P|ratrol
+Ubertip="Orders your units to continually move from their current position to the targeted area until given another command. Units on patrol will move to engage enemy units that come within range. Issuing a patrol order onto a target unit will cause your unit to imitate the targeted unit's behavior."
+Hotkey=P
+
+[CmdPurchase]
+Tip=|cffffcc00S|rell Items
+Hotkey=s
+
+[CmdRally]
+Tip=Set Rall|cffffcc00y|r Point
+Ubertip="Orders units that pop out of the building to immediately attack move to the targeted area. You can rally point gold mines or trees to auto-harvest. You can rally point a unit to have new units follow it when they finish building."
+Hotkey=Y
+
+[CmdSelectSkill]
+Tip=Her|cffffcc00o|r Abilities
+Ubertip="Opens the abilities menu and allows you to assign unused points to the Heroes' abilities."
+Hotkey=O
+
+[CmdStop]
+Tip=|cffffcc00S|rtop
+Ubertip="Orders your units to stop whatever order they were previously given. Units that have been told to stop will attack enemy units and move to engage nearby enemies."
+Hotkey=S
+
+//[CmdUnivAgi]
+//Tip=Increase |cffffcc00A|rgility
+//Hotkey=A
+
+//[CmdUnivInt]
+//Tip=Increase |cffffcc00I|rntelligence
+//Hotkey=I
+
+//[CmdUnivStr]
+//Tip=Increase |cffffcc00S|rtrength
+//Hotkey=S
+
+[Errors]
+Emptycontrolgroup=Unable to form an empty control group.
+Invalidcontrolgroup=Unable to form a control group with units you do not control.
+Nonunitincontrolgroup=Control group can only be formed with units.
+Nofood=Build more Farms to continue unit production.,Build more Burrows to continue unit production.,Summon more Ziggurats to continue unit production.,Create more Moon Wells to continue unit production.
+
+Maxsupply=Unable to create unit due to maximum food limit.
+Nogold=Not enough gold.
+Nolumber=Not enough lumber.
+Nomana=Not enough mana.
+Cooldown=Spell is not ready yet.
+
+Noroom=Cargo capacity unavailable.
+Canttransport=Unable to load target.
+Cantdevour=Unable to devour target.
+Cantcyclone=Unable to cast Cyclone on this target.
+Cantspiritwolf=Unable to cast Feral Spirit on this target.
+Cantpossess=Unable to cast Possession on this target.
+Cantmanaburn=Unable to cast Mana Burn on this target.
+Onlyattackers=Must target a unit capable of attacking.
+
+Notentangledmine=Unable to use an Entangled Gold Mine.
+Notblightedmine=Unable to use a Haunted Gold Mine.
+Alreadyentangled=That gold mine is already entangled.
+Alreadyblightedmine=That gold mine is already haunted.
+Targetwispresources=Must target a tree or an Entangled Gold Mine.
+Targetblightedmine=Must target a Haunted Gold Mine.
+Entangleminefirst=Must entangle gold mine first.
+Blightminefirst=Must haunt gold mine first.
+Entangledminefull=That gold mine can't support any more Wisps.
+Blightringfull=That gold mine can't support any more Acolytes.
+Acolytealreadymining=The selected Acolyte is already mining.
+Nototherplayersmine=Unable to use a mine controlled by another player.
+Targgetmine=Must target a gold mine.
+Targgetresources=Must target resources.
+
+Humanbuilding=Must target a Human building.
+Undeadbuilding=Must target an Undead building.
+Underconstruction=That building is currently under construction.
+Alreadyrebuilding=The building is already under construction.
+Creeptoopowerful=That creature is too powerful.
+Hibernating=That unit is already hibernating.
+Magicleashed=That unit is already leashed.
+Immunetomagic=That unit is immune to magic.
+Holybolttarget=Must target friendly living units or enemy Undead units.
+Deathcoiltarget=Must target enemy living units or friendly Undead units.
+Dispelmagictarget=Must target a unit or blighted ground.
+
+Treeoccupied=That tree is occupied. Target a vacant tree.
+Coupletarget=Unable to merge with that unit.
+Mounthippogryphtarget=Must target a Hippogryph.
+Archerridertarget=Must target an Archer.
+
+Cantsee=Must explore there first.
+Cantplace=Unable to build there.
+Outofbounds=Targeted location is outside of the map boundary.
+Offblight=Must summon structures upon Blight.
+Tooclosetomine=Unable to build so close to the gold mine.
+Tooclosetohall=Unable to create a gold mine so close to the town.
+Notonshoreline=Unable to build away from a shoreline.
+Buildingblocked=A newly constructed unit has no room to be placed.
+Teleportfail=A unit could not be teleported.
+Stumpblocked=Something is blocking that tree stump.
+Cantland=Unable to land there.
+Cantroot=Unable to root there.
+Cantrootunit=Target is no longer rootable.
+Mustroottoentangle=Must root adjacent to a gold mine to entangle it.
+Mustbeclosertomine=Must root closer to the gold mine. 
+
+Minenotentangleable=Gold mine couldn't be entangled.
+Notinrange=Target is outside range.
+UnderRange=Target is inside minimum range.
+
+Notthisunit=Unable to target this unit.
+Targetunit=Must target a unit with this action.
+
+Targetstructuretree=Must target a building or tree.
+Targetground=Must target a ground unit.
+Targetair=Must target an air unit.
+Targetstructure=Must target a building.
+Targetward=Must target a ward.
+Targetitem=Must target an item.
+Targettree=Must target a tree.
+Targetrepair=Must target a building or a mechanical unit.
+Targetbridge=Must target a bridge.
+Targetnaval=Must target a naval unit.
+
+Targetowned=Must target one of your own units.
+Targetally=Must target a friendly unit.
+Targetneutral=Must target a neutral unit.
+Targetenemy=Must target an enemy unit.
+Targetcontrol=Must target a unit you can control.
+
+Targethero=Must target a Hero.
+Targetenemyhero=Must target an enemy Hero.
+Targetcorpse=Must target a corpse.
+Targetfleshycorpse=Must target a fleshy corpse.
+Targetbonecorpse=Must target a skeletal corpse.
+Targetundead=Must target an Undead unit.
+Targetmechanical=Must target a mechanical unit.
+Targetmoveable=Must target moveable units.
+Targetorganicground=Must target an organic ground unit.
+
+Targetancient=Must target an Ancient.
+Targetarmoredtransport=Must target an armored transport.
+
+Targetmanauser=Must target a unit with mana.
+Targetbunkerunit=Must target a Peon.
+Targetwisp=Must target a Wisp.
+
+Targetacolyte=Must target an Acolyte.
+Targetpit=Must target a Sacrificial Pit.
+Needemptytree=That tree is occupied by an owl.
+Needowltree=That tree is not occupied by an owl.
+
+Cantfindcorpse=There are no usable corpses nearby.
+Cantfindfriendlycorpse=There are no corpses of friendly units nearby.
+Nounits=Unable to target units.
+Noground=Unable to target ground units.
+Noair=Unable to target air units.
+Nostructure=Unable to target buildings.
+Noward=Unable to target wards.
+Noitem=Unable to target items.
+Nodebris=Unable to target debris.
+Notree=Unable to target trees.
+Nowall=Unable to target walls.
+Nobridge=Unable to target bridges.
+Notfrozenbldg=Target building has been frozen.
+Nonaval=Unable to target naval units.
+
+Nottownhall=Must target friendly Town Hall.,Must target friendly Great Hall.,Must target friendly Town Hall.,Must target friendly Town Hall.
+Notownportalhalls=There are no friendly Town Halls to Town Portal to.,There are no friendly Great Halls to Town Portal to.,There are no friendly Town Halls to Town Portal to.,There are no friendly Town Halls to Town Portal to.
+Notself=Unable to target self.
+Notowned=Unable to target your own units.
+Notfriendly=Unable to target friendly units.
+Notneutral=Unable to target neutral units.
+Notenemy=Unable to target enemy units.
+Notcargo=Unable to target units inside a building or transport.
+Nothidden=That target is not visible on the map.
+Nothiddenitem=Unable to target carried items.
+
+Notinvulnerable=That target is invulnerable.
+Nohero=Unable to target Heroes.
+Notcorpse=Target must be living.
+Notfleshycorpse=Unable to target fleshy corpses.
+Notbonecorpse=Unable to target skeletal corpses.
+Notmechanical=Must target organic units.
+Notorganic=Unable to target organic units.
+Notdisabled=Caster movement has been disabled.
+
+Cantattackloc=Unable to attack there.
+Canttargetloc=Unable to target there.
+
+Inventoryfull=Inventory is full.
+Inventoryinteract=Select a unit with an inventory.
+NeedInventory=Only units with an inventory can pick up items.
+Needretrainablehero=Only Heroes that have learned spells not in cooldown can use this item.
+Neednearbyhero=A hero must be nearby.
+Neednearbypatron=A valid patron must be nearby.
+
+Notsapper=Unable to target Sappers.
+Notancient=Unable to target Ancients.
+Notsummoned=Unable to target summoned units.
+Nottransport=Unable to target transports or bunkers.
+Notunsummoned=Target is being unsummoned.
+Notillusion=Unable to target illusions.
+Notmorphing=Unable to target morphing units.
+Notdot=Unable to target a Druid of the Talon.
+
+Illusionscantharvest=Illusions are unable to harvest.
+Illusionscantpickup=Illusions cannot pick up items.
+
+Cantpolymorphunit=This unit is immune to Polymorph.
+
+Notundead=Unable to target an Undead unit.
+Heromaxed=Hero is at max level.
+HPmaxed=Hero has full health.
+Manamaxed=Already at full mana.
+HPmanamaxed=Already at full mana and health.
+
+UnitHPmaxed=Already at full health.
+UnitManaMaxed=Already at full mana.
+RepairHPmaxed=Target is not damaged.
+
+Alreadybeinghealed=Target is already being healed.
+Alreadybeingrepaired=Target is already being repaired.
+Pitalreadysacrificing=Sacrificial Pit is already sacrificing an Acolyte.
+Outofstock=Out of stock
+Cooldownstock=Out of stock
+Cantdrop=Item must remain in your inventory.
+Cantpawn=Item cannot be pawned.
+
+Calltoarms=No Peasants could be found.
+Calltoarmspeasant=No Town Halls could be found that can convert Peasants into Militia.
+Backtowork=No Militia could be found.
+Backtoworkmilitia=No Town Halls could be found that can convert Militia into Peasants.
+BattleStations=No Peons could be found.
+
+Replaceme=Replace this error message with something meaningful!
+
+Notliquidfirebldg=Target building has liquid fire.
+Notethereal=Ethereal units can only be hit by spells and Magic damage.
+
+Needstealbuff=Target has no stealable buffs.
+
+Needmeleeattacker=Must target a melee attacker.
+Needrangedattacker=Must target a ranged attacker.
+Needspecialattacker=Must target a special attacker.
+Needattacker=Must target an attack unit.
+Needcaster=Must target a caster.
+Needattackerorcaster=Must target an attack unit or a caster.
+
+Nopreservationtarget=No structures are available to teleport the target to.
+
+Canttransformitem=Unable to transform this item.
+
+Notmocunit=This unit has already been marked by fire.
+
+Cantimpale=Can't impale this unit.
+
+Needpositivebuff=Must target an enemy unit with positive buffs.
+Needposbufforsummoned=Must target an enemy unit with positive buffs or a summoned unit.
+Neednegativebuff=Must target a friendly unit with negative buffs.
+
+Absorbmana=Not enough mana to absorb.
+
+Canttakeitem=Unable to pick up this item.
+Cantdropitem=Unable to drop this item.
+Cantuseitem=Unable to use this item.
+Notpowerup=Unable to use powerups.
+
+Itemcooldown=This item is cooling down.
+
+Cantfindcoupletarget=Unable to find couple target.
+
+Notdisabledinventory=This unit has a disabled inventory.
+
+Resistantskin=This unit has Resistant Skin.
+
+Notinvulnerablespell=Unable to use invulnerability granting spells or items.
+
+Needsummoned=Must target summoned units.
+
+Cantsubmergethere=Unable to submerge there.
+
+Alreadydoomed=This unit has already been stricken with Doom.
+
+//[AdvisorStrings]
+Unitattack=The battle has been joined.
+Townattack=Our town is under siege!
+Herodies=%s has fallen in battle.
+Allyunderattack=%s is under attack.
+Allytownattack=%s's city is under siege!
+Allyminimapping=%s has marked the way.
+Goldandlumberfromally=Received %d gold and %d lumber from %s.
+Goldfromally=Received %d gold from %s.
+Lumberfromally=Received %d lumber from %s.
+Goldminedestroyed=A gold mine has collapsed.,A gold mine has collapsed.,Our gold source has been depleted.,Gold mine has been drained.
+Upkeeplevel=Upkeep level %d.
+Herokilledhero=%s was defeated by %s.
+Herodeath=%s the %s (level %d) has fallen.,%s the %s (level %d) has been slain.,%s the %s (level %d) has been killed.,%s the %s (level %d) has fallen.
+Goldminelow=A gold mine is running low.,A gold mine is running low.,We've almost depleted our gold source.,Gold mine is running low.
+Controlgranted=You have been granted control of %s's units.
+Controlrevoked=Control of %s's units has been taken away.
+
+// UI Strings are now all defined in GlobalStrings.fdf

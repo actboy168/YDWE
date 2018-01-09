@@ -1,0 +1,1264 @@
+// Human Units
+[Harf]
+Name=Paladin
+EditorSuffix= (wielding Frostmourne)
+Hotkey=L
+Propernames=Arthas
+Revivetip=Revive Pa|cffffcc00l|radin
+Awakentip=Revive Pa|cffffcc00l|radin
+Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
+
+[Hart]
+Name=Paladin
+Hotkey=L
+Propernames=Arthas
+Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive Pa|cffffcc00l|radin
+Awakentip=Revive Pa|cffffcc00l|radin
+
+[Huth]
+Name=Paladin
+Hotkey=L
+Propernames=Uther
+Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive Pa|cffffcc00l|radin
+Awakentip=Revive Pa|cffffcc00l|radin
+
+[Hpb1]
+Name=Paladin
+Hotkey=L
+Propernames=Lord Nicholas Buzan
+Revivetip=Revive Pa|cffffcc00l|radin
+Awakentip=Revive Pa|cffffcc00l|radin
+Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
+
+[Hpb2]
+Name=Paladin
+Hotkey=L
+Propernames=Sir Gregory Edmunson
+Revivetip=Revive Pa|cffffcc00l|radin
+Awakentip=Revive Pa|cffffcc00l|radin
+Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
+
+[Hdgo]
+Name=Paladin
+Hotkey=L
+Propernames=Dagren the Orcslayer
+Revivetip=Revive Pa|cffffcc00l|radin
+Awakentip=Revive Pa|cffffcc00l|radin
+Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
+
+[Hmgd]
+Name=Paladin
+Hotkey=L
+Propernames=Magroth the Defender
+Revivetip=Revive Pa|cffffcc00l|radin
+Awakentip=Revive Pa|cffffcc00l|radin
+Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
+
+[Hhkl]
+Name=Paladin
+Hotkey=L
+Propernames=Halahk the Lifebringer
+Revivetip=Revive Pa|cffffcc00l|radin
+Awakentip=Revive Pa|cffffcc00l|radin
+Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
+
+[Hjai]
+Name=Archmage
+Hotkey=A
+Propernames=Jaina
+Revivetip=Revive |cffffcc00A|rrchmage
+Awakentip=Revive |cffffcc00A|rrchmage
+Ubertip="Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Hmbr]
+Name=Mountain King
+Hotkey=M
+Propernames=Muradin Bronzebeard
+Revivetip=Revive |cffffcc00M|rountain King
+Awakentip=Revive |cffffcc00M|rountain King
+UberTip="Warrior Hero, adept at offensive combat and disrupting enemy troops. Can learn Storm Bolt, Thunder Clap, Bash and Avatar. |n|n|cffffcc00Attacks land units.|r"
+
+[Hant]
+Name=Archmage
+Hotkey=A
+Propernames=Antonidas
+Revivetip=Revive |cffffcc00A|rrchmage
+Awakentip=Revive |cffffcc00A|rrchmage
+Ubertip="Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Hvwd]
+Name=Ranger
+Hotkey=P
+Propernames=Sylvanas Windrunner
+Revivetip=Revive |cffffcc00R|ranger
+Awakentip=Revive |cffffcc00R|ranger
+
+[Hkal]
+Name=Blood Mage
+Hotkey=B
+Propernames=Kael
+Revivetip=Revive |cffffcc00B|rlood Mage
+Awakentip=Revive |cffffcc00B|rlood Mage
+Ubertip="Mystical Hero, adept at controlling magic and ranged assaults. Can learn Flame Strike, Banish, Siphon Mana and Phoenix. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Hvsh]
+Name=Naga Sea Witch
+Hotkey=N
+Propernames=Lady Vashj
+Revivetip=Revive |cffffcc00N|raga Sea Witch
+Awakentip=Revive |cffffcc00N|raga Sea Witch
+Ubertip="Mystical Hero, adept at ranged combat. Can learn Forked Lightning, Frost Arrows, Mana Shield, and Tornado. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Hlgr]
+Name=Dark Knight
+Hotkey=L
+Propernames=Lord Garithos
+Revivetip=Revive Pa|cffffcc00l|radin
+Awakentip=Revive Pa|cffffcc00l|radin
+Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
+
+[haro]
+Name=Arcane Observatory
+Hotkey=V
+Tip=Build Arcane Obser|cffffcc00v|ratory
+
+[hcth]
+Name=Captain
+
+[hhdl]
+Name=Riderless Horse
+
+[hhes]
+Name=Swordsman
+Tip=Train |cffffcc00S|rwordsman
+Hotkey=S
+Ubertip="Versatile foot soldier. Can learn the Defend ability. |n|n|cffffcc00Attacks land units.|r"
+
+[hbew]
+Name=Wagon
+
+[Hapm]
+Name=Paladin
+Hotkey=L
+Propernames=Admiral Proudmoore
+Revivetip=Revive Pa|cffffcc00l|radin
+Awakentip=Revive Pa|cffffcc00l|radin
+Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
+
+[hrdh]
+Name=Pack Horse
+
+[Hgam]
+Name=Ghostly Archmage
+Hotkey=A
+Propernames=Antonidas
+Revivetip=Revive Ghostly |cffffcc00A|rrchmage
+Awakentip=Revive Ghostly |cffffcc00A|rrchmage
+Ubertip="Mystical Hero Spirit, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. |n|n|cffffcc00Attacks land and air units.|r"
+
+// Orc Units
+[Othr]
+Name=Far Seer
+Hotkey=F
+Propernames=Thrall
+Revivetip=Revive |cffffcc00F|rar Seer
+Awakentip=Revive |cffffcc00F|rar Seer
+Ubertip="Mystical Hero, effective at ranged attacks and scouting. Can learn Chain Lightning, Far Sight, Feral Spirit and Earthquake. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Ogrh]
+Name=Blademaster
+Hotkey=B
+Propernames=Grom Hellscream
+Revivetip=Revive |cffffcc00B|rlademaster
+Awakentip=Revive |cffffcc00B|rlademaster
+Ubertip="Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. |n|n|cffffcc00Attacks land units.|r"
+
+[Opgh]
+Name=Blademaster
+EditorSuffix= (Possessed)
+Hotkey=B
+Propernames=Grom Hellscream
+Revivetip=Revive |cffffcc00B|rlademaster
+Awakentip=Revive |cffffcc00B|rlademaster
+Ubertip="Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. |n|n|cffffcc00Attacks land units.|r"
+
+[Ocbh]
+Name=Tauren Chieftain
+Hotkey=T
+Propernames=Cairne Bloodhoof
+Revivetip=Revive |cffffcc00T|rauren Chieftain
+Awakentip=Revive |cffffcc00T|rauren Chieftain
+Ubertip="Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Shockwave, War Stomp, Endurance Aura and Reincarnation. |n|n|cffffcc00Attacks land units.|r"
+
+//expansion version of cairne bloodhoof
+[Ocb2]
+Name=Tauren Chieftain
+Hotkey=T
+Propernames=Cairne Bloodhoof
+Revivetip=Revive |cffffcc00T|rauren Chieftain
+Awakentip=Revive |cffffcc00T|rauren Chieftain
+Ubertip="Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Shockwave, War Stomp, Endurance Aura and Reincarnation. |n|n|cffffcc00Attacks land units.|r"
+EditorSuffix=(Expansion)
+
+[owar]
+Name=Orc Warchief
+
+[ocbw]
+Name=Fel Orc Burrow
+Hotkey=O
+Tip=Build Fel |cffffcc00O|rrc Burrow
+Ubertip="Provides food, which increases the maximum number of units that can be trained. Fel Orc Peons can garrison inside to attack enemy units. |n|n|cffffcc00Attacks land and air units.|r"
+EditorSuffix= (Chaos)
+
+[oosc]
+Name=Kodo Beast
+EditorSuffix= (Riderless)
+
+[ownr]
+Name=Wyvern
+EditorSuffix= (Riderless)
+
+[odkt]
+Name=Drak'thul
+
+[onzg]
+Name=Nazgrel
+
+[Odrt]
+Name=Far Seer
+Propernames=Drek'Thar
+Hotkey=F
+Tip=Summon |cffffcc00F|rar Seer
+Ubertip="Mystical Hero, effective at ranged attacks and scouting. Can learn Chain Lightning, Far Sight, Feral Spirit and Earthquake. |n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive |cffffcc00F|rar Seer
+Awakentip=Revive |cffffcc00F|rar Seer
+
+[Orkn]
+Name=Shadow Hunter
+Propernames=Rokhan
+Hotkey=S
+Tip=Summon |cffffcc00S|rhadow Hunter
+Ubertip="Cunning Hero, adept at healing magics and voodoo curses. Can learn Healing Wave, Hex, Serpent Ward and Big Bad Voodoo. |n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive |cffffcc00S|rhadow Hunter
+Awakentip=Revive |cffffcc00S|rhadow Hunter
+
+[omtg]
+Name=Mathog
+
+[ovlj]
+Name=Vol'jin
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Sentry Ward","- Sentry Ward|n- Stasis Trap","- Sentry Ward|n- Stasis Trap|n- Healing Ward"
+
+[Ogld]
+Name=Warlock
+Propernames=Gul'dan
+Hotkey=W
+Tip=Summon |cffffcc00W|rarlock
+Ubertip="Powerful Warlock working under the tutelage of Kil'jaeden himself. |n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive |cffffcc00W|rarlock
+Awakentip=Revive |cffffcc00W|rarlock
+
+[Osam]
+Name=Blademaster
+Hotkey=B
+Propernames=Samuro
+Revivetip=Revive |cffffcc00B|rlademaster
+Awakentip=Revive |cffffcc00B|rlademaster
+Ubertip="Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. |n|n|cffffcc00Attacks land units.|r"
+
+[Orex]
+Name=Beastmaster
+Propernames=Rexxar
+Hotkey=B
+Tip=Summon |cffffcc00B|reastmaster
+Ubertip="Warrior Hero, adept at summoning beasts and rallying his allies. Can learn Summon Bear, Summon Quilbeast, Battle Roar, and Stampede. |n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive |cffffcc00B|reastmaster
+Awakentip=Revive |cffffcc00B|reastmaster
+
+[ngzc]
+Name=Misha
+EditorSuffix= (Level 1)
+
+[ngzd]
+Name=Misha
+EditorSuffix= (Level 2)
+
+[ngza]
+Name=Misha
+EditorSuffix= (Level 3)
+
+[ngz4]
+Name=Misha
+EditorSuffix= (Level 4)
+
+[nqb4]
+Name=Berserk Quilbeast
+EditorSuffix= (Level 4)
+
+[osp4]
+Name=Serpent Ward
+EditorSuffix= (Level 4)
+
+
+[npn4]
+Name=Fire
+Tip=Summon |cffffcc00F|rire
+Ubertip="Fierce Pandaren warrior of fire. Has Permanent Immolation and Resistant Skin. |n|n|cffffcc00Attacks land units.|r"
+Hotkey=F
+
+[npn5]
+Name=Storm
+Tip=Summon S|cffffcc00t|rorm
+Ubertip="Quick Pandaren warrior of storms. Has Resistant Skin. Can cast Dispel Magic, Cyclone, and Wind Walk. |n|n|cffffcc00Attacks land and air units.|r"
+Hotkey=T
+
+[npn6]
+Name=Earth
+Tip=Summon |cffffcc00E|rarth
+Ubertip="Sturdy Pandaren warrior of earth. Has Resistant Skin, and Spell Immunity. Can cast Pulverize, and Taunt. |n|n|cffffcc00Attacks land units.|r"
+Hotkey=E
+
+[oswy]
+Name=Spirit Wyvern
+
+[ogrk]
+Name=Gar'thok
+
+[ojgn]
+Name=Orc Juggernaught
+Hotkey=R
+Tip=Train O|cffffcc00r|rc Juggernaught
+Ubertip="Massive battleship good at destroying enemy ships and bombarding buildings from the sea. |n|n|cffffcc00Attacks land units.|r"
+
+// Undead Units
+[Uear]
+Name=Death Knight
+EditorSuffix= (Evil)
+Hotkey=D
+Propernames=Arthas
+Revivetip=Revive |cffffcc00D|reath Knight
+Awakentip=Revive |cffffcc00D|reath Knight
+Ubertip="Warrior Hero, evil counterpart to the Human Paladin. Can learn Death Coil, Death Pact, Unholy Aura, and Animate Dead. |n|n|cffffcc00Attacks land units.|r"
+
+[Uktl]
+Name=Lich
+EditorSuffix= (Lich)
+Hotkey=L
+Propernames=Kel'Thuzad
+Revivetip=Revive |cffffcc00L|rich
+Awakentip=Revive |cffffcc00L|rich
+Ubertip="Mystical Hero, particularly adept at cold magic. Can learn Frost Armor, Frost Nova, Dark Ritual and Death And Decay. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Umal]
+Name=Dreadlord
+Hotkey=E
+Propernames=Mal'Ganis
+Revivetip=Revive Dr|cffffcc00e|radlord
+Awakentip=Revive Dr|cffffcc00e|radlord
+Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
+
+[Utic]
+Name=Dreadlord
+Hotkey=E
+Propernames=Tichondrius
+Revivetip=Revive Dr|cffffcc00e|radlord
+Awakentip=Revive Dr|cffffcc00e|radlord
+Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
+
+[Uvar]
+Name=Dreadlord
+Hotkey=E
+Propernames=Varimathras
+Revivetip=Revive Dr|cffffcc00e|radlord
+Awakentip=Revive Dr|cffffcc00e|radlord
+Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
+
+[Udth]
+Name=Dreadlord
+Hotkey=E
+Propernames=Detheroc
+Revivetip=Revive Dr|cffffcc00e|radlord
+Awakentip=Revive Dr|cffffcc00e|radlord
+Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
+
+[Ubal]
+Name=Dreadlord
+Hotkey=E
+Propernames=Balnazzar
+Revivetip=Revive Dr|cffffcc00e|radlord
+Awakentip=Revive Dr|cffffcc00e|radlord
+Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
+
+[Uvng]
+Name=Dreadlord
+Hotkey=E
+Propernames=Dalvengyr
+Revivetip=Revive Dr|cffffcc00e|radlord
+Awakentip=Revive Dr|cffffcc00e|radlord
+Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
+
+[Uanb]
+Name=Crypt Lord
+Hotkey=C
+Propernames=Anub'arak
+Revivetip=Revive |cffffcc00C|rrypt Lord
+Awakentip=Revive |cffffcc00C|rrypt Lord
+Ubertip="Warrior Hero, adept at summoning insect minions and crushing enemies. Can learn Impale, Spiked Carapace, Carrion Beetles and Locust Swarm. |n|n|cffffcc00Attacks land units.|r"
+
+[Usyl]
+Name=Dark Ranger
+Propernames=Sylvanas
+Hotkey=D
+Tip=Summon |cffffcc00D|rark Ranger
+Revivetip=Revive |cffffcc00D|rark Ranger
+Awakentip=Revive |cffffcc00D|rark Ranger
+Ubertip="Cunning Hero, adept at manipulating opponents. Can learn Silence, Black Arrow, Life Drain, and Charm. |n|n|cffffcc00Attacks land and air units.|r"
+
+[uktn]
+Name=Kel'Thuzad
+EditorSuffix= (Necromancer)
+
+[uktg]
+Name=Kel'Thuzad
+EditorSuffix= (Ghost)
+
+[Uwar]
+Name=Warlock
+Hotkey=W
+Propernames=Archimonde
+Revivetip=Revive |cffffcc00W|rarlock
+Awakentip=Revive |cffffcc00W|rarlock
+
+[uswb]
+Name=Sylvanas Windrunner
+EditorSuffix= (Banshee)
+
+[uarb]
+Name=Sky Barge
+Tip=Summon Sky |cffffcc00B|rarge
+Ubertip="A massive air transport."
+Hotkey=B
+
+[ubdr]
+Name=Sapphiron
+EditorSuffix= (living)
+
+[ubdd]
+Name=Sapphiron
+EditorSuffix= (undead)
+
+[ushp]
+Name=Undead Shipyard
+Tip=S|cffffcc00h|ripyard
+Ubertip="Boat construction facility. Produces Undead Transport Ships, Undead Frigates, and Undead Battleships."
+Hotkey=H
+
+// Night Elf Units
+[Eill]
+Name=Demon Hunter
+Hotkey=D
+Propernames=Illidan
+Revivetip=Revive |cffffcc00D|remon Hunter
+Awakentip=Revive |cffffcc00D|remon Hunter
+Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
+
+[Eilm]
+Name=Demon Hunter
+EditorSuffix= (Morphed)
+Hotkey=D
+Propernames=Illidan
+Revivetip=Revive |cffffcc00D|remon Hunter
+Awakentip=Revive |cffffcc00D|remon Hunter
+Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
+
+[Eidm]
+Name=Demon Hunter
+EditorSuffix= (Demon Form)
+Hotkey=D
+Propernames=Illidan
+Revivetip=Revive |cffffcc00D|remon Hunter
+Awakentip=Revive |cffffcc00D|remon Hunter
+Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
+
+[Ecen]
+Name=Demigod
+Hotkey=C
+Propernames=Cenarius
+Revivetip=Revive |cffffcc00C|renarius
+Awakentip=Revive |cffffcc00C|renarius
+
+[Ekgg]
+Name=Keeper of the Grove
+Hotkey=G
+Propernames=Ghost
+Revivetip=Revive |cffffcc00G|rhost
+Awakentip=Revive |cffffcc00G|rhost
+Ubertip="Mystical Hero, adept at using nature spells. Can learn Entangling Roots, Force of Nature, Thorns Aura, and Tranquility. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Efur]
+Name=Keeper of the Grove
+Hotkey=K
+Propernames=Furion
+Revivetip=Revive |cffffcc00K|reeper of the Grove
+Awakentip=Revive |cffffcc00K|reeper of the Grove
+Ubertip="Mystical Hero, adept at using nature spells. Can learn Entangling Roots, Force of Nature, Thorns Aura, and Tranquility. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Emfr]
+Name=Keeper of the Grove
+Hotkey=K
+Propernames=Malfurion
+Revivetip=Revive |cffffcc00K|reeper of the Grove
+Awakentip=Revive |cffffcc00K|reeper of the Grove
+Ubertip="Mystical Hero, adept at using nature spells. Can learn Entangling Roots, Force of Nature, Thorns Aura, and Tranquility. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Emns]
+Name=Keeper of the Grove
+Hotkey=K
+Propernames=Malfurion
+Revivetip=Revive |cffffcc00K|reeper of the Grove
+Awakentip=Revive |cffffcc00K|reeper of the Grove
+EditorSuffix= (Without Stag)
+Ubertip="Mystical Hero, adept at using nature spells. Can learn Entangling Roots, Force of Nature, Thorns Aura, and Tranquility. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Ewrd]
+Name=Warden
+Hotkey=W
+Propernames=Maiev
+Revivetip=Revive |cffffcc00W|rarden
+Awakentip=Revive |cffffcc00W|rarden
+Ubertip="Cunning Hero, adept at entering and escaping combat. Can learn Blink, Fan of Knives, Shadow Strike and Vengeance. |n|n|cffffcc00Attacks land units.|r"
+
+[eshd]
+Name=Shandris
+
+[Etyr]
+Name=Priestess of the Moon
+Hotkey=P
+Propernames=Tyrande
+Revivetip=Revive |cffffcc00P|rriestess of the Moon
+Awakentip=Revive |cffffcc00P|rriestess of the Moon
+Ubertip="Warrior Hero, adept at enhancing ranged attacks and slaying enemies from afar. Can learn Scout, Searing Arrows, Trueshot Aura, and Starfall. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Eevi]
+Name=Demon Hunter
+Hotkey=D
+Propernames=Illidan
+Revivetip=Revive |cffffcc00D|remon Hunter
+Awakentip=Revive |cffffcc00D|remon Hunter
+EditorSuffix= (Evil)
+Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
+
+[Eevm]
+Name=Demon Hunter
+EditorSuffix= (Morphed)
+Hotkey=D
+Propernames=Illidan
+Revivetip=Revive |cffffcc00D|remon Hunter
+Awakentip=Revive |cffffcc00D|remon Hunter
+EditorSuffix= (Evil)
+Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
+
+[ensh]
+Name=Naisha
+
+[enec]
+Name=Night Elf Runner
+
+[eilw]
+Name=Prison Wagon
+
+// Neutral Units
+[Nbbc]
+Name=Blademaster
+Hotkey=B
+Propernames=Blademaster of Blackrock Clan
+Revivetip=Revive |cffffcc00B|rlademaster
+Awakentip=Revive |cffffcc00B|rlademaster
+Ubertip="Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. |n|n|cffffcc00Attacks land units.|r"
+
+[nckb]
+Name=Fel Orc Kodo Beast
+Hotkey=K
+Tip=Train Fel Orc |cffffcc00K|rodo Beast
+Ubertip="Lumbering war beast, mounted by an Orcish drummer. Has the abilities War Drums and Devour. War Drums gives friendly units nearby a bonus to attack damage. Can gain the War Drums Upgrade. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nchg]
+Name=Fel Orc Grunt
+Hotkey=G
+Tip=Train Fel Orc |cffffcc00G|rrunt
+Ubertip="Brutish Orc warrior infused with the blood of demons. |n|n|cffffcc00Attacks land units.|r"
+
+[nchr]
+Name=Fel Orc Raider
+Hotkey=R
+Tip=Train Fel Orc |cffffcc00R|raider
+Ubertip="Highly mobile wolf rider infused with the blood of demons. |n|n|cffffcc00Attacks land units.|r"
+
+[nchw]
+Name=Fel Orc Warlock
+Hotkey=W
+Tip=Train Fel Orc |cffffcc00W|rarlock
+Ubertip="Orc spellcaster infused with the blood of demons. Can initially cast Firebolt, which stuns and damages a target enemy unit. Can also learn Unholy Frenzy and Cripple. |n|n|cffffcc00Attacks land and air units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Firebolt","- Firebolt|n- Unholy Frenzy","- Firebolt|n- Unholy Frenzy|n- Cripple"
+
+[nw2w]
+Name=Orc Warlock
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Firebolt","- Firebolt|n- Unholy Frenzy","- Firebolt|n- Unholy Frenzy|n- Cripple"
+
+[ncpn]
+Name=Fel Orc Peon
+Hotkey=P
+Tip=Train Fel Orc |cffffcc00P|reon
+Ubertip="Basic worker unit. Can harvest gold and lumber, build structures, and Repair. Can also go inside Orc Burrows to give it an attack. |n|n|cffffcc00Attacks land units and trees.|r"
+
+[nmed]
+Name=Medivh
+
+[nmdm]
+Name=Medivh
+EditorSuffix= (Raven Form)
+
+[Nman]
+Name=Pit Lord
+Propernames=Mannoroth
+Revivetip=Revive |cffffcc00P|rit Lord
+Awakentip=Revive |cffffcc00P|rit Lord
+Hotkey=M
+
+[Npld]
+Name=Pit Lord
+Propernames=Azgalor,Brutillus,Mongrethod,Destromath,Gogonnash,Magtheridon
+Revivetip=Revive |cffffcc00P|rit Lord
+Awakentip=Revive |cffffcc00P|rit Lord
+Hotkey=P
+
+[nser]
+Name=Searinox
+
+[nthr]
+Name=Tharifas
+
+[nemi]
+Name=Emissary
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Heal","- Heal|n- Dispel Magic","- Heal|n- Dispel Magic|n- Inner Fire"
+
+[nhem]
+Name=High Elf
+EditorSuffix= (Male)
+
+[nhef]
+Name=High Elf
+EditorSuffix= (Female)
+
+[nhea]
+Name=Archer
+Tip=Train A|cffffcc00r|rcher
+Hotkey=R
+Ubertip="Basic long-ranged attacker. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nshr]
+Name=Shrine
+
+[ndmg]
+Name=Demon Gate
+
+[nefm]
+Name=High Elven Farm
+
+[nef0]
+Name=High Elven Farm
+EditorSuffix=1
+
+[nef1]
+Name=High Elven Farm
+EditorSuffix=2
+
+[nef2]
+Name=High Elven Farm
+EditorSuffix=3
+
+[nef3]
+Name=High Elven Farm
+EditorSuffix=4
+
+[nef4]
+Name=High Elven Farm
+EditorSuffix=5
+
+[nef5]
+Name=High Elven Farm
+EditorSuffix=6
+
+[nef6]
+Name=High Elven Farm
+EditorSuffix=7
+
+[nef7]
+Name=High Elven Farm
+EditorSuffix=8
+
+[negt]
+Name=High Elven Guard Tower
+Hotkey=G
+Tip=Build High Elven |cffffcc00G|ruard Tower
+Ubertip="Primary defensive structure.|n|n|cffffcc00Attacks land and air units.|r"
+
+
+[negf]
+Name=Earth-Fury Tower
+
+[negm]
+Name=Sky-Fury Tower
+
+[ndgt]
+Name=Dalaran Guard Tower
+
+[npgf]
+Name=Pig Farm
+Tip=Build Pig |cffffcc00F|rarm
+Hotkey=F
+
+[nheb]
+Name=High Elven Barracks
+Hotkey=B
+Tip=Build |cffffcc00B|rarracks
+Ubertip="Primary troop production building. Trains High Elven Swordsmen, High Elven Archers and Dragon Hawks. |nAlso contains the Defend upgrade for High Elven Swordsmen."
+
+
+[nbfl]
+Name=Fountain of Blood
+
+[nfnp]
+Name=Fountain of Power
+
+[ndfl]
+Name=Defiled Fountain of Life
+
+[nbsm]
+Name=Book of Summoning Pedestal
+
+[nhcn]
+Name=Horn of Cenarius Pedestal
+
+[nfrm]
+Name=Frostmourne Pedestal
+
+[ngob]
+Name=Enchanted Gemstone Obelisk
+
+[nbwd]
+Name=Barrow Den
+
+[ncap]
+Name=Corrupted Ancient Protector
+Hotkey=P
+Tip=Create Corrupted Ancient |cffffcc00P|rrotector
+Ubertip="Defensive Ancient. When rooted in the ground, can hurl enormous rocks at nearby enemy units. |nAttacks land and air units."
+
+[ncmw]
+Name=Corrupted Moon Well
+Hotkey=M
+Tip=Create Corrupted |cffffcc00M|roon Well
+Ubertip="Provides food, which increases the maximum number of units that can be trained. Has the Replenish Mana and Life ability."
+
+[nctl]
+Name=Corrupted Tree of Life
+Hotkey=T
+Tip=Create Corrupted |cffffcc00T|rree of Life
+Ubertip="Primary structure, used to train Wisps and entangle gold mines. Can be upgraded to Corrupted Tree of Ages and then Corrupted Tree of Eternity to enable the production of additional types of structures and units."
+
+[ncta]
+Name=Corrupted Tree of Ages
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Corrupted Tree of Ages
+Ubertip="Upgrade to Corrupted Tree of Ages to enable the production of additional types of structures and units."
+
+[ncte]
+Name=Corrupted Tree of Eternity
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Corrupted Tree of Eternity
+Ubertip="Upgrade to Corrupted Tree of Eternity to enable the production of additional types of structures and units."
+
+[ncaw]
+Name=Corrupted Ancient of War
+Hotkey=R
+Tip=Create Corrupted Ancient of Wa|cffffcc00r|r
+Ubertip="Keeper of primary assault troops. |n|n|cffffcc00Attacks land units.|r"
+
+[nbsp]
+Name=Ship
+
+[nssn]
+Name=Warden
+
+[nwat]
+Name=Sentry
+
+[ndrb]
+Name=Dragon Roost
+Tip=Build Dragon Roost
+
+[Uclc]
+Name=Lich
+EditorSuffix=" (Lich, cinematic)"
+Hotkey=L
+Propernames=Kel'Thuzad
+Revivetip=Revive |cffffcc00L|rich
+Awakentip=Revive |cffffcc00L|rich
+Ubertip="Mystical Hero, particularly adept at cold magic. Can learn Frost Armor, Frost Nova, Dark Ritual and Death And Decay. |n|n|cffffcc00Attacks land and air units.|r"
+
+[uabc]
+Name=Abomination
+EditorSuffix= (cinematic)
+Tip=Train |cffffcc00A|rbomination
+Ubertip="Heavy melee unit. Can learn the Disease Cloud ability. |n|n|cffffcc00Attacks land units.|r"
+Hotkey=A
+
+[Otcc]
+Name=Tauren Chieftain
+EditorSuffix= (cinematic)
+Hotkey=T
+Propernames=Cairne Bloodhoof
+Revivetip=Revive |cffffcc00T|rauren Chieftain
+Awakentip=Revive |cffffcc00T|rauren Chieftain
+Ubertip="Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Shockwave, War Stomp, Endurance Aura and Reincarnation. |n|n|cffffcc00Attacks land units.|r"
+
+[zmar]
+Name=Marine
+Hotkey=M
+Tip=Train |cffffcc00M|rarine
+Ubertip="Powerful Terran marine armed with an automatic pulse rifle. |n|n|cffffcc00Attacks land and air units.|r"
+
+[zjug]
+Name=Orc Juggernaught
+Hotkey=R
+Tip=Train O|cffffcc00r|rc Juggernaught
+Ubertip="Massive battleship good at destroying enemy ships and bombarding buildings from the sea. |n|n|cffffcc00Attacks land units.|r"
+EditorSuffix= (Cinematic)
+
+[zzrg]
+Name=Zergling
+Hotkey=Z
+Tip=Train |cffffcc00Z|rergling
+Ubertip="Small melee creature of the Zerg army. Though fragile, they are good in large numbers. |n|n|cffffcc00Attacks land units.|r"
+
+[zhyd]
+Name=Hydralisk
+Hotkey=H
+Tip=Train |cffffcc00H|rydralisk
+Ubertip="Powerful Zerg creature, adept at destroying enemies with projectile spines coated in acid. |n|n|cffffcc00Attacks land and air units.|r"
+
+[zcso]
+Name=Space Fel Orc
+Hotkey=C
+Tip=Train Spa|cffffcc00c|re Fel Orc
+Ubertip="Fel Orc sent into space to fight for the demonic legion. Armed with a powerful flame-thrower, they can decimate large numbers of clustered enemy troops. |n|n|cffffcc00Attacks land and air units.|r"
+
+[zsmc]
+Name=Sammy!
+Hotkey=M
+Tip=Train Sa|cffffcc00m|rmy
+Ubertip="Lead artist, Sam Didier. Good at concept art and texturing. Has many artist minions that do his bidding. |n|n|cffffcc00Attacks bad art.|r"
+
+[zshv]
+Name=Kobold Shoveler
+Hotkey=K
+Tip=Train |cffffcc00K|robold Shoveler
+Ubertip="Vice President of Blizzard, Frank pearce. Powerful programmer, good at cutting through the chaff and getting tasks done. |n|n|cffffcc00Attacks bugs.|r"
+
+// naga units/buildings
+[nmpe]
+Name=Mur'gul Slave
+Hotkey=V
+Tip=Train Mur'gul Sla|cffffcc00v|re
+Ubertip="Basic worker unit. Can harvest gold and lumber, build structures, and Repair. |n|n|cffffcc00Attacks land units and trees.|r"
+
+[nnfm]
+Name=Coral Bed
+Tip=Build |cffffcc00C|roral Bed
+Hotkey=C
+Ubertip="Provides food, which increases the maximum number of units that can be trained."
+
+[nntg]
+Name=Tidal Guardian
+Tip=Build Ti|cffffcc00d|ral Guardian
+Hotkey=D
+Ubertip="Primary defensive structure. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nntt]
+Name=Temple of Tides
+Tip=Build |cffffcc00T|remple of Tides
+Hotkey=T
+Ubertip="Primary structure, used to train Mur'gul Slaves, Mur'gul Reavers and receive gathered resources. Also contains the Naga weapon and armor upgrades, and the Submerge upgrade."
+
+[nnsg]
+Name=Spawning Grounds
+Tip=Build |cffffcc00S|rpawning Grounds
+Hotkey=S
+Ubertip="Trains Naga Myrmidons, Snap Dragons, and Dragon Turtles. Also contains the Ensnare upgrade."
+
+[nnsa]
+Name=Shrine of Azshara
+Tip=Build Shrine of |cffffcc00A|rzshara
+Hotkey=A
+Ubertip="Trains Naga Sirens and Couatl. Also contains spell upgrades for Naga Sirens."
+
+[nnad]
+Name=Altar of the Depths
+Tip=Build A|cffffcc00l|rtar of the Depths
+Hotkey=L
+Ubertip="Summons Heroes. Revives slain Heroes."
+
+[nnmg]
+Name=Mur'gul Reaver
+Tip=Train Mur'gul |cffffcc00R|reaver
+Hotkey=R
+Ubertip="Light melee amphibious unit.  |n|n|cffffcc00Attacks land units.|r"
+
+[nmyr]
+Name=Naga Myrmidon
+Hotkey=M
+Tip=Train Naga |cffffcc00M|ryrmidon
+Ubertip="Powerful melee unit. Has the Submerge ability, which allows this unit to hide in water. Can learn the Ensnare ability.  |n|n|cffffcc00Attacks land units."
+
+[nmys]
+Name=Submerged Naga Myrmidon
+Hotkey=M
+Tip=Train Naga |cffffcc00M|ryrmidon
+Ubertip="Powerful melee unit. Has the Submerge ability, which allows this unit to hide in water. Can Can learn the Ensnare ability.  |n|n|cffffcc00Attacks land units."
+
+[nnrg]
+Name=Naga Royal Guard
+Tip=Train Naga Royal Guard
+Ubertip="Incredibly powerful melee unit. Has the Submerge ability, which allows this unit to hide in water. Also has Resistant Skin, which reduces the duration of negative spells, Frost Bolt, which stuns a target enemy unit, Crushing Wave, which deals damage in a line, and Summon Sea Elemental, which summons a ranged attack unit. |n|n|cffffcc00Attacks land units.|r"
+
+[nnrs]
+Name=Submerged Naga Royal Guard
+Tip=Train Naga Royal Guard
+Ubertip="Incredibly powerful melee unit. Has the Submerge ability, which allows this unit to hide in water. Also has Resistant Skin, which reduces the duration of negative spells, Frost Bolt, which stuns a target enemy unit, Crushing Wave, which deals damage in a line, and Summon Sea Elemental, which summons a ranged attack unit. |n|n|cffffcc00Attacks land units.|r"
+
+[nnsw]
+Name=Naga Siren
+Hotkey=S
+Tip=Train Naga |cffffcc00S|riren
+Ubertip="Powerful spellcaster. Can initially cast Parasite, which damages an enemy unit over time and can spawn a Watery Minion from their corpse. Can also learn Frost Armor, and Cyclone. |n|n|cffffcc00Attacks land and air units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Parasite","- Parasite|n- Frost Armor","- Parasite|n- Frost Armor|n- Cyclone"
+
+[nnsu]
+Name=Summoner
+Hotkey=S
+Tip=Train |cffffcc00S|rummoner
+Ubertip="Powerful summoner. Can initially cast Parasite, which damages an enemy unit over time and can spawn a Watery Minion from their corpse. Can also learn Frost Armor, and Cyclone. |n|n|cffffcc00Attacks land and air units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Parasite","- Parasite|n- Frost Armor","- Parasite|n- Frost Armor|n- Cyclone"
+
+[nsnp]
+Name=Snap Dragon
+Hotkey=D
+Tip=Train Snap |cffffcc00D|rragon
+Ubertip="Light ranged unit that has a poison attack which slows and damages enemy units. Has the Submerge ability, which allows this unit to hide in water. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nsbs]
+Name=Submerged Snap Dragon
+Hotkey=D
+Tip=Train Snap |cffffcc00D|rragon
+Ubertip="Light ranged unit that has a poison attack which slows and damages enemy units. Has the Submerge ability, which allows this unit to hide in water. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nwgs]
+Name=Couatl
+Hotkey=C
+Tip=Train |cffffcc00C|rouatl
+Ubertip="Light flying unit that can learn Abolish Magic. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nhyc]
+Name=Dragon Turtle
+Hotkey=T
+Tip=Train Dragon |cffffcc00T|rurtle
+Ubertip="A powerful Turtle that can devour enemy units. Good at destroying enemy buildings. Has Hardened Skin, which reduces damage taken, and Spiked Shell which deals damage to enemy melee attackers. |n|n|cffffcc00Attacks land units."
+
+//end naga stuff
+
+[nbel]
+Name=Blood Elf Lieutenant
+Hotkey=L
+Tip=Train Blood Elf |cffffcc00L|rieutenant
+Ubertip="Powerful lieutenants from Prince Kael's Blood Elf army. Experts at destroying spellcasters. |n|n|cffffcc00Attacks land units.|r"
+
+[nbee]
+Name=Blood Elf Engineer
+Hotkey=E
+Tip=Train Blood Elf |cffffcc00E|rngineer
+Ubertip="Extremely intelligent Blood Elves that are good at discovering new technologies and crafting powerful towers. |n|n|cffffcc00Attacks land units and trees.|r"
+
+[ndmu]
+Name=Dalaran Mutant
+
+[ndrj]
+Name=Dalaran Reject
+
+[nfgl]
+Name=Flesh Golem
+
+[njks]
+Name=Jailor Kassan
+
+[Naka]
+Name=Elder Sage
+Propernames=Akama
+Revivetip=Revive A|cffffcc00k|rama
+Awakentip=Revive A|cffffcc00k|rama
+Hotkey=K
+
+[ndrl]
+Name=Draenei Laborer
+Hotkey=D
+Tip=Train |cffffcc00D|rrainei Laborer
+Ubertip="Basic worker unit. Can harvest gold and lumber, build structures, and Repair. |n|n|cffffcc00Attacks land units and trees.|r"
+
+[ndh4]
+Name=Seer's Den
+Tip=Build Seer's Den
+Ubertip="Produces Draenei Seers and Harbingers."
+
+[ndh3]
+Name=Draenei Barracks
+Tip=Build Draenei Barracks
+Ubertip="Produces Draenei Vindicators, Stalkers, Demolishers and Salamanders."
+
+[ndh2]
+Name=Draenei Haven
+Tip=Build Draenei Haven
+Ubertip="Allows the collection of gold, produces Laborers and can revive Heroes."
+
+[ndsa]
+Name=Salamander
+Tip=Train Salamander
+Ubertip="Heavy ranged unit that hurls bolts of lightning.|n|n|cffffcc00Attacks land and air units.|r"
+
+[nsw1]
+Name=Lesser Spirit Beast
+EditorSuffix= (Level 1)
+
+[nsw2]
+Name=Spirit Beast
+EditorSuffix= (Level 2)
+
+[nsw3]
+Name=Greater Spirit Beast
+EditorSuffix= (Level 3)
+
+[ncat]
+Name=Draenei Demolisher
+Hotkey=D
+Tip=Train Draenei |cffffcc00D|remolisher
+Ubertip="Long-range siege weaponry. Effective against buildings but slow and vulnerable. Can learn the Burning Oil ability. |n|n|cffffcc00Attacks land units and trees.|r"
+
+[Nmag]
+Name=Pit Lord
+Propernames=Magtheridon
+Revivetip=Revive |cffffcc00P|rit Lord
+Awakentip=Revive |cffffcc00P|rit Lord
+Hotkey=P
+Ubertip="Warrior Hero, adept at terrorizing enemies. Can learn Rain of Fire, Howl of Terror, Cleaving Attack, and Doom. |n|n|cffffcc00Attacks land units.|r"
+
+[Nklj]
+Name=Warlock
+Hotkey=W
+Propernames=Kil'jaeden
+Revivetip=Revive |cffffcc00W|rarlock
+Awakentip=Revive |cffffcc00W|rarlock
+
+[Nkjx]
+Name=Warlock
+Hotkey=W
+Propernames=Kil'jaeden
+Revivetip=Revive |cffffcc00W|rarlock
+Awakentip=Revive |cffffcc00W|rarlock
+EditorSuffix=(Cinematic)
+
+[nfv0]
+Name=Night Elf Fishing Village
+EditorSuffix= (two story, southwest facing)
+
+[nfv1]
+Name=Night Elf Fishing Village
+EditorSuffix= (crested, southwest facing)
+
+[nfv2]
+Name=Night Elf Fishing Village
+EditorSuffix= (one story)
+
+[nfv3]
+Name=Night Elf Fishing Village
+EditorSuffix= (two story, southeast facing)
+
+[nfv4]
+Name=Night Elf Fishing Village
+EditorSuffix= (crested, southeast facing)
+
+[nvr0]
+Name=Night Elf Fishing Village
+EditorSuffix= (ruined)
+
+[nvr1]
+Name=Night Elf Fishing Village
+EditorSuffix= (ruined)
+
+[nvr2]
+Name=Night Elf Fishing Village
+EditorSuffix= (ruined)
+
+[npgr]
+Name=Power Generator
+
+[nmsh]
+Name=Misha
+
+[negz]
+Name=Engineer Gazlowe
+
+[Nsjs]
+Name=Pandaren Brewmaster
+Propernames=Chen Stormstout
+Hotkey=N
+Tip=Summon Pa|cffffcc00n|rdaren Brewmaster
+Ubertip="Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Breath of Fire, Drunken Haze, Drunken Brawler and Storm, Earth And Fire. |n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive Pa|cffffcc00n|rdaren Brewmaster
+Awakentip=Revive Pa|cffffcc00n|rdaren Brewmaster
+
+[nhew]
+Name=Worker
+EditorSuffix= (Blood Elf)
+Hotkey=W
+Tip=Train |cffffcc00W|rorker
+Ubertip="Basic worker unit. Can build structures, and Repair."
+
+[nspc]
+Name=Support Column
+
+[ngbl]
+Name=Goblin Blaster
+
+[ndkw]
+Name=Dimensional Gate
+EditorSuffix= (facing southwest)
+
+[ndke]
+Name=Dimensional Gate
+EditorSuffix= (facing southeast)
+
+[nico]
+Name=Icecrown Obelisk
+
+[net1]
+Name=Energy Tower
+Hotkey=E
+Tip=Build |cffffcc00E|rnergy Tower
+Ubertip="Fires bolts of energy. Good at destroying air units. Immune to magic. |n|n|cffffcc00Attacks land and air units.|r"
+
+[net2]
+Name=Advanced Energy Tower
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Advanced Energy Tower
+Ubertip="Increases the damage of the energy bolts. Good at destroying air units. Immune to magic. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nbt1]
+Name=Boulder Tower
+Hotkey=B
+Tip=Build |cffffcc00B|roulder Tower
+Ubertip="Fires massive boulders that deal splash damage. Good at destroying ground units. Immune to magic. |n|n|cffffcc00Attacks land units.|r"
+
+[nbt2]
+Name=Advanced Boulder Tower
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Advanced Boulder Tower
+Ubertip="Increases the damage of the boulders. Good at destroying ground units. Immune to magic. |n|n|cffffcc00Attacks land units.|r"
+
+[nft1]
+Name=Flame Tower
+Hotkey=F
+Tip=Build |cffffcc00F|rlame Tower
+Ubertip="Fires short jets of flame. Good at destroying enemies that get close. Immune to magic. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nft2]
+Name=Advanced Flame Tower
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Advanced Flame Tower
+Ubertip="Increases the damage of the jets of flame. Good at destroying enemies that get close. Immune to magic. |n|n|cffffcc00Attacks land and air units.|r"
+
+[ndt1]
+Name=Cold Tower
+Hotkey=C
+Tip=Build |cffffcc00C|rold Tower
+Ubertip="Fires shards of ice. Good at slowing down enemies. Immune to magic. |n|n|cffffcc00Attacks land and air units.|r"
+
+[ndt2]
+Name=Advanced Cold Tower
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Advanced Cold Tower
+Ubertip="Fires shards of ice at a faster rate. Good at slowing down enemies. Immune to magic. |n|n|cffffcc00Attacks land and air units.|r"
+
+[ntt1]
+Name=Death Tower
+Hotkey=D
+Tip=Build |cffffcc00D|reath Tower
+Ubertip="Fires bolts of deadly energy. Excellent at dealing massive damage to everything. Immune to magic. |n|n|cffffcc00Attacks land and air units.|r"
+
+[ntx2]
+Name=Advanced Death Tower
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Advanced Death Tower
+Ubertip="Fires bolts of death. Excellent at destroying everything. Immune to magic. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nfrt]
+Name=Fruit Stand
+Tip=Build Fruit Stand
+Ubertip="The most incredible fruit stand you have ever seen in your entire life."
+
+[hprt]
+Name=Portal
+Tip=Open Portal
+Ubertip="Opens the portal."
+
+[nzlc]
+Name=Lich King
+Tip=Lich King
+Ubertip="This is the Lich King, no honest it is, really. Don't you believe me?"
+EditorSuffix= (cinematic campaign unit)
+
+[nchp]
+Name=Chaplain
+Hotkey=C
+Tip=Train |cffffcc00C|rhaplain
+Ubertip="Supporting spellcaster. Can cast Heal, Dispel Magic and Inner Fire. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nhym]
+Name=Hydromancer
+Hotkey=Y
+Tip=Train H|cffffcc00y|rdromancer
+Ubertip="Versatile spellcaster. Can cast Slow, Crushing Wave, and Polymorph. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nzin]
+Name=Zone Indicator
+Tip=Zone Indicator
+Ubertip="Zone Indicator"
+EditorSuffix= (Custom Campaign)
+
+[nbse]
+Name=Resurrection Stone
+Tip=Create Resurrection Stone
+Ubertip=""
+EditorSuffix= (southeast facing)
+
+[nbsw]
+Name=Resurrection Stone
+Tip=Create Resurrection Stone
+Ubertip=""
+EditorSuffix= (southwest facing)
