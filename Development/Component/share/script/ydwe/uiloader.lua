@@ -135,20 +135,26 @@ function loader:initialize()
 		local t = {}
 		for _, filename in pairs(info.txt) do
 			txt(load_mpq(filename), filename, t)
-		end
-		txt(io.load(ydwe / 'share' / 'mpq' / 'ydwe' / 'ydwetip.txt'), 'ydwetip', t)
-		
-		local replace = {}
-		txt(io.load(ydwe / 'share' / 'mpq' / 'ydwe' / 'editorsuffix.txt'), 'editorsuffix', replace)
-		for id, o in pairs(replace) do
-			if not t[id] then
-				t[id] = o
-			else
-				for k, v in pairs(o) do
-					t[id][k] = v
-				end
-			end
-		end
+        end
+        local ydwetip = load_mpq('ydwe' / 'ydwetip.txt')
+        if ydwetip then
+            txt(ydwetip, 'ydwetip', t)
+        end
+        
+        local editorsuffix = load_mpq('ydwe' / 'editorsuffix.txt')
+        if editorsuffix then
+		    local replace = {}
+		    txt(editorsuffix, 'editorsuffix', replace)
+		    for id, o in pairs(replace) do
+		    	if not t[id] then
+		    		t[id] = o
+		    	else
+		    		for k, v in pairs(o) do
+		    			t[id][k] = v
+		    		end
+		    	end
+            end
+        end
 		return stringify_txt(t)
 	end)
 	virtual_mpq.watch('units\\abilitydata.slk', function ()
