@@ -12,6 +12,12 @@ namespace i18n {
 		return base::u2w(std::string_view(buf, len), base::conv_method::replace | '?');
 	}
 
+	static void luaL_pushwstring(lua_State* L, const std::wstring& str)
+	{
+		std::string utf8 = base::w2u(str, base::conv_method::replace | '?');
+		lua_pushlstring(L, utf8.data(), utf8.size());
+	}
+
 	static int get_text(lua_State* L)
 	{
 		auto str = base::i18n::v2::get_text(luaL_checkstring(L, 1));
@@ -23,6 +29,12 @@ namespace i18n {
 	{
 		base::i18n::v2::set_domain(luaL_checkwstring(L, 1));
 		return 0;
+	}
+
+	static int get_language(lua_State* L)
+	{
+		luaL_pushwstring(L, base::i18n::v2::get_language());
+		return 1;
 	}
 
 	static int initialize(lua_State* L)
@@ -37,6 +49,7 @@ int luaopen_i18n(lua_State* L)
 	luaL_Reg l[] = {
 		{ "get_text", i18n::get_text },
 		{ "set_domain", i18n::set_domain },
+		{ "get_language", i18n::get_language },
 		{ "initialize", i18n::initialize },
 		{ NULL, NULL },
 	};
