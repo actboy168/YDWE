@@ -1,5 +1,6 @@
 require "compile.inject_code"
 require "compile.native"
+local uiloader = require "uiloader"
 local stormlib = require 'ffi.stormlib'
 
 -- 版本信息
@@ -192,7 +193,7 @@ function event.EVENT_WE_START(event_data)
 	plugin:load_all()
 
 	-- 初始化UI加载器
-	uiloader:initialize()
+	uiloader()
 	
 	-- 载入注入代码配置
 	inject_code:initialize()

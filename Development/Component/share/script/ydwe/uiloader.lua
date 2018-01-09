@@ -9,13 +9,11 @@ local w3x2lni = require 'w3x2lni_in_sandbox'
 local w2l = w3x2lni()
 local ui = w2l.ui_builder
 local storm = require 'ffi.storm'
-
 local ydwe = fs.ydwe_devpath()
-
 local root = ydwe / 'share' / 'ui'
 local info = lni(io.load(ydwe / 'plugin' / 'w3x2lni' / 'info.ini'))
 
-local loader = {}
+local list = {}
 
 local function is_enable_japi()
 	local ok, result = pcall(function ()
@@ -30,8 +28,8 @@ local function is_enable_unknowui()
 	return true
 end
 
-function loader:config()
-	self.list = {}
+local function load_config()
+	list = {}
 	local f, err = io.open(root / 'config', 'r')
 	if not f then
 		log.error('Open ' .. (root / 'config'):string() .. ' failed.')
@@ -45,24 +43,24 @@ function loader:config()
 		elseif not enable_japi and (string.trim(line) == 'japi') then
 			-- do nothing
 		else
-			table.insert(self.list, root / string.trim(line))
+			table.insert(list, root / string.trim(line))
 		end
 	end
 	f:close()
 	if is_enable_unknowui() then
-		table.insert(self.list, fs.ydwe_path() / 'share' / 'ui' / 'unknowui')
+		table.insert(list, fs.ydwe_path() / 'share' / 'ui' / 'unknowui')
 	end
 	return true
 end
 
 local state, data, string
-function loader:triggerdata(name, callback)
+local function load_triggerdata(name, callback)
 	log.trace("virtual_mpq 'triggerdata'")
-	if #self.list == 0 then
+	if #list == 0 then
 		return nil
 	end
 	state = nil
-	for _, path in ipairs(self.list) do
+	for _, path in ipairs(list) do
 		if fs.exists(path / 'ui') then
 			state = ui.merge(state, ui.old_reader(function(filename)
 				return io.load(path / 'ui' / filename)
@@ -73,13 +71,13 @@ function loader:triggerdata(name, callback)
 			end))
 		end
 	end
-	data, string =  ui.old_writer(state)
+	data, string = ui.old_writer(state)
 	return data
 end
 
-function loader:triggerstrings(name, callback)
+local function load_triggerstrings(name, callback)
 	log.trace("virtual_mpq 'triggerstrings'")
-	if #self.list == 0 then
+	if #list == 0 then
 		return nil
 	end
 	local r = string
@@ -87,7 +85,7 @@ function loader:triggerstrings(name, callback)
 	return r
 end
 
-function loader:worldeditstrings()
+local function load_worldeditstrings()
 	log.trace("virtual_mpq 'worldeditstrings'")
 	local t = ini(io.load(ydwe / 'share' / 'mpq' / 'ui' / 'WorldEditStrings.txt'), 'WorldEditStrings')
 	t.WorldEditStrings.WESTRING_APPNAME = t.WorldEditStrings.WESTRING_APPNAME .. ' [ ' .. tostring(ydwe_version) .. ' ]'
@@ -120,11 +118,11 @@ local function load_mpq(filename)
 	return io.load(ydwe / mpq_path / filename) or io.load(ydwe / 'share' / 'mpq' / filename)
 end
 
-function loader:initialize()
-	self:config()
-	virtual_mpq.watch('UI\\TriggerData.txt',      function (name) return self:triggerdata() end)
-	virtual_mpq.watch('UI\\TriggerStrings.txt',   function (name) return self:triggerstrings() end)
-	virtual_mpq.watch('UI\\WorldEditStrings.txt', function (name) return self:worldeditstrings() end)
+local function initialize()
+	load_config()
+	virtual_mpq.watch('UI\\TriggerData.txt',      function (name) return load_triggerdata() end)
+	virtual_mpq.watch('UI\\TriggerStrings.txt',   function (name) return load_triggerstrings() end)
+	virtual_mpq.watch('UI\\WorldEditStrings.txt', function (name) return load_worldeditstrings() end)
 	
 	for _, filename in ipairs(info.txt) do
 		if info.txt[1] ~= filename then
@@ -225,4 +223,4 @@ function loader:initialize()
     end
 end
 
-uiloader = loader
+return initialize
