@@ -15,7 +15,7 @@ if not fs.exists(ydwe) then
 	ydwe = fs.ydwe_path()
 end
 
-local root = ydwe / 'share' / 'mpq'
+local root = ydwe / 'share' / 'ui'
 local info = lni(io.load(ydwe / 'plugin' / 'w3x2lni' / 'info.ini'))
 
 local loader = {}
@@ -53,7 +53,7 @@ function loader:config()
 	end
 	f:close()
 	if is_enable_unknowui() then
-		table.insert(self.list, fs.ydwe_path() / 'share' / 'mpq' / 'unknowui')
+		table.insert(self.list, fs.ydwe_path() / 'share' / 'ui' / 'unknowui')
 	end
 	return true
 end
@@ -92,7 +92,7 @@ end
 
 function loader:worldeditstrings()
 	log.trace("virtual_mpq 'worldeditstrings'")
-	local t = ini(io.load(root / 'units' / 'ui' / 'WorldEditStrings.txt'), 'WorldEditStrings')
+	local t = ini(io.load(ydwe / 'share' / 'mpq' / 'ui' / 'WorldEditStrings.txt'), 'WorldEditStrings')
 	t.WorldEditStrings.WESTRING_APPNAME = t.WorldEditStrings.WESTRING_APPNAME .. ' [ ' .. tostring(ydwe_version) .. ' ]'
 	local str = {}
 	str[#str+1] = "[WorldEditStrings]"
@@ -118,9 +118,8 @@ local function stringify_txt(t)
 	return table.concat(buf, '\r\n')
 end
 
-local units_path = fs.path 'units'
 local function load_mpq(filename)
-	return io.load(root / units_path / filename) or io.load(root / 'units' / filename)
+	return io.load(ydwe / 'share' / 'mpq' / filename) or io.load(ydwe / 'share' / 'units' / filename)
 end
 
 function loader:initialize()
@@ -139,10 +138,10 @@ function loader:initialize()
 		for _, filename in pairs(info.txt) do
 			txt(load_mpq(filename), filename, t)
 		end
-		txt(io.load(root / 'units' / 'ui' / 'ydwetip.txt'), 'ydwetip', t)
+		txt(io.load(ydwe / 'share' / 'mpq' / 'ui' / 'ydwetip.txt'), 'ydwetip', t)
 		
 		local replace = {}
-		txt(io.load(root / 'units' / 'ui' / 'editorsuffix.txt'), 'editorsuffix', replace)
+		txt(io.load(ydwe / 'share' / 'mpq' / 'ui' / 'editorsuffix.txt'), 'editorsuffix', replace)
 		for id, o in pairs(replace) do
 			if not t[id] then
 				t[id] = o
@@ -210,7 +209,7 @@ function loader:initialize()
             end
 	    	local _, fix = w2l:wtg_reader(wtg, state)
             local bufs = {ui.new_writer(fix)}
-            local dir = fs.ydwe_path() / 'share' / 'mpq' / 'unknowui'
+            local dir = fs.ydwe_path() / 'share' / 'ui' / 'unknowui'
 	    	fs.create_directories(dir)
 	    	io.save(dir / 'define.txt',    bufs[1])
 	    	io.save(dir / 'event.txt',     bufs[2])

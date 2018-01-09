@@ -454,7 +454,7 @@ end
 local function get_w2l(map)
     local w2l = w3x2lni()
     w2l:set_config(get_config())
-    local mpq_path = root / 'share' / 'mpq' / 'units'
+    local mpq_path = root / 'share' / 'mpq'
     function w2l:mpq_load(filename)
         return io.load(mpq_path / filename)
     end

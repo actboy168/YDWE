@@ -8,7 +8,7 @@ local lni       = require 'lni-c'
 
 local w2l      = root / 'plugin' / 'w3x2lni'
 local defined  = w2l / 'defined'
-local mpq      = root / 'share' / 'mpq' / 'units'
+local mpq      = root / 'share' / 'mpq'
 
 local info       = lni(assert(io.load(w2l / 'info.ini')), 'info.ini')
 local typedefine = lni(assert(io.load(defined / 'typedefine.ini')), 'typedefine.ini')
