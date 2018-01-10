@@ -181,11 +181,29 @@ end
 local function new_path()
     local mt = {}
     local paths = {'\\'}
-    function mt:insert(path)
-        local max = #paths
-        table.insert(paths, '\\' .. path .. '\\')
-        for i = 2, max do
-            table.insert(paths, '\\' .. path .. paths[i])
+    local mpqs = {}
+    local function update()
+        paths = {'\\'}
+        for i = #mpqs, 1, -1 do
+            local path = mpqs[i]
+            local max = #paths
+            table.insert(paths, '\\' .. path .. '\\')
+            for i = 2, max do
+                table.insert(paths, '\\' .. path .. paths[i])
+            end
+        end
+    end
+    function mt:open(path)
+        table.insert(mpqs, path)
+        update()
+    end
+    function mt:close(path)
+        for i, mpq in ipairs(mpqs) do
+            if mpq == path then
+                table.remove(mpqs, i)
+                update()
+                return
+            end
         end
     end
     function mt:each_path(callback)
@@ -203,13 +221,14 @@ function mt:set_config(config)
     self.config = config
     self.mpq = self.config.mpq
     self.path = new_path()
+    self.path:open(config.lang)
     if self.config.version == 'Melee' then
+        self.path:open 'Melee_V1'
         self.default = self.mpq .. '\\Melee'
     else
-        self.path:insert 'Custom_V1'
+        self.path:open 'Custom_V1'
         self.default = self.mpq .. '\\Custom'
     end
-    self.path:insert(config.lang)
 end
 
 function mt:mpq_loader(filename)
