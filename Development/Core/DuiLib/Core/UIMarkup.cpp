@@ -279,15 +279,11 @@ bool CMarkup::LoadFromMem(BYTE* pByte, DWORD dwSize, int encoding)
 bool CMarkup::LoadFromFile(const wchar_t* pstrFilename, int encoding)
 {
     Release();
-	CUIBuffer buf;
-
-	buf = CUIFile::LoadZip(pstrFilename);
-
+	CUIBuffer buf = CUIFile::Load(pstrFilename);
 	if (!buf)
 	{
 		return _Failed(L"Could not open file");
 	}
-
 	return LoadFromMem(buf.ptrData.get(), buf.nSize, encoding);
 }
 

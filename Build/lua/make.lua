@@ -172,13 +172,6 @@ fs.copy_file(path.OpenSource / 'sfmpq' / 'bin' / configuration / 'sfmpq.dll', pa
 fs.copy_file(path.OpenSource / 'sfmpq' / 'bin' / configuration / 'sfmpq.dll', path.Result / 'plugin' / 'jasshelper' / 'bin' / 'sfmpq.dll', true)
 copy_directory(path.Development / 'Component', path.Result)
 
--- Step.6 打包皮肤
-zip(path.Development / 'Core' / 'DuiLib' / 'Resources', path.Result / 'bin' / 'skin.zip', 
-    function (file) 
-        return file:string():lower() ~= 'thumbs.db'
-    end
-)
-
 -- Step.7 复制到publish
 local ignore = { ['.pdb'] = true, ['.exp'] = true, ['.ilk'] = true, ['.aps'] = true, ['.lib'] = true, ['.ipdb'] = true, ['.iobj'] = true }
 copy_directory(path.Result, path.Build / 'publish' / configuration, 

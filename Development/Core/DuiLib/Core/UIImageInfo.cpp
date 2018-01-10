@@ -6,15 +6,7 @@ namespace DuiLib
 {
 	CImageInfo* CImageInfo::Load(STRINGorID bitmap, DWORD mask)
 	{
-		CUIBuffer buf;
-
-		buf = CUIFile::LoadZip(bitmap.m_lpstr);
-
-		if (!buf)
-		{
-			buf = CUIFile::LoadFile(bitmap.m_lpstr);
-		}
-
+		CUIBuffer buf = CUIFile::Load(bitmap.m_lpstr);
 		if (!buf)
 		{
 			//::MessageBox(0, L"读取图片数据失败！", L"抓BUG", MB_OK);
