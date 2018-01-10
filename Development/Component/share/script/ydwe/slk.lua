@@ -1,7 +1,8 @@
 local root = fs.ydwe_devpath()
 
-local w3x2lni = require 'w3x2lni_in_sandbox'
-local stormlib = require 'ffi.stormlib'
+local w3x2lni   = require 'w3x2lni_in_sandbox'
+local stormlib  = require 'ffi.stormlib'
+local mpqloader = require 'mpqloader'
 
 local slk
 local obj
@@ -455,11 +456,11 @@ local function get_w2l(map)
     w2l:set_config(get_config())
     local mpq_path = root / 'share' / 'mpq'
     function w2l:mpq_load(filename)
-        return io.load(mpq_path / filename)
+        return mpqloader:load(mpq_path, filename)
     end
     local prebuilt_path = root / 'share' / 'script' / 'ydwe' / 'prebuilt'
     function w2l:prebuilt_load(filename)
-        return io.load(prebuilt_path / filename)
+        return mpqloader:load(prebuilt_path, filename)
     end
     function w2l:map_load(filename)
         return map:load_file(filename)
