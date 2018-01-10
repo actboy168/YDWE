@@ -24,6 +24,7 @@ namespace DuiLib
 	struct UILIB_API CUIFile
 	{
 	public:
+		static CUIBuffer Load(fs::path const& name);
 		static CUIBuffer LoadZip(fs::path const& name);
 		static CUIBuffer LoadFile(fs::path const& name);
 	};

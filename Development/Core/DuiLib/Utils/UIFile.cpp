@@ -43,9 +43,18 @@ namespace DuiLib
 		return (*this);
 	}
 
+	CUIBuffer CUIFile::Load(fs::path const& name)
+	{
+		const fs::path& zip = CPaintManagerUI::GetResourceZip();
+		if (fs::is_directory(zip)) {
+			return LoadFile(name);
+		}
+		return LoadZip(name);
+	}
+
 	CUIBuffer CUIFile::LoadZip(fs::path const& name)
 	{
-		fs::path zip_file = CPaintManagerUI::GetResourceZip();
+		const fs::path& zip_file = CPaintManagerUI::GetResourceZip();
 
 		zip::reader r;
 		if (r.Open(zip_file)) 
@@ -72,9 +81,11 @@ namespace DuiLib
 
 	CUIBuffer CUIFile::LoadFile(fs::path const& name)
 	{
+		const fs::path& zip = CPaintManagerUI::GetResourceZip();
+
 		CUIBuffer buf;
 
-		HANDLE hFile = ::CreateFileW(name.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		HANDLE hFile = ::CreateFileW((zip / name).c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (hFile == INVALID_HANDLE_VALUE) 
 			return std::move(buf);
 

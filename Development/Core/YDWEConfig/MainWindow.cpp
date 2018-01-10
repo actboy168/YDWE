@@ -121,7 +121,7 @@ void CMainWindow::OnFinalMessage(HWND /*hWnd*/)
 
 fs::path CMainWindow::GetSkinZip() const 
 {
-	return std::move(base::path::self().remove_filename() / L"skin.zip"); 
+	return std::move(base::path::ydwe(true) / L"share" / L"skins"); 
 }
 
 void CMainWindow::ContrlSelected(std::string const& name, bool bSelect)
