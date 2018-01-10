@@ -27,4 +27,8 @@ function mt:save(dir, filename, buf)
     io.save(dir / self.mpq_path:first_path() / filename, buf)
 end
 
+function mt:create_directories(dir)
+    fs.create_directories(dir / self.mpq_path:first_path())
+end
+
 return mt
