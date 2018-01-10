@@ -105,7 +105,7 @@ return function (_w2l)
                 merge_slk(t, abilitybuffdata)
 			end
 		end
-		return w2l:mpq_loader(name)
+		return w2l:mpq_load(name)
 	end)
 
 	local hook

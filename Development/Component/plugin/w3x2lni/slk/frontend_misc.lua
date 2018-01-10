@@ -108,7 +108,7 @@ return function (w2l_, slk)
     local miscnames = w2l:miscnames()
     local misc = {}
     for _, name in ipairs {"UI\\MiscData.txt", "Units\\MiscData.txt", "Units\\MiscGame.txt"} do
-        local buf = w2l:mpq_loader(name)
+        local buf = w2l:mpq_load(name)
         w2l:parse_txt(buf, name, misc)
     end
     local buf = w2l:map_load('war3mapmisc.txt')

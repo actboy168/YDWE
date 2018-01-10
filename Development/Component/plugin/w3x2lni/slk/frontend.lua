@@ -12,7 +12,7 @@ local function load_slk(w2l, force_slk)
                 w2l:map_remove(name)
                 return buf
             end
-            return w2l:mpq_loader(name)
+            return w2l:mpq_load(name)
         end)
     else
         return w2l:get_default(true)
