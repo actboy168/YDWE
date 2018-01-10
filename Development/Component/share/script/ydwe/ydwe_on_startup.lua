@@ -1,7 +1,8 @@
 require "compile.inject_code"
 require "compile.native"
-local uiloader = require "uiloader"
-local stormlib = require 'ffi.stormlib'
+local uiloader  = require "uiloader"
+local mpqloader = require 'mpqloader'
+local stormlib  = require 'ffi.stormlib'
 
 -- 版本信息
 ydwe_version = sys.version {}
@@ -195,6 +196,9 @@ function event.EVENT_WE_START(event_data)
 
 	-- 初始化UI加载器
 	uiloader()
+
+	-- 初始化mpq读取器
+	mpqloader:init()
 	
 	-- 载入注入代码配置
 	inject_code:initialize()
