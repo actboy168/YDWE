@@ -233,6 +233,15 @@ local function initialize()
         end
 		return stringify_txt(t)
 	end)
+	for _, filenames in pairs(info.slk) do
+		for _, filename in ipairs(filenames) do
+			if filename ~= 'units\\abilitydata.slk' and filename ~= 'units\\abilitybuffdata.slk' then
+				virtual_mpq.watch(filename, function ()
+					return load_mpq(filename, filename)
+				end)
+			end
+		end
+	end
 	virtual_mpq.watch('units\\abilitydata.slk', function ()
 		local t = slk(load_mpq('units/abilitydata.slk'), 'abilitydata.slk')
 		for _, o in pairs(t) do
