@@ -364,7 +364,7 @@ local function get_config()
     -- 转换后的目标格式(lni, obj, slk)
     config.target_format = 'obj'
     -- 使用的语言
-    config.lang = 'zh-CN'
+    config.lang = (require "i18n").get_language()
     -- 是否分析slk文件
     config.read_slk = false
     -- 是否分析lni文件
