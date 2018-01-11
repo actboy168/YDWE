@@ -12,7 +12,7 @@ local storm = require 'ffi.storm'
 local mpqloader = require 'mpqloader'
 local ydwe = fs.ydwe_devpath()
 local info = lni(io.load(ydwe / 'plugin' / 'w3x2lni' / 'info.ini'))
-
+local current_language = (require "i18n").get_language()
 local list = {}
 
 local function is_enable_japi()
@@ -90,7 +90,7 @@ local function load_triggerdata(name, callback)
 	log.trace("virtual_mpq 'triggerdata'")
 	if #list == 0 then
 		return nil
-	end
+    end
 	state = nil
 	for _, path in ipairs(list) do
 		if fs.exists(path / 'ui') then
@@ -100,7 +100,7 @@ local function load_triggerdata(name, callback)
 		else
 			state = ui.merge(state, ui.new_reader(function(filename)
 				return io.load(path / filename)
-			end))
+			end, current_language))
 		end
 	end
 	data, string = ui.old_writer(state)
