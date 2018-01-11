@@ -12,6 +12,7 @@
 #include <base/win/font/utility.h>
 #include <base/util/list_of.h>
 #include <base/util/ini.h>
+#include <base/i18n-2/gettext.h>
 
 std::wstring CComboUI_GetSelectText(DuiLib::CComboUI* pui)
 {
@@ -274,13 +275,15 @@ void CMainWindow::ConfigToUI(base::ini::table& table)
 		}
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
-			std::wstring font_name = base::u2w(table[attribute.Section()][name]);
-			for (int i = 0; i < m_comboboxs[name]->GetCount(); ++i)
-			{
-				if (font_name == ((DuiLib::CListLabelElementUI*)m_comboboxs[name]->GetItemAt(i))->GetText())
+			if (m_comboboxs[name]) {
+				std::wstring font_name = base::u2w(table[attribute.Section()][name]);
+				for (int i = 0; i < m_comboboxs[name]->GetCount(); ++i)
 				{
-					m_comboboxs[name]->SelectItem(i);
-					break;
+					if (font_name == ((DuiLib::CListLabelElementUI*)m_comboboxs[name]->GetItemAt(i))->GetText())
+					{
+						m_comboboxs[name]->SelectItem(i);
+						break;
+					}
 				}
 			}
 		}
@@ -318,7 +321,9 @@ void CMainWindow::UIToConfig(base::ini::table& table)
 		}
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
-			table[attribute.Section()][name] = base::w2u(CComboUI_GetSelectText(m_comboboxs[name]));
+			if (m_comboboxs[name]) {
+				table[attribute.Section()][name] = base::w2u(CComboUI_GetSelectText(m_comboboxs[name]));
+			}
 		}
 	}
 }
@@ -378,50 +383,59 @@ void CMainWindow::DoneRegistryUI()
 
 void CMainWindow::InitOSHelpUI()
 {
-	if (base::win::get_version() >= base::win::VERSION_WIN7)
-	{
-		m_pShortcuts_taskbar->SetText(L"固定到任务栏");
+	if (m_pShortcuts_taskbar) {
+		if (base::win::get_version() >= base::win::VERSION_WIN7)
+		{
+			m_pShortcuts_taskbar->SetText(L"固定到任务栏");
+		}
+		else
+		{
+			m_pShortcuts_taskbar->SetText(L"添加到快速启动栏");
+		}
 	}
-	else
-	{
-		m_pShortcuts_taskbar->SetText(L"添加到快速启动栏");
-	}
 
-	if (!fs::exists(m_ydwe_path))
-	{
-		if (m_pFileAssociation_w3x)
-			m_pFileAssociation_w3x->SetEnabled(false);
+	if (m_pFileAssociation_w3x && m_pFileAssociation_w3m) {
+		if (!fs::exists(m_ydwe_path))
+		{
+			if (m_pFileAssociation_w3x)
+				m_pFileAssociation_w3x->SetEnabled(false);
 
-		if (m_pFileAssociation_w3m)
-			m_pFileAssociation_w3m->SetEnabled(false);
+			if (m_pFileAssociation_w3m)
+				m_pFileAssociation_w3m->SetEnabled(false);
 
-		if (m_pShortcuts_desktop)
-			m_pShortcuts_desktop->SetEnabled(false);
+			if (m_pShortcuts_desktop)
+				m_pShortcuts_desktop->SetEnabled(false);
 
-		if (m_pShortcuts_taskbar)
-			m_pShortcuts_taskbar->SetEnabled(false);
-	}
-	else
-	{
-		FileAssociationS::initialize(m_ydwe_path);
+			if (m_pShortcuts_taskbar)
+				m_pShortcuts_taskbar->SetEnabled(false);
+		}
+		else
+		{
+			FileAssociationS::initialize(m_ydwe_path);
 
-		if (m_pFileAssociation_w3x)
-			m_pFileAssociation_w3x->Selected(FileAssociationS::get()->has_w3x());
+			if (m_pFileAssociation_w3x)
+				m_pFileAssociation_w3x->Selected(FileAssociationS::get()->has_w3x());
 
-		if (m_pFileAssociation_w3m)
-			m_pFileAssociation_w3m->Selected(FileAssociationS::get()->has_w3m());	
+			if (m_pFileAssociation_w3m)
+				m_pFileAssociation_w3m->Selected(FileAssociationS::get()->has_w3m());
 
-		if (m_pShortcuts_desktop)
-			m_pShortcuts_desktop->Selected(Shortcuts::Desktop::Has(m_ydwe_path));
+			if (m_pShortcuts_desktop)
+				m_pShortcuts_desktop->Selected(Shortcuts::Desktop::Has(m_ydwe_path));
 
-		if (m_pShortcuts_taskbar)
-			m_pShortcuts_taskbar->Selected(Shortcuts::Taskbar::Has(m_ydwe_path));
+			if (m_pShortcuts_taskbar)
+				m_pShortcuts_taskbar->Selected(Shortcuts::Taskbar::Has(m_ydwe_path));
+		}
 	}
 
 	if (base::win::get_version() >= base::win::VERSION_WIN10)
 	{
 		if (m_pShortcuts_taskbar)
 			m_pShortcuts_taskbar->SetEnabled(false);
+	}
+
+	DuiLib::CRadioButtonUI* ui_lang = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(L"Language-" + base::i18n::v2::get_language()));
+	if (ui_lang) {
+		ui_lang->Selected(true);
 	}
 }
 
@@ -464,6 +478,19 @@ void CMainWindow::DoneOSHelpUI()
 			else
 			{
 				Shortcuts::Taskbar::Remove(m_ydwe_path);
+			}
+		}
+	}
+
+	DuiLib::CStdPtrArray* group = m_pm.GetOptionGroup(L"Language");
+	for (int i = 0; i < group->GetSize(); i++)
+	{
+		DuiLib::CRadioButtonUI* control = static_cast<DuiLib::CRadioButtonUI*>(group->GetAt(i));
+		if (control && control->IsSelected() && control->GetName().substr(0, 9) == L"Language-")
+		{
+			auto newlang = control->GetName().substr(9);
+			if (newlang != base::i18n::v2::get_language()) {
+				base::i18n::v2::set_language(newlang, true);
 			}
 		}
 	}
@@ -610,14 +637,15 @@ void CMainWindow::DonePatchUI(base::ini::table& table)
 
 void CMainWindow::InitFontUI()
 {
-	std::set<std::wstring> font_names = base::font::get_list();
-	
-	for (auto it = font_names.begin(); it != font_names.end(); ++it)
-	{
-		DuiLib::CListLabelElementUI* elem = new DuiLib::CListLabelElementUI;
-		elem->SetText(it->c_str());
-		elem->SetManager(m_pFontName->GetManager(), m_pFontName, false);
-		m_pFontName->Add(elem);
+	if (m_pFontName) {
+		std::set<std::wstring> font_names = base::font::get_list();
+		for (auto it = font_names.begin(); it != font_names.end(); ++it)
+		{
+			DuiLib::CListLabelElementUI* elem = new DuiLib::CListLabelElementUI;
+			elem->SetText(it->c_str());
+			elem->SetManager(m_pFontName->GetManager(), m_pFontName, false);
+			m_pFontName->Add(elem);
+		}
 	}
 }
 

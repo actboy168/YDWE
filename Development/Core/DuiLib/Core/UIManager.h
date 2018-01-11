@@ -277,7 +277,7 @@ public:
 
     CControlUI* GetRoot() const;
     CControlUI* FindControl(POINT pt) const;
-    CControlUI* FindControl(const wchar_t* pstrName) const;
+    CControlUI* FindControl(const std::wstring& pstrName) const;
     CControlUI* FindSubControlByPoint(CControlUI* pParent, POINT pt) const;
     CControlUI* FindSubControlByName(CControlUI* pParent, const wchar_t* pstrName) const;
     CControlUI* FindSubControlByClass(CControlUI* pParent, const wchar_t* pstrClass, int iIndex = 0);

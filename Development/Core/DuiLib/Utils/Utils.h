@@ -118,6 +118,15 @@ namespace DuiLib
 				return it->second;
 		}
 
+		T* Find(const std::wstring& key) const
+		{
+			auto it = mybase::find(key);
+			if (it == mybase::end())
+				return nullptr;
+			else
+				return it->second;
+		}
+
 		bool Insert(const wchar_t* key, T* pData)
 		{
 			return mybase::insert(std::make_pair(key, pData)).second;

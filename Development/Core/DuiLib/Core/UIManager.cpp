@@ -1872,7 +1872,7 @@ CControlUI* CPaintManagerUI::FindControl(POINT pt) const
     return m_pRoot->FindControl(__FindControlFromPoint, &pt, UIFIND_VISIBLE | UIFIND_HITTEST | UIFIND_TOP_FIRST);
 }
 
-CControlUI* CPaintManagerUI::FindControl(const wchar_t* pstrName) const
+CControlUI* CPaintManagerUI::FindControl(const std::wstring& pstrName) const
 {
     ASSERT(m_pRoot);
     return m_mNameHash.Find(pstrName);
