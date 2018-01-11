@@ -48,6 +48,7 @@ HINSTANCE CPaintManagerUI::m_hInstance = NULL;
 std::wstring CPaintManagerUI::m_pStrDefaultFontName;//added by cddjr at 05/18/2012
 fs::path CPaintManagerUI::m_pStrResourceZip;
 CStdPtrArray CPaintManagerUI::m_aPreMessages;
+std::wstring CPaintManagerUI::m_sLanguage;
 
 
 CPaintManagerUI::CPaintManagerUI() :
@@ -162,6 +163,16 @@ const fs::path& CPaintManagerUI::GetResourceZip()
 void CPaintManagerUI::SetInstance(HINSTANCE hInst)
 {
     m_hInstance = hInst;
+}
+
+const std::wstring& CPaintManagerUI::GetLanguage()
+{
+	return m_sLanguage;
+}
+
+void CPaintManagerUI::SetLanguage(const std::wstring& lang)
+{
+	m_sLanguage = lang;
 }
 
 void CPaintManagerUI::SetResourceZip(fs::path const& pStrPath)

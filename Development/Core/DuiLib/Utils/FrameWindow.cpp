@@ -1,4 +1,6 @@
 #include "stdafx.h"
+#include <base/i18n-2/gettext.h>
+#include <base/util/unicode.h>
 
 namespace DuiLib
 {
@@ -23,7 +25,7 @@ namespace DuiLib
 		CControlUI* pRoot = builder.Create(GetSkinXml(), NULL, &m_pm);
 		if (!pRoot) 
 		{
-			::MessageBoxW(NULL,L"¶ÁÈ¡Æ¤·ôÎÄ¼þÊ§°Ü", L"YDWEConfig", MB_OK|MB_ICONERROR);
+			::MessageBoxW(NULL, base::u2w(base::i18n::v2::get_text("ERROR_LOAD_SKINS")).c_str(), L"YDWEConfig", MB_OK|MB_ICONERROR);
 			::PostQuitMessage(0L);
 			return 0;
 		}

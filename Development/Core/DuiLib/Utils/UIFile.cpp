@@ -46,10 +46,12 @@ namespace DuiLib
 	CUIBuffer CUIFile::Load(fs::path const& name)
 	{
 		const fs::path& zip = CPaintManagerUI::GetResourceZip();
-		if (fs::is_directory(zip)) {
-			return LoadFile(name);
+		const std::wstring& lang = CPaintManagerUI::GetLanguage();
+
+		if (fs::exists(zip / lang / name)) {
+			return LoadFile(lang / name);
 		}
-		return LoadZip(name);
+		return LoadFile(name);
 	}
 
 	CUIBuffer CUIFile::LoadZip(fs::path const& name)
