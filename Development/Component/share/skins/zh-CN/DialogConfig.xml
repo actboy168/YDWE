@@ -36,6 +36,8 @@
         <RadioButton name="tab_4" group="TabSelect" text="魔兽插件"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
         <RadioButton name="tab_5" group="TabSelect" text="系统关联"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <Control height="1" />
+        <RadioButton name="tab_6" group="TabSelect" text="语言"       textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
       </VerticalLayout>
       <TabLayout name="tabs" >
         <VerticalLayout class="Background" inset="2,18,2,18" >
@@ -215,6 +217,15 @@
             <Label text="注册表"  tooltip="修改魔兽注册表项。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
               <CheckBox text="允许魔兽读取本地文件"   width="200" name="AllowLocalFiles" tooltip="开启后，魔兽就可以读取魔兽目录下的文件。" />
+            </VerticalLayout>
+          </VerticalLayout>
+        </VerticalLayout>
+        <VerticalLayout class="Background" inset="2,24,2,24" >
+          <VerticalLayout height="140" >
+            <Label text="语言(*)" tooltip= "选择YDWE的语言" class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <RadioButton class="NormalRadioButton" text="简体中文" width="200" group="Language" name="Language-zh-CN" />
+              <RadioButton class="NormalRadioButton" text="English" width="200" group="Language" name="Language-en-US" />
             </VerticalLayout>
           </VerticalLayout>
         </VerticalLayout>

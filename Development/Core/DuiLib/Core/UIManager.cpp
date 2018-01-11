@@ -48,6 +48,7 @@ HINSTANCE CPaintManagerUI::m_hInstance = NULL;
 std::wstring CPaintManagerUI::m_pStrDefaultFontName;//added by cddjr at 05/18/2012
 fs::path CPaintManagerUI::m_pStrResourceZip;
 CStdPtrArray CPaintManagerUI::m_aPreMessages;
+std::wstring CPaintManagerUI::m_sLanguage;
 
 
 CPaintManagerUI::CPaintManagerUI() :
@@ -162,6 +163,16 @@ const fs::path& CPaintManagerUI::GetResourceZip()
 void CPaintManagerUI::SetInstance(HINSTANCE hInst)
 {
     m_hInstance = hInst;
+}
+
+const std::wstring& CPaintManagerUI::GetLanguage()
+{
+	return m_sLanguage;
+}
+
+void CPaintManagerUI::SetLanguage(const std::wstring& lang)
+{
+	m_sLanguage = lang;
 }
 
 void CPaintManagerUI::SetResourceZip(fs::path const& pStrPath)
@@ -1861,7 +1872,7 @@ CControlUI* CPaintManagerUI::FindControl(POINT pt) const
     return m_pRoot->FindControl(__FindControlFromPoint, &pt, UIFIND_VISIBLE | UIFIND_HITTEST | UIFIND_TOP_FIRST);
 }
 
-CControlUI* CPaintManagerUI::FindControl(const wchar_t* pstrName) const
+CControlUI* CPaintManagerUI::FindControl(const std::wstring& pstrName) const
 {
     ASSERT(m_pRoot);
     return m_mNameHash.Find(pstrName);

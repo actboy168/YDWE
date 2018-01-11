@@ -179,8 +179,10 @@ public:
     void SetShowUpdateRect(bool show);
 
 	static HINSTANCE GetInstance();
+	static const std::wstring& GetLanguage();
     static const fs::path& GetResourceZip();
 	static void SetInstance(HINSTANCE hInst);
+	static void SetLanguage(const std::wstring& lang);
     static void SetResourceZip(fs::path const& pstrZip);
     static void ReloadSkin();
 
@@ -275,7 +277,7 @@ public:
 
     CControlUI* GetRoot() const;
     CControlUI* FindControl(POINT pt) const;
-    CControlUI* FindControl(const wchar_t* pstrName) const;
+    CControlUI* FindControl(const std::wstring& pstrName) const;
     CControlUI* FindSubControlByPoint(CControlUI* pParent, POINT pt) const;
     CControlUI* FindSubControlByName(CControlUI* pParent, const wchar_t* pstrName) const;
     CControlUI* FindSubControlByClass(CControlUI* pParent, const wchar_t* pstrClass, int iIndex = 0);
@@ -370,6 +372,7 @@ public:
 #pragma warning(push)
 #pragma warning(disable:4251)
 	static std::wstring m_pStrDefaultFontName;
+	static std::wstring m_sLanguage;
 #pragma warning(pop)
 	CStdPtrArray m_aTranslateAccelerator;
 };

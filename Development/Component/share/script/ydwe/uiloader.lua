@@ -7,13 +7,12 @@ local slk = (require 'w3xparser').slk
 local lni = require 'lni-c'
 local w3x2lni = require 'w3x2lni_in_sandbox'
 local w2l = w3x2lni()
-local ui = w2l.ui_builder
+local ui = require 'ui-builder.init'
 local storm = require 'ffi.storm'
 local mpqloader = require 'mpqloader'
 local ydwe = fs.ydwe_devpath()
-local root = ydwe / 'share' / 'ui'
 local info = lni(io.load(ydwe / 'plugin' / 'w3x2lni' / 'info.ini'))
-
+local current_language = (require "i18n").get_language()
 local list = {}
 
 local function is_enable_japi()
@@ -31,20 +30,21 @@ end
 
 local function load_config()
 	list = {}
-	local f, err = io.open(root / 'config', 'r')
+	local f, err = io.open(ydwe / 'share' / 'ui' / 'config', 'r')
 	if not f then
-		log.error('Open ' .. (root / 'config'):string() .. ' failed.')
+		log.error('Open ' .. (ydwe / 'share' / 'ui' / 'config'):string() .. ' failed.')
 		return false
 	end
 	local enable_ydtrigger = global_config["ThirdPartyPlugin"]["EnableYDTrigger"] ~= "0"
 	local enable_japi = is_enable_japi()
-	for line in f:lines() do
-		if not enable_ydtrigger and (string.trim(line) == 'ydtrigger') then
+    for line in f:lines() do
+        line = string.trim(line) 
+		if not enable_ydtrigger and line == 'ydtrigger' then
 			-- do nothing
-		elseif not enable_japi and (string.trim(line) == 'japi') then
+		elseif not enable_japi and line == 'japi' then
 			-- do nothing
 		else
-			table.insert(list, root / string.trim(line))
+			table.insert(list, ydwe / 'share' / 'ui' / line)
 		end
 	end
 	f:close()
@@ -90,7 +90,7 @@ local function load_triggerdata(name, callback)
 	log.trace("virtual_mpq 'triggerdata'")
 	if #list == 0 then
 		return nil
-	end
+    end
 	state = nil
 	for _, path in ipairs(list) do
 		if fs.exists(path / 'ui') then
@@ -100,7 +100,7 @@ local function load_triggerdata(name, callback)
 		else
 			state = ui.merge(state, ui.new_reader(function(filename)
 				return io.load(path / filename)
-			end))
+			end, current_language))
 		end
 	end
 	data, string = ui.old_writer(state)

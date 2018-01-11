@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Window size="400,620" caption="0,0,0,36" roundcorner="10,10" >
+  <Font name="微软雅黑" size="18"  default="true" />
+  <Font name="幼圆" size="18" />
+  <Font name="微软雅黑" size="14" />
+  <Include source="styles.xml" />
+
+  <Class name="Title" bkimage="file='Common/Button.png' corner='5,11,5,11' source='0,24,96,48'" />
+  <Class name="LabelTitle" class="Title"  borderround="4,4" />
+  <Class name="ListLabelElement" />
+  <Class name="Background" bkcolor="#FFFAFCFC" />
+  <Class name="TabSelect" font="0"
+		textcolor="#000000" selectedtextcolor="#FFFFFF" hottextcolor="#000000" focusedtextcolor="#000000" pushedtextcolor="#77A8DE" selectedpushedtextcolor="#77A8DE"
+		normalimage         = "file='Common/Button.png' corner='5,11,5,11' source='0, 0,96,24'"
+		selectedimage       = "file='Common/Button.png' corner='5,11,5,11' source='0,24,96,48'"
+		hotimage            = "file='Common/Button.png' corner='5,11,5,11' source='0,72,96,96'"
+		pushedimage         = "file='Common/Button.png' corner='5,11,5,11' source='0,48,96,72'"
+    selectedpushedimage = "file='Common/Button.png' corner='5,11,5,11' source='0,48,96,72'"
+		disabledimage       = "file='Common/Button.png' corner='5,11,5,11' source='0,72,96,96'"
+	/>
+
+  <VerticalLayout class="Title" inset="0,0,0,0" >
+    <Label text="YDWE Config" height="36" align="center" />
+    <HorizontalLayout>
+      <VerticalLayout bkcolor="#FFEAECEC" width="106" inset="6,4,0,4">
+        <Control height="16" />
+        <RadioButton name="tab_6" group="TabSelect" text="Language"       textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+      </VerticalLayout>
+      <TabLayout name="tabs" >
+        <VerticalLayout class="Background" inset="2,24,2,24" >
+          <VerticalLayout height="140" >
+            <Label text="Language(*)" tooltip= "" class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <RadioButton class="NormalRadioButton" text="简体中文" width="200" group="Language" name="Language-zh-CN" />
+              <RadioButton class="NormalRadioButton" text="English" width="200" group="Language" name="Language-en-US" />
+            </VerticalLayout>
+          </VerticalLayout>
+        </VerticalLayout>
+      </TabLayout>
+    </HorizontalLayout>
+    <HorizontalLayout class="Background" height="40"  childpadding="20" >
+      <Control bkcolor="#000000" width="90" inset="0,0,0,0" />
+      <Button text="Reset" width="90" height="30"  name="reset" />
+      <Button text="OK"    width="60"  height="30" name="ok" />
+      <Button text="Cacel" width="60"  height="30" name="cancel" />
+    </HorizontalLayout>
+  </VerticalLayout>
+</Window>

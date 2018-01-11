@@ -36,8 +36,8 @@ namespace base { namespace i18n { namespace v2 {
 		}
 		template <class ... Args>
 		void accept_error(int line, const char* fmt, const Args& ... args) {
-			errormsg = base::format("%s:%d: ", file, line);
-			errormsg += base::format(fmt, args ...);
+			errormsg = format("%s:%d: ", file, line);
+			errormsg += format(fmt, args ...);
 		}
 		std::string         key;
 		const std::wstring& file;
@@ -59,7 +59,7 @@ namespace base { namespace i18n { namespace v2 {
 	static std::wstring get_default_language()
 	{
 		try {
-			auto w = base::u2w(file::read_stream(workpath / L"default").read<std::string>());
+			auto w = u2w(file::read_stream(workpath / L"default").read<std::string>());
 			trim(w);
 			return w;
 		} catch(...) {
@@ -87,13 +87,20 @@ namespace base { namespace i18n { namespace v2 {
 		workpath = p;
 	}
 
-	bool set_language(const std::wstring& l) {
+	bool set_language(const std::wstring& l, bool refresh) {
 		if (!fs::exists(workpath / l)) {
 			return false;
 		}
 		language = l;
 		cache_language = &(cache_alllang[l]);
 		cache_domain = nullptr;
+		if (refresh) {
+			try {
+				file::write_stream(workpath / L"default").write<std::string>(w2u(l));
+			}
+			catch (...) {
+			}
+		}
 		return true;
 	}
 
@@ -135,10 +142,10 @@ namespace base { namespace i18n { namespace v2 {
 
 	void initialize(const fs::path& p) {
 		set_workpath(p);
-		if (set_language(get_default_language())) {
+		if (set_language(get_default_language(), false)) {
 			return;
 		}
-		if (set_language(get_system_language())) {
+		if (set_language(get_system_language(), false)) {
 			return;
 		}
 	}
