@@ -1,5 +1,6 @@
 require "localization"
 local ffi = require "ffi"
+local uni = require "ffi.unicode"
 
 local loader = {}
 	
@@ -9,7 +10,7 @@ loader.load = function(path)
 		return false
 	end
 	
-	local s, r = pcall(ffi.load, __(path:string()))
+	local s, r = pcall(ffi.load, uni.u2a(path:string()))
 			
 	if not s then
 		log.error('failed: ' .. r)
