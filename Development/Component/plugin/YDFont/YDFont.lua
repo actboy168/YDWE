@@ -10,7 +10,7 @@ loader.load = function(path)
 		return false
 	end
 	
-	local s, r = pcall(ffi.load, uni.u2a(path:string()))
+	local s, r = pcall(ffi.load, path:string())
 			
 	if not s then
 		log.error('failed: ' .. r)

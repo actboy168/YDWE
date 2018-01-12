@@ -144,19 +144,20 @@ static void (lua_remove)(lua_State *L, int idx) {
 
 #ifdef _WIN32
 
-#   ifdef UNDER_CE
-        static void* DoLoadLibraryA(const char* name) {
-          wchar_t buf[MAX_PATH];
-          int sz = MultiByteToWideChar(CP_UTF8, 0, name, -1, buf, 512);
-          if (sz > 0) {
-            buf[sz] = 0;
-            return LoadLibraryW(buf);
-          } else {
-            return NULL;
-          }
-        }
-#       define LoadLibraryA DoLoadLibraryA
-#   else
+static void* DoLoadLibraryA(const char* name) {
+	wchar_t buf[MAX_PATH];
+	int sz = MultiByteToWideChar(CP_UTF8, 0, name, -1, buf, 512);
+	if (sz > 0) {
+		buf[sz] = 0;
+		return LoadLibraryW(buf);
+	}
+	else {
+		return NULL;
+	}
+}
+#   define LoadLibraryA DoLoadLibraryA
+
+#   ifndef UNDER_CE
 #       define GetProcAddressA GetProcAddress
 #   endif
 

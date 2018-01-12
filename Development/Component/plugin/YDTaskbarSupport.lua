@@ -5,7 +5,7 @@ local uni = require "ffi.unicode"
 local loader = {}
 	
 loader.load = function(path)
-	local s, r = pcall(ffi.load, uni.u2a(path:string()))
+	local s, r = pcall(ffi.load, path:string())
 	if not s then
 		log.error('failed: ' .. r)
 		return false
