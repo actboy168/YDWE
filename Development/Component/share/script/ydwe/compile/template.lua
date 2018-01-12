@@ -121,7 +121,7 @@ function template:compile(op)
 			if pos then
 				msg = msg:sub(1, pos-1)
 			end
-			gui.error_message(nil, uni.u2a(msg))
+			gui.error_message(nil, uni.a2u(msg))
 		else
 			gui.error_message(nil, LNG.UNKNOWN)
 		end			
