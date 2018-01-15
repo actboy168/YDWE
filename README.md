@@ -20,4 +20,4 @@ YDWE是一个用于制作《魔兽争霸III》(英文名 Warcraft3，下面简�
 * [w3xparser](https://github.com/actboy168/w3xparser)
 * [pjass-chs](https://github.com/actboy168/pjass-chs)
 * [Direct3D8to9](https://github.com/actboy168/Direct3D8to9)
-* [w3x2txt](https://github.com/syj2010syj/w3x2txt)
+* [w3x2lni](https://github.com/syj2010syj/w3x2lni)
