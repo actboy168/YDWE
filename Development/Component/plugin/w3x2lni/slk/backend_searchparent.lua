@@ -98,7 +98,7 @@ end
 local function parse_obj(name, obj, default, config, ttype)
     local parent
     local count
-    local find_times = config.find_id_times
+    local find_times = config.find_id_times or 0
     local maybe = find_para(name, obj, default, ttype)
     if type(maybe) == 'table' then
         for try_name in pairs(maybe) do
