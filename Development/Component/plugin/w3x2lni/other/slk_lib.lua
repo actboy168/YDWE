@@ -1,4 +1,5 @@
 local w2l
+local read_only
 local slk
 local default
 local metadata
@@ -185,7 +186,7 @@ local function create_object(objt, ttype, name)
         return value[level] or ''
     end
     function mt:__newindex(key, nvalue)
-        if not objt.w2lobject then
+        if read_only or not objt.w2lobject then
             return
         end
         local parent = objt._parent
@@ -263,6 +264,9 @@ local function create_object(objt, ttype, name)
         end
     end
     local o = {}
+    if read_only then
+        return setmetatable(o, mt)
+    end
     function o:new(id)
         local objd = default[ttype][name]
         if not objd then
@@ -439,8 +443,9 @@ function slk_proxy:refresh(report)
     end
 end
 
-return function (_w2l)
+return function (_w2l, _read_only)
     w2l = _w2l
+    read_only = _read_only
     slk = {}
     used = {}
     all = {}

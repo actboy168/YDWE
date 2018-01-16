@@ -116,7 +116,7 @@ return function (w2l_, type, data, objs)
     if type == 'txt' then
         is_remove_exceeds_level = false
     else
-        is_remove_exceeds_level = w2l.config.remove_exceeds_level
+        is_remove_exceeds_level = true
     end
     metadata = w2l:metadata()
     local template = {}
