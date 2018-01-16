@@ -88,7 +88,7 @@ namespace base { namespace i18n { namespace v2 {
 	}
 
 	bool set_language(const std::wstring& l, bool refresh) {
-		if (l != L"") {
+		if (l == L"") {
 			return false;
 		}
 		if (!fs::exists(workpath / l)) {
