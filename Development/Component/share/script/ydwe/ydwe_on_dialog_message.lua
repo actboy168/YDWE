@@ -1,4 +1,6 @@
-local wes = sys.ini_load(fs.ydwe_path() / "share" / "mpq" / "units" / "ui" / "worldeditstrings.txt")
+local mpqloader = require 'mpqloader'
+local w3xparser = require 'w3xparser'
+local wes = w3xparser.ini(mpqloader:load(fs.ydwe_path() / "share" / "mpq", "ui/worldeditstrings.txt"))
 local WESTRING_MODIFYTEXTURES = wes['WorldEditStrings']['WESTRING_MODIFYTEXTURES']
 local tiledialog = 0
 
