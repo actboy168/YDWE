@@ -1,8 +1,4 @@
-local root = fs.ydwe_devpath()
-
 local w3x2lni   = require 'w3x2lni_in_sandbox'
-local stormlib  = require 'ffi.stormlib'
-local mpqloader = require 'mpqloader'
 
 local slk
 local obj
@@ -360,38 +356,6 @@ local function mark_obj(ttype, objs)
     end
 end
 
-local function get_config()
-    local config = {}
-    -- 转换后的目标格式(lni, obj, slk)
-    config.target_format = 'obj'
-    -- 使用的语言
-    config.lang = (require "i18n").get_language()
-    -- 是否分析slk文件
-    config.read_slk = false
-    -- 是否分析lni文件
-    config.read_lni = false
-    -- 分析slk时寻找id最优解的次数,0表示无限,寻找次数越多速度越慢
-    config.find_id_times = 0
-    -- 移除与模板完全相同的数据
-    config.remove_same = false
-    -- 移除超出等级的数据
-    config.remove_exceeds_level = false
-    -- 移除只在WE使用的文件
-    config.remove_we_only = false
-    -- 移除没有引用的对象
-    config.remove_unuse_object = false
-    -- mdx压缩
-    config.mdx_squf = false
-    -- 转换为地图还是目录(mpq, dir)
-    config.target_storage = 'mpq'
-    -- 复制一份物编文件
-    config.copy_obj = true
-    -- 没有嵌套目录
-    config.mpq = ''
-
-    return config
-end
-
 local function to_list(tbl)
     local list = {}
     for k in pairs(tbl) do
@@ -451,7 +415,73 @@ local function create_report()
     end
 end
 
-local function get_w2l(map)
+local slk_proxy = {}
+
+local function initialize(w2l)
+    slk = {}
+    obj = {}
+    used = {}
+    all = {}
+    dynamics = {}
+    old = {}
+    new = {}
+    all_chs = {}
+
+    w2l:frontend(slk)
+    default = w2l:get_default()
+    metadata = w2l:metadata()
+    for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
+        slk_proxy[name] = create_proxy(slk, name)
+        dynamics[name] = {}
+        obj[name] = slk['copyed_'..name]
+        mark_obj(name, obj[name])
+    end
+    return slk_proxy
+end
+
+
+local root = fs.ydwe_devpath()
+local stormlib  = require 'ffi.stormlib'
+local mpqloader = require 'mpqloader'
+local i18n = require 'i18n'
+
+local function get_config()
+    local config = {}
+    -- 转换后的目标格式(lni, obj, slk)
+    config.target_format = 'obj'
+    -- 使用的语言
+    config.lang = i18n.get_language()
+    -- 是否分析slk文件
+    config.read_slk = false
+    -- 是否分析lni文件
+    config.read_lni = false
+    -- 分析slk时寻找id最优解的次数,0表示无限,寻找次数越多速度越慢
+    config.find_id_times = 0
+    -- 移除与模板完全相同的数据
+    config.remove_same = false
+    -- 移除超出等级的数据
+    config.remove_exceeds_level = false
+    -- 移除只在WE使用的文件
+    config.remove_we_only = false
+    -- 移除没有引用的对象
+    config.remove_unuse_object = false
+    -- mdx压缩
+    config.mdx_squf = false
+    -- 转换为地图还是目录(mpq, dir)
+    config.target_storage = 'mpq'
+    -- 复制一份物编文件
+    config.copy_obj = true
+    -- 没有嵌套目录
+    config.mpq = ''
+
+    return config
+end
+
+local function get_w2l(mappath)
+    local map = stormlib.attach(mappath)
+    if not map then
+        return
+    end
     local w2l = w3x2lni()
     local has_created
     w2l:set_config(get_config())
@@ -461,7 +491,7 @@ local function get_w2l(map)
     end
     local prebuilt_path = root / 'share' / 'script' / 'ydwe' / 'prebuilt'
     function w2l:prebuilt_load(filename)
-        local buf =  mpqloader:load(prebuilt_path, filename)
+        local buf = mpqloader:load(prebuilt_path, filename)
         if not buf and not has_created then
             has_created = true
             require('prebuilt')(w2l, prebuilt_path)
@@ -481,15 +511,12 @@ local function get_w2l(map)
     return w2l
 end
 
-local slk_proxy = {}
-
 function slk_proxy:refresh(mappath)
     if not next(used) then
         return
     end
     create_report()
-    local map = stormlib.attach(mappath)
-    local w2l = get_w2l(map)
+    local w2l = get_w2l(mappath)
     for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
         if used[name] then
             local buf = w2l:backend_obj(name, obj[name])
@@ -499,32 +526,6 @@ function slk_proxy:refresh(mappath)
     end
 end
 
-local function initialize(mappath)
-    slk = {}
-    obj = {}
-    used = {}
-    all = {}
-    dynamics = {}
-    old = {}
-    new = {}
-    all_chs = {}
-
-    local map = stormlib.attach(mappath)
-    if not map then
-        return
-    end
-    local w2l = get_w2l(map)
-    w2l:frontend(slk)
-    default = w2l:get_default()
-    metadata = w2l:metadata()
-    for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
-        slk_proxy[name] = create_proxy(slk, name)
-        dynamics[name] = {}
-        obj[name] = slk['copyed_'..name]
-        mark_obj(name, obj[name])
-    end
-end
-
-initialize(__map_handle__.handle)
+initialize(get_w2l(__map_handle__.handle))
 
 return slk_proxy
