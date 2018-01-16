@@ -196,9 +196,6 @@ function event.EVENT_WE_START(event_data)
 
 	-- 初始化UI加载器
 	uiloader()
-
-	-- 初始化mpq读取器
-	mpqloader:init()
 	
 	-- 载入注入代码配置
 	inject_code:initialize()
