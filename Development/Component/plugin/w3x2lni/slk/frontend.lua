@@ -121,26 +121,6 @@ local function get_displayname(o)
     return (name:sub(1, 100):gsub('\r\n', ' '))
 end
 
-local function copy_obj(objs)
-    local new_objs = {}
-    for name, obj in pairs(objs) do
-        local new_obj = {}
-        new_objs[name] = new_obj
-        for key, value in pairs(obj) do
-            if type(value) == 'table' then
-                local new_value = {}
-                new_obj[key] = new_value
-                for k, v in pairs(value) do
-                    new_value[k] = v
-                end
-            else
-                new_obj[key] = value
-            end
-        end
-    end
-    return new_objs
-end
-
 local function update_then_merge(w2l, slks, objs, lnis, slk)
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'txt'} do
         local report, report2
@@ -156,9 +136,6 @@ local function update_then_merge(w2l, slks, objs, lnis, slk)
             for k, v in pairs(lnis[type]) do
                 obj[k] = v
             end
-        end
-        if w2l.config.copy_obj then
-            slk['copyed_'..type] = copy_obj(obj)
         end
         slk[type] = w2l:frontend_merge(type, data, obj)
         if report then

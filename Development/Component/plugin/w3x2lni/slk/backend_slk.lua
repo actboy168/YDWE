@@ -352,7 +352,13 @@ local function load_obj(id, obj, slk_name)
     local slk_data = {}
     slk_data[slk_keys[slk_name][1]] = obj._slk_id or obj._id
     slk_data['code'] = obj._code
-    slk_data['name'] = obj._name
+    if obj._name then
+        if obj._id == obj._parent then
+            slk_data['name'] = obj._name
+        else
+            slk_data['name'] = 'custom_' .. obj._id
+        end
+    end
     obj._slk = true
     for _, key in ipairs(keys) do
         local meta = metadata[slk_type][key]

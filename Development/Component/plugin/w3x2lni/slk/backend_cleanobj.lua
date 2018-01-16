@@ -114,12 +114,18 @@ local function clean_obj(name, obj, type, default)
 end
 
 local function clean_objs(type, t)
+    if not t then
+        return
+    end
     for id, obj in sortpairs(t) do
         clean_obj(id, obj, type, default[type])
     end
 end
 
 local function clean_misc(type, t)
+    if not t then
+        return
+    end
     for _, name in ipairs {'FontHeights', 'InfoPanel', 'Misc', 'PingColor', 'QuestIndicatorTimeout', 'SelectionCircle'} do
         clean_obj(id, t[name], type, default[type])
     end

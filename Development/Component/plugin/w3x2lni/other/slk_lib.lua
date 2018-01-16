@@ -1,6 +1,5 @@
 local w2l
 local slk
-local obj
 local default
 local metadata
 local used
@@ -170,24 +169,23 @@ local function find_id(objs, dynamics, source, tag, ttype)
     end
 end
 
-local function create_object(t, ttype, name)
+local function create_object(objt, ttype, name)
     local mt = {}
     function mt:__index(key)
-        local key, value, level = try_value(t, key)
+        local key, value, level = try_value(objt, key)
         if not value then
             return ''
         end
         if not level then
             return value
         end
-        if level > t._max_level then
+        if level > objt._max_level then
             return get_default(value) or ''
         end
         return value[level] or ''
     end
     function mt:__newindex(key, nvalue)
-        local objt = obj[ttype][name]
-        if not objt or not objt.w2lobject then
+        if not objt.w2lobject then
             return
         end
         local parent = objt._parent
@@ -224,7 +222,7 @@ local function create_object(t, ttype, name)
         used[ttype] = true
     end
     function mt:__pairs()
-        if not t then
+        if not objt then
             return function() end
         end
         local nkey
@@ -234,34 +232,34 @@ local function create_object(t, ttype, name)
             if level then
                 level = level + 1
                 local olevel = level
-                if t._max_level <= level then
+                if objt._max_level <= level then
                     level = nil
                 end
-                return key .. olevel, t[nkey][olevel] or ''
+                return key .. olevel, objt[nkey][olevel] or ''
             end
-            nkey = next(t, nkey)
+            nkey = next(objt, nkey)
             if nkey == '_code' then
-                return 'code', t._code
+                return 'code', objt._code
             end
             local meta
             while true do
                 if not nkey then
                     return
                 end
-                meta = get_meta(nkey, metadata[ttype], t._code and metadata[t._code])
+                meta = get_meta(nkey, metadata[ttype], objt._code and metadata[objt._code])
                 if meta then
                     break
                 end
-                nkey = next(t, nkey)
+                nkey = next(objt, nkey)
             end
             key = meta.field:gsub(':', '')
-            if type(t[nkey]) ~= 'table' then
-                return key, t[nkey] or ''
+            if type(objt[nkey]) ~= 'table' then
+                return key, objt[nkey] or ''
             end
-            if t._max_level > 1 then
+            if objt._max_level > 1 then
                 level = 1
             end
-            return key .. 1, t[nkey][1] or ''
+            return key .. 1, objt[nkey][1] or ''
         end
     end
     local o = {}
@@ -276,27 +274,31 @@ local function create_object(t, ttype, name)
         local w2lobject
         if #id == 4 and not id:find('%W') then
             w2lobject = 'static'
-            if obj[ttype][id] then
-            return create_object(nil, ttype, '')
+            if slk[ttype][id] then
+                return create_object(nil, ttype, '')
             end
         else
             w2lobject = 'dynamic|' .. id
-            id = find_id(obj[ttype], dynamics[ttype], name, w2lobject, ttype)
+            id = find_id(slk[ttype], dynamics[ttype], name, w2lobject, ttype)
             if not id then
                 return create_object(nil, ttype, '')
             end
             dynamics[ttype][w2lobject] = id
         end
-        local new_obj = {
-            _id = id,
-            _parent = name,
-            _type = ttype,
-            _obj = true,
-            _code = objd._code,
-            _create = true,
-            w2lobject = w2lobject,
-        }
-        obj[ttype][id] = new_obj
+        
+        local new_obj = {}
+        for k, v in pairs(objd) do
+            new_obj[k] = v
+        end
+        new_obj._id = id
+        new_obj._parent = name
+        new_obj._type = ttype
+        new_obj._obj = true
+        new_obj._code = objd._code
+        new_obj._create = true
+        new_obj.w2lobject = w2lobject
+
+        slk[ttype][id] = new_obj
         all[id:lower()] = new_obj
         used[ttype] = true
         if old[id] then
@@ -304,7 +306,7 @@ local function create_object(t, ttype, name)
         else
             new[id] = new_obj
         end
-        return create_object(nil, ttype, id)
+        return create_object(new_obj, ttype, id)
     end
     function o:get_id()
         return name
@@ -312,7 +314,7 @@ local function create_object(t, ttype, name)
     return setmetatable(o, mt)
 end
 
-local function create_proxy(slk, type)
+local function create_proxy(type)
     local t = slk[type]
     local mt = {}
     function mt:__index(key)
@@ -416,20 +418,30 @@ function slk_proxy:refresh(report)
     if not next(used) then
         return
     end
-    report(create_report())
-    for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
-        if used[name] then
-            local buf = w2l:backend_obj(name, obj[name])
-            log.debug('refresh object: ' .. w2l.info.obj[name])
-            w2l:map_save(w2l.info.obj[name], buf)
+    if report then
+        report(create_report())
+    end
+    local objs = {}
+    for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
+        if used[type] then
+            objs[type] = {}
+            for name, obj in pairs(slk[type]) do
+                if obj._parent then
+                    objs[type][name] = obj
+                end
+            end
         end
+    end
+    w2l:backend_cleanobj(objs)
+    for type, data in pairs(objs) do
+        local buf = w2l:backend_obj(type, data)
+        w2l:map_save(w2l.info.obj[type], buf)
     end
 end
 
 return function (_w2l)
     w2l = _w2l
     slk = {}
-    obj = {}
     used = {}
     all = {}
     dynamics = {}
@@ -441,10 +453,9 @@ return function (_w2l)
     default = w2l:get_default()
     metadata = w2l:metadata()
     for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
-        slk_proxy[name] = create_proxy(slk, name)
+        slk_proxy[name] = create_proxy(name)
         dynamics[name] = {}
-        obj[name] = slk['copyed_'..name]
-        mark_obj(name, obj[name])
+        mark_obj(name, slk[name])
     end
     return slk_proxy
 end

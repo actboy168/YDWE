@@ -10,10 +10,6 @@ local function get_config()
     config.target_format = 'obj'
     -- 使用的语言
     config.lang = i18n.get_language()
-    -- 没有嵌套目录
-    config.mpq = ''
-    -- 复制一份物编文件
-    config.copy_obj = true
 
     return config
 end
