@@ -83,7 +83,7 @@ local function sandbox_env(root, loaded)
         end
         local buf = f:read 'a'
         f:close()
-        return load(buf, '@' .. filename)
+        return load(buf, '@' .. _ROOT .. filename)
     end
 
     local function searcher_preload(name)
@@ -156,20 +156,6 @@ local function sandbox_env(root, loaded)
     return _E
 end
 
-local function sandbox_load(name, searchers)
-    assert(type(searchers) == "table", "'package.searchers' must be a table")
-    local msg = ''
-    for _, searcher in ipairs(searchers) do
-        local f, extra = searcher(name)
-        if type(f) == 'function' then
-            return f, extra
-        elseif type(f) == 'string' then
-            msg = msg .. f
-        end
-    end
-    error(("module '%s' not found:%s"):format(name, msg))
-end
-
 local function getparent(path)
     if path then
         local pos = path:find [[[/\][^\/]*$]]
@@ -179,25 +165,15 @@ local function getparent(path)
     end
 end
 
-local _SANDBOX = {}
-return function(name, loaded)
-    assert(type(name) == "string", ("bad argument #1 to 'sandbox' (string expected, got %s)"):format(type(name)))
-	local p = _SANDBOX[name]
-	if p ~= nil then
-		return p
-	end
-    local init, extra = sandbox_load(name, package.searchers)
+return function(name, loadlua, loaded)
+    local init, extra = loadlua(name)
+    if not init then
+        return error(("module '%s' not found"):format(name))
+    end
     local root = getparent(extra)
     if not root then
         return error(("module '%s' not found"):format(name))
     end
     debug.setupvalue(init, 1, sandbox_env(root, loaded))
-	local res = init(name, extra)
-	if res ~= nil then
-		_SANDBOX[name] = res
-	end
-	if _SANDBOX[name] == nil then
-		_SANDBOX[name] = true
-	end
-	return _SANDBOX[name]
+	return init(name, extra)
 end
