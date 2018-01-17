@@ -318,11 +318,17 @@ local function create_object(objt, ttype, name)
     return setmetatable(o, mt)
 end
 
-local function create_proxy(type)
-    local t = slk[type]
+local function create_proxy(ttype)
+    local t = slk[ttype]
     local mt = {}
     function mt:__index(key)
-        return create_object(t[key], type, key)
+        if type(key) == 'number' then
+            local suc, res = pcall(string.pack, '>I4', key)
+            if suc then
+                key = res
+            end
+        end
+        return create_object(t[key], ttype, key)
     end
     function mt:__newindex()
     end
@@ -416,9 +422,7 @@ local function create_report()
     return table.concat(lines, '\n')
 end
 
-local slk_proxy = {}
-
-function slk_proxy:refresh(report)
+local function refresh(self, report)
     if not next(used) then
         return
     end
@@ -443,6 +447,8 @@ function slk_proxy:refresh(report)
     end
 end
 
+local slk_proxy = {}
+
 return function (_w2l, _read_only)
     w2l = _w2l
     read_only = _read_only
@@ -461,6 +467,9 @@ return function (_w2l, _read_only)
         slk_proxy[name] = create_proxy(name)
         dynamics[name] = {}
         mark_obj(name, slk[name])
+    end
+    if not read_only then
+        slk_proxy.refresh = refresh
     end
     return slk_proxy
 end

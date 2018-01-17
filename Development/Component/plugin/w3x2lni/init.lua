@@ -83,7 +83,7 @@ local function create_default(w2l)
     local default = {}
     local need_build = false
     for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'txt', 'misc'} do
-        local str = w2l.prebuilt_load and w2l:prebuilt_load(name .. '.ini')
+        local str = w2l:prebuilt_load(name .. '.ini')
         if str then
             default[name] = lni(str)
         else
