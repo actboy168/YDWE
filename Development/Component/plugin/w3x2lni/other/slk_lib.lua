@@ -1,14 +1,5 @@
-local w2l
-local read_only
-local slk
-local default
-local metadata
-local used
-local dynamics
-local all
-local all_chs
-local old
-local new
+local mt = {}
+mt.__index = mt
 
 local function try_value(t, key)
     if not t then
@@ -117,14 +108,13 @@ local function to_type(value, tp)
 end
 
 local chars = {}
-local string_list = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-for i = 1, #string_list do
-    chars[i] = string_list:sub(i, i)
+for c in ('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'):gmatch '.' do
+    table.insert(chars, c)
 end
-local function find_id(objs, dynamics, source, tag, ttype)
+function mt:find_id(objs, dynamics, source, tag, ttype)
     local id = dynamics[tag]
     if id then
-        local obj = all[id:lower()]
+        local obj = self.all[id:lower()]
         if not obj then
             return id
         elseif obj._create then
@@ -146,14 +136,14 @@ local function find_id(objs, dynamics, source, tag, ttype)
     elseif ttype == 'upgrade' then
         first = 'R'
     end
-    if not all_chs[first] then
-        all_chs[first] = {1, 1, 1}
+    if not self.all_chs[first] then
+        self.all_chs[first] = {1, 1, 1}
     end
-    local chs = all_chs[first]
+    local chs = self.all_chs[first]
     while true do
         local id = first .. chars[chs[3]] .. chars[chs[2]] .. chars[chs[1]]
         local lid = id:lower()
-        if not all[lid] and not dynamics[id] then
+        if not self.all[lid] and not dynamics[id] then
             return id
         end
         for x = 1, 3 do
@@ -170,7 +160,8 @@ local function find_id(objs, dynamics, source, tag, ttype)
     end
 end
 
-local function create_object(objt, ttype, name)
+function mt:create_object(objt, ttype, name)
+    local session = self
     local mt = {}
     function mt:__index(key)
         local key, value, level = try_value(objt, key)
@@ -186,12 +177,12 @@ local function create_object(objt, ttype, name)
         return value[level] or ''
     end
     function mt:__newindex(key, nvalue)
-        if read_only or not objt.w2lobject then
+        if session.read_only or not objt.w2lobject then
             return
         end
         local parent = objt._parent
-        local objd = default[ttype][parent]
-        local meta, level = get_meta(key, metadata[ttype], objd._code and metadata[objd._code])
+        local objd = session.default[ttype][parent]
+        local meta, level = get_meta(key, session.metadata[ttype], objd._code and session.metadata[objd._code])
         if not meta then
             return
         end
@@ -220,7 +211,7 @@ local function create_object(objt, ttype, name)
         else
             objt[key] = nvalue
         end
-        used[ttype] = true
+        session.used[ttype] = true
     end
     function mt:__pairs()
         if not objt then
@@ -247,7 +238,7 @@ local function create_object(objt, ttype, name)
                 if not nkey then
                     return
                 end
-                meta = get_meta(nkey, metadata[ttype], objt._code and metadata[objt._code])
+                meta = get_meta(nkey, session.metadata[ttype], objt._code and session.metadata[objt._code])
                 if meta then
                     break
                 end
@@ -264,30 +255,30 @@ local function create_object(objt, ttype, name)
         end
     end
     local o = {}
-    if read_only then
+    if session.read_only then
         return setmetatable(o, mt)
     end
     function o:new(id)
-        local objd = default[ttype][name]
+        local objd = session.default[ttype][name]
         if not objd then
-            return create_object(nil, ttype, '')
+            return session:create_object(nil, ttype, '')
         end
         if type(id) ~= 'string' then
-            return create_object(nil, ttype, '')
+            return session:create_object(nil, ttype, '')
         end
         local w2lobject
         if #id == 4 and not id:find('%W') then
             w2lobject = 'static'
-            if slk[ttype][id] then
-                return create_object(nil, ttype, '')
+            if session.slk[ttype][id] then
+                return session:create_object(nil, ttype, '')
             end
         else
             w2lobject = 'dynamic|' .. id
-            id = find_id(slk[ttype], dynamics[ttype], name, w2lobject, ttype)
+            id = session:find_id(session.slk[ttype], session.dynamics[ttype], name, w2lobject, ttype)
             if not id then
-                return create_object(nil, ttype, '')
+                return session:create_object(nil, ttype, '')
             end
-            dynamics[ttype][w2lobject] = id
+            session.dynamics[ttype][w2lobject] = id
         end
         
         local new_obj = {}
@@ -302,15 +293,15 @@ local function create_object(objt, ttype, name)
         new_obj._create = true
         new_obj.w2lobject = w2lobject
 
-        slk[ttype][id] = new_obj
-        all[id:lower()] = new_obj
-        used[ttype] = true
-        if old[id] then
-            old[id] = nil
+        session.slk[ttype][id] = new_obj
+        session.all[id:lower()] = new_obj
+        session.used[ttype] = true
+        if session.old[id] then
+            session.old[id] = nil
         else
-            new[id] = new_obj
+            session.new[id] = new_obj
         end
-        return create_object(new_obj, ttype, id)
+        return session:create_object(new_obj, ttype, id)
     end
     function o:get_id()
         return name
@@ -318,8 +309,9 @@ local function create_object(objt, ttype, name)
     return setmetatable(o, mt)
 end
 
-local function create_proxy(ttype)
-    local t = slk[ttype]
+function mt:create_proxy(ttype)
+    local t = self.slk[ttype]
+    local session = self
     local mt = {}
     function mt:__index(key)
         if type(key) == 'number' then
@@ -328,7 +320,7 @@ local function create_proxy(ttype)
                 key = res
             end
         end
-        return create_object(t[key], ttype, key)
+        return session:create_object(t[key], ttype, key)
     end
     function mt:__newindex()
     end
@@ -344,25 +336,25 @@ local function create_proxy(ttype)
     return setmetatable({}, mt)
 end
 
-local function mark_obj(ttype, objs)
+function mt:mark_obj(ttype, objs)
     if not objs then
         return
     end
     for name, obj in pairs(objs) do
         if obj.w2lobject then
             objs[name] = nil
-            old[name] = obj
-            used[ttype] = true
+            self.old[name] = obj
+            self.used[ttype] = true
             local pos = obj.w2lobject:find('|', 1, false)
             if pos then
                 local kind = obj.w2lobject:sub(1, pos-1)
                 if kind == 'dynamic' then
-                    dynamics[ttype][obj.w2lobject] = name
-                    dynamics[ttype][name] = obj.w2lobject
+                    self.dynamics[ttype][obj.w2lobject] = name
+                    self.dynamics[ttype][name] = obj.w2lobject
                 end
             end
         else
-            all[name:lower()] = obj
+            self.all[name:lower()] = obj
         end
     end
 end
@@ -398,15 +390,15 @@ local displaytype = {
     destructable = '可破坏物',
 }
 
-local function create_report()
-	local lold = to_list(old)
-	local lnew = to_list(new)
+function mt:create_report()
+	local lold = to_list(self.old)
+	local lnew = to_list(self.new)
 	local lines = {}
 	if #lold > 0 then
 		lines[#lines+1] = ('移除了 %d 个对象'):format(#lold)
 		for i = 1, math.min(10, #lold) do
-			local o = old[lold[i]]
-			lines[#lines+1] = ("[%s][%s] '%s'"):format(displaytype[o._type], get_displayname(o, slk[o._type][o._parent]), o._id)
+			local o = self.old[lold[i]]
+			lines[#lines+1] = ("[%s][%s] '%s'"):format(displaytype[o._type], get_displayname(o, self.slk[o._type][o._parent]), o._id)
 		end
 	end
 	if #lnew > 0 then
@@ -415,61 +407,65 @@ local function create_report()
 		end
 		lines[#lines+1] = ('新建了 %d 个对象'):format(#lnew)
 		for i = 1, math.min(10, #lnew) do
-			local o = new[lnew[i]]
-			lines[#lines+1] = ("[%s][%s] '%s'"):format(displaytype[o._type], get_displayname(o, slk[o._type][o._parent]), o._id)
+			local o = self.new[lnew[i]]
+			lines[#lines+1] = ("[%s][%s] '%s'"):format(displaytype[o._type], get_displayname(o, self.slk[o._type][o._parent]), o._id)
 		end
     end
     return table.concat(lines, '\n')
 end
 
-local function refresh(self, report)
-    if not next(used) then
+function mt:refresh(report)
+    if not next(self.used) then
         return
     end
     if report then
-        report(create_report())
+        report(self:create_report())
     end
     local objs = {}
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
-        if used[type] then
+        if self.used[type] then
             objs[type] = {}
-            for name, obj in pairs(slk[type]) do
+            for name, obj in pairs(self.slk[type]) do
                 if obj._parent then
                     objs[type][name] = obj
                 end
             end
         end
     end
-    w2l:backend_cleanobj(objs)
+    self.w2l:backend_cleanobj(objs)
     for type, data in pairs(objs) do
-        local buf = w2l:backend_obj(type, data)
-        w2l:map_save(w2l.info.obj[type], buf)
+        local buf = self.w2l:backend_obj(type, data)
+        self.w2l:map_save(self.w2l.info.obj[type], buf)
     end
 end
 
-local slk_proxy = {}
+return function (w2l, read_only)
+    local session = setmetatable({
+        w2l = w2l,
+        read_only = read_only,
+        slk = {},
+        used = {},
+        all = {},
+        dynamics = {},
+        old = {},
+        new = {},
+        all_chs = {},
+    }, mt)
 
-return function (_w2l, _read_only)
-    w2l = _w2l
-    read_only = _read_only
-    slk = {}
-    used = {}
-    all = {}
-    dynamics = {}
-    old = {}
-    new = {}
-    all_chs = {}
+    w2l:frontend(session.slk)
+    session.default = w2l:get_default()
+    session.metadata = w2l:metadata()
 
-    w2l:frontend(slk)
-    default = w2l:get_default()
-    metadata = w2l:metadata()
+    local slk_proxy = {}
     for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
-        slk_proxy[name] = create_proxy(name)
-        dynamics[name] = {}
-        mark_obj(name, slk[name])
+        slk_proxy[name] = session:create_proxy(name)
+        session.dynamics[name] = {}
+        session:mark_obj(name, session.slk[name])
     end
     if not read_only then
-        slk_proxy.refresh = refresh
+        function slk_proxy:refresh(report)
+            session:refresh(report)
+        end
     end
     return slk_proxy
 end

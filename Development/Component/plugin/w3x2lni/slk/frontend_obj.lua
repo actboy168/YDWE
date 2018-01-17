@@ -9,7 +9,6 @@ local default
 local has_level
 local unpack_buf
 local unpack_pos
-local force_slk
 
 local function set_pos(...)
     unpack_pos = select(-1, ...)
@@ -73,7 +72,7 @@ local function read_obj(chunk, type)
         read_data(obj)
     end
     if not default or not default[parent] then
-        force_slk = true
+        w2l.force_slk = true
     end
     chunk[name] = obj
     return obj
@@ -97,7 +96,6 @@ return function (w2l_, type, buf, wts_)
     has_level = w2l.info.key.max_level[type]
     unpack_buf = buf
     unpack_pos = 1
-    force_slk = false
     local data    = {}
     -- 版本号
     read_version()
@@ -105,5 +103,5 @@ return function (w2l_, type, buf, wts_)
     read_chunk(data, type)
     -- 自定义数据
     read_chunk(data, type)
-    return data, force_slk
+    return data
 end

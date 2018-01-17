@@ -245,7 +245,31 @@ local function to_slk(w2l, slk)
     end
 end
 
+local function clean_file(w2l, slk)
+    if w2l.force_slk or w2l.config.read_slk then
+        for _, filename in pairs(w2l.info.txt) do
+            w2l:map_remove(filename)
+        end
+        for type, names in pairs(w2l.info.slk) do
+            for _, filename in pairs(names) do
+                w2l:map_remove(filename)
+            end
+        end
+    end
+    for _, filename in pairs(w2l.info.obj) do
+        w2l:map_remove(filename)
+    end
+    for _, filename in pairs(w2l.info.lni) do
+        w2l:map_remove(filename)
+    end
+    w2l:map_remove('war3map.txt.ini')
+    if w2l.config.read_lni then
+        w2l:map_remove('war3map.w3i.ini')
+    end
+end
+
 return function (w2l, slk)
+    clean_file(w2l, slk)
     if slk.w3i then
         if w2l.config.target_format == 'lni' then
             w2l:map_save('war3map.w3i.ini', w2l:w3i2lni(slk.w3i), slk.wts)

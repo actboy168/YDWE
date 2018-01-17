@@ -1,15 +1,14 @@
 local pairs = pairs
 local type = type
 
-local function load_slk(w2l, force_slk)
-    if force_slk then
+local function load_slk(w2l)
+    if w2l.force_slk then
         w2l.message('-report|9其他', '物编信息不完整,强制读取slk文件')
     end
-    if force_slk or w2l.config.read_slk then
+    if w2l.force_slk or w2l.config.read_slk then
         return w2l:frontend_slk(function(name)
             local buf = w2l:map_load(name)
             if buf then
-                w2l:map_remove(name)
                 return buf
             end
             return w2l:mpq_load(name)
@@ -21,23 +20,17 @@ end
 
 local function load_obj(w2l, wts)
     local objs = {}
-    local force_slk
     local count = 0
     for type, name in pairs(w2l.info.obj) do
         local buf = w2l:map_load(name)
-        local force
         local count = count + 1
         if buf then
             w2l.message('正在转换', name)
-            objs[type], force = w2l:frontend_obj(type, buf, wts)
+            objs[type] = w2l:frontend_obj(type, buf, wts)
             w2l.progress(count / 7)
-            if force then
-                force_slk = true
-            end
-            w2l:map_remove(name)
         end
     end
-    return objs, force_slk
+    return objs
 end
 
 local function load_lni(w2l)
@@ -53,14 +46,12 @@ local function load_lni(w2l)
             w2l.message('正在转换', name)
             lnis[type] = w2l:frontend_lni(type, buf, name)
             w2l.progress(count / 7)
-            w2l:map_remove(name)
         end
     end
 
     local buf = w2l:map_load('war3map.txt.ini')
     if buf then
         lnis['txt'] = w2l:parse_lni(buf, 'war3map.txt.ini')
-        w2l:map_remove('war3map.txt.ini')
     end
     return lnis
 end
@@ -68,7 +59,6 @@ end
 local function load_w3i(w2l, slk)
     local buf = w2l:map_load 'war3map.w3i.ini'
     if buf and w2l.config.read_lni then
-        w2l:map_remove('war3map.w3i.ini')
         return w2l:parse_lni(buf, 'war3map.w3i.ini')
     else
         buf = w2l:map_load 'war3map.w3i'
@@ -173,12 +163,12 @@ return function(w2l, slk)
 
     w2l.message('读取obj...')
     w2l.progress:start(0.4)
-    local objs, force_slk1 = load_obj(w2l, slk.wts)
+    local objs = load_obj(w2l, slk.wts)
     w2l.progress:finish()
 
     w2l.message('读取lni...')
     w2l.progress:start(0.6)
-    local lnis, force_slk2 = load_lni(w2l)
+    local lnis = load_lni(w2l)
     w2l.progress:finish()
 
     w2l.message('读取slk...')

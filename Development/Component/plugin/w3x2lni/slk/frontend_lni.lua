@@ -2,7 +2,6 @@ local string_lower = string.lower
 local pairs = pairs
 
 local w2l
-local force_slk
 local default
 
 local function add_obj(type, name, level_key, obj)
@@ -15,7 +14,7 @@ local function add_obj(type, name, level_key, obj)
     new_obj._type = type
     new_obj._obj = true
     if not default or not default[new_obj._parent] then
-        force_slk = true
+        w2l.force_slk = true
     end
     return new_obj
 end
@@ -30,9 +29,8 @@ return function (w2l_, type, buf, filename)
         level_key = metadata[level_key].field
     end
     local data = {}
-    force_slk = false
     for name, obj in pairs(lni) do
         data[name] = add_obj(type, name, level_key, obj)
     end
-    return data, force_slk
+    return data
 end
