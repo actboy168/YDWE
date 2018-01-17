@@ -200,7 +200,7 @@ end
 function w2l:map_load(filename)
 	return load_mpq(filename)
 end
-return w2l:slk_lib()
+return w2l:slk_lib(true, false)
 )=";
 
 static int loadlib(lua_State* L)
