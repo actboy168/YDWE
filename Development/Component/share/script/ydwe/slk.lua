@@ -11,10 +11,6 @@ local function initialize(mappath)
     end
 
     local w2l = w3x2lni()
-    local config = {
-        lang = i18n.get_language(),
-    }
-    w2l:set_config(config)
 
     local mpq_path = root / 'share' / 'mpq'
     function w2l:mpq_load(filename)
