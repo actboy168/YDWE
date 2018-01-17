@@ -162,19 +162,26 @@ end
 
 function mt:create_object(objt, ttype, name)
     local session = self
+    if not objt and not session.safe_mode then
+        return nil
+    end
     local mt = {}
     function mt:__index(key)
         local key, value, level = try_value(objt, key)
+        local null
+        if session.safe_mode then
+            null = ''
+        end
         if not value then
-            return ''
+            return null
         end
         if not level then
             return value
         end
         if level > objt._max_level then
-            return get_default(value) or ''
+            return get_default(value) or null
         end
-        return value[level] or ''
+        return value[level] or null
     end
     function mt:__newindex(key, nvalue)
         if session.read_only or not objt.w2lobject then
@@ -439,10 +446,11 @@ function mt:refresh(report)
     end
 end
 
-return function (w2l, read_only)
+return function (w2l, read_only, safe_mode)
     local session = setmetatable({
         w2l = w2l,
         read_only = read_only,
+        safe_mode = safe_mode,
         slk = {},
         used = {},
         all = {},

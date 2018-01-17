@@ -32,7 +32,7 @@ local function initialize(mappath)
         return map:save_file(filename, buf)
     end
 
-    return w2l:slk_lib()
+    return w2l:slk_lib(false, true)
 end
 
 return initialize(__map_handle__.handle)
