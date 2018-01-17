@@ -45,28 +45,21 @@ local function standard(loaded)
     return r
 end
 
-local function sandbox_env(root, loaded)
+local function sandbox_env(loadlua, openfile, loaded)
     local _LOADED = loaded or {}
     local _E = standard(_LOADED)
-    local _ROOT = root
     local _PRELOAD = {}
 
-    local rioOpen = loaded.io and loaded.io.open or io.open
-
-    local function ioOpen(path, mode)
-        return rioOpen(_ROOT .. path, mode)
-    end
-
     _E.io = {
-        open = ioOpen,
+        open = openfile,
     }
 
     local function searchpath(name, path)
         local err = ''
     	name = string.gsub(name, '%.', '/')
     	for c in string.gmatch(path, '[^;]+') do
-    		local filename = string.gsub(c, '%?', name)
-    		local f = ioOpen(filename)
+            local filename = string.gsub(c, '%?', name)
+            local f = openfile(filename)
             if f then
                 f:close()
     			return filename
@@ -74,16 +67,6 @@ local function sandbox_env(root, loaded)
             err = err .. ("\n\tno file '%s'"):format(filename)
         end
         return nil, err
-    end
-
-    local function loadfile(filename)
-        local f, e = ioOpen(filename)
-        if not f then
-            return nil, e
-        end
-        local buf = f:read 'a'
-        f:close()
-        return load(buf, '@' .. _ROOT .. filename)
     end
 
     local function searcher_preload(name)
@@ -100,7 +83,7 @@ local function sandbox_env(root, loaded)
     	if not filename then
     		return err
     	end
-    	local f, err = loadfile(filename)
+    	local f, err = loadlua(filename)
     	if not f then
     		error(("error loading module '%s' from file '%s':\n\t%s"):format(name, filename, err))
     	end
@@ -156,24 +139,33 @@ local function sandbox_env(root, loaded)
     return _E
 end
 
-local function getparent(path)
-    if path then
-        local pos = path:find [[[/\][^\/]*$]]
-        if pos then
-            return path:sub(1, pos)
-        end
+local function loadinit(name, read)
+    local f = io._open(name, 'r')
+    if not read then
+        local ok = not not f
+        f:close()
+        return ok
+    end
+    if f then
+        local str = f:read 'a'
+        f:close()
+        return load(str, '@' .. name)
     end
 end
 
-return function(name, loadlua, loaded)
-    local init, extra = loadlua(name)
-    if not init then
-        return error(("module '%s' not found"):format(name))
+return function(root, io_open, loaded)
+    local function openfile(name, mode)
+        return io_open(root .. name, mode)
     end
-    local root = getparent(extra)
-    if not root then
-        return error(("module '%s' not found"):format(name))
+    local function loadlua(name)
+        local f = openfile(name, 'r')
+        if f then
+            local str = f:read 'a'
+            f:close()
+            return load(str, '@' .. root .. name)
+        end
     end
-    debug.setupvalue(init, 1, sandbox_env(root, loaded))
-	return init(name, extra)
+    local init = loadlua('init.lua')
+    debug.setupvalue(init, 1, sandbox_env(loadlua, openfile, loaded))
+	return init()
 end
