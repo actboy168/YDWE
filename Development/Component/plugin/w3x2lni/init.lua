@@ -218,6 +218,24 @@ local function new_path()
     return mt
 end
 
+function mt:map_load(filename)
+    return nil
+end
+
+function mt:map_save(filename, buf)
+end
+
+function mt:map_remove(filename)
+end
+
+function mt:mpq_load(filename)
+    return nil
+end
+
+function mt:prebuilt_load(filename)
+    return nil
+end
+
 mt.config = {}
 function mt:set_config(config)
     self.config = config
