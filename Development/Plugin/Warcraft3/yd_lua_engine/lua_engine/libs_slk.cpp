@@ -275,7 +275,6 @@ static int loadlua(lua_State* L)
 
 int open(lua_State* L)
 {
-	base::console::enable();
 	if (DoString(L, sandbox, 0)) {
 		printf("%s\n", lua_tostring(L, -1));
 		return 0;
