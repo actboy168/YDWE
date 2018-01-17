@@ -9,6 +9,22 @@
 #include <base/warcraft3/jass/global_variable.h>
 #include <base/lua/make_range.h>
 
+namespace base { namespace lua {
+	template <>
+	int convert_to_lua(lua_State* L, const std::string& v)
+	{
+		lua_pushlstring(L, v.data(), v.size());
+		return 1;
+	}
+
+	template <>
+	int convert_to_lua(lua_State* L, const std::string_view& v)
+	{
+		lua_pushlstring(L, v.data(), v.size());
+		return 1;
+	}
+}}
+
 namespace base { namespace warcraft3 { namespace lua_engine { 
 
 	namespace globals {
