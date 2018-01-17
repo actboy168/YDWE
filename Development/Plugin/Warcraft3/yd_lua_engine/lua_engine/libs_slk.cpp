@@ -53,28 +53,21 @@ local function standard(loaded)
     return r
 end
 
-local function sandbox_env(root, loaded)
+local function sandbox_env(loadlua, openfile, loaded)
     local _LOADED = loaded or {}
     local _E = standard(_LOADED)
-    local _ROOT = root
     local _PRELOAD = {}
 
-    local rioOpen = loaded.io and loaded.io.open or io.open
-
-    local function ioOpen(path, mode)
-        return rioOpen(_ROOT .. path, mode)
-    end
-
     _E.io = {
-        open = ioOpen,
+        open = openfile,
     }
 
     local function searchpath(name, path)
         local err = ''
     	name = string.gsub(name, '%.', '/')
     	for c in string.gmatch(path, '[^;]+') do
-    		local filename = string.gsub(c, '%?', name)
-    		local f = ioOpen(filename)
+            local filename = string.gsub(c, '%?', name)
+            local f = openfile(filename)
             if f then
                 f:close()
     			return filename
@@ -82,16 +75,6 @@ local function sandbox_env(root, loaded)
             err = err .. ("\n\tno file '%s'"):format(filename)
         end
         return nil, err
-    end
-
-    local function loadfile(filename)
-        local f, e = ioOpen(filename)
-        if not f then
-            return nil, e
-        end
-        local buf = f:read 'a'
-        f:close()
-        return load(buf, '@' .. _ROOT .. filename)
     end
 
     local function searcher_preload(name)
@@ -108,7 +91,7 @@ local function sandbox_env(root, loaded)
     	if not filename then
     		return err
     	end
-    	local f, err = loadfile(filename)
+    	local f, err = loadlua(filename)
     	if not f then
     		error(("error loading module '%s' from file '%s':\n\t%s"):format(name, filename, err))
     	end
@@ -164,31 +147,40 @@ local function sandbox_env(root, loaded)
     return _E
 end
 
-local function getparent(path)
-    if path then
-        local pos = path:find [[[/\][^\/]*$]]
-        if pos then
-            return path:sub(1, pos)
-        end
+local function loadinit(name, read)
+    local f = io._open(name, 'r')
+    if not read then
+        local ok = not not f
+        f:close()
+        return ok
+    end
+    if f then
+        local str = f:read 'a'
+        f:close()
+        return load(str, '@' .. name)
     end
 end
 
-return function(name, loadlua, loaded)
-    local init, extra = loadlua(name)
-    if not init then
-        return error(("module '%s' not found"):format(name))
+return function(root, io_open, loaded)
+    local function openfile(name, mode)
+        return io_open(root .. name, mode)
     end
-    local root = getparent(extra)
-    if not root then
-        return error(("module '%s' not found"):format(name))
+    local function loadlua(name)
+        local f = openfile(name, 'r')
+        if f then
+            local str = f:read 'a'
+            f:close()
+            return load(str, '@' .. root .. name)
+        end
     end
-    debug.setupvalue(init, 1, sandbox_env(root, loaded))
-	return init(name, extra)
+    local init = loadlua('init.lua')
+    debug.setupvalue(init, 1, sandbox_env(loadlua, openfile, loaded))
+	return init()
 end
 )=";
 static const char slk[] = R"=(
-local sandbox, loadlib, loadlua = ...
-local w3x2lni = sandbox('w3x2lni', loadlua, {
+local sandbox, root, loadlib, io_open = ...
+local w3x2lni = sandbox(root, io_open, {
     ['w3xparser'] = (loadlib 'w3xparser')(),
     ['lni-c']     = (loadlib 'lni-c')(),
     ['lpeg']      = (loadlib 'lpeg')(),
@@ -239,39 +231,25 @@ static int loadlib(lua_State* L)
 	return 0;
 }
 
-static bool loadlua_(lua_State* L, const fs::path& path)
-{
-	if (!fs::exists(path)) {
-		return false;
-	}
-	const std::string filename = path.string();
-	if (LUA_OK == luaL_loadfile(L, filename.c_str())) {
-		lua_pushstring(L, filename.c_str());
-		return true;
-	}
-	return true;
+static int io_fclose(lua_State *L) {
+	luaL_Stream *p = (luaL_Stream *)luaL_checkudata(L, 1, LUA_FILEHANDLE);
+	int res = fclose(p->f);
+	return luaL_fileresult(L, (res == 0), NULL);
 }
 
-static int loadlua(lua_State* L)
-{
-	try {
-		size_t len = 0;
-		const char* str = luaL_checklstring(L, 1, &len);
-		std::string name(str, len);
-		if (loadlua_(L, path::ydwe(true) / "plugin" / name / "init.lua")) {
-			return 2;
-		}
-		if (loadlua_(L, path::ydwe(true) / "plugin" / name / "init.lua")) {
-			return 2;
-		}
-	}
-	catch (...) {
-	}
-	return 0;
+static int io_open(lua_State *L) {
+	const char *filename = luaL_checkstring(L, 1);
+	const char *mode = luaL_optstring(L, 2, "r");
+	luaL_argcheck(L, mode[0] == 'r' && mode[1] == '\0', 2, "invalid mode");
+	luaL_Stream *p = (luaL_Stream *)lua_newuserdata(L, sizeof(luaL_Stream));
+	luaL_setmetatable(L, LUA_FILEHANDLE);
+	p->closef = &io_fclose;
+	p->f = fopen(filename, mode);
+	return (p->f == NULL) ? luaL_fileresult(L, 0, filename) : 1;
 }
 
 #define DoString(L, s, n) \
-	(luaL_loadbuffer(L, s, sizeof(s) - 1, s) || (lua_insert(L, -(n)-1), lua_pcall(L, n, LUA_MULTRET, 0)))
+	(luaL_loadbuffer(L, s, sizeof(s) - 1, "module '" #s "'") || (lua_insert(L, -(n)-1), lua_pcall(L, n, LUA_MULTRET, 0)))
 
 int open(lua_State* L)
 {
@@ -279,9 +257,11 @@ int open(lua_State* L)
 		printf("%s\n", lua_tostring(L, -1));
 		return 0;
 	}
+	fs::path root = base::path::ydwe(true) / "plugin" / "w3x2lni";
+	lua_pushstring(L, (root.string() + "\\").c_str());
 	lua_pushcfunction(L, loadlib);
-	lua_pushcfunction(L, loadlua);
-	if (DoString(L, slk, 3)) {
+	lua_pushcfunction(L, io_open);
+	if (DoString(L, slk, 4)) {
 		printf("%s\n", lua_tostring(L, -1));
 		return 0;
 	}
