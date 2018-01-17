@@ -11,11 +11,26 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace message {
 
-	static HWND war3_window = NULL;
-
-	void set_window(HWND hwnd)
+	static HWND FindWar3Window()
 	{
-		war3_window = hwnd;
+		DWORD current_pid = GetCurrentProcessId();
+		HWND hwnd = NULL;
+		while (NULL != (hwnd = FindWindowExW(NULL, hwnd, L"Warcraft III", L"Warcraft III")))
+		{
+			DWORD pid = 0;
+			GetWindowThreadProcessId(hwnd, &pid);
+			if (pid == current_pid)
+			{
+				return hwnd;
+			}
+		}
+		return NULL;
+	}
+
+	static HWND get_window()
+	{
+		static HWND war3_window =  FindWar3Window();
+		return war3_window;
 	}
 
 	struct AbilityData
@@ -133,6 +148,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 
 	static int lmouse(lua_State* L)
 	{
+		HWND war3_window = get_window();
 		POINT pt = { 0 };
 		::GetCursorPos(&pt);
 		ScreenToClient(war3_window, &pt);
