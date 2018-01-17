@@ -240,5 +240,6 @@ return function ()
     local self = setmetatable({}, mt)
     self.progress = progress()
     self.loaded = {}
+    self:set_messager(function () end)
     return self
 end

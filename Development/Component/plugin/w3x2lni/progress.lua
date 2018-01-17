@@ -7,7 +7,7 @@ mt.current = 0
 mt.min_rate = 0
 mt.max_rate = 1
 mt.progress = 0
-mt.message = print
+mt.message = function () end
 
 function mt:send_progress()
     local newprogress = self.current * (self.max_rate - self.min_rate) + self.min_rate

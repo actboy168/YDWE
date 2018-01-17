@@ -22,8 +22,4 @@ local w3x2lni = sandbox('w3x2lni', loadlua, {
     ['io']        = { open = function(filename) return io.open(fs.path(filename)) end },
 })
 
-return function ()
-    local w2l = w3x2lni()
-    w2l:set_messager(function() end)
-    return w2l
-end
+return w3x2lni
