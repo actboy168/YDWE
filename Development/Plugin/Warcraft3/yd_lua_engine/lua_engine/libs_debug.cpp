@@ -1,4 +1,3 @@
-#include "lua_helper.h"	  
 #include "jassbind.h" 
 #include <base/warcraft3/jass/func_value.h>	   
 #include <base/warcraft3/jass/global_variable.h>

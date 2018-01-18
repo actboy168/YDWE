@@ -1,4 +1,3 @@
-#include "lua_helper.h"	 
 #include "common.h"
 #include "storm.h"
 #include <base/hook/fp_call.h>

@@ -68,9 +68,6 @@
     <ClCompile Include="lua_engine\libs_storm.cpp">
       <Filter>lua_engine\library</Filter>
     </ClCompile>
-    <ClCompile Include="lua_engine\lua_helper.cpp">
-      <Filter>lua_engine\main</Filter>
-    </ClCompile>
     <ClCompile Include="lua_engine\libs_globals.cpp">
       <Filter>lua_engine\library</Filter>
     </ClCompile>
@@ -142,14 +139,14 @@
     <ClInclude Include="lua_engine\jassbind.h">
       <Filter>lua_engine\main</Filter>
     </ClInclude>
-    <ClInclude Include="lua_engine\lua_helper.h">
-      <Filter>lua_engine\main</Filter>
-    </ClInclude>
     <ClInclude Include="lua_engine\sha_1.h">
       <Filter>lua_engine\misc</Filter>
     </ClInclude>
     <ClInclude Include="lua_engine\lua_memfile.h">
       <Filter>lua_engine\misc</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_engine\fix_baselib.h">
+      <Filter>lua_engine\main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

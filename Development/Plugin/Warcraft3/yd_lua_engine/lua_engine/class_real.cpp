@@ -1,5 +1,4 @@
 #include "class_real.h"
-#include "lua_helper.h"
 #include "jassbind.h"
 #include <base/util/format.h>
 

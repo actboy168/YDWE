@@ -1,6 +1,6 @@
 #include "open_lua_engine.h"
 #include "callback.h"
-#include "lua_helper.h"
+#include "fix_baselib.h"
 #include "class_real.h"
 #include "class_array.h"
 #include "class_handle.h"
@@ -25,8 +25,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	namespace debugger { int open(lua_State* L); }
 	namespace selector { int open(lua_State* L); }
 	
-	int fix_baselib(lua_State* L);
-
 	void register_preload_lib(lua_State* L, const char *name, lua_CFunction f)
 	{
 		lua_getfield(L, LUA_REGISTRYINDEX, LUA_PRELOAD_TABLE);

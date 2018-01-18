@@ -1,5 +1,5 @@
 #include "callback.h"
-#include "lua_helper.h"
+#include "fix_baselib.h"
 #include "lua_loader.h"
 #include "storm.h"
 #include "open_lua_engine.h"
@@ -21,39 +21,34 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 	{
 	public:
 		jass_state()
-			: state_(nullptr)
+			: L(nullptr)
 		{
 			register_game_reset_event([this](uintptr_t)
 			{
-				if (state_)
+				if (L)
 				{
-					lua_close(state_);
-					state_ = nullptr;
+					lua_close(L);
+					L = nullptr;
 				}
 			});
 		}
 
 		lua_State* get()
 		{
-			if (!state_) {
-				state_ = initialize();
-				luaL_dostring(state_, "(require 'jass.debugger').listen('127.0.0.1', 4278)");
+			if (!L) {
+				L = luaL_newstate2();
+				if (L) {
+					luaL_openlibs(L);
+					open_lua_engine(L);
+					runtime::initialize();
+					luaL_dostring(L, "(require 'jass.debugger').listen('127.0.0.1', 4278)");
+				}
 			}
-			return state_;
-		}
-
-	private:
-		lua_State* initialize()
-		{
-			lua_State* L = luaL_newstate2();
-			luaL_openlibs(L);
-			open_lua_engine(L);
-			runtime::initialize();
 			return L;
 		}
 
 	private:
-		lua_State* state_; 
+		lua_State* L; 
 	};
 	typedef singleton_nonthreadsafe<jass_state> jass_state_s;
 
