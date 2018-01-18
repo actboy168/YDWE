@@ -41,7 +41,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 					luaL_openlibs(L);
 					open_lua_engine(L);
 					runtime::initialize();
-					luaL_dostring(L, "(require 'jass.debugger').listen('127.0.0.1', 4278)");
+					luaL_dostring(L, "require 'jass.debugger'");
 				}
 			}
 			return L;
