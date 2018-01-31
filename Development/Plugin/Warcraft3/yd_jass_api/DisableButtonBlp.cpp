@@ -359,7 +359,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		real::SFileLoadFile = base::hook::iat(module_handle, "Storm.dll", (const char*)(279), (uintptr_t)fake::SFileLoadFile);
 		jass::japi_add((uintptr_t)EXDclareButtonIcon, "EXDclareButtonIcon", "(S)V");
 		jass::japi_add((uintptr_t)EXBlendButtonIcon, "EXBlendButtonIcon", "(SSS)B");
-		register_game_reset_event([&](uintptr_t)
+		event_game_reset([&]()
 		{
 			fake::g_virtualblp.clear();
 			fake::g_lastfilepath.clear();

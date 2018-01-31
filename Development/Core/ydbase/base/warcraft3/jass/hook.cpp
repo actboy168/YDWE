@@ -82,14 +82,13 @@ namespace warcraft3 { namespace jass {
 	}
 
 	namespace detail {
-
-		struct register_info
+		struct add_info
 		{
 			uintptr_t   func;
 			std::string name; 
 			std::string param;
 
-			register_info(uintptr_t f, const char* n, const char* p)
+			add_info(uintptr_t f, const char* n, const char* p)
 				: func(f)
 				, name(n)
 				, param(p)
@@ -98,22 +97,23 @@ namespace warcraft3 { namespace jass {
 
 		struct hook_info
 		{
-			std::string proc_name;
+			std::string name;
 			uintptr_t*  old_proc_ptr;
 			uintptr_t   new_proc;
 			bool        japi;
 
 			hook_info(const char* p, uintptr_t* o, uintptr_t n, bool j)
-				: proc_name(p)
+				: name(p)
 				, old_proc_ptr(o)
 				, new_proc(n)
 				, japi(j)
 			{ }
 		};
 
-		std::vector<register_info> register_info_list;
-		std::vector<hook_info>     hook_info_list;
-		std::vector<hook_info>     once_hook_info_list;
+		std::vector<add_info>  add_info_list;
+		std::vector<add_info>  once_add_info_list;
+		std::vector<hook_info> hook_info_list;
+		std::vector<hook_info> once_hook_info_list;
 		
 		uintptr_t search_register_func()
 		{
@@ -124,7 +124,12 @@ namespace warcraft3 { namespace jass {
 
 		void async_add(uintptr_t func, const char* name, const char* param)
 		{
-			register_info_list.push_back(register_info(func, name, param));
+			add_info_list.push_back(add_info(func, name, param));
+		}
+
+		void async_once_add(uintptr_t func, const char* name, const char* param)
+		{
+			once_add_info_list.push_back(add_info(func, name, param));
 		}
 
 		void async_hook(const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc, bool japi)
@@ -140,7 +145,7 @@ namespace warcraft3 { namespace jass {
 					return (
 						      (new_proc == h.new_proc)
 						   && (old_proc_ptr == h.old_proc_ptr)
-						   && (proc_name == h.proc_name)
+						   && (proc_name == h.name)
 						);
 				}
 			);
@@ -159,7 +164,7 @@ namespace warcraft3 { namespace jass {
 					return (
 							   (new_proc == h.new_proc)
 							&& (old_proc_ptr == h.old_proc_ptr)
-							&& (proc_name == h.proc_name)
+							&& (proc_name == h.name)
 						);
 				}
 			);
@@ -175,27 +180,33 @@ namespace warcraft3 { namespace jass {
 	{
 		japi_func_clean();
 		static uintptr_t register_func = detail::search_register_func();
-		foreach(detail::register_info const& it, detail::register_info_list)
+		foreach(detail::add_info const& it, detail::add_info_list)
 		{
 			fast_call<void>(register_func, it.func, it.name.c_str(), it.param.c_str());
 			japi_func_add(it.name.c_str(), it.func);
 		}
+		foreach(detail::add_info const& it, detail::once_add_info_list)
+		{
+			fast_call<void>(register_func, it.func, it.name.c_str(), it.param.c_str());
+			japi_func_add(it.name.c_str(), it.func);
+		}
+		detail::once_add_info_list.clear();
 	}
 
 	void nfunction_hook()
 	{
 		foreach(detail::hook_info const& it, detail::hook_info_list)
 		{
-			table_hook(it.proc_name.c_str(), it.old_proc_ptr, it.new_proc);
+			table_hook(it.name.c_str(), it.old_proc_ptr, it.new_proc);
 			if (it.japi) {
-				japi_func_add(it.proc_name.c_str(), it.new_proc);
+				japi_func_add(it.name.c_str(), it.new_proc);
 			}
 		}
 		foreach(detail::hook_info const& it, detail::once_hook_info_list)
 		{
-			table_hook(it.proc_name.c_str(), it.old_proc_ptr, it.new_proc);
+			table_hook(it.name.c_str(), it.old_proc_ptr, it.new_proc);
 			if (it.japi) {
-				japi_func_add(it.proc_name.c_str(), it.new_proc);
+				japi_func_add(it.name.c_str(), it.new_proc);
 			}
 		}
 		detail::once_hook_info_list.clear();
@@ -339,6 +350,13 @@ namespace warcraft3 { namespace jass {
 	{
 		detail::async_initialize();
 		detail::async_add(func, name, param);
+		return true;
+	}
+
+	bool japi_once_add(uintptr_t func, const char* name, const char* param)
+	{
+		detail::async_initialize();
+		detail::async_once_add(func, name, param);
 		return true;
 	}
 }}

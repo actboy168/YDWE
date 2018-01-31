@@ -17,40 +17,21 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 
-	class jass_state
+	static lua_State* mainL = 0;
+	static lua_State* getMainL()
 	{
-	public:
-		jass_state()
-			: L(nullptr)
-		{
-			register_game_reset_event([this](uintptr_t)
-			{
-				if (L)
-				{
-					lua_close(L);
-					L = nullptr;
-				}
-			});
-		}
-
-		lua_State* get()
-		{
-			if (!L) {
-				L = luaL_newstate2();
-				if (L) {
-					luaL_openlibs(L);
-					open_lua_engine(L);
-					runtime::initialize();
-					luaL_dostring(L, "require 'jass.debugger'");
-				}
+		if (!mainL) {
+			lua_State* L = luaL_newstate2();
+			if (L) {
+				luaL_openlibs(L);
+				open_lua_engine(L);
+				runtime::initialize();
+				luaL_dostring(L, "require 'jass.debugger'");
 			}
-			return L;
+			mainL = L;
 		}
-
-	private:
-		lua_State* L; 
-	};
-	typedef singleton_nonthreadsafe<jass_state> jass_state_s;
+		return mainL;
+	}
 
 	uintptr_t RealCheat = 0;
 	void __cdecl FakeCheat(jass::jstring_t cheat_str)
@@ -73,7 +54,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			{
 				cheat_s = cheat_s.substr(1, cheat_s.size() - 2);
 			}
-			lua_State* L = jass_state_s::instance().get();
+			lua_State* L = getMainL();
 			lua_getglobal(L, "require");
 			lua_pushlstring(L, cheat_s.data(), cheat_s.size());
 			safe_call(L, 1, 1, true);
@@ -82,10 +63,9 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		c_call<uint32_t>(RealCheat, cheat_str);
 	}
 
-
 	jass::jstring_t __cdecl EXExecuteScript(jass::jstring_t script)
 	{
-		lua_State* L = jass_state_s::instance().get();
+		lua_State* L = getMainL();
 
 		std::string str_script = format("return (%s)", jass::from_trigstring(jass::from_string(script)));
 		if (luaL_loadbuffer(L, str_script.c_str(), str_script.size(), str_script.c_str()) != LUA_OK)
@@ -111,7 +91,16 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 
 	void initialize()
 	{
-		jass::async_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
-		jass::japi_add((uintptr_t)EXExecuteScript, "EXExecuteScript", "(S)S");
+		event_game_reset([&]()
+		{
+			if (mainL)
+			{
+				lua_close(mainL);
+				mainL = 0;
+			}
+
+			jass::async_once_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
+			jass::japi_once_add((uintptr_t)EXExecuteScript, "EXExecuteScript", "(S)S");
+		});
 	}
 }}}}

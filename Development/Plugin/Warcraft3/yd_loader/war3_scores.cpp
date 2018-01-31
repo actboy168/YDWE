@@ -118,7 +118,7 @@ namespace scores {
 			jass::async_hook("InitGameCache", (uintptr_t*)&real::InitGameCache, (uintptr_t)fake::InitGameCache);
 			jass::async_hook("StoreInteger", (uintptr_t*)&real::StoreInteger, (uintptr_t)fake::StoreInteger);
 			jass::async_hook("GetStoredInteger", (uintptr_t*)&real::GetStoredInteger, (uintptr_t)fake::GetStoredInteger);
-			register_game_reset_event([&](uintptr_t)
+			event_game_reset([&]()
 			{
 				g_gc = 0;
 				g_dict = 0;

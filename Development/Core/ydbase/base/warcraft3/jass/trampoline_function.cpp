@@ -31,7 +31,7 @@ namespace base { namespace warcraft3 { namespace jass {
 		{
 			DO_ONCE_NOTHREADSAFE()
 			{
-				register_game_reset_event([&](uintptr_t)
+				event_game_reset([&]()
 				{
 					initialized = false;
 					trampoline_mapping.clear();
