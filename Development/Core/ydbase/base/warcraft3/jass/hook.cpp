@@ -165,36 +165,30 @@ namespace warcraft3 { namespace jass {
 
 		void async_initialize()
 		{
-			DO_ONCE_NOTHREADSAFE()
-			{
-				nf_register::initialize();
-
-				nf_register::event_add.connect([&]()
-				{
-					static uintptr_t register_func = search_register_func();
-
-					foreach (register_info const& it, register_info_list)
-					{
-						fast_call<void>(register_func, it.func, it.name.c_str(), it.param.c_str());
-					}
-				});
-
-				nf_register::event_hook.connect([&](uintptr_t)
-				{
-					foreach (hook_info const& it, hook_info_list)
-					{
-						table_hook(it.proc_name.c_str(), it.old_proc_ptr, it.new_proc);
-					}
-
-					foreach (hook_info const& it, once_hook_info_list)
-					{
-						table_hook(it.proc_name.c_str(), it.old_proc_ptr, it.new_proc);
-					}
-
-					once_hook_info_list.clear();
-				});
-			}
+			nf_register::initialize();
 		}
+	}
+
+	void nfunction_add()
+	{
+		static uintptr_t register_func = detail::search_register_func();
+		foreach(detail::register_info const& it, detail::register_info_list)
+		{
+			fast_call<void>(register_func, it.func, it.name.c_str(), it.param.c_str());
+		}
+	}
+
+	void nfunction_hook()
+	{
+		foreach(detail::hook_info const& it, detail::hook_info_list)
+		{
+			table_hook(it.proc_name.c_str(), it.old_proc_ptr, it.new_proc);
+		}
+		foreach(detail::hook_info const& it, detail::once_hook_info_list)
+		{
+			table_hook(it.proc_name.c_str(), it.old_proc_ptr, it.new_proc);
+		}
+		detail::once_hook_info_list.clear();
 	}
 
 	bool async_hook           (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)

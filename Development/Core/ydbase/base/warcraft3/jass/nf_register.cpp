@@ -5,7 +5,11 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
 
-namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
+namespace base { namespace warcraft3 { namespace jass { 
+	void nfunction_add();
+	void nfunction_hook();
+
+	namespace nf_register {
 
 	signal<void, uintptr_t> event_hook;
 	signal<void, void>      event_add;
@@ -37,6 +41,7 @@ namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 				{
 					stat = 0;
 					event_hook(retval);
+					nfunction_hook();
 				}
 			}
 		}
@@ -67,6 +72,7 @@ namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 				{
 					stat = 0;
 					event_hook(retval);
+					nfunction_hook();
 				}
 			}
 		}
@@ -97,6 +103,7 @@ namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 				{
 					stat = 0;
 					event_hook(retval);
+					nfunction_hook();
 				}
 			}
 		}
@@ -126,6 +133,7 @@ namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 				{
 					stat = 0;
 					event_hook(retval);
+					nfunction_hook();
 				}
 			}
 		}
@@ -145,6 +153,7 @@ namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
 			{
 				stat = 3;
 				event_add();
+				nfunction_add();
 			}
 		}
 
