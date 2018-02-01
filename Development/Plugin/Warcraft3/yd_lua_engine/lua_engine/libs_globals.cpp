@@ -30,7 +30,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace globals 
 			jassbind::push_real(L, value);
 			break;
 		case jass::OPCODE_VARIABLE_STRING:
-			jassbind::push_string(L, get_jass_vm()->string_table->get(value));
+			jassbind::push_string(L, value);
 			break;
 		case jass::OPCODE_VARIABLE_HANDLE:
 			jassbind::push_handle(L, value);

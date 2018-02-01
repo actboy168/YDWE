@@ -12,62 +12,9 @@
 #include "callback.h"
 #include "libs_runtime.h"
 #include "common.h"
+#include "lua_to_nativefunction.h"
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace hook {
-
-	template <class Base, int(Base::* extFunc)(lua_State*)>
-	struct lua_to_nativefunction : noncopyable
-	{
-		lua_to_nativefunction(lua_State* L, int luaobj, const jass::func_value* funcdef, Base* base)
-			: L(get_mainthread(L))
-			, funcdef(funcdef)
-			, luaobj(luaobj)
-			, funcentry((uintptr_t)code.data())
-			, base(base)
-		{
-			using namespace base::hook::assembler;
-			code.push(esi);
-			code.mov(esi, esp);
-			code.add(operand(esi), 8);
-			code.push(esi);
-			code.mov(ecx, (uintptr_t)this);
-			code.call(horrible_cast<uintptr_t>(&lua_to_nativefunction::lua_function), funcentry + code.size());
-			code.pop(esi);
-			code.ret();
-			if (!code.executable()) {
-				throw std::bad_alloc();
-			}
-		}
-
-		uintptr_t lua_function(const uintptr_t* paramlist)
-		{
-			size_t param_size = funcdef->get_param().size();
-
-			for (size_t i = 0; i < param_size; ++i)
-			{
-				if (funcdef->get_param()[i] == jass::TYPE_REAL)
-				{
-					jassbind::push_real_precise(L, paramlist[i] ? *(uintptr_t*)paramlist[i] : 0);
-				}
-				else
-				{
-					jass_push(L, funcdef->get_param()[i], paramlist[i]);
-				}
-			}
-			int n = (base->*extFunc)(L);
-			return safe_call_ref(L, luaobj, param_size + n, funcdef->get_return());
-		}
-
-		struct __declspec(align(32)) {
-			::base::hook::assembler::writer<32> code;
-#pragma warning(suppress:4201 4324)
-		};
-		lua_State*              L;
-		int                     luaobj;
-		const jass::func_value* funcdef;
-		uintptr_t               funcentry;
-		Base*                   base;
-	};
 
 	class jhook_t
 	{
@@ -130,14 +77,14 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace hook {
 			return jass_call_native_function(L, self->base_->funcdef, self->real_func_);
 		}
 
-		int push_real_function(lua_State* L)
+		static int push_real_function(lua_State* L, void* userdata)
 		{
-			lua_pushinteger(L, (uint32_t)(uintptr_t)this);
+			lua_pushinteger(L, (uint32_t)(uintptr_t)userdata);
 			lua_pushcclosure(L, call_real_function, 1);
 			return 1;
 		}
 
-		typedef lua_to_nativefunction<jhook_t, &jhook_t::push_real_function> nfunction;
+		typedef lua_to_nativefunction<jhook_t::push_real_function> nfunction;
 
 	private:
 		nfunction*  base_;

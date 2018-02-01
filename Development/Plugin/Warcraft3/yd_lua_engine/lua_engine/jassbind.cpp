@@ -57,6 +57,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		void             push_string(lua_State* L, jass::jstring_t value)
 		{
+			if (value < 0x10000) {
+				value = get_jass_vm()->string_table->get(value);
+			}
 			lua_pushstring(L, jass::from_trigstring(jass::from_string(value)));
 		}
 

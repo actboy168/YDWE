@@ -130,6 +130,7 @@
     <ClInclude Include="lua_engine\fix_baselib.h" />
     <ClInclude Include="lua_engine\lua_loader.h" />
     <ClInclude Include="lua_engine\lua_memfile.h" />
+    <ClInclude Include="lua_engine\lua_to_nativefunction.h" />
     <ClInclude Include="lua_engine\open_lua_engine.h" />
     <ClInclude Include="lua_engine\sha_1.h" />
     <ClInclude Include="lua_engine\storm.h" />

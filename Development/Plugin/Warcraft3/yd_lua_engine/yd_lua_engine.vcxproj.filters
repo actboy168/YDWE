@@ -148,6 +148,9 @@
     <ClInclude Include="lua_engine\fix_baselib.h">
       <Filter>lua_engine\main</Filter>
     </ClInclude>
+    <ClInclude Include="lua_engine\lua_to_nativefunction.h">
+      <Filter>lua_engine\misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="yd_lua_engine.def">
