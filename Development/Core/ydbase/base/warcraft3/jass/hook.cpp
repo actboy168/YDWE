@@ -120,7 +120,6 @@ namespace warcraft3 { namespace jass {
 		};
 
 		std::map<std::string, add_info>  add_info_list;
-		std::map<std::string, add_info>  once_add_info_list;
 		std::map<std::string, hook_info> hook_info_list;
 		std::map<std::string, hook_info> once_hook_info_list;
 		
@@ -134,11 +133,6 @@ namespace warcraft3 { namespace jass {
 		void async_add(uintptr_t func, const char* name, const char* param)
 		{
 			add_info_list[name].set(func, param);
-		}
-
-		void async_once_add(uintptr_t func, const char* name, const char* param)
-		{
-			once_add_info_list[name].set(func, param);
 		}
 
 		void async_hook(const char* name, uintptr_t* old_proc_ptr, uintptr_t new_proc, bool japi)
@@ -165,23 +159,24 @@ namespace warcraft3 { namespace jass {
 		{
 			nf_register::initialize();
 		}
+
+	}
+
+	bool japi_table_add(uintptr_t func, const char* name, const char* param)
+	{
+		static uintptr_t register_func = detail::search_register_func();
+		fast_call<void>(register_func, func, name, param);
+		japi_func_add(name, func);
+		return true;
 	}
 
 	void nfunction_add()
 	{
 		japi_func_clean();
-		static uintptr_t register_func = detail::search_register_func();
 		foreach(auto const& it, detail::add_info_list)
 		{
-			fast_call<void>(register_func, it.second.func, it.first.c_str(), it.second.param.c_str());
-			japi_func_add(it.first.c_str(), it.second.func);
+			japi_table_add(it.second.func, it.first.c_str(), it.second.param.c_str());
 		}
-		foreach(auto const& it, detail::once_add_info_list)
-		{
-			fast_call<void>(register_func, it.second.func, it.first.c_str(), it.second.param.c_str());
-			japi_func_add(it.first.c_str(), it.second.func);
-		}
-		detail::once_add_info_list.clear();
 	}
 
 	void nfunction_hook()
@@ -347,13 +342,6 @@ namespace warcraft3 { namespace jass {
 	{
 		detail::async_initialize();
 		detail::async_add(func, name, param);
-		return true;
-	}
-
-	bool japi_once_add(uintptr_t func, const char* name, const char* param)
-	{
-		detail::async_initialize();
-		detail::async_once_add(func, name, param);
 		return true;
 	}
 }}

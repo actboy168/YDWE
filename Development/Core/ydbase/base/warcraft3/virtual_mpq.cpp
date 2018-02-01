@@ -399,7 +399,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		return filesystem::SMemAlloc(n);
 	}
 
-	void watch(const std::string& filename, watch_cb callback, bool force)
+	void watch(const std::string& filename, bool force, watch_cb callback)
 	{
 		std::string ifilename(filename.size(), 0);
 		std::transform(filename.begin(), filename.end(), ifilename.begin(), [](unsigned char c) { return (unsigned char)tolower(c); });
