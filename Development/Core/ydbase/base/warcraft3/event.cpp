@@ -5,6 +5,6 @@ namespace base { namespace warcraft3 {
 	void event_game_reset(std::function<void()> func)
 	{
 		jass::nf_register::initialize();
-		jass::nf_register::event_hook.connect(func);
+		jass::nf_register::event_add.connect(func);
 	}
 }}

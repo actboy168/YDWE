@@ -27,10 +27,10 @@ namespace base { namespace warcraft3 { namespace jass {
 			&& (default_value == 0)
 			&& (strcmp(log_filename, "Jass.cpp") == 0))
 		{
-			stat = 1;
+			stat = stat == 3 ? 4 : 1;
 			thread_id = ::GetCurrentThreadId();
 		}
-		else if (stat == 3)
+		else if (stat == 6)
 		{
 			if (thread_id == ::GetCurrentThreadId())
 			{
@@ -58,10 +58,10 @@ namespace base { namespace warcraft3 { namespace jass {
 			&& (default_value == 0)
 			&& (strcmp(log_filename, ".\\Jass.cpp") == 0))
 		{
-			stat = 1;
+			stat = stat == 3 ? 4 : 1;
 			thread_id = ::GetCurrentThreadId();
 		}
-		else if (stat == 3)
+		else if (stat == 6)
 		{
 			if (thread_id == ::GetCurrentThreadId())
 			{
@@ -89,10 +89,10 @@ namespace base { namespace warcraft3 { namespace jass {
 			&& (default_value == 0)
 			&& (strcmp(log_filename, ".\\Jass.cpp") == 0))
 		{
-			stat = 1;
+			stat = stat == 3 ? 4 : 1;
 			thread_id = ::GetCurrentThreadId();
 		}
-		else if (stat == 3)
+		else if (stat == 6)
 		{
 			if (thread_id == ::GetCurrentThreadId())
 			{
@@ -119,10 +119,10 @@ namespace base { namespace warcraft3 { namespace jass {
 			&& (default_value == 0)
 			&& (strcmp(log_filename, "E:\\Drive1\\temp\\buildwar3x\\engine\\source\\Jass2\\Jass.cpp") == 0))
 		{
-			stat = 1;
+			stat = stat == 3 ? 4 : 1;
 			thread_id = ::GetCurrentThreadId();
 		}
-		else if (stat == 3)
+		else if (stat == 6)
 		{
 			if (thread_id == ::GetCurrentThreadId())
 			{
@@ -145,13 +145,17 @@ namespace base { namespace warcraft3 { namespace jass {
 	{
 		if ((stat != 0) && (thread_id == ::GetCurrentThreadId()))
 		{
-			if (stat == 1)
+			if (stat == 1 || stat == 4)
 			{
-				stat = 2;
+				stat++;
 			}
 			else if (stat == 2)
 			{
 				stat = 3;
+			}
+			else if (stat == 5)
+			{
+				stat = 6;
 				event_add();
 				nfunction_add();
 			}
