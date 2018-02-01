@@ -14,6 +14,7 @@
 #include <base/hook/fp_call.h>
 #include <base/util/string_view.h>	
 #include <base/util/string_algorithm.h>
+#include <base/warcraft3/virtual_mpq.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 
@@ -89,8 +90,37 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		return result;
 	}
 
+	static void initialize_lua()
+	{
+		const char* buf = 0;
+		size_t      len = 0;
+		if (storm_s::instance().load_file("script\\war3map.lua", (const void**)&buf, &len))
+		{
+			lua_State* L = getMainL();
+			if (luaL_loadbuffer(L, buf, len, buf) != LUA_OK) {
+				printf("%s\n", lua_tostring(L, -1));
+				lua_pop(L, 1);
+				storm_s::instance().unload_file(buf);
+				return;
+			}
+			safe_call(L, 0, 0, true);
+			storm_s::instance().unload_file(buf);
+		}
+
+		jass::table_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
+		jass::japi_table_add((uintptr_t)EXExecuteScript, "EXExecuteScript", "(S)S");
+	}
+
 	void initialize()
 	{
+		virtual_mpq::watch("war3map.j", true, [](const std::string&, const void**, uint32_t*, uint32_t)->bool {
+			if (!mainL)
+			{
+				initialize_lua();
+			}
+			return false;
+		});
+
 		event_game_reset([&]()
 		{
 			if (mainL)
@@ -98,9 +128,6 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 				lua_close(mainL);
 				mainL = 0;
 			}
-
-			jass::async_once_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
-			jass::japi_once_add((uintptr_t)EXExecuteScript, "EXExecuteScript", "(S)S");
 		});
 	}
 }}}}
