@@ -51,7 +51,7 @@ event.on('GameDll加载', function ()
         if not fs.is_directory(file) 
         and file:filename():string():lower() ~= 'yd_loader.dll'
         and file:extension():string():lower() == '.dll'
-        and cfg.Enable[file:filename():string()] ~= '0'
+        and (not cfg or cfg.Enable[file:filename():string()] ~= '0')
         then
             libs[#libs+1] = ll.load_library(file)
         end
