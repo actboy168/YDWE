@@ -18,6 +18,9 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 
+	static char tmpMapName[1024] = { 0 };
+	static char curMapName[1024] = { 0 };
+	static bool init = false;
 	static lua_State* mainL = 0;
 	static lua_State* getMainL()
 	{
@@ -115,11 +118,13 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 
 	void initialize()
 	{
-		virtual_mpq::watch("war3map.j", true, [](const std::string&, const void**, uint32_t*, uint32_t)->bool {
-			if (!mainL)
-			{
-				initialize_lua();
+		virtual_mpq::watch("war3map.j", true, [&](const std::string&, const void**, uint32_t*, uint32_t)->bool {
+			storm_s::instance().get_mpq_name(tmpMapName, sizeof tmpMapName - 1);
+			if (curMapName[0] && strcmp(curMapName, tmpMapName) == 0) {
+				return false;
 			}
+			strcpy(curMapName, tmpMapName);
+			initialize_lua();
 			return false;
 		});
 
@@ -130,6 +135,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 				lua_close(mainL);
 				mainL = 0;
 			}
+			curMapName[0] = 0;
 		});
 	}
 }}}}

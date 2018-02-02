@@ -24,6 +24,10 @@ namespace base { namespace warcraft3 {
 		fn_sfile_unload_file_ = get_proc(280); if (!(fn_sfile_unload_file_)) return false; 
 		fn_sfile_exists_      = get_proc(288); if (!(fn_sfile_exists_))      return false; 
 
+		fn_sfile_open_file_        = get_proc(267); if (!(fn_sfile_open_file_))        return false;
+		fn_sfile_close_file_       = get_proc(253); if (!(fn_sfile_close_file_))       return false;
+		fn_sfile_get_file_archive_ = get_proc(264); if (!(fn_sfile_get_file_archive_)) return false;
+		fn_sfile_get_archive_name_ = get_proc(275); if (!(fn_sfile_get_archive_name_)) return false;
 		return true;
 	}
 
@@ -58,5 +62,24 @@ namespace base { namespace warcraft3 {
 	uintptr_t storm_dll::get_proc(uint32_t ord)
 	{
 		return (uintptr_t)::GetProcAddress(mod_, (const char*)ord);
+	}
+
+	bool storm_dll::get_mpq_name(char* buf, size_t len)
+	{
+		HANDLE filehandle = 0;
+		HANDLE mpqhandle = 0;
+		if (!std_call<BOOL>(fn_sfile_open_file_, "war3map.j", &filehandle)) {
+			if (!std_call<BOOL>(fn_sfile_open_file_, "script\\war3map.j", &filehandle)) {
+				return false;
+			}
+		}
+		bool ok = false;
+		if (std_call<BOOL>(fn_sfile_get_file_archive_, filehandle, &mpqhandle)) {
+			if (std_call<BOOL>(fn_sfile_get_archive_name_, mpqhandle, buf, len)) {
+				ok = true;
+			}
+		}
+		std_call<BOOL>(fn_sfile_close_file_, filehandle);
+		return ok;
 	}
 }}

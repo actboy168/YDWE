@@ -18,6 +18,7 @@ namespace base { namespace warcraft3 {
 		bool unload_file(const void* buffer);
 		bool has_file(const char* file_name);
 		uintptr_t get_proc(uint32_t ord);
+		bool get_mpq_name(char* buf, size_t len);
 
 	private:
 		HMODULE   mod_;
@@ -25,6 +26,10 @@ namespace base { namespace warcraft3 {
 		uintptr_t fn_sfile_load_file_;
 		uintptr_t fn_sfile_unload_file_;
 		uintptr_t fn_sfile_exists_;
+		uintptr_t fn_sfile_open_file_;
+		uintptr_t fn_sfile_close_file_;
+		uintptr_t fn_sfile_get_file_archive_;
+		uintptr_t fn_sfile_get_archive_name_;
 	};
 
 	typedef singleton_nonthreadsafe<storm_dll> storm_s;
