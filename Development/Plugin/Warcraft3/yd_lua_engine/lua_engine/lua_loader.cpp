@@ -97,7 +97,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		if (storm_s::instance().load_file("script\\war3map.lua", (const void**)&buf, &len))
 		{
 			lua_State* L = getMainL();
-			if (luaL_loadbuffer(L, buf, len, buf) != LUA_OK) {
+			if (luaL_loadbuffer(L, buf, len, "@script\\war3map.lua") != LUA_OK) {
 				printf("%s\n", lua_tostring(L, -1));
 				lua_pop(L, 1);
 				storm_s::instance().unload_file(buf);
@@ -106,9 +106,11 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			safe_call(L, 0, 0, true);
 			storm_s::instance().unload_file(buf);
 		}
-
-		jass::table_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
-		jass::japi_table_add((uintptr_t)EXExecuteScript, "EXExecuteScript", "(S)S");
+		else
+		{
+			jass::table_hook("Cheat", (uintptr_t*)&RealCheat, (uintptr_t)FakeCheat);
+			jass::japi_table_add((uintptr_t)EXExecuteScript, "EXExecuteScript", "(S)S");
+		}
 	}
 
 	void initialize()
