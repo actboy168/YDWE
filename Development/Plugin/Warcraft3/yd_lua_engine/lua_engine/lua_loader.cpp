@@ -119,7 +119,9 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 	void initialize()
 	{
 		virtual_mpq::watch("war3map.j", true, [&](const std::string&, const void**, uint32_t*, uint32_t)->bool {
-			storm_s::instance().get_mpq_name(tmpMapName, sizeof tmpMapName - 1);
+			if (!storm_s::instance().get_mpq_name(tmpMapName, sizeof tmpMapName - 1)) {
+				return false;
+			}
 			if (curMapName[0] && strcmp(curMapName, tmpMapName) == 0) {
 				return false;
 			}
