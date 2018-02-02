@@ -27,10 +27,10 @@ namespace base { namespace warcraft3 { namespace jass {
 			&& (default_value == 0)
 			&& (strcmp(log_filename, "Jass.cpp") == 0))
 		{
-			stat = stat == 3 ? 4 : 1;
+			stat = 1;
 			thread_id = ::GetCurrentThreadId();
 		}
-		else if (stat == 6)
+		else if (stat == 3)
 		{
 			if (thread_id == ::GetCurrentThreadId())
 			{
