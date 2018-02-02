@@ -212,7 +212,6 @@ namespace base { namespace warcraft3 { namespace jass {
 		{
 			return false;
 		}
-
 		return japi_function.insert(std::make_pair(proc_name, func_value(*nf, new_proc))).second;
 	}
 

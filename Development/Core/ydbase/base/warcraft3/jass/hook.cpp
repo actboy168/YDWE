@@ -166,7 +166,7 @@ namespace warcraft3 { namespace jass {
 	{
 		static uintptr_t register_func = detail::search_register_func();
 		fast_call<void>(register_func, func, name, param);
-		japi_func_add(name, func);
+		japi_func_add(name, func, param);
 		return true;
 	}
 
