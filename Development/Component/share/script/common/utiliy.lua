@@ -76,8 +76,8 @@ function io.save(file_path, content)
 	end
 end
 
-function string.trim (self) 
-	return self:gsub("^%s*(.-)%s*$", "%1")
+local function trim(str) 
+	return str:gsub("^%s*(.-)%s*$", "%1")
 end
 
 function sys.spawn (command_line, current_dir, wait)
@@ -109,14 +109,14 @@ function sys.ini_load (path)
 	local tbl = {}
 	local section = nil
 	for line in f:lines() do
-		line = string.trim(line)
+		line = trim(line)
 		if string.sub(line,1,1) == "[" then
-			section = string.trim(string.sub(line, 2, string.len(line) - 1 ))
+			section = trim(string.sub(line, 2, string.len(line) - 1 ))
 			tbl[section] = {}
 		elseif string.sub(line,1,2) == "//" then
 		elseif line ~= "" then
-			local key = string.trim(string.sub(line, 1, string.find(line, "=") - 1))
-			local value = string.trim(string.sub(line, string.find(line, "=") + 1))
+			local key = trim(string.sub(line, 1, string.find(line, "=") - 1))
+			local value = trim(string.sub(line, string.find(line, "=") + 1))
 			tbl[section][key] = value or ""
 		end
 	end
@@ -129,7 +129,7 @@ function sys.ini_save (path, tbl)
 	for section, kv in pairs(tbl) do
 		f:write("[" .. section .. "]\n")
 		for key, value in pairs(kv) do
-			f:write(string.trim(key) .. " = " .. string.trim(value) .. "\n")
+			f:write(trim(key) .. " = " .. trim(value) .. "\n")
 		end
 	end
 	f:close()

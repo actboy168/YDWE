@@ -38,7 +38,7 @@ local function load_config()
 	local enable_ydtrigger = global_config["ThirdPartyPlugin"]["EnableYDTrigger"] ~= "0"
 	local enable_japi = is_enable_japi()
     for line in f:lines() do
-        line = string.trim(line) 
+        line = line:gsub("^%s*(.-)%s*$", "%1") 
 		if not enable_ydtrigger and line == 'ydtrigger' then
 			-- do nothing
 		elseif not enable_japi and line == 'japi' then
