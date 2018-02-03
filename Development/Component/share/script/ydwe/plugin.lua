@@ -2,10 +2,20 @@ local uni = require 'ffi.unicode'
 
 plugin = {}
 plugin.loaders = {}
-plugin.path = fs.ydwe_path() / "plugin"
 plugin.blacklist = { 'YDTileLimitBreaker', 'YDCustomObjectId' }
 
-function plugin.load (self, plugin_config_path)
+local getdevpath
+if fs.ydwe_path() == fs.ydwe_devpath() then
+    function getdevpath(path)
+        return path
+    end
+else
+    function getdevpath(path)
+        return fs.absolute(fs.uncomplete(path, fs.ydwe_path()), fs.ydwe_devpath())
+    end
+end
+
+function plugin:load(plugin_config_path)
 	log.trace("Load plugin config " .. plugin_config_path:string())
 	
 	local plugin_config = sys.ini_load(plugin_config_path)
@@ -43,7 +53,7 @@ function plugin.load (self, plugin_config_path)
 		log.error("Cannot find " .. plugin_name .. "'s loader.")
 		return 
 	end
-	plugin_loader_path = plugin_config_path:parent_path() / plugin_loader_path
+    plugin_loader_path = getdevpath(plugin_config_path:parent_path()) / plugin_loader_path
 	if not fs.exists(plugin_loader_path) then
 		log.error(plugin_name .. "'loader does not exist.")
 		return
@@ -85,7 +95,7 @@ function plugin.load (self, plugin_config_path)
 	return
 end
 
-function plugin.load_directory (self, plugin_dir)
+function plugin:load_directory(plugin_dir)
 	-- 遍历目录
 	for full_path in plugin_dir:list_directory() do
 		if fs.is_directory(full_path) then
@@ -96,11 +106,11 @@ function plugin.load_directory (self, plugin_dir)
 	end
 end
 
-function plugin.load_all (self)
-	self:load_directory(self.path)
+function plugin:load_all()
+	self:load_directory(fs.ydwe_path() / "plugin")
 end
 
-function plugin.unload_all (self)
+function plugin:unload_all()
 	for name, loader in pairs(self.loaders) do
 		log.trace("Unload plugin " .. name .. ".")
 		pcall(loader.unload)
