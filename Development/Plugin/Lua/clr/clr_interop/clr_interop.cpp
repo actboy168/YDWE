@@ -247,7 +247,7 @@ namespace clr {
 			return appdomain_;
 		}
 
-		operator mscorlib::_AppDomain*() const {
+		mscorlib::_AppDomain* get() const {
 			return appdomain_;
 		}
 
@@ -267,7 +267,7 @@ namespace clr {
 		return m_impl->operator bool();
 	}
 
-	appdomain::operator appdomain_impl*() const {
+	appdomain_impl* appdomain::get() const {
 		return m_impl;
 	}
 
@@ -362,7 +362,7 @@ namespace clr {
 	};
 
 	object::object(appdomain* appdomain, const wchar_t* assembly, const wchar_t* type)
-		: m_impl(new object_impl((mscorlib::_AppDomain*)(appdomain_impl*)appdomain, assembly, type))
+		: m_impl(new object_impl(appdomain->get()->get(), assembly, type))
 	{ }
 
 	object::~object() {

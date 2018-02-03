@@ -8,7 +8,7 @@ namespace clr {
 		appdomain(const wchar_t* version);
 		~appdomain();
 		operator bool() const;
-		operator appdomain_impl*() const;
+		appdomain_impl* get() const;
 
 	private:
 		appdomain_impl* m_impl;
