@@ -124,17 +124,6 @@ function sys.ini_load (path)
 	return tbl
 end
 
-function sys.ini_save (path, tbl)
-	local f = io.open(path, "w")
-	for section, kv in pairs(tbl) do
-		f:write("[" .. section .. "]\n")
-		for key, value in pairs(kv) do
-			f:write(trim(key) .. " = " .. trim(value) .. "\n")
-		end
-	end
-	f:close()
-end
-
 local ffi = require 'ffi'
 ffi.cdef[[
     const wchar_t* __stdcall GetCommandLineW();
