@@ -14,11 +14,9 @@ namespace YDColorizer
     {
         private static string ReadLocalFile(string lpszFileName)
         {
-            // TODO: 和ydwe的加载方式保持一致
-            string mpqdir = Config.GetThisMoudlePath() + "\\..\\..\\share\\mpq\\units\\";
             try
             {
-                return File.ReadAllText(mpqdir + lpszFileName, Encoding.UTF8);
+                return File.ReadAllText(Config.GetThisMoudlePath() + "\\" + lpszFileName, Encoding.UTF8);
             }
             catch (Exception)
             {
@@ -55,37 +53,16 @@ namespace YDColorizer
         public static List<string> LoadSearchTitles()
         {
             List<string> dialogBoxTitles = new List<string>();
-            //string text_ = ReadMpqFile("UI\\WorldEditStrings.txt");
-            string text_ = ReadLocalFile("UI\\WorldEditStrings.txt");
+            string text_ = ReadLocalFile("title.txt");
             
             if (text_ != null)
-            {
-                // WESTRING_COD_TYPE_STRING=字符串
-                // WESTRING_UE_DLG_EDITVALUE=编辑单位值 - %s
-                // WESTRING_IE_DLG_EDITVALUE=编辑物品值 - %s
-                // WESTRING_AE_DLG_EDITVALUE=编辑技能值 - %s
-                // WESTRING_FE_DLG_EDITVALUE=编辑效果值 - %s
-                // WESTRING_BE_DLG_EDITVALUE=编辑可破坏物值 - %s
-                // WESTRING_DE_DLG_EDITVALUE=编辑装饰物值 - %s
-                // WESTRING_GE_DLG_EDITVALUE=编辑科技值 - %s
+            {                
+                var arr = text_.Split(Environment.NewLine.ToCharArray());
 
-                Ini.Section s = (new Ini(text_)).GetSection("WorldEditStrings");
-                string WESTRING_COD_TYPE_STRING = s.GetKeyString("WESTRING_COD_TYPE_STRING");
-                string WESTRING_UE_DLG_EDITVALUE = s.GetKeyString("WESTRING_UE_DLG_EDITVALUE");
-                string WESTRING_IE_DLG_EDITVALUE = s.GetKeyString("WESTRING_IE_DLG_EDITVALUE");
-                string WESTRING_AE_DLG_EDITVALUE = s.GetKeyString("WESTRING_AE_DLG_EDITVALUE");
-                string WESTRING_FE_DLG_EDITVALUE = s.GetKeyString("WESTRING_FE_DLG_EDITVALUE");
-                string WESTRING_BE_DLG_EDITVALUE = s.GetKeyString("WESTRING_BE_DLG_EDITVALUE");
-                string WESTRING_DE_DLG_EDITVALUE = s.GetKeyString("WESTRING_DE_DLG_EDITVALUE");
-                string WESTRING_GE_DLG_EDITVALUE = s.GetKeyString("WESTRING_GE_DLG_EDITVALUE");
-
-                dialogBoxTitles.Add(Format(WESTRING_UE_DLG_EDITVALUE, WESTRING_COD_TYPE_STRING));
-                dialogBoxTitles.Add(Format(WESTRING_IE_DLG_EDITVALUE, WESTRING_COD_TYPE_STRING));
-                dialogBoxTitles.Add(Format(WESTRING_AE_DLG_EDITVALUE, WESTRING_COD_TYPE_STRING));
-                dialogBoxTitles.Add(Format(WESTRING_FE_DLG_EDITVALUE, WESTRING_COD_TYPE_STRING));
-                dialogBoxTitles.Add(Format(WESTRING_BE_DLG_EDITVALUE, WESTRING_COD_TYPE_STRING));
-                dialogBoxTitles.Add(Format(WESTRING_DE_DLG_EDITVALUE, WESTRING_COD_TYPE_STRING));
-                dialogBoxTitles.Add(Format(WESTRING_GE_DLG_EDITVALUE, WESTRING_COD_TYPE_STRING));
+                foreach (var str in arr)
+                {
+                    dialogBoxTitles.Add(str);
+                }
             }
 
             return dialogBoxTitles;

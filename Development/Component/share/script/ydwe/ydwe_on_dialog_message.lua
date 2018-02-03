@@ -1,7 +1,5 @@
-local mpqloader = require 'mpqloader'
-local w3xparser = require 'w3xparser'
-local wes = w3xparser.ini(mpqloader:load(fs.ydwe_path() / "share" / "mpq", "ui/worldeditstrings.txt"))
-local WESTRING_MODIFYTEXTURES = wes['WorldEditStrings']['WESTRING_MODIFYTEXTURES']
+local wes = require 'WEString'
+local WESTRING_MODIFYTEXTURES = wes.WESTRING_MODIFYTEXTURES
 local tiledialog = 0
 
 function event.EVENT_DIALOG_MESSAGE(event_data)
