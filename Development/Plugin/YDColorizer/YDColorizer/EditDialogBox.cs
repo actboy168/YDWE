@@ -1,4 +1,5 @@
-﻿using System;
+﻿using WinApi;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -234,7 +235,7 @@ namespace YDColorizer
         /// <param name="e"></param>
         private void btnSelectColor_Click(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
+            System.Windows.Forms.Button btn = sender as System.Windows.Forms.Button;
             ColorPicker colorPicker = new ColorPicker(btn);
             colorPicker.SelectedColorChanged += new EventHandler((object_sender, EventArgs_e) =>
             {
@@ -254,7 +255,7 @@ namespace YDColorizer
         {
             if (e.Button == MouseButtons.Left)// 选取颜色
             {
-                Button btn = sender as Button;
+                System.Windows.Forms.Button btn = sender as System.Windows.Forms.Button;
                 ColorPicker colorPicker = new ColorPicker(btn);
                 colorPicker.SelectedColorChanged += new EventHandler((object_sender, EventArgs_e) =>
                 {
@@ -266,7 +267,7 @@ namespace YDColorizer
             }
             else// 交换颜色
             {
-                Button btn = sender as Button;
+                System.Windows.Forms.Button btn = sender as System.Windows.Forms.Button;
                 Color temp = btn.BackColor;
                 btn.BackColor = btn1stColor.BackColor;
                 btn1stColor.BackColor = temp;
