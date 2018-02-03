@@ -279,7 +279,13 @@ namespace luafs {
 			FS_TRY;
 			const fs::path& self = path::to(L, 1);
 			const fs::path& rht = path::to(L, 2);
-			lua_pushboolean(L, fs::equivalent(self, rht));
+			std::error_code ec;
+			bool r = fs::equivalent(self, rht, ec);
+			if (ec) {
+				lua_pushboolean(L, r);
+				return 1;
+			}
+			lua_pushboolean(L, base::path::equal(self, rht));
 			return 1;
 			FS_TRY_END;
 		}
