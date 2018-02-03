@@ -92,6 +92,10 @@ function inject_code:compile(op)
 	return self:do_inject(op, self:detect(op))
 end
 
+local function trim(str) 
+	return str:gsub("^%s*(.-)%s*$", "%1")
+end
+
 -- 扫描注入代码
 -- config_dir - 需要扫描的路径
 -- 返回值无，修改全局变量inject_code_table_new以及inject_code_table_old
@@ -120,7 +124,7 @@ function inject_code:scan(config_dir)
 			-- 循环处理每一行
 			for line in io.lines(full_path) do
 				-- 插入函数名
-				local trimed = line:trim()
+				local trimed = trim(line)
 				if trimed ~= "" and trimed:sub(1, 1) ~= "#" then
 					if trimed == "[general]" then
 						state = 0
