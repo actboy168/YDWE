@@ -41,7 +41,6 @@ namespace NYDWE {
 	int32_t WINAPI DetourWeWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR commandLine, int32_t showCommand)
 	{
 		LOGGING_INFO(lg) << "Entering main program.";
-		LOGGING_DEBUG(lg) << "Command line: " << (commandLine ? commandLine : "NULL");
 
 		// Initialize COM	   
 		base::com::guard com;
