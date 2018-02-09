@@ -1,6 +1,7 @@
 
 local ffi = require 'ffi'
 local hk = require 'hook'
+local ll = require 'ffi.loadlibrary'
 
 hk.initialize(ffi.new)
 
