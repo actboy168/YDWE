@@ -7,7 +7,7 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine { 
 namespace debugger {
-	int open(lua_State* L);
+	int open(lua_State* L, int port);
 }
 namespace runtime	{
 	int  version = 3;
@@ -214,9 +214,9 @@ namespace runtime	{
 		}
 		else if (strcmp("debugger", name) == 0)
 		{
-			if (!enable_debugger && lua_toboolean(L, 3))
+			if (!enable_debugger && lua_isinteger(L, 3))
 			{
-				if (debugger::open(L)) {
+				if (debugger::open(L, (int)lua_tointeger(L, 3))) {
 					luaL_ref(L, LUA_REGISTRYINDEX);
 					enable_debugger = true;
 				}

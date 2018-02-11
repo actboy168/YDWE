@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <functional>
 #include <base/filesystem.h>
-#include <base/warcraft3/command_line.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger {
 
@@ -186,22 +185,12 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger
 		}
 		return std::wstring(buf, len);
 	}
-	static int stoi(const std::wstring& s, int def) {
-		try { return std::stoi(s); }
-		catch (...) {}
-		return def;
-	}
 
 #define DoString(L, s, n) \
 	(luaL_loadbuffer(L, s, sizeof(s) - 1, "module '" #s "'") || (lua_insert(L, -(n)-1), lua_pcall(L, n, LUA_MULTRET, 0)))
 
-	int open(lua_State* L)
+	int open(lua_State* L, int port)
 	{
-		int port = 4278;
-		base::warcraft3::command_line cmd;
-		if (cmd.has(L"debugger")) {
-			port = stoi(cmd[L"debugger"], 4278);
-		}
 		HMODULE m = GetModuleHandleW(L"debugger.dll");
 		if (!m) {
 			fs::path path = fs::path(QueryProcessPath(L"vscode-lua-debug.exe")).remove_filename() / L"debugger.dll";
