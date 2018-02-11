@@ -166,6 +166,10 @@ end
 function event.EVENT_WE_START(event_data)
 	log.debug("********************* on startup start *********************")
 	
+    if fs.ydwe_path() ~= fs.ydwe_devpath() then
+        require 'debugger'
+    end
+
 	-- 读取版本
 	ydwe_version = sys.version { file = fs.ydwe_path() / "ydwe.exe" }
 	war3_version = sys.war3_version { file = fs.war3_path() / "game.dll" }
