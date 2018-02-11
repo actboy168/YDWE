@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="luaopen_ffi_hook.cpp">
+    <ClCompile Include="luaopen_hook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

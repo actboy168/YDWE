@@ -101,6 +101,9 @@
     <ProjectReference Include="$(YDWE)\Core\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\OpenSource\Lua\build\lua53.vcxproj">
+      <Project>{b84f7231-16ce-41d8-8c08-7b523ff4225b}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc" />

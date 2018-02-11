@@ -62,7 +62,6 @@
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>event.def</ModuleDefinitionFile>
-      <AdditionalDependencies>luacore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,7 +79,6 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>event.def</ModuleDefinitionFile>
-      <AdditionalDependencies>luacore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -96,6 +94,9 @@
     <ClInclude Include="YDWELogger.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OpenSource\Lua\build\lua53.vcxproj">
+      <Project>{b84f7231-16ce-41d8-8c08-7b523ff4225b}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Core\LuaEngine\LuaEngine.vcxproj">
       <Project>{42def9a2-d658-4984-aa00-073b9cc03552}</Project>
     </ProjectReference>

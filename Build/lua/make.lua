@@ -163,7 +163,7 @@ if tonumber(msvc.version) < 150 then
 else
 	copy_ucrt_dll()
 end
-fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / configuration / 'luacore.dll', path.Result / 'bin' / 'luacore.dll', true)
+fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / configuration / 'lua53.dll', path.Result / 'bin' / 'lua53.dll', true)
 fs.copy_file(path.OpenSource / 'StormLib' / 'bin' / 'Win32' / configuration / 'StormLib.dll', path.Result / 'bin' / 'StormLib.dll', true)
 fs.copy_file(path.OpenSource / 'minizip' / 'bin' / configuration / 'minizip.dll', path.Result / 'bin' / 'minizip.dll', true)
 fs.copy_file(path.OpenSource / 'luaffi' / 'bin' / configuration / 'ffi.dll', path.Result / 'bin' / 'modules' / 'ffi.dll', true)

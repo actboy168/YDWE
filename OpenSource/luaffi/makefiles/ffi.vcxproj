@@ -26,6 +26,11 @@
     <ClInclude Include="..\src\msvc\stdbool.h" />
     <ClInclude Include="..\src\msvc\stdint.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Lua\build\lua53.vcxproj">
+      <Project>{b84f7231-16ce-41d8-8c08-7b523ff4225b}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{076A366B-6B75-4D35-A6A9-CA680F0771E3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -81,7 +86,6 @@
     <Lib />
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)..\..\Lua\build\bin\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>luacore.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
@@ -105,7 +109,6 @@
     <Lib />
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)..\..\Lua\build\bin\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>luacore.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
