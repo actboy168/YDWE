@@ -195,6 +195,9 @@ namespace NYDWE {
 	uintptr_t pgTrueWeWindowProc;
 	LRESULT CALLBACK DetourWeWindowProc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam)
 	{
+		if (message != WM_COMMAND) {
+			return base::std_call<LRESULT>(pgTrueWeWindowProc, windowHandle, message, wParam, lParam);
+		}
 		int results = event_array[EVENT_WINDOW_MESSAGE]([&](lua_State* L, int idx){
 			lua_pushstring(L, "handle");
 			lua_pushinteger(L, (lua_Integer)windowHandle);
