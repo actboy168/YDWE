@@ -5,10 +5,15 @@
 #include <cstring>
 #include "libs_runtime.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime	{
+namespace base { namespace warcraft3 { namespace lua_engine { 
+namespace debugger {
+	int open(lua_State* L);
+}
+namespace runtime	{
 	int  version = 3;
 	int  handle_level = 2;
 	bool enable_console = false;
+	bool enable_debugger = false;
 	bool sleep = false;
 	bool catch_crash = true;
 
@@ -207,6 +212,16 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime	
 				console::disable();
 			}
 		}
+		else if (strcmp("debugger", name) == 0)
+		{
+			if (!enable_debugger && lua_toboolean(L, 3))
+			{
+				if (debugger::open(L)) {
+					luaL_ref(L, LUA_REGISTRYINDEX);
+					enable_debugger = true;
+				}
+			}
+		}
 		else if (strcmp("sleep", name) == 0)
 		{
 			sleep = !!lua_toboolean(L, 3);
@@ -240,6 +255,11 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace runtime	
 		else if (strcmp("console", name) == 0)
 		{
 			lua_pushboolean(L, enable_console);
+			return 1;
+		}
+		else if (strcmp("debugger", name) == 0)
+		{
+			lua_pushboolean(L, enable_debugger);
 			return 1;
 		}
 		else if (strcmp("sleep", name) == 0)

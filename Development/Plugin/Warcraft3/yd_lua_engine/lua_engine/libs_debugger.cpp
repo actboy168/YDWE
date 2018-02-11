@@ -197,11 +197,11 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger
 
 	int open(lua_State* L)
 	{
+		int port = 4278;
 		base::warcraft3::command_line cmd;
-		if (!cmd.has(L"debugger")) {
-			return 0;
+		if (cmd.has(L"debugger")) {
+			port = stoi(cmd[L"debugger"], 4278);
 		}
-		int port = stoi(cmd[L"debugger"], 4278);
 		HMODULE m = GetModuleHandleW(L"debugger.dll");
 		if (!m) {
 			fs::path path = fs::path(QueryProcessPath(L"vscode-lua-debug.exe")).remove_filename() / L"debugger.dll";
