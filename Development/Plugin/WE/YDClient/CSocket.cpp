@@ -11,7 +11,7 @@ CSocket::CSocket()
 
 CSocket::~CSocket() 
 {
-	WSACleanup();
+	//WSACleanup();
 }
 
 bool CSocket::init()
