@@ -41,7 +41,7 @@ local function check_conflicting_ui()
 	end
 	
 	if found then
-		if gui.yesno_message(nil, string.format(LNG.DELETE_DANGER_DIR, 'UI'), LNG.YDWE) then
+		if gui.yesno_message(nil, string.format(LNG.DELETE_DANGER_DIR, 'UI'), 'YDWE') then
 			for index, file in ipairs(file_list) do			
 				log.debug("remove file " .. (fs.war3_path() / file):string())
 				pcall(fs.remove_all, fs.war3_path() / file)
