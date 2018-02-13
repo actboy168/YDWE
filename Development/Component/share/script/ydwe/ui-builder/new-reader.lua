@@ -71,6 +71,7 @@ function mt:read_ui(loader, lang, type)
         end,
     })
     lni(buf, type .. '.txt', t)
+    lni(buf, type .. '.txt', {t})
     savelast()
 end
 
