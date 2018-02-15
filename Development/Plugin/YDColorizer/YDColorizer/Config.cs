@@ -142,30 +142,6 @@ namespace YDColorizer
             }
         }
 
-        /// <summary>
-        /// 是否显示托盘图标
-        /// </summary>
-        /// <returns></returns>
-        public static bool IsNotifyIconVisible()
-        {
-            int visible = WinApi.Ini.GetInt(GetConfigPath(), "Application", "NotifyIcon");
-            return visible == 0 ? false : true;
-        }
-
-        /// <summary>
-        /// 读取配置文件中设置的语言
-        /// </summary>
-        /// <returns>0：简体；1：繁体</returns>
-        public static int GetLanguage()
-        {
-            int language = WinApi.Ini.GetInt(GetConfigPath(), "Application", "Language");
-            if (language != 1)
-            {
-                return 0;// 默认简体
-            }
-            return language;// 繁体
-        }
-
         public static void CreateDefault()
         {
             using (StreamWriter sw = new StreamWriter(GetConfigPath(), false, Encoding.Default))
@@ -173,10 +149,6 @@ namespace YDColorizer
                 sw.WriteLine("[YDColorizerConfig]");
                 sw.WriteLine("; 这是YDColorizer的配置文件，请勿随意修改");
                 sw.WriteLine("[Application]");
-                sw.WriteLine("Language=0");
-                sw.WriteLine("; 语言,0->简体中文,1->繁体中文");
-                sw.WriteLine("NotifyIcon=0");
-                sw.WriteLine("; 托盘图标,0->不显示,非0->显示");
                 sw.WriteLine("RememberSize=0");
                 sw.WriteLine("; 记住上次的窗口大小，0->不记，非0->记");
                 sw.WriteLine("Width=400");

@@ -144,33 +144,15 @@ namespace YDColorizer
 
             #region 初始化提示
             ToolTip toolTip = new ToolTip();
-            switch (Program.language)
-            {
-                case 0:
-                    toolTip.SetToolTip(this.btn1stColor, "点击以选择主颜色");
-                    toolTip.SetToolTip(this.btn2ndColor, "点击鼠标左键以选取颜色" + Environment.NewLine + "点击鼠标右键以与主颜色交换颜色");
-                    toolTip.SetToolTip(this.btn3rdColor, "点击鼠标左键以选取颜色" + Environment.NewLine + "点击鼠标右键以与主颜色交换颜色");
-                    toolTip.SetToolTip(this.btn4thColor, "点击鼠标左键以选取颜色" + Environment.NewLine + "点击鼠标右键以与主颜色交换颜色");
-                    toolTip.SetToolTip(this.btnSetColor, "点击以设置选择文本的颜色");
-                    toolTip.SetToolTip(this.btnGradual, "点击以使用主颜色和第一候选色对选择文本进行渐变");
-                    toolTip.SetToolTip(this.btnUndo, "撤销" + Environment.NewLine + "(Ctrl+Z)");
-                    toolTip.SetToolTip(this.btnRedo, "重做" + Environment.NewLine + "(Ctrl+Y)");
-                    toolTip.SetToolTip(this.btnOk, "快捷键Ctrl+Enter");
-                    break;
-                case 1:
-                    toolTip.SetToolTip(this.btn1stColor, "點擊以選擇主顏色");
-                    toolTip.SetToolTip(this.btn2ndColor, "點擊鼠標左鍵以選取顏色" + Environment.NewLine + "點擊鼠標右鍵以與主顏色交換顏色");
-                    toolTip.SetToolTip(this.btn3rdColor, "點擊鼠標左鍵以選取顏色" + Environment.NewLine + "點擊鼠標右鍵以與主顏色交換顏色");
-                    toolTip.SetToolTip(this.btn4thColor, "點擊鼠標左鍵以選取顏色" + Environment.NewLine + "點擊鼠標右鍵以與主顏色交換顏色");
-                    toolTip.SetToolTip(this.btnSetColor, "點擊以設置選擇文本的顏色");
-                    toolTip.SetToolTip(this.btnGradual, "點擊以使用主顏色和第一候選色對選擇文本進行漸變");
-                    toolTip.SetToolTip(this.btnUndo, "撤銷" + Environment.NewLine + "(Ctrl+Z)");
-                    toolTip.SetToolTip(this.btnRedo, "重做" + Environment.NewLine + "(Ctrl+Y)");
-                    toolTip.SetToolTip(this.btnOk, "快捷鍵Ctrl+Enter");
-                    break;
-                default:
-                    break;
-            }
+            toolTip.SetToolTip(this.btn1stColor, "点击以选择主颜色");
+            toolTip.SetToolTip(this.btn2ndColor, "点击鼠标左键以选取颜色" + Environment.NewLine + "点击鼠标右键以与主颜色交换颜色");
+            toolTip.SetToolTip(this.btn3rdColor, "点击鼠标左键以选取颜色" + Environment.NewLine + "点击鼠标右键以与主颜色交换颜色");
+            toolTip.SetToolTip(this.btn4thColor, "点击鼠标左键以选取颜色" + Environment.NewLine + "点击鼠标右键以与主颜色交换颜色");
+            toolTip.SetToolTip(this.btnSetColor, "点击以设置选择文本的颜色");
+            toolTip.SetToolTip(this.btnGradual, "点击以使用主颜色和第一候选色对选择文本进行渐变");
+            toolTip.SetToolTip(this.btnUndo, "撤销" + Environment.NewLine + "(Ctrl+Z)");
+            toolTip.SetToolTip(this.btnRedo, "重做" + Environment.NewLine + "(Ctrl+Y)");
+            toolTip.SetToolTip(this.btnOk, "快捷键Ctrl+Enter");
             #endregion
 
             //this.Activate();// 激活当前窗口
@@ -181,24 +163,9 @@ namespace YDColorizer
             #region 检查'}'
             if (this.txtEdit.Text.Contains("}") == true)// 存在'}'
             {
-                switch (Program.language)
+                if (MessageBox.Show("字符串：" + Environment.NewLine + this.txtEdit.Text.Substring(this.txtEdit.Text.IndexOf('}')) + Environment.NewLine + "将会丢失，是否仍要确定？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 {
-                    case 0:
-                        {
-                            if (MessageBox.Show("字符串：" + Environment.NewLine + this.txtEdit.Text.Substring(this.txtEdit.Text.IndexOf('}')) + Environment.NewLine + "将会丢失，是否仍要确定？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                            {
-                                return;
-                            }
-                            break;
-                        }
-                    case 1:
-                        {
-                            if (MessageBox.Show("字符串：" + Environment.NewLine + this.txtEdit.Text.Substring(this.txtEdit.Text.IndexOf('}')) + Environment.NewLine + "將會丟失，是否仍要確定？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                            {
-                                return;
-                            }
-                            break;
-                        }
+                    return;
                 }
             }
             #endregion
@@ -370,16 +337,6 @@ namespace YDColorizer
                 cm.MenuItems.Add(new MenuItem("删除", new EventHandler((object object_sender, EventArgs EventArgs_e) => { this.txtPreview.SelectedText = string.Empty; })) { Enabled = (this.txtPreview.SelectionLength > 0) });
                 cm.MenuItems.Add(new MenuItem("全选", new EventHandler((object object_sender, EventArgs EventArgs_e) => { this.txtPreview.SelectAll(); })));
                 cm.Show(this.txtPreview, e.Location);
-            }
-        }
-
-        private void btnSetting_Click(object sender, EventArgs e)
-        {
-            using (SettingForm sf = new SettingForm())
-            {
-                this.TopMost = false;
-                sf.ShowDialog();
-                this.TopMost = true;
             }
         }
 

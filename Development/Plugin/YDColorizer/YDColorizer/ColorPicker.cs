@@ -110,23 +110,9 @@ namespace YDColorizer
                     btnColor[i, j].Height = 12;
                     btnColor[i, j].FlatStyle = FlatStyle.Flat;// 设置按钮风格
                     btnColor[i, j].TabStop = false;// 禁止使用Tab获得焦点
-
-                    switch (Program.language)
-                    {
-                        case 0:
-                            btnColor[i, j].BackColor = colorSetChs[i, j].color;// 设置颜色
-                            toolTip.SetToolTip(btnColor[i, j], colorSetChs[i, j].name + Environment.NewLine + "(" + colorSetChs[i, j].color.R + "," + colorSetChs[i, j].color.G + "," + colorSetChs[i, j].color.B + ")");// 设置说明文本
-                            break;
-                        case 1:
-                            btnColor[i, j].BackColor = colorSetCht[i, j].color;// 设置颜色
-                            toolTip.SetToolTip(btnColor[i, j], colorSetCht[i, j].name + Environment.NewLine + "(" + colorSetCht[i, j].color.R + "," + colorSetCht[i, j].color.G + "," + colorSetCht[i, j].color.B + ")");// 设置说明文本
-                            break;
-                        default:
-                            break;
-                    }
-
+                    btnColor[i, j].BackColor = colorSetChs[i, j].color;// 设置颜色
                     btnColor[i, j].Click += new EventHandler(btn_Click);
-
+                    toolTip.SetToolTip(btnColor[i, j], colorSetChs[i, j].name + Environment.NewLine + "(" + colorSetChs[i, j].color.R + "," + colorSetChs[i, j].color.G + "," + colorSetChs[i, j].color.B + ")");// 设置说明文本
                     pnl.Controls.Add(btnColor[i, j]);
                 }
             }
@@ -134,19 +120,8 @@ namespace YDColorizer
 
             #region 其他颜色
             btnOtherColor = new Button();
-            switch (Program.language)
-            {
-                case 0:
-                    btnOtherColor.Text = "其他颜色";
-                    toolTip.SetToolTip(btnOtherColor, "选择其他颜色");
-                    break;
-                case 1:
-                    btnOtherColor.Text = "其他顏色";
-                    toolTip.SetToolTip(btnOtherColor, "選擇其他顏色");
-                    break;
-                default:
-                    break;
-            }
+            btnOtherColor.Text = "其他颜色";
+            toolTip.SetToolTip(btnOtherColor, "选择其他颜色");
             btnOtherColor.Left = 6;
             btnOtherColor.Top = 96;
             btnOtherColor.Width = 138;
@@ -163,19 +138,8 @@ namespace YDColorizer
             #endregion
             #region 屏幕取色
             btnScreenColor = new Button();
-            switch (Program.language)
-            {
-                case 0:
-                    btnScreenColor.Text = "屏幕取色";
-                    toolTip.SetToolTip(btnScreenColor, "选取屏幕上一点的颜色");
-                    break;
-                case 1:
-                    btnScreenColor.Text = "屏幕取色";
-                    toolTip.SetToolTip(btnScreenColor, "選取屏幕上一點的顏色");
-                    break;
-                default:
-                    break;
-            }
+            btnScreenColor.Text = "屏幕取色";
+            toolTip.SetToolTip(btnScreenColor, "选取屏幕上一点的颜色");
             btnScreenColor.Left = 6;
             btnScreenColor.Top = 125;
             btnScreenColor.Width = 138;

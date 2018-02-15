@@ -6,6 +6,5 @@ namespace YDColorizer
 {
     static class Program
     {
-        public static int language = 0;
     }
 }

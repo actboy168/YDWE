@@ -25,27 +25,6 @@ namespace YDColorizer
             }
         }
 
-        private static string ReadMpqFile(string lpszFileName)
-        {
-            IntPtr ptr_buf_ = IntPtr.Zero;
-            int size_ = 0;
-            SFileLoadFile(lpszFileName, out ptr_buf_, out size_, 0, 0);
-            if (size_ == 0)
-            {
-                return null;
-            }
-
-            byte[] buf_ = new byte[size_];
-            Marshal.Copy(ptr_buf_, buf_, 0, size_);
-            SFileUnloadFile(ptr_buf_);
-            return Encoding.UTF8.GetString(buf_);
-        }
-
-        private static string Format(string format_, string arg_)
-        {
-            return Regex.Replace(format_, @"(\%s)", arg_, RegexOptions.Compiled);
-        }
-
         /// <summary>
         /// 加载搜索的标题
         /// </summary>
@@ -67,10 +46,5 @@ namespace YDColorizer
 
             return dialogBoxTitles;
         }
-
-        [DllImport("Storm.dll", EntryPoint = "#279", CharSet = CharSet.Ansi, SetLastError = true)]
-        private static extern int SFileLoadFile(string lpszFileName, out IntPtr pBuf, out int nSize, int nUnknownA, int nUnknownB);
-        [DllImport("Storm.dll", EntryPoint = "#280", CharSet = CharSet.Ansi, SetLastError = true)]
-        private static extern int SFileUnloadFile(IntPtr pBuf);
     }
 }
