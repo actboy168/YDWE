@@ -1,5 +1,0 @@
-LIBRARY "YDTileLimitBreaker"
-EXPORTS
-	PluginName
-	PluginStart
-	PluginStop
