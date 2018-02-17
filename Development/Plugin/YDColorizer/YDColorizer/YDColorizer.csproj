@@ -91,7 +91,6 @@
     <Compile Include="MyTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextConvert.cs" />
     <Compile Include="UserCustomColor.cs" />
