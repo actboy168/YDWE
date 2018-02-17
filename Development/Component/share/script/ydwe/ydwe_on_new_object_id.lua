@@ -1,15 +1,27 @@
 require "filesystem"
 require "localization"
 local ffi = require "ffi"
-local lni = require 'lni-c'
+local root = fs.ydwe_devpath()
+local w3x2lni = require 'w3x2lni_in_sandbox'
+local mpqloader = require 'mpqloader'
 
-local path = fs.ydwe_path() / 'share' / 'script' / 'ydwe' / 'prebuilt' / 'Custom'
-local default = {}
 local function get_default(type)
-	if not default[type] then
-		default[type] = lni(io.load(path / (type .. '.ini')))
+	local w2l = w3x2lni()
+
+    local mpq_path = root / 'share' / 'mpq'
+    function w2l:mpq_load(filename)
+        return mpqloader:load(mpq_path, filename)
+    end
+
+    local prebuilt_path = root / 'share' / 'script' / 'ydwe' / 'prebuilt'
+    function w2l:prebuilt_load(filename)
+        return mpqloader:load(prebuilt_path, filename)
+    end
+    function w2l:prebuilt_save(filename, buf)
+        mpqloader:save(prebuilt_path, filename, buf)
 	end
-	return default[type]
+
+	return w2l:get_default()[type]
 end
 
 local function from_objectid (id)
