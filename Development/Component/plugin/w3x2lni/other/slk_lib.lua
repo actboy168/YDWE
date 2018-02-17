@@ -20,10 +20,8 @@ local function try_value(t, key)
             return key, value, nil
         end
     end
-    local ikey = key .. ':1'
-    local value = t[ikey]
-    if value then
-        return ikey, value, nil
+    if t[key..':1'] then
+        return key, ('%s,%s'):format(t[key..':1'], t[key..':2']), nil
     end
     local pos = key:find("%d+$")
     if not pos then
