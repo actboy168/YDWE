@@ -1,3 +1,0 @@
-LIBRARY "<?php echo $argv[1]; ?>"
-EXPORTS
-	PluginName
