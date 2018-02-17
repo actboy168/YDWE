@@ -3,42 +3,50 @@ mt.__index = mt
 
 local function try_value(t, key)
     if not t then
-        return nil, nil, nil
+        return nil, nil
     end
     key = key:lower()
     if key == 'code' then
-        return 'code', t._code, nil
+        return t._code, nil
     end
-    if key:sub(1, 1) == '_' then
-        return nil, nil, nil
+    local nkey, level = key:match '^(%a+)(%d*)'
+    if not nkey then
+        return nil, nil
     end
-    local value = t[key]
-    if value then
+    if t[nkey..':1'] then
+        local values = {}
+        local index = 0
+        while true do
+            index = index + 1
+            local k = nkey .. ':' .. index
+            local v = t[k]
+            if key == k or key == nkey .. '_' .. index then
+                return v, nil
+            end
+            if v then
+                values[index] = v
+            else
+                break
+            end
+        end
+        if key == nkey then
+            return table.concat(values, ','), nil
+        end
+    else
+        local value = t[nkey]
         if type(value) == 'table' then
-            return key, value[1], nil
+            if key == nkey then
+                return value, 1
+            else
+                return value, tonumber(level)
+            end
         else
-            return key, value, nil
+            if key == nkey then
+                return value, nil
+            end
         end
     end
-    if t[key..':1'] then
-        return key, ('%s,%s'):format(t[key..':1'], t[key..':2']), nil
-    end
-    local pos = key:find("%d+$")
-    if not pos then
-        return key, nil, nil
-    end
-    local nkey = key:sub(1, pos-1)
-    local ikey = nkey .. ':' .. key:sub(pos)
-    local value = t[ikey]
-    if value then
-        return ikey, value, nil
-    end
-    local value = t[nkey]
-    if not value or type(value) ~= 'table' then
-        return nkey, nil, level
-    end
-    local level = tonumber(key:sub(pos))
-    return nkey, value, level
+    return nil, nil
 end
 
 local function get_default(t)
@@ -165,7 +173,7 @@ function mt:create_object(objt, ttype, name)
     end
     local mt = {}
     function mt:__index(key)
-        local key, value, level = try_value(objt, key)
+        local value, level = try_value(objt, key)
         local null
         if session.safe_mode then
             null = ''
