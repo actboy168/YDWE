@@ -29,9 +29,9 @@
         <Control height="1" />
         <RadioButton name="tab_1" group="TabSelect" text="测试"       textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
-        <RadioButton name="tab_2" group="TabSelect" text="局域网测试" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <RadioButton name="tab_2" group="TabSelect" text="编辑器" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
-        <RadioButton name="tab_3" group="TabSelect" text="编辑器插件" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <RadioButton name="tab_3" group="TabSelect" text="局域网测试" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
         <RadioButton name="tab_4" group="TabSelect" text="魔兽插件"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
@@ -123,30 +123,21 @@
           </VerticalLayout>
         </VerticalLayout>
         <VerticalLayout class="Background" inset="2,24,2,24" >
-          <VerticalLayout height="260" >
-            <Label text="局域网测试"  tooltip="" class="LabelTitle" />
+          <VerticalLayout height="370" >
+            <Label text="功能选项" tooltip= "一些可能存在兼容性问题的功能的开关。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
-              <CheckBox text="启用局域网测试"         width="200" name="EnableHost" tooltip="" />
-                <VerticalLayout class="Background" inset="10,6,10,6" >
-                  <RadioButton class="NormalRadioButton" text="单人模式" width="200" group="HostTest" name="HostTest_0" tooltip="只会启动一个魔兽。" />
-                  <RadioButton class="NormalRadioButton" text="多人模式"   width="200" group="HostTest" name="HostTest_1" tooltip="启动和你的地图空位相同数量的魔兽。" />
-              </VerticalLayout>
-            </VerticalLayout>
-          </VerticalLayout>
-        </VerticalLayout>
-        <VerticalLayout class="Background" inset="2,24,2,24" >
-          <VerticalLayout height="260" >
-            <Label text="插件选项"  tooltip="一些可能存在兼容性问题的功能的开关。需要重启YDWE生效。" class="LabelTitle" />
-            <VerticalLayout class="Background" inset="10,6,10,6" >
-              <CheckBox text="启用颜色插件(*)"         width="200" name="EnableDotNetSupport" tooltip="开启后，物体编辑器中输入字符串时，会加载颜色插件。需要安装了.net此项方能生效。" />
-              <CheckBox text="启用语法高亮插件(*)"     width="200" name="EnableTesh" tooltip="启用TESH，如果触发编辑器出现了崩溃等现象，请禁用此项。" />
-              <CheckBox text="启用逆天触发器插件(*)"   width="200" name="EnableYDTrigger" tooltip="全面强化触发编辑器的功能。"  />
-              <CheckBox text="启用字体插件(*)" tooltip="设置YDWE的字体" width="200" name="FontEnable" />
+              <CheckBox text="颜色插件(*)"         width="200" name="EnableDotNetSupport" tooltip="开启后，物体编辑器中输入字符串时，会加载颜色插件。需要安装了.net此项方能生效。" />
+              <CheckBox text="Jass语法高亮(*)"     width="200" name="EnableTesh" tooltip="启用TESH，如果触发编辑器出现了崩溃等现象，请禁用此项。" />
+              <CheckBox text="逆天触发器(*)"   width="200" name="EnableYDTrigger" tooltip="全面强化触发编辑器的功能。"  />
+              <CheckBox text="自定义物体ID输入"  width="200" name="EnableManualNewId" tooltip="允许在创建物体时输入自定义ID。" />
+              <CheckBox text="复制触发自动转码"      width="200" name="EnableTriggerCopyEncodingAutoConversion" tooltip="复制触发器时，去除乱码。" />
+              <CheckBox text="显示物体属性内部ID(*)" width="200" name="EnableShowInternalAttributeId" tooltip="显示物体属性的内部ID。" />
+              <CheckBox text="设置字体(*)" tooltip="设置YDWE的字体" width="200" name="FontEnable" />
               <HorizontalLayout>
                 <Control width="20" />
-                <Combo name="FontName" dropboxsize="0, 300" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" />
+                <Combo name="FontName" dropboxsize="0, 300" height="30" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" />
                 <Control width="20" />
-                <Combo name="FontSize" width="60" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
+                <Combo name="FontSize" width="60" height="30" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
                   <ListLabelElement text="8" />
                   <ListLabelElement text="9" />
                   <ListLabelElement text="10" />
@@ -163,13 +154,16 @@
               <Label name="FontPreview" text="AaBbCc 0123456789 测试" textcolor="#FF000000" align="center" height="80" />
             </VerticalLayout>
           </VerticalLayout>
-          <Control height="16" />
-          <VerticalLayout height="110" >
-            <Label text="功能选项" tooltip= "YDWE的一些可选功能的开启与关闭。" class="LabelTitle" />
-            <VerticalLayout class="Background" inset="10,6,10,0" >
-              <CheckBox text="启用自定义物体ID输入"  width="200" name="EnableManualNewId" tooltip="允许在创建物体时输入自定义ID。" />
-              <CheckBox text="复制触发自动转码"      width="200" name="EnableTriggerCopyEncodingAutoConversion" tooltip="复制触发器时，去除乱码。" />
-              <CheckBox text="显示物体属性内部ID(*)" width="200" name="EnableShowInternalAttributeId" tooltip="显示物体属性的内部ID。" />
+        </VerticalLayout>
+        <VerticalLayout class="Background" inset="2,24,2,24" >
+          <VerticalLayout height="260" >
+            <Label text="局域网测试"  tooltip="" class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <CheckBox text="启用局域网测试"         width="200" name="EnableHost" tooltip="" />
+                <VerticalLayout class="Background" inset="10,6,10,6" >
+                  <RadioButton class="NormalRadioButton" text="单人模式" width="200" group="HostTest" name="HostTest_0" tooltip="只会启动一个魔兽。" />
+                  <RadioButton class="NormalRadioButton" text="多人模式"   width="200" group="HostTest" name="HostTest_1" tooltip="启动和你的地图空位相同数量的魔兽。" />
+              </VerticalLayout>
             </VerticalLayout>
           </VerticalLayout>
         </VerticalLayout>
