@@ -1,4 +1,0 @@
-LIBRARY "YDFont"
-EXPORTS
-	SetFontByName
-

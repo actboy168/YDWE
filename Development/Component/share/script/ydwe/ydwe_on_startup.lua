@@ -159,6 +159,23 @@ function show_credit()
 end
 
 
+local function initialize_font()
+	if global_config.Font.FontEnable ~= "1" then
+		return
+	end
+	
+	local name = global_config.Font.FontName
+	local size = tonumber(global_config.Font.FontSize)
+	if name == '' then name = 'system' end
+	if size == nil then size = 12 end
+
+	local font = (require 'ffi.font')(name, size)
+	if font ~= 0 then
+		log.info('Font: ', name, size)
+		we.set_font(font)
+	end
+end
+
 -- 本函数在编辑器启动时调用，可以在本函数中载入一些插件
 -- event_data - 事件参数
 -- 	暂无内容
@@ -206,6 +223,7 @@ function event.EVENT_WE_START(event_data)
 	native:initialize()
 		
 	initialize_reg()
+	initialize_font()
 
 	-- 显示感谢信息
 	show_credit()

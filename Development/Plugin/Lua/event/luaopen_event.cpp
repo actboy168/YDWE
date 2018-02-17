@@ -73,6 +73,14 @@ namespace NYDWE {
 		LOGGING_INFO(lg) << message;
 		base::fast_call<void>(RealWeMessageShow, message, flag);
 	}
+	extern HFONT font;
+}
+
+static int set_font(lua_State* L)
+{
+	if (NYDWE::font) ::DeleteObject(NYDWE::font);
+	NYDWE::font = (HFONT)luaL_checkinteger(L, 1);
+	return 0;
 }
 
 int luaopen_event(lua_State* L)
@@ -120,12 +128,12 @@ int luaopen_event(lua_State* L)
 
 	base::hook::inline_install(&NYDWE::RealWeMessageShow, (uintptr_t)NYDWE::FakeWeMessageShow);
 
-	lua_newtable(L);
-	{
-		lua_pushstring(L, "message_show");
-		lua_pushcclosure(L, NYDWE::LuaWeMessageShow, 0);
-		lua_rawset(L, -3);
-	}
+	luaL_Reg lib[] = {
+		{ "message_show", NYDWE::LuaWeMessageShow },
+		{ "set_font", set_font },
+		{ NULL, NULL },
+	};
+	luaL_newlib(L, lib);
 	lua_setglobal(L, "we");
 	return 0;
 }

@@ -19,6 +19,8 @@
 
 namespace NYDWE {
 
+	HFONT font = NULL;
+
 	void lua_pushwstring(lua_State* L, const std::wstring& str)
 	{
 		std::string ustr = base::w2u(str, base::conv_method::replace | '?');
@@ -238,11 +240,14 @@ namespace NYDWE {
 			lpParam
 			);
 
-		if (strcmp("Warcraft III", lpClassName) == 0)
-		{
-			gWeMainWindowHandle = result;
+		if (result) {
+			if (strcmp("Warcraft III", lpClassName) == 0) {
+				gWeMainWindowHandle = result;
+			}
+			if (font) {
+				::PostMessage(result, WM_SETFONT, (WPARAM)(HFONT)(font), (LPARAM)(BOOL)(0));
+			}
 		}
-
 		return result;
 	}
 
