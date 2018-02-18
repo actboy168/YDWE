@@ -60,7 +60,7 @@ int luaopen_clr(lua_State* L)
 {
 	clr::appdomain_.reset(new clr::appdomain(nullptr));
 	if (!*clr::appdomain_) {
-		return luaL_error(L, "init clr failded.");
+		return 0;
 	}
 
 	static luaL_Reg mt[] = {
@@ -79,6 +79,5 @@ int luaopen_clr(lua_State* L)
 		{ NULL, NULL },
 	};
 	luaL_newlib(L, l);
-	lua_setglobal(L, "clr");
-	return 0;
+	return 1;
 }

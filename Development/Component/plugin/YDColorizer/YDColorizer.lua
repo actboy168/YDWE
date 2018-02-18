@@ -34,14 +34,14 @@ loader.load = function(path)
 		return false
 	end
 	
-	require "dotnet"
-	if not dotnet.initialized then
+	local clr = require "clr"
+	if not clr then
 		log.error('failed: not support')
 		return false
 	end
 	InitConfig()
 	
-	local obj = dotnet:load(path, 'WEInit')
+	local obj = clr.object(path, 'WEInit')
 	if not obj then
 		log.error('failed: load failed')
 		return false
