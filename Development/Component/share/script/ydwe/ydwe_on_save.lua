@@ -208,7 +208,7 @@ function event.EVENT_PRE_SAVE_MAP(event_data)
 			log.trace("Remove the read-only attribute.")
 			map_path:add_permissions(128)
 		else
-			log.trace("Don't the remove read-only attribute.")
+			log.trace("Don't remove the read-only attribute.")
 		end
 	end
 		

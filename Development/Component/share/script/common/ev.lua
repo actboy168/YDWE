@@ -61,7 +61,7 @@ function ev.emit(name, ...)
     event.lock = event.lock - 1
     if event.lock == 0 and event.clean then
         for i, trg in ipairs(event) do
-            if list[trg] then
+            if event.clean[trg] then
                 tbl_remove(event, i)
                 break
             end
