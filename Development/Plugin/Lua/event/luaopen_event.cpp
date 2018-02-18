@@ -126,7 +126,7 @@ int luaopen_event(lua_State* L)
 	}
 	lua_setglobal(L, "event");
 
-	base::hook::inline_install(&NYDWE::RealWeMessageShow, (uintptr_t)NYDWE::FakeWeMessageShow);
+	base::hook::install(&NYDWE::RealWeMessageShow, (uintptr_t)NYDWE::FakeWeMessageShow);
 
 	luaL_Reg lib[] = {
 		{ "message_show", NYDWE::LuaWeMessageShow },

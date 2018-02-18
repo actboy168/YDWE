@@ -148,7 +148,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 	bool initialize()
 	{
 		real_jass_vmmain = search_jass_vmmain();
-		return base::hook::inline_install(&real_jass_vmmain, (uintptr_t)fake_jass_vmmain);
+		return base::hook::install(&real_jass_vmmain, (uintptr_t)fake_jass_vmmain);
 	}
 }}}
 

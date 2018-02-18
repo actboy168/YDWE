@@ -88,13 +88,13 @@ void TriggerParameterDialog_Type_Hook()
     HookOne(&g_TPD_type_info2);
 
     TPD_Type = (TPD_TypeProc) WE_ADDRESS(0x00687650);
-	base::hook::inline_install((uintptr_t*)&TPD_Type, (uintptr_t)TPD_Type_Hook);
+	base::hook::install((uintptr_t*)&TPD_Type, (uintptr_t)TPD_Type_Hook);
 }
 
 void TriggerParameterDialog_Type_Unhook()
 {
-    UnhookOne(&g_TPD_type_info1);
-    UnhookOne(&g_TPD_type_info2);
+    //UnhookOne(&g_TPD_type_info1);
+    //UnhookOne(&g_TPD_type_info2);
 
-	base::hook::inline_uninstall((uintptr_t*)&TPD_Type, (uintptr_t)TPD_Type_Hook);
+	//base::hook::inline_uninstall((uintptr_t*)&TPD_Type, (uintptr_t)TPD_Type_Hook);
 }

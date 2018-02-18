@@ -357,9 +357,9 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			b_hook = true;
 			search();
 
-			hook::inline_install(&real::immediate_order, (uintptr_t)fake::immediate_order);
-			hook::inline_install(&real::point_order, (uintptr_t)fake::point_order);
-			hook::inline_install(&real::target_order, (uintptr_t)fake::target_order);
+			hook::install(&real::immediate_order, (uintptr_t)fake::immediate_order);
+			hook::install(&real::point_order, (uintptr_t)fake::point_order);
+			hook::install(&real::target_order, (uintptr_t)fake::target_order);
 			return 0;
 		}
 	}

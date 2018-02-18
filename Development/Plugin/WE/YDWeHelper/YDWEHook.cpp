@@ -40,7 +40,7 @@ static bool InstallPatch(const char* name, uintptr_t address, uint8_t *patch, ui
 }
 
 static uintptr_t pgTrueWeSetWindowCaption;
-static bool isWeSetWindowCaptionHookInstalled;
+static base::hook::hook_t isWeSetWindowCaptionHookInstalled;
 
 BOOL __fastcall DetourWeSetWindowCaption(HWND hWnd, LPCSTR lpString)
 {
@@ -55,7 +55,7 @@ BOOL __fastcall DetourWeSetWindowCaption(HWND hWnd, LPCSTR lpString)
 }
 
 static uintptr_t pgTrueWeSetMenuItem;
-static bool isWeSetMenuItemHookInstalled;
+static base::hook::hook_t isWeSetMenuItemHookInstalled;
 uint32_t __fastcall DetourWeSetMenuItem(uint32_t this_, uint32_t edx_, uint32_t item, const char* str, uint32_t hotkey[2])
 {
 	try
@@ -108,7 +108,7 @@ locale_helper<wchar_t> g_deflocale;
 // 0x004D2D90
 // 将WE的字符串比较改为根据locale来比较(中文环境下是根据拼音比较)
 static uintptr_t pgTrueWeStringCompare;
-static bool isWeStringCompareHookInstalled;
+static base::hook::hook_t isWeStringCompareHookInstalled;
 int __fastcall DetourWeStringCompare(const char* a, const char* b, bool ignore_case)
 {
 	if (!a || !b)
@@ -176,7 +176,7 @@ bool WriteText(std::wstring const& str)
 }
 
 static uintptr_t pgTrueWeTriggerEditorEditboxCopy;
-static bool isWeTriggerEditorEditboxCopyHookInstalled;
+static base::hook::hook_t isWeTriggerEditorEditboxCopyHookInstalled;
 BOOL __fastcall DetourWeTriggerEditorEditboxCopy(const char *source)
 {
 	if (source)
@@ -192,7 +192,7 @@ BOOL __fastcall DetourWeTriggerEditorEditboxCopy(const char *source)
 }
 
 static uintptr_t pgTrueWeGetSystemParameter;
-static bool isWeGetSystemParameterHookInstalled;
+static base::hook::hook_t isWeGetSystemParameterHookInstalled;
 
 static int32_t __fastcall DetourWeGetSystemParameter(LPCSTR parentKey, LPCSTR childKey, int32_t flag)
 {
@@ -214,7 +214,7 @@ static int32_t __fastcall DetourWeGetSystemParameter(LPCSTR parentKey, LPCSTR ch
 }
 
 static uintptr_t pgTrueWeVerifyMapCellsLimit;
-static bool isWeVerifyMapCellsLimitHookInstalled;
+static base::hook::hook_t isWeVerifyMapCellsLimitHookInstalled;
 static uintptr_t pgMapCellsGetUnknownGlobalFlag;
 
 std::unique_ptr<CMemoryPatch> pgWeVerifyMapCellsLimitPatcher;
@@ -241,7 +241,7 @@ static int32_t __fastcall DetourWeVerifyMapCellsLimit(int32_t flag)
 }
 
 static uintptr_t pgTrueWeTriggerNameCheck;
-static bool isWeTriggerNameCheckHookInstalled;
+static base::hook::hook_t isWeTriggerNameCheckHookInstalled;
 
 static BOOL __fastcall DetourWeTriggerNameCheck(const char *triggerName, BOOL allowSpaces)
 {
@@ -251,7 +251,7 @@ static BOOL __fastcall DetourWeTriggerNameCheck(const char *triggerName, BOOL al
 }
 
 static uintptr_t pgTrueWeTriggerNameInputCharCheck;
-static bool isWeTriggerNameInputCharCheckHookInstalled;
+static base::hook::hook_t isWeTriggerNameInputCharCheckHookInstalled;
 
 std::unique_ptr<CMemoryPatch> pgWeTriggerNameInputCharCheckPatcher;
 
@@ -263,12 +263,10 @@ static uint32_t __fastcall DetourWeTriggerNameInputCharCheck(uint32_t c, uint32_
 }
 
 #define INSTALL_INLINE_HOOK(name) \
-	if (!is##name##HookInstalled) \
-	{ \
 		if (pgTrue##name##) \
 		{ \
-			is##name##HookInstalled = base::hook::inline_install(&pgTrue##name##, (uintptr_t)Detour##name##); \
-			if (is##name##HookInstalled) \
+			bool ok = base::hook::install(&pgTrue##name##, (uintptr_t)Detour##name##, &is##name##HookInstalled); \
+			if (ok) \
 			{ \
 				LOGGING_TRACE(lg) << #name " hook installation succeeded."; \
 			} \
@@ -280,14 +278,9 @@ static uint32_t __fastcall DetourWeTriggerNameInputCharCheck(uint32_t c, uint32_
 		else \
 		{ \
 			LOGGING_ERROR(lg) << "Cannot find " #name "!"; \
-		} \
-	} \
-	else \
-	{ \
-		LOGGING_TRACE(lg) << #name " hook already installed."; \
-	}
+		}
 
-bool isWeUtf8ToAnsiHookInstalled;
+base::hook::hook_t isWeUtf8ToAnsiHookInstalled;
 uintptr_t pgTrueWeUtf8ToAnsi;
 void __fastcall DetourWeUtf8ToAnsi(const char* str)
 {
@@ -357,16 +350,7 @@ static void InitInlineHook()
 #undef INSTALL_INLINE_HOOK
 
 #define UNINSTALL_INLINE_HOOK(name) \
-	if (is##name##HookInstalled) \
-	{ \
-		is##name##HookInstalled = \
-			!base::hook::inline_uninstall(&pgTrue##name, (uintptr_t)Detour##name); \
-		LOGGING_TRACE(lg) << #name " hook uninstallation succeeded."; \
-	} \
-	else \
-	{ \
-		LOGGING_TRACE(lg) << #name " hook has not been installed. No need to uninstall."; \
-	}
+	base::hook::uninstall(&is##name##HookInstalled);
 
 static void UninstallInlineHook()
 {

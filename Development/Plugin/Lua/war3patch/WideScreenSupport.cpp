@@ -83,6 +83,6 @@ namespace WideScreen
 
 		static uintptr_t address = search();
 		fake = address;
-		base::hook::inline_install(&fake, (uintptr_t)real);
+		base::hook::install(&fake, (uintptr_t)real);
 	}
 }

@@ -18,6 +18,7 @@ struct hook_t {
 	type type = type::Inline;
 	uintptr_t real = 0;
 	uintptr_t fake = 0;
+	base::hook::hook_t hi = 0;
 };
 
 static int push_funcdef(lua_State* L, int idx) {
@@ -63,7 +64,7 @@ static int hook_remove(lua_State* L) {
 	}
 	switch (h->type) {
 	case hook_t::type::Inline:
-		base::hook::inline_uninstall(&h->real, h->fake);
+		base::hook::uninstall(&h->hi);
 		break;
 	}
 	return 0;
@@ -83,7 +84,7 @@ static void infInline(lua_State* L, hook_t* h) {
 	lua_getupvalue(L, 1, 1);
 	h->real = *(uintptr_t*)((uintptr_t)lua_touserdata(L, -1) + 16);
 	lua_pop(L, 1);
-	base::hook::inline_install(&h->real, h->fake);
+	base::hook::install(&h->real, h->fake, &h->hi);
 }
 
 static void infIAT(lua_State* L, hook_t* h) {

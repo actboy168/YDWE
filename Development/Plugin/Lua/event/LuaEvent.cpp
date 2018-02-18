@@ -400,7 +400,7 @@ namespace NYDWE {
 		return base::std_call<HPROVIDER>(pgTrueMssRIBLoadProviderLibrary, fileName);
 	}
 
-#define INSTALL_INLINE_HOOK(name) if (!is##name##HookInstalled) { if (pgTrue##name##) { is##name##HookInstalled = base::hook::inline_install(&pgTrue##name##, (uintptr_t)Detour##name##); }}
+#define INSTALL_INLINE_HOOK(name) if (!is##name##HookInstalled) { if (pgTrue##name##) { is##name##HookInstalled = base::hook::install(&pgTrue##name##, (uintptr_t)Detour##name##); }}
 
 	void SetupEvent()
 	{

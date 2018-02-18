@@ -5,8 +5,9 @@
 
 namespace base { namespace hook {  
 #if !defined(DISABLE_DETOURS)
-	_BASE_API bool inline_install(uintptr_t* pointer_ptr, uintptr_t detour);
-	_BASE_API bool inline_uninstall(uintptr_t* pointer_ptr, uintptr_t detour);
+	typedef void* hook_t;
+	_BASE_API bool install(uintptr_t* pointer_ptr, uintptr_t detour, hook_t* ph = nullptr);
+	_BASE_API bool uninstall(hook_t* ph);
 #endif
 	_BASE_API uintptr_t replace_pointer(uintptr_t address, uintptr_t new_value);
 }}

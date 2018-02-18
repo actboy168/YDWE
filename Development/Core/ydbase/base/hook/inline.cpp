@@ -9,17 +9,23 @@
 namespace base { namespace hook {
 
 #if !defined(DISABLE_DETOURS)
-	bool inline_install(uintptr_t* pointer_ptr, uintptr_t detour)
+	struct hook_info {
+		uintptr_t* pointer_ptr;
+		uintptr_t  detour;
+	};
+	bool install(uintptr_t* pointer_ptr, uintptr_t detour, hook_t* ph)
 	{
 		LONG status;
-		if ((status = DetourTransactionBegin()) == NO_ERROR)
-		{
-			if ((status = DetourUpdateThread(::GetCurrentThread())) == NO_ERROR)
-			{
-				if ((status = DetourAttach((PVOID*)pointer_ptr, (PVOID)detour)) == NO_ERROR)
-				{
-					if ((status = DetourTransactionCommit()) == NO_ERROR)
-					{
+		if ((status = DetourTransactionBegin()) == NO_ERROR) {
+			if ((status = DetourUpdateThread(::GetCurrentThread())) == NO_ERROR) {
+				if ((status = DetourAttach((PVOID*)pointer_ptr, (PVOID)detour)) == NO_ERROR) {
+					if ((status = DetourTransactionCommit()) == NO_ERROR) {
+						if (ph) {
+							hook_info* hi = new hook_info;
+							hi->detour = detour;
+							hi->pointer_ptr = pointer_ptr;
+							*ph = hi;
+						}
 						return true;
 					}
 				}
@@ -30,17 +36,19 @@ namespace base { namespace hook {
 		return false;
 	}
 
-	bool inline_uninstall(uintptr_t* pointer_ptr, uintptr_t detour)
+	bool uninstall(hook_t* ph)
 	{
+		if (!ph || !*ph) {
+			return false;
+		}
+		hook_info* hi = *(hook_info**)ph;
 		LONG status;
-		if ((status = DetourTransactionBegin()) == NO_ERROR)
-		{
-			if ((status = DetourUpdateThread(::GetCurrentThread())) == NO_ERROR)
-			{
-				if ((status = DetourDetach((PVOID*)pointer_ptr, (PVOID)detour)) == NO_ERROR)
-				{
-					if ((status = DetourTransactionCommit()) == NO_ERROR)
-					{
+		if ((status = DetourTransactionBegin()) == NO_ERROR) {
+			if ((status = DetourUpdateThread(::GetCurrentThread())) == NO_ERROR) {
+				if ((status = DetourDetach((PVOID*)hi->pointer_ptr, (PVOID)hi->detour)) == NO_ERROR) {
+					if ((status = DetourTransactionCommit()) == NO_ERROR) {
+						delete hi;
+						*ph = 0;
 						return true;
 					}
 				}
