@@ -3,9 +3,11 @@ local root = fs.ydwe_devpath()
 local stormlib  = require 'ffi.stormlib'
 local mpqloader = require 'mpqloader'
 local i18n = require 'i18n'
+local event = require 'ev'
+local map_handle = __map_handle__.handle
 
-local function initialize(mappath)
-    local map = stormlib.attach(mappath)
+local function initialize()
+    local map = stormlib.attach(map_handle)
     if not map then
         return
     end
@@ -29,6 +31,7 @@ local function initialize(mappath)
         return map:load_file(filename)
     end
     function w2l:map_save(filename, buf)
+        log.debug('map_save', filename, #buf)
         return map:save_file(filename, buf)
     end
     function w2l:map_remove(filename)
@@ -38,4 +41,19 @@ local function initialize(mappath)
     return w2l:slk_lib(false, true)
 end
 
-return initialize(__map_handle__.handle)
+local trg
+local slk = initialize()
+trg = event.on('编译地图', function ()
+    package.loaded['slk'] = nil
+    trg:remove()
+    log.trace('build object start', map_handle)
+    slk:refresh(function(msg)
+        log.trace('build object finish')
+        if #msg == 0 then
+            return
+        end
+        gui.message(nil, ('%s\n\n%s'):format('编辑器刚刚帮你修改了物编数据,建议重新打开地图,以便查看变化', msg))
+    end)
+end)
+
+return slk

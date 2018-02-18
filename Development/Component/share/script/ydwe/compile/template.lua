@@ -85,7 +85,6 @@ function template:do_compile(op)
 		return r, err
 	end
 	
-	package.loaded['slk'] = nil
 	__map_handle__ = op.map_handle
 	__map_path__   = op.map_path
 	local env = {
@@ -103,15 +102,8 @@ function template:do_compile(op)
 	local suc, content = xpcall(f, function(msg) return debug.traceback(msg) end)
 	if not suc then
     	return false, content
-    end
-    if package.loaded['slk'] then
-		package.loaded['slk']:refresh(function(msg)
-			if #msg == 0 then
-				return
-			end
-			gui.message(nil, ('%s\n\n%s'):format('编辑器刚刚帮你修改了物编数据,建议重新打开地图,以便查看变化', msg))
-		end)
-    end
+	end
+	
     return true, content
 end
 
