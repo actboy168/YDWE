@@ -27,18 +27,21 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace japi {
 	}
 
 	struct japi
-		: public lua_to_nativefunction<empty_function>
 	{
 		typedef lua_to_nativefunction<empty_function> mybase;
 
 		jass::func_value funcdef;
 		japi(lua_State*L, int luaobj, const char* name, const char* def)
 			: funcdef(def, 0)
-			, mybase(L, luaobj, &funcdef, 0)
+			, base_(new mybase(L, luaobj, &funcdef, 0))
 		{
-			jass::japi_table_add((uintptr_t)mybase::funcentry, name, def);
+			jass::japi_table_add((uintptr_t)base_->funcentry, name, def);
 		}
+
+		~japi() { delete base_; }
 		static const char* name() { return "japi_t"; }
+
+		mybase* base_;
 	};
 
 	int japi_index(lua_State* L)

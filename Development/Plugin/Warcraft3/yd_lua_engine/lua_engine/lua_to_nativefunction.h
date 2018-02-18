@@ -60,6 +60,16 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return safe_call_ref(L, luaobj, param_size + n, funcdef->get_return());
 		}
 
+    	void* operator new(size_t i)
+    	{
+        	return _aligned_malloc(i, 32);
+    	}
+
+    	void operator delete(void* p)
+    	{
+        	_aligned_free(p);
+    	}
+
 		struct __declspec(align(32)) {
 			::base::hook::assembler::writer<32> code;
 #pragma warning(suppress:4201 4324)
