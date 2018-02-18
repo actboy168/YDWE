@@ -93,7 +93,7 @@ namespace base { namespace win {
 			{
 				foreach(auto it, replace_dll)
 				{
-					hook::ReplaceImport(process_information->hProcess, it.first.c_str(), it.second.string().c_str());
+					hook::replace_import(process_information->hProcess, it.first.c_str(), it.second.string().c_str());
 				}
 			}
 

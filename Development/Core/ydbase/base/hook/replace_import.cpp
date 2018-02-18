@@ -1,15 +1,8 @@
 #include <base/hook/replace_import.h>
 #include <memory>
+#include <strsafe.h>
 
 namespace base { namespace hook {
-
-#if (_MSC_VER < 1299)
-	typedef DWORD DWORD_PTR;
-#endif
-#if (_MSC_VER < 1310)
-#else
-#include <strsafe.h>
-#endif
 
 #define IMPORT_DIRECTORY OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT]
 #define BOUND_DIRECTORY OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT]
@@ -105,26 +98,26 @@ namespace base { namespace hook {
 		return (dw + 7) & ~7u;
 	}
 
-	BOOL WINAPI ReplaceImport(HANDLE hProcess, LPCSTR lpOldDll, LPCSTR lpNewDll)
+	bool replace_import(HANDLE hProcess, const char* oldDll, const char* newDll)
 	{
 		PBYTE pbModule = (PBYTE)FindExe(hProcess);
 		IMAGE_DOS_HEADER idh = { 0 };
 		if (!ReadProcessMemory(hProcess, pbModule, &idh, sizeof(idh), NULL)) {
-			return FALSE;
+			return false;
 		}
 		if (idh.e_magic != IMAGE_DOS_SIGNATURE) {
-			return FALSE;
+			return false;
 		}
 
 		IMAGE_NT_HEADERS inh = { 0 };
 		if (!ReadProcessMemory(hProcess, pbModule + idh.e_lfanew, &inh, sizeof(inh), NULL)) {
-			return FALSE;
+			return false;
 		}
 		if (inh.Signature != IMAGE_NT_SIGNATURE) {
-			return FALSE;
+			return false;
 		}
 		if (inh.IMPORT_DIRECTORY.VirtualAddress == 0) {
-			return FALSE;
+			return false;
 		}
 		inh.BOUND_DIRECTORY.VirtualAddress = 0;
 		inh.BOUND_DIRECTORY.Size = 0;
@@ -135,7 +128,7 @@ namespace base { namespace hook {
 		for (DWORD i = 0; i < inh.FileHeader.NumberOfSections; i++) {
 			IMAGE_SECTION_HEADER ish = { 0 };
 			if (!ReadProcessMemory(hProcess, pbModule + dwSec + sizeof(ish) * i, &ish, sizeof(ish), NULL)) {
-				return FALSE;
+				return false;
 			}
 			if (inh.IAT_DIRECTORY.VirtualAddress == 0 && inh.IMPORT_DIRECTORY.VirtualAddress >= ish.VirtualAddress && inh.IMPORT_DIRECTORY.VirtualAddress < ish.VirtualAddress + ish.SizeOfRawData) {
 				inh.IAT_DIRECTORY.VirtualAddress = ish.VirtualAddress;
@@ -147,7 +140,7 @@ namespace base { namespace hook {
 		}
 
 		DWORD obStr = PadToDwordPtr(inh.IMPORT_DIRECTORY.Size);
-		DWORD cbNew = obStr + PadToDword((DWORD)strlen(lpNewDll) + 1);
+		DWORD cbNew = obStr + PadToDword((DWORD)strlen(newDll) + 1);
 
 		std::unique_ptr<BYTE> pbNew(new BYTE[cbNew]);
 		ZeroMemory(pbNew.get(), cbNew);
@@ -164,27 +157,27 @@ namespace base { namespace hook {
 
 		PBYTE pbNewIid = FindAndAllocateNearBase(hProcess, pbBase, cbNew);
 		if (pbNewIid == NULL) {
-			return FALSE;
+			return false;
 		}
 		DWORD dwProtect = 0;
 		if (!VirtualProtectEx(hProcess, pbModule + inh.IMPORT_DIRECTORY.VirtualAddress, inh.IMPORT_DIRECTORY.Size, PAGE_EXECUTE_READWRITE, &dwProtect)) {
-			return FALSE;
+			return false;
 		}
 		DWORD obBase = (DWORD)(pbNewIid - pbModule);
 		if (!ReadProcessMemory(hProcess, pbModule + inh.IMPORT_DIRECTORY.VirtualAddress, pbNew.get(), inh.IMPORT_DIRECTORY.Size, NULL)) {
-			return FALSE;
+			return false;
 		}
 		PIMAGE_IMPORT_DESCRIPTOR piid = (PIMAGE_IMPORT_DESCRIPTOR)pbNew.get();
-		HRESULT hrRet = StringCchCopyA((char*)pbNew.get() + obStr, cbNew - obStr, lpNewDll);
+		HRESULT hrRet = StringCchCopyA((char*)pbNew.get() + obStr, cbNew - obStr, newDll);
 		if (FAILED(hrRet)) {
-			return FALSE;
+			return false;
 		}
 		CHAR szTemp[MAX_PATH];
 		for (DWORD i = 0; i < inh.IMPORT_DIRECTORY.Size / sizeof(*piid); i++) {
 			if (!ReadProcessMemory(hProcess, pbModule + piid[i].Name, szTemp, MAX_PATH, NULL)) {
-				return FALSE;
+				return false;
 			}
-			if (_stricmp(szTemp, lpOldDll) == 0) {
+			if (_stricmp(szTemp, oldDll) == 0) {
 				piid[i].Name = obBase + obStr;
 			}
 			if (piid[i].OriginalFirstThunk == 0 && piid[i].FirstThunk == 0) {
@@ -192,24 +185,24 @@ namespace base { namespace hook {
 			}
 		}
 		if (!WriteProcessMemory(hProcess, pbNewIid, pbNew.get(), cbNew, NULL)) {
-			return FALSE;
+			return false;
 		}
 
 		inh.IMPORT_DIRECTORY.VirtualAddress = obBase;
 		inh.IMPORT_DIRECTORY.Size = cbNew;
 		if (!VirtualProtectEx(hProcess, pbModule, inh.OptionalHeader.SizeOfHeaders, PAGE_EXECUTE_READWRITE, &dwProtect)) {
-			return FALSE;
+			return false;
 		}
 		idh.e_res[0] = 0;
 		if (!WriteProcessMemory(hProcess, pbModule, &idh, sizeof(idh), NULL)) {
-			return FALSE;
+			return false;
 		}
 		if (!WriteProcessMemory(hProcess, pbModule + idh.e_lfanew, &inh, sizeof(inh), NULL)) {
-			return FALSE;
+			return false;
 		}
 		if (!VirtualProtectEx(hProcess, pbModule, inh.OptionalHeader.SizeOfHeaders, dwProtect, &dwProtect)) {
-			return FALSE;
+			return false;
 		}
-		return TRUE;
+		return true;
 	}
 }}
