@@ -31,6 +31,9 @@ local function initialize(mappath)
     function w2l:map_save(filename, buf)
         return map:save_file(filename, buf)
     end
+    function w2l:map_remove(filename)
+        return map:remove_file(filename)
+    end
 
     return w2l:slk_lib(false, true)
 end
