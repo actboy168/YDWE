@@ -42,8 +42,6 @@ local tbl_index = {
 	},
 	FeatureToggle = {
 		EnableManualNewId = "0",
-		EnableTriggerCopyEncodingAutoConversion = "1",
-		EnableShowInternalAttributeId = "0",
 	},
 	Font = {
 		FontEnable = "0",

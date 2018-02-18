@@ -130,7 +130,6 @@
               <CheckBox text="Jass语法高亮(*)"     width="200" name="EnableTesh" tooltip="启用TESH，如果触发编辑器出现了崩溃等现象，请禁用此项。" />
               <CheckBox text="逆天触发器(*)"   width="200" name="EnableYDTrigger" tooltip="全面强化触发编辑器的功能。"  />
               <CheckBox text="自定义物体ID输入"  width="200" name="EnableManualNewId" tooltip="允许在创建物体时输入自定义ID。" />
-              <CheckBox text="复制触发自动转码"      width="200" name="EnableTriggerCopyEncodingAutoConversion" tooltip="复制触发器时，去除乱码。" />
               <CheckBox text="设置字体(*)" tooltip="设置YDWE的字体" width="200" name="FontEnable" />
               <HorizontalLayout>
                 <Control width="20" />

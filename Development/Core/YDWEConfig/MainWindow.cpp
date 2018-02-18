@@ -91,7 +91,6 @@ namespace
 		("EnableTesh",                              Attribute("ThirdPartyPlugin"))
 		("EnableYDTrigger",                         Attribute("ThirdPartyPlugin"))
 		("EnableManualNewId",                       Attribute("FeatureToggle"))
-		("EnableTriggerCopyEncodingAutoConversion", Attribute("FeatureToggle"))
 		("FontEnable",                              Attribute("Font"))
 		("FontName",                                Attribute("Font", Attribute::e_ComboBox))
 		("FontSize",                                Attribute("Font", Attribute::e_ComboBox))
@@ -207,7 +206,6 @@ void CMainWindow::ResetConfig(base::ini::table& table)
 	table["ThirdPartyPlugin"]["EnableTesh"] = "1";
 	table["ThirdPartyPlugin"]["EnableYDTrigger"] = "1";
 	table["FeatureToggle"]["EnableManualNewId"] = "0";
-	table["FeatureToggle"]["EnableTriggerCopyEncodingAutoConversion"] = "1";
 	table["Font"]["FontEnable"] = "0";
 	table["Font"]["FontName"] = "";
 	table["Font"]["FontSize"] = "12";
