@@ -190,12 +190,15 @@ function mt:create_object(objt, ttype, name)
         return value[level] or null
     end
     function mt:__newindex(key, nvalue)
+        if not objt then
+            return
+        end
         if session.read_only or not objt.w2lobject then
             return
         end
         local parent = objt._parent
         local objd = session.default[ttype][parent]
-        local meta, level = get_meta(key, session.metadata[ttype], objd._code and session.metadata[objd._code])
+        local meta, level = get_meta(key:gsub('_', ':'), session.metadata[ttype], objd._code and session.metadata[objd._code])
         if not meta then
             return
         end
@@ -257,7 +260,7 @@ function mt:create_object(objt, ttype, name)
                 end
                 nkey = next(objt, nkey)
             end
-            key = meta.field:gsub(':', '')
+            key = meta.field:gsub(':', '_')
             if type(objt[nkey]) ~= 'table' then
                 return key, objt[nkey] or ''
             end
@@ -266,6 +269,21 @@ function mt:create_object(objt, ttype, name)
             end
             return key .. 1, objt[nkey][1] or ''
         end
+    end
+    function mt:__call(data)
+        if not objt then
+            return self
+        end
+        if session.read_only or not objt.w2lobject then
+            return self
+        end
+        if type(data) ~= 'table' then
+            return self
+        end
+        for k, v in pairs(data) do
+            self[k] = v
+        end
+        return self
     end
     local o = {}
     if session.read_only then
