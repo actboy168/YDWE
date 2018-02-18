@@ -76,39 +76,47 @@ local function get_default(t)
     end
 end
 
-local function get_meta(key, meta1, meta2)
-    if key:sub(1, 1) == '_' then
-        return nil, nil
-    end
+local function try_meta(key, meta1, meta2)
     key = key:lower()
-    local meta = meta1 and meta1[key] or meta2 and meta2[key]
-    if meta then
-        if meta['repeat'] then
-            return meta, 1
+    local nkey, level = key:match '^(%a+)(%d*)'
+    if not nkey then
+        return nil, nil, nil
+    end
+    
+    local function get_meta(key)
+        return meta1 and meta1[key] or meta2 and meta2[key]
+    end
+    if get_meta(nkey..':1') then
+        if key == nkey then
+            return get_meta(nkey..':1'), nil, 'index'
+        end
+        local index = 0
+        while true do
+            index = index + 1
+            local k = nkey .. ':' .. index
+            local v = get_meta(k)
+            if key == k or key == nkey .. '_' .. index then
+                return v, nil, nil
+            end
+            if not v then
+                break
+            end
+        end
+    else
+        local meta = get_meta(nkey)
+        if meta and meta['repeat'] then
+            if key == nkey then
+                return meta, 1, 'level'
+            else
+                return meta, tonumber(level), nil
+            end
         else
-            return meta, nil
+            if key == nkey then
+                return meta, nil, nil
+            end
         end
     end
-    local ikey = key .. ':1'
-    local meta = meta1 and meta1[ikey] or meta2 and meta2[ikey]
-    if meta then
-        return meta, nil
-    end
-    local pos = key:find("%d+$")
-    if not pos then
-        return nil, nil
-    end
-    local nkey = key:sub(1, pos-1)
-    local ikey = nkey .. ':' .. key:sub(pos)
-    local meta = meta1 and meta1[ikey] or meta2 and meta2[ikey]
-    if meta then
-        return meta, nil
-    end
-    local meta = meta1 and meta1[nkey] or meta2 and meta2[nkey]
-    if meta and meta['repeat'] then
-        return meta, tonumber(key:sub(pos))
-    end
-    return nil, nil
+    return nil, nil, nil
 end
 
 local function to_type(value, tp)
@@ -178,8 +186,35 @@ function mt:find_id(objs, dynamics, source, tag, ttype)
     end
 end
 
+local function fill_data(data, max_level, meta, default)
+    if not meta['repeat'] then
+        return
+    end
+    for i = #data + 1, max_level do
+        if meta.profile then
+            data[i] = default[i] or data[i-1]
+        else
+            data[i] = default[i] or default[#default]
+        end
+    end
+end
+
+function mt:fill_object(obj, ttype)
+    local default = self.default[ttype][obj._parent] or self.default[ttype][obj._id]
+    local max_level = obj._max_level
+    for key, meta in pairs(self.metadata[ttype]) do
+        fill_data(obj[key], max_level, meta, default[key])
+    end
+    if self.metadata[obj._code] then
+        for key, meta in pairs(self.metadata[obj._code]) do
+            fill_data(obj[key], max_level, meta, default[key])
+        end
+    end
+end
+
 function mt:create_object(objt, ttype, name)
     local session = self
+    
     if not objt and not session.safe_mode then
         return nil
     end
@@ -210,35 +245,85 @@ function mt:create_object(objt, ttype, name)
         end
         local parent = objt._parent
         local objd = session.default[ttype][parent]
-        local meta, level = get_meta(key:gsub('_', ':'), session.metadata[ttype], objd._code and session.metadata[objd._code])
+        local meta, level, list_type = try_meta(key, session.metadata[ttype], objd._code and session.metadata[objd._code])
         if not meta then
             return
         end
-        nvalue = to_type(nvalue, meta.type)
-        if not nvalue then
-            return
-        end
-        key = meta.field:lower()
-        local dvalue
-        if level then
-            dvalue = objd[key][level] or (not meta.profile and objd[key][#objd[key]])
-        else
-            dvalue = objd[key]
-        end
-        if nvalue == dvalue then
-            return
-        end
-        if meta.type == 3 and #nvalue > 1023 then
-            nvalue = nvalue:sub(1, 1023)
-        end
-        if level then
-            if not objt[key] then
-                objt[key] = {}
+
+        local function write_data(nvalue, level)
+            nvalue = to_type(nvalue, meta.type)
+            if not nvalue then
+                return
             end
-            objt[key][level] = nvalue
-        else
-            objt[key] = nvalue
+            key = meta.field:lower()
+
+            local dvalue
+            if level then
+                dvalue = objd[key][level] or (not meta.profile and objd[key][#objd[key]])
+            else
+                dvalue = objd[key]
+            end
+            if nvalue == dvalue then
+                return
+            end
+
+            if meta.type == 3 and #nvalue > 1023 then
+                nvalue = nvalue:sub(1, 1023)
+            end
+            if level then
+                if not objt[key] then
+                    objt[key] = {}
+                end
+                objt[key][level] = nvalue
+            else
+                objt[key] = nvalue
+                if key == session.w2l.info.key.max_level[ttype] then
+                    objt._max_level = nvalue
+                    session:fill_object(objt, ttype)
+                end
+            end
         end
+
+        if list_type == 'index' then
+            if type(nvalue) ~= 'table' then
+                return
+            end
+            for k, v in pairs(nvalue) do
+                self[key..'_'..k] = v
+            end
+            return
+        end
+
+        if list_type == 'level' then
+            if type(nvalue) ~= 'table' then
+                write_data(nvalue, level)
+                return
+            end
+            local max_level = objt._max_level
+            if #nvalue == max_level then
+                for i = 1, max_level do
+                    write_data(nvalue[i], i)
+                end
+                return
+            end
+            if max_level <= 1 then
+                return
+            end
+            local min = nvalue[1]
+            local max = nvalue[#nvalue]
+            local o = (max - min) / (max_level - 1)
+            for i = 1, max_level do
+                write_data(min + o * (i - 1), i)
+            end
+            return
+        end
+
+        if type(nvalue) == 'table' then
+            return
+        end
+
+        write_data(nvalue, level)
+
         session.used[ttype] = true
     end
     function mt:__pairs()
@@ -266,7 +351,7 @@ function mt:create_object(objt, ttype, name)
                 if not nkey then
                     return
                 end
-                meta = get_meta(nkey, session.metadata[ttype], objt._code and session.metadata[objt._code])
+                meta = try_meta(nkey, session.metadata[ttype], objt._code and session.metadata[objt._code])
                 if meta then
                     break
                 end
