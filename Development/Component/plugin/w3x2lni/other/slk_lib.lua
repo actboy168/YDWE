@@ -257,16 +257,6 @@ function mt:create_object(objt, ttype, name)
             end
             key = meta.field:lower()
 
-            local dvalue
-            if level then
-                dvalue = objd[key][level] or (not meta.profile and objd[key][#objd[key]])
-            else
-                dvalue = objd[key]
-            end
-            if nvalue == dvalue then
-                return
-            end
-
             if meta.type == 3 and #nvalue > 1023 then
                 nvalue = nvalue:sub(1, 1023)
             end
@@ -376,6 +366,11 @@ function mt:create_object(objt, ttype, name)
         end
         if type(data) ~= 'table' then
             return self
+        end
+        local level_key = session.w2l.info.key.max_level[ttype]
+        if data[level_key] then
+            self[level_key] = data[level_key]
+            data[level_key] = nil
         end
         for k, v in pairs(data) do
             self[k] = v
@@ -557,6 +552,7 @@ function mt:refresh(report)
             end
         end
     end
+    self.w2l.config.remove_same = true
     self.w2l:backend_cleanobj(objs)
     for type, data in pairs(objs) do
         local buf = self.w2l:backend_obj(type, data)
