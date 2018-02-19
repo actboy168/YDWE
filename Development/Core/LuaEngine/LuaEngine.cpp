@@ -63,7 +63,7 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 	LOGGING_INFO(lg) << base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
 
 #ifndef _DEBUG
-	base::hook::inline_install(&RealLuaPcall, (uintptr_t)FakeLuaPcall);
+	base::hook::install(&RealLuaPcall, (uintptr_t)FakeLuaPcall);
 #endif
 	lua_State* L = luaL_newstate();
 	if (!L)
