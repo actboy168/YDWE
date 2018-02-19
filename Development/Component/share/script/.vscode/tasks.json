@@ -1,0 +1,22 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "command": "cmd",
+    "args": [
+        "/c"
+    ],
+    "isShellCommand": true,
+    "showOutput": "always",
+    "echoCommand": true,
+    "suppressTaskName": true,
+    "tasks": [
+        {
+            "taskName": "运行",
+            "args": [
+                "\"${workspaceRoot}/../../../Build/bin/Debug/ydwe.exe\""
+            ],
+            "isBuildCommand": true
+        }
+    ]
+}

@@ -5,10 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "attach",
+            "name": "附加",
             "type": "lua",
             "request": "attach",
             "stopOnEntry": true,
+            "ip": "localhost",
+            "port": 4279
+        },
+        {
+            "name": "运行",
+            "type": "lua",
+            "request": "attach",
+            "stopOnEntry": true,
+            "preLaunchTask": "运行",
             "ip": "localhost",
             "port": 4279
         }
