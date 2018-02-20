@@ -21,6 +21,9 @@ local function try_value(t, key)
     if key == 'code' then
         return t._code, nil
     end
+    if key == 'w2lobject' then
+        return nil, nil
+    end
     local nkey, level = key:match '^(%a+)(%d*)'
     if not nkey then
         return nil, nil
@@ -44,7 +47,9 @@ local function try_value(t, key)
         if key == nkey then
             return table.concat(values, ','), nil
         end
-    else
+    end
+
+    if t[nkey] then
         local value = t[nkey]
         if type(value) == 'table' then
             if key == nkey then
@@ -58,7 +63,8 @@ local function try_value(t, key)
             end
         end
     end
-    return nil, nil
+
+    return t[key], nil
 end
 
 local function get_default(t)
@@ -78,6 +84,9 @@ end
 
 local function try_meta(key, meta1, meta2)
     key = key:lower()
+    if key == 'w2lobject' then
+        return nil, nil, nil
+    end
     local nkey, level = key:match '^(%a+)(%d*)'
     if not nkey then
         return nil, nil, nil
@@ -102,7 +111,9 @@ local function try_meta(key, meta1, meta2)
                 break
             end
         end
-    else
+    end
+    
+    if get_meta(nkey) then
         local meta = get_meta(nkey)
         if meta and meta['repeat'] then
             if key == nkey then
@@ -116,7 +127,8 @@ local function try_meta(key, meta1, meta2)
             end
         end
     end
-    return nil, nil, nil
+    
+    return get_meta(key), nil, nil
 end
 
 local function to_type(value, tp)
