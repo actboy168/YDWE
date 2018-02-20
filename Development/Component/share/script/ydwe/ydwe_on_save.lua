@@ -91,12 +91,12 @@ local function compile_map(map_path, option)
 				if not template:compile(compile_t) then
 					return nil
 				end
+
+				ev.emit('编译地图')
 				
 				return compile_t.output
 			end
 		)
-		
-		ev.emit('编译地图')
 		
 		-- 开始调用编译工具编译
 		if result then

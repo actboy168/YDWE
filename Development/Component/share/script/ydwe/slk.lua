@@ -31,7 +31,6 @@ local function initialize()
         return map:load_file(filename)
     end
     function w2l:map_save(filename, buf)
-        log.debug('map_save', filename, #buf)
         return map:save_file(filename, buf)
     end
     function w2l:map_remove(filename)
