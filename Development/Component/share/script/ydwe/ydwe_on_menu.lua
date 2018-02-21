@@ -51,13 +51,6 @@ end
 function event.EVENT_INIT_MENU(event_data)
 	log.debug("********************* on menuinit start *********************")
 
-	-- 处理一下Tile Limit Breaker插件
-	if plugin then
-		if plugin.loaders['YDTileLimitBreaker'] and plugin.loaders['YDTileLimitBreaker'].start then
-			plugin.loaders['YDTileLimitBreaker'].start()
-		end
-	end
-
 	local menu = gui.menu(event_data.main_menu_handle, LNG.MENU_YDWE)
 	menu:add(LNG.MENU_CONIFG, launch_config)
 	menu:add(LNG.MENU_LAUNCH_WAR3, launch_warcraft3)
