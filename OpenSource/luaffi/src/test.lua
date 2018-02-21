@@ -28,8 +28,8 @@ else
 end
 
 if ffi.arch == 'x86' and ffi.os == 'Windows' then
-    dlls.__stdcall = ffi.load('test_stdcall')
-    dlls.__fastcall = ffi.load('test_fastcall')
+    --dlls.__stdcall = ffi.load('test_stdcall')
+    --dlls.__fastcall = ffi.load('test_fastcall')
 end
 
 local function check(a, b, msg)
@@ -757,21 +757,23 @@ if _VERSION == "Lua 5.3" then
 
     local native_80 = 0x8000000000000000
 
-    for _, func in ipairs{ffi.C.add_i64, ffi.C.add_u64} do
-        -- 0x7FFFFFFFFFFFFFFF (native)         + 1 == 0x8000000000000000 (native)
-        local res = func(native_7F, 1)
-        assert(type(res) == "number", "native_7F: returned value not a number")
-        assert(res == native_80, "native_7F: math error")
+    for _, c in pairs(dlls) do
+        for _, func in ipairs{c.add_i64, c.add_u64} do
+            -- 0x7FFFFFFFFFFFFFFF (native)         + 1 == 0x8000000000000000 (native)
+            local res = func(native_7F, 1)
+            assert(type(res) == "number", "native_7F: returned value not a number")
+            assert(res == native_80, "native_7F: math error")
 
-        -- 0x7FFFFFFFFFFFFFFF (cdata int64_t)  + 1 == 0x8000000000000000 (native)
-        local res = func(cdata_long_7F, 1)
-        assert(type(res) == "number", "cdata_long_7F: returned value not a number")
-        assert(res == native_80, "cdata_long_7F: math error")
+            -- 0x7FFFFFFFFFFFFFFF (cdata int64_t)  + 1 == 0x8000000000000000 (native)
+            local res = func(cdata_long_7F, 1)
+            assert(type(res) == "number", "cdata_long_7F: returned value not a number")
+            assert(res == native_80, "cdata_long_7F: math error")
 
-        -- 0x7FFFFFFFFFFFFFFF (cdata uint64_t) + 1 == 0x8000000000000000 (native)
-        local res = func(cdata_ulong_7F, 1)
-        assert(type(res) == "number", "cdata_ulong_7F: returned value not a number")
-        assert(res == native_80, "cdata_ulong_7F: math error")
+            -- 0x7FFFFFFFFFFFFFFF (cdata uint64_t) + 1 == 0x8000000000000000 (native)
+            local res = func(cdata_ulong_7F, 1)
+            assert(type(res) == "number", "cdata_ulong_7F: returned value not a number")
+            assert(res == native_80, "cdata_ulong_7F: math error")
+        end
     end
 end
 

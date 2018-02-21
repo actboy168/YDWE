@@ -1,8 +1,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffi", "ffi.vcxproj", "{076A366B-6B75-4D35-A6A9-CA680F0771E3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffi_test", "ffi_test.vcxproj", "{B74E8082-49A4-493F-8955-DE4DB1B1E592}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +16,10 @@ Global
 		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Debug|Win32.Build.0 = Debug|Win32
 		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Release|Win32.ActiveCfg = Release|Win32
 		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Release|Win32.Build.0 = Release|Win32
+		{B74E8082-49A4-493F-8955-DE4DB1B1E592}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B74E8082-49A4-493F-8955-DE4DB1B1E592}.Debug|Win32.Build.0 = Debug|Win32
+		{B74E8082-49A4-493F-8955-DE4DB1B1E592}.Release|Win32.ActiveCfg = Release|Win32
+		{B74E8082-49A4-493F-8955-DE4DB1B1E592}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

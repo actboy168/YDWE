@@ -19,8 +19,10 @@
 #include <errno.h>
 #endif
 
+#if __STDC_VERSION__+0 >= 199901L
 #include <complex.h>
 #define HAVE_COMPLEX
+#endif
 
 #ifdef __cplusplus
 # define EXTERN_C extern "C"
