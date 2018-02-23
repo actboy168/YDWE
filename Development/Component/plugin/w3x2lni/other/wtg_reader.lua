@@ -217,6 +217,9 @@ local function get_ui_returns(ui, ui_type, ui_guess_level)
 end
 
 local function get_call_type(name, ui_type, ui_guess_level)
+    if ui_type == 'eventcall' then
+        return ui_type, ui_guess_level
+    end
     local ui = get_ui_define('call', name)
     if ui then
         return get_ui_returns(ui, ui_type, ui_guess_level)
@@ -305,7 +308,8 @@ local function read_arg()
     assert(arg.insert_call == 0 or arg.insert_call == 1, 'arg.insert_call 错误')
 
     if arg.insert_call == 1 then
-        arg.eca = read_eca(false)
+        local eca_type = unpack 'l'
+        arg.eca = read_eca(false, eca_type)
     end
 
     arg.insert_index = unpack 'l'
@@ -316,11 +320,15 @@ local function read_arg()
     return arg
 end
 
-function read_eca(is_child)
+function read_eca(is_child, eca_type)
     local eca = {}
-    eca.type = unpack 'l'
-    if is_child then
-        eca.child_id = unpack 'l'
+    if eca_type then
+        eca.type = eca_type
+    else
+        eca.type = unpack 'l'
+        if is_child then
+            eca.child_id = unpack 'l'
+        end
     end
     eca.name   = unpack 'z'
     eca.enable = unpack 'l'
