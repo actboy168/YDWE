@@ -41,6 +41,8 @@ end)
 
 event.on('GameDll加载', function ()
     ll.load_library(fs.ydwe_path() / 'plugin' / 'warcraft3' / 'yd_loader.dll')
+    local war3 = require 'war3patch'
+    war3.remove_sizelimit()
 end)
 
 event.on('GameDll加载', function ()
