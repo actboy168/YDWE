@@ -66,9 +66,6 @@
     <ClCompile Include="TriggerParameterDialog_Type_Hook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Storm\StringHash.cpp">
-      <Filter>Storm</Filter>
-    </ClCompile>
     <ClCompile Include="Hashtable\GUIID_Table.cpp">
       <Filter>HashTable</Filter>
     </ClCompile>

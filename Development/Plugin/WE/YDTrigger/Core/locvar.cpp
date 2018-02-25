@@ -5,6 +5,7 @@
 #include <string>
 #include <functional>
 #include <base/util/foreach.h>
+#include <base/warcraft3/detail/string_hash.h>
 
 extern BOOL g_bDisableSaveLoadSystem;
 extern BOOL g_local_in_mainproc;
@@ -144,7 +145,7 @@ namespace locvar
 	void do_get_array(DWORD OutClass, const char* type_name, const char* var_name, const state& s, std::function<void(void)> index)
 	{
 		g_bDisableSaveLoadSystem = FALSE;
-		unsigned int hash = SStrHash(var_name);
+		unsigned int hash = base::warcraft3::detail::string_hash(var_name);
 		hash = ((hash >> 24) & 0xFF) | (((hash >> 16) & 0xFF) << 8) | (((hash >> 8) & 0xFF) << 16) | ((hash & 0xFF) << 24);
 
 		char buff[260];
@@ -186,7 +187,7 @@ namespace locvar
 	void do_set_array(DWORD OutClass, const char* type_name, int id, const char* var_name, const state& s, std::function<void(void)> index, std::function<void(void)> func)
 	{
 		g_bDisableSaveLoadSystem = FALSE;
-		unsigned int hash = SStrHash(var_name);
+		unsigned int hash = base::warcraft3::detail::string_hash(var_name);
 		hash = ((hash >> 24) & 0xFF) | (((hash >> 16) & 0xFF) << 8) | (((hash >> 8) & 0xFF) << 16) | ((hash & 0xFF) << 24);
 
 		char buff[260];

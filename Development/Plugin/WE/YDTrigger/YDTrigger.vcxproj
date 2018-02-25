@@ -119,7 +119,6 @@
     <ClCompile Include="SetGUIId_Hook.cpp" />
     <ClCompile Include="SetGUI_Hook.cpp" />
     <ClCompile Include="ShowError.cpp" />
-    <ClCompile Include="Storm\StringHash.cpp" />
     <ClCompile Include="TriggerParameterDialog_FuncList_Hook.cpp" />
     <ClCompile Include="TriggerParameterDialog_Type_Hook.cpp" />
   </ItemGroup>
