@@ -72,7 +72,6 @@ local slk
 local buffmap
 local search
 local mark_known_type
-local mark_known_type_no_child
 local report_once = {}
 local current_root = {'', '%s%s'}
 
@@ -124,37 +123,15 @@ local function report(type, id)
     w2l.message('-tip', format_marktip(slk, current_root))
 end
 
-local function mark_value(slk, type, value)
-    if type == 'upgrade,unit' then
-        if std_type(value) == 'string' then
-            for _, name in ipairs(split(value)) do
-                if not mark_known_type_no_child(slk, 'unit', name) then
-                    if not mark_known_type_no_child(slk, 'upgrade', name) then
-                        if not mark_known_type_no_child(slk, 'misc', name) then
-                            report('简化时没有找到对象:', name)
-                        end
-                    end
-                end
-            end
-        else
-            if not mark_known_type_no_child(slk, 'unit', value) then
-                if not mark_known_type_no_child(slk, 'upgrade', value) then
-                    if not mark_known_type_no_child(slk, 'misc', value) then
-                        report('简化时没有找到对象:', value)
-                    end
-                end
-            end
-        end
-        return
-    end
+local function mark_value(slk, type, value, nosearch)
     if std_type(value) == 'string' then
         for _, name in ipairs(split(value)) do
-            if not mark_known_type(slk, type, name) then
+            if not mark_known_type(slk, type, name, nosearch) then
                 report('简化时没有找到对象:', name)
             end
         end
     else
-        if not mark_known_type(slk, type, value) then
+        if not mark_known_type(slk, type, value, nosearch) then
             report('简化时没有找到对象:', value)
         end
     end
@@ -165,37 +142,20 @@ local function mark_list(slk, o, list)
         return
     end
     for key, type in pairs(list) do
+        local nosearch = (key == 'upgrades')
         local value = o[key]
         if not value then
         elseif std_type(value) == 'table' then
             for _, name in ipairs(value) do
-                mark_value(slk, type, name)
+                mark_value(slk, type, name, nosearch)
             end
         else
-            mark_value(slk, type, value)
+            mark_value(slk, type, value, nosearch)
         end
     end
 end
 
-function mark_known_type_no_child(slk, type, name)
-    local o = slk[type][name]
-    if not o then
-        local o = slk.txt[name:lower()]
-        if o then
-            o._mark = current_root
-            report('引用未分类对象: ', ('%s 期望分类：%s'):format(name:lower(), type))
-            return true
-        end
-        return false
-    end
-    if o._mark then
-        return true
-    end
-    o._mark = current_root
-    return true
-end
-
-local function mark_known_type2(slk, type, name)
+local function mark_known_type2(slk, type, name, nosearch)
     local o = slk[type][name]
     if not o then
         local o = slk.txt[name:lower()]
@@ -209,35 +169,38 @@ local function mark_known_type2(slk, type, name)
     if not o._mark then
         o._mark = current_root
     end
-    if o._mark_child then
-        return true
-    end
-    o._mark_child = true
-    mark_list(slk, o, search[type])
-    if o._code then
-        mark_list(slk, o, search[o._code])
-        local marklist = mustmark[o._code]
-        if marklist then
-            if not mark_known_type(slk, marklist[2], marklist[1]) then
-                report('简化时没有找到对象:', marklist[1])
+    if not nosearch and not o._mark_child then
+        o._mark_child = true
+        mark_list(slk, o, search[type])
+        if o._code then
+            mark_list(slk, o, search[o._code])
+            local marklist = mustmark[o._code]
+            if marklist then
+                if not mark_known_type(slk, marklist[2], marklist[1]) then
+                    report('简化时没有找到对象:', marklist[1])
+                end
             end
         end
     end
     return true
 end
 
-function mark_known_type(slk, type, name)
+function mark_known_type(slk, type, name, nosearch)
     if type == 'buff' then
         local m = buffmap[name:lower()]
         if m then
             for _, name in ipairs(m) do
-                mark_known_type2(slk, type, name)
+                mark_known_type2(slk, type, name, nosearch)
             end
             return true
         end
         return false
+    elseif type == 'upgrade,unit' then
+        return mark_known_type2(slk, 'unit', name, true)
+            or mark_known_type2(slk, 'upgrade', name, true)
+            or mark_known_type2(slk, 'misc', name, true)
     else
-        return mark_known_type2(slk, type, name)
+        return mark_known_type2(slk, type, name, nosearch)
     end
 end
 
@@ -269,20 +232,20 @@ local function mark_jass(slk, list, flag)
             mark(slk, name)
         end
     end
-    local maptile = slk.w3i and slk.w3i['地形']['地形类型'] or '*'
-    for _, obj in pairs(slk.unit) do
-        -- 随机建筑
-        if flag.building and obj.isbldg == 1 and obj.nbrandom == 1 then
+    if flag.building or flag.creeps then
+        local maptile = slk.w3i and slk.w3i['地形']['地形类型'] or '*'
+        for _, obj in pairs(slk.unit) do
             if obj.race == 'creeps' and obj.tilesets and (obj.tilesets == '*' or obj.tilesets:find(maptile)) then
-                current_root = {obj._id, "保留的野怪建筑'%s'[%s]引用了它"}
-                mark_known_type(slk, 'unit', obj._id)
-            end
-        end
-        -- 随机单位
-        if flag.creeps and obj.isbldg == 0 then
-            if obj.race == 'creeps' and obj.tilesets and (obj.tilesets == '*' or obj.tilesets:find(maptile)) and obj.special == 0 then
-                current_root = {obj._id, "保留的野怪单位'%s'[%s]引用了它"}
-                mark_known_type(slk, 'unit', obj._id)
+                -- 随机建筑
+                if flag.building and obj.isbldg == 1 and obj.nbrandom == 1 then
+                    current_root = {obj._id, "保留的野怪建筑'%s'[%s]引用了它"}
+                    mark_known_type(slk, 'unit', obj._id)
+                end
+                -- 随机单位
+                if flag.creeps and obj.isbldg == 0 and obj.special == 0 then
+                    current_root = {obj._id, "保留的野怪单位'%s'[%s]引用了它"}
+                    mark_known_type(slk, 'unit', obj._id)
+                end
             end
         end
     end

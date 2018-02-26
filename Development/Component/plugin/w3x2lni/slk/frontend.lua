@@ -63,7 +63,7 @@ local function load_w3i(w2l, slk)
     else
         buf = w2l:map_load 'war3map.w3i'
         if buf then
-            return w2l:read_w3i(buf, slk.wts)
+            return w2l:frontend_w3i(buf, slk.wts)
         end
     end
     return nil

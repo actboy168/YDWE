@@ -272,10 +272,10 @@ return function (w2l, slk)
     clean_file(w2l, slk)
     if slk.w3i then
         if w2l.config.target_format == 'lni' then
-            w2l:map_save('war3map.w3i.ini', w2l:w3i2lni(slk.w3i), slk.wts)
+            w2l:map_save('war3map.w3i.ini', w2l:backend_w3i2lni(slk.w3i), slk.wts)
             w2l:map_remove('war3map.w3i')
         else
-            w2l:map_save('war3map.w3i', w2l:lni2w3i(slk.w3i, slk.wts))
+            w2l:map_save('war3map.w3i', w2l:backend_w3i(slk.w3i, slk.wts))
         end
     end
     w2l.progress(0.1)

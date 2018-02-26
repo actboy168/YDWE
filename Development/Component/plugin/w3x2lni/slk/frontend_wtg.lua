@@ -6,7 +6,7 @@ local unpack_index
 local read_eca
 local fix
 local retry_point
-local abort
+local need_retry
 
 local fix_step
 local trigger_types
@@ -16,10 +16,17 @@ local var_map
 local unknowtypes
 local unknowindex
 
+local function assert_then_retry(b, info)
+    if b then
+        return
+    end
+    need_retry = true
+    error(info)
+end
+
 local function fix_arg(n)
     n = n or #fix_step
     if n <= 0 then
-        abort = true
         if #fix_step > 0 then
             error '未知UI参数超过100个，放弃修复。'
         else
@@ -216,11 +223,8 @@ local function get_ui_returns(ui, ui_type, ui_guess_level)
     return ui.returns, ui.returns_guess_level
 end
 
-local function get_call_type(name, ui_type, ui_guess_level)
-    if ui_type == 'eventcall' then
-        return ui_type, ui_guess_level
-    end
-    local ui = get_ui_define('call', name)
+local function get_call_type(name, eca_type, ui_type, ui_guess_level)
+    local ui = get_ui_define(eca_type, name)
     if ui then
         return get_ui_returns(ui, ui_type, ui_guess_level)
     else
@@ -251,7 +255,7 @@ local function get_arg_type(arg, ui_type, ui_guess_level)
     elseif atp == 'var' then
         return get_var_type(arg.value)
     elseif atp == 'call' then
-        return get_call_type(arg.value, ui_type, ui_guess_level)
+        return get_call_type(arg.eca.name, type_map[arg.eca.type], ui_type, ui_guess_level)
     else
         return get_constant_type(arg.value)
     end
@@ -304,8 +308,8 @@ local function read_arg()
     arg.type        = unpack 'l'
     arg.value       = unpack 'z'
     arg.insert_call = unpack 'l'
-    assert(arg_type_map[arg.type], 'arg.type 错误')
-    assert(arg.insert_call == 0 or arg.insert_call == 1, 'arg.insert_call 错误')
+    assert_then_retry(arg_type_map[arg.type], 'arg.type 错误')
+    assert_then_retry(arg.insert_call == 0 or arg.insert_call == 1, 'arg.insert_call 错误')
 
     if arg.insert_call == 1 then
         local eca_type = unpack 'l'
@@ -313,7 +317,7 @@ local function read_arg()
     end
 
     arg.insert_index = unpack 'l'
-    assert(arg.insert_index == 0 or arg.insert_index == 1, 'arg.insert_index 错误')
+    assert_then_retry(arg.insert_index == 0 or arg.insert_index == 1, 'arg.insert_index 错误')
     if arg.insert_index == 1 then
         arg.index = read_arg()
     end
@@ -333,9 +337,9 @@ function read_eca(is_child, eca_type)
     eca.name   = unpack 'z'
     eca.enable = unpack 'l'
 
-    assert(type_map[eca.type], 'eca.type 错误')
-    assert(eca.name:match '^[%g%s]*$', ('eca.name 错误：[%s]'):format(eca.name))
-    assert(eca.enable == 0 or eca.enable == 1, 'eca.enable 错误')
+    assert_then_retry(type_map[eca.type], 'eca.type 错误')
+    assert_then_retry(eca.name:match '^[%g%s]*$', ('eca.name 错误：[%s]'):format(eca.name))
+    assert_then_retry(eca.enable == 0 or eca.enable == 1, 'eca.enable 错误')
 
     eca.args = {}
     local ui = get_ui_define(type_map[eca.type], eca.name)
@@ -371,11 +375,11 @@ local function read_trigger()
     trigger.run_init = unpack 'l'
     trigger.category = unpack 'l'
 
-    assert(trigger.type == 0 or trigger.type == 1, 'trigger.type 错误')
-    assert(trigger.enable == 0 or trigger.enable == 1, 'trigger.enable 错误')
-    assert(trigger.wct == 0 or trigger.wct == 1, 'trigger.wct 错误')
-    assert(trigger.init == 0 or trigger.init == 1, 'trigger.init 错误')
-    assert(trigger.run_init == 0 or trigger.run_init == 1, 'trigger.run_init 错误')
+    assert_then_retry(trigger.type == 0 or trigger.type == 1, 'trigger.type 错误')
+    assert_then_retry(trigger.enable == 0 or trigger.enable == 1, 'trigger.enable 错误')
+    assert_then_retry(trigger.wct == 0 or trigger.wct == 1, 'trigger.wct 错误')
+    assert_then_retry(trigger.init == 0 or trigger.init == 1, 'trigger.init 错误')
+    assert_then_retry(trigger.run_init == 0 or trigger.run_init == 1, 'trigger.run_init 错误')
 
     trigger.ecas = {}
     local count = unpack 'l'
@@ -399,8 +403,13 @@ local function read_triggers()
             break
         else
             try_count = try_count + 1
-            assert(not abort, err)
-            assert(try_count < 1000, '在大量尝试后放弃修复。')
+            if not need_retry then
+                error(err)
+            end
+            need_retry = false
+            if try_count > 1000 then
+                error('在大量尝试后放弃修复。')
+            end
             w2l.message(err)
             if retry_point then
                 pos, unpack_index = retry_point[1], retry_point[2]
