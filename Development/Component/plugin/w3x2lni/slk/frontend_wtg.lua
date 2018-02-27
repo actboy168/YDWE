@@ -218,7 +218,7 @@ local function get_ui_returns(ui, ui_type, ui_guess_level)
         ui.returns = ui_type
         ui.returns_guess_level = ui_guess_level
         retry_point = ui.save_point
-        error(('重新计算[%s]的参数类型。'):format(ui.name))
+        assert_then_retry(true, ('重新计算[%s]的参数类型。'):format(ui.name))
     end
     return ui.returns, ui.returns_guess_level
 end
