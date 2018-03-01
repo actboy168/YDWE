@@ -70,9 +70,9 @@ namespace process {
 				return 0;
 			}
 			if (type == 'r') {
-				return push(L, h, _O_RDONLY, "r");
+				return push(L, h, _O_RDONLY |_O_TEXT, "rt");
 			}
-			return push(L, h, _O_WRONLY, "w");
+			return push(L, h, _O_WRONLY | _O_TEXT, "wt");
 		}
 
 		static int peek(lua_State* L, int idx)
