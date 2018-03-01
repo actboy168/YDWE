@@ -37,6 +37,8 @@ for i = 1, 24 do
 		v = -v
 	end
 	o.DataA1 = v
+    o.Name = '万能属性-攻击'
+    o.EditorSuffix = '请勿修改'
 end
 for i = 1, 13 do
 	local o = slk.ability.AId0:new('YDc'..idx[i])
@@ -45,6 +47,8 @@ for i = 1, 13 do
 		v = -v
 	end
 	o.DataA1 = v
+    o.Name = '万能属性-护甲'
+    o.EditorSuffix = '请勿修改'
 end
 for i = 1, 16 do
 	local o = slk.ability.AIlz:new('YDl'..idx[i])
@@ -53,6 +57,8 @@ for i = 1, 16 do
 	o.DataA1 = 0
 	o.DataA2 = v
 	o.DataA3 = -v
+    o.Name = '万能属性-生命'
+    o.EditorSuffix = '请勿修改'
 end
 for i = 1, 16 do
 	local o = slk.ability.AImz:new('YDm'..idx[i])
@@ -61,6 +67,8 @@ for i = 1, 16 do
 	o.DataA1 = 0
 	o.DataA2 = v
 	o.DataA3 = -v
+    o.Name = '万能属性-魔法'
+    o.EditorSuffix = '请勿修改'
 end
 ?>
 //以下函数仅仅是让技能ID出现在代码里，不然SLK优化器会删除这些技能
