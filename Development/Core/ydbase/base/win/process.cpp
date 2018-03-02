@@ -250,6 +250,9 @@ namespace base { namespace win {
 				return false;
 			}
 			statue_ = PROCESS_STATUE_RUNNING;
+			::CloseHandle(si_.hStdInput);
+			::CloseHandle(si_.hStdOutput);
+			::CloseHandle(si_.hStdError);
 			return true;
 		}
 		return false;
