@@ -168,6 +168,25 @@ namespace process {
 		lua_pushboolean(L, ok);
 		return 1;
 	}
+	
+	int set_console(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		const char* console = luaL_checkstring(L, 2);
+		if (strcmp(console, "new") == 0) {
+			lua_pushboolean(L, self.set_console(base::win::process::CONSOLE_NEW));
+		}
+		else if(strcmp(console, "disable") == 0) {
+			lua_pushboolean(L, self.set_console(base::win::process::CONSOLE_DISABLE));
+		}
+		else if (strcmp(console, "inherit") == 0) {
+			lua_pushboolean(L, self.set_console(base::win::process::CONSOLE_INHERIT));
+		}
+		else {
+			lua_pushboolean(L, 0);
+		}
+		return 1;
+	}
 
 	int hide_window(lua_State* L)
 	{
@@ -279,6 +298,7 @@ int luaopen_process(lua_State* L)
 	static luaL_Reg mt[] = {
 		{ "inject", process::inject },
 		{ "hide_window", process::hide_window },
+		{ "set_console", process::set_console },
 		{ "std_input", process::std_input },
 		{ "std_output", process::std_output },
 		{ "std_error", process::std_error },

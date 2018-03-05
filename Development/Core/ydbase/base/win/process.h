@@ -16,11 +16,19 @@ namespace base { namespace win {
 			PROCESS_STATUE_READY,
 			PROCESS_STATUE_RUNNING,
 		};
-		
+
+		enum CONSOLE
+		{
+			CONSOLE_INHERIT,
+			CONSOLE_DISABLE,
+			CONSOLE_NEW,
+		};
+
 		process();
 		~process();
 		bool     inject(const fs::path& dllpath);
 		bool     replace(const fs::path& dllpath, const char* dllname);
+		bool     set_console(CONSOLE type);
 		bool     hide_window();
 		bool     redirect(HANDLE std_input, HANDLE std_output, HANDLE std_error);
 		bool     create(const std::optional<fs::path>& application, const std::wstring& command_line, const std::optional<fs::path>& current_directory = std::optional<fs::path>());
@@ -42,6 +50,7 @@ namespace base { namespace win {
 		STARTUPINFOW            si_;
 		PROCESS_INFORMATION     pi_;
 		bool                    inherit_handle_;
+		DWORD                   console_;
 	};
 
 	_BASE_API bool create_process(

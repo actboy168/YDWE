@@ -152,6 +152,7 @@ namespace base { namespace win {
 	process::process()
 		: statue_(PROCESS_STATUE_READY)
 		, inherit_handle_(false)
+		, console_(0)
 	{
 		si_.cb = sizeof STARTUPINFOW;
 		::GetStartupInfoW(&si_);
@@ -183,6 +184,26 @@ namespace base { namespace win {
 		if (statue_ == PROCESS_STATUE_READY)
 		{
 			replace_dll_[dllname] = dllpath;
+			return true;
+		}
+		return false;
+	}
+
+	bool process::set_console(CONSOLE type)
+	{
+		if (statue_ == PROCESS_STATUE_READY)
+		{
+			switch (type) {
+			case CONSOLE_INHERIT:
+				console_ = 0;
+				break;
+			case CONSOLE_DISABLE:
+				console_ = CREATE_NO_WINDOW;
+				break;
+			case CONSOLE_NEW:
+				console_ = CREATE_NEW_CONSOLE;
+				break;
+			}
 			return true;
 		}
 		return false;
@@ -245,7 +266,7 @@ namespace base { namespace win {
 				application? application->c_str(): nullptr,
 				command_line_buffer.data(),
 				inherit_handle_,
-				NORMAL_PRIORITY_CLASS,
+				console_ | NORMAL_PRIORITY_CLASS,
 				current_directory ? current_directory->c_str() : nullptr,
 				&si_, &pi_, inject_dll_, replace_dll_
 				))
