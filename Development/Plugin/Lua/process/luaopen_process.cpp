@@ -42,15 +42,13 @@ namespace process {
 		{
 			SECURITY_ATTRIBUTES sa;
 			sa.nLength = sizeof(SECURITY_ATTRIBUTES);
-			sa.bInheritHandle = TRUE;
+			sa.bInheritHandle = FALSE;
 			sa.lpSecurityDescriptor = NULL;
 			HANDLE read_pipe = NULL, write_pipe = NULL;
 			if (!::CreatePipe(&read_pipe, &write_pipe, &sa, 0))
 			{
 				return std::make_pair((HANDLE)NULL, (HANDLE)NULL);
 			}
-			::SetHandleInformation(read_pipe, HANDLE_FLAG_INHERIT, 0);
-			::SetHandleInformation(write_pipe, HANDLE_FLAG_INHERIT, 0);
 			return std::make_pair(read_pipe, write_pipe);
 		}
 

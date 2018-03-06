@@ -155,7 +155,7 @@ namespace base { namespace win {
 		, console_(0)
 	{
 		si_.cb = sizeof STARTUPINFOW;
-		::GetStartupInfoW(&si_);
+		memset(&si_, 0, sizeof STARTUPINFOW);
 		si_.dwFlags = 0;
 		si_.hStdInput = INVALID_HANDLE_VALUE;
 		si_.hStdOutput = INVALID_HANDLE_VALUE;
