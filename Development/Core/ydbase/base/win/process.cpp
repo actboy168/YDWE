@@ -154,13 +154,13 @@ namespace base { namespace win {
 		, inherit_handle_(false)
 		, console_(0)
 	{
-		si_.cb = sizeof STARTUPINFOW;
 		memset(&si_, 0, sizeof STARTUPINFOW);
+		memset(&pi_, 0, sizeof PROCESS_INFORMATION);
+		si_.cb = sizeof STARTUPINFOW;
 		si_.dwFlags = 0;
 		si_.hStdInput = INVALID_HANDLE_VALUE;
 		si_.hStdOutput = INVALID_HANDLE_VALUE;
 		si_.hStdError = INVALID_HANDLE_VALUE;
-		memset(&pi_, 0 ,sizeof PROCESS_INFORMATION);
 	}
 
 	process::~process()
