@@ -29,11 +29,9 @@ function mt:stringify_ui(data_title, string_title, t)
             local limits = ''
             local has_default = false
             local has_limit = false
-            if u.use_in_event then
-                args = args .. ',' .. u.use_in_event
-            end
-            if u.returns then
-                args = args .. ',' .. u.returns
+            if data_title == 'TriggerCalls' then
+                args = args .. ',' .. u.use_in_event or 0
+                args = args .. ',' .. u.returns or 'nothing'
             end
             if u.args then
                 for i, arg in ipairs(u.args) do
