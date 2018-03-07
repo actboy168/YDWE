@@ -248,7 +248,7 @@ local function initialize()
             if not gui.yesno_message(nil, LNG.PARSE_UNKNOWN_UI) then
                 return
             end
-	    	local _, fix = w2l:frontend_wtg(wtg, state)
+	    	local _, fix = w2l:wtg_reader(wtg, state)
             local bufs = {ui.new_writer(fix)}
             local dir = fs.ydwe_path() / 'share' / 'ui' / 'unknowui'
 	    	fs.create_directories(dir)
