@@ -337,12 +337,10 @@ return function (w2l, slk)
     end
     w2l.progress(0.94)
 
-    if w2l.config.target_format == 'lni' then
-        local buf = w2l:map_load 'war3map.imp'
-        if buf then
-            w2l:map_remove('war3map.imp')
-            w2l:map_save('war3map.imp.ini', w2l:backend_imp(buf))
-        end
+    local buf = w2l:map_load 'war3map.imp'
+    if buf then
+        w2l:map_remove('war3map.imp')
+        w2l:map_save('war3map.imp.ini', w2l:backend_imp(buf))
     end
 
     w2l.message('重新生成字符串...')

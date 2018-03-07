@@ -1,6 +1,7 @@
 local w3xparser = require 'w3xparser'
 local mpq_path = require 'mpq_path'
 local lni = require 'lni-c'
+local lml = require 'lml'
 local progress = require 'progress'
 local slk = w3xparser.slk
 local txt = w3xparser.txt
@@ -26,6 +27,10 @@ end
 
 function mt:parse_lni(buf, filename, ...)
     return lni(buf, filename, ...)
+end
+
+function mt:parse_lml(buf)
+    return lml(buf)
 end
 
 function mt:parse_slk(buf)

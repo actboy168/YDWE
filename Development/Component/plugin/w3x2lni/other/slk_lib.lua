@@ -28,14 +28,14 @@ local function try_value(t, key)
     if not nkey then
         return nil, nil
     end
-    if t[nkey..':1'] then
+    if t[nkey..'_1'] then
         local values = {}
         local index = 0
         while true do
             index = index + 1
-            local k = nkey .. ':' .. index
+            local k = nkey .. '_' .. index
             local v = t[k]
-            if key == k or key == nkey .. '_' .. index then
+            if key == k or key == nkey .. ':' .. index then
                 return v, nil
             end
             if v then
@@ -95,16 +95,16 @@ local function try_meta(key, meta1, meta2)
     local function get_meta(key)
         return meta1 and meta1[key] or meta2 and meta2[key]
     end
-    if get_meta(nkey..':1') then
+    if get_meta(nkey..'_1') then
         if key == nkey then
-            return get_meta(nkey..':1'), nil, 'index'
+            return get_meta(nkey..'_1'), nil, 'index'
         end
         local index = 0
         while true do
             index = index + 1
-            local k = nkey .. ':' .. index
+            local k = nkey .. '_' .. index
             local v = get_meta(k)
-            if key == k or key == nkey .. '_' .. index then
+            if key == k or key == nkey .. ':' .. index then
                 return v, nil, nil
             end
             if not v then
@@ -359,7 +359,7 @@ function mt:create_object(objt, ttype, name)
                 end
                 nkey = next(objt, nkey)
             end
-            key = meta.field:gsub(':', '_')
+            key = meta.field:gsub('_', ':')
             if type(objt[nkey]) ~= 'table' then
                 return key, objt[nkey] or ''
             end

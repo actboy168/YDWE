@@ -74,7 +74,7 @@ local function add_data(obj, meta, value, keyval)
     if meta.index then
         -- TODO: 有点奇怪的写法
         if meta.index == 1 then
-            local value = get_index_data(meta.type, {obj[meta.key..':1'], obj[meta.key..':2']}, 2)
+            local value = get_index_data(meta.type, {obj[meta.key..'_1'], obj[meta.key..'_2']}, 2)
             if not value then
                 if meta.cantempty then
                     value = ','
