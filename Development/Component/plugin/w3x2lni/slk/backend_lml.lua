@@ -140,7 +140,7 @@ local function read_triggers(files, map)
     end
     for i, trg in ipairs(wtg.triggers) do
         local dir = dirs[trg.category]
-        local path = map[1][dir] .. '/' .. map[dir][trg.name]
+        local path = map[1][dir] .. '\\' .. map[dir][trg.name]
         if trg.wct == 0 and trg.type == 0 then
             files[path..'.lml'] = convert_lml(trg.trg)
         end

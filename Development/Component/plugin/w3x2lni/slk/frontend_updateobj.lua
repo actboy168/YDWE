@@ -65,7 +65,7 @@ local function update_obj(name, type, obj, data)
             update_data(key, meta, obj, new_obj)
         end
     end
-    if type == 'ability' and w2l.config.target_format == 'slk' and not next(new_obj) then
+    if type == 'ability' and w2l.config.mode == 'slk' and not next(new_obj) then
         reports2[#reports2+1] = {('技能被移除: %s'):format(name), '自定义技能没有修改任何属性的话会被魔兽移除'}
         return nil
     end

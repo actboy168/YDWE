@@ -10,18 +10,25 @@ local function pack_head()
 end
 
 local function pack_custom()
-    pack('zl', wct.custom.comment, #wct.custom.code)
+    pack('z', wct.custom.comment)
     if #wct.custom.code > 0 then
+        -- 这里的字符串长度算上了'\0'，因此要+1
+        pack('l', #wct.custom.code+1)
         pack('z', wct.custom.code)
+    else
+        pack('l', 0)
     end
 end
 
 local function pack_triggers()
     pack('l', #wct.triggers)
     for _, trg in ipairs(wct.triggers) do
-        pack('l', #trg)
         if #trg > 0 then
+            -- 这里的字符串长度算上了'\0'，因此要+1
+            pack('l', #trg+1)
             pack('z', trg)
+        else
+            pack('l', 0)
         end
     end
 end

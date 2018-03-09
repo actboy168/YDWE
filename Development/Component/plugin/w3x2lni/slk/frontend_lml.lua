@@ -41,7 +41,7 @@ local function load_trigger(trg, id, filename)
         end
     end
 
-    local path = filename .. '/' .. name
+    local path = filename .. '\\' .. name
 
     trigger.trg = w2l:parse_lml(loader(path..'.lml') or '')
     trigger.des = loader(path..'.txt') or ''

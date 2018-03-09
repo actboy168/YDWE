@@ -180,6 +180,9 @@ function read_eca(is_child, is_arg)
     end
     local args
     local ui = get_ui_define(type_index[type], name)
+    if not ui then
+        error(('UI不存在：[%s]'):format(name))
+    end
     if ui.args then
         for _, arg in ipairs(ui.args) do
             if arg.type ~= 'nothing' then
@@ -226,10 +229,14 @@ local function read_triggers()
     end
 end
 
-return function (w2l_, wtg_, state_)
+return function (w2l_, wtg_)
     w2l = w2l_
     wtg = wtg_
+    local state_, err = w2l:trigger_data()
     state = state_
+    if not state_ then
+        error(err)
+    end
     unpack_index = 1
     chunk = {}
 

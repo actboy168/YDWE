@@ -332,41 +332,39 @@ function mt:create_object(objt, ttype, name)
         if not objt then
             return function() end
         end
-        local nkey
-        local key
-        local level
+        local metadata = session.metadata[ttype]
+        local codemetadata = objt._code and session.metadata[objt._code]
+        local keys = {}
+        local kv = {}
+        for k, v in pairs(objt) do
+            if k == '_code' then
+                keys[#keys+1] = 'code'
+                kv.code = v
+                goto CONTINUE
+            end
+            local meta = try_meta(k, metadata, codemetadata)
+            if not meta then
+                goto CONTINUE
+            end
+            local key = meta.field
+            if type(v) ~= 'table' then
+                keys[#keys+1] = key
+                kv[key] = v or ''
+                goto CONTINUE
+            end
+            for level = 1, objt._max_level do
+                local lkey = key .. level
+                keys[#keys+1] = lkey
+                kv[lkey] = v[level]
+            end
+            ::CONTINUE::
+        end
+        table.sort(keys)
+        local i = 0
         return function ()
-            if level then
-                level = level + 1
-                local olevel = level
-                if objt._max_level <= level then
-                    level = nil
-                end
-                return key .. olevel, objt[nkey][olevel] or ''
-            end
-            nkey = next(objt, nkey)
-            if nkey == '_code' then
-                return 'code', objt._code
-            end
-            local meta
-            while true do
-                if not nkey then
-                    return
-                end
-                meta = try_meta(nkey, session.metadata[ttype], objt._code and session.metadata[objt._code])
-                if meta then
-                    break
-                end
-                nkey = next(objt, nkey)
-            end
-            key = meta.field:gsub('_', ':')
-            if type(objt[nkey]) ~= 'table' then
-                return key, objt[nkey] or ''
-            end
-            if objt._max_level > 1 then
-                level = 1
-            end
-            return key .. 1, objt[nkey][1] or ''
+            i = i + 1
+            local k = keys[i]
+            return k, kv[k]
         end
     end
     function mt:__call(data)
@@ -457,12 +455,16 @@ function mt:create_proxy(ttype)
     function mt:__newindex()
     end
     function mt:__pairs()
-        return function (_, key)
-            local nkey = next(t, key)
-            if not nkey then
-                return
-            end
-            return nkey, self[nkey]
+        local keys = {}
+        for k in pairs(t) do
+            keys[#keys+1] = k
+        end
+        table.sort(keys)
+        local i = 0
+        return function ()
+            i = i + 1
+            local k = keys[i]
+            return k, t[k]
         end
     end
     return setmetatable({}, mt)
