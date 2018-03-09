@@ -288,6 +288,13 @@ namespace process {
 	{
 		return pipe::peek(L, 2);
 	}
+
+	int set_env(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		self.set_env(luaL_checkwstring(L, 2), luaL_checkwstring(L, 3));
+		return 0;
+	}
 }
 
 extern "C" __declspec(dllexport)
@@ -307,6 +314,7 @@ int luaopen_process(lua_State* L)
 		{ "kill", process::kill },
 		{ "id", process::id },
 		{ "is_running", process::is_running },
+		{ "set_env", process::set_env },
 		{ "__gc", process::destructor },
 		{ NULL, NULL }
 	};

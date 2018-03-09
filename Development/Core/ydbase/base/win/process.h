@@ -39,6 +39,7 @@ namespace base { namespace win {
 		bool     close();
 		bool     release(PROCESS_INFORMATION* pi_ptr);
 		int      id() const;
+		void     set_env(const std::wstring& key, const std::wstring& value);
 
 	private:
 		uint32_t                statue_;
@@ -46,11 +47,12 @@ namespace base { namespace win {
 #pragma warning(disable:4251)
 		fs::path inject_dll_;
 		std::map<std::string, fs::path> replace_dll_;
+		std::map<std::wstring, std::wstring> env_;
 #pragma warning(pop)
 		STARTUPINFOW            si_;
 		PROCESS_INFORMATION     pi_;
 		bool                    inherit_handle_;
-		DWORD                   console_;
+		DWORD                   flags_;
 	};
 
 	_BASE_API bool create_process(

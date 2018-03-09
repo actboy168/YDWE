@@ -5,6 +5,7 @@
 #include <base/util/foreach.h>
 #include <Windows.h>
 #include <memory>
+#include <deque>
 #include <strsafe.h>
 #include <cassert>
 #if !defined(DISABLE_DETOURS)
@@ -21,11 +22,13 @@ namespace base { namespace win {
 			wchar_t*                       command_line,
 			bool                           inherit_handle,
 			uint32_t                       creation_flags,
+			wchar_t*                       environment,
 			const wchar_t*                 current_directory,
 			LPSTARTUPINFOW                 startup_info,
 			LPPROCESS_INFORMATION          process_information,
 			const fs::path& inject_dll,
-			const std::map<std::string, fs::path>& replace_dll)
+			const std::map<std::string, fs::path>& replace_dll
+		)
 		{
 			bool pause = !replace_dll.empty();
 			bool suc = false;
@@ -46,7 +49,7 @@ namespace base { namespace win {
 					application, command_line,
 					NULL, NULL,
 					inherit_handle, creation_flags | CREATE_SUSPENDED, 
-					NULL, current_directory,
+					environment, current_directory,
 					startup_info, process_information
 				);
 				if (suc) 
@@ -61,7 +64,7 @@ namespace base { namespace win {
 					application, command_line, 
 					NULL, NULL, 
 					inherit_handle, pause ? (creation_flags | CREATE_SUSPENDED) : creation_flags,
-					NULL, current_directory,
+					environment, current_directory,
 					startup_info, process_information
 				);
 			}
@@ -126,10 +129,84 @@ namespace base { namespace win {
 		}
 	}
 
+	struct strbuilder {
+		struct node {
+			size_t size;
+			size_t maxsize;
+			wchar_t* data;
+			node(size_t maxsize)
+				: size(0)
+				, maxsize(maxsize)
+				, data(new wchar_t[maxsize])
+			{ }
+			~node() {
+				delete[] data;
+			}
+			wchar_t* release() {
+				wchar_t* r = data;
+				data = nullptr;
+				return r;
+			}
+			bool append(const wchar_t* str, size_t n) {
+				if (size + n > maxsize) {
+					return false;
+				}
+				memcpy(data + size, str, n * sizeof(wchar_t));
+				size += n;
+				return true;
+			}
+			template <class T, size_t n>
+			void operator +=(T(&str)[n]) {
+				append(str, n - 1);
+			}
+			template <size_t n>
+			void operator +=(const strbuilder& str) {
+				append(str.data, str.size);
+			}
+		};
+		strbuilder() : size(0) { }
+		void clear() {
+			size = 0;
+			data.clear();
+		}
+		bool append(const wchar_t* str, size_t n) {
+			if (!data.empty() && data.back().append(str, n)) {
+				size += n;
+				return true;
+			}
+			size_t m = 1024;
+			while (m < n) {
+				m *= 2;
+			}
+			data.emplace_back(m).append(str, n);
+			size += n;
+			return true;
+		}
+		template <class T, size_t n>
+		strbuilder& operator +=(T(&str)[n]) {
+			append(str, n - 1);
+			return *this;
+		}
+		strbuilder& operator +=(const std::wstring& s) {
+			append(s.data(), s.size());
+			return *this;
+		}
+		wchar_t* string() {
+			node r(size + 1);
+			for (auto& s : data) {
+				r.append(s.data, s.size);
+			}
+			r += L"\0";
+			return r.release();
+		}
+		std::deque<node> data;
+		size_t size;
+	};
+
 	process::process()
 		: statue_(PROCESS_STATUE_READY)
 		, inherit_handle_(false)
-		, console_(0)
+		, flags_(0)
 	{
 		memset(&si_, 0, sizeof STARTUPINFOW);
 		memset(&pi_, 0, sizeof PROCESS_INFORMATION);
@@ -172,13 +249,13 @@ namespace base { namespace win {
 		{
 			switch (type) {
 			case CONSOLE_INHERIT:
-				console_ = 0;
+				flags_ = 0;
 				break;
 			case CONSOLE_DISABLE:
-				console_ = CREATE_NO_WINDOW;
+				flags_ = CREATE_NO_WINDOW;
 				break;
 			case CONSOLE_NEW:
-				console_ = CREATE_NEW_CONSOLE;
+				flags_ = CREATE_NEW_CONSOLE;
 				break;
 			}
 			return true;
@@ -236,6 +313,18 @@ namespace base { namespace win {
 	{
 		if (statue_ == PROCESS_STATUE_READY)
 		{
+			std::unique_ptr<wchar_t[]> environment;
+			if (!env_.empty()) {
+				strbuilder env;
+				for (auto& e : env_) {
+					env += e.first;
+					env += L"=";
+					env += e.second;
+					env += L"\0";
+				}
+				environment.reset(env.string());
+				flags_ |= CREATE_UNICODE_ENVIRONMENT;
+			}
 			std::dynarray<wchar_t> command_line_buffer(command_line.size() + 1);
 			wcscpy_s(command_line_buffer.data(), command_line_buffer.size(), command_line.c_str());
 
@@ -243,7 +332,8 @@ namespace base { namespace win {
 				application? application->c_str(): nullptr,
 				command_line_buffer.data(),
 				inherit_handle_,
-				console_ | NORMAL_PRIORITY_CLASS,
+				flags_ | NORMAL_PRIORITY_CLASS,
+				environment.get(),
 				current_directory ? current_directory->c_str() : nullptr,
 				&si_, &pi_, inject_dll_, replace_dll_
 				))
@@ -332,6 +422,11 @@ namespace base { namespace win {
 			return (int)pi_.dwProcessId;
 		}
 		return -1;
+	}
+
+	void process::set_env(const std::wstring& key, const std::wstring& value)
+	{
+		env_[key] = value;
 	}
 
 	bool create_process(const fs::path& application, const std::wstring& command_line, const fs::path& current_directory, const fs::path& inject_dll, PROCESS_INFORMATION* pi_ptr)
