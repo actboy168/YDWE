@@ -16,45 +16,6 @@ namespace base { namespace win {
 
 	namespace detail 
 	{
-		bool create_process_use_system(
-			const wchar_t*        application, 
-			wchar_t*              command_line,
-			bool                  inherit_handle,
-			uint32_t              creation_flags,
-			const wchar_t*        current_directory,
-			LPSTARTUPINFOW        startup_info,
-			LPPROCESS_INFORMATION process_information)
-		{
-			return !!::CreateProcessW(
-				application, command_line, 
-				NULL, NULL, inherit_handle, creation_flags, NULL,
-				current_directory, 
-				startup_info, 
-				process_information);
-		}
-
-#if !defined(DISABLE_DETOURS)
-		bool create_process_use_detour(
-			const wchar_t*        application, 
-			wchar_t*              command_line,
-			bool                  inherit_handle,
-			uint32_t              creation_flags,
-			const wchar_t*        current_directory,
-			LPSTARTUPINFOW        startup_info,
-			LPPROCESS_INFORMATION process_information,
-			const char*           dll_path)
-		{
-			return !!DetourCreateProcessWithDllW(
-				application, command_line, 
-				NULL, NULL, inherit_handle, creation_flags, NULL,
-				current_directory, 
-				startup_info, 
-				process_information, 
-				dll_path, 
-				NULL);
-		}
-#endif
-
 		bool create_process(
 			const wchar_t*                 application, 
 			wchar_t*                       command_line,
@@ -66,18 +27,28 @@ namespace base { namespace win {
 			const fs::path& inject_dll,
 			const std::map<std::string, fs::path>& replace_dll)
 		{
-			bool need_pause = !replace_dll.empty();
-#if defined(DISABLE_DETOURS)  	
-			need_pause = need_pause || fs::exists(inject_dll);
-#endif
+			bool pause = !replace_dll.empty();
 			bool suc = false;
 			if (fs::exists(inject_dll))
 			{
+				pause = true;
 #if !defined(DISABLE_DETOURS)
-				suc = create_process_use_detour(application, command_line, inherit_handle, need_pause ? (creation_flags | CREATE_SUSPENDED) : creation_flags, current_directory, startup_info, process_information, inject_dll.string().c_str());
+				suc = !!DetourCreateProcessWithDllW(
+					application, command_line,
+					NULL, NULL,
+					inherit_handle, creation_flags | CREATE_SUSPENDED,
+					NULL, current_directory,
+					startup_info, process_information,
+					inject_dll.string().c_str(), NULL
+				);
 #else
-				assert(need_pause);
-				suc = create_process_use_system(application, command_line, inherit_handle, creation_flags | CREATE_SUSPENDED, current_directory, startup_info, process_information);
+				suc = !!::CreateProcessW(
+					application, command_line,
+					NULL, NULL,
+					inherit_handle, creation_flags | CREATE_SUSPENDED, 
+					NULL, current_directory,
+					startup_info, process_information
+				);
 				if (suc) 
 				{
 					hook::detail::inject_dll(process_information->hProcess, process_information->hThread, inject_dll.c_str());
@@ -86,7 +57,13 @@ namespace base { namespace win {
 			}
 			else
 			{
-				suc = create_process_use_system(application, command_line, inherit_handle, need_pause ? (creation_flags | CREATE_SUSPENDED) : creation_flags, current_directory, startup_info, process_information);
+				suc = !!::CreateProcessW(
+					application, command_line, 
+					NULL, NULL, 
+					inherit_handle, pause ? (creation_flags | CREATE_SUSPENDED) : creation_flags,
+					NULL, current_directory,
+					startup_info, process_information
+				);
 			}
 
 			if (suc && !replace_dll.empty())
@@ -97,7 +74,7 @@ namespace base { namespace win {
 				}
 			}
 
-			if (suc && need_pause)
+			if (suc && pause)
 			{
 				if (!(creation_flags & CREATE_SUSPENDED))
 				{
