@@ -292,7 +292,12 @@ namespace process {
 	int set_env(lua_State* L)
 	{
 		base::win::process& self = to(L, 1);
-		self.set_env(luaL_checkwstring(L, 2), luaL_checkwstring(L, 3));
+		if (lua_type(L, 3) == LUA_TNIL) {
+			self.del_env(luaL_checkwstring(L, 2));
+		}
+		else {
+			self.set_env(luaL_checkwstring(L, 2), luaL_checkwstring(L, 3));
+		}
 		return 0;
 	}
 }

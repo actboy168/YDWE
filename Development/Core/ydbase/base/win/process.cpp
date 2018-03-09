@@ -203,6 +203,43 @@ namespace base { namespace win {
 		size_t size;
 	};
 
+	static wchar_t* make_env(const std::map<std::wstring, std::wstring, ignore_case::less<std::wstring>>& set, const std::set<std::wstring, ignore_case::less<std::wstring>>& del)
+	{
+		strbuilder res;
+
+		wchar_t* es = GetEnvironmentStringsW();
+		if (es == 0) {
+			return nullptr;
+		}
+		try {
+			wchar_t* escp = es;
+			while (*escp != L'\0') {
+				std::wstring str = escp;
+				std::wstring::size_type pos = str.find(L'=');
+				std::wstring key = str.substr(0, pos);
+				if (del.find(key) != del.end()) {
+					continue;
+				}
+				std::wstring val = str.substr(pos + 1, str.length());
+				auto it = set.find(key);
+				if (it != set.end()) {
+					val = it->second;
+				}
+				res += key;
+				res += L"=";
+				res += val;
+				res += L"\0";
+
+				escp += str.length() + 1;
+			}
+			return res.string();
+		}
+		catch (...) {
+		}
+		FreeEnvironmentStringsW(es);
+		return nullptr;
+	}
+
 	process::process()
 		: statue_(PROCESS_STATUE_READY)
 		, inherit_handle_(false)
@@ -314,15 +351,8 @@ namespace base { namespace win {
 		if (statue_ == PROCESS_STATUE_READY)
 		{
 			std::unique_ptr<wchar_t[]> environment;
-			if (!env_.empty()) {
-				strbuilder env;
-				for (auto& e : env_) {
-					env += e.first;
-					env += L"=";
-					env += e.second;
-					env += L"\0";
-				}
-				environment.reset(env.string());
+			if (!set_env_.empty() || !del_env_.empty()) {
+				environment.reset(make_env(set_env_, del_env_));
 				flags_ |= CREATE_UNICODE_ENVIRONMENT;
 			}
 			std::dynarray<wchar_t> command_line_buffer(command_line.size() + 1);
@@ -426,8 +456,14 @@ namespace base { namespace win {
 
 	void process::set_env(const std::wstring& key, const std::wstring& value)
 	{
-		env_[key] = value;
+		set_env_[key] = value;
 	}
+
+	void process::del_env(const std::wstring& key)
+	{
+		del_env_.insert(key);
+	}
+
 
 	bool create_process(const fs::path& application, const std::wstring& command_line, const fs::path& current_directory, const fs::path& inject_dll, PROCESS_INFORMATION* pi_ptr)
 	{
