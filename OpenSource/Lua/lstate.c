@@ -79,6 +79,10 @@ typedef struct LG {
     memcpy(b + p, &t, sizeof(t)); p += sizeof(t); }
 
 static unsigned int makeseed (lua_State *L) {
+  const char* seed = getenv("LUA_SEED");
+  if (seed) {
+	  return atoi(seed);
+  }
   char buff[4 * sizeof(size_t)];
   unsigned int h = luai_makeseed();
   int p = 0;
@@ -311,55 +315,6 @@ LUA_API lua_State *lua_newstate (lua_Alloc f, void *ud) {
   g->ud = ud;
   g->mainthread = L;
   g->seed = makeseed(L);
-  g->hash = g->seed;
-  L->gchash = g->hash++;
-  if (L->gchash == 0) L->gchash++;
-  g->gcrunning = 0;  /* no GC while building state */
-  g->GCestimate = 0;
-  g->strt.size = g->strt.nuse = 0;
-  g->strt.hash = NULL;
-  setnilvalue(&g->l_registry);
-  g->panic = NULL;
-  g->version = NULL;
-  g->gcstate = GCSpause;
-  g->gckind = KGC_NORMAL;
-  g->allgc = g->finobj = g->tobefnz = g->fixedgc = NULL;
-  g->sweepgc = NULL;
-  g->gray = g->grayagain = NULL;
-  g->weak = g->ephemeron = g->allweak = NULL;
-  g->twups = NULL;
-  g->totalbytes = sizeof(LG);
-  g->GCdebt = 0;
-  g->gcfinnum = 0;
-  g->gcpause = LUAI_GCPAUSE;
-  g->gcstepmul = LUAI_GCMUL;
-  for (i=0; i < LUA_NUMTAGS; i++) g->mt[i] = NULL;
-  if (luaD_rawrunprotected(L, f_luaopen, NULL) != LUA_OK) {
-    /* memory allocation error: free partial state */
-    close_state(L);
-    L = NULL;
-  }
-  return L;
-}
-
-
-LUA_API lua_State *lua_newstate2 (lua_Alloc f, void *ud, unsigned int seed) {
-  int i;
-  lua_State *L;
-  global_State *g;
-  LG *l = cast(LG *, (*f)(ud, NULL, LUA_TTHREAD, sizeof(LG)));
-  if (l == NULL) return NULL;
-  L = &l->l.l;
-  g = &l->g;
-  L->next = NULL;
-  L->tt = LUA_TTHREAD;
-  g->currentwhite = bitmask(WHITE0BIT);
-  L->marked = luaC_white(g);
-  preinit_thread(L, g);
-  g->frealloc = f;
-  g->ud = ud;
-  g->mainthread = L;
-  g->seed = seed;
   g->hash = g->seed;
   L->gchash = g->hash++;
   if (L->gchash == 0) L->gchash++;

@@ -25,7 +25,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 	static lua_State* getMainL()
 	{
 		if (!mainL) {
-			lua_State* L = luaL_newstate2();
+			lua_State* L = newstate();
 			if (L) {
 				luaL_openlibs(L);
 				open_lua_engine(L);

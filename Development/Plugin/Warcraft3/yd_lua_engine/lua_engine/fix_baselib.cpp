@@ -269,25 +269,6 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return 0;
 	}
 
-	static void* l_alloc(void* /*ud*/, void* ptr, size_t /*osize*/, size_t nsize)
-	{
-		if (nsize == 0)
-		{
-			free(ptr);
-			return NULL;
-		}
-		else
-		{
-			return realloc(ptr, nsize);
-		}
-	}
-
-	static int panic(lua_State *L)
-	{
-		lua_writestringerror("PANIC: unprotected error in call to Lua API (%s)\n", lua_tostring(L, -1));
-		return 0;
-	}
-
 	uintptr_t get_random_seed()
 	{
 		war3_searcher& s = get_war3_searcher();
@@ -298,10 +279,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return *(uintptr_t*)(*(uintptr_t*)(ptr)+4);
 	}
 
-	lua_State* luaL_newstate2()
+	lua_State* newstate()
 	{
-		lua_State *L = lua_newstate2(l_alloc, NULL, get_random_seed());
-		if (L) lua_atpanic(L, &panic);
+		putenv(("LUA_SEED=" + std::to_string(get_random_seed())).c_str());
+		lua_State* L = luaL_newstate();
+		putenv("LUA_SEED=");
 		return L;
 	}
 }}}
