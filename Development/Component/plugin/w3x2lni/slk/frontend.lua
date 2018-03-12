@@ -151,6 +151,8 @@ local function update_then_merge(w2l, slks, objs, lnis, slk)
 end
 
 return function(w2l, slk)
+    slk = slk or {}
+    w2l.slk = slk
     --读取字符串
     slk.wts = w2l:frontend_wts(w2l:map_load('war3map.wts'))
     w2l.progress(0.2)

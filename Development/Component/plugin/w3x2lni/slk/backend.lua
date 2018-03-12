@@ -309,6 +309,8 @@ local function clean_file(w2l, slk)
 end
 
 return function (w2l, slk)
+    slk = slk or w2l.slk or {}
+    w2l.slk = slk
     clean_file(w2l, slk)
     if slk.w3i then
         if w2l.config.mode == 'lni' then
