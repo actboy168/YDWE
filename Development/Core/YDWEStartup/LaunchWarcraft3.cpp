@@ -5,6 +5,7 @@
 #include <base/win/env_variable.h>
 #include <base/win/process.h>
 #include <base/util/ini.h>
+#include <base/util/format.h>
 #include <base/warcraft3/directory.h>
 #include <base/warcraft3/command_line.h>
 #include <base/win/registry/key.h> 
@@ -35,8 +36,26 @@ bool launch_taskbar_support(const fs::path& ydwe_path)
 	return false;
 }
 
+bool map_slk(const fs::path& ydwe, const fs::path& from, const fs::path& to)
+{
+	fs::path app = ydwe / L"bin" / L"w2l-worker.exe";
+	base::win::process process;
+	process.set_console(base::win::process::CONSOLE_DISABLE);
+	process.set_env(L"PATH", (ydwe / L"bin").wstring());
+	process.set_env(L"LUA_CPATH", (ydwe / L"bin" / L"modules").wstring());
+	if (!process.create(
+		app,
+		base::format(LR"("%s" gui\mini.lua -slk "%s" "%s")", app.wstring(), from.wstring(), to.wstring()),
+		ydwe / L"plugin" / L"w3x2lni"
+	)) {
+		return false;
+	}
+	return process.wait() == 0;
+}
+
 bool launch_warcraft3(base::warcraft3::command_line& cmd)
 {
+	MessageBox(0, 0, 0, 0);
 	try {
 		fs::path ydwe_path = base::path::get(base::path::DIR_EXE).remove_filename();
 		launch_taskbar_support(ydwe_path);
@@ -50,6 +69,18 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		if (!base::warcraft3::directory::get(nullptr, war3_path))
 		{
 			return false;
+		}
+
+		base::ini::table table;
+		table["MapTest"]["LaunchRenderingEngine"] = "Direct3D 8";
+		table["MapTest"]["LaunchWindowed"] = "1";
+		table["MapTest"]["UserName"] = "";
+		table["MapTest"]["EnableMapSlk"] = "0";
+		try {
+			auto buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<std::string>();
+			base::ini::read(table, buf.c_str());
+		}
+		catch (...) {
 		}
 
 		//
@@ -66,12 +97,18 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 			{
 				fs::path test_map_path = get_test_map_path() + loadfile.extension().wstring();
 				try {
-#if _MSC_VER >= 1910
-					fs::copy_file(loadfile, war3_path / test_map_path, fs::copy_options::overwrite_existing);
-#else
-					fs::copy_file(loadfile, war3_path / test_map_path, fs::copy_option::overwrite_if_exists);
-#endif
 					cmd[L"loadfile"] = test_map_path.wstring();
+					if (!loadfile.is_absolute()) {
+						loadfile = war3_path / loadfile;
+					}
+					if ("0" != table["MapTest"]["EnableMapSlk"]) {
+						if (!map_slk(ydwe_path, loadfile, war3_path / test_map_path)) {
+							fs::copy_file(loadfile, war3_path / test_map_path, fs::copy_options::overwrite_existing);
+						}
+					}
+					else {
+						fs::copy_file(loadfile, war3_path / test_map_path, fs::copy_options::overwrite_existing);
+					}
 				}
 				catch (...) {
 				}
@@ -81,16 +118,6 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		war3_path = war3_path / L"war3.exe";
 		fs::path inject_dll = ydwe_path / L"bin" / L"LuaEngine.dll";
 
-		base::ini::table table;
-		table["MapTest"]["LaunchRenderingEngine"]   = "Direct3D 8";
-		table["MapTest"]["LaunchWindowed"] = "1";
-		table["MapTest"]["UserName"] = "";
-		try {
-			auto buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<std::string>();
-			base::ini::read(table, buf.c_str());
-		} 
-		catch (...) {
-		}
 		std::string name = table["MapTest"]["UserName"];
 		if (name != "")
 		{

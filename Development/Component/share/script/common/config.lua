@@ -13,7 +13,8 @@ local tbl_index = {
 		Option = "0"
 	},
 	MapTest = {
-		EnableHost = "0",
+        EnableHost = "0",
+        EnableMapSlk = "0",
 		LaunchRenderingEngine = "Direct3D 8",
 		LaunchWindowed = "1",
 		LaunchFullWindowed = "0",

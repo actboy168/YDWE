@@ -87,6 +87,7 @@ namespace
 		("LaunchWideScreenSupport",                 Attribute("MapTest"))
 		("LaunchDisableSecurityAccess",             Attribute("MapTest"))
 		("EnableHost",                              Attribute("MapTest"))
+		("EnableMapSlk",                            Attribute("MapTest"))
 		("EnableDotNetSupport",                     Attribute("ThirdPartyPlugin"))
 		("EnableTesh",                              Attribute("ThirdPartyPlugin"))
 		("EnableYDTrigger",                         Attribute("ThirdPartyPlugin"))
@@ -194,6 +195,7 @@ void CMainWindow::ResetConfig(base::ini::table& table)
 	table["MapTest"]["LaunchFixedRatioWindowed"] = "0";
 	table["MapTest"]["LaunchDisableSecurityAccess"] = "0";
 	table["MapTest"]["EnableHost"] = "0";
+	table["MapTest"]["EnableMapSlk"] = "0";
 	table["ScriptCompiler"]["EnableJassHelper"] = "1";
 	table["ScriptCompiler"]["EnableJassHelperDebug"] = "0";
 	table["ScriptCompiler"]["EnableJassHelperScriptOnly"] = "0";
