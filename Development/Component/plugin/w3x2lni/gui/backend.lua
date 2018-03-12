@@ -145,7 +145,7 @@ function backend:open(entry, commandline)
     local stdout = p:std_output()
     local stderr = p:std_error()
     p:set_console('disable')
-    if not p:create(self.application, ('"%s" -E "%s" %s'):format(self.application:string(), entry:string(), commandline), self.currentdir) then
+    if not p:create(self.application, ('"%s" -e "package.cpath=[[%s]]" "%s" %s'):format(self.application:string(), package.cpath, entry, commandline), self.currentdir) then
         return
     end
     self:clean()

@@ -1,6 +1,3 @@
-local loaddll = require 'ffi.loaddll'
-loaddll 'base'
-loaddll 'nativeui'
 local gui = require 'yue.gui'
 local backend = require 'gui.backend'
 local messagebox = require 'ffi.messagebox'
@@ -70,9 +67,16 @@ end
 mini:init()
 mini:event_close(gui.MessageLoop.quit)
 
-local root = fs.current_path():remove_filename()
-backend:init(root / 'bin' / 'w2l-worker.exe', root / 'script')
-local worker = backend:open(root / 'script' / 'map.lua', pack_arg())
+local function getexe()
+	local i = 0
+	while arg[i] ~= nil do
+		i = i - 1
+	end
+	return fs.path(arg[i + 1])
+end
+
+backend:init(getexe(), fs.current_path())
+local worker = backend:open('map.lua', pack_arg())
 backend.message = '正在初始化...'
 backend.progress = 0
 

@@ -9,6 +9,15 @@ ffi.cdef[[
 local function getfullpath(name)
     local path, e = package.searchpath(name, package.cpath)
     if not path then
+	    local path = os.getenv 'PATH'
+	    if path then
+    		for w in path:gmatch '[^;]+' do
+	    		local r = w .. '/' .. name .. '.dll'
+    			if io.open(r, 'rb') then
+	    			return r
+    			end
+    		end
+		end
         return error(e)
     end
     return path
