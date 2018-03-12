@@ -120,6 +120,8 @@
     <ClCompile Include="..\ltablib.c">
       <Filter>standard-library</Filter>
     </ClCompile>
+    <ClCompile Include="utf8\unicode.c" />
+    <ClCompile Include="utf8\utf8_crt.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lua.h">
@@ -173,9 +175,6 @@
     <ClInclude Include="..\lparser.h">
       <Filter>core\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\lprefix.h">
-      <Filter>core\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\lstate.h">
       <Filter>core\include</Filter>
     </ClInclude>
@@ -197,5 +196,8 @@
     <ClInclude Include="..\lzio.h">
       <Filter>core\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\lprefix.h" />
+    <ClInclude Include="utf8\unicode.h" />
+    <ClInclude Include="utf8\utf8_crt.h" />
   </ItemGroup>
 </Project>

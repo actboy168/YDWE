@@ -44,6 +44,8 @@
     <ClCompile Include="..\lutf8lib.c" />
     <ClCompile Include="..\lvm.c" />
     <ClCompile Include="..\lzio.c" />
+    <ClCompile Include="utf8\unicode.c" />
+    <ClCompile Include="utf8\utf8_crt.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lapi.h" />
@@ -71,6 +73,8 @@
     <ClInclude Include="..\lundump.h" />
     <ClInclude Include="..\lvm.h" />
     <ClInclude Include="..\lzio.h" />
+    <ClInclude Include="utf8\unicode.h" />
+    <ClInclude Include="utf8\utf8_crt.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B84F7231-16CE-41D8-8C08-7B523FF4225B}</ProjectGuid>

@@ -11,6 +11,12 @@
 
 int luaopen_log(lua_State* L);
 
+void lua_pushwstring(lua_State* L, const std::wstring& str)
+{
+	std::string ustr = base::w2u(str, base::conv_method::replace | '?');
+	lua_pushlstring(L, ustr.data(), ustr.size());
+}
+
 uintptr_t RealLuaPcall = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"luacore.dll"), "lua_pcallk");
 int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
 {
@@ -83,7 +89,7 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 
 		fs::path cp = ydwe / L"bin" / L"modules" / L"?.dll";
 		lua_getglobal(L, "package");
-		lua_pushstring(L, cp.string().c_str());
+		lua_pushwstring(L, cp.wstring());
 		lua_setfield(L, -2, "cpath");
 		lua_pop(L, 1);
 
@@ -95,7 +101,7 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 		fs::path p1 = ydwe / L"share" / L"script" / "common" / L"?.lua";
 		fs::path p2 = ydwe / L"share" / L"script" / str_replace(name, L'.', L'/') / L"?.lua";
 		lua_getglobal(L, "package");
-		lua_pushstring(L, (p1.string() + ";" + p2.string()).c_str());
+		lua_pushwstring(L, p1.wstring() + L";" + p2.wstring());
 		lua_setfield(L, -2, "path");
 		lua_pop(L, 1);
 		return L;

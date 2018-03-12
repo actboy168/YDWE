@@ -1,4 +1,4 @@
-local lni = require 'lni-c'
+local lni = require 'lni'
 
 local mt = {}
 mt.__index = mt
