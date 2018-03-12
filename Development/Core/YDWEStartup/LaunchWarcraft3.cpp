@@ -38,15 +38,15 @@ bool launch_taskbar_support(const fs::path& ydwe_path)
 
 bool map_slk(const fs::path& ydwe, const fs::path& from, const fs::path& to)
 {
+	fs::path ydwedev = base::path::ydwe(true);
 	fs::path app = ydwe / L"bin" / L"w2l-worker.exe";
 	base::win::process process;
-	process.set_console(base::win::process::CONSOLE_DISABLE);
+	process.set_console(base::win::process::CONSOLE_NEW);
 	process.set_env(L"PATH", (ydwe / L"bin").wstring());
-	process.set_env(L"LUA_CPATH", (ydwe / L"bin" / L"modules").wstring());
 	if (!process.create(
 		app,
-		base::format(LR"("%s" gui\mini.lua -slk "%s" "%s")", app.wstring(), from.wstring(), to.wstring()),
-		ydwe / L"plugin" / L"w3x2lni"
+		base::format(LR"("%s" -e "package.cpath = [[%s]]" gui\mini.lua -slk "%s" "%s")", app.wstring(), (ydwe / L"bin" / L"modules" / L"?.dll").wstring(), from.wstring(), to.wstring()),
+		ydwedev / L"plugin" / L"w3x2lni"
 	)) {
 		return false;
 	}
@@ -55,15 +55,9 @@ bool map_slk(const fs::path& ydwe, const fs::path& from, const fs::path& to)
 
 bool launch_warcraft3(base::warcraft3::command_line& cmd)
 {
-	MessageBox(0, 0, 0, 0);
 	try {
-		fs::path ydwe_path = base::path::get(base::path::DIR_EXE).remove_filename();
-		launch_taskbar_support(ydwe_path);
-
-		//base::win::env_variable ev(L"PATH");
-		//std::wstring p;
-		//p += (ydwe_path / L"bin").c_str();    p += L";"; 
-		//ev.set(p + ev.get());
+		fs::path ydwe = base::path::ydwe(false);
+		launch_taskbar_support(ydwe);
 
 		fs::path war3_path;
 		if (!base::warcraft3::directory::get(nullptr, war3_path))
@@ -77,7 +71,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		table["MapTest"]["UserName"] = "";
 		table["MapTest"]["EnableMapSlk"] = "0";
 		try {
-			auto buf = base::file::read_stream(ydwe_path / L"bin" / L"EverConfig.cfg").read<std::string>();
+			auto buf = base::file::read_stream(ydwe / L"bin" / L"EverConfig.cfg").read<std::string>();
 			base::ini::read(table, buf.c_str());
 		}
 		catch (...) {
@@ -102,7 +96,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 						loadfile = war3_path / loadfile;
 					}
 					if ("0" != table["MapTest"]["EnableMapSlk"]) {
-						if (!map_slk(ydwe_path, loadfile, war3_path / test_map_path)) {
+						if (!map_slk(ydwe, loadfile, war3_path / test_map_path)) {
 							fs::copy_file(loadfile, war3_path / test_map_path, fs::copy_options::overwrite_existing);
 						}
 					}
@@ -116,7 +110,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		}
 
 		war3_path = war3_path / L"war3.exe";
-		fs::path inject_dll = ydwe_path / L"bin" / L"LuaEngine.dll";
+		fs::path inject_dll = ydwe / L"bin" / L"LuaEngine.dll";
 
 		std::string name = table["MapTest"]["UserName"];
 		if (name != "")
@@ -143,7 +137,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		try {
 			if (table["War3Patch"]["Option"] == "2")
 			{
-				fs::path stormdll = ydwe_path / L"share" / L"patch" / table["War3Patch"]["DirName"] / L"Storm.dll";
+				fs::path stormdll = ydwe / L"share" / L"patch" / table["War3Patch"]["DirName"] / L"Storm.dll";
 				if (fs::exists(stormdll))
 				{
 					warcraft3_process.replace(stormdll, "Storm.dll");
@@ -155,7 +149,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 
 		if (fs::exists(inject_dll))
 		{
-			cmd.add(L"ydwe", ydwe_path.wstring());
+			cmd.add(L"ydwe", ydwe.wstring());
 			warcraft3_process.inject(inject_dll);			
 		}
 
