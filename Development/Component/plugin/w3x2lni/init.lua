@@ -1,6 +1,6 @@
 local w3xparser = require 'w3xparser'
 local mpq_path = require 'mpq_path'
-local lni = require 'lni-c'
+local lni = require 'lni'
 local lml = require 'lml'
 local progress = require 'progress'
 local slk = w3xparser.slk
