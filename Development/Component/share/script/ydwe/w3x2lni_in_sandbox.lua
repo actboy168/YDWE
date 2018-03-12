@@ -32,7 +32,7 @@ local root = search_init('w3x2lni')
 
 return sandbox(root, io.__open, { 
     ['w3xparser'] = require 'w3xparser',
-    ['lni-c']     = require 'lni-c',
+    ['lni']     = require 'lni',
     ['lpeg']      = require 'lpeg',
     ['lml']       = require 'lml',
 })

@@ -1,7 +1,7 @@
 local root = fs.ydwe_devpath()
 
 local w3xparser = require 'w3xparser'
-local lni       = require 'lni-c'
+local lni       = require 'lni'
 
 local w2l      = root / 'plugin' / 'w3x2lni'
 local defined  = w2l / 'defined'
