@@ -203,7 +203,7 @@ namespace base { namespace win {
 		size_t size;
 	};
 
-	static wchar_t* make_env(const std::map<std::wstring, std::wstring, ignore_case::less<std::wstring>>& set, const std::set<std::wstring, ignore_case::less<std::wstring>>& del)
+	static wchar_t* make_env(std::map<std::wstring, std::wstring, ignore_case::less<std::wstring>>& set, std::set<std::wstring, ignore_case::less<std::wstring>>& del)
 	{
 		strbuilder res;
 
@@ -224,6 +224,7 @@ namespace base { namespace win {
 				auto it = set.find(key);
 				if (it != set.end()) {
 					val = it->second;
+					set.erase(it);
 				}
 				res += key;
 				res += L"=";
@@ -231,6 +232,17 @@ namespace base { namespace win {
 				res += L"\0";
 
 				escp += str.length() + 1;
+			}
+			for (auto& e : set) {
+				const std::wstring& key = e.first;
+				const std::wstring& val = e.second;
+				if (del.find(key) != del.end()) {
+					continue;
+				}
+				res += key;
+				res += L"=";
+				res += val;
+				res += L"\0";
 			}
 			return res.string();
 		}
