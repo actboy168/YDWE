@@ -28,7 +28,7 @@ local function search_init(name)
     error(("module '%s' not found:%s"):format(name, msg))
 end
 
-local root = search_init('w3x2lni')
+local root = search_init('w3x2lni\\core')
 
 return sandbox(root, io.__open, { 
     ['w3xparser'] = require 'w3xparser',

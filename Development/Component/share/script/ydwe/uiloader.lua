@@ -11,7 +11,7 @@ local ui = require 'ui-builder.init'
 local storm = require 'ffi.storm'
 local mpqloader = require 'mpqloader'
 local ydwe = fs.ydwe_devpath()
-local info = lni(io.load(ydwe / 'plugin' / 'w3x2lni' / 'info.ini'))
+local info = lni(io.load(ydwe / 'plugin' / 'w3x2lni' / 'core' / 'info.ini'))
 local current_language = (require "i18n").get_language()
 local list = {}
 
