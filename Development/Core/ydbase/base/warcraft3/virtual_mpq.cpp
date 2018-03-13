@@ -88,7 +88,8 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 		bool close_path(const fs::path& p, uint32_t priority)
 		{
 			if (priority > 15) priority = 15;
-			std::remove_if(mpq_path[priority].begin(), mpq_path[priority].end(), [&](const fs::path& o)->bool { return o == p; });
+			auto pos = std::remove_if(mpq_path[priority].begin(), mpq_path[priority].end(), [&](const fs::path& o)->bool { return o == p; });
+			mpq_path[priority].erase(pos, mpq_path[priority].end());
 			return true;
 		}
 
