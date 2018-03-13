@@ -68,7 +68,6 @@ trg = event.on('编译地图', function ()
     if #report > 0 then
         gui.message(nil, ('%s\n\n%s'):format('编辑器刚刚帮你修改了物编数据,建议重新打开地图,以便查看变化', report))
     end
-    we.refresh_objecteditor()
 end)
 
 return slk
