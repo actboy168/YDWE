@@ -548,12 +548,9 @@ function mt:create_report()
     return table.concat(lines, '\n')
 end
 
-function mt:refresh(report)
+function mt:refresh()
     if not next(self.used) then
         return
-    end
-    if report then
-        report(self:create_report())
     end
     local objs = {}
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
@@ -576,6 +573,8 @@ function mt:refresh(report)
             self.w2l:map_remove(self.w2l.info.obj[type])
         end
     end
+    local report = self:create_report()
+    return report
 end
 
 return function (w2l, read_only, safe_mode)
@@ -603,8 +602,8 @@ return function (w2l, read_only, safe_mode)
         session:mark_obj(name, session.slk[name])
     end
     if not read_only then
-        function slk_proxy:refresh(report)
-            session:refresh(report)
+        function slk_proxy:refresh()
+            return session:refresh()
         end
     end
     return slk_proxy
