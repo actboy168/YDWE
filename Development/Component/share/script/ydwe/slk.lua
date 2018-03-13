@@ -46,13 +46,11 @@ trg = event.on('编译地图', function ()
     package.loaded['slk'] = nil
     trg:remove()
     log.trace('build object start', map_handle)
-    slk:refresh(function(msg)
-        log.trace('build object finish')
-        if #msg == 0 then
-            return
-        end
-        gui.message(nil, ('%s\n\n%s'):format('编辑器刚刚帮你修改了物编数据,建议重新打开地图,以便查看变化', msg))
-    end)
+    local report = slk:refresh()
+    log.trace('build object finish')
+    if #report > 0 then
+        gui.message(nil, ('%s\n\n%s'):format('编辑器刚刚帮你修改了物编数据,建议重新打开地图,以便查看变化', report))
+    end
 end)
 
 return slk
