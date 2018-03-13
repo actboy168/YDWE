@@ -6,6 +6,16 @@ local i18n = require 'i18n'
 local event = require 'ev'
 local map_handle = __map_handle__.handle
 
+local type_map = {
+    ['war3map.w3u'] = 0,
+    ['war3map.w3t'] = 1,
+    ['war3map.w3b'] = 2,
+    ['war3map.w3d'] = 3,
+    ['war3map.w3a'] = 4,
+    ['war3map.w3h'] = 5,
+    ['war3map.w3q'] = 6,
+}
+
 local function initialize()
     local map = stormlib.attach(map_handle)
     if not map then
@@ -31,10 +41,16 @@ local function initialize()
         return map:load_file(filename)
     end
     function w2l:map_save(filename, buf)
-        return map:save_file(filename, buf)
+        local tmp = fs.path(os.tmpname()):remove_filename() / filename
+        log.info('object save', filename, type_map[filename], tmp)
+        io.save(tmp, buf)
+        we.import_customdata(type_map[filename], tmp)
     end
     function w2l:map_remove(filename)
-        return map:remove_file(filename)
+        local tmp = fs.path(os.tmpname()):remove_filename() / filename
+        log.info('object remove', filename, type_map[filename], tmp)
+        io.save(tmp, '')
+        we.import_customdata(type_map[filename], tmp)
     end
 
     return w2l:slk_lib(false, true)
@@ -51,6 +67,7 @@ trg = event.on('编译地图', function ()
     if #report > 0 then
         gui.message(nil, ('%s\n\n%s'):format('编辑器刚刚帮你修改了物编数据,建议重新打开地图,以便查看变化', report))
     end
+    we.refresh_objecteditor()
 end)
 
 return slk
