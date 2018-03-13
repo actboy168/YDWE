@@ -37,6 +37,10 @@ local config_content = [[
 mpq = default
 -- 使用的语言
 lang = zh-CN
+-- mpq路径
+mpq_path = ../data/mpq
+-- 预处理路径
+prebuilt_path = ../data/mpq
 
 [lni]
 -- 读取slk文件
@@ -331,7 +335,7 @@ local function window_convert(canvas)
     else
         if canvas:button('开始') then
             canvas:progress(0, 100)
-            worker = backend:open(root / 'script' / 'map.lua', ('"%s" -%s'):format(mappath:string(), config.mode))
+            worker = backend:open(root / 'script' / 'map.lua', ('"%s" -%s -config="%s"'):format(mappath:string(), config.mode, (root / 'config.ini'):string()))
             backend.message = '正在初始化...'
         end
     end

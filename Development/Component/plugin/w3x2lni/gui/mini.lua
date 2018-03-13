@@ -55,11 +55,7 @@ end
 local function pack_arg()
     local buf = {}
     for i, command in ipairs(arg) do
-        if command:sub(1, 1) == '-' then
-            buf[i] = command
-        else
-            buf[i] = '"' .. command .. '"'
-        end
+        buf[i] = '"' .. command .. '"'
     end
     return table.concat(buf, ' ')
 end
