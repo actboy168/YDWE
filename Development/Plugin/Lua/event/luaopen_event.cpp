@@ -74,12 +74,12 @@ namespace NYDWE {
 		base::fast_call<void>(RealWeMessageShow, message, flag);
 	}
 
-	int32_t CObjectPane = 0;
-	uintptr_t RealCreateCObjectPane = 0x00650D90;
-	int32_t __fastcall FakeCreateCObjectPane(int32_t This, int32_t Edx, int32_t Unk1, int32_t Unk2)
+	int32_t CObjectEditor = 0;
+	uintptr_t RealCreateCObjectEditor = 0x005935E0;
+	int32_t __fastcall FakeCreateCObjectEditor(int32_t This, int32_t Edx, int32_t Unk1, int32_t Unk2)
 	{
-		CObjectPane = This;
-		return base::fast_call<int32_t>(RealCreateCObjectPane, This, Edx, Unk1, Unk2);
+		CObjectEditor = This;
+		return base::fast_call<int32_t>(RealCreateCObjectEditor, This, Edx, Unk1, Unk2);
 	}
 	
 	extern HFONT font;
@@ -94,27 +94,19 @@ static int set_font(lua_State* L)
 
 static int import_customdata(lua_State* L)
 {
-	if (!NYDWE::CObjectPane) {
+	if (!NYDWE::CObjectEditor) {
 		return 0;
 	}
 	lua_Integer type = luaL_checkinteger(L, 1);
 	if (type < 0 || type > 6) {
 		return 0;
 	}
-	int32_t CCustomData = *(int32_t*)(*(int32_t*)(NYDWE::CObjectPane + 4) + type * 4 + 4);
+	int32_t CObjectPane = *(int32_t*)(NYDWE::CObjectEditor + 4 * (8 + type));
+	int32_t CCustomData = *(int32_t*)(*(int32_t*)(CObjectPane + 4) + type * 4 + 4);
 	fs::path& path = *(fs::path*)luaL_checkudata(L, 2, "filesystem");
 	std::string asciipath = base::w2a(path.c_str(), base::conv_method::replace | '?');
 	base::fast_call<int32_t>(0x005B7270, CCustomData, 0, asciipath.c_str());
-	return 0;
-}
-
-
-static int refresh_objecteditor(lua_State* L)
-{
-	if (!NYDWE::CObjectPane) {
-		return 0;
-	}
-	base::fast_call<int32_t>(0x0064D4E0, NYDWE::CObjectPane);
+	base::fast_call<int32_t>(0x0064D4E0, CObjectPane);
 	return 0;
 }
 
@@ -162,13 +154,12 @@ int luaopen_event(lua_State* L)
 	lua_setglobal(L, "event");
 
 	base::hook::install(&NYDWE::RealWeMessageShow, (uintptr_t)NYDWE::FakeWeMessageShow);
-	base::hook::install(&NYDWE::RealCreateCObjectPane, (uintptr_t)NYDWE::FakeCreateCObjectPane);
+	base::hook::install(&NYDWE::RealCreateCObjectEditor, (uintptr_t)NYDWE::FakeCreateCObjectEditor);
 
 	luaL_Reg lib[] = {
 		{ "message_show", NYDWE::LuaWeMessageShow },
 		{ "set_font", set_font },
 		{ "import_customdata", import_customdata },
-		{ "refresh_objecteditor", refresh_objecteditor },
 		{ NULL, NULL },
 	};
 	luaL_newlib(L, lib);
