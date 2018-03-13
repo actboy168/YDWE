@@ -69,7 +69,9 @@ function mt:load(dir, filename)
 end
 
 function mt:save(dir, filename, buf)
-    io.save(dir / self:path():first_path() / filename, buf)
+    local path = dir / self:path():first_path() / filename
+    fs.create_directories(path:parent_path())
+    io.save(path, buf)
 end
 
 function mt:create_directories(dir)
