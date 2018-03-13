@@ -15,11 +15,18 @@ function mini:init()
     view:setstyle { FlexGrow = 1 }
     view:setmousedowncanmovewindow(true)
 
-    local title = gui.Label.create('等待slk优化后测试...')
-    title:setstyle { Margintop = 10, Height = 20 }
-    title:setfont(gui.Font.create('微软雅黑', 20, "extra-bold", "normal"))
+    local title = gui.Container.create()
+    title:setstyle { FlexGrow = 1, Height = 25, FlexDirection = 'row', AlignItems = 'center' }
+    title:setbackgroundcolor('#44c')
     title:setmousedowncanmovewindow(true)
     view:addchildview(title)
+
+    local title_label = gui.Label.create('Slk优化')
+    title_label:setstyle { Height = 16, Width = 80, FlexDirection = 'row', AlignItems = 'center' }
+    title_label:setcolor('#eee')
+    title_label:setfont(gui.Font.create('宋体', 16, "bold", "normal"))
+    title_label:setmousedowncanmovewindow(true)
+    title:addchildview(title_label)
     
     local label = gui.Label.create('')
     label:setstyle { Margin = 5, Height = 20 }
