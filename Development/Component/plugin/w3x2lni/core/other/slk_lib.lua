@@ -402,7 +402,7 @@ function mt:create_object(objt, ttype, name)
         local w2lobject
         if #id == 4 and not id:find('%W') then
             w2lobject = 'static'
-            if session.slk[ttype][id] then
+            if session.default[ttype][id] or session.slk[ttype][id] then
                 return session:create_object(nil, ttype, '')
             end
         else
