@@ -127,9 +127,6 @@ w2l:backend(slk)
 w2l.progress:finish()
 
 print('正在生成文件...')
-w2l.progress:start(1)
-builder.save(w2l, output_ar, slk.w3i, input_ar)
-w2l.progress:finish()
 if w2l.config.mode == 'lni' then
     local ex_map = builder.load(output / 'builder.w3x', 'w')
     ex_map:set('war3mapunits.doo', w2l:create_unitsdoo())
@@ -140,6 +137,7 @@ if w2l.config.mode == 'lni' then
     ex_map:save(slk.w3i, w2l.progress, false)
     ex_map:close()
 end
-output_ar:close()
-input_ar:close()
+w2l.progress:start(1)
+builder.save(w2l, output_ar, slk.w3i, input_ar)
+w2l.progress:finish()
 print('转换完毕,用时 ' .. os.clock() .. ' 秒') 

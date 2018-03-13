@@ -56,7 +56,7 @@ function mt:save(path, w3i, n, encrypt)
     io.save(path, table.concat(hexs))
     self.handle = stormlib.create(path, n+3, encrypt)
     if not self.handle then
-        return false
+        error('保存地图失败，可能文件被占用了')
     end
     return true
 end

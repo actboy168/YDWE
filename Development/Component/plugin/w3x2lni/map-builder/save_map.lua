@@ -150,7 +150,9 @@ return function (w2l, output_ar, w3i, input_ar)
         end
     end
 
+    input_ar:close()
     if not output_ar:save(w3i, w2l.progress, w2l.config.remove_we_only) then
         print('创建新地图失败,可能文件被占用了')
     end
+    output_ar:close()
 end
