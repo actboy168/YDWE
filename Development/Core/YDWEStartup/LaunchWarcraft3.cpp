@@ -39,13 +39,18 @@ bool launch_taskbar_support(const fs::path& ydwe_path)
 bool map_slk(const fs::path& ydwe, const fs::path& from, const fs::path& to)
 {
 	fs::path ydwedev = base::path::ydwe(true);
-	fs::path app = ydwe / L"bin" / L"w2l-worker.exe";
+	fs::path app = ydwe / L"bin" / L"lua.exe";
 	base::win::process process;
-	process.set_console(base::win::process::CONSOLE_NEW);
+	process.set_console(base::win::process::CONSOLE_DISABLE);
 	process.set_env(L"PATH", (ydwe / L"bin").wstring());
 	if (!process.create(
 		app,
-		base::format(LR"("%s" -e "package.cpath = [[%s]]" gui\mini.lua -slk "%s" "%s")", app.wstring(), (ydwe / L"bin" / L"modules" / L"?.dll").wstring(), from.wstring(), to.wstring()),
+		base::format(LR"("%s" -e "package.cpath = [[%s]]" gui\mini.lua -slk -config="%s" "%s" "%s")", 
+			app.wstring(), (ydwe / L"bin" / L"modules" / L"?.dll").wstring(), 
+			(ydwedev / L"share"/ L"script"/ L"war3"/ L"w3x2lni.ini").wstring(),
+			from.wstring(),
+			to.wstring()
+		),
 		ydwedev / L"plugin" / L"w3x2lni"
 	)) {
 		return false;

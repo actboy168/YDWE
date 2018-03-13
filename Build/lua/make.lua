@@ -164,6 +164,7 @@ else
 	copy_ucrt_dll()
 end
 fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / configuration / 'lua53.dll', path.Result / 'bin' / 'lua53.dll', true)
+fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / configuration / 'lua.exe', path.Result / 'bin' / 'lua.exe', true)
 fs.copy_file(path.OpenSource / 'StormLib' / 'bin' / 'Win32' / configuration / 'StormLib.dll', path.Result / 'bin' / 'StormLib.dll', true)
 fs.copy_file(path.OpenSource / 'minizip' / 'bin' / configuration / 'minizip.dll', path.Result / 'bin' / 'minizip.dll', true)
 fs.copy_file(path.OpenSource / 'luaffi' / 'bin' / configuration / 'ffi.dll', path.Result / 'bin' / 'modules' / 'ffi.dll', true)
