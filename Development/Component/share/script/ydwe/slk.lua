@@ -50,7 +50,7 @@ local function initialize()
     function w2l:map_remove(filename)
         local tmp = fs.path(os.tmpname()):remove_filename() / filename
         log.info('object remove', filename, type_map[filename], tmp)
-        io.save(tmp, '')
+        io.save(tmp, ('lll'):pack(2, 0, 0))
         we.import_customdata(type_map[filename], tmp)
     end
 
