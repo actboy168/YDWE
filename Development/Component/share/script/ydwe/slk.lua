@@ -45,9 +45,11 @@ local function initialize()
     end
     function w2l:map_save(filename, buf)
         import_files[filename] = buf
+        log.info('Object save', filename)
     end
     function w2l:map_remove(filename)
         import_files[filename] = ('lll'):pack(2, 0, 0)
+        log.info('Object remove', filename)
     end
 
     return w2l:slk_lib(false, true)
@@ -58,15 +60,15 @@ local slk = initialize()
 trg = event.on('编译地图', function ()
     package.loaded['slk'] = nil
     trg:remove()
-    log.trace('build object start', map_handle)
     import_files = {}
+    log.trace('Refresh object start', map_handle)
     local report = slk:refresh()
-    log.trace('build object finish')
+    log.trace('Refresh object finish')
     if #report > 0 then
         gui.message(nil, ('%s\n\n%s'):format('编辑器修改了物编数据', report))
         for filename, buf in pairs(import_files) do
             local tmp = fs.path(os.tmpname()):remove_filename() / filename
-            log.info('object save', filename, type_map[filename], tmp)
+            log.info('Import customdata', filename, type_map[filename], tmp)
             io.save(tmp, buf)
             we.import_customdata(type_map[filename], tmp)
         end
