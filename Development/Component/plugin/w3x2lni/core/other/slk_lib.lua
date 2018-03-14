@@ -1,3 +1,6 @@
+local pairs = pairs
+local type = type
+
 local mt = {}
 mt.__index = mt
 
@@ -209,6 +212,9 @@ local function fill_data(data, max_level, meta, default)
             data[i] = default[i] or default[#default]
         end
     end
+    for i = max_level + 1, #data do
+        data[i] = nil
+    end
 end
 
 function mt:fill_object(obj, ttype)
@@ -325,8 +331,6 @@ function mt:create_object(objt, ttype, name)
         end
 
         write_data(nvalue, level)
-
-        session.used[ttype] = true
     end
     function mt:__pairs()
         if not objt then
@@ -415,6 +419,7 @@ function mt:create_object(objt, ttype, name)
         end
         
         local new_obj = copy_table(objd)
+        session:fill_object(new_obj, ttype)
         new_obj._id = id
         new_obj._parent = name
         new_obj._type = ttype
@@ -425,12 +430,7 @@ function mt:create_object(objt, ttype, name)
 
         session.slk[ttype][id] = new_obj
         session.all[id:lower()] = new_obj
-        session.used[ttype] = true
-        if session.old[id] then
-            session.old[id] = nil
-        else
-            session.new[id] = new_obj
-        end
+        session.new[ttype][id] = new_obj
         return session:create_object(new_obj, ttype, id)
     end
     function o:get_id()
@@ -474,11 +474,12 @@ function mt:mark_obj(ttype, objs)
     if not objs then
         return
     end
+    self.new[ttype] = {}
+    self.old[ttype] = {}
     for name, obj in pairs(objs) do
         if obj.w2lobject then
             objs[name] = nil
-            self.old[name] = obj
-            self.used[ttype] = true
+            self.old[ttype][name] = obj
             local pos = obj.w2lobject:find('|', 1, false)
             if pos then
                 local kind = obj.w2lobject:sub(1, pos-1)
@@ -494,11 +495,15 @@ function mt:mark_obj(ttype, objs)
 end
 
 local function to_list(tbl)
-	local list = {}
-	for k in pairs(tbl) do
-		list[#list+1] = k
-	end
-	table.sort(list)
+    local list = {}
+    for ttype, data in pairs(tbl) do
+        for name, obj in pairs(data) do
+            list[#list+1] = obj
+        end
+    end
+    table.sort(list, function (a, b)
+        return a._id < b._id
+    end)
 	return list
 end
 
@@ -526,12 +531,13 @@ local displaytype = {
 
 function mt:create_report()
 	local lold = to_list(self.old)
-	local lnew = to_list(self.new)
+    local lnew = to_list(self.new)
+    local lchg = to_list(self.change)
 	local lines = {}
 	if #lold > 0 then
 		lines[#lines+1] = ('移除了 %d 个对象'):format(#lold)
 		for i = 1, math.min(10, #lold) do
-			local o = self.old[lold[i]]
+			local o = lold[i]
 			lines[#lines+1] = ("[%s][%s] '%s'"):format(displaytype[o._type], get_displayname(o, self.slk[o._type][o._parent]), o._id)
 		end
 	end
@@ -541,20 +547,70 @@ function mt:create_report()
 		end
 		lines[#lines+1] = ('新建了 %d 个对象'):format(#lnew)
 		for i = 1, math.min(10, #lnew) do
-			local o = self.new[lnew[i]]
+			local o = lnew[i]
+			lines[#lines+1] = ("[%s][%s] '%s'"):format(displaytype[o._type], get_displayname(o, self.slk[o._type][o._parent]), o._id)
+		end
+    end
+	if #lchg > 0 then
+		if #lines > 0 then
+			lines[#lines+1] = ''
+		end
+		lines[#lines+1] = ('修改了 %d 个对象'):format(#lchg)
+		for i = 1, math.min(10, #lchg) do
+			local o = lchg[i]
 			lines[#lines+1] = ("[%s][%s] '%s'"):format(displaytype[o._type], get_displayname(o, self.slk[o._type][o._parent]), o._id)
 		end
     end
     return table.concat(lines, '\n')
 end
 
-function mt:refresh()
-    if not next(self.used) then
-        return
+local function eq_obj(a, b)
+    for k, v in pairs(a) do
+        if k == '_create' then
+            goto CONTINUE
+        end
+        if type(v) ~= type(b[k]) then
+            return false
+        end
+        if type(v) == 'table' then
+            if not eq_obj(v, b[k]) then
+                return false
+            end
+        else
+            if v ~= b[k] then
+                return false
+            end
+        end
+        ::CONTINUE::
     end
+    return true
+end
+
+function mt:update_change(ttype)
+    if not self.change[ttype] then
+        self.change[ttype] = {}
+        local old_map = self.old[ttype]
+        local new_map = self.new[ttype]
+        for name, obj in pairs(self.new[ttype]) do
+            if old_map[name] then
+                if not eq_obj(obj, old_map[name]) then
+                    self.change[ttype][name] = obj
+                end
+                old_map[name] = nil
+                new_map[name] = nil
+            end
+        end
+    end
+    return self.change[ttype]
+end
+
+function mt:refresh()
     local objs = {}
+    local need_update = {}
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
-        if self.used[type] then
+        self:update_change(type)
+        need_update[type] = next(self.change[type]) or next(self.new[type]) or next(self.old[type])
+        if need_update[type] then
             objs[type] = {}
             for name, obj in pairs(self.slk[type]) do
                 if obj._parent then
@@ -566,11 +622,13 @@ function mt:refresh()
     self.w2l.config.remove_same = true
     self.w2l:backend_cleanobj(objs)
     for type, data in pairs(objs) do
-        local buf = self.w2l:backend_obj(type, data)
-        if buf then
-            self.w2l:map_save(self.w2l.info.obj[type], buf)
-        else
-            self.w2l:map_remove(self.w2l.info.obj[type])
+        if need_update[type] then
+            local buf = self.w2l:backend_obj(type, data)
+            if buf then
+                self.w2l:map_save(self.w2l.info.obj[type], buf)
+            else
+                self.w2l:map_remove(self.w2l.info.obj[type])
+            end
         end
     end
     local report = self:create_report()
@@ -583,11 +641,11 @@ return function (w2l, read_only, safe_mode)
         read_only = read_only,
         safe_mode = safe_mode,
         slk = {},
-        used = {},
         all = {},
         dynamics = {},
         old = {},
         new = {},
+        change = {},
         all_chs = {},
     }, mt)
 
