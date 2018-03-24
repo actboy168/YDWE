@@ -162,11 +162,27 @@ namespace process {
 	int inject(lua_State* L)
 	{
 		base::win::process& self = to(L, 1);
-		bool ok = self.inject(*(fs::path*)luaL_checkudata(L, 2, "filesystem"));
+		bool ok = self.inject_x86(*(fs::path*)luaL_checkudata(L, 2, "filesystem"));
 		lua_pushboolean(L, ok);
 		return 1;
 	}
-	
+
+	int inject_x86(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		bool ok = self.inject_x86(*(fs::path*)luaL_checkudata(L, 2, "filesystem"));
+		lua_pushboolean(L, ok);
+		return 1;
+	}
+
+	int inject_x64(lua_State* L)
+	{
+		base::win::process& self = to(L, 1);
+		bool ok = self.inject_x64(*(fs::path*)luaL_checkudata(L, 2, "filesystem"));
+		lua_pushboolean(L, ok);
+		return 1;
+	}
+
 	int set_console(lua_State* L)
 	{
 		base::win::process& self = to(L, 1);
@@ -307,6 +323,8 @@ int luaopen_process(lua_State* L)
 {
 	static luaL_Reg mt[] = {
 		{ "inject", process::inject },
+		{ "inject_x86", process::inject_x86 },
+		{ "inject_x64", process::inject_x64 },
 		{ "hide_window", process::hide_window },
 		{ "set_console", process::set_console },
 		{ "std_input", process::std_input },

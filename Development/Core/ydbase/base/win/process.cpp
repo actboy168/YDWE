@@ -1,5 +1,5 @@
 #include <base/win/process.h>
-#include <base/hook/detail/inject_dll.h>   
+#include <base/hook/injectdll.h>   
 #include <base/hook/replace_import.h>
 #include <base/util/dynarray.h>	  
 #include <base/util/foreach.h>
@@ -26,13 +26,14 @@ namespace base { namespace win {
 			const wchar_t*                 current_directory,
 			LPSTARTUPINFOW                 startup_info,
 			LPPROCESS_INFORMATION          process_information,
-			const fs::path& inject_dll,
+			const fs::path&                injectdll_x86,
+			const fs::path&                injectdll_x64,
 			const std::map<std::string, fs::path>& replace_dll
 		)
 		{
 			bool pause = !replace_dll.empty();
 			bool suc = false;
-			if (fs::exists(inject_dll))
+			if (fs::exists(injectdll_x86) || fs::exists(injectdll_x64))
 			{
 				pause = true;
 #if !defined(DISABLE_DETOURS)
@@ -42,7 +43,7 @@ namespace base { namespace win {
 					inherit_handle, creation_flags | CREATE_SUSPENDED,
 					NULL, current_directory,
 					startup_info, process_information,
-					inject_dll.string().c_str(), NULL
+					injectdll_x86.string().c_str(), NULL
 				);
 #else
 				suc = !!::CreateProcessW(
@@ -52,10 +53,12 @@ namespace base { namespace win {
 					environment, current_directory,
 					startup_info, process_information
 				);
-				if (suc) 
+#if !defined(_M_X64)
+				if (suc)
 				{
-					hook::detail::inject_dll(process_information->hProcess, process_information->hThread, inject_dll.c_str());
+					hook::injectdll(*process_information, injectdll_x86, injectdll_x64);
 				}
+#endif
 #endif
 			}
 			else
@@ -271,11 +274,22 @@ namespace base { namespace win {
 		close();
 	}
 
-	bool process::inject(const fs::path& dllpath)
+	bool process::inject_x86(const fs::path& dllpath)
 	{
 		if (statue_ == PROCESS_STATUE_READY)
 		{
-			inject_dll_ = dllpath;
+			injectdll_x86_ = dllpath;
+			return true;
+		}
+
+		return false;
+	}
+
+	bool process::inject_x64(const fs::path& dllpath)
+	{
+		if (statue_ == PROCESS_STATUE_READY)
+		{
+			injectdll_x64_ = dllpath;
 			return true;
 		}
 
@@ -377,7 +391,7 @@ namespace base { namespace win {
 				flags_ | NORMAL_PRIORITY_CLASS,
 				environment.get(),
 				current_directory ? current_directory->c_str() : nullptr,
-				&si_, &pi_, inject_dll_, replace_dll_
+				&si_, &pi_, injectdll_x86_, injectdll_x64_, replace_dll_
 				))
 			{
 				return false;
@@ -481,7 +495,7 @@ namespace base { namespace win {
 	{
 		process p;
 
-		p.inject(inject_dll);
+		p.inject_x86(inject_dll);
 
 		if (p.create(application, command_line, current_directory))
 		{

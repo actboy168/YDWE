@@ -63,7 +63,7 @@
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>$(ThirdParty)\Microsoft\Detours\src;$(OpenSource)\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OpenSource)\minhook\include\;$(OpenSource)\wow64ext\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DISABLE_DETOURS;YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -94,7 +94,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(ThirdParty)\Microsoft\Detours\src;$(OpenSource)\minhook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OpenSource)\minhook\include\;$(OpenSource)\wow64ext\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DISABLE_DETOURS;YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link />
@@ -115,6 +115,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base\hook\dyn_iat.cpp" />
+    <ClCompile Include="base\hook\injectdll.cpp" />
     <ClCompile Include="base\hook\patch.cpp" />
     <ClCompile Include="base\hook\replace_import.cpp" />
     <ClCompile Include="base\hook\udis86\udis86.c" />
@@ -141,7 +142,6 @@
     <ClCompile Include="base\file\memory_mapped_file.cpp" />
     <ClCompile Include="base\file\stream.cpp" />
     <ClCompile Include="base\hook\detail\import_address_table.cpp" />
-    <ClCompile Include="base\hook\detail\inject_dll.cpp" />
     <ClCompile Include="base\hook\detail\memory_protect.cpp" />
     <ClCompile Include="base\hook\detail\replace_pointer.cpp" />
     <ClCompile Include="base\hook\detail\export_address_table.cpp" />
@@ -199,7 +199,6 @@
     <ClInclude Include="base\hook\assembler\writer.h" />
     <ClInclude Include="base\hook\assembler\register.h" />
     <ClInclude Include="base\hook\detail\import_address_table.h" />
-    <ClInclude Include="base\hook\detail\inject_dll.h" />
     <ClInclude Include="base\hook\detail\memory_protect.h" />
     <ClInclude Include="base\hook\detail\replace_pointer.h" />
     <ClInclude Include="base\hook\detail\export_address_table.h" />
@@ -208,6 +207,7 @@
     <ClInclude Include="base\hook\fp_call.h" />
     <ClInclude Include="base\hook\iat.h" />
     <ClInclude Include="base\hook\iat_manager.h" />
+    <ClInclude Include="base\hook\injectdll.h" />
     <ClInclude Include="base\hook\inline.h" />
     <ClInclude Include="base\hook\patch.h" />
     <ClInclude Include="base\hook\replace_import.h" />
@@ -305,6 +305,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\OpenSource\minhook\build\VC15\libMinHook.vcxproj">
       <Project>{f142a341-5ee0-442d-a15f-98ae9b48dbae}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OpenSource\wow64ext\src\wow64ext.vcxproj">
+      <Project>{9da7f232-0096-45bc-a452-24c7f3afa0f8}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

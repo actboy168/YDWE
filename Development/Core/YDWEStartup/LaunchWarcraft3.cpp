@@ -155,7 +155,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		if (fs::exists(inject_dll))
 		{
 			cmd.add(L"ydwe", ydwe.wstring());
-			warcraft3_process.inject(inject_dll);			
+			warcraft3_process.inject_x86(inject_dll);			
 		}
 
 		cmd.app(war3_path.wstring());

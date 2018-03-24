@@ -122,9 +122,6 @@
     <ClCompile Include="base\win\pe_reader.cpp">
       <Filter>base\win</Filter>
     </ClCompile>
-    <ClCompile Include="base\hook\detail\inject_dll.cpp">
-      <Filter>base\hook\detail</Filter>
-    </ClCompile>
     <ClCompile Include="base\exception\windows_exception.cpp">
       <Filter>base\exception</Filter>
     </ClCompile>
@@ -269,6 +266,9 @@
     <ClCompile Include="base\i18n-2\gettext.cpp">
       <Filter>base\i18n-2</Filter>
     </ClCompile>
+    <ClCompile Include="base\hook\injectdll.cpp">
+      <Filter>base\hook</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -327,9 +327,6 @@
     </ClInclude>
     <ClInclude Include="base\hook\assembler\writer.h">
       <Filter>base\hook\assembler</Filter>
-    </ClInclude>
-    <ClInclude Include="base\hook\detail\inject_dll.h">
-      <Filter>base\hook\detail</Filter>
     </ClInclude>
     <ClInclude Include="base\exception\windows_exception.h">
       <Filter>base\exception</Filter>
@@ -601,6 +598,9 @@
     </ClInclude>
     <ClInclude Include="base\i18n-2\gettext.h">
       <Filter>base\i18n-2</Filter>
+    </ClInclude>
+    <ClInclude Include="base\hook\injectdll.h">
+      <Filter>base\hook</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

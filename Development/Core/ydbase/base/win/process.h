@@ -39,7 +39,8 @@ namespace base { namespace win {
 
 		process();
 		~process();
-		bool     inject(const fs::path& dllpath);
+		bool     inject_x86(const fs::path& dllpath);
+		bool     inject_x64(const fs::path& dllpath);
 		bool     replace(const fs::path& dllpath, const char* dllname);
 		bool     set_console(CONSOLE type);
 		bool     hide_window();
@@ -59,7 +60,8 @@ namespace base { namespace win {
 		uint32_t                statue_;
 #pragma warning(push)
 #pragma warning(disable:4251)
-		fs::path inject_dll_;
+		fs::path injectdll_x86_;
+		fs::path injectdll_x64_;
 		std::map<std::string, fs::path> replace_dll_;
 		std::map<std::wstring, std::wstring, ignore_case::less<std::wstring>> set_env_;
 		std::set<std::wstring, ignore_case::less<std::wstring>>               del_env_;
