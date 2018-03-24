@@ -20,11 +20,6 @@ end
 require "utiliy"
 require "filesystem"
 require "gui"
-
-local uni = require "ffi.unicode"
-local root = fs.ydwe_devpath()
-package.path = package.path.. ';' .. uni.u2a((root / 'plugin' / '?.lua'):string()) .. ';' .. uni.u2a((root / 'plugin' / '?' / 'init.lua'):string()) 
-
 require "event"
 require "virtual_mpq"
 require "registry"
