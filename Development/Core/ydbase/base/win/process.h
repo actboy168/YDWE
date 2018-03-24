@@ -71,12 +71,4 @@ namespace base { namespace win {
 		bool                    inherit_handle_;
 		DWORD                   flags_;
 	};
-
-	_BASE_API bool create_process(
-		const fs::path& application, 
-		const std::wstring&            command_line, 
-		const fs::path& current_directory, 
-		const fs::path& inject_dll, 
-		PROCESS_INFORMATION*           pi_ptr = nullptr
-	);
 }}

@@ -489,23 +489,4 @@ namespace base { namespace win {
 	{
 		del_env_.insert(key);
 	}
-
-
-	bool create_process(const fs::path& application, const std::wstring& command_line, const fs::path& current_directory, const fs::path& inject_dll, PROCESS_INFORMATION* pi_ptr)
-	{
-		process p;
-
-		p.inject_x86(inject_dll);
-
-		if (p.create(application, command_line, current_directory))
-		{
-			if (pi_ptr)
-			{ 
-				p.release(pi_ptr);
-			}
-			return true;
-		}
-
-		return false;
-	}
 }}
