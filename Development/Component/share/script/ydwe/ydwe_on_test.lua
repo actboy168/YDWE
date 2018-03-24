@@ -1,5 +1,5 @@
 local stormlib = require 'ffi.stormlib'
-local w3x2lni = require 'w3x2lni_in_sandbox'
+local w3x2lni = require 'w3x2lni'
 
 local mapdump = require 'mapdump'
 local process = require 'process'
