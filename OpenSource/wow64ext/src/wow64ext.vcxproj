@@ -105,9 +105,6 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="wow64ext.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="wow64ext.rc" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
