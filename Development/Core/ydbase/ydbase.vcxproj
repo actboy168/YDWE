@@ -122,6 +122,7 @@
     <ClCompile Include="base\hook\udis86\udis86_decode.c" />
     <ClCompile Include="base\hook\udis86\udis86_itab.c" />
     <ClCompile Include="base\i18n-2\gettext.cpp" />
+    <ClCompile Include="base\path\ydwe.cpp" />
     <ClCompile Include="base\thread\thread.cpp" />
     <ClCompile Include="base\thread\thread_exception.cpp" />
     <ClCompile Include="base\warcraft3\command_line.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="base\path\helper.h" />
     <ClInclude Include="base\path\self.h" />
     <ClInclude Include="base\path\get_path.h" />
+    <ClInclude Include="base\path\ydwe.h" />
     <ClInclude Include="base\thread\intrusive_ptr.h" />
     <ClInclude Include="base\thread\lock\backoff.h" />
     <ClInclude Include="base\thread\lock\guard.h" />

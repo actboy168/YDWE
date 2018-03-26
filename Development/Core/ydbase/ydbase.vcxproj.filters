@@ -263,6 +263,9 @@
     <ClCompile Include="base\path\get_path.cpp">
       <Filter>base\path</Filter>
     </ClCompile>
+    <ClCompile Include="base\path\ydwe.cpp">
+      <Filter>base\path</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -591,6 +594,9 @@
       <Filter>base\hook</Filter>
     </ClInclude>
     <ClInclude Include="base\path\get_path.h">
+      <Filter>base\path</Filter>
+    </ClInclude>
+    <ClInclude Include="base\path\ydwe.h">
       <Filter>base\path</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
 #include <lua.hpp>
 #include <Windows.h>
-#include <base/path/helper.h>
+#include <base/path/ydwe.h>
 #include <base/util/console.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace slk {

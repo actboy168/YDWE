@@ -3,7 +3,7 @@
 #include <base/com/guard.h>
 #include <base/util/unicode.h>
 #include <base/i18n-2/gettext.h>
-#include <base/path/helper.h>
+#include <base/path/ydwe.h>
 
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR lpCmdLine, int nCmdShow)
 {
