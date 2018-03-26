@@ -27,14 +27,14 @@ local function slk_to_type(tp, value)
         return wtonumber(value) + 0.0
     elseif tp == 3 then
         if not value then
-            return nil
+            return ''
         end
         if value == '' then
             return value
         end
         value = tostring(value)
         if not value:match '[^ %-%_]' then
-            return nil
+            return ''
         end
         return value
     end
@@ -46,11 +46,11 @@ local function slk_read_data(obj, key, meta, data)
         local t = {}
         if slk_type == 'doodad' then
             for i = 1, 10 do
-                t[i] = slk_to_type(type, data[('%s%02d'):format(meta.field, i)]) or ''
+                t[i] = slk_to_type(type, data[('%s%02d'):format(meta.field, i)])
             end
         else
             for i = 1, 4 do
-                t[i] = slk_to_type(type, data[meta.field..i]) or ''
+                t[i] = slk_to_type(type, data[meta.field..i])
             end
         end
         obj[key] = t

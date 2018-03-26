@@ -59,16 +59,33 @@ local function write_data(f, k, v)
     end
 end
 
+local function is_enable(obj)
+    for key, value in pairs(obj) do
+        if key:sub(1, 1) ~= '_' then
+            if type(value) == 'table' then
+                if next(value) then
+                    return true
+                end
+            else
+                return true
+            end
+        end
+    end
+    return false
+end
+
 return function (w2l, t)
     local f = {}
     for i, o in sortpairs(t) do
-        f[#f+1] = ('[%s]'):format(i)
-        for k, v in sortpairs(o) do
-            if k:sub(1, 1) ~= '_' then
-                write_data(f, k, v)
+        if is_enable(o) then
+            f[#f+1] = ('[%s]'):format(i)
+            for k, v in sortpairs(o) do
+                if k:sub(1, 1) ~= '_' then
+                    write_data(f, k, v)
+                end
             end
+            f[#f+1] = ''
         end
-        f[#f+1] = ''
     end
-    return table.concat(f, '\r\n')
+    return #f > 0 and table.concat(f, '\r\n')
 end

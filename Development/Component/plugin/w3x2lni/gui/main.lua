@@ -5,8 +5,10 @@ local process = require 'process'
 local nk = require 'nuklear'
 local backend = require 'gui.backend'
 local show_version = require 'gui.show_version'
+local plugin = require 'gui.plugin'
 local lni = require 'lni'
 local currenttheme = {0, 173, 217}
+local worker
 
 NK_WIDGET_STATE_MODIFIED = 1 << 1
 NK_WIDGET_STATE_INACTIVE = 1 << 2
@@ -34,13 +36,15 @@ backend:init(root / 'bin' / 'w2l-worker.exe', root / 'script')
 local config_content = [[
 [root]
 -- 使用谁的mpq(default, custom)
-mpq = default
+mpq = $mpq$
 -- 使用的语言
-lang = zh-CN
+lang = $lang$
 -- mpq路径
-mpq_path = ../data/mpq
+mpq_path = $mpq_path$
 -- 预处理路径
-prebuilt_path = ../data/mpq
+prebuilt_path = $prebuilt_path$
+-- 插件路径
+plugin_path = $plugin_path$
 
 [lni]
 -- 读取slk文件
@@ -92,6 +96,9 @@ local mapname = ''
 local mappath = fs.path()
 
 function window:dropfile(file)
+    if worker and not worker.exited then
+        return
+    end
     mappath = fs.path(file)
     mapname = mappath:filename():string()
     uitype = 'select'
@@ -129,14 +136,52 @@ local function button_mapname(canvas, height)
     return height
 end
 
+local version = (require 'gui.changelog')[1].version
 local function button_about(canvas)
-    canvas:layout_row_dynamic(20, 2)
-    canvas:text('', NK_TEXT_RIGHT)
     window:set_style('button.color', 51, 55, 67)
-    if canvas:button('版本: 1.9.1') then
+    canvas:text('', NK_TEXT_RIGHT)
+    if canvas:button('版本: ' .. version) then
         uitype = 'about'
     end
-    set_current_theme()
+end
+
+local show_plugin
+
+local function button_plugin(canvas)
+    show_plugin = plugin()
+    canvas:text('', NK_TEXT_RIGHT)
+    if show_plugin then
+        window:set_style('button.color', 51, 55, 67)
+        if canvas:button('插件') then
+            uitype = 'plugin'
+        end
+    else
+        canvas:text('', NK_TEXT_RIGHT)
+    end
+end
+
+local function window_plugin(canvas)
+    canvas:layout_row_dynamic(20, 1)
+    canvas:layout_space(30, 1)
+    canvas:layout_space_push(-10, 0, 300, 30)
+    canvas:button('插件')
+    if show_plugin then
+        show_plugin(canvas)
+    else
+        if mapname == '' then
+            uitype = 'none'
+        else
+            uitype = 'select'
+        end
+    end
+    canvas:layout_row_dynamic(30, 1)
+    if canvas:button('返回') then
+        if mapname == '' then
+            uitype = 'none'
+        else
+            uitype = 'select'
+        end
+    end
 end
 
 local function window_about(canvas)
@@ -169,8 +214,11 @@ local function window_none(canvas)
     canvas:layout_row_dynamic(2, 1)
     canvas:layout_row_dynamic(200, 1)
     canvas:button('把地图拖进来')
-    canvas:layout_row_dynamic(320, 1)
+    canvas:layout_row_dynamic(290, 1)
+    canvas:layout_row_dynamic(20, 2)
+    button_plugin(canvas)
     button_about(canvas)
+    set_current_theme()
 end
 
 local function clean_convert_ui()
@@ -213,11 +261,12 @@ local function window_select(canvas)
         set_current_theme {217, 163, 60}
         return
     end
-    canvas:layout_row_dynamic(212, 1)
+    canvas:layout_row_dynamic(182, 1)
+    canvas:layout_row_dynamic(20, 2)
+    button_plugin(canvas)
     button_about(canvas)
+    set_current_theme()
 end
-
-local worker
 
 local function update_worker()
     if worker then
@@ -317,7 +366,7 @@ local function window_convert(canvas)
     canvas:text(backend.message, NK_TEXT_LEFT)
     canvas:layout_row_dynamic(10, 1)
     canvas:layout_row_dynamic(30, 1)
-    if (worker and not worker.exited) or #backend.report == 0 then
+    if (worker and not worker.exited) or not next(backend.report) then
         if backend.progress then
             canvas:progress(math.floor(backend.progress), 100)
         else
@@ -413,6 +462,10 @@ function window:draw(canvas)
     end
     if uitype == 'report' then
         window_report(canvas)
+        return
+    end
+    if uitype == 'plugin' then
+        window_plugin(canvas)
         return
     end
     window_convert(canvas)

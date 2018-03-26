@@ -17,12 +17,12 @@ function mini:init()
 
     local title = gui.Container.create()
     title:setstyle { FlexGrow = 1, Height = 25, FlexDirection = 'row', AlignItems = 'center' }
-    title:setbackgroundcolor('#44c')
+    title:setbackgroundcolor('#28c')
     title:setmousedowncanmovewindow(true)
     view:addchildview(title)
 
     local title_label = gui.Label.create('Slk优化')
-    title_label:setstyle { Height = 16, Width = 80, FlexDirection = 'row', AlignItems = 'center' }
+    title_label:setstyle { Height = 20, Width = 80 }
     title_label:setcolor('#eee')
     title_label:setfont(gui.Font.create('宋体', 16, "bold", "normal"))
     title_label:setmousedowncanmovewindow(true)
@@ -41,6 +41,8 @@ function mini:init()
     win:sethasshadow(true)
     win:setresizable(false)
     win:setmaximizable(false)
+    win:setminimizable(false)
+    win:setalwaysontop(true)
     win:setcontentsize { width = 400, height = 110 }
     win:center()
     win:activate()

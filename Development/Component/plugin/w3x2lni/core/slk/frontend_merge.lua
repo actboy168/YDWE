@@ -75,7 +75,7 @@ end
 local function copy_obj(a, b)
     local c = {}
     local lv = b._max_level or a._max_level
-    if a._code ~= b._code then
+    if b._code and a._code ~= b._code then
         w2l.message("-report|6无效的物编数据", ("技能code与默认不一致： %s:%s"):format(b._id, b._code))
         w2l.message("-tip", ("默认为： %s"):format(a._code))
         return nil

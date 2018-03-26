@@ -92,68 +92,10 @@ local function merge_slk(t, fix)
     end
 end
 
-local miscdata = {
-    ['Misc'] = {
-        ['GoldTextHeight']             = {0.024},
-        ['GoldTextVelocity']           = {0, 0.03},
-        ['LumberTextHeight']           = {0.024},
-        ['LumberTextVelocity']         = {0, 0.03},
-        ['BountyTextHeight']           = {0.024},
-        ['BountyTextVelocity']         = {0, 0.03},
-        ['MissTextHeight']             = {0.024},
-        ['MissTextVelocity']           = {0, 0.03},
-        ['CriticalStrikeTextHeight']   = {0.024},
-        ['CriticalStrikeTextVelocity'] = {0, 0.04},
-        ['ShadowStrikeTextHeight']     = {0.024},
-        ['ShadowStrikeTextVelocity']   = {0, 0.04},
-        ['ManaBurnTextHeight']         = {0.024},
-        ['ManaBurnTextVelocity']       = {0, 0.04},
-        ['BashTextVelocity']           = {0, 0.04},
-    },
-    ['Terrain'] = {
-        ['MaxSlope']                   = {90},
-        ['MaxHeight']                  = {1920},
-        ['MinHeight']                  = {-1920},
-    },
-    ['FontHeights'] = {
-        ['ToolTipName']                = {0.011},
-        ['ToolTipDesc']                = {0.011},
-        ['ToolTipCost']                = {0.011},
-        ['ChatEditBar']                = {0.013},
-        ['CommandButtonNumber']        = {0.009},
-        ['WorldFrameMessage']          = {0.015},
-        ['WorldFrameTopMessage']       = {0.024},
-        ['WorldFrameUnitMessage']      = {0.015},
-        ['WorldFrameChatMessage']      = {0.013},
-        ['Inventory']                  = {0.011},
-        ['LeaderBoard']                = {0.007},
-        ['PortraitStats']              = {0.011},
-        ['UnitTipPlayerName']          = {0.011},
-        ['UnitTipDesc']                = {0.011},
-        ['ScoreScreenNormal']          = {0.011},
-        ['ScoreScreenLarge']           = {0.011},
-        ['ScoreScreenTeam']            = {0.009},
-    },
-}
-
-local function merge_txt(t, fix)
-    for name, data in pairs(fix) do
-        name = name:lower()
-        if not t[name] then
-            t[name] = {}
-        end
-        for k, v in pairs(data) do
-            k = k:lower()
-            t[name][k] = v
-        end
-    end
-end
-
-return function (_w2l)
+return function (_w2l, load_map)
     w2l = _w2l
     
     local slk = w2l.parse_slk
-    local txt = w2l.parse_txt
     
 	local hook
 	function w2l:parse_slk(buf)
@@ -171,22 +113,19 @@ return function (_w2l)
 			function hook(t)
                 merge_slk(t, abilitybuffdata)
 			end
-		end
+        end
+        if load_map then
+            local buf = w2l:file_load('map', name)
+            if buf then
+                return buf
+            end
+        end
 		return w2l:mpq_load(name)
 	end)
 
-	local hook
-	function w2l:parse_txt(buf, name, ...)
-        local r = txt(self, buf, name, ...)
-        if name:lower() == 'ui\\miscdata.txt' then
-            merge_txt(r, miscdata)
-        end
-        return r
-	end
     w2l:frontend_misc(result)
 
     w2l.parse_slk = slk
-    w2l.parse_txt = txt
 
     if w2l.prebuilt_save then
         for type, data in pairs(result) do

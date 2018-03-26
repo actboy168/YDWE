@@ -98,6 +98,7 @@ local function create_default(w2l)
     end
     if need_build then
         default = w2l:build_slk()
+        w2l:message('-report|9其他', '没有找到预生成结果')
     end
     return default
 end
@@ -131,7 +132,7 @@ function mt:load_wts(wts, content, max, reason, fmter)
             text = fmter(text)
         end
         if max and #text > max then
-            return self:save_wts(wts, text, reason)
+            return self:save_wts(wts, str_data.text, reason)
         end
         return text
     end)
@@ -151,6 +152,9 @@ function mt:save_wts(wts, text, reason)
 end
 
 function mt:refresh_wts(wts)
+    if not wts then
+        return
+    end
     local lines = {}
     for index, text in ipairs(wts.mark) do
         lines[#lines+1] = ('STRING %d\r\n{\r\n%s\r\n}'):format(index-1, text)
@@ -245,6 +249,36 @@ function mt:trigger_data()
     return nil
 end
 
+function mt:file_save(type, name, buf)
+    if type == 'lni' then
+        self:map_save(self.info.dir[name][2], buf)
+    elseif type == 'trigger' then
+        self:map_save('war3map.wtg.lml/' .. name, buf)
+    elseif type == 'map' then
+        self:map_save(name, buf)
+    end
+end
+
+function mt:file_load(type, name)
+    if type == 'lni' then
+        return self:map_load(self.info.dir[name][2])
+    elseif type == 'trigger' then
+        return self:map_load('war3map.wtg.lml/' .. name)
+    elseif type == 'map' then
+        return self:map_load(name)
+    end
+end
+
+function mt:file_remove(type, name)
+    if type == 'lni' then
+        self:map_remove(self.info.dir[name][2], buf)
+    elseif type == 'trigger' then
+        self:map_remove('war3map.wtg.lml/' .. name, buf)
+    elseif type == 'map' then
+        self:map_remove(name, buf)
+    end
+end
+
 mt.config = {}
 
 local function toboolean(v)
@@ -287,6 +321,7 @@ function mt:set_config(config)
     choose('optimize_jass', toboolean)
     choose('confusion')
     choose('target_storage')
+    choose('computed_text', toboolean)
     
     self.config = config
     

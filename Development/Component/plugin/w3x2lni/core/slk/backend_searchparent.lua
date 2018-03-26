@@ -120,6 +120,9 @@ local function parse_obj(name, obj, default, config, ttype)
 end
 
 local function processing(type, chunk)
+    if not chunk then
+        return
+    end
     local default = w2l:get_default()[type]
     local config = w2l.config
     local names = {}

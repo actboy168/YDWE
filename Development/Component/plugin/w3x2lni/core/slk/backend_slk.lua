@@ -379,6 +379,9 @@ local function load_chunk(chunk, slk_name)
 end
 
 return function(w2l_, type, slk_name, chunk, report_, obj, slk_)
+    if not chunk then
+        return nil
+    end
     slk = {}
     w2l = w2l_
     report = report_

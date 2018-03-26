@@ -7,9 +7,9 @@ local function parse_imp(buf)
     for i = 1, count do
         _, name, index = ('c1z'):unpack(buf, index)
         local name = name:lower()
-        if w2l:map_load(name) then
+        if w2l:file_load('map', name) then
             list[#list+1] = name
-        elseif w2l:map_load('war3mapimported\\' .. name) then
+        elseif w2l:file_load('map', 'war3mapimported\\' .. name) then
             list[#list+1] = 'war3mapimported\\' .. name
         end
     end

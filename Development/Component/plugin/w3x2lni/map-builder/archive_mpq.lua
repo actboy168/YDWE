@@ -84,6 +84,9 @@ function mt:remove_file(name)
 end
 
 function mt:load_file(name)
+    if not self.handle then
+        return nil
+    end
     return self.handle:load_file(name)
 end
 

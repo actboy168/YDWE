@@ -19,13 +19,13 @@ local function to_lni(w2l, slk)
         local content = w2l:backend_lni(ttype, data)
         w2l.progress:finish()
         if content then
-            w2l:map_save(filename, content)
+            w2l:file_save('lni', ttype, content)
         end
     end
 
     local content = w2l:backend_txtlni(slk['txt'])
     if content then
-        w2l:map_save('war3map.txt.ini', content)
+        w2l:file_save('lni', 'txt', content)
     end
 end
 
@@ -39,21 +39,21 @@ local function to_obj(w2l, slk)
         local content = w2l:backend_obj(type, data, slk.wts)
         w2l.progress:finish()
         if content then
-            w2l:map_save(filename, content)
+            w2l:file_save('map', filename, content)
         end
     end
 
     local content = w2l:backend_txtlni(slk['txt'])
     if content then
-        w2l:map_save('war3map.txt.ini', content)
+        w2l:file_save('lni', 'txt', content)
     end
 end
 
 local function convert_wtg(w2l)
     local wtg_data, wct_data
     w2l.progress:start(0.1)
-    local wtg = w2l:map_load 'war3map.wtg'
-    local wct = w2l:map_load 'war3map.wct'
+    local wtg = w2l:file_load('map', 'war3map.wtg')
+    local wct = w2l:file_load('map', 'war3map.wct')
     w2l.progress:finish()
     w2l.progress:start(0.5)
     if wtg and wct then
@@ -61,17 +61,19 @@ local function convert_wtg(w2l)
             xpcall(function ()
                 wtg_data = w2l:frontend_wtg(wtg)
                 wct_data = w2l:frontend_wct(wct)
-                w2l:map_remove 'war3map.wtg'
-                w2l:map_remove 'war3map.wct'
+                w2l:file_remove('map', 'war3map.wtg')
+                w2l:file_remove('map', 'war3map.wct')
             end, function (msg)
-                w2l.message('-report|2警告', '没有转换触发器', msg)
+                w2l.message('-report|2警告', '没有转换触发器')
+                w2l.message('-tip', msg:match('%.lua:%d+: (.*)'))
             end)
         end
     else
         wtg_data, wct_data = w2l:frontend_lml(function (filename)
-            local path = 'war3map.wtg.lml\\' .. filename
-            local buf = w2l:map_load(path)
-            w2l:map_remove(path)
+            local buf = w2l:file_load('trigger', filename)
+            if buf then
+                w2l:file_remove('trigger', filename)
+            end
             return buf
         end)
     end
@@ -81,11 +83,11 @@ local function convert_wtg(w2l)
         if w2l.config.mode == 'lni' then
             local files = w2l:backend_lml(wtg_data, wct_data)
             for filename, buf in pairs(files) do
-                w2l:map_save('war3map.wtg.lml\\'..filename, buf)
+                w2l:file_save('trigger', filename, buf)
             end
         else
-            w2l:map_save('war3map.wtg', w2l:backend_wtg(wtg_data))
-            w2l:map_save('war3map.wct', w2l:backend_wct(wct_data))
+            w2l:file_save('map', 'war3map.wtg', w2l:backend_wtg(wtg_data))
+            w2l:file_save('map', 'war3map.wct', w2l:backend_wct(wct_data))
         end
     end
     w2l.progress:finish()
@@ -241,29 +243,29 @@ local function to_slk(w2l, slk)
         local data = slk[type]
         object[type] = {}
         for _, name in ipairs(w2l.info.slk[type]) do
-            w2l:map_save(name, w2l:backend_slk(type, name, data, report, object[type], slk))
+            w2l:file_save('map', name, w2l:backend_slk(type, name, data, report, object[type], slk))
         end
     end
 
     for _, filename in ipairs(w2l.info.txt) do
-        w2l:map_save(filename, '')
+        w2l:file_save('map', filename, '')
     end
     local txt = w2l:backend_txt(slk, report, object)
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade'} do
-        w2l:map_save(output[type], txt[type])
+        w2l:file_save('map', output[type], txt[type])
     end
 
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'destructable', 'doodad'} do
         local data = object[type] or slk[type]
         local content = w2l:backend_obj(type, data, slk.wts)
         if content then
-            w2l:map_save(w2l.info.obj[type], content)
+            w2l:file_save('map', w2l.info.obj[type], content)
         end
     end
 
     local content = w2l:backend_extra_txt(slk['txt'])
     if content then
-        w2l:map_save(output['txt'], content)
+        w2l:file_save('map', output['txt'], content)
     end
 
     if report.n > 0 then
@@ -290,23 +292,23 @@ end
 local function clean_file(w2l, slk)
     if w2l.force_slk or w2l.config.read_slk then
         for _, filename in pairs(w2l.info.txt) do
-            w2l:map_remove(filename)
+            w2l:file_remove('map', filename)
         end
         for type, names in pairs(w2l.info.slk) do
             for _, filename in pairs(names) do
-                w2l:map_remove(filename)
+                w2l:file_remove('map', filename)
             end
         end
     end
     for _, filename in pairs(w2l.info.obj) do
-        w2l:map_remove(filename)
+        w2l:file_remove('map', filename)
     end
-    for _, filename in pairs(w2l.info.lni) do
-        w2l:map_remove(filename)
+    for ttype, filename in pairs(w2l.info.lni) do
+        w2l:file_remove('lni', ttype)
     end
-    w2l:map_remove('war3map.txt.ini')
-    w2l:map_remove('war3map.w3i.ini')
-    w2l:map_remove('war3map.doo.ini')
+    w2l:file_remove('lni', 'txt')
+    w2l:file_remove('lni', 'w3i')
+    w2l:file_remove('lni', 'doo')
 end
 
 return function (w2l, slk)
@@ -315,10 +317,10 @@ return function (w2l, slk)
     clean_file(w2l, slk)
     if slk.w3i then
         if w2l.config.mode == 'lni' then
-            w2l:map_save('war3map.w3i.ini', w2l:backend_w3i2lni(slk.w3i), slk.wts)
-            w2l:map_remove('war3map.w3i')
+            w2l:file_save('lni', 'w3i', w2l:backend_w3i2lni(slk.w3i), slk.wts)
+            w2l:file_remove('map', 'war3map.w3i')
         else
-            w2l:map_save('war3map.w3i', w2l:backend_w3i(slk.w3i, slk.wts))
+            w2l:file_save('map', 'war3map.w3i', w2l:backend_w3i(slk.w3i, slk.wts))
         end
     end
     w2l.progress(0.1)
@@ -334,7 +336,7 @@ return function (w2l, slk)
         w2l.progress(0.2)
     end
 
-    if w2l.config.mode == 'slk' then
+    if w2l.config.computed_text then
         w2l.message('计算描述中的公式...')
         w2l:backend_computed(slk)
         w2l.progress(0.3)
@@ -363,40 +365,34 @@ return function (w2l, slk)
     w2l.progress:finish()
 
     w2l.progress:start(0.8)
-    w2l.message('转换触发器...')
-    convert_wtg(w2l)
+    if not w2l.config.remove_we_only then
+        w2l.message('转换触发器...')
+        w2l:backend_convertwtg(slk.wts)
+        convert_wtg(w2l)
+    end
     w2l.progress:finish()
 
     w2l.message('转换脚本...')
     w2l:backend_convertjass(slk.wts)
-    if not w2l.config.remove_we_only then
-        w2l:backend_convertwtg(slk.wts)
-    end
     w2l.progress(0.9)
 
     w2l.message('转换其他文件...')
-    w2l:map_save('war3mapmisc.txt', w2l:backend_misc(slk.misc, slk.txt, slk.wts))
+    w2l:file_save('map', 'war3mapmisc.txt', w2l:backend_misc(slk.misc, slk.txt, slk.wts))
     w2l.progress(0.92)
 
-    local buf = w2l:map_load 'war3mapskin.txt'
+    local buf = w2l:file_load('map', 'war3mapskin.txt')
     if buf then
         local skin = w2l:parse_ini(buf)
-        w2l:map_save('war3mapskin.txt', w2l:backend_skin(skin, slk.wts))
+        w2l:file_save('map', 'war3mapskin.txt', w2l:backend_skin(skin, slk.wts))
     end
     w2l.progress(0.94)
 
-    local buf = w2l:map_load 'war3map.imp'
-    if buf then
-        w2l:map_remove('war3map.imp')
-        w2l:map_save('war3map.imp.ini', w2l:backend_imp(buf))
-    end
-
     w2l.message('重新生成字符串...')
     local content = w2l:refresh_wts(slk.wts)
-    if #content > 0 then
-        w2l:map_save('war3map.wts', content)
+    if content and #content > 0 then
+        w2l:file_save('map', 'war3map.wts', content)
     else
-        w2l:map_remove('war3map.wts')
+        w2l:file_remove('map', 'war3map.wts')
     end
     w2l.progress(0.95)
 

@@ -226,6 +226,9 @@ local function mark(slk, name)
 end
 
 local function mark_jass(slk, list, flag)
+    if not flag then
+        return
+    end
     if list then
         for name in pairs(list) do
             current_root = {name, "脚本里的'%s'[%s]引用了它"}
@@ -260,6 +263,9 @@ local function mark_jass(slk, list, flag)
 end
 
 local function mark_marketplace(slk, flag)
+    if not flag then
+        return
+    end
     if not flag.marketplace or flag.item then
         return
     end
@@ -298,19 +304,19 @@ local function mark_doo(w2l, slk)
 end
 
 local function mark_lua(w2l, slk)
-    local buf = w2l:map_load('reference.lua')
+    local buf = w2l:file_load('lua', 'reference.lua')
     if not buf then
         return
     end
     local archive = {}
     function archive:get(filename)
-        return w2l:map_load(filename)
+        return w2l:file_load('map', filename)
     end
     function archive:set(filename, buf)
         if buf then
-            return w2l:map_save(filename, buf)
+            return w2l:file_save('map', filename, buf)
         else
-            return w2l:map_remove(filename)
+            return w2l:file_remove('map', filename)
         end
     end
     local env = {

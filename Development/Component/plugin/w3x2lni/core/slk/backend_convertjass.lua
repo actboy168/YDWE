@@ -34,13 +34,13 @@ return function (w2l_, wts_)
     w2l = w2l_
     wts = wts_
     local name = 'war3map.j'
-    local buf = w2l:map_load(name)
+    local buf = w2l:file_load('jass', name)
     if not buf then
         name = 'scripts\\war3map.j'
-        buf = w2l:map_load(name)
+        buf = w2l:file_load('jass', name)
         if not buf then
             return
         end
     end
-    w2l:map_save(name, pjass:match(buf))
+    w2l:file_save('jass', name, pjass:match(buf))
 end

@@ -11,7 +11,7 @@ local function unpack(str)
 end
 
 return function(w2l)
-    local buf = w2l:map_load('war3map.doo')
+    local buf = w2l:file_load('map', 'war3map.doo')
     if not buf then
         return
     end

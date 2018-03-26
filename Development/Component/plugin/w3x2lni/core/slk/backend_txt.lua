@@ -47,7 +47,7 @@ local function get_index_data(tp, l, n)
     local null
     for i = n, 1, -1 do
         local v = to_type(tp, l[i])
-        if v then
+        if v and v ~= '' then
             l[i] = v
             null = ''
         else
@@ -106,7 +106,7 @@ local function add_data(obj, meta, value, keyval)
                 if i > 1 then
                     key = key .. (i-1)
                 end
-                if value[i] then
+                if value[i] and value[i] ~= '' then
                     flag = true
                     if meta.concat then
                         keyval[#keyval+1] = {key, value[i]}
@@ -319,7 +319,7 @@ local function prebuild_merge(obj, a, b)
                 obj[k] = v
             end
         end
-::CONTINUE::
+        ::CONTINUE::
     end
 end
 
@@ -354,7 +354,9 @@ return function(w2l_, slk, report_, obj)
         list[type] = {}
         object = obj[type]
         update_constant(type)
-        prebuild(type, slk[type], txt, list[type])
+        if slk[type] then
+            prebuild(type, slk[type], txt, list[type])
+        end
     end
     local r = {}
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade'} do

@@ -1,20 +1,35 @@
 local pairs = pairs
 local type = type
 
+local function has_slk(w2l)
+    for _, name in ipairs(w2l.info.txt) do
+        if w2l:file_load('map', name) then
+            return true
+        end
+    end
+    for _, slks in pairs(w2l.info.slk) do
+        for _, name in ipairs(slks) do
+            if w2l:file_load('map', name) then
+                return true
+            end
+        end
+    end
+    if w2l:file_load('map', 'war3mapmisc.txt') then
+        return true
+    end
+    return false
+end
+
 local function load_slk(w2l)
     if w2l.force_slk then
         w2l.message('-report|9其他', '物编信息不完整,强制读取slk文件')
     end
-    if w2l.force_slk or w2l.config.read_slk then
-        return w2l:frontend_slk(function(name)
-            local buf = w2l:map_load(name)
-            if buf then
-                return buf
-            end
-            return w2l:mpq_load(name)
-        end)
+    if (w2l.force_slk or w2l.config.read_slk) and has_slk(w2l) then
+        return w2l:build_slk(true)
     else
-        return w2l:get_default(true)
+        local slk = w2l:get_default(true)
+        w2l:frontend_misc(slk)
+        return slk
     end
 end
 
@@ -22,7 +37,7 @@ local function load_obj(w2l, wts)
     local objs = {}
     local count = 0
     for type, name in pairs(w2l.info.obj) do
-        local buf = w2l:map_load(name)
+        local buf = w2l:file_load('map', name)
         local count = count + 1
         if buf then
             w2l.message('正在转换', name)
@@ -38,7 +53,7 @@ local function load_lni(w2l)
     local count = 0
     for type, name in pairs(w2l.info.lni) do
         count = count + 1
-        local buf = w2l:map_load(name)
+        local buf = w2l:file_load('lni', type)
         if buf then
             w2l.message('正在转换', name)
             lnis[type] = w2l:frontend_lni(type, buf, name)
@@ -46,19 +61,19 @@ local function load_lni(w2l)
         end
     end
 
-    local buf = w2l:map_load('war3map.txt.ini')
+    local buf = w2l:file_load('lni', 'txt')
     if buf then
-        lnis['txt'] = w2l:parse_lni(buf, 'war3map.txt.ini')
+        lnis['txt'] = w2l:parse_lni(buf, 'txt')
     end
     return lnis
 end
 
 local function load_w3i(w2l, slk)
-    local buf = w2l:map_load 'war3map.w3i.ini'
+    local buf = w2l:file_load('lni', 'w3i')
     if buf then
-        return w2l:parse_lni(buf, 'war3map.w3i.ini')
+        return w2l:parse_lni(buf, 'w3i')
     else
-        buf = w2l:map_load 'war3map.w3i'
+        buf = w2l:file_load('map', 'war3map.w3i')
         if buf then
             return w2l:frontend_w3i(buf, slk.wts)
         end
@@ -109,7 +124,7 @@ local function get_displayname(o)
 end
 
 local function update_then_merge(w2l, slks, objs, lnis, slk)
-    for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'txt'} do
+    for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc', 'txt'} do
         local report, report2
         local data = slks[type]
         local obj = objs[type]
@@ -154,7 +169,7 @@ return function(w2l, slk)
     slk = slk or {}
     w2l.slk = slk
     --读取字符串
-    slk.wts = w2l:frontend_wts(w2l:map_load('war3map.wts'))
+    slk.wts = w2l:frontend_wts(w2l:file_load('map', 'war3map.wts'))
     w2l.progress(0.2)
 
     slk.w3i = load_w3i(w2l, slk)
@@ -172,13 +187,11 @@ return function(w2l, slk)
 
     w2l.message('读取slk...')
     w2l.progress:start(0.8)
-    local slks = load_slk(w2l, force_slk1 or force_slk2)
+    local slks = load_slk(w2l)
     w2l.progress:finish()
     
-    -- 完整数据中的空字符串被省略为了空值以减小内存，后端进行数据转换时需要将空值还原为空字符串
     w2l.message('合并物编数据...')
     w2l.progress:start(1)
     update_then_merge(w2l, slks, objs, lnis, slk)
     w2l.progress:finish()
-    w2l:frontend_misc(slk)
 end

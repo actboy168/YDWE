@@ -93,7 +93,7 @@ local function remove_same_as_txt(meta, key, data, default, obj, ttype)
     else
         if data == dest then
             obj[key] = nil
-        elseif data == nil then
+        elseif data == nil and meta then
             obj[key] = default_value(meta.type)
         end
     end
@@ -132,6 +132,20 @@ local function clean_objs(type, t)
     end
 end
 
+local function clean_txt(type, t)
+    if not t then
+        return
+    end
+    for id, obj in sortpairs(t) do
+        local default = default[type][id]
+        if default then
+            for key, data in pairs(obj) do
+                remove_same_as_txt(nil, key, data, default, obj, type)
+            end
+        end
+    end
+end
+
 local function clean_misc(type, t)
     if not t then
         return
@@ -156,8 +170,11 @@ return function (w2l_, slk)
     else
         for i, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
             clean_objs(type, slk[type])
-            w2l.progress(i / 8)
+            w2l.progress(i / 9)
         end
+        local type = 'txt'
+        clean_txt(type, slk[type])
+        w2l.progress(8 / 9)
     end
     local type = 'misc'
     clean_misc(type, slk[type])

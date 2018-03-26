@@ -172,5 +172,5 @@ return function (w2l_, type, slk)
     ttype = type
     str = {}
     write_table(slk, type)
-    return table_concat(str, '\r\n')
+    return #str > 0 and table_concat(str, '\r\n')
 end

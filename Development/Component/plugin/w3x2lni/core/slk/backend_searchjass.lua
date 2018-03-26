@@ -127,9 +127,9 @@ local pjass = (ign + word + S'=+-*/><!()[],' + err'语法错误，可能是地�
 
 return function (w2l_)
     w2l = w2l_
-    local buf = w2l:map_load('war3map.j')
+    local buf = w2l:file_load('jass', 'war3map.j')
     if not buf then
-        buf = w2l:map_load('scripts\\war3map.j')
+        buf = w2l:file_load('jass', 'scripts\\war3map.j')
         if not buf then
             return
         end

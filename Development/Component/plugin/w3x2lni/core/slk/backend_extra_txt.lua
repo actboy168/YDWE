@@ -80,6 +80,9 @@ local function add_chunk(lines, tbl)
 end
 
 return function (w2l, tbl)
+    if not tbl then
+        return
+    end
     local lines = {}
 
     add_chunk(lines, tbl)

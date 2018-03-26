@@ -124,41 +124,47 @@ end
 return function(w2l_, slk)
     w2l = w2l_
     local remove_unuse = w2l.config.remove_unuse_object
-    for _, o in pairs(slk.ability) do
-        if remove_unuse and not o._mark then
-            goto CONTINUE
-        end
-        if o.researchubertip then
-            o.researchubertip = computed(slk, o.researchubertip, o._id, 'Researchtip')
-        end
-        if o.ubertip then
-            for k, v in pairs(o.ubertip) do
-                o.ubertip[k] = computed(slk, v, o._id, 'Ubertip')
+    if slk.ability then
+        for _, o in pairs(slk.ability) do
+            if remove_unuse and not o._mark then
+                goto CONTINUE
             end
-        end
-        ::CONTINUE::
-    end
-    for _, o in pairs(slk.item) do
-        if remove_unuse and not o._mark then
-            goto CONTINUE
-        end
-        if o.ubertip then
-            o.ubertip = computed(slk, o.ubertip, o._id, 'Ubertip')
-        end
-        if o.description then
-            o.description = computed(slk, o.description, o._id, 'Description')
-        end
-        ::CONTINUE::
-    end
-    for _, o in pairs(slk.upgrade) do
-        if remove_unuse and not o._mark then
-            goto CONTINUE
-        end
-        if o.ubertip then
-            for k, v in pairs(o.ubertip) do
-                o.ubertip[k] = computed(slk, v, o._id, 'Ubertip')
+            if o.researchubertip then
+                o.researchubertip = computed(slk, o.researchubertip, o._id, 'Researchtip')
             end
+            if o.ubertip then
+                for k, v in pairs(o.ubertip) do
+                    o.ubertip[k] = computed(slk, v, o._id, 'Ubertip')
+                end
+            end
+            ::CONTINUE::
         end
-        ::CONTINUE::
+    end
+    if slk.item then
+        for _, o in pairs(slk.item) do
+            if remove_unuse and not o._mark then
+                goto CONTINUE
+            end
+            if o.ubertip then
+                o.ubertip = computed(slk, o.ubertip, o._id, 'Ubertip')
+            end
+            if o.description then
+                o.description = computed(slk, o.description, o._id, 'Description')
+            end
+            ::CONTINUE::
+        end
+    end
+    if slk.upgrade then
+        for _, o in pairs(slk.upgrade) do
+            if remove_unuse and not o._mark then
+                goto CONTINUE
+            end
+            if o.ubertip then
+                for k, v in pairs(o.ubertip) do
+                    o.ubertip[k] = computed(slk, v, o._id, 'Ubertip')
+                end
+            end
+            ::CONTINUE::
+        end
     end
 end

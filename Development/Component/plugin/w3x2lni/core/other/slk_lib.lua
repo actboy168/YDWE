@@ -625,9 +625,9 @@ function mt:refresh()
         if need_update[type] then
             local buf = self.w2l:backend_obj(type, data)
             if buf then
-                self.w2l:map_save(self.w2l.info.obj[type], buf)
+                self.w2l:file_save('map', self.w2l.info.obj[type], buf)
             else
-                self.w2l:map_remove(self.w2l.info.obj[type])
+                self.w2l:file_remove('map', self.w2l.info.obj[type])
             end
         end
     end

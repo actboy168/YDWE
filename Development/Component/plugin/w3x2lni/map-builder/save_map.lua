@@ -1,74 +1,6 @@
 local w3xparser = require 'w3xparser'
 
-local function search_staticfile(map)
-    map:get '(listfile)'
-    map:get '(signature)'
-    map:get '(attributes)'
-end
-
-local function search_listfile(map)
-    local buf = map:get '(listfile)'
-    if buf then
-        for name in buf:gmatch '[^\r\n]+' do
-            map:get(name)
-        end
-    end
-end
-
-local function search_imp(map)
-    local buf = map:get 'war3map.imp'
-    if buf then
-        local _, count, index = ('ll'):unpack(buf)
-        local name
-        for i = 1, count do
-            _, name, index = ('c1z'):unpack(buf, index)
-            if not map:get(name) then
-                map:get('war3mapimported\\' .. name)
-            end            
-        end
-    end
-end
-
-local searchers = {
-    search_listfile,
-    search_staticfile,
-    search_imp,
-}
-
-local function search_mpq(map)
-    local total = map:number_of_files()
-    
-    for i, searcher in ipairs(searchers) do
-        pcall(searcher, map)
-        if map.read_count == total then
-            return true
-        end
-    end
-
-    print('-report|1严重错误', ('还有%d个文件没有读取'):format(total - map.read_count))
-    print('-tip', '这些文件被丢弃了,请包含完整(listfile)')
-    print('-report|1严重错误', ('读取(%d/%d)个文件'):format(map.read_count, total))
-end
-
-local function scan_dir(dir, callback)
-    for path in dir:list_directory() do
-        if fs.is_directory(path) then
-            scan_dir(path, callback)
-        else
-            callback(path)
-        end
-    end
-end
-
-local function search_dir(map)
-    local len = #map.path:string()
-    scan_dir(map.path, function(path)
-        local name = path:string():sub(len+2):lower()
-        map:get(name)
-    end)
-end
-
-local function save_imp(w2l, output_ar, imp_buf, filename)
+local function build_imp(w2l, output_ar, imp_buf)
     local impignore = {}
     for _, name in ipairs(w2l.info.pack.impignore) do
         impignore[name] = true
@@ -108,46 +40,49 @@ local function save_imp(w2l, output_ar, imp_buf, filename)
     for _, name in ipairs(imp) do
         hex[#hex+1] = ('z'):pack(name)
     end
-    output_ar:set('war3map.imp', table.concat(hex, '\r'))
+    return table.concat(hex, '\r')
 end
 
 return function (w2l, output_ar, w3i, input_ar)
-    if input_ar:get_type() == 'mpq' then
-        search_mpq(input_ar)
-    else
-        search_dir(input_ar)
-    end
+    local files = {}
     if w2l.config.remove_we_only then
-        input_ar:remove('war3map.wtg')
-        input_ar:remove('war3map.wct')
-        input_ar:remove('war3map.imp')
-        input_ar:remove('war3map.w3s')
-        input_ar:remove('war3map.w3r')
-        input_ar:remove('war3map.w3c')
-        input_ar:remove('war3mapunits.doo')
+        w2l:file_remove('map', 'war3map.wtg')
+        w2l:file_remove('map', 'war3map.wct')
+        w2l:file_remove('map', 'war3map.imp')
+        w2l:file_remove('map', 'war3map.w3s')
+        w2l:file_remove('map', 'war3map.w3r')
+        w2l:file_remove('map', 'war3map.w3c')
+        w2l:file_remove('map', 'war3mapunits.doo')
     else
-        if not input_ar:get 'war3mapunits.doo' then
-            input_ar:set('war3mapunits.doo', w2l:create_unitsdoo())
+        if not w2l:file_load('map', 'war3mapunits.doo') then
+            w2l:file_save('map', 'war3mapunits.doo', w2l:create_unitsdoo())
         end
     end
-    for name, buf in pairs(input_ar) do
-        if buf then
-            if w2l.config.mdx_squf and name:sub(-4) == '.mdx' then
-                buf = w3xparser.mdxopt(buf)
-            end
-            output_ar:set(name, buf)
+    
+    for _, name in pairs(w2l.info.pack.packignore) do
+        w2l:file_remove('map', name)
+    end
+    w2l:map_remove('builder.w3x')
+    if w2l.config.mode == 'lni' then
+        if w2l:file_load('map', 'war3map.imp') then
+            w2l:file_save('lni', 'imp', w2l:backend_imp(w2l:file_load('map', 'war3map.imp')))
+            w2l:file_remove('map', 'war3map.imp')
+        else
+            w2l:file_save('lni', 'imp', w2l:file_load('lni', 'imp'))
+        end
+    else
+        if w2l.config.remove_we_only then
+            w2l:file_remove('map', 'war3map.imp')
+        elseif w2l:file_load('lni', 'imp') then
+            w2l:file_save('map', 'war3map.imp', build_imp(w2l, output_ar, w2l:file_load('lni', 'imp')))
         end
     end
-    output_ar:remove('(listfile)')
-    output_ar:remove('(signature)')
-    output_ar:remove('(attributes)')
 
-    if w2l.config.mode ~= 'lni' then
-        local imp = input_ar:get 'war3map.imp.ini'
-        output_ar:remove('war3map.imp.ini')
-        if not w2l.config.remove_we_only then
-            save_imp(w2l, output_ar, imp, 'war3map.imp.ini')
+    for type, name, buf in w2l:file_pairs() do
+        if type == 'resource' and w2l.config.mdx_squf and name:sub(-4) == '.mdx' then
+            buf = w3xparser.mdxopt(buf)
         end
+        w2l:file_save(type, name, buf)
     end
 
     input_ar:close()

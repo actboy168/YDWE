@@ -166,6 +166,9 @@ return function(root, io_open, loaded)
         end
     end
     local init = loadlua('init.lua')
+    if not init then
+        return
+    end
     debug.setupvalue(init, 1, sandbox_env(loadlua, openfile, loaded))
 	return init()
 end

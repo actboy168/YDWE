@@ -30,9 +30,9 @@ return function (w2l_, wts_)
     w2l = w2l_
     wts = wts_
     local name = 'war3map.wtg'
-    local buf = w2l:map_load(name)
+    local buf = w2l:file_load('map', name)
     if not buf then
         return
     end
-    w2l:map_save(name, pwtg:match(buf))
+    w2l:file_save('map', name, pwtg:match(buf))
 end

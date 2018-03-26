@@ -11,6 +11,9 @@ local function ydwe_path()
         return nil
     end
     local command = commands['']
+    if not command then
+        return nil
+    end
     local path = command:match '^"([^"]*)"'
     local ydpath = fs.path(path):remove_filename()
     if fs.exists(ydpath / 'YDWE.exe') then
