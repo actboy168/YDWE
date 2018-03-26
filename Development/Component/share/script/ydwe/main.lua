@@ -19,7 +19,6 @@ end
 
 require "utiliy"
 require "filesystem"
-require "gui"
 require "event"
 require "virtual_mpq"
 require "registry"
