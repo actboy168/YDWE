@@ -1,4 +1,4 @@
-return function(default, f)
+return function(default, is_valid)
     local gui = require 'yue.gui'
 
     local win = gui.Window.create { frame = false }
@@ -20,7 +20,7 @@ return function(default, f)
     title:setmousedowncanmovewindow(true)
     view:addchildview(title)
 
-    local title_label = gui.Label.create('新物体的ID')
+    local title_label = gui.Label.create(LNG.NEW_OBJECT_ID)
     title_label:setstyle { Height = 20, Width = 100 }
     title_label:setcolor('#eee')
     title_label:setfont(gui.Font.create('宋体', 16, "bold", "normal"))
@@ -45,38 +45,32 @@ return function(default, f)
     btnView:setstyle { FlexDirection = 'row-reverse' }
     content:addchildview(btnView)
 
-    local btnCancel = gui.Button.create('使用默认')
+    local btnCancel = gui.Button.create(LNG.USE_DEFAULT)
     btnCancel:setstyle { Margin = 10, Width = 70, MarginTop = 0 }
     btnView:addchildview(btnCancel)
 
-    local btnOK = gui.Button.create('确定')
+    local btnOK = gui.Button.create(LNG.OK)
     btnOK:setstyle { Margin = 10, Width = 70, MarginTop = 0 }
     btnView:addchildview(btnOK)
 
-
-    local function is_valid(r)
-        if #r ~= 4 then
-            return '物体ID的长度必须为4'
-        end
-    end
-
+    local result = default
     local function finish(r)
         local err = is_valid(r)
         if err then
             tip:settext(err)
             return
         end
-        err = f(r)
-        if err then
-            tip:settext(err)
-            return
-        end
+        result = r
         win:close()
     end
 
-    -- TODO:
-    -- function entry:ontextchange()
-    -- end
+    function win:onclose()
+        gui.MessageLoop.quit()
+    end
+
+    function entry:ontextchange()
+        print('ontextchange')
+    end
 
     function entry:onactivate()
         finish(entry:gettext())
@@ -89,4 +83,6 @@ return function(default, f)
     function btnCancel:onclick()
         finish(default)
     end
+    gui.MessageLoop.run()
+    return result
 end

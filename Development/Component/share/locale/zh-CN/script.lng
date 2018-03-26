@@ -4,8 +4,8 @@
 错误
 [OK]
 确定
-[CANCEL]
-取消
+[USE_DEFAULT]
+使用默认
 [PREPEOCESSOR_FAILED]
 预处理出现错误，信息:
 stdout: %s
@@ -34,12 +34,10 @@ YDWE(&Y)
 致谢(&D)
 [NEW_OBJECT_ID]
 新物体的ID
-[INPUT_OBJECT_ID]
-请输入新物体的ID值（4个字母数字）。或者选择取消使用默认值。
 [ERROR_OBJECT_ID]
-你输入的ID值不合法。ID必须包含恰好4个字符，不能是除了ASCII码以外的其他字符，特别是汉字。
+物体ID的长度必须为4。
 [EXISTS_OBJECT_ID]
-你输入的ID已经存在。
+物体ID已经存在。
 [REMOVE_MAP_READONLY]
 地图 "%s" 带有只读属性，是否去掉地图中的只读属性?
 [DELETE_DANGER_DIR]
