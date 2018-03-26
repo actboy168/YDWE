@@ -34,6 +34,14 @@ namespace base {
 			, ptr_(data_) 
 		{ }
 
+		hybrid_array(size_type n)
+			: size_(0)
+			, capacity_(SIZE)
+			, ptr_(data_)
+		{
+			resize(n);
+		}
+
 		~hybrid_array() 
 		{
 			if (ptr_ != data_) 
@@ -65,7 +73,7 @@ namespace base {
 		reference              at(size_type n)               { check(n); return ptr_[n]; }
 		T*                     data()                        { return ptr_; }
 		const T*               data()                  const { return ptr_; }
-		void                   fill(const T& v)              { fill_n(begin(), size(), v); }
+		void                   fill(const T& v)              { std::fill_n(begin(), size(), v); }
 		size_type              capacity() const              { return capacity_; }
 		void                   clear()                       { size_ = 0; }
 
