@@ -82,9 +82,9 @@ local function host_save_config(curdir, mappath, autostart)
 	local ver = global_config_war3_version()
 	local jasspath
 	if ver:is_new() then
-		jasspath = fs.ydwe_path() / "jass" / "system" / "ht"
+		jasspath = fs.ydwe_path() / "share" / "jass" / "ht"
 	else
-		jasspath = fs.ydwe_path() / "jass" / "system" / "rb"
+		jasspath = fs.ydwe_path() / "share" / "jass" / "rb"
 	end
 	local of = io.open(curdir / 'map.cfg', 'wb')
 	local ok, e = pcall(mapdump, mappath, jasspath,

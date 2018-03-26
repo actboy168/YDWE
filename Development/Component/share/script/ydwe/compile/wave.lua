@@ -8,7 +8,6 @@ wave.path                = fs.ydwe_path() / "plugin" / "wave"
 wave.exe_path            = wave.path / "Wave.exe"
 wave.sys_include_path    = wave.path / "include"
 wave.plugin_include_path = fs.ydwe_path() / "plugin"
-wave.jass_include_path   = root / "jass"
 wave.force_file_path     = wave.sys_include_path / "WaveForce.i"
 
 local function pathstring(path)
@@ -33,7 +32,11 @@ function wave:do_compile(op)
 	cmd = cmd .. string.format('--sysinclude=%s ', pathstring(self.sys_include_path))
 	cmd = cmd .. string.format('--sysinclude=%s ', pathstring(self.plugin_include_path))
 	cmd = cmd .. string.format('--include=%s ',    pathstring(op.map_path:parent_path()))
-	cmd = cmd .. string.format('--include=%s ',    pathstring(self.jass_include_path))
+    for _, path in ipairs(require 'ui') do
+        if fs.exists(path / 'jass') then
+            cmd = cmd .. string.format('--include=%s ',    pathstring(path / 'jass'))
+        end
+    end
 	cmd = cmd .. string.format('--define=WARCRAFT_VERSION=%d ', 100 * op.option.runtime_version.major + op.option.runtime_version.minor)
 	cmd = cmd .. string.format('--define=YDWE_VERSION_STRING=\\"%s\\" ', tostring(ydwe_version))
 	if op.option.enable_jasshelper_debug then

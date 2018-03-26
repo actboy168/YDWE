@@ -60,7 +60,7 @@ function native:inject(input, output)
 end
 
 function native:compile(op)
-	local native = fs.ydwe_path() / "jass" / "native"
+	local native = fs.ydwe_path() / 'share' / "jass" / "native"
 	if not fs.exists(native) or not next(self.list) then
 		return
 	end
@@ -99,7 +99,7 @@ function native:scan(path)
 end
 
 function native:initialize()
-	local native = fs.ydwe_path() / "jass" / "native"
+	local native = fs.ydwe_path() / "share" / "jass" / "native"
 	if not fs.exists(native) then
 		return
 	end

@@ -20,11 +20,11 @@ local config = [[
 -- 返回：cj路径，bj路径，都是fs.path
 function jasshelper.default_jass_libs(self, version)
 	if version:is_new() then
-		return (fs.ydwe_path() / "jass" / "system" / "ht" / "common.j"),
-			(fs.ydwe_path() / "jass" / "system" / "ht" / "blizzard.j")
+		return (fs.ydwe_path() / "share" / "jass" / "ht" / "common.j"),
+			(fs.ydwe_path() / "share" / "jass" / "ht" / "blizzard.j")
 	else
-		return (fs.ydwe_path() / "jass" / "system" / "rb" / "common.j"),
-			(fs.ydwe_path() / "jass" / "system" / "rb" / "blizzard.j")
+		return (fs.ydwe_path() / "share" / "jass" / "rb" / "common.j"),
+			(fs.ydwe_path() / "share" / "jass" / "rb" / "blizzard.j")
 	end
 end
 

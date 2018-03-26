@@ -177,6 +177,11 @@ function inject_code:scan(config_dir)
 end
 
 function inject_code:initialize()
-	local counter = self:scan(root / "jass")
+    local counter = 0
+    for _, path in ipairs(require 'ui') do
+        if fs.exists(path / 'jass') then
+            counter = counter + self:scan(path / "jass")
+        end
+    end
 	log.trace(string.format("Scanned file: %d", counter))
 end

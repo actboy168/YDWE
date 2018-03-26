@@ -15,42 +15,7 @@ local info = lni(io.load(ydwe / 'plugin' / 'w3x2lni' / 'core' / 'info.ini'))
 local current_language = (require "i18n").get_language()
 local list = {}
 
-local function is_enable_japi()
-	local ok, result = pcall(function ()
-		local tbl = sys.ini_load(fs.ydwe_path() / 'plugin' / 'warcraft3' / 'config.cfg')
-		return tbl['Enable']['yd_jass_api.dll'] ~= '0'
-	end)
-	if not ok then return true end
-	return result
-end
-
 local function is_enable_unknowui()
-	return true
-end
-
-local function load_config()
-	list = {}
-	local f, err = io.open(ydwe / 'share' / 'ui' / 'config', 'r')
-	if not f then
-		log.error('Open ' .. (ydwe / 'share' / 'ui' / 'config'):string() .. ' failed.')
-		return false
-	end
-	local enable_ydtrigger = global_config["ThirdPartyPlugin"]["EnableYDTrigger"] ~= "0"
-	local enable_japi = is_enable_japi()
-    for line in f:lines() do
-        line = line:gsub("^%s*(.-)%s*$", "%1") 
-		if not enable_ydtrigger and line == 'ydtrigger' then
-			-- do nothing
-		elseif not enable_japi and line == 'japi' then
-			-- do nothing
-		else
-			table.insert(list, ydwe / 'share' / 'ui' / line)
-		end
-	end
-	f:close()
-	if is_enable_unknowui() then
-		table.insert(list, fs.ydwe_path() / 'share' / 'ui' / 'unknowui')
-	end
 	return true
 end
 
@@ -152,7 +117,7 @@ local function load_worldeditdata()
 end
 
 local function initialize()
-	load_config()
+	list = require 'ui'
 	virtual_mpq.watch('UI\\TriggerData.txt',      load_triggerdata)
 	virtual_mpq.watch('UI\\TriggerStrings.txt',   load_triggerstrings)
 	virtual_mpq.watch('UI\\WorldEditStrings.txt', load_worldeditstrings)
