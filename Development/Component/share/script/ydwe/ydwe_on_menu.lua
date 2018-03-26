@@ -17,27 +17,6 @@ local function launch_warcraft3()
 	sys.spawn(command_line, fs.ydwe_path())
 end
 
--- 显示最近一次编译错误
-local function show_last_error()
-	local jasshelper_path = fs.ydwe_path() / "plugin" / "jasshelper" / "jasshelper.exe"
-	local command_line = string.format('"%s" --showerrors', jasshelper_path:string())
-	sys.spawn(command_line, fs.ydwe_path())
-end
-
--- 显示JassHelper版本
-local function show_jasshelper_version()
-	local jasshelper_path = fs.ydwe_path() / "plugin" / "jasshelper" / "jasshelper.exe"
-	local command_line = string.format('"%s" --about', jasshelper_path:string())
-	sys.spawn(command_line, fs.ydwe_path())
-end
-
--- 显示cJass版本
-local function show_cjass_version()
-	local cjass_path = fs.ydwe_path() / "plugin" / "AdicHelper" / "AdicHelper.exe"
-	local command_line = cjass_path:string()
-	sys.spawn(command_line, fs.ydwe_path())
-end
-
 -- 打开官网
 local function open_offical_site()
 	os.execute('explorer "http://www.ydwe.net"')
@@ -54,9 +33,6 @@ function event.EVENT_INIT_MENU(event_data)
 	local menu = gui.menu(event_data.main_menu_handle, LNG.MENU_YDWE)
 	menu:add(LNG.MENU_CONIFG, launch_config)
 	menu:add(LNG.MENU_LAUNCH_WAR3, launch_warcraft3)
-	menu:add(LNG.MENU_SHOW_LAST_COMPILE_RESULT, show_last_error)
-	menu:add(LNG.MENU_SHOW_JASSHELPER_VERSION, show_jasshelper_version)
-	menu:add(LNG.MENU_SHOW_CJASS_VERSION, show_cjass_version)
 	menu:add(LNG.MENU_OPEN_OFFICIAL_SITE, open_offical_site)
 	menu:add(LNG.MENU_CREDITS, show_credit)
 
