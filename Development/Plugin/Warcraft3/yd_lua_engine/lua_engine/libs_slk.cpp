@@ -147,20 +147,6 @@ local function sandbox_env(loadlua, openfile, loaded)
     return _E
 end
 
-local function loadinit(name, read)
-    local f = io._open(name, 'r')
-    if not read then
-        local ok = not not f
-        f:close()
-        return ok
-    end
-    if f then
-        local str = f:read 'a'
-        f:close()
-        return load(str, '@' .. name)
-    end
-end
-
 return function(root, io_open, loaded)
     local function openfile(name, mode)
         return io_open(root .. name, mode)
@@ -174,6 +160,9 @@ return function(root, io_open, loaded)
         end
     end
     local init = loadlua('init.lua')
+    if not init then
+        return
+    end
     debug.setupvalue(init, 1, sandbox_env(loadlua, openfile, loaded))
 	return init()
 end
@@ -182,7 +171,8 @@ static const char slk[] = R"=(
 local sandbox, root, loadlib, io_open = ...
 local w3x2lni = sandbox(root, io_open, {
     ['w3xparser'] = (loadlib 'w3xparser')(),
-    ['lni-c']     = (loadlib 'lni-c')(),
+    ['lni']       = (loadlib 'lni')(),
+    ['lml']       = (loadlib 'lml')(),
     ['lpeg']      = (loadlib 'lpeg')(),
 })
 local function load_mpq(filename)
@@ -257,7 +247,7 @@ int open(lua_State* L)
 		printf("%s\n", lua_tostring(L, -1));
 		return 0;
 	}
-	fs::path root = base::path::ydwe(true) / "plugin" / "w3x2lni";
+	fs::path root = base::path::ydwe(true) / "plugin" / "w3x2lni" / "core";
 	lua_pushstring(L, (root.string() + "\\").c_str());
 	lua_pushcfunction(L, loadlib);
 	lua_pushcfunction(L, io_open);
