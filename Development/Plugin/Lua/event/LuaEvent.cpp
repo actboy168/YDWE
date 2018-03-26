@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <functional>
 #include <regex>
-#include <base/path/service.h>
+#include <base/path/get_path.h>
 #include <base/util/unicode.h>
 #include <base/hook/inline.h>
 #include <base/hook/iat.h>

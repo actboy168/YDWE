@@ -151,9 +151,8 @@
     <ClCompile Include="base\hook\inline.cpp" />
     <ClCompile Include="base\i18n\libintl.cpp" />
     <ClCompile Include="base\i18n\mofile.cpp" />
-    <ClCompile Include="base\path\detail\get_path.cpp" />
     <ClCompile Include="base\path\helper.cpp" />
-    <ClCompile Include="base\path\service.cpp" />
+    <ClCompile Include="base\path\get_path.cpp" />
     <ClCompile Include="base\util\console.cpp" />
     <ClCompile Include="base\util\is_utf8.cpp" />
     <ClCompile Include="base\util\unicode.cpp" />
@@ -224,10 +223,9 @@
     <ClInclude Include="base\lua\guard.h" />
     <ClInclude Include="base\lua\make_range.h" />
     <ClInclude Include="base\lua\object.h" />
-    <ClInclude Include="base\path\detail\get_path.h" />
     <ClInclude Include="base\path\helper.h" />
     <ClInclude Include="base\path\self.h" />
-    <ClInclude Include="base\path\service.h" />
+    <ClInclude Include="base\path\get_path.h" />
     <ClInclude Include="base\thread\intrusive_ptr.h" />
     <ClInclude Include="base\thread\lock\backoff.h" />
     <ClInclude Include="base\thread\lock\guard.h" />

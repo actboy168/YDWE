@@ -53,9 +53,6 @@
     <Filter Include="base\i18n">
       <UniqueIdentifier>{5337e579-9ee0-4e9b-807d-3339cda61c96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\path\detail">
-      <UniqueIdentifier>{4f489e17-c001-4918-84f9-45d751d1b9ac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\warcraft3\jass">
       <UniqueIdentifier>{96a12d03-e58b-4f43-8c9b-5226c011e69f}</UniqueIdentifier>
     </Filter>
@@ -85,9 +82,6 @@
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="base\util\unicode.cpp">
       <Filter>base\util</Filter>
-    </ClCompile>
-    <ClCompile Include="base\path\service.cpp">
-      <Filter>base\path</Filter>
     </ClCompile>
     <ClCompile Include="base\win\version.cpp">
       <Filter>base\win</Filter>
@@ -175,9 +169,6 @@
     </ClCompile>
     <ClCompile Include="base\i18n\libintl.cpp">
       <Filter>base\i18n</Filter>
-    </ClCompile>
-    <ClCompile Include="base\path\detail\get_path.cpp">
-      <Filter>base\path\detail</Filter>
     </ClCompile>
     <ClCompile Include="base\warcraft3\jass\trampoline.cpp">
       <Filter>base\warcraft3\jass</Filter>
@@ -269,6 +260,9 @@
     <ClCompile Include="base\hook\injectdll.cpp">
       <Filter>base\hook</Filter>
     </ClCompile>
+    <ClCompile Include="base\path\get_path.cpp">
+      <Filter>base\path</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -276,9 +270,6 @@
     </ClInclude>
     <ClInclude Include="base\util\unicode.h">
       <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\path\service.h">
-      <Filter>base\path</Filter>
     </ClInclude>
     <ClInclude Include="base\com\unique_ptr.h">
       <Filter>base\com</Filter>
@@ -393,9 +384,6 @@
     </ClInclude>
     <ClInclude Include="base\path\self.h">
       <Filter>base\path</Filter>
-    </ClInclude>
-    <ClInclude Include="base\path\detail\get_path.h">
-      <Filter>base\path\detail</Filter>
     </ClInclude>
     <ClInclude Include="base\warcraft3\jass\trampoline.h">
       <Filter>base\warcraft3\jass</Filter>
@@ -601,6 +589,9 @@
     </ClInclude>
     <ClInclude Include="base\hook\injectdll.h">
       <Filter>base\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="base\path\get_path.h">
+      <Filter>base\path</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

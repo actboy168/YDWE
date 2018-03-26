@@ -1,7 +1,7 @@
 #include <base/win/file_version.h>
 #include <base/util/string_algorithm.h>
 #include <base/util/format.h>
-#include <base/path/detail/get_path.h>
+#include <base/path/get_path.h>
 #include <vector>
 
 #pragma comment(lib, "version.lib")
@@ -66,7 +66,7 @@ namespace base { namespace win {
 
 	bool file_version::create(HMODULE module_handle)
 	{
-		return create(base::path::detail::module_path(module_handle).c_str());
+		return create(base::path::module_path(module_handle).c_str());
 	}
 
 	bool file_version::create(const wchar_t* module_path)

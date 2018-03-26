@@ -3,7 +3,7 @@
 #include <string>				 	  		
 #include <base/filesystem.h>
 #include <base/win/version.h>
-#include <base/path/service.h>
+#include <base/path/get_path.h>
 #include "Windows7.h"
 #include "JumpList.h"
 

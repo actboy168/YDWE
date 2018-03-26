@@ -4,7 +4,7 @@
 #include <base/hook/iat.h>
 #include <base/hook/dyn_iat.h>
 #include <base/path/helper.h>
-#include <base/path/service.h>
+#include <base/path/get_path.h>
 #include <base/util/unicode.h>
 #include <base/warcraft3/command_line.h>
 #include <base/win/file_version.h>

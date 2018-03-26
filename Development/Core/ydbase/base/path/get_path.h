@@ -2,6 +2,7 @@
 
 #include <base/config.h>	   	  		
 #include <base/filesystem.h>
+#include <Windows.h>
 
 namespace base { namespace path {
 	enum PATH_TYPE
@@ -32,5 +33,6 @@ namespace base { namespace path {
 		DIR_MYPICTURES,
 	};
 
+	_BASE_API fs::path module_path(HMODULE module_handle);
 	_BASE_API fs::path get(PATH_TYPE type);
 }}

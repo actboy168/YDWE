@@ -4,7 +4,7 @@
 #include <base/filesystem.h>
 
 //#define YDWE_BASE_INLINE
-#include <base/path/service.h>
+#include <base/path/get_path.h>
 #include <base/path/helper.h>
 #include <base/util/unicode.h>	
 #include <base/lua/make_range.h>

@@ -1,9 +1,9 @@
-
-#include <base/path/detail/get_path.h>
-#include <base/path/service.h>
+#include <base/path/get_path.h>
 #include <base/exception/windows_exception.h>
 #include <base/util/dynarray.h>
 #include <base/win/env_variable.h>
+#include <Windows.h>
+#include <assert.h>
 #include <Psapi.h>
 #pragma warning(push)
 #pragma warning(disable:6387)
@@ -11,19 +11,23 @@
 #pragma warning(pop)
 #pragma comment(lib, "Psapi.lib")
 
+// http://blogs.msdn.com/oldnewthing/archive/2004/10/25/247180.aspx
+extern "C" IMAGE_DOS_HEADER __ImageBase;
+
 #define ENSURE(cond) if (FAILED(cond)) throw windows_exception(#cond " failed.");
 
-namespace base { namespace path { namespace detail {
-	fs::path quick_launch_path(bool default_user) 
+namespace base { namespace path {
+
+	fs::path quick_launch_path(bool default_user)
 	{
-		if (default_user) 
+		if (default_user)
 		{
 			wchar_t buffer[MAX_PATH];
 			buffer[0] = 0;
 			// http://msdn.microsoft.com/library/windows/desktop/bb762181.aspx
 			ENSURE(::SHGetFolderPathW(NULL, CSIDL_APPDATA, reinterpret_cast<HANDLE>(-1), SHGFP_TYPE_CURRENT, buffer));
 			return std::move(fs::path(buffer));
-		} 
+		}
 		else
 		{
 			fs::path result = get(DIR_APP_DATA);
@@ -38,7 +42,7 @@ namespace base { namespace path { namespace detail {
 	// https://blogs.msdn.com/b/larryosterman/archive/2010/10/19/because-if-you-do_2c00_-stuff-doesn_2700_t-work-the-way-you-intended_2e00_.aspx
 	// http://msdn.microsoft.com/en-us/library/windows/desktop/aa364992%28v=vs.85%29.aspx
 	//
-	fs::path temp_path() 
+	fs::path temp_path()
 	{
 		std::wstring result;
 		result = win::env_variable(L"TMP").get_nothrow();
@@ -130,7 +134,7 @@ namespace base { namespace path { namespace detail {
 		for (size_t buf_len = 0x200; buf_len <= 0x10000; buf_len <<= 1)
 		{
 			std::dynarray<wchar_t> buf(path_len);
-			path_len = ::GetModuleFileNameW(module_handle, buf.data(), buf.size());		
+			path_len = ::GetModuleFileNameW(module_handle, buf.data(), buf.size());
 			if (path_len == 0)
 			{
 				throw windows_exception("::GetModuleFileNameW failed.");
@@ -176,4 +180,79 @@ namespace base { namespace path { namespace detail {
 
 		throw windows_exception("::GetModuleFileNameExW failed.");
 	}
-}}}
+
+	fs::path get(PATH_TYPE type)
+	{
+		wchar_t buffer[MAX_PATH];
+		buffer[0] = 0;
+
+		switch (type) 
+		{
+		case DIR_EXE:
+			return std::move(module_path(NULL));
+		case DIR_MODULE:
+			return std::move(module_path(reinterpret_cast<HMODULE>(&__ImageBase)));
+		case DIR_TEMP:
+			return std::move(temp_path());
+		case DIR_WINDOWS:
+			return std::move(windows_path());
+		case DIR_SYSTEM:
+			return std::move(system_path());
+		case DIR_PROGRAM_FILES:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_PROGRAM_FILES, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_IE_INTERNET_CACHE:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_INTERNET_CACHE, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_COMMON_START_MENU:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_COMMON_PROGRAMS, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_START_MENU:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_PROGRAMS, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_APP_DATA:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_COMMON_APP_DATA:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_COMMON_APPDATA, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_PROFILE:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_PROFILE, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_LOCAL_APP_DATA:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_LOCAL_APPDATA, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_SOURCE_ROOT: 
+			{
+				fs::path result = get(DIR_EXE);
+				result = result.remove_filename();
+				return std::move(result);
+			}
+		case DIR_USER_DESKTOP:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_DESKTOPDIRECTORY, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_COMMON_DESKTOP:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_COMMON_DESKTOPDIRECTORY, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_PERSONAL:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_MYPICTURES:
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_MYPICTURES, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		case DIR_USER_QUICK_LAUNCH:
+			return std::move(quick_launch_path(false));
+		case DIR_DEFAULT_USER_QUICK_LAUNCH:
+			return std::move(quick_launch_path(true));
+		case DIR_TASKBAR_PINS:
+			{
+				fs::path result = get(DIR_USER_QUICK_LAUNCH);
+				result = result / L"User Pinned" / L"TaskBar";
+				return std::move(result);
+			}
+		default:
+			assert(false);
+			return std::move(fs::path());
+		}
+	}
+}}

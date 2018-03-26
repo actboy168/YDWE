@@ -5,7 +5,7 @@
 #include <base/hook/fp_call.h>
 #include <base/win/registry/key.h>	
 #include <base/util/unicode.h>	
-#include <base/path/service.h>
+#include <base/path/get_path.h>
 #include <base/path/helper.h>
 #include <base/util/list_of.h>
 #include <set>

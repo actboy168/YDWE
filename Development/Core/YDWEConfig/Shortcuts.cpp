@@ -2,7 +2,7 @@
 #include <Shobjidl.h>
 #include <memory>
 #include <base/win/version.h>
-#include <base/path/service.h>
+#include <base/path/get_path.h>
 #include <base/path/helper.h>
 #include <base/com/unique_ptr.h>
 
