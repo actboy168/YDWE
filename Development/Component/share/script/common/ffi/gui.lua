@@ -12,6 +12,7 @@ local uni = require 'ffi.unicode'
 local generate_id = 48886
 local message_map = {}
 
+gui = {}
 gui.MB_ICONQUESTION = 0x00000020
 gui.MB_OK = 0x00000000
 gui.MB_YESNO = 0x00000004
