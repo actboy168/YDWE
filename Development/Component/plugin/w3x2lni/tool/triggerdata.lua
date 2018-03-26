@@ -64,7 +64,7 @@ return function ()
     if not path then
         return nil, '请设置YDWE关联地图'
     end
-    local list = trigger_config(path / 'share' / 'ui') or trigger_config(path / 'share' / 'mpq')
+    local list = trigger_config(path / 'ui') or trigger_config(path / 'share' / 'ui') or trigger_config(path / 'share' / 'mpq')
     if not list then
         return nil, '没有找到触发器数据的目录：' .. path:string()
     end
