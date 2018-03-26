@@ -33,6 +33,6 @@ namespace base { namespace path {
 		DIR_MYPICTURES,
 	};
 
-	_BASE_API fs::path module_path(HMODULE module_handle);
+	_BASE_API fs::path module(HMODULE module_handle);
 	_BASE_API fs::path get(PATH_TYPE type);
 }}

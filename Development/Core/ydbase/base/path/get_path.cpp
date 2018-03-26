@@ -117,7 +117,7 @@ namespace base { namespace path {
 		return std::move(fs::path(buf.begin(), buf.end()));
 	}
 
-	fs::path module_path(HMODULE module_handle)
+	fs::path module(HMODULE module_handle)
 	{
 		wchar_t buffer[MAX_PATH];
 		DWORD path_len = ::GetModuleFileNameW(module_handle, buffer, _countof(buffer));
@@ -149,7 +149,7 @@ namespace base { namespace path {
 		throw windows_exception("::GetModuleFileNameW failed.");
 	}
 
-	fs::path module_path(HANDLE process_handle, HMODULE module_handle)
+	fs::path module(HANDLE process_handle, HMODULE module_handle)
 	{
 		wchar_t buffer[MAX_PATH];
 		DWORD path_len = ::GetModuleFileNameExW(process_handle, module_handle, buffer, _countof(buffer));
@@ -189,9 +189,9 @@ namespace base { namespace path {
 		switch (type) 
 		{
 		case DIR_EXE:
-			return std::move(module_path(NULL));
+			return std::move(module(NULL));
 		case DIR_MODULE:
-			return std::move(module_path(reinterpret_cast<HMODULE>(&__ImageBase)));
+			return std::move(module(reinterpret_cast<HMODULE>(&__ImageBase)));
 		case DIR_TEMP:
 			return std::move(temp_path());
 		case DIR_WINDOWS:
