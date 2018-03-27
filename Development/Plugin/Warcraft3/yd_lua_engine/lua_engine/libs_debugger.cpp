@@ -209,10 +209,10 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger
 		lua_pushinteger(L, port);
 		DoString(L, R"(
 			local dbg, port = ... 
+			dbg.listen('127.0.0.1', port)
 			dbg.config [[
 				{ "sourceCoding": "utf8" }
 			]]
-			dbg.listen('127.0.0.1', port)
 			return dbg
 		)", 2);
 		return 1;
