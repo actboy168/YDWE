@@ -416,7 +416,7 @@ bool WINAPI SFileGetFileInfo(
             if(ha != NULL)
             {
                 nInfoType = SFILE_INFO_TYPE_NOT_FOUND;
-                if(MAKE_OFFSET64(ha->pHeader->wBlockTablePosHi, ha->pHeader->dwBlockTablePos) != 0)
+                if(MAKE_OFFSET64(ha->pHeader->wBlockTablePosHi, ha->pHeader->dwBlockTablePos) < ha->FileSize)
                 {
                     cbSrcFileInfo = ha->pHeader->dwBlockTableSize * sizeof(TMPQBlock);
                     if(cbFileInfo >= cbSrcFileInfo)
@@ -990,7 +990,7 @@ bool WINAPI SFileGetFileName(HANDLE hFile, char * szFileName)
             if(szFileName != NULL)
             {
                 const TCHAR * szStreamName = FileStream_GetFileName(hf->pStream);
-                CopyFileName(szFileName, szStreamName, _tcslen(szStreamName));
+                StringCopy(szFileName, MAX_PATH, szStreamName);
             }
             nError = ERROR_SUCCESS;
         }

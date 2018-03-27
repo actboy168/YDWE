@@ -1,7 +1,7 @@
 /*****************************************************************************/
-/* StormLib.h                        Copyright (c) Ladislav Zezula 1999-2010 */
+/* StormLib.h                        Copyright (c) Ladislav Zezula 1999-2017 */
 /*---------------------------------------------------------------------------*/
-/* StormLib library v 7.02                                                   */
+/* StormLib library v 9.22                                                   */
 /*                                                                           */
 /* Author : Ladislav Zezula                                                  */
 /* E-mail : ladik@zezula.net                                                 */
@@ -71,7 +71,8 @@
 /* 27.08.14  9.10  Lad  Signing archives with weak digital signature         */
 /* 25.11.14  9.11  Lad  Fixed bug reading & creating HET table               */
 /* 18.09.15  9.20  Lad  Release 9.20                                         */
-/* 12.12.16  9.20  Lad  Release 9.21                                         */
+/* 12.12.16  9.21  Lad  Release 9.21                                         */
+/* 10.11.17  9.22  Lad  Release 9.22                                         */
 /*****************************************************************************/
 
 #ifndef __STORMLIB_H__
@@ -99,8 +100,11 @@ extern "C" {
 //  Z - S for static-linked CRT library, D for multithreaded DLL CRT library
 //
 
-#if defined(_MSC_VER) && !defined(__STORMLIB_SELF__)
-  
+#if defined(__STORMLIB_SELF__) && !defined(STORMLIB_NO_AUTO_LINK)
+#define STORMLIB_NO_AUTO_LINK // Define this if you don't want to link using pragmas when using msvc
+#endif
+
+#if defined(_MSC_VER) && !defined(STORMLIB_NO_AUTO_LINK)
   #ifdef _DEBUG                                 // DEBUG VERSIONS
     #ifndef _UNICODE                            
       #ifdef _DLL                               
@@ -136,8 +140,8 @@ extern "C" {
 //-----------------------------------------------------------------------------
 // Defines
 
-#define STORMLIB_VERSION                0x0915  // Current version of StormLib (9.21)
-#define STORMLIB_VERSION_STRING         "9.21"  // String version of StormLib version
+#define STORMLIB_VERSION                0x0916  // Current version of StormLib (9.21)
+#define STORMLIB_VERSION_STRING         "9.22"  // String version of StormLib version
 
 #define ID_MPQ                      0x1A51504D  // MPQ archive header ID ('MPQ\x1A')
 #define ID_MPQ_USERDATA             0x1B51504D  // MPQ userdata entry ('MPQ\x1B')
@@ -220,12 +224,23 @@ extern "C" {
 
 #define MPQ_FILE_COMPRESS_MASK      0x0000FF00  // Mask for a file being compressed
 
+#define MPQ_FILE_DEFAULT_INTERNAL   0xFFFFFFFF  // Use default flags for internal files
+
 #define MPQ_FILE_VALID_FLAGS     (MPQ_FILE_IMPLODE       |  \
                                   MPQ_FILE_COMPRESS      |  \
                                   MPQ_FILE_ENCRYPTED     |  \
                                   MPQ_FILE_FIX_KEY       |  \
                                   MPQ_FILE_PATCH_FILE    |  \
                                   MPQ_FILE_SINGLE_UNIT   |  \
+                                  MPQ_FILE_DELETE_MARKER |  \
+                                  MPQ_FILE_SECTOR_CRC    |  \
+                                  MPQ_FILE_SIGNATURE     |  \
+                                  MPQ_FILE_EXISTS)
+
+#define MPQ_FILE_VALID_FLAGS_W3X (MPQ_FILE_IMPLODE       |  \
+                                  MPQ_FILE_COMPRESS      |  \
+                                  MPQ_FILE_ENCRYPTED     |  \
+                                  MPQ_FILE_FIX_KEY       |  \
                                   MPQ_FILE_DELETE_MARKER |  \
                                   MPQ_FILE_SECTOR_CRC    |  \
                                   MPQ_FILE_SIGNATURE     |  \
@@ -906,9 +921,9 @@ typedef struct _SFILE_CREATE_MPQ
     void *pvUserData;                           // Reserved, must be NULL
     DWORD cbUserData;                           // Reserved, must be 0
     DWORD dwStreamFlags;                        // Stream flags for creating the MPQ
-    DWORD dwFileFlags1;                         // File flags for (listfile). 0 = default
-    DWORD dwFileFlags2;                         // File flags for (attributes). 0 = default
-    DWORD dwFileFlags3;                         // File flags for (signature). 0 = default
+    DWORD dwFileFlags1;                         // File flags for (listfile). Use MPQ_FILE_DEFAULT_INTERNAL to set default flags
+    DWORD dwFileFlags2;                         // File flags for (attributes). Use MPQ_FILE_DEFAULT_INTERNAL to set default flags
+    DWORD dwFileFlags3;                         // File flags for (signature). Use MPQ_FILE_DEFAULT_INTERNAL to set default flags
     DWORD dwAttrFlags;                          // Flags for the (attributes) file. If 0, no attributes will be created
     DWORD dwSectorSize;                         // Sector size for compressed files
     DWORD dwRawChunkSize;                       // Size of raw data chunk
@@ -984,11 +999,11 @@ bool   WINAPI SFileCloseArchive(HANDLE hMpq);
 // Adds another listfile into MPQ. The currently added listfile(s) remain,
 // so you can use this API to combining more listfiles.
 // Note that this function is internally called by SFileFindFirstFile
-int    WINAPI SFileAddListFile(HANDLE hMpq, const char * szListFile);
+int    WINAPI SFileAddListFile(HANDLE hMpq, const TCHAR * szListFile);
 
 // Archive compacting
 bool   WINAPI SFileSetCompactCallback(HANDLE hMpq, SFILE_COMPACT_CALLBACK CompactCB, void * pvUserData);
-bool   WINAPI SFileCompactArchive(HANDLE hMpq, const char * szListFile, bool bReserved);
+bool   WINAPI SFileCompactArchive(HANDLE hMpq, const TCHAR * szListFile, bool bReserved);
 
 // Changing the maximum file count
 DWORD  WINAPI SFileGetMaxFileCount(HANDLE hMpq);
@@ -1044,11 +1059,11 @@ DWORD  WINAPI SFileVerifyArchive(HANDLE hMpq);
 //-----------------------------------------------------------------------------
 // Functions for file searching
 
-HANDLE WINAPI SFileFindFirstFile(HANDLE hMpq, const char * szMask, SFILE_FIND_DATA * lpFindFileData, const char * szListFile);
+HANDLE WINAPI SFileFindFirstFile(HANDLE hMpq, const char * szMask, SFILE_FIND_DATA * lpFindFileData, const TCHAR * szListFile);
 bool   WINAPI SFileFindNextFile(HANDLE hFind, SFILE_FIND_DATA * lpFindFileData);
 bool   WINAPI SFileFindClose(HANDLE hFind);
 
-HANDLE WINAPI SListFileFindFirstFile(HANDLE hMpq, const char * szListFile, const char * szMask, SFILE_FIND_DATA * lpFindFileData);
+HANDLE WINAPI SListFileFindFirstFile(HANDLE hMpq, const TCHAR * szListFile, const char * szMask, SFILE_FIND_DATA * lpFindFileData);
 bool   WINAPI SListFileFindNextFile(HANDLE hFind, SFILE_FIND_DATA * lpFindFileData);
 bool   WINAPI SListFileFindClose(HANDLE hFind);
 

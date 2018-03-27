@@ -338,7 +338,8 @@ int ConvertMpqHeaderToFormat4(
     TMPQArchive * ha,
     ULONGLONG MpqOffset,
     ULONGLONG FileSize,
-    DWORD dwFlags)
+    DWORD dwFlags,
+    bool bIsWarcraft3Map)
 {
     TMPQHeader * pHeader = (TMPQHeader *)ha->HeaderData;
     ULONGLONG BlockTablePos64 = 0;
@@ -350,7 +351,7 @@ int ConvertMpqHeaderToFormat4(
 
     // If version 1.0 is forced, then the format version is forced to be 1.0
     // Reason: Storm.dll in Warcraft III ignores format version value
-    if(dwFlags & MPQ_OPEN_FORCE_MPQ_V1)
+    if((dwFlags & MPQ_OPEN_FORCE_MPQ_V1) || bIsWarcraft3Map)
         wFormatVersion = MPQ_FORMAT_VERSION_1;
 
     // Format-specific fixes
@@ -751,7 +752,7 @@ static int BuildFileTableFromBlockTable(
     assert(ha->dwFileTableSize >= ha->dwMaxFileCount);
 
     // MPQs for Warcraft III doesn't know some flags, namely MPQ_FILE_SINGLE_UNIT and MPQ_FILE_PATCH_FILE
-    dwFlagMask = (ha->dwFlags & MPQ_FLAG_WAR3_MAP) ? ~(MPQ_FILE_SINGLE_UNIT | MPQ_FILE_PATCH_FILE) : 0xFFFFFFFF;
+    dwFlagMask = (ha->dwFlags & MPQ_FLAG_WAR3_MAP) ? MPQ_FILE_VALID_FLAGS_W3X : MPQ_FILE_VALID_FLAGS;
 
     // Defragment the hash table, if needed
     if(ha->dwFlags & MPQ_FLAG_HASH_TABLE_CUT)
@@ -890,8 +891,8 @@ TMPQBlock * TranslateBlockTable(
     TFileEntry * pFileEntry = ha->pFileTable;
     TMPQBlock * pBlockTable;
     TMPQBlock * pBlock;
-    DWORD dwBlockTableSize = ha->pHeader->dwBlockTableSize;
     DWORD NeedHiBlockTable = 0;
+    DWORD dwBlockTableSize = ha->pHeader->dwBlockTableSize;
 
     // Allocate copy of the hash table
     pBlockTable = pBlock = STORM_ALLOC(TMPQBlock, dwBlockTableSize);
@@ -2616,7 +2617,7 @@ int DefragmentFileTable(TMPQArchive * ha)
                 pTarget++;
 
                 // Update the block table size
-                dwBlockTableSize = (DWORD)(pSource - ha->pFileTable) + 1;
+                dwBlockTableSize = (DWORD)(pTarget - ha->pFileTable);
             }
 			else
 			{
