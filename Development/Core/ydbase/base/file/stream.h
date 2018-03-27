@@ -5,8 +5,7 @@
 #include <base/util/noncopyable.h>
 #include <fstream>
 
-namespace base { 
-namespace file {
+namespace base { namespace file {
 
 #pragma warning(push)
 #pragma warning(disable:4275)
@@ -83,5 +82,4 @@ namespace file {
 
 #pragma warning(pop)
 #pragma warning(disable:4275)
-}
-}
+}}

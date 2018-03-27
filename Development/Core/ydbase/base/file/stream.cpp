@@ -1,8 +1,8 @@
 #include <base/file/stream.h>
 #include <base/exception/exception.h>
+#include <base/util/unicode.h>
 
-namespace base { 
-namespace file {
+namespace base { namespace file {
 
 	stream::stream(const char* filename, std::ios_base::openmode mode)
 	{
@@ -14,7 +14,7 @@ namespace file {
 #if defined(_MSC_VER)
 		file_.open(filename, std::ios::binary | mode);
 #else
-		file_.open(util::w2u(filename), std::ios::binary | mode);
+		file_.open(base::w2u(filename), std::ios::binary | mode);
 #endif
 	}
 
@@ -117,6 +117,4 @@ namespace file {
 			throw exception(L"Can not open the file %s.", filename.c_str());
 		}
 	}
-}
-
-}
+}}
