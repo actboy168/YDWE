@@ -88,12 +88,13 @@ local function compile_map(map_path, option)
 					compile_t.input = compile_t.output
 				end
 
+                compile_t.output = fs.ydwe_path() / "logs" / "lua_processed.j"
 				if not template:compile(compile_t) then
+                    collectgarbage 'collect'
 					return nil
 				end
-
 				ev.emit('编译地图')
-				
+                collectgarbage 'collect'
 				return compile_t.output
 			end
 		)
