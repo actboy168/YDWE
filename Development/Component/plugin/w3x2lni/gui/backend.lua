@@ -49,6 +49,7 @@ function mt:update_pipe()
     if not self.process:is_running() then
         self.output = self.output .. self.out_rd:read 'a'
         self.error = self.error .. self.err_rd:read 'a'
+        self.exit_code = self.process:wait()
         self.process:close()
         return true
     end

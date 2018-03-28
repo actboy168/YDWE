@@ -248,6 +248,10 @@ function mt:file_save(type, name, buf)
         self:map_save('war3map.wtg.lml/' .. name, buf)
     elseif type == 'map' then
         self:map_save(name, buf)
+    elseif type == 'scirpt' then
+        if self.config.export_lua then
+            self:map_save(name, buf)
+        end
     end
 end
 
@@ -314,6 +318,7 @@ function mt:set_config(config)
     choose('confusion')
     choose('target_storage')
     choose('computed_text', toboolean)
+    choose('export_lua', toboolean)
     
     self.config = config
     

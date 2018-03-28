@@ -51,6 +51,8 @@ plugin_path = $plugin_path$
 read_slk = $lni.read_slk$
 -- 限制搜索最优模板的次数,0表示无限
 find_id_times = $lni.find_id_times$
+-- 导出lua脚本
+export_lua = $lni.export_lua$
 
 [slk]
 -- 简化(移除没有引用的对象)
@@ -316,6 +318,10 @@ local function window_convert(canvas)
         canvas:layout_row_dynamic(30, 1)
         if fmt == 'slk' then
             checkbox_simple(canvas, '优化装饰物', '地形变化不会卡顿，但之后需要重启魔兽', 'slk_doodad')
+            height = height - 34
+        end
+        if fmt == 'lni' then
+            checkbox_simple(canvas, '导出lua脚本', '', 'export_lua')
             height = height - 34
         end
         if checkbox_tip(canvas, '限制搜索最优模板的次数', '次数越多质量越好，但某些地图搜索会很慢', config[fmt].find_id_times ~= 0) then

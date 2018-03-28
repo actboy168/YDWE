@@ -38,16 +38,27 @@ function mt:close()
     return self.handle:close()
 end
 
-function mt:save(w3i, progress, encrypt)
+function mt:save(w3i, w2l)
     if self:is_readonly() then
         return false
     end
+    local progress = w2l.progress
     local max = 0
     for _ in pairs(self) do
         max = max + 1
     end
-    if not self.handle:save(self.path, w3i, max, encrypt) then
-        return false
+    if self._type == 'mpq' then
+        if not self.handle:save(self.path, w3i, max, w2l.config.remove_we_only) then
+            return false
+        end
+    else
+        local dirs = {}
+        if not w2l.config.export_lua then
+            dirs[#dirs+1] = 'script'
+        end
+        if not self.handle:save(self.path, dirs) then
+            return false
+        end
     end
     local clock = os_clock()
     local count = 0

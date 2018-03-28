@@ -102,27 +102,34 @@ local function update()
     if #worker.error > 0 then
         messagebox('错误', worker.error)
         worker.error = ''
-        return 0
+        return 0, 1
     end
     if worker.exited then
-        return 1000
+        if worker.exit_code == 0 then
+            return 1000, 0
+        else
+            return 0, worker.exit_code
+        end
     end
 end
 
 local function delayedtask()
-    local ok, r = xpcall(update, debug.traceback)
+    local ok, r, code = xpcall(update, debug.traceback)
     if not ok then
         messagebox('错误', r)
         mini:close()
+        os.exit(1, true)
         return
     end
     if r then
         if r > 0 then
             gui.MessageLoop.postdelayedtask(r, function()
                 mini:close()
+                os.exit(code, true)
             end)
         else
             mini:close()
+            os.exit(code, true)
         end
         return
     end
