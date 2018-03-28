@@ -153,7 +153,7 @@ return function (w2l_, slk)
     local count = 0
     for type, name in pairs(w2l.info.obj) do
         count = count + 1
-        w2l.progress:start(count / 7)
+        w2l.progress:start(count / 8)
         processing(type, slk[type])
         w2l.progress:finish()
     end

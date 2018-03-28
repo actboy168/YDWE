@@ -13,7 +13,6 @@ local mt = {}
 
 local metadata
 local keydata
-local miscnames
 
 local function load_file(path)
     local f = io.open(path)
@@ -61,13 +60,6 @@ function mt:keydata()
         keydata = self:defined 'keydata'
     end
     return keydata
-end
-
-function mt:miscnames()
-    if not miscnames then
-        miscnames = self:defined 'miscnames'
-    end
-    return miscnames
 end
 
 function mt:get_editstring(str)
@@ -250,8 +242,8 @@ function mt:trigger_data()
 end
 
 function mt:file_save(type, name, buf)
-    if type == 'lni' then
-        self:map_save(self.info.dir[name][2], buf)
+    if type == 'table' then
+        self:map_save(self.info.lni_dir[name][1], buf)
     elseif type == 'trigger' then
         self:map_save('war3map.wtg.lml/' .. name, buf)
     elseif type == 'map' then
@@ -260,8 +252,8 @@ function mt:file_save(type, name, buf)
 end
 
 function mt:file_load(type, name)
-    if type == 'lni' then
-        return self:map_load(self.info.dir[name][2])
+    if type == 'table' then
+        return self:map_load(self.info.lni_dir[name][1])
     elseif type == 'trigger' then
         return self:map_load('war3map.wtg.lml/' .. name)
     elseif type == 'map' then
@@ -270,8 +262,8 @@ function mt:file_load(type, name)
 end
 
 function mt:file_remove(type, name)
-    if type == 'lni' then
-        self:map_remove(self.info.dir[name][2], buf)
+    if type == 'table' then
+        self:map_remove(self.info.lni_dir[name][1], buf)
     elseif type == 'trigger' then
         self:map_remove('war3map.wtg.lml/' .. name, buf)
     elseif type == 'map' then

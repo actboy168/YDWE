@@ -166,11 +166,14 @@ local function write_table(slk)
 end
 
 return function (w2l_, type, slk)
+    if not slk then
+        return
+    end
     w2l = w2l_
     metadata = w2l:metadata()
     remove_unuse_object = w2l.config.remove_unuse_object
     ttype = type
     str = {}
-    write_table(slk, type)
+    write_table(slk)
     return #str > 0 and table_concat(str, '\r\n')
 end

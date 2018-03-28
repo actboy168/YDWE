@@ -75,6 +75,9 @@ local function is_enable(obj)
 end
 
 return function (w2l, t)
+    if not t then
+        return
+    end
     local f = {}
     for i, o in sortpairs(t) do
         if is_enable(o) then

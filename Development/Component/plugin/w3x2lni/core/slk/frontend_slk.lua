@@ -59,22 +59,27 @@ local function slk_read_data(obj, key, meta, data)
     end
 end
 
-local function slk_read_obj(obj, name, data, keys, metas)
-    if data.code then
-        obj._code = data.code
+local function slk_private(table, slk)
+    for name in pairs(slk) do
+        local obj = table[name]
+        local private = metadata[obj._code]
+        if private then
+            for key, meta in pairs(private) do
+                slk_read_data(obj, key, meta, slk[name])
+            end
+        end
     end
-    if slk_type == 'unit' and not obj._name then
-        obj._name = data.name  -- 单位的反slk可以用name作为线索
-    end
-    
-    for i = 1, #keys do
-        slk_read_data(obj, keys[i], metas[i], data)
-    end
+end
 
-    local private = metadata[obj._code]
-    if private then
-        for key, meta in pairs(private) do
-            slk_read_data(obj, key, meta, data)
+local function slk_update_level(table, slk, update_level)
+    for name in pairs(slk) do
+        local obj = table[name]
+        obj._max_level = obj[update_level]
+        if not obj._max_level or obj._max_level == 0 then
+            obj._max_level = 1
+        elseif obj._max_level and obj._max_level > 10000 then
+            w2l.message('-report|9其他', ('对象等级太高[%s][%d]'):format(name, obj._max_level))
+            w2l.message('-tip', '可能会影响此工具的性能')
         end
     end
 end
@@ -88,15 +93,15 @@ local function slk_read(table, slk, keys, meta, update_level)
             }
         end
         local obj = table[name]
-        slk_read_obj(obj, name, data, keys, meta)
-        if update_level then
-            obj._max_level = obj[update_level]
-            if not obj._max_level or obj._max_level == 0 then
-                obj._max_level = 1
-            elseif obj._max_level and obj._max_level > 10000 then
-                w2l.message('-report|9其他', ('对象等级太高[%s][%d]'):format(name, obj._max_level))
-                w2l.message('-tip', '可能会影响此工具的性能')
-            end
+        if data.code then
+            obj._code = data.code
+        end
+        if slk_type == 'unit' and not obj._name then
+            obj._name = data.name  -- 单位的反slk可以用name作为线索
+        end
+        
+        for i = 1, #keys do
+            slk_read_data(obj, keys[i], meta[i], data)
         end
     end
 end
@@ -193,6 +198,24 @@ local function txt_read(table, txt, used, keys, meta)
     end
 end
 
+local function slk_misc(table, misc, txt)
+    for name, meta in pairs(metadata) do
+        if meta.type == 'misc' then
+            table[name] = {
+                _id = name,
+                _type = 'misc',
+                _code = name,
+            }
+            local obj = table[name]
+            local lname = name:lower()
+            for key, meta in pairs(meta) do
+                txt_read_data(name, obj, key, meta, misc[lname] or txt[lname])
+            end
+            txt[lname] = nil
+        end
+    end
+end
+
 local function txt_set_level(txt)
     for _, obj in pairs(txt) do
         obj._max_level = 1
@@ -206,32 +229,43 @@ return function(w2l_, loader)
     local datas = {}
     local txt = {}
     local used = {}
+    local misc = {}
     local count = 0
     w2l.progress:start(0.3)
     for _, filename in pairs(w2l.info.txt) do
         w2l:parse_txt(loader(filename), filename, txt)
     end
+    for _, filename in pairs(w2l.info.misc) do
+        w2l:parse_txt(loader(filename), filename, misc)
+    end
     w2l.progress:finish()
     
     local count = 0
     w2l.progress:start(1)
-    for type, names in pairs(w2l.info.slk) do
+    for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
         local level_key = w2l.info.key.max_level[type]
         slk_type = type
 
         datas[type] = {}
-        for i, filename in ipairs(names) do
-            local update_level
-            local keys = {}
-            local meta = {}
-            for _, key in ipairs(keydata[filename]) do
-                keys[#keys+1] = key
-                meta[#meta+1] = metadata[type][key]
-                if key == level_key then
-                    update_level = level_key
+        if w2l.info.slk[type] then
+            for i, filename in ipairs(w2l.info.slk[type]) do
+                local update_level
+                local keys = {}
+                local meta = {}
+                for _, key in ipairs(keydata[filename]) do
+                    keys[#keys+1] = key
+                    meta[#meta+1] = metadata[type][key]
+                    if key == level_key then
+                        update_level = level_key
+                    end
+                end
+                local slk = w2l:parse_slk(loader(filename))
+                slk_read(datas[type], slk, keys, meta)
+                slk_private(datas[type], slk)
+                if update_level then
+                    slk_update_level(datas[type], slk, update_level)
                 end
             end
-            slk_read(datas[type], w2l:parse_slk(loader(filename)), keys, meta, update_level)
         end
         if keydata[type] then
             local keys = {}
@@ -243,10 +277,16 @@ return function(w2l_, loader)
             txt_read(datas[type], txt, used, keys, meta)
         end
         count = count + 1
-        w2l.progress(count / 7)
+        w2l.progress(count / 8)
     end
-    txt_set_level(txt)
+    -- 特殊处理misc
+    datas.misc = {}
+    slk_misc(datas.misc, misc, txt)
+    
     w2l.progress:finish()
+
+    -- 给剩下的txt设置等级
+    txt_set_level(txt)
 
     -- 此单位只在一张单位slk里定义,是无效单位
     datas.unit.nrmf = nil

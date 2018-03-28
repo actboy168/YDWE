@@ -139,20 +139,6 @@ local function sandbox_env(loadlua, openfile, loaded)
     return _E
 end
 
-local function loadinit(name, read)
-    local f = io.open(name, 'r')
-    if not read then
-        local ok = not not f
-        f:close()
-        return ok
-    end
-    if f then
-        local str = f:read 'a'
-        f:close()
-        return load(str, '@' .. name)
-    end
-end
-
 return function(root, io_open, loaded)
     local function openfile(name, mode)
         return io_open(root .. name, mode)

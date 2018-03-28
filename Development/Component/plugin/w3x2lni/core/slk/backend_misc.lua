@@ -71,7 +71,7 @@ local function concat(misc)
     return table_concat(lines, '\r\n')
 end
 
-return function(w2l_, misc, txt)
+return function(w2l_, misc)
     if not misc then
         return
     end

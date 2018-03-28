@@ -91,6 +91,9 @@ end
 
 return function (w2l_, type, buf, wts_)
     w2l = w2l_
+    if type == 'misc' then
+        return w2l:frontend_misc(buf)
+    end
     wts = wts_
     default = w2l:get_default()[type]
     has_level = w2l.info.key.max_level[type]

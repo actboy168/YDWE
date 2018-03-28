@@ -77,6 +77,7 @@ print('正在打开地图...')
 local slk = {}
 local input_ar = builder.load(input)
 if not input_ar then
+    os.exit(1, true)
     return
 end
 
@@ -86,6 +87,7 @@ if w2l.config.target_storage == 'dir' then
 end
 local output_ar = builder.load(output, 'w')
 if not output_ar then
+    os.exit(1, true)
     return
 end
 output_ar:flush()
@@ -121,9 +123,9 @@ function w2l:map_remove(filename)
 end
 
 function w2l:file_save(type, name, buf)
-    if type == 'lni' then
-        input_ar:set(self.info.dir[name][1], buf)
-        output_ar:set(self.info.dir[name][1], buf)
+    if type == 'table' then
+        input_ar:set(self.info.lni_dir[name][1], buf)
+        output_ar:set(self.info.lni_dir[name][1], buf)
     elseif type == 'trigger' then
         input_ar:set('trigger/' .. name, buf)
         output_ar:set('trigger/' .. name, buf)
@@ -142,8 +144,8 @@ function w2l:file_save(type, name, buf)
 end
 
 function w2l:file_load(type, name)
-    if type == 'lni' then
-        for _, filename in ipairs(self.info.dir[name]) do
+    if type == 'table' then
+        for _, filename in ipairs(self.info.lni_dir[name]) do
             local buf = input_ar:get(filename)
             if buf then
                 return buf
@@ -161,8 +163,8 @@ function w2l:file_load(type, name)
 end
 
 function w2l:file_remove(type, name)
-    if type == 'lni' then
-        for _, filename in ipairs(self.info.dir[name]) do
+    if type == 'table' then
+        for _, filename in ipairs(self.info.lni_dir[name]) do
             input_ar:remove(filename)
             output_ar:remove(filename)
         end
@@ -196,10 +198,8 @@ function w2l:file_pairs()
         local type
         if name:sub(-4) == '.mdx' or name:sub(-4) == '.mdl' or name:sub(-4) == '.blp' or name:sub(-4) == '.tga' then
             type = 'resource'
-        elseif name:sub(-2) == '.j' then
-            type = 'jass'
         elseif name:sub(-4) == '.lua' or name:sub(-4) == '.ini' then
-            type = 'lua'
+            type = 'script'
         elseif name:sub(-4) == '.mp3' or name:sub(-4) == '.wav' then
             type = 'sound'
         else

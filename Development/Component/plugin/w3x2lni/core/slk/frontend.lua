@@ -27,22 +27,21 @@ local function load_slk(w2l)
     if (w2l.force_slk or w2l.config.read_slk) and has_slk(w2l) then
         return w2l:build_slk(true)
     else
-        local slk = w2l:get_default(true)
-        w2l:frontend_misc(slk)
-        return slk
+        return w2l:get_default(true)
     end
 end
 
 local function load_obj(w2l, wts)
     local objs = {}
     local count = 0
-    for type, name in pairs(w2l.info.obj) do
+    for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
+        local name = w2l.info.obj[type]
         local buf = w2l:file_load('map', name)
         local count = count + 1
         if buf then
             w2l.message('正在转换', name)
             objs[type] = w2l:frontend_obj(type, buf, wts)
-            w2l.progress(count / 7)
+            w2l.progress(count / 8)
         end
     end
     return objs
@@ -53,15 +52,15 @@ local function load_lni(w2l)
     local count = 0
     for type, name in pairs(w2l.info.lni) do
         count = count + 1
-        local buf = w2l:file_load('lni', type)
+        local buf = w2l:file_load('table', type)
         if buf then
-            w2l.message('正在转换', name)
-            lnis[type] = w2l:frontend_lni(type, buf, name)
-            w2l.progress(count / 7)
+            w2l.message('正在转换', type)
+            lnis[type] = w2l:frontend_lni(type, buf, type)
+            w2l.progress(count / 8)
         end
     end
 
-    local buf = w2l:file_load('lni', 'txt')
+    local buf = w2l:file_load('table', 'txt')
     if buf then
         lnis['txt'] = w2l:parse_lni(buf, 'txt')
     end
@@ -69,7 +68,7 @@ local function load_lni(w2l)
 end
 
 local function load_w3i(w2l, slk)
-    local buf = w2l:file_load('lni', 'w3i')
+    local buf = w2l:file_load('table', 'w3i')
     if buf then
         return w2l:parse_lni(buf, 'w3i')
     else
@@ -129,7 +128,9 @@ local function update_then_merge(w2l, slks, objs, lnis, slk)
         local data = slks[type]
         local obj = objs[type]
         if obj then
-            report, report2 = w2l:frontend_updateobj(type, obj, data)
+            if type ~= 'misc' then
+                report, report2 = w2l:frontend_updateobj(type, obj, data)
+            end
         else
             obj = {}
         end

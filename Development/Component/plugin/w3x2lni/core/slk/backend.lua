@@ -15,27 +15,28 @@ local function to_lni(w2l, slk)
     for ttype, filename in pairs(w2l.info.lni) do
         count = count + 1
         local data = slk[ttype]
-        w2l.progress:start(count / 7)
+        w2l.progress:start(count / 8)
         local content = w2l:backend_lni(ttype, data)
         w2l.progress:finish()
         if content then
-            w2l:file_save('lni', ttype, content)
+            w2l:file_save('table', ttype, content)
         end
     end
 
     local content = w2l:backend_txtlni(slk['txt'])
     if content then
-        w2l:file_save('lni', 'txt', content)
+        w2l:file_save('table', 'txt', content)
     end
 end
 
 local function to_obj(w2l, slk)
     --转换物编
     local count = 0
-    for type, filename in pairs(w2l.info.obj) do
+    for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
+        local filename = w2l.info.obj[type]
         count = count + 1
         local data = slk[type]
-        w2l.progress:start(count / 7)
+        w2l.progress:start(count / 8)
         local content = w2l:backend_obj(type, data, slk.wts)
         w2l.progress:finish()
         if content then
@@ -45,7 +46,7 @@ local function to_obj(w2l, slk)
 
     local content = w2l:backend_txtlni(slk['txt'])
     if content then
-        w2l:file_save('lni', 'txt', content)
+        w2l:file_save('table', 'txt', content)
     end
 end
 
@@ -57,7 +58,7 @@ local function convert_wtg(w2l)
     w2l.progress:finish()
     w2l.progress:start(0.5)
     if wtg and wct then
-        if w2l.config.mode == 'lni' then
+        if w2l.config.mode == 'table' then
             xpcall(function ()
                 wtg_data = w2l:frontend_wtg(wtg)
                 wct_data = w2l:frontend_wct(wct)
@@ -80,7 +81,7 @@ local function convert_wtg(w2l)
     w2l.progress:finish()
     w2l.progress:start(1)
     if wtg_data and wct_data and not w2l.config.remove_we_only then
-        if w2l.config.mode == 'lni' then
+        if w2l.config.mode == 'table' then
             local files = w2l:backend_lml(wtg_data, wct_data)
             for filename, buf in pairs(files) do
                 w2l:file_save('trigger', filename, buf)
@@ -174,6 +175,7 @@ local function remove_unuse(w2l, slk)
         upgrade = {},
         doodad = {},
         destructable = {},
+        misc = {},
     }
     for type, list in pairs(slk.mustuse) do
         for _, id in ipairs(list) do
@@ -255,7 +257,7 @@ local function to_slk(w2l, slk)
         w2l:file_save('map', output[type], txt[type])
     end
 
-    for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'destructable', 'doodad'} do
+    for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'destructable', 'doodad', 'misc'} do
         local data = object[type] or slk[type]
         local content = w2l:backend_obj(type, data, slk.wts)
         if content then
@@ -304,11 +306,11 @@ local function clean_file(w2l, slk)
         w2l:file_remove('map', filename)
     end
     for ttype, filename in pairs(w2l.info.lni) do
-        w2l:file_remove('lni', ttype)
+        w2l:file_remove('table', ttype)
     end
-    w2l:file_remove('lni', 'txt')
-    w2l:file_remove('lni', 'w3i')
-    w2l:file_remove('lni', 'doo')
+    w2l:file_remove('table', 'txt')
+    w2l:file_remove('table', 'w3i')
+    w2l:file_remove('table', 'doo')
 end
 
 return function (w2l, slk)
@@ -317,7 +319,7 @@ return function (w2l, slk)
     clean_file(w2l, slk)
     if slk.w3i then
         if w2l.config.mode == 'lni' then
-            w2l:file_save('lni', 'w3i', w2l:backend_w3i2lni(slk.w3i), slk.wts)
+            w2l:file_save('table', 'w3i', w2l:backend_w3i2lni(slk.w3i), slk.wts)
             w2l:file_remove('map', 'war3map.w3i')
         else
             w2l:file_save('map', 'war3map.w3i', w2l:backend_w3i(slk.w3i, slk.wts))
