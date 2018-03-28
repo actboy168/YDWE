@@ -2,17 +2,17 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/ybeps6jwp0nupxu6?svg=true)](https://ci.appveyor.com/project/actboy168/YDWE)
 
-YDWE是一个用于制作《魔兽争霸III》(英文名 Warcraft3，下面简称War3) 地图的工具，它是基于War3自带的WorldEdit进行二次开发。
+Based on Warcraft III World Editor, YDWE is a tool used for making Warcraft III game maps. 
 
-## 编译
+## Compile
 
 1. Visual Studio 2017 with Update 6
 2. Windows 10 SDK 10.0.15063
-3. 执行 `/Build/Build_Release.bat`
-4. 编译好的文件可以在`/Build/publish/Release/`找到
+3. Running `/Build/Build_Release.bat`
+4. The compiled files are generated under the `/Build/publish/Release/` directory.
 
 
-## 其他引用的项目
+## Other Referenced Projects
 
 * [ydhost](https://github.com/actboy168/ydhost)
 * [vscode-lua-debug](https://github.com/actboy168/vscode-lua-debug)
