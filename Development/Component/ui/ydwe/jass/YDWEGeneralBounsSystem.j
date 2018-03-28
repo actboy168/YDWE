@@ -176,7 +176,7 @@ endfunction
             return false
         endif
         set v=v-R2I(GetUnitState(u, state))
-        call YDWESaveIntegerByString(I2S(YDWEH2I(u)),"bonusType"+I2S(bonusType),v)
+        call YDWESaveIntegerByString(I2S(YDWEH2I(u)),"bonusType"+I2S(bonusType),v+YDWEGetIntegerByString(I2S(YDWEH2I(u)),"bonusType"+I2S(bonusType)))
         if v>0 then
             set o=3
           elseif v<0 then
