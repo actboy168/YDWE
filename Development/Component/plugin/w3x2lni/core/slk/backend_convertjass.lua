@@ -30,17 +30,36 @@ local any  = C((1 - mtch)^1)
 local pjass = (mtch + any)^0 / function(...)
     return table.concat {...}
 end
+
+local function convert_wts(name)
+    local buf = w2l:file_load('map', name)
+    if buf then
+        w2l:file_save('map', name, pjass:match(buf))
+    end
+end
+
+local function convert_mark(name)
+    local buf = w2l:file_load('map', name)
+    if buf then
+        local time = ('//W3x2lni Data: %s.%03.f'):format(os.date '%Y-%m-%d %H:%M:%S', (os.clock() % 1) * 1000)
+        if buf:sub(1, 15) == '//W3x2lni Data:' then
+            local pos = buf:find('[\r\n]')
+            if pos then
+                local new_buf = time .. buf:sub(pos)
+                w2l:file_save('map', name, new_buf)
+                return
+            end
+        end
+        local new_buf = time .. '\r\n' .. buf
+        w2l:file_save('map', name, new_buf)
+    end
+end
+
 return function (w2l_, wts_)
     w2l = w2l_
     wts = wts_
-    local name = 'war3map.j'
-    local buf = w2l:file_load('map', name)
-    if not buf then
-        name = 'scripts\\war3map.j'
-        buf = w2l:file_load('map', name)
-        if not buf then
-            return
-        end
-    end
-    w2l:file_save('map', name, pjass:match(buf))
+    convert_wts('war3map.j')
+    convert_wts('scripts\\war3map.j')
+    convert_mark('war3map.j')
+    convert_mark('scripts\\war3map.j')
 end

@@ -21,7 +21,7 @@ function mini:init()
     title:setmousedowncanmovewindow(true)
     view:addchildview(title)
 
-    local title_label = gui.Label.create('Slk优化')
+    local title_label = gui.Label.create('')
     title_label:setstyle { Height = 20, Width = 80 }
     title_label:setcolor('#eee')
     title_label:setfont(gui.Font.create('宋体', 16, "bold", "normal"))
@@ -49,6 +49,7 @@ function mini:init()
     ext.hide_in_taskbar()
 
     self._label = label
+    self._title = title_label
     self._progressbar = pb
     self._window = win
     self._view = view
@@ -56,6 +57,10 @@ end
 
 function mini:settext(text)
     self._label:settext(text)
+end
+
+function mini:settitle(title)
+    self._title:settext(title)
 end
 
 function mini:setvalue(value)
@@ -98,6 +103,7 @@ backend.progress = 0
 local function update()
     worker:update()
     mini:settext(backend.message)
+    mini:settitle(backend.title)
     mini:setvalue(backend.progress)
     if #worker.error > 0 then
         messagebox('错误', worker.error)

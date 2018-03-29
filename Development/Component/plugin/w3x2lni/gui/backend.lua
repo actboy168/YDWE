@@ -2,6 +2,7 @@ local process = require 'process'
 
 local backend = {}
 backend.message = ''
+backend.title = ''
 backend.progress = nil
 backend.report = {}
 backend.lastreport = nil
@@ -77,6 +78,8 @@ function mt:update_message(pos)
                 push_report(key:sub(8), value)
             elseif key == 'tip' then
                 backend.lastreport[2] = value
+            elseif key == 'title' then
+                backend.title = value
             end
             msg = ''
         end

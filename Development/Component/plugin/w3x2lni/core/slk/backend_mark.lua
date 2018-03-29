@@ -312,7 +312,7 @@ local function mark_doo(w2l, slk)
 end
 
 local function mark_lua(w2l, slk)
-    local buf = w2l:file_load('script', 'reference.lua')
+    local buf = w2l:file_load('map', 'reference.lua')
     if not buf then
         return
     end
