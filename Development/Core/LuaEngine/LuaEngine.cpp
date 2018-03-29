@@ -5,6 +5,7 @@
 #include <base/filesystem.h>
 #include <base/hook/inline.h>
 #include <base/path/self.h>
+#include <base/path/ydwe.h>
 #include <base/win/file_version.h>
 #include <base/util/format.h>
 #include <base/win/version.h>
@@ -56,7 +57,8 @@ std::wstring str_replace(const wchar_t* str, wchar_t src, wchar_t dst)
 
 lua_State* LuaEngineCreate(const wchar_t* name)
 {
-	fs::path ydwe = base::path::self().remove_filename().remove_filename();
+	fs::path ydwe = base::path::ydwe(false);
+	fs::path ydwedev = base::path::ydwe(true);
 
 	std::unique_ptr<logging::manager> mgr = std::make_unique<logging::manager>((ydwe / L"logs").c_str(), name);
 
@@ -93,13 +95,8 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 		lua_setfield(L, -2, "cpath");
 		lua_pop(L, 1);
 
-		fs::path ydwedev = ydwe.parent_path().remove_filename().remove_filename();
-		if (fs::exists(ydwedev / "build.root")) {
-			ydwe = ydwedev / L"Component";
-		}
-
-		fs::path p1 = ydwe / L"share" / L"script" / "common" / L"?.lua";
-		fs::path p2 = ydwe / L"share" / L"script" / str_replace(name, L'.', L'/') / L"?.lua";
+		fs::path p1 = ydwedev / L"script" / "common" / L"?.lua";
+		fs::path p2 = ydwedev / L"script" / str_replace(name, L'.', L'/') / L"?.lua";
 		lua_getglobal(L, "package");
 		lua_pushwstring(L, p1.wstring() + L";" + p2.wstring());
 		lua_setfield(L, -2, "path");

@@ -14,7 +14,7 @@ local function get_default(type)
         return mpqloader:load(mpq_path, filename)
     end
 
-    local prebuilt_path = ydpath / 'share' / 'script' / 'ydwe' / 'prebuilt'
+    local prebuilt_path = ydpath / 'script' / 'ydwe' / 'prebuilt'
     function w2l:prebuilt_load(filename)
         return mpqloader:load(prebuilt_path, filename)
     end
