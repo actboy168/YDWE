@@ -5,43 +5,19 @@ local root = fs.current_path():remove_filename()
 local plugin_path = root / 'plugin'
 
 local function load_one_plugin(path)
-    local info = lni(io.load(path / 'info.ini'))
-    local plugin = {
-        name = info.info.name,
-        version = info.info.version,
-        author = info.info.author,
-        description = info.info.description,
-        enable = info.config.enable,
-        path = path,
+    local plugin = assert(load(io.load(path), '@'..path:string(), 't', _ENV))()
+    return {
+        name = path:stem():string(),
+        version = plugin.info and plugin.info.version or '未知',
+        author = plugin.info and plugin.info.author or '未知',
+        description = plugin.info and plugin.info.description,
     }
-    if not plugin.name then
-        return
-    end
-    return plugin
-end
-
-local info_buf = [[
-[info]
-name = $name$
-version = $version$
-author = $author$
-description = $description$
-
-[config]
-enable = $enable$
-]]
-local function save_info(plugin)
-    local buf = info_buf:gsub('%$(.-)%$', function (key)
-        return tostring(plugin[key])
-    end)
-    buf = buf:gsub('\n', '\r\n')
-    io.save(plugin.path / 'info.ini', buf)
 end
 
 local function load_plugins()
     local plugins = {}
     for path in plugin_path:list_directory() do
-        if fs.is_directory(path) then
+        if not fs.is_directory(path) and path:extension():string() == '.lua' then
             local ok, res = pcall(load_one_plugin, path)
             if ok then
                 plugins[#plugins+1] = res
@@ -54,10 +30,34 @@ local function load_plugins()
     return plugins
 end
 
+local function load_enable_list()
+    local list = {}
+    local buf = io.load(plugin_path / '.config')
+    if buf then
+        for name in buf:gmatch '[^\r\n]+' do
+            list[name] = true
+        end
+    end
+    return list
+end
+
+local function save_enable_list(list)
+    local array = {}
+    for name, enable in pairs(list) do
+        if enable then
+            array[#array+1] = name
+        end
+    end
+    table.sort(array)
+    array[#array+1] = ''
+    io.save(plugin_path / '.config', table.concat(array, '\r\n'))
+end
+
 local plugins
 local last_clock
 local current_plugin
 local check_plugins
+local enbale_list
 
 local function checkbox_plugin(canvas, text, plugin, active)
     canvas:layout_space_push(0, 0, 320, 25)
@@ -80,17 +80,17 @@ local function show_plugin(canvas)
         if plugins then
             for _, plugin in ipairs(plugins) do
                 canvas:layout_space(25, 2)
-                if checkbox_plugin(canvas, plugin.name, plugin, plugin.enable) then
-                    plugin.enable = not plugin.enable
-                    save_info(plugin)
+                if checkbox_plugin(canvas, plugin.name, plugin, enable_list[plugin.name]) then
+                    enable_list[plugin.name] = not enable_list[plugin.name]
+                    save_enable_list(enable_list)
                 end
             end
         end
     end)
     canvas:layout_row_dynamic(25, 1)
     if current_plugin then
-        canvas:text('作者：' .. (current_plugin.author or '未知'), NK_TEXT_LEFT)
-        canvas:text('版本：' .. (current_plugin.version or '未知'), NK_TEXT_LEFT)
+        canvas:text('作者：' .. current_plugin.author, NK_TEXT_LEFT)
+        canvas:text('版本：' .. current_plugin.version, NK_TEXT_LEFT)
     else
         canvas:text('', NK_TEXT_LEFT)
         canvas:text('', NK_TEXT_LEFT)
@@ -101,6 +101,7 @@ function check_plugins()
     if not last_clock or os.clock() - last_clock > 1 then
         last_clock = os.clock()
         plugins = load_plugins()
+        enable_list = load_enable_list()
     end
     if #plugins == 0 then
         return nil

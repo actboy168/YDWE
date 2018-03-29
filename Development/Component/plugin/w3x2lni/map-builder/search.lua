@@ -85,16 +85,18 @@ local function search_dir(map, progress)
     local clock = os.clock()
     local count = 0
     local len = #map.path:string()
-    scan_dir(map.path, function(path)
-        local name = path:string():sub(len+2):lower()
-        map:get(name)
-        count = count + 1
-        if os.clock() - clock > 0.1 then
-            clock = os.clock()
-            print(('正在读取文件... (%d/%d)'):format(count, total))
-            progress(count / total)
-        end
-    end)
+    for _, dir_name in ipairs {'map', 'resource', 'script', 'sound', 'trigger'} do
+        scan_dir(map.path / dir_name, function(path)
+            local name = path:string():sub(len+2):lower()
+            map:get(name)
+            count = count + 1
+            if os.clock() - clock > 0.1 then
+                clock = os.clock()
+                print(('正在读取文件... (%d/%d)'):format(count, total))
+                progress(count / total)
+            end
+        end)
+    end
 end
 
 return function (map, progress)

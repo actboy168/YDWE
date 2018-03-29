@@ -21,12 +21,12 @@ local function pack_define()
 end
 
 local function pack_size()
-    pack('ll', 17, 17)
+    pack('ll', 2, 2)
     pack('ff', 0, 0)
 end
 
 local function pack_titles()
-    for i = 1, 17*17 do
+    for i = 1, 2*2 do
         pack('c7', '\x00\x20\x00\x60\x00\x10\xf2')
     end
 end
