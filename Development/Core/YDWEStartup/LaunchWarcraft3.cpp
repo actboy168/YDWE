@@ -48,7 +48,7 @@ bool map_slk(const fs::path& ydwe, const fs::path& from, const fs::path& to)
 		app,
 		base::format(LR"("%s" -e "package.cpath = [[%s]]" gui\mini.lua -slk -config="%s" "%s" "%s")", 
 			app.wstring(), (ydwe / L"bin" / L"modules" / L"?.dll").wstring(), 
-			(ydwedev / L"share"/ L"script"/ L"war3"/ L"w3x2lni.ini").wstring(),
+			(ydwedev / L"script"/ L"war3"/ L"w3x2lni.ini").wstring(),
 			from.wstring(),
 			to.wstring()
 		),
