@@ -62,7 +62,7 @@ return function (w2l_, config_)
     w2l = w2l_
     config = config_
     if not config.plugin_path then
-        return
+        return function () end
     end
 
     local function load_in_disk(name)
