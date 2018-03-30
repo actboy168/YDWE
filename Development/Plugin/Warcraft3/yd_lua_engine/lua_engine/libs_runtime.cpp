@@ -13,7 +13,7 @@ namespace runtime	{
 	int  version = 3;
 	int  handle_level = 2;
 	bool enable_console = false;
-	bool enable_debugger = false;
+	int  debugger = LUA_NOREF;
 	bool sleep = false;
 	bool catch_crash = true;
 
@@ -214,11 +214,10 @@ namespace runtime	{
 		}
 		else if (strcmp("debugger", name) == 0)
 		{
-			if (!enable_debugger && lua_isinteger(L, 3))
+			if (debugger == LUA_NOREF && lua_isinteger(L, 3))
 			{
 				if (debugger::open(L, (int)lua_tointeger(L, 3))) {
-					luaL_ref(L, LUA_REGISTRYINDEX);
-					enable_debugger = true;
+					debugger = luaL_ref(L, LUA_REGISTRYINDEX);
 				}
 			}
 		}
@@ -259,7 +258,7 @@ namespace runtime	{
 		}
 		else if (strcmp("debugger", name) == 0)
 		{
-			lua_pushboolean(L, enable_debugger);
+			lua_rawgeti(L, LUA_REGISTRYINDEX, debugger);
 			return 1;
 		}
 		else if (strcmp("sleep", name) == 0)
