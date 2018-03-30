@@ -7,7 +7,8 @@ local plugin_path = root / 'plugin'
 local function load_one_plugin(path)
     local plugin = assert(load(io.load(path), '@'..path:string(), 't', _ENV))()
     return {
-        name = path:stem():string(),
+        path = path:stem():string(),
+        name = plugin.info and plugin.info.name or path:stem():string(),
         version = plugin.info and plugin.info.version or '未知',
         author = plugin.info and plugin.info.author or '未知',
         description = plugin.info and plugin.info.description,
@@ -80,8 +81,8 @@ local function show_plugin(canvas)
         if plugins then
             for _, plugin in ipairs(plugins) do
                 canvas:layout_space(25, 2)
-                if checkbox_plugin(canvas, plugin.name, plugin, enable_list[plugin.name]) then
-                    enable_list[plugin.name] = not enable_list[plugin.name]
+                if checkbox_plugin(canvas, plugin.name, plugin, enable_list[plugin.path]) then
+                    enable_list[plugin.path] = not enable_list[plugin.path]
                     save_enable_list(enable_list)
                 end
             end

@@ -381,15 +381,12 @@ return function (w2l, slk)
     w2l.progress(0.9)
 
     w2l.message('转换其他文件...')
-    w2l:file_save('map', 'war3mapmisc.txt', w2l:backend_misc(slk.misc, slk.txt, slk.wts))
-    w2l.progress(0.92)
-
     local buf = w2l:file_load('map', 'war3mapskin.txt')
     if buf then
         local skin = w2l:parse_ini(buf)
         w2l:file_save('map', 'war3mapskin.txt', w2l:backend_skin(skin, slk.wts))
     end
-    w2l.progress(0.94)
+    w2l.progress(0.92)
 
     w2l.message('转换脚本...')
     w2l:backend_convertjass(slk.wts)

@@ -327,34 +327,14 @@ local function mark_lua(w2l, slk)
             return w2l:file_remove('map', filename)
         end
     end
-    local env = {
-        archive  = archive,
-        assert   = assert,
-        error    = error,
-        ipairs   = ipairs,
-        load     = load,
-        pairs    = pairs,
-        next     = next,
-        print    = print,
-        select   = select,
-        tonumber = tonumber,
-        tostring = tostring,
-        type     = type,
-        pcall    = pcall,
-        xpcall   = xpcall,
-        math     = math,
-        string   = string,
-        table    = table,
-        utf8     = utf8,
-    }
-    local f, e = load(buf, 'reference.lua', 't', env)
+    local f, e = load(buf, 'reference.lua', 't', _ENV)
     if not f then
-        report('简化时没有找到对象:', e)
+        report('加载reference.lua错误:', e)
         return
     end
     local suc, list = pcall(f)
     if not suc then
-        report('简化时没有找到对象:', list)
+        report('加载reference.lua错误:', list)
         return
     end
     if type(list) ~= 'table' then

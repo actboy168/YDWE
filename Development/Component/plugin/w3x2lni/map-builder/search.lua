@@ -70,12 +70,19 @@ local function search_mpq(map, progress)
     end
 end
 
+local ignore = {}
+for _, name in ipairs {'.git', '.svn', '.vscode', '.gitignore'} do
+    ignore[name] = true
+end
+
 local function scan_dir(dir, callback)
     for path in dir:list_directory() do
-        if fs.is_directory(path) then
-            scan_dir(path, callback)
-        else
-            callback(path)
+        if not ignore[path:filename():string()] then
+            if fs.is_directory(path) then
+                scan_dir(path, callback)
+            else
+                callback(path)
+            end
         end
     end
 end
@@ -85,7 +92,7 @@ local function search_dir(map, progress)
     local clock = os.clock()
     local count = 0
     local len = #map.path:string()
-    for _, dir_name in ipairs {'map', 'resource', 'script', 'sound', 'trigger'} do
+    for _, dir_name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'plugin'} do
         scan_dir(map.path / dir_name, function(path)
             local name = path:string():sub(len+2):lower()
             map:get(name)

@@ -150,7 +150,9 @@ local function clean_misc(type, t)
         return
     end
     for _, name in ipairs {'FontHeights', 'InfoPanel', 'Misc', 'PingColor', 'QuestIndicatorTimeout', 'SelectionCircle'} do
-        clean_obj(id, t[name], type, default[type])
+        if t[name] then
+            clean_obj(id, t[name], type, default[type])
+        end
     end
 end
 

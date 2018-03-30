@@ -10,12 +10,19 @@ local function task(f, ...)
     return false
 end
 
+local ignore = {}
+for _, name in ipairs {'.git', '.svn', '.vscode', '.gitignore'} do
+    ignore[name] = true
+end
+
 local function scan_dir(dir, callback)
     for path in dir:list_directory() do
-        if fs.is_directory(path) then
-            scan_dir(path, callback)
-        else
-            callback(path)
+        if not ignore[path:filename():string()] then
+            if fs.is_directory(path) then
+                scan_dir(path, callback)
+            else
+                callback(path)
+            end
         end
     end
 end
@@ -32,7 +39,7 @@ end
 
 function mt:count_files()
     local count = 0
-    for _, name in ipairs {'map', 'resource', 'script', 'sound', 'trigger'} do
+    for _, name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'plugin'} do
         scan_dir(self.path / name, function ()
             count = count + 1
         end)
@@ -63,16 +70,6 @@ function mt:load_file(name)
 end
 
 function mt:save_file(name, buf, filetime)
-    local dir = name:match '^([^/\\]+)[/\\]'
-    if dir then
-        dir = dir:lower()
-        if not self.cleaned[dir] then
-            self.cleaned[dir] = true
-            if not task(fs.remove_all, self.path / dir) then
-                error(('无法清空目录[%s]，请检查目录是否被占用。'):format((self.path / dir):string()))
-            end
-        end
-    end
     local dir = (self.path / name):remove_filename()
     if not fs.exists(dir) then
         fs.create_directories(dir)
@@ -82,5 +79,5 @@ function mt:save_file(name, buf, filetime)
 end
 
 return function (input)
-    return setmetatable({ path = input, cleaned = {} }, mt)
+    return setmetatable({ path = input }, mt)
 end

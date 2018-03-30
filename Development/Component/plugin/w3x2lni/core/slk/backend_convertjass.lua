@@ -41,16 +41,21 @@ end
 local function convert_mark(name)
     local buf = w2l:file_load('map', name)
     if buf then
-        local time = ('//W3x2lni Data: %s.%03.f'):format(os.date '%Y-%m-%d %H:%M:%S', (os.clock() % 1) * 1000)
+        local time
+        if w2l.config.mode == 'lni' then
+            time = ''
+        else
+            time = ('//W3x2lni Data: %s.%03.f\r\n'):format(os.date '%Y-%m-%d %H:%M:%S', (os.clock() % 1) * 1000)
+        end
         if buf:sub(1, 15) == '//W3x2lni Data:' then
-            local pos = buf:find('[\r\n]')
+            local _, pos = buf:find('[\r\n]+')
             if pos then
-                local new_buf = time .. buf:sub(pos)
+                local new_buf = time .. buf:sub(pos+1)
                 w2l:file_save('map', name, new_buf)
                 return
             end
         end
-        local new_buf = time .. '\r\n' .. buf
+        local new_buf = time .. buf
         w2l:file_save('map', name, new_buf)
     end
 end

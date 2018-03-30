@@ -4,10 +4,12 @@ local sandbox = require 'tool.sandbox'
 local w2l
 local config
 
-local function load_one_plugin(path)
-    local plugin = assert(load(io.load(path), '@'..path:string(), 't', _ENV))()
+local function load_one_plugin(load_in_disk, name)
+    local buf, path = load_in_disk(name .. '.lua')
+    local plugin = assert(load(buf, path and ('@'..path) or buf, 't', _ENV))()
     return {
-        name = path:stem():string(),
+        path = name,
+        name = plugin.info and plugin.info.name or name,
         version = plugin.info and plugin.info.version or '未知',
         author = plugin.info and plugin.info.author or '未知',
         description = plugin.info and plugin.info.description,
@@ -15,15 +17,13 @@ local function load_one_plugin(path)
     }
 end
 
-local function load_plugins(list)
+local function load_plugins(load_in_disk, list, source)
     local plugins = {}
-    local plugin_path = fs.current_path() / config.plugin_path
     for name in pairs(list) do
-        local path = plugin_path / (name .. '.lua')
-        local ok, res = pcall(load_one_plugin, path)
+        local ok, res = pcall(load_one_plugin, load_in_disk, name)
         if ok then
             plugins[#plugins+1] = res
-            w2l.message('-report|9其他', ('使用的插件：[%s]'):format(res.name))
+            w2l.message('-report|9其他', ('使用的插件：[%s](%s)'):format(res.name, source))
             if res.description then
                 w2l.message('-tip', res.description)
             end
@@ -35,9 +35,9 @@ local function load_plugins(list)
     return plugins
 end
 
-local function load_enable_list()
+local function load_enable_list(load_in_disk)
     local list = {}
-    local buf = io.load(fs.current_path() / config.plugin_path / '.config')
+    local buf = load_in_disk '.config'
     if buf then
         for name in buf:gmatch '[^\r\n]+' do
             list[name] = true
@@ -64,10 +64,25 @@ return function (w2l_, config_)
     if not config.plugin_path then
         return
     end
-    local enable_list = load_enable_list()
-    local plugins = load_plugins(enable_list)
+
+    local function load_in_disk(name)
+        local path = fs.current_path() / config.plugin_path / name
+        return io.load(path), path:string()
+    end
+    local enable_list = load_enable_list(load_in_disk)
+    local plugins = load_plugins(load_in_disk, enable_list, '本地')
+
+    local function load_in_map(name)
+        return w2l:file_load('plugin', name)
+    end
+    local map_enable_list = load_enable_list(load_in_map)
+    local map_plugins = load_plugins(load_in_map, map_enable_list, '地图')
+
     return function (event)
         for _, plugin in ipairs(plugins) do
+            call_plugin(plugin, event)
+        end
+        for _, plugin in ipairs(map_plugins) do
             call_plugin(plugin, event)
         end
     end
