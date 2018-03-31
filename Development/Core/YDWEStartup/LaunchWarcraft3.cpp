@@ -12,7 +12,7 @@
 #include <base/win/registry/key.h> 
 #include <base/hook/fp_call.h>
 
-std::wstring get_test_map_path()
+static std::wstring get_test_map_path()
 {
 	std::wstring result = L"Maps\\Test\\WorldEditTestMap";
 	try {
@@ -22,7 +22,7 @@ std::wstring get_test_map_path()
 	return std::move(result);
 }
 
-bool launch_taskbar_support(const fs::path& ydwe_path)
+static bool launch_taskbar_support(const fs::path& ydwe_path)
 {
 	HMODULE hdll = LoadLibraryW((ydwe_path / L"plugin" / L"YDTaskbarSupport.dll").c_str());
 	if (hdll)
@@ -37,7 +37,22 @@ bool launch_taskbar_support(const fs::path& ydwe_path)
 	return false;
 }
 
-bool map_slk(const fs::path& ydwe, const fs::path& from, const fs::path& to)
+static bool is_lnimap(const fs::path& from)
+{
+	bool res = false;
+	FILE* f = 0;
+	if (_wfopen_s(&f, from.c_str(), L"rb") == 0 && f) {
+		fseek(f, 8, SEEK_SET);
+		uint32_t mark = 0;
+		if (1 == fread(&mark, sizeof mark, 1, f) && mark == '\1L2W') {
+			res = true;
+		}
+		fclose(f);
+	}
+	return res;
+}
+
+static bool map_convert(const fs::path& ydwe, const fs::path& from, const fs::path& to, const char* mode)
 {
 	fs::path ydwedev = base::path::ydwe(true);
 	fs::path app = ydwe / L"bin" / L"lua.exe";
@@ -46,8 +61,10 @@ bool map_slk(const fs::path& ydwe, const fs::path& from, const fs::path& to)
 	process.set_env(L"PATH", (ydwe / L"bin").wstring());
 	if (!process.create(
 		app,
-		base::format(LR"("%s" -e "package.cpath = [[%s]]" gui\mini.lua -slk -config="%s" "%s" "%s")", 
-			app.wstring(), (ydwe / L"bin" / L"modules" / L"?.dll").wstring(), 
+		base::format(LR"("%s" -e "package.cpath = [[%s]]" gui\mini.lua -%s -config="%s" "%s" "%s")", 
+			app.wstring(), 
+			(ydwe / L"bin" / L"modules" / L"?.dll").wstring(),
+			mode,
 			(ydwedev / L"script"/ L"war3"/ L"w3x2lni.ini").wstring(),
 			from.wstring(),
 			to.wstring()
@@ -57,6 +74,34 @@ bool map_slk(const fs::path& ydwe, const fs::path& from, const fs::path& to)
 		return false;
 	}
 	return process.wait() == 0;
+}
+
+static void map_build(const fs::path& ydwe, const fs::path& from, const fs::path& to, bool slk)
+{
+	if (is_lnimap(from)) {
+		if (slk) {
+			if (!map_convert(ydwe, from, to, "slk")) {
+				// TODO: ERROR
+				fs::copy_file(from, to, fs::copy_options::overwrite_existing);
+			}
+		}
+		else {
+			if (!map_convert(ydwe, from, to, "obj")) {
+				// TODO: ERROR
+				fs::copy_file(from, to, fs::copy_options::overwrite_existing);
+			}
+		}
+	}
+	else {
+		if (slk) {
+			if (!map_convert(ydwe, from, to, "slk")) {
+				fs::copy_file(from, to, fs::copy_options::overwrite_existing);
+			}
+		}
+		else {
+			fs::copy_file(from, to, fs::copy_options::overwrite_existing);
+		}
+	}
 }
 
 bool launch_warcraft3(base::warcraft3::command_line& cmd)
@@ -101,14 +146,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 					if (!loadfile.is_absolute()) {
 						loadfile = war3_path / loadfile;
 					}
-					if ("0" != table["MapTest"]["EnableMapSlk"]) {
-						if (!map_slk(ydwe, loadfile, war3_path / test_map_path)) {
-							fs::copy_file(loadfile, war3_path / test_map_path, fs::copy_options::overwrite_existing);
-						}
-					}
-					else {
-						fs::copy_file(loadfile, war3_path / test_map_path, fs::copy_options::overwrite_existing);
-					}
+					map_build(ydwe, loadfile, war3_path / test_map_path, "0" != table["MapTest"]["EnableMapSlk"]);
 				}
 				catch (...) {
 				}
