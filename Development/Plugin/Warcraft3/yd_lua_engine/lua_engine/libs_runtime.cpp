@@ -28,6 +28,7 @@ namespace runtime	{
 	{
 		handle_level = 2;
 		enable_console = false;
+		debugger = LUA_NOREF;
 		sleep = false;
 		catch_crash = true;
 
