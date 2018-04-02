@@ -4,12 +4,10 @@
 #include <base/win/env_variable.h>
 #include <Windows.h>
 #include <assert.h>
-#include <Psapi.h>
 #pragma warning(push)
 #pragma warning(disable:6387)
 #include <Shlobj.h>
 #pragma warning(pop)
-#pragma comment(lib, "Psapi.lib")
 
 // http://blogs.msdn.com/oldnewthing/archive/2004/10/25/247180.aspx
 extern "C" IMAGE_DOS_HEADER __ImageBase;
