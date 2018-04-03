@@ -59,7 +59,7 @@ function plugin:load(plugin_config_path)
 		return
 	end
 	
-	local s, r = pcall(dofile, uni.u2a(plugin_loader_path:string()))
+	local s, r = pcall(dofile, plugin_loader_path:string())
 	if not s then
 		log.error("Error in initialize " .. plugin_name .. "'s loader: ".. r)
 		return 
