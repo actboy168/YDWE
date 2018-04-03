@@ -135,11 +135,7 @@ return function (w2l_, type, data, objs)
         else
             source = template[obj._parent] or data[obj._parent]
         end
-        if type == 'txt' then
-            result[name] = obj
-        else
-            result[name] = copy_obj(source, obj)
-        end
+        result[name] = copy_obj(source, obj)
     end
     for name, obj in pairs(data) do
         result[name] = fill_obj(obj)

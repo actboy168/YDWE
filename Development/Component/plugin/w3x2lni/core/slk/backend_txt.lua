@@ -115,7 +115,7 @@ local function add_data(obj, meta, value, keyval)
                     end
                 end
             end
-            if not flag then
+            if not flag and len > 1 then
                 keyval[#keyval] = nil
             end
         else

@@ -41,8 +41,11 @@ local function unpack_config()
             end
         end
     end
-    if not config.config_path or not config.mode then
+    if not config.mode then
         return config
+    end
+    if not config.config_path then
+        config.config_path = '..\\config.ini'
     end
     local tbl = lni(io.load(fs.path(config.config_path)))
     for k, v in pairs(tbl) do
@@ -74,6 +77,10 @@ local config = unpack_config()
 w2l:set_config(config)
 if config.mode == 'slk' then
     print('-title Slk优化')
+elseif config.mode == 'obj' then
+    print('-title 转为Obj')
+elseif config.mode == 'lni' then
+    print('-title 转为Lni')
 end
 
 input = config.input
@@ -82,6 +89,7 @@ local function check_lni_mark(path)
     if map then
         map:seek('set', 8)
         local mark = map:read(4)
+        map:close()
         if mark == 'W2L\x01' then
             return true
         end
@@ -291,7 +299,7 @@ local frontend_rate = (1 - input_rate - output_rate) * 0.4
 local backend_rate = (1 - input_rate - output_rate) * 0.6
 
 print('正在检查插件...')
-local call_plugin = plugin(w2l, config)
+plugin(w2l, config)
 
 print('正在读取文件...')
 w2l.progress:start(input_rate)
@@ -304,7 +312,7 @@ w2l:frontend(slk)
 w2l.progress:finish()
 
 print('正在执行插件...')
-call_plugin('on_complete_data')
+w2l:call_plugin('on_complete_data')
 
 print('正在转换...')
 w2l.progress:start(input_rate + frontend_rate + backend_rate)
