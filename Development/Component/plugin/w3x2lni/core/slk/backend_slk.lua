@@ -103,7 +103,7 @@ local slk_keys = {
 
 local index = {1, 1, 1, 1}
 local strs1 = {}
-for c in ('!@#$%^&*()-_=+\\|/?>.<,`~'):gmatch '.' do
+for c in ('!@#$%^&*()_=+\\|/?>.<,`~'):gmatch '.' do
     strs1[#strs1+1] = c
 end
 local strs2 = {}
@@ -341,7 +341,7 @@ local function load_obj(id, obj, slk_name)
         obj_data._mark   = obj._mark
         obj_data._parent = obj._parent
     end
-    if not is_usable_string(obj._id) then
+    if not obj._slk_id and not is_usable_string(obj._id) then
         obj._slk_id = find_unused_id()
         obj_data._slk_id = obj._slk_id
         report_failed(obj, 'id', '对象ID可以被转换为数字', '')

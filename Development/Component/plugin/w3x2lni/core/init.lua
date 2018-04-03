@@ -241,6 +241,9 @@ function mt:trigger_data()
     return nil
 end
 
+function mt:call_plugin()
+end
+
 function mt:file_save(type, name, buf)
     if type == 'table' then
         self:map_save(self.info.lni_dir[name][1], buf)

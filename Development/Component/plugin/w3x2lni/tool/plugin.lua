@@ -51,10 +51,12 @@ local function call_plugin(plugin, event)
     if not f then
         return
     end
-    local ok, err = pcall(f, plugin.plugin, w2l)
-    if not ok then
+    local ok, res = pcall(f, plugin.plugin, w2l)
+    if ok then
+        return res
+    else
         w2l.message('-report|2警告', ('插件[%s]执行失败'):format(plugin.name))
-        w2l.message('-tip', err)
+        w2l.message('-tip', res)
     end
 end
 
@@ -62,7 +64,7 @@ return function (w2l_, config_)
     w2l = w2l_
     config = config_
     if not config.plugin_path then
-        return function () end
+        return
     end
 
     local function load_in_disk(name)
@@ -78,12 +80,18 @@ return function (w2l_, config_)
     local map_enable_list = load_enable_list(load_in_map)
     local map_plugins = load_plugins(load_in_map, map_enable_list, '地图')
 
-    return function (event)
+    function w2l:call_plugin(event)
         for _, plugin in ipairs(plugins) do
-            call_plugin(plugin, event)
+            local res = call_plugin(plugin, event)
+            if res ~= nil then
+                return res
+            end
         end
         for _, plugin in ipairs(map_plugins) do
-            call_plugin(plugin, event)
+            local res = call_plugin(plugin, event)
+            if res ~= nil then
+                return res
+            end
         end
     end
 end
