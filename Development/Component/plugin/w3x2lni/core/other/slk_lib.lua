@@ -148,6 +148,13 @@ local function to_type(value, tp)
     end
 end
 
+local function around_number(value)
+    if math.type(value) ~= 'float' then
+        return value
+    end
+    return math.floor(value * 10000 + 0.5) / 10000
+end
+
 local chars = {}
 for c in ('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'):gmatch '.' do
     table.insert(chars, c)
@@ -247,12 +254,12 @@ function mt:create_object(objt, ttype, name)
             return null
         end
         if not level then
-            return value
+            return around_number(value)
         end
         if level > objt._max_level then
             return get_default(value) or null
         end
-        return value[level] or null
+        return around_number(value[level]) or null
     end
     function mt:__newindex(key, nvalue)
         if not objt then
@@ -576,12 +583,8 @@ local function eq_obj(a, b)
             if not eq_obj(v, b[k]) then
                 return false
             end
-        elseif math.type(v) == 'float' then
-            if math.abs(v - b[k]) > 1e-5 then
-                return false
-            end
         else
-            if v ~= b[k] then
+            if around_number(v) ~= around_number(b[k]) then
                 return false
             end
         end

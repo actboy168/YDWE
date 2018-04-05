@@ -51,6 +51,7 @@ local function to_obj(w2l, slk)
 end
 
 local function convert_wtg(w2l)
+    w2l:backend_convertwtg(w2l.slk.wts)
     local wtg_data, wct_data
     w2l.progress:start(0.1)
     local wtg = w2l:file_load('map', 'war3map.wtg')
@@ -87,7 +88,7 @@ local function convert_wtg(w2l)
                 w2l:file_save('trigger', filename, buf)
             end
         else
-            w2l:file_save('map', 'war3map.wtg', w2l:backend_wtg(wtg_data))
+            w2l:file_save('map', 'war3map.wtg', w2l:backend_wtg(wtg_data, w2l.slk.wts))
             w2l:file_save('map', 'war3map.wct', w2l:backend_wct(wct_data))
         end
     end
@@ -369,7 +370,6 @@ return function (w2l, slk)
     w2l.progress:start(0.8)
     if not w2l.config.remove_we_only then
         w2l.message('转换触发器...')
-        w2l:backend_convertwtg(slk.wts)
         convert_wtg(w2l)
     end
     w2l.progress:finish()

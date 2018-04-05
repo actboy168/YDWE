@@ -1,6 +1,7 @@
 local w2l
 local wtg
-local state
+local wts
+local state1
 
 local pack_eca
 
@@ -82,6 +83,11 @@ local function pack_arg(arg)
     elseif type == '数组' then
         array = true
         type = '变量'
+    end
+    if type == '常量' then
+        value = w2l:load_wts(wts, value, 299, '触发器里的文本长度超过299字符', function(str)
+            return str:gsub('\\', '\\\\'):gsub('"', '\\"')
+        end)
     end
     pack('lz', arg_type_map[type], value)
     if type == '函数' then
@@ -209,9 +215,10 @@ local function pack_triggers()
     end
 end
 
-return function (w2l_, wtg_)
+return function (w2l_, wtg_, wts_)
     w2l = w2l_
     wtg = wtg_
+    wts = wts_
     state, err = w2l:trigger_data()
     hex = {}
 
