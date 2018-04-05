@@ -28,7 +28,7 @@ end
 -- 返回：number, info, path - 子进程返回值；预处理输出信息；输出文件路径
 function wave:do_compile(op)
 	local cmd = ''
-	cmd = cmd .. '--autooutput '
+	cmd = cmd .. string.format('--output=%s ', pathstring(op.output))
 	cmd = cmd .. string.format('--sysinclude=%s ', pathstring(self.sys_include_path))
 	cmd = cmd .. string.format('--sysinclude=%s ', pathstring(self.plugin_include_path))
 	cmd = cmd .. string.format('--include=%s ',    pathstring(op.map_path:parent_path()))
@@ -74,15 +74,11 @@ end
 function wave:compile(op)
 	log.trace("Wave compilation start.")		
 	
-	local map_script_file = io.open(op.input, "a+b")
-	if map_script_file then
-		map_script_file:write("/**/\r\n")
-		map_script_file:close()
+	local f = io.open(op.input, "a+b")
+	if f then
+		f:write("/**/\r\n")
+		f:close()
 	end
-	
-	-- 输出路径
-	op.output = op.input:parent_path() / (op.input:stem():string() .. ".i")
-	
 	local exit_code, out, err = self:do_compile(op)
 	
 	-- 退出码0代表成功

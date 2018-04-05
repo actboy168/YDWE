@@ -36,7 +36,7 @@ local function do_compile(code, env)
 	if not ok then
 		return false, res
 	end
-	local f, err = load(res, '@JASS', 't', env)
+	local f, err = load(res, '@3_wave.j', 't', env)
 	if not f then
 		return f, err
 	end

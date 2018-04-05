@@ -124,9 +124,9 @@ function jasshelper.do_compile(self, map_path, common_j_path, blizzard_j_path, o
 	end
 
 	if option.enable_jasshelper_scriptonly then
-		return mpq_util:update_file(map_path, 'war3map.j',
+		return mpq_util:update_file(map_path, 'war3map.j', "5_vjass.j",
 			function (map_handle, in_script_path)
-				local out_script_path = fs.ydwe_path() / "logs" / "jasshelper.j"
+				local out_script_path = fs.ydwe_path() / "logs" / "6_vjass.j"
 				
 				-- 生成命令行
 				local command_line = string.format('"%s"%s --scriptonly "%s" "%s" "%s" "%s"',
