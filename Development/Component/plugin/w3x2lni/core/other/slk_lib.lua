@@ -576,6 +576,10 @@ local function eq_obj(a, b)
             if not eq_obj(v, b[k]) then
                 return false
             end
+        elseif math.type(v) == 'float' then
+            if math.abs(v - b[k]) > 1e-5 then
+                return false
+            end
         else
             if v ~= b[k] then
                 return false
