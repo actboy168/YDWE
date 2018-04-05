@@ -464,7 +464,7 @@ function mt:create_proxy(ttype)
         return function ()
             i = i + 1
             local k = keys[i]
-            return k, t[k]
+            return k, self[k]
         end
     end
     return setmetatable({}, mt)
