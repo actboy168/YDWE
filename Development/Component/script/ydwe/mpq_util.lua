@@ -4,13 +4,7 @@ local stormlib = require 'ffi.stormlib'
 
 mpq_util = {}
 
--- 从地图中解压出文件来然后调用回调函数更新
--- map_path - 地图路径，fs.path
--- path_in_archive - 地图压缩包中的路径，string
--- process_function - 函数，必须接收一个fs.path对象，返回一个fs.path对象
--- 形如 function (in_path) return out_path end
--- 返回值：true表示成功，false表示失败
-function mpq_util:update_file(map_path, path_in_archive, process_function)
+function mpq_util:update_file(map_path, path_in_archive, path_tmp, process_function)
 	-- 结果
 	local result = false
 	log.trace("mpq_util.update_file.")
@@ -19,7 +13,7 @@ function mpq_util:update_file(map_path, path_in_archive, process_function)
 	local mpq = stormlib.open(map_path)
 	if mpq then
 		-- 确定解压路径
-		local extract_file_path = fs.ydwe_path() / "logs" / "file.out"
+		local extract_file_path = fs.ydwe_path() / "logs" / path_tmp
 		-- 将文件解压
 		if mpq:has_file(path_in_archive) and
 			mpq:extract(path_in_archive, extract_file_path)

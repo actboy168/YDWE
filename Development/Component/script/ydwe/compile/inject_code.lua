@@ -47,6 +47,7 @@ end
 -- 返回值：0 - 成功；-1 - 出错失败；1 - 什么都没做
 function inject_code:do_inject(op, tbl)
 	-- 结果
+	fs.copy_file(op.input, op.output, true)
 	local result = 1
 	if tbl and next(tbl) then
 		-- 默认成功
@@ -88,7 +89,6 @@ end
 
 
 function inject_code:compile(op)
-	op.output = op.input
 	return self:do_inject(op, self:detect(op))
 end
 

@@ -5,7 +5,7 @@ local table = table
 local cEqual = string.byte('=', 1)
 
 local function do_precompile(code)
-    local c = {"local __JASS__={}"}
+    local c = {"local __JASS__={} "}
     local startPos
     local endPos = -1
     while true do
@@ -13,7 +13,7 @@ local function do_precompile(code)
         if not startPos then
             break
         end
-        c[#c+1] = ("__JASS__[#__JASS__+1]=%q"):format(code:sub(endPos + 2, startPos - 1))
+        c[#c+1] = ("__JASS__[#__JASS__+1]=%q "):format(code:sub(endPos + 2, startPos - 1))
 
         endPos = code:find('?>', startPos + 2, true)
         if not endPos then
@@ -21,27 +21,31 @@ local function do_precompile(code)
             break
         end
         if code:byte(startPos + 2) ~= cEqual then
-            c[#c+1] = code:sub(startPos + 2, endPos - 1)
+            c[#c+1] = ("%s "):format(code:sub(startPos + 2, endPos - 1))
         else
-            c[#c+1] = ("__JASS__[#__JASS__+1]=%s"):format(code:sub(startPos + 3, endPos - 1)) 
+            c[#c+1] = ("__JASS__[#__JASS__+1]=%s "):format(code:sub(startPos + 3, endPos - 1)) 
         end
     end
-    c[#c+1] = ("__JASS__[#__JASS__+1]=%q"):format(code:sub(endPos + 2))
+    c[#c+1] = ("__JASS__[#__JASS__+1]=%q "):format(code:sub(endPos + 2))
     c[#c+1] = "return table.concat(__JASS__)"
-    return table.concat(c, '\n')
+    return table.concat(c)
 end
 
 local function do_compile(code, env)
 	local ok, res = pcall(do_precompile, code)
 	if not ok then
 		return false, res
-    end
-	local f, err = load(res, nil, 't', env)
+	end
+	local f, err = load(res, '@3_wave.j', 't', env)
 	if not f then
 		return f, err
 	end
 	local ok, res = xpcall(f, debug.traceback)
 	if not ok then
+		local pos = res:find("[C]: in function 'xpcall'", 1, true)
+		if pos then
+			res = res:sub(1, pos-1)
+		end
     	return false, res
 	end
     return true, res
@@ -92,12 +96,7 @@ function template:compile(op)
 	local ok, res = do_compile(code, env)
 	if not ok then
 		if res then
-			local msg = res
-			local pos = res:find 'stack traceback:'
-			if pos then
-				msg = msg:sub(1, pos-1)
-			end
-			gui.error_message(nil, msg)
+			gui.error_message(nil, res)
 		else
 			gui.error_message(nil, LNG.UNKNOWN)
 		end
