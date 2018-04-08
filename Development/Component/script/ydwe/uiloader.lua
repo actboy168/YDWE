@@ -215,7 +215,7 @@ local function initialize()
             end
 	    	local _, fix = w2l:wtg_reader(wtg, state)
             local bufs = {ui.new_writer(fix)}
-            local dir = fs.ydwe_path() / 'share' / 'ui' / 'unknowui'
+            local dir = fs.ydwe_path() / 'ui' / 'unknowui'
 	    	fs.create_directories(dir)
 	    	io.save(dir / 'define.txt',    bufs[1])
 	    	io.save(dir / 'event.txt',     bufs[2])
