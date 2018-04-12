@@ -116,6 +116,7 @@ local sp  = (S' \t' + P'\xEF\xBB\xBF' + com)^0
 local sps = (S' \t' + P'\xEF\xBB\xBF' + com)^1
 local cl  = com^0 * nl
 local spl = sp * cl
+local finish = P'\0' * P(1)^0
 
 local Keys = {'globals', 'endglobals', 'constant', 'native', 'array', 'and', 'or', 'not', 'type', 'extends', 'function', 'endfunction', 'nothing', 'takes', 'returns', 'call', 'set', 'return', 'if', 'endif', 'elseif', 'else', 'loop', 'endloop', 'exitwhen'}
 for _, key in ipairs(Keys) do
@@ -292,7 +293,7 @@ local Function = P{
     End      = expect(sp * Whole'endfunction', '缺少endfunction') * endline(),
 }
 
-local pjass = expect(sps + cl + Type + Function + Global, P(1), '语法不正确')^0
+local pjass = expect(sps + cl + finish + Type + Function + Global, P(1), '语法不正确')^0
 
 local mt = {}
 setmetatable(mt, mt)
