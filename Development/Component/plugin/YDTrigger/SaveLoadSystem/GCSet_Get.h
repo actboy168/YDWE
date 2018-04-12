@@ -28,7 +28,7 @@
 #  */
 #
 #  define YDHashSetEx(handle, type, table, key, value)       YDTRIGGER_SET_##type##(handle, I2S(table), I2S(key), value)
-#  define YDHashSet(handle, type, table, key, value)         YDTRIGGER_SET_##type##(handle, I2S(table), #key, value)
+#  define YDHashSet(handle, type, table, key, value)         YDTRIGGER_SET_##type##(handle, I2S(table), key, value)
 #  define YDHashSetByString(handle, type, table, key, value) YDTRIGGER_SET_##type##(handle, table, key, value) 
 #                                                                         
 #  define YDTRIGGER_SET_integer                         YDTRIGGER_GCSET_INTEGER
@@ -85,9 +85,9 @@
 #  *
 #  */
 #
-#  define YDTriggerGet(handle, type, table, key)         YDTRIGGER_GET_##type##(handle, I2S(table), I2S(key)) 
-#  define YDTriggerGetEx(handle, type, table, key)       YDTRIGGER_GET_##type##(handle, I2S(table), #key) 
-#  define YDTriggerGetByString(handle, type, table, key) YDTRIGGER_GET_##type##(handle, table, key) 
+#  define YDHashGetEx(handle, type, table, key)         YDTRIGGER_GET_##type##(handle, I2S(table), I2S(key)) 
+#  define YDHashGet(handle, type, table, key)       YDTRIGGER_GET_##type##(handle, I2S(table), key) 
+#  define YDHashGetByString(handle, type, table, key) YDTRIGGER_GET_##type##(handle, table, key) 
 #
 #  define YDTRIGGER_GET_integer                         YDTRIGGER_GCGET_INTEGER
 #  define YDTRIGGER_GET_real                            YDTRIGGER_GCGET_REAL
