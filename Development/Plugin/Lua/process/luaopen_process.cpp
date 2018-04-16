@@ -349,6 +349,31 @@ int luaopen_process(lua_State* L)
 	return 1;
 }
 
+int set_filemode(lua_State* L) {
+	luaL_Stream* p = process::pipe::to(L, 1);
+	const char* mode = luaL_checkstring(L, 2);
+	if (p && p->f) {
+		if (mode[0] == 'b') {
+			_setmode(_fileno(p->f), _O_BINARY);
+		}
+		else {
+			_setmode(_fileno(p->f), _O_TEXT);
+		}
+	}
+	return 0;
+}
+
+extern "C" __declspec(dllexport)
+int luaopen_process_ext(lua_State* L)
+{
+	static luaL_Reg mt[] = {
+		{ "set_filemode", set_filemode },
+		{ NULL, NULL },
+	};
+	luaL_newlib(L, mt);
+	return 1;
+}
+
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 {
 	if (reason == DLL_PROCESS_ATTACH)
