@@ -236,6 +236,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			lua_pushstring(L, "tmpfile");   lua_pushnil(L); lua_rawset(L, -3);
 			lua_pushstring(L, "input");     lua_pushnil(L); lua_rawset(L, -3);
 			lua_pushstring(L, "output");    lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "stdin");     lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "stdout");    lua_pushnil(L); lua_rawset(L, -3);
+			lua_pushstring(L, "stderr");    lua_pushnil(L); lua_rawset(L, -3);
 			lua_pushstring(L, "open");      lua_pushcclosure(L, io_open, 0); lua_rawset(L, -3);
 		}
 		lua_pop(L, 1);
