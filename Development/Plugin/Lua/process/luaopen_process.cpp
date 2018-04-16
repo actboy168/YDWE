@@ -68,9 +68,9 @@ namespace process {
 				return 0;
 			}
 			if (type == 'r') {
-				return push(L, h, _O_RDONLY |_O_TEXT, "rt");
+				return push(L, h, _O_RDONLY | _O_BINARY, "rb");
 			}
-			return push(L, h, _O_WRONLY | _O_TEXT, "wt");
+			return push(L, h, _O_WRONLY | _O_BINARY, "wb");
 		}
 
 		static int peek(lua_State* L, int idx)
