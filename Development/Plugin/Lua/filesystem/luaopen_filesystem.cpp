@@ -495,6 +495,7 @@ int luaopen_filesystem(lua_State* L)
 		{ "__eq", luafs::path::mt_eq },
 		{ "__gc", luafs::path::destructor },
 		{ "__tostring", luafs::path::mt_tostring },
+		{ "__debugger_tostring", luafs::path::mt_tostring },
 		{ NULL, NULL }
 	};
 	luaL_newmetatable(L, "filesystem");
