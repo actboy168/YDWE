@@ -1,6 +1,5 @@
-#include <base/hook/replace_import.h>
+#include <base/hook/replacedll.h>
 #include <memory>
-#include <strsafe.h>
 
 namespace base { namespace hook {
 
@@ -98,7 +97,7 @@ namespace base { namespace hook {
 		return (dw + 7) & ~7u;
 	}
 
-	bool replace_import(HANDLE hProcess, const char* oldDll, const char* newDll)
+	bool replacedll(HANDLE hProcess, const char* oldDll, const char* newDll)
 	{
 		PBYTE pbModule = (PBYTE)FindExe(hProcess);
 		IMAGE_DOS_HEADER idh = { 0 };
@@ -168,8 +167,8 @@ namespace base { namespace hook {
 			return false;
 		}
 		PIMAGE_IMPORT_DESCRIPTOR piid = (PIMAGE_IMPORT_DESCRIPTOR)pbNew.get();
-		HRESULT hrRet = StringCchCopyA((char*)pbNew.get() + obStr, cbNew - obStr, newDll);
-		if (FAILED(hrRet)) {
+		errno_t err = strcpy_s((char*)pbNew.get() + obStr, cbNew - obStr, newDll);
+		if (err) {
 			return false;
 		}
 		CHAR szTemp[MAX_PATH];

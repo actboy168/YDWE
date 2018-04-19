@@ -117,7 +117,7 @@
     <ClCompile Include="base\hook\dyn_iat.cpp" />
     <ClCompile Include="base\hook\injectdll.cpp" />
     <ClCompile Include="base\hook\patch.cpp" />
-    <ClCompile Include="base\hook\replace_import.cpp" />
+    <ClCompile Include="base\hook\replacedll.cpp" />
     <ClCompile Include="base\hook\udis86\udis86.c" />
     <ClCompile Include="base\hook\udis86\udis86_decode.c" />
     <ClCompile Include="base\hook\udis86\udis86_itab.c" />
@@ -210,7 +210,7 @@
     <ClInclude Include="base\hook\injectdll.h" />
     <ClInclude Include="base\hook\inline.h" />
     <ClInclude Include="base\hook\patch.h" />
-    <ClInclude Include="base\hook\replace_import.h" />
+    <ClInclude Include="base\hook\replacedll.h" />
     <ClInclude Include="base\hook\udis86\udis86.h" />
     <ClInclude Include="base\hook\udis86\udis86_decode.h" />
     <ClInclude Include="base\hook\udis86\udis86_itab.h" />

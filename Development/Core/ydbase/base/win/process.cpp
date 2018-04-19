@@ -1,8 +1,7 @@
 #include <base/win/process.h>
 #include <base/hook/injectdll.h>   
-#include <base/hook/replace_import.h>
-#include <base/util/dynarray.h>	  
-#include <base/util/foreach.h>
+#include <base/hook/replacedll.h>
+#include <base/util/dynarray.h>
 #include <Windows.h>
 #include <memory>
 #include <deque>
@@ -28,10 +27,10 @@ namespace base { namespace win {
 			LPPROCESS_INFORMATION          process_information,
 			const fs::path&                injectdll_x86,
 			const fs::path&                injectdll_x64,
-			const std::map<std::string, fs::path>& replace_dll
+			const std::map<std::string, fs::path>& replacedll
 		)
 		{
-			bool pause = !replace_dll.empty();
+			bool pause = !replacedll.empty();
 			bool suc = false;
 			if (fs::exists(injectdll_x86) || fs::exists(injectdll_x64))
 			{
@@ -72,11 +71,11 @@ namespace base { namespace win {
 				);
 			}
 
-			if (suc && !replace_dll.empty())
+			if (suc && !replacedll.empty())
 			{
-				foreach(auto it, replace_dll)
+				for (auto it = replacedll.begin(); it != replacedll.end(); ++it)
 				{
-					hook::replace_import(process_information->hProcess, it.first.c_str(), it.second.string().c_str());
+					hook::replacedll(process_information->hProcess, it->first.c_str(), it->second.string().c_str());
 				}
 			}
 
@@ -300,7 +299,7 @@ namespace base { namespace win {
 	{
 		if (statue_ == PROCESS_STATUE_READY)
 		{
-			replace_dll_[dllname] = dllpath;
+			replacedll_[dllname] = dllpath;
 			return true;
 		}
 		return false;
@@ -391,7 +390,7 @@ namespace base { namespace win {
 				flags_ | NORMAL_PRIORITY_CLASS,
 				environment.get(),
 				current_directory ? current_directory->c_str() : nullptr,
-				&si_, &pi_, injectdll_x86_, injectdll_x64_, replace_dll_
+				&si_, &pi_, injectdll_x86_, injectdll_x64_, replacedll_
 				))
 			{
 				return false;

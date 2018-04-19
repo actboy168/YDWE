@@ -62,7 +62,7 @@ namespace base { namespace win {
 #pragma warning(disable:4251)
 		fs::path injectdll_x86_;
 		fs::path injectdll_x64_;
-		std::map<std::string, fs::path> replace_dll_;
+		std::map<std::string, fs::path> replacedll_;
 		std::map<std::wstring, std::wstring, ignore_case::less<std::wstring>> set_env_;
 		std::set<std::wstring, ignore_case::less<std::wstring>>               del_env_;
 #pragma warning(pop)

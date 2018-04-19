@@ -239,9 +239,6 @@
     <ClCompile Include="base\warcraft3\message_dispatch.cpp">
       <Filter>base\warcraft3</Filter>
     </ClCompile>
-    <ClCompile Include="base\hook\replace_import.cpp">
-      <Filter>base\hook</Filter>
-    </ClCompile>
     <ClCompile Include="base\hook\udis86\udis86_itab.c">
       <Filter>base\hook\udis86</Filter>
     </ClCompile>
@@ -265,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="base\path\ydwe.cpp">
       <Filter>base\path</Filter>
+    </ClCompile>
+    <ClCompile Include="base\hook\replacedll.cpp">
+      <Filter>base\hook</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -533,9 +533,6 @@
     <ClInclude Include="base\warcraft3\message_dispatch.h">
       <Filter>base\warcraft3</Filter>
     </ClInclude>
-    <ClInclude Include="base\hook\replace_import.h">
-      <Filter>base\hook</Filter>
-    </ClInclude>
     <ClInclude Include="base\hook\udis86\udis86_itab.h">
       <Filter>base\hook\udis86</Filter>
     </ClInclude>
@@ -598,6 +595,9 @@
     </ClInclude>
     <ClInclude Include="base\path\ydwe.h">
       <Filter>base\path</Filter>
+    </ClInclude>
+    <ClInclude Include="base\hook\replacedll.h">
+      <Filter>base\hook</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
