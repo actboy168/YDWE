@@ -2,7 +2,7 @@
 //
 //  Module Enumeration Functions (modules.cpp of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_343.
+//  Microsoft Research Detours Package, Version 4.0.1
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -34,7 +34,7 @@
 #define DETOURS_INTERNAL
 #include "detours.h"
 
-#if DETOURS_VERSION != 30001
+#if DETOURS_VERSION != 0x4c0c1   // 0xMAJORcMINORcPATCH
 #error detours.h version mismatch
 #endif
 
@@ -828,9 +828,9 @@ PVOID WINAPI DetourFindPayload(_In_opt_ HMODULE hModule,
 
                 if (pcbData) {
                     *pcbData = pSection->cbBytes - sizeof(*pSection);
+                    SetLastError(NO_ERROR);
+                    return (PBYTE)(pSection + 1);
                 }
-                SetLastError(NO_ERROR);
-                return (PBYTE)(pSection + 1);
             }
 
             pbData = (PBYTE)pSection + pSection->cbBytes;

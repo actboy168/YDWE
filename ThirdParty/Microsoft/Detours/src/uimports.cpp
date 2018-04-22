@@ -2,7 +2,7 @@
 //
 //  Add DLLs to a module import table (uimports.cpp of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_343.
+//  Microsoft Research Detours Package, Version 4.0.1
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -10,7 +10,7 @@
 //  (once for each supported module format).
 //
 
-#if DETOURS_VERSION != 30001
+#if DETOURS_VERSION != 0x4c0c1   // 0xMAJORcMINORcPATCH
 #error detours.h version mismatch
 #endif
 

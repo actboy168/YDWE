@@ -2,7 +2,7 @@
 //
 //  Core Detours Functionality (detours.h of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_343.
+//  Microsoft Research Detours Package, Version 4.0.1
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -11,7 +11,7 @@
 #ifndef _DETOURS_H_
 #define _DETOURS_H_
 
-#define DETOURS_VERSION     30001   // 3.00.01
+#define DETOURS_VERSION     0x4c0c1   // 0xMAJORcMINORcPATCH
 
 //////////////////////////////////////////////////////////////////////////////
 //

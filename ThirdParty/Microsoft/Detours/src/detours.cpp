@@ -2,7 +2,7 @@
 //
 //  Core Detours Functionality (detours.cpp of detours.lib)
 //
-//  Microsoft Research Detours Package, Version 3.0 Build_343.
+//  Microsoft Research Detours Package, Version 4.0.1
 //
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 //
@@ -26,7 +26,7 @@
 
 #include "detours.h"
 
-#if DETOURS_VERSION != 30001
+#if DETOURS_VERSION != 0x4c0c1   // 0xMAJORcMINORcPATCH
 #error detours.h version mismatch
 #endif
 
@@ -833,10 +833,15 @@ inline void detour_find_jmp_bounds(PBYTE pbCode,
                                    PDETOUR_TRAMPOLINE *ppLower,
                                    PDETOUR_TRAMPOLINE *ppUpper)
 {
-    (void)pbCode;
-    *ppLower = (PDETOUR_TRAMPOLINE)(ULONG_PTR)0x00080000;
-    *ppUpper = (PDETOUR_TRAMPOLINE)(ULONG_PTR)0xfff80000;
+    // We have to place trampolines within +/- 2GB of code.
+    ULONG_PTR lo = detour_2gb_below((ULONG_PTR)pbCode);
+    ULONG_PTR hi = detour_2gb_above((ULONG_PTR)pbCode);
+    DETOUR_TRACE(("[%p..%p..%p]\n", lo, pbCode, hi));
+
+    *ppLower = (PDETOUR_TRAMPOLINE)lo;
+    *ppUpper = (PDETOUR_TRAMPOLINE)hi;
 }
+
 
 inline BOOL detour_does_code_end_function(PBYTE pbCode)
 {
@@ -888,7 +893,7 @@ struct _DETOUR_TRAMPOLINE
 C_ASSERT(sizeof(_DETOUR_TRAMPOLINE) == 120);
 
 enum {
-    SIZE_OF_JMP = 16
+    SIZE_OF_JMP = 8
 };
 
 inline ULONG fetch_opcode(PBYTE pbCode)
@@ -910,7 +915,7 @@ PBYTE detour_gen_jmp_immediate(PBYTE pbCode, PBYTE *ppPool, PBYTE pbJmpVal)
         pbLiteral = *ppPool;
     }
     else {
-        pbLiteral = pbCode + 8;
+        pbLiteral = pbCode + 2*4;
     }
 
     *((PBYTE*&)pbLiteral) = pbJmpVal;
@@ -967,15 +972,6 @@ inline PBYTE detour_skip_jmp(PBYTE pbCode, PVOID *ppGlobals)
         }
     }
     return pbCode;
-}
-
-inline void detour_find_jmp_bounds(PBYTE pbCode,
-                                   PDETOUR_TRAMPOLINE *ppLower,
-                                   PDETOUR_TRAMPOLINE *ppUpper)
-{
-    (void)pbCode;
-    *ppLower = (PDETOUR_TRAMPOLINE)(ULONG_PTR)0x0000000000080000;
-    *ppUpper = (PDETOUR_TRAMPOLINE)(ULONG_PTR)0xfffffffffff80000;
 }
 
 inline BOOL detour_does_code_end_function(PBYTE pbCode)

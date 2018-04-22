@@ -2,7 +2,7 @@
 ##
 ##  Makefile for Detours.
 ##
-##  Microsoft Research Detours Package, Version 3.0.
+##  Microsoft Research Detours Package
 ##
 ##  Copyright (c) Microsoft Corporation.  All rights reserved.
 ##
