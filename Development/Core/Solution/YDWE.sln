@@ -83,7 +83,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua53", "..\..\..\OpenSourc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wow64ext", "..\..\..\OpenSource\wow64ext\src\wow64ext.vcxproj", "{9DA7F232-0096-45BC-A452-24C7F3AFA0F8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Detours", "..\..\..\OpenSource\Detours\sln\Detours.vcxproj", "{198D08D6-92BA-46E3-B430-8351244FB61C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Detours", "..\..\..\OpenSource\Detours\project\Detours.vcxproj", "{198D08D6-92BA-46E3-B430-8351244FB61C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -287,10 +287,12 @@ Global
 		{9DA7F232-0096-45BC-A452-24C7F3AFA0F8}.Release|x64.ActiveCfg = Release|Win32
 		{198D08D6-92BA-46E3-B430-8351244FB61C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{198D08D6-92BA-46E3-B430-8351244FB61C}.Debug|Win32.Build.0 = Debug|Win32
-		{198D08D6-92BA-46E3-B430-8351244FB61C}.Debug|x64.ActiveCfg = Debug|Win32
+		{198D08D6-92BA-46E3-B430-8351244FB61C}.Debug|x64.ActiveCfg = Debug|x64
+		{198D08D6-92BA-46E3-B430-8351244FB61C}.Debug|x64.Build.0 = Debug|x64
 		{198D08D6-92BA-46E3-B430-8351244FB61C}.Release|Win32.ActiveCfg = Release|Win32
 		{198D08D6-92BA-46E3-B430-8351244FB61C}.Release|Win32.Build.0 = Release|Win32
-		{198D08D6-92BA-46E3-B430-8351244FB61C}.Release|x64.ActiveCfg = Release|Win32
+		{198D08D6-92BA-46E3-B430-8351244FB61C}.Release|x64.ActiveCfg = Release|x64
+		{198D08D6-92BA-46E3-B430-8351244FB61C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -303,7 +303,7 @@
     <None Include="base\util\detail\utf8_codecvt.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\OpenSource\Detours\sln\Detours.vcxproj">
+    <ProjectReference Include="..\..\..\OpenSource\Detours\project\Detours.vcxproj">
       <Project>{198d08d6-92ba-46e3-b430-8351244fb61c}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\OpenSource\wow64ext\src\wow64ext.vcxproj">
