@@ -63,8 +63,8 @@
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>$(OpenSource)\minhook\include\;$(OpenSource)\wow64ext\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>DISABLE_DETOURS;YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(OpenSource)\detours\src\;$(OpenSource)\wow64ext\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <BaseAddress>
@@ -94,8 +94,8 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
-      <AdditionalIncludeDirectories>$(OpenSource)\minhook\include\;$(OpenSource)\wow64ext\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>DISABLE_DETOURS;YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(OpenSource)\detours\src\;$(OpenSource)\wow64ext\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link />
     <Bscmake>
@@ -303,8 +303,8 @@
     <None Include="base\util\detail\utf8_codecvt.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\OpenSource\minhook\build\VC15\libMinHook.vcxproj">
-      <Project>{f142a341-5ee0-442d-a15f-98ae9b48dbae}</Project>
+    <ProjectReference Include="..\..\..\OpenSource\Detours\sln\Detours.vcxproj">
+      <Project>{198d08d6-92ba-46e3-b430-8351244fb61c}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\OpenSource\wow64ext\src\wow64ext.vcxproj">
       <Project>{9da7f232-0096-45bc-a452-24c7f3afa0f8}</Project>

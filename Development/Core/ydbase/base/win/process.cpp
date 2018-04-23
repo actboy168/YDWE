@@ -35,7 +35,7 @@ namespace base { namespace win {
 			if (fs::exists(injectdll_x86) || fs::exists(injectdll_x64))
 			{
 				pause = true;
-#if !defined(DISABLE_DETOURS)
+#if 0
 				suc = !!DetourCreateProcessWithDllW(
 					application, command_line,
 					NULL, NULL,
