@@ -1,5 +1,5 @@
 /*
-** $Id: lapi.c,v 2.258 2016/01/05 16:07:21 roberto Exp roberto $
+** $Id: lapi.c,v 2.259 2016/02/29 14:27:14 roberto Exp $
 ** Lua API
 ** See Copyright Notice in lua.h
 */
@@ -1294,3 +1294,5 @@ LUA_API void lua_upvaluejoin (lua_State *L, int fidx1, int n1,
   if (upisopen(*up1)) (*up1)->u.open.touched = 1;
   luaC_upvalbarrier(L, *up1);
 }
+
+
