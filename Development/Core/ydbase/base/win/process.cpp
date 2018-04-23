@@ -5,11 +5,9 @@
 #include <Windows.h>
 #include <memory>
 #include <deque>
-#include <strsafe.h>
-#include <cassert>
+#include <assert.h>
 #if !defined(DISABLE_DETOURS)
-#include <detours.h>	  
-#pragma comment(lib, "detours.lib")
+#include <detours.h>
 #endif
 
 namespace base { namespace win {
