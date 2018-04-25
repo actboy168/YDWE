@@ -699,3 +699,10 @@ void luaG_traceexec (lua_State *L) {
   }
 }
 
+const void* lua_getproto(lua_State *L, int idx) {
+	const LClosure *c;
+	if (!lua_isfunction(L, idx) || lua_iscfunction(L, idx))
+		return 0;
+	c = lua_topointer(L, idx);
+	return c->p;
+}
