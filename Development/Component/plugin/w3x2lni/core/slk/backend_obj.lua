@@ -1,4 +1,5 @@
 local w3xparser = require 'w3xparser'
+local lang = require 'lang'
 
 local table_insert = table.insert
 local table_sort   = table.sort
@@ -20,13 +21,13 @@ local wts
 local ttype
 
 local displaytype = {
-    unit = '单位',
-    ability = '技能',
-    item = '物品',
-    buff = '魔法效果',
-    upgrade = '科技',
-    doodad = '装饰物',
-    destructable = '可破坏物',
+    unit = lang.script.UNIT,
+    ability = lang.script.ABILITY,
+    item = lang.script.ITEM,
+    buff = lang.script.BUFF,
+    upgrade = lang.script.UPGRADE,
+    doodad = lang.script.DOODAD,
+    destructable = lang.script.DESTRUCTABLE,
 }
 
 local function get_displayname(o)
@@ -56,8 +57,7 @@ local function format_value(value)
 end
 
 local function report(reason, obj, key, tip)
-    w2l.message('-report|6%s', ('%s %s %s'):format(reason, displaytype[ttype], get_displayname(obj)))
-    w2l.message('-tip', ('[%s]: %s'):format(key, format_value(tip)))
+    w2l.messager.report(reason, 6, ('%s %s %s'):format(displaytype[ttype], get_displayname(obj)), ('[%s]: %s'):format(key, format_value(tip)))
 end
 
 local function write(format, ...)
@@ -84,7 +84,7 @@ local function write_value(meta, level, value)
         write('f', value)
     else
         if #value > 1023 then
-            value = w2l:save_wts(wts, value, '物编里的文本长度超过1023字符')
+            value = w2l:save_wts(wts, value, lang.script.TEXT_TOO_LONG_IN_OBJ)
         end
         write('z', value)
     end
@@ -139,12 +139,16 @@ local function write_object(chunk, name, obj)
     for _, key in ipairs(keys) do
         local data = obj[key]
         if data then
-            if type(data) == 'table' then
-                for _ in pairs(data) do
+            if metas[key] then
+                if type(data) == 'table' then
+                    for _ in pairs(data) do
+                        count = count + 1
+                    end
+                else
                     count = count + 1
                 end
             else
-                count = count + 1
+                report(lang.report.INVALID_OBJECT_DATA, obj, key, obj[key])
             end
         end
     end
@@ -163,8 +167,6 @@ local function write_object(chunk, name, obj)
         if data then
             if metas[key] then
                 write_data(key, obj[key], metas[key])
-            else
-                report('-report|6无效的物编数据', obj, key, obj[key])
             end
         end
     end
@@ -178,7 +180,7 @@ local function write_chunk(names, data, n, max)
         if os_clock() - clock > 0.1 then
             clock = os_clock()
             w2l.progress((i+n) / max)
-            w2l.message(('正在转换%s: [%s] (%d/%d)'):format(ttype, data[name]._id, i+n, max))
+            w2l.messager.text(lang.script.CONVERT_FILE:format(ttype, data[name]._id, i+n, max))
         end
     end
 end
@@ -216,7 +218,7 @@ local function sort_chunk(chunk, remove_unuse_object)
     local user = {}
     for name, obj in pairs(chunk) do
         if #name ~= 4 then
-            w2l.message('-report|6无效的物编对象', ('[%s] %s'):format(name, '对象ID不合法'))
+            w2l.messager.report(lang.report.INVALID_OBJECT, 6, ('[%s] %s'):format(name, lang.report.INVALID_OBJECT_ID))
         elseif is_enable_obj(obj, remove_unuse_object) then
             local parent = obj._slk_id or obj._parent
             if (name == parent or obj._slk) and not obj._slk_id then

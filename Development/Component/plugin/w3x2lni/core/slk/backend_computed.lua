@@ -1,13 +1,14 @@
+local lang = require 'lang'
 local w2l
 
 local displaytype = {
-    unit = '单位',
-    ability = '技能',
-    item = '物品',
-    buff = '魔法效果',
-    upgrade = '科技',
-    doodad = '装饰物',
-    destructable = '可破坏物',
+    unit = lang.script.UNIT,
+    ability = lang.script.ABILITY,
+    item = lang.script.ITEM,
+    buff = lang.script.BUFF,
+    upgrade = lang.script.UPGRADE,
+    doodad = lang.script.DOODAD,
+    destructable = lang.script.DESTRUCTABLE,
 }
 
 local function get_displayname(o)
@@ -19,7 +20,7 @@ local function get_displayname(o)
     else
         name = o.name or ''
     end
-    return displaytype[o._type], o._id, (name:sub(1, 100):gsub('\r\n', ' '))
+    return displaytype[o._type], o._id, name:sub(1, 100):gsub('\r\n', ' ')
 end
 
 local function get_displayname_by_id(slk, id)
@@ -31,7 +32,7 @@ local function get_displayname_by_id(slk, id)
            or slk.doodad[id]
            or slk.upgrade[id]
     if not o then
-        return '未知', id, '<unknown>'
+        return lang.script.UNKNOW, id, '<unknown>'
     end
     return get_displayname(o)
 end
@@ -81,8 +82,7 @@ local function computed_value(slk, str, name, field)
            or slk.item[id]
            or slk.upgrade[id]
     if not o then
-        w2l.message('-report|5公式计算失败', get_displayname_by_id(slk, name))
-        w2l.message('-tip', ('%s: <%s>'):format(field, str))
+        w2l.messager.report(lang.report.COMPUTED_TEXT_FAILED, 5, ('%s %s %s'):format(get_displayname_by_id(slk, name)), ('%s: <%s>'):format(field, str))
         return
     end
     key = key:lower()
@@ -112,8 +112,7 @@ local function computed_value(slk, str, name, field)
         end
         return math.floor(res)
     end
-    w2l.message('-report|5公式计算失败', get_displayname_by_id(slk, id))
-    w2l.message('-tip', ('%s: <%s>'):format(field, str))
+    w2l.messager.report(lang.report.COMPUTED_TEXT_FAILED, 5, ('%s %s %s'):format(get_displayname_by_id(slk, id)), ('%s: <%s>'):format(field, str))
     return res
 end
 

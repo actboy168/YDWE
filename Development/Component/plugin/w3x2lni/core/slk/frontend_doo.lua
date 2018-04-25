@@ -1,3 +1,4 @@
+local lang = require 'lang'
 local w2l
 local hex
 local unpack_pos
@@ -18,15 +19,15 @@ end
 local function unpack_head()
     local flag = unpack 'c4'
     if flag ~= 'W3do' then
-        error('不支持的文件类型:'..flag)
+        error(lang.report.UNSUPPORT_FILE_TYPE..flag)
     end
     local version = unpack 'l'
     if version ~= 8 then
-        error('不支持的版本:'..version)
+        error(lang.report.UNSUPPORT_VERSION..version)
     end
     local unknow = unpack 'l'
     if unknow ~= 11 then
-        error('未知值不正确:'..unknow)
+        error(lang.report.UNSUPPORT_UNKNOWN_VALUE..unknow)
     end
 end
 
@@ -85,7 +86,7 @@ end
 local function unpack_special_head()
     local version = unpack 'l'
     if version ~= 0 then
-        error('不支持的版本:'..version)
+        error(lang.report.UNSUPPORT_VERSION..version)
     end
 end
 

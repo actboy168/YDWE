@@ -1,4 +1,5 @@
 local w3xparser = require 'w3xparser'
+local lang = require 'lang'
 
 local table_concat = table.concat
 local ipairs = ipairs
@@ -29,13 +30,13 @@ local all_slk
 local used
 
 local displaytype = {
-    unit = '单位',
-    ability = '技能',
-    item = '物品',
-    buff = '魔法效果',
-    upgrade = '科技',
-    doodad = '装饰物',
-    destructable = '可破坏物',
+    unit = lang.script.UNIT,
+    ability = lang.script.ABILITY,
+    item = lang.script.ITEM,
+    buff = lang.script.BUFF,
+    upgrade = lang.script.UPGRADE,
+    doodad = lang.script.DOODAD,
+    destructable = lang.script.DESTRUCTABLE,
 }
 
 local function get_displayname(o)
@@ -189,7 +190,7 @@ local function add_values(names, skeys, slk_name)
         if os_clock() - clock > 0.1 then
             clock = os_clock()
             w2l.progress(y / #names)
-            w2l.message(('正在转换: [%s] (%d/%d)'):format(name, y, #names))
+            w2l.messager.text(lang.script.CONVERT_FILE:format(slk_type, name, y, #names))
         end
     end
 end
@@ -291,7 +292,7 @@ local function load_data(meta, obj, key, slk_data, obj_data)
                 local value = to_type(tp, obj[key][i])
                 if value and tp == 3 and not is_usable_string(value) then
                     obj_data[key][i] = value
-                    report_failed(obj, displaykey, '字符串可以被转换为数字', value)
+                    report_failed(obj, displaykey, lang.report.STRING_CAN_CONVERT_NUMBER, value)
                 else
                     slk_data[('%s%02d'):format(displaykey, i)] = value
                 end
@@ -307,20 +308,20 @@ local function load_data(meta, obj, key, slk_data, obj_data)
                 local value = to_type(tp, obj[key][i])
                 if value and tp == 3 and not is_usable_string(value) then
                     obj_data[key][i] = value
-                    report_failed(obj, displaykey, '字符串可以被转换为数字', value)
+                    report_failed(obj, displaykey, lang.report.STRING_CAN_CONVERT_NUMBER, value)
                 else
                     slk_data[displaykey..i] = value
                 end
             end
         end
         if over_level then
-            report_failed(obj, displaykey, '数据超过了4级', '')
+            report_failed(obj, displaykey, lang.report.DATA_LEVEL_TOO_HIGHT, '')
         end
     else
         local value = to_type(tp, obj[key])
         if value and tp == 3 and not is_usable_string(value) then
             obj_data[key] = value
-            report_failed(obj, displaykey, '字符串可以被转换为数字', value)
+            report_failed(obj, displaykey, lang.report.STRING_CAN_CONVERT_NUMBER, value)
         else
             slk_data[displaykey] = value
         end
@@ -344,7 +345,7 @@ local function load_obj(id, obj, slk_name)
     if not obj._slk_id and not is_usable_string(obj._id) then
         obj._slk_id = find_unused_id()
         obj_data._slk_id = obj._slk_id
-        report_failed(obj, 'id', '对象ID可以被转换为数字', '')
+        report_failed(obj, 'id', lang.report.OBJECT_ID_CAN_CONVERT_NUMBER, '')
         if not obj._slk_id then
             return nil
         end

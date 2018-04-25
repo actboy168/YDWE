@@ -1,5 +1,6 @@
 local lpeg = require 'lpeg'
 local w3xparser = require 'w3xparser'
+local lang = require 'lang'
 local wtonumber = w3xparser.tonumber
 local ids
 local marks
@@ -78,16 +79,13 @@ local function fbj(id)
     end
     if need_mark[id] then
         if need_mark[id] == 'creeps' and not marks.creeps then
-            w2l.message('-report|4简化', '保留野怪单位')
-            w2l.message('-tip', ("脚本里的'%s'引用了它"):format(id))
+            w2l.messager.report(lang.report.SIMPLIFY, 4, lang.report.RETAIN_CREEP_UNIT, (lang.report.REFERENCE_BY_JASS):format(id))
         end
         if need_mark[id] == 'building' and not marks.building then
-            w2l.message('-report|4简化', '保留野怪建筑')
-            w2l.message('-tip', ("脚本里的'%s'引用了它"):format(id))
+            w2l.messager.report(lang.report.SIMPLIFY, 4, lang.report.RETAIN_CREEP_BUILDING, (lang.report.REFERENCE_BY_JASS):format(id))
         end
         if need_mark[id] == 'item' and not marks.item then
-            w2l.message('-report|4简化', '保留可随机物品')
-            w2l.message('-tip', ("脚本里的'%s'引用了它"):format(id))
+            w2l.messager.report(lang.report.SIMPLIFY, 4, lang.report.RETAIN_RANDOM_ITEM, (lang.report.REFERENCE_BY_JASS):format(id))
         end
         marks[need_mark[id]] = true
     end
@@ -123,7 +121,7 @@ local function err(str)
 end
 
 local word = sp * (real + int + str + id) * sp
-local pjass = (ign + word + S'=+-*/><!()[],' + err'语法错误，可能是地图保存失败了。')^0
+local pjass = (ign + word + S'=+-*/><!()[],' + err(lang.report.SYNTAX_ERROR))^0
 
 return function (w2l_)
     w2l = w2l_
@@ -137,6 +135,10 @@ return function (w2l_)
     ids = {}
     marks = {}
     line_count = 0
-    pjass:match(buf)
+    local suc, err = pcall(pjass.match, pjass, buf)
+    if not suc then
+        w2l.messager.report(lang.report.ERROR, 1, lang.report.SYNTAX_ERROR, err:match '[\r\n]+(.+)$')
+        return
+    end
     return ids, marks
 end

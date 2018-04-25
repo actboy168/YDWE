@@ -1,3 +1,4 @@
+local lang = require 'lang'
 local w2l
 local wtg
 local wts
@@ -6,26 +7,26 @@ local state1
 local pack_eca
 
 local type_map = {
-    ['列表'] = -1,
-    ['事件'] = 0,
-    ['条件'] = 1,
-    ['动作'] = 2,
-    ['函数'] = 3,
+    [lang.lml.LIST] = -1,
+    [lang.lml.EVENT] = 0,
+    [lang.lml.CONDITION] = 1,
+    [lang.lml.ACTION] = 2,
+    [lang.lml.CALL] = 3,
 }
 
 local type_key = {
-    ['事件'] = 'event',
-    ['条件'] = 'condition',
-    ['动作'] = 'action',
-    ['函数'] = 'call',
+    [lang.lml.EVENT] = 'event',
+    [lang.lml.CONDITION] = 'condition',
+    [lang.lml.ACTION] = 'action',
+    [lang.lml.CALL] = 'call',
 }
 
 local arg_type_map = {
-    ['禁用'] = -1,
-    ['预设'] = 0,
-    ['变量'] = 1,
-    ['函数'] = 2,
-    ['常量'] = 3,
+    [lang.lml.DISABLE] = -1,
+    [lang.lml.PRESET] = 0,
+    [lang.lml.VARIABLE] = 1,
+    [lang.lml.CALL] = 2,
+    [lang.lml.CONSTANT] = 3,
 }
 
 local function pack(fmt, ...)
@@ -53,10 +54,10 @@ local function pack_var(var)
     local value = ''
     for i = 3, #var do
         local k, v = var[i][1], var[i][2]
-        if k == '数组' then
+        if k == lang.lml.ARRAY then
             array = 1
             size = v
-        elseif k == '默认' then
+        elseif k == lang.lml.DEFAULT then
             default = 1
             value = v
         end
@@ -76,21 +77,21 @@ local function pack_arg(arg)
     local value = arg[2]
     local array = false
     if type_map[type] then
-        type = '函数'
-        if type_map[type] ~= '函数' then
+        type = lang.lml.CALL
+        if type_map[type] ~= lang.lml.CALL then
             value = ''
         end
-    elseif type == '数组' then
+    elseif type == lang.lml.ARRAY then
         array = true
-        type = '变量'
+        type = lang.lml.CONSTANT
     end
-    if type == '常量' then
-        value = w2l:load_wts(wts, value, 299, '触发器里的文本长度超过299字符', function(str)
+    if type == lang.lml.CONSTANT then
+        value = w2l:load_wts(wts, value, 299, lang.script.TEXT_TOO_LONG_IN_WTG, function(str)
             return str:gsub('\\', '\\\\'):gsub('"', '\\"')
         end)
     end
     pack('lz', arg_type_map[type], value)
-    if type == '函数' then
+    if type == lang.lml.CALL then
         pack('l', 1)
         pack_eca(arg)
     else
@@ -132,7 +133,7 @@ local function pack_args(ui, eca)
 
     if ui then
         if eca_arg_count ~= get_ui_arg_count(ui) then
-            error(('[%s]的参数数量不正确：[%d] - [%d]'):format(ui.name, get_ui_arg_count(ui), eca_arg_count))
+            error(lang.script.WTG_ERROR_ARG:format(ui.name, get_ui_arg_count(ui), eca_arg_count))
         end
     end
 end
@@ -164,16 +165,16 @@ end
 
 function pack_eca(eca, child_id, eca_type)
     local name
-    local type = eca_type or '函数'
+    local type = eca_type or lang.lml.CALL
     local enable = 1
     if eca[2] then
         name = eca[2]
-        if eca[1] == '禁用' then
+        if eca[1] == lang.lml.DISABLE then
             enable = 0
         elseif type_map[eca[1]] then
             type = eca[1]
         else
-            w2l.message('未知的动作属性', eca[1], #hex)
+            w2l.messager.text(lang.script.WTG_UNKNOWN_ACTION_STATE:format(eca[1], #hex))
         end
     else
         name = eca[1]
@@ -182,7 +183,7 @@ function pack_eca(eca, child_id, eca_type)
     if state then
         ui = state.ui[type_key[type]][name]
         if not ui then
-            error(('UI不存在：[%s]'):format(name))
+            error(lang.script.WTG_UI_NOT_FOUND:format(name))
         end
     end
     if child_id then

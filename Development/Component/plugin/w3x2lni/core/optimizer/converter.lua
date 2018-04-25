@@ -1,6 +1,7 @@
 local lines
 local jass
 local report
+local messager
 
 local current_function
 local get_exp
@@ -286,7 +287,7 @@ function get_exp(exp, op, pos)
         end
         return value
     end
-    print('未知的表达式类型', exp.type)
+    messager('未知的表达式类型', exp.type)
     return nil
 end
 
@@ -434,7 +435,7 @@ local function add_ifs(chunk)
         elseif data.type == 'else' then
             add_else(data)
         else
-            print('未知的判断类型', line.type)
+            messager('未知的判断类型', line.type)
         end
     end
     insert_line('endif')
@@ -464,7 +465,7 @@ function add_lines(chunk)
         elseif line.type == 'loop' then
             add_loop(line)
         else
-            print('未知的代码行类型', line.type)
+            messager('未知的代码行类型', line.type)
         end
     end
 end
@@ -520,10 +521,11 @@ local function add_functions()
     end
 end
 
-return function (ast, _report)
+return function (ast, _report, _messager)
     lines = {}
     jass = ast
     report = _report
+    messager = _messager
     
     add_globals()
     add_functions()

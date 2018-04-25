@@ -1,6 +1,7 @@
 local mpq = require 'map-builder.archive_mpq'
 local dir = require 'map-builder.archive_dir'
 local search = require 'map-builder.search'
+local lang = require 'tool.lang'
 
 local os_clock = os.clock
 
@@ -47,8 +48,9 @@ function mt:save(w3i, w2l)
     for _ in pairs(self) do
         max = max + 1
     end
-    if not self.handle:save(self.path, w3i, max, w2l.config.remove_we_only) then
-        return false
+    local suc, res = self.handle:save(self.path, w3i, max, w2l.config.remove_we_only)
+    if not suc then
+        return false, res
     end
     local clock = os_clock()
     local count = 0
@@ -59,9 +61,9 @@ function mt:save(w3i, w2l)
             clock = os_clock()
             progress(count / max)
             if self:get_type() == 'mpq' then
-                print(('正在打包文件... (%d/%d)'):format(count, max))
+                messager.text(lang.script.PACK_MAP:format(count, max))
             else
-                print(('正在导出文件... (%d/%d)'):format(count, max))
+                messager.text(lang.script.EXPORT_FILE:format(count, max))
             end
         end
     end
@@ -169,7 +171,11 @@ function mt:search_files(progress)
 end
 
 return function (pathorhandle, tp)
+    if not pathorhandle then
+        return nil
+    end
     local read_only = tp ~= 'w'
+    local err
     local ar = {
         write_cache = {},
         read_cache = {},
@@ -177,21 +183,20 @@ return function (pathorhandle, tp)
         _read = read_only,
     }
     if type(pathorhandle) == 'number' then
-        ar.handle = mpq(pathorhandle)
+        ar.handle, err = mpq(pathorhandle)
         ar._type = 'mpq'
         ar._attach = true
         ar._read = false
     elseif read_only then
         if fs.is_directory(pathorhandle) then
-            ar.handle = dir(pathorhandle)
+            ar.handle, err = dir(pathorhandle)
             ar._type = 'dir'
         else
-            ar.handle = mpq(pathorhandle, true)
+            ar.handle, err = mpq(pathorhandle, true)
             ar._type = 'mpq'
         end
         if not ar.handle then
-            print('地图打开失败')
-            return nil
+            return nil, err or lang.script.OPEN_FAILED
         end
     else
         if fs.is_directory(pathorhandle) then

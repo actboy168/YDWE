@@ -1,4 +1,5 @@
 local w3xparser = require 'w3xparser'
+local lang = require 'tool.lang'
 
 local function build_imp(w2l, output_ar, imp_buf)
     local impignore = {}
@@ -70,7 +71,7 @@ return function (w2l, output_ar, w3i, input_ar)
         if type == 'resource' and w2l.config.mdx_squf and name:sub(-4) == '.mdx' then
             buf = w3xparser.mdxopt(buf)
         end
-        if type == 'plugin' and w2l.config.remove_we_only then
+        if type == 'w3x2lni' and w2l.config.remove_we_only then
         else
             w2l:file_save(type, name, buf)
         end
@@ -90,8 +91,9 @@ return function (w2l, output_ar, w3i, input_ar)
     end
 
     input_ar:close()
-    if not output_ar:save(w3i, w2l) then
-        print('创建新地图失败,可能文件被占用了')
+    local suc, res = output_ar:save(w3i, w2l)
+    if not suc then
+        w2l:failed(res or lang.script.CREATE_FAILED)
     end
     output_ar:close()
 end

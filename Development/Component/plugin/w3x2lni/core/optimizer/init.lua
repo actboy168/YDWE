@@ -1,16 +1,16 @@
 local simplify = require 'optimizer.simplify'
 local converter = require 'optimizer.converter'
 
-return function (ast, config)
+return function (ast, config, messager)
     local report = {}
 
-    local function message(type, msg, tip)
+    local function reporter(type, msg, tip)
         if not report[type] then
             report[type] = {}
         end
         report[type][#report[type]+1] = {msg, tip}
     end
     
-    simplify(ast, config, message)
-    return converter(ast, message), report
+    simplify(ast, config, reporter)
+    return converter(ast, reporter, messager or print), report
 end

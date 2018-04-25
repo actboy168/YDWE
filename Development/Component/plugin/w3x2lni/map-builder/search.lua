@@ -1,4 +1,4 @@
-
+local lang = require 'tool.lang'
 local w2l
 
 local function search_staticfile(map, callback)
@@ -57,16 +57,15 @@ local function search_mpq(map, progress)
             count = count + 1
             if os.clock() - clock > 0.1 then
                 clock = os.clock()
-                print(('正在读取文件... (%d/%d)'):format(count, total))
+                messager.text(lang.script.LOAD_MAP_FILE:format(count, total))
                 progress(count / total)
             end
         end)
     end
 
     if count ~= total then
-        print('-report|1严重错误', ('还有%d个文件没有读取'):format(total - count))
-        print('-tip', '这些文件被丢弃了,请包含完整(listfile)')
-        print('-report|1严重错误', ('读取(%d/%d)个文件'):format(count, total))
+        messager.report(lang.report.ERROR, 1, lang.report.FILE_LOST:format(total - count), lang.report.FILE_LOST_HINT)
+        messager.report(lang.report.ERROR, 1, lang.report.FILE_READ:format(count, total))
     end
 end
 
@@ -92,14 +91,14 @@ local function search_dir(map, progress)
     local clock = os.clock()
     local count = 0
     local len = #map.path:string()
-    for _, dir_name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'plugin'} do
+    for _, dir_name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
         scan_dir(map.path / dir_name, function(path)
             local name = path:string():sub(len+2):lower()
             map:get(name)
             count = count + 1
             if os.clock() - clock > 0.1 then
                 clock = os.clock()
-                print(('正在读取文件... (%d/%d)'):format(count, total))
+                messager.text(lang.script.LOAD_MAP_FILE:format(count, total))
                 progress(count / total)
             end
         end)

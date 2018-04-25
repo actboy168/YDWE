@@ -1,14 +1,26 @@
 local process = require 'process'
+local proto = require 'tool.protocol'
+local lang = require 'tool.lang'
 
 local backend = {}
 backend.message = ''
 backend.title = ''
 backend.progress = nil
 backend.report = {}
-backend.lastreport = nil
 
 local mt = {}
 mt.__index = mt
+
+function mt:unpack_out(bytes)
+    while true do
+        local res = proto.recv(self.proto_s, bytes)
+        if not res then
+            break
+        end
+        bytes = ''
+        self.output[#self.output+1] = res
+    end
+end
 
 function mt:update_out()
     if not self.out_rd then
@@ -20,7 +32,7 @@ function mt:update_out()
     end
     local r = self.out_rd:read(n)
     if r then
-        self.output = self.output .. r
+        self:unpack_out(r)
         return
     end
     self.out_rd:close()
@@ -48,7 +60,7 @@ function mt:update_pipe()
     self:update_out()
     self:update_err()
     if not self.process:is_running() then
-        self.output = self.output .. self.out_rd:read 'a'
+        self:unpack_out()
         self.error = self.error .. self.err_rd:read 'a'
         self.exit_code = self.process:wait()
         self.process:close()
@@ -57,37 +69,33 @@ function mt:update_pipe()
     return false
 end
 
-local function push_report(type, value)
-    if not backend.report[type] then
-        backend.report[type] = {}
+local function push_report(type, level, value, tip)
+    local name = level .. type
+    if not backend.report[name] then
+        backend.report[name] = {}
     end
-    backend.lastreport = {value}
-    table.insert(backend.report[type], backend.lastreport)
+    table.insert(backend.report[name], {value, tip})
 end
 
-function mt:update_message(pos)
-    local msg = self.output:sub(1, pos):gsub("^%s*(.-)%s*$", "%1"):gsub('\t', ' ')
-    if msg:sub(1, 1) == '-' then
-        local key, value = msg:match('%-(%S+)%s(.+)')
-        if key then
-            if key == 'progress' then
-                backend.progress = tonumber(value) * 100
-            elseif key == 'report' then
-                push_report('', value)
-            elseif key:sub(1, 7) == 'report|' then
-                push_report(key:sub(8), value)
-            elseif key == 'tip' then
-                backend.lastreport[2] = value
-            elseif key == 'title' then
-                backend.title = value
-            end
-            msg = ''
+function mt:update_message()
+    while true do
+        local msg = table.remove(self.output, 1)
+        if not msg then
+            break
+        end
+        local key, value = msg.type, msg.args
+        if key == 'progress' then
+            backend.progress = value * 100
+        elseif key == 'report' then
+            push_report(value.type, value.level, value.content, value.tip)
+        elseif key == 'title' then
+            backend.title = value
+        elseif key == 'text' then
+            backend.message = value
+        elseif key == 'exit' then
+            backend.lastword = value
         end
     end
-    if #msg > 0 then
-        backend.message = msg
-    end
-    self.output = self.output:sub(pos+1)
 end
 
 function mt:update()
@@ -98,34 +106,23 @@ function mt:update()
         self.closed = self:update_pipe()
     end
     if #self.output > 0 then
-        local pos = self.output:find('\n')
-        if pos then
-            self:update_message(pos)
-        end
+        self:update_message()
     end
     if #self.error > 0 then
-        while true do
-            local pos = self.output:find('\n')
-            if not pos then
-                break
-            end
+        while #self.output > 0 do
             self:update_message(pos)
         end
-        self:update_message(-1)
-        self.output = ''
-        self.out_rd:close()
-        self.out_rd = nil
-        backend.message = '转换失败'
+        self.output = {}
+        if self.out_rd then
+            self.out_rd:close()
+            self.out_rd = nil
+        end
+        backend.message = lang.ui.FAILED
     end
     if self.closed then
-        while true do
-            local pos = self.output:find('\n')
-            if not pos then
-                break
-            end
+        while #self.output > 0 do
             self:update_message(pos)
         end
-        self:update_message(-1)
         self.exited = true
         return true
     end
@@ -141,7 +138,7 @@ function backend:clean()
     self.message = ''
     self.progress = nil
     self.report = {}
-    self.lastreport = nil
+    self.lastword = nil
 end
 
 function backend:open(entry, commandline)
@@ -157,8 +154,9 @@ function backend:open(entry, commandline)
         process = p,
         out_rd = stdout, 
         err_rd = stderr,
-        output = '',
+        output = {},
         error = '',
+        proto_s = {},
     }, mt)
 end
 

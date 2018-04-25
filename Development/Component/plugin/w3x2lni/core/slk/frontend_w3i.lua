@@ -1,3 +1,4 @@
+local lang = require 'lang'
 local select = select
 
 local w2l
@@ -39,102 +40,102 @@ function mt:is_finish()
 end
 
 function mt:add_head(chunk)
-    chunk['地图'] = {
-        ['文件版本']   = self:unpack 'l',
-        ['地图版本']   = self:unpack 'l',
-        ['编辑器版本'] = self:unpack 'l',
-        ['地图名称']   = w2l:load_wts(self.wts, (self:unpack 'z')),
-        ['作者名字']   = w2l:load_wts(self.wts, (self:unpack 'z')),
-        ['地图描述']   = w2l:load_wts(self.wts, (self:unpack 'z')),
-        ['推荐玩家']   = w2l:load_wts(self.wts, (self:unpack 'z')),
+    chunk[lang.w3i.MAP] = {
+        [lang.w3i.FILE_VERSION] = self:unpack 'l',
+        [lang.w3i.MAP_VERSION]  = self:unpack 'l',
+        [lang.w3i.WE_VERSION]   = self:unpack 'l',
+        [lang.w3i.MAP_NAME]     = w2l:load_wts(self.wts, (self:unpack 'z')),
+        [lang.w3i.AUTHOR_NAME]  = w2l:load_wts(self.wts, (self:unpack 'z')),
+        [lang.w3i.MAP_DESC]     = w2l:load_wts(self.wts, (self:unpack 'z')),
+        [lang.w3i.PLAYER_DESC]  = w2l:load_wts(self.wts, (self:unpack 'z')),
     }
     
-    chunk['镜头'] = {
-        ['镜头范围'] = pack(self:unpack 'ffffffff'),
-        ['镜头范围扩充'] = pack(self:unpack 'llll'),
+    chunk[lang.w3i.CAMERA] = {
+        [lang.w3i.CAMERA_BOUND]      = pack(self:unpack 'ffffffff'),
+        [lang.w3i.CAMERA_COMPLEMENT] = pack(self:unpack 'llll'),
     }
 
-    chunk['地形'] = {
-        ['地图宽度'] = self:unpack 'l',
-        ['地图长度'] = self:unpack 'l',
+    chunk[lang.w3i.MAP_INFO] = {
+        [lang.w3i.MAP_WIDTH]  = self:unpack 'l',
+        [lang.w3i.MAP_HEIGHT] = self:unpack 'l',
     }
 
     local flag = self:unpack 'L'
-    chunk['选项'] = {
-        ['关闭预览图']      = flag >> 0 & 1,
-        ['自定义结盟优先权'] = flag >> 1 & 1,
-        ['对战地图']        = flag >> 2 & 1,
-        ['大型地图']        = flag >> 3 & 1,
-        ['迷雾区域显示地形'] = flag >> 4 & 1,
-        ['自定义玩家分组']   = flag >> 5 & 1,
-        ['自定义队伍']      = flag >> 6 & 1,
-        ['自定义科技树']    = flag >> 7 & 1,
-        ['自定义技能']      = flag >> 8 & 1,
-        ['自定义升级']      = flag >> 9 & 1,
-        ['地图菜单标记']    = flag >> 10 & 1,
-        ['地形悬崖显示水波'] = flag >> 11 & 1,
-        ['地形起伏显示水波'] = flag >> 12 & 1,
-        ['未知1']           = flag >> 13 & 1,
-        ['未知2']           = flag >> 14 & 1,
-        ['未知3']           = flag >> 15 & 1,
-        ['未知4']           = flag >> 16 & 1,
-        ['未知5']           = flag >> 17 & 1,
-        ['未知6']           = flag >> 18 & 1,
-        ['未知7']           = flag >> 19 & 1,
-        ['未知8']           = flag >> 20 & 1,
-        ['未知9']           = flag >> 21 & 1,
+    chunk[lang.w3i.CONFIG] = {
+        [lang.w3i.DISABLE_PREVIEW]          = flag >> 0 & 1,
+        [lang.w3i.CUSTOM_ALLY]              = flag >> 1 & 1,
+        [lang.w3i.MELEE_MAP]                = flag >> 2 & 1,
+        [lang.w3i.LARGE_MAP]                = flag >> 3 & 1,
+        [lang.w3i.MASKED_AREA_SHOW_TERRAIN] = flag >> 4 & 1,
+        [lang.w3i.FIX_FORCE_SETTING]        = flag >> 5 & 1,
+        [lang.w3i.CUSTOM_FORCE]             = flag >> 6 & 1,
+        [lang.w3i.CUSTOM_TECHTREE]          = flag >> 7 & 1,
+        [lang.w3i.CUSTOM_ABILITY]           = flag >> 8 & 1,
+        [lang.w3i.CUSTOM_UPGRADE]           = flag >> 9 & 1,
+        [lang.w3i.MAP_MENU_MARK]            = flag >> 10 & 1,
+        [lang.w3i.SHOW_WAVE_ON_CLIFF]       = flag >> 11 & 1,
+        [lang.w3i.SHOW_WAVE_ON_ROLLING]     = flag >> 12 & 1,
+        [lang.w3i.UNKNOWN_1]                = flag >> 13 & 1,
+        [lang.w3i.UNKNOWN_2]                = flag >> 14 & 1,
+        [lang.w3i.UNKNOWN_3]                = flag >> 15 & 1,
+        [lang.w3i.UNKNOWN_4]                = flag >> 16 & 1,
+        [lang.w3i.UNKNOWN_5]                = flag >> 17 & 1,
+        [lang.w3i.UNKNOWN_6]                = flag >> 18 & 1,
+        [lang.w3i.UNKNOWN_7]                = flag >> 19 & 1,
+        [lang.w3i.UNKNOWN_8]                = flag >> 20 & 1,
+        [lang.w3i.UNKNOWN_9]                = flag >> 21 & 1,
     }
 
-    chunk['地形']['地形类型'] = self:unpack 'c1'
+    chunk[lang.w3i.MAP_INFO][lang.w3i.MAP_MAIN_GROUND] = self:unpack 'c1'
 
-    chunk['载入图'] = {
-        ['序号']   = self:unpack 'l',
-        ['路径']   = w2l:load_wts(self.wts, (self:unpack 'z')),
-        ['文本']   = w2l:load_wts(self.wts, (self:unpack 'z')),
-        ['标题']   = w2l:load_wts(self.wts, (self:unpack 'z')),
-        ['子标题'] = w2l:load_wts(self.wts, (self:unpack 'z')),
+    chunk[lang.w3i.LOADING_SCREEN] = {
+        [lang.w3i.ID]       = self:unpack 'l',
+        [lang.w3i.PATH]     = w2l:load_wts(self.wts, (self:unpack 'z')),
+        [lang.w3i.TEXT]     = w2l:load_wts(self.wts, (self:unpack 'z')),
+        [lang.w3i.TITLE]    = w2l:load_wts(self.wts, (self:unpack 'z')),
+        [lang.w3i.SUBTITLE] = w2l:load_wts(self.wts, (self:unpack 'z')),
     }
 
-    chunk['选项']['使用的游戏数据设置'] = self:unpack 'l'
+    chunk[lang.w3i.CONFIG][lang.w3i.GAME_DATA_SETTING] = self:unpack 'l'
 
-    chunk['战役'] = {
-        ['路径']   = w2l:load_wts(self.wts, (self:unpack 'z')),
-        ['文本']   = w2l:load_wts(self.wts, (self:unpack 'z')),
-        ['标题']   = w2l:load_wts(self.wts, (self:unpack 'z')),
-        ['子标题'] = w2l:load_wts(self.wts, (self:unpack 'z')),
+    chunk[lang.w3i.PROLOGUE] = {
+        [lang.w3i.PATH]     = w2l:load_wts(self.wts, (self:unpack 'z')),
+        [lang.w3i.TEXT]     = w2l:load_wts(self.wts, (self:unpack 'z')),
+        [lang.w3i.TITLE]    = w2l:load_wts(self.wts, (self:unpack 'z')),
+        [lang.w3i.SUBTITLE] = w2l:load_wts(self.wts, (self:unpack 'z')),
     }
 
-    chunk['迷雾'] = {
-        ['类型']    = self:unpack 'l',
-        ['z轴起点'] = self:unpack 'f',
-        ['z轴终点'] = self:unpack 'f',
-        ['密度']    = self:unpack 'f',
-        ['颜色']    = pack(self:unpack 'BBBB'),
+    chunk[lang.w3i.FOG] = {
+        [lang.w3i.TYPE]    = self:unpack 'l',
+        [lang.w3i.START_Z] = self:unpack 'f',
+        [lang.w3i.END_Z]   = self:unpack 'f',
+        [lang.w3i.DENSITY] = self:unpack 'f',
+        [lang.w3i.COLOR]   = pack(self:unpack 'BBBB'),
     }
     
-    chunk['环境'] = {
-        ['天气']     = self:unpack 'c4',
-        ['音效']     = w2l:load_wts(self.wts, (self:unpack 'z')),
-        ['光照']     = self:unpack 'c1',
-        ['水面颜色'] = pack(self:unpack 'BBBB'),
+    chunk[lang.w3i.ENVIRONMENT] = {
+        [lang.w3i.WEATHER]     = self:unpack 'c4',
+        [lang.w3i.SOUND]       = w2l:load_wts(self.wts, (self:unpack 'z')),
+        [lang.w3i.LIGHT]       = self:unpack 'c1',
+        [lang.w3i.WATER_COLOR] = pack(self:unpack 'BBBB'),
     }
 end
 
 function mt:add_player(chunk)
-    chunk['玩家'] = {
-        ['玩家数量'] = self:unpack 'l',
+    chunk[lang.w3i.PLAYER] = {
+        [lang.w3i.PLAYER_COUNT] = self:unpack 'l',
     }
 
-    for i = 1, chunk['玩家']['玩家数量'] do
-        chunk['玩家'..i] = {
-            ['玩家']            = self:unpack 'l',
-            ['类型']            = self:unpack 'l',
-            ['种族']            = self:unpack 'l',
-            ['修正出生点']       = self:unpack 'l',
-            ['名字']            = w2l:load_wts(self.wts, (self:unpack 'z')),
-            ['出生点']          = pack(self:unpack 'ff'),
-            ['低结盟优先权标记'] = unpack_flag(self:unpack 'L'),
-            ['高结盟优先权标记'] = unpack_flag(self:unpack 'L'),
+    for i = 1, chunk[lang.w3i.PLAYER][lang.w3i.PLAYER_COUNT] do
+        chunk[lang.w3i.PLAYER..i] = {
+            [lang.w3i.PLAYER]             = self:unpack 'l',
+            [lang.w3i.TYPE]               = self:unpack 'l',
+            [lang.w3i.RACE]               = self:unpack 'l',
+            [lang.w3i.FIX_START_POSITION] = self:unpack 'l',
+            [lang.w3i.NAME]               = w2l:load_wts(self.wts, (self:unpack 'z')),
+            [lang.w3i.START_POSITION]     = pack(self:unpack 'ff'),
+            [lang.w3i.ALLY_LOW_FLAG]      = unpack_flag(self:unpack 'L'),
+            [lang.w3i.ALLY_HIGH_FLAG]     = unpack_flag(self:unpack 'L'),
         }
     end
 end
@@ -143,9 +144,9 @@ function mt:unpack_player_flag(chunk)
     local flag = self:unpack 'L'
     local tbl = unpack_flag(flag)
     local exits = {}
-    for i = 1, chunk['玩家']['玩家数量'] do
-        local player = chunk['玩家'..i]
-        local id = player['玩家'] + 1
+    for i = 1, chunk[lang.w3i.PLAYER][lang.w3i.PLAYER_COUNT] do
+        local player = chunk[lang.w3i.PLAYER..i]
+        local id = player[lang.w3i.PLAYER] + 1
         exits[id] = true
     end
     local result = {}
@@ -158,20 +159,20 @@ function mt:unpack_player_flag(chunk)
 end
 
 function mt:add_force(chunk)
-    chunk['队伍'] = {
-        ['队伍数量'] = self:unpack 'l',
+    chunk[lang.w3i.FORCE] = {
+        [lang.w3i.FORCE_COUNT] = self:unpack 'l',
     }
 
-    for i = 1, chunk['队伍']['队伍数量'] do
+    for i = 1, chunk[lang.w3i.FORCE][lang.w3i.FORCE_COUNT] do
         local flag = self:unpack 'L'
-        chunk['队伍'..i] = {
-            ['结盟']            = flag >> 0 & 1,
-            ['结盟胜利']        = flag >> 1 & 1,
-            ['共享视野']        = flag >> 3 & 1,
-            ['共享单位控制']     = flag >> 4 & 1,
-            ['共享高级单位设置'] = flag >> 5 & 1,
-            ['玩家列表']        = self:unpack_player_flag(chunk),
-            ['队伍名称']        = w2l:load_wts(self.wts, (self:unpack 'z')),
+        chunk[lang.w3i.FORCE..i] = {
+            [lang.w3i.ALLY]          = flag >> 0 & 1,
+            [lang.w3i.ALLY_WIN]      = flag >> 1 & 1,
+            [lang.w3i.SHARE_VISIBLE] = flag >> 3 & 1,
+            [lang.w3i.SHARE_CONTROL] = flag >> 4 & 1,
+            [lang.w3i.SHARE_ADVANCE] = flag >> 5 & 1,
+            [lang.w3i.PLAYER_LIST]   = self:unpack_player_flag(chunk),
+            [lang.w3i.FORCE_NAME]    = w2l:load_wts(self.wts, (self:unpack 'z')),
         }
     end
 end
@@ -182,11 +183,11 @@ function mt:add_upgrade(chunk)
     end
     local count = self:unpack 'l'
     for i = 1, count do
-        chunk['升级'..i] = {
-            ['玩家列表'] = unpack_flag(self:unpack 'L'),
-            ['ID']      = self:unpack 'c4',
-            ['等级']    = self:unpack 'l',
-            ['可用性']  = self:unpack 'l',
+        chunk[lang.w3i.UPGRADE..i] = {
+            [lang.w3i.PLAYER_LIST] = unpack_flag(self:unpack 'L'),
+            ['ID']                 = self:unpack 'c4',
+            [lang.w3i.LEVEL]       = self:unpack 'l',
+            [lang.w3i.AVAILABLE]   = self:unpack 'l',
         }
     end
 end
@@ -197,9 +198,9 @@ function mt:add_tech(chunk)
     end
     local count = self:unpack 'l'
     for i = 1, count do
-        chunk['科技'..i] = {
-            ['玩家列表'] = unpack_flag(self:unpack 'L'),
-            ['ID']      = self:unpack 'c4',
+        chunk[lang.w3i.TECH..i] = {
+            [lang.w3i.PLAYER_LIST] = unpack_flag(self:unpack 'L'),
+            ['ID']                 = self:unpack 'c4',
         }
     end
 end
@@ -210,19 +211,19 @@ function mt:add_randomgroup(chunk)
     end
     local count = self:unpack 'l'
     for i = 1, count do
-        chunk['随机组'..i] = {
-            ['ID'] = self:unpack 'l',
-            ['随机组名称'] = w2l:load_wts(self.wts, (self:unpack 'z')),
-            ['设置'] = {},
+        chunk[lang.w3i.RANDOM_GROUP..i] = {
+            ['ID']                       = self:unpack 'l',
+            [lang.w3i.RANDOM_GROUP_NAME] = w2l:load_wts(self.wts, (self:unpack 'z')),
+            [lang.w3i.SETTING]           = {},
         }
         local x = self:unpack 'l'
-        chunk['随机组'..i]['位置类型'] = pack(self:unpack(('l'):rep(x)))
+        chunk[lang.w3i.RANDOM_GROUP..i][lang.w3i.POSITION_TYPE] = pack(self:unpack(('l'):rep(x)))
 
         local y = self:unpack 'l'
         for y = 1, y do
-            chunk['随机组'..i]['设置'][y] = {
-                ['几率'] = self:unpack 'l',
-                ['ID']   = pack(self:unpack(('c4'):rep(x))),
+            chunk[lang.w3i.RANDOM_GROUP..i][lang.w3i.SETTING][y] = {
+                [lang.w3i.CHANCE] = self:unpack 'l',
+                ['ID']            = pack(self:unpack(('c4'):rep(x))),
             }
         end
     end
@@ -234,21 +235,21 @@ function mt:add_randomitem(chunk)
     end
     local count = self:unpack 'l'
     for i = 1, count do
-        chunk['物品列表'..i] = {
-            ['ID'] = self:unpack 'l',
-            ['物品列表名称'] = w2l:load_wts(self.wts, (self:unpack 'z')),
-            ['设置'] = {},
+        chunk[lang.w3i.RANDOM_ITEM..i] = {
+            ['ID']                      = self:unpack 'l',
+            [lang.w3i.RANDOM_ITEM_NAME] = w2l:load_wts(self.wts, (self:unpack 'z')),
+            [lang.w3i.SETTING]          = {},
         }
 
         --设置
         local x = self:unpack 'l'
         for x = 1, x do
-            chunk['物品列表'..i]['设置'][x] = {}
+            chunk[lang.w3i.RANDOM_ITEM..i][lang.w3i.SETTING][x] = {}
             local y = self:unpack 'l'
             for y = 1, y do
-                chunk['物品列表'..i]['设置'][x][y] = {
-                    ['几率'] = self:unpack 'l',
-                    ['ID'] = self:unpack 'c4',
+                chunk[lang.w3i.RANDOM_ITEM..i][lang.w3i.SETTING][x][y] = {
+                    [lang.w3i.CHANCE] = self:unpack 'l',
+                    ['ID']            = self:unpack 'c4',
                 }
             end
         end

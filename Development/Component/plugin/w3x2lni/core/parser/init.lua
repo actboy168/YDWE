@@ -1,6 +1,7 @@
 local grammar = require 'parser.grammar'
 
 local ast
+local messager
 
 local parse_exp
 local parse_lines
@@ -207,10 +208,10 @@ function parse_exp(exp, expect)
     elseif exp.type == 'code' then
         exp.vtype = get_code(exp)
     else
-        print('解析未定义的表达式类型:', exp.type)
+        messager('解析未定义的表达式类型:', exp.type)
     end
     if not exp.vtype then
-        print('没有解析到类型:', exp.type)
+        messager('没有解析到类型:', exp.type)
     end
     return exp.vtype
 end
@@ -408,7 +409,8 @@ local function parser_gram(gram)
     end
 end
 
-return function (jass, file, _ast)
+return function (jass, file, _ast, _messager)
+    messager = _messager or print
     if _ast then
         ast = _ast
 
@@ -435,7 +437,7 @@ return function (jass, file, _ast)
 
     ast.file = file
 
-    local gram, comments = grammar(jass, file)
+    local gram, comments = grammar(jass, file, messager)
 
     parser_gram(gram)
 

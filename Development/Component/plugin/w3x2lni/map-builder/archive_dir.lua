@@ -1,15 +1,5 @@
 local sleep = require 'ffi.sleep'
 
-local function task(f, ...)
-    for i = 1, 99 do
-        if pcall(f, ...) then
-            return true
-        end
-        sleep(10)
-    end
-    return false
-end
-
 local ignore = {}
 for _, name in ipairs {'.git', '.svn', '.vscode', '.gitignore'} do
     ignore[name] = true
@@ -39,7 +29,7 @@ end
 
 function mt:count_files()
     local count = 0
-    for _, name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'plugin'} do
+    for _, name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
         scan_dir(self.path / name, function ()
             count = count + 1
         end)

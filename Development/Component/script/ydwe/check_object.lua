@@ -89,7 +89,7 @@ end
 local function unpack_obj()
     local parent, name, count = unpack 'c4c4l'
     for i = 1, count do
-        unpack_data(name)
+        unpack_data(name == '\0\0\0\0' and parent or name)
     end
 end
 
