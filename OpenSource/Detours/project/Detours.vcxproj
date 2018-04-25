@@ -93,7 +93,7 @@
     <OutDir>$(ProjectDir)..\lib\$(PlatformName)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>$(ProjectDir)\$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
+    <IntDir>$(ProjectDir)..\tmp\$(PlatformName)\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)..\lib\$(PlatformName)\$(Configuration)\</OutDir>
