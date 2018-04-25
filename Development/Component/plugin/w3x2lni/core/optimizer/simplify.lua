@@ -356,8 +356,8 @@ local function can_use(name)
     return true
 end
 
-local function init_confuser(confusion)
-    if not confusion then
+local function init_confuser(confused, confusion)
+    if not confused then
         return
     end
 
@@ -374,15 +374,16 @@ local function init_confuser(confusion)
     
     confusion = table.concat(chars)
 
-    for char in confusion:gmatch '%a' do
-        chars[#chars+1] = char
+    local count = 0
+    for _ in confusion:gmatch '%a' do
+        count = count + 1
     end
-    if #chars < 2 then
+    if count < 2 then
         report('混淆脚本', '脚本混淆失败', '至少要有2个字母')
         return
     end
 
-    local confuse_head = chars[1]
+    local confuse_head = confusion:match '%a'
     confuse1 = confuser(confusion:gsub(confuse_head, ''))
     function confuse1:on_find(name)
         if can_use(name) then
@@ -408,7 +409,7 @@ return function (ast, config, _report)
     jass = ast
     report = _report
 
-    init_confuser(config.confusion)
+    init_confuser(config.confused, config.confusion)
     mark_globals()
     mark_function(get_function 'config')
     mark_function(get_function 'main')

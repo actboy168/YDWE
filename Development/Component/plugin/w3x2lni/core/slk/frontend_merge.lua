@@ -1,3 +1,4 @@
+local lang = require 'lang'
 local w2l
 local is_remove_exceeds_level
 local metadata
@@ -76,8 +77,7 @@ local function copy_obj(a, b)
     local c = {}
     local lv = b._max_level or a._max_level
     if b._code and a._code ~= b._code then
-        w2l.message("-report|6无效的物编数据", ("技能code与默认不一致： %s:%s"):format(b._id, b._code))
-        w2l.message("-tip", ("默认为： %s"):format(a._code))
+        w2l.messager.report(lang.report.INVALID_OBJECT_DATA, 6, lang.report.ABILITY_CODE_ERROR:format(b._id, b._code), lang.report.DEFAULT_IS:format(a._code))
         return nil
     end
     for k, v in pairs(a) do
@@ -135,7 +135,12 @@ return function (w2l_, type, data, objs)
         else
             source = template[obj._parent] or data[obj._parent]
         end
-        result[name] = copy_obj(source, obj)
+        if source then
+            result[name] = copy_obj(source, obj)
+        else
+            assert(type == 'txt')
+            result[name] = obj
+        end
     end
     for name, obj in pairs(data) do
         result[name] = fill_obj(obj)

@@ -1,4 +1,5 @@
 local w3xparser = require 'w3xparser'
+local lang = require 'lang'
 
 local table_concat = table.concat
 local ipairs = ipairs
@@ -194,13 +195,13 @@ local function stringify_obj(str, obj)
 end
 
 local displaytype = {
-    unit = '单位',
-    ability = '技能',
-    item = '物品',
-    buff = '魔法效果',
-    upgrade = '科技',
-    doodad = '装饰物',
-    destructable = '可破坏物',
+    unit = lang.script.UNIT,
+    ability = lang.script.ABILITY,
+    item = lang.script.ITEM,
+    buff = lang.script.BUFF,
+    upgrade = lang.script.UPGRADE,
+    doodad = lang.script.DOODAD,
+    destructable = lang.script.DESTRUCTABLE,
 }
 
 local function get_displayname(o)
@@ -244,7 +245,7 @@ local function prebuild_data(obj, key, r)
         local t = {}
         for k, v in pairs(obj[key]) do
             if check_string(v) then
-                report_failed(obj, metadata[key].field, '文本内容同时包含了逗号和双引号', v)
+                report_failed(obj, metadata[key].field, lang.report.TEXT_CANT_ESCAPE_IN_TXT, v)
                 object[name][key][k] = v
             else
                 t[k] = v
@@ -256,7 +257,7 @@ local function prebuild_data(obj, key, r)
         r[key] = t
     else
         if check_string(obj[key]) then
-            report_failed(obj, metadata[key].field, '文本内容同时包含了逗号和双引号', obj[key])
+            report_failed(obj, metadata[key].field, lang.report.TEXT_CANT_ESCAPE_IN_TXT, obj[key])
             object[name][key] = obj[key]
         else
             r[key] = obj[key]
@@ -284,8 +285,7 @@ local function prebuild_merge(obj, a, b)
     if a._type ~= b._type then
         local tp1, _, name1 = get_displayname(a)
         local tp2, _, name2 = get_displayname(b)
-        w2l.message('-report|2警告', ('对象的ID冲突[%s]'):format(obj._id))
-        w2l.message('-tip', ('[%s]%s --> [%s]%s'):format(tp1, name1, tp2, name2))
+        w2l.messager.report(lang.report.WARN, 2, (lang.report.OBJECT_ID_CONFLICT):format(obj._id), ('[%s]%s --> [%s]%s'):format(tp1, name1, tp2, name2))
     end
     for k, v in pairs(b) do
         if k == '_id' or k == '_type' then
@@ -295,7 +295,7 @@ local function prebuild_merge(obj, a, b)
             if type(a[k]) == 'table' then
                 for i, iv in pairs(v) do
                     if a[k][i] ~= iv then
-                        report_failed(obj, metadata[k].field, '文本内容和另一个对象冲突', '--> ' .. a._id)
+                        report_failed(obj, metadata[k].field, lang.report.TXT_CONFLICT, '--> ' .. a._id)
                         if obj[k] then
                             obj[k][i] = iv
                         else
@@ -304,7 +304,7 @@ local function prebuild_merge(obj, a, b)
                     end
                 end
             else
-                report_failed(obj, metadata[k].field, '文本内容和另一个对象冲突', '--> ' .. a._id)
+                report_failed(obj, metadata[k].field, lang.report.TXT_CONFLICT, '--> ' .. a._id)
                 for i, iv in pairs(v) do
                     if obj[k] then
                         obj[k][i] = iv
@@ -315,7 +315,7 @@ local function prebuild_merge(obj, a, b)
             end
         else
             if a[k] ~= v then
-                report_failed(obj, metadata[k].field, '文本内容和另一个对象冲突', '--> ' .. a._id)
+                report_failed(obj, metadata[k].field, lang.report.TXT_CONFLICT, '--> ' .. a._id)
                 obj[k] = v
             end
         end

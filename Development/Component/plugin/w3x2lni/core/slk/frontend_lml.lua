@@ -1,3 +1,5 @@
+local lang = require 'lang'
+
 local w2l
 local wtg
 local wct
@@ -5,13 +7,13 @@ local loader
 
 local function load_custom()
     wct.custom = {
-        comment = loader '代码.txt' or '',
-        code    = loader '代码.j' or '',
+        comment = loader(lang.lml.CODE .. '.txt') or '',
+        code    = loader(lang.lml.CODE .. '.j') or '',
     }
 end
 
 local function load_vars()
-    wtg.vars = w2l:parse_lml(loader '变量.lml' or '')
+    wtg.vars = w2l:parse_lml(loader(lang.lml.VARIABLE .. '.lml') or '')
 end
 
 local function load_trigger(trg, id, filename)
@@ -28,15 +30,15 @@ local function load_trigger(trg, id, filename)
     for i = 3, #trg do
         local line = trg[i]
         local k, v = line[1], line[2]
-        if k == '名称' then
+        if k == lang.lml.NAME then
             trigger.name = v
-        elseif k == '注释' then
+        elseif k == lang.lml.COMMENT then
             trigger.type = 1
-        elseif k == '禁用' then
+        elseif k == lang.lml.DISABLE then
             trigger.enable = 0
-        elseif k == '关闭' then
+        elseif k == lang.lml.CLOSE then
             trigger.close = 1
-        elseif k == '运行' then
+        elseif k == lang.lml.RUN then
             trigger.run = 1
         end
     end
@@ -70,9 +72,9 @@ local function load_category(dir)
         local line = dir[i]
         local k, v = line[1], line[2]
         if v then
-            if k == '名称' then
+            if k == lang.lml.NAME then
                 category.name = v
-            elseif k == '注释' and v == '1' then
+            elseif k == lang.lml.COMMENT and v == '1' then
                 category.comment = 1
             end
         else
@@ -87,7 +89,7 @@ local function load_triggers()
     wtg.categories = {}
     wtg.triggers = {}
     wct.triggers = {}
-    local buf = loader '目录.lml'
+    local buf = loader(lang.lml.CATALOG .. '.lml')
     if not buf then
         return
     end

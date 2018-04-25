@@ -2,7 +2,14 @@ local gui = require 'yue.gui'
 local ext = require 'yue-ext'
 local backend = require 'gui.backend'
 local messagebox = require 'ffi.messagebox'
+local timer = require 'gui.timer'
+local lang = require 'tool.lang'
 require 'filesystem'
+
+ext.on_timer = timer.update
+
+local worker
+local exitcode = 0
 
 local mini = {}
 
@@ -84,21 +91,14 @@ local function pack_arg()
     return table.concat(buf, ' ')
 end
 
-mini:init()
-mini:event_close(gui.MessageLoop.quit)
-
-local function getexe()
-	local i = 0
-	while arg[i] ~= nil do
-		i = i - 1
-	end
-	return fs.path(arg[i + 1])
+local function need_select()
+    for _, command in ipairs(arg) do
+        if command == '-slk' or command == '-lni' or command == '-obj' then
+            return false
+        end
+    end
+    return true
 end
-
-backend:init(getexe(), fs.current_path())
-local worker = backend:open('map.lua', pack_arg())
-backend.message = '正在初始化...'
-backend.progress = 0
 
 local function sortpairs(t)
     local sort = {}
@@ -154,7 +154,7 @@ local function update()
     mini:settitle(backend.title)
     mini:setvalue(backend.progress)
     if #worker.error > 0 then
-        messagebox('错误', worker.error)
+        messagebox(lang.ui.ERROR, worker.error)
         worker.error = ''
         return 0, 1
     end
@@ -168,27 +168,54 @@ local function update()
     end
 end
 
-local function delayedtask()
+local function delayedtask(t)
     local ok, r, code = xpcall(update, debug.traceback)
     if not ok then
-        messagebox('错误', r)
+        t:remove()
+        messagebox(lang.ui.ERROR, r)
         mini:close()
-        os.exit(1, true)
+        exitcode = -1
         return
     end
     if r then
+        t:remove()
         if r > 0 then
-            gui.MessageLoop.postdelayedtask(r, function()
+            timer.wait(r, function()
+                if code ~= 0 then
+                    exitcode = code
+                end
                 mini:close()
-                os.exit(code, true)
             end)
         else
+            if code ~= 0 then
+                exitcode = code
+            end
             mini:close()
-            os.exit(code, true)
         end
-        return
     end
-    gui.MessageLoop.postdelayedtask(100, delayedtask)
 end
-gui.MessageLoop.postdelayedtask(100, delayedtask)
-gui.MessageLoop.run()
+
+local function getexe()
+	local i = 0
+	while arg[i] ~= nil do
+		i = i - 1
+	end
+	return fs.path(arg[i + 1])
+end
+
+function mini:backend()
+    mini:init()
+    mini:event_close(gui.MessageLoop.quit)
+    backend:init(getexe(), fs.current_path())
+    worker = backend:open('backend\\init.lua', pack_arg())
+    backend.message = lang.ui.INIT
+    backend.progress = 0
+    timer.loop(100, delayedtask)
+    gui.MessageLoop.run()
+end
+
+mini:backend()
+
+if exitcode ~= 0 then
+    os.exit(exitcode, true)
+end

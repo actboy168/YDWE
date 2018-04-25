@@ -1,0 +1,49 @@
+local function sortpairs(t)
+    local sort = {}
+    for k, v in pairs(t) do
+        sort[#sort+1] = {k, v}
+    end
+    table.sort(sort, function (a, b)
+        return a[1] < b[1]
+    end)
+    local n = 1
+    return function()
+        local v = sort[n]
+        if not v then
+            return
+        end
+        n = n + 1
+        return v[1], v[2]
+    end
+end
+
+return function (report)
+    local lines = {}
+    for type, report in sortpairs(report) do
+        if type ~= '' then
+            type = type:sub(2)
+            lines[#lines+1] = '================'
+            lines[#lines+1] = type
+            lines[#lines+1] = '================'
+            for _, s in ipairs(report) do
+                if s[2] then
+                    lines[#lines+1] = ('%s - %s'):format(s[1], s[2])
+                else
+                    lines[#lines+1] = s[1]
+                end
+            end
+            lines[#lines+1] = ''
+        end
+    end
+    local report = report['']
+    if report then
+        for _, s in ipairs(report) do
+            if s[2] then
+                lines[#lines+1] = ('%s - %s'):format(s[1], s[2])
+            else
+                lines[#lines+1] = s[1]
+            end
+        end
+    end
+    return table.concat(lines, '\n')
+end

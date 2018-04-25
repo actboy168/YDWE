@@ -1,3 +1,5 @@
+local lang = require 'lang'
+
 local type = type
 local pairs = pairs
 local os_clock = os.clock
@@ -141,7 +143,7 @@ local function processing(type, chunk)
         parse_obj(name, chunk[name], default, config, type)
         if os_clock() - clock >= 0.1 then
             clock = os_clock()
-            w2l.message(('搜索最优模板[%s] (%d/%d)'):format(chunk[name]._id, i, #names))
+            w2l.messager.text(lang.script.SEARCH_TEMPLATE:format(chunk[name]._id, i, #names))
             w2l.progress(i / #names)
         end
     end

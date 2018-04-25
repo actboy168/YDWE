@@ -1,3 +1,4 @@
+local lang = require 'lang'
 local table_insert = table.insert
 local table_sort   = table.sort
 local table_concat = table.concat
@@ -28,159 +29,159 @@ end
 function mt:get(key)
     local value = self.data[self._current][key]
     if type(value) == 'string' and #value > 1023 then
-        value = self.self:save_wts(self.wts, value, 'w3i里的文本长度超过1023字符')
+        value = self.self:save_wts(self.wts, value, lang.script.TEXT_TOO_LONG_IN_W3I)
     end
     return value
 end
 
 function mt:read_head(data)
-    self:current '地图'
-    data.file_ver   = self:get '文件版本'
-    data.map_ver    = self:get '地图版本'
-    data.editor_ver = self:get '编辑器版本'
-    data.map_name   = self:get '地图名称'
-    data.author     = self:get '作者名字'
-    data.des        = self:get '地图描述'
-    data.player_rec = self:get '推荐玩家'
+    self:current(lang.w3i.MAP)
+    data.file_ver   = self:get(lang.w3i.FILE_VERSION)
+    data.map_ver    = self:get(lang.w3i.MAP_VERSION)
+    data.editor_ver = self:get(lang.w3i.WE_VERSION)
+    data.map_name   = self:get(lang.w3i.MAP_NAME)
+    data.author     = self:get(lang.w3i.AUTHOR_NAME)
+    data.des        = self:get(lang.w3i.MAP_DESC)
+    data.player_rec = self:get(lang.w3i.PLAYER_DESC)
 
-    self:current '镜头'
+    self:current(lang.w3i.CAMERA)
     for i = 1, 8 do
-        data['camera_bound_' .. i] = self:get '镜头范围' [i]
+        data['camera_bound_' .. i] = self:get(lang.w3i.CAMERA_BOUND)[i]
     end
     for i = 1, 4 do
-        data['camera_complement_' .. i] = self:get '镜头范围扩充' [i]
+        data['camera_complement_' .. i] = self:get(lang.w3i.CAMERA_COMPLEMENT)[i]
     end
 
-    self:current '地形'
-    data.map_width = self:get '地图宽度'
-    data.map_height = self:get '地图长度'
-    data.map_main_ground_type = self:get '地形类型'
+    self:current(lang.w3i.MAP_INFO)
+    data.map_width = self:get(lang.w3i.MAP_WIDTH)
+    data.map_height = self:get(lang.w3i.MAP_HEIGHT)
+    data.map_main_ground_type = self:get(lang.w3i.MAP_MAIN_GROUND)
 
-    self:current '选项'
-    data.game_data_set = self:get '使用的游戏数据设置'
-    data.map_flag = self:get '关闭预览图'      << 0
-                  | self:get '自定义结盟优先权' << 1
-                  | self:get '对战地图'        << 2
-                  | self:get '大型地图'        << 3
-                  | self:get '迷雾区域显示地形' << 4
-                  | self:get '自定义玩家分组'   << 5
-                  | self:get '自定义队伍'       << 6
-                  | self:get '自定义科技树'     << 7
-                  | self:get '自定义技能'       << 8
-                  | self:get '自定义升级'       << 9
-                  | self:get '地图菜单标记'     << 10
-                  | self:get '地形悬崖显示水波' << 11
-                  | self:get '地形起伏显示水波' << 12
-                  | self:get '未知1'           << 13
-                  | self:get '未知2'           << 14
-                  | self:get '未知3'           << 15
-                  | self:get '未知4'           << 16
-                  | self:get '未知5'           << 17
-                  | self:get '未知6'           << 18
-                  | self:get '未知7'           << 19
-                  | self:get '未知8'           << 20
-                  | self:get '未知9'           << 21
+    self:current(lang.w3i.CONFIG)
+    data.game_data_set = self:get(lang.w3i.GAME_DATA_SETTING)
+    data.map_flag = self:get(lang.w3i.DISABLE_PREVIEW)          << 0
+                  | self:get(lang.w3i.CUSTOM_ALLY)              << 1
+                  | self:get(lang.w3i.MELEE_MAP)                << 2
+                  | self:get(lang.w3i.LARGE_MAP)                << 3
+                  | self:get(lang.w3i.MASKED_AREA_SHOW_TERRAIN) << 4
+                  | self:get(lang.w3i.FIX_FORCE_SETTING)        << 5
+                  | self:get(lang.w3i.CUSTOM_FORCE)             << 6
+                  | self:get(lang.w3i.CUSTOM_TECHTREE)          << 7
+                  | self:get(lang.w3i.CUSTOM_ABILITY)           << 8
+                  | self:get(lang.w3i.CUSTOM_UPGRADE)           << 9
+                  | self:get(lang.w3i.MAP_MENU_MARK)            << 10
+                  | self:get(lang.w3i.SHOW_WAVE_ON_CLIFF)       << 11
+                  | self:get(lang.w3i.SHOW_WAVE_ON_ROLLING)     << 12
+                  | self:get(lang.w3i.UNKNOWN_1)                 << 13
+                  | self:get(lang.w3i.UNKNOWN_2)                 << 14
+                  | self:get(lang.w3i.UNKNOWN_3)                 << 15
+                  | self:get(lang.w3i.UNKNOWN_4)                 << 16
+                  | self:get(lang.w3i.UNKNOWN_5)                 << 17
+                  | self:get(lang.w3i.UNKNOWN_6)                 << 18
+                  | self:get(lang.w3i.UNKNOWN_7)                 << 19
+                  | self:get(lang.w3i.UNKNOWN_8)                 << 20
+                  | self:get(lang.w3i.UNKNOWN_9)                 << 21
 
-    self:current '载入图'
-    data.loading_screen_id       = self:get '序号'
-    data.loading_screen_path     = self:get '路径'
-    data.loading_screen_text     = self:get '文本'
-    data.loading_screen_title    = self:get '标题'
-    data.loading_screen_subtitle = self:get '子标题'
+    self:current(lang.w3i.LOADING_SCREEN)
+    data.loading_screen_id       = self:get(lang.w3i.ID)
+    data.loading_screen_path     = self:get(lang.w3i.PATH)
+    data.loading_screen_text     = self:get(lang.w3i.TEXT)
+    data.loading_screen_title    = self:get(lang.w3i.TITLE)
+    data.loading_screen_subtitle = self:get(lang.w3i.SUBTITLE)
 
-    self:current '战役'
-    data.prologue_screen_path     = self:get '路径'
-    data.prologue_screen_text     = self:get '文本'
-    data.prologue_screen_title    = self:get '标题'
-    data.prologue_screen_subtitle = self:get '子标题'
+    self:current(lang.w3i.PROLOGUE)
+    data.prologue_screen_path     = self:get(lang.w3i.PATH)
+    data.prologue_screen_text     = self:get(lang.w3i.TEXT)
+    data.prologue_screen_title    = self:get(lang.w3i.TITLE)
+    data.prologue_screen_subtitle = self:get(lang.w3i.SUBTITLE)
 
-    self:current '迷雾'
-    data.terrain_fog = self:get '类型'
-    data.fog_start_z = self:get 'z轴起点'
-    data.fog_end_z   = self:get 'z轴终点'
-    data.fog_density = self:get '密度'
-    data.fog_red     = self:get '颜色' [1]
-    data.fog_green   = self:get '颜色' [2]
-    data.fog_blue    = self:get '颜色' [3]
-    data.fog_alpha   = self:get '颜色' [4]
+    self:current(lang.w3i.FOG)
+    data.terrain_fog = self:get(lang.w3i.TYPE)
+    data.fog_start_z = self:get(lang.w3i.START_Z)
+    data.fog_end_z   = self:get(lang.w3i.END_Z)
+    data.fog_density = self:get(lang.w3i.DENSITY)
+    data.fog_red     = self:get(lang.w3i.COLOR)[1]
+    data.fog_green   = self:get(lang.w3i.COLOR)[2]
+    data.fog_blue    = self:get(lang.w3i.COLOR)[3]
+    data.fog_alpha   = self:get(lang.w3i.COLOR)[4]
 
-    self:current '环境'
-    data.weather_id        = self:get '天气'
-    data.sound_environment = self:get '音效'
-    data.light_environment = self:get '光照'
-    data.water_red         = self:get '水面颜色' [1]
-    data.water_green       = self:get '水面颜色' [2]
-    data.water_blue        = self:get '水面颜色' [3]
-    data.water_alpha       = self:get '水面颜色' [4]
+    self:current(lang.w3i.ENVIRONMENT)
+    data.weather_id        = self:get(lang.w3i.WEATHER)
+    data.sound_environment = self:get(lang.w3i.SOUND)
+    data.light_environment = self:get(lang.w3i.LIGHT)
+    data.water_red         = self:get(lang.w3i.WATER_COLOR)[1]
+    data.water_green       = self:get(lang.w3i.WATER_COLOR)[2]
+    data.water_blue        = self:get(lang.w3i.WATER_COLOR)[3]
+    data.water_alpha       = self:get(lang.w3i.WATER_COLOR)[4]
 end
 
 function mt:read_player(data)
-    self:current '玩家'
-    data.player_count = self:get '玩家数量'
+    self:current(lang.w3i.PLAYER)
+    data.player_count = self:get(lang.w3i.PLAYER_COUNT)
     data.players = {}
 
     for i = 1, data.player_count do
         local player = {}
         data.players[i] = player
-        self:current('玩家' .. i)
-        player.id             = self:get '玩家'
-        player.type           = self:get '类型'
-        player.race           = self:get '种族'
-        player.start_position = self:get '修正出生点'
-        player.name           = self:get '名字'
-        player.start_x        = self:get '出生点' [1]
-        player.start_y        = self:get '出生点' [2]
-        player.ally_low_flag  = pack_flag(self:get '低结盟优先权标记')
-        player.ally_high_flag = pack_flag(self:get '高结盟优先权标记')
+        self:current(lang.w3i.PLAYER .. i)
+        player.id             = self:get(lang.w3i.PLAYER)
+        player.type           = self:get(lang.w3i.TYPE)
+        player.race           = self:get(lang.w3i.RACE)
+        player.start_position = self:get(lang.w3i.FIX_START_POSITION)
+        player.name           = self:get(lang.w3i.NAME)
+        player.start_x        = self:get(lang.w3i.START_POSITION)[1]
+        player.start_y        = self:get(lang.w3i.START_POSITION)[2]
+        player.ally_low_flag  = pack_flag(self:get(lang.w3i.ALLY_LOW_FLAG))
+        player.ally_high_flag = pack_flag(self:get(lang.w3i.ALLY_HIGH_FLAG))
     end
 end
 
 local function pack_unuse_players(self)
     local flag = 0xFFFFFFFF
-    self:current '玩家'
-    for i = 1, self:get '玩家数量' do
-        self:current('玩家'..i)
-        local id = self:get '玩家'
+    self:current(lang.w3i.PLAYER)
+    for i = 1, self:get(lang.w3i.PLAYER_COUNT) do
+        self:current(lang.w3i.PLAYER .. i)
+        local id = self:get(lang.w3i.PLAYER)
         flag = flag ~ (1 << id)
     end
     return flag
 end
 
 function mt:read_force(data)
-    self:current '队伍'
-    data.force_count = self:get '队伍数量'
+    self:current(lang.w3i.FORCE)
+    data.force_count = self:get(lang.w3i.FORCE_COUNT)
     data.forces = {}
 
     local unuse_player_flag = pack_unuse_players(self)
     for i = 1, data.force_count do
         local force = {}
         data.forces[i] = force
-        self:current('队伍' .. i)
-        force.force_flag = self:get '结盟'            << 0
-                         | self:get '结盟胜利'        << 1
-                         | self:get '共享视野'        << 3
-                         | self:get '共享单位控制'     << 4
-                         | self:get '共享高级单位设置' << 5
+        self:current(lang.w3i.FORCE .. i)
+        force.force_flag = self:get(lang.w3i.ALLY)            << 0
+                         | self:get(lang.w3i.ALLY_WIN)        << 1
+                         | self:get(lang.w3i.SHARE_VISIBLE)        << 3
+                         | self:get(lang.w3i.SHARE_CONTROL)     << 4
+                         | self:get(lang.w3i.SHARE_ADVANCE) << 5
         if i == 1 then
-            force.player_flag = pack_flag(self:get '玩家列表') | unuse_player_flag
+            force.player_flag = pack_flag(self:get(lang.w3i.PLAYER_LIST)) | unuse_player_flag
         else
-            force.player_flag = pack_flag(self:get '玩家列表')
+            force.player_flag = pack_flag(self:get(lang.w3i.PLAYER_LIST))
         end
-        force.name        = self:get '队伍名称'
+        force.name        = self:get(lang.w3i.FORCE_NAME)
     end
 end
 
 function mt:read_upgrade(data)
     data.upgrades = {}
     local i = 1
-    while self.data['升级'..i] do
+    while self.data[lang.w3i.UPGRADE..i] do
         local upgrade = {}
         data.upgrades[i] = upgrade
-        self:current('升级'..i)
-        upgrade.player_flag = pack_flag(self:get '玩家列表')
+        self:current(lang.w3i.UPGRADE..i)
+        upgrade.player_flag = pack_flag(self:get(lang.w3i.PLAYER_LISTn))
         upgrade.id          = self:get 'ID'
-        upgrade.level       = self:get '等级'
-        upgrade.available   = self:get '可用性'
+        upgrade.level       = self:get(lang.w3i.LEVEL)
+        upgrade.available   = self:get(lang.w3i.AVAILABLE)
         i = i + 1
     end
     data.upgrade_count = #data.upgrades
@@ -189,11 +190,11 @@ end
 function mt:read_tech(data)
     data.techs = {}
     local i = 1
-    while self.data['科技'..i] do
+    while self.data[lang.w3i.TECH..i] do
         local tech = {}
         data.techs[i] = tech
-        self:current('科技'..i)
-        tech.player_flag = pack_flag(self:get '玩家列表')
+        self:current(lang.w3i.TECH..i)
+        tech.player_flag = pack_flag(self:get(lang.w3i.PLAYER_LIST))
         tech.id          = self:get 'ID'
         i = i + 1
     end
@@ -203,21 +204,21 @@ end
 function mt:read_randomgroup(data)
     data.groups = {}
     local i = 1
-    while self.data['随机组'..i] do
+    while self.data[lang.w3i.RANDOM_GROUP..i] do
         local group = {}
         data.groups[i] = group
-        self:current('随机组'..i)
+        self:current(lang.w3i.RANDOM_GROUP..i)
         group.id = i - 1
-        group.name = self:get '随机组名称'
-        group.positions = self:get '位置类型'
+        group.name = self:get(lang.w3i.RANDOM_GROUP_NAME)
+        group.positions = self:get(lang.w3i.POSITION_TYPE)
         group.position_count = #group.positions
-        group.line_count = #self:get '设置'
+        group.line_count = #self:get(lang.w3i.SETTING)
         group.lines = {}
         for i = 1, group.line_count do
             local line = {}
             group.lines[i] = line
-            line.chance = self:get '设置' [i]['几率']
-            line.ids    = self:get '设置' [i]['ID']
+            line.chance = self:get(lang.w3i.SETTING)[i][lang.w3i.CHANCE]
+            line.ids    = self:get(lang.w3i.SETTING)[i]['ID']
         end
         i = i + 1
     end
@@ -227,21 +228,21 @@ end
 function mt:read_randomitem(data)
     data.random_items = {}
     local i = 1
-    while self.data['物品列表'..i] do
+    while self.data[lang.w3i.RANDOM_ITEM..i] do
         local random_item = {}
         data.random_items[i] = random_item
-        self:current('物品列表'..i)
+        self:current(lang.w3i.RANDOM_ITEM..i)
         random_item.id = i - 1
-        random_item.name = self:get '物品列表名称'
+        random_item.name = self:get(lang.w3i.RANDOM_ITEM_NAME)
         random_item.sets = {}
-        for i = 1, #self:get '设置' do
+        for i = 1, #self:get(lang.w3i.SETTING) do
             local set = {}
             random_item.sets[i] = set
             set.items = {}
-            for i, v in ipairs(self:get '设置' [i]) do
+            for i, v in ipairs(self:get(lang.w3i.SETTING)[i]) do
                 local item = {}
                 set.items[i] = item
-                item.chance = v['几率']
+                item.chance = v[lang.w3i.CHANCE]
                 item.id     = v['ID']
             end
             set.item_count = #set.items

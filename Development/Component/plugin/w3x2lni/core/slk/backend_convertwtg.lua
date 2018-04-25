@@ -1,3 +1,4 @@
+local lang = require 'lang'
 local w2l
 local wts
 
@@ -5,7 +6,7 @@ local wts
 local lpeg = require 'lpeg'
 
 local function fwts(str)
-    return w2l:load_wts(wts, str, 299, '触发器里的文本长度超过299字符', function(str)
+    return w2l:load_wts(wts, str, 299, lang.script.TEXT_TOO_LONG_IN_WTG, function(str)
         return str:gsub('\\', '\\\\'):gsub('"', '\\"')
     end)
 end

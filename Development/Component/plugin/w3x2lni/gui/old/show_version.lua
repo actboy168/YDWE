@@ -1,4 +1,4 @@
-local changelog = require 'gui.changelog'
+local changelog = require 'tool.changelog'
 local window
 local canvas
 local current

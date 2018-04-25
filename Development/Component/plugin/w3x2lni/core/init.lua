@@ -3,6 +3,7 @@ local mpq_path = require 'mpq_path'
 local lni = require 'lni'
 local lml = require 'lml'
 local progress = require 'progress'
+local lang = require 'lang'
 local slk = w3xparser.slk
 local txt = w3xparser.txt
 local ini = w3xparser.ini
@@ -50,7 +51,11 @@ end
 
 function mt:metadata()
     if not metadata then
-        metadata = self:defined 'metadata'
+        if self.config.mode ~= 'obj' or self.config.data_meta == '${DEFAULT}' then
+            metadata = self:defined 'metadata'
+        else
+            metadata = lni(self:meta_load 'metadata.ini')
+        end
     end
     return metadata
 end
@@ -62,18 +67,42 @@ function mt:keydata()
     return keydata
 end
 
-function mt:get_editstring(str)
-    -- TODO: WESTRING不区分大小写，不过我们把WorldEditStrings.txt改了，暂时不会出现问题
+function mt:get_editstring(source)
+    local str = source:upper()
+    if str:sub(1, 9) ~= 'WESTRING_' then
+        return source
+    end
     if not self.editstring then
-        self.editstring = ini(self:mpq_load('UI\\WorldEditStrings.txt'))['WorldEditStrings']
+        self.editstring = {}
+        local t
+        if self.config.data_wes == '${DEFAULT}' then
+            t = ini(load_file('WorldEditStrings.txt'))['WorldEditStrings']
+        else
+            t = ini(self:wes_load('WorldEditStrings.txt'))['WorldEditStrings']
+        end
+        for k, v in pairs(t) do
+            self.editstring[k:upper()] = v
+        end
     end
-    if not self.editstring[str] then
-        return str
+    if self.editstring[str] then
+        repeat
+            str = self.editstring[str]
+        until not self.editstring[str]
+        return str:gsub('%c+', '')
     end
-    repeat
-        str = self.editstring[str]
-    until not self.editstring[str]
-    return str:gsub('%c+', '')
+    local text = lang.wes[str]
+    if text ~= str then
+        return text
+    end
+    if not self.editstring_reported then
+        self.editstring_reported = {}
+    end
+    if not self.editstring_reported[str] and #self.editstring_reported < 10 then
+        self.editstring_reported[str] = true
+        --self.editstring_reported[#self.editstring_reported+1] = str
+        self.messager.report(lang.report.OTHER, 9, lang.report.NO_WES_STRING, source)
+    end
+    return source
 end
 
 local function create_default(w2l)
@@ -90,7 +119,7 @@ local function create_default(w2l)
     end
     if need_build then
         default = w2l:build_slk()
-        w2l:message('-report|9其他', '没有找到预生成结果')
+        w2l.messager.report(lang.report.OTHER, 9, lang.report.NO_PREBUILT)
     end
     return default
 end
@@ -116,7 +145,7 @@ function mt:load_wts(wts, content, max, reason, fmter)
     return content:gsub('TRIGSTR_(%d+)', function(i)
         local str_data = wts[tonumber(i)]
         if not str_data then
-            self.message('-report|9其他', '没有找到字符串定义:', ('TRIGSTR_%03d'):format(i))
+            self.messager.report(lang.report.OTHER, 9, lang.report.NO_TRIGSTR:format(i))
             return
         end
         local text = str_data.text
@@ -131,11 +160,9 @@ function mt:load_wts(wts, content, max, reason, fmter)
 end
 
 function mt:save_wts(wts, text, reason)
-    self.message('-report|7保存到wts中的文本', reason)
-    self.message('-tip', '文本保存在wts中会导致加载速度变慢: ', (text:sub(1, 1000):gsub('\r\n', ' ')))
+    self.messager.report(lang.report.TEXT_IN_WTS, 7, reason, lang.report.TEXT_IN_WTS_HINT..text:sub(1, 1000))
     if text:find('}', 1, false) then
-        self.message('-report|2警告', '文本中的"}"被修改为了"|"')
-        self.message('-tip', (text:sub(1, 1000):gsub('\r\n', ' ')))
+        self.messager.report(lang.report.WARN, 2, lang.report.WTS_NEED_ESCAPE, text:sub(1, 1000))
         text = text:gsub('}', '|')
     end
     local index = #wts.mark + 1
@@ -154,6 +181,10 @@ function mt:refresh_wts(wts)
     return table.concat(lines, '\r\n\r\n')
 end
 
+local function hasFile(name)
+    return nil ~= package.searchpath(name, package.path)
+end
+
 function mt:__index(name)
     local value = mt[name]
     if value then
@@ -166,15 +197,13 @@ function mt:__index(name)
         self.info = lni(assert(load_file('info.ini')), 'info')
         return self.info
     end
-    local suc, res = pcall(require, 'slk.'..name)
-    if suc then
-        self[name] = res
-        return res
+    if hasFile('slk.'..name) then
+        self[name] = require('slk.'..name)
+        return self[name]
     end
-    local suc, res = pcall(require, 'other.'..name)
-    if suc then
-        self[name] = res
-        return res
+    if hasFile('other.'..name) then
+        self[name] = require('other.'..name)
+        return self[name]
     end
     self.loaded[name] = true
     return nil
@@ -278,6 +307,11 @@ function mt:file_remove(type, name)
     end
 end
 
+function mt:failed(msg)
+    self.messager.exit('failed', msg or lang.script.UNKNOWN_REASON)
+    os.exit(1, true)
+end
+
 mt.config = {}
 
 local function toboolean(v)
@@ -292,10 +326,11 @@ end
 function mt:set_config(config)
     local default = self:parse_lni(load_file 'config.ini')
     local config = config or {}
+    local dir
 
     local function choose(k, f)
         local a = config[k]
-        local b = default and default[k]
+        local b = dir and dir[k]
         if f then
             a = f(a)
             b = f(b)
@@ -306,10 +341,11 @@ function mt:set_config(config)
             config[k] = a
         end
     end
-    choose('mode')
-    choose('mpq')
-    choose('lang')
-    default = default[config.mode]
+    dir = default.global
+    choose('data_war3')
+    choose('data_meta')
+    choose('data_wes')
+    dir = default[config.mode]
     choose('read_slk', toboolean)
     choose('find_id_times', math.tointeger)
     choose('remove_same', toboolean)
@@ -318,6 +354,7 @@ function mt:set_config(config)
     choose('mdx_squf', toboolean)
     choose('slk_doodad', toboolean)
     choose('optimize_jass', toboolean)
+    choose('confused', toboolean)
     choose('confusion')
     choose('target_storage')
     choose('computed_text', toboolean)
@@ -326,8 +363,6 @@ function mt:set_config(config)
     self.config = config
     
     self.mpq_path = mpq_path()
-    self.mpq_path:open(config.mpq)
-    self.mpq_path:open(config.lang)
     if self.config.version == 'Melee' then
         self.mpq_path:open 'Melee_V1'
     else
@@ -336,8 +371,16 @@ function mt:set_config(config)
 end
 
 function mt:set_messager(messager)
-    self.message = messager
-    self.progress:set_messager(messager)
+    if type(messager) == 'table' then
+        self.messager = setmetatable(messager, { __index = function () return function () end end })
+    else
+        self.messager = setmetatable({}, { __index = function (_, tp)
+            return function (...)
+                messager(tp, ...)
+            end
+        end })
+    end
+    self.progress:set_messager(self.messager)
 end
 
 return function ()

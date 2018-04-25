@@ -1,3 +1,4 @@
+local lang = require 'lang'
 local wct
 local unpack_index
 local chunk
@@ -10,7 +11,7 @@ end
 
 local function read_head()
     local ver = unpack 'l'
-    assert(ver == 1, '不支持的wct格式')
+    assert(ver == 1, lang.script.UNSUPPORTED_WCT)
 end
 
 local function read_custom()

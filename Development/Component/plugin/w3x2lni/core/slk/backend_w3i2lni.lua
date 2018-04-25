@@ -1,3 +1,5 @@
+local lang = require 'lang'
+
 local table_concat = table.concat
 local type = type
 local math_type = math.type
@@ -61,126 +63,126 @@ function mt:value(name)
 end
 
 function mt:add_head(data)
-    self:title('地图', data)
-    self:value '文件版本'
-    self:value '地图版本'
-    self:value '编辑器版本'
-    self:value '地图名称'
-    self:value '作者名字'
-    self:value '地图描述'
-    self:value '推荐玩家'
+    self:title(lang.w3i.MAP, data)
+    self:value(lang.w3i.FILE_VERSION)
+    self:value(lang.w3i.MAP_VERSION)
+    self:value(lang.w3i.WE_VERSION)
+    self:value(lang.w3i.MAP_NAME)
+    self:value(lang.w3i.AUTHOR_NAME)
+    self:value(lang.w3i.MAP_DESC)
+    self:value(lang.w3i.PLAYER_DESC)
 
-    self:title('镜头', data)
-    self:value '镜头范围'
-    self:value '镜头范围扩充'
+    self:title(lang.w3i.CAMERA, data)
+    self:value(lang.w3i.CAMERA_BOUND)
+    self:value(lang.w3i.CAMERA_COMPLEMENT)
 
-    self:title('地形', data)
-    self:value '地图宽度'
-    self:value '地图长度'
-    self:value '地形类型'
+    self:title(lang.w3i.MAP_INFO, data)
+    self:value(lang.w3i.MAP_WIDTH)
+    self:value(lang.w3i.MAP_HEIGHT)
+    self:value(lang.w3i.MAP_MAIN_GROUND)
     
-    self:title('选项', data)
-    self:value '使用的游戏数据设置'
-    self:value '关闭预览图'
-    self:value '自定义结盟优先权'
-    self:value '对战地图'
-    self:value '大型地图'
-    self:value '迷雾区域显示地形'
-    self:value '自定义玩家分组'
-    self:value '自定义队伍'
-    self:value '自定义科技树'
-    self:value '自定义技能'
-    self:value '自定义升级'
-    self:value '地图菜单标记'
-    self:value '地形悬崖显示水波'
-    self:value '地形起伏显示水波'
-    self:value '未知1'
-    self:value '未知2'
-    self:value '未知3'
-    self:value '未知4'
-    self:value '未知5'
-    self:value '未知6'
-    self:value '未知7'
-    self:value '未知8'
-    self:value '未知9'
+    self:title(lang.w3i.CONFIG, data)
+    self:value(lang.w3i.GAME_DATA_SETTING)
+    self:value(lang.w3i.DISABLE_PREVIEW)
+    self:value(lang.w3i.CUSTOM_ALLY)
+    self:value(lang.w3i.MELEE_MAP)
+    self:value(lang.w3i.LARGE_MAP)
+    self:value(lang.w3i.MASKED_AREA_SHOW_TERRAIN)
+    self:value(lang.w3i.FIX_FORCE_SETTING)
+    self:value(lang.w3i.CUSTOM_FORCE)
+    self:value(lang.w3i.CUSTOM_TECHTREE)
+    self:value(lang.w3i.CUSTOM_ABILITY)
+    self:value(lang.w3i.CUSTOM_UPGRADE)
+    self:value(lang.w3i.MAP_MENU_MARK)
+    self:value(lang.w3i.SHOW_WAVE_ON_CLIFF)
+    self:value(lang.w3i.SHOW_WAVE_ON_ROLLING)
+    self:value(lang.w3i.UNKNOWN_1)
+    self:value(lang.w3i.UNKNOWN_2)
+    self:value(lang.w3i.UNKNOWN_3)
+    self:value(lang.w3i.UNKNOWN_4)
+    self:value(lang.w3i.UNKNOWN_5)
+    self:value(lang.w3i.UNKNOWN_6)
+    self:value(lang.w3i.UNKNOWN_7)
+    self:value(lang.w3i.UNKNOWN_8)
+    self:value(lang.w3i.UNKNOWN_9)
     
-    self:title('载入图', data)
-    self:value '序号'
-    self:value '路径'
-    self:value '文本'
-    self:value '标题'
-    self:value '子标题'
+    self:title(lang.w3i.LOADING_SCREEN, data)
+    self:value(lang.w3i.ID)
+    self:value(lang.w3i.PATH)
+    self:value(lang.w3i.TEXT)
+    self:value(lang.w3i.TITLE)
+    self:value(lang.w3i.SUBTITLE)
 
-    self:title('战役', data)
-    self:value '路径'
-    self:value '文本'
-    self:value '标题'
-    self:value '子标题'
+    self:title(lang.w3i.PROLOGUE, data)
+    self:value(lang.w3i.PATH)
+    self:value(lang.w3i.TEXT)
+    self:value(lang.w3i.TITLE)
+    self:value(lang.w3i.SUBTITLE)
 
-    self:title('迷雾', data)
-    self:value '类型'
-    self:value 'z轴起点'
-    self:value 'z轴终点'
-    self:value '密度'
-    self:value '颜色'
+    self:title(lang.w3i.FOG, data)
+    self:value(lang.w3i.TYPE)
+    self:value(lang.w3i.START_Z)
+    self:value(lang.w3i.END_Z)
+    self:value(lang.w3i.DENSITY)
+    self:value(lang.w3i.COLOR)
 
-    self:title('环境', data)
-    self:value '天气'
-    self:value '音效'
-    self:value '光照'
-    self:value '水面颜色'
+    self:title(lang.w3i.ENVIRONMENT, data)
+    self:value(lang.w3i.WEATHER)
+    self:value(lang.w3i.SOUND)
+    self:value(lang.w3i.LIGHT)
+    self:value(lang.w3i.WATER_COLOR)
 
     return data
 end
 
 function mt:add_player(data)
-    self:title('玩家', data)
-    self:value '玩家数量'
+    self:title(lang.w3i.PLAYER, data)
+    self:value(lang.w3i.PLAYER_COUNT)
 
-    for i = 1, data['玩家']['玩家数量'] do
-        self:title('玩家'..i, data)
-        self:value '玩家'
-        self:value '类型'
-        self:value '种族'
-        self:value '修正出生点'
-        self:value '名字'
-        self:value '出生点'
-        self:value '低结盟优先权标记'
-        self:value '高结盟优先权标记'
+    for i = 1, data[lang.w3i.PLAYER][lang.w3i.PLAYER_COUNT] do
+        self:title(lang.w3i.PLAYER..i, data)
+        self:value(lang.w3i.PLAYER)
+        self:value(lang.w3i.TYPE)
+        self:value(lang.w3i.RACE)
+        self:value(lang.w3i.FIX_START_POSITION)
+        self:value(lang.w3i.NAME)
+        self:value(lang.w3i.START_POSITION)
+        self:value(lang.w3i.ALLY_LOW_FLAG)
+        self:value(lang.w3i.ALLY_HIGH_FLAG)
     end
 end
 
 function mt:add_force(data)
-    self:title('队伍', data)
-    self:value '队伍数量'
+    self:title(lang.w3i.FORCE, data)
+    self:value(lang.w3i.FORCE_COUNT)
 
-    for i = 1, data['队伍']['队伍数量'] do
-        self:title('队伍'..i, data)
-        self:value '结盟'
-        self:value '结盟胜利'
-        self:value '共享视野'
-        self:value '共享单位控制'
-        self:value '共享高级单位设置'
-        self:value '玩家列表'
-        self:value '队伍名称'
+    for i = 1, data[lang.w3i.FORCE][lang.w3i.FORCE_COUNT] do
+        self:title(lang.w3i.FORCE..i, data)
+        self:value(lang.w3i.ALLY)
+        self:value(lang.w3i.ALLY_WIN)
+        self:value(lang.w3i.SHARE_VISIBLE)
+        self:value(lang.w3i.SHARE_CONTROL)
+        self:value(lang.w3i.SHARE_ADVANCE)
+        self:value(lang.w3i.PLAYER_LIST)
+        self:value(lang.w3i.FORCE_NAME)
     end
 end
 
 function mt:add_upgrade(data)
     local i = 1
-    while self:title('升级'..i, data) do
-        self:value '玩家列表'
+    while self:title(lang.w3i.UPGRADE..i, data) do
+        self:value(lang.w3i.PLAYER_LIST)
         self:value 'ID'
-        self:value '等级'
-        self:value '可用性'
+        self:value(lang.w3i.LEVEL)
+        self:value(lang.w3i.AVAILABLE)
         i = i + 1
     end
 end
 
 function mt:add_tech(data)
     local i = 1
-    while self:title('科技'..i, data) do
-        self:value '玩家列表'
+    while self:title(lang.w3i.TECH..i, data) do
+        self:value(lang.w3i.PLAYER_LIST)
         self:value 'ID'
         i = i + 1
     end
@@ -188,14 +190,14 @@ end
 
 function mt:add_randomgroup(data)
     local i = 1
-    while self:title('随机组'..i, data) do
-        self:value '随机组名称'
-        self:value '位置类型'
+    while self:title(lang.w3i.RANDOM_GROUP..i, data) do
+        self:value(lang.w3i.RANDOM_GROUP_NAME)
+        self:value(lang.w3i.POSITION_TYPE)
 
-        self:add('设置 = {')
-        for i, set in ipairs(data['随机组'..i]['设置']) do
+        self:add(lang.w3i.SETTING .. ' = {')
+        for i, set in ipairs(data[lang.w3i.RANDOM_GROUP..i][lang.w3i.SETTING]) do
             self:add('%d = {', i)
-            self:add('几率 = %d,', set['几率'])
+            self:add(lang.w3i.CHANCE .. ' = %d,', set[lang.w3i.CHANCE])
             self:add('ID = {%s},', table_concat(format_table(set['ID']), ', '))
             self:add('},')
         end
@@ -206,14 +208,14 @@ end
 
 function mt:add_randomitem(data)
     local i = 1
-    while self:title('物品列表'..i, data) do
-        self:value '物品列表名称'
+    while self:title(lang.w3i.RANDOM_ITEM..i, data) do
+        self:value(lang.w3i.RANDOM_ITEM_NAME)
 
-        self:add('设置 = {')
-        for i, set in ipairs(data['物品列表'..i]['设置']) do
+        self:add(lang.w3i.SETTING .. ' = {')
+        for i, set in ipairs(data[lang.w3i.RANDOM_ITEM..i][lang.w3i.SETTING]) do
             self:add('%d = {', i)
             for _, item in ipairs(set) do
-                self:add('{几率 = %d, ID = %q},', item['几率'], item['ID'])
+                self:add(('{%s = %d, ID = %q},'):format(lang.w3i.CHANCE), item[lang.w3i.CHANCE], item['ID'])
             end
             self:add('},')
         end

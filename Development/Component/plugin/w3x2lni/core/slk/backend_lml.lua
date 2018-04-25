@@ -1,3 +1,5 @@
+local lang = require 'lang'
+
 local w2l
 local wtg
 local wct
@@ -99,28 +101,28 @@ local function read_dirs(map)
         local filename = map[1][dir.name]
         local dir_data = { filename, dir.id }
         if dir.name ~= filename then
-            dir_data[#dir_data+1] = { '名称', dir.name }
+            dir_data[#dir_data+1] = { lang.lml.NAME, dir.name }
         end
         if dir.comment == 1 then
-            dir_data[#dir_data+1] = { '注释', 1 }
+            dir_data[#dir_data+1] = { lang.lml.COMMENT, 1 }
         end
         for i, trg in ipairs(dirs[dir.id]) do
             local filename = map[dir.name][trg.name]
             local trg_data = { filename, false }
             if trg.name ~= filename then
-                trg_data[#trg_data+1] = { '名称', trg.name }
+                trg_data[#trg_data+1] = { lang.lml.NAME, trg.name }
             end
             if trg.type == 1 then
-                trg_data[#trg_data+1] = { '注释' }
+                trg_data[#trg_data+1] = { lang.lml.COMMENT }
             end
             if trg.enable == 0 then
-                trg_data[#trg_data+1] = { '禁用' }
+                trg_data[#trg_data+1] = { lang.lml.DISABLE }
             end
             if trg.close == 1 then
-                trg_data[#trg_data+1] = { '关闭' }
+                trg_data[#trg_data+1] = { lang.lml.CLOSE }
             end
             if trg.run == 1 then
-                trg_data[#trg_data+1] = { '运行' }
+                trg_data[#trg_data+1] = { lang.lml.RUN }
             end
             dir_data[#dir_data+1] = trg_data
         end
@@ -164,22 +166,22 @@ return function (w2l_, wtg_, wct_)
     local files = {}
 
     if #wct.custom.comment > 0 then
-        files['代码.txt'] = wct.custom.comment
+        files[lang.lml.CODE .. '.txt'] = wct.custom.comment
     end
     if #wct.custom.code > 0 then
-        files['代码.j'] = wct.custom.code
+        files[lang.lml.CODE .. '.j'] = wct.custom.code
     end
 
     local vars = convert_lml(wtg.vars)
     if #vars > 0 then
-        files['变量.lml'] = vars
+        files[lang.lml.VARIABLE .. '.lml'] = vars
     end
 
     local map = compute_path()
     
     local listfile = read_dirs(map)
     if #listfile > 0 then
-        files['目录.lml'] = listfile
+        files[lang.lml.CATALOG .. '.lml'] = listfile
     end
 
     read_triggers(files, map)

@@ -1,3 +1,4 @@
+local lang = require 'lang'
 local w2l
 local wtg
 local state
@@ -28,7 +29,7 @@ end
 local function fix_arg(n)
     n = n or #fix_step
     if n <= 0 then
-        error '触发器文件错误。'
+        error(lang.script.WTG_ERROR)
     end
     local step = fix_step[n]
     local max = max_guess_arg
@@ -38,7 +39,7 @@ local function fix_arg(n)
     if #step.args >= max then
         if n > 1 then
             step.args = {}
-            w2l.message(('猜测[%s]的参数数量为[0]'):format(step.name))
+            w2l.messager.text(lang.script.WTG_GUESS_ARG:format(step.name, 0))
             return fix_arg(n-1)
         else
             max_guess_arg = max_guess_arg + 1
@@ -46,7 +47,7 @@ local function fix_arg(n)
     end
     table.insert(step.args, {})
     last_guess = step
-    w2l.message(('猜测[%s]的参数数量为[%d]'):format(step.name, #step.args))
+    w2l.messager.text(lang.scirpt.WTG_GUESS_ARG:format(step.name, #step.args))
     return step.save_point
 end
 
@@ -55,7 +56,7 @@ local function try_fix(tp, name)
         fix.ui[tp] = {}
     end
     if not fix.ui[tp][name] then
-        w2l.message(('触发器UI[%s]不存在'):format(name))
+        w2l.messager.text(WTG_UI_NOT_FOUND:format(name))
         fix.ui[tp][name] = {
             name = name,
             fix = true,
@@ -70,7 +71,7 @@ local function try_fix(tp, name)
             table.insert(fix.categories[tp], 'TC_UNKNOWUI')
         end
         table.insert(fix.categories[tp]['TC_UNKNOWUI'], fix.ui[tp][name])
-        w2l.message(('猜测[%s]的参数数量为[0]'):format(name))
+        w2l.messager.text(lang.scirpt.WTG_GUESS_ARG:format(name, 0))
         try_count = 0
     end
     return fix.ui[tp][name]
@@ -422,9 +423,9 @@ local function read_triggers()
             end
             need_retry = false
             if try_count > 10000 then
-                error('在大量尝试后放弃修复。')
+                error(lang.script.WTG_ABORT_FIX)
             end
-            w2l.message(errs[1])
+            w2l.messager.text(errs[1])
             if retry_point then
                 pos, unpack_index = retry_point[1], retry_point[2]
                 retry_point = false

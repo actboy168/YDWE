@@ -1,3 +1,4 @@
+local lang = require 'lang'
 local pairs = pairs
 local type = type
 
@@ -22,7 +23,7 @@ end
 
 local function load_slk(w2l)
     if w2l.force_slk then
-        w2l.message('-report|9其他', '物编信息不完整,强制读取slk文件')
+        w2l.messager.report(lang.report.OTHER, 9, lang.report.FORCE_READ_SLK)
     end
     if (w2l.force_slk or w2l.config.read_slk) and has_slk(w2l) then
         return w2l:build_slk(true)
@@ -39,7 +40,7 @@ local function load_obj(w2l, wts)
         local buf = w2l:file_load('map', name)
         local count = count + 1
         if buf then
-            w2l.message('正在转换', name)
+            w2l.messager.text(lang.script.CONVERT_ONE .. name)
             objs[type] = w2l:frontend_obj(type, buf, wts)
             w2l.progress(count / 8)
         end
@@ -54,7 +55,7 @@ local function load_lni(w2l)
         count = count + 1
         local buf = w2l:file_load('table', type)
         if buf then
-            w2l.message('正在转换', type)
+            w2l.messager.text(lang.script.CONVERT_ONE .. type)
             lnis[type] = w2l:frontend_lni(type, buf, type)
             w2l.progress(count / 8)
         end
@@ -84,8 +85,8 @@ local function update_version(w2l, w3i)
     if not w3i then
         return
     end
-    local melee = w3i['选项']['对战地图']
-    local set   = w3i['选项']['使用的游戏数据设置']
+    local melee = w3i[lang.w3i.CONFIG][lang.w3i.MELEE_MAP]
+    local set   = w3i[lang.w3i.CONFIG][lang.w3i.GAME_DATA_SETTING]
     if set == -1 or set == 0 then
         if melee == 0 then
             w2l.config.version = 'Custom'
@@ -101,13 +102,13 @@ local function update_version(w2l, w3i)
 end
 
 local displaytype = {
-    unit = '单位',
-    ability = '技能',
-    item = '物品',
-    buff = '魔法效果',
-    upgrade = '科技',
-    doodad = '装饰物',
-    destructable = '可破坏物',
+    unit = lang.script.UNIT,
+    ability = lang.script.ABILITY,
+    item = lang.script.ITEM,
+    buff = lang.script.BUFF,
+    upgrade = lang.script.UPGRADE,
+    doodad = lang.script.DOODAD,
+    destructable = lang.script.DESTRUCTABLE,
 }
 
 local function get_displayname(o)
@@ -148,8 +149,7 @@ local function update_then_merge(w2l, slks, objs, lnis, slk)
                     break
                 end
                 local displayname = get_displayname(slk[type][data[1]])
-                w2l.message('-report|6无效的物编数据', ('%s %s %s'):format(displaytype[type], data[1], displayname))
-                w2l.message('-tip', ('[%s]: %s'):format(data[2], data[3]))
+                w2l.messager.report(lang.report.INVALID_OBJECT_DATA, 6, ('%s %s %s'):format(displaytype[type], data[1], displayname), ('[%s]: %s'):format(data[2], data[3]))
             end
         end
         if report2 then
@@ -157,10 +157,7 @@ local function update_then_merge(w2l, slks, objs, lnis, slk)
                 if not report2[i] then
                     break
                 end
-                w2l.message('-report|6无效的物编数据', report2[i][1])
-                if report2[i][2] then
-                    w2l.message('-tip', report2[i][2])
-                end
+                w2l.messager.report(lang.report.INVALID_OBJECT_DATA, 6, report2[i][1], report2[i][2])
             end
         end
     end
@@ -176,22 +173,22 @@ return function(w2l, slk)
     slk.w3i = load_w3i(w2l, slk)
     update_version(w2l, slk.w3i)
 
-    w2l.message('读取obj...')
+    w2l.messager.text(lang.script.LOAD_OBJ)
     w2l.progress:start(0.4)
     local objs = load_obj(w2l, slk.wts)
     w2l.progress:finish()
 
-    w2l.message('读取lni...')
+    w2l.messager.text(lang.script.LOAD_LNI)
     w2l.progress:start(0.6)
     local lnis = load_lni(w2l)
     w2l.progress:finish()
 
-    w2l.message('读取slk...')
+    w2l.messager.text(lang.script.LOAD_SLK)
     w2l.progress:start(0.8)
     local slks = load_slk(w2l)
     w2l.progress:finish()
     
-    w2l.message('合并物编数据...')
+    w2l.messager.text(lang.script.MERGE_OBJECT)
     w2l.progress:start(1)
     update_then_merge(w2l, slks, objs, lnis, slk)
     w2l.progress:finish()
