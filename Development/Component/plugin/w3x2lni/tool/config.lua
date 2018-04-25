@@ -5,7 +5,7 @@ local input_path = require 'tool.input_path'
 local command = require 'tool.command'
 local builder = require 'map-builder'
 local config_loader = require 'tool.config_loader'
-local root = fs.current_path():remove_filename()
+local root = fs.current_path()
 local default_config
 local global_config
 
@@ -19,7 +19,7 @@ local function save()
         lines[#lines+1] = ''
     end
     local buf = table.concat(lines, '\r\n')
-    io.save(root / 'config.ini', buf)
+    io.save(root:parent_path() / 'config.ini', buf)
 end
 
 local function load_config(buf, fill)
@@ -84,10 +84,10 @@ end
 
 return function (path)
     if not default_config then
-        default_config = load_config(io.load(root / 'script' / 'tool' / 'config.ini'), true)
+        default_config = load_config(io.load(root / 'tool' / 'config.ini'), true)
     end
     if not global_config then
-        global_config = load_config(io.load(root / 'config.ini'), false)
+        global_config = load_config(io.load(root:parent_path() / 'config.ini'), false)
     end
     local map_config
     local map = builder.load(input_path(path))

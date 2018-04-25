@@ -286,6 +286,8 @@ return function (mode)
     messager.text(lang.script.CHECK_PLUGIN)
     plugin(w2l, config)
     
+    w2l:call_plugin('on_convert')
+    
     messager.text(lang.script.LOAD_FILE)
     w2l.progress:start(input_rate)
     input_ar:search_files(w2l.progress)
