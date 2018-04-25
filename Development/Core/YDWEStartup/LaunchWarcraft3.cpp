@@ -61,11 +61,10 @@ static bool map_convert(const fs::path& ydwe, const fs::path& from, const fs::pa
 	process.set_env(L"PATH", (ydwe / L"bin").wstring());
 	if (!process.create(
 		app,
-		base::format(LR"("%s" -e "package.cpath = [[%s]]" gui\mini.lua -%s -config="%s" "%s" "%s")", 
+		base::format(LR"("%s" -e "package.cpath = [[%s]]" gui\mini.lua %s "%s" "%s")", 
 			app.wstring(), 
 			(ydwe / L"bin" / L"modules" / L"?.dll").wstring(),
 			mode,
-			(ydwedev / L"script"/ L"war3"/ L"w3x2lni.ini").wstring(),
 			from.wstring(),
 			to.wstring()
 		),
