@@ -47,6 +47,11 @@ function mt:on_convert(w2l)
         fs.create_directories(path:parent_path())
         io.save(path, buf)
 	end
+
+    w2l.config.optimize_jass = false
+    w2l.config.mdx_squf = false
+
+    w2l:set_config(w2l.config)
 end
 
 return mt
