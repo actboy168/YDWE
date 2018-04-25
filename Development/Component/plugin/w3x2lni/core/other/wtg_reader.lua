@@ -56,7 +56,7 @@ local function try_fix(tp, name)
         fix.ui[tp] = {}
     end
     if not fix.ui[tp][name] then
-        w2l.messager.text(WTG_UI_NOT_FOUND:format(name))
+        w2l.messager.text(lang.scirpt.WTG_UI_NOT_FOUND:format(name))
         fix.ui[tp][name] = {
             name = name,
             fix = true,
