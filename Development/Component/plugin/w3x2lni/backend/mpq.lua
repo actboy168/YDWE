@@ -11,6 +11,7 @@ local file_version = require 'ffi.file_version'
 local core = require 'backend.sandbox_core'
 local unpack_config = require 'backend.unpack_config'
 local w3xparser = require 'w3xparser'
+local messager = require 'tool.messager'
 local w2l
 local mpq_name
 local root = fs.current_path()
@@ -162,7 +163,8 @@ local function extract_mpq(mpqs)
 end
 
 local function create_metadata(w2l, mpqs)
-    local meta = prebuilt_metadata(w2l, function (filename)
+    local defined_meta = w2l:parse_lni(io.load(root / 'core' / 'defined' / 'metadata.ini'))
+    local meta = prebuilt_metadata(w2l, defined_meta, function (filename)
         if filename == 'doodadmetadata.slk' then
             return mpqs:load_file('Doodads\\' .. filename)
         else
@@ -175,10 +177,12 @@ local function create_metadata(w2l, mpqs)
 end
 
 local function create_wes(w2l, mpqs)
-    local wes = mpqs:load_file 'ui\\WorldEditStrings.txt'
     local wes_path = root:parent_path() / 'data' / mpq_name / 'we'
     fs.create_directories(wes_path)
+    local wes = mpqs:load_file 'ui\\WorldEditStrings.txt'
+    local wegs = mpqs:load_file 'ui\\WorldEditGameStrings.txt'
     io.save(wes_path / 'WorldEditStrings.txt', wes)
+    io.save(wes_path / 'WorldEditGameStrings.txt', wegs)
 end
 
 local lost_wes = {}
@@ -192,6 +196,10 @@ local function get_w2l()
         return self.mpq_path:each_path(function(path)
             return io.load(mpq_path / path / filename)
         end)
+    end
+
+    function w2l:wes_load(filename)
+        return io.load(root:parent_path() / 'data' / mpq_name / 'we' / filename)
     end
 
     function messager.report(_, _, str, tip)
@@ -261,6 +269,18 @@ return function ()
         mpq_name = input:filename():string()
     end
 
+    local config = require 'tool.config' ()
+    config.global.data_war3 = mpq_name
+    if config.global.data_ui ~= '${YDWE}' then
+        config.global.data_ui = mpq_name
+    end
+    if config.global.data_meta ~= '${DEFAULT}' then
+        config.global.data_meta = mpq_name
+    end
+    if config.global.data_wes ~= '${DEFAULT}' then
+        config.global.data_wes = mpq_name
+    end
+
     w2l.progress:start(0.1)
     w2l.messager.text(lang.script.CLEAN_DIR)
     local mpq_path = fs.current_path():parent_path() / 'data' / mpq_name / 'war3'
@@ -290,29 +310,18 @@ return function ()
     w2l.progress:finish()
 
     w2l.progress:start(0.4)
-    makefile(w2l, mpq_name, 'Melee')
+    local slk = makefile(w2l, 'Melee')
     w2l.progress:finish()
     w2l.progress:start(0.65)
-    maketemplate(w2l, mpq_name, 'Melee')
+    maketemplate(w2l, 'Melee', slk)
     w2l.progress:finish()
     w2l.progress:start(0.75)
-    makefile(w2l, mpq_name, 'Custom')
+    local slk = makefile(w2l, 'Custom')
     w2l.progress:finish()
     w2l.progress:start(1.0)
-    maketemplate(w2l, mpq_name, 'Custom')
+    maketemplate(w2l, 'Custom', slk)
     w2l.progress:finish()
 
-    local config = require 'tool.config' ()
-    config.global.data_war3 = mpq_name
-    if config.global.data_ui ~= '${YDWE}' then
-        config.global.data_ui = mpq_name
-    end
-    if config.global.data_meta ~= '${DEFAULT}' then
-        config.global.data_meta = mpq_name
-    end
-    if config.global.data_wes ~= '${DEFAULT}' then
-        config.global.data_wes = mpq_name
-    end
     w2l.messager.text((lang.script.FINISH):format(os.clock()))
     w2l.messager.exit('success', lang.script.MPQ_EXTRACT_DIR:format(mpq_name))
 

@@ -42,11 +42,11 @@ local function getplayernum(mappath)
 		local w2l = w3x2lni()
 		local tbl = w2l:frontend_w3i(w3i)
 		local n = 0
-		if tbl['选项']['自定义玩家分组'] == 0 then
-			n = tbl['玩家']['玩家数量']
+		if tbl.CONFIG.FIX_FORCE_SETTING == 0 then
+			n = tbl.PLAYER.PLAYER_COUNT
 		else
-			for i = 1, tbl['玩家']['玩家数量'] do
-    			if tbl['玩家'..i]['类型'] == 1 then
+			for i = 1, tbl.PLAYER.PLAYER_COUNT do
+    			if tbl['PLAYER'..i].TYPE == 1 then
 					n = n + 1
 				end
 			end

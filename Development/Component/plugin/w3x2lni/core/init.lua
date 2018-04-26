@@ -83,6 +83,12 @@ function mt:get_editstring(source)
         for k, v in pairs(t) do
             self.editstring[k:upper()] = v
         end
+        if self.config.data_wes ~= '${DEFAULT}' then
+            t = ini(self:wes_load('WorldEditGameStrings.txt'))['WorldEditStrings']
+        end
+        for k, v in pairs(t) do
+            self.editstring[k:upper()] = v
+        end
     end
     if self.editstring[str] then
         repeat
@@ -97,7 +103,7 @@ function mt:get_editstring(source)
     if not self.editstring_reported then
         self.editstring_reported = {}
     end
-    if not self.editstring_reported[str] and #self.editstring_reported < 10 then
+    if not self.editstring_reported[str] then
         self.editstring_reported[str] = true
         --self.editstring_reported[#self.editstring_reported+1] = str
         self.messager.report(lang.report.OTHER, 9, lang.report.NO_WES_STRING, source)
