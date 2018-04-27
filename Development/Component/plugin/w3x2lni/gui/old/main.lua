@@ -263,7 +263,7 @@ local function window_convert(canvas)
         checkbox_simple(canvas, lang.ui.REMOVE_WE_ONLY, lang.ui.REMOVE_WE_ONLY_HINT, 'remove_we_only')
     end
     canvas:layout_row_dynamic(10, 1)
-    canvas:tree('高级', 1, function()
+    canvas:tree(lang.ui.ADVANCED, 1, function()
         canvas:layout_row_dynamic(30, 1)
         if fmt == 'slk' then
             checkbox_simple(canvas, lang.ui.SLK_DOODAD, lang.ui.SLK_DOODAD_HINT, 'slk_doodad')

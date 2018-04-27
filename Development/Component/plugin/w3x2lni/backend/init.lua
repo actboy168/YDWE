@@ -41,6 +41,9 @@ elseif act == 'log' then
 elseif act == 'template' then
     local template = require 'backend.template'
     template()
+elseif act == 'test' then
+    local test = require 'backend.test'
+    test()
 elseif not act or act == 'help' then
     require 'backend.help'
 else

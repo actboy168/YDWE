@@ -51,6 +51,7 @@ local mustuse =  {
         'PingColor',
         'QuestIndicatorTimeout',
         'SelectionCircle',
+        'HERO',
     }
 }
 

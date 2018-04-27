@@ -41,7 +41,7 @@ local function to_obj(w2l, slk)
         w2l.progress:start(count / 8)
         local content = w2l:backend_obj(type, data, slk.wts)
         w2l.progress:finish()
-        if content then
+        if content and #content > 0 then
             w2l:file_save('map', filename, content)
         end
     end
@@ -227,7 +227,9 @@ local function remove_unuse(w2l, slk)
         w2l.messager.report(lang.report.SIMPLIFY, 4, lang.report.SIMPLIFIED_OBJECT:format(unuse_origin + unuse_custom, total_origin + total_custom))
     end
     if total_origin - unuse_origin > 0 then
+        w2l.messager.report(lang.report.SIMPLIFY, 4, '---------------------------------------------------------------------')
         w2l.messager.report(lang.report.SIMPLIFY, 4, lang.report.RETAIN_DEFAULT_OBJECT:format(total_origin - unuse_origin, total_origin))
+        w2l.messager.report(lang.report.SIMPLIFY, 4, '---------------------------------------------------------------------')
         report_list(slk, origin_list, 'unit', 10)
         report_list(slk, origin_list, 'ability', 10)
         report_list(slk, origin_list, 'item', 10)
@@ -237,7 +239,9 @@ local function remove_unuse(w2l, slk)
         report_list(slk, origin_list, 'doodad', 3)
     end
     if unuse_custom > 0 then
+        w2l.messager.report(lang.report.SIMPLIFY, 4, '---------------------------------------------------------------------')
         w2l.messager.report(lang.report.SIMPLIFY, 4, lang.report.SIMPLIFIED_CUSTOM_OBJECT:format(unuse_custom, total_custom))
+        w2l.messager.report(lang.report.SIMPLIFY, 4, '---------------------------------------------------------------------')
         report_list(slk, custom_list, 'unit', 10)
         report_list(slk, custom_list, 'ability', 10)
         report_list(slk, custom_list, 'item', 10)
@@ -274,7 +278,7 @@ local function to_slk(w2l, slk)
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'destructable', 'doodad', 'misc'} do
         local data = object[type] or slk[type]
         local content = w2l:backend_obj(type, data, slk.wts)
-        if content then
+        if content and #content > 0 then
             w2l:file_save('map', w2l.info.obj[type], content)
         end
     end

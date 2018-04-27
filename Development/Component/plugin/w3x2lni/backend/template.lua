@@ -1,5 +1,4 @@
 require 'filesystem'
-local command = require 'tool.command'
 local messager = require 'tool.messager'
 local maketemplate = require 'prebuilt.maketemplate'
 local core = require 'backend.sandbox_core'

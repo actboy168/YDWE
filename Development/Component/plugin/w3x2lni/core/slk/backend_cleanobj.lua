@@ -149,8 +149,8 @@ local function clean_misc(type, t)
     if not t then
         return
     end
-    for _, name in ipairs {'FontHeights', 'InfoPanel', 'Misc', 'PingColor', 'QuestIndicatorTimeout', 'SelectionCircle'} do
-        if t[name] then
+    for name in pairs(default[type]) do
+        if t[name] and (t[name]._source ~= 'slk' or w2l.config.mode ~= 'slk') then
             clean_obj(id, t[name], type, default[type])
         end
     end
