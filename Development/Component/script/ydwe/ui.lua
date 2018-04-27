@@ -8,10 +8,6 @@ local function is_enable_japi()
 	return result
 end
 
-local function is_enable_unknowui()
-	return true
-end
-
 local function get_ui()
     local ydwe = fs.ydwe_devpath()
 	local list = {}
@@ -33,9 +29,6 @@ local function get_ui()
 		end
 	end
 	f:close()
-	if is_enable_unknowui() then
-		table.insert(list, fs.ydwe_path() / 'ui' / 'unknowui')
-	end
 	return list
 end
 

@@ -15,7 +15,7 @@ local info = lni(io.load(ydwe / 'plugin' / 'w3x2lni' / 'core' / 'info.ini'))
 local current_language = (require "i18n").get_language()
 local list = {}
 
-local function is_enable_unknowui()
+local function is_enable_unknownui()
 	return true
 end
 
@@ -51,13 +51,23 @@ local function stringify_ini(t)
 end
 
 local state, data, string
-local function load_triggerdata(name, callback)
-	log.trace("virtual_mpq 'triggerdata'")
+local function load_triggerdata(load_unknownui)
 	if #list == 0 then
 		return nil
     end
-	state = nil
-	for _, path in ipairs(list) do
+    state = nil
+    local unknown_path = fs.ydwe_path() / 'unknownui'
+    for i, path in ipairs(list) do
+        if path:string() == unknown_path:string() then
+            table.remove(list, i)
+            break
+        end
+    end
+	if load_unknownui then
+		table.insert(list, unknown_path)
+	end
+    for _, path in ipairs(list) do
+        log.trace('Loading ui from ' .. path:string())
 		if fs.exists(path / 'ui') then
 			state = ui.merge(state, ui.old_reader(function(filename)
 				return io.load(path / 'ui' / filename)
@@ -118,7 +128,10 @@ end
 
 local function initialize()
 	list = require 'ui'
-	virtual_mpq.watch('UI\\TriggerData.txt',      load_triggerdata)
+    virtual_mpq.watch('UI\\TriggerData.txt',      function ()
+        log.trace("virtual_mpq 'triggerdata'")
+        return load_triggerdata(true)
+    end)
 	virtual_mpq.watch('UI\\TriggerStrings.txt',   load_triggerstrings)
 	virtual_mpq.watch('UI\\WorldEditStrings.txt', load_worldeditstrings)
 	virtual_mpq.watch('UI\\WorldEditData.txt',    load_worldeditdata)
@@ -194,7 +207,7 @@ local function initialize()
 		insert('Btlf', 'unit', 'other')
 		return stringify_slk(t, 'alias')
     end)
-    if is_enable_unknowui() then
+    if is_enable_unknownui() then
         local ignore_once = nil
         event.on('virtual_mpq: open map', function(mappath)
             if ignore_once == mappath then
@@ -202,7 +215,7 @@ local function initialize()
                 return
             end
             ignore_once = mappath
-            log.info('OpenMap', mappath)
+			log.info('OpenMap', mappath)
 	    	local wtg = storm.load_file('war3map.wtg')
 	    	if not wtg then
 	    		return
@@ -212,10 +225,11 @@ local function initialize()
 	    	end
             if not gui.yesno_message(nil, LNG.PARSE_UNKNOWN_UI) then
                 return
-            end
+			end
+            load_triggerdata(false)
 	    	local _, fix = w2l:wtg_reader(wtg, state)
             local bufs = {ui.new_writer(fix)}
-            local dir = fs.ydwe_path() / 'ui' / 'unknowui'
+            local dir = fs.ydwe_path() / 'unknownui'
 	    	fs.create_directories(dir)
 	    	io.save(dir / 'define.txt',    bufs[1])
 	    	io.save(dir / 'event.txt',     bufs[2])
