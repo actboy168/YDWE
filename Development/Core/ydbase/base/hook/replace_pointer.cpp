@@ -1,13 +1,13 @@
-#include <base/hook/detail/replace_pointer.h>
+#include <base/hook/replace_pointer.h>
 #include <base/hook/detail/memory_protect.h>
 #include <Windows.h>
 
-namespace base { namespace hook { namespace detail {
+namespace base { namespace hook {
 	uintptr_t replace_pointer(uintptr_t address, uintptr_t new_value)
 	{
 		uintptr_t old_value = 0;
 
-		memory_protect protect_(address);
+		detail::memory_protect protect_(address);
 		if (protect_.success())
 		{
 			DWORD written = 0;
@@ -26,4 +26,4 @@ namespace base { namespace hook { namespace detail {
 
 		return old_value;
 	}
-}}}
+}}

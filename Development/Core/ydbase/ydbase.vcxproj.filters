@@ -41,20 +41,11 @@
     <Filter Include="base\file">
       <UniqueIdentifier>{98c0be1b-e82d-4a6a-8179-8d6e11315c17}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\warcraft3">
-      <UniqueIdentifier>{7e4a1c7a-d9c5-407e-acf1-72627542f7a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="base\warcraft3\detail">
-      <UniqueIdentifier>{3d97b047-ef84-446e-8db9-35c263ab3b2b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\lua">
       <UniqueIdentifier>{b74a47f0-eb1f-4c6c-9b1c-210bcabbb9d0}</UniqueIdentifier>
     </Filter>
     <Filter Include="base\i18n">
       <UniqueIdentifier>{5337e579-9ee0-4e9b-807d-3339cda61c96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="base\warcraft3\jass">
-      <UniqueIdentifier>{96a12d03-e58b-4f43-8c9b-5226c011e69f}</UniqueIdentifier>
     </Filter>
     <Filter Include="base\thread">
       <UniqueIdentifier>{9ca77287-10cc-4b02-bc03-1ed154a1e30e}</UniqueIdentifier>
@@ -71,9 +62,6 @@
     <Filter Include="base\win\font">
       <UniqueIdentifier>{d3bb681c-bfad-45b8-b53a-094ab9bbc6bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\hook\udis86">
-      <UniqueIdentifier>{f23ecf6d-f199-4948-9430-68c1c5ec48c3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\i18n-2">
       <UniqueIdentifier>{84787b93-89af-4757-b2f5-8507c8e7cc78}</UniqueIdentifier>
     </Filter>
@@ -85,9 +73,6 @@
     </ClCompile>
     <ClCompile Include="base\win\version.cpp">
       <Filter>base\win</Filter>
-    </ClCompile>
-    <ClCompile Include="base\hook\detail\replace_pointer.cpp">
-      <Filter>base\hook\detail</Filter>
     </ClCompile>
     <ClCompile Include="base\hook\detail\memory_protect.cpp">
       <Filter>base\hook\detail</Filter>
@@ -128,35 +113,14 @@
     <ClCompile Include="base\file\memory_mapped_file.cpp">
       <Filter>base\file</Filter>
     </ClCompile>
-    <ClCompile Include="base\warcraft3\detail\string_hash.cpp">
-      <Filter>base\warcraft3\detail</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\detail\memory_search.cpp">
-      <Filter>base\warcraft3\detail</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\war3_searcher.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\basic_searcher.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
     <ClCompile Include="base\win\env_variable.cpp">
       <Filter>base\win</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\hashtable.cpp">
-      <Filter>base\warcraft3</Filter>
     </ClCompile>
     <ClCompile Include="base\util\console.cpp">
       <Filter>base\util</Filter>
     </ClCompile>
     <ClCompile Include="base\exception\seh_exception.cpp">
       <Filter>base\exception</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\jass.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\detail\convert_real.cpp">
-      <Filter>base\warcraft3\detail</Filter>
     </ClCompile>
     <ClCompile Include="base\win\process.cpp">
       <Filter>base\win</Filter>
@@ -170,38 +134,14 @@
     <ClCompile Include="base\i18n\libintl.cpp">
       <Filter>base\i18n</Filter>
     </ClCompile>
-    <ClCompile Include="base\warcraft3\jass\trampoline.cpp">
-      <Filter>base\warcraft3\jass</Filter>
-    </ClCompile>
     <ClCompile Include="base\exception\exception.cpp">
       <Filter>base\exception</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\jass\global_variable.cpp">
-      <Filter>base\warcraft3\jass</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\jass\trampoline_function.cpp">
-      <Filter>base\warcraft3\jass</Filter>
     </ClCompile>
     <ClCompile Include="base\exception\system_exception.cpp">
       <Filter>base\exception</Filter>
     </ClCompile>
     <ClCompile Include="base\file\stream.cpp">
       <Filter>base\file</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\jass\nf_register.cpp">
-      <Filter>base\warcraft3\jass</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\jass\hook.cpp">
-      <Filter>base\warcraft3\jass</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\jass\func_value.cpp">
-      <Filter>base\warcraft3\jass</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\event.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\directory.cpp">
-      <Filter>base\warcraft3</Filter>
     </ClCompile>
     <ClCompile Include="base\win\get_tick_count.cpp">
       <Filter>base\win</Filter>
@@ -212,17 +152,11 @@
     <ClCompile Include="base\thread\thread_exception.cpp">
       <Filter>base\thread</Filter>
     </ClCompile>
-    <ClCompile Include="base\warcraft3\command_line.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
     <ClCompile Include="base\win\font\file.cpp">
       <Filter>base\win\font</Filter>
     </ClCompile>
     <ClCompile Include="base\win\font\utility.cpp">
       <Filter>base\win\font</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\virtual_mpq.cpp">
-      <Filter>base\warcraft3</Filter>
     </ClCompile>
     <ClCompile Include="base\path\helper.cpp">
       <Filter>base\path</Filter>
@@ -232,21 +166,6 @@
     </ClCompile>
     <ClCompile Include="base\win\windows_category.cpp">
       <Filter>base\win</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\player.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="base\warcraft3\message_dispatch.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="base\hook\udis86\udis86_itab.c">
-      <Filter>base\hook\udis86</Filter>
-    </ClCompile>
-    <ClCompile Include="base\hook\udis86\udis86.c">
-      <Filter>base\hook\udis86</Filter>
-    </ClCompile>
-    <ClCompile Include="base\hook\udis86\udis86_decode.c">
-      <Filter>base\hook\udis86</Filter>
     </ClCompile>
     <ClCompile Include="base\hook\patch.cpp">
       <Filter>base\hook</Filter>
@@ -266,6 +185,9 @@
     <ClCompile Include="base\hook\replacedll.cpp">
       <Filter>base\hook</Filter>
     </ClCompile>
+    <ClCompile Include="base\hook\replace_pointer.cpp">
+      <Filter>base\hook</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -282,9 +204,6 @@
     </ClInclude>
     <ClInclude Include="base\win\version.h">
       <Filter>base\win</Filter>
-    </ClInclude>
-    <ClInclude Include="base\hook\detail\replace_pointer.h">
-      <Filter>base\hook\detail</Filter>
     </ClInclude>
     <ClInclude Include="base\hook\detail\memory_protect.h">
       <Filter>base\hook\detail</Filter>
@@ -340,38 +259,17 @@
     <ClInclude Include="base\util\noncopyable.h">
       <Filter>base\util</Filter>
     </ClInclude>
-    <ClInclude Include="base\warcraft3\detail\string_hash.h">
-      <Filter>base\warcraft3\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\detail\memory_search.h">
-      <Filter>base\warcraft3\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\war3_searcher.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\basic_searcher.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
     <ClInclude Include="base\util\singleton.h">
       <Filter>base\util</Filter>
     </ClInclude>
     <ClInclude Include="base\win\env_variable.h">
       <Filter>base\win</Filter>
     </ClInclude>
-    <ClInclude Include="base\warcraft3\hashtable.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
     <ClInclude Include="base\util\console.h">
       <Filter>base\util</Filter>
     </ClInclude>
     <ClInclude Include="base\exception\seh_exception.h">
       <Filter>base\exception</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\version.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\jass.h">
-      <Filter>base\warcraft3</Filter>
     </ClInclude>
     <ClInclude Include="base\win\process.h">
       <Filter>base\win</Filter>
@@ -388,17 +286,8 @@
     <ClInclude Include="base\path\self.h">
       <Filter>base\path</Filter>
     </ClInclude>
-    <ClInclude Include="base\warcraft3\jass\trampoline.h">
-      <Filter>base\warcraft3\jass</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\jass\opcode.h">
-      <Filter>base\warcraft3\jass</Filter>
-    </ClInclude>
     <ClInclude Include="base\exception\exception.h">
       <Filter>base\exception</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\jass\global_variable.h">
-      <Filter>base\warcraft3\jass</Filter>
     </ClInclude>
     <ClInclude Include="base\exception\detail\error_msg.h">
       <Filter>base\exception\detail</Filter>
@@ -414,9 +303,6 @@
     </ClInclude>
     <ClInclude Include="base\util\detail\utf8_codecvt.h">
       <Filter>base\util\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\jass\trampoline_function.h">
-      <Filter>base\warcraft3\jass</Filter>
     </ClInclude>
     <ClInclude Include="base\util\signal.h">
       <Filter>base\util</Filter>
@@ -439,26 +325,11 @@
     <ClInclude Include="base\util\format.h">
       <Filter>base\util</Filter>
     </ClInclude>
-    <ClInclude Include="base\warcraft3\jass\nf_register.h">
-      <Filter>base\warcraft3\jass</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\jass\hook.h">
-      <Filter>base\warcraft3\jass</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\jass\func_value.h">
-      <Filter>base\warcraft3\jass</Filter>
-    </ClInclude>
     <ClInclude Include="base\win\event.h">
       <Filter>base\win</Filter>
     </ClInclude>
-    <ClInclude Include="base\warcraft3\event.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
     <ClInclude Include="base\lua\make_range.h">
       <Filter>base\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\directory.h">
-      <Filter>base\warcraft3</Filter>
     </ClInclude>
     <ClInclude Include="base\config.h" />
     <ClInclude Include="base\win\get_tick_count.h">
@@ -488,9 +359,6 @@
     <ClInclude Include="base\hook\fp_call.h">
       <Filter>base\hook</Filter>
     </ClInclude>
-    <ClInclude Include="base\warcraft3\command_line.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
     <ClInclude Include="base\thread\lock\spin.h">
       <Filter>base\thread\lock</Filter>
     </ClInclude>
@@ -509,9 +377,6 @@
     <ClInclude Include="base\win\font\utility.h">
       <Filter>base\win\font</Filter>
     </ClInclude>
-    <ClInclude Include="base\warcraft3\virtual_mpq.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
     <ClInclude Include="base\path\helper.h">
       <Filter>base\path</Filter>
     </ClInclude>
@@ -523,30 +388,6 @@
     </ClInclude>
     <ClInclude Include="base\win\windows_category.h">
       <Filter>base\win</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\keyboard_code.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\player.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\message_dispatch.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="base\hook\udis86\udis86_itab.h">
-      <Filter>base\hook\udis86</Filter>
-    </ClInclude>
-    <ClInclude Include="base\hook\udis86\udis86_types.h">
-      <Filter>base\hook\udis86</Filter>
-    </ClInclude>
-    <ClInclude Include="base\hook\udis86\udis86_udint.h">
-      <Filter>base\hook\udis86</Filter>
-    </ClInclude>
-    <ClInclude Include="base\hook\udis86\udis86.h">
-      <Filter>base\hook\udis86</Filter>
-    </ClInclude>
-    <ClInclude Include="base\hook\udis86\udis86_decode.h">
-      <Filter>base\hook\udis86</Filter>
     </ClInclude>
     <ClInclude Include="base\filesystem.h">
       <Filter>base</Filter>
@@ -597,6 +438,9 @@
       <Filter>base\path</Filter>
     </ClInclude>
     <ClInclude Include="base\hook\replacedll.h">
+      <Filter>base\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="base\hook\replace_pointer.h">
       <Filter>base\hook</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,7 +5,7 @@
 #include <base/warcraft3/jass/func_value.h>
 #include <base/warcraft3/jass/nf_register.h>
 #include <base/warcraft3/version.h>
-#include <base/hook/detail/replace_pointer.h>
+#include <base/hook/replace_pointer.h>
 #include <base/hook/iat.h>
 #include <base/util/do_once.h>
 #include <base/util/foreach.h>
@@ -60,7 +60,7 @@ namespace warcraft3 { namespace jass {
 		if (!hook_address)
 			return false;
 
-		uintptr_t old_proc = hook::detail::replace_pointer(hook_address + 0x05, new_proc);
+		uintptr_t old_proc = hook::replace_pointer(hook_address + 0x05, new_proc);
 		if (!old_proc)
 			return false;
 
@@ -77,7 +77,7 @@ namespace warcraft3 { namespace jass {
 		if (!hook_address)
 			return false;
 
-		hook::detail::replace_pointer(hook_address + 0x05, *old_proc_ptr);
+		hook::replace_pointer(hook_address + 0x05, *old_proc_ptr);
 		return true;
 	}
 

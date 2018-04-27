@@ -1,6 +1,6 @@
 #include <base/hook/eat.h>
 #include <base/hook/detail/export_address_table.h>
-#include <base/hook/detail/replace_pointer.h>
+#include <base/hook/replace_pointer.h>
 
 #include <Windows.h>
 
@@ -21,7 +21,7 @@ namespace base { namespace hook {
 			return 0;
 		}
 
-		return (uintptr_t)module_handle + (uintptr_t)detail::replace_pointer(address, (uintptr_t)new_function-(uintptr_t)module_handle);
+		return (uintptr_t)module_handle + (uintptr_t)replace_pointer(address, (uintptr_t)new_function-(uintptr_t)module_handle);
 	}
 
 	uintptr_t eat(const wchar_t* module_name, const char* api_name, uintptr_t new_function)

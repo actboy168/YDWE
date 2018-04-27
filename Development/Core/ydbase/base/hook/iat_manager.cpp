@@ -1,6 +1,6 @@
 #include <base/hook/iat_manager.h>
 #include <base/hook/detail/import_address_table.h>
-#include <base/hook/detail/replace_pointer.h>
+#include <base/hook/replace_pointer.h>
 #include <cassert>
 
 namespace base { namespace hook {
@@ -37,7 +37,7 @@ namespace base { namespace hook {
 		if (!address)
 			return false;
 
-		uintptr_t old_function = detail::replace_pointer(address, new_function);
+		uintptr_t old_function = replace_pointer(address, new_function);
 		*old_function_ptr = old_function;
 		hook_info_.push_front(hook_info(old_function, new_function, address));
 		return true;
@@ -74,7 +74,7 @@ namespace base { namespace hook {
 			if ((info->old_function == old_function) && (info->new_function == new_function))
 			{
 				uintptr_t address = info->address;
-				uintptr_t last_function = detail::replace_pointer(address, old_function);
+				uintptr_t last_function = replace_pointer(address, old_function);
 				hook_info_.erase(info);
 				if (!last_function)
 				{
@@ -92,7 +92,7 @@ namespace base { namespace hook {
 	{
 		for (auto info = hook_info_.begin(); info != hook_info_.end(); ++info)
 		{
-			uintptr_t last_function = detail::replace_pointer(info->address, info->old_function);
+			uintptr_t last_function = replace_pointer(info->address, info->old_function);
 
 			if (last_function)
 			{

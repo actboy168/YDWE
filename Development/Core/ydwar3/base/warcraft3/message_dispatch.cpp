@@ -1,7 +1,7 @@
 #include <base/warcraft3/message_dispatch.h>
 #include <base/warcraft3/war3_searcher.h>	
-#include <base/warcraft3/version.h>		 
-#include <base/hook/inline.h>	  		 
+#include <base/warcraft3/version.h>
+#include <base/hook/replace_pointer.h>
 #include <base/hook/fp_call.h>
 #include <vector>
 

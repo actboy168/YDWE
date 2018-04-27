@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A0E0FBBF-AF94-4132-BE63-AB101E3AF949}</ProjectGuid>
+    <RootNamespace>ydbase</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfAtl>false</UseOfAtl>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), build.root))\Core\Solution\ydwe_build.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateManifest>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level4</WarningLevel>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <Optimization>MinSpace</Optimization>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <PreprocessorDefinitions>YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <BaseAddress>
+      </BaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <AdditionalLibraryDirectories>$(ThirdParty)Microsoft\Detours\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+      <PreprocessorDefinitions>YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link />
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <Link>
+      <BaseAddress>
+      </BaseAddress>
+      <AdditionalLibraryDirectories>$(ThirdParty)Microsoft\Detours\lib\$(PlatformName)\$(ConfigurationName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="base\warcraft3\command_line.cpp" />
+    <ClCompile Include="base\warcraft3\message_dispatch.cpp" />
+    <ClCompile Include="base\warcraft3\player.cpp" />
+    <ClCompile Include="base\warcraft3\udis86\udis86.c" />
+    <ClCompile Include="base\warcraft3\udis86\udis86_decode.c" />
+    <ClCompile Include="base\warcraft3\udis86\udis86_itab.c" />
+    <ClCompile Include="base\warcraft3\virtual_mpq.cpp" />
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="base\warcraft3\detail\convert_real.cpp">
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Strict</FloatingPointModel>
+      <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Strict</FloatingPointModel>
+    </ClCompile>
+    <ClCompile Include="base\warcraft3\detail\memory_search.cpp" />
+    <ClCompile Include="base\warcraft3\detail\string_hash.cpp" />
+    <ClCompile Include="base\warcraft3\basic_searcher.cpp" />
+    <ClCompile Include="base\warcraft3\event.cpp" />
+    <ClCompile Include="base\warcraft3\hashtable.cpp" />
+    <ClCompile Include="base\warcraft3\jass.cpp" />
+    <ClCompile Include="base\warcraft3\jass\func_value.cpp" />
+    <ClCompile Include="base\warcraft3\jass\global_variable.cpp" />
+    <ClCompile Include="base\warcraft3\jass\hook.cpp" />
+    <ClCompile Include="base\warcraft3\jass\nf_register.cpp" />
+    <ClCompile Include="base\warcraft3\jass\trampoline_function.cpp" />
+    <ClCompile Include="base\warcraft3\jass\trampoline.cpp" />
+    <ClCompile Include="base\warcraft3\war3_searcher.cpp" />
+    <ClCompile Include="base\warcraft3\directory.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="base\config.h" />
+    <ClInclude Include="base\warcraft3\command_line.h" />
+    <ClInclude Include="base\warcraft3\detail\memory_search.h" />
+    <ClInclude Include="base\warcraft3\detail\string_hash.h" />
+    <ClInclude Include="base\warcraft3\event.h" />
+    <ClInclude Include="base\warcraft3\hashtable.h" />
+    <ClInclude Include="base\warcraft3\basic_searcher.h" />
+    <ClInclude Include="base\warcraft3\jass.h" />
+    <ClInclude Include="base\warcraft3\jass\func_value.h" />
+    <ClInclude Include="base\warcraft3\jass\global_variable.h" />
+    <ClInclude Include="base\warcraft3\jass\hook.h" />
+    <ClInclude Include="base\warcraft3\jass\nf_register.h" />
+    <ClInclude Include="base\warcraft3\jass\trampoline_function.h" />
+    <ClInclude Include="base\warcraft3\jass\opcode.h" />
+    <ClInclude Include="base\warcraft3\jass\trampoline.h" />
+    <ClInclude Include="base\warcraft3\message_dispatch.h" />
+    <ClInclude Include="base\warcraft3\player.h" />
+    <ClInclude Include="base\warcraft3\udis86\udis86.h" />
+    <ClInclude Include="base\warcraft3\udis86\udis86_decode.h" />
+    <ClInclude Include="base\warcraft3\udis86\udis86_itab.h" />
+    <ClInclude Include="base\warcraft3\udis86\udis86_types.h" />
+    <ClInclude Include="base\warcraft3\udis86\udis86_udint.h" />
+    <ClInclude Include="base\warcraft3\version.h" />
+    <ClInclude Include="base\warcraft3\virtual_mpq.h" />
+    <ClInclude Include="base\warcraft3\war3_searcher.h" />
+    <ClInclude Include="base\warcraft3\directory.h" />
+    <ClInclude Include="base\warcraft3\keyboard_code.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ydbase\ydbase.vcxproj">
+      <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

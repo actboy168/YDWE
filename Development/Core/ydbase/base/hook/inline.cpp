@@ -1,5 +1,5 @@
 #include <base/hook/inline.h>
-#include <base/hook/detail/replace_pointer.h>
+#include <base/hook/replace_pointer.h>
 #include <Windows.h>
 
 #if defined(DISABLE_DETOURS)
@@ -108,9 +108,4 @@ namespace base { namespace hook {
 		return false;
 	}
 #endif
-
-	uintptr_t replace_pointer(uintptr_t address, uintptr_t new_value)
-	{
-		return detail::replace_pointer(address, new_value);
-	}
 }}

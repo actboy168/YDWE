@@ -1,6 +1,6 @@
 #include <base/hook/iat.h>
 #include <base/hook/detail/import_address_table.h>
-#include <base/hook/detail/replace_pointer.h>
+#include <base/hook/replace_pointer.h>
 
 namespace base { namespace hook {
 	uintptr_t iat(HMODULE module_handle, const char* dll_name, const char* api_name, uintptr_t new_function)
@@ -23,7 +23,7 @@ namespace base { namespace hook {
 			return 0;
 		}
 
-		return detail::replace_pointer(address, new_function);
+		return replace_pointer(address, new_function);
 	}
 
 	uintptr_t iat(const wchar_t* module_name, const char* dll_name, const char* api_name, uintptr_t new_function)

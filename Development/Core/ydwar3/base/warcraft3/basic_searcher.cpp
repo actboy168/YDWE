@@ -1,7 +1,7 @@
 #include <base/warcraft3/basic_searcher.h>
 #include <base/warcraft3/detail/memory_search.h>
 extern "C" {
-#include <base/hook/udis86/udis86.h>
+#include <base/warcraft3/udis86/udis86.h>
 }
 
 namespace base { namespace warcraft3 {

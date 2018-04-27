@@ -83,6 +83,9 @@
     <ProjectReference Include="..\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\ydwar3\ydwar3.vcxproj">
+      <Project>{a0e0fbbf-af94-4132-be63-ab101e3af949}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindow.h" />
