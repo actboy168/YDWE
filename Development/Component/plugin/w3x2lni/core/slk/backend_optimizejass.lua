@@ -2,7 +2,7 @@ local parser    = require 'parser.init'
 local optimizer = require 'optimizer.init'
 local lang = require 'lang'
 
-local function create_report(w2l, report, title, type, max)
+local function create_report(w2l, report, type, max)
     local msgs = report[type]
     if not msgs then
         return
@@ -11,15 +11,23 @@ local function create_report(w2l, report, title, type, max)
     if #msgs > max then
         fix = math.random(0, #msgs - max)
     end
-    if title then
-        w2l.messager.report(lang.report.OPTIMIZE_JASS, 8, lang.report.OPTIMIZE_JASS_RESULT:format(title, type, #msgs))
-    end
+    w2l.messager.report(lang.report.OPTIMIZE_JASS, 8, '--------------------------------------------------')
+    w2l.messager.report(lang.report.OPTIMIZE_JASS, 8, lang.report.OPTIMIZE_JASS_RESULT:format(type, #msgs))
+    w2l.messager.report(lang.report.OPTIMIZE_JASS, 8, '--------------------------------------------------')
     for i = 1, max do
         local msg = msgs[i+fix]
         if msg then
             w2l.messager.report(lang.report.OPTIMIZE_JASS, 8, msg[1], msg[2])
         end
     end
+end
+
+local function count_report(report)
+    local n = 0 
+    for _, msgs in pairs(report) do
+        n = n + #msgs
+    end
+    return n
 end
 
 return function (w2l)
@@ -56,9 +64,14 @@ return function (w2l)
         w2l:file_save('map', 'scripts\\war3map.j', buf)
     end
 
-    create_report(w2l, report, 1, lang.report.CONFUSE_JASS,         10)
-    create_report(w2l, report, 2, lang.report.REFERENCE_FUNCTION,   5)
-    create_report(w2l, report, 3, lang.report.UNREFERENCE_GLOBAL,   20)
-    create_report(w2l, report, 4, lang.report.UNREFERENCE_FUNCTION, 20)
-    create_report(w2l, report, 5, lang.report.UNREFERENCE_LOCAL,    20)
+    local total = count_report(report)
+    if total == 0 then
+        return
+    end
+    w2l.messager.report(lang.report.OPTIMIZE_JASS, 8, 'TOTAL:' .. total)
+    create_report(w2l, report, lang.report.CONFUSE_JASS,         10)
+    create_report(w2l, report, lang.report.REFERENCE_FUNCTION,   5)
+    create_report(w2l, report, lang.report.UNREFERENCE_GLOBAL,   20)
+    create_report(w2l, report, lang.report.UNREFERENCE_FUNCTION, 20)
+    create_report(w2l, report, lang.report.UNREFERENCE_LOCAL,    20)
 end

@@ -159,7 +159,7 @@ end
 
 local arg_type_map = {
     [-1] = 'disabled',
-    [0]  = 'preset',
+    [0]  = 'enum',
     [1]  = 'var',
     [2]  = 'call',
     [3]  = 'constant',
@@ -262,7 +262,7 @@ local function get_arg_type(arg, ui_type, ui_guess_level)
     local atp = arg_type_map[arg.type]
     if atp == 'disabled' then
         return new_unknow(), 0.0
-    elseif atp == 'preset' then
+    elseif atp == 'enum' then
         return get_preset_type(arg.value, ui_type, ui_guess_level)
     elseif atp == 'var' then
         return get_var_type(arg.value)

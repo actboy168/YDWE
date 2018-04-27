@@ -1,6 +1,7 @@
 local lang = require 'lang'
 local pairs = pairs
 local type = type
+local w2l
 
 local function has_slk(w2l)
     for _, name in ipairs(w2l.info.txt) do
@@ -117,6 +118,8 @@ local function get_displayname(o)
         name = o.bufftip or o.editorname
     elseif o._type == 'upgrade' then
         name = o.name[1]
+    elseif o._type == 'doodad' or o._type == 'destructable' then
+        name = w2l:get_editstring(o.name or '')
     else
         name = o.name
     end
@@ -163,7 +166,8 @@ local function update_then_merge(w2l, slks, objs, lnis, slk)
     end
 end
 
-return function(w2l, slk)
+return function(w2l_, slk)
+    w2l = w2l_
     slk = slk or {}
     w2l.slk = slk
     --读取字符串

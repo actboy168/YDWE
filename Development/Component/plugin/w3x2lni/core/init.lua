@@ -75,7 +75,7 @@ function mt:get_editstring(source)
     if not self.editstring then
         self.editstring = {}
         local t
-        if self.config.data_wes == '${DEFAULT}' then
+        if self.config.data_wes == '${YDWE}' then
             t = ini(load_file('WorldEditStrings.txt'))['WorldEditStrings']
         else
             t = ini(self:wes_load('WorldEditStrings.txt'))['WorldEditStrings']
@@ -83,7 +83,7 @@ function mt:get_editstring(source)
         for k, v in pairs(t) do
             self.editstring[k:upper()] = v
         end
-        if self.config.data_wes ~= '${DEFAULT}' then
+        if self.config.data_wes ~= '${YDWE}' then
             t = ini(self:wes_load('WorldEditGameStrings.txt'))['WorldEditStrings']
         end
         for k, v in pairs(t) do
@@ -148,7 +148,7 @@ function mt:load_wts(wts, content, max, reason, fmter)
     if not wts then
         return content
     end
-    return content:gsub('TRIGSTR_(%d+)', function(i)
+    local str, count = content:gsub('TRIGSTR_(%d+)', function(i)
         local str_data = wts[tonumber(i)]
         if not str_data then
             self.messager.report(lang.report.OTHER, 9, lang.report.NO_TRIGSTR:format(i))
@@ -163,10 +163,14 @@ function mt:load_wts(wts, content, max, reason, fmter)
         end
         return text
     end)
+    if count == 0 and max and #str > max then
+        str = self:save_wts(wts, str, reason)
+    end
+    return str
 end
 
 function mt:save_wts(wts, text, reason)
-    self.messager.report(lang.report.TEXT_IN_WTS, 7, reason, lang.report.TEXT_IN_WTS_HINT..text:sub(1, 1000))
+    self.messager.report(lang.report.TEXT_IN_WTS, 7, reason, ('%s\r\n%s...\r\n-------------------------'):format(lang.report.TEXT_IN_WTS_HINT, text:sub(1, 1000)))
     if text:find('}', 1, false) then
         self.messager.report(lang.report.WARN, 2, lang.report.WTS_NEED_ESCAPE, text:sub(1, 1000))
         text = text:gsub('}', '|')

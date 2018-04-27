@@ -277,7 +277,7 @@ return function ()
     if config.global.data_meta ~= '${DEFAULT}' then
         config.global.data_meta = mpq_name
     end
-    if config.global.data_wes ~= '${DEFAULT}' then
+    if config.global.data_wes ~= '${YDWE}' then
         config.global.data_wes = mpq_name
     end
 

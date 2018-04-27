@@ -3,6 +3,7 @@ local lang = require 'lang'
 local w2l
 local wtg
 local wct
+local wts
 
 local type = type
 local tonumber = tonumber
@@ -26,6 +27,8 @@ local function lml_string(str)
     if type(str) == 'string' then
         if find(str, "[%s%:%'%c]") then
             str = format("'%s'", gsub(str, "'", "''"))
+        elseif find(str, '^TRIGSTR_%d+$') then
+            str = w2l:load_wts(wts, str)
         end
     end
     return str
@@ -33,7 +36,7 @@ end
 
 local function lml_value(v, sp)
     if v[2] then
-        buf[#buf+1] = format('%s%s: %s\n', sp_rep[sp], lml_string(v[1]), lml_string(v[2]))
+        buf[#buf+1] = format('%s%s: %s\n', sp_rep[sp], v[1], lml_string(v[2]))
     else
         buf[#buf+1] = format('%s%s\n', sp_rep[sp], lml_string(v[1]))
     end
@@ -158,30 +161,31 @@ local function read_triggers(files, map)
     end
 end
 
-return function (w2l_, wtg_, wct_)
+return function (w2l_, wtg_, wct_, wts_)
     w2l = w2l_
     wtg = wtg_
     wct = wct_
+    wts = wts_
 
     local files = {}
 
     if #wct.custom.comment > 0 then
-        files[lang.lml.CODE .. '.txt'] = wct.custom.comment
+        files['code.txt'] = wct.custom.comment
     end
     if #wct.custom.code > 0 then
-        files[lang.lml.CODE .. '.j'] = wct.custom.code
+        files['code.j'] = wct.custom.code
     end
 
     local vars = convert_lml(wtg.vars)
     if #vars > 0 then
-        files[lang.lml.VARIABLE .. '.lml'] = vars
+        files['variable.lml'] = vars
     end
 
     local map = compute_path()
     
     local listfile = read_dirs(map)
     if #listfile > 0 then
-        files[lang.lml.CATALOG .. '.lml'] = listfile
+        files['catalog.lml'] = listfile
     end
 
     read_triggers(files, map)

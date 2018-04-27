@@ -221,7 +221,7 @@ local function meta(v)
 end
 
 local function wes(v)
-    if v == '${DEFAULT}' then
+    if v == '${YDWE}' then
         return true, v, v
     end
     local list = get_datas()
@@ -233,34 +233,55 @@ local function wes(v)
     return false, lang.raw.CONFIG_GLOBAL_WES_ERROR .. data_hint()
 end
 
+local function string_proxy(key, concat)
+    return setmetatable({}, {
+        __tostring = function ()
+            if concat then
+                return lang.raw[key] .. concat()
+            else
+                return lang.raw[key]
+            end
+        end,
+        __concat = function (_, concat)
+            return string_proxy(key, concat)
+        end,
+    })
+end
+
+local raw = setmetatable({}, {
+    __index = function (_, key)
+        return string_proxy(key)
+    end,
+})
+
 return function ()
     local config = proxy {}
     
     config.global                  = {}
-    config.global.lang             = {langf,  lang.raw.CONFIG_GLOBAL_LANG .. lang_hint()}
-    config.global.data_war3        = {war3,   lang.raw.CONFIG_GLOBAL_WAR3 .. data_hint()}
-    config.global.data_ui          = {ui,     lang.raw.CONFIG_GLOBAL_UI   .. data_hint()}
-    config.global.data_meta        = {meta,   lang.raw.CONFIG_GLOBAL_META .. data_hint()}
-    config.global.data_wes         = {wes,    lang.raw.CONFIG_GLOBAL_WES  .. data_hint()}
+    config.global.lang             = {langf,  raw.CONFIG_GLOBAL_LANG .. lang_hint}
+    config.global.data_war3        = {war3,   raw.CONFIG_GLOBAL_WAR3 .. data_hint}
+    config.global.data_ui          = {ui,     raw.CONFIG_GLOBAL_UI   .. data_hint}
+    config.global.data_meta        = {meta,   raw.CONFIG_GLOBAL_META .. data_hint}
+    config.global.data_wes         = {wes,    raw.CONFIG_GLOBAL_WES  .. data_hint}
 
     config.lni                     = {}
-    config.lni.read_slk            = {boolean, lang.raw.CONFIG_LNI_READ_SLK}
-    config.lni.find_id_times       = {integer, lang.raw.CONFIG_LNI_FIND_ID_TIMES}
-    config.lni.export_lua          = {boolean, lang.raw.CONFIG_LNI_EXPORT_LUA}
+    config.lni.read_slk            = {boolean, raw.CONFIG_LNI_READ_SLK}
+    config.lni.find_id_times       = {integer, raw.CONFIG_LNI_FIND_ID_TIMES}
+    config.lni.export_lua          = {boolean, raw.CONFIG_LNI_EXPORT_LUA}
 
     config.slk                     = {}
-    config.slk.remove_unuse_object = {boolean,   lang.raw.CONFIG_LNI_REMOVE_UNUSE_OBJECT}
-    config.slk.optimize_jass       = {boolean,   lang.raw.CONFIG_SLK_OPTIMIZE_JASS}
-    config.slk.mdx_squf            = {boolean,   lang.raw.CONFIG_SLK_MDX_SQUF}
-    config.slk.remove_we_only      = {boolean,   lang.raw.CONFIG_SLK_REMOVE_WE_ONLY}
-    config.slk.slk_doodad          = {boolean,   lang.raw.CONFIG_SLK_SLK_DOODAD}
-    config.slk.find_id_times       = {integer,   lang.raw.CONFIG_SLK_FIND_ID_TIMES}
-    config.slk.confused            = {boolean,   lang.raw.CONFIG_SLK_CONFUSED}
-    config.slk.confusion           = {confusion, lang.raw.CONFIG_SLK_CONFUSION}
+    config.slk.remove_unuse_object = {boolean,   raw.CONFIG_LNI_REMOVE_UNUSE_OBJECT}
+    config.slk.optimize_jass       = {boolean,   raw.CONFIG_SLK_OPTIMIZE_JASS}
+    config.slk.mdx_squf            = {boolean,   raw.CONFIG_SLK_MDX_SQUF}
+    config.slk.remove_we_only      = {boolean,   raw.CONFIG_SLK_REMOVE_WE_ONLY}
+    config.slk.slk_doodad          = {boolean,   raw.CONFIG_SLK_SLK_DOODAD}
+    config.slk.find_id_times       = {integer,   raw.CONFIG_SLK_FIND_ID_TIMES}
+    config.slk.confused            = {boolean,   raw.CONFIG_SLK_CONFUSED}
+    config.slk.confusion           = {confusion, raw.CONFIG_SLK_CONFUSION}
 
     config.obj                     = {}
-    config.obj.read_slk            = {boolean, lang.raw.CONFIG_OBJ_READ_SLK}
-    config.obj.find_id_times       = {integer, lang.raw.CONFIG_OBJ_FIND_ID_TIMES}
+    config.obj.read_slk            = {boolean, raw.CONFIG_OBJ_READ_SLK}
+    config.obj.find_id_times       = {integer, raw.CONFIG_OBJ_FIND_ID_TIMES}
 
     return config
 end

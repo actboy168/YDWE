@@ -224,7 +224,7 @@ local function update_worker()
     if worker then
         worker:update()
         if #worker.error > 0 then
-            messagebox(lang.ui.ERROR, worker.error)
+            messagebox(lang.ui.ERROR, '%s', worker.error)
             worker.error = ''
         end
     end
@@ -378,10 +378,14 @@ local function window_report(canvas)
     canvas:group(lang.ui.REPORT, function()
         for type, report in sortpairs(backend.report) do
             if type ~= '' then
-                type = type:sub(2)
-                canvas:tree(type, get_tree(type), function()
-                    for _, s in ipairs(report) do
-                        canvas:text(s[1], NK_TEXT_LEFT, s[2])
+                local total = report[1][1]:match('TOTAL:(%d+)')
+                local title = ('%s (%d)'):format(type:sub(2), total or #report)
+                canvas:tree(title, get_tree(title), function()
+                    for i, s in ipairs(report) do
+                        if total and i == 1 then
+                        else
+                            canvas:text(s[1], NK_TEXT_LEFT, s[2])
+                        end
                     end
                 end)
             end

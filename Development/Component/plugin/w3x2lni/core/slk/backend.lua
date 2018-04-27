@@ -1,5 +1,6 @@
 local lang = require 'lang'
 local os_clock = os.clock
+local w2l
 
 local output = {
     unit    = 'units\\campaignunitstrings.txt',
@@ -52,7 +53,6 @@ local function to_obj(w2l, slk)
 end
 
 local function convert_wtg(w2l)
-    w2l:backend_convertwtg(w2l.slk.wts)
     local wtg_data, wct_data
     w2l.progress:start(0.1)
     local wtg = w2l:file_load('map', 'war3map.wtg')
@@ -81,9 +81,10 @@ local function convert_wtg(w2l)
     end
     w2l.progress:finish()
     w2l.progress:start(1)
+    local need_convert_wtg = true
     if wtg_data and wct_data and not w2l.config.remove_we_only then
         if w2l.config.mode == 'lni' then
-            local files = w2l:backend_lml(wtg_data, wct_data)
+            local files = w2l:backend_lml(wtg_data, wct_data, w2l.slk.wts)
             for filename, buf in pairs(files) do
                 w2l:file_save('trigger', filename, buf)
             end
@@ -96,12 +97,16 @@ local function convert_wtg(w2l)
             if suc then
                 w2l:file_save('map', 'war3map.wtg', wtg_buf)
                 w2l:file_save('map', 'war3map.wct', wct_buf)
+                need_convert_wtg = false
             else
                 w2l.messager.report(lang.report.ERROR, 1, lang.report.SAVE_WTG_FAILED, err:match('%.lua:%d+: (.*)'))
             end
         end
     end
     w2l.progress:finish()
+    if need_convert_wtg then
+        w2l:backend_convertwtg(w2l.slk.wts)
+    end
 end
 
 local displaytype = {
@@ -120,6 +125,8 @@ local function get_displayname(o)
         name = o.bufftip or o.editorname or ''
     elseif o._type == 'upgrade' then
         name = o.name[1] or ''
+    elseif o._type == 'doodad' or o._type == 'destructable' then
+        name = w2l:get_editstring(o.name or '')
     else
         name = o.name or ''
     end
@@ -145,7 +152,7 @@ local function format_marktip(slk, marktip)
 end
 
 local function report_object(slk, type, o)
-    w2l.messager.report(lang.report.SIMPLIFY, 4, ('%s %s'):format(displaytype[type], get_displayname(o)), o._mark and format_marktip(slk, o._mark))
+    w2l.messager.report(lang.report.SIMPLIFY, 4, ('%s \'%s\' %s'):format(displaytype[type], get_displayname(o)), o._mark and format_marktip(slk, o._mark)) 
 end
 
 local function report_list(slk, list, type, n)
@@ -278,13 +285,13 @@ local function to_slk(w2l, slk)
     end
 
     if report.n > 0 then
-        local index = 1
-        w2l.messager.report(lang.report.NO_SLK_DATA, 3, (lang.report.TOTAL .. ': %d'):format(report.n))
+        w2l.messager.report(lang.report.NO_SLK_DATA, 3, 'TOTAL:' .. report.n)
         for tip, list in pairs(report) do
             if #tip > 1 then
                 local n = 0
-                w2l.messager.report(lang.report.NO_SLK_DATA, 3, ('%d.%s'):format(index, tip))
-                index = index + 1
+                w2l.messager.report(lang.report.NO_SLK_DATA, 3, '--------------------------------------------')
+                w2l.messager.report(lang.report.NO_SLK_DATA, 3, tip)
+                w2l.messager.report(lang.report.NO_SLK_DATA, 3, '--------------------------------------------')
                 for _, msg in pairs(list) do
                     w2l.messager.report(lang.report.NO_SLK_DATA, 3, msg[1], msg[2])
                     n = n + 1
@@ -319,7 +326,8 @@ local function clean_file(w2l, slk)
     w2l:file_remove('table', 'doo')
 end
 
-return function (w2l, slk)
+return function (w2l_, slk)
+    w2l = w2l_
     slk = slk or w2l.slk or {}
     w2l.slk = slk
     clean_file(w2l, slk)

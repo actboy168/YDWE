@@ -1,4 +1,5 @@
 local lang = require 'tool.lang'
+local messager = require 'tool.messager'
 local w2l
 
 local function search_staticfile(map, callback)

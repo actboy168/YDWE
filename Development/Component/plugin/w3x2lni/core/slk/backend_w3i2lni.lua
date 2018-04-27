@@ -215,7 +215,7 @@ function mt:add_randomitem(data)
         for i, set in ipairs(data[lang.w3i.RANDOM_ITEM..i][lang.w3i.SETTING]) do
             self:add('%d = {', i)
             for _, item in ipairs(set) do
-                self:add(('{%s = %d, ID = %q},'):format(lang.w3i.CHANCE), item[lang.w3i.CHANCE], item['ID'])
+                self:add(('{%s = %d, ID = %q},'):format(lang.w3i.CHANCE, item[lang.w3i.CHANCE], item['ID']))
             end
             self:add('},')
         end

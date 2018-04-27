@@ -86,6 +86,7 @@ local buffmap
 local search
 local mark_known_type
 local report_once = {}
+local report_cache = {}
 local current_root = {'', '%s%s'}
 
 local function get_displayname(o)
@@ -94,6 +95,8 @@ local function get_displayname(o)
         name = o.bufftip or o.editorname or ''
     elseif o._type == 'upgrade' then
         name = o.name[1] or ''
+    elseif o._type == 'doodad' or o._type == 'destructable' then
+        name = w2l:get_editstring(o.name or '')
     else
         name = o.name or ''
     end
@@ -132,7 +135,7 @@ local function report(type, id)
         return
     end
     report_once[type][id] = true
-    w2l.messager.report(lang.report.SIMPLIFY, 4, ('%s %s'):format(type, id), format_marktip(slk, current_root))
+    report_cache[#report_cache+1] = {('%s \'%s\''):format(type, id), format_marktip(slk, current_root)}
 end
 
 local function mark_value(slk, type, value, nosearch)
@@ -173,7 +176,7 @@ local function mark_known_type2(slk, type, name, nosearch)
         local o = slk.txt[name:lower()]
         if o then
             o._mark = current_root
-            report(lang.report.USE_UNCLASSIFIED_OBJECT, lang.report.EXPECTATION_CLASSIFICATION:format(name:lower(), type))
+            report_cache[#report_cache+1] = {lang.report.USE_UNCLASSIFIED_OBJECT:format(name:lower()), lang.report.EXPECTATION_CLASSIFICATION:format(type)}
             return true
         end
         return false
@@ -285,7 +288,7 @@ local function mark_marketplace(slk, flag)
         -- 是否使用了市场
         if obj._mark and obj._name == 'marketplace' then
             search_marketplace = true
-            w2l.messager.report(lang.report.SIMPLIFY, 4, lang.report.RETAIN_MARKET, lang.report.RETAIN_MARKET_HINT:format(obj.name, obj._id))
+            report_cache[#report_cache+1] = {lang.report.RETAIN_MARKET, lang.report.RETAIN_MARKET_HINT:format(obj.name, obj._id)}
             for _, obj in pairs(slk.item) do
                 if obj.pickrandom == 1 and obj.sellable == 1 then
                     current_root = {obj._id, lang.report.REFERENCE_BY_MARKET_ITEM}
@@ -348,4 +351,11 @@ return function(w2l_, slk_)
     mark_doo(w2l, slk)
     mark_lua(w2l, slk)
     mark_marketplace(slk, jassflag)
+    if #report_cache > 0 then
+        w2l.messager.report(lang.report.SIMPLIFY, 4, 'TOTAL:' .. #report_cache)
+        for _, rep in ipairs(report_cache) do
+            w2l.messager.report(lang.report.SIMPLIFY, 4, rep[1], rep[2])
+        end
+        w2l.messager.report(lang.report.SIMPLIFY, 4, '-------------------------------------------')
+    end
 end

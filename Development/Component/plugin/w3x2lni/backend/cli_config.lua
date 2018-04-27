@@ -30,7 +30,7 @@ return function (command)
     if section then
         local v = config2[section][k]
         if v then
-            messager.raw(v[5])
+            messager.raw(tostring(v[5]))
             messager.raw('\r\n\r\n')
             messager.raw(lang.raw.CONFIG_DISPLAY .. '\r\n\r\n')
             show_config(section, k, v)

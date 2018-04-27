@@ -122,12 +122,14 @@ end
 local function create_report()
     for type, report in sortpairs(backend.report) do
         if type ~= '' then
-            type = type:sub(2)
+            local total = report[1][1]:match('TOTAL:(%d+)')
+            local title = ('%s (%d)'):format(type:sub(2), total or #report)
             print('================')
-            print(type)
+            print(title)
             print('================')
-            for _, s in ipairs(report) do
-                if s[2] then
+            for i, s in ipairs(report) do
+                if total and i == 1 then
+                elseif s[2] then
                     print(('%s - %s'):format(s[1], s[2]))
                 else
                     print(s[1])
@@ -154,7 +156,7 @@ local function update()
     mini:settitle(backend.title)
     mini:setvalue(backend.progress)
     if #worker.error > 0 then
-        messagebox(lang.ui.ERROR, worker.error)
+        messagebox(lang.ui.ERROR, '%s', worker.error)
         worker.error = ''
         return 0, 1
     end
@@ -172,7 +174,7 @@ local function delayedtask(t)
     local ok, r, code = xpcall(update, debug.traceback)
     if not ok then
         t:remove()
-        messagebox(lang.ui.ERROR, r)
+        messagebox(lang.ui.ERROR, '%s', r)
         mini:close()
         exitcode = -1
         return

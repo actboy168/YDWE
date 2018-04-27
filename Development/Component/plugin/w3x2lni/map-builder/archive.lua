@@ -61,9 +61,9 @@ function mt:save(w3i, w2l)
             clock = os_clock()
             progress(count / max)
             if self:get_type() == 'mpq' then
-                messager.text(lang.script.PACK_MAP:format(count, max))
+                w2l.messager.text(lang.script.PACK_MAP:format(count, max))
             else
-                messager.text(lang.script.EXPORT_FILE:format(count, max))
+                w2l.messager.text(lang.script.EXPORT_FILE:format(count, max))
             end
         end
     end

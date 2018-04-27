@@ -19,6 +19,9 @@ end
 function messager.exit(type, text)
     proto.send('exit', ('{type=%q,content=%q}'):format(type, text))
 end
+function messager.wait()
+    proto.send('wait', '""')
+end
 
 local ext = require 'process.ext'
 ext.set_filemode(io.stdout, 'b')

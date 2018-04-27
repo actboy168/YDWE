@@ -28,7 +28,16 @@ elseif act == 'log' then
     require 'filesystem'
     require 'utility'
     local root = fs.current_path()
-    messager.raw(io.load(root:parent_path() / 'log' / 'report.log'))
+    local s = {}
+    for l in io.lines((root:parent_path() / 'log' / 'report.log'):string()) do
+        s[#s+1] = l
+        if #s > 50 then
+            messager.raw(table.concat(s, '\r\n') .. '\r\n')
+            messager.wait()
+            s = {}
+        end
+    end
+    messager.raw(table.concat(s, '\r\n') .. '\r\n')
 elseif act == 'template' then
     local template = require 'backend.template'
     template()

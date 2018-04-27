@@ -178,7 +178,7 @@ function mt:read_upgrade(data)
         local upgrade = {}
         data.upgrades[i] = upgrade
         self:current(lang.w3i.UPGRADE..i)
-        upgrade.player_flag = pack_flag(self:get(lang.w3i.PLAYER_LISTn))
+        upgrade.player_flag = pack_flag(self:get(lang.w3i.PLAYER_LIST))
         upgrade.id          = self:get 'ID'
         upgrade.level       = self:get(lang.w3i.LEVEL)
         upgrade.available   = self:get(lang.w3i.AVAILABLE)

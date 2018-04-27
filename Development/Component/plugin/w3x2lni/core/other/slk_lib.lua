@@ -1,5 +1,6 @@
 local pairs = pairs
 local type = type
+local w2l
 
 local mt = {}
 mt.__index = mt
@@ -520,6 +521,8 @@ local function get_displayname(o1, o2)
         name = o1.bufftip or o1.editorname or o2.bufftip or o2.editorname
     elseif o1._type == 'upgrade' then
         name = o1.name[1] or o2.name[1]
+    elseif o1._type == 'doodad' or o1._type == 'destructable' then
+        name = w2l:get_editstring(o1.name or o2.name)
     else
         name = o1.name or o2.name
     end
@@ -642,7 +645,8 @@ function mt:refresh()
     return report
 end
 
-return function (w2l, read_only, safe_mode)
+return function (w2l_, read_only, safe_mode)
+    w2l = w2l_
     local session = setmetatable({
         w2l = w2l,
         read_only = read_only,

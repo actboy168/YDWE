@@ -1,3 +1,5 @@
+local lang = require 'tool.lang'
+
 local function sortpairs(t)
     local sort = {}
     for k, v in pairs(t) do
@@ -21,12 +23,15 @@ return function (report)
     local lines = {}
     for type, report in sortpairs(report) do
         if type ~= '' then
-            type = type:sub(2)
-            lines[#lines+1] = '================'
-            lines[#lines+1] = type
-            lines[#lines+1] = '================'
-            for _, s in ipairs(report) do
-                if s[2] then
+            
+            local total = report[1][1]:match('TOTAL:(%d+)')
+            local title = ('%s (%d)'):format(type:sub(2), total or #report)
+            lines[#lines+1] = '=========================='
+            lines[#lines+1] = title
+            lines[#lines+1] = '=========================='
+            for i, s in ipairs(report) do
+                if total and i == 1 then
+                elseif s[2] then
                     lines[#lines+1] = ('%s - %s'):format(s[1], s[2])
                 else
                     lines[#lines+1] = s[1]

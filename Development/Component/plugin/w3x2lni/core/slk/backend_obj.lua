@@ -36,6 +36,8 @@ local function get_displayname(o)
         name = o.bufftip or o.editorname or ''
     elseif o._type == 'upgrade' then
         name = o.name[1] or ''
+    elseif o._type == 'doodad' or o._type == 'destructable' then
+        name = w2l:get_editstring(o.name or '')
     else
         name = o.name or ''
     end

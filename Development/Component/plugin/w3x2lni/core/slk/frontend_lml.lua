@@ -7,13 +7,13 @@ local loader
 
 local function load_custom()
     wct.custom = {
-        comment = loader(lang.lml.CODE .. '.txt') or '',
-        code    = loader(lang.lml.CODE .. '.j') or '',
+        comment = loader('code.txt') or '',
+        code    = loader('code.j') or '',
     }
 end
 
 local function load_vars()
-    wtg.vars = w2l:parse_lml(loader(lang.lml.VARIABLE .. '.lml') or '')
+    wtg.vars = w2l:parse_lml(loader('variable.lml') or '')
 end
 
 local function load_trigger(trg, id, filename)
@@ -89,7 +89,7 @@ local function load_triggers()
     wtg.categories = {}
     wtg.triggers = {}
     wct.triggers = {}
-    local buf = loader(lang.lml.CATALOG .. '.lml')
+    local buf = loader('catalog.lml')
     if not buf then
         return
     end

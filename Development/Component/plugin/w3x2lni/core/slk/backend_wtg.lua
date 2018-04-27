@@ -6,28 +6,37 @@ local state1
 
 local pack_eca
 
+local CALL     = lang.lml.CALL:match '^(.-)%s*$'
+local DISABLE  = lang.lml.DISABLE:match '^(.-)%s*$'
+local PRESET   = lang.lml.PRESET:match '^(.-)%s*$'
+local VARIABLE = lang.lml.VARIABLE:match '^(.-)%s*$'
+local CONSTANT = lang.lml.CONSTANT:match '^(.-)%s*$'
+local ARRAY    = lang.lml.ARRAY:match '^(.-)%s*$'
+local DEFAULT  = lang.lml.DEFAULT:match '^(.-)%s*$'
+
 local type_map = {
     [lang.lml.LIST] = -1,
     [lang.lml.EVENT] = 0,
     [lang.lml.CONDITION] = 1,
     [lang.lml.ACTION] = 2,
-    [lang.lml.CALL] = 3,
+    [CALL] = 3,
 }
 
 local type_key = {
     [lang.lml.EVENT] = 'event',
     [lang.lml.CONDITION] = 'condition',
     [lang.lml.ACTION] = 'action',
-    [lang.lml.CALL] = 'call',
+    [CALL] = 'call',
 }
 
 local arg_type_map = {
-    [lang.lml.DISABLE] = -1,
-    [lang.lml.PRESET] = 0,
-    [lang.lml.VARIABLE] = 1,
-    [lang.lml.CALL] = 2,
-    [lang.lml.CONSTANT] = 3,
+    [DISABLE] = -1,
+    [PRESET] = 0,
+    [VARIABLE] = 1,
+    [CALL] = 2,
+    [CONSTANT] = 3,
 }
+
 
 local function pack(fmt, ...)
     hex[#hex+1] = fmt:pack(...)
@@ -54,10 +63,10 @@ local function pack_var(var)
     local value = ''
     for i = 3, #var do
         local k, v = var[i][1], var[i][2]
-        if k == lang.lml.ARRAY then
+        if k == ARRAY then
             array = 1
             size = v
-        elseif k == lang.lml.DEFAULT then
+        elseif k == DEFAULT then
             default = 1
             value = v
         end
@@ -77,21 +86,19 @@ local function pack_arg(arg)
     local value = arg[2]
     local array = false
     if type_map[type] then
-        type = lang.lml.CALL
-        if type_map[type] ~= lang.lml.CALL then
+        type = CALL
+        if type_map[type] ~= CALL then
             value = ''
         end
-    elseif type == lang.lml.ARRAY then
+    elseif type == ARRAY then
         array = true
-        type = lang.lml.CONSTANT
+        type = CONSTANT
     end
-    if type == lang.lml.CONSTANT then
-        value = w2l:load_wts(wts, value, 299, lang.script.TEXT_TOO_LONG_IN_WTG, function(str)
-            return str:gsub('\\', '\\\\'):gsub('"', '\\"')
-        end)
+    if type == CONSTANT then
+        value = w2l:load_wts(wts, value, 299, lang.script.TEXT_TOO_LONG_IN_WTG)
     end
     pack('lz', arg_type_map[type], value)
-    if type == lang.lml.CALL then
+    if type == CALL then
         pack('l', 1)
         pack_eca(arg)
     else
@@ -165,11 +172,11 @@ end
 
 function pack_eca(eca, child_id, eca_type)
     local name
-    local type = eca_type or lang.lml.CALL
+    local type = eca_type or CALL
     local enable = 1
     if eca[2] then
         name = eca[2]
-        if eca[1] == lang.lml.DISABLE then
+        if eca[1] == DISABLE then
             enable = 0
         elseif type_map[eca[1]] then
             type = eca[1]
