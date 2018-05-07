@@ -86,7 +86,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 	{
 		base::console::enable();
 		std::cout << "---------------------------------------" << std::endl;
-		std::cout << "              JASS ERROR               " << std::endl;
+		std::cout << "               Jass´íÎó                " << std::endl;
 		std::cout << "---------------------------------------" << std::endl;
 		std::cout << msg << std::endl;
 		std::cout << std::endl;
