@@ -31,7 +31,7 @@ local function load_trigger(trg, id, filename)
         local line = trg[i]
         local k, v = line[1], line[2]
         if k == lang.lml.NAME then
-            trigger.name = v
+            name = v
         elseif k == lang.lml.COMMENT then
             trigger.type = 1
         elseif k == lang.lml.DISABLE then
@@ -73,7 +73,7 @@ local function load_category(dir)
         local k, v = line[1], line[2]
         if v then
             if k == lang.lml.NAME then
-                category.name = v
+                filename = v
             elseif k == lang.lml.COMMENT and v == '1' then
                 category.comment = 1
             end

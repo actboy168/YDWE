@@ -55,7 +55,7 @@ end
 
 local function get_path(path, used)
     path = path:gsub('[$\\$/$:$*$?$"$<$>$|]', '_')
-    while used[path] do
+    while used[path:lower()] do
         local name, id = path:match '(.+)_(%d+)$'
         if name and id then
             id = id + 1
@@ -65,6 +65,7 @@ local function get_path(path, used)
         end
         path = name .. '_' .. id
     end
+    used[path:lower()] = true
     return path
 end
 
@@ -72,20 +73,21 @@ local function compute_path()
     if not wtg then
         return
     end
-    local map = {}
-    map[1] = {}
     local dirs = {}
+    local used = {}
+    local map = {}
     for _, dir in ipairs(wtg.categories) do
         dirs[dir.id] = {}
-        map[1][dir.name] = get_path(dir.name, map[1])
+        map[dir.id] = {}
+        local path = get_path(dir.name, used)
+        map[dir.id][1] = path
     end
     for _, trg in ipairs(wtg.triggers) do
         table.insert(dirs[trg.category], trg)
     end
     for _, dir in ipairs(wtg.categories) do
-        map[dir.name] = {}
         for _, trg in ipairs(dirs[dir.id]) do
-            map[dir.name][trg.name] = get_path(trg.name, map[dir.name])
+            map[dir.id][trg.name] = get_path(trg.name, dirs[dir.id])
         end
     end
     return map
@@ -101,19 +103,19 @@ local function read_dirs(map)
     end
     local lml = { '', false }
     for i, dir in ipairs(wtg.categories) do
-        local filename = map[1][dir.name]
-        local dir_data = { filename, dir.id }
+        local filename = map[dir.id][1]
+        local dir_data = { dir.name, dir.id }
         if dir.name ~= filename then
-            dir_data[#dir_data+1] = { lang.lml.NAME, dir.name }
+            dir_data[#dir_data+1] = { lang.lml.NAME, filename }
         end
         if dir.comment == 1 then
             dir_data[#dir_data+1] = { lang.lml.COMMENT, 1 }
         end
         for i, trg in ipairs(dirs[dir.id]) do
-            local filename = map[dir.name][trg.name]
-            local trg_data = { filename, false }
+            local filename = map[dir.id][trg.name]
+            local trg_data = { trg.name, false }
             if trg.name ~= filename then
-                trg_data[#trg_data+1] = { lang.lml.NAME, trg.name }
+                trg_data[#trg_data+1] = { lang.lml.NAME, filename }
             end
             if trg.type == 1 then
                 trg_data[#trg_data+1] = { lang.lml.COMMENT }
@@ -139,13 +141,9 @@ local function read_triggers(files, map)
         return
     end
     local triggers = {}
-    local dirs = {}
-    for _, dir in ipairs(wtg.categories) do
-        dirs[dir.id] = dir.name
-    end
     for i, trg in ipairs(wtg.triggers) do
-        local dir = dirs[trg.category]
-        local path = map[1][dir] .. '\\' .. map[dir][trg.name]
+        local dir = map[trg.category]
+        local path = dir[1] .. '\\' .. dir[trg.name]
         if trg.wct == 0 and trg.type == 0 then
             files[path..'.lml'] = convert_lml(trg.trg)
         end

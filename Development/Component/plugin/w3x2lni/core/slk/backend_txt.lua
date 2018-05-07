@@ -290,7 +290,7 @@ local function prebuild_merge(obj, a, b)
         w2l.messager.report(lang.report.WARN, 2, (lang.report.OBJECT_ID_CONFLICT):format(obj._id), ('[%s]%s --> [%s]%s'):format(tp1, name1, tp2, name2))
     end
     for k, v in pairs(b) do
-        if k == '_id' or k == '_type' then
+        if k == '_id' or k == '_type' or k == '_slk_id' then
             goto CONTINUE
         end
         if type(v) == 'table' then
