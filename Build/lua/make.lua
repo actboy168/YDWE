@@ -16,7 +16,6 @@ if type(arg[3]) == 'string' then
 end
 
 require 'filesystem'
-local zip = require 'zip'
 local filelock = require 'filelock'
 
 local oklock = filelock('ok.lock')
@@ -40,8 +39,6 @@ path.Build = path.Root / 'Build'
 path.OpenSource = path.Root / 'OpenSource'
 path.Development = path.Root / 'Development'
 path.Result = path.Development / 'Build' / 'bin' / configuration
-
-msvc:copy_crt_dll(path.Result / 'bin')
 
 -- Step.2 清理
 fs.remove_all(path.Development / 'Build' / 'bin' / configuration)
