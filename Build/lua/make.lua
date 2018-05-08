@@ -17,11 +17,9 @@ end
 
 require 'filesystem'
 local zip = require 'zip'
-local uni = require 'unicode'
 local filelock = require 'filelock'
-local buildroot = fs.path(uni.a2u(arg[1])) / '..'
 
-local oklock = filelock(buildroot / 'ok.lock')
+local oklock = filelock('ok.lock')
 
 oklock:unlock()
 
