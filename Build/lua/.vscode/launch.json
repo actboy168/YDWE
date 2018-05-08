@@ -7,15 +7,17 @@
             "request": "launch",
             "program": "${workspaceRoot}/make.lua",
             "stopOnEntry": true,
-            "cwd": "${workspaceRoot}/luabuild/bin/",
-            "luadll": "${workspaceRoot}/luabuild/bin/lua53.dll",
-            "path": "",
-            "cpath": "",
+            "cwd": "${workspaceRoot}",
+            "path": "${workspaceRoot}/?.lua;${workspaceRoot}/luabuild/?.lua",
+            "cpath": "${workspaceRoot}/luabuild/?.dll",
             "arg": [
                 "${workspaceRoot}",
                 "Debug"
             ],
-            "consoleCoding" : "ansi"
+            "env": {
+                "PATH": "${workspaceRoot}/luabuild/"
+            },
+            "consoleCoding": "ansi"
         }
     ]
 }

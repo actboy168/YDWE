@@ -1,11 +1,8 @@
-package.path = package.path .. ';' .. arg[1] .. '/luabuild/src/?.lua' .. ';' .. arg[1] .. '/?.lua'
-package.cpath = package.cpath .. ';' .. arg[1] .. '/luabuild/bin/?.dll'
+local configuration = arg[1] or 'Debug'
+local dev = arg[3] ~= nil
 
-local configuration = arg[2] or 'Debug'
-local dev = arg[4] ~= nil
-
-if type(arg[3]) == 'string' then
-    local out = io.open(arg[3], 'w')
+if type(arg[2]) == 'string' then
+    local out = io.open(arg[2], 'w')
     if out then
         local oldprint = print
         function print(...)
