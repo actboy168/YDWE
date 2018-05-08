@@ -104,6 +104,14 @@ function zip:add_file(t)
     info.internal_fa = t.internal_fa
     info.external_fa = t.external_fa
 
+    t.method = t.method or 8
+    t.level = t.level or 9
+    t.memLevel = t.memLevel or 9
+    t.windowBits = t.windowBits or 15
+    t.strategy = t.strategy or 0
+    t.local_extra_size = t.local_extra and (t.local_extra_size or #t.local_extra) or 0
+    t.file_extra_size  = t.file_extra  and (t.file_extra_size  or #t.file_extra)  or 0
+
     check_error('zipOpenNewFileInZip4_64',
         minizip.zipOpenNewFileInZip4_64(self.h, t.filename, info,
             t.local_extra, t.local_extra_size, t.file_extra, t.file_extra_size,
