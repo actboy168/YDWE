@@ -5,7 +5,7 @@ ffi.cdef[[
 ]]
 
 local function strtrim(str) 
-	return str:gsub("^%s*(.-)%s*$", "%1")
+    return str:gsub("^%s*(.-)%s*$", "%1")
 end
 
 local function parse_env(str)
@@ -13,7 +13,7 @@ local function parse_env(str)
     if not pos then
         return nil, nil
     end
-	return strtrim(str:sub(1, pos - 1)), strtrim(str:sub(pos + 1))
+    return strtrim(str:sub(1, pos - 1)), strtrim(str:sub(pos + 1))
 end
 
 local function addenv(name, newvalue)
@@ -24,7 +24,7 @@ local function addenv(name, newvalue)
     ffi.C.SetEnvironmentVariableA(name, newvalue)
 end
 
-local function execute(command)	
+local function execute(command)    
     local f = io.popen(command, 'r')
     for line in f:lines() do
         print(line)
@@ -33,7 +33,7 @@ local function execute(command)
     if not ok then
         error(("execute failed: %q"):format(command))
     end
-end	
+end    
 
 local function msvc_path(version)
     local reg = registry.local_machine() / [[SOFTWARE\Microsoft\VisualStudio\SxS\VS7]]
@@ -47,16 +47,16 @@ local need = { LIB = true, LIBPATH = true, PATH = true, INCLUDE = true }
 
 function mt:initialize(version)
     self.__path = msvc_path(version)
-	local vsvars32 = self.__path / 'Common7' / 'Tools' / 'VsDevCmd.bat'
+    local vsvars32 = self.__path / 'Common7' / 'Tools' / 'VsDevCmd.bat'
     local f = io.popen(('"%s" & set'):format(vsvars32:string()), 'r')
     for line in f:lines() do
         local name, value = parse_env(line)
         if name and value then
-        	local name = name:upper()
-        	if need[name] then
-        	    addenv(name, value)
-        	end
-    	end
+            local name = name:upper()
+            if need[name] then
+                addenv(name, value)
+            end
+        end
     end
     f:close()
     self.version = version
@@ -66,7 +66,7 @@ end
 function mt:redistversion()
     local verfile = self.__path / 'VC' / 'Auxiliary' / 'Build' / 'Microsoft.VCRedistVersion.default.txt'
     local f = assert(io.open(verfile:string(), 'r'))
-	local r = f:read 'a'
+    local r = f:read 'a'
     f:close()
     return strtrim(r)
 end
@@ -76,7 +76,7 @@ function mt:crtpath()
 end
 
 function mt:sdkpath()
-	local reg = registry.open [[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots]]
+    local reg = registry.open [[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots]]
     return fs.path(reg.KitsRoot10)
 end
 
