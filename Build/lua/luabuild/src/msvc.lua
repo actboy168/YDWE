@@ -1,5 +1,4 @@
 require 'registry'
-local uni = require 'unicode'
 local ffi = require 'ffi'
 ffi.cdef[[
     int SetEnvironmentVariableA(const char* name, const char* value);
@@ -66,7 +65,7 @@ end
 
 function mt:redistversion()
     local verfile = self.__path / 'VC' / 'Auxiliary' / 'Build' / 'Microsoft.VCRedistVersion.default.txt'
-    local f = assert(io.open(uni.u2a(verfile:string()), 'r'))
+    local f = assert(io.open(verfile:string(), 'r'))
 	local r = f:read 'a'
     f:close()
     return strtrim(r)

@@ -59,12 +59,12 @@ local function split(str, p)
 end
 if fs.exists(path.Build / 'include'/ 'version') then
     fs.create_directories(path.Development / 'Build' / 'include')
-	local f = assert(io.open(uni.u2a((path.Build / 'include'/ 'version'):string()), 'r'))
+	local f = assert(io.open((path.Build / 'include'/ 'version'):string(), 'r'))
 	local version = f:read 'a'
 	f:close()
 	local major, minor, revised, build = table.unpack(split(version, '.'))
 	local major, minor, revised, build = tonumber(major), tonumber(minor), tonumber(revised), tonumber(build)
-	local f = assert(io.open(uni.u2a((path.Development / 'Build' / 'include' / 'YDWEVersion.h'):string()), 'w'))
+	local f = assert(io.open((path.Development / 'Build' / 'include' / 'YDWEVersion.h'):string(), 'w'))
 	f:write(([[
 #ifndef YDWE_VERSION_H_INCLUDED
 #define YDWE_VERSION_H_INCLUDED

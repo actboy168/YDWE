@@ -1,6 +1,5 @@
 require 'filesystem'
 local minizip = require 'minizip'
-local uni = require 'unicode'
 
 local function for_directory(path, func, leaf)
 	for file in (leaf and (path / leaf) or path):list_directory() do
@@ -14,7 +13,7 @@ local function for_directory(path, func, leaf)
 end
 
 local function loadfile(filename)
-	local f, e = io.open(uni.u2a(filename:string()), 'rb')
+	local f, e = io.open(filename:string(), 'rb')
 	if not f then error(e) end
 	local content = f:read 'a'
 	f:close()
