@@ -1,4 +1,3 @@
-require 'luabind'
 require 'filesystem'
 local minizip = require 'minizip'
 local uni = require 'unicode'

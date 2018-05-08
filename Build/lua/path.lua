@@ -1,4 +1,3 @@
-require 'luabind'
 require 'filesystem'
 
 --和[MSBuild]::GetDirectoryNameOfFileAbove效果相同
@@ -7,9 +6,9 @@ local function GetDirectoryNameOfFileAbove(p, f)
         if fs.exists(p / f) then
             return p
         end
-        p:remove_filename()
+        p = p:parent_path()
         if p:filename():string() == '' then
-            return nil
+            error '无法定位根目录'
         end
     end
 end

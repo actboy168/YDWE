@@ -15,7 +15,6 @@ if type(arg[3]) == 'string' then
     end
 end
 
-require 'luabind'
 require 'filesystem'
 local zip = require 'zip'
 local uni = require 'unicode'

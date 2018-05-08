@@ -8,14 +8,14 @@
             "program": "${workspaceRoot}/make.lua",
             "stopOnEntry": true,
             "cwd": "${workspaceRoot}/luabuild/bin/",
-            "luadll": "${workspaceRoot}/luabuild/bin/luacore.dll",
+            "luadll": "${workspaceRoot}/luabuild/bin/lua53.dll",
             "path": "",
             "cpath": "",
             "arg": [
                 "${workspaceRoot}",
                 "Debug"
             ],
-            "console" : "ansi"
+            "consoleCoding" : "ansi"
         }
     ]
 }
