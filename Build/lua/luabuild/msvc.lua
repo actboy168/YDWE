@@ -1,4 +1,5 @@
 require 'registry'
+local uni = require 'unicode'
 local ffi = require 'ffi'
 ffi.cdef[[
     int SetEnvironmentVariableA(const char* name, const char* value);
@@ -24,14 +25,24 @@ local function addenv(name, newvalue)
     ffi.C.SetEnvironmentVariableA(name, newvalue)
 end
 
-local function execute(command)    
+local function execute(coding, command)
     local f = io.popen(command, 'r')
-    for line in f:lines() do
-        print(line)
+    if coding == 'ansi' then
+        for line in f:lines() do
+            print(line)
+        end
+    else
+        for line in f:lines() do
+            print(uni.a2u(line))
+        end
     end
     local ok = f:close()
     if not ok then
-        error(("execute failed: %q"):format(command))
+        if coding == 'ansi' then
+            error(("execute failed: %q"):format(uni.u2a(command)))
+        else
+            error(("execute failed: %q"):format(command))
+        end
     end
 end    
 
@@ -45,7 +56,7 @@ local mt = {}
 
 local need = { LIB = true, LIBPATH = true, PATH = true, INCLUDE = true }
 
-function mt:initialize(version)
+function mt:initialize(version, coding)
     self.__path = msvc_path(version)
     local vsvars32 = self.__path / 'Common7' / 'Tools' / 'VsDevCmd.bat'
     local f = io.popen(('"%s" & set'):format(vsvars32:string()), 'r')
@@ -60,6 +71,7 @@ function mt:initialize(version)
     end
     f:close()
     self.version = version
+    self.coding = coding or 'ansi'
     return true
 end
 
@@ -94,7 +106,7 @@ function mt:copy_crt_dll(target)
 end
 
 function mt:rebuild(solution, configuration, platform)
-    execute(('MSBuild "%s" /m /v:m /t:rebuild /clp:ShowEventId /p:Configuration="%s",Platform="%s"'):format(solution:string(), configuration or 'Release', platform or 'Win32'))
+    execute(self.coding, ('MSBuild "%s" /m /v:m /t:rebuild /clp:ShowEventId /p:Configuration="%s",Platform="%s"'):format(solution:string(), configuration or 'Release', platform or 'Win32'))
 end
 
 return mt
