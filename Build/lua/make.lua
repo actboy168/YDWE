@@ -43,6 +43,8 @@ path.OpenSource = path.Root / 'OpenSource'
 path.Development = path.Root / 'Development'
 path.Result = path.Development / 'Build' / 'bin' / configuration
 
+msvc:copy_crt_dll(path.Result / 'bin')
+
 -- Step.2 清理
 fs.remove_all(path.Development / 'Build' / 'bin' / configuration)
 fs.remove_all(path.Development / 'Build' / 'obj' / configuration)
@@ -98,20 +100,11 @@ local function copy_directory(from, to, filter)
 	end
 end
 
-local function copy_crt_dll()
-    if configuration ~= 'Release' then
-        return
-    end
-    fs.copy_file(msvc:crtpath() / 'msvcp140.dll', path.Result / 'bin' / 'msvcp140.dll', true)
-    fs.copy_file(msvc:crtpath() / 'vcruntime140.dll', path.Result / 'bin' / 'vcruntime140.dll', true)
-    copy_directory(msvc:ucrtpath(), path.Result / 'bin', function(path)
-        return path:extension():string():lower() == '.dll'
-    end)
-end
-
 fs.create_directories(path.Result / 'bin' / 'modules')
 fs.create_directories(path.Result / 'plugin' / 'jasshelper' / 'bin')
-copy_crt_dll()
+if configuration == 'Release' then
+    msvc:copy_crt_dll(path.Result / 'bin')
+end
 fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / configuration / 'lua53.dll', path.Result / 'bin' / 'lua53.dll', true)
 fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / configuration / 'lua.exe', path.Result / 'bin' / 'lua.exe', true)
 fs.copy_file(path.OpenSource / 'StormLib' / 'bin' / 'Win32' / configuration / 'StormLib.dll', path.Result / 'bin' / 'StormLib.dll', true)

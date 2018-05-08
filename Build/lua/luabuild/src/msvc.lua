@@ -85,6 +85,15 @@ function mt:ucrtpath()
     return self:sdkpath() / 'Redist' / 'ucrt' / 'DLLs' / 'x86'
 end
 
+function mt:copy_crt_dll(target)
+    fs.create_directories(target)
+    fs.copy_file(self:crtpath() / 'msvcp140.dll', target / 'msvcp140.dll', true)
+    fs.copy_file(self:crtpath() / 'vcruntime140.dll', target / 'vcruntime140.dll', true)
+    for dll in self:ucrtpath():list_directory() do
+        fs.copy_file(dll, target / dll:filename(), true)
+    end
+end
+
 function mt:rebuild(solution, configuration, platform)
     execute(('MSBuild "%s" /m /v:m /t:rebuild /clp:ShowEventId /p:Configuration="%s",Platform="%s"'):format(solution:string(), configuration or 'Release', platform or 'Win32'))
 end
