@@ -38,7 +38,7 @@ end
 
 local function msvc_path(version)
     local reg = registry.local_machine() / [[SOFTWARE\Microsoft\VisualStudio\SxS\VS7]]
-    local path = reg[("%d.0"):format(version // 10)]
+    local path = reg[("%d.0"):format(math.ceil(version / 10))]
     return fs.path(path)
 end
 
@@ -48,12 +48,7 @@ local need = { LIB = true, LIBPATH = true, PATH = true, INCLUDE = true }
 
 function mt:initialize(version)
     self.__path = msvc_path(version)
-	local vsvars32
-    if version >= 150 then
-	    vsvars32 = self.__path / 'Common7' / 'Tools' / 'VsDevCmd.bat'
-	else
-	    vsvars32 = self.__path / 'Tools' / 'vsvars32.bat'
-    end
+	local vsvars32 = self.__path / 'Common7' / 'Tools' / 'VsDevCmd.bat'
     local f = io.popen(('"%s" & set'):format(vsvars32:string()), 'r')
     for line in f:lines() do
         local name, value = parse_env(line)
@@ -69,8 +64,8 @@ function mt:initialize(version)
     return true
 end
 
-function mt:fullversion()
-    local verfile = self.__path / 'VC' / 'Auxiliary' / 'Build' / 'Microsoft.VCToolsVersion.default.txt'
+function mt:redistversion()
+    local verfile = self.__path / 'VC' / 'Auxiliary' / 'Build' / 'Microsoft.VCRedistVersion.default.txt'
     local f = assert(io.open(uni.u2a(verfile:string()), 'r'))
 	local r = f:read 'a'
     f:close()
@@ -78,20 +73,16 @@ function mt:fullversion()
 end
 
 function mt:crtpath()
-    if self.version >= 150 then
-	    local fullversion = self:fullversion()
-        if fullversion == '14.10.25017' then
-	        fullversion = '14.10.25008'
-        end
-        return self.__path / 'VC' / 'Redist' / 'MSVC' / fullversion / 'x86' / ('Microsoft.VC' .. self.version .. '.CRT')
-    else
-	    return self.__path / 'VC' / 'Redist' / 'x86' / ('Microsoft.VC' .. self.version .. '.CRT')
-    end
+    return self.__path / 'VC' / 'Redist' / 'MSVC' / self:redistversion() / 'x86' / ('Microsoft.VC' .. self.version .. '.CRT')
 end
 
 function mt:sdkpath()
 	local reg = registry.open [[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots]]
     return fs.path(reg.KitsRoot10)
+end
+
+function mt:ucrtpath()
+    return self:sdkpath() / 'Redist' / 'ucrt' / 'DLLs' / 'x86'
 end
 
 function mt:rebuild(solution, configuration, platform)

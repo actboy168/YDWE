@@ -27,7 +27,7 @@ oklock:unlock()
 
 -- Step.1 初始化
 local msvc = require 'msvc'
-if not msvc:initialize(150) then
+if not msvc:initialize(141) then
     error('Cannot found Visual Studio Toolset.')
 end
 
@@ -39,7 +39,6 @@ end
 local path = {}
 path.Root = fs.path(root)
 path.Build = path.Root / 'Build'
-path.ThirdParty = path.Root / 'ThirdParty'
 path.OpenSource = path.Root / 'OpenSource'
 path.Development = path.Root / 'Development'
 path.Result = path.Development / 'Build' / 'bin' / configuration
@@ -80,38 +79,12 @@ if fs.exists(path.Build / 'include'/ 'version') then
 end
 
 -- Step.4 编译
---msvc:rebuild(path.ThirdParty / 'Microsoft' / 'Detours' / 'sln' / 'Detours.sln', configuration)
 msvc:rebuild(path.OpenSource / 'all.sln', configuration)
 if not dev then
     msvc:rebuild(path.Development / 'Core' / 'Solution' / 'YDWE.sln', configuration)
 end
 
 -- Step.5 复制
-local function get_boost_version()
-	local f = io.open((path.OpenSource / 'Boost' / 'boost' / 'version.hpp'):string(), 'rb')
-	if not f then
-        error('Not found <boost/version.hpp>')
-    end
-	local content = f:read 'a'
-	f:close()
-    local version = content:match('BOOST_LIB_VERSION%s+"([%d_]+)"')
-    if not version then
-        error('Error in <boost/version.hpp>')
-    end
-    return version
-end
-
-local function copy_boost_dll(name)
-    local fmt
-    if configuration == 'Release' then
-        fmt = 'boost_%s-vc%s-mt-%s.dll'
-    else
-        fmt = 'boost_%s-vc%s-mt-gd-%s.dll'
-    end
-    local filename = fmt:format(name, msvc.version, get_boost_version())
-    fs.copy_file(path.OpenSource / 'Boost' / 'stage' / 'lib' / filename, path.Result / 'bin' / filename, true)
-end
-
 local function copy_directory(from, to, filter)
     fs.create_directories(to)
 	for fromfile in from:list_directory() do
@@ -129,39 +102,16 @@ local function copy_crt_dll()
     if configuration ~= 'Release' then
         return
     end
-    local crtpath = msvc:crtpath()
-    if fs.exists(crtpath) then
-        if tonumber(msvc.version) < 150 then
-            copy_directory(crtpath, path.Result / 'bin', function(path)
-                local ext = path:extension():string():lower()
-                return ext == '.dll'
-            end)
-        else
-            fs.copy_file(crtpath / 'msvcp140.dll', path.Result / 'bin' / 'msvcp140.dll', true)
-            fs.copy_file(crtpath / 'vcruntime140.dll', path.Result / 'bin' / 'vcruntime140.dll', true)
-        end
-    end
-end
-
-local function copy_ucrt_dll()
-    if configuration ~= 'Release' then
-        return
-    end
-    copy_directory(msvc:sdkpath() / 'Redist' / 'ucrt' / 'DLLs' / 'x86', path.Result / 'bin', function(path)
-        local ext = path:extension():string():lower()
-        return ext == '.dll'
+    fs.copy_file(msvc:crtpath() / 'msvcp140.dll', path.Result / 'bin' / 'msvcp140.dll', true)
+    fs.copy_file(msvc:crtpath() / 'vcruntime140.dll', path.Result / 'bin' / 'vcruntime140.dll', true)
+    copy_directory(msvc:ucrtpath(), path.Result / 'bin', function(path)
+        return path:extension():string():lower() == '.dll'
     end)
 end
 
 fs.create_directories(path.Result / 'bin' / 'modules')
 fs.create_directories(path.Result / 'plugin' / 'jasshelper' / 'bin')
 copy_crt_dll()
-if tonumber(msvc.version) < 150 then
-	copy_boost_dll('system')
-	copy_boost_dll('filesystem')
-else
-	copy_ucrt_dll()
-end
 fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / configuration / 'lua53.dll', path.Result / 'bin' / 'lua53.dll', true)
 fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / configuration / 'lua.exe', path.Result / 'bin' / 'lua.exe', true)
 fs.copy_file(path.OpenSource / 'StormLib' / 'bin' / 'Win32' / configuration / 'StormLib.dll', path.Result / 'bin' / 'StormLib.dll', true)
