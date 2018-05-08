@@ -1,6 +1,9 @@
 #pragma once
 
-#if _MSC_VER >= 1910
+#if _MSC_VER >= 1914
+#include <filesystem>
+namespace fs = std::filesystem;
+#elif _MSC_VER >= 1910
 #include <filesystem>
 namespace fs = std::experimental::filesystem;
 #elif _MSC_VER >= 1800

@@ -11,7 +11,7 @@ if fs.ydwe_path() == fs.ydwe_devpath() then
     end
 else
     function getdevpath(path)
-        return fs.absolute(fs.uncomplete(path, fs.ydwe_path()), fs.ydwe_devpath())
+        return fs.absolute(fs.relative(path, fs.ydwe_path()), fs.ydwe_devpath())
     end
 end
 

@@ -244,7 +244,7 @@ namespace luafs {
 			FS_TRY;
 			const fs::path& self = path::to(L, 1);
 			fs::perms perms = fs::perms::mask & fs::perms(luaL_checkinteger(L, 2));
-			fs::permissions(self, fs::perms::add_perms | perms);
+			fs::permissions(self, perms, fs::perm_options::add);
 			return 0;
 			FS_TRY_END;
 		}
@@ -254,7 +254,7 @@ namespace luafs {
 			FS_TRY;
 			const fs::path& self = path::to(L, 1);
 			fs::perms perms = fs::perms::mask & fs::perms(luaL_checkinteger(L, 2));
-			fs::permissions(self, fs::perms::remove_perms | perms);
+			fs::permissions(self, perms, fs::perm_options::remove);
 			return 0;
 			return 1;
 			FS_TRY_END;
@@ -409,33 +409,16 @@ namespace luafs {
 			return path::constructor_(L, std::move(fs::absolute(p)));
 		}
 		const fs::path& base = path::to(L, 2);
-		return path::constructor_(L, std::move(fs::absolute(p, base)));
+		return path::constructor_(L, std::move(fs::absolute(base / p)));
 		FS_TRY_END;
 	}
 
-	static int canonical(lua_State* L)
-	{
-		FS_TRY;
-		const fs::path& p = path::to(L, 1);
-		if (lua_gettop(L) == 1) {
-			return path::constructor_(L, std::move(fs::canonical(p)));
-		}
-		const fs::path& base = path::to(L, 2);
-		return path::constructor_(L, std::move(fs::canonical(p, base)));
-		FS_TRY_END;
-	}
-
-	static int uncomplete(lua_State* L)
+	static int relative(lua_State* L)
 	{
 		FS_TRY;
 		const fs::path& p = path::to(L, 1);
 		const fs::path& base = path::to(L, 2);
-		std::error_code ec;
-		fs::path result  = base::path::uncomplete(p, base, ec);
-		if (ec) {
-			throw fs::filesystem_error("uncomplete(p1, p2): invalid arguments");
-		}
-		return path::constructor_(L, std::move(result));
+		return path::constructor_(L, std::move(fs::relative(p, base)));
 		FS_TRY_END;
 	}
 
@@ -462,6 +445,30 @@ namespace luafs {
 		FS_TRY;
 		return path::constructor_(L, std::move(base::path::ydwe(lua_toboolean(L, 1))));
 		FS_TRY_END;
+	}
+
+	namespace deprecated {
+		static int uncomplete(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& p = path::to(L, 1);
+			const fs::path& base = path::to(L, 2);
+			return path::constructor_(L, std::move(fs::relative(p, base)));
+			FS_TRY_END;
+		}
+
+		static int canonical(lua_State* L)
+		{
+			FS_TRY;
+			const fs::path& p = path::to(L, 1);
+			if (lua_gettop(L) == 1) {
+				return path::constructor_(L, std::move(fs::canonical(p)));
+			}
+			const fs::path& base = path::to(L, 2);
+			return path::constructor_(L, std::move(fs::canonical(base / p)));
+			FS_TRY_END;
+		}
+
 	}
 }
  
@@ -515,11 +522,14 @@ int luaopen_filesystem(lua_State* L)
 		{ "current_path", luafs::current_path },
 		{ "copy_file", luafs::copy_file },
 		{ "absolute", luafs::absolute },
-		{ "canonical", luafs::canonical },
-		{ "uncomplete", luafs::uncomplete },
+		{ "relative", luafs::relative },
 		{ "last_write_time", luafs::last_write_time },
 		{ "get", luafs::get },
 		{ "ydwe", luafs::ydwe },
+
+		// deprecated
+		{ "uncomplete", luafs::deprecated::uncomplete },
+		{ "canonical", luafs::deprecated::canonical },
 		{ NULL, NULL }
 	};	
 	lua_newtable(L);
