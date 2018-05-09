@@ -1,3 +1,4 @@
+require 'filesystem'
 require 'registry'
 local uni = require 'unicode'
 local ffi = require 'ffi'
