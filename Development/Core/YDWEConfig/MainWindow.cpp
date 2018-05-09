@@ -103,7 +103,7 @@ CMainWindow::CMainWindow()
 {
 	try
 	{
-		m_ydwe_path = base::path::get(base::path::DIR_EXE).remove_filename().remove_filename() / L"YDWE.exe";
+		m_ydwe_path = base::path::get(base::path::DIR_EXE).parent_path().parent_path() / L"YDWE.exe";
 	}
 	catch (...)
 	{
@@ -219,7 +219,7 @@ bool CMainWindow::LoadConfig(base::ini::table& table)
 	try
 	{
 		ResetConfig(table);
-		auto buf = base::file::read_stream(base::path::self().remove_filename() / L"EverConfig.cfg").read<std::string>();
+		auto buf = base::file::read_stream(base::path::self().parent_path() / L"EverConfig.cfg").read<std::string>();
 		base::ini::read(table, buf.c_str());
 	}
 	catch (...)
@@ -234,7 +234,7 @@ bool CMainWindow::SaveConfig(base::ini::table const& table)
 {
 	try
 	{
-		base::file::write_stream(base::path::self().remove_filename() / L"EverConfig.cfg").write(base::ini::write(table));
+		base::file::write_stream(base::path::self().parent_path() / L"EverConfig.cfg").write(base::ini::write(table));
 	}
 	catch (...)
 	{

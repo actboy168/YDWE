@@ -13,7 +13,7 @@ static fs::path GetModuleDirectory(HMODULE hModule)
 	if (::GetModuleFileNameW(hModule, buffer, sizeof(buffer) / sizeof(buffer[0])))
 	{
 		result = buffer;
-		result.remove_filename(); // 获取上级路径
+		result = result.parent_path(); // 获取上级路径
 	}
 
 	return std::move(result);

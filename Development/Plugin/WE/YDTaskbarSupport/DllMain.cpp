@@ -76,7 +76,7 @@ void Initialize()
 	jumpList.SetAppID(currentAppID);
 	if (jumpList.InitializeList())
 	{
-		fs::path ydweDirectory = base::path::get(base::path::DIR_MODULE).remove_filename().remove_filename();
+		fs::path ydweDirectory = base::path::get(base::path::DIR_MODULE).parent_path().parent_path();
 
 		jumpList.AddTaskSeparator();
 

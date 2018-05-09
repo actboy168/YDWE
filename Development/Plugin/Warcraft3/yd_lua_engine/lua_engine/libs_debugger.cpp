@@ -193,7 +193,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger
 	{
 		HMODULE m = GetModuleHandleW(L"debugger.dll");
 		if (!m) {
-			fs::path path = fs::path(QueryProcessPath(L"vscode-lua-debug.exe")).remove_filename() / L"debugger.dll";
+			fs::path path = fs::path(QueryProcessPath(L"vscode-lua-debug.exe")).parent_path() / L"debugger.dll";
 			if (fs::exists(path)) {
 				m = LoadLibraryW(path.c_str());
 				if (!m) {

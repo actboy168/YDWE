@@ -170,7 +170,7 @@ static bool CreateDotNetConfig(fs::path const& config_path)
 
 static void DoTask()
 {
-	fs::path gExecutableDirectory = base::path::get(base::path::DIR_EXE).remove_filename();
+	fs::path gExecutableDirectory = base::path::get(base::path::DIR_EXE).parent_path();
 
 	base::i18n::v2::initialize(base::path::ydwe(true) / L"share" / L"locale");
 	base::i18n::v2::set_domain(L"startup");

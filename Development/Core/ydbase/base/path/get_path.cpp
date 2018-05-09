@@ -191,7 +191,7 @@ namespace base { namespace path {
 		case DIR_SOURCE_ROOT: 
 			{
 				fs::path result = get(DIR_EXE);
-				result = result.remove_filename();
+				result = result.parent_path();
 				return std::move(result);
 			}
 		case DIR_USER_DESKTOP:

@@ -106,7 +106,6 @@ namespace NYDWE {
 		{
 			try {
 				fs::path p(fileName);
-				//p = p.parent_path().remove_filename() / p.filename();
 
 				event_array[EVENT_SAVE_MAP]([&](lua_State* L, int idx){
 					lua_pushstring(L, "map_path");
@@ -130,7 +129,7 @@ namespace NYDWE {
 		std::cmatch matcher;
 		if (lpCommandLine && std::regex_match(lpCommandLine, matcher, gRegexCommandLine))
 		{
-			fs::path currentWarcraftMap = base::path::get(base::path::DIR_EXE).remove_filename() / matcher.str(1);
+			fs::path currentWarcraftMap = base::path::get(base::path::DIR_EXE).parent_path() / matcher.str(1);
 			LOGGING_TRACE(lg) << "Executing map " << currentWarcraftMap.wstring();
 
 			if (gIsInCompileProcess)

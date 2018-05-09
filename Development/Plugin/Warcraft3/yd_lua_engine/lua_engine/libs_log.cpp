@@ -213,7 +213,7 @@ static int l__newindex(lua_State* L)
 			size_t pathlen = 0;
 			const char* path = lua_tolstring(L, 3, &pathlen);
 			std::wstring utf16_str = base::u2w(std::string_view(path, pathlen));
-			fs::create_directories(fs::path(utf16_str).remove_filename());
+			fs::create_directories(fs::path(utf16_str).parent_path());
 			lua_pushstring(L, "__path");
 			lua_pushlstring(L, (const char*)utf16_str.c_str(), (utf16_str.size() + 1) * sizeof(wchar_t));
 			lua_rawset(L, lua_upvalueindex(1));
