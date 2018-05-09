@@ -94,8 +94,7 @@ function mt:build(solution, configuration, platform)
 end
 
 function mt:compile(solution, target, configuration, platform)
-    local command = ('MSBuild "%s" /m /v:m /t:%s /clp:ShowEventId /p:Configuration="%s",Platform="%s"'):format(solution:string(), target, configuration or 'Release', platform or 'Win32'))
-    local f = io.popen(command, 'r')
+    local command = ('MSBuild "%s" /m /v:m /t:%s /clp:ShowEventId /p:Configuration="%s",Platform="%s"'):format(solution:string(), target, configuration or 'Release', platform or 'Win32')    local f = io.popen(command, 'r')
     if self.coding == 'ansi' then
         for line in f:lines() do
             print(line)
