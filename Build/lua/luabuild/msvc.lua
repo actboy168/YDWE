@@ -26,27 +26,6 @@ local function addenv(name, newvalue)
     ffi.C.SetEnvironmentVariableA(name, newvalue)
 end
 
-local function execute(coding, command)
-    local f = io.popen(command, 'r')
-    if coding == 'ansi' then
-        for line in f:lines() do
-            print(line)
-        end
-    else
-        for line in f:lines() do
-            print(uni.a2u(line))
-        end
-    end
-    local ok = f:close()
-    if not ok then
-        if coding == 'ansi' then
-            error(("execute failed: %q"):format(uni.u2a(command)))
-        else
-            error(("execute failed: %q"):format(command))
-        end
-    end
-end    
-
 local function msvc_path(version)
     local reg = registry.local_machine() / [[SOFTWARE\Microsoft\VisualStudio\SxS\VS7]]
     local path = reg[("%d.0"):format(math.ceil(version / 10))]
@@ -107,11 +86,33 @@ function mt:copy_crt_dll(platform, target)
 end
 
 function mt:rebuild(solution, configuration, platform)
-    execute(self.coding, ('MSBuild "%s" /m /v:m /t:rebuild /clp:ShowEventId /p:Configuration="%s",Platform="%s"'):format(solution:string(), configuration or 'Release', platform or 'Win32'))
+    self:compile(solution, 'rebuild', configuration, platform)
 end
 
 function mt:build(solution, configuration, platform)
-    execute(self.coding, ('MSBuild "%s" /m /v:m /t:build /clp:ShowEventId /p:Configuration="%s",Platform="%s"'):format(solution:string(), configuration or 'Release', platform or 'Win32'))
+    self:compile(solution, 'build', configuration, platform)
+end
+
+function mt:compile(solution, target, configuration, platform)
+    local command = ('MSBuild "%s" /m /v:m /t:%s /clp:ShowEventId /p:Configuration="%s",Platform="%s"'):format(solution:string(), target, configuration or 'Release', platform or 'Win32'))
+    local f = io.popen(command, 'r')
+    if self.coding == 'ansi' then
+        for line in f:lines() do
+            print(line)
+        end
+    else
+        for line in f:lines() do
+            print(uni.a2u(line))
+        end
+    end
+    local ok = f:close()
+    if not ok then
+        if self.coding == 'ansi' then
+            error(("execute failed: %q"):format(uni.u2a(command)))
+        else
+            error(("execute failed: %q"):format(command))
+        end
+    end
 end
 
 return mt
