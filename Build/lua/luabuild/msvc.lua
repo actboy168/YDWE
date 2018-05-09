@@ -110,4 +110,8 @@ function mt:rebuild(solution, configuration, platform)
     execute(self.coding, ('MSBuild "%s" /m /v:m /t:rebuild /clp:ShowEventId /p:Configuration="%s",Platform="%s"'):format(solution:string(), configuration or 'Release', platform or 'Win32'))
 end
 
+function mt:build(solution, configuration, platform)
+    execute(self.coding, ('MSBuild "%s" /m /v:m /t:build /clp:ShowEventId /p:Configuration="%s",Platform="%s"'):format(solution:string(), configuration or 'Release', platform or 'Win32'))
+end
+
 return mt
