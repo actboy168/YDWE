@@ -73,9 +73,13 @@ if fs.exists(path.Build / 'include'/ 'version') then
 end
 
 -- Step.4 编译
-msvc:rebuild(path.OpenSource / 'all.sln', configuration)
+local property = {
+    Configuration = configuration,
+    Platform = 'Win32'
+}
+msvc:compile('rebuild', path.OpenSource / 'all.sln', property)
 if not dev then
-    msvc:rebuild(path.Development / 'Core' / 'Solution' / 'YDWE.sln', configuration)
+    msvc:compile('rebuild', path.Development / 'Core' / 'Solution' / 'YDWE.sln', property)
 end
 
 -- Step.5 复制
