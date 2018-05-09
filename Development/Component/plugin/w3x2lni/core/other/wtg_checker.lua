@@ -34,7 +34,12 @@ local function get_ui_arg_count(type, name)
 end
 
 local function read_head()
-    index = index + 8
+    local id, ver, index = string_unpack('c4l', wtg, index)
+    if id == 'WTG!' and index == 7 then
+        return true
+    else
+        return false
+    end
 end
 
 local function read_category()
@@ -112,7 +117,10 @@ local function read_triggers()
 end
 
 local function check()
-    read_head()
+    local suc = read_head()
+    if not suc then
+        return
+    end
     read_categories()
     read_vars()
     read_triggers()

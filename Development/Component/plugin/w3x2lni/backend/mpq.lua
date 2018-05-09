@@ -5,70 +5,19 @@ local sleep = require 'ffi.sleep'
 local makefile = require 'prebuilt.makefile'
 local maketemplate = require 'prebuilt.maketemplate'
 local prebuilt_metadata = require 'prebuilt.metadata'
+local prebuilt_keydata = require 'prebuilt.keydata'
+local prebuilt_search = require 'prebuilt.search'
 local proto = require 'tool.protocol'
 local lang = require 'tool.lang'
-local file_version = require 'ffi.file_version'
 local core = require 'backend.sandbox_core'
 local unpack_config = require 'backend.unpack_config'
 local w3xparser = require 'w3xparser'
 local messager = require 'tool.messager'
+local war3_name = require 'tool.war3_name'
 local w2l
 local mpq_name
+local mpqs
 local root = fs.current_path()
-
-local language_map = {
-    [0x00000409] = 'enUS',
-    [0x00000809] = 'enGB',
-    [0x0000040c] = 'frFR',
-    [0x00000407] = 'deDE',
-    [0x0000040a] = 'esES',
-    [0x00000410] = 'itIT',
-    [0x00000405] = 'csCZ',
-    [0x00000419] = 'ruRU',
-    [0x00000415] = 'plPL',
-    [0x00000416] = 'ptBR',
-    [0x00000816] = 'ptPT',
-    [0x0000041f] = 'tkTK',
-    [0x00000411] = 'jaJA',
-    [0x00000412] = 'koKR',
-    [0x00000404] = 'zhTW',
-    [0x00000804] = 'zhCN',
-    [0x0000041e] = 'thTH',
-}
-
-local function mpq_language(config)
-    if not config then
-        return nil
-    end
-    local id = config:match 'LANGID=(0x[%x]+)'
-    if not id then
-        return nil
-    end
-    return language_map[tonumber(id)]
-end
-
-local function war3_ver(input)
-    local exe_path = input / 'War3.exe'
-    if fs.exists(exe_path) then
-        local ver = file_version(exe_path:string())
-        if ver.major > 1 or ver.minor >= 29 then
-            return ('%d.%d.%d'):format(ver.major, ver.minor, ver.revision)
-        end
-    end
-    local exe_path = input / 'Warcraft III.exe'
-    if fs.exists(exe_path) then
-        local ver = file_version(exe_path:string())
-        if ver.major > 1 or ver.minor >= 29 then
-            return ('%d.%d.%d'):format(ver.major, ver.minor, ver.revision)
-        end
-    end
-    local dll_path = input / 'Game.dll'
-    if fs.exists(dll_path) then
-        local ver = file_version(dll_path:string())
-        return ('%d.%d.%d'):format(ver.major, ver.minor, ver.revision)
-    end
-    return nil
-end
 
 local function task(f, ...)
     for i = 1, 99 do
@@ -136,8 +85,8 @@ local function report_fail()
     end
 end
 
-local function extract_mpq(mpqs)
-    local info = w2l:parse_lni(assert(io.load(fs.current_path() / 'core' / 'info.ini')))
+local function extract_mpq()
+    local info = w2l:parse_lni(assert(io.load(root / 'core' / 'info.ini')))
     for _, root in ipairs {'', 'Custom_V1\\'} do
         mpqs:extract_file('war3', root .. 'Scripts\\Common.j')
         mpqs:extract_file('war3', root .. 'Scripts\\Blizzard.j')
@@ -162,9 +111,39 @@ local function extract_mpq(mpqs)
     end
 end
 
-local function create_metadata(w2l, mpqs)
+local function get_codemapped(w2l)
+    local template = w2l:parse_slk(mpqs:load_file 'units\\abilitydata.slk')
+    local t = {}
+    for id, d in pairs(template) do
+        t[id] = d.code
+    end
+    return t
+end
+
+local function get_typedefine(w2l)
+    local uniteditordata = w2l:parse_txt(mpqs:load_file 'ui\\uniteditordata.txt')
+    local t = {
+        int    = 0,
+        bool   = 0,
+        real   = 1,
+        unreal = 2,
+    }
+    for key, data in pairs(uniteditordata) do
+        local value = data['00'][1]
+        local tp
+        if tonumber(value) then
+            tp = 0
+        else
+            tp = 3
+        end
+        t[key] = tp
+    end
+    return t
+end
+
+local function create_metadata(w2l, codemapped, typedefine)
     local defined_meta = w2l:parse_lni(io.load(root / 'core' / 'defined' / 'metadata.ini'))
-    local meta = prebuilt_metadata(w2l, defined_meta, function (filename)
+    local meta = prebuilt_metadata(w2l, defined_meta, codemapped, typedefine, function (filename)
         if filename == 'doodadmetadata.slk' then
             return mpqs:load_file('Doodads\\' .. filename)
         else
@@ -176,7 +155,7 @@ local function create_metadata(w2l, mpqs)
     io.save(meta_path / 'metadata.ini', meta)
 end
 
-local function create_wes(w2l, mpqs)
+local function create_wes(w2l)
     local wes_path = root:parent_path() / 'data' / mpq_name / 'we'
     fs.create_directories(wes_path)
     local wes = mpqs:load_file 'ui\\WorldEditStrings.txt'
@@ -201,6 +180,10 @@ local function get_w2l()
     function w2l:wes_load(filename)
         return io.load(root:parent_path() / 'data' / mpq_name / 'we' / filename)
     end
+
+    --function w2l:defined_load(filename)
+    --    return io.load(root:parent_path() / 'data' / mpq_name / 'war3' / 'defined' / filename)
+    --end
 
     function messager.report(_, _, str, tip)
         if str == lang.report.NO_WES_STRING then
@@ -249,27 +232,17 @@ return function ()
     local input = config.input
     get_w2l()
 
-    if not fs.is_directory(input) then
+    mpq_name = war3_name(input)
+    if not mpq_name then
         w2l.messager.text(lang.script.NEED_WAR3_DIR)
         return
     end
-    local ver = war3_ver(input)
-    if not ver then
-        w2l.messager.text(lang.script.NEED_WAR3_DIR)
-        return
-    end
-    local mpqs = open_mpq(input)
+    mpqs = open_mpq(input)
     if not mpqs then
         return
     end
-    local lg = mpq_language(mpqs:load_file 'config.txt')
-    if lg then
-        mpq_name = lg .. '-' .. ver
-    else
-        mpq_name = input:filename():string()
-    end
-
     local config = require 'tool.config' ()
+    w2l.config.data_war3 = mpq_name
     config.global.data_war3 = mpq_name
     if config.global.data_ui ~= '${YDWE}' then
         config.global.data_ui = mpq_name
@@ -300,14 +273,20 @@ return function ()
 
     w2l.progress:start(0.2)
     w2l.messager.text(lang.script.EXPORT_MPQ)
-    extract_mpq(mpqs)
+    extract_mpq()
     report_fail()
     w2l.progress:finish()
 
+    local codemapped = get_codemapped(w2l)
+    local typedefine = get_typedefine(w2l)
+
     w2l.progress:start(0.3)
-    create_metadata(w2l, mpqs)
-    create_wes(w2l, mpqs)
+    create_metadata(w2l, codemapped, typedefine)
+    create_wes(w2l)
     w2l.progress:finish()
+
+    prebuilt_keydata(w2l, mpqs)
+    prebuilt_search(w2l, codemapped, mpqs)
 
     w2l.progress:start(0.4)
     local slk = makefile(w2l, 'Melee')

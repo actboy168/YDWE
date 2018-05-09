@@ -13,11 +13,14 @@ return function (path)
                 path = root:parent_path() / path
             end
         end
-    elseif _W2L_DIR then
+    elseif _W2L_MODE == 'CLI' then
         local cur = fs.path(_W2L_DIR)
-        while fs.is_directory(cur) do
+        while true do
             if check_lni_mark(cur / '.w3x') then
                 path = cur
+                break
+            end
+            if cur == cur:parent_path() then
                 break
             end
             cur = cur:parent_path()

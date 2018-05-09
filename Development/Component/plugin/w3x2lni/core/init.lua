@@ -45,14 +45,18 @@ function mt:parse_ini(buf)
     return ini(buf)
 end
 
+function mt:defined_load(name)
+    return load_file(name)
+end
+
 function mt:defined(name)
-    return lni(load_file('defined\\' .. name .. '.ini'))
+    return lni(self:defined_load('defined\\' .. name .. '.ini'))
 end
 
 function mt:metadata()
     if not metadata then
         if self.config.mode ~= 'obj' or self.config.data_meta == '${DEFAULT}' then
-            metadata = self:defined 'metadata'
+            metadata = lni(load_file 'defined\\metadata.ini')
         else
             metadata = lni(self:meta_load 'metadata.ini')
         end

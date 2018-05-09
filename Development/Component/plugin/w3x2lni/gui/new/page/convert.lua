@@ -97,7 +97,7 @@ lower:setstyle { FlexGrow = 1, JustifyContent = 'flex-end' }
 view:addchildview(lower)
 
 local filename = Button('')
-filename:setstyle { Height = 50, Margin = 2 }
+filename:setstyle { Height = 36, Margin = 8, MarginTop = 16, MarginBottom = 16 }
 filename:setfont(Font('黑体', 20))
 upper:addchildview(filename)
 

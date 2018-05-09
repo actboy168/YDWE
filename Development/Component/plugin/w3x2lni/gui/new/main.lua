@@ -4,6 +4,9 @@ local timer = require 'gui.timer'
 local lang = require 'tool.lang'
 local config = require 'tool.config' ()
 local input_path = require 'tool.input_path'
+local builder = require 'map-builder'
+local war3_name = require 'tool.war3_name'
+local ev = require 'gui.event'
 
 lang:set_lang(config.global.lang)
 window = {}
@@ -13,8 +16,18 @@ function ext.on_dropfile(filename)
     if window._worker and not window._worker.exited then
         return
     end
+    local war3 = war3_name(fs.path(filename))
+    if war3 then
+        return
+    end
+    local mappath = input_path(filename)
+    local map = builder.load(mappath)
+    if not map then
+        return
+    end
+    map:close()
+    window._filename = mappath
     window:show_page('select')
-    window._filename = input_path(filename)
 end
 
 local FontPool = {}
@@ -186,6 +199,7 @@ function window:set_theme(title, color)
     self._color = color
     self._caption:setbackgroundcolor(color)
     self:close_theme()
+    ev.emit('update theme')
 end
 
 function window:show_page(name)

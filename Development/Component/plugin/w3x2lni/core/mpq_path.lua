@@ -1,15 +1,15 @@
 return function ()
     local mt = {}
-    local paths = {'\\'}
+    local paths = {''}
     local mpqs = {}
     local function update()
-        paths = {'\\'}
+        paths = {''}
         for i = #mpqs, 1, -1 do
             local path = mpqs[i]
             local max = #paths
-            table.insert(paths, '\\' .. path .. '\\')
+            table.insert(paths, path)
             for i = 2, max do
-                table.insert(paths, '\\' .. path .. paths[i])
+                table.insert(paths, path .. '\\' .. paths[i])
             end
         end
     end

@@ -41,7 +41,7 @@ local color  = {
 
 local height = 0
 local log = gui.Container.create()
-for _, v in ipairs(require 'gui.changelog') do
+for _, v in ipairs(require 'tool.changelog') do
     local label = gui.Label.create(v.version)
     label:setstyle { Margin = 3, Height = 25 }
     label:setbackgroundcolor('#444')

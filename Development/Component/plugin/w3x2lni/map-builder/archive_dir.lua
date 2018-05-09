@@ -60,7 +60,7 @@ function mt:load_file(name)
 end
 
 function mt:save_file(name, buf, filetime)
-    local dir = (self.path / name):remove_filename()
+    local dir = (self.path / name):parent_path()
     if not fs.exists(dir) then
         fs.create_directories(dir)
     end
