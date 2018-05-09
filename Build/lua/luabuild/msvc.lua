@@ -83,8 +83,8 @@ function mt:redistversion()
     return strtrim(r)
 end
 
-function mt:crtpath()
-    return self.__path / 'VC' / 'Redist' / 'MSVC' / self:redistversion() / 'x86' / ('Microsoft.VC' .. self.version .. '.CRT')
+function mt:crtpath(platform)
+    return self.__path / 'VC' / 'Redist' / 'MSVC' / self:redistversion() / platform / ('Microsoft.VC' .. self.version .. '.CRT')
 end
 
 function mt:sdkpath()
@@ -92,15 +92,15 @@ function mt:sdkpath()
     return fs.path(reg.KitsRoot10)
 end
 
-function mt:ucrtpath()
-    return self:sdkpath() / 'Redist' / 'ucrt' / 'DLLs' / 'x86'
+function mt:ucrtpath(platform)
+    return self:sdkpath() / 'Redist' / 'ucrt' / 'DLLs' / platform
 end
 
-function mt:copy_crt_dll(target)
+function mt:copy_crt_dll(platform, target)
     fs.create_directories(target)
-    fs.copy_file(self:crtpath() / 'msvcp140.dll', target / 'msvcp140.dll', true)
-    fs.copy_file(self:crtpath() / 'vcruntime140.dll', target / 'vcruntime140.dll', true)
-    for dll in self:ucrtpath():list_directory() do
+    fs.copy_file(self:crtpath(platform) / 'msvcp140.dll', target / 'msvcp140.dll', true)
+    fs.copy_file(self:crtpath(platform) / 'vcruntime140.dll', target / 'vcruntime140.dll', true)
+    for dll in self:ucrtpath(platform):list_directory() do
         fs.copy_file(dll, target / dll:filename(), true)
     end
 end

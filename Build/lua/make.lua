@@ -95,7 +95,7 @@ end
 fs.create_directories(path.Result / 'bin' / 'modules')
 fs.create_directories(path.Result / 'plugin' / 'jasshelper' / 'bin')
 if configuration == 'Release' then
-    msvc:copy_crt_dll(path.Result / 'bin')
+    msvc:copy_crt_dll('x86', path.Result / 'bin')
 end
 fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / configuration / 'lua53.dll', path.Result / 'bin' / 'lua53.dll', true)
 fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / configuration / 'lua.exe', path.Result / 'bin' / 'lua.exe', true)
