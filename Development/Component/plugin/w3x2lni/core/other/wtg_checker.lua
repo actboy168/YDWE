@@ -35,7 +35,7 @@ end
 
 local function read_head()
     local id, ver, index = string_unpack('c4l', wtg, index)
-    if id == 'WTG!' and index == 7 then
+    if id == 'WTG!' and ver == 7 then
         return true
     else
         return false
