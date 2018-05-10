@@ -34,8 +34,8 @@ local function get_ui_arg_count(type, name)
 end
 
 local function read_head()
-    local id, ver, index = string_unpack('c4l', wtg, index)
-    if id == 'WTG!' and ver == 7 then
+    a, b, index = string_unpack('c4l', wtg, index)
+    if a == 'WTG!' and b == 7 then
         return true
     else
         return false
