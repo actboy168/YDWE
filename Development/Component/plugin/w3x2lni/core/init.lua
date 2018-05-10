@@ -12,7 +12,6 @@ local string_lower = string.lower
 
 local mt = {}
 
-local metadata
 local keydata
 
 local function load_file(path)
@@ -54,14 +53,14 @@ function mt:defined(name)
 end
 
 function mt:metadata()
-    if not metadata then
+    if not self.cache_metadata then
         if self.config.mode ~= 'obj' or self.config.data_meta == '${DEFAULT}' then
-            metadata = lni(load_file 'defined\\metadata.ini')
+            self.cache_metadata = lni(load_file 'defined\\metadata.ini')
         else
-            metadata = lni(self:meta_load 'metadata.ini')
+            self.cache_metadata = lni(self:meta_load 'metadata.ini')
         end
     end
-    return metadata
+    return self.cache_metadata
 end
 
 function mt:keydata()

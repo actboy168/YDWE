@@ -216,6 +216,10 @@ function w2l:wes_load(filename)
     return io.load(root:parent_path() / 'data' / self.config.data_wes / 'we' / filename)
 end
 
+function w2l:defined_load(filename)
+    return io.load(root:parent_path() / 'data' / self.config.data_war3 / 'war3' / filename)
+end
+
 function w2l:trigger_data()
     return triggerdata(self.config.data_ui)
 end

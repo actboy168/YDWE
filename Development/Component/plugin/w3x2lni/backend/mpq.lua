@@ -241,8 +241,8 @@ return function ()
     if not mpqs then
         return
     end
+    fs.create_directories(root:parent_path() / 'data' / mpq_name)
     local config = require 'tool.config' ()
-    w2l.config.data_war3 = mpq_name
     config.global.data_war3 = mpq_name
     if config.global.data_ui ~= '${YDWE}' then
         config.global.data_ui = mpq_name
@@ -256,7 +256,7 @@ return function ()
 
     w2l.progress:start(0.1)
     w2l.messager.text(lang.script.CLEAN_DIR)
-    local mpq_path = fs.current_path():parent_path() / 'data' / mpq_name / 'war3'
+    local mpq_path = root:parent_path() / 'data' / mpq_name / 'war3'
     if fs.exists(mpq_path) then
         if not task(fs.remove_all, mpq_path) then
             w2l.messager.text(lang.script.CREATE_DIR_FAILED:format(mpq_path:string()))
@@ -285,8 +285,10 @@ return function ()
     create_wes(w2l)
     w2l.progress:finish()
 
+    w2l.cache_metadata = w2l:parse_lni(io.load(root:parent_path() / 'data' / mpq_name / 'we' / 'metadata.ini'))
     prebuilt_keydata(w2l, mpqs)
     prebuilt_search(w2l, codemapped, mpqs)
+    w2l.cache_metadata = nil
 
     w2l.progress:start(0.4)
     local slk = makefile(w2l, 'Melee')
