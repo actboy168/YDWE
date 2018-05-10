@@ -10,6 +10,8 @@ local w2l = w3x2lni()
 local ui = require 'ui-builder.init'
 local storm = require 'ffi.storm'
 local mpqloader = require 'mpqloader'
+local wtg_checker = require 'wtg_checker'
+local wtg_reader = require 'wtg_reader'
 local ydwe = fs.ydwe_devpath()
 local info = lni(io.load(ydwe / 'plugin' / 'w3x2lni' / 'core' / 'info.ini'))
 local current_language = (require "i18n").get_language()
@@ -220,14 +222,14 @@ local function initialize()
 	    	if not wtg then
 	    		return
 	    	end
-	    	if w2l:wtg_checker(wtg, state) then
+	    	if wtg_checker(wtg, state) then
 	    		return
 	    	end
             if not gui.yesno_message(nil, LNG.PARSE_UNKNOWN_UI) then
                 return
 			end
             load_triggerdata(false)
-	    	local _, fix = w2l:wtg_reader(wtg, state)
+	    	local _, fix = wtg_reader(wtg, state)
             local bufs = {ui.new_writer(fix)}
             local dir = fs.ydwe_path() / 'unknownui'
 	    	fs.create_directories(dir)

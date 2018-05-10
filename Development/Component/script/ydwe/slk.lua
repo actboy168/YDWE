@@ -5,6 +5,7 @@ local stormlib  = require 'ffi.stormlib'
 local mpqloader = require 'mpqloader'
 local i18n = require 'i18n'
 local event = require 'ev'
+local slk_lib = require 'slk_lib'
 local map_handle = __map_handle__.handle
 
 local type_map = {
@@ -53,7 +54,7 @@ local function initialize()
         log.info('Object remove', filename)
     end
 
-    return w2l:slk_lib(false, true)
+    return slk_lib(w2l, false, true)
 end
 
 local trg
