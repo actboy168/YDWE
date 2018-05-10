@@ -102,6 +102,9 @@ end
 local function clean_obj(name, obj, type, default)
     local parent = obj._parent
     local default = default[parent]
+    if not default then
+        return
+    end
     for key, meta in pairs(metadata[type]) do
         local data = obj[key]
         if meta.profile then

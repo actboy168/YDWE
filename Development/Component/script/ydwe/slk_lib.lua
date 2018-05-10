@@ -1,6 +1,7 @@
 local pairs = pairs
 local type = type
 local w2l
+local slk_proxy
 
 local mt = {}
 mt.__index = mt
@@ -144,7 +145,7 @@ local function try_meta(key, meta1, meta2)
     
     local meta = get_meta(key)
     if not meta then
-        return nil, nil, nil, '对象[%s]没有[%s]属性'
+        return nil, nil, nil
     end
     return get_meta(key), nil, nil
 end
@@ -241,6 +242,9 @@ end
 
 function mt:fill_object(obj, ttype)
     local default = self.default[ttype][obj._parent] or self.default[ttype][obj._id]
+    if not default then
+        return
+    end
     local max_level = obj._max_level
     for key, meta in pairs(self.metadata[ttype]) do
         fill_data(obj[key], max_level, meta, default[key])
@@ -289,21 +293,20 @@ function mt:create_object(objt, ttype, name)
         end
         local parent = objt._parent
         local objd = session.default[ttype][parent]
-        local meta, level, list_type, err = try_meta(key, session.metadata[ttype], objd._code and session.metadata[objd._code])
+        if not objd then
+            objt[key] = nvalue
+            return
+        end
+        local meta, level, list_type = try_meta(key, session.metadata[ttype], objd._code and session.metadata[objd._code])
         if not meta then
-            errors[#errors+1] = err:format(objt._id, key)
+            objt[key] = nvalue
             return
         end
 
-        local function write_data(value, level)
-            local nvalue = to_type(value, meta.type)
-            if not nvalue then
-                errors[#errors+1] = ('无法将[%s]转换为[%s][%s]需要的类型（%s)'):format(value, objt._id, key, type_name[meta.type])
-                return
-            end
+        local function write_data(nvalue, level)
             key = meta.field:lower()
 
-            if meta.type == 3 and #nvalue > 1023 then
+            if type(nvalue) == 'string' and #nvalue > 1023 then
                 nvalue = nvalue:sub(1, 1023)
                 errors[#errors+1] = ('字符串[%s...]太长（不能超过1023个字符）'):format(nvalue:sub(1, 20))
             end
@@ -425,20 +428,13 @@ function mt:create_object(objt, ttype, name)
         return setmetatable(o, mt)
     end
     function o:new(id)
-        local objd = session.default[ttype][name]
-        if not objd then
-            return session:create_object(nil, ttype, '')
-        end
-        if type(id) ~= 'string' then
-            errors[#errors+1] = ('新建对象的ID[%s]无效'):format(id)
-            return session:create_object(nil, ttype, '')
-        end
+        local objd = session.default[ttype][name] or {}
         local w2lobject
         if #id == 4 and not id:find('%W') then
             w2lobject = 'static'
             if session.default[ttype][id] or session.slk[ttype][id] then
                 errors[#errors+1] = ('新建对象的ID[%s]重复'):format(id)
-                return session:create_object(nil, ttype, '')
+                return slk_proxy[ttype][id]
             end
         else
             w2lobject = 'dynamic|' .. id
@@ -547,6 +543,9 @@ local function to_list(tbl)
 end
 
 local function get_displayname(o1, o2)
+    if not o2 then
+        o2 = {}
+    end
     local name
     if o1._type == 'buff' then
         name = o1.bufftip or o1.editorname or o2.bufftip or o2.editorname
@@ -556,6 +555,9 @@ local function get_displayname(o1, o2)
         name = w2l:get_editstring(o1.name or o2.name)
     else
         name = o1.name or o2.name
+    end
+    if not name then
+        name = '<未知>'
     end
     return name:sub(1, 100):gsub('\r\n', ' ')
 end
@@ -706,7 +708,7 @@ return function (w2l_, read_only, safe_mode)
     session.default = w2l:get_default()
     session.metadata = w2l:metadata()
 
-    local slk_proxy = {}
+    slk_proxy = {}
     for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
         slk_proxy[name] = session:create_proxy(name)
         session.dynamics[name] = {}
