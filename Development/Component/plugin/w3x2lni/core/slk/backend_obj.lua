@@ -16,6 +16,7 @@ local os_clock = os.clock
 local w2l
 local has_level
 local metadata
+local default
 local hexs
 local wts
 local ttype
@@ -54,7 +55,7 @@ local function format_value(value)
         end
         return table_concat(tbl, ' ')
     else
-        return tostring(tip):sub(1, 100):gsub('\r\n', ' ')
+        return tostring(value):sub(1, 100):gsub('\r\n', ' ')
     end
 end
 
@@ -66,7 +67,7 @@ local function write(format, ...)
     hexs[#hexs+1] = (format):pack(...)
 end
 
-local function write_value(meta, level, value)
+local function write_value(meta, level, obj, value)
     local id = meta.id
     local tp = meta.type
     write('c4l', id .. ('\0'):rep(4 - #id), tp)
@@ -85,6 +86,13 @@ local function write_value(meta, level, value)
         end
         write('f', value)
     else
+        if type(value) ~= 'string' then
+            value = ''
+        end
+        if value:find('\0', 1, true) then
+            report(lang.report.INVALID_OBJECT_DATA, obj, id, value)
+            value = ''
+        end
         if #value > 1023 then
             value = w2l:save_wts(wts, value, lang.script.TEXT_TOO_LONG_IN_OBJ)
         end
@@ -93,7 +101,7 @@ local function write_value(meta, level, value)
     write('c4', '\0\0\0\0')
 end
 
-local function write_data(key, data, meta)
+local function write_data(key, obj, data, meta)
     if meta['repeat'] then
         if type(data) ~= 'table' then
             data = {data}
@@ -108,11 +116,11 @@ local function write_data(key, data, meta)
         end
         for level = 1, max_level do
             if data[level] then
-                write_value(meta, level, data[level])
+                write_value(meta, level, obj, data[level])
             end
         end
     else
-        write_value(meta, 0, data)
+        write_value(meta, 0, obj, data)
     end
 end
 
@@ -168,7 +176,7 @@ local function write_object(chunk, name, obj)
         local data = obj[key]
         if data then
             if metas[key] then
-                write_data(key, obj[key], metas[key])
+                write_data(key, obj, obj[key], metas[key])
             end
         end
     end
@@ -191,8 +199,16 @@ local function write_head()
     write('l', 2)
 end
 
-local function is_enable_obj(obj, remove_unuse_object)
+local function is_enable_obj(name, obj, remove_unuse_object)
     if remove_unuse_object and not obj._mark then
+        return false
+    end
+    if #name ~= 4 then
+        w2l.messager.report(lang.report.INVALID_OBJECT, 6, ('[%s] %s'):format(name, lang.report.INVALID_OBJECT_ID))
+        return false
+    end
+    if not default[obj._parent] then
+        w2l.messager.report(lang.report.INVALID_OBJECT, 6, ('[%s:%s] %s'):format(name, obj._parent, lang.report.INVALID_OBJECT_PARENT))
         return false
     end
     if not obj._slk and obj._id ~= obj._parent then
@@ -219,9 +235,7 @@ local function sort_chunk(chunk, remove_unuse_object)
     local origin = {}
     local user = {}
     for name, obj in pairs(chunk) do
-        if #name ~= 4 then
-            w2l.messager.report(lang.report.INVALID_OBJECT, 6, ('[%s] %s'):format(name, lang.report.INVALID_OBJECT_ID))
-        elseif is_enable_obj(obj, remove_unuse_object) then
+        if is_enable_obj(name, obj, remove_unuse_object) then
             local parent = obj._slk_id or obj._parent
             if (name == parent or obj._slk) and not obj._slk_id then
                 origin[#origin+1] = name
@@ -247,6 +261,7 @@ return function (w2l_, type, data, wts_)
     ttype = type
     has_level = w2l.info.key.max_level[type]
     metadata = w2l:metadata()
+    default = w2l:get_default()[type]
     
     local origin_id, user_id = sort_chunk(data, w2l.config.remove_unuse_object)
     local max = #origin_id + #user_id

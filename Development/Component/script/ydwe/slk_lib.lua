@@ -2,6 +2,7 @@ local pairs = pairs
 local type = type
 local w2l
 local slk_proxy
+local errors
 
 local mt = {}
 mt.__index = mt
@@ -256,13 +257,20 @@ function mt:fill_object(obj, ttype)
     end
 end
 
+local function report_error(type, content)
+    if not errors[type] then
+        errors[type] = {}
+        table.insert(errors, type)
+    end
+    table.insert(errors[type], content)
+end
+
 function mt:create_object(objt, ttype, name)
     local session = self
     
     if not objt and not session.safe_mode then
         return nil
     end
-    local errors = self.error
     local mt = {}
     function mt:__index(key)
         local value, level, err = try_value(objt, key)
@@ -271,7 +279,7 @@ function mt:create_object(objt, ttype, name)
             null = ''
         end
         if err then
-            errors[#errors+1] = err:format(objt._id, key)
+            report_error('读取数据错误', err:format(objt._id, key))
         end
         if not value then
             return null
@@ -308,7 +316,7 @@ function mt:create_object(objt, ttype, name)
 
             if type(nvalue) == 'string' and #nvalue > 1023 then
                 nvalue = nvalue:sub(1, 1023)
-                errors[#errors+1] = ('字符串[%s...]太长（不能超过1023个字符）'):format(nvalue:sub(1, 20))
+                report_error('字符串太长（不能超过1023个字符）', nvalue:sub(1, 20))
             end
             if level then
                 if not objt[key] then
@@ -430,17 +438,25 @@ function mt:create_object(objt, ttype, name)
     function o:new(id)
         local objd = session.default[ttype][name] or {}
         local w2lobject
+        if type(id) == 'number' then
+            local suc, res = pcall(string.pack, '>I4', id)
+            if suc then
+                id = res
+            else
+                id = tostring(id)
+            end
+        end
         if #id == 4 and not id:find('%W') then
             w2lobject = 'static'
             if session.default[ttype][id] or session.slk[ttype][id] then
-                errors[#errors+1] = ('新建对象的ID[%s]重复'):format(id)
+                report_error('新建对象的ID重复', ('[%s]'):format(id))
                 return slk_proxy[ttype][id]
             end
         else
             w2lobject = 'dynamic|' .. id
             id = session:find_id(session.slk[ttype], session.dynamics[ttype], name, w2lobject, ttype)
             if not id then
-                errors[#errors+1] = ('无法找到可用ID[%s]'):format(id)
+                report_error('无法找到可用ID', ('[%s]'):format(id))
                 return session:create_object(nil, ttype, '')
             end
             session.dynamics[ttype][w2lobject] = id
@@ -458,7 +474,9 @@ function mt:create_object(objt, ttype, name)
 
         session.slk[ttype][id] = new_obj
         session.all[id:lower()] = new_obj
-        session.new[ttype][id] = new_obj
+        if session.default[ttype][name] then
+            session.new[ttype][id] = new_obj
+        end
         return session:create_object(new_obj, ttype, id)
     end
     function o:get_id()
@@ -470,7 +488,6 @@ end
 function mt:create_proxy(ttype)
     local t = self.slk[ttype]
     local session = self
-    local errors = self.error
     local mt = {}
     function mt:__index(okey)
         local key = okey
@@ -479,11 +496,8 @@ function mt:create_proxy(ttype)
             if suc then
                 key = res
             else
-                errors[#errors+1] = ('不合法的ID[%s]'):format(okey)
+                report_error('不合法的ID', ('[%s]'):format(okey))
             end
-        end
-        if key and not t[key] then
-            errors[#errors+1] = ('找不到对象[%s]'):format(okey)
         end
         return session:create_object(t[key], ttype, key)
     end
@@ -576,8 +590,18 @@ function mt:create_report()
 	local lold = to_list(self.old)
     local lnew = to_list(self.new)
     local lchg = to_list(self.change)
-    local lerr = self.error
 	local lines = {}
+    if #errors > 0 then
+        for _, type in ipairs(errors) do
+            if #lines > 0 then
+                lines[#lines+1] = ''
+            end
+            lines[#lines+1] = type
+            for _, err in ipairs(errors[type]) do
+                lines[#lines+1] = err
+            end
+        end
+    end
 	if #lold > 0 then
 		lines[#lines+1] = ('移除了 %d 个对象'):format(#lold)
 		for i = 1, math.min(10, #lold) do
@@ -605,16 +629,59 @@ function mt:create_report()
 			lines[#lines+1] = ("[%s][%s] '%s'"):format(displaytype[o._type], get_displayname(o, self.slk[o._type][o._parent]), o._id)
 		end
     end
-    if #lerr > 0 then
-		if #lines > 0 then
-			lines[#lines+1] = ''
-        end
-		lines[#lines+1] = ('有 %d 个错误'):format(#lerr)
-        for i = 1, math.min(10, #lerr) do
-            lines[#lines+1] = lerr[i]
-		end
-    end
     return table.concat(lines, '\n')
+end
+
+local type_trans = {
+    UNIT = '单位',
+    ABILITY = '技能',
+    ITEM = '物品',
+    BUFF = '魔法效果',
+    UPGRADE = '科技',
+    DOODAD = '装饰物',
+    DESTRUCTABLE = '可破坏物',
+}
+
+local tip_trans = {
+    INVALID_OBJECT_DATA = '无效的数据',
+    INVALID_OBJECT = '无效的对象',
+    INVALID_OBJECT_ID = '对象ID不合法',
+    INVALID_OBJECT_PARENT = '继承对象不存在',
+}
+
+local function split(content)
+    local text = {}
+    for str in content:gmatch '%S+' do
+        text[#text+1] = str
+    end
+    return text
+end
+
+function mt:listen_error(w2l)
+    function w2l.messager.report(type, level, content, tip)
+        log.info(type, content, tip)
+        if type == 'INVALID_OBJECT_DATA' then
+            if not content or not tip then
+                return
+            end
+            local key, value = tip:match '^%[(.-)%]%: (.+)$'
+            local ttype, id, name = table.unpack(split(content))
+            if key and value and ttype and id then
+                report_error(tip_trans[type], ("[%s][%s] '%s'.%s = %q"):format(type_trans[ttype], name or '<未知>', id, key, value))
+            end
+            return
+        end
+        if type == 'INVALID_OBJECT' then
+            if not content then
+                return
+            end
+            local key, value = content:match '^(.-) (%S+)$'
+            if key and value then
+                report_error(tip_trans[type], ('%s %s'):format(key, tip_trans[value]))
+            end
+            return
+        end
+    end
 end
 
 local function eq_obj(a, b)
@@ -701,9 +768,10 @@ return function (w2l_, read_only, safe_mode)
         new = {},
         change = {},
         all_chs = {},
-        error = {},
     }, mt)
 
+    errors = {}
+    session:listen_error(w2l)
     w2l:frontend(session.slk)
     session.default = w2l:get_default()
     session.metadata = w2l:metadata()
