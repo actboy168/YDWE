@@ -36,6 +36,11 @@ function mt:on_convert(w2l)
         end)
     end
 
+    local defined_path = ydpath / 'share' / 'mpq' / 'defined'
+    function w2l:defined_load(filename)
+        return io.load(defined_path / filename)
+    end
+
     local prebuilt_path = ydpath / 'script' / 'ydwe' / 'prebuilt'
     function w2l:prebuilt_load(filename)
         return mpq_path:each_path(function (path)
