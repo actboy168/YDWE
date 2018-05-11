@@ -6,6 +6,7 @@ local mpqloader = require 'mpqloader'
 local i18n = require 'i18n'
 local event = require 'ev'
 local slk_lib = require 'slk_lib'
+local defined = require 'defined'
 local map_handle = __map_handle__.handle
 
 local type_map = {
@@ -33,6 +34,13 @@ local function initialize()
     function w2l:mpq_load(filename)
         return mpqloader:load(mpq_path, filename)
     end
+
+    local defined_path = ydpath / 'share' / 'mpq' / 'defined'
+    function w2l:defined_load(filename)
+        return io.load(defined_path / filename)
+    end
+
+    defined(w2l)
 
     local prebuilt_path = ydpath / 'script' / 'ydwe' / 'prebuilt'
     function w2l:prebuilt_load(filename)

@@ -141,6 +141,11 @@ local function get_w2l()
         end)
     end
 
+    function w2l:defined_load(filename)
+        local mpq_path = root:parent_path() / 'data' / mpq_name / 'war3'
+        return io.load(mpq_path / 'defined' / filename)
+    end
+
     function w2l:wes_load(filename)
         return io.load(root:parent_path() / 'data' / mpq_name / 'we' / filename)
     end

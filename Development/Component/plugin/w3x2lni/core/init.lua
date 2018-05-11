@@ -44,9 +44,8 @@ function mt:parse_ini(buf)
     return ini(buf)
 end
 
-
 function mt:defined(name)
-    return lni(self:mpq_load('defined\\' .. name .. '.ini'))
+    return lni(self:defined_load(name .. '.ini'))
 end
 
 function mt:metadata()
@@ -230,6 +229,10 @@ function mt:map_remove(filename)
 end
 
 function mt:mpq_load(filename)
+    return nil
+end
+
+function mt:defined_load(filename)
     return nil
 end
 
