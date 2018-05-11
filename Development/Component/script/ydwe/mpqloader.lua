@@ -2,42 +2,54 @@ local event = require 'ev'
 
 local function mpq_path()
     local mt = {}
-    local paths = {''}
-    local mpqs = {}
-    local function update()
-        paths = {''}
-        for i = #mpqs, 1, -1 do
-            local path = mpqs[i]
-            local max = #paths
-            table.insert(paths, path)
-            for i = 2, max do
-                table.insert(paths, path .. '\\' .. paths[i])
-            end
-        end
+    local archive = nil
+    local lang = nil
+    function mt:lang(lng)
+        lang = lng
     end
     function mt:open(path)
-        table.insert(mpqs, path)
-        update()
+        archive = path
     end
     function mt:close(path)
-        for i, mpq in ipairs(mpqs) do
-            if mpq == path then
-                table.remove(mpqs, i)
-                update()
-                return
-            end
+        if archive == path then
+            archive = nil
         end
     end
     function mt:each_path(callback)
-        for i = #paths, 1, -1 do
-            local res = callback(paths[i])
-            if res then
-                return res
+        if lang then
+            if archive then
+                local buf = callback(lang .. '\\' .. archive)
+                if buf then
+                    return buf
+                end
             end
+            local buf = callback(lang)
+            if buf then
+                return buf
+            end
+        end
+        if archive then
+            local buf = callback(archive)
+            if buf then
+                return buf
+            end
+        end
+        local buf = callback('')
+        if buf then
+            return buf
         end
     end
     function mt:first_path()
-        return paths[#paths]
+        if lang then
+            if archive then
+                return lang .. '\\' .. archive
+            end
+            return lang
+        end
+        if archive then
+            return archive
+        end
+        return ''
     end
     return mt
 end
@@ -50,7 +62,7 @@ function mt:path()
     end
     local lang = (require "i18n").get_language()
     self.mpq_path = mpq_path()
-    self.mpq_path:open(lang)
+    self.mpq_path:lang(lang)
     event.on('virtual_mpq: open path', function(name)
         log.info('OpenPathAsArchive', name)
         self.mpq_path:open(name)
