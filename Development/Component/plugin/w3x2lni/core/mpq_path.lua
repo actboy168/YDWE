@@ -1,41 +1,19 @@
 return function ()
     local mt = {}
-    local paths = {''}
-    local mpqs = {}
-    local function update()
-        paths = {''}
-        for i = #mpqs, 1, -1 do
-            local path = mpqs[i]
-            local max = #paths
-            table.insert(paths, path)
-            for i = 2, max do
-                table.insert(paths, path .. '\\' .. paths[i])
-            end
-        end
-    end
+    local archive = nil
     function mt:open(path)
-        table.insert(mpqs, path)
-        update()
+        archive = path
     end
     function mt:close(path)
-        for i, mpq in ipairs(mpqs) do
-            if mpq == path then
-                table.remove(mpqs, i)
-                update()
-                return
-            end
+        if archive == path then
+            archive = nil
         end
     end
     function mt:each_path(callback)
-        for i = #paths, 1, -1 do
-            local res = callback(paths[i])
-            if res then
-                return res
-            end
-        end
+        return callback(archive) or callback('')
     end
     function mt:first_path()
-        return paths[#paths]
+        return archive or ''
     end
     return mt
 end

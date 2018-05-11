@@ -111,45 +111,9 @@ local function extract_mpq()
     end
 end
 
-local function get_codemapped(w2l)
-    local template = w2l:parse_slk(mpqs:load_file 'units\\abilitydata.slk')
-    local t = {}
-    for id, d in pairs(template) do
-        t[id] = d.code
-    end
-    return t
-end
-
-local function get_typedefine(w2l)
-    local uniteditordata = w2l:parse_txt(mpqs:load_file 'ui\\uniteditordata.txt')
-    local t = {
-        int    = 0,
-        bool   = 0,
-        real   = 1,
-        unreal = 2,
-    }
-    for key, data in pairs(uniteditordata) do
-        local value = data['00'][1]
-        local tp
-        if tonumber(value) then
-            tp = 0
-        else
-            tp = 3
-        end
-        t[key] = tp
-    end
-    return t
-end
-
-local function create_metadata(w2l, codemapped, typedefine)
+local function create_metadata(w2l, loader)
     local defined_meta = w2l:parse_lni(io.load(root / 'core' / 'defined' / 'metadata.ini'))
-    local meta = prebuilt_metadata(w2l, defined_meta, codemapped, typedefine, function (filename)
-        if filename == 'doodadmetadata.slk' then
-            return mpqs:load_file('Doodads\\' .. filename)
-        else
-            return mpqs:load_file('Units\\' .. filename)
-        end
-    end)
+    local meta = prebuilt_metadata(w2l, defined_meta, loader)
     local meta_path = root:parent_path() / 'data' / mpq_name / 'we'
     fs.create_directories(meta_path)
     io.save(meta_path / 'metadata.ini', meta)
@@ -180,10 +144,6 @@ local function get_w2l()
     function w2l:wes_load(filename)
         return io.load(root:parent_path() / 'data' / mpq_name / 'we' / filename)
     end
-
-    --function w2l:defined_load(filename)
-    --    return io.load(root:parent_path() / 'data' / mpq_name / 'war3' / 'defined' / filename)
-    --end
 
     function messager.report(_, _, str, tip)
         if str == lang.report.NO_WES_STRING then
@@ -225,6 +185,10 @@ local function make_log()
     end
     local buf = table.concat(lines, '\r\n')
     io.save(root:parent_path() / 'log' / 'mpq.log', buf)
+end
+
+local function loader(name)
+    return mpqs:load_file(name)
 end
 
 return function ()
@@ -277,17 +241,18 @@ return function ()
     report_fail()
     w2l.progress:finish()
 
-    local codemapped = get_codemapped(w2l)
-    local typedefine = get_typedefine(w2l)
-
     w2l.progress:start(0.3)
-    create_metadata(w2l, codemapped, typedefine)
+    create_metadata(w2l, loader)
     create_wes(w2l)
     w2l.progress:finish()
 
     w2l.cache_metadata = w2l:parse_lni(io.load(root:parent_path() / 'data' / mpq_name / 'we' / 'metadata.ini'))
-    prebuilt_keydata(w2l, mpqs)
-    prebuilt_search(w2l, codemapped, mpqs)
+    local dir = root:parent_path() / 'data' / mpq_name / 'war3' / 'defined'
+    fs.create_directories(dir)
+    local keydata = prebuilt_keydata(w2l, loader)
+    local search = prebuilt_search(w2l, loader)
+    io.save(dir / 'keydata.ini', keydata)
+    io.save(dir / 'search.ini', search)
     w2l.cache_metadata = nil
 
     w2l.progress:start(0.4)

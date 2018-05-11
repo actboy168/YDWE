@@ -44,12 +44,9 @@ function mt:parse_ini(buf)
     return ini(buf)
 end
 
-function mt:defined_load(name)
-    return load_file(name)
-end
 
 function mt:defined(name)
-    return lni(self:defined_load('defined\\' .. name .. '.ini'))
+    return lni(self:mpq_load('defined\\' .. name .. '.ini'))
 end
 
 function mt:metadata()
@@ -79,7 +76,7 @@ function mt:get_editstring(source)
         self.editstring = {}
         local t
         if self.config.data_wes == '${YDWE}' then
-            t = ini(load_file('WorldEditStrings.txt'))['WorldEditStrings']
+            t = ini(load_file('defined\\WorldEditStrings.txt'))['WorldEditStrings']
         else
             t = ini(self:wes_load('WorldEditStrings.txt'))['WorldEditStrings']
         end
@@ -220,45 +217,6 @@ function mt:__index(name)
     end
     self.loaded[name] = true
     return nil
-end
-
-local function new_path()
-    local mt = {}
-    local paths = {'\\'}
-    local mpqs = {}
-    local function update()
-        paths = {'\\'}
-        for i = #mpqs, 1, -1 do
-            local path = mpqs[i]
-            local max = #paths
-            table.insert(paths, '\\' .. path .. '\\')
-            for i = 2, max do
-                table.insert(paths, '\\' .. path .. paths[i])
-            end
-        end
-    end
-    function mt:open(path)
-        table.insert(mpqs, path)
-        update()
-    end
-    function mt:close(path)
-        for i, mpq in ipairs(mpqs) do
-            if mpq == path then
-                table.remove(mpqs, i)
-                update()
-                return
-            end
-        end
-    end
-    function mt:each_path(callback)
-        for i = #paths, 1, -1 do
-            local res = callback(paths[i])
-            if res then
-                return res
-            end
-        end
-    end
-    return mt
 end
 
 function mt:map_load(filename)
