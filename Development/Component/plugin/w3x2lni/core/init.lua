@@ -123,7 +123,7 @@ local function create_default(w2l)
         end
     end
     if need_build then
-        default = w2l:build_slk()
+        default = w2l:frontend_buildslk()
         w2l.messager.report(lang.report.OTHER, 9, lang.report.NO_PREBUILT)
     end
     return default
@@ -203,15 +203,11 @@ function mt:__index(name)
         return nil
     end
     if name == 'info' then
-        self.info = lni(assert(load_file('info.ini')), 'info')
+        self.info = require 'info'
         return self.info
     end
     if hasFile('slk.'..name) then
         self[name] = require('slk.'..name)
-        return self[name]
-    end
-    if hasFile('other.'..name) then
-        self[name] = require('other.'..name)
         return self[name]
     end
     self.loaded[name] = true

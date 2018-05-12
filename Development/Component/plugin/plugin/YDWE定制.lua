@@ -9,10 +9,13 @@ mt.info = {
 
 function mt:on_convert(w2l)
     require 'filesystem'
+    local root = fs.ydwe(true)
+    local ydpath = fs.ydwe(false)
     local lang = require 'ffi.language' ()
     local mpq_path = require 'core.mpq_path' ()
+    local defined = loadfile((root / 'script' / 'ydwe' / 'defined.lua'):string())()
 
-    mpq_path:open(lang)
+    mpq_path:lang(lang)
 
     local updated
     local function update_version()
@@ -27,8 +30,6 @@ function mt:on_convert(w2l)
         end
     end
     
-    local root = fs.ydwe(true)
-    local ydpath = fs.ydwe(false)
     local war3_path = root / 'share' / 'mpq'
     function w2l:mpq_load(filename)
         return mpq_path:each_path(function (path)
@@ -40,6 +41,8 @@ function mt:on_convert(w2l)
     function w2l:defined_load(filename)
         return io.load(defined_path / filename)
     end
+
+    defined(w2l)
 
     local prebuilt_path = ydpath / 'script' / 'ydwe' / 'prebuilt'
     function w2l:prebuilt_load(filename)

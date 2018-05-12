@@ -1,6 +1,10 @@
 return function ()
     local mt = {}
     local archive = nil
+    local lang = nil
+    function mt:lang(lng)
+        lang = lng
+    end
     function mt:open(path)
         archive = path
     end
@@ -10,10 +14,40 @@ return function ()
         end
     end
     function mt:each_path(callback)
-        return callback(archive) or callback('')
+        if lang then
+            if archive then
+                local buf = callback(lang .. '\\' .. archive)
+                if buf then
+                    return buf
+                end
+            end
+            local buf = callback(lang)
+            if buf then
+                return buf
+            end
+        end
+        if archive then
+            local buf = callback(archive)
+            if buf then
+                return buf
+            end
+        end
+        local buf = callback('')
+        if buf then
+            return buf
+        end
     end
     function mt:first_path()
-        return archive or ''
+        if lang then
+            if archive then
+                return lang .. '\\' .. archive
+            end
+            return lang
+        end
+        if archive then
+            return archive
+        end
+        return ''
     end
     return mt
 end

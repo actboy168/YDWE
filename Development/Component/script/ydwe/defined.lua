@@ -1,6 +1,6 @@
 require 'filesystem'
-local w2l_path = fs.ydwe_devpath() / 'plugin' / 'w3x2lni'
-local yd_path = fs.ydwe_path()
+local w2l_path = fs.ydwe(true) / 'plugin' / 'w3x2lni'
+local yd_path = fs.ydwe(false)
 local defined_path = yd_path / 'share' / 'mpq' / 'defined'
 
 return function (w2l)
