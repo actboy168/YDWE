@@ -62,6 +62,9 @@ function mt:accept_ui(type, name, key, value)
         end,
         default = function ()
             local r = str_split(value, ',')
+            if not ui.args then
+                return
+            end
             for i, v in ipairs(ui.args) do
                 if r[i] and r[i] ~= '_' then
                     v.default = r[i]
