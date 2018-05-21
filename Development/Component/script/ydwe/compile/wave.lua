@@ -7,7 +7,7 @@ wave = {}
 wave.path                = fs.ydwe_path() / "plugin" / "wave"
 wave.exe_path            = wave.path / "Wave.exe"
 wave.sys_include_path    = wave.path / "include"
-wave.plugin_include_path = fs.ydwe_path() / "plugin"
+wave.plugin_include_path = fs.ydwe_devpath() / "plugin"
 wave.force_file_path     = wave.sys_include_path / "WaveForce.i"
 
 local function pathstring(path)
