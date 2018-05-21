@@ -1,4 +1,5 @@
-local messager = require 'tool.messager'
+local messager = require 'share.messager'
+local lang = require 'share.lang'
 local loader
 local key_cache = {}
 local function get_key(w2l, type, id)
@@ -93,7 +94,7 @@ end
 
 return function(w2l, loader_)
     loader = loader_
-    messager.text('正在生成keydata')
+    messager.text(lang.raw.CREATING .. 'keydata')
     local keydata = {}
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
         create_keydata(w2l, type, keydata)

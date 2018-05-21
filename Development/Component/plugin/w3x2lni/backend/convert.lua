@@ -1,18 +1,18 @@
-local messager = require 'tool.messager'
+local messager = require 'share.messager'
 local core = require 'backend.sandbox_core'
 local builder = require 'map-builder'
 local triggerdata = require 'backend.triggerdata'
-local plugin = require 'tool.plugin'
-local lang = require 'tool.lang'
-local get_report = require 'tool.report'
-local root_path = require 'backend.root_path'
-local check_lni_mark = require 'tool.check_lni_mark'
+local plugin = require 'share.plugin'
+local lang = require 'share.lang'
+local get_report = require 'share.report'
+local check_lni_mark = require 'share.check_lni_mark'
 local unpack_config = require 'backend.unpack_config'
+local check_config = require 'backend.check_config'
 local w2l = core()
 local root = fs.current_path()
 local config
-local input_ar
-local output_ar
+local input_ar, input_proxy
+local output_ar, output_proxy
 
 local report = {}
 local messager_report = messager.report
@@ -41,13 +41,6 @@ local function default_output(input)
     end
 end
 
-local function check_input_lni()
-    if fs.is_directory(input) and check_lni_mark(input / '.w3x') then
-        return true
-    end
-    return false
-end
-
 local function exit(report)
     local err = 0
     local warn = 0
@@ -65,6 +58,7 @@ local function exit(report)
     else
         messager.exit('success', lang.script.ERROR_COUNT:format(err, warn))
     end
+    return err, warn
 end
 
 function w2l:map_load(filename)
@@ -80,120 +74,21 @@ function w2l:map_remove(filename)
 end
 
 function w2l:file_save(type, name, buf)
-    if type == 'table' then
-        input_ar:set(self.info.lni_dir[name][1], buf)
-        output_ar:set(self.info.lni_dir[name][1], buf)
-    elseif type == 'trigger' then
-        input_ar:set('trigger/' .. name, buf)
-        output_ar:set('trigger/' .. name, buf)
-    elseif type == 'scripts' then
-        if not self.config.export_lua then
-            return
-        end
-        input_ar:set('scripts/' .. name, buf)
-        output_ar:set('scripts/' .. name, buf)
-    elseif type == 'w3x2lni' then
-        input_ar:set('w3x2lni/' .. name, buf)
-        output_ar:set('w3x2lni/' .. name, buf)
-    else
-        if self.input_mode == 'lni' then
-            input_ar:set(type .. '/' .. name, buf)
-        else
-            input_ar:set(name, buf)
-        end
-        if self.config.mode == 'lni' then
-            output_ar:set(type .. '/' .. name, buf)
-        else
-            output_ar:set(name, buf)
-        end
-    end
+    input_proxy:save(type, name, buf)
+    output_proxy:save(type, name, buf)
 end
 
 function w2l:file_load(type, name)
-    if type == 'table' then
-        for _, filename in ipairs(self.info.lni_dir[name]) do
-            local buf = input_ar:get(filename)
-            if buf then
-                return buf
-            end
-        end
-    elseif type == 'trigger' then
-        return input_ar:get('trigger/' .. name) or input_ar:get('war3map.wtg.lml/' .. name)
-    elseif type == 'scripts' then
-        return input_ar:get('scripts/' .. name)
-    elseif type == 'w3x2lni' then
-        return input_ar:get('w3x2lni/' .. name)
-    else
-        if self.input_mode == 'lni' then
-            return input_ar:get(type .. '/' .. name)
-        else
-            return input_ar:get(name)
-        end
-    end
+    return input_proxy:load(type, name)
 end
 
 function w2l:file_remove(type, name)
-    if type == 'table' then
-        for _, filename in ipairs(self.info.lni_dir[name]) do
-            input_ar:remove(filename)
-            output_ar:remove(filename)
-        end
-    elseif type == 'trigger' then
-        input_ar:remove('trigger/' .. name, buf)
-        input_ar:remove('war3map.wtg.lml/' .. name, buf)
-        output_ar:remove('trigger/' .. name, buf)
-        output_ar:remove('war3map.wtg.lml/' .. name, buf)
-    elseif type == 'scripts' then
-        input_ar:remove('scripts/' .. name, buf)
-        output_ar:remove('scripts/' .. name, buf)
-    elseif type == 'w3x2lni' then
-        input_ar:remove('w3x2lni/' .. name, buf)
-        output_ar:remove('w3x2lni/' .. name, buf)
-    else
-        if self.input_mode == 'lni' then
-            input_ar:remove(type .. '/' .. name, buf)
-        else
-            input_ar:remove(name, buf)
-        end
-        if self.config.mode == 'lni' then
-            output_ar:remove(type .. '/' .. name, buf)
-        else
-            output_ar:remove(name, buf)
-        end
-    end
+    input_proxy:remove(type, name)
+    output_proxy:remove(type, name)
 end
 
 function w2l:file_pairs()
-    local next, tbl, index = input_ar:search_files()
-    return function ()
-        local name, buf = next(tbl, index)
-        if not name then
-            return nil
-        end
-        index = name
-        local type
-        local dir = name:match '^[^/\\]+' :lower()
-        local ext = name:match '[^%.]+$'
-        if ext == 'mdx' or ext == 'mdl' or ext == 'blp' or ext == 'tga' then
-            type = 'resource'
-        elseif ext == 'mp3' or ext == 'wav' then
-            type = 'sound'
-        elseif name == 'scripts\\war3map.j' then
-            type = 'map'
-        elseif dir == 'scripts' then
-            type = 'scripts'
-        elseif dir == 'w3x2lni' then
-            type = 'w3x2lni'
-        else
-            type = 'map'
-        end
-        if w2l.input_mode == 'lni' or type == 'scripts' or type == 'w3x2lni' then
-            if dir == type then
-                name = name:sub(#type + 2)
-            end
-        end
-        return type, name, buf
-    end
+    return input_proxy:pairs()
 end
 
 function w2l:mpq_load(filename)
@@ -224,12 +119,6 @@ function w2l:trigger_data()
     return triggerdata(self.config.data_ui)
 end
 
-local function save_builder()
-    if w2l.config.mode == 'lni' then
-        fs.copy_file(root / 'map-builder' / '.w3x', output / '.w3x', true)
-    end
-end
-
 local function get_io_time(map, file_count)
     local io_speed = map:get_type() == 'mpq' and 30000 or 10000
     local io_rate = math.min(0.3, file_count / io_speed)
@@ -237,6 +126,7 @@ local function get_io_time(map, file_count)
 end
 
 return function (mode)
+    fs.remove(root:parent_path() / 'log' / 'report.log')
     config = unpack_config(mode)
     input = config.input
 
@@ -244,13 +134,14 @@ return function (mode)
     if not input then
         w2l:failed(lang.script.NO_INPUT)
     end
+    check_config(w2l, input)
+
+    if input:filename():string() == '.w3x' then
+        w2l:failed(lang.script.UNSUPPORTED_LNI_MARK)
+    end
 
     w2l.messager.text(lang.script.INIT)
     w2l.messager.progress(0)
-
-    if check_input_lni() then
-        w2l.input_mode = 'lni'
-    end
 
     if config.mode == 'slk' then
         messager.title 'Slk'
@@ -266,9 +157,23 @@ return function (mode)
     if not input_ar then
         w2l:failed(err)
     end
+    if input_ar:get_type() == 'mpq' and not input_ar:get '(listfile)' then
+        w2l:failed(lang.script.UNSUPPORTED_MAP)
+    end
+
+    if input_ar:get '.w3x' then
+        if check_lni_mark(input_ar:get '.w3x') then
+            w2l.input_mode = 'lni'
+        else
+            w2l:failed(lang.script.UNSUPPORTED_LNI_MARK)
+        end
+    end
+    
     w2l:set_config(config)
     
+    w2l.input_ar = input_ar
     output = config.output or default_output(config.input)
+    config.output = output
     if w2l.config.target_storage == 'dir' then
         if not fs.exists(output) then
             fs.create_directories(output)
@@ -279,6 +184,10 @@ return function (mode)
         w2l:failed(err)
     end
     output_ar:flush()
+    w2l.output_ar = output_ar
+    
+    input_proxy = builder.proxy(input_ar, w2l.input_mode)
+    output_proxy = builder.proxy(output_ar, config.mode)
 
     local slk = {}
     local file_count = input_ar:number_of_files()
@@ -328,14 +237,13 @@ return function (mode)
     end
     
     messager.text(lang.script.SAVE_FILE)
-    local doo = input_ar:get 'war3map.doo'
     w2l.progress:start(1)
-    builder.save(w2l, output_ar, slk.w3i, input_ar)
+    builder.save(w2l, slk.w3i, input_ar, output_ar, input_proxy, output_proxy)
     w2l.progress:finish()
     
-    save_builder()
     fs.create_directories(root:parent_path() / 'log')
-    io.save(root:parent_path() / 'log' / 'report.log', get_report(report))
-    messager.text((lang.script.FINISH):format(os.clock()))
-    exit(report)
+    local clock = os.clock()
+    messager.text(lang.script.FINISH:format(clock))
+    local err, warn = exit(report)
+    io.save(root:parent_path() / 'log' / 'report.log', get_report(w2l, report, config, clock, err, warn))
 end

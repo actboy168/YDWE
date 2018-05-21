@@ -1,4 +1,4 @@
-local changelog = require 'tool.changelog'
+local changelog = require 'share.changelog'
 local window
 local canvas
 local current

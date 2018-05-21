@@ -1,5 +1,5 @@
-local lang = require 'tool.lang'
-local config = require 'tool.config' ()
+local lang = require 'share.lang'
+local config = require 'share.config'
 local root = fs.current_path()
 
 return function (w2l, version)
@@ -20,7 +20,7 @@ return function (w2l, version)
         io.save(prebuilt_path / filename, buf)
     end
 
-    local slk = w2l:build_slk()
+    local slk = w2l:frontend_buildslk()
 
     function w2l:prebuilt_save()
     end

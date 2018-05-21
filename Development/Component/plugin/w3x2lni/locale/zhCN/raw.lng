@@ -1,0 +1,192 @@
+[INVALID]
+`%s` 不是一个合法的命令。请看`w2l help`。
+[HELP_MPQ]
+提取《魔兽争霸III》的数据文件
+[HELP_MPQ_DESC]
+用法: w2l mpq <War3路径>
+
+例如：
+   w2l mpq "C:\Warcraft III"
+
+[HELP_LNI]
+将地图转换为`Lni`格式
+[HELP_LNI_DESC]
+用法: w2l lni <地图路径> [<输出路径>]
+
+    地图可以是一个w3x文件也可以是一个文件夹。
+    Lni是一个方便文本编辑与代码管理的地图格式。
+
+例如：
+    w2l lni "E:\Warcraft III\Maps\Test.w3x"
+    w2l lni "E:\Warcraft III\Maps\Test.w3x" "E:\Warcraft III\Maps\Test_lni"
+
+[HELP_SLK]
+将地图转换为`Slk`格式
+[HELP_SLK_DESC]
+用法: w2l slk <地图路径> [<输出路径>]
+
+    地图可以是一个w3x文件也可以是一个文件夹。
+    Slk是用于魔兽争霸游戏的格式，编辑器无法打开该格式的地图。
+
+例如：
+    w2l slk "E:\Warcraft III\Maps\Test.w3x"
+    w2l slk "E:\Warcraft III\Maps\Test.w3x" "E:\Warcraft III\Maps\Test_slk.w3x"
+
+[HELP_OBJ]
+将地图转换为`Obj`格式
+[HELP_OBJ_DESC]
+用法: w2l obj <地图路径> [<输出路径>]
+
+    地图可以是一个w3x文件也可以是一个文件夹。
+    Obj是用于地图编辑器编辑的格式。
+
+例如：
+    w2l obj "E:\Warcraft III\Maps\Test.w3x"
+    w2l obj "E:\Warcraft III\Maps\Test.w3x" "E:\Warcraft III\Maps\Test_obj.w3x"
+
+[HELP_CONFIG]
+查看和修过配置
+[HELP_CONFIG_DESC]
+用法: w2l config              查看所有配置
+      w2l config <配置>       查看指定配置
+      w2l config <配置>=<值>  修过指定配置
+
+例如：
+    w2l config
+    w2l config lni.read_slk
+    w2l config lni.read_slk=false
+
+[HELP_VERSION]
+显示`w2l`的版本
+[HELP_LOG]
+显示上一次的转换报告
+[HELP_HELP]
+显示帮助信息
+[HELP]
+用法: w2l <命令> <路径>
+
+可用命令：
+%s
+
+使用`w2l help <命令>`，获取具体命令的帮助信息。
+
+[CONFIG_DISPLAY]
+当前生效的配置:
+[CONFIG_ERROR]
+不合法的参数，请看`w2l help config`。
+[CONFIG_UPDATE]
+已经应用全局配置:
+[CONFIG_USED_MAP]
+但实际生效的是地图配置:
+[USED_MAP]
+[地图]  
+[USED_GLOBAL]
+        
+[USED_DEFAULT]
+[默认]  
+[CONFIG_GLOBAL_LANG]
+使用的语言，可以是以下值：
+
+
+[CONFIG_GLOBAL_LANG_ERROR]
+无效的语言，必须是以下值：
+
+
+[CONFIG_GLOBAL_WAR3]
+使用魔兽数据文件的目录，可以是以下值：
+
+
+[CONFIG_GLOBAL_WAR3_ERROR]
+无效的目录，必须是以下值：
+
+
+[CONFIG_GLOBAL_UI]
+使用触发器数据的目录，可以是以下值：
+
+        ${YDWE}        搜索本地YDWE使用的触发器文件
+
+[CONFIG_GLOBAL_UI_ERROR]
+无效的目录，必须是以下值：
+
+        ${YDWE}        搜索本地YDWE使用的触发器文件
+
+[CONFIG_GLOBAL_META]
+使用编辑器数据的目录，可以使以下值：
+
+        ${DEFAULT}        使用正确的编辑器数据
+
+[CONFIG_GLOBAL_META_ERROR]
+无效的目录，必须是以下值：
+
+        ${DEFAULT}        使用正确的编辑器数据
+
+[CONFIG_GLOBAL_WES]
+使用编辑器文本的目录，可以使以下值：
+
+        ${DEFAULT}        使用默认的编辑器字符串
+
+[CONFIG_GLOBAL_WES_ERROR]
+无效的目录，必须是以下值：
+
+        ${DEFAULT}        使用默认的编辑器字符串
+
+[CONFIG_GLOBAL_PLUGIN]
+插件的目录。默认是`plugin`。
+[CONFIG_LNI_READ_SLK]
+输出目标是Lni时，转换地图内的slk文件。必须是布尔。
+[CONFIG_LNI_FIND_ID_TIMES]
+输出目标是Lni时，限制搜索最优模板的次数，0表示无限。必须是整数。
+[CONFIG_LNI_EXPORT_LUA]
+输出目标是Lni时，导出地图内的lua文件。必须是布尔。
+[CONFIG_SLK_REMOVE_UNUSE_OBJECT]
+输出目标是Slk时，移除没有引用的物体对象。必须是布尔。
+[CONFIG_SLK_OPTIMIZE_JASS]
+输出目标是Slk时，优化jass文件。必须是布尔。
+[CONFIG_SLK_MDX_SQUF]
+输出目标是Slk时，压缩mdx文件（有损压缩）。必须是布尔。
+[CONFIG_SLK_REMOVE_WE_ONLY]
+输出目标是Slk时，删除只在WE中使用的文件。必须是布尔。
+
+这将使WE与W3x2lni无法打开转换后的地图。
+[CONFIG_SLK_SLK_DOODAD]
+输出目标是Slk时，对装饰物进行Slk优化。必须是布尔。
+
+这可以使地形变化不再卡顿，但同时包含了潜在的风险：如果玩家没有重启魔兽就去玩另一张地图，那么他将看不到装饰物模型并且有可能掉线。
+[CONFIG_SLK_FIND_ID_TIMES]
+输出目标是Slk时，限制搜索最优模板的次数，0表示无限。必须是整数。
+[CONFIG_SLK_CONFUSED]
+输出目标是Slk时，混淆jass文件。必须是布尔。
+[CONFIG_SLK_CONFUSION]
+输出目标是Slk时，混淆jass文件使用的字符集。需要满足以下条件：
+
+    1.只能是字母数字下划线
+    2.至少要有3个不同的字符
+    3.至少要有2个字母
+[CONFIG_OBJ_READ_SLK]
+输出目标是Obj时，转换地图内的slk文件。必须是布尔。
+[CONFIG_OBJ_FIND_ID_TIMES]
+输出目标是Obj时，限制搜索最优模板的次数，0表示无限。必须是整数。
+[CONFIG_MUST_BOOLEAN]
+必须是布尔
+[CONFIG_MUST_INTEGER]
+必须是整数
+[CONFIG_CONFUSION_1]
+只能使用字母数字下划线
+[CONFIG_CONFUSION_2]
+至少要有3个不同的字符
+[CONFIG_CONFUSION_3]
+至少要有2个字母
+[AUTO_SELECT]
+自动选择
+[CREATING]
+正在生成
+[TYPE_CONFLICT]
+类型不同:
+[CREATED_ID_CONFLICT]
+生成的ID不同：skill [%s] code [%s]
+[COPIED_ID_CONFLICT]
+复制的ID[%s]不同：skill [%s][%s] code [%s][%s]
+[DATA_VERSION_ERROR]
+数据文件版本不兼容，请使用 mpq 命令重新提取
+[INVALID_CONFIG]
+无效的配置

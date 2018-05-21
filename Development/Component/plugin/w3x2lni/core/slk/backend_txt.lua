@@ -283,7 +283,6 @@ local function prebuild_obj(name, obj)
 end
 
 local function prebuild_merge(obj, a, b)
-    -- TODO: 需要处理a和b类型不一样的情况
     if a._type ~= b._type then
         local tp1, _, name1 = get_displayname(a)
         local tp2, _, name2 = get_displayname(b)
@@ -293,40 +292,55 @@ local function prebuild_merge(obj, a, b)
         if k == '_id' or k == '_type' or k == '_slk_id' then
             goto CONTINUE
         end
+        local id = b._id
         if type(v) == 'table' then
             if type(a[k]) == 'table' then
                 for i, iv in pairs(v) do
                     if a[k][i] ~= iv then
                         report_failed(obj, metadata[k].field, lang.report.TXT_CONFLICT, '--> ' .. a._id)
-                        if obj[k] then
-                            obj[k][i] = iv
+                        if object[id][k] then
+                            object[id][k][i] = iv
                         else
-                            obj[k] = {[i] = iv}
+                            object[id][k] = {[i] = iv}
                         end
                     end
                 end
             else
                 report_failed(obj, metadata[k].field, lang.report.TXT_CONFLICT, '--> ' .. a._id)
                 for i, iv in pairs(v) do
-                    if obj[k] then
-                        obj[k][i] = iv
+                    if object[id][k] then
+                        object[id][k][i] = iv
                     else
-                        obj[k] = {[i] = iv}
+                        object[id][k] = {[i] = iv}
                     end
                 end
             end
         else
             if a[k] ~= v then
                 report_failed(obj, metadata[k].field, lang.report.TXT_CONFLICT, '--> ' .. a._id)
-                obj[k] = v
+                object[id][k] = v
             end
         end
         ::CONTINUE::
     end
 end
 
+local function sortpairs(tbl)
+    local keys = {}
+    for k in pairs(tbl) do
+        keys[#keys+1] = k
+    end
+    table.sort(keys)
+    local i = 0
+    return function ()
+        i = i + 1
+        local k = keys[i]
+        return k, tbl[k]
+    end
+end
+
 local function prebuild(type, input, output, list)
-    for name, obj in pairs(input) do
+    for name, obj in sortpairs(input) do
         local r = prebuild_obj(name, obj)
         if r then
             r._type = type

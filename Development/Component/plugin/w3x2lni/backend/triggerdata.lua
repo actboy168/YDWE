@@ -1,6 +1,6 @@
 require 'filesystem'
 local ui = require 'ui-builder'
-local lang = require 'tool.lang'
+local lang = require 'share.lang'
 
 local root = fs.current_path()
 

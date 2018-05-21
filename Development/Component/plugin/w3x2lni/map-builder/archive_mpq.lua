@@ -1,5 +1,5 @@
 local stormlib = require 'ffi.stormlib'
-local lang = require 'tool.lang'
+local lang = require 'share.lang'
 
 local function get_map_flag(w3i)
     if not w3i then
@@ -43,7 +43,7 @@ end
 local mt = {}
 mt.__index = mt
 
-function mt:save(path, w3i, n, encrypt)
+function mt:save(path, w3i, filecount, encrypt)
     if self.handle then
         self.handle:close()
         self.handle = nil
@@ -55,7 +55,7 @@ function mt:save(path, w3i, n, encrypt)
     hexs[#hexs+1] = ('l'):pack(get_map_flag(w3i))
     hexs[#hexs+1] = ('l'):pack(w3i and get_player_count(w3i) or 233)
     io.save(path, table.concat(hexs))
-    self.handle = stormlib.create(path, n+3, encrypt)
+    self.handle = stormlib.create(path, filecount+3, encrypt)
     if not self.handle then
         return false, lang.script.CREATE_MAP_FAILED
     end
@@ -110,10 +110,6 @@ return function (input, read)
         handle = stormlib.open(input, true)
         if not handle then
             return nil
-        end
-        if not handle:has_file '(listfile)' then
-            handle:close()
-            return nil, lang.script.UNSUPPORTED_MAP
         end
     else
         handle = stormlib.open(input)

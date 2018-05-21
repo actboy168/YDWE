@@ -66,10 +66,6 @@ local function update_obj(name, type, obj, data)
             update_data(key, meta, obj, new_obj)
         end
     end
-    if type == 'ability' and w2l.config.mode == 'slk' and not next(new_obj) then
-        reports2[#reports2+1] = {lang.report.ABILITY_REMOVED:format(name), lang.report.ABILITY_REMOVED_HINT}
-        return nil
-    end
     for k, v in pairs(obj) do
         if string_sub(k, 1, 1) == '_' then
             new_obj[k] = v

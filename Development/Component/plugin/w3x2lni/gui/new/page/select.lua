@@ -1,53 +1,77 @@
-local gui = require 'yue.gui'
-local timer = require 'gui.timer'
-local lang = require 'tool.lang'
+local lang = require 'share.lang'
+local ui = require 'gui.new.template'
+local ev = require 'gui.event'
 
-local view = gui.Container.create()
-view:setstyle { FlexGrow = 1, Padding = 1 }
-
-local topview = gui.Container.create()
-topview:setstyle { JustifyContent = 'flex-start' }
-view:addchildview(topview)
-
-local bottomview = gui.Container.create()
-bottomview:setstyle { FlexGrow = 1, JustifyContent = 'center' }
-view:addchildview(bottomview)
-
-local filename = Button('')
-filename:setstyle { Height = 36, Margin = 8, MarginTop = 16, MarginBottom = 16 }
-filename:setfont(Font('黑体', 20))
-topview:addchildview(filename)
-
-local info = {
-    {
-        type = 'Lni',
-        color = '#00ADD9',
+local template = ui.container {
+    style = { FlexGrow = 1, Padding = 1 },
+    ui.container{
+        font = { size = 18 },
+        style = { Padding = 4, JustifyContent = 'flex-start' },
+        ui.button {
+            style = { Height = 36, MarginTop = 4 },
+            bind = {
+                title = 'filename',
+                color = 'theme'
+            }
+        }
     },
-    {
-        type = 'Slk',
-        color = '#00AD3C',
-    },
-    {
-        type = 'Obj',
-        color = '#D9A33C',
-    },
+    ui.container {
+        font = { size = 20 },
+        style =  { Padding = 4, FlexGrow = 1, JustifyContent = 'flex-end' },
+        ui.button {
+            title = lang.ui.CONVERT_TO..'Lni',
+            color = '#00ADD9',
+            style = { MarginTop = 1, MarginBottom = 1, Height = 155 },
+            on = {
+                click = function()
+                    window._mode = 'lni'
+                    window:set_theme('W3x2Lni', '#00ADD9')
+                    window:show_page 'convert'
+                    window:set_theme('W3x2Lni', '#00ADD9')
+                end
+            }
+        },
+        ui.button {
+            title = lang.ui.CONVERT_TO..'Slk',
+            color = '#00AD3C',
+            style = { MarginTop = 1, MarginBottom = 1, Height = 155 },
+            on = {
+                click = function()
+                    window._mode = 'slk'
+                    window:set_theme('W3x2Slk', '#00AD3C')
+                    window:show_page 'convert'
+                    window:set_theme('W3x2Slk', '#00AD3C')
+                end
+            }
+        },
+        ui.button {
+            title = lang.ui.CONVERT_TO..'Obj',
+            color = '#D9A33C',
+            style = { MarginTop = 1, MarginBottom = 1, Height = 155 },
+            on = {
+                click = function()
+                    window._mode = 'obj'
+                    window:set_theme('W3x2Obj', '#D9A33C')
+                    window:show_page 'convert'
+                    window:set_theme('W3x2Obj', '#D9A33C')
+                end
+            }
+        }
+    }
 }
-for i = 1, 3 do
-    local data = info[i]
-    local btn = Button(lang.ui.CONVERT_TO..data.type, data.color)
-    btn:setfont(Font('黑体', 20))
-    btn:setstyle { Margin = 8, MarginTop = 2, MarginBottom = 2, Height = 140 }
-    bottomview:addchildview(btn)
-    function btn:onclick()
-        window:set_theme('W3x2'..data.type, data.color)
-        window._mode = data.type:lower()
-        window:show_page 'convert'
-    end
-end
+
+local view, data = ui.create(template, {
+    filename = '',
+    theme = window._color
+})
+
+ev.on('update theme', function()
+    data.theme = window._color
+end)
 
 function view:on_show()
-    filename:settitle(window._filename:filename():string())
-    filename:update_color()
+    window:set_theme('W3x2Lni', '#00ADD9')
+    data.filename = window._filename:filename():string()
 end
 
 return view

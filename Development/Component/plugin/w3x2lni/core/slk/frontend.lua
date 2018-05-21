@@ -126,6 +126,22 @@ local function get_displayname(o)
     return (name:sub(1, 100):gsub('\r\n', ' '))
 end
 
+local function mark_keep_obj(type, objs)
+    if type ~= 'ability' then
+        return
+    end
+    for id, obj in pairs(objs) do
+        for k in pairs(obj) do
+            if k:sub(1, 1) ~= '_' then
+                goto CONTINUE
+            end
+        end
+        obj._keep_obj = true
+        w2l.messager.report(lang.report.INVALID_OBJECT, 6, lang.report.ABILITY_REMOVED:format(id), lang.report.ABILITY_REMOVED_HINT)
+        ::CONTINUE::
+    end
+end
+
 local function update_then_merge(w2l, slks, objs, lnis, slk)
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc', 'txt'} do
         local report, report2
@@ -143,6 +159,9 @@ local function update_then_merge(w2l, slks, objs, lnis, slk)
             for k, v in pairs(lnis[type]) do
                 obj[k] = v
             end
+        end
+        if w2l.config.mode == 'slk' then
+            mark_keep_obj(type, obj)
         end
         slk[type] = w2l:frontend_merge(type, data, obj)
         if report then

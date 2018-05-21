@@ -23,16 +23,12 @@ local function get_integer(exp)
 end
 
 local function get_real(exp)
-    local str = ('%.3f'):format(exp.value)
-    for i = 1, 3 do
-        if str:sub(-1) == '0' then
-            str = str:sub(1, -2)
-        end
+    local neg, real = exp.value:match '%s-(%-?)%s-(%S+)'
+    real = real:gsub('^[0]+', ''):gsub('[0]+$', '')
+    if real == '.' then
+        real = '0.'
     end
-    if #str > 2 and str:sub(1, 2) == '0.' then
-        str = str:sub(2)
-    end
-    return str
+    return neg .. real
 end
 
 local function get_string(exp)

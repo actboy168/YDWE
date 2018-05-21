@@ -1,5 +1,5 @@
 local w3xparser = require 'w3xparser'
-local lang = require 'tool.lang'
+local lang = require 'share.lang'
 
 local function build_imp(w2l, output_ar, imp_buf)
     local impignore = {}
@@ -44,7 +44,7 @@ local function build_imp(w2l, output_ar, imp_buf)
     return table.concat(hex, '\r')
 end
 
-return function (w2l, output_ar, w3i, input_ar)
+return function (w2l, w3i, input_ar, output_ar)
     local files = {}
     if w2l.config.remove_we_only then
         w2l:file_remove('map', 'war3map.wtg')
@@ -56,7 +56,7 @@ return function (w2l, output_ar, w3i, input_ar)
         w2l:file_remove('map', 'war3mapunits.doo')
     else
         if not w2l:file_load('map', 'war3mapunits.doo') then
-            w2l:file_save('map', 'war3mapunits.doo', w2l:create_unitsdoo())
+            w2l:file_save('map', 'war3mapunits.doo', w2l:backend_unitsdoo())
         end
     end
     

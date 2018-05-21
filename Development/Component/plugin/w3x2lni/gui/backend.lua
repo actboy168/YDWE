@@ -1,6 +1,6 @@
 local process = require 'process'
-local proto = require 'tool.protocol'
-local lang = require 'tool.lang'
+local proto = require 'share.protocol'
+local lang = require 'share.lang'
 
 local backend = {}
 backend.message = ''

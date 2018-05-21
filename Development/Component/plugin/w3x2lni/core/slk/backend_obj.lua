@@ -217,6 +217,9 @@ local function is_enable_obj(name, obj, remove_unuse_object)
     if obj._slk_id then
         return true
     end
+    if obj._keep_obj then
+        return true
+    end
     for key, value in pairs(obj) do
         if key:sub(1, 1) ~= '_' then
             if type(value) == 'table' then

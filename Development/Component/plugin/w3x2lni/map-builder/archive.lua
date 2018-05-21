@@ -1,7 +1,7 @@
 local mpq = require 'map-builder.archive_mpq'
 local dir = require 'map-builder.archive_dir'
 local search = require 'map-builder.search'
-local lang = require 'tool.lang'
+local lang = require 'share.lang'
 
 local os_clock = os.clock
 
@@ -187,24 +187,33 @@ return function (pathorhandle, tp)
         ar._type = 'mpq'
         ar._attach = true
         ar._read = false
-    elseif read_only then
-        if fs.is_directory(pathorhandle) then
-            ar.handle, err = dir(pathorhandle)
-            ar._type = 'dir'
-        else
-            ar.handle, err = mpq(pathorhandle, true)
-            ar._type = 'mpq'
-        end
-        if not ar.handle then
-            return nil, err or lang.script.OPEN_FAILED
-        end
     else
-        if fs.is_directory(pathorhandle) then
-            ar.handle = dir(pathorhandle)
-            ar._type = 'dir'
+        if tp ~= 'w' and not fs.exists(pathorhandle) then
+            if fs.exists(pathorhandle:parent_path() / (pathorhandle:filename():string() .. '.w3x')) then
+                return nil, lang.script.OPEN_FAILED_MAYBE_W3X:format(pathorhandle:filename())
+            else
+                return nil, lang.script.OPEN_FAILED_NO_EXISTS:format()
+            end
+        end
+        if read_only then
+            if fs.is_directory(pathorhandle) then
+                ar.handle, err = dir(pathorhandle)
+                ar._type = 'dir'
+            else
+                ar.handle, err = mpq(pathorhandle, true)
+                ar._type = 'mpq'
+            end
+            if not ar.handle then
+                return nil, err or lang.script.OPEN_FAILED
+            end
         else
-            ar.handle = mpq(pathorhandle)
-            ar._type = 'mpq'
+            if fs.is_directory(pathorhandle) then
+                ar.handle = dir(pathorhandle)
+                ar._type = 'dir'
+            else
+                ar.handle = mpq(pathorhandle)
+                ar._type = 'mpq'
+            end
         end
     end
     return setmetatable(ar, mt)

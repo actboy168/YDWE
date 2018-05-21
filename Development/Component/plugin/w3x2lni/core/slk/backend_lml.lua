@@ -25,10 +25,23 @@ local sp_rep = setmetatable({}, {
 
 local function lml_string(str)
     if type(str) == 'string' then
+        -- Check string from WTS firstly.
+        if find(str, '^TRIGSTR_%d+$') then
+            str = w2l:load_wts(wts, str)
+        end
+        -- Then check if the string should be in quotes.
         if find(str, "[%s%:%'%c]") then
             str = format("'%s'", gsub(str, "'", "''"))
-        elseif find(str, '^TRIGSTR_%d+$') then
-            str = w2l:load_wts(wts, str)
+        end
+    end
+    return str
+end
+
+-- Like lml_string. But this version will never check WTS.
+local function lml_string_without_wts(str)
+    if type(str) == 'string' then
+        if find(str, "[%s%:%'%c]") then
+            str = format("'%s'", gsub(str, "'", "''"))
         end
     end
     return str
@@ -36,7 +49,7 @@ end
 
 local function lml_value(v, sp)
     if v[2] then
-        buf[#buf+1] = format('%s%s: %s\n', sp_rep[sp], v[1], lml_string(v[2]))
+        buf[#buf+1] = format('%s%s: %s\n', sp_rep[sp], lml_string_without_wts(v[1]), lml_string(v[2]))
     else
         buf[#buf+1] = format('%s%s\n', sp_rep[sp], lml_string(v[1]))
     end

@@ -1,4 +1,5 @@
 local lpeg = require 'lpeg'
+local lang = require 'lang'
 
 local tonumber = tonumber
 local table_concat = table.concat
@@ -28,7 +29,7 @@ local function errorpos(pos, str)
     local endpos = jass:find('[\r\n]', pos) or (#jass+1)
     local sp = (' '):rep(pos-line_pos)
     local line = ('%s\r\n%s^'):format(jass:sub(line_pos, endpos-1), sp)
-    error(('\n\n%s\n\n[%s] 第 %d 行：\n===========================\n%s\n===========================\n'):format(str, file, line_count, line))
+    error(lang.parser.ERROR_POS:format(str, file, line_count, line))
 end
 
 local function err(str)
@@ -44,7 +45,7 @@ end
 
 local function comment(str)
     if comments[line_count] then
-        messager('注释行重复:' .. line_count)
+        messager(lang.parser.CONFLICT_COMMENT_LINE .. line_count)
         messager(comments[line_count])
         messager(str)
     end
@@ -126,7 +127,7 @@ end
 
 local Id = P{
     'Def',
-    Def  = C(V'Id') * Cp() / function(id, pos) if Keys[id] then errorpos(pos-#id, ('不能使用关键字[%s]作为函数名或变量名'):format(id)) end end,
+    Def  = C(V'Id') * Cp() / function(id, pos) if Keys[id] then errorpos(pos-#id, lang.parser.ERROR_KEY_WORD:format(id)) end end,
     Id   = R('az', 'AZ') * R('az', 'AZ', '09', '__')^0,
 }
 
@@ -148,7 +149,7 @@ local Str = P{
     'Def',
     Def  = Ct(keyvalue('type', 'string') * Cg(V'Str', 'value')),
     Str  = '"' * Cs((nl + V'Char')^0) * '"',
-    Char = V'Esc' + '\\' * err'不合法的转义字符' + (1-P'"'),
+    Char = V'Esc' + '\\' * err(lang.parser.ERROR_ESC) + (1-P'"'),
     Esc  = P'\\b'
          + P'\\t'
          + P'\\r'
@@ -161,9 +162,8 @@ local Str = P{
 local Real = P{
     'Def',
     Def  = Ct(keyvalue('type', 'real') * Cg(V'Real', 'value')),
-    Real = V'Neg' * V'Char' / function(neg, n) return neg and -n or n end,
-    Neg   = Cc(true) * P'-' * sp + Cc(false),
-    Char  = (P'.' * expect(R'09'^1, '不合法的实数') + R'09'^1 * P'.' * R'09'^0) / tonumber,
+    Real = P'-'^-1 * sp * V'Char',
+    Char  = (P'.' * expect(R'09'^1, lang.parser.ERROR_REAL) + R'09'^1 * P'.' * R'09'^0),
 }
 
 local Int = P{
@@ -172,11 +172,11 @@ local Int = P{
     Int    = V'Neg' * (V'Int16' + V'Int10' + V'Int256') / function(neg, n) return neg and -n or n end,
     Neg    = Cc(true) * P'-' * sp + Cc(false),
     Int10  = (P'0' + R'19' * R'09'^0) / tonumber,
-    Int16  = (P'$' + P'0' * S'xX') * expect(R('af', 'AF', '09')^1 / function(n) return tonumber('0x'..n) end, '不合法的16进制整数'),
-    Int256 = "'" * expect((V'C4' + V'C1') * "'", '256进制整数必须是由1个或者4个字符组成'),
+    Int16  = (P'$' + P'0' * S'xX') * expect(R('af', 'AF', '09')^1 / function(n) return tonumber('0x'..n) end, lang.parser.ERROR_INT16),
+    Int256 = "'" * expect((V'C4' + V'C1') * "'", lang.parser.ERROR_INT256_COUNT),
     C4     = V'C4W' * V'C4W' * V'C4W' * V'C4W' / function(n) return ('>I4'):unpack(n) end,
-    C4W    = expect(1-P"'"-P'\\', '\\' * P(1), '4个字符组成的256进制整数不能使用转义字符'),
-    C1     = ('\\' * expect(V'Esc', P(1), '不合法的转义字符') + C(1-P"'")) / function(n) return ('I1'):unpack(n) end,
+    C4W    = expect(1-P"'"-P'\\', '\\' * P(1), lang.parser.ERROR_INT256_ESC),
+    C1     = ('\\' * expect(V'Esc', P(1), lang.parser.ERROR_ESC) + C(1-P"'")) / function(n) return ('I1'):unpack(n) end,
     Esc    = P'b' / function() return '\b' end 
            + P't' / function() return '\t' end
            + P'r' / function() return '\r' end
@@ -215,7 +215,7 @@ local Exp = P{
 
 local Type = P{
     'Def',
-    Def  = Ct(sp * Whole'type' * keyvalue('type', 'type') * currentline() * expect(sps * Cg(Id, 'name'), '变量类型定义错误') * expect(V'Ext', '类型继承错误')),
+    Def  = Ct(sp * Whole'type' * keyvalue('type', 'type') * currentline() * expect(sps * Cg(Id, 'name'), lang.parser.ERROR_VAR_TYPE) * expect(V'Ext', lang.parser.ERROR_EXTENDS_TYPE)),
     Ext  = sps * Whole'extends' * sps * Cg(Id, 'extends'),
 }
 
@@ -230,7 +230,7 @@ local Global = P{
         * Cg(Id, 'name')
         * (sp * '=' * Cg(Exp) + P(true))
         ),
-    End    = expect(sp * Whole'endglobals', '缺少endglobals'),
+    End    = expect(sp * Whole'endglobals', lang.parser.ERROR_ENDGLOBALS),
 }
 
 local Local = P{
@@ -291,10 +291,10 @@ local Function = P{
     Content  = sp * Cg(V'Locals', 'locals') * V'Lines',
     Locals   = Ct((spl + Local * spl)^0),
     Lines    = (spl + Logic * spl + Line * spl)^0,
-    End      = expect(sp * Whole'endfunction', '缺少endfunction') * endline(),
+    End      = expect(sp * Whole'endfunction', lang.parser.ERROR_ENDFUNCTION) * endline(),
 }
 
-local pjass = expect(sps + cl + finish + Type + Function + Global, P(1), '语法不正确')^0
+local pjass = expect(sps + cl + finish + Type + Function + Global, P(1), lang.parser.SYNTAX_ERROR)^0
 
 local mt = {}
 setmetatable(mt, mt)
@@ -318,7 +318,7 @@ function mt:__call(_jass, _file, _messager, mode)
     lpeg.setmaxstack(1000)
     
     if mode then
-        return Ct(expect(mt[mode] + spl, P(1), '语法不正确')^0):match(_jass)
+        return Ct(expect(mt[mode] + spl, P(1), lang.parser.SYNTAX_ERROR)^0):match(_jass)
     else
         return Ct(pjass):match(_jass), comments
     end

@@ -24,5 +24,5 @@ return function(name)
     if not lang or not ctry then
         return
     end
-    return lang .. '-' .. ctry
+    return lang .. ctry
 end

@@ -1,0 +1,152 @@
+[WESTRING_MISCVAL_AKVS]
+信息面板 - 攻击速度 - 非常慢
+[WESTRING_MISCVAL_ATKF]
+信息面板 - 攻击速度 - 快
+[WESTRING_MISCVAL_ATKN]
+信息面板 - 攻击速度 - 中等
+[WESTRING_MISCVAL_ATKS]
+信息面板 - 攻击速度 - 慢
+[WESTRING_MISCVAL_BOTC]
+漂浮文字 - 奖励 - 文字颜色
+[WESTRING_MISCVAL_BOTF]
+漂浮文字 - 奖励 -消逝时间点
+[WESTRING_MISCVAL_BOTH]
+漂浮文字 - 奖励 - 字体大小
+[WESTRING_MISCVAL_BOTL]
+漂浮文字 - 奖励 -持续时间
+[WESTRING_MISCVAL_BOTV]
+漂浮文字 - 奖励 - 移动速度
+[WESTRING_MISCVAL_CAOA]
+炎魔分裂三代后的默认颜色
+[WESTRING_MISCVAL_CBNB]
+字体大小 - 图标右下角数字
+[WESTRING_MISCVAL_CEDB]
+字体大小 - 聊天输入栏文字大小
+[WESTRING_MISCVAL_CREM]
+点命令指示器颜色(攻击)
+[WESTRING_MISCVAL_CRFD]
+点命令指示器颜色(一般)
+[WESTRING_MISCVAL_CSTC]
+漂浮文字 - 致命一击 - 文字颜色
+[WESTRING_MISCVAL_CSTF]
+漂浮文字 - 致命一击 -消逝时间点
+[WESTRING_MISCVAL_CSTH]
+漂浮文字 - 致命一击 - 字体大小
+[WESTRING_MISCVAL_CSTL]
+漂浮文字 - 致命一击 -持续时间
+[WESTRING_MISCVAL_CSTV]
+漂浮文字 - 致命一击 - 移动速度
+[WESTRING_MISCVAL_FBDR]
+信息面板 - Buff图标消褪时间
+[WESTRING_MISCVAL_FBNA]
+信息面板 - Buff图标消褪最小Alpha值
+[WESTRING_MISCVAL_FBXA]
+信息面板 - Buff图标消褪最大Alpha值
+[WESTRING_MISCVAL_GDTC]
+漂浮文字 - 黄金 - 文字颜色
+[WESTRING_MISCVAL_GDTF]
+漂浮文字 - 黄金 -消逝时间点
+[WESTRING_MISCVAL_GDTH]
+漂浮文字 - 黄金 - 字体大小
+[WESTRING_MISCVAL_GDTL]
+漂浮文字 - 黄金 -持续时间
+[WESTRING_MISCVAL_GDTV]
+漂浮文字 - 黄金 - 移动速度
+[WESTRING_MISCVAL_INVY]
+字体大小 - 物品栏标题
+[WESTRING_MISCVAL_ITSF]
+物品 -物品阴影
+[WESTRING_MISCVAL_ITSO]
+物品- 物品阴影位移
+[WESTRING_MISCVAL_ITSS]
+物品 -物品阴影大小
+[WESTRING_MISCVAL_IWZO]
+通过可破坏物时选择圈Z偏移
+[WESTRING_MISCVAL_LDBD]
+字体大小 - 排行榜和多面板
+[WESTRING_MISCVAL_LMTC]
+漂浮文字 - 木材 - 文字颜色
+[WESTRING_MISCVAL_LMTF]
+漂浮文字 - 木材 -消逝时间点
+[WESTRING_MISCVAL_LMTH]
+漂浮文字 - 木材 - 字体大小
+[WESTRING_MISCVAL_LMTL]
+漂浮文字 - 木材 -持续时间
+[WESTRING_MISCVAL_LMTV]
+漂浮文字 - 木材 - 移动速度
+[WESTRING_MISCVAL_MBTC]
+漂浮文字 - 法力燃烧 - 文字颜色
+[WESTRING_MISCVAL_MBTF]
+漂浮文字 - 法力燃烧 -消逝时间点
+[WESTRING_MISCVAL_MBTH]
+漂浮文字 - 法力燃烧 - 字体大小
+[WESTRING_MISCVAL_MBTL]
+漂浮文字 - 法力燃烧 -持续时间
+[WESTRING_MISCVAL_MBTV]
+漂浮文字 - 法力燃烧 - 移动速度
+[WESTRING_MISCVAL_MRGX]
+信息面板 - 近战最大攻击距离
+[WESTRING_MISCVAL_MSTC]
+漂浮文字 - 攻击丢失 - 文字颜色
+[WESTRING_MISCVAL_MSTF]
+漂浮文字 - 攻击丢失 -消逝时间点
+[WESTRING_MISCVAL_MSTH]
+漂浮文字 - 攻击丢失 - 字体大小
+[WESTRING_MISCVAL_MSTL]
+漂浮文字 - 攻击丢失 -持续时间
+[WESTRING_MISCVAL_MSTV]
+漂浮文字 - 攻击丢失 - 移动速度
+[WESTRING_MISCVAL_PACR]
+小地图信号 - 攻击信号颜色
+[WESTRING_MISCVAL_PICR]
+小地图信号 - 完成信号颜色
+[WESTRING_MISCVAL_PPCR]
+小地图信号 - 路径点信号颜色
+[WESTRING_MISCVAL_PTST]
+字体大小 - 生命魔法值
+[WESTRING_MISCVAL_PVCR]
+小地图信号 - 建议信号颜色
+[WESTRING_MISCVAL_QITO]
+信息面板 - 任务指示器持续时间
+[WESTRING_MISCVAL_SPDF]
+信息面板 - 移动速度 - 快
+[WESTRING_MISCVAL_SPDN]
+信息面板 - 移动速度 - 中等
+[WESTRING_MISCVAL_SPDS]
+信息面板 - 移动速度 - 慢
+[WESTRING_MISCVAL_SPVS]
+信息面板 - 移动速度 - 非常慢
+[WESTRING_MISCVAL_SSNL]
+字体大小 - 计分屏 - 大字体
+[WESTRING_MISCVAL_SSNN]
+字体大小 - 计分屏 - 普通字体
+[WESTRING_MISCVAL_SSNT]
+字体大小 - 计分屏 - 玩家名字
+[WESTRING_MISCVAL_SSTC]
+漂浮文字 - 暗影突袭 - 文字颜色
+[WESTRING_MISCVAL_SSTF]
+漂浮文字 - 暗影突袭 -消逝时间点
+[WESTRING_MISCVAL_SSTH]
+漂浮文字 - 暗影突袭 - 字体大小
+[WESTRING_MISCVAL_SSTL]
+漂浮文字 - 暗影突袭 -持续时间
+[WESTRING_MISCVAL_SSTV]
+漂浮文字 - 暗影突袭 - 移动速度
+[WESTRING_MISCVAL_TTCS]
+字体大小 - 工具栏 - 消费数值
+[WESTRING_MISCVAL_TTDS]
+字体大小 - 工具栏 - 说明
+[WESTRING_MISCVAL_TTNA]
+字体大小 - 工具栏 - 标题
+[WESTRING_MISCVAL_UTDS]
+字体大小 - 物体悬浮窗 - 说明
+[WESTRING_MISCVAL_UTPN]
+字体大小 - 物体悬浮窗 - 名字
+[WESTRING_MISCVAL_WFCM]
+字体大小 - 聊天文本显示
+[WESTRING_MISCVAL_WFMG]
+字体大小 - 游戏信息提示
+[WESTRING_MISCVAL_WFTM]
+字体大小 - 维修费提示
+[WESTRING_MISCVAL_WFUM]
+字体大小 - 触发文本显示

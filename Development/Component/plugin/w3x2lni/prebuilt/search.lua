@@ -1,4 +1,5 @@
-local messager = require 'tool.messager'
+local messager = require 'share.messager'
+local lang = require 'share.lang'
 local key_cache = {}
 local function get_key(w2l, type, id)
     if not key_cache[type] then
@@ -137,7 +138,7 @@ local function create_search(w2l, type, search)
                     local key = get_key2(w2l, type, code, id)
                     local vtype = enable_type[meta.type]
                     if search[code][key] and search[code][key] ~= vtype then
-                        messager.text('类型不同:', 'skill', name, 'code', code)
+                        messager.text(lang.raw.TYPE_CONFLICT, 'skill', name, 'code', code)
                     end
                     if key then
                         search[code][key] = vtype
@@ -165,7 +166,7 @@ end
 return function(w2l, loader_)
     loader = loader_
     codemapped = get_codemapped(w2l, loader)
-    messager.text('正在生成search')
+    messager.text(lang.raw.CREATING .. 'search')
     local search = {}
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
         create_search(w2l, type, search)

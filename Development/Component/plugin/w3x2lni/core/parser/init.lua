@@ -1,5 +1,7 @@
 local grammar = require 'parser.grammar'
+local lang = require 'lang'
 
+local jass
 local ast
 local messager
 
@@ -7,7 +9,26 @@ local parse_exp
 local parse_lines
 
 local function parser_error(str)
-    error(('[%s]第[%d]行: %s'):format(ast.file, ast.current_line, str))
+    local line = ast.current_line
+    local start = 1
+    while true do
+        start = jass:find('[\r\n]', start)
+        if not start then
+            start = 1
+            break
+        end
+        if jass:sub(start, start + 1) == '\r\n' then
+            start = start + 2
+        else
+            start = start + 1
+        end
+        line = line - 1
+        if line <= 1 then
+            break
+        end
+    end
+    local finish = jass:find('%f[\r\n]', start) or #jass
+    error(lang.parser.ERROR_POS:format(str, ast.file, ast.current_line, jass:sub(start, finish)))
 end
 
 local function base_type(type)
@@ -26,7 +47,11 @@ local function get_var(name)
             return ast.current_function.args[name]
         end
     end
-    return ast.globals[name]
+    local var = ast.globals[name]
+    if not var then
+        parser_error(lang.parser.VAR_NO_EXISTS:format(name))
+    end
+    return var
 end
 
 local function get_function(name)
@@ -47,7 +72,7 @@ end
 local function get_call(exp)
     local func = ast.functions[exp.name]
     if not func then
-        parser_error(('函数[%s]不存在'):format(exp.name))
+        parser_error(lang.parser.FUNCTION_NO_EXISTS:format(exp.name))
     end
     for _, arg in ipairs(exp) do
         parse_exp(arg)
@@ -76,7 +101,7 @@ local function get_add(exp)
     if (t1 == 'string' or t1 == 'null') and (t2 == 'string' or t2 == 'null') then
         return 'string'
     end
-    parser_error(('不能对[%s]与[%s]做加法运算'):format(t1, t2))
+    parser_error(lang.parser.ERROR_ADD:format(t1, t2))
 end
 
 local function get_sub(exp)
@@ -84,7 +109,7 @@ local function get_sub(exp)
     if type then
         return type
     end
-    parser_error(('不能对[%s]与[%s]做减法运算'):format(t1, t2))
+    parser_error(lang.parser.ERROR_SUB:format(t1, t2))
 end
 
 local function get_mul(exp)
@@ -92,7 +117,7 @@ local function get_mul(exp)
     if type then
         return type
     end
-    parser_error(('不能对[%s]与[%s]做乘法运算'):format(t1, t2))
+    parser_error(lang.parser.ERROR_MUL:format(t1, t2))
 end
 
 local function get_div(exp)
@@ -100,7 +125,7 @@ local function get_div(exp)
     if type then
         return type
     end
-    parser_error(('不能对[%s]与[%s]做除法运算'):format(t1, t2))
+    parser_error(lang.parser.ERROR_DIV:format(t1, t2))
 end
 
 local function get_neg(exp)
@@ -108,7 +133,7 @@ local function get_neg(exp)
     if t == 'real' or t == 'integer' then
         return t
     end
-    parser_error(('不能对[%s]做负数运算'):format(t))
+    parser_error(lang.parser.ERROR_NEG:format(t))
 end
 
 local function get_equal(exp)
@@ -125,7 +150,7 @@ local function get_equal(exp)
     if b1 == b2 then
         return 'boolean'
     end
-    parser_error(('不能比较[%s]与[%s]是否相等'):format(t1, t2))
+    parser_error(lang.parser.ERROR_EQUAL:format(t1, t2))
 end
 
 local function get_compare(exp)
@@ -134,7 +159,7 @@ local function get_compare(exp)
     if (t1 == 'integer' or t1 == 'real') and (t2 == 'integer' or t2 == 'real') then
         return 'boolean'
     end
-    parser_error(('不能比较[%s]与[%s]的大小'):format(t1, t2))
+    parser_error(lang.parser.ERROR_COMPARE:format(t1, t2))
 end
 
 local function get_and(exp)
@@ -208,10 +233,10 @@ function parse_exp(exp, expect)
     elseif exp.type == 'code' then
         exp.vtype = get_code(exp)
     else
-        messager('解析未定义的表达式类型:', exp.type)
+        messager(lang.parser.UNKNOWN_EXP, exp.type)
     end
     if not exp.vtype then
-        messager('没有解析到类型:', exp.type)
+        messager(lang.parser.UNKNOWN_EXP_TYPE, exp.type)
     end
     return exp.vtype
 end
@@ -219,13 +244,13 @@ end
 local function parse_type(data)
     ast.current_line = data.line
     if not ast.types[data.extends] then
-        parser_error(('类型[%s]未定义'):format(data.extends))
+        parser_error(lang.parser.ERROR_TYPE:format(data.extends))
     end
     if ast.types[data.name] and not ast.types[data.name].extends then
-        parser_error('不能重新定义本地类型')
+        parser_error(lang.parser.ERROR_DEFINE_NATIVE_TYPE)
     end
     if ast.types[data.name] then
-        parser_error(('类型[%s]重复定义 --> 已经定义在[%s]第[%d]行'):format(data.name, ast.types[data.name].file, ast.types[data.name].line))
+        parser_error(lang.parser.ERROR_REDEFINE_TYPE:format(data.name, ast.types[data.name].file, ast.types[data.name].line))
     end
     ast.types[data.name] = data
 end
@@ -233,16 +258,16 @@ end
 local function parse_global(data)
     ast.current_line = data.line
     if ast.globals[data.name] then
-        parser_error(('全局变量[%s]重复定义 --> 已经定义在[%s]第[%d]行'):format(data.name, ast.globals[data.name].file, ast.globals[data.name].line))
+        parser_error(lang.parser.ERROR_REDEFINE_GLOBAL:format(data.name, ast.globals[data.name].file, ast.globals[data.name].line))
     end
     if data.constant and not data[1] then
-        parser_error('常量必须初始化')
+        parser_error(lang.parser.ERROR_CONSTANT_INIT)
     end
     if not ast.types[data.type] then
-        parser_error(('类型[%s]未定义'):format(data.type))
+        parser_error(lang.parser.ERROR_UNDEFINE_TYPE:format(data.type))
     end
     if data.array and data[1] then
-        parser_error('数组不能直接初始化')
+        parser_error(lang.parser.ERROR_ARRAY_INIT)
     end
     if data[1] then
         parse_exp(data[1], data.type)
@@ -255,7 +280,7 @@ local function parse_globals(chunk)
     for _, func in ipairs(ast.functions) do
         if not func.native then
             ast.current_line = chunk.line
-            parser_error '全局变量必须在函数前定义'
+            parser_error(lang.parser.ERROR_GLOBAL_AFTER_FUNCTION)
         end
     end
     for _, data in ipairs(chunk) do
@@ -279,13 +304,13 @@ end
 local function parse_local(data, locals, args)
     ast.current_line = data.line
     if not ast.types[data.type] then
-        parser_error(('类型[%s]未定义'):format(data.type))
+        parser_error(lang.parser.ERROR_TYPE:format(data.type))
     end
     if data.array and data[1] then
-        parser_error('数组不能直接初始化')
+        parser_error(lang.parser.ERROR_ARRAY_INIT)
     end
     if args and args[data.name] then
-        parser_error(('局部变量[%s]和函数参数重名'):format(data.name))
+        parser_error(lang.parser.ERROR_LOCAL_NAME_WITH_ARG:format(data.name))
     end
     if data[1] then
         parse_exp(data[1], data.type)
@@ -345,7 +370,7 @@ end
 
 local function parse_exit(line)
     if ast.loop_count == 0 then
-        parser_error '不能在循环外使用exitwhen'
+        parser_error(lang.parser.ERROR_EXITWHEN)
     end
     parse_exp(line[1], 'boolean')
 end
@@ -367,7 +392,7 @@ local function parse_line(line)
     elseif line.type == 'exit' then
         parse_exit(line)
     else
-        parser_error('未知的语句类型:'..line.type)
+        parser_error(lang.parser.UNKNOWN_LINE..line.type)
     end
 end
 
@@ -404,12 +429,13 @@ local function parser_gram(gram)
         elseif chunk.type == 'type' then
             parse_type(chunk)
         else
-            parser_error('未知的区块类型:'..chunk.type)
+            parser_error(lang.parser.UNKNOWN_CHUNK..chunk.type)
         end
     end
 end
 
-return function (jass, file, _ast, _messager)
+return function (jass_, file, _ast, _messager)
+    jass = jass_
     messager = _messager or print
     if _ast then
         ast = _ast

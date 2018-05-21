@@ -3,7 +3,7 @@ local ext = require 'yue-ext'
 local backend = require 'gui.backend'
 local messagebox = require 'ffi.messagebox'
 local timer = require 'gui.timer'
-local lang = require 'tool.lang'
+local lang = require 'share.lang'
 require 'filesystem'
 
 ext.on_timer = timer.update

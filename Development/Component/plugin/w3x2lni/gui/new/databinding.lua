@@ -138,6 +138,11 @@ function mt:bind(str, f)
     }
 end
 
+function mt:execute(str, data_self)
+    local env = setmetatable({self = data_self}, {__index = self.proxy})
+    return assert(load(str, '=(databinding)', 't', env))()
+end
+
 return function (data)
     local event = {}
     local proxy = create_proxy(data, event)

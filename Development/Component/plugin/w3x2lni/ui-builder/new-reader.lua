@@ -11,15 +11,42 @@ local function switch(value)
     end
 end
 
-function mt:read_ui(type, buf)
+local function get_lang_ui(loader, type, lang)
+    if not lang then
+        return
+    end
+    local filename = lang .. '/' .. type .. '.txt'
+    local buf = loader(filename)
+    if buf then
+        return lni(buf, filename)
+    end
+end
+
+local function merge_lang_ui(key, value, lang_ui)
+    local nv = lang_ui[key]
+    if not nv then
+        return value
+    end
+    for k, v in pairs(nv) do
+        value[k] = v
+    end
+    return value
+end
+
+function mt:read_ui(loader, lang, type)
+    local buf = loader(type .. '.txt')
     if not buf then
         return
     end
+    local lang_ui = get_lang_ui(loader, type, lang)
     local lastkey
     local last
     local function savelast()
         if not last then
             return
+        end
+        if lang_ui then
+            last = merge_lang_ui(lastkey, last, lang_ui)
         end
         last.name = lastkey
         if type == 'call' then
@@ -41,7 +68,7 @@ function mt:read_ui(type, buf)
             last = value
         end,
     })
-    lni(buf, type, {t})
+    lni(buf, type .. '.txt', {t})
     savelast()
 end
 
@@ -114,17 +141,20 @@ function mt:read_define(buf)
 	end
 end
 
-function mt:read(loader)
+function mt:read(loader, lang)
     self:reset()
-    self:read_define(loader [[define.txt]])
-    self:read_ui('event', loader [[event.txt]])
-    self:read_ui('condition', loader [[condition.txt]])
-    self:read_ui('action', loader [[action.txt]])
-    self:read_ui('call', loader [[call.txt]])
+    self:read_define(loader('define.txt'))
+    if lang then
+        self:read_define(loader(lang .. '/define.txt'))
+    end
+    self:read_ui(loader, lang, 'event')
+    self:read_ui(loader, lang, 'condition')
+    self:read_ui(loader, lang, 'action')
+    self:read_ui(loader, lang, 'call')
 end
 
-return function(loader)
+return function(loader, lang)
     local obj = setmetatable({}, mt)
-    obj:read(loader)
+    obj:read(loader, lang)
     return obj
 end

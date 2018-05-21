@@ -6,11 +6,12 @@ local nk = require 'nuklear'
 local backend = require 'gui.backend'
 local show_version = require 'gui.old.show_version'
 local plugin = require 'gui.old.plugin'
-local create_config = require 'tool.config'
-local lang = require 'tool.lang'
-local input_path = require 'tool.input_path'
+local config = require 'share.config'
+local lang = require 'share.lang'
+local input_path = require 'share.input_path'
 local builder = require 'map-builder'
-local war3_name = require 'tool.war3_name'
+local war3 = require 'share.war3'
+local push_error = require 'gui.push_error'
 local currenttheme = {0, 173, 217}
 local worker
 
@@ -33,7 +34,7 @@ NK_TEXT_RIGHT          = NK_TEXT_ALIGN_MIDDLE | NK_TEXT_ALIGN_RIGHT
 
 local root = fs.current_path():remove_filename()
 local fmt = nil
-local config = create_config()
+local config
 
 local function getexe()
 	local i = 0
@@ -44,7 +45,6 @@ local function getexe()
 end
 
 backend:init(getexe(), root / 'script')
-lang:set_lang(config.global.lang)
 local window = nk.window('W3x2Lni', 400, 600)
 window:set_theme(0, 173, 217)
 
@@ -58,8 +58,7 @@ function window:dropfile(file)
     if worker and not worker.exited then
         return
     end
-    local war3 = war3_name(fs.path(file))
-    if war3 then
+    if war3:open(fs.path(file)) then
         return
     end
     local inputpath = input_path(file)
@@ -70,7 +69,7 @@ function window:dropfile(file)
     map:close()
     mappath = inputpath
     mapname = mappath:filename():string()
-    config = create_config(mappath)
+    config:open_map(mappath)
     uitype = 'select'
 end
 
@@ -106,7 +105,7 @@ local function button_mapname(canvas, height)
     return height
 end
 
-local version = (require 'tool.changelog')[1].version
+local version = (require 'share.changelog')[1].version
 local function button_about(canvas)
     window:set_style('button.color', 51, 55, 67)
     canvas:text('', NK_TEXT_RIGHT)
@@ -236,7 +235,7 @@ local function update_worker()
     if worker then
         worker:update()
         if #worker.error > 0 then
-            messagebox(lang.ui.ERROR, '%s', worker.error)
+            push_error(worker.error)
             worker.error = ''
         end
     end
@@ -269,7 +268,7 @@ local function window_convert(canvas)
     else
         height = height - 129
         canvas:layout_row_dynamic(30, 1)
-        checkbox_simple(canvas, lang.ui.SIMPLIFY, lang.ui.SIMPLIFY_HINT, 'remove_unuse_object')
+        checkbox_simple(canvas, lang.ui.REMOVE_UNUSED_OBJECT, lang.ui.SIMPLIFY_HINT, 'remove_unuse_object')
         checkbox_simple(canvas, lang.ui.OPTIMIZE_JASS, lang.ui.OPTIMIZE_JASS_HINT, 'optimize_jass')
         checkbox_simple(canvas, lang.ui.MDX_SQUF, lang.ui.MDX_SQUF_HINT, 'mdx_squf')
         checkbox_simple(canvas, lang.ui.REMOVE_WE_ONLY, lang.ui.REMOVE_WE_ONLY_HINT, 'remove_we_only')

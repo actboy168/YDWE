@@ -339,14 +339,21 @@ local function load_obj(id, obj, slk_name)
         obj_data = {}
         object[id] = obj_data
         obj_data._id     = obj._id
-        obj_data._slk    = true
+        obj_data._slk    = not obj._keep_obj
         obj_data._code   = obj._code
         obj_data._mark   = obj._mark
         obj_data._parent = obj._parent
+        obj_data._keep_obj = obj._keep_obj
+    end
+    if obj._keep_obj then
+        return nil
     end
     if not obj._slk_id and not is_usable_string(obj._id) then
         obj._slk_id = find_unused_id()
         obj_data._slk_id = obj._slk_id
+        if slk_type == 'ability' then
+            obj_data.name = obj.name
+        end
         report_failed(obj, 'id', lang.report.OBJECT_ID_CAN_CONVERT_NUMBER, '')
         if not obj._slk_id then
             return nil

@@ -1,8 +1,7 @@
-local command = require 'tool.command'
+local command = require 'share.command'
 local lni = require 'lni'
-local root_path = require 'backend.root_path'
-local input_path = require 'tool.input_path'
-local create_config = require 'tool.config'
+local input_path = require 'share.input_path'
+local global_config = require 'share.config'
 require 'utility'
 require 'filesystem'
 
@@ -20,7 +19,7 @@ local function output_path(path)
             path = root:parent_path() / path
         end
     end
-    return fs.canonical(path)
+    return fs.absolute(path)
 end
 
 return function (mode)
@@ -28,12 +27,12 @@ return function (mode)
     local input = input_path(command[2])
     local output = output_path(command[3])
 
-    local tbl = create_config(input)
-    for k, v in pairs(tbl.global) do
+    global_config:open_map(input)
+    for k, v in pairs(global_config.global) do
         config[k] = v
     end
-    if tbl[config.mode] then
-        for k, v in pairs(tbl[config.mode]) do
+    if global_config[config.mode] then
+        for k, v in pairs(global_config[config.mode]) do
             config[k] = v
         end
     end

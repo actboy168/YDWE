@@ -1,48 +1,73 @@
+require 'filesystem'
 local gui = require 'yue.gui'
 local backend = require 'gui.backend'
-local get_report = require 'tool.report'
-local lang = require 'tool.lang'
+local lang = require 'share.lang'
+local ui = require 'gui.new.template'
+local ev = require 'gui.event'
+local root = fs.current_path()
 
 local function count_report_height(text)
     local n = 1
     for _ in text:gmatch '\n' do
         n = n + 1
     end
-    return n * 21
+    return n * 15
 end
 
-local view = gui.Container.create()
-view:setstyle { FlexGrow = 1 }
+local template = ui.container {
+    style = { FlexGrow = 1 },
+    font = { size = 12 },
+    ui.scroll {
+        style = { FlexGrow = 1, Margin = 2 },
+        hpolicy = 'never',
+        vpolicy = 'never',
+        width = 0,
+        bind = {
+            height = 'report.height'
+        },
+        ui.container {
+            style = { FlexGrow = 1 },
+            ui.label {
+                style = { FlexGrow = 1 },
+                text_color = '#CCC',
+                align = 'start',
+                bind = {
+                    text = 'report.text'
+                },
+            },
+        },
+    },
+    ui.button {
+        title = lang.ui.BACK,
+        style = { Bottom = 0, Height = 28, Margin = 5 },
+        bind = {
+            color = 'theme'
+        },
+        on = {
+            click = function()
+                window:show_page('convert')
+            end
+        }
+    }
+}
 
-local report = gui.Container.create()
-report:setstyle { FlexGrow = 1 }
+local view, data = ui.create(template, {
+    theme = window._color,
+    report = {
+        text = '',
+        height = 0
+    }
+})
 
-local label = gui.Label.create('')
-label:setstyle { FlexGrow = 1 }
-label:setfont(Font('黑体', 18))
-label:setcolor('#CCC')
-label:setalign('start')
-report:addchildview(label)
+ev.on('update theme', function()
+    data.theme = window._color
+end)
 
-local scroll = gui.Scroll.create()
-scroll:setstyle { FlexGrow = 1, Margin = 2 }
-scroll:setcontentview(report)
-scroll:setscrollbarpolicy('never', 'never')
-view:addchildview(scroll)
-
-local btn = Button(lang.ui.BACK)
-btn:setstyle { Bottom = 0, Height = 28, Margin = 5 }
-btn:setfont(Font('黑体', 16))
-function btn:onclick()
-    window:show_page('convert')
-end
-view:addchildview(btn)
-
-function window:show_report()
-    local text = get_report(backend.report)
-    local height = count_report_height(text)
-    scroll:setcontentsize { width = 0, height = height }
-    label:settext(text)
+function view:on_show()
+    local text = io.load(root:parent_path() / 'log' / 'report.log') or ''
+    data.report.text = text
+    data.report.height = count_report_height(text)
+    data.theme = window._color
 end
 
 return view

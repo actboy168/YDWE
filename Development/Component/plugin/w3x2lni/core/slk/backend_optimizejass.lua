@@ -54,7 +54,7 @@ return function (w2l)
         buf, report = optimizer(ast, w2l.config, messager)
     end)
     if not suc then
-        w2l.messager.report(lang.report.ERROR, 1, lang.report.SYNTAX_ERROR, err:match '[\r\n]+(.+)$')
+        w2l.messager.report(lang.report.ERROR, 1, lang.report.SYNTAX_ERROR, err:match('%.lua:%d+: (.*)'))
         return
     end
 
