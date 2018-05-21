@@ -4,13 +4,25 @@ local yd_path = fs.ydwe(false)
 local defined_path = yd_path / 'share' / 'mpq' / 'defined'
 
 return function (w2l)
-    package.loaded['tool.messager'] = {
-        text = function ()
+    package.loaded['share.messager'] = setmetatable({}, {
+        __index = function ()
+            return function ()
+            end
         end,
-    }
+    })
+    package.loaded['share.lang'] = setmetatable({}, {
+        __index = function ()
+            return setmetatable({}, {
+                __index = function (_, str)
+                    return str
+                end,
+            })
+        end,
+    })
     local prebuilt_keydata = loadfile((w2l_path / 'prebuilt' / 'keydata.lua'):string())()
     local prebuilt_search = loadfile((w2l_path / 'prebuilt' / 'search.lua'):string())()
-    package.loaded['tool.messager'] = nil
+    package.loaded['share.messager'] = nil
+    package.loaded['share.lang'] = nil
 
     local function loader(name)
         return w2l:mpq_load(name)

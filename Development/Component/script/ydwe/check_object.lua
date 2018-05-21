@@ -7,7 +7,7 @@ local w2l      = root / 'plugin' / 'w3x2lni' / 'core'
 local defined  = w2l / 'defined'
 local mpq      = root / 'share' / 'mpq'
 
-local info       = lni(assert(io.load(w2l / 'info.ini')), 'info.ini')
+local info       = load(io.load(w2l / 'info.lua'))()
 local typedefine = {
     aibuffer = 3,
     armortype = 3,
