@@ -63,7 +63,7 @@
 # // 5.
 #define YDLOCAL_5                                  ydl_triggerstep
 #define YDLocal5Set(type, name, value)             YDHashSet(YDLOC, type, YDLOCAL_5, YDConstStringHash(name), value)
-#define YDLocal5ArraySet(type, name, index, value) YDHashSet(YDHASH_HYDLOCANDLE, type, YDLOCAL_5, YDConstArrayHash(name, index), value)
+#define YDLocal5ArraySet(type, name, index, value) YDHashSet(YDLOC, type, YDLOCAL_5, YDConstArrayHash(name, index), value)
 #define YDLocal5Get(type, name)                    YDHashGet(YDLOC, type, YDLOCAL_5, YDConstStringHash(name))
 #define YDLocal5ArrayGet(type, name, index)        YDHashGet(YDLOC, type, YDLOCAL_5, YDConstArrayHash(name, index))
 #
