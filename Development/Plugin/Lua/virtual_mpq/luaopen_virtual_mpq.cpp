@@ -48,17 +48,27 @@ static int VirtualMpqOpenPath(lua_State* L)
 
 static int VirtualMpqWatch(lua_State* L)
 {
-	size_t len = 0;
-	const char* str = luaL_checklstring(L, 1, &len);
-	base::warcraft3::virtual_mpq::watch(std::string(str, len), false, std::bind(VirtualMpqWatchCB, base::lua::object(L, 2), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	if (lua_type(L, 1) == LUA_TSTRING) {
+		size_t len = 0;
+		const char* str = luaL_checklstring(L, 1, &len);
+		base::warcraft3::virtual_mpq::watch(std::string(str, len), false, std::bind(VirtualMpqWatchCB, base::lua::object(L, 2), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	}
+	else {
+		base::warcraft3::virtual_mpq::watch(false, std::bind(VirtualMpqWatchCB, base::lua::object(L, 1), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	}
 	return 0;
 }
 
 static int VirtualMpqForceWatch(lua_State* L)
 {
-	size_t len = 0;
-	const char* str = luaL_checklstring(L, 1, &len);
-	base::warcraft3::virtual_mpq::watch(std::string(str, len), true, std::bind(VirtualMpqWatchCB, base::lua::object(L, 2), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	if (lua_type(L, 1) == LUA_TSTRING) {
+		size_t len = 0;
+		const char* str = luaL_checklstring(L, 1, &len);
+		base::warcraft3::virtual_mpq::watch(std::string(str, len), true, std::bind(VirtualMpqWatchCB, base::lua::object(L, 2), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	}
+	else {
+		base::warcraft3::virtual_mpq::watch(true, std::bind(VirtualMpqWatchCB, base::lua::object(L, 1), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	}
 	return 0;
 }
 

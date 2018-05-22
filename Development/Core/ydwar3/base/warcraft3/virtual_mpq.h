@@ -15,5 +15,6 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 	_BASE_API bool  close_path(const fs::path& p, uint32_t priority);
 	_BASE_API void* storm_alloc(size_t n);
 	_BASE_API void  watch(const std::string& filename, bool force, watch_cb callback);
+	_BASE_API void  watch(bool force, watch_cb callback);
 	_BASE_API void  event(event_cb callback);
 }}}
