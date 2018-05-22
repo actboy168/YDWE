@@ -11,7 +11,7 @@ local mpqloader = require 'mpqloader'
 local wtg_checker = require 'wtg_checker'
 local wtg_reader = require 'wtg_reader'
 local ydwe = fs.ydwe_devpath()
-local info = load(io.load(ydwe / 'plugin' / 'w3x2lni' / 'core' / 'info.lua'))()
+local info = load(io.load(ydwe / 'plugin' / 'w3x2lni' / 'script' / 'core' / 'info.lua'))()
 local current_language = (require "i18n").get_language()
 local list = {}
 
