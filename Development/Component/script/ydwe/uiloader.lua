@@ -70,7 +70,7 @@ local function load_triggerdata(load_unknownui)
         log.trace('Loading ui from ' .. path:string())
 		if fs.exists(path / 'ui') then
 			state = ui.merge(state, ui.old_reader(function(filename)
-				return io.load(path / 'ui' / filename)
+				return io.load(path / filename)
 			end))
 		else
 			state = ui.merge(state, ui.new_reader(function(filename)

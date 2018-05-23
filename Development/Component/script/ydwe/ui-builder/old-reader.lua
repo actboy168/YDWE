@@ -240,8 +240,8 @@ end
 
 function mt:read(loader)
     self:reset()
-    self:readfile(loader [[TriggerData.txt]])
-    self:readfile(loader [[TriggerStrings.txt]])
+    self:readfile(loader [[ui\TriggerData.txt]])
+    self:readfile(loader [[ui\TriggerStrings.txt]])
 end
 
 return function(loader)
