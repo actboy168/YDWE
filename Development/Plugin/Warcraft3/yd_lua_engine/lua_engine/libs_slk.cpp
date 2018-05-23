@@ -168,7 +168,7 @@ return function(root, io_open, loaded)
 end
 )=";
 static const char slk[] = R"=(
-local sandbox, root, loadlib, io_open = ...
+local sandbox, slklib, root, loadlib, io_open = ...
 local w3x2lni = sandbox(root, io_open, {
     ['w3xparser'] = (loadlib 'w3xparser')(),
     ['lni']       = (loadlib 'lni')(),
@@ -190,7 +190,7 @@ end
 function w2l:map_load(filename)
 	return load_mpq(filename)
 end
-return w2l:slk_lib(true, false)
+return slklib(w2l, true, false)
 )=";
 
 static int loadlib(lua_State* L)
@@ -241,17 +241,24 @@ static int io_open(lua_State *L) {
 #define DoString(L, s, n) \
 	(luaL_loadbuffer(L, s, sizeof(s) - 1, "module '" #s "'") || (lua_insert(L, -(n)-1), lua_pcall(L, n, LUA_MULTRET, 0)))
 
+#define DoFile(L, f, n) \
+	(luaL_loadfile(L, f) || (lua_insert(L, -(n)-1), lua_pcall(L, n, LUA_MULTRET, 0)))
+
 int open(lua_State* L)
 {
 	if (DoString(L, sandbox, 0)) {
 		printf("%s\n", lua_tostring(L, -1));
 		return 0;
 	}
-	fs::path root = base::path::ydwe(true) / "plugin" / "w3x2lni" / "core";
+	if (DoFile(L, (base::path::ydwe(true) / "script" / "ydwe" / "slk_lib.lua").string().c_str(), 0)) {
+		printf("%s\n", lua_tostring(L, -1));
+		return 0;
+	}
+	fs::path root = base::path::ydwe(true) / "plugin" / "w3x2lni" / "script" / "core";
 	lua_pushstring(L, (root.string() + "\\").c_str());
 	lua_pushcfunction(L, loadlib);
 	lua_pushcfunction(L, io_open);
-	if (DoString(L, slk, 4)) {
+	if (DoString(L, slk, 5)) {
 		printf("%s\n", lua_tostring(L, -1));
 		return 0;
 	}
