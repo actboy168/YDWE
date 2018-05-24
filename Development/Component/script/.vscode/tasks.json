@@ -14,7 +14,7 @@
         {
             "taskName": "运行",
             "args": [
-                "\"${workspaceRoot}/../../../Build/bin/Debug/ydwe.exe\""
+                "\"${workspaceRoot}/../../Build/bin/Debug/ydwe.exe\""
             ],
             "isBuildCommand": true
         }

@@ -9,17 +9,8 @@
             "type": "lua",
             "request": "attach",
             "stopOnEntry": true,
-            "ip": "localhost",
-            "port": 4279
-        },
-        {
-            "name": "运行",
-            "type": "lua",
-            "request": "attach",
-            "stopOnEntry": true,
-            "preLaunchTask": "运行",
-            "ip": "localhost",
-            "port": 4279
+            "sourceCoding": "utf8",
+            "processName": "worldeditydwe.exe"
         }
     ]
 }

@@ -182,10 +182,6 @@ end
 -- 返回值：返回非负数表示成功，负数表示失败
 function event.EVENT_WE_START(event_data)
 	log.debug("********************* on startup start *********************")
-	
-    if fs.ydwe_path() ~= fs.ydwe_devpath() then
-        require 'debugger'
-    end
 
 	-- 读取版本
 	ydwe_version = sys.version { file = fs.ydwe_path() / "ydwe.exe" }
