@@ -55,7 +55,13 @@ return function(default, is_valid)
 
     local result = default
     local function finish(r)
-        local err = is_valid(r)
+        local suc, err = xpcall(is_valid, debug.traceback, r)
+        if not suc then
+            log.error(err)
+            r = default
+            win:close()
+            return
+        end
         if err then
             tip:settext(err)
             return
