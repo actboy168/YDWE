@@ -739,7 +739,7 @@ function mt:refresh()
             end
         end
     end
-    self.w2l.config.remove_same = true
+    self.w2l.setting.remove_same = true
     self.w2l:backend_cleanobj(objs)
     for type, data in pairs(objs) do
         if need_update[type] then

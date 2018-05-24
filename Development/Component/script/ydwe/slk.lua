@@ -29,13 +29,17 @@ local function initialize()
 
     local w2l = w3x2lni()
 
-    w2l.input_ar = map
+    w2l.input_ar = {
+        get = function (self, filename)
+            return map:load_file(filename)
+        end,
+    }
     w2l.output_ar = {
-        set = function (filename, buf)
+        set = function (self, filename, buf)
             import_files[filename] = buf
             log.info('Object save', filename)
         end,
-        remove = function (filename)
+        remove = function (self, filename)
             import_files[filename] = ('lll'):pack(2, 0, 0)
             log.info('Object remove', filename)
         end,
