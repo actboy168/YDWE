@@ -6,7 +6,6 @@ local mpqloader = require 'mpqloader'
 local i18n = require 'i18n'
 local event = require 'ev'
 local slk_lib = require 'slk_lib'
-local defined = require 'defined'
 local map_handle = __map_handle__.handle
 
 local type_map = {
@@ -30,37 +29,17 @@ local function initialize()
 
     local w2l = w3x2lni()
 
-    local mpq_path = root / 'share' / 'mpq'
-    function w2l:mpq_load(filename)
-        return mpqloader:load(mpq_path, filename)
-    end
-
-    local defined_path = ydpath / 'share' / 'mpq' / 'defined'
-    function w2l:defined_load(filename)
-        return io.load(defined_path / filename)
-    end
-
-    defined(w2l)
-
-    local prebuilt_path = ydpath / 'script' / 'ydwe' / 'prebuilt'
-    function w2l:prebuilt_load(filename)
-        return mpqloader:load(prebuilt_path, filename)
-    end
-    function w2l:prebuilt_save(filename, buf)
-        mpqloader:save(prebuilt_path, filename, buf)
-    end
-
-    function w2l:map_load(filename)
-        return map:load_file(filename)
-    end
-    function w2l:map_save(filename, buf)
-        import_files[filename] = buf
-        log.info('Object save', filename)
-    end
-    function w2l:map_remove(filename)
-        import_files[filename] = ('lll'):pack(2, 0, 0)
-        log.info('Object remove', filename)
-    end
+    w2l.input_ar = map
+    w2l.output_ar = {
+        set = function (filename, buf)
+            import_files[filename] = buf
+            log.info('Object save', filename)
+        end,
+        remove = function (filename)
+            import_files[filename] = ('lll'):pack(2, 0, 0)
+            log.info('Object remove', filename)
+        end,
+    }
 
     return slk_lib(w2l, false, true)
 end

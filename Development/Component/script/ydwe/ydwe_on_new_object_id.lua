@@ -5,31 +5,9 @@ local root = fs.ydwe_devpath()
 local ydpath = fs.ydwe_path()
 local w3x2lni = require 'w3x2lni'
 local mpqloader = require 'mpqloader'
-local defined = require 'defined'
 
 local function get_default(type)
 	local w2l = w3x2lni()
-
-    local mpq_path = root / 'share' / 'mpq'
-    function w2l:mpq_load(filename)
-        return mpqloader:load(mpq_path, filename)
-	end
-	
-    local defined_path = ydpath / 'share' / 'mpq' / 'defined'
-    function w2l:defined_load(filename)
-        return io.load(defined_path / filename)
-    end
-
-	defined(w2l)
-
-    local prebuilt_path = ydpath / 'script' / 'ydwe' / 'prebuilt'
-    function w2l:prebuilt_load(filename)
-        return mpqloader:load(prebuilt_path, filename)
-    end
-    function w2l:prebuilt_save(filename, buf)
-        mpqloader:save(prebuilt_path, filename, buf)
-	end
-
 	return w2l:get_default()[type]
 end
 
