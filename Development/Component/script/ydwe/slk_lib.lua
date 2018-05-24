@@ -772,6 +772,7 @@ return function (w2l_, read_only, safe_mode)
 
     errors = {}
     session:listen_error(w2l)
+    w2l.setting.read_slk = true
     w2l:frontend(session.slk)
     session.default = w2l:get_default()
     session.metadata = w2l:metadata()
