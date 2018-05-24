@@ -139,7 +139,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 			// war3将非.w3g后缀名的文件当地图处理
 			if (!base::path::equal(loadfile.extension(), L".w3g"))
 			{
-				fs::path test_map_path = get_test_map_path() + loadfile.extension().wstring();
+				fs::path test_map_path = get_test_map_path() + L".w3x";
 				try {
 					cmd[L"loadfile"] = test_map_path.wstring();
 					if (!loadfile.is_absolute()) {
