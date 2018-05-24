@@ -73,8 +73,7 @@ end
 
 function config:open_map(path)
     local builder = require 'map-builder'
-    local input_path = require 'share.input_path'
-    local map = builder.load(input_path(path))
+    local map = builder.load(path)
     if map then
         lni(map:get 'w3x2lni\\config.ini' or '', 'w3x2lni\\config.ini', { map_config })
         map:close()

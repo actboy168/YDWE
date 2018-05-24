@@ -140,8 +140,6 @@ w3i里的文本长度超过1023字符
 没有读取到触发器数据
 [NEED_YDWE_ASSOCIATE]
 请设置YDWE关联地图
-[NO_TRIGGER_DATA_DIR]
-没有找到触发器数据的目录：
 [TRIGGER_DATA_ERROR]
 触发器文件解析错误
 [OPEN_FAILED_MAYBE_W3X]
@@ -152,3 +150,5 @@ w3i里的文本长度超过1023字符
 不支持的Lni地图
 [CONFIG_INVALID_DIR]
 %s.%s 指定的目录无效
+[NO_LNI]
+没有找到所在的Lni目录

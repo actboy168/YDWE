@@ -1,0 +1,186 @@
+[OTHER]
+Other
+[NO_PREBUILT]
+Didn't find Prebuilt
+[NO_TRIGSTR]
+Didn't find: TRIGSTR_%03d
+[TEXT_IN_WTS]
+Save text into WTS
+[TEXT_IN_WTS_HINT]
+The text saved in WTS will cause the loading to slow down: 
+[WARN]
+Warn
+[WTS_NEED_ESCAPE]
+`}` is modified to `|`
+[COMPUTED_TEXT_FAILED]
+Compute text failed
+[REMOVE_UNUSED_OBJECT]
+Remove unreferenced objects
+[RETAIN_MARKET]
+Retained items in market
+[RETAIN_MARKET_HINT]
+Used market '%s'[%s]
+[INVALID_OBJECT]
+Invalid object
+[INVALID_OBJECT_ID]
+Invalid object id
+[INVALID_OBJECT_PARENT]
+Can't find parent object
+[INVALID_OBJECT_DATA]
+Invalid object data
+[OPTIMIZE_JASS]
+Optimize JASS
+[OPTIMIZE_JASS_RESULT]
+%s (%d)
+[ERROR]
+Error
+[NO_JASS]
+Didn't find JASS
+[CONFUSE_JASS]
+Confuse JASS
+[REFERENCE_FUNCTION]
+Referenced functions
+[UNREFERENCE_GLOBAL]
+Unreferenced global variables
+[UNREFERENCE_FUNCTION]
+Unreferenced functions
+[UNREFERENCE_LOCAL]
+Unreferenced local variables
+[REFERENCE_BY_JASS]
+Referenced by '%s' in JASS
+[RETAIN_CREEP_UNIT]
+Retained creep units
+[RETAIN_CREEP_BUILDING]
+Retained creep buildings
+[RETAIN_RANDOM_ITEM]
+Retained random items
+[SYNTAX_ERROR]
+JASS syntax error
+[TEXT_CANT_ESCAPE_IN_TXT]
+The text contains both commas and double quotes
+[OBJECT_ID_CONFLICT]
+Id [%s] is conflicted between different objects
+[TXT_CONFLICT]
+Txt is conflicted between different objects
+[NO_CONVERT_WTG]
+Didn't convert WTG
+[SIMPLIFIED_OBJECT]
+Simplified objects: %d/%d
+[RETAIN_DEFAULT_OBJECT]
+Retained default objects: %d/%d
+[SIMPLIFIED_CUSTOM_OBJECT]
+Simplified custom objects: %d/%d
+[NO_SLK_DATA]
+No SLK data
+[OBJECT_LEVEL_TOO_HIGHT]
+The object level is too high: [%s][%d]
+[OBJECT_LEVEL_TOO_HIGHT_HINT]
+It may affect the performance of W2l
+[WTS_ESCAPE_WARN]
+Text cannot contain `}`
+[FORCE_READ_SLK]
+Incomplete information, forced reading SLK files
+[FILE_LOST]
+Lost %d files
+[FILE_LOST_HINT]
+These files are discarded, Please include the complete `(listfile)`
+[FILE_READ]
+Read (%d/%d) files
+[USED_PLUGIN]
+Used plugin [%s](%s)
+[PLUGIN_FAILED]
+Executed plugin [%s] failed
+[NATIVE]
+Native
+[MAP]
+Map
+[STRING_CAN_CONVERT_NUMBER]
+String can be converted to number
+[DATA_LEVEL_TOO_HIGHT]
+Data level is more than 4
+[OBJECT_ID_CAN_CONVERT_NUMBER]
+Object id can be converted to number
+[DIDNT_FIND_OBJECT_WHEN_SIMPLIFY]
+Missing object
+[USE_UNCLASSIFIED_OBJECT]
+Unclassified object: '%s'
+[EXPECTATION_CLASSIFICATION]
+Expectation classification: %s
+[REFERENCE_BY_MUST_RETAIN]
+Referenced by '%s'[%s] which must be retained
+[REFERENCE_BY_JASS_NAME]
+Referenced by '%s'[%s] in JASS
+[REFERENCE_BY_CREEP_BUILDING]
+Referenced by crepp building '%s'[%s]
+[REFERENCE_BY_CREEP_UNIT]
+Referenced by crepp unit '%s'[%s]
+[REFERENCE_BY_RANDOM_ITEM]
+Referenced by random item '%s'[%s]
+[REFERENCE_BY_MARKET_ITEM]
+Referenced by markect item '%s'[%s]
+[REFERENCE_BY_PLACING]
+Referenced by '%s'[%s] which replaced in map
+[REFERENCE_BY_PLUGIN]
+Referenced by '%s'[%s] which appointed by plugin
+[SAVE_WTG_FAILED]
+Save WTG failed
+[UNSUPPORT_FILE_TYPE]
+Unsupported file type:
+[UNSUPPORT_VERSION]
+Unsupported version:
+[UNSUPPORT_UNKNOWN_VALUE]
+Unsupported unknown value:
+[WTS_SYNTAX_ERROR]
+WTS syntax error
+[NO_WES_STRING]
+Didn't find WES string
+[CREATE_TEMPLATE]
+Creating template [%s][%s]
+[ABILITY_CODE_ERROR]
+Ability code is incompatible with default: %s:%s
+[DEFAULT_IS]
+Default is %s
+[TEMPLATE_NOT_EXISTED]
+Template not existed: %s [%s:%s]
+[ABILITY_REMOVED]
+Wc3 can't identify ability: %s
+[ABILITY_REMOVED_HINT]
+Wc3 can't identify a custom ability without any modify
+[JASS_LINE]
+Line [%d] : 
+[JASS_LINES]
+Line [%d]-[%d] :
+[FORCE_REFERENCE_ALL]
+Force referenced all functions
+[FULLY_DYNAMIC]
+Fully dynamic
+[NO_CONFUSING_FUNCTION_NAME]
+Didn't confuse function names
+[NO_CONFUSING_GLOBAL_REAL]
+Didn't confuse global reals
+[DEFINED_VARIABLE_EVENT]
+Defined variable event
+[CONFUSED_FAILED]
+Confused failed
+[NEED_3_CHARS]
+At least 3 legitimate characters
+[NEED_2_LETTERS]
+At least 2 letters
+[UNEXPECT_EXP]
+Unexpect expression type
+[UNEXPECT_LOGIC]
+Unexpect judgment type
+[UNEXPECT_CHUNK]
+Unexpect chunk type
+[INPUT_PATH]
+Input path: 
+[OUTPUT_PATH]
+Output path: 
+[INPUT_FORMAT]
+Input format: 
+[OUTPUT_MODE]
+Output mode: 
+[RESULT]
+Result: 
+[TAKES_TIME]
+Takes: %.3f sec

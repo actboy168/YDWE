@@ -46,7 +46,7 @@ end
 
 return function (w2l, w3i, input_ar, output_ar)
     local files = {}
-    if w2l.config.remove_we_only then
+    if w2l.setting.remove_we_only then
         w2l:file_remove('map', 'war3map.wtg')
         w2l:file_remove('map', 'war3map.wct')
         w2l:file_remove('map', 'war3map.imp')
@@ -63,21 +63,20 @@ return function (w2l, w3i, input_ar, output_ar)
     for _, name in pairs(w2l.info.pack.packignore) do
         w2l:file_remove('map', name)
     end
-    w2l:map_remove('.w3x')
     local imp = w2l:file_load('table', 'imp')
     w2l:file_remove('table', 'imp')
 
     for type, name, buf in w2l:file_pairs() do
-        if type == 'resource' and w2l.config.mdx_squf and name:sub(-4) == '.mdx' then
+        if type == 'resource' and w2l.setting.mdx_squf and name:sub(-4) == '.mdx' then
             buf = w3xparser.mdxopt(buf)
         end
-        if type == 'w3x2lni' and w2l.config.remove_we_only then
+        if type == 'w3x2lni' and w2l.setting.remove_we_only then
         else
             w2l:file_save(type, name, buf)
         end
     end
     
-    if w2l.config.mode == 'lni' then
+    if w2l.setting.mode == 'lni' then
         if w2l:file_load('map', 'war3map.imp') then
             w2l:file_save('table', 'imp', w2l:backend_imp(w2l:file_load('map', 'war3map.imp')))
             w2l:file_remove('map', 'war3map.imp')
@@ -85,7 +84,7 @@ return function (w2l, w3i, input_ar, output_ar)
             w2l:file_save('table', 'imp', imp)
         end
     else
-        if not w2l.config.remove_we_only and imp then
+        if not w2l.setting.remove_we_only and imp then
             w2l:file_save('map', 'war3map.imp', build_imp(w2l, output_ar, imp))
         end
     end

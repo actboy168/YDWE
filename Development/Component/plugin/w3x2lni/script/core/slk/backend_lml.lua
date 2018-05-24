@@ -37,8 +37,7 @@ local function lml_string(str)
     return str
 end
 
--- Like lml_string. But this version will never check WTS.
-local function lml_string_without_wts(str)
+local function lml_key(str)
     if type(str) == 'string' then
         if find(str, "[%s%:%'%c]") then
             str = format("'%s'", gsub(str, "'", "''"))
@@ -49,7 +48,18 @@ end
 
 local function lml_value(v, sp)
     if v[2] then
-        buf[#buf+1] = format('%s%s: %s\n', sp_rep[sp], lml_string_without_wts(v[1]), lml_string(v[2]))
+        buf[#buf+1] = format('%s%s: %s\n', sp_rep[sp], v[1], lml_string(v[2]))
+    else
+        buf[#buf+1] = format('%s%s\n', sp_rep[sp], lml_string(v[1]))
+    end
+    for i = 3, #v do
+        lml_value(v[i], sp+4)
+    end
+end
+
+local function lml_value_by_dir(v, sp)
+    if v[2] then
+        buf[#buf+1] = format('%s%s: %s\n', sp_rep[sp], lml_key(v[1]), lml_string(v[2]))
     else
         buf[#buf+1] = format('%s%s\n', sp_rep[sp], lml_string(v[1]))
     end
@@ -62,6 +72,14 @@ local function convert_lml(tbl)
     buf = {}
     for i = 3, #tbl do
         lml_value(tbl[i], 0)
+    end
+    return table.concat(buf)
+end
+
+local function convert_lml_by_dir(tbl)
+    buf = {}
+    for i = 3, #tbl do
+        lml_value_by_dir(tbl[i], 0)
     end
     return table.concat(buf)
 end
@@ -146,7 +164,7 @@ local function read_dirs(map)
         end
         lml[i+2] = dir_data
     end
-    return convert_lml(lml)
+    return convert_lml_by_dir(lml)
 end
 
 local function read_triggers(files, map)

@@ -1,0 +1,383 @@
+﻿// Attribute Bonus
+[Aamk]
+Name=属性附加
+Tip=属性加强 - [|cffffcc00等级 1|r],属性加强 - [|cffffcc00等级 2|r],属性加强 - [|cffffcc00等级 3|r],属性加强 - [|cffffcc00等级 4|r]
+Ubertip="将总共<Aamk,DataA1>点技能点分配到敏捷度，智力和力量这三个属性","将总共<Aamk,DataA2>点技能点分配到敏捷度，智力和力量这三个属性","将总共<Aamk,DataA3>点技能点分配到敏捷度，智力和力量这三个属性","将总共<Aamk,DataA4>点技能点分配到敏捷度，智力和力量这三个属性"
+Researchtip="学习属性附加(|cffffcc00B|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="永久性地增加智力，敏捷度和力量。 |n|n|cffffcc00等级 1|r - 对所有属性增加3点。|n|cffffcc00等级 2|r - 增加额外的3点。|n|cffffcc00等级 3|r - 增加额外的3点。|n|cffffcc00等级 4|r - 增加额外的3点。"
+Researchhotkey=B
+
+// Serpent Ward (tentacle)
+[ACtn]
+Name=产卵触角
+Tip=产卵触角(|cffffcc00T|r)
+Ubertip="在敌人头上召唤出一巨大的触角。"
+Hotkey=T
+
+// Feral Spirit (akama)
+[ACs7]
+Name=野兽幽魂
+Tip=野兽幽魂(|cffffcc00T|r) - [|cffffcc00等级 1|r],野兽幽魂(|cffffcc00T|r) - [|cffffcc00等级 2|r],野兽幽魂(|cffffcc00T|r) - [|cffffcc00等级 3|r]
+Ubertip="召唤出<ACs7,DataB1>条幽灵狼。每条幽灵狼有<osw1,realHP>点生命值并能对敌人造成<osw1,mindmg1> - <osw1,maxdmg1>点的伤害。|n持续<ACs7,Dur1>秒。|n|n|cffffcc00能攻击地面单位。|r","召唤出<ACs7,DataB2>条具有致命一击技能的幽灵狼。每条幽灵狼有<osw2,realHP>点生命值并能对敌人造成<osw2,mindmg1> - <osw2,maxdmg1>点的伤害。|n持续<ACs7,Dur2>秒。|n|n|cffffcc00能攻击地面单位。|r","召唤出<ACs7,DataB3>条具有致命一击和隐形技能的幽灵狼。每条幽灵狼有<osw3,realHP>点生命值并能对敌人造成<osw3,mindmg1> - <osw3,maxdmg1>点的伤害。|n持续<ACs7,Dur3>秒。|n|n|cffffcc00能攻击地面单位。|r"
+Researchtip="学习野兽幽魂(|cffffcc00T|r) - [|cffffcc00等级 %d|r]"
+Researchubertip=召唤出<ACs7,DataB1>条幽灵狼来为你战斗。|n持续<ACs7,Dur1>秒。|n|n|cffffcc00等级 1|r -<osw1,realHP>点生命值，<osw1,mindmg1>-<osw1,maxdmg1>点攻击力。|n|cffffcc00等级 2|r -<osw2,realHP>点生命值，<osw2,mindmg1>-<osw2,maxdmg1>点攻击力，具有致命一击技能。|n|cffffcc00等级 3|r -<osw3,realHP>点生命值，<osw3,mindmg1>-<osw3,maxdmg1>点攻击力，具有致命一击和隐形技能。
+Hotkey=T
+Researchhotkey=T
+
+
+// Avatar (garithos)
+[ANav]
+Name=天神下凡
+EditorSuffix=(中立的)
+Tip=激活天神下凡(|cffffcc00V|r)
+UberTip="激活天神下凡之后给予加理瑟斯<ANav,DataA1>点额外的护甲，<ANav,DataB1>点额外的生命值，<AHav,DataC1>点额外的攻击力和魔法免疫技能。|n持续<ANav,Dur1>秒。"
+Untip=取消天神下凡(|cffffcc00V|r)
+UnUberTip=""
+Hotkey=V
+Unhotkey=V
+Researchtip=学习天神下凡(|cffffcc00V|r)
+ResearchUberTip="当天神下凡被激活的时候，加理瑟斯的护甲会增加<ANav,DataA1>点，生命值会增加<ANav,DataB1>点，攻击力会增加<ANav,DataC1>点，并具有魔法免疫技能。|n持续 <ANav,Dur1>秒。"
+Researchhotkey=V
+
+// Shockwave
+[ANsh]
+Name=震荡波
+Tip=震荡波(|cffffcc00W|r) - [|cffffcc00等级 1|r],震荡波(|cffffcc00W|r) - [|cffffcc00等级 2|r],震荡波(|cffffcc00W|r) - [|cffffcc00等级 3|r]
+Ubertip="从英雄身上发射出一道威力巨大的能量波，从而对一直线上的敌人地面单位造成<AOsh,DataA1>点的伤害。","从英雄身上发射出一道威力巨大的能量波，从而对一直线上的敌人地面单位造成<AOsh,DataA2>点的伤害。","从英雄身上发射出一道威力巨大的能量波，从而对一直线上的敌人地面单位造成<AOsh,DataA3>点的伤害。"
+Hotkey=W
+Researchtip="学习震荡波(|cffffcc00W|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="从英雄身上发射出一道威力巨大的能量波，从而对一直线上的敌人地面单位造成一定的伤害。|n|n|cffffcc00等级 1|r - <AOsh,DataA1>点伤害。|n|cffffcc00等级 2|r - <AOsh,DataA2>点伤害。|n|cffffcc00等级 3|r - <AOsh,DataA3>点伤害。"
+Researchhotkey=W
+
+// Feral Spirit
+[ACs8]
+Name=灵兽
+Tip=灵兽(|cffffcc00B|r) - [|cffffcc00等级 1|r],灵兽(|cffffcc00B|r) - [|cffffcc00等级 2|r],灵兽(|cffffcc00B|r) - [|cffffcc00等级 3|r]
+Ubertip="召唤<ACs8,DataB1>灵兽伙伴。每只灵兽有<nsw1,realHP>生命值并造成<nsw1,mindmg1> - <nsw1,maxdmg1>伤害。|n持续<ACs8,Dur1>秒。|n|n|cffffcc00攻击地面单位。|r","召唤<ACs8,DataB2>灵兽伙伴，拥有反馈技能。每只灵兽有<nsw2,realHP>生命值并造成<nsw2,mindmg1> - <nsw2,maxdmg1>伤害。|n持续<ACs8,Dur2>秒。|n|n|cffffcc00攻击地面单位。|r","召唤<ACs8,DataB3>灵兽伙伴，拥有反馈和法力燃烧技能。每只灵兽有<nsw3,realHP>生命值并造成<nsw3,mindmg1> - <nsw3,maxdmg1>伤害。|n持续<ACs8,Dur3>秒。|n|n|cffffcc00攻击地面单位。|r"
+Researchtip="学习灵兽(|cffffcc00B|r) - [|cffffcc00等级 %d|r]。"
+Researchubertip="召唤<ACs8,DataB1>只灵兽攻击阿卡玛的敌人。|n持续 <ACs8,Dur1> 秒。|n|n|cffffcc00等级 1|r - <nsw1,realHP>生命值，<nsw1,mindmg1> - <nsw1,maxdmg1>伤害力。|n|cffffcc00等级 2|r - <nsw2,realHP>生命值，<nsw2,mindmg1> - <nsw2,maxdmg1>伤害力及反馈。|n|cffffcc00等级 3|r - <nsw3,realHP>生命值，<nsw3,mindmg1> - <nsw3,maxdmg1>伤害力，反馈和法力燃烧。"
+Hotkey=B
+Researchhotkey=B
+
+// Reincarnation (generic)
+[ANr2]
+Name=重生
+Tip=重生
+Ubertip="当被杀时，该英雄自动会复活。重生有<ANr2,Cool1>秒的间隔时间。"
+Researchtip=学习重生(|cffffcc00R|r)
+Researchubertip="当被杀时，该英雄自动会复活。重生有<ANr2,Cool1>秒的间隔时间。"
+Researchhotkey=R
+Globalmessage=
+Globalsound=
+
+// Feedback
+[Afbb]
+Name=反馈
+Tip=反馈
+Ubertip="灵兽每次攻击抵消<Afbb,DataA1>点魔力。这些魔力值燃烧，对被攻击单位造成伤害。"
+
+
+// Auto-Dispel Magic
+[Andm]
+Name=驱逐魔法
+Tip=驱逐魔法(|cffffcc00B|r)
+Ubertip="能去除敌方单位身上那些有利的魔法效果和友军单位身上那些不利的魔法效果。|n|cffffcc00对召唤单位造成<Aadm,DataB1>点伤害。|r"
+Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=B
+Unhotkey=B
+
+// Submerge
+[Asb1]
+Name=潜水
+EditorSuffix= (暴徒)
+Tip=潜水(|cffffcc00U|r)
+Untip=浮出水面(|cffffcc00U|r)
+Ubertip="使单位可以潜入水下，隐去行踪。"
+Unubertip="使单位从水中出现。"
+Hotkey=U
+Unhotkey=U
+
+// Submerge
+[Asb2]
+Name=潜水
+EditorSuffix= (皇家卫兵)
+Tip=潜水(|cffffcc00U|r)
+Untip=浮出水面(|cffffcc00U|r)
+Ubertip="使单位可以潜入水下，隐去行踪。"
+Unubertip="使单位从水中出现。"
+Hotkey=U
+Unhotkey=U
+
+// Submerge
+[Asb3]
+Name=潜水
+EditorSuffix= (飞龙)
+Tip=潜水(|cffffcc00U|r)
+Untip=浮出水面(|cffffcc00U|r)
+Ubertip="使单位可以潜入水下，隐去行踪。"
+Unubertip="使单位从水中出现。"
+Hotkey=U
+Unhotkey=U
+
+//naga harvest
+[ANha]
+Name=采集
+EditorSuffix= (Neutral)
+Tip=采集(|cffffcc00G|r)
+Ubertip="从金矿处采集黄金资源，从树木上砍伐木材资源。"
+Untip=返送资源(|cffffcc00E|r)
+Unubertip="将采集到的资源返送到最近的潮汐神庙。"
+Hotkey=G
+Unhotkey=E
+EditorSuffix= (金矿和木材)
+
+// Ensnare (Naga)
+[ANen]
+Name=诱捕
+Tip=诱捕(|cffffcc00E|r)
+Ubertip="能将一个目标空中单位固定在地面上，使其在<Aens,Dur1>秒内不能移动。被诱捕的空中单位可以当作地面单位进行攻击。"
+Hotkey=E
+
+
+// Frost Armor (Autocast, Naga)
+[ACfu]
+Name=霜冻护甲
+EditorSuffix= (自动施放)
+Tip=霜冻护甲(|cffffcc00F|r)
+Ubertip="霜冻护甲能增加目标单位<ACfu,DataB1>点的护甲防御，攻击该单位的近战型敌人也会在<ACfu,Dur1>秒内减速。|n持续<ACfu,DataA1>秒。"
+Untip="|cffc3dbff点击右键以取消自动施放功能。"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。"
+Hotkey=F
+
+// Parasite
+[ANpa]
+Name=寄生虫
+Tip=寄生虫(|cffffcc00R|r)
+Ubertip="用一个致命的寄生虫折磨目标单位,使它每秒受到<ANpa,DataA1>的伤害，持续<ANpa,Dur1>秒。如果命中单位在寄生虫仍有效果的时候死亡，一个战士将会从尸体上诞生。"
+Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=R
+Unhotkey=R
+
+[BNpa]
+Bufftip="寄生虫"
+Buffubertip="这个单位已被寄生虫侵扰，它将随着时间逝去而受伤害，如果在它死时仍然在被折磨，一个单位将会从它的尸体上诞生。"
+
+// Parasite Minion
+[BNpm]
+Bufftip="寄生虫"
+Buffubertip="这个单位已被寄生虫侵扰，它将随着时间逝去而受伤害，如果在它死时仍然在被折磨，一个单位将会从它的尸体上诞生。"
+EditorSuffix= (奴)
+
+// Cyclone, Naga
+//Unused line: When that unit lands, its movement speed is slowed by a factor of <Acyc,DataC1>, and it will regain 1/<Acyc,DataC1> of its movement every <Acyc,DataB1> seconds.
+[Acny]
+Name=飓风
+Tip=飓风(|cffffcc00C|r)
+Ubertip="将目标单位投掷到空中,使其不能移动，攻击和施放任何的魔法技能。而且其他单位也不能在这期间攻击它。|n持续<Acny,Dur1>秒。"
+Hotkey=C
+
+// null aoe roar, naga summoner
+[Ahnl]
+Name=召唤仪式
+Tip=召唤仪式(|cffffcc00U|r)
+Ubertip="从扭曲的地狱召唤能量。"
+Hotkey=U
+
+// Channel
+[ANcl]
+Name=通魔
+Tip=通魔(|cffffcc00C|r)
+Ubertip="通向强大的守卫魔法力量。"
+Hotkey=C
+
+
+//orc campaign abilities
+
+// Summon Quilbeast (Rexxar)
+[Arsq]
+Name=召唤豪猪
+Tip=召唤豪猪(|cffffcc00Q|r) - [|cffffcc00等级 1|r],召唤豪猪(|cffffcc00Q|r) - [|cffffcc00等级 2|r],召唤豪猪(|cffffcc00Q|r) - [|cffffcc00等级 3|r],召唤豪猪(|cffffcc00Q|r) - [|cffffcc00等级 4|r]
+Ubertip="召唤出一头具有<nqb1,realHP>点生命值的豪猪来为你战斗。|n持续<Arsq,Dur1>秒。","召唤出一头具有<nqb2,realHP>点生命值的豪猪来为你战斗。具有狂热技能。|n持续<Arsq,Dur2>秒。","召唤出一头具有<nqb3,realHP>点生命值的豪猪来为你战斗。具有狂热技能并能造成范围伤害。|n持续<Arsq,Dur3>秒。","召唤出一头具有<nqb4,realHP>点生命值的豪猪来为你战斗。具有狂热技能并能造成范围伤害。|n持续<Arsq,Dur4>秒。"
+Hotkey=Q
+Researchtip=学习召唤豪猪(|cffffcc00Q|r) - [|cffffcc00等级 %d|r]
+Researchubertip="召唤出一头愤怒的豪猪来为你战斗。|n持续<Arsq,Dur1>秒。|n|n|cffffcc00等级 1|r -<nqb1,realHP>点生命值，<nqb1,mindmg1>-<nqb1,maxdmg1>点攻击力。|n|cffffcc00等级 2|r -<nqb2,realHP>点生命值，<nqb2,mindmg1>-<nqb2,maxdmg1>点攻击力，具有狂热技能。|n|cffffcc00等级 3|r -<nqb3,realHP>点生命值，<nqb3,mindmg1>-<nqb3,maxdmg1>点攻击力，具有范围伤害效果。同时具有狂热技能。|n|cffffcc00等级 4|r -<nqb4,realHP>点生命值，<nqb4,mindmg1>-<nqb4,maxdmg1>点攻击力，具有范围伤害效果。同时具有狂热技能。"
+Researchhotkey=Q
+EditorSuffix=(雷克萨)
+
+// Summon Bear (Rexxar)
+[Arsg]
+Name=召唤米纱
+Tip=召唤米纱(|cffffcc00I|r) - [|cffffcc00等级 1|r],召唤米纱(|cffffcc00I|r) - [|cffffcc00等级 2|r],召唤米纱(|cffffcc00I|r) - [|cffffcc00等级 3|r],召唤米纱(|cffffcc00I|r) - [|cffffcc00等级 4|r]
+Ubertip="召唤出米纱，一头具有<ngz1,realHP>点生命值的野熊来为你战斗。","召唤出米纱，一头具有<ngz2,realHP>点生命值的野熊来为你战斗。具有重击技能。","召唤出米纱，一头具有<ngz3,realHP>点生命值的野熊来为你战斗。具有大锤技能。","召唤出米纱，一头具有<ngz4,realHP>点生命值的野熊来为你战斗。具有大锤技能。"
+Hotkey=I
+Researchtip=学习召唤米纱(|cffffcc00I|r) - [|cffffcc00等级 %d|r]
+Researchubertip="召唤出米纱，一头强大的野熊来为你战斗。|n|n|cffffcc00等级 1|r -<ngz1,realHP>点生命值，<ngz1,mindmg1>-<ngz1,maxdmg1>点攻击力。|n|cffffcc00等级 2|r -<ngz2,realHP>点生命值，<ngz2,mindmg1>-<ngz2,maxdmg1>点攻击力，具有重击技能。 |n|cffffcc00等级 3|r -<ngz3,realHP>点生命值，<ngz3,mindmg1>-<ngz3,maxdmg1>点攻击力，具有大锤技能。|n|cffffcc00等级 4|r -<ngz4,realHP>点生命值，<ngz4,mindmg1>-<ngz4,maxdmg1>点攻击力，具有大锤技能。"
+Researchhotkey=I
+EditorSuffix=(雷克萨)
+
+// Stampede (Rexxar)
+[Arsp]
+Name=惊吓
+Tip=惊吓(|cffffcc00E|r) - [|cffffcc00等级 1|r],惊吓(|cffffcc00E|r) - [|cffffcc00等级 2|r]
+Ubertip="召唤出雷霆蜥蜴来爆炸在敌方单位的头上。每个爆炸的雷霆蜥蜴能造成<Arsp,DataC1>点伤害。|n持续<Arsp,Dur1>秒。","召唤出雷霆蜥蜴来爆炸在敌方单位的头上。每个爆炸的雷霆蜥蜴能造成<Arsp,DataC2>点伤害。|n持续<Arsp,Dur2>秒。"
+Hotkey=E
+Researchtip=学习惊吓(|cffffcc00E|r) - [|cffffcc00等级 %d|r]
+Researchubertip="唤出雷霆蜥蜴来爆炸在敌方单位的头上。|n|n|cffffcc00等级 1|r -每个爆炸的雷霆蜥蜴能造成<Arsp,DataC1>点伤害。|n|cffffcc00等级 2|r -每个爆炸的雷霆蜥蜴能造成<Arsp,DataC2>点伤害。|n|n持续<Arsp,Dur2>秒。"
+Researchhotkey=E
+EditorSuffix=(雷克萨)
+
+// Battle Roar
+[ANbr]
+Name=战争咆哮
+Tip=战争咆哮(|cffffcc00R|r) - [|cffffcc00等级 1|r],战争咆哮(|cffffcc00R|r) - [|cffffcc00等级 2|r],战争咆哮(|cffffcc00R|r) - [|cffffcc00等级 3|r],战争咆哮(|cffffcc00R|r) - [|cffffcc00等级 4|r]
+Ubertip="增加周围单位<ANbr,DataA1>点的攻击力。|n持续<ANbr,Dur1>秒。","增加周围单位<ANbr,DataA2>点的攻击力。|n持续<ANbr,Dur2>秒。","增加周围单位<ANbr,DataA3>点的攻击力。|n持续<ANbr,Dur3>秒。","增加周围单位<ANbr,DataA4>点的攻击力。|n持续<ANbr,Dur4>秒。"
+Hotkey=R
+Researchtip="学习战争咆哮(|cffffcc00R|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="增加周围单位的攻击力。|n持续 <ANbr,Dur1>秒。|n|n|cffffcc00等级 1|r - <ANbr,DataA1>点攻击力。|n|cffffcc00等级 2|r - <ANbr,DataA2>点攻击力。|n|cffffcc00等级 3|r - <ANbr,DataA3>点攻击力。|n|cffffcc00等级 4|r - <ANbr,DataA4>点攻击力。"
+Researchhotkey=R
+
+[BNbr]
+Bufftip=战争咆哮
+Buffubertip="该单位具有战争咆哮技能，因此它的攻击力增加了。"
+
+// storm bolt
+[ANsb]
+Name=风暴之锤
+Tip=风暴之锤(|cffffcc00T|r) - [|cffffcc00等级 1|r],风暴之锤(|cffffcc00T|r) - [|cffffcc00等级 2|r],风暴之锤(|cffffcc00T|r) - [|cffffcc00等级 3|r],风暴之锤(|cffffcc00T|r) - [|cffffcc00等级 4|r]
+Ubertip="向目标投掷一巨大的魔法斧，对其造成<ANsb,DataA1>点伤害并使其<ANsb,Dur1>秒内处于眩晕状态。","向目标投掷一巨大的魔法斧，对其造成<ANsb,DataA2> 点伤害并使其<ANsb,Dur2>秒内处于眩晕状态。","向目标投掷一巨大的魔法斧，对其造成<ANsb,DataA3>点伤害并使其<ANsb,Dur3>秒内处于眩晕状态。","向目标投掷一巨大的魔法斧，对其造成<ANsb,DataA4>点伤害并使其<ANsb,Dur4>秒内处于眩晕状态。"
+Hotkey=T
+Researchtip=学习风暴之锤(|cffffcc00T|r) - [|cffffcc00等级 %d|r]
+Researchubertip="向目标投掷一巨大的魔法斧，对其造成一定伤害并使其处于眩晕状态。|n|n|cffffcc00等级 1|r - <ANsb,DataA1>点伤害, <ANsb,Dur1>秒眩晕状态。|n|cffffcc00等级 2|r - <ANsb,DataA2>点伤害, <ANsb,Dur2>秒眩晕状态。|n|cffffcc00等级 3|r - <ANsb,DataA3>点伤害, <ANsb,Dur3>秒眩晕状态。|n|cffffcc00等级 4|r - <ANsb,DataA4>点伤害, <ANsb,Dur4>秒眩晕状态。"
+Researchhotkey=T
+
+// Breath of Fire (Chen)
+[ANcf]
+Name=火焰呼吸
+Tip=火焰呼吸(|cffffcc00F|r) - [|cffffcc00等级 1|r],火焰呼吸(|cffffcc00F|r) - [|cffffcc00等级 2|r],火焰呼吸(|cffffcc00F|r) - [|cffffcc00等级 3|r],火焰呼吸(|cffffcc00F|r) - [|cffffcc00等级 4|r]
+Ubertip="对敌人呼出带有攻击力的火焰。最初造成<ANcf,DataA1>点的伤害。那些身上带有醉酒云雾的单位会自动引燃并在<ANcf,Dur1>秒内持续受到每秒<ANcf,DataE1>点的伤害。","对敌人呼出带有攻击力的火焰。最初造成<ANcf,DataA2>点的伤害。那些身上带有醉酒云雾的单位会自动引燃并在<ANcf,Dur2>秒内持续受到每秒<ANcf,DataE2>点的伤害。","对敌人呼出带有攻击力的火焰。最初造成<ANcf,DataA3>点的伤害。那些身上带有醉酒云雾的单位会自动引燃并在<ANcf,Dur3>秒内持续受到每秒<ANcf,DataE3>点的伤害。","对敌人呼出带有攻击力的火焰。最初造成<ANcf,DataA4>点的伤害。那些身上带有醉酒云雾的单位会自动引燃并在<ANcf,Dur4>秒内持续受到每秒<ANcf,DataE4>点的伤害。"
+Hotkey=F
+Researchtip="学习火焰呼吸(|cffffcc00F|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="对敌人吐出一道火焰，在一开始对其就造成伤害之后，如果对方身上有醉酒云雾的话那还能在一定时间内持续地对其造成伤害。|n持续<ANcf,Dur1>秒。|n|n|cffffcc00等级 1|r - 最初造成<ANcf,DataA1>点的伤害随后造成每秒<ANcf,DataE1>点的伤害。|n|cffffcc00等级 2|r - 最初造成<ANcf,DataA2>点的伤害随后造成每秒<ANcf,DataE2>点的伤害。|n|cffffcc00等级 3|r - 最初造成<ANcf,DataA3>点的伤害随后造成每秒<ANcf,DataE3>点的伤害。|n|cffffcc00等级 4|r - 最初造成<ANcf,DataA4>点的伤害随后造成每秒<ANcf,DataE4>点的伤害。"
+Researchhotkey=F
+EditorSuffix=(陈)
+
+// Drunken Brawler (Chen)
+[Acdb]
+Name=醉拳
+Tip=醉拳 - [|cffffcc00等级 1|r],醉拳 - [|cffffcc00等级 2|r],醉拳 - [|cffffcc00等级 3|r],醉拳 - [|cffffcc00等级 4|r]
+Ubertip="给予<Acdb,DataD1,%>%的概率来躲避攻击和<Acdb,DataA1>%的概率来施放出<Acdb,DataB1>倍于常规攻击的伤害。","给予<Acdb,DataD2,%>%的概率来躲避攻击和<Acdb,DataA2>%的概率来施放出<Acdb,DataB2>倍于常规攻击的伤害。","给予<Acdb,DataD3,%>%的概率来躲避攻击和<Acdb,DataA3>%的概率来施放出<Acdb,DataB3>倍于常规攻击的伤害。","给予<Acdb,DataD4,%>%的概率来躲避攻击和<Acdb,DataA4>%的概率来施放出<Acdb,DataB4>倍于常规攻击的伤害。"
+Researchtip="学习醉拳(|cffffcc00B|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="给予一定的概率来躲避攻击和<Acdb,DataA1>%的概率来对敌人造成额外的伤害。|n|n|cffffcc00等级 1|r -<Acdb,DataD1,%>%的概率来躲避攻击，<Acdb,DataB1>倍于常规攻击的额外伤害。|n|cffffcc00等级 2|r -<Acdb,DataD2,%>%的概率来躲避攻击，<Acdb,DataB2>倍于常规攻击的额外伤害。|n|cffffcc00等级 3|r -<Acdb,DataD3,%>%的概率来躲避攻击，<Acdb,DataB3>倍于常规攻击的额外伤害。|n|cffffcc00等级 4|r -<Acdb,DataD4,%>%的概率来躲避攻击，<Acdb,DataB4>倍于常规攻击的额外伤害。"
+Researchhotkey=B
+EditorSuffix=(陈)
+
+// Drunken Haze (Chen)
+[Acdh]
+Name=醉酒云雾
+Tip=醉酒云雾(|cffffcc00D|r) - [|cffffcc00等级 1|r],醉酒云雾(|cffffcc00D|r) - [|cffffcc00等级 2|r],醉酒云雾(|cffffcc00D|r) - [|cffffcc00等级 3|r],醉酒云雾(|cffffcc00D|r) - [|cffffcc00等级 4|r]
+Ubertip="用酒精浸透目标单位，减慢其<Acdh,DataC1,%>%的移送速度，并使其有<Acdh,DataB1,%>%的概率不能击中其他单位。带有醉酒云雾的单位遭到火焰呼吸攻击的话，那么就会自动引燃身上的酒精从而持续受到火焰的伤害。|n持续<Acdh,Dur1>秒。","用酒精浸透目标单位，减慢其<Acdh,DataC2,%>%的移送速度，并使其有<Acdh,DataB2,%>%的概率不能击中其他单位。带有醉酒云雾的单位遭到火焰呼吸攻击的话，那么就会自动引燃身上的酒精从而持续受到火焰的伤害。|n持续<Acdh,Dur2>秒。","用酒精浸透目标单位，减慢其<Acdh,DataC3,%>%的移送速度，并使其有<Acdh,DataB3,%>%的概率不能击中其他单位。带有醉酒云雾的单位遭到火焰呼吸攻击的话，那么就会自动引燃身上的酒精从而持续受到火焰的伤害。|n持续<Acdh,Dur3>秒。","用酒精浸透目标单位，减慢其<Acdh,DataC4,%>%的移送速度，并使其有<Acdh,DataB4,%>%的概率不能击中其他单位。带有醉酒云雾的单位遭到火焰呼吸攻击的话，那么就会自动引燃身上的酒精从而持续受到火焰的伤害。|n持续<Acdh,Dur4>秒。"
+Hotkey=D
+Researchtip="学习醉酒云雾(|cffffcc00D|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="用酒精浸透目标单位，减慢其移送速度，并使其有一定的概率不能击中其他单位。带有醉酒云雾的单位遭到火焰呼吸攻击的话，那么就会自动引燃身上的酒精从而持续受到火焰的伤害。|n持续<Acdh,Dur1>秒。|n|n|cffffcc00等级 1|r - 减慢<Acdh,DataC1,%>%的移动速度，<Acdh,DataB1,%>%的概率不能击中其他单位。|n|cffffcc00等级 2|r - 减慢<Acdh,DataC2,%>%的移动速度，<Acdh,DataB2,%>%的概率不能击中其他单位。|n|cffffcc00等级 3|r - 减慢<Acdh,DataC3,%>%的移动速度，<Acdh,DataB3,%>%的概率不能击中其他单位。|n|cffffcc00等级 4|r - 减慢<Acdh,DataC4,%>%的移动速度，<Acdh,DataB4,%>%的概率不能击中其他单位。"
+Researchhotkey=D
+EditorSuffix=(陈)
+
+// Storm, Earth, and Fire
+[Acef]
+Name="火土风暴"
+Tip="火土风暴(|cffffcc00E|r) - [|cffffcc00等级 1|r]","火土风暴(|cffffcc00E|r) - [|cffffcc00等级 2|r]"
+Ubertip="熊猫酒仙分身成3元素形体，制造出3个特殊的战士。他们中任何一个在召唤时限内还活着，熊猫酒仙就会再生。","熊猫酒仙分身成3元素形体，制造出3个特殊的战士。他们中任何一个在召唤时限内还活着，熊猫酒仙就会再生。"
+Hotkey=E
+Researchtip="学习火土风暴(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="熊猫酒仙分身成3元素形体，制造出3个特殊的战士。他们中任何一个在召唤时限内还活着，熊猫酒仙就会再生。|n|n|cffffcc00等级 1|r - 制造出3个巨大的熊猫战士。|n|cffffcc00等级 2|r - 制造出3个更加巨大的熊猫战士。"
+Researchhotkey=E
+EditorSuffix=(陈)
+
+// Healing Wave (Rokhan)
+[ANhw]
+Name=医疗波
+Tip=医疗波(|cffffcc00E|r) - [|cffffcc00等级 1|r],医疗波(|cffffcc00E|r) - [|cffffcc00等级 2|r],医疗波(|cffffcc00E|r) - [|cffffcc00等级 3|r],医疗波(|cffffcc00E|r) - [|cffffcc00等级 4|r]
+Ubertip="召唤出一道能跳跃<ANhw,DataB1>次的医疗能量波，对首个目标能恢复<ANhw,DataA1>点的生命值。每次跳跃都会削弱医疗波的医疗能力。","召唤出一道能跳跃<ANhw,DataB2>次的医疗能量波，对首个目标能恢复<ANhw,DataA2>点的生命值。每次跳跃都会削弱医疗波的医疗能力。","召唤出一道能跳跃<ANhw,DataB3>次的医疗能量波，对首个目标能恢复<ANhw,DataA3>点的生命值。每次跳跃都会削弱医疗波的医疗能力。","召唤出一道能跳跃<ANhw,DataB4>次的医疗能量波，对首个目标能恢复<ANhw,DataA4>点的生命值。每次跳跃都会削弱医疗波的医疗能力。"
+Hotkey=E
+Researchtip="学习医疗波(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="召唤出一道能进行跳跃的医疗能量波，每次跳跃都会削弱医疗波的医疗能力。|n|n|cffffcc00等级 1|r - 恢复<ANhw,DataA1>点生命值，跳跃<ANhw,DataB1>次。|n|cffffcc00等级 2|r - 恢复<ANhw,DataA2>点生命值，跳跃<ANhw,DataB2>次。|n|cffffcc00等级 3|r - 恢复<ANhw,DataA3>点生命值，跳跃<ANhw,DataB3>次。|n|cffffcc00等级 4|r - 恢复<ANhw,DataA4>点生命值，跳跃<ANhw,DataB4>次。"
+Researchhotkey=E
+EditorSuffix=(洛克汗)
+
+// Hex (rokhan)
+[ANhx]
+Name=妖术
+Tip=妖术(|cffffcc00X|r) - [|cffffcc00等级 1|r],妖术(|cffffcc00X|r) - [|cffffcc00等级 2|r],妖术(|cffffcc00X|r) - [|cffffcc00等级 3|r],妖术(|cffffcc00X|r) - [|cffffcc00等级 4|r]
+Ubertip="将某个敌方单位变成随机的一种小动物，持续<ANhx,Dur1>秒。","T将某个敌方单位变成随机的一种小动物，持续<ANhx,Dur2>秒。","将某个敌方单位变成随机的一种小动物，持续<ANhx,Dur3>秒。","将某个敌方单位变成随机的一种小动物，持续<ANhx,Dur4>秒。"
+Hotkey=X
+Researchtip="学习妖术(|cffffcc00X|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="将敌方某个单位变成一种随机的小动物。|n|n|cffffcc00等级 1|r - 消耗<ANhx,Cost1>点魔法，持续<ANhx,Dur1>秒。|n|cffffcc00等级 2|r - 消耗<ANhx,Cost2>点魔法，持续<ANhx,Dur2>秒。|n|cffffcc00等级 3|r - 消耗<ANhx,Cost3>点魔法，持续<ANhx,Dur3>秒。|n|cffffcc00等级 4|r - 消耗<ANhx,Cost4>点魔法，持续<ANhx,Dur4>秒。"
+Researchhotkey=X
+EditorSuffix=(洛克汗)
+
+// Serpent Ward
+[Arsw]
+Name=毒蛇守卫
+Tip=毒蛇守卫(|cffffcc00W|r) - [|cffffcc00等级 1|r],毒蛇守卫(|cffffcc00W|r) - [|cffffcc00等级 2|r],毒蛇守卫(|cffffcc00W|r) - [|cffffcc00等级 3|r],毒蛇守卫(|cffffcc00W|r) - [|cffffcc00等级 4|r]
+Ubertip="召唤出一个固定不动的毒蛇守卫来为暗影猎手攻击。守卫具有<osp1,realHP>点生命值并对魔法免疫。攻击力为<osp1,mindmg1> —— <osp1,maxdmg1>点。|n持续<Arsw,Dur1>秒。 |n|n|cffffcc00能攻击地面和空中单位。|r","召唤出一个固定不动的毒蛇守卫来为暗影猎手攻击。守卫具有<osp2,realHP>点生命值并对魔法免疫。攻击力为<osp2,mindmg1> —  <osp2,maxdmg1>点。|n持续<Arsw,Dur1>秒。 |n|n|cffffcc00能攻击地面和空中单位。|r","召唤出一个固定不动的毒蛇守卫来为暗影猎手攻击。守卫具有<osp3,realHP>点生命值并对魔法免疫。攻击力为<osp3,mindmg1> —  <osp3,maxdmg1>点。|n持续<Arsw,Dur1>秒。 |n|n|cffffcc00能攻击地面和空中单位。|r","召唤出一个固定不动的毒蛇守卫来为暗影猎手攻击。守卫具有<osp4,realHP>点生命值并对魔法免疫。攻击力为<osp4,mindmg1> —  <osp4,maxdmg1>点溅射伤害。|n持续<Arsw,Dur1>秒。 |n|n|cffffcc00能攻击地面和空中单位。|r"
+Hotkey=W
+Researchtip="学习毒蛇守卫(|cffffcc00W|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="召唤出一个固定不动的毒蛇守卫来为暗影猎手攻击。守卫对魔法免疫。|n持续<Arsw,Dur1>秒。|n|n|cffffcc00能攻击地面和空中单位。|r|n|n|cffffcc00等级 1|r -<osp1,realHP>点生命值，<osp1,mindmg1>-<osp1,maxdmg1>点攻击力。|n|cffffcc00等级 2|r -<osp2,realHP>点生命值，<osp2,mindmg1>-<osp2,maxdmg1>点攻击力。|n|cffffcc00等级 3|r -<osp3,realHP>点生命值，<osp3,mindmg1>-<osp3,maxdmg1>点攻击力。|n|cffffcc00等级 4|r -<osp4,realHP>点生命值，<osp4,mindmg1>-<osp4,maxdmg1>点溅射攻击力。"
+Researchhotkey=W
+EditorSuffix=(洛克汗)
+
+// Endurance Aura (Cairne)
+[AOr2]
+Name=耐久光环
+Tip=耐久光环 - [|cffffcc00等级 1|r],耐久光环 - [|cffffcc00等级 2|r],耐久光环 - [|cffffcc00等级 3|r],耐久光环 - [|cffffcc00等级 4|r]
+Ubertip="增加周围单位<AOr2,DataA1,%>%的移动速度和<AOr2,DataB1,%>%的攻击速度。","I增加周围单位<AOr2,DataA2,%>%的移动速度和<AOr2,DataB2,%>%的攻击速度。","增加周围单位<AOr2,DataA3,%>%的移动速度和<AOr2,DataB3,%>%的攻击速度。","增加周围单位<AOr2,DataA4,%>%的移动速度和<AOr2,DataB4,%>%的攻击速度。"
+Researchtip="学习耐久光环(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="增加周围单位的移动和攻击速度。|n|n|cffffcc00等级 1|r - <AOr2,DataA1,%>%的移动速度和<AOr2,DataB1,%>%的攻击速度。|n|cffffcc00等级 2|r - <AOr2,DataA2,%>%的移动速度和<AOr2,DataB2,%>%的攻击速度。|n|cffffcc00等级 3|r - <AOr2,DataA3,%>%的移动速度和<AOr2,DataB3,%>%的攻击速度。|n|cffffcc00等级 4|r - <AOr2,DataA4,%>%的移动速度和<AOr2,DataB4,%>%的攻击速度。"
+Researchhotkey=E
+EditorSuffix=(卡林)
+
+// Shockwave (Cairne)
+[AOs2]
+Name=震荡波
+Tip=震荡波(|cffffcc00W|r) - [|cffffcc00等级 1|r],震荡波(|cffffcc00W|r) - [|cffffcc00等级 2|r],震荡波(|cffffcc00W|r) - [|cffffcc00等级 3|r],震荡波(|cffffcc00W|r) - [|cffffcc00等级 4|r]
+Ubertip="发射出一道向前的能量波，对一直线上的敌人造成<AOs2,DataA1>点的伤害。","发射出一道向前的能量波，对一直线上的敌人造成<AOs2,DataA2>点的伤害。","发射出一道向前的能量波，对一直线上的敌人造成<AOs2,DataA3>点的伤害。","发射出一道向前的能量波，对一直线上的敌人造成<AOs2,DataA4>点的伤害。"
+Hotkey=W
+Researchtip="学习震荡波(|cffffcc00W|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="发射出一道向前的能量波，对一直线上的敌人造成一定的伤害。|n|n|cffffcc00等级 1|r - <AOs2,DataA1>点伤害。|n|cffffcc00等级 2|r - <AOs2,DataA2>点伤害。|n|cffffcc00等级 3|r - <AOs2,DataA3>点伤害。|n|cffffcc00等级 4|r - <AOs2,DataA4>点伤害。"
+Researchhotkey=W
+EditorSuffix=(卡林)
+
+// Reincarnation (Cairne)
+[AOr3]
+Name=重生
+Tip=重生 - [|cffffcc00等级 1|r],重生 - [|cffffcc00等级 1|r]
+Ubertip="当被杀害的时候，卡林会自动复活。重生技能具有<AOr3,Cool1>秒的魔法施放间隔时间。",""当被杀害的时候，卡林会自动复活。重生技能具有<AOr3,Cool2>秒的魔法施放间隔时间。"
+Researchtip=学习重生(|cffffcc00R|r)
+Researchubertip="当被杀害的时候，酋长会自动复活。|n|n|cffffcc00等级 1|r - <AOr3,Cool1>秒的魔法施放间隔时间。|n|cffffcc00等级 2|r - <AOr3,Cool2>秒的魔法施放间隔时间。"
+Researchhotkey=R
+Globalmessage=
+Globalsound=
+EditorSuffix=(卡林)
+
+// War Stomp (Chieftan)
+[AOw2]
+Name=战争践踏
+Tip=战争践踏(|cffffcc00T|r) - [|cffffcc00等级 1|r],战争践踏(|cffffcc00T|r) - [|cffffcc00等级 2|r],战争践踏(|cffffcc00T|r) - [|cffffcc00等级 3|r],战争践踏(|cffffcc00T|r) - [|cffffcc00等级 4|r]
+Ubertip="震击地面，对周围的敌方地面单位造成<AOw2,DataA1>点的伤害，并让其在<AOw2,Dur1>秒内处于昏晕的状态。","震击地面，对周围的敌方地面单位造成<AOw2,DataA2>点的伤害，并让其在<AOw2,Dur2>秒内处于昏晕的状态。","震击地面，对周围的敌方地面单位造成<AOw2,DataA3>点的伤害，并让其在<AOw2,Dur3>秒内处于昏晕的状态。","震击地面，对周围的敌方地面单位造成<AOw2,DataA4>点的伤害，并让其在<AOw2,Dur4>秒内处于昏晕的状态。"
+Researchtip="学习战争践踏(|cffffcc00T|r) - [|cffffcc00等级 %d|r]。"
+Researchubertip="震击地面，击晕周围的地面单位。|n|n|cffffcc00等级 1|r - <AOw2,DataA1>点伤害，昏晕状态持续<AOw2,Dur1>秒。|n|n|cffffcc00等级 2|r - <AOw2,DataA2>点伤害，昏晕状态持续<AOw2,Dur2>秒。|n|n|cffffcc00等级 3|r - <AOw2,DataA3>点伤害，昏晕状态持续<AOw2,Dur3>秒。|n|n|cffffcc00等级 4|r - <AOw2,DataA4>点伤害，昏晕状态持续<AOw2,Dur4>秒。"
+Hotkey=T
+Researchhotkey=T
+
+
+// Voodoo Spirits
+[AOls]
+Name=巫毒幽魂
+Tip=巫毒幽魂(|cffffcc00V|r) - [|cffffcc00等级 1|r],巫毒幽魂(|cffffcc00V|r) - [|cffffcc00等级 2|r]
+Ubertip="召唤出愤怒的幽灵来汲取敌人的生命值，幽灵能将汲取到的生命值补充到洛克汗的身上。|n持续<AOls,HeroDur1>秒。","召唤出愤怒的幽灵来汲取敌人的生命值，幽灵能将汲取到的生命值补充到洛克汗的身上。|n持续<AOls,HeroDur1>秒。"
+Hotkey=V
+Researchtip="学习巫毒幽魂(|cffffcc00V|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="召唤出愤怒的幽灵来汲取敌人的生命值，幽灵能将汲取到的生命值补充到洛克汗的身上。|n|n|cffffcc00等级 1|r — <AOls,DataA1> 个幽灵。 |n|cffffcc00等级 2|r — <AOls,DataA2>幽灵。|n|n持续<AOls,HeroDur1>秒。"
+Researchhotkey=V

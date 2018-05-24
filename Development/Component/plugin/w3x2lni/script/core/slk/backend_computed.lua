@@ -124,7 +124,7 @@ end
 
 return function(w2l_, slk)
     w2l = w2l_
-    local remove_unuse = w2l.config.remove_unuse_object
+    local remove_unuse = w2l.setting.remove_unuse_object
     if slk.ability then
         for _, o in pairs(slk.ability) do
             if remove_unuse and not o._mark then

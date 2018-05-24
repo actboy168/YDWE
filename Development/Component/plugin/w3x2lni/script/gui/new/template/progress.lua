@@ -24,6 +24,7 @@ return function (t, data)
         end
         if n >= 1 then
             set_progress(1, true)
+            return
         end
         if n < background or n <= 0 then
             set_progress(n, true)
@@ -33,11 +34,10 @@ return function (t, data)
         if not ti then
             ti = timer.loop(30, function ()
                 local delta1 = 0
-                local delta2 = 0.01
+                local delta2 = 0
                 if frontground < background then
                     delta1 = (background - frontground) / 10
-                else
-                    delta2 = delta2 * ((1 - frontground) / (1 - background)) ^ 5
+                    delta2 = math.min(background - frontground, 0.001)
                 end
                 frontground = frontground + math.max(delta1, delta2)
                 frontlabel:setstyle { FlexGrow = frontground }

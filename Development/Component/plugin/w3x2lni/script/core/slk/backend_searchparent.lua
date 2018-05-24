@@ -97,10 +97,10 @@ local function try_obj(obj, may_obj)
     return diff_count
 end
 
-local function parse_obj(name, obj, default, config, ttype)
+local function parse_obj(name, obj, default, setting, ttype)
     local parent
     local count
-    local find_times = config.find_id_times or 0
+    local find_times = setting.find_id_times or 0
     local maybe = find_para(name, obj, default, ttype)
     if type(maybe) == 'table' then
         for try_name in pairs(maybe) do
@@ -126,7 +126,7 @@ local function processing(type, chunk)
         return
     end
     local default = w2l:get_default()[type]
-    local config = w2l.config
+    local setting = w2l.setting
     local names = {}
     for name in pairs(chunk) do
         names[#names+1] = name
@@ -140,7 +140,7 @@ local function processing(type, chunk)
     w2l.progress:start(1)
     local clock = os_clock()
     for i, name in ipairs(names) do
-        parse_obj(name, chunk[name], default, config, type)
+        parse_obj(name, chunk[name], default, setting, type)
         if os_clock() - clock >= 0.1 then
             clock = os_clock()
             w2l.messager.text(lang.script.SEARCH_TEMPLATE:format(chunk[name]._id, i, #names))

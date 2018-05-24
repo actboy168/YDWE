@@ -1,0 +1,588 @@
+﻿// burning oil
+[Abof]
+Name=燃烧之油
+Tip=燃烧之油
+Ubertip="用凝固汽油浇在粉碎者的弹药上，使它们能够点燃地面，烧伤敌人。"
+
+[Bbof]
+Bufftip="燃烧之油"
+Buffubertip="此单位已被燃烧之油烧着，它将不断的受到伤害。"
+
+// Berserk
+[Absk]
+Name=狂战士
+Tip="狂战士(|cffffcc00B|r)"
+Ubertip="让该单位增加<Absk,DataB1,%>%的攻击速度，但是同时会受到额外<Absk,DataC1,%>%的伤害。"
+Hotkey=B
+
+[Bbsk]
+Bufftip=狂战士
+Buffubertip="该单位处于狂热愤怒的作用之下，因此攻击力得到了加强，但是同时也会受到更多的伤害。"
+
+// Berserker Upgrade
+[Sbsk]
+Name=狂暴愤怒升级
+
+// Reinforced Burrows Upgrade
+[Arbr]
+Name=加强型地洞升级
+Tip=加强型地洞
+Ubertip="给予地洞加强型的护甲。"
+
+// Ancestral Spirit
+[Aast]
+Name=先祖幽灵
+Tip="远古神灵(|cffffcc00C|r)"
+Ubertip="将一个死亡的非英雄牛头人重新复活。复活的牛头人具有先前<Aast,DataA1,%>%的生命值。"
+Hotkey=C
+
+// Disenchant
+[Adch]
+Name=消魔
+EditorSuffix=(年长的)
+Tip="消魔(|cffffcc00D|r)"
+Ubertip="驱散目标区域单位身上所有的魔法效果。|n|cffffcc00对召唤出来的单位造成<Adch,DataB1>点的伤害。|r"
+Hotkey=D
+
+// Disenchant (new)
+[Adcn]
+Name=消魔
+Tip="消魔(|cffffcc00D|r)"
+Ubertip="驱散目标区域上的所有的魔法效果。|n|cffffcc00对敌对召唤单位造成<Adcn,DataB1>点的伤害。|r"
+Hotkey=D
+
+// Corporeal Form
+[Acpf]
+Name=灵肉形态
+Tip="灵肉形态(|cffffcc00F|r)"
+Untip="虚无形态(|cffffcc00F|r)"
+Ubertip="让灵魂行者处于灵肉形态，从而能进行攻击也会遭到敌方物理攻击的伤害。"
+Unubertip="让灵魂行者处于虚无形态，从而对物理攻击免疫，但是自己也会丧失物理进攻能力。此外灵魂行者能施放魔法，但是敌人的魔法也会对其造成额外的伤害。"
+Hotkey=F
+Unhotkey=F
+
+// Ethereal Form
+[Aetf]
+Name=虚无形态
+Tip="虚无形态(|cffffcc00F|r)"
+Untip="灵肉形态(|cffffcc00F|r)"
+Ubertip="让灵魂行者处于虚无形态，从而对物理攻击免疫，但是自己也会丧失物理进攻能力。此外灵魂行者能施放魔法，但是敌人的魔法也会对其造成额外的伤害。"
+Unubertip="让灵魂行者处于灵肉形态，从而能进行攻击也会遭到敌方物理攻击的伤害。"
+Hotkey=F
+Unhotkey=F
+
+// Spirit Link
+[Aspl]
+Name=灵魂锁链
+Tip="灵魂锁链(|cffffcc00R|r)"
+Ubertip="链接<Aspl,DataB1>个单位在一起。所有被灵魂锁链作用的单位都可以将其<Aspl,DataA1,%>%受到的伤害转移到其他单位身上。|n持续<Aspl,Dur1>秒。"
+Hotkey=R
+
+[Bspl]
+Bufftip=灵魂锁链
+Buffubertip="该单位处于灵魂锁链的作用之下，因此其遭到攻击的话会将其受到的伤害转移一部分到其他处于灵魂锁链作用之下的单位。"
+
+// Pack Mule
+[Apak]
+Name=行囊技能
+Tip="行囊技能"
+Ubertip="让该单位能为英雄携带物品。物品在处于该单位物品栏里的时候不能被使用。"
+
+// Liquid Fire
+[Aliq]
+Name=液体炸弹
+Tip="液体炸弹"
+Ubertip="对建筑物投掷出液体炸弹从而对其造成持续性的伤害。正在受到液体炸弹作用的建筑物不能被修复，并将其攻击速率下降<Aliq,DataC1,%>%。"
+
+// Unstable Concoction
+[Auco]
+Name=不稳定化合物
+Tip="不稳定化合物(|cffffcc00C|r)"
+Ubertip="制造出一次强力爆炸，对目标敌方空中单位造成<Auco,DataB1>点伤害，对周围敌空中单位造成<Auco,DataD1>点伤害。"
+Untip="|cffc3dbff点击右键以启动自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=C
+Unhotkey=C
+
+// Healing Wave
+[AOhw]
+Name=医疗波
+Tip=医疗波(|cffffcc00E|r) - [|cffffcc00等级 1|r],医疗波(|cffffcc00E|r) - [|cffffcc00等级 2|r],医疗波(|cffffcc00E|r) - [|cffffcc00等级 3|r]
+Ubertip="召唤出一道能跳跃<AOhw,DataB1>次的医疗能量波，对首个目标能恢复<AOhw,DataA1>点的生命值。每次跳跃都会削弱医疗波的医疗能力。","召唤出一道能跳跃<AOhw,DataB2>次的医疗能量波，对首个目标能恢复<AOhw,DataA2>点的生命值。每次跳跃都会削弱医疗波的医疗能力。","召唤出一道能跳跃<AOhw,DataB3>次的医疗能量波，对首个目标能恢复<AOhw,DataA3>点的生命值。每次跳跃都会削弱医疗波的医疗能力。"
+Hotkey=E
+Researchtip="学习医疗波(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="召唤出一道能进行跳跃的医疗能量波，每次跳跃都会削弱医疗波的医疗能力。|n|n|cffffcc00等级 1|r - 恢复<AOhw,DataA1>点生命值，跳跃<AOhw,DataB1>次。|n|cffffcc00等级 2|r - 恢复<AOhw,DataA2>点生命值，跳跃<AOhw,DataB2>次。|n|cffffcc00等级 3|r - 恢复<AOhw,DataA3>点生命值，跳跃<AOhw,DataB3>次。"
+Researchhotkey=E
+
+// Hex
+[AOhx]
+Name=妖术
+Tip=妖术(|cffffcc00X|r) - [|cffffcc00等级 1|r],妖术(|cffffcc00X|r) - [|cffffcc00等级 2|r],妖术(|cffffcc00X|r) - [|cffffcc00等级 3|r]
+Ubertip="让目标单位在<AOhx,Dur1>秒内变成一只随机的小动物<AOhx,Dur1>秒。","让目标单位在<AOhx,Dur1>秒内变成一只随机的小动物<AOhx,Dur2>秒。","让目标单位在<AOhx,Dur1>秒内变成一只随机的小动物<AOhx,Dur3>秒。"
+Hotkey=X
+Researchtip="学习妖术(|cffffcc00X|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="让目标单位在<AOhx,Dur1>秒内变成一只随机的小动物, 废除其特殊技能的使用。|n|n|cffffcc00等级 1|r - 持续<AOhx,Dur1>秒。|n|cffffcc00等级 2|r - 持续<AOhx,Dur2>秒。|n|cffffcc00等级 3|r - 持续<AOhx,Dur3>秒。"
+Researchhotkey=X
+
+[BOhx]
+Bufftip=妖术
+Buffubertip="该单位受到了妖术的作用，因此其变成了一只小动物。"
+
+// Serpent Ward
+[AOsw]
+Name=毒蛇守卫
+Tip=毒蛇守卫(|cffffcc00W|r) - [|cffffcc00等级 1|r],毒蛇守卫(|cffffcc00W|r) - [|cffffcc00等级 2|r],毒蛇守卫(|cffffcc00W|r) - [|cffffcc00等级 3|r]
+Ubertip="召唤出一个固定不动的毒蛇守卫来为暗影猎手攻击。守卫具有<osp1,realHP>点生命值并对魔法免疫。攻击力为<osp1,mindmg1> - <osp1,maxdmg1>点。|n持续<AOsw,Dur1>秒。|n|n|cffffcc00能攻击地面和空中单位。|r","唤出一个固定不动的毒蛇守卫来为暗影猎手攻击。守卫具有<osp2,realHP>点生命值并对魔法免疫。攻击力为<osp2,mindmg1> - <osp2,maxdmg1>点。|n持续<AOsw,Dur1>秒。|n|n|cffffcc00能攻击地面和空中单位。|r","唤出一个固定不动的毒蛇守卫来为暗影猎手攻击。守卫具有<osp3,realHP>点生命值并对魔法免疫。攻击力为<osp3,mindmg1> - <osp3,maxdmg1>点。|n持续<AOsw,Dur1>秒。|n|n|cffffcc00能攻击地面和空中单位。|r"
+Hotkey=W
+Researchtip="学习毒蛇守卫(|cffffcc00W|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="召唤出一个固定不动的毒蛇守卫来为暗影猎手攻击。并对魔法免疫。|n持续<AOsw,Dur1>秒。|n|n|cffffcc00能攻击地面和空中单位。|r|n|n|cffffcc00等级 1|r - <osp1,realHP>点生命值，<osp1,mindmg1> - <osp1,maxdmg1>点攻击力。|n|cffffcc00等级 2|r - <osp2,realHP>点生命值，<osp2,mindmg1> - <osp2,maxdmg1>点攻击力。|n|cffffcc00等级 3|r - <osp3,realHP>点生命值，<osp3,mindmg1> - <osp3,maxdmg1>点攻击力。"
+Researchhotkey=W
+
+// Generic ward buff
+[BOwd]
+Bufftip=守卫
+Buffubertip="召唤出来的单位会受到驱逐魔法的伤害。"
+
+// Voodoo
+[AOvd]
+Name=巫毒
+Tip=巫毒(|cffffcc00V|r)
+Ubertip="将在暗影猎手附近一定区域内的所有友军单位都变为无敌。|n但是暗影猎手自己不会变为无敌。|n持续<AOvd,Dur1>秒。"
+Hotkey=V
+Researchtip="学习巫毒(|cffffcc00V|r)"
+Researchubertip="将在暗影猎手附近一定区域内的所有友军单位都变为无敌。|n但是暗影猎手自己不会变为无敌。|n持续<AOvd,Dur1>秒。"
+Researchhotkey=V
+
+[BOvd]
+Bufftip=巫毒
+Buffubertip="该单位处在巫毒的作用之下, 因此暂时是无敌的。"
+
+// firebolt
+[Awfb]
+Name=霹雳闪电
+Tip=霹雳闪电(|cffffcc00F|r)
+Ubertip="能将敌人击晕。"
+Hotkey=F
+EditorSuffix=(巫师)
+
+[Acha]
+Name=混乱的
+
+[Sca1]
+EditorSuffix= (兽族步兵)
+
+[Sca2]
+EditorSuffix= (掠夺者)
+
+[Sca3]
+EditorSuffix= (萨满祭司)
+
+[Sca4]
+EditorSuffix= (科多兽)
+
+[Sca5]
+EditorSuffix= (苦工)
+
+[Sca6]
+EditorSuffix= (格罗姆)
+
+[Achl]
+Name=装载
+
+// Pulverize
+[Awar]
+Name=粉碎
+Tip=粉碎
+Ubertip="给予<Awar,DataA1>%的概率使得攻击能对周围的单位造成<Awar,DataB1>点的伤害。"
+
+[Abtl]
+Name=战斗位置
+Tip=战斗位置(|cffffcc00B|r)
+Ubertip="使得附近的苦工跑入地洞从而对来犯的敌人进行反击。"
+Hotkey=B
+
+[Astd]
+Name=卸载苦工
+Tip=卸载苦工(|cffffcc00D|r)
+Ubertip="使得地洞内的苦工重新回到自己的工作岗位上。"
+Hotkey=D
+
+// Ensnare
+[Aens]
+Name=诱捕
+Tip=诱捕(|cffffcc00E|r)
+Ubertip="能将一个目标空中单位固定在地面上，使其在<Aens,Dur1>秒内不能移动。"
+Hotkey=E
+
+// Ensnare buff on ground units
+[Beng]
+Bufftip=诱捕
+Buffubertip="该单位被诱捕了，因此其不能移动和飞行。"
+EditorSuffix= (地面的)
+
+// Ensnare buff on air units
+[Bena]
+Bufftip=诱捕
+Buffubertip="该单位被诱捕了，因此其不能移动和飞行。"
+EditorSuffix= (空中的)
+
+// Pulverize - passive
+[Awar]
+Name=粉碎
+
+// Devour
+[Adev]
+Name=吞噬
+Tip=吞噬(|cffffcc00D|r)
+Ubertip="吞噬敌方目标单位，将其慢慢咀嚼，每秒对其造成<Advc,DataC1>点的伤害。在咀嚼目标的过程中，如果科多兽遭到杀害，那么它肚中的被吞噬单位就会从中跳出来。"
+Hotkey=D
+
+// Devour buff
+[Bdvv]
+Bufftip=吞噬
+Buffubertip="该单位被吞噬了，因此会持续地受到伤害。"
+
+// Purge (classic)
+[Aprg]
+Name=净化
+Tip=净化(|cffffcc00G|r)
+Ubertip="去除目标单位上的所有魔法效果，并以<Aprg,DataA1>分之1的速度来减慢其移动速度。目标单位会在<Aprg,Dur1>秒内慢慢恢复自己的速度。|n|cffffcc00对召唤出来的单位造成<Aprg,DataC1>点的伤害。|r"
+Hotkey=G
+
+// Purge (expansion melee)
+[Apg2]
+Name=净化
+Tip=净化(|cffffcc00G|r)
+Ubertip="去除目标单位身上所有的魔法效果。敌方单位会被固定住,持续时间为<Apg2,DataD1>秒。并且他们的移动速度也会以<Apg2,DataA1>的一个因子值来被减慢。不过在<Apg2,Dur1>秒的时间内，他们的移动速度会慢慢地恢复过来。|n|cffffcc00对召唤出来地单位造成<Apg2,DataC1>点的伤害。|r"
+Hotkey=G
+
+[Bprg]
+Bufftip=净化
+Buffubertip="该单位受到了净化的作用; 因此其移动速度被减慢了，而且身上所有的魔法效果都消失了。"
+
+// Lightning Shield
+[Alsh]
+Name=闪电护盾
+Tip=闪电护盾(|cffffcc00L|r)
+Ubertip="在目标单位周围形成一个带电护罩，能对其周围的单位造成每秒<Alsh,DataA1>点的伤害。|n持续<Alsh,Dur1>秒。"
+Hotkey=L
+
+[Blsh]
+Bufftip=闪电护盾
+Buffubertip="该单位处在闪电护盾的作用之下，因此周围所有的单位都会受到一定的伤害。"
+
+// Bloodlust
+[Ablo]
+Name=嗜血术
+Tip=嗜血术(|cffffcc00B|r)
+Ubertip="增加一个友军单位<Ablo,DataA1,%>%的攻击速度和<Ablo,DataB1,%>%的移动速度。|n持续<Ablo,Dur1>秒。"
+Untip="|cffc3dbff点击右键以启动自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=B
+Unhotkey=B
+
+[Bblo]
+Bufftip=嗜血术
+Buffubertip="该单位具有嗜血术，因此其攻击速度和移动速度都加快了。"
+
+// Sentry Ward
+[Aeye]
+Name=岗哨守卫
+Tip=岗哨守卫(|cffffcc00W|r)
+Ubertip="能召唤出一个固定隐形的守卫来监视一定的区域。|n能看见隐形单位。|n持续<Aeye,Dur1>秒。"
+Hotkey=W
+
+[Beye]
+Bufftip=岗哨守卫
+Buffubertip="召唤出来的单位会受到驱逐魔法的伤害。"
+
+// Stasis Trap spell
+[Asta]
+Name=静止陷阱
+Tip=静止陷阱(|cffffcc00T|r)
+Ubertip="召唤出一个固定隐形的陷阱来击晕靠近的敌方地面单位。当有敌方的地点单位靠近陷阱的时候会自动激活守卫。|n持续<Asta,Dur1>秒。|n眩晕效果持续<Asta,DataD1>秒。"
+Hotkey=T
+
+// Stasis Trap trigger buff
+[Bstt]
+Bufftip=静止陷阱
+Buffubertip="这个守卫被激活的话会击晕周围敌方的地面单位。"
+
+// Stasis Trap effect buff
+[Bsta]
+Bufftip=静止陷阱
+Buffubertip="该单位被静止陷阱击中了，因此不能移动，进攻和施放魔法。"
+
+// Healing Ward
+[Ahwd]
+Name=治疗守卫
+Tip=治疗守卫(|cffffcc00E|r)
+Ubertip="召唤出一个固定的守卫，该守卫能以每秒<Aoar,DataA1,%>%的速度来恢复周围友军非机械单位的生命值。|n持续<Ahwd,Dur1>秒。"
+Hotkey=E
+EditorSuffix= (巨魔巫医)
+
+[Bhwd]
+Bufftip=治疗守卫
+Buffubertip="这个守卫能恢复周围单位的生命值。"
+
+// Healing Ward Aura
+[Aoar]
+Name=治疗守卫光环
+EditorSuffix= (治疗守卫)
+
+[Boar]
+Bufftip=治疗守卫光环
+Buffubertip="加快生命值恢复速度。"
+
+// Envenomed Spears
+[Aven]
+Name=浸毒武器
+Tip=浸毒武器
+Ubertip="能造成每秒<Aven,DataA1>点的毒性伤害。|n持续<Aven,Dur1>秒。"
+
+// currently unused
+// Poison Sting
+[Apoi]
+Name=毒刺
+Hotkey=T
+Tip=毒刺(|cffffcc00T|r)
+
+// Poison Sting (Orb of Venom)
+[Apo2]
+Name=毒刺
+Hotkey=T
+Tip=毒刺(|cffffcc00T|r)
+EditorSuffix= (毒液之球)
+
+// Poison Sting Non Stack Buff
+[Bpoi]
+Bufftip=毒
+Buffubertip="该单位被毒刺攻击了, 因此会持续受到伤害。"
+EditorSuffix= (没有堆积)
+
+// Poison Sting Stack Buff
+[Bpsd]
+Bufftip=毒
+Buffubertip="该单位被毒刺攻击了, 因此会持续受到伤害。"
+EditorSuffix= (堆积)
+
+[Bpsi]
+EditorName=毒药(信息)
+
+// currently unused
+// Tracking (Passive)
+[Anit]
+Name=跟踪
+
+// Spiked Barricades (Passive)
+[Aspi]
+Name=尖形路障
+
+// Pillage (Passive)
+[Asal]
+Name=掠夺
+Tip=掠夺
+Ubertip="能使对敌方建筑物的攻击带来一定的资源。"
+
+// War Drums Aura
+[Aakb]
+Name=战鼓
+Tip=战鼓
+Ubertip="能增加周围友军单位的攻击力。"
+
+[Bakb]
+Bufftip=战鼓
+Buffubertip="该单位受到了战鼓的作用，因此攻击力得到了加强。"
+
+// Wind Walk
+[AOwk]
+Name=疾步风
+Tip=疾步风(|cffffcc00W|r) - [|cffffcc00等级 1|r],疾步风(|cffffcc00W|r) - [|cffffcc00等级 2|r],疾步风(|cffffcc00W|r) - [|cffffcc00等级 3|r]
+Ubertip="使得剑圣在<AOwk,Dur1>秒内隐形并增加<AOwk,DataB1,%>%的移动速度。如果此时剑圣进行攻击的话，那么就不再隐形，但是攻击力会增加<AOwk,DataC1>点。","使得剑圣在<AOwk,Dur2>秒内隐形并增加<AOwk,DataB2,%>%的移动速度。如果此时剑圣进行攻击的话，那么就不再隐形，但是攻击力会增加<AOwk,DataC2>点。","使得剑圣在<AOwk,Dur3>秒内隐形并增加<AOwk,DataB3,%>%的移动速度。如果此时剑圣进行攻击的话，那么就不再隐形，但是攻击力会增加<AOwk,DataC3>点。"
+Hotkey=W
+Researchtip="学习疾步风(|cffffcc00W|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="使得剑圣在一定时间内隐形并加快移动速度，如果此时进行攻击的话，那么就不再隐形但会造成更多的伤害。|n|n|cffffcc00等级 1|r -消耗<AOwk,Cost1>点魔法，加快<AOwk,DataB1,%>%的移动速度，增加<AOwk,DataC1>点的伤害，持续<AOwk,Dur1>秒。|n|cffffcc00等级 2|r -消耗<AOwk,Cost2>点魔法，加快<AOwk,DataB2,%>%的移动速度，增加<AOwk,DataC2>点的伤害，持续<AOwk,Dur2>秒。|n|cffffcc00等级 3|r -消耗<AOwk,Cost3>点魔法，加快<AOwk,DataB3,%>%的移动速度，增加<AOwk,DataC3>点的伤害，持续<AOwk,Dur3>秒。"
+Researchhotkey=W
+
+[BOwk]
+Bufftip=疾步风
+Buffubertip="此单位处于疾步风的作用之下， 因此其变为隐形了，移动地也更加快了。隐形状态中的第一次攻击会造成额外的伤害。"
+
+// Mirror Image
+[AOmi]
+Name=镜像
+Tip=镜像(|cffffcc00R|r) - [|cffffcc00等级 1|r],镜像(|cffffcc00R|r) - [|cffffcc00等级 2|r],镜像(|cffffcc00R|r) - [|cffffcc00等级 3|r]
+Ubertip="制造出<AOmi,DataA1>个幻象来迷惑敌人。同时也会驱逐掉剑圣身上所有的魔法效果。|n持续<AOmi,Dur1>秒。","制造出<AOmi,DataA2>个幻象来迷惑敌人。同时也会驱逐掉剑圣身上所有的魔法效果。|n持续<AOmi,Dur1>秒。","制造出<AOmi,DataA3>个幻象来迷惑敌人。同时也会驱逐掉剑圣身上所有的魔法效果。|n持续<AOmi,Dur1>秒。"
+Hotkey=R
+Researchtip="学习镜像(|cffffcc00R|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="制造出一定数量的幻象来迷惑敌人。同时也会驱逐掉剑圣身上所有的魔法效果。|n|n|cffffcc00等级 1|r - 创造出<AOmi,DataA1>个幻象。|n|cffffcc00等级 2|r - 创造出<AOmi,DataA2>个幻象。|n|cffffcc00等级 3|r - 创造出<AOmi,DataA3>个幻象。"
+Researchhotkey=R
+
+[BOmi]
+Bufftip=镜像
+Buffubertip="一个剑圣的幻象。"
+
+// Critical Strike
+[AOcr]
+Name=致命一击
+Tip=致命一击 - [|cffffcc00等级 1|r],致命一击 - [|cffffcc00等级 2|r],致命一击 - [|cffffcc00等级 3|r]
+Ubertip="给予<AOcr,DataA1>%的概率使得剑圣的攻击能造成<AOcr,DataB1>倍于一般攻击的伤害值。","给予<AOcr,DataA2>%的概率使得剑圣的攻击能造成<AOcr,DataB2>倍于一般攻击的伤害值。","给予<AOcr,DataA3>%的概率使得剑圣的攻击能造成<AOcr,DataB3>倍于一般攻击的伤害值。"
+Researchtip="学习致命一击(|cffffcc00C|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="给予一定的概率使得攻击力能大大增强。|n|n|cffffcc00等级 1|r -<AOcr,DataA1>%的概率，<AOcr,DataB1>倍于一般攻击的伤害值。|n|cffffcc00等级 2|r -<AOcr,DataA2>%的概率，<AOcr,DataB2>倍于一般攻击的伤害值。|n|cffffcc00等级 3|r -<AOcr,DataA1>%的概率，<AOcr,DataB3>倍于一般攻击的伤害值。"
+Researchhotkey=C
+
+// Bladestorm
+[AOww]
+Name=剑刃风暴
+Tip=剑刃风暴(|cffffcc00B|r)
+Ubertip="使得剑圣周围能形成一股具有极强攻击力的剑刃风暴。对周围敌方的地面单位造成每秒<AOww,DataA1>点的伤害。|n持续<AOww,Dur1>秒。"
+Hotkey=B
+Researchtip=学习剑刃风暴(|cffffcc00B|r)
+Researchubertip="使得剑圣周围能形成一股具有极强攻击力的剑刃风暴。对周围敌方的地面单位造成每秒<AOww,DataA1>点的伤害。|n持续<AOww,Dur1>秒。"
+Researchhotkey=B
+Globalmessage=
+Globalsound=
+
+// Chain Lightning
+[AOcl]
+Name=闪电链
+Tip=闪电链(|cffffcc00C|r) - [|cffffcc00等级 1|r],闪电链(|cffffcc00C|r) - [|cffffcc00等级 2|r],闪电链(|cffffcc00C|r) - [|cffffcc00等级 3|r]
+Ubertip="投掷出一道具有攻击力的闪电，第一个单位造成<AOcl,DataA1>点的伤害，然后闪电跳跃向周围<AOcl,DataB1>个敌方的其他单位。每次跳跃都会减小闪电的攻击力。","投掷出一道具有攻击力的闪电，第一个单位造成<AOcl,DataA2>点的伤害，然后闪电跳跃向周围<AOcl,DataB2>个敌方的其他单位。每次跳跃都会减小闪电的攻击力。","投掷出一道具有攻击力的闪电，第一个单位造成<AOcl,DataA3>点的伤害，然后闪电跳跃向周围<AOcl,DataB3>个敌方的其他单位。每次跳跃都会减小闪电的攻击力。"
+Hotkey=C
+Researchtip="学习闪电链(|cffffcc00C|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="投掷出一道能进行跳跃的闪电。每次跳跃都会减小闪电的攻击力。|n|n|cffffcc00等级 1|r - <AOcl,DataA1>点伤害，跳跃<AOcl,DataB1>次。|n|cffffcc00等级 2|r - <AOcl,DataA2>点伤害，跳跃<AOcl,DataB2>次。|n|cffffcc00等级 3|r - <AOcl,DataA3>点伤害，跳跃<AOcl,DataB3>次。"
+Researchhotkey=C
+
+// Far Sight
+[AOfs]
+Name=透视
+Tip=透视(|cffffcc00F|r) - [|cffffcc00等级 1|r],透视(|cffffcc00F|r) - [|cffffcc00等级 2|r],透视(|cffffcc00F|r) - [|cffffcc00等级 3|r]
+Ubertip="能在<AOfs,Dur1>秒内驱散目标区域内的战争迷雾。也能看到隐形单位。"
+Hotkey=F
+Researchtip="学习透视(|cffffcc00F|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="能在一定时间内驱散目标区域内的战争迷雾。还能看见敌方的隐形单位。|n|n|cffffcc00等级 1|r - 消耗<AOfs,Cost1>点魔法。|n|cffffcc00等级 2|r - 消耗<AOfs,Cost2>点魔法。|n|cffffcc00等级 3|r - 消耗<AOfs,Cost3>点魔法。"
+Researchhotkey=F
+
+// Feral Spirit
+[AOsf]
+Name=野兽幽魂
+Tip=野兽幽魂(|cffffcc00T|r) - [|cffffcc00等级 1|r],野兽幽魂(|cffffcc00T|r) - [|cffffcc00等级 2|r],野兽幽魂(|cffffcc00T|r) - [|cffffcc00等级 3|r]
+Ubertip="召唤出<AOsf,DataB1>条幽狼来为你战斗。每头狼具有<osw1,realHP>点生命值和 <osw1,mindmg1>-<osw1,maxdmg1>点的攻击力。|n持续<AOsf,Dur1>秒。|n|n|cffffcc00能攻击地面单位。|r","召唤出<AOsf,DataB2>条拥有致命一击技能的幽狼来为你战斗。每头狼具有<osw2,realHP>点生命值和<osw2,mindmg1>-<osw2,maxdmg1>点的攻击力。|n持续<AOsf,Dur2>秒。|n|n|cffffcc00能攻击地面单位。|r","召唤出<AOsf,DataB3>条拥有致命一击和隐形技能的幽狼来为你战斗。每头狼具有<osw3,realHP>点生命值和<osw3,mindmg1>-<osw3,maxdmg1>点的攻击力。|n持续<AOsf,Dur3>秒。|n|n|cffffcc00能攻击地面单位。|r"
+Researchtip="学习野兽幽魂(|cffffcc00T|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="召唤出<AOsf,DataB1>头幽狼来为你战斗。|n持续<AOsf,Dur1>秒。|n|n|cffffcc00等级 1|r -<osw1,realHP>点生命值，<osw1,mindmg1>-<osw1,maxdmg1>点的攻击力。|n|cffffcc00等级 2|r -<osw2,realHP>点生命值，<osw2,mindmg1>-<osw2,maxdmg1>点攻击力，且具有致命一击技能。|n|cffffcc00等级 3|r -<osw3,realHP>点生命值，<osw3,mindmg1>-<osw3,maxdmg1>点攻击力，且具有致命一击和隐形技能。"
+Hotkey=T
+Researchhotkey=T
+
+
+[BOsf]
+Bufftip=野兽幽魂
+Buffubertip="召唤出来的单位会受到驱逐魔法的伤害。"
+
+// Earthquake
+[AOeq]
+Name=地震
+Tip=地震(|cffffcc00E|r)
+Ubertip="使得大地发生颤抖，对有效范围内的建筑物造成每秒<AOeq,DataB1>点的伤害，并使该范围内的单位减速<AOeq,DataC1,%>%。|n持续<AOeq,Dur1>秒。"
+Hotkey=E
+Researchtip="学习地震(|cffffcc00E|r)"
+Researchubertip="使得大地发生颤抖，对有效范围内的建筑物造成每秒<AOeq,DataB1>点的伤害，并使该范围内的单位减速<AOeq,DataC1,%>%。持续<AOeq,Dur1>秒。"
+Researchhotkey=E
+
+[BOeq]
+Bufftip=地震
+Buffubertip="该单位处于地震的作用之下，因此其移动速度被减慢了。"
+
+// Shockwave
+[AOsh]
+Name=震荡波
+Tip=震荡波(|cffffcc00W|r) - [|cffffcc00等级 1|r],震荡波(|cffffcc00W|r) - [|cffffcc00等级 2|r],震荡波(|cffffcc00W|r) - [|cffffcc00等级 3|r]
+Ubertip="能发出一道向前的能量波，对一条线上的敌方地面单位造成<AOsh,DataA1>点的伤害。","能发出一道向前的能量波，对一条线上的敌方地面单位造成<AOsh,DataA2>点的伤害。","能发出一道向前的能量波，对一条线上的敌方地面单位造成<AOsh,DataA3>点的伤害。"
+Hotkey=W
+Researchtip="学习震荡波(|cffffcc00W|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="能发出一道向前的能量波，对一条线上的敌方地面单位造成一定的伤害。|n|n|cffffcc00等级 1|r - <AOsh,DataA1>点的伤害。|n|cffffcc00等级 2|r - <AOsh,DataA2>点的伤害。|n|cffffcc00等级 3|r - <AOsh,DataA3>点的伤害。"
+Researchhotkey=W
+
+// Endurance Aura
+[AOae]
+Name=耐久光环
+Tip=耐久光环 - [|cffffcc00等级 1|r],耐久光环 - [|cffffcc00等级 2|r],耐久光环 - [|cffffcc00等级 3|r]
+Ubertip="增加周围单位<AOae,DataA1,%>%的移动速度和<AOae,DataB1,%>%的攻击速度。","增加周围单位<AOae,DataA2,%>%的移动速度和<AOae,DataB2,%>%的攻击速度。","增加周围单位<AOae,DataA3,%>%的移动速度和<AOae,DataB3,%>%的攻击速度。"
+Researchtip="学习耐久光环(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="能增加周围单位的移动速度和攻击速度。|n|n|cffffcc00等级 1|r - 提高<AOae,DataA1,%>%的移动速度和<AOae,DataB1,%>%的攻击速度。|n|cffffcc00等级 2|r - 提高<AOae,DataA2,%>%的移动速度和<AOae,DataB2,%>%的攻击速度。|n|cffffcc00等级 3|r - 提高<AOae,DataA3,%>%的移动速度和<AOae,DataB3,%>%的攻击速度。"
+Researchhotkey=E
+
+[BOae]
+Bufftip=耐久光环
+Buffubertip="该单位处在耐久光环的作用之下，因此其移动速度和攻击速度都加快了。"
+
+// Reincarnation
+[AOre]
+Name=重生
+Tip=重生
+Ubertip="使当牛头人酋长被杀时，它就会自动复活。重生技能有<AOre,Cool1>秒的魔法施放间隔时间。"
+Researchtip=学习重生(|cffffcc00R|r)
+Researchubertip="使当牛头人酋长被杀时，它就会自动复活。重生技能有<AOre,Cool1>秒的魔法施放间隔时间。"
+Researchhotkey=R
+Globalmessage=
+Globalsound=
+
+// War Stomp (Chieftan)
+[AOws]
+Name=战争践踏
+Tip=战争践踏(|cffffcc00T|r) - [|cffffcc00等级 1|r],战争践踏(|cffffcc00T|r) - [|cffffcc00等级 2|r],战争践踏(|cffffcc00T|r) - [|cffffcc00等级 3|r]
+Ubertip="重击地面，对周围的地面单位造成<AOws,DataA1>点的伤害并在<AOws,Dur1>秒内使其处于昏晕状态。","重击地面，对周围的地面单位造成<AOws,DataA2>点的伤害并在<AOws,Dur2>秒内使其处于昏晕状态。","重击地面，对周围的地面单位造成<AOws,DataA3>点的伤害并在<AOws,Dur3>秒内使其处于昏晕状态。"
+Researchtip="学习战争践踏(|cffffcc00T|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="重击地面，对周围的地面单位造成一定的伤害。|n|n|cffffcc00等级 1|r - <AOws,DataA1>点伤害，<AOws,Dur1>秒眩晕效果。|n|cffffcc00等级 2|r - <AOws,DataA2>点伤害，<AOws,Dur2>秒眩晕效果。|n|cffffcc00等级 3|r - <AOws,DataA3>点伤害，<AOws,Dur3>秒眩晕效果。"
+Hotkey=T
+Researchhotkey=T
+
+
+[BOws]
+Bufftip=战争践踏
+Buffubertip="该单位受到了战争践踏的作用，因此其在短时间内不能移动，攻击和施放魔法。"
+
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BOea]
+EditorName=地震 (施法者)
+
+[BOsh]
+EditorName=震荡波(施法者)
+
+[BOvc]
+EditorName=巫毒(施法者)
+
+[BOww]
+EditorName=剑刃风暴(施法者)
+
+[Bdig]
+EditorName=吞噬 (施法者)
+
+[Bens]
+EditorName=诱捕(一般的)
+
+[Bliq]
+EditorName=液体炸弹
+
+[Blsa]
+EditorName=闪电护盾(施法者)
+
+[XOeq]
+EditorName=地震 (效果)
+
+[XOre]
+EditorName=重生(效果)
+
+[Xbof]
+EditorName=燃烧之油(效果)
+
+[Xfos]
+EditorName=建筑物伤害 – 兽族  小
+
+[Xfom]
+EditorName=建筑物伤害 – 兽族  中
+
+[Xfol]
+EditorName=建筑物伤害 – 兽族  大

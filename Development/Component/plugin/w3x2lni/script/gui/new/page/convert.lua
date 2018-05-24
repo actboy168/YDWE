@@ -50,12 +50,12 @@ local function update()
     end
     data.progress.value = backend.progress / 100
     update_show()
-    if #worker.error > 0 then
-        push_error(worker.error)
-        worker.error = ''
-        return 0, 1
-    end
     if worker.exited then
+        if #worker.error > 0 then
+            push_error(worker.error)
+            worker.error = ''
+            return 0, 1
+        end
         if worker.exit_code == 0 then
             return 1000, 0
         else

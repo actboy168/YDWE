@@ -233,11 +233,7 @@ end
 return function (w2l_, wtg_)
     w2l = w2l_
     wtg = wtg_
-    local state_, err = w2l:trigger_data()
-    state = state_
-    if not state_ then
-        error(err)
-    end
+    state = w2l:frontend_trg()
     unpack_index = 1
     chunk = {}
 

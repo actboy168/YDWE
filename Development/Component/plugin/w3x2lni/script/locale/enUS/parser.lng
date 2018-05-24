@@ -1,0 +1,82 @@
+[PARSER_ERROR]
+[%s] line [%d]: %s
+[VAR_NO_EXISTS]
+Variable [%s] not exists
+[FUNCTION_NO_EXISTS]
+Function [%s] not exists
+[ERROR_ADD]
+Attempt to perform addition operations between [%s] and [%s]
+[ERROR_SUB]
+Attempt to perform subtraction operation between [%s] and [%s]
+[ERROR_MUL]
+Attempt to perform multiplication operations between [%s] and [%s]
+[ERROR_DIV]
+Attempt to perform division operations between [%s] and [%s]
+[ERROR_NEG]
+Attempt to perform negative operations to [%s]
+[ERROR_EQUAL]
+Attempt to judgment [%s] with [%s]
+[ERROR_COMPARE]
+Attempt to compare [%s] with [%s]
+[UNKNOWN_EXP]
+Attempt to parse unknown exp
+[UNKNOWN_EXP_TYPE]
+Attempt to parse unknown exp type
+[ERROR_TYPE]
+Undefined type [%s]
+[ERROR_DEFINE_NATIVE_TYPE]
+Native type cannot be redefined
+[ERROR_REDEFINE_TYPE]
+Type [%s] redefined --> Defined in [%s] line [%d]
+[ERROR_REDEFINE_GLOBAL]
+Global [%s] redefined --> Defined in [%s] line [%d]
+[ERROR_CONSTANT_INIT]
+Constant must be initialized
+[ERROR_UNDEFINE_TYPE]
+Undefined type [%s]
+[ERROR_ARRAY_INIT]
+Unable to initialize an array
+[ERROR_GLOBAL_AFTER_FUNCTION]
+Globals must defined before functions
+[ERROR_LOCAL_NAME_WITH_ARG]
+Conflicted name between local [%s] and function arg
+[ERROR_EXITWHEN]
+Unable to use `exitwhen` outside of loop
+[UNKNOWN_LINE]
+Unknown line:
+[UNKNOWN_CHUNK]
+Unknown chunk:
+[ERROR_POS]
+
+
+%s
+
+[%s] line %d :
+===========================
+%s
+===========================
+
+[CONFLICT_COMMENT_LINE]
+Conflicted comment line
+[ERROR_KEY_WORD]
+Keyword [%s] cannot use as function name or variable name
+[ERROR_ESC]
+Unlawful escape character
+[ERROR_REAL]
+Unlawful real
+[ERROR_INT16]
+Unlawful int16
+[ERROR_INT256_COUNT]
+Int256 must be composed of 1 or 4 characters
+[ERROR_INT256_ESC]
+4 character int256 cannot use escape characters
+[ERROR_VAR_TYPE]
+Variable type error
+[ERROR_EXTENDS_TYPE]
+Type extends error
+[ERROR_ENDGLOBALS]
+Need `endglobals`
+[ERROR_ENDFUNCTION]
+Need `endfunction`
+[SYNTAX_ERROR]
+Synatx error

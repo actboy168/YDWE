@@ -1,6 +1,7 @@
 local messager = require 'share.messager'
 local config = require 'share.config'
 local lang = require 'share.lang'
+local get_lni_map = require 'backend.get_lni_map'
 
 local function show_config(section, k, v)
     local map = config:raw_map(section, k)
@@ -18,7 +19,7 @@ local function show_config(section, k, v)
 end
 
 return function (command)
-    config:open_map()
+    config:open_map(get_lni_map())
     if not command[2] then
         messager.raw(lang.raw.CONFIG_DISPLAY .. '\r\n\r\n')
         for section, tbl in pairs(config) do

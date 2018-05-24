@@ -92,42 +92,48 @@
 无效的语言，必须是以下值：
 
 
-[CONFIG_GLOBAL_WAR3]
-使用魔兽数据文件的目录，可以是以下值：
+[CONFIG_GLOBAL_DATA]
+使用数据文件的目录，可以是以下值：
 
 
-[CONFIG_GLOBAL_WAR3_ERROR]
+[CONFIG_GLOBAL_DATA_ERROR]
 无效的目录，必须是以下值：
 
 
-[CONFIG_GLOBAL_UI]
+[CONFIG_GLOBAL_DATA_UI]
 使用触发器数据的目录，可以是以下值：
 
-        ${YDWE}        搜索本地YDWE使用的触发器文件
+        ${DATA}           使用global.data的值
+        ${YDWE}           搜索本地YDWE使用的触发器文件
 
-[CONFIG_GLOBAL_UI_ERROR]
+[CONFIG_GLOBAL_DATA_UI_ERROR]
 无效的目录，必须是以下值：
 
-        ${YDWE}        搜索本地YDWE使用的触发器文件
+        ${DATA}           使用global.data的值
+        ${YDWE}           搜索本地YDWE使用的触发器文件
 
-[CONFIG_GLOBAL_META]
+[CONFIG_GLOBAL_DATA_META]
 使用编辑器数据的目录，可以使以下值：
 
+        ${DATA}           使用global.data的值
         ${DEFAULT}        使用正确的编辑器数据
 
-[CONFIG_GLOBAL_META_ERROR]
+[CONFIG_GLOBAL_DATA_META_ERROR]
 无效的目录，必须是以下值：
 
+        ${DATA}           使用global.data的值
         ${DEFAULT}        使用正确的编辑器数据
 
-[CONFIG_GLOBAL_WES]
+[CONFIG_GLOBAL_DATA_WES]
 使用编辑器文本的目录，可以使以下值：
 
+        ${DATA}           使用global.data的值
         ${DEFAULT}        使用默认的编辑器字符串
 
-[CONFIG_GLOBAL_WES_ERROR]
+[CONFIG_GLOBAL_DATA_WES_ERROR]
 无效的目录，必须是以下值：
 
+        ${DATA}           使用global.data的值
         ${DEFAULT}        使用默认的编辑器字符串
 
 [CONFIG_GLOBAL_PLUGIN]

@@ -60,7 +60,7 @@ local function convert_wtg(w2l)
     w2l.progress:finish()
     w2l.progress:start(0.5)
     if wtg and wct then
-        if w2l.config.mode == 'lni' then
+        if w2l.setting.mode == 'lni' then
             xpcall(function ()
                 wtg_data = w2l:frontend_wtg(wtg)
                 wct_data = w2l:frontend_wct(wct)
@@ -82,8 +82,8 @@ local function convert_wtg(w2l)
     w2l.progress:finish()
     w2l.progress:start(1)
     local need_convert_wtg = true
-    if wtg_data and wct_data and not w2l.config.remove_we_only then
-        if w2l.config.mode == 'lni' then
+    if wtg_data and wct_data and not w2l.setting.remove_we_only then
+        if w2l.setting.mode == 'lni' then
             local files = w2l:backend_lml(wtg_data, wct_data, w2l.slk.wts)
             for filename, buf in pairs(files) do
                 w2l:file_save('trigger', filename, buf)
@@ -256,7 +256,7 @@ local function to_slk(w2l, slk)
     local report = { n = 0 }
     local object = {}
     local slk_list = {'ability', 'buff', 'unit', 'item', 'upgrade', 'destructable'}
-    if w2l.config.slk_doodad then
+    if w2l.setting.slk_doodad then
         slk_list[#slk_list+1] = 'doodad'
     end
     for id, obj in pairs(slk.ability) do
@@ -314,7 +314,7 @@ local function to_slk(w2l, slk)
 end
 
 local function clean_file(w2l, slk)
-    if w2l.force_slk or w2l.config.read_slk then
+    if w2l.force_slk or w2l.setting.read_slk then
         for _, filename in pairs(w2l.info.txt) do
             w2l:file_remove('map', filename)
         end
@@ -341,7 +341,7 @@ return function (w2l_, slk)
     w2l.slk = slk
     clean_file(w2l, slk)
     if slk.w3i then
-        if w2l.config.mode == 'lni' then
+        if w2l.setting.mode == 'lni' then
             w2l:file_save('table', 'w3i', w2l:backend_w3i2lni(slk.w3i), slk.wts)
             w2l:file_remove('map', 'war3map.w3i')
         else
@@ -355,19 +355,19 @@ return function (w2l_, slk)
     w2l:backend_searchparent(slk)
     w2l.progress:finish()
 
-    if w2l.config.remove_unuse_object then
+    if w2l.setting.remove_unuse_object then
         w2l.messager.text(lang.script.MARK_UNUSED_OBJECT)
         w2l:backend_mark(slk)
         w2l.progress(0.2)
     end
 
-    if w2l.config.computed_text then
+    if w2l.setting.computed_text then
         w2l.messager.text(lang.script.COMPUTED_TEXT)
         w2l:backend_computed(slk)
         w2l.progress(0.3)
     end
 
-    if w2l.config.remove_unuse_object then
+    if w2l.setting.remove_unuse_object then
         w2l.messager.text(lang.script.REMOVE_UNUSED_OBJECT)
         w2l.progress:start(0.5)
         remove_unuse(w2l, slk)
@@ -380,23 +380,23 @@ return function (w2l_, slk)
     
     w2l.progress:start(0.7)
     w2l.messager.text(lang.script.CONVERT_OBJ)
-    if w2l.config.mode == 'lni' then
+    if w2l.setting.mode == 'lni' then
         to_lni(w2l, slk)
-    elseif w2l.config.mode == 'obj' then
+    elseif w2l.setting.mode == 'obj' then
         to_obj(w2l, slk)
-    elseif w2l.config.mode == 'slk' then
+    elseif w2l.setting.mode == 'slk' then
         to_slk(w2l, slk)
     end
     w2l.progress:finish()
 
     w2l.progress:start(0.8)
-    if not w2l.config.remove_we_only then
+    if not w2l.setting.remove_we_only then
         w2l.messager.text(lang.script.CONVERT_WTG)
         convert_wtg(w2l)
     end
     w2l.progress:finish()
 
-    if w2l.config.optimize_jass then
+    if w2l.setting.optimize_jass then
         w2l.messager.text(lang.script.OPTIMIZE_JASS)
         w2l:backend_optimizejass()
     end

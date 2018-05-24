@@ -406,11 +406,11 @@ local function init_confuser(confused, confusion)
     end
 end
 
-return function (ast, config, _report)
+return function (ast, setting, _report)
     jass = ast
     report = _report
 
-    init_confuser(config.confused, config.confusion)
+    init_confuser(setting.confused, setting.confusion)
     mark_globals()
     mark_function(get_function 'config')
     mark_function(get_function 'main')

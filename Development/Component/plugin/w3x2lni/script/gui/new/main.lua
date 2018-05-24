@@ -11,24 +11,29 @@ function ext.on_dropfile(filename)
     if window._worker and not window._worker.exited then
         return
     end
-    local input_path = require 'share.input_path'
+    local check_lni_mark = require 'share.check_lni_mark'
     local builder = require 'map-builder'
     local war3 = require 'share.war3'
-    if war3:open(fs.path(filename)) then
-        window._filename = fs.path(filename)
+    local path = fs.path(filename)
+    if war3:open(path) then
+        window._filename = path
         window._mode = 'mpq'
         window:set_theme('War3Dump', '#9CD')
         window:show_page('convert')
         window:set_theme('War3Dump', '#9CD')
         return
     end
-    local mappath = input_path(filename)
-    local map = builder.load(mappath)
+    if path:filename():string() == '.w3x' then
+        if check_lni_mark(io.load(path)) then
+            path = fs.absolute(path:parent_path())
+        end
+    end
+    local map = builder.load(path)
     if not map then
         return
     end
     map:close()
-    window._filename = mappath
+    window._filename = path
     window:show_page('select')
 end
 
@@ -44,7 +49,6 @@ local function create_mainview(win)
             },
             ui.label {
                 id = 'title',
-                style = { Width = 200 },
                 align = 'start',
                 font = { name = 'Constantia', size = 24, weight = 'bold' },
                 bind = {

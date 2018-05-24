@@ -1,0 +1,758 @@
+﻿// Vengeance
+[Avng]
+Name=复仇之魂
+Tip=复仇之魂(|cffffcc00V|r)
+Ubertip="从倒下的友军尸体身上召唤出不可伤害的野兽幽魂。持续<Avng,Dur1>秒或直到化身死亡。"
+Hotkey=V
+Untip="|cffc3dbff点击右键以启动自动施放功能。"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。"
+
+[Bvng]
+Bufftip=复仇之魂
+Buffubertip="复仇之魂在此。"
+
+// Mana Flare
+[Amfl]
+Name=魔力之焰
+Tip=魔力之焰(|cffffcc00F|r)
+Untip=停止魔力之焰(|cffffcc00F|r)
+Ubertip="在周围敌方单位施放魔法的时候，让精灵龙对其造成伤害。同时增加精灵龙<Amfl,DataE1>点的护甲。|n持续<Amfl,Dur1>秒。"
+Unubertip="停止魔力之焰通道"
+Hotkey=F
+Unhotkey=F
+
+[Bmfl]
+Bufftip=魔力之焰
+Buffubertip="该单位身上有魔力之焰的作用;周围任何敌方单位施放魔法都会受到伤害。"
+
+[Bmfa]
+Bufftip=魔力之焰
+Buffubertip="该单位身上有魔力之焰的作用;周围任何敌方单位施放魔法都会受到伤害。"
+EditorSuffix= (额外的)
+
+// Phase Shift
+[Apsh]
+Name=变相移动
+Tip=变相移动(|cffffcc00E|r)
+Ubertip="让该单位一旦遭到攻击就处于消失的状态之中。在短时间内不再受到任何的伤害。|n持续<Apsh,Dur1>秒。"
+Untip="|cffc3dbff|cffc3dbff点击右键以启动自动施放功能。|r|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=E
+Unhotkey=E
+
+[Bpsh]
+Bufftip=变相移动
+Buffubertip="该单位处于消失的状态中，因此在短时间内不会受到任何的伤害。"
+
+// Ethereal
+[Aetl]
+Name=虚无状态
+Tip=虚无状态
+Ubertip="处于虚无形态的单位不能攻击，但是能施放魔法，敌方的魔法能对其造成额外的伤害。"
+Hotkey=E
+
+// Sphere
+[Asp1]
+Name=球体
+EditorSuffix= (复仇之魂-等级 1)
+
+// Sphere
+[Asp2]
+Name=球体
+EditorSuffix= (复仇之魂-等级 2)
+
+// Sphere
+[Asp3]
+Name=球体
+EditorSuffix= (复仇之魂-等级 3)
+
+// Sphere
+[Asp4]
+Name=球体
+EditorSuffix= (复仇之魂-等级 4)
+
+// Sphere
+[Asp5]
+Name=球体
+EditorSuffix= (复仇之魂-等级 5)
+
+// Sphere
+[Asp6]
+Name=球体
+EditorSuffix= (复仇之魂-等级 6)
+
+// War Club
+[Agra]
+Name=战棍
+Tip=战棍(|cffffcc00W|r)
+Ubertip="让山岭巨人拔起一棵树木从而拥有攻城能力，并且增加远程攻击范围。|n持续<Agra,DataE1>次攻击。"
+Hotkey=W
+
+// Hardened Skin
+[Assk]
+Name=硬化皮肤
+Tip=硬化皮肤
+Ubertip="降低所有施加在山岭巨人身上的伤害<Assk,DataC1>点。攻击不能低于<Assk,DataB1>点。"
+Hotkey=K
+
+// Resistant Skin
+[Arsk]
+Name=抗性皮肤
+Tip=抗性皮肤
+Ubertip="降低负性魔法的持续时间，并让山岭巨人对某些特定魔法免疫。"
+Hotkey=E
+
+// Taunt
+[Atau]
+Name=嘲讽
+Tip=嘲讽(|cffffcc00T|r)
+Ubertip="最近的<ANta,DataA1>个单位会强迫攻击这个单位。"
+Hotkey=T
+
+[Btau]
+Bufftip=嘲讽
+Buffubertip="这个单位现在是免疫的。"
+
+// Blink
+[AEbl]
+Name=闪烁
+Tip=闪烁(|cffffcc00B|r) - [|cffffcc00等级 1|r],闪烁(|cffffcc00B|r) - [|cffffcc00等级 2|r],闪烁(|cffffcc00B|r)- [|cffffcc00等级 3|r]
+Ubertip="能让守望者瞬间移动一段距离，从而逃离战场或者快速加入战斗。","能让守望者瞬间移动一段距离，从而逃离战场或者快速加入战斗。","能让守望者瞬间移动一段距离，从而逃离战场或者快速加入战斗。"
+Hotkey=B
+Researchtip="学习闪烁(|cffffcc00B|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="能让守望者瞬间移动一段距离，从而逃离战场或者快速加入战斗。|n|n|cffffcc00等级 1|r -<AEbl,Cool1>秒魔法施放间隔时间，消耗<AEbl,Cost1>点魔法。|n|cffffcc00等级 2|r -<AEbl,Cool2>秒魔法施放间隔时间，消耗<AEbl,Cost2>点魔法。|n|cffffcc00等级 3|r -<AEbl,Cool3>秒魔法施放间隔时间，消耗<AEbl,Cost3>点魔法。"
+Researchhotkey=B
+
+// Fan of Knives
+[AEfk]
+Name=刀阵旋风
+Tip=刀阵旋风(|cffffcc00F|r) - [|cffffcc00等级 1|r],刀阵旋风(|cffffcc00F|r) - [|cffffcc00等级 2|r],刀阵旋风(|cffffcc00F|r) - [|cffffcc00等级 3|r]
+Ubertip="守望者对周围的敌人发射出锋利的尖刀进行伤害，每把尖刀造成<AEfk,DataA1>点的伤害。","守望者对周围的敌人发射出锋利的尖刀进行伤害，每把尖刀造成<AEfk,DataA2>点的伤害。","守望者对周围的敌人发射出锋利的尖刀进行伤害，每把尖刀造成<AEfk,DataA3>点的伤害。"
+Hotkey=F
+Researchtip="学习刀阵旋风(|cffffcc00F|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="守望者对周围的敌人发射出锋利的尖刀进行伤害。|n|n|cffffcc00等级 1|r - 对每个目标造成<AEfk,DataA1>点伤害。|n|cffffcc00等级 2|r - 对每个目标造成<AEfk,DataA2>点伤害。|n|cffffcc00等级 3|r - 对每个目标造成<AEfk,DataA3>点伤害。"
+Researchhotkey=F
+
+// Shadow Strike
+[AEsh]
+Name=暗影突袭
+Tip=暗影突袭(|cffffcc00D|r) - [|cffffcc00等级 1|r],暗影突袭(|cffffcc00D|r) - [|cffffcc00等级 2|r],暗影突袭(|cffffcc00D|r) - [|cffffcc00等级 3|r]
+Ubertip="投掷出一把毒性的匕首，能对敌方的地面单位造成巨大的伤害。最初造成<AEsh,DataE1>点的伤害，随后每<AEsh,Cast1>秒造成<AEsh,DataA1>点的伤害，持续<AEsh,Dur1>秒。匕首上的毒素能在短时间内减慢目标单位的攻击速度和移动速度。","投掷出一把毒性的匕首，能对敌方的地面单位造成巨大的伤害。最初造成<AEsh,DataE2>点的伤害，随后每<AEsh,Cast2>秒造成<AEsh,DataA2>点的伤害，持续<AEsh,Dur2>秒。匕首上的毒素能在短时间内减慢目标单位的攻击速度和移动速度。","投掷出一把毒性的匕首，能对敌方的地面单位造成巨大的伤害。最初造成<AEsh,DataE3>点的伤害，随后每<AEsh,Cast3>秒造成<AEsh,DataA3>点的伤害，持续<AEsh,Dur3>秒。匕首上的毒素能在短时间内减慢目标单位的攻击速度和移动速度。"
+Hotkey=D
+Researchtip="学习暗影突袭(|cffffcc00D|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="投掷出一把毒性的匕首，能对敌方的地面单位造成巨大的伤害。最初造成很大的伤害，随后每秒造成一定的伤害。匕首上的毒素能在短时间内减慢目标单位的攻击速度和移动速度。|n|n|cffffcc00等级 1|r - <AEsh,DataE1> 点初始伤害，<AEsh,DataA1> 点持续伤害。 |n|cffffcc00等级 2|r - <AEsh,DataE2>点初始伤害，<AEsh,DataA2>点持续伤害。 |n|cffffcc00等级 3|r - <AEsh,DataE3>点初始伤害，<AEsh,DataA3>点持续伤害。."
+Researchhotkey=D
+
+// Shadow Strike Non Stack Buff
+[BEsh]
+Bufftip=暗影突袭
+Buffubertip="This unit was hit by Shadow Strike; it will take damage over time and move more slowly."
+
+// Shadow Strike Stack Buff
+[BEsi]
+Bufftip=暗影突袭
+Buffubertip="This unit was hit by Shadow Strike; it will take damage over time and move more slowly."
+
+// Vengeance
+[AEsv]
+Name=复仇之魂
+Tip=复仇之魂(|cffffcc00V|r)
+Ubertip="召唤出一个强大的复仇天神，复仇天神能从周围的尸体中复活许多无敌的幽灵来为你战斗。当复仇天神死掉的时候，那些幽灵也会自动消失。|n持续<AEsv,Dur1>秒。"
+Hotkey=V
+Researchtip="学习复仇之魂(|cffffcc00V|r)"
+Researchubertip="召唤出一个强大的复仇天神，复仇天神能从周围的尸体中复活许多无敌的幽灵来为你战斗。当复仇天神死掉的时候，那些幽灵也会自动消失。|n持续<AEsv,Dur1>秒。"
+Researchhotkey=V
+
+[BEsv]
+Bufftip=复仇之魂
+Buffubertip="复仇之魂暴怒中。"
+
+// Cargo Load entangled mine
+[Slo2]
+Name=装载小精灵
+Tip=装载小精灵(|cffffcc00L|r)
+Ubertip="装载一个小精灵。"
+Hotkey=L
+
+// see unitstrings
+//[Aimp]
+//Name=Vorpal Blades
+//Tip=Vorpal Blades
+//Ubertip="Permits the glaives launched by the Glaive Thrower to strike through initial ground targets and damage those behind."
+
+[Amgl]
+Name=月刃
+Tip=月刃
+Ubertip="使得女猎手的月刃剑能在攻击的时候进行弹射，从而伤害到敌人其他的单位。"
+
+[Amgr]
+Name=月刃
+EditorSuffix= (娜萨)
+Tip=月刃
+Ubertip="使得女猎手的月刃剑能在攻击的时候进行弹射，从而伤害到敌人其他的单位。"
+
+[Aspo]
+Name=慢性毒药
+Tip=慢性毒药
+Ubertip="慢性毒药攻击能造成每秒<Aspo,DataA1>点的伤害，并在<Aspo,Dur1>秒内减慢敌人<Aspo,DataB1,%>%的移动速度和<Aspo,DataC1,%>%的攻击速度。"
+
+// Slow Poison Non Stack Buff
+[Bspo]
+Bufftip=慢性毒药
+Buffubertip="该单位受到了慢性毒药的攻击，因此其移动速度和攻击速度都减慢了，而且会在一定时间内持续地受到伤害。"
+EditorSuffix= (没有堆积)
+
+// Slow Poison Stack Buff
+[Bssd]
+Bufftip=慢性毒药
+Buffubertip="该单位受到了慢性毒药的攻击;因此其移动速度和攻击速度都减慢了，而且会在一定时间内持续地受到伤害。"
+EditorSuffix= (堆积)
+
+// Shadow Meld passive nighttime cloaking ability, with its "Hide" button
+[Ashm]
+Name=影遁
+Tip=隐藏(|cffffcc00I|r)
+Ubertip="让单位停止自动攻击敌人，可以使其影遁，在夜间变的隐形。"
+Hotkey=I
+
+[Sshm]
+Name=影遁
+Tip=隐藏(|cffffcc00I|r)
+Ubertip="让单位停止自动攻击敌人，可以使其影遁，在夜间变的隐形。"
+Hotkey=I
+EditorSuffix= (立刻的)
+
+// Shadow Meld passive nighttime cloaking ability, with its "Hide" button
+[Ahid]
+Name=影遁
+Tip=隐藏(|cffffcc00I|r)
+Ubertip="让单位停止自动攻击敌人，可以使其影遁，在夜间变的隐形。"
+Hotkey=I
+EditorSuffix= (阿卡玛)
+
+// Sentinel
+[Aesn]
+Name=哨兵
+Tip=哨兵(|cffffcc00E|r)
+Ubertip="能召唤出一头用来侦察地图的猫头鹰。|n能看见隐形单位。"
+Hotkey=E
+
+// Sentinel
+[Aesr]
+Name=哨兵
+EditorSuffix= (娜萨)
+Tip=哨兵(|cffffcc00E|r)
+Ubertip="能召唤出一头用来侦察地图的猫头鹰。|n能看见隐形单位。"
+Hotkey=E
+
+// Eat Tree
+[Aeat]
+Name=吞食树木
+Tip=吞食树木(|cffffcc00E|r)
+Ubertip="吞食一棵树木以在<Aeat,Dur1>秒内恢复<Aeat,DataC1>点的生命值。"
+Hotkey=E
+
+// Moon pool mana battery
+[Ambt]
+Name=补充魔法和生命值
+Tip=补充魔法和生命值(|cffffcc00R|r)
+Ubertip="恢复一个目标单位的魔法和生命值。"
+Untip="|cffc3dbff|cffc3dbff点击右键以启动自动施放功能。|r|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=R
+Unhotkey=R
+Order=补充魔法和生命值
+
+// Wisp Harvest
+[Awha]
+Name=采集
+Tip=采集(|cffffcc00G|r)
+Ubertip="你可以从缠绕金矿中采集黄金，从树木中采集木材。"
+Hotkey=G
+EditorSuffix= (小精灵能采集黄金和木材)
+
+// Wisp Harvest (Invulnerable)
+[Awh2]
+Name=采集
+Tip=采集(|cffffcc00G|r)
+Ubertip="你可以从缠绕金矿中采集黄金，从树木中采集木材。"
+Hotkey=G
+EditorSuffix= (小精灵可以采集黄金和木材－远古灵魂)
+
+// Detonate
+[Adtn]
+Name=爆炸
+Tip=爆炸(|cffffcc00D|r)
+Ubertip="会毁灭掉小精灵，但可以消除一定范围内所有的魔法效果并会吸收周围每个单位<Adtn,DataA1>点的魔法值。|n|cffffcc00对召唤出来的单位造成<Adtn,DataB1>点的伤害。|r"
+Hotkey=D
+
+// Wisp Healing
+[Awhe]
+Name=医疗
+Tip=医疗(|cffffcc00L|r)
+Ubertip="医疗周围受伤的友军单位。"
+Untip="|cffc3dbff点击右键以启动自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=L
+Unhotkey=L
+
+// Entangle
+[Aent]
+Name=缠绕金矿
+Tip=缠绕金矿(|cffffcc00G|r)
+Ubertip="在小精灵采集金矿之前，你必须先将金矿缠绕。"
+Hotkey=G
+
+// Entangled Gold Mine Cargo
+[Aenc]
+Name=装载
+EditorSuffix= (缠绕金矿)
+Tip=装载(|cffffcc00L|r)
+Ubertip="让某个小精灵进入金矿。"
+Hotkey=L
+Untip=卸载全部(|cffffcc00U|r)
+Unubertip="将所有小精灵从金矿中移开。"
+Unhotkey=U
+
+// Root
+[Aroo]
+Name=扎根
+Tip=扎根(|cffffcc00R|r)
+Ubertip="使得暗夜精灵族的古树固定在地上，从而能生产各种单位。对远古保护者来说，这就意味着它能向空中投掷大量的岩石以攻击来犯的敌人，同时使古树变成加强型护甲。"
+Hotkey=R
+Untip=拔根(|cffffcc00R|r)
+Unubertip="使得古树从地上拔起自己的根须从而能进行移动。同时使古树具有重型护甲。"
+Unhotkey=R
+
+// Bear Form
+[Abrf]
+Name=变熊
+Tip=变熊(|cffffcc00F|r)
+Ubertip="将德鲁伊变成一头威力巨大的熊，但是其魔法恢复速度会变慢。"
+Hotkey=F
+Untip=恢复暗夜精灵族状态(|cffffcc00F|r)
+Unubertip="让德鲁伊变为暗夜精灵形态。"
+Unhotkey=F
+
+[Sbr2]
+EditorSuffix= (可选的)
+
+// Crow Form
+[Arav]
+Name=风暴之鸦
+Tip=风暴之鸦状态(|cffffcc00F|r)
+Ubertip="让德鲁伊变为风暴乌鸦，从而可以飞翔在天空中。"
+Hotkey=F
+Untip=恢复暗夜精灵族状态(|cffffcc00F|r)
+Unubertip="让德鲁伊变为暗夜精灵形态。"
+Unhotkey=F
+
+[Sra2]
+EditorSuffix= (可选的)
+
+// Auto-Dispel Magic
+[Aadm]
+Name=驱逐魔法
+Tip=驱逐魔法(|cffffcc00B|r)
+Ubertip="能去除敌方单位身上有利的魔法效果和友军单位身上不利的魔法效果。|n|cffffcc00对召唤出来的单位造成<Aadm,DataB1>点的伤害。|r"
+Untip="|cffc3dbff点击右键以启动自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=B
+Unhotkey=B
+
+// Spell Immunity
+[Amim]
+Name=魔法免疫
+Tip=魔法免疫
+Ubertip="让目标单位对所有魔法免疫。"
+
+// Ultravision
+[Ault]
+Name=夜视能力
+
+//Elune's Grace
+[Aegr]
+Name=艾鲁尼之优雅
+Tip=艾鲁尼之优雅
+Ubertip="减少来自穿刺攻击的伤害到原来的<Aegr,DataA1,%>%，并减少来自魔法攻击的伤害到原来的<Aegr,DataE1,%>%。"
+
+// Mount Hippogryph
+[Acoa]
+Name=骑乘角鹰兽
+EditorSuffix=(年长的)
+Tip=骑乘角鹰兽(|cffffcc00U|r)
+Ubertip="骑在角鹰兽身上以后，弓箭手可以从空中进行攻击。|n|n|cffffcc00能攻击地面和空中单位。|r"
+Hotkey=U
+Order=骑乘角鹰兽
+
+// Mount Hippogryph
+[Aco2]
+Name=骑乘角鹰兽
+Tip=骑乘角鹰兽(|cffffcc00U|r)
+Ubertip="骑在角鹰兽身上以后，弓箭手可以从空中进行攻击。|n|n|cffffcc00能攻击地面和空中单位。|r"
+Hotkey=U
+Order=双目标
+
+// Pick up Archer
+[Acoh]
+Name=搭载弓箭手
+EditorSuffix=(年长的)
+Tip=搭载弓箭手(|cffffcc00U|r)
+Ubertip="搭载一个弓箭手使其能在空中对敌人进行攻击。|n|n|cffffcc00能攻击地面和空中单位。|r"
+Hotkey=U
+Order=搭载弓箭手
+
+// Pick up Archer
+[Aco3]
+Name=搭载弓箭手
+Tip=搭载弓箭手(|cffffcc00U|r)
+Ubertip="搭载一个弓箭手使其能在空中对敌人进行攻击。|n|n|cffffcc00能攻击地面和空中单位。|r"
+Hotkey=U
+Order=双目标
+
+// Dismount
+[Adec]
+Name=卸载
+Tip=卸载弓箭手和角鹰兽(|cffffcc00U|r)
+Ubertip="将弓箭手从角鹰兽身上卸载下来。"
+Hotkey=U
+
+// Corrosive Breath
+[Acor]
+Name=腐蚀喷吐
+Tip=腐蚀喷吐
+Ubertip="能喷出一团腐蚀性液体，对破坏建筑物特别的有效。"
+
+[Bcor]
+Bufftip=腐蚀喷吐
+Buffubertip="该建筑物受到了腐蚀喷吐的攻击，因此其在一定的时间内会受到持续的伤害。"
+
+// Mana Burn
+[AEmb]
+Name=法力燃烧
+Tip=法力燃烧(|cffffcc00B|r) - [|cffffcc00等级 1|r],法力燃烧(|cffffcc00B|r) - [|cffffcc00等级 2|r],法力燃烧(|cffffcc00B|r) - [|cffffcc00等级 3|r]
+Ubertip="射出一道能量波从而消耗掉目标单位<AEmb,DataA1>点的魔法值。目标单位的魔法值在燃烧的过程中，也会对其造成同等数量的伤害值。","射出一道能量波从而消耗掉目标单位<AEmb,DataA2>点的魔法值。目标单位的魔法值在燃烧的过程中，也会对其造成同等数量的伤害值。","射出一道能量波从而消耗掉目标单位<AEmb,DataA3>点的魔法值。目标单位的魔法值在燃烧的过程中，也会对其造成同等数量的伤害值。"
+Hotkey=B
+Researchtip="学习法力燃烧(|cffffcc00B|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="射出一道能量波来消耗掉目标单位一定的魔法值，目标单位的魔法值在燃烧的过程中,也会对其造成同等数量的伤害值。|n|n|cffffcc00等级 1|r - 消耗掉目标<AEmb,DataA1>点魔法。|n|cffffcc00等级 2|r - 消耗掉目标<AEmb,DataA2>点魔法。|n|cffffcc00等级 3|r - 消耗掉目标<AEmb,DataA3>点魔法。"
+Researchhotkey=B
+
+// Immolation
+[AEim]
+Name=献祭
+Tip=激活献祭(|cffffcc00L|r) - [|cffffcc00等级 1|r],激活献祭(|cffffcc00L|r) - [|cffffcc00等级 2|r],激活献祭(|cffffcc00L|r) - [|cffffcc00等级 3|r]
+Ubertip="激活献祭之后会让该单位处于火焰的包围之中，对周围的地面单位会造成每秒<AEim,DataA1>点的伤害。|n该技能会持续地消耗魔法值。","激活献祭之后会让该单位处于火焰的包围之中，对周围的地面单位会造成每秒<AEim,DataA2>点的伤害。|n该技能会持续地消耗魔法值。","激活献祭之后会让该单位处于火焰的包围之中，对周围的地面单位会造成每秒<AEim,DataA3>点的伤害。|n该技能会持续地消耗魔法值。"
+Unubertip="取消献祭之后可以停止消耗魔法。
+Hotkey=L
+Untip=取消献祭(|cffffcc00L|r)
+Unhotkey=L
+Researchtip="学习献祭(|cffffcc00L|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="让恶魔猎手处于火焰的包围之中，并对周围的敌方地面单位造成一定的伤害。|n该技能会持续地消耗魔法值。|n|n|cffffcc00等级 1|r - 每秒<AEim,DataA1>点的伤害。|n|cffffcc00等级 2|r - 每秒<AEim,DataA2>点的伤害。|n|cffffcc00等级 3|r - 每秒<AEim,DataA3>点的伤害。"
+Researchhotkey=L
+
+[BEim]
+Bufftip=献祭
+Buffubertip="该单位有着献祭技能，因此其周围的地面单位会持续受到伤害。"
+
+// Evasion
+[AEev]
+Name=闪避
+Tip=闪避 - [|cffffcc00等级 1|r],闪避 - [|cffffcc00等级 2|r],闪避 - [|cffffcc00等级 3|r]
+Ubertip="给予<AEev,DataA1,%>%的概率让恶魔猎手躲避掉敌人的攻击。","给予<AEev,DataA2,%>%的概率让恶魔猎手躲避掉敌人的攻击。","给予<AEev,DataA3,%>%的概率让恶魔猎手躲避掉敌人的攻击。"
+Researchtip="学习闪避(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="给予一定的概率使得恶魔猎手躲避掉敌人的攻击。|n|n|cffffcc00等级 1|r - <AEev,DataA1,%>%的概率躲避掉敌人的攻击。|n|cffffcc00等级 2|r - <AEev,DataA2,%>%的概率躲避掉敌人的攻击。|n|cffffcc00等级 3|r - <AEev,DataA3,%>%的概率躲避掉敌人的攻击。"
+Researchhotkey=E
+
+// Metamorphosis
+[AEme]
+Name=变身
+Tip=变身(|cffffcc00T|r)
+Ubertip="让恶魔猎手变身为一个威力巨大的恶魔。该恶魔具有远程攻击能力并会增加<AEme,DataE1>点的生命值。|n持续<AEme,HeroDur1>秒。"
+Hotkey=T
+Researchtip=学习变身(|cffffcc00T|r)
+Researchubertip="让恶魔猎手变身为一个威力巨大的恶魔。该恶魔具有远程攻击能力并会增加<AEme,DataE1>点的生命值。|n持续<AEme,HeroDur1>秒。"
+Researchhotkey=T
+Globalmessage=
+Globalsound=
+
+// Illidan Metamorphosis
+[AEIl]
+Name=变身
+Tip=变身(|cffffcc00T|r)
+Ubertip="让恶魔猎手变身为一个威力巨大的恶魔，该恶魔具有远程攻击能力。"
+Hotkey=T
+Researchtip=学习变身(|cffffcc00T|r)
+Researchubertip="让恶魔猎手变身为一个威力巨大的恶魔，该恶魔具有远程攻击能力。"
+Researchhotkey=T
+EditorSuffix= (尤迪安)
+Globalmessage=
+Globalsound=
+
+// Illidan Metamorphosis
+[AEvi]
+Name=变身
+Tip=变身(|cffffcc00T|r)
+Ubertip="让恶魔猎手变身为一个威力巨大的恶魔，该恶魔具有远程攻击能力。"
+Hotkey=T
+Researchtip=学习变身(|cffffcc00T|r)
+Researchubertip="让恶魔猎手变身为一个威力巨大的恶魔，该恶魔具有远程攻击能力。"
+Researchhotkey=T
+EditorSuffix= (邪恶的尤迪安)
+Globalmessage=
+Globalsound=
+
+[BEme]
+Bufftip=变身
+Buffubertip="让恶魔猎手变身为一个威力巨大的恶魔，该恶魔具有远程攻击能力。"
+
+// Entangling Roots
+[AEer]
+Name=纠缠根须
+Tip=纠缠根须(|cffffcc00E|r) - [|cffffcc00等级 1|r],纠缠根须(|cffffcc00E|r) - [|cffffcc00等级 2|r],纠缠根须(|cffffcc00E|r) - [|cffffcc00等级 3|r]
+Ubertip="从地下伸出缠绕的根须将目标在<AEer,Dur1>秒内固定住，并对其造成每秒<AEer,DataA1>点的伤害。","从地下伸出缠绕的根须将目标在<AEer,Dur2>秒内固定住，并对其造成每秒<AEer,DataA2>点的伤害。","从地下伸出缠绕的根须将目标在<AEer,Dur3>秒内固定住，并对其造成每秒<AEer,DataA3>点的伤害。"
+Hotkey=E
+Researchtip="学习纠缠根须(|cffffcc00E|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="从地下伸出缠绕的根须将目标暂时固定，并造成持续伤害。|n|n|cffffcc00等级 1|r - <AEer,DataA1>伤害/秒，持续<AEer,Dur1>秒。|n|cffffcc00等级 2|r - <AEer,DataA2>伤害/秒，持续<AEer,Dur2>秒。|n|cffffcc00等级 3|r - <AEer,DataA3>伤害/秒，持续<AEer,Dur3>秒。"
+Researchhotkey=E
+
+[BEer]
+Bufftip=纠缠根须
+Buffubertip="该单位受到了纠缠根须的攻击，因此其不能移动并在一定时间内会持续受到伤害。"
+
+// Force of Nature
+[AEfn]
+Name=自然之力
+Tip=自然之力(|cffffcc00F|r) - [|cffffcc00等级 1|r],自然之力(|cffffcc00F|r) - [|cffffcc00等级 2|r],自然之力(|cffffcc00F|r) - [|cffffcc00等级 3|r]
+Ubertip="将一定范围内的树木转化成<AEfn,DataA1>个树人，树人具有<efon,realHP>点生命值和<efon,mindmg1>-<efon,maxdmg1>点的攻击力。可以学会自然之祝福能力。|n持续<AEfn,Dur1>秒。|n|n|cffffcc00能攻击地面单位。|r","将一定范围内的树木转化成<AEfn,DataA2>个树人，树人具有<efon,realHP>点生命值和<efon,mindmg1>-<efon,maxdmg1>点的攻击力。可以学会自然之祝福能力。|n持续<AEfn,Dur2>秒。|n|n|cffffcc00能攻击地面单位。|r","将一定范围内的树木转化成<AEfn,DataA3>个树人，树人具有<efon,realHP>点生命值和<efon,mindmg1>-<efon,maxdmg1>点的攻击力。可以学会自然之祝福能力。|n持续<AEfn,Dur3>秒。|n|n|cffffcc00能攻击地面单位。|r"
+Hotkey=F
+Researchtip="学习自然之力(|cffffcc00F|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="将一定范围内的树木转化成树人，每个树人具有<efon,realHP>点的生命值和<efon,mindmg1>-<efon,maxdmg1>点的攻击力。可以学会自然之祝福能力。|n|n|cffffcc00能攻击地面单位。|r|n|n|cffffcc00等级 1|r - 召唤<AEfn,DataA1>个树人，持续时间<AEfn,Dur1>秒。|n|cffffcc00等级 2|r - 召唤<AEfn,DataA2>个树人，持续时间<AEfn,Dur2>秒。|n|cffffcc00等级 3|r - 召唤<AEfn,DataA3>个树人，持续时间<AEfn,Dur3>秒。"
+Researchhotkey=F
+
+[BEfn]
+Bufftip=自然之力
+Buffubertip="召唤出来的单位会受到驱逐魔法的伤害。"
+
+// Thorns Aura
+[AEah]
+Name=荆棘光环
+Tip=荆棘光环 - [|cffffcc00等级 1|r],荆棘光环 - [|cffffcc00等级 2|r],荆棘光环 - [|cffffcc00等级 3|r]
+Ubertip="该光环能给予周围的友军单位一个具有攻击力的护盾保护，敌人对这些单位进行一次近战攻击就会受到相当于<AEah,DataA1,%>%自身攻击力的伤害。","该光环能给予周围的友军单位一个具有攻击力的护盾保护，敌人对这些单位进行一次近战攻击就会受到相当于<AEah,DataA2,%>%自身攻击力的伤害。","该光环能给予周围的友军单位一个具有攻击力的护盾保护，敌人对这些单位进行一次近战攻击就会受到相当于<AEah,DataA3,%>%自身攻击力的伤害。"
+Researchtip="学习荆棘光环(|cffffcc00R|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="该光环能给予周围的友军单位一个具有攻击力的护盾保护，敌人对这些单位进行一次近战攻击就会受到一定的伤害。|n|n|cffffcc00等级 1|r - 返回<AEah,DataA1,%>%的伤害。|n|cffffcc00等级 2|r - 返回<AEah,DataA2,%>%的伤害。|n|cffffcc00等级 3|r - 返回<AEah,DataA3,%>%的伤害。"
+Researchhotkey=R
+
+
+[BEah]
+Bufftip=荆棘光环
+Buffubertip="该单位处在荆棘光环的作用之下，因此近战单位攻击它会受到伤害。"
+
+// Tranquility
+[AEtq]
+Name=宁静
+Tip=宁静(|cffffcc00T|r)
+Ubertip="在一大片范围内召唤出一阵强大的能量雨，能以每秒<AEtq,DataA1>点的速度恢复其中友军单位的生命值。|n持续<AEtq,Dur1>秒。"
+Hotkey=T
+Researchtip="学习宁静(|cffffcc00T|r)"
+Researchubertip="在一大片范围内召唤出一阵强大的能量雨，能以每秒<AEtq,DataA1>点的速度恢复其中友军单位的生命值。|n持续<AEtq,Dur1>秒。"
+Researchhotkey=T
+Globalmessage=
+Globalsound=
+
+// Scout
+[AEst]
+Name=侦察
+Tip=侦察(|cffffcc00C|r) - [|cffffcc00等级 1|r],侦察(|cffffcc00C|r) - [|cffffcc00等级 2|r],侦察(|cffffcc00C|r) - [|cffffcc00等级 3|r]
+Ubertip="能召唤出一头用来侦察地图的猫头鹰。|n能看见隐形单位。|n持续<AEst,Dur1>秒。","能召唤出一头用来侦察地图的猫头鹰。|n能看见隐形单位。|n持续<AEst,Dur2>秒。","能召唤出一头用来侦察地图的猫头鹰。|n能看见隐形单位。|n持续<AEst,Dur3>秒。"
+Hotkey=C
+Researchtip="学习侦察(|cffffcc00C|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="能召唤出一头用来侦察地图的猫头鹰。|n能看见隐形单位。|n|n|cffffcc00等级 1|r -消耗<AEst,Cost1>点魔法值来召唤出一头猫头鹰。|n|cffffcc00等级 2|r -消耗<AEst,Cost2>点魔法值来召唤出一头猫头鹰。|n|cffffcc00等级 3|r -消耗<AEst,Cost3>点魔法值来召唤出一头猫头鹰。"
+Researchhotkey=C
+
+[BEst]
+Bufftip=侦察
+Buffubertip="召唤出来的单位会受到驱逐魔法的伤害。"
+
+// Searing Arrows
+[AHfa]
+Name=灼热之箭
+Tip=灼热之箭(|cffffcc00R|r) - [|cffffcc00等级 1|r],灼热之箭(|cffffcc00R|r) - [|cffffcc00等级 2|r],灼热之箭(|cffffcc00R|r) - [|cffffcc00等级 3|r]
+Ubertip="增加<AHfa,DataA1>点的火焰伤害，但是每次攻击会消耗一定的魔法值。","增加<AHfa,DataA2>点的火焰伤害，但是每次攻击会消耗一定的魔法值。","增加<AHfa,DataA3>点的火焰伤害，但是每次攻击会消耗一定的魔法值。"
+Untip="|cffc3dbff点击右键以启动自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=R
+Unhotkey=R
+Researchtip="学习灼热之箭(|cffffcc00R|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="通过附加的火焰伤害来增加女祭司的攻击力。|n|n|cffffcc00等级 1|r - 增加<AHfa,DataA1>点的伤害。|n|cffffcc00等级 2|r - 增加<AHfa,DataA2>点的伤害。|n|cffffcc00等级 3|r - 增加<AHfa,DataA3>点的伤害。"
+Researchhotkey=R
+
+// Trueshot Aura
+[AEar]
+Name=强击光环
+Tip=强击光环 - [|cffffcc00等级 1|r],强击光环 - [|cffffcc00等级 2|r],强击光环 - [|cffffcc00等级 3|r]
+Ubertip="一种能增加周围友军单位<AEar,DataA1,%>%远程攻击力的光环。","一种能增加周围友军单位<AEar,DataA2,%>%远程攻击力的光环。","一种能增加周围友军单位<AEar,DataA3,%>%远程攻击力的光环。"
+Researchtip="学习强击光环(|cffffcc00T|r) - [|cffffcc00等级 %d|r]"
+Researchubertip="一种能增加周围友军单位远程攻击力的光环。|n|n|cffffcc00等级 1|r - 增加<AEar,DataA1,%>%的远程攻击力。|n|cffffcc00等级 2|r - 增加<AEar,DataA2,%>%的远程攻击力。|n|cffffcc00等级 3|r - 增加<AEar,DataA3,%>%的远程攻击力。"
+Researchhotkey=T
+
+[BEar]
+Bufftip=强击光环
+Buffubertip="该单位处在强击光环的作用之下，因此其远程攻击力得到了加强。"
+
+// Starfall
+[AEsf]
+Name=群星坠落
+Tip=群星坠落(|cffffcc00F|r)
+Ubertip="召唤出一阵阵的流星雨，每阵流星雨对敌人造成<AEsf,DataA1>点的伤害。|n持续<AEsf,Dur1>秒。"
+Hotkey=F
+Researchtip=学习群星坠落(|cffffcc00F|r)
+Researchubertip="召唤出一阵阵的流星雨，每阵流星雨对敌人造成<AEsf,DataA1>点的伤害。|n持续<AEsf,Dur1>秒。"
+Researchhotkey=F
+
+// beefy starfall - campaign spell
+[AEsb]
+Name=群星坠落
+Tip=群星坠落(|cffffcc00F|r)
+Ubertip="每隔<AEsb,DataB1>秒就召唤出一阵强大的流星雨，每阵流星雨能对周围的单位造成<AEsb,DataA1>点的伤害。|n持续<AEsb,Dur1>秒。"
+Hotkey=F
+Researchtip=学习群星坠落(|cffffcc00F|r)
+Researchubertip="召唤出一阵阵的流星雨，每阵流星雨对敌人造成<AEsb,DataA1>点的伤害。|n持续<AEsb,Dur1>秒。"
+Researchhotkey=F
+EditorSuffix= (更加强大的)
+
+// Faerie Fire
+[Afae]
+Name=精灵之火
+Tip=精灵之火(|cffffcc00R|r)
+Ubertip="减少目标单位<Afae,DataA1>点的护甲，并能拥有该单位的视野。|n持续<Afae,Dur1>秒。"
+Untip="|cffc3dbff点击右键以启动自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=R
+Unhotkey=R
+
+// Faerie Fire
+[Afa2]
+Name=精灵之火
+EditorSuffix=(变形)
+Tip=精灵之火(|cffffcc00R|r)
+Ubertip="减少目标单位<Afae,DataA1>点的护甲，并能拥有该单位的视野。|n持续<Afae,Dur1>秒。"
+Untip="|cffc3dbff点击右键以启动自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=R
+Unhotkey=R
+
+[Bfae]
+Bufftip=精灵之火
+Buffubertip="该单位受到了精灵之火的作用，因此其护甲被削弱了，而且还会被敌人看见。"
+
+// Cyclone
+//Unused line: When that unit lands, its movement speed is slowed by a factor of <Acyc,DataC1>, and it will regain 1/<Acyc,DataC1> of its movement every <Acyc,DataB1> seconds.
+[Acyc]
+Name=飓风
+Tip=飓风(|cffffcc00C|r)
+Ubertip="将目标单位投掷到空中，使其不能移动、攻击和施放任何的魔法技能.而且其他单位也不能在这期间攻击它。|n持续<Acyc,Dur1>秒。"
+Hotkey=C
+
+[Bcyc]
+Bufftip=飓风
+Buffubertip="该单位处在飓风的作用之下，因此其不能移动，攻击和施放魔法。"
+
+[Bcy2]
+Bufftip=飓风
+Buffubertip="该单位处在飓风的作用之下，因此其不能移动，攻击和施放魔法。"
+EditorSuffix= (额外的)
+
+// Rejuvenation
+[Arej]
+Name=生命恢复
+Tip=生命恢复(|cffffcc00E|r)
+Ubertip="在<Arej,Dur1>秒内恢复目标友军单位<Arej,DataA1>点的生命值。"
+Hotkey=E
+
+[Brej]
+Bufftip=生命恢复
+Buffubertip="该单位具有生命恢复技能，因此其能持续地恢复自己的生命值。"
+
+// Renew
+[Aren]
+Name=更新
+Tip=更新(|cffffcc00R|r)
+Ubertip="让友方的暗夜精灵建筑物、联盟建筑物与友方的机械单位焕然一新。"
+Untip="|cffc3dbff点击右键以启动自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=R
+Unhotkey=R
+
+// Roar
+[Aroa]
+Name=咆哮
+Tip=咆哮(|cffffcc00R|r)
+Ubertip="增加周围友军单位<Aroa,DataA1,%>%的攻击力。|n持续<Aroa,Dur1>秒。"
+Hotkey=R
+
+// Roar
+[Ara2]
+Name=咆哮
+EditorSuffix=(变形)
+Tip=咆哮(|cffffcc00R|r)
+Ubertip="增加周围友军单位<Ara2,DataA1,%>%的攻击力。|n持续<Ara2,Dur1>秒。"
+Hotkey=R
+
+[Broa]
+Bufftip=咆哮
+Buffubertip="该单位具有咆哮技能，因此其攻击力得到了加强。"
+
+[Alit]
+Name=闪电攻击
+
+// used by creep ability
+[Bbar]
+Bufftip=树皮
+Buffubertip="该单位具有树皮技能，因此其护甲得到了加强。"
+
+// tree of life upgrade
+[Atol]
+
+
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BEia]
+EditorName=献祭(施法者)
+
+[Beat]
+EditorName=吃树
+
+[Bgra]
+EditorName=拔树
+
+[Bssi]
+EditorName=慢性毒药(信息)
+
+[AEsd]
+EditorName=群星坠落(目标)
+
+[AEtr]
+EditorName=宁静(目标)
+
+[Bult]
+EditorName=夜视能力
+
+[XEsf]
+EditorName=群星坠落(效果)
+
+[XEtq]
+EditorName=宁静(效果)
+
+[XEsn]
+EditorName=哨兵(效果)
+
+[Xfns]
+EditorName=建筑物伤害 - 暗夜精灵族 小
+
+[Xfnm]
+EditorName=建筑物伤害 - 暗夜精灵族 中
+
+[Xfnl]
+EditorName=建筑物伤害 - 暗夜精灵族 大

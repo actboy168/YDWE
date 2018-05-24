@@ -1,0 +1,199 @@
+[INVALID]
+`%s` is not a w2l command. See `w2l help`.
+[HELP_MPQ]
+Extracting MPQ data from Warcraft III
+[HELP_MPQ_DESC]
+usage: w2l mpq <War3 Path>
+
+E.g:
+   w2l mpq "C:\Warcraft III"
+
+[HELP_LNI]
+Convert the map into `Lni` format
+[HELP_LNI_DESC]
+usage: w2l lni <Map Path> [<Output Path>]
+
+    Map can be a w3x file or a folder.
+    `Lni` is a convenient format for text editing and code management.
+
+E.g:
+    w2l lni "E:\Warcraft III\Maps\Test.w3x"
+    w2l lni "E:\Warcraft III\Maps\Test.w3x" "E:\Warcraft III\Maps\Test_lni"
+
+[HELP_SLK]
+Convert the map into `SLk` format
+[HELP_SLK_DESC]
+usage: w2l slk <Map Path> [<Output Path>]
+
+    Map can be a w3x file or a folder.
+    `Slk` is a format for playing. WE can't open the map of this format.
+
+E.g：
+    w2l slk "E:\Warcraft III\Maps\Test.w3x"
+    w2l slk "E:\Warcraft III\Maps\Test.w3x" "E:\Warcraft III\Maps\Test_slk.w3x"
+
+[HELP_OBJ]
+Convert the map into `Obj` format
+[HELP_OBJ_DESC]
+usage: w2l obj <Map Path> [<Output Path>]
+
+    Map can be a w3x file or a folder.
+    `Slk` is a format for editing by WE.
+
+E.g：
+    w2l obj "E:\Warcraft III\Maps\Test.w3x"
+    w2l obj "E:\Warcraft III\Maps\Test.w3x" "E:\Warcraft III\Maps\Test_obj.w3x"
+
+[HELP_CONFIG]
+View and modify the config
+[HELP_CONFIG_DESC]
+usage:
+    w2l config                view all configurations
+    w2l config <key>          view this configuration 
+    w2l config <key>=<value>  modify this configuration
+
+E.g:
+    w2l config
+    w2l config lni.read_slk
+    w2l config lni.read_slk=false
+
+[HELP_VERSION]
+Display `w2l` version
+[HELP_LOG]
+Display last log
+[HELP_HELP]
+Display help information
+[HELP]
+usage: w2l <command> <path>
+
+available commands:
+%s
+
+use `w2l help <command>` to get help information for specific commands.
+
+[CONFIG_DISPLAY]
+Current config:
+[CONFIG_ERROR]
+Invalid parameters, see `w2l help config`.
+[CONFIG_UPDATE]
+Config updated:
+[CONFIG_USED_MAP]
+But the actual effect is the map configuration:
+[USED_MAP]
+[Map]   
+[USED_GLOBAL]
+        
+[USED_DEFAULT]
+[Def]   
+[CONFIG_GLOBAL_LANG]
+Language used, can be the following:
+
+
+[CONFIG_GLOBAL_LANG_ERROR]
+Invalid language, must be the following:
+
+
+[CONFIG_GLOBAL_DATA]
+War3 data used, can be the following:
+
+
+[CONFIG_GLOBAL_DATA_ERROR]
+Invalid directory, must be the following:
+
+
+[CONFIG_GLOBAL_DATA_UI]
+Trigger data used, can be the following:
+
+        ${DATA}           Use `global.data`
+        ${YDWE}           Search for trigger data used by local YDWE
+
+[CONFIG_GLOBAL_DATA_UI_ERROR]
+Invalid directory, must be the following:
+
+        ${DATA}           Use `global.data`
+        ${YDWE}           Search for trigger data used by local YDWE
+
+[CONFIG_GLOBAL_DATA_META]
+WE data used, can be the following:
+
+        ${DATA}           Use `global.data`
+        ${DEFAULT}        Correct WE data
+
+[CONFIG_GLOBAL_DATA_META_ERROR]
+Invalid directory, must be the following:
+
+        ${DATA}           Use `global.data`
+        ${DEFAULT}        Correct WE data
+
+[CONFIG_GLOBAL_DATA_WES]
+WE strings used, can be the following:
+
+        ${DATA}           Use `global.data`
+        ${DEFAULT}        Default strings
+
+[CONFIG_GLOBAL_DATA_WES_ERROR]
+Invalid directory, must be the following:
+
+        ${DATA}           Use `global.data`
+        ${DEFAULT}        Default strings
+
+[CONFIG_GLOBAL_PLUGIN]
+Path to the plugins. Defaults to: `plugin`.
+[CONFIG_LNI_READ_SLK]
+When converting to Lni, convert imported slk files. Should be boolean.
+[CONFIG_LNI_FIND_ID_TIMES]
+When converting to Lni, limit times to search the optimal template, 0 means unlimited. Should be integer.
+[CONFIG_LNI_EXPORT_LUA]
+When converting to Lni, export lua files. Should be boolean.
+[CONFIG_SLK_REMOVE_UNUSE_OBJECT]
+When converting to slk, remove unreferenced objects. Should be boolean.
+[CONFIG_SLK_OPTIMIZE_JASS]
+When converting to slk, optimize jass. Should be boolean.
+[CONFIG_SLK_MDX_SQUF]
+When converting to slk, compress mdx files (lossy). Should be boolean.
+[CONFIG_SLK_REMOVE_WE_ONLY]
+When converting to slk, remove WE-only files. Should be boolean.
+
+This will prevent WE and W3x2lni from opening the converted map.
+[CONFIG_SLK_SLK_DOODAD]
+When converting to slk, optimize doodads. Should be boolean.
+
+This allows terrain changes to no longer frame off, but it also contains potential risks: if the player does not restart the wc3 before play another map, he will miss doodad models and may desync.
+[CONFIG_SLK_FIND_ID_TIMES]
+When converting to slk, limit times to search the optimal template, 0 means unlimited. Should be integer.
+[CONFIG_SLK_CONFUSED]
+When converting to slk, confuse jass. Should be boolean.
+[CONFIG_SLK_CONFUSION]
+When converting to slk, used characters by confusing jass. The following need to be met:
+
+    1. Only alphanumeric underline
+    2. At least 3 different characters
+    3. At least 2 letters
+[CONFIG_OBJ_READ_SLK]
+When converting to obj, convert imported slk files. Should be boolean.
+[CONFIG_OBJ_FIND_ID_TIMES]
+When converting to obj, limit times to search the optimal template, 0 means unlimited. Should be integer.
+[CONFIG_MUST_BOOLEAN]
+Must be boolean
+[CONFIG_MUST_INTEGER]
+Must be integer
+[CONFIG_CONFUSION_1]
+Only alphanumeric underline
+[CONFIG_CONFUSION_2]
+At least 3 different characters
+[CONFIG_CONFUSION_3]
+At least 2 letters
+[AUTO_SELECT]
+Auto select
+[CREATING]
+Creating 
+[TYPE_CONFLICT]
+Type conflict:
+[CREATED_ID_CONFLICT]
+Created id conflict: skill [%s] code [%s]
+[COPIED_ID_CONFLICT]
+Copied id [%s] conflict: skill [%s][%s] code [%s][%s]
+[DATA_VERSION_ERROR]
+Incompatible data files, please re-extracting MPQ data by `mpq` command
+[INVALID_CONFIG]
+Invalid config

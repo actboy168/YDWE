@@ -10,11 +10,11 @@ local prebuilt_search = require 'prebuilt.search'
 local proto = require 'share.protocol'
 local lang = require 'share.lang'
 local core = require 'backend.sandbox_core'
-local unpack_config = require 'backend.unpack_config'
 local w3xparser = require 'w3xparser'
 local messager = require 'share.messager'
 local war3 = require 'share.war3'
 local data_version = require 'share.data_version'
+local command = require 'backend.command'
 local w2l
 local mpqs
 local root = fs.current_path()
@@ -33,11 +33,16 @@ local function task(f, ...)
 end
 
 local result = {}
-local function extract_file(type, name)
-    local path = output / type / name
-    local r = war3:extractfile(name, path)
+
+local function extract_file(path, name)
+    local r = war3:extractfile(name, path / name)
     result[name] = r or false
 end
+
+local function extract_mpq(name)
+    extract_file(output / 'mpq', name)
+end
+
 
 local function report_fail()
     local tbl = {}
@@ -52,44 +57,35 @@ local function report_fail()
     end
 end
 
-local function extract_mpq()
+local function extract()
     for _, root in ipairs {'', 'Custom_V1\\'} do
-        extract_file('war3', root .. 'Scripts\\Common.j')
-        extract_file('war3', root .. 'Scripts\\Blizzard.j')
-        
-        extract_file('war3', root .. 'UI\\MiscData.txt')
-
-        extract_file('war3', root .. 'Units\\MiscGame.txt')
-        extract_file('war3', root .. 'Units\\MiscData.txt')
-
-        extract_file('we', root .. 'ui\\TriggerData.txt')
-        extract_file('we', root .. 'ui\\TriggerStrings.txt')
-
+        extract_mpq(root .. 'Scripts\\Common.j')
+        extract_mpq(root .. 'Scripts\\Blizzard.j')
+        extract_mpq(root .. 'UI\\MiscData.txt')
+        extract_mpq(root .. 'Units\\MiscGame.txt')
+        extract_mpq(root .. 'Units\\MiscData.txt')
         for type, slks in pairs(w2l.info.slk) do
             for _, name in ipairs(slks) do
-                extract_file('war3', root .. name)
+                extract_mpq(root .. name)
             end
         end
-
         for _, name in ipairs(w2l.info.txt) do
-            extract_file('war3', root .. name)
+            extract_mpq(root .. name)
         end
     end
+    -- TODO: 应该放在上面的循环中？
+    extract_mpq('UI\\WorldEditStrings.txt')
+    extract_mpq('UI\\WorldEditGameStrings.txt')
+
+    extract_file(output, 'UI\\TriggerData.txt')
+    extract_file(output, 'UI\\TriggerStrings.txt')
 end
 
 local function create_metadata(w2l, loader)
     local defined_meta = w2l:parse_lni(io.load(root / 'core' / 'defined' / 'metadata.ini'))
     local meta = prebuilt_metadata(w2l, defined_meta, loader)
-    local meta_path = output / 'we'
-    fs.create_directories(meta_path)
-    io.save(meta_path / 'metadata.ini', meta)
-end
-
-local function create_wes(w2l)
-    local wes_path = output / 'we'
-    fs.create_directories(wes_path)
-    war3:extractfile('ui\\WorldEditStrings.txt', wes_path / 'WorldEditStrings.txt')
-    war3:extractfile('ui\\WorldEditGameStrings.txt', wes_path / 'WorldEditGameStrings.txt')
+    fs.create_directories(output / 'prebuilt')
+    io.save(output / 'prebuilt' / 'metadata.ini', meta)
 end
 
 local lost_wes = {}
@@ -97,22 +93,6 @@ local reports = {}
 local function get_w2l()
     w2l = core()
     w2l:set_messager(messager)
-
-    function w2l:mpq_load(filename)
-        local mpq_path = output / 'war3'
-        return self.mpq_path:each_path(function(path)
-            return io.load(mpq_path / path / filename)
-        end)
-    end
-
-    function w2l:defined_load(filename)
-        local mpq_path = output / 'war3'
-        return io.load(mpq_path / 'defined' / filename)
-    end
-
-    function w2l:wes_load(filename)
-        return io.load(output / 'we' / filename)
-    end
 
     function messager.report(_, _, str, tip)
         if str == lang.report.NO_WES_STRING then
@@ -165,11 +145,31 @@ local function loader(name)
     return war3:readfile(name)
 end
 
+local function input_war3(path)
+    if path then
+        path = fs.path(path)
+        if not path:is_absolute() then
+            if _W2L_DIR then
+                path = fs.path(_W2L_DIR) / path
+            else
+                path = root:parent_path() / path
+            end
+        end
+    elseif _W2L_MODE == 'CLI' then
+        path = fs.path(_W2L_DIR)
+    else
+        return nil
+    end
+    return fs.absolute(path)
+end
+
 return function ()
-    fs.remove(root:parent_path() / 'log' / 'report.log')
-    local config = unpack_config()
-    input = config.input
     get_w2l()
+    w2l.messager.text(lang.script.INIT)
+    w2l.messager.progress(0)
+
+    fs.remove(root:parent_path() / 'log' / 'report.log')
+    input = input_war3(command[2])
 
     if not war3:open(input) then
         w2l.messager.text(lang.script.NEED_WAR3_DIR)
@@ -183,20 +183,11 @@ return function ()
     fs.create_directories(output)
     io.save(output / 'version', data_version)
     local config = require 'share.config'
-    config.global.data_war3 = war3.name
-    if config.global.data_ui ~= '${YDWE}' then
-        config.global.data_ui = war3.name
-    end
-    if config.global.data_meta ~= '${DEFAULT}' then
-        config.global.data_meta = war3.name
-    end
-    if config.global.data_wes ~= '${DEFAULT}' then
-        config.global.data_wes = war3.name
-    end
+    config.global.data = war3.name
 
     w2l.progress:start(0.1)
     w2l.messager.text(lang.script.CLEAN_DIR)
-    local mpq_path = output / 'war3'
+    local mpq_path = output / 'mpq'
     if fs.exists(mpq_path) then
         if not task(fs.remove_all, mpq_path) then
             w2l.messager.text(lang.script.CREATE_DIR_FAILED:format(mpq_path:string()))
@@ -211,24 +202,19 @@ return function ()
     end
     w2l.progress:finish()
 
-    w2l.progress:start(0.2)
-    w2l.messager.text(lang.script.EXPORT_MPQ)
-    extract_mpq()
-    report_fail()
-    w2l.progress:finish()
-
     w2l.progress:start(0.3)
+    w2l.messager.text(lang.script.EXPORT_MPQ)
+    extract()
+    report_fail()
     create_metadata(w2l, loader)
-    create_wes(w2l)
     w2l.progress:finish()
 
-    w2l.cache_metadata = w2l:parse_lni(io.load(output / 'we' / 'metadata.ini'))
-    local dir = output / 'war3' / 'defined'
-    fs.create_directories(dir)
+    w2l.cache_metadata = w2l:parse_lni(io.load(output / 'prebuilt' / 'metadata.ini'))
+    fs.create_directories(output / 'prebuilt')
     local keydata = prebuilt_keydata(w2l, loader)
     local search = prebuilt_search(w2l, loader)
-    io.save(dir / 'keydata.ini', keydata)
-    io.save(dir / 'search.ini', search)
+    io.save(output / 'prebuilt' / 'keydata.ini', keydata)
+    io.save(output / 'prebuilt' / 'search.ini', search)
     w2l.cache_metadata = nil
 
     w2l.progress:start(0.4)

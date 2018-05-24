@@ -4,6 +4,7 @@ local lni = require 'lni'
 local lml = require 'lml'
 local progress = require 'progress'
 local lang = require 'lang'
+local proxy = require 'proxy'
 local slk = w3xparser.slk
 local txt = w3xparser.txt
 local ini = w3xparser.ini
@@ -44,16 +45,12 @@ function mt:parse_ini(buf)
     return ini(buf)
 end
 
-function mt:defined(name)
-    return lni(self:defined_load(name .. '.ini'))
-end
-
 function mt:metadata()
     if not self.cache_metadata then
-        if self.config.mode ~= 'obj' or self.config.data_meta == '${DEFAULT}' then
+        if self.setting.mode ~= 'obj' or self.setting.data_meta == '${DEFAULT}' then
             self.cache_metadata = lni(load_file 'defined\\metadata.ini')
         else
-            self.cache_metadata = lni(self:meta_load 'metadata.ini')
+            self.cache_metadata = lni(self:data_load('prebuilt/metadata.ini'))
         end
     end
     return self.cache_metadata
@@ -61,7 +58,7 @@ end
 
 function mt:keydata()
     if not keydata then
-        keydata = self:defined 'keydata'
+        keydata = lni(self:data_load('prebuilt/keydata.ini'))
     end
     return keydata
 end
@@ -73,20 +70,20 @@ function mt:get_editstring(source)
     end
     if not self.editstring then
         self.editstring = {}
-        local t
-        if self.config.data_wes == '${DEFAULT}' then
-            t = ini(load_file('defined\\WorldEditStrings.txt'))['WorldEditStrings']
+        if self.setting.data_wes == '${DEFAULT}' then
+            local t = ini(load_file('defined\\WorldEditStrings.txt'))['WorldEditStrings']
+            for k, v in pairs(t) do
+                self.editstring[k:upper()] = v
+            end
         else
-            t = ini(self:wes_load('WorldEditStrings.txt'))['WorldEditStrings']
-        end
-        for k, v in pairs(t) do
-            self.editstring[k:upper()] = v
-        end
-        if self.config.data_wes ~= '${DEFAULT}' then
-            t = ini(self:wes_load('WorldEditGameStrings.txt'))['WorldEditStrings']
-        end
-        for k, v in pairs(t) do
-            self.editstring[k:upper()] = v
+            local t = ini(self:data_load('mpq/ui/WorldEditStrings.txt'))['WorldEditStrings']
+            for k, v in pairs(t) do
+                self.editstring[k:upper()] = v
+            end
+            local t = ini(self:data_load('mpq/ui/WorldEditGameStrings.txt'))['WorldEditStrings']
+            for k, v in pairs(t) do
+                self.editstring[k:upper()] = v
+            end
         end
     end
     if self.editstring[str] then
@@ -114,7 +111,7 @@ local function create_default(w2l)
     local default = {}
     local need_build = false
     for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'txt', 'misc'} do
-        local str = w2l:prebuilt_load(name .. '.ini')
+        local str = w2l:data_load(('prebuilt/%s/%s.ini'):format(w2l.setting.version, name))
         if str then
             default[name] = lni(str)
         else
@@ -214,67 +211,44 @@ function mt:__index(name)
     return nil
 end
 
-function mt:map_load(filename)
-    return nil
-end
-
-function mt:map_save(filename, buf)
-end
-
-function mt:map_remove(filename)
-end
-
 function mt:mpq_load(filename)
-    return nil
-end
-
-function mt:defined_load(filename)
-    return nil
-end
-
-function mt:prebuilt_load(filename)
-    return nil
-end
-
-function mt:trigger_data()
-    return nil
+    return self.mpq_path:each_path(function(path)
+        return self:data_load(('mpq/%s/%s'):format(path, filename))
+    end)
 end
 
 function mt:call_plugin()
 end
 
-function mt:file_save(type, name, buf)
-    if type == 'table' then
-        self:map_save(self.info.lni_dir[name][1], buf)
-    elseif type == 'trigger' then
-        self:map_save('war3map.wtg.lml/' .. name, buf)
-    elseif type == 'map' then
-        self:map_save(name, buf)
-    elseif type == 'scirpt' then
-        if self.config.export_lua then
-            self:map_save(name, buf)
-        end
+function mt:init_proxy()
+    if self.inited_proxy then
+        return
     end
+    self.inited_proxy = true
+    self.input_proxy = proxy(self.input_ar, self.input_mode, 'input')
+    self.output_proxy = proxy(self.output_ar, self.setting.mode, 'output')
+end
+
+function mt:file_save(type, name, buf)
+    self:init_proxy()
+    self.input_proxy:save(type, name, buf)
+    self.output_proxy:save(type, name, buf)
 end
 
 function mt:file_load(type, name)
-    if type == 'table' then
-        return self:map_load(self.info.lni_dir[name][1])
-    elseif type == 'trigger' then
-        return self:map_load('war3map.wtg.lml/' .. name)
-    elseif type == 'map' then
-        return self:map_load(name)
-    end
+    self:init_proxy()
+    return self.input_proxy:load(type, name)
 end
 
 function mt:file_remove(type, name)
-    if type == 'table' then
-        self:map_remove(self.info.lni_dir[name][1], buf)
-    elseif type == 'trigger' then
-        self:map_remove('war3map.wtg.lml/' .. name, buf)
-    elseif type == 'map' then
-        self:map_remove(name, buf)
-    end
+    self:init_proxy()
+    self.input_proxy:remove(type, name)
+    self.output_proxy:remove(type, name)
+end
+
+function mt:file_pairs()
+    self:init_proxy()
+    return self.input_proxy:pairs()
 end
 
 function mt:failed(msg)
@@ -282,7 +256,7 @@ function mt:failed(msg)
     os.exit(1, true)
 end
 
-mt.config = {}
+mt.setting = {}
 
 local function toboolean(v)
     if v == 'true' or v == true then
@@ -293,29 +267,29 @@ local function toboolean(v)
     return nil
 end
 
-function mt:set_config(config)
+function mt:set_setting(setting)
     local default = self:parse_lni(load_file 'config.ini')
-    local config = config or {}
+    local setting = setting or {}
     local dir
 
     local function choose(k, f)
-        local a = config[k]
+        local a = setting[k]
         local b = dir and dir[k]
         if f then
             a = f(a)
             b = f(b)
         end
         if a == nil then
-            config[k] = b
+            setting[k] = b
         else
-            config[k] = a
+            setting[k] = a
         end
     end
     dir = default.global
-    choose('data_war3')
+    choose('data')
     choose('data_meta')
     choose('data_wes')
-    dir = default[config.mode]
+    dir = default[setting.mode]
     choose('read_slk', toboolean)
     choose('find_id_times', math.tointeger)
     choose('remove_same', toboolean)
@@ -330,14 +304,13 @@ function mt:set_config(config)
     choose('computed_text', toboolean)
     choose('export_lua', toboolean)
     
-    self.config = config
+    self.setting = setting
     
     self.mpq_path = mpq_path()
-    if self.config.version == 'Melee' then
-        self.mpq_path:open 'Melee_V1'
-    else
+    if self.setting.version == 'Custom' then
         self.mpq_path:open 'Custom_V1'
     end
+    self.data_load = require 'data_load'
 end
 
 function mt:set_messager(messager)
@@ -358,6 +331,6 @@ return function ()
     self.progress = progress()
     self.loaded = {}
     self:set_messager(function () end)
-    self:set_config()
+    self:set_setting()
     return self
 end

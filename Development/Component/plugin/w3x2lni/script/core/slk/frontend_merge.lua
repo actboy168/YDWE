@@ -48,7 +48,11 @@ local function fill_and_merge(a, b, lv, meta)
         for i = 1, #a do
             c[i] = b[i] or a[i]
         end
-        if not meta or meta.profile then
+        if meta and meta.appendindex then
+            for i = #a+1, lv do
+                c[i] = b[i] or ''
+            end
+        elseif not meta or meta.profile then
             local maxlv = maxindex(b)
             for i = #a+1, lv do
                 if i > maxlv then

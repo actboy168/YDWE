@@ -399,7 +399,7 @@ return function(w2l_, type, slk_name, chunk, report_, obj, slk_)
     all_slk = slk_
     cx = nil
     cy = nil
-    remove_unuse_object = w2l.config.remove_unuse_object
+    remove_unuse_object = w2l.setting.remove_unuse_object
     lines = {}
     metadata = w2l:metadata()
     keys = w2l:keydata()[slk_name]

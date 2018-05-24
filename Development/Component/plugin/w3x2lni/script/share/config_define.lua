@@ -174,7 +174,7 @@ local function data_hint()
     return table.concat(chars)
 end
 
-local function war3(v)
+local function global_data(v)
     local list = get_datas()
     for _, name in ipairs(list) do
         if name == v then
@@ -186,77 +186,50 @@ local function war3(v)
     if info then
         return false, info
     else
-        return false, raw.CONFIG_GLOBAL_WAR3_ERROR .. data_hint
+        return false, raw.CONFIG_GLOBAL_DATA_ERROR .. data_hint
     end
 end
 
-local function ui(v)
+local function global_data_ui(v)
     if v == '${YDWE}' then
         return true, v, v
     end
-    local list = get_datas()
-    for _, name in ipairs(list) do
-        if name == v then
-            return true, v, v
-        end
+    if v == '${DATA}' then
+        return true, v, v
     end
-    local suc, info = is_valid_data(root:parent_path() / 'data' / tostring(v))
-    assert(suc == false)
-    if info then
-        return false, info
-    else
-        return false, raw.CONFIG_GLOBAL_UI_ERROR .. data_hint
-    end
+    return false, raw.CONFIG_GLOBAL_DATA_UI_ERROR
 end
 
-local function meta(v)
+local function global_data_meta(v)
     if v == '${DEFAULT}' then
         return true, v, v
     end
-    local list = get_datas()
-    for _, name in ipairs(list) do
-        if name == v then
-            return true, v, v
-        end
+    if v == '${DATA}' then
+        return true, v, v
     end
-    local suc, info = is_valid_data(root:parent_path() / 'data' / tostring(v))
-    assert(suc == false)
-    if info then
-        return false, info
-    else
-        return false, raw.CONFIG_GLOBAL_META_ERROR .. data_hint
-    end
+    return false, raw.CONFIG_GLOBAL_DATA_META_ERROR
 end
 
-local function wes(v)
+local function global_data_wes(v)
     if v == '${DEFAULT}' then
         return true, v, v
     end
-    local list = get_datas()
-    for _, name in ipairs(list) do
-        if name == v then
-            return true, v, v
-        end
+    if v == '${DATA}' then
+        return true, v, v
     end
-    local suc, info = is_valid_data(root:parent_path() / 'data' / tostring(v))
-    assert(suc == false)
-    if info then
-        return false, info
-    else
-        return false, raw.CONFIG_GLOBAL_WES_ERROR .. data_hint
-    end
+    return false, raw.CONFIG_GLOBAL_DATA_WES_ERROR
 end
 
 local define = {
     _child = true,
     'global', 'lni', 'slk', 'obj',
     global = {
-        'lang', 'data_war3', 'data_ui', 'data_meta', 'data_wes',
+        'lang', 'data', 'data_ui', 'data_meta', 'data_wes',
         lang                = {langf,     raw.CONFIG_GLOBAL_LANG .. lang_hint},
-        data_war3           = {war3,      raw.CONFIG_GLOBAL_WAR3 .. data_hint},
-        data_ui             = {ui,        raw.CONFIG_GLOBAL_UI   .. data_hint},
-        data_meta           = {meta,      raw.CONFIG_GLOBAL_META .. data_hint},
-        data_wes            = {wes,       raw.CONFIG_GLOBAL_WES  .. data_hint},
+        data                = {global_data,           raw.CONFIG_GLOBAL_DATA .. data_hint},
+        data_ui             = {global_data_ui,        raw.CONFIG_GLOBAL_DATA_UI .. data_hint},
+        data_meta           = {global_data_meta,      raw.CONFIG_GLOBAL_DATA_META .. data_hint},
+        data_wes            = {global_data_wes,       raw.CONFIG_GLOBAL_DATA_WES .. data_hint},
     },
     lni = {
         'read_slk', 'find_id_times', 'export_lua',

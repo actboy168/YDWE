@@ -227,7 +227,7 @@ return function (w2l_, wtg_, wts_)
     w2l = w2l_
     wtg = wtg_
     wts = wts_
-    state, err = w2l:trigger_data()
+    state = w2l:frontend_trg()
     hex = {}
 
     pack_head()

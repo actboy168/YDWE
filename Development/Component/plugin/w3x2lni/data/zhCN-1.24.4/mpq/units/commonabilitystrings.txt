@@ -1,0 +1,178 @@
+﻿//allied building
+[Aall]
+Name=共享商店，联盟建筑物。
+
+//burrow detection, fliers
+[Abdt]
+Name=地洞探测
+EditorSuffix= (飞行单位，废弃的)
+
+//purchase (shop)
+[Apit]
+Name=商店购买物品
+
+[Amou]
+Name=骑乘
+Tip=变形(|cffffcc00R|r)
+Untip=取消变形(|cffffcc00R|r)
+Ubertip="将英雄变成另外一种形态。"
+Unubertip="将英雄变回原来的形态。"
+Hotkey=R
+Unhotkey=R
+
+[Ahar]
+Name=采集
+Tip=采集(|cffffcc00G|r)
+Ubertip="从金矿处采集黄金资源，从树木上砍伐木材资源。"
+Untip=返送资源(|cffffcc00E|r)
+Unubertip="将携带的资源送往自己的城镇大厅。"
+Hotkey=G
+Unhotkey=E
+EditorSuffix= (黄金和木材)
+
+[Ahrl]
+Name=采集
+Tip=采集(|cffffcc00G|r)
+Ubertip="从树上采集所需的木材。"
+Untip=返送资源(|cffffcc00E|r)
+Unubertip="将携带的资源送往大墓地或者坟场。"
+Hotkey=G
+Unhotkey=E
+EditorSuffix= (采集木材)
+
+[Arev]
+Name=复活英雄
+
+[Aawa]
+Name=立刻复活英雄
+
+// passive 'detector' ability
+[Adet]
+Name=探测者
+
+[Adt1]
+Name=探测者
+
+[Adta]
+Name=显示
+Tip=显示(|cffffcc00R|r)
+Hotkey=R
+
+[Bdet]
+Bufftip=被探测到
+Buffubertip="该单位被探测到了，这就意味着敌人可以看见你的单位。"
+
+[Bvul]
+Bufftip=无敌的
+Buffubertip="该单位是无敌的，所以任何的攻击和魔法都对其无效。"
+
+[Bspe]
+Bufftip=速度加快
+Buffubertip="该单位速度被加快了，所以移动起来要比其他一般的单位要快。"
+
+[Bfro]
+Bufftip=被减速的
+Buffubertip="该单位速度被减慢了，所以移动起来要比其他一般的单位要慢。"
+
+// peon/peasant repair ability
+[Arep]
+Name=修理
+Tip=修理(|cffffcc00R|r)
+Ubertip="修理建筑物和机械单位，需要消耗资源。"
+Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=R
+Unhotkey=R
+
+// Abilities that need names in the editor
+[AEpa]
+Name=毒箭
+Tip=毒箭(|cffffcc00R|r)- [|cffffcc00等级 1|r],毒箭(|cffffcc00R|r) - [|cffffcc00等级 2|r],毒箭(|cffffcc00R|r) - [|cffffcc00等级 3|r]
+Ubertip="增加<AHfa,DataA1>点的火焰伤害，但是每次攻击会消耗一定的魔法值。","增加<AHfa,DataA2>点的火焰伤害，但是每次攻击会消耗一定的魔法值。","增加<AHfa,DataA3>点的火焰伤害，但是每次攻击会消耗一定的魔法值。"
+Untip="|cffc3dbff点击右键以激活自动施放功能。|r"
+Unubertip="|cffc3dbff点击右键以取消自动施放功能。|r"
+Hotkey=R
+Unhotkey=R
+Researchtip="学习毒箭(|cffffcc00R|r)- [|cffffcc00等级 %d|r]"
+Researchubertip="通过附加的火焰伤害来增加女祭司的攻击力。|n|n|cffffcc00等级 1|r -增加<AHfa,DataA1>点伤害。|n|cffffcc00等级 2|r –增加 <AHfa,DataA2>点伤害。 |n|cffffcc00等级 3|r – 增加<AHfa,DataA3>点伤害。"
+Researchhotkey=R
+
+[AEbu]
+Name=建造 (暗夜精灵族)
+
+[AGbu]
+Name=建造(娜迦)
+
+[AHbu]
+Name=建造(人族)
+
+[AHer]
+Name=英雄
+
+[ANbu]
+Name=建造(中立)
+
+[AObu]
+Name=建造(兽族)
+
+[ARal]
+Name=集结
+
+[AUbu]
+Name=建造(不死族)
+
+[Aalr]
+Name=警报
+
+[Aatk]
+Name=攻击
+
+[Afih]
+Name=开火 (人族)
+
+[Afin]
+Name=开火 (暗夜精灵族)
+
+[Afio]
+Name=开火 (兽族)
+
+[Afir]
+Name=开火
+
+[Afiu]
+Name=开火 (不死族)
+
+[Aloc]
+Name=蝗虫
+
+[Amov]
+Name=移动
+
+[Atdp]
+Name=放下驾驶员
+
+[Atlp]
+Name=装载驾驶员
+
+[Attu]
+Name=小塔
+
+// Stun buff
+[BSTN]
+Bufftip=被击晕的
+Buffubertip="该单位被击晕了，所以不能移动，攻击和施放魔法。"
+
+// Pause buff
+[BPSE]
+Bufftip=被击晕的
+Buffubertip="该单位不能移动。"
+EditorSuffix= (暂停)
+
+[Xbdt]
+EditorName=显示 (效果)
+
+[Xbli]
+EditorName=荒芜之地(效果)
+
+[Xdis]
+EditorName=英雄  驱散 (效果)

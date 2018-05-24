@@ -1,0 +1,2963 @@
+// permits dependencies upon heroes
+[HERO]
+DependencyOr=Hamg,Hblm,Hmkg,Hpal,Obla,Ofar,Oshd,Otch,Edem,Ekee,Emoo,Ewar,Ucrl,Udea,Udre,Ulic,Npbm,Nbrn,Nngs,Nplh,Nbst,Nalc,Ntin,Nfir
+
+[nwad]
+Art=ReplaceableTextures\CommandButtons\BTNSentryWard.blp
+
+// skeletal archer
+[nska]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonArcher.blp
+Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+
+// skeleton
+[nske]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
+
+// skeletal archer (summoned)
+[nsca]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonArcher.blp
+Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+
+// skeleton (summoned)
+[nsce]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
+
+// giant skeleton
+[nskg]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
+
+// skeletal marksman
+[nskm]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonArcher.blp
+Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+
+// burning archer
+[nskf]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonArcher.blp
+Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+
+// wind serpent 1
+[nws1]
+Art=ReplaceableTextures\CommandButtons\BTNDragonHawk.blp
+Buttonpos=1,0
+Missileart=Abilities\Weapons\DragonHawkMissile\DragonHawkMissile.mdl
+Missilearc=0.15
+Missilespeed=1100
+MissileHoming=1
+Attachmentanimprops=medium
+
+// wind serpent 2
+[nws2]
+Art=ReplaceableTextures\CommandButtons\BTNDragonHawk.blp
+Buttonpos=1,0
+Missileart=Abilities\Weapons\DragonHawkMissile\DragonHawkMissile.mdl
+Missilearc=0.15
+Missilespeed=1100
+MissileHoming=1
+Attachmentanimprops=medium
+
+// bandit 1
+[nban]
+Art=ReplaceableTextures\CommandButtons\BTNBandit.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// brigand
+[nbrg]
+Art=ReplaceableTextures\CommandButtons\BTNBanditSpearThrower.blp
+Missileart=Abilities\Weapons\Banditmissile\Banditmissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// bandit 2
+[nrog]
+Art=ReplaceableTextures\CommandButtons\BTNBandit.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// bandit 3
+[nenf]
+Art=ReplaceableTextures\CommandButtons\BTNBandit.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// bandit lord
+[nbld]
+Art=ReplaceableTextures\CommandButtons\BTNBanditLord.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// assassin
+[nass]
+Art=ReplaceableTextures\CommandButtons\BTNBanditSpearThrower.blp
+Missileart=Abilities\Weapons\Banditmissile\Banditmissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// black dragon whelp
+[nbdr]
+Art=ReplaceableTextures\CommandButtons\BTNBlackDragon.blp
+Missileart=Abilities\Weapons\RedDragonBreath\RedDragonMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+Attachmentanimprops=medium
+
+// black drake
+[nbdk]
+Art=ReplaceableTextures\CommandButtons\BTNBlackDragon.blp
+Missileart=Abilities\Weapons\FireballMissile\FireballMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+Attachmentanimprops=medium
+
+// black dragon
+[nbwm]
+Attachmentanimprops=medium
+Missileart=Abilities\Weapons\RedDragonBreath\RedDragonMissile.mdl
+Missilearc=0.00
+Art=ReplaceableTextures\CommandButtons\BTNBlackDragon.blp
+
+// blue dragon whelp
+[nadw]
+Attachmentanimprops=medium
+Art=ReplaceableTextures\CommandButtons\BTNAzureDragon.blp
+Missileart=Abilities\Weapons\FrostWyrmMissile\FrostWyrmMissile.mdl
+Missilearc=0.1
+Missilespeed=800
+
+// blue drake
+[nadk]
+Attachmentanimprops=medium
+Art=ReplaceableTextures\CommandButtons\BTNAzureDragon.blp
+Missileart=Abilities\Weapons\FrostWyrmMissile\FrostWyrmMissile.mdl
+Missilearc=0.1
+Missilespeed=800
+
+// blue dragon
+[nadr]
+Attachmentanimprops=medium
+Art=ReplaceableTextures\CommandButtons\BTNAzureDragon.blp
+Missileart=Abilities\Weapons\FrostWyrmMissile\FrostWyrmMissile.mdl
+Missilearc=0.1
+Missilespeed=800
+
+// bronze dragon whelp
+[nbzw]
+Attachmentanimprops=medium
+Missileart=Abilities\Weapons\ChimaeraLightningMissile\ChimaeraLightningMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+Art=ReplaceableTextures\CommandButtons\BTNBronzeDragon.blp
+
+// bronze drake
+[nbzk]
+Attachmentanimprops=medium
+Missileart=Abilities\Weapons\ChimaeraLightningMissile\ChimaeraLightningMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+Art=ReplaceableTextures\CommandButtons\BTNBronzeDragon.blp
+
+// bronze dragon
+[nbzd]
+Attachmentanimprops=medium
+Missileart=Abilities\Weapons\ChimaeraLightningMissile\ChimaeraLightningMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+Art=ReplaceableTextures\CommandButtons\BTNBronzeDragon.blp
+
+// green dragon whelp
+[ngrw]
+Attachmentanimprops=medium
+Art=ReplaceableTextures\CommandButtons\BTNGreenDragon.blp
+Missileart=Abilities\Weapons\GreenDragonMissile\GreenDragonMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+
+// green drake
+[ngdk]
+Attachmentanimprops=medium
+Art=ReplaceableTextures\CommandButtons\BTNGreenDragon.blp
+Missileart=Abilities\Weapons\GreenDragonMissile\GreenDragonMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+
+// green dragon
+[ngrd]
+Attachmentanimprops=medium
+Art=ReplaceableTextures\CommandButtons\BTNGreenDragon.blp
+Missileart=Abilities\Weapons\GreenDragonMissile\GreenDragonMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+
+// red dragon whelp
+[nrdk]
+Art=ReplaceableTextures\CommandButtons\BTNRedDragon.blp
+Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+Attachmentanimprops=medium
+
+// red drake
+[nrdr]
+Art=ReplaceableTextures\CommandButtons\BTNRedDragon.blp
+Missileart=Abilities\Weapons\RedDragonBreath\RedDragonMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+Attachmentanimprops=medium
+
+// red dragon
+[nrwm]
+Art=ReplaceableTextures\CommandButtons\BTNRedDragon.blp
+Attachmentanimprops=medium
+Missileart=Abilities\Weapons\RedDragonBreath\RedDragonMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+
+// black dragon roost
+[ndrk]
+Art=ReplaceableTextures\CommandButtons\BTNBlackDragonRoost.blp
+Sellunits=nbdr,nbdk,nbwm
+
+// blue dragon roost
+[ndru]
+Art=ReplaceableTextures\CommandButtons\BTNBlueDragonRoost.blp
+Sellunits=nadw,nadk,nadr
+
+// bronze dragon roost
+[ndrz]
+Art=ReplaceableTextures\CommandButtons\BTNDragonRoost.blp
+Sellunits=nbzw,nbzk,nbzd
+
+// green dragon roost
+[ndrg]
+Art=ReplaceableTextures\CommandButtons\BTNGreenDragonRoost.blp
+Sellunits=ngrw,ngdk,ngrd
+
+// red dragon roost
+[ndrr]
+Art=ReplaceableTextures\CommandButtons\BTNDragonRoost.blp
+Sellunits=nrdk,nrdr,nrwm
+
+// centaur archer
+[ncea]
+Art=ReplaceableTextures\CommandButtons\BTNCentaurArcher.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// centaur impaler
+[ncim]
+Art=ReplaceableTextures\CommandButtons\BTNCentaurArcher.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// centaur outrunner
+[ncen]
+Art=ReplaceableTextures\CommandButtons\BTNcentaur.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// centaur drudge
+[ncer]
+Art=ReplaceableTextures\CommandButtons\BTNcentaur.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// centaur sorceror
+[ncks]
+Art=ReplaceableTextures\CommandButtons\BTNCentaurKhan.blp
+Missileart=Abilities\Weapons\FireballMissile\FireballMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// centaur khan
+[ncnk]
+Art=ReplaceableTextures\CommandButtons\BTNCentaurKhan.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Dark Troll High Priest
+[ndth]
+Art=ReplaceableTextures\CommandButtons\BTNDarkTrollShadowPriest.blp
+Missileart=Abilities\Weapons\FireballMissile\FireballMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// Dark Troll Shadow Priest
+[ndtp]
+Art=ReplaceableTextures\CommandButtons\BTNDarkTrollShadowPriest.blp
+Missileart=Abilities\Weapons\FireballMissile\FireballMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// Dark troll
+[ndtr]
+Art=ReplaceableTextures\CommandButtons\BTNDarkTroll.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// dark troll berserker
+[ndtb]
+Art=ReplaceableTextures\CommandButtons\BTNDarkTroll.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// dark troll trapper
+[ndtt]
+Art=ReplaceableTextures\CommandButtons\BTNDarkTrollTrapper.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// dark troll warlord
+[ndtw]
+Art=ReplaceableTextures\CommandButtons\BTNDarkTrollTrapper.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// berserk elemental
+[nelb]
+Art=ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.blp
+Missileart=Abilities\Weapons\WaterElementalMissile\WaterElementalMissile.mdl
+Missilearc=0.15
+Missilespeed=1300
+Attachmentanimprops=medium
+
+// enraged elemental
+[nele]
+Art=ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.blp
+Missileart=Abilities\Weapons\WaterElementalMissile\WaterElementalMissile.mdl
+Missilearc=0.15
+Missilespeed=1300
+Attachmentanimprops=medium
+
+[nenc]
+Art=ReplaceableTextures\CommandButtons\BTNCorruptedEnt.blp
+Attachmentanimprops=medium
+
+[nenp]
+Art=ReplaceableTextures\CommandButtons\BTNCorruptedEnt.blp
+Attachmentanimprops=medium
+
+[nepl]
+Art=ReplaceableTextures\CommandButtons\BTNCorruptedEnt.blp
+Attachmentanimprops=medium
+
+// fel stalker
+[nfel]
+Art=ReplaceableTextures\CommandButtons\BTNFelHound.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Forest Troll High Priest
+[nfsh]
+Art=ReplaceableTextures\CommandButtons\BTNForestTrollShadowPriest.blp
+Missileart=Abilities\Weapons\FireballMissile\FireballMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+// Forest Troll Shadow Priest
+[nfsp]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNForestTrollShadowPriest.blp
+Missileart=Abilities\Weapons\FireballMissile\FireballMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// forest troll 1
+[nftr]
+Art=ReplaceableTextures\CommandButtons\BTNForestTroll.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// forest troll berserker
+[nftb]
+Buttonpos=1,0
+Art=ReplaceableTextures\CommandButtons\BTNForestTroll.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// forest troll 3
+[nftt]
+Art=ReplaceableTextures\CommandButtons\BTNForestTrollTrapper.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// forest troll king
+[nftk]
+Art=ReplaceableTextures\CommandButtons\BTNForestTroll.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+[nnom]
+// Goblin Laboratory
+[ngad]
+Art=ReplaceableTextures\CommandButtons\BTNAmmoDump.blp
+Sellunits=ngsp,nzep,ngir
+
+// goblin merchant
+[ngme]
+Art=ReplaceableTextures\CommandButtons\BTNMerchant.blp
+Sellitems=stwp,bspd,dust,tret,prvt,cnob,stel,pnvl,shea,spro,pinv
+
+// goblin shipyard
+[nshp]
+Art=ReplaceableTextures\CommandButtons\BTNGoblinShipyard.blp
+Sellunits=nbot
+
+// rock golem 1
+[ngrk]
+Buttonpos=2,0
+Attachmentanimprops=large
+Art=ReplaceableTextures\CommandButtons\BTNRockGolem.blp
+
+// rock golem 2
+[ngst]
+Attachmentanimprops=large
+Missileart=Abilities\Weapons\AncientProtectorMissile\AncientProtectorMissile.mdl
+Missilearc=0.0
+Missilespeed=1000
+Art=ReplaceableTextures\CommandButtons\BTNRockGolem.blp
+
+// rock golem 3
+[nggr]
+Attachmentanimprops=large
+Missileart=Abilities\Weapons\AncientProtectorMissile\AncientProtectorMissile.mdl
+Missilearc=0.0
+Missilespeed=1000
+Art=ReplaceableTextures\CommandButtons\BTNRockGolem.blp
+
+// battle golem
+[narg]
+Attachmentanimprops=large
+Art=ReplaceableTextures\CommandButtons\BTNArmorGolem.blp
+
+// war golem
+[nwrg]
+Attachmentanimprops=large
+Art=ReplaceableTextures\CommandButtons\BTNArmorGolem.blp
+
+// siege golem
+[nsgg]
+Attachmentanimprops=large
+Art=ReplaceableTextures\CommandButtons\BTNArmorGolem.blp
+
+// goblin shredder
+[ngir]
+Attachmentanimprops=medium
+Art=ReplaceableTextures\CommandButtons\BTNJunkGolem.blp
+
+// Furbolg level 4
+[nfrl]
+Art=ReplaceableTextures\CommandButtons\BTNFurbolg.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Furbolg Tracker level 6
+[nfrb]
+Art=ReplaceableTextures\CommandButtons\BTNFurbolgTracker.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Furbolg Champion level 7
+[nfrg]
+Art=ReplaceableTextures\CommandButtons\BTNFurbolg.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Furbolg Ursa Warrior level 8
+[nfra]
+Art=ReplaceableTextures\CommandButtons\BTNFurbolgElder.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Furbolg Shaman level 4
+[nfrs]
+Art=ReplaceableTextures\CommandButtons\BTNFurbolgShaman.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Furbolg Elder Shaman level 7
+[nfre]
+Art=ReplaceableTextures\CommandButtons\BTNFurbolgShaman.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\LichMissile\LichMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// ghost
+[ngh1]
+Art=ReplaceableTextures\CommandButtons\BTNGhost.blp
+Missileart=Abilities\Weapons\BansheeMissile\BansheeMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+
+// wraith
+[ngh2]
+Art=ReplaceableTextures\CommandButtons\BTNGhost.blp
+Missileart=Abilities\Weapons\BansheeMissile\BansheeMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+
+// gnoll poacher
+[ngna]
+Art=ReplaceableTextures\CommandButtons\BTNGnollArcher.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// gnoll assassin
+[ngns]
+Art=ReplaceableTextures\CommandButtons\BTNGnollArcher.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\PoisonArrow\PoisonArrowMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// gnoll 1
+[ngno]
+Art=ReplaceableTextures\CommandButtons\BTNGnoll.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// gnoll brute
+[ngnb]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNGnoll.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// gnoll warden
+[ngnw]
+Buttonpos=1,0
+Art=ReplaceableTextures\CommandButtons\BTNGnollWarden.blp
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// gnoll overseer
+[ngnv]
+Buttonpos=3,0
+Art=ReplaceableTextures\CommandButtons\BTNGnollKing.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// Gold Mine
+[ngol]
+Art=ReplaceableTextures\CommandButtons\BTNGoldMine.blp
+
+// goblin sapper
+[ngsp]
+Art=ReplaceableTextures\CommandButtons\BTNGoblinSapper.blp
+Buttonpos=0,0
+
+// harpy scout
+[nhar]
+Buttonpos=1,0
+Art=ReplaceableTextures\CommandButtons\BTNHarpy.blp
+Missileart=Abilities\Weapons\HarpyMissile\HarpyMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+
+// harpy rogue
+[nhrr]
+Buttonpos=1,0
+Art=ReplaceableTextures\CommandButtons\BTNHarpy.blp
+Missileart=Abilities\Weapons\HarpyMissile\HarpyMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+
+// harpy wind witch
+[nhrw]
+Buttonpos=2,0
+Art=ReplaceableTextures\CommandButtons\BTNHarpyWitch.blp
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+// harpy hag
+[nhrh]
+Art=ReplaceableTextures\CommandButtons\BTNHarpyWitch.blp
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+// harpy queen
+[nhrq]
+Art=ReplaceableTextures\CommandButtons\BTNHarpyQueen.blp
+Missileart=Abilities\Weapons\GargoyleMissile\GargoyleMissile.mdl
+Missilearc=0.0
+Missilespeed=1000
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+// fallen priest
+[nhfp]
+Art=ReplaceableTextures\CommandButtons\BTNAcolyte.blp
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Undead\UndeadLargeDeathExplode\UndeadLargeDeathExplode.mdl
+
+// deceiver
+[nhdc]
+Art=ReplaceableTextures\CommandButtons\BTNAcolyte.blp
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Undead\UndeadLargeDeathExplode\UndeadLargeDeathExplode.mdl
+
+// heretic
+[nhhr]
+Art=ReplaceableTextures\CommandButtons\BTNAcolyte.blp
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Undead\UndeadLargeDeathExplode\UndeadLargeDeathExplode.mdl
+
+// ice troll
+[nitr]
+Art=ReplaceableTextures\CommandButtons\BTNIceTroll.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// ice troll berserker
+[nits]
+Buttonpos=1,0
+Art=ReplaceableTextures\CommandButtons\BTNIceTrollBeserker.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// ice troll trapper
+[nitt]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNICeTroll.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// ice troll warlord
+[nitw]
+Art=ReplaceableTextures\CommandButtons\BTNICeTroll.blp
+Missileart=Abilities\Weapons\Axe\AxeMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// ice troll high priest
+[nith]
+Art=ReplaceableTextures\CommandButtons\BTNIceTrollShaman.blp
+Missileart=Abilities\Weapons\LichMissile\LichMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// ice troll priest
+[nitp]
+Art=ReplaceableTextures\CommandButtons\BTNIceTrollShadowPriest.blp
+Missileart=Abilities\Weapons\LichMissile\LichMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// kobold
+[nkob]
+Art=ReplaceableTextures\CommandButtons\BTNKobold.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// kobold geomancer
+[nkog]
+Buttonpos=2,0
+Art=ReplaceableTextures\CommandButtons\BTNKoboldGeomancer.blp
+Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// kobold taskmaster
+[nkol]
+Art=ReplaceableTextures\CommandButtons\BTNKobold.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// kobold tunneler
+[nkot]
+Art=ReplaceableTextures\CommandButtons\BTNKobold.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// lightning lizard
+[nltl]
+Art=ReplaceableTextures\CommandButtons\BTNThunderLizard.blp
+Missileart=Abilities\Weapons\ChimaeraLightningMissile\ChimaeraLightningMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// monster lure
+[nlur]
+Art=ReplaceableTextures\CommandButtons\BTNMonsterLure.blp
+
+// thunder lizard
+[nthl]
+Art=ReplaceableTextures\CommandButtons\BTNThunderLizard.blp
+Missileart=Abilities\Weapons\ChimaeraLightningMissile\ChimaeraLightningMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// storm wyrm
+[nstw]
+Art=ReplaceableTextures\CommandButtons\BTNThunderLizard.blp
+Missileart=Abilities\Weapons\ChimaeraLightningMissile\ChimaeraLightningMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// murloc flesheater
+[nmfs]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNMurlocFlesheater.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// murloc mutant
+[nmmu]
+Art=ReplaceableTextures\CommandButtons\BTNMurlocMutant.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// murloc plaguebearer
+[nmpg]
+Art=ReplaceableTextures\CommandButtons\BTNMurlocMutant.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// murloc tiderunner
+[nmrl]
+Art=ReplaceableTextures\CommandButtons\BTNMurloc.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// murloc huntsman
+[nmrr]
+Art=ReplaceableTextures\CommandButtons\BTNMurloc.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// murloc nightcrawler
+[nmrm]
+Art=ReplaceableTextures\CommandButtons\BTNMurlocNightCrawler.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// owlbear
+[nowb]
+Buttonpos=1,0
+Art=ReplaceableTextures\CommandButtons\BTNOwlBear.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+// enraged owlbear
+[nowe]
+Art=ReplaceableTextures\CommandButtons\BTNOwlBear.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+// berserk owlbear
+[nowk]
+Art=ReplaceableTextures\CommandButtons\BTNOwlBear.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+// razormane scout
+[nrzs]
+Art=ReplaceableTextures\CommandButtons\BTNRazorback.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// razormane brute
+[nrzb]
+Art=ReplaceableTextures\CommandButtons\BTNRazorback.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// razormane medicine man
+[nrzm]
+Buttonpos=3,0
+Art=ReplaceableTextures\CommandButtons\BTNRazorManeChief.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// razormane chieftain
+[nrzg]
+Art=ReplaceableTextures\CommandButtons\BTNRazorManeChief.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+
+// quillboar
+[nrzt]
+Art=ReplaceableTextures\CommandButtons\BTNRazorback.blp
+Missileart=Abilities\Weapons\BristleBackMissile\BristleBackMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// quillboar hunter
+[nqbh]
+Art=ReplaceableTextures\CommandButtons\BTNRazorback.blp
+Missileart=Abilities\Weapons\BristleBackMissile\BristleBackMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+[nspd]
+Art=ReplaceableTextures\CommandButtons\BTNNerubian.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+[nnwa]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNNerubian.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+[nnwl]
+Buttonpos=2,0
+Art=ReplaceableTextures\CommandButtons\BTNNerubianQueen.blp
+Missileart=Abilities\Weapons\CryptFiendMissile\CryptFiendMissile.mdl
+Missilearc=0.15
+Missilespeed=500
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+[nnws]
+Art=ReplaceableTextures\CommandButtons\BTNnerubianSpiderLord.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+[nnwr]
+Art=ReplaceableTextures\CommandButtons\BTNnerubianSpiderLord.blp
+Missileart=Abilities\Weapons\CryptFiendMissile\CryptFiendMissile.mdl
+Missilearc=0.15
+Missilespeed=500
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+[nnwq]
+Art=ReplaceableTextures\CommandButtons\BTNNerubianQueen.blp
+Missileart=Abilities\Weapons\CryptFiendMissile\CryptFiendMissile.mdl
+Missilearc=0.15
+Missilespeed=500
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Mercenary Camp Lord Summer
+[nmer]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=nftb,nfsp,nogm,ngrk
+
+// Lord Fall
+[nmr2]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=ngnb,ngnw,nomg,ngrk
+
+// Lord Winter
+[nmr3]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=ngnv,nits,nitt,ngrk
+
+// Barrens
+[nmr4]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=ncen,nhrr,nrzm,nhrw
+
+// Ashenvale
+[nmr5]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=nsts,nfrs,nthl
+
+// Felwood
+[nmr6]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=nmfs,nslf,nstl
+
+// Northrend
+[nmr7]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=nnwa,nits,nrvs,nnwl
+
+// Cityscape
+[nmr8]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=nrog,nass,nkog,nfsh
+
+// Dalaran
+[nmr9]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=nrog,nass,nkog,nfsh
+
+// Village (fall)
+[nmr0]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=nkob,nmrr,nass,nkog
+
+// Dungeon
+[nmra]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=nskf,nkog,nowb
+
+// Underground
+[nmrb]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=nskf,nkog,nowb
+
+// Sunken Ruins
+[nmrc]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=nmsn,nlsn,nlds,ntrt
+
+// Icecrown Glacier
+[nmrd]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=nanm,nbdm,nmgw,nfps
+
+// outland
+[nmre]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=npfl,ndrm,nvdw,ndrd
+
+// black citadel
+[nmrf]
+Art=ReplaceableTextures\CommandButtons\BTNMercenaryCamp.blp
+Sellunits=npfl,ndrm,nvdw,ndrd
+
+
+// Tavern
+[ntav]
+Art=ReplaceableTextures\CommandButtons\BTNTavern.blp
+Sellunits=Nalc,Ntin,Nfir,Nngs,Nbrn,Npbm,Nplh,Nbst
+
+// Fountain of Power
+[nmoo]
+Art=ReplaceableTextures\CommandButtons\BTNFountainOfLife.blp
+
+// fountain of health
+[nfoh]
+Art=ReplaceableTextures\CommandButtons\BTNFountainOfLife.blp
+
+// Marketplace
+[nmrk]
+Art=ReplaceableTextures\CommandButtons\BTNBlackMarket.blp
+
+
+// ogre 1
+[nogr]
+Attachmentanimprops=medium
+Art=ReplaceableTextures\CommandButtons\BTNOgre.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+// ogre 2
+[nogm]
+Buttonpos=3,0
+Attachmentanimprops=medium
+Art=ReplaceableTextures\CommandButtons\BTNOgre.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+// ogre lord
+[nogl]
+Attachmentanimprops=medium
+Art=ReplaceableTextures\CommandButtons\BTNOgreLord.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+// ogre magi
+[nomg]
+Attachmentanimprops=medium
+Art=ReplaceableTextures\CommandButtons\BTNOgreMagi.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+// fire revenant
+[nrvf]
+Art=ReplaceableTextures\CommandButtons\BTNRevenant.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// frost revenant
+[nrvs]
+Buttonpos=3,0
+Art=ReplaceableTextures\CommandButtons\BTNRevenant.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// lightning revenant
+[nrvl]
+Art=ReplaceableTextures\CommandButtons\BTNRevenant.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// ice revenant
+[nrvi]
+Art=ReplaceableTextures\CommandButtons\BTNRevenant.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// death revenant
+[nrvd]
+Art=ReplaceableTextures\CommandButtons\BTNRevenant.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// sludge minion
+[nslm]
+Art=ReplaceableTextures\CommandButtons\BTNSludgeCreature.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+//sludge flinger
+[nslf]
+Buttonpos=1,0
+Art=ReplaceableTextures\CommandButtons\BTNSludgeCreature.blp
+Missileart=Abilities\Weapons\SludgeMissile\SludgeMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// sludge monstrosity
+[nsln]
+Art=ReplaceableTextures\CommandButtons\BTNSludgeCreature.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// salamander hatchling
+[nslh]
+Art=ReplaceableTextures\CommandButtons\BTNThunderLizardSalamander.blp
+Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Attachmentanimprops=large
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// salamander
+[nslr]
+Art=ReplaceableTextures\CommandButtons\BTNThunderLizardSalamander.blp
+Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Attachmentanimprops=large
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// salamander vizier
+[nslv]
+Art=ReplaceableTextures\CommandButtons\BTNThunderLizardVizier.blp
+Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Attachmentanimprops=large
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// salamander lord
+[nsll]
+Art=ReplaceableTextures\CommandButtons\BTNThunderLizardSalamander.blp
+Missileart=Abilities\Weapons\RedDragonBreath\RedDragonMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Attachmentanimprops=large
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// satyr Trickster
+[nsat]
+Art=ReplaceableTextures\CommandButtons\BTNSatyrTrickster.blp
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// satyr shadowdancer
+[nsts]
+Art=ReplaceableTextures\CommandButtons\BTNSatyrTrickster.blp
+Missileart=Abilities\Weapons\BlackKeeperMissile\BlackKeeperMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// satyr hellcaller
+[nsth]
+Art=ReplaceableTextures\CommandButtons\BTNSatyr.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// satyr soulstealer
+[nstl]
+Buttonpos=2,0
+Art=ReplaceableTextures\CommandButtons\BTNSatyr.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// satyr
+[nsty]
+Art=ReplaceableTextures\CommandButtons\BTNSatyr.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// black spider
+[nspb]
+Art=ReplaceableTextures\CommandButtons\BTNSpiderBlack.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// spider
+[nspr]
+Art=ReplaceableTextures\CommandButtons\BTNSpider.blp
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// giant spider
+[nsgt]
+Art=ReplaceableTextures\CommandButtons\BTNSpider.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// spitting spider
+[nssp]
+Art=ReplaceableTextures\CommandButtons\BTNSpiderBlue.blp
+Missileart=Abilities\Weapons\ChimaeraAcidMissile\ChimaeraAcidMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// brood mother
+[nsbm]
+Art=ReplaceableTextures\CommandButtons\BTNSpiderBlue.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// green spider
+[nspg]
+Art=ReplaceableTextures\CommandButtons\BTNSpiderGreen.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// sasquatch
+[nsqt]
+Art=ReplaceableTextures\CommandButtons\BTNSasquatch.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// elder sasquatch
+[nsqe]
+Art=ReplaceableTextures\CommandButtons\BTNSasquatchShaman.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// sasquatch oracle
+[nsqo]
+Art=ReplaceableTextures\CommandButtons\BTNSasquatch.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// ancient sasquatch
+[nsqa]
+Art=ReplaceableTextures\CommandButtons\BTNSasquatch.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// dog
+[ndog]
+Art=ReplaceableTextures\CommandButtons\BTNWolf.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// pig critter
+[npig]
+Art=ReplaceableTextures\CommandButtons\BTNPig.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// stag critter
+[nder]
+Art=ReplaceableTextures\CommandButtons\BTNStag.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+[nsea]
+Art=ReplaceableTextures\CommandButtons\BTNSeal.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+[nshe]
+Art=ReplaceableTextures\CommandButtons\BTNSheep.blp
+RandomSoundLabel=SheepRandomSounds
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+[nshf]
+Art=ReplaceableTextures\CommandButtons\BTNSheep.blp
+RandomSoundLabel=SheepRandomSounds
+
+[nsha]
+Art=ReplaceableTextures\CommandButtons\BTNSheep.blp
+RandomSoundLabel=SheepRandomSounds
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+[nshw]
+Art=ReplaceableTextures\CommandButtons\BTNSheep.blp
+RandomSoundLabel=SheepRandomSounds
+Animprops=swim
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// vulture
+[nvul]
+Art=ReplaceableTextures\CommandButtons\BTNVulture.blp
+
+// male villager
+[nvil]
+Art=ReplaceableTextures\CommandButtons\BTNVillagerMan.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// kid villager
+[nvlk]
+Art=ReplaceableTextures\CommandButtons\BTNVillagerKid.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// female villager
+[nvlw]
+Art=ReplaceableTextures\CommandButtons\BTNVillagerWoman.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// wendigo
+[nwen]
+Art=ReplaceableTextures\CommandButtons\BTNWendigo.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// timber wolf
+[nwlt]
+Art=ReplaceableTextures\CommandButtons\BTNTimberWolf.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// giant wolf
+[nwlg]
+Art=ReplaceableTextures\CommandButtons\BTNTimberWolf.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// dire wolf
+[nwld]
+Art=ReplaceableTextures\CommandButtons\BTNDireWolf.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// white wolf
+[nwwf]
+Art=ReplaceableTextures\CommandButtons\BTNTimberWolf.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// giant white wolf
+[nwwg]
+Art=ReplaceableTextures\CommandButtons\BTNTimberWolf.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+// white dire wolf
+[nwwd]
+Art=ReplaceableTextures\CommandButtons\BTNTimberWolf.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+// elder wendigo
+[nwnr]
+Art=ReplaceableTextures\CommandButtons\BTNWendigo.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+// ancient wendigo
+[nwna]
+Art=ReplaceableTextures\CommandButtons\BTNWendigo.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// wendigo shaman
+[nwns]
+Art=ReplaceableTextures\CommandButtons\BTNWendigo.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+// rogue wizard
+[nwzr]
+Art=ReplaceableTextures\CommandButtons\BTNBanditMage.blp
+Missileart=Abilities\Weapons\LichMissile\LichMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+// renegade wizard
+[nwzg]
+Art=ReplaceableTextures\CommandButtons\BTNBanditMage.blp
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+// apprentice wizard
+[nwiz]
+Art=ReplaceableTextures\CommandButtons\BTNBanditMage.blp
+Missileart=Abilities\Weapons\PriestMissile\PriestMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+// dark wizard
+[nwzd]
+Art=ReplaceableTextures\CommandButtons\BTNBanditMage.blp
+Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+[nzep]
+Art=ReplaceableTextures\CommandButtons\BTNGoblinZeppelin.blp
+Buttonpos=0,0
+MovementSoundLabel=GoblinZeppelinMovement
+LoopingSoundFadeIn=512
+LoopingSoundFadeOut=512
+Attachmentanimprops=large
+
+[ninf]
+Art=ReplaceableTextures\CommandButtons\BTNInfernal.blp
+Attachmentanimprops=large
+
+[nbal]
+Art=ReplaceableTextures\CommandButtons\BTNDoomGuard.blp
+Missileart=Abilities\Weapons\DemonHunterMissile\DemonHunterMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+Attachmentanimprops=medium
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+//summoned doomguard
+[nba2]
+Art=ReplaceableTextures\CommandButtons\BTNDoomGuard.blp
+Missileart=Abilities\Weapons\DemonHunterMissile\DemonHunterMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+Attachmentanimprops=medium
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+[nglm]
+Art=ReplaceableTextures\CommandButtons\BTNGoblinLandMine.blp
+
+[nwgt]
+Art=ReplaceableTextures\CommandButtons\BTNWaygate.blp
+
+[ncnt]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[nct1]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[nct2]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[ntnt]
+Art=ReplaceableTextures\CommandButtons\BTNTaurenHut.blp
+
+[ntt2]
+Art=ReplaceableTextures\CommandButtons\BTNTaurenHut.blp
+
+[ngnh]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[ngt2]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[nten]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[ntn2]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[nfh0]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[nfh1]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[nfr1]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[nfr2]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[nth0]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[nth1]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[ncb0]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncb1]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncb2]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncb3]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncb4]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncb5]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncb6]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncb7]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncb8]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncb9]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncba]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncbb]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncbc]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncbd]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncbe]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[ncbf]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+Attachmentanimprops=large
+
+[nmh0]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[nmh1]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+// nerubian ziggurat
+[nnzg]
+Art=ReplaceableTextures\CommandButtons\BTNNerubianZiggurat.blp
+
+// circle of power
+[ncop]
+Art=ReplaceableTextures\CommandButtons\BTNCOP.blp
+
+[ncp2]
+Art=ReplaceableTextures\CommandButtons\BTNCOP.blp
+
+[ncp3]
+Art=ReplaceableTextures\CommandButtons\BTNCOP.blp
+
+// harpy nest
+[nhns]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+// owl
+[nowl]
+Art=ReplaceableTextures\CommandButtons\BTNScout.blp
+
+// owl 2
+[now2]
+Art=ReplaceableTextures\CommandButtons\BTNScout.blp
+
+// owl 3
+[now3]
+Art=ReplaceableTextures\CommandButtons\BTNScout.blp
+
+// spirit pig
+[nspp]
+Art=ReplaceableTextures\CommandButtons\BTNRazorback.blp
+
+// Pandaren Brewmaster
+[Npbm]
+Art=ReplaceableTextures\CommandButtons\BTNPandarenBrewmaster.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Missileart=Abilities\Weapons\BrewmasterMissile\BrewmasterMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Buttonpos=2,1
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+Attachmentanimprops=large
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-pandarenbrewmaster.blp
+
+// fire
+[npn1]
+Art=ReplaceableTextures\CommandButtons\BTNFireBrewmaster.blp
+Attachmentanimprops=medium
+
+// storm
+[npn2]
+Art=ReplaceableTextures\CommandButtons\BTNStormBrewmaster.blp
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Attachmentanimprops=medium
+
+// earth
+[npn3]
+Art=ReplaceableTextures\CommandButtons\BTNEarthBrewmaster.blp
+Attachmentanimprops=medium
+
+// Alchemist
+[Nalc]
+Art=ReplaceableTextures\CommandButtons\BTNHeroAlchemist.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Missileart=Abilities\Weapons\BrewmasterMissile\BrewmasterMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Buttonpos=3,2
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+Attachmentanimprops=large
+DependencyOr=Nalm,Nal2,Nal3
+// do NOT put a similar DependencyOr on Nalm
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-alchemist.blp
+
+// Alchemist
+[Nalm]
+Art=ReplaceableTextures\CommandButtons\BTNHeroAlchemist.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Missileart=Abilities\Weapons\BrewmasterMissile\BrewmasterMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Buttonpos=3,2
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+Attachmentanimprops=large
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-alchemist.blp
+
+// Alchemist
+[Nal2]
+Art=ReplaceableTextures\CommandButtons\BTNHeroAlchemist.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Missileart=Abilities\Weapons\BrewmasterMissile\BrewmasterMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Buttonpos=3,2
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+Attachmentanimprops=large
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-alchemist.blp
+
+// Alchemist
+[Nal3]
+Art=ReplaceableTextures\CommandButtons\BTNHeroAlchemist.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Missileart=Abilities\Weapons\BrewmasterMissile\BrewmasterMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Buttonpos=3,2
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+Attachmentanimprops=large
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-alchemist.blp
+
+// Tinker
+[Ntin]
+Art=ReplaceableTextures\CommandButtons\BTNHeroTinker.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Missileart=Abilities\Weapons\BrewmasterMissile\BrewmasterMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Buttonpos=2,2
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+Attachmentanimprops=large
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-tinker.blp
+
+// Tinker -- Robo Goblin
+[Nrob]
+Art=ReplaceableTextures\CommandButtons\BTNHeroTinker.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Missileart=Abilities\Weapons\BrewmasterMissile\BrewmasterMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+Buttonpos=2,2
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+Attachmentanimprops=large
+Attachmentlinkprops=alternate
+Boneprops=alternate
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-tinker.blp
+
+// clockwerk goblin 
+[ncgb]
+Art=ReplaceableTextures\CommandButtons\BTNClockWerkGoblin.blp
+Attachmentanimprops=medium
+
+// clockwerk goblin 
+[ncg1]
+Art=ReplaceableTextures\CommandButtons\BTNClockWerkGoblin.blp
+Attachmentanimprops=medium
+
+// clockwerk goblin 
+[ncg2]
+Art=ReplaceableTextures\CommandButtons\BTNClockWerkGoblin.blp
+Attachmentanimprops=medium
+
+// clockwerk goblin 
+[ncg3]
+Art=ReplaceableTextures\CommandButtons\BTNClockWerkGoblin.blp
+Attachmentanimprops=medium
+
+// pocket factory (level 1)
+[nfac]
+Art=ReplaceableTextures\CommandButtons\BTNPocketFactory.blp
+Attachmentanimprops=medium
+
+// pocket factory (level 2)
+[nfa1]
+Art=ReplaceableTextures\CommandButtons\BTNPocketFactory.blp
+Attachmentanimprops=medium
+
+// pocket factory (level 3)
+[nfa2]
+Art=ReplaceableTextures\CommandButtons\BTNPocketFactory.blp
+Attachmentanimprops=medium
+
+
+
+// Dark Ranger
+[Nbrn]
+Art=ReplaceableTextures\CommandButtons\BTNBansheeRanger.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Buttonpos=1,1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-bansheeranger.blp
+
+[ndr1]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
+
+[ndr2]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
+
+[ndr3]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
+
+// Skink critter
+[nskk]
+Art=ReplaceableTextures\CommandButtons\BTNSkink.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// crab critter
+[ncrb]
+Art=ReplaceableTextures\CommandButtons\BTNSpinyCrab.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// Chicken critter
+[nech]
+Art=ReplaceableTextures\CommandButtons\BTNCritterChicken.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// Frog critter
+[nfro]
+Art=ReplaceableTextures\CommandButtons\BTNHex.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// Rabbit critter
+[necr]
+Art=ReplaceableTextures\CommandButtons\BTNCritterRabbit.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// Raccoon critter
+[nrac]
+Art=ReplaceableTextures\CommandButtons\BTNRacoon.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+
+// hermit crab critter
+[nhmc]
+Art=ReplaceableTextures\CommandButtons\BTNHermitCrab.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// albatross critter
+[nalb]
+Art=ReplaceableTextures\CommandButtons\BTNAlbatross.blp
+Buttonpos=0,0
+
+// sea turtle hatchling
+[ntrh]
+Art=ReplaceableTextures\CommandButtons\BTNSeaTurtleGreen.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\WaterElementalMissile\WaterElementalMissile.mdl
+Missilearc=0.15
+Missilespeed=1300
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// sea turtle
+[ntrs]
+Art=ReplaceableTextures\CommandButtons\BTNSeaTurtleGreen.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// giant sea turtle
+[ntrt]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNSeaTurtleGreen.blp
+Missileart=Abilities\Weapons\WaterElementalMissile\WaterElementalMissile.mdl
+Missilearc=0.15
+Missilespeed=1300
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// gargantuan sea turtle
+[ntrg]
+Art=ReplaceableTextures\CommandButtons\BTNSeaTurtleGreen.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// dragon turtle
+[ntrd]
+Art=ReplaceableTextures\CommandButtons\BTNSeaTurtleRed.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// hydra
+[nhyd]
+Art=ReplaceableTextures\CommandButtons\BTNGreenHydra.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\ChimaeraAcidMissile\ChimaeraAcidMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// hydra hatchling
+[nhyh]
+Art=ReplaceableTextures\CommandButtons\BTNGreenHydra.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\ChimaeraAcidMissile\ChimaeraAcidMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+// elder hydra
+[nehy]
+Art=ReplaceableTextures\CommandButtons\BTNGreenHydra.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\ChimaeraAcidMissile\ChimaeraAcidMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// ancient hydra
+[nahy]
+Art=ReplaceableTextures\CommandButtons\BTNGreenHydra.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\ChimaeraAcidMissile\ChimaeraAcidMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// lobstrokk prawn
+[nlpr]
+Art=ReplaceableTextures\CommandButtons\BTNLobstrokkRed.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+[nlps]
+Art=ReplaceableTextures\CommandButtons\BTNLobstrokkRed.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// lobstrokk snarecaster
+[nltc]
+Buttonpos=2,0
+Art=ReplaceableTextures\CommandButtons\BTNLobstrokkGreen.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\MakuraMissile\MakuraMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// lobstrokk pool dweller
+[nlpd]
+Art=ReplaceableTextures\CommandButtons\BTNLobstrokkRed.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// lobstrokk deep seer
+[nlds]
+Art=ReplaceableTextures\CommandButtons\BTNLobstrokkGreen.blp
+Buttonpos=3,0
+Missileart=Abilities\Weapons\MakuraMissile\MakuraMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// lobstrokk snapper
+[nlsn]
+Buttonpos=1,0
+Art=ReplaceableTextures\CommandButtons\BTNLobstrokkRed.blp
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// lobstrokk tidal lord
+[nlkl]
+Art=ReplaceableTextures\CommandButtons\BTNLobstrokkBlue.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+Attachmentanimprops=large
+
+// mur'gul cliffrunner
+[nmcf]
+Art=ReplaceableTextures\CommandButtons\BTNMurgulTideWarrior.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// mur'gul blood-gill
+[nmbg]
+Art=ReplaceableTextures\CommandButtons\BTNMurgulBloodGill.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\MurgulMagicMissile\MurgulMagicMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// mur'gul tidewarrior
+[nmtw]
+Art=ReplaceableTextures\CommandButtons\BTNMurgulTideWarrior.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// mur'gul snarecaster
+[nmsn]
+Art=ReplaceableTextures\CommandButtons\BTNMurgulShadowCaster.blp
+Buttonpos=2,0
+Missileart=Abilities\Weapons\MurgulMagicMissile\MurgulMagicMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// mur'gul reaver
+[nmrv]
+Art=ReplaceableTextures\CommandButtons\BTNMurgulBloodGill.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// mur'gul shadowcaster
+[nmsc]
+Art=ReplaceableTextures\CommandButtons\BTNMurgulShadowCaster.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\MurgulMagicMissile\MurgulMagicMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// spider crab
+[nscb]
+Art=ReplaceableTextures\CommandButtons\BTNSpiderCrab.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// revenant of the tides
+[ntrv]
+Art=ReplaceableTextures\CommandButtons\BTNRevenant.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// revenant of the seas
+[nsrv]
+Art=ReplaceableTextures\CommandButtons\BTNRevenant.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// revenant of the depths
+[ndrv]
+Art=ReplaceableTextures\CommandButtons\BTNRevenant.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// deeplord revenant
+[nlrv]
+Art=ReplaceableTextures\CommandButtons\BTNDeepLordRevenant.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// reef elemental
+[nrel]
+Art=ReplaceableTextures\CommandButtons\BTNSeaElemental.blp
+Missileart=Abilities\Weapons\SeaElementalMissile\SeaElementalMissile.mdl
+Missilearc=0.15
+Missilespeed=1300
+Attachmentanimprops=medium
+
+// sea elemental
+[nsel]
+Art=ReplaceableTextures\CommandButtons\BTNSeaElemental.blp
+Missileart=Abilities\Weapons\SeaElementalMissile\SeaElementalMissile.mdl
+Missilearc=0.15
+Missilespeed=1300
+Attachmentanimprops=medium
+
+// sea giant
+[nsgn]
+Art=ReplaceableTextures\CommandButtons\BTNSeaGiant.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// sea giant hunter
+[nsgh]
+Art=ReplaceableTextures\CommandButtons\BTNSeaGiantGreen.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// sea giant behemoth
+[nsgb]
+Art=ReplaceableTextures\CommandButtons\BTNSeaGiant.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// skeletal orc
+[nsko]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletalOrc.blp
+Buttonpos=0,0
+
+// skeletal orc grunt
+[nsog]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletalOrcGrunt.blp
+Buttonpos=0,0
+
+// skeletal orc champion
+[nsoc]
+Art=ReplaceableTextures\CommandButtons\BTNSkeletalOrcChampion.blp
+Buttonpos=0,0
+
+// stormreaver apprentice
+[nsra]
+Art=ReplaceableTextures\CommandButtons\BTNOrcWarlock.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// stormreaver hermit
+[nsrh]
+Art=ReplaceableTextures\CommandButtons\BTNOrcWarlock.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// stormreaver necrolyte
+[nsrn]
+Art=ReplaceableTextures\CommandButtons\BTNOrcWarlock.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// stormreaver warlock
+[nsrw]
+Art=ReplaceableTextures\CommandButtons\BTNOrcWarlock.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+[nbot]
+Art=ReplaceableTextures\CommandButtons\BTNTransport.blp
+Buttonpos=0,0
+Attachmentanimprops=large
+
+// Pandaren level 5
+[nfrp]
+Art=ReplaceableTextures\CommandButtons\BTNFurbolgPanda.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Naga Sea Witch
+[Nngs]
+Art=ReplaceableTextures\CommandButtons\BTNNagaSeaWitch.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Buttonpos=0,1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Missileart=Abilities\Weapons\NagaArrowMissile\NagaArrowMissile.mdl
+Missilearc=0.08
+Missilespeed=1200
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-seawitch.blp
+
+// Firelord
+[Nfir]
+Art=ReplaceableTextures\CommandButtons\BTNHeroAvatarOfFlame.blp
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+Buttonpos=3,1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Missileart=Abilities\Weapons\LordofFlameMissile\LordofFlameMissile.mdl
+Missilearc=0.08
+MissileHoming=1
+Missilespeed=1200
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-avatarofflame.blp
+
+//lava spawn 1
+[nlv1]
+Art=ReplaceableTextures\CommandButtons\BTNLavaSpawn.blp
+Missileart=Abilities\Weapons\LavaSpawnMissile\LavaSpawnMissile.mdl
+Missilearc=0.15
+MissileHoming=1
+Missilespeed=1000
+Attachmentanimprops=medium
+
+//lava spawn 2
+[nlv2]
+Art=ReplaceableTextures\CommandButtons\BTNLavaSpawn.blp
+Missileart=Abilities\Weapons\LavaSpawnMissile\LavaSpawnMissile.mdl
+Missilearc=0.15
+MissileHoming=1
+Missilespeed=1000
+Attachmentanimprops=medium
+
+//lava spawn 3
+[nlv3]
+Art=ReplaceableTextures\CommandButtons\BTNLavaSpawn.blp
+Missileart=Abilities\Weapons\LavaSpawnMissile\LavaSpawnMissile.mdl
+Missilearc=0.15
+MissileHoming=1
+Missilespeed=1000
+Attachmentanimprops=medium
+
+
+
+// neutral hireable pit lord
+[Nplh]
+Art=ReplaceableTextures\CommandButtons\BTNPitLord.blp
+Buttonpos=0,2
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=large
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-pitlord.blp
+
+
+// Beastmaster
+[Nbst]
+Art=ReplaceableTextures\CommandButtons\BTNBeastMaster.blp
+Buttonpos=1,2
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=large
+Requirescount=3
+Requires=TALT
+Requires1=TWN2,TALT
+Requires2=TWN3,TALT
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-beastmaster.blp
+
+// grizzly bears
+[ngz1]
+Art=ReplaceableTextures\CommandButtons\BTNGrizzlyBear.blp
+Attachmentanimprops=medium
+
+[ngz2]
+Art=ReplaceableTextures\CommandButtons\BTNGrizzlyBear.blp
+Attachmentanimprops=medium
+
+[ngz3]
+Art=ReplaceableTextures\CommandButtons\BTNGrizzlyBear.blp
+Attachmentanimprops=medium
+
+// war eagles
+[nwe1]
+Art=ReplaceableTextures\CommandButtons\BTNWarEagle.blp
+Missileart=Abilities\Weapons\ChimaeraLightningMissile\ChimaeraLightningMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+
+[nwe2]
+Art=ReplaceableTextures\CommandButtons\BTNWarEagle.blp
+Missileart=Abilities\Weapons\ChimaeraLightningMissile\ChimaeraLightningMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+
+[nwe3]
+Art=ReplaceableTextures\CommandButtons\BTNWarEagle.blp
+Missileart=Abilities\Weapons\ChimaeraLightningMissile\ChimaeraLightningMissile.mdl
+Missilearc=0.00
+Missilespeed=1500
+
+// quillbeasts
+[nqb1]
+Art=ReplaceableTextures\CommandButtons\BTNQuillBeast.blp
+Missileart=Abilities\Weapons\BristleBackMissile\BristleBackMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Attachmentanimprops=medium
+
+[nqb2]
+Art=ReplaceableTextures\CommandButtons\BTNQuillBeast.blp
+Missileart=Abilities\Weapons\BristleBackMissile\BristleBackMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Attachmentanimprops=medium
+
+[nqb3]
+Art=ReplaceableTextures\CommandButtons\BTNQuillBeast.blp
+Missileart=Abilities\Weapons\BristleBackMissile\BristleBackMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Attachmentanimprops=medium
+
+[ntor]
+Art=ReplaceableTextures\CommandButtons\BTNTornado.blp
+
+[nsc2]
+Art=ReplaceableTextures\CommandButtons\BTNSpiderCrab.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+[nsc3]
+Art=ReplaceableTextures\CommandButtons\BTNSpiderCrab.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+
+
+
+//#RESTNOBETA
+
+
+// mammoth
+[nmam]
+Art=ReplaceableTextures\CommandButtons\BTNMammoth.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// icetusk mammoth
+[nmit]
+Art=ReplaceableTextures\CommandButtons\BTNMammoth.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// dire mammoth
+[nmdr]
+Art=ReplaceableTextures\CommandButtons\BTNBlackMammoth.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// forgotten one
+[nfgo]
+Art=ReplaceableTextures\CommandButtons\BTNForgottenOne.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
+Missilearc=0.15
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+[nfgt]
+Art=ReplaceableTextures\CommandButtons\BTNTentacle.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// tuskarr fighter
+[ntkf]
+Art=ReplaceableTextures\CommandButtons\BTNTuskaarBrown.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// tuskarr spearman
+[ntka]
+Art=ReplaceableTextures\CommandButtons\BTNTuskaarGold.blp
+Buttonpos=0,0
+Missileart=abilities\weapons\TuskarSpear\TuskarSpear.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// tuskarr warrior
+[ntkw]
+Art=ReplaceableTextures\CommandButtons\BTNTuskaarBrown.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// tuskarr trapper
+[ntkt]
+Art=ReplaceableTextures\CommandButtons\BTNTuskaarGold.blp
+Buttonpos=1,0
+Missileart=abilities\weapons\TuskarSpear\TuskarSpear.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// tuskarr chieftain
+[ntkc]
+Art=ReplaceableTextures\CommandButtons\BTNTuskaarBlack.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+
+// tuskarr healer
+[ntkh]
+Art=ReplaceableTextures\CommandButtons\BTNTuskaarBrown.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\PriestMissile\PriestMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// tuskarr sorceror
+[ntks]
+Art=ReplaceableTextures\CommandButtons\BTNTuskaarBrown.blp
+Buttonpos=0,0
+Missileart=abilities\weapons\TuskarSpear\TuskarSpear.mdl
+Missilearc=0.15
+Missilespeed=1200
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// blue dragonspawn meddler
+[nbdm]
+Art=ReplaceableTextures\CommandButtons\BTNBlueDragonSpawn.blp
+Buttonpos=1,0
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// blue dragonspawn warrior
+[nbdw]
+Art=ReplaceableTextures\CommandButtons\BTNBlueDragonSpawn.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// blue dragonspawn overseer
+[nbdo]
+Art=ReplaceableTextures\CommandButtons\BTNpurpleDragonSpawn.blp
+Buttonpos=0,0
+Attachmentanimprops=medium
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// blue dragonspawn apprentice
+[nbda]
+Art=ReplaceableTextures\CommandButtons\BTNGreenDragonSpawn.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\LichMissile\LichMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// blue dragonspawn sorceror
+[nbds]
+Art=ReplaceableTextures\CommandButtons\BTNGreenDragonSpawn.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\LichMissile\LichMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// magnataur warrior
+[nmgw]
+Art=ReplaceableTextures\CommandButtons\BTNMagnataur.blp
+Buttonpos=3,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// magnataur reaver
+[nmgr]
+Art=ReplaceableTextures\CommandButtons\BTNMagnataurBrown.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\LichMissile\LichMissile.mdl
+Missilearc=0.10
+Missilespeed=1000
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// magnataur destroyer
+[nmgd]
+Art=ReplaceableTextures\CommandButtons\BTNBlueMagnataur.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\LichMissile\LichMissile.mdl
+Missilearc=0.10
+Missilespeed=1000
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// crystal arachnathid
+[nanc]
+DependencyOr=nbnc
+Art=ReplaceableTextures\CommandButtons\BTNArachnathidGreen.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// barbed arachnathid
+[nanb]
+DependencyOr=nbnb
+Art=ReplaceableTextures\CommandButtons\BTNArachnathid.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\HarpyMissile\HarpyMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// barbed arachnathid (merc)
+[nanm]
+DependencyOr=nbnb
+Art=ReplaceableTextures\CommandButtons\BTNArachnathid.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\HarpyMissile\HarpyMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+
+[nbnb]
+Art=ReplaceableTextures\CommandButtons\BTNArachnathid.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\HarpyMissile\HarpyMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// warrior arachnathid
+[nanw]
+DependencyOr=nbnw
+Art=ReplaceableTextures\CommandButtons\BTNArachnathidGreen.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+
+// earth-borer arachnathid
+[nane]
+DependencyOr=nbne
+Art=ReplaceableTextures\CommandButtons\BTNArachnathid.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\HarpyMissile\HarpyMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// overlord arachnathid
+[nano]
+DependencyOr=nbno
+Art=ReplaceableTextures\CommandButtons\BTNArachnathidpurple.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// faceless one trickster
+[nfor]
+Art=ReplaceableTextures\CommandButtons\BTNFacelessOne.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// faceless one terror
+[nfot]
+Art=ReplaceableTextures\CommandButtons\BTNFacelessOne.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// faceless one deathbringer
+[nfod]
+Art=ReplaceableTextures\CommandButtons\BTNFacelessOne.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// unbroken darkhunter
+[nubk]
+Art=ReplaceableTextures\CommandButtons\BTNUnbroken.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// unbroken rager
+[nubr]
+Art=ReplaceableTextures\CommandButtons\BTNUnbroken.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// unbroken darkweaver
+[nubw]
+Art=ReplaceableTextures\CommandButtons\BTNUnbroken.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// polar bear
+[nplb]
+Art=ReplaceableTextures\CommandButtons\BTNFrostBear.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+// giant polar bear
+[nplg]
+Art=ReplaceableTextures\CommandButtons\BTNFrostBear.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// watery minion cliffrunner
+[ncfs]
+Art=ReplaceableTextures\CommandButtons\BTNMurgulTideWarrior.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// watery minion tidewarrior
+[ntws]
+Art=ReplaceableTextures\CommandButtons\BTNMurgulTideWarrior.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// watery minion snarecaster
+[nsns]
+Art=ReplaceableTextures\CommandButtons\BTNMurgulShadowCaster.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\MurgulMagicMissile\MurgulMagicMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonSmallDeathExplode\DemonSmallDeathExplode.mdl
+
+// polar furbolg
+[nfpl]
+Art=ReplaceableTextures\CommandButtons\BTNPolarFurbolg.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// polar furbolg champion
+[nfpc]
+Art=ReplaceableTextures\CommandButtons\BTNPolarFurbolg.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Polar Furbolg Elder Shaman level 8
+[nfpe]
+Art=ReplaceableTextures\CommandButtons\BTNPolarFurbolgShaman.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\LichMissile\LichMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Polar Furbolg Shaman level 5
+[nfps]
+Art=ReplaceableTextures\CommandButtons\BTNPolarFurbolgShaman.blp
+Buttonpos=2,0
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Polar Furbolg Ursa Warrior level 9
+[nfpu]
+Art=ReplaceableTextures\CommandButtons\BTNPolarFurbolgElder.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+// Polar Furbolg Tracker level 6
+[nfpt]
+Art=ReplaceableTextures\CommandButtons\BTNPolarFurbolgTracker.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+Attachmentanimprops=medium
+
+// infected granary
+[ngni]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+
+// grain warehouse
+[ngwr]
+Art=ReplaceableTextures\CommandButtons\BTNGenericHumanBuilding.blp
+
+// wyvern cage 1
+[nwc1]
+Art=ReplaceableTextures\CommandButtons\BTNCage.blp
+
+// wyvern cage 2
+[nwc2]
+Art=ReplaceableTextures\CommandButtons\BTNCage.blp
+
+// magic vault
+[nmgv]
+Art=ReplaceableTextures\CommandButtons\BTNMagicVault.blp
+
+// treasure box
+[nitb]
+Art=ReplaceableTextures\CommandButtons\BTNIcyTreasureBox.blp
+
+
+// Outland dragon roost
+[ndro]
+Art=ReplaceableTextures\CommandButtons\BTNBlackDragonRoost.blp
+Sellunits=nnht,nndk,nndr
+
+// penguin critter
+[npng]
+Art=ReplaceableTextures\CommandButtons\BTNPenguin.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+[npnw]
+Art=ReplaceableTextures\CommandButtons\BTNPenguin.blp
+Animprops=swim
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// rat critter
+[nrat]
+Art=ReplaceableTextures\CommandButtons\BTNYouDirtyRat!.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+// snowy owl critter
+[nsno]
+Art=ReplaceableTextures\CommandButtons\BTNSnowOwl.blp
+Buttonpos=0,0
+
+// felboar critter
+[nfbr]
+Art=ReplaceableTextures\CommandButtons\BTNFelBoar.blp
+Buttonpos=0,0
+
+// dune worm critter
+[ndwm]
+Art=ReplaceableTextures\CommandButtons\BTNDuneWorm.blp
+Buttonpos=0,0
+
+[nvk2]
+Art=ReplaceableTextures\CommandButtons\BTNVillagerKid2.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+[nvl2]
+Art=ReplaceableTextures\CommandButtons\BTNVillagerMan1.blp
+Specialart=Objects\Spawnmodels\Orc\OrcSmallDeathExplode\OrcSmallDeathExplode.mdl
+
+[nzom]
+Art=ReplaceableTextures\CommandButtons\BTNZombie.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+//fel beast
+[npfl]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNPurpleFelhound.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+//fel ravager
+[npfm]
+Art=ReplaceableTextures\CommandButtons\BTNPurpleFelhound.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+
+// succubus/demonness
+[ndqn]
+Art=ReplaceableTextures\CommandButtons\BTNDemoness.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+[ndqv]
+Art=ReplaceableTextures\CommandButtons\BTNBlueDemoness.blp
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+[ndqt]
+Art=ReplaceableTextures\CommandButtons\BTNDemoness.blp
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+[ndqp]
+Art=ReplaceableTextures\CommandButtons\BTNBlueDemoness.blp
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+[ndqs]
+Art=ReplaceableTextures\CommandButtons\BTNBlueDemoness.blp
+Missileart=Abilities\Weapons\NecromancerMissile\NecromancerMissile.mdl
+Missilearc=0.00
+Missilespeed=900
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+// mur'gul huts
+[nmg0]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+[nmg1]
+Art=ReplaceableTextures\CommandButtons\BTNGenericCreepBuilding.blp
+
+// felguard
+[nfgu]
+Art=ReplaceableTextures\CommandButtons\BTNFelGuard.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+
+[nfgb]
+Art=ReplaceableTextures\CommandButtons\BTNFelGuard.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=medium
+
+[nfov]
+Art=ReplaceableTextures\CommandButtons\BTNFelGuardBlue.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+// infernal contraption
+[ninc]
+Art=ReplaceableTextures\CommandButtons\BTNInfernalCannon.blp
+Missileart=Abilities\Weapons\RedDragonBreath\RedDragonMissile.mdl
+Missilearc=0.08
+Missilespeed=700
+Attachmentanimprops=large
+
+[ninm]
+Art=ReplaceableTextures\CommandButtons\BTNInfernalCannon.blp
+Missileart=Abilities\Weapons\RedDragonBreath\RedDragonMissile.mdl
+Missilearc=0.08
+Missilespeed=700
+Attachmentanimprops=large
+
+[nina]
+Art=ReplaceableTextures\CommandButtons\BTNInfernalFlameCannon.blp
+Missileart=Abilities\Weapons\RedDragonBreath\RedDragonMissile.mdl
+Missilearc=0.08
+Missilespeed=700
+Attachmentanimprops=large
+
+[ndrf]
+Art=ReplaceableTextures\CommandButtons\BTNDranai.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+[ndrp]
+Art=ReplaceableTextures\CommandButtons\BTNDranai.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+[ndrw]
+Art=ReplaceableTextures\CommandButtons\BTNDranai.blp
+Buttonpos=0,0
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+[ndrd]
+Art=ReplaceableTextures\CommandButtons\BTNDranai.blp
+Buttonpos=3,0
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+[ndrt]
+Art=ReplaceableTextures\CommandButtons\BTNDranai.blp
+Buttonpos=2,0
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+[ndrn]
+Art=ReplaceableTextures\CommandButtons\BTNDranai.blp
+Buttonpos=2,0
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+[ndrm]
+Art=ReplaceableTextures\CommandButtons\BTNDranaiMage.blp
+Buttonpos=1,0
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+[ndrh]
+Art=ReplaceableTextures\CommandButtons\BTNDranaiMage.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+[ndrs]
+Art=ReplaceableTextures\CommandButtons\BTNDranaiMage.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\FarseerMissile\FarseerMissile.mdl
+Missilearc=0.15
+Missilespeed=1200
+MissileHoming=1
+Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+
+
+
+// lesser voidwalker
+[nvdl]
+Art=ReplaceableTextures\CommandButtons\BTNVoidWalker.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Missileart=Abilities\Weapons\VoidWalkerMissile\VoidWalkerMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+
+// voidwalker
+[nvdw]
+Buttonpos=2,0
+Art=ReplaceableTextures\CommandButtons\BTNVoidWalker.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Missileart=Abilities\Weapons\VoidWalkerMissile\VoidWalkerMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+Attachmentanimprops=medium
+
+//greater voidwalker
+[nvdg]
+Buttonpos=3,0
+Art=ReplaceableTextures\CommandButtons\BTNVoidWalker.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Missileart=Abilities\Weapons\VoidWalkerMissile\VoidWalkerMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+Attachmentanimprops=large
+
+[nvde]
+Art=ReplaceableTextures\CommandButtons\BTNVoidWalker.blp
+Specialart=Objects\Spawnmodels\Demon\DemonLargeDeathExplode\DemonLargeDeathExplode.mdl
+Missileart=Abilities\Weapons\VoidWalkerMissile\VoidWalkerMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+Attachmentanimprops=large
+
+// nether dragon hatchling
+[nnht]
+Art=ReplaceableTextures\CommandButtons\BTNNetherDragon.blp
+Attachmentanimprops=medium
+Missileart=Abilities\Weapons\AvengerMissile\AvengerMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+
+
+// nether drake
+[nndk]
+Art=ReplaceableTextures\CommandButtons\BTNNetherDragon.blp
+Attachmentanimprops=medium
+Missileart=Abilities\Weapons\AvengerMissile\AvengerMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+
+// nether dragon
+[nndr]
+Art=ReplaceableTextures\CommandButtons\BTNNetherDragon.blp
+Attachmentanimprops=medium
+Missileart=Abilities\Weapons\AvengerMissile\AvengerMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+
+// eredar sorceror
+[ners]
+Art=ReplaceableTextures\CommandButtons\BTNEredarWarlockPurple.blp
+Missileart=Abilities\Weapons\DemonHunterMissile\DemonHunterMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+Attachmentanimprops=medium
+
+[nerd]
+Art=ReplaceableTextures\CommandButtons\BTNEredarWarlockPurple.blp
+Missileart=Abilities\Weapons\DemonHunterMissile\DemonHunterMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+Attachmentanimprops=medium
+
+[nerw]
+Art=ReplaceableTextures\CommandButtons\BTNEredarWarlockPurple.blp
+Missileart=Abilities\Weapons\DemonHunterMissile\DemonHunterMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+Attachmentanimprops=medium
+
+[nogo]
+Art=ReplaceableTextures\CommandButtons\BTNOneHeadedOgre.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+[nogn]
+Art=ReplaceableTextures\CommandButtons\BTNOneHeadedOgre.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+[noga]
+Art=ReplaceableTextures\CommandButtons\BTNArmoredOge.blp
+Specialart=Objects\Spawnmodels\Orc\OrcLargeDeathExplode\OrcLargeDeathExplode.mdl
+Attachmentanimprops=large
+
+[ndh0]
+Art=ReplaceableTextures\CommandButtons\BTNDranaiHut.blp
+
+[ndh1]
+Art=ReplaceableTextures\CommandButtons\BTNDranaiHut.blp
+
+[ndch]
+Art=ReplaceableTextures\CommandButtons\BTNDranaiChiefHut.blp
+
+[njgb]
+Art=ReplaceableTextures\CommandButtons\BTNJungleBeast.blp
+Attachmentanimprops=large
+
+[njga]
+Art=ReplaceableTextures\CommandButtons\BTNJungleBeast.blp
+Attachmentanimprops=medium
+
+[njg1]
+Art=ReplaceableTextures\CommandButtons\BTNJungleBeast.blp
+Attachmentanimprops=medium

@@ -26,7 +26,7 @@ local function load_slk(w2l)
     if w2l.force_slk then
         w2l.messager.report(lang.report.OTHER, 9, lang.report.FORCE_READ_SLK)
     end
-    if (w2l.force_slk or w2l.config.read_slk) and has_slk(w2l) then
+    if (w2l.force_slk or w2l.setting.read_slk) and has_slk(w2l) then
         return w2l:frontend_buildslk(true)
     else
         return w2l:get_default(true)
@@ -90,16 +90,16 @@ local function update_version(w2l, w3i)
     local set   = w3i[lang.w3i.CONFIG][lang.w3i.GAME_DATA_SETTING]
     if set == -1 or set == 0 then
         if melee == 0 then
-            w2l.config.version = 'Custom'
+            w2l.setting.version = 'Custom'
         elseif melee == 1 then
-            w2l.config.version = 'Melee'
+            w2l.setting.version = 'Melee'
         end
     elseif set == 1 then
-        w2l.config.version = 'Custom'
+        w2l.setting.version = 'Custom'
     elseif set == 2 then
-        w2l.config.version = 'Melee'
+        w2l.setting.version = 'Melee'
     end
-    w2l:set_config(w2l.config)
+    w2l:set_setting(w2l.setting)
 end
 
 local displaytype = {
@@ -160,7 +160,7 @@ local function update_then_merge(w2l, slks, objs, lnis, slk)
                 obj[k] = v
             end
         end
-        if w2l.config.mode == 'slk' then
+        if w2l.setting.mode == 'slk' then
             mark_keep_obj(type, obj)
         end
         slk[type] = w2l:frontend_merge(type, data, obj)

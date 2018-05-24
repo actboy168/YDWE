@@ -1,4 +1,4 @@
-local command = require 'share.command'
+local command = require 'backend.command'
 local messager = require 'share.messager'
 local lang = require 'share.lang'
 local act = command[1]

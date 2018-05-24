@@ -1,0 +1,216 @@
+[Misc]
+MagicImmunesResistDamage=1
+MagicImmunesResistThorns=0
+MagicImmunesResistLeech=0
+MagicImmunesResistUltimates=0
+CycloneStasis=0
+DepCheckAlias=1
+MassTeleportCluster=1
+DarkSummoningCluster=1
+TownPortalCluster=1
+AmuletOfRecallCluster=1
+MorphLandClosest=1
+MorphAlternateDisable=0
+InvulnSummonDispelDamage=0
+ConstructionDamageRefundPenalty=1
+UpgradeDamageRefundPenalty=0
+AllowMultiBounce=0
+EnsnareIsMagic=0
+WebIsMagic=0
+IllusionsGetAttackBonus=1
+IllusionsGetAttackSpeedBonus=1
+IllusionsGetMoveSpeedBonus=1
+IllusionsGetDefenseBonus=1
+IllusionsCanRestoreLife=1
+IllusionsCanRestoreMana=1
+IllusionsBestowAuras=0
+IllusionsGetAutocast=0
+InvisibleUnitsBestowAuras=0
+PolymorphedUnitsBestowAuras=0
+BurrowedUnitsBestowAuras=0
+AnimatedUnitsBestowAuras=0
+FlyingHeroesBestowAuras=0
+MoveSpeedBonusesStack=0
+DrainUsesEtheralBonus=0
+DrainTransfersLife=1
+DrainTransfersMana=1
+DrainGivesBonusLife=1
+DrainGivesBonusMana=1
+EtherealDamageBonusAlly=0
+CanDeactivateAvatar=0
+CanDeactivateAvengerForm=0
+CanDeactivateBarkskin=1
+CanDeactivateBearForm=1
+CanDeactivateBladestorm=0
+CanDeactivateBurrow=1
+CanDeactivateCallToArms=1
+CanDeactivateChemicalRage=0
+CanDeactivateCorporealForm=1
+CanDeactivateDefend=1
+CanDeactivateDivineShield=0
+CanDeactivateImmolation=1
+CanDeactivateManaFlare=0
+CanDeactivateManaShield=1
+CanDeactivateMetamorphosis=0
+CanDeactivateRavenForm=1
+CanDeactivateRoboGoblin=1
+CanDeactivateStoneForm=1
+CanDeactivateSubmerge=1
+CanDeactivateWindWalk=0
+RelativeUpgradeCost=0
+DefendDeflection=1
+ItemSaleAggroRange=0
+UnitSaleAggroRange=600
+AbilSaleAggroRange=0
+AbolishMagicDispelSmart=1
+UpgradeInProgressIdChange=0
+
+GlobalExperience=1
+MaxLevelHeroesDrainExp=1
+BuildingKillsGiveExp=0
+
+DisplayEnemyInventory=1
+DisplayBuildingStatus=0
+
+// Max revival cost of a hero
+HeroMaxReviveCostGold=700
+HeroMaxReviveCostLumber=0
+HeroMaxReviveTime=150
+
+// Max awaken (tavern) cost of a hero
+HeroMaxAwakenCostGold=1400
+HeroMaxAwakenCostLumber=350
+
+// Hero Revive & Awaken returning stats
+HeroReviveManaStart=1
+HeroReviveManaFactor=0.0
+HeroReviveLifeFactor=1.0
+HeroAwakenManaStart=0
+HeroAwakenManaFactor=0.0
+HeroAwakenLifeFactor=0.5
+
+// the distance at which heroes still gain XP for dying units
+HeroExpRange=1200
+
+// factors for calculating the cost, time to revive a hero
+// goldRevivalCost = originalCost * (ReviveBaseFactor + (ReviveLevelFactor*(level-1)))
+//	but not exceeding originalCost * ReviveMaxFactor
+// lumberRevivalCost = originalCost * (ReviveBaseLumberFactor + (ReviveLumberLevelFactor*(level-1)))
+//	but not exceeding originalCost * ReviveMaxFactor
+// revivalTime = originalTime * level * ReviveTimeFactor
+//	but not exceeding originalTime * ReviveMaxTimeFactor
+ReviveBaseFactor=.40
+ReviveLevelFactor=.10
+ReviveBaseLumberFactor=0
+ReviveLumberLevelFactor=0
+ReviveMaxFactor=4.0
+ReviveTimeFactor=0.65
+ReviveMaxTimeFactor=2.0
+
+AwakenBaseFactor=.80
+AwakenLevelFactor=.20
+AwakenBaseLumberFactor=.80
+AwakenLumberLevelFactor=.20
+AwakenMaxFactor=8.0
+
+// Note: Maps saved with a Reign of Chaos version of the editor will use 25 for the
+//  min unit speed value since it wasn't increased to 150 until Frozen Throne.
+MinUnitSpeed=150
+MaxUnitSpeed=400
+MinBldgSpeed=25
+MaxBldgSpeed=400
+
+FrostMoveSpeedDecrease=0.5
+FrostAttackSpeedDecrease=0.25
+
+// Experience & Level Information
+//
+MaxHeroLevel=10
+MaxUnitLevel=20
+NeedHeroXP=200
+GrantHeroXP=100,120,160,220,300
+GrantNormalXP=25
+HeroFactorXP=80,70,60,50,0
+SummonedKillFactor=0.5
+StrAttackBonus=1.0
+StrHitPointBonus=25
+StrRegenBonus=0.05
+IntManaBonus=15
+IntRegenBonus=0.05
+AgiDefenseBonus=0.30
+AgiDefenseBase=-2
+AgiMoveBonus=0
+AgiAttackSpeedBonus=0.02
+
+// Formula constants for hero levels beyond the tables...
+// The three constants are used to define a table as:
+//
+// f(x) = A*f(x-1) + B*x + C
+//
+// where A,B,C are the constants given below
+//
+NeedHeroXPFormulaA=1
+NeedHeroXPFormulaB=100
+NeedHeroXPFormulaC=0
+GrantHeroXPFormulaA=1
+GrantHeroXPFormulaB=0
+GrantHeroXPFormulaC=100
+GrantNormalXPFormulaA=1
+GrantNormalXPFormulaB=5
+GrantNormalXPFormulaC=5
+
+// Hero ability level skip
+// The required hero level for a given ability level is:
+//
+// baseReq + levelSkip*abilityLevel
+//
+
+HeroAbilityLevelSkip=2
+
+// Hero Inventory Items
+DropItemRange=100
+GiveItemRange=150
+PickupItemRange=150
+PawnItemRange=300
+PawnItemRate=0.50
+
+// combat related entries
+CallForHelp=600
+CreepCallForHelp=600
+DefenseArmor=0.06
+
+// Damage bonus lists: SMALL, MEDIUM, LARGE, FORT, NORMAL, HERO, DIVINE, NONE
+DamageBonusNormal=1.00,1.50,1.00,0.70,1.00,1.00,0.05,1.00
+DamageBonusPierce=2.00,0.75,1.00,0.35,1.00,0.50,0.05,1.50
+DamageBonusSiege=1.00,0.50,1.00,1.50,1.00,0.50,0.05,1.50
+DamageBonusMagic=1.25,0.75,2.00,0.35,1.00,0.50,0.05,1.00
+DamageBonusChaos=1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00
+DamageBonusSpells=1.00,1.00,1.00,1.00,1.00,0.70,0.05,1.00
+DamageBonusHero=1.00,1.00,1.00,0.50,1.00,1.00,0.05,1.00
+
+// Ethereal Damage bonus values: NORMAL, PIERCE, SIEGE, MAGIC, CHAOS, SPELLS, HERO
+EtherealDamageBonus=0,0,0,1.66,0,1.66,0
+EtherealHealBonus=1.66
+
+// After a unit has strayed 'GuardDistance' from where it started,
+// that unit begins thinking about heading back to its start position.
+// If the unit has move 'GuardDistance' away from "home" at any time 
+// and spends 'GuardReturnTime' seconds chasing a target without getting
+// attacked by anyone, the unit indeed turns around and heads home.
+// If a creep goes beyond 'MaxGuardDistance' then it always returns home
+// regardless of who's attacking it.
+//
+GuardDistance=600
+MaxGuardDistance=1000
+GuardReturnTime=5.0
+
+// refund rates
+ConstructionRefundRate=0.75	// for cancelled construction
+ResearchRefundRate=1.0		// for cancelled research of spells or unit improvements
+ReviveRefundRate=1.0		// for cancelled hero revival
+TrainRefundRate=1.0		// currently applied regardless of location in queue
+UpgradeRefundRate=0.75		// for a cancelled structure upgrade
+
+ConstructionLifeDrainRate=10.0	// hp per second drained when building construction is halted
+
+MissDamageReduction=0.5

@@ -1,0 +1,152 @@
+[WESTRING_MISCVAL_AKVS]
+Info Panel - Attack Speed - Very Slow
+[WESTRING_MISCVAL_ATKF]
+Info Panel - Attack Speed - Fast
+[WESTRING_MISCVAL_ATKN]
+Info Panel - Attack Speed - Medium
+[WESTRING_MISCVAL_ATKS]
+Info Panel - Attack Speed - Slow
+[WESTRING_MISCVAL_BOTC]
+Floating Text - Bonus - Text Color
+[WESTRING_MISCVAL_BOTF]
+Floating Text - Bonus - Fade Point
+[WESTRING_MISCVAL_BOTH]
+Floating Text - Bonus - Font Size
+[WESTRING_MISCVAL_BOTL]
+Floating Text - Bonus - Life Span
+[WESTRING_MISCVAL_BOTV]
+Floating Text - Bonus - Move Speed
+[WESTRING_MISCVAL_CAOA]
+Color of Lava Spawn
+[WESTRING_MISCVAL_CBNB]
+Font Size - Icon Corner Number
+[WESTRING_MISCVAL_CEDB]
+Font Size - Chat Input Font Size
+[WESTRING_MISCVAL_CREM]
+Point Order Indicator Color(Attack)
+[WESTRING_MISCVAL_CRFD]
+Point Order Indicator Color(Common)
+[WESTRING_MISCVAL_CSTC]
+Floating Text - Critical Strike - Text Color
+[WESTRING_MISCVAL_CSTF]
+Floating Text - Critical Strike - Fade Point
+[WESTRING_MISCVAL_CSTH]
+Floating Text - Critical Strike - Font Size
+[WESTRING_MISCVAL_CSTL]
+Floating Text - Critical Strike - Life Span
+[WESTRING_MISCVAL_CSTV]
+Floating Text - Critical Strike - Move Speed
+[WESTRING_MISCVAL_FBDR]
+Info Panel - Buff Icon Fade Point
+[WESTRING_MISCVAL_FBNA]
+Info Panel - Buff Icon Fade Alpha Minimum
+[WESTRING_MISCVAL_FBXA]
+Info Panel - Buff Icon Fade Alpha Maximum
+[WESTRING_MISCVAL_GDTC]
+Floating Text - Gold - Text Color
+[WESTRING_MISCVAL_GDTF]
+Floating Text - Gold - Fade Point
+[WESTRING_MISCVAL_GDTH]
+Floating Text - Gold - Font Size
+[WESTRING_MISCVAL_GDTL]
+Floating Text - Gold - Life Span
+[WESTRING_MISCVAL_GDTV]
+Floating Text - Gold - Velocity
+[WESTRING_MISCVAL_INVY]
+Font Size - Inventory Title
+[WESTRING_MISCVAL_ITSF]
+Item - Item Shadow
+[WESTRING_MISCVAL_ITSO]
+Item - Item Shadow Offset
+[WESTRING_MISCVAL_ITSS]
+Item - Item Shadow Size
+[WESTRING_MISCVAL_IWZO]
+Selection Circle Z Offset When Passing Destructable
+[WESTRING_MISCVAL_LDBD]
+Font Size - Leaderboard And Multiboard
+[WESTRING_MISCVAL_LMTC]
+Floating Text - Lumber - Text Color
+[WESTRING_MISCVAL_LMTF]
+Floating Text - Lumber - Fade Point
+[WESTRING_MISCVAL_LMTH]
+Floating Text - Lumber - Font Size
+[WESTRING_MISCVAL_LMTL]
+Floating Text - Lumber - Life Span
+[WESTRING_MISCVAL_LMTV]
+Floating Text - Lumber - Velocity
+[WESTRING_MISCVAL_MBTC]
+Floating Text - Mana Burn - Text Color
+[WESTRING_MISCVAL_MBTF]
+Floating Text - Mana Burn - Fade Point
+[WESTRING_MISCVAL_MBTH]
+Floating Text - Mana Burn - Font Size
+[WESTRING_MISCVAL_MBTL]
+Floating Text - Mana Burn - Life Span
+[WESTRING_MISCVAL_MBTV]
+Floating Text - Mana Burn - Velocity
+[WESTRING_MISCVAL_MRGX]
+Info Panel - Max Melee Attack Range
+[WESTRING_MISCVAL_MSTC]
+Floating Text - Attack Miss - Text Color
+[WESTRING_MISCVAL_MSTF]
+Floating Text - Attack Miss - Fade Point
+[WESTRING_MISCVAL_MSTH]
+Floating Text - Attack Miss - Font Size
+[WESTRING_MISCVAL_MSTL]
+Floating Text - Attack Miss - Life Span
+[WESTRING_MISCVAL_MSTV]
+Floating Text - Attack Miss - Velocity
+[WESTRING_MISCVAL_PACR]
+Minimap Signal - Attacked Signal Color
+[WESTRING_MISCVAL_PICR]
+Minimap Signal - Completed Signal Color
+[WESTRING_MISCVAL_PPCR]
+Minimap Signal - Waypoint Signal Color
+[WESTRING_MISCVAL_PTST]
+Font Size - Life And Mana
+[WESTRING_MISCVAL_PVCR]
+Minimap Signal - Suggested Signal Color
+[WESTRING_MISCVAL_QITO]
+Info Panel - Quest Indicator Duration
+[WESTRING_MISCVAL_SPDF]
+Info Panel - Move Speed - Fast
+[WESTRING_MISCVAL_SPDN]
+Info Panel - Move Speed - Medium
+[WESTRING_MISCVAL_SPDS]
+Info Panel - Move Speed - Slow
+[WESTRING_MISCVAL_SPVS]
+Info Panel - Move Speed - Very Slow
+[WESTRING_MISCVAL_SSNL]
+Font Size - Score Screen - Large Font
+[WESTRING_MISCVAL_SSNN]
+Font Size - Score Screen - Normal Font
+[WESTRING_MISCVAL_SSNT]
+Font Size - Score Screen - Player Name
+[WESTRING_MISCVAL_SSTC]
+Floating Text - Shadow Strike - Text Color
+[WESTRING_MISCVAL_SSTF]
+Floating Text - Shadow Strike - Fade Point
+[WESTRING_MISCVAL_SSTH]
+Floating Text - Shadow Strike - Font Size
+[WESTRING_MISCVAL_SSTL]
+Floating Text - Shadow Strike - Life Span
+[WESTRING_MISCVAL_SSTV]
+Floating Text - Shadow Strike - Velocity
+[WESTRING_MISCVAL_TTCS]
+Font Size - Toolbar - Cost
+[WESTRING_MISCVAL_TTDS]
+Font Size - Toolbar - Description
+[WESTRING_MISCVAL_TTNA]
+Font Size - Toolbar - Name
+[WESTRING_MISCVAL_UTDS]
+Font Size - Floating Window - Description
+[WESTRING_MISCVAL_UTPN]
+Font Size - Floating Window - Name
+[WESTRING_MISCVAL_WFCM]
+Font Size - Chat Message
+[WESTRING_MISCVAL_WFMG]
+Font Size - Game Message
+[WESTRING_MISCVAL_WFTM]
+Font Size - Upkeep Message
+[WESTRING_MISCVAL_WFUM]
+Font Size - Trigger Message

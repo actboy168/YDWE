@@ -1,0 +1,154 @@
+[INIT]
+Initializing...
+[OPEN_MAP]
+Opening map...
+[CHECK_PLUGIN]
+Cheking plugin...
+[LOAD_FILE]
+Loading files...
+[LOAD_OBJECT]
+Loading objects...
+[DO_PLUGIN]
+Executing plugins...
+[DO_CONVERT]
+Converting...
+[SAVE_FILE]
+Saving files...
+[FINISH]
+Finish, takes %.3f sec
+[WTG_ERROR]
+WTG error.
+[WTG_GUESS_ARG]
+Guess args number of [%s] is [%d]
+[WTG_UI_NOT_FOUND]
+Trigger UI [%s] is not exist
+[WTG_ABORT_FIX]
+Give up fix after a lot of attempts.
+[CONVERT_FILE]
+Converting %s: [%s] (%d/%d)
+[SEARCH_TEMPLATE]
+Searching template [%s] (%d/%d)
+[WTG_UNKNOWN_ACTION_STATE]
+Unknown action state [%s][%d]
+[WTG_ERROR_ARG]
+Args number of [%s] is not correctly：[%d] - [%d]
+[CLEAN_SAME_OBJECT]
+Cleaning data...
+[MARK_UNUSED_OBJECT]
+Marking unused objects...
+[COMPUTED_TEXT]
+Compute formulas in ubertip...
+[REMOVE_UNUSED_OBJECT]
+Removing unsed objects...
+[CONVERT_OBJ]
+Converting object files...
+[CONVERT_WTG]
+Converting WTG file...
+[OPTIMIZE_JASS]
+Optimizing JASS...
+[CONVERT_OTHER]
+Optimizing other files...
+[CONVERT_JASS]
+Converting JASS...
+[REBUILD_WTS]
+Rebuilding WTS...
+[CONVERT_ONE]
+Converting: 
+[LOAD_OBJ]
+Loading Obj...
+[LOAD_LNI]
+Loading Lni...
+[LOAD_SLK]
+Loading Slk...
+[MERGE_OBJECT]
+Merging data...
+[UNSUPPORTED_MAP]
+Didn't find `(listfile)`
+[PACK_MAP]
+Packing map... (%d/%d)
+[EXPORT_FILE]
+Exporting files... (%d/%d)
+[OPEN_FAILED]
+Open map failed
+[CREATE_FAILED]
+Create map failed, maybe occupied
+[LOAD_MAP_FILE]
+Loading map files... (%d/%d)
+[TEXT_TOO_LONG_IN_OBJ]
+Text is longer than 1023 characters in object
+[TEXT_TOO_LONG_IN_WTG]
+Text is longer than 299 characters in WTG
+[TEXT_TOO_LONG_IN_JASS]
+Text is longer than 1023 characters in jass
+[TEXT_TOO_LONG_IN_W3I]
+Text is longer than 1023 characters in w3i
+[UNIT]
+Unit
+[ABILITY]
+Ability
+[ITEM]
+Item
+[BUFF]
+Buff
+[UPGRADE]
+Upgrade
+[DOODAD]
+Doodad
+[DESTRUCTABLE]
+Destructable
+[UNKNOW]
+Unknown
+[FAILED]
+Failed
+[CREATE_MAP_FAILED]
+Create map failed, maybe occupied
+[UNKNOWN_REASON]
+Unknown reason
+[NEED_WAR3_DIR]
+Need inputed WarIII directory
+[LOAD_WAR3_LANG_FAILED]
+Failed to load WC3 language
+[EXPORT_FILE_FAILED]
+Export file failed: 
+[OPEN_FILE_FAILED]
+Open file failed: 
+[CLEAN_DIR]
+Cleaning directory...
+[EXPORT_MPQ]
+Exporting mpq...
+[CREATE_DIR_FAILED]
+Create [%s] failed, maybe occupied
+[ERROR_COUNT]
+%d errors, %d warnings
+[NO_INPUT]
+Need input path
+[CONFIG_INPUT_ERROR]
+`%s` expect (%s), but input was [%s]
+[MPQ_EXTRACT_DIR]
+Extracted dir is [%s]
+[UNSUPPORTED_WCT]
+Unsupported WCT
+[WTG_VERSION_ERROR]
+WTG version error
+[UNKNOWN2_ERROR]
+Unknown2 error
+[UNKNOWN1_ERROR]
+Unknown1 error
+[UNEXIST_WES_IN_MPQ]
+The extracted MPQ does not find the following WorldEditStrings
+[NO_TRIGGER_DATA]
+No trigger data was read
+[NEED_YDWE_ASSOCIATE]
+Need to set the map to the associated YDWE
+[TRIGGER_DATA_ERROR]
+Trigger data error
+[OPEN_FAILED_MAYBE_W3X]
+File dose not exsit, did you mean "%s.w3x" ?
+[OPEN_FAILED_NO_EXISTS]
+File dose not exsit
+[UNSUPPORTED_LNI_MARK]
+Unsupported Lni map
+[CONFIG_INVALID_DIR]
+Invalid dir specified by %s.%s
+[NO_LNI]
+No Lni dir

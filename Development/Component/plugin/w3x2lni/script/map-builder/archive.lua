@@ -48,7 +48,7 @@ function mt:save(w3i, w2l)
     for _ in pairs(self) do
         max = max + 1
     end
-    local suc, res = self.handle:save(self.path, w3i, max, w2l.config.remove_we_only)
+    local suc, res = self.handle:save(self.path, w3i, max, w2l.setting.remove_we_only)
     if not suc then
         return false, res
     end
@@ -70,15 +70,6 @@ function mt:save(w3i, w2l)
     return true
 end
 
-function mt:flush()
-    if self:is_readonly() then
-        return false
-    end
-    self._flushed = true
-    self.write_cache = {}
-    self.read_cache = {}
-end
-
 local function unify(name)
     return name:lower():gsub('/', '\\'):gsub('\\[\\]+', '\\')
 end
@@ -88,67 +79,56 @@ function mt:has(name)
     if not self.handle then
         return false
     end
-    if self.read_cache[name] == false then
-        return false
-    end
-    if self.read_cache[name] then
+    if self.cache[name] then
         return true
-    end
-    if self._flushed then
-        return
     end
     local buf = self.handle:load_file(name)
     if buf then
-        self.read_cache[name] = buf
+        self.cache[name] = buf
         return true
     else
-        self.read_cache[name] = false
+        self.cache[name] = false
         return false
     end
 end
 
 function mt:set(name, buf)
-    name = unify(name)
-    self.write_cache[name] = buf
+    if not self.handle then
+        return
+    end
+    self.cache[name] = buf
 end
 
 function mt:remove(name)
-    name = unify(name)
-    self.write_cache[name] = false
+    if not self.handle then
+        return
+    end
+    self.cache[name] = false
 end
 
 function mt:get(name)
-    name = unify(name)
-    if self.write_cache[name] then
-        return self.write_cache[name]
-    end
-    if self.write_cache[name] == false then
-        return nil
-    end
     if not self.handle then
         return nil
     end
-    if self._flushed then
-        return nil
+    name = unify(name)
+    if self.cache[name] then
+        return self.cache[name]
     end
-    if self.read_cache[name] == false then
+    if self.cache[name] == false then
         return nil
-    end
-    if self.read_cache[name] then
-        return self.read_cache[name]
     end
     local buf = self.handle:load_file(name)
     if buf then
-        self.read_cache[name] = buf
+        self.cache[name] = buf
     else
-        self.read_cache[name] = false
+        self.cache[name] = false
     end
     return buf
 end
 
 function mt:__pairs()
     local tbl = {}
-    for k, v in pairs(self.write_cache) do
+    for k, v in pairs(self.cache) do
         if v then
             tbl[k] = v
         end
@@ -162,8 +142,8 @@ function mt:search_files(progress)
         search(self, progress)
     end
     local files = {}
-    for name, buf in pairs(self.read_cache) do
-        if buf and self.write_cache[name] == nil then
+    for name, buf in pairs(self.cache) do
+        if buf then
             files[name] = buf
         end
     end
@@ -177,9 +157,8 @@ return function (pathorhandle, tp)
     local read_only = tp ~= 'w'
     local err
     local ar = {
-        write_cache = {},
-        read_cache = {},
         path = pathorhandle,
+        cache = {},
         _read = read_only,
     }
     if type(pathorhandle) == 'number' then

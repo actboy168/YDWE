@@ -1,4 +1,4 @@
-local unpack_config = require 'backend.unpack_config'
+local unpack_setting = require 'backend.unpack_setting'
 local messager = require 'share.messager'
 local uni = require 'ffi.unicode'
 local root = fs.current_path()
@@ -19,8 +19,8 @@ local function task(...)
 end
 
 return function ()
-    local config = unpack_config()
-    local input = config.input
+    local setting = unpack_setting()
+    local input = setting.input
     local output = root:parent_path() / 'temp'
     fs.create_directories(output)
     messager.text(('地图路径：%s'):format(input))

@@ -173,7 +173,7 @@ return function (w2l_, type, slk)
     end
     w2l = w2l_
     metadata = w2l:metadata()
-    remove_unuse_object = w2l.config.remove_unuse_object
+    remove_unuse_object = w2l.setting.remove_unuse_object
     ttype = type
     str = {}
     write_table(slk)

@@ -43,7 +43,7 @@ local function convert_mark(name)
     local buf = w2l:file_load('map', name)
     if buf then
         local time
-        if w2l.config.mode == 'lni' then
+        if w2l.setting.mode == 'lni' then
             time = ''
         else
             time = ('//W3x2lni Data: %s.%03.f\r\n'):format(os.date '%Y-%m-%d %H:%M:%S', (os.clock() % 1) * 1000)

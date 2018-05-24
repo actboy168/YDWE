@@ -4,4 +4,5 @@ return (require 'backend.sandbox')('.\\core\\', io.open, {
     ['lpeg']      = require 'lpeg',
     ['lml']       = require 'lml',
     ['lang']      = require 'share.lang',
+    ['data_load'] = require 'backend.data_load'
 })

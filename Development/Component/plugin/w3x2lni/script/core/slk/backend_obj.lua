@@ -266,7 +266,7 @@ return function (w2l_, type, data, wts_)
     metadata = w2l:metadata()
     default = w2l:get_default()[type]
     
-    local origin_id, user_id = sort_chunk(data, w2l.config.remove_unuse_object)
+    local origin_id, user_id = sort_chunk(data, w2l.setting.remove_unuse_object)
     local max = #origin_id + #user_id
     if max == 0 then
         return

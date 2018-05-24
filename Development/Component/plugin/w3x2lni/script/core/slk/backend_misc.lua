@@ -16,7 +16,7 @@ local function add_data(name, lkey, meta, obj, data)
 end
 
 local function add_obj(name, obj, data)
-    if w2l.config.remove_unuse_object and not obj._mark then
+    if w2l.setting.remove_unuse_object and not obj._mark then
         return
     end
     local new_obj = {}

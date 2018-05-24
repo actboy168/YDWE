@@ -6,7 +6,7 @@ local nk = require 'nuklear'
 local backend = require 'gui.backend'
 local show_version = require 'gui.old.show_version'
 local plugin = require 'gui.old.plugin'
-local config = require 'share.config'
+local setting = require 'share.setting'
 local lang = require 'share.lang'
 local input_path = require 'share.input_path'
 local builder = require 'map-builder'
@@ -34,7 +34,7 @@ NK_TEXT_RIGHT          = NK_TEXT_ALIGN_MIDDLE | NK_TEXT_ALIGN_RIGHT
 
 local root = fs.current_path():remove_filename()
 local fmt = nil
-local config
+local setting
 
 local function getexe()
 	local i = 0
@@ -69,7 +69,7 @@ function window:dropfile(file)
     map:close()
     mappath = inputpath
     mapname = mappath:filename():string()
-    config:open_map(mappath)
+    setting:open_map(mappath)
     uitype = 'select'
 end
 
@@ -252,8 +252,8 @@ local function checkbox_tip(canvas, text, tip, active)
 end
 
 local function checkbox_simple(canvas, text, tip, data)
-    if checkbox_tip(canvas, text, tip, config[fmt][data]) then
-        config[fmt][data] = not config[fmt][data]
+    if checkbox_tip(canvas, text, tip, setting[fmt][data]) then
+        setting[fmt][data] = not setting[fmt][data]
     end
 end
 
@@ -284,35 +284,35 @@ local function window_convert(canvas)
             checkbox_simple(canvas, lang.ui.EXPORT_LUA, lang.ui.EXPORT_LUA_HINT, 'export_lua')
             height = height - 34
         end
-        if checkbox_tip(canvas, lang.ui.FIND_ID_TIMES, lang.ui.FIND_ID_TIMES_HINT, config[fmt].find_id_times ~= 0) then
-            if config[fmt].find_id_times == 0 then
-                config[fmt].find_id_times = 10
+        if checkbox_tip(canvas, lang.ui.FIND_ID_TIMES, lang.ui.FIND_ID_TIMES_HINT, setting[fmt].find_id_times ~= 0) then
+            if setting[fmt].find_id_times == 0 then
+                setting[fmt].find_id_times = 10
             else
-                config[fmt].find_id_times = 0
+                setting[fmt].find_id_times = 0
             end
         end
         height = height - 34
-        if config[fmt].find_id_times ~= 0 then
-            local r = canvas:edit(tostring(config[fmt].find_id_times), 10, function (c)
+        if setting[fmt].find_id_times ~= 0 then
+            local r = canvas:edit(tostring(setting[fmt].find_id_times), 10, function (c)
                 return 48 <= c and c <= 57
             end)
             local n = tonumber(r) or 1
-            if config[fmt].find_id_times ~= n then
-                config[fmt].find_id_times = n
+            if setting[fmt].find_id_times ~= n then
+                setting[fmt].find_id_times = n
             end
             height = height - 34
         end
-        if fmt == 'slk' and config[fmt].optimize_jass then
-            if checkbox_tip(canvas, lang.ui.CONFUSION, lang.ui.CONFUSION_HINT, config[fmt].confused) then
-                config[fmt].confused = not config[fmt].confused
+        if fmt == 'slk' and setting[fmt].optimize_jass then
+            if checkbox_tip(canvas, lang.ui.CONFUSION, lang.ui.CONFUSION_HINT, setting[fmt].confused) then
+                setting[fmt].confused = not setting[fmt].confused
             end
             height = height - 34
-            if config[fmt].confused then
-                local r = canvas:edit(config[fmt].confusion, 100, function (c)
+            if setting[fmt].confused then
+                local r = canvas:edit(setting[fmt].confusion, 100, function (c)
                     return (48 <= c and c <= 57) or (65 <= c and c <= 90) or (c == 95) or (97 <= c and c <= 122)
                 end)
-                if config[fmt].confusion ~= r then
-                    config[fmt].confusion = r
+                if setting[fmt].confusion ~= r then
+                    setting[fmt].confusion = r
                 end
                 height = height - 34
             end

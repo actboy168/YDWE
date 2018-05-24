@@ -363,7 +363,7 @@ end
 return function(w2l_, slk, report_, obj)
     w2l = w2l_
     report = report_
-    remove_unuse_object = w2l.config.remove_unuse_object
+    remove_unuse_object = w2l.setting.remove_unuse_object
     local txt = {}
     local list = {}
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade'} do
