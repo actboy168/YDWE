@@ -5,4 +5,5 @@ return sandbox(root:string() .. '\\', io.__open, {
     ['lni']       = require 'lni',
     ['lpeg']      = require 'lpeg',
     ['lml']       = require 'lml',
+    ['data_load'] = require 'data_load',
 })
