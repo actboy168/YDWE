@@ -27,7 +27,7 @@ end
 local function search_dir(dir)
     local files = {}
     local len = #dir:string()
-    for _, dir_name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
+    for _, dir_name in ipairs {'map', 'table', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
         scan_dir(dir / dir_name, function(path)
             local name = unify(path:string():sub(len+2))
             files[name] = io.load(path)
@@ -109,7 +109,7 @@ local function build_imp(w2l, output_ar, imp_buf)
     return table.concat(hex, '\r')
 end
 
-local function create_imp(w2l, dummy_map)
+local function save_map(w2l, dummy_map)
     if not w2l:file_load('map', 'war3mapunits.doo') then
         w2l:file_save('map', 'war3mapunits.doo', w2l:backend_unitsdoo())
     end
@@ -130,7 +130,13 @@ end
 
 return function ()
     local dummy_map
+    local ignore_once = nil
     event.on('virtual_mpq: open map', function(mappath)
+        if ignore_once == mappath then
+            ignore_once = nil
+            return
+        end
+        ignore_once = mappath
         dummy_map = nil
         local path = fs.path(mappath)
         if path:filename():string() ~= '.w3x' then
@@ -153,7 +159,7 @@ return function ()
         w2l.output_ar = dummy_map
         w2l:frontend()
         w2l:backend()
-        create_imp(w2l, dummy_map)
+        save_map(w2l, dummy_map)
         log.info('Converted to Obj map')
     end)
     virtual_mpq.force_watch(function (filename)
@@ -162,6 +168,7 @@ return function ()
             local buf = dummy_map:get(filename)
             if not buf then
                 log.warn('Load map file failed', filename)
+                return
             end
             dummy_map:remove(filename)
             return buf
