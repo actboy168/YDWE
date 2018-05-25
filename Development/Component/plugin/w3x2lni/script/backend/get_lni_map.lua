@@ -1,11 +1,11 @@
 
 require 'filesystem'
 local check_lni_mark = require 'share.check_lni_mark'
-local root = fs.current_path()
+local base = require 'backend.base_path'
 
 return function ()
     local path
-    local cur = fs.path(_W2L_DIR)
+    local cur = base
     while true do
         if fs.exists(cur / '.w3x') then
             if check_lni_mark(io.load(cur / '.w3x')) then

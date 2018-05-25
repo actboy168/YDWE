@@ -136,7 +136,7 @@ function mt:pairs()
 end
 
 local function load_file(path)
-    local f = io.open(path)
+    local f = io.open(path, 'rb')
     if f then
         local buf = f:read 'a'
         f:close()

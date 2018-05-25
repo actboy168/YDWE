@@ -45,7 +45,7 @@ end
 function mt:set_lng_file(filename, buf)
     local t = {}
     self[filename] = t
-    cache[filename] = true
+    cache[filename] = buf
     if not buf then
         return proxy(t)
     end
@@ -64,6 +64,10 @@ function mt:set_lng_file(filename, buf)
         end
     end
     return proxy(t)
+end
+
+function mt:get_lng_file(filename)
+    return cache[filename]
 end
 
 function mt:__index(filename)

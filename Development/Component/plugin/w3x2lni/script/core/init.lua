@@ -217,7 +217,19 @@ function mt:mpq_load(filename)
     end)
 end
 
-function mt:call_plugin()
+function mt:add_plugin(source, plugin)
+    self.plugins[#self.plugins + 1] = plugin
+    self.messager.report(lang.report.OTHER, 9, lang.report.USED_PLUGIN:format(plugin.info.name, source), plugin.info.description)
+end
+
+function mt:call_plugin(event)
+    for _, plugin in ipairs(self.plugins) do
+        if plugin[event] then
+            if not pcall(plugin[event], plugin, self) then
+                self.messager.report(lang.report.OTHER, 2, lang.report.PLUGIN_FAILED:format(plugin.info.name), res)
+            end
+        end
+    end
 end
 
 function mt:init_proxy()
@@ -227,6 +239,21 @@ function mt:init_proxy()
     self.inited_proxy = true
     self.input_proxy = proxy(self.input_ar, self.input_mode, 'input')
     self.output_proxy = proxy(self.output_ar, self.setting.mode, 'output')
+    
+    if self:file_load('w3x2lni', 'locale/w3i.lng') then
+        lang:set_lng_file('w3i', self:file_load('w3x2lni', 'locale/w3i.lng'))
+    end
+    if self:file_load('w3x2lni', 'locale/lml.lng') then
+        lang:set_lng_file('lml', self:file_load('w3x2lni', 'locale/lml.lng'))
+    end
+    
+    if self.setting.mode == 'lni' then
+        self:file_save('w3x2lni', 'locale/w3i.lng', lang:get_lng_file 'w3i')
+        self:file_save('w3x2lni', 'locale/lml.lng', lang:get_lng_file 'lml')
+    else
+        self:file_remove('w3x2lni', 'locale/w3i.lng')
+        self:file_remove('w3x2lni', 'locale/lml.lng')
+    end
 end
 
 function mt:file_save(type, name, buf)
@@ -330,6 +357,7 @@ return function ()
     local self = setmetatable({}, mt)
     self.progress = progress()
     self.loaded = {}
+    self.plugins = {}
     self:set_messager(function () end)
     self:set_setting()
     return self

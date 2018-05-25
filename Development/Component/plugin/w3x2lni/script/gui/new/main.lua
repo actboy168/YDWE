@@ -49,6 +49,7 @@ local function create_mainview(win)
             },
             ui.label {
                 id = 'title',
+                style = { Width = 200 },
                 align = 'start',
                 font = { name = 'Constantia', size = 24, weight = 'bold' },
                 bind = {

@@ -215,4 +215,7 @@ return function(w2l_, slk)
     w2l.progress:start(1)
     update_then_merge(w2l, slks, objs, lnis, slk)
     w2l.progress:finish()
+    
+    w2l.messager.text(lang.script.DO_PLUGIN)
+    w2l:call_plugin('on_full')
 end

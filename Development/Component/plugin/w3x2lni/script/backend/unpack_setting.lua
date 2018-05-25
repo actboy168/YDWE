@@ -4,24 +4,18 @@ local get_lni_map = require 'backend.get_lni_map'
 local config = require 'share.config'
 local lang = require 'share.lang'
 local check_lni_mark = require 'share.check_lni_mark'
-local root = fs.current_path()
+local base = require 'backend.base_path'
+
 require 'utility'
 require 'filesystem'
-require 'filesystem'
-
-local root = fs.current_path()
 
 local function output_path(path)
     if not path then
-        return nil
+        return
     end
     path = fs.path(path)
     if not path:is_absolute() then
-        if _W2L_DIR then
-            path = fs.path(_W2L_DIR) / path
-        else
-            path = root:parent_path() / path
-        end
+        return fs.absolute(path, base)
     end
     return fs.absolute(path)
 end
@@ -48,13 +42,8 @@ end
 local function normalize_path(w2l, path)
     path = fs.path(path)
     if not path:is_absolute() then
-        if _W2L_DIR then
-            path = fs.path(_W2L_DIR) / path
-        else
-            path = root:parent_path() / path
-        end
+        path = fs.absolute(path, base)
     end
-
     if path:filename():string() == '.w3x' then
         if check_lni_mark(io.load(path)) then
             return fs.absolute(path:parent_path())
@@ -69,15 +58,11 @@ end
 return function (w2l, mode)
     local setting = { mode = mode }
     local output = output_path(command[3])
-    local input
+    local input, err
 
     if command[2] then
         input, err = normalize_path(w2l, command[2])
-    elseif _W2L_MODE ~= 'CLI' then
-        w2l:failed(lang.script.NO_INPUT)
-        return
     else
-        local err
         input, err = get_lni_map()
         if err == 'no lni' then
             w2l:failed(lang.script.NO_LNI)

@@ -15,9 +15,10 @@ local messager = require 'share.messager'
 local war3 = require 'share.war3'
 local data_version = require 'share.data_version'
 local command = require 'backend.command'
+local base = require 'backend.base_path'
+local root = fs.current_path():parent_path()
 local w2l
 local mpqs
-local root = fs.current_path()
 
 local input
 local output
@@ -58,19 +59,19 @@ local function report_fail()
 end
 
 local function extract()
-    for _, root in ipairs {'', 'Custom_V1\\'} do
-        extract_mpq(root .. 'Scripts\\Common.j')
-        extract_mpq(root .. 'Scripts\\Blizzard.j')
-        extract_mpq(root .. 'UI\\MiscData.txt')
-        extract_mpq(root .. 'Units\\MiscGame.txt')
-        extract_mpq(root .. 'Units\\MiscData.txt')
+    for _, dir in ipairs {'', 'Custom_V1\\'} do
+        extract_mpq(dir .. 'Scripts\\Common.j')
+        extract_mpq(dir .. 'Scripts\\Blizzard.j')
+        extract_mpq(dir .. 'UI\\MiscData.txt')
+        extract_mpq(dir .. 'Units\\MiscGame.txt')
+        extract_mpq(dir .. 'Units\\MiscData.txt')
         for type, slks in pairs(w2l.info.slk) do
             for _, name in ipairs(slks) do
-                extract_mpq(root .. name)
+                extract_mpq(dir .. name)
             end
         end
         for _, name in ipairs(w2l.info.txt) do
-            extract_mpq(root .. name)
+            extract_mpq(dir .. name)
         end
     end
     -- TODO: 应该放在上面的循环中？
@@ -82,7 +83,7 @@ local function extract()
 end
 
 local function create_metadata(w2l, loader)
-    local defined_meta = w2l:parse_lni(io.load(root / 'core' / 'defined' / 'metadata.ini'))
+    local defined_meta = w2l:parse_lni(io.load(root / 'script' / 'core' / 'defined' / 'metadata.ini'))
     local meta = prebuilt_metadata(w2l, defined_meta, loader)
     fs.create_directories(output / 'prebuilt')
     io.save(output / 'prebuilt' / 'metadata.ini', meta)
@@ -137,8 +138,8 @@ local function make_log(clock)
         lines[#lines+1] = ''
     end
     local buf = table.concat(lines, '\r\n')
-    fs.create_directories(root:parent_path() / 'log')
-    io.save(root:parent_path() / 'log' / 'report.log', buf)
+    fs.create_directories(root / 'log')
+    io.save(root / 'log' / 'report.log', buf)
 end
 
 local function loader(name)
@@ -146,19 +147,12 @@ local function loader(name)
 end
 
 local function input_war3(path)
-    if path then
-        path = fs.path(path)
-        if not path:is_absolute() then
-            if _W2L_DIR then
-                path = fs.path(_W2L_DIR) / path
-            else
-                path = root:parent_path() / path
-            end
-        end
-    elseif _W2L_MODE == 'CLI' then
-        path = fs.path(_W2L_DIR)
-    else
-        return nil
+    if not path then
+        path = '.'
+    end
+    path = fs.path(path)
+    if not path:is_absolute() then
+        path = fs.absolute(path, base)
     end
     return fs.absolute(path)
 end
@@ -168,7 +162,7 @@ return function ()
     w2l.messager.text(lang.script.INIT)
     w2l.messager.progress(0)
 
-    fs.remove(root:parent_path() / 'log' / 'report.log')
+    fs.remove(root / 'log' / 'report.log')
     input = input_war3(command[2])
 
     if not war3:open(input) then
@@ -179,7 +173,7 @@ return function ()
         w2l.messager.text(lang.script.LOAD_WAR3_LANG_FAILED)
         return
     end
-    output = root:parent_path() / 'data' / war3.name
+    output = root / 'data' / war3.name
     fs.create_directories(output)
     io.save(output / 'version', data_version)
     local config = require 'share.config'

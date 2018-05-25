@@ -73,7 +73,6 @@ return function (mode)
     fs.remove(root:parent_path() / 'log' / 'report.log')
 
     setting = unpack_setting(w2l, mode)
-    input = setting.input
 
     if setting.mode == 'slk' then
         messager.title 'Slk'
@@ -85,7 +84,7 @@ return function (mode)
 
     messager.text(lang.script.OPEN_MAP)
     local err
-    input_ar, err = builder.load(input)
+    input_ar, err = builder.load(setting.input)
     if not input_ar then
         w2l:failed(err)
     end
@@ -125,44 +124,24 @@ return function (mode)
     local backend_rate = (1 - input_rate - output_rate) * 0.6
 
     messager.text(lang.script.CHECK_PLUGIN)
-    plugin(w2l, setting)
-    
-    w2l:call_plugin('on_convert')
+    plugin(w2l, function(source, plugin)
+        w2l:add_plugin(source, plugin)
+    end)
     
     messager.text(lang.script.LOAD_FILE)
     w2l.progress:start(input_rate)
     input_ar:search_files(w2l.progress)
     w2l.progress:finish()
-
-    if w2l:file_load('w3x2lni', 'locale/w3i.lng') then
-        lang:set_lng_file('w3i', w2l:file_load('w3x2lni', 'locale/w3i.lng'))
-    end
-    if w2l:file_load('w3x2lni', 'locale/lml.lng') then
-        lang:set_lng_file('lml', w2l:file_load('w3x2lni', 'locale/lml.lng'))
-    end
     
     messager.text(lang.script.LOAD_OBJECT)
     w2l.progress:start(input_rate + frontend_rate)
     w2l:frontend(slk)
     w2l.progress:finish()
     
-    messager.text(lang.script.DO_PLUGIN)
-    w2l:call_plugin('on_full')
-    
     messager.text(lang.script.DO_CONVERT)
     w2l.progress:start(input_rate + frontend_rate + backend_rate)
     w2l:backend(slk)
     w2l.progress:finish()
-
-    if w2l.setting.mode == 'lni' then
-        local path = root / 'locale' / lang:current_lang() / 'w3i.lng'
-        w2l:file_save('w3x2lni', 'locale/w3i.lng', io.load(path) or '')
-        local path = root / 'locale' / lang:current_lang() / 'lml.lng'
-        w2l:file_save('w3x2lni', 'locale/lml.lng', io.load(path) or '')
-    else
-        w2l:file_remove('w3x2lni', 'locale/w3i.lng')
-        w2l:file_remove('w3x2lni', 'locale/lml.lng')
-    end
     
     messager.text(lang.script.SAVE_FILE)
     w2l.progress:start(1)
