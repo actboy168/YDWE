@@ -2,6 +2,7 @@ require "compile.inject_code"
 require "compile.native"
 local uiloader  = require "uiloader"
 local mpqloader = require 'mpqloader'
+local lniloader = require 'lniloader'
 local stormlib  = require 'ffi.stormlib'
 
 -- 版本信息
@@ -211,9 +212,12 @@ function event.EVENT_WE_START(event_data)
 	-- 加载插件
 	plugin:load_all()
 
+	-- 初始化Lni地图加载器
+	lniloader()
+	
 	-- 初始化UI加载器
 	uiloader()
-	
+
 	-- 载入注入代码配置
 	inject_code:initialize()
 	native:initialize()

@@ -31,6 +31,7 @@ local function initialize()
 
     w2l.input_ar = {
         get = function (self, filename)
+            log.info('load_file', filename)
             return map:load_file(filename)
         end,
     }
