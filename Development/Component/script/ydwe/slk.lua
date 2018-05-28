@@ -2,10 +2,9 @@ local w3x2lni = require 'w3x2lni'
 local root = fs.ydwe_devpath()
 local ydpath = fs.ydwe_path()
 local stormlib  = require 'ffi.stormlib'
-local mpqloader = require 'mpqloader'
 local i18n = require 'i18n'
 local event = require 'ev'
-local slk_lib = require 'slk_lib'
+local slk_lib = require 'slk.slk_lib'
 local map_handle = __map_handle__.handle
 
 local type_map = {

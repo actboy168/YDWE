@@ -1,7 +1,6 @@
 require "compile.inject_code"
 require "compile.native"
 local uiloader  = require "uiloader"
-local mpqloader = require 'mpqloader'
 local lniloader = require 'lniloader'
 local stormlib  = require 'ffi.stormlib'
 

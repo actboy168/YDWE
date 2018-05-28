@@ -4,7 +4,6 @@ local ffi = require "ffi"
 local root = fs.ydwe_devpath()
 local ydpath = fs.ydwe_path()
 local w3x2lni = require 'w3x2lni'
-local mpqloader = require 'mpqloader'
 
 local function get_default(type)
 	local w2l = w3x2lni()
