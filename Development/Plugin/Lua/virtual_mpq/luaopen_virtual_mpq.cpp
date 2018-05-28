@@ -115,7 +115,7 @@ static int VirtualMpqForceWatch(lua_State* L)
 	return 0;
 }
 
-static int VirtualMpqMapWatch(lua_State* L)
+static int VirtualMpqMapLoad(lua_State* L)
 {
 	base::warcraft3::virtual_mpq::map_load(std::bind(VirtualMpqWatchCB, base::lua::object(L, 1), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 	return 0;
@@ -131,7 +131,7 @@ int luaopen_virtual_mpq(lua_State* L)
 		{ "force_watch", VirtualMpqForceWatch },
 		{ "event", VirtualMpqEvent },
 	    { "map_has", VirtualMpqMapHas },
-		{ "map_watch", VirtualMpqMapWatch },
+		{ "map_load", VirtualMpqMapLoad },
 		{ NULL, NULL },
 	};
 	luaL_newlib(L, l);
