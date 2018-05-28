@@ -162,8 +162,16 @@ return function ()
         save_map(w2l, dummy_map)
         log.info('Converted to Obj map')
     end)
-    virtual_mpq.force_watch(function (filename)
-        log.info('Force watch any file', filename)
+    virtual_mpq.map_has(function (filename)
+        if dummy_map then
+            local buf = dummy_map:get(filename)
+            if buf then
+                return true
+            end
+        end
+    end)
+    virtual_mpq.map_load(function (filename)
+        log.info('Map load', filename)
         if dummy_map then
             local buf = dummy_map:get(filename)
             if not buf then
