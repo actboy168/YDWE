@@ -26,6 +26,7 @@ end
 
 local function dummy_map_ar(dir)
     local files = {}
+    local output = {}
     local ar = {}
     setmetatable(ar, ar)
 
@@ -42,11 +43,13 @@ local function dummy_map_ar(dir)
     function ar:set(name, buf)
         log.info('dummy map set', name)
         files[name] = buf
+        output[name] = buf
     end
 
     function ar:remove(name)
         log.info('dummy map remove', name)
         files[name] = false
+        output[name] = false
     end
 
     function ar:list_file()
@@ -73,7 +76,7 @@ local function dummy_map_ar(dir)
 
     function ar:__pairs()
         local tbl = {}
-        for k, v in pairs(files) do
+        for k, v in pairs(output) do
             if v then
                 tbl[k] = v
             end
