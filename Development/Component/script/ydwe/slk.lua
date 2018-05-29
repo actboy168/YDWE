@@ -4,7 +4,7 @@ local ydpath = fs.ydwe_path()
 local stormlib  = require 'ffi.stormlib'
 local i18n = require 'i18n'
 local event = require 'ev'
-local slk_lib = require 'slk.slk_lib'
+local slk_lib = require 'w3x2lni.slk_lib'
 local map_handle = __map_handle__.handle
 
 local type_map = {
@@ -36,10 +36,16 @@ local function initialize()
     }
     w2l.output_ar = {
         set = function (self, filename, buf)
+            if not type_map[filename] then
+                return
+            end
             import_files[filename] = buf
             log.info('Object save', filename)
         end,
         remove = function (self, filename)
+            if not type_map[filename] then
+                return
+            end
             import_files[filename] = ('lll'):pack(2, 0, 0)
             log.info('Object remove', filename)
         end,
