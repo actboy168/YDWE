@@ -171,11 +171,9 @@ return function ()
         end
     end)
     virtual_mpq.map_load(function (filename)
-        log.info('Map load', filename)
         if dummy_map then
             local buf = dummy_map:get(filename)
             if not buf then
-                log.warn('Load map file failed', filename)
                 return
             end
             dummy_map:remove(filename)
