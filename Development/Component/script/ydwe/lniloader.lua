@@ -135,7 +135,7 @@ return function ()
             if not buf then
                 return
             end
-            dummy_map:remove(filename)
+            --dummy_map:remove(filename)
             return buf
         end
     end)
