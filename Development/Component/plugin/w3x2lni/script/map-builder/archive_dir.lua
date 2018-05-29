@@ -1,8 +1,10 @@
-local sleep = require 'ffi.sleep'
-
 local ignore = {}
 for _, name in ipairs {'.git', '.svn', '.vscode', '.gitignore'} do
     ignore[name] = true
+end
+
+local function unify(name)
+    return name:lower():gsub('/', '\\'):gsub('\\[\\]+', '\\')
 end
 
 local function scan_dir(dir, callback)
@@ -27,14 +29,22 @@ end
 function mt:close()
 end
 
-function mt:count_files()
-    local count = 0
-    for _, name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
-        scan_dir(self.path / name, function ()
-            count = count + 1
-        end)
+function mt:list_file()
+    if not self._list_file then
+        self._list_file = {}
+        local len = #map.path:string()
+        for _, name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
+            scan_dir(self.path / name, function (path)
+                local name = path:string():sub(len+2):lower()
+                self._list_file[#self._list_file+1] = unify(name)
+            end)
+        end
     end
-    return count
+    return self._list_file
+end
+
+function mt:number_of_files()
+    return #self:list_file()
 end
 
 function mt:extract(name, path)

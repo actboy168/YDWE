@@ -67,6 +67,7 @@ function mt:set_lng_file(filename, buf)
 end
 
 function mt:get_lng_file(filename)
+    local _ = self[filename]
     return cache[filename]
 end
 

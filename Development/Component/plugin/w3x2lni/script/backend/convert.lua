@@ -128,24 +128,24 @@ return function (mode)
         w2l:add_plugin(source, plugin)
     end)
     
-    messager.text(lang.script.LOAD_FILE)
-    w2l.progress:start(input_rate)
-    input_ar:search_files(w2l.progress)
-    w2l.progress:finish()
-    
     messager.text(lang.script.LOAD_OBJECT)
-    w2l.progress:start(input_rate + frontend_rate)
+    w2l.progress:start(frontend_rate)
     w2l:frontend(slk)
     w2l.progress:finish()
     
     messager.text(lang.script.DO_CONVERT)
-    w2l.progress:start(input_rate + frontend_rate + backend_rate)
+    w2l.progress:start(frontend_rate + backend_rate)
     w2l:backend(slk)
     w2l.progress:finish()
     
+    messager.text(lang.script.LOAD_FILE)
+    w2l.progress:start(frontend_rate + backend_rate + input_rate)
+    w2l:save()
+    w2l.progress:finish()
+
     messager.text(lang.script.SAVE_FILE)
     w2l.progress:start(1)
-    builder.save(w2l, slk.w3i, input_ar, output_ar, w2l.input_proxy, w2l.output_proxy)
+    builder.save(w2l, slk.w3i, input_ar, output_ar)
     w2l.progress:finish()
     
     fs.create_directories(root:parent_path() / 'log')

@@ -1,4 +1,5 @@
-local info = require 'info'
+local load = require 'map-builder.load'
+local w2l
 
 local mt = {}
 mt.__index = mt
@@ -17,7 +18,7 @@ end
 
 function mt:save(type, name, buf)
     if type == 'table' then
-        self:set(info.lni_dir[name][1], buf)
+        self:set(w2l.info.lni_dir[name][1], buf)
     elseif type == 'trigger' then
         self:set('trigger/' .. name, buf)
     elseif type == 'scripts' then
@@ -48,7 +49,7 @@ end
 
 function mt:load(type, name)
     if type == 'table' then
-        for _, filename in ipairs(info.lni_dir[name]) do
+        for _, filename in ipairs(w2l.info.lni_dir[name]) do
             local buf = self:get(filename)
             if buf then
                 return buf
@@ -79,7 +80,7 @@ end
 
 function mt:remove(type, name)
     if type == 'table' then
-        for _, filename in ipairs(info.lni_dir[name]) do
+        for _, filename in ipairs(w2l.info.lni_dir[name]) do
             self:rm(filename)
         end
     elseif type == 'trigger' then
@@ -99,9 +100,12 @@ function mt:remove(type, name)
 end
 
 function mt:pairs()
-    local next, tbl, index = self.archive:search_files()
+    if not self._loaded then
+        self._loaded = load(w2l, self.archive)
+    end
+    local index
     local function next_one()
-        local name, buf = next(tbl, index)
+        local name, buf = next(self._loaded, index)
         if not name then
             return nil
         end
@@ -145,7 +149,8 @@ local function load_file(path)
     return nil
 end
 
-return function (archive, mode, type)
+return function (w2l_, archive, mode, type)
+    w2l = w2l_
     local proxy = setmetatable({ archive = archive, mode = mode, type = type, cache = {} }, mt)
     if mode == 'lni' then
         local buf = load_file '.w3x'

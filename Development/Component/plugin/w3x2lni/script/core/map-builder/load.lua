@@ -1,6 +1,9 @@
-local lang = require 'share.lang'
-local messager = require 'share.messager'
+local lang = require 'lang'
 local w2l
+
+local function unify(name)
+    return name:lower():gsub('/', '\\'):gsub('\\[\\]+', '\\')
+end
 
 local function search_staticfile(map, callback)
     for _, name in ipairs {'(listfile)', '(signature)', '(attributes)'} do
@@ -39,14 +42,15 @@ local searchers = {
     search_imp,
 }
 
-local function search_mpq(map, progress)
+local function search_mpq(map)
     local total = map:number_of_files()
     local count = 0
     local clock = os.clock()
     local mark = {}
+    local files = {}
     for i, searcher in ipairs(searchers) do
         pcall(searcher, map, function (name)
-            name = name:lower():gsub('/', '\\')
+            name = unify(name)
             if mark[name] then
                 return
             end
@@ -54,20 +58,22 @@ local function search_mpq(map, progress)
             if not map:has(name) then
                 return
             end
-            map:get(name)
+            files[name] = map:get(name)
             count = count + 1
             if os.clock() - clock > 0.1 then
                 clock = os.clock()
-                messager.text(lang.script.LOAD_MAP_FILE:format(count, total))
-                progress(count / total)
+                w2l.messager.text(lang.script.LOAD_MAP_FILE:format(count, total))
+                w2l.progress(count / total)
             end
         end)
     end
 
     if count ~= total then
-        messager.report(lang.report.ERROR, 1, lang.report.FILE_LOST:format(total - count), lang.report.FILE_LOST_HINT)
-        messager.report(lang.report.ERROR, 1, lang.report.FILE_READ:format(count, total))
+        w2l.messager.report(lang.report.ERROR, 1, lang.report.FILE_LOST:format(total - count), lang.report.FILE_LOST_HINT)
+        w2l.messager.report(lang.report.ERROR, 1, lang.report.FILE_READ:format(count, total))
     end
+
+    return files
 end
 
 local ignore = {}
@@ -87,30 +93,29 @@ local function scan_dir(dir, callback)
     end
 end
 
-local function search_dir(map, progress)
-    local total = map:number_of_files()
+local function search_dir(map)
+    local list = map:list_file()
+    local total = #list
     local clock = os.clock()
     local count = 0
-    local len = #map.path:string()
-    for _, dir_name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
-        scan_dir(map.path / dir_name, function(path)
-            local name = path:string():sub(len+2):lower()
-            map:get(name)
-            count = count + 1
-            if os.clock() - clock > 0.1 then
-                clock = os.clock()
-                messager.text(lang.script.LOAD_MAP_FILE:format(count, total))
-                progress(count / total)
-            end
-        end)
+    local files = {}
+    for i, name in ipairs(list) do
+        files[name] = map:get(name)
+        count = count + 1
+        if os.clock() - clock > 0.1 then
+            clock = os.clock()
+            w2l.messager.text(lang.script.LOAD_MAP_FILE:format(count, total))
+            w2l.progress(count / total)
+        end
     end
+    return files
 end
 
-return function (map, progress)
-    progress = progress or function () end
+return function (w2l_, map)
+    w2l = w2l_
     if map:get_type() == 'mpq' then
-        search_mpq(map, progress)
+        return search_mpq(map)
     else
-        search_dir(map, progress)
+        return search_dir(map)
     end
 end

@@ -237,8 +237,8 @@ function mt:init_proxy()
         return
     end
     self.inited_proxy = true
-    self.input_proxy = proxy(self.input_ar, self.input_mode, 'input')
-    self.output_proxy = proxy(self.output_ar, self.setting.mode, 'output')
+    self.input_proxy = proxy(self, self.input_ar, self.input_mode, 'input')
+    self.output_proxy = proxy(self, self.output_ar, self.setting.mode, 'output')
     
     if self:file_load('w3x2lni', 'locale/w3i.lng') then
         lang:set_lng_file('w3i', self:file_load('w3x2lni', 'locale/w3i.lng'))
@@ -276,6 +276,11 @@ end
 function mt:file_pairs()
     self:init_proxy()
     return self.input_proxy:pairs()
+end
+
+function mt:save()
+    local save = require 'map-builder.save'
+    save(self)
 end
 
 function mt:failed(msg)

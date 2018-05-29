@@ -1,24 +1,11 @@
 local mpq = require 'map-builder.archive_mpq'
 local dir = require 'map-builder.archive_dir'
-local search = require 'map-builder.search'
 local lang = require 'share.lang'
 
 local os_clock = os.clock
 
 local mt = {}
 mt.__index = mt
-
-function mt:number_of_files()
-    if self:get_type() == 'mpq' then
-        return self.handle:number_of_files()
-    else
-        return self.handle:count_files()
-    end
-end
-
-function mt:search_files()
-    return self.handle:search_files()
-end
 
 function mt:get_type()
     return self._type
@@ -72,6 +59,14 @@ end
 
 local function unify(name)
     return name:lower():gsub('/', '\\'):gsub('\\[\\]+', '\\')
+end
+
+function mt:list_file()
+    return self.handle:list_file()
+end
+
+function mt:number_of_files()
+    return self.handle:number_of_files()
 end
 
 function mt:has(name)
@@ -134,20 +129,6 @@ function mt:__pairs()
         end
     end
     return next, tbl
-end
-
-function mt:search_files(progress)
-    if not self._searched then
-        self._searched = true
-        search(self, progress)
-    end
-    local files = {}
-    for name, buf in pairs(self.cache) do
-        if buf then
-            files[name] = buf
-        end
-    end
-    return next, files
 end
 
 return function (pathorhandle, tp)
