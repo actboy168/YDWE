@@ -32,7 +32,7 @@ end
 function mt:list_file()
     if not self._list_file then
         self._list_file = {}
-        local len = #map.path:string()
+        local len = #self.path:string()
         for _, name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
             scan_dir(self.path / name, function (path)
                 local name = path:string():sub(len+2):lower()

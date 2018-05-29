@@ -85,7 +85,7 @@ return function (w2l)
         end
     else
         if not w2l.setting.remove_we_only and imp then
-            w2l:file_save('map', 'war3map.imp', build_imp(w2l, output_ar, imp))
+            w2l:file_save('map', 'war3map.imp', build_imp(w2l, w2l.output_ar, imp))
         end
     end
 end

@@ -24,24 +24,18 @@ local function unify(name)
     return name:lower():gsub('/', '\\'):gsub('\\[\\]+', '\\')
 end
 
-local function search_dir(dir)
-    local files = {}
-    local len = #dir:string()
-    for _, dir_name in ipairs {'map', 'table', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
-        scan_dir(dir / dir_name, function(path)
-            local name = unify(path:string():sub(len+2))
-            files[name] = io.load(path)
-            log.info('dummy map set', name)
-        end)
-    end
-    return files
-end
-
 local function dummy_map_ar(dir)
-    local files = search_dir(dir)
+    local files = {}
     local ar = {}
+    setmetatable(ar, ar)
 
     function ar:get(name)
+        if files[name] == nil then
+            files[name] = io.load(dir / name) or false
+        end
+        if files[name] == false then
+            return nil
+        end
         return files[name]
     end
     
@@ -52,80 +46,42 @@ local function dummy_map_ar(dir)
 
     function ar:remove(name)
         log.info('dummy map remove', name)
-        files[name] = nil
+        files[name] = false
     end
 
-    function ar:search_files()
+    function ar:list_file()
+        if not self._list_file then
+            self._list_file = {}
+            local len = #dir:string()
+            for _, name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
+                scan_dir(dir / name, function (path)
+                    local name = path:string():sub(len+2):lower()
+                    self._list_file[#self._list_file+1] = unify(name)
+                end)
+            end
+        end
+        return self._list_file
+    end
+    
+    function ar:number_of_files()
+        return #self:list_file()
+    end
+
+    function ar:get_type()
+        return 'dir'
+    end
+
+    function ar:__pairs()
         local tbl = {}
         for k, v in pairs(files) do
-            tbl[k] = v
+            if v then
+                tbl[k] = v
+            end
         end
-        return pairs(tbl)
+        return next, tbl
     end
 
     return ar
-end
-
-local function build_imp(w2l, output_ar, imp_buf)
-    local impignore = {}
-    for _, name in ipairs(w2l.info.pack.impignore) do
-        impignore[name] = true
-    end
-    for _, name in pairs(w2l.info.obj) do
-        impignore[name] = true
-    end
-    for _, name in pairs(w2l.info.lni) do
-        impignore[name] = true
-    end
-    for _, slks in pairs(w2l.info.slk) do
-        for _, name in ipairs(slks) do
-            impignore[name] = true
-        end
-    end
-    for _, name in ipairs(w2l.info.txt) do
-        impignore[name] = true
-    end
-    local imp = {}
-    for name, buf in output_ar:search_files() do
-        if buf and not impignore[name] then
-            imp[#imp+1] = name
-        end
-    end
-    if imp_buf then
-        local imp_lni = w2l:parse_lni(imp_buf, filename)
-        for _, name in ipairs(imp_lni.import) do
-            local name = name:lower()
-            if impignore[name] then
-                imp[#imp+1] = name
-            end
-        end
-    end
-    table.sort(imp)
-    local hex = {}
-    hex[1] = ('ll'):pack(1, #imp)
-    for _, name in ipairs(imp) do
-        hex[#hex+1] = ('z'):pack(name)
-    end
-    return table.concat(hex, '\r')
-end
-
-local function save_map(w2l, dummy_map)
-    if not w2l:file_load('map', 'war3mapunits.doo') then
-        w2l:file_save('map', 'war3mapunits.doo', w2l:backend_unitsdoo())
-    end
-    for _, name in pairs(w2l.info.pack.packignore) do
-        w2l:file_remove('map', name)
-    end
-    local imp = w2l:file_load('table', 'imp')
-    w2l:file_remove('table', 'imp')
-
-    for type, name, buf in w2l:file_pairs() do
-        w2l:file_save(type, name, buf)
-    end
-
-    if imp then
-        w2l:file_save('map', 'war3map.imp', build_imp(w2l, dummy_map, imp))
-    end
 end
 
 return function ()
@@ -159,7 +115,7 @@ return function ()
         w2l.output_ar = dummy_map
         w2l:frontend()
         w2l:backend()
-        save_map(w2l, dummy_map)
+        w2l:save()
         log.info('Converted to Obj map')
     end)
     virtual_mpq.map_has(function (filename)
