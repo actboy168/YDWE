@@ -46,11 +46,7 @@ namespace luafs {
 			directory_container(directory_container const& that) : p_(that.p_) { }
 			directory_container(fs::path const& that) : p_(that) { }
 			fs::directory_iterator cbegin() const {
-#if _MSC_VER >= 1910
 				std::error_code ec;
-#else
-				boost::system::error_code ec;
-#endif
 				auto r = fs::directory_iterator(p_, ec);
 				if (!!ec)
 				{
@@ -62,7 +58,6 @@ namespace luafs {
 			fs::directory_iterator begin()       { return cbegin(); }
 			fs::directory_iterator end() const   { return fs::directory_iterator(); }
 			fs::directory_iterator end()         { return fs::directory_iterator(); }
-		private:
 		private:
 			const fs::path& p_;
 		};
@@ -391,12 +386,8 @@ namespace luafs {
 		FS_TRY;
 		const fs::path& from = path::to(L, 1);
 		const fs::path& to = path::to(L, 2);
-		bool overwritten = !!lua_toboolean(L, 3); 
-#if _MSC_VER >= 1910
+		bool overwritten = !!lua_toboolean(L, 3);
 		fs::copy_file(from, to, overwritten ? fs::copy_options::overwrite_existing : fs::copy_options::none);
-#else
-		fs::copy_file(from, to, overwritten ? fs::copy_option::overwrite_if_exists : fs::copy_option::fail_if_exists);
-#endif
 		return 0;
 		FS_TRY_END;
 	}
