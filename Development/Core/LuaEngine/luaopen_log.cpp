@@ -5,6 +5,8 @@
 #include <windows.h>
 #include "logging.h"
 
+#define buffonstack(B)	((B)->b != (B)->initb)
+
 int llog_print(lua_State *L)
 {
 	logging::logger* lg = (logging::logger*)lua_touserdata(L, lua_upvalueindex(1));
@@ -13,20 +15,21 @@ int llog_print(lua_State *L)
 
 	luaL_Buffer b;
 	luaL_buffinit(L, &b);
-	lua_getglobal(L, "tostring"); 
+	lua_getglobal(L, "tostring");
 	for (int i = 1; i <= n; i++)
 	{
 		const char *s;
 		size_t l;
-		lua_pushvalue(L, -1);
+		lua_pushvalue(L, n + 1);
 		lua_pushvalue(L, i);
 		lua_call(L, 1, 1);
 		s = lua_tolstring(L, -1, &l);
+		if (buffonstack(&b)) lua_insert(L, -2);
 		if (s == NULL)
 			return luaL_error(L, "'tostring' must return a string to 'print'");
 		if (i>1) luaL_addchar(&b, '\t');
 		luaL_addlstring(&b, s, l);
-		lua_pop(L, 1);
+		lua_remove(L, n + 2);
 	}
 	luaL_pushresult(&b);
 	size_t l;

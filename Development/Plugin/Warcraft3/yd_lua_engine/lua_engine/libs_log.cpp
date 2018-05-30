@@ -1,7 +1,7 @@
 #include <lua.hpp>
 #include <stdint.h>
 #include <time.h>
-
+#include <assert.h>
 #include <base/filesystem.h>
 #include <base/util/unicode.h>
 
@@ -126,6 +126,8 @@ static const char *	log_timestr()
 	return str;
 }
 
+#define buffonstack(B)	((B)->b != (B)->initb)
+
 static int l_log(lua_State* L, int level)
 {
 	lua_pushstring(L, "__level");
@@ -142,22 +144,24 @@ static int l_log(lua_State* L, int level)
 	luaL_addstring(&b, " [");
 	luaL_addstring(&b, log_lvstr[level]);
 	luaL_addstring(&b, "]: ");
+	assert(!buffonstack(&b));
 
 	int n = lua_gettop(L);
 	lua_getglobal(L, "tostring");
 	for (int i = 1; i <= n; ++i)
 	{
-		lua_pushvalue(L, -1);
+		lua_pushvalue(L, n + 1);
 		lua_pushvalue(L, i);
 		lua_call(L, 1, 1);
 		size_t l;
 		const char * s = lua_tolstring(L, -1, &l);
+		if (buffonstack(&b)) lua_insert(L, -2);
 		if (s == NULL) {
 			s = "nil";
 		}
 		if (i>1) luaL_addchar(&b, '\t');
 		luaL_addlstring(&b, s, l);
-		lua_pop(L, 1);
+		lua_remove(L, n + 2);
 	}
 
 	luaL_addchar(&b, '\n');
