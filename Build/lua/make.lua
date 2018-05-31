@@ -49,28 +49,42 @@ local function split(str, p)
 	str:gsub('[^'..p..']+', function (w) table.insert(rt, w) end)
 	return rt
 end
-if fs.exists(path.Build / 'include'/ 'version') then
-    fs.create_directories(path.Development / 'Build' / 'include')
-	local f = assert(io.open((path.Build / 'include'/ 'version'):string(), 'r'))
+
+local function version()
+	local f = assert(io.open((path.Development / 'Core' / 'YDWEVersion' / 'YDWEVersion.h'):string(), 'r'))
 	local version = f:read 'a'
 	f:close()
-	local major, minor, revised, build = table.unpack(split(version, '.'))
-	local major, minor, revised, build = tonumber(major), tonumber(minor), tonumber(revised), tonumber(build)
-	local f = assert(io.open((path.Development / 'Build' / 'include' / 'YDWEVersion.h'):string(), 'w'))
-	f:write(([[
-#ifndef YDWE_VERSION_H_INCLUDED
-#define YDWE_VERSION_H_INCLUDED
-
-#define YDWE_VERSION_MAJOR %d
-#define YDWE_VERSION_MINOR %d
-#define YDWE_VERSION_REVISED %d
-#define YDWE_VERSION_BUILD %d
-
-#endif // YDWE_VERSION_H_INCLUDED
-	]]):format(major, minor, revised, build))
-	f:close()
-	print(('build %d.%d.%d.%d'):format(major, minor, revised, build))
+	local major = version:match('YDWE_VERSION_MAJOR +(%d+)')
+	local minor = version:match('YDWE_VERSION_MINOR +(%d+)')
+	local revised = version:match('YDWE_VERSION_REVISED +(%d+)')
+	return major, minor, revised
 end
+
+local function version_build()
+	if fs.exists(path.Build / 'include'/ 'version') then
+		fs.create_directories(path.Development / 'Build' / 'include')
+		local f = assert(io.open((path.Build / 'include'/ 'version'):string(), 'r'))
+		local build = f:read 'a'
+		f:close()
+		local build = tonumber(build) or 0
+		local f = assert(io.open((path.Development / 'Build' / 'include' / 'YDWEVersionBuild.h'):string(), 'w'))
+		f:write(([[
+	#ifndef YDWE_VERSION_BUILD_H_INCLUDED
+	#define YDWE_VERSION_BUILD_H_INCLUDED
+
+	#define YDWE_VERSION_BUILD %d
+
+	#endif // YDWE_VERSION_BUILD_H_INCLUDED
+		]]):format(build))
+		f:close()
+		return build
+	end
+	return 0
+end
+
+local major, minor, revised = version()
+local build = version_build()
+print(('build %d.%d.%d.%d'):format(major, minor, revised, build))
 
 -- Step.4 编译
 local property = {
