@@ -86,6 +86,9 @@ local major, minor, revised = version()
 local build = version_build()
 print(('build %d.%d.%d.%d'):format(major, minor, revised, build))
 
+local gitlog = require 'gitlog'
+gitlog((path.Development / 'Component' / 'script' / 'common' / 'gitlog.lua'):string())
+
 -- Step.4 编译
 local property = {
     Configuration = configuration,
