@@ -62,9 +62,8 @@ Dll hDllArray[] = {
 	{ L"vcruntime140.dll",NULL },
 	{ L"msvcp140.dll",NULL },
 #endif
-	{ L"zlib1.dll",NULL },
 	{ L"StormLib.dll",NULL },
-	{ L"luacore.dll",NULL },
+	{ L"lua53.dll",NULL },
 	{ L"ydbase.dll",NULL },
 	{ L"LuaEngine.dll",NULL },
 };
