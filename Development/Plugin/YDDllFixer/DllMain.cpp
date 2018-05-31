@@ -33,23 +33,18 @@ const wchar_t* szDllList[] = {
 
 std::deque<HMODULE> hDllArray;
 
-void PreloadDll(const fs::path &ydweDirectory)
+void PreloadDll(HMODULE module)
 {
-	if (!ydweDirectory.empty())
+	fs::path ydweDirectory = GetModuleDirectory(module);
+	fs::path binPath = ydweDirectory.parent_path() / L"bin";
+	wchar_t buffer[MAX_PATH];
+	::GetCurrentDirectoryW(sizeof(buffer) / sizeof(buffer[0]), buffer);
+	::SetCurrentDirectoryW(binPath.wstring().c_str());
+	for (const wchar_t *szDllName : szDllList)
 	{
-		fs::path binPath = ydweDirectory.parent_path() / L"bin";
-
-		wchar_t buffer[MAX_PATH];
-		::GetCurrentDirectoryW(sizeof(buffer) / sizeof(buffer[0]), buffer);
-		::SetCurrentDirectoryW(binPath.wstring().c_str());
-		 
-		for (const wchar_t *szDllName: szDllList)
-		{
-			hDllArray.push_front(::LoadLibraryW((binPath / szDllName).wstring().c_str()));
-		}
-
-		::SetCurrentDirectoryW(buffer);
+		hDllArray.push_front(::LoadLibraryW((binPath / szDllName).wstring().c_str()));
 	}
+	::SetCurrentDirectoryW(buffer);
 }
 
 void PostfreeDll()
@@ -61,48 +56,12 @@ void PostfreeDll()
 	}
 }
 
-static void RestoreDetouredSystemDll(const fs::path &war3Directory)
-{
-	fs::path backupPath = war3Directory / L"ydwe_backups_system_dll";
-
-	try
-	{
-		fs::directory_iterator endItr;
-		for (fs::directory_iterator itr(backupPath); itr != endItr; ++itr)
-		{
-			try
-			{
-				if (!fs::is_directory(itr->path()))
-				{
-					fs::rename(itr->path(), war3Directory / itr->path().filename());
-				}
-			}
-			catch(...)
-			{}
-		}
-	}
-	catch(...)
-	{}
-
-	try
-	{
-		fs::remove(backupPath);
-	}
-	catch (...)
-	{}
-}
-
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 {
 	if (reason == DLL_PROCESS_ATTACH)
 	{
 		::DisableThreadLibraryCalls(module);
-
-		fs::path war3Directory = GetModuleDirectory(NULL);
-		fs::path ydweDirectory = GetModuleDirectory(module);
-
-		PreloadDll(ydweDirectory);
-		RestoreDetouredSystemDll(war3Directory);
+		PreloadDll(module);
 	}
 	else if (reason == DLL_PROCESS_DETACH)
 	{

@@ -112,40 +112,6 @@ static void CheckedCopyFile(const fs::path &source, const fs::path &destination)
 #endif
 }
 
-const wchar_t* szSystemDllList[] = {
-	L"version.dll",
-	L"winmm.dll",
-};
-
-static void MoveDetouredSystemDll(const fs::path &war3Directory)
-{
-	fs::path backupPath = war3Directory / L"ydwe_backups_system_dll";
-	try
-	{
-		if (!fs::exists(backupPath))
-		{
-			fs::create_directory(backupPath);
-		}
-	}
-	catch (...)
-	{
-		return;
-	}
-
-	for (const wchar_t *szDllName : szSystemDllList)
-	{
-		try
-		{
-			if (fs::exists(war3Directory / szDllName))
-			{
-				fs::rename(war3Directory / szDllName, backupPath / szDllName);
-			}
-		}
-		catch (...)
-		{}
-	}
-}
-
 //
 // see http://blogs.msdn.com/b/shawnfa/archive/2009/06/08/more-implicit-uses-of-cas-policy-loadfromremotesources.aspx
 //
@@ -185,8 +151,6 @@ static void DoTask()
 	{
 		return ;
 	}
-
-	MoveDetouredSystemDll(gWarcraftDirectory);
 
 	// Set current directory
 	SetCurrentDirectoryW(gExecutableDirectory.c_str());
