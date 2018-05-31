@@ -1,12 +1,17 @@
-#include <deque>
 #include <windows.h>
 #include <Shlwapi.h>
 
 struct strview {
 	const wchar_t* buf;
 	size_t len;
-	strview(const wchar_t* str);
-	strview(const wchar_t* str, size_t len);
+	strview(const wchar_t* str)
+		: buf(str)
+		, len(wcslen(str))
+	{ }
+	strview(const wchar_t* str, size_t len)
+		: buf(str)
+		, len(len)
+	{ }
 };
 
 template <size_t N>
@@ -20,14 +25,6 @@ struct strbuilder {
 		wcsncpy(buf + len, str, n);
 		len += n;
 	}
-	template <class T, size_t n>
-	void operator +=(T(&str)[n]) {
-		append(str, n - 1);
-	}
-	template <size_t n>
-	void operator +=(const strbuilder<n>& str) {
-		append(str.buf, str.len);
-	}
 	void operator +=(const strview& str) {
 		append(str.buf, str.len);
 	}
@@ -38,27 +35,15 @@ struct strbuilder {
 };
 
 struct path : public strbuilder<MAX_PATH> {
-	path(HMODULE m);
-	template <class T, size_t n>
-	path& operator /=(T(&str)[n]) {
-		*this += L"\\";
-		*this += str;
-		return *this;
-	}
-	path& operator /=(const wchar_t* str) {
-		*this += L"\\";
-		*this += str;
-		return *this;
+	path(HMODULE m) {
+		::GetModuleFileNameW(m, buf, sizeof buf / sizeof buf[0]);
+		::PathRemoveBlanksW(buf);
+		::PathUnquoteSpacesW(buf);
+		::PathRemoveBackslashW(buf);
+		::PathRemoveFileSpecW(buf);
+		len = wcslen(buf);
 	}
 };
-
-template <class T, size_t n>
-path operator /(path& self, T(&str)[n]) {
-	path res = self;
-	res += L"\\";
-	res += str;
-	return res;
-}
 
 path operator /(path& self, const wchar_t* str) {
 	path res = self;
@@ -67,38 +52,22 @@ path operator /(path& self, const wchar_t* str) {
 	return res;
 }
 
-strview::strview(const wchar_t* str)
-	: buf(str)
-	, len(wcslen(str))
-{ }
-
-strview::strview(const wchar_t* str, size_t len)
-	: buf(str)
-	, len(len)
-{ }
-
-path::path(HMODULE m) {
-	::GetModuleFileNameW(m, buf, sizeof buf / sizeof buf[0]);
-	::PathRemoveBlanksW(buf);
-	::PathUnquoteSpacesW(buf);
-	::PathRemoveBackslashW(buf);
-	::PathRemoveFileSpecW(buf);
-	len = wcslen(buf);
-}
-
-const wchar_t* szDllList[] = {
-#if !_DEBUG
-	L"vcruntime140.dll",
-	L"msvcp140.dll",
-#endif
-	L"zlib1.dll",
-	L"StormLib.dll",
-	L"luacore.dll",	
-	L"ydbase.dll",
-	L"LuaEngine.dll", // always at last
+struct Dll{
+	const wchar_t* name;
+	HMODULE handle;
 };
 
-std::deque<HMODULE> hDllArray;
+Dll hDllArray[] = {
+#if !_DEBUG
+	{ L"vcruntime140.dll",NULL },
+	{ L"msvcp140.dll",NULL },
+#endif
+	{ L"zlib1.dll",NULL },
+	{ L"StormLib.dll",NULL },
+	{ L"luacore.dll",NULL },
+	{ L"ydbase.dll",NULL },
+	{ L"LuaEngine.dll",NULL },
+};
 
 void PreloadDll(HMODULE module)
 {
@@ -106,19 +75,22 @@ void PreloadDll(HMODULE module)
 	wchar_t buffer[MAX_PATH];
 	::GetCurrentDirectoryW(sizeof(buffer) / sizeof(buffer[0]), buffer);
 	::SetCurrentDirectoryW(binPath.string());
-	for (const wchar_t *szDllName : szDllList)
+	for (int i = 0; i < _countof(hDllArray); ++i)
 	{
-		hDllArray.push_front(::LoadLibraryW((binPath / szDllName).string()));
+		auto dll = hDllArray[i];
+		dll.handle = ::LoadLibraryW((binPath / dll.name).string());
 	}
 	::SetCurrentDirectoryW(buffer);
 }
 
 void PostfreeDll()
 {
-	for (HMODULE hDll : hDllArray)
+	for (int i = _countof(hDllArray); i > 0; --i)
 	{
-		if (hDll)
-			::FreeLibrary(hDll);
+		auto dll = hDllArray[i - 1];
+		if (dll.handle) {
+			::FreeLibrary(dll.handle);
+		}
 	}
 }
 
