@@ -1,4 +1,3 @@
-
 #pragma warning(push, 3)
 #include <lua.hpp>
 #pragma warning(pop)			 	  		
@@ -91,19 +90,6 @@ namespace process {
 	base::win::process& to(lua_State* L, int idx)
 	{
 		return *(base::win::process*)luaL_checkudata(L, idx, "process");
-	}
-
-	HANDLE cast_file_handle(lua_State* L, int idx)
-	{
-		if (LUA_TUSERDATA == lua_type(L, idx))
-		{
-			luaL_Stream* p = pipe::to(L, idx);
-			if (p)
-			{
-				return (HANDLE)_get_osfhandle(fileno(p->f));
-			}
-		}
-		return NULL;
 	}
 
 	std::wstring luaL_checkwstring(lua_State* L, int idx)
