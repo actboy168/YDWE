@@ -2,7 +2,6 @@
 #include <base/win/registry/key.h> 
 #include <base/util/unicode.h>
 
-
 #define RKEY_TRY() try   
 #define RKEY_TRY_END() catch (const std::exception& e) { lua_pushstring(L, e.what()); return lua_error(L); }
 
@@ -167,28 +166,6 @@ namespace luawarp { namespace registry {
 		return 0;
 	}
 
-	int current_user(lua_State* L)
-	{
-		open_access::t access = open_access::none;
-		if (lua_gettop(L) >= 1)
-		{
-			access = (open_access::t)lua_tointeger(L, 1);
-		}
-		rkey_create(L, HKEY_CURRENT_USER, access);
-		return 1;
-	}
-
-	int local_machine(lua_State* L)
-	{
-		open_access::t access = open_access::none;
-		if (lua_gettop(L) >= 1)
-		{
-			access = (open_access::t)lua_tointeger(L, 1);
-		}
-		rkey_create(L, HKEY_LOCAL_MACHINE, access);
-		return 1;
-	}
-
 	int open(lua_State* L)
 	{
 		std::wstring key = rkey_read_wstring(L, 1);
@@ -221,14 +198,11 @@ namespace luawarp { namespace registry {
 	}
 }}
 
-extern "C" __declspec(dllexport) int luaopen_registry(lua_State* L);
-
+extern "C" __declspec(dllexport)
 int luaopen_registry(lua_State* L)
 {
 	using namespace luawarp;
 	static luaL_Reg func[] = {
-		{ "current_user", registry::current_user },
-		{ "local_machine", registry::local_machine },
 		{ "open", registry::open },
 		{ "del", registry::del },
 		{ NULL, NULL }
