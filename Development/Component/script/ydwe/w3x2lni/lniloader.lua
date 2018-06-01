@@ -1,6 +1,6 @@
 local root = fs.ydwe_path()
 local event = require 'ev'
-local w3x2lni = require 'w3x2lni'
+local w3x2lni = require 'w3x2lni.init'
 local check_lni_mark = loadfile((root / 'plugin' / 'w3x2lni' / 'script' / 'share' / 'check_lni_mark.lua'):string())()
 
 local ignore = {}

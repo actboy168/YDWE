@@ -1,4 +1,4 @@
-local w3x2lni = require 'w3x2lni'
+local w3x2lni = require 'w3x2lni.init'
 local root = fs.ydwe_devpath()
 local ydpath = fs.ydwe_path()
 local stormlib  = require 'ffi.stormlib'

@@ -21,7 +21,6 @@ require "version"
 require "localization"
 require "config"
 require "plugin"
-require "check_object"
 require "ffi.loadlibrary"
 require "ffi.gui"
 

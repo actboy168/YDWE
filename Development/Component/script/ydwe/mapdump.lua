@@ -23,7 +23,7 @@ return function (input, jass, write)
     if not map then
         return error('Couldn\'t open map.')
     end
-    local w3x2lni = require 'w3x2lni'
+    local w3x2lni = require 'w3x2lni.init'
     local w2l = w3x2lni()
     local info = w2l:frontend_w3i(map:load_file 'war3map.w3i')
     map:close()

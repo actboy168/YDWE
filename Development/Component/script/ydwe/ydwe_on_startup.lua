@@ -1,7 +1,8 @@
 require "compile.inject_code"
 require "compile.native"
+require "w3x2lni.check_object"
 local uiloader  = require "uiloader"
-local lniloader = require 'lniloader'
+local lniloader = require 'w3x2lni.lniloader'
 local stormlib  = require 'ffi.stormlib'
 
 -- 版本信息
