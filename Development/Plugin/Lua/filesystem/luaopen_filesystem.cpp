@@ -437,30 +437,6 @@ namespace luafs {
 		return path::constructor_(L, std::move(base::path::ydwe(lua_toboolean(L, 1))));
 		FS_TRY_END;
 	}
-
-	namespace deprecated {
-		static int uncomplete(lua_State* L)
-		{
-			FS_TRY;
-			const fs::path& p = path::to(L, 1);
-			const fs::path& base = path::to(L, 2);
-			return path::constructor_(L, std::move(fs::relative(p, base)));
-			FS_TRY_END;
-		}
-
-		static int canonical(lua_State* L)
-		{
-			FS_TRY;
-			const fs::path& p = path::to(L, 1);
-			if (lua_gettop(L) == 1) {
-				return path::constructor_(L, std::move(fs::canonical(p)));
-			}
-			const fs::path& base = path::to(L, 2);
-			return path::constructor_(L, std::move(fs::canonical(base / p)));
-			FS_TRY_END;
-		}
-
-	}
 }
  
 namespace base { namespace lua {
@@ -517,10 +493,6 @@ int luaopen_filesystem(lua_State* L)
 		{ "last_write_time", luafs::last_write_time },
 		{ "get", luafs::get },
 		{ "ydwe", luafs::ydwe },
-
-		// deprecated
-		{ "uncomplete", luafs::deprecated::uncomplete },
-		{ "canonical", luafs::deprecated::canonical },
 		{ NULL, NULL }
 	};	
 	lua_newtable(L);
