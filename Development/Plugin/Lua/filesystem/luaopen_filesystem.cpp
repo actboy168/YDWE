@@ -11,9 +11,9 @@
 #include <base/lua/make_range.h>
 
 #if defined(YDWE_BASE_INLINE)
-#include <base/path/service.cpp>
 #include <base/path/helper.cpp>
-#include <base/path/detail/get_path.cpp>
+#include <base/path/get_path.cpp>
+#include <base/path/ydwe.cpp>
 #include <base/util/unicode.cpp>
 #include <base/exception/exception.cpp>
 #include <base/exception/system_exception.cpp>
@@ -70,7 +70,7 @@ namespace luafs {
 			return storage;
 		}
 
-		fs::path& to(lua_State* L, int idx)
+		static fs::path& to(lua_State* L, int idx)
 		{
 			return *(fs::path*)luaL_checkudata(L, idx, "filesystem");
 		}
@@ -251,7 +251,6 @@ namespace luafs {
 			fs::perms perms = fs::perms::mask & fs::perms(luaL_checkinteger(L, 2));
 			fs::permissions(self, perms, fs::perm_options::remove);
 			return 0;
-			return 1;
 			FS_TRY_END;
 		}
 
