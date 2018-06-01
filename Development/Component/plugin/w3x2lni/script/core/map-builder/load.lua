@@ -2,7 +2,7 @@ local lang = require 'lang'
 local w2l
 
 local function unify(name)
-    return name:lower():gsub('/', '\\'):gsub('\\[\\]+', '\\')
+    return name:lower():gsub('/', '\\')
 end
 
 local function search_staticfile(map, callback)

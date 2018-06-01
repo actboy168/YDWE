@@ -4,7 +4,7 @@ for _, name in ipairs {'.git', '.svn', '.vscode', '.gitignore'} do
 end
 
 local function unify(name)
-    return name:lower():gsub('/', '\\'):gsub('\\[\\]+', '\\')
+    return name:lower():gsub('/', '\\')
 end
 
 local function scan_dir(dir, callback)

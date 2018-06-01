@@ -5,7 +5,7 @@ local mt = {}
 mt.__index = mt
 
 local function unify(name)
-    return name:lower():gsub('/', '\\'):gsub('\\[\\]+', '\\')
+    return name:lower():gsub('/', '\\')
 end
 
 function mt:set(name, buf)

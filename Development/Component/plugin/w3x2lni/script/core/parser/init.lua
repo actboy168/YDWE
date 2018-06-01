@@ -341,6 +341,9 @@ end
 
 local function parse_call(line)
     local func = get_function(line.name)
+    if not func then
+        parser_error(lang.parser.FUNCTION_NO_EXISTS:format(line.name))
+    end
     if not func.args then
         return
     end

@@ -347,7 +347,11 @@ end
 
 function mt:set_messager(messager)
     if type(messager) == 'table' then
-        self.messager = setmetatable(messager, { __index = function () return function () end end })
+        if getmetatable(messager) then
+            self.messager = messager
+        else
+            self.messager = setmetatable(messager, { __index = function () return function () end end })
+        end
     else
         self.messager = setmetatable({}, { __index = function (_, tp)
             return function (...)

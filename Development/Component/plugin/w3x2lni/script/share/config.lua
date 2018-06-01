@@ -13,7 +13,11 @@ local function save()
     for name, t in pairs(config) do
         lines[#lines+1] = ('[%s]'):format(name)
         for k, v in pairs(t) do
-            local _, _, fmt = define[name][k][1](global_config[name][k])
+            local value = global_config[name][k]
+            if value == nil then
+                value = default_config[name][k]
+            end
+            local _, _, fmt = define[name][k][1](value)
             lines[#lines+1] = ('%s = %s'):format(k, fmt)
         end
         lines[#lines+1] = ''

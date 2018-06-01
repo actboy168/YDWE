@@ -73,6 +73,9 @@ function mt:accept_ui(type, name, key, value)
         end,
         limit = function ()
             local r = str_split(value, ',')
+            if not ui.args then
+                return
+            end
             for i, v in ipairs(ui.args) do
                 if r[2*i-1] and r[2*i-1] ~= '_' then
                     v.min = r[2*i-1]
@@ -134,7 +137,7 @@ function mt:parse_ui(type, subtype, key, value)
         elseif key:sub(- #'_UseWithAI', -1) == '_UseWithAI' then
         elseif key:sub(- #'_AIDefaults', -1) == '_AIDefaults' then
         else
-            error('无法解析: ' .. key)
+            --error('无法解析: ' .. key)
         end
     elseif subtype == 'string' then
         if key:sub(- #'Hint', -1) == 'Hint' then

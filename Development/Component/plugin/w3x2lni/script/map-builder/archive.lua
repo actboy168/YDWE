@@ -58,7 +58,7 @@ function mt:save(w3i, w2l)
 end
 
 local function unify(name)
-    return name:lower():gsub('/', '\\'):gsub('\\[\\]+', '\\')
+    return name:lower():gsub('/', '\\')
 end
 
 function mt:list_file()

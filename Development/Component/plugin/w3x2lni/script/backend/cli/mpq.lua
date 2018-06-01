@@ -174,23 +174,18 @@ return function ()
         return
     end
     output = root / 'data' / war3.name
-    fs.create_directories(output)
-    io.save(output / 'version', data_version)
-    local config = require 'share.config'
-    config.global.data = war3.name
 
     w2l.progress:start(0.1)
     w2l.messager.text(lang.script.CLEAN_DIR)
-    local mpq_path = output / 'mpq'
-    if fs.exists(mpq_path) then
-        if not task(fs.remove_all, mpq_path) then
-            w2l.messager.text(lang.script.CREATE_DIR_FAILED:format(mpq_path:string()))
+    if fs.exists(output) then
+        if not task(fs.remove_all, output) then
+            w2l.messager.text(lang.script.CREATE_DIR_FAILED:format(output:string()))
             return
         end
     end
-    if not fs.exists(mpq_path) then
-        if not task(fs.create_directories, mpq_path) then
-            w2l.messager.text(lang.script.CREATE_DIR_FAILED:format(mpq_path:string()))
+    if not fs.exists(output) then
+        if not task(fs.create_directories, output) then
+            w2l.messager.text(lang.script.CREATE_DIR_FAILED:format(output:string()))
             return
         end
     end
@@ -210,6 +205,10 @@ return function ()
     io.save(output / 'prebuilt' / 'keydata.ini', keydata)
     io.save(output / 'prebuilt' / 'search.ini', search)
     w2l.cache_metadata = nil
+
+    io.save(output / 'version', data_version)
+    local config = require 'share.config'
+    config.global.data = war3.name
 
     w2l.progress:start(0.4)
     local slk = makefile(w2l, 'Melee')

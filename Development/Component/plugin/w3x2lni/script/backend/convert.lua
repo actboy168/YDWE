@@ -65,7 +65,30 @@ local function get_io_time(map, file_count)
     return io_rate
 end
 
+local function message_log()
+    fs.remove(root:parent_path() / 'log' / 'messager.log')
+    local f = io.open((root:parent_path() / 'log' / 'messager.log'):string(), 'a+b')
+    if not f then
+        return messager
+    end
+    f:setvbuf 'line'
+    return setmetatable({}, {
+        __index = function (_, type)
+            return function (...)
+                messager[type](...)
+                local strs = table.pack(type, ...)
+                for i = 1, strs.n do
+                    strs[i] = tostring(strs[i])
+                end
+                f:write(table.concat(strs, '\t'))
+                f:write '\r\n'
+            end
+        end,
+    })
+end
+
 return function (mode)
+    local messager = message_log()
     w2l:set_messager(messager)
     w2l.messager.text(lang.script.INIT)
     w2l.messager.progress(0)
