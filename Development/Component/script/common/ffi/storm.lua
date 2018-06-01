@@ -18,11 +18,6 @@ local SFileExists = ffi.cast('SFileExists', ffi.C.GetProcAddress(storm, ffi.cast
 local SStrHash = ffi.cast('SStrHash', ffi.C.GetProcAddress(storm, ffi.cast('const char*', 590)))
 
 local storm = {}
-local dummy_map
-
-local function unify(name)
-    return name:lower():gsub('/', '\\')
-end
 
 function storm.open(path, priority)
 	local apath = uni.u2a(path:string())
@@ -34,13 +29,6 @@ function storm.open(path, priority)
 end
 
 function storm.extract_file(path, name)
-    if dummy_map then
-        local buf = dummy_map:get(unify(name))
-        if buf then
-            io.save(path, buf)
-            return
-        end
-    end
 	local aname = uni.u2a(name)
 	local pbuf = ffi.new('void*[1]', 0)
 	local plen = ffi.new('uint32_t[1]', 0)
@@ -53,12 +41,6 @@ function storm.extract_file(path, name)
 end
 
 function storm.load_file(name)
-    if dummy_map then
-        local buf = dummy_map:get(unify(name))
-        if buf then
-            return buf
-        end
-    end
 	local aname = uni.u2a(name)
 	local pbuf = ffi.new('void*[1]', 0)
 	local plen = ffi.new('uint32_t[1]', 0)
@@ -71,21 +53,11 @@ function storm.load_file(name)
 end
 
 function storm.has_file(name)
-    if dummy_map then
-        local buf = dummy_map:get(unify(name))
-        if buf then
-            return true
-        end
-    end
     return SFileExists(name)
 end
 
 function storm.string_hash(str)
     return SStrHash(str)
-end
-
-function storm.set_dummy_map(map)
-    dummy_map = map
 end
 
 return storm

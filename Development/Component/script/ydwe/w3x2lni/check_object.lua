@@ -168,7 +168,7 @@ local function check(type, buf)
 end
 
 local function init()
-    local storm = require 'ffi.storm'
+    local storm = require 'virtual_storm'
     for _, type in ipairs {'ability', 'unit', 'item', 'doodad', 'destructable', 'buff', 'upgrade'} do
         local filename = info.obj[type]
         virtual_mpq.force_watch(filename, function ()

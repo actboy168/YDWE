@@ -4,7 +4,7 @@ local ll = require 'ffi.loadlibrary'
 local getCommandLine = require 'getCommandLine'
 local ffi = require 'ffi'
 local event = require 'ev'
-local storm = require 'ffi.storm'
+local storm = require 'virtual_storm'
 local hook = require 'ffi.hook'
 
 local _, patch = global_config_war3_version()

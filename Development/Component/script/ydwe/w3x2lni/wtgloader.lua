@@ -1,7 +1,7 @@
 local wtg_checker = require 'w3x2lni.wtg_checker'
 local wtg_reader = require 'w3x2lni.wtg_reader'
 local load_triggerdata = require 'triggerdata'
-local storm = require 'ffi.storm'
+local storm = require 'virtual_storm'
 local ui = require 'ui-builder.init'
 
 local function is_enable_unknownui()

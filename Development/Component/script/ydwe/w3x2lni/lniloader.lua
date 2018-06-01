@@ -1,5 +1,5 @@
 local w3x2lni = require 'w3x2lni.init'
-local storm = require 'ffi.storm'
+local storm = require 'virtual_storm'
 local root = fs.ydwe_path()
 local check_lni_mark = loadfile((root / 'plugin' / 'w3x2lni' / 'script' / 'share' / 'check_lni_mark.lua'):string())()
 

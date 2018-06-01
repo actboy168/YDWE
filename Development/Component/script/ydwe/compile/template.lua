@@ -73,7 +73,7 @@ local function map_file_import(path_in_archive)
 	end
 end
 
-local storm = require 'ffi.storm'
+local storm = require 'virtual_storm'
 local function string_hash(str)
 	return string.format('0x%08X', storm.string_hash(str))
 end

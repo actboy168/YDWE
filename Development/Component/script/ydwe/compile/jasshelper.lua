@@ -1,6 +1,6 @@
 require "filesystem"
 require "mpq_util"
-local storm = require 'ffi.storm'
+local storm = require 'virtual_storm'
 local stormlib = require 'ffi.stormlib'
 
 jasshelper = {}
