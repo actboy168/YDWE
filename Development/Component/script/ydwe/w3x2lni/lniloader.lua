@@ -1,4 +1,5 @@
 local w3x2lni = require 'w3x2lni.init'
+local storm = require 'ffi.storm'
 local root = fs.ydwe_path()
 local check_lni_mark = loadfile((root / 'plugin' / 'w3x2lni' / 'script' / 'share' / 'check_lni_mark.lua'):string())()
 
@@ -20,7 +21,7 @@ local function scan_dir(dir, callback)
 end
 
 local function unify(name)
-    return name:lower():gsub('/', '\\'):gsub('\\[\\]+', '\\')
+    return name:lower():gsub('/', '\\')
 end
 
 local function dummy_map_ar(dir)
@@ -86,8 +87,10 @@ local function dummy_map_ar(dir)
     return ar
 end
 
+local dummy_map
 return function (mappath)
-    local dummy_map
+    dummy_map = nil
+    storm.set_dummy_map(nil)
     local path = fs.path(mappath)
     if path:filename():string() ~= '.w3x' then
         return
@@ -100,6 +103,7 @@ return function (mappath)
     log.info('Open Lni map', path)
     local dir = path:parent_path()
     dummy_map = dummy_map_ar(dir)
+    storm.set_dummy_map(dummy_map)
     
     local w2l = w3x2lni()
     w2l.input_mode = 'lni'
