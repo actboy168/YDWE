@@ -5,6 +5,7 @@ require "compile.cjass"
 require "compile.jasshelper"
 require "compile.native"
 require "mpq_util"
+local lnisaver = require 'w3x2lni.lnisaver'
 local ev = require 'ev'
 
 -- 给路径末尾，扩展名前添加内容
@@ -118,6 +119,11 @@ local function compile_map(map_path, option)
 	else
 		-- 只做语法检查
 		result = jasshelper:compile(map_path, option)
+	end
+
+	if result then
+		-- 转换成Lni地图
+		result = lnisaver(map_path)
 	end
 
 	return result

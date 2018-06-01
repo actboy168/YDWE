@@ -50,4 +50,8 @@ function api.set_dummy_map(map)
     dummy_map = map
 end
 
+function api.get_dummy_map()
+    return dummy_map
+end
+
 return api
