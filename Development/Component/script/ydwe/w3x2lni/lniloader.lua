@@ -1,6 +1,5 @@
-local root = fs.ydwe_path()
-local event = require 'ev'
 local w3x2lni = require 'w3x2lni.init'
+local root = fs.ydwe_path()
 local check_lni_mark = loadfile((root / 'plugin' / 'w3x2lni' / 'script' / 'share' / 'check_lni_mark.lua'):string())()
 
 local ignore = {}
@@ -87,40 +86,32 @@ local function dummy_map_ar(dir)
     return ar
 end
 
-return function ()
+return function (mappath)
     local dummy_map
-    local ignore_once = nil
-    event.on('virtual_mpq: open map', function(mappath)
-        if ignore_once == mappath then
-            ignore_once = nil
-            return
-        end
-        ignore_once = mappath
-        dummy_map = nil
-        local path = fs.path(mappath)
-        if path:filename():string() ~= '.w3x' then
-            return
-        end
-        local buf = io.load(path)
-        if not check_lni_mark(buf) then
-            return
-        end
+    local path = fs.path(mappath)
+    if path:filename():string() ~= '.w3x' then
+        return
+    end
+    local buf = io.load(path)
+    if not check_lni_mark(buf) then
+        return
+    end
 
-        log.info('Open Lni map', path)
-        local dir = path:parent_path()
-        dummy_map = dummy_map_ar(dir)
-        
-        local w2l = w3x2lni()
-        w2l.input_mode = 'lni'
-        w2l:set_setting { mode = 'obj' }
+    log.info('Open Lni map', path)
+    local dir = path:parent_path()
+    dummy_map = dummy_map_ar(dir)
+    
+    local w2l = w3x2lni()
+    w2l.input_mode = 'lni'
+    w2l:set_setting { mode = 'obj' }
 
-        w2l.input_ar = dummy_map
-        w2l.output_ar = dummy_map
-        w2l:frontend()
-        w2l:backend()
-        w2l:save()
-        log.info('Converted to Obj map')
-    end)
+    w2l.input_ar = dummy_map
+    w2l.output_ar = dummy_map
+    w2l:frontend()
+    w2l:backend()
+    w2l:save()
+    log.info('Converted to Obj map')
+
     virtual_mpq.map_has(function (filename)
         if dummy_map then
             local buf = dummy_map:get(filename)
@@ -129,13 +120,13 @@ return function ()
             end
         end
     end)
+
     virtual_mpq.map_load(function (filename)
         if dummy_map then
             local buf = dummy_map:get(filename)
             if not buf then
                 return
             end
-            --dummy_map:remove(filename)
             return buf
         end
     end)

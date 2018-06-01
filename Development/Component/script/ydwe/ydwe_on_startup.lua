@@ -1,8 +1,8 @@
 require "compile.inject_code"
 require "compile.native"
 require "w3x2lni.check_object"
+require 'w3x2lni.open_map'
 local uiloader  = require "uiloader"
-local lniloader = require 'w3x2lni.lniloader'
 local stormlib  = require 'ffi.stormlib'
 
 -- 版本信息
@@ -215,9 +215,6 @@ function event.EVENT_WE_START(event_data)
 
 	-- 加载插件
 	plugin:load_all()
-
-	-- 初始化Lni地图加载器
-	lniloader()
 	
 	-- 初始化UI加载器
 	uiloader()

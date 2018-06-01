@@ -5,11 +5,8 @@ local txt = (require 'w3xparser').txt
 local ini = (require 'w3xparser').ini
 local slk = (require 'w3xparser').slk
 local lni = require 'lni'
-local ui = require 'ui-builder.init'
-local storm = require 'ffi.storm'
 local mpqloader = require 'mpqloader'
-local wtg_checker = require 'w3x2lni.wtg_checker'
-local wtg_reader = require 'w3x2lni.wtg_reader'
+local load_triggerdata = require 'triggerdata'
 local ydwe = fs.ydwe_devpath()
 local info = load(io.load(ydwe / 'plugin' / 'w3x2lni' / 'script' / 'core' / 'info.lua'))()
 local current_language = (require "i18n").get_language()
@@ -50,37 +47,7 @@ local function stringify_ini(t)
 	return table.concat(buf, '\r\n')
 end
 
-local state, data, string
-local function load_triggerdata(load_unknownui)
-	if #list == 0 then
-		return nil
-    end
-    state = nil
-    local unknown_path = fs.ydwe_path() / 'unknownui'
-    for i, path in ipairs(list) do
-        if path:string() == unknown_path:string() then
-            table.remove(list, i)
-            break
-        end
-    end
-	if load_unknownui then
-		table.insert(list, unknown_path)
-	end
-    for _, path in ipairs(list) do
-        log.trace('Loading ui from ' .. path:string())
-		if fs.exists(path / 'ui') then
-			state = ui.merge(state, ui.old_reader(function(filename)
-				return io.load(path / filename)
-			end))
-		else
-			state = ui.merge(state, ui.new_reader(function(filename)
-				return io.load(path / filename)
-			end, current_language))
-		end
-	end
-	data, string = ui.old_writer(state)
-	return data
-end
+local data, string
 
 local function load_triggerstrings(name, callback)
 	log.trace("virtual_mpq 'triggerstrings'")
@@ -130,7 +97,8 @@ local function initialize()
 	list = require 'ui'
     virtual_mpq.watch('UI\\TriggerData.txt',      function ()
         log.trace("virtual_mpq 'triggerdata'")
-        return load_triggerdata(true)
+		data, string = load_triggerdata(list, true)
+		return data
     end)
 	virtual_mpq.watch('UI\\TriggerStrings.txt',   load_triggerstrings)
 	virtual_mpq.watch('UI\\WorldEditStrings.txt', load_worldeditstrings)
@@ -207,38 +175,6 @@ local function initialize()
 		insert('Btlf', 'unit', 'other')
 		return stringify_slk(t, 'alias')
     end)
-    if is_enable_unknownui() then
-        local ignore_once = nil
-        event.on('virtual_mpq: open map', function(mappath)
-            if ignore_once == mappath then
-                ignore_once = nil
-                return
-            end
-            ignore_once = mappath
-			log.info('OpenMap', mappath)
-	    	local wtg = storm.load_file('war3map.wtg')
-	    	if not wtg then
-	    		return
-	    	end
-	    	if wtg_checker(wtg, state) then
-	    		return
-	    	end
-            if not gui.yesno_message(nil, LNG.PARSE_UNKNOWN_UI) then
-                return
-			end
-            load_triggerdata(false)
-	    	local _, fix = wtg_reader(wtg, state)
-            local bufs = {ui.new_writer(fix)}
-            local dir = fs.ydwe_path() / 'unknownui'
-	    	fs.create_directories(dir)
-	    	io.save(dir / 'define.txt',    bufs[1])
-	    	io.save(dir / 'event.txt',     bufs[2])
-	    	io.save(dir / 'condition.txt', bufs[3])
-	    	io.save(dir / 'action.txt',    bufs[4])
-            io.save(dir / 'call.txt',      bufs[5])
-            sys.reboot(mappath)
-        end)
-    end
 end
 
 return initialize
