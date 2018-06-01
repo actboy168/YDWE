@@ -146,7 +146,7 @@ namespace luawarp { namespace registry {
 			}
 			}
 		}
-		RKEY_TRY_END();
+		RKEY_TRY_END()
 	}
 
 	int rkey_div(lua_State* L)
@@ -158,7 +158,7 @@ namespace luawarp { namespace registry {
 			key_w        ret = *self / rht;
 			return rkey_copy(L, 1, &ret);
 		}
-		RKEY_TRY_END();
+		RKEY_TRY_END()
 	}
 
 	int rkey_gc(lua_State* L)
