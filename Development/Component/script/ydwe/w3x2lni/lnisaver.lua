@@ -23,7 +23,7 @@ return function (map_path)
         ('"lni" "%s" "%s"'):format((root / 'backups' / 'lni_backup.w3x'):string(), map_path:parent_path():string())
     )
     local p = process()
-    p:hide_window()
+    p:set_console 'disable'
     local stdout, stderr = p:std_output(), p:std_error()
     if not p:create(root / 'bin' / 'lua.exe', command_line, current_dir) then
         log.error(string.format("Executed %s failed", command_line))
