@@ -2,14 +2,15 @@ require "compile.inject_code"
 require "compile.native"
 require "w3x2lni.check_object"
 require 'w3x2lni.open_map'
-local uiloader  = require "uiloader"
-local stormlib  = require 'ffi.stormlib'
+local uiloader = require "uiloader"
+local stormlib = require 'ffi.stormlib'
 
 -- 版本信息
 ydwe_version = sys.version {}
 war3_version = sys.war3_version {}
 
 local function initialize_reg()
+    local registry = require "registry"
 	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\WorldEdit]]
 	-- 不弹用户协议
 	reg["Has Been Run"] = { registry.REG_DWORD, 1 }

@@ -1,4 +1,3 @@
-require "registry"
 local event = require 'ev'
 local stringify_slk = require 'stringify_slk'
 local txt = (require 'w3xparser').txt

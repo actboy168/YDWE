@@ -232,9 +232,7 @@ int luaopen_registry(lua_State* L)
 	LUA_PUSH_CONST(L, KEY_WOW64_64KEY);
 
 #undef LUA_PUSH_CONST
-
-	lua_setglobal(L, "registry");
-	return 0;
+	return 1;
 }
 
 #include <windows.h>
