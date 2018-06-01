@@ -5,7 +5,7 @@
 #define RKEY_TRY() try   
 #define RKEY_TRY_END() catch (const std::exception& e) { lua_pushstring(L, e.what()); return lua_error(L); }
 
-namespace luawarp { namespace registry {
+namespace luareg {
 
 	using namespace base::registry;
 
@@ -196,22 +196,21 @@ namespace luawarp { namespace registry {
 		lua_pushboolean(L, self->del()? 1: 0);
 		return 1;
 	}
-}}
+}
 
 extern "C" __declspec(dllexport)
 int luaopen_registry(lua_State* L)
 {
-	using namespace luawarp;
 	static luaL_Reg func[] = {
-		{ "open", registry::open },
-		{ "del", registry::del },
+		{ "open", luareg::open },
+		{ "del", luareg::del },
 		{ NULL, NULL }
 	};
 	static luaL_Reg rkey_mt[] = {
-		{ "__index", registry::rkey_index },
-		{ "__newindex", registry::rkey_newindex },
-		{ "__div", registry::rkey_div },
-		{ "__gc", registry::rkey_gc },
+		{ "__index", luareg::rkey_index },
+		{ "__newindex", luareg::rkey_newindex },
+		{ "__div", luareg::rkey_div },
+		{ "__gc", luareg::rkey_gc },
 		{ NULL, NULL }
 	};
 	luaL_newlibtable(L, func);
