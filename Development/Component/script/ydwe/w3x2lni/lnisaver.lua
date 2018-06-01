@@ -1,6 +1,7 @@
 local storm = require 'virtual_storm'
 local process = require 'process'
 local root = fs.ydwe_path()
+local dev = fs.ydwe_devpath()
 
 return function (map_path)
     if not storm.get_dummy_map() then
@@ -10,12 +11,16 @@ return function (map_path)
         return true
     end
 
-    local current_dir = root / 'plugin' / 'w3x2lni' / 'script'
+    fs.create_directories(root / 'backups')
+    fs.copy_file(map_path, root / 'backups' / 'lni_backup.w3x', true)
+    fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', map_path, true)
+
+    local current_dir = dev / 'plugin' / 'w3x2lni' / 'script'
     local command_line = ('"%s" -e"%s" "%s" %s'):format(
         (root / 'bin' / 'lua.exe'):string(),
-        ([[package.cpath = '${YDWE}\\bin\\?.dll;${YDWE}\\bin\\modules\\?.dll';package.path = '?.lua;?\\init.lua']]):gsub('${YDWE}', root:string():gsub('\\', '\\\\')),
+        ([[package.cpath = '${YDWE}\\bin\\?.dll;${YDWE}\\bin\\modules\\?.dll';package.path = '${DEV}\\?.lua;${DEV}\\?\\init.lua']]):gsub('${YDWE}', root:string():gsub('\\', '\\\\')):gsub('${DEV}', current_dir:string():gsub('\\', '\\\\')),
         (current_dir / 'gui' / 'mini.lua'):string(),
-        ('"-slk" "%s" "%s"'):format(map_path:string(), map_path:parent_path():string())
+        ('"lni" "%s" "%s"'):format((root / 'backups' / 'lni_backup.w3x'):string(), map_path:parent_path():string())
     )
     local p = process()
     p:hide_window()
@@ -30,7 +35,6 @@ return function (map_path)
     local exit_code = p:wait()
     p:close()
     if err == '' then
-        log.info(out)
         return true
     else
         log.error(err)
