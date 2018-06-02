@@ -9,13 +9,13 @@ local lnisaver = require 'w3x2lni.lnisaver'
 local function determine_map_version(save_type, runtime_version)
 	-- 固定旧版本
 	if save_type == 1 then
-		return runtime_version:is_new() and runtime_version:old() or runtime_version
+		return 20
 	-- 固定新版本
 	elseif save_type == 2 then
-		return runtime_version:is_new() and runtime_version or runtime_version:new()
+		return 24
 	else
 		-- 按照当前版本或者双份
-		return runtime_version
+		return runtime_version:is_new() and 24 or 20
 	end
 end
 

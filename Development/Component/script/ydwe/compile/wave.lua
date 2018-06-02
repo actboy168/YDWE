@@ -37,7 +37,7 @@ function wave:do_compile(op)
             cmd = cmd .. string.format('--include=%s ',    pathstring(path / 'jass'))
         end
     end
-	cmd = cmd .. string.format('--define=WARCRAFT_VERSION=%d ', 100 * op.option.runtime_version.major + op.option.runtime_version.minor)
+	cmd = cmd .. string.format('--define=WARCRAFT_VERSION=%d ', 100 + op.option.runtime_version)
 	cmd = cmd .. string.format('--define=YDWE_VERSION_STRING=\\"%s\\" ', tostring(ydwe_version))
 	if op.option.enable_jasshelper_debug then
 		cmd = cmd .. '--define=DEBUG=1 '

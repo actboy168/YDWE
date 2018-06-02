@@ -24,7 +24,7 @@ function inject_code:detect(op)
 	-- 文件存在
 	if s then
 		-- 检查是否有需要注入的函数
-		local all_table = op.option.runtime_version:is_new() and self.new_table or self.old_table		
+		local all_table = op.option.runtime_version == 24 and self.new_table or self.old_table		
 
 		for function_name, file in pairs(all_table) do	
 			if not r[file] and s:find(function_name) then

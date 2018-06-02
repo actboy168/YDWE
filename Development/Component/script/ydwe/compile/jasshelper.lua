@@ -17,7 +17,7 @@ local config = [[
 -- version - 魔兽版本，数
 -- 返回：cj路径，bj路径，都是fs.path
 function jasshelper:default_jass_libs(version)
-	if version:is_new() then
+	if version == 24 then
 		return (fs.ydwe_path() / "share" / "jass" / "ht" / "common.j"),
 			(fs.ydwe_path() / "share" / "jass" / "ht" / "blizzard.j")
 	else
@@ -144,7 +144,7 @@ function jasshelper:compile(map_path, option)
 	if option.pjass == '1' then
 		io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-classic.exe', ''))
 	else
-		if option.runtime_version:is_new() then
+		if option.runtime_version == 24 then
 			io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-latest.exe', ''))
 		else
 			io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-latest.exe', '+rb '))
