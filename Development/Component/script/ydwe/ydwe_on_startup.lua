@@ -1,5 +1,4 @@
-local inject_code = require "compile.inject_code"
-local native = require "compile.native"
+local compiler = require "compile.compiler"
 require "w3x2lni.check_object"
 require 'w3x2lni.open_map'
 local uiloader = require "uiloader"
@@ -220,9 +219,8 @@ function event.EVENT_WE_START(event_data)
 	-- 初始化UI加载器
 	uiloader()
 
-	-- 载入注入代码配置
-	inject_code:initialize()
-	native:initialize()
+	-- 初始化编译器
+	compiler:initialize()
 		
 	initialize_reg()
 	initialize_font()
