@@ -3,7 +3,6 @@ local wave = require "compile.wave"
 local template = require "compile.template"
 local cjass = require "compile.cjass"
 local jasshelper = require "compile.jasshelper"
-local native = require "compile.native"
 local ev = require 'ev'
 local storm    = require 'virtual_storm'
 local stormlib = require 'ffi.stormlib'
@@ -138,8 +137,6 @@ local function compile_map(map_path, option)
 				result = jasshelper:compile(map_path, option)
 			end
 		end
-
-		native:compile(compile_t)
 	else
 		-- 只做语法检查
 		result = jasshelper:compile(map_path, option)
@@ -160,7 +157,6 @@ end
 
 function compiler:initialize()
 	inject_code:initialize()
-	native:initialize()
 end
 
 return compiler
