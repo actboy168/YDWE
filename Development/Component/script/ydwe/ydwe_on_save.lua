@@ -1,44 +1,6 @@
 local compiler = require "compile.compiler"
 local lnisaver = require 'w3x2lni.lnisaver'
 
-local function make_option(config, war3ver)
-	local option = {}
-	-- 是否启用JassHelper
-	option.enable_jasshelper = config.ScriptCompiler.EnableJassHelper ~= "0"
-	-- 是否使用脚本模式编译
-	option.enable_jasshelper_scriptonly = config.ScriptCompiler.EnableJassHelperScriptOnly == "1"
-	-- 是否是调试模式
-	option.enable_jasshelper_debug = config.ScriptCompiler.EnableJassHelperDebug == "1"
-	-- 是否优化地图
-	option.enable_jasshelper_optimization = config.ScriptCompiler.EnableJassHelperOptimization ~= "0"
-	-- 是否启用cJass
-	option.enable_cjass = config.ScriptCompiler.EnableCJass == "1"
-	-- 是否启用YDTrigger
-	option.enable_yd_trigger = config.ThirdPartyPlugin.EnableYDTrigger ~= "0"
-	-- pjass的版本
-	option.pjass = config.PJass.Option
-	-- 代码注入选项
-	-- cjass和脚本注入不能共存
-	if option.enable_cjass then
-		option.script_injection = false
-	else
-		option.script_injection = tonumber(config.ScriptInjection.Option)
-	end
-	-- 目标魔兽版本
-	local save_type = tonumber(config.MapSave.Option)
-	if save_type == 1 then
-		-- 固定旧版本
-		option.runtime_version = 20
-	elseif save_type == 2 then
-		-- 固定新版本
-		option.runtime_version = 24
-	else
-		-- 按照当前版本或者双份
-		option.runtime_version = war3ver
-	end
-	return option
-end
-
 -- 本函数当保存地图时调用
 -- event_data - 事件参数。table类型，包含了以下成员
 --	map_path - 保存的地图路径，字符串类型
@@ -54,7 +16,7 @@ function event.EVENT_SAVE_MAP(event_data)
 	log.trace("Saving " .. map_path:string())
 
 	-- 编译地图
-	local result = compiler:compile(map_path, make_option(global_config, war3_version:is_new() and 24 or 20))
+	local result = compiler:compile(map_path, global_config, war3_version:is_new() and 24 or 20)
 	if result then
 		-- 转换成Lni地图
 		result = lnisaver(map_path)
