@@ -4,6 +4,7 @@ require 'w3x2lni.open_map'
 local uiloader = require "uiloader"
 local stormlib = require 'ffi.stormlib'
 
+
 -- 版本信息
 ydwe_version = sys.version {}
 war3_version = sys.war3_version {}
@@ -177,6 +178,16 @@ local function initialize_font()
 	end
 end
 
+-- 从主程序的mpq目录下载入MPQ
+-- mpqname - MPQ的文件名
+-- 返回值：MPQ句柄
+local function load_virtual_mpq(mpqname, priority)
+	local mpq = fs.ydwe_path() / "share" / mpqname
+	if fs.exists(mpq) then
+		virtual_mpq.open_path(mpq, priority)
+	end
+end
+
 -- 本函数在编辑器启动时调用，可以在本函数中载入一些插件
 -- event_data - 事件参数
 -- 	暂无内容
@@ -209,9 +220,9 @@ function event.EVENT_WE_START(event_data)
 	check_war3_version()	
 
 	-- 载入Patch MPQ
-	mpq_util:load_mpq("mpq", 14)
-    mpq_util:load_mpq("mpq/war3", 14)
-    mpq_util:load_mpq("mpq/" .. (require "i18n").get_language(), 14)
+	load_virtual_mpq("mpq", 14)
+    load_virtual_mpq("mpq/war3", 14)
+    load_virtual_mpq("mpq/" .. (require "i18n").get_language(), 14)
 
 	-- 加载插件
 	plugin:load_all()

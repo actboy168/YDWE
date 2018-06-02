@@ -51,13 +51,3 @@ function mpq_util:update_file(map_path, path_in_archive, path_tmp, process_funct
 
 	return result
 end
-
--- 从主程序的mpq目录下载入MPQ
--- mpqname - MPQ的文件名
--- 返回值：MPQ句柄
-function mpq_util:load_mpq(mpqname, priority)
-	local mpq = fs.ydwe_path() / "share" / mpqname
-	if fs.exists(mpq) then
-		virtual_mpq.open_path(mpq, priority)
-	end
-end
