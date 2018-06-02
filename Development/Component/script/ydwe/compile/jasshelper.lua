@@ -1,6 +1,5 @@
 require "filesystem"
 local compiler = require 'compile.compiler'
-local storm = require 'virtual_storm'
 local stormlib = require 'ffi.stormlib'
 
 local jasshelper = {}
@@ -18,7 +17,7 @@ local config = [[
 -- 根据版本获取YDWE自带的Jass库函数（bj和cj）路径
 -- version - 魔兽版本，数
 -- 返回：cj路径，bj路径，都是fs.path
-function jasshelper.default_jass_libs(self, version)
+function jasshelper:default_jass_libs(version)
 	if version:is_new() then
 		return (fs.ydwe_path() / "share" / "jass" / "ht" / "common.j"),
 			(fs.ydwe_path() / "share" / "jass" / "ht" / "blizzard.j")
@@ -32,7 +31,7 @@ end
 -- 如果地图中有，则优先使用地图的，否则使用自带的
 -- map_path - 地图路径，fs.path对象
 -- 返回2个值：cj路径，bj路径，都是fs.path。
-function jasshelper.prepare_jass_libs(self, map_path, version)
+function jasshelper:prepare_jass_libs(map_path, version)
 	local common_j_path = self.path / "common.j"
 	local blizzard_j_path = self.path / "blizzard.j"
 	local map_has_cj = false
@@ -62,34 +61,12 @@ function jasshelper.prepare_jass_libs(self, map_path, version)
 		log.warn("Cannot open map archive, using default bj and cj instead.")
 	end
 
-	-- 是否和当前版本一致？
-	local use_default = (war3_version:is_new() == version:is_new())
 	local default_common_j_path, default_blizzard_j_path = self:default_jass_libs(version)
 	if not map_has_cj then
-		if use_default then
-			if storm.has_file("common.j") then
-				storm.extract_file(common_j_path, "common.j")
-			elseif storm.has_file("scripts\\common.j") then
-				storm.extract_file(common_j_path, "scripts\\common.j")
-			else			
-				common_j_path = default_common_j_path
-			end
-		else
-			common_j_path = default_common_j_path
-		end
+		common_j_path = default_common_j_path
 	end
 	if not map_has_bj then
-		if use_default then
-			if storm.has_file("blizzard.j") then
-				storm.extract_file(blizzard_j_path, "blizzard.j")
-			elseif storm.has_file("scripts\\blizzard.j") then
-				storm.extract_file(blizzard_j_path, "scripts\\blizzard.j")
-			else
-				blizzard_j_path = default_blizzard_j_path
-			end
-		else
-			blizzard_j_path = default_blizzard_j_path
-		end
+		blizzard_j_path = default_blizzard_j_path
 	end
 	
 	return common_j_path, blizzard_j_path
@@ -105,7 +82,7 @@ end
 --	enable_jasshelper_debug - 启用JassHelper的Debug，true/false
 --	enable_jasshelper_optimization - 启用优化，true/false
 -- 返回：true编译成功，false编译失败
-function jasshelper.do_compile(self, map_path, common_j_path, blizzard_j_path, option)
+function jasshelper:do_compile(map_path, common_j_path, blizzard_j_path, option)
 	local parameter = ""
 	
 	-- 需要做vJass编译？
@@ -161,7 +138,7 @@ function jasshelper.do_compile(self, map_path, common_j_path, blizzard_j_path, o
 	
 end
 
-function jasshelper.compile(self, map_path, option)	
+function jasshelper:compile(map_path, option)	
 	log.trace("JassHelper compilation start.")	
 	local common_j_path, blizzard_j_path = self:prepare_jass_libs(map_path, option.runtime_version)
 	if option.pjass == '1' then
