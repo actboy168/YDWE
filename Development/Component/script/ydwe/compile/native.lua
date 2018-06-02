@@ -65,7 +65,7 @@ function native:compile(op)
 		return
 	end
 	log.info('Native compilation start.')
-	return compiler:update_file(op.map_path, 'war3map.j', "file.out",
+	return compiler:update_file(op.map_path, "file.out",
 		function (_, input)
 			local output = fs.ydwe_path() / "logs" / "native.j"
 			if not self:inject(input, output) then

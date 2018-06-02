@@ -124,7 +124,7 @@ function jasshelper.do_compile(self, map_path, common_j_path, blizzard_j_path, o
 	end
 
 	if option.enable_jasshelper_scriptonly then
-		return compiler:update_file(map_path, 'war3map.j', "5_vjass.j",
+		return compiler:update_file(map_path, "5_vjass.j",
 			function (map_handle, in_script_path)
 				local out_script_path = fs.ydwe_path() / "logs" / "6_vjass.j"
 				

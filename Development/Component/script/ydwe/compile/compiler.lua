@@ -8,7 +8,7 @@ local ev = require 'ev'
 local storm    = require 'virtual_storm'
 local stormlib = require 'ffi.stormlib'
 
-local function update_file(map_path, path_in_archive, path_tmp, process_function)
+local function update_script(map_path, path_tmp, process_function)
 	-- 结果
 	local result = false
 	log.trace("Update mpq file")
@@ -19,10 +19,10 @@ local function update_file(map_path, path_in_archive, path_tmp, process_function
 		-- 确定解压路径
 		local extract_file_path = fs.ydwe_path() / "logs" / path_tmp
 		-- 将文件解压
-		if mpq:has_file(path_in_archive) and
-			mpq:extract(path_in_archive, extract_file_path)
+		if mpq:has_file('war3map.j') and
+			mpq:extract('war3map.j', extract_file_path)
 		then
-			log.trace(path_in_archive .. " has been extracted from " .. map_path:filename():string())
+			log.trace("war3map.j has been extracted from " .. map_path:filename():string())
 
 			-- 调用处理函数处理
 			local success, out_file_path = pcall(process_function, mpq, extract_file_path)
@@ -31,7 +31,7 @@ local function update_file(map_path, path_in_archive, path_tmp, process_function
 				-- 如果函数成功完成任务
 				if out_file_path then
 					-- 替换文件
-					result = mpq:add_file(path_in_archive, out_file_path)
+					result = mpq:add_file('war3map.j', out_file_path)
 				else
 					-- 出现了错误
 					log.error("Processor function cannot complete its task.")
@@ -44,7 +44,7 @@ local function update_file(map_path, path_in_archive, path_tmp, process_function
 			-- 删除临时文件
 			--pcall(fs.remove_all, extract_file_path)
 		else
-			log.error("Cannot extract " .. path_in_archive)
+			log.error("Cannot extract war3map.j")
 		end
 
 		-- 关闭地图
@@ -82,7 +82,7 @@ local function compile_map(map_path, option)
 	
 	-- 如果JassHelper开启，执行正常编译
 	if option.enable_jasshelper then
-		result = update_file(map_path, "war3map.j", "1_war3map.j",
+		result = update_script(map_path, "1_war3map.j",
 			-- 解压缩地图脚本，处理然后写回
 			function (map_handle, in_script_path)
 				-- 开始处理
@@ -154,8 +154,8 @@ function compiler:compile(map_path, option)
     return compile_map(map_path, option)
 end
 
-function compiler:update_file(map_path, path_in_archive, path_tmp, process_function)
-    return update_file(map_path, path_in_archive, path_tmp, process_function)
+function compiler:update_script(map_path, path_tmp, process_function)
+    return update_script(map_path, path_tmp, process_function)
 end
 
 function compiler:initialize()
