@@ -1,5 +1,5 @@
-require "compile.inject_code"
-require "compile.native"
+local inject_code = require "compile.inject_code"
+local native = require "compile.native"
 require "w3x2lni.check_object"
 require 'w3x2lni.open_map'
 local uiloader = require "uiloader"

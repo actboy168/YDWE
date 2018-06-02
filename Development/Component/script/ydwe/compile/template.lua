@@ -51,7 +51,7 @@ local function do_compile(code, env)
     return true, res
 end
 
-template = {}
+local template = {}
 
 local function map_file_import(path_in_archive)
 	return function (buf, is_path)		
@@ -113,3 +113,5 @@ function template:compile(op)
 	log.debug("Template compilation succeeded.")
 	return true
 end
+
+return template

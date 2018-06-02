@@ -1,7 +1,7 @@
 require "filesystem"
 require "mpq_util"
 
-native = {}
+local native = {}
 native.list = {}
 native.file = {}
 
@@ -110,3 +110,5 @@ function native:initialize()
 		end
 	end
 end
+
+return native

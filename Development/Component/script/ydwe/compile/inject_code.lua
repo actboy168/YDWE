@@ -1,5 +1,5 @@
 
-inject_code = {}
+local inject_code = {}
 
 -- 注入代码表
 inject_code.new_table = {}
@@ -185,3 +185,5 @@ function inject_code:initialize()
     end
 	log.trace(string.format("Scanned file: %d", counter))
 end
+
+return inject_code

@@ -3,7 +3,7 @@ require "mpq_util"
 local storm = require 'virtual_storm'
 local stormlib = require 'ffi.stormlib'
 
-jasshelper = {}
+local jasshelper = {}
 
 jasshelper.path     = fs.ydwe_path() / "plugin" / "jasshelper"
 jasshelper.exe_path = jasshelper.path / "jasshelper.exe"
@@ -177,3 +177,5 @@ function jasshelper.compile(self, map_path, option)
 	fs.remove(fs.ydwe_path() / 'jasshelper.conf')
 	return res
 end
+
+return jasshelper

@@ -1,9 +1,9 @@
-require "compile.inject_code"
-require "compile.wave"
-require "compile.template"
-require "compile.cjass"
-require "compile.jasshelper"
-require "compile.native"
+local inject_code = require "compile.inject_code"
+local wave = require "compile.wave"
+local template = require "compile.template"
+local cjass = require "compile.cjass"
+local jasshelper = require "compile.jasshelper"
+local native = require "compile.native"
 require "mpq_util"
 local lnisaver = require 'w3x2lni.lnisaver'
 local ev = require 'ev'

@@ -1,6 +1,6 @@
 require "filesystem"
 
-cjass = {}
+local cjass = {}
 
 cjass.path     = fs.ydwe_path() / "plugin" / "AdicHelper"
 cjass.exe_path = cjass.path / "AdicHelper.exe"
@@ -36,3 +36,5 @@ function cjass.compile(self, map_path, option)
 
 	return result
 end
+
+return cjass
