@@ -1,5 +1,4 @@
 require "filesystem"
-local compiler = require 'compile.compiler'
 local stormlib = require 'ffi.stormlib'
 
 local jasshelper = {}
@@ -101,6 +100,7 @@ function jasshelper:do_compile(map_path, common_j_path, blizzard_j_path, option)
 	end
 
 	if option.enable_jasshelper_scriptonly then
+		local compiler = require 'compile.compiler'
 		return compiler:update_script(map_path, "5_vjass.j",
 			function (map_handle, in_script_path)
 				local out_script_path = fs.ydwe_path() / "logs" / "6_vjass.j"
