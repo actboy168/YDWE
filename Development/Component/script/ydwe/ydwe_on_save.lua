@@ -14,7 +14,7 @@ local function make_option(config, war3ver)
 	-- 是否启用cJass
 	option.enable_cjass = config.ScriptCompiler.EnableCJass == "1"
 	-- 是否启用YDTrigger
-	option.enable_yd_trigger = plugin.loaders['YDTrigger'] ~= nil
+	option.enable_yd_trigger = config.ThirdPartyPlugin.EnableYDTrigger ~= "0"
 	-- pjass的版本
 	option.pjass = config.PJass.Option
 	-- 代码注入选项
