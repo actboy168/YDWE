@@ -1,12 +1,6 @@
 local compiler = require "compile.compiler"
 local lnisaver = require 'w3x2lni.lnisaver'
 
--- 给路径末尾，扩展名前添加内容
--- 效果：("abc.w3x", "def") -> "abcdef.w3x"
-local function aux_filename(self, str)
-	return self:parent_path() / (self:stem():string() .. str .. self:extension():string())
-end
-
 -- 确定应当把地图保存为适合老版本（< 1.24）还是新版本（>= 1.24）的
 -- 对于保存为双份，按照当前魔兽版本处理
 -- save_type - 保存类型，0到3的取值，意义同设置程序，从上到下依次为0到3
@@ -23,15 +17,6 @@ local function determine_map_version(save_type, runtime_version)
 		-- 按照当前版本或者双份
 		return runtime_version
 	end
-end
-
-local function compile_map(map_path, option)
-	local result = compiler:compile(map_path, option)
-	if result then
-		-- 转换成Lni地图
-		result = lnisaver(map_path)
-	end
-	return result
 end
 
 -- 本函数当保存地图时调用
@@ -78,35 +63,15 @@ function event.EVENT_SAVE_MAP(event_data)
 		save_option.script_injection = false
 	end
 
-	-- 如果保存双份，需要预先拷贝
-	local map_path_aux = nil
-	if save_type == 3 then
-		-- 决定第二份的路径
-		if save_option.runtime_version:is_new() then
-			map_path_aux = aux_filename(map_path, "hashtable")
-		else
-			map_path_aux = aux_filename(map_path, "returnbug")
-		end
-
-		log.trace("Making copy of the original map.")
-
-		-- true代表覆盖现有文件。false不会覆盖
-		pcall(fs.copy_file, map_path, map_path_aux, true)
-	end
-
 	-- 编译地图
-	local result = compile_map(map_path, save_option)
-
-	-- 如果有第二份，此时处理第二份
-	if map_path_aux then
-		log.trace("Processing second map")
-		save_option.runtime_version = save_option.runtime_version:is_new() and save_option.runtime_version:old() or save_option.runtime_version:new()
-		compile_map(map_path_aux, save_option)
+	local result = compiler:compile(map_path, save_option)
+	if result then
+		-- 转换成Lni地图
+		result = lnisaver(map_path)
 	end
 
 	log.debug("Result " .. tostring(result))
 	log.debug("********************* on save end *********************")
-
 	if result then return 0 else return -1 end
 end
 

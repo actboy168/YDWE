@@ -332,7 +332,6 @@ void CMainWindow::EnableMapSave(bool bEnable)
 	ContrlSetEnabled("MapSave_0", bEnable);
 	ContrlSetEnabled("MapSave_1", bEnable);
 	ContrlSetEnabled("MapSave_2", bEnable);
-	ContrlSetEnabled("MapSave_3", bEnable);
 	if (!bEnable) ContrlSelected("MapSave_0", true);
 }
 

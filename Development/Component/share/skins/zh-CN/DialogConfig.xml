@@ -41,13 +41,12 @@
       </VerticalLayout>
       <TabLayout name="tabs" >
         <VerticalLayout class="Background" inset="2,18,2,18" >
-          <VerticalLayout height="140" >
+          <VerticalLayout height="110" >
             <Label text="地图版本" tooltip= "地图兼容性选项。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
               <RadioButton class="NormalRadioButton" text="默认（按照魔兽版本）"   width="200" group="MapSave" name="MapSave_0" tooltip="生成当前魔兽可运行的版本。" />
               <RadioButton class="NormalRadioButton" text="只保存为旧版本（1.20）" width="200" group="MapSave" name="MapSave_1" tooltip="保存为适用于魔兽1.24补丁以前的版本。" />
               <RadioButton class="NormalRadioButton" text="只保存为新版本（1.24）" width="200" group="MapSave" name="MapSave_2" tooltip="保存为适用于魔兽1.24补丁以及以后的版本。" />
-              <RadioButton class="NormalRadioButton" text="同时保存双份"           width="200" group="MapSave" name="MapSave_3" tooltip="同时保存为新旧两个版本。和当前魔兽版本不同的版本会以不同的文件名保存。" />
             </VerticalLayout>
           </VerticalLayout>
           <Control height="12" />
