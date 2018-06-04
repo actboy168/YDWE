@@ -8,6 +8,7 @@ mt.info = {
 }
 
 function mt:on_convert(w2l)
+    local fs = require 'fs'
     w2l.log_path = fs.ydwe(false) / 'logs' / 'w3x2lni'
 end
 
