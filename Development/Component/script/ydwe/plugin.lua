@@ -96,18 +96,21 @@ function plugin:load(plugin_config_path)
 end
 
 function plugin:load_directory(plugin_dir)
-	-- 遍历目录
 	for full_path in plugin_dir:list_directory() do
-		if fs.is_directory(full_path) then
-			self:load_directory(full_path)
-		elseif full_path:extension():string() == ".plcfg" then
+		if full_path:extension():string() == ".plcfg" then
 			self:load(full_path)
 		end
 	end
 end
 
 function plugin:load_all()
-	self:load_directory(fs.ydwe_path() / "plugin")
+	for full_path in (fs.ydwe_path() / "plugin"):list_directory() do
+		if fs.is_directory(full_path) then
+			self:load_directory(full_path)
+		elseif full_path:extension():string() == ".plcfg" then
+			self:load(full_path)
+		end
+	end
 end
 
 function plugin:unload_all()
