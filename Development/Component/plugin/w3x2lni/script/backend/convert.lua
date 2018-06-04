@@ -1,7 +1,6 @@
 local messager = require 'share.messager'
 local core = require 'backend.sandbox_core'
 local builder = require 'map-builder'
-local plugin = require 'share.plugin'
 local lang = require 'share.lang'
 local get_report = require 'share.report'
 local check_lni_mark = require 'share.check_lni_mark'
@@ -118,10 +117,6 @@ return function (mode)
     w2l.output_ar = output_ar
 
     messager.text(lang.script.CHECK_PLUGIN)
-    plugin(w2l, function(source, plugin)
-        w2l:add_plugin(source, plugin)
-    end)
-
     w2l:call_plugin 'on_convert'
 
     local slk = {}

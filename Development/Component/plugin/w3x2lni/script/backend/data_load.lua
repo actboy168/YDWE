@@ -29,5 +29,8 @@ return function (w2l, filename)
         end
         return io.load(w2l.ydwe_ui[1] / filename:sub(4))
     end
-    return io.load(root / 'data' / w2l.setting.data / filename)
+    if filename:sub(1, 5) == 'data/' then
+        return io.load(root / 'data' / w2l.setting.data / filename:sub(6))
+    end
+    return io.load(root / filename)
 end

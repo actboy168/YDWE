@@ -1,6 +1,6 @@
 return function()
     require 'registry'
-    local commands = registry.current_user() / [[SOFTWARE\Classes\YDWEMap\shell\run_war3\command]]
+    local commands = registry.open [[HKEY_CURRENT_USER\SOFTWARE\Classes\YDWEMap\shell\run_war3\command]]
     if not commands then
         return
     end
