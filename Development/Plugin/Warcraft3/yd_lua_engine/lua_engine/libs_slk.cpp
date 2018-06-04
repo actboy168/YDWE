@@ -178,11 +178,16 @@ local function load_file(filename)
 	end
 end
 local function data_load(w2l, filename)
-    if filename:sub(1, 6) == 'ui/' and w2l.setting.data_ui == '${YDWE}' then
-		error('error in ${YDWE}')
+    if filename:sub(1, 5) == 'data/' then
+		if filename:sub(1, 8) == 'data/ui/' and w2l.setting.data_ui == '${YDWE}' then
+			error('error in ${YDWE}')
+		end
+		return load_file(('%s/data/%s/%s'):format(root, w2l.setting.data, filename:sub(6)))
     end
-    return load_file(('%s/data/%s/%s'):format(root, w2l.setting.data, filename))
+    return load_file(('%s/%s'):format(root, filename))
 end
+
+(loadlib 'filesystem')()
 
 local w3x2lni = sandbox(('%s/script/core/'):format(root), io_open, {
     ['w3xparser'] = (loadlib 'w3xparser')(),
@@ -190,6 +195,7 @@ local w3x2lni = sandbox(('%s/script/core/'):format(root), io_open, {
     ['lml']       = (loadlib 'lml')(),
     ['lpeg']      = (loadlib 'lpeg')(),
     ['data_load'] = data_load,
+    ['fs']        = fs,
 })
 local function load_mpq(filename)
 	local f = io.open(filename, "r")
