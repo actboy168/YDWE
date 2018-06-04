@@ -4,9 +4,6 @@ local root = fs.ydwe_path()
 local dev = fs.ydwe_devpath()
 
 return function (map_path)
-    if not storm.get_dummy_map() then
-        return
-    end
     if map_path:filename():string() ~= '.w3x' then
         return true
     end
