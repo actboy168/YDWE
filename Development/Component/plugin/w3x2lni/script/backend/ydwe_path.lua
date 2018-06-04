@@ -1,5 +1,5 @@
 return function()
-    require 'registry'
+    local registry = require 'registry'
     local commands = registry.open [[HKEY_CURRENT_USER\SOFTWARE\Classes\YDWEMap\shell\run_war3\command]]
     if not commands then
         return
