@@ -6,5 +6,8 @@ return function (w2l, filename)
     if filename:sub(1, 3) == 'ui/' then
         return io.load(root / filename)
     end
-    return io.load(w2l_path / 'data' / w2l.setting.data / filename)
+    if filename:sub(1, 5) == 'data/' then
+        return io.load(w2l_path / 'data' / w2l.setting.data / filename:sub(6))
+    end
+    return io.load(w2l_path / filename)
 end
