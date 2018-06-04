@@ -39,7 +39,6 @@ local tbl_index = {
 	ThirdPartyPlugin = {
 		EnableDotNetSupport = "0",
 		EnableTesh = "1",
-		EnableYDTrigger = "1",
 	},
 	FeatureToggle = {
 		EnableManualNewId = "0",

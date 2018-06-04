@@ -128,7 +128,6 @@
               <CheckBox text="测试地图前先slk优化" width="200" name="EnableMapSlk" tooltip="可以大幅度降低大型地图的加载时间。可能会有兼容性问题。" />
               <CheckBox text="颜色插件(*)"         width="200" name="EnableDotNetSupport" tooltip="开启后，物体编辑器中输入字符串时，会加载颜色插件。需要安装了.net此项方能生效。" />
               <CheckBox text="Jass语法高亮(*)"     width="200" name="EnableTesh" tooltip="启用TESH，如果触发编辑器出现了崩溃等现象，请禁用此项。" />
-              <CheckBox text="逆天触发器(*)"   width="200" name="EnableYDTrigger" tooltip="全面强化触发编辑器的功能。"  />
               <CheckBox text="自定义物体ID输入"  width="200" name="EnableManualNewId" tooltip="允许在创建物体时输入自定义ID。" />
               <CheckBox text="设置字体(*)" tooltip="设置YDWE的字体" width="200" name="FontEnable" />
               <HorizontalLayout>

@@ -104,14 +104,14 @@ local function compile_map(map_path, option)
 						end
 						compile_t.input = compile_t.output
 					end
-
-					-- Wave预处理
-					compile_t.output = fs.ydwe_path() / "logs" / "3_wave.j"
-					if not wave:compile(compile_t) then
-						return nil
-					end
-					compile_t.input = compile_t.output
 				end
+
+				-- Wave预处理
+				compile_t.output = fs.ydwe_path() / "logs" / "3_wave.j"
+				if not wave:compile(compile_t) then
+					return nil
+				end
+				compile_t.input = compile_t.output
 
                 compile_t.output = fs.ydwe_path() / "logs" / "4_template.j"
 				if not template:compile(compile_t) then
@@ -156,8 +156,6 @@ local function make_option(config, war3ver)
 	option.enable_jasshelper_optimization = config.ScriptCompiler.EnableJassHelperOptimization ~= "0"
 	-- 是否启用cJass
 	option.enable_cjass = config.ScriptCompiler.EnableCJass == "1"
-	-- 是否启用YDTrigger
-	option.enable_yd_trigger = config.ThirdPartyPlugin.EnableYDTrigger ~= "0"
 	-- pjass的版本
 	option.pjass = config.PJass.Option
 	-- 代码注入选项

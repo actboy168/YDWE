@@ -24,7 +24,6 @@ end
 -- op.option - 预处理选项，table，支持的值有
 -- 	runtime_version - 表示魔兽版本
 -- 	enable_jasshelper_debug - 布尔值，是否是调试模式
---	enable_yd_trigger - 布尔值，是否启用YD触发器
 -- 返回：number, info, path - 子进程返回值；预处理输出信息；输出文件路径
 function wave:do_compile(op)
 	local cmd = ''
@@ -44,9 +43,6 @@ function wave:do_compile(op)
 	end
 	if tonumber(global_config["ScriptInjection"]["Option"]) == 0 then
 		cmd = cmd .. "--define=SCRIPT_INJECTION=1 "
-	end
-	if not op.option.enable_yd_trigger then
-		cmd = cmd .. '--define=DISABLE_YDTRIGGER=1 '
 	end
 	if fs.exists(self.force_file_path) then
 		cmd = cmd .. string.format('--forceinclude=%s ', self.force_file_path:filename():string())
