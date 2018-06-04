@@ -114,7 +114,6 @@
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="GetGlobalVarName_Hook.cpp" />
     <ClCompile Include="Hashtable\GUIID_Table.cpp" />
-    <ClCompile Include="Hashtable\Hashtable.cpp" />
     <ClCompile Include="Hook.cpp" />
     <ClCompile Include="SetGUIId_Hook.cpp" />
     <ClCompile Include="SetGUI_Hook.cpp" />
@@ -135,7 +134,6 @@
     <ClInclude Include="Core\CC_SP_UserData.h" />
     <ClInclude Include="Core\CC_VarType.h" />
     <ClInclude Include="Hashtable\GUIID_Table.h" />
-    <ClInclude Include="Hashtable\Hashtable.h" />
     <ClInclude Include="Hook.h" />
     <ClInclude Include="Storm\StormAdapter.h" />
   </ItemGroup>

@@ -69,9 +69,6 @@
     <ClCompile Include="Hashtable\GUIID_Table.cpp">
       <Filter>HashTable</Filter>
     </ClCompile>
-    <ClCompile Include="Hashtable\Hashtable.cpp">
-      <Filter>HashTable</Filter>
-    </ClCompile>
     <ClCompile Include="Core\CC_CountBlock.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -150,9 +147,6 @@
       <Filter>Storm</Filter>
     </ClInclude>
     <ClInclude Include="Hashtable\GUIID_Table.h">
-      <Filter>HashTable</Filter>
-    </ClInclude>
-    <ClInclude Include="Hashtable\Hashtable.h">
       <Filter>HashTable</Filter>
     </ClInclude>
     <ClInclude Include="Core\CC_GUIID.h">
