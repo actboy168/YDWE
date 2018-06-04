@@ -19,7 +19,7 @@ local function get_ui()
 	local enable_japi = is_enable_japi()
     for line in f:lines() do
         line = line:gsub("^%s*(.-)%s*$", "%1")
-		elseif not enable_japi and line == 'japi' then
+		if not enable_japi and line == 'japi' then
 			-- do nothing
 		else
 			table.insert(list, ydwe / 'ui' / line)
