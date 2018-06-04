@@ -3,24 +3,6 @@ local process = require 'process'
 local root = fs.ydwe_path()
 local dev = fs.ydwe_devpath()
 
-local function copy_files(source, target)
-    if not fs.exists(source) then
-        return
-    end
-    if fs.exists(target) then
-        fs.remove_all(target)
-    end
-    if fs.is_directory(source) then
-        fs.create_directories(target)
-        for path in source:list_directory() do
-            local name = path:filename()
-            copy_files(path, target / name)
-        end
-    else
-        fs.copy_file(source, target, true)
-    end
-end
-
 return function (map_path)
     if map_path:filename():string() ~= '.w3x' then
         return true
@@ -49,10 +31,6 @@ return function (map_path)
     local err = stderr:read 'a'
     local exit_code = p:wait()
     p:close()
-    if dev ~= root then
-        copy_files(dev / 'plugin' / 'w3x2lni' / 'log', root / 'logs' / 'w3x2lni')
-        fs.remove_all(dev / 'plugin' / 'w3x2lni' / 'log')
-    end
     if err == '' then
         return true
     else
