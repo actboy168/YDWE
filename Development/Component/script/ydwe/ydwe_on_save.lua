@@ -49,3 +49,15 @@ function event.EVENT_PRE_SAVE_MAP(event_data)
 	log.debug("********************* on pre_save end *********************")
 	return 0
 end
+
+function event.EVENT_NEW_SAVE_MAP(event_data)
+	log.debug("********************* on new save start *********************")
+
+	-- 刷新配置数据
+	global_config_reload()
+
+    -- TODO
+    
+	log.debug("********************* on new save end *********************")
+	if result then return 0 else return -1 end
+end

@@ -86,6 +86,21 @@ namespace NYDWE {
 		return base::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
 	}
 
+	uintptr_t pgTrueFopen;
+	FILE* __cdecl DetourWeFopen(const char* filename, const char* mode)
+	{
+		std::string sFilename(filename);
+		size_t pos = sFilename.rfind(".w3xTemp");
+		if (pos == -1) {
+			pos = sFilename.rfind(".w3mTemp");
+			if (pos == -1) {
+				return base::c_call<FILE*>(pgTrueFopen, filename, mode);
+			}
+		}
+		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
+		return base::c_call<FILE*>(pgTrueFopen, sFilename.c_str(), mode);
+	} 
+
 	HANDLE WINAPI DetourWeCreateFileA(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
 	{
 		std::string fileName(lpFileName);
@@ -118,6 +133,41 @@ namespace NYDWE {
 		}
 
 		return base::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+	}
+
+	bool isWeRebuildMapHookInstalled;
+	uintptr_t pgTrueWeRebuildMap;
+	static int __fastcall DetourWeRebuildMap(int This)
+	{
+		//int ok = base::fast_call<int>(pgTrueWeRebuildMap, This);
+		int unk = *(int*)(This + 12);
+		if (unk + 4 < 64) {
+			unk = 64;
+		}
+		else {
+			unk = unk + 4;
+		}
+		int buffer = 0;
+		int count = 0;
+		int subclass = *(int*)(This + 24);
+		const char* mappath = *(const char**)This;
+		if (subclass)
+		{
+			base::fast_call<void>(*(int*)(*(int*)subclass + 32), subclass);
+			base::fast_call<void>(*(int*)(*(int*)subclass + 36), subclass, 0, &buffer, &count, 0);
+		}
+		int ok = base::std_call<int>(0x00402B00, mappath, 0x88u, unk, 1, count);
+		if (!ok) {
+			event_array[EVENT_NEW_SAVE_MAP]([&](lua_State* L, int idx) {
+			});
+			return 0;
+		}
+		event_array[EVENT_NEW_SAVE_MAP]([&](lua_State* L, int idx) {
+			lua_pushstring(L, "map_path");
+			lua_pushwstring(L, base::a2w(mappath));
+			lua_settable(L, idx);
+		});
+		return 1;
 	}
 
 	/// Regex for extracting file path
@@ -404,12 +454,16 @@ namespace NYDWE {
 	void SetupEvent()
 	{
 		pgTrueCreateFileA     = base::hook::iat(L"storm.dll",             "kernel32.dll", "CreateFileA",     (uintptr_t)DetourStormCreateFileA);
+		pgTrueFopen           = base::hook::iat(::GetModuleHandleW(NULL), "msvcrt.dll",   "fopen",           (uintptr_t)DetourWeFopen);
 		pgTrueCreateFileA     = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateFileA",     (uintptr_t)DetourWeCreateFileA);
 		pgTrueCreateProcessA  = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateProcessA",  (uintptr_t)DetourWeCreateProcessA);
 		pgTrueCreateWindowExA = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "CreateWindowExA", (uintptr_t)DetourWeCreateWindowExA);
 		pgTrueSetMenu         = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "SetMenu",         (uintptr_t)DetourWeSetMenu);
 		pgTrueCreateDialogIndirectParamA = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "CreateDialogIndirectParamA",  (uintptr_t)DetourWeCreateDialogIndirectParamA);
 
+		pgTrueWeRebuildMap = (uintptr_t)0x00402540;
+		INSTALL_INLINE_HOOK(WeRebuildMap);
+		
 		pgTrueWeWinMain     = (uintptr_t)0x004021A0;
 		INSTALL_INLINE_HOOK(WeWinMain);
 
