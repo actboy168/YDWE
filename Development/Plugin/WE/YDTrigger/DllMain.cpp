@@ -22,22 +22,6 @@ int check()
   return FALSE;
 }
 
-CHAR g_szDllPath[MAX_PATH];
-void SetDllPath(HMODULE hModule)
-{
-	if (NULL == GetModuleFileNameA(hModule, g_szDllPath, _countof(g_szDllPath)))
-	{
-		g_szDllPath[0] = '.';
-		g_szDllPath[1] = '\0';
-	}
-	else
-	{
-		PathRemoveBackslashA(g_szDllPath);
-		PathUnquoteSpacesA(g_szDllPath);
-		PathRemoveFileSpecA(g_szDllPath);
-	}
-}
-
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved)
 {
   UNREFERENCED_PARAMETER(lpReserved);
@@ -53,7 +37,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
   case DLL_THREAD_ATTACH:
     {
       DisableThreadLibraryCalls(hModule);
-	  SetDllPath(hModule);
       GUIID_Table_Create();
       GUIID_Table_Init();
       All_Hook();

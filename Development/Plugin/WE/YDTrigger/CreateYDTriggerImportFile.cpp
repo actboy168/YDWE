@@ -1,42 +1,31 @@
-#include <Shlwapi.h>
 #include <stdio.h>
-#include <tchar.h>
-
-extern CHAR g_szDllPath[MAX_PATH];
+#include <base/path/get_path.h>
 
 BOOL g_bDisableSaveLoadSystem = TRUE;
 
-BOOL GetYDTriggerImportFilePath(OUT LPTSTR lpszDest)
-{
-  return (NULL != PathCombine(lpszDest, g_szDllPath, TEXT("YDTrigger\\Import.h")));
-}
-
 BOOL CreateYDTriggerImportFile()
 {
-  TCHAR szYDTriggerImportFilePath[MAX_PATH];
-  FILE* fp = NULL;
+	fs::path file = base::path::get(base::path::DIR_MODULE).parent_path() / L"YDTrigger" / L"Import.h";
 
-  if (!GetYDTriggerImportFilePath(szYDTriggerImportFilePath))
-    return FALSE;
+	FILE* fp = NULL;
+	errno_t err = _wfopen_s(&fp, file.c_str(), L"w");
+	if (err != 0 || NULL == fp)
+		return FALSE;
 
-  errno_t err = _tfopen_s(&fp, szYDTriggerImportFilePath, TEXT("w"));
-  if (err != 0 || NULL == fp)
-    return FALSE;
+	fprintf(fp, "#ifndef INCLUDE_IMPORT_H\n");
+	fprintf(fp, "#define INCLUDE_IMPORT_H\n");
 
-  fprintf(fp, "#ifndef INCLUDE_IMPORT_H\n");
-  fprintf(fp, "#define INCLUDE_IMPORT_H\n");
+	if (g_bDisableSaveLoadSystem)
+	{
+		fprintf(fp, "#\n");
+		fprintf(fp, "#  ifndef DISABLE_SAVE_LOAD_SYSTEM\n");
+		fprintf(fp, "#    define DISABLE_SAVE_LOAD_SYSTEM\n");
+		fprintf(fp, "#  endif\n");
+		fprintf(fp, "#\n");
+	}
 
-  if (g_bDisableSaveLoadSystem)
-  {
-    fprintf(fp, "#\n");
-    fprintf(fp, "#  ifndef DISABLE_SAVE_LOAD_SYSTEM\n");
-    fprintf(fp, "#    define DISABLE_SAVE_LOAD_SYSTEM\n");
-    fprintf(fp, "#  endif\n");
-    fprintf(fp, "#\n");
-  }
+	fprintf(fp, "#endif\n");
 
-  fprintf(fp, "#endif\n");
-
-  fclose(fp);
-  return TRUE;
+	fclose(fp);
+	return TRUE;
 }
