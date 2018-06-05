@@ -12,7 +12,6 @@ typedef int  (_fastcall* GetTriggerVarProc)(DWORD This, DWORD EDX, char* buff, i
 typedef int  (_fastcall* GetTriggerName_InitTrigProc)(DWORD This, DWORD EDX, char* buff, int len);
 typedef int  (_fastcall* GetWEStringProc)(const char* Name, char* buff, int len, DWORD Unknow);
 typedef int  (_fastcall* SetGUIUnknowProc)(DWORD This);
-typedef void (_fastcall* CC_PutActionExProc)(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl);
 typedef void (_fastcall* SetGUITypeProc)(DWORD This, DWORD EDX, DWORD index, const char* name, DWORD unknow);
 typedef void (_fastcall* CC_GetGlobalVarProc)(DWORD This, DWORD EDX, char* buff, DWORD len);
 
@@ -38,7 +37,6 @@ extern GetTriggerVarProc           GetTriggerVar;
 extern GetTriggerName_InitTrigProc GetTriggerName_InitTrig;
 extern GetWEStringProc             GetWEString;
 extern SetGUIUnknowProc            SetGUIUnknow;
-extern CC_PutActionExProc          CC_PutActionEx;
 extern SetGUITypeProc              SetGUIType;
 extern CC_GetGlobalVarProc         CC_GetGlobalVar;
 extern CC_PutStringProc            CC_PutString;

@@ -4,7 +4,7 @@
 BOOL g_bYDWEEnumUnitsInRangeMultipleFlag = FALSE;
 
 BOOL _fastcall  CC_PutAction_SearchVar(DWORD This, DWORD OutClass);
-void _fastcall  CC_PutActionEx_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl);
+void _fastcall  CC_PutActionEx(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl);
 
 void _fastcall 
 	CC_PutActionEx_ForLoop_GetVarName(DWORD This, DWORD cc_guiid_type, char* varname)
@@ -117,7 +117,7 @@ void CC_PutActionEx_ForLoop(DWORD This, DWORD OutClass, char* name, DWORD cc_gui
 }
 
 void _fastcall 
-	CC_PutActionEx_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl)
+	CC_PutActionEx(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl)
 {
 	if (CC_PutAction_SearchVar(This, OutClass))
 	{
@@ -486,5 +486,5 @@ void _fastcall
 	char NewName[260];
 	BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index+1);
 
-	CC_PutActionEx_Hook(This, 0, OutClass, NewName, CC_GUI_TYPE_ACTION, Endl);
+	CC_PutActionEx(This, 0, OutClass, NewName, CC_GUI_TYPE_ACTION, Endl);
 }

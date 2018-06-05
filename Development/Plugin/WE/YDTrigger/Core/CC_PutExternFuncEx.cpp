@@ -2,7 +2,7 @@
 #include "locvar.h"
 
 void _fastcall CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name);
-void _fastcall CC_PutActionEx_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl);
+void _fastcall CC_PutActionEx(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl);
 
 void _fastcall CC_PutExternFunc(DWORD This, DWORD OutClass, char* name, DWORD index)
 {
@@ -107,7 +107,7 @@ void _fastcall CC_PutExternFuncEx_TopDown(DWORD This, DWORD OutClass, char* name
 			BLZSStrPrintf(buff, 260, "function %s takes nothing returns nothing", NewName);
 			PUT_CONST(buff, 1);
 
-			CC_PutActionEx_Hook(VarClass, 0, OutClass, NewName, CC_GUI_TYPE_ACTION, 0);
+			CC_PutActionEx(VarClass, 0, OutClass, NewName, CC_GUI_TYPE_ACTION, 0);
 
 			PUT_CONST("endfunction", 1);
 			PUT_CONST("", 1);

@@ -1,6 +1,6 @@
 #include "CC_Include.h"
 
-void _fastcall CC_PutActionEx_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl);
+void _fastcall CC_PutActionEx(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl);
 
 void _fastcall
 CC_PutVar_Code(DWORD This, DWORD OutClass, char* name, DWORD index, DWORD Type)
@@ -17,7 +17,7 @@ CC_PutVar_Code(DWORD This, DWORD OutClass, char* name, DWORD index, DWORD Type)
     }
     else
     {
-      CC_PutActionEx_Hook(VarClass, 0, OutClass, NewName, CC_GUI_TYPE_ACTION, 0);
+      CC_PutActionEx(VarClass, 0, OutClass, NewName, CC_GUI_TYPE_ACTION, 0);
     }
   }
 }
