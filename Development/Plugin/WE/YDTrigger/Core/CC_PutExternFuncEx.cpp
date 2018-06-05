@@ -1,16 +1,7 @@
 #include "CC_Include.h"
 #include "locvar.h"
 
-void _fastcall CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name);
 void _fastcall CC_PutActionEx(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl);
-
-void _fastcall CC_PutExternFunc(DWORD This, DWORD OutClass, char* name, DWORD index)
-{
-	char NewName[260];
-	BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index+1);
-
-	CC_PutExternFuncEx(This, OutClass, NewName);
-}
 
 void _fastcall CC_PutExternFuncEx_Item(DWORD This, DWORD OutClass, char* name)
 {
@@ -25,7 +16,9 @@ void _fastcall CC_PutExternFuncEx_Item(DWORD This, DWORD OutClass, char* name)
 
 		if (*(DWORD*)(nItemClass+0x13C) != 0)
 		{
-			CC_PutExternFunc(nItemClass, OutClass, name, i);
+			char NewName[260];
+			BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, i + 1);
+			CC_PutExternFuncEx(nItemClass, OutClass, NewName);
 		}
 	}
 }
@@ -126,13 +119,9 @@ void _fastcall CC_PutExternFuncEx_TopDown(DWORD This, DWORD OutClass, char* name
 		{
 			BLZSStrPrintf(buff, 260, "function %sA takes nothing returns nothing", name);
 			PUT_CONST(buff, 1);
-
 			CC_PutLocal_Begin(This, OutClass, FALSE, FALSE);
-
 			CC_PutBlock_Action(This, OutClass, name, -1);
-
 			CC_PutLocal_End(This, OutClass, FALSE, TRUE);
-
 			PUT_CONST("endfunction", 1);
 			PUT_CONST("", 1);
 		}
@@ -173,11 +162,9 @@ void _fastcall CC_PutExternFuncEx(DWORD This, DWORD OutClass, char* name)
 			char buff[260];
 			BLZSStrPrintf(buff, 260, "function %sConditions takes nothing returns nothing", name);
 			PUT_CONST(buff, 1);
-
 			CC_PutLocal_Begin(This, OutClass, TRUE, FALSE);
 			CC_PutBlock_Action(This, OutClass, name, 2);
 			CC_PutLocal_End(This, OutClass, TRUE, TRUE);
-
 			PUT_CONST("endfunction", 1);
 			PUT_CONST("", 1);
 		}
