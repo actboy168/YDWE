@@ -195,12 +195,29 @@ static void _fastcall GetTriggerName_InitTrig(DWORD This, DWORD EDX, char* buf, 
 	char szTemp[260];
 	ConvertTriggerName((char*)This + 0x4C, szTemp, 260);
 	BLZSStrPrintf(buf, len, "%s%s", "InitTrig_", szTemp);
-	if (!isIdentifier(buf))
-	{
+	if (!isIdentifier(buf)) {
 		char szTemp2[260];
 		GetWEString("WESTRING_MELEEINITIALIZATION", szTemp2, 260, 0);
 		if (0 == BLZSStrCmpI((char*)This + 0x4C, szTemp2, 0x7FFFFFFFu)) {
 			BLZSStrPrintf(buf, len, "%s%s", "InitTrig_", "MELEE_INITIALIZATION");
+		}
+	}
+}
+
+static void _fastcall GetTriggerVar(DWORD This, DWORD EDX, char* buf, int len)
+{
+	if (*(DWORD*)(This + 0x18)) {
+		buf[0] = 0;
+		return;
+	}
+	char szTemp[260];
+	ConvertTriggerName((char*)This + 0x4C, szTemp, 260);
+	BLZSStrPrintf(buf, len, "%s%s%s", "gg_", "trg_", szTemp);
+	if (!isIdentifier(buf)) {
+		char szTemp2[260];
+		GetWEString("WESTRING_MELEEINITIALIZATION", szTemp2, 260, 0);
+		if (0 == BLZSStrCmpI((char*)This + 0x4C, szTemp2, 0x7FFFFFFFu)) {
+			BLZSStrPrintf(buf, len, "%s%s%s", "gg_", "trg_", "MELEE_INITIALIZATION");
 		}
 	}
 }

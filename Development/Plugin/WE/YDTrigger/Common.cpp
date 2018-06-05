@@ -35,7 +35,6 @@ void Hook_Init()
   CC_Put_endglobals       = (CC_Put_endglobalsProc)      WE_ADDRESS(0x005BC6A0);
   CC_Main                 = (CC_MainProc)                WE_ADDRESS(0x005CEE70);
   
-  GetTriggerVar           = (GetTriggerVarProc)          WE_ADDRESS(0x005C8110);
   CC_GetGUIName           = (CC_GetGUINameProc)          WE_ADDRESS(0x005D7270);
   CC_PutBegin             = (CC_VoidProc)                WE_ADDRESS(0x004D3420);
   CC_PutEnd               = (CC_VoidProc)                WE_ADDRESS(0x004D3430);
@@ -98,7 +97,6 @@ CC_VoidProc                 CC_PutBegin;
 CC_VoidProc                 CC_PutEnd;
 CC_PutConstProc             CC_PutConst;
 CC_GetGUINameProc           CC_GetGUIName;
-GetTriggerVarProc           GetTriggerVar;
 GetWEStringProc             GetWEString;
 SetGUIUnknowProc            SetGUIUnknow;
 SetGUITypeProc              SetGUIType;
