@@ -22,6 +22,28 @@ BOOL _fastcall CC_PutAction_SearchVar(DWORD This, DWORD OutClass)
 
 	return FALSE;
 }
+int _fastcall CC_PutEventRegister(DWORD This, DWORD EDX, DWORD OutClass, const char* triggername, const char* name, DWORD index)
+{
+	if (0 == BLZSStrCmp((char *)This + 32, "MapInitializationEvent", -1)) {
+		return 0;
+	}
+
+	char guiName[260];
+	CC_GetGUIName(This, 0, guiName, 260);
+	PUT_CONST("    call ", 0);
+	PUT_CONST(guiName, 0);
+	PUT_CONST("(", 0);
+	PUT_CONST(triggername, 0);
+	char NewName[260];
+	BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index + 1);
+	DWORD Type = (*(int(__thiscall **)(int))(*(DWORD *)This + 8))(This);
+	DWORD nVar = *(DWORD*)(This + 0x128);
+	for (DWORD i = 0; i < nVar; ++i) {
+		PUT_CONST(", ", 0);
+		CC_PutVar((This), 0, OutClass, (char*)name, i, Type, 0);
+	}
+	return PUT_CONST(")", 1);
+}
 
 void _fastcall CC_PutEventRegisterEx(DWORD This, DWORD OutClass, const char* triggername, const char* name, DWORD index)
 {

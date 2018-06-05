@@ -6,7 +6,6 @@
 typedef int  (_fastcall* CC_VoidProc)(void);
 typedef int  (_fastcall* CC_PutConstProc)(DWORD OutClass, const char* string, DWORD Endl);
 typedef int  (_fastcall* CC_PutStringProc)(DWORD OutClass, DWORD EDX, const char* string, DWORD Endl);
-typedef int  (_fastcall* CC_PutEventRegisterProc)(DWORD This, DWORD EDX, DWORD OutClass, const char* triggername, const char* name, DWORD index);
 typedef int  (_fastcall* CC_GetGUINameProc)(DWORD This, DWORD EDX, char* buff, int len);
 typedef int  (_fastcall* GetTriggerVarProc)(DWORD This, DWORD EDX, char* buff, int len);
 typedef int  (_fastcall* GetTriggerName_InitTrigProc)(DWORD This, DWORD EDX, char* buff, int len);
@@ -31,7 +30,6 @@ typedef void (_fastcall* CC_MainProc)(DWORD OutClass);
 extern CC_VoidProc                 CC_PutBegin;
 extern CC_VoidProc                 CC_PutEnd;
 extern CC_PutConstProc             CC_PutConst;
-extern CC_PutEventRegisterProc     CC_PutEventRegister;
 extern CC_GetGUINameProc           CC_GetGUIName;
 extern GetTriggerVarProc           GetTriggerVar;
 extern GetTriggerName_InitTrigProc GetTriggerName_InitTrig;
