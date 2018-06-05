@@ -119,6 +119,11 @@ void CC_PutActionEx_ForLoop(DWORD This, DWORD OutClass, char* name, DWORD cc_gui
 void _fastcall 
 	CC_PutActionEx_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl)
 {
+	if (CC_PutAction_SearchVar(This, OutClass))
+	{
+		ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ANYPLAYER");
+	}
+
 	char buff[260];
 
 	switch (*(DWORD*)(This+0x138))
@@ -338,6 +343,90 @@ void _fastcall
 
 			break;
 		}
+	case CC_GUIID_SetVariable:
+		CC_PutBegin();
+		PUT_CONST("set ", 0);
+		PUT_VAR(This, 0);
+		PUT_CONST(" = ", 0);
+		PUT_VAR(This, 1);
+		PUT_CONST("", 1);
+		CC_PutEnd();
+		break;
+	case CC_GUIID_ForGroupMultiple:
+		CC_PutBegin();
+		PUT_CONST("call ForGroupBJ(", 0);
+		PUT_VAR(This, 0);
+		PUT_CONST(", function ", 0);
+		PUT_CONST(name, 0);
+		PUT_CONST("A)", 1);
+		CC_PutEnd();
+		break;
+	case CC_GUIID_ForForceMultiple:
+		CC_PutBegin();
+		PUT_CONST("call ForForce(", 0);
+		PUT_VAR(This, 0);
+		PUT_CONST(", function ", 0);
+		PUT_CONST(name, 0);
+		PUT_CONST("A)", 1);
+		CC_PutEnd();
+		break;
+	case CC_GUIID_EnumDestructablesInRectAllMultiple:
+		CC_PutBegin();
+		PUT_CONST("call EnumDestructablesInRectAll(", 0);
+		PUT_VAR(This, 0);
+		PUT_CONST(", function ", 0);
+		PUT_CONST(name, 0);
+		PUT_CONST("A)", 1);
+		CC_PutEnd();
+		break;
+	case CC_GUIID_EnumDestructablesInCircleBJMultiple:
+		CC_PutBegin();
+		PUT_CONST("call EnumDestructablesInCircleBJ(", 0);
+		PUT_VAR(This, 0);
+		PUT_CONST(", ", 0);
+		PUT_VAR(This, 1);
+		PUT_CONST(", function ", 0);
+		PUT_CONST(name, 0);
+		PUT_CONST("A)", 1);
+		CC_PutEnd();
+		break;
+	case CC_GUIID_EnumItemsInRectBJMultiple:
+		CC_PutBegin();
+		PUT_CONST("call EnumItemsInRectBJ(", 0);
+		PUT_VAR(This, 0);
+		PUT_CONST(", function ", 0);
+		PUT_CONST(name, 0);
+		PUT_CONST("A)", 1);
+		CC_PutEnd();
+		break;
+	case CC_GUIID_WaitForCondition:
+		CC_PutBegin();
+		PUT_CONST("loop", 1);
+		CC_PutBegin();
+		PUT_CONST("exitwhen ( ", 0);
+		PUT_VAR(This, 0);
+		PUT_CONST("()", 0);
+		PUT_CONST(" )", 1);
+		PUT_CONST("call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL, ", 0);
+		PUT_VAR(This, 1);
+		PUT_CONST("))", 1);
+		CC_PutEnd();
+		PUT_CONST("endloop", 1);
+		CC_PutEnd();
+		break;
+	case CC_GUIID_CommentString:
+		CC_PutBegin();
+		PUT_CONST("// ", 0);
+		PUT_VAR(This, 0);
+		PUT_CONST("", 1);
+		CC_PutEnd();
+		break;
+	case CC_GUIID_CustomScriptCode:
+		CC_PutBegin();
+		PUT_VAR(This, 0);
+		PUT_CONST("", 1);
+		CC_PutEnd();
+		break;
 	case CC_GUIID_AddTriggerEvent:
 		{
 			DWORD nVarClass = GetGUIVar_Class(This, 1);
@@ -368,15 +457,26 @@ void _fastcall
 			CC_PutEnd();
 		}
 		break;
-	default:
-		{
-			if (CC_PutAction_SearchVar(This, OutClass))
-			{
-				ShowError(OutClass, "WESTRING_ERROR_YDTRIGGER_ANYPLAYER");
+	default: {
+		char szName[260];
+		CC_GetGUIName(This, 0, szName, 260);
+		DWORD nVar = *(DWORD*)(This + 0x128);
+
+		CC_PutBegin();
+		PUT_CONST("call ", 0);
+		PUT_CONST(szName, 0);
+		PUT_CONST("(", 0);
+		if (nVar > 0) {
+			PUT_VAR(This, 0);
+			for (DWORD i = 1; i < nVar; ++i) {
+				PUT_CONST(", ", 0);
+				PUT_VAR(This, i);
 			}
-			CC_PutActionEx(This, EDX, OutClass, name, Type, Endl);
 		}
+		PUT_CONST(")", 1);
+		CC_PutEnd();
 		break;
+	}
 	}
 }
 
