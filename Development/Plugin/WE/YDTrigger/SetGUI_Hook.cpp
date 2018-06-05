@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "Storm/StormAdapter.h"
+#include <BlizzardStorm.h>
 #include "Common.h"
 #include "Core/CC_GUIID.h"
 #include <algorithm>

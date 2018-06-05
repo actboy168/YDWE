@@ -3,7 +3,7 @@
 
 #include <windows.h>
 #include "../Common.h"
-#include "../Storm/StormAdapter.h"
+#include <BlizzardStorm.h>
 #include "../ConvertString/ConvertString.h"
 #include "CC_Put.h"
 #include "CC_GUIID.h"

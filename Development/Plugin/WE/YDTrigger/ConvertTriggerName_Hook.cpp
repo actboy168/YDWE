@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "Storm/StormAdapter.h"
+#include <BlizzardStorm.h>
 #include "ConvertString/ConvertString.h"
 #include "Common.h"
 

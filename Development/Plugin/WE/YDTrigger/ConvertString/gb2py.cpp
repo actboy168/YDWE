@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <ctype.h>
-#include "../Storm/StormAdapter.h"
+#include <BlizzardStorm.h>
 #include "ConvertString.h"
 
 

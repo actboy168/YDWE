@@ -1,5 +1,5 @@
 #include <ctype.h>
-#include "../Storm/StormAdapter.h"
+#include <BlizzardStorm.h>
 #include "ConvertString.h"
 
 static unsigned char ConvertToAlnum[] = {

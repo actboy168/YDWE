@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "Storm/StormAdapter.h"
+#include <BlizzardStorm.h>
 #include "Common.h"
 #include "Hook.h"
 #include <base/hook/inline.h>

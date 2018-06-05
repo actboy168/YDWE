@@ -135,7 +135,6 @@
     <ClInclude Include="Core\CC_VarType.h" />
     <ClInclude Include="Hashtable\GUIID_Table.h" />
     <ClInclude Include="Hook.h" />
-    <ClInclude Include="Storm\StormAdapter.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc" />
