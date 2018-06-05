@@ -1,5 +1,6 @@
 #include "CC_Include.h"
 #include "locvar.h"
+#include <base/hook/fp_call.h>
 
 extern BOOL g_bYDWEEnumUnitsInRangeMultipleFlag;
 
@@ -93,7 +94,6 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 			{
 				return 0;
 			}
-
 			PUT_CONST((char*)(nItemClass + 0x20), 0);
 			PUT_CONST("(", 0);
 			BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index + 1);
@@ -106,9 +106,20 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 				}
 			}
 			return PUT_CONST(")", 0);
-		}
-      break;      
+		}     
     }
   }
-  return CC_PutVar_Other(This, EDX, OutClass, name, index, type);
+  else
+  {
+	  // TODO
+	  base::fast_call<void>(0x0065B2A0, This, 0, buff, 260);
+	  PUT_CONST(buff, 0);
+	  if (!*(DWORD*)(This + 380))
+	  {
+		  return 0;
+	  }
+	  PUT_CONST("[", 0);
+	  CC_PutVar_Other_Hook(*(DWORD*)(This + 0x17C), 0, OutClass, name, index, type);
+	  return PUT_CONST("]", 0);
+  }
 }
