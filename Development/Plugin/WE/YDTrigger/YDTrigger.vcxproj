@@ -91,7 +91,7 @@
     <ClCompile Include="ConvertString\gb2py.cpp" />
     <ClCompile Include="ConvertTriggerName_Hook.cpp" />
     <ClCompile Include="Core\CC_CountBlock.cpp" />
-    <ClCompile Include="Core\CC_PutActionEx_Hook.cpp" />
+    <ClCompile Include="Core\CC_PutActionEx.cpp" />
     <ClCompile Include="Core\CC_PutBlock_Action.cpp" />
     <ClCompile Include="Core\CC_PutBlock_Condition.cpp" />
     <ClCompile Include="Core\CC_PutBlock_Event.cpp" />

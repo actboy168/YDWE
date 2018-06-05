@@ -69,9 +69,6 @@
     <ClCompile Include="Core\CC_CountBlock.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Core\CC_PutActionEx_Hook.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\CC_PutBlock_Action.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -133,6 +130,9 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\CC_PutVar.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\CC_PutActionEx.cpp">
       <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
