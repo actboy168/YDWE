@@ -13,9 +13,6 @@
       <UniqueIdentifier>{B9460C90-BDD0-11E1-AC76-D5F2066D06AF}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="HashTable">
-      <UniqueIdentifier>{25e3dc12-6189-499c-8e10-5d6e04f0ba3b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{6348ed94-a21c-470e-be80-b8c87102863e}</UniqueIdentifier>
     </Filter>
@@ -62,9 +59,6 @@
     </ClCompile>
     <ClCompile Include="TriggerParameterDialog_Type_Hook.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hashtable\GUIID_Table.cpp">
-      <Filter>HashTable</Filter>
     </ClCompile>
     <ClCompile Include="Core\CC_CountBlock.cpp">
       <Filter>Core</Filter>
@@ -142,9 +136,6 @@
     </ClInclude>
     <ClInclude Include="Hook.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hashtable\GUIID_Table.h">
-      <Filter>HashTable</Filter>
     </ClInclude>
     <ClInclude Include="Core\CC_GUIID.h">
       <Filter>Core</Filter>
