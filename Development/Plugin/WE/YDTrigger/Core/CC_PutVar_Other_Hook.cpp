@@ -12,6 +12,18 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 
   if ((0 != nItemClass) && (2 == *(DWORD*)(This+0x08)))
   {
+	  DWORD nVar = (*(DWORD*)(nItemClass + 0x128));
+	  if (nVar == 3 && GetGUIVar_Type(nItemClass, 1) == CC_VARTYPE_ArithmeticOperator) {
+		  BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index + 1);
+		  PUT_CONST("(", 0);
+		  name = NewName;
+		  PUT_VAR(nItemClass, 0);
+		  PUT_CONST(" ", 0);
+		  PUT_VAR(nItemClass, 1);
+		  PUT_CONST(" ", 0);
+		  PUT_VAR(nItemClass, 2);
+		  return PUT_CONST(")", 0);
+	  }
     switch (*(DWORD*)(nItemClass+0x138))
     {
     case CC_GUIID_GetEnumUnit:
@@ -52,6 +64,27 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
       ConvertString((char*)&GetGUIVar_Value(nItemClass, 0), NewName, 260);
       BLZSStrPrintf(buff, 260, "ydul_%s", NewName);
 	  return PUT_CONST(buff, 0);
+	case CC_GUIID_GetTriggerName: {
+		DWORD Trigger = *(DWORD*)(*(DWORD*)(This + 0x04) + 0x30);
+		char szName[260];
+		if (Trigger) {
+			BLZSStrCopy(szName, (const char*)(Trigger + 0x4C), 260);
+		}
+		else {
+			GetWEString("WESTRING_UNKNOWN", szName, 260, 0);
+		}
+		PUT_CONST("\"", 0);
+		PUT_CONST(szName, 0);
+		return PUT_CONST("\"", 0);
+	}
+	case CC_GUIID_OperatorString:
+		BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index + 1);
+		PUT_CONST("(", 0);
+		name = NewName;
+		PUT_VAR(nItemClass, 0);
+		PUT_CONST(" + ", 0);
+		PUT_VAR(nItemClass, 1);
+		return PUT_CONST(")", 0);
     default:
 		{
 			char szName[260];
@@ -60,6 +93,19 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 			{
 				return 0;
 			}
+
+			PUT_CONST((char*)(nItemClass + 0x20), 0);
+			PUT_CONST("(", 0);
+			BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index + 1);
+			DWORD nVar = *(DWORD*)(nItemClass + 0x128);
+			if (nVar > 0) {
+				PUT_VAR(nItemClass, 0);
+				for (DWORD i = 1; i < nVar; ++i) {
+					PUT_CONST(", ", 0);
+					PUT_VAR(nItemClass, i);
+				}
+			}
+			return PUT_CONST(")", 0);
 		}
       break;      
     }
