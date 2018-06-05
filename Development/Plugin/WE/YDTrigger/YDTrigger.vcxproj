@@ -100,6 +100,7 @@
     <ClCompile Include="Core\CC_PutExternFuncEx.cpp" />
     <ClCompile Include="Core\CC_PutLocal.cpp" />
     <ClCompile Include="Core\CC_PutTrigger_Hook.cpp" />
+    <ClCompile Include="Core\CC_PutVar.cpp" />
     <ClCompile Include="Core\CC_PutVar_Code.cpp" />
     <ClCompile Include="Core\CC_PutVar_Other_Hook.cpp" />
     <ClCompile Include="Core\CC_Put_endglobalsHook.cpp" />

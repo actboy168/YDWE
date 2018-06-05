@@ -4,7 +4,7 @@
 #include <base/hook/inline.h>
 
 void _fastcall CC_PutTrigger_Hook(DWORD This, DWORD EDX, DWORD OutClass);
-void _fastcall CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD index, DWORD type);
+int  _fastcall CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD index, DWORD type);
 int  _fastcall GetGUICount_Hook(DWORD This);
 int  _fastcall GetGUIString_Hook(DWORD This, DWORD EDX, int index, char* buff, int len);
 int  _fastcall GetGUIIcon_Hook(DWORD This, DWORD EDX, int index);
@@ -42,7 +42,6 @@ void Hook_Init()
   CC_PutEnd               = (CC_VoidProc)                WE_ADDRESS(0x004D3430);
   CC_PutConst             = (CC_PutConstProc)            WE_ADDRESS(0x004D3440);
   CC_PutString            = (CC_PutStringProc)           WE_ADDRESS(0x005BCB10);
-  CC_PutVar               = (CC_PutVarProc)              WE_ADDRESS(0x005DA6A0);
   CC_PutEventRegister     = (CC_PutEventRegisterProc)    WE_ADDRESS(0x005DAA20);
   GetWEString             = (GetWEStringProc)            WE_ADDRESS(0x004EEC00);
   SetGUIUnknow            = (SetGUIUnknowProc)           WE_ADDRESS(0x005D7800);
@@ -101,7 +100,6 @@ void All_Unhook()
 CC_VoidProc                 CC_PutBegin;
 CC_VoidProc                 CC_PutEnd;
 CC_PutConstProc             CC_PutConst;
-CC_PutVarProc               CC_PutVar;
 CC_PutEventRegisterProc     CC_PutEventRegister;
 CC_GetGUINameProc           CC_GetGUIName;
 GetTriggerVarProc           GetTriggerVar;

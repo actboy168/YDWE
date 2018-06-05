@@ -24,7 +24,7 @@ CC_Put_YDWESaveAnyTypeDataByUserData(DWORD This, DWORD OutClass, char* name)
   }
 }
 
-VOID _fastcall
+int _fastcall
 CC_Put_YDWELoadAnyTypeDataByUserData(DWORD This, DWORD OutClass, char* name, char* type_name)
 {
   char buff[260];
@@ -38,11 +38,12 @@ CC_Put_YDWELoadAnyTypeDataByUserData(DWORD This, DWORD OutClass, char* name, cha
     PUT_CONST(buff, 0);
     PUT_VAR(This, 1);
     BLZSStrPrintf(buff, 260, ", \"%s\", %s)", (char*)&GetGUIVar_Value(This, 2), type_name);
-    PUT_CONST(buff, 0);
+    return PUT_CONST(buff, 0);
   }
+  return 0;
 }
 
-VOID _fastcall
+int _fastcall
 CC_Put_YDWEHaveSavedAnyTypeDataByUserData(DWORD This, DWORD OutClass, char* name)
 {
   char buff[260];
@@ -58,8 +59,9 @@ CC_Put_YDWEHaveSavedAnyTypeDataByUserData(DWORD This, DWORD OutClass, char* name
     PUT_CONST(buff, 0);
     PUT_VAR(This, 1);
     BLZSStrPrintf(buff, 260, ", \"%s\", %s)", (char*)&GetGUIVar_Value(This, 3), TypeName[nValueType]);
-    PUT_CONST(buff, 0);
+    return PUT_CONST(buff, 0);
   }
+  return 0;
 }
 
 VOID _fastcall

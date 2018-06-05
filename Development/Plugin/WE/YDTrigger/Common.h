@@ -6,7 +6,6 @@
 typedef int  (_fastcall* CC_VoidProc)(void);
 typedef int  (_fastcall* CC_PutConstProc)(DWORD OutClass, const char* string, DWORD Endl);
 typedef int  (_fastcall* CC_PutStringProc)(DWORD OutClass, DWORD EDX, const char* string, DWORD Endl);
-typedef int  (_fastcall* CC_PutVarProc)(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Index, DWORD Type, DWORD Endl);
 typedef int  (_fastcall* CC_PutEventRegisterProc)(DWORD This, DWORD EDX, DWORD OutClass, const char* triggername, const char* name, DWORD index);
 typedef int  (_fastcall* CC_GetGUINameProc)(DWORD This, DWORD EDX, char* buff, int len);
 typedef int  (_fastcall* GetTriggerVarProc)(DWORD This, DWORD EDX, char* buff, int len);
@@ -18,7 +17,7 @@ typedef void (_fastcall* SetGUITypeProc)(DWORD This, DWORD EDX, DWORD index, con
 typedef void (_fastcall* CC_GetGlobalVarProc)(DWORD This, DWORD EDX, char* buff, DWORD len);
 
 typedef void (_fastcall* CC_PutTriggerProc)(DWORD This, DWORD EDX, DWORD OutClass);
-typedef void (_fastcall* CC_PutVar_OtherProc)(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD index, DWORD type);
+typedef int  (_fastcall* CC_PutVar_OtherProc)(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD index, DWORD type);
 typedef int  (_fastcall* GetGUICountProc)(DWORD This);
 typedef int  (_fastcall* GetGUIStringProc)(DWORD This, DWORD EDX, int index, char* buff, int len);
 typedef int  (_fastcall* GetGUIIconProc)(DWORD This, DWORD EDX, int index);
@@ -33,7 +32,6 @@ typedef void (_fastcall* CC_MainProc)(DWORD OutClass);
 extern CC_VoidProc                 CC_PutBegin;
 extern CC_VoidProc                 CC_PutEnd;
 extern CC_PutConstProc             CC_PutConst;
-extern CC_PutVarProc               CC_PutVar;
 extern CC_PutEventRegisterProc     CC_PutEventRegister;
 extern CC_GetGUINameProc           CC_GetGUIName;
 extern GetTriggerVarProc           GetTriggerVar;

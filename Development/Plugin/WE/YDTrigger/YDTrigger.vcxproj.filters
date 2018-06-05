@@ -132,6 +132,9 @@
     <ClCompile Include="Core\trigger_data_ui.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Core\CC_PutVar.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
