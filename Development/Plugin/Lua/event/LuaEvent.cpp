@@ -101,6 +101,37 @@ namespace NYDWE {
 		return base::c_call<FILE*>(pgTrueFopen, sFilename.c_str(), mode);
 	} 
 
+	uintptr_t pgTrueGetFileAttributesA;
+	DWORD WINAPI DetourWeGetFileAttributesA(LPCSTR lpPathName)
+	{
+		std::string sFilename(lpPathName);
+		size_t pos = sFilename.rfind(".w3xTemp");
+		if (pos == -1) {
+			pos = sFilename.rfind(".w3mTemp");
+			if (pos == -1) {
+				return base::std_call<DWORD>(pgTrueGetFileAttributesA, lpPathName);
+			}
+		}
+		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
+		return base::std_call<DWORD>(pgTrueGetFileAttributesA, sFilename.c_str());
+	}
+
+	uintptr_t pgTrueCreateDirectoryA;
+	BOOL WINAPI DetourWeCreateDirectoryA(LPCSTR lpPathName, LPSECURITY_ATTRIBUTES lpSecurityAttributes)
+	{
+		std::string sFilename(lpPathName);
+		size_t pos = sFilename.rfind(".w3xTemp");
+		if (pos == -1) {
+			pos = sFilename.rfind(".w3mTemp");
+			if (pos == -1) {
+				return base::std_call<BOOL>(pgTrueCreateDirectoryA, lpPathName, lpSecurityAttributes);
+			}
+		}
+		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
+		BOOL ok = base::std_call<BOOL>(pgTrueCreateDirectoryA, sFilename.c_str(), lpSecurityAttributes);
+		return ok;
+	}
+
 	HANDLE WINAPI DetourWeCreateFileA(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
 	{
 		std::string fileName(lpFileName);
@@ -454,6 +485,8 @@ namespace NYDWE {
 	{
 		pgTrueCreateFileA     = base::hook::iat(L"storm.dll",             "kernel32.dll", "CreateFileA",     (uintptr_t)DetourStormCreateFileA);
 		pgTrueFopen           = base::hook::iat(::GetModuleHandleW(NULL), "msvcrt.dll",   "fopen",           (uintptr_t)DetourWeFopen);
+		pgTrueGetFileAttributesA = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "GetFileAttributesA", (uintptr_t)DetourWeGetFileAttributesA);
+		pgTrueCreateDirectoryA = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateDirectoryA", (uintptr_t)DetourWeCreateDirectoryA);
 		pgTrueCreateFileA     = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateFileA",     (uintptr_t)DetourWeCreateFileA);
 		pgTrueCreateProcessA  = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateProcessA",  (uintptr_t)DetourWeCreateProcessA);
 		pgTrueCreateWindowExA = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "CreateWindowExA", (uintptr_t)DetourWeCreateWindowExA);
