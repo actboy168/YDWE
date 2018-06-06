@@ -80,7 +80,6 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
 	local files = {}
 	scan(temp_path, function (path, relative)
 		files[relative] = path
-		log.info(('Searched [%s] at [%s]'):format(relative, path))
 	end)
 
 	local result, err = objsaver(map_path, files)

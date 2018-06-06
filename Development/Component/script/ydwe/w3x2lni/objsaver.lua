@@ -81,7 +81,6 @@ return function (target_path, files)
         if buf then
             local suc = map:save_file(name, buf)
             if suc then
-                log.info(('Imported: %s'):format(name))
             else
                 log.warn(('Imported failed: %s'):format(name))
             end
