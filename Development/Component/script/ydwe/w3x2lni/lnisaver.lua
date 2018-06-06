@@ -3,7 +3,7 @@ local process = require 'process'
 local root = fs.ydwe_path()
 local dev = fs.ydwe_devpath()
 
-return function (map_path)
+return function (map_path, target_path)
     if map_path:filename():string() ~= '.w3x' then
         return true
     end
@@ -17,7 +17,7 @@ return function (map_path)
         (root / 'bin' / 'lua.exe'):string(),
         ([[package.cpath = '${YDWE}\\bin\\?.dll;${YDWE}\\bin\\modules\\?.dll';package.path = '${DEV}\\?.lua;${DEV}\\?\\init.lua']]):gsub('${YDWE}', root:string():gsub('\\', '\\\\')):gsub('${DEV}', current_dir:string():gsub('\\', '\\\\')),
         (current_dir / 'gui' / 'mini.lua'):string(),
-        ('"lni" "%s" "%s"'):format((root / 'backups' / 'lni_backup.w3x'):string(), map_path:parent_path():string())
+        ('"lni" "%s" "%s"'):format((root / 'backups' / 'lni_backup.w3x'):string(), target_path:string())
     )
     local p = process()
     p:set_console 'disable'

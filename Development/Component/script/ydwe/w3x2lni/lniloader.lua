@@ -41,13 +41,11 @@ local function dummy_map_ar(dir)
     end
     
     function ar:set(name, buf)
-        log.info('dummy map set', name)
         files[name] = buf
         output[name] = buf
     end
 
     function ar:remove(name)
-        log.info('dummy map remove', name)
         files[name] = false
         output[name] = false
     end
