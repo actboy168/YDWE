@@ -17,3 +17,4 @@
 *.vs/
 OpenSource/Boost/
 Development/Component/script/common/gitlog.lua
+Development/Component/plugin/YDTrigger/Import.h
