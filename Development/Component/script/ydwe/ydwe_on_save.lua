@@ -81,7 +81,7 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
 	scan(temp_path, function (path, relative)
 		if relative ~= map_name then
 			files[relative] = path
-			log.info('Searched', relative, path)
+			log.info(('Searched [%s] at [%s]'):format(relative, path))
 		end
 	end)
 
