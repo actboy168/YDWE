@@ -158,16 +158,15 @@ namespace NYDWE {
 		}
 		int ok = base::std_call<int>(0x00402B00, mappath, 0x88u, unk, 1, count);
 		if (!ok) {
-			event_array[EVENT_NEW_SAVE_MAP]([&](lua_State* L, int idx) {
-			});
 			return 0;
 		}
-		event_array[EVENT_NEW_SAVE_MAP]([&](lua_State* L, int idx) {
+		int results = event_array[EVENT_NEW_SAVE_MAP]([&](lua_State* L, int idx) {
 			lua_pushstring(L, "map_path");
 			lua_pushwstring(L, base::a2w(mappath));
 			lua_settable(L, idx);
 		});
-		return 1;
+		base::std_call<BOOL>(GetProcAddress(GetModuleHandleW(L"storm.dll"), (const char*)403), ok, "delete", -1, 0);
+		return results >= 0 ? 1 : 0;
 	}
 
 	/// Regex for extracting file path

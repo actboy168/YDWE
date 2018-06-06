@@ -88,9 +88,8 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
 	local suc, err = objsaver(target_path, files)
 	if not suc then
 		log.error(err)
-		error(err)
 	end
 
 	log.debug("********************* on new save end *********************")
-	if result then return 0 else return -1 end
+	if suc then return 0 else return -1 end
 end
