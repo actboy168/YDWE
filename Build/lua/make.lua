@@ -61,6 +61,8 @@ local function version()
 end
 
 local function version_build()
+	fs.remove(path.Development / 'Build' / 'include' / 'YDWEVersion.h')
+	fs.remove(path.Development / 'Build' / 'include' / 'YDWEVersionBuild.h')
 	if fs.exists(path.Build / 'include'/ 'version') then
 		fs.create_directories(path.Development / 'Build' / 'include')
 		local f = assert(io.open((path.Build / 'include'/ 'version'):string(), 'r'))
