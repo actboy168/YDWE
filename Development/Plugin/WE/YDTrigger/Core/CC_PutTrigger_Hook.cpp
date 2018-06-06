@@ -43,7 +43,7 @@ CC_PutTrigger_PutExternProc(DWORD This, DWORD OutClass, char* name, DWORD cc_gui
       {
 		char NewName[260];
 		BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, i + 1);
-		CC_PutExternFuncEx(This, OutClass, NewName);
+		CC_PutExternFuncEx(nItemClass, OutClass, NewName);
       }
     }
   }
