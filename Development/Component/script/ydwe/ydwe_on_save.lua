@@ -92,7 +92,7 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
 		result = compiler:compile(map_path, global_config, war3_version:is_new() and 24 or 20)
 		if result then
 			-- 转换成Lni地图
-			result = lnisaver(map_path)
+			result = lnisaver(map_path, target_path:parent_path())
 		end
 	end
 
