@@ -1,11 +1,12 @@
 #include <stdio.h>
-#include <base/path/get_path.h>
+#include <base/path/ydwe.h>
+#include <Windows.h>
 
 BOOL g_bDisableSaveLoadSystem = TRUE;
 
 BOOL CreateYDTriggerImportFile()
 {
-	fs::path file = base::path::get(base::path::DIR_MODULE).parent_path() / L"YDTrigger" / L"Import.h";
+	fs::path file = base::path::ydwe(true) / "plugin" / L"YDTrigger" / L"Import.h";
 
 	FILE* fp = NULL;
 	errno_t err = _wfopen_s(&fp, file.c_str(), L"w");
