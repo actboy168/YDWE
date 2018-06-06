@@ -76,16 +76,14 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
 	local target_path = temp_path:parent_path() / map_path:filename()
 	log.trace("Saving " .. target_path:string())
 
-	local map_name = map_path:filename():string()
+	fs.remove(map_path)
 	local files = {}
 	scan(temp_path, function (path, relative)
-		if relative ~= map_name then
-			files[relative] = path
-			log.info(('Searched [%s] at [%s]'):format(relative, path))
-		end
+		files[relative] = path
+		log.info(('Searched [%s] at [%s]'):format(relative, path))
 	end)
 
-	local suc, err = objsaver(target_path, files)
+	local suc, err = objsaver(map_path, files)
 	if not suc then
 		log.error(err)
 	end
