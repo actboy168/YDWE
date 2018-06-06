@@ -1,4 +1,5 @@
 local compiler = require "compile.compiler"
+local objsaver = require 'w3x2lni.objsaver'
 local lnisaver = require 'w3x2lni.lnisaver'
 
 -- 本函数当保存地图时调用
@@ -50,6 +51,19 @@ function event.EVENT_PRE_SAVE_MAP(event_data)
 	return 0
 end
 
+local function scan(dir, callback, relative)
+	if not relative then
+		relative = fs.path ''
+	end
+	for path in dir:list_directory() do
+		if fs.is_directory(path) then
+			scan(path, callback, relative / path:filename())
+		else
+			callback(path, (relative / path:filename()):string())
+		end
+	end
+end
+
 function event.EVENT_NEW_SAVE_MAP(event_data)
 	log.debug("********************* on new save start *********************")
 
@@ -57,7 +71,26 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
 	global_config_reload()
 
     -- TODO
-    
+	local map_path = fs.path(event_data.map_path)
+	local temp_path = map_path:parent_path()
+	local target_path = temp_path:parent_path() / map_path:filename()
+	log.trace("Saving " .. target_path:string())
+
+	local map_name = map_path:filename():string()
+	local files = {}
+	scan(temp_path, function (path, relative)
+		if relative ~= map_name then
+			files[relative] = path
+			log.info('Searched', relative, path)
+		end
+	end)
+
+	local suc, err = objsaver(target_path, files)
+	if not suc then
+		log.error(err)
+		error(err)
+	end
+
 	log.debug("********************* on new save end *********************")
 	if result then return 0 else return -1 end
 end
