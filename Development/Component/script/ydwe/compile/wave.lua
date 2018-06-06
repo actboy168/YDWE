@@ -30,7 +30,7 @@ function wave:do_compile(op)
 	cmd = cmd .. string.format('--output=%s ', pathstring(op.output))
 	cmd = cmd .. string.format('--sysinclude=%s ', pathstring(self.sys_include_path))
 	cmd = cmd .. string.format('--sysinclude=%s ', pathstring(self.plugin_include_path))
-	cmd = cmd .. string.format('--include=%s ',    pathstring(op.map_path:parent_path()))
+	cmd = cmd .. string.format('--include=%s ',    pathstring(op.map_path:parent_path():parent_path()))
     for _, path in ipairs(require 'ui') do
         if fs.exists(path / 'jass') then
             cmd = cmd .. string.format('--include=%s ',    pathstring(path / 'jass'))
