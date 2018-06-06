@@ -83,11 +83,21 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
 		log.info(('Searched [%s] at [%s]'):format(relative, path))
 	end)
 
-	local suc, err = objsaver(map_path, files)
-	if not suc then
+	local result, err = objsaver(map_path, files)
+	if not result then
 		log.error(err)
 	end
+	
+	if result then
+		-- 编译地图
+		result = compiler:compile(map_path, global_config, war3_version:is_new() and 24 or 20)
+		if result then
+			-- 转换成Lni地图
+			result = lnisaver(map_path)
+		end
+	end
 
+	log.debug("Result " .. tostring(result))
 	log.debug("********************* on new save end *********************")
-	if suc then return 0 else return -1 end
+	if result then return 0 else return -1 end
 end
