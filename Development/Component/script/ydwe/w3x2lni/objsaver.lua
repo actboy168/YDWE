@@ -79,8 +79,12 @@ return function (target_path, files)
     for name, path in pairs(files) do
         local buf = io.load(path)
         if buf then
-            log.info(('Imported: %s'):format(name))
-            map:save_file(name, buf)
+            local suc = map:save_file(name, buf)
+            if suc then
+                log.info(('Imported: %s'):format(name))
+            else
+                log.warn(('Imported failed: %s'):format(name))
+            end
         else
             log.warn(('Read failed: %s'):format(name))
         end
