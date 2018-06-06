@@ -67,25 +67,6 @@ namespace NYDWE {
 		return result;
 	}
 
-	volatile bool gIsInCompileProcess = false;
-	uintptr_t pgTrueCreateFileA;
-	HANDLE WINAPI DetourStormCreateFileA(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
-	{
-		std::wstring fileName = base::a2w(std::string_view(lpFileName), base::conv_method::replace | '?');
-		std::wstring_view fileExt(fileName.data() + fileName.size() - 4, 4);
-		if (gIsInCompileProcess && (fileExt == L".w3x" || fileExt == L".w3m"))
-		{
-			gIsInCompileProcess = false;
-			event_array[EVENT_SAVE_MAP]([&](lua_State* L, int idx){
-				lua_pushstring(L, "map_path");
-				lua_pushwstring(L, fileName);
-				lua_settable(L, idx);
-			});
-		}
-
-		return base::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
-	}
-
 	uintptr_t pgTrueFopen;
 	FILE* __cdecl DetourWeFopen(const char* filename, const char* mode)
 	{
@@ -130,40 +111,6 @@ namespace NYDWE {
 		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
 		BOOL ok = base::std_call<BOOL>(pgTrueCreateDirectoryA, sFilename.c_str(), lpSecurityAttributes);
 		return ok;
-	}
-
-	HANDLE WINAPI DetourWeCreateFileA(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile)
-	{
-		std::string fileName(lpFileName);
-		std::string_view fileExt(fileName.data() + fileName.size() - 4, 4);
-		if (std::string_view(fileName.data() + fileName.size() - 14, 14) == "war3mapMap.blp")
-		{
-			if (dwCreationDisposition == OPEN_EXISTING)
-			{
-				LOGGING_TRACE(lg) << "WE is about to compile maps.";
-				gIsInCompileProcess = true;
-			}
-			else
-			{
-				gIsInCompileProcess = false;
-			}
-		}
-		else if (gIsInCompileProcess && (fileExt == ".w3x" || fileExt == ".w3m"))
-		{
-			try {
-				fs::path p(fileName);
-
-				event_array[EVENT_SAVE_MAP]([&](lua_State* L, int idx){
-					lua_pushstring(L, "map_path");
-					lua_pushwstring(L, p.wstring());
-					lua_settable(L, idx);
-				});
-			}
-			catch (...) {				
-			}
-		}
-
-		return base::std_call<HANDLE>(pgTrueCreateFileA, lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
 	}
 
 	bool isWeRebuildMapHookInstalled;
@@ -211,29 +158,6 @@ namespace NYDWE {
 		{
 			fs::path currentWarcraftMap = base::path::get(base::path::DIR_EXE).parent_path() / matcher.str(1);
 			LOGGING_TRACE(lg) << "Executing map " << currentWarcraftMap.wstring();
-
-			if (gIsInCompileProcess)
-			{
-				LOGGING_TRACE(lg) << "Need to compile...";
-
-				int results = event_array[EVENT_SAVE_MAP]([&](lua_State* L, int idx){
-					lua_pushstring(L, "map_path");
-					lua_pushwstring(L, currentWarcraftMap.wstring());
-					lua_settable(L, idx);
-				});
-
-				gIsInCompileProcess = false;
-				if (results < 0)
-				{
-					LOGGING_TRACE(lg) << "Save failed. Abort testing.";
-					memset(lpProcessInformation, 0, sizeof(PROCESS_INFORMATION));
-					return FALSE;
-				}
-			}
-			else
-			{
-				LOGGING_TRACE(lg) << "No need to compile.";
-			}
 
 			int results = event_array[EVENT_TEST_MAP]([&](lua_State* L, int idx){
 				lua_pushstring(L, "map_path");
@@ -483,11 +407,9 @@ namespace NYDWE {
 
 	void SetupEvent()
 	{
-		pgTrueCreateFileA     = base::hook::iat(L"storm.dll",             "kernel32.dll", "CreateFileA",     (uintptr_t)DetourStormCreateFileA);
 		pgTrueFopen           = base::hook::iat(::GetModuleHandleW(NULL), "msvcrt.dll",   "fopen",           (uintptr_t)DetourWeFopen);
 		pgTrueGetFileAttributesA = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "GetFileAttributesA", (uintptr_t)DetourWeGetFileAttributesA);
 		pgTrueCreateDirectoryA = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateDirectoryA", (uintptr_t)DetourWeCreateDirectoryA);
-		pgTrueCreateFileA     = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateFileA",     (uintptr_t)DetourWeCreateFileA);
 		pgTrueCreateProcessA  = base::hook::iat(::GetModuleHandleW(NULL), "kernel32.dll", "CreateProcessA",  (uintptr_t)DetourWeCreateProcessA);
 		pgTrueCreateWindowExA = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "CreateWindowExA", (uintptr_t)DetourWeCreateWindowExA);
 		pgTrueSetMenu         = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "SetMenu",         (uintptr_t)DetourWeSetMenu);
