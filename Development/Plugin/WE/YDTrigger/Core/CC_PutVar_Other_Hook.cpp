@@ -15,7 +15,7 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
   {
 	  DWORD nVar = (*(DWORD*)(nItemClass + 0x128));
 	  if (nVar == 3 && GetGUIVar_Type(nItemClass, 1) == CC_VARTYPE_ArithmeticOperator) {
-		  BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index + 1);
+		  BLZSStrPrintf(NewName, 260, "%s%03d", name, index + 1);
 		  PUT_CONST("(", 0);
 		  name = NewName;
 		  PUT_VAR(nItemClass, 0);
@@ -46,14 +46,14 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 			return PUT_CONST("GetFilterUnit()", 0);
 		}
     case CC_GUIID_YDWECustomScriptCode:
-      BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index+1);
+      BLZSStrPrintf(NewName, 260, "%s%03d", name, index+1);
 	  return CC_PutVar(nItemClass, EDX, OutClass, NewName, 0, type, 1);
     case CC_GUIID_YDWEGetAnyTypeLocalVariable:
 		locvar::get(nItemClass, OutClass, (char*)(This + 0x0C));
 		// TODO
 		return 1;
 	case CC_GUIID_YDWEGetAnyTypeLocalArray:
-		BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index + 1);
+		BLZSStrPrintf(NewName, 260, "%s%03d", name, index + 1);
 		locvar::get_array(nItemClass, OutClass, NewName, (char*)(This+0x0C));
 		// TODO
 		return 1;
@@ -79,7 +79,7 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 		return PUT_CONST("\"", 0);
 	}
 	case CC_GUIID_OperatorString:
-		BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index + 1);
+		BLZSStrPrintf(NewName, 260, "%s%03d", name, index + 1);
 		PUT_CONST("(", 0);
 		name = NewName;
 		PUT_VAR(nItemClass, 0);
@@ -96,7 +96,8 @@ CC_PutVar_Other_Hook(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD in
 			}
 			PUT_CONST((char*)(nItemClass + 0x20), 0);
 			PUT_CONST("(", 0);
-			BLZSStrPrintf(NewName, 260, "%sFunc%03d", name, index + 1);
+			BLZSStrPrintf(NewName, 260, "%s%03d", name, index + 1);
+			name = NewName;
 			DWORD nVar = *(DWORD*)(nItemClass + 0x128);
 			if (nVar > 0) {
 				PUT_VAR(nItemClass, 0);

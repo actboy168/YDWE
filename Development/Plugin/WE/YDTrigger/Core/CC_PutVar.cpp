@@ -16,6 +16,7 @@ int _fastcall CC_PutVar(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD
 	case CC_VARTYPE_boolexpr:
 	case CC_VARTYPE_boolcall:
 		flag = 1;
+		break;
 	case CC_VARTYPE_code:
 		flag = 2;
 		break;
@@ -39,7 +40,7 @@ int _fastcall CC_PutVar(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD
 		return CC_PutConst(OutClass, szName, 0);
 	}
 	BLZSStrPrintf(szTemp, 260, "%s%03d", name, Index + 1);
-	if (!Endl)
+	if (Endl)
 	{
 		BLZSStrCopy(szName, szTemp, 0x7FFFFFFFu);
 		return CC_PutConst(OutClass, szName, 0);
