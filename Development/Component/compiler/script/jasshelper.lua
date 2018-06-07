@@ -54,54 +54,6 @@ function jasshelper:prepare_jass_libs(map_path, version)
 	return common_j_path, blizzard_j_path
 end
 
-
--- 使用JassHelper编译地图
--- map_path - 地图路径，fs.path对象
--- common_j_path - common.j路径，fs.path对象
--- blizzard_j_path - blizzard.j路径，fs.path对象
--- option - 编译选项, table，目前支持参数：
--- 	enable_jasshelper - 启用JassHelper，true/false
---	enable_jasshelper_debug - 启用JassHelper的Debug，true/false
---	enable_jasshelper_optimization - 启用优化，true/false
--- 返回：true编译成功，false编译失败
-function jasshelper:do_compile(map_path, common_j_path, blizzard_j_path, option)
-	local parameter = ""
-	
-	-- 需要做vJass编译？
-	if option.enable_jasshelper then
-		-- debug选项（--debug）
-		if option.enable_jasshelper_debug then
-			parameter = parameter .. " --debug"
-		end
-		-- （关闭）优化选项（--nooptimize）
-		if not option.enable_jasshelper_optimization then
-			parameter = parameter .. " --nooptimize"
-		end
-	else
-		-- 不编译vJass选项（--nopreprocessor）
-		parameter = parameter .. " --nopreprocessor"
-	end
-
-    local compiler = require 'compiler'
-    return compiler:update_script(map_path, "5_vjass.j",
-        function (map_handle, in_script_path)
-            local out_script_path = fs.ydwe_path() / "logs" / "6_vjass.j"
-            local command_line = string.format('"%s"%s --scriptonly "%s" "%s" "%s" "%s"',
-                (self.path / "jasshelper.exe"):string(),
-                parameter,
-                common_j_path:string(),
-                blizzard_j_path:string(),
-                in_script_path:string(),
-                out_script_path:string()
-            )
-            if not sys.spawn(command_line, fs.ydwe_path(), true) then
-                return nil
-            end
-            return out_script_path
-        end
-    )
-end
-
 function jasshelper:createConfig()
 	if option.pjass == '1' then
 		io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-classic.exe', ''))

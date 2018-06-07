@@ -92,8 +92,7 @@ local compiler = {}
 
 function compiler:compile(map_path, config, war3ver)
     local option = make_option(config, war3ver)
-	-- 结果
-	local result = nil
+
 
 	log.trace("Save version " .. tostring(option.runtime_version))
 
@@ -103,32 +102,27 @@ function compiler:compile(map_path, config, war3ver)
         log = fs.ydwe_path() / "logs",
 	}
 	
-	-- 如果JassHelper开启，执行正常编译
-	if option.enable_jasshelper then
-        result = update_script(map_path, "1_war3map.j",
-            -- 解压缩地图脚本，处理然后写回
-            function (map_handle, in_script_path)
-                -- 开始处理
-                log.trace("Processing " .. in_script_path:filename():string())
+    return update_script(map_path, "1_war3map.j",
+        -- 解压缩地图脚本，处理然后写回
+        function (map_handle, in_script_path)
+            -- 开始处理
+            log.trace("Processing " .. in_script_path:filename():string())
 
-                compile_t.input = in_script_path
-                compile_t.output = nil
-                compile_t.map_handle = map_handle
-                compile_t.inject_file = function (file_path, path_in_archive)
-                    log.trace("[stormlib]import file", path_in_archive)
-                    return map_handle:add_file(path_in_archive, file_path)
-                end
-                
-                -- 未启用用cJass
-                if not option.enable_cjass then
-                    -- 根据注入选项进行处理（由于Lua的closure，此处可以访问“父”函数的局部变量）
-                    if option.script_injection == 0 then
-                        compile_t.output = compile_t.log / "2_inject.j"
-                        if not inject_code:compile(compile_t) then
-                            return nil
-                        end
-                        compile_t.input = compile_t.output
+            compile_t.input = in_script_path
+            compile_t.output = nil
+            compile_t.map_handle = map_handle
+            compile_t.inject_file = function (file_path, path_in_archive)
+                log.trace("[stormlib]import file", path_in_archive)
+                return map_handle:add_file(path_in_archive, file_path)
+            end
+            
+            if option.enable_jasshelper then
+                if option.script_injection == 0 then
+                    compile_t.output = compile_t.log / "2_inject.j"
+                    if not inject_code:compile(compile_t) then
+                        return nil
                     end
+                    compile_t.input = compile_t.output
                 end
 
                 -- Wave预处理
@@ -145,30 +139,16 @@ function compiler:compile(map_path, config, war3ver)
                 end
                 ev.emit('编译地图')
                 collectgarbage 'collect'
-                
-                compile_t.input = compile_t.output
-                compile_t.output = compile_t.log / "6_vjass.j"
-                result = jasshelper:compile(compile_t)
-                return compile_t.output
             end
-        )
-	else
-        result = update_script(map_path, "1_war3map.j", 
-            function(map_handle, in_script_path)
-                log.trace("Processing " .. in_script_path:filename():string())
-                -- 只做语法检查
-                compile_t.input = in_script_path
-                compile_t.output = compile_t.log / "6_vjass.j"
-                result = jasshelper:compile(compile_t)
-            end
-        )
-    end
-    
-    return result
-end
 
-function compiler:update_script(map_path, path_tmp, process_function)
-    return update_script(map_path, path_tmp, process_function)
+            compile_t.input = compile_t.output
+            compile_t.output = compile_t.log / "6_vjass.j"
+            if not jasshelper:compile(compile_t) then
+                return nil
+            end
+            return compile_t.output
+        end
+    )
 end
 
 function compiler:initialize()
