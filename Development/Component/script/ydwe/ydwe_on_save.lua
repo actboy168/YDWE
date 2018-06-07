@@ -27,11 +27,10 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
     fs.remove(map_path)
 
     local result = compiler:compile(temp_path, global_config, war3_version:is_new() and 24 or 20)
-    if result then
-        result = map_packer(temp_path, map_path)
-    end
-
-	log.debug("Result " .. tostring(result))
+    log.debug("Compiler Result " .. tostring(result))
+    
+    local result = map_packer(temp_path, map_path)
+	log.debug("Packer Result " .. tostring(result))
 	log.debug("********************* on new save end *********************")
 	if result then return 0 else return -1 end
 end
