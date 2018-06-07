@@ -116,7 +116,7 @@ local function copy_directory(from, to, filter)
 end
 
 fs.create_directories(path.Result / 'bin' / 'modules')
-fs.create_directories(path.Result / 'plugin' / 'jasshelper' / 'bin')
+fs.create_directories(path.Result / 'compiler' / 'jasshelper' / 'bin')
 if configuration == 'Release' then
     msvc:copy_crt_dll('x86', path.Result / 'bin')
 end
@@ -126,8 +126,8 @@ fs.copy_file(path.OpenSource / 'StormLib' / 'bin' / 'Win32' / configuration / 'S
 fs.copy_file(path.OpenSource / 'minizip' / 'bin' / configuration / 'minizip.dll', path.Result / 'bin' / 'minizip.dll', true)
 fs.copy_file(path.OpenSource / 'luaffi' / 'bin' / configuration / 'ffi.dll', path.Result / 'bin' / 'modules' / 'ffi.dll', true)
 fs.copy_file(path.OpenSource / 'lpeg' / 'bin' / configuration / 'lpeg.dll', path.Result / 'bin' / 'modules' / 'lpeg.dll', true)
-fs.copy_file(path.OpenSource / 'sfmpq' / 'bin' / configuration / 'sfmpq.dll', path.Result / 'plugin' / 'jasshelper' / 'sfmpq.dll', true)
-fs.copy_file(path.OpenSource / 'sfmpq' / 'bin' / configuration / 'sfmpq.dll', path.Result / 'plugin' / 'jasshelper' / 'bin' / 'sfmpq.dll', true)
+fs.copy_file(path.OpenSource / 'sfmpq' / 'bin' / configuration / 'sfmpq.dll', path.Result / 'compiler' / 'jasshelper' / 'sfmpq.dll', true)
+fs.copy_file(path.OpenSource / 'sfmpq' / 'bin' / configuration / 'sfmpq.dll', path.Result / 'compiler' / 'jasshelper' / 'bin' / 'sfmpq.dll', true)
 copy_directory(path.Development / 'Component', path.Result)
 
 -- Step.7 复制到publish
