@@ -12,17 +12,19 @@ local config = [[
 "%s$COMMONJ $BLIZZARDJ $WAR3MAPJ"
 ]]
 
-
--- 根据版本获取YDWE自带的Jass库函数（bj和cj）路径
--- version - 魔兽版本，数
--- 返回：cj路径，bj路径，都是fs.path
-function jasshelper:default_jass_libs(version)
+local function default_common_j(version)
 	if version == 24 then
-		return (fs.ydwe_path() / "share" / "jass" / "ht" / "common.j"),
-			(fs.ydwe_path() / "share" / "jass" / "ht" / "blizzard.j")
+		return fs.ydwe_path() / "share" / "jass" / "ht" / "common.j"
 	else
-		return (fs.ydwe_path() / "share" / "jass" / "rb" / "common.j"),
-			(fs.ydwe_path() / "share" / "jass" / "rb" / "blizzard.j")
+		return fs.ydwe_path() / "share" / "jass" / "rb" / "common.j"
+	end
+end
+
+local function default_blizzard_j(version)
+	if version == 24 then
+		return fs.ydwe_path() / "share" / "jass" / "ht" / "blizzard.j"
+	else
+		return fs.ydwe_path() / "share" / "jass" / "rb" / "blizzard.j"
 	end
 end
 
@@ -60,14 +62,12 @@ function jasshelper:prepare_jass_libs(map_path, version)
 		log.warn("Cannot open map archive, using default bj and cj instead.")
 	end
 
-	local default_common_j_path, default_blizzard_j_path = self:default_jass_libs(version)
 	if not map_has_cj then
-		common_j_path = default_common_j_path
+		common_j_path = default_common_j(version)
 	end
 	if not map_has_bj then
-		blizzard_j_path = default_blizzard_j_path
+		blizzard_j_path = default_blizzard_j(version)
 	end
-	
 	return common_j_path, blizzard_j_path
 end
 
@@ -103,8 +103,6 @@ function jasshelper:do_compile(map_path, common_j_path, blizzard_j_path, option)
     return compiler:update_script(map_path, "5_vjass.j",
         function (map_handle, in_script_path)
             local out_script_path = fs.ydwe_path() / "logs" / "6_vjass.j"
-            
-            -- 生成命令行
             local command_line = string.format('"%s"%s --scriptonly "%s" "%s" "%s" "%s"',
                 self.exe_path:string(),
                 parameter,
@@ -113,11 +111,9 @@ function jasshelper:do_compile(map_path, common_j_path, blizzard_j_path, option)
                 in_script_path:string(),
                 out_script_path:string()
             )
-            -- 执行并获取结果
             if not sys.spawn(command_line, fs.ydwe_path(), true) then
                 return nil
             end
-
             return out_script_path
         end
     )
