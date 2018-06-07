@@ -119,37 +119,6 @@ local function sortpairs(t)
     end
 end
 
-local function create_report()
-    for type, report in sortpairs(backend.report) do
-        if type ~= '' then
-            local total = report[1][1]:match('TOTAL:(%d+)')
-            local title = ('%s (%d)'):format(type:sub(2), total or #report)
-            print('================')
-            print(title)
-            print('================')
-            for i, s in ipairs(report) do
-                if total and i == 1 then
-                elseif s[2] then
-                    print(('%s - %s'):format(s[1], s[2]))
-                else
-                    print(s[1])
-                end
-            end
-            print('')
-        end
-    end
-    local report = backend.report['']
-    if report then
-        for _, s in ipairs(report) do
-            if s[2] then
-                print(('%s - %s'):format(s[1], s[2]))
-            else
-                print(s[1])
-            end
-        end
-    end
-end
-
 local function update()
     worker:update()
     mini:settext(backend.message)
@@ -161,7 +130,11 @@ local function update()
         return 0, 1
     end
     if worker.exited then
-        create_report()
+        if backend.lastword then
+            if backend.lastword.type == 'failed' or backend.lastword.type == 'error' or backend.lastword.type == 'warning' then
+                messagebox(lang.ui.ERROR, '%s', backend.lastword.content)
+            end
+        end
         if worker.exit_code == 0 then
             return 1000, 0
         else
