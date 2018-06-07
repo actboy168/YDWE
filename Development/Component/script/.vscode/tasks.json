@@ -9,6 +9,12 @@
             "command": [
                 "\"${workspaceRoot}/../../Build/bin/Debug/ydwe.exe\""
             ],
+        },
+        {
+            "label": "配置",
+            "command": [
+                "\"${workspaceRoot}/../../Build/bin/Debug/bin/ydweconfig.exe\""
+            ],
         }
     ]
 }
