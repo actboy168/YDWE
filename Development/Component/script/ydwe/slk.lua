@@ -5,7 +5,7 @@ local stormlib  = require 'ffi.stormlib'
 local i18n = require 'i18n'
 local event = require 'ev'
 local slk_lib = require 'w3x2lni.slk_lib'
-local map_handle = __map_handle__.handle
+local map_path = __map_path__
 
 local type_map = {
     ['war3map.w3u'] = 0,
@@ -18,20 +18,14 @@ local type_map = {
 }
 
 local import_files
-local map
 
 local function initialize()
-    map = stormlib.attach(map_handle)
-    if not map then
-        return
-    end
-
     local w2l = w3x2lni()
 
     w2l.input_ar = {
         get = function (self, filename)
             log.info('load_file', filename)
-            return map:load_file(filename)
+            return io.load(map_path / filename)
         end,
     }
     w2l.output_ar = {
@@ -60,17 +54,16 @@ trg = event.on('编译地图', function ()
     package.loaded['slk'] = nil
     trg:remove()
     import_files = {}
-    log.trace('Refresh object start', map_handle)
+    log.trace('Refresh object start', map_path)
     local report = slk:refresh()
     log.trace('Refresh object finish')
     if #report > 0 then
         gui.message(nil, ('%s\n\n%s'):format('编辑器修改了物编数据', report))
         for filename, buf in pairs(import_files) do
-            local tmp = fs.path(os.tmpname()):remove_filename() / filename
-            log.info('Import customdata', filename, type_map[filename], tmp)
-            io.save(tmp, buf)
-            we.import_customdata(type_map[filename], tmp)
-            map:save_file(filename, buf)
+            local file_path = map_path / filename
+            log.info('Import customdata', filename, type_map[filename], file_path)
+            io.save(file_path, buf)
+            we.import_customdata(type_map[filename], file_path)
         end
     end
 end)
