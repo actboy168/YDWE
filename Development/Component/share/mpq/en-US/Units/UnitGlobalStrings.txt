@@ -1,5 +1,0 @@
-[Categories]
-GiantClass=Giant
-UndeadClass=Undead
-MechanicalClass=Mechanical
-TaurenClass=Tauren

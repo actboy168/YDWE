@@ -6,49 +6,56 @@ FadeBuffMaxAlpha=255
 
 // gold text data
 GoldTextColor=255,255,220,0
-GoldTextVelocity=0,0.03,100
+GoldTextHeight=0.024
+GoldTextVelocity=0,0.03
 GoldTextLifetime=2
 GoldTextFadeStart=1
 
 // lumber text data
 LumberTextColor=255,0,200,80
-LumberTextVelocity=0,0.03,100
+LumberTextHeight=0.024
+LumberTextVelocity=0,0.03
 LumberTextLifetime=2
 LumberTextFadeStart=1
 
 // bounty text data
 BountyTextColor=255,255,220,0
-BountyTextVelocity=0,0.03,100
+BountyTextHeight=0.024
+BountyTextVelocity=0,0.03
 BountyTextLifetime=3
 BountyTextFadeStart=2
 
 // missile 'miss' text tag data
 MissTextColor=255,255,0,0
-MissTextVelocity=0,0.03,100
+MissTextHeight=0.024
+MissTextVelocity=0,0.03
 MissTextLifetime=3
 MissTextFadeStart=1
 
 // CriticalStrike text tag data
 CriticalStrikeTextColor=255,255,0,0
-CriticalStrikeTextVelocity=0,0.04,100
+CriticalStrikeTextHeight=0.024
+CriticalStrikeTextVelocity=0,0.04
 CriticalStrikeTextLifetime=5
 CriticalStrikeTextFadeStart=2
 
 // ShadowStrike text tag data
 ShadowStrikeTextColor=255,160,255,0
-ShadowStrikeTextVelocity=0,0.04,100
+ShadowStrikeTextHeight=0.024
+ShadowStrikeTextVelocity=0,0.04
 ShadowStrikeTextLifetime=5
 ShadowStrikeTextFadeStart=2
 
 // ManaBurn text tag data
 ManaBurnTextColor=255,82,82,255
-ManaBurnTextVelocity=0,0.04,100
+ManaBurnTextHeight=0.024
+ManaBurnTextVelocity=0,0.04
 ManaBurnTextLifetime=5
 ManaBurnTextFadeStart=2
 
 // CriticalStrike text tag data
 BashTextColor=255,0,0,255
-BashTextVelocity=0,0.04,100
+BashTextVelocity=0,0.04
 BashTextLifetime=5
 BashTextFadeStart=2
 
@@ -167,12 +174,12 @@ Scene1="FinalCinematic"
 // terrain parameters
 
 // Maximum slope in degrees, (86+ will disable slope limits)
-MaxSlope=50
+MaxSlope=90
 
 // Global height limits
 // 0 = low ground, each cliff level = 128
-MaxHeight=1536
-MinHeight=-128
+MaxHeight=1920
+MinHeight=-1920
 
 [FlyerMap]
 // Radius, in pathing cells, to search for maximum height
@@ -356,3 +363,22 @@ PingColor=255,0,255,0
 PingAttackColor=255,255,0,0
 PingAdvisorColor=255,255,255,0
 PingWaypointColor=255,255,255,255
+
+[FontHeights]
+ToolTipName=0.011
+ToolTipDesc=0.011
+ToolTipCost=0.011
+ChatEditBar=0.013
+CommandButtonNumber=0.009
+WorldFrameMessage=0.015
+WorldFrameTopMessage=0.024
+WorldFrameUnitMessage=0.015
+WorldFrameChatMessage=0.013
+Inventory=0.011
+LeaderBoard=0.007
+PortraitStats=0.011
+UnitTipPlayerName=0.011
+UnitTipDesc=0.011
+ScoreScreenNormal=0.011
+ScoreScreenLarge=0.011
+ScoreScreenTeam=0.009
