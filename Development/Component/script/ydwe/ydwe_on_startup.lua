@@ -219,10 +219,13 @@ function event.EVENT_WE_START(event_data)
 	-- 检测魔兽的版本
 	check_war3_version()	
 
-	-- 载入Patch MPQ
-	load_virtual_mpq("mpq", 14)
+    -- 载入Patch MPQ
     load_virtual_mpq("mpq/war3", 14)
-    load_virtual_mpq("mpq/" .. (require "i18n").get_language(), 14)
+    local lang = (require "i18n").get_language()
+    if lang ~= 'zh-CN' then
+        load_virtual_mpq(lang .. "/mpq", 14)
+    end
+    load_virtual_mpq("zh-CN/mpq", 14)
 
 	-- 加载插件
 	plugin:load_all()
