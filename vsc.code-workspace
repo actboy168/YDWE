@@ -1,11 +1,14 @@
 {
-	"folders": [
-		{
-			"path": ".\\Development\\Component\\script"
-		},
-		{
-			"path": ".\\Development\\Component\\compiler"
-		}
-	],
+    "folders": [
+        {
+            "path": ".\\Development\\Component\\script"
+        },
+        {
+            "path": ".\\Development\\Component\\compiler"
+        },
+        {
+            "path": "Development\\Component\\plugin\\w3x2lni\\script"
+        }
+    ],
     "settings": {}
 }
