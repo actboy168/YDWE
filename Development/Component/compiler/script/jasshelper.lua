@@ -11,22 +11,6 @@ local config = [[
 "%s$COMMONJ $BLIZZARDJ $WAR3MAPJ"
 ]]
 
-local function default_common_j(version)
-	if version == 24 then
-		return fs.ydwe_devpath() / "share" / "jass" / "ht" / "common.j"
-	else
-		return fs.ydwe_devpath() / "share" / "jass" / "rb" / "common.j"
-	end
-end
-
-local function default_blizzard_j(version)
-	if version == 24 then
-		return fs.ydwe_devpath() / "share" / "jass" / "ht" / "blizzard.j"
-	else
-		return fs.ydwe_devpath() / "share" / "jass" / "rb" / "blizzard.j"
-	end
-end
-
 -- 准备魔兽争霸3的Jass库函数（common.j和blizzard.j）供语法检查用
 -- 如果地图中有，则优先使用地图的，否则使用自带的
 -- map_path - 地图路径，fs.path对象
@@ -62,10 +46,10 @@ function jasshelper:prepare_jass_libs(map_path, version)
 	end
 
 	if not map_has_cj then
-		common_j_path = default_common_j(version)
+		common_j_path = fs.ydwe_devpath() / "compiler" / "jass" / tostring(version) / "common.j"
 	end
 	if not map_has_bj then
-		blizzard_j_path = default_blizzard_j(version)
+		blizzard_j_path = fs.ydwe_devpath() / "compiler" / "jass" / tostring(version) / "blizzard.j"
 	end
 	return common_j_path, blizzard_j_path
 end
