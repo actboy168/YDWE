@@ -148,8 +148,6 @@ local function make_option(config, war3ver)
 	local option = {}
 	-- 是否启用JassHelper
 	option.enable_jasshelper = config.ScriptCompiler.EnableJassHelper ~= "0"
-	-- 是否使用脚本模式编译
-	option.enable_jasshelper_scriptonly = config.ScriptCompiler.EnableJassHelperScriptOnly == "1"
 	-- 是否是调试模式
 	option.enable_jasshelper_debug = config.ScriptCompiler.EnableJassHelperDebug == "1"
 	-- 是否优化地图

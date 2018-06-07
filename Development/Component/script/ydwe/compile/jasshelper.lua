@@ -99,43 +99,28 @@ function jasshelper:do_compile(map_path, common_j_path, blizzard_j_path, option)
 		parameter = parameter .. " --nopreprocessor"
 	end
 
-	if option.enable_jasshelper_scriptonly then
-		local compiler = require 'compile.compiler'
-		return compiler:update_script(map_path, "5_vjass.j",
-			function (map_handle, in_script_path)
-				local out_script_path = fs.ydwe_path() / "logs" / "6_vjass.j"
-				
-				-- 生成命令行
-				local command_line = string.format('"%s"%s --scriptonly "%s" "%s" "%s" "%s"',
-					self.exe_path:string(),
-					parameter,
-					common_j_path:string(),
-					blizzard_j_path:string(),
-					in_script_path:string(),
-					out_script_path:string()
-				)
-				-- 执行并获取结果
-				if not sys.spawn(command_line, fs.ydwe_path(), true) then
-					return nil
-				end
+    local compiler = require 'compile.compiler'
+    return compiler:update_script(map_path, "5_vjass.j",
+        function (map_handle, in_script_path)
+            local out_script_path = fs.ydwe_path() / "logs" / "6_vjass.j"
+            
+            -- 生成命令行
+            local command_line = string.format('"%s"%s --scriptonly "%s" "%s" "%s" "%s"',
+                self.exe_path:string(),
+                parameter,
+                common_j_path:string(),
+                blizzard_j_path:string(),
+                in_script_path:string(),
+                out_script_path:string()
+            )
+            -- 执行并获取结果
+            if not sys.spawn(command_line, fs.ydwe_path(), true) then
+                return nil
+            end
 
-				return out_script_path
-			end
-		)
-	else
-		-- 生成命令行
-		local command_line = string.format('"%s"%s "%s" "%s" "%s"',
-			self.exe_path:string(),
-			parameter,
-			common_j_path:string(),
-			blizzard_j_path:string(),
-			map_path:string()
-		)
-
-		-- 执行并获取结果
-		return sys.spawn(command_line, fs.ydwe_path(), true)
-	end
-	
+            return out_script_path
+        end
+    )
 end
 
 function jasshelper:compile(map_path, option)	

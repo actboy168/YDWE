@@ -76,7 +76,6 @@ namespace
 		("HostTest",                                Attribute(2))
 		("EnableJassHelper",                        Attribute("ScriptCompiler"))
 		("EnableJassHelperDebug",                   Attribute("ScriptCompiler"))
-		("EnableJassHelperScriptOnly",              Attribute("ScriptCompiler"))
 		("EnableJassHelperOptimization",            Attribute("ScriptCompiler"))
 		("EnableCJass",                             Attribute("ScriptCompiler"))
 		("PJass",                                   Attribute(2))
@@ -198,7 +197,6 @@ void CMainWindow::ResetConfig(base::ini::table& table)
 	table["MapTest"]["EnableMapSlk"] = "0";
 	table["ScriptCompiler"]["EnableJassHelper"] = "1";
 	table["ScriptCompiler"]["EnableJassHelperDebug"] = "0";
-	table["ScriptCompiler"]["EnableJassHelperScriptOnly"] = "0";
 	table["ScriptCompiler"]["EnableJassHelperOptimization"] = "1";
 	table["ScriptCompiler"]["EnableCJass"] = "0";
 	table["PJass"]["Option"] = "0";
@@ -355,7 +353,6 @@ void CMainWindow::DisableCJass(bool bEnable)
 
 void CMainWindow::EnableJassHelper(bool bEnable)
 {
-	ContrlSetEnabled("EnableJassHelperScriptOnly", bEnable);
 	ContrlSetEnabled("EnableJassHelperOptimization", bEnable);
 	ContrlSetEnabled("EnableJassHelperDebug", bEnable);
 	ContrlSetEnabled("EnableCJass", bEnable);
