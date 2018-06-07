@@ -1,6 +1,5 @@
 local compiler = require "compiler"
-local objsaver = require 'w3x2lni.objsaver'
-local lnisaver = require 'w3x2lni.lnisaver'
+local map_packer = require 'w3x2lni.map_packer'
 
 function event.EVENT_NEW_SAVE_MAP(event_data)
 	log.debug("********************* on new save start *********************")
@@ -29,12 +28,7 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
 
     local result = compiler:compile(temp_path, global_config, war3_version:is_new() and 24 or 20)
     if result then
-        if map_path:filename():string() ~= '.w3x' then
-            result = objsaver(temp_path, map_path)
-        else
-            result = objsaver(temp_path, map_path)
-            result = lnisaver(map_path, target_path:parent_path())
-        end
+        result = map_packer(temp_path, map_path)
     end
 
 	log.debug("Result " .. tostring(result))

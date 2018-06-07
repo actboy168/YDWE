@@ -1,5 +1,6 @@
 local w3x2lni = require 'w3x2lni.init'
 local stormlib = require 'ffi.stormlib'
+local lnisaver = require 'w3x2lni.lnisaver'
 
 local w2l
 
@@ -68,7 +69,7 @@ local function scan(dir, callback, relative)
 	end
 end
 
-return function (source_path, target_path)
+local function objsaver(source_path, target_path)
     local files = {}
     scan(source_path, function (path, relative)
         files[relative] = path
@@ -114,5 +115,14 @@ return function (source_path, target_path)
     end
     map:close()
     log.info('Save map finish!')
+
     return true
+end
+
+return function (source_path, target_path)
+    local result = objsaver(source_path, target_path)
+    if result and target_path:filename():string() == '.w3x' then
+        result = lnisaver(target_path, source_path:parent_path() / '.w3x')
+    end
+    return result
 end
