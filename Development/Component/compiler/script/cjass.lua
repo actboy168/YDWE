@@ -2,8 +2,7 @@ require "filesystem"
 
 local cjass = {}
 
-cjass.path     = fs.ydwe_path() / "plugin" / "AdicHelper"
-cjass.exe_path = cjass.path / "AdicHelper.exe"
+cjass.path     = fs.ydwe_path() / "compiler" / "AdicHelper"
 
 -- 使用cJass编译地图
 -- map_path - 地图路径，fs.path对象
@@ -16,7 +15,7 @@ function cjass.do_compile(self, map_path, option)
 					.. (option.enable_jasshelper_debug and " /dbg" or "")
 
 	local command_line = string.format('"%s"%s /mappars="%s"',
-		self.exe_path:string(),
+		(self.path / "AdicHelper.exe"):string(),
 		parameter,
 		map_path:string()
 	)
