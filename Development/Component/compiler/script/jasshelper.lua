@@ -102,9 +102,7 @@ function jasshelper:do_compile(map_path, common_j_path, blizzard_j_path, option)
     )
 end
 
-function jasshelper:compile(map_path, option)	
-	log.trace("JassHelper compilation start.")	
-	local common_j_path, blizzard_j_path = self:prepare_jass_libs(map_path, option.runtime_version)
+function jasshelper:createConfig()
 	if option.pjass == '1' then
 		io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-classic.exe', ''))
 	else
@@ -114,9 +112,44 @@ function jasshelper:compile(map_path, option)
 			io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-latest.exe', '+rb '))
 		end
 	end
-	local res = self:do_compile(map_path, common_j_path, blizzard_j_path, option)
-	fs.remove(fs.ydwe_path() / 'jasshelper.conf')
-	return res
+end
+
+function jasshelper:compile(op)	
+	log.trace("JassHelper compilation start.")
+	self:createConfig()
+    local common_j_path, blizzard_j_path = self:prepare_jass_libs(op.map_path, option.runtime_version)
+    
+	local parameter = ""
+	
+	-- 需要做vJass编译？
+	if op.option.enable_jasshelper then
+		-- debug选项（--debug）
+		if op.option.enable_jasshelper_debug then
+			parameter = parameter .. " --debug"
+		end
+		-- （关闭）优化选项（--nooptimize）
+		if not op.option.enable_jasshelper_optimization then
+			parameter = parameter .. " --nooptimize"
+		end
+	else
+		-- 不编译vJass选项（--nopreprocessor）
+		parameter = parameter .. " --nopreprocessor"
+	end
+
+    local command_line = string.format('"%s"%s --scriptonly "%s" "%s" "%s" "%s"',
+        (self.path / "jasshelper.exe"):string(),
+        parameter,
+        common_j_path:string(),
+        blizzard_j_path:string(),
+        in_script_path:string(),
+        op.output:string()
+    )
+    local ok = true
+    if not sys.spawn(command_line, fs.ydwe_path(), true) then
+        ok = false
+    end
+    fs.remove(fs.ydwe_path() / 'jasshelper.conf')
+    return ok
 end
 
 return jasshelper
