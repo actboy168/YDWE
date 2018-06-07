@@ -62,8 +62,6 @@ local function make_option(config, war3ver)
 	option.enable_jasshelper_debug = config.ScriptCompiler.EnableJassHelperDebug == "1"
 	-- 是否优化地图
 	option.enable_jasshelper_optimization = config.ScriptCompiler.EnableJassHelperOptimization ~= "0"
-	-- 是否启用cJass
-	option.enable_cjass = config.ScriptCompiler.EnableCJass == "1"
 	-- pjass的版本
 	option.pjass = config.PJass.Option
 	-- 代码注入选项

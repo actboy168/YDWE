@@ -58,12 +58,11 @@
             </VerticalLayout>
           </VerticalLayout>
           <Control height="12" />
-          <VerticalLayout height="140" >
+          <VerticalLayout height="110" >
             <Label text="脚本编译器" tooltip="有关JassHelper、Cjass编译器的选项。" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6"  >
               <CheckBox text="启用JassHelper编译器" width="200" name="EnableJassHelper" tooltip="启用JassHelper编译器。JassHelper编译器是YDWE功能的基础，如果去掉，将不能使用任何YDWE特有的触发动作。除非你是纯Jass地图编写者并且不喜欢vJass，否则请选择此项。" />
               <CheckBox text="启用脚本优化"         width="200" name="EnableJassHelperOptimization" tooltip="目前支持函数的内联。" />
-              <CheckBox text="启用CJass编译器"      width="200" name="EnableCJass" tooltip="启用CJass编译器。开启此项，将会自动把智能导入、预处理器和逆天触发器插件关闭。" />
               <CheckBox text="地图调试模式"         width="200" name="EnableJassHelperDebug" tooltip="打开地图的调试模式。影响到debug关键字和代码优化。" />
             </VerticalLayout>
           </VerticalLayout>

@@ -19,7 +19,6 @@ public:
 	void EnableMapSave(bool bEnable);
 	void EnableScriptInjection(bool bEnable); 
 	void EnableHostTest(bool bEnable);
-	void DisableCJass(bool bEnable);
 	void EnableJassHelper(bool bEnable);
 	void Notify(DuiLib::TNotifyUI& msg);
 
@@ -44,7 +43,6 @@ private:
 	std::map<std::string, DuiLib::CComboUI*>    m_comboboxs;
 
 	DuiLib::CCheckBoxUI*       m_pEnableJassHelper;
-	DuiLib::CCheckBoxUI*       m_pEnableCJass;
 	DuiLib::CCheckBoxUI*       m_pLaunchWindowed;
 	DuiLib::CCheckBoxUI*       m_pLaunchWideScreenSupport;
 	DuiLib::CCheckBoxUI*       m_pLaunchFixedRatioWindowed;
