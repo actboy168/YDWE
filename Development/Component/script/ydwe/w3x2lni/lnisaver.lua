@@ -4,10 +4,6 @@ local root = fs.ydwe_path()
 local dev = fs.ydwe_devpath()
 
 return function (map_path, target_path)
-    if map_path:filename():string() ~= '.w3x' then
-        return true
-    end
-
     fs.create_directories(root / 'backups')
     fs.copy_file(map_path, root / 'backups' / 'lni_backup.w3x', true)
     fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', map_path, true)

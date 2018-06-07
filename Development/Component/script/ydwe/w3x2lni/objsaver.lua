@@ -55,7 +55,25 @@ local function create_map(path, w3i, filecount, encrypt)
     return map
 end
 
-return function (target_path, files)
+local function scan(dir, callback, relative)
+	if not relative then
+		relative = fs.path ''
+	end
+	for path in dir:list_directory() do
+		if fs.is_directory(path) then
+			scan(path, callback, relative / path:filename())
+		else
+			callback(path, (relative / path:filename()):string())
+		end
+	end
+end
+
+return function (source_path, target_path)
+    local files = {}
+    scan(source_path, function (path, relative)
+        files[relative] = path
+    end)
+
     if not files['war3map.w3i'] then
         return false, 'No found: war3map.w3i'
     end

@@ -111,7 +111,6 @@ local function initialize()
 	virtual_mpq.watch(info.txt[1], function ()
 		local t = {}
         for _, filename in pairs(info.txt) do
-            log.info(filename)
 			txt(load_mpq(filename), filename, t)
         end
         local ydwetip = load_mpq('ydwe/ydwetip.txt')
