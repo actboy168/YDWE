@@ -4,11 +4,10 @@ local process = require "process"
 local root = fs.ydwe_devpath()
 
 local wave = {}
-wave.path                = fs.ydwe_path() / "plugin" / "wave"
+wave.path                = fs.ydwe_path() / "compiler" / "wave"
 wave.exe_path            = wave.path / "Wave.exe"
-wave.sys_include_path    = wave.path / "include"
+wave.sys_include_path    = fs.ydwe_path() / "compiler" / "include"
 wave.plugin_include_path = fs.ydwe_devpath() / "plugin"
-wave.force_file_path     = wave.sys_include_path / "WaveForce.i"
 
 local function pathstring(path)
 	local str = path:string()
@@ -44,8 +43,8 @@ function wave:do_compile(op)
 	if tonumber(global_config["ScriptInjection"]["Option"]) == 0 then
 		cmd = cmd .. "--define=SCRIPT_INJECTION=1 "
 	end
-	if fs.exists(self.force_file_path) then
-		cmd = cmd .. string.format('--forceinclude=%s ', self.force_file_path:filename():string())
+	if fs.exists(self.sys_include_path / "WaveForce.i") then
+		cmd = cmd .. '--forceinclude=WaveForce.i '
 	end
 	cmd = cmd .. "--extended --c99 --preserve=2 --line=0 "
 
