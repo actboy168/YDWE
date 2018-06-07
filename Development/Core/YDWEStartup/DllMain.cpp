@@ -60,7 +60,7 @@ static void ShowSplash(fs::path const& ydwe_path)
 
 	try {
 		base::ini::table table;
-		fs::path dir = ydwe_path / L"share" / L"mpq" / "ReplaceableTextures" / "WorldEditUI";
+		fs::path dir = ydwe_path / L"share" / "zh-CN" / L"mpq" / "ReplaceableTextures" / "WorldEditUI";
 		fs::create_directories(dir);
 		fs::path blp1 = dir / "WarcraftIIILogo.blp";
 		if (!fs::exists(blp1))
