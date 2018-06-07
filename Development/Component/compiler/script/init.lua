@@ -1,8 +1,8 @@
-local inject_code = require "compile.inject_code"
-local wave = require "compile.wave"
-local template = require "compile.template"
-local cjass = require "compile.cjass"
-local jasshelper = require "compile.jasshelper"
+local inject_code = require "compiler.inject_code"
+local wave = require "compiler.wave"
+local template = require "compiler.template"
+local cjass = require "compiler.cjass"
+local jasshelper = require "compiler.jasshelper"
 local ev = require 'ev'
 local stormlib = require 'ffi.stormlib'
 

@@ -1,4 +1,4 @@
-local compiler = require "compile.compiler"
+local compiler = require "compiler"
 local objsaver = require 'w3x2lni.objsaver'
 local lnisaver = require 'w3x2lni.lnisaver'
 

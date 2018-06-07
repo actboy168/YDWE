@@ -1,4 +1,4 @@
-local compiler = require "compile.compiler"
+local compiler = require "compiler"
 require "w3x2lni.check_object"
 require 'w3x2lni.open_map'
 local uiloader = require "uiloader"
