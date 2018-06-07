@@ -11,11 +11,10 @@
             "path": "${workspaceRoot}/?.lua;${workspaceRoot}/luabuild/?.lua",
             "cpath": "${workspaceRoot}/luabuild/?.dll",
             "arg": [
-                "${workspaceRoot}",
                 "Debug"
             ],
             "env": {
-                "PATH": "${workspaceRoot}/luabuild/"
+                "PATH": "${workspaceRoot}/luabuild/;${env:PATH}"
             },
             "consoleCoding": "ansi"
         }
