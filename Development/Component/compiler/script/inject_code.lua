@@ -5,12 +5,6 @@ local inject_code = {}
 inject_code.new_table = {}
 inject_code.old_table = {}
 
-local root = fs.ydwe_devpath()
-
-function inject_code:inject_file(op, path_in_archive)
-	op.inject_file(root / "share" / "mpq" / "units" / path_in_archive, path_in_archive)
-end
-
 -- 侦测需要注入哪些代码
 -- op.input - 脚本的路径，fs.path变量
 -- op.option - 选项，table类型，支持成员：
