@@ -25,14 +25,9 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
             return -1
 		end
     end
-    
     fs.remove(map_path)
 
-	local result, err = objsaver(temp_path, map_path)
-	if not result then
-		log.error(err)
-	end
-	
+	local result = objsaver(temp_path, map_path)
     if result then
         -- 编译地图
         result = compiler:compile(map_path, global_config, war3_version:is_new() and 24 or 20)

@@ -75,16 +75,19 @@ return function (source_path, target_path)
     end)
 
     if not files['war3map.w3i'] then
-        return false, 'No found: war3map.w3i'
+        log.error('No found: war3map.w3i')
+        return false
     end
     local buf = io.load(files['war3map.w3i'])
     if not buf then
-        return false, 'Read failed: war3map.w3i'
+        log.error('Read failed: war3map.w3i')
+        return false
     end
     w2l = w3x2lni()
     local w3i = w2l:frontend_w3i(buf)
     if not w3i then
-        return false, 'Converted failed: war3map.w3i'
+        log.error('Converted failed: war3map.w3i')
+        return false
     end
 
     local max = 0
@@ -94,7 +97,8 @@ return function (source_path, target_path)
 
     local map = create_map(target_path, w3i, max, false)
     if not map then
-        return false, 'Create map failed!'
+        log.error('Create map failed!')
+        return false
     end
     for name, path in pairs(files) do
         local buf = io.load(path)
