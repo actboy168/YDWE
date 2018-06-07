@@ -148,7 +148,9 @@ File dose not exsit, did you mean "%s.w3x" ?
 File dose not exsit
 [UNSUPPORTED_LNI_MARK]
 Unsupported Lni map
-[CONFIG_INVALID_DIR]
-Invalid dir specified by %s.%s
+[CONFIG_DIR_NO_EXISTS]
+Dir specified by %s.%s not exsits
+[CONFIG_DIR_VERSION_ERROR]
+Data version of %s.%s not matched
 [NO_LNI]
 No Lni dir

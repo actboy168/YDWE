@@ -148,7 +148,9 @@ w3i里的文本长度超过1023字符
 文件不存在
 [UNSUPPORTED_LNI_MARK]
 不支持的Lni地图
-[CONFIG_INVALID_DIR]
-%s.%s 指定的目录无效
+[CONFIG_DIR_NO_EXISTS]
+%s.%s 指定的目录不存在
+[CONFIG_DIR_VERSION_ERROR]
+%s.%s 的数据版本不匹配
 [NO_LNI]
 没有找到所在的Lni目录

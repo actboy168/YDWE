@@ -9,6 +9,8 @@ local base = require 'backend.base_path'
 require 'utility'
 require 'filesystem'
 
+local root = fs.current_path()
+
 local function output_path(path)
     if not path then
         return
@@ -36,7 +38,11 @@ local function check_config(w2l, type, key)
     if effect == raw then
         return
     end
-    w2l:failed(lang.script.CONFIG_INVALID_DIR:format(type, key, raw))
+    if fs.exists(root:parent_path() / 'data' / raw) then
+        w2l:failed(lang.script.CONFIG_DIR_VERSION_ERROR:format(type, key))
+    else
+        w2l:failed(lang.script.CONFIG_DIR_NO_EXISTS:format(type, key))
+    end
 end
 
 local function normalize_path(w2l, path)

@@ -1,5 +1,5 @@
 require 'filesystem'
-local root = fs.ydwe_devpath()
+local root = fs.ydwe(true)
 local current_language = (require "i18n").get_language()
 local w2l_path = root / 'plugin' / 'w3x2lni'
 
