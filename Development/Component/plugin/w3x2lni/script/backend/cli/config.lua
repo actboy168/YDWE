@@ -24,7 +24,9 @@ return function (command)
         messager.raw(lang.raw.CONFIG_DISPLAY .. '\r\n\r\n')
         for section, tbl in pairs(config) do
             for k, v in pairs(tbl) do
-                show_config(section, k, v)
+                if config:define_visible(section, k) then
+                    show_config(section, k, v)
+                end
             end
         end
         return
@@ -32,7 +34,7 @@ return function (command)
 
     local request = command[2]
     local section, k = request:match '(%a+)%.([%w_]+)$'
-    if section then
+    if section and config:define_visible(section, k) then
         local v = config:define_comment(section, k)
         if v then
             messager.raw(v)
@@ -46,7 +48,7 @@ return function (command)
         return
     end
     local section, k, v = request:match '(%a+)%.([%w_]+)%=(.*)$'
-    if section then
+    if section and config:define_visible(section, k) then
         local suc, msg = config:define_check(section, k, v)
         if not suc then
             messager.exit('error', msg)

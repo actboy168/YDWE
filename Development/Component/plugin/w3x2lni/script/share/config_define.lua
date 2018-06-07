@@ -224,12 +224,13 @@ local define = {
     _child = true,
     'global', 'lni', 'slk', 'obj',
     global = {
-        'lang', 'data', 'data_ui', 'data_meta', 'data_wes',
+        'lang', 'data', 'data_ui', 'data_meta', 'data_wes', 'data_load',
         lang                = {langf,     raw.CONFIG_GLOBAL_LANG .. lang_hint},
         data                = {global_data,           raw.CONFIG_GLOBAL_DATA},
         data_ui             = {global_data_ui,        raw.CONFIG_GLOBAL_DATA_UI},
         data_meta           = {global_data_meta,      raw.CONFIG_GLOBAL_DATA_META},
         data_wes            = {global_data_wes,       raw.CONFIG_GLOBAL_DATA_WES},
+        data_load           = {string},
     },
     lni = {
         'read_slk', 'find_id_times', 'export_lua',

@@ -45,11 +45,11 @@
     w2l obj "E:\Warcraft III\Maps\Test.w3x" "E:\Warcraft III\Maps\Test_obj.w3x"
 
 [HELP_CONFIG]
-查看和修过配置
+查看和修改配置
 [HELP_CONFIG_DESC]
 用法: w2l config              查看所有配置
       w2l config <配置>       查看指定配置
-      w2l config <配置>=<值>  修过指定配置
+      w2l config <配置>=<值>  修改指定配置
 
 例如：
     w2l config

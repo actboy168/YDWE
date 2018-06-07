@@ -13,12 +13,14 @@ local function save()
     for name, t in pairs(config) do
         lines[#lines+1] = ('[%s]'):format(name)
         for k, v in pairs(t) do
-            local value = global_config[name][k]
-            if value == nil then
-                value = default_config[name][k]
+            if define[name][k][2] ~= nil then
+                local value = global_config[name][k]
+                if value == nil then
+                    value = default_config[name][k]
+                end
+                local _, _, fmt = define[name][k][1](value)
+                lines[#lines+1] = ('%s = %s'):format(k, fmt)
             end
-            local _, _, fmt = define[name][k][1](value)
-            lines[#lines+1] = ('%s = %s'):format(k, fmt)
         end
         lines[#lines+1] = ''
     end
@@ -123,6 +125,10 @@ function config:define_comment(k1, k2)
         return false, lang.raw.INVALID_CONFIG
     end
     return tostring(definer[2])
+end
+
+function config:define_visible(k1, k2)
+    return define[k1][k2][2] ~= nil
 end
 
 return proxy(default_config, global_config, map_config, define, config)
