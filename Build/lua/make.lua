@@ -103,12 +103,14 @@ end
 
 -- Step.5 复制
 local function copy_directory(from, to, filter)
-    fs.create_directories(to)
 	for fromfile in from:list_directory() do
 		if fs.is_directory(fromfile) then
-			copy_directory(fromfile, to / fromfile:filename(), filter)
+			if fromfile:filename():string() ~= '.vscode' then
+				copy_directory(fromfile, to / fromfile:filename(), filter)
+			end
 		else
 			if (not filter) or filter(fromfile) then
+    			fs.create_directories(to)
                 fs.copy_file(fromfile, to / fromfile:filename(), true)
             end
 		end
