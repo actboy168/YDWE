@@ -3,8 +3,7 @@ local stormlib = require 'ffi.stormlib'
 
 local jasshelper = {}
 
-jasshelper.path     = fs.ydwe_path() / "plugin" / "jasshelper"
-jasshelper.exe_path = jasshelper.path / "jasshelper.exe"
+jasshelper.path = fs.ydwe_path() / "compiler" / "jasshelper"
 
 local config = [[
 [jasscompiler]
@@ -14,17 +13,17 @@ local config = [[
 
 local function default_common_j(version)
 	if version == 24 then
-		return fs.ydwe_path() / "share" / "jass" / "ht" / "common.j"
+		return fs.ydwe_devpath() / "share" / "jass" / "ht" / "common.j"
 	else
-		return fs.ydwe_path() / "share" / "jass" / "rb" / "common.j"
+		return fs.ydwe_devpath() / "share" / "jass" / "rb" / "common.j"
 	end
 end
 
 local function default_blizzard_j(version)
 	if version == 24 then
-		return fs.ydwe_path() / "share" / "jass" / "ht" / "blizzard.j"
+		return fs.ydwe_devpath() / "share" / "jass" / "ht" / "blizzard.j"
 	else
-		return fs.ydwe_path() / "share" / "jass" / "rb" / "blizzard.j"
+		return fs.ydwe_devpath() / "share" / "jass" / "rb" / "blizzard.j"
 	end
 end
 
@@ -104,7 +103,7 @@ function jasshelper:do_compile(map_path, common_j_path, blizzard_j_path, option)
         function (map_handle, in_script_path)
             local out_script_path = fs.ydwe_path() / "logs" / "6_vjass.j"
             local command_line = string.format('"%s"%s --scriptonly "%s" "%s" "%s" "%s"',
-                self.exe_path:string(),
+                (self.path / "jasshelper.exe"):string(),
                 parameter,
                 common_j_path:string(),
                 blizzard_j_path:string(),
