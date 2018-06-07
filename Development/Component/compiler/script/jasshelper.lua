@@ -11,47 +11,24 @@ local config = [[
 "%s$COMMONJ $BLIZZARDJ $WAR3MAPJ"
 ]]
 
--- 准备魔兽争霸3的Jass库函数（common.j和blizzard.j）供语法检查用
--- 如果地图中有，则优先使用地图的，否则使用自带的
--- map_path - 地图路径，fs.path对象
--- 返回2个值：cj路径，bj路径，都是fs.path。
-function jasshelper:prepare_jass_libs(map_path, version)
-	local common_j_path = self.path / "common.j"
-	local blizzard_j_path = self.path / "blizzard.j"
-	local map_has_cj = false
-	local map_has_bj = false
-	
-	-- 从地图中解压缩两个重要文件到jasshelper目录（供语法检查用）
-	local mpq = stormlib.open(map_path, true)
-	if mpq then
-		-- 如果地图中导入了，优先使用地图的
-		if mpq:has_file("common.j") then
-			mpq:extract("common.j", common_j_path)
-			map_has_cj = true
-		elseif mpq:has_file("scripts\\common.j") then
-			mpq:extract("scripts\\common.j", common_j_path)
-			map_has_cj = true
-		end
+function jasshelper:prepare_common_j(map_path, version)
+    if fs.exists(map_path / 'common.j') then
+        return map_path / 'common.j'
+    elseif fs.exists(map_path / 'scripts' / 'common.j') then
+        return map_path / 'scripts' / 'common.j'
+    else
+        return fs.ydwe_devpath() / "compiler" / "jass" / tostring(version) / "common.j"
+    end
+end
 
-		if mpq:has_file("blizzard.j") then
-			mpq:extract("blizzard.j", blizzard_j_path)
-			map_has_bj = true
-		elseif mpq:has_file("scripts\\blizzard.j") then
-			mpq:extract("scripts\\blizzard.j", blizzard_j_path)
-			map_has_bj = true
-		end
-		mpq:close()
-	else
-		log.warn("Cannot open map archive, using default bj and cj instead.")
-	end
-
-	if not map_has_cj then
-		common_j_path = fs.ydwe_devpath() / "compiler" / "jass" / tostring(version) / "common.j"
-	end
-	if not map_has_bj then
-		blizzard_j_path = fs.ydwe_devpath() / "compiler" / "jass" / tostring(version) / "blizzard.j"
-	end
-	return common_j_path, blizzard_j_path
+function jasshelper:prepare_blizzard_j(map_path, version)
+    if fs.exists(map_path / 'blizzard.j') then
+        return map_path / 'blizzard.j'
+    elseif fs.exists(map_path / 'scripts' / 'blizzard.j') then
+        return map_path / 'scripts' / 'blizzard.j'
+    else
+        return fs.ydwe_devpath() / "compiler" / "jass" / tostring(version) / "blizzard.j"
+    end
 end
 
 function jasshelper:createConfig(op)
@@ -69,7 +46,8 @@ end
 function jasshelper:compile(op)	
 	log.trace("JassHelper compilation start.")
 	self:createConfig(op)
-    local common_j_path, blizzard_j_path = self:prepare_jass_libs(op.map_path, op.option.runtime_version)
+    local common_j_path = self:prepare_common_j(op.map_path, op.option.runtime_version)
+    local blizzard_j_path = self:prepare_blizzard_j(op.map_path, op.option.runtime_version)
     
 	local parameter = ""
 	

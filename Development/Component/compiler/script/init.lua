@@ -10,46 +10,25 @@ local function update_script(map_path, path_tmp, process_function)
 	-- 结果
 	local result = false
 	log.trace("Update mpq file")
-
-	-- 打开MPQ（地图）
-	local mpq = stormlib.open(map_path)
-	if mpq then
-		-- 确定解压路径
-		local extract_file_path = fs.ydwe_path() / "logs" / path_tmp
-		-- 将文件解压
-		if mpq:has_file('war3map.j') and
-			mpq:extract('war3map.j', extract_file_path)
-		then
-			log.trace("war3map.j has been extracted from " .. map_path:filename():string())
-
-			-- 调用处理函数处理
-			local success, out_file_path = pcall(process_function, mpq, extract_file_path)
-			-- 如果函数正常结束（没有出错）
-			if success then
-				-- 如果函数成功完成任务
-				if out_file_path then
-					-- 替换文件
-					result = mpq:add_file('war3map.j', out_file_path)
-				else
-					-- 出现了错误
-					log.error("Processor function cannot complete its task.")
-				end
-			else
-				-- 记录出错原因
-				log.error(out_file_path)
-			end
-
-			-- 删除临时文件
-			--pcall(fs.remove_all, extract_file_path)
-		else
-			log.error("Cannot extract war3map.j")
-		end
-
-		-- 关闭地图
-		mpq:close()
-	else
-		log.error("Cannot open map archive " .. map_path:string())
-	end
+    fs.copy_file(map_path / 'war3map.j', path_tmp, true)
+    log.trace("war3map.j has been extracted from " .. map_path:filename():string())
+    -- 调用处理函数处理
+    local success, out_file_path = pcall(process_function, path_tmp)
+    -- 如果函数正常结束（没有出错）
+    if success then
+        -- 如果函数成功完成任务
+        if out_file_path then
+            -- 替换文件
+            fs.copy_file(out_file_path, map_path / 'war3map.j', true)
+            result = true
+        else
+            -- 出现了错误
+            log.error("Processor function cannot complete its task.")
+        end
+    else
+        -- 记录出错原因
+        log.error(out_file_path)
+    end
 
 	return result
 end
@@ -100,19 +79,14 @@ function compiler:compile(map_path, config, war3ver)
         log = fs.ydwe_path() / "logs",
 	}
 	
-    return update_script(map_path, "1_war3map.j",
+    return update_script(map_path, compile_t.log / "1_war3map.j",
         -- 解压缩地图脚本，处理然后写回
-        function (map_handle, in_script_path)
+        function (in_script_path)
             -- 开始处理
             log.trace("Processing " .. in_script_path:filename():string())
 
             compile_t.input = in_script_path
             compile_t.output = nil
-            compile_t.map_handle = map_handle
-            compile_t.inject_file = function (file_path, path_in_archive)
-                log.trace("[stormlib]import file", path_in_archive)
-                return map_handle:add_file(path_in_archive, file_path)
-            end
             
             if option.enable_jasshelper then
                 if option.script_injection == 0 then

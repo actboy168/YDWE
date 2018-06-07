@@ -27,17 +27,13 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
     end
     fs.remove(map_path)
 
-	local result = objsaver(temp_path, map_path)
+    local result = compiler:compile(temp_path, global_config, war3_version:is_new() and 24 or 20)
     if result then
-        -- 编译地图
-        result = compiler:compile(map_path, global_config, war3_version:is_new() and 24 or 20)
-        if result then
-            if map_path:filename():string() ~= '.w3x' then
-                result = true
-            else
-                -- 转换成Lni地图
-                result = lnisaver(map_path, target_path:parent_path())
-            end
+        if map_path:filename():string() ~= '.w3x' then
+            result = objsaver(temp_path, map_path)
+        else
+            result = objsaver(temp_path, map_path)
+            result = lnisaver(map_path, target_path:parent_path())
         end
     end
 

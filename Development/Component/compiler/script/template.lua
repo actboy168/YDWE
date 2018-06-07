@@ -55,9 +55,10 @@ local template = {}
 
 local function map_file_import(path_in_archive)
 	return function (buf, is_path)		
-		if is_path then
-			log.trace("[stormlib]import file", path_in_archive)
-			__map_handle__:add_file(path_in_archive, __map_path__:parent_path() / buf)
+        if is_path then
+            log.trace("[stormlib]import file", path_in_archive)
+            fs.create_directories((__map_path__ / path_in_archive):parent_path())
+            fs.copy_file(buf, __map_path__ / path_in_archive, true)
 			return
 		else
 			local temp_file_path = fs.ydwe_path() / "logs" / "import" / path_in_archive
@@ -67,7 +68,8 @@ local function map_file_import(path_in_archive)
 				return
 			end
 			log.trace("[stormlib]import file", path_in_archive)
-			__map_handle__:add_file(path_in_archive, temp_file_path)
+            fs.create_directories((__map_path__ / path_in_archive):parent_path())
+            fs.copy_file(temp_file_path, __map_path__ / path_in_archive, true)
 			return
 		end
 	end
@@ -85,7 +87,6 @@ function template:compile(op)
 		log.error("Template read " .. op.input .. ". Error: " .. err)
 		return false
 	end
-	__map_handle__ = op.map_handle
 	__map_path__   = op.map_path
 	local env = {
 		import = map_file_import, 
