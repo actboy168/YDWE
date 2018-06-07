@@ -54,11 +54,11 @@ function jasshelper:prepare_jass_libs(map_path, version)
 	return common_j_path, blizzard_j_path
 end
 
-function jasshelper:createConfig()
-	if option.pjass == '1' then
+function jasshelper:createConfig(op)
+	if op.option.pjass == '1' then
 		io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-classic.exe', ''))
 	else
-		if option.runtime_version == 24 then
+		if op.option.runtime_version == 24 then
 			io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-latest.exe', ''))
 		else
 			io.save(fs.ydwe_path() / 'jasshelper.conf', config:format('../pjass/pjass-latest.exe', '+rb '))
@@ -68,8 +68,8 @@ end
 
 function jasshelper:compile(op)	
 	log.trace("JassHelper compilation start.")
-	self:createConfig()
-    local common_j_path, blizzard_j_path = self:prepare_jass_libs(op.map_path, option.runtime_version)
+	self:createConfig(op)
+    local common_j_path, blizzard_j_path = self:prepare_jass_libs(op.map_path, op.option.runtime_version)
     
 	local parameter = ""
 	
@@ -93,7 +93,7 @@ function jasshelper:compile(op)
         parameter,
         common_j_path:string(),
         blizzard_j_path:string(),
-        in_script_path:string(),
+        op.input:string(),
         op.output:string()
     )
     local ok = true
