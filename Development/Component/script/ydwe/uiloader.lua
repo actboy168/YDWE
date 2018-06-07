@@ -16,7 +16,7 @@ local function is_enable_unknownui()
 end
 
 local function load_mpq(filename)
-	return mpqloader:load(ydwe / 'share' / 'mpq', filename)
+	return mpqloader:load(filename)
 end
 
 local function stringify_txt(t)
@@ -110,7 +110,8 @@ local function initialize()
 	end
 	virtual_mpq.watch(info.txt[1], function ()
 		local t = {}
-		for _, filename in pairs(info.txt) do
+        for _, filename in pairs(info.txt) do
+            log.info(filename)
 			txt(load_mpq(filename), filename, t)
         end
         local ydwetip = load_mpq('ydwe/ydwetip.txt')
