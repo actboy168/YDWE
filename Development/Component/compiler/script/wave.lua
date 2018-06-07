@@ -4,10 +4,8 @@ local process = require "process"
 local root = fs.ydwe_devpath()
 
 local wave = {}
-wave.path                = fs.ydwe_path() / "compiler" / "wave"
-wave.exe_path            = wave.path / "Wave.exe"
-wave.sys_include_path    = fs.ydwe_path() / "compiler" / "include"
-wave.plugin_include_path = fs.ydwe_devpath() / "plugin"
+wave.path          = fs.ydwe_devpath() / "compiler" / "wave"
+wave.sysinclude    = fs.ydwe_devpath() / "compiler" / "include"
 
 local function pathstring(path)
 	local str = path:string()
@@ -27,8 +25,7 @@ end
 function wave:do_compile(op)
 	local cmd = ''
 	cmd = cmd .. string.format('--output=%s ', pathstring(op.output))
-	cmd = cmd .. string.format('--sysinclude=%s ', pathstring(self.sys_include_path))
-	cmd = cmd .. string.format('--sysinclude=%s ', pathstring(self.plugin_include_path))
+	cmd = cmd .. string.format('--sysinclude=%s ', pathstring(self.sysinclude))
 	cmd = cmd .. string.format('--include=%s ',    pathstring(op.map_path:parent_path():parent_path()))
     for _, path in ipairs(require 'ui') do
         if fs.exists(path / 'jass') then
@@ -43,12 +40,12 @@ function wave:do_compile(op)
 	if tonumber(global_config["ScriptInjection"]["Option"]) == 0 then
 		cmd = cmd .. "--define=SCRIPT_INJECTION=1 "
 	end
-	if fs.exists(self.sys_include_path / "WaveForce.i") then
+	if fs.exists(self.sysinclude / "WaveForce.i") then
 		cmd = cmd .. '--forceinclude=WaveForce.i '
 	end
 	cmd = cmd .. "--extended --c99 --preserve=2 --line=0 "
 
-	local command_line = string.format('%s %s %s', pathstring(self.exe_path), cmd, pathstring(op.input))
+	local command_line = string.format('%s %s %s', pathstring(self.path / "Wave.exe"), cmd, pathstring(op.input))
 	-- 启动进程
 	local p = process()
 	p:hide_window()
