@@ -76,23 +76,6 @@ local function search_mpq(map)
     return files
 end
 
-local ignore = {}
-for _, name in ipairs {'.git', '.svn', '.vscode', '.gitignore'} do
-    ignore[name] = true
-end
-
-local function scan_dir(dir, callback)
-    for path in dir:list_directory() do
-        if not ignore[path:filename():string()] then
-            if fs.is_directory(path) then
-                scan_dir(path, callback)
-            else
-                callback(path)
-            end
-        end
-    end
-end
-
 local function search_dir(map)
     local list = map:list_file()
     local total = #list

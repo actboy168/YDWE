@@ -99,6 +99,10 @@ function mt:remove(type, name)
     end
 end
 
+local lni_dirs = {}
+for _, name in ipairs {'resource', 'sound', 'map', 'scripts', 'w3x2lni'} do
+    lni_dirs[name] = true
+end
 function mt:pairs()
     if not self._loaded then
         self._loaded = load(w2l, self.archive)
@@ -115,6 +119,9 @@ function mt:pairs()
         end
         local type
         local dir = name:match '^[^/\\]+' :lower()
+        if self.mode == 'lni' and dir and not lni_dirs[dir] then
+            return next_one()
+        end
         local ext = name:match '[^%.]+$'
         if ext == 'mdx' or ext == 'mdl' or ext == 'blp' or ext == 'tga' then
             type = 'resource'
