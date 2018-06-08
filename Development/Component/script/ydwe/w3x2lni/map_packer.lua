@@ -3,17 +3,16 @@ local process = require 'process'
 local root = fs.ydwe_path()
 local dev = fs.ydwe_devpath()
 
-return function (map_path, target_path)
-    fs.create_directories(root / 'backups')
-    fs.copy_file(map_path, root / 'backups' / 'lni_backup.w3x', true)
-    fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', map_path, true)
+return function (mode, map_path, target_path)
+    if mode == 'lni' then
+    end
 
     local current_dir = dev / 'plugin' / 'w3x2lni' / 'script'
     local command_line = ('"%s" -e"%s" "%s" %s'):format(
         (root / 'bin' / 'lua.exe'):string(),
         ([[package.cpath = '${YDWE}\\bin\\?.dll;${YDWE}\\bin\\modules\\?.dll';package.path = '${DEV}\\?.lua;${DEV}\\?\\init.lua']]):gsub('${YDWE}', root:string():gsub('\\', '\\\\')):gsub('${DEV}', current_dir:string():gsub('\\', '\\\\')),
         (current_dir / 'gui' / 'mini.lua'):string(),
-        ('"lni" "%s" "%s"'):format((root / 'backups' / 'lni_backup.w3x'):string(), target_path:string())
+        ('"%s" "%s" "%s"'):format(mode, map_path:string(), target_path:string())
     )
     local p = process()
     p:set_console 'disable'
