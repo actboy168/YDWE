@@ -32,8 +32,8 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
     
     local result
     if map_path:filename():string() == '.w3x' then
-        fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', map_path, true)
         result = map_packer('lni', temp_path, target_path:parent_path())
+        fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', map_path, true)
     else
         result = map_packer('pack', temp_path, map_path)
         fs.create_directories(fs.ydwe_path() / 'backups')
