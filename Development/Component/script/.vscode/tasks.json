@@ -6,15 +6,11 @@
     "tasks": [
         {
             "label": "运行",
-            "command": [
-                "\"${workspaceRoot}/../../Build/bin/Debug/ydwe.exe\""
-            ],
+            "command": "\"${workspaceRoot}/../../Build/bin/Debug/ydwe.exe\"",
         },
         {
             "label": "配置",
-            "command": [
-                "\"${workspaceRoot}/../../Build/bin/Debug/bin/ydweconfig.exe\""
-            ],
+            "command": "\"${workspaceRoot}/../../Build/bin/Debug/bin/ydweconfig.exe\"",
         }
     ]
 }
