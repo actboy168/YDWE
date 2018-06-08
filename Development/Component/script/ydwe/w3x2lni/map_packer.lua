@@ -4,15 +4,18 @@ local root = fs.ydwe_path()
 local dev = fs.ydwe_devpath()
 
 return function (mode, map_path, target_path)
-    if mode == 'lni' then
-    end
-
     local current_dir = dev / 'plugin' / 'w3x2lni' / 'script'
-    local command_line = ('"%s" -e"%s" "%s" %s'):format(
+    local command_line = ([=[
+"%s" -e"package.cpath=[[%s]];package.path=[[%s;%s]]" "%s" "%s" "%s" "%s"]=]
+    ):format(
         (root / 'bin' / 'lua.exe'):string(),
-        ([[package.cpath = '${YDWE}\\bin\\?.dll;${YDWE}\\bin\\modules\\?.dll';package.path = '${DEV}\\?.lua;${DEV}\\?\\init.lua']]):gsub('${YDWE}', root:string():gsub('\\', '\\\\')):gsub('${DEV}', current_dir:string():gsub('\\', '\\\\')),
+        (root / 'bin' / 'modules' / '?.dll'):string(),
+        (current_dir / '?.lua'):string(),
+        (current_dir / '?' / 'init.lua'):string(),
         (current_dir / 'gui' / 'mini.lua'):string(),
-        ('"%s" "%s" "%s"'):format(mode, map_path:string(), target_path:string())
+        mode,
+        map_path:string(),
+        target_path:string()
     )
     local p = process()
     p:set_console 'disable'
