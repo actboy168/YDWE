@@ -1,5 +1,6 @@
 local compiler = require "compiler"
 local map_packer = require 'w3x2lni.map_packer'
+local dev = fs.ydwe_devpath()
 
 function event.EVENT_NEW_SAVE_MAP(event_data)
 	log.debug("********************* on new save start *********************")
@@ -29,7 +30,16 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
     local result = compiler:compile(temp_path, global_config, war3_version:is_new() and 24 or 20)
     log.debug("Compiler Result " .. tostring(result))
     
-    local result = map_packer(temp_path, map_path)
+    local result
+    if map_path:filename():string() == '.w3x' then
+        fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', map_path, true)
+        result = map_packer('lni', temp_path, target_path:parent_path())
+    else
+        result = map_packer('pack', temp_path, map_path)
+        fs.create_directories(fs.ydwe_path() / 'backups')
+        fs.copy_file(map_path, fs.ydwe_path() / 'backups' / map_path:filename(), true)
+    end
+
 	log.debug("Packer Result " .. tostring(result))
 	log.debug("********************* on new save end *********************")
 	if result then return 0 else return -1 end
