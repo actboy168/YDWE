@@ -4,7 +4,6 @@ local template = require "compiler.template"
 local cjass = require "compiler.cjass"
 local jasshelper = require "compiler.jasshelper"
 local ev = require 'ev'
-local stormlib = require 'ffi.stormlib'
 
 local function update_script(map_path, path_tmp, process_function)
 	-- 结果

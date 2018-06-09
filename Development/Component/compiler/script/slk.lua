@@ -1,8 +1,4 @@
 local w3x2lni = require 'w3x2lni.init'
-local root = fs.ydwe_devpath()
-local ydpath = fs.ydwe_path()
-local stormlib  = require 'ffi.stormlib'
-local i18n = require 'i18n'
 local event = require 'ev'
 local slk_lib = require 'w3x2lni.slk_lib'
 local map_path = __map_path__
