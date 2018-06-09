@@ -168,7 +168,8 @@ return function(root, io_open, loaded)
 end
 )=";
 static const char slk[] = R"=(
-local sandbox, slklib, root, loadlib, io_open = ...
+local sandbox, slklib, ydwePath, loadlib, io_open = ...
+local w2lPath = ('%s/plugin/w3x2lni'):format(ydwePath))
 local function load_file(filename)
 	local f = io_open(filename, "r")
 	if f then
@@ -178,18 +179,21 @@ local function load_file(filename)
 	end
 end
 local function data_load(w2l, filename)
-    if filename:sub(1, 5) == 'data/' then
-		if filename:sub(1, 8) == 'data/ui/' and w2l.setting.data_ui == '${YDWE}' then
-			error('error in ${YDWE}')
-		end
-		return load_file(('%s/data/%s/%s'):format(root, w2l.setting.data, filename:sub(6)))
+    if filename:sub(1, 3) == 'ui/' then
+		return load_file(('%s/%s'):format(ydwePath, filename))
     end
-    return load_file(('%s/%s'):format(root, filename))
+    if filename:sub(1, 14) == 'data/prebuilt/' then
+		return load_file(('%s/data/%s/%s'):format(w2lPath, w2l.setting.data, filename:sub(6)))
+    end
+    if filename:sub(1, 5) == 'data/' then
+		return load_file(('%s/share/zh-CN/%s'):format(ydwePath, filename:sub(6)))
+    end
+	return load_file(('%s/%s'):format(w2lPath, filename))
 end
 
 (loadlib 'filesystem')()
 
-local w3x2lni = sandbox(('%s/script/core/'):format(root), io_open, {
+local w3x2lni = sandbox(('%s/script/core/'):format(w2lPath), io_open, {
     ['w3xparser'] = (loadlib 'w3xparser')(),
     ['lni']       = (loadlib 'lni')(),
     ['lml']       = (loadlib 'lml')(),
@@ -274,8 +278,8 @@ int open(lua_State* L)
 		printf("%s\n", lua_tostring(L, -1));
 		return 0;
 	}
-	fs::path root = base::path::ydwe(true) / "plugin" / "w3x2lni";
-	lua_pushstring(L, root.string().c_str());
+	fs::path ydwe = base::path::ydwe(true);
+	lua_pushstring(L, ydwe.string().c_str());
 	lua_pushcfunction(L, loadlib);
 	lua_pushcfunction(L, io_open);
 	if (DoString(L, slk, 5)) {

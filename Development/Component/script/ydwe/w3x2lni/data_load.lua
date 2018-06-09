@@ -1,17 +1,17 @@
 require 'filesystem'
-local root = fs.ydwe(true)
-local current_language = (require "i18n").get_language()
-local w2l_path = root / 'plugin' / 'w3x2lni'
+local ydwePath = fs.ydwe(true)
+local w2lPath = ydwePath / 'plugin' / 'w3x2lni'
+local currentLanguage = (require "i18n").get_language()
 
 return function (w2l, filename)
     if filename:sub(1, 3) == 'ui/' then
-        return io.load(root / filename)
+        return io.load(ydwePath / filename)
     end
     if filename:sub(1, 14) == 'data/prebuilt/' then
-        return io.load(w2l_path / 'data' / w2l.setting.data / filename:sub(6))
+        return io.load(w2lPath / 'data' / w2l.setting.data / filename:sub(6))
     end
     if filename:sub(1, 5) == 'data/' then
-        return io.load(root / 'share' / current_language / filename:sub(6))
+        return io.load(ydwePath / 'share' / currentLanguage / filename:sub(6))
     end
-    return io.load(w2l_path / filename)
+    return io.load(w2lPath / filename)
 end
