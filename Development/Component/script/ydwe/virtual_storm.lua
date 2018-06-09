@@ -42,10 +42,6 @@ function api.has_file(name)
     return storm.has_file(name)
 end
 
-function api.string_hash(str)
-    return storm.string_hash(str)
-end
-
 function api.set_dummy_map(map)
     dummy_map = map
 end

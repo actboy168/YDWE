@@ -18,7 +18,7 @@ local function compiler_searcher(name)
     if name == 'compiler' then
         filename = fs.ydwe_devpath() / 'compiler' / 'script' / 'init.lua'
     elseif name:sub(1, 9) == 'compiler.' then
-        filename = fs.ydwe_devpath() / 'compiler' / 'script' / (name:sub(10) .. '.lua')
+        filename = fs.ydwe_devpath() / 'compiler' / 'script' / (name:sub(10):gsub('%.', '/') .. '.lua')
     else
         return ("\n\tno file '%s'"):format(name)
     end

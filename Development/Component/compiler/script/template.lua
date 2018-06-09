@@ -1,4 +1,3 @@
-
 local load = load
 local string = string
 local table = table
@@ -53,33 +52,6 @@ end
 
 local template = {}
 
-local function map_file_import(path_in_archive)
-	return function (buf, is_path)		
-        if is_path then
-            log.trace("[stormlib]import file", path_in_archive)
-            fs.create_directories((__map_path__ / path_in_archive):parent_path())
-            fs.copy_file(buf, __map_path__ / path_in_archive, true)
-			return
-		else
-			local temp_file_path = fs.ydwe_path() / "logs" / "import" / path_in_archive
-			fs.create_directories(temp_file_path:parent_path())
-			if not io.save(temp_file_path, buf) then
-				log.error("failed: save " .. temp_file_path:string())
-				return
-			end
-			log.trace("[stormlib]import file", path_in_archive)
-            fs.create_directories((__map_path__ / path_in_archive):parent_path())
-            fs.copy_file(temp_file_path, __map_path__ / path_in_archive, true)
-			return
-		end
-	end
-end
-
-local storm = require 'virtual_storm'
-local function string_hash(str)
-	return string.format('0x%08X', storm.string_hash(str))
-end
-
 function template:compile(op)
 	log.trace("Template compilation start.")
 	local code, err = io.load(op.input)
@@ -88,12 +60,7 @@ function template:compile(op)
 		return false
 	end
 	__map_path__   = op.map_path
-	local env = {
-		import = map_file_import, 
-		StringHash = string_hash,
-		ability2order = require 'computed.ability2order',
-	}
-	setmetatable(env, {__index = _G})
+	local env = require 'compiler.computed.env'
 	local ok, res = do_compile(code, env)
 	if not ok then
 		if res then

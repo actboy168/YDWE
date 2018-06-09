@@ -1,5 +1,5 @@
-local order_list = require 'computed.order_list'
-local order_id = require 'computed.order_id'
+local order_list = require 'compiler.computed.order_list'
+local order_id = require 'compiler.computed.order_id'
 
 return function (skill, type)
     if skill:sub(1,1) == "'" and skill:sub(-1,-1) == "'" then
