@@ -1,4 +1,3 @@
-local storm = require 'virtual_storm'
 local process = require 'process'
 local root = fs.ydwe_path()
 local dev = fs.ydwe_devpath()
