@@ -15,7 +15,9 @@ require "utiliy"
 
 local function compiler_searcher(name)
     local filename
-    if name == 'compiler' then
+    if name == 'slk' then
+        filename = fs.ydwe_devpath() / 'compiler' / 'script' / 'slk.lua'
+    elseif name == 'compiler' then
         filename = fs.ydwe_devpath() / 'compiler' / 'script' / 'init.lua'
     elseif name:sub(1, 9) == 'compiler.' then
         filename = fs.ydwe_devpath() / 'compiler' / 'script' / (name:sub(10):gsub('%.', '/') .. '.lua')
