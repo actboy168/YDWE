@@ -23,8 +23,8 @@ namespace base { namespace warcraft3 { namespace message_dispatch {
 			ptr += 0x44;
 			return ptr;
 		}
-		uintptr_t ptr = s.search_string_ptr_part("war3\\source\\ui\\CMultiboard.h", sizeof("war3\\source\\ui\\CMultiboard.h"));
-		ptr += 0x80;
+		uintptr_t ptr = get_vfn_ptr(".?AVCGameUI@@");
+		ptr += 0x10;
 		return ptr;
 	}
 
