@@ -182,16 +182,11 @@ local function data_load(w2l, filename)
     if filename:sub(1, 3) == 'ui/' then
 		return load_file(('%s/%s'):format(ydwePath, filename))
     end
-    if filename:sub(1, 14) == 'data/prebuilt/' then
-		return load_file(('%s/data/%s/%s'):format(w2lPath, w2l.setting.data, filename:sub(6)))
+    if filename:sub(1, 9) == 'prebuilt/' then
+		return load_file(('%s/data/%s/%s'):format(w2lPath, w2l.setting.data, filename))
     end
-    if filename:sub(1, 5) == 'data/' then
-		return load_file(('%s/share/zh-CN/%s'):format(ydwePath, filename:sub(6)))
-    end
-	return load_file(('%s/%s'):format(w2lPath, filename))
+	return load_file(('%s/share/zh-CN/%s'):format(ydwePath, filename))
 end
-
-(loadlib 'filesystem')()
 
 local w3x2lni = sandbox(('%s/script/core/'):format(w2lPath), io_open, {
     ['w3xparser'] = (loadlib 'w3xparser')(),
@@ -199,7 +194,6 @@ local w3x2lni = sandbox(('%s/script/core/'):format(w2lPath), io_open, {
     ['lml']       = (loadlib 'lml')(),
     ['lpeg']      = (loadlib 'lpeg')(),
     ['data_load'] = data_load,
-    ['fs']        = fs,
 })
 local function load_mpq(filename)
 	local f = io.open(filename, "r")
@@ -274,7 +268,7 @@ int open(lua_State* L)
 		printf("%s\n", lua_tostring(L, -1));
 		return 0;
 	}
-	if (DoFile(L, (base::path::ydwe(true) / "script" / "ydwe" / "slk_lib.lua").string().c_str(), 0)) {
+	if (DoFile(L, (base::path::ydwe(true) / "compiler" / "script" / "w3x2lni" / "slk_lib.lua").string().c_str(), 0)) {
 		printf("%s\n", lua_tostring(L, -1));
 		return 0;
 	}
