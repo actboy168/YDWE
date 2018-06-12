@@ -51,12 +51,14 @@ namespace NYDWE {
 		}
 
 		EVENT_ID evenetid = (EVENT_ID)lua_tointeger(L, -1);
-		LOGGING_TRACE(lg) << "RegisterEvent id: " << evenetid;
 		if (evenetid >= 0 && evenetid < EVENT_MAXIMUM)
 		{
+			LOGGING_INFO(lg) << "RegisterEvent: " << lua_tostring(L, 2);
 			event_array[evenetid] = std::bind(LuaOnSignal, L, std::placeholders::_1, base::lua::object(L, 3));
+			lua_pushboolean(L, 1);
+			return 1;
 		}
-		lua_pushboolean(L, 1);
+		lua_pushboolean(L, 0);
 		return 1;
 	}
 
