@@ -6,14 +6,15 @@ local function backup_map(map_path)
     local ydwe_path = fs.ydwe_path()
     fs.create_directories(ydwe_path / 'backups')
     local buf = io.load(ydwe_path / 'backups' / 'backupsdata.txt')
-    if not buf then
-        buf = '0123456789abcdefghijklmnopqrstuvwxyz'
+    local char
+    if buf then
+        char = buf:match '(.)[\r\n]*$'
+    else
+        char = '0'
     end
-    local char = buf:sub(1, 1)
     local filename = char .. map_path:extension():string()
     local target_path = ydwe_path / 'backups' / filename
     log.info('Backup map at ' .. target_path:string())
-    io.save(ydwe_path / 'backups' / 'backupsdata.txt', buf:sub(2) .. char)
     fs.copy_file(map_path, target_path, true)
 end
 
