@@ -1,5 +1,7 @@
 local stormlib = require 'ffi.stormlib'
 local w3x2lni = require 'compiler.w3x2lni.init'
+local ev = require 'ev'
+local map_packer = require 'w3x2lni.map_packer'
 
 local mapdump = require 'mapdump'
 local process = require 'process'
@@ -135,6 +137,24 @@ local function process_create(application, command_line)
 	return true
 end
 
+local function is_lni(path)
+	local root = fs.ydwe_path()
+	local check_lni_mark = loadfile((root / 'plugin' / 'w3x2lni' / 'script' / 'share' / 'check_lni_mark.lua'):string())()
+    if path:filename():string() ~= '.w3x' then
+        return false
+    end
+    local buf = io.load(path)
+    if not check_lni_mark(buf) then
+        return false
+	end
+	return true
+end
+
+local current_map_path
+ev.on('打开地图', function (map_path)
+	current_map_path = fs.path(map_path)
+end)
+
 -- 本函数在测试地图时使用
 -- event_data - 事件参数，table，包含以下值
 --	map_path - 保存的地图路径，字符串类型
@@ -149,8 +169,18 @@ function event.EVENT_TEST_MAP(event_data)
 	
 	-- 获取当前测试的地图名
 	local mappath = fs.path(event_data.map_path)
+	log.info('Current map path ' .. current_map_path:string())
 	log.debug("Testing " .. mappath:string())
 	log.debug("Testing " .. event_data.command_line)
+
+	-- 如果是lni地图，需要重新打包
+	if is_lni(current_map_path) then
+        local result = map_packer('obj', current_map_path, mappath)
+		if not result then
+			log.inifo('Pack lni map failed!')
+			return -1
+		end
+	end
 
 	-- 附加命令行
 	local commandline = ""
