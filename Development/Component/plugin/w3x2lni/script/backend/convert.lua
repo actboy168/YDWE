@@ -116,6 +116,11 @@ return function (mode)
     end
     w2l.output_ar = output_ar
 
+    local plugin_loader = require 'backend.plugin'
+    plugin_loader(w2l, function (source, plugin)
+        w2l:add_plugin(source, plugin)
+    end)
+
     messager.text(lang.script.CHECK_PLUGIN)
     w2l:call_plugin 'on_convert'
 

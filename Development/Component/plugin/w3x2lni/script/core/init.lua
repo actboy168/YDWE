@@ -230,16 +230,10 @@ function mt:add_plugin(source, plugin)
 end
 
 function mt:call_plugin(event)
-    if not self.plugins then
-        self.plugins = {}
-        local plugin_loader = require 'plugin'
-        plugin_loader(self, function (source, plugin)
-            self:add_plugin(source, plugin)
-        end)
-    end
     for _, plugin in ipairs(self.plugins) do
         if plugin[event] then
-            if not pcall(plugin[event], plugin, self) then
+            local ok, res = pcall(plugin[event], plugin, self)
+            if not ok then
                 self.messager.report(lang.report.OTHER, 2, lang.report.PLUGIN_FAILED:format(plugin.info.name), res)
             end
         end
@@ -380,6 +374,7 @@ return function ()
     local self = setmetatable({}, mt)
     self.progress = progress()
     self.loaded = {}
+    self.plugins = {}
     self.lang = require 'lang'
     self:set_messager(function () end)
     self:set_setting()
