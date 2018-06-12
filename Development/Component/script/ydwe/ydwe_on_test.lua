@@ -150,7 +150,7 @@ local function is_lni(path)
         return true
     end
     f:close()
-	return true
+    return false
 end
 
 local current_map_path

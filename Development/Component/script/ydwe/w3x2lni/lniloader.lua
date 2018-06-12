@@ -1,11 +1,26 @@
 local w3x2lni = require 'compiler.w3x2lni.init'
 local storm = require 'virtual_storm'
 local root = fs.ydwe_path()
-local check_lni_mark = loadfile((root / 'plugin' / 'w3x2lni' / 'script' / 'share' / 'check_lni_mark.lua'):string())()
 
 local ignore = {}
 for _, name in ipairs {'.git', '.svn', '.vscode', '.gitignore'} do
     ignore[name] = true
+end
+
+local function is_lni(path)
+    if path:filename():string() ~= '.w3x' then
+        return false
+    end
+    local f = io.open(path)
+    if not f then
+        return false
+    end
+    if f:seek('set', 8) and 'W2L\x01' == f:read(4) then
+        f:close()
+        return true
+    end
+    f:close()
+    return false
 end
 
 local function scan_dir(dir, callback)
@@ -90,11 +105,7 @@ return function (mappath)
     dummy_map = nil
     storm.set_dummy_map(nil)
     local path = fs.path(mappath)
-    if path:filename():string() ~= '.w3x' then
-        return
-    end
-    local buf = io.load(path)
-    if not check_lni_mark(buf) then
+    if not is_lni(path) then
         return
     end
 
