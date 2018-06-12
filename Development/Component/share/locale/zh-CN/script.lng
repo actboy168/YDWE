@@ -42,6 +42,8 @@ YDWE(&Y)
 地图 "%s" 带有只读属性，是否去掉地图中的只读属性?
 [DELETE_DANGER_DIR]
 YDWE检测到魔兽的安装路径下存在一个名为"%s"的文件夹。它可能影响YDWE运行，是否删除?
+[UNSUPPORTED_WAR3_VERSION]
+不支持魔兽%d.%d。
 [ERROR_WAR3_VERSION]
 检测到您的魔兽Game.dll和War3Patch.mpq的版本不一致，这可能是由版本转换器造成的，这会导致您无法保存和测试地图，强烈建议您使用正确的魔兽补丁还原您的魔兽。
 [PARSE_UNKNOWN_UI]

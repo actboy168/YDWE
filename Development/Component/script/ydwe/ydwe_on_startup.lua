@@ -124,6 +124,12 @@ end
 local function check_war3_version()
 	log.trace("check_war3_version")
 
+    if war3_version.major ~= 1 or war3_version.minor < 20 or war3_version.minor > 27 then
+        log.error("Unsupported War3 %d.%d", war3_version.major, war3_version.minor)
+        gui.error_message(nil, LNG.UNSUPPORTED_WAR3_VERSION, war3_version.major, war3_version.minor)
+        os.exit(true, -1)
+    end
+
 	-- 检查“版本转换器”等造成的game.dll和war3patch.mpq不一致的问题
 	if tonumber(global_config["MapSave"]["Option"]) == 0 then
 		-- 检测魔兽中包含的脚本文件所代表的版本
