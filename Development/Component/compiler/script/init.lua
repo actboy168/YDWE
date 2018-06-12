@@ -5,31 +5,15 @@ local cjass = require "compiler.cjass"
 local jasshelper = require "compiler.jasshelper"
 local ev = require 'ev'
 
-local function update_script(map_path, path_tmp, process_function)
-	-- 结果
-	local result = false
-	log.trace("Update mpq file")
-    fs.copy_file(map_path / 'war3map.j', path_tmp, true)
-    log.trace("war3map.j has been extracted from " .. map_path:filename():string())
-    -- 调用处理函数处理
-    local success, out_file_path = pcall(process_function, path_tmp)
-    -- 如果函数正常结束（没有出错）
-    if success then
-        -- 如果函数成功完成任务
-        if out_file_path then
-            -- 替换文件
-            fs.copy_file(out_file_path, map_path / 'war3map.j', true)
-            result = true
-        else
-            -- 出现了错误
-            log.error("Processor function cannot complete its task.")
-        end
-    else
-        -- 记录出错原因
-        log.error(out_file_path)
+local function update_script(map_path, input, process_function)
+    fs.copy_file(map_path / 'war3map.j', input, true)
+    local output = process_function(input)
+    if not output then
+        log.error("Compile failed.")
+        return false
     end
-
-	return result
+    fs.copy_file(output, map_path / 'war3map.j', true)
+    return true
 end
 
 local function make_option(config, war3ver)
@@ -70,28 +54,23 @@ function compiler:compile(map_path, config, war3ver)
     inject_code:initialize()
     
     local option = make_option(config, war3ver)
-	log.trace("Save version " .. tostring(option.runtime_version))
+    log.trace("Compile to version " .. tostring(option.runtime_version))
 
-	local compile_t = {
-		option = option,
+    local compile_t = {
+        option = option,
         map_path = map_path,
         log = fs.ydwe_path() / "logs",
-	}
-	
-    return update_script(map_path, compile_t.log / "1_war3map.j",
-        -- 解压缩地图脚本，处理然后写回
-        function (in_script_path)
-            -- 开始处理
-            log.trace("Processing " .. in_script_path:filename():string())
+    }
 
-            compile_t.input = in_script_path
+    return update_script(map_path, compile_t.log / "1_war3map.j",
+        function (input)
+            compile_t.input = input
             compile_t.output = nil
-            
             if option.enable_jasshelper then
                 if option.script_injection == 0 then
                     compile_t.output = compile_t.log / "2_inject.j"
                     if not inject_code:compile(compile_t) then
-                        return nil
+                        return
                     end
                     compile_t.input = compile_t.output
                 end
@@ -99,14 +78,14 @@ function compiler:compile(map_path, config, war3ver)
                 -- Wave预处理
                 compile_t.output = compile_t.log / "3_wave.j"
                 if not wave:compile(compile_t) then
-                    return nil
+                    return
                 end
                 compile_t.input = compile_t.output
 
                 compile_t.output = compile_t.log / "4_template.j"
                 if not template:compile(compile_t) then
                     collectgarbage 'collect'
-                    return nil
+                    return
                 end
                 ev.emit('编译地图')
                 collectgarbage 'collect'
@@ -115,7 +94,7 @@ function compiler:compile(map_path, config, war3ver)
             compile_t.input = compile_t.output
             compile_t.output = compile_t.log / "6_vjass.j"
             if not jasshelper:compile(compile_t) then
-                return nil
+                return
             end
             return compile_t.output
         end
