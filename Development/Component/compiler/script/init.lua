@@ -67,9 +67,9 @@ end
 local compiler = {}
 
 function compiler:compile(map_path, config, war3ver)
+    inject_code:initialize()
+    
     local option = make_option(config, war3ver)
-
-
 	log.trace("Save version " .. tostring(option.runtime_version))
 
 	local compile_t = {
@@ -120,10 +120,6 @@ function compiler:compile(map_path, config, war3ver)
             return compile_t.output
         end
     )
-end
-
-function compiler:initialize()
-	inject_code:initialize()
 end
 
 return compiler

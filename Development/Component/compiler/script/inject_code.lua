@@ -2,6 +2,7 @@
 local inject_code = {}
 
 -- 注入代码表
+inject_code.initialized = false
 inject_code.new_table = {}
 inject_code.old_table = {}
 
@@ -171,6 +172,10 @@ function inject_code:scan(config_dir)
 end
 
 function inject_code:initialize()
+    if self.initialized then
+        return
+    end
+    self.initialized = true
     local counter = 0
     for _, path in ipairs(require 'ui') do
         if fs.exists(path / 'jass') then
