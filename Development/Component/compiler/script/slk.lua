@@ -1,6 +1,6 @@
-local w3x2lni = require 'w3x2lni.init'
+local w3x2lni = require 'compiler.w3x2lni.init'
+local slk_lib = require 'compiler.w3x2lni.slk_lib'
 local event = require 'ev'
-local slk_lib = require 'w3x2lni.slk_lib'
 local map_path = __map_path__
 
 local type_map = {
