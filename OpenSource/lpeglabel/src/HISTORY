@@ -1,0 +1,51 @@
+HISTORY for LPegLabel 1.5.0-1
+
+* Changes from version 1.4.0-1 to 1.5.0-1
+  ---------------------------------
+  + new semantics for recovery
+  + strings can be used as labels 
+  - labeled ordered choice removed
+  - recovery operator removed
+
+
+* Changes from version 1.3.0-1 to 1.4.0-1
+  ---------------------------------
+  + reintroduces labeled ordered choice
+
+
+* Changes from version 1.2.0-1 to 1.3.0-1
+  ---------------------------------
+  + updating LPegLabel to use the codebase of LPeg 1.0.1  
+  + fixes bug in relabel.lua (triggered when using LuaJIT) 
+
+
+* Changes from version 1.1.0-1 to 1.2.0-1
+  ---------------------------------
+  + fixes bug when reporting the error position of an ordinary failure 
+  + reports the farthest failure position for ordinary failures
+
+
+* Changes from version 1.0.0-1 to 1.1.0-1
+  ---------------------------------
+  + new semantics of lpeglabel.Rec
+  - labeled ordered choice removed
+  + examples updated
+
+
+* Changes from version 0.12.2-2 to 1.0.0-1
+  ---------------------------------
+  + base code updated to LPeg 1.0 
+  + new functions: lpeglabel.Rec and relabel.calcline
+  + improved documentation
+  + new examples
+  + some bugs fixed 
+
+
+* Changes from version 0.12.2-1 to 0.12.2-2
+  ---------------------------------
+  + in case of a failure, "match" also returns a suffix of the input
+  + improved error reporting for "relabel", thanks to Matthew Allen
+  + limit of labels increased from 32 to 64, thanks to André Maidl
+  + compiles with Lua 5.1, thanks to Matthew Allen
+  + the throw operator now throws only one label
+  + some bugs fixed
