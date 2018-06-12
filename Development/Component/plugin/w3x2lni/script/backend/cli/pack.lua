@@ -59,7 +59,7 @@ return function()
     local setting = unpack_setting(w2l, mode)
 
     setting.mode = 'pack'
-    messager.title 'Pack'
+    messager.title 'Obj'
     messager.text(lang.script.OPEN_MAP)
     local err
     local input_ar, err = builder.load(setting.input)

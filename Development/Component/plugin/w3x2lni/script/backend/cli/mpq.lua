@@ -44,7 +44,6 @@ local function extract_mpq(name)
     extract_file(output / 'mpq', name)
 end
 
-
 local function report_fail()
     local tbl = {}
     for name, res in pairs(result) do
@@ -65,6 +64,14 @@ local function extract()
         extract_mpq(dir .. 'UI\\MiscData.txt')
         extract_mpq(dir .. 'Units\\MiscGame.txt')
         extract_mpq(dir .. 'Units\\MiscData.txt')
+        extract_mpq(dir .. 'Units\\AbilityMetaData.slk')
+        extract_mpq(dir .. 'Units\\DestructableMetaData.slk')
+        extract_mpq(dir .. 'Units\\AbilitybuffMetaData.slk')
+        extract_mpq(dir .. 'Units\\UpgradeMetaData.slk')
+        extract_mpq(dir .. 'Units\\UnitMetaData.slk')
+        extract_mpq(dir .. 'Units\\MiscMetaData.slk')
+        extract_mpq(dir .. 'Doodads\\DoodadMetaData.slk')
+        extract_mpq(dir .. 'UI\\UnitEditorData.txt')
         for type, slks in pairs(w2l.info.slk) do
             for _, name in ipairs(slks) do
                 extract_mpq(dir .. name)
@@ -82,9 +89,11 @@ local function extract()
     extract_file(output, 'UI\\TriggerStrings.txt')
 end
 
-local function create_metadata(w2l, loader)
+local function create_metadata(w2l)
     local defined_meta = w2l:parse_lni(io.load(root / 'script' / 'core' / 'defined' / 'metadata.ini'))
-    local meta = prebuilt_metadata(w2l, defined_meta, loader)
+    local meta = prebuilt_metadata(w2l, defined_meta, function (name)
+        return io.load(output / 'mpq' / name)
+    end)
     fs.create_directories(output / 'prebuilt')
     io.save(output / 'prebuilt' / 'metadata.ini', meta)
 end
@@ -195,7 +204,7 @@ return function ()
     w2l.messager.text(lang.script.EXPORT_MPQ)
     extract()
     report_fail()
-    create_metadata(w2l, loader)
+    create_metadata(w2l)
     w2l.progress:finish()
 
     w2l.cache_metadata = w2l:parse_lni(io.load(output / 'prebuilt' / 'metadata.ini'))

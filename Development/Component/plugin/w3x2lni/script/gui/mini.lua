@@ -29,7 +29,8 @@ function mini:init()
     view:addchildview(title)
 
     local title_label = gui.Label.create('')
-    title_label:setstyle { Height = 20, Width = 80 }
+    title_label:setstyle { Height = 20, Left = 5 }
+    title_label:setalign 'start'
     title_label:setcolor('#eee')
     title_label:setfont(gui.Font.create('宋体', 16, "bold", "normal"))
     title_label:setmousedowncanmovewindow(true)
@@ -37,6 +38,7 @@ function mini:init()
     
     local label = gui.Label.create('')
     label:setstyle { Margin = 5, Height = 20 }
+    label:setalign 'start'
     label:setmousedowncanmovewindow(true)
     view:addchildview(label)
     
@@ -136,7 +138,7 @@ local function update()
             end
         end
         if worker.exit_code == 0 then
-            return 1000, 0
+            return 0, 0
         else
             return 0, worker.exit_code
         end
