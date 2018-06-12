@@ -7,9 +7,9 @@ OK
 [CANCEL]
 Cancel
 [PREPEOCESSOR_FAILED]
-Preprocessor failed with message:
-stdout: %s
-stderr: %s
+Preprocessor failed:
+
+%s
 [PREPEOCESSOR_LAUNCH_FAILED]
 Cannot start preprocessor process.
 [EXPORT_FILE]

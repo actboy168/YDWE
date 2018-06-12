@@ -73,10 +73,12 @@ function wave:compile(op)
 	end
 	local exit_code, out, err = self:do_compile(op)
 	
+    if err and err ~= '' then log.error('Wave error:', err) end
+
 	-- 退出码0代表成功
 	if exit_code ~= 0 then
-		if out and err then
-			gui.error_message(nil, LNG.PREPEOCESSOR_FAILED, out, err)
+		if err then
+			gui.error_message(nil, LNG.PREPEOCESSOR_FAILED, err)
 		else
 			gui.error_message(nil, LNG.PREPEOCESSOR_LAUNCH_FAILED)
 		end

@@ -7,9 +7,9 @@
 [USE_DEFAULT]
 使用默认
 [PREPEOCESSOR_FAILED]
-预处理出现错误，信息:
-stdout: %s
-stderr: %s
+预处理错误:
+
+%s
 [PREPEOCESSOR_LAUNCH_FAILED]
 无法启动预处理器
 [EXPORT_FILE]
