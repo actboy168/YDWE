@@ -5,171 +5,11 @@
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace slk {
 
-static const char sandbox[] = R"=(
-local function standard(loaded)
-    local r = {}
-    for _, s in ipairs {
-        --'package',
-        'coroutine',
-        'table',
-        --'io',
-        'os',
-        'string',
-        'math',
-        'utf8',
-        'debug',
-    } do
-        r[s] = _G[s]
-        loaded[s] = _G[s]
-    end
-    for _, s in ipairs {
-        'assert',
-        'collectgarbage',
-        --'dofile',
-        'error',
-        'getmetatable',
-        'ipairs',
-        --'loadfile',
-        'load',
-        'next',
-        'pairs',
-        'pcall',
-        'print',
-        'rawequal',
-        'rawlen',
-        'rawget',
-        'rawset',
-        'select',
-        'setmetatable',
-        'tonumber',
-        'tostring',
-        'type',
-        'xpcall',
-        '_VERSION',
-        --'require',
-    } do
-        r[s] = _G[s]
-    end
-    return r
-end
-
-local function sandbox_env(loadlua, openfile, loaded)
-    local _LOADED = loaded or {}
-    local _E = standard(_LOADED)
-    local _PRELOAD = {}
-
-    _E.io = {
-        open = openfile,
-    }
-
-    local function searchpath(name, path)
-        local err = ''
-    	name = string.gsub(name, '%.', '/')
-    	for c in string.gmatch(path, '[^;]+') do
-            local filename = string.gsub(c, '%?', name)
-            local f = openfile(filename)
-            if f then
-                f:close()
-    			return filename
-    		end
-            err = err .. ("\n\tno file '%s'"):format(filename)
-        end
-        return nil, err
-    end
-
-    local function searcher_preload(name)
-        assert(type(_PRELOAD) == "table", "'package.preload' must be a table")
-        if _PRELOAD[name] == nil then
-            return ("\n\tno field package.preload['%s']"):format(name)
-        end
-        return _PRELOAD[name]
-    end
-    
-    local function searcher_lua(name)
-        assert(type(_E.package.path) == "string", "'package.path' must be a string")
-    	local filename, err = searchpath(name, _E.package.path)
-    	if not filename then
-    		return err
-    	end
-    	local f, err = loadlua(filename)
-    	if not f then
-    		error(("error loading module '%s' from file '%s':\n\t%s"):format(name, filename, err))
-    	end
-    	return f, filename
-    end
-
-    local function require_load(name)
-        local msg = ''
-        local _SEARCHERS = _E.package.searchers
-        assert(type(_SEARCHERS) == "table", "'package.searchers' must be a table")
-    	for _, searcher in ipairs(_SEARCHERS) do
-            local f, extra = searcher(name)
-            if type(f) == 'function' then
-                return f, extra
-            elseif type(f) == 'string' then
-                msg = msg .. f
-            end
-        end
-        error(("module '%s' not found:%s"):format(name, msg))
-    end
-
-    _E.require = function(name)
-        assert(type(name) == "string", ("bad argument #1 to 'require' (string expected, got %s)"):format(type(name)))
-    	local p = _LOADED[name]
-    	if p ~= nil then
-    		return p
-    	end
-    	local init, extra = require_load(name)
-        debug.setupvalue(init, 1, _E)
-    	local res = init(name, extra)
-    	if res ~= nil then
-    		_LOADED[name] = res
-    	end
-    	if _LOADED[name] == nil then
-    		_LOADED[name] = true
-    	end
-    	return _LOADED[name]
-    end
-    _E.package = {
-        config = [[
-            \
-            ;
-            ?
-            !
-            -
-        ]],
-        loaded = _LOADED,
-        path = '?.lua',
-        preload = _PRELOAD,
-        searchers = { searcher_preload, searcher_lua },
-        searchpath = searchpath
-    }
-    return _E
-end
-
-return function(root, io_open, loaded)
-    local function openfile(name, mode)
-        return io_open(root .. name, mode)
-    end
-    local function loadlua(name)
-        local f = openfile(name, 'r')
-        if f then
-            local str = f:read 'a'
-            f:close()
-            return load(str, '@' .. root .. name)
-        end
-    end
-    local init = loadlua('init.lua')
-    if not init then
-        return
-    end
-    debug.setupvalue(init, 1, sandbox_env(loadlua, openfile, loaded))
-	return init()
-end
-)=";
 static const char slk[] = R"=(
-local sandbox, slklib, ydwePath, loadlib, io_open = ...
-local w2lPath = ('%s/plugin/w3x2lni'):format(ydwePath))
+local ydwePath, loadlua, loadlib, io_open = ...
+local w2lPath = ('%s/plugin/w3x2lni'):format(ydwePath)
+local sandbox = loadlua(('%s/script/backend/sandbox.lua'):format(w2lPath))
+local slklib = loadlua(('%s/compiler/script/w3x2lni/slk_lib.lua'):format(ydwePath))
 local function load_file(filename)
 	local f = io_open(filename, "r")
 	if f then
@@ -239,6 +79,18 @@ static int loadlib(lua_State* L)
 	return 0;
 }
 
+static int loadlua(lua_State* L)
+{
+	size_t len = 0;
+	const char* str = luaL_checklstring(L, 1, &len);
+	std::string name(str, len);
+	if (luaL_loadfile(L, name.c_str())) {
+		return lua_error(L);
+	}
+	lua_call(L, 0, 1);
+	return 1;
+}
+
 static int io_fclose(lua_State *L) {
 	luaL_Stream *p = (luaL_Stream *)luaL_checkudata(L, 1, LUA_FILEHANDLE);
 	int res = fclose(p->f);
@@ -264,19 +116,12 @@ static int io_open(lua_State *L) {
 
 int open(lua_State* L)
 {
-	if (DoString(L, sandbox, 0)) {
-		printf("%s\n", lua_tostring(L, -1));
-		return 0;
-	}
-	if (DoFile(L, (base::path::ydwe(true) / "compiler" / "script" / "w3x2lni" / "slk_lib.lua").string().c_str(), 0)) {
-		printf("%s\n", lua_tostring(L, -1));
-		return 0;
-	}
 	fs::path ydwe = base::path::ydwe(true);
 	lua_pushstring(L, ydwe.string().c_str());
+	lua_pushcfunction(L, loadlua);
 	lua_pushcfunction(L, loadlib);
 	lua_pushcfunction(L, io_open);
-	if (DoString(L, slk, 5)) {
+	if (DoString(L, slk, 4)) {
 		printf("%s\n", lua_tostring(L, -1));
 		return 0;
 	}
