@@ -73,7 +73,8 @@ function wave:compile(op)
 	end
 	local exit_code, out, err = self:do_compile(op)
 	
-    if err and err ~= '' then log.error('Wave error:', err) end
+    if out and out ~= '' then log.info('Wave stdout:', out) end
+    if err and err ~= '' then log.error('Wave stderr:', err) end
 
 	-- 退出码0代表成功
 	if exit_code ~= 0 then
