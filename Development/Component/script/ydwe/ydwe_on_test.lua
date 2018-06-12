@@ -138,15 +138,18 @@ local function process_create(application, command_line)
 end
 
 local function is_lni(path)
-	local root = fs.ydwe_path()
-	local check_lni_mark = loadfile((root / 'plugin' / 'w3x2lni' / 'script' / 'share' / 'check_lni_mark.lua'):string())()
     if path:filename():string() ~= '.w3x' then
         return false
     end
-    local buf = io.load(path)
-    if not check_lni_mark(buf) then
+    local f = io.open(path)
+    if not f then
         return false
-	end
+    end
+    if f:seek('set', 8) and 'W2L\x01' == f:read(4) then
+        f:close()
+        return true
+    end
+    f:close()
 	return true
 end
 
