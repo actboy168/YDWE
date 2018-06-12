@@ -2,6 +2,21 @@ local compiler = require "compiler"
 local map_packer = require 'w3x2lni.map_packer'
 local dev = fs.ydwe_devpath()
 
+local function backup_map(map_path)
+    local ydwe_path = fs.ydwe_path()
+    fs.create_directories(ydwe_path / 'backups')
+    local buf = io.load(ydwe_path / 'backups' / 'backupsdata.txt')
+    if not buf then
+        buf = '0123456789abcdefghijklmnopqrstuvwxyz'
+    end
+    local char = buf:sub(1, 1)
+    local filename = char .. map_path:extension():string()
+    local target_path = ydwe_path / 'backups' / filename
+    log.info('Backup map at ' .. target_path:string())
+    io.save(ydwe_path / 'backups' / 'backupsdata.txt', buf:sub(2) .. char)
+    fs.copy_file(map_path, target_path, true)
+end
+
 function event.EVENT_NEW_SAVE_MAP(event_data)
 	log.debug("********************* on new save start *********************")
 
@@ -36,8 +51,7 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
         fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', map_path, true)
     else
         result = map_packer('pack', temp_path, map_path)
-        fs.create_directories(fs.ydwe_path() / 'backups')
-        fs.copy_file(map_path, fs.ydwe_path() / 'backups' / map_path:filename(), true)
+        backup_map(map_path)
     end
 
 	log.debug("Packer Result " .. tostring(result))
