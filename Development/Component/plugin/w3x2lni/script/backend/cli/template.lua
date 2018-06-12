@@ -5,7 +5,6 @@ local core = require 'backend.sandbox_core'
 local lang = require 'share.lang'
 local config = require 'share.config'
 local w2l = core()
-local root = fs.current_path()
 
 w2l:set_messager(messager)
 

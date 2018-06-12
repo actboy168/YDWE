@@ -1,5 +1,5 @@
 require 'filesystem'
-local root = fs.current_path()
+local root = require 'backend.base_path'
 
 local function string_proxy(key, concat)
     return setmetatable({}, {
@@ -87,7 +87,7 @@ local function confusion(confusion)
 end
 
 local function get_langs()
-    local locale = root / 'locale'
+    local locale = root / 'script' / 'locale'
     local list = {}
     for dir in locale:list_directory() do
         if fs.is_directory(dir) then
@@ -105,7 +105,7 @@ local function insert_lang(chars, max, lng)
     if lng == '${AUTO}' then
         chars[#chars+1] = tostring(raw.AUTO_SELECT)
     else
-        chars[#chars+1] = io.load(root / 'locale' / lng / 'name')
+        chars[#chars+1] = io.load(root / 'script' / 'locale' / lng / 'name')
     end
     chars[#chars+1] = '\r\n'
 end
@@ -152,7 +152,7 @@ local function is_valid_data(dir)
 end
 
 local function get_datas()
-    local locale = root:parent_path() / 'data'
+    local locale = root / 'data'
     local list = {}
     for dir in locale:list_directory() do
         if is_valid_data(dir) then
@@ -181,7 +181,7 @@ local function global_data(v)
             return true, v, v
         end
     end
-    local suc, info = is_valid_data(root:parent_path() / 'data' / tostring(v))
+    local suc, info = is_valid_data(root / 'data' / tostring(v))
     assert(suc == false)
     if info then
         return false, info

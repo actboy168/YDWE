@@ -1,6 +1,6 @@
 local lang = require 'share.lang'
 local config = require 'share.config'
-local root = fs.current_path()
+local root = require 'backend.base_path'
 
 local function sortpairs(t)
     local sort = {}
@@ -80,7 +80,7 @@ return function (w2l, version)
         data_wes  = config.global.data_wes,
         version   = version,
     }
-    local prebuilt_path = root:parent_path() / 'data' / config.global.data / 'prebuilt' / version
+    local prebuilt_path = root / 'data' / config.global.data / 'prebuilt' / version
     fs.create_directories(prebuilt_path)
 
     local slk = w2l:frontend_buildslk()

@@ -5,7 +5,7 @@ local lang = require 'share.lang'
 local builder = require 'map-builder'
 local core = require 'backend.sandbox_core'
 local w2l = core()
-local root = fs.current_path()
+local root = require 'backend.base_path'
 
 local report = {}
 local messager_report = messager.report
@@ -49,7 +49,7 @@ local function get_io_time(map, file_count)
 end
 
 return function()
-    w2l.log_path = root:parent_path() / 'log'
+    w2l.log_path = root / 'log'
     w2l:set_messager(messager)
     w2l.messager.text(lang.script.INIT)
     w2l.messager.progress(0)

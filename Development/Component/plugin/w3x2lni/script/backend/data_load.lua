@@ -1,6 +1,5 @@
 require 'utility'
-
-local root = fs.current_path():parent_path()
+local root = require 'backend.base_path'
 
 local function ydwe_ui(w2l)
     local ydwe_path = require 'backend.ydwe_path'

@@ -4,12 +4,10 @@ local get_lni_map = require 'backend.get_lni_map'
 local config = require 'share.config'
 local lang = require 'share.lang'
 local check_lni_mark = require 'share.check_lni_mark'
-local base = require 'backend.base_path'
+local root = require 'backend.base_path'
 
 require 'utility'
 require 'filesystem'
-
-local root = fs.current_path()
 
 local function output_path(path)
     if not path then
@@ -17,7 +15,7 @@ local function output_path(path)
     end
     path = fs.path(path)
     if not path:is_absolute() then
-        return fs.absolute(path, base)
+        return fs.absolute(path, root)
     end
     return fs.absolute(path)
 end
@@ -38,7 +36,7 @@ local function check_config(w2l, type, key)
     if effect == raw then
         return
     end
-    if fs.exists(root:parent_path() / 'data' / raw) then
+    if fs.exists(root / 'data' / raw) then
         w2l:failed(lang.script.CONFIG_DIR_VERSION_ERROR:format(type, key))
     else
         w2l:failed(lang.script.CONFIG_DIR_NO_EXISTS:format(type, key))
@@ -48,7 +46,7 @@ end
 local function normalize_path(w2l, path)
     path = fs.path(path)
     if not path:is_absolute() then
-        path = fs.absolute(path, base)
+        path = fs.absolute(path, root)
     end
     if path:filename():string() == '.w3x' then
         if check_lni_mark(io.load(path)) then

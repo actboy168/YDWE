@@ -1,6 +1,6 @@
 require 'filesystem'
 require 'utility'
-local root = fs.current_path()
+local root = require 'backend.base_path'
 local cache = {}
 local mt = {}
 setmetatable(mt, mt)
@@ -38,7 +38,7 @@ function mt:load_lng(filename)
         local config = require 'share.config'
         self:set_lang(config.global.lang)
     end
-    local buf = io.load(root / 'locale' / lang / (filename .. '.lng'))
+    local buf = io.load(root / 'script' / 'locale' / lang / (filename .. '.lng'))
     return buf
 end
 
@@ -83,7 +83,7 @@ function mt:set_lang(lang_)
     else
         lang = lang_
     end
-    if not fs.exists(root / 'locale' / lang) then
+    if not fs.exists(root / 'script' / 'locale' / lang) then
         if lang:sub(1, 2) == 'zh' then
             lang = 'zhCN'
         elseif lang:sub(1, 2) == 'en' then

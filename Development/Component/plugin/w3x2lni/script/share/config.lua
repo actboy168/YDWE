@@ -1,9 +1,9 @@
 require 'filesystem'
 local lni = require 'lni'
 local define = require 'share.config_define'
-local root = fs.current_path()
-local default_config = lni(io.load(root / 'share' / 'config.ini'), 'script\\share\\config.ini')
-local global_config  = lni(io.load(root:parent_path() / 'config.ini'), 'config.ini')
+local root = require 'backend.base_path'
+local default_config = lni(io.load(root / 'script' / 'share' / 'config.ini'), 'script\\share\\config.ini')
+local global_config  = lni(io.load(root / 'config.ini'), 'config.ini')
 local map_config = {}
 
 local config = {}
@@ -25,7 +25,7 @@ local function save()
         lines[#lines+1] = ''
     end
     local buf = table.concat(lines, '\r\n')
-    io.save(root:parent_path() / 'config.ini', buf)
+    io.save(root / 'config.ini', buf)
 end
 
 local function proxy(default, global, map, define, table)
