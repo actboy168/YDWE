@@ -3,7 +3,7 @@
 
 #define YDWE_VERSION_MAJOR 1
 #define YDWE_VERSION_MINOR 32
-#define YDWE_VERSION_REVISED 5
+#define YDWE_VERSION_REVISED 6
 #include <YDWEVersionBuild.h>
 
 #endif // YDWE_VERSION_H_INCLUDED
