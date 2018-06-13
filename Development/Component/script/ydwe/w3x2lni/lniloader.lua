@@ -57,6 +57,14 @@ local function tga_mpq(map)
     return path
 end
 
+local function load_plugin(w2l)
+    local plugin_loader = require 'w3x2lni.plugin'
+    plugin_loader(w2l, function (source, plugin)
+        w2l:add_plugin(source, plugin)
+    end)
+    w2l:call_plugin 'on_convert'
+end
+
 local function unify(name)
     return name:lower():gsub('/', '\\')
 end
@@ -78,6 +86,7 @@ local function dummy_map_ar(dir)
     end
     
     function ar:set(name, buf)
+        log.debug('output set', name)
         files[name] = buf
         output[name] = buf
     end
@@ -148,6 +157,9 @@ return function (mappath)
 
     w2l.input_ar = dummy_map
     w2l.output_ar = dummy_map
+
+    load_plugin(w2l)
+    
     w2l:frontend()
     w2l:backend()
     w2l:save()
