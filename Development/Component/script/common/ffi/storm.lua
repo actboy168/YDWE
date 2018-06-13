@@ -2,6 +2,7 @@ local ffi = require 'ffi'
 require 'ffi.loadlibrary'
 
 ffi.cdef[[
+    typedef bool (*__stdcall SFileCloseArchive)(uint32_t handle);
     typedef bool (*__stdcall SFileOpenArchive)(const char* szArchivename, unsigned long dwPriority, unsigned long dwFlags, uint32_t* handle);
     typedef bool (*__stdcall SFileLoadFile)(const char* filename, const void** pbuf, uint32_t* plen, uint32_t reservelen, void* overlapped_ptr);
     typedef bool (*__stdcall SFileUnloadFile)(const void* buf);
@@ -11,6 +12,8 @@ ffi.cdef[[
 
 local uni = require 'ffi.unicode'
 local storm = ffi.C.LoadLibraryA('storm.dll')
+
+local SFileCloseArchive = ffi.cast('SFileCloseArchive', ffi.C.GetProcAddress(storm, ffi.cast('const char*', 252)))
 local SFileOpenArchive = ffi.cast('SFileOpenArchive', ffi.C.GetProcAddress(storm, ffi.cast('const char*', 266)))
 local SFileLoadFile = ffi.cast('SFileLoadFile', ffi.C.GetProcAddress(storm, ffi.cast('const char*', 279)))
 local SFileUnloadFile = ffi.cast('SFileUnloadFile', ffi.C.GetProcAddress(storm, ffi.cast('const char*', 280)))
@@ -26,6 +29,10 @@ function storm.open(path, priority)
         return nil
     end
     return phandle[0]
+end
+
+function storm.close(handle)
+    return SFileCloseArchive(handle)
 end
 
 function storm.extract_file(path, name)
