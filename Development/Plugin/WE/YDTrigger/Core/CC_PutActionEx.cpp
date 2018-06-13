@@ -203,7 +203,16 @@ void _fastcall
 			break;
 		}
 	case CC_GUIID_YDWERegionMultiple:
+		CC_PutBegin();
+		PUT_CONST("// --------------------", 1);
+		PUT_CONST("// ", 0);
+		PUT_VAR(This, 0);
+		PUT_CONST("", 1);
+		CC_PutEnd();
 		CC_PutBlock_Action(This, OutClass, name, 0);
+		CC_PutBegin();
+		PUT_CONST("// --------------------", 1);
+		CC_PutEnd();
 		break;
 	case CC_GUIID_ReturnAction:
 		{
