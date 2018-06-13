@@ -2,6 +2,7 @@
 #include "locvar.h"
 
 BOOL g_bYDWEEnumUnitsInRangeMultipleFlag = FALSE;
+extern BOOL g_bDisableSaveLoadSystem;
 
 BOOL _fastcall  CC_PutAction_SearchVar(DWORD This, DWORD OutClass);
 void _fastcall  CC_PutActionEx(DWORD This, DWORD EDX, DWORD OutClass, char* name, DWORD Type, DWORD Endl);
@@ -241,6 +242,7 @@ void _fastcall
 		}
 	case CC_GUIID_YDWEExecuteTriggerMultiple:
 	{
+		g_bDisableSaveLoadSystem = FALSE;
 		CC_PutBegin();
 		PUT_CONST("set " YDL_TRIGGER " = ", 0);
 		PUT_VAR(This, 0);
