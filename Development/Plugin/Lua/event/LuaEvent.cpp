@@ -67,16 +67,27 @@ namespace NYDWE {
 		return result;
 	}
 
+	static size_t findBuildDir(const std::string& filename) {
+		size_t pos = filename.rfind(".w3xTemp");
+		if (pos == -1) {
+			pos = filename.rfind(".w3mTemp");
+			if (pos == -1) {
+				pos = filename.rfind(".w3nTemp");
+				if (pos == -1) {
+					return pos;
+				}
+			}
+		}
+		return pos;
+	}
+
 	uintptr_t pgTrueFopen;
 	FILE* __cdecl DetourWeFopen(const char* filename, const char* mode)
 	{
 		std::string sFilename(filename);
-		size_t pos = sFilename.rfind(".w3xTemp");
+		size_t pos = findBuildDir(sFilename);
 		if (pos == -1) {
-			pos = sFilename.rfind(".w3mTemp");
-			if (pos == -1) {
-				return base::c_call<FILE*>(pgTrueFopen, filename, mode);
-			}
+			return base::c_call<FILE*>(pgTrueFopen, filename, mode);
 		}
 		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
 		return base::c_call<FILE*>(pgTrueFopen, sFilename.c_str(), mode);
@@ -86,12 +97,9 @@ namespace NYDWE {
 	DWORD WINAPI DetourWeGetFileAttributesA(LPCSTR lpPathName)
 	{
 		std::string sFilename(lpPathName);
-		size_t pos = sFilename.rfind(".w3xTemp");
+		size_t pos = findBuildDir(sFilename);
 		if (pos == -1) {
-			pos = sFilename.rfind(".w3mTemp");
-			if (pos == -1) {
-				return base::std_call<DWORD>(pgTrueGetFileAttributesA, lpPathName);
-			}
+			return base::std_call<DWORD>(pgTrueGetFileAttributesA, lpPathName);
 		}
 		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
 		return base::std_call<DWORD>(pgTrueGetFileAttributesA, sFilename.c_str());
@@ -101,12 +109,9 @@ namespace NYDWE {
 	BOOL WINAPI DetourWeCreateDirectoryA(LPCSTR lpPathName, LPSECURITY_ATTRIBUTES lpSecurityAttributes)
 	{
 		std::string sFilename(lpPathName);
-		size_t pos = sFilename.rfind(".w3xTemp");
+		size_t pos = findBuildDir(sFilename);
 		if (pos == -1) {
-			pos = sFilename.rfind(".w3mTemp");
-			if (pos == -1) {
-				return base::std_call<BOOL>(pgTrueCreateDirectoryA, lpPathName, lpSecurityAttributes);
-			}
+			return base::std_call<BOOL>(pgTrueCreateDirectoryA, lpPathName, lpSecurityAttributes);
 		}
 		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
 		BOOL ok = base::std_call<BOOL>(pgTrueCreateDirectoryA, sFilename.c_str(), lpSecurityAttributes);
