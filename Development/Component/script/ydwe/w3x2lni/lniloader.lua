@@ -1,4 +1,5 @@
 local w3x2lni = require 'compiler.w3x2lni.init'
+local stormlib = require 'ffi.stormlib'
 local storm = require 'virtual_storm'
 local root = fs.ydwe_path()
 
@@ -33,6 +34,24 @@ local function scan_dir(dir, callback)
             end
         end
     end
+end
+
+local function tga_mpq(map)
+    local tgas = {}
+    for name in pairs(map) do
+        if name:sub(-4) == '.tga' then
+            tgas[#tgas+1] = name
+        end
+    end
+    local path = fs.path(os.tmpname()):parent_path() / 'tga.mpq'
+    fs.remove(path)
+    local mpq = stormlib.create(path, #tgas)
+    for _, name in ipairs(tgas) do
+        mpq:save_file(name, map:get(name))
+    end
+    mpq:close()
+    log.info('Create tga mpq at ' .. path:string())
+    return path
 end
 
 local function unify(name)
@@ -124,6 +143,9 @@ return function (mappath)
     w2l:backend()
     w2l:save()
     log.info('Converted to Obj map')
+
+    local mpq_path = tga_mpq(dummy_map)
+    storm.open(mpq_path, 16)
 
     virtual_mpq.map_has(function (filename)
         if dummy_map then

@@ -9,7 +9,7 @@ event.on('virtual_mpq: open map', function(mappath)
         return
     end
     ignore_once = mappath
-    log.info('OpenMap', mappath)
+    log.info('Open map', mappath)
     lniloader(mappath)
     wtgloader(mappath)
     event.emit('打开地图', mappath)
