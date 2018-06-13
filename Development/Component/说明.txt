@@ -15,6 +15,10 @@
     5.如果编辑器无法正常启动或出现BUG，请将logs\ydwe.log上传论坛（www.ydwe.net），以供我们研究；
     6.当地图保存时遇到问题，可以去论坛（www.ydwe.net）求助，或将地图发邮箱（actboy168@gmail.com）。
 
+YDWEv1.32.7测试版更新说明：
+
+[Chg]Lua引擎runtime库的version现在是ydwe版本的字符串
+
 YDWEv1.32.6测试版更新说明：
 
 [New]编译地图现在总是使用w3x2lni来打包地图
