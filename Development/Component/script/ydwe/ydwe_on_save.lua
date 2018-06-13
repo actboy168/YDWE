@@ -18,44 +18,59 @@ local function backup_map(map_path)
     fs.copy_file(map_path, target_path, true)
 end
 
+local function saveW3x(source_path, target_path, temp_path, save_version)
+    fs.remove(target_path)
+    local result = compiler:compile(temp_path, global_config, save_version)
+    log.debug("Compiler Result " .. tostring(result))
+    
+    local result
+    if target_path:filename():string() == '.w3x' then
+        result = map_packer('lni', temp_path, source_path:parent_path())
+        fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', target_path, true)
+    else
+        result = map_packer('pack', temp_path, target_path)
+        backup_map(target_path)
+    end
+    log.debug("Packer Result " .. tostring(result))
+    return result
+end
+
 function event.EVENT_NEW_SAVE_MAP(event_data)
 	log.debug("********************* on new save start *********************")
 
 	-- 刷新配置数据
 	global_config_reload()
 
-	local map_path = fs.path(event_data.map_path)
-	local temp_path = map_path:parent_path()
-	local target_path = temp_path:parent_path() / map_path:filename()
-	log.trace("Saving " .. target_path:string())
+    local target_path = fs.path(event_data.map_path)
+    local temp_path = target_path:parent_path()
+    local source_path = temp_path:parent_path() / target_path:filename()
+    
+    log.info("Saving " .. source_path:string())
+    local save_type = temp_path:extension():string():sub(2, 4)
+    local save_version = war3_version:is_new() and 24 or 20
+    log.info("Type:", save_type, "Version:", save_version)
 
 	-- 如果地图文件带有只读属性，则先询问是否去掉只读属性
 	-- 128 == 0200 S_IWUSR
-	if fs.exists(target_path) and 0 == (target_path:permissions() & 128) then		
-		if gui.yesno_message(nil, LNG.REMOVE_MAP_READONLY, target_path:string()) then
+	if fs.exists(source_path) and 0 == (source_path:permissions() & 128) then
+		if gui.yesno_message(nil, LNG.REMOVE_MAP_READONLY, source_path:string()) then
 			log.trace("Remove the read-only attribute.")
-			target_path:add_permissions(128)
+			source_path:add_permissions(128)
 		else
             log.trace("Don't remove the read-only attribute.")
             log.debug("********************* on new save end *********************")
             return -1
-		end
+        end
     end
-    fs.remove(map_path)
 
-    local result = compiler:compile(temp_path, global_config, war3_version:is_new() and 24 or 20)
-    log.debug("Compiler Result " .. tostring(result))
-    
-    local result
-    if map_path:filename():string() == '.w3x' then
-        result = map_packer('lni', temp_path, target_path:parent_path())
-        fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', map_path, true)
+    local result = false
+    if save_type == 'w3x' then
+        result = saveW3x(source_path, target_path, temp_path, save_version)
     else
-        result = map_packer('pack', temp_path, map_path)
-        backup_map(map_path)
+        log.error('Unsupport save to ' .. save_type)
+        gui.error_message(nil, LNG.UNSUPORTED_SAVE_TYPE, save_type)
     end
 
-	log.debug("Packer Result " .. tostring(result))
 	log.debug("********************* on new save end *********************")
 	if result then return 0 else return -1 end
 end
