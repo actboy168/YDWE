@@ -63,25 +63,19 @@ end
 local function version_build()
 	fs.remove(path.Development / 'Build' / 'include' / 'YDWEVersion.h')
 	fs.remove(path.Development / 'Build' / 'include' / 'YDWEVersionBuild.h')
-	if fs.exists(path.Build / 'include'/ 'version') then
-		fs.create_directories(path.Development / 'Build' / 'include')
-		local f = assert(io.open((path.Build / 'include'/ 'version'):string(), 'r'))
-		local build = f:read 'a'
-		f:close()
-		local build = tonumber(build) or 0
-		local f = assert(io.open((path.Development / 'Build' / 'include' / 'YDWEVersionBuild.h'):string(), 'w'))
-		f:write(([[
-	#ifndef YDWE_VERSION_BUILD_H_INCLUDED
-	#define YDWE_VERSION_BUILD_H_INCLUDED
+    fs.create_directories(path.Development / 'Build' / 'include')
+    local build = tonumber(os.date('%y%m%d')) or 0
+    local f = assert(io.open((path.Development / 'Build' / 'include' / 'YDWEVersionBuild.h'):string(), 'w'))
+    f:write(([[
+#ifndef YDWE_VERSION_BUILD_H_INCLUDED
+#define YDWE_VERSION_BUILD_H_INCLUDED
 
-	#define YDWE_VERSION_BUILD %d
+#define YDWE_VERSION_BUILD %d
 
-	#endif // YDWE_VERSION_BUILD_H_INCLUDED
-		]]):format(build))
-		f:close()
-		return build
-	end
-	return 0
+#endif // YDWE_VERSION_BUILD_H_INCLUDED
+    ]]):format(build))
+    f:close()
+    return build
 end
 
 local major, minor, revised = version()
