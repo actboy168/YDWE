@@ -241,11 +241,6 @@ namespace runtime	{
 
 		if (strcmp("version", name) == 0)
 		{
-			lua_pushinteger(L, version);
-			return 1;
-		}
-		else if (strcmp("ydwe", name) == 0)
-		{
 			lua_pushfstring(L, "%d.%d.%d.%d", YDWE_VERSION_MAJOR, YDWE_VERSION_MINOR, YDWE_VERSION_REVISED, YDWE_VERSION_BUILD);
 			return 1;
 		}
