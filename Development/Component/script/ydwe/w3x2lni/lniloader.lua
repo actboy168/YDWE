@@ -86,7 +86,6 @@ local function dummy_map_ar(dir)
     end
     
     function ar:set(name, buf)
-        log.debug('output set', name)
         files[name] = buf
         output[name] = buf
     end
