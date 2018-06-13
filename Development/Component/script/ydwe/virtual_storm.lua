@@ -11,6 +11,10 @@ function api.open(path, priority)
     return storm.open(path, priority)
 end
 
+function api.close(handle)
+    return storm.close(handle)
+end
+
 function api.extract_file(path, name)
     if dummy_map then
         local buf = dummy_map:get(unify(name))

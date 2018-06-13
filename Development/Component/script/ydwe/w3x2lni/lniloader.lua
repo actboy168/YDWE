@@ -43,7 +43,10 @@ local function tga_mpq(map)
             tgas[#tgas+1] = name
         end
     end
-    local path = fs.path(os.tmpname()):parent_path() / 'tga.mpq'
+    if #tgas == 0 then
+        return nil
+    end
+    local path = root / 'logs' / 'tga.mpq'
     fs.remove(path)
     local mpq = stormlib.create(path, #tgas)
     for _, name in ipairs(tgas) do
@@ -120,9 +123,15 @@ local function dummy_map_ar(dir)
 end
 
 local dummy_map
+local dummy_mpq
 return function (mappath)
     dummy_map = nil
     storm.set_dummy_map(nil)
+    if dummy_mpq then
+        log.info('Close tga mpq')
+        storm.close(dummy_mpq)
+        dummy_mpq = nil
+    end
     local path = fs.path(mappath)
     if not is_lni(path) then
         return
@@ -145,7 +154,10 @@ return function (mappath)
     log.info('Converted to Obj map')
 
     local mpq_path = tga_mpq(dummy_map)
-    storm.open(mpq_path, 16)
+    if mpq_path then
+        log.info('Open tga mpq')
+        dummy_mpq = storm.open(mpq_path, 16)
+    end
 
     virtual_mpq.map_has(function (filename)
         if dummy_map then
