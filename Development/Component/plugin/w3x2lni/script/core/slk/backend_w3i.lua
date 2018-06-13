@@ -34,9 +34,9 @@ function mt:get(key)
     return value
 end
 
-function mt:read_head(data)
+function mt:read_head(data, version)
     self:current(lang.w3i.MAP)
-    data.file_ver   = self:get(lang.w3i.FILE_VERSION)
+    data.file_ver   = version
     data.map_ver    = self:get(lang.w3i.MAP_VERSION)
     data.editor_ver = self:get(lang.w3i.WE_VERSION)
     data.map_name   = self:get(lang.w3i.MAP_NAME)
@@ -90,29 +90,32 @@ function mt:read_head(data)
     data.loading_screen_subtitle = self:get(lang.w3i.SUBTITLE)
 
     self:current(lang.w3i.PROLOGUE)
+    data.prologue_screen_id     = self:get(lang.w3i.ID)
     data.prologue_screen_path     = self:get(lang.w3i.PATH)
     data.prologue_screen_text     = self:get(lang.w3i.TEXT)
     data.prologue_screen_title    = self:get(lang.w3i.TITLE)
     data.prologue_screen_subtitle = self:get(lang.w3i.SUBTITLE)
 
-    self:current(lang.w3i.FOG)
-    data.terrain_fog = self:get(lang.w3i.TYPE)
-    data.fog_start_z = self:get(lang.w3i.START_Z)
-    data.fog_end_z   = self:get(lang.w3i.END_Z)
-    data.fog_density = self:get(lang.w3i.DENSITY)
-    data.fog_red     = self:get(lang.w3i.COLOR)[1]
-    data.fog_green   = self:get(lang.w3i.COLOR)[2]
-    data.fog_blue    = self:get(lang.w3i.COLOR)[3]
-    data.fog_alpha   = self:get(lang.w3i.COLOR)[4]
+    if version == 25 then
+        self:current(lang.w3i.FOG)
+        data.terrain_fog = self:get(lang.w3i.TYPE)
+        data.fog_start_z = self:get(lang.w3i.START_Z)
+        data.fog_end_z   = self:get(lang.w3i.END_Z)
+        data.fog_density = self:get(lang.w3i.DENSITY)
+        data.fog_red     = self:get(lang.w3i.COLOR)[1]
+        data.fog_green   = self:get(lang.w3i.COLOR)[2]
+        data.fog_blue    = self:get(lang.w3i.COLOR)[3]
+        data.fog_alpha   = self:get(lang.w3i.COLOR)[4]
 
-    self:current(lang.w3i.ENVIRONMENT)
-    data.weather_id        = self:get(lang.w3i.WEATHER)
-    data.sound_environment = self:get(lang.w3i.SOUND)
-    data.light_environment = self:get(lang.w3i.LIGHT)
-    data.water_red         = self:get(lang.w3i.WATER_COLOR)[1]
-    data.water_green       = self:get(lang.w3i.WATER_COLOR)[2]
-    data.water_blue        = self:get(lang.w3i.WATER_COLOR)[3]
-    data.water_alpha       = self:get(lang.w3i.WATER_COLOR)[4]
+        self:current(lang.w3i.ENVIRONMENT)
+        data.weather_id        = self:get(lang.w3i.WEATHER)
+        data.sound_environment = self:get(lang.w3i.SOUND)
+        data.light_environment = self:get(lang.w3i.LIGHT)
+        data.water_red         = self:get(lang.w3i.WATER_COLOR)[1]
+        data.water_green       = self:get(lang.w3i.WATER_COLOR)[2]
+        data.water_blue        = self:get(lang.w3i.WATER_COLOR)[3]
+        data.water_alpha       = self:get(lang.w3i.WATER_COLOR)[4]
+    end
 end
 
 function mt:read_player(data)
@@ -253,8 +256,8 @@ function mt:read_randomitem(data)
     data.random_item_count = #data.random_items
 end
 
-function mt:add_head(data)
-    self:add('lllzzzz', data.file_ver, data.map_ver, data.editor_ver, data.map_name, data.author, data.des, data.player_rec)
+function mt:add_head(data, version)
+    self:add('lllzzzz', version, data.map_ver, data.editor_ver, data.map_name, data.author, data.des, data.player_rec)
 
     self:add('ffffffff', data.camera_bound_1, data.camera_bound_2, data.camera_bound_3, data.camera_bound_4, data.camera_bound_5, data.camera_bound_6, data.camera_bound_7, data.camera_bound_8)
 
@@ -262,17 +265,23 @@ function mt:add_head(data)
 
     self:add('lllc1', data.map_width, data.map_height, data.map_flag, data.map_main_ground_type)
 
-    self:add('lzzzz', data.loading_screen_id, data.loading_screen_path, data.loading_screen_text, data.loading_screen_title, data.loading_screen_subtitle)
+    if version == 25 then
+        self:add('lzzzz', data.loading_screen_id, data.loading_screen_path, data.loading_screen_text, data.loading_screen_title, data.loading_screen_subtitle)
 
-    self:add('l', data.game_data_set)
+        self:add('l', data.game_data_set)
 
-    self:add('zzzz', data.prologue_screen_path, data.prologue_screen_text, data.prologue_screen_title, data.prologue_screen_subtitle)
+        self:add('zzzz', data.prologue_screen_path, data.prologue_screen_text, data.prologue_screen_title, data.prologue_screen_subtitle)
 
-    self:add('lfffBBBB', data.terrain_fog, data.fog_start_z, data.fog_end_z, data.fog_density, data.fog_red, data.fog_green, data.fog_blue, data.fog_alpha)
+        self:add('lfffBBBB', data.terrain_fog, data.fog_start_z, data.fog_end_z, data.fog_density, data.fog_red, data.fog_green, data.fog_blue, data.fog_alpha)
 
-    self:add('c4zc1', data.weather_id, data.sound_environment, data.light_environment)
+        self:add('c4zc1', data.weather_id, data.sound_environment, data.light_environment)
 
-    self:add('BBBB', data.water_red, data.water_green, data.water_blue, data.water_alpha)
+        self:add('BBBB', data.water_red, data.water_green, data.water_blue, data.water_alpha)
+    elseif version == 18 then
+        self:add('lzzz', data.loading_screen_id, data.loading_screen_text, data.loading_screen_title, data.loading_screen_subtitle)
+
+        self:add('lzzz', data.prologue_screen_id, data.prologue_screen_text, data.prologue_screen_title, data.prologue_screen_subtitle)
+    end
 end
 
 function mt:add_player(data)
@@ -380,22 +389,38 @@ return function (self, data, wts)
     tbl.wts  = wts
 
     local data = {}
-
-    tbl:read_head(data)
-    tbl:read_player(data)
-    tbl:read_force(data)
-    tbl:read_upgrade(data)
-    tbl:read_tech(data)
-    tbl:read_randomgroup(data)
-    tbl:read_randomitem(data)
-
-    tbl:add_head(data)
-    tbl:add_player(data)
-    tbl:add_force(data)
-    tbl:add_upgrade(data)
-    tbl:add_tech(data)
-    tbl:add_randomgroup(data)
-    tbl:add_randomitem(data)
+    local version = tbl.data[lang.w3i.MAP][lang.w3i.FILE_VERSION]
+    if version == 25 then
+        tbl:read_head(data, version)
+        tbl:read_player(data)
+        tbl:read_force(data)
+        tbl:read_upgrade(data)
+        tbl:read_tech(data)
+        tbl:read_randomgroup(data)
+        tbl:read_randomitem(data)
+    
+        tbl:add_head(data, version)
+        tbl:add_player(data)
+        tbl:add_force(data)
+        tbl:add_upgrade(data)
+        tbl:add_tech(data)
+        tbl:add_randomgroup(data)
+        tbl:add_randomitem(data)
+    elseif version == 18 then
+        tbl:read_head(data, version)
+        tbl:read_player(data)
+        tbl:read_force(data)
+        tbl:read_upgrade(data)
+        tbl:read_tech(data)
+        tbl:read_randomgroup(data)
+    
+        tbl:add_head(data, version)
+        tbl:add_player(data)
+        tbl:add_force(data)
+        tbl:add_upgrade(data)
+        tbl:add_tech(data)
+        tbl:add_randomgroup(data)
+    end
 
     return table_concat(tbl.hexs)
 end

@@ -1,6 +1,6 @@
 local lang = require 'share.lang'
 local config = require 'share.config'
-local root = require 'backend.base_path'
+local root = require 'backend.w2l_path'
 
 local function sortpairs(t)
     local sort = {}

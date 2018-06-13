@@ -50,6 +50,9 @@ end
 
 function mt:value(name)
     local value = self._title[name]
+    if not value then
+        return
+    end
     if type(value) == 'table' then
         local strs = format_table(value)
         if type(strs[1]) == 'string' and #strs > 6 then
@@ -114,6 +117,7 @@ function mt:add_head(data)
     self:value(lang.w3i.SUBTITLE)
 
     self:title(lang.w3i.PROLOGUE, data)
+    self:value(lang.w3i.ID)
     self:value(lang.w3i.PATH)
     self:value(lang.w3i.TEXT)
     self:value(lang.w3i.TITLE)

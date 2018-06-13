@@ -111,9 +111,9 @@ Referenced by '%s'[%s] which must be retained
 [REFERENCE_BY_JASS_NAME]
 Referenced by '%s'[%s] in JASS
 [REFERENCE_BY_CREEP_BUILDING]
-Referenced by crepp building '%s'[%s]
+Referenced by creep building '%s'[%s]
 [REFERENCE_BY_CREEP_UNIT]
-Referenced by crepp unit '%s'[%s]
+Referenced by creep unit '%s'[%s]
 [REFERENCE_BY_RANDOM_ITEM]
 Referenced by random item '%s'[%s]
 [REFERENCE_BY_MARKET_ITEM]

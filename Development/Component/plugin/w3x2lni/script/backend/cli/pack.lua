@@ -5,7 +5,7 @@ local lang = require 'share.lang'
 local builder = require 'map-builder'
 local core = require 'backend.sandbox_core'
 local w2l = core()
-local root = require 'backend.base_path'
+local root = require 'backend.w2l_path'
 
 local report = {}
 local messager_report = messager.report

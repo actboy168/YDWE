@@ -5,8 +5,8 @@ local lang = require 'share.lang'
 local get_report = require 'share.report'
 local check_lni_mark = require 'share.check_lni_mark'
 local unpack_setting = require 'backend.unpack_setting'
-local root = require 'backend.base_path'
 local w2l = core()
+local root = require 'backend.w2l_path'
 local setting
 local input_ar
 local output_ar

@@ -1,5 +1,5 @@
 require 'filesystem'
-local root = require 'backend.base_path'
+local root = require 'backend.w2l_path'
 
 local function string_proxy(key, concat)
     return setmetatable({}, {
@@ -145,7 +145,15 @@ local function is_valid_data(dir)
         return false
     end
     local data_version = require 'share.data_version'
-    if data_version ~= io.load(dir / 'version') then
+    local buf = io.load(dir / 'version')
+    if not buf then
+        return false, raw.DATA_VERSION_ERROR
+    end
+    local mpq_version = {}
+    for ver in buf:gmatch '%C+' do
+        mpq_version[#mpq_version+1] = ver
+    end
+    if data_version[1] ~= mpq_version[1] then
         return false, raw.DATA_VERSION_ERROR
     end
     return true

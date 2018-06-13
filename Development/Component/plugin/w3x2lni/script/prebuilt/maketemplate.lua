@@ -1,5 +1,5 @@
 local config = require 'share.config'
-local root = require 'backend.base_path'
+local root = require 'backend.w2l_path'
 
 return function (w2l, version, slk)
     local template_path = root / 'template' / version
