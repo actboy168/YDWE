@@ -113,8 +113,8 @@ type = nothing
 
 [IfThenElseMultiple]
 title = "If / Then / Else (多项功能)"
-description = "如果(所有的条件成立) 则运行 (Then - 动作) 否则运行 (Else - 动作)"
-comment = ""
+description = "If - Then - Else"
+comment = "如果(所有的条件成立) 则运行 (Then - 动作) 否则运行 (Else - 动作)"
 category = TC_LOGIC
 [[.args]]
 type = nothing
