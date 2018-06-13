@@ -280,6 +280,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 			if (filesystem::top_mpq == mpq_handle)
 			{
 				filesystem::top_mpq = 0;
+				filesystem::dispatch_event("close map", "");
 			}
 			else if (filesystem::war3x_mpq == mpq_handle)
 			{
