@@ -22,6 +22,11 @@ local function open_offical_site()
 	os.execute('explorer "http://www.ydwe.net"')
 end
 
+local function open_thanks()
+    local thanks = require 'gui_thanks'
+    thanks()
+end
+
 -- 初始化菜单
 -- event_data - 事件参数，table，包含以下值
 --	main_window_handle - 主窗口的handle
@@ -34,7 +39,7 @@ function event.EVENT_INIT_MENU(event_data)
 	menu:add(LNG.MENU_CONIFG, launch_config)
 	menu:add(LNG.MENU_LAUNCH_WAR3, launch_warcraft3)
 	menu:add(LNG.MENU_OPEN_OFFICIAL_SITE, open_offical_site)
-	menu:add(LNG.MENU_CREDITS, show_credit)
+	menu:add(LNG.MENU_CREDITS, open_thanks)
 
 	main_window_handle = event_data.main_window_handle
 
