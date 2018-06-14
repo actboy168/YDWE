@@ -67,20 +67,19 @@ end
 return function (mode)
     w2l.log_path = root / 'log'
     w2l:set_messager(messager)
+    if mode == 'slk' then
+        w2l.messager.title 'Slk'
+    elseif mode == 'obj' then
+        w2l.messager.title 'Obj'
+    elseif mode == 'lni' then
+        w2l.messager.title 'Lni'
+    end
     w2l.messager.text(lang.script.INIT)
     w2l.messager.progress(0)
 
     fs.remove(w2l.log_path / 'report.log')
 
     setting = unpack_setting(w2l, mode)
-
-    if setting.mode == 'slk' then
-        messager.title 'Slk'
-    elseif setting.mode == 'obj' then
-        messager.title 'Obj'
-    elseif setting.mode == 'lni' then
-        messager.title 'Lni'
-    end
 
     messager.text(lang.script.OPEN_MAP)
     local err

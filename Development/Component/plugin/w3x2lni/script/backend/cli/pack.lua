@@ -51,6 +51,7 @@ end
 return function()
     w2l.log_path = root / 'log'
     w2l:set_messager(messager)
+    w2l.messager.title 'Obj'
     w2l.messager.text(lang.script.INIT)
     w2l.messager.progress(0)
 
@@ -59,7 +60,6 @@ return function()
     local setting = unpack_setting(w2l, mode)
 
     setting.mode = 'pack'
-    messager.title 'Obj'
     messager.text(lang.script.OPEN_MAP)
     local err
     local input_ar, err = builder.load(setting.input)
