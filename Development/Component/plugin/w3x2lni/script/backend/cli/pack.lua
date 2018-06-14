@@ -96,7 +96,8 @@ return function()
     local output_rate = get_io_time(output_ar, file_count)
 
     local wts = w2l:frontend_wts(input_ar:get 'war3map.wts')
-    slk.w3i = w2l:frontend_w3i(input_ar:get 'war3map.w3i', wts)
+    local w3i = w2l:frontend_w3i(input_ar:get 'war3map.w3i', wts)
+    local w3f = w2l:frontend_w3f(input_ar:get 'war3campaign.w3f', wts)
     
     messager.text(lang.script.LOAD_FILE)
     w2l.progress:start(input_rate)
@@ -105,7 +106,7 @@ return function()
 
     messager.text(lang.script.SAVE_FILE)
     w2l.progress:start(1)
-    builder.save(w2l, slk.w3i, input_ar, output_ar)
+    builder.save(w2l, w3i, w3f, input_ar, output_ar)
     w2l.progress:finish()
     
     local clock = os.clock()

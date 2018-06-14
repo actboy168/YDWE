@@ -148,7 +148,7 @@ return function (mode)
 
     messager.text(lang.script.SAVE_FILE)
     w2l.progress:start(1)
-    builder.save(w2l, slk.w3i, input_ar, output_ar)
+    builder.save(w2l, slk.w3i, slk.w3f, input_ar, output_ar)
     w2l.progress:finish()
     
     local clock = os.clock()

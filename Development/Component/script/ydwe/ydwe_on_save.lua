@@ -47,6 +47,16 @@ local function saveW3m(source_path, target_path, temp_path, save_version)
     return result
 end
 
+local function saveW3n(source_path, target_path, temp_path, save_version)
+    fs.remove(target_path)
+    
+    local result
+    result = map_packer('pack', temp_path, target_path)
+    backup_map(target_path)
+    log.debug("Packer Result " .. tostring(result))
+    return result
+end
+
 function event.EVENT_NEW_SAVE_MAP(event_data)
 	log.debug("********************* on new save start *********************")
 
@@ -80,6 +90,8 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
         result = saveW3x(source_path, target_path, temp_path, save_version)
     elseif save_type == 'w3m' then
         result = saveW3m(source_path, target_path, temp_path, save_version)
+    elseif save_type == 'w3n' then
+        result = saveW3n(source_path, target_path, temp_path, save_version)
     else
         log.error('Unsupport save to ' .. save_type)
         gui.error_message(nil, LNG.UNSUPORTED_SAVE_TYPE, save_type)
