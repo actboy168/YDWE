@@ -1,5 +1,5 @@
 local get_report = require 'share.report'
-local unpack_setting = require 'backend.unpack_setting'
+local command = require 'backend.command'
 local messager = require 'share.messager'
 local lang = require 'share.lang'
 local builder = require 'map-builder'
@@ -42,76 +42,70 @@ local function exit(report)
     return err, warn
 end
 
-local function get_io_time(map, file_count)
-    local io_speed = map:get_type() == 'mpq' and 30000 or 10000
-    local io_rate = math.min(0.3, file_count / io_speed)
-    return io_rate
+local function absolute_path(path)
+    if not path then
+        return
+    end
+    path = fs.path(path)
+    if not path:is_absolute() then
+        return fs.absolute(path, base)
+    end
+    return fs.absolute(path)
+end
+
+local function load_file(input_ar, output_ar)
+    local list = input_ar:list_file()
+    local total = #list
+    local count = 0
+    local clock = os.clock()
+    for i, name in ipairs(list) do
+        local buf = input_ar:get(name)
+        output_ar:set(name, buf)
+        count = count + 1
+        if os.clock() - clock > 0.1 then
+            clock = os.clock()
+            w2l.messager.text(lang.script.LOAD_MAP_FILE:format(count, total))
+            w2l.progress(count / total)
+        end
+    end
 end
 
 return function()
-    w2l.log_path = root / 'log'
     w2l:set_messager(messager)
-    w2l.messager.title 'Obj'
-    w2l.messager.text(lang.script.INIT)
-    w2l.messager.progress(0)
+    messager.title 'Obj'
+    messager.text(lang.script.INIT)
+    messager.progress(0)
 
-    fs.remove(w2l.log_path / 'report.log')
+    local input = absolute_path(command[2])
+    local output = absolute_path(command[3])
 
-    local setting = unpack_setting(w2l, mode)
-
-    setting.mode = 'pack'
     messager.text(lang.script.OPEN_MAP)
-    local err
-    local input_ar, err = builder.load(setting.input)
+    local input_ar, err = builder.load(input)
     if not input_ar then
         w2l:failed(err)
     end
-    if input_ar:get_type() == 'mpq' and not input_ar:get '(listfile)' then
-        w2l:failed(lang.script.UNSUPPORTED_MAP)
-    end
     
-    w2l:set_setting(setting)
-    
-    w2l.input_ar = input_ar
-    local output = setting.output or default_output(setting.input)
-    setting.output = output
-
-    output_ar, err = builder.load(output, 'w')
+    local output = output or default_output(input)
+    local output_ar, err = builder.load(output, 'w')
     if not output_ar then
         w2l:failed(err)
     end
-    w2l.output_ar = output_ar
-
-    local plugin_loader = require 'backend.plugin'
-    plugin_loader(w2l, function (source, plugin)
-        w2l:add_plugin(source, plugin)
-    end)
-
-    messager.text(lang.script.CHECK_PLUGIN)
-    w2l:call_plugin 'on_convert'
-
-    local slk = {}
-    local file_count = input_ar:number_of_files()
-    local input_rate = get_io_time(input_ar, file_count)
-    local output_rate = get_io_time(output_ar, file_count)
 
     local wts = w2l:frontend_wts(input_ar:get 'war3map.wts')
     local w3i = w2l:frontend_w3i(input_ar:get 'war3map.w3i', wts)
     local w3f = w2l:frontend_w3f(input_ar:get 'war3campaign.w3f', wts)
     
     messager.text(lang.script.LOAD_FILE)
-    w2l.progress:start(input_rate)
-    w2l:save()
+    w2l.progress:start(0.6)
+    load_file(input_ar, output_ar)
     w2l.progress:finish()
 
     messager.text(lang.script.SAVE_FILE)
-    w2l.progress:start(1)
+    w2l.progress:start(1.0)
     builder.save(w2l, w3i, w3f, input_ar, output_ar)
     w2l.progress:finish()
     
     local clock = os.clock()
     messager.text(lang.script.FINISH:format(clock))
-    local err, warn = exit(report)
-    fs.create_directories(w2l.log_path)
-    io.save(w2l.log_path / 'report.log', get_report(w2l, report, setting, clock, err, warn))
+    exit(report)
 end
