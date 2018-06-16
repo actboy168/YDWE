@@ -46,9 +46,13 @@ end
 
 local trg
 local slk = initialize()
-trg = event.on('编译地图', function ()
+trg = event.on('编译地图', function (success)
     package.loaded['slk'] = nil
     trg:remove()
+    log.info('Flushed slk lib')
+    if not success then
+        return
+    end
     import_files = {}
     log.trace('Refresh object start', map_path)
     local report = slk:refresh()

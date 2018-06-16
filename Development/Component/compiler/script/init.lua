@@ -84,10 +84,11 @@ function compiler:compile(map_path, config, war3ver)
 
                 compile_t.output = compile_t.log / "4_template.j"
                 if not template:compile(compile_t) then
+                    ev.emit('编译地图', false)
                     collectgarbage 'collect'
                     return
                 end
-                ev.emit('编译地图')
+                ev.emit('编译地图', true)
                 collectgarbage 'collect'
             end
 
