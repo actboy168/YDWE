@@ -58,7 +58,7 @@ trg = event.on('编译地图', function (success)
     local report = slk:refresh()
     log.trace('Refresh object finish')
     if #report > 0 then
-        gui.message(nil, ('%s\n\n%s'):format('编辑器修改了物编数据', report))
+        gui.message(nil, report)
         for filename, buf in pairs(import_files) do
             local file_path = map_path / filename
             log.info('Import customdata', filename, type_map[filename], file_path)
