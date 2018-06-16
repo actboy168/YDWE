@@ -415,7 +415,7 @@ void _fastcall
 		PUT_CONST("loop", 1);
 		CC_PutBegin();
 		PUT_CONST("exitwhen ( ", 0);
-		PUT_VAR(This, 0);
+		CC_PutVar(This, 0, OutClass, name, 0, 2, 1);
 		PUT_CONST("()", 0);
 		PUT_CONST(" )", 1);
 		PUT_CONST("call TriggerSleepAction(RMaxBJ(bj_WAIT_FOR_COND_MIN_INTERVAL, ", 0);
