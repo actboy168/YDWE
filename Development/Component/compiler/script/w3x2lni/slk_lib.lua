@@ -26,78 +26,6 @@ local function copy_table(tbl)
     return new
 end
 
-local function try_value(t, key)
-    if not t then
-        return nil, nil
-    end
-    key = key:lower()
-    if key == 'code' then
-        return t._code, nil
-    end
-    if key == 'w2lobject' then
-        return nil, nil
-    end
-    local nkey, level = key:match '^(%a+)(%d*)'
-    if not nkey then
-        return nil, nil
-    end
-    if t[nkey..'_1'] then
-        local values = {}
-        local index = 0
-        while true do
-            index = index + 1
-            local k = nkey .. '_' .. index
-            local v = t[k]
-            if key == k or key == nkey .. ':' .. index then
-                return v, nil
-            end
-            if v then
-                values[index] = v
-            else
-                break
-            end
-        end
-        if key == nkey then
-            return table.concat(values, ','), nil
-        end
-    end
-
-    if t[nkey] then
-        local value = t[nkey]
-        if type(value) == 'table' then
-            if key == nkey then
-                return value, 1
-            else
-                return value, tonumber(level)
-            end
-        else
-            if key == nkey then
-                return value, nil
-            end
-        end
-    end
-
-    if t[key] == nil then
-        return nil, nil, '对象[%s]没有[%s]属性'
-    end
-    return t[key], nil
-end
-
-local function get_default(t)
-    local tp = type(t[1])
-    if tp == 'number' then
-        if math.type(t[1]) == 'integer' then
-            return 0
-        else
-            return 0.0
-        end
-    elseif tp == 'string' then
-        return ''
-    else
-        return nil
-    end
-end
-
 local function try_meta(key, meta1, meta2)
     key = key:lower()
     if key == 'w2lobject' then
@@ -149,6 +77,78 @@ local function try_meta(key, meta1, meta2)
         return nil, nil, nil
     end
     return get_meta(key), nil, nil
+end
+
+local function try_value(t, key, meta1, meta2)
+    if not t then
+        return nil, nil
+    end
+    key = key:lower()
+    if key == 'code' then
+        return t._code, nil
+    end
+    if key == 'w2lobject' then
+        return nil, nil
+    end
+    local nkey, level = key:match '^(%a+)(%d*)'
+    if not nkey then
+        return nil, nil
+    end
+    if t[nkey..'_1'] then
+        local values = {}
+        local index = 0
+        while true do
+            index = index + 1
+            local k = nkey .. '_' .. index
+            local v = t[k]
+            if key == k or key == nkey .. ':' .. index then
+                return v, nil
+            end
+            if v then
+                values[index] = v
+            else
+                break
+            end
+        end
+        if key == nkey then
+            return table.concat(values, ','), nil
+        end
+    end
+
+    if t[nkey] then
+        local value = t[nkey]
+        if type(value) == 'table' then
+            if key == nkey then
+                return value, 1
+            else
+                return value, tonumber(level)
+            end
+        else
+            if key == nkey then
+                return value, nil
+            end
+        end
+    end
+
+    if t[key] == nil and not try_meta(key, meta1, meta2) then
+        return nil, nil, '对象[%s]没有[%s]属性'
+    end
+    return t[key], nil
+end
+
+local function get_default(t)
+    local tp = type(t[1])
+    if tp == 'number' then
+        if math.type(t[1]) == 'integer' then
+            return 0
+        else
+            return 0.0
+        end
+    elseif tp == 'string' then
+        return ''
+    else
+        return nil
+    end
 end
 
 local function to_type(value, tp)
@@ -273,7 +273,12 @@ function mt:create_object(objt, ttype, name)
     end
     local mt = {}
     function mt:__index(key)
-        local value, level, err = try_value(objt, key)
+        if not objt then
+            return ''
+        end
+        local parent = objt._parent
+        local objd = session.default[ttype][parent]
+        local value, level, err = try_value(objt, key, session.metadata[ttype], objd and objd._code and session.metadata[objd._code])
         local null
         if session.safe_mode then
             null = ''
