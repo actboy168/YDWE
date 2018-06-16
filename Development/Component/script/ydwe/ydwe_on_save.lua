@@ -68,7 +68,7 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
     local source_path = temp_path:parent_path() / target_path:filename()
     
     log.info("Saving " .. source_path:string())
-    local save_type = temp_path:filename():string():sub(2, 4)
+    local save_type = temp_path:filename():string():sub(-7, -5)
     local save_version = war3_version:is_new() and 24 or 20
     log.info("Type:", save_type, "Version:", save_version)
 
