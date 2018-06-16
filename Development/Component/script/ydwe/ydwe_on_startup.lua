@@ -206,9 +206,11 @@ function event.EVENT_WE_START(event_data)
 	log.debug("ydwe version " .. tostring(ydwe_version))
 	log.debug("war3 version " .. tostring(war3_version))
 
-	local gitlog = require 'gitlog'
-	log.debug("commit: " .. gitlog.commit)
-	log.debug("data: " .. gitlog.date)
+	local suc, gitlog = pcall(require, 'gitlog')
+	if suc then
+		log.debug("commit: " .. gitlog.commit)
+		log.debug("data: " .. gitlog.date)
+	end
 	
 	-- 刷新配置数据	
 	global_config_reload()
