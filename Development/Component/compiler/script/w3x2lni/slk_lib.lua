@@ -602,9 +602,12 @@ function mt:create_report()
                 lines[#lines+1] = ''
             end
             lines[#lines+1] = type
+            local buf = {'Slk lib RW error'}
             for _, err in ipairs(errors[type]) do
                 lines[#lines+1] = err
+                buf[#buf+1] = '+ ' .. err
             end
+            log.error(table.concat(buf, '\n'))
         end
     end
 	if #lold > 0 then
