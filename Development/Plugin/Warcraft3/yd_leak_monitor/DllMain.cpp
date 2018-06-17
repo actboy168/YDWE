@@ -266,10 +266,18 @@ void create_report(std::fstream& fs)
 	ht.update_pos(monitor::handle_manager<commonj::force>::instance());
 
 
+
 	fs << "---------------------------------------" << std::endl;
 	fs << "            泄漏检测详细报告           " << std::endl;
 	fs << "---------------------------------------" << std::endl;
-	fs << "总数:" << ht.size() << std::endl;
+	fs << "点（location）: "       << monitor::handle_manager<commonj::location>::instance().size() << std::endl;
+	fs << "特效（effect）: "       << monitor::handle_manager<commonj::effect>::instance().size() << std::endl;
+	fs << "单位组（group）: "      << monitor::handle_manager<commonj::group>::instance().size() << std::endl;
+	fs << "不规则区域（region）: " << monitor::handle_manager<commonj::region>::instance().size() << std::endl;
+	fs << "矩形区域（rect）: "     << monitor::handle_manager<commonj::rect>::instance().size() << std::endl;
+	fs << "玩家组（force）: "      << monitor::handle_manager<commonj::force>::instance().size() << std::endl;
+	fs << "---------------------------------------" << std::endl;
+	fs << "当前handle总数:" << ht.size() << std::endl;
 	fs << "---------------------------------------" << std::endl;
 
 	for (auto it = ht.begin(); it != ht.end(); ++it)
