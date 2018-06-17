@@ -65,16 +65,6 @@ local function single_test(commandline, mappath)
 	return '"' .. (fs.ydwe_path() / 'ydwe.exe'):string() .. '" -war3 -loadfile "' .. mappath:string() .. '"' .. commandline
 end
 
-local function path_sub(a, b)
-	local i = a
-	local r = fs.path('')
-	while i ~= '' and i ~= b do
-		r = i:filename() / r
-		i = i:parent_path()
-	end
-	return r
-end
-
 local function host_copy_dll(curdir)
 	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'vcruntime140.dll', curdir / 'vcruntime140.dll', true)
 	pcall(fs.copy_file, fs.ydwe_path() / 'bin' / 'msvcp140.dll', curdir / 'msvcp140.dll', true)
@@ -84,9 +74,9 @@ local function host_save_config(curdir, mappath, autostart)
 	local ver = global_config_war3_version()
 	local jasspath
 	if ver:is_new() then
-		jasspath = fs.ydwe_path() / "share" / "jass" / "ht"
+		jasspath = fs.ydwe_path() / "compiler" / "jass" / "24"
 	else
-		jasspath = fs.ydwe_path() / "share" / "jass" / "rb"
+		jasspath = fs.ydwe_path() / "compiler" / "jass" / "20"
 	end
 	local of = io.open(curdir / 'map.cfg', 'wb')
 	local ok, e = pcall(mapdump, mappath, jasspath,
@@ -102,7 +92,7 @@ local function host_save_config(curdir, mappath, autostart)
 		lan_war3version = ver.minor,
 		bot_defaultgamename = mappath:filename():string(),
 		bot_autostart = autostart,
-		bot_mappath = path_sub(mappath, fs.war3_path()):string(),
+		bot_mappath = fs.relative(mappath, fs.war3_path()):string(),
 		bot_mapcfgpath = 'map.cfg',
 	}
 	local str = ''
