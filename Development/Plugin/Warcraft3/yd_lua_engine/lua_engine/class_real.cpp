@@ -2,11 +2,33 @@
 #include "jassbind.h"
 #include <base/util/format.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace base { namespace warcraft3 { namespace lua_engine { namespace jreal {
 
 #define LUA_JASS_REAL "jreal_t"
 
-	jass::jreal_t* jreal_create(lua_State* L)
+	static bool is_precise(lua_State* L, int index1, int index2)
+	{
+		return ((lua_type(L, index1) == LUA_TUSERDATA) && (lua_type(L, index2) == LUA_TUSERDATA));
+	}
+
+	template <class T>
+	T read(lua_State* L, int index)
+	{
+		int type = lua_type(L, index);
+		switch (type)
+		{
+		case LUA_TNUMBER:
+			return (T)lua_tonumber(L, index);
+		case LUA_TUSERDATA:
+			return (T)jass::from_real(*(jass::jreal_t*)luaL_checkudata(L, index, LUA_JASS_REAL));
+		default:
+			luaL_error(L, "argument %d error type %s", index, lua_typename(L, type));
+			break;
+		}
+		return 0;
+	}
+
+	static jass::jreal_t* create(lua_State* L)
 	{
 		jass::jreal_t* p = (jass::jreal_t*)lua_newuserdata(L, sizeof(jass::jreal_t));
 		*p = 0;
@@ -15,228 +37,175 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		return p;
 	}
 
-	bool jreal_precise(lua_State* L, int index1)
+	void push_precise(lua_State* L, jass::jreal_t f)
 	{
-		return (lua_type(L, index1) == LUA_TUSERDATA);
-	}
-
-	bool jreal_precise(lua_State* L, int index1, int index2)
-	{
-		return ((lua_type(L, index1) == LUA_TUSERDATA) && (lua_type(L, index2) == LUA_TUSERDATA));
-	}
-
-	template <class T>
-	T jreal_read(lua_State* L, int index) 
-	{
-		int type = lua_type(L, index);
-		T f = 0;
-
-		switch(type)
-		{
-		case LUA_TNUMBER: 
-			{
-				f = (T)lua_tonumber(L, index);
-				break;						 
-			}
-		case LUA_TUSERDATA:
-			{
-				jass::jreal_t tmp = *(jass::jreal_t*)luaL_checkudata(L, index, LUA_JASS_REAL);
-				f = (T)jass::from_real(tmp);
-				break;								 
-			}
-		default:
-			luaL_error(L, "argument %d error type %s", index, lua_typename(L, type));
-			break;	
-		}
-		return f;
-	}
-
-	void jreal_push(lua_State* L, float f)
-	{
-		jass::jreal_t* p = jreal_create(L);
-		*p = jass::to_real(f);
-	}
-
-	void jreal_push(lua_State* L, jass::jreal_t f)
-	{
-		jass::jreal_t* p = jreal_create(L);
+		jass::jreal_t* p = create(L);
 		*p = f;
 	}
 
-	int jreal_add(lua_State* L)
-	{
-		if (jreal_precise(L, 1, 2))
-		{
-			jreal_push(L, jreal_read<float>(L, 1) + jreal_read<float>(L, 2));
-		}
-		else
-		{
-			lua_pushnumber(L, jreal_read<lua_Number>(L, 1) + jreal_read<lua_Number>(L, 2));
-		}
-
-		return 1;
-	}
-
-	int jreal_sub(lua_State* L)
-	{
-		if (jreal_precise(L, 1, 2))
-		{
-			jreal_push(L, jreal_read<float>(L, 1) - jreal_read<float>(L, 2));
-		}
-		else
-		{
-			lua_pushnumber(L, jreal_read<lua_Number>(L, 1) - jreal_read<lua_Number>(L, 2));
-		}
-
-		return 1;
-	}
-
-	int jreal_mul(lua_State* L)
-	{
-		if (jreal_precise(L, 1, 2))
-		{
-			jreal_push(L, jreal_read<float>(L, 1) * jreal_read<float>(L, 2));
-		}
-		else
-		{
-			lua_pushnumber(L, jreal_read<lua_Number>(L, 1) * jreal_read<lua_Number>(L, 2));
-		}
-
-		return 1;
-	}
-
-	int jreal_div(lua_State* L)
-	{
-		if (jreal_precise(L, 1, 2))
-		{
-			jreal_push(L, jreal_read<float>(L, 1) / jreal_read<float>(L, 2));
-		}
-		else
-		{
-			lua_pushnumber(L, jreal_read<lua_Number>(L, 1) / jreal_read<lua_Number>(L, 2));
-		}
-		return 1;
-	}
 	template <class T>
-	T jreal_math_mod(lua_State* L, int index_a, int index_b)
+	void push(lua_State* L, T f);
+
+	template <>
+	void push<float>(lua_State* L, float f)
 	{
-		T a = jreal_read<T>(L, index_a);
-		T b = jreal_read<T>(L, index_b);
-		return a - floor(a/b)*b;
+		jass::jreal_t* p = create(L);
+		*p = jass::to_real(f);
 	}
 
-	int jreal_mod(lua_State* L)
+	template <>
+	void push<lua_Number>(lua_State* L, lua_Number f)
 	{
-		if (jreal_precise(L, 1, 2))
+		lua_pushnumber(L, f);
+	}
+
+	static int mt_add(lua_State* L)
+	{
+		if (is_precise(L, 1, 2))
 		{
-			jreal_push(L, jreal_math_mod<float>(L, 1, 2));
+			push(L, read<float>(L, 1) + read<float>(L, 2));
 		}
 		else
 		{
-			lua_pushnumber(L, jreal_math_mod<lua_Number>(L, 1, 2));
+			push(L, read<lua_Number>(L, 1) + read<lua_Number>(L, 2));
 		}
 		return 1;
 	}
 
-	int jreal_unm(lua_State* L)
+	static int mt_sub(lua_State* L)
 	{
-		if (jreal_precise(L, 1))
+		if (is_precise(L, 1, 2))
 		{
-			jreal_push(L, -jreal_read<float>(L, 1));
+			push(L, read<float>(L, 1) - read<float>(L, 2));
 		}
 		else
 		{
-			lua_pushnumber(L, -jreal_read<lua_Number>(L, 1));
+			push(L, read<lua_Number>(L, 1) - read<lua_Number>(L, 2));
 		}
 		return 1;
 	}
 
-	int jreal_pow(lua_State* L)
+	static int mt_mul(lua_State* L)
 	{
-		if (jreal_precise(L, 1, 2))
+		if (is_precise(L, 1, 2))
 		{
-			jreal_push(L, pow(jreal_read<float>(L, 1), jreal_read<float>(L, 2)));
+			push(L, read<float>(L, 1) * read<float>(L, 2));
 		}
 		else
 		{
-			lua_pushnumber(L, pow(jreal_read<lua_Number>(L, 1), jreal_read<lua_Number>(L, 2)));
+			push(L, read<lua_Number>(L, 1) * read<lua_Number>(L, 2));
 		}
 		return 1;
 	}
 
-	int jreal_eq(lua_State* L)
+	static int mt_div(lua_State* L)
 	{
-		if (jreal_precise(L, 1, 2))
+		if (is_precise(L, 1, 2))
 		{
-			lua_pushboolean(L, jreal_read<float>(L, 1) == jreal_read<float>(L, 2));
+			push(L, read<float>(L, 1) / read<float>(L, 2));
 		}
 		else
 		{
-			lua_pushboolean(L, jreal_read<lua_Number>(L, 1) == jreal_read<lua_Number>(L, 2));
+			push(L, read<lua_Number>(L, 1) / read<lua_Number>(L, 2));
 		}
 		return 1;
 	}
 
-	int jreal_lt(lua_State* L)
+	template <class T>
+	static int template_mod(lua_State* L)
 	{
-		if (jreal_precise(L, 1, 2))
+		T a = read<T>(L, 1);
+		T b = read<T>(L, 2);
+		push<T>(L, a - floor(a / b) * b);
+		return 1;
+	}
+
+	static int mt_mod(lua_State* L)
+	{
+		if (is_precise(L, 1, 2))
+			return template_mod<float>(L);
+		else
+			return template_mod<lua_Number>(L);
+	}
+
+	static int mt_pow(lua_State* L)
+	{
+		if (is_precise(L, 1, 2))
 		{
-			lua_pushboolean(L, jreal_read<float>(L, 1) < jreal_read<float>(L, 2));
+			push(L, pow(read<float>(L, 1), read<float>(L, 2)));
 		}
 		else
 		{
-			lua_pushboolean(L, jreal_read<lua_Number>(L, 1) < jreal_read<lua_Number>(L, 2));
+			push(L, pow(read<lua_Number>(L, 1), read<lua_Number>(L, 2)));
 		}
 		return 1;
 	}
 
-	int jreal_le(lua_State* L)
+	static int mt_eq(lua_State* L)
 	{
-		if (jreal_precise(L, 1, 2))
+		if (is_precise(L, 1, 2))
 		{
-			lua_pushboolean(L, jreal_read<float>(L, 1) <= jreal_read<float>(L, 2));
+			lua_pushboolean(L, read<float>(L, 1) == read<float>(L, 2));
 		}
 		else
 		{
-			lua_pushboolean(L, jreal_read<lua_Number>(L, 1) <= jreal_read<lua_Number>(L, 2));
+			lua_pushboolean(L, read<lua_Number>(L, 1) == read<lua_Number>(L, 2));
 		}
 		return 1;
 	}
 
-	int jreal_len(lua_State *L) 
+	static int mt_lt(lua_State* L)
 	{
-		if (jreal_precise(L, 1))
+		if (is_precise(L, 1, 2))
 		{
-			lua_pushnumber(L, jreal_read<float>(L, 1));
+			lua_pushboolean(L, read<float>(L, 1) < read<float>(L, 2));
 		}
 		else
 		{
-			lua_pushvalue(L, 1);
+			lua_pushboolean(L, read<lua_Number>(L, 1) < read<lua_Number>(L, 2));
 		}
 		return 1;
 	}
 
-	int jreal_tostring(lua_State* L)
-	{		
-		lua_pushstring(L, format("%f", jreal_read<float>(L, 1)).c_str());
+	static int mt_le(lua_State* L)
+	{
+		if (is_precise(L, 1, 2))
+		{
+			lua_pushboolean(L, read<float>(L, 1) <= read<float>(L, 2));
+		}
+		else
+		{
+			lua_pushboolean(L, read<lua_Number>(L, 1) <= read<lua_Number>(L, 2));
+		}
 		return 1;
 	}
 
-	void jreal_make_mt(lua_State* L)
-	{	
+	static int mt_unm(lua_State* L)
+	{
+		push(L, -read<float>(L, 1));
+		return 1;
+	}
+
+	static int mt_tostring(lua_State* L)
+	{
+		lua_pushfstring(L, "%f", read<float>(L, 1));
+		return 1;
+	}
+
+	void init(lua_State* L)
+	{
 		luaL_Reg lib[] = {
-			{ "__add",      jreal_add      },
-			{ "__sub",      jreal_sub      },
-			{ "__mul",      jreal_mul      },
-			{ "__div",      jreal_div      },
-			{ "__mod",      jreal_mod      },
-			{ "__unm",      jreal_unm      },
-			{ "__pow",      jreal_pow      },
-			{ "__eq",       jreal_eq       },
-			{ "__lt",       jreal_lt       },
-			{ "__le",       jreal_le       },
-			{ "__len",      jreal_len      },
-			{ "__tostring", jreal_tostring },
+			{ "__add",      mt_add },
+			{ "__sub",      mt_sub },
+			{ "__mul",      mt_mul },
+			{ "__div",      mt_div },
+			{ "__mod",      mt_mod },
+			{ "__unm",      mt_unm },
+			{ "__pow",      mt_pow },
+			{ "__eq",       mt_eq },
+			{ "__lt",       mt_lt },
+			{ "__le",       mt_le },
+			{ "__tostring", mt_tostring },
 			{ NULL, NULL },
 		};
 
@@ -246,4 +215,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		luaL_setfuncs(L, lib, 0);
 		lua_pop(L, 1);
 	}
-}}}
+}}}}

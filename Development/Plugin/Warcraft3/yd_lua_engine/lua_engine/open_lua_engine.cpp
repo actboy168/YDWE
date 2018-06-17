@@ -68,7 +68,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		register_preload_lib(L, "jass.ai",      ai::open);
 		register_preload_lib(L, "jass.selector", selector::open);
 		
-		jreal_make_mt(L);
+		jreal::init(L);
 		jhandle_ud_make_mt(L);
 		jhandle_lud_make_mt(L);
 		jarray_make_mt(L);

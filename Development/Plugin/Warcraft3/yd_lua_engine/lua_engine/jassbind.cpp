@@ -81,7 +81,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		jass::jreal_t    read_real(lua_State* L, int index)
 		{
 			if (lua_isnil(L, index)) return 0;
-			return jass::to_real(jreal_read<float>(L, index));
+			return jass::to_real(jreal::read<float>(L, index));
 		}
 
 		void             push_real(lua_State* L, jass::jreal_t value)
@@ -91,7 +91,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 		void             push_real_precise(lua_State* L, jass::jreal_t value)
 		{
-			jreal_push(L, value);
+			jreal::push_precise(L, value);
 		}
 	}
 }}}
