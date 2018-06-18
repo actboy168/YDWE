@@ -180,6 +180,7 @@ struct handle_info_t
 	uint32_t object;
 	uint32_t reference;
 	uint32_t pos;
+	const char* type;
 	std::vector<std::string> gv_reference;
 
 	handle_info_t()
@@ -187,6 +188,7 @@ struct handle_info_t
 		, object(0)
 		, reference(0)
 		, pos(0)
+		, type(0)
 		, gv_reference()
 	{ }
 };
@@ -215,13 +217,14 @@ public:
 		it->second.gv_reference.push_back(name);
 	}
 
-	void update_pos(std::map<uintptr_t, uintptr_t> m)
+	void update_pos(const char* type, std::map<uintptr_t, uintptr_t> m)
 	{
 		for (auto it = m.begin(); it != m.end(); ++it)
 		{
 			auto h = find(it->first);
 			if (h != end()) 
 			{
+				h->second.type = type;
 				h->second.pos = it->second;
 			}
 		}
@@ -258,14 +261,12 @@ void create_report(std::fstream& fs)
 		}
 	}
 
-	ht.update_pos(monitor::handle_manager<commonj::location>::instance());
-	ht.update_pos(monitor::handle_manager<commonj::effect>::instance());
-	ht.update_pos(monitor::handle_manager<commonj::group>::instance());
-	ht.update_pos(monitor::handle_manager<commonj::region>::instance());
-	ht.update_pos(monitor::handle_manager<commonj::rect>::instance());
-	ht.update_pos(monitor::handle_manager<commonj::force>::instance());
-
-
+	ht.update_pos(commonj::location, monitor::handle_manager<commonj::location>::instance());
+	ht.update_pos(commonj::effect,   monitor::handle_manager<commonj::effect>::instance());
+	ht.update_pos(commonj::group,    monitor::handle_manager<commonj::group>::instance());
+	ht.update_pos(commonj::region,   monitor::handle_manager<commonj::region>::instance());
+	ht.update_pos(commonj::rect,     monitor::handle_manager<commonj::rect>::instance());
+	ht.update_pos(commonj::force,    monitor::handle_manager<commonj::force>::instance());
 
 	fs << "---------------------------------------" << std::endl;
 	fs << "            泄漏检测详细报告           " << std::endl;
@@ -289,7 +290,11 @@ void create_report(std::fstream& fs)
 		if (h.object)
 		{
 			uint32_t type = get_object_type(h.object);
-			fs << base::format("  类型: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
+			fs << base::format("  对象: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
+		}
+		if (h.type)
+		{
+			fs << base::format("  类型: %s", h.type) << std::endl;
 		}
 		if (h.pos)
 		{
