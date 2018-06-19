@@ -29,7 +29,7 @@ local function build_imp(w2l, output_ar, imp_buf)
     if imp_buf then
         local imp_lni = w2l:parse_lni(imp_buf, filename)
         for _, name in ipairs(imp_lni.import) do
-            if impignore[lname:lower()] then
+            if impignore[name:lower()] then
                 imp[#imp+1] = name
             end
         end
