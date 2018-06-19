@@ -491,6 +491,7 @@ function mt:create_object(objt, ttype, name)
         if objt then
             objt.w2lobject = nil
         end
+        return self
     end
     return setmetatable(o, mt)
 end
