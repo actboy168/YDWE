@@ -111,12 +111,11 @@ function image:create(name, url, path)
         control:setfont(gui.Font.create(fontName, 20, "normal", "normal"))
     end
 
-    function control:onmousedown()
-        os.execute('explorer "' .. url .. '"')
-    end
+    --function control:onmousedown()
+    --    os.execute('explorer "' .. url .. '"')
+    --end
     return control
 end
-
 
 return function ()
     guiThanksMain(function(content)
