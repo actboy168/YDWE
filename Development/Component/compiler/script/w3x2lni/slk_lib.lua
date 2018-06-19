@@ -437,6 +437,9 @@ function mt:create_object(objt, ttype, name)
         return self
     end
     local o = {}
+    function o:get_id()
+        return name
+    end
     if session.read_only then
         return setmetatable(o, mt)
     end
@@ -484,8 +487,10 @@ function mt:create_object(objt, ttype, name)
         end
         return session:create_object(new_obj, ttype, id)
     end
-    function o:get_id()
-        return name
+    function o:permanent()
+        if objt then
+            objt.w2lobject = nil
+        end
     end
     return setmetatable(o, mt)
 end
