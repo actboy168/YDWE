@@ -26,7 +26,7 @@ local function load_trigger(trg, id, filename)
         wct = 0,
     }
     local name = trg[2] or trg[1]
-    trigger.name = name
+    trigger.name = trg[1]
     for i = 3, #trg do
         local line = trg[i]
         local k, v = line[1], line[2]
