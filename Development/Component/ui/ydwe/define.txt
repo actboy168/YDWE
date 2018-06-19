@@ -13,7 +13,6 @@ TC_LAST=WESTRING_TRIGCAT_LAST,ReplaceableTextures\WorldEditUI\Actions-SetVariabl
 TC_YDST=[系统],ReplaceableTextures\CommandButtons\BTNMetamorphosis.blp
 TC_YDLD=[存储],ReplaceableTextures\CommandButtons\BTNLoad.blp
 TC_YDLC=[变量],ReplaceableTextures\WorldEditUI\Editor-ScriptVariable.blp
-TC_YDAI=[AI],ReplaceableTextures\CommandButtons\BTNHeroTinker.blp
 TC_YDET=[事件],UI\Widgets\ToolTips\Human\ToolTipStonesIcon.blp
 TC_YDBF=[逆天],ReplaceableTextures\CommandButtons\BTNInfernal.blp
 TC_YDSL=[存档],ReplaceableTextures\CommandButtons\BTNTome.blp

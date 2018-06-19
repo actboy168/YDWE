@@ -732,7 +732,7 @@ default = "300"
 title = "佣兵系统<Red_Wolf制作>"
 description = "命令 ${单位} 跟随 ${单位}，刷新周期 ${timeout}，巡逻半径 ${guardRanger}，返回半径 ${returnRanger}，传送半径 ${outRanger}，巡逻概率 ${percent}%"
 comment = "让一个佣兵跟随主人，可以在主人身边巡逻，当远离主人后自动返回或传送到主人身边。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unit
 [[.args]]
@@ -763,7 +763,7 @@ max = 100
 title = "取消佣兵<Red_Wolf制作>"
 description = "取消 ${单位} 的跟随"
 comment = "让一个佣兵不再跟随主人。备注：如果佣兵是召唤生物那么不必取消，因为当佣兵或主人死亡后，系统会自动取消跟随。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unit
 
@@ -771,7 +771,7 @@ type = unit
 title = "AI-技能绑定英雄<GreedWind制作>"
 description = "给单位 ${英雄} 绑定技能 ${技能1} ${技能2} ${技能3} ${技能4} ${技能5}"
 comment = "为单位绑定5个技能，如果英雄只有4个技能，那么第5个技能请设置为空。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unitcode
 default = "Hamg"
@@ -790,7 +790,7 @@ type = abilcode
 title = "AI-技能学习顺序绑定英雄<GreedWind制作>"
 description = "给单位 ${英雄} 设置技能学习顺序为( ${技能1} ${技能2} ${技能3} ${技能4} ${技能5} )"
 comment = "单位会按输入的等级去学习对应的技能，切记技能学习顺序要按^等级^等级...^等级^的格式输入。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unitcode
 default = "Hamg"
@@ -814,7 +814,7 @@ default = "null"
 title = "AI-自动学习对应技能<GreedWind制作>"
 description = "让英雄 ${英雄} 自动学习技能，所学技能对应的英雄等级为 ${整数}"
 comment = "英雄会学习与等级对应的技能，这些技能必须在之前绑定给英雄。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -827,7 +827,7 @@ min = 1
 title = "AI-自动学习全部技能<GreedWind制作>"
 description = "让英雄 ${英雄} 自动学习所有技能。"
 comment = "英雄会洗去之前学习过的技能，并根据技能表顺序学习完所有技能。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -836,7 +836,7 @@ default = "GetTriggerUnit"
 title = "AI-自动施放技能"
 description = "让单位 ${单位} 在 ${整数}时 ${目标}施放技能，技能施放方式为(对单位-${命令}、对点-${命令}、立即-${命令})，施放概率为 ${整数}%"
 comment = "让单位有一定概率施放技能，命令要与技能目标一致；代码由Red_Wolf和Fetrix_sai优化。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
