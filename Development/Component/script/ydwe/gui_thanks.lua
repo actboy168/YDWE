@@ -67,6 +67,15 @@ local function guiThanksMain(contentCallback)
     gui.MessageLoop.run()
 end
 
+local logo11 = {}
+local logo11path = fs.ydwe_devpath() / 'bin' / '11logo.png'
+if fs.exists(logo11path) then
+    logo11.img = gui.Image.createfrompath(logo11path:string())
+    local size = logo11.img:getsize()
+    logo11.height = math.sqrt(10000.0 / size.width * size.height)
+    logo11.width = logo11.height / size.height * size.width
+end
+
 return function ()
     guiThanksMain(function(content)
         content:setstyle { Margin = 10, FlexDirection = 'column', JustifyContent = 'center' }
@@ -75,17 +84,17 @@ return function ()
         label:setfont(gui.Font.create(fontName, 20, "normal", "normal"))
         content:addchildview(label)
     
-        local logo11 = fs.ydwe_devpath() / 'bin' / '11logo.png'
-        if fs.exists(logo11) then
-            local canvas = gui.Canvas.createformainscreen{width=200, height=50}
+        if logo11.img then
+            local height = logo11.height
+            local width = logo11.width
+            local canvas = gui.Canvas.createformainscreen{width=width, height=height}
             local painter = canvas:getpainter()
-            local img = gui.Image.createfrompath(logo11:string())
-            painter:drawimage(img, {x=0, y=0, width=200, height=50})
+            painter:drawimage(logo11.img, {x=0, y=0, width=width, height=height})
         
             local image = gui.Container.create()
-            image:setstyle { Left = 100, Width = 200, Height = 50 }
+            image:setstyle { Left = (400.0 - width) / 2.0, Width = width, Height = height }
             function image:ondraw(painter, dirty)
-                painter:drawcanvas(canvas, {x=0, y=0, width=200, height=50})
+                painter:drawcanvas(canvas, {x=0, y=0, width=width, height=height})
             end
             content:addchildview(image)
         else
