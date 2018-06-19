@@ -76,6 +76,48 @@ if fs.exists(logo11path) then
     logo11.width = logo11.height / size.height * size.width
 end
 
+local image = {}
+local imagePool = {}
+
+function image:create(name, url, path)
+    if not imagePool[name] then
+        local obj = {}
+        if fs.exists(path) then
+            obj.img = gui.Image.createfrompath(path:string())
+            local size = obj.img:getsize()
+            obj.height = math.sqrt(10000.0 / size.width * size.height)
+            obj.width = obj.height / size.height * size.width
+        end
+        imagePool[name] = obj
+    end
+    local img = imagePool[name]
+
+    local control
+    if img.img then
+        local height = img.height
+        local width = img.width
+        local canvas = gui.Canvas.createformainscreen{width=width, height=height}
+        local painter = canvas:getpainter()
+        painter:drawimage(img.img, {x=0, y=0, width=width, height=height})
+    
+        control = gui.Container.create()
+        control:setstyle { Left = (400.0 - width) / 2.0, Width = width, Height = height }
+        function control:ondraw(painter, dirty)
+            painter:drawcanvas(canvas, {x=0, y=0, width=width, height=height})
+        end
+    else
+        control = gui.Label.create(name)
+        control:setcolor '#28c'
+        control:setfont(gui.Font.create(fontName, 20, "normal", "normal"))
+    end
+
+    function control:onmousedown()
+        os.execute('explorer "' .. url .. '"')
+    end
+    return control
+end
+
+
 return function ()
     guiThanksMain(function(content)
         content:setstyle { Margin = 10, FlexDirection = 'column', JustifyContent = 'center' }
@@ -83,27 +125,10 @@ return function ()
         local label = gui.Label.create('赞助商')
         label:setfont(gui.Font.create(fontName, 20, "normal", "normal"))
         content:addchildview(label)
-    
-        if logo11.img then
-            local height = logo11.height
-            local width = logo11.width
-            local canvas = gui.Canvas.createformainscreen{width=width, height=height}
-            local painter = canvas:getpainter()
-            painter:drawimage(logo11.img, {x=0, y=0, width=width, height=height})
+
+        local image = image:create('11对战平台', 'http://rpg.5211game.com/', fs.ydwe_devpath() / 'bin' / '11logo.png')
+        content:addchildview(image)
         
-            local image = gui.Container.create()
-            image:setstyle { Left = (400.0 - width) / 2.0, Width = width, Height = height }
-            function image:ondraw(painter, dirty)
-                painter:drawcanvas(canvas, {x=0, y=0, width=width, height=height})
-            end
-            content:addchildview(image)
-        else
-            local label = gui.Label.create('11对战平台')
-            label:setcolor '#28c'
-            label:setfont(gui.Font.create(fontName, 20, "normal", "normal"))
-            content:addchildview(label)
-        end
-    
         local function tool(name)
             local label = gui.Label.create(name)
             label:setcolor '#28c'
