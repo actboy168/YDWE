@@ -4,7 +4,7 @@ local api = {}
 local dummy_map
 
 local function unify(name)
-    return name:lower():gsub('/', '\\')
+    return name:lower()
 end
 
 function api.open(path, priority)
