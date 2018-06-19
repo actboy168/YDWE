@@ -34,7 +34,7 @@ type = scriptcode
 type = Null
 
 [YDWESetAnyTypeLocalArray]
-title = "局部变量 -- 设置数组 [New!]"
+title = "局部变量 -- 设置数组"
 description = "设置 [${类型}] loc_${变量名}[${索引}] = ${null}"
 comment = "设置局部变量数组，注意: 数组不能穿透逆天计时器、逆天触发器"
 category = TC_YDBF
@@ -104,7 +104,7 @@ category = TC_YDBF
 type = nothing
 
 [YDWEExecuteTriggerMultiple]
-title = "触发器   -- 运行 [New!]"
+title = "触发器   -- 运行"
 description = "运行 ${触发器}， ${条件}"
 comment = ""
 category = TC_YDBF

@@ -235,7 +235,7 @@ default = "ITEM_DATA_TIP"
 type = string
 
 [YDWESetEffectLoc]
-title = "移动到点 [JAPI] [New!]"
+title = "移动到点 [JAPI]"
 description = "移动 ${特效} 到${点}"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -246,7 +246,7 @@ default = "bj_lastCreatedEffect"
 type = location
 
 [EXSetEffectXY]
-title = "移动到坐标 [JAPI] [New!]"
+title = "移动到坐标 [JAPI]"
 description = "移动 ${特效} 到（ ${X}, ${Y} ）"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -261,7 +261,7 @@ type = real
 default = "0"
 
 [EXSetEffectZ]
-title = "设置高度 [JAPI] [New!]"
+title = "设置高度 [JAPI]"
 description = "设置 ${特效} 的高度为 ${高度}"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -273,7 +273,7 @@ type = real
 default = "0"
 
 [EXSetEffectSize]
-title = "设置大小 [JAPI] [New!]"
+title = "设置大小 [JAPI]"
 description = "设置 ${特效} 的大小为 ${大小}"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -285,7 +285,7 @@ type = real
 default = "1"
 
 [EXSetEffectSpeed]
-title = "设置动画速度 [JAPI] [New!]"
+title = "设置动画速度 [JAPI]"
 description = "设置 ${特效} 的动画速度为 ${动画速度}"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -297,7 +297,7 @@ type = real
 default = "1"
 
 [EXEffectMatReset]
-title = "重置变换 [JAPI] [New!]"
+title = "重置变换 [JAPI]"
 description = "重置 ${特效}"
 comment = "清空所有的旋转和缩放，重置为初始状态。"
 category = TC_SPECIALEFFECT
@@ -306,7 +306,7 @@ type = effect
 default = "bj_lastCreatedEffect"
 
 [EXEffectMatRotateX]
-title = "绕X轴旋转 [JAPI] [New!]"
+title = "绕X轴旋转 [JAPI]"
 description = "${特效} 绕X轴旋转 ${度} 度"
 comment = "多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
 category = TC_SPECIALEFFECT
@@ -318,7 +318,7 @@ type = degree
 default = "0"
 
 [EXEffectMatRotateY]
-title = "绕Y轴旋转 [JAPI] [New!]"
+title = "绕Y轴旋转 [JAPI]"
 description = "${特效} 绕Y轴旋转 ${度} 度"
 comment = "多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
 category = TC_SPECIALEFFECT
@@ -330,7 +330,7 @@ type = degree
 default = "0"
 
 [EXEffectMatRotateZ]
-title = "绕Z轴旋转 [JAPI] [New!]"
+title = "绕Z轴旋转 [JAPI]"
 description = "${特效} 绕Z轴旋转 ${度} 度"
 comment = "多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
 category = TC_SPECIALEFFECT
@@ -342,7 +342,7 @@ type = degree
 default = "0"
 
 [EXEffectMatScale]
-title = "缩放 [JAPI] [New!]"
+title = "缩放 [JAPI]"
 description = "设置 ${特效} 的X轴缩放[ ${缩放} ]，Y轴缩放[ ${缩放} ]，Z轴缩放[ ${缩放} ]。"
 comment = "多次调用，效果会叠加，不想叠加需要先重置为初始状态。设置为2,2,2时相当于大小变为2倍。设置为负数时，就是镜像翻转。"
 category = TC_SPECIALEFFECT
@@ -360,7 +360,7 @@ type = real
 default = "1"
 
 [EXSetUnitFacing]
-title = "设置单位面向角度 [JAPI] [New!]"
+title = "设置单位面向角度 [JAPI]"
 description = "设置 ${单位} 的面向角度为 ${Angle} 度"
 comment = "立即转身"
 category = TC_UNIT
@@ -371,7 +371,7 @@ type = degree
 default = "RealUnitFacing"
 
 [EXSetUnitMoveType]
-title = "设置单位的移动类型 [JAPI] [New!]"
+title = "设置单位的移动类型 [JAPI]"
 description = "设置 ${单位} 的移动类型为 ${Value}"
 comment = ""
 category = TC_UNIT
@@ -383,7 +383,7 @@ type = MoveType
 default = "MoveType06"
 
 [EXSetUnitCollisionType]
-title = "设置单位的碰撞类型 [JAPI] [New!]"
+title = "设置单位的碰撞类型 [JAPI]"
 description = "${启用/禁用} ${单位} 对 ${碰撞} 的碰撞"
 comment = ""
 category = TC_UNIT
