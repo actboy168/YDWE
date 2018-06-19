@@ -24,7 +24,7 @@ default = "512"
 [YDWESetAnyTypeLocalVariable]
 title = "局部变量 -- 设置"
 description = "[${类型}] loc_${变量名} = ${null}"
-comment = "设置局部变量，可以指定变量类型.在1.24下不可直接将变量置为null"
+comment = "设置局部变量，可以指定变量类型。在1.24下不可直接将变量置为 空(null)"
 category = TC_YDBF
 [[.args]]
 type = typename
