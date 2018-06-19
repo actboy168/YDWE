@@ -3444,7 +3444,6 @@ type = location
 [CreatePermanentCorpseLocBJ]
 title = "创建永久性尸体"
 description = "创建一个 ${Style} ${单位} 尸体给 ${Player} 在 ${指定点} 面向角度为 ${Direction} 度"
-comment = "肉态尸体经常会自动变为骨态尸体."
 category = TC_UNIT
 [[.args]]
 type = corpsetype

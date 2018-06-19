@@ -75,6 +75,7 @@
 #define GetInventoryIndexOfItemTypeBJ(a,b)        YDWEGetInventoryIndexOfItemTypeBJNull(a,b)
 #define GetItemOfTypeFromUnitBJ(a,b)              YDWEGetItemOfTypeFromUnitBJNull(a,b)
 #define UnitHasItemOfTypeBJ(a,b)                  YDWEUnitHasItemOfTypeBJNull(a,b)
+#define CreatePermanentCorpseLocBJ(a,b,c,d,e)     YDWECreatePermanentCorpseLocBJNull(a,b,c,d,e)
 
 #endif
 #endif
