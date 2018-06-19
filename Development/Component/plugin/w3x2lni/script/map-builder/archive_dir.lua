@@ -3,8 +3,35 @@ for _, name in ipairs {'.git', '.svn', '.vscode', '.gitignore'} do
     ignore[name] = true
 end
 
-local function unify(name)
-    return name:lower():gsub('/', '\\')
+local esc_map = {}
+local loaded_map = {}
+for c in ('/:*?"<>|$'):gmatch '.' do
+    esc_map[c] = ('$%02x'):format(c:byte())
+end
+for i = 0, 31 do
+    esc_map[string.char(i)] = ('$%02x'):format(i)
+end
+for k, v in pairs(esc_map) do
+    loaded_map[v] = k
+end
+local function esced_name(name)
+    name = name:gsub('[^\\]*', function (path)
+        if path == '' then
+            return '$'
+        end
+        return path:gsub('.', esc_map)
+    end)
+    return name
+end
+
+local function loaded_name(name)
+    name = name:gsub('[^\\]*', function (path)
+        if path == '$' then
+            return ''
+        end
+        return path:gsub('$..', loaded_map)
+    end)
+    return name
 end
 
 local function scan_dir(dir, callback)
@@ -34,8 +61,8 @@ function mt:list_file()
         self._list_file = {}
         local len = #self.path:string()
         scan_dir(self.path, function (path)
-            local name = path:string():sub(len+2):lower()
-            self._list_file[#self._list_file+1] = unify(name)
+            local name = path:string():sub(len+2)
+            self._list_file[#self._list_file+1] = loaded_name(name)
         end)
     end
     return self._list_file
@@ -46,19 +73,20 @@ function mt:number_of_files()
 end
 
 function mt:extract(name, path)
-    return fs.copy_file(self.path / name, path, true)
+    return fs.copy_file(self.path / esced_name(name), path, true)
 end
 
 function mt:has_file(name)
-    return fs.exists(self.path / name)
+    return fs.exists(self.path / esced_name(name))
 end
 
 function mt:remove_file(name)
-    fs.remove(self.path / name)
+    fs.remove(self.path / esced_name(name))
 end
 
 function mt:load_file(name)
-    local f = io.open((self.path / name):string(), 'rb')
+    local new_name = esced_name(name)
+    local f = io.open((self.path / new_name):string(), 'rb')
     if not f then
         return nil
     end
@@ -68,11 +96,12 @@ function mt:load_file(name)
 end
 
 function mt:save_file(name, buf, filetime)
-    local dir = (self.path / name):parent_path()
+    local new_name = esced_name(name)
+    local dir = (self.path / new_name):parent_path()
     if not fs.exists(dir) then
         fs.create_directories(dir)
     end
-    io.save(self.path / name, buf)
+    io.save(self.path / new_name, buf)
     return true
 end
 

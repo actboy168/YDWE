@@ -25,12 +25,14 @@ local function load_trigger(trg, id, filename)
         run = 0,
         wct = 0,
     }
-    local name = trg[2] or trg[1]
+    local name = trg[1]
     trigger.name = name
     for i = 3, #trg do
         local line = trg[i]
         local k, v = line[1], line[2]
-        if k == lang.lml.COMMENT then
+        if k == lang.lml.NAME then
+            name = v
+        elseif k == lang.lml.COMMENT then
             trigger.type = 1
         elseif k == lang.lml.DISABLE then
             trigger.enable = 0
@@ -57,25 +59,26 @@ local function load_trigger(trg, id, filename)
     wtg.triggers[#wtg.triggers+1] = trigger
 end
 
-local category_id
 local function load_category(dir)
     local category = {
         comment = 0,
     }
-    local dir_name = dir[2] or dir[1]
-    category.name = dir[1]
-    category_id = category_id + 1
-    category.id = category_id
+    local filename = dir[1]
+    local id = tonumber(dir[2])
+    category.name = filename
+    category.id = id
 
     for i = 3, #dir do
         local line = dir[i]
         local k, v = line[1], line[2]
         if v then
-            load_trigger(line, category_id, dir_name)
-        else
-            if k == lang.lml.COMMENT then
+            if k == lang.lml.NAME then
+                filename = v
+            elseif k == lang.lml.COMMENT and v == '1' then
                 category.comment = 1
             end
+        else
+            load_trigger(line, id, filename)
         end
     end
     
@@ -102,8 +105,6 @@ return function (w2l_, loader_)
     wtg = {}
     wct = {}
     loader = loader_
-
-    category_id = 0
 
     load_custom()
     load_vars()

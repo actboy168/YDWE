@@ -106,7 +106,7 @@ local slk_keys = {
 
 local index = {1, 1, 1, 1}
 local strs1 = {}
-for c in ('!@#$%^&*()_=+\\|/?>.<,`~'):gmatch '.' do
+for c in ('!@#$%^&*()_=+\\|/?><,`~'):gmatch '.' do
     strs1[#strs1+1] = c
 end
 local strs2 = {}
@@ -265,10 +265,7 @@ end
 
 local function is_usable_string(str)
     local char = str:sub(1, 1)
-    if char == '-' or tonumber(char) then
-        return false
-    end
-    if char == '.' and tonumber(str:sub(2, 2)) then
+    if char == '-' or char == '.' or tonumber(char) then
         return false
     end
     return true
@@ -382,8 +379,22 @@ local function load_obj(id, obj, slk_name)
     return slk_data
 end
 
+local function sort_pairs(t)
+    local keys = {}
+    for k in pairs(t) do
+        keys[#keys+1] = k
+    end
+    table_sort(keys)
+    local i = 0
+    return function ()
+        i = i + 1
+        local k = keys[i]
+        return k, t[k]
+    end
+end
+
 local function load_chunk(chunk, slk_name)
-    for id, obj in pairs(chunk) do
+    for id, obj in sort_pairs(chunk) do
         slk[id] = load_obj(id, obj, slk_name)
     end
 end

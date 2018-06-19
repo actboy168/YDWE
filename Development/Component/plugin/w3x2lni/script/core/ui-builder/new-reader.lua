@@ -15,7 +15,7 @@ local function get_lang_ui(loader, type, lang)
     if not lang then
         return
     end
-    local filename = lang .. '/' .. type .. '.txt'
+    local filename = lang .. '\\' .. type .. '.txt'
     local buf = loader(filename)
     if buf then
         return lni(buf, filename)
@@ -145,7 +145,7 @@ function mt:read(loader, lang)
     self:reset()
     self:read_define(loader('define.txt'))
     if lang then
-        self:read_define(loader(lang .. '/define.txt'))
+        self:read_define(loader(lang .. '\\define.txt'))
     end
     self:read_ui(loader, lang, 'event')
     self:read_ui(loader, lang, 'condition')
