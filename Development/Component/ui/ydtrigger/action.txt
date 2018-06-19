@@ -22,7 +22,7 @@ type = real
 default = "512"
 
 [YDWESetAnyTypeLocalVariable]
-title = "局部变量 -- 设置"
+title = "变量 -- 设置"
 description = "[${类型}] loc_${变量名} = ${null}"
 comment = "设置局部变量，可以指定变量类型。在1.24下不可直接将变量置为 空(null)"
 category = TC_YDBF
@@ -34,8 +34,8 @@ type = scriptcode
 type = Null
 
 [YDWESetAnyTypeLocalArray]
-title = "局部变量 -- 设置数组"
-description = "设置 [${类型}] loc_${变量名}[${索引}] = ${null}"
+title = "变量 -- 设置数组"
+description = "[${类型}] loc_${变量名}[${索引}] = ${null}"
 comment = "设置局部变量数组，注意: 数组不能穿透逆天计时器、逆天触发器"
 category = TC_YDBF
 [[.args]]
@@ -49,8 +49,8 @@ default = 0
 type = Null
 
 [YDWEForLoopLocVarMultiple]
-title = "局部变量 -- 循环"
-description = "循环 loop_${局部变量名} 从 ${开始} 到 ${结束}"
+title = "循环"
+description = "循环 loop_${循环变量名} 从 ${开始} 到 ${结束}"
 comment = ""
 category = TC_YDBF
 [[.args]]
