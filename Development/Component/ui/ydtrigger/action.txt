@@ -117,7 +117,7 @@ default = "tirggerexecute_notcondition"
 [YDWESaveAnyTypeDataByUserData]
 title = "自定义值 -- 设置"
 description = "设置 [${类型}] ${null} 的 ${属性} 为 [${类型}]${null}"
-comment = "设置某个数据的自定义属性，如设置[单位]李启铭_的_爸爸_为[单位]李刚。"
+comment = "设置某个数据的自定义属性。在1.24下不可直接将自定义属性置为 空(null)，可以用清空。"
 category = TC_YDBF
 [[.args]]
 type = typename
