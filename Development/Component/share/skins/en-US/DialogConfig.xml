@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Window size="400,620" caption="0,0,0,36" roundcorner="10,10" >
+<Window size="400,600" caption="0,0,0,36" roundcorner="10,10" >
   <Font name="微软雅黑" size="18"  default="true" />
   <Font name="幼圆" size="18" />
   <Font name="微软雅黑" size="14" />
@@ -21,29 +21,213 @@
 	/>
 
   <VerticalLayout class="Title" inset="0,0,0,0" >
-    <Label text="YDWE Config" height="36" align="center" />
+    <Label text="YDWE Config Software" height="36" align="center" />
     <HorizontalLayout>
       <VerticalLayout bkcolor="#FFEAECEC" width="106" inset="6,4,0,4">
         <Control height="16" />
+        <RadioButton name="tab_0" group="TabSelect" text="Compile Map"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" selected="true" />
+        <Control height="1" />
+        <RadioButton name="tab_1" group="TabSelect" text="Test"       textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <Control height="1" />
+        <RadioButton name="tab_2" group="TabSelect" text="Editor" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <Control height="1" />
+        <RadioButton name="tab_3" group="TabSelect" text="Local Area Network" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <Control height="1" />
+        <RadioButton name="tab_4" group="TabSelect" text="War3 Plugin"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <Control height="1" />
+        <RadioButton name="tab_5" group="TabSelect" text="File Type Relation"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <Control height="1" />
         <RadioButton name="tab_6" group="TabSelect" text="Language"       textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
       </VerticalLayout>
       <TabLayout name="tabs" >
+        <VerticalLayout class="Background" inset="2,18,2,18" >
+          <VerticalLayout height="110" >
+            <Label text="MapVersion" tooltip= "Map compatibility options." class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <RadioButton class="NormalRadioButton" text="Default (Base On War3)"   width="200" group="MapSave" name="MapSave_0" tooltip="Generate map with current War3 version" />
+              <RadioButton class="NormalRadioButton" text="Only Old(1.20)" width="200" group="MapSave" name="MapSave_1" tooltip="Save the map as a version before War3 1.24 that support Return Bug" />
+              <RadioButton class="NormalRadioButton" text="Only New（1.24）" width="200" group="MapSave" name="MapSave_2" tooltip="Save the map as a version after War3 1.24 that not support Return Bug" />
+            </VerticalLayout>
+          </VerticalLayout>
+          <Control height="12" />
+          <VerticalLayout height="80" >
+            <Label text="Inject Code" tooltip="Inject code to the map, and so support some custom BJ function of YDWE" class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <RadioButton class="NormalRadioButton" text="Intelligent Inject Code" width="200" group="ScriptInjection" name="ScriptInjection_0" tooltip="Intelligent inject jass code if the code is used in the map by Triger." />
+              <RadioButton class="NormalRadioButton" text="No Inject"   width="200" group="ScriptInjection" name="ScriptInjection_1" tooltip="Will not inject code automatically. You can use #include &quot;jass file name&quot; to inject the code manually." />
+            </VerticalLayout>
+          </VerticalLayout>
+          <Control height="12" />
+          <VerticalLayout height="110" >
+            <Label text="Script Compiler" tooltip="Option for the compiler, JassHelper and Cjass." class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6"  >
+              <CheckBox text="Enable JassHelper" width="200" name="EnableJassHelper" tooltip="Enable JassHelper. JassHelper is the base of YDWE, if you disable it , you can not use any YDTrigger. So keep this option enable, disable it only if you are a pure jass use and have no use for vJass." />
+              <CheckBox text="Enable JassHelper Optimization" width="200" name="EnableJassHelperOptimization" tooltip="Support inline function." />
+              <CheckBox text="Enable JassHelper Debug" width="200" name="EnableJassHelperDebug" tooltip="Enable the Debug mode of JassHelper, it will have impact on Debug keyword and script optimization." />
+            </VerticalLayout>
+          </VerticalLayout>
+          <Control height="12" />
+          <VerticalLayout height="80" >
+            <Label text="Syntax Check" tooltip="Option about pjass.exe" class="LabelTitle" />
+            <HorizontalLayout height="40" inset="10,6,10,6" >
+              <RadioButton class="NormalRadioButton" text="Newest" width="80" group="PJass" name="PJass_0" tooltip="" />
+              <RadioButton class="NormalRadioButton" text="Classic" width="80" group="PJass" name="PJass_1" tooltip="" />
+            </HorizontalLayout>
+          </VerticalLayout>
+        </VerticalLayout>
+        <VerticalLayout class="Background" inset="2,18,2,18" >
+          <VerticalLayout height="200" >
+            <Label text="General Option" tooltip="Options about Test Map." class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <CheckBox text="TestIn Window Mode"     width="200" name="LaunchWindowed" tooltip="Start War3 in window mode" />
+              <HorizontalLayout>
+                <Control width="16" />
+                <VerticalLayout>
+                  <CheckBox text="Windowed Full Screen"     width="200" name="LaunchFullWindowed"       tooltip="Start War3 in windowed full screen mode." />
+                  <CheckBox text="Lock Cursor"       width="200" name="LaunchLockingMouse"       tooltip="Lock cursor, so it can not move out from War3 window." />
+                  <CheckBox text="Keep Length-Width"   width="200" name="LaunchFixedRatioWindowed" tooltip="Keep war3 window 4:3." />
+                </VerticalLayout>
+                </HorizontalLayout>
+              <CheckBox text="Adaptive Resolution" width="200" name="LaunchWideScreenSupport" tooltip="Let War3 automatically adapt the resolution of the screen rather then stretching" />
+              <CheckBox text="Prevent Elevated Permission" width="200" name="LaunchDisableSecurityAccess" tooltip="War3 will ask for elevated permission, disable it to avoid the diturb of UAC after win Vista." />
+            </VerticalLayout>
+          </VerticalLayout>
+          <VerticalLayout height="60" >
+            <Label text="Rendering Engine" tooltip="Some adjustment options for War3 when testing the map." class="LabelTitle" />
+            <Control height="12" />
+            <HorizontalLayout height="30" >
+              <Control width="16" />
+              <Combo name="LaunchRenderingEngine" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
+                <ListLabelElement text="Direct3D 8" />
+                <ListLabelElement text="Direct3D 9" />
+                <ListLabelElement text="OpenGL" />
+              </Combo>
+            </HorizontalLayout>
+          </VerticalLayout>
+          <Control height="12" />
+          <VerticalLayout>
+            <Label text="War3 Version" tooltip="Specify the War3 version in testing map." class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <RadioButton class="NormalRadioButton" text="Use Default Version"       width="200" group="War3Patch" name="War3Patch_0" tooltip="Use current version of War3." />
+              <RadioButton class="NormalRadioButton" text="Use Map Vers " width="200" group="War3Patch" name="War3Patch_1" tooltip="YDWE will dynamically change War3 version to adapt the map if there is a patch of the version in YDWE." />
+              <RadioButton class="NormalRadioButton" text="Select Version"           width="200" group="War3Patch" name="War3Patch_2" tooltip="Select the patch yourself" />
+              <HorizontalLayout>
+                <Control width="16" />
+                <VerticalLayout name ="War3PatchList" enabled="false" vscrollbar="true" height="90" >
+                </VerticalLayout>
+              </HorizontalLayout>
+            </VerticalLayout>
+          </VerticalLayout>
+        </VerticalLayout>
+        <VerticalLayout class="Background" inset="2,24,2,24" >
+          <VerticalLayout height="280" >
+            <Label text="Functional Option" tooltip= "Some options which may cause compatibility problem." class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <CheckBox text="Slk Optimization Before Test" width="200" name="EnableMapSlk" tooltip="Can greatly reduce the loading time of large map, but it may cause a compatibility problem." />
+              <CheckBox text="Color Text(*)"         width="200" name="EnableDotNetSupport" tooltip="if enable, a color plugin will load when you input text in Object Editor, need .Net support." />
+              <CheckBox text="Jass Syntax Highlight(*)"     width="200" name="EnableTesh" tooltip="Enable TESH, if there is a crash, please disable it." />
+              <CheckBox text="Custom Object ID"  width="200" name="EnableManualNewId" tooltip="Enable input Object ID when create a Object." />
+              <CheckBox text="Font(*)" tooltip="Set the font of YDWE." width="200" name="FontEnable" />
+              <HorizontalLayout>
+                <Control width="20" />
+                <Combo name="FontName" dropboxsize="0, 300" height="30" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" />
+                <Control width="20" />
+                <Combo name="FontSize" width="60" height="30" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
+                  <ListLabelElement text="8" />
+                  <ListLabelElement text="9" />
+                  <ListLabelElement text="10" />
+                  <ListLabelElement text="11" />
+                  <ListLabelElement text="12" />
+                  <ListLabelElement text="13" />
+                  <ListLabelElement text="14" />
+                  <ListLabelElement text="15" />
+                  <ListLabelElement text="16" />
+                  <ListLabelElement text="17" />
+                  <ListLabelElement text="18" />
+                </Combo>
+              </HorizontalLayout>
+              <Label name="FontPreview" text="AaBbCc 0123456789 Test" textcolor="#FF000000" align="center" height="80" />
+            </VerticalLayout>
+          </VerticalLayout>
+        </VerticalLayout>
+        <VerticalLayout class="Background" inset="2,24,2,24" >
+          <VerticalLayout height="260" >
+            <Label text="Local Area Network Testing"  tooltip="" class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <CheckBox text="Enable Local Area Network Support"         width="200" name="EnableHost" tooltip="" />
+                <VerticalLayout class="Background" inset="10,6,10,6" >
+                  <RadioButton class="NormalRadioButton" text="Single Player Mode" width="200" group="HostTest" name="HostTest_0" tooltip="Just start one war3." />
+                  <RadioButton class="NormalRadioButton" text="Multiplayer Mode"   width="200" group="HostTest" name="HostTest_1" tooltip="Start several War3 as the count of empty player slots." />
+              </VerticalLayout>
+            </VerticalLayout>
+          </VerticalLayout>
+        </VerticalLayout>
+        <VerticalLayout class="Background" inset="2,24,2,24" >
+          <VerticalLayout height="420" >
+            <Label text="Plugin"  tooltip="Select the plugins need to be opened." class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <HorizontalLayout>
+                <Control width="16" />
+                <VerticalLayout name ="War3PluginList" enabled="false" vscrollbar="true" height="400" >
+                </VerticalLayout>
+              </HorizontalLayout>
+            </VerticalLayout>
+          </VerticalLayout>
+        </VerticalLayout>
+        <VerticalLayout class="Background" inset="2,24,2,24" vscrollbar="true" >
+          <VerticalLayout height="80" >
+            <Label text="Open With Setting"  tooltip="If checked, you can open a map with YDWE simply by double click it." class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <CheckBox text=".w3x" width="200" name="FileAssociation_w3x" tooltip="TFT map." />
+              <CheckBox text=".w3m" width="200" name="FileAssociation_w3m" tooltip="ROC map." />
+            </VerticalLayout>
+          </VerticalLayout>
+          <Control height="16" />
+          <VerticalLayout height="80" >
+            <Label text="Shortcut"  tooltip="Add / Delete Shortcut Of YDWE" class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <CheckBox text="Add To Desktop"   width="200" name="Shortcuts_desktop" tooltip="Add Shortcut of YDWE to desktop." />
+              <CheckBox text="Add To Taskbar" width="200" name="Shortcuts_taskbar" tooltip="Add Shortcut of YDWE to Taskbar." />
+            </VerticalLayout>
+          </VerticalLayout>
+          <Control height="16" />
+          <VerticalLayout height="60" >
+            <Label text="War3 Path (*)"  tooltip="Select War3 path that YDWE use." class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <Control height="8" />
+              <HorizontalLayout class="Background" childpadding="6" >
+                <Button text="Modify" width="40" height="20" font="2" name="choose_war3_dir" />
+                <Label text="" bkcolor="#FFEBEBEB" textcolor="#FF000000" font="2" name="Warcraft3Directory" />
+              </HorizontalLayout>
+            </VerticalLayout>
+          </VerticalLayout>
+          <Control height="16" />
+          <VerticalLayout height="80" >
+            <Label text="Regedit"  tooltip="Modify the Regedit setting of War3." class="LabelTitle" />
+            <VerticalLayout class="Background" inset="10,6,10,6" >
+              <CheckBox text="Allow Local Files"   width="200" name="AllowLocalFiles" tooltip="If enable, War3 will load the file in the root folder." />
+            </VerticalLayout>
+          </VerticalLayout>
+        </VerticalLayout>
         <VerticalLayout class="Background" inset="2,24,2,24" >
           <VerticalLayout height="140" >
-            <Label text="Language(*)" tooltip= "" class="LabelTitle" />
+            <Label text="Language(*)" tooltip= "Select Language of YDWE" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
-              <RadioButton class="NormalRadioButton" text="简体中文" width="200" group="Language" name="Language-zh-CN" />
+              <RadioButton class="NormalRadioButton" text="Chinese" width="200" group="Language" name="Language-zh-CN" />
               <RadioButton class="NormalRadioButton" text="English" width="200" group="Language" name="Language-en-US" />
             </VerticalLayout>
           </VerticalLayout>
         </VerticalLayout>
       </TabLayout>
     </HorizontalLayout>
+    <HorizontalLayout class="Background" height="20"   >
+      <Label text="Note: the option with (*) needs to restart YDWE to take effect." textcolor="#FF000000" font="2" />
+    </HorizontalLayout>
     <HorizontalLayout class="Background" height="40"  childpadding="20" >
       <Control bkcolor="#000000" width="90" inset="0,0,0,0" />
       <Button text="Reset" width="90" height="30"  name="reset" />
-      <Button text="OK"    width="60"  height="30" name="ok" />
-      <Button text="Cacel" width="60"  height="30" name="cancel" />
+      <Button text="Confirm"     width="60"  height="30" name="ok" />
+      <Button text="Cancel"     width="60"  height="30" name="cancel" />
     </HorizontalLayout>
   </VerticalLayout>
 </Window>

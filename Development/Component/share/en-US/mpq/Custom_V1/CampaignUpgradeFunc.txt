@@ -1,0 +1,26 @@
+//naga siren training 
+[Rnsw]
+Art=ReplaceableTextures\CommandButtons\BTNSirenAdept.tga,ReplaceableTextures\CommandButtons\BTNSirenMaster.tga
+Buttonpos=0,2
+
+[Rnen]
+Art=ReplaceableTextures\CommandButtons\BTNEnsnare.tga
+Buttonpos=0,2
+
+[Rnsi]
+Art=ReplaceableTextures\CommandButtons\BTNDryadDispelMagic.tga
+Buttonpos=1,2
+
+[Rnat]
+Art=ReplaceableTextures\CommandButtons\BTNNagaWeaponUp1.tga,ReplaceableTextures\CommandButtons\BTNNagaWeaponUp2.tga,ReplaceableTextures\CommandButtons\BTNNagaWeaponUp3.tga
+Buttonpos=0,2
+
+
+[Rnam]
+Art=ReplaceableTextures\CommandButtons\BTNNagaArmorUp1.tga,ReplaceableTextures\CommandButtons\BTNNagaArmorUp2.tga,ReplaceableTextures\CommandButtons\BTNNagaArmorUp3.tga
+Buttonpos=1,2
+
+[Rnsb]
+Art=ReplaceableTextures\CommandButtons\BTNNagaBurrow.tga
+Buttonpos=2,2
+

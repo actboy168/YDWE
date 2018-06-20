@@ -1,0 +1,97 @@
+//allied building
+[Aall]
+Name=Shop Sharing, Allied Bldg.
+
+//burrow detection, fliers
+[Abdt]
+Name=Burrow Detection
+EditorSuffix= (Fliers, Obsolete)
+
+//purchase (shop)
+[Apit]
+Name=Shop Purchase Item
+
+[Amou]
+Name=Mount
+Tip=Mo|cffffcc00r|rph
+Untip=De-Mo|cffffcc00r|rph
+Ubertip="Morphs the hero into an alternate form."
+Unubertip="Returns the hero to normal form."
+Hotkey=R
+Unhotkey=R
+
+[AHer]
+
+[Ahar]
+Name=Harvest
+Tip=|cffffcc00G|rather
+Ubertip="Mines gold from gold mines and harvests lumber from trees."
+Untip=R|cffffcc00e|rturn Resources
+Unubertip="Return the carried resources to the nearest town hall."
+Hotkey=G
+Unhotkey=E
+EditorSuffix= (Gold and Lumber)
+
+[Ahrl]
+Name=Harvest
+Tip=|cffffcc00G|rather
+Ubertip="Harvests lumber from trees."
+Untip=R|cffffcc00e|rturn Resources
+Unubertip="Return the carried resources to the nearest Necropolis or Graveyard."
+Hotkey=G
+Unhotkey=E
+EditorSuffix= (Ghouls Lumber)
+
+[Arev]
+Name=Revive Hero
+
+[Aawa]
+Name=Revive Hero Instantly
+
+// passive 'detector' ability
+[Adet]
+Name=Detector
+
+[Adt1]
+Name=Detector
+
+[Adta]
+Name=Reveal
+Tip=|cffffcc00R|reveal
+Hotkey=R
+
+[Bdet]
+Bufftip=Detected
+Buffubertip="This unit is detected; an enemy player can see it."
+
+[Bvul]
+Bufftip=Invulnerable
+Buffubertip="This unit is invulnerable; it will not take damage from attacks and cannot be targeted by spells."
+
+[Bspe]
+Bufftip=Speed Bonus
+Buffubertip="This unit has a speed bonus; it moves more quickly than it normally does."
+
+[Bfro]
+Bufftip=Slowed
+Buffubertip="This unit is slowed; it moves more slowly than it normally does."
+
+// peon/peasant repair ability
+[Arep]
+Name=Repair
+Tip=|cffffcc00R|repair
+Ubertip="Repairs mechanical units and structures at the cost of resources."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=R
+Unhotkey=R
+
+// Stun buff
+[BSTN]
+Bufftip=Stunned
+Buffubertip="This unit is stunned; it cannot move, attack or cast spells."
+
+// Pause buff
+[BPSE]
+Bufftip=Stunned
+Buffubertip="This unit will not move."
