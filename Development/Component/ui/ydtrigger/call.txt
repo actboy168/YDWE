@@ -8,7 +8,7 @@ returns = AnyReturnType
 type = scriptcode
 
 [YDWEGetAnyTypeLocalVariable]
-title = "局部变量 -- 读取"
+title = "变量 -- 读取"
 description = "loc_${变量名}"
 comment = "可以获取到任意类型的局部变量。"
 category = TC_YDBF
@@ -17,7 +17,7 @@ returns = AnyReturnType
 type = scriptcode
 
 [YDWEGetAnyTypeLocalArray]
-title = "局部变量 -- 读取数组 [New!]"
+title = "变量 -- 读取数组"
 description = "loc_${变量名}[${索引}]"
 comment = "可以获取到任意类型的局部变量数组。"
 category = TC_YDBF
@@ -29,7 +29,7 @@ type = integer
 default = 0
 
 [YDWEForLoopLocVarIndex]
-title = "局部变量 -- 读取(循环数)"
+title = "循环 -- 读取(循环变量)"
 description = "loop_${变量名}"
 comment = "用来获取当前循环中的循环数，是个真正的Jass局部变量。"
 category = TC_YDBF

@@ -127,7 +127,11 @@ local function write_obj(id, obj)
     if #lines == 0 and id == obj._parent then
         return
     end
-    write('[%s]', id)
+    if id:match '[^%w%_]' then
+        write('[%q]', id)
+    else
+        write('[%s]', id)
+    end
     if obj._parent then
         write('%s = %q', '_parent', obj._parent)
     end

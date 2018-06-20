@@ -134,7 +134,7 @@ type = string
 default = "EverguoIsHandsome"
 
 [YDWERPGBillingGetStatus]
-title = "11RPG计费 - 读取状态 [JAPI] [New!]"
+title = "11RPG计费 - 读取状态 [JAPI]"
 description = "11RPG计费 - 读取${玩家}中的状态〖${状态名}〗"
 category = TC_YDSL
 returns = integer
@@ -146,7 +146,7 @@ type = string
 default = "EverguoIsHandsome"
 
 [YDWERPGBillingGetItem]
-title = "11RPG计费 - 读取道具 [JAPI] [New!]"
+title = "11RPG计费 - 读取道具 [JAPI]"
 description = "11RPG计费 - 读取${玩家}中的道具〖${道具名}〗"
 category = TC_YDSL
 returns = integer
@@ -158,7 +158,7 @@ type = string
 default = "EverguoIsHandsome"
 
 [YDWERPGBillingHasStatus]
-title = "11RPG计费 - 存在状态 [JAPI] [New!]"
+title = "11RPG计费 - 存在状态 [JAPI]"
 description = "11RPG计费 - ${玩家}中存在状态〖${状态名}〗"
 category = TC_YDSL
 returns = boolean
@@ -170,7 +170,7 @@ type = string
 default = "EverguoIsHandsome"
 
 [YDWERPGBillingHasItem]
-title = "11RPG计费 - 存在道具 [JAPI] [New!]"
+title = "11RPG计费 - 存在道具 [JAPI]"
 description = "11RPG计费 - ${玩家}中存在道具〖${道具名}〗"
 category = TC_YDSL
 returns = boolean
@@ -272,7 +272,7 @@ type = ItemDataString
 default = "ITEM_DATA_TIP"
 
 [EXGetEffectX]
-title = "X轴坐标 [JAPI] [New!]"
+title = "X轴坐标 [JAPI]"
 description = "${特效} 的X轴坐标"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -283,7 +283,7 @@ type = effect
 default = "bj_lastCreatedEffect"
 
 [EXGetEffectY]
-title = "Y轴坐标 [JAPI] [New!]"
+title = "Y轴坐标 [JAPI]"
 description = "${特效} 的Y轴坐标"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -294,7 +294,7 @@ type = effect
 default = "bj_lastCreatedEffect"
 
 [EXGetEffectZ]
-title = "高度 [JAPI] [New!]"
+title = "高度 [JAPI]"
 description = "${特效} 的高度"
 comment = ""
 category = TC_SPECIALEFFECT
@@ -305,7 +305,7 @@ type = effect
 default = "bj_lastCreatedEffect"
 
 [EXGetEffectSize]
-title = "大小 [JAPI] [New!]"
+title = "大小 [JAPI]"
 description = "${特效} 的大小"
 comment = ""
 category = TC_SPECIALEFFECT

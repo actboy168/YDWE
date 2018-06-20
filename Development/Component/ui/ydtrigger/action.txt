@@ -6,25 +6,10 @@ category = TC_COMMENT
 [[.args]]
 type = scriptcode
 
-[YDWEEnumUnitsInRangeMultiple]
-title = "选取单位 -- 圆形范围"
-description = "选取以(${坐标X}, ${坐标Y})为圆心,${半径}为半径的圆范围内的单位做动作"
-comment = "选取范围内的单位做动作"
-category = TC_YDBF
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "512"
-
 [YDWESetAnyTypeLocalVariable]
-title = "局部变量 -- 设置"
-description = "设置 [${类型}] loc_${变量名} = ${null}"
-comment = "设置局部变量，可以指定变量类型.在1.24下不可直接将变量置为null"
+title = "变量 -- 设置"
+description = "[${类型}] loc_${变量名} = ${null}"
+comment = "设置局部变量，可以指定变量类型。在1.24下不可直接将变量置为 空(null)"
 category = TC_YDBF
 [[.args]]
 type = typename
@@ -34,8 +19,8 @@ type = scriptcode
 type = Null
 
 [YDWESetAnyTypeLocalArray]
-title = "局部变量 -- 设置数组 [New!]"
-description = "设置 [${类型}] loc_${变量名}[${索引}] = ${null}"
+title = "变量 -- 设置数组"
+description = "[${类型}] loc_${变量名}[${索引}] = ${null}"
 comment = "设置局部变量数组，注意: 数组不能穿透逆天计时器、逆天触发器"
 category = TC_YDBF
 [[.args]]
@@ -49,8 +34,8 @@ default = 0
 type = Null
 
 [YDWEForLoopLocVarMultiple]
-title = "局部变量 -- 循环"
-description = "循环 loop_${局部变量名} 从 ${开始} 到 ${结束}"
+title = "循环"
+description = "循环 loop_${循环变量名} 从 ${开始} 到 ${结束}"
 comment = ""
 category = TC_YDBF
 [[.args]]
@@ -104,7 +89,7 @@ category = TC_YDBF
 type = nothing
 
 [YDWEExecuteTriggerMultiple]
-title = "触发器   -- 运行 [New!]"
+title = "触发器   -- 运行"
 description = "运行 ${触发器}， ${条件}"
 comment = ""
 category = TC_YDBF
@@ -114,10 +99,25 @@ type = trigger
 type = tirggerexecute
 default = "tirggerexecute_notcondition"
 
+[YDWEEnumUnitsInRangeMultiple]
+title = "选取单位 -- 圆形范围"
+description = "选取以(${坐标X}, ${坐标Y})为圆心,${半径}为半径的圆范围内的单位做动作"
+comment = "选取范围内的单位做动作"
+category = TC_YDBF
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "512"
+
 [YDWESaveAnyTypeDataByUserData]
 title = "自定义值 -- 设置"
 description = "设置 [${类型}] ${null} 的 ${属性} 为 [${类型}]${null}"
-comment = "设置某个数据的自定义属性，如设置[单位]李启铭_的_爸爸_为[单位]李刚。"
+comment = "设置某个数据的自定义属性。在1.24下不可直接将自定义属性置为 空(null)，可以用清空。"
 category = TC_YDBF
 [[.args]]
 type = typename

@@ -333,7 +333,7 @@ return function(w2l_, slk_)
     w2l = w2l_
     slk = slk_
     if not search then
-        search = w2l:parse_lni(w2l:data_load('prebuilt/search.ini'))
+        search = w2l:parse_lni(w2l:data_load('prebuilt\\search.ini'))
     end
     buffmap = {}
     for i in pairs(slk.buff) do

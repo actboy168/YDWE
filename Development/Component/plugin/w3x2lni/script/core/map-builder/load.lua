@@ -1,21 +1,31 @@
 local lang = require 'lang'
 local w2l
 
-local function unify(name)
-    return name:lower():gsub('/', '\\')
-end
-
 local function search_staticfile(map, callback)
-    for _, name in ipairs {'(listfile)', '(signature)', '(attributes)'} do
-        callback(name)
+    local function search_tbl(tbl)
+        for _, v in pairs(tbl) do
+            if type(v) == 'table' then
+                search_tbl(v)
+            elseif type(v) == 'string' then
+                callback(v)
+            end
+        end
     end
+    search_tbl(w2l.info)
 end
 
 local function search_listfile(map, callback)
     local buf = map:get '(listfile)'
     if buf then
-        for name in buf:gmatch '[^\r\n]+' do
-            callback(name)
+        local start = 1
+        while true do
+            local pos = buf:find('\r\n', start)
+            if not pos then
+                callback(buf:sub(start))
+                break
+            end
+            callback(buf:sub(start, pos-1))
+            start = pos + 2
         end
     end
 end
@@ -50,11 +60,11 @@ local function search_mpq(map)
     local files = {}
     for i, searcher in ipairs(searchers) do
         pcall(searcher, map, function (name)
-            name = unify(name)
-            if mark[name] then
+            local lname = name:lower()
+            if mark[lname] then
                 return
             end
-            mark[name] = true
+            mark[lname] = true
             if not map:has(name) then
                 return
             end
@@ -66,11 +76,6 @@ local function search_mpq(map)
                 w2l.progress(count / total)
             end
         end)
-    end
-
-    if count ~= total then
-        w2l.messager.report(lang.report.ERROR, 1, lang.report.FILE_LOST:format(total - count), lang.report.FILE_LOST_HINT)
-        w2l.messager.report(lang.report.ERROR, 1, lang.report.FILE_READ:format(count, total))
     end
 
     return files

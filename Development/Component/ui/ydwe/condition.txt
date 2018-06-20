@@ -14,10 +14,10 @@ type = boolean
 default = "true"
 
 ["             "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "条件内不可输入局部变量,如有必要,可用全局变量或GetTriggerUnit()之类的代替"
-category = TC_CONDITION
+category = TC_YDHIDE
 [[.args]]
 type = scriptcode
 

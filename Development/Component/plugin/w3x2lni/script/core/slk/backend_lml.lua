@@ -48,17 +48,6 @@ end
 
 local function lml_value(v, sp)
     if v[2] then
-        buf[#buf+1] = format('%s%s: %s\n', sp_rep[sp], v[1], lml_string(v[2]))
-    else
-        buf[#buf+1] = format('%s%s\n', sp_rep[sp], lml_string(v[1]))
-    end
-    for i = 3, #v do
-        lml_value(v[i], sp+4)
-    end
-end
-
-local function lml_value_by_dir(v, sp)
-    if v[2] then
         buf[#buf+1] = format('%s%s: %s\n', sp_rep[sp], lml_key(v[1]), lml_string(v[2]))
     else
         buf[#buf+1] = format('%s%s\n', sp_rep[sp], lml_string(v[1]))
@@ -76,16 +65,10 @@ local function convert_lml(tbl)
     return table.concat(buf)
 end
 
-local function convert_lml_by_dir(tbl)
-    buf = {}
-    for i = 3, #tbl do
-        lml_value_by_dir(tbl[i], 0)
-    end
-    return table.concat(buf)
-end
-
-local function get_path(path, used)
+local function get_path(path, used, index,  max)
+    local fmt = ('%%0%dd-%%s'):format(#tostring(max))
     path = path:gsub('[$\\$/$:$*$?$"$<$>$|]', '_')
+    path = fmt:format(index, path)
     while used[path:lower()] do
         local name, id = path:match '(.+)_(%d+)$'
         if name and id then
@@ -107,18 +90,21 @@ local function compute_path()
     local dirs = {}
     local used = {}
     local map = {}
-    for _, dir in ipairs(wtg.categories) do
+    local max = #wtg.categories
+    for index, dir in ipairs(wtg.categories) do
         dirs[dir.id] = {}
         map[dir.id] = {}
-        local path = get_path(dir.name, used)
+        local path = get_path(dir.name, used, index, max)
         map[dir.id][1] = path
     end
     for _, trg in ipairs(wtg.triggers) do
         table.insert(dirs[trg.category], trg)
     end
     for _, dir in ipairs(wtg.categories) do
-        for _, trg in ipairs(dirs[dir.id]) do
-            map[dir.id][trg.name] = get_path(trg.name, dirs[dir.id])
+        local max = #dirs[dir.id]
+        local used = {}
+        for index, trg in ipairs(dirs[dir.id]) do
+            map[dir.id][trg.name] = get_path(trg.name, used, index, max)
         end
     end
     return map
@@ -135,19 +121,13 @@ local function read_dirs(map)
     local lml = { '', false }
     for i, dir in ipairs(wtg.categories) do
         local filename = map[dir.id][1]
-        local dir_data = { dir.name, dir.id }
-        if dir.name ~= filename then
-            dir_data[#dir_data+1] = { lang.lml.NAME, filename }
-        end
+        local dir_data = { dir.name, filename }
         if dir.comment == 1 then
-            dir_data[#dir_data+1] = { lang.lml.COMMENT, 1 }
+            dir_data[#dir_data+1] = { lang.lml.COMMENT, false }
         end
+
         for i, trg in ipairs(dirs[dir.id]) do
-            local filename = map[dir.id][trg.name]
-            local trg_data = { trg.name, false }
-            if trg.name ~= filename then
-                trg_data[#trg_data+1] = { lang.lml.NAME, filename }
-            end
+            local trg_data = { trg.name, map[dir.id][trg.name] }
             if trg.type == 1 then
                 trg_data[#trg_data+1] = { lang.lml.COMMENT }
             end
@@ -164,7 +144,7 @@ local function read_dirs(map)
         end
         lml[i+2] = dir_data
     end
-    return convert_lml_by_dir(lml)
+    return convert_lml(lml)
 end
 
 local function read_triggers(files, map)

@@ -28,14 +28,24 @@ endfunction
 function YDWECoordinateY takes real y returns real
     return RMinBJ(RMaxBJ(y, yd_MapMinY), yd_MapMaxY)
 endfunction
-//两个单位之间的距离
-function YDWEDistanceBetweenUnits takes unit a,unit b returns real
-    return SquareRoot((GetUnitX(a)-GetUnitX(b))*(GetUnitX(a)-GetUnitX(b))+(GetUnitY(a)-GetUnitY(b))*(GetUnitY(a)-GetUnitY(b)))
+
+function YDWEDistanceBetweenUnitAndPoint takes unit a, location b returns real
+    local real x = GetUnitX(a) - GetLocationX(b)
+    local real y = GetUnitY(a) - GetLocationY(b)
+    return SquareRoot(x * x + y * y)
 endfunction
-//两个单位之间的角度
-function YDWEAngleBetweenUnits takes unit fromUnit, unit toUnit returns real
-    return bj_RADTODEG * Atan2(GetUnitY(toUnit) - GetUnitY(fromUnit), GetUnitX(toUnit) - GetUnitX(fromUnit))
+function YDWEAngleBetweenUnitAndPoint takes unit a, location b returns real
+    return bj_RADTODEG * Atan2(GetLocationY(b) - GetUnitY(a), GetLocationX(b) - GetUnitX(a))
 endfunction
+function YDWEDistanceBetweenUnits takes unit a, unit b returns real
+    local real x = GetUnitX(a) - GetUnitX(b)
+    local real y = GetUnitY(a) - GetUnitY(b)
+    return SquareRoot(x * x + y * y)
+endfunction
+function YDWEAngleBetweenUnits takes unit a, unit b returns real
+    return bj_RADTODEG * Atan2(GetUnitY(b) - GetUnitY(a), GetUnitX(b) - GetUnitX(a))
+endfunction
+
 //生成区域
 function YDWEGetRect takes real x,real y,real width, real height returns rect
     return Rect( x - width*0.5, y - height*0.5, x + width*0.5, y + height*0.5 )

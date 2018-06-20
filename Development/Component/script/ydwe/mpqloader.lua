@@ -15,7 +15,7 @@ end)
 local mt = {}
 
 function mt:load(filename)
-    if filename:sub(1, 5) == 'ydwe/' then
+    if filename:sub(1, 5) == 'ydwe\\' then
         local res = io.load(ydwe / 'share' / lang / filename)
         if res then
             return res

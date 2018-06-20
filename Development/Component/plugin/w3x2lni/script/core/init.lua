@@ -9,7 +9,6 @@ local slk = w3xparser.slk
 local txt = w3xparser.txt
 local ini = w3xparser.ini
 local pairs = pairs
-local string_lower = string.lower
 
 local mt = {}
 
@@ -57,7 +56,7 @@ function mt:we_metadata()
         if self.setting.data_meta == '${DEFAULT}' then
             self.cache_we_metadata = self.cache_metadata
         else
-            self.cache_we_metadata = lni(self:data_load('prebuilt/metadata.ini'))
+            self.cache_we_metadata = lni(self:data_load('prebuilt\\metadata.ini'))
         end
     end
     return self.cache_we_metadata
@@ -65,7 +64,7 @@ end
 
 function mt:keydata()
     if not keydata then
-        keydata = lni(self:data_load('prebuilt/keydata.ini'))
+        keydata = lni(self:data_load('prebuilt\\keydata.ini'))
     end
     return keydata
 end
@@ -83,11 +82,11 @@ function mt:get_editstring(source)
                 self.editstring[k:upper()] = v
             end
         else
-            local t = ini(self:data_load('mpq/ui/WorldEditStrings.txt'))['WorldEditStrings']
+            local t = ini(self:data_load('mpq\\ui\\WorldEditStrings.txt'))['WorldEditStrings']
             for k, v in pairs(t) do
                 self.editstring[k:upper()] = v
             end
-            local t = ini(self:data_load('mpq/ui/WorldEditGameStrings.txt'))['WorldEditStrings']
+            local t = ini(self:data_load('mpq\\ui\\WorldEditGameStrings.txt'))['WorldEditStrings']
             for k, v in pairs(t) do
                 self.editstring[k:upper()] = v
             end
@@ -118,7 +117,7 @@ local function create_default(w2l)
     local default = {}
     local need_build = false
     for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'txt', 'misc'} do
-        local str = w2l:data_load(('prebuilt/%s/%s.ini'):format(w2l.setting.version, name))
+        local str = w2l:data_load(('prebuilt\\%s\\%s.ini'):format(w2l.setting.version, name))
         if str then
             default[name] = lni(str)
         else
@@ -220,7 +219,7 @@ end
 
 function mt:mpq_load(filename)
     return self.mpq_path:each_path(function(path)
-        return self:data_load(('mpq/%s/%s'):format(path, filename))
+        return self:data_load(('mpq\\%s\\%s'):format(path, filename))
     end)
 end
 
@@ -248,19 +247,19 @@ function mt:init_proxy()
     self.input_proxy = proxy(self, self.input_ar, self.input_mode, 'input')
     self.output_proxy = proxy(self, self.output_ar, self.setting.mode, 'output')
     
-    if self:file_load('w3x2lni', 'locale/w3i.lng') then
-        lang:set_lng_file('w3i', self:file_load('w3x2lni', 'locale/w3i.lng'))
+    if self:file_load('w3x2lni', 'locale\\w3i.lng') then
+        lang:set_lng_file('w3i', self:file_load('w3x2lni', 'locale\\w3i.lng'))
     end
-    if self:file_load('w3x2lni', 'locale/lml.lng') then
-        lang:set_lng_file('lml', self:file_load('w3x2lni', 'locale/lml.lng'))
+    if self:file_load('w3x2lni', 'locale\\lml.lng') then
+        lang:set_lng_file('lml', self:file_load('w3x2lni', 'locale\\lml.lng'))
     end
     
     if self.setting.mode == 'lni' then
-        self:file_save('w3x2lni', 'locale/w3i.lng', lang:get_lng_file 'w3i')
-        self:file_save('w3x2lni', 'locale/lml.lng', lang:get_lng_file 'lml')
+        self:file_save('w3x2lni', 'locale\\w3i.lng', lang:get_lng_file 'w3i')
+        self:file_save('w3x2lni', 'locale\\lml.lng', lang:get_lng_file 'lml')
     else
-        self:file_remove('w3x2lni', 'locale/w3i.lng')
-        self:file_remove('w3x2lni', 'locale/lml.lng')
+        self:file_remove('w3x2lni', 'locale\\w3i.lng')
+        self:file_remove('w3x2lni', 'locale\\lml.lng')
     end
 end
 
@@ -289,6 +288,15 @@ end
 function mt:save()
     local save = require 'map-builder.save'
     save(self)
+    local total = self.input_ar:number_of_files()
+    local count = 0
+    for _ in pairs(self.input_ar) do
+        count = count + 1
+    end
+    if count ~= total then
+        self.messager.report(lang.report.ERROR, 1, lang.report.FILE_LOST:format(total - count), lang.report.FILE_LOST_HINT)
+        self.messager.report(lang.report.ERROR, 1, lang.report.FILE_READ:format(count, total))
+    end
 end
 
 function mt:failed(msg)

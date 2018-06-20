@@ -57,10 +57,6 @@ function mt:save(w3i, w3f, w2l)
     return true
 end
 
-local function unify(name)
-    return name:lower():gsub('/', '\\')
-end
-
 function mt:list_file()
     return self.handle:list_file()
 end
@@ -70,19 +66,20 @@ function mt:number_of_files()
 end
 
 function mt:has(name)
-    name = unify(name)
     if not self.handle then
         return false
     end
-    if self.cache[name] then
+    local lname = name:lower()
+    self.case[lname] = name
+    if self.cache[lname] then
         return true
     end
     local buf = self.handle:load_file(name)
     if buf then
-        self.cache[name] = buf
+        self.cache[lname] = buf
         return true
     else
-        self.cache[name] = false
+        self.cache[lname] = false
         return false
     end
 end
@@ -91,41 +88,47 @@ function mt:set(name, buf)
     if not self.handle then
         return
     end
-    self.cache[name] = buf
+    local lname = name:lower()
+    self.cache[lname] = buf
+    self.case[lname] = name
 end
 
 function mt:remove(name)
     if not self.handle then
         return
     end
-    self.cache[name] = false
+    local lname = name:lower()
+    self.cache[lname] = false
+    self.case[lname] = name
 end
 
 function mt:get(name)
     if not self.handle then
         return nil
     end
-    name = unify(name)
-    if self.cache[name] then
-        return self.cache[name]
+    local lname = name:lower()
+    self.case[lname] = name
+    if self.cache[lname] then
+        return self.cache[lname]
     end
-    if self.cache[name] == false then
+    if self.cache[lname] == false then
         return nil
     end
     local buf = self.handle:load_file(name)
     if buf then
-        self.cache[name] = buf
+        self.cache[lname] = buf
     else
-        self.cache[name] = false
+        self.cache[lname] = false
     end
     return buf
 end
 
 function mt:__pairs()
+    local case = self.case
     local tbl = {}
     for k, v in pairs(self.cache) do
         if v then
-            tbl[k] = v
+            tbl[case[k]] = v
         end
     end
     return next, tbl
@@ -140,6 +143,7 @@ return function (pathorhandle, tp)
     local ar = {
         path = pathorhandle,
         cache = {},
+        case = {},
         _read = read_only,
     }
     if type(pathorhandle) == 'number' then

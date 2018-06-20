@@ -6,11 +6,10 @@ local function parse_imp(buf)
     local name
     for i = 1, count do
         _, name, index = ('c1z'):unpack(buf, index)
-        local name = name:lower()
         if w2l:file_load('map', name) then
             list[#list+1] = name
-        elseif w2l:file_load('map', 'war3mapimported\\' .. name) then
-            list[#list+1] = 'war3mapimported\\' .. name
+        elseif w2l:file_load('map', 'War3mapImported\\' .. name) then
+            list[#list+1] = 'War3mapImported\\' .. name
         end
     end
     table.sort(list)

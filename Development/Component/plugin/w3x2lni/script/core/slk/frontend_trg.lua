@@ -18,13 +18,13 @@ local function hasFile(name)
 end
 
 local function trigger_config()
-    local f, err = w2l:data_load('ui/config')
+    local f, err = w2l:data_load('ui\\config')
     if not f then
         if err:sub(#err-24) == 'No such file or directory' then
-            if hasFile('ui/TriggerData.txt') then
+            if hasFile('ui\\TriggerData.txt') then
                 return { '' }
             end
-            return { 'ui/' }
+            return { 'ui\\' }
         end
         return nil, err
     end
@@ -32,7 +32,7 @@ local function trigger_config()
     for _, line in ipairs(split(f)) do
         line = string_trim(line)
         if line ~= '' then
-            list[#list+1] = 'ui/' .. string_trim(line) .. '/'
+            list[#list+1] = 'ui\\' .. string_trim(line) .. '\\'
         end
     end
     return list
@@ -46,7 +46,7 @@ local function load_triggerdata(list)
     local ok
     for _, uiname in ipairs(list) do
         local reader = ui.new_reader
-        if hasFile(uiname .. 'ui/TriggerData.txt') then
+        if hasFile(uiname .. 'ui\\TriggerData.txt') then
             reader = ui.old_reader
         end
         t = ui.merge(t, reader(function(filename)

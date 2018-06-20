@@ -732,7 +732,7 @@ default = "300"
 title = "佣兵系统<Red_Wolf制作>"
 description = "命令 ${单位} 跟随 ${单位}，刷新周期 ${timeout}，巡逻半径 ${guardRanger}，返回半径 ${returnRanger}，传送半径 ${outRanger}，巡逻概率 ${percent}%"
 comment = "让一个佣兵跟随主人，可以在主人身边巡逻，当远离主人后自动返回或传送到主人身边。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unit
 [[.args]]
@@ -763,7 +763,7 @@ max = 100
 title = "取消佣兵<Red_Wolf制作>"
 description = "取消 ${单位} 的跟随"
 comment = "让一个佣兵不再跟随主人。备注：如果佣兵是召唤生物那么不必取消，因为当佣兵或主人死亡后，系统会自动取消跟随。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unit
 
@@ -771,7 +771,7 @@ type = unit
 title = "AI-技能绑定英雄<GreedWind制作>"
 description = "给单位 ${英雄} 绑定技能 ${技能1} ${技能2} ${技能3} ${技能4} ${技能5}"
 comment = "为单位绑定5个技能，如果英雄只有4个技能，那么第5个技能请设置为空。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unitcode
 default = "Hamg"
@@ -790,7 +790,7 @@ type = abilcode
 title = "AI-技能学习顺序绑定英雄<GreedWind制作>"
 description = "给单位 ${英雄} 设置技能学习顺序为( ${技能1} ${技能2} ${技能3} ${技能4} ${技能5} )"
 comment = "单位会按输入的等级去学习对应的技能，切记技能学习顺序要按^等级^等级...^等级^的格式输入。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unitcode
 default = "Hamg"
@@ -814,7 +814,7 @@ default = "null"
 title = "AI-自动学习对应技能<GreedWind制作>"
 description = "让英雄 ${英雄} 自动学习技能，所学技能对应的英雄等级为 ${整数}"
 comment = "英雄会学习与等级对应的技能，这些技能必须在之前绑定给英雄。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -827,7 +827,7 @@ min = 1
 title = "AI-自动学习全部技能<GreedWind制作>"
 description = "让英雄 ${英雄} 自动学习所有技能。"
 comment = "英雄会洗去之前学习过的技能，并根据技能表顺序学习完所有技能。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -836,7 +836,7 @@ default = "GetTriggerUnit"
 title = "AI-自动施放技能"
 description = "让单位 ${单位} 在 ${整数}时 ${目标}施放技能，技能施放方式为(对单位-${命令}、对点-${命令}、立即-${命令})，施放概率为 ${整数}%"
 comment = "让单位有一定概率施放技能，命令要与技能目标一致；代码由Red_Wolf和Fetrix_sai优化。"
-category = TC_YDAI
+category = TC_YDST
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
@@ -3385,8 +3385,8 @@ type = trigger
 default = "GetTriggeringTrigger"
 
 [CreateNUnitsAtLoc]
-title = "创建单位(面向角度)"
-description = "创建 ${Number} 个 ${单位} 给 ${Player} 在 ${指定点} ,面向角度为 ${Direction} 度"
+title = "创建单位 (多个) (面向角度)"
+description = "创建 ${Number} 个 ${单位} 给 ${Player} 在 ${指定点} , 面向角度为 ${Direction}"
 comment = "面向角度采用角度制,0度为正东方向,90度为正北方向. 使用'最后创建的单位组'来获取创建的所有单位. 使用'最后创建的单位'来获取创建的单个单位."
 category = TC_UNIT
 [[.args]]
@@ -3408,8 +3408,8 @@ min = 0
 max = 360
 
 [CreateNUnitsAtLocFacingLocBJ]
-title = "创建单位(面向点)"
-description = "创建 ${Number} ${单位} 给 ${Player} 在 ${指定点} ,面向 ${指定点}"
+title = "创建单位 (多个) (面向点)"
+description = "创建 ${Number} 个 ${单位} 给 ${Player} 在 ${指定点} , 面向 ${指定点}"
 comment = "使用'最后创建的单位组'来获取创建的所有单位. 使用'最后创建的单位'来获取创建的单个单位."
 category = TC_UNIT
 [[.args]]
@@ -3427,9 +3427,43 @@ type = location
 [[.args]]
 type = location
 
+[" CreateUnitAtLoc"]
+title = "创建单位 (指定点)"
+description = "给 ${玩家} 创建 ${单位} 在 ${指定点}, 面向角度为 ${Direction}"
+comment = "不能被'最后创建的单位'获得"
+category = TC_UNIT
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unitcode
+default = "hfoo"
+[[.args]]
+type = location
+[[.args]]
+type = degree
+default = "0"
+
+[" CreateUnit"]
+title = "创建单位 (指定坐标)"
+description = "给 ${玩家} 创建 ${单位} 在 (${X}, ${Y}), 面向角度为 ${Direction}"
+comment = "不能被'最后创建的单位'获得"
+category = TC_UNIT
+[[.args]]
+type = player
+[[.args]]
+type = unitcode
+[[.args]]
+type = real
+[[.args]]
+type = real
+[[.args]]
+type = degree
+default = "RealUnitFacing"
+
 [CreateCorpseLocBJ]
 title = "创建尸体"
-description = "创建一个 ${单位} 的尸体给 ${Player} 在 ${指定点}"
+description = "创建 ${单位} 的尸体给 ${Player} 在 ${指定点}"
 comment = "不是所有单位都有尸体形态. 使用'最后创建的单位'来获取该尸体."
 category = TC_UNIT
 [[.args]]
@@ -3443,7 +3477,7 @@ type = location
 
 [CreatePermanentCorpseLocBJ]
 title = "创建永久性尸体"
-description = "创建一个 ${Style} ${单位} 尸体给 ${Player} 在 ${指定点} 面向角度为 ${Direction} 度"
+description = "创建 ${Style} ${单位} 的尸体给 ${Player} 在 ${指定点} , 面向角度为 ${Direction}"
 category = TC_UNIT
 [[.args]]
 type = corpsetype
@@ -3461,40 +3495,6 @@ type = degree
 default = "GetRandomDirectionDeg"
 min = 0
 max = 360
-
-[" CreateUnit"]
-title = "创建单位(指定坐标) [C]"
-description = "为玩家 ${玩家} 创建一个 ${单位} 在(X坐标: ${输入坐标} Y坐标: ${输入坐标} ), 面向角度: ${facing}"
-comment = "不能被'最后创建的单位'捕获之"
-category = TC_UNIT
-[[.args]]
-type = player
-[[.args]]
-type = unitcode
-[[.args]]
-type = real
-[[.args]]
-type = real
-[[.args]]
-type = degree
-default = "RealUnitFacing"
-
-[" CreateUnitAtLoc"]
-title = "创建单位(指定点) [C]"
-description = "为玩家 ${玩家} 创建一个 ${单位} 在 ${指定点} 面向角度:${Face} 度"
-comment = "不能被'最后创建的单位'捕获之"
-category = TC_UNIT
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unitcode
-default = "hfoo"
-[[.args]]
-type = location
-[[.args]]
-type = degree
-default = "0"
 
 [KillUnit]
 title = "杀死"
@@ -4909,7 +4909,7 @@ default = "OrderCodeSmartItem"
 type = item
 
 [YDWEIssueNeutralImmediateOrderById]
-title = "发布中介命令(无目标)(自定义ID) [New!]"
+title = "发布中介命令(无目标)(自定义ID)"
 description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令"
 comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
 script_name = IssueNeutralImmediateOrderById
@@ -4925,7 +4925,7 @@ type = ordercode
 default = YDWEAbilityId2OrderId
 
 [YDWEIssueNeutralPointOrderById]
-title = "发布中介命令(指定坐标)(自定义ID) [New!]"
+title = "发布中介命令(指定坐标)(自定义ID)"
 description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到坐标:(${X},${Y})"
 comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
 script_name = IssueNeutralPointOrderById
@@ -4947,7 +4947,7 @@ type = real
 default = "0"
 
 [YDWEIssueNeutralTargetOrderById]
-title = "发布中介命令(指定单位)(自定义ID) [New!]"
+title = "发布中介命令(指定单位)(自定义ID)"
 description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${单位}"
 comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
 script_name = IssueNeutralTargetOrderById
@@ -4983,7 +4983,7 @@ default = "851983"
 type = destructable
 
 [YDWEIssueNeutralTargetItemOrderById]
-title = "发布中介命令(指定物品)(自定义ID) [New!]"
+title = "发布中介命令(指定物品)(自定义ID)"
 description = "使 ${玩家} 对 ${单位} 发布 ${Order} 命令到目标: ${物品}"
 comment = "可以用来对非本玩家单位发布命令，能直接输入数字命令ID。"
 script_name = IssueNeutralTargetOrderById
@@ -5835,7 +5835,7 @@ default = "EnableDisableEnable"
 [MoveLocation]
 title = "移动点 [R]"
 description = "移动 ${点} 到(${X},${Y})"
-comment = "该点必须是一个变量. 因为移动一个不可重用的点是无意义的."
+comment = "该点必须是一个变量。 因为移动一个不可重用的点是无意义的。"
 category = TC_LOCATION
 [[.args]]
 type = location
@@ -5849,7 +5849,7 @@ default = "0"
 [RemoveLocation]
 title = "清除点 [R]"
 description = "清除 ${点}"
-comment = "点是堆积最多的垃圾资源,不需要再使用的点都要记得清除掉."
+comment = "点是堆积最多的垃圾资源，不需要再使用的点都要记得清除掉。"
 category = TC_LOCATION
 [[.args]]
 type = location
@@ -8002,10 +8002,10 @@ type = timer
 default = "bj_lastStartedTimer"
 
 [TimerStart]
-title = "运行计时器 [C]"
+title = "运行计时器"
 description = "运行 ${计时器}，周期: ${时间} 秒，模式: ${模式}，运行函数: ${函数}"
 comment = "等同于TimerStart"
-category = TC_TIMER
+category = TC_YDHIDE
 [[.args]]
 type = timer
 [[.args]]

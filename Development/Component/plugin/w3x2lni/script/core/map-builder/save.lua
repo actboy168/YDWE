@@ -22,15 +22,14 @@ local function build_imp(w2l, output_ar, imp_buf)
     end
     local imp = {}
     for name, buf in pairs(output_ar) do
-        if buf and not impignore[name] then
+        if buf and not impignore[name:lower()] then
             imp[#imp+1] = name
         end
     end
     if imp_buf then
         local imp_lni = w2l:parse_lni(imp_buf, filename)
         for _, name in ipairs(imp_lni.import) do
-            local name = name:lower()
-            if impignore[name] then
+            if impignore[name:lower()] then
                 imp[#imp+1] = name
             end
         end
@@ -67,7 +66,7 @@ return function (w2l)
     w2l:file_remove('table', 'imp')
 
     for type, name, buf in w2l:file_pairs() do
-        if type == 'resource' and w2l.setting.mdx_squf and name:sub(-4) == '.mdx' then
+        if type == 'resource' and w2l.setting.mdx_squf and name:sub(-4):lower() == '.mdx' then
             buf = w3xparser.mdxopt(buf)
         end
         if type == 'w3x2lni' and w2l.setting.remove_we_only then
