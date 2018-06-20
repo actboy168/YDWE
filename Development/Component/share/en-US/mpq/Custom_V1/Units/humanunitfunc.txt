@@ -1,5 +1,5 @@
 [Hblm]
-Art=ReplaceableTextures\CommandButtons\BTNHeroBloodElfPrince.tga
+Art=ReplaceableTextures\CommandButtons\BTNHeroBloodElfPrince.blp
 Buttonpos=0,1
 Missileart=Abilities\Weapons\BloodElfMissile\BloodElfMissile.mdl
 Missilearc=0.15
@@ -10,10 +10,11 @@ Requires=
 Requires1=hkee
 Requires2=hcas
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-sorceror.blp
 
 [halt]
 Trains=Hamg,Hmkg,Hpal,Hblm
-Art=ReplaceableTextures\CommandButtons\BTNAltarOfKings.tga
+Art=ReplaceableTextures\CommandButtons\BTNAltarOfKings.blp
 Buttonpos=1,1
 BuildingSoundLabel=BuildingConstructionLoop
 LoopingSoundFadeIn=512
@@ -23,7 +24,7 @@ Attachmentanimprops=medium
 Revive=1
 
 [Hamg]
-Art=ReplaceableTextures\CommandButtons\BTNHeroArchMage.tga
+Art=ReplaceableTextures\CommandButtons\BTNHeroArchMage.blp
 Buttonpos=0,2
 Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
 Missilearc=0.15
@@ -38,11 +39,12 @@ Requires1=hkee
 Requires2=hcas
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
 Attachmentanimprops=medium
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-archmage.blp
 
 [harm]	
 Requires=hkee,hbla
 Trains=hgyr,hmtm,hmtt,hrtt
-Art=ReplaceableTextures\CommandButtons\BTNWorkshop.tga
+Art=ReplaceableTextures\CommandButtons\BTNWorkshop.blp
 Buttonpos=3,1
 Researches=Rhgb,Rhfl,Rhrt,Rhfc,Rhfs
 BuildingSoundLabel=BuildingConstructionLoop
@@ -55,7 +57,7 @@ Attachmentanimprops=medium
 Requires=hkee
 Trains=hmpr,hsor,hspt
 Researches=Rhpt,Rhst,Rhse,Rhss
-Art=ReplaceableTextures\CommandButtons\BTNArcaneSanctum.tga
+Art=ReplaceableTextures\CommandButtons\BTNArcaneSanctum.blp
 Buttonpos=2,1
 BuildingSoundLabel=BuildingConstructionLoop
 LoopingSoundFadeIn=512
@@ -65,7 +67,7 @@ Specialart=Objects\Spawnmodels\Human\HCancelDeath\HCancelDeath.mdl
 [hbar]
 Trains=hfoo,hrif,hkni
 Researches=Rhde,Rhan,Rhri
-Art=ReplaceableTextures\CommandButtons\BTNHumanBarracks.tga
+Art=ReplaceableTextures\CommandButtons\BTNHumanBarracks.blp
 Buttonpos=1,0
 BuildingSoundLabel=BuildingConstructionLoop
 LoopingSoundFadeIn=512
@@ -75,7 +77,7 @@ Attachmentanimprops=medium
 
 [hbla]
 Requires=htow
-Art=ReplaceableTextures\CommandButtons\BTNBlacksmith.tga
+Art=ReplaceableTextures\CommandButtons\BTNBlacksmith.blp
 Buttonpos=3,0
 Researches=Rhme,Rhar,Rhla,Rhra
 BuildingSoundLabel=BuildingConstructionLoop
@@ -87,7 +89,7 @@ Specialart=Objects\Spawnmodels\Human\HCancelDeath\HCancelDeath.mdl
 Requires=halt
 Trains=hpea
 Researches=Rhpm
-Art=ReplaceableTextures\CommandButtons\BTNCastle.tga
+Art=ReplaceableTextures\CommandButtons\BTNCastle.blp
 Buttonpos=0,2
 Missileart=Abilities\Weapons\GuardTowerMissile\GuardTowerMissile.mdl
 Missilearc=0.15
@@ -101,7 +103,7 @@ Attachmentanimprops=large
 
 [hctw]
 Requires=harm
-Art=ReplaceableTextures\CommandButtons\BTNCannonTower.tga
+Art=ReplaceableTextures\CommandButtons\BTNCannonTower.blp
 Buttonpos=1,2
 Missileart=Abilities\Weapons\CannonTowerMissile\CannonTowerMissile.mdl
 Missilearc=0.35
@@ -115,7 +117,7 @@ Specialart=Objects\Spawnmodels\Human\HCancelDeath\HCancelDeath.mdl
 // blood elf dragon hawk 
 [hdhw]
 Requires=hvlt
-Art=ReplaceableTextures\CommandButtons\BTNDragonHawk.tga
+Art=ReplaceableTextures\CommandButtons\BTNDragonHawk.blp
 Buttonpos=1,0
 Missileart=Abilities\Weapons\DragonHawkMissile\DragonHawkMissile.mdl
 Missilearc=0.15
@@ -124,7 +126,7 @@ MissileHoming=1
 Attachmentanimprops=medium
 
 [hhou]
-Art=ReplaceableTextures\CommandButtons\BTNFarm.tga
+Art=ReplaceableTextures\CommandButtons\BTNFarm.blp
 Buttonpos=0,1
 BuildingSoundLabel=BuildingConstructionLoop
 LoopingSoundFadeIn=512
@@ -132,7 +134,7 @@ LoopingSoundFadeOut=512
 Specialart=Objects\Spawnmodels\Human\HCancelDeath\HCancelDeath.mdl
 
 [hfoo]	
-Art=ReplaceableTextures\CommandButtons\BTNFootman.tga
+Art=ReplaceableTextures\CommandButtons\BTNFootman.blp
 Buttonpos=0,0
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
 
@@ -140,7 +142,7 @@ Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplo
 Requires=hcas,hlum
 Trains=hgry,hdhw
 Researches=Rhhb,Rhcd
-Art=ReplaceableTextures\CommandButtons\BTNGryphonAviary.tga
+Art=ReplaceableTextures\CommandButtons\BTNGryphonAviary.blp
 Buttonpos=1,2
 BuildingSoundLabel=BuildingConstructionLoop
 LoopingSoundFadeIn=512
@@ -150,7 +152,7 @@ Attachmentanimprops=medium
 
 [hgtw]
 Requires=hlum
-Art=ReplaceableTextures\CommandButtons\BTNGuardTower.tga
+Art=ReplaceableTextures\CommandButtons\BTNGuardTower.blp
 Buttonpos=0,2
 Missileart=Abilities\Weapons\GuardTowerMissile\GuardTowerMissile.mdl
 Missilearc=0.15
@@ -163,7 +165,7 @@ Specialart=Objects\Spawnmodels\Human\HCancelDeath\HCancelDeath.mdl
 
 [hwtw]
 Upgrade=hgtw,hctw,hatw
-Art=ReplaceableTextures\CommandButtons\BTNHumanWatchTower.tga
+Art=ReplaceableTextures\CommandButtons\BTNHumanWatchTower.blp
 Buttonpos=0,2
 BuildingSoundLabel=BuildingConstructionLoop
 LoopingSoundFadeIn=512
@@ -172,7 +174,7 @@ Specialart=Objects\Spawnmodels\Human\HCancelDeath\HCancelDeath.mdl
 
 [hatw]
 Requires=
-Art=ReplaceableTextures\CommandButtons\BTNHumanArcaneTower.tga
+Art=ReplaceableTextures\CommandButtons\BTNHumanArcaneTower.blp
 Buttonpos=2,2
 Missileart=Abilities\Spells\Undead\OrbOfDeath\OrbOfDeathMissile.mdl
 Missilearc=0.15
@@ -185,7 +187,7 @@ Animprops=upgrade,third
 Specialart=Objects\Spawnmodels\Human\HCancelDeath\HCancelDeath.mdl
 
 [hgyr]
-Art=ReplaceableTextures\CommandButtons\BTNFlyingMachine.tga
+Art=ReplaceableTextures\CommandButtons\BTNFlyingMachine.blp
 Buttonpos=0,0
 Missileart=Abilities\Weapons\GyroCopter\GyroCopterImpact.mdl,Abilities\Weapons\GyroCopter\GyroCopterMissile.mdl
 Missilearc=0.0,0.0
@@ -199,7 +201,7 @@ Attachmentanimprops=medium
 Upgrade=hcas
 Trains=hpea
 Researches=Rhpm
-Art=ReplaceableTextures\CommandButtons\BTNKeep.tga
+Art=ReplaceableTextures\CommandButtons\BTNKeep.blp
 Buttonpos=0,2
 Missileart=Abilities\Weapons\GuardTowerMissile\GuardTowerMissile.mdl
 Missilearc=0.15
@@ -213,7 +215,7 @@ Attachmentanimprops=large
 
 [hkni]
 Requires=hlum,hcas,hbla
-Art=ReplaceableTextures\CommandButtons\BTNKnight.tga
+Art=ReplaceableTextures\CommandButtons\BTNKnight.blp
 Buttonpos=2,0
 MovementSoundLabel=HumanKnightMovement
 LoopingSoundFadeIn=512
@@ -222,7 +224,7 @@ Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplo
 Attachmentanimprops=medium
 
 [hlum]
-Art=ReplaceableTextures\CommandButtons\BTNHumanLumberMill.tga
+Art=ReplaceableTextures\CommandButtons\BTNHumanLumberMill.blp
 Buttonpos=2,0
 Researches=Rhac,Rhlh
 BuildingSoundLabel=BuildingConstructionLoop
@@ -232,30 +234,31 @@ Specialart=Objects\Spawnmodels\Human\HCancelDeath\HCancelDeath.mdl
 
 [hmil]
 Builds=htow,hhou,hbar,hbla,hwtw,halt,harm,hars,hlum,hgra,hvlt
-Art=ReplaceableTextures\CommandButtons\BTNMilitia.tga
+Art=ReplaceableTextures\CommandButtons\BTNMilitia.blp
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
 
 [Hmkg]
-Art=ReplaceableTextures\CommandButtons\BTNHeroMountainKing.tga
+Art=ReplaceableTextures\CommandButtons\BTNHeroMountainKing.blp
 Buttonpos=1,2
 Requirescount=3
 Requires=
 Requires1=hkee
 Requires2=hcas
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-mountainking.blp
 
 [hmpr]
-Art=ReplaceableTextures\CommandButtons\BTNPriest.tga
+Art=ReplaceableTextures\CommandButtons\BTNPriest.blp
 Buttonpos=1,0
 Missileart=Abilities\Weapons\PriestMissile\PriestMissile.mdl
 Missilearc=0.00
 Missilespeed=900
 MissileHoming=1
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
-Casterupgradeart=UI\Widgets\Console\Human\infocard-priest.tga
+Casterupgradeart=UI\Widgets\Console\Human\infocard-priest.blp
 
 [hmtm]
-Art=ReplaceableTextures\CommandButtons\BTNMortarTeam.tga
+Art=ReplaceableTextures\CommandButtons\BTNMortarTeam.blp
 Buttonpos=1,0
 Missileart=Abilities\Weapons\Mortar\MortarMissile.mdl
 Missilearc=0.35
@@ -264,23 +267,24 @@ Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplo
 Attachmentanimprops=medium
 
 [Hpal]
-Art=ReplaceableTextures\CommandButtons\BTNHeroPaladin.tga
+Art=ReplaceableTextures\CommandButtons\BTNHeroPaladin.blp
 Buttonpos=2,2
 Requirescount=3
 Requires=
 Requires1=hkee
 Requires2=hcas
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-paladin.blp
 
 [hpea]
 Builds=htow,hhou,hbar,hbla,hwtw,halt,harm,hars,hlum,hgra,hvlt
-Art=ReplaceableTextures\CommandButtons\BTNPeasant.tga
+Art=ReplaceableTextures\CommandButtons\BTNPeasant.blp
 Buttonpos=0,0
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
 
 [hrif]
 Requires=hbla
-Art=ReplaceableTextures\CommandButtons\BTNRifleman.tga
+Art=ReplaceableTextures\CommandButtons\BTNRifleman.blp
 Buttonpos=1,0
 Missileart=Abilities\Weapons\Rifle\RifleImpact.mdl
 Missilearc=0.0
@@ -288,19 +292,19 @@ Missilespeed=1900
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
 
 [hsor]
-Art=ReplaceableTextures\CommandButtons\BTNSorceress.tga
+Art=ReplaceableTextures\CommandButtons\BTNSorceress.blp
 Buttonpos=0,0
 Missileart=Abilities\Weapons\SorceressMissile\SorceressMissile.mdl
 Missilearc=0.00
 Missilespeed=900
 MissileHoming=1
 Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplode.mdl
-Casterupgradeart=UI\Widgets\Console\Human\infocard-sorceress.tga
+Casterupgradeart=UI\Widgets\Console\Human\infocard-sorceress.blp
 
 // Blood Elf Spell Breaker
 [hspt]
 Requires=hvlt,hkee
-Art=ReplaceableTextures\CommandButtons\BTNSpellBreaker.tga
+Art=ReplaceableTextures\CommandButtons\BTNSpellBreaker.blp
 Buttonpos=2,0
 Missileart=Abilities\Weapons\BloodElfSpellThiefMISSILE\BloodElfSpellThiefMISSILE.mdl
 Missilearc=0.00
@@ -309,7 +313,7 @@ Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplo
 
 [hmtt]
 Requires=hcas
-Art=ReplaceableTextures\CommandButtons\BTNSeigeEngine.tga
+Art=ReplaceableTextures\CommandButtons\BTNSeigeEngine.blp
 Attachmentanimprops=large
 Buttonpos=2,0
 MovementSoundLabel=HumanSteamTankMovement
@@ -321,7 +325,7 @@ Missilespeed=2500
 
 [hrtt]
 Requires=hcas
-Art=ReplaceableTextures\CommandButtons\BTNSeigeEngineWithMissles.tga
+Art=ReplaceableTextures\CommandButtons\BTNSeigeEngineWithMissles.blp
 Attachmentanimprops=large
 Animprops=alternate
 Buttonpos=2,0
@@ -337,7 +341,7 @@ Missilehoming=1
 Upgrade=hkee
 Trains=hpea
 Researches=Rhpm
-Art=ReplaceableTextures\CommandButtons\BTNTownHall.tga
+Art=ReplaceableTextures\CommandButtons\BTNTownHall.blp
 Buttonpos=0,0
 Missileart=Abilities\Weapons\GuardTowerMissile\GuardTowerMissile.mdl
 Missilearc=0.15
@@ -350,35 +354,35 @@ Attachmentanimprops=large
 
 // Arcane Vault 
 [hvlt]
-Art=ReplaceableTextures\CommandButtons\BTNArcaneVault.tga
+Art=ReplaceableTextures\CommandButtons\BTNArcaneVault.blp
 Buttonpos=2,2
 Makeitems=sreg,mcri,plcl,phea,pman,stwp,tsct,ofir,ssan
 Specialart=Objects\Spawnmodels\Human\HCancelDeath\HCancelDeath.mdl
 Attachmentanimprops=medium
 
 [hwat]
-Art=ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.tga
+Art=ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.blp
 Missileart=Abilities\Weapons\WaterElementalMissile\WaterElementalMissile.mdl
 Missilearc=0.15
 Missilespeed=1300
 Attachmentanimprops=medium
 
 [hwt2]
-Art=ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.tga
+Art=ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.blp
 Missileart=Abilities\Weapons\WaterElementalMissile\WaterElementalMissile.mdl
 Missilearc=0.15
 Missilespeed=1300
 Attachmentanimprops=medium
 
 [hwt3]
-Art=ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.tga
+Art=ReplaceableTextures\CommandButtons\BTNSummonWaterElemental.blp
 Missileart=Abilities\Weapons\WaterElementalMissile\WaterElementalMissile.mdl
 Missilearc=0.15
 Missilespeed=1300
 Attachmentanimprops=medium
 
 [hgry]
-Art=ReplaceableTextures\CommandButtons\BTNGryphonRider.tga
+Art=ReplaceableTextures\CommandButtons\BTNGryphonRider.blp
 Buttonpos=0,0
 Missileart=Abilities\Weapons\GryphonRiderMissile\GryphonRiderMissile.mdl
 Missilearc=0.15
@@ -387,7 +391,7 @@ Targetart=Abilities\Weapons\GryphonRiderMissile\GryphonRiderMissileTarget.mdl
 Attachmentanimprops=medium
 
 [zmar]
-Art=ReplaceableTextures\CommandButtons\BTNRifleman.tga
+Art=ReplaceableTextures\CommandButtons\BTNRifleman.blp
 Buttonpos=1,0
 Missileart=Abilities\Weapons\Rifle\RifleImpact.mdl
 Missilearc=0.0
@@ -396,7 +400,7 @@ Specialart=Objects\Spawnmodels\Human\HumanLargeDeathExplode\HumanLargeDeathExplo
 
 // phoenix
 [hphx]
-Art=ReplaceableTextures\CommandButtons\BTNMarkOfFire.tga
+Art=ReplaceableTextures\CommandButtons\BTNMarkOfFire.blp
 Missileart=Abilities\Weapons\PhoenixMissile\Phoenix_Missile.mdl
 Missilearc=0.15
 Missilespeed=1800
@@ -406,11 +410,11 @@ Attachmentanimprops=medium
 
 // phoenix egg
 [hpxe]
-Art=ReplaceableTextures\CommandButtons\BTNPhoenixEgg.tga
+Art=ReplaceableTextures\CommandButtons\BTNPhoenixEgg.blp
 
 //#RESTNOBETA
 [hbsh]
-Art=ReplaceableTextures\CommandButtons\BTNHumanBattleShip.tga
+Art=ReplaceableTextures\CommandButtons\BTNHumanBattleShip.blp
 Buttonpos=2,0
 Missileart=Abilities\Weapons\BoatMissile\BoatMissile.mdl
 Missilearc=0.10
@@ -418,7 +422,7 @@ Missilespeed=900
 Attachmentanimprops=large
 
 [hdes]
-Art=ReplaceableTextures\CommandButtons\BTNHumanDestroyer.tga
+Art=ReplaceableTextures\CommandButtons\BTNHumanDestroyer.blp
 Buttonpos=1,0
 Missileart=Abilities\Weapons\BoatMissile\BoatMissile.mdl
 Missilearc=0.10
@@ -426,12 +430,12 @@ Missilespeed=900
 Attachmentanimprops=large
 
 [hbot]
-Art=ReplaceableTextures\CommandButtons\BTNHumanTransport.tga
+Art=ReplaceableTextures\CommandButtons\BTNHumanTransport.blp
 Buttonpos=0,0
 Attachmentanimprops=large
 
 [hshy]
-Art=ReplaceableTextures\CommandButtons\BTNHumanShipyard.tga
+Art=ReplaceableTextures\CommandButtons\BTNHumanShipyard.blp
 Sellunits=hbot
 BuildingSoundLabel=BuildingConstructionLoop
 LoopingSoundFadeIn=512

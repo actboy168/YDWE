@@ -1,5 +1,9 @@
 [Misc]
 
+FadeBuffMinDuration=10
+FadeBuffMinAlpha=96
+FadeBuffMaxAlpha=255
+
 // gold text data
 GoldTextColor=255,255,220,0
 GoldTextVelocity=0,0.03,100
@@ -47,6 +51,9 @@ BashTextColor=255,0,0,255
 BashTextVelocity=0,0.04,100
 BashTextLifetime=5
 BashTextFadeStart=2
+
+// Lava Spawn Vertex Colors
+LavaSpawnColor=255,255,255,255,255,220,220,220,255,185,185,185
 
 ActiveButtonColor=255,75,150,255
 

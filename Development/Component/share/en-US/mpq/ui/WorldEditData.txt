@@ -288,7 +288,7 @@ J=Default
 // Value 2: Integer indicating which animation sequence to use
 // Value 3: Model file for screen graphics
 [LoadingScreens]
-NumScreens=86
+NumScreens=98
 00=0,WESTRING_LOADINGSCREEN_TUTORIAL01,0,UI\Glues\Loading\Backgrounds\Campaigns\TutorialBackground.mdl
 01=0,WESTRING_LOADINGSCREEN_TUTORIAL02,1,UI\Glues\Loading\Backgrounds\Campaigns\TutorialBackground.mdl
 02=0,WESTRING_LOADINGSCREEN_HUMAN01,0,UI\Glues\Loading\Backgrounds\Campaigns\LordaeronBackground.mdl
@@ -415,6 +415,30 @@ NumScreens=86
 84=1,WESTRING_LOADINGSCREEN_ORCX01_04,3,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
 //#LINENOBETA
 85=1,WESTRING_LOADINGSCREEN_ORCX01_05,1,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
+//#LINENOBETA
+86=1,WESTRING_LOADINGSCREEN_ORCX02_01,0,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionQuest02Background.mdl
+//#LINENOBETA
+87=1,WESTRING_LOADINGSCREEN_ORCX02_02,5,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
+//#LINENOBETA
+88=1,WESTRING_LOADINGSCREEN_ORCX02_03,6,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
+//#LINENOBETA
+89=1,WESTRING_LOADINGSCREEN_ORCX02_04,8,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
+//#LINENOBETA
+90=1,WESTRING_LOADINGSCREEN_ORCX02_05,7,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
+//#LINENOBETA
+91=1,WESTRING_LOADINGSCREEN_ORCX02_06,9,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
+//#LINENOBETA
+92=1,WESTRING_LOADINGSCREEN_ORCX02_07,10,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
+//#LINENOBETA
+93=1,WESTRING_LOADINGSCREEN_ORCX02_08,11,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
+//#LINENOBETA
+94=1,WESTRING_LOADINGSCREEN_ORCX02_09,12,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
+//#LINENOBETA
+95=1,WESTRING_LOADINGSCREEN_ORCX02_10,13,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
+//#LINENOBETA
+96=1,WESTRING_LOADINGSCREEN_ORCX03A,14,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
+//#LINENOBETA
+97=1,WESTRING_LOADINGSCREEN_ORCX03B,15,UI\Glues\Loading\Backgrounds\Campaigns\BarrensExpansionBackground.mdl
 
 [PrologueScreens]
 NumScreens=1
@@ -615,15 +639,17 @@ DropTableIndicatorScale=0.25
 DropTableIndicatorHeight=10
 MouseWheelZoomFactor=1.10
 DefaultMapSize=64,64
-MinimumMapSize=64
+MinimumMapSize=32
 MaximumMapSize=256
 DefaultDoodadCategory=D
 DefaultTileset=L
 ClickHelperScale=0.4
 
 // Help documentation
-HelpFile=support\Layout\(PC)WEHIndex.html
-HelpFile_Mac=ReadMe/Layout/(Mac)WEHIndex.html
+HelpFile_V0=support\Layout\Index2.html
+HelpFile_V0_Mac=ReadMe/Layout/Index2.html
+HelpFile_V1=support\Layout\(PC)WEHIndex.html
+HelpFile_V1_Mac=ReadMe/Layout/(Mac)WEHIndex.html
 HelpFile_CampaignEditor=support\Layout\(PC)WEHIndex.html
 HelpFile_CampaignEditor_Mac=ReadMe/Layout/(Mac)WEHIndex.html
 
@@ -782,6 +808,7 @@ OMIcon_Variable=ReplaceableTextures\WorldEditUI\Actions-SetVariables
 // Miscellaneous icons
 Icon_Force=ReplaceableTextures\WorldEditUI\Editor-Force.blp
 Icon_ItemSet=ReplaceableTextures\WorldEditUI\Editor-ItemSet.blp
+Icon_ItemTable=ReplaceableTextures\WorldEditUI\Editor-ItemSet.blp
 Icon_AllyPri_High=ReplaceableTextures\WorldEditUI\Editor-Ally-HighPriority.blp
 Icon_AllyPri_Low=ReplaceableTextures\WorldEditUI\Editor-Ally-LowPriority.blp
 Icon_AllyPri_None=ReplaceableTextures\WorldEditUI\Editor-Ally-NoPriority.blp
@@ -839,6 +866,7 @@ ToolBarIcon_OE_NewItem=ReplaceableTextures\WorldEditUI\ObjectEditor-CustomItem
 ToolBarIcon_OE_NewDood=ReplaceableTextures\WorldEditUI\ObjectEditor-CustomDoodad
 ToolBarIcon_OE_NewDest=ReplaceableTextures\WorldEditUI\ObjectEditor-CustomDestructible
 ToolBarIcon_OE_NewAbil=ReplaceableTextures\WorldEditUI\ObjectEditor-CustomAbility
+ToolBarIcon_OE_NewBuff=ReplaceableTextures\WorldEditUI\ObjectEditor-CustomAbility
 ToolBarIcon_OE_NewUpgr=ReplaceableTextures\WorldEditUI\ObjectEditor-CustomUpgrade
 ToolBarIcon_UseSound=ReplaceableTextures\WorldEditUI\SoundEditor-UseSound
 ToolBarIcon_ImportSound=ReplaceableTextures\WorldEditUI\SoundEditor-ImportSound
@@ -926,8 +954,7 @@ Welcome=Sound\Ambient\DoodadEffects\UtherReturns.wav
 //#LINENOBETA
 06=1,Units\NightElf\MalFurion\MalFurionNoStag,WESTRING_MODEL_MALFURIONNOSTAG
 //#LINENOBETA
-07=1,Doodads\Cinematic\ArthasVictoryCinematic\ArthasVictoryCinematic,WESTRING_MODEL_VICTORYCINEMATICARTHAS
+07=1,Doodads\Cinematic\ArthasIllidanFight\ArthasIllidanFight,WESTRING_MODEL_VICTORYCINEMATICARTHAS
 //#LINENOBETA
 08=1,Doodads\Cinematic\IllidanVictoryCinematic\IllidanVictoryCinematic,WESTRING_MODEL_VICTORYCINEMATICILLIDAN
-09=1,Abilities\Spells\Other\Andt\Andt,WESTRING_MODEL_REVEAL_EFFECT
-10=1,Objects\InventoryItems\Rune\Rune,WESTRING_MODEL_RUNE
+09=1,Objects\InventoryItems\Rune\Rune,WESTRING_MODEL_RUNE

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Window size="400,600" caption="0,0,0,36" roundcorner="10,10" >
-  <Font name="微软雅黑" size="18"  default="true" />
-  <Font name="幼圆" size="18" />
-  <Font name="微软雅黑" size="14" />
+  <Font name="Microsoft YaHei" size="14"  default="true" />
+  <Font name="Microsoft YaHei" size="13" />
+  <Font name="Microsoft YaHei" size="12" />
+  <Font name="Microsoft YaHei" size="11" />
   <Include source="styles.xml" />
 
   <Class name="Title" bkimage="file='Common/Button.png' corner='5,11,5,11' source='0,24,96,48'" />
@@ -25,17 +26,17 @@
     <HorizontalLayout>
       <VerticalLayout bkcolor="#FFEAECEC" width="106" inset="6,4,0,4">
         <Control height="16" />
-        <RadioButton name="tab_0" group="TabSelect" text="Compile Map"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" selected="true" />
+        <RadioButton name="tab_0" group="TabSelect" text="Compile"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" selected="true" />
         <Control height="1" />
         <RadioButton name="tab_1" group="TabSelect" text="Test"       textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
         <RadioButton name="tab_2" group="TabSelect" text="Editor" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
-        <RadioButton name="tab_3" group="TabSelect" text="Local Area Network" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <RadioButton name="tab_3" group="TabSelect" text="LAN" textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
         <RadioButton name="tab_4" group="TabSelect" text="War3 Plugin"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
-        <RadioButton name="tab_5" group="TabSelect" text="File Type Relation"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
+        <RadioButton name="tab_5" group="TabSelect" text="File Type"   textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
         <Control height="1" />
         <RadioButton name="tab_6" group="TabSelect" text="Language"       textpadding="-6,0,0,0" borderround="6,6" class="TabSelect" width="106" height="36" />
       </VerticalLayout>
@@ -98,9 +99,9 @@
             <HorizontalLayout height="30" >
               <Control width="16" />
               <Combo name="LaunchRenderingEngine" itemfont="2" bkcolor="#FFEBEBEB" itembkcolor="#FFFAFCFC" >
-                <ListLabelElement text="Direct3D 8" />
-                <ListLabelElement text="Direct3D 9" />
-                <ListLabelElement text="OpenGL" />
+                <ListLabelElement font="2" text="Direct3D 8" />
+                <ListLabelElement font="2" text="Direct3D 9" />
+                <ListLabelElement font="2" text="OpenGL" />
               </Combo>
             </HorizontalLayout>
           </VerticalLayout>
@@ -152,9 +153,9 @@
         </VerticalLayout>
         <VerticalLayout class="Background" inset="2,24,2,24" >
           <VerticalLayout height="260" >
-            <Label text="Local Area Network Testing"  tooltip="" class="LabelTitle" />
+            <Label text="LAN Testing"  tooltip="" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
-              <CheckBox text="Enable Local Area Network Support"         width="200" name="EnableHost" tooltip="" />
+              <CheckBox text="Enable LAN Support"         width="200" name="EnableHost" tooltip="" />
                 <VerticalLayout class="Background" inset="10,6,10,6" >
                   <RadioButton class="NormalRadioButton" text="Single Player Mode" width="200" group="HostTest" name="HostTest_0" tooltip="Just start one war3." />
                   <RadioButton class="NormalRadioButton" text="Multiplayer Mode"   width="200" group="HostTest" name="HostTest_1" tooltip="Start several War3 as the count of empty player slots." />
@@ -187,7 +188,7 @@
             <Label text="Shortcut"  tooltip="Add / Delete Shortcut Of YDWE" class="LabelTitle" />
             <VerticalLayout class="Background" inset="10,6,10,6" >
               <CheckBox text="Add To Desktop"   width="200" name="Shortcuts_desktop" tooltip="Add Shortcut of YDWE to desktop." />
-              <CheckBox text="Add To Taskbar" width="200" name="Shortcuts_taskbar" tooltip="Add Shortcut of YDWE to Taskbar." />
+              <CheckBox text="Add To Taskbar(Quick Start Bar)" width="200" name="Shortcuts_taskbar" tooltip="Add Shortcut of YDWE to Taskbar." />
             </VerticalLayout>
           </VerticalLayout>
           <Control height="16" />
@@ -196,8 +197,8 @@
             <VerticalLayout class="Background" inset="10,6,10,6" >
               <Control height="8" />
               <HorizontalLayout class="Background" childpadding="6" >
-                <Button text="Modify" width="40" height="20" font="2" name="choose_war3_dir" />
-                <Label text="" bkcolor="#FFEBEBEB" textcolor="#FF000000" font="2" name="Warcraft3Directory" />
+                <Button text="Modify" width="40" height="20" font="3" name="choose_war3_dir" />
+                <Label text="" bkcolor="#FFEBEBEB" textcolor="#FF000000" font="3" name="Warcraft3Directory" />
               </HorizontalLayout>
             </VerticalLayout>
           </VerticalLayout>

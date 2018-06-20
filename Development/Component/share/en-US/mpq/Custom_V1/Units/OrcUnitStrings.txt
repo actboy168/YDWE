@@ -27,7 +27,6 @@ Tip=Summon |cffffcc00B|rlademaster
 Ubertip="Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. |n|n|cffffcc00Attacks land units.|r"
 Revivetip=Revive |cffffcc00B|rlademaster
 Awakentip=Revive |cffffcc00B|rlademaster
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-blademaster.tga
 
 [ocat]
 Name=Demolisher
@@ -57,7 +56,6 @@ Tip=Summon |cffffcc00F|rar Seer
 Ubertip="Mystical Hero, effective at ranged attacks and scouting. Can learn Chain Lightning, Far Sight, Feral Spirit and Earthquake. |n|n|cffffcc00Attacks land and air units.|r"
 Revivetip=Revive |cffffcc00F|rar Seer
 Awakentip=Revive |cffffcc00F|rar Seer
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-farseer.tga
 
 [ofor]
 Name=War Mill
@@ -87,7 +85,7 @@ Ubertip="Brutish Orc warrior. Can learn Berserker Strength. |n|n|cffffcc00Attack
 Name=Troll Headhunter
 Hotkey=T
 Tip=Train |cffffcc00T|rroll Headhunter
-Ubertip="Versatile spear-thrower, effective against air units. Can learn Troll Regeneration. Can be ugpraded to Troll Berserker, which has the Berserk ability. |n|n|cffffcc00Attacks land and air units.|r "
+Ubertip="Versatile spear-thrower, effective against air units. Can learn Troll Regeneration. Can be upgraded to Troll Berserker, which has the Berserk ability. |n|n|cffffcc00Attacks land and air units.|r "
 
 [otbk]
 Name=Troll Berserker
@@ -180,7 +178,6 @@ Tip=Summon Shadow |cffffcc00H|runter
 Ubertip="Cunning Hero, adept at healing magics and voodoo curses. Can learn Healing Wave, Hex, Serpent Ward and Big Bad Voodoo. |n|n|cffffcc00Attacks land and air units.|r"
 Revivetip=Revive Shadow |cffffcc00H|runter
 Awakentip=Revive Shadow |cffffcc00H|runter
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-shadowhunter.tga
 
 [Otch]
 Name=Tauren Chieftain
@@ -190,7 +187,6 @@ Tip=Summon |cffffcc00T|rauren Chieftain
 Ubertip="Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Shockwave, War Stomp, Endurance Aura and Reincarnation. |n|n|cffffcc00Attacks land units.|r"
 Revivetip=Revive |cffffcc00T|rauren Chieftain
 Awakentip=Revive |cffffcc00T|rauren Chieftain
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-taurenchieftain.tga
 
 [otrb]
 Name=Orc Burrow

@@ -1,6 +1,6 @@
 [ebal]
 Requires=edob
-Art=ReplaceableTextures\CommandButtons\BTNGlaiveThrower.tga
+Art=ReplaceableTextures\CommandButtons\BTNGlaiveThrower.blp
 Buttonpos=2,0
 Missileart=Abilities\Weapons\GlaiveMissile\GlaiveMissile.mdl
 Missilearc=0.05
@@ -10,7 +10,7 @@ Attachmentanimprops=large
 
 [etrp]
 Requires=edob
-Art=ReplaceableTextures\CommandButtons\BTNTreant.tga
+Art=ReplaceableTextures\CommandButtons\BTNTreant.blp
 Buttonpos=3,0
 Missileart=Abilities\Weapons\AncientProtectorMissile\AncientProtectorMissile.mdl
 Missilearc=0.10
@@ -21,7 +21,7 @@ LoopingSoundFadeOut=512
 Specialart=Objects\Spawnmodels\NightElf\NECancelDeath\NECancelDeath.mdl
 
 [echm]
-Art=ReplaceableTextures\CommandButtons\BTNChimaera.tga
+Art=ReplaceableTextures\CommandButtons\BTNChimaera.blp
 Buttonpos=0,0
 Missileart=Abilities\Weapons\ChimaeraAcidMissile\ChimaeraAcidMissile.mdl,Abilities\Weapons\ChimaeraLightningMissile\ChimaeraLightningMissile.mdl
 Missilearc=0.0,0.0
@@ -32,26 +32,26 @@ Attachmentanimprops=large
 Requires=etoa
 DependencyOr=edcm
 // do NOT put a similar DependencyOr under edcm
-Art=ReplaceableTextures\CommandButtons\BTNDruidOfTheClaw.tga
+Art=ReplaceableTextures\CommandButtons\BTNDruidOfTheClaw.blp
 Buttonpos=1,0
 Specialart=Objects\Spawnmodels\NightElf\NightElfLargeDeathExplode\NightElfLargeDeathExplode.mdl
 Attachmentanimprops=medium
-Casterupgradeart=UI\Widgets\Console\Human\infocard-druidofclaw.tga
+Casterupgradeart=UI\Widgets\Console\Human\infocard-druidofclaw.blp
 
 [edcm]
 Requires=etoa
-Art=ReplaceableTextures\CommandButtons\BTNBearForm.tga
+Art=ReplaceableTextures\CommandButtons\BTNBearForm.blp
 Buttonpos=1,0
 Specialart=Objects\Spawnmodels\NightElf\NightElfLargeDeathExplode\NightElfLargeDeathExplode.mdl
 Attachmentanimprops=large
 Attachmentlinkprops=alternate
 Boneprops=alternate
-Casterupgradeart=UI\Widgets\Console\Human\infocard-druidofclaw.tga
+Casterupgradeart=UI\Widgets\Console\Human\infocard-druidofclaw.blp
 Animprops=alternateex
 
 // Ancient of Wonders
 [eden]
-Art=ReplaceableTextures\CommandButtons\BTNAncientOfWonders.tga
+Art=ReplaceableTextures\CommandButtons\BTNAncientOfWonders.blp
 Buttonpos=2,2
 Makeitems=moon,plcl,dust,phea,pman,stwp,spre,oven,pams
 BuildingSoundLabel=NightElfGrowingLoop
@@ -63,17 +63,17 @@ Attachmentanimprops=medium
 [edot]
 DependencyOr=edtm
 // do NOT put a similar DependencyOr under edtm
-Art=ReplaceableTextures\CommandButtons\BTNDruidOfTheTalon.tga
+Art=ReplaceableTextures\CommandButtons\BTNDruidOfTheTalon.blp
 Buttonpos=1,0
 Missileart=Abilities\Weapons\DruidoftheTalonMissile\DruidoftheTalonMissile.mdl
 Missilearc=0.15
 Missilespeed=900
 MissileHoming=1
 Specialart=Objects\Spawnmodels\NightElf\NightElfLargeDeathExplode\NightElfLargeDeathExplode.mdl
-Casterupgradeart=UI\Widgets\Console\Human\infocard-druidoftalon.tga
+Casterupgradeart=UI\Widgets\Console\Human\infocard-druidoftalon.blp
 
 [edtm]
-Art=ReplaceableTextures\CommandButtons\BTNRavenForm.tga
+Art=ReplaceableTextures\CommandButtons\BTNRavenForm.blp
 Buttonpos=1,0
 Missileart=Abilities\Weapons\DruidoftheTalonMissile\DruidoftheTalonMissile.mdl
 Missilearc=0.15
@@ -81,12 +81,12 @@ Missilespeed=900
 MissileHoming=1
 Attachmentlinkprops=alternate
 Boneprops=alternate
-Casterupgradeart=UI\Widgets\Console\Human\infocard-druidoftalon.tga
+Casterupgradeart=UI\Widgets\Console\Human\infocard-druidoftalon.blp
 Animprops=alternateex
 
 // Entangled Gold Mine
 [egol]
-Art=ReplaceableTextures\CommandButtons\BTNGoldMine.tga
+Art=ReplaceableTextures\CommandButtons\BTNGoldMine.blp
 BuildingSoundLabel=UndeadBuildingConstructionLoop
 LoopingSoundFadeIn=512
 LoopingSoundFadeOut=512
@@ -95,12 +95,12 @@ Attachmentanimprops=medium
 
 [ewsp]
 Builds=etol,emow,edos,eaom,eate,eaow,eaoe,edob,etrp,eden
-Art=ReplaceableTextures\CommandButtons\BTNWisp.tga
+Art=ReplaceableTextures\CommandButtons\BTNWisp.blp
 Buttonpos=0,0
 Specialart=Units\NightElf\Wisp\WispExplode.mdl
 
 [Edem]
-Art=ReplaceableTextures\CommandButtons\BTNHeroDemonHunter.tga
+Art=ReplaceableTextures\CommandButtons\BTNHeroDemonHunter.blp
 Buttonpos=0,2
 Requirescount=3
 Requires=
@@ -113,9 +113,10 @@ Missilearc=0.0
 Missilespeed=900
 MissileHoming=1
 Specialart=Objects\Spawnmodels\NightElf\NightElfLargeDeathExplode\NightElfLargeDeathExplode.mdl
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-demonhunter.blp
 
 [Edmm]
-Art=ReplaceableTextures\CommandButtons\BTNMetamorphosis.tga
+Art=ReplaceableTextures\CommandButtons\BTNMetamorphosis.blp
 Buttonpos=0,2
 Requirescount=3
 Requires=
@@ -130,9 +131,10 @@ Attachmentanimprops=medium
 Attachmentlinkprops=alternate
 Boneprops=alternate
 Animprops=alternateex
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-demonhunter.blp
 
 [Ekee]
-Art=ReplaceableTextures\CommandButtons\BTNKeeperOfTheGrove.tga
+Art=ReplaceableTextures\CommandButtons\BTNKeeperOfTheGrove.blp
 Buttonpos=1,2
 Requirescount=3
 Requires=
@@ -144,9 +146,10 @@ Missilespeed=900
 MissileHoming=1
 Specialart=Objects\Spawnmodels\NightElf\NightElfLargeDeathExplode\NightElfLargeDeathExplode.mdl
 Attachmentanimprops=medium
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-keeperofthegrove.blp
 
 [Emoo]
-Art=ReplaceableTextures\CommandButtons\BTNPriestessOfTheMoon.tga
+Art=ReplaceableTextures\CommandButtons\BTNPriestessOfTheMoon.blp
 Buttonpos=2,2
 Missileart=Abilities\Weapons\MoonPriestessMissile\MoonPriestessMissile.mdl
 Missilearc=0.15
@@ -158,9 +161,10 @@ Requires1=etoa
 Requires2=etoe
 Specialart=Objects\Spawnmodels\NightElf\NightElfLargeDeathExplode\NightElfLargeDeathExplode.mdl
 Attachmentanimprops=medium
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-priestessofthemoon.blp
 
 [Ewar]
-Art=ReplaceableTextures\CommandButtons\BTNHeroWarden.tga
+Art=ReplaceableTextures\CommandButtons\BTNHeroWarden.blp
 Buttonpos=0,1
 Missileart=Abilities\Weapons\WardenMissile\WardenMissile.mdl
 Missilearc=0.15
@@ -171,10 +175,11 @@ Requires1=etoa
 Requires2=etoe
 Specialart=Objects\Spawnmodels\NightElf\NightElfLargeDeathExplode\NightElfLargeDeathExplode.mdl
 Attachmentanimprops=medium
+ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-warden.blp
 
 [esen]
 Requires=edob
-Art=ReplaceableTextures\CommandButtons\BTNHuntress.tga
+Art=ReplaceableTextures\CommandButtons\BTNHuntress.blp
 Buttonpos=1,0
 Missileart=Abilities\Weapons\SentinelMissile\SentinelMissile.mdl
 Missilearc=0.10
@@ -183,7 +188,7 @@ Specialart=Objects\Spawnmodels\NightElf\NightElfLargeDeathExplode\NightElfLargeD
 Attachmentanimprops=medium
 
 [earc]
-Art=ReplaceableTextures\CommandButtons\BTNArcher.tga
+Art=ReplaceableTextures\CommandButtons\BTNArcher.blp
 Buttonpos=0,0
 Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
 Missilearc=0.15
@@ -191,7 +196,7 @@ Missilespeed=900
 Specialart=Objects\Spawnmodels\NightElf\NightElfLargeDeathExplode\NightElfLargeDeathExplode.mdl
 
 [edry]
-Art=ReplaceableTextures\CommandButtons\BTNDryad.tga
+Art=ReplaceableTextures\CommandButtons\BTNDryad.blp
 Buttonpos=0,0
 Missileart=Abilities\Weapons\Dryadmissile\Dryadmissile.mdl
 Missilearc=0.15
@@ -199,17 +204,17 @@ Missilespeed=1000
 Specialart=Objects\Spawnmodels\NightElf\NightElfLargeDeathExplode\NightElfLargeDeathExplode.mdl
 
 [efon]
-Art=ReplaceableTextures\CommandButtons\BTNEnt.tga
+Art=ReplaceableTextures\CommandButtons\BTNEnt.blp
 Buttonpos=0,0
 Attachmentanimprops=medium
 
 [ehip]
-Art=ReplaceableTextures\CommandButtons\BTNHippogriff.tga
+Art=ReplaceableTextures\CommandButtons\BTNHippogriff.blp
 Buttonpos=0,0
 Attachmentanimprops=medium
 
 [ehpr]
-Art=ReplaceableTextures\CommandButtons\BTNHippogriffRider.tga
+Art=ReplaceableTextures\CommandButtons\BTNHippogriffRider.blp
 Buttonpos=0,0
 Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
 Missilearc=0.15
@@ -219,7 +224,7 @@ Attachmentanimprops=medium
 [etol]
 Upgrade=etoa
 Trains=ewsp
-Art=ReplaceableTextures\CommandButtons\BTNTreeOfLife.tga
+Art=ReplaceableTextures\CommandButtons\BTNTreeOfLife.blp
 Buttonpos=0,0
 Researches=Renb,Repm
 BuildingSoundLabel=NightElfGrowingLoop
@@ -231,7 +236,7 @@ Specialart=Objects\Spawnmodels\NightElf\NECancelDeath\NECancelDeath.mdl
 [etoa]
 Upgrade=etoe
 Trains=ewsp
-Art=ReplaceableTextures\CommandButtons\BTNTreeOfAges.tga
+Art=ReplaceableTextures\CommandButtons\BTNTreeOfAges.blp
 Buttonpos=0,2
 Researches=Renb,Repm
 BuildingSoundLabel=NightElfGrowingLoop
@@ -244,7 +249,7 @@ Specialart=Objects\Spawnmodels\NightElf\NECancelDeath\NECancelDeath.mdl
 [etoe]
 Requires=eate
 Trains=ewsp
-Art=ReplaceableTextures\CommandButtons\BTNTreeOfEternity.tga
+Art=ReplaceableTextures\CommandButtons\BTNTreeOfEternity.blp
 Buttonpos=0,2
 Researches=Renb,Repm
 BuildingSoundLabel=NightElfGrowingLoop
@@ -256,7 +261,7 @@ Specialart=Objects\Spawnmodels\NightElf\NECancelDeath\NECancelDeath.mdl
 
 [edob]
 Requires=etol
-Art=ReplaceableTextures\CommandButtons\BTNHuntersHall.tga
+Art=ReplaceableTextures\CommandButtons\BTNHuntersHall.blp
 Buttonpos=2,0
 Researches=Resm,Rema,Resw,Rerh,Reuv,Rews
 BuildingSoundLabel=NightElfGrowingLoop
@@ -267,7 +272,7 @@ Attachmentanimprops=medium
 
 [eate]
 Trains=Edem,Ekee,Emoo,Ewar
-Art=ReplaceableTextures\CommandButtons\BTNAltarOfElders.tga
+Art=ReplaceableTextures\CommandButtons\BTNAltarOfElders.blp
 Buttonpos=1,1
 BuildingSoundLabel=NightElfGrowingLoop
 LoopingSoundFadeIn=512
@@ -280,7 +285,7 @@ Revive=1
 Requires=etoa,edob
 Trains=edry,edoc,emtg
 Researches=Resi,Redc,Rers,Rehs,Reeb
-Art=ReplaceableTextures\CommandButtons\BTNAncientOfLore.tga
+Art=ReplaceableTextures\CommandButtons\BTNAncientOfLore.blp
 Buttonpos=2,1
 BuildingSoundLabel=NightElfGrowingLoop
 LoopingSoundFadeIn=512
@@ -290,7 +295,7 @@ Attachmentanimprops=medium
 
 [eaom]
 Trains=earc,esen,ebal
-Art=ReplaceableTextures\CommandButtons\BTNAncientOfTheEarth.tga
+Art=ReplaceableTextures\CommandButtons\BTNAncientOfTheEarth.blp
 Buttonpos=1,0
 Researches=Resc,Reib,Remk,Remg,Repb
 BuildingSoundLabel=NightElfGrowingLoop
@@ -303,7 +308,7 @@ Attachmentanimprops=medium
 Requires=etoa
 Trains=ehip,edot,efdr
 Researches=Redt,Reht,Reec
-Art=ReplaceableTextures\CommandButtons\BTNAncientOfTheMoon.tga
+Art=ReplaceableTextures\CommandButtons\BTNAncientOfTheMoon.blp
 Buttonpos=0,2
 BuildingSoundLabel=NightElfGrowingLoop
 LoopingSoundFadeIn=512
@@ -315,7 +320,7 @@ Attachmentanimprops=medium
 Requires=etoe,eaow
 Researches=Recb
 Trains=echm
-Art=ReplaceableTextures\CommandButtons\BTNChimaeraRoost.tga
+Art=ReplaceableTextures\CommandButtons\BTNChimaeraRoost.blp
 Buttonpos=1,2
 BuildingSoundLabel=NightElfGrowingLoop
 LoopingSoundFadeIn=512
@@ -323,7 +328,7 @@ LoopingSoundFadeOut=512
 Specialart=Objects\Spawnmodels\NightElf\NECancelDeath\NECancelDeath.mdl
 
 [emow]
-Art=ReplaceableTextures\CommandButtons\BTNMoonWell.tga
+Art=ReplaceableTextures\CommandButtons\BTNMoonWell.blp
 Buttonpos=0,1
 BuildingSoundLabel=NightElfGrowingLoop
 LoopingSoundFadeIn=512
@@ -332,7 +337,7 @@ Specialart=Objects\Spawnmodels\NightElf\NECancelDeath\NECancelDeath.mdl
 
 // spirit of vengeance
 [espv]
-Art=ReplaceableTextures\CommandButtons\BTNSpiritOfVengeance.tga
+Art=ReplaceableTextures\CommandButtons\BTNSpiritOfVengeance.blp
 Buttonpos=0,0
 Missileart=Abilities\Weapons\SpiritOfVengeanceMissile\SpiritOfVengeanceMissile.mdl
 Missilearc=0.10
@@ -342,7 +347,7 @@ Attachmentanimprops=medium
 
 // little spirit of vengeance
 [even]
-Art=ReplaceableTextures\CommandButtons\BTNAvengingWatcher.tga
+Art=ReplaceableTextures\CommandButtons\BTNAvengingWatcher.blp
 Buttonpos=0,0
 Missileart=Abilities\Weapons\VengeanceMissile\VengeanceMissile.mdl
 Missilearc=0.10
@@ -352,14 +357,14 @@ MissileHoming=1
 // mountain giant
 [emtg]
 Requires=etoa,eden
-Art=ReplaceableTextures\CommandButtons\BTNMountainGiant.tga
+Art=ReplaceableTextures\CommandButtons\BTNMountainGiant.blp
 Buttonpos=2,0
 Attachmentanimprops=large
 
 // faerie dragon
 [efdr]
 Requires=eden
-Art=ReplaceableTextures\CommandButtons\BTNFaerieDragon.tga
+Art=ReplaceableTextures\CommandButtons\BTNFaerieDragon.blp
 Buttonpos=2,0
 Missileart=Abilities\Weapons\FaerieDragonMissile\FaerieDragonMissile.mdl
 Missilearc=0.15
@@ -368,16 +373,16 @@ MissileHoming=1
 
 [Aimp]
 Requires=Repb
-Art=ReplaceableTextures\PassiveButtons\PASBTNVorpalBlades.tga
+Art=ReplaceableTextures\PassiveButtons\PASBTNVorpalBlades.blp
 Buttonpos=0,2
 
 //#RESTNOBETA
 [etrs]
-Art=ReplaceableTextures\CommandButtons\BTNNightElfTransport.tga
+Art=ReplaceableTextures\CommandButtons\BTNNightElfTransport.blp
 Attachmentanimprops=large
 
 [edes]
-Art=ReplaceableTextures\CommandButtons\BTNNightElfDestroyer.tga
+Art=ReplaceableTextures\CommandButtons\BTNNightElfDestroyer.blp
 Buttonpos=1,0
 Missileart=Abilities\Weapons\GuardTowerMissile\GuardTowerMissile.mdl
 Missilearc=0.10
@@ -385,7 +390,7 @@ Missilespeed=900
 Attachmentanimprops=large
 
 [ebsh]
-Art=ReplaceableTextures\CommandButtons\BTNNightElfBattleCruiser.tga
+Art=ReplaceableTextures\CommandButtons\BTNNightElfBattleCruiser.blp
 Buttonpos=2,0
 Missileart=Abilities\Weapons\GuardTowerMissile\GuardTowerMissile.mdl
 Missilearc=0.10
@@ -393,5 +398,5 @@ Missilespeed=900
 Attachmentanimprops=large
 
 [eshy]
-Art=ReplaceableTextures\CommandButtons\BTNNightElfShipyard.tga
+Art=ReplaceableTextures\CommandButtons\BTNNightElfShipyard.blp
 Sellunits=

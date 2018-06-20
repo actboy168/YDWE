@@ -1,8 +1,76 @@
 [Misc]
+MagicImmunesResistDamage=1
+MagicImmunesResistThorns=0
+MagicImmunesResistLeech=0
+MagicImmunesResistUltimates=0
+CycloneStasis=0
+DepCheckAlias=1
+MassTeleportCluster=1
+DarkSummoningCluster=1
+TownPortalCluster=1
+AmuletOfRecallCluster=1
+MorphLandClosest=1
+MorphAlternateDisable=0
+InvulnSummonDispelDamage=1
+ConstructionDamageRefundPenalty=1
+UpgradeDamageRefundPenalty=0
+AllowMultiBounce=1
+EnsnareIsMagic=0
+WebIsMagic=0
+IllusionsGetAttackBonus=0
+IllusionsGetAttackSpeedBonus=0
+IllusionsGetMoveSpeedBonus=0
+IllusionsGetDefenseBonus=0
+IllusionsCanRestoreLife=0
+IllusionsCanRestoreMana=0
+IllusionsBestowAuras=0
+IllusionsGetAutocast=0
+InvisibleUnitsBestowAuras=0
+PolymorphedUnitsBestowAuras=0
+BurrowedUnitsBestowAuras=0
+AnimatedUnitsBestowAuras=0
+FlyingHeroesBestowAuras=0
+MoveSpeedBonusesStack=1
+DrainUsesEtheralBonus=0
+DrainTransfersLife=0
+DrainTransfersMana=0
+DrainGivesBonusLife=0
+DrainGivesBonusMana=0
+EtherealDamageBonusAlly=1
+CanDeactivateAvatar=0
+CanDeactivateAvengerForm=0
+CanDeactivateBarkskin=1
+CanDeactivateBearForm=1
+CanDeactivateBladestorm=0
+CanDeactivateBurrow=1
+CanDeactivateCallToArms=1
+CanDeactivateChemicalRage=0
+CanDeactivateCorporealForm=1
+CanDeactivateDefend=1
+CanDeactivateDivineShield=1
+CanDeactivateImmolation=1
+CanDeactivateManaFlare=0
+CanDeactivateManaShield=1
+CanDeactivateMetamorphosis=0
+CanDeactivateRavenForm=1
+CanDeactivateRoboGoblin=1
+CanDeactivateStoneForm=1
+CanDeactivateSubmerge=1
+CanDeactivateWindWalk=0
+RelativeUpgradeCost=1
+DefendDeflection=0
+ItemSaleAggroRange=0
+UnitSaleAggroRange=0
+AbilSaleAggroRange=0
+AbolishMagicDispelSmart=0
+UpgradeInProgressIdChange=1
 
 GlobalExperience=1
 MaxLevelHeroesDrainExp=1
 BuildingKillsGiveExp=0
+
+DisplayEnemyInventory=1
+DisplayBuildingStatus=0
 
 // Max revival cost of a hero
 HeroMaxReviveCostGold=700
@@ -72,6 +140,7 @@ IntRegenBonus=0.05
 AgiDefenseBonus=0.30
 AgiDefenseBase=-2
 AgiMoveBonus=0
+AgiAttackSpeedBonus=0.02
 
 // Formula constants for hero levels beyond the tables...
 // The three constants are used to define a table as:
@@ -120,7 +189,7 @@ DamageBonusSpells=1.00,1.00,1.00,1.00,1.00,0.75,0.05,1.00
 DamageBonusHero=1.00,1.00,1.00,0.50,1.00,1.00,0.05,1.00
 
 // Ethereal Damage bonus values: NORMAL, PIERCE, SIEGE, MAGIC, CHAOS, SPELLS, HERO
-EtherealDamageBonus=1.66,1.66,1.66,1.66,1.66,1.66,1.66
+EtherealDamageBonus=0,0,0,1.66,0,1.66,0
 EtherealHealBonus=1.66
 
 // After a unit has strayed 'GuardDistance' from where it started,

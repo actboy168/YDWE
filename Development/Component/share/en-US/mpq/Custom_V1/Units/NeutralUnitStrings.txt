@@ -1,6 +1,6 @@
-// permits dependencies upon heroes
+﻿// permits dependencies upon heroes
 [HERO]
-Name=a Hero
+Name=A Hero
 
 [nwad]
 Name=Watcher Ward
@@ -11,6 +11,16 @@ Tip=Hire Skeleton Archer
 Ubertip="Light ranged unit. |n|n|cffffcc00Attacks land and air units.|r"
 
 [nske]
+Name=Skeleton Warrior
+Tip=Hire Skeleton Warrior
+Ubertip="Light melee unit. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nsca]
+Name=Skeleton Archer
+Tip=Hire Skeleton Archer
+Ubertip="Light ranged unit. |n|n|cffffcc00Attacks land and air units.|r"
+
+[nsce]
 Name=Skeleton Warrior
 Tip=Hire Skeleton Warrior
 Ubertip="Light melee unit. |n|n|cffffcc00Attacks land and air units.|r"
@@ -684,7 +694,7 @@ Ubertip="Light melee unit that carries its young into battle. |n|n|cffffcc00Atta
 Name=Nerubian Webspinner
 Tip=Summon |cffffcc00N|rerubian Webspinner
 Hotkey=N
-Ubertip="Light melee unit that can cast Web and Raise Dead. |n|n|cffffcc00Attacks land units.|r"
+Ubertip="Light ranged unit that can cast Web and Raise Dead. |n|n|cffffcc00Attacks land units.|r"
 
 [nnws]
 Name=Nerubian Spider Lord
@@ -1122,6 +1132,13 @@ Name=Doom Guard
 Tip=Summon Doom Guard
 Ubertip="Heavy ranged unit can cast Dispel Magic, War Stomp, Cripple and Rain of Fire. |n|n|cffffcc00Attacks land and air units.|r"
 
+//summoned doom guard
+[nba2]
+Name=Doom Guard
+Tip=Summon Doom Guard
+Ubertip="Heavy ranged unit can cast Dispel Magic, War Stomp, Cripple and Rain of Fire. |n|n|cffffcc00Attacks land and air units.|r"
+
+
 [nglm]
 Name=Goblin Land Mine
 
@@ -1368,7 +1385,6 @@ Tip=Summon Pa|cffffcc00n|rdaren Brewmaster
 Ubertip="Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Breath of Fire, Drunken Haze, Drunken Brawler and Storm, Earth, And Fire. |n|n|cffffcc00Attacks land units.|r"
 Revivetip=Revive Pa|cffffcc00n|rdaren Brewmaster
 Awakentip=Revive Pa|cffffcc00n|rdaren Brewmaster
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-pandarenbrewmaster.tga
 
 [npn1]
 Name=Fire
@@ -1396,7 +1412,6 @@ Tip=Summon Dark |cffffcc00R|ranger
 Ubertip="Cunning Hero, adept at manipulating opponents. Can learn Silence, Black Arrow, Life Drain, and Charm. |n|n|cffffcc00Attacks land and air units.|r"
 Revivetip=Revive Dark |cffffcc00R|ranger
 Awakentip=Revive Dark |cffffcc00R|ranger
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-bansheeranger.tga
 
 [ndr1]
 Name=Lesser Dark Minion
@@ -1409,6 +1424,138 @@ Tip=Summon Dark Minion
 [ndr3]
 Name=Greater Dark Minion
 Tip=Summon Dark Minion
+
+[Nfir]
+Name=Firelord
+Propernames=Ragepyre,Hatespark,Blazefury,Heatflayer,Volcanus,Flashfire,Kar the Everburning,Smolderas,Singeslayer
+Hotkey=O
+Tip=Summon Firel|cffffcc00o|rrd
+Ubertip="Mystical Hero, adept at disrupting spells and dealing large amounts of fire damage.  Can learn Incinerate, Soul Burn, Summon Lava Spawn, and Volcano.|n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive Firel|cffffcc00o|rrd
+Awakentip=Revive Firel|cffffcc00o|rrd
+
+//lava spawn1
+[nlv1]
+Name=Lava Spawn
+EditorSuffix= (Level 1)
+
+//lava spawn2
+[nlv2]
+Name=Lava Spawn
+EditorSuffix= (Level 2)
+
+//lava spawn3
+[nlv3]
+Name=Lava Spawn
+EditorSuffix= (Level 3)
+
+//alchemist
+[Nalc]
+Name=Alchemist
+Propernames=Razzil Naypolm,Niffy Gurglebeaker,Ezzel Darkbrewer,Lapis Concocter,Savvy Foulmixer,Fictious Warpotion
+Hotkey=X
+Tip=Summon Alchemist (|cffffcc00X|r)
+Ubertip="Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute.|n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive Alchemist (|cffffcc00X|r)
+Awakentip=Revive Alchemist (|cffffcc00X|r)
+
+//alchemist
+[Nalm]
+Name=Alchemist
+Propernames=Razzil Naypolm,Niffy Gurglebeaker,Ezzel Darkbrewer,Lapis Concocter,Savvy Foulmixer,Fictious Warpotion
+Hotkey=X
+Tip=Summon Alchemist (|cffffcc00X|r)
+Ubertip="Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute.|n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive Alchemist (|cffffcc00X|r)
+Awakentip=Revive Alchemist (|cffffcc00X|r)
+EditorSuffix= (Morph level 1)
+
+//alchemist (morph, 2)
+[Nal2]
+Name=Alchemist
+Propernames=Razzil Naypolm,Niffy Gurglebeaker,Ezzel Darkbrewer,Lapis Concocter,Savvy Foulmixer,Fictious Warpotion
+Hotkey=X
+Tip=Summon Alchemist (|cffffcc00X|r)
+Ubertip="Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute.|n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive Alchemist (|cffffcc00X|r)
+Awakentip=Revive Alchemist (|cffffcc00X|r)
+EditorSuffix= (Morph level 2)
+
+//alchemist (morph, 3)
+[Nal3]
+Name=Alchemist
+Propernames=Razzil Naypolm,Niffy Gurglebeaker,Ezzel Darkbrewer,Lapis Concocter,Savvy Foulmixer,Fictious Warpotion
+Hotkey=X
+Tip=Summon Alchemist (|cffffcc00X|r)
+Ubertip="Warrior Hero, known for offensive and defensive versatility. Can learn Healing Spray, Chemical Rage, Acid Bomb and Transmute.|n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive Alchemist (|cffffcc00X|r)
+Awakentip=Revive Alchemist (|cffffcc00X|r)
+EditorSuffix= (Morph level 3)
+
+// Tinker
+[Ntin]
+Name=Tinker
+Propernames=Gazz Stripbolt,Riket Contraption,Mekka Gobb,Tek Piecetinker,Plug Rattletrap,Ratso Steamwheedle
+Hotkey=Z
+Tip=Summon Tinker (|cffffcc00Z|r)
+Ubertip="Cunning Hero, exceptional at disrupting battles and enduring damage. Can learn Pocket Factory, Cluster Rockets, Engineering Upgrade and Robo-Goblin.|n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive Tinker (|cffffcc00Z|r)
+Awakentip=Revive Tinker (|cffffcc00Z|r)
+
+// Tinker (morph / robo-goblin)
+[Nrob]
+Name=Tinker
+Propernames=Gazz Stripbolt,Riket Contraption,Mekka Gobb,Tek Piecetinker,Plug Rattletrap,Ratso Steamwheedle
+Hotkey=Z
+Tip=Summon Tinker (|cffffcc00Z|r)
+Ubertip="Cunning Hero, exceptional at disrupting battles and enduring damage. Can learn Pocket Factory, Cluster Rockets, Engineering Upgrade and Robo-Goblin.|n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive Tinker (|cffffcc00Z|r)
+Awakentip=Revive Tinker (|cffffcc00Z|r)
+
+[ncgb]
+Name=Clockwerk Goblin
+Tip=Summon |cffffcc00C|rlockwerk Goblin
+Ubertip="Poorly engineered mechanical goblin melee warrior.  Detonates after a certain period of time.|n|n|cffffcc00Attacks land units.|r"
+Hotkey=C
+
+[ncg1]
+Name=Clockwerk Goblin
+Tip=Summon |cffffcc00C|rlockwerk Goblin
+Ubertip="Poorly engineered mechanical goblin melee warrior.  Detonates after a certain period of time.|n|n|cffffcc00Attacks land units.|r"
+Hotkey=C
+
+[ncg2]
+Name=Clockwerk Goblin
+Tip=Summon |cffffcc00C|rlockwerk Goblin
+Ubertip="Poorly engineered mechanical goblin melee warrior.  Detonates after a certain period of time.|n|n|cffffcc00Attacks land units.|r"
+Hotkey=C
+
+[ncg3]
+Name=Clockwerk Goblin
+Tip=Summon |cffffcc00C|rlockwerk Goblin
+Ubertip="Poorly engineered mechanical goblin melee warrior.  Detonates after a certain period of time.|n|n|cffffcc00Attacks land units.|r"
+Hotkey=C
+
+[nfac]
+Name=Pocket Factory
+Tip=Summon Pocket |cffffcc00F|ractory
+Ubertip="Factory unit for spawning Clockwerk Goblins via the Pocket Factory ability."
+Hotkey=F
+EditorSuffix= (Level 1)
+
+[nfa1]
+Name=Pocket Factory
+Tip=Summon Pocket |cffffcc00F|ractory
+Ubertip="Factory unit for spawning Clockwerk Goblins via the Pocket Factory ability."
+Hotkey=F
+EditorSuffix= (Level 2)
+
+[nfa2]
+Name=Pocket Factory
+Tip=Summon Pocket |cffffcc00F|ractory
+Ubertip="Factory unit for spawning Clockwerk Goblins via the Pocket Factory ability."
+Hotkey=F
+EditorSuffix= (Level 3)
 
 [nskk]
 Name=Skink
@@ -1424,6 +1571,26 @@ Ubertip="Call upon the spirit of Crab to save you."
 Name=Hermit Crab
 Tip=Invoke Hermit Crab
 Ubertip="Call upon the spirit of Hermit Crab to save you."
+
+[nech]
+Name=Chicken
+Tip=Invoke Chicken
+Ubertip="Call upon the spirit of fearsome Chicken to save you."
+
+[nfro]
+Name=Frog
+Tip=Invoke Frog
+Ubertip="Call upon the spirit of fearsome Frog to save you."
+
+[necr]
+Name=Rabbit
+Tip=Invoke Rabbit
+Ubertip="Call upon the spirit of fearsome Rabbit to save you."
+
+[nrac]
+Name=Raccoon
+Tip=Invoke Raccoon
+Ubertip="Call upon the spirit of fearsome Raccoon to save you."
 
 [nalb]
 Name=Albatross
@@ -1649,7 +1816,6 @@ Tip=Summon Na|cffffcc00g|ra Sea Witch
 Ubertip="Mystical Hero, adept at ranged combat. Can learn Forked Lightning, Frost Arrows, Mana Shield, and Tornado. |n|n|cffffcc00Attacks land and air units.|r"
 Revivetip=Revive Na|cffffcc00g|ra Sea Witch
 Awakentip=Revive Na|cffffcc00g|ra Sea Witch
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-seawitch.tga
 
 [Nplh]
 Name=Pit Lord
@@ -1659,7 +1825,6 @@ Tip=Summon P|cffffcc00i|rt Lord
 Ubertip="Warrior Hero, adept at terrorizing enemies. Can learn Rain of Fire, Howl of Terror, Cleaving Attack, and Doom. |n|n|cffffcc00Attacks land units.|r"
 Revivetip=Revive P|cffffcc00i|rt Lord
 Awakentip=Revive P|cffffcc00i|rt Lord
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-pitlord.tga
 
 [Nbst]
 Name=Beastmaster
@@ -1669,7 +1834,6 @@ Tip=Summon Bea|cffffcc00s|rtmaster
 Ubertip="Warrior Hero, adept at summoning beasts into battle. Can learn Summon Bear, Summon Quilbeast, Summon Hawk, and Stampede. |n|n|cffffcc00Attacks land units.|r"
 Revivetip=Revive Bea|cffffcc00s|rtmaster
 Awakentip=Revive Bea|cffffcc00s|rtmaster
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-beastmaster.tga
 
 [ngz1]
 Name=Bear

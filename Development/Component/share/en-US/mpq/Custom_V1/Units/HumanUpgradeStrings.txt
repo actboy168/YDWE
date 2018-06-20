@@ -73,7 +73,7 @@ Hotkey=O,O
 [Rhri]
 Name=Long Rifles
 Tip=Upgrade to |cffffcc00L|rong Rifles
-Ubertip="Increases the range of Rifleman attacks."
+Ubertip="Increases the range of Riflemen attacks."
 Hotkey=L
 
 [Rhse]
@@ -85,7 +85,7 @@ Hotkey=M
 [Rhfl]
 Name=Flare
 Tip=Research Fla|cffffcc00r|re
-Ubertip="Provides Mortar Teams with the Flare ability. This gives each Mortar Team one flare which they can use to reveal any area of the map. |nCan see invisible units."
+Ubertip="Provides Mortar Teams with the Flare ability. Flares can be used to reveal any area of the map. |nCan see invisible units."
 Hotkey=R
 
 [Rhhb]
