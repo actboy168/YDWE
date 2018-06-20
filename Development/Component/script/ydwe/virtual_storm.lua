@@ -3,10 +3,6 @@ local storm = require 'ffi.storm'
 local api = {}
 local dummy_map
 
-local function unify(name)
-    return name:lower()
-end
-
 function api.open(path, priority)
     return storm.open(path, priority)
 end
@@ -17,7 +13,7 @@ end
 
 function api.extract_file(path, name)
     if dummy_map then
-        local buf = dummy_map:get(unify(name))
+        local buf = dummy_map:get(name)
         if buf then
             io.save(path, buf)
             return
@@ -28,7 +24,7 @@ end
 
 function api.load_file(name)
     if dummy_map then
-        local buf = dummy_map:get(unify(name))
+        local buf = dummy_map:get(name)
         if buf then
             return buf
         end
@@ -38,7 +34,7 @@ end
 
 function api.has_file(name)
     if dummy_map then
-        local buf = dummy_map:get(unify(name))
+        local buf = dummy_map:get(name)
         if buf then
             return true
         end
