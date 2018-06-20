@@ -145,7 +145,12 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 					if (!loadfile.is_absolute()) {
 						loadfile = war3_path / loadfile;
 					}
-					map_build(ydwe, loadfile, war3_path / test_map_path, "0" != table["MapTest"]["EnableMapSlk"]);
+					if (cmd.has(L"closew2l")) {
+						fs::copy_file(loadfile, war3_path / test_map_path, fs::copy_options::overwrite_existing);
+					}
+					else {
+						map_build(ydwe, loadfile, war3_path / test_map_path, "0" != table["MapTest"]["EnableMapSlk"]);
+					}
 				}
 				catch (...) {
 				}
@@ -198,6 +203,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 
 		cmd.app(war3_path.wstring());
 		cmd.del(L"war3");
+		cmd.del(L"closew2l");
 		return warcraft3_process.create(war3_path, cmd.str());
 	}
 	catch (...) {
