@@ -8002,10 +8002,10 @@ type = timer
 default = "bj_lastStartedTimer"
 
 [TimerStart]
-title = "运行计时器 [C]"
+title = "运行计时器"
 description = "运行 ${计时器}，周期: ${时间} 秒，模式: ${模式}，运行函数: ${函数}"
 comment = "等同于TimerStart"
-category = TC_TIMER
+category = TC_YDHIDE
 [[.args]]
 type = timer
 [[.args]]
