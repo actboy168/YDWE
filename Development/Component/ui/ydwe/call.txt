@@ -1886,8 +1886,8 @@ type = location
 default = "Location"
 
 [CreateUnit]
-title = "新建单位(指定坐标) [R]"
-description = "新建 ${玩家} 的 ${单位} 在(${X},${Y}),面向角度:${Face} 度"
+title = "创建单位 (指定坐标)"
+description = "给 ${玩家} 创建 ${单位} 在 (${X}, ${Y}), 面向角度为 ${Direction}"
 comment = "在坐标创建单位，不能被'最后创建的单位'获得。"
 category = TC_NOTHING
 returns = unit
@@ -1908,8 +1908,8 @@ type = degree
 default = "0"
 
 [CreateUnitAtLoc]
-title = "新建单位(指定点) [R]"
-description = "新建 ${玩家} 的 ${单位} 在 ${点} 面向角度:${Face} 度"
+title = "创建单位 (指定点)"
+description = "给 ${玩家} 创建 ${单位} 在 ${指定点}, 面向角度为 ${Direction}"
 comment = ""
 category = TC_NOTHING
 returns = unit
@@ -1927,7 +1927,7 @@ default = "0"
 
 [CreateCorpse]
 title = "新建尸体 [R]"
-description = "新建 ${玩家} 的 ${单位} 的尸体在(${X},${Y}),面向角度:${Face} 度"
+description = "给 ${玩家} 创建 ${单位} 的尸体在 (${X}, ${Y}), 面向角度为 ${Direction}"
 comment = ""
 category = TC_NOTHING
 returns = unit

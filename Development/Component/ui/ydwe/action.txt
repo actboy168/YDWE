@@ -3385,8 +3385,8 @@ type = trigger
 default = "GetTriggeringTrigger"
 
 [CreateNUnitsAtLoc]
-title = "创建单位(面向角度)"
-description = "创建 ${Number} 个 ${单位} 给 ${Player} 在 ${指定点} ,面向角度为 ${Direction} 度"
+title = "创建单位 (多个) (面向角度)"
+description = "创建 ${Number} 个 ${单位} 给 ${Player} 在 ${指定点} , 面向角度为 ${Direction}"
 comment = "面向角度采用角度制,0度为正东方向,90度为正北方向. 使用'最后创建的单位组'来获取创建的所有单位. 使用'最后创建的单位'来获取创建的单个单位."
 category = TC_UNIT
 [[.args]]
@@ -3408,8 +3408,8 @@ min = 0
 max = 360
 
 [CreateNUnitsAtLocFacingLocBJ]
-title = "创建单位(面向点)"
-description = "创建 ${Number} ${单位} 给 ${Player} 在 ${指定点} ,面向 ${指定点}"
+title = "创建单位 (多个) (面向点)"
+description = "创建 ${Number} 个 ${单位} 给 ${Player} 在 ${指定点} , 面向 ${指定点}"
 comment = "使用'最后创建的单位组'来获取创建的所有单位. 使用'最后创建的单位'来获取创建的单个单位."
 category = TC_UNIT
 [[.args]]
@@ -3427,9 +3427,43 @@ type = location
 [[.args]]
 type = location
 
+[" CreateUnitAtLoc"]
+title = "创建单位 (指定点)"
+description = "给 ${玩家} 创建 ${单位} 在 ${指定点}, 面向角度为 ${Direction}"
+comment = "不能被'最后创建的单位'获得"
+category = TC_UNIT
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = unitcode
+default = "hfoo"
+[[.args]]
+type = location
+[[.args]]
+type = degree
+default = "0"
+
+[" CreateUnit"]
+title = "创建单位 (指定坐标)"
+description = "给 ${玩家} 创建 ${单位} 在 (${X}, ${Y}), 面向角度为 ${Direction}"
+comment = "不能被'最后创建的单位'获得"
+category = TC_UNIT
+[[.args]]
+type = player
+[[.args]]
+type = unitcode
+[[.args]]
+type = real
+[[.args]]
+type = real
+[[.args]]
+type = degree
+default = "RealUnitFacing"
+
 [CreateCorpseLocBJ]
 title = "创建尸体"
-description = "创建一个 ${单位} 的尸体给 ${Player} 在 ${指定点}"
+description = "创建 ${单位} 的尸体给 ${Player} 在 ${指定点}"
 comment = "不是所有单位都有尸体形态. 使用'最后创建的单位'来获取该尸体."
 category = TC_UNIT
 [[.args]]
@@ -3443,7 +3477,7 @@ type = location
 
 [CreatePermanentCorpseLocBJ]
 title = "创建永久性尸体"
-description = "创建一个 ${Style} ${单位} 尸体给 ${Player} 在 ${指定点} 面向角度为 ${Direction} 度"
+description = "创建 ${Style} ${单位} 的尸体给 ${Player} 在 ${指定点} , 面向角度为 ${Direction}"
 category = TC_UNIT
 [[.args]]
 type = corpsetype
@@ -3461,40 +3495,6 @@ type = degree
 default = "GetRandomDirectionDeg"
 min = 0
 max = 360
-
-[" CreateUnit"]
-title = "创建单位(指定坐标) [C]"
-description = "为玩家 ${玩家} 创建一个 ${单位} 在(X坐标: ${输入坐标} Y坐标: ${输入坐标} ), 面向角度: ${facing}"
-comment = "不能被'最后创建的单位'捕获之"
-category = TC_UNIT
-[[.args]]
-type = player
-[[.args]]
-type = unitcode
-[[.args]]
-type = real
-[[.args]]
-type = real
-[[.args]]
-type = degree
-default = "RealUnitFacing"
-
-[" CreateUnitAtLoc"]
-title = "创建单位(指定点) [C]"
-description = "为玩家 ${玩家} 创建一个 ${单位} 在 ${指定点} 面向角度:${Face} 度"
-comment = "不能被'最后创建的单位'捕获之"
-category = TC_UNIT
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = unitcode
-default = "hfoo"
-[[.args]]
-type = location
-[[.args]]
-type = degree
-default = "0"
 
 [KillUnit]
 title = "杀死"
