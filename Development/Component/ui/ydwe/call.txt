@@ -132,6 +132,83 @@ type = integer
 default = "2"
 min = 0
 
+
+[OffsetLocation]
+title = "坐标位移"
+description = "从 ${指定点} 开始, 移动 (${X}, ${Y})"
+comment = "会创建点."
+category = TC_LOCATION
+returns = location
+[[.args]]
+type = location
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+
+[PolarProjectionBJ]
+title = "极坐标位移"
+description = "从 ${指定点} 开始, 移动距离 ${Distance}, 方向 ${Angle}"
+comment = "会创建点."
+category = TC_LOCATION
+returns = location
+[[.args]]
+type = location
+[[.args]]
+type = real
+default = "256"
+[[.args]]
+type = degree
+default = "0"
+
+[DistanceBetweenPoints]
+title = "点到点的距离"
+description = "${点} 到 ${点} 的距离"
+comment = ""
+category = TC_LOCATION
+returns = real
+[[.args]]
+type = location
+[[.args]]
+type = location
+
+[AngleBetweenPoints]
+title = "点到点的角度"
+description = "${点} 到 ${点} 的角度"
+comment = "取值-180 - 180."
+category = TC_LOCATION
+returns = degree
+[[.args]]
+type = location
+[[.args]]
+type = location
+
+[YDWEDistanceBetweenUnits]
+title = "单位到单位的距离"
+description = "${单位} 到 ${单位} 的距离"
+category = TC_LOCATION
+returns = real
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = unit
+default = "GetLastCreatedUnit"
+
+[YDWEAngleBetweenUnits]
+title = "单位到单位的角度"
+description = "${单位} 到 ${单位} 的角度"
+category = TC_LOCATION
+returns = degree
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = unit
+default = "GetLastCreatedUnit"
+
 [OperatorIntegerAdd]
 title = "加 < ﹢ >"
 description = "${整数} + ${整数}"
@@ -1676,36 +1753,6 @@ category = TC_NOTHING
 returns = location
 [[.args]]
 type = scriptcode
-
-[OffsetLocation]
-title = "坐标位移点"
-description = "${指定点} 坐标位移 (${X}, ${Y})处"
-comment = "会创建点."
-category = TC_NOTHING
-returns = location
-[[.args]]
-type = location
-[[.args]]
-type = real
-default = "0"
-[[.args]]
-type = real
-default = "0"
-
-[PolarProjectionBJ]
-title = "极坐标位移点"
-description = "从 ${指定点} 开始,距离 ${Distance} ,方向为 ${Angle} 度的位移处"
-comment = "会创建点."
-category = TC_NOTHING
-returns = location
-[[.args]]
-type = location
-[[.args]]
-type = real
-default = "256"
-[[.args]]
-type = degree
-default = "0"
 
 [GetCurrentCameraBoundsMapRectBJ]
 title = "当前可用镜头范围"
@@ -8041,32 +8088,6 @@ returns = real
 [[.args]]
 type = real
 
-[YDWEDistanceBetweenUnits]
-title = "两个单位之间的距离 [YDWE]"
-description = "从${单位}到${单位}的距离"
-comment = "获取两个单位之间的距离。"
-category = TC_YDST
-returns = real
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = unit
-default = "GetLastCreatedUnit"
-
-[YDWEAngleBetweenUnits]
-title = "两个单位之间的角度 [YDWE]"
-description = "从${单位}到${单位}的角度"
-comment = "获取两个单位之间的角度。"
-category = TC_YDST
-returns = degree
-[[.args]]
-type = unit
-default = "GetTriggerUnit"
-[[.args]]
-type = unit
-default = "GetLastCreatedUnit"
-
 [YDWEGetUnitArmor]
 title = "获取单位护甲<Rising_Dusk制作>"
 description = "获取 ${单位} 的护甲值，关联技能为 ${辅助技能}"
@@ -8700,28 +8721,6 @@ description = "随机百分数"
 comment = "0-100的随机实数."
 category = TC_MATH
 returns = real
-
-[DistanceBetweenPoints]
-title = "两点间距"
-description = "${点} 和 ${点} 之间的距离"
-comment = ""
-category = TC_MATH
-returns = real
-[[.args]]
-type = location
-[[.args]]
-type = location
-
-[AngleBetweenPoints]
-title = "两点间方向"
-description = "${点} 到 ${点} 的角度"
-comment = "取值-180 - 180."
-category = TC_MATH
-returns = degree
-[[.args]]
-type = location
-[[.args]]
-type = location
 
 [RMinBJ]
 title = "取较小值"

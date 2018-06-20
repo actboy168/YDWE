@@ -5835,7 +5835,7 @@ default = "EnableDisableEnable"
 [MoveLocation]
 title = "移动点 [R]"
 description = "移动 ${点} 到(${X},${Y})"
-comment = "该点必须是一个变量. 因为移动一个不可重用的点是无意义的."
+comment = "该点必须是一个变量。 因为移动一个不可重用的点是无意义的。"
 category = TC_LOCATION
 [[.args]]
 type = location
@@ -5849,7 +5849,7 @@ default = "0"
 [RemoveLocation]
 title = "清除点 [R]"
 description = "清除 ${点}"
-comment = "点是堆积最多的垃圾资源,不需要再使用的点都要记得清除掉."
+comment = "点是堆积最多的垃圾资源，不需要再使用的点都要记得清除掉。"
 category = TC_LOCATION
 [[.args]]
 type = location
