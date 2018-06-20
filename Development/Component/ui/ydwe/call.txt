@@ -132,7 +132,6 @@ type = integer
 default = "2"
 min = 0
 
-
 [OffsetLocation]
 title = "坐标位移"
 description = "从 ${指定点} 开始, 移动 (${X}, ${Y})"
@@ -182,6 +181,28 @@ category = TC_LOCATION
 returns = degree
 [[.args]]
 type = location
+[[.args]]
+type = location
+
+[YDWEDistanceBetweenUnitAndPoint]
+title = "单位到点的距离 [New!]"
+description = "${单位} 到 ${点} 的距离"
+category = TC_LOCATION
+returns = real
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = location
+
+[YDWEAngleBetweenUnitAndPoint]
+title = "单位到点的角度 [New!]"
+description = "${单位} 到 ${点} 的角度"
+category = TC_LOCATION
+returns = degree
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
 [[.args]]
 type = location
 
