@@ -1609,7 +1609,7 @@ type = integer
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = boolean
 [[.args]]
 type = scriptcode
@@ -1637,7 +1637,7 @@ type = scriptcode
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = real
 [[.args]]
 type = scriptcode
@@ -1702,7 +1702,7 @@ default = null
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = string
 [[.args]]
 type = scriptcode
@@ -1770,7 +1770,7 @@ default = "GetPlayableMapRect"
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = location
 [[.args]]
 type = scriptcode
@@ -1992,7 +1992,7 @@ type = group
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = unit
 [[.args]]
 type = scriptcode
@@ -2028,7 +2028,7 @@ default = "GetTriggerUnit"
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = unitcode
 [[.args]]
 type = scriptcode
@@ -2309,7 +2309,7 @@ default = "GetLastCreatedItem"
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = itemcode
 [[.args]]
 type = scriptcode
@@ -2344,7 +2344,7 @@ min = -1
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = abilcode
 [[.args]]
 type = scriptcode
@@ -2403,7 +2403,7 @@ returns = player
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = player
 [[.args]]
 type = scriptcode
@@ -2419,7 +2419,7 @@ returns = group
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = group
 [[.args]]
 type = scriptcode
@@ -3159,7 +3159,7 @@ returns = timer
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = timer
 [[.args]]
 type = scriptcode
@@ -3187,7 +3187,7 @@ default = "0"
 title = "自定义代码 [C]"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
-category = TC_NOTHING
+category = TC_YDHIDE
 returns = hashtable
 [[.args]]
 type = scriptcode
