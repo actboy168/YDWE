@@ -15,10 +15,6 @@ local function is_enable_unknownui()
 	return true
 end
 
-local function load_mpq(filename)
-	return mpqloader:load(filename)
-end
-
 local function stringify_txt(t)
 	local buf = {}
 	for id, o in pairs(t) do
@@ -60,7 +56,7 @@ end
 
 local function load_worldeditstrings()
 	log.trace("virtual_mpq 'worldeditstrings'")
-	local t = ini(load_mpq('ui\\WorldEditStrings.txt'), 'WorldEditStrings')
+	local t = ini(mpqloader:load('ui\\WorldEditStrings.txt'), 'WorldEditStrings')
 	t.WorldEditStrings.WESTRING_APPNAME = t.WorldEditStrings.WESTRING_APPNAME .. ' [ ' .. tostring(ydwe_version) .. ' ]'
 	local str = {}
 	str[#str+1] = "[WorldEditStrings]"
@@ -72,8 +68,8 @@ end
 
 local function load_worldeditdata()
 	log.trace("virtual_mpq 'worldeditdata'")
-    local newt = ini(load_mpq('ui\\WorldEditData.txt'), 'WorldEditData')
-    local ydwewedata = load_mpq('ydwe\\WorldEditData.txt')
+    local newt = ini(mpqloader:load('ui\\WorldEditData.txt'), 'WorldEditData')
+    local ydwewedata = mpqloader:load('ydwe\\WorldEditData.txt')
     if ydwewedata then
         local t = ini(ydwewedata, 'ydwe\\WorldEditData')
         if t then
@@ -111,14 +107,14 @@ local function initialize()
 	virtual_mpq.watch(info.txt[1], function ()
 		local t = {}
         for _, filename in pairs(info.txt) do
-			txt(load_mpq(filename), filename, t)
+			txt(mpqloader:load(filename), filename, t)
         end
-        local ydwetip = load_mpq('ydwe\\ydwetip.txt')
+        local ydwetip = mpqloader:load('ydwe\\ydwetip.txt')
         if ydwetip then
             txt(ydwetip, 'ydwe\\ydwetip', t)
         end
         
-        local editorsuffix = load_mpq('ydwe\\editorsuffix.txt')
+        local editorsuffix = mpqloader:load('ydwe\\editorsuffix.txt')
         if editorsuffix then
 		    local replace = {}
 		    txt(editorsuffix, 'ydwe\\editorsuffix', replace)
@@ -138,20 +134,20 @@ local function initialize()
 		for _, filename in ipairs(filenames) do
 			if filename ~= 'units\\abilitydata.slk' and filename ~= 'units\\abilitybuffdata.slk' then
 				virtual_mpq.watch(filename, function ()
-					return load_mpq(filename, filename)
+					return mpqloader:load(filename, filename)
 				end)
 			end
 		end
 	end
 	virtual_mpq.watch('units\\abilitydata.slk', function ()
-		local t = slk(load_mpq('units\\abilitydata.slk'), 'abilitydata.slk')
+		local t = slk(mpqloader:load('units\\abilitydata.slk'), 'abilitydata.slk')
 		for _, o in pairs(t) do
 			o.useInEditor = 1
 		end
 		return stringify_slk(t, 'alias')
 	end)
 	virtual_mpq.watch('units\\abilitybuffdata.slk', function ()
-		local t = slk(load_mpq('units\\abilitybuffdata.slk'), 'abilitybuffdata.slk')
+		local t = slk(mpqloader:load('units\\abilitybuffdata.slk'), 'abilitybuffdata.slk')
 		local function insert(code, sort, race)
 			t[code] = {
 				code = code,
