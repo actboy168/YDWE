@@ -1606,7 +1606,7 @@ returns = real
 type = integer
 
 ["  "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
@@ -1634,7 +1634,7 @@ returns = integer
 type = scriptcode
 
 ["   "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
@@ -1699,7 +1699,7 @@ type = string
 default = null
 
 ["    "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
@@ -1767,7 +1767,7 @@ type = rect
 default = "GetPlayableMapRect"
 
 ["     "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
@@ -1989,7 +1989,7 @@ returns = unit
 type = group
 
 ["      "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
@@ -2025,7 +2025,7 @@ type = unit
 default = "GetTriggerUnit"
 
 ["       "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
@@ -2306,7 +2306,7 @@ type = item
 default = "GetLastCreatedItem"
 
 ["        "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
@@ -2341,7 +2341,7 @@ default = "1"
 min = -1
 
 ["         "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
@@ -2400,7 +2400,7 @@ category = TC_NOTHING
 returns = player
 
 ["          "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
@@ -2416,7 +2416,7 @@ category = TC_NOTHING
 returns = group
 
 ["           "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
@@ -3156,7 +3156,7 @@ category = TC_NOTHING
 returns = timer
 
 ["            "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
@@ -3184,7 +3184,7 @@ type = degree
 default = "0"
 
 ["              "]
-title = "自定义代码 [C]"
+title = "自定义代码"
 description = "代码: ${Jass代码}"
 comment = "输入一行Jass代码"
 category = TC_YDHIDE
