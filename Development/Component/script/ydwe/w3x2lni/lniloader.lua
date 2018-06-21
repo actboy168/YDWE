@@ -155,7 +155,10 @@ return function (mappath)
     
     local w2l = w3x2lni()
     w2l.input_mode = 'lni'
-    w2l:set_setting { mode = 'obj' }
+    w2l:set_setting {
+        mode = 'obj',
+        input = dir,
+    }
 
     w2l.input_ar = dummy_map
     w2l.output_ar = dummy_map
