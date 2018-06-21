@@ -201,7 +201,6 @@ function event.EVENT_TEST_MAP(event_data)
 	end
 
 	local result = false
-	log.debug("Testing " .. commandline)
 	for i = 1, n do
 		result = process_create(fs.ydwe_path() / 'ydwe.exe', commandline)
 	end
