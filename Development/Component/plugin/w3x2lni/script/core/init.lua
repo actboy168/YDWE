@@ -232,7 +232,11 @@ function mt:call_plugin(event, ...)
     for _, plugin in ipairs(self.plugins) do
         if plugin[event] then
             local ok, res = pcall(plugin[event], plugin, self, ...)
-            if not ok then
+            if ok then
+                if res ~= nil then
+                    return res
+                end
+            else
                 self.messager.report(lang.report.OTHER, 2, lang.report.PLUGIN_FAILED:format(plugin.info.name), res)
             end
         end
