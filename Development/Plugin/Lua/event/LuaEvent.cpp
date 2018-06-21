@@ -118,6 +118,15 @@ namespace NYDWE {
 		return ok;
 	}
 
+	static bool testMap = false;
+	bool isWeSaveMapHookInstalled;
+	uintptr_t pgTrueWeSaveMap;
+	static int __fastcall DetourWeSaveMap(int This, int Edx, int Map, int NoTest)
+	{
+		testMap = !NoTest;
+		return base::fast_call<int>(pgTrueWeSaveMap, This, Edx, Map, NoTest);
+	}
+
 	bool isWeRebuildMapHookInstalled;
 	uintptr_t pgTrueWeRebuildMap;
 	static int __fastcall DetourWeRebuildMap(int This)
@@ -147,7 +156,11 @@ namespace NYDWE {
 		int results = event_array[EVENT_NEW_SAVE_MAP]([&](lua_State* L, int idx) {
 			lua_pushstring(L, "map_path");
 			lua_pushwstring(L, base::a2w(mappath));
-			lua_settable(L, idx);
+			lua_rawset(L, idx);
+
+			lua_pushstring(L, "test");
+			lua_pushboolean(L, testMap);
+			lua_rawset(L, idx);
 		});
 		return results >= 0 ? 1 : 0;
 	}
@@ -419,6 +432,9 @@ namespace NYDWE {
 		pgTrueCreateWindowExA = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "CreateWindowExA", (uintptr_t)DetourWeCreateWindowExA);
 		pgTrueSetMenu         = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "SetMenu",         (uintptr_t)DetourWeSetMenu);
 		pgTrueCreateDialogIndirectParamA = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "CreateDialogIndirectParamA",  (uintptr_t)DetourWeCreateDialogIndirectParamA);
+
+		pgTrueWeSaveMap = (uintptr_t)0x005252A0;
+		INSTALL_INLINE_HOOK(WeSaveMap);
 
 		pgTrueWeRebuildMap = (uintptr_t)0x00402540;
 		INSTALL_INLINE_HOOK(WeRebuildMap);
