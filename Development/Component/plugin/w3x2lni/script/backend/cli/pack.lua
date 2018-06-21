@@ -76,6 +76,9 @@ return function()
     messager.text(lang.script.INIT)
     messager.progress(0)
 
+    w2l.log_path = root / 'log'
+    fs.remove(w2l.log_path / 'report.log')
+
     local input = absolute_path(command[2])
     local output = absolute_path(command[3])
 
@@ -90,6 +93,17 @@ return function()
     if not output_ar then
         w2l:failed(err)
     end
+
+    w2l.input_ar = input_ar
+    w2l.output_ar = output_ar
+
+    local plugin_loader = require 'backend.plugin'
+    plugin_loader(w2l, function (source, plugin)
+        w2l:add_plugin(source, plugin)
+    end)
+
+    messager.text(lang.script.CHECK_PLUGIN)
+    w2l:call_plugin('on_pack', input_ar)
 
     local wts = w2l:frontend_wts(input_ar:get 'war3map.wts')
     local w3i = w2l:frontend_w3i(input_ar:get 'war3map.w3i', wts)
@@ -107,5 +121,13 @@ return function()
     
     local clock = os.clock()
     messager.text(lang.script.FINISH:format(clock))
-    exit(report)
+    local err, warn = exit(report)
+
+    local setting = {
+        input  = input,
+        output = output,
+        mode   = 'pack',
+    }
+    fs.create_directories(w2l.log_path)
+    io.save(w2l.log_path / 'report.log', get_report(w2l, report, setting, clock, err, warn))
 end
