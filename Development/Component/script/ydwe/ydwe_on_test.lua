@@ -165,28 +165,31 @@ function event.EVENT_TEST_MAP(event_data)
 	log.info('Current map path ' .. current_map_path:string())
 	log.debug("Testing " .. mappath:string())
     log.debug("Testing " .. event_data.command_line)
-    
-    local mapSlk = "0" ~= global_config["MapTest"]["EnableMapSlk"]
-	-- 如果是lni地图，需要重新打包
-    if is_lni(current_map_path) then
-        if mapSlk then
-            if not map_packer('slk', current_map_path, mappath) then
-                log.inifo('Slk map failed!')
-                return -1
-            end
-        else 
-            if not map_packer('obj', current_map_path, mappath) then
-                log.inifo('Pack map failed!')
-                return -1
-            end
-        end
-    else
-        if mapSlk then
-            if not map_packer('slk', current_map_path, mappath) then
-                log.inifo('Slk map failed!')
-                return -1
-            end
-        end
+	
+	-- 如果测试前没有保存过，则在这里转换地图
+	if not event_data.save then
+		local mapSlk = "0" ~= global_config["MapTest"]["EnableMapSlk"]
+		-- 如果是lni地图，需要重新打包
+		if is_lni(current_map_path) then
+			if mapSlk then
+				if not map_packer('slk', current_map_path, mappath) then
+					log.inifo('Slk map failed!')
+					return -1
+				end
+			else 
+				if not map_packer('obj', current_map_path, mappath) then
+					log.inifo('Pack map failed!')
+					return -1
+				end
+			end
+		else
+			if mapSlk then
+				if not map_packer('slk', current_map_path, mappath) then
+					log.inifo('Slk map failed!')
+					return -1
+				end
+			end
+		end
 	end
 
 	-- 附加命令行

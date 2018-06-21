@@ -18,18 +18,28 @@ local function backup_map(map_path)
     fs.copy_file(map_path, target_path, true)
 end
 
-local function saveW3x(source_path, target_path, temp_path, save_version)
+local function saveW3x(source_path, target_path, temp_path, save_version, is_test)
     fs.remove(target_path)
     local result = compiler:compile(temp_path, global_config, save_version)
     log.debug("Compiler Result " .. tostring(result))
     
     local result
-    if target_path:filename():string() == '.w3x' then
-        result = map_packer('lni', temp_path, source_path:parent_path())
-        fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', target_path, true)
-    else
-        result = map_packer('pack', temp_path, target_path)
+    if is_test then
+        local mapSlk = "0" ~= global_config["MapTest"]["EnableMapSlk"]
+        if mapSlk then
+            result = map_packer('slk', temp_path, target_path)
+        else
+            result = map_packer('pack', temp_path, target_path)
+        end
         backup_map(target_path)
+    else
+        if target_path:filename():string() == '.w3x' then
+            result = map_packer('lni', temp_path, source_path:parent_path())
+            fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', target_path, true)
+        else
+            result = map_packer('pack', temp_path, target_path)
+            backup_map(target_path)
+        end
     end
     log.debug("Packer Result " .. tostring(result))
     return result
@@ -92,7 +102,7 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
 
     local result = false
     if save_type == 'w3x' then
-        result = saveW3x(source_path, target_path, temp_path, save_version)
+        result = saveW3x(source_path, target_path, temp_path, save_version, event_data.test)
     elseif save_type == 'w3m' then
         result = saveW3m(source_path, target_path, temp_path, save_version)
     elseif save_type == 'w3n' then
