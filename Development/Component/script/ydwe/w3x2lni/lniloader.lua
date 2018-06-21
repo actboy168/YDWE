@@ -104,7 +104,7 @@ local function dummy_map_ar(dir)
             local len = #dir:string()
             for _, name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
                 scan_dir(dir / name, function (path)
-                    local name = path:string():sub(len+2)
+                    local name = path:string():sub(len+2):gsub('/', '\\')
                     self._list_file[#self._list_file+1] = name
                 end)
             end
