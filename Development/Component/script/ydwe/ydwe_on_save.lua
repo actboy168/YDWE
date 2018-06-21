@@ -58,7 +58,7 @@ local function saveW3n(source_path, target_path, temp_path, save_version)
 end
 
 function event.EVENT_NEW_SAVE_MAP(event_data)
-	log.debug("********************* on new save start *********************")
+	log.debug("********************* on save start *********************")
 
 	-- 刷新配置数据
 	global_config_reload()
@@ -80,7 +80,7 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
 			source_path:add_permissions(128)
 		else
             log.trace("Don't remove the read-only attribute.")
-            log.debug("********************* on new save end *********************")
+            log.debug("********************* on save end *********************")
             return -1
         end
     end
@@ -97,6 +97,6 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
         gui.error_message(nil, LNG.UNSUPORTED_SAVE_TYPE, save_type)
     end
 
-	log.debug("********************* on new save end *********************")
+	log.debug("********************* on save end *********************")
 	if result then return 0 else return -1 end
 end
