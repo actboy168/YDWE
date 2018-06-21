@@ -119,12 +119,17 @@ namespace NYDWE {
 	}
 
 	static bool testMap = false;
-	bool isWeSaveMapHookInstalled;
-	uintptr_t pgTrueWeSaveMap;
-	static int __fastcall DetourWeSaveMap(int This, int Edx, int Map, int NoTest)
+	static bool saveMap = false;
+	bool isWeTestMapHookInstalled;
+	uintptr_t pgTrueWeTestMap;
+	static int __fastcall DetourWeTestMap(int This)
 	{
-		testMap = !NoTest;
-		return base::fast_call<int>(pgTrueWeSaveMap, This, Edx, Map, NoTest);
+		testMap = true;
+		saveMap = false;
+		int res = base::fast_call<int>(pgTrueWeTestMap, This);
+		testMap = false;
+		saveMap = false;
+		return res;
 	}
 
 	bool isWeRebuildMapHookInstalled;
@@ -153,6 +158,7 @@ namespace NYDWE {
 			return 0;
 		}
 		base::std_call<void>(0x004063A0, map, 1, NULL);
+		saveMap = true;
 		int results = event_array[EVENT_NEW_SAVE_MAP]([&](lua_State* L, int idx) {
 			lua_pushstring(L, "map_path");
 			lua_pushwstring(L, base::a2w(mappath));
@@ -180,19 +186,24 @@ namespace NYDWE {
 			int results = event_array[EVENT_TEST_MAP]([&](lua_State* L, int idx){
 				lua_pushstring(L, "map_path");
 				lua_pushwstring(L, currentWarcraftMap.wstring());
-				lua_settable(L, idx);
+				lua_rawset(L, idx);
+
+				lua_pushstring(L, "save");
+				lua_pushboolean(L, saveMap);
+				lua_rawset(L, idx);
 
 				if (lpApplicationName) {
 					lua_pushstring(L, "application_name");
 					lua_pushastring(L, lpApplicationName);
-					lua_settable(L, idx);
+					lua_rawset(L, idx);
 				}
 
 				if (lpCommandLine) {
 					lua_pushstring(L, "command_line");
 					lua_pushastring(L, lpCommandLine);
-					lua_settable(L, idx);
+					lua_rawset(L, idx);
 				}
+				
 			});
 			return results >= 0;
 		}
@@ -433,8 +444,8 @@ namespace NYDWE {
 		pgTrueSetMenu         = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "SetMenu",         (uintptr_t)DetourWeSetMenu);
 		pgTrueCreateDialogIndirectParamA = base::hook::iat(::GetModuleHandleW(NULL), "user32.dll",   "CreateDialogIndirectParamA",  (uintptr_t)DetourWeCreateDialogIndirectParamA);
 
-		pgTrueWeSaveMap = (uintptr_t)0x005252A0;
-		INSTALL_INLINE_HOOK(WeSaveMap);
+		pgTrueWeTestMap = (uintptr_t)0x004EB9B0;
+		INSTALL_INLINE_HOOK(WeTestMap);
 
 		pgTrueWeRebuildMap = (uintptr_t)0x00402540;
 		INSTALL_INLINE_HOOK(WeRebuildMap);
