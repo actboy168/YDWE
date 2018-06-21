@@ -39,8 +39,8 @@ type = scriptcode
 
 [YDWELoadAnyTypeDataByUserData]
 title = "自定义值 -- 读取"
-description = "获取 [${类型}] ${null} 的 ${属性}"
-comment = "从某个数据上获取自定义值，如获取[单位] 恶魔猎手 的 命中率 。"
+description = "[${类型}] ${null} 的 ${属性}"
+comment = "从某个数据上获取自定义值，如[单位] 恶魔猎手 的 命中率 。"
 category = TC_YDBF
 returns = AnyReturnType
 [[.args]]
