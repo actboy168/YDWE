@@ -254,6 +254,13 @@ void luaC_fix (lua_State *L, GCObject *o) {
 GCObject *luaC_newobj (lua_State *L, int tt, size_t sz) {
   global_State *g = G(L);
   GCObject *o = cast(GCObject *, luaM_newobject(L, novariant(tt), sz));
+  if (tt == LUA_TTABLE || tt == LUA_TUSERDATA) {
+	  o->gchash = g->hash++;
+	  if (o->gchash == 0) o->gchash++;
+  }
+  else {
+	  o->gchash = 0;
+  }
   o->marked = luaC_white(g);
   o->tt = tt;
   o->next = g->allgc;

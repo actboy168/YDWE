@@ -239,7 +239,7 @@ typedef StackValue *StkId;  /* index to stack elements */
 ** Common Header for all collectable objects (in macro form, to be
 ** included in other objects)
 */
-#define CommonHeader	struct GCObject *next; lu_byte tt; lu_byte marked
+#define CommonHeader	struct GCObject *next; lu_byte tt; lu_byte marked; lua_Integer gchash
 
 
 /* Common type for all collectable objects */
