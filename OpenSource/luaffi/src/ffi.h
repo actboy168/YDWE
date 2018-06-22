@@ -107,7 +107,7 @@ static char* luaL_prepbuffsize(luaL_Buffer* B, size_t sz) {
     }
     return luaL_prepbuffer(B);
 }
-#elif LUA_VERSION_NUM == 503
+#elif LUA_VERSION_NUM >= 503
 static void (lua_remove)(lua_State *L, int idx) {
     lua_remove(L, idx);
 }
