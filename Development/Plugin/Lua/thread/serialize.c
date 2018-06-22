@@ -298,20 +298,20 @@ wb_string(struct write_block *wb, const char *str, int len) {
 
 static void pack_one(lua_State *L, struct write_block *b, int index, int depth);
 
-static int
+static lua_Unsigned
 wb_table_array(lua_State *L, struct write_block * wb, int index, int depth) {
-	int array_size = lua_rawlen(L, index);
+	lua_Unsigned array_size = lua_rawlen(L, index);
 	if (array_size >= MAX_COOKIE - 1) {
 		int n = COMBINE_TYPE(TYPE_TABLE, MAX_COOKIE - 1);
 		wb_push(wb, &n, 1);
 		wb_integer(wb, array_size);
 	}
 	else {
-		int n = COMBINE_TYPE(TYPE_TABLE, array_size);
+		int n = COMBINE_TYPE(TYPE_TABLE, (int)array_size);
 		wb_push(wb, &n, 1);
 	}
 
-	int i;
+	lua_Unsigned i;
 	for (i = 1; i <= array_size; i++) {
 		lua_rawgeti(L, index, i);
 		pack_one(L, wb, -1, depth);
@@ -347,7 +347,7 @@ wb_table(lua_State *L, struct write_block *wb, int index, int depth) {
 	if (index < 0) {
 		index = lua_gettop(L) + index + 1;
 	}
-	int array_size = wb_table_array(L, wb, index, depth);
+	int array_size = (int)wb_table_array(L, wb, index, depth);
 	wb_table_hash(L, wb, index, depth, array_size);
 }
 

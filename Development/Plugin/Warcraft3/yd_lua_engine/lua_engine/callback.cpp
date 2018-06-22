@@ -74,7 +74,8 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		lua_pushvalue(L, -nargs - 1);
 		lua_xmove(L, thread, 1);
 		lua_xmove(L, thread, nargs);
-		int error = lua_resume(thread, L, nargs);
+		int nresTODO = 0;
+		int error = lua_resume(thread, L, nargs, &nresTODO);
 
 		if (error == LUA_OK || error == LUA_YIELD)
 		{

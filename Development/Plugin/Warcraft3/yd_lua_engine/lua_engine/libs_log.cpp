@@ -126,7 +126,7 @@ static const char *	log_timestr()
 	return str;
 }
 
-#define buffonstack(B)	((B)->b != (B)->initb)
+#define buffonstack(B)	((B)->b != (B)->init.b)
 
 static int l_log(lua_State* L, int level)
 {

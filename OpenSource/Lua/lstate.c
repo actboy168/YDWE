@@ -1,5 +1,5 @@
 /*
-** $Id: lstate.c,v 2.133 2015/11/13 12:16:51 roberto Exp $
+** $Id: lstate.c,v 2.155 2018/06/18 12:08:10 roberto Exp $
 ** Global State
 ** See Copyright Notice in lua.h
 */
@@ -12,7 +12,6 @@
 
 #include <stddef.h>
 #include <string.h>
-#include <stdlib.h>
 
 #include "lua.h"
 
@@ -27,25 +26,6 @@
 #include "lstring.h"
 #include "ltable.h"
 #include "ltm.h"
-
-
-#if !defined(LUAI_GCPAUSE)
-#define LUAI_GCPAUSE	200  /* 200% */
-#endif
-
-#if !defined(LUAI_GCMUL)
-#define LUAI_GCMUL	200 /* GC runs 'twice the speed' of memory allocation */
-#endif
-
-
-/*
-** a macro to help the creation of a unique random seed when a state is
-** created; the seed is used to randomize hashes.
-*/
-#if !defined(luai_makeseed)
-#include <time.h>
-#define luai_makeseed()		cast(unsigned int, time(NULL))
-#endif
 
 
 
@@ -72,28 +52,34 @@ typedef struct LG {
 
 
 /*
-** Compute an initial seed as random as possible. Rely on Address Space
-** Layout Randomization (if present) to increase randomness..
+** A macro to create a "random" seed when a state is created;
+** the seed is used to randomize string hashes.
+*/
+#if !defined(luai_makeseed)
+
+#include <time.h>
+
+/*
+** Compute an initial seed with some level of randomness.
+** Rely on Address Space Layout Randomization (if present) and
+** current time.
 */
 #define addbuff(b,p,e) \
-  { size_t t = cast(size_t, e); \
+  { size_t t = cast_sizet(e); \
     memcpy(b + p, &t, sizeof(t)); p += sizeof(t); }
 
-static unsigned int makeseed (lua_State *L) {
-  const char* seed = getenv("LUA_SEED");
-  if (seed) {
-	  return atoi(seed);
-  }
-  char buff[4 * sizeof(size_t)];
-  unsigned int h = luai_makeseed();
+static unsigned int luai_makeseed (lua_State *L) {
+  char buff[3 * sizeof(size_t)];
+  unsigned int h = cast_uint(time(NULL));
   int p = 0;
   addbuff(buff, p, L);  /* heap variable */
   addbuff(buff, p, &h);  /* local variable */
-  addbuff(buff, p, luaO_nilobject);  /* global variable */
   addbuff(buff, p, &lua_newstate);  /* public function */
   lua_assert(p == sizeof(buff));
   return luaS_hash(buff, p, h);
 }
+
+#endif
 
 
 /*
@@ -110,12 +96,33 @@ void luaE_setdebt (global_State *g, l_mem debt) {
 }
 
 
+/*
+** Increment count of "C calls" and check for overflows. In case of
+** a stack overflow, check appropriate error ("regular" overflow or
+** overflow while handling stack overflow). If 'nCalls' is larger than
+** LUAI_MAXCCALLS (which means it is handling a "regular" overflow) but
+** smaller than 9/8 of LUAI_MAXCCALLS, does not report an error (to
+** allow overflow handling to work)
+*/
+void luaE_incCcalls (lua_State *L) {
+  if (++L->nCcalls >= LUAI_MAXCCALLS) {
+    if (L->nCcalls == LUAI_MAXCCALLS)
+      luaG_runerror(L, "C stack overflow");
+    else if (L->nCcalls >= (LUAI_MAXCCALLS + (LUAI_MAXCCALLS>>3)))
+      luaD_throw(L, LUA_ERRERR);  /* error while handing stack error */
+  }
+}
+
+
 CallInfo *luaE_extendCI (lua_State *L) {
-  CallInfo *ci = luaM_new(L, CallInfo);
+  CallInfo *ci;
+  luaE_incCcalls(L);
+  ci = luaM_new(L, CallInfo);
   lua_assert(L->ci->next == NULL);
   L->ci->next = ci;
   ci->previous = L->ci;
   ci->next = NULL;
+  ci->u.l.trap = 0;
   L->nci++;
   return ci;
 }
@@ -128,11 +135,13 @@ void luaE_freeCI (lua_State *L) {
   CallInfo *ci = L->ci;
   CallInfo *next = ci->next;
   ci->next = NULL;
+  L->nCcalls -= L->nci;  /* to subtract removed elements from 'nCcalls' */
   while ((ci = next) != NULL) {
     next = ci->next;
     luaM_free(L, ci);
     L->nci--;
   }
+  L->nCcalls += L->nci;  /* to subtract removed elements from 'nCcalls' */
 }
 
 
@@ -142,6 +151,7 @@ void luaE_freeCI (lua_State *L) {
 void luaE_shrinkCI (lua_State *L) {
   CallInfo *ci = L->ci;
   CallInfo *next2;  /* next's next */
+  L->nCcalls -= L->nci;  /* to subtract removed elements from 'nCcalls' */
   /* while there are two nexts */
   while (ci->next != NULL && (next2 = ci->next->next) != NULL) {
     luaM_free(L, ci->next);  /* free next */
@@ -150,24 +160,26 @@ void luaE_shrinkCI (lua_State *L) {
     next2->previous = ci;
     ci = next2;  /* keep next's next */
   }
+  L->nCcalls += L->nci;  /* to subtract removed elements from 'nCcalls' */
 }
 
 
 static void stack_init (lua_State *L1, lua_State *L) {
   int i; CallInfo *ci;
   /* initialize stack array */
-  L1->stack = luaM_newvector(L, BASIC_STACK_SIZE, TValue);
+  L1->stack = luaM_newvector(L, BASIC_STACK_SIZE, StackValue);
   L1->stacksize = BASIC_STACK_SIZE;
   for (i = 0; i < BASIC_STACK_SIZE; i++)
-    setnilvalue(L1->stack + i);  /* erase new stack */
+    setnilvalue(s2v(L1->stack + i));  /* erase new stack */
   L1->top = L1->stack;
   L1->stack_last = L1->stack + L1->stacksize - EXTRA_STACK;
   /* initialize first ci */
   ci = &L1->base_ci;
   ci->next = ci->previous = NULL;
-  ci->callstatus = 0;
+  ci->callstatus = CIST_C;
   ci->func = L1->top;
-  setnilvalue(L1->top++);  /* 'function' entry for this 'ci' */
+  setnilvalue(s2v(L1->top));  /* 'function' entry for this 'ci' */
+  L1->top++;
   ci->top = L1->top + LUA_MINSTACK;
   L1->ci = ci;
 }
@@ -203,7 +215,7 @@ static void init_registry (lua_State *L, global_State *g) {
 
 /*
 ** open parts of the state that may cause memory-allocation errors.
-** ('g->version' != NULL flags that the state was completely build)
+** ('ttisnil(&g->nilvalue)'' flags that the state was completely build)
 */
 static void f_luaopen (lua_State *L, void *ud) {
   global_State *g = G(L);
@@ -214,7 +226,7 @@ static void f_luaopen (lua_State *L, void *ud) {
   luaT_init(L);
   luaX_init(L);
   g->gcrunning = 1;  /* allow gc */
-  g->version = lua_version(NULL);
+  setnilvalue(&g->nilvalue);
   luai_userstateopen(L);
 }
 
@@ -248,7 +260,7 @@ static void close_state (lua_State *L) {
   global_State *g = G(L);
   luaF_close(L, L->stack);  /* close all upvalues for this thread */
   luaC_freeallobjects(L);  /* collect all objects */
-  if (g->version)  /* closing a fully built state? */
+  if (ttisnil(&g->nilvalue))  /* closing a fully built state? */
     luai_userstateclose(L);
   luaM_freearray(L, G(L)->strt.hash, G(L)->strt.size);
   freestack(L);
@@ -264,15 +276,13 @@ LUA_API lua_State *lua_newthread (lua_State *L) {
   luaC_checkGC(L);
   /* create new thread */
   L1 = &cast(LX *, luaM_newobject(L, LUA_TTHREAD, sizeof(LX)))->l;
-  L1->gchash = g->hash++;
-  if (L1->gchash == 0) L1->gchash++;
   L1->marked = luaC_white(g);
   L1->tt = LUA_TTHREAD;
   /* link it on list 'allgc' */
   L1->next = g->allgc;
   g->allgc = obj2gco(L1);
   /* anchor it on L stack */
-  setthvalue(L, L->top, L1);
+  setthvalue2s(L, L->top, L1);
   api_incr_top(L);
   preinit_thread(L1, g);
   L1->hookmask = L->hookmask;
@@ -307,37 +317,39 @@ LUA_API lua_State *lua_newstate (lua_Alloc f, void *ud) {
   if (l == NULL) return NULL;
   L = &l->l.l;
   g = &l->g;
-  L->next = NULL;
   L->tt = LUA_TTHREAD;
   g->currentwhite = bitmask(WHITE0BIT);
   L->marked = luaC_white(g);
   preinit_thread(L, g);
+  g->allgc = obj2gco(L);  /* by now, only object is the main thread */
+  L->next = NULL;
   g->frealloc = f;
   g->ud = ud;
   g->mainthread = L;
-  g->seed = makeseed(L);
-  g->hash = g->seed;
-  L->gchash = g->hash++;
-  if (L->gchash == 0) L->gchash++;
+  g->seed = luai_makeseed(L);
   g->gcrunning = 0;  /* no GC while building state */
-  g->GCestimate = 0;
   g->strt.size = g->strt.nuse = 0;
   g->strt.hash = NULL;
   setnilvalue(&g->l_registry);
   g->panic = NULL;
-  g->version = NULL;
   g->gcstate = GCSpause;
-  g->gckind = KGC_NORMAL;
-  g->allgc = g->finobj = g->tobefnz = g->fixedgc = NULL;
+  g->gckind = KGC_INC;
+  g->gcemergency = 0;
+  g->finobj = g->tobefnz = g->fixedgc = NULL;
+  g->survival = g->old = g->reallyold = NULL;
+  g->finobjsur = g->finobjold = g->finobjrold = NULL;
   g->sweepgc = NULL;
   g->gray = g->grayagain = NULL;
-  g->weak = g->ephemeron = g->allweak = NULL;
+  g->weak = g->ephemeron = g->allweak = g->protogray = NULL;
   g->twups = NULL;
   g->totalbytes = sizeof(LG);
   g->GCdebt = 0;
-  g->gcfinnum = 0;
-  g->gcpause = LUAI_GCPAUSE;
-  g->gcstepmul = LUAI_GCMUL;
+  setivalue(&g->nilvalue, 0);  /* to signal that state is not yet built */
+  setgcparam(g->gcpause, LUAI_GCPAUSE);
+  setgcparam(g->gcstepmul, LUAI_GCMUL);
+  g->gcstepsize = LUAI_GCSTEPSIZE;
+  setgcparam(g->genmajormul, LUAI_GENMAJORMUL);
+  g->genminormul = LUAI_GENMINORMUL;
   for (i=0; i < LUA_NUMTAGS; i++) g->mt[i] = NULL;
   if (luaD_rawrunprotected(L, f_luaopen, NULL) != LUA_OK) {
     /* memory allocation error: free partial state */
