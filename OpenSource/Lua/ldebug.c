@@ -745,6 +745,8 @@ const char *luaG_addinfo (lua_State *L, const char *msg, TString *src,
 
 
 l_noret luaG_errormsg (lua_State *L) {
+  if (L->hookmask & LUA_MASKEXCEPTION)
+    luaD_hook(L, LUA_HOOKEXCEPTION, -1, 0, 0);
   if (L->errfunc != 0) {  /* is there an error handling function? */
     StkId errfunc = restorestack(L, L->errfunc);
     lua_assert(ttisfunction(s2v(errfunc)));

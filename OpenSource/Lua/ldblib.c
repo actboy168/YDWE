@@ -335,6 +335,7 @@ static int makemask (const char *smask, int count) {
   if (strchr(smask, 'c')) mask |= LUA_MASKCALL;
   if (strchr(smask, 'r')) mask |= LUA_MASKRET;
   if (strchr(smask, 'l')) mask |= LUA_MASKLINE;
+  if (strchr(smask, 'e')) mask |= LUA_MASKEXCEPTION;
   if (count > 0) mask |= LUA_MASKCOUNT;
   return mask;
 }
@@ -348,6 +349,7 @@ static char *unmakemask (int mask, char *smask) {
   if (mask & LUA_MASKCALL) smask[i++] = 'c';
   if (mask & LUA_MASKRET) smask[i++] = 'r';
   if (mask & LUA_MASKLINE) smask[i++] = 'l';
+  if (mask & LUA_MASKEXCEPTION) smask[i++] = 'e';
   smask[i] = '\0';
   return smask;
 }
