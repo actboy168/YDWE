@@ -56,5 +56,17 @@
 
 #endif			/* } */
 
+#include <time.h>
+
+__inline unsigned int luafix_makeseed(void *L) {
+	const char* seed = getenv("LUA_SEED");
+	if (seed) {
+		return atoi(seed);
+	}
+	return (unsigned int)time(NULL);
+}
+
+#define luai_makeseed luafix_makeseed
+
 #endif
 
