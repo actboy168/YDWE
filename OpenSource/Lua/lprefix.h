@@ -56,6 +56,7 @@
 
 #endif			/* } */
 
+#include <stdlib.h>
 #include <time.h>
 
 __inline unsigned int luafix_makeseed(void *L) {
