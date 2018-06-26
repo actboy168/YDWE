@@ -2,6 +2,7 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/hook/inline.h>
 #include <base/hook/fp_call.h>
+#include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/opcode.h>
 #include <base/util/console.h>
@@ -67,9 +68,9 @@ namespace base { namespace warcraft3 { namespace jdebug {
 
 	uintptr_t real_jass_vmmain = 0;
 
-	struct jass::opcode* current_opcode(uint32_t vm)
+	struct jass::opcode* current_opcode(base::warcraft3::jass_vm_t* vm)
 	{
-		return *(struct jass::opcode**)(vm + 0x20) - 1;
+		return *(struct jass::opcode**)((int)vm + 0x20) - 1;
 	}
 
 	struct jass::opcode* show_pos(struct jass::opcode* current_op)
@@ -82,7 +83,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		return op;
 	}
 
-	void show_error(uint32_t vm, const std::string& msg)
+	void show_error(base::warcraft3::jass_vm_t* vm, const std::string& msg)
 	{
 		base::console::enable();
 		std::cout << "---------------------------------------" << std::endl;
@@ -92,7 +93,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		std::cout << std::endl;
 		std::cout << "stack traceback:" << std::endl;
 
-		uintptr_t stack = *(uintptr_t*)(vm + 0x2868);
+		base::warcraft3::stackframe_t* frame = vm->stackframe;
 		jass::opcode* op = current_opcode(vm);
 		while (op)
 		{
@@ -100,15 +101,15 @@ namespace base { namespace warcraft3 { namespace jdebug {
 			if (op->arg == 1) {
 				break;
 			}
-			stack = *(uintptr_t*)(stack + 0x04);
-			uintptr_t code = *(uintptr_t*)(*(uintptr_t*)(stack + 4 * *(uintptr_t*)(stack + 0x8C) + 0x08) + 0x20);
-			op = (jass::opcode*)(*(uintptr_t*)(*(uintptr_t*)(vm + 0x2858)) + code * 4);
+			frame = frame->next;
+			uintptr_t code = frame->codes[frame->index]->code;
+			op = (jass::opcode*)(vm->symbol_table->unk0 + code * 4);
 		}
 
 		std::cout << "---------------------------------------" << std::endl;
 	}
 
-	uint32_t __fastcall fake_jass_vmmain(uint32_t vm, uint32_t edx, uint32_t unk1, uint32_t unk2, uint32_t limit, uint32_t unk4)
+	uint32_t __fastcall fake_jass_vmmain(base::warcraft3::jass_vm_t* vm, uint32_t edx, uint32_t unk1, uint32_t unk2, uint32_t limit, uint32_t unk4)
 	{
 		uint32_t result = base::fast_call<uint32_t>(real_jass_vmmain, vm, edx, unk1, unk2, limit, unk4);
 

@@ -5,10 +5,10 @@
 
 namespace base { namespace warcraft3 {
 
-	jass_vm_t* get_jass_vm()
+	jass_vm_t* get_jass_vm(int index)
 	{
 		uintptr_t ptr = get_war3_searcher().get_instance(5);
-		uintptr_t vm = *(uintptr_t*)(*(uintptr_t*)(ptr + 0x90) + 0x04);
+		uintptr_t vm = *(uintptr_t*)(*(uintptr_t*)(ptr + 0x90) + 0x04 * index);
 		return vm ? (jass_vm_t*)(vm - ((get_war3_searcher().get_version() > version_120e) ? 0 : 4)) : nullptr;
 	}
 
