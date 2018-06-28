@@ -18,18 +18,28 @@ local function backup_map(map_path)
     fs.copy_file(map_path, target_path, true)
 end
 
-local function saveW3x(source_path, target_path, temp_path, save_version)
+local function saveW3x(source_path, target_path, temp_path, save_version, is_test)
     fs.remove(target_path)
     local result = compiler:compile(temp_path, global_config, save_version)
     log.debug("Compiler Result " .. tostring(result))
     
     local result
-    if target_path:filename():string() == '.w3x' then
-        result = map_packer('lni', temp_path, source_path:parent_path())
-        fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', target_path, true)
-    else
-        result = map_packer('pack', temp_path, target_path)
+    if is_test then
+        local mapSlk = "0" ~= global_config["MapTest"]["EnableMapSlk"]
+        if mapSlk then
+            result = map_packer('slk', temp_path, target_path)
+        else
+            result = map_packer('pack', temp_path, target_path)
+        end
         backup_map(target_path)
+    else
+        if target_path:filename():string() == '.w3x' then
+            result = map_packer('lni', temp_path, source_path:parent_path())
+            fs.copy_file(dev / 'plugin' / 'w3x2lni' / 'script' / 'core' / '.w3x', target_path, true)
+        else
+            result = map_packer('pack', temp_path, target_path)
+            backup_map(target_path)
+        end
     end
     log.debug("Packer Result " .. tostring(result))
     return result
@@ -58,7 +68,7 @@ local function saveW3n(source_path, target_path, temp_path, save_version)
 end
 
 function event.EVENT_NEW_SAVE_MAP(event_data)
-	log.debug("********************* on new save start *********************")
+	log.debug("********************* on save start *********************")
 
 	-- 刷新配置数据
 	global_config_reload()
@@ -67,6 +77,11 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
     local temp_path = target_path:parent_path()
     local source_path = temp_path:parent_path() / target_path:filename()
     
+    if event_data.test then
+        log.debug("Test Map")
+    else
+        log.debug("Save Map")
+    end
     log.info("Saving " .. source_path:string())
     local save_type = temp_path:filename():string():sub(-7, -5)
     local save_version = war3_version:is_new() and 24 or 20
@@ -80,14 +95,14 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
 			source_path:add_permissions(128)
 		else
             log.trace("Don't remove the read-only attribute.")
-            log.debug("********************* on new save end *********************")
+            log.debug("********************* on save end *********************")
             return -1
         end
     end
 
     local result = false
     if save_type == 'w3x' then
-        result = saveW3x(source_path, target_path, temp_path, save_version)
+        result = saveW3x(source_path, target_path, temp_path, save_version, event_data.test)
     elseif save_type == 'w3m' then
         result = saveW3m(source_path, target_path, temp_path, save_version)
     elseif save_type == 'w3n' then
@@ -97,6 +112,6 @@ function event.EVENT_NEW_SAVE_MAP(event_data)
         gui.error_message(nil, LNG.UNSUPORTED_SAVE_TYPE, save_type)
     end
 
-	log.debug("********************* on new save end *********************")
+	log.debug("********************* on save end *********************")
 	if result then return 0 else return -1 end
 end

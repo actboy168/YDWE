@@ -61,7 +61,7 @@ function mt:list_file()
         self._list_file = {}
         local len = #self.path:string()
         scan_dir(self.path, function (path)
-            local name = path:string():sub(len+2)
+            local name = path:string():sub(len+2):gsub('/', '\\')
             self._list_file[#self._list_file+1] = loaded_name(name)
         end)
     end

@@ -19,10 +19,10 @@ local function load_file(filename)
 	end
 end
 local function data_load(w2l, filename)
-    if filename:sub(1, 3) == 'ui/' then
+    if filename:sub(1, 3) == 'ui\\' then
 		return load_file(('%s/%s'):format(ydwePath, filename))
     end
-    if filename:sub(1, 9) == 'prebuilt/' then
+    if filename:sub(1, 9) == 'prebuilt\\' then
 		return load_file(('%s/data/%s/%s'):format(w2lPath, w2l.setting.data, filename))
     end
 	return load_file(('%s/share/zh-CN/%s'):format(ydwePath, filename))

@@ -228,11 +228,15 @@ function mt:add_plugin(source, plugin)
     self.messager.report(lang.report.OTHER, 9, lang.report.USED_PLUGIN:format(plugin.info.name, source), plugin.info.description)
 end
 
-function mt:call_plugin(event)
+function mt:call_plugin(event, ...)
     for _, plugin in ipairs(self.plugins) do
         if plugin[event] then
-            local ok, res = pcall(plugin[event], plugin, self)
-            if not ok then
+            local ok, res = pcall(plugin[event], plugin, self, ...)
+            if ok then
+                if res ~= nil then
+                    return res
+                end
+            else
                 self.messager.report(lang.report.OTHER, 2, lang.report.PLUGIN_FAILED:format(plugin.info.name), res)
             end
         end

@@ -65,34 +65,37 @@ local function load_plugin(w2l)
     w2l:call_plugin 'on_convert'
 end
 
-local function unify(name)
-    return name:lower():gsub('/', '\\')
-end
-
 local function dummy_map_ar(dir)
     local files = {}
     local output = {}
+    local case_map = {}
     local ar = {}
     setmetatable(ar, ar)
 
     function ar:get(name)
-        if files[name] == nil then
-            files[name] = io.load(dir / name) or false
+        local lname = name:lower()
+        case_map[lname] = name
+        if files[lname] == nil then
+            files[lname] = io.load(dir / name) or false
         end
-        if files[name] == false then
+        if files[lname] == false then
             return nil
         end
-        return files[name]
+        return files[lname]
     end
     
     function ar:set(name, buf)
-        files[name] = buf
-        output[name] = buf
+        local lname = name:lower()
+        case_map[lname] = name
+        files[lname] = buf
+        output[lname] = buf
     end
 
     function ar:remove(name)
-        files[name] = false
-        output[name] = false
+        local lname = name:lower()
+        case_map[lname] = name
+        files[lname] = false
+        output[lname] = false
     end
 
     function ar:list_file()
@@ -101,8 +104,8 @@ local function dummy_map_ar(dir)
             local len = #dir:string()
             for _, name in ipairs {'map', 'resource', 'scripts', 'sound', 'trigger', 'w3x2lni'} do
                 scan_dir(dir / name, function (path)
-                    local name = path:string():sub(len+2):lower()
-                    self._list_file[#self._list_file+1] = unify(name)
+                    local name = path:string():sub(len+2):gsub('/', '\\')
+                    self._list_file[#self._list_file+1] = name
                 end)
             end
         end
@@ -121,7 +124,7 @@ local function dummy_map_ar(dir)
         local tbl = {}
         for k, v in pairs(output) do
             if v then
-                tbl[k] = v
+                tbl[case_map[k]] = v
             end
         end
         return next, tbl
@@ -152,7 +155,10 @@ return function (mappath)
     
     local w2l = w3x2lni()
     w2l.input_mode = 'lni'
-    w2l:set_setting { mode = 'obj' }
+    w2l:set_setting {
+        mode = 'obj',
+        input = dir,
+    }
 
     w2l.input_ar = dummy_map
     w2l.output_ar = dummy_map

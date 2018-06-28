@@ -92,7 +92,7 @@ local function pack_arg(arg)
         end
     elseif type == ARRAY then
         array = true
-        type = CONSTANT
+        type = VARIABLE
     end
     if type == CONSTANT then
         value = w2l:load_wts(wts, value, 299, lang.script.TEXT_TOO_LONG_IN_WTG)

@@ -82,6 +82,7 @@ local function convert_wtg(w2l)
             end
             return buf
         end)
+        w2l:file_remove('w3x2lni', 'version\\lml')
     end
     w2l.progress:finish()
     w2l.progress:start(1)
