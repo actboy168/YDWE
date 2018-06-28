@@ -6,7 +6,6 @@ Hotkey=C
 Ubertip="Warrior Hero, adept at summoning insect minions and crushing enemies. Can learn Impale, Spiked Carapace, Carrion Beetles and Locust Swarm. |n|n|cffffcc00Attacks land units.|r"
 Revivetip=Revive |cffffcc00C|rrypt Lord
 Awakentip=Revive |cffffcc00C|rrypt Lord
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-cryptlord.blp
 
 [uaco]
 Name=Acolyte
@@ -28,7 +27,6 @@ Ubertip="Warrior Hero, evil counterpart to the Human Paladin. Can learn Death Co
 Revivetip=Revive |cffffcc00D|reath Knight
 Awakentip=Revive |cffffcc00D|reath Knight
 Hotkey=D
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-deathknight.blp
 
 [uban]
 Name=Banshee
@@ -58,7 +56,6 @@ Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sle
 Revivetip=Revive Dr|cffffcc00e|radlord
 Awakentip=Revive Dr|cffffcc00e|radlord
 Hotkey=E
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-dreadlord.blp
 
 [ufro]
 Name=Frost Wyrm
@@ -92,7 +89,6 @@ Ubertip="Mystical Hero, particularly adept at cold magic. Can learn Frost Armor,
 Revivetip=Revive |cffffcc00L|rich
 Awakentip=Revive |cffffcc00L|rich
 Hotkey=L
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-lich.blp
 
 [unec]
 Name=Necromancer
@@ -206,7 +202,7 @@ Hotkey=H
 [ushd]
 Name=Shade
 Tip=Train Shade
-Ubertip="An permanently invisible spirit that can see other invisible units, but cannot attack."
+Ubertip="A permanently invisible spirit that can see other invisible units, but cannot attack."
 
 [ugrv]
 Name=Graveyard

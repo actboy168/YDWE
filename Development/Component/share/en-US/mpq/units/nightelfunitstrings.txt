@@ -54,6 +54,9 @@ Casterupgradetip="- Faerie Fire","- Faerie Fire|n- Storm Crow Form","- Faerie Fi
 
 [egol]
 Name=Entangled Gold Mine
+Tip=Entangle |cffffcc00G|rold Mine
+Ubertip="A cluster of roots that allows wisps to mine gold from goldmines."
+
 
 [ewsp]
 Name=Wisp
@@ -69,7 +72,6 @@ Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolatio
 Revivetip=Revive |cffffcc00D|remon Hunter
 Awakentip=Revive |cffffcc00D|remon Hunter
 Propernames=Shadowsong,Shadowfury,Shadowstalker,Flameseeker,Darkweaver,Darkterror,Darksorrow,Sindweller,Painkiller,Hellbourne,Wrathbringer,Ragerunner,Firebrand,Bloodwrath,Terrorblade
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-demonhunter.blp
 
 
 [Edmm]
@@ -81,7 +83,6 @@ Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolatio
 Revivetip=Revive |cffffcc00D|remon Hunter
 Awakentip=Revive |cffffcc00D|remon Hunter
 Propernames=Shadowsong,Shadowfury,Shadowstalker,Flameseeker,Darkweaver,Darkterror,Darksorrow,Sindweller,Painkiller,Hellbourne,Wrathbringer,Ragerunner,Firebrand,Bloodwrath,Terrorblade
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-demonhunter.blp
 
 [Ekee]
 Name=Keeper of the Grove
@@ -91,7 +92,6 @@ Ubertip="Mystical Hero, adept at using nature spells. Can learn Entangling Roots
 Revivetip=Revive |cffffcc00K|reeper of the Grove
 Awakentip=Revive |cffffcc00K|reeper of the Grove
 Propernames=Larodar,Anubris,Nandieb,Califax,Bandalar,Malorne,Gholbine,Dagda,Nuada,Oghma,Centrius,Ceredwyn
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-keeperofthegrove.blp
 
 [Emoo]
 Name=Priestess of the Moon
@@ -100,8 +100,7 @@ Tip=Summon |cffffcc00P|rriestess of the Moon
 Ubertip="Warrior Hero, adept at enhancing ranged attacks and slaying enemies from afar. Can learn Scout, Searing Arrows, Trueshot Aura, and Starfall. |n|n|cffffcc00Attacks land and air units.|r"
 Revivetip=Revive |cffffcc00P|rriestess of the Moon
 Awakentip=Revive |cffffcc00P|rriestess of the Moon
-Propernames=Kathris Starsong,Adora Nightshade,Mora Moonsinger,Felore Moonray,Anara Chillwind,Kera Stardragon,Mave Whisperwind,Delas Moonfang,Mira Whitemane,Theta Saberfang,Tygra Snowscar,Ariel Darkmoon, Diana Windwood
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-priestessofthemoon.blp
+Propernames=Kathris Starsong,Adora Nightshade,Mora Moonsinger,Felore Moonray,Anara Chillwind,Kera Stardragon,Mave Whisperwind,Delas Moonfang,Mira Whitemane,Theta Saberfang,Tygra Snowscar,Ariel Darkmoon,Diana Windwood
 
 [Ewar]
 Name=Warden
@@ -111,7 +110,6 @@ Ubertip="Cunning Hero, adept at entering and escaping combat. Can learn Blink, F
 Revivetip=Revive |cffffcc00W|rarden
 Awakentip=Revive |cffffcc00W|rarden
 Propernames=Alsa Iron-cell,The Iron Raven,Marin Bladewing,Shalis Darkhunter,Sira Moonwarden,Saithis,Malace Shade,Kiri Starstalker,Anaya Felgrove,Mirana Starlight,Felhala Starmoon,Drelanim Whisperwind,Cordana Felsong,Nalmeena Darkfollow
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-warden.blp
 
 [esen]
 Name=Huntress
@@ -123,7 +121,7 @@ Ubertip="Agile short-ranged warrior. Can learn the Sentinel ability and the Moon
 Name=Archer
 Hotkey=A
 Tip=Train |cffffcc00A|rrcher
-Ubertip="Basic long-ranged attacker. Can learn the Marksmanship, Improved Bows and Hippogryph Taming upgrades.|n|n|cffffcc00Attacks land and air units.|r"
+Ubertip="Basic long-ranged attacker. Has the Elune's Grace ability. Can learn the Marksmanship, Improved Bows and Hippogryph Taming upgrades.|n|n|cffffcc00Attacks land and air units.|r"
 
 [edry]
 Name=Dryad
@@ -176,12 +174,6 @@ Hotkey=A
 Tip=Create |cffffcc00A|rltar of Elders
 Ubertip="Summons Heroes. Revives slain Heroes."
 
-[eden]
-Name=Ancient of Wonders
-Hotkey=D
-Tip=Build Ancient of Won|cffffcc00d|rers
-Ubertip="Creates a shop with purchasable items. The items available depend upon what level of upgrade your Tree of Life has (Tree of Life, Tree of Ages, or Tree of Eternity) and which buildings you have. |n|n|cffffcc00Attacks land units.|r"
-
 [eaoe]
 Name=Ancient of Lore
 Hotkey=L
@@ -199,6 +191,14 @@ Name=Ancient of Wind
 Hotkey=W
 Tip=Create Ancient of |cffffcc00W|rind
 Ubertip="Keeper of aerial assault units and spellcasters. Trains Hippogryphs, Druids of the Talon, and Faerie Dragons. |nAlso contains the upgrades for Druids of the Talon, Mark of the Talon, and Hippogryph Taming. |n|n|cffffcc00Attacks land units.|r"
+
+
+[eden]
+Name=Ancient of Wonders
+Hotkey=D
+Tip=Build Ancient of Won|cffffcc00d|rers
+Ubertip="Creates a shop with purchasable items. The items available depend upon what level of upgrade your Tree of Life has (Tree of Life, Tree of Ages, or Tree of Eternity) and which buildings you have. |n|n|cffffcc00Attacks land units.|r"
+
 
 [edos]
 Name=Chimaera Roost

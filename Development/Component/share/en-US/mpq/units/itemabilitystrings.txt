@@ -23,6 +23,7 @@ Name=Item Temporary Speed Bonus
 // continuous Attack Bonus
 [AIat]
 Name=Item Damage Bonus
+EditorSuffix=(+3)
 
 // continuous Defense Bonus
 [AIde]
@@ -695,6 +696,7 @@ Name=Scroll of Regeneration
 [BIrg]
 Bufftip=Rejuvenation
 Buffubertip="This unit will regenerate health and mana over time."
+EditorSuffix= (Item)
 
 // One time permanent gold increase
 [AIgo]
@@ -749,7 +751,6 @@ Name=Change Time of Day
 Name=Vampiric Potion
 
 [BIpv]
-Name=Vampiric Potion
 Bufftip=Vampiric Potion
 Buffubertip="This Hero used a Vampiric Potion; the Hero has increased damage and a life-draining attack."
 
@@ -1048,3 +1049,13 @@ EditorSuffix= (item)
 [AIxk]
 Name=Berserk
 EditorSuffix= (item)
+
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BIwb]
+EditorName=Item Web
+
+[Btrv]
+EditorName=Teleport Reveal

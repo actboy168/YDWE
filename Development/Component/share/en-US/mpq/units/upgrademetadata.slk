@@ -36,7 +36,7 @@ C;X12;K"string"
 C;X13;K"t"
 C;X15;K1
 C;X16;K1
-C;X17;K1
+C;X17;K0
 C;X19;K"TTName"
 C;X20;K0
 C;X21;K1
@@ -72,7 +72,7 @@ C;X12;K"unitRace"
 C;X13;K"c"
 C;X15;K0
 C;X16;K0
-C;X17;K1
+C;X17;K0
 C;X20;K0
 C;X21;K1
 C;X1;Y5;K"gtp1"

@@ -979,7 +979,7 @@ C;X1;Y17;K"hmtt"
 C;X2;K"a2"
 C;X3;K"art"
 C;X4;K"Siege Engine"
-C;X5;K2
+C;X5;K3
 C;X6;KFALSE
 C;X7;K"Mechanical"
 C;X8;K195
@@ -1241,8 +1241,8 @@ C;X19;K0
 C;X20;K3
 C;X21;K30
 C;X22;K0
-C;X23;K505
-C;X24;K505
+C;X23;K535
+C;X24;K535
 C;X25;K0.25
 C;X26;K"always"
 C;X27;K" - "
@@ -1284,7 +1284,7 @@ C;X1;Y22;K"hrtt"
 C;X2;K"a2"
 C;X3;K"art"
 C;X4;K"siege engine upgraded"
-C;X5;K2
+C;X5;K3
 C;X6;KFALSE
 C;X7;K"Mechanical"
 C;X8;K195
@@ -4517,7 +4517,7 @@ C;X1;Y75;K"osw1"
 C;X2;K"b2"
 C;X3;K"sum"
 C;X4;K"spirit wolf level 1"
-C;X5;K3
+C;X5;K2
 C;X6;KTRUE
 C;X7;K"_"
 C;X8;K0

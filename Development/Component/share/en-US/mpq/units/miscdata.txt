@@ -30,7 +30,7 @@ CancelTime=6
 BulletDeathTime=5
 EffectDeathTime=5
 FogFlashTime=3
-CreepCampPathingCellDistance=20
+CreepCampPathingCellDistance=26
 
 // follow ranges
 FollowRange=300

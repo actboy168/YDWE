@@ -1,11 +1,11 @@
 [CmdMove]
 Tip=|cffffcc00M|rove
-Ubertip="Orders your units to move to the target area, while ignoring enemy units and attacks. Issuing a move order onto a target unit will cause your unit to follow the target using move orders."
+Ubertip="Orders your units to move to the target area while ignoring enemy units and attacks. Issuing a move order onto a target unit will cause your unit to follow the target using move orders."
 Hotkey=M
 
 [CmdAttack]
 Tip=|cffffcc00A|rttack
-Ubertip="Orders your units to move to the target area, and attack any enemy units they see on the way. If you order them to attack a specific unit, your units will ignore other enemy units and will attack the targeted unit until it is destroyed."
+Ubertip="Orders your units to move to the target area and attack any enemy units they see on the way. If you order them to attack a specific unit, your units will ignore other enemy units and will attack the targeted unit until it is destroyed."
 Hotkey=A
 
 [CmdAttackGround]
@@ -65,7 +65,7 @@ Hotkey=512
 
 [CmdHoldPos]
 Tip=|cffffcc00H|rold Position
-Ubertip="Orders your units to stand where they are and attack units that are within range. When on Hold Position your units will not chase down enemy units that run away, or move to engage ranged attackers."
+Ubertip="Orders your units to stand where they are and attack units that are within range. When on Hold Position your units will not chase down enemy units that run away, nor move to engage ranged attackers."
 Hotkey=H
 
 [CmdPatrol]
@@ -177,7 +177,7 @@ Minenotentangleable=Gold mine couldn't be entangled.
 Notinrange=Target is outside range.
 UnderRange=Target is inside minimum range.
 
-Notthisunit=Unable to target unit.
+Notthisunit=Unable to target this unit.
 Targetunit=Must target a unit with this action.
 
 Targetstructuretree=Must target a building or tree.
@@ -260,7 +260,7 @@ Canttargetloc=Unable to target there.
 Inventoryfull=Inventory is full.
 Inventoryinteract=Select a unit with an inventory.
 NeedInventory=Only units with an inventory can pick up items.
-Needretrainablehero=Only Heroes that have learned spells can use this item.
+Needretrainablehero=Only Heroes that have learned spells not in cooldown can use this item.
 Neednearbyhero=A hero must be nearby.
 Neednearbypatron=A valid patron must be nearby.
 
@@ -297,7 +297,9 @@ Cantdrop=Item must remain in your inventory.
 Cantpawn=Item cannot be pawned.
 
 Calltoarms=No Peasants could be found.
+Calltoarmspeasant=No Town Halls could be found that can convert Peasants into Militia.
 Backtowork=No Militia could be found.
+Backtoworkmilitia=No Town Halls could be found that can convert Militia into Peasants.
 BattleStations=No Peons could be found.
 
 Replaceme=Replace this error message with something meaningful!

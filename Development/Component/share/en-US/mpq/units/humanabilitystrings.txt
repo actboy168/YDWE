@@ -29,14 +29,14 @@ Ubertip="Spell Breaker attacks destroy <Afbk,DataA1> mana per hit. The mana comb
 Name=Feedback
 EditorSuffix= (Arcane Tower)
 Tip=Feedback
-Ubertip="This tower's attacks destroy <Afbt,DataA1> mana per hit. The mana combusts, dealing damage to the attacked unit."
+Ubertip="This tower's attacks destroy <Afbt,DataA1> mana per hit against any unit, causing bonus damage equal to the mana destroyed.|n|nAdditionally, attacks made by this tower cause <Afbt,DataE1> bonus damage against summoned units."
 
 
 // Control Magic
 [Acmg]
 Name=Control Magic
 Tip=|cffffcc00C|rontrol Magic
-Ubertip="Takes control of an enemy summoned unit. The mana cost is <Acmg,DataB1,%>% of the summoned unit's base hit points."
+Ubertip="Takes control of an enemy summoned unit. The mana cost is <Acmg,DataB1,%>% of the summoned unit's current hit points."
 Hotkey=C
 
 [Bcmg]
@@ -47,11 +47,26 @@ Buffubertip="This unit has been controlled; it obeys a new master now."
 [AHdr]
 Name=Siphon Mana
 Tip=Sipho|cffffcc00n|r Mana - [|cffffcc00Level 1|r],Sipho|cffffcc00n|r Mana - [|cffffcc00Level 2|r],Sipho|cffffcc00n|r Mana - [|cffffcc00Level 3|r]
-Ubertip="Absorbs the magical energies of a target enemy unit by taking <AHdr,DataB1> mana per second from it and giving it to the Blood Mage. |nLasts <AHdr,Dur1> seconds.","Absorbs the magical energies of a target enemy unit by taking <AHdr,DataB2> mana per second from it and giving it to the Blood Mage. |nLasts <AHdr,Dur2> seconds.","Absorbs the magical energies of a target enemy unit by taking <AHdr,DataB3> mana per second from it and giving it to the Blood Mage. |nLasts <AHdr,Dur3> seconds."
+Ubertip="Transfers mana between the Blood Mage and a target. Drains <AHdr,DataB1> mana per second from an enemy, or transfers <AHdr,DataE1> mana per second to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts <AHdr,Dur1> seconds.","Transfers mana between the Blood Mage and a target. Drains <AHdr,DataB2> mana per second from an enemy, or transfers <AHdr,DataE2> mana per second to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts <AHdr,Dur2> seconds.","Transfers mana between the Blood Mage and a target. Drains <AHdr,DataB3> mana per second from an enemy, or transfers <AHdr,DataE3> mana per second to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts <AHdr,Dur3> seconds."
 Hotkey=N
 Researchtip="Learn Sipho|cffffcc00n|r Mana - [|cffffcc00Level %d|r]"
-Researchubertip="Absorbs the magical energies of a target enemy unit by taking mana from it every second and giving it to the Blood Mage. |nLasts <AHdr,Dur1> seconds. |n|n|cffffcc00Level 1|r - <AHdr,DataB1> mana drained per second. |n|cffffcc00Level 2|r - <AHdr,DataB2> mana drained per second. |n|cffffcc00Level 3|r - <AHdr,DataB3> mana drained per second." 
+Researchubertip="Transfers mana between the Blood Mage and a target. Drains mana from an enemy, or transfers mana to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts <AHdr,Dur1> seconds.|n|n|cffffcc00Level 1|r - <AHdr,DataB1> mana drained per second. |n|cffffcc00Level 2|r - <AHdr,DataB2> mana drained per second. |n|cffffcc00Level 3|r - <AHdr,DataB3> mana drained per second." 
 Researchhotkey=N
+
+[Bdbb]
+Name=Drain Life & Mana (Bonus)
+Bufftip=Drain Life & Mana
+Buffubertip="This unit has temporary bonus health and mana above its normal maximums.  This bonus will fade off quickly."
+
+[Bdbl]
+Name=Drain Life (Bonus)
+Bufftip=Drain Life
+Buffubertip="This unit has temporary bonus health above its normal maximum.  This bonus will fade off quickly."
+
+[Bdbm]
+Name=Siphon Mana (Bonus)
+Bufftip=Siphon Mana
+Buffubertip="This unit has temporary bonus mana above its normal maximum.  This bonus will fade off quickly."
 
 // Flak Cannons
 [Aflk]
@@ -69,7 +84,7 @@ Ubertip="Uses fragmentation mortars to increase damage dealt to Unarmored and Me
 [Aroc]
 Name=Barrage
 Tip=Barrage
-Ubertip="Fires powerful rockets at nearby enemy air units, dealing <Aroc,DataA1> damage per hit."
+Ubertip="Fires powerful rockets at nearby enemy air units, dealing <hrtt,mindmg2> - <hrtt,maxdmg2> damage per hit."
 
 // Tank upgrade
 [Srtt]
@@ -131,7 +146,7 @@ Tip=|cffffcc00B|ranish - [|cffffcc00Level 1|r],|cffffcc00B|ranish - [|cffffcc00L
 Ubertip="Turns a non-mechanical unit ethereal and slows its movement speed by <AHbn,DataA1,%>% for <AHbn,Dur1> seconds. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect.","Turns a unit ethereal and slows its movement speed by <AHbn,DataA2,%>% for <AHbn,Dur2> seconds. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect.","Turns a unit ethereal and slows its movement speed by <AHbn,DataA3,%>% for <AHbn,Dur3> seconds. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect."
 Hotkey=B
 Researchtip="Learn |cffffcc00B|ranish - [|cffffcc00Level %d|r]"
-Researchubertip="Turns a non-mechanical unit ethereal and slows its movement speed by <AHbn,DataA1,%>% for a short duration. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect. |n|n|cffffcc00Level 1|r - Lasts <AHbn,Dur1> seconds for <AHbn,Cost1> mana. |n|cffffcc00Level 2|r - Lasts <AHbn,Dur2> seconds for <AHbn,Cost2> mana. |n|cffffcc00Level 3|r - Lasts <AHbn,Dur3> seconds for <AHbn,Cost3> mana."
+Researchubertip="Turns a non-mechanical unit ethereal and slows its movement speed by <AHbn,DataA1,%>% for a short duration. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect. |n|n|cffffcc00Level 1|r - <AHbn,Cost1> mana, lasts <AHbn,Dur1> seconds. |n|cffffcc00Level 2|r - <AHbn,Cost2> mana, lasts <AHbn,Dur2> seconds. |n|cffffcc00Level 3|r - <AHbn,Cost3> mana, lasts <AHbn,Dur3> seconds."
 Researchhotkey=B
 
 [BHbn]
@@ -191,7 +206,7 @@ EditorSuffix= (Flying Machine)
 [Adef]
 Name=Defend
 Tip=|cffffcc00D|refend
-Ubertip="Activate to take only <Adef,DataA1,%>% of the damage from Piercing attacks, but have <Adef,DataC1,%>% reduced movement speed."
+Ubertip="Activate to have a <Adef,DataF1>% chance to reflect Piercing attacks upon the source, and to take only <Adef,DataA1,%>% of the damage from attacks that are not reflected. While Defend is active, movement is reduced to <Adef,DataC1,%>% of normal speed."
 Untip=Stop |cffffcc00D|refend
 Unubertip="Deactivate to move at normal speed, but take regular damage from Piercing attacks."
 Hotkey=D
@@ -246,6 +261,10 @@ Unhotkey=E
 Bufftip=Heal
 Buffubertip="This unit is being healed; lost hit points are being restored."
 
+[BNhe]
+Bufftip=Neutral Heal
+Buffubertip="This unit is being healed; lost hit points are being restored."
+
 // Slow
 [Aslo]
 Name=Slow
@@ -286,7 +305,7 @@ Buffubertip="This unit is Polymorphed; it is transformed into a sheep."
 [AHbz]
 Name=Blizzard
 Tip=|cffffcc00B|rlizzard - [|cffffcc00Level 1|r],|cffffcc00B|rlizzard - [|cffffcc00Level 2|r],|cffffcc00B|rlizzard - [|cffffcc00Level 3|r]
-Ubertip="Calls down <AHbz,DataA1> freezing ice shard waves; each wave deals <AHbz,DataB1> damage to units in an area","Calls down <AHbz,DataA2> freezing ice shard waves; each wave deals <AHbz,DataB2> damage to units in an area","Calls down <AHbz,DataA3> freezing ice shard waves; each wave deals <AHbz,DataB3> damage to units in an area."
+Ubertip="Calls down <AHbz,DataA1> freezing ice shard waves; each wave deals <AHbz,DataB1> damage to units in an area.","Calls down <AHbz,DataA2> freezing ice shard waves; each wave deals <AHbz,DataB2> damage to units in an area.","Calls down <AHbz,DataA3> freezing ice shard waves; each wave deals <AHbz,DataB3> damage to units in an area."
 Hotkey=B
 Researchtip="Learn |cffffcc00B|rlizzard - [|cffffcc00Level %d|r]"
 Researchubertip="Calls down waves of freezing ice shards that damage units in a target area. |n|n|cffffcc00Level 1|r - <AHbz,DataA1> waves at <AHbz,DataB1> damage each. |n|cffffcc00Level 2|r - <AHbz,DataA2> waves at <AHbz,DataB2> damage each. |n|cffffcc00Level 3|r - <AHbz,DataA3> waves at <AHbz,DataB3> damage each."
@@ -406,7 +425,7 @@ Researchhotkey=T
 // Divine Shield
 [AHds]
 Name=Divine Shield
-Tip=Activate |cffffcc00D|rivine Shield - [|cffffcc00Level 1|r],Activate |cffffcc00D|rivine Shield - [|cffffcc00Level 2|r],Activate |cffffcc00D|rivine Shield - [|cffffcc00Level 3|r]
+Tip=|cffffcc00D|rivine Shield - [|cffffcc00Level 1|r],|cffffcc00D|rivine Shield - [|cffffcc00Level 2|r],|cffffcc00D|rivine Shield - [|cffffcc00Level 3|r]
 Ubertip="An impenetrable shield surrounds this unit, protecting it from all damage and spells for <AHds,Dur1> seconds.","An impenetrable shield surrounds this unit, protecting it from all damage and spells for <AHds,Dur2> seconds.","An impenetrable shield surrounds this unit, protecting it from all damage and spells for <AHds,Dur3> seconds."
 Untip=Deactivate |cffffcc00D|rivine Shield
 Hotkey=D
@@ -425,9 +444,9 @@ Buffubertip="This unit is under a Divine Shield; it is invulnerable."
 [AHad]
 Name=Devotion Aura
 Tip=Devotion Aura - [|cffffcc00Level 1|r],Devotion Aura - [|cffffcc00Level 2|r],Devotion Aura - [|cffffcc00Level 3|r]
-Ubertip="Gives <AHad,DataA1> additional armor to nearby friendly units.","Gives <AHad,DataA2> additional armor to nearby friendly units.","Gives <AHad,DataA3> additional armor to nearby friendly units."
+Ubertip="Gives <AHad,DataA1,.> additional armor to nearby friendly units.","Gives <AHad,DataA2,.> additional armor to nearby friendly units.","Gives <AHad,DataA3,.> additional armor to nearby friendly units."
 Researchtip="Learn De|cffffcc00v|rotion Aura - [|cffffcc00Level %d|r]"
-Researchubertip="Gives additional armor to nearby friendly units. |n|n|cffffcc00Level 1|r - Increases base armor by <AHad,DataA1>. |n|cffffcc00Level 2|r - Increases base armor by <AHad,DataA2>. |n|cffffcc00Level 3|r - Increases base armor by <AHad,DataA3>."
+Researchubertip="Gives additional armor to nearby friendly units. |n|n|cffffcc00Level 1|r - Increases base armor by <AHad,DataA1,.>. |n|cffffcc00Level 2|r - Increases base armor by <AHad,DataA2,.>. |n|cffffcc00Level 3|r - Increases base armor by <AHad,DataA3,.>."
 Researchhotkey=V
 
 [BHad]
@@ -449,8 +468,8 @@ Researchhotkey=R
 Name=Call to Arms
 Tip=|cffffcc00C|rall to Arms
 Untip=Back to |cffffcc00W|rork
-Ubertip="Run to the nearest Town Hall to arm the Peasant, converting him into Militia. |nLasts <Amil,Dur1> seconds."
-Unubertip="Run to the nearest Town Hall to disarm the Militia, converting it into a Peasant."
+Ubertip="Run to the nearest Keep, Castle or starting Town Hall to arm the Peasant, converting him into Militia. |nLasts <Amil,Dur1> seconds."
+Unubertip="Run to the nearest Keep, Castle or starting Town Hall to disarm the Militia, converting it into a Peasant."
 Hotkey=C
 Unhotkey=W
 EditorSuffix= (Peasant)
@@ -470,3 +489,54 @@ Hotkey=C
 Unhotkey=W
 EditorSuffix= (Town Hall)
 
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BHbz]
+EditorName=Blizzard (Caster)
+
+[Bdcb]
+EditorName=Drain Life & Mana (Caster)
+
+[Bdcl]
+EditorName=Drain Life (Caster)
+
+[Bdcm]
+EditorName=Drain Mana (Caster)
+
+[Bdtb]
+EditorName=Drain Life & Mana (Target)
+
+[Bdtl]
+EditorName=Drain Life (Target)
+
+[Bdtm]
+EditorName=Drain Mana (Target)
+
+[Bmlc]
+EditorName=Aerial Shackles (Caster)
+
+[Bivs]
+EditorName=Invisibility (Extra)
+
+[XHbz]
+EditorName=Blizzard (Effect)
+
+[XHfs]
+EditorName=Flame Strike (Effect)
+
+[Xclf]
+EditorName=Cloud (Effect)
+
+[Xfla]
+EditorName=Flare (Effect)
+
+[Xfhs]
+EditorName=Building Damage - Human Small
+
+[Xfhm]
+EditorName=Building Damage - Human Medium
+
+[Xfhl]
+EditorName=Building Damage - Human Large

@@ -6,7 +6,6 @@ Tip=Summon |cffffcc00B|rlood Mage
 Ubertip="Mystical Hero, adept at controlling magic and ranged assaults. Can learn Flame Strike, Banish, Siphon Mana and Phoenix. |n|n|cffffcc00Attacks land and air units.|r"
 Revivetip=Revive |cffffcc00B|rlood Mage
 Awakentip=Revive |cffffcc00B|rlood Mage
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-sorceror.blp
 
 [halt]
 Name=Altar of Kings
@@ -22,7 +21,6 @@ Tip=Summon |cffffcc00A|rrchmage
 Ubertip="Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. |n|n|cffffcc00Attacks land and air units.|r"
 Revivetip=Revive |cffffcc00A|rrchmage
 Awakentip=Revive |cffffcc00A|rrchmage
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-archmage.blp
 
 [harm]	
 Name=Workshop
@@ -100,7 +98,7 @@ Ubertip="Basic observation tower. Has no attack, but can be upgraded into a Guar
 Name=Arcane Tower
 Hotkey=N
 Tip=Upgrade to Arca|cffffcc00n|re Tower
-Ubertip="Magical defensive tower. Particularly effective against enemy Heroes and spellcasters. Has the Feedback ability, which causes its attacks to destroy mana, dealing extra damage equal to the mana destroyed. Can learn the Magic Sentry ability. |n|n|cffffcc00Attacks land and air units."
+Ubertip="Magical defensive tower. Particularly effective against enemy Heroes and spellcasters. Has the Feedback ability, which causes its attacks to destroy mana, dealing extra damage equal to the mana destroyed. Deals bonus damage against summoned units. Can learn the Magic Sentry ability. |n|n|cffffcc00Attacks land and air units.|r"
 
 [hvlt]
 Name=Arcane Vault
@@ -143,7 +141,6 @@ Tip=Summon |cffffcc00M|rountain King
 UberTip="Warrior Hero, adept at offensive combat and disrupting enemy troops. Can learn Storm Bolt, Thunder Clap, Bash and Avatar. |n|n|cffffcc00Attacks land units.|r"
 Revivetip=Revive |cffffcc00M|rountain King
 Awakentip=Revive |cffffcc00M|rountain King
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-mountainking.blp
 
 [hmpr]
 Name=Priest
@@ -167,7 +164,6 @@ Tip=Summon Pa|cffffcc00l|radin
 Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
 Revivetip=Revive Pa|cffffcc00l|radin
 Awakentip=Revive Pa|cffffcc00l|radin
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-paladin.blp
 
 [hpea]
 Name=Peasant
@@ -203,6 +199,7 @@ Ubertip="Heavily armored vehicle, effective at destroying buildings. Can be upgr
 
 [hrtt]
 Name=Siege Engine
+EditorSuffix= (Barrage)
 Hotkey=E
 Tip=Train Siege |cffffcc00E|rngine
 Ubertip="Heavily armored vehicle, effective at destroying buildings. Has the Barrage ability, which fires rockets at nearby enemy air units. |n|n|cffffcc00Attacks buildings.|r"

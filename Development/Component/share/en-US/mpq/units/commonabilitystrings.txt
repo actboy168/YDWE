@@ -20,8 +20,6 @@ Unubertip="Returns the hero to normal form."
 Hotkey=R
 Unhotkey=R
 
-[AHer]
-
 [Ahar]
 Name=Harvest
 Tip=|cffffcc00G|rather
@@ -86,6 +84,79 @@ Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
 Hotkey=R
 Unhotkey=R
 
+// Abilities that need names in the editor
+[AEpa]
+Name=Poison Arrows
+Tip=Poison A|cffffcc00r|rrows - [|cffffcc00Level 1|r],Poison A|cffffcc00r|rrows  - [|cffffcc00Level 2|r],Poison A|cffffcc00r|rrows  - [|cffffcc00Level 3|r]
+Ubertip="Adds <AHfa,DataA1> bonus fire damage to an attack against enemies, but drains mana with each shot fired.","Adds <AHfa,DataA2> bonus fire damage to an attack, but drains mana with each shot fired.","Adds <AHfa,DataA3> bonus fire damage to an attack, but drains mana with each shot fired."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=R
+Unhotkey=R
+Researchtip="Learn Poison A|cffffcc00r|rrows - [|cffffcc00Level %d|r]"
+Researchubertip="Increases the damage of the Priestess' attack by adding fire. |n|n|cffffcc00Level 1|r - <AHfa,DataA1> bonus damage. |n|cffffcc00Level 2|r - <AHfa,DataA2> bonus damage. |n|cffffcc00Level 3|r - <AHfa,DataA3> bonus damage."
+Researchhotkey=R
+
+[AEbu]
+Name=Build (Night Elf)
+
+[AGbu]
+Name=Build (Naga)
+
+[AHbu]
+Name=Build (Human)
+
+[AHer]
+Name=Hero
+
+[ANbu]
+Name=Build (Neutral)
+
+[AObu]
+Name=Build (Orc)
+
+[ARal]
+Name=Rally
+
+[AUbu]
+Name=Build (Undead)
+
+[Aalr]
+Name=Alarm
+
+[Aatk]
+Name=Attack
+
+[Afih]
+Name=On Fire (Human)
+
+[Afin]
+Name=On Fire (Night Elf)
+
+[Afio]
+Name=On Fire (Orc)
+
+[Afir]
+Name=On Fire
+
+[Afiu]
+Name=On Fire (Undead)
+
+[Aloc]
+Name=Locust
+
+[Amov]
+Name=Move
+
+[Atdp]
+Name=Drop Pilot
+
+[Atlp]
+Name=Load Pilot
+
+[Attu]
+Name=Turret
+
 // Stun buff
 [BSTN]
 Bufftip=Stunned
@@ -95,3 +166,13 @@ Buffubertip="This unit is stunned; it cannot move, attack or cast spells."
 [BPSE]
 Bufftip=Stunned
 Buffubertip="This unit will not move."
+EditorSuffix= (Pause)
+
+[Xbdt]
+EditorName=Reveal (Effect)
+
+[Xbli]
+EditorName=Blight (Effect)
+
+[Xdis]
+EditorName=Hero Dissipate (Effect)

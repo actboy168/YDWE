@@ -1,8 +1,76 @@
 [Misc]
+MagicImmunesResistDamage=1
+MagicImmunesResistThorns=0
+MagicImmunesResistLeech=0
+MagicImmunesResistUltimates=0
+CycloneStasis=0
+DepCheckAlias=1
+MassTeleportCluster=1
+DarkSummoningCluster=1
+TownPortalCluster=1
+AmuletOfRecallCluster=1
+MorphLandClosest=1
+MorphAlternateDisable=0
+InvulnSummonDispelDamage=0
+ConstructionDamageRefundPenalty=1
+UpgradeDamageRefundPenalty=0
+AllowMultiBounce=0
+EnsnareIsMagic=0
+WebIsMagic=0
+IllusionsGetAttackBonus=1
+IllusionsGetAttackSpeedBonus=1
+IllusionsGetMoveSpeedBonus=1
+IllusionsGetDefenseBonus=1
+IllusionsCanRestoreLife=1
+IllusionsCanRestoreMana=1
+IllusionsBestowAuras=0
+IllusionsGetAutocast=0
+InvisibleUnitsBestowAuras=0
+PolymorphedUnitsBestowAuras=0
+BurrowedUnitsBestowAuras=0
+AnimatedUnitsBestowAuras=0
+FlyingHeroesBestowAuras=0
+MoveSpeedBonusesStack=0
+DrainUsesEtheralBonus=0
+DrainTransfersLife=1
+DrainTransfersMana=1
+DrainGivesBonusLife=1
+DrainGivesBonusMana=1
+EtherealDamageBonusAlly=0
+CanDeactivateAvatar=0
+CanDeactivateAvengerForm=0
+CanDeactivateBarkskin=1
+CanDeactivateBearForm=1
+CanDeactivateBladestorm=0
+CanDeactivateBurrow=1
+CanDeactivateCallToArms=1
+CanDeactivateChemicalRage=0
+CanDeactivateCorporealForm=1
+CanDeactivateDefend=1
+CanDeactivateDivineShield=0
+CanDeactivateImmolation=1
+CanDeactivateManaFlare=0
+CanDeactivateManaShield=1
+CanDeactivateMetamorphosis=0
+CanDeactivateRavenForm=1
+CanDeactivateRoboGoblin=1
+CanDeactivateStoneForm=1
+CanDeactivateSubmerge=1
+CanDeactivateWindWalk=0
+RelativeUpgradeCost=0
+DefendDeflection=1
+ItemSaleAggroRange=0
+UnitSaleAggroRange=600
+AbilSaleAggroRange=0
+AbolishMagicDispelSmart=1
+UpgradeInProgressIdChange=0
 
 GlobalExperience=1
 MaxLevelHeroesDrainExp=1
 BuildingKillsGiveExp=0
+
+DisplayEnemyInventory=1
+DisplayBuildingStatus=0
 
 // Max revival cost of a hero
 HeroMaxReviveCostGold=700
@@ -12,6 +80,14 @@ HeroMaxReviveTime=150
 // Max awaken (tavern) cost of a hero
 HeroMaxAwakenCostGold=1400
 HeroMaxAwakenCostLumber=350
+
+// Hero Revive & Awaken returning stats
+HeroReviveManaStart=1
+HeroReviveManaFactor=0.0
+HeroReviveLifeFactor=1.0
+HeroAwakenManaStart=0
+HeroAwakenManaFactor=0.0
+HeroAwakenLifeFactor=0.5
 
 // the distance at which heroes still gain XP for dying units
 HeroExpRange=1200
@@ -64,6 +140,7 @@ IntRegenBonus=0.05
 AgiDefenseBonus=0.30
 AgiDefenseBase=-2
 AgiMoveBonus=0
+AgiAttackSpeedBonus=0.02
 
 // Formula constants for hero levels beyond the tables...
 // The three constants are used to define a table as:
@@ -108,11 +185,11 @@ DamageBonusPierce=2.00,0.75,1.00,0.35,1.00,0.50,0.05,1.50
 DamageBonusSiege=1.00,0.50,1.00,1.50,1.00,0.50,0.05,1.50
 DamageBonusMagic=1.25,0.75,2.00,0.35,1.00,0.50,0.05,1.00
 DamageBonusChaos=1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00
-DamageBonusSpells=1.00,1.00,1.00,1.00,1.00,0.75,0.05,1.00
+DamageBonusSpells=1.00,1.00,1.00,1.00,1.00,0.70,0.05,1.00
 DamageBonusHero=1.00,1.00,1.00,0.50,1.00,1.00,0.05,1.00
 
 // Ethereal Damage bonus values: NORMAL, PIERCE, SIEGE, MAGIC, CHAOS, SPELLS, HERO
-EtherealDamageBonus=1.66,1.66,1.66,1.66,1.66,1.66,1.66
+EtherealDamageBonus=0,0,0,1.66,0,1.66,0
 EtherealHealBonus=1.66
 
 // After a unit has strayed 'GuardDistance' from where it started,

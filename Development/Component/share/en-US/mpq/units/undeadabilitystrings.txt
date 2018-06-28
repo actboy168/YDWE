@@ -173,10 +173,10 @@ Buffubertip="Summoned units take damage from dispels."
 [AUls]
 Name=Locust Swarm
 Tip=|cffffcc00L|rocust Swarm
-Ubertip="Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return."
+Ubertip="Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. |nLasts <AUls,HeroDur1> seconds."
 Hotkey=L
 Researchtip="Learn |cffffcc00L|rocust Swarm"
-Researchubertip="Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return."
+Researchubertip="Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. |nLasts <AUls,HeroDur1> seconds."
 Researchhotkey=L
 
 [BUlo]
@@ -212,7 +212,7 @@ Ubertip="Unsummons your building to regain <Auns,DataA1,%>% of the spent resourc
 Hotkey=U
 
 [Buns]
-Name=Unsummon
+Bufftip=Unsummon
 
 // Graveyard
 [Agyd]
@@ -273,11 +273,13 @@ Unhotkey=W
 [Bweb]
 Bufftip=Web
 Buffubertip="This unit is webbed; it is stuck to the ground and cannot move."
+EditorSuffix= (Ground)
 
 // Web buff on air units
 [Bwea]
 Bufftip=Web
 Buffubertip="This unit is webbed; it is stuck to the ground and cannot move."
+EditorSuffix= (Air)
 
 // Stone Form
 [Astn]
@@ -356,6 +358,11 @@ Name=Frost Attack
 Tip=Frost Attack
 Ubertip="Adds a cold effect to this unit's attacks that slows enemy units' movement speed."
 
+// Frost Attack (1,2 button pos version)
+[Afr2]
+Name=Frost Attack
+Tip=Frost Attack
+Ubertip="Adds a cold effect to this unit's attacks that slows enemy units' movement speed."
 
 // Freezing Breath
 [Afrz]
@@ -421,9 +428,22 @@ Tip=A|cffffcc00n|rti-magic Shell
 Ubertip="Creates a barrier that stops spells from affecting a target unit. |nLasts <Aams,Dur1> seconds."
 Hotkey=N
 
+// Anti-magic Shell
+[Aam2]
+Name=Anti-magic Shell
+Tip=A|cffffcc00n|rti-magic Shell
+Ubertip="Creates a barrier that stops <Aam2,DataC1> points of spell damage from affecting a target unit. |nLasts <Aam2,Dur1> seconds."
+Hotkey=N
+EditorSuffix= (Magic Resistance)
+
 [Bams]
 Bufftip=Anti-magic Shell
 Buffubertip="This unit has Anti-magic Shell; it cannot be targeted by spells. It can be dispelled."
+
+[Bam2]
+Bufftip=Anti-magic Shell
+Buffubertip="This unit has Anti-magic Shell; damage spells must destroy the shell to affect the unit."
+EditorSuffix= (Extra)
 
 // Possession
 [Apos]
@@ -431,6 +451,18 @@ Name=Possession
 Tip=P|cffffcc00o|rssession
 Ubertip="Displaces the soul of an enemy, giving you permanent control of it, but destroying the caster's body. |nPossession cannot be used on flying units, Heroes, or creeps above level <Apos,DataA1>."
 Hotkey=O
+
+// Possession
+[Aps2]
+Name=Possession
+Tip=P|cffffcc00o|rssession
+Ubertip="Stuns a target unit and the Banshee for <Aps2,Dur1> seconds, during which the Banshee takes extra damage from attacks. She then displaces the soul of the enemy, giving you permanent control of it, but destroying the caster's body. |nPossession cannot be used on flying units, Heroes, or creeps above level <Aps2,DataA1>."
+Hotkey=O
+EditorSuffix= (Channeling)
+
+[Bpos]
+Bufftip=Possession
+Buffubertip="This unit is being possessed."
 
 // Death Coil
 [AUdc]
@@ -616,3 +648,40 @@ Hotkey=N
 Researchtip=Learn I|cffffcc00n|rferno
 Researchubertip="Calls an Infernal down from the sky, dealing <AUin,DataA1> damage and stunning enemy land units for <AUin,Dur1> seconds in an area. The Infernal lasts <AUin,DataB1> seconds."
 Researchhotkey=N
+
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BUcs]
+EditorName=Carrion Swarm (Caster)
+
+[BUsp]
+EditorName=Sleep (Pause)
+
+[BUst]
+EditorName=Sleep (Stun)
+
+[BUts]
+EditorName=Spiked Carapace
+
+[Bplg]
+EditorName=Disease Cloud
+
+[BUad]
+EditorName=Animate Dead (Extra)
+
+[Bpoc]
+EditorName=Possession (Caster)
+
+[XUdd]
+EditorName=Death And Decay (Effect)
+
+[Xfus]
+EditorName=Building Damage - Undead Small
+
+[Xfum]
+EditorName=Building Damage - Undead Medium
+
+[Xful]
+EditorName=Building Damage - Undead Large

@@ -28,6 +28,7 @@ Buffubertip="This unit has Mana Flare on it; nearby enemy units that cast spells
 [Bmfa]
 Bufftip=Mana Flare
 Buffubertip="This unit has Mana Flare on it; nearby enemy units that cast spells will take damage."
+EditorSuffix= (Extra)
 
 // Phase Shift
 [Apsh]
@@ -105,8 +106,12 @@ Hotkey=E
 [Atau]
 Name=Taunt
 Tip=|cffffcc00T|raunt
-Ubertip="All nearby enemies are forced to attack this unit."
+Ubertip="The closest <Atau,DataA1> enemies are forced to attack this unit."
 Hotkey=T
+
+[Btau]
+Bufftip=Taunt
+Buffubertip="This unit has been taunted and is now immune."
 
 // Blink
 [AEbl]
@@ -132,21 +137,21 @@ Researchhotkey=F
 [AEsh]
 Name=Shadow Strike
 Tip=Sha|cffffcc00d|row Strike - [|cffffcc00Level 1|r],Sha|cffffcc00d|row Strike - [|cffffcc00Level 2|r],Sha|cffffcc00d|row Strike - [|cffffcc00Level 3|r]
-Ubertip="Hurls a poisoned dagger at a target enemy unit, dealing <AEsh,DataE1> initial damage, and <AEsh,DataA1> damage every <AEsh,Cast1> seconds for <AEsh,Dur1> seconds. The poison slows the attack rate and movement speed of the targeted unit for a short duration.","Hurls a poisoned dagger with incredible force at a target enemy ground unit, dealing <AEsh,DataE2> initial damage, and <AEsh,DataA2> damage every <AEsh,Cast2> seconds for <AEsh,Dur2> seconds. The poison slows the attack rate and movement speed of the targeted unit for a short duration.","Hurls a poisoned dagger with incredible force at a target enemy ground unit, dealing <AEsh,DataE3> initial damage, and <AEsh,DataA3> damage every <AEsh,Cast3> seconds for <AEsh,Dur3> seconds. The poison slows the attack rate and movement speed of the targeted unit for a short duration."
+Ubertip="Hurls a poisoned dagger at a target enemy unit, dealing <AEsh,DataE1> initial damage, and <AEsh,DataA1> damage every <AEsh,Cast1> seconds for <AEsh,Dur1> seconds. The poison slows the movement speed of the targeted unit for a short duration.","Hurls a poisoned dagger at a target enemy unit, dealing <AEsh,DataE2> initial damage, and <AEsh,DataA2> damage every <AEsh,Cast2> seconds for <AEsh,Dur2> seconds. The poison slows the movement speed of the targeted unit for a short duration.","Hurls a poisoned dagger at a target enemy unit, dealing <AEsh,DataE3> initial damage, and <AEsh,DataA3> damage every <AEsh,Cast3> seconds for <AEsh,Dur3> seconds. The poison slows the movement speed of the targeted unit for a short duration."
 Hotkey=D
 Researchtip="Learn Sha|cffffcc00d|row Strike - [|cffffcc00Level %d|r]"
-Researchubertip="Hurls a poisoned dagger which deals large initial damage, and then deals damage over time. The poisoned unit has its attack and movement rate slowed for a short duration. |n|n|cffffcc00Level 1|r - <AEsh,DataE1> strike damage, <AEsh,DataA1> duration damage. |n|cffffcc00Level 2|r - <AEsh,DataE2> strike damage, <AEsh,DataA2> duration damage. |n|cffffcc00Level 3|r - <AEsh,DataE3> strike damage, <AEsh,DataA3> duration damage."
+Researchubertip="Hurls a poisoned dagger which deals large initial damage, and then deals damage over time. The poisoned unit has its movement speed slowed for a short duration. |n|n|cffffcc00Level 1|r - <AEsh,DataE1> strike damage, <AEsh,DataA1> duration damage. |n|cffffcc00Level 2|r - <AEsh,DataE2> strike damage, <AEsh,DataA2> duration damage. |n|cffffcc00Level 3|r - <AEsh,DataE3> strike damage, <AEsh,DataA3> duration damage."
 Researchhotkey=D
 
 // Shadow Strike Non Stack Buff
 [BEsh]
 Bufftip=Shadow Strike
-Buffubertip="This unit was hit by Shadow Strike; it will take damage over time."
+Buffubertip="This unit was hit by Shadow Strike; it will take damage over time and move more slowly."
 
 // Shadow Strike Stack Buff
 [BEsi]
 Bufftip=Shadow Strike
-Buffubertip="This unit was hit by Shadow Strike; it will take damage over time."
+Buffubertip="This unit was hit by Shadow Strike; it will take damage over time and move more slowly."
 
 // Vengeance
 [AEsv]
@@ -195,11 +200,13 @@ Ubertip="A poison attack that deals <Aspo,DataA1> damage per second, and slows t
 [Bspo]
 Bufftip=Slow Poison
 Buffubertip="This unit was hit by Slow Poison; its movement speed and attack rate have been reduced, and it will take damage over time."
+EditorSuffix= (Non-stacking)
 
 // Slow Poison Stack Buff
 [Bssd]
 Bufftip=Slow Poison
 Buffubertip="This unit was hit by Slow Poison; its movement speed and attack rate have been reduced, and it will take damage over time."
+EditorSuffix= (Stacking)
 
 // Shadow Meld passive nighttime cloaking ability, with its "Hide" button
 [Ashm]
@@ -299,6 +306,7 @@ Hotkey=G
 // Entangled Gold Mine Cargo
 [Aenc]
 Name=Load
+EditorSuffix= (Entangled Gold Mine)
 Tip=|cffffcc00L|road
 Ubertip="Orders a Wisp to enter the gold mine."
 Hotkey=L
@@ -361,6 +369,12 @@ Ubertip="Renders this unit immune to all spells."
 // Ultravision
 [Ault]
 Name=Ultravision
+
+//Elune's Grace
+[Aegr]
+Name=Elune's Grace
+Tip=Elune's Grace
+Ubertip="Reduces the damage taken from Piercing attacks to <Aegr,DataA1,%>%, and spells and Magic attacks to <Aegr,DataE1,%>%."
 
 // Mount Hippogryph
 [Acoa]
@@ -646,6 +660,7 @@ Buffubertip="This unit is in a Cyclone; it cannot move, attack or cast spells."
 [Bcy2]
 Bufftip=Cyclone
 Buffubertip="This unit is in a Cyclone; it cannot move, attack or cast spells."
+EditorSuffix= (Extra)
 
 // Rejuvenation
 [Arej]
@@ -697,3 +712,47 @@ Buffubertip="This unit has Barkskin; it has increased armor."
 
 // tree of life upgrade
 [Atol]
+
+
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BEia]
+EditorName=Immolation (Caster)
+
+[Beat]
+EditorName=Eat Tree
+
+[Bgra]
+EditorName=War Club
+
+[Bssi]
+EditorName=Slow Poison (Info)
+
+[AEsd]
+EditorName=Starfall (Target)
+
+[AEtr]
+EditorName=Tranquility (Target)
+
+[Bult]
+EditorName=Ultravision
+
+[XEsf]
+EditorName=Starfall (Effect)
+
+[XEtq]
+EditorName=Tranquility (Effect)
+
+[XEsn]
+EditorName=Sentinel (Effect)
+
+[Xfns]
+EditorName=Building Damage - Night Elf Small
+
+[Xfnm]
+EditorName=Building Damage - Night Elf Medium
+
+[Xfnl]
+EditorName=Building Damage - Night Elf Large

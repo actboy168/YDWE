@@ -1,4 +1,7 @@
-//names of dependecies
+﻿//names of dependecies
+[TWN1]
+Name=Town Hall or Great Hall or Tree of Life or Necropolis
+
 [TWN2]
 Name=Keep or Stronghold or Tree of Ages or Halls of the Dead
 
@@ -80,8 +83,8 @@ Description=Permits the viewing of distant areas.
 
 [desc]
 Name=Kelen's Dagger of Escape
-Hotkey=D
-Tip=Purchase |cffffcc00D|ragger of Escape
+Hotkey=E
+Tip=Purchase Dagger of |cffffcc00E|rscape
 Ubertip="Allows the Hero to teleport a short distance."
 Description=Teleports the Hero a short distance.
 
@@ -232,7 +235,7 @@ Description=Attacks cause Frost Shock.
 Name=Orb of Lightning
 Hotkey=L
 Tip=Purchase Orb of |cffffcc00L|rightning
-Ubertip="Adds <AIlb,DataA1> bonus damage to the attack of a Hero when carried. The Hero's attacks also become ranged when attacking air, dispel magic and slow the movement speed of the enemy for <AIlp,Dur1> seconds. |n|cffffcc00Deals <AIpg,DataC1> bonus damage to summoned units."
+Ubertip="Adds <AIlb,DataA1> bonus damage to the attack of a Hero when carried. The Hero's attacks also become ranged when attacking air, dispel magic and slow the movement speed of the enemy for <AIlp,Dur1> seconds. |n|cffffcc00Deals <AIlp,DataC1> bonus damage to summoned units."
 Description=Attacks cause lightning damage.
 
 [oli2]
@@ -342,8 +345,8 @@ Description=Provides Hero with a temporary speed increase.
 
 [rlif]
 Name=Ring of Regeneration
-Hotkey=L
-Tip=Purchase Ring of Regeneration (|cffffcc00l|r)
+Hotkey=R
+Tip=Purchase Ring of |cffffcc00R|regeneration
 Ubertip="Increases the Hero's hit point regeneration by <Arel,DataA1> hit points per second."
 Description=Provides regeneration.
 
@@ -726,7 +729,7 @@ Description=Surrounds the Hero with damaging flames.
 [evtl]
 Name=Talisman of Evasion
 Tip=Purchase Talisman of Evasion
-Ubertip="Causes attacks against the wearer to miss <AIev,DataA1,%>% of the time. |nDoes not stack with Evasion, or Drunken Brawler."
+Ubertip="Causes attacks against the wearer to miss <AIev,DataA1,%>% of the time. |nDoes not stack with Evasion or Drunken Brawler."
 Description=Makes the Hero harder to hit.
 
 [nspi]
@@ -1655,8 +1658,8 @@ Description="Restores hit points, mana and increases armor to nearby units."
 
 [scul]
 Name=Scroll of the Unholy Legion
-Hotkey=U
-Tip=Purchase Scroll of the |cffffcc00U|rnholy Legion
+Hotkey=I
+Tip=Purchase Scroll of the Unholy Leg|cffffcc00i|ron
 Ubertip="Animates <AIan,DataA1> nearby corpses to fight for you. Lasts <AIan,Dur1> seconds."
 Description="Animates nearby corpses."
 

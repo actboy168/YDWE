@@ -6,7 +6,6 @@ Hotkey=L
 Propernames=Arthas
 Revivetip=Revive Pa|cffffcc00l|radin
 Awakentip=Revive Pa|cffffcc00l|radin
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-arthas.blp
 Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
 
 [Hart]
@@ -16,7 +15,6 @@ Propernames=Arthas
 Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
 Revivetip=Revive Pa|cffffcc00l|radin
 Awakentip=Revive Pa|cffffcc00l|radin
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-arthas.blp
 
 [Huth]
 Name=Paladin
@@ -25,7 +23,6 @@ Propernames=Uther
 Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
 Revivetip=Revive Pa|cffffcc00l|radin
 Awakentip=Revive Pa|cffffcc00l|radin
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-paladin.blp
 
 [Hpb1]
 Name=Paladin
@@ -33,7 +30,6 @@ Hotkey=L
 Propernames=Lord Nicholas Buzan
 Revivetip=Revive Pa|cffffcc00l|radin
 Awakentip=Revive Pa|cffffcc00l|radin
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-paladin.blp
 Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
 
 [Hpb2]
@@ -42,7 +38,6 @@ Hotkey=L
 Propernames=Sir Gregory Edmunson
 Revivetip=Revive Pa|cffffcc00l|radin
 Awakentip=Revive Pa|cffffcc00l|radin
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-paladin.blp
 Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
 
 [Hdgo]
@@ -51,7 +46,6 @@ Hotkey=L
 Propernames=Dagren the Orcslayer
 Revivetip=Revive Pa|cffffcc00l|radin
 Awakentip=Revive Pa|cffffcc00l|radin
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-paladin.blp
 Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
 
 [Hmgd]
@@ -60,7 +54,6 @@ Hotkey=L
 Propernames=Magroth the Defender
 Revivetip=Revive Pa|cffffcc00l|radin
 Awakentip=Revive Pa|cffffcc00l|radin
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-paladin.blp
 Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
 
 [Hhkl]
@@ -69,7 +62,6 @@ Hotkey=L
 Propernames=Halahk the Lifebringer
 Revivetip=Revive Pa|cffffcc00l|radin
 Awakentip=Revive Pa|cffffcc00l|radin
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-paladin.blp
 Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
 
 [Hjai]
@@ -78,7 +70,6 @@ Hotkey=A
 Propernames=Jaina
 Revivetip=Revive |cffffcc00A|rrchmage
 Awakentip=Revive |cffffcc00A|rrchmage
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-jaina.blp
 Ubertip="Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. |n|n|cffffcc00Attacks land and air units.|r"
 
 [Hmbr]
@@ -87,7 +78,6 @@ Hotkey=M
 Propernames=Muradin Bronzebeard
 Revivetip=Revive |cffffcc00M|rountain King
 Awakentip=Revive |cffffcc00M|rountain King
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-mountainking.blp
 UberTip="Warrior Hero, adept at offensive combat and disrupting enemy troops. Can learn Storm Bolt, Thunder Clap, Bash and Avatar. |n|n|cffffcc00Attacks land units.|r"
 
 [Hant]
@@ -96,7 +86,6 @@ Hotkey=A
 Propernames=Antonidas
 Revivetip=Revive |cffffcc00A|rrchmage
 Awakentip=Revive |cffffcc00A|rrchmage
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-archmage.blp
 Ubertip="Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. |n|n|cffffcc00Attacks land and air units.|r"
 
 [Hvwd]
@@ -105,7 +94,6 @@ Hotkey=P
 Propernames=Sylvanas Windrunner
 Revivetip=Revive |cffffcc00R|ranger
 Awakentip=Revive |cffffcc00R|ranger
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-sylvanus.blp
 
 [Hkal]
 Name=Blood Mage
@@ -113,7 +101,6 @@ Hotkey=B
 Propernames=Kael
 Revivetip=Revive |cffffcc00B|rlood Mage
 Awakentip=Revive |cffffcc00B|rlood Mage
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-sorceror.blp
 Ubertip="Mystical Hero, adept at controlling magic and ranged assaults. Can learn Flame Strike, Banish, Siphon Mana and Phoenix. |n|n|cffffcc00Attacks land and air units.|r"
 
 [Hvsh]
@@ -122,7 +109,6 @@ Hotkey=N
 Propernames=Lady Vashj
 Revivetip=Revive |cffffcc00N|raga Sea Witch
 Awakentip=Revive |cffffcc00N|raga Sea Witch
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-seawitch.blp
 Ubertip="Mystical Hero, adept at ranged combat. Can learn Forked Lightning, Frost Arrows, Mana Shield, and Tornado. |n|n|cffffcc00Attacks land and air units.|r"
 
 [Hlgr]
@@ -131,7 +117,6 @@ Hotkey=L
 Propernames=Lord Garithos
 Revivetip=Revive Pa|cffffcc00l|radin
 Awakentip=Revive Pa|cffffcc00l|radin
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-garithos.blp
 Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
 
 [haro]
@@ -160,7 +145,6 @@ Hotkey=L
 Propernames=Admiral Proudmoore
 Revivetip=Revive Pa|cffffcc00l|radin
 Awakentip=Revive Pa|cffffcc00l|radin
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-paladin.blp
 Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
 
 [hrdh]
@@ -172,7 +156,6 @@ Hotkey=A
 Propernames=Antonidas
 Revivetip=Revive Ghostly |cffffcc00A|rrchmage
 Awakentip=Revive Ghostly |cffffcc00A|rrchmage
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-archmage.blp
 Ubertip="Mystical Hero Spirit, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. |n|n|cffffcc00Attacks land and air units.|r"
 
 // Orc Units
@@ -182,7 +165,6 @@ Hotkey=F
 Propernames=Thrall
 Revivetip=Revive |cffffcc00F|rar Seer
 Awakentip=Revive |cffffcc00F|rar Seer
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-thrall.blp
 Ubertip="Mystical Hero, effective at ranged attacks and scouting. Can learn Chain Lightning, Far Sight, Feral Spirit and Earthquake. |n|n|cffffcc00Attacks land and air units.|r"
 
 [Ogrh]
@@ -191,7 +173,6 @@ Hotkey=B
 Propernames=Grom Hellscream
 Revivetip=Revive |cffffcc00B|rlademaster
 Awakentip=Revive |cffffcc00B|rlademaster
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-grom.blp
 Ubertip="Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. |n|n|cffffcc00Attacks land units.|r"
 
 [Opgh]
@@ -201,7 +182,6 @@ Hotkey=B
 Propernames=Grom Hellscream
 Revivetip=Revive |cffffcc00B|rlademaster
 Awakentip=Revive |cffffcc00B|rlademaster
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-chaosgrom.blp
 Ubertip="Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. |n|n|cffffcc00Attacks land units.|r"
 
 [Ocbh]
@@ -210,7 +190,6 @@ Hotkey=T
 Propernames=Cairne Bloodhoof
 Revivetip=Revive |cffffcc00T|rauren Chieftain
 Awakentip=Revive |cffffcc00T|rauren Chieftain
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-taurenchieftain.blp
 Ubertip="Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Shockwave, War Stomp, Endurance Aura and Reincarnation. |n|n|cffffcc00Attacks land units.|r"
 
 //expansion version of cairne bloodhoof
@@ -220,7 +199,6 @@ Hotkey=T
 Propernames=Cairne Bloodhoof
 Revivetip=Revive |cffffcc00T|rauren Chieftain
 Awakentip=Revive |cffffcc00T|rauren Chieftain
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-taurenchieftain.blp
 Ubertip="Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Shockwave, War Stomp, Endurance Aura and Reincarnation. |n|n|cffffcc00Attacks land units.|r"
 EditorSuffix=(Expansion)
 
@@ -256,7 +234,6 @@ Tip=Summon |cffffcc00F|rar Seer
 Ubertip="Mystical Hero, effective at ranged attacks and scouting. Can learn Chain Lightning, Far Sight, Feral Spirit and Earthquake. |n|n|cffffcc00Attacks land and air units.|r"
 Revivetip=Revive |cffffcc00F|rar Seer
 Awakentip=Revive |cffffcc00F|rar Seer
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-farseer.blp
 
 [Orkn]
 Name=Shadow Hunter
@@ -266,7 +243,6 @@ Tip=Summon |cffffcc00S|rhadow Hunter
 Ubertip="Cunning Hero, adept at healing magics and voodoo curses. Can learn Healing Wave, Hex, Serpent Ward and Big Bad Voodoo. |n|n|cffffcc00Attacks land and air units.|r"
 Revivetip=Revive |cffffcc00S|rhadow Hunter
 Awakentip=Revive |cffffcc00S|rhadow Hunter
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-shadowhunter.blp
 
 [omtg]
 Name=Mathog
@@ -284,8 +260,6 @@ Tip=Summon |cffffcc00W|rarlock
 Ubertip="Powerful Warlock working under the tutelage of Kil'jaeden himself. |n|n|cffffcc00Attacks land and air units.|r"
 Revivetip=Revive |cffffcc00W|rarlock
 Awakentip=Revive |cffffcc00W|rarlock
-// needs icon
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-guldan.blp
 
 [Osam]
 Name=Blademaster
@@ -293,7 +267,6 @@ Hotkey=B
 Propernames=Samuro
 Revivetip=Revive |cffffcc00B|rlademaster
 Awakentip=Revive |cffffcc00B|rlademaster
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-blademaster.blp
 Ubertip="Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. |n|n|cffffcc00Attacks land units.|r"
 
 [Orex]
@@ -304,8 +277,6 @@ Tip=Summon |cffffcc00B|reastmaster
 Ubertip="Warrior Hero, adept at summoning beasts and rallying his allies. Can learn Summon Bear, Summon Quilbeast, Battle Roar, and Stampede. |n|n|cffffcc00Attacks land and air units.|r"
 Revivetip=Revive |cffffcc00B|reastmaster
 Awakentip=Revive |cffffcc00B|reastmaster
-//needs icon
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-beastmaster.blp
 
 [ngzc]
 Name=Misha
@@ -322,7 +293,6 @@ EditorSuffix= (Level 3)
 [ngz4]
 Name=Misha
 EditorSuffix= (Level 4)
-
 
 [nqb4]
 Name=Berserk Quilbeast
@@ -371,7 +341,6 @@ Hotkey=D
 Propernames=Arthas
 Revivetip=Revive |cffffcc00D|reath Knight
 Awakentip=Revive |cffffcc00D|reath Knight
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-deathknight.blp
 Ubertip="Warrior Hero, evil counterpart to the Human Paladin. Can learn Death Coil, Death Pact, Unholy Aura, and Animate Dead. |n|n|cffffcc00Attacks land units.|r"
 
 [Uktl]
@@ -381,7 +350,6 @@ Hotkey=L
 Propernames=Kel'Thuzad
 Revivetip=Revive |cffffcc00L|rich
 Awakentip=Revive |cffffcc00L|rich
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-lich.blp
 Ubertip="Mystical Hero, particularly adept at cold magic. Can learn Frost Armor, Frost Nova, Dark Ritual and Death And Decay. |n|n|cffffcc00Attacks land and air units.|r"
 
 [Umal]
@@ -390,7 +358,6 @@ Hotkey=E
 Propernames=Mal'Ganis
 Revivetip=Revive Dr|cffffcc00e|radlord
 Awakentip=Revive Dr|cffffcc00e|radlord
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-dreadlord.blp
 Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
 
 [Utic]
@@ -399,7 +366,6 @@ Hotkey=E
 Propernames=Tichondrius
 Revivetip=Revive Dr|cffffcc00e|radlord
 Awakentip=Revive Dr|cffffcc00e|radlord
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-tichondrius.blp
 Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
 
 [Uvar]
@@ -408,7 +374,6 @@ Hotkey=E
 Propernames=Varimathras
 Revivetip=Revive Dr|cffffcc00e|radlord
 Awakentip=Revive Dr|cffffcc00e|radlord
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-dreadlord.blp
 Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
 
 [Udth]
@@ -417,7 +382,6 @@ Hotkey=E
 Propernames=Detheroc
 Revivetip=Revive Dr|cffffcc00e|radlord
 Awakentip=Revive Dr|cffffcc00e|radlord
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-dreadlord.blp
 Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
 
 [Ubal]
@@ -426,7 +390,6 @@ Hotkey=E
 Propernames=Balnazzar
 Revivetip=Revive Dr|cffffcc00e|radlord
 Awakentip=Revive Dr|cffffcc00e|radlord
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-tichondrius.blp
 Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
 
 [Uvng]
@@ -435,7 +398,6 @@ Hotkey=E
 Propernames=Dalvengyr
 Revivetip=Revive Dr|cffffcc00e|radlord
 Awakentip=Revive Dr|cffffcc00e|radlord
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-dreadlord.blp
 Ubertip="Cunning Hero, adept at controlling combat. Can learn Carrion Swarm, Sleep, Vampiric Aura, and Inferno. |n|n|cffffcc00Attacks land units.|r"
 
 [Uanb]
@@ -444,7 +406,6 @@ Hotkey=C
 Propernames=Anub'arak
 Revivetip=Revive |cffffcc00C|rrypt Lord
 Awakentip=Revive |cffffcc00C|rrypt Lord
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-cryptlord.blp
 Ubertip="Warrior Hero, adept at summoning insect minions and crushing enemies. Can learn Impale, Spiked Carapace, Carrion Beetles and Locust Swarm. |n|n|cffffcc00Attacks land units.|r"
 
 [Usyl]
@@ -454,7 +415,6 @@ Hotkey=D
 Tip=Summon |cffffcc00D|rark Ranger
 Revivetip=Revive |cffffcc00D|rark Ranger
 Awakentip=Revive |cffffcc00D|rark Ranger
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-bansheeranger.blp
 Ubertip="Cunning Hero, adept at manipulating opponents. Can learn Silence, Black Arrow, Life Drain, and Charm. |n|n|cffffcc00Attacks land and air units.|r"
 
 [uktn]
@@ -471,7 +431,6 @@ Hotkey=W
 Propernames=Archimonde
 Revivetip=Revive |cffffcc00W|rarlock
 Awakentip=Revive |cffffcc00W|rarlock
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-archimonde.blp
 
 [uswb]
 Name=Sylvanas Windrunner
@@ -504,7 +463,6 @@ Hotkey=D
 Propernames=Illidan
 Revivetip=Revive |cffffcc00D|remon Hunter
 Awakentip=Revive |cffffcc00D|remon Hunter
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-demonhunter.blp
 Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
 
 [Eilm]
@@ -514,7 +472,6 @@ Hotkey=D
 Propernames=Illidan
 Revivetip=Revive |cffffcc00D|remon Hunter
 Awakentip=Revive |cffffcc00D|remon Hunter
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-demonhunter.blp
 Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
 
 [Eidm]
@@ -524,7 +481,6 @@ Hotkey=D
 Propernames=Illidan
 Revivetip=Revive |cffffcc00D|remon Hunter
 Awakentip=Revive |cffffcc00D|remon Hunter
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-demonhunter.blp
 Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
 
 [Ecen]
@@ -533,7 +489,6 @@ Hotkey=C
 Propernames=Cenarius
 Revivetip=Revive |cffffcc00C|renarius
 Awakentip=Revive |cffffcc00C|renarius
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-keeperofthegrove.blp
 
 [Ekgg]
 Name=Keeper of the Grove
@@ -541,7 +496,6 @@ Hotkey=G
 Propernames=Ghost
 Revivetip=Revive |cffffcc00G|rhost
 Awakentip=Revive |cffffcc00G|rhost
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-keeperofthegrove.blp
 Ubertip="Mystical Hero, adept at using nature spells. Can learn Entangling Roots, Force of Nature, Thorns Aura, and Tranquility. |n|n|cffffcc00Attacks land and air units.|r"
 
 [Efur]
@@ -550,7 +504,6 @@ Hotkey=K
 Propernames=Furion
 Revivetip=Revive |cffffcc00K|reeper of the Grove
 Awakentip=Revive |cffffcc00K|reeper of the Grove
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-furion.blp
 Ubertip="Mystical Hero, adept at using nature spells. Can learn Entangling Roots, Force of Nature, Thorns Aura, and Tranquility. |n|n|cffffcc00Attacks land and air units.|r"
 
 [Emfr]
@@ -559,7 +512,6 @@ Hotkey=K
 Propernames=Malfurion
 Revivetip=Revive |cffffcc00K|reeper of the Grove
 Awakentip=Revive |cffffcc00K|reeper of the Grove
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-furion.blp
 Ubertip="Mystical Hero, adept at using nature spells. Can learn Entangling Roots, Force of Nature, Thorns Aura, and Tranquility. |n|n|cffffcc00Attacks land and air units.|r"
 
 [Emns]
@@ -569,7 +521,6 @@ Propernames=Malfurion
 Revivetip=Revive |cffffcc00K|reeper of the Grove
 Awakentip=Revive |cffffcc00K|reeper of the Grove
 EditorSuffix= (Without Stag)
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-furion.blp
 Ubertip="Mystical Hero, adept at using nature spells. Can learn Entangling Roots, Force of Nature, Thorns Aura, and Tranquility. |n|n|cffffcc00Attacks land and air units.|r"
 
 [Ewrd]
@@ -578,7 +529,6 @@ Hotkey=W
 Propernames=Maiev
 Revivetip=Revive |cffffcc00W|rarden
 Awakentip=Revive |cffffcc00W|rarden
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-warden.blp
 Ubertip="Cunning Hero, adept at entering and escaping combat. Can learn Blink, Fan of Knives, Shadow Strike and Vengeance. |n|n|cffffcc00Attacks land units.|r"
 
 [eshd]
@@ -590,7 +540,6 @@ Hotkey=P
 Propernames=Tyrande
 Revivetip=Revive |cffffcc00P|rriestess of the Moon
 Awakentip=Revive |cffffcc00P|rriestess of the Moon
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-priestessofthemoon.blp
 Ubertip="Warrior Hero, adept at enhancing ranged attacks and slaying enemies from afar. Can learn Scout, Searing Arrows, Trueshot Aura, and Starfall. |n|n|cffffcc00Attacks land and air units.|r"
 
 [Eevi]
@@ -599,7 +548,6 @@ Hotkey=D
 Propernames=Illidan
 Revivetip=Revive |cffffcc00D|remon Hunter
 Awakentip=Revive |cffffcc00D|remon Hunter
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-demonhunter.blp
 EditorSuffix= (Evil)
 Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
 
@@ -610,7 +558,6 @@ Hotkey=D
 Propernames=Illidan
 Revivetip=Revive |cffffcc00D|remon Hunter
 Awakentip=Revive |cffffcc00D|remon Hunter
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-demonhunter.blp
 EditorSuffix= (Evil)
 Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
 
@@ -630,7 +577,6 @@ Hotkey=B
 Propernames=Blademaster of Blackrock Clan
 Revivetip=Revive |cffffcc00B|rlademaster
 Awakentip=Revive |cffffcc00B|rlademaster
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-chaosblademaster.blp
 Ubertip="Cunning Hero, adept at quickly killing individual units and creating confusion among enemies. Can learn Mirror Image, Wind Walk, Critical Strike and Bladestorm. |n|n|cffffcc00Attacks land units.|r"
 
 [nckb]
@@ -683,7 +629,6 @@ Propernames=Mannoroth
 Revivetip=Revive |cffffcc00P|rit Lord
 Awakentip=Revive |cffffcc00P|rit Lord
 Hotkey=M
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-mannaroth.blp
 
 [Npld]
 Name=Pit Lord
@@ -691,7 +636,6 @@ Propernames=Azgalor,Brutillus,Mongrethod,Destromath,Gogonnash,Magtheridon
 Revivetip=Revive |cffffcc00P|rit Lord
 Awakentip=Revive |cffffcc00P|rit Lord
 Hotkey=P
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-pitlord.blp
 
 [nser]
 Name=Searinox
@@ -761,6 +705,10 @@ EditorSuffix=8
 
 [negt]
 Name=High Elven Guard Tower
+Hotkey=G
+Tip=Build High Elven |cffffcc00G|ruard Tower
+Ubertip="Primary defensive structure.|n|n|cffffcc00Attacks land and air units.|r"
+
 
 [negf]
 Name=Earth-Fury Tower
@@ -778,6 +726,10 @@ Hotkey=F
 
 [nheb]
 Name=High Elven Barracks
+Hotkey=B
+Tip=Build |cffffcc00B|rarracks
+Ubertip="Primary troop production building. Trains High Elven Swordsmen, High Elven Archers and Dragon Hawks. |nAlso contains the Defend upgrade for High Elven Swordsmen."
+
 
 [nbfl]
 Name=Fountain of Blood
@@ -859,7 +811,6 @@ Hotkey=L
 Propernames=Kel'Thuzad
 Revivetip=Revive |cffffcc00L|rich
 Awakentip=Revive |cffffcc00L|rich
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-lich.blp
 Ubertip="Mystical Hero, particularly adept at cold magic. Can learn Frost Armor, Frost Nova, Dark Ritual and Death And Decay. |n|n|cffffcc00Attacks land and air units.|r"
 
 [uabc]
@@ -876,7 +827,6 @@ Hotkey=T
 Propernames=Cairne Bloodhoof
 Revivetip=Revive |cffffcc00T|rauren Chieftain
 Awakentip=Revive |cffffcc00T|rauren Chieftain
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-taurenchieftain.blp
 Ubertip="Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Shockwave, War Stomp, Endurance Aura and Reincarnation. |n|n|cffffcc00Attacks land units.|r"
 
 [zmar]
@@ -1065,7 +1015,6 @@ Propernames=Akama
 Revivetip=Revive A|cffffcc00k|rama
 Awakentip=Revive A|cffffcc00k|rama
 Hotkey=K
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-akama.blp
 
 [ndrl]
 Name=Draenei Laborer
@@ -1117,7 +1066,6 @@ Propernames=Magtheridon
 Revivetip=Revive |cffffcc00P|rit Lord
 Awakentip=Revive |cffffcc00P|rit Lord
 Hotkey=P
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-pitlord.blp
 Ubertip="Warrior Hero, adept at terrorizing enemies. Can learn Rain of Fire, Howl of Terror, Cleaving Attack, and Doom. |n|n|cffffcc00Attacks land units.|r"
 
 [Nklj]
@@ -1126,7 +1074,6 @@ Hotkey=W
 Propernames=Kil'jaeden
 Revivetip=Revive |cffffcc00W|rarlock
 Awakentip=Revive |cffffcc00W|rarlock
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-archimonde.blp
 
 [Nkjx]
 Name=Warlock
@@ -1134,7 +1081,6 @@ Hotkey=W
 Propernames=Kil'jaeden
 Revivetip=Revive |cffffcc00W|rarlock
 Awakentip=Revive |cffffcc00W|rarlock
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-archimonde.blp
 EditorSuffix=(Cinematic)
 
 [nfv0]
@@ -1186,7 +1132,6 @@ Tip=Summon Pa|cffffcc00n|rdaren Brewmaster
 Ubertip="Warrior Hero, exceptional at absorbing damage and melee combat. Can learn Breath of Fire, Drunken Haze, Drunken Brawler and Storm, Earth And Fire. |n|n|cffffcc00Attacks land units.|r"
 Revivetip=Revive Pa|cffffcc00n|rdaren Brewmaster
 Awakentip=Revive Pa|cffffcc00n|rdaren Brewmaster
-ScoreScreenIcon=UI\Glues\ScoreScreen\scorescreen-hero-pandarenbrewmaster.blp
 
 [nhew]
 Name=Worker

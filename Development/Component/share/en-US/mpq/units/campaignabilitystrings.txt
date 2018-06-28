@@ -7,7 +7,6 @@ Researchtip="Learn Attribute |cffffcc00B|ronus - [|cffffcc00Level %d|r]."
 Researchubertip="Gives a permanent bonus to Agility, Intelligence, and Strength. |n|n|cffffcc00Level 1|r - Adds three points to all stats.|n|cffffcc00Level 2|r - Adds three additional points.|n|cffffcc00Level 3|r - Adds three additional points.|n|cffffcc00Level 4|r - Adds three additional points."
 Researchhotkey=B
 
-
 // Serpent Ward (tentacle)
 [ACtn]
 Name=Spawn Tentacle
@@ -169,6 +168,7 @@ Buffubertip="This unit has been inflicted with a parasite; it will take damage o
 [BNpm]
 Bufftip="Parasite"
 Buffubertip="This unit has been inflicted with a parasite; it will take damage over time, and if it dies while still afflicted, a minion will spawn from its corpse."
+EditorSuffix= (Minion)
 
 // Cyclone, Naga
 //Unused line: When that unit lands, its movement speed is slowed by a factor of <Acyc,DataC1>, and it will regain 1/<Acyc,DataC1> of its movement every <Acyc,DataB1> seconds.
@@ -262,7 +262,6 @@ Researchtip="Learn Breath of |cffffcc00F|rire - [|cffffcc00Level %d|r]"
 Researchubertip="Breathes a cone of fire at enemy units which deals damage. Units that have Drunken Haze on them will ignite and take burn damage over time. |nLasts <ANcf,Dur1> seconds. |n|n|cffffcc00Level 1|r - <ANcf,DataA1> initial damage, <ANcf,DataE1> damage per second. |n|cffffcc00Level 2|r - <ANcf,DataA2> initial damage, <ANcf,DataE2> damage per second. |n|cffffcc00Level 3|r - <ANcf,DataA3> initial damage, <ANcf,DataE3> damage per second. |n|cffffcc00Level 4|r - <ANcf,DataA4> initial damage, <ANcf,DataE4> damage per second."
 Researchhotkey=F
 EditorSuffix=(Chen)
-
 
 // Drunken Brawler (Chen)
 [Acdb]
@@ -377,8 +376,8 @@ Researchhotkey=T
 [AOls]
 Name=Voodoo Spirits
 Tip=|cffffcc00V|roodoo Spirits - [|cffffcc00Level 1|r],|cffffcc00V|roodoo Spirits - [|cffffcc00Level 2|r]
-Ubertip="Creates a swarm of angry spirits that drain the life energies of nearby enemy units. They store the life energy they drain from their victims and use it to replenish Rokhan's hit points when they return.","Creates a swarm of angry spirits that drain the life energies of nearby enemy units. They store the life energy they drain from their victims and use it to replenish Rokhan's hit points when they return."
+Ubertip="Creates a swarm of angry spirits that drain the life energies of nearby enemy units. They store the life energy they drain from their victims and use it to replenish Rokhan's hit points when they return.|nLasts <AOls,HeroDur1> seconds.","Creates a swarm of angry spirits that drain the life energies of nearby enemy units. They store the life energy they drain from their victims and use it to replenish Rokhan's hit points when they return.|nLasts <AOls,HeroDur1> seconds."
 Hotkey=V
 Researchtip="Learn |cffffcc00V|roodoo Spirits - [|cffffcc00Level %d|r]"
-Researchubertip="Creates a swarm of angry spirits that drain the life energies of nearby enemy units. They store the life energy they drain from their victims and use it to replenish Rokhan's hit points when they return.|n|n|cffffcc00Level 1|r - <AOls,DataA1> spirits. |n|cffffcc00Level 2|r - <AOls,DataA2> spirits."
+Researchubertip="Creates a swarm of angry spirits that drain the life energies of nearby enemy units. They store the life energy they drain from their victims and use it to replenish Rokhan's hit points when they return.|n|n|cffffcc00Level 1|r - <AOls,DataA1> spirits. |n|cffffcc00Level 2|r - <AOls,DataA2> spirits.|n|nLasts <AOls,HeroDur1> seconds."
 Researchhotkey=V

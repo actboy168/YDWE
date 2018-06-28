@@ -374,7 +374,7 @@ C;X2;K"radl"
 C;X3;K"Attack Damage Loss"
 C;X4;K"Base"
 C;X5;K"WESTRING_EEVAL_ADLB"
-C;X6;K"unreal"
+C;X6;K"int"
 C;X7;K-100000
 C;X8;K100000
 C;X9;K0
@@ -384,7 +384,7 @@ C;X2;K"radl"
 C;X3;K"Attack Damage Loss"
 C;X4;K"Mod"
 C;X5;K"WESTRING_EEVAL_ADLM"
-C;X6;K"unreal"
+C;X6;K"int"
 C;X7;K-100000
 C;X8;K100000
 C;X9;K0

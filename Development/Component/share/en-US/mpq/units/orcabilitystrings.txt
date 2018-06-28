@@ -218,11 +218,13 @@ Hotkey=E
 [Beng]
 Bufftip=Ensnare
 Buffubertip="This unit is ensnared; it cannot move or fly."
+EditorSuffix= (Ground)
 
 // Ensnare buff on air units
 [Bena]
 Bufftip=Ensnare
 Buffubertip="This unit is ensnared; it cannot move or fly."
+EditorSuffix= (Air)
 
 // Pulverize - passive
 [Awar]
@@ -240,11 +242,18 @@ Hotkey=D
 Bufftip=Devour
 Buffubertip="A unit is being devoured; it will take damage while providing vision to the owner."
 
-// Purge
+// Purge (classic)
 [Aprg]
 Name=Purge
 Tip=Pur|cffffcc00g|re
 Ubertip="Removes all buffs from a target unit, and slows its movement speed by a factor of <Aprg,DataA1>. Purged units will slowly regain their movement speed over <Aprg,Dur1> seconds. |n|cffffcc00Deals <Aprg,DataC1> damage to summoned units.|r"
+Hotkey=G
+
+// Purge (expansion melee)
+[Apg2]
+Name=Purge
+Tip=Pur|cffffcc00g|re
+Ubertip="Removes all buffs from a target unit. Enemy units are also immobilized for <Apg2,DataD1> seconds and their movement speed is reduced by a factor of <Apg2,DataA1>; they will slowly regain their movement speed over <Apg2,Dur1> seconds. |n|cffffcc00Deals <Apg2,DataC1> damage to summoned units.|r"
 Hotkey=G
 
 [Bprg]
@@ -349,11 +358,31 @@ EditorSuffix= (Orb of Venom)
 [Bpoi]
 Bufftip=Poison
 Buffubertip="This unit is poisoned, and will take damage over time."
+EditorSuffix= (Non-stacking)
 
 // Poison Sting Stack Buff
 [Bpsd]
 Bufftip=Poison
 Buffubertip="This unit is poisoned; it will take damage over time."
+EditorSuffix= (Stacking)
+
+[Bpsi]
+EditorName=Poison (Info)
+
+// Venom Non Stack Buff
+[BIpb]
+Bufftip=Venom
+Buffubertip="This unit is poisoned, and will take damage over time."
+EditorSuffix= (Non-stacking)
+
+// Venom Stack Buff
+[BIpd]
+Bufftip=Venom
+Buffubertip="This unit is poisoned; it will take damage over time."
+EditorSuffix= (Stacking)
+
+[BIpi]
+EditorName=Venom (Info)
 
 // currently unused
 // Tracking (Passive)
@@ -526,3 +555,49 @@ Researchhotkey=T
 [BOws]
 Bufftip=War Stomp
 Buffubertip="This unit has been hit by War Stomp; it cannot move, attack or cast spells for a short duration."
+
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BOea]
+EditorName=Earthquake (Caster)
+
+[BOsh]
+EditorName=Shockwave (Caster)
+
+[BOvc]
+EditorName=Big Bad Voodoo (Caster)
+
+[BOww]
+EditorName=Bladestorm (Caster)
+
+[Bdig]
+EditorName=Devour (Caster)
+
+[Bens]
+EditorName=Ensnare (General)
+
+[Bliq]
+EditorName=Liquid Fire
+
+[Blsa]
+EditorName=Lightning Shield (Caster)
+
+[XOeq]
+EditorName=Earthquake (Effect)
+
+[XOre]
+EditorName=Reincarnation (Effect)
+
+[Xbof]
+EditorName=Burning Oil (Effect)
+
+[Xfos]
+EditorName=Building Damage - Orc Small
+
+[Xfom]
+EditorName=Building Damage - Orc Medium
+
+[Xfol]
+EditorName=Building Damage - Orc Large
