@@ -1,6 +1,6 @@
 #include <lua.hpp>
 #include <string.h>	  
-#include <base/util/unicode.h>	 
+#include <base/util/unicode.h>
 #include <base/path/get_path.h>
 #include <base/path/helper.h>
 #include <base/file/stream.h>
@@ -164,7 +164,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 	}
 
 	static HMODULE loaddll_frommemory(const char* filename, const char* str, size_t len) {
-		fs::path dir = base::path::get(base::path::DIR_TEMP);
+		fs::path dir = base::path::temp();
 		fs::path file = dir / filename;
 		FILE* f = fopen(file.string().c_str(), "wb");
 		if (!f) {

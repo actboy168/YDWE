@@ -4,7 +4,6 @@
 #include <base/warcraft3/directory.h>
 #include <base/file/stream.h>
 #include <base/path/self.h>
-#include <base/path/get_path.h>
 #include <base/path/ydwe.h>
 #include <base/path/helper.h>
 #include <base/util/unicode.h>

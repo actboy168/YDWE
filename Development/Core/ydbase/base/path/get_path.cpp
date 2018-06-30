@@ -80,18 +80,4 @@ namespace base { namespace path {
 
 		throw windows_exception("::GetModuleFileNameW failed.");
 	}
-
-	fs::path get(PATH_TYPE type)
-	{
-		switch (type) 
-		{
-		case DIR_EXE:
-			return std::move(module(NULL));
-		case DIR_TEMP:
-			return std::move(temp_path());
-		default:
-			assert(false);
-			return std::move(fs::path());
-		}
-	}
 }}

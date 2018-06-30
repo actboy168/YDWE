@@ -3,8 +3,8 @@
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
-#include <base/win/registry/key.h>	
-#include <base/util/unicode.h>	
+#include <base/win/registry/key.h>
+#include <base/util/unicode.h>
 #include <base/path/get_path.h>
 #include <base/path/helper.h>
 #include <base/util/list_of.h>

@@ -422,11 +422,10 @@ namespace luafs {
 		FS_TRY_END;
 	}
 	
-	static int get(lua_State* L)
+	static int procedure_path(lua_State* L)
 	{
 		FS_TRY;
-		lua_Integer option = luaL_checkinteger(L, 1);
-		return path::constructor_(L, std::move(base::path::get(base::path::PATH_TYPE(option))));
+		return path::constructor_(L, std::move(base::path::module().parent_path()));
 		FS_TRY_END;
 	}
 
@@ -490,18 +489,12 @@ int luaopen_filesystem(lua_State* L)
 		{ "absolute", luafs::absolute },
 		{ "relative", luafs::relative },
 		{ "last_write_time", luafs::last_write_time },
-		{ "get", luafs::get },
+		{ "procedure_path", luafs::procedure_path },
 		{ "ydwe", luafs::ydwe },
 		{ NULL, NULL }
 	};	
 	lua_newtable(L);
 	luaL_setfuncs(L, f, 0);
-
-#define LUA_AREA_CONSTANT(val) \
-	lua_pushinteger(L, base::path:: ## val); \
-	lua_setfield(L, -2, # val);
-
-	LUA_AREA_CONSTANT(DIR_EXE);
 
 	lua_setglobal(L, "fs");
 	return 0;
