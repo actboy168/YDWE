@@ -100,7 +100,7 @@ CMainWindow::CMainWindow()
 {
 	try
 	{
-		m_ydwe_path = base::path::get(base::path::DIR_EXE).parent_path().parent_path() / L"YDWE.exe";
+		m_ydwe_path = base::path::ydwe(false) / L"YDWE.exe";
 	}
 	catch (...)
 	{

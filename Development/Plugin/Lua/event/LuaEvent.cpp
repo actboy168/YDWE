@@ -180,7 +180,7 @@ namespace NYDWE {
 		std::cmatch matcher;
 		if (lpCommandLine && std::regex_match(lpCommandLine, matcher, gRegexCommandLine))
 		{
-			fs::path currentWarcraftMap = base::path::get(base::path::DIR_EXE).parent_path() / matcher.str(1);
+			fs::path currentWarcraftMap = base::path::module().parent_path() / matcher.str(1);
 			LOGGING_TRACE(lg) << "Executing map " << currentWarcraftMap.wstring();
 
 			int results = event_array[EVENT_TEST_MAP]([&](lua_State* L, int idx){

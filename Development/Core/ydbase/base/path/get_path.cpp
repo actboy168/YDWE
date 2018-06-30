@@ -16,23 +16,11 @@ extern "C" IMAGE_DOS_HEADER __ImageBase;
 
 namespace base { namespace path {
 
-	fs::path quick_launch_path()
-	{
-		wchar_t buffer[MAX_PATH];
-		buffer[0] = 0;
-		ENSURE(::SHGetFolderPathW(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, buffer));
-		fs::path result(buffer);
-		// http://stackoverflow.com/questions/76080/how-do-you-reliably-get-the-quick-
-		// http://www.microsoft.com/technet/scriptcenter/resources/qanda/sept05/hey0901.mspx
-		result = result / L"Microsoft" / L"Internet Explorer" / L"Quick Launch";
-		return std::move(result);
-	}
-
 	// 
 	// https://blogs.msdn.com/b/larryosterman/archive/2010/10/19/because-if-you-do_2c00_-stuff-doesn_2700_t-work-the-way-you-intended_2e00_.aspx
 	// http://msdn.microsoft.com/en-us/library/windows/desktop/aa364992%28v=vs.85%29.aspx
 	//
-	fs::path temp_path()
+	fs::path temp()
 	{
 		std::wstring result;
 		result = win::env_variable(L"TMP").get_nothrow();
@@ -95,31 +83,12 @@ namespace base { namespace path {
 
 	fs::path get(PATH_TYPE type)
 	{
-		wchar_t buffer[MAX_PATH];
-		buffer[0] = 0;
-
 		switch (type) 
 		{
 		case DIR_EXE:
 			return std::move(module(NULL));
-		case DIR_MODULE:
-			return std::move(module(reinterpret_cast<HMODULE>(&__ImageBase)));
 		case DIR_TEMP:
 			return std::move(temp_path());
-		case DIR_START_MENU:
-			ENSURE(::SHGetFolderPathW(NULL, CSIDL_PROGRAMS, NULL, SHGFP_TYPE_CURRENT, buffer));
-			return std::move(fs::path(buffer));
-		case DIR_USER_DESKTOP:
-			ENSURE(::SHGetFolderPathW(NULL, CSIDL_DESKTOPDIRECTORY, NULL, SHGFP_TYPE_CURRENT, buffer));
-			return std::move(fs::path(buffer));
-		case DIR_USER_QUICK_LAUNCH:
-			return std::move(quick_launch_path());
-		case DIR_TASKBAR_PINS:
-			{
-				fs::path result = get(DIR_USER_QUICK_LAUNCH);
-				result = result / L"User Pinned" / L"TaskBar";
-				return std::move(result);
-			}
 		default:
 			assert(false);
 			return std::move(fs::path());

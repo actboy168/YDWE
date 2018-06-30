@@ -137,7 +137,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			try {
 				fs::path filepath = u2w(filename);
 				if (!filepath.is_absolute()) {
-					filepath = path::get(path::DIR_EXE).parent_path() / filepath;
+					filepath = path::module().parent_path() / filepath;
 				}
 				if (fs::exists(filepath))
 				{
@@ -158,7 +158,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		static std::set<std::wstring> s_blacklist = list_of(L"mix")(L"asi")(L"m3d")(L"flt")(L"flt")(L"exe")(L"dll");
 		try {
-			fs::path rootpath = path::get(path::DIR_EXE).parent_path();
+			fs::path rootpath = path::module().parent_path();
 			fs::path filepath = rootpath / u2w(filename);
 			filepath = path::normalize(filepath);
 
