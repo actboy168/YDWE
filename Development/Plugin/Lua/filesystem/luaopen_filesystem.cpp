@@ -23,20 +23,38 @@
 #endif
 
 #define FS_TRY     try {   
-#define FS_TRY_END } catch (const std::exception& e) { lua_pushstring(L, base::a2u(e.what()).c_str()); return lua_error(L); }
+#define FS_TRY_END } catch (const std::exception& e) { return pusherror(L, e); }
 
 namespace luafs {
-	static std::wstring lua_towstring(lua_State* L, int idx)
+	static int pusherror(lua_State* L, const std::exception& e)
+	{
+#if defined(_MSC_VER)
+		lua_pushstring(L, base::a2u(e.what()).c_str());
+#else
+		lua_pushstring(L, e.what());
+#endif
+		return lua_error(L);
+	}
+
+	static fs::path::string_type lua_tofsstring(lua_State* L, int idx)
 	{
 		size_t len = 0;
 		const char* buf = luaL_checklstring(L, idx, &len);
+#if defined(_MSC_VER)
 		return base::u2w(std::string_view(buf, len), base::conv_method::replace | '?');
+#else
+		return fs::path::string_type(buf, len);
+#endif
 	}
 
-	static void lua_pushwstring(lua_State* L, const std::wstring& str)
+	static void lua_pushfsstring(lua_State* L, const fs::path::string_type& str)
 	{
+#if defined(_MSC_VER)
 		std::string utf8 = base::w2u(str, base::conv_method::replace | '?');
 		lua_pushlstring(L, utf8.data(), utf8.size());
+#else
+		lua_pushlstring(L, str.data(), str.size());
+#endif
 	}
 
 	namespace path {
@@ -82,17 +100,17 @@ namespace luafs {
 			return 1;
 		}
 
-		static int constructor_(lua_State* L, const std::wstring& path)
+		static int constructor_(lua_State* L, const fs::path::string_type& path)
 		{
 			void* storage = newudata(L);
 			new (storage)fs::path(path);
 			return 1;
 		}
 
-		static int constructor_(lua_State* L, std::wstring&& path)
+		static int constructor_(lua_State* L, fs::path::string_type&& path)
 		{
 			void* storage = newudata(L);
-			new (storage)fs::path(std::forward<std::wstring>(path));
+			new (storage)fs::path(std::forward<fs::path::string_type>(path));
 			return 1;
 		}
 
@@ -118,7 +136,7 @@ namespace luafs {
 			}
 			switch (lua_type(L, 1)) {
 			case LUA_TSTRING:
-				return constructor_(L, lua_towstring(L, 1));
+				return constructor_(L, lua_tofsstring(L, 1));
 			case LUA_TUSERDATA:
 				return constructor_(L, to(L, 1));
 			}
@@ -131,7 +149,7 @@ namespace luafs {
 		{
 			FS_TRY;
 			const fs::path& self = path::to(L, 1);
-			lua_pushwstring(L, self.wstring());
+			lua_pushfsstring(L, self.string<fs::path::value_type>());
 			return 1;
 			FS_TRY_END;
 		}
@@ -201,7 +219,7 @@ namespace luafs {
 			fs::path& self = path::to(L, 1);
 			switch (lua_type(L, 2)) {
 			case LUA_TSTRING:
-				self.replace_extension(lua_towstring(L, 2));
+				self.replace_extension(lua_tofsstring(L, 2));
 				lua_settop(L, 1);
 				return 1;
 			case LUA_TUSERDATA:
@@ -260,7 +278,7 @@ namespace luafs {
 			const fs::path& self = path::to(L, 1);
 			switch (lua_type(L, 2)) {
 			case LUA_TSTRING:
-				return constructor_(L, std::move(self / lua_towstring(L, 2)));
+				return constructor_(L, std::move(self / lua_tofsstring(L, 2)));
 			case LUA_TUSERDATA:
 				return constructor_(L, std::move(self / to(L, 2)));
 			}
@@ -298,7 +316,7 @@ namespace luafs {
 		{
 			FS_TRY;
 			const fs::path& self = path::to(L, 1);
-			lua_pushwstring(L, self.wstring());
+			lua_pushfsstring(L, self.string<fs::path::value_type>());
 			return 1;
 			FS_TRY_END;
 		}
