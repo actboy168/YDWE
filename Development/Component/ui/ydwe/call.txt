@@ -3141,6 +3141,12 @@ default = "0"
 type = integer
 default = "0"
 
+[YDWECreateMover]
+title = "新建运动器"
+description = "新建运动器"
+category = TC_NOTHING
+returns = mover
+
 [CreateTimer]
 title = "新建计时器 [R]"
 description = "新建的计时器"

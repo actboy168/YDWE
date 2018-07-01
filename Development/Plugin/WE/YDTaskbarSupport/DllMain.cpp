@@ -3,7 +3,7 @@
 #include <string>				 	  		
 #include <base/filesystem.h>
 #include <base/win/version.h>
-#include <base/path/get_path.h>
+#include <base/path/ydwe.h>
 #include "Windows7.h"
 #include "JumpList.h"
 
@@ -76,7 +76,7 @@ void Initialize()
 	jumpList.SetAppID(currentAppID);
 	if (jumpList.InitializeList())
 	{
-		fs::path ydweDirectory = base::path::get(base::path::DIR_MODULE).parent_path().parent_path();
+		fs::path ydweDirectory = base::path::ydwe(false);
 
 		jumpList.AddTaskSeparator();
 

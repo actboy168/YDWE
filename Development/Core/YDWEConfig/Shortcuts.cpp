@@ -5,11 +5,34 @@
 #include <base/path/get_path.h>
 #include <base/path/helper.h>
 #include <base/com/unique_ptr.h>
+#include <base/exception/windows_exception.h>
 
 namespace Shortcuts
 {
 	namespace detail
 	{
+#define ENSURE(cond) if (FAILED(cond)) throw base::windows_exception(#cond " failed.");
+
+		fs::path quick_launch_path()
+		{
+			wchar_t buffer[MAX_PATH];
+			buffer[0] = 0;
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, buffer));
+			fs::path result(buffer);
+			// http://stackoverflow.com/questions/76080/how-do-you-reliably-get-the-quick-
+			// http://www.microsoft.com/technet/scriptcenter/resources/qanda/sept05/hey0901.mspx
+			result = result / L"Microsoft" / L"Internet Explorer" / L"Quick Launch";
+			return std::move(result);
+		}
+
+		fs::path desktop_path()
+		{
+			wchar_t buffer[MAX_PATH];
+			buffer[0] = 0;
+			ENSURE(::SHGetFolderPathW(NULL, CSIDL_DESKTOPDIRECTORY, NULL, SHGFP_TYPE_CURRENT, buffer));
+			return std::move(fs::path(buffer));
+		}
+
 		bool CreateOrUpdateShortcutLink(fs::path const& shortcut_path, fs::path const& target_path)
 		{
 			bool shortcut_existed = fs::exists(shortcut_path);
@@ -98,7 +121,7 @@ namespace Shortcuts
 	{
 		try
 		{
-			fs::path shortcut_path = base::path::get(base::path::DIR_USER_DESKTOP) / target_path.filename().replace_extension(L".lnk");
+			fs::path shortcut_path = detail::desktop_path() / target_path.filename().replace_extension(L".lnk");
 
 			if (!detail::CreateOrUpdateShortcutLink(shortcut_path, target_path))
 			{
@@ -118,7 +141,7 @@ namespace Shortcuts
 	{
 		try
 		{
-			fs::path desktop_path = base::path::get(base::path::DIR_USER_DESKTOP);
+			fs::path desktop_path = detail::desktop_path();
 			if (!fs::exists(desktop_path))
 			{
 				throw std::domain_error("Couldn't find path to desktop.");
@@ -156,7 +179,7 @@ namespace Shortcuts
 	{
 		try
 		{
-			fs::path desktop_path = base::path::get(base::path::DIR_USER_DESKTOP);
+			fs::path desktop_path = detail::desktop_path();
 			if (!fs::exists(desktop_path))
 			{
 				throw std::domain_error("Couldn't find path to desktop.");
@@ -198,7 +221,7 @@ namespace Shortcuts
 			}
 			else if (base::win::get_version() >= base::win::VERSION_WIN7)
 			{
-				fs::path shortcut_path = base::path::get(base::path::DIR_TEMP) / target_path.filename().replace_extension(L".lnk");
+				fs::path shortcut_path = base::path::temp() / target_path.filename().replace_extension(L".lnk");
 
 				if (!detail::CreateOrUpdateShortcutLink(shortcut_path, target_path))
 				{
@@ -211,7 +234,7 @@ namespace Shortcuts
 			}
 			else
 			{
-				fs::path shortcut_path = base::path::get(base::path::DIR_USER_QUICK_LAUNCH) / target_path.filename().replace_extension(L".lnk");
+				fs::path shortcut_path = detail::quick_launch_path() / target_path.filename().replace_extension(L".lnk");
 
 				return detail::CreateOrUpdateShortcutLink(shortcut_path, target_path);
 			}
@@ -234,11 +257,11 @@ namespace Shortcuts
 			}
 			else if (base::win::get_version() >= base::win::VERSION_WIN7)
 			{
-				taskbar_path = base::path::get(base::path::DIR_TASKBAR_PINS);
+				taskbar_path = detail::quick_launch_path() / L"User Pinned" / L"TaskBar";
 			}
 			else
 			{
-				taskbar_path = base::path::get(base::path::DIR_USER_QUICK_LAUNCH);
+				taskbar_path = detail::quick_launch_path();
 			}
 
 			if (!fs::exists(taskbar_path))
@@ -288,11 +311,11 @@ namespace Shortcuts
 			fs::path taskbar_path;
 			if (base::win::get_version() >= base::win::VERSION_WIN7)
 			{
-				taskbar_path = base::path::get(base::path::DIR_TASKBAR_PINS);
+				taskbar_path = detail::quick_launch_path() / L"User Pinned" / L"TaskBar";
 			}
 			else
 			{
-				taskbar_path = base::path::get(base::path::DIR_USER_QUICK_LAUNCH);
+				taskbar_path = detail::quick_launch_path();
 			}
 
 			if (!fs::exists(taskbar_path))

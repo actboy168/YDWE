@@ -13,6 +13,7 @@ typename03_boolean=0,typename,3,真值
 typename04_string=0,typename,4,字符串
 typename05_timer=0,typename,5,计时器
 typename06_trigger=0,typename,6,触发器
+typename39_mover=0,typename,39,运动器
 typename07_unit=0,typename,7,单位
 typename08_unitcode=0,typename,8,单位类型
 typename09_abilcode=0,typename,9,技能
@@ -45,6 +46,7 @@ typename35_fogstate=0,typename,35,迷雾
 typename36_fogmodifier=0,typename,36,可见度修正器
 typename37_radian=0,typename,37,弧度
 typename38_degree=0,typename,38,角度
+
 objecttype00_abilcode=0,objecttype,YDWE_OBJECT_TYPE_ABILITY,WESTRING_OBJTAB_ABILITIES
 objecttype01_buffcode=0,objecttype,YDWE_OBJECT_TYPE_BUFF,WESTRING_OBJTAB_BUFFS
 objecttype02_unitcode=0,objecttype,YDWE_OBJECT_TYPE_UNIT,WESTRING_OBJTAB_UNITS

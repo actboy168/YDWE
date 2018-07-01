@@ -213,7 +213,7 @@ namespace base { namespace warcraft3 {
 
 		struct variable_node : public node
 		{
-			uint32_t    unk_;
+			uint32_t    array_;
 			uint32_t    type_;
 			uint32_t    value_;
 		};
@@ -340,21 +340,47 @@ namespace base { namespace warcraft3 {
 		hashtable::reverse_table table; // 0x194
 	};
 
+	struct stackframe_unk_t {
+		uint32_t unk0;
+		uint32_t unk1;
+		uint32_t unk2;
+		uint32_t unk3;
+		uint32_t unk4;
+		uint32_t unk5;
+		uint32_t unk6;
+		uint32_t unk7;
+		uint32_t code;
+	};
+
+	struct stackframe_t {
+		uint32_t                   unk0;
+		stackframe_t*              next;
+		stackframe_unk_t*          codes[0x21];
+		uint32_t                   index;
+		hashtable::variable_table  local_table;
+	};
+
 	struct jass_vm_t
 	{
-		char                         unk1[0x2858];
+		char                         unk0[0x2850];
+		uint32_t                     index;                 //0x2850
+		uint32_t                     unk1;
 		symbol_table_t*              symbol_table;          //0x2858
 		hashtable::variable_table*   global_table;          //0x285C
-		char                         unk2[0x14];
+		uint32_t                     unk2;
+		uint32_t                     unk3;
+		stackframe_t*                stackframe;            //0x2868
+		uint32_t                     unk4;
+		uint32_t                     unk5;
 		hashtable::string_fasttable* string_table;		    //0x2874
-		char                         unk3[0x10];
+		char                         unk6[0x10];
 		code_table_t*                code_table;		    //0x2888
-		char                         unk4[0x14];
+		char                         unk7[0x14];
 		uintptr_t                    set_handle_reference;	//0x28A0
 		handle_table_t**             handle_table;	        //0x28A4
 	};
 
-	_BASE_API jass_vm_t*                    get_jass_vm();
+	_BASE_API jass_vm_t*                    get_jass_vm(int index = 1);
 	_BASE_API uintptr_t                     get_jass_thread();
 	_BASE_API hashtable::native_func_table* get_native_function_hashtable();
 	_BASE_API uintptr_t                     get_current_jass_pos();

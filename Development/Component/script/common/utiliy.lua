@@ -133,7 +133,7 @@ ffi.cdef[[
 
 function sys.reboot(map)
     local p = process()
-    local ydwe = fs.get(fs.DIR_EXE)
+    local ydwe = fs.ydwe_path() / 'ydwe.exe'
     local cmd = '"'.. ydwe:string() .. '"'
     if map then
         cmd = cmd .. ' -loadfile "' .. map .. '"'

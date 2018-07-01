@@ -23,20 +23,38 @@
 #endif
 
 #define FS_TRY     try {   
-#define FS_TRY_END } catch (const std::exception& e) { lua_pushstring(L, base::a2u(e.what()).c_str()); return lua_error(L); }
+#define FS_TRY_END } catch (const std::exception& e) { return pusherror(L, e); }
 
 namespace luafs {
-	static std::wstring lua_towstring(lua_State* L, int idx)
+	static int pusherror(lua_State* L, const std::exception& e)
+	{
+#if defined(_MSC_VER)
+		lua_pushstring(L, base::a2u(e.what()).c_str());
+#else
+		lua_pushstring(L, e.what());
+#endif
+		return lua_error(L);
+	}
+
+	static fs::path::string_type lua_tofsstring(lua_State* L, int idx)
 	{
 		size_t len = 0;
 		const char* buf = luaL_checklstring(L, idx, &len);
+#if defined(_MSC_VER)
 		return base::u2w(std::string_view(buf, len), base::conv_method::replace | '?');
+#else
+		return fs::path::string_type(buf, len);
+#endif
 	}
 
-	static void lua_pushwstring(lua_State* L, const std::wstring& str)
+	static void lua_pushfsstring(lua_State* L, const fs::path::string_type& str)
 	{
+#if defined(_MSC_VER)
 		std::string utf8 = base::w2u(str, base::conv_method::replace | '?');
 		lua_pushlstring(L, utf8.data(), utf8.size());
+#else
+		lua_pushlstring(L, str.data(), str.size());
+#endif
 	}
 
 	namespace path {
@@ -82,17 +100,17 @@ namespace luafs {
 			return 1;
 		}
 
-		static int constructor_(lua_State* L, const std::wstring& path)
+		static int constructor_(lua_State* L, const fs::path::string_type& path)
 		{
 			void* storage = newudata(L);
 			new (storage)fs::path(path);
 			return 1;
 		}
 
-		static int constructor_(lua_State* L, std::wstring&& path)
+		static int constructor_(lua_State* L, fs::path::string_type&& path)
 		{
 			void* storage = newudata(L);
-			new (storage)fs::path(std::forward<std::wstring>(path));
+			new (storage)fs::path(std::forward<fs::path::string_type>(path));
 			return 1;
 		}
 
@@ -118,7 +136,7 @@ namespace luafs {
 			}
 			switch (lua_type(L, 1)) {
 			case LUA_TSTRING:
-				return constructor_(L, lua_towstring(L, 1));
+				return constructor_(L, lua_tofsstring(L, 1));
 			case LUA_TUSERDATA:
 				return constructor_(L, to(L, 1));
 			}
@@ -131,7 +149,7 @@ namespace luafs {
 		{
 			FS_TRY;
 			const fs::path& self = path::to(L, 1);
-			lua_pushwstring(L, self.wstring());
+			lua_pushfsstring(L, self.string<fs::path::value_type>());
 			return 1;
 			FS_TRY_END;
 		}
@@ -201,7 +219,7 @@ namespace luafs {
 			fs::path& self = path::to(L, 1);
 			switch (lua_type(L, 2)) {
 			case LUA_TSTRING:
-				self.replace_extension(lua_towstring(L, 2));
+				self.replace_extension(lua_tofsstring(L, 2));
 				lua_settop(L, 1);
 				return 1;
 			case LUA_TUSERDATA:
@@ -260,7 +278,7 @@ namespace luafs {
 			const fs::path& self = path::to(L, 1);
 			switch (lua_type(L, 2)) {
 			case LUA_TSTRING:
-				return constructor_(L, std::move(self / lua_towstring(L, 2)));
+				return constructor_(L, std::move(self / lua_tofsstring(L, 2)));
 			case LUA_TUSERDATA:
 				return constructor_(L, std::move(self / to(L, 2)));
 			}
@@ -298,7 +316,7 @@ namespace luafs {
 		{
 			FS_TRY;
 			const fs::path& self = path::to(L, 1);
-			lua_pushwstring(L, self.wstring());
+			lua_pushfsstring(L, self.string<fs::path::value_type>());
 			return 1;
 			FS_TRY_END;
 		}
@@ -422,11 +440,10 @@ namespace luafs {
 		FS_TRY_END;
 	}
 	
-	static int get(lua_State* L)
+	static int procedure_path(lua_State* L)
 	{
 		FS_TRY;
-		lua_Integer option = luaL_checkinteger(L, 1);
-		return path::constructor_(L, std::move(base::path::get(base::path::PATH_TYPE(option))));
+		return path::constructor_(L, std::move(base::path::module().parent_path()));
 		FS_TRY_END;
 	}
 
@@ -490,38 +507,12 @@ int luaopen_filesystem(lua_State* L)
 		{ "absolute", luafs::absolute },
 		{ "relative", luafs::relative },
 		{ "last_write_time", luafs::last_write_time },
-		{ "get", luafs::get },
+		{ "procedure_path", luafs::procedure_path },
 		{ "ydwe", luafs::ydwe },
 		{ NULL, NULL }
 	};	
 	lua_newtable(L);
 	luaL_setfuncs(L, f, 0);
-
-#define LUA_AREA_CONSTANT(val) \
-	lua_pushinteger(L, base::path:: ## val); \
-	lua_setfield(L, -2, # val);
-
-	LUA_AREA_CONSTANT(DIR_EXE);
-	LUA_AREA_CONSTANT(DIR_MODULE);
-	LUA_AREA_CONSTANT(DIR_TEMP);
-	LUA_AREA_CONSTANT(DIR_WINDOWS);
-	LUA_AREA_CONSTANT(DIR_SYSTEM);
-	LUA_AREA_CONSTANT(DIR_PROGRAM_FILES);
-	LUA_AREA_CONSTANT(DIR_IE_INTERNET_CACHE);
-	LUA_AREA_CONSTANT(DIR_COMMON_START_MENU);
-	LUA_AREA_CONSTANT(DIR_START_MENU);
-	LUA_AREA_CONSTANT(DIR_APP_DATA);
-	LUA_AREA_CONSTANT(DIR_COMMON_APP_DATA);
-	LUA_AREA_CONSTANT(DIR_PROFILE);
-	LUA_AREA_CONSTANT(DIR_LOCAL_APP_DATA);
-	LUA_AREA_CONSTANT(DIR_SOURCE_ROOT);
-	LUA_AREA_CONSTANT(DIR_USER_DESKTOP);
-	LUA_AREA_CONSTANT(DIR_COMMON_DESKTOP);
-	LUA_AREA_CONSTANT(DIR_USER_QUICK_LAUNCH);
-	LUA_AREA_CONSTANT(DIR_DEFAULT_USER_QUICK_LAUNCH);
-	LUA_AREA_CONSTANT(DIR_TASKBAR_PINS);
-	LUA_AREA_CONSTANT(DIR_PERSONAL);
-	LUA_AREA_CONSTANT(DIR_MYPICTURES);
 
 	lua_setglobal(L, "fs");
 	return 0;
