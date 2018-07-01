@@ -82,7 +82,7 @@ namespace base {  namespace warcraft3 { namespace lua_engine { namespace console
 			lua_call(L, 1, 1);
 			s = lua_tolstring(L, -1, &l);
 			if (s == NULL)
-				return luaL_error(L, LUA_QL("tostring") " must return a string to " LUA_QL("print"));
+				return luaL_error(L, "`tostring` must return a string to `print`");
 			if (i>1) jass_console_write_string("\t", 1);
 			jass_console_write_string(s, l);
 			lua_pop(L, 1);

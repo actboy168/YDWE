@@ -27,7 +27,10 @@
     <ClInclude Include="..\src\msvc\stdint.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Lua\build\lua53.vcxproj">
+    <ProjectReference Include="..\..\Lua\build\lua.vcxproj">
+      <Project>{76338556-5419-494a-a4c6-d79090629054}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Lua\build\lua54.vcxproj">
       <Project>{b84f7231-16ce-41d8-8c08-7b523ff4225b}</Project>
     </ProjectReference>
   </ItemGroup>

@@ -5,7 +5,7 @@
 #include <windows.h>
 #include "logging.h"
 
-#define buffonstack(B)	((B)->b != (B)->initb)
+#define buffonstack(B)	((B)->b != (B)->init.b)
 
 int llog_print(lua_State *L)
 {

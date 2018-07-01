@@ -87,12 +87,12 @@
     <ClCompile Include="utf8\wmain.c" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="lua53.vcxproj">
-      <Project>{b84f7231-16ce-41d8-8c08-7b523ff4225b}</Project>
-    </ProjectReference>
+    <ClInclude Include="utf8\unicode.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="utf8\unicode.h" />
+    <ProjectReference Include="lua54.vcxproj">
+      <Project>{b84f7231-16ce-41d8-8c08-7b523ff4225b}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
