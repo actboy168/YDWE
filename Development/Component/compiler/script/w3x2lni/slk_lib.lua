@@ -339,6 +339,7 @@ function mt:create_object(objt, ttype, name)
 
         if list_type == 'index' then
             if type(nvalue) ~= 'table' then
+                self[key..'_1'] = nvalue
                 return
             end
             for k, v in pairs(nvalue) do
