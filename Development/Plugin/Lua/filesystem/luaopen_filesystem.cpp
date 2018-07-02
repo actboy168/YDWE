@@ -434,12 +434,16 @@ namespace luafs {
 	{
 		FS_TRY;
 		const fs::path& p = path::to(L, 1);
-		fs::file_time_type time = fs::last_write_time(p);
-		lua_pushinteger(L, time.time_since_epoch().count());
-		return 1;
+		if (lua_gettop(L) == 1) {
+			fs::file_time_type time = fs::last_write_time(p);
+			lua_pushinteger(L, time.time_since_epoch().count());
+			return 1;
+		}
+		fs::last_write_time(p, fs::file_time_type() + fs::file_time_type::duration(luaL_checkinteger(L, 2)));
+		return 0;
 		FS_TRY_END;
 	}
-	
+
 	static int procedure_path(lua_State* L)
 	{
 		FS_TRY;
