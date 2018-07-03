@@ -1,6 +1,6 @@
 #include <lua.hpp>
 #include <string.h>	  
-#include <base/util/unicode.h>	 
+#include <base/util/unicode.h>
 #include <base/path/get_path.h>
 #include <base/path/helper.h>
 #include <base/file/stream.h>
@@ -58,7 +58,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			lua_remove(L, -2);  /* remove path template */
 			if (readable(filename, is_local))  /* does file exist and is readable? */
 				return filename;  /* return that file name */
-			lua_pushfstring(L, "\n\tno file " LUA_QS, filename);
+			lua_pushfstring(L, "\n\tno file `%s`", filename);
 			lua_remove(L, -2);  /* remove file name */
 			luaL_addvalue(&msg);  /* concatenate error msg. entry */
 		}
@@ -71,7 +71,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		lua_getfield(L, lua_upvalueindex(1), pname);
 		path = lua_tostring(L, -1);
 		if (path == NULL)
-			luaL_error(L, LUA_QL("package.%s") " must be a string", pname);
+			luaL_error(L, "`package.%s` must be a string", pname);
 		return searchpath(L, name, path, ".", LUA_DIRSEP, is_local);
 	}
 
@@ -81,7 +81,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			return 2;  /* return open function and file name */
 		}
 		else
-			return luaL_error(L, "error loading module " LUA_QS " from file " LUA_QS ":\n\t%s", lua_tostring(L, 1), filename, lua_tostring(L, -1));
+			return luaL_error(L, "error loading module `%s` from file `%s`:\n\t%s", lua_tostring(L, 1), filename, lua_tostring(L, -1));
 	}
 
 	int searcher_lua(lua_State *L) {
@@ -164,7 +164,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 	}
 
 	static HMODULE loaddll_frommemory(const char* filename, const char* str, size_t len) {
-		fs::path dir = base::path::get(base::path::DIR_TEMP);
+		fs::path dir = base::path::temp();
 		fs::path file = dir / filename;
 		FILE* f = fopen(file.string().c_str(), "wb");
 		if (!f) {

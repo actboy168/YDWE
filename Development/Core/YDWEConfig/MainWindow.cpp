@@ -4,7 +4,6 @@
 #include <base/warcraft3/directory.h>
 #include <base/file/stream.h>
 #include <base/path/self.h>
-#include <base/path/get_path.h>
 #include <base/path/ydwe.h>
 #include <base/path/helper.h>
 #include <base/util/unicode.h>
@@ -100,7 +99,7 @@ CMainWindow::CMainWindow()
 {
 	try
 	{
-		m_ydwe_path = base::path::get(base::path::DIR_EXE).parent_path().parent_path() / L"YDWE.exe";
+		m_ydwe_path = base::path::ydwe(false) / L"YDWE.exe";
 	}
 	catch (...)
 	{

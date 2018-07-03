@@ -1,5 +1,5 @@
 /*
-** $Id: llex.c,v 2.96 2016/05/02 14:02:12 roberto Exp $
+** $Id: llex.c,v 2.102 2018/04/04 14:23:41 roberto Exp $
 ** Lexical Analyzer
 ** See Copyright Notice in lua.h
 */
@@ -63,7 +63,7 @@ static void save (LexState *ls, int c) {
     newsize = luaZ_sizebuffer(b) * 2;
     luaZ_resizebuffer(ls->L, b, newsize);
   }
-  b->buffer[luaZ_bufflen(b)++] = cast(char, c);
+  b->buffer[luaZ_bufflen(b)++] = cast_char(c);
 }
 
 
@@ -129,15 +129,15 @@ TString *luaX_newstring (LexState *ls, const char *str, size_t l) {
   TValue *o;  /* entry for 'str' */
   TString *ts = luaS_newlstr(L, str, l);  /* create new string */
   setsvalue2s(L, L->top++, ts);  /* temporarily anchor it in stack */
-  o = luaH_set(L, ls->h, L->top - 1);
-  if (ttisnil(o)) {  /* not in use yet? */
+  o = luaH_set(L, ls->h, s2v(L->top - 1));
+  if (isempty(o)) {  /* not in use yet? */
     /* boolean value does not need GC barrier;
-       table has no metatable, so it does not need to invalidate cache */
+       table is not a metatable, so it does not need to invalidate cache */
     setbvalue(o, 1);  /* t[string] = true */
     luaC_checkGC(L);
   }
   else {  /* string already present */
-    ts = tsvalue(keyfromval(o));  /* re-use value previously stored */
+    ts = keystrval(nodefromval(o));  /* re-use value previously stored */
   }
   L->top--;  /* remove string from stack */
   return ts;

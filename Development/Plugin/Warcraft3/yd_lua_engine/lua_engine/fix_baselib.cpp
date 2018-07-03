@@ -3,8 +3,8 @@
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
-#include <base/win/registry/key.h>	
-#include <base/util/unicode.h>	
+#include <base/win/registry/key.h>
+#include <base/util/unicode.h>
 #include <base/path/get_path.h>
 #include <base/path/helper.h>
 #include <base/util/list_of.h>
@@ -137,7 +137,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			try {
 				fs::path filepath = u2w(filename);
 				if (!filepath.is_absolute()) {
-					filepath = path::get(path::DIR_EXE).parent_path() / filepath;
+					filepath = path::module().parent_path() / filepath;
 				}
 				if (fs::exists(filepath))
 				{
@@ -158,7 +158,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		static std::set<std::wstring> s_blacklist = list_of(L"mix")(L"asi")(L"m3d")(L"flt")(L"flt")(L"exe")(L"dll");
 		try {
-			fs::path rootpath = path::get(path::DIR_EXE).parent_path();
+			fs::path rootpath = path::module().parent_path();
 			fs::path filepath = rootpath / u2w(filename);
 			filepath = path::normalize(filepath);
 

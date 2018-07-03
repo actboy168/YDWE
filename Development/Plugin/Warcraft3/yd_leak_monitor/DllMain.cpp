@@ -174,47 +174,85 @@ namespace monitor
 	}
 }
 
-struct handle_info_t
+struct handle_info
 {
 	uint32_t handle;
 	uint32_t object;
 	uint32_t reference;
 	uint32_t pos;
 	const char* type;
-	std::vector<std::string> gv_reference;
+	std::vector<std::string> global_reference;
+	std::vector<std::string> local_reference;
 
-	handle_info_t()
+	handle_info()
 		: handle(0)
 		, object(0)
 		, reference(0)
 		, pos(0)
 		, type(0)
-		, gv_reference()
+		, global_reference()
+		, local_reference()
 	{ }
+
+	void add_global_reference(const std::string& name)
+	{
+		global_reference.push_back(name);
+	}
+
+	void add_local_reference(const std::string& name)
+	{
+		local_reference.push_back(name);
+	}
 };
 
-class handle_table_t
-	: public std::map<uint32_t, handle_info_t>
+class handle_table
+	: public std::map<uint32_t, handle_info>
 {
 public:
+	enum e_type {
+		local,
+		global,
+	};
+
 	void add_handle(uint32_t handle, uint32_t object, uint32_t reference)
 	{
-		handle_info_t hi;
+		handle_info hi;
 		hi.handle = handle;
 		hi.object = object;
 		hi.reference = reference;
 		insert(std::make_pair(handle, hi));
 	}
 
-	void add_gv_reference(uint32_t handle, const std::string& name)
+	void add_reference(e_type type, base::warcraft3::hashtable::variable_node& var)
+	{
+		base::warcraft3::jass::global_variable gv(&var);
+		if (base::warcraft3::jass::OPCODE_VARIABLE_HANDLE == gv.type())
+		{
+			add_reference(type, (uint32_t)gv, gv.name());
+		}
+		else if (base::warcraft3::jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type())
+		{
+			for (uint32_t i = 0; i < gv.array_size(); ++i)
+			{
+				add_reference(type, gv[i], base::format("%s[%d]", gv.name(), i));
+			}
+		}
+	}
+
+	void add_reference(e_type type, uint32_t handle, const std::string& name)
 	{
 		auto it = find(handle);
-		if (it == end())
-		{
+		if (it == end()) {
 			return;
 		}
-
-		it->second.gv_reference.push_back(name);
+		switch (type) {
+		case e_type::local:
+			it->second.local_reference.push_back(name);
+			break;
+		case e_type::global:
+			it->second.global_reference.push_back(name);
+			break;
+		}
 	}
 
 	void update_pos(const char* type, std::map<uintptr_t, uintptr_t> m)
@@ -233,7 +271,7 @@ public:
 
 void create_report(std::fstream& fs)
 {
-	handle_table_t ht;
+	handle_table ht;
 
 	using namespace base::warcraft3;
 
@@ -243,22 +281,32 @@ void create_report(std::fstream& fs)
 		ht.add_handle(it->index_, (uint32_t)table->at(3 * (it->index_ - 0x100000) + 1), (uint32_t)table->at(3 * (it->index_ - 0x100000)));
 	}
 
+	for (int i = 2;;++i)
+	{
+		jass_vm_t* vm = get_jass_vm(i);
+		if (!vm) {
+			break;
+		}
+		stackframe_t* frame = vm->stackframe;
+		while (frame) {
+			hashtable::variable_table* vt = &(frame->local_table);
+			if (vt) {
+				for (auto it = vt->begin(); it != vt->end(); ++it) {
+					ht.add_reference(handle_table::e_type::local, *it);
+				}
+			}
+			frame = frame->next;
+			uintptr_t code = frame->codes[frame->index]->code;
+			if (!(jass::opcode*)(vm->symbol_table->unk0 + code * 4)) {
+				break;
+			}
+		}
+	}
+
 	hashtable::variable_table* vt = get_jass_vm()->global_table;
 	for (auto it = vt->begin(); it != vt->end(); ++it)
 	{
-		jass::global_variable gv(&*it);
-
-		if (jass::OPCODE_VARIABLE_HANDLE == gv.type())
-		{
-			ht.add_gv_reference((uint32_t)gv, gv.name());
-		}
-		else if (jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type())
-		{
-			for (uint32_t i = 0; i < gv.array_size(); ++i)
-			{
-				ht.add_gv_reference(gv[i], base::format("%s[%d]", gv.name(), i));
-			}
-		}
+		ht.add_reference(handle_table::e_type::global, *it);
 	}
 
 	ht.update_pos(commonj::location, monitor::handle_manager<commonj::location>::instance());
@@ -283,7 +331,7 @@ void create_report(std::fstream& fs)
 
 	for (auto it = ht.begin(); it != ht.end(); ++it)
 	{
-		handle_info_t& h = it->second;
+		handle_info& h = it->second;
 
 		fs << base::format("handle: 0x%08X", h.handle) << std::endl;
 		fs << base::format("  引用: %d", h.reference) << std::endl;
@@ -305,10 +353,10 @@ void create_report(std::fstream& fs)
 
 			fs << base::format("  创建位置: %s, %d", jass::from_stringid(op->arg), current_op - op) << std::endl;
 		}
-		if (!h.gv_reference.empty())
+		if (!h.global_reference.empty())
 		{
 			fs << base::format("  引用它的全局变量:") << std::endl;
-			for (auto gv = h.gv_reference.begin(); gv != h.gv_reference.end(); ++gv)
+			for (auto gv = h.global_reference.begin(); gv != h.global_reference.end(); ++gv)
 			{
 				fs << base::format("    | %s", gv->c_str()) << std::endl;
 			}

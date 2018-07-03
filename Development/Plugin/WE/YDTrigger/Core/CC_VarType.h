@@ -75,6 +75,7 @@ enum VARTYPE_User_Defined
   CC_TYPE_fogmodifier,
   CC_TYPE_radian,
   CC_TYPE_degree,
+  CC_TYPE_mover,
   CC_TYPE__end,
 };
 

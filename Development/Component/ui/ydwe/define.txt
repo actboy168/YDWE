@@ -94,6 +94,7 @@ trigger=0,1,1,WESTRING_TRIGTYPE_trigger
 dialog=0,1,0,WESTRING_TRIGTYPE_dialog
 button=0,1,0,WESTRING_TRIGTYPE_button
 timer=0,1,0,WESTRING_TRIGTYPE_timer
+mover=0,1,0,运动器
 timerdialog=0,1,0,WESTRING_TRIGTYPE_timerdialog
 texttag=1,1,0,WESTRING_TRIGTYPE_texttag
 leaderboard=0,1,0,WESTRING_TRIGTYPE_leaderboard
