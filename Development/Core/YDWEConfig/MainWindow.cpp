@@ -360,17 +360,6 @@ void CMainWindow::DoneRegistryUI()
 
 void CMainWindow::InitOSHelpUI()
 {
-	//if (m_pShortcuts_taskbar) {
-	//	if (base::win::get_version() >= base::win::VERSION_WIN7)
-	//	{
-	//		m_pShortcuts_taskbar->SetText(L"固定到任务栏");
-	//	}
-	//	else
-	//	{
-	//		m_pShortcuts_taskbar->SetText(L"添加到快速启动栏");
-	//	}
-	//}
-
 	if (m_pFileAssociation_w3x && m_pFileAssociation_w3m) {
 		if (!fs::exists(m_ydwe_path))
 		{
