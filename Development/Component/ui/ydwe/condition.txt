@@ -1,15 +1,17 @@
 [OperatorCompareBoolean]
 title = "Boolean Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = boolean
-default = IsUnitType
+default = "IsUnitType"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = boolean
+default = "true"
 
 ["             "]
 title = "Custom Script"
@@ -22,54 +24,59 @@ type = scriptcode
 [OperatorCompareTrigger]
 title = "Trigger Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = trigger
-default = _
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = trigger
 
 [OperatorCompareUnit]
 title = "Unit Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = unit
-default = GetTriggerUnit
+default = "GetTriggerUnit"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = unit
 
 [OperatorCompareUnitCode]
 title = "Unit-Type Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = unitcode
-default = GetUnitTypeId
+default = "GetUnitTypeId"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = unitcode
+default = "hfoo"
 
 [OperatorCompareTerrainType]
 title = "Terrain Type Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = terraintype
-default = GetTerrainTypeBJ
+default = "GetTerrainTypeBJ"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = terraintype
+default = "TerrainTypeLdrt"
 
 [OperatorComparePoint]
 title = "点 [R]"
@@ -101,41 +108,45 @@ type = dialog
 [OperatorCompareButton]
 title = "Dialog Button Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = button
-default = GetClickedButtonBJ
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = button
 
 [OperatorCompareMeleeDifficulty]
 title = "Melee AI Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = aidifficulty
-default = GetAIDifficulty
+default = "GetAIDifficulty"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = aidifficulty
+default = "AIDifficultyNormal"
 
 [OperatorCompareAbilityId]
 title = "Ability Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = abilcode
-default = GetSpellAbilityId
+default = "GetSpellAbilityId"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = abilcode
+default = "AUan"
 
 [OperatorCompareTimer]
 title = "Timer [R]"
@@ -154,41 +165,44 @@ type = timer
 [OperatorCompareTechCode]
 title = "Tech-Type Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = techcode
-default = GetResearched
+default = "GetResearched"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = techcode
 
 [OperatorCompareDestructible]
 title = "Destructible Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = destructable
-default = _
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = destructable
 
 [OperatorCompareDestructableCode]
 title = "Destructible-Type Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = destructablecode
-default = GetDestructableTypeId
+default = "GetDestructableTypeId"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = destructablecode
+default = "LTlt"
 
 [OperatorCompareTrackable]
 title = "traceable [R]"
@@ -208,26 +222,28 @@ default = "GetTriggeringTrackable"
 [OperatorCompareOrderCode]
 title = "Order Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = ordercode
-default = GetIssuedOrderIdBJ
+default = "GetIssuedOrderIdBJ"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = ordercode
+default = "String2OrderIdBJ"
 
 [OperatorCompareBuffId]
 title = "Buff Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = buffcode
-default = _
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = buffcode
 
@@ -260,15 +276,17 @@ type = region
 [OperatorCompareReal]
 title = "Real Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = real
-default = GetUnitStateSwap
+default = "10"
 [[.args]]
 type = ComparisonOperator
+default = "OperatorGreaterEq"
 [[.args]]
 type = real
+default = "10"
 
 [OperatorCompareDegree]
 title = "Degree"
@@ -303,192 +321,212 @@ default = "10"
 [OperatorComparePlayer]
 title = "Player Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = player
-default = GetOwningPlayer
+default = "GetOwningPlayer"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = player
+default = "Player00"
 
 [OperatorComparePlayerColor]
 title = "Player Color Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = playercolor
-default = GetPlayerColor
+default = "GetPlayerColor"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = playercolor
+default = "Color00"
 
 [OperatorComparePlayerControl]
 title = "Player Controller Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = mapcontrol
-default = GetPlayerController
+default = "GetPlayerController"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = mapcontrol
+default = "MapControlUser"
 
 [OperatorComparePlayerSlotStatus]
 title = "Player Slot Status Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = playerslotstate
-default = GetPlayerSlotState
+default = "GetPlayerSlotState"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = playerslotstate
+default = "PlayerSlotStatePlaying"
 
 [OperatorCompareItem]
 title = "Item Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = item
-default = _
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = item
 
 [OperatorCompareItemType]
 title = "Item-Class Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = itemtype
-default = GetItemType
+default = "GetItemType"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = itemtype
+default = "ItemTypePowerup"
 
 [OperatorCompareItemCode]
 title = "Item-Type Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = itemcode
-default = GetItemTypeId
+default = "GetItemTypeId"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = itemcode
+default = "texp"
 
 [OperatorCompareHeroSkill]
 title = "Hero Skill Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = heroskillcode
-default = GetLearnedSkillBJ
+default = "GetLearnedSkillBJ"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = heroskillcode
+default = "HeroSkillBlizzard"
 
 [OperatorCompareGameDifficulty]
 title = "Game Difficulty Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = gamedifficulty
-default = GetGameDifficulty
+default = "GetGameDifficulty"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = gamedifficulty
+default = "GameDifficultyNormal"
 
 [OperatorCompareGameSpeed]
 title = "Game Speed Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = gamespeed
-default = GetGameSpeed
+default = "GetGameSpeed"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = gamespeed
+default = "GameSpeedNormal"
 
 [OperatorCompareInteger]
 title = "Integer Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = integer
-default = CountUnitsInGroup
+default = "0"
 [[.args]]
 type = ComparisonOperator
+default = "OperatorEqual"
 [[.args]]
 type = integer
+default = "0"
 
 [OperatorCompareRace]
 title = "Race Comparison"
 description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = race
-default = GetPlayerRace
+default = "GetPlayerRace"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = race
+default = "RaceHuman"
 
 [OperatorCompareString]
 title = "String Comparison"
 description = "${Value} ${Operator} ${Value}"
 comment = "For two strings to be equal, they must be of equal length and content."
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = string
-default = GetEventPlayerChatString
+default = "GetEventPlayerChatString"
 [[.args]]
 type = EqualNotEqualOperator
+default = "OperatorEqualENE"
 [[.args]]
 type = string
 
 [GetBooleanAnd]
 title = "And"
 description = "${Condition 1} and ${Condition 2}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = boolcall
-default = _
 [[.args]]
 type = boolcall
 
 [GetBooleanOr]
 title = "Or"
 description = "${Condition 1} or ${Condition 2}"
+comment =""
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = boolcall
-default = _
 [[.args]]
 type = boolcall
 
@@ -497,7 +535,6 @@ title = "And"
 description = "And - All (Conditions) are true"
 comment = "Add conditions to this function in the main display."
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = nothing
 
@@ -506,7 +543,5 @@ title = "Or"
 description = "Or - Any (Conditions) are true"
 comment = "Add conditions to this function in the main display."
 category = TC_CONDITION
-use_in_event = 0
 [[.args]]
 type = nothing
-
