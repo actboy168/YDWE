@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 
 namespace base { namespace warcraft3 { namespace detail {
 

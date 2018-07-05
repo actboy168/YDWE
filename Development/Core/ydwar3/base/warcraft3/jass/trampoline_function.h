@@ -1,13 +1,13 @@
 #pragma once
 
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 #include <base/util/horrible_cast.h>
 #include <base/warcraft3/jass/opcode.h>
 #include <cstdint>
 
 namespace base { namespace warcraft3 { namespace jass {
 
-	_BASE_API uintptr_t trampoline_create(uintptr_t callback_, uintptr_t param1_, uintptr_t param2_);
+	_WAR3_API uintptr_t trampoline_create(uintptr_t callback_, uintptr_t param1_, uintptr_t param2_);
 
 	inline size_t trampoline_size()
 	{

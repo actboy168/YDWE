@@ -139,7 +139,6 @@
     <ClInclude Include="base\warcraft3\directory.h">
       <Filter>base\warcraft3</Filter>
     </ClInclude>
-    <ClInclude Include="base\config.h" />
     <ClInclude Include="base\warcraft3\command_line.h">
       <Filter>base\warcraft3</Filter>
     </ClInclude>
@@ -169,6 +168,9 @@
     </ClInclude>
     <ClInclude Include="base\warcraft3\udis86\udis86_udint.h">
       <Filter>base\warcraft3\udis86</Filter>
+    </ClInclude>
+    <ClInclude Include="base\warcraft3\config.h">
+      <Filter>base\warcraft3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

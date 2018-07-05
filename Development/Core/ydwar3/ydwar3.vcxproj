@@ -63,7 +63,7 @@
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <PreprocessorDefinitions>YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>YDWE_WAR3_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <BaseAddress>
@@ -93,7 +93,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
-      <PreprocessorDefinitions>YDWE_BASE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>YDWE_WAR3_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link />
     <Bscmake>
@@ -140,8 +140,8 @@
     <ClCompile Include="base\warcraft3\directory.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="base\config.h" />
     <ClInclude Include="base\warcraft3\command_line.h" />
+    <ClInclude Include="base\warcraft3\config.h" />
     <ClInclude Include="base\warcraft3\detail\memory_search.h" />
     <ClInclude Include="base\warcraft3\detail\string_hash.h" />
     <ClInclude Include="base\warcraft3\event.h" />

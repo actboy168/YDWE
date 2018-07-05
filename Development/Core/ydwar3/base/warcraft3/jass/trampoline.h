@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 #include <base/warcraft3/jass/opcode.h>
 
 namespace base { 
