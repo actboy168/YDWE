@@ -13,11 +13,15 @@
 #include <base/util/unicode.h>
 #include <base/win/file_version.h>
 #include <base/win/process.h>
-#include <base/warcraft3/directory.h>
-#include <base/warcraft3/command_line.h>
 #include <base/util/format.h>	 
 #include <base/util/ini.h>
 #include "Splash.h"
+
+#define YDWE_WAR3_INLINE
+#include <base/warcraft3/directory.h>
+#include <base/warcraft3/directory.cpp>
+#include <base/warcraft3/command_line.h>
+#include <base/warcraft3/command_line.cpp>
 
 #define _(str)  base::i18n::v2::get_text(str).data()
 #define __(str) base::u2w(base::i18n::v2::get_text(str)).c_str()

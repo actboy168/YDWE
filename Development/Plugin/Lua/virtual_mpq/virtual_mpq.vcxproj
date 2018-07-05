@@ -97,9 +97,6 @@
     <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Core\ydwar3\ydwar3.vcxproj">
-      <Project>{a0e0fbbf-af94-4132-be63-ab101e3af949}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

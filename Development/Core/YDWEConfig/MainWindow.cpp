@@ -1,7 +1,6 @@
 ﻿#include "MainWindow.h"
 #include "Regedit.h"
 #include "Shortcuts.h"
-#include <base/warcraft3/directory.h>
 #include <base/file/stream.h>
 #include <base/path/self.h>
 #include <base/path/ydwe.h>
@@ -13,6 +12,10 @@
 #include <base/util/list_of.h>
 #include <base/util/ini.h>
 #include <base/i18n-2/gettext.h>
+
+#define YDWE_WAR3_INLINE
+#include <base/warcraft3/directory.h>
+#include <base/warcraft3/directory.cpp>
 
 std::wstring CComboUI_GetSelectText(DuiLib::CComboUI* pui)
 {
