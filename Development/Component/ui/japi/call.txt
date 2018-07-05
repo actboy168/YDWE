@@ -52,7 +52,7 @@ default = "AttackTypeNormal"
 [YDWEGetObjectPropertyInteger]
 title = "YDWE Object Attribute (Integer) [JAPI]"
 description = "Get value of [${type}] of ${object} with ${attributeName}"
-comment = ""Attribute name can be found in the item editor after fress Ctrl + D, it include data like Abilities，Buffs/Effects ，Units，Items，Upgrades，Doodads，Destructibles. ""
+comment = "Attribute name can be found in the item editor after fress Ctrl + D, it include data like Abilities，Buffs/Effects ，Units，Items，Upgrades，Doodads，Destructibles. "
 category = TC_UNIT
 use_in_event = 0
 returns = integer
@@ -69,7 +69,7 @@ default = "\"levels\""
 [YDWEGetObjectPropertyReal]
 title = "YDWE Object Attribute (Real) [JAPI]"
 description = "Get value of [${type}] of ${object} with ${attributeName}"
-comment = ""Attribute name can be found in the item editor after fress Ctrl + D, it include data like Abilities，Buffs/Effects ，Units，Items，Upgrades，Doodads，Destructibles. ""
+comment = "Attribute name can be found in the item editor after fress Ctrl + D, it include data like Abilities，Buffs/Effects ，Units，Items，Upgrades，Doodads，Destructibles. "
 category = TC_UNIT
 use_in_event = 0
 returns = real
@@ -86,7 +86,7 @@ default = "\"Rng1\""
 [YDWEGetObjectPropertyString]
 title = "YDWE Object Attribute (String) [JAPI]"
 description = "Get value of [${type}] of ${object} with ${attributeName}"
-comment = ""Attribute name can be found in the item editor after fress Ctrl + D, it include data like Abilities，Buffs/Effects ，Units，Items，Upgrades，Doodads，Destructibles. ""
+comment = "Attribute name can be found in the item editor after fress Ctrl + D, it include data like Abilities，Buffs/Effects ，Units，Items，Upgrades，Doodads，Destructibles. "
 category = TC_UNIT
 use_in_event = 0
 returns = string

@@ -493,7 +493,7 @@ default = _
 type = boolcall
 
 [AndMultiple]
-title = "And
+title = "And"
 description = "And - All (Conditions) are true"
 comment = "Add conditions to this function in the main display."
 category = TC_CONDITION
@@ -502,7 +502,7 @@ use_in_event = 0
 type = nothing
 
 [OrMultiple]
-title = "Or
+title = "Or"
 description = "Or - Any (Conditions) are true"
 comment = "Add conditions to this function in the main display."
 category = TC_CONDITION

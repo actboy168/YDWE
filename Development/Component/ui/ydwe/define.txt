@@ -2601,6 +2601,7 @@ Trigger01Name=WESTRING_MELEEINITIALIZATION
 Trigger01Comment=WESTRING_MELEEINITIALIZATION_COMMENT
 Trigger01Category=1
 Trigger01Events=1
+Trigger01Event01=MapInitializationEvent
 Trigger01Conditions=0
 Trigger01Actions=8
 Trigger01Action01=MeleeStartingVisibility
@@ -2608,6 +2609,9 @@ Trigger01Action02=MeleeStartingHeroLimit
 Trigger01Action03=MeleeGrantHeroItems
 Trigger01Action04=MeleeStartingResources
 Trigger01Action05=MeleeClearExcessUnits
+Trigger01Action06=MeleeStartingUnits
+Trigger01Action07=MeleeStartingAI
+Trigger01Action08=MeleeInitVictoryDefeat
 
 [AIFunctionStrings]
 TownThreatened="Town Is Under Attack"
