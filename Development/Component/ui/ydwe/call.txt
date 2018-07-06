@@ -1732,9 +1732,9 @@ type = integer
 default = "5"
 
 [SubString]
-title = "截取字符串 [R]"
-description = "截取 ${字符串} 的 ${Start} - ${End} 字节部分(不包括首字节)"
-comment = "例: 截取''Grunts stink''的2 - 4字节部分 = ''un''."
+title = "Substring [R]"
+description = "Substring (${String} , ${Start} , ${End})"
+comment = "Example:  Substring(''Grunts stink'', 2, 4) = ''run''."
 category = TC_NOTHING
 returns = string
 [[.args]]
@@ -1806,7 +1806,7 @@ returns = rect
 
 [YDWEGetRect]
 title = "New Rect(Center Location)[YDWE]"
-description = "Create a Rect at (${x},${y}) with height ${Real}，width ${Real}"
+description = "Create a Rect at (${x},${y}) with height ${Real}, width ${Real}"
 comment = "Create a Rect"
 category = TC_NOTHING
 returns = rect
@@ -2263,7 +2263,7 @@ default = "texp"
 
 [CreateItemPool]
 title = "Create Item Pool [R]"
-description = "Create 的空Item Pool"
+description = "Create a empty Item Pool"
 comment = "Create a Item Pool."
 category = TC_NOTHING
 use_in_event = 0
@@ -2409,8 +2409,8 @@ returns = player
 type = scriptcode
 
 [CreateGroup]
-title = "Create 的Unit Group [R]"
-description = "Create 的空Unit Group"
+title = "Create Unit Group [R]"
+description = "Create a empty Unit Group"
 comment = "Create a Unit Group."
 category = TC_NOTHING
 returns = group
@@ -2671,7 +2671,7 @@ default = "ConverUnitNot"
 
 [CreateFogModifierRadius]
 title = "Create Fog Modifier (Radius) [R]"
-description = "Create 的 ${Player} Fog Modifier. Visible: ${FogStateVisible}, Center of Region:(${X},${Y}), Radius: ${value} (For allies ${share} view, ${overwrite} unit view)"
+description = "Create Fog Modifier for ${Player} . Visible: ${FogStateVisible}, Center of Region:(${X},${Y}), Radius: ${value} (For allies ${share} view, ${overwrite} unit view)"
 comment = "Create a Fog Modifier ."
 category = TC_NOTHING
 returns = fogmodifier
@@ -2760,7 +2760,7 @@ default = "Player00"
 
 [AddSpecialEffect]
 title = "Create Effect(At Coordinate) [R]"
-description = "Create Effect ${Model File} 在(${X},${Y})处"
+description = "Create Effect ${Model File} at (${X},${Y})"
 comment = "Create a Effect."
 category = TC_NOTHING
 returns = effect
@@ -2803,7 +2803,7 @@ type = string
 default = "\"overhead\""
 
 [AddSpellEffectById]
-title = "Create Effect(Ability，At Coordinate) [R]"
+title = "Create Effect(Ability, At Coordinate) [R]"
 description = "${Ability} with ${EffectType} , create at Coordinate(${X},${Y})"
 comment = "Create a Effect."
 category = TC_NOTHING
@@ -3100,7 +3100,7 @@ default = "HotKeyNull"
 
 [CreateLeaderboard]
 title = "Create Leaderboard [R]"
-description = "Create 的空Leaderboard"
+description = "Create a empty Leaderboard"
 comment = "Create a Leaderboard."
 category = TC_NOTHING
 returns = leaderboard
@@ -3118,7 +3118,7 @@ default = "Player00"
 
 [CreateMultiboard]
 title = "Create Multi Board [R]"
-description = "Create 的空Multi Board"
+description = "Create a empty Multi Board"
 comment = "Create a Multi Board."
 category = TC_NOTHING
 use_in_event = 0
@@ -3142,14 +3142,14 @@ type = integer
 default = "0"
 
 [YDWECreateMover]
-title = "新建运动器"
-description = "新建运动器"
+title = "YDWE Create Mover"
+description = "Create a mover"
 category = TC_NOTHING
 returns = mover
 
 [CreateTimer]
 title = "Create Timer [R]"
-description = "Create 的Timer"
+description = "Create a Timer"
 comment = "Create a Timer."
 category = TC_NOTHING
 returns = timer
@@ -3232,7 +3232,7 @@ type = abilcode
 
 [IssueImmediateOrder]
 title = "Issue Order With No Target"
-description = "Order ${Unit}  to ${Order}"
+description = "Order ${Unit} to ${Order}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -3309,8 +3309,8 @@ default = "UnitOrderHarvestDestructible"
 type = destructable
 
 [IssueTargetItemOrder]
-title = "发布命令(指定Item)"
-description = "对 ${Unit} 发布 ${Order} 命令到目标: ${Item}"
+title = "Issue Order Targeting An Item"
+description = "Order ${Unit} to ${Order} ${Item}"
 comment = ""
 script_name = IssueTargetOrder
 category = TC_UNIT
@@ -3325,8 +3325,8 @@ default = "UnitOrderSmartItem"
 type = item
 
 [IssueImmediateOrderById]
-title = "发布命令(无目标)(ID)"
-description = "对 ${Unit} 发布 ${Order} 命令"
+title = "Issue Order With No Target(ID)"
+description = "Order ${Unit} with Order ID ${Order}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -3338,8 +3338,8 @@ type = ordercodenotarg
 default = "OrderCodeStop"
 
 [IssuePointOrderById]
-title = "发布命令(指定坐标)(ID)"
-description = "对 ${Unit} 发布 ${Order} 命令到坐标:(${X},${Y})"
+title = "Issue Order Targeting A Point (Coordinate)(ID)"
+description = "Order ${Unit} with Order ID ${Order} (${X},${Y})"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -3357,8 +3357,8 @@ type = real
 default = "0"
 
 [IssuePointOrderByIdLoc]
-title = "发布命令(指定点)(ID)"
-description = "对 ${Unit} 发布 ${Order} 命令到目标点: ${Location}"
+title = "Issue Order Targeting A Point (Location)(ID)"
+description = "Order ${Unit} with Order ID ${Order} ${Location}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -3372,8 +3372,8 @@ default = "OrderCodeMove"
 type = location
 
 [IssueTargetOrderById]
-title = "发布命令(指定单位)(ID)"
-description = "对 ${Unit} 发布 ${Order} 命令到目标: ${Unit}"
+title = "Issue Order Targeting A Unit(ID)"
+description = "Order ${Unit} with Order ID ${Order} ${Unit}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -3387,8 +3387,8 @@ default = "OrderCodeAttackUnit"
 type = unit
 
 [IssueTargetDestructableOrderById]
-title = "发布命令(指定Destructable)(ID)"
-description = "对 ${Unit} 发布 ${Order} 命令到目标: ${Destructable}"
+title = "Issue Order Targeting A Destructible(ID)"
+description = "Order ${Unit} with Order ID ${Order} ${Destructable}"
 comment = ""
 script_name = IssueTargetOrderById
 category = TC_UNIT
@@ -3403,8 +3403,8 @@ default = "OrderCodeHarvestDestructible"
 type = destructable
 
 [IssueTargetItemOrderById]
-title = "发布命令(指定Item)(ID)"
-description = "对 ${Unit} 发布 ${Order} 命令到目标: ${Item}"
+title = "Issue Order Targeting An Item(ID)"
+description = "Order ${Unit} with Order ID ${Order} ${Item}"
 comment = ""
 script_name = IssueTargetOrderById
 category = TC_UNIT
@@ -3419,9 +3419,9 @@ default = "OrderCodeSmartItem"
 type = item
 
 [IssueNeutralImmediateOrder]
-title = "发布中介命令(无目标)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令"
-comment = "可以用来对非本Player单位发布命令."
+title = "Issue Neutral Order Targeting With No Target"
+description = "${Player} order ${Unit} with Order ID ${Order}"
+comment = "Can be used to issue orders to other player's units."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -3435,9 +3435,9 @@ type = unitordernotarg
 default = "UnitOrderStop"
 
 [IssueNeutralPointOrder]
-title = "发布中介命令(指定坐标)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到坐标:(${X},${Y})"
-comment = "可以用来对非本Player单位发布命令."
+title = "Issue Neutral Order Targeting A Point (Coordinate)"
+description = "${Player} order ${Unit} to ${Order} (${X},${Y})"
+comment = "Can be used to issue orders to other player's units."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -3457,9 +3457,9 @@ type = real
 default = "0"
 
 [IssueNeutralTargetOrder]
-title = "发布中介命令(指定单位)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到目标: ${Unit}"
-comment = "可以用来对非本Player单位发布命令."
+title = "Issue Neutral Order Targeting A Unit"
+description = "${Player} order ${Unit} to ${Order} ${Unit}"
+comment = "Can be used to issue orders to other player's units."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -3475,9 +3475,9 @@ default = "UnitOrderNeutralInterAct"
 type = unit
 
 [IssueNeutralTargetDestructableOrder]
-title = "发布中介命令(指定Destructable)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到目标: ${Destructable}"
-comment = "可以用来对非本Player单位发布命令."
+title = "Issue Neutral Order Targeting A Destructible"
+description = "${Player} order ${Unit} to ${Order} ${Destructable}"
+comment = "Can be used to issue orders to other player's units."
 script_name = IssueNeutralTargetOrder
 category = TC_UNIT
 returns = boolean
@@ -3494,9 +3494,9 @@ default = "UnitOrderHarvestDestructible"
 type = destructable
 
 [IssueNeutralTargetItemOrder]
-title = "发布中介命令(指定Item)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到目标: ${Item}"
-comment = "可以用来对非本Player单位发布命令."
+title = "Issue Neutral Order Targeting An Item"
+description = "${Player} order ${Unit} to ${Order} ${Item}"
+comment = "Can be used to issue orders to other player's units."
 script_name = IssueNeutralTargetOrder
 category = TC_UNIT
 returns = boolean
@@ -3513,9 +3513,9 @@ default = "UnitOrderSmartItem"
 type = item
 
 [IssueNeutralImmediateOrderById]
-title = "发布中介命令(无目标)(ID)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令"
-comment = "可以用来对非本Player单位发布命令."
+title = "Issue Neutral Order Targeting  With No Target (ID)"
+description = "${Player} order ${Unit} with Order ID ${Order}"
+comment = "Can be used to issue orders to other player's units."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -3529,9 +3529,9 @@ type = ordercodenotarg
 default = "OrderCodeStop"
 
 [IssueNeutralPointOrderById]
-title = "发布中介命令(指定坐标)(ID)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到坐标:(${X},${Y})"
-comment = "可以用来对非本Player单位发布命令."
+title = "Issue Neutral Order Targeting A Point (Coordinate)(ID)"
+description = "${Player} order ${Unit} with Order ID ${Order} (${X},${Y})"
+comment = "Can be used to issue orders to other player's units."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -3551,9 +3551,9 @@ type = real
 default = "0"
 
 [IssueNeutralTargetOrderById]
-title = "发布中介命令(指定单位)(ID)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到目标: ${Unit}"
-comment = "可以用来对非本Player单位发布命令."
+title = "Issue Neutral Order Targeting A Unit(ID)"
+description = "${Player} order ${Unit} with Order ID ${Order} ${Unit}"
+comment = "Can be used to issue orders to other player's units."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -3569,9 +3569,9 @@ default = "OrderCodeNeutralInterAct"
 type = unit
 
 [IssueNeutralTargetDestructableOrderById]
-title = "发布中介命令(指定Destructable)(ID)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到目标: ${Destructable}"
-comment = "可以用来对非本Player单位发布命令."
+title = "Issue Neutral Order Targeting A Destructible(ID)"
+description = "${Player} order ${Unit} with Order ID ${Order} ${Destructable}"
+comment = "Can be used to issue orders to other player's units."
 script_name = IssueNeutralTargetOrderById
 category = TC_UNIT
 returns = boolean
@@ -3588,9 +3588,9 @@ default = "OrderCodeHarvestDestructible"
 type = destructable
 
 [IssueNeutralTargetItemOrderById]
-title = "发布中介命令(指定Item)(ID)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到目标: ${Item}"
-comment = "可以用来对非本Player单位发布命令."
+title = "Issue Neutral Order Targeting An Item(ID)"
+description = "${Player} order ${Unit} with Order ID ${Order} ${Item}"
+comment = "Can be used to issue orders to other player's units."
 script_name = IssueNeutralTargetOrderById
 category = TC_UNIT
 returns = boolean
@@ -3607,9 +3607,9 @@ default = "OrderCodeSmartItem"
 type = item
 
 [YDWEIssueNeutralImmediateOrderById]
-title = "发布中介命令(无目标)(自定义ID)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令"
-comment = "可以用来对非本Player单位发布命令，能直接输入数字命令ID。"
+title = "YDWE Issue Neutral Order Targeting With No Target"
+description = "${Player} order ${Unit} ${Order}"
+comment = "Can be used to issue orders to other player's units. Use integer order id directly."
 script_name = IssueNeutralImmediateOrderById
 category = TC_UNIT
 returns = boolean
@@ -3624,9 +3624,9 @@ type = ordercode
 default = YDWEAbilityId2OrderId
 
 [YDWEIssueNeutralPointOrderById]
-title = "发布中介命令(指定坐标)(自定义ID)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到坐标:(${X},${Y})"
-comment = "可以用来对非本Player单位发布命令，能直接输入数字命令ID。"
+title = "YDWE Issue Neutral Order Targeting A Point (Coordinate)(ID)"
+description = "${Player} order ${Unit} with Order ID ${Order} (${X},${Y})"
+comment = "Can be used to issue orders to other player's units. Use integer order id directly."
 script_name = IssueNeutralPointOrderById
 category = TC_UNIT
 returns = boolean
@@ -3647,9 +3647,9 @@ type = real
 default = "0"
 
 [YDWEIssueNeutralTargetOrderById]
-title = "发布中介命令(指定单位)(自定义ID)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到目标: ${Unit}"
-comment = "可以用来对非本Player单位发布命令，能直接输入数字命令ID。"
+title = "YDWE Issue Neutral Order Targeting A Unit(ID)"
+description = "${Player} order ${Unit} with Order ID ${Order} ${Unit}"
+comment = "Can be used to issue orders to other player's units. Use integer order id directly."
 script_name = IssueNeutralTargetOrderById
 category = TC_UNIT
 returns = boolean
@@ -3666,9 +3666,9 @@ default = YDWEAbilityId2OrderId
 type = unit
 
 [YDWEIssueNeutralTargetDestructableOrderById]
-title = "发布中介命令(指定Destructable)(自定义ID)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到目标: ${Destructable}"
-comment = "可以用来对非本Player单位发布命令，能直接输入数字命令ID。"
+title = "YDWE Issue Neutral Order Targeting A Destructible(ID)"
+description = "${Player} order ${Unit} with Order ID ${Order} ${Destructable}"
+comment = "Can be used to issue orders to other player's units. Use integer order id directly."
 script_name = IssueNeutralTargetOrderById
 category = TC_UNIT
 returns = boolean
@@ -3685,9 +3685,9 @@ default = YDWEAbilityId2OrderId
 type = destructable
 
 [YDWEIssueNeutralTargetItemOrderById]
-title = "发布中介命令(指定Item)(自定义ID)"
-description = "使 ${Player} 对 ${Unit} 发布 ${Order} 命令到目标: ${Item}"
-comment = "可以用来对非本Player单位发布命令，能直接输入数字命令ID。"
+title = "YDWE Issue Neutral Order Targeting An Item(ID)"
+description = "${Player} order ${Unit} with Order ID ${Order} ${Item}"
+comment = "Can be used to issue orders to other player's units. Use integer order id directly."
 script_name = IssueNeutralTargetOrderById
 category = TC_UNIT
 returns = boolean
@@ -3704,9 +3704,9 @@ default = YDWEAbilityId2OrderId
 type = item
 
 [IssueTrainOrderByIdBJ]
-title = "发布训练/升级命令"
-description = "命令 ${Unit} 建造/升级为 ${单位类型}"
-comment = "该升级是指A单位升级为B单位,而不是科技升级."
+title = "Issue Train/Upgrade Order"
+description = "Order ${Unit}  to train/upgrade to a ${Unit-Type}"
+comment = "This action can be used to order a unit to upgrade itself.  A Town Hall, for example, can be upgraded by ordering it to train a Keep."
 script_name = IssueImmediateOrderById
 category = TC_UNIT
 returns = boolean
@@ -3718,8 +3718,8 @@ type = unitcode
 default = "hfoo"
 
 [IssueUpgradeOrderByIdBJ]
-title = "发布研究科技命令"
-description = "命令 ${Unit} 研究 ${Tech-Type}"
+title = "Issue Research Order"
+description = "Order ${Unit} to research ${Tech-Type}"
 comment = ""
 script_name = IssueImmediateOrderById
 category = TC_UNIT
@@ -3732,8 +3732,8 @@ type = techcode
 default = "Rhde"
 
 [IssueBuildOrderById]
-title = "发布建造命令(指定坐标) [R]"
-description = "命令 ${Unit} 建造 ${单位类型} 在坐标:(${X},${Y})"
+title = "Issue Build Order (Coordinate)[R]"
+description = "Order ${Unit} to build a ${Unit-Type}  at:(${X},${Y})"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -3751,8 +3751,8 @@ type = real
 default = "0"
 
 [IssueBuildOrderByIdLocBJ]
-title = "发布建造命令(指定点)"
-description = "命令 ${Unit} 建造 ${单位类型} 在 ${Location}"
+title = "Issue Build Order(Location)"
+description = "Order ${Unit} to build a ${Unit-Type} at ${Location}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -3766,8 +3766,8 @@ default = "hbar"
 type = location
 
 [UnitDropItemPoint]
-title = "发布丢弃Item命令(指定坐标) [R]"
-description = "命令 ${Unit} 丢弃Item ${Item} 到坐标:(${X},${Y})"
+title = "Issue Drop Item Order (Coordinate) [R]"
+description = "Order ${Unit} to drop ${Item} at (${X},${Y})"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -3785,8 +3785,8 @@ type = real
 default = "0"
 
 [UnitDropItemPointLoc]
-title = "发布丢弃Item命令(指定点)"
-description = "命令 ${Unit} 丢弃Item ${Item} 到 ${Location}"
+title = "Issue Drop Item Order"
+description = "Order ${Unit} to drop ${Item} at ${Location}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -3800,9 +3800,9 @@ default = "GetLastCreatedItem"
 type = location
 
 [UnitDropItemSlot]
-title = "移动Item到Item栏 [R]"
-description = "命令 ${Unit} 移动 ${Item} 到Item栏# ${Index}"
-comment = "只有当单位持有该Item时才有效. 注意: 该函数中Item栏编号从0-5,而不是1-6."
+title = "Issue Move Item In Inventory Order [R]"
+description = "${Unit} to move ${Item} to inventory slot ${Index}"
+comment = "This only works if the unit is already carrying the item.  If an item exists in the slot, the items will be swapped. Notice: Item Slot Index in this function form 0 to 5, not 1 to 6."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -3818,9 +3818,9 @@ min = 0
 max = 5
 
 [UnitDropItemSlotBJ]
-title = "移动Item到Item栏"
-description = "命令 ${Unit} 移动 ${Item} 到Item栏第 ${Index} 格"
-comment = "只有当单位持有该Item时才有效."
+title = "Issue Move Item In Inventory Order"
+description = "${Unit} to move ${Item} to inventory slot ${Index}"
+comment = "This only works if the unit is already carrying the item."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -3836,8 +3836,8 @@ min = 1
 max = 6
 
 [UnitDropItemTargetBJ]
-title = "发布给予Item命令"
-description = "命令 ${Unit} 把 ${Item} 给 ${Unit}"
+title = "Issue Give Item Order"
+description = "Order ${Unit} to give ${Item} to ${Unit}"
 comment = ""
 script_name = UnitDropItemTarget
 category = TC_UNIT
@@ -3852,8 +3852,8 @@ default = "GetLastCreatedItem"
 type = unit
 
 [IssueBuyUnitOrder]
-title = "发布购买单位命令 [R]"
-description = "使 ${Player} 从 ${Unit} 处购买 ${单位类型}"
+title = "Issue Buy Unit [R]"
+description = "${Player} buy from ${Unit}, bought unit type is ${Unit-Type}"
 comment = ""
 script_name = IssueNeutralImmediateOrderById
 category = TC_UNIT
@@ -3869,9 +3869,9 @@ type = unitcode
 default = "hfoo"
 
 [IssueBuyItemOrder]
-title = "发布购买Item命令 [R]"
-description = "使 ${Player} 从 ${Unit} 处购买 ${Item Type}"
-comment = "先让商店对Player单位发布'中立商店 - 选择'命令,再使用该函数就能实现指定单位的购买Item了."
+title = "Issue Buy Item [R]"
+description = "${Player} buy from  ${Unit} bought item type is ${Item Type}"
+comment = "First, the store will release the 'Neutral Shop - Select' command to the players' units, and then use the function to achieve the purchase of the designated units."
 script_name = IssueNeutralImmediateOrderById
 category = TC_UNIT
 returns = boolean
@@ -3886,9 +3886,9 @@ type = itemcode
 default = "ckng"
 
 [UnitDamagePoint]
-title = "伤害区域 [R]"
-description = "命令 ${Unit} 在 ${Seconds} 秒后对半径为 ${Size} 圆心为(${X},${Y})的范围造成 ${Amount} 点伤害(${是} 攻击伤害, ${是}远程攻击) 攻击类型: ${AttackType} 伤害类型: ${DamageType} 装甲类型: ${WeaponType}"
-comment = "该动作不会打断单位动作. 由该动作伤害/杀死单位同样正常触发'受到伤害'和'死亡'单位Event."
+title = "Damage Area [R]"
+description = "Cause ${Unit} to damage circular area after ${Seconds} seconds of radius ${Size} at (${X},${Y}), dealing ${Amount} damage of (${yes/no} attack damage, ${yes/no} range damage) attack type ${AttackType}, damage type ${DamageType} and  weaponType ${WeaponType}"
+comment = "This does not interrupt the unit's orders.  The source unit gets credit for kills resulting from this damage."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -3926,9 +3926,9 @@ type = weapontype
 default = "WEAPON_TYPE_WHOKNOWS"
 
 [UnitDamagePointLoc]
-title = "伤害区域"
-description = "命令 ${Unit} 在 ${Seconds} 秒后对半径为 ${Size} 圆心为 ${Location} 的范围造成${Amount} 点伤害,攻击类型: ${AttackType} 伤害类型: ${DamageType}"
-comment = "该动作不会打断单位动作. 由该动作伤害/杀死单位同样正常触发'受到伤害'和'死亡'单位Event."
+title = "Damage Area"
+description = "Cause ${Unit} to damage circular area after ${Seconds} seconds of radius ${Size} at ${Location}, dealing ${Amount} damage of attack type ${AttackType} and damage type ${DamageType}"
+comment = "This does not interrupt the unit's orders.  The source unit gets credit for kills resulting from this damage."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -3954,9 +3954,9 @@ type = damagetype
 default = "DamageTypeNormal"
 
 [UnitDamageTarget]
-title = "伤害目标 [R]"
-description = "命令 ${Unit} 对 ${Target} 造成 ${Amount} 点伤害(${是} 攻击伤害, ${是}远程攻击) 攻击类型: ${AttackType} 伤害类型: ${DamageType} 武器类型: ${WeaponType}"
-comment = "该动作不会打断单位动作. 由该动作伤害/杀死单位同样正常触发'受到伤害'和'死亡'单位Event."
+title = "Damage Target [R]"
+description = "Cause ${Unit} to damage ${Target}, dealing ${Amount} damage of (${yes/no} attack damage, ${yes/no} range damage) attack type ${AttackType}, damage type ${DamageType} and  weaponType ${WeaponType}"
+comment = "This does not interrupt the unit's orders.  The source unit gets credit for kills resulting from this damage."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -3985,9 +3985,9 @@ type = weapontype
 default = "WEAPON_TYPE_WHOKNOWS"
 
 [UnitDamageTargetBJ]
-title = "伤害目标"
-description = "命令 ${Unit} 对 ${Target} 造成 ${Amount} 点伤害,攻击类型: ${AttackType} 伤害类型: ${DamageType}"
-comment = "该动作不会打断单位动作. 由该动作伤害/杀死单位同样正常触发'受到伤害'和'死亡'单位Event."
+title = "Damage Target"
+description = "Cause ${Unit} to damage ${Target}, dealing ${Amount} damage of attack type ${AttackType} and damage type ${DamageType}"
+comment = "This does not interrupt the unit's orders.  The source unit gets credit for kills resulting from this damage."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -4007,9 +4007,9 @@ type = damagetype
 default = "DamageTypeNormal"
 
 [IsUnit]
-title = "单位检查"
-description = "${Unit} 与 ${Unit}相同"
-comment = "用来判断两个单位是否相等。"
+title = "Is Unit The Same"
+description = "${Unit} equal ${Unit}"
+comment = "It is used to judge whether the two units are equal."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -4020,9 +4020,9 @@ type = unit
 default = "GetLastCreatedUnit"
 
 [IsUnitDetected]
-title = "被检测到"
-description = "${Unit} 处在 ${Player} 的真实视野范围内"
-comment = "用来判断单位在这个Player反隐形范围内，注：不包含该Player同盟的反隐范围。"
+title = "Is Unit Detected"
+description = "${Unit} is in the real field of vision of ${Player}"
+comment = "It is used to judge the unit in the Player anti invisibility range. Note: does not contain the anti hiding scope of the Player alliance."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -4046,8 +4046,8 @@ type = unittype
 default = "UnitTypeStructure"
 
 [IsUnitRace]
-title = "单位种族检查"
-description = "${Unit} 是 ${Race}"
+title = "Is Unit Race"
+description = "${Unit} is ${Race}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -4072,8 +4072,8 @@ type = unittype
 default = "UnitTypeStructure"
 
 [IsHeroUnitId]
-title = "单位类型是英雄单位"
-description = "${UnitType} 是英雄单位"
+title = "Is Unit A Hero"
+description = "${UnitType} is a hero"
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -4093,8 +4093,8 @@ default = "GetTriggerUnit"
 type = group
 
 [IsUnitInRange]
-title = "在指定单位范围内 [R]"
-description = "${Unit} 在距离 ${指定单位} ${范围} 范围内"
+title = "Is Unit In Range Of Unit [R]"
+description = "Is ${Unit} in the range of ${Unit}, range radius is ${radius}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -4108,8 +4108,8 @@ type = real
 default = "600"
 
 [IsUnitInRangeXY]
-title = "在指定坐标范围内 [R]"
-description = "${Unit} 在距离坐标(${X},${Y}) ${范围} 范围内"
+title = "Is Unit In Range (Coordinate)[R]"
+description = "Is ${Unit} in the range that its center is (${X},${Y}), radius is ${radius}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -4127,8 +4127,8 @@ type = real
 default = "600"
 
 [IsUnitInRangeLoc]
-title = "在指定点范围内 [R]"
-description = "${Unit} 在距离 ${Location} ${范围} 范围内"
+title = "Is Unit In Range (Location)[R]"
+description = "Is ${Unit}  in the range that its center is ${Location}, radius is ${radius}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -4155,8 +4155,8 @@ type = unit
 default = "GetTriggerUnit"
 
 [IsUnitInRegion]
-title = "在不规则区域内 [R]"
-description = "${不规则区域} 内存在 ${Unit}"
+title = "Is Unit in Region [R]"
+description = "Region ${Region} contains ${Unit}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -4325,9 +4325,9 @@ type = player
 default = "Player00"
 
 [IsUnitOwnedByPlayer]
-title = "是Player的单位"
-description = "${Unit} 属于 ${Player}"
-comment = "判断单位是否属于这个Player。"
+title = "Is Unit Owned By Player"
+description = "${Unit} belongs ${Player}"
+comment = "Determine whether the unit belongs to a player."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -4338,9 +4338,9 @@ type = player
 default = "Player00"
 
 [IsUnitInForce]
-title = "是Player Group 里Player的单位"
-description = "${Unit} 属于 ${Player Group} 里的Player"
-comment = "判断单位是否属于这个Player Group 里的Player。"
+title = "Is Unit Owned By Player In Group"
+description = "${Unit} belongs player in ${Player Group}"
+comment = "Determine whether the unit belongs to a player in player group."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -4465,9 +4465,9 @@ type = unit
 default = "GetTriggerUnit"
 
 [GetUnitAbilityLevel]
-title = "单位Ability等级 [R]"
-description = "${Unit} 的 ${Ability} Ability等级"
-comment = "如果单位没有该Ability,则返回0."
+title = "Get Ability Level Of Unit [R]"
+description = " Get level from ${Unit} of ${Ability}"
+comment = "If unit do not have the ability, returns 0"
 category = TC_UNIT
 returns = integer
 [[.args]]
@@ -4510,8 +4510,8 @@ type = unit
 default = "GetTriggerUnit"
 
 [UnitCountBuffsEx]
-title = "拥有Buff数量 [R]"
-description = "${Unit} 的附带Buff数量,(${Include/Exclude} 正面Buff, ${Include/Exclude} 负面Buff${Include/Exclude} 魔法Buff, ${Include/Exclude} 物理Buff${Include/Exclude} 生命周期, ${Include/Exclude} 光环效果${Include/Exclude} 不可驱散Buff)"
+title = "Unit Count Buffs Ex [R]"
+description = "Buffs count of ${Unit}, (${Include/Exclude} positive buffs, ${Include/Exclude} negative buffs , ${Include/Exclude} magic buffs, ${Include/Exclude} physical buffs${Include/Exclude} life cycle, ${Include/Exclude} aura buffs ${Include/Exclude} dispelled buffs)"
 comment = ""
 category = TC_UNIT
 returns = integer
@@ -4563,8 +4563,8 @@ type = includeoption
 default = "InclusionInclude"
 
 [GetUnitState]
-title = "属性 [R]"
-description = "${Unit} 的 ${Property}"
+title = "Get Unit State [R]"
+description = "${Unit} with ${Property}"
 comment = ""
 category = TC_UNIT
 returns = real
@@ -4609,8 +4609,8 @@ type = unit
 default = "GetTriggerUnit"
 
 [GetUnitX]
-title = "单位所在X轴坐标 [R]"
-description = "${Unit} 所在X轴坐标"
+title = "Get Unit X [R]"
+description = "X axis value of ${Unit}"
 comment = ""
 category = TC_UNIT
 returns = real
@@ -4619,8 +4619,8 @@ type = unit
 default = "GetTriggerUnit"
 
 [GetUnitY]
-title = "单位所在Y轴坐标 [R]"
-description = "${Unit} 所在Y轴坐标"
+title = "Get Unit Y [R]"
+description = "Y axis value of ${Unit}"
 comment = ""
 category = TC_UNIT
 returns = real
@@ -4699,9 +4699,9 @@ type = unit
 default = "GetTriggerUnit"
 
 [GetUnitPropWindow]
-title = "当前转向角度(弧度制) [R]"
-description = "${Unit} 的当前转向角度(弧度制)"
-comment = "单位转身时的转向角度. 数值越大转向幅度越大. "
+title = "Prop Window Angle (Radian) [R]"
+description = "Current prop window angle of ${Unit} (Radian)"
+comment = ""
 category = TC_UNIT
 returns = radian
 [[.args]]
@@ -4813,9 +4813,9 @@ type = unit
 default = "GetTriggerUnit"
 
 [" CreateNUnitsAtLoc"]
-title = "创建单位(面向角度) [C]"
-description = "创建 ${Number} 个 ${单位} 给 ${Player} 在 ${指定点} ,面向角度为 ${Direction} 度"
-comment = "面向角度采用角度制,0度为正东方向,90度为正北方向. 使用'最后创建的单位组'来获取创建的所有单位. 使用'最后创建的单位'来获取创建的单个单位."
+title = "Create Units Facing Angle [C]"
+description = "Create ${Number} ${Unit} for ${Player} at ${Point} facing ${Direction} degrees"
+comment = "The facing angle is expected in degrees, with 0 being east and 90 being north.  Use 'Last Created Unit Group' to refer to these created units.  Use 'Last Created Unit' to refer to exactly one of these units."
 category = TC_UNIT
 returns = group
 [[.args]]
@@ -4906,9 +4906,9 @@ category = TC_TRIGGER
 returns = string
 
 [CreateTrigger]
-title = "Create 触发 [R]"
-description = "Create 触发"
-comment = "Create a 一个新的Trigger,如果对该功能不熟悉请慎用."
+title = "Create Trigger  [R]"
+description = "Create Trigger "
+comment = "Create a new Trigger, if you are not familiar with the function, please use it carefully."
 category = TC_TRIGGER
 returns = trigger
 
@@ -4994,8 +4994,8 @@ type = multiboard
 default = "GetLastCreatedMultiboard"
 
 [IsPointBlighted]
-title = "坐标点被荒芜地表覆盖 [R]"
-description = "坐标点(${X},${Y})被荒芜地表覆盖"
+title = "Point Is Blighted [R]"
+description = "Locatio (${X},${Y}) is blighted"
 comment = ""
 category = TC_ENVIRONMENT
 returns = boolean
@@ -5016,9 +5016,9 @@ returns = boolean
 type = location
 
 [IsTerrainPathable]
-title = "地形通行状态关闭(指定坐标) [R]"
-description = "坐标(${X},${Y})处的 ${Pathing Type} 通行状态为关闭"
-comment = "指定类型单位不能通行即通行状态为关闭. 如该点不能造建筑就是'建造'通行状态为关闭. 可使用'环境 - 设置地形通行状态'来改变通行状态."
+title = "Terrain Pathing Is Off(Coordinate) [R]"
+description = "Terrain pathing at (${X},${Y}) of type ${Pathing Type} is off"
+comment = "Terrain pathing is off if it is not pathable to the given pathing type.  For example, 'Buildability' is off if the pathing cell is unbuildable.  Use 'Environment - Turn Terrain Pathing On/Off' to change terrain pathing."
 category = TC_ENVIRONMENT
 returns = boolean
 [[.args]]
@@ -5044,9 +5044,9 @@ type = pathingtype
 default = "PathingTypeWalkability"
 
 [GetTerrainCliffLevel]
-title = "地形悬崖高度(指定坐标) [R]"
-description = "坐标(${X},${Y})处的地形悬崖高度"
-comment = "悬崖高度:深水区为0, 浅水区为1, 平原为2, 之后每层+1."
+title = "Terrain Cliff Level(Coordinate) [R]"
+description = "Terrain cliff level at (${X},${Y})"
+comment = "Cliff level values start at zero."
 category = TC_ENVIRONMENT
 returns = integer
 [[.args]]
@@ -5066,8 +5066,8 @@ returns = integer
 type = location
 
 [GetTerrainVariance]
-title = "地形样式(指定坐标) [R]"
-description = "坐标(${X},${Y})处的地形样式"
+title = "Terrain Variance(Coordinate) [R]"
+description = "Terrain variance at (${X},${Y})"
 comment = ""
 category = TC_ENVIRONMENT
 returns = integer
@@ -5089,8 +5089,8 @@ type = location
 default = "GetRectCenter"
 
 [GetTerrainType]
-title = "指定坐标地形 [R]"
-description = "坐标(${X},${Y})处的地形"
+title = "Terrain Type [R]"
+description = "Terrain type at (${X},${Y})"
 comment = ""
 category = TC_ENVIRONMENT
 returns = terraintype
@@ -5190,8 +5190,8 @@ type = player
 default = "Player00"
 
 [IsVisibleToPlayer]
-title = "坐标可见"
-description = "坐标(${x},${y}) 对 ${Player} 可见"
+title = "Coordinate Is Visible To Player"
+description = "Location(${x},${y}) is visible to ${Player}"
 comment = ""
 category = TC_VISIBILITY
 returns = boolean
@@ -5217,9 +5217,9 @@ type = player
 default = "Player00"
 
 [IsFoggedToPlayer]
-title = "坐标在迷雾中"
-description = "坐标(${x},${y}) 在 ${Player} 的迷雾范围内"
-comment = "黑色阴影内的坐标不被计算在内。"
+title = "Coordinate Fogged To Player"
+description = "(${x},${y}) is fogged for ${Player}"
+comment = "The coordinates which is marked are not calculated."
 category = TC_VISIBILITY
 returns = boolean
 [[.args]]
@@ -5244,8 +5244,8 @@ type = player
 default = "Player00"
 
 [IsMaskedToPlayer]
-title = "坐标在黑色阴影中"
-description = "坐标(${x},${y}) 在 ${Player} 的黑色阴影内"
+title = "Masked To Player"
+description = "Coordinate (${x},${y}) is Masked to ${Player}"
 comment = ""
 category = TC_VISIBILITY
 returns = boolean
@@ -5328,8 +5328,8 @@ type = destructable
 default = "GetLastCreatedDestructable"
 
 [GetDestructableX]
-title = "Destructable所在X轴坐标 [R]"
-description = "${Destructable} 所在X轴坐标"
+title = "Get Destructable X[R]"
+description = "X axis value of ${Destructable}"
 comment = ""
 category = TC_DESTRUCT
 returns = real
@@ -5338,8 +5338,8 @@ type = destructable
 default = "GetLastCreatedDestructable"
 
 [GetDestructableY]
-title = "Destructable所在Y轴坐标 [R]"
-description = "${Destructable} 所在Y轴坐标"
+title = "Get Destructable Y [R]"
+description = "Y axis value of ${Destructable}"
 category = TC_DESTRUCT
 returns = real
 [[.args]]
@@ -5394,8 +5394,8 @@ type = leaderboard
 default = "GetLastCreatedLeaderboard"
 
 [LeaderboardGetItemCount]
-title = "行数"
-description = "${Leaderboard} 的行数"
+title = "Row Index of Item"
+description = "Row index of item in ${Leaderboard}"
 comment = ""
 category = TC_LEADERBOARD
 returns = integer
@@ -5420,8 +5420,8 @@ type = leaderboard
 default = "GetLastCreatedLeaderboard"
 
 [IsPointInRegion]
-title = "包含坐标"
-description = "${不规则区域} 内包含坐标(${X},${Y})"
+title = "Is Coordinate in Region"
+description = "${Region} contains (${X},${Y})"
 comment = "TC_REGION"
 category = TC_REGION
 returns = boolean
@@ -5435,8 +5435,8 @@ type = real
 default = "0"
 
 [IsLocationInRegion]
-title = "包含点"
-description = "${不规则区域} 内包含点: ${点}"
+title = "Is Location In Region"
+description = "${Region} Contains ${Location}"
 comment = "TC_REGION"
 category = TC_REGION
 returns = boolean
@@ -5598,14 +5598,14 @@ default = "GetLastCreatedQuestBJ"
 [CreateQuest]
 title = "Create Quest [R]"
 description = "Create Quest "
-comment = "Create 一个Quest.注：这条毫无用处，别用——everguo"
+comment = ""
 category = TC_QUEST
 returns = quest
 
 [YDWECreateQuest]
 title = "Create Quest[YDWE]"
-description = "Create 一个 ${Quest Type} Quest,标题: ${文字} Quest说明: ${文字} Quest图标: ${Icon Path}"
-comment = "Create 一个Quest；YDWE新增。"
+description = "Create a ${Quest Type} Quest, Title: ${Text} Quest Info: ${Text} Quest Icon: ${Icon Path}"
+comment = "Create a Quest[YDWE]"
 script_name = CreateQuestBJ
 category = TC_QUEST
 returns = quest
@@ -5622,9 +5622,9 @@ type = imagefile
 default = "\"ReplaceableTextures\\CommandButtons\\BTNAmbush.blp\""
 
 [YDWECreateQuestItem]
-title = "创建Quest Item[YDWE]"
-description = "为 ${Quest} 创建一个Quest Item: ${文字}"
-comment = "Create 一个Quest Item；YDWE新增功能。"
+title = "YDWE Create Quest Item[YDWE]"
+description = "Cteate a Quest item for ${Quest} with text ${text}"
+comment = "Create a Quest Item(YDWE)"
 script_name = CreateQuestItemBJ
 category = TC_QUEST
 returns = questitem
@@ -5674,8 +5674,8 @@ type = player
 default = "Player00"
 
 [IsPlayerObserver]
-title = "Player是裁判或观察者 [R]"
-description = "${Player}是裁判或观察者"
+title = "Is Player Observer [R]"
+description = "${Player} is Observer"
 comment = ""
 category = TC_PLAYER
 returns = boolean
@@ -5684,8 +5684,8 @@ type = player
 default = "GetTriggerPlayer"
 
 [IsPlayerRacePrefSet]
-title = "Player的种族选择"
-description = "${Player} 选择了 ${RacePreference}"
+title = "Player Race"
+description = "${Player} Select ${RacePreference}"
 comment = ""
 category = TC_PLAYER
 returns = boolean
@@ -5739,9 +5739,9 @@ type = playerstate
 default = "PlayerStateGold"
 
 [GetPlayerTaxRate]
-title = "Player税率 [R]"
-description = "${Player} 需要交纳给 ${Player} 的 ${Resource} 所得税"
-comment = "所得税取值范围0-100."
+title = "Get Player Tax Rate [R]"
+description = "Tax rate from ${Player} to ${Player} in ${Resource}"
+comment = "Value range of tax rate is 0-100."
 category = TC_PLAYER
 returns = integer
 [[.args]]
@@ -5795,8 +5795,8 @@ default = "GetTriggerPlayer"
 
 [GetPlayerId]
 title = "PlayerID - 1 [R]"
-description = "${Player} 的PlayerID - 1"
-comment = "PlayerID取值1-16."
+description = "PlayerID of ${Player} - 1"
+comment = "PlayerID range in 1-16."
 category = TC_PLAYER
 returns = integer
 [[.args]]
@@ -5942,9 +5942,9 @@ type = itemcodestatus
 default = "ItemcodeStatusPowerup"
 
 [IsItemVisible]
-title = "Item可见 [R]"
-description = "${Item} 是可见的"
-comment = "Item不被隐藏且不被单位持有时即为可见的."
+title = "Is Item Visible [R]"
+description = "${Item} is visible"
+comment = "Item do not hide or own by some unit means visible."
 category = TC_ITEM
 use_in_event = 0
 returns = boolean
@@ -5974,8 +5974,8 @@ returns = boolean
 type = item
 
 [IsItemPowerup]
-title = "Item是拾取时自动使用的 [R]"
-description = "${Item} 是拾取时自动使用类Item"
+title = "Is Item Powerup [R]"
+description = "${Item} is the type of powerup"
 comment = ""
 category = TC_ITEM
 use_in_event = 0
@@ -5985,8 +5985,8 @@ type = item
 default = "bj_lastCreatedItem"
 
 [IsItemSellable]
-title = "Item可被市场随机出售 [R]"
-description = "${Item} 可被市场随机出售"
+title = "Is Item Sellable [R]"
+description = "${Item} is the type of sellable"
 comment = ""
 category = TC_ITEM
 use_in_event = 0
@@ -5996,8 +5996,8 @@ type = item
 default = "bj_lastCreatedItem"
 
 [IsItemPawnable]
-title = "Item可被抵押 [R]"
-description = "${Item} 可被抵押"
+title = "Is Item Pawnable [R]"
+description = "${Item}  is the type of pawnable"
 comment = ""
 category = TC_ITEM
 use_in_event = 0
@@ -6029,9 +6029,9 @@ type = item
 default = "GetLastCreatedItem"
 
 [GetInventoryIndexOfItemTypeBJ]
-title = "Item在Item栏的序号 [C]"
-description = "${Unit} 所持有的 ${Item Type} 的Item栏序号"
-comment = "如果单位没有该类型的Item则返回0"
+title = "Get Inventory Index Of Item Type [C]"
+description = "Get inverntory of ${Unit} owns item in type ${Item Type}"
+comment = "If unit do not have the item, returns 0."
 category = TC_ITEM
 returns = integer
 [[.args]]
@@ -6081,8 +6081,8 @@ type = item
 default = "GetLastCreatedItem"
 
 [GetItemX]
-title = "Item的X轴坐标 [R]"
-description = "${Item} 的X轴坐标"
+title = "Get Item X [R]"
+description = "X axis value of ${Item}"
 comment = ""
 category = TC_ITEM
 returns = real
@@ -6091,8 +6091,8 @@ type = item
 default = "GetLastCreatedItem"
 
 [GetItemY]
-title = "Item的Y轴坐标 [R]"
-description = "${Item} 的Y轴坐标"
+title = "Get Item Y [R]"
+description = "Y axis value of ${Item}"
 comment = ""
 category = TC_ITEM
 returns = real
@@ -6177,8 +6177,8 @@ type = unit
 default = "GetTriggerUnit"
 
 [GetHeroStr]
-title = "英雄力量 [R]"
-description = "${英雄} 的力量值(${Include/Exclude} 加成)"
+title = "Get Hero Str [R]"
+description = "Get Str of ${Hero} (${Include/Exclude} addition)"
 comment = ""
 category = TC_HERO
 returns = integer
@@ -6189,8 +6189,8 @@ type = includeoption
 default = "InclusionExclude"
 
 [GetHeroAgi]
-title = "英雄敏捷 [R]"
-description = "${英雄} 的敏捷值(${Include/Exclude} 加成)"
+title = "Get Hero Agi [R]"
+description = "Get Agi of ${Hero} (${Include/Exclude} addition)"
 comment = ""
 category = TC_HERO
 returns = integer
@@ -6201,8 +6201,8 @@ type = includeoption
 default = "InclusionExclude"
 
 [GetHeroInt]
-title = "英雄智力 [R]"
-description = "${英雄} 的智力值(${Include/Exclude} 加成)"
+title = "Get Hero Int [R]"
+description = "Get Int of ${Hero} (${Include/Exclude} addition)"
 comment = ""
 category = TC_HERO
 returns = integer
@@ -6286,17 +6286,17 @@ returns = boolean
 type = anyfile
 
 [IsNoVictoryCheat]
-title = "无法胜利 [R]"
-description = "Player开启作弊模式: 无法胜利"
-comment = "单机作弊码开启的模式."
+title = "Is No Victory Cheat [R]"
+description = "Player use cheat: No Victory"
+comment = "Mode of single computer cheating."
 category = TC_GAME
 use_in_event = 0
 returns = boolean
 
 [IsNoDefeatCheat]
-title = "无法失败 [R]"
-description = "Player开启作弊模式: 无法失败"
-comment = "单机作弊码开启的模式."
+title = "Is No Defeat Cheat [R]"
+description = "Player use cheat: No Defeat"
+comment = "Mode of single computer cheating."
 category = TC_GAME
 use_in_event = 0
 returns = boolean
@@ -6395,9 +6395,9 @@ type = soundtype
 default = "SoundTypeEffect"
 
 [GetStoredBoolean]
-title = "读取布尔值[R]"
-description = "从${Game Cache}中读取布尔值,类别: ${Category},名称: ${文字}"
-comment = "如果该值不存在则返回false."
+title = "Load Boolean Value[R]"
+description = "Load boolean from ${Game Cache}, category: ${Category}, name: ${text}"
+comment = "If the label is not found, this function returns false."
 category = TC_GAMECACHE
 returns = boolean
 [[.args]]
@@ -6429,9 +6429,9 @@ type = gamecache
 default = "GetLastCreatedGameCacheBJ"
 
 [GetStoredInteger]
-title = "缓存读取整数 [C]"
-description = "从${Game Cache}中读取整数值,类别: ${Category},名称: ${文字}"
-comment = "如果该值不存在则返回0."
+title = "Load Integer Value [C]"
+description = "Load integer from ${Game Cache}, catagory: ${Category}, name: ${text}"
+comment = "If the label is not found, this function returns 0."
 category = TC_GAMECACHE
 returns = integer
 [[.args]]
@@ -6444,9 +6444,9 @@ default = "\"Category\""
 type = string
 
 [GetStoredReal]
-title = "缓存读取实数 [C]"
-description = "从 ${Game Cache} 中读取实数,类别: ${Category} 名称: ${文字}"
-comment = "如果该值不存在则返回0."
+title = "Load Real Value [C]"
+description = "Load real from ${Game Cache}, catagory: ${Category}, name: ${text}"
+comment = "If the label is not found, this function returns 0."
 category = TC_GAMECACHE
 returns = real
 [[.args]]
@@ -6459,9 +6459,9 @@ default = "\"Category\""
 type = string
 
 [GetStoredString]
-title = "读取字符串 [C]"
-description = "从 ${Game Cache} 中读取字符串,类别: ${Category} 名称: ${文字}"
-comment = "如果该值不存在,则返回空字符串. 注意,空字符串不等于null"
+title = "Load String Value [C]"
+description = "Load string from ${Game Cache}, catagory: ${Category}, name: ${text}}"
+comment = "If the label is not found, this function returns empty string. Notice empty string do not equal null"
 category = TC_GAMECACHE
 returns = string
 [[.args]]
@@ -6474,9 +6474,9 @@ default = "\"Category\""
 type = string
 
 [InitGameCache]
-title = "Create 游戏缓存 [R]"
-description = "Create 游戏缓存: ${缓存名}"
-comment = "创建一个新的游戏缓存,一个地图最多只有有256个游戏缓存."
+title = "Create Game Cache [R]"
+description = "Create a game cache from ${Filename}"
+comment = "A game cache allows you to store data between maps, or between games on a given map.  If the specified file does not exist, it will be created. Max cache count is 256."
 category = TC_GAMECACHE
 returns = gamecache
 [[.args]]
@@ -6503,8 +6503,8 @@ returns = integer
 type = unit
 
 [WaygateGetDestinationX]
-title = "传送门目的地X坐标"
-description = "${传送门} 的目的地X坐标"
+title = "Way Gate Destination X"
+description = "X axis value of destination of ${Way Gate}"
 comment = ""
 category = TC_NEUTRALBUILDING
 returns = real
@@ -6513,8 +6513,8 @@ type = unit
 default = "GetTriggerUnit"
 
 [WaygateGetDestinationY]
-title = "传送门目的地Y坐标"
-description = "${传送门} 的目的地Y坐标"
+title = "Way Gate Destination Y"
+description = "Y axis value of destination of ${Way Gate}"
 comment = ""
 category = TC_NEUTRALBUILDING
 returns = real
@@ -6532,7 +6532,7 @@ returns = location
 type = unit
 
 [LoadBooleanBJ]
-title = "Load Boolean Value (hashtable)"
+title = "Load Boolean Value (Hashtable)"
 description = "Load ${Value} of ${Value} from ${Hashtable}"
 comment = "If the label is not found, this function returns False."
 category = TC_HASHTABLE
@@ -6546,9 +6546,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadBoolean]
-title = "<1.24> 从哈希表提取布尔 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取布尔"
-comment = "如果不存在则返回False"
+title = "<1.24> Load Boolean Value (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return False"
 category = TC_HASHTABLE
 returns = boolean
 [[.args]]
@@ -6587,9 +6587,9 @@ returns = integer
 type = handle
 
 [GetHandleId]
-title = "<1.24> 获取对象的h2i值 [C]"
-description = "转换 ${Handle} 为整数"
-comment = "创建一个对应该handle的临时密钥,可以在哈希表中作为索引号使用.当该handle被彻底销毁时,密钥会被回收."
+title = "<1.24> Get Handle Id [C]"
+description = "Key ${Handle}"
+comment = "Creates a key from a handle for use in the hashtable. If the handle object destroy, the handle id wil be auto-collection."
 category = TC_HASHTABLE
 returns = integer
 [[.args]]
@@ -6605,7 +6605,7 @@ returns = integer
 type = string
 
 [LoadIntegerBJ]
-title = "Load Integer Value (hashtable)"
+title = "Load Integer Value (Hashtable)"
 description = "Load ${Value} of ${Value} from ${Hashtable}"
 comment = "If the label is not found, this function returns 0."
 category = TC_HASHTABLE
@@ -6619,9 +6619,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadInteger]
-title = "<1.24> 从哈希表提取整数 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取整数"
-comment = "如果不存在则返回0"
+title = "<1.24> Load Integer Value (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return 0"
 category = TC_HASHTABLE
 returns = integer
 [[.args]]
@@ -6633,7 +6633,7 @@ type = integer
 type = integer
 
 [LoadRealBJ]
-title = "Load Real Value (hashtable)"
+title = "Load Real Value (Hashtable)"
 description = "Load ${Value} of ${Value} from ${Hashtable}"
 comment = "If the label is not found, this function returns 0."
 category = TC_HASHTABLE
@@ -6647,9 +6647,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadReal]
-title = "<1.24> 从哈希表提取实数 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取实数"
-comment = "如果不存在则返回0.00"
+title = "<1.24> Load Real Value (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return 0.00"
 category = TC_HASHTABLE
 returns = real
 [[.args]]
@@ -6661,7 +6661,7 @@ type = integer
 type = integer
 
 [LoadStringBJ]
-title = "Load String Value (hashtable)"
+title = "Load String Value (Hashtable)"
 description = "Load ${Value} of ${Value} from ${Hashtable}"
 comment = "If the label is not found, this function returns an empty string."
 category = TC_HASHTABLE
@@ -6676,9 +6676,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadStr]
-title = "<1.24> 从哈希表提取字符串 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取字符串"
-comment = "如果不存在则返回空"
+title = "<1.24> Load String Value (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 use_in_event = 0
 returns = string
@@ -6691,7 +6691,7 @@ type = integer
 type = integer
 
 [LoadPlayerHandleBJ]
-title = "Load Player Handle"
+title = "Load Player Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -6705,9 +6705,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadPlayerHandle]
-title = "<1.24> 从哈希表提取Player [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Player"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Player Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = player
 [[.args]]
@@ -6719,7 +6719,7 @@ type = integer
 type = integer
 
 [LoadDestructableHandleBJ]
-title = "Load Destructable Handle"
+title = "Load Destructable Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -6733,9 +6733,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadDestructableHandle]
-title = "<1.24> 从哈希表提取Destructable [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Destructable"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Destructable Handle [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = destructable
 [[.args]]
@@ -6747,7 +6747,7 @@ type = integer
 type = integer
 
 [LoadItemHandleBJ]
-title = "Load Item Handle"
+title = "Load Item Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -6761,9 +6761,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadItemHandle]
-title = "<1.24> 从哈希表提取Item [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Item"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Item Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = item
 [[.args]]
@@ -6775,7 +6775,7 @@ type = integer
 type = integer
 
 [LoadUnitHandleBJ]
-title = "Load Unit Handle"
+title = "Load Unit Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -6789,9 +6789,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadUnitHandle]
-title = "<1.24> 从哈希表提取单位 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取单位"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Unit Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = unit
 [[.args]]
@@ -6803,9 +6803,9 @@ type = integer
 type = integer
 
 [YDWELoadAbilityHandleBJ]
-title = "<1.24> 从哈希表提取Ability"
-description = "在子索引 ${Value} 主索引 ${Value} 的 ${Hashtable} 内提取Ability"
-comment = "如果不存在则返回空"
+title = "Load Ability Handle (Hashtable) [YDWE]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = abilcode
 [[.args]]
@@ -6817,9 +6817,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [YDWELoadAbilityHandle]
-title = "<1.24> 从哈希表提取Ability [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Ability"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Ability Handle (Hashtable) [YDWE] [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = abilcode
 [[.args]]
@@ -6831,7 +6831,7 @@ type = integer
 type = integer
 
 [LoadTimerHandleBJ]
-title = "Load Timer Handle"
+title = "Load Timer Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -6845,9 +6845,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadTimerHandle]
-title = "<1.24> 从哈希表提取Timer [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Timer"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Timer Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = timer
 [[.args]]
@@ -6859,7 +6859,7 @@ type = integer
 type = integer
 
 [LoadTriggerHandleBJ]
-title = "Load Trigger Handle"
+title = "Load Trigger Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -6873,9 +6873,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadTriggerHandle]
-title = "<1.24> 从哈希表提取Trigger [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Trigger"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Trigger Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = trigger
 [[.args]]
@@ -6887,7 +6887,7 @@ type = integer
 type = integer
 
 [LoadTriggerConditionHandleBJ]
-title = "Load Triggercondition Handle"
+title = "Load Triggercondition Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -6901,9 +6901,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadTriggerConditionHandle]
-title = "<1.24> 从哈希表提取触发条件 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取触发条件"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Triggercondition Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = triggercondition
 [[.args]]
@@ -6915,7 +6915,7 @@ type = integer
 type = integer
 
 [LoadTriggerActionHandleBJ]
-title = "Load Triggeraction Handle"
+title = "Load Triggeraction Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -6929,9 +6929,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadTriggerActionHandle]
-title = "<1.24> 从哈希表提取触发动作 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取触发动作"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Triggeraction Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = triggeraction
 [[.args]]
@@ -6943,7 +6943,7 @@ type = integer
 type = integer
 
 [LoadTriggerEventHandleBJ]
-title = "Load Eventid Handle"
+title = "Load Eventid Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -6957,9 +6957,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadTriggerEventHandle]
-title = "<1.24> 从哈希表提取触发Event [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取触发Event"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Eventid Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = event
 [[.args]]
@@ -6971,7 +6971,7 @@ type = integer
 type = integer
 
 [LoadForceHandleBJ]
-title = "Load Force Handle"
+title = "Load Force Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -6985,9 +6985,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadForceHandle]
-title = "<1.24> 从哈希表提取Player Group  [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Player Group "
-comment = "如果不存在则返回空"
+title = "<1.24> Load Force Handle (Hashtable)  [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = force
 [[.args]]
@@ -6999,7 +6999,7 @@ type = integer
 type = integer
 
 [LoadGroupHandleBJ]
-title = "Load Group Handle"
+title = "Load Group Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7013,9 +7013,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadGroupHandle]
-title = "<1.24> 从哈希表提取Unit Group [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Unit Group"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Group Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = group
 [[.args]]
@@ -7027,7 +7027,7 @@ type = integer
 type = integer
 
 [LoadLocationHandleBJ]
-title = "Load Location Handle"
+title = "Load Location Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7041,9 +7041,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadLocationHandle]
-title = "<1.24> 从哈希表提取点 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取点"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Location Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = location
 [[.args]]
@@ -7055,7 +7055,7 @@ type = integer
 type = integer
 
 [LoadRegionHandleBJ]
-title = "Load Region Handle"
+title = "Load Region Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7069,9 +7069,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadRegionHandle]
-title = "<1.24> 从哈希表提取区域(不规则) [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取区域(不规则)"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Region Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = region
 [[.args]]
@@ -7083,7 +7083,7 @@ type = integer
 type = integer
 
 [LoadRectHandleBJ]
-title = "Load Rect Handle"
+title = "Load Rect Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7097,9 +7097,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadRectHandle]
-title = "<1.24> 从哈希表提取区域(矩型) [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取区域(矩型)"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Rect Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = rect
 [[.args]]
@@ -7111,7 +7111,7 @@ type = integer
 type = integer
 
 [LoadBooleanExprHandleBJ]
-title = "Load Boolexpr Handle"
+title = "Load Boolexpr Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7125,9 +7125,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadBooleanExprHandle]
-title = "<1.24> 从哈希表提取Boolexpr [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Boolexpr"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Boolexpr Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = boolexpr
 [[.args]]
@@ -7139,7 +7139,7 @@ type = integer
 type = integer
 
 [LoadSoundHandleBJ]
-title = "Load Sound Handle"
+title = "Load Sound Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7153,9 +7153,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadSoundHandle]
-title = "<1.24> 从哈希表提取Sound [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Sound"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Sound Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = sound
 [[.args]]
@@ -7167,7 +7167,7 @@ type = integer
 type = integer
 
 [LoadEffectHandleBJ]
-title = "Load Effect Handle"
+title = "Load Effect Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7181,9 +7181,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadEffectHandle]
-title = "<1.24> 从哈希表提取Effect [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Effect"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Effect Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = effect
 [[.args]]
@@ -7195,7 +7195,7 @@ type = integer
 type = integer
 
 [LoadUnitPoolHandleBJ]
-title = "Load Unitpool Handle"
+title = "Load Unitpool Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7209,9 +7209,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadUnitPoolHandle]
-title = "<1.24> 从哈希表提取单位池 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取单位池"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Unitpool Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = unitpool
 [[.args]]
@@ -7223,7 +7223,7 @@ type = integer
 type = integer
 
 [LoadItemPoolHandleBJ]
-title = "Load Itempool Handle"
+title = "Load Itempool Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7237,9 +7237,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadItemPoolHandle]
-title = "<1.24> 从哈希表提取Item Pool [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Item Pool"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Itempool Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = itempool
 [[.args]]
@@ -7251,7 +7251,7 @@ type = integer
 type = integer
 
 [LoadQuestHandleBJ]
-title = "Load Quest Handle"
+title = "Load Quest Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7265,9 +7265,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadQuestHandle]
-title = "<1.24> 从哈希表提取Quest [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Quest"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Quest Handle [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = quest
 [[.args]]
@@ -7279,7 +7279,7 @@ type = integer
 type = integer
 
 [LoadQuestItemHandleBJ]
-title = "Load Questitem Handle"
+title = "Load Questitem Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7293,9 +7293,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadQuestItemHandle]
-title = "<1.24> 从哈希表提取Quest要求 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Quest要求"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Questitem Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = questitem
 [[.args]]
@@ -7307,7 +7307,7 @@ type = integer
 type = integer
 
 [LoadDefeatConditionHandleBJ]
-title = "Load Defeatcondition Handle"
+title = "Load Defeatcondition Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7321,9 +7321,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadDefeatConditionHandle]
-title = "<1.24> 从哈希表提取失败条件 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取失败条件"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Defeatcondition Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = defeatcondition
 [[.args]]
@@ -7335,7 +7335,7 @@ type = integer
 type = integer
 
 [LoadTimerDialogHandleBJ]
-title = "Load Timerdialog Handle"
+title = "Load Timerdialog Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7349,9 +7349,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadTimerDialogHandle]
-title = "<1.24> 从哈希表提取Timer Window [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Timer Window"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Timerdialog Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = timerdialog
 [[.args]]
@@ -7363,7 +7363,7 @@ type = integer
 type = integer
 
 [LoadLeaderboardHandleBJ]
-title = "Load Leaderboard Handle"
+title = "Load Leaderboard Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7377,9 +7377,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadLeaderboardHandle]
-title = "<1.24> 从哈希表提取Leaderboard [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Leaderboard"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Leaderboard Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = leaderboard
 [[.args]]
@@ -7391,7 +7391,7 @@ type = integer
 type = integer
 
 [LoadMultiboardHandleBJ]
-title = "Load Multiboard Handle"
+title = "Load Multiboard Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7405,9 +7405,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadMultiboardHandle]
-title = "<1.24> 从哈希表提取Multi Board [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Multi Board"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Multiboard Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = multiboard
 [[.args]]
@@ -7419,7 +7419,7 @@ type = integer
 type = integer
 
 [LoadMultiboardItemHandleBJ]
-title = "Load Multiboarditem Handle"
+title = "Load Multiboarditem Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7433,9 +7433,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadMultiboardItemHandle]
-title = "<1.24> 从哈希表提取Multi Board Item [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Multi Board Item"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Multiboarditem Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = multiboarditem
 [[.args]]
@@ -7447,7 +7447,7 @@ type = integer
 type = integer
 
 [LoadTrackableHandleBJ]
-title = "Load Trackable Handle"
+title = "Load Trackable Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7461,9 +7461,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadTrackableHandle]
-title = "<1.24> 从哈希表提取Trackable [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Trackable"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Trackable Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = trackable
 [[.args]]
@@ -7475,7 +7475,7 @@ type = integer
 type = integer
 
 [LoadDialogHandleBJ]
-title = "Load Dialog Handle"
+title = "Load Dialog Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7489,9 +7489,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadDialogHandle]
-title = "<1.24> 从哈希表提取Dialog [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Dialog"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Dialog Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = dialog
 [[.args]]
@@ -7503,7 +7503,7 @@ type = integer
 type = integer
 
 [LoadButtonHandleBJ]
-title = "Load Button Handle"
+title = "Load Button Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7517,9 +7517,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadButtonHandle]
-title = "<1.24> 从哈希表提取Dialog Button [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Dialog Button"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Button Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = button
 [[.args]]
@@ -7531,7 +7531,7 @@ type = integer
 type = integer
 
 [LoadTextTagHandleBJ]
-title = "Load Texttag Handle"
+title = "Load Texttag Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment =""
 category = TC_HASHTABLE
@@ -7545,9 +7545,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadTextTagHandle]
-title = "<1.24> 从哈希表提取Text Tag [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Text Tag"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Texttag Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = texttag
 [[.args]]
@@ -7559,7 +7559,7 @@ type = integer
 type = integer
 
 [LoadLightningHandleBJ]
-title = "Load Lightning Handle"
+title = "Load Lightning Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7573,9 +7573,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadLightningHandle]
-title = "<1.24> 从哈希表提取Lightning效果 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Lightning效果"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Lightning Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = lightning
 [[.args]]
@@ -7587,7 +7587,7 @@ type = integer
 type = integer
 
 [LoadImageHandleBJ]
-title = "Load Image Handle"
+title = "Load Image Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7601,9 +7601,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadImageHandle]
-title = "<1.24> 从哈希表提取图象 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取图象"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Image Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = image
 [[.args]]
@@ -7615,7 +7615,7 @@ type = integer
 type = integer
 
 [LoadUbersplatHandleBJ]
-title = "Load Ubersplat Handle"
+title = "Load Ubersplat Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7629,9 +7629,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadUbersplatHandle]
-title = "<1.24> 从哈希表提取地面纹理变化 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取地面纹理变化"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Ubersplat Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = ubersplat
 [[.args]]
@@ -7643,7 +7643,7 @@ type = integer
 type = integer
 
 [LoadFogStateHandleBJ]
-title = "Load Fogstate Handle"
+title = "Load Fogstate Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7657,9 +7657,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadFogStateHandle]
-title = "<1.24> 从哈希表提取迷雾状态 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取迷雾状态"
-comment = "如果不存在则返回空"
+title = "<1.24> Load Fogstate Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = fogstate
 [[.args]]
@@ -7671,7 +7671,7 @@ type = integer
 type = integer
 
 [LoadFogModifierHandleBJ]
-title = "Load Fogmodifier Handle"
+title = "Load Fogmodifier Handle (Hashtable)"
 description = "Load ${Value} of ${Value} in ${Hashtable}"
 comment = "If the label is not found, this function returns NULL."
 category = TC_HASHTABLE
@@ -7685,9 +7685,9 @@ type = hashtable
 default = "GetLastCreatedHashtableBJ"
 
 [LoadFogModifierHandle]
-title = "<1.24> 从哈希表提取Fog Modifier  [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取Fog Modifier "
-comment = "如果不存在则返回空"
+title = "<1.24> Load Fogmodifier Handle (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_HASHTABLE
 returns = fogmodifier
 [[.args]]
@@ -7730,8 +7730,8 @@ type = real
 default = "0"
 
 [YDWEOperatorInt3]
-title = "算术运算 Lv3"
-description = "${数值} ${运算符} ${数值} ${运算符} ${数值}"
+title = "Arithmetic Lv3"
+description = "${Value} ${Operator} ${Value} ${Operator} ${Value}"
 comment = ""
 category = TC_MATH
 returns = integer
@@ -7751,8 +7751,8 @@ type = integer
 default = "0"
 
 [YDWEOperatorReal3]
-title = "算术运算 Lv3"
-description = "${数值} ${运算符} ${数值} ${运算符} ${数值}"
+title = "Arithmetic Lv3"
+description = "${Value} ${Operator} ${Value} ${Operator} ${Value}"
 comment = ""
 category = TC_MATH
 returns = real
@@ -7772,9 +7772,9 @@ type = real
 default = "0"
 
 [YDWE_PreloadSL_Get]
-title = "获取存档数据"
-description = "从${Player}获取 ※${数据注释}，从当前存档[${数据项索引}]上获取"
-comment = "从Player本地存档上获取数据，需要填入正确的数据项索引，标签即该项数据的注释。"
+title = "YDWE PerloadSL Get Value"
+description = "For ${Player} Get *${Data Commet}, form current PerloadSL [${Data Index}]"
+comment = "To get data from the Player local archive, you need to fill in the correct index of data items, which is the annotation of the data."
 category = TC_YDSL
 returns = integer
 [[.args]]
@@ -7788,9 +7788,9 @@ min = 1
 max = 500
 
 [YDWE_PreloadSL_GetFile]
-title = "获取存档名(存档名单)[YDWE]"
-description = "为${Player}在『${目录名}』下，获取索引为[${Integer}]的存档名"
-comment = "高级功能，获取指定目录下某个Player存档文件的名字，填写正确的索引，即可获得对应存档名。"
+title = "YDWE Get PreloadSL (File Name)[YDWE]"
+description = "For ${Player} Get bank name in ${Folder}], by the index [${Integer}]"
+comment = "Advanced function, get the name of a Player archive file in the specified directory, fill in the correct index, and get the corresponding archive name."
 category = TC_YDSL
 returns = string
 [[.args]]
@@ -7838,9 +7838,9 @@ type = unitcode
 default = "GetUnitTypeId"
 
 [GetLocalizedString]
-title = "本地字符串 [R]"
-description = "本地字符串: ${文字}"
-comment = "获取ui\\framedef\\globalstrings.fdf中定义的字符串."
+title = "Get Localized String [R]"
+description = "Get localized string: ${text}"
+comment = "Get text defines in ui\\framedef\\globalstrings.fdf."
 category = TC_CONVERSION
 use_in_event = 0
 returns = string
@@ -7849,7 +7849,7 @@ type = string
 
 [StringIdentity]
 title = "Convert Externalized String"
-description = "Externalized string(${String})"
+description = "Externalized string(${Text})"
 comment = "Use this to make sure the given string will be externalized in the map string file (war3map.wts)."
 script_name = GetLocalizedString
 category = TC_CONVERSION
@@ -7859,9 +7859,9 @@ returns = string
 type = string
 
 [GetLocalizedHotkey]
-title = "本地热键 "
-description = "本地热键: ${文字}"
-comment = "获取ui\\miscui.txt中定义的热键."
+title = "Get Localized Hotkey "
+description = "Get localized hotkey: ${Text}"
+comment = "Get hotkey defines in ui\\miscui.."
 category = TC_CONVERSION
 use_in_event = 0
 returns = integer
@@ -7937,23 +7937,23 @@ min = 1
 max = 16
 
 [YDWEGetGameCurrentTime]
-title = "Timer系统-获取游戏当前时间"
-description = "获取游戏当前时间"
-comment = "获得从游戏开始到目前流逝的时间，以秒为单位。"
+title = "YDWE Timer System - Get current game time"
+description = "Get current game time"
+comment = "Get the time from the beginning of the game to the present time, in seconds."
 category = TC_YDST
 returns = integer
 
 [YDWETimerSystemGetRunIndex]
-title = "Timer系统-获取中心Timer当前执行索引"
-description = "获取中心Timer当前执行索引"
-comment = "获得中心Timer运行Trigger或函数目前为止的执行次数。"
+title = "YDWE Timer System - Get Central Timer Run Index"
+description = "Get center timer run index"
+comment = "Gets the number of times the central Timer runs Trigger or function so far."
 category = TC_YDST
 returns = integer
 
 [YDWEGetUnitItemSoftId]
-title = "Item在Item栏中的位置[YDWE]"
-description = "Get ${Unit} Item栏中 ${Item} 的位置"
-comment = "返回Item所在单位Item栏中的位置，为1-6之间的某个值；若单位身上不存在该Item，则返回0。"
+title = "YDWE Get Slot ID of Item[YDWE]"
+description = "Get slot id form ${Unit} by ${Item}"
+comment = "Returns the location in the Item column of the unit where Item is located, a value between 1-6. If there is no Item in the unit, it returns 0.."
 category = TC_YDST
 returns = integer
 [[.args]]
@@ -7964,63 +7964,63 @@ type = item
 default = "GetManipulatedItem"
 
 [YDWEConverUnitcodeToInt]
-title = "显示单位类型为整数[YDWE]"
-description = "显示<${单位类型}>为整数"
-comment = "单位类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
+title = "YDWE Conver Unitcode To Int [YDWE]"
+description = "Show <${Type}> in integer"
+comment = "Unit type itself is an integer, so there is no need to convert; this function is mainly used in the path setting of the storage system."
 category = TC_YDST
 returns = integer
 [[.args]]
 type = unitcode
 
 [YDWEConverItemcodeToInt]
-title = "显示Item Type为整数[YDWE]"
-description = "显示<${Item Type}>为整数"
-comment = "Item Type本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
+title = "YDWE Conver Itemcode To Int [YDWE]"
+description = "Show <${Type}> in integer"
+comment = "Item Type itself is an integer, so there is no need to convert; this function is mainly used in the path setting of the storage system."
 category = TC_YDST
 returns = integer
 [[.args]]
 type = itemcode
 
 [YDWEConverAbilcodeToInt]
-title = "显示Ability类型为整数[YDWE]"
-description = "显示<${Ability类型}>为整数"
-comment = "Ability类型本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
+title = "YDWE Conver Abilcode To Int [YDWE]"
+description = "Show <${Type}> in integer"
+comment = "Ability itself is an integer, so there is no need to convert; this function is mainly used in the path setting of the storage system."
 category = TC_YDST
 returns = integer
 [[.args]]
 type = abilcode
 
 [YDWEConverOrdercodeToInt]
-title = "显示命令ID为整数[YDWE]"
-description = "显示<${命令ID}>为整数"
-comment = "命令ID本身是个整数，因此无需转换；该功能主要用于存储系统的路径设置中。"
+title = "YDWE Conver Ordercode To Int [YDWE]"
+description = "Show <${Type}> in integer"
+comment = "Order ID itself is an integer, so there is no need to convert; this function is mainly used in the path setting of the storage system."
 category = TC_YDST
 returns = integer
 [[.args]]
 type = ordercode
 
 [YDWEI2UnitId]
-title = "转换整数为单位Id [YDWE]"
-description = "转换 ${Integer} 为单位Id"
-comment = "将一个整数转换成单位ID，如输入1751543663，将转成步兵的ID。"
+title = "YDWE Convert Integer To UnitId [YDWE]"
+description = "Convert ${Integer} to UnitId"
+comment = "Convert a integer to UnitId, e.g. input 1751543663, it will convert to UnitId of footman."
 category = TC_YDST
 returns = unitcode
 [[.args]]
 type = integer
 
 [YDWEI2ItemId]
-title = "转换整数为ItemId [YDWE]"
-description = "转换 ${Integer} 为ItemId"
-comment = "将一个整数转换成ItemID，如输入1936749416，将转成魔法护盾的ID。"
+title = "YDWE Convert Integer To ItemId [YDWE]"
+description = "Convert ${Integer} to ItemId"
+comment = "Convert a integer to ItemID, e.g. input 1936749416, it will convert to ItemID of Amulet of Spell Shield."
 category = TC_YDST
 returns = itemcode
 [[.args]]
 type = integer
 
 [YDWES2Id]
-title = "转换字符串为Id [YDWE]"
-description = "需要转换成ID的字符串为：${字符窜}"
-comment = "将一个字符串转换成单位、Item等目标的ID；如spsh转换后为'spsh'，届时可以通过聊天输入字符串来创建单位或Item。"
+title = "YDWE Convert String To Id [YDWE]"
+description = "String to convert to id is ${String}"
+comment = "Convert a string to a UnitId, ItemId or other object id; e.g. spsh will convert to 'spsh', use  this you can create a unit or item by chat message."
 category = TC_YDST
 returns = integer
 [[.args]]
@@ -8028,9 +8028,9 @@ type = string
 default = "spsh"
 
 [YDWES2UnitId]
-title = "转换字符串为单位Id [YDWE]"
-description = "需要转换成单位Id的字符窜为：${字符窜}"
-comment = "将一个字符窜转换成单位ID，如输入hfoo，将转成步兵的ID。"
+title = "YDWE Convert String To UnitId [YDWE]"
+description = "String to convert to UnitId is: ${String}"
+comment = "Convert a string to a UnitId, e.g. input hfoo, it will convert to UnitId of footman."
 category = TC_YDST
 returns = unitcode
 [[.args]]
@@ -8038,9 +8038,9 @@ type = string
 default = "hfoo"
 
 [YDWES2ItemId]
-title = "转换字符串为ItemId [YDWE]"
-description = "需要转换成ItemId的字符串为：${字符窜}"
-comment = "将一个字符串转换成ItemID，如输入spsh，将转成魔法护盾的ID。"
+title = "YDWE Convert String To ItemId [YDWE]"
+description = "String to convert to ItemId is: ${String}"
+comment = "Convert a string to a ItemID, e.g. input spsh, it will convert to ItemID of Amulet of Spell Shield."
 category = TC_YDST
 returns = itemcode
 [[.args]]
@@ -8048,9 +8048,9 @@ type = string
 default = "spsh"
 
 [YDWEGetUnitGoldCost]
-title = "Get 黄金消耗 (单位类型)"
-description = "Get ${Unit} 建造时消耗的黄金"
-comment = "本触发只能获取普通单位建造时消耗的黄金，若填入英雄单位，将会获得固定值425"
+title = "YDWE Get Unit Gold Cost (UnitType)"
+description = "Get ${Unit} gold cost in building"
+comment = "This trigger action can only use to get the build cost of gold, if input a hero unit, will get a fixed value 425"
 category = TC_YDST
 returns = integer
 [[.args]]
@@ -8058,9 +8058,9 @@ type = unitcode
 default = "hfoo"
 
 [YDWEGetUnitWoodCost]
-title = "Get 木头消耗 (单位类型)"
-description = "Get ${Unit} 建造时消耗的木头"
-comment = "本触发只能获取普通单位建造时消耗的木头，若填入英雄单位，将会获得固定值100"
+title = "YDWE Get Unit Wood Cost (UnitType)"
+description = "Get ${Unit} wood cost in building"
+comment = "This trigger action can only use to get the build cost of wood, if input a hero unit, will get a fixed value 100"
 category = TC_YDST
 returns = integer
 [[.args]]
@@ -8068,9 +8068,9 @@ type = unitcode
 default = "hfoo"
 
 [YDWEGetUnitBuildTime]
-title = "Get 建造时间 (单位类型)"
-description = "Get ${Unit} 建造时需要的时间"
-comment = "本触发只能获取普通单位建造时需要的时间，若填入英雄单位，将会获得固定值55"
+title = "YDWE Get Unit Build Time (UnitType)"
+description = "Get ${Unit} teme cost in building"
+comment = "This trigger action can only use to get the build cost of time, if input a hero unit, will get a fixed value 55"
 category = TC_YDST
 returns = integer
 [[.args]]
@@ -8078,9 +8078,9 @@ type = unitcode
 default = "hfoo"
 
 [YDWEGetUnitFoodUsed]
-title = "Get 消耗人口 (单位)"
-description = "Get ${Unit} 建造时消耗的人口"
-comment = "本触发只能获取普通单位建造时消耗的人口，若填入英雄单位，将会获得固定值5"
+title = "YDWE Get Unit Food Used (Unit)"
+description = "Get ${Unit} food cost in build"
+comment = "This trigger action can only use to get the build cost of food cost, if input a hero unit, will get a fixed value 5"
 category = TC_YDST
 returns = integer
 [[.args]]
@@ -8088,9 +8088,9 @@ type = unit
 default = "GetTriggerUnit"
 
 [YDWEGetUnitFoodMade]
-title = "Get 提供人口 (单位)"
-description = "Get ${Unit} 建造后提供的人口"
-comment = "本触发只能获取普通单位建造后提供的人口，若填入英雄单位，将会获得固定值0"
+title = "YDWE Get Unit Food Made (Unit)"
+description = "Get ${Unit}  food made in build"
+comment = "This trigger action can only use to get the build cost of food made, if input a hero unit, will get a fixed value 0"
 category = TC_YDST
 returns = integer
 [[.args]]
@@ -8098,27 +8098,27 @@ type = unit
 default = "GetTriggerUnit"
 
 [YDWECoordinateX]
-title = "修正X坐标 [YDWE]"
-description = "需要修正的X坐标为：${Real}"
-comment = "设修正X坐标，强制它大于地图边界最小值，小于地图边界最大值，避免弹出游戏错误。"
+title = "YDWE Coordinate X [YDWE]"
+description = "X axis that need fix is ${Real}"
+comment = "Set the modified X coordinate to force it to be larger than the minimum value of the map boundary, which is smaller than the maximum value of the map boundary and avoid playing the game error."
 category = TC_YDST
 returns = real
 [[.args]]
 type = real
 
 [YDWECoordinateY]
-title = "修正Y坐标 [YDWE]"
-description = "需要修正的Y坐标为：${Real}"
-comment = "设修正Y坐标，强制它大于地图边界最小值，小于地图边界最大值，避免弹出游戏错误。"
+title = "YDWE Coordinate Y [YDWE]"
+description = "Y axis that need fix is  ${Real}"
+comment = "Set the modified Y coordinate to force it to be larger than the minimum value of the map boundary, which is smaller than the maximum value of the map boundary and avoid playing the game error."
 category = TC_YDST
 returns = real
 [[.args]]
 type = real
 
 [YDWEGetUnitArmor]
-title = "获取单位护甲<Rising_Dusk制作>"
-description = "Get ${Unit} 的护甲值，关联Ability为 ${辅助Ability}"
-comment = "可以获取单位的护甲值；需要保证混乱攻击对所有护甲均为100%伤害。关联Ability的设置请参考example文件夹下的辅助地图。"
+title = "YDWE Get Unit Armor<By Rising_Dusk>"
+description = "Get ${Unit} armor, linked Ability is ${Helper Ability}"
+comment = "You can get the armor value of Unit; it is necessary to ensure that the chaos attack is 100% damage to all armor. Refer to the setting of the associated Ability for the auxiliary map under the example folder."
 category = TC_YDST
 returns = real
 [[.args]]
@@ -8128,9 +8128,9 @@ default = "GetTriggerUnit"
 type = abilcode
 
 [YDWEId2S]
-title = "转换Id为字符串"
-description = "需要转换的Id为：${Integer}"
-comment = "将一个单位、Item等目标的Id转换成字符串；如'spsh'转换后为spsh。"
+title = "YDWE Convert Id to string"
+description = "Id to convert to string is : ${Integer}"
+comment = "Converts the Id of a unit, object, etc. to a string, such as SPSH after'spsh'conversion."
 category = TC_YDST
 returns = string
 [[.args]]
@@ -8138,7 +8138,7 @@ type = integer
 default = "'spsh'"
 
 [YDWEGetPlayerColorString]
-title = "附加上Player颜色"
+title = "YDWE Get Player Color String"
 description = "|c[${Player}]${Start}|r"
 comment = ""
 category = TC_YDST
@@ -8150,23 +8150,23 @@ default = "Player00"
 type = string
 
 [GetLastAbilityCastingUnit]
-title = "获取最后结束施放特殊Ability的单位"
-description = "获取最后结束施放特殊Ability的单位"
-comment = "响应单位释放特殊AbilityEvent，当Ability释放完毕后，可以获取最后施放特殊Ability的单位。"
+title = "YDWE Get Last Ability Casting Unit"
+description = "Get the last unit cast spec ability"
+comment = "Response the last unit who cast the special ability in event."
 category = TC_YDST
 returns = unit
 
 [GetLastAbilityTargetUnit]
-title = "获取最后被特殊Ability命中的单位"
-description = "获取最后被特殊Ability命中的单位"
-comment = "响应单位释放可以命中目标的特殊AbilityEvent，如钩子、月神箭；当Ability命中目标后，可以获取最后被特殊Ability命中的单位。"
+title = "YDWE Get Last Ability Casting Target Unit"
+description = "Get the last target unit cast spec ability"
+comment = "Response the last unit who cast the special ability in event."
 category = TC_YDST
 returns = unit
 
 [YDWEInitHashtable]
-title = "Create 哈希表(YDWE)"
-description = "Create 哈希表"
-comment = "获得一个新哈希表。"
+title = "Create Hashtable (YDWE)"
+description = "Create hashtable"
+comment = "Create a hashtable."
 category = TC_YDST
 use_in_event = 0
 returns = hashtable
@@ -8186,30 +8186,30 @@ category = TC_EVENTRESPONSE
 returns = real
 
 [GetOrderPointX]
-title = "命令发布点X坐标 [R]"
-description = "命令发布点X坐标"
-comment = "用坐标代替点可以省去创建、删除点的麻烦."
+title = "Target Point Of Issued Order X [R]"
+description = "X axis of target point of issued order"
+comment = "When responding to an 'Is Issued An Order Targeting A Point' unit event, this refers to the target of the order."
 category = TC_EVENTRESPONSE
 returns = real
 
 [GetOrderPointY]
-title = "命令发布点Y坐标 [R]"
-description = "命令发布点Y坐标"
-comment = "用坐标代替点可以省去创建、删除点的麻烦."
+title = "Target Point Of Issued Order Y [R]"
+description = "Y axis of target point of issued order"
+comment = "When responding to an 'Is Issued An Order Targeting A Point' unit event, this refers to the target of the order."
 category = TC_EVENTRESPONSE
 returns = real
 
 [GetSpellTargetX]
-title = "Ability施放点X坐标"
-description = "获取Ability目标点的X坐标"
-comment = "这是1.24的函数，但已加入函数库，在1.20也可以使用。"
+title = "Target Point Of Ability Being Cast X"
+description = "X axis of target point of ability being cast"
+comment = "It is a function of 1.24, but have added to trigger library, so it can be use in 1.20."
 category = TC_EVENTRESPONSE
 returns = real
 
 [GetSpellTargetY]
-title = "Ability施放点Y坐标"
-description = "获取Ability目标点的Y坐标"
-comment = "这是1.24的函数，但已加入函数库，在1.20也可以使用。"
+title = "Target Point Of Ability Being Cast Y"
+description = "Y axis of target point of ability being cast"
+comment = "It is a function of 1.24, but have added to trigger library, so it can be use in 1.20."
 category = TC_EVENTRESPONSE
 returns = real
 
@@ -8259,17 +8259,17 @@ use_in_event = 0
 returns = location
 
 [CreateRegion]
-title = "Create 区域 [R]"
-description = "Create 区域"
-comment = "Create a 一个新的不规则区域,如果不往该区域添加点或地区,则该区域无效果."
+title = "Create Region [R]"
+description = "Create a empty region"
+comment = "Create a Region, if not add range or rect, it have no effect."
 category = TC_REGION
 use_in_event = 0
 returns = region
 
 [GetTriggeringRegion]
-title = "触发区域 [R]"
-description = "触发区域"
-comment = "响应单位进入/离开不规则区域Event."
+title = "Get Trigger Region [R]"
+description = "Trigger region"
+comment = "Respons unit enter/leave region event."
 category = TC_EVENTRESPONSE
 returns = region
 
@@ -8590,9 +8590,9 @@ use_in_event = 0
 returns = abilcode
 
 [GetLearnedSkill]
-title = "学习Ability [R]"
-description = "学习Ability"
-comment = "响应'学习Ability'单位Event, 指代被学习的Ability."
+title = "Learned Hero Skill [R]"
+description = "Learned Hero Skill"
+comment = ""
 category = TC_EVENTRESPONSE
 returns = abilcode
 
@@ -8643,8 +8643,8 @@ category = TC_EVENTRESPONSE
 returns = timer
 
 [GetTriggeringTrackable]
-title = "Event响应 - 触发Trackable [R]"
-description = "Event响应 - 触发Trackable"
+title = "Event Response - Trigger Trackable [R]"
+description = "Event Response - Trigger Trackable"
 comment = ""
 category = TC_EVENTRESPONSE
 returns = trackable
@@ -8703,9 +8703,9 @@ returns = integer
 type = integer
 
 [StringHash]
-title = "获取字符串的哈希值"
-description = "(${String})的哈希值"
-comment = "获取一个对应该字符串的密钥，不同的字符串的密钥基本不可能相同，也很难找到两个不同的字符串他们有着相同的密钥。可以用于制作密码等功能。"
+title = "Get String ID [R]"
+description = "Key ${String}"
+comment = "Creates a key from a string for use in the hashtable."
 category = TC_MATH
 returns = integer
 [[.args]]
@@ -8894,9 +8894,9 @@ type = real
 type = real
 
 [Sin]
-title = "正弦(弧度) [R]"
+title = "Sine(Radian) [R]"
 description = "Sin(${Angle})"
-comment = "采用弧度制计算. "
+comment = "Using the radian system. "
 category = TC_MATH
 returns = real
 [[.args]]
@@ -8904,9 +8904,9 @@ type = radian
 default = "bj_PI"
 
 [Cos]
-title = "余弦(弧度) [R]"
+title = "Cosine(Radian) [R]"
 description = "Cos(${Angle})"
-comment = "采用弧度制计算. "
+comment = "Using the radian system. "
 category = TC_MATH
 returns = real
 [[.args]]
@@ -8914,9 +8914,9 @@ type = radian
 default = "bj_PI"
 
 [Tan]
-title = "正切(弧度) [R]"
+title = "Tangent(Radian) [R]"
 description = "Tan(${Angle})"
-comment = "采用弧度制计算. "
+comment = "Using the radian system. "
 category = TC_MATH
 returns = real
 [[.args]]
@@ -8924,9 +8924,9 @@ type = radian
 default = "bj_PI"
 
 [Asin]
-title = "反正弦(弧度) [R]"
-description = "Asin(${数值})"
-comment = "采用弧度制计算. 返回弧度取值-π/2 — π/2. "
+title = "Arcsine(Radian) [R]"
+description = "Asin(${Value})"
+comment = "Using the radian system. Return radian value -π/2 - π/2. "
 category = TC_MATH
 returns = radian
 [[.args]]
@@ -8936,9 +8936,9 @@ min = -1
 max = 1
 
 [Acos]
-title = "反余弦(弧度) [R]"
-description = "Acos(${数值})"
-comment = "采用弧度制计算. 返回弧度取值0 — π. "
+title = "Arccosine(Radian) [R]"
+description = "Acos(${Value})"
+comment = "Using the radian system. Return radian value 0 - π. "
 category = TC_MATH
 returns = radian
 [[.args]]
@@ -8948,9 +8948,9 @@ min = -1
 max = 1
 
 [Atan]
-title = "反正切(弧度) [R]"
-description = "Atan(${数值})"
-comment = "采用弧度制计算. 返回弧度取值-π/2 — π/2. "
+title = "Arctangent(Radian) [R]"
+description = "Atan(${Value})"
+comment = "Using the radian system. Return radian value -π/2 - π/2. "
 category = TC_MATH
 returns = radian
 [[.args]]
@@ -8958,9 +8958,9 @@ type = real
 default = "0"
 
 [Atan2]
-title = "反正切(Y:X)(弧度) [R]"
+title = "Arctangent(Y:X)(Radian) [R]"
 description = "Atan(${Y} : ${X})"
-comment = "采用弧度制计算. 返回弧度取值-π/2 — π/2. "
+comment = "Using the radian system. Return radian value -π/2 - π/2. "
 category = TC_MATH
 returns = radian
 [[.args]]
@@ -8969,9 +8969,9 @@ type = real
 type = real
 
 [YDWELogarithmLg]
-title = "对数函数(10为底)<c kuhn制作>"
+title = "LogarithmLg(10)<By c kuhn>"
 description = "Lg(${x})"
-comment = "10^n=x，那么lg(x)=n，如lg(100)=2；鸣谢zyl910"
+comment = "10^n=x, so lg(x)=n, e.g. lg(100)=2; Acknowledgement zyl910"
 category = TC_MATH
 returns = real
 [[.args]]
@@ -8979,9 +8979,9 @@ type = real
 min = 0.01
 
 [YDWELogarithmLn]
-title = "对数函数(e为底)<c kuhn制作>"
+title = "LogarithmLn (e)<By c kuhn>"
 description = "Ln(${x})"
-comment = "e^n=x，那么ln(x)=n，e即自然对数，约等于2.718281828；鸣谢zyl910"
+comment = "e^n=x, so ln(x)=n, e is natural logarithm, approximately equal to.718281828; Acknowledgement zyl910"
 category = TC_MATH
 returns = real
 [[.args]]
@@ -8989,9 +8989,9 @@ type = real
 min = 0.01
 
 [YDWELogarithmLog]
-title = "对数函数(任意底)<c kuhn制作>"
+title = "LogarithmLog(Any Value)<By c kuhn>"
 description = "Log(${a})(${b})"
-comment = "a^n=b，那么log(a)(b)=n，如log(2)(4)=2；鸣谢zyl910"
+comment = "a^n=b, So log(a)(b)=n, e.g. log(2)(4)=2; Acknowledgement zyl910"
 category = TC_MATH
 returns = real
 [[.args]]
@@ -9037,16 +9037,16 @@ type = timer
 
 [CreateTimerDialog]
 title = "Create Timer Window [R]"
-description = "为 ${Timer} 新建计时窗口"
-comment = "为一个Timer创建一个新建Timer Window."
+description = "Create a timer window for ${Timer}"
+comment = "Create a timer window for timer."
 category = TC_TIMER
 returns = timerdialog
 [[.args]]
 type = timer
 
 [CameraSetupGetField]
-title = "镜头属性(指定镜头) [R]"
-description = "${镜头} 的 ${Camera Field}"
+title = "Camera Field Of Camera Object (Special Camera) [R]"
+description = "${Camera} of ${Camera Field}"
 comment = ""
 category = TC_CAMERA
 returns = real
@@ -9192,9 +9192,9 @@ type = lightning
 default = "GetLastCreatedLightningBJ"
 
 [AddLightning]
-title = "Create Lightning效果 [R]"
-description = "Create Lightning效果: ${Lightning效果} (${Boolean}检查可见性) 起始点:(${X},${Y}) 终结点:(${X},${Y})"
-comment = "Create a Lightning效果. 允许检查可见性则在起始点和终结点都不可见时将不创建Lightning效果."
+title = "Create Lightning Effect [R]"
+description = "Create a Lightning effect: ${Lightning effect} (${Boolean} check visible) Start Point:(${X},${Y}) End Point:(${X},${Y})"
+comment = "Create a Lightning effect. Allowing inspection visibility will not create Lightning effects when the starting point and endpoint are not visible."
 category = TC_LIGHTNING
 returns = lightning
 [[.args]]
@@ -9217,9 +9217,9 @@ type = real
 default = "0"
 
 [AddLightningEx]
-title = "Create Lightning效果(指定Z轴) [R]"
-description = "Create Lightning效果: ${Lightning效果} (${Boolean}检查可见性) 起始点:(${X},${Y},${Z}) 终结点:(${X},${Y},${Z})"
-comment = "Create a Lightning效果. 允许检查可见性则在起始点和终结点都不可见时将不创建Lightning效果."
+title = "Create Lightning Effect (Z Axis) [R]"
+description = Create a Lightning effect: ${Lightning effect} (${Boolean} check visible) Start Point:(${X},${Y},${Z}) End Point:(${X},${Y},${Z})"
+comment = "Create a Lightning effect. Allowing inspection visibility will not create Lightning effects when the starting point and endpoint are not visible."
 category = TC_LIGHTNING
 returns = lightning
 [[.args]]
@@ -9296,9 +9296,9 @@ category = TC_LAST
 returns = unit
 
 [YDWEGetLastUnitPool]
-title = "Last Created 单位池 [YDWE]"
-description = "Last Created 单位池"
-comment = "该单位池必须是由YDWE提供的<创建单位池>动作生成，不然无法获取。"
+title = "YDWE Last Created Unit Pool [YDWE]"
+description = "Last Created Unit Pool"
+comment = "The Unit pool must be generated by YDWE, <YDWE Create Unit Pool> action, otherwise it will not be available."
 category = TC_LAST
 use_in_event = 0
 returns = unitpool
@@ -9325,16 +9325,16 @@ category = TC_LAST
 returns = item
 
 [GetLastMovedItemInItemSlot]
-title = "最后在Item栏中移动的Item [YDWE]"
-description = "最后在Item栏中移动的Item"
-comment = "最后一个单位在Item栏中移动的Item"
+title = "YDWE Get Last Moved Item In Item Slot [YDWE]"
+description = "Get last moved item in item slot"
+comment = "The last Unit moving in the Item column, Item"
 category = TC_LAST
 returns = item
 
 [GetLastCombinedItem]
-title = "最后被合成的Item [YDWE]"
-description = "最后被合成的Item"
-comment = "最后由Item合成系统合成的Item"
+title = "YDWE Get Last Combined Item [YDWE]"
+description = "Get last combined item"
+comment = "Finally, the Item synthesized by the Item synthesis system"
 category = TC_LAST
 returns = item
 
@@ -9484,9 +9484,9 @@ category = TC_LAST
 returns = hashtable
 
 [LoadHashtableHandle]
-title = "<1.24> 从哈希表提取哈希表 [C]"
-description = "在 ${Hashtable} 的主索引 ${Value} 子索引 ${Value} 内提取哈希表"
-comment = "如果不存在则返回空"
+title = "<1.24>  Load Hashtable Value (Hashtable) [C]"
+description = "Load from ${Hashtable} with ${Value} of ${Value}"
+comment = "If it does not exist, return null"
 category = TC_LAST
 returns = hashtable
 [[.args]]
@@ -9506,9 +9506,9 @@ use_in_event = 0
 returns = texttag
 
 [YDWECinSActor]
-title = "演员单位"
-description = "电影系统里编号为(${Integer})的演员"
-comment = "获取Script System电影系统中的演员单位。"
+title = "YDWE Actor Unit"
+description = "Actor in film system with the (${Integer})"
+comment = "Get the actor unit in the film system by index."
 category = TC_SCRIPTSET
 returns = unit
 [[.args]]
@@ -9517,9 +9517,9 @@ default = "1"
 min = 1
 
 [PlaceRandomUnit]
-title = "选择放置单位 [R]"
-description = "从 ${单位池} 中为 ${Player} 任意选择一个单位并放置到点( ${X} , ${Y}) 面向 ${度}"
-comment = "从单位池中随机选取一个单位类型."
+title = "Place Random Unit [R]"
+description = "Select a randowm unit in ${Unit Pool} for ${Player} and place at (${X} , ${Y}) , face ${degree}"
+comment = "Randomly select a UnitType from the Unit pool."
 category = TC_UNITPOOL
 returns = unit
 [[.args]]
@@ -9538,15 +9538,15 @@ type = degree
 default = "0"
 
 [YDWEGetLastPoolAbstractedUnit]
-title = "最后从单位池里取出的单位"
-description = "最后从单位池里取出的单位"
-comment = "该单位必须是由YDWE提供的<选择放置单位>动作生成，不然无法获取。"
+title = "YDWE Get Last Pool Abstracted Unit"
+description = "Finally Unit from the Unit pool"
+comment = "The unit must be provided by YDWE, <YDWE Select Place Unit> action generation, otherwise it can not be obtained.."
 category = TC_UNITPOOL
 returns = unit
 
 [PlaceRandomItem]
-title = "选择放置Item [R]"
-description = "从 ${Item Pool} 中任意选择一个Item并放置到( ${X} , ${Y})点"
+title = "Place Random Item [R]"
+description = "Select a random item form ${Item Pool} and place at (${X} , ${Y})Location "
 comment = ""
 category = TC_ITEMPOOL
 returns = item
@@ -9562,14 +9562,14 @@ default = "0"
 [DialogCreate]
 title = "Create Dialog [R]"
 description = "Create Dialog"
-comment = "创建新的Dialog."
+comment = "Create a New Dialog."
 category = TC_DIALOG
 returns = dialog
 
 [YDWEGetUnitID]
-title = "Get 单位 的整数地址"
-description = "Get ${Unit} 的整数地址"
-comment = "可以把一个单位转成整数，方便存入缓存或Hash表。"
+title = "Get Unit Handle ID"
+description = "Get ${Unit} handle ID"
+comment = "You can turn an Unit into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9577,9 +9577,9 @@ type = unit
 default = "GetTriggerUnit"
 
 [YDWEGetPlayerID]
-title = "Get Player 的整数地址"
-description = "Get ${Player} 的整数地址"
-comment = "可以把一个Player转成整数，方便存入缓存或Hash表。"
+title = "Get Player Handle ID"
+description = "Get ${Player} Handle ID"
+comment = "You can turn an Player into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9587,9 +9587,9 @@ type = player
 default = "GetTriggerPlayer"
 
 [YDWEGetItemID]
-title = "Get Item 的整数地址"
-description = "Get ${Item} 的整数地址"
-comment = "可以把一个Item转成整数，方便存入缓存或Hash表。"
+title = "Get Item Handle ID"
+description = "Get ${Item} Handle ID"
+comment = "You can turn an Item into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9597,9 +9597,9 @@ type = item
 default = "GetManipulatedItem"
 
 [YDWEGetTimerID]
-title = "Get Timer 的整数地址"
-description = "Get ${Timer} 的整数地址"
-comment = "可以把一个Timer转成整数，方便存入缓存或Hash表。"
+title = "Get Timer Handle ID"
+description = "Get ${Timer} Handle ID"
+comment = "You can turn an Timer into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9607,9 +9607,9 @@ type = timer
 default = "GetLastCreatedTimerBJ"
 
 [YDWEGetTriggerID]
-title = "Get Trigger 的整数地址"
-description = "Get ${Trigger} 的整数地址"
-comment = "可以把一个Trigger转成整数，方便存入缓存或Hash表。"
+title = "Get Trigger Handle ID"
+description = "Get ${Trigger} Handle ID"
+comment = "You can turn an Trigger into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9617,9 +9617,9 @@ type = trigger
 default = "GetTriggeringTrigger"
 
 [YDWEGetGroupID]
-title = "Get Unit Group 的整数地址"
-description = "Get ${Unit Group} 的整数地址"
-comment = "可以把一个Unit Group转成整数，方便存入缓存或Hash表。"
+title = "Get Unit Group Handle ID"
+description = "Get ${Unit Group} Handle ID"
+comment = "You can turn an Unit Group into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9627,18 +9627,18 @@ type = group
 default = "GetLastCreatedGroup"
 
 [YDWEGetLocationID]
-title = "Get 点 的整数地址"
-description = "Get ${点} 的整数地址"
-comment = "可以把一个点转成整数，方便存入缓存或Hash表。"
+title = "Get Location Handle ID"
+description = "Get ${Location} Handle ID"
+comment = "You can turn an Location into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
 type = location
 
 [YDWEGetUnitTypeID]
-title = "Get 单位类型 的整数地址"
-description = "Get ${单位类型} 的整数地址"
-comment = "可以把一个单位类型转成整数，方便存入缓存或Hash表。"
+title = "Get UnitType Handle ID"
+description = "Get ${UnitType} Handle ID"
+comment = "You can turn an UnitType into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9646,9 +9646,9 @@ type = unitcode
 default = "hfoo"
 
 [YDWEGetAbilityTypeID]
-title = "Get Ability类型 的整数地址"
-description = "Get ${Ability类型} 的整数地址"
-comment = "可以把一个Ability类型转成整数，方便存入缓存或Hash表。"
+title = "Get Ability Type Handle ID"
+description = "Get ${Ability Type} Handle ID"
+comment = "You can turn an Ability Type into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9656,9 +9656,9 @@ type = abilcode
 default = "Aloc"
 
 [YDWEGetItemTypeID]
-title = "Get Item Type 的整数地址"
-description = "Get ${Item Type} 的整数地址"
-comment = "可以把一个Item Type转成整数，方便存入缓存或Hash表。"
+title = "Get Item Type Handle ID"
+description = "Get ${Item Type} Handle ID"
+comment = "You can turn an Item Type into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9666,9 +9666,9 @@ type = itemcode
 default = "spsh"
 
 [YDWEGetMultiboardID]
-title = "Get Multi Board 的整数地址"
-description = "Get ${Multi Board} 的整数地址"
-comment = "可以把一个Multi Board转成整数，方便存入缓存或Hash表。"
+title = "Get Multi Board Handle ID"
+description = "Get ${Multi Board} Handle ID"
+comment = "You can turn an Multi Board into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9676,18 +9676,18 @@ type = multiboard
 default = "GetLastCreatedMultiboard"
 
 [YDWEGetMultiboardItemID]
-title = "Get Multi Board Item 的整数地址"
-description = "Get ${Multi Board Item} 的整数地址"
-comment = "可以把一个Multi Board Item转成整数，方便存入缓存或Hash表。"
+title = "Get Multi Board Item Handle ID"
+description = "Get ${Multi Board Item} Handle ID"
+comment = "You can turn an Multi Board Item into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
 type = multiboarditem
 
 [YDWEGetTextTagID]
-title = "Get Text Tag 的整数地址"
-description = "Get ${Text Tag} 的整数地址"
-comment = "可以把一个Text Tag转成整数，方便存入缓存或Hash表。"
+title = "Get Text Tag Handle ID"
+description = "Get ${Text Tag} Handle ID"
+comment = "You can turn an Text Tag into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9695,9 +9695,9 @@ type = texttag
 default = "GetLastCreatedTextTag"
 
 [YDWEGetLightningID]
-title = "Get Lightning 的整数地址"
-description = "Get ${Lightning} 的整数地址"
-comment = "可以把一个Lightning成转整数，方便存入缓存或Hash表。"
+title = "Get Lightning Handle ID"
+description = "Get ${Lightning} Handle ID"
+comment = "You can turn an Lightning into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9705,9 +9705,9 @@ type = lightning
 default = "bj_lastCreatedLightning"
 
 [YDWEGetRegionID]
-title = "Get 区域 的整数地址"
-description = "Get ${区域} 的整数地址"
-comment = "可以把一个区域转成整数，方便存入缓存或Hash表。"
+title = "Get Region Handle ID"
+description = "Get ${Region} Handle ID"
+comment = "You can turn an Region into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9715,9 +9715,9 @@ type = region
 default = "GetTriggeringRegion"
 
 [YDWEGetRectID]
-title = "Get 地区 的整数地址"
-description = "Get ${地区} 的整数地址"
-comment = "可以把一个地区转成整数，方便存入缓存或Hash表。"
+title = "Get Rect Handle ID"
+description = "Get ${Rect} Handle ID"
+comment = "You can turn an Rect into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9725,9 +9725,9 @@ type = rect
 default = "GetPlayableMapRect"
 
 [YDWEGetLeaderboardID]
-title = "Get Leaderboard 的整数地址"
-description = "Get ${Leaderboard} 的整数地址"
-comment = "可以把一个Leaderboard转成整数，方便存入缓存或Hash表。"
+title = "Get Leaderboard Handle ID"
+description = "Get ${Leaderboard} Handle ID"
+comment = "You can turn an Leaderboard into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9735,9 +9735,9 @@ type = leaderboard
 default = "DestroyLeaderboard"
 
 [YDWEGetEffectID]
-title = "Get Effect 的整数地址"
-description = "Get ${Effect} 的整数地址"
-comment = "可以把一个Effect转成整数，方便存入缓存或Hash表。"
+title = "Get Effect Handle ID"
+description = "Get ${Effect} Handle ID"
+comment = "You can turn an Effect into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9745,9 +9745,9 @@ type = effect
 default = "GetLastCreatedEffectBJ"
 
 [YDWEGetDestructableID]
-title = "Get Destructable 的整数地址"
-description = "Get ${Destructable} 的整数地址"
-comment = "可以把一个Destructable转成整数，方便存入缓存或Hash表。"
+title = "Get Destructable Handle ID"
+description = "Get ${Destructable} Handle ID"
+comment = "You can turn an Destructable into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9755,45 +9755,45 @@ type = destructable
 default = "GetLastCreatedDestructable"
 
 [YDWEGetTriggerConditionID]
-title = "Get Condition 的整数地址"
-description = "Get ${Condition} 的整数地址"
-comment = "可以把一个Condition转成整数，方便存入缓存或Hash表。"
+title = "Get Condition Handle ID"
+description = "Get ${Condition} Handle ID"
+comment = "You can turn an Condition into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
 type = triggercondition
 
 [YDWEGetTriggerActionID]
-title = "Get Trigger Action 的整数地址"
-description = "Get ${Trigger Action} 的整数地址"
-comment = "可以把一个Trigger Action转成整数，方便存入缓存或Hash表。"
+title = "Get Trigger Action Handle ID"
+description = "Get ${Trigger Action} Handle ID"
+comment = "You can turn an Trigger Action into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
 type = triggeraction
 
 [YDWEGetTriggerEventID]
-title = "Get Event 的整数地址"
-description = "Get ${Event} 的整数地址"
-comment = "可以把一个Event转成整数，方便存入缓存或Hash表。"
+title = "Get Event Handle ID"
+description = "Get ${Event} Handle ID"
+comment = "You can turn an Event into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
 type = event
 
 [YDWEGetForceID]
-title = "Get Force 的整数地址"
-description = "Get ${Force} 的整数地址"
-comment = "可以把一个Force转成整数，方便存入缓存或Hash表。"
+title = "Get Force Handle ID"
+description = "Get ${Force} Handle ID"
+comment = "You can turn an Force into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
 type = force
 
 [YDWEGetBoolexprID]
-title = "Get Boolexpr 的整数地址"
-description = "Get ${Boolexpr} 的整数地址"
-comment = "可以把一个Boolexpr转成整数，方便存入缓存或Hash表。"
+title = "Get Boolexpr Handle ID"
+description = "Get ${Boolexpr} Handle ID"
+comment = "You can turn an Boolexpr into an integer to store the cache or Hash table."
 category = TC_YDID
 returns = integer
 [[.args]]
@@ -9861,7 +9861,7 @@ type = gamecache
 default = "GetLastCreatedGameCacheBJ"
 
 [YDWEConvert]
-title = "命令ID"
+title = "YDWE Convert ID"
 description = "${ID}"
 comment = ""
 category = TC_CONVERSION
@@ -9870,9 +9870,9 @@ returns = ordercode
 type = integer
 
 [YDWEAbilityId2OrderId]
-title = "Ability的命令ID"
-description = "${Ability} 的 ${类型}"
-comment = "AbilityID一定要用常量"
+title = "YDWE Ability ID To Order ID"
+description = "${Ability} of ${type}"
+comment = "AbilityID need a const value"
 category = TC_CONVERSION
 returns = ordercode
 [[.args]]
@@ -9883,8 +9883,8 @@ type = OrderType
 default = OrderTypeOrder
 
 [YDWEUOrderId2OrderId]
-title = "单位目标命令"
-description = "${命令}"
+title = "Unit Oreder ID To Order ID"
+description = "${Order}"
 comment = ""
 category = TC_CONVERSION
 returns = ordercode
@@ -9892,8 +9892,8 @@ returns = ordercode
 type = ordercodeutarg
 
 [YDWEPOrderId2OrderId]
-title = "点目标命令"
-description = "${命令}"
+title = "Point Target Order ID to Order ID"
+description = "${Order}"
 comment = ""
 category = TC_CONVERSION
 returns = ordercode
@@ -9901,8 +9901,8 @@ returns = ordercode
 type = ordercodeptarg
 
 [YDWEDOrderId2OrderId]
-title = "Destructable目标命令"
-description = "${命令}"
+title = "Destructable Target Order ID to Order ID"
+description = "${Order}"
 comment = ""
 category = TC_CONVERSION
 returns = ordercode
@@ -9910,8 +9910,8 @@ returns = ordercode
 type = ordercodedtarg
 
 [YDWEIOrderId2OrderId]
-title = "Item目标命令"
-description = "${命令}"
+title = "Item Target Order ID to Order ID"
+description = "${Order}"
 comment = ""
 category = TC_CONVERSION
 returns = ordercode
@@ -9919,8 +9919,8 @@ returns = ordercode
 type = ordercodeitarg
 
 [YDWENOrderId2OrderId]
-title = "无目标命令"
-description = "${命令}"
+title = "Immediate Order ID to Order ID"
+description = "${Order}"
 comment = ""
 category = TC_CONVERSION
 returns = ordercode
