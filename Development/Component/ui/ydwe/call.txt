@@ -3372,8 +3372,8 @@ default = "OrderCodeMove"
 type = location
 
 [IssueTargetOrderById]
-title = "Issue Order Targeting A Point (Location)(ID)"
-description = "Order ${Unit} with Order ID ${Order} ${Location}"
+title = "Issue Order Targeting A Unit (ID)"
+description = "Order ${Unit} with Order ID ${Order} ${Unit}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -3819,7 +3819,7 @@ max = 5
 
 [UnitDropItemSlotBJ]
 title = "Issue Move Item In Inventory Order"
-description = "${Unit} to move ${Item} to inventory slot ${Index}"
+description = "Order ${Unit} to move ${Item} to inventory slot ${Index}"
 comment = "This only works if the unit is already carrying the item.  If an item exists in the slot, the items will be swapped."
 category = TC_UNIT
 returns = boolean
