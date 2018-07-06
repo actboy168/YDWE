@@ -6,10 +6,12 @@
 #include <base/win/process.h>
 #include <base/util/ini.h>
 #include <base/util/format.h>
-#include <base/warcraft3/directory.h>
-#include <base/warcraft3/command_line.h>
 #include <base/win/registry/key.h> 
 #include <base/hook/fp_call.h>
+
+#define YDWE_WAR3_INLINE
+#include <base/warcraft3/directory.h>
+#include <base/warcraft3/command_line.h>
 
 static std::wstring get_test_map_path()
 {

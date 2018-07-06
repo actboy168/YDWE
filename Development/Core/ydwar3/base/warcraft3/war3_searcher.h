@@ -1,11 +1,11 @@
 #pragma once
 
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 #include <base/warcraft3/basic_searcher.h>
 
 namespace base { namespace warcraft3 {
 
-	class _BASE_API war3_searcher : public basic_searcher
+	class _WAR3_API war3_searcher : public basic_searcher
 	{
 		typedef basic_searcher _Mybase;
 	public:
@@ -45,11 +45,11 @@ namespace base { namespace warcraft3 {
 		}
 	};
 
-	_BASE_API war3_searcher& get_war3_searcher();
-	_BASE_API uintptr_t   find_objectid_64(const objectid_64& id);
-	_BASE_API const char* get_class_name(uintptr_t ptr);
-	_BASE_API uintptr_t   get_vfn_ptr(const char* name);
-	_BASE_API uint32_t    get_object_type(uintptr_t ptr);
-	_BASE_API uintptr_t   handle_to_object(uint32_t handle);
-	_BASE_API uint32_t    object_to_handle(uintptr_t obj);
+	_WAR3_API war3_searcher& get_war3_searcher();
+	_WAR3_API uintptr_t   find_objectid_64(const objectid_64& id);
+	_WAR3_API const char* get_class_name(uintptr_t ptr);
+	_WAR3_API uintptr_t   get_vfn_ptr(const char* name);
+	_WAR3_API uint32_t    get_object_type(uintptr_t ptr);
+	_WAR3_API uintptr_t   handle_to_object(uint32_t handle);
+	_WAR3_API uint32_t    object_to_handle(uintptr_t obj);
 }}

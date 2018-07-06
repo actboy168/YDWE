@@ -5,7 +5,10 @@
 #include <string>
 #include <functional>
 #include <base/util/foreach.h>
+
+#define YDWE_WAR3_INLINE
 #include <base/warcraft3/detail/string_hash.h>
+#include <base/warcraft3/detail/string_hash.cpp>
 
 extern BOOL g_bDisableSaveLoadSystem;
 extern BOOL g_local_in_mainproc;

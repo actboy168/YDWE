@@ -1,12 +1,12 @@
 #pragma once
 
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 #include <base/win/pe_reader.h>
 #include <utility>
 
 namespace base { namespace warcraft3 {
 
-	class _BASE_API basic_searcher
+	class _WAR3_API basic_searcher
 	{
 	public:
 		basic_searcher(HMODULE hModule);
@@ -42,7 +42,7 @@ namespace base { namespace warcraft3 {
 		uintptr_t text_end_;
 	};
 
-	_BASE_API uintptr_t convert_function(uintptr_t address);
-	_BASE_API uintptr_t next_opcode(uintptr_t address);
-	_BASE_API uintptr_t next_opcode(uintptr_t address, uint8_t opcode, size_t length);
+	_WAR3_API uintptr_t convert_function(uintptr_t address);
+	_WAR3_API uintptr_t next_opcode(uintptr_t address);
+	_WAR3_API uintptr_t next_opcode(uintptr_t address, uint8_t opcode, size_t length);
 }}

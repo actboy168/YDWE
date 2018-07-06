@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 #include <vector>
 #include <cstdint>
 
@@ -18,7 +18,7 @@ namespace base { namespace warcraft3 { namespace jass {
 	const static jboolean_t jfalse = 0;
 	const static jhandle_t jnull = 0;
 
-	class _BASE_API string_fake
+	class _WAR3_API string_fake
 	{
 	public:
 		string_fake();
@@ -35,7 +35,7 @@ namespace base { namespace warcraft3 { namespace jass {
 		uint32_t memory_[8];
 	};
 
-	class _BASE_API call_param
+	class _WAR3_API call_param
 	{
 	public:
 		call_param(size_t n);
@@ -56,18 +56,18 @@ namespace base { namespace warcraft3 { namespace jass {
 #pragma warning(pop)
 	};
 
-	_BASE_API float       from_real      (jreal_t val);
-	_BASE_API jreal_t     to_real        (float val);
-	_BASE_API const char* from_string    (jstring_t val);
-	_BASE_API string_fake to_string      (const char* val);
+	_WAR3_API float       from_real      (jreal_t val);
+	_WAR3_API jreal_t     to_real        (float val);
+	_WAR3_API const char* from_string    (jstring_t val);
+	_WAR3_API string_fake to_string      (const char* val);
 
-	_BASE_API jstring_t   create_string  (const char* val);
-	_BASE_API const char* from_trigstring(const char* val);
-	_BASE_API const char* from_stringid  (uint32_t strid);
+	_WAR3_API jstring_t   create_string  (const char* val);
+	_WAR3_API const char* from_trigstring(const char* val);
+	_WAR3_API const char* from_stringid  (uint32_t strid);
 
-	_BASE_API void        handle_ref     (jhandle_t h);
-	_BASE_API void        handle_unref   (jhandle_t h);
+	_WAR3_API void        handle_ref     (jhandle_t h);
+	_WAR3_API void        handle_unref   (jhandle_t h);
 
-	_BASE_API uintptr_t   call           (const char* name, ...);
-	_BASE_API uintptr_t   call           (uintptr_t func_address, const uintptr_t* param_list, size_t param_list_size);
+	_WAR3_API uintptr_t   call           (const char* name, ...);
+	_WAR3_API uintptr_t   call           (uintptr_t func_address, const uintptr_t* param_list, size_t param_list_size);
 }}}

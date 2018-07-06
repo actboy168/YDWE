@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/opcode.h>
 #include <base/warcraft3/hashtable.h>
@@ -63,7 +63,7 @@ namespace base { namespace warcraft3 { namespace jass {
 	}
 
 
-	class _BASE_API global_variable
+	class _WAR3_API global_variable
 	{
 	public:
 		struct array_entry;

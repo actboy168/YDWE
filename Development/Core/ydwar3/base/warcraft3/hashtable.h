@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 #include <cstdint>
 #include <base/warcraft3/detail/string_hash.h>
 #include <cstring>
@@ -380,8 +380,8 @@ namespace base { namespace warcraft3 {
 		handle_table_t**             handle_table;	        //0x28A4
 	};
 
-	_BASE_API jass_vm_t*                    get_jass_vm(int index = 1);
-	_BASE_API uintptr_t                     get_jass_thread();
-	_BASE_API hashtable::native_func_table* get_native_function_hashtable();
-	_BASE_API uintptr_t                     get_current_jass_pos();
+	_WAR3_API jass_vm_t*                    get_jass_vm(int index = 1);
+	_WAR3_API uintptr_t                     get_jass_thread();
+	_WAR3_API hashtable::native_func_table* get_native_function_hashtable();
+	_WAR3_API uintptr_t                     get_current_jass_pos();
 }}

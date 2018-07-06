@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 #include <functional>
 #include <map>
 #include <string>
@@ -9,7 +9,7 @@ namespace base { namespace warcraft3 {
 
 #pragma warning (push)
 #pragma warning (disable:4251)
-	class _BASE_API command_line
+	class _WAR3_API command_line
 		: public std::map<std::wstring, std::wstring>
 	{
 	public:

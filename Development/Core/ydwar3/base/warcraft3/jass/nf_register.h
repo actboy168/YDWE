@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 #include <base/util/signal.h>
 #include <cstdint>
 

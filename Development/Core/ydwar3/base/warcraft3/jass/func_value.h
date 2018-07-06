@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 #include <stdint.h>
 #include <vector>
 #include <unordered_map>
@@ -22,7 +22,7 @@ namespace base { namespace warcraft3 { namespace jass {
 		TYPE_NOTHING = 'V',
 	};
 
-	class _BASE_API func_value
+	class _WAR3_API func_value
 	{
 	public:
 		func_value();
@@ -57,13 +57,13 @@ namespace base { namespace warcraft3 { namespace jass {
 	};
 
 	typedef std::unordered_map<std::string, func_value> func_mapping;
-	_BASE_API extern func_mapping jass_function;
-	_BASE_API extern func_mapping japi_function;
+	_WAR3_API extern func_mapping jass_function;
+	_WAR3_API extern func_mapping japi_function;
 
-	_BASE_API func_value const* jass_func(const char* proc_name);
-	_BASE_API func_value const* japi_func(const char* proc_name);
-	/*_BASE_API*/ bool japi_func_add(const char* proc_name, uintptr_t new_proc);
-	/*_BASE_API*/ bool japi_func_add(const char* proc_name, uintptr_t new_proc, const char* param);
-	/*_BASE_API*/ bool japi_func_clean();
-	_BASE_API func_mapping initialize_mapping(const char* startfunc);
+	_WAR3_API func_value const* jass_func(const char* proc_name);
+	_WAR3_API func_value const* japi_func(const char* proc_name);
+	/*_WAR3_API*/ bool japi_func_add(const char* proc_name, uintptr_t new_proc);
+	/*_WAR3_API*/ bool japi_func_add(const char* proc_name, uintptr_t new_proc, const char* param);
+	/*_WAR3_API*/ bool japi_func_clean();
+	_WAR3_API func_mapping initialize_mapping(const char* startfunc);
 }}}

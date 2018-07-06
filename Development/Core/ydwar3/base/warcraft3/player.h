@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/config.h>
+#include <base/warcraft3/config.h>
 #include <stdint.h>
 
 namespace base { namespace warcraft3 { namespace player {
@@ -52,8 +52,8 @@ namespace base { namespace warcraft3 { namespace player {
 		uint32_t  unkc7;
 	};
 
-	_BASE_API uintptr_t from_id(uint32_t pid);
-	_BASE_API uint32_t  local_pid();
-	_BASE_API uintptr_t local();
-	_BASE_API selection_t* selection(uintptr_t player);
+	_WAR3_API uintptr_t from_id(uint32_t pid);
+	_WAR3_API uint32_t  local_pid();
+	_WAR3_API uintptr_t local();
+	_WAR3_API selection_t* selection(uintptr_t player);
 }}}

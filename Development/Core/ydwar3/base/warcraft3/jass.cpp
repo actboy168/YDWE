@@ -212,28 +212,28 @@ namespace base { namespace warcraft3 { namespace jass {
 		, string_buffer_(n)
 	{ }
 
-	template <> _BASE_API
+	template <> _WAR3_API
 	void call_param::push<uintptr_t>(size_t i, uintptr_t value)
 	{
 		assert(i < param_buffer_.size());
 		param_buffer_[i] = value;
 	}
 
-	template <> _BASE_API
+	template <> _WAR3_API
 	void call_param::push<intptr_t>(size_t i, intptr_t value)
 	{
 		assert(i < param_buffer_.size());
 		param_buffer_[i] = *(uintptr_t*)&value;
 	}
 
-	template <> _BASE_API
+	template <> _WAR3_API
 	void call_param::push<bool>(size_t i, bool value)
 	{
 		assert(i < param_buffer_.size());
 		param_buffer_[i] = value? 1: 0;
 	}
 
-	template <> _BASE_API
+	template <> _WAR3_API
 	void call_param::push<float>(size_t i, float value)
 	{
 		push_real(i, to_real(value));
@@ -246,7 +246,7 @@ namespace base { namespace warcraft3 { namespace jass {
 		param_buffer_[i] = (uintptr_t)&real_buffer_[i];
 	}
 
-	template <> _BASE_API
+	template <> _WAR3_API
 	void call_param::push<const char*>(size_t i, const char* value)
 	{
 		assert(i < param_buffer_.size());
