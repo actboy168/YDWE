@@ -2111,8 +2111,8 @@ type = integer
 default = "0"
 
 [RandomDestructableInRectSimpleBJ]
-title = "Random Destructible In Region"
-description = "Random destructible in ${Region}"
+title = "Random Destructable In Region"
+description = "Random Destructable in ${Region}"
 comment =""
 category = TC_NOTHING
 returns = destructable
@@ -2120,9 +2120,9 @@ returns = destructable
 type = rect
 
 [RandomDestructableInRectBJ]
-title = "Random Destructible In Region Matching Condition"
-description = "Random destructible in ${Region} matching ${Condition}"
-comment = "Use 'Matching Destructible' to refer to the destructible being considered."
+title = "Random Destructable In Region Matching Condition"
+description = "Random Destructable in ${Region} matching ${Condition}"
+comment = "Use 'Matching Destructable' to refer to the Destructable being considered."
 category = TC_NOTHING
 returns = destructable
 [[.args]]
@@ -2131,22 +2131,22 @@ type = rect
 type = boolexpr
 
 [GetEnumDestructable]
-title = "Picked Destructible"
-description = "Picked destructible"
-comment = "When using the 'Pick Every Destructible...' action, this refers to each destructible as it is picked."
+title = "Picked Destructable"
+description = "Picked Destructable"
+comment = "When using the 'Pick Every Destructable...' action, this refers to each Destructable as it is picked."
 category = TC_NOTHING
 returns = destructable
 
 [GetFilterDestructable]
-title = "Matching Destructible"
-description = "Matching destructible"
-comment = "Use this to refer to the destructible being considered for the 'Random Destructible' functions."
+title = "Matching Destructable"
+description = "Matching Destructable"
+comment = "Use this to refer to the Destructable being considered for the 'Random Destructable' functions."
 category = TC_NOTHING
 returns = destructable
 
 [GetDestructableTypeId]
-title = "Destructible-Type of Destructible"
-description = "Destructible-type of ${Destructible}"
+title = "Destructable-Type of Destructable"
+description = "Destructable-type of ${Destructable}"
 comment =""
 category = TC_NOTHING
 returns = destructablecode
@@ -3293,7 +3293,7 @@ default = "UnitOrderAttackUnit"
 type = unit
 
 [IssueTargetDestructableOrder]
-title = "Issue Order Targeting A Destructible"
+title = "Issue Order Targeting A Destructable"
 description = "Order ${Unit} to ${Order} ${Destructable}"
 comment = ""
 script_name = IssueTargetOrder
@@ -3304,7 +3304,7 @@ type = unit
 default = "GetTriggerUnit"
 [[.args]]
 type = unitorderdtarg
-default = "UnitOrderHarvestDestructible"
+default = "UnitOrderHarvestDestructable"
 [[.args]]
 type = destructable
 
@@ -3372,8 +3372,8 @@ default = "OrderCodeMove"
 type = location
 
 [IssueTargetOrderById]
-title = "Issue Order Targeting A Unit(ID)"
-description = "Order ${Unit} with Order ID ${Order} ${Unit}"
+title = "Issue Order Targeting A Point (Location)(ID)"
+description = "Order ${Unit} with Order ID ${Order} ${Location}"
 comment = ""
 category = TC_UNIT
 returns = boolean
@@ -3387,7 +3387,7 @@ default = "OrderCodeAttackUnit"
 type = unit
 
 [IssueTargetDestructableOrderById]
-title = "Issue Order Targeting A Destructible(ID)"
+title = "Issue Order Targeting A Destructable(ID)"
 description = "Order ${Unit} with Order ID ${Order} ${Destructable}"
 comment = ""
 script_name = IssueTargetOrderById
@@ -3398,7 +3398,7 @@ type = unit
 default = "GetTriggerUnit"
 [[.args]]
 type = ordercodedtarg
-default = "OrderCodeHarvestDestructible"
+default = "OrderCodeHarvestDestructable"
 [[.args]]
 type = destructable
 
@@ -3475,7 +3475,7 @@ default = "UnitOrderNeutralInterAct"
 type = unit
 
 [IssueNeutralTargetDestructableOrder]
-title = "Issue Neutral Order Targeting A Destructible"
+title = "Issue Neutral Order Targeting A Destructable"
 description = "${Player} order ${Unit} to ${Order} ${Destructable}"
 comment = "Can be used to issue orders to other player's units."
 script_name = IssueNeutralTargetOrder
@@ -3489,7 +3489,7 @@ type = unit
 default = "GetTriggerUnit"
 [[.args]]
 type = unitorderdtarg
-default = "UnitOrderHarvestDestructible"
+default = "UnitOrderHarvestDestructable"
 [[.args]]
 type = destructable
 
@@ -3569,7 +3569,7 @@ default = "OrderCodeNeutralInterAct"
 type = unit
 
 [IssueNeutralTargetDestructableOrderById]
-title = "Issue Neutral Order Targeting A Destructible(ID)"
+title = "Issue Neutral Order Targeting A Destructable(ID)"
 description = "${Player} order ${Unit} with Order ID ${Order} ${Destructable}"
 comment = "Can be used to issue orders to other player's units."
 script_name = IssueNeutralTargetOrderById
@@ -3583,7 +3583,7 @@ type = unit
 default = "GetTriggerUnit"
 [[.args]]
 type = ordercodedtarg
-default = "OrderCodeHarvestDestructible"
+default = "OrderCodeHarvestDestructable"
 [[.args]]
 type = destructable
 
@@ -3666,7 +3666,7 @@ default = YDWEAbilityId2OrderId
 type = unit
 
 [YDWEIssueNeutralTargetDestructableOrderById]
-title = "YDWE Issue Neutral Order Targeting A Destructible(ID)"
+title = "YDWE Issue Neutral Order Targeting A Destructable(ID)"
 description = "${Player} order ${Unit} with Order ID ${Order} ${Destructable}"
 comment = "Can be used to issue orders to other player's units. Use integer order id directly."
 script_name = IssueNeutralTargetOrderById
@@ -3705,7 +3705,7 @@ type = item
 
 [IssueTrainOrderByIdBJ]
 title = "Issue Train/Upgrade Order"
-description = "Order ${Unit}  to train/upgrade to a ${Unit-Type}"
+description = "Order ${Unit} to train/upgrade to a ${Unit-Type}"
 comment = "This action can be used to order a unit to upgrade itself.  A Town Hall, for example, can be upgraded by ordering it to train a Keep."
 script_name = IssueImmediateOrderById
 category = TC_UNIT
@@ -3720,7 +3720,7 @@ default = "hfoo"
 [IssueUpgradeOrderByIdBJ]
 title = "Issue Research Order"
 description = "Order ${Unit} to research ${Tech-Type}"
-comment = ""
+comment = "Weapons and armor upgrades can be researched multiple times via this trigger action."
 script_name = IssueImmediateOrderById
 category = TC_UNIT
 returns = boolean
@@ -3820,7 +3820,7 @@ max = 5
 [UnitDropItemSlotBJ]
 title = "Issue Move Item In Inventory Order"
 description = "${Unit} to move ${Item} to inventory slot ${Index}"
-comment = "This only works if the unit is already carrying the item."
+comment = "This only works if the unit is already carrying the item.  If an item exists in the slot, the items will be swapped."
 category = TC_UNIT
 returns = boolean
 [[.args]]
@@ -4802,9 +4802,9 @@ type = unit
 default = "GetTriggerUnit"
 
 [GetUnitRallyDestructable]
-title = "Rally-Point As Destructible"
-description = "Rally-Point of ${Unit} as a destructible"
-comment = "If the unit does not have a rally-point set to a destructible, this will return 'No destructible'."
+title = "Rally-Point As Destructable"
+description = "Rally-Point of ${Unit} as a Destructable"
+comment = "If the unit does not have a rally-point set to a Destructable, this will return 'No Destructable'."
 category = TC_UNIT
 use_in_event = 0
 returns = destructable
@@ -5258,8 +5258,8 @@ type = player
 default = "Player00"
 
 [IsDestructableAliveBJ]
-title = "Destructible Is Alive"
-description = "${Destructible} is alive"
+title = "Destructable Is Alive"
+description = "${Destructable} is alive"
 comment =""
 category = TC_DESTRUCT
 returns = boolean
@@ -5268,8 +5268,8 @@ type = destructable
 default = "GetLastCreatedDestructable"
 
 [IsDestructableDeadBJ]
-title = "Destructible Is Dead"
-description = "${Destructible} is dead"
+title = "Destructable Is Dead"
+description = "${Destructable} is dead"
 comment =""
 category = TC_DESTRUCT
 returns = boolean
@@ -5278,8 +5278,8 @@ type = destructable
 default = "GetLastCreatedDestructable"
 
 [IsDestructableInvulnerableBJ]
-title = "Destructible Is Invulnerable"
-description = "${Destructible} is invulnerable"
+title = "Destructable Is Invulnerable"
+description = "${Destructable} is invulnerable"
 comment =""
 script_name = IsDestructableInvulnerable
 category = TC_DESTRUCT
@@ -5291,7 +5291,7 @@ default = "GetLastCreatedDestructable"
 [GetElevatorHeight]
 title = "Elevator Height"
 description = "Height of ${Elevator}"
-comment = "An elevator's height can be changed using the 'Destructible - Set Elevator Height' action."
+comment = "An elevator's height can be changed using the 'Destructable - Set Elevator Height' action."
 category = TC_DESTRUCT
 returns = integer
 [[.args]]
@@ -5299,8 +5299,8 @@ type = destructable
 
 [GetDestructableLife]
 title = "Life"
-description = "Current life of ${Destructible}"
-comment = "Destructibles lose life when attacked or harvested.  Like units, destructibles die when their life reaches 0."
+description = "Current life of ${Destructable}"
+comment = "Destructables lose life when attacked or harvested.  Like units, Destructables die when their life reaches 0."
 category = TC_DESTRUCT
 returns = real
 [[.args]]
@@ -5309,8 +5309,8 @@ default = "GetLastCreatedDestructable"
 
 [GetDestructableMaxLife]
 title = "Max Life"
-description = "Max life of ${Destructible}"
-comment = "Destructibles lose life when attacked or harvested.  Like units, destructibles die when their life reaches 0."
+description = "Max life of ${Destructable}"
+comment = "Destructables lose life when attacked or harvested.  Like units, Destructables die when their life reaches 0."
 category = TC_DESTRUCT
 returns = real
 [[.args]]
@@ -5319,7 +5319,7 @@ default = "GetLastCreatedDestructable"
 
 [GetDestructableOccluderHeight]
 title = "Occlusion Height"
-description = "Occlusion height of ${Destructible}"
+description = "Occlusion height of ${Destructable}"
 comment =""
 category = TC_DESTRUCT
 returns = real
@@ -5347,8 +5347,8 @@ type = destructable
 default = "GetLastCreatedDestructable"
 
 [GetDestructableName]
-title = "Destructible Name"
-description = "Name of ${Destructible}"
+title = "Destructable Name"
+description = "Name of ${Destructable}"
 comment =""
 category = TC_DESTRUCT
 returns = string
@@ -5357,8 +5357,8 @@ type = destructable
 default = "GetLastCreatedDestructable"
 
 [GetDestructableLoc]
-title = "Position Of Destructible"
-description = "Position of ${Destructible}"
+title = "Position Of Destructable"
+description = "Position of ${Destructable}"
 comment =""
 category = TC_DESTRUCT
 returns = location
@@ -8523,23 +8523,23 @@ category = TC_EVENTRESPONSE
 returns = ordercode
 
 [GetDyingDestructable]
-title = "Dying Destructible"
-description = "Dying destructible"
-comment = "When responding to a 'Destructible Dies' event, this refers to the destructible that is dying."
+title = "Dying Destructable"
+description = "Dying Destructable"
+comment = "When responding to a 'Destructable Dies' event, this refers to the Destructable that is dying."
 category = TC_EVENTRESPONSE
 returns = destructable
 
 [GetOrderTargetDestructable]
-title = "Target Destructible Of Issued Order"
-description = "Target destructible of issued order"
-comment = "When responding to an 'Is Issued An Order Targeting An Object' unit event with a destructible target, this refers to the target of the order."
+title = "Target Destructable Of Issued Order"
+description = "Target Destructable of issued order"
+comment = "When responding to an 'Is Issued An Order Targeting An Object' unit event with a Destructable target, this refers to the target of the order."
 category = TC_EVENTRESPONSE
 returns = destructable
 
 [GetSpellTargetDestructable]
-title = "Target Destructible Of Ability Being Cast"
-description = "Target destructible of ability being cast"
-comment = "When responding to 'Channeling/Casting/etc. casting an ability' unit events with a destructible target, this refers to the target of the ability being cast."
+title = "Target Destructable Of Ability Being Cast"
+description = "Target Destructable of ability being cast"
+comment = "When responding to 'Channeling/Casting/etc. casting an ability' unit events with a Destructable target, this refers to the target of the ability being cast."
 category = TC_EVENTRESPONSE
 use_in_event = 0
 returns = destructable
@@ -9304,9 +9304,9 @@ use_in_event = 0
 returns = unitpool
 
 [GetLastCreatedDestructable]
-title = "Last Created Destructible"
-description = "Last created destructible"
-comment = "This is the last destructible created via a 'Destructible - Create' trigger action."
+title = "Last Created Destructable"
+description = "Last created Destructable"
+comment = "This is the last Destructable created via a 'Destructable - Create' trigger action."
 category = TC_LAST
 returns = destructable
 
