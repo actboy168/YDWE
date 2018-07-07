@@ -26,7 +26,11 @@
 #  *
 #  */
 #                                               
+#if defined(YDHASH_SUPPORT_SETNULL)                                       
+#  define YDHashSet(handle, type, table, key, value)         YDTRIGGER_SET_##type##(handle, table, key, value)
+#else                                   
 #  define YDHashSet(handle, type, table, key, value)         YDTRIGGER_##type##(SET)(handle, table, key, value)
+#endif   
 #  define YDHashGet(handle, type, table, key)                YDTRIGGER_##type##(GET)(handle, table, key)
 #
 #  define YDHashSetEx(handle, type, table, key, value)       YDHashSet(handle, type, table, key, value)

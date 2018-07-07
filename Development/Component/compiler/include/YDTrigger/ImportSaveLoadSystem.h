@@ -8,6 +8,8 @@
 #ifndef INCLUDE_IMPORT_SAVE_LOAD_SYSTEM_H
 #define INCLUDE_IMPORT_SAVE_LOAD_SYSTEM_H
 
+#define YDHASH_SUPPORT_SETNULL 1
+
 #if WARCRAFT_VERSION >= 124
 #    define YDHASH_HANDLE_TYPE hashtable
 #    define YDHASH_HANDLE YDHT
@@ -36,7 +38,11 @@ globals
     YDHASH_HANDLE_TYPE YDLOC
 endglobals
 
-#if WARCRAFT_VERSION < 124
+#if WARCRAFT_VERSION >= 124
+#if defined(YDHASH_SUPPORT_SETNULL)
+    #include <YDTrigger/SaveLoadSystem/HTSystem.j>
+#endif
+#else
     #include <YDTrigger/SaveLoadSystem/GCSystem.j>
 #endif
 
