@@ -18,7 +18,7 @@ void lua_pushwstring(lua_State* L, const std::wstring& str)
 	lua_pushlstring(L, ustr.data(), ustr.size());
 }
 
-uintptr_t RealLuaPcall = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"luacore.dll"), "lua_pcallk");
+uintptr_t RealLuaPcall = (uintptr_t)::GetProcAddress(::GetModuleHandleW(L"lua54.dll"), "lua_pcallk");
 int FakeLuaPcall(lua_State *L, int nargs, int nresults, int errfunc)
 {
 	EXCEPTION_POINTERS* xp = nullptr;

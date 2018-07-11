@@ -102,9 +102,6 @@
     <ClCompile Include="..\ltm.c">
       <Filter>core\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\lundump.c">
-      <Filter>core\source</Filter>
-    </ClCompile>
     <ClCompile Include="..\lvm.c">
       <Filter>core\source</Filter>
     </ClCompile>

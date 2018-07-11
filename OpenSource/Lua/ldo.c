@@ -768,8 +768,8 @@ static void f_parser (lua_State *L, void *ud) {
   struct SParser *p = cast(struct SParser *, ud);
   int c = zgetc(p->z);  /* read first character */
   if (c == LUA_SIGNATURE[0]) {
-    checkmode(L, p->mode, "binary");
-    cl = luaU_undump(L, p->z, p->name);
+	lua_pushstring(L, "binary loader not available");
+	lua_error(L);
   }
   else {
     checkmode(L, p->mode, "text");
