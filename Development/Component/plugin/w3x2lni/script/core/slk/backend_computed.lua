@@ -79,7 +79,7 @@ local function around_integer(value)
     if math.type(value) ~= 'float' then
         return value
     end
-    return math.floor((value * 10000 + 0.5) / 10000)
+    return math.floor(value + 0.00005)
 end
 
 local function computed_value(slk, str, name, field)
