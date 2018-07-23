@@ -6,9 +6,6 @@
 #include <memory>
 #include <deque>
 #include <assert.h>
-#if !defined(DISABLE_DETOURS)
-#include <detours.h>
-#endif
 
 namespace base { namespace win {
 

@@ -4,11 +4,9 @@
 #include <base/filesystem.h>
 #include <Windows.h>
 #include <base/win/process.h>
-#include <base/win/file_version.h>
 #include <base/util/unicode.h>
-#include <base/util/console.h>
 #include <fcntl.h>
-#include <io.h>	  
+#include <io.h>
 
 namespace process {
 	namespace pipe {
