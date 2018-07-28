@@ -1,6 +1,6 @@
 [YDWESetUnitAbilityState]
-title = "设置技能属性 [JAPI]"
-description = "设置 ${单位} 的 ${技能} 的 ${状态} 为 ${Value}"
+title = "YDWE Set Unit Ability State [JAPI]"
+description = "Set unit ${Unit} ,its ability ${Ability} in state ${State} is ${Value}"
 comment = ""
 category = TC_UNIT
 [[.args]]
@@ -15,8 +15,8 @@ default = "ABILITY_STATE_COOLDOWN"
 type = real
 
 [YDWESetUnitAbilityDataInteger]
-title = "设置技能数据 (整数) [JAPI]"
-description = "设置 ${单位} 的 ${技能} 第 ${等级} 级的 ${数据} 为 ${Value}"
+title = "YDWE Set Unit Ability Data Integer (Integer) [JAPI]"
+description = "Set unit ${Unit} ,its ability ${Ability} in Level ${Level} with data column ${Data} is ${Value}"
 comment = ""
 category = TC_UNIT
 [[.args]]
@@ -35,9 +35,9 @@ default = "ABILITY_DATA_COST"
 type = integer
 
 [YDWESetUnitAbilityDataReal]
-title = "设置技能数据 (实数) [JAPI]"
-description = "设置 ${单位} 的 ${技能} 第 ${等级} 级的 ${数据} 为 ${Value}"
-comment = "数据A~数据I也就是物体编辑器里按Ctrl+D后看到的DataA~DataI"
+title = "YDWE Set Unit Ability Data Real (Real) [JAPI]"
+description = "Set unit ${Unit} ,its ability ${Ability} in Level ${Level} with data column ${Data} is ${Value}"
+comment = "Data A~ means the data column you can see in Object manager as DataA~DataI if you pause Ctrl+D"
 category = TC_UNIT
 [[.args]]
 type = unit
@@ -55,8 +55,8 @@ default = "ABILITY_DATA_COOL"
 type = real
 
 [YDWESetUnitAbilityDataString]
-title = "设置技能数据 (字符串) [JAPI]"
-description = "设置 ${单位} 的 ${技能} 第 ${等级} 级的 ${数据} 为 ${Value}"
+title = "YDWE Set Unit Ability Data String (String) [JAPI]"
+description = "Set unit ${Unit} ,its ability ${Ability} in Level ${Level} with data column ${Data} is ${Value}"
 comment = ""
 category = TC_UNIT
 [[.args]]
@@ -75,9 +75,9 @@ default = "ABILITY_DATA_TIP"
 type = string
 
 [YDWEUnitTransform]
-title = "单位变身 [JAPI]"
-description = "${单位} ${技能}为 ${目标单位}"
-comment = "技能请填恶魔猎手的变身<AEme>或其复制品"
+title = "YDWE UnitTransform [JAPI]"
+description = "Transform ${Unit} with ${Ability} to ${TargetUnit}"
+comment = "The ability you use need Metamorphosis <AEme> or its copy"
 category = TC_UNIT
 [[.args]]
 type = unit
@@ -90,8 +90,8 @@ type = unitcode
 default = "hfoo"
 
 [YDWEUnitAddStun]
-title = "单位添加晕眩 [JAPI]"
-description = "${单位} 添加晕眩"
+title = "YDWE Add Stun to unit [JAPI]"
+description = "Add stun to ${Unit}"
 comment = ""
 category = TC_UNIT
 [[.args]]
@@ -99,26 +99,26 @@ type = unit
 default = "GetTriggerUnit"
 
 [YDWEUnitRemoveStun]
-title = "单位移除晕眩 [JAPI]"
-description = "${单位} 移除晕眩"
-comment = "别用来移风暴之锤之类的晕眩。因为它只会移除晕眩并不会移除晕眩的buff。"
+title = "YDWE Remove Stun from unit [JAPI]"
+description = "Remove stun from ${unit}"
+comment = "Do not use stun of Storm Bolt, because it just remove stun but keep buff of stun exist."
 category = TC_UNIT
 [[.args]]
 type = unit
 default = "GetTriggerUnit"
 
 [YDWESetEventDamage]
-title = "设置伤害值 [JAPI]"
-description = "设置单位所受伤害为 ${伤害值}"
-comment = "修改伤害事件里的伤害值，不能在等待之后使用。"
+title = "YDWE Set Damage [JAPI]"
+description = "Set Damage Of Unit ${DamageValue}"
+comment = "Modify damage value in Damage Event, do not use after Wait."
 category = TC_UNIT
 [[.args]]
 type = real
 default = "0."
 
 [YDWERHSetGameWinner]
-title = "设置联盟胜利 [JAPI]"
-description = "设置队伍(${整数})获胜"
+title = "YDWE Set Alliance Victory [JAPI]"
+description = "Set force (${Ingeger}) victory"
 comment = "队伍1的ID为0，队伍2的ID为1。"
 category = TC_YDHIDE
 [[.args]]
@@ -127,88 +127,9 @@ default = "0"
 min = 0
 max = 15
 
-[YDWERecordSetTitle]
-title = "11RPG存档-设置平台积分项名称 [JAPI]"
-description = "11RPG存档，平台界面上第${整数}个名称为〖${战斗力}〗"
-comment = "这里可以设置需要显示在平台界面上的积分项名字，最多可显示8个积分项，每个积分项名字不超过3个汉字。"
-category = TC_YDSL
-[[.args]]
-type = integer
-default = "0"
-min = 0
-max = 7
-[[.args]]
-type = string
-
-[YDWERecordSetI]
-title = "11RPG存档-设置玩家存档数据 [JAPI]"
-description = "11RPG存档，${玩家}的〖${战斗力}〗=${整数}"
-comment = "设置玩家11RPG存档里某个目录下的数据，如设置玩家一的战斗力为5。"
-category = TC_YDSL
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = string
-[[.args]]
-type = integer
-default = "5"
-
-[YDWERecordSave]
-title = "11RPG存档-保存玩家存档数据 [JAPI]"
-description = "11RPG存档，保存${玩家}所有数据"
-comment = "11RPG存档数据必须保存后才能生效。"
-category = TC_YDSL
-[[.args]]
-type = player
-default = "Player00"
-
-[YDWERecordClear]
-title = "11RPG存档-清空玩家存档数据 [JAPI]"
-description = "11RPG存档，清空${玩家}所有数据"
-comment = "由于每个玩家最多只能存储100条左右的数据，假如超过上限，建议使用此功能清空全部数据，然后重新保存有用的数据。"
-category = TC_YDSL
-[[.args]]
-type = player
-default = "Player00"
-
-[YDWERPGSetKey]
-title = "11RPG积分-设置玩家积分数据 [JAPI]"
-description = "11RPG积分，${玩家}的〖${战斗力}〗= ${整数}"
-comment = "修改积分数据，覆盖型。"
-category = TC_YDSL
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = string
-[[.args]]
-type = integer
-default = "5"
-
-[YDWERPGAddKey]
-title = "11RPG积分-增加玩家积分数据 [JAPI]"
-description = "11RPG积分，${玩家}的〖${战斗力}〗+= ${整数}"
-comment = "修改积分数据，累加型。名字需要是xx+1的形式，1表示一局这项最多可以增加的值。注意设置合理的值来避免刷分。"
-category = TC_YDSL
-[[.args]]
-type = player
-default = "Player00"
-[[.args]]
-type = string
-[[.args]]
-type = integer
-default = "5"
-
-[YDWERPGGameEnd]
-title = "11RPG积分-游戏结束 [JAPI]"
-description = "11RPG积分，游戏结束"
-comment = "游戏结束，开始算分"
-category = TC_YDSL
-
 [YDWEDisplayChat]
-title = "模拟玩家聊天 [JAPI]"
-description = "模拟 ${Player} 在 ${频道} 发言: ${文字}"
+title = "YDWE Player Chat Simulation [JAPI]"
+description = "Simulation of ${Player} in ${channel} send: ${msg}"
 comment = ""
 category = TC_PLAYER
 [[.args]]
@@ -221,8 +142,8 @@ default = "CHAT_RECIPIENT_ALL"
 type = StringExt
 
 [YDWESetItemDataString]
-title = "设置物品数据 (字符串) [JAPI]"
-description = "设置 ${物品} 的 ${数据} 为 ${Value}"
+title = "YDWE Set Item Data (String) [JAPI]"
+description = "Set ${Item} in ${DataColumn} to ${Value}"
 comment = ""
 category = TC_ITEM
 [[.args]]
@@ -235,8 +156,8 @@ default = "ITEM_DATA_TIP"
 type = string
 
 [YDWESetEffectLoc]
-title = "移动到点 [JAPI]"
-description = "移动 ${特效} 到${点}"
+title = "YDWE Move Effect To Location [JAPI]"
+description = "Move ${effect} to ${location}"
 comment = ""
 category = TC_SPECIALEFFECT
 [[.args]]
@@ -246,8 +167,8 @@ default = "bj_lastCreatedEffect"
 type = location
 
 [EXSetEffectXY]
-title = "移动到坐标 [JAPI]"
-description = "移动 ${特效} 到（ ${X}, ${Y} ）"
+title = "YDWE Set Effect XY[JAPI]"
+description = "Move ${effect} to ( ${X}, ${Y} )"
 comment = ""
 category = TC_SPECIALEFFECT
 [[.args]]
@@ -261,8 +182,8 @@ type = real
 default = "0"
 
 [EXSetEffectZ]
-title = "设置高度 [JAPI]"
-description = "设置 ${特效} 的高度为 ${高度}"
+title = "YDWE Set Effect Z [JAPI]"
+description = "Set ${effect} height to ${height}"
 comment = ""
 category = TC_SPECIALEFFECT
 [[.args]]
@@ -273,8 +194,8 @@ type = real
 default = "0"
 
 [EXSetEffectSize]
-title = "设置大小 [JAPI]"
-description = "设置 ${特效} 的大小为 ${大小}"
+title = "YDWE Set Effect Size [JAPI]"
+description = "Set ${effect} size to ${size}"
 comment = ""
 category = TC_SPECIALEFFECT
 [[.args]]
@@ -285,8 +206,8 @@ type = real
 default = "1"
 
 [EXSetEffectSpeed]
-title = "设置动画速度 [JAPI]"
-description = "设置 ${特效} 的动画速度为 ${动画速度}"
+title = "YDWE Set Effect Animation Speed [JAPI]"
+description = "Set ${effect} animation speed to ${speed}"
 comment = ""
 category = TC_SPECIALEFFECT
 [[.args]]
@@ -297,18 +218,18 @@ type = real
 default = "1"
 
 [EXEffectMatReset]
-title = "重置变换 [JAPI]"
-description = "重置 ${特效}"
-comment = "清空所有的旋转和缩放，重置为初始状态。"
+title = "YDWE Reset Effect mat [JAPI]"
+description = "Reset ${effect}"
+comment = "Clear all rotation and scale, reset to init"
 category = TC_SPECIALEFFECT
 [[.args]]
 type = effect
 default = "bj_lastCreatedEffect"
 
 [EXEffectMatRotateX]
-title = "绕X轴旋转 [JAPI]"
-description = "${特效} 绕X轴旋转 ${度} 度"
-comment = "多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
+title = "YDWE Rotate Around X Axis  [JAPI]"
+description = "Set ${effect} rotate around X axis ${degree} degree"
+comment = "Multiple calls, the effect will be superimposed, do not want to overlay the need to first reset to the initial state."
 category = TC_SPECIALEFFECT
 [[.args]]
 type = effect
@@ -318,9 +239,9 @@ type = degree
 default = "0"
 
 [EXEffectMatRotateY]
-title = "绕Y轴旋转 [JAPI]"
-description = "${特效} 绕Y轴旋转 ${度} 度"
-comment = "多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
+title = "YDWE Rotate Around Y Axis  [JAPI]"
+description = "Set ${effect} rotate around Y axis ${degree} degree"
+comment = "Multiple calls, the effect will be superimposed, do not want to overlay the need to first reset to the initial state."
 category = TC_SPECIALEFFECT
 [[.args]]
 type = effect
@@ -330,9 +251,9 @@ type = degree
 default = "0"
 
 [EXEffectMatRotateZ]
-title = "绕Z轴旋转 [JAPI]"
-description = "${特效} 绕Z轴旋转 ${度} 度"
-comment = "多次调用，效果会叠加，不想叠加需要先重置为初始状态。"
+title = "YDWE Rotate Around Z Axis  [JAPI]"
+description = "Set ${effect} rotate around Z axis ${degree} degree"
+comment = "Multiple calls, the effect will be superimposed, do not want to overlay the need to first reset to the initial state."
 category = TC_SPECIALEFFECT
 [[.args]]
 type = effect
@@ -342,9 +263,9 @@ type = degree
 default = "0"
 
 [EXEffectMatScale]
-title = "缩放 [JAPI]"
-description = "设置 ${特效} 的X轴缩放[ ${缩放} ]，Y轴缩放[ ${缩放} ]，Z轴缩放[ ${缩放} ]。"
-comment = "多次调用，效果会叠加，不想叠加需要先重置为初始状态。设置为2,2,2时相当于大小变为2倍。设置为负数时，就是镜像翻转。"
+title = "YDWE Scale Effect [JAPI]"
+description = "Set ${effect} size in X axis to [ ${scale} ], in Y axis to[ ${scale} ],in Y axis to[ ${scale} ]。"
+comment = "Multiple calls, the effect will be superimposed, do not want to overlay the need to first reset to the initial state.When set to 2,2,2, the size is 2 times the size. When the negative number is set, it is the mirror image flipping."
 category = TC_SPECIALEFFECT
 [[.args]]
 type = effect
@@ -360,9 +281,9 @@ type = real
 default = "1"
 
 [EXSetUnitFacing]
-title = "设置单位面向角度 [JAPI]"
-description = "设置 ${单位} 的面向角度为 ${Angle} 度"
-comment = "立即转身"
+title = "YDWE Set Unit Facing [JAPI]"
+description = "Set ${unit} facing angle to ${Angle} degree"
+comment = "Change immediately"
 category = TC_UNIT
 [[.args]]
 type = unit
@@ -371,8 +292,8 @@ type = degree
 default = "RealUnitFacing"
 
 [EXSetUnitMoveType]
-title = "设置单位的移动类型 [JAPI]"
-description = "设置 ${单位} 的移动类型为 ${Value}"
+title = "YDWE Set Move Type [JAPI]"
+description = "Set move type of ${unit} to ${Value}"
 comment = ""
 category = TC_UNIT
 [[.args]]
@@ -383,8 +304,8 @@ type = MoveType
 default = "MoveType06"
 
 [EXSetUnitCollisionType]
-title = "设置单位的碰撞类型 [JAPI]"
-description = "${启用/禁用} ${单位} 对 ${碰撞} 的碰撞"
+title = "YDWE Set Unit Collision Type [JAPI]"
+description = "${Enable/Disable} collision from ${unit} to ${collision}"
 comment = ""
 category = TC_UNIT
 [[.args]]
@@ -396,3 +317,4 @@ default = "GetTriggerUnit"
 [[.args]]
 type = CollisionType
 default = "CollisionType01"
+

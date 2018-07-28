@@ -1,7 +1,7 @@
 [YDWEDisableRegister]
-title = "休眠 [YDWE]"
-description = "休眠"
-comment = "休眠后，当前触发器不会在读取地图时进行注册，需要手动激活."
+title = "YDWE Disable Register [YDWE]"
+description = "Sleep Trigger"
+comment = "After sleep, the current trigger does not register when reading the map, and needs to be activated manually."
 category = TC_NOTHING
 [[.args]]
 type = nothing

@@ -1,0 +1,118 @@
+[Roch]
+Name=Chaos
+
+[Rome]
+Name=Steel Melee Weapons,Thorium Melee Weapons,Arcanite Melee Weapons
+Tip=Upgrade to Steel |cffffcc00M|relee Weapons,Upgrade to Thorium |cffffcc00M|relee Weapons,Upgrade to Arcanite |cffffcc00M|relee Weapons
+Ubertip="Increases the melee attack damage of Grunts, Raiders and Tauren.","Further increases the melee attack damage of Grunts, Raiders and Tauren.","Further increases the melee attack damage of Grunts, Raiders and Tauren."
+Hotkey=M,M,M
+
+[Rora]
+Name=Steel Ranged Weapons,Thorium Ranged Weapons,Arcanite Ranged Weapons
+Tip=Upgrade to Steel |cffffcc00R|ranged Weapons,Upgrade to Thorium |cffffcc00R|ranged Weapons,Upgrade to Arcanite |cffffcc00R|ranged Weapons
+Ubertip="Increases the ranged attack damage of Headhunters, Wind Riders, Troll Batriders and Demolishers.","Further increases the ranged attack damage of Headhunters, Wind Riders, Troll Batriders and Demolishers.","Further increases the ranged attack damage of Headhunters, Wind Riders, Troll Batriders and Demolishers."
+Hotkey=R,R,R
+
+[Roar]
+Name=Steel Armor,Thorium Armor,Arcanite Armor
+Tip=Upgrade to Steel Unit |cffffcc00A|rrmor,Upgrade to Thorium Unit |cffffcc00A|rrmor,Upgrade to Arcanite Unit |cffffcc00A|rrmor
+Ubertip="Increases the armor of Grunts, Raiders, Troll Batriders, Tauren, Headhunters, Wind Riders and Demolishers.","Further increases the armor of Grunts, Raiders, Troll Batriders, Tauren, Headhunters, Wind Riders and Demolishers.","Further increases the armor of Grunts, Raiders, Troll Batriders, Tauren, Headhunters, Wind Riders and Demolishers."
+Hotkey=A,A,A
+
+[Rwdm]
+Name=War Drums Damage Increase
+Tip=Upgrade War |cffffcc00D|rrums
+Ubertip="Increases the damage bonus that the War Drums aura on the Kodo Beast gives. War Drums increases the damage of friendly units around Kodo Beasts."
+Hotkey=D
+
+// pillage
+[Ropg]
+Name=Pillage
+Tip=Pilla|cffffcc00g|re
+Ubertip="Causes Peons', Grunts', and Raiders' attacks to gain resources when hitting enemy buildings."
+Hotkey=G
+
+[Robs]
+Name=Berserker Strength
+Tip=Research |cffffcc00B|rerserker Strength
+Ubertip="Improves the fighting capabilities of Grunts with a <Robs,base1> hit point increase, and <Robs,base2> bonus attack damage."
+Hotkey=B
+
+[Rows]
+Name=Pulverize
+Tip=Research |cffffcc00P|rulverize
+Ubertip="Gives Tauren the Pulverize ability. Pulverize gives Tauren a chance of dealing area effect damage on their attacks."
+Hotkey=P
+
+[Roen]
+Name=Ensnare
+Tip=Research E|cffffcc00n|rsnare
+Ubertip="Enables Raiders to use the Ensnare ability. Ensnare causes a target enemy unit to be bound to the ground so that it cannot move. Air units that are ensnared can be attacked as though they were land units."
+Hotkey=N
+
+[Rovs]
+Name=Envenomed Spears
+Tip=Research |cffffcc00E|rnvenomed Spears
+Ubertip="Adds an additional poison effect to Wind Riders' attacks. A unit poisoned by Envenomed Spears takes damage over time."
+Hotkey=E
+
+[Rowd]
+Name=Witch Doctor Adept Training,Witch Doctor Master Training
+Tip=Witch |cffffcc00D|roctor Adept Training,Witch |cffffcc00D|roctor Master Training
+Ubertip="Increases Witch Doctors' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Stasis Trap.","Increases Witch Doctors' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Healing Ward."
+Hotkey=D,D
+
+[Rost]
+Name=Shaman Adept Training,Shaman Master Training
+Tip=Sha|cffffcc00m|ran Adept Training,Sha|cffffcc00m|ran Master Training
+Ubertip="Increases Shaman mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Lightning Shield.","Increases Shaman mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Bloodlust."
+Hotkey=M,M
+
+[Rosp]
+Name=Spiked Barricades,Improved Spiked Barricades,Advanced Spiked Barricades
+Tip=Upgrade to |cffffcc00S|rpiked Barricades,Upgrade to Improved |cffffcc00S|rpiked Barricades,Upgrade to Advanced |cffffcc00S|rpiked Barricades
+Ubertip="Surrounds Orc buildings with spikes that damage enemy melee attackers. Deals <Rosp,base1> damage per attack.","Increases the amount of damage inflicted on melee attackers by <Rosp,mod1>.","Further increases the amount of damage inflicted on melee attackers by <Rosp,mod1>."
+Hotkey=S,S,S
+
+[Rotr]
+Name=Troll Regeneration,Improved Troll Regeneration,Advanced Troll Regeneration
+Tip=Research Troll |cffffcc00R|regeneration, Research Improved Troll |cffffcc00R|regeneration, Research Advanced Troll |cffffcc00R|regeneration
+Ubertip="Increases the hit point regeneration rate of Headhunters, Witch Doctors and Troll Batriders.","Further increases the hit point regeneration rate of Headhunters, Witch Doctors and Troll Batriders.","Further increases the hit point regeneration rate of Headhunters, Witch Doctors and Troll Batriders."
+Hotkey=R
+
+[Rolf]
+Name=Liquid Fire
+Tip=Research |cffffcc00L|riquid Fire
+Ubertip="Gives Troll Batriders the Liquid Fire attack, which deals damage over time to enemy buildings, stops them from being repaired, and reduces the attack rate of enemy buildings."
+Hotkey=L
+
+[Ropm]
+Name=Backpack
+EditorSuffix= (Orc)
+Tip=Research |cffffcc00B|rackpack
+Ubertip="Gives specific Orc ground units the ability to carry items."
+Hotkey=B
+
+[Rowt]
+Name=Spirit Walker Adept Training,Spirit Walker Master Training
+Tip=Spi|cffffcc00r|rit Walker Adept Training,Spi|cffffcc00r|rit Walker Master Training
+Ubertip="Increases Spirit Walkers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Disenchant.","Increases Spirit Walkers' mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Ancestral Spirit."
+Hotkey=R,R
+
+[Robk]
+Name=Berserker Upgrade
+Tip=B|cffffcc00e|rrserker Upgrade
+Ubertip="Transforms Headhunters into Troll Berserkers, giving them increased hit points and the Berserk ability."
+Hotkey=E
+
+[Rorb]
+Name=Reinforced Defenses
+Tip=Reinforced |cffffcc00D|refenses
+Ubertip="Upgrades Burrows and Watch Towers so that they have Fortified armor."
+Hotkey=D
+
+[Robf]
+Name=Burning Oil
+Tip=Bur|cffffcc00n|ring Oil
+Ubertip="Upgrades Demolishers to fire rocks smothered in burning oil, which causes the ground to burn."
+Hotkey=N

@@ -1,0 +1,178 @@
+//allied building
+[Aall]
+Name=Shop Sharing, Allied Bldg.
+
+//burrow detection, fliers
+[Abdt]
+Name=Burrow Detection
+EditorSuffix= (Fliers, Obsolete)
+
+//purchase (shop)
+[Apit]
+Name=Shop Purchase Item
+
+[Amou]
+Name=Mount
+Tip=Mo|cffffcc00r|rph
+Untip=De-Mo|cffffcc00r|rph
+Ubertip="Morphs the hero into an alternate form."
+Unubertip="Returns the hero to normal form."
+Hotkey=R
+Unhotkey=R
+
+[Ahar]
+Name=Harvest
+Tip=|cffffcc00G|rather
+Ubertip="Mines gold from gold mines and harvests lumber from trees."
+Untip=R|cffffcc00e|rturn Resources
+Unubertip="Return the carried resources to the nearest town hall."
+Hotkey=G
+Unhotkey=E
+EditorSuffix= (Gold and Lumber)
+
+[Ahrl]
+Name=Harvest
+Tip=|cffffcc00G|rather
+Ubertip="Harvests lumber from trees."
+Untip=R|cffffcc00e|rturn Resources
+Unubertip="Return the carried resources to the nearest Necropolis or Graveyard."
+Hotkey=G
+Unhotkey=E
+EditorSuffix= (Ghouls Lumber)
+
+[Arev]
+Name=Revive Hero
+
+[Aawa]
+Name=Revive Hero Instantly
+
+// passive 'detector' ability
+[Adet]
+Name=Detector
+
+[Adt1]
+Name=Detector
+
+[Adta]
+Name=Reveal
+Tip=|cffffcc00R|reveal
+Hotkey=R
+
+[Bdet]
+Bufftip=Detected
+Buffubertip="This unit is detected; an enemy player can see it."
+
+[Bvul]
+Bufftip=Invulnerable
+Buffubertip="This unit is invulnerable; it will not take damage from attacks and cannot be targeted by spells."
+
+[Bspe]
+Bufftip=Speed Bonus
+Buffubertip="This unit has a speed bonus; it moves more quickly than it normally does."
+
+[Bfro]
+Bufftip=Slowed
+Buffubertip="This unit is slowed; it moves more slowly than it normally does."
+
+// peon/peasant repair ability
+[Arep]
+Name=Repair
+Tip=|cffffcc00R|repair
+Ubertip="Repairs mechanical units and structures at the cost of resources."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=R
+Unhotkey=R
+
+// Abilities that need names in the editor
+[AEpa]
+Name=Poison Arrows
+Tip=Poison A|cffffcc00r|rrows - [|cffffcc00Level 1|r],Poison A|cffffcc00r|rrows  - [|cffffcc00Level 2|r],Poison A|cffffcc00r|rrows  - [|cffffcc00Level 3|r]
+Ubertip="Adds <AHfa,DataA1> bonus fire damage to an attack against enemies, but drains mana with each shot fired.","Adds <AHfa,DataA2> bonus fire damage to an attack, but drains mana with each shot fired.","Adds <AHfa,DataA3> bonus fire damage to an attack, but drains mana with each shot fired."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=R
+Unhotkey=R
+Researchtip="Learn Poison A|cffffcc00r|rrows - [|cffffcc00Level %d|r]"
+Researchubertip="Increases the damage of the Priestess' attack by adding fire. |n|n|cffffcc00Level 1|r - <AHfa,DataA1> bonus damage. |n|cffffcc00Level 2|r - <AHfa,DataA2> bonus damage. |n|cffffcc00Level 3|r - <AHfa,DataA3> bonus damage."
+Researchhotkey=R
+
+[AEbu]
+Name=Build (Night Elf)
+
+[AGbu]
+Name=Build (Naga)
+
+[AHbu]
+Name=Build (Human)
+
+[AHer]
+Name=Hero
+
+[ANbu]
+Name=Build (Neutral)
+
+[AObu]
+Name=Build (Orc)
+
+[ARal]
+Name=Rally
+
+[AUbu]
+Name=Build (Undead)
+
+[Aalr]
+Name=Alarm
+
+[Aatk]
+Name=Attack
+
+[Afih]
+Name=On Fire (Human)
+
+[Afin]
+Name=On Fire (Night Elf)
+
+[Afio]
+Name=On Fire (Orc)
+
+[Afir]
+Name=On Fire
+
+[Afiu]
+Name=On Fire (Undead)
+
+[Aloc]
+Name=Locust
+
+[Amov]
+Name=Move
+
+[Atdp]
+Name=Drop Pilot
+
+[Atlp]
+Name=Load Pilot
+
+[Attu]
+Name=Turret
+
+// Stun buff
+[BSTN]
+Bufftip=Stunned
+Buffubertip="This unit is stunned; it cannot move, attack or cast spells."
+
+// Pause buff
+[BPSE]
+Bufftip=Stunned
+Buffubertip="This unit will not move."
+EditorSuffix= (Pause)
+
+[Xbdt]
+EditorName=Reveal (Effect)
+
+[Xbli]
+EditorName=Blight (Effect)
+
+[Xdis]
+EditorName=Hero Dissipate (Effect)

@@ -1,0 +1,261 @@
+[ebal]
+Name=Glaive Thrower
+Hotkey=T
+Tip=Train Glaive |cffffcc00T|rhrower
+Ubertip="Long-range siege weaponry. Exceptional damage versus buildings. Can gain the Vorpal Blades upgrade to attack trees. |n|n|cffffcc00Attacks land units.|r"
+
+[etrp]
+Name=Ancient Protector
+Hotkey=P
+Tip=Create Ancient |cffffcc00P|rrotector
+Ubertip="Defensive Ancient. When rooted in the ground, can hurl enormous rocks at nearby enemy units. |n|n|cffffcc00Attacks land and air units.|r"
+
+[echm]
+Name=Chimaera
+Hotkey=C
+Tip=Train |cffffcc00C|rhimaera
+Ubertip="Flying two headed Dragon. Can learn Corrosive Breath. |n|n|cffffcc00Attacks land units.|r"
+
+[edoc]
+Name=Druid of the Claw
+EditorSuffix= (Night Elf Form)
+Hotkey=C
+Tip=Train Druid of the |cffffcc00C|rlaw
+Ubertip="Melee spellcaster. Can initially cast Roar, which increases attack damage. Can also learn Rejuvenation, Bear Form and Mark of the Claw. |n|n|cffffcc00Attacks land units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Roar","- Roar|n- Rejuvenation","- Roar|n- Rejuvenation|n- Bear Form"
+
+[edcm]
+Name=Druid of the Claw
+EditorSuffix= (Bear Form)
+Hotkey=C
+Tip=Train Druid of the |cffffcc00C|rlaw
+Ubertip="Melee spellcaster. Can initially cast Roar, which increases attack damage. Can also learn Rejuvenation, Bear Form and Mark of the Claw. |n|n|cffffcc00Attacks land units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Roar","- Roar|n- Rejuvenation","- Roar|n- Rejuvenation|n- Bear Form"
+
+[edot]
+Name=Druid of the Talon
+EditorSuffix= (Night Elf Form)
+Hotkey=T
+Tip=Train Druid of the |cffffcc00T|ralon
+Ubertip="Maneuverable spellcaster. Can initially cast Faerie Fire, which reduces armor and gives vision of an enemy unit. Can also learn Storm Crow Form, Cyclone and Mark of the Talon. |n|n|cffffcc00Attacks land and air units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Faerie Fire","- Faerie Fire|n- Storm Crow Form","- Faerie Fire|n- Storm Crow Form|n- Cyclone"
+
+[edtm]
+Name=Druid of the Talon
+EditorSuffix= (Storm Crow Form)
+Hotkey=T
+Tip=Train Druid of the |cffffcc00T|ralon
+Ubertip="Maneuverable spellcaster. Can initially cast Faerie Fire, which reduces armor and gives vision of an enemy unit. Can also learn Storm Crow Form, Cyclone and Mark of the Talon. |n|n|cffffcc00Attacks land and air units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Faerie Fire","- Faerie Fire|n- Storm Crow Form","- Faerie Fire|n- Storm Crow Form|n- Cyclone"
+
+[egol]
+Name=Entangled Gold Mine
+Tip=Entangle |cffffcc00G|rold Mine
+Ubertip="A cluster of roots that allows wisps to mine gold from goldmines."
+
+
+[ewsp]
+Name=Wisp
+Hotkey=W
+Tip=Train |cffffcc00W|risp
+Ubertip="Basic worker unit. Can harvest gold and lumber, create Night Elf buildings and Renew. |nCan Detonate to dispel magic, hurt summoned creatures and drain mana in an area."
+
+[Edem]
+Name=Demon Hunter
+Hotkey=D
+Tip=Summon |cffffcc00D|remon Hunter
+Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive |cffffcc00D|remon Hunter
+Awakentip=Revive |cffffcc00D|remon Hunter
+Propernames=Shadowsong,Shadowfury,Shadowstalker,Flameseeker,Darkweaver,Darkterror,Darksorrow,Sindweller,Painkiller,Hellbourne,Wrathbringer,Ragerunner,Firebrand,Bloodwrath,Terrorblade
+
+
+[Edmm]
+Name=Demon Hunter
+EditorSuffix= (Demon Form)
+Hotkey=D
+Tip=Summon |cffffcc00D|remon Hunter
+Ubertip="Cunning Hero, adept at maneuvering through battles. Can learn Immolation, Evasion, Mana Burn, and Metamorphosis. |n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive |cffffcc00D|remon Hunter
+Awakentip=Revive |cffffcc00D|remon Hunter
+Propernames=Shadowsong,Shadowfury,Shadowstalker,Flameseeker,Darkweaver,Darkterror,Darksorrow,Sindweller,Painkiller,Hellbourne,Wrathbringer,Ragerunner,Firebrand,Bloodwrath,Terrorblade
+
+[Ekee]
+Name=Keeper of the Grove
+Hotkey=K
+Tip=Summon |cffffcc00K|reeper of the Grove
+Ubertip="Mystical Hero, adept at using nature spells. Can learn Entangling Roots, Force of Nature, Thorns Aura, and Tranquility. |n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive |cffffcc00K|reeper of the Grove
+Awakentip=Revive |cffffcc00K|reeper of the Grove
+Propernames=Larodar,Anubris,Nandieb,Califax,Bandalar,Malorne,Gholbine,Dagda,Nuada,Oghma,Centrius,Ceredwyn
+
+[Emoo]
+Name=Priestess of the Moon
+Hotkey=P
+Tip=Summon |cffffcc00P|rriestess of the Moon
+Ubertip="Warrior Hero, adept at enhancing ranged attacks and slaying enemies from afar. Can learn Scout, Searing Arrows, Trueshot Aura, and Starfall. |n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive |cffffcc00P|rriestess of the Moon
+Awakentip=Revive |cffffcc00P|rriestess of the Moon
+Propernames=Kathris Starsong,Adora Nightshade,Mora Moonsinger,Felore Moonray,Anara Chillwind,Kera Stardragon,Mave Whisperwind,Delas Moonfang,Mira Whitemane,Theta Saberfang,Tygra Snowscar,Ariel Darkmoon,Diana Windwood
+
+[Ewar]
+Name=Warden
+Hotkey=W
+Tip=Summon |cffffcc00W|rarden
+Ubertip="Cunning Hero, adept at entering and escaping combat. Can learn Blink, Fan of Knives, Shadow Strike and Vengeance. |n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive |cffffcc00W|rarden
+Awakentip=Revive |cffffcc00W|rarden
+Propernames=Alsa Iron-cell,The Iron Raven,Marin Bladewing,Shalis Darkhunter,Sira Moonwarden,Saithis,Malace Shade,Kiri Starstalker,Anaya Felgrove,Mirana Starlight,Felhala Starmoon,Drelanim Whisperwind,Cordana Felsong,Nalmeena Darkfollow
+
+[esen]
+Name=Huntress
+Hotkey=H
+Tip=Train |cffffcc00H|runtress
+Ubertip="Agile short-ranged warrior. Can learn the Sentinel ability and the Moon Glaive attack. |n|n|cffffcc00Attacks land units.|r"
+
+[earc]
+Name=Archer
+Hotkey=A
+Tip=Train |cffffcc00A|rrcher
+Ubertip="Basic long-ranged attacker. Has the Elune's Grace ability. Can learn the Marksmanship, Improved Bows and Hippogryph Taming upgrades.|n|n|cffffcc00Attacks land and air units.|r"
+
+[edry]
+Name=Dryad
+Hotkey=D
+Tip=Train |cffffcc00D|rryad
+Ubertip="Anti-spellcaster that has a poison attack which slows and damages enemy units. Also has Spell Immunity which renders her invulnerable to magical effects and damage. Can learn Abolish Magic. |n|n|cffffcc00Attacks land and air units.|r"
+
+[efon]
+Name=Treant
+
+[ehip]
+Name=Hippogryph
+Hotkey=H
+Tip=Train |cffffcc00H|rippogryph
+Ubertip="Flying melee attack beast. Can learn the Hippogryph Taming ability. |n|n|cffffcc00Attacks air units.|r"
+
+[ehpr]
+Name=Hippogryph Rider
+Hotkey=R
+Tip=Ride Hippog|cffffcc00r|ryph
+Ubertip="Archer mounted Hippogryph. |n|n|cffffcc00Attacks land and air units.|r"
+
+[etol]
+Name=Tree of Life
+Hotkey=T
+Tip=Create |cffffcc00T|rree of Life
+Ubertip="Primary structure, used to train Wisps and entangle gold mines. Can be upgraded to Tree of Ages and then Tree of Eternity to enable the production of additional types of structures and units. |n|n|cffffcc00Attacks land units.|r"
+
+[etoa]
+Name=Tree of Ages
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Tree of Ages
+Ubertip="Upgrade to Tree of Ages to enable the production of additional types of structures and units. |n|n|cffffcc00Attacks land units.|r"
+
+[etoe]
+Name=Tree of Eternity
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Tree of Eternity
+Ubertip="Upgrade to Tree of Eternity to enable the production of additional types of structures and units. |n|n|cffffcc00Attacks land units.|r"
+
+[edob]
+Name=Hunter's Hall
+Hotkey=H
+Tip=Create |cffffcc00H|runter's Hall
+Ubertip="Contains the attack and armor upgrades for all units, the Ultravision and Well Spring upgrades."
+
+[eate]
+Name=Altar of Elders
+Hotkey=A
+Tip=Create |cffffcc00A|rltar of Elders
+Ubertip="Summons Heroes. Revives slain Heroes."
+
+[eaoe]
+Name=Ancient of Lore
+Hotkey=L
+Tip=Create Ancient of |cffffcc00L|rore
+Ubertip="Keeper of ground based spellcasters. Trains Druids of the Claw, Dryads, and Mountain Giants. |nAlso contains the upgrades for Druids of the Claw, Mark of the Claw, Abolish Magic, Hardened Skin, and Resistant Skin. |n|n|cffffcc00Attacks land units.|r"
+
+[eaom]
+Name=Ancient of War
+Hotkey=R
+Tip=Create Ancient of Wa|cffffcc00r|r
+Ubertip="Keeper of primary assault troops. Trains Archers, Huntresses, and Glaive Throwers. |nAlso contains Archer, Huntress and Glaive Thrower upgrades. |n|n|cffffcc00Attacks land units.|r"
+
+[eaow]
+Name=Ancient of Wind
+Hotkey=W
+Tip=Create Ancient of |cffffcc00W|rind
+Ubertip="Keeper of aerial assault units and spellcasters. Trains Hippogryphs, Druids of the Talon, and Faerie Dragons. |nAlso contains the upgrades for Druids of the Talon, Mark of the Talon, and Hippogryph Taming. |n|n|cffffcc00Attacks land units.|r"
+
+
+[eden]
+Name=Ancient of Wonders
+Hotkey=D
+Tip=Build Ancient of Won|cffffcc00d|rers
+Ubertip="Creates a shop with purchasable items. The items available depend upon what level of upgrade your Tree of Life has (Tree of Life, Tree of Ages, or Tree of Eternity) and which buildings you have. |n|n|cffffcc00Attacks land units.|r"
+
+
+[edos]
+Name=Chimaera Roost
+Hotkey=C
+Tip=Create |cffffcc00C|rhimaera Roost
+Ubertip="Trains Chimaeras. |nAlso contains the Corrosive Breath upgrade."
+
+[emow]
+Name=Moon Well
+Hotkey=M
+Tip=Create |cffffcc00M|roon Well
+Ubertip="Provides food, which increases the maximum number of units that can be trained. Has the Replenish Mana and Life ability. Can gain the Well Spring upgrade. Regenerates mana at night."
+
+[espv]
+Name=Avatar of Vengeance
+
+[even]
+Name=Spirit of Vengeance
+
+[emtg]
+Name=Mountain Giant
+Hotkey=G
+Tip=Train Mountain |cffffcc00G|riant
+Ubertip="Massive melee unit that can disrupt enemy attackers and take incredible amounts of punishment. Has the Taunt and War Club abilities. Can learn Hardened Skin, and Resistant Skin. |n|n|cffffcc00Attacks land units.|r"
+
+[efdr]
+Name=Faerie Dragon
+Hotkey=F
+Tip=Train |cffffcc00F|raerie Dragon
+Ubertip="Small flying creature adept at harming spellcasters and avoiding damage. Has Spell Immunity, Phase Shift and Mana Flare. |n|n|cffffcc00Attacks land and air units.|r"
+
+[Aimp]
+Name=Vorpal Blades
+Tip=Vorpal Blades
+Ubertip="Permits the glaives launched by the Glaive Thrower to strike through initial ground targets and damage those behind. Also allows the Glaive Thrower to attack trees."
+
+//#RESTNOBETA
+[etrs]
+Name=Night Elf Transport Ship
+Hotkey=T
+Tip=Hire Night Elf |cffffcc00T|rransport Ship
+Ubertip="A sturdy transport ship capable of carrying units over the sea."
+
+[edes]
+Name=Night Elf Frigate
+Hotkey=F
+Tip=Hire |cffffcc00F|rrigate
+Ubertip="A versatile attack ship good at destroying air attackers. |n|n|cffffcc00Attacks land and air units.|r"
+
+[ebsh]
+Name=Night Elf Battleship
+Hotkey=B
+Tip=Hire |cffffcc00B|rattleship
+Ubertip="Massive battleship good at destroying enemy ships and bombarding buildings from the sea. |n|n|cffffcc00Attacks land units.|r"
+
+[eshy]
+Name=Night Elf Shipyard
+Tip=Build Night Elf Shipyard
+Ubertip="Boat construction facility. Produces Night Elf Transport Ships, Night Elf Frigates, and Night Elf Battleships.
+Description=Sells boats.

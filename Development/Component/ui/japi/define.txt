@@ -1,39 +1,39 @@
 
 [TriggerTypes]
-MoveType=0,0,0,移动类型,integer
-CollisionType=0,0,0,碰撞类型,integer
+MoveType=0,0,0,MoveType,integer
+CollisionType=0,0,0,CollisionType,integer
 
 [TriggerParams]
-UnitStateDamageDice=0,unitstate,ConvertUnitState(0x10),"骰子数量 [JAPI]"
-UnitStateDamageSide=0,unitstate,ConvertUnitState(0x11),"骰子面数 [JAPI]"
-UnitStateDamageBase=0,unitstate,ConvertUnitState(0x12),"基础伤害 [JAPI]"
-UnitStateDamageBonus=0,unitstate,ConvertUnitState(0x13),"附加伤害 [JAPI]"
-UnitStateDamageMix=0,unitstate,ConvertUnitState(0x14),"攻击最小值 [JAPI]"
-UnitStateDamageMax=0,unitstate,ConvertUnitState(0x15),"攻击最大值 [JAPI]"
-UnitStateDamageRange=0,unitstate,ConvertUnitState(0x16),"攻击范围 [JAPI]"
-UnitStateDamageCool=0,unitstate,ConvertUnitState(0x25),"攻击间隔 [JAPI]"
-UnitStateAttackSpeed=0,unitstate,ConvertUnitState(0x51),"攻击速度 [JAPI]"
-UnitStateArmor=0,unitstate,ConvertUnitState(0x20),"护甲 [JAPI]"
-UnitStateDamageDiceSec=0,unitstatesec,ConvertUnitState(0x10),"骰子数量 [JAPI]"
-UnitStateDamageSideSec=0,unitstatesec,ConvertUnitState(0x11),"骰子面数 [JAPI]"
-UnitStateDamageBaseSec=0,unitstatesec,ConvertUnitState(0x12),"基础伤害 [JAPI]"
-UnitStateDamageBonusSec=0,unitstatesec,ConvertUnitState(0x13),"附加伤害 [JAPI]"
-UnitStateDamageRangeSec=0,unitstatesec,ConvertUnitState(0x16),"攻击范围 [JAPI]"
-UnitStateDamageCoolSec=0,unitstatesec,ConvertUnitState(0x25),"攻击间隔 [JAPI]"
-UnitStateAttackSpeedSec=0,unitstatesec,ConvertUnitState(0x51),"攻击速度 [JAPI]"
-UnitStateArmorSec=0,unitstatesec,ConvertUnitState(0x20),"护甲 [JAPI]"
-UnitStateMaxLifeSec=0,unitstatesec,UNIT_STATE_MAX_LIFE,"最大生命值 [JAPI]"
-UnitStateMaxManaSec=0,unitstatesec,UNIT_STATE_MAX_MANA,"最大魔法值 [JAPI]"
+UnitStateDamageDice=0,unitstate,ConvertUnitState(0x10),"UnitStateDamageDice [JAPI]"
+UnitStateDamageSide=0,unitstate,ConvertUnitState(0x11),"UnitStateDamageSide [JAPI]"
+UnitStateDamageBase=0,unitstate,ConvertUnitState(0x12),"UnitStateDamageBase [JAPI]"
+UnitStateDamageBonus=0,unitstate,ConvertUnitState(0x13),"UnitStateDamageBonus [JAPI]"
+UnitStateDamageMix=0,unitstate,ConvertUnitState(0x14),"UnitStateDamageMix [JAPI]"
+UnitStateDamageMax=0,unitstate,ConvertUnitState(0x15),"UnitStateDamageMax [JAPI]"
+UnitStateDamageRange=0,unitstate,ConvertUnitState(0x16),"UnitStateDamageRange [JAPI]"
+UnitStateDamageCool=0,unitstate,ConvertUnitState(0x25),"UnitStateDamageCool [JAPI]"
+UnitStateAttackSpeed=0,unitstate,ConvertUnitState(0x51),"UnitStateAttackSpeed [JAPI]"
+UnitStateArmor=0,unitstate,ConvertUnitState(0x20),"UnitStateArmor [JAPI]"
+UnitStateDamageDiceSec=0,unitstatesec,ConvertUnitState(0x10),"UnitStateDamageDiceSec [JAPI]"
+UnitStateDamageSideSec=0,unitstatesec,ConvertUnitState(0x11),"UnitStateDamageSideSec [JAPI]"
+UnitStateDamageBaseSec=0,unitstatesec,ConvertUnitState(0x12),"UnitStateDamageBaseSec [JAPI]"
+UnitStateDamageBonusSec=0,unitstatesec,ConvertUnitState(0x13),"UnitStateDamageBonusSec [JAPI]"
+UnitStateDamageRangeSec=0,unitstatesec,ConvertUnitState(0x16),"UnitStateDamageRangeSec [JAPI]"
+UnitStateDamageCoolSec=0,unitstatesec,ConvertUnitState(0x25),"UnitStateDamageCoolSec [JAPI]"
+UnitStateAttackSpeedSec=0,unitstatesec,ConvertUnitState(0x51),"UnitStateAttackSpeedSec [JAPI]"
+UnitStateArmorSec=0,unitstatesec,ConvertUnitState(0x20),"UnitStateArmorSec [JAPI]"
+UnitStateMaxLifeSec=0,unitstatesec,UNIT_STATE_MAX_LIFE,"UnitStateMaxLifeSec [JAPI]"
+UnitStateMaxManaSec=0,unitstatesec,UNIT_STATE_MAX_MANA,"UnitStateMaxManaSec [JAPI]"
 
-MoveType01=0,MoveType,0x00,"没有"
-MoveType02=0,MoveType,0x01,"无法移动"
+MoveType01=0,MoveType,0x00,"NoMove"
+MoveType02=0,MoveType,0x01,"UnableMove"
 MoveType03=0,MoveType,0x02,WESTRING_UE_MOVETYPE_FOOT
 MoveType04=0,MoveType,0x04,WESTRING_UE_MOVETYPE_FLY
-MoveType05=0,MoveType,0x08,"地雷"
-MoveType06=0,MoveType,0x10,"疾风步"
-MoveType07=0,MoveType,0x20,"未知"
+MoveType05=0,MoveType,0x08,"LandMine"
+MoveType06=0,MoveType,0x10,"windWalk"
+MoveType07=0,MoveType,0x20,"Unknown"
 MoveType08=0,MoveType,0x40,WESTRING_UE_MOVETYPE_FLOAT
 MoveType09=0,MoveType,0x80,WESTRING_UE_MOVETYPE_AMPH
 
-CollisionType01=0,CollisionType,1,"单位"
-CollisionType03=0,CollisionType,3,"建筑"
+CollisionType01=0,CollisionType,1,"Unit"
+CollisionType03=0,CollisionType,3,"Building"

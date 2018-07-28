@@ -1,7 +1,7 @@
 [OperatorCompareBoolean]
-title = "布尔表达式"
-description = "${表达式A} ${Operator} ${表达式B}"
-comment = ""
+title = "Boolean Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = boolean
@@ -14,17 +14,17 @@ type = boolean
 default = "true"
 
 ["             "]
-title = "自定义代码"
-description = "代码: ${Jass代码}"
-comment = "条件内不可输入局部变量,如有必要,可用全局变量或GetTriggerUnit()之类的代替"
+title = "Custom Script"
+description = "Script: ${JassScript}"
+comment = "Use local variable in Condition is unable, if it is necessary you can use global variable or GetTriggerUnit() as a instead"
 category = TC_YDHIDE
 [[.args]]
 type = scriptcode
 
 [OperatorCompareTrigger]
-title = "触发"
-description = "${触发} ${Operator} ${触发}"
-comment = ""
+title = "Trigger Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = trigger
@@ -35,9 +35,9 @@ default = "OperatorEqualENE"
 type = trigger
 
 [OperatorCompareUnit]
-title = "单位"
-description = "${Value} ${Operator} ${单位}"
-comment = ""
+title = "Unit Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = unit
@@ -49,9 +49,9 @@ default = "OperatorEqualENE"
 type = unit
 
 [OperatorCompareUnitCode]
-title = "单位类型"
+title = "Unit-Type Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = unitcode
@@ -64,9 +64,9 @@ type = unitcode
 default = "hfoo"
 
 [OperatorCompareTerrainType]
-title = "地形"
+title = "Terrain Type Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = terraintype
@@ -92,8 +92,8 @@ default = "OperatorEqualENE"
 type = location
 
 [OperatorCompareDialog]
-title = "对话框 [R]"
-description = "${对话框} ${Operator} ${对话框}"
+title = "Dialog [R]"
+description = "${Dialog} ${Operator} ${dialog}"
 comment = ""
 category = TC_CONDITION
 [[.args]]
@@ -106,9 +106,9 @@ default = "OperatorEqualENE"
 type = dialog
 
 [OperatorCompareButton]
-title = "对话框按钮"
-description = "${对话框按钮} ${Operator} ${对话框按钮}"
-comment = ""
+title = "Dialog Button Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = button
@@ -119,9 +119,9 @@ default = "OperatorEqualENE"
 type = button
 
 [OperatorCompareMeleeDifficulty]
-title = "对战AI难度"
+title = "Melee AI Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = aidifficulty
@@ -134,9 +134,9 @@ type = aidifficulty
 default = "AIDifficultyNormal"
 
 [OperatorCompareAbilityId]
-title = "技能"
+title = "Ability Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = abilcode
@@ -149,8 +149,8 @@ type = abilcode
 default = "AUan"
 
 [OperatorCompareTimer]
-title = "计时器 [R]"
-description = "${计时器} ${Operator} ${计时器}"
+title = "Timer [R]"
+description = "${Timer} ${Operator} ${timer}"
 comment = ""
 category = TC_CONDITION
 [[.args]]
@@ -163,9 +163,9 @@ default = "OperatorEqualENE"
 type = timer
 
 [OperatorCompareTechCode]
-title = "科技研究"
-description = "${Value} ${Operator} ${科技}"
-comment = ""
+title = "Tech-Type Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = techcode
@@ -177,9 +177,9 @@ default = "OperatorEqualENE"
 type = techcode
 
 [OperatorCompareDestructible]
-title = "可破坏物"
-description = "${可破坏物} ${Operator} ${可破坏物}"
-comment = ""
+title = "Destructible Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = destructable
@@ -190,9 +190,9 @@ default = "OperatorEqualENE"
 type = destructable
 
 [OperatorCompareDestructableCode]
-title = "可破坏物类型"
+title = "Destructible-Type Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = destructablecode
@@ -205,8 +205,8 @@ type = destructablecode
 default = "LTlt"
 
 [OperatorCompareTrackable]
-title = "可追踪物 [R]"
-description = "${值} ${Operator} ${值}"
+title = "traceable [R]"
+description = "${Value} ${Operator} ${Value}"
 comment = ""
 category = TC_CONDITION
 [[.args]]
@@ -220,9 +220,9 @@ type = trackable
 default = "GetTriggeringTrackable"
 
 [OperatorCompareOrderCode]
-title = "命令ID"
+title = "Order Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = ordercode
@@ -235,9 +235,9 @@ type = ordercode
 default = "String2OrderIdBJ"
 
 [OperatorCompareBuffId]
-title = "魔法效果"
-description = "${魔法效果} ${Operator} ${魔法效果}"
-comment = ""
+title = "Buff Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = buffcode
@@ -248,7 +248,7 @@ default = "OperatorEqualENE"
 type = buffcode
 
 [OperatorCompareRegion]
-title = "区域(矩形) [R]"
+title = "Region (Rect) [R]"
 description = "${Value} ${Operator} ${Value}"
 comment = ""
 category = TC_CONDITION
@@ -261,7 +261,7 @@ default = "OperatorEqualENE"
 type = rect
 
 [OperatorCompareRegionR]
-title = "区域(不规则) [R]"
+title = "Region(Irregular) [R]"
 description = "${Value} ${Operator} ${Value}"
 comment = ""
 category = TC_CONDITION
@@ -274,9 +274,9 @@ default = "OperatorEqualENE"
 type = region
 
 [OperatorCompareReal]
-title = "实数"
+title = "Real Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = real
@@ -289,7 +289,7 @@ type = real
 default = "10"
 
 [OperatorCompareDegree]
-title = "角度"
+title = "Degree"
 description = "${Value} ${Operator} ${Value}"
 comment = ""
 category = TC_CONDITION
@@ -304,7 +304,7 @@ type = degree
 default = "10"
 
 [OperatorCompareRadian]
-title = "弧度"
+title = "Radian"
 description = "${Value} ${Operator} ${Value}"
 comment = ""
 category = TC_CONDITION
@@ -319,9 +319,9 @@ type = radian
 default = "10"
 
 [OperatorComparePlayer]
-title = "玩家"
+title = "Player Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = player
@@ -334,9 +334,9 @@ type = player
 default = "Player00"
 
 [OperatorComparePlayerColor]
-title = "玩家颜色"
+title = "Player Color Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = playercolor
@@ -349,9 +349,9 @@ type = playercolor
 default = "Color00"
 
 [OperatorComparePlayerControl]
-title = "玩家控制者"
+title = "Player Controller Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = mapcontrol
@@ -364,9 +364,9 @@ type = mapcontrol
 default = "MapControlUser"
 
 [OperatorComparePlayerSlotStatus]
-title = "玩家游戏状态"
+title = "Player Slot Status Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = playerslotstate
@@ -379,9 +379,9 @@ type = playerslotstate
 default = "PlayerSlotStatePlaying"
 
 [OperatorCompareItem]
-title = "物品"
-description = "${物品} ${Operator} ${物品}"
-comment = ""
+title = "Item Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = item
@@ -392,9 +392,9 @@ default = "OperatorEqualENE"
 type = item
 
 [OperatorCompareItemType]
-title = "物品分类"
+title = "Item-Class Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = itemtype
@@ -407,9 +407,9 @@ type = itemtype
 default = "ItemTypePowerup"
 
 [OperatorCompareItemCode]
-title = "物品类型"
+title = "Item-Type Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = itemcode
@@ -422,9 +422,9 @@ type = itemcode
 default = "texp"
 
 [OperatorCompareHeroSkill]
-title = "学习技能"
+title = "Hero Skill Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = heroskillcode
@@ -437,9 +437,9 @@ type = heroskillcode
 default = "HeroSkillBlizzard"
 
 [OperatorCompareGameDifficulty]
-title = "游戏难度"
+title = "Game Difficulty Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = gamedifficulty
@@ -452,9 +452,9 @@ type = gamedifficulty
 default = "GameDifficultyNormal"
 
 [OperatorCompareGameSpeed]
-title = "游戏速度"
+title = "Game Speed Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = gamespeed
@@ -467,9 +467,9 @@ type = gamespeed
 default = "GameSpeedNormal"
 
 [OperatorCompareInteger]
-title = "整数"
+title = "Integer Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = integer
@@ -482,9 +482,9 @@ type = integer
 default = "0"
 
 [OperatorCompareRace]
-title = "种族"
+title = "Race Comparison"
 description = "${Value} ${Operator} ${Value}"
-comment = ""
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = race
@@ -497,9 +497,9 @@ type = race
 default = "RaceHuman"
 
 [OperatorCompareString]
-title = "字符串"
-description = "${Value} ${Operator} ${字符串}"
-comment = ""
+title = "String Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment = "For two strings to be equal, they must be of equal length and content."
 category = TC_CONDITION
 [[.args]]
 type = string
@@ -512,8 +512,8 @@ type = string
 
 [GetBooleanAnd]
 title = "And"
-description = "${条件 1} 且 ${条件 2}"
-comment = "条件1 和条件2 均成立."
+description = "${Condition 1} and ${Condition 2}"
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = boolcall
@@ -522,8 +522,8 @@ type = boolcall
 
 [GetBooleanOr]
 title = "Or"
-description = "${条件 1} or ${条件 2}"
-comment = "条件1 和条件2 任意成立."
+description = "${Condition 1} or ${Condition 2}"
+comment =""
 category = TC_CONDITION
 [[.args]]
 type = boolcall
@@ -531,17 +531,17 @@ type = boolcall
 type = boolcall
 
 [AndMultiple]
-title = "And, 多项条件"
-description = "And - 所有条件成立"
-comment = "用该功能添加的条件必须为主体之下."
+title = "And"
+description = "And - All (Conditions) are true"
+comment = "Add conditions to this function in the main display."
 category = TC_CONDITION
 [[.args]]
 type = nothing
 
 [OrMultiple]
-title = "Or, 多项条件"
-description = "Or - 任意条件成立"
-comment = "用该功能添加的条件必须为主体之下."
+title = "Or"
+description = "Or - Any (Conditions) are true"
+comment = "Add conditions to this function in the main display."
 category = TC_CONDITION
 [[.args]]
 type = nothing

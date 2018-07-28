@@ -1,0 +1,635 @@
+// Balls of Fire
+[Abof]
+Art=ReplaceableTextures\PassiveButtons\PASBTNFireRocks.blp
+Buttonpos=0,2
+Missileart=Abilities\Weapons\DemolisherFireMissile\DemolisherFireMissile.mdl
+Missilearc=0.35
+Missilespeed=900
+Requires=Robf
+
+[Bbof]
+Buffart=ReplaceableTextures\CommandButtons\BTNWallOfFire.blp
+Targetart=Abilities\Spells\Human\FlameStrike\FlameStrikeDamageTarget.mdl
+
+[Xbof]
+Effectart=Abilities\Spells\Human\FlameStrike\FlameStrikeEmbers.mdl
+Effectsoundlooped=HumanFireLarge
+
+// Berserk
+[Absk]
+Art=ReplaceableTextures\CommandButtons\BTNBerserkForTrolls.blp
+Buttonpos=0,2
+Order=berserk
+
+[Bbsk]
+Buffart=ReplaceableTextures\CommandButtons\BTNBerserkForTrolls.blp
+Targetart=Abilities\Spells\Orc\TrollBerserk\HeadhunterWEAPONSLeft.mdl,Abilities\Spells\Orc\TrollBerserk\HeadhunterWEAPONSRight.mdl
+Targetattachcount=2
+Targetattach=weapon,left
+Targetattach1=weapon,right
+
+// Berserker Upgrade
+[Sbsk]
+Requires=Robk
+
+// Reinforced Burrows Upgrade
+[Arbr]
+Targetart=Abilities\Spells\Orc\ReinforcedTrollBurrow\ReinforcedTrollBurrowTarget.mdl
+
+// Ancestral Spirit
+[Aast]
+Requires=Rowt
+Requiresamount=2
+Art=ReplaceableTextures\CommandButtons\BTNAncestralSpirit.blp
+Buttonpos=2,2
+Casterart=Abilities\Spells\Orc\AncestralSpirit\AncestralSpiritCaster.mdl
+Targetart=Abilities\Spells\Orc\Reincarnation\ReincarnationTarget.mdl
+
+// Disenchant
+[Adch]
+Requires=Rowt
+Requiresamount=1
+Art=ReplaceableTextures\CommandButtons\BTNDisenchant.blp
+Buttonpos=1,2
+Targetart=Abilities\Spells\Orc\Disenchant\DisenchantSpecialArt.mdl
+Targetattach=head
+Effectsound=Disenchant
+
+// Disenchant (new)
+[Adcn]
+Requires=Rowt
+Requiresamount=1
+Art=ReplaceableTextures\CommandButtons\BTNDisenchant.blp
+Buttonpos=1,2
+Targetart=Abilities\Spells\Orc\Disenchant\DisenchantSpecialArt.mdl
+Targetattach=head
+Effectsound=Disenchant
+
+// Corporeal Form
+[Acpf]
+Art=ReplaceableTextures\CommandButtons\BTNSpiritwalker.blp
+Unart=ReplaceableTextures\CommandButtons\BTNEtherealFormOn.blp
+Casterart=Abilities\Spells\Orc\EtherealForm\SpiritWalkerChange.mdl
+Casterattach=chest
+Buttonpos=3,2
+Unbuttonpos=3,2
+//#LINENOBETA
+Effectsound=SpiritwalkerMorph
+Order=corporealform
+Unorder=uncorporealform
+
+// Ethereal Form
+[Aetf]
+Art=ReplaceableTextures\CommandButtons\BTNEtherealFormOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNSpiritwalker.blp
+Casterart=Abilities\Spells\Orc\EtherealForm\SpiritWalkerChange.mdl
+Casterattach=chest
+Buttonpos=3,2
+Unbuttonpos=3,2
+//#LINENOBETA
+Effectsound=SpiritwalkerMorph
+Order=etherealform
+Unorder=unetherealform
+
+// Spirit Link
+[Aspl]
+Art=ReplaceableTextures\CommandButtons\BTNSpiritLink.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Targetart=Abilities\Spells\Orc\SpiritLink\SpiritLinkZapTarget.mdl
+Casterart=Abilities\Spells\Orc\SpiritLink\SpiritLinkZapTarget.mdl
+Order=spiritlink
+LightningEffect=SPLK
+
+[Bspl]
+Buffart=ReplaceableTextures\CommandButtons\BTNSpiritLink.blp
+Targetart=Abilities\Spells\Orc\SpiritLink\SpiritLinkTarget.mdl
+Targetattach=chest
+
+// Pack Mule
+[Apak]
+Requires=Ropm
+Art=ReplaceableTextures\CommandButtons\BTNPackBeast.blp
+
+// Liquid Fire
+[Aliq]
+Art=ReplaceableTextures\PassiveButtons\PASBTNLiquidFire.blp
+Buttonpos=1,2
+Requires=Rolf
+
+[Bliq]
+Buffart=ReplaceableTextures\PassiveButtons\PASBTNLiquidFire.blp
+Targetart=Abilities\Spells\Orc\LiquidFire\Liquidfire.mdl
+Effectsoundlooped=LiquidFireLoop
+
+[Mliq]
+Missileart=Abilities\Spells\Orc\LiquidFire\BatRiderMissile.mdl
+Missilespeed=900
+Missilearc=0.35
+
+// Unstable Concoction
+[Auco]
+Art=ReplaceableTextures\CommandButtons\BTNUnstableConcoction.blp
+Unart=ReplaceableTextures\CommandButtons\BTNUnstableConcoction.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Order=unstableconcoction
+Orderon=unstableconcoctionon
+Orderoff=unstableconcoctionoff
+
+// Orc Build
+[AObu]
+Art=ReplaceableTextures\CommandButtons\BTNBasicStruct.blp
+Buttonpos=0,2
+Order=orcbuild
+
+// Healing Wave
+[AOhw]
+Art=ReplaceableTextures\CommandButtons\BTNHealingWave.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNHealingWave.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Targetart=Abilities\Spells\Orc\HealingWave\HealingWaveTarget.mdl
+Order=healingwave
+Animnames=spell,throw
+LightningEffect=HWPB,HWSB
+
+// Hex
+[AOhx]
+Art=ReplaceableTextures\CommandButtons\BTNHex.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNHex.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Specialart=Abilities\Spells\Human\Polymorph\PolyMorphDoneGround.mdl
+Order=hex
+
+[BOhx]
+Buffart=ReplaceableTextures\CommandButtons\BTNHex.blp
+Effectart=Abilities\Spells\Human\Polymorph\PolyMorphDoneGround.mdl
+
+// Serpent Ward
+[AOsw]
+Art=ReplaceableTextures\CommandButtons\BTNSerpentWard.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNSerpentWard.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+Order=ward
+
+// Voodoo
+[AOvd]
+Art=ReplaceableTextures\CommandButtons\BTNBigBadVoodooSpell.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNBigBadVoodooSpell.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Order=voodoo
+Animnames=stand,channel
+
+[BOvd]
+Buffart=ReplaceableTextures\CommandButtons\BTNBigBadVoodooSpell.blp
+Targetart=Abilities\Spells\Orc\Voodoo\VoodooAuraTarget.mdl
+Targetattach=overhead
+
+[BOvc]
+Targetart=Abilities\Spells\Orc\Voodoo\VoodooAura.mdl
+
+// Warlock Firebolt
+[Awfb]
+Art=ReplaceableTextures\CommandButtons\BTNFireBolt.blp
+Buttonpos=0,2
+Missileart=Abilities\Weapons\FireBallMissile\FireBallMissile.mdl
+Missilespeed=1000
+MissileHoming=1
+Animnames=spell,throw
+
+// Chaos conversion
+[Acha]
+Requires=Roch
+
+[Achl]
+Requires=Roch
+
+[Sca1]
+Requires=Roch
+
+[Sca2]
+Requires=Roch
+
+[Sca3]
+Requires=Roch
+
+[Sca4]
+Requires=Roch
+
+[Sca5]
+Requires=Roch
+
+[Sca6]
+Requires=Roch
+
+// battle stations, load all peons into a bunker
+[Abtl]
+Art=ReplaceableTextures\CommandButtons\BTNBattleStations.blp
+Buttonpos=0,2
+Effectsound=BurrowBattleStations
+Order=battlestations
+
+// stand down, send peons back to work
+[Astd]
+Art=ReplaceableTextures\CommandButtons\BTNBacktoWork.blp
+Buttonpos=1,2
+Effectsound=
+Order=standdown
+
+// Ensnare
+[Aens]
+Art=ReplaceableTextures\CommandButtons\BTNEnsnare.blp
+Buttonpos=0,2
+Requires=Roen
+Missileart=Abilities\Spells\Orc\Ensnare\EnsnareMissile.mdl
+Missilespeed=1500
+MissileHoming=1
+Order=ensnare
+
+// Ensnare buff
+[Bens]
+Buffart=ReplaceableTextures\CommandButtons\BTNEnsnare.blp
+Targetart=Abilities\Spells\Orc\Ensnare\ensnareTarget.mdl
+Targetattach=origin
+
+// Ensnare buff on ground units
+[Beng]
+Buffart=ReplaceableTextures\CommandButtons\BTNEnsnare.blp
+Targetart=Abilities\Spells\Orc\Ensnare\ensnareTarget.mdl
+
+// Ensnare buff on air units
+[Bena]
+Buffart=ReplaceableTextures\CommandButtons\BTNEnsnare.blp
+Targetart=Abilities\Spells\Orc\Ensnare\ensnare_AirTarget.mdl
+Targetattach=chest,mount
+
+// Totem Smash, Pulverize, whatnot
+[Awar]
+Art=ReplaceableTextures\PassiveButtons\PASBTNSmash.blp
+Buttonpos=0,2
+Requires=Rows
+Animnames=slam
+
+// Devour
+[Adev]
+Art=ReplaceableTextures\CommandButtons\BTNDevour.blp
+Buttonpos=0,2
+Specialart=Abilities\Spells\Orc\Devour\DevourEffectArt.mdl
+Targetattach=head,mount
+Order=devour
+
+// Devour buff
+[Bdvv]
+Buffart=ReplaceableTextures\CommandButtons\BTNDevour.blp
+
+// Purge (classic)
+[Aprg]
+Art=ReplaceableTextures\CommandButtons\BTNPurge.blp
+Specialart=Abilities\Spells\Orc\Purge\PurgeBuffTarget.mdl
+Specialattach=origin
+Buttonpos=0,2
+Order=purge
+
+// Purge (expansion melee)
+[Apg2]
+Art=ReplaceableTextures\CommandButtons\BTNPurge.blp
+Specialart=Abilities\Spells\Orc\Purge\PurgeBuffTarget.mdl
+Specialattach=origin
+Buttonpos=0,2
+Order=purge
+
+
+[Bprg]
+Buffart=ReplaceableTextures\CommandButtons\BTNPurge.blp
+Targetart=Abilities\Spells\Orc\Purge\PurgeBuffTarget.mdl
+Targetattach=origin
+
+// Lightning Shield
+[Alsh]
+Art=ReplaceableTextures\CommandButtons\BTNLightningShield.blp
+Buttonpos=1,2
+Requires=Rost
+Order=lightningshield
+
+[Blsh]
+Buffart=ReplaceableTextures\CommandButtons\BTNLightningShield.blp
+Targetart=Abilities\Spells\Orc\LightningShield\LightningShieldTarget.mdl
+Targetattach=origin
+Specialart=Abilities\Spells\Orc\LightningShield\LightningShieldBuff.mdl
+
+// Bloodlust
+[Ablo]
+Art=ReplaceableTextures\CommandButtons\BTNBloodLustOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNBloodLustOff.blp
+Buttonpos=2,2
+Unbuttonpos=2,2
+Requires=Rost
+Requiresamount=2
+Order=bloodlust
+OrderOn=bloodluston
+OrderOff=bloodlustoff
+
+[Bblo]
+Spelldetail=1
+Buffart=ReplaceableTextures\CommandButtons\BTNBloodLust.blp
+Targetart=Abilities\Spells\Orc\Bloodlust\BloodlustTarget.mdl,Abilities\Spells\Orc\Bloodlust\BloodlustSpecial.mdl
+Targetattachcount=2
+Targetattach=hand,left
+Targetattach1=hand,right
+
+// Sentry Ward
+[Aeye]
+Art=ReplaceableTextures\CommandButtons\BTNSentryWard.blp
+Buttonpos=0,2
+Order=evileye
+
+[Beye]
+Buffart=ReplaceableTextures\CommandButtons\BTNSentryWard.blp
+
+// Stasis Trap spell
+[Asta]
+Art=ReplaceableTextures\CommandButtons\BTNStasisTrap.blp
+Buttonpos=1,2
+Requires=Rowd
+Order=stasistrap
+
+// Stasis Trap trigger buff
+[Bstt]
+Buffart=ReplaceableTextures\CommandButtons\BTNStasisTrap.blp
+
+// Stasis Trap effect buff
+[Bsta]
+Buffart=ReplaceableTextures\CommandButtons\BTNStasisTrap.blp
+Targetart=Abilities\Spells\Human\Thunderclap\ThunderclapTarget.mdl
+Targetattach=overhead
+
+// Healing Ward
+[Ahwd]
+Art=ReplaceableTextures\CommandButtons\BTNHealingWard.blp
+Buttonpos=2,2
+Requires=Rowd
+Requiresamount=2
+Order=healingward
+
+[Bhwd]
+Buffart=ReplaceableTextures\CommandButtons\BTNHealingWard.blp
+
+// Healing Ward Regeneration Aura
+[Aoar]
+Art=ReplaceableTextures\CommandButtons\BTNHealingWard.blp
+
+[Boar]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNHealingWard.blp
+Targetart=Abilities\Spells\Other\ANrm\ANrmTarget.mdl
+Effectsoundlooped=FountainOfLifeLoop
+
+// Envenomed Spears
+[Aven]
+Art=ReplaceableTextures\PassiveButtons\PASBTNEnvenomedSpear.blp
+Buttonpos=0,2
+Requires=Rovs
+
+// Poison Sting
+[Apoi]
+Art=ReplaceableTextures\PassiveButtons\PASBTNPoisonSting.blp
+Buttonpos=0,0
+Missileart=Abilities\Weapons\PoisonSting\PoisonStingMissile.mdl
+Missilespeed=1500
+MissileHoming=1
+
+// Poison Sting (Orb of Venom)
+[Apo2]
+Art=ReplaceableTextures\PassiveButtons\PASBTNPoisonSting.blp
+Buttonpos=0,0
+Missileart=Abilities\Spells\Items\OrbVenom\OrbVenomMissile.mdl
+MissileHoming=1
+
+// Poison Sting Non Stack Buff
+[Bpoi]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNEnvenomedSpear.blp
+Targetart=Abilities\Weapons\PoisonSting\PoisonStingTarget.mdl
+
+// Poison Sting Stack Buff
+[Bpsd]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNEnvenomedSpear.blp
+Targetart=Abilities\Weapons\PoisonSting\PoisonStingTarget.mdl
+
+// Venom Non Stack Buff
+[BIpb]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNOrbOfVenom.blp
+Targetart=Abilities\Weapons\PoisonSting\PoisonStingTarget.mdl
+
+// Venom Stack Buff
+[BIpd]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNOrbOfVenom.blp
+Targetart=Abilities\Weapons\PoisonSting\PoisonStingTarget.mdl
+
+// Tracking (Passive)
+[Anit]
+Requires=Ronv
+
+// Pillage (Passive)
+[Asal]
+Requires=Ropg
+Art=ReplaceableTextures\PassiveButtons\PASBTNPillage.blp
+Buttonpos=1,2
+
+// Spiked Barricades (Passive)
+[Aspi]
+Targetart=Abilities\Spells\Orc\SpikeBarrier\SpikeBarrier.mdl
+
+// War Drums Aura
+[Aakb]
+Art=ReplaceableTextures\PassiveButtons\PASBTNDrum.blp
+Buttonpos=1,2
+Targetart=Abilities\Spells\Orc\WarDrums\DrumsCasterHeal.mdl
+Targetattach=origin
+
+[Bakb]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNDrum.blp
+Targetart=Abilities\Spells\Other\GeneralAuraTarget\GeneralAuraTarget.mdl
+Targetattach=origin
+
+// Wind Walk
+[AOwk]
+Art=ReplaceableTextures\CommandButtons\BTNWindWalkOn.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNWindWalkOn.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Effectsound=WindWalk
+Order=windwalk
+
+[BOwk]
+Buffart=ReplaceableTextures\CommandButtons\BTNWindWalkOn.blp
+
+// Mirror Image
+[AOmi]
+Art=ReplaceableTextures\CommandButtons\BTNMirrorImage.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNMirrorImage.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Targetart=Abilities\Spells\Other\Levelup\LevelupCaster.mdl
+Specialart=Abilities\Spells\Orc\MirrorImage\MirrorImageCaster.mdl
+Missileart=Abilities\Spells\Orc\MirrorImage\MirrorImageMissile.mdl
+Missilespeed=1000
+Order=mirrorimage
+
+[BOmi]
+Buffart=ReplaceableTextures\CommandButtons\BTNMirrorImage.blp
+Specialart=Abilities\Spells\Orc\MirrorImage\MirrorImageDeathCaster.mdl
+
+// Critical Strike
+[AOcr]
+Art=ReplaceableTextures\PassiveButtons\PASBTNCriticalStrike.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNCriticalStrike.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+
+// Bladestorm
+[AOww]
+Art=ReplaceableTextures\CommandButtons\BTNWhirlwind.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNWhirlwind.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Order=whirlwind
+
+// Chain Lightning
+[AOcl]
+Art=ReplaceableTextures\CommandButtons\BTNChainLightning.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNChainLightning.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Missileart=Abilities\Spells\Orc\LightningBolt\LightningBoltMissile.mdl
+Missilespeed=1500
+Targetart=Abilities\Weapons\Bolt\BoltImpact.mdl
+Order=chainlightning
+Animnames=spell,chain
+LightningEffect=CLPB,CLSB
+
+// Far Sight
+[AOfs]
+Art=ReplaceableTextures\CommandButtons\BTNFarSight.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNFarSight.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Order=farsight
+
+// Earthquake
+[AOeq]
+Art=ReplaceableTextures\CommandButtons\BTNEarthquake.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNEarthquake.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Order=earthquake
+Animnames=spell,looping
+
+[BOeq]
+Buffart=ReplaceableTextures\CommandButtons\BTNEarthquake.blp
+Targetart=Abilities\Spells\Orc\StasisTrap\StasisTotemTarget.mdl
+Targetattach=overhead
+
+[XOeq]
+Effectart=Abilities\Spells\Orc\EarthQuake\EarthQuakeTarget.mdl
+Effectsoundlooped=EarthquakeLoop
+
+// Shockwave
+[AOsh]
+Art=ReplaceableTextures\CommandButtons\BTNShockWave.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNShockWave.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Missileart=Abilities\Spells\Orc\Shockwave\ShockwaveMissile.mdl
+Missilespeed=1050
+Order=shockwave
+Animnames=attack,slam
+
+// Endurance Aura
+[AOae]
+Art=ReplaceableTextures\PassiveButtons\PASBTNCommand.blp
+Buttonpos=2,2
+Researchart=ReplaceableTextures\CommandButtons\BTNCommand.blp
+Researchbuttonpos=2,0
+Targetart=Abilities\Spells\Orc\CommandAura\CommandAura.mdl
+Targetattach=origin
+
+[BOae]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNCommand.blp
+Targetart=Abilities\Spells\Other\GeneralAuraTarget\GeneralAuraTarget.mdl
+Targetattach=origin
+
+// Reincarnation
+[AOre]
+Art=ReplaceableTextures\PassiveButtons\PASBTNReincarnation.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNReincarnation.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Effectart=Abilities\Spells\Orc\Reincarnation\ReincarnationTarget.mdl
+Casterart=
+Targetart=
+
+// Feral Spirit
+[AOsf]
+Art=ReplaceableTextures\CommandButtons\BTNSpiritWolf.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNSpiritWolf.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+Specialart=Abilities\Spells\Orc\FeralSpirit\feralspirittarget.mdl
+Order=spiritwolf
+
+[BOsf]
+Buffart=ReplaceableTextures\CommandButtons\BTNSpiritWolf.blp
+Effectart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+
+// War Stomp (Chieftan)
+[AOws]
+Art=ReplaceableTextures\CommandButtons\BTNWarStomp.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNWarStomp.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Casterart=Abilities\Spells\Orc\WarStomp\WarStompCaster.mdl
+Order=stomp
+Animnames=spell,slam
+
+[BOws]
+Buffart=ReplaceableTextures\CommandButtons\BTNWarStomp.blp
+
+// 'damaged' attachment effect, small
+[Xfos]
+TargetArt=Environment\SmallBuildingFire\SmallBuildingFire2.mdl,Environment\SmallBuildingFire\SmallBuildingFire1.mdl
+Targetattachcount=2
+Targetattach=sprite,first
+Targetattach1=sprite,fourth
+Effectsoundlooped=HumanFireSmall
+
+// medium
+[Xfom]
+TargetArt=Environment\LargeBuildingFire\LargeBuildingFire2.mdl,Environment\SmallBuildingFire\SmallBuildingFire1.mdl,Environment\LargeBuildingFire\LargeBuildingFire0.mdl,Environment\SmallBuildingFire\SmallBuildingFire2.mdl
+Targetattachcount=4
+Targetattach=sprite,first
+Targetattach1=sprite,second
+Targetattach2=sprite,fourth
+Targetattach3=sprite,fifth
+Effectsoundlooped=HumanFireMedium
+
+// large
+[Xfol]
+TargetArt=Environment\LargeBuildingFire\LargeBuildingFire1.mdl,Environment\LargeBuildingFire\LargeBuildingFire0.mdl,Environment\LargeBuildingFire\LargeBuildingFire0.mdl,Environment\SmallBuildingFire\SmallBuildingFire1.mdl,Environment\LargeBuildingFire\LargeBuildingFire1.mdl,Environment\SmallBuildingFire\SmallBuildingFire0.mdl
+Targetattachcount=6
+Targetattach=sprite,first
+Targetattach1=sprite,second
+Targetattach2=sprite,fifth
+Targetattach3=sprite,third
+Targetattach4=sprite,fourth
+Targetattach5=sprite,sixth
+Effectsoundlooped=HumanFireLarge

@@ -1,25 +1,25 @@
 [YDWECustomScriptCode]
-title = "自定义代码"
-description = "${Jass 代码}"
-comment = "可以在任何有返回值的地方输入一行代码. 比如: 杀死(自定义代码：GetTriggerUnit())。"
+title = "YDWE Custom Script"
+description = "${Jass Script}"
+comment = "You can inject one line of code anywhere that get a return value. e.g. Kill (Custom Script: GetTriggerUnit())."
 category = TC_YDBF
 returns = AnyReturnType
 [[.args]]
 type = scriptcode
 
 [YDWEGetAnyTypeLocalVariable]
-title = "变量 -- 读取"
-description = "loc_${变量名}"
-comment = "可以获取到任意类型的局部变量。"
+title = "YDWE Variable -- Read"
+description = "loc_${variableName}"
+comment = "Get local variable value by any type."
 category = TC_YDBF
 returns = AnyReturnType
 [[.args]]
 type = scriptcode
 
 [YDWEGetAnyTypeLocalArray]
-title = "变量 -- 读取数组"
-description = "loc_${变量名}[${索引}]"
-comment = "可以获取到任意类型的局部变量数组。"
+title = "YDWE Variable -- Read Array"
+description = "loc_${variableName}[${index}]"
+comment = "Get local variable value in array by any type."
 category = TC_YDBF
 returns = AnyReturnType
 [[.args]]
@@ -29,18 +29,18 @@ type = integer
 default = 0
 
 [YDWEForLoopLocVarIndex]
-title = "循环 -- 读取(循环变量)"
-description = "loop_${变量名}"
-comment = "用来获取当前循环中的循环数，是个真正的Jass局部变量。"
+title = "YDWE Loop -- Read(LoopVariable)"
+description = "loop_${variable}"
+comment = "It is a local variable, use in a loop script as a loop integer."
 category = TC_YDBF
 returns = integer
 [[.args]]
 type = scriptcode
 
 [YDWELoadAnyTypeDataByUserData]
-title = "自定义值 -- 读取"
-description = "[${类型}] ${null} 的 ${属性}"
-comment = "从某个数据上获取自定义值，如[单位] 恶魔猎手 的 命中率 。"
+title = "YDWE User Data -- Read"
+description = "[${type}] ${null} 的 ${Attribute}"
+comment = "Get User Data from a Game Data, e.g. [Unit] Demon Hunter's Hit rate."
 category = TC_YDBF
 returns = AnyReturnType
 [[.args]]
@@ -51,9 +51,9 @@ type = Null
 type = scriptcode
 
 [YDWEHaveSavedAnyTypeDataByUserData]
-title = "自定义值 -- 是否存有"
-description = "[${类型}] ${null} 拥有 [${类型}] ${属性}"
-comment = "判断某个数据的自定义值是否存在，如[单位] 恶魔猎手 拥有[物品] 圣剑。"
+title = "YDWE User Data -- Is Exist"
+description = "[${type}] ${null} contains [${type}] ${Attribute}"
+comment = "Judge if a User Data is exist, e.g. [Unit] Demon Hunter has [Item] swords."
 category = TC_YDBF
 returns = boolean
 [[.args]]

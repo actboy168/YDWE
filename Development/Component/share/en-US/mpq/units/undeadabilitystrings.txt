@@ -1,0 +1,687 @@
+// Replenish Life & Mana
+[Arpb]
+Name=Replenish
+Tip=|cffffcc00R|replenish
+Ubertip="Replenish the life and mana of a target friendly unit."
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=R
+Unhotkey=R
+
+[Brpb]
+Bufftip=Replenish
+Buffubertip="This unit has been hit by Replenish; some of its hit points and mana have been restored."
+
+// Replenish Life (Obsidian Statue)
+[Arpl]
+Name=Essence of Blight
+Tip=Essence of |cffffcc00B|rlight
+Ubertip="Restores <Arpl,DataA1> hit points to nearby friendly units."
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=B
+Unhotkey=B
+
+[Brpl]
+Bufftip=Essence of Blight
+Buffubertip="This unit has been hit by Essence of Blight; some of its hit points have been restored."
+
+// Spirit Touch (Obsidian Statue)
+[Arpm]
+Name=Spirit Touch
+Tip=Spirit Tou|cffffcc00c|rh
+Ubertip="Restores <Arpm,DataB1> mana to nearby friendly units."
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=C
+Unhotkey=C
+Order=replenishmana
+Orderon=replenishmanaon
+Orderoff=replenishmanaoff
+
+[Brpm]
+Bufftip=Spirit Touch
+Buffubertip="This unit has been hit by Spirit Touch; some of its mana has been restored."
+
+// Exhume Corpses
+[Aexh]
+Name=Exhume Corpses
+Tip=Exhume Corpses
+Ubertip="Generates a corpse within the Meat Wagon every <Aexh,Dur1> seconds."
+
+// Obsidian Statue mana battery
+[Amb2]
+Name=Replenish Mana
+Tip=|cffffcc00R|replenish Mana
+Ubertip="Replenish the mana of a target friendly unit."
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=R
+Unhotkey=R
+Order=replenish
+
+// Destroyer Form 
+[Aave] 
+Name=Destroyer Form 
+
+// Orb of Annihilation
+[Afak]
+Name=Orb of Annihilation
+Tip="|cffffcc00O|rrb of Annihilation"
+Ubertip="Adds <Afak,DataA1> bonus damage to the Destroyer's attack and causes his attacks to do area of effect damage."
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=O
+Unhotkey=O
+
+// Devour Magic
+[Advm]
+Name=Devour Magic
+Tip="|cffffcc00D|revour Magic"
+Ubertip="Consumes all magical buffs from units in an area. Each unit that is devoured of magic gives the Destroyer <Advm,DataA1> hit points and <Advm,DataB1> mana. |n|cffffcc00Deals <Advm,DataE1> damage to summoned units.|r"
+Hotkey=D
+
+// Aura of Blight
+[Aabr]
+Name=Aura of Blight
+Tip=Aura of Blight
+Ubertip="Gives all friendly Undead nearby units a bonus to hit point regeneration. The aura does not stack with the regenerative effects of Blight."
+
+[Babr]
+Bufftip=Aura of Blight
+Buffubertip="This unit is under the effects of Aura of Blight; it has a bonus to hit point regeneration."
+
+// Absorb Mana
+[Aabs]
+Name=Absorb Mana
+Tip="A|cffffcc00b|rsorb Mana"
+Ubertip="Takes all mana from one of your units and gives it to the Destroyer."
+Hotkey=B
+
+// Burrow
+[Abur]
+Name=Burrow
+EditorSuffix= (Crypt Fiend)
+Tip=|cffffcc00B|rurrow
+Untip=Un|cffffcc00b|rurrow
+Ubertip="The Crypt Fiend digs into the ground, becomes invisible, and gains a regeneration rate of <ucrm,regenHP> hit points per second. |nThe Crypt Fiend cannot attack while burrowed."
+Unubertip="The Crypt Fiend pops out of the ground and becomes visible again."
+Hotkey=B
+Unhotkey=B
+
+// Burrow (scarab lvl 2)
+[Abu2]
+Name=Burrow
+EditorSuffix= (Scarab lvl 2)
+Tip=|cffffcc00B|rurrow
+Untip=Un|cffffcc00b|rurrow
+Ubertip="The Carrion Beetle digs into the ground and becomes invisible."
+Unubertip="The Carrion Beetle pops out of the ground and becomes visible again."
+Hotkey=B
+Unhotkey=B
+
+// Burrow (scarab lvl 3)
+[Abu3]
+Name=Burrow
+EditorSuffix= (Scarab lvl 3)
+Tip=|cffffcc00B|rurrow
+Untip=Un|cffffcc00b|rurrow
+Ubertip="The Carrion Beetle digs into the ground and becomes invisible."
+Unubertip="The Carrion Beetle pops out of the ground and becomes visible again."
+Hotkey=B
+Unhotkey=B
+
+// Impale
+[AUim]
+Name=Impale
+Tip=Impal|cffffcc00e|r - [|cffffcc00Level 1|r],Impal|cffffcc00e|r - [|cffffcc00Level 2|r],Impal|cffffcc00e|r - [|cffffcc00Level 3|r]
+Ubertip="Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line, dealing <AUim,DataC1> damage and hurling enemy ground units into the air in their wake, stunning them for <AUim,Dur1> seconds.","Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line dealing <AUim,DataC2> damage and hurling enemy ground units into the air in their wake, stunning them for <AUim,Dur2> seconds.","Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line dealing <AUim,DataC3> damage and hurling enemy ground units into the air in their wake, stunning them for <AUim,Dur3> seconds."
+Hotkey=E
+Researchtip="Learn Impal|cffffcc00e|r - [|cffffcc00Level %d|r]"
+Researchubertip="Slams the ground with the Crypt Lord's massive claws, shooting spiked tendrils out in a straight line, dealing damage and hurling enemy ground units into the air in their wake. |n|n|cffffcc00Level 1|r - <AUim,DataC1> damage, <AUim,Dur1> second stun. |n|cffffcc00Level 2|r - <AUim,DataC2> damage, <AUim,Dur2> second stun. |n|cffffcc00Level 3|r - <AUim,DataC3> damage, <AUim,Dur3> second stun."
+Researchhotkey=E
+
+[BUim]
+Bufftip=Impale
+Buffubertip="This unit has been impaled; it is in the air for a short duration."
+
+[AUts]
+Name=Spiked Carapace
+Tip=Spiked Carapace - [|cffffcc00Level 1|r],Spiked Carapace - [|cffffcc00Level 2|r],Spiked Carapace - [|cffffcc00Level 3|r]
+Ubertip="Enhances the Crypt Lord's chitinous armor with organic barbs, giving the Crypt Lord <AUts,DataC1> bonus armor and returning <AUts,DataA1,%>% of melee attack damage to enemies.","Enhances the Crypt Lord's chitinous armor with organic barbs, giving him <AUts,DataC2> bonus armor and returning <AUts,DataA2,%>% of melee attack damage to enemies.","Enhances the Crypt Lord's chitinous armor with organic barbs, giving him <AUts,DataC3> bonus armor and returning <AUts,DataA3,%>% of melee attack damage to enemies."
+Researchtip="Learn |cffffcc00S|rpiked Carapace - [|cffffcc00Level %d|r]"
+Researchubertip="The Crypt Lord forms barbed layers of chitinous armor that increases its defense and returns damage to enemy melee attackers.  |n|n|cffffcc00Level 1|r - <AUts,DataA1,%>% damage returned, <AUts,DataC1> bonus armor. |n|cffffcc00Level 2|r -  <AUts,DataA2,%>% damage returned, <AUts,DataC2> bonus armor. |n|cffffcc00Level 3|r -  <AUts,DataA3,%>% damage returned, <AUts,DataC3> bonus armor."
+Researchhotkey=S
+
+// Carrion Beetles
+[AUcb]
+Name=Carrion Beetles
+Tip=|cffffcc00C|rarrion Beetles - [|cffffcc00Level 1|r],|cffffcc00C|rarrion Beetles - [|cffffcc00Level 2|r],|cffffcc00C|rarrion Beetles - [|cffffcc00Level 3|r]
+Ubertip="Progenerates <AUcb,DataA1> Beetle from a target corpse. Beetles have <ucs1,realHP> hit points, and deal <ucs1,mindmg1> - <ucs1,maxdmg1> damage. Beetles are permanent until killed. |nMaximum of <AUcb,DataE1> Beetles.","Progenerates <AUcb,DataA2> Beetle from a target corpse. Beetles have <ucs2,realHP> hit points, and deal <ucs2,mindmg1> - <ucs2,maxdmg1> damage, and can burrow. Beetles are permanent until killed. |nMaximum of <AUcb,DataE2> Beetles.","Progenerates <AUcb,DataA3> Beetle from a target corpse. Beetles have <ucs3,realHP> hit points, and deal <ucs3,mindmg1> - <ucs3,maxdmg1> damage, and can burrow. Beetles are permanent until killed. |nMaximum of <AUcb,DataE3> Beetles."
+Hotkey=C
+Researchtip="Learn |cffffcc00C|rarrion Beetles - [|cffffcc00Level %d|r]"
+Researchubertip="The Crypt Lord progenerates <AUcb,DataA1> Carrion Beetle from a target corpse to attack the Crypt Lord's enemies. Beetles are permanent, but only <AUcb,DataE1> can be controlled at a time. |n|n|cffffcc00Level 1|r - <ucs1,realHP> hit points, <ucs1,mindmg1> - <ucs1,maxdmg1> damage. |n|cffffcc00Level 2|r - <ucs2,realHP> hit points, <ucs2,mindmg1> - <ucs2,maxdmg1> damage, Beetles can burrow. |n|cffffcc00Level 3|r - <ucs3,realHP> hit points, <ucs3,mindmg1> - <ucs3,maxdmg1> damage, Beetles can burrow."
+Researchhotkey=C
+Untip="|cffc3dbffRight-click to activate auto-casting."
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting."
+
+[BUcb]
+Bufftip=Carrion Beetles
+Buffubertip="Summoned units take damage from dispels."
+
+// Locust Swarm
+[AUls]
+Name=Locust Swarm
+Tip=|cffffcc00L|rocust Swarm
+Ubertip="Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. |nLasts <AUls,HeroDur1> seconds."
+Hotkey=L
+Researchtip="Learn |cffffcc00L|rocust Swarm"
+Researchubertip="Creates a swarm of angry locusts that bite and tear at nearby enemy units. As they chew the enemy flesh, they convert it into a substance that restores hit points to the Crypt Lord when they return. |nLasts <AUls,HeroDur1> seconds."
+Researchhotkey=L
+
+[BUlo]
+Bufftip=Locust
+
+// Meat Wagon Cargo Hold
+[Amtc]
+Name=Cargo Hold
+
+// True Sight
+[Atru]
+Name=True Sight
+Tip=True Sight
+Ubertip="Reveals nearby invisible units."
+EditorSuffix= (Shade)
+
+// Acolyte Harvest
+[Aaha]
+Name=Gather
+Tip=|cffffcc00G|rather
+Ubertip="Mines gold from Haunted Gold Mines."
+Untip=|cffffcc00R|return Resources
+Unubertip="Return the carried resources to the nearest town hall."
+Hotkey=G
+Unhotkey=R
+EditorSuffix= (Acolyte Gold)
+
+// Unsummon
+[Auns]
+Name=Unsummon Building
+Tip=|cffffcc00U|rnsummon Building
+Ubertip="Unsummons your building to regain <Auns,DataA1,%>% of the spent resources."
+Hotkey=U
+
+[Buns]
+Bufftip=Unsummon
+
+// Graveyard
+[Agyd]
+Name=Create Corpse
+//Tip=Create C|cffffcc00o|rrpse
+//Ubertip="Create a corpse."
+//Hotkey=O
+
+// Sacrifice (Acolyte's button)
+[Alam]
+Name=Sacrifice
+Tip=Sa|cffffcc00c|rrifice
+Ubertip="Target a Sacrificial Pit to sacrifice the Acolyte and turn it into a Shade. Shades are invisible spirits that can see invisible units. |nShades cannot attack."
+Hotkey=C
+EditorSuffix= (Acolyte)
+
+// Sacrifice (Sacrificial Pit's button)
+[Asac]
+Name=Sacrifice
+Tip=Sa|cffffcc00c|rrifice
+Ubertip="Target an Acolyte to sacrifice it and turn it into a Shade. Shades are invisible spirits that can see invisible units. |nShades cannot attack."
+Hotkey=C
+EditorSuffix= (Sacrificial Pit)
+
+// Cannibalize
+[Acan]
+Name=Cannibalize
+Tip=|cffffcc00C|rannibalize
+Ubertip="Consumes a nearby corpse to heal <Acan,DataA1> hit points per second."
+Hotkey=C
+
+// Cannibalize
+[Acn2]
+Name=Cannibalize
+Tip=|cffffcc00C|rannibalize
+Ubertip="Consumes a nearby corpse to heal <Acn2,DataA1> hit points per second."
+Hotkey=C
+
+// Spider Attack
+[Aspa]
+Name=Spider Attack
+// This ability modifies the unit's attack.
+
+[Bspa]
+Bufftip=Spiderling
+
+// Web
+[Aweb]
+Name=Web
+Tip=|cffffcc00W|reb
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting."
+Ubertip="Binds a target enemy air unit in webbing, forcing it to the ground. Webbed units can be hit as though they were land units. |nLasts <Aweb,Dur1> seconds."
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting."
+Hotkey=W
+Unhotkey=W
+
+// Web buff on ground units
+[Bweb]
+Bufftip=Web
+Buffubertip="This unit is webbed; it is stuck to the ground and cannot move."
+EditorSuffix= (Ground)
+
+// Web buff on air units
+[Bwea]
+Bufftip=Web
+Buffubertip="This unit is webbed; it is stuck to the ground and cannot move."
+EditorSuffix= (Air)
+
+// Stone Form
+[Astn]
+Name=Stone Form
+Tip=Stone |cffffcc00F|rorm
+Ubertip="Transforms the Gargoyle into a statue that is immune to spells, gains additional armor and has a regeneration rate of <Astn,DataE1> hit points per second. |nThe Gargoyle cannot attack in this form."
+Hotkey=F
+Untip=Gargoyle |cffffcc00F|rorm
+Unubertip="Returns the Gargoyle to the air."
+Unhotkey=F
+
+// Load Corpse
+[Amel]
+Name=Get Corpse
+Tip=Get |cffffcc00C|rorpse
+Ubertip="Picks up a nearby corpse for later use."
+Untip="|cffc3dbffRight-click to activate auto-casting."
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting."
+Hotkey=C
+Unhotkey=C
+
+// Unload Corpse
+[Amed]
+Name=Drop Corpse
+Tip=|cffffcc00D|rrop All Corpses
+Ubertip="Drops all corpses for immediate use."
+Hotkey=D
+
+// Disease Cloud
+[Aapl]
+Name=Disease Cloud
+Tip=Disease Cloud
+Ubertip="Infects nearby enemy living units with Disease Cloud. Disease Cloud deals <Aap1,DataB1> damage per second. |nLasts <Aap1,DataA1> seconds."
+
+[Aap1]
+Name=Disease Cloud
+Tip=Disease Cloud
+Ubertip="Infects nearby enemy living units with Disease Cloud. Disease Cloud deals <Aap1,DataB1> damage per second. |nLasts <Aap1,DataA1> seconds."
+
+// Disease Cloud
+[Aap2]
+Name=Disease Cloud
+EditorSuffix= (Plague Ward)
+
+[Aap3]
+Name=Disease Cloud
+Tip=Disease Cloud
+Ubertip="Infects nearby enemy living units with Disease Cloud. Disease Cloud deals <Aap3,DataB1> damage per second. |nLasts <Aap3,DataA1> seconds."
+EditorSuffix= (Neutral Hostile)
+
+[Aap4]
+Name=Disease Cloud
+Tip=Disease Cloud
+Ubertip="Infects nearby enemy living units with Disease Cloud. Disease Cloud deals <Aap4,DataB1> damage per second. |nLasts <Aap4,DataA1> seconds."
+EditorSuffix= (Neutral Hostile no damage)
+
+[Bapl]
+Bufftip=Disease
+Buffubertip="This unit is diseased; it will take damage over time."
+
+// Disease Cloud
+[Apts]
+Name=Disease Cloud
+Tip=Disease Cloud
+Ubertip="Drops a Disease Cloud with each attack. Disease Cloud deals <Aap1,DataB1> damage per second. |nLasts <Aap1,DataA1> seconds."
+EditorSuffix= (Meat Wagon)
+
+// Frost Breath
+[Afrb]
+Name=Frost Breath
+// This ability modifies the unit's attack.
+
+// Frost Attack
+[Afra]
+Name=Frost Attack
+Tip=Frost Attack
+Ubertip="Adds a cold effect to this unit's attacks that slows enemy units' movement speed."
+
+// Frost Attack (1,2 button pos version)
+[Afr2]
+Name=Frost Attack
+Tip=Frost Attack
+Ubertip="Adds a cold effect to this unit's attacks that slows enemy units' movement speed."
+
+// Freezing Breath
+[Afrz]
+Name=Freezing Breath
+Tip=Freezing Breath
+Ubertip="When used on a building, temporarily stops all building activities. |nLasts <Afrz,Dur1> seconds."
+
+[Bfrz]
+Bufftip=Freezing Breath
+Buffubertip="This building is frozen; its abilities cannot be used and it cannot be repaired."
+
+// Raise Dead
+[Arai]
+Name=Raise Dead
+Tip=|cffffcc00R|raise Dead
+Untip="|cffc3dbffRight-click to activate auto-casting."
+Ubertip="Raises <Arai,DataA1> skeletons from a corpse."
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting."
+Hotkey=R
+Unhotkey=R
+
+[Brai]
+Bufftip=Skeletal Minion
+Buffubertip="Summoned units take damage from dispels."
+
+// Unholy Frenzy
+[Auhf]
+Name=Unholy Frenzy
+Tip=|cffffcc00U|rnholy Frenzy
+Ubertip="Increases the attack rate of a target unit by <Auhf,DataA1,%>%, but drains <Auhf,DataB1> hit points per second. |nLasts <Auhf,Dur1> seconds."
+Hotkey=U
+
+// Unholy Frenzy (Warlock)
+[Suhf]
+Name=Unholy Frenzy
+Tip=|cffffcc00U|rnholy Frenzy
+Ubertip="Increases the attack rate of a target unit by <Suhf,DataA1,%>%, but drains <Suhf,DataB1> hit points per second. |nLasts <Suhf,Dur1> seconds."
+Hotkey=U
+EditorSuffix= (Warlock)
+
+[Buhf]
+Bufftip=Unholy Frenzy
+Buffubertip="This unit has Unholy Frenzy; its attack rate is increased, but it takes damage over time."
+
+// Curse
+[Acrs]
+Name=Curse
+Tip=|cffffcc00C|rurse
+Ubertip="Curses a target enemy unit, causing it to have a <Acrs,DataA1,%>% chance to miss on an attack. |nLasts <Acrs,Dur1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting."
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting."
+Hotkey=C
+Unhotkey=C
+
+[Bcrs]
+Bufftip=Curse
+Buffubertip="This unit is Cursed; it can miss when it attacks."
+
+// Anti-magic Shell
+[Aams]
+Name=Anti-magic Shell
+Tip=A|cffffcc00n|rti-magic Shell
+Ubertip="Creates a barrier that stops spells from affecting a target unit. |nLasts <Aams,Dur1> seconds."
+Hotkey=N
+
+// Anti-magic Shell
+[Aam2]
+Name=Anti-magic Shell
+Tip=A|cffffcc00n|rti-magic Shell
+Ubertip="Creates a barrier that stops <Aam2,DataC1> points of spell damage from affecting a target unit. |nLasts <Aam2,Dur1> seconds."
+Hotkey=N
+EditorSuffix= (Magic Resistance)
+
+[Bams]
+Bufftip=Anti-magic Shell
+Buffubertip="This unit has Anti-magic Shell; it cannot be targeted by spells. It can be dispelled."
+
+[Bam2]
+Bufftip=Anti-magic Shell
+Buffubertip="This unit has Anti-magic Shell; damage spells must destroy the shell to affect the unit."
+EditorSuffix= (Extra)
+
+// Possession
+[Apos]
+Name=Possession
+Tip=P|cffffcc00o|rssession
+Ubertip="Displaces the soul of an enemy, giving you permanent control of it, but destroying the caster's body. |nPossession cannot be used on flying units, Heroes, or creeps above level <Apos,DataA1>."
+Hotkey=O
+
+// Possession
+[Aps2]
+Name=Possession
+Tip=P|cffffcc00o|rssession
+Ubertip="Stuns a target unit and the Banshee for <Aps2,Dur1> seconds, during which the Banshee takes extra damage from attacks. She then displaces the soul of the enemy, giving you permanent control of it, but destroying the caster's body. |nPossession cannot be used on flying units, Heroes, or creeps above level <Aps2,DataA1>."
+Hotkey=O
+EditorSuffix= (Channeling)
+
+[Bpos]
+Bufftip=Possession
+Buffubertip="This unit is being possessed."
+
+// Death Coil
+[AUdc]
+Name=Death Coil
+Tip=Death |cffffcc00C|roil - [|cffffcc00Level 1|r],Death |cffffcc00C|roil - [|cffffcc00Level 2|r],Death |cffffcc00C|roil - [|cffffcc00Level 3|r]
+Ubertip="A coil of death that can heal a friendly Undead unit for <AUdc,DataA1> hit points, or deal half damage to an enemy living unit.","A coil of death that can heal a friendly Undead unit for <AUdc,DataA2> hit points, or deal half damage to an enemy living unit.","A coil of death that can heal a friendly Undead unit for <AUdc,DataA3> hit points, or deal half damage to an enemy living unit."
+Hotkey=C
+Researchtip="Learn Death |cffffcc00C|roil - [|cffffcc00Level %d|r]"
+Researchubertip="A coil of death that can damage an enemy living unit or heal a friendly Undead unit. |n|n|cffffcc00Level 1|r - Heals for <AUdc,DataA1> hit points. |n|cffffcc00Level 2|r - Heals for <AUdc,DataA2> hit points. |n|cffffcc00Level 3|r - Heals for <AUdc,DataA3> hit points."
+Researchhotkey=C
+
+// Unholy Aura
+[AUau]
+Name=Unholy Aura
+Tip=Unholy Aura - [|cffffcc00Level 1|r],Unholy Aura - [|cffffcc00Level 2|r],Unholy Aura - [|cffffcc00Level 3|r]
+Ubertip="Increases nearby friendly units' movement speed by <AUau,DataA1,%>% and life regeneration rate.","Increases nearby friendly units' movement speed by <AUau,DataA2,%>% and life regeneration rate.","Increases nearby friendly units' movement speed by <AUau,DataA3,%>% and life regeneration rate."
+Researchtip="Learn |cffffcc00U|rnholy Aura - [|cffffcc00Level %d|r]"
+Researchubertip="Increases the movement speed and life regeneration rate of nearby friendly units. |n|n|cffffcc00Level 1|r - <AUau,DataA1,%>% movement, minor regeneration bonus. |n|cffffcc00Level 2|r - <AUau,DataA2,%>% movement, moderate regeneration bonus. |n|cffffcc00Level 3|r - <AUau,DataA3,%>% movement, greater regeneration bonus."
+Researchhotkey=U
+
+[BUau]
+Bufftip=Unholy Aura
+Buffubertip="This unit is under the effects of Unholy Aura; it has an increased movement speed and hit point regeneration."
+
+// Death Pact
+[AUdp]
+Name=Death Pact
+Tip=D|cffffcc00e|rath Pact - [|cffffcc00Level 1|r],D|cffffcc00e|rath Pact - [|cffffcc00Level 2|r],D|cffffcc00e|rath Pact - [|cffffcc00Level 3|r]
+Ubertip="Kills a target friendly Undead unit, giving <AUdp,DataB1,%>% of its hit points to the Death Knight.","Kills a target friendly Undead unit, giving <AUdp,DataB2,%>% of its hit points to the Death Knight.","Kills a target friendly Undead unit, giving <AUdp,DataB3,%>% of its hit points to the Death Knight."
+Hotkey=E
+Researchtip="Learn D|cffffcc00e|rath Pact - [|cffffcc00Level %d|r]"
+Researchubertip="Kills a target friendly Undead unit, giving a percentage of its hit points to the Death Knight. |n|n|cffffcc00Level 1|r - <AUdp,DataB1,%>% conversion. |n|cffffcc00Level 2|r - <AUdp,DataB2,%>% conversion. |n|cffffcc00Level 3|r - <AUdp,DataB3,%>% conversion."
+Researchhotkey=E
+
+// Animate Dead
+[AUan]
+Name=Animate Dead
+Tip=Animate |cffffcc00D|read
+Ubertip="Raises <AUan,DataA1> dead units in an area to fight for the Death Knight for <AUan,Dur1> seconds. Animated units are invulnerable."
+Hotkey=D
+Researchtip="Learn Animate |cffffcc00D|read"
+Researchubertip="Raises <AUan,DataA1> dead units in an area to fight for the Death Knight for <AUan,Dur1> seconds. Animated units are invulnerable."
+Researchhotkey=D
+Globalmessage=
+Globalsound=
+
+[BUan]
+Bufftip=Animate Dead
+Buffubertip="Summoned units take damage from dispels."
+
+// Carrion Swarm
+[AUcs]
+Name=Carrion Swarm
+Tip=|cffffcc00C|rarrion Swarm - [|cffffcc00Level 1|r],|cffffcc00C|rarrion Swarm - [|cffffcc00Level 2|r],|cffffcc00C|rarrion Swarm - [|cffffcc00Level 3|r]
+Ubertip="Sends a horde of bats to deal <AUcs,DataA1> damage to each enemy unit in a cone.","Sends a horde of bats to deal <AUcs,DataA2> damage to each enemy unit in a cone.","Sends a horde of bats to deal <AUcs,DataA3> damage to each enemy unit in a cone."
+Hotkey=C
+Researchtip="Learn |cffffcc00C|rarrion Swarm - [|cffffcc00Level %d|r]"
+Researchubertip="Sends a horde of bats to damage enemies. |n|n|cffffcc00Level 1|r - <AUcs,DataA1> damage per unit. |n|cffffcc00Level 2|r - <AUcs,DataA2> damage per unit. |n|cffffcc00Level 3|r - <AUcs,DataA3> damage per unit."
+Researchhotkey=C
+
+// Sleep
+[AUsl]
+Name=Sleep
+Tip=Sl|cffffcc00e|rep - [|cffffcc00Level 1|r],Sl|cffffcc00e|rep - [|cffffcc00Level 2|r],Sl|cffffcc00e|rep - [|cffffcc00Level 3|r]
+Ubertip="Puts a target enemy unit to sleep for <AUsl,Dur1> seconds. A sleeping unit can be awoken by attacking it.","Puts a target enemy unit to sleep for <AUsl,Dur2> seconds. A sleeping unit can be awoken by attacking it.","Puts a target enemy unit to sleep for <AUsl,Dur3> seconds. A sleeping unit can be awoken by attacking it."
+Hotkey=E
+Researchtip="Learn Sl|cffffcc00e|rep - [|cffffcc00Level %d|r]"
+Researchubertip="Puts a target enemy unit to sleep. A sleeping unit can be awoken by attacking it. |n|n|cffffcc00Level 1|r - <AUsl,Dur1> second sleep for <AUsl,Cost1> mana. |n|cffffcc00Level 2|r - <AUsl,Dur2> second sleep for <AUsl,Cost2> mana. |n|cffffcc00Level 3|r - <AUsl,Dur3> second sleep for <AUsl,Cost3> mana."
+Researchhotkey=E
+
+[BUsl]
+Bufftip=Sleep
+Buffubertip="This unit is sleeping; it cannot move, attack, or cast spells. Attacking it will wake it up."
+
+// Vampiric Aura
+[AUav]
+Name=Vampiric Aura
+Tip=Vampiric Aura - [|cffffcc00Level 1|r],Vampiric Aura - [|cffffcc00Level 2|r],Vampiric Aura - [|cffffcc00Level 3|r]
+Ubertip="Nearby friendly melee units gain <AUav,DataA1,%>% of their attack damage when they hit enemy units.","Nearby friendly melee units gain <AUav,DataA2,%>% of their attack damage when they hit enemy units.","Nearby friendly melee units gain <AUav,DataA3,%>% of their attack damage when they hit enemy units."
+Researchtip="Learn |cffffcc00V|rampiric Aura - [|cffffcc00Level %d|r]"
+Researchubertip="Nearby friendly melee units gain hit points when they hit enemy units. |n|n|cffffcc00Level 1|r - Gains <AUav,DataA1,%>% of attack damage. |n|cffffcc00Level 2|r - Gains <AUav,DataA2,%>% of attack damage. |n|cffffcc00Level 3|r - Gains <AUav,DataA3,%>% of attack damage."
+Researchhotkey=V
+
+[BUav]
+Bufftip=Vampiric Aura
+Buffubertip="This unit is under the effects of Vampiric Aura; damage it deals to enemy units will restore hit points."
+
+// Frost Nova
+[AUfn]
+Name=Frost Nova
+Tip=Frost |cffffcc00N|rova - [|cffffcc00Level 1|r],Frost |cffffcc00N|rova - [|cffffcc00Level 2|r],Frost |cffffcc00N|rova - [|cffffcc00Level 3|r]
+Ubertip="Blasts enemy units with a wave of frost that deals <AUfn,DataB1> damage to the target, and <AUfn,DataA1> nova damage. Cold damage slows units' movement and attack rate for <AUfn,Dur1> seconds.","Blasts enemy units with a wave of frost that deals <AUfn,DataB2> damage to the target, and <AUfn,DataA2> nova damage. Cold damage slows units' movement and attack rate for <AUfn,Dur2> seconds.","Blasts enemy units with a wave of frost that deals <AUfn,DataB3> damage to the target, and <AUfn,DataA3> nova damage. Cold damage slows units' movement and attack rate for <AUfn,Dur3> seconds."
+Hotkey=N
+Researchtip="Learn Frost |cffffcc00N|rova - [|cffffcc00Level %d|r]"
+Researchubertip="Blasts enemy units around a target enemy unit with a wave of damaging frost that slows movement and attack rate. |n|n|cffffcc00Level 1|r - <AUfn,DataB1> target damage, <AUfn,DataA1> nova damage. |n|cffffcc00Level 2|r - <AUfn,DataB2> target damage, <AUfn,DataA2> nova damage. |n|cffffcc00Level 3|r - <AUfn,DataB3> target damage, <AUfn,DataA3> nova damage."
+Researchhotkey=N
+
+// Frost Armor
+[AUfa]
+Name=Frost Armor
+Tip=|cffffcc00F|rrost Armor - [|cffffcc00Level 1|r],|cffffcc00F|rrost Armor - [|cffffcc00Level 2|r],|cffffcc00F|rrost Armor - [|cffffcc00Level 3|r]
+Ubertip="Creates a shield of frost around a target friendly unit. The shield adds <AUfa,DataB1> armor and slows melee units that attack it for <AUfa,Dur1> seconds. |nLasts <AUfa,DataA1> seconds.","Creates a shield of frost around a target friendly unit. The shield adds <AUfa,DataB2> armor and slows melee units that attack it for <AUfa,Dur1> seconds. |nLasts <AUfa,DataA2> seconds.","Creates a shield of frost around a target friendly unit. The shield adds <AUfa,DataB3> armor and slows melee units that attack it for <AUfa,Dur1> seconds. |nLasts <AUfa,DataA3> seconds."
+Hotkey=F
+Researchtip="Learn |cffffcc00F|rrost Armor - [|cffffcc00Level %d|r]"
+Researchubertip="Creates a shield of frost around a target friendly unit. The shield adds armor and slows melee units that attack it. |n|n|cffffcc00Level 1|r - Adds <AUfa,DataB1> armor. |n|cffffcc00Level 2|r - Adds <AUfa,DataB2> armor. |n|cffffcc00Level 3|r - Adds <AUfa,DataB3> armor."
+Researchhotkey=F
+
+// Frost Armor (Autocast)
+[AUfu]
+Name=Frost Armor
+EditorSuffix= (Autocast)
+Tip=|cffffcc00F|rrost Armor - [|cffffcc00Level 1|r],|cffffcc00F|rrost Armor - [|cffffcc00Level 2|r],|cffffcc00F|rrost Armor - [|cffffcc00Level 3|r]
+Ubertip="Creates a shield of frost around a target friendly unit. The shield adds <AUfu,DataB1> armor and slows melee units that attack it for <AUfu,Dur1> seconds. |nLasts <AUfu,DataA1> seconds.","Creates a shield of frost around a target friendly unit. The shield adds <AUfa,DataB2> armor and slows melee units that attack it for <AUfa,Dur1> seconds. |nLasts <AUfa,DataA2> seconds.","Creates a shield of frost around a target friendly unit. The shield adds <AUfa,DataB3> armor and slows melee units that attack it for <AUfa,Dur1> seconds. |nLasts <AUfa,DataA3> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting."
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting."
+Hotkey=F
+Researchtip="Learn |cffffcc00F|rrost Armor - [|cffffcc00Level %d|r]"
+Researchubertip="Creates a shield of frost around a target friendly unit. The shield adds armor and slows melee units that attack it. |n|n|cffffcc00Level 1|r - Adds <AUfu,DataB1> armor. |n|cffffcc00Level 2|r - Adds <AUfu,DataB2> armor. |n|cffffcc00Level 3|r - Adds <AUfu,DataB3> armor."
+Researchhotkey=F
+
+[BUfa]
+Bufftip=Frost Armor
+Buffubertip="This unit has Frost Armor; it has increased armor, and melee units that attack it will have their movement speed and attack rate reduced for a short duration."
+
+// Dark Ritual
+[AUdr]
+Name=Dark Ritual
+Tip=Dark |cffffcc00R|ritual - [|cffffcc00Level 1|r],Dark |cffffcc00R|ritual - [|cffffcc00Level 2|r],Dark |cffffcc00R|ritual - [|cffffcc00Level 3|r]
+Ubertip="Sacrifices a target friendly Undead unit to convert <AUdr,DataA1,%>% of its hit points into mana for the Lich.","Sacrifices a target friendly Undead unit to convert <AUdr,DataA2,%>% of its hit points into mana for the Lich.","Sacrifices a target friendly Undead unit to convert <AUdr,DataA3,%>% of its hit points into mana for the Lich."
+Hotkey=R
+Researchtip="Learn Dark |cffffcc00R|ritual - [|cffffcc00Level %d|r]"
+Researchubertip="Sacrifices a target friendly Undead unit to convert its hit points into mana for the Lich. |n|n|cffffcc00Level 1|r - <AUdr,DataA1,%>% of hit points to mana. |n|cffffcc00Level 2|r - <AUdr,DataA2,%>% of hit points to mana. |n|cffffcc00Level 3|r - <AUdr,DataA3,%>% of hit points to mana."
+Researchhotkey=R
+
+// Death And Decay
+[AUdd]
+Name=Death And Decay
+Tip=|cffffcc00D|reath And Decay
+Ubertip="Damages everything in its area of effect by <AUdd,DataA1,%>% of its base hit points per second. Also destroys trees. |nLasts <AUdd,Dur1> seconds."
+Hotkey=D
+Researchtip="Learn |cffffcc00D|reath And Decay"
+Researchubertip="Damages everything in its area of effect by <AUdd,DataA1,%>% of its base hit points per second. Also destroys trees."
+Researchhotkey=D
+
+[BUdd]
+Bufftip=Death and Decay
+Buffubertip="This unit is under Death and Decay; it will take damage over time."
+
+// Cripple
+[Acri]
+Name=Cripple
+Tip=|cffffcc00C|rripple
+Ubertip="Reduces movement speed by <Acri,DataA1,%>%, attack rate by <Acri,DataB1,%>%, and damage by <Acri,DataC1,%>% of a target enemy unit. |nLasts <Acri,Dur1> seconds."
+Hotkey=C
+
+// Cripple (Warlock)
+[Scri]
+Name=Cripple
+Tip=|cffffcc00C|rripple
+Ubertip="Reduces movement speed by <Acri,DataA1,%>%, attack rate by <Acri,DataB1,%>%, and damage by <Acri,DataC1,%>% of a target enemy unit. |nLasts <Acri,Dur1> seconds."
+Hotkey=C
+EditorSuffix= (Warlock)
+
+[Bcri]
+Bufftip=Cripple
+Buffubertip="This unit is Crippled; its movement speed, attack rate and damage have been reduced."
+
+// Restore
+[Arst]
+Name=Restore
+Tip=|cffffcc00R|restore
+Ubertip="Repairs mechanical units and structures at the cost of resources."
+Untip="|cffc3dbffRight-click to activate auto-casting."
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting."
+Hotkey=R
+Unhotkey=R
+
+[AUin]
+Name=Inferno
+Tip=I|cffffcc00n|rferno
+Ubertip="Calls an Infernal down from the sky, dealing <AUin,DataA1> damage and stunning enemy land units for <AUin,Dur1> seconds in an area. The Infernal lasts <AUin,DataB1> seconds."
+Hotkey=N
+Researchtip=Learn I|cffffcc00n|rferno
+Researchubertip="Calls an Infernal down from the sky, dealing <AUin,DataA1> damage and stunning enemy land units for <AUin,Dur1> seconds in an area. The Infernal lasts <AUin,DataB1> seconds."
+Researchhotkey=N
+
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BUcs]
+EditorName=Carrion Swarm (Caster)
+
+[BUsp]
+EditorName=Sleep (Pause)
+
+[BUst]
+EditorName=Sleep (Stun)
+
+[BUts]
+EditorName=Spiked Carapace
+
+[Bplg]
+EditorName=Disease Cloud
+
+[BUad]
+EditorName=Animate Dead (Extra)
+
+[Bpoc]
+EditorName=Possession (Caster)
+
+[XUdd]
+EditorName=Death And Decay (Effect)
+
+[Xfus]
+EditorName=Building Damage - Undead Small
+
+[Xfum]
+EditorName=Building Damage - Undead Medium
+
+[Xful]
+EditorName=Building Damage - Undead Large
