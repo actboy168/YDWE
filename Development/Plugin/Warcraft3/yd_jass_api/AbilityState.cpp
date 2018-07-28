@@ -121,7 +121,24 @@ namespace base { namespace warcraft3 { namespace japi {
 			{
 				return nullptr;
 			}
+			return &(items_[level - 1]);
+		}
 
+		T* get_or_create(uint32_t level)
+		{
+			if (level == 0)
+			{
+				return nullptr;
+			}
+			if (level > max_)
+			{
+				T* newbuf = (T*)string_pool.malloc(level * sizeof(items_[0]));
+				memset(newbuf, 0, level * sizeof(items_[0]));
+				memcpy(newbuf, items_, max_ * sizeof(items_[0]));
+				string_pool.free((uintptr_t)items_);
+				items_ = newbuf;
+				max_ = level;
+			}
 			return &(items_[level-1]);
 		}
 	};
@@ -595,8 +612,8 @@ namespace base { namespace warcraft3 { namespace japi {
 				ability_ui* ptr = GetAbilityUITable(ability_pool.at(ability_handle));
 				if (ptr)
 				{
-					uint32_t* buf = ptr->hotkey_[state_type-ABILITY_DATA_HOTKET].get(level);
-					if (buf) 
+					uint32_t* buf = ptr->hotkey_[state_type - ABILITY_DATA_HOTKET].get_or_create(level);
+					if (buf)
 					{
 						*buf = value;
 						return true;
@@ -661,11 +678,11 @@ namespace base { namespace warcraft3 { namespace japi {
 			buf = &ptr->unart;
 			break;
 		default:
-			buf = ptr->array_[type - ABILITY_DATA_NAME].get(level);
+			buf = ptr->array_[type - ABILITY_DATA_NAME].get_or_create(level);
 			break;
 		}
 
-		if (!buf || !*buf)
+		if (!buf)
 		{
 			return jass::jfalse;
 		}

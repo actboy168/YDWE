@@ -49,6 +49,7 @@ namespace base { namespace warcraft3 { namespace japi {
 
 		bool free(uintptr_t ptr)
 		{
+			if (!ptr) return false;
 			auto it = used_.find(ptr);
 			if (it == used_.end())
 			{
