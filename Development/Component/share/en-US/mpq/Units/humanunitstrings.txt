@@ -1,0 +1,260 @@
+[Hblm]
+Name=Blood Mage
+Propernames=Eldin Sunstrider,Tanin Hawkwing,Lorn Bloodseeker,Aldos Firestar,Gilaras Drakeson,Hale Magefire,Kath'ranis Remar,Tyoril Sunchaser,Sylvos Windrunner,Tenris Mirkblood,Marakanis Starfury,Geldor Earthfire,Halendor Burnkin,Kelen the Destroyer
+Hotkey=B
+Tip=Summon |cffffcc00B|rlood Mage
+Ubertip="Mystical Hero, adept at controlling magic and ranged assaults. Can learn Flame Strike, Banish, Siphon Mana and Phoenix. |n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive |cffffcc00B|rlood Mage
+Awakentip=Revive |cffffcc00B|rlood Mage
+
+[halt]
+Name=Altar of Kings
+Hotkey=A
+Tip=Build |cffffcc00A|rltar of Kings
+Ubertip="Summons Heroes. Revives slain Heroes."
+
+[Hamg]
+Name=Archmage
+Propernames=Tenn Flamecaster,Nilas Arcanister,Andromath,Shal Lightbinder,Aran Spellweaver,Manath Magesinger,Landazar,Doril Magefont,Peril Spellbinder,Conjurus Rex,Fordred Aran,Dalar Dawnweaver,Kelen the Seeker
+Hotkey=A
+Tip=Summon |cffffcc00A|rrchmage
+Ubertip="Mystical Hero, adept at ranged assaults. Can learn Blizzard, Summon Water Elemental, Brilliance Aura and Mass Teleport. |n|n|cffffcc00Attacks land and air units.|r"
+Revivetip=Revive |cffffcc00A|rrchmage
+Awakentip=Revive |cffffcc00A|rrchmage
+
+[harm]	
+Name=Workshop
+Hotkey=W
+Tip=Build |cffffcc00W|rorkshop
+Ubertip="Produces Siege Engines, Flying Machines, and Mortar Teams. |nAlso contains the Flare, Fragmentation Shards, Barrage, Flying Machine Bombs, and Flak Cannons upgrades."
+
+[hars]
+Name=Arcane Sanctum
+Hotkey=R
+Tip=Build A|cffffcc00r|rcane Sanctum
+Ubertip="Trains Priests, Sorceresses, and Spell Breakers. |nAlso contains spell upgrades for Priests and Sorceresses, Control Magic, and Magic Sentry."
+
+[hbar]
+Name=Barracks
+Hotkey=B
+Tip=Build |cffffcc00B|rarracks
+Ubertip="Primary troop production building. Trains Footmen, Riflemen and Knights. |nAlso contains the Defend, Long Rifles, and Animal War Training upgrades."
+
+[hbla]
+Name=Blacksmith
+Hotkey=S
+Tip=Build Black|cffffcc00s|rmith
+Ubertip="Contains upgrades for improved armor, weaponry and gunpowder."
+
+[hcas]
+Name=Castle
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Castle
+Ubertip="Upgrade to Castle to enable the production of additional types of structures and units."
+
+[hdhw]
+Name=Dragonhawk Rider
+Hotkey=D
+Tip=Train |cffffcc00D|rragonhawk Rider
+Ubertip="Swift flying unit, mounted by an Elven warrior. Has the Aerial Shackles ability, which allows it to immobilize and disarm enemy air units temporarily. Can learn Animal War Training, and the Cloud ability. |n|n|cffffcc00Attacks land and air units.|r"
+
+[hhou]
+Name=Farm
+Hotkey=F
+Tip=Build |cffffcc00F|rarm
+Ubertip="Provides food, which increases the maximum number of units that can be trained."
+
+[hfoo]	
+Name=Footman
+Hotkey=F
+Tip=Train |cffffcc00F|rootman
+Ubertip="Versatile foot soldier. Can learn the Defend ability. |n|n|cffffcc00Attacks land units.|r"
+
+[hgra]
+Name=Gryphon Aviary
+Hotkey=G
+Tip=Build |cffffcc00G|rryphon Aviary
+Ubertip="Trains Gryphon Riders, and Dragonhawk Riders. |nAlso contains the Storm Hammers and Cloud upgrades."
+
+[hctw]
+Name=Cannon Tower
+Hotkey=C
+Tip=Upgrade to |cffffcc00C|rannon Tower
+Ubertip="Heavy defensive structure. Particularly effective against clusters of troops. Can learn the Magic Sentry ability. |n|n|cffffcc00Attacks land units and trees.|r"
+
+[hgtw]
+Name=Guard Tower
+Hotkey=G
+Tip=Upgrade to |cffffcc00G|ruard Tower
+Ubertip="Primary defensive structure. Can learn the Magic Sentry ability. |n|n|cffffcc00Attacks land and air units.|r"
+
+[hwtw]
+Name=Scout Tower
+Hotkey=T
+Tip=Build Scout |cffffcc00T|rower
+Ubertip="Basic observation tower. Has no attack, but can be upgraded into a Guard Tower, an Arcane Tower, or a Cannon Tower. Can learn the Magic Sentry ability."
+
+[hatw]
+Name=Arcane Tower
+Hotkey=N
+Tip=Upgrade to Arca|cffffcc00n|re Tower
+Ubertip="Magical defensive tower. Particularly effective against enemy Heroes and spellcasters. Has the Feedback ability, which causes its attacks to destroy mana, dealing extra damage equal to the mana destroyed. Deals bonus damage against summoned units. Can learn the Magic Sentry ability. |n|n|cffffcc00Attacks land and air units.|r"
+
+[hvlt]
+Name=Arcane Vault
+Hotkey=V
+Tip=Build Arcane |cffffcc00V|rault
+Ubertip="Creates a shop with purchasable items. The items available depend upon what level of upgrade your Town Hall has (Town Hall, Keep, or Castle) and which buildings you have."
+
+[hgyr]
+Name=Flying Machine
+Hotkey=F
+Tip=Train |cffffcc00F|rlying Machine
+Ubertip="Fast moving flying machine. Excellent at scouting, and effective against air units. Can learn the Flying Machine Bombs and Flak Cannons upgrades. |nCan see invisible units. |n|n|cffffcc00Attacks air units.|r"
+
+[hkee]	
+Name=Keep
+Hotkey=U
+Tip=|cffffcc00U|rpgrade to Keep
+Ubertip="Upgrade to Keep to enable the production of additional types of structures and units."
+
+[hkni]
+Name=Knight
+Hotkey=K
+Tip=Train |cffffcc00K|rnight
+Ubertip="Powerful mounted warrior. Can learn Animal War Training. |n|n|cffffcc00Attacks land units.|r"
+
+[hlum]
+Name=Lumber Mill
+Hotkey=L
+Tip=Build |cffffcc00L|rumber Mill
+Ubertip="Serves as a drop-off point for harvested lumber. |nAlso contains the upgrades for Lumber Harvesting and Masonry."
+
+[hmil]
+Name=Militia
+
+[Hmkg]
+Name=Mountain King
+Propernames=Bor Stonebreaker,Munin Ironcliff,Thorgas Broadaxe,Kelv Sternhammer,Grim Thunderbrew,Buri Frostbeard,Huginn Ironcliff,Thordin Rockbeard,Bandis Forgefire,Gar Doomforge,Beazel Bludstone,Modi Stonesmith,Aggronor the Mighty
+Hotkey=M
+Tip=Summon |cffffcc00M|rountain King
+UberTip="Warrior Hero, adept at offensive combat and disrupting enemy troops. Can learn Storm Bolt, Thunder Clap, Bash and Avatar. |n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive |cffffcc00M|rountain King
+Awakentip=Revive |cffffcc00M|rountain King
+
+[hmpr]
+Name=Priest
+Hotkey=P
+Tip=Train |cffffcc00P|rriest
+Ubertip="Supporting spellcaster. Can initially cast Heal, which increases the life of wounded units. Can also learn Dispel Magic and Inner Fire. |n|n|cffffcc00Attacks land and air units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Heal","- Heal|n- Dispel Magic","- Heal|n- Dispel Magic|n- Inner Fire"
+
+[hmtm]
+Name=Mortar Team
+Hotkey=M
+Tip=Train |cffffcc00M|rortar Team
+Ubertip="Long-range siege weaponry. Exceptional damage versus buildings, but slow and vulnerable. Can learn the Fragmentation Shards and Flare abilities. |n|n|cffffcc00Attacks land units and trees.|r"
+
+[Hpal]
+Name=Paladin
+Propernames=Granis Darkhammer,Jorn the Redeemer,Sage Truthbearer,Malak the Avenger,Gavinrad the Dire,Morlune the Mighty,Agamand the True,Ballador the Bright,Manadar the Healer,Zann the Defender,Arius the Seeker,Aurrius the Pure,Karnwield the Seeker,Buzan the Fearless
+Hotkey=L
+Tip=Summon Pa|cffffcc00l|radin
+Ubertip="Warrior Hero, exceptional at defense and augmenting nearby friendly troops. Can learn Holy Light, Divine Shield, Devotion Aura and Resurrection. |n|n|cffffcc00Attacks land units.|r"
+Revivetip=Revive Pa|cffffcc00l|radin
+Awakentip=Revive Pa|cffffcc00l|radin
+
+[hpea]
+Name=Peasant
+Hotkey=P
+Tip=Train |cffffcc00P|reasant
+Ubertip="Basic worker unit. Can harvest gold and lumber, build structures and Repair. Can become Militia. |n|n|cffffcc00Attacks land units and trees.|r"
+
+[hrif]
+Name=Rifleman
+Hotkey=R
+Tip=Train |cffffcc00R|rifleman
+Ubertip="Highly skilled sharpshooter, effective against air units. Can gain the Long Rifles upgrade. |n|n|cffffcc00Attacks land and air units.|r"
+
+[hsor]
+Name=Sorceress
+Hotkey=S
+Tip=Train |cffffcc00S|rorceress
+Ubertip="Versatile spellcaster. Can initially cast Slow, which decreases movement and attack speed on enemy units. Can also learn Invisibility and Polymorph. |n|n|cffffcc00Attacks land and air units.|r"
+Casterupgradename=Initiate, Adept, Master
+Casterupgradetip="- Slow","- Slow|n- Invisibility","- Slow|n- Invisibility|n- Polymorph"
+
+[hspt]
+Name=Spell Breaker
+Hotkey=B
+Tip=Train Spell |cffffcc00B|rreaker
+Ubertip="Elven warrior trained to destroy spellcasters. Initially has Spell Steal, which manipulates buffs to your advantage, Spell Immunity and Feedback. Can also learn Control Magic. |n|n|cffffcc00Attacks land units.|r"
+
+[hmtt]
+Name=Siege Engine
+Hotkey=E
+Tip=Train Siege |cffffcc00E|rngine
+Ubertip="Heavily armored vehicle, effective at destroying buildings. Can be upgraded with the Barrage ability. |n|n|cffffcc00Attacks buildings.|r"
+
+[hrtt]
+Name=Siege Engine
+EditorSuffix= (Barrage)
+Hotkey=E
+Tip=Train Siege |cffffcc00E|rngine
+Ubertip="Heavily armored vehicle, effective at destroying buildings. Has the Barrage ability, which fires rockets at nearby enemy air units. |n|n|cffffcc00Attacks buildings.|r"
+
+[htow]
+Name=Town Hall
+Hotkey=H
+Tip=Build Town |cffffcc00H|rall
+Ubertip="Primary structure, used to train Peasants and receive gathered resources. Can be upgraded to Keep and then Castle to enable the production of additional types of structures and units."
+
+[hwat]
+Name=Water Elemental
+EditorSuffix= (Level 1)
+
+[hwt2]
+Name=Water Elemental
+EditorSuffix= (Level 2)
+
+[hwt3]
+Name=Water Elemental
+EditorSuffix= (Level 3)
+
+[hgry]
+Name=Gryphon Rider
+Hotkey=G
+Tip=Train |cffffcc00G|rryphon Rider
+Ubertip="Powerful flying creature, mounted by a Dwarven hammer-thrower. Can learn Animal War Training, and the Storm Hammers ability. |n|n|cffffcc00Attacks land and air units.|r"
+
+[hphx]
+Name=Phoenix
+
+[hpxe]
+Name=Phoenix Egg
+
+//#RESTNOBETA
+
+[hshy]
+Name=Human Shipyard
+Tip=Build Human Shipyard
+Ubertip="Boat construction facility. Produces Human Transport Ships, Human Frigates, and Human Battleships."
+
+[hbsh]
+Name=Human Battleship
+Hotkey=B
+Tip=Hire |cffffcc00B|rattleship
+Ubertip="Massive battleship good at destroying enemy ships and bombarding buildings from the sea. |n|n|cffffcc00Attacks land units.|r"
+
+[hdes]
+Name=Human Frigate
+Hotkey=F
+Tip=Hire |cffffcc00F|rrigate
+Ubertip="A versatile attack ship good at destroying air attackers. |n|n|cffffcc00Attacks land and air units.|r"
+
+[hbot]
+Name=Human Transport Ship
+Hotkey=T
+Tip=Hire |cffffcc00T|rransport Ship
+Ubertip="A sturdy transport ship capable of carrying units over the sea."

@@ -1,0 +1,2602 @@
+//-----------------------------------------------------------------------------
+// FIRELORD
+//-----------------------------------------------------------------------------
+
+// Incinerate
+[ANic]
+Name=Incinerate
+Tip=Incinerate - [|cffffcc00Level 1|r],Incinerate - [|cffffcc00Level 2|r],Incinerate - [|cffffcc00Level 3|r]
+Researchtip="Learn In|cffffcc00c|rinerate - [|cffffcc00Level %d|r]"
+Ubertip="Each attack made is enhanced with living flames that cling to the target. These flames add <ANic,DataA1> damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing up to <ANic,DataB1> damage to all nearby hostile units.","Each attack made is enhanced with living flames that cling to the target. These flames add <ANic,DataA2> damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing up to <ANic,DataB2> damage to all nearby hostile units.","Each attack made is enhanced with living flames that cling to the target. These flames add <ANic,DataA3> damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing up to <ANic,DataB3> damage to all nearby hostile units."
+Researchubertip="Each attack made is enhanced with living flames that cling to the target. These flames add a small amount of damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing significant damage to all nearby hostile units.|n|n|cffffcc00Level 1|r - <ANic,DataA1> bonus damage, <ANic,DataB1> incineration damage.|n|cffffcc00Level 2|r - <ANic,DataA2> bonus damage, <ANic,DataB2> incineration damage.|n|cffffcc00Level 3|r - <ANic,DataA3> bonus damage, <ANic,DataB3> incineration damage."
+Hotkey=C
+Researchhotkey=C
+
+// Incinerate (Arrow)
+[ANia]
+Name=Incinerate
+Tip=In|cffffcc00c|rinerate - [|cffffcc00Level 1|r],In|cffffcc00c|rinerate - [|cffffcc00Level 2|r],In|cffffcc00c|rinerate - [|cffffcc00Level 3|r]
+Researchtip="Learn In|cffffcc00c|rinerate - [|cffffcc00Level %d|r]"
+Ubertip="Each attack made is enhanced with living flames that cling to the target. These flames add <ANia,DataA1> damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing up to <ANia,DataB1> damage to all nearby hostile units.","Each attack made is enhanced with living flames that cling to the target. These flames add <ANia,DataA2> damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing up to <ANia,DataB2> damage to all nearby hostile units.","Each attack made is enhanced with living flames that cling to the target. These flames add <ANia,DataA3> damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing up to <ANia,DataB3> damage to all nearby hostile units."
+Researchubertip="Each attack made is enhanced with living flames that cling to the target. These flames add a small amount of damage on the first attack, twice as much on the second attack, three times as much on the third attack, etc.|n|nIf a unit dies while under this effect, it is incinerated, causing significant damage to all nearby hostile units.|n|n|cffffcc00Level 1|r - <ANia,DataA1> bonus damage, <ANia,DataB1> incineration damage.|n|cffffcc00Level 2|r - <ANia,DataA2> bonus damage, <ANia,DataB2> incineration damage.|n|cffffcc00Level 3|r - <ANia,DataA3> bonus damage, <ANia,DataB3> incineration damage."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=C
+Researchhotkey=C
+EditorSuffix= (Arrow)
+
+[BNic]
+Bufftip=Incinerate
+Buffubertip="This target is partially aflame, and will incinerate if it dies, causing damage to nearby units."
+
+// Soul Burn
+[ANso]
+Name=Soul Burn
+Tip=Soul |cffffcc00B|rurn - [|cffffcc00Level 1|r],Soul |cffffcc00B|rurn - [|cffffcc00Level 2|r],Soul |cffffcc00B|rurn - [|cffffcc00Level 3|r]
+Researchtip="Learn Soul |cffffcc00B|rurn - [|cffffcc00Level %d|r]"
+Ubertip="Wreaths an enemy unit in magical flames which cause <ANso,DataA1> damage per second, prevent the casting of spells, and reduce attack damage by <ANso,DataC1,%>%.|nLasts <ANso,Dur1> seconds.","Wreaths an enemy unit in magical flames which cause <ANso,DataA2> damage per second, prevent the casting of spells, and reduce attack damage by <ANso,DataC2,%>%.|nLasts <ANso,Dur2> seconds.","Wreaths an enemy unit in magical flames which cause <ANso,DataA3> damage per second, prevent the casting of spells, and reduce attack damage by <ANso,DataC3,%>%.|nLasts <ANso,Dur3> seconds."
+Researchubertip="Wreaths an enemy unit in magical flames which cause damage over time, prevent the casting of spells, and reduce attack damage by <ANso,DataC1,%>%.|n|n|cffffcc00Level 1|r - 100 damage over <ANso,Dur1> seconds.|n|cffffcc00Level 2|r - 225 damage over <ANso,Dur2> seconds.|n|cffffcc00Level 3|r - 375 damage over <ANso,Dur3> seconds.|n|nSoul Burn lasts roughly half as long on Heroes."
+Hotkey=B
+Researchhotkey=B
+
+[BNso]
+Bufftip=Soul Burn
+Buffubertip="This unit is afflicted by Soul Burn. It cannot cast spells, attacks for less damage, and will take damage over time."
+
+// Summmon Lava Spawn
+[ANlm]
+Name=Summon Lava Spawn
+Tip=Summon Lava Spa|cffffcc00w|rn - [|cffffcc00Level 1|r],Summon Lava Spa|cffffcc00w|rn - [|cffffcc00Level 2|r],Summon Lava Spa|cffffcc00w|rn - [|cffffcc00Level 3|r]
+Researchtip="Learn Summon Lava Spa|cffffcc00w|rn - [|cffffcc00Level %d|r]"
+Ubertip="Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, thereby fueling its fires and eventually splitting into two healthy Lava Spawns.|n|nHas <nlv1,realHP> hit points and deals <nlv1,mindmg1> - <nlv1,maxdmg1> damage.|nLasts <ANlm,Dur1> seconds.|n|n|cffffcc00Attacks ground and air units.|r","Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, thereby fueling its fires and eventually splitting into two healthy Lava Spawns.|n|nHas <nlv2,realHP> hit points and deals <nlv2,mindmg1> - <nlv2,maxdmg1> damage.|nLasts <ANlm,Dur2> seconds.|n|n|cffffcc00Attacks ground and air units.|r","Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, thereby fueling its fires and eventually splitting into two healthy Lava Spawns.|n|nHas <nlv3,realHP> hit points and deals <nlv3,mindmg1> - <nlv3,maxdmg1> damage.|nLasts <ANlm,Dur3> seconds.|n|n|cffffcc00Attacks ground and air units.|r"
+Researchubertip="Summons a Lava Spawn, a resilient and deadly fire creature. As a Lava Spawn deals damage, it consumes the flesh of its target, eventually splitting into two healthy Lava Spawns.|nLasts <ANlm,Dur1> seconds.|n|n|cffffcc00Level 1|r - <nlv1,realHP> hit points, <nlv1,mindmg1> - <nlv1,maxdmg1> damage.|n|cffffcc00Level 2|r - <nlv2,realHP> hit points, <nlv2,mindmg1> - <nlv2,maxdmg1> damage.|n|cffffcc00Level 3|r - <nlv3,realHP> hit points, <nlv3,mindmg1> - <nlv3,maxdmg1> damage.|n|n|cffffcc00Attacks ground and air units.|r
+Hotkey=W
+Researchhotkey=W
+
+[BNlm]
+Bufftip=Lava Spawn
+Buffubertip="Lava Spawn."
+
+// Volcano
+[ANvc]
+Name=Volcano
+Tip="|cffffcc00V|rolcano"
+Researchtip="Learn |cffffcc00V|rolcano"
+Ubertip="Causes the ground to erupt into a massive Volcano. Every <ANvc,DataC1> seconds, a wave of molten rocks is hurled from the Volcano at nearby ground units and buildings, causing <ANvc,DataE1> damage to each target and stunning it for <ANvc,Dur1> seconds. Buildings take <ANvc,DataD1> times more damage from molten rocks than units do.|nLasts 35 seconds."
+Researchubertip="Causes the ground to erupt into a massive Volcano. Every <ANvc,DataC1> seconds, a wave of molten rocks is hurled from the Volcano at nearby ground units and buildings, causing <ANvc,DataE1> damage to each target and stunning it for <ANvc,Dur1> seconds. Buildings take <ANvc,DataD1> times more damage from molten rocks than units do.|nLasts 35 seconds."
+Hotkey=V
+Researchhotkey=V
+
+[BNvc]
+Bufftip=Volcano
+Buffubertip="Volcano."
+
+//-----------------------------------------------------------------------------
+// TINKERER
+//-----------------------------------------------------------------------------
+
+// Pocket Factory
+[ANsy]
+Name=Pocket Factory
+Tip=Pocket |cffffcc00F|ractory - [|cffffcc00Level 1|r],Pocket |cffffcc00F|ractory - [|cffffcc00Level 2|r],Pocket |cffffcc00F|ractory - [|cffffcc00Level 3|r]
+Ubertip="Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncgb,realHP> hit points, deal <ncgb,mindmg1> - <ncgb,maxdmg1> damage, and explode upon death, causing up to <Asdg,DataB1> damage to nearby enemy units.|nFactory lasts <ANsy,Dur1> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r","Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncg2,realHP> hit points, deal <ncg2,mindmg1> - <ncg2,maxdmg1> damage, and explode upon death, causing up to <Asd2,DataB1> damage to nearby enemy units.|nFactory lasts <ANsy,Dur2> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r","Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncg3,realHP> hit points, deal <ncg3,mindmg1> - <ncg3,maxdmg1> damage, and explode upon death, causing up to <Asd3,DataB1> damage to nearby enemy units.|nFactory lasts <ANsy,Dur3> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"
+Hotkey=F
+Researchtip="Learn Pocket |cffffcc00F|ractory - [|cffffcc00Level %d|r]"
+Researchubertip="Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does <Asdg,DataB1> damage.|n|cffffcc00Level 2|r - Explosion does <Asd2,DataB1> damage.|n|cffffcc00Level 3|r - Explosion does <Asd3,DataB1> damage.|nFactory lasts <ANsy,Dur3> seconds."
+Researchhotkey=F
+
+// Pocket Factory
+[ANs1]
+Name=Pocket Factory
+Tip=Pocket |cffffcc00F|ractory - [|cffffcc00Level 1|r],Pocket |cffffcc00F|ractory - [|cffffcc00Level 2|r],Pocket |cffffcc00F|ractory - [|cffffcc00Level 3|r]
+Ubertip="Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncgb,realHP> hit points, deal <ncgb,mindmg1> - <ncgb,maxdmg1> damage, and explode upon death, causing up to <Asdg,DataB1> damage to nearby enemy units.|nFactory lasts <ANs1,Dur1> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r","Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncg2,realHP> hit points, deal <ncg2,mindmg1> - <ncg2,maxdmg1> damage, and explode upon death, causing up to <Asd2,DataB1> damage to nearby enemy units.|nFactory lasts <ANs1,Dur2> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r","Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncg3,realHP> hit points, deal <ncg3,mindmg1> - <ncg3,maxdmg1> damage, and explode upon death, causing up to <Asd3,DataB1> damage to nearby enemy units.|nFactory lasts <ANs1,Dur3> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"
+Hotkey=F
+Researchtip="Learn Pocket |cffffcc00F|ractory - [|cffffcc00Level %d|r]"
+Researchubertip="Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does <Asdg,DataB1> damage.|n|cffffcc00Level 2|r - Explosion does <Asd2,DataB1> damage.|n|cffffcc00Level 3|r - Explosion does <Asd3,DataB1> damage.|nFactory lasts <ANs1,Dur3> seconds."
+Researchhotkey=F// Pocket Factory
+EditorSuffix= (Upgrade 1)
+
+[ANs2]
+Name=Pocket Factory
+Tip=Pocket |cffffcc00F|ractory - [|cffffcc00Level 1|r],Pocket |cffffcc00F|ractory - [|cffffcc00Level 2|r],Pocket |cffffcc00F|ractory - [|cffffcc00Level 3|r]
+Ubertip="Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncgb,realHP> hit points, deal <ncgb,mindmg1> - <ncgb,maxdmg1> damage, and explode upon death, causing up to <Asdg,DataB1> damage to nearby enemy units.|nFactory lasts <ANs2,Dur1> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r","Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncg2,realHP> hit points, deal <ncg2,mindmg1> - <ncg2,maxdmg1> damage, and explode upon death, causing up to <Asd2,DataB1> damage to nearby enemy units.|nFactory lasts <ANs2,Dur2> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r","Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncg3,realHP> hit points, deal <ncg3,mindmg1> - <ncg3,maxdmg1> damage, and explode upon death, causing up to <Asd3,DataB1> damage to nearby enemy units.|nFactory lasts <ANs2,Dur3> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"
+Hotkey=F
+Researchtip="Learn Pocket |cffffcc00F|ractory - [|cffffcc00Level %d|r]"
+Researchubertip="Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does <Asdg,DataB1> damage.|n|cffffcc00Level 2|r - Explosion does <Asd2,DataB1> damage.|n|cffffcc00Level 3|r - Explosion does <Asd3,DataB1> damage.|nFactory lasts <ANs2,Dur3> seconds."
+Researchhotkey=F
+EditorSuffix= (Upgrade 2)
+
+// Pocket Factory
+[ANs3]
+Name=Pocket Factory
+Tip=Pocket |cffffcc00F|ractory - [|cffffcc00Level 1|r],Pocket |cffffcc00F|ractory - [|cffffcc00Level 2|r],Pocket |cffffcc00F|ractory - [|cffffcc00Level 3|r]
+Ubertip="Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncgb,realHP> hit points, deal <ncgb,mindmg1> - <ncgb,maxdmg1> damage, and explode upon death, causing up to <Asdg,DataB1> damage to nearby enemy units.|nFactory lasts <ANs3,Dur1> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r","Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncg2,realHP> hit points, deal <ncg2,mindmg1> - <ncg2,maxdmg1> damage, and explode upon death, causing up to <Asd2,DataB1> damage to nearby enemy units.|nFactory lasts <ANs3,Dur2> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r","Creates a factory which automatically constructs Clockwerk Goblins.|n|nClockwerk Goblins have <ncg3,realHP> hit points, deal <ncg3,mindmg1> - <ncg3,maxdmg1> damage, and explode upon death, causing up to <Asd3,DataB1> damage to nearby enemy units.|nFactory lasts <ANs3,Dur3> seconds. |n|n|cffffcc00Clockwerk Goblins attack land units only.|r"
+Hotkey=F
+Researchtip="Learn Pocket |cffffcc00F|ractory - [|cffffcc00Level %d|r]"
+Researchubertip="Creates a factory which automatically constructs Clockwerk Goblins. These artificial Goblins, in addition to being potent attackers, explode upon death, causing damage to nearby enemy units. |n|n|cffffcc00Level 1|r - Explosion does <Asdg,DataB1> damage.|n|cffffcc00Level 2|r - Explosion does <Asd2,DataB1> damage.|n|cffffcc00Level 3|r - Explosion does <Asd3,DataB1> damage.|nFactory lasts <ANs3,Dur3> seconds."
+Researchhotkey=F
+EditorSuffix= (Upgrade 3)
+
+[BNfy]
+Bufftip=Pocket Factory
+Buffubertip="Pocket Factory."
+
+// Cluster Rockets
+[ANcs]
+Name=Cluster Rockets
+Tip=Cluster |cffffcc00R|rockets - [|cffffcc00Level 1|r],Cluster |cffffcc00R|rockets - [|cffffcc00Level 2|r],Cluster |cffffcc00R|rockets - [|cffffcc00Level 3|r]
+Researchtip="Learn Cluster |cffffcc00R|rockets - [|cffffcc00Level %d|r]"
+Ubertip="Bombards an area with rockets, dealing up to 35 damage to nearby enemy land units and stunning them for <ANcs,Dur1> second.","Bombards an area with rockets, dealing up to 65 damage to nearby enemy land units and stunning them for <ANcs,Dur2> second.","Bombards an area with rockets, dealing up to 100 damage to nearby enemy land units and stunning them for <ANcs,Dur3> second."
+Researchubertip="Bombards an area with rockets, stunning enemy land units for <ANcs,Dur1> second and damaging nearby enemy units.|n|n|cffffcc00Level 1|r - 35 damage.|n|cffffcc00Level 2|r - 65 damage.|n|cffffcc00Level 3|r - 100 damage."
+Hotkey=R
+Researchhotkey=R
+
+// Cluster Rockets
+[ANc1]
+Name=Cluster Rockets
+Tip=Cluster |cffffcc00R|rockets - [|cffffcc00Level 1|r],Cluster |cffffcc00R|rockets - [|cffffcc00Level 2|r],Cluster |cffffcc00R|rockets - [|cffffcc00Level 3|r]
+Researchtip="Learn Cluster |cffffcc00R|rockets - [|cffffcc00Level %d|r]"
+Ubertip="Bombards an area with rockets, dealing up to 35 damage to nearby enemy land units and stunning them for <ANc1,Dur1> second.","Bombards an area with rockets, dealing up to 65 damage to nearby enemy land units and stunning them for <ANc1,Dur2> second.","Bombards an area with rockets, dealing up to 100 damage to nearby enemy land units and stunning them for <ANc1,Dur3> second."
+Researchubertip="Bombards an area with rockets, stunning enemy land units for <ANc1,Dur1> second and damaging nearby enemy units.|n|n|cffffcc00Level 1|r - 35 damage.|n|cffffcc00Level 2|r - 65 damage.|n|cffffcc00Level 3|r - 100 damage"
+Hotkey=R
+Researchhotkey=R
+EditorSuffix= (Upgrade Level 1)
+
+// Cluster Rockets
+[ANc2]
+Name=Cluster Rockets
+Tip=Cluster |cffffcc00R|rockets - [|cffffcc00Level 1|r],Cluster |cffffcc00R|rockets - [|cffffcc00Level 2|r],Cluster |cffffcc00R|rockets - [|cffffcc00Level 3|r]
+Researchtip="Learn Cluster |cffffcc00R|rockets - [|cffffcc00Level %d|r]"
+Ubertip="Bombards an area with rockets, dealing up to 35 damage to nearby enemy land units and stunning them for <ANc2,Dur1> second.","Bombards an area with rockets, dealing up to 65 damage to nearby enemy land units and stunning them for <ANc2,Dur2> second.","Bombards an area with rockets, dealing up to 100 damage to nearby enemy land units and stunning them for <ANc2,Dur3> second."
+Researchubertip="Bombards an area with rockets, stunning enemy land units for <ANc2,Dur1> second and damaging nearby enemy units.|n|n|cffffcc00Level 1|r - 35 damage.|n|cffffcc00Level 2|r - 65 damage.|n|cffffcc00Level 3|r - 100 damage"
+Hotkey=R
+Researchhotkey=R
+EditorSuffix= (Upgrade Level 2)
+
+// Cluster Rockets
+[ANc3]
+Name=Cluster Rockets
+Tip=Cluster |cffffcc00R|rockets - [|cffffcc00Level 1|r],Cluster |cffffcc00R|rockets - [|cffffcc00Level 2|r],Cluster |cffffcc00R|rockets - [|cffffcc00Level 3|r]
+Researchtip="Learn Cluster |cffffcc00R|rockets - [|cffffcc00Level %d|r]"
+Ubertip="Bombards an area with rockets, dealing up to 35 damage to nearby enemy land units and stunning them for <ANc3,Dur1> second.","Bombards an area with rockets, dealing up to 65 damage to nearby enemy land units and stunning them for <ANc3,Dur2> second.","Bombards an area with rockets, dealing up to 100 damage to nearby enemy land units and stunning them for <ANc3,Dur3> second."
+Researchubertip="Bombards an area with rockets, stunning enemy land units for <ANc3,Dur1> second and damaging nearby enemy units.|n|n|cffffcc00Level 1|r - 35 damage.|n|cffffcc00Level 2|r - 65 damage.|n|cffffcc00Level 3|r - 100 damage"
+Hotkey=R
+Researchhotkey=R
+EditorSuffix= (Upgrade Level 3)
+
+[BNcs]
+Bufftip=Cluster Rockets
+Buffubertip="Cluster Rockets."
+
+// Engineering Upgrade
+[ANeg]
+Name=Engineering Upgrade
+Tip=Engineering Upgrade - [|cffffcc00Level 1|r],Engineering Upgrade - [|cffffcc00Level 2|r],Engineering Upgrade - [|cffffcc00Level 3|r]
+Researchtip="Learn |cffffcc00E|rngineering Upgrade - [|cffffcc00Level %d|r]"
+Ubertip="Improves other Tinker abilities, gives <ANeg,DataB1> attack damage and increases Tinker movement speed by <ANeg,DataA1,%>%.","Improves other Tinker abilities, gives <ANeg,DataB2> attack damage and increases Tinker movement speed by <ANeg,DataA2,%>%.","Improves other Tinker abilities, gives <ANeg,DataB3> attack damage and increases Tinker movement speed by <ANeg,DataA3,%>%."
+Researchubertip="Enhances other Tinker abilities with each level learned:|n|n|cffffcc00Cluster Rockets|r - Larger Area.|n|cffffcc00Pocket Factory|r - Builds Clockwerk Goblins more quickly.|n|cffffcc00Robo-Goblin|r - Increases armor and Strength; enhances Demolish.|n|nAlso gives bonus damage and increases the Tinker's movement speed.|n|n|cffffcc00Level 1|r - +<ANeg,DataB1> damage, +<ANeg,DataA1,%>% movement.|n|cffffcc00Level 2|r - +<ANeg,DataB2> damage, +<ANeg,DataA2,%>% movement.|n|cffffcc00Level 3|r - +<ANeg,DataB3> damage, +<ANeg,DataA3,%>% movement."
+Hotkey=E
+Researchhotkey=E
+
+[BNeg]
+Bufftip=Engineering Upgrade
+
+// Robo-Goblin
+[ANrg]
+Name=Robo-Goblin
+Tip="Ro|cffffcc00b|ro-Goblin"
+Untip="Revert to |cffffcc00T|rinker Form"
+Researchtip="Learn Ro|cffffcc00b|ro-Goblin"
+Ubertip="Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- <ANrg,DataE1> bonus Strength and <ANrg,DataF1> bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."
+Unubertip="Returns to normal Tinker form, losing the benefits of Robo-Goblin but once again becoming organic."
+Researchubertip="Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."
+Hotkey=B
+Unhotkey=T
+Researchhotkey=B
+
+// Robo-Goblin
+[ANg1]
+Name=Robo-Goblin
+Tip="Ro|cffffcc00b|ro-Goblin"
+Untip="Revert to |cffffcc00T|rinker Form"
+Researchtip="Learn Ro|cffffcc00b|ro-Goblin"
+Ubertip="Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- <ANg1,DataE1> bonus Strength and <ANg1,DataF1> bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."
+Unubertip="Returns to normal Tinker form, losing the benefits of Robo-Goblin but once again becoming organic."
+Researchubertip="Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."
+Hotkey=B
+Unhotkey=T
+Researchhotkey=B
+EditorSuffix= (Upgrade Level 1)
+
+// Robo-Goblin
+[ANg2]
+Name=Robo-Goblin
+Tip="Ro|cffffcc00b|ro-Goblin"
+Untip="Revert to |cffffcc00T|rinker Form"
+Researchtip="Learn Ro|cffffcc00b|ro-Goblin"
+Ubertip="Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- <ANg2,DataE1> bonus Strength and <ANg2,DataF1> bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."
+Unubertip="Returns to normal Tinker form, losing the benefits of Robo-Goblin but once again becoming organic."
+Researchubertip="Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."
+Hotkey=B
+Unhotkey=T
+Researchhotkey=B
+EditorSuffix= (Upgrade Level 2)
+
+// Robo-Goblin
+[ANg3]
+Name=Robo-Goblin
+Tip="Ro|cffffcc00b|ro-Goblin"
+Untip="Revert to |cffffcc00T|rinker Form"
+Researchtip="Learn Ro|cffffcc00b|ro-Goblin"
+Ubertip="Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- <ANg3,DataE1> bonus Strength and <ANg3,DataF1> bonus armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."
+Unubertip="Returns to normal Tinker form, losing the benefits of Robo-Goblin but once again becoming organic."
+Researchubertip="Transforms the Tinker into a Robo-Goblin, a powerful armored form that has the following traits:|n|n- Bonus Strength and armor.|n- Use of the Demolish ability, which grants bonus damage against buildings.|n- The Tinker becomes mechanical, rendering him immune to most forms of stun, most offensive spells, and several beneficial spells."
+Hotkey=B
+Unhotkey=T
+Researchhotkey=B
+EditorSuffix= (Upgrade Level 3)
+
+// Demolish
+[ANde]
+Name=Demolish
+Tip="Demolish"
+Ubertip="Causes attacks to do <ANde,DataB1> times normal damage to buildings."
+Hotkey=
+
+// Demolish
+[ANd1]
+Name=Demolish
+Tip="Demolish - Upgrade Level 1"
+Ubertip="Causes attacks to do <ANd1,DataB1> times normal damage to buildings."
+Hotkey=
+EditorSuffix= (Upgrade Level 1)
+
+// Demolish
+[ANd2]
+Name=Demolish
+Tip="Demolish - Upgrade Level 2"
+Ubertip="Causes attacks to do <ANd2,DataB1> times normal damage to buildings."
+Hotkey=
+EditorSuffix= (Upgrade Level 2)
+
+// Demolish
+[ANd3]
+Name=Demolish
+Tip="Demolish - Upgrade Level 3"
+Ubertip="Causes attacks to do <ANd3,DataB1> times normal damage to buildings."
+Hotkey=
+EditorSuffix= (Upgrade Level 3)
+
+[ANfy]
+Name=Factory
+Tip="Factory"
+Ubertip="Factory."
+Hotkey=
+
+[ANf1]
+Name=Factory
+Tip="Factory - Upgrade Level 1"
+Ubertip="Factory."
+Hotkey=
+EditorSuffix= (Upgrade Level 1)
+
+[ANf2]
+Name=Factory
+Tip="Factory - Upgrade Level 2"
+Ubertip="Factory."
+Hotkey=
+EditorSuffix= (Upgrade Level 2)
+
+[ANf3]
+Name=Factory
+Tip="Factory - Upgrade Level 3"
+Ubertip="Factory."
+Hotkey=
+EditorSuffix= (Upgrade Level 3)
+
+[BNcg]
+Bufftip="Clockwerk Goblin"
+Buffubertip="Clockwerk Goblin."
+
+// Kaboom! (Clockwerk goblin level 1)
+[Asdg]
+Name=Kaboom!
+Tip=Ka|cffffcc00b|room!
+Ubertip="Deals <Asdg,DataB1> damage in a small area."
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"
+Unubertip="|cffc3dbff|cffc3dbffRight-click to deactivate auto-casting.|r|r"
+Hotkey=B
+Unhotkey=B
+EditorSuffix=(Clockwerk Goblin-Level 1)
+
+// Kaboom! (Clockwerk goblin level 2)
+[Asd2]
+Name=Kaboom!
+Tip=Ka|cffffcc00b|room!
+Ubertip="Deals <Asd2,DataB1> damage in a small area."
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"
+Unubertip="|cffc3dbff|cffc3dbffRight-click to deactivate auto-casting.|r|r"
+Hotkey=B
+Unhotkey=B
+EditorSuffix= (Clockwerk Goblin-Level 2)
+
+// Kaboom! (Clockwerk goblin level 3)
+[Asd3]
+Name=Kaboom!
+Tip=Ka|cffffcc00b|room!
+Ubertip="Deals <Asd3,DataB1> damage in a small area."
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"
+Unubertip="|cffc3dbff|cffc3dbffRight-click to deactivate auto-casting.|r|r"
+Hotkey=B
+Unhotkey=B
+EditorSuffix= (Clockwerk Goblin-Level 3)
+
+//-----------------------------------------------------------------------------
+// ALCHEMIST
+//-----------------------------------------------------------------------------
+
+// Healing Spray
+[ANhs]
+Name=Healing Spray
+Tip=H|cffffcc00e|raling Spray - [|cffffcc00Level 1|r],H|cffffcc00e|raling Spray - [|cffffcc00Level 2|r],H|cffffcc00e|raling Spray - [|cffffcc00Level 3|r]
+Researchtip="Learn H|cffffcc00e|raling Spray - [|cffffcc00Level %d|r]"
+Ubertip="Sprays <ANhs,DataF1> waves of healing mist; each wave heals <ANhs,DataA1> damage to all units in an area.","Sprays <ANhs,DataF2> waves of healing mist; each wave heals <ANhs,DataA2> damage to all units in an area.","Sprays <ANhs,DataF3> waves of healing mist; each wave heals <ANhs,DataA3> damage to all units in an area."
+Researchubertip="Sprays waves of healing mist that heal units in a target area. |n|n|cffffcc00Level 1|r - <ANhs,DataF1> waves at <ANhs,DataA1> hit points healed each. |n|cffffcc00Level 2|r - <ANhs,DataF2> waves at <ANhs,DataA2> hit points healed each. |n|cffffcc00Level 3|r - <ANhs,DataF3> waves at <ANhs,DataA3> hit points healed each."
+Hotkey=E
+Researchhotkey=E
+
+[BNhs]
+Bufftip=Healing Spray
+Buffubertip="This unit is being healed by Healing Spray."
+
+// Acid Bomb
+[ANab]
+Name=Acid Bomb
+Tip=Acid |cffffcc00B|romb - [|cffffcc00Level 1|r],Acid |cffffcc00B|romb - [|cffffcc00Level 2|r],Acid |cffffcc00B|romb - [|cffffcc00Level 3|r]
+Researchtip="Learn Acid |cffffcc00B|romb - [|cffffcc00Level %d|r]"
+Ubertip="Hurls a flask of acid at a target.  The flask breaks upon impact, splashing a powerful acid on nearby hostile units.|n|nDecreases armor by <ANab,DataC1>; deals <ANab,DataD1> damage per second to the primary target; deals slightly less damage to nearby targets.|nLasts <ANab,Dur1> seconds.","Hurls a flask of acid at a target.  The flask breaks upon impact, splashing a powerful acid on nearby hostile units.|n|nDecreases armor by <ANab,DataC2>; deals <ANab,DataD2> damage per second to the primary target; deals slightly less damage to nearby targets.|nLasts <ANab,Dur2> seconds.","Hurls a flask of acid at a target.  The flask breaks upon impact, splashing a powerful acid on nearby hostile units.|n|nDecreases armor by <ANab,DataC3>; deals <ANab,DataD3> damage per second to the primary target; deals slightly less damage to nearby targets.|nLasts <ANab,Dur3> seconds."
+Researchubertip="Hurls a flask of acid at a target.  The flask breaks upon impact, splashing a powerful acid on nearby hostile units.|n|nDecreases armor; deals high damage over time to the primary target; deals slightly less damage over time to nearby targets.|nLasts <ANab,Dur1> seconds.|n|n|cffffcc00Level 1|r - <ANab,DataD1> max damage per second, reduces armor by <ANab,DataC1>.|n|cffffcc00Level 2|r - <ANab,DataD2> max damage per second, reduces armor by <ANab,DataC2>.|n|cffffcc00Level 3|r - <ANab,DataD3> max damage per second, reduces armor by <ANab,DataC3>."
+Hotkey=B
+Researchhotkey=B
+
+[BNab]
+Bufftip=Acid Bomb
+Buffubertip="This unit has been Acid Bombed.  It has reduced armor, and is being damaged over time."
+
+// Chemical Rage
+[ANcr]
+Name=Chemical Rage
+Tip=Chemical |cffffcc00R|rage - [|cffffcc00Level 1|r],Chemical |cffffcc00R|rage - [|cffffcc00Level 2|r],Chemical |cffffcc00R|rage - [|cffffcc00Level 3|r]
+Researchtip="Learn Chemical |cffffcc00R|rage - [|cffffcc00Level %d|r]""
+Ubertip="The Alchemist causes his Ogre to enter a chemically induced rage, increasing movement rate by <ANcr,DataE1,%>% and increasing attack rate by <ANcr,DataF1,%>% for <ANcr,HeroDur1> seconds.","The Alchemist causes his Ogre to enter a chemically induced rage, increasing movement rate by <ANcr,DataE2,%>% and increasing attack rate by <ANcr,DataF2,%>% for <ANcr,HeroDur1> seconds.","The Alchemist causes his Ogre to enter a chemically induced rage, increasing movement rate by <ANcr,DataE3,%>% and increasing attack rate by <ANcr,DataF3,%>% for <ANcr,HeroDur1> seconds."
+Researchubertip="The Alchemist causes his Ogre to enter a chemically induced rage, increasing movement rate by <ANcr,DataE1,%>% and increasing attack rate.|nLasts <ANcr,HeroDur1> seconds.|n|n|cffffcc00Level 1|r - <ANcr,DataF1,%>% attack rate increase.|n|cffffcc00Level 2|r - <ANcr,DataF2,%>% attack rate increase.|n|cffffcc00Level 3|r - <ANcr,DataF3,%>% attack rate increase."
+Hotkey=R
+Researchhotkey=R
+
+[BNcr]
+Bufftip=Chemical Rage
+Buffubertip="This unit is benefiting from Chemical Rage.  It is moving and attacking more quickly."
+
+// Transmute
+[ANtm]
+Name=Transmute
+Tip="|cffffcc00T|rransmute"
+Researchtip="Learn |cffffcc00T|rransmute"
+Ubertip="Kills a target unit instantly, transforming it into gold which is added to your available gold!|nTransmute cannot be used on Heroes, or creeps above level <ANtm,DataC1>."
+Researchubertip="Kills a target unit instantly, transforming it into gold which is added to your available gold!|nTransmute cannot be used on Heroes, or creeps above level <ANtm,DataC1>."
+Hotkey=T
+Researchhotkey=T
+
+[BNtm]
+Bufftip=Transmute
+Buffubertip="This unit is being transmuted and will die very soon. It will be converted into gold which will be given to the player who cast Transmute."
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+
+//glyph of fortification
+[AIgf]
+Name=Glyph of Fortification
+
+[AIgu]
+Name=Glyph of Fortification
+
+//tornado slow
+[Aasl]
+Name=Slow Aura
+EditorSuffix= (Tornado)
+
+[Atdg]
+Name=Building Damage Aura
+EditorSuffix= (Tornado)
+
+[Atsp]
+Name=Tornado Spin
+EditorSuffix= (Tornado)
+
+[Atwa]
+Name=Tornado Wander
+EditorSuffix= (Tornado)
+
+
+// Orb of Annihilation (Quill Spray)
+[ANak]
+Name=Quill Spray
+Tip="|cffffcc00Q|ruill Spray"
+Ubertip="Adds <ANak,DataA1> bonus damage to the Quill Beast's attack and causes its attacks to do area of effect damage."
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=Q
+Unhotkey=Q
+
+// Blink (beastmaster bear)
+[ANbl]
+Name=Blink
+EditorSuffix=(Neutral)
+Tip=|cffffcc00B|rlink
+Ubertip="Teleports the bear a short distance, allowing it to move in and out of combat."
+Hotkey=B
+
+//chain dispel
+[Ache]
+Name=Ray of Disruption
+Hotkey=R
+Tip=Cast |cffffcc00R|ray of Disruption
+Ubertip="Conjures a stream of neutralizing magic that bounces up to <Ache,DataC1> times, dispelling units in its wake."
+
+// Burrow (Barbed Arachnathid)
+[Abu5]
+Name=Burrow
+EditorSuffix= (Neutral Hostile)
+Tip=|cffffcc00B|rurrow
+Untip=Un|cffffcc00b|rurrow
+Ubertip="The Arachnathid digs into the ground and becomes invisible."
+Unubertip="The Arachnathid pops out of the ground and becomes visible again."
+Hotkey=B
+Unhotkey=B
+
+// Parasite
+[ACpa]
+Name=Parasite
+Tip=Pa|cffffcc00r|rasite
+Ubertip="Afflicts a target enemy unit with a deadly parasite that deals <ANpa,DataA1> damage per second for <ANpa,Dur1> seconds. If the afflicted unit dies while under the effect of Parasite, a minor minion will spawn from its corpse."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=R
+Unhotkey=R
+
+// Siphon Mana
+[ACsm]
+Name=Siphon Mana
+EditorSuffix= (Neutral Hostile)
+Tip=Sipho|cffffcc00n|r Mana 
+Ubertip="Absorbs the magical energies of a target enemy unit by taking <ACsm,DataB1> mana per second from it and giving it to this unit. |nLasts <ACsm,Dur1> seconds."
+Hotkey=N
+
+
+// Devour Magic
+[ACde]
+Name=Devour Magic
+EditorSuffix= (Neutral Hostile)
+Tip="|cffffcc00D|revour Magic"
+Ubertip="Consumes all magical buffs from units in an area. Each unit that is devoured of magic gives the caster <Advm,DataA1> hit points and <Advm,DataB1> mana. |n|cffffcc00Deals <Advm,DataE1> damage to summoned units.|r"
+Hotkey=D
+
+
+// Hardened Skin
+[Ansk]
+Name=Hardened Skin
+Tip=Hardened Skin
+Ubertip="Reduces all attacks on the unit by <Ansk,DataC1> damage. Attacks cannot be reduced below <Ansk,DataB1> damage."
+Hotkey=K
+
+// Mana Shield
+[ANms]
+Name=Mana Shield
+Tip=Activate Ma|cffffcc00n|ra Shield - [|cffffcc00Level 1|r],Activate Ma|cffffcc00n|ra Shield - [|cffffcc00Level 2|r],Activate Ma|cffffcc00n|ra Shield - [|cffffcc00Level 3|r]
+Ubertip="Activates a shield that absorbs 1 damage per point of mana.","Activates a shield that absorbs 1.5 damage per point of mana.","Activates a shield that absorbs 2 damage per point of mana."
+Untip=Deactivate Ma|cffffcc00n|ra Shield
+Hotkey=N
+Unhotkey=N
+Researchtip="Learn Ma|cffffcc00n|ra Shield - [|cffffcc00Level %d|r]"
+Researchubertip="Creates a shield that absorbs damage by using the Sea Witch's mana. |n|n|cffffcc00Level 1|r - 1 damage per point of mana. |n|cffffcc00Level 2|r - 1.5 damage per point of mana. |n|cffffcc00Level 3|r - 2 damage per point of mana."
+Researchhotkey=N
+
+[BNms]
+Bufftip=Mana Shield
+Buffubertip="This unit has a Mana Shield; it is temporarily protected from physical damage and negative spells."
+
+// Rain of Fire
+[ANrf]
+Name=Rain of Fire
+Tip=Rain of |cffffcc00F|rire - [|cffffcc00Level 1|r],Rain of |cffffcc00F|rire - [|cffffcc00Level 2|r],Rain of |cffffcc00F|rire - [|cffffcc00Level 3|r]
+Ubertip="Calls down waves of fire that damage units in an area. Each wave deals <ANrf,DataB1> initial damage and <ANrf,DataE1> damage per second for <ANrf,Dur1> seconds. |nLasts for <ANrf,DataA1> waves.","Calls down waves of fire that damage units in an area. Each wave deals <ANrf,DataB2> initial damage and <ANrf,DataE2> damage per second for <ANrf,Dur2> seconds. |nLasts for <ANrf,DataA2> waves.","Calls down waves of fire that damage units in an area. Each wave deals <ANrf,DataB3> initial damage and <ANrf,DataE3> damage per second for <ANrf,Dur3> seconds. |nLasts for <ANrf,DataA3> waves."
+Hotkey=F
+Researchtip=Learn Rain of |cffffcc00F|rire - [|cffffcc00Level %d|r]
+Researchhotkey=F
+Researchubertip="Calls down waves of fire that damage units in an area. Each wave deals initial damage and then burns enemies for <ANrf,Dur1> seconds. |n|n|cffffcc00Level 1|r - <ANrf,DataB1> wave damage, <ANrf,DataA1> waves, <ANrf,DataE1> damage per second. |n|cffffcc00Level 2|r - <ANrf,DataB2> wave damage, <ANrf,DataA2> waves, <ANrf,DataE2> damage per second. |n|cffffcc00Level 3|r - <ANrf,DataB3> wave damage, <ANrf,DataA3> waves, <ANrf,DataE3> damage per second."
+
+[BNrd]
+Bufftip=Rain of Fire
+Buffubertip="This unit was hit by Rain of Fire; it will take damage over time."
+
+// Rain of Fire (greater, creep)
+[ACrg]
+Name=Rain of Fire
+EditorSuffix= (Neutral Hostile 1)
+Tip=Rain of |cffffcc00F|rire
+Ubertip="Calls down waves of fire that damage units in an area. Each wave deals <ACrg,DataB1> initial damage and <ACrg,DataE1> damage per second for <ACrg,Dur1> seconds. |nLasts for <ACrg,DataA1> waves."
+Hotkey=F
+
+// Frost Arrows
+[ANfa]
+Name=Frost Arrows
+Tip=F|cffffcc00r|rost Arrows - [|cffffcc00Level 1|r],F|cffffcc00r|rost Arrows - [|cffffcc00Level 2|r],F|cffffcc00r|rost Arrows - [|cffffcc00Level 3|r]
+Ubertip="Adds a cold effect to each attack, dealing <ANfa,DataA1> bonus damage, slowing a target enemy unit's attacks by <ANfa,DataB1,%>% and movement by <ANfa,DataC1,%>% for <ANfa,Dur1> seconds.","Adds a cold effect to each attack, dealing <ANfa,DataA2> bonus damage, slowing a target enemy unit's attacks by <ANfa,DataB2,%>% and movement by <ANfa,DataC2,%>% for <ANfa,Dur2> seconds.","Adds a cold effect to each attack, dealing <ANfa,DataA3> bonus damage, slowing a target enemy unit's attacks by <ANfa,DataB3,%>% and movement by <ANfa,DataC3,%>% for <ANfa,Dur3> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=R
+Unhotkey=R
+Researchtip="Learn F|cffffcc00r|rost Arrows - [|cffffcc00Level %d|r]"
+Researchubertip="Adds a cold effect to each attack, causing bonus damage and slowing a target enemy unit's attacks and movement. |n|n|cffffcc00Level 1|r - <ANfa,DataB1,%>% attack rate, <ANfa,DataC1,%>% movement speed, <ANfa,DataA1> bonus damage.|n|cffffcc00Level 2|r - <ANfa,DataB2,%>% attack rate, <ANfa,DataC2,%>% movement speed, <ANfa,DataA2> bonus damage.|n|cffffcc00Level 3|r - <ANfa,DataB3,%>% attack rate, <ANfa,DataC3,%>% movement speed, <ANfa,DataA3> bonus damage."
+Researchhotkey=R
+
+// Cold Arrows
+[AHca]
+Name=Cold Arrows
+Tip=|cffffcc00C|rold Arrows - [|cffffcc00Level 1|r],|cffffcc00C|rold Arrows - [|cffffcc00Level 2|r],|cffffcc00C|rold Arrows - [|cffffcc00Level 3|r]
+Ubertip="Adds a cold effect to each attack, slowing a target enemy unit's attacks by <AHca,DataB1,%>% and movement by <AHca,DataC1,%>% for <AHca,Dur1> seconds.","Adds a cold effect to each attack, slowing a target enemy unit's attacks by <AHca,DataB2,%>% and movement by <AHca,DataC2,%>% for <AHca,Dur2> seconds.""Adds a cold effect to each attack, slowing a target enemy unit's attacks by <AHca,DataB3,%>% and movement by <AHca,DataC3,%>% for <AHca,Dur3> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=C
+Unhotkey=C
+Researchtip="Learn |cffffcc00C|rold Arrows - [|cffffcc00Level %d|r]"
+Researchubertip="Adds a cold effect to each attack, slowing a target enemy unit's attacks and movement. |n|n|cffffcc00Level 1|r - <AHca,DataB1,%>% attack rate, <AHca,DataC1,%>% movement speed, lasts <AHca,Dur1> seconds. |n|cffffcc00Level 2|r - <AHca,DataB2,%>% attack rate, <AHca,DataC2,%>% movement speed, lasts <AHca,Dur2> seconds. |n|cffffcc00Level 3|r - <AHca,DataB3,%>% attack rate, <AHca,DataC3,%>% movement speed, lasts <AHca,Dur3> seconds."
+Researchhotkey=C
+
+[BHca]
+Bufftip=Cold Arrows
+Buffubertip="This unit was hit by a Cold Arrow; its attack rate and movement speed have been reduced."
+EditorSuffix= (Non-stacking)
+
+[Bcsd]
+Bufftip=Cold Arrows
+Buffubertip="This unit was hit by a Cold Arrow; its attack rate and movement speed have been reduced."
+EditorSuffix= (Stacking)
+
+[Bcsi]
+EditorName=Cold Arrows
+EditorSuffix= (Info)
+
+// Howl of Terror
+[ANht]
+Name=Howl of Terror
+Tip=Howl of |cffffcc00T|rerror - [|cffffcc00Level 1|r],Howl of |cffffcc00T|rerror - [|cffffcc00Level 2|r],Howl of |cffffcc00T|rerror - [|cffffcc00Level 3|r]
+Ubertip="The Pit Lord lets loose a terrifying howl that reduces nearby enemy units' attack damage by <ANht,DataA1,%>% for <ANht,Dur1> seconds.","The Pit Lord lets loose a terrifying howl that reduces nearby enemy units' attack damage by <ANht,DataA2,%>% for <ANht,Dur2> seconds.","The Pit Lord lets loose a terrifying howl that reduces nearby enemy units' attack damage by <ANht,DataA3,%>% for <ANht,Dur3> seconds."
+Hotkey=T
+Researchtip="Learn Howl of |cffffcc00T|rerror - [|cffffcc00Level %d|r]"
+Researchubertip="The Pit Lord lets loose a terrifying howl that causes nearby enemy units to shiver in fear, reducing their attack damage. |nLasts <ANht,Dur1> seconds. |n|n|cffffcc00Level 1|r - <ANht,DataA1,%>% attack damage reduction. |n|cffffcc00Level 2|r - <ANht,DataA2,%>% attack damage reduction. |n|cffffcc00Level 3|r - <ANht,DataA3,%>% attack damage reduction."
+Researchhotkey=T
+
+// Howl of Terror
+[Acht]
+Name=Howl of Terror
+EditorSuffix= (Neutral Hostile)
+Tip=Ho|cffffcc00w|rl of Terror 
+Ubertip="Emits a terrifying howl that reduces nearby enemy units' attack damage by <Acht,DataA1,%>% for <Acht,Dur1> seconds."
+Hotkey=W
+
+[BNht]
+Bufftip=Howl of Terror
+Buffubertip="This unit has heard the Howl of Terror; it deals less damage for a duration."
+
+// Cleaving Attack
+[ANca]
+Name=Cleaving Attack
+Tip=Cleaving Attack - [|cffffcc00Level 1|r],Cleaving Attack - [|cffffcc00Level 2|r],Cleaving Attack - [|cffffcc00Level 3|r]
+Ubertip="The Pit Lord strikes with such force that <ANca,DataA1,%>% of his damage strikes through to enemies near the primary attacked unit.","The Pit Lord strikes with such force that <ANca,DataA2,%>% of his damage strikes through to enemies near the primary attacked unit.","The Pit Lord strikes with such force that <ANca,DataA3,%>% of his damage strikes through to enemies near the primary attacked unit."
+Researchtip="Learn |cffffcc00C|rleaving Attack - [|cffffcc00Level %d|r]"
+Researchubertip="The Pit Lord strikes with such force that he damages multiple enemies with his attack. |n|n|cffffcc00Level 1|r - <ANca,DataA1,%>% damage is splash. |n|cffffcc00Level 2|r - <ANca,DataA2,%>% damage is splash. |n|cffffcc00Level 3|r - <ANca,DataA3,%>% damage is splash."
+Researchhotkey=C
+
+// Cleaving Attack
+[ACce]
+Name=Cleaving Attack
+EditorSuffix= (Neutral Hostile)
+Tip=Cleaving Attack
+Ubertip="The creature strikes with such force that <ACce,DataA1,%>% of their damage strikes through to enemies near the primary attacked unit."
+
+// Doom
+[ANdo]
+Name=Doom
+Tip=|cffffcc00D|room
+Ubertip="Marks a target unit for the manifestation of a Demon. The afflicted unit cannot cast spells and will take <ANdo,DataA1> damage per second until it dies. Upon its death, a great Demon will spawn from its corpse. Doom cannot be dispelled or cancelled."
+Hotkey=D
+Researchtip="Learn |cffffcc00D|room"
+Researchubertip="Marks a target unit for the manifestation of a Demon. The afflicted unit cannot cast spells and will take <ANdo,DataA1> damage per second until it dies. Upon its death, a great Demon will spawn from its corpse. Doom cannot be dispelled or cancelled."
+Researchhotkey=D
+
+[BNdo]
+Bufftip=Doom
+Buffubertip="This unit has been stricken with Doom; it cannot cast spells and will take damage until it dies, and a Demon will spawn from its corpse. Doom cannot be dispelled or cancelled."
+
+[BNdi]
+Bufftip=Doom
+Buffubertip="This unit has been stricken with Doom; it will take damage until it dies, and a Demon will spawn from its corpse. Doom cannot be dispelled or cancelled."
+EditorSuffix= (Minion)
+
+// Storm, Earth, and Fire
+[ANef]
+Name="Storm, Earth, And Fire"
+Tip="Storm, |cffffcc00E|rarth, And Fire"
+Ubertip="Splits the Pandaren Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn. |nLasts <ANef,HeroDur1> seconds."
+Hotkey=E
+Researchtip="Learn Storm, |cffffcc00E|rarth, And Fire"
+Researchubertip="Splits the Pandaren Brewmaster into elements, forming 3 specialized warriors. If any of them survive until the end of their summoned timer, the Brewmaster is reborn. |nLasts <ANef,HeroDur1> seconds."
+Researchhotkey=E
+
+[BNef]
+Bufftip="Pandaren Elemental"
+Buffubertip="I am a Pandaren Elemental; worship me."
+
+// Wind Walk (pandaren)
+[ANwk]
+Name=Wind Walk
+EditorSuffix= (Neutral Hostile)
+Tip=|cffffcc00W|rind Walk
+Ubertip="Allows the Pandaren to become invisible, and move <ANwk,DataB1,%>% faster. If the Pandaren attacks a unit to break invisibility, the attack will do <ANwk,DataC1> bonus damage."
+Hotkey=W
+
+// Taunt
+[ANta]
+Name=Taunt
+EditorSuffix= (Neutral Hostile)
+Tip=|cffffcc00T|raunt
+Ubertip="The closest <ANta,DataA1> enemies are forced to attack this unit."
+Hotkey=T
+
+// Banish (Creep)
+[ACbn]
+Name=Banish
+EditorSuffix= (Neutral Hostile)
+Tip=|cffffcc00B|ranish
+Ubertip="Turns a non-mechanical unit ethereal and slows its movement speed by <ACbn,DataA1,%>% for <ACbn,Dur1> seconds. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect."
+Hotkey=B
+
+
+// Life Drain 
+[ANdr]
+Name=Life Drain
+Tip=Life |cffffcc00D|rrain - [|cffffcc00Level 1|r],Life |cffffcc00D|rrain - [|cffffcc00Level 2|r],Life |cffffcc00D|rrain - [|cffffcc00Level 3|r]
+Ubertip="Absorbs the life essence of a target enemy unit by taking <ANdr,DataA1> hit points per second from it and giving them to the Dark Ranger. |nLasts <ANdr,Dur1> seconds.","Absorbs the life essence of a target enemy unit by taking <ANdr,DataA2> hit points per second from it and giving them to the Dark Ranger. |nLasts <ANdr,Dur2> seconds.","Absorbs the life essence of a target enemy unit by taking <ANdr,DataA3> hit points per second from it and giving them to the Dark Ranger. |nLasts <ANdr,Dur3> seconds."
+Hotkey=D
+Researchtip="Learn Life |cffffcc00D|rrain - [|cffffcc00Level %d|r]"
+Researchubertip="Absorbs the life essence of a target enemy unit by taking hit points from it every second and giving them to the Dark Ranger. |nLasts <ANdr,Dur1> seconds. |n|n|cffffcc00Level 1|r - <ANdr,DataA1> hit point drain per second. |n|cffffcc00Level 2|r - <ANdr,DataA2> hit point drain per second. |n|cffffcc00Level 3|r - <ANdr,DataA3> hit point drain per second." 
+Researchhotkey=D
+
+// Life Drain (Creep)
+[ACdr]
+Name=Life Drain
+EditorSuffix= (Neutral Hostile)
+Tip=Life D|cffffcc00r|rain 
+Ubertip="Absorbs the life essence of a target enemy unit by taking <ACdr,DataA1> hit points per second from it and giving them to the caster. |nLasts <ACdr,Dur1> seconds."
+Hotkey=R
+
+// Breath of Fire
+[ANbf]
+Name=Breath of Fire
+Tip=Breath of |cffffcc00F|rire - [|cffffcc00Level 1|r],Breath of |cffffcc00F|rire - [|cffffcc00Level 2|r],Breath of |cffffcc00F|rire - [|cffffcc00Level 3|r]
+Ubertip="Breathes a cone of fire at enemy units, dealing <ANbf,DataA1> initial damage. Units that have Drunken Haze on them will ignite and burn for <ANbf,DataE1> damage per second over <ANbf,Dur1> seconds.","Breathes a cone of fire at enemy units, dealing <ANbf,DataA2> initial damage. Units that have Drunken Haze on them will ignite and burn for <ANbf,DataE2> damage per second over <ANbf,Dur2> seconds.","Breathes a cone of fire at enemy units, dealing <ANbf,DataA3> initial damage. Units that have Drunken Haze on them will ignite and burn for <ANbf,DataE3> damage per second over <ANbf,Dur3> seconds."
+Hotkey=F
+Researchtip="Learn Breath of |cffffcc00F|rire - [|cffffcc00Level %d|r]"
+Researchubertip="Breathes a cone of fire at enemy units which deals damage. Units that have Drunken Haze on them will ignite and take burn damage over time. |nLasts <ANbf,Dur1> seconds. |n|n|cffffcc00Level 1|r - <ANbf,DataA1> initial damage, <ANbf,DataE1> damage per second. |n|cffffcc00Level 2|r - <ANbf,DataA2> initial damage, <ANbf,DataE2> damage per second. |n|cffffcc00Level 3|r - <ANbf,DataA3> initial damage, <ANbf,DataE3> damage per second."
+Researchhotkey=F
+
+// Unit Inventory (2 slot)
+[Aiun]
+Name=Unit Inventory
+EditorSuffix= (Undead)
+Tip="Unit Inventory"
+Ubertip="Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."
+
+[Aion]
+Name=Unit Inventory
+EditorSuffix= (Orc)
+Tip="Unit Inventory"
+Ubertip="Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."
+
+[Aihn]
+Name=Unit Inventory
+EditorSuffix= (Human)
+Tip="Unit Inventory"
+Ubertip="Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."
+
+[Aien]
+Name=Unit Inventory
+EditorSuffix= (Night Elf)
+Tip="Unit Inventory"
+Ubertip="Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."
+
+// Summon Bear
+[ANsg]
+Name=Summon Bear
+Tip=Summon |cffffcc00B|rear - [|cffffcc00Level 1|r],Summon |cffffcc00B|rear - [|cffffcc00Level 2|r],Summon |cffffcc00B|rear - [|cffffcc00Level 3|r]
+Ubertip="Summons a powerful <ngz1,realHP> hit point bear to attack your enemies. |nLasts <ANsg,Dur1> seconds.","Summons a powerful <ngz2,realHP> hit point bear to attack your enemies. Has the Bash ability. |nLasts <ANsg,Dur2> seconds.","Summons a powerful <ngz3,realHP> hit point bear to attack your enemies. Has the Bash and Blink abilities. |nLasts <ANsg,Dur3> seconds."
+Hotkey=B
+Researchtip=Learn Summon |cffffcc00B|rear - [|cffffcc00Level %d|r]
+Researchubertip="Summons a powerful bear to attack your enemies. |nLasts <ANsg,Dur1> seconds. |n|n|cffffcc00Level 1|r - <ngz1,realHP> hit points, <ngz1,mindmg1> to <ngz1,maxdmg1> damage. |n|cffffcc00Level 2|r - <ngz2,realHP> hit points, <ngz2,mindmg1> to <ngz2,maxdmg1> damage, has Bash. |n|cffffcc00Level 3|r - <ngz3,realHP> hit points, <ngz3,mindmg1> to <ngz3,maxdmg1> damage, has Bash and Blink."
+Researchhotkey=B
+
+[BNsg]
+Bufftip=Bear
+Buffubertip="A ferocious bear."
+
+// Summon Quilbeast
+[ANsq]
+Name=Summon Quilbeast
+Tip=Summon |cffffcc00Q|ruilbeast - [|cffffcc00Level 1|r],Summon |cffffcc00Q|ruilbeast - [|cffffcc00Level 2|r],Summon |cffffcc00Q|ruilbeast - [|cffffcc00Level 3|r]
+Ubertip="Summons an angry <nqb1,realHP> hit point quilbeast to fling spines at your enemies. |nLasts <ANsq,Dur1> seconds.","Summons an angry <nqb2,realHP> hit point quilbeast to fling spines at your enemies. Has the Frenzy ability. |nLasts <ANsq,Dur2> seconds.","Summons an angry <nqb3,realHP> hit point quilbeast to fling spines at your enemies. Has the Frenzy ability and does area effect damage. |nLasts <ANsq,Dur3> seconds."
+Hotkey=Q
+Researchtip=Learn Summon |cffffcc00Q|ruilbeast - [|cffffcc00Level %d|r]
+Researchubertip="Summons an angry quilbeast to attack your enemies. |nLasts <ANsq,Dur1> seconds. |n|n|cffffcc00Level 1|r - <nqb1,realHP> hit points, <nqb1,mindmg1> to <nqb1,maxdmg1> damage. |n|cffffcc00Level 2|r - <nqb2,realHP> hit points, <nqb2,mindmg1> to <nqb2,maxdmg1> damage, has Frenzy. |n|cffffcc00Level 3|r - <nqb3,realHP> hit points, <nqb3,mindmg1> to <nqb3,maxdmg1> area effect damage, has Frenzy."
+Researchhotkey=Q
+
+[BNsq]
+Bufftip=Quilbeast
+Buffubertip="An angry quilbeast."
+
+// Summon Hawk
+[ANsw]
+Name=Summon Hawk
+Tip=Summon Ha|cffffcc00w|rk - [|cffffcc00Level 1|r],Summon Ha|cffffcc00w|rk - [|cffffcc00Level 2|r],Summon Ha|cffffcc00w|rk - [|cffffcc00Level 3|r]
+Ubertip="Summons a proud <nwe1,realHP> hit point hawk to spy on your enemies. Has the True Sight ability. |nLasts <ANsw,Dur1> seconds.","Summons a proud <nwe2,realHP> hit point hawk to attack and spy on your enemies. Has the True Sight ability. |nLasts <ANsw,Dur2> seconds.","Summons a proud <nwe3,realHP> hit point hawk to attack and spy on your enemies. Has the True Sight and Invisibility abilities. |nLasts <ANsw,Dur3> seconds."
+Hotkey=W
+Researchtip=Learn Summon Ha|cffffcc00w|rk - [|cffffcc00Level %d|r]
+Researchubertip="Summons a proud hawk to spy on your enemies. |nLasts <ANsw,Dur1> seconds. |n|n|cffffcc00Level 1|r - <nwe1,realHP> hit points, has True Sight. |n|cffffcc00Level 2|r - <nwe2,realHP> hit points, <nwe2,mindmg1> to <nwe2,maxdmg1> damage, has True Sight. |n|cffffcc00Level 3|r - <nwe3,realHP> hit points, <nwe3,mindmg1> to <nwe3,maxdmg1> damage, has True Sight and Invisibility."
+Researchhotkey=W
+
+[BNsw]
+Bufftip=Hawk
+Buffubertip="A proud hawk."
+
+// Stampede
+[ANst]
+Name=Stampede
+Tip=S|cffffcc00t|rampede
+Ubertip="Calls down hordes of rampaging thunder lizards to explode upon the Beastmaster's enemies. Each exploding lizard deals <ANst,DataC1> damage. |nLasts <ANst,Dur1> seconds."
+Hotkey=T
+Researchtip=Learn S|cffffcc00t|rampede
+Researchubertip="Calls down hordes of rampaging thunder lizards to explode upon the Beastmaster's enemies. Each exploding lizard deals <ANst,DataC1> damage. |nLasts <ANst,Dur1> seconds."
+Researchhotkey=T
+
+// Hex
+[AChx]
+Name=Hex
+EditorSuffix= (Neutral Hostile)
+Tip=He|cffffcc00x|r
+Ubertip="Transforms an enemy unit into a random critter for <AChx,Dur1> seconds."
+Hotkey=X
+
+// Entangling Roots Seaweed Version (Creep)
+[Aenw]
+Name=Entangling Roots
+EditorSuffix= (Neutral Hostile 2)
+Tip=|cffffcc00E|rntangling Roots
+Ubertip="Causes roots to burst from the ground, immobilizing a target enemy unit for <Aenw,Dur1> seconds, and dealing <Aenw,DataA1> damage per second."
+Hotkey=E
+
+// Healing Wave (Creep)
+[AChv]
+Name=Healing Wave
+EditorSuffix= (Neutral Hostile)
+Tip=H|cffffcc00e|raling Wave
+Ubertip="Calls forth a wave of healing energy that bounces up to <AChv,DataB1> times, healing <AChv,DataA1> damage on the primary target. Each jump heals less damage."
+Hotkey=E
+
+// Silence(Creep)
+[ACsi]
+Name=Silence
+EditorSuffix= (Neutral Hostile)
+Tip=Sil|cffffcc00e|rnce
+Ubertip="Stops all enemies in a target area from casting spells for <ACsi,Dur1> seconds."
+Hotkey=E
+
+// Mana Shield(Creep)
+[ACmf]
+Name=Mana Shield
+EditorSuffix= (Neutral Hostile)
+Tip=Ma|cffffcc00n|ra Shield
+Ubertip="Activates a shield that absorbs <ACmf,DataA1> damage per point of mana."
+Untip=Deactivate Ma|cffffcc00n|ra Shield
+Hotkey=N
+Unhotkey=N
+
+// Shadow Strike
+[ACss]
+EditorSuffix= (Neutral Hostile)
+Tip=Sha|cffffcc00d|row Strike
+Ubertip="Hurls a poisoned dagger with incredible force at an enemy, dealing <ACss,DataE1> initial damage, and <ACss,DataA1> damage every <ACss,Cast1> seconds for <ACss,Dur1> seconds. The poison slows the attack rate and movement speed of the enemy for a short duration."
+Hotkey=D
+
+// Frost Bolt
+[ACcb]
+Name=Frost Bolt
+Tip=|cffffcc00F|rrost Bolt
+Ubertip="Throws a magical shard of ice at a target enemy unit, dealing <ACcb,DataA1> damage and stunning the target for <ACcb,Dur1> seconds."
+Hotkey=F
+
+// Breath of Frost(Creep)
+[ACbf]
+Name=Breath of Frost
+Tip=Breath of |cffffcc00F|rrost
+Ubertip="Breathes a cone of frost at enemy units that deals <ACbf,DataA1> initial damage, and <ACbf,DataE1> damage per second over <ACbf,Dur1> seconds."
+Hotkey=F
+
+[BCbf]
+Bufftip=Breath of Frost
+Buffubertip="This unit was hit by Breath of Frost; it will take damage over time."
+
+// Breath of Fire (Creep)
+[ACbc]
+Name=Breath of Fire
+EditorSuffix= (Neutral Hostile)
+Tip=Breath of |cffffcc00F|rire 
+Ubertip="Breathes a cone of fire at enemy units, dealing <ACbc,DataA1> damage."
+Hotkey=F
+
+// Flame Strike
+[ACfs]
+Name=Flame Strike
+EditorSuffix= (Neutral Hostile)
+Tip=|cffffcc00F|rlame Strike
+Ubertip="Conjures a pillar of flame that burns ground units for 45 damage a second for 2 seconds. As the pillar of flame subsides, units within the fire continue to take minor damage."
+Hotkey=F
+
+// Flame Strike
+[ANfs]
+Name=Flame Strike
+EditorSuffix= (Neutral Hostile 2)
+Tip=|cffffcc00F|rlame Strike
+Ubertip="Conjures a pillar of flame that burns ground units for 75 damage a second for 3 seconds. As the pillar of flame subsides, units within the fire continue to take moderate damage."
+Hotkey=F
+
+// Impale
+[ACmp]
+Name=Impale
+EditorSuffix= (Neutral Hostile)
+Tip=Impal|cffffcc00e|r
+Ubertip="Slams the ground, sending a wave of force out in a straight line, dealing <ACmp,DataA1> damage and hurling enemy ground units into the air in their wake, stunning them for <ACmp,Dur1> seconds."
+Hotkey=E
+
+// Inventory
+[AInv]
+Name=Inventory
+EditorSuffix= (Hero)
+
+// Spiked Shell
+[ANth]
+Name=Spiked Shell
+Tip=Spiked Shell
+Ubertip="Razor-sharp spikes on the Turtle's shell deal <ANth,DataA1,%>% of an enemy unit's melee attack damage back to it."
+
+// Spiked Shell, 2,2 button pos, dragon turtle
+[ANt2]
+Name=Spiked Shell
+Tip=Spiked Shell
+Ubertip="Razor-sharp spikes on the Turtle's shell deal <ANth,DataA1,%>% of an enemy unit's melee attack damage back to it."
+EditorSuffix="(2,2 Button Pos)"
+
+// Mind Rot
+[ANmr]
+Name=Mind Rot
+Tip=Mind |cffffcc00R|rot
+Ubertip="Drains <ANmr,DataA1> mana from a target enemy unit over <ANmr,Dur1> seconds."
+Hotkey=R
+
+[BNmr]
+Bufftip=Mind Rot
+Buffubertip="This unit has been hit by Mind Rot; it is losing mana over time."
+
+// Preservation
+[ANpr]
+
+// Spell Shield
+[ANss]
+
+// Breath of Fire
+[ANbf]
+Name=Breath of Fire
+Tip=Breath of |cffffcc00F|rire - [|cffffcc00Level 1|r],Breath of |cffffcc00F|rire - [|cffffcc00Level 2|r],Breath of |cffffcc00F|rire - [|cffffcc00Level 3|r]
+Ubertip="Breathes a cone of fire at enemy units, dealing <ANbf,DataA1> initial damage, and burning them for <ANbf,DataE1> damage per second over <ANbf,Dur1> seconds.","Breathes a cone of fire at enemy units, dealing <ANbf,DataA2> initial damage, and burning them for <ANbf,DataE2> damage per second over <ANbf,Dur2> seconds.","Breathes a cone of fire at enemy units, dealing <ANbf,DataA3> initial damage, and burning them for <ANbf,DataE3> damage per second over <ANbf,Dur3> seconds."
+Hotkey=F
+Researchtip="Learn Breath of |cffffcc00F|rire - [|cffffcc00Level %d|r]"
+Researchubertip="Breathes a cone of fire at enemy units, dealing initial damage, and then damage over time. |nLasts <ANbf,Dur1> seconds. |n|n|cffffcc00Level 1|r - <ANbf,DataA1> initial damage, <ANbf,DataE1> damage per second. |n|cffffcc00Level 2|r - <ANbf,DataA2> initial damage, <ANbf,DataE2> damage per second. |n|cffffcc00Level 3|r - <ANbf,DataA3> initial damage, <ANbf,DataE3> damage per second."
+Researchhotkey=F
+
+[BNbf]
+Bufftip=Breath of Fire
+Buffubertip="This unit has been hit by Breath of Fire; it will take damage over time."
+
+// Drunken Brawler
+[ANdb]
+Name=Drunken Brawler
+Tip=Drunken Brawler - [|cffffcc00Level 1|r],Drunken Brawler - [|cffffcc00Level 2|r],Drunken Brawler - [|cffffcc00Level 3|r]
+Ubertip="Gives a <ANdb,DataD1,%>% chance to dodge an attack and a <ANdb,DataA1>% chance to deal <ANdb,DataB1> times normal damage.","Gives a <ANdb,DataD2,%>% chance to dodge an attack and a <ANdb,DataA2>% chance to deal <ANdb,DataB2> times normal damage.","Gives a <ANdb,DataD3,%>% chance to dodge an attack and a <ANdb,DataA3>% chance to deal <ANdb,DataB3> times normal damage."
+Researchtip="Learn Drunken |cffffcc00B|rrawler - [|cffffcc00Level %d|r]"
+Researchubertip="Gives a percent chance to avoid attacks and a <ANdb,DataA1>% chance to deal additional damage. |n|n|cffffcc00Level 1|r - <ANdb,DataD1,%>% dodge, <ANdb,DataB1> times normal damage. |n|cffffcc00Level 2|r - <ANdb,DataD2,%>% dodge, <ANdb,DataB2> times normal damage. |n|cffffcc00Level 3|r - <ANdb,DataD3,%>% dodge, <ANdb,DataB3> times normal damage."
+Researchhotkey=B
+
+// Drunken Haze
+[ANdh]
+Name=Drunken Haze
+Tip=|cffffcc00D|rrunken Haze - [|cffffcc00Level 1|r],|cffffcc00D|rrunken Haze - [|cffffcc00Level 2|r],|cffffcc00D|rrunken Haze - [|cffffcc00Level 3|r]
+Ubertip="Drenches enemy units in alcohol, causing their movement speed to be reduced by <ANdh,DataC1,%>%, and have a <ANdh,DataB1,%>% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. |nLasts <ANdh,Dur1> seconds.","Drenches enemy units in alcohol, causing their movement speed to be reduced by <ANdh,DataC2,%>%, and have a <ANdh,DataB2,%>% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. |nLasts <ANdh,Dur2> seconds.","Drenches enemy units in alcohol, causing their movement speed to be reduced by <ANdh,DataC3,%>%, and have a <ANdh,DataB3,%>% chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage. |nLasts <ANdh,Dur3> seconds."
+Hotkey=D
+Researchtip="Learn |cffffcc00D|rrunken Haze - [|cffffcc00Level %d|r]"
+Researchubertip="Drenches enemy units in alcohol, causing their movement speed to be reduced, and have a chance to miss on attacks. When units with Drunken Haze cast on them are hit by Breath of Fire, they will ignite and take burn damage over time. |nLasts <ANdh,Dur1> seconds |n|n|cffffcc00Level 1|r - <ANdh,DataC1,%>% movement speed reduction, <ANdh,DataB1,%>% miss chance. |n|cffffcc00Level 2|r - <ANdh,DataC2,%>% movement speed reduction, <ANdh,DataB2,%>% miss chance. |n|cffffcc00Level 3|r - <ANdh,DataC3,%>% movement speed reduction, <ANdh,DataB3,%>% miss chance."
+Researchhotkey=D
+
+[BNdh]
+Bufftip=Drunken Haze
+Buffubertip="This unit was hit by a Drunken Haze; it has reduced movement speed and a chance to miss on attacks."
+
+// Silence
+[ANsi]
+Name=Silence
+Tip=Sil|cffffcc00e|rnce - [|cffffcc00Level 1|r],Sil|cffffcc00e|rnce - [|cffffcc00Level 2|r],Sil|cffffcc00e|rnce - [|cffffcc00Level 3|r]
+Ubertip="Stops all enemies in a small target area from casting spells for <ANsi,Dur1> seconds.","Stops all enemies in a medium target area from casting spells for <ANsi,Dur2> seconds.","Stops all enemies in a large target area from casting spells for <ANsi,Dur3> seconds."
+Hotkey=E
+Researchtip="Learn Sil|cffffcc00e|rnce - [|cffffcc00Level %d|r]"
+Researchubertip="Stops all enemies in a target area from casting spells. The area of effect and duration increase with level. |n|n|cffffcc00Level 1|r - Small area, lasts <ANsi,Dur1> seconds. |n|cffffcc00Level 2|r - Medium area, lasts <ANsi,Dur2> seconds. |n|cffffcc00Level 3|r - Large area, lasts <ANsi,Dur3> seconds."
+Researchhotkey=E
+
+[BNsi]
+Bufftip=Silence
+Buffubertip="This unit is Silenced; it cannot cast spells."
+
+// Black Arrow
+[ANba]
+Name=Black Arrow
+Tip=|cffffcc00B|rlack Arrow - [|cffffcc00Level 1|r],|cffffcc00B|rlack Arrow - [|cffffcc00Level 2|r],|cffffcc00B|rlack Arrow - [|cffffcc00Level 3|r]
+Ubertip="Adds <ANba,DataA1> bonus damage to attacks. Units killed while under the effect of Black Arrow will turn into <ndr1,RealHP> hit point skeletons.","Adds <ANba,DataA2> bonus damage to attacks. Units killed while under the effect of Black Arrow will turn into <ndr2,RealHP> hit point skeletons.","Adds <ANba,DataA3> bonus damage to attacks. Units killed while under the effect of Black Arrow will turn into <ndr3,RealHP> hit point skeletons."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=B
+Researchtip="Learn |cffffcc00B|rlack Arrow - [|cffffcc00Level %d|r]"
+Researchubertip="Adds extra damage to attacks. Units killed while under the effect of Black Arrow will turn into skeletons. |n|n|cffffcc00Level 1|r - <ANba,DataA1> bonus damage, <ndr1,RealHP> hit point skeleton. |n|cffffcc00Level 2|r - <ANba,DataA2> bonus damage, <ndr2,RealHP> hit point skeleton. |n|cffffcc00Level 3|r - <ANba,DataA3> bonus damage, <ndr3,RealHP> hit point skeleton."
+Researchhotkey=B
+
+[BNba]
+Bufftip=Black Arrow
+Buffubertip="This unit was hit by a Black Arrow; if it dies, it will turn into a skeleton for the enemy."
+
+[BNdm]
+Bufftip=Dark Minion
+Buffubertip="Summoned units take damage from dispels."
+
+// Black Arrow
+[ACbk]
+Name=Black Arrow
+EditorSuffix= (Neutral Hostile)
+Tip=|cffffcc00B|rlack Arrow 
+Ubertip="Adds <ACbk,DataA1> bonus damage to attacks. Units killed while under the effect of Black Arrow will turn into skeletons."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=B
+
+// Charm (Creep)
+[ACch]
+Name=Charm
+EditorSuffix= (Neutral Hostile)
+Tip=Cha|cffffcc00r|rm
+Ubertip="Takes control of a target enemy unit. |nCharm cannot be used on Heroes, or creeps above level <ACch,DataA1>."
+Hotkey=R
+
+// Charm
+[ANch]
+Name=Charm
+Tip=|cffffcc00C|rharm
+Ubertip="Takes control of a target enemy unit. |nCharm cannot be used on Heroes, or creeps above level <ANch,DataA1>."
+Hotkey=C
+Researchtip=Learn |cffffcc00C|rharm
+Researchubertip="Takes control of a target enemy unit. |nCharm cannot be used on Heroes, or creeps above level <ANch,DataA1>."
+Researchhotkey=C
+
+// Monsoon
+[ANmo]
+Name=Monsoon
+Tip=Monsoo|cffffcc00n|r - [|cffffcc00Level 1|r],Monsoo|cffffcc00n|r - [|cffffcc00Level 2|r],Monsoo|cffffcc00n|r - [|cffffcc00Level 3|r]
+Ubertip="Calls down a storm of lightning to strike enemy units for <ANmo,DataA1> damage in a small target area. |nLasts <ANmo,Dur1> seconds.","Calls down a storm of lightning to strike enemy units for <ANmo,DataA2> damage in a medium target area. |nLasts <ANmo,Dur1> seconds.","Calls down a storm of lightning to strike enemy units for <ANmo,DataA3> damage in a large target area. |nLasts <ANmo,Dur1> seconds."
+Hotkey=N
+Researchtip="Learn Monsoo|cffffcc00n|r - [|cffffcc00Level %d|r]"
+Researchubertip="Calls a storm of lightning bolts to strike enemy units for <ANmo,DataA1> damage. |nLasts <ANmo,Dur1> seconds. |n|n|cffffcc00Level 1|r - Small area. |n|cffffcc00Level 2|r - Medium area. |n|cffffcc00Level 3|r - Large area."
+Researchhotkey=N
+
+[BNmo]
+Bufftip=Monsoon
+Buffubertip="This unit is under a Monsoon; it will take damage from lightning bolts."
+
+// creep monsoon
+[ACmo]
+Name=Monsoon
+Tip=Monsoo|cffffcc00n|r - [|cffffcc00Level 1|r],Monsoo|cffffcc00n|r - [|cffffcc00Level 2|r],Monsoo|cffffcc00n|r - [|cffffcc00Level 3|r]
+Ubertip="Calls down a storm of lightning to strike enemy units for <ACmo,DataA1> damage in a small target area. |nLasts <ACmo,Dur1> seconds.","Calls down a storm of lightning to strike enemy units for <ACmo,DataA2> damage in a medium target area. |nLasts <ACmo,Dur1> seconds.","Calls down a storm of lightning to strike enemy units for <ACmo,DataA3> damage in a large target area. |nLasts <ACmo,Dur1> seconds."
+Hotkey=N
+Researchtip="Learn Monsoo|cffffcc00n|r - [|cffffcc00Level %d|r]"
+Researchubertip="Calls a storm of lightning bolts to strike enemy units for <ANmo,DataA1> damage. |nLasts <ANmo,Dur1> seconds. |n|n|cffffcc00Level 1|r - Small area. |n|cffffcc00Level 2|r - Medium area. |n|cffffcc00Level 3|r - Large area."
+Researchhotkey=N
+
+// Watery Minion
+[ANwm]
+Name=Watery Minion
+Tip=|cffffcc00W|ratery Minion
+Ubertip="Summons <ANwm,DataA1> minions to do their master's bidding. |nLasts <ANwm,Dur1> seconds."
+Hotkey=W
+
+[BNwm]
+Bufftip=Watery Minion
+Buffubertip="Summoned units take damage from dispels."
+
+// watery minion makrura
+[Aslp]
+Name=Summon Prawns
+Tip=Summon P|cffffcc00r|rawns
+Ubertip="Summons <Aslp,DataA1> Makrura Prawns to do their master's bidding. |nLasts <Aslp,Dur1> seconds."
+Hotkey=R
+
+// Tornado
+[ANto]
+Name=Tornado
+Tip=|cffffcc00T|rornado
+Ubertip="Summons a fierce controllable Tornado that slows enemy units' movement speed, randomly tosses enemy ground units into the air and damages enemy buildings. |nLasts <ANto,Dur1> seconds."
+Hotkey=T
+Researchtip="Learn |cffffcc00T|rornado"
+Researchubertip="Summons a fierce controllable Tornado that slows enemy units' movement speed, randomly tosses enemy ground units into the air and damages enemy buildings. |nLasts <ANto,Dur1> seconds."
+Researchhotkey=T
+
+// Tornado - Slow Aura
+[Basl]
+Bufftip=Tornado
+Buffubertip="This unit is caught within a Tornado; its movement speed has been reduced temporarily."
+EditorSuffix= (Slow Aura)
+
+// Tornado - Spin
+[Btsp]
+Bufftip=Tornado Spin
+Buffubertip="This unit is caught within a Tornado; it has been tossed into the air."
+
+// Tornado - timed life
+[BNto]
+Bufftip=Tornado
+EditorSuffix= (Timed Life)
+
+// Healing Ward (Creep)
+[AChw]
+Name=Healing Ward
+Tip=H|cffffcc00e|raling Ward
+Ubertip="Summons an immovable ward that heals <Aoar,DataA1,%>% of a nearby friendly non-mechanical unit's hit points per second. |nLasts <AChw,Dur1> seconds."
+Hotkey=E
+EditorSuffix= (Neutral Hostile)
+
+// Rejuvenation (Furbolg)
+[ACr2]
+Name=Rejuvenation
+Tip=R|cffffcc00e|rjuvenation
+Ubertip="Heals a target friendly unit for <ACr2,DataA1> hit points over <ACr2,Dur1> seconds."
+Hotkey=E
+EditorSuffix=(Furbolg)
+
+// Magic Immunity (Archimonde)
+[ACm2]
+Name=Spell Immunity
+Tip=Spell Immunity
+Ubertip="Renders this unit immune to all spells."
+
+// Magic Immunity (Dragons)
+[ACm3]
+Name=Spell Immunity
+Tip=Spell Immunity
+Ubertip="Renders this unit immune to all spells."
+
+[Arng]
+Name=Revenge
+
+// general detect invis
+[Adtg]
+Name=True Sight
+EditorSuffix= (Neutral 1)
+Tip=True Sight
+Ubertip="Reveals nearby invisible units."
+
+// general detect invis (War eagle)
+[ANtr]
+Name=True Sight
+EditorSuffix= (Neutral 2)
+Tip=True Sight
+Ubertip="Reveals nearby invisible units."
+
+// blighted gold mine
+[Abgm]
+Name=Blighted Gold Mine Ability
+
+// entangled gold mine
+[Aegm]
+Name=Entangled Gold Mine Ability
+
+// tree of life art attachment
+[Atol]
+Name=Tree of Life upgrade ability
+
+// waygate ability
+[Awrp]
+Name=Waygate ability
+
+// Dark Conversion
+[ANdc]
+Name=Dark Conversion
+Tip=Dar|cffffcc00k|r Conversion
+Ubertip="Puts a target villager to sleep and converts it into a zombie."
+Hotkey=K
+Researchtip="Learn Dar|cffffcc00k|r Conversion"
+Researchubertip="Puts a target villager to sleep and converts it into a zombie."
+Researchhotkey=K
+EditorSuffix= (Malganis)
+
+[BNdc]
+Bufftip=Dark Conversion
+Buffubertip="This villager was hit by Dark Conversion; it will fall asleep and then turn into a zombie."
+
+// Dark Conversion (Fast)
+[SNdc]
+Name=Dark Conversion
+Tip=Dar|cffffcc00k|r Conversion
+Ubertip="Puts a target villager to sleep and converts it into a zombie."
+Hotkey=K
+Researchtip="Learn Dar|cffffcc00k|r Conversion"
+Researchubertip="Puts a target villager to sleep and converts it into a zombie."
+Researchhotkey=K
+EditorSuffix=" (Malganis, Fast)"
+
+// Soul Preservation
+[ANsl]
+Name=Soul Preservation
+Tip=Sou|cffffcc00l|r Preservation
+Ubertip="Puts a converted zombie into the nether-realm for later use."
+Hotkey=L
+Researchtip="Learn Sou|cffffcc00l|r Preservation"
+Researchubertip="Puts a converted zombie into the nether-realm for later use."
+Researchhotkey=L
+EditorSuffix= (Malganis)
+
+[BNsp]
+Bufftip=Soul Preservation
+Buffubertip="This unit is being preserved for later use."
+
+// Inferno (Tichondrius)
+[SNin]
+Name=Inferno
+Tip=I|cffffcc00n|rferno
+Ubertip="Calls an Infernal down from the sky, dealing <SNin,DataA1> damage and stunning enemy land units for <SNin,Dur1> seconds in an area. The Infernal lasts <SNin,DataB1> seconds."
+Hotkey=N
+Researchtip=Learn I|cffffcc00n|rferno
+Researchubertip="Calls an Infernal down from the sky, dealing <SNin,DataA1> damage and stunning enemy land units for <SNin,Dur1> seconds in an area. The Infernal lasts <SNin,DataB1> seconds."
+Researchhotkey=N
+EditorSuffix= (Tichondrius)
+
+[ANfd]
+Name=Finger of Death
+Tip=|cffffcc00F|ringer of Death
+Ubertip="Instantly turns a creature or building inside-out, destroying it utterly."
+Hotkey=F
+Researchtip=Learn |cffffcc00F|ringer of Death
+Researchubertip="Instantly turns a creature or building inside-out, destroying it utterly."
+Researchhotkey=F
+EditorSuffix= (Archimonde)
+
+[ACfd]
+Name=Finger of Pain
+Tip=|cffffcc00F|ringer of Pain
+Ubertip="Horribly cripples the innards of a creature or building."
+Hotkey=F
+Researchtip=Learn |cffffcc00F|ringer of Pain
+Researchubertip="Horribly cripples the innards of a creature or building."
+Researchhotkey=F
+EditorSuffix= (Neutral Hostile)
+
+[ACf3]
+Name=Finger of Pain
+Tip=|cffffcc00F|ringer of Pain
+Ubertip="Horribly cripples the innards of a creature or building."
+Hotkey=F
+Researchtip=Learn |cffffcc00F|ringer of Pain
+Researchubertip="Horribly cripples the innards of a creature or building."
+Researchhotkey=F
+EditorSuffix= (Neutral Hostile)
+
+[Afod]
+Name=Finger of Death
+Tip=|cffffcc00F|ringer of Death
+Ubertip="Instantly turns a creature or building inside-out."
+Hotkey=F
+Researchtip=Learn |cffffcc00F|ringer of Death
+Researchubertip="Instantly turns a creature or building inside-out."
+Researchhotkey=F
+EditorSuffix= (Neutral Hostile)
+
+[ANdp]
+Name=Dark Portal
+Tip=|cffffcc00D|rark Portal
+Ubertip="Opens a portal, allowing demons to step through and do Archimonde's bidding."
+Hotkey=D
+Researchtip=Learn |cffffcc00D|rark Portal
+Researchubertip="Opens a portal, allowing demons to step through and do Archimonde's bidding."
+Researchhotkey=D
+EditorSuffix= (Archimonde)
+
+[ANrc]
+Name=Rain of Chaos
+Tip=|cffffcc00R|rain of Chaos
+Ubertip="Calls down multiple Infernals from the sky."
+Hotkey=R
+Researchtip=Learn |cffffcc00R|rain of Chaos
+Researchubertip="Calls down multiple Infernals from the sky."
+Researchhotkey=R
+EditorSuffix= (Archimonde)
+
+//rain of chaos button pos 0,2, balnazzar
+[ANr3]
+Name=Rain of Chaos
+Tip=|cffffcc00R|rain of Chaos
+Ubertip="Calls down multiple Infernals from the sky."
+Hotkey=R
+Researchtip=Learn |cffffcc00R|rain of Chaos
+Researchubertip="Calls down multiple Infernals from the sky."
+Researchhotkey=R
+EditorSuffix= (Balnazzar)
+
+// Creep Devotion Aura
+[ACav]
+Name=Devotion Aura
+EditorSuffix= (Neutral Hostile)
+Tip=Devotion Aura
+Ubertip="Gives <ACav,DataA1> additional armor to nearby friendly units."
+
+// Cargo Hold Death
+[Achd]
+Name=Cargo Hold Death
+
+[Bchd]
+Bufftip=Dizziness
+Buffubertip="This unit is dizzy; its attack rate and movement speed are reduced."
+
+// Cargo Load
+[Aloa]
+Name=Load
+Tip=|cffffcc00L|road
+Ubertip="Loads a targeted friendly land unit."
+Hotkey=L
+EditorSuffix= (Goblin Zeppelin)
+
+// Cargo Unload
+[Adro]
+Name=Unload
+EditorSuffix= (Air Transports)
+Tip=|cffffcc00U|rnload All
+Ubertip="Unloads all carried units at a target location."
+Hotkey=U
+EditorSuffix= (Goblin Zeppelin)
+
+[Sdro]
+Name=Unload
+EditorSuffix= (Sea Transports)
+Tip=|cffffcc00U|rnload All
+Ubertip="Unloads all carried units at a target location."
+Hotkey=U
+
+// Cargo Unload (Instant)
+[Adri]
+Name=Unload Instant
+Tip=|cffffcc00U|rnload All
+Ubertip="Unloads all units."
+Hotkey=U
+EditorSuffix= (Entangled Mine)
+
+[Asla]
+Name=Sleep Always
+Tip=|cffffcc00S|leep
+Ubertip="Unit sleeps until awoken."
+
+// devour cargo hold
+[Advc]
+Name=Devour Cargo
+
+// permanent immolation
+[ANpi]
+Name=Permanent Immolation
+EditorSuffix= (Neutral Hostile 1)
+Tip=Permanent Immolation
+Ubertip="Burns nearby enemy units for <ANpi,DataA1> points of damage per second."
+
+[Apig]
+Name=Permanent Immolation
+EditorSuffix= (Neutral Hostile 2)
+Tip=Permanent Immolation
+Ubertip="Burns nearby enemy units for <Apig,DataA1> points of damage per second."
+
+// bunker, orc burrow cargo hold
+[Abun]
+Name=Cargo Hold (Orc Burrow)
+
+// chaos orc burrow battle stations
+[Sbtl]
+Name=Battle Stations
+Tip=|cffffcc00B|rattle Stations
+Ubertip="Causes nearby Peons to run into the Burrow so that they can defend their base."
+Hotkey=B
+EditorSuffix= (Chaos Orc Burrow)
+
+// cargo hold, generic
+[Acar]
+Name=Cargo Hold
+
+// Neutral Spell
+[AAns]
+Name=Charge Gold and Lumber
+Tip=Charge |cffffcc00G|rold and Lumber
+Ubertip="Charges the player a fixed amount of gold and lumber."
+Hotkey=G
+
+// Reveal
+[Andt]
+Name=Reveal
+Tip=|cffffcc00R|reveal
+Ubertip="Reveals an area of the map. |nDetects invisible units. |nLasts <Andt,Dur1> seconds."
+Hotkey=R
+
+// Currently Unused
+// Neutral G2L Exchange
+[ANgl]
+Name=Exchange Gold for Lumber
+Tip=Exchange %d Gold for %d |cffffcc00L|rumber
+Hotkey=L
+
+// Currently Unused
+// Neutral L2G Exchange
+[ANlg]
+Name=Exchange Lumber for Gold
+Tip=Exchange %d Lumber for %d |cffffcc00G|rold
+Hotkey=G
+
+[ANre]
+Name=Mana Regeneration
+
+[ANrl]
+Name=Life Regeneration
+
+// 'select hero to use' ability for neutral buildings
+[Aneu]
+Name=Select Hero
+Tip=Select |cffffcc00H|rero
+Untip=Deselect |cffffcc00H|rero
+Hotkey=H
+Unhotkey=H
+
+// select any unit, for buildings
+[Ane2]
+Name=Select Unit
+Tip=Select |cffffcc00U|rnit
+Untip=Deselect |cffffcc00U|rnit
+Hotkey=U
+Unhotkey=U
+
+// Inferno
+[ANin]
+Name=Inferno
+Tip=|cffffcc00I|rnferno
+Ubertip="Summons an Infernal from the sky, causing area effect damage where it lands."
+Hotkey=I
+Researchtip=Learn |cffffcc00I|rnferno
+Researchhotkey=I
+EditorSuffix= (Neutral Hostile)
+Globalmessage=
+Globalsound=
+
+[BNin]
+Bufftip=Infernal
+Buffubertip="This Infernal is mighty."
+
+// Spy
+[ANsp]
+Name=Spy
+Tip=Sp|cffffcc00y|r
+Hotkey=Y
+
+// Kaboom!
+[Asds]
+Name=Kaboom!
+Tip=Ka|cffffcc00b|room!
+Ubertip="Deals <Asds,DataB1> damage in a small area. Effective against buildings and trees."
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting.|r|r"
+Unubertip="|cffc3dbff|cffc3dbffRight-click to deactivate auto-casting.|r|r"
+Hotkey=B
+Unhotkey=B
+EditorSuffix= (Goblin Sapper)
+
+// Medivh Crow Form
+[Amrf]
+Name=Crow Form
+Tip=Crow |cffffcc00F|rorm
+Ubertip="Turn into a Crow."
+Hotkey=F
+Untip=Human |cffffcc00F|rorm
+Unubertip="Turn into a Human."
+Unhotkey=F
+
+// Neutral Unit Healing
+[Anhe]
+Name=Heal
+EditorSuffix= (Neutral Hostile 1)
+Tip=H|cffffcc00e|ral
+Ubertip="Heals a target friendly non-mechanical wounded unit."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=E
+Unhotkey=E
+
+// Creep slow
+[ACsw]
+Name=Slow
+Hotkey=W
+Unhotkey=W
+Tip=Slo|cffffcc00w|r
+Ubertip="Slows enemy unit's attack rate by <ACsw,DataB1,%>% and movement speed by <ACsw,DataA1,%>%. Lasts <ACsw,Dur1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+
+// Creep Thunder Clap
+[ACtc]
+Name=Slam
+Tip=S|cffffcc00l|ram
+Ubertip="Slams the ground, dealing <ACtc,DataA1> points of damage and slowing the movement and attack rate of nearby enemy units."
+Hotkey=L
+EditorSuffix= (Neutral Hostile)
+
+[BCtc]
+Bufftip=Slam
+Buffubertip="This unit has been hit by Slam; its movement speed and attack rate are reduced."
+
+// Creep Thunder Clap (Thunder Lizard)
+[ACt2]
+Name=Slam
+Tip=S|cffffcc00l|ram
+Ubertip="Slams the ground, dealing <ACt2,DataA1> points of damage and slowing the movement and attack rate of nearby enemy units."
+Hotkey=L
+EditorSuffix= (Thunder Lizard)
+
+// Creep Storm Bolt
+[ACtb]
+Name=Hurl Boulder
+Tip=Hurl |cffffcc00B|roulder
+Ubertip="A magical boulder that is thrown at an enemy unit, causing <ACtb,DataA1> points of damage and stunning the target for <ACtb,Dur1> seconds."
+Hotkey=B
+
+// Creep Berserker Rage
+[ACbr]
+Name=Berserker Rage
+Tip=|cffffcc00B|rerserker Rage
+Ubertip="Increases attack rate by <ACbr,DataA1,%>% for <ACbr,Dur1> seconds."
+Hotkey=B
+
+// Creep Bloodlust (B hotkey version)
+[ACbb]
+Name=Bloodlust
+EditorSuffix= (Neutral Hostile 2)
+Tip=|cffffcc00B|rloodlust
+Ubertip="Increases a target friendly unit's attack rate by <ACbb,DataA1,%>% and movement speed by <ACbb,DataB1,%>% for <ACbb,Dur1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=B
+Unhotkey=B
+
+// Frenzy
+[Afzy]
+Name=Frenzy
+Tip=|cffffcc00F|rrenzy
+Ubertip="Increases the unit's attack rate by <Afzy,DataA1,%>% and movement speed by <Afzy,DataB1,%>% for <Afzy,Dur1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=F
+Unhotkey=F
+
+[Bfzy]
+Bufftip=Frenzy
+Buffubertip="This unit has Frenzy; its attack rate and movement speed are increased."
+
+// Creep Bloodlust
+[ACbl]
+Name=Bloodlust
+EditorSuffix= (Neutral Hostile 1)
+Tip=B|cffffcc00l|roodlust
+Ubertip="Increases a target friendly unit's attack rate by <ACbl,DataA1,%>% and movement speed by <ACbl,DataB1,%>% for <ACbl,Dur1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=L
+Unhotkey=L
+
+// Creep Ensnare
+[ACen]
+Name=Ensnare
+Tip=|cffffcc00E|rnsnare
+Ubertip="Causes a target unit to be bound to the ground so that it cannot move. Air units that are ensnared can be attacked as though they were land units. |nLasts <ACen,Dur1> seconds."
+Hotkey=E
+
+// Dragon Creep Devour
+[ACdv]
+Name=Devour
+EditorSuffix= (Neutral Hostile)
+Tip=|cffffcc00D|revour
+Ubertip="Consumes an enemy unit, slowly digesting it and dealing <Advc,DataB1> damage per second to it. If the creep is killed while the consumed unit is still digesting, the unit that was devoured will be released."
+Hotkey=D
+
+// Creep Sleep
+[ACsp]
+Name=Sleep
+
+// demon reincarnation
+[ANrn]
+Name=Reincarnation
+Tip=Reincarnation
+Ubertip="When killed, the demon will come back to life. Reincarnation has a <ANrn,Cool1> second cooldown."
+Researchtip=Learn |cffffcc00R|reincarnation
+Researchubertip="When killed, the demon will come back to life. Reincarnation has a <ANrn,Cool1> second cooldown."
+Hotkey=R
+Unhotkey=R
+Researchhotkey=R
+EditorSuffix= (Mannoroth)
+
+// Creep Firebolt (like storm bolt, only fiery)
+[ANfb]
+Name=Firebolt
+Tip=Fire|cffffcc00b|rolt
+Ubertip="Hurls a fiery bolt that stuns a target enemy unit."
+Hotkey=B
+Researchtip="Learn Fire|cffffcc00b|rolt, Level %d"
+Researchhotkey=B
+EditorSuffix= (Neutral Hostile)
+
+//spawn skeleton
+[Asod]
+Name=Spawn Skeleton
+EditorSuffix= (Probably Black Arrow)
+
+// spawn spiderlings (nerubian) on death
+[Assp]
+Name=Spawn Spiderlings
+EditorSuffix= (Neutral Hostile)
+
+// spawn spiders on death
+[Aspd]
+Name=Spawn Spiders
+EditorSuffix= (Neutral Hostile)
+
+// spawn hydra on death
+[Aspy]
+Name=Spawn Hydra
+
+// spawn hydra hatchling on death
+[Aspt]
+Name=Spawn Hydra Hatchling
+
+[AOac]
+Name=Command Aura
+Tip=Command Aura
+Ubertip="Gives extra damage to the attacks of nearby friendly units."
+
+[Boac]
+Bufftip=Command Aura
+Buffubertip="This unit is under the effects of Command Aura; it has increased attack damage."
+
+[ACac]
+Name=Command Aura
+Tip=Command Aura
+Ubertip="Gives extra damage to the attacks of nearby friendly units."
+
+[Btlf]
+Bufftip=Timed Life
+Buffubertip="Summoned units take damage from dispels."
+
+[ACad]
+Name=Animate Dead
+Tip=Animate |cffffcc00D|read
+Ubertip="Raises <ACad,DataA1> dead units in an area for <ACad,Dur1> seconds."
+Hotkey=D
+EditorSuffix=(Neutral Hostile)
+
+[ACrn]
+Name=Reincarnation
+Tip=Reincarnation
+ubertip="When killed, this unit will come back to life. Reincarnation has a <ACrn,Cool1> second cooldown."
+EditorSuffix=(Neutral Hostile)
+
+// creep (demon) mana burn
+[Ambd]
+Name=Mana Burn
+EditorSuffix= (Neutral Hostile 1)
+Tip=Ma|cffffcc00n|ra Burn
+Ubertip="Sends a bolt of negative energy that burns <Ambd,DataA1> points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned."
+Hotkey=N
+
+[Amnb]
+Name=Mana Burn
+EditorSuffix= (Neutral Hostile 2)
+Tip=Ma|cffffcc00n|ra Burn
+Ubertip="Sends a bolt of negative energy that burns <Amnb,DataA1> points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned."
+Hotkey=N
+
+[Ambb]
+Name=Mana Burn
+EditorSuffix= (Neutral Hostile 3)
+Tip=Mana |cffffcc00B|rurn
+Ubertip="Sends a bolt of negative energy that burns <Ambb,DataA1> points of a target enemy unit's mana. The mana combusts, dealing damage equal to the amount of mana burned."
+Hotkey=B
+
+
+// AOE damage upon death
+[Adda]
+Name=AOE damage upon death
+EditorSuffix= (Sapper)
+
+// ghost (shade)
+[Agho]
+Name=Ghost
+
+// Ghost (visible)
+[Aeth]
+Name=Ghost
+EditorSuffix= (Visible)
+
+// gold mine ability
+[Agld]
+Name=Gold Mine ability
+
+// goblin mine
+[Amin]
+Name=Mine - exploding
+EditorSuffix= (Goblin Land Mine)
+
+// permanent invis
+[Apiv]
+Name=Permanent Invisibility
+
+// return resources
+[Artn]
+Name=Return
+
+// invulnerable
+[Avul]
+Name=Invulnerable
+EditorSuffix= (Neutral)
+
+// critter wander
+[Awan]
+Name=Wander
+EditorSuffix= (Neutral)
+
+// Malganis dark summoning
+[AUmd]
+Name=Dark Summoning (Malganis)
+
+[Aarm]
+Name=Mana Regeneration Aura
+
+[Barm]
+Bufftip=Mana Regeneration Aura
+Buffubertip="This unit is under the effects of Mana Regeneration Aura; it has an increased mana regeneration rate."
+
+//
+// below is a section by which aliased abilities, typically used by neutral hostile units,
+// can be denoted as different from normal abilities
+//
+
+[ACnr]
+Name=Life Regeneration Aura
+EditorSuffix= (Neutral)
+
+[ANre]
+Name=Life Regeneration Aura
+EditorSuffix= (Neutral)
+
+// meat wagon cargo hold
+[Sch2]
+Name=Cargo Hold
+EditorSuffix=(Meat Wagon)
+
+// transport cargo hold
+[Sch3]
+Name=Cargo Hold
+EditorSuffix= (Goblin Zeppelin)
+
+// Tank cargo hold
+[Sch4]
+Name=Cargo Hold
+EditorSuffix= (Tank)
+
+// Boat cargo hold
+[Sch5]
+Name=Cargo Hold
+EditorSuffix= (Ship)
+
+[Argd]
+Name=Return Gold
+
+[Argl]
+Name=Return Gold and Lumber
+
+[Arlm]
+Name=Return Lumber
+
+[Amnz]
+Name=AOE damage upon death
+EditorSuffix=(Big Mine)
+
+// animate dead
+[Aand]
+EditorSuffix=(Neutral Hostile)
+
+// anti-magic shield
+[ACam]
+Name=Anti-magic Shell
+Tip=A|cffffcc00n|rti-magic Shell
+Ubertip="Creates a barrier that stops spells from affecting a target unit. |nLasts <ACam,Dur1> seconds."
+Hotkey=N
+EditorSuffix=(Neutral Hostile)
+
+// brilliance aura
+[ACba]
+Name=Brilliance Aura
+Tip=Brilliance Aura
+Ubertip="Gives additional mana regeneration to nearby friendly units of <ACba,DataA1> mana per second."
+EditorSuffix=(Neutral Hostile)
+
+// bash
+[ACbh]
+Name=Bash
+EditorSuffix= (Neutral Hostile 1)
+Tip=Bash
+Ubertip="Gives a <ACbh,DataA1>% chance that an attack will do <ACbh,DataC1> bonus damage and stun an opponent for <ACbh,Dur1> seconds."
+
+// bash
+[ANbh]
+Name=Bash
+EditorSuffix= (Neutral Hostile 2)
+Tip=Bash
+Ubertip="Gives a <ANbh,DataA1>% chance that an attack will do <ANbh,DataC1> bonus damage and stun an opponent for <ANbh,Dur1> seconds."
+
+// bash
+[ANb2]
+Name=Maul
+EditorSuffix= (Neutral Hostile 3/Maul)
+Tip=Maul
+Ubertip="Gives a <ANb2,DataA1>% chance that an attack will do <ANb2,DataC1> bonus damage and stun an opponent for <ANb2,Dur1> seconds."
+
+
+
+// devotion aura
+[ACad]
+EditorSuffix=(Neutral Hostile)
+
+// disease cloud/plague
+[Aap1]
+EditorSuffix=(Abomination)
+
+[Aap2]
+EditorSuffix=(Plague Ward)
+
+[Aap3]
+EditorSuffix=(Neutral Hostile)
+
+[Aap4]
+EditorSuffix=(Neutral Hostile no damage)
+
+// trueshot aura
+[ACat]
+Name=Trueshot Aura
+Tip=Trueshot Aura
+Ubertip="An aura that gives nearby friendly units a <ACat,DataA1,%>% bonus damage to their ranged attacks."
+EditorSuffix=(Neutral Hostile)
+
+// Blight
+[Abli]
+Name=Blight
+
+// blight dispel
+[Abds]
+Name=Blight Dispel Small
+
+[Abdl]
+Name=Blight Dispel Large
+
+// blight growth
+[Abgs]
+Name=Blight Growth Small
+
+[Abgl]
+Name=Blight Growth Large
+
+// blizzard
+[ACbz]
+Name=Blizzard
+Tip=|cffffcc00B|rlizzard
+Ubertip="Calls down <ACbz,DataA1> freezing ice shard waves; each wave deals <ACbz,DataB1> damage to units in a small area."
+Hotkey=B
+EditorSuffix=(Neutral Hostile)
+
+
+// cannibalize
+[ACcn]
+Name=Cannibalize
+Tip=|cffffcc00C|rannibalize
+Ubertip="Consumes a nearby corpse to heal <ACcn,DataA1> hit points per second."
+Hotkey=C
+EditorSuffix=(Neutral Hostile)
+
+// carrion swarm
+[ACca]
+Name=Carrion Swarm
+Tip=|cffffcc00C|rarrion Swarm
+Ubertip="Sends a horde of bats to deal <ACca,DataA1> damage to each enemy land unit in a line, up to <ACca,DataB1> max damage."
+Hotkey=C
+EditorSuffix=(Neutral Hostile)
+
+// chain lightning
+[ACcl]
+Name=Chain Lightning
+Tip=|cffffcc00C|rhain Lightning
+Ubertip="Hurls a bolt of lightning that bounces up to <ACcl,DataB1> times, dealing <ACcl,DataA1> damage to the primary target. Each jump deals less damage."
+Hotkey=C
+EditorSuffix=(Neutral Hostile)
+
+// cold arrows
+[ACcw]
+Name=Cold Arrows
+Tip=|cffffcc00C|rold Arrows
+Ubertip="Adds bonus cold damage to an attack and slows target, but drains mana with each shot fired."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=C
+Unhotkey=C
+EditorSuffix=(Neutral Hostile)
+
+// cripple
+[ACcr]
+Name=Cripple
+Tip=|cffffcc00C|rripple
+Ubertip="Reduces movement speed by <ACcr,DataA1,%>%, attack rate by <ACcr,DataB1,%>%, and damage by <ACcr,DataC1,%>% of a target enemy unit. |nLasts <ACcr,Dur1> seconds."
+Hotkey=C
+EditorSuffix=(Neutral Hostile)
+
+// critical strike
+[ACct]
+Name=Critical Strike
+Tip=Critical Strike
+Ubertip="Gives a <ACct,DataA1>% chance to do <ACct,DataB1> times normal damage on an attack."
+EditorSuffix=(Neutral Hostile)
+
+// curse
+[ACcs]
+Name=Curse
+Tip=|cffffcc00C|rurse
+Ubertip="Curses a target enemy unit, causing it to have a <ACcs,DataA1,%>% chance to miss on an attack. |nLasts <ACcs,Dur1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting."
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting."
+Hotkey=C
+Unhotkey=C
+EditorSuffix=(Neutral Hostile)
+
+// cyclone
+[ACcy]
+Name=Cyclone
+Tip=|cffffcc00C|ryclone
+Ubertip="Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. |nLasts <ACcy,Dur1> seconds."
+Hotkey=C
+EditorSuffix=(Neutral Hostile)
+
+[SCc1]
+Name=Cyclone
+Tip=|cffffcc00C|ryclone
+Ubertip="Tosses a target enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. |nLasts <SCc1,Dur1> seconds."
+Hotkey=C
+EditorSuffix=(Cenarius)
+
+// goblin mine damage aoe
+[Amnx]
+Name=AOE damage upon death
+EditorSuffix=(Goblin Mine)
+
+// super death and decay
+[SNdd]
+Name=Death And Decay
+Tip=|cffffcc00D|reath And Decay
+Ubertip="Damages everything in its area of effect by <SNdd,DataA1,%>% of its base hit points per second. Also destroys trees. |nLasts <SNdd,Dur1> seconds."
+Hotkey=D
+Researchtip="Learn |cffffcc00D|reath And Decay"
+Researchubertip="Damages everything in its area of effect by <SNdd,DataA1,%>% of its base hit points per second. Also destroys trees."
+Researchhotkey=D
+EditorSuffix=(Neutral Hostile)
+
+// death coil
+[ACdc]
+Name=Death Coil
+Tip=Death |cffffcc00C|roil
+Ubertip="A coil of death that can heal a friendly Undead unit for <ACdc,DataA1> hit points, or deal half damage to an enemy living unit."
+Hotkey=C
+EditorSuffix=(Neutral Hostile)
+
+// detection
+[Adt1]
+EditorSuffix=(Sentry Ward)
+
+[Adt2]
+EditorSuffix=(Shade)
+
+[Adt3]
+EditorSuffix=(Gyrocopter)
+
+// dispel magic
+[Adsm]
+Name=Dispel Magic
+Tip=|cffffcc00D|rispel Magic
+UberTip="Removes all buffs from units in a target area. |n|cffffcc00Deals <Adsm,DataB1> damage to summoned units.|r"
+Hotkey=D
+EditorSuffix=(Neutral Hostile)
+
+// auto-dispel magic
+[ACdm]
+Name=Abolish Magic
+Tip=A|cffffcc00b|rolish Magic
+Ubertip="Dispels positive buffs from enemy units, and negative buffs from friendly units. |n|cffffcc00Deals <ACdm,DataB1> damage to summoned units.|r"
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=B
+Unhotkey=B
+EditorSuffix=(Neutral Hostile)
+
+// auto-dispel magic (button pos 1,2)
+[ACd2]
+Name=Abolish Magic
+Tip=A|cffffcc00b|rolish Magic
+Ubertip="Dispels positive buffs from enemy units, and negative buffs from friendly units. |n|cffffcc00Deals <ACdm,DataB1> damage to summoned units.|r"
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=B
+Unhotkey=B
+EditorSuffix="(Neutral Hostile, second position)"
+
+// divine shield
+[ACds]
+Name=Divine Shield
+Tip=Activate |cffffcc00D|rivine Shield
+Ubertip="An impenetrable shield surrounds this unit, protecting it from all damage and spells for <ACds,Dur1> seconds."
+Untip=Deactivate |cffffcc00D|rivine Shield
+Hotkey=D
+Unhotkey=D
+EditorSuffix=(Neutral Hostile)
+
+// super earthquake
+[SNeq]
+Name=Earthquake
+Tip=|cffffcc00E|rarthquake
+Ubertip="Makes the ground tremble and break, causing <SNeq,DataB1> damage per second to buildings and slowing units by <SNeq,DataC1,%>% within the area of effect. |nLasts <SNeq,Dur1> seconds."
+Hotkey=E
+Researchtip="Learn |cffffcc00E|rarthquake"
+Researchubertip="Makes the ground tremble and break, causing <SNeq,DataB1> damage per second to buildings and slowing units by <SNeq,DataC1,%>% within the area of effect. Lasts <SNeq,Dur1> seconds."
+Researchhotkey=E
+EditorSuffix=(Neutral Hostile)
+
+// endurance aura
+[SCae]
+Name=Endurance Aura
+Tip=Endurance Aura
+Ubertip="Increases nearby friendly units' movement speed by <SCae,DataA1,%>% and attack rate by <SCae,DataB1,%>%.","Increases nearby friendly units' movement speed by <SCae,DataA2,%>% and attack rate by <SCae,DataB2,%>%.","Increases nearby friendly units' movement speed by <SCae,DataA3,%>% and attack rate by <SCae,DataB3,%>%."
+EditorSuffix=(Neutral Hostile)
+
+// ensnare
+[ACen]
+Name=Ensnare
+Tip=|cffffcc00E|rnsnare
+Ubertip="Causes a target enemy unit to be bound to the ground so that it cannot move for <ACen,Dur1> seconds. Air units that are ensnared can be attacked as though they were land units."
+Hotkey=E
+EditorSuffix=(Neutral Hostile)
+
+// entangling roots
+[Aenr]
+Name=Entangling Roots
+EditorSuffix= (Neutral Hostile 1)
+Tip=|cffffcc00E|rntangling Roots
+Ubertip="Causes roots to burst from the ground, immobilizing a target enemy unit for <Aenr,Dur1> seconds, and dealing <Aenr,DataA1> damage per second."
+Hotkey=E
+
+// evasion
+[ACev]
+Name=Evasion
+Tip=Evasion
+Ubertip="Gives a <ACev,DataA1,%>% percent chance to avoid an attack."
+EditorSuffix=(Neutral Hostile)
+
+[ACes]
+Name=Evasion
+Tip=Evasion
+Ubertip="Gives a <ACes,DataA1,%>% percent chance to avoid an attack."
+EditorSuffix=(Neutral Hostile 100%)
+
+// faerie fire
+[ACff]
+Name=Faerie Fire
+Tip=Fae|cffffcc00r|rie Fire
+Ubertip="Reduces a target enemy unit's armor by <ACff,DataA1> and gives vision of that unit. |nLasts <ACff,Dur1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=R
+Unhotkey=R
+EditorSuffix=(Neutral Hostile)
+
+// feral spirit
+[ACsf]
+Name=Feral Spirit
+Tip=Feral Spiri|cffffcc00t|r
+Ubertip="Summons <ACsf,DataB1> Spirit Wolf companions. |nLasts <ACsf,Dur1> seconds. |n|n|cffffcc00Attacks land units.|r"
+Hotkey=T
+EditorSuffix=(Neutral Hostile)
+
+// spirit pig
+[ACs9]
+Name=Feral Spirit
+Tip=Feral Spiri|cffffcc00t|r
+Ubertip="Summons <ACs9,DataB1> Spirit Pig companions. |nLasts <ACs9,Dur1> seconds. |n|n|cffffcc00Attacks land units.|r"
+Hotkey=T
+EditorSuffix="(Neutral Hostile, Pig)"
+
+// firebolt
+[ACfb]
+Name=Firebolt
+Tip=Fire|cffffcc00b|rolt
+Ubertip="Hurls a fiery bolt that stuns a target enemy unit."
+Hotkey=B
+EditorSuffix=(Neutral Hostile)
+
+// force of nature
+[ACfr]
+Name=Force of Nature
+Tip=|cffffcc00F|rorce of Nature
+Ubertip="Converts a small area of trees into <ACfr,DataA1> Treants. |nLasts <ACfr,Dur1> seconds. |n|n|cffffcc00Attacks land units.|r"
+Hotkey=F
+EditorSuffix=(Neutral Hostile)
+
+// frost armor (old, creep)
+[ACfa]
+Name=Frost Armor
+Tip=|cffffcc00F|rrost Armor
+Ubertip="Creates a shield of frost around a target friendly unit. The shield adds <ACfa,DataB1> armor and slows melee units that attack it for <ACfa,Dur1> seconds. |nLasts <ACfa,DataA1> seconds."
+Hotkey=F
+EditorSuffix= (Neutral Hostile)
+
+// frost armor (new, creep, autocast)
+[ACf2]
+Name=Frost Armor
+Tip=|cffffcc00F|rrost Armor
+Ubertip="Creates a shield of frost around a target friendly unit. The shield adds <ACfa,DataB1> armor and slows melee units that attack it for <ACfa,Dur1> seconds. |nLasts <ACfa,DataA1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=F
+EditorSuffix= (Autocast) (Neutral Hostile)
+
+// frost armor (autocast)
+[ACfu]
+Name=Frost Armor
+Tip=|cffffcc00F|rrost Armor
+Ubertip="Creates a shield of frost around a target friendly unit. The shield adds <ACfu,DataB1> armor and slows melee units that attack it for <ACfu,Dur1> seconds. |nLasts <ACfu,DataA1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=F
+EditorSuffix= (Autocast) (Neutral Hostile)
+
+// frost nova
+[ACfn]
+Name=Frost Nova
+Tip=Frost |cffffcc00N|rova
+Ubertip="Blasts enemy units with a wave of frost that deals <ACfn,DataB1> damage to the target, and <ACfn,DataA1> nova damage. Cold damage slows units' movement and attack rate for <ACfn,Dur1> seconds."
+Hotkey=N
+EditorSuffix=(Neutral Hostile)
+
+// archimonde's ghouls harvest lumber
+[Ahr2]
+Name=Harvest
+Tip=|cffffcc00G|rather
+Ubertip="Harvests lumber from trees."
+Untip=R|cffffcc00e|rturn Resources
+Unubertip="Return the carried lumber to the nearest building capable of receiving it."
+Hotkey=G
+Unhotkey=E
+EditorSuffix=(Archimonde's Ghouls lumber)
+
+// goblin shredder's harvest lumber
+[Ahr3]
+Name=Harvest
+Tip=|cffffcc00G|rather
+Ubertip="Harvests lumber from trees."
+Untip=R|cffffcc00e|rturn Resources
+Unubertip="Return the carried lumber to the nearest building capable of receiving it."
+Hotkey=G
+Unhotkey=E
+EditorSuffix=(Goblin Shredders lumber)
+
+// heal
+[Anh1]
+Name=Heal
+EditorSuffix=(Neutral Hostile 2)
+Tip=H|cffffcc00e|ral
+Ubertip="Heals a target friendly non-mechanical wounded unit."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=E
+Unhotkey=E
+
+[Anh2]
+Name=Heal
+EditorSuffix=(Neutral Hostile 3)
+Tip=H|cffffcc00e|ral
+Ubertip="Heals a target friendly non-mechanical wounded unit."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=E
+Unhotkey=E
+
+// healing ward
+[AChd]
+EditorSuffix=(Neutral Hostile)
+
+// immolation
+[ACim]
+Name=Immolation
+Tip=Activate Immo|cffffcc00l|ration
+Ubertip="Activate Immolation to engulf this unit in flames, causing <ACim,DataA1> damage per second to nearby enemy land units. |nDrains mana until deactivated."
+Unubertip="Deactivate Immolation to stop draining mana."
+Hotkey=L
+Untip=Deactivate Immo|cffffcc00l|ration
+Unhotkey=L
+EditorSuffix=(Neutral Hostile)
+
+[ACma]
+EditorSuffix=(always on)
+
+// inner fire
+[ACif]
+Name=Inner Fire
+Tip=Inner |cffffcc00F|rire
+Ubertip="Increases a target friendly unit's damage by <ACif,DataA1,%>% and armor by <ACif,DataB1>. |nLasts <ACif,Dur1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=F
+Unhotkey=F
+EditorSuffix=(Neutral Hostile)
+
+// lightning shield
+[ACls]
+Name=Lightning Shield
+Tip=|cffffcc00L|rightning Shield
+Ubertip="Forms a shield of electricity around a target unit, dealing <ACls,DataA1> damage per second to units around it. |nLasts <ACls,Dur1> seconds."
+Hotkey=L
+EditorSuffix=(Neutral Hostile)
+
+// load, orc burrow
+[Sloa]
+Name=Load
+Tip=|cffffcc00L|road
+Ubertip="Loads a targeted friendly land unit."
+Hotkey=L
+EditorSuffix=(Orc Burrow)
+
+// load ships
+[Slo3]
+Name=Load
+Tip=|cffffcc00L|road
+Ubertip="Loads a targeted friendly land unit."
+Hotkey=L
+EditorSuffix= (Ships)
+
+// magic immunity
+[ACmi]
+Name=Spell Immunity
+Tip=Spell Immunity
+Ubertip="Renders this unit immune to all spells."
+EditorSuffix=(Neutral Hostile)
+
+[ACm2]
+Name=Spell Immunity
+Tip=Spell Immunity
+Ubertip="Renders this unit immune to all spells."
+EditorSuffix=(Archimonde)
+
+[ACm3]
+Name=Spell Immunity
+Tip=Spell Immunity
+Ubertip="Renders this unit immune to all spells."
+EditorSuffix=(Dragon)
+
+// polymorph
+[ACpy]
+Name=Polymorph
+Tip=Polym|cffffcc00o|rrph
+Ubertip="Turns a target enemy unit into a sheep. The targeted unit retains its hit points and armor, but cannot attack. |nCannot be cast on Heroes or summoned units.|nLasts <ACpy,Dur1> seconds."
+Hotkey=O
+EditorSuffix=(Neutral Hostile)
+
+// possession
+[ACps]
+Name=Possession
+Tip=P|cffffcc00o|rssession
+Ubertip="Displaces the soul of a target unit, giving you control of it, but destroying the caster's body. |nPossession cannot be used on flying units, Heroes, or creeps above level <ACps,DataA1>."
+Hotkey=O
+EditorSuffix=(Neutral Hostile)
+
+// pulverize
+[ACpv]
+Name=Pulverize
+Tip=Pulverize
+Ubertip="Gives a <ACpv,DataA1>% chance that an attack will deal <ACpv,DataB1> damage to nearby units."
+EditorSuffix=(Neutral Hostile)
+
+// purge
+[ACpu]
+Name=Purge
+Tip=Pur|cffffcc00g|re
+Ubertip="Removes all buffs from a target unit, and slows its movement speed by a factor of <ACpu,DataA1>. Purged units will slowly regain their movement speed over <ACpu,Dur1> seconds. |n|cffffcc00Deals <ACpu,DataC1> damage to summoned units.|r"
+Hotkey=G
+EditorSuffix=(Neutral Hostile)
+
+// rain of fire
+[ACrf]
+Name=Rain of Fire
+EditorSuffix= (Neutral Hostile 2)
+Tip=Rain of |cffffcc00F|rire
+Ubertip="Calls down waves of fire that damage units in an area. Each wave deals <ACrf,DataB1> damage. |nLasts for <ACrf,DataA1> waves."
+Hotkey=F
+
+// raise dead
+[ACrd]
+Name=Raise Dead
+Tip=|cffffcc00R|raise Dead
+Untip="|cffc3dbffRight-click to activate auto-casting."
+Ubertip="Raises <ACrd,DataA1> skeletons from a corpse."
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting."
+Hotkey=R
+Unhotkey=R
+EditorSuffix=(Neutral Hostile)
+
+// rejuvenation
+[ACrj]
+Name=Rejuvenation
+Tip=R|cffffcc00e|rjuvenation
+Ubertip="Heals a target friendly unit for <ACrj,DataA1> hit points over <ACrj,Dur1> seconds."
+Hotkey=E
+EditorSuffix=(Neutral Hostile)
+
+// human repair
+[Ahrp]
+Name=Repair
+Tip=|cffffcc00R|repair
+Ubertip="Repairs mechanical units and structures at the cost of resources."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=R
+Unhotkey=R
+EditorSuffix=(Human)
+
+// roar
+[ACro]
+Name=Roar
+Tip=|cffffcc00R|roar
+Ubertip="Gives nearby friendly units a <ACro,DataA1,%>% bonus to damage. |nLasts <ACro,Dur1> seconds."
+Hotkey=R
+EditorSuffix=(Neutral Hostile)
+
+// roar skeletal orc champion
+[ACr1]
+Name=Roar
+Tip=|cffffcc00R|roar
+Ubertip="Gives nearby friendly units a <ACr1,DataA1,%>% bonus to damage. |nLasts <ACr1,Dur1> seconds."
+Hotkey=R
+EditorSuffix= (Skeletal Orc Champion)
+
+// root
+[Aro1]
+Name=Root
+Tip=|cffffcc00R|root
+Ubertip="Burrows the Ancient's roots into the ground, rendering it immobile, but allowing it to build units. For the Ancient Protector, this allows it to hurl enormous rocks through the air to damage enemy units. Also gives the Ancient Fortified armor."
+Hotkey=R
+Untip=Up|cffffcc00r|root
+Unubertip="Allows the Ancient to pull itself up out of the ground so that it can move and engage units in melee combat. Also gives the Ancient Heavy armor."
+Unhotkey=R
+EditorSuffix=(Ancients)
+
+[Aro2]
+Name=Root
+Tip=|cffffcc00R|root
+Ubertip="Burrows the Ancient's roots into the ground, rendering it immobile, but allowing it to build units. For the Ancient Protector, this allows it to hurl enormous rocks through the air to damage enemy units. Also gives the Ancient Fortified armor."
+Hotkey=R
+Untip=Up|cffffcc00r|root
+Unubertip="Allows the Ancient to pull itself up out of the ground so that it can move and engage units in melee combat. Also gives the Ancient Heavy armor."
+Unhotkey=R
+EditorSuffix=(Ancient Protector)
+
+// searing arrows
+[ACsa]
+Name=Searing Arrows
+Tip=Sea|cffffcc00r|ring Arrows
+Ubertip="Adds <ACsa,DataA1> bonus fire damage to an attack against enemies, but drains mana with each shot fired."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=R
+Unhotkey=R
+EditorSuffix=(Neutral Hostile)
+
+// sell items
+[Asid]
+Name=Sell Items
+Tip=Sell Items
+Ubertip="Permits the sale of items."
+
+// sell units
+[Asud]
+Name=Sell Units
+Tip=Sell Units
+Ubertip="Permits the sale of units."
+
+// shockwave
+[ACsh]
+Name=Shockwave
+Tip=Shock|cffffcc00w|rave
+Ubertip="A wave of force that ripples outward, causing <ACsh,DataA1> damage to land units in a line."
+Hotkey=W
+EditorSuffix=(Neutral Hostile)
+
+[ACst]
+Name=Shockwave
+Tip=Shock|cffffcc00w|rave
+Ubertip="A wave of force that ripples outward, causing <ACst,DataA1> damage to land units in a line."
+Hotkey=W
+EditorSuffix=(Trap)
+
+// sleep
+[ACsl]
+Name=Sleep
+Tip=S|cffffcc00l|reep
+Ubertip="Puts a target enemy unit to sleep for <ACsl,Dur1> seconds. A sleeping unit can be awoken by attacking it."
+Hotkey=L
+EditorSuffix=(Neutral Hostile)
+
+// slow
+[ACsw]
+EditorSuffix=(Neutral Hostile)
+
+// thorns aura
+[ACah]
+Name=Thorns Aura
+Tip=Thorns Aura
+Ubertip="An aura that gives nearby friendly units a damage shield, which deals <ACah,DataA1,%>% of an enemy unit's attack damage back to it."
+EditorSuffix=(Neutral Hostile)
+
+// unholy aura
+[ACua]
+Name=Unholy Aura
+Tip=Unholy Aura
+Ubertip="Increases nearby friendly units' movement speed by <ACua,DataA1,%>% and life regeneration rate by <ACua,DataB1,%>%."
+EditorSuffix=(Neutral Hostile)
+
+// unholy frenzy
+[ACuf]
+Name=Unholy Frenzy
+Tip=|cffffcc00U|rnholy Frenzy
+Ubertip="Increases the attack rate of a target unit by <ACuf,DataA1,%>%, but drains <ACuf,DataB1> hit points per second. |nLasts <ACuf,Dur1> seconds."
+Hotkey=U
+EditorSuffix=(Neutral Hostile)
+
+// vampiric attack
+[SCva]
+Name=Life Steal
+EditorSuffix= (Frostmourne)
+
+// vampiric aura
+[ACvp]
+Name=Vampiric Aura
+Tip=Vampiric Aura
+Ubertip="Nearby friendly melee units gain <ACvp,DataA1,%>% of their attack damage when they hit enemy units."
+EditorSuffix=(Neutral Hostile)
+
+// war stomp
+[Awrs]
+Name=War Stomp
+EditorSuffix= (Neutral Hostile 1)
+Tip=War S|cffffcc00t|romp
+Ubertip="Slams the ground, dealing <Awrs,DataA1> damage to nearby enemy land units and stunning them for <Awrs,Dur1> seconds."
+Hotkey=T
+EditorSuffix=(Neutral Hostile)
+
+// war stomp (Ancient Hydra)
+[Awrh]
+Name=War Stomp
+EditorSuffix= (Neutral Hostile 2)
+Tip=War S|cffffcc00t|romp
+Ubertip="Slams the ground, dealing <Awrh,DataA1> damage to nearby enemy land units and stunning them for <Awrh,Dur1> seconds."
+Hotkey=T
+EditorSuffix=(Neutral Hostile)
+
+// war stomp (Sea Giant)
+[Awrg]
+Name=War Stomp
+EditorSuffix= (Neutral Hostile 3)
+Tip=War S|cffffcc00t|romp
+Ubertip="Slams the ground, dealing <Awrg,DataA1> damage to nearby enemy land units and stunning them for <Awrg,Dur1> seconds."
+Hotkey=T
+EditorSuffix=(Neutral Hostile)
+
+// Pulverize (sea giant)
+[ACpv]
+Name=Pulverize
+Tip=Pulverize
+Ubertip="Gives a <ACpv,DataA1>% chance that an attack will deal <ACpv,DataB1> damage to nearby units."
+
+// venom spears
+[ACvs]
+Name=Envenomed Weapons
+Tip=Envenomed Weapons
+Ubertip="Deals <ACvs,DataA1> poison damage per second. |nLasts <ACvs,Dur1> seconds."
+EditorSuffix=(Neutral Hostile)
+
+// web
+[ACwb]
+Name=Web
+Tip=|cffffcc00W|reb
+Untip="|cffc3dbff|cffc3dbffRight-click to activate auto-casting."
+Ubertip="Binds a target enemy air unit in webbing, forcing it to the ground. Webbed units can be hit as though they were land units. |nLasts <ACwb,Dur1> seconds."
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting."
+Hotkey=W
+Unhotkey=W
+EditorSuffix=(Neutral Hostile)
+
+// Crushing Wave
+[ACcv]
+Name=Crushing Wave
+Tip=|cffffcc00C|rrushing Wave 
+Ubertip="Sends a gigantic wave which deals <ACcv,DataA1> damage to each enemy land unit in a line, up to <ACcv,DataB1> max damage."
+Hotkey=C
+
+// Crushing Wave (dragon turtle)
+[ACc2]
+Name=Crushing Wave
+Tip=|cffffcc00C|rrushing Wave
+Ubertip="Sends a gigantic wave which deals <ACc2,DataA1> damage to each enemy land unit in a line, up to <ACc2,DataB1> max damage."
+Hotkey=C
+EditorSuffix=(Lesser)
+
+// Crushing Wave (lesser version)
+[ACc3]
+Name=Crushing Wave
+Tip=|cffffcc00C|rrushing Wave
+Ubertip="Sends a gigantic wave which deals <ACc3,DataA1> damage to each enemy land unit in a line, up to <ACc3,DataB1> max damage."
+Hotkey=C
+EditorSuffix=(Lesser)
+
+// summon sea elemental
+[ACwe]
+Name=Summon Sea Elemental
+Tip=Summon Sea |cffffcc00E|rlemental
+Ubertip="Summons a powerful Sea Elemental with <nsel,realHP> hit points that does <nsel,mindmg1> - <nsel,maxdmg1> damage. |nLasts <ACwe,Dur1> seconds."
+Hotkey=E
+
+// neutral interact
+[Anei]
+Name=Select User
+Tip=Select |cffffcc00U|rser
+Hotkey=U
+
+// permanent flyer immolation
+[Apmf]
+Name=Phoenix Fire
+Tip=Phoenix Fire
+EditorSuffix=(flyer)
+Ubertip="Burns nearby enemy flying units for <Apmf,DataA1> points of damage per second."
+
+// neutral version of resistant skin
+[ACrk]
+Name=Resistant Skin
+EditorSuffix= (Neutral Hostile 1)
+Tip=Resistant Skin
+Ubertip="Reduces the duration of negative spells and renders the unit immune to certain spells."
+
+// neutral version of resistant skin (altered button pos)
+[ACsk]
+Name=Resistant Skin
+EditorSuffix= (Neutral Hostile 2)
+Tip=Resistant Skin
+Ubertip="Reduces the duration of negative spells and renders the unit immune to certain spells."
+
+
+// Forked Lightning
+[ANfl]
+Name=Forked Lightning
+Tip=|cffffcc00F|rorked Lightning - [|cffffcc00Level 1|r],|cffffcc00F|rorked Lightning - [|cffffcc00Level 2|r],|cffffcc00F|rorked Lightning - [|cffffcc00Level 3|r]
+Ubertip="Calls forth a cone of lightning on a target enemy unit, hitting up to <ANfl,DataB1> enemy units for <ANfl,DataA1> damage.","Calls forth a cone of lightning from the Sea Witch, hitting up to <ANfl,DataB2> enemy units for <ANfl,DataA2> damage.","Calls forth a cone of lightning from the Sea Witch, hitting up to <ANfl,DataB3> enemy units for <ANfl,DataA3> damage."
+Hotkey=F
+Researchtip="Learn |cffffcc00F|rorked Lightning - [|cffffcc00Level %d|r]"
+Researchubertip="Calls forth a cone of lightning to damage enemies. |n|n|cffffcc00Level 1|r - <ANfl,DataA1> damage per unit. |n|cffffcc00Level 2|r - <ANfl,DataA2> damage per unit. |n|cffffcc00Level 3|r - <ANfl,DataA3> damage per unit."
+Researchhotkey=F
+
+// Forked Lightning
+[ACfl]
+Name=Forked Lightning
+EditorSuffix= (Neutral Hostile)
+Tip=Fo|cffffcc00r|rked Lightning
+Ubertip="Calls forth a cone of lightning on a target enemy unit, hitting up to <ACfl,DataB1> enemy units for <ACfl,DataA1> damage."
+Hotkey=R
+
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BNpi]
+EditorName=Permanent Immolation
+EditorSuffix= (Neutral Hostile 1)
+
+[Bpig]
+EditorName=Permanent Immolation
+EditorSuffix= (Neutral Hostile 2)
+
+[BNsl]
+EditorName=Soul Preservation
+
+[BNst]
+EditorName=Stampede
+
+[BNrf]
+EditorName=Rain of Fire (Area)
+
+[Bfre]
+EditorName=Freeze
+
+[Bsha]
+EditorName=Shared Vision
+
+[Btdg]
+EditorName=Tornado Damage
+
+[Btsa]
+EditorName=Tornado Spin (Area)
+
+[ANmd]
+EditorName=Monsoon
+
+[XErc]
+EditorName=Rain of Chaos (Effect)
+
+[XErf]
+EditorName=Rain of Fire (Effect)
+
+[XIct]
+EditorName=Item Change Time of Day
+
+[XNmo]
+EditorName=Monsoon (Effect)
+
+[BNva]
+EditorName=Volcano (Area)
+
+[XNvc]
+EditorName=Volcano (Effect)
+
+[XNcs]
+EditorName=Cluster Rockets (Effect)
+
+[XNhs]
+EditorName=Healing Spray (Effect)
