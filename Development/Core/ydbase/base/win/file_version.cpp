@@ -11,57 +11,56 @@ namespace base { namespace win {
 	file_version::file_version() 
 		: fixed_file_info_(nullptr)
 		, vaild_(false)
+		, current_(0)
+		, translation_size_(0)
 	{ }
 
 	file_version::file_version(const wchar_t* module_path)
 		: version_info_()
 		, vaild_(create(module_path))
+		, current_(0)
+		, translation_size_(0)
 	{ }
 
 	file_version::file_version(HMODULE module_handle)
 		: version_info_()
 		, vaild_(create(module_handle))
+		, current_(0)
+		, translation_size_(0)
 	{ }
 
 	const wchar_t* file_version::operator[] (const wchar_t* key) const
 	{
 		if (!vaild_)
 			return L"";
-
-		try
+		const wchar_t* value = nullptr;
+		if (get_value(translation_[current_].language, translation_[current_].code_page, key, &value))
 		{
-			const wchar_t* value = nullptr;
-			if (get_value(translation_.language, translation_.code_page ,key, &value))
-			{
-				return value;
-			}
-
-			if (get_value(::GetUserDefaultLangID(), translation_.code_page ,key, &value))
-			{
-				return value;
-			}
-
-			if (get_value(translation_.language, ansi_code_page ,key, &value))
-			{
-				return value;
-			}
-
-			if (get_value(::GetUserDefaultLangID(), ansi_code_page ,key, &value))
-			{
-				return value;
-			}
+			return value;
 		}
-		catch (...)
-		{
-			assert(false);
-		}
-
 		return L"";
 	}
 
 	VS_FIXEDFILEINFO* file_version::fixed_file_info() const
 	{
 		return fixed_file_info_; 
+	}
+
+	bool file_version::select_language(WORD langid)
+	{
+		for (size_t i = 0; i < translation_size_; ++i) {
+			if (translation_[i].language == langid) {
+				current_ = i;
+				return true;
+			}
+		}
+		for (size_t i = 0; i < translation_size_; ++i) {
+			if (translation_[i].language == 0) {
+				current_ = i;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	bool file_version::create(HMODULE module_handle)
@@ -84,19 +83,23 @@ namespace base { namespace win {
 		if (!::VerQueryValueW(version_info_.get(), L"\\", (LPVOID*)&fixed_file_info_, &length))
 			return false;
 
-		TRANSLATION* translate_ptr = nullptr;
-		if (::VerQueryValueW(version_info_.get(), L"\\VarFileInfo\\Translation", (LPVOID*)&translate_ptr, &length) 
-			&& (length >= sizeof TRANSLATION))
-		{
-			translation_ = *(TRANSLATION*)translate_ptr;
-		}
-		else
-		{
-			translation_.language  = ::GetUserDefaultLangID();
-			translation_.code_page = ansi_code_page;
+		if (fixed_file_info()->dwSignature != VS_FFI_SIGNATURE) {
+			return false;
 		}
 
-		return fixed_file_info()->dwSignature == VS_FFI_SIGNATURE;
+		TRANSLATION* translate_ptr = nullptr;
+		if (!::VerQueryValueW(version_info_.get(), L"\\VarFileInfo\\Translation", (LPVOID*)&translate_ptr, &length) 
+			|| (length < sizeof TRANSLATION))
+		{
+			return false;
+		}
+
+		current_ = 0;
+		translation_size_ = length / sizeof TRANSLATION;
+		translation_.reset(new TRANSLATION[translation_size_]);
+		memcpy(translation_.get(), translate_ptr, translation_size_ * sizeof TRANSLATION);
+		select_language(::GetUserDefaultLangID());
+		return true;
 	}
 
 	bool file_version::get_value(WORD language, WORD code_page, const wchar_t* key, const wchar_t** value_ptr) const

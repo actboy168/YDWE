@@ -491,6 +491,7 @@ void CMainWindow::InitPluginUI()
 						&& (!base::path::equal(itr->path().filename(), L"yd_loader.dll")))
 					{
 						base::win::file_version fv(itr->path().c_str());
+						fv.select_language(base::i18n::v2::get_languageid());
 
 						DuiLib::CCheckBoxUI* node = new DuiLib::CCheckBoxUI;
 						m_pWar3PluginList->Add(node);

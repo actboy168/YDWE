@@ -32,9 +32,21 @@ BEGIN
             VALUE "ProductName", YDWE_VERSION_PRODUCTNAME
             VALUE "ProductVersion", YDWE_VERSION_NUMBER_STRING
         END
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", YDWE_VERSION_COMMENTS
+            VALUE "CompanyName", YDWE_VERSION_COMPANYNAME
+            VALUE "FileDescription", YDWE_VERSION_FILEDESCRIPTION_409
+            VALUE "FileVersion", YDWE_VERSION_NUMBER_STRING
+            VALUE "InternalName", YDWE_VERSION_INTERNALNAME
+            VALUE "LegalCopyright", YDWE_VERSION_LEGALCOPYRIGHT
+            VALUE "OriginalFilename", YDWE_VERSION_ORIGUINALFILENAME
+            VALUE "ProductName", YDWE_VERSION_PRODUCTNAME
+            VALUE "ProductVersion", YDWE_VERSION_NUMBER_STRING
+        END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x0, 1200
+        VALUE "Translation", 0x0, 1200, 0x0409, 1200
     END
 END

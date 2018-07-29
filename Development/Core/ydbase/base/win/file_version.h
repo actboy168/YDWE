@@ -19,6 +19,7 @@ namespace win {
 		file_version(HMODULE module_handle);
 		const wchar_t* operator[] (const wchar_t* key) const;
 		VS_FIXEDFILEINFO* fixed_file_info() const;
+		bool select_language(WORD langid);
 
 	protected:
 		bool create(const wchar_t* module_path);
@@ -31,10 +32,12 @@ namespace win {
 			WORD code_page;
 		};
 
-		TRANSLATION translation_;
 		VS_FIXEDFILEINFO* fixed_file_info_;
+		size_t translation_size_;
+		size_t current_;
 #pragma warning(push)
 #pragma warning(disable:4251)
+		std::unique_ptr<TRANSLATION[]> translation_;
 		std::unique_ptr<uint8_t[]> version_info_;
 #pragma warning(pop)
 		bool vaild_;
