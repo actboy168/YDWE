@@ -151,5 +151,8 @@ namespace base { namespace i18n { namespace v2 {
 		if (set_language(get_system_language(), false)) {
 			return;
 		}
+		if (set_language(L"zh-CN", false)) {
+			return;
+		}
 	}
 }}}
