@@ -1,38 +1,4 @@
-#include <YDWEVersion.h>
-#include <windows.h>
-
-#ifndef YDWE_VERSION_COMMENTS
-#define YDWE_VERSION_COMMENTS          ""
-#endif
-
-#ifndef YDWE_VERSION_COMPANYNAME
-#define YDWE_VERSION_COMPANYNAME       "www.ydwe.net"
-#endif
-
-#ifndef YDWE_VERSION_FILEDESCRIPTION
-#define YDWE_VERSION_FILEDESCRIPTION   ""
-#endif
-
-#ifndef YDWE_VERSION_INTERNALNAME
-#define YDWE_VERSION_INTERNALNAME      "YDWE"
-#endif
-
-#ifndef YDWE_VERSION_LEGALCOPYRIGHT
-#define YDWE_VERSION_LEGALCOPYRIGHT    "Copyright (C) 2009~2013, Aeris, Actboy168"
-#endif
-
-#ifndef YDWE_VERSION_ORIGUINALFILENAME
-#define YDWE_VERSION_ORIGUINALFILENAME ""
-#endif
-
-#ifndef YDWE_VERSION_PRODUCTNAME
-#define YDWE_VERSION_PRODUCTNAME       "YDWE"
-#endif
-
-#define VERSION_STR1(a,b,c,d)      #a ", " #b ", " #c ", " #d
-#define VERSION_STR2(a,b,c,d)      VERSION_STR1(a,b,c,d)
-#define YDWE_VERSION_NUMBER        YDWE_VERSION_MAJOR,YDWE_VERSION_MINOR,YDWE_VERSION_REVISED,YDWE_VERSION_BUILD
-#define YDWE_VERSION_NUMBER_STRING VERSION_STR2(YDWE_VERSION_MAJOR,YDWE_VERSION_MINOR,YDWE_VERSION_REVISED,YDWE_VERSION_BUILD)
+#include <YDWEVersionCommon.h>
 
 /////////////////////////////////////////////////////////////////////////////
 //

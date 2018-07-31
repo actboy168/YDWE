@@ -1,0 +1,1061 @@
+// Item abilities are generally activated via the inventory UI and not through their own hotkeys
+
+// Rune of the Watcher
+[APwt]
+Name=Rune of the Watcher
+
+// Blink (item)
+[AIbk]
+Name=Blink (Item Version)
+
+// One time permanent strength gain ability, usually on a Tome
+[AIsm]
+Name=Item Strength Gain
+
+// One time permanent agility gain ability, usually on a tome
+[AIam]
+Name=Item Agility Gain
+
+// short duration single target speed bonus
+[AIsp]
+Name=Item Temporary Speed Bonus
+
+// continuous Attack Bonus
+[AIat]
+Name=Item Damage Bonus
+EditorSuffix=(+3)
+
+// continuous Defense Bonus
+[AIde]
+Name=Item Armor Bonus
+
+// area of effect damage of destructables
+[AIdm]
+Name=Item Area tree/wall damage
+
+// One time permanent hero experience gain, usually on a tome
+[AIem]
+Name=Item Experience Gain
+
+[AIe2]
+Name=Item Experience Gain
+EditorSuffix= (Greater)
+
+// Cloud of Fog
+[AIfg]
+Name=Cloud of Fog
+Tip=|cffffcc00C|rloud of Fog
+Ubertip="Creates a small cloud that stops buildings with ranged attacks that are within it from attacking. |nLasts <Aclf,Dur1> seconds."
+Hotkey=C
+
+// Flag Ability, to show something on a hero carrying the flag
+[AIfl]
+Name=Item Capture The Flag
+
+// human flag
+[AIfm]
+Name=Item Capture The Flag
+EditorSuffix=(Human)
+
+// night elf flag
+[AIfn]
+Name=Item Capture The Flag
+EditorSuffix=(Night Elf)
+
+// orc flag
+[AIfo]
+Name=Item Capture The Flag
+EditorSuffix=(Orc)
+
+// undead flag
+[AIfe]
+Name=Item Capture The Flag
+EditorSuffix=(Undead)
+
+// One time permanent hero level gain, usually on a tome
+[AIlm]
+Name=Item Level Gain
+
+// One time permanent intelligence gain, usually on a Tome
+[AIim]
+Name=Item Intelligence Gain
+
+// One time permanent int/agi/str gain
+[AIxm]
+Name=Item Int/Agi/Str gain
+
+// single shot one target healing (potions, typically)
+[AIhe]
+Name=Item Healing
+
+[AIhx]
+Name=Item Healing
+EditorSuffix=(least)
+
+// single shot group area effect healing (scrolls, typically)
+[AIha]
+Name=Item Area Healing
+
+[AIhb]
+Name=Item Area Healing
+EditorSuffix= (Greater)
+
+// single shot group area effect healing (powerup, lesser)
+[APh1]
+Name=Powerup Area Healing Lesser
+
+// single shot group area effect healing (powerup)
+[APh2]
+Name=Powerup Area Healing 
+
+// single shot group area effect healing (powerup, greater)
+[APh3]
+Name=Powerup Area Healing Greater
+
+
+// short duration single target invisibility (potion)
+[AIvi]
+Name=Item Temporary Invisibility
+
+// short duration single target invulnerability (potion)
+[AIvu]
+Name=Item Temporary Invulnerability
+
+[AIvl]
+Name=Item Temporary Invulnerability
+EditorSuffix= (Lesser)
+
+// single shot one target mana regain (potions, typically)
+[AIma]
+Name=Item Mana Regain
+
+// single shot group area effect mana regain (scrolls, typically)
+[AImr]
+Name=Item Area Mana Regain
+
+// single shot group area effect mana regain (rune)
+[APmr]
+Name=Rune Area Mana Regain
+
+// single shot group area effect mana regain (rune, greater)
+[APmg]
+Name=Rune Area Mana Regain Greater
+
+// single shot one target life/mana restore (potion)
+[AIre]
+Name=Item Heal/Mana Regain
+
+// single shot group area effect life/mana restore (scroll)
+[AIra]
+Name=Item Area Heal/Mana Regain
+
+// single shot group area effect life/mana restore (rune)
+[APra]
+Name=Rune Area Heal/Mana Regain
+
+// area of effect application of a defensive buff (scroll of protection)
+[AIda]
+Name=Item Temporary Area Armor Bonus
+
+// area of effect application of a defensive buff (scroll of protection) (with healing)
+[AIdb]
+Name=Item Temporary Area Armor Bonus
+EditorSuffix= (with Life & Mana Healing)
+
+// buff that AIda applies
+[Bdef]
+Bufftip=Scroll of Protection
+Buffubertip="This unit is affected by a Scroll of Protection; its armor is temporarily increased."
+
+// area of effect detection (crystal ball)
+[AIta]
+Name=Item Area Detection
+
+// continuous Mana regeneration (ring)
+[AIrm]
+Name=Item Mana Regeneration
+
+[AIfi]
+Name=Item Firebolt
+
+// Illusion generator
+[AIil]
+Name=Item Illusions
+
+[BIil]
+Bufftip=Illusion
+Buffubertip="This unit is an illusion; it takes extra damage from enemies."
+
+// Dispel effect
+[AIdi]
+Name=Item Dispel
+
+[AIds]
+Name=Item Dispel
+EditorSuffix= (with cooldown)
+
+// Dispel effect (powerup)
+[APdi]
+Name=Powerup Dispel
+
+// Hero attacks get fire damage bonus, persistent, Orb of Fire
+[AIfb]
+Name=Item Attack Fire Bonus
+
+// Hero attacks get lightning damage bonus, persistent, Orb of Lightning
+[AIlb]
+Name=Item Attack Lightning Bonus
+
+// Hero attacks get black arrow bonus
+[AIdf]
+Name=Item Attack Black Arrow Bonus
+
+// purge portion of lightning orb
+[AIlp]
+Name=Item Purge
+EditorSuffix= (1)
+
+// Hero attacks get frost damage bonus, persistent, Orb of Frost
+[AIob]
+Name=Item Attack Frost Bonus
+
+[AIpb]
+Name=Item Attack Poison Bonus
+
+[AIcb]
+Name=Item Attack Corruption Bonus
+
+[BIcb]
+Bufftip=Corruption
+Buffubertip="This unit was hit by an Orb of Corruption; its armor is temporarily reduced."
+
+// Hero sight range increase, persistent, Telescope
+[AIsi]
+Name=Item Sight Range Bonus
+
+// Soul Gem Hero soul theft ability
+[AIso]
+Name=Item Soul Theft
+
+// Soul Gem Hero soul-carying ability - remove this to release the soul
+[Asou]
+Name=Item Soul Possession
+
+// caster buff for AIso
+[BIsv]
+Bufftip=Soul Theft
+Buffubertip="This is the soul of a Hero."
+
+// reincarnation (ankh)
+[AIrc]
+Name=Item Reincarnation
+
+// recall (amulet)
+[AIrt]
+Name=Item Recall
+
+[AItp]
+Name=Item Town Portal
+
+[AIco]
+Name=Item Command
+
+// figurine unit summon ability - red drake
+[AIfd]
+Name=Item Red Drake Summon
+
+// furbolg
+[AIff]
+Name=Item Furbolg Summon
+
+// rock golem
+[AIfr]
+Name=Item Rock Golem Summon
+
+// doom guard
+[AIfu]
+Name=Item Doom Guard Summon
+
+// felhound
+[AIfh]
+Name=Item Felhound Summon
+
+// skeleton
+[AIfs]
+Name=Item Skeleton Summon
+
+// Ice Revenant
+[AIir]
+Name=Item Ice Revenant Summon
+
+// Ursa Warrior
+[AIuw]
+Name=Item Ursa Warrior Summon
+
+[BFig]
+Bufftip=Summoned Unit
+Buffubertip="Summoned units take additional damage from dispels."
+
+// place goblin land mine
+[AIpm]
+Name=Item Place Goblin Land Mine
+
+// permanent attack bonus
+[AIaa]
+Name=Item Permanent Damage Gain
+
+// permanent hit point bonus
+[AImi]
+Name=Item Permanent Life Gain
+
+[AIpx]
+Name=Item Permanent Life Gain
+EditorSuffix=(lesser)
+
+// vampiric life steal ability
+[AIva]
+Name=Item Life Steal
+
+// cloak of flames immolation
+[AIcf]
+Name=Item Immolation
+
+// Cloak of Flames immolation buff
+[BIcf]
+Bufftip=Cloak of Flames
+Buffubertip="This unit has a Cloak of Flames; nearby enemy ground units will take damage over time."
+
+// hero stat bonus
+[AIab]
+Name=Item Hero Stat Bonus
+
+// freeze damage bonus
+[AIzb]
+Name=Item Freeze Damage Bonus
+
+// max life bonus
+[AIml]
+Name=Item Life Bonus
+
+[AIlz]
+Name=Item Life Bonus
+EditorSuffix=(least)
+
+// regen life
+[Arel]
+Name=Item Life Regeneration
+
+// anti-magic shield
+[Aami]
+Name=Item Anti-Magic Shell
+
+// max mana bonus
+[AImm]
+Name=Item Mana Bonus
+
+[AImz]
+Name=Item Mana Bonus (100)
+
+[AImv]
+Name=Item Mana Bonus (75)
+
+[AI2m]
+Name=Item Mana Bonus (200)
+
+// attack speed increase
+[AIas]
+Name=Item Attack Speed Bonus
+
+[AIsx]
+Name=Item Attack Speed Bonus
+EditorSuffix= (Gloves of Haste)
+
+[AIs2]
+Name=Item Attack Speed Bonus
+EditorSuffix= (Greater)
+
+[AIan]
+Name=Item Animate Dead
+
+[AIrs]
+Name=Item Resurrection
+
+[AIrx]
+Name=Item Resurrection
+EditorSuffix=(cooldown)
+
+[APrl]
+Name=Lesser Rune Resurrection
+
+[APrr]
+Name=Greater Rune Resurrection
+
+[AIaa]
+Name=Item Attack Damage Gain
+
+[AImi]
+Name=Item Life Gain
+
+[AIms]
+Name=Item Move Speed Bonus
+
+[AIa3]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+3 Agility)
+
+[AIa4]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+4 Agility)
+
+[AIa6]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+6 Agility)
+
+[AIaz]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+10 Agility)
+
+[AIx5]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+5 All Stats)
+
+[AIx2]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+2 All Stats)
+
+[AIs3]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+3 Strength)
+
+[AIs4]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+4 Strength)
+
+[AIs6]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+6 Strength)
+
+[AIi3]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+3 Intelligence)
+
+[AIi4]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+4 Intelligence)
+
+[AIi6]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+6 Intelligence)
+
+[AIgm]
+Name=Item Agility Gain
+EditorSuffix=(+2)
+
+[AItm]
+Name=Item Intelligence Gain
+EditorSuffix=(+2)
+
+[AInm]
+Name=Item Strength Gain
+EditorSuffix=(+2)
+
+[AIt6]
+Name=Item Damage Bonus
+EditorSuffix=(+6)
+
+[AIt9]
+Name=Item Damage Bonus
+EditorSuffix=(+9)
+
+[AItc]
+Name=Item Damage Bonus
+EditorSuffix=(+12)
+
+[AItf]
+Name=Item Damage Bonus
+EditorSuffix=(+15)
+
+[AIcy]
+Name=Cyclone
+Tip=|cffffcc00C|ryclone
+Ubertip="Tosses a target non-mechanical enemy unit into the air, rendering it unable to move, attack or cast spells, and stopping others from attacking or casting on it. |nLasts <AIcy,Dur1> seconds."
+Hotkey=C
+EditorSuffix=(Item)
+
+[AId1]
+Name=Item Armor Bonus
+EditorSuffix=(+1)
+
+[AId2]
+Name=Item Armor Bonus
+EditorSuffix=(+2)
+
+[AId3]
+Name=Item Armor Bonus
+EditorSuffix=(+3)
+
+[AId4]
+Name=Item Armor Bonus
+EditorSuffix=(+4)
+
+[AId5]
+Name=Item Armor Bonus
+EditorSuffix=(+5)
+
+[AId7]
+Name=Item Armor Bonus
+EditorSuffix=(+7)
+
+[AId8]
+Name=Item Armor Bonus
+EditorSuffix=(+8)
+
+[AId0]
+Name=Item Armor Bonus
+EditorSuffix=(+10)
+
+[AIin]
+EditorSuffix=(Item)
+
+[AIlf]
+Name=Item Life Bonus
+EditorSuffix=(Least)
+
+[AIl1]
+Name=Item Life Bonus
+EditorSuffix=(Lesser)
+
+[AIl2]
+Name=Item Life Bonus
+EditorSuffix=(Greater)
+
+[Arll]
+Name=Item Life Regeneration
+EditorSuffix=(Lesser)
+
+[AIh1]
+Name=Item Healing
+EditorSuffix=(Lesser)
+
+[AIh2]
+Name=Item Healing
+EditorSuffix=(Greater)
+
+[AIhw]
+Name=Healing Ward
+Ubertip="Summons an immovable ward that heals <Aoar,DataA1,%>% of a nearby friendly non-mechanical unit's hit points per second. |nLasts <AIhw,Dur1> seconds."
+EditorSuffix=(Item)
+
+[AIsw]
+Name=Sentry Ward
+Ubertip="Summons an invisible and immovable ward that provides vision in an area. |nCan see invisible units. |nLasts <AIsw,Dur1> seconds."
+EditorSuffix=(Item)
+
+[AIv1]
+Name=Item Temporary Invisibility
+EditorSuffix=(Lesser)
+
+[AIv2]
+Name=Item Temporary Invisibility
+EditorSuffix=(Greater)
+
+[AIm1]
+Name=Item Mana Regain
+EditorSuffix=(Lesser)
+
+[AIm2]
+Name=Item Mana Regain
+EditorSuffix=(Greater)
+
+[AIrn]
+EditorSuffix=(Lesser)
+
+[AIad]
+EditorSuffix=(Item)
+
+[AIcd]
+EditorSuffix=(Item)
+
+[AIba]
+EditorSuffix=(Item)
+
+[AIav]
+EditorSuffix=(Item)
+
+[AIar]
+EditorSuffix=(Item)
+
+[AIae]
+EditorSuffix=(Item)
+
+[AIau]
+EditorSuffix=(Item)
+
+[AIls]
+Name=Lightning Shield
+Ubertip="Forms a shield of electricity around a target unit, dealing <AIls,DataA1> damage per second to units around it. |nLasts <AIls,Dur1> seconds."
+EditorSuffix=(Item)
+
+[AIrr]
+Name=Roar
+Ubertip="Gives friendly nearby units a <AIrr,DataA1,%>% bonus to damage. |nLasts <AIrr,Dur1> seconds."
+EditorSuffix=(Item)
+
+[AIev]
+Name=Evasion
+Ubertip="Gives a <AIev,DataA1,%>% chance to avoid an attack."
+EditorSuffix=(Item)
+
+[AImx]
+Name=Spell Immunity
+Ubertip="Renders this unit immune to all spells."
+EditorSuffix=(Item)
+
+[AImb]
+Name=Item Mana Bonus
+EditorSuffix=(Least)
+
+[AIbm]
+Name=Item Mana Bonus
+EditorSuffix=(Greater)
+
+[AIuv]
+Name=Ultravision
+EditorSuffix=(Item)
+
+[AImh]
+Name=Item Permanent Life Gain
+EditorSuffix=(+50)
+
+[AIa1]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+1 Agility)
+
+[AIx1]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+1 All Stats)
+
+[AIs1]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+1 Strength)
+
+[AIi1]
+Name=Item Hero Stat Bonus
+EditorSuffix=(+1 Intelligence)
+
+[AIfc]
+Name=Flying Carpet
+
+// Healing Salve
+[AIrl]
+Name=Healing Salve
+
+[BIrl]
+Bufftip=Regeneration
+Buffubertip="This unit has Regeneration on it; its hit points will regenerate over time."
+
+// Clarity Potion
+[AIpr]
+Name=Clarity Potion
+
+[AIpl]
+Name=Lesser Clarity Potion
+
+// generic rejuv potion/scroll base
+[AIp1]
+Name=Generic Item-Rejuv Effect
+
+[BIrm]
+Bufftip=Clarity Potion
+Buffubertip="This unit drank a Clarity Potion; its mana will regenerate over time."
+
+[AIp2]
+Name=Generic Item-Rejuv Effect
+EditorSuffix= (II)
+
+[AIp3]
+Name=Generic Item-Rejuv Effect
+EditorSuffix= (III)
+
+[AIp4]
+Name=Generic Item-Rejuv Effect
+EditorSuffix= (IV)
+
+[AIp5]
+Name=Generic Item-Rejuv Effect
+EditorSuffix= (V)
+
+[AIp6]
+Name=Generic Item-Rejuv Effect
+EditorSuffix= (VI)
+
+// Scroll of Regeneration
+[AIsl]
+Name=Scroll of Regeneration
+
+[BIrg]
+Bufftip=Rejuvenation
+Buffubertip="This unit will regenerate health and mana over time."
+EditorSuffix= (Item)
+
+// One time permanent gold increase
+[AIgo]
+Name=Chest of Gold
+
+// One time permanent lumber increase
+[AIlu]
+Name=Bundle of Lumber
+
+// Flare Gun
+[AIfa]
+Name=Flare Gun
+
+[AIrv]
+Name=Item Reveal Entire Map
+
+
+// Wand of Neutralization
+[AIdc]
+Name=Item Chain Dispel
+
+// Spider Silk
+[AIwb]
+Name=Item Web
+
+// Monster Lure
+[AImo]
+Name=Monster Lure
+
+[BImo]
+Bufftip=Monster Lure
+Buffubertip="Nearby creeps will be summoned to this lure."
+
+// Random Item
+[AIri]
+Name=Random Item
+
+// Blight Placement
+[Ablp]
+Name=Blight Placement
+
+// Steal
+[Aste]
+Name=Steal
+
+// Change TOD
+[AIct]
+Name=Change Time of Day
+
+// Vampiric Potion
+[AIpv]
+Name=Vampiric Potion
+
+[BIpv]
+Bufftip=Vampiric Potion
+Buffubertip="This Hero used a Vampiric Potion; the Hero has increased damage and a life-draining attack."
+
+// Spell Damage Reduction
+[AIsr]
+Name=Spell Damage Reduction
+
+// Build Tiny Castle
+[AIbl]
+Name=Build Tiny Castle
+
+// Build Tiny Castle
+[AIbg]
+Name=Build Tiny Great Hall
+
+//build tiny tower
+[AIbt]
+Name=Build Tiny Scout Tower 
+
+
+// Shadowsight
+[Ashs]
+Name=Wand of Shadowsight
+
+[Bshs]
+Bufftip=Wand of Shadowsight
+Buffubertip="This unit was hit by a Wand of Shadowsight; it is revealed to an enemy player."
+
+// Tome of Retraining
+[Aret]
+Name=Tome of Retraining
+
+// Staff of Teleportation
+[AImt]
+Name=Staff of Teleportation
+
+// Staff of Preservation
+[ANpr]
+Name=Staff of Preservation
+
+// Mechanical Critter
+[Amec]
+Name=Mechanical Critter
+
+[Bmec]
+Bufftip=Mechanical Critter
+Buffubertip="Summoned units take damage from dispels."
+
+// Spell Shield
+[ANss]
+Name=Spell Shield
+EditorSuffix= (Amulet)
+
+// Spell Shield (AOE)
+[ANse]
+Name=Spell Shield
+EditorSuffix= (Rune)
+
+[BNss]
+Bufftip=Spell Shield
+Buffubertip="A protective shield that blocks a spell."
+
+// Spell book
+[Aspb]
+Name=Spell Book
+
+// Raise Dead
+[AIrd]
+Name=Raise Dead (Item)
+
+// Staff of Sanctuary
+[ANsa]
+Name=Staff of Sanctuary
+
+[BNsa]
+Bufftip=Sanctuary
+Buffubertip="This unit is under the effects of a Staff of Sanctuary; its hit points will regenerate over time, but it cannot move, attack or cast spells."
+
+[AIsa]
+Name=Scroll of Haste
+
+[APsa]
+Name=Rune of Speed
+
+[AItb]
+Name=Dust of Appearance
+
+[Bdet]
+Bufftip=Dust of Appearance
+Buffubertip="The Dust of Appearance reveals invisible units to enemy players."
+
+[AIsb]
+Name=Orb of Slow 
+
+[AIll]
+Name=Orb of Lightning (new)
+
+[AIos]
+Name=Slow
+Tip=Slo|cffffcc00w|r
+Ubertip="Slows a target enemy unit's attack rate by <AIos,DataB1,%>% and movement speed by <AIos,DataA1,%>%. |nLasts <AIos,Dur1> seconds."
+EditorSuffix= (Orb Version)
+
+// Orb of Darkness
+[ANbs]
+Name=Orb of Darkness
+
+// Spirit Link (AOE)
+[Aspp]
+Name=Spirit Link
+EditorSuffix= (Area)
+
+[AIrb]
+Name=Rebirth
+
+[BIrb]
+Bufftip=Reborn
+Buffubertip="This unit has been reborn."
+
+// Dark Summoning
+[AUds]
+Name=Dark Summoning
+Tip=|cffffcc00D|rark Summoning
+Ubertip="Summons <AUds,DataA1> friendly units from a target area to the caster."
+Hotkey=D
+Researchtip="Learn |cffffcc00D|rark Summoning"
+Researchubertip="Summons <AUds,DataA1> friendly units from a target area to the caster."
+Researchhotkey=D
+
+// anti-magic shield
+[AIxs]
+Name=Item Anti-Magic Shell
+
+// divine shield item
+[AIdv]
+Name=Item Divine Shield
+
+// silence item
+[AIse]
+Name=Item Silence
+
+// item purge
+[AIpg]
+Name=Item Purge
+EditorSuffix= (2)
+
+// item purge
+[AIps]
+Name=Item Purge
+EditorSuffix= (3)
+
+//#RESTNOBETA
+[AItg]
+Name=Item Damage Bonus
+EditorSuffix=(+1)
+
+[AIth]
+Name=Item Damage Bonus
+EditorSuffix=(+2)
+
+[AIti]
+Name=Item Damage Bonus
+EditorSuffix=(+4)
+
+[AItj]
+Name=Item Damage Bonus
+EditorSuffix=(+5)
+
+[AItk]
+Name=Item Damage Bonus
+EditorSuffix=(+7)
+
+[AItl]
+Name=Item Damage Bonus
+EditorSuffix=(+8)
+
+[AItn]
+Name=Item Damage Bonus
+EditorSuffix=(+10)
+
+[AItx]
+Name=Item Damage Bonus
+EditorSuffix=(+20)
+
+[AIh3]
+Name=Least Healing
+EditorSuffix=(slow cooldown)
+
+// orcish battle standard
+[AIfx]
+Name=Item Orcish Battle Standard
+
+// Hero attacks get fire damage bonus, persistent, Orb of Gul'dan
+[AIgd]
+Name=Item Attack Fire Bonus
+EditorSuffix= (Gul'dan)
+
+
+// tiny altar of kings
+[AIbh]
+Name=Build Tiny Altar of Kings
+
+// tiny blacksmith
+[AIbb]
+Name=Build Tiny Blacksmith
+
+// tiny lumber mill
+[AIbr]
+Name=Build Tiny Lumber Mill
+
+// tiny farm
+[AIbf]
+Name=Build Tiny Farm
+
+// tiny barracks
+[AIbs]
+Name=Build Tiny Barracks
+
+[AIdn]
+Name=Shadow Orb Ability
+
+[AInd]
+Name=Reanimation
+EditorSuffix= (special campaign item)
+
+[AIuf]
+Name=Unholy Frenzy
+EditorSuffix= (item)
+
+[AIcm]
+Name=Control Magic
+EditorSuffix= (item)
+
+[AIfz]
+Name=Finger of Death
+EditorSuffix= (item)
+
+[AIdp]
+Name=Death Pact
+EditorSuffix= (item)
+
+[AIdd]
+Name=Defend
+EditorSuffix= (item)
+
+[AIbx]
+Name=Bash
+EditorSuffix= (item)
+
+[AIwm]
+Name=Watery Minion
+EditorSuffix= (item)
+
+[AIsh]
+Name=Summon Headhunter
+EditorSuffix= (item)
+
+[BIsh]
+Bufftip=Headhunter Spirit
+
+[AIgx]
+Name=Regeneration Aura
+EditorSuffix= (item)
+
+[AIhl]
+Name=Holy Light
+EditorSuffix= (item)
+
+[AIsz]
+Name=Slow Poison
+EditorSuffix= (item)
+
+[AIpz]
+Name=Penguin Squeek
+
+[AIfw]
+Name=Melee Fire Damage Bonus
+
+[AIft]
+Name=Melee Cold Damage Bonus
+
+[AIlx]
+Name=Melee Lightning Damage Bonus
+
+[AIcs]
+Name=Critical Strike
+EditorSuffix= (item)
+
+[AIdd]
+Name=Passive Defense
+
+[AIcl]
+Name=Chain Lightning
+EditorSuffix= (item)
+
+[AIxk]
+Name=Berserk
+EditorSuffix= (item)
+
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BIwb]
+EditorName=Item Web
+
+[Btrv]
+EditorName=Teleport Reveal

@@ -1,0 +1,542 @@
+// Aerial Shackles
+[Amls]
+Name=Aerial Shackles
+Tip=A|cffffcc00e|rrial Shackles
+Ubertip="Magically binds a target enemy air unit, so that it cannot move or attack and takes <Amls,DataA1> damage per second. |nLasts <Amls,Dur1> seconds."
+Hotkey=E
+
+// Aerial Shackles Target
+[Bmlt]
+Bufftip=Aerial Shackles
+Buffubertip="This unit is bound in Aerial Shackles; it cannot move or attack and will take damage over time."
+
+// area of effect detection (scry)
+[AHta]
+Name=Reveal
+Tip=|cffffcc00R|reveal
+Ubertip="Reveals an area of the map. |nDetects invisible units. |nLasts <AHta,Dur1> seconds."
+Hotkey=R
+
+// Feedback
+[Afbk]
+Name=Feedback
+EditorSuffix= (Spell Breaker)
+Tip=Feedback
+Ubertip="Spell Breaker attacks destroy <Afbk,DataA1> mana per hit. The mana combusts, dealing damage to the attacked unit."
+
+// Feedback
+[Afbt]
+Name=Feedback
+EditorSuffix= (Arcane Tower)
+Tip=Feedback
+Ubertip="This tower's attacks destroy <Afbt,DataA1> mana per hit against any unit, causing bonus damage equal to the mana destroyed.|n|nAdditionally, attacks made by this tower cause <Afbt,DataE1> bonus damage against summoned units."
+
+
+// Control Magic
+[Acmg]
+Name=Control Magic
+Tip=|cffffcc00C|rontrol Magic
+Ubertip="Takes control of an enemy summoned unit. The mana cost is <Acmg,DataB1,%>% of the summoned unit's current hit points."
+Hotkey=C
+
+[Bcmg]
+Bufftip=Control Magic
+Buffubertip="This unit has been controlled; it obeys a new master now."
+
+// Siphon Mana
+[AHdr]
+Name=Siphon Mana
+Tip=Sipho|cffffcc00n|r Mana - [|cffffcc00Level 1|r],Sipho|cffffcc00n|r Mana - [|cffffcc00Level 2|r],Sipho|cffffcc00n|r Mana - [|cffffcc00Level 3|r]
+Ubertip="Transfers mana between the Blood Mage and a target. Drains <AHdr,DataB1> mana per second from an enemy, or transfers <AHdr,DataE1> mana per second to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts <AHdr,Dur1> seconds.","Transfers mana between the Blood Mage and a target. Drains <AHdr,DataB2> mana per second from an enemy, or transfers <AHdr,DataE2> mana per second to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts <AHdr,Dur2> seconds.","Transfers mana between the Blood Mage and a target. Drains <AHdr,DataB3> mana per second from an enemy, or transfers <AHdr,DataE3> mana per second to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts <AHdr,Dur3> seconds."
+Hotkey=N
+Researchtip="Learn Sipho|cffffcc00n|r Mana - [|cffffcc00Level %d|r]"
+Researchubertip="Transfers mana between the Blood Mage and a target. Drains mana from an enemy, or transfers mana to an ally.|n|nSiphon Mana can push the Blood Mage's mana over its maximum value, though excess mana drains off rapidly if not used.|nLasts <AHdr,Dur1> seconds.|n|n|cffffcc00Level 1|r - <AHdr,DataB1> mana drained per second. |n|cffffcc00Level 2|r - <AHdr,DataB2> mana drained per second. |n|cffffcc00Level 3|r - <AHdr,DataB3> mana drained per second." 
+Researchhotkey=N
+
+[Bdbb]
+Name=Drain Life & Mana (Bonus)
+Bufftip=Drain Life & Mana
+Buffubertip="This unit has temporary bonus health and mana above its normal maximums.  This bonus will fade off quickly."
+
+[Bdbl]
+Name=Drain Life (Bonus)
+Bufftip=Drain Life
+Buffubertip="This unit has temporary bonus health above its normal maximum.  This bonus will fade off quickly."
+
+[Bdbm]
+Name=Siphon Mana (Bonus)
+Bufftip=Siphon Mana
+Buffubertip="This unit has temporary bonus mana above its normal maximum.  This bonus will fade off quickly."
+
+// Flak Cannons
+[Aflk]
+Name=Flak Cannons
+Tip=Flak Cannons
+Ubertip="Uses powerful cannons to deal area effect damage against air units."
+
+// Frag Shards
+[Afsh]
+Name=Fragmentation Shards
+Tip=Fragmentation Shards
+Ubertip="Uses fragmentation mortars to increase damage dealt to Unarmored and Medium armor units."
+
+// Barrage
+[Aroc]
+Name=Barrage
+Tip=Barrage
+Ubertip="Fires powerful rockets at nearby enemy air units, dealing <hrtt,mindmg2> - <hrtt,maxdmg2> damage per hit."
+
+// Tank upgrade
+[Srtt]
+Requires=Rhrt
+
+// Magic Defense
+[Amdf]
+Name=Magic Defense
+Tip=Magic |cffffcc00D|refense
+Untip=Stop Magic |cffffcc00D|refense
+Ubertip="Activate to gain magic immunity, but have <Adef,DataC1,%>% reduced movement speed."
+Unubertip="Deactivate to move at normal speed, but take damage from spells."
+Hotkey=D
+Unhotkey=D
+
+// Sphere
+[Asph]
+Name=Sphere
+
+// Spell Steal
+[Asps]
+Name=Spell Steal
+Tip=Spell S|cffffcc00t|real
+Ubertip="Steals a positive buff from an enemy unit and applies it to a nearby friendly unit, or takes a negative buff from a friendly unit and applies it to a nearby enemy unit."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=T
+Unhotkey=T
+
+// Cloud
+[Aclf]
+Name=Cloud
+Tip=|cffffcc00C|rloud
+Ubertip="Cast on enemy buildings with ranged attacks to stop the buildings from attacking. |nLasts <Aclf,Dur1> seconds."
+Hotkey=C
+
+[Bclf]
+Bufftip=Cloud
+Buffubertip="This building has a Cloud on it, and cannot use its ranged attack."
+
+// Flame Strike
+[AHfs]
+Name=Flame Strike
+Tip=|cffffcc00F|rlame Strike - [|cffffcc00Level 1|r],|cffffcc00F|rlame Strike - [|cffffcc00Level 2|r],|cffffcc00F|rlame Strike - [|cffffcc00Level 3|r]
+Ubertip="Conjures a pillar of flame that burns ground units for 45 damage a second for 3 seconds. As the pillar of flame subsides, units within the fire continue to take minor damage.","Conjures a pillar of flame that burns ground units for 80 damage a second for 3 seconds. As the pillar of flame subsides, units within the fire continue to take light damage.","Conjures a pillar of flame that burns ground units for 110 damage a second for 3 seconds. As the pillar of flame subsides, units within the fire continue to take moderate damage."
+Hotkey=F
+Researchtip="Learn |cffffcc00F|rlame Strike - [|cffffcc00Level %d|r]"
+Researchubertip="Conjures a pillar of fire which damages ground units in a target area over time. |n|n|cffffcc00Level 1|r - 45 damage a second for 3 seconds, followed by minor damage for 6 seconds. |n|cffffcc00Level 2|r - 80 damage a second for 3 seconds, followed by light damage for 6 seconds. |n|cffffcc00Level 3|r - 110 damage a second for 3 seconds, followed by moderate damage for 6 seconds."
+Researchhotkey=F
+
+[BHfs]
+Bufftip=Flame Strike
+Buffubertip="This unit is in a Flame Strike, and is taking damage over time."
+
+// Banish
+[AHbn]
+Name=Banish
+Tip=|cffffcc00B|ranish - [|cffffcc00Level 1|r],|cffffcc00B|ranish - [|cffffcc00Level 2|r],|cffffcc00B|ranish - [|cffffcc00Level 3|r]
+Ubertip="Turns a non-mechanical unit ethereal and slows its movement speed by <AHbn,DataA1,%>% for <AHbn,Dur1> seconds. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect.","Turns a unit ethereal and slows its movement speed by <AHbn,DataA2,%>% for <AHbn,Dur2> seconds. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect.","Turns a unit ethereal and slows its movement speed by <AHbn,DataA3,%>% for <AHbn,Dur3> seconds. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect."
+Hotkey=B
+Researchtip="Learn |cffffcc00B|ranish - [|cffffcc00Level %d|r]"
+Researchubertip="Turns a non-mechanical unit ethereal and slows its movement speed by <AHbn,DataA1,%>% for a short duration. Ethereal creatures cannot attack, but they can cast spells and certain spells cast upon them will have a greater effect. |n|n|cffffcc00Level 1|r - <AHbn,Cost1> mana, lasts <AHbn,Dur1> seconds. |n|cffffcc00Level 2|r - <AHbn,Cost2> mana, lasts <AHbn,Dur2> seconds. |n|cffffcc00Level 3|r - <AHbn,Cost3> mana, lasts <AHbn,Dur3> seconds."
+Researchhotkey=B
+
+[BHbn]
+Bufftip=Banish
+Buffubertip="This unit is Banished; Banished creatures cannot attack, but they can cast spells and will take extra damage from Magic attacks and spells."
+
+// Summon Phoenix
+[AHpx]
+Name=Phoenix
+Tip=Phoeni|cffffcc00x|r
+Ubertip="Summons a powerful Phoenix. The Phoenix burns with such intensity that it damages itself and nearby enemy units. Has Spell Immunity, and Resistant Skin. When a Phoenix dies, it creates an egg that will hatch into a Phoenix. |n|n|cffffcc00Attacks land and air units.|r"
+Hotkey=X
+Researchtip=Learn Phoeni|cffffcc00x|r
+Researchubertip="Summons a powerful Phoenix. The Phoenix burns with such intensity that it damages itself and nearby enemy units. Has Spell Immunity, and Resistant Skin. When a Phoenix dies, it creates an egg that will hatch into a Phoenix. |n|n|cffffcc00Attacks land and air units.|r"
+Researchhotkey=X
+
+// Phoenix (morph)
+[Aphx]
+Name=Phoenix Morphing (Egg Related)
+
+// Phoenix (progress bar)
+[Bphx]
+Bufftip=Phoenix
+Buffubertip="The power of the Phoenix unfolds."
+
+// Phoenix Fire
+[Apxf]
+Name=Phoenix Fire
+Tip=Phoenix Fire
+Ubertip="Fires down streams of flame, lighting nearby enemies on fire."
+
+// Phoenix Fire
+[Bpxf]
+Bufftip=Phoenix Fire
+Buffubertip="This unit is being burned by Phoenix Fire; it will take damage over time."
+
+// Flying Machine Bombs
+[Agyb]
+Name=Flying Machine Bombs
+Tip=Flying Machine Bombs
+Ubertip="Allows Flying Machines to attack land units."
+
+// Storm hammers
+[Asth]
+Name=Storm Hammers
+Tip=Storm Hammers
+Ubertip="Causes a Gryphon Rider's attacks to damage multiple units."
+
+// Flying Machine Vision
+[Agyv]
+Name=True Sight
+Tip=True Sight
+Ubertip="Reveals nearby invisible units."
+EditorSuffix= (Flying Machine)
+
+// Defend
+[Adef]
+Name=Defend
+Tip=|cffffcc00D|refend
+Ubertip="Activate to have a <Adef,DataF1>% chance to reflect Piercing attacks upon the source, and to take only <Adef,DataA1,%>% of the damage from attacks that are not reflected. While Defend is active, movement is reduced to <Adef,DataC1,%>% of normal speed."
+Untip=Stop |cffffcc00D|refend
+Unubertip="Deactivate to move at normal speed, but take regular damage from Piercing attacks."
+Hotkey=D
+Unhotkey=D
+
+// Flare
+[Afla]
+Name=Flare
+Tip=|cffffcc00F|rlare
+Ubertip="Launches a Dwarven flare above a target point, which reveals that area for <Afla,Dur1> seconds. |nReveals invisible units.
+Hotkey=F
+
+// Magic Sentry (passive)
+[Adts]
+Name=Magic Sentry
+Tip=Magic Sentry
+Ubertip="Reveals nearby invisible units."
+EditorSuffix= (Human Towers)
+
+// Inner Fire
+[Ainf]
+Name=Inner Fire
+Tip=Inner |cffffcc00F|rire
+Ubertip="Increases a target friendly unit's damage by <Ainf,DataA1,%>% and armor by <Ainf,DataB1>. |nLasts <Ainf,Dur1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=F
+Unhotkey=F
+
+[Binf]
+Bufftip=Inner Fire
+Buffubertip="This unit has Inner Fire; its armor and attack damage are increased."
+
+// Dispel Magic
+[Adis]
+Name=Dispel Magic
+Tip=|cffffcc00D|rispel Magic
+UberTip="Removes all buffs from units in a target area. |n|cffffcc00Deals <Adis,DataB1> damage to summoned units.|r"
+Hotkey=D
+
+// Heal
+[Ahea]
+Name=Heal
+Tip=H|cffffcc00e|ral
+Ubertip="Heals a target friendly non-mechanical wounded unit for <Ahea,DataA1> hit points."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=E
+Unhotkey=E
+
+[Bhea]
+Bufftip=Heal
+Buffubertip="This unit is being healed; lost hit points are being restored."
+
+[BNhe]
+Bufftip=Neutral Heal
+Buffubertip="This unit is being healed; lost hit points are being restored."
+
+// Slow
+[Aslo]
+Name=Slow
+Tip=Slo|cffffcc00w|r
+Ubertip="Slows a target enemy unit's attack rate by <Aslo,DataB1,%>% and movement speed by <Aslo,DataA1,%>%. |nLasts <Aslo,Dur1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=W
+Unhotkey=W
+
+[Bslo]
+Bufftip=Slow
+Buffubertip="This unit is slowed; its movement speed and attack rate are reduced."
+
+// Invisibility
+[Aivs]
+Name=Invisibility
+Tip=|cffffcc00I|rnvisibility
+Ubertip="Makes a unit invisible. If the unit attacks, uses an ability or casts a spell, it will become visible. |nLasts <Aivs,Dur1> seconds."
+Hotkey=I
+
+[Binv]
+Bufftip=Invisibility
+Buffubertip="This unit is invisible; enemy units cannot see it. If it attacks or casts a spell, it will become visible."
+
+// Polymorph
+[Aply]
+Name=Polymorph
+Tip=Polym|cffffcc00o|rrph
+Ubertip="Turns a target enemy unit into a sheep. The targeted unit retains its hit points and armor, but cannot attack. |nCannot be cast on Heroes. |nLasts <Aply,Dur1> seconds."
+Hotkey=O
+
+[Bply]
+Bufftip=Polymorph
+Buffubertip="This unit is Polymorphed; it is transformed into a sheep."
+
+// Blizzard
+[AHbz]
+Name=Blizzard
+Tip=|cffffcc00B|rlizzard - [|cffffcc00Level 1|r],|cffffcc00B|rlizzard - [|cffffcc00Level 2|r],|cffffcc00B|rlizzard - [|cffffcc00Level 3|r]
+Ubertip="Calls down <AHbz,DataA1> freezing ice shard waves; each wave deals <AHbz,DataB1> damage to units in an area.","Calls down <AHbz,DataA2> freezing ice shard waves; each wave deals <AHbz,DataB2> damage to units in an area.","Calls down <AHbz,DataA3> freezing ice shard waves; each wave deals <AHbz,DataB3> damage to units in an area."
+Hotkey=B
+Researchtip="Learn |cffffcc00B|rlizzard - [|cffffcc00Level %d|r]"
+Researchubertip="Calls down waves of freezing ice shards that damage units in a target area. |n|n|cffffcc00Level 1|r - <AHbz,DataA1> waves at <AHbz,DataB1> damage each. |n|cffffcc00Level 2|r - <AHbz,DataA2> waves at <AHbz,DataB2> damage each. |n|cffffcc00Level 3|r - <AHbz,DataA3> waves at <AHbz,DataB3> damage each."
+Researchhotkey=B
+
+[BHbd]
+Bufftip=Blizzard
+Buffubertip="This unit is being damaged by Blizzard."
+
+// Summon Water Elemental
+[AHwe]
+Name=Summon Water Elemental
+Tip=Summon |cffffcc00W|rater Elemental - [|cffffcc00Level 1|r],Summon |cffffcc00W|rater Elemental - [|cffffcc00Level 2|r],Summon |cffffcc00W|rater Elemental - [|cffffcc00Level 3|r] 
+Ubertip="Summons a water elemental to attack the Archmage's enemies. Has <hwat,realHP> hit points and deals <hwat,mindmg1> - <hwat,maxdmg1> damage. |nLasts <AHwe,Dur1> seconds. |n|n|cffffcc00Attacks land and air units.|r","Summons a water elemental to attack the Archmage's enemies. Has <hwt2,realHP> hit points and deals <hwt2,mindmg1> - <hwt2,maxdmg1> damage. |nLasts <AHwe,Dur1> seconds. |n|n|cffffcc00Attacks land and air units.|r","Summons a water elemental to attack the Archmage's enemies. Has <hwt3,realHP> hit points and deals <hwt3,mindmg1> - <hwt3,maxdmg1> damage. |nLasts <AHwe,Dur1> seconds. |n|n|cffffcc00Attacks land and air units.|r"
+ResearchUberTip="Summons a water elemental to attack the Archmage's enemies. |nLasts <AHwe,Dur1> seconds. |n|n|cffffcc00Attacks land and air units.|r |n|n|cffffcc00Level 1|r - <hwat,realHP> hit points, <hwat,mindmg1> - <hwat,maxdmg1> damage. |n|cffffcc00Level 2|r - <hwt2,realHP> hit points, <hwt2,mindmg1> - <hwt2,maxdmg1> damage. |n|cffffcc00Level 3|r - <hwt3,realHP> hit points, <hwt3,mindmg1> - <hwt3,maxdmg1> damage."
+Hotkey=W
+Researchtip="Learn Summon |cffffcc00W|rater Elemental - [|cffffcc00Level %d|r]"
+Researchhotkey=W
+
+[BHwe]
+Bufftip=Water Elemental
+Buffubertip="Summoned units are vulnerable to dispels."
+
+// Brilliance Aura
+[AHab]
+Name=Brilliance Aura
+Tip=Brilliance Aura - [|cffffcc00Level 1|r],Brilliance Aura - [|cffffcc00Level 2|r],Brilliance Aura - [|cffffcc00Level 3|r]
+Ubertip="Gives additional mana regeneration to nearby friendly units.","Gives additional mana regeneration to nearby friendly units.","Gives additional mana regeneration to nearby friendly units."
+Researchtip="Learn B|cffffcc00r|rilliance Aura - [|cffffcc00Level %d|r]"
+Researchubertip="Gives additional mana regeneration to nearby friendly units. |n|n|cffffcc00Level 1|r - Grants minor mana regeneration. |n|cffffcc00Level 2|r - Grants moderate mana regeneration. |n|cffffcc00Level 3|r - Grants heavy mana regeneration."
+Researchhotkey=R
+
+[BHab]
+Bufftip=Brilliance Aura
+Buffubertip="This unit is under the effects of Brilliance Aura; it has an increased mana regeneration."
+
+// Mass Teleport
+[AHmt]
+Name=Mass Teleport
+Tip=Mass |cffffcc00T|releport
+Ubertip="Teleports <AHmt,DataA1> of the player's nearby units, including the Archmage, to a friendly ground unit or structure."
+Hotkey=T
+Researchtip=Learn Mass |cffffcc00T|releport
+Researchubertip="Teleports <AHmt,DataA1> of the player's nearby units, including the Archmage, to a friendly ground unit or structure."
+Researchhotkey=T
+Globalmessage=
+Globalsound=
+
+// Storm Bolt
+[AHtb]
+Name=Storm Bolt
+Tip=S|cffffcc00t|rorm Bolt - [|cffffcc00Level 1|r],S|cffffcc00t|rorm Bolt - [|cffffcc00Level 2|r],S|cffffcc00t|rorm Bolt - [|cffffcc00Level 3|r]
+Ubertip="Throws a magical hammer at a target enemy unit, dealing <AHtb,DataA1> damage and stunning the target for <AHtb,Dur1> seconds.","Throws a magical hammer at a target enemy unit, dealing <AHtb,DataA2> damage and stunning the target for <AHtb,Dur2> seconds.","Throws a magical hammer at a target enemy unit, dealing <AHtb,DataA3> damage and stunning the target for <AHtb,Dur3> seconds."
+Hotkey=T
+Researchtip="Learn S|cffffcc00t|rorm Bolt - [|cffffcc00Level %d|r]"
+Researchubertip="A magical hammer that is thrown at an enemy unit, causing damage and stunning the target. |n|n|cffffcc00Level 1|r - <AHtb,DataA1> damage, <AHtb,Dur1> second stun. |n|cffffcc00Level 2|r - <AHtb,DataA2> damage, <AHtb,Dur2> second stun. |n|cffffcc00Level 3|r - <AHtb,DataA3> damage, <AHtb,Dur3> second stun."
+Researchhotkey=T
+
+[BHtb]
+Bufftip=Storm Bolt
+Buffubertip="This unit is stunned by Storm Bolt; it cannot move, attack, or cast spells."
+
+// Thunder Clap
+[AHtc]
+Name=Thunder Clap
+Tip=Thunder |cffffcc00C|rlap - [|cffffcc00Level 1|r],Thunder |cffffcc00C|rlap - [|cffffcc00Level 2|r],Thunder |cffffcc00C|rlap - [|cffffcc00Level 3|r]
+Ubertip="Slams the ground, dealing <AHtc,DataA1> damage to nearby enemy land units and slowing their movement by <AHtc,DataC1,%>% and attack rate by <AHtc,DataD1,%>%.","Slams the ground, dealing <AHtc,DataA2> damage to nearby enemy land units and slowing their movement by <AHtc,DataC2,%>% and attack rate by <AHtc,DataD2,%>%.","Slams the ground, dealing <AHtc,DataA3> damage to nearby enemy land units and slowing their movement by <AHtc,DataC3,%>% and attack rate by <AHtc,DataD3,%>%."
+Hotkey=C
+Researchtip="Learn Thunder |cffffcc00C|rlap - [|cffffcc00Level %d|r]"
+Researchubertip="Slams the ground, dealing damage to and slowing the movement speed and attack rate of nearby enemy land units. |n|n|cffffcc00Level 1|r - <AHtc,DataA1> damage, <AHtc,DataC1,%>% move, <AHtc,DataD1,%>% attack. |n|cffffcc00Level 2|r - <AHtc,DataA2> damage, <AHtc,DataC2,%>% move, <AHtc,DataD2,%>% attack. |n|cffffcc00Level 3|r - <AHtc,DataA3> damage, <AHtc,DataC3,%>% move, <AHtc,DataD3,%>% attack."
+Researchhotkey=C
+
+[BHtc]
+Bufftip=Thunder Clap
+Buffubertip="This unit has been hit by Thunder Clap; its movement speed and attack rate are reduced."
+
+// Bash
+[AHbh]
+Name=Bash
+Tip=Bash - [|cffffcc00Level 1|r],Bash - [|cffffcc00Level 2|r],Bash - [|cffffcc00Level 3|r]
+Ubertip="Gives a <AHbh,DataA1>% chance that an attack will do <AHbh,DataC1> bonus damage and stun an opponent for <AHbh,Dur1> seconds.","Gives a <AHbh,DataA2>% chance that an attack will do <AHbh,DataC1> bonus damage and stun an opponent for <AHbh,Dur1> seconds.","Gives a <AHbh,DataA3>% chance that an attack will do <AHbh,DataC1> bonus damage and stun an opponent for <AHbh,Dur1> seconds."
+Researchtip="Learn |cffffcc00B|rash - [|cffffcc00Level %d|r]"
+Researchubertip="Gives a chance that an attack will do <AHbh,DataC1> bonus damage and stun an opponent for <AHbh,Dur1> seconds. |n|n|cffffcc00Level 1|r - <AHbh,DataA1>% chance per attack. |n|cffffcc00Level 2|r - <AHbh,DataA2>% chance per attack. |n|cffffcc00Level 3|r - <AHbh,DataA3>% chance per attack."
+Researchhotkey=B
+
+[BHbh]
+Bufftip=Bash
+Buffubertip="This unit has been Bashed; it cannot move, attack, or cast spells."
+
+// Avatar
+[AHav]
+Name=Avatar
+Tip=Activate A|cffffcc00v|ratar
+UberTip="Activate Avatar to give the Mountain King <AHav,DataA1> bonus armor, <AHav,DataB1> bonus hit points, <AHav,DataC1> bonus damage and spell immunity. |nLasts <AHav,Dur1> seconds."
+Untip=Deactivate A|cffffcc00v|ratar
+UnUberTip=""
+Hotkey=V
+Unhotkey=V
+Researchtip=Learn A|cffffcc00v|ratar
+ResearchUberTip="When Avatar is activated, it gives the Mountain King <AHav,DataA1> bonus armor, <AHav,DataB1> bonus hit points, <AHav,DataC1> bonus damage and spell immunity. |nLasts <AHav,Dur1> seconds."
+Researchhotkey=V
+
+[BHav]
+Bufftip=Avatar
+Buffubertip="This unit is in Avatar form; it has increased hit points, attack damage, armor, and is immune to spells."
+
+// Holy Light
+[AHhb]
+Name=Holy Light
+Tip=Holy Ligh|cffffcc00t|r - [|cffffcc00Level 1|r],Holy Ligh|cffffcc00t|r - [|cffffcc00Level 2|r],Holy Ligh|cffffcc00t|r - [|cffffcc00Level 3|r]
+UberTip="A holy light that can heal a friendly living unit for <AHhb,DataA1> or deal half damage to an enemy Undead unit.","A holy light that can heal a friendly living unit for <AHhb,DataA2> or deal half damage to an enemy Undead unit.","A holy light that can heal a friendly living unit for <AHhb,DataA3> or deal half damage to an enemy Undead unit."
+Hotkey=T
+Researchtip="Learn Holy Ligh|cffffcc00t|r - [|cffffcc00Level %d|r]"
+Researchubertip="A holy light that can heal a friendly living unit or damage an enemy Undead unit. |n|n|cffffcc00Level 1|r - Heals for <AHhb,DataA1> hit points. |n|cffffcc00Level 2|r - Heals for <AHhb,DataA2> hit points. |n|cffffcc00Level 3|r - Heals for <AHhb,DataA3> hit points. "
+Researchhotkey=T
+
+// Divine Shield
+[AHds]
+Name=Divine Shield
+Tip=|cffffcc00D|rivine Shield - [|cffffcc00Level 1|r],|cffffcc00D|rivine Shield - [|cffffcc00Level 2|r],|cffffcc00D|rivine Shield - [|cffffcc00Level 3|r]
+Ubertip="An impenetrable shield surrounds this unit, protecting it from all damage and spells for <AHds,Dur1> seconds.","An impenetrable shield surrounds this unit, protecting it from all damage and spells for <AHds,Dur2> seconds.","An impenetrable shield surrounds this unit, protecting it from all damage and spells for <AHds,Dur3> seconds."
+Untip=Deactivate |cffffcc00D|rivine Shield
+Hotkey=D
+Unhotkey=D
+Researchtip="Learn |cffffcc00D|rivine Shield - [|cffffcc00Level %d|r]"
+Researchubertip="An impenetrable shield surrounds the Paladin, protecting him from all damage and spells for a set amount of time. |n|n|cffffcc00Level 1|r - Lasts <AHds,Dur1> seconds. |n|cffffcc00Level 2|r - Lasts <AHds,Dur2> seconds. |n|cffffcc00Level 3|r - Lasts <AHds,Dur3> seconds."
+Researchhotkey=D
+Globalmessage=
+Globalsound=
+
+[BHds]
+Bufftip=Divine Shield
+Buffubertip="This unit is under a Divine Shield; it is invulnerable."
+
+// Devotion Aura
+[AHad]
+Name=Devotion Aura
+Tip=Devotion Aura - [|cffffcc00Level 1|r],Devotion Aura - [|cffffcc00Level 2|r],Devotion Aura - [|cffffcc00Level 3|r]
+Ubertip="Gives <AHad,DataA1,.> additional armor to nearby friendly units.","Gives <AHad,DataA2,.> additional armor to nearby friendly units.","Gives <AHad,DataA3,.> additional armor to nearby friendly units."
+Researchtip="Learn De|cffffcc00v|rotion Aura - [|cffffcc00Level %d|r]"
+Researchubertip="Gives additional armor to nearby friendly units. |n|n|cffffcc00Level 1|r - Increases base armor by <AHad,DataA1,.>. |n|cffffcc00Level 2|r - Increases base armor by <AHad,DataA2,.>. |n|cffffcc00Level 3|r - Increases base armor by <AHad,DataA3,.>."
+Researchhotkey=V
+
+[BHad]
+Bufftip=Devotion Aura
+Buffubertip="This unit is under the effects of Devotion Aura; it has increased armor."
+
+// Resurrection
+[AHre]
+Name=Resurrection
+Tip=|cffffcc00R|resurrection
+Ubertip="Brings back to life the corpses of <AHre,DataA1> friendly nearby units."
+Hotkey=R
+Researchtip=Learn |cffffcc00R|resurrection
+Researchubertip="Brings back to life the corpses of <AHre,DataA1> friendly nearby units."
+Researchhotkey=R
+
+// Militia
+[Amil]
+Name=Call to Arms
+Tip=|cffffcc00C|rall to Arms
+Untip=Back to |cffffcc00W|rork
+Ubertip="Run to the nearest Keep, Castle or starting Town Hall to arm the Peasant, converting him into Militia. |nLasts <Amil,Dur1> seconds."
+Unubertip="Run to the nearest Keep, Castle or starting Town Hall to disarm the Militia, converting it into a Peasant."
+Hotkey=C
+Unhotkey=W
+EditorSuffix= (Peasant)
+
+[Bmil]
+Bufftip=Militia
+Buffubertip="This unit has become Militia; its movement speed, attack rate, attack damage, and armor have been increased."
+
+// Militia Conversion
+[Amic]
+Name=Call To Arms
+Tip=|cffffcc00C|rall to Arms
+Untip=Back to |cffffcc00W|rork
+Ubertip="Call all nearby Peasants to the Town Hall to be converted to Militia. |nLasts <Amil,Dur1> seconds."
+Unubertip="Call all nearby Militia to the Town Hall to be converted to Peasants."
+Hotkey=C
+Unhotkey=W
+EditorSuffix= (Town Hall)
+
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BHbz]
+EditorName=Blizzard (Caster)
+
+[Bdcb]
+EditorName=Drain Life & Mana (Caster)
+
+[Bdcl]
+EditorName=Drain Life (Caster)
+
+[Bdcm]
+EditorName=Drain Mana (Caster)
+
+[Bdtb]
+EditorName=Drain Life & Mana (Target)
+
+[Bdtl]
+EditorName=Drain Life (Target)
+
+[Bdtm]
+EditorName=Drain Mana (Target)
+
+[Bmlc]
+EditorName=Aerial Shackles (Caster)
+
+[Bivs]
+EditorName=Invisibility (Extra)
+
+[XHbz]
+EditorName=Blizzard (Effect)
+
+[XHfs]
+EditorName=Flame Strike (Effect)
+
+[Xclf]
+EditorName=Cloud (Effect)
+
+[Xfla]
+EditorName=Flare (Effect)
+
+[Xfhs]
+EditorName=Building Damage - Human Small
+
+[Xfhm]
+EditorName=Building Damage - Human Medium
+
+[Xfhl]
+EditorName=Building Damage - Human Large

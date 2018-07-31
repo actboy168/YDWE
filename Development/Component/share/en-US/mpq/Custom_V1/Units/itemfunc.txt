@@ -1,0 +1,1071 @@
+//townhall tier 1 dependency
+[TWN1]
+DependencyOr=htow,ogre,etol,unpl
+XPFactor=0
+
+//townhall teir 2 dependency
+[TWN2]
+DependencyOr=hkee,ostr,etoa,unp1
+XPFactor=0
+
+//townhall teir 3 dependency
+[TWN3]
+DependencyOr=hcas,ofrt,etoe,unp2
+XPFactor=0
+
+//altar dependency
+[TALT]
+DependencyOr=halt,oalt,eate,uaod
+
+
+
+[amrc]
+Art=ReplaceableTextures\CommandButtons\BTNAmulet.blp
+
+[ankh]
+Art=ReplaceableTextures\CommandButtons\BTNAnkh.blp
+
+[belv]
+Art=ReplaceableTextures\CommandButtons\BTNBoots.blp
+
+[bgst]
+Art=ReplaceableTextures\CommandButtons\BTNBelt.blp
+
+[bspd]
+Art=ReplaceableTextures\CommandButtons\BTNBootsOfSpeed.blp
+
+[ccmd]
+Art=ReplaceableTextures\CommandButtons\BTNScepterOfMastery.blp
+
+[ciri]
+Art=ReplaceableTextures\CommandButtons\BTNRobeOfTheMagi.blp
+
+[ckng]
+Art=ReplaceableTextures\CommandButtons\BTNHelmutPurple.blp
+
+[clsd]
+Art=ReplaceableTextures\CommandButtons\BTNCloak.blp
+
+[crys]
+Art=ReplaceableTextures\CommandButtons\BTNCrystalBall.blp
+
+[desc]
+Art=ReplaceableTextures\CommandButtons\BTNDaggerOfEscape.blp
+
+[flag]
+Art=ReplaceableTextures\CommandButtons\BTNHumanCaptureFlag.blp
+
+[nflg]
+Art=ReplaceableTextures\CommandButtons\BTNNightElfCaptureFlag.blp
+
+[oflg]
+Art=ReplaceableTextures\CommandButtons\BTNOrcCaptureFlag.blp
+
+[uflg]
+Art=ReplaceableTextures\CommandButtons\BTNUndeadCaptureFlag.blp
+
+[gemt]
+Art=ReplaceableTextures\CommandButtons\BTNGem.blp
+
+[gobm]
+Art=ReplaceableTextures\CommandButtons\BTNGoblinLandMine.blp
+
+[gsou]
+Art=ReplaceableTextures\CommandButtons\BTNSoulGem.blp
+
+[soul]
+Art=ReplaceableTextures\CommandButtons\BTNUsedSoulGem.blp
+
+[mdpb]
+Art=ReplaceableTextures\CommandButtons\BTNPebble.blp
+
+// slippers of agility +2
+[rag1]
+Art=ReplaceableTextures\CommandButtons\BTNSlippersOfAgility.blp
+
+// claws of attack +3
+[rat3]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+[rin1]
+Art=ReplaceableTextures\CommandButtons\BTNMantleOfIntelligence.blp
+
+// ring of protection +2
+[rde1]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNRingGreen.blp
+
+// ring of protection +3
+[rde2]
+Art=ReplaceableTextures\CommandButtons\BTNRingGreen.blp
+
+// ring of protection +4
+[rde3]
+Art=ReplaceableTextures\CommandButtons\BTNRingGreen.blp
+
+[rhth]
+Art=ReplaceableTextures\CommandButtons\BTNPeriapt1.blp
+
+[rst1]
+Art=ReplaceableTextures\CommandButtons\BTNGauntletsOfOgrePower.blp
+
+//orb of darkness
+[odef]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+[ofir]
+Buttonpos=0,2
+Requires=hcas
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfFire.blp
+
+[ofro]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfFrost.blp
+
+[olig]
+Buttonpos=2,2
+Requires=ofrt
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfLightning.blp
+
+[oli2]
+Buttonpos=0,2
+Requires=ofrt
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfLightning.blp
+
+[oven]
+Buttonpos=0,2
+Requires=etoe
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfVenom.blp
+
+[ocor]
+Buttonpos=0,2
+Requires=unp2
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfCorruption.blp
+
+// potion of divinity
+[pdiv]
+Art=ReplaceableTextures\CommandButtons\BTNPotionOfDivinity.blp
+
+[phea]
+Requires=TWN2
+Buttonpos=0,1
+Art=ReplaceableTextures\CommandButtons\BTNPotionGreenSmall.blp
+
+[pghe]
+Art=ReplaceableTextures\CommandButtons\BTNPotionGreen.blp
+
+[pinv]
+Art=ReplaceableTextures\CommandButtons\BTNLesserInvisibility.blp
+
+[pgin]
+Art=ReplaceableTextures\CommandButtons\BTNGreaterInvisibility.blp
+
+[pman]
+Requires=TWN2
+Buttonpos=1,1
+Art=ReplaceableTextures\CommandButtons\BTNPotionBlueSmall.blp
+
+[pgma]
+Art=ReplaceableTextures\CommandButtons\BTNPotionBlueBig.blp
+
+[pnvu]
+Art=ReplaceableTextures\CommandButtons\BTNGreaterInvulneralbility.blp
+
+[pnvl]
+Buttonpos=2,2
+Art=ReplaceableTextures\CommandButtons\BTNLesserInvulneralbility.blp
+
+[pres]
+Art=ReplaceableTextures\CommandButtons\BTNPotionOfRestoration.blp
+
+//potion of speed
+[pspd]
+Art=ReplaceableTextures\CommandButtons\BTNPotionRed.blp
+
+[rlif]
+Art=ReplaceableTextures\CommandButtons\BTNRingSkull.blp
+
+[rwiz]
+Buttonpos=2,0
+Art=ReplaceableTextures\CommandButtons\BTNSobiMask.blp
+
+[shea]
+Requires=unp2
+Buttonpos=1,2
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfTownPortal.blp
+
+[sman]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfProtection.blp
+
+[spro]
+Art=ReplaceableTextures\CommandButtons\BTNScroll.blp
+
+[sres]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfHealing.blp
+
+// Staff of Silence
+[ssil]
+Art=ReplaceableTextures\CommandButtons\BTNStaffOfSilence.blp
+
+[stwp]
+Requires=TWN2
+Buttonpos=2,1
+Art=ReplaceableTextures\CommandButtons\BTNScrollUber.blp
+
+[tels]
+Art=ReplaceableTextures\CommandButtons\BTNTelescope.blp
+
+[tdex]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+
+[texp]
+Art=ReplaceableTextures\CommandButtons\BTNTomeBrown.blp
+
+[tint]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+
+[tkno]
+Art=ReplaceableTextures\CommandButtons\BTNTomeRed.blp
+
+[tstr]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+
+[ward]
+Art=ReplaceableTextures\CommandButtons\BTNDrum.blp
+
+[will]
+Art=ReplaceableTextures\CommandButtons\BTNWand.blp
+
+[wneg]
+ButtonPos=3,1
+Requires=unp1
+Art=ReplaceableTextures\CommandButtons\BTNWandSkull.blp
+
+[fgrd]
+Art=ReplaceableTextures\CommandButtons\BTNRedDragon.blp
+
+[fgrg]
+Art=ReplaceableTextures\CommandButtons\BTNRockGolem.blp
+
+[fgdg]
+Art=ReplaceableTextures\CommandButtons\BTNDoomGuard.blp
+
+[fgfh]
+Art=ReplaceableTextures\CommandButtons\BTNFelHound.blp
+
+[fgsk]
+Art=ReplaceableTextures\CommandButtons\BTNBookOfTheDead.blp
+
+[ktrm]
+Art=ReplaceableTextures\CommandButtons\BTNUrnOfKelThuzad.blp
+
+[sehr]
+Art=ReplaceableTextures\CommandButtons\BTNHeartOfSearinox.blp
+
+[azhr]
+Art=ReplaceableTextures\CommandButtons\BTNHeartOfAszune.blp
+
+[bzbe]
+Art=ReplaceableTextures\CommandButtons\BTNVialEmpty.blp
+
+[bzbf]
+Art=ReplaceableTextures\CommandButtons\BTNVialFull.blp
+
+[cnhn]
+Art=ReplaceableTextures\CommandButtons\BTNHornOfCenarius.blp
+
+[glsk]
+Art=ReplaceableTextures\CommandButtons\BTNGuldanSkull.blp
+
+[engs]
+Art=ReplaceableTextures\CommandButtons\BTNEnchantedGemstone.blp
+
+[k3m1]
+Art=ReplaceableTextures\CommandButtons\BTN3M1.blp
+
+[k3m2]
+Art=ReplaceableTextures\CommandButtons\BTN3M2.blp
+
+[k3m3]
+Art=ReplaceableTextures\CommandButtons\BTN3M3.blp
+
+[modt]
+Art=ReplaceableTextures\CommandButtons\BTNMaskOfDeath.blp
+
+// scroll of animate dead
+[sand]
+Art=ReplaceableTextures\CommandButtons\BTNSnazzyScrollPurple.blp
+
+// scroll of resurrection
+[srrc]
+Art=ReplaceableTextures\CommandButtons\BTNSnazzyScroll.blp
+
+// scroll of the beast
+[sror]
+Art=ReplaceableTextures\CommandButtons\BTNSnazzyScrollGreen.blp
+
+[infs]
+Art=ReplaceableTextures\CommandButtons\BTNInfernalStone.blp
+
+// Ice Shard
+[shar]
+Art=ReplaceableTextures\CommandButtons\BTNIceShard.blp
+
+// Amulet of the Wild
+[wild]
+Art=ReplaceableTextures\CommandButtons\BTNAmuletOftheWild.blp
+
+[wswd]
+Art=ReplaceableTextures\CommandButtons\BTNSentryWard.blp
+
+[whwd]
+Art=ReplaceableTextures\CommandButtons\BTNHealingWard.blp
+
+[wlsd]
+Art=ReplaceableTextures\CommandButtons\BTNStarWand.blp
+
+[wcyc]
+Art=ReplaceableTextures\CommandButtons\BTNWandOfCyclone.blp
+
+//wand of necromancy
+[rnec]
+Art=ReplaceableTextures\CommandButtons\BTNRodOfNecromancy.blp
+
+// antibody potion
+[pams]
+Requires=etoe
+Buttonpos=1,2
+Art=ReplaceableTextures\CommandButtons\BTNSnazzyPotion.blp
+
+// cloak of flames
+[clfm]
+Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
+
+// talisman of evasion
+[evtl]
+Art=ReplaceableTextures\CommandButtons\BTNTalisman.blp
+
+[nspi]
+Art=ReplaceableTextures\CommandButtons\BTNNecklace.blp
+
+// lion horn of 
+[lhst]
+Art=ReplaceableTextures\CommandButtons\BTNLionHorn.blp
+
+// khadgar's pipe of insight
+[kpin]
+Art=ReplaceableTextures\CommandButtons\BTNPipeOfInsight.blp
+
+// scourge bone chimes
+[sbch]
+Art=ReplaceableTextures\CommandButtons\BTNBoneChimes.blp
+
+// alleria's flute of accuracy
+[afac]
+Art=ReplaceableTextures\CommandButtons\BTNAlleriaFlute.blp
+
+// ancient janggo of endurance
+[ajen]
+Art=ReplaceableTextures\CommandButtons\BTNJanggo.blp
+
+// legion doom-horn
+[lgdh]
+Art=ReplaceableTextures\CommandButtons\BTNHornOfDoom.blp
+
+// hood of cunning
+[hcun]
+Art=ReplaceableTextures\CommandButtons\BTNHoodOfCunning.blp
+
+// medallion of courage
+[mcou]
+Art=ReplaceableTextures\CommandButtons\BTNMedalionOfCourage.blp
+
+// helm of valor
+[hval]
+Art=ReplaceableTextures\CommandButtons\BTNHelmOfValor.blp
+
+// circlet of nobility
+[cnob]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNCirclet.blp
+
+// periapt of vitality
+[prvt]
+Buttonpos=1,0
+Art=ReplaceableTextures\CommandButtons\BTNPeriapt.blp
+
+// tome of greater experience
+[tgxp]
+Art=ReplaceableTextures\CommandButtons\BTNManual3.blp
+
+// mana stone
+[mnst]
+Art=ReplaceableTextures\CommandButtons\BTNManaStone.blp
+
+// health stone
+[hlst]
+Art=ReplaceableTextures\CommandButtons\BTNHealthStone.blp
+
+[tpow]
+Art=ReplaceableTextures\CommandButtons\BTNTomeRed.blp
+
+[tst2]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+
+[tin2]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+
+[tdx2]
+Art=ReplaceableTextures\CommandButtons\BTNTome.blp
+
+// ring of protection +1
+[rde0]
+Art=ReplaceableTextures\CommandButtons\BTNRingGreen.blp
+
+// ring of protection +5
+[rde4]
+Art=ReplaceableTextures\CommandButtons\BTNRingGreen.blp
+
+// claws of attack +6
+[rat6]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+// claws of attack +9
+[rat9]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+// claws of attack +12
+[ratc]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+// claws of attack +15
+[ratf]
+Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
+
+// manual of health
+[manh]
+Art=ReplaceableTextures\CommandButtons\BTNManual.blp
+
+// pendant of mana
+[pmna]
+Art=ReplaceableTextures\CommandButtons\BTNPendantOfMana.blp
+
+// pendant of energy
+[penr]
+Art=ReplaceableTextures\CommandButtons\BTNPendantOfEnergy.blp
+
+// gloves of celerity
+[gcel]
+Art=ReplaceableTextures\CommandButtons\BTNGlove.blp
+
+// the ledger, 'null' quest item
+[ledg]
+Art=ReplaceableTextures\CommandButtons\BTNSorceressMaster.blp
+
+// Talisman of the Wild, quest reward
+[totw]
+Art=ReplaceableTextures\CommandButtons\BTNStone.blp
+
+[kybl]
+Art=ReplaceableTextures\CommandButtons\BTNBloodKey.blp
+
+[kygh]
+Art=ReplaceableTextures\CommandButtons\BTNGhostKey.blp
+
+[kysn]
+Art=ReplaceableTextures\CommandButtons\BTNSunKey.blp
+
+[kymn]
+Art=ReplaceableTextures\CommandButtons\BTNMoonKey.blp
+
+[phlt]
+Art=ReplaceableTextures\CommandButtons\BTNUndeadShrine.blp
+
+[gopr]
+Art=ReplaceableTextures\CommandButtons\BTNGlyph.blp
+
+[ches]
+Art=ReplaceableTextures\CommandButtons\BTNCheese.blp
+
+// maul of strength
+[mlst]
+Art=ReplaceableTextures\CommandButtons\BTNHammer.blp
+
+// Ring of Superiority
+[rnsp]
+Art=ReplaceableTextures\CommandButtons\BTNGoldRing.blp
+
+// Bracer of Agility
+[brag]
+Art=ReplaceableTextures\CommandButtons\BTNRingPurple.blp
+
+// Skull Shield
+[sksh]
+Art=ReplaceableTextures\CommandButtons\BTNGrimWard.blp
+
+// Voodoo Doll
+[vddl]
+Art=ReplaceableTextures\CommandButtons\BTNShadowPact.blp
+
+// Spider Ring
+[sprn]
+Art=ReplaceableTextures\CommandButtons\BTNRingVioletSpider.blp
+
+// Totem of Might
+[tmmt]
+Art=ReplaceableTextures\CommandButtons\BTNEntrapmentWard.blp
+
+// Ancient Figurine
+[anfg]
+Art=ReplaceableTextures\CommandButtons\BTNClayFigurine.blp
+
+// Lion's Ring
+[lnrn]
+Art=ReplaceableTextures\CommandButtons\BTNRingLionHead.blp
+
+// Ironwood Branch
+[iwbr]
+Art=ReplaceableTextures\CommandButtons\BTNNatureTouchGrow.blp
+
+// Jade Ring
+[jdrn]
+Art=ReplaceableTextures\CommandButtons\BTNRingJadeFalcon.blp
+
+// Druid Pouch
+[drph]
+Art=ReplaceableTextures\CommandButtons\BTNDust.blp
+
+// Healing Salve
+[hslv]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNHealingSalve.blp
+
+// Clarity Potion
+[pclr]
+Buttonpos=1,2
+Requires=etoe
+Art=ReplaceableTextures\CommandButtons\BTNPotionOfClarity.blp
+
+// Lesser Clarity Potion
+[plcl]
+Buttonpos=1,0
+Art=ReplaceableTextures\CommandButtons\BTNLesserClarityPotion.blp
+
+// Minor Rejuvenation Potion
+[rej1]
+Art=ReplaceableTextures\CommandButtons\BTNMinorRejuvPotion.blp
+
+// Lesser Rejuvenation Potion
+[rej2]
+Art=ReplaceableTextures\CommandButtons\BTNLesserRejuvPotion.blp
+
+// Rejuvenation Potion
+[rej3]
+Art=ReplaceableTextures\CommandButtons\BTNRejuvPotion.blp
+
+// Greater Rejuvenation Potion
+[rej4]
+Art=ReplaceableTextures\CommandButtons\BTNGreaterRejuvPotion.blp
+
+// Lesser Rejuvenation Scroll
+[rej5]
+Art=ReplaceableTextures\CommandButtons\BTNLesserRejuvScroll.blp
+
+// Greater Rejuvenation Scroll
+[rej6]
+Art=ReplaceableTextures\CommandButtons\BTNGreaterRejuvScroll.blp
+
+// Scroll of Regeneration
+[sreg]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfRegenerationGreen.blp
+
+// Chest of Gold
+[gold]
+Art=ReplaceableTextures\CommandButtons\BTNChestOfGold.blp
+
+// Bundle of Lumber
+[lmbr]
+Art=ReplaceableTextures\CommandButtons\BTNBundleOfLumber.blp
+
+// Flare Gun
+[fgun]
+Art=ReplaceableTextures\CommandButtons\BTNFlare.blp
+
+// Potion of Omniscience
+[pomn]
+Art=ReplaceableTextures\CommandButtons\BTNPotionOfOmniscience.blp
+
+// Wand of Neutralization
+[wneu]
+Art=ReplaceableTextures\CommandButtons\BTNWandOfNeutralization.blp
+
+// Spider Silk
+[silk]
+Art=ReplaceableTextures\CommandButtons\BTNSpiderSilkBroach.blp
+
+// Monster Lure
+[lure]
+Art=ReplaceableTextures\CommandButtons\BTNMonsterLure.blp
+
+//Horn of Fog
+[sfog]
+Art=ReplaceableTextures\CommandButtons\BTNHornOfFog.blp
+
+
+// Sacrificial Skull
+[skul]
+ButtonPos=2,0
+Requires=ugrv
+Art=ReplaceableTextures\CommandButtons\BTNSacrificialSkull.blp
+
+// Moonstone
+[moon]
+Buttonpos=0,0
+Art=ReplaceableTextures\CommandButtons\BTNMoonStone.blp
+
+// Vampiric Potion
+[vamp]
+Art=ReplaceableTextures\CommandButtons\BTNPotionOfVampirism.blp
+
+// Runed Bracers
+[brac]
+Art=ReplaceableTextures\CommandButtons\BTNRunedBracers.blp
+
+// Wand of Mana Steal
+[woms]
+Art=ReplaceableTextures\CommandButtons\BTNWandOfManaSteal.blp
+
+// Tiny Castle
+[tcas]
+Requires=hcas
+Art=ReplaceableTextures\CommandButtons\BTNTinyCastle.blp
+
+// Tiny Scout Tower
+[tsct]
+Buttonpos=3,1
+Requires=hkee
+Art=ReplaceableTextures\CommandButtons\BTNHumanWatchTower.blp
+
+// Tiny Great Hall
+[tgrh]
+Buttonpos=1,2
+Requires=ofrt
+Art=ReplaceableTextures\CommandButtons\BTNGreathall.blp
+
+// Wand of Shadowsight
+[wshs]
+Art=ReplaceableTextures\CommandButtons\BTNWandOfShadowSight.blp
+
+// Tome of Retraining
+[tret]
+Buttonpos=0,2
+Art=ReplaceableTextures\CommandButtons\BTNTomeOfRetraining.blp
+
+// Staff of Teleportation
+[stel]
+Buttonpos=3,1
+Art=ReplaceableTextures\CommandButtons\BTNStaffOfTeleportation.blp
+
+// Staff of Preservation
+[spre]
+Buttonpos=3,1
+Requires=etoa
+Art=ReplaceableTextures\CommandButtons\BTNStaffOfPreservation.blp
+
+// Mechanical Critter
+[mcri]
+ButtonPos=2,0
+Art=ReplaceableTextures\CommandButtons\BTNMechanicalCritter.blp
+
+// Amulet of Spell Shield
+[spsh]
+Art=ReplaceableTextures\CommandButtons\BTNSpellShieldAmulet.blp
+
+// Spell Book
+[sbok]
+Art=ReplaceableTextures\CommandButtons\BTNSpellBookBLS.blp
+
+// Staff of Sanctuary
+[ssan]
+Art=ReplaceableTextures\CommandButtons\BTNStaffOfSanctuary.blp
+Requires=hcas
+Buttonpos=1,2
+
+// Scroll of Speed
+[shas]
+Buttonpos=1,0
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfHaste.blp
+
+// Dust of Appearance
+[dust]
+Art=ReplaceableTextures\CommandButtons\BTNDustOfAppearance.blp
+Buttonpos=3,0
+
+// Orb of Slow
+[oslo]
+Art=ReplaceableTextures\CommandButtons\BTNOrbofSlowness.blp
+
+// staff of negation
+[sneg]
+Art=ReplaceableTextures\CommandButtons\BTNStaffOfNegation.blp
+
+// Rune of Rebirth
+[rreb]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+// Glyph of Ultravision
+[guvi]
+Art=ReplaceableTextures\CommandButtons\BTNGlyph.blp
+
+// Diamond of Summoning
+[dsum]
+Art=ReplaceableTextures\CommandButtons\BTNDarkSummoning.blp
+
+//startvarious runes and glyphs
+//glyph of omniscience
+[gomn]
+Art=ReplaceableTextures\CommandButtons\BTNGlyph.blp
+
+//glyph of foritfication
+[gfor]
+Art=ReplaceableTextures\CommandButtons\BTNGlyph.blp
+
+//rune of spirit link
+[rspl]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of spell shield
+[rsps]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of resurrection, lesser
+[rre1]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of resurrection, greater
+[rre2]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of speed
+[rspd]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of mana
+[rman]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of mana greater
+[rma2]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of restoration
+[rres]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of heal lesser
+[rhe1]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of heal
+[rhe2]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of heal greater
+[rhe3]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of dispelling
+[rdis]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//rune of the watcher
+[rwat]
+Art=ReplaceableTextures\CommandButtons\BTNRune.blp
+
+//END various runes and glyphs
+
+//#RESTNOBETA
+//shadow orbs, campaign items
+[sor1]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+[sor2]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+[sor3]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+[sor4]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+[sor5]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+[sor6]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+[sor7]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+[sor8]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+[sor9]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+// shadow orb 10
+[sora]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+// shadow orb fragment
+[sorf]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDarkness.blp
+
+// frostwyrm skull shield
+[fwss]
+Art=ReplaceableTextures\CommandButtons\BTNGrimWard.blp
+
+// gem fragment
+[gmfr]
+Art=ReplaceableTextures\CommandButtons\BTNGem.blp
+
+// archmagi rings
+[ram1]
+Art=ReplaceableTextures\CommandButtons\BTNRingJadeFalcon.blp
+
+[ram2]
+Art=ReplaceableTextures\CommandButtons\BTNRingJadeFalcon.blp
+
+[ram3]
+Art=ReplaceableTextures\CommandButtons\BTNRingJadeFalcon.blp
+
+[ram4]
+Art=ReplaceableTextures\CommandButtons\BTNRingJadeFalcon.blp
+
+// shamanic totem
+[shtm]
+Art=ReplaceableTextures\CommandButtons\BTNEntrapmentWard.blp
+
+// essence of aszune
+[esaz]
+Art=ReplaceableTextures\CommandButtons\BTNHeartOfAszune.blp
+
+[jpnt]
+Art=ReplaceableTextures\CommandButtons\BTNScrollOfProtection.blp
+
+// shimmerweed
+[shwd]
+Art=ReplaceableTextures\CommandButtons\BTNShimmerWeed.blp
+
+// battle standard
+[btst]
+Art=ReplaceableTextures\CommandButtons\BTNOrcBattleStandard.blp
+
+// skeletal artifact
+[skrt]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfCorruption.blp
+
+// thunder lizard egg
+[thle]
+Art=ReplaceableTextures\CommandButtons\BTNThunderLizardEgg.blp
+
+// secret level powerup
+[sclp]
+Art=ReplaceableTextures\CommandButtons\BTNSelectHeroOn.blp
+
+// orb of gul'dan
+[gldo]
+Art=ReplaceableTextures\CommandButtons\BTNUsedSoulGem.blp
+
+// wirt's leg
+[wtlg]
+Art=ReplaceableTextures\CommandButtons\BTNWirtsLeg.blp
+
+// wirt's other leg
+[wolg]
+Art=ReplaceableTextures\CommandButtons\BTNWirtsOtherLeg.blp
+
+[tbsm]
+Art=ReplaceableTextures\CommandButtons\BTNBlacksmith.blp
+
+[tfar]
+Art=ReplaceableTextures\CommandButtons\BTNFarm.blp
+
+[tlum]
+Art=ReplaceableTextures\CommandButtons\BTNHumanLumberMill.blp
+
+[tbar]
+Art=ReplaceableTextures\CommandButtons\BTNHumanBarracks.blp
+
+[tbak]
+Art=ReplaceableTextures\CommandButtons\BTNAltarOfKings.blp
+
+[mgtk]
+Art=ReplaceableTextures\CommandButtons\BTNBlood&GhostKey.blp
+
+// staff of reanimation
+[stre]
+Art=ReplaceableTextures\CommandButtons\BTNWandSkull.blp
+
+// holy relic
+[horl]
+Art=ReplaceableTextures\CommandButtons\BTNGlyph.blp
+
+// helm of battlethirst
+[hbth]
+Art=ReplaceableTextures\CommandButtons\BTNUnholyAura.blp
+
+// Bladebane Armor
+[blba]
+Art=ReplaceableTextures\CommandButtons\BTNArmorGolem.blp
+
+// Runed Gauntlets
+[rugt]
+Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp
+
+// Firehand Gauntlets
+[frhg]
+Art=ReplaceableTextures\CommandButtons\BTNAdvancedUnholyStrength.blp
+
+// Gloves of Spell Mastery
+[gvsm]
+Art=ReplaceableTextures\CommandButtons\BTNSpellSteal.blp
+
+// Crown of the Deathlord
+[crdt]
+Art=ReplaceableTextures\CommandButtons\BTNRevenant.blp
+
+// Arcane Scroll
+[arsc]
+Art=ReplaceableTextures\CommandButtons\BTNBansheeAdept.blp
+
+// scroll of the unholy legion
+[scul]
+Art=ReplaceableTextures\CommandButtons\BTNBansheeMaster.blp
+
+// tome of sacrifices
+[tmsc]
+Art=ReplaceableTextures\CommandButtons\BTNNecromancerAdept.blp
+
+// drek'thar's spellbook
+[dtsb]
+Art=ReplaceableTextures\CommandButtons\BTNSorceressMaster.blp
+
+// Grimoire of Souls
+[grsl]
+Art=ReplaceableTextures\CommandButtons\BTNNecromancerMaster.blp
+
+// Arcanite Shield
+[arsh]
+Art=ReplaceableTextures\CommandButtons\BTNArcaniteArmor.blp
+
+// Shield of the Deathlord
+[shdt]
+Art=ReplaceableTextures\CommandButtons\BTNLightningShield.blp
+
+// Shield of Honor
+[shhn]
+Art=ReplaceableTextures\CommandButtons\BTNHumanArmorUpThree.blp
+
+// Enchanted Shield
+[shen]
+Art=ReplaceableTextures\CommandButtons\BTNThoriumArmor.blp
+
+// Thunderlizard Diamond
+[thdm]
+Art=ReplaceableTextures\CommandButtons\BTNEnchantedGemstone.blp
+
+/ Stuffed Penguin
+[stpg]
+Art=ReplaceableTextures\CommandButtons\BTNPenguin.blp
+
+// Shimmerglaze Roast
+[shrs]
+Art=ReplaceableTextures\CommandButtons\BTNMonsterLure.blp
+
+// Bloodfeather's Heart
+[bfhr]
+Art=ReplaceableTextures\CommandButtons\BTNPhilosophersStone.blp
+
+// Celestial Orb of Souls
+[cosl]
+Art=ReplaceableTextures\CommandButtons\BTNUsedSoulGem.blp
+
+// Shaman Claws
+[shcw]
+Art=ReplaceableTextures\CommandButtons\BTNShamanMaster.blp
+
+// Searing Blade
+[srbd]
+Art=ReplaceableTextures\CommandButtons\BTNArcaniteMelee.blp
+
+// Frostguard
+[frgd]
+Art=ReplaceableTextures\CommandButtons\BTNThoriumMelee.blp
+
+// Enchanted Vial
+[envl]
+Art=ReplaceableTextures\CommandButtons\BTNVialFull.blp
+
+// Rusty Mining Pick
+[rump]
+Art=ReplaceableTextures\CommandButtons\BTNGatherGold.blp
+
+// Mogrin's Report
+[mort]
+Art=ReplaceableTextures\CommandButtons\BTNSpy.blp
+
+// Serathil
+[srtl]
+Art=ReplaceableTextures\CommandButtons\BTNOrcMeleeUpThree.blp
+
+// Sturdy War Axe
+[stwa]
+Art=ReplaceableTextures\CommandButtons\BTNOrcMeleeUpOne.blp
+
+// Killmaim
+[klmm]
+Art=ReplaceableTextures\CommandButtons\BTNSpiritWalkerAdeptTraining.blp
+
+// Rod of the Sea
+[rots]
+Art=ReplaceableTextures\CommandButtons\BTNWitchDoctorAdept.blp
+
+// Ancestral Staff
+[axas]
+Art=ReplaceableTextures\CommandButtons\BTNWitchDoctorMaster.blp
+
+// Mindstaff
+[mnsf]
+Art=ReplaceableTextures\CommandButtons\BTNBrilliance.blp
+
+// Scepter of Healing
+[schl]
+Art=ReplaceableTextures\CommandButtons\BTNPriestAdept.blp
+
+// Assassin's Blade
+[asbl]
+Art=ReplaceableTextures\CommandButtons\BTNDaggerOfEscape.blp
+
+// Keg of Ale
+[kgal]
+Art=ReplaceableTextures\CommandButtons\BTNBarrel.blp
+
+// thunder hawk egg
+[dphe]
+//no button because its a powerup
+Art=ReplaceableTextures\CommandButtons\BTNThunderLizardEgg.blp
+
+// Keg of Thunderwater
+[dkfw]
+//no button because its a powerup
+Art=ReplaceableTextures\CommandButtons\BTNBarrel.blp
+
+// Thunderbloom Bulb
+[dthb]
+//no button because its a powerup
+Art=ReplaceableTextures\CommandButtons\BTNManaFlareOff.blp
+
+
+
+

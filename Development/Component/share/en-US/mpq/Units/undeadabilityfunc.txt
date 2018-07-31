@@ -1,0 +1,787 @@
+// Replenish Life & Mana
+[Arpb]
+Art=ReplaceableTextures\CommandButtons\BTNReplenishManaOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNReplenishManaOff.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Casterart=Abilities\Spells\Undead\ReplenishHealth\ReplenishHealthCaster.mdl
+Casterattach=origin
+Specialart=Abilities\Spells\Undead\ReplenishHealth\ReplenishHealthCasterOverhead.mdl
+Specialattach=overhead
+Targetart=Abilities\Spells\Human\Heal\HealTarget.mdl
+Order=replenish
+Orderon=replenishon
+Orderoff=replenishoff
+
+[Brpb]
+Buffart=ReplaceableTextures\CommandButtons\BTNReplenishMana.blp
+
+// Replenish Life (Obsidian Statue)
+[Arpl]
+Art=ReplaceableTextures\CommandButtons\BTNReplenishHealthOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNReplenishHealthOff.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Casterart=Abilities\Spells\Undead\ReplenishHealth\ReplenishHealthCaster.mdl
+Casterattach=origin
+Specialart=Abilities\Spells\Undead\ReplenishHealth\ReplenishHealthCasterOverhead.mdl
+Specialattach=overhead
+Targetart=Abilities\Spells\Human\Heal\HealTarget.mdl
+Order=replenishlife
+Orderon=replenishlifeon
+Orderoff=replenishlifeoff
+
+[Brpl]
+Buffart=ReplaceableTextures\CommandButtons\BTNReplenishHealth.blp
+
+// Spirit Touch (Obsidian Statue)
+[Arpm]
+Art=ReplaceableTextures\CommandButtons\BTNReplenishManaOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNReplenishManaOff.blp
+Buttonpos=1,2
+Unbuttonpos=1,2
+Casterart=Abilities\Spells\Undead\ReplenishMana\ReplenishManaCaster.mdl
+Casterattach=origin
+Specialart=Abilities\Spells\Undead\ReplenishMana\ReplenishManaCasterOverhead.mdl
+Specialattach=overhead
+Targetart=Abilities\Spells\Undead\ReplenishMana\SpiritTouchTarget.mdl
+//#LINENOBETA
+Effectsound=SpiritTouch
+Order=replenishmana
+Orderon=replenishmanaon
+Orderoff=replenishmanaoff
+
+[Brpm]
+Buffart=ReplaceableTextures\CommandButtons\BTNReplenishMana.blp
+
+// Exhume Corpses
+[Aexh]
+Art=ReplaceableTextures\PassiveButtons\PASBTNExhumeCorpses.blp
+Buttonpos=3,2
+Requires=Ruex
+
+// Moon pool mana battery
+[Amb2]
+Art=ReplaceableTextures\CommandButtons\BTNReplenishManaOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNReplenishManaOff.blp
+Buttonpos=1,2
+Unbuttonpos=1,2
+Casterart=Abilities\Spells\Undead\ReplenishMana\ReplenishManaCaster.mdl
+Specialart=Abilities\Spells\Items\AIma\AImaTarget.mdl
+Order=recharge
+
+// Destroyer Form
+[Aave]
+Art=ReplaceableTextures\CommandButtons\BTNDestroyer.blp
+Unart=ReplaceableTextures\CommandButtons\BTNObsidianStatue.blp
+Buttonpos=3,2
+Unbuttonpos=3,2
+Order=sphinxform
+Unorder=unsphinxform
+Requires=Rusp
+
+// Orb of Death
+[Afak]
+Art=ReplaceableTextures\CommandButtons\BTNOrbOfDeathOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNOrbOfDeathOff.blp
+Buttonpos=1,2
+Unbuttonpos=1,2
+Missileart=Abilities\Spells\Undead\OrbOfDeath\AnnihilationMissile.mdl
+Missilespeed=1500
+MissileHoming=1
+Animnames=attack
+
+// Devour Magic
+[Advm]
+Art=ReplaceableTextures\CommandButtons\BTNDevourMagic.blp
+Buttonpos=0,2
+Specialart=Abilities\Spells\Human\DispelMagic\DispelMagicTarget.mdl
+Missileart=Abilities\Spells\Undead\DevourMagic\DevourMagicBirthMissile.mdl
+Missilespeed=1200
+Missilearc=0.10
+MissileHoming=1
+
+// Blight-like Regeneration Aura (to be renamed)
+[Aabr]
+Art=ReplaceableTextures\PassiveButtons\PASBTNRegenerationAura.blp
+Buttonpos=2,2
+Targetart=Abilities\Spells\Undead\RegenerationAura\ObsidianRegenAura.mdl
+Targetattach=origin
+
+[Babr]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNRegenerationAura.blp
+Targetart=Abilities\Spells\Other\GeneralAuraTarget\GeneralAuraTarget.mdl
+Targetattach=origin
+
+// Absorb Mana
+[Aabs]
+Art=ReplaceableTextures\CommandButtons\BTNAbsorbMagic.blp
+Buttonpos=0,2
+Missileart=Abilities\Spells\Undead\AbsorbMana\AbsorbManaBirthMissile.mdl
+Missilespeed=1500
+MissileHoming=1
+Order=absorbmana
+
+// Undead Build
+[AUbu]
+Art=ReplaceableTextures\CommandButtons\BTNScourgeBuild.blp
+Buttonpos=0,2
+Order=undeadbuild
+
+// Burrow
+[Abur]
+Requires=Rubu
+Art=ReplaceableTextures\CommandButtons\BTNCryptFiendBurrow.blp
+Unart=ReplaceableTextures\CommandButtons\BTNCryptFiendUnBurrow.blp
+Buttonpos=3,2
+Unbuttonpos=3,2
+Order=burrow
+Unorder=unburrow
+
+// Burrow (lvl 2 scarab)
+[Abu2]
+Art=ReplaceableTextures\CommandButtons\BTNCryptFiendBurrow.blp
+Unart=ReplaceableTextures\CommandButtons\BTNCryptFiendUnBurrow.blp
+Buttonpos=3,2
+Unbuttonpos=3,2
+Order=burrow
+Unorder=unburrow
+
+// Burrow (lvl 3 scarab)
+[Abu3]
+Art=ReplaceableTextures\CommandButtons\BTNCryptFiendBurrow.blp
+Unart=ReplaceableTextures\CommandButtons\BTNCryptFiendUnBurrow.blp
+Buttonpos=3,2
+Unbuttonpos=3,2
+Order=burrow
+Unorder=unburrow
+
+
+// Impale
+[AUim]
+Art=ReplaceableTextures\CommandButtons\BTNImpale.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNImpale.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Effectsound=ImpaleCast
+Specialart=Abilities\Spells\Undead\Impale\ImpaleMissTarget.mdl
+Order=impale
+
+[BUim]
+Buffart=ReplaceableTextures\CommandButtons\BTNImpale.blp
+Effectart=Abilities\Spells\Undead\Impale\ImpaleHitTarget.mdl
+Effectattach=sprite,first
+Targetart=Abilities\Spells\Human\StormBolt\StormBoltTarget.mdl
+Targetattach=overhead
+
+// Thorny Shield
+[AUts]
+Art=ReplaceableTextures\PassiveButtons\PASBTNThornShield.blp
+//Unart=ReplaceableTextures\CommandButtons\BTNThornyShieldOff.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNThornShield.blp
+Buttonpos=1,2
+Unbuttonpos=1,2
+Researchbuttonpos=1,0
+// This ability is now passive...
+//Order=Thornyshield
+//Unorder=Unthornyshield
+ 
+[BUts]
+Buffart=ReplaceableTextures\CommandButtons\BTNThornShield.blp
+Targetart=Abilities\Spells\Undead\ThornyShield\ThornyShieldTargetChestLeft.mdl,Abilities\Spells\Undead\ThornyShield\ThornyShieldTargetChestRight.mdl,Abilities\Spells\Undead\ThornyShield\ThornyShieldTargetChestMountLeft.mdl,Abilities\Spells\Undead\ThornyShield\ThornyShieldTargetChestMountRight.mdl
+Targetattachcount=4
+Targetattach=chest,left
+Targetattach1=chest,right
+Targetattach2=chest,mount,left
+Targetattach3=chest,mount,right
+
+// Carrion Scarabs
+[AUcb]
+Art=ReplaceableTextures\CommandButtons\BTNCarrionScarabsOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNCarrionScarabsOff.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNCarrionScarabs.blp
+Buttonpos=2,2
+Unbuttonpos=2,2
+Researchbuttonpos=2,0
+Order=Carrionscarabs
+Orderon=Carrionscarabson
+Orderoff=Carrionscarabsoff
+
+[BUcb]
+Buffart=ReplaceableTextures\CommandButtons\BTNCarrionScarabs.blp
+
+// Locust Swarm
+[AUls]
+Art=ReplaceableTextures\CommandButtons\BTNLocustSwarm.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNLocustSwarm.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Order=Locustswarm
+Effectsoundlooped=LocustSwarmLoop
+
+// Buff on locust
+[BUlo]
+Buffart=ReplaceableTextures\CommandButtons\BTNLocustSwarm.blp
+
+// Meat Wagon Cargo Hold
+[Amtc]
+Effectsound=LoadUnload
+
+// True Sight
+[Atru]
+Art=ReplaceableTextures\PassiveButtons\PASBTNShadeTrueSight.blp
+Buttonpos=0,2
+
+// Acolyte Harvest
+[Aaha]
+Art=ReplaceableTextures\CommandButtons\BTNGatherGold.blp
+Unart=ReplaceableTextures\CommandButtons\BTNReturnGoods.blp
+Buttonpos=3,1
+UnButtonpos=3,1
+Effectsound=AcolyteMining
+Order=harvest
+
+// Ghoul Harvest
+[Ahrl]
+Art=ReplaceableTextures\CommandButtons\BTNGatherGold.blp
+Unart=ReplaceableTextures\CommandButtons\BTNReturnGoods.blp
+Buttonpos=3,1
+UnButtonpos=3,1
+Order=harvest
+
+// Unsummon
+[Auns]
+Art=ReplaceableTextures\CommandButtons\BTNUnsummonBuilding.blp
+Buttonpos=1,2
+Order=unsummon
+
+[Buns]
+Buffart=ReplaceableTextures\CommandButtons\BTNUnsummonBuilding.blp
+Targetart=Abilities\Spells\Undead\Unsummon\UnsummonTarget.mdl
+Effectsoundlooped=AcolyteUnsummonLoop
+
+// Haunted Gold Mine - Manages the ring of acolytes that is formed around a
+// haunted gold mine. This ability has no UI, and shouldn't be exposed to
+// scripts or the map editor. It is only here to specify art paths.
+[Abgm]
+Effectart=Abilities\Spells\Undead\UndeadMine\UndeadMineCircle.mdl
+Effectsoundlooped=MineDomeLoop
+
+// Graveyard
+[Agyd]
+SpecialArt=Abilities\Spells\Undead\Graveyard\GraveMarker.mdl
+
+// Sacrifice (Acolyte's button)
+[Alam]
+Art=ReplaceableTextures\CommandButtons\BTNSacrifice.blp
+Buttonpos=3,2
+Requires=usap
+Order=sacrifice
+
+// Sacrifice (Sacrificial Pit's button)
+[Asac]
+Art=ReplaceableTextures\CommandButtons\BTNSacrifice.blp
+Buttonpos=0,0
+Order=sacrifice
+
+// Cannibalize
+[Acan]
+Requires=Ruac
+Art=ReplaceableTextures\CommandButtons\BTNCannibalize.blp
+Buttonpos=0,2
+Order=cannibalize
+Animnames=stand,channel
+
+// Cannibalize (abomination)
+[Acn2]
+Requires=Ruac
+Art=ReplaceableTextures\CommandButtons\BTNCannibalize.blp
+Buttonpos=0,2
+Order=cannibalize
+Animnames=stand,channel
+
+// Spider Attack
+[Aspa]
+// Uses missile art and speed from the unit's attack.
+
+[Bspa]
+Buffart=ReplaceableTextures\CommandButtons\BTNSpider.blp
+Targetart=Abilities\Weapons\CryptFiendMissile\CryptFiendMissileTarget.mdl
+Targetattach=origin
+
+// Web
+[Aweb]
+Art=ReplaceableTextures\CommandButtons\BTNWebOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNWebOff.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Requires=Ruwb
+Missileart=Abilities\Spells\Undead\Web\Webmissile.mdl
+Missilespeed=1500
+MissileHoming=1
+Order=web
+Orderon=webon
+Orderoff=weboff
+
+// Web buff on ground units
+[Bweb]
+Buffart=ReplaceableTextures\CommandButtons\BTNWeb.blp
+Targetart=Abilities\Spells\Undead\Web\WebTarget.mdl
+Targetattach=origin
+
+// Web buff on air units
+[Bwea]
+Buffart=ReplaceableTextures\CommandButtons\BTNWeb.blp
+Targetart=Abilities\Spells\Undead\Web\Web_AirTarget.mdl
+Targetattach=chest,mount
+
+// Stone Form
+[Astn]
+Art=ReplaceableTextures\CommandButtons\BTNStoneForm.blp
+Unart=ReplaceableTextures\CommandButtons\BTNGargoyle.blp
+Requires=Rusf
+Buttonpos=0,2
+Unbuttonpos=0,2
+Order=stoneform
+Unorder=unstoneform
+
+// Load corpse
+[Amel]
+Art=ReplaceableTextures\CommandButtons\BTNUndeadLoadOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNUndeadLoadOff.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Order=loadcorpse
+
+// Unload corpse
+[Amed]
+Art=ReplaceableTextures\CommandButtons\BTNUndeadUnLoad.blp
+Buttonpos=1,2
+Order=unloadcorpse
+
+// Disease Cloud
+[Aapl]
+Art=ReplaceableTextures\PassiveButtons\PASBTNPlagueCloud.blp
+Buttonpos=1,2
+Requires=Rupc
+Targetart=Abilities\Spells\Undead\PlagueCloud\PlagueCloudCaster.mdl
+
+[Aap1]
+Art=ReplaceableTextures\PassiveButtons\PASBTNPlagueCloud.blp
+Buttonpos=1,2
+Requires=Rupc
+Targetart=Abilities\Spells\Undead\PlagueCloud\PlagueCloudCaster.mdl
+
+[Aap2]
+Art=ReplaceableTextures\PassiveButtons\PASBTNPlagueCloud.blp
+Buttonpos=0,2
+Requires=Rupc
+Targetart=
+
+[Aap3]
+Art=ReplaceableTextures\PassiveButtons\PASBTNPlagueCloud.blp
+Buttonpos=1,2
+Requires=Rupc
+Targetart=Abilities\Spells\Undead\PlagueCloud\PlagueCloudCaster.mdl
+
+[Aap4]
+Art=ReplaceableTextures\PassiveButtons\PASBTNPlagueCloud.blp
+Buttonpos=1,2
+Requires=Rupc
+Targetart=Abilities\Spells\Undead\PlagueCloud\PlagueCloudCaster.mdl
+
+[Bapl]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNPlagueCloud.blp
+Targetart=Units\Undead\PlagueCloud\PlagueCloudtarget.mdl
+Targetattach=head
+
+// Disease Cloud
+[Apts]
+Art=ReplaceableTextures\PassiveButtons\PASBTNPlagueCloud.blp
+Buttonpos=2,2
+Requires=Rupc
+
+// Frost Breath
+[Afrb]
+Missileart=Abilities\Weapons\FrostWyrmMissile\FrostWyrmMissile.mdl
+
+// Frost Attack
+[Afra]
+Art=ReplaceableTextures\PassiveButtons\PASBTNFrost.blp
+Buttonpos=0,2
+Missileart=Abilities\Weapons\ZigguratFrostMissile\ZigguratFrostMissile.mdl
+
+
+// Frost Attack (1,2) button pos
+[Afr2]
+Art=ReplaceableTextures\PassiveButtons\PASBTNFrost.blp
+Buttonpos=1,2
+Missileart=Abilities\Weapons\ZigguratFrostMissile\ZigguratFrostMissile.mdl
+
+
+// Freezing Breath
+[Afrz]
+Art=ReplaceableTextures\PassiveButtons\PASBTNFreezingBreath.blp
+Buttonpos=0,2
+Requires=Rufb
+Missileart=Abilities\Spells\Undead\FreezingBreath\FreezingBreathMissile.mdl
+Missilearc=0.0
+Missilespeed=900
+MissileHoming=1
+Order=freezingbreath
+
+[Bfrz]
+Buffart=ReplaceableTextures\CommandButtons\BTNFreezingBreath.blp
+Targetart=Abilities\Spells\Undead\FreezingBreath\FreezingBreathTargetArt.mdl
+Targetattach=origin
+
+// Raise Dead
+[Arai]
+Art=ReplaceableTextures\CommandButtons\BTNRaiseDeadOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNRaiseDeadOff.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Effectart=Abilities\Spells\Undead\RaiseSkeletonWarrior\RaiseSkeleton.mdl
+Order=raisedead
+Orderon=raisedeadon
+Orderoff=raisedeadoff
+
+[Brai]
+Buffart=ReplaceableTextures\CommandButtons\BTNSkeletonWarrior.blp
+
+// Unholy Frenzy
+[Auhf]
+Art=ReplaceableTextures\CommandButtons\BTNUnholyFrenzy.blp
+Buttonpos=1,2
+Requires=Rune
+Order=unholyfrenzy
+
+// Unholy Frenzy (Warlock)
+[Suhf]
+Art=ReplaceableTextures\CommandButtons\BTNUnholyFrenzy.blp
+Buttonpos=1,2
+Order=unholyfrenzy
+
+[Buhf]
+Buffart=ReplaceableTextures\CommandButtons\BTNUnholyFrenzy.blp
+Targetart=Abilities\Spells\Undead\UnholyFrenzy\UnholyFrenzyTarget.mdl
+Targetattach=overhead
+
+// Curse
+[Acrs]
+Art=ReplaceableTextures\CommandButtons\BTNCurseOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNCurseOff.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Order=curse
+Orderon=curseon
+Orderoff=curseoff
+
+[Bcrs]
+Spelldetail=1
+Buffart=ReplaceableTextures\CommandButtons\BTNCurse.blp
+Targetart=Abilities\Spells\Undead\Curse\CurseTarget.mdl
+Targetattach=overhead
+
+// Anti-magic Shell
+[Aams]
+Art=ReplaceableTextures\CommandButtons\BTNAntiMagicShell.blp
+Buttonpos=1,2
+Requires=Ruba
+Order=antimagicshell
+
+// Anti-magic Shell
+[Aam2]
+Art=ReplaceableTextures\CommandButtons\BTNAntiMagicShell.blp
+Buttonpos=1,2
+Requires=Ruba
+Order=antimagicshell
+
+[Bams]
+Buffart=ReplaceableTextures\CommandButtons\BTNAntiMagicShell.blp
+Targetart=Abilities\Spells\Undead\AntiMagicShell\AntiMagicShell.mdl
+Targetattach=overhead
+
+[Bam2]
+Buffart=ReplaceableTextures\CommandButtons\BTNAntiMagicShell.blp
+Targetart=Abilities\Spells\Undead\AntiMagicShell\AntiMagicShell.mdl
+Targetattach=overhead
+
+// Possession
+[Apos]
+Art=ReplaceableTextures\CommandButtons\BTNPossession.blp
+Buttonpos=2,2
+SpecialArt=
+Requires=Ruba
+Requiresamount=2
+Missileart=Abilities\Spells\Undead\Possession\PossessionMissile.mdl
+Missilespeed=1500
+MissileHoming=1
+Order=possession
+
+// Possession
+[Aps2]
+Art=ReplaceableTextures\CommandButtons\BTNPossession.blp
+Buttonpos=2,2
+SpecialArt=
+Requires=Ruba
+Requiresamount=2
+Missileart=Abilities\Spells\Undead\Possession\PossessionMissile.mdl
+Missilespeed=1500
+MissileHoming=1
+Order=possession
+
+[Bpos]
+Buffart=ReplaceableTextures\CommandButtons\BTNPossession.blp
+Targetart=Abilities\Spells\Undead\Possession\PossessionTarget.mdl
+Targetattach=overhead
+
+// Buff for looping caster art.
+[Bpoc]
+Targetart=Abilities\Spells\Undead\Possession\PossessionCaster.mdl
+Targetattach=overhead
+
+// Death Coil
+[AUdc]
+Art=ReplaceableTextures\CommandButtons\BTNDeathCoil.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNDeathCoil.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Missileart=Abilities\Spells\Undead\DeathCoil\DeathCoilMissile.mdl
+Missilespeed=1100
+MissileHoming=1
+Specialart=Abilities\Spells\Undead\DeathCoil\DeathCoilSpecialArt.mdl
+Order=deathcoil
+
+// Death Pact
+[AUdp]
+Art=ReplaceableTextures\CommandButtons\BTNDeathPact.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNDeathPact.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Casterart=Abilities\Spells\Undead\DeathPact\DeathPactCaster.mdl
+Targetart=Abilities\Spells\Undead\DeathPact\DeathPactTarget.mdl
+Targetattach=origin
+Order=deathpact
+
+// (this is the shield on the caster.)
+// unused these days
+[BUdp]
+Buffart=ReplaceableTextures\CommandButtons\BTNDeathPact.blp
+Targetart=Abilities\Spells\Undead\DeathPact\DeathPactCaster.mdl
+Targetattach=origin
+
+// Animate Dead
+[AUan]
+Art=ReplaceableTextures\CommandButtons\BTNAnimateDead.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNAnimateDead.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Specialart=Abilities\Spells\Undead\AnimateDead\AnimateDeadTarget.mdl
+Order=animatedead
+
+[BUan]
+Buffart=ReplaceableTextures\CommandButtons\BTNAnimateDead.blp
+Specialart=Objects\Spawnmodels\Undead\UndeadLargeDeathExplode\UndeadLargeDeathExplode.mdl
+
+// Carrion Swarm
+[AUcs]
+Art=ReplaceableTextures\CommandButtons\BTNCarrionSwarm.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNCarrionSwarm.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Missileart=Abilities\Spells\Undead\CarrionSwarm\CarrionSwarmMissile.mdl
+Missilespeed=1100
+Specialart=Abilities\Spells\Undead\CarrionSwarm\CarrionSwarmDamage.mdl
+Order=carrionswarm
+Animnames=attack,slam
+
+// Sleep
+[AUsl]
+Art=ReplaceableTextures\CommandButtons\BTNSleep.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNSleep.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Order=sleep
+
+[BUsl]
+Buffart=ReplaceableTextures\CommandButtons\BTNSleep.blp
+Targetart=Abilities\Spells\Undead\Sleep\SleepTarget.mdl
+Targetattach=overhead
+Effectsoundlooped=CreepSleepSnoreLoop
+
+// Sleep stun buff
+[BUst]
+Buffart=ReplaceableTextures\CommandButtons\BTNSleep.blp
+Targetart=Abilities\Spells\Undead\Sleep\SleepSpecialArt.mdl
+
+// Sleep pause buff
+[BUsp]
+Buffart=ReplaceableTextures\CommandButtons\BTNSleep.blp
+Targetart=Abilities\Spells\Undead\Sleep\SleepSpecialArt.mdl
+
+// Vampiric Aura
+[AUav]
+Art=ReplaceableTextures\PassiveButtons\PASBTNVampiricAura.blp
+Buttonpos=2,2
+Researchart=ReplaceableTextures\CommandButtons\BTNVampiricAura.blp
+Researchbuttonpos=2,0
+Targetart=Abilities\Spells\Undead\VampiricAura\VampiricAura.mdl
+Targetattach=origin
+
+[BUav]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNVampiricAura.blp
+Targetart=Abilities\Spells\Other\GeneralAuraTarget\GeneralAuraTarget.mdl
+Targetattach=origin
+Specialart=Abilities\Spells\Undead\VampiricAura\VampiricAuraTarget.mdl
+Specialattach=origin
+
+// Frost Nova
+[AUfn]
+Art=ReplaceableTextures\CommandButtons\BTNGlacier.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNGlacier.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Effectart=Abilities\Spells\Undead\FrostNova\FrostNovaTarget.mdl
+Order=frostnova
+
+// Frost Armor
+[AUfa]
+Art=ReplaceableTextures\CommandButtons\BTNFrostArmor.blp
+Buttonpos=1,2
+Researchart=ReplaceableTextures\CommandButtons\BTNFrostArmor.blp
+Researchbuttonpos=1,0
+Order=frostarmor
+
+// Frost Armor (Autocast)
+[AUfu]
+Art=ReplaceableTextures\CommandButtons\BTNFrostArmorOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNFrostArmorOff.blp
+Buttonpos=1,2
+Unbuttonpos=1,2
+Researchart=ReplaceableTextures\CommandButtons\BTNFrostArmor.blp
+Researchbuttonpos=1,0
+Order=frostarmor
+Orderon=frostarmoron
+Orderoff=frostarmoroff
+
+[BUfa]
+Spelldetail=1
+Buffart=ReplaceableTextures\CommandButtons\BTNFrostArmor.blp
+Targetart=Abilities\Spells\Undead\FrostArmor\FrostArmorTarget.mdl
+Targetattach=chest
+Specialart=Abilities\Spells\Undead\FrostArmor\FrostArmorDamage.mdl
+Specialattach=chest
+
+// Dark Ritual
+[AUdr]
+Art=ReplaceableTextures\CommandButtons\BTNDarkRitual.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNDarkRitual.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+Casterart=Abilities\Spells\Undead\DarkRitual\DarkRitualCaster.mdl
+Targetart=Abilities\Spells\Undead\DarkRitual\DarkRitualTarget.mdl
+Order=darkritual
+
+// Death And Decay
+[AUdd]
+Art=ReplaceableTextures\CommandButtons\BTNDeathAndDecay.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNDeathAndDecay.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Order=deathanddecay
+Animnames=stand,channel
+
+[XUdd]
+Effectart=Abilities\Spells\Undead\DeathandDecay\DeathandDecayTarget.mdl
+Effectsoundlooped=DeathAndDecayLoop
+
+[BUdd]
+Buffart=ReplaceableTextures\CommandButtons\BTNDeathAndDecay.blp
+Targetart=Abilities\Spells\Undead\DeathandDecay\DeathandDecayDamage.mdl
+
+// Cripple
+[Acri]
+Art=ReplaceableTextures\CommandButtons\BTNCripple.blp
+Requires=Rune
+Requiresamount=2
+Buttonpos=2,2
+order=cripple
+
+// Cripple (Warlock)
+[Scri]
+Art=ReplaceableTextures\CommandButtons\BTNCripple.blp
+Buttonpos=2,2
+order=cripple
+
+[Bcri]
+Buffart=ReplaceableTextures\CommandButtons\BTNCripple.blp
+Targetart=Abilities\Spells\Undead\Cripple\CrippleTarget.mdl
+
+// Restore
+[Arst]
+Art=ReplaceableTextures\CommandButtons\BTNRepairOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNRepairOff.blp
+Buttonpos=1,1
+Unbuttonpos=1,1
+Effectsoundlooped=AcolyteRestoreLoop
+Order=restoration
+Orderon=restorationon
+Orderoff=restorationoff
+Animnames=stand,work
+
+// Unholy Aura
+[AUau]
+Art=ReplaceableTextures\PassiveButtons\PASBTNUnholyAura.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNUnholyAura.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+Targetart=Abilities\Spells\Undead\UnholyAura\UnholyAura.mdl
+Targetattach=origin
+
+[BUau]
+Spelldetail=2
+Buffart=ReplaceableTextures\CommandButtons\BTNUnholyAura.blp
+Targetart=Abilities\Spells\Other\GeneralAuraTarget\GeneralAuraTarget.mdl
+Targetattach=origin
+
+[AUin]
+Researchart=ReplaceableTextures\CommandButtons\BTNInfernal.blp
+Art=ReplaceableTextures\CommandButtons\BTNInfernal.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Order=inferno
+Effectart=Units\Demon\Infernal\InfernalBirth.mdl
+
+// 'damaged' attachment effect, small
+[Xfus]
+TargetArt=Environment\UndeadBuildingFire\UndeadSmallBuildingFire2.mdl,Environment\UndeadBuildingFire\UndeadSmallBuildingFire1.mdl
+Targetattachcount=2
+Targetattach=sprite,first
+Targetattach1=sprite,fourth
+Effectsoundlooped=UndeadFireSmall
+
+// medium
+[Xfum]
+TargetArt=Environment\UndeadBuildingFire\UndeadLargeBuildingFire2.mdl,Environment\UndeadBuildingFire\UndeadSmallBuildingFire1.mdl,Environment\UndeadBuildingFire\UndeadLargeBuildingFire0.mdl,Environment\UndeadBuildingFire\UndeadSmallBuildingFire2.mdl
+Targetattachcount=4
+Targetattach=sprite,first
+Targetattach1=sprite,second
+Targetattach2=sprite,fourth
+Targetattach3=sprite,fifth
+Effectsoundlooped=UndeadFireMedium
+
+// large
+[Xful]
+TargetArt=Environment\UndeadBuildingFire\UndeadLargeBuildingFire1.mdl,Environment\UndeadBuildingFire\UndeadLargeBuildingFire0.mdl,Environment\UndeadBuildingFire\UndeadLargeBuildingFire0.mdl,Environment\UndeadBuildingFire\UndeadSmallBuildingFire1.mdl,Environment\UndeadBuildingFire\UndeadLargeBuildingFire2.mdl,Environment\UndeadBuildingFire\UndeadSmallBuildingFire0.mdl
+Targetattachcount=6
+Targetattach=sprite,first
+Targetattach1=sprite,second
+Targetattach2=sprite,fifth
+Targetattach3=sprite,third
+Targetattach4=sprite,fourth
+Targetattach5=sprite,sixth
+Effectsoundlooped=UndeadFireLarge

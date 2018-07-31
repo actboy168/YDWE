@@ -111,6 +111,10 @@ namespace base { namespace i18n { namespace v2 {
 		return language;
 	}
 
+	int get_languageid() {
+		return LocaleNameToLCID(language.c_str(), 0);
+	}
+	
 	bool set_domain(const std::wstring& d) {
 		if (!cache_language) {
 			return false;

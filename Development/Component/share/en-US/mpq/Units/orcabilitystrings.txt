@@ -1,0 +1,603 @@
+// burning oil
+[Abof]
+Name=Burning Oil
+Tip=Burning Oil
+Ubertip="Drenches the Demolisher ammo in burning oil, causing them to light the ground on fire and burn enemy units."
+
+[Bbof]
+Bufftip="Burning Oil"
+Buffubertip="This unit is caught in a burning oil fire; it will take damage over time."
+
+// Berserk
+[Absk]
+Name=Berserk
+Tip="|cffffcc00B|rerserk"
+Ubertip="Causes this unit to attack <Absk,DataB1,%>% faster, but take <Absk,DataC1,%>% more damage."
+Hotkey=B
+
+[Bbsk]
+Bufftip=Berserk
+Buffubertip="This unit is Berserk; it will deal more damage, but also take more damage from attacks."
+
+// Berserker Upgrade
+[Sbsk]
+Name=Berserker Upgrade
+
+// Reinforced Burrows Upgrade
+[Arbr]
+Name=Reinforced Burrows Upgrade
+Tip=Reinforced Burrows
+Ubertip="Gives Burrows Fortified armor."
+
+// Ancestral Spirit
+[Aast]
+Name=Ancestral Spirit
+Tip="An|cffffcc00c|restral Spirit"
+Ubertip="Raises a fallen non-Hero Tauren from the dead. The Tauren is revived with <Aast,DataA1,%>% of its hit points restored."
+Hotkey=C
+
+// Disenchant
+[Adch]
+Name=Disenchant
+EditorSuffix=(Old)
+Tip="|cffffcc00D|risenchant"
+Ubertip="Removes all buffs from units in a target area. |n|cffffcc00Deals <Adch,DataB1> damage to summoned units.|r"
+Hotkey=D
+
+// Disenchant (new)
+[Adcn]
+Name=Disenchant
+Tip="|cffffcc00D|risenchant"
+Ubertip="Removes all buffs from units in a target area. |n|cffffcc00Deals <Adcn,DataB1> damage to hostile summoned units.|r"
+Hotkey=D
+
+// Corporeal Form
+[Acpf]
+Name=Corporeal Form
+Tip="Corporeal |cffffcc00F|rorm"
+Untip="Ethereal |cffffcc00F|rorm"
+Ubertip="Turns the Spirit Walker corporeal, allowing him to attack and take physical damage."
+Unubertip="Turns the Spirit Walker ethereal, making him immune to physical damage but unable to attack. He can cast spells and will take extra damage from Magic attacks and spells."
+Hotkey=F
+Unhotkey=F
+
+// Ethereal Form
+[Aetf]
+Name=Ethereal Form
+Tip="Ethereal |cffffcc00F|rorm"
+Untip="Corporeal |cffffcc00F|rorm"
+Ubertip="Turns the Spirit Walker ethereal, making him immune to physical damage but unable to attack. He can cast spells and will take extra damage from Magic attacks and spells."
+Unubertip="Turns the Spirit Walker corporeal, allowing him to attack and take physical damage."
+Hotkey=F
+Unhotkey=F
+
+// Spirit Link
+[Aspl]
+Name=Spirit Link
+Tip="Spi|cffffcc00r|rit Link"
+Ubertip="Links <Aspl,DataB1> units together in a chain. All units with Spirit Link on them will live longer, by distributing <Aspl,DataA1,%>% of the damage they take across other Spirit Linked units. |nLasts <Aspl,Dur1> seconds."
+Hotkey=R
+
+[Bspl]
+Bufftip=Spirit Link
+Buffubertip="This unit is Spirit Linked; it will distribute some of the damage it takes across other Spirit Linked units."
+
+// Pack Mule
+[Apak]
+Name=Pack Mule
+Tip="Pack Mule"
+Ubertip="Allows this unit to carry items for Heroes. Items cannot be used from this unit's inventory."
+
+// Liquid Fire
+[Aliq]
+Name=Liquid Fire
+Tip="Liquid Fire"
+Ubertip="Flings a volatile liquid that causes buildings to take damage over time. Buildings that are currently taking damage from Liquid Fire cannot be repaired, and have their attack rate reduced by <Aliq,DataC1,%>%."
+
+// Unstable Concoction
+[Auco]
+Name=Unstable Concoction
+Tip="Unstable |cffffcc00C|roncoction"
+Ubertip="Causes a powerful explosion that deals <Auco,DataB1> damage to a target air unit, and <Auco,DataD1> damage to nearby enemy air units."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=C
+Unhotkey=C
+
+// Healing Wave
+[AOhw]
+Name=Healing Wave
+Tip=H|cffffcc00e|raling Wave - [|cffffcc00Level 1|r],H|cffffcc00e|raling Wave - [|cffffcc00Level 2|r],H|cffffcc00e|raling Wave - [|cffffcc00Level 3|r]
+Ubertip="Calls forth a wave of healing energy that bounces up to <AOhw,DataB1> times, healing <AOhw,DataA1> damage on the primary target. Each jump heals less damage.","Calls forth a wave of healing energy that bounces up to <AOhw,DataB2> times, healing <AOhw,DataA2> damage on the primary target. Each jump heals less damage.","Calls forth a wave of healing energy that bounces up to <AOhw,DataB3> times, healing <AOhw,DataA3> damage on the primary target. Each jump heals less damage."
+Hotkey=E
+Researchtip="Learn H|cffffcc00e|raling Wave - [|cffffcc00Level %d|r]"
+Researchubertip="Calls forth a wave of energy that heals a target and bounces to nearby friendlies. Each bounce heals less damage. |n|n|cffffcc00Level 1|r - Heals <AOhw,DataA1> damage, jumps <AOhw,DataB1> times. |n|cffffcc00Level 2|r - Heals <AOhw,DataA2> damage, jumps <AOhw,DataB2> times. |n|cffffcc00Level 3|r - Heals <AOhw,DataA3> damage, jumps <AOhw,DataB3> times."
+Researchhotkey=E
+
+// Hex
+[AOhx]
+Name=Hex
+Tip=He|cffffcc00x|r - [|cffffcc00Level 1|r],He|cffffcc00x|r - [|cffffcc00Level 2|r],He|cffffcc00x|r - [|cffffcc00Level 3|r]
+Ubertip="Transforms an enemy unit into a random critter for <AOhx,Dur1> seconds.","Transforms an enemy unit into a random critter for <AOhx,Dur2> seconds.","Transforms an enemy unit into a random critter for <AOhx,Dur3> seconds."
+Hotkey=X
+Researchtip="Learn He|cffffcc00x|r - [|cffffcc00Level %d|r]"
+Researchubertip="Transforms an enemy unit into a random critter, disabling special abilities. |n|n|cffffcc00Level 1|r - Lasts <AOhx,Dur1> seconds. |n|cffffcc00Level 2|r - Lasts <AOhx,Dur2> seconds. |n|cffffcc00Level 3|r - Lasts <AOhx,Dur3> seconds."
+Researchhotkey=X
+
+[BOhx]
+Bufftip=Hex
+Buffubertip="This unit is Hexed; it has been transformed into a critter."
+
+// Serpent Ward
+[AOsw]
+Name=Serpent Ward
+Tip=Serpent |cffffcc00W|rard - [|cffffcc00Level 1|r],Serpent |cffffcc00W|rard - [|cffffcc00Level 2|r],Serpent |cffffcc00W|rard - [|cffffcc00Level 3|r]
+Ubertip="Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward has <osp1,realHP> hit points, is magic immune, and deals <osp1,mindmg1> - <osp1,maxdmg1> damage. |nLasts <AOsw,Dur1> seconds. |n|n|cffffcc00Attacks land and air units.|r","Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward has <osp2,realHP> hit points, is magic immune, and deals <osp2,mindmg1> - <osp2,maxdmg1> damage. |nLasts <AOsw,Dur1> seconds. |n|n|cffffcc00Attacks land and air units.|r","Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward has <osp3,realHP> hit points, is magic immune, and deals <osp3,mindmg1> - <osp3,maxdmg1> damage. |nLasts <AOsw,Dur1> seconds. |n|n|cffffcc00Attacks land and air units.|r"
+Hotkey=W
+Researchtip="Learn Serpent |cffffcc00W|rard - [|cffffcc00Level %d|r]"
+Researchubertip="Summons an immobile serpentine ward to attack the Shadow Hunter's enemies. The ward is immune to magic. |nLasts <AOsw,Dur1> seconds. |n|n|cffffcc00Attacks land and air units.|r |n|n|cffffcc00Level 1|r - <osp1,realHP> hit points, <osp1,mindmg1> - <osp1,maxdmg1> damage. |n|cffffcc00Level 2|r - <osp2,realHP> hit points, <osp2,mindmg1> - <osp2,maxdmg1> damage. |n|cffffcc00Level 3|r - <osp3,realHP> hit points, <osp3,mindmg1> - <osp3,maxdmg1> damage."
+Researchhotkey=W
+
+// Generic ward buff
+[BOwd]
+Bufftip=Ward
+Buffubertip="Summoned units take damage from dispels."
+
+// Voodoo
+[AOvd]
+Name=Big Bad Voodoo
+Tip=Big Bad |cffffcc00V|roodoo
+Ubertip="Turns all friendly units invulnerable in an area around the Shadow Hunter. |nThe Shadow Hunter does not turn invulnerable. |nLasts <AOvd,Dur1> seconds."
+Hotkey=V
+Researchtip="Learn Big Bad |cffffcc00V|roodoo"
+Researchubertip="Turns all friendly units invulnerable in an area around the Shadow Hunter. |nThe Shadow Hunter does not turn invulnerable. |nLasts <AOvd,Dur1> seconds."
+Researchhotkey=V
+
+[BOvd]
+Bufftip=Big Bad Voodoo
+Buffubertip="This unit is under the effects of Big Bad Voodoo, and is invulnerable."
+
+// firebolt
+[Awfb]
+Name=Firebolt
+Tip=|cffffcc00F|rirebolt
+Ubertip="Hurls a fiery bolt that stuns a target enemy unit."
+Hotkey=F
+EditorSuffix=(Warlock)
+
+[Acha]
+Name=Chaos
+
+[Sca1]
+EditorSuffix= (Grunt)
+
+[Sca2]
+EditorSuffix= (Raider)
+
+[Sca3]
+EditorSuffix= (Shaman)
+
+[Sca4]
+EditorSuffix= (Kodo Beast)
+
+[Sca5]
+EditorSuffix= (Peon)
+
+[Sca6]
+EditorSuffix= (Grom)
+
+[Achl]
+Name=Chaos Cargo Load
+
+// Pulverize
+[Awar]
+Name=Pulverize
+Tip=Pulverize
+Ubertip="Gives a <Awar,DataA1>% chance that an attack will deal <Awar,DataB1> damage to nearby units."
+
+[Abtl]
+Name=Battle Stations
+Tip=|cffffcc00B|rattle Stations
+Ubertip="Causes nearby Peons to run into the Burrow so that they can defend their base."
+Hotkey=B
+
+[Astd]
+Name=Stand Down
+Tip=Stand |cffffcc00D|rown
+Ubertip="Causes Peons within the Burrow to return to work."
+Hotkey=D
+
+// Ensnare
+[Aens]
+Name=Ensnare
+Tip=|cffffcc00E|rnsnare
+Ubertip="Causes a target enemy unit to be bound to the ground so that it cannot move for <Aens,Dur1> seconds. Air units that are ensnared can be attacked as though they were land units."
+Hotkey=E
+
+// Ensnare buff on ground units
+[Beng]
+Bufftip=Ensnare
+Buffubertip="This unit is ensnared; it cannot move or fly."
+EditorSuffix= (Ground)
+
+// Ensnare buff on air units
+[Bena]
+Bufftip=Ensnare
+Buffubertip="This unit is ensnared; it cannot move or fly."
+EditorSuffix= (Air)
+
+// Pulverize - passive
+[Awar]
+Name=Pulverize
+
+// Devour
+[Adev]
+Name=Devour
+Tip=|cffffcc00D|revour
+Ubertip="Consumes an enemy land unit, slowly digesting it and dealing <Advc,DataC1> damage per second to it. If the Kodo Beast is killed while the consumed unit is still digesting, the unit that was devoured will be released."
+Hotkey=D
+
+// Devour buff
+[Bdvv]
+Bufftip=Devour
+Buffubertip="A unit is being devoured; it will take damage while providing vision to the owner."
+
+// Purge (classic)
+[Aprg]
+Name=Purge
+Tip=Pur|cffffcc00g|re
+Ubertip="Removes all buffs from a target unit, and slows its movement speed by a factor of <Aprg,DataA1>. Purged units will slowly regain their movement speed over <Aprg,Dur1> seconds. |n|cffffcc00Deals <Aprg,DataC1> damage to summoned units.|r"
+Hotkey=G
+
+// Purge (expansion melee)
+[Apg2]
+Name=Purge
+Tip=Pur|cffffcc00g|re
+Ubertip="Removes all buffs from a target unit. Enemy units are also immobilized for <Apg2,DataD1> seconds and their movement speed is reduced by a factor of <Apg2,DataA1>; they will slowly regain their movement speed over <Apg2,Dur1> seconds. |n|cffffcc00Deals <Apg2,DataC1> damage to summoned units.|r"
+Hotkey=G
+
+[Bprg]
+Bufftip=Purge
+Buffubertip="This unit is Purged; it has had all buffs removed, and has its movement speed slowed for a short duration."
+
+// Lightning Shield
+[Alsh]
+Name=Lightning Shield
+Tip=|cffffcc00L|rightning Shield
+Ubertip="Forms a shield of electricity around a target unit, dealing <Alsh,DataA1> damage per second to units around it. |nLasts <Alsh,Dur1> seconds."
+Hotkey=L
+
+[Blsh]
+Bufftip=Lightning Shield
+Buffubertip="This unit has a Lightning Shield; nearby friendly and enemy units will take damage if they are next to this unit."
+
+// Bloodlust
+[Ablo]
+Name=Bloodlust
+Tip=|cffffcc00B|rloodlust
+Ubertip="Increases a friendly unit's attack rate by <Ablo,DataA1,%>% and movement speed by <Ablo,DataB1,%>%. |nLasts <Ablo,Dur1> seconds."
+Untip="|cffc3dbffRight-click to activate auto-casting.|r"
+Unubertip="|cffc3dbffRight-click to deactivate auto-casting.|r"
+Hotkey=B
+Unhotkey=B
+
+[Bblo]
+Bufftip=Bloodlust
+Buffubertip="This unit has Bloodlust; its attack rate and movement speed are increased."
+
+// Sentry Ward
+[Aeye]
+Name=Sentry Ward
+Tip=Sentry |cffffcc00W|rard
+Ubertip="Summons an invisible and immovable ward that provides vision in an area. |nCan see invisible units. |nLasts <Aeye,Dur1> seconds."
+Hotkey=W
+
+[Beye]
+Bufftip=Sentry Ward
+Buffubertip="Summoned units take damage from dispels."
+
+// Stasis Trap spell
+[Asta]
+Name=Stasis Trap
+Tip=Stasis |cffffcc00T|rrap
+Ubertip="Summons an invisible and immovable ward that stuns enemy land units around it. The trap activates when an enemy land unit approaches and destroys all other stasis wards in its area of effect. |nThe trap lasts <Asta,Dur1> seconds. |nThe stun lasts <Asta,DataD1> seconds."
+Hotkey=T
+
+// Stasis Trap trigger buff
+[Bstt]
+Bufftip=Stasis Trap
+Buffubertip="This ward will stun enemy land units when triggered."
+
+// Stasis Trap effect buff
+[Bsta]
+Bufftip=Stasis Trap
+Buffubertip="This unit is stunned by Stasis Trap and cannot move, attack or cast spells."
+
+// Healing Ward
+[Ahwd]
+Name=Healing Ward
+Tip=H|cffffcc00e|raling Ward
+Ubertip="Summons an immovable ward that heals <Aoar,DataA1,%>% of a nearby friendly non-mechanical unit's hit points per second. |nLasts <Ahwd,Dur1> seconds."
+Hotkey=E
+EditorSuffix= (Witch Doctor)
+
+[Bhwd]
+Bufftip=Healing Ward
+Buffubertip="This ward provides life regeneration for nearby friendly units."
+
+// Healing Ward Aura
+[Aoar]
+Name=Healing Ward Aura
+EditorSuffix= (Healing Ward)
+
+[Boar]
+Bufftip=Healing Ward Aura
+Buffubertip="Increases life regeneration."
+
+// Envenomed Spears
+[Aven]
+Name=Envenomed Spears
+Tip=Envenomed Spears
+Ubertip="Deals <Aven,DataA1> poison damage per second. |nLasts <Aven,Dur1> seconds."
+
+// currently unused
+// Poison Sting
+[Apoi]
+Name=Poison Sting
+Hotkey=T
+Tip=Poison S|cffffcc00t|ring
+
+// Poison Sting (Orb of Venom)
+[Apo2]
+Name=Poison Sting
+Hotkey=T
+Tip=Poison S|cffffcc00t|ring
+EditorSuffix= (Orb of Venom)
+
+// Poison Sting Non Stack Buff
+[Bpoi]
+Bufftip=Poison
+Buffubertip="This unit is poisoned, and will take damage over time."
+EditorSuffix= (Non-stacking)
+
+// Poison Sting Stack Buff
+[Bpsd]
+Bufftip=Poison
+Buffubertip="This unit is poisoned; it will take damage over time."
+EditorSuffix= (Stacking)
+
+[Bpsi]
+EditorName=Poison (Info)
+
+// Venom Non Stack Buff
+[BIpb]
+Bufftip=Venom
+Buffubertip="This unit is poisoned, and will take damage over time."
+EditorSuffix= (Non-stacking)
+
+// Venom Stack Buff
+[BIpd]
+Bufftip=Venom
+Buffubertip="This unit is poisoned; it will take damage over time."
+EditorSuffix= (Stacking)
+
+[BIpi]
+EditorName=Venom (Info)
+
+// currently unused
+// Tracking (Passive)
+[Anit]
+Name=Tracking
+
+// Spiked Barricades (Passive)
+[Aspi]
+Name=Spiked Barricades
+
+// Pillage (Passive)
+[Asal]
+Name=Pillage
+Tip=Pillage
+Ubertip="Each attack that does damage to an enemy building also gains resources."
+
+// War Drums Aura
+[Aakb]
+Name=War Drums
+Tip=War Drums
+Ubertip="Adds a damage increase to the attacks of nearby friendly units."
+
+[Bakb]
+Bufftip=War Drums
+Buffubertip="This unit hears War Drums; it has increased attack damage."
+
+// Wind Walk
+[AOwk]
+Name=Wind Walk
+Tip=|cffffcc00W|rind Walk - [|cffffcc00Level 1|r],|cffffcc00W|rind Walk - [|cffffcc00Level 2|r],|cffffcc00W|rind Walk - [|cffffcc00Level 3|r]
+Ubertip="Allows the Blademaster to become invisible, and move <AOwk,DataB1,%>% faster for <AOwk,Dur1> seconds. If the Blademaster attacks a unit to break invisibility, the attack will do <AOwk,DataC1> bonus damage.","Allows the Blademaster to become invisible, and move <AOwk,DataB2,%>% faster for <AOwk,Dur2> seconds. If the Blademaster attacks a unit to break invisibility, the attack will do <AOwk,DataC2> bonus damage.","Allows the Blademaster to become invisible, and move <AOwk,DataB3,%>% faster for <AOwk,Dur3> seconds. If the Blademaster attacks a unit to break invisibility, the attack will do <AOwk,DataC3> bonus damage."
+Hotkey=W
+Researchtip="Learn |cffffcc00W|rind Walk - [|cffffcc00Level %d|r]"
+Researchubertip="Allows the Blademaster to become invisible, and move faster for a set amount of time. When the Blademaster attacks a unit to break invisibility, he will deal bonus damage. |n|n|cffffcc00Level 1|r - <AOwk,DataB1,%>% move, <AOwk,DataC1> bonus damage, <AOwk,Dur1> seconds. |n|cffffcc00Level 2|r - <AOwk,DataB2,%>% move, <AOwk,DataC2> bonus damage, <AOwk,Dur2> seconds. |n|cffffcc00Level 3|r - <AOwk,DataB3,%>% move, <AOwk,DataC3> bonus damage, <AOwk,Dur3> seconds."
+Researchhotkey=W
+
+[BOwk]
+Bufftip=Wind Walk
+Buffubertip="This unit is Wind Walking; it is invisible, moves faster, and the first attack it makes while invisible will deal bonus damage."
+
+// Mirror Image
+[AOmi]
+Name=Mirror Image
+Tip=Mirro|cffffcc00r|r Image - [|cffffcc00Level 1|r],Mirro|cffffcc00r|r Image - [|cffffcc00Level 2|r],Mirro|cffffcc00r|r Image - [|cffffcc00Level 3|r]
+Ubertip="Confuses the enemy by creating <AOmi,DataA1> illusion of the Blademaster. Dispels all magic from the Blademaster. |nLasts <AOmi,Dur1> seconds.","Confuses the enemy by creating <AOmi,DataA2> illusions of the Blademaster. Dispels all magic from the Blademaster. |nLasts <AOmi,Dur1> seconds.","Confuses the enemy by creating <AOmi,DataA3> illusions of the Blademaster. Dispels all magic from the Blademaster. |nLasts <AOmi,Dur1> seconds."
+Hotkey=R
+Researchtip="Learn Mirro|cffffcc00r|r Image - [|cffffcc00Level %d|r]"
+Researchubertip="Confuses the enemy by creating illusions of the Blademaster and dispelling all magic from the Blademaster. |n|n|cffffcc00Level 1|r - Creates <AOmi,DataA1> illusion. |n|cffffcc00Level 2|r - Creates <AOmi,DataA2> illusions. |n|cffffcc00Level 3|r - Creates <AOmi,DataA3> illusions."
+Researchhotkey=R
+
+[BOmi]
+Bufftip=Mirror Image
+Buffubertip="A duplicate illusion of the original Blademaster."
+
+// Critical Strike
+[AOcr]
+Name=Critical Strike
+Tip=Critical Strike - [|cffffcc00Level 1|r],Critical Strike - [|cffffcc00Level 2|r],Critical Strike - [|cffffcc00Level 3|r]
+Ubertip="Gives a <AOcr,DataA1>% chance to do <AOcr,DataB1> times normal damage on an attack.","Gives a <AOcr,DataA2>% chance to do <AOcr,DataB2> times normal damage on an attack.","Gives a <AOcr,DataA3>% chance to do <AOcr,DataB3> times normal damage on an attack."
+Researchtip="Learn |cffffcc00C|rritical Strike - [|cffffcc00Level %d|r]"
+Researchubertip="Gives a chance to do more damage on an attack. |n|n|cffffcc00Level 1|r - <AOcr,DataA1>% chance, <AOcr,DataB1> times normal damage. |n|cffffcc00Level 2|r - <AOcr,DataA2>% chance, <AOcr,DataB2> times normal damage. |n|cffffcc00Level 3|r - <AOcr,DataA3>% chance, <AOcr,DataB3> times normal damage."
+Researchhotkey=C
+
+// Bladestorm
+[AOww]
+Name=Bladestorm
+Tip=|cffffcc00B|rladestorm
+Ubertip="Causes a bladestorm of destructive force around the Blademaster, rendering him immune to magic and dealing <AOww,DataA1> damage per second to nearby enemy land units. |nLasts <AOww,Dur1> seconds."
+Hotkey=B
+Researchtip=Learn |cffffcc00B|rladestorm
+Researchubertip="Causes a bladestorm of destructive force around the Blademaster, rendering him immune to magic and dealing <AOww,DataA1> damage per second to nearby enemy land units."
+Researchhotkey=B
+Globalmessage=
+Globalsound=
+
+// Chain Lightning
+[AOcl]
+Name=Chain Lightning
+Tip=|cffffcc00C|rhain Lightning - [|cffffcc00Level 1|r],|cffffcc00C|rhain Lightning - [|cffffcc00Level 2|r],|cffffcc00C|rhain Lightning - [|cffffcc00Level 3|r]
+Ubertip="Calls forth a bolt of lightning that bounces up to <AOcl,DataB1> times, dealing <AOcl,DataA1> damage on the primary target. Each jump deals less damage.","Calls forth a bolt of lightning that bounces up to <AOcl,DataB2> times, dealing <AOcl,DataA2> damage on the primary target. Each jump deals less damage.","Calls forth a bolt of lightning that bounces up to <AOcl,DataB3> times, dealing <AOcl,DataA3> damage on the primary target. Each jump deals less damage."
+Hotkey=C
+Researchtip="Learn |cffffcc00C|rhain Lightning - [|cffffcc00Level %d|r]"
+Researchubertip="Hurls a bolt of damaging lightning at a target enemy that jumps to nearby enemies. Each jump deals less damage. |n|n|cffffcc00Level 1|r - <AOcl,DataA1> damage, jumps <AOcl,DataB1> times. |n|cffffcc00Level 2|r - <AOcl,DataA2> damage, jumps <AOcl,DataB2> times. |n|cffffcc00Level 3|r - <AOcl,DataA3> damage, jumps <AOcl,DataB3> times."
+Researchhotkey=C
+
+// Far Sight
+[AOfs]
+Name=Far Sight
+Tip=|cffffcc00F|rar Sight - [|cffffcc00Level 1|r],|cffffcc00F|rar Sight - [|cffffcc00Level 2|r],|cffffcc00F|rar Sight - [|cffffcc00Level 3|r]
+Ubertip="Reveals the area of the map that it is cast upon for <AOfs,Dur1> seconds. Also reveals invisible units."
+Hotkey=F
+Researchtip="Learn |cffffcc00F|rar Sight - [|cffffcc00Level %d|r]"
+Researchubertip="Reveals the area of the map that it is cast upon. Also reveals invisible units. |n|n|cffffcc00Level 1|r - Reveals a small area for <AOfs,Cost1> mana. |n|cffffcc00Level 2|r - Reveals a large area for <AOfs,Cost2> mana. |n|cffffcc00Level 3|r - Reveals a huge area for <AOfs,Cost3> mana."
+Researchhotkey=F
+
+// Feral Spirit
+[AOsf]
+Name=Feral Spirit
+Tip=Feral Spiri|cffffcc00t|r - [|cffffcc00Level 1|r],Feral Spiri|cffffcc00t|r - [|cffffcc00Level 2|r],Feral Spiri|cffffcc00t|r - [|cffffcc00Level 3|r]
+Ubertip="Summons <AOsf,DataB1> Spirit Wolf companions. Each wolf has <osw1,realHP> hit points and deals <osw1,mindmg1> - <osw1,maxdmg1> damage. |nLasts <AOsf,Dur1> seconds. |n|n|cffffcc00Attacks land units.|r","Summons <AOsf,DataB2> Spirit Wolf companions that have Critical Strike. Each wolf has <osw2,realHP> hit points and deals <osw2,mindmg1> - <osw2,maxdmg1> damage. |nLasts <AOsf,Dur2> seconds. |n|n|cffffcc00Attacks land units.|r","Summons <AOsf,DataB3> Spirit Wolf companions that have Critical Strike and are invisible unless they are attacking. Each wolf has <osw3,realHP> hit points and deals <osw3,mindmg1> - <osw3,maxdmg1> damage. |nLasts <AOsf,Dur3> seconds. |n|n|cffffcc00Attacks land units.|r"
+Researchtip="Learn Feral Spiri|cffffcc00t|r - [|cffffcc00Level %d|r]."
+Researchubertip="Summons <AOsf,DataB1> Spirit Wolves to fight the Far Seer's enemies. |nLasts <AOsf,Dur1> seconds. |n|n|cffffcc00Level 1|r - <osw1,realHP> hit points, <osw1,mindmg1> - <osw1,maxdmg1> damage. |n|cffffcc00Level 2|r - <osw2,realHP> hit points, <osw2,mindmg1> - <osw2,maxdmg1> damage and Critical Strike. |n|cffffcc00Level 3|r - <osw3,realHP> hit points, <osw3,mindmg1> - <osw3,maxdmg1> damage, Critical Strike and Invisibility."
+Hotkey=T
+Researchhotkey=T
+
+
+[BOsf]
+Bufftip=Feral Spirit
+Buffubertip="Summoned units take damage from dispels."
+
+// Earthquake
+[AOeq]
+Name=Earthquake
+Tip=|cffffcc00E|rarthquake
+Ubertip="Makes the ground tremble and break, causing <AOeq,DataB1> damage per second to buildings and slowing units by <AOeq,DataC1,%>% within the area of effect. |nLasts <AOeq,Dur1> seconds."
+Hotkey=E
+Researchtip="Learn |cffffcc00E|rarthquake"
+Researchubertip="Makes the ground tremble and break, causing <AOeq,DataB1> damage per second to buildings and slowing units by <AOeq,DataC1,%>% within the area of effect. Lasts <AOeq,Dur1> seconds."
+Researchhotkey=E
+
+[BOeq]
+Bufftip=Earthquake
+Buffubertip="This unit is in an Earthquake; its movement speed is greatly reduced."
+
+// Shockwave
+[AOsh]
+Name=Shockwave
+Tip=Shock|cffffcc00w|rave - [|cffffcc00Level 1|r],Shock|cffffcc00w|rave - [|cffffcc00Level 2|r],Shock|cffffcc00w|rave - [|cffffcc00Level 3|r]
+Ubertip="A wave of force that ripples outward, causing <AOsh,DataA1> damage to land units in a line.","A wave of force that ripples outward, causing <AOsh,DataA2> damage to land units in a line.","A wave of force that ripples outward, causing <AOsh,DataA3> damage to land units in a line."
+Hotkey=W
+Researchtip="Learn Shock|cffffcc00w|rave - [|cffffcc00Level %d|r]"
+Researchubertip="A wave of force that ripples out from the Hero, causing damage to land units in a line. |n|n|cffffcc00Level 1|r - <AOsh,DataA1> damage. |n|cffffcc00Level 2|r - <AOsh,DataA2> damage. |n|cffffcc00Level 3|r - <AOsh,DataA3> damage."
+Researchhotkey=W
+
+// Endurance Aura
+[AOae]
+Name=Endurance Aura
+Tip=Endurance Aura - [|cffffcc00Level 1|r],Endurance Aura - [|cffffcc00Level 2|r],Endurance Aura - [|cffffcc00Level 3|r]
+Ubertip="Increases nearby friendly units' movement speed by <AOae,DataA1,%>% and attack rate by <AOae,DataB1,%>%.","Increases nearby friendly units' movement speed by <AOae,DataA2,%>% and attack rate by <AOae,DataB2,%>%.","Increases nearby friendly units' movement speed by <AOae,DataA3,%>% and attack rate by <AOae,DataB3,%>%."
+Researchtip="Learn |cffffcc00E|rndurance Aura - [|cffffcc00Level %d|r]"
+Researchubertip="Increases the movement speed and attack rate of nearby friendly units. |n|n|cffffcc00Level 1|r - <AOae,DataA1,%>% movement, <AOae,DataB1,%>% attack. |n|cffffcc00Level 2|r - <AOae,DataA2,%>% movement, <AOae,DataB2,%>% attack. |n|cffffcc00Level 3|r - <AOae,DataA3,%>% movement, <AOae,DataB3,%>% attack."
+Researchhotkey=E
+
+[BOae]
+Bufftip=Endurance Aura
+Buffubertip="This unit is under the effects of Endurance Aura; it has an increased movement speed and attack rate."
+
+// Reincarnation
+[AOre]
+Name=Reincarnation
+Tip=Reincarnation
+Ubertip="When killed, the Tauren Chieftain will come back to life. Reincarnation has a <AOre,Cool1> second cooldown."
+Researchtip=Learn |cffffcc00R|reincarnation
+Researchubertip="When killed, the Tauren Chieftain will come back to life. Reincarnation has a <AOre,Cool1> second cooldown."
+Researchhotkey=R
+Globalmessage=
+Globalsound=
+
+// War Stomp (Chieftan)
+[AOws]
+Name=War Stomp
+Tip=War S|cffffcc00t|romp - [|cffffcc00Level 1|r],War S|cffffcc00t|romp - [|cffffcc00Level 2|r],War S|cffffcc00t|romp - [|cffffcc00Level 3|r]
+Ubertip="Slams the ground, dealing <AOws,DataA1> damage to nearby enemy land units and stunning them for <AOws,Dur1> seconds.","Slams the ground, dealing <AOws,DataA2> damage to nearby enemy land units and stunning them for <AOws,Dur2> seconds.","Slams the ground, dealing <AOws,DataA3> damage to nearby enemy land units and stunning them for <AOws,Dur3> seconds."
+Researchtip="Learn War S|cffffcc00t|romp - [|cffffcc00Level %d|r]."
+Researchubertip="Slams the ground, stunning and damaging nearby enemy land units. |n|n|cffffcc00Level 1|r - <AOws,DataA1> damage, <AOws,Dur1> second stun. |n|cffffcc00Level 2|r - <AOws,DataA2> damage, <AOws,Dur2> second stun. |n|cffffcc00Level 3|r - <AOws,DataA3> damage, <AOws,Dur3> second stun."
+Hotkey=T
+Researchhotkey=T
+
+
+[BOws]
+Bufftip=War Stomp
+Buffubertip="This unit has been hit by War Stomp; it cannot move, attack or cast spells for a short duration."
+
+//----------------------------------------------------
+// Buffs with no in-game text
+// EditorName is for the Object Editor list only
+
+[BOea]
+EditorName=Earthquake (Caster)
+
+[BOsh]
+EditorName=Shockwave (Caster)
+
+[BOvc]
+EditorName=Big Bad Voodoo (Caster)
+
+[BOww]
+EditorName=Bladestorm (Caster)
+
+[Bdig]
+EditorName=Devour (Caster)
+
+[Bens]
+EditorName=Ensnare (General)
+
+[Bliq]
+EditorName=Liquid Fire
+
+[Blsa]
+EditorName=Lightning Shield (Caster)
+
+[XOeq]
+EditorName=Earthquake (Effect)
+
+[XOre]
+EditorName=Reincarnation (Effect)
+
+[Xbof]
+EditorName=Burning Oil (Effect)
+
+[Xfos]
+EditorName=Building Damage - Orc Small
+
+[Xfom]
+EditorName=Building Damage - Orc Medium
+
+[Xfol]
+EditorName=Building Damage - Orc Large

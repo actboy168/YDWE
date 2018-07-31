@@ -1,0 +1,393 @@
+// Attribute Bonus
+[Aamk]
+Art=ReplaceableTextures\PassiveButtons\PASBTNStatUp.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNStatUp.blp
+Buttonpos=1,1
+Researchbuttonpos=3,1
+Order=attributemodskill
+
+// Feral Spirit
+[ACs7]
+Art=ReplaceableTextures\CommandButtons\BTNSpiritWolf.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNSpiritWolf.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Specialart=Abilities\Spells\Orc\FeralSpirit\feralspirittarget.mdl
+Order=spiritwolf
+
+// Serpent Ward (Tentacles)
+[ACtn]
+Art=ReplaceableTextures\CommandButtons\BTNTentacle.blp
+Buttonpos=0,2
+Order=Serpentward
+
+
+// Avatar (garithos)
+[ANav]
+Art=ReplaceableTextures\CommandButtons\BTNAvatarOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNAvatarOff.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNAvatar.blp
+Buttonpos=3,2
+Unbuttonpos=3,2
+Researchbuttonpos=3,0
+Effectsound=HowlOfTerror
+Order=avatar
+
+//naga harvest
+[ANha]
+Art=ReplaceableTextures\CommandButtons\BTNGatherGold.blp
+Unart=ReplaceableTextures\CommandButtons\BTNReturnGoods.blp
+Buttonpos=3,1
+UnButtonpos=3,1
+Order=harvest
+
+// Shockwave
+[ANsh]
+Art=ReplaceableTextures\CommandButtons\BTNShockWave.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNShockWave.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Missileart=Abilities\Spells\Orc\Shockwave\ShockwaveMissile.mdl
+Missilespeed=1050
+Order=shockwave
+Animnames=attack,slam
+
+// Spirit Beast
+[ACs8]
+Art=ReplaceableTextures\CommandButtons\BTNFelHound.blp
+ResearchArt=ReplaceableTextures\CommandButtons\BTNFelHound.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Specialart=Abilities\Spells\Orc\FeralSpirit\feralspirittarget.mdl
+Order=spiritwolf
+
+// Reincarnation (akama)
+[ANr2]
+Art=ReplaceableTextures\PassiveButtons\PASBTNReincarnation.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNReincarnation.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Effectart=Abilities\Spells\Orc\Reincarnation\ReincarnationTarget.mdl
+Casterart=
+Targetart=
+
+// Feedback
+[Afbb]
+Art=ReplaceableTextures\PassiveButtons\PASBTNFeedBack.blp
+Specialart=Abilities\Spells\Human\Feedback\SpellBreakerAttack.mdl
+Buttonpos=1,2
+
+// Naga Build
+[AGbu]
+Art=ReplaceableTextures\CommandButtons\BTNBasicStruct.blp
+Buttonpos=0,2
+Order=nagabuild
+
+// Cyclone (naga)
+[Acny]
+Art=ReplaceableTextures\CommandButtons\BTNCyclone.blp
+Buttonpos=2,2
+Requires=Rnsw
+Requiresamount=2
+order=cyclone
+
+// Submerge
+[Asb1]
+Requires=Rnsb
+Art=ReplaceableTextures\CommandButtons\BTNNagaBurrow.blp
+Unart=ReplaceableTextures\CommandButtons\BTNNagaUnBurrow.blp
+Buttonpos=3,2
+Unbuttonpos=3,2
+Effectsound=SubmergeSound
+Order=submerge
+Unorder=unsubmerge
+
+// Submerge
+[Asb2]
+Art=ReplaceableTextures\CommandButtons\BTNNagaBurrow.blp
+Unart=ReplaceableTextures\CommandButtons\BTNNagaUnBurrow.blp
+Buttonpos=3,2
+Unbuttonpos=3,2
+Effectsound=SubmergeSound
+Order=submerge
+Unorder=unsubmerge
+
+// Submerge
+[Asb3]
+Requires=Rnsb
+Art=ReplaceableTextures\CommandButtons\BTNNagaBurrow.blp
+Unart=ReplaceableTextures\CommandButtons\BTNNagaUnBurrow.blp
+Buttonpos=3,2
+Unbuttonpos=3,2
+Effectsound=SubmergeSound
+Order=submerge
+Unorder=unsubmerge
+
+// Ensnare (Naga)
+[ANen]
+Art=ReplaceableTextures\CommandButtons\BTNEnsnare.blp
+Buttonpos=0,2
+Requires=Rnen
+Missileart=Abilities\Spells\Orc\Ensnare\EnsnareMissile.mdl
+Missilespeed=1500
+MissileHoming=1
+Order=ensnare
+
+// Auto-Dispel Magic
+[Andm]
+Art=ReplaceableTextures\CommandButtons\BTNDryadDispelMagicOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNDryadDispelMagicOff.blp
+Requires=Rnsi
+Buttonpos=0,2
+Unbuttonpos=0,2
+Casterart=
+Targetart=Abilities\Spells\Human\DispelMagic\DispelMagicTarget.mdl
+Order=autodispel
+Orderon=autodispelon
+Orderoff=autodispeloff
+
+// Frost Armor (Autocast, Naga)
+[ACfu]
+Requires=Rnsw
+Art=ReplaceableTextures\CommandButtons\BTNFrostArmorOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNFrostArmorOff.blp
+Buttonpos=1,2
+Unbuttonpos=1,2
+Order=frostarmor
+Orderon=frostarmoron
+Orderoff=frostarmoroff
+
+// Parasite
+[ANpa]
+Art=ReplaceableTextures\CommandButtons\BTNParasiteOn.blp
+Unart=ReplaceableTextures\CommandButtons\BTNParasiteOff.blp
+Buttonpos=0,2
+Unbuttonpos=0,2
+Missileart=Abilities\Spells\Other\Parasite\ParasiteMissile.mdl
+Missilespeed=1200
+MissileArc=0.0
+MissileHoming=1
+Orderon=parasiteon
+Orderoff=parasiteoff
+Order=parasite
+
+[BNpa]
+Buffart=ReplaceableTextures\CommandButtons\BTNParasite.blp
+Targetart=Abilities\Spells\Other\Parasite\ParasiteTarget.mdl
+Targetattach=overhead
+
+[BNpm]
+Buffart=ReplaceableTextures\CommandButtons\BTNParasite.blp
+
+// naga summoner null aoe roar
+[Ahnl]
+Art=ReplaceableTextures\CommandButtons\BTNAntiMagicShell.blp
+Casterart=Abilities\Spells\Other\ANrm\ANrmTarget.mdl
+Buttonpos=3,2
+Order=roar
+Animnames=spell,slam
+
+// Channel
+[ANcl]
+Art=ReplaceableTextures\CommandButtons\BTNDeathPact.blp
+Buttonpos=2,0
+Order=channel
+Casterart=Abilities\Spells\Undead\DeathPact\DeathPactTarget.mdl
+Casterattach=origin
+Targetart=Abilities\Spells\Undead\DeathPact\DeathPactTarget.mdl
+Targetattach=origin
+Effectart=Abilities\Spells\Undead\DeathPact\DeathPactTarget.mdl
+Animnames=spell,channel
+
+//orc campaign hero stuff
+
+// War Stomp (Cairn)
+[AOw2]
+Art=ReplaceableTextures\CommandButtons\BTNWarStomp.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNWarStomp.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Casterart=Abilities\Spells\Orc\WarStomp\WarStompCaster.mdl
+Order=stomp
+Animnames=spell,slam
+
+// Shockwave (Cairne)
+[AOs2] 
+Art=ReplaceableTextures\CommandButtons\BTNShockWave.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNShockWave.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Missileart=Abilities\Spells\Orc\Shockwave\ShockwaveMissile.mdl
+Missilespeed=1050
+Order=shockwave
+Animnames=attack,slam
+
+// Endurance Aura (Cairne)
+[AOr2]
+Art=ReplaceableTextures\PassiveButtons\PASBTNCommand.blp
+Buttonpos=2,2
+Researchart=ReplaceableTextures\CommandButtons\BTNCommand.blp
+Researchbuttonpos=2,0
+Targetart=Abilities\Spells\Orc\CommandAura\CommandAura.mdl
+Targetattach=origin
+
+// Reincarnation (Cairne)
+[AOr3]
+Art=ReplaceableTextures\PassiveButtons\PASBTNReincarnation.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNReincarnation.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Effectart=Abilities\Spells\Orc\Reincarnation\ReincarnationTarget.mdl
+Casterart=
+Targetart=
+
+// Healing Wave (rokhan)
+[ANhw]
+Art=ReplaceableTextures\CommandButtons\BTNHealingWave.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNHealingWave.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Targetart=Abilities\Spells\Orc\HealingWave\HealingWaveTarget.mdl
+Order=healingwave
+Animnames=spell,throw
+LightningEffect=HWPB,HWSB
+
+// Hex (rokhan)
+[ANhx]
+Art=ReplaceableTextures\CommandButtons\BTNHex.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNHex.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Specialart=Abilities\Spells\Human\Polymorph\PolyMorphDoneGround.mdl
+Order=hex
+
+// Serpent Ward (rokhan)
+[Arsw]
+Art=ReplaceableTextures\CommandButtons\BTNSerpentWard.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNSerpentWard.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+Order=Serpentward
+
+// Voodoo Spirits (rokhan)
+[AOls]
+Art=ReplaceableTextures\CommandButtons\BTNLocustSwarm.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNLocustSwarm.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Order=Locustswarm
+Effectsoundlooped=LocustSwarmLoop
+
+// Summon Quillbeast (Rexxar)
+[Arsq]
+Art=ReplaceableTextures\CommandButtons\BTNQuillBeast.blp
+Buttonpos=1,2
+Researchart=ReplaceableTextures\CommandButtons\BTNQuillBeast.blp
+Researchbuttonpos=1,0
+Targetart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+Order=summonquillbeast
+Animnames=spell,slam
+
+// Stampede (Rexxar)
+[Arsp]
+Art=ReplaceableTextures\CommandButtons\BTNStampede.blp
+Buttonpos=3,2
+Researchart=ReplaceableTextures\CommandButtons\BTNStampede.blp
+Researchbuttonpos=3,0
+Specialart=Abilities\Spells\Other\Stampede\MissileDeath.mdl 
+Missileart=Abilities\Spells\Other\Stampede\StampedeMissile.mdl
+Missilespeed=500
+Effectsoundlooped=StampedeLoop
+Effectsound=StampedeCast
+Order=stampede
+Animnames=spell,looping
+
+// Battle Roar
+[ANbr]
+Art=ReplaceableTextures\CommandButtons\BTNBattleRoar.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNBattleRoar.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+Casterart=Abilities\Spells\NightElf\BattleRoar\RoarCaster.mdl
+Order=battleroar
+Animnames=spell,slam
+
+[BNbr]
+Spelldetail=1
+Buffart=ReplaceableTextures\CommandButtons\BTNBattleRoar.blp
+Targetart=Abilities\Spells\NightElf\BattleRoar\RoarTarget.mdl
+Targetattach=overhead
+
+// Summon Grizzly (campaign)
+[Arsg]
+Art=ReplaceableTextures\CommandButtons\BTNGrizzlyBear.blp
+Buttonpos=0,2
+Researchart=ReplaceableTextures\CommandButtons\BTNGrizzlyBear.blp
+Researchbuttonpos=0,0
+Specialart=Abilities\Spells\Orc\FeralSpirit\feralspiritdone.mdl
+Order=spiritwolf
+Animnames=spell,slam
+
+// Storm Bolt (campaign)
+[ANsb]
+Art=ReplaceableTextures\CommandButtons\BTNStormBolt.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNStormBolt.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+Missileart=Abilities\Spells\Human\StormBolt\StormBoltMissile.mdl
+Missilespeed=1000
+MissileHoming=1
+Order=thunderbolt
+Animnames=spell,throw
+
+// Breath of Fire (Chen)
+[ANcf]
+Art=ReplaceableTextures\CommandButtons\BTNBreathOfFire.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNBreathOfFire.blp
+Buttonpos=0,2
+Researchbuttonpos=0,0
+Missileart=Abilities\Spells\Other\BreathOfFire\BreathOfFireMissile.mdl
+Missilespeed=1050
+Order=breathoffire
+Animnames=spell,slam
+
+// Drunken Brawler (Chen)
+[Acdb]
+Art=ReplaceableTextures\PassiveButtons\PASBTNDrunkenDodge.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNDrunkenDodge.blp
+Buttonpos=2,2
+Researchbuttonpos=2,0
+
+// Drunken Haze (Chen)
+[Acdh]
+Art=ReplaceableTextures\CommandButtons\BTNStrongDrink.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNStrongDrink.blp
+Buttonpos=1,2
+Researchbuttonpos=1,0
+Missileart=Abilities\Spells\Other\StrongDrink\BrewmasterMissile.mdl
+Missilearc=0.15
+Missilespeed=1500
+Order=drunkenhaze
+
+// Earth, Storm, and Fire (Chen)
+[Acef]
+Art=ReplaceableTextures\CommandButtons\BTNStormEarth&Fire.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNStormEarth&Fire.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Specialart=Abilities\Spells\Human\Polymorph\PolyMorphDoneGround.mdl
+Order=elementalfury
+Missileart=Units\Creeps\FirePandarenBrewmaster\FirePandarenBrewmaster_Missile.mdl,Units\Creeps\StormPandarenBrewmaster\StormPandarenBrewmaster_Missile.mdl,Units\Creeps\EarthPandarenBrewmaster\EarthPandarenBrewmaster_Missile.mdl
+Missilearc=0.75
+Missilespeed=150
+Effectsound=StormEarthFireSound
+Animnames=spell,throw
+
+// Voodoo Spirits (Rokhan)
+[AOls]
+Art=ReplaceableTextures\CommandButtons\BTNLocustSwarm.blp
+Researchart=ReplaceableTextures\CommandButtons\BTNLocustSwarm.blp
+Buttonpos=3,2
+Researchbuttonpos=3,0
+Order=Locustswarm
+Effectsoundlooped=LocustSwarmLoop

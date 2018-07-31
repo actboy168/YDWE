@@ -1,0 +1,132 @@
+[Resm]
+Name=Strength of the Moon,Improved Strength of the Moon,Advanced Strength of the Moon
+Tip=Upgrade to Strength of the |cffffcc00M|roon,Upgrade to Improved Strength of the |cffffcc00M|roon,Upgrade to Advanced Strength of the |cffffcc00M|roon
+Ubertip="Increases the damage of Archers, Huntresses, Glaive Throwers, and Hippogryph Riders.","Further increases the damage of Archers, Huntresses, Glaive Throwers, and Hippogryph Riders.","Further increases the damage of Archers, Huntresses, Glaive Throwers, and Hippogryph Riders."
+Hotkey=M,M,M
+
+[Resw]
+Name=Strength of the Wild,Improved Strength of the Wild,Advanced Strength of the Wild
+Tip=Upgrade to Strength of the |cffffcc00W|rild,Upgrade to Improved Strength of the |cffffcc00W|rild,Upgrade to Advanced Strength of the |cffffcc00W|rild
+Ubertip="Increases the damage of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.","Further increases the damage of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.","Further increases the damage of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras."
+Hotkey=W,W,W
+
+[Rema]
+Name=Moon Armor,Improved Moon Armor,Advanced Moon Armor
+Tip=Upgrade to Moon |cffffcc00A|rrmor,Upgrade to Improved Moon |cffffcc00A|rrmor,Upgrade to Advanced Moon |cffffcc00A|rrmor
+Ubertip="Increases the armor of Archers, Huntresses, and Hippogryph Riders.","Further increases the armor of Archers, Huntresses, and Hippogryph Riders.","Further increases the armor of Archers, Huntresses, and Hippogryph Riders."
+Hotkey=A,A,A
+
+[Rerh]
+Name=Reinforced Hides,Improved Reinforced Hides,Advanced Reinforced Hides
+Tip=Upgrade to |cffffcc00R|reinforced Hides,Upgrade to Improved |cffffcc00R|reinforced Hides,Upgrade to Advanced |cffffcc00R|reinforced Hides
+Ubertip="Increases the armor of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.","Further increases the armor of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras.","Further increases the armor of Druids of the Claw in Bear Form, Druids of the Talon in Storm Crow Form, Dryads, Mountain Giants, Faerie Dragons, Hippogryphs, and Chimaeras."
+Hotkey=R,R,R
+
+[Reuv]
+Name=Ultravision
+Tip=Upgrade to |cffffcc00U|rltravision
+Ubertip="Gives Night Elves the ability to see as far at night as they do during the day."
+Hotkey=U
+
+[Renb]
+Name=Nature's Blessing
+Tip=Research |cffffcc00N|rature's Blessing
+Ubertip="Upgrades all Ancients' and Treants' movement speed and armor."
+Hotkey=N
+
+[Reib]
+Name=Improved Bows
+Tip=Research |cffffcc00I|rmproved Bows
+Ubertip="Increases the Archer's and Hippogryph Rider's attack range."
+Hotkey=I
+
+[Remk]
+Name=Marksmanship
+Tip=Research |cffffcc00M|rarksmanship
+Ubertip="Increases damage of Archers and Hippogryph Riders by <Remk,base1>."
+Hotkey=M
+
+[Resc]
+Name=Sentinel
+Tip=Research |cffffcc00S|rentinel
+Ubertip="Gives the Huntress the ability to send her owl companion to a nearby tree and provide vision. |nCan see invisible units."
+Hotkey=S
+
+[Remg]
+Name=Upgrade Moon Glaive
+Tip=Upgrade Moon |cffffcc00G|rlaive
+Ubertip="Gives the Huntress the ability to strike additional units with her bouncing glaive attacks."
+Hotkey=G
+
+[Redt]
+Name=Druid of the Talon Adept Training,Druid of the Talon Master Training
+Tip=Druid of the T|cffffcc00a|rlon Adept Training,Druid of the T|cffffcc00a|rlon Master Training
+Ubertip="Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, and gives them the ability Storm Crow Form.","Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, and gives them the ability to cast Cyclone."
+Hotkey=A,A
+
+[Redc]
+Name=Druid of the Claw Adept Training,Druid of the Claw Master Training
+Tip=Druid of the C|cffffcc00l|raw Adept Training,Druid of the C|cffffcc00l|raw Master Training
+Ubertip="Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, attack damage and gives them the ability Rejuvenation.","Increases their Night Elf Form's mana capacity, mana regeneration rate, hit points, attack damage and gives them the ability Bear Form."
+Hotkey=L,L
+
+[Resi]
+Name=Abolish Magic
+Tip=Research Aboli|cffffcc00s|rh Magic
+Ubertip="Gives the Dryad the ability to dispel positive buffs from enemy units, and negative buffs from friendly units. |nDamages summoned units."
+Hotkey=S
+
+[Reht]
+Name=Hippogryph Taming
+Tip=Research H|cffffcc00i|rppogryph Taming
+Ubertip="Trains Hippogryphs to allow Archers to mount them. This allows them to attack both air and ground units."
+Hotkey=I
+
+[Recb]
+Name=Corrosive Breath
+Tip=Research Corrosive |cffffcc00B|rreath
+Ubertip="Gives Chimaeras the ability to hurl corrosive bile onto enemy buildings."
+Hotkey=B
+
+[Repb]
+Name=Vorpal Blades
+Tip=Research Vor|cffffcc00p|ral Blades
+Ubertip="Permits the glaives launched by the Glaive Thrower to strike through initial ground targets and damage those behind. Also allows them to attack trees."
+Hotkey=P
+
+[Rers]
+Name=Resistant Skin
+Tip=Research Resis|cffffcc00t|rant Skin
+Ubertip="Gives Mountain Giants increased resistance to spell damage."
+Hotkey=T
+
+[Rehs]
+Name=Hardened Skin
+Tip=Research |cffffcc00H|rardened Skin
+Ubertip="Gives Mountain Giants increased resistance to attack damage."
+Hotkey=H
+
+[Reeb]
+Name=Mark of the Claw
+Tip=Research |cffffcc00M|rark of the Claw
+Ubertip="Allows Druids of the Claw to cast Roar while in Bear Form."
+Hotkey=M
+
+[Reec]
+Name=Mark of the Talon
+Tip=Research |cffffcc00M|rark of the Talon
+Ubertip="Allows Druids of the Talon to cast Faerie Fire while in Storm Crow Form."
+Hotkey=M
+
+[Rews]
+Name=Well Spring
+Tip=Research W|cffffcc00e|rll Spring
+Ubertip="Increases the amount of mana that can be stored in Moon Wells by <Rews,base1>, and their rate of mana regeneration by <Rews,base2,%>%."
+Hotkey=E
+
+[Repm]
+Name=Backpack
+EditorSuffix= (Night Elf)
+Tip=Research |cffffcc00B|rackpack
+Ubertip="Gives specific Night Elf ground units the ability to carry items."
+Hotkey=B

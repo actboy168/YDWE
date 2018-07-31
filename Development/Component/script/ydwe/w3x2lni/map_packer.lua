@@ -1,20 +1,23 @@
 local process = require 'process'
 local root = fs.ydwe_path()
 local dev = fs.ydwe_devpath()
+local i18n = require "i18n"
 
-return function (mode, map_path, target_path)
+local function do_command(script, ...)
+    local cmds = {...}
+    for i, str in ipairs(cmds) do
+        cmds[i] = '"' .. tostring(str) .. '"'
+    end
     local current_dir = dev / 'plugin' / 'w3x2lni' / 'script'
     local command_line = ([=[
-"%s" -e"package.cpath=[[%s]];package.path=[[%s;%s]]" "%s" "%s" "%s" "%s"]=]
+"%s" -e"package.cpath=[[%s]];package.path=[[%s;%s]]" "%s" %s]=]
     ):format(
         (root / 'bin' / 'lua.exe'):string(),
         (root / 'bin' / 'modules' / '?.dll'):string(),
         (current_dir / '?.lua'):string(),
         (current_dir / '?' / 'init.lua'):string(),
-        (current_dir / 'gui' / 'mini.lua'):string(),
-        mode,
-        map_path:string(),
-        target_path:string()
+        (current_dir / script):string(),
+        table.concat(cmds, ' ')
     )
     local p = process()
     p:set_console 'disable'
@@ -34,4 +37,40 @@ return function (mode, map_path, target_path)
         log.error(err)
         return false
     end
+end
+
+local command = {
+    backend = function (...)
+        return do_command('backend/init.lua', ...)
+    end,
+    frontend = function (...)
+        return do_command('gui/mini.lua', ...)
+    end,
+}
+
+local function make_zhCN()
+    command.backend('config', 'global.data=zhCN-1.24.4')
+    command.backend('config', 'global.data_ui=${YDWE}')
+    command.backend('config', 'global.data_meta=${DEFAULT}')
+    command.backend('config', 'global.data_wes=${DEFAULT}')
+    command.backend('config', 'slk.slk_doodad=true')
+end
+
+local function make_enUS()
+    command.backend('config', 'global.data=enUS-1.27.1')
+    command.backend('config', 'global.data_ui=${DATA}')
+    command.backend('config', 'global.data_meta=${DATA}')
+    command.backend('config', 'global.data_wes=${DATA}')
+    command.backend('config', 'slk.slk_doodad=false')
+end
+
+return function (mode, map_path, target_path)
+    local lang = i18n.get_language()
+    if lang:sub(1, 2) == 'en' then
+        make_enUS()
+    else
+        make_zhCN()
+    end
+    local result = command.frontend(mode, map_path:string(), target_path:string())
+    return result
 end
