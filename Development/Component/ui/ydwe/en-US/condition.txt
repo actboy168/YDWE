@@ -1,0 +1,547 @@
+[OperatorCompareBoolean]
+title = "Boolean Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = boolean
+default = "IsUnitType"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = boolean
+default = "true"
+
+["             "]
+title = "Custom Script"
+description = "Script: ${JassScript}"
+comment = "Use local variable in Condition is unable, if it is necessary you can use global variable or GetTriggerUnit() as a instead"
+category = TC_YDHIDE
+[[.args]]
+type = scriptcode
+
+[OperatorCompareTrigger]
+title = "Trigger Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = trigger
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = trigger
+
+[OperatorCompareUnit]
+title = "Unit Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = unit
+
+[OperatorCompareUnitCode]
+title = "Unit-Type Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = unitcode
+default = "GetUnitTypeId"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = unitcode
+default = "hfoo"
+
+[OperatorCompareTerrainType]
+title = "Terrain Type Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = terraintype
+default = "GetTerrainTypeBJ"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = terraintype
+default = "TerrainTypeLdrt"
+
+[OperatorComparePoint]
+title = "点 [R]"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = location
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = location
+
+[OperatorCompareDialog]
+title = "Dialog [R]"
+description = "${Dialog} ${Operator} ${dialog}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = dialog
+default = "GetClickedDialogBJ"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = dialog
+
+[OperatorCompareButton]
+title = "Dialog Button Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = button
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = button
+
+[OperatorCompareMeleeDifficulty]
+title = "Melee AI Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = aidifficulty
+default = "GetAIDifficulty"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = aidifficulty
+default = "AIDifficultyNormal"
+
+[OperatorCompareAbilityId]
+title = "Ability Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = abilcode
+default = "GetSpellAbilityId"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = abilcode
+default = "AUan"
+
+[OperatorCompareTimer]
+title = "Timer [R]"
+description = "${Timer} ${Operator} ${timer}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = timer
+default = "GetExpiredTimer"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = timer
+
+[OperatorCompareTechCode]
+title = "Tech-Type Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = techcode
+default = "GetResearched"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = techcode
+
+[OperatorCompareDestructible]
+title = "Destructible Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = destructable
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = destructable
+
+[OperatorCompareDestructableCode]
+title = "Destructible-Type Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = destructablecode
+default = "GetDestructableTypeId"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = destructablecode
+default = "LTlt"
+
+[OperatorCompareTrackable]
+title = "traceable [R]"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = trackable
+default = "GetTriggeringTrackable"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = trackable
+default = "GetTriggeringTrackable"
+
+[OperatorCompareOrderCode]
+title = "Order Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = ordercode
+default = "GetIssuedOrderIdBJ"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = ordercode
+default = "String2OrderIdBJ"
+
+[OperatorCompareBuffId]
+title = "Buff Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = buffcode
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = buffcode
+
+[OperatorCompareRegion]
+title = "Region (Rect) [R]"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = rect
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = rect
+
+[OperatorCompareRegionR]
+title = "Region(Irregular) [R]"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = region
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = region
+
+[OperatorCompareReal]
+title = "Real Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = real
+default = "10"
+[[.args]]
+type = ComparisonOperator
+default = "OperatorGreaterEq"
+[[.args]]
+type = real
+default = "10"
+
+[OperatorCompareDegree]
+title = "Degree"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = degree
+default = "10"
+[[.args]]
+type = ComparisonOperator
+default = "OperatorGreaterEq"
+[[.args]]
+type = degree
+default = "10"
+
+[OperatorCompareRadian]
+title = "Radian"
+description = "${Value} ${Operator} ${Value}"
+comment = ""
+category = TC_CONDITION
+[[.args]]
+type = radian
+default = "10"
+[[.args]]
+type = ComparisonOperator
+default = "OperatorGreaterEq"
+[[.args]]
+type = radian
+default = "10"
+
+[OperatorComparePlayer]
+title = "Player Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = player
+default = "GetOwningPlayer"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = player
+default = "Player00"
+
+[OperatorComparePlayerColor]
+title = "Player Color Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = playercolor
+default = "GetPlayerColor"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = playercolor
+default = "Color00"
+
+[OperatorComparePlayerControl]
+title = "Player Controller Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = mapcontrol
+default = "GetPlayerController"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = mapcontrol
+default = "MapControlUser"
+
+[OperatorComparePlayerSlotStatus]
+title = "Player Slot Status Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = playerslotstate
+default = "GetPlayerSlotState"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = playerslotstate
+default = "PlayerSlotStatePlaying"
+
+[OperatorCompareItem]
+title = "Item Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = item
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = item
+
+[OperatorCompareItemType]
+title = "Item-Class Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = itemtype
+default = "GetItemType"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = itemtype
+default = "ItemTypePowerup"
+
+[OperatorCompareItemCode]
+title = "Item-Type Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = itemcode
+default = "GetItemTypeId"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = itemcode
+default = "texp"
+
+[OperatorCompareHeroSkill]
+title = "Hero Skill Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = heroskillcode
+default = "GetLearnedSkillBJ"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = heroskillcode
+default = "HeroSkillBlizzard"
+
+[OperatorCompareGameDifficulty]
+title = "Game Difficulty Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = gamedifficulty
+default = "GetGameDifficulty"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = gamedifficulty
+default = "GameDifficultyNormal"
+
+[OperatorCompareGameSpeed]
+title = "Game Speed Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = gamespeed
+default = "GetGameSpeed"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = gamespeed
+default = "GameSpeedNormal"
+
+[OperatorCompareInteger]
+title = "Integer Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = integer
+default = "0"
+[[.args]]
+type = ComparisonOperator
+default = "OperatorEqual"
+[[.args]]
+type = integer
+default = "0"
+
+[OperatorCompareRace]
+title = "Race Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = race
+default = "GetPlayerRace"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = race
+default = "RaceHuman"
+
+[OperatorCompareString]
+title = "String Comparison"
+description = "${Value} ${Operator} ${Value}"
+comment = "For two strings to be equal, they must be of equal length and content."
+category = TC_CONDITION
+[[.args]]
+type = string
+default = "GetEventPlayerChatString"
+[[.args]]
+type = EqualNotEqualOperator
+default = "OperatorEqualENE"
+[[.args]]
+type = string
+
+[GetBooleanAnd]
+title = "And"
+description = "${Condition 1} and ${Condition 2}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = boolcall
+[[.args]]
+type = boolcall
+
+[GetBooleanOr]
+title = "Or"
+description = "${Condition 1} or ${Condition 2}"
+comment =""
+category = TC_CONDITION
+[[.args]]
+type = boolcall
+[[.args]]
+type = boolcall
+
+[AndMultiple]
+title = "And"
+description = "And - All (Conditions) are true"
+comment = "Add conditions to this function in the main display."
+category = TC_CONDITION
+[[.args]]
+type = nothing
+
+[OrMultiple]
+title = "Or"
+description = "Or - Any (Conditions) are true"
+comment = "Add conditions to this function in the main display."
+category = TC_CONDITION
+[[.args]]
+type = nothing

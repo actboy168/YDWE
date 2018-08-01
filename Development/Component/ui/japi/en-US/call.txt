@@ -1,0 +1,235 @@
+[YDWEIsEventPhysicalDamage]
+title = "YDWE Is Physical Damage [JAPI]"
+description = "Physical damage will calculate armor. "
+comment = "Reacting when in Unit Takes Damage Event, Don`t use it after 'Wait'."
+category = TC_EVENTRESPONSE
+returns = boolean
+
+[YDWEIsEventAttackDamage]
+title = "YDWE Is Attack Damage [JAPI]"
+description = "Attack damage means the damage do not from a skill."
+comment = "Reacting when in Unit Takes Damage Event, Don`t use it after 'Wait'."
+category = TC_EVENTRESPONSE
+returns = boolean
+
+[YDWEIsEventRangedDamage]
+title = "YDWE Is Ranged Damage [JAPI]"
+description = "Ranged damage means the damage do not from a attack of ranged."
+comment = "Reacting when in Unit Takes Damage Event, Don`t use it after 'Wait'."
+category = TC_EVENTRESPONSE
+returns = boolean
+
+[YDWEIsEventDamageType]
+title = "YDWE Get Damage Type [JAPI]"
+description = "Unit suffer damage as damage type of ${damagetype}"
+comment = "Reacting when in Unit Takes Damage Event, Don`t use it after 'Wait'."
+category = TC_EVENTRESPONSE
+returns = boolean
+[[.args]]
+type = damagetype
+default = "DamageTypeNormal"
+
+[YDWEIsEventWeaponType]
+title = "YDWE Get Weapon Type [JAPI]"
+description = "Unit suffer damage as weapon type of ${weapontype}"
+comment = "Reacting when in Unit Takes Damage Event, Don`t use it after 'Wait'."
+category = TC_EVENTRESPONSE
+returns = boolean
+[[.args]]
+type = weapontype
+default = "WEAPON_TYPE_WHOKNOWS"
+
+[YDWEIsEventAttackType]
+title = "YDWE Get Attack Type [JAPI]"
+description = "Unit suffer damage as attack type of ${attacktype}"
+comment = "Reacting when in Unit Takes Damage Event, Don`t use it after 'Wait'."
+category = TC_EVENTRESPONSE
+returns = boolean
+[[.args]]
+type = attacktype
+default = "AttackTypeNormal"
+
+[YDWEGetObjectPropertyInteger]
+title = "YDWE Object Attribute (Integer) [JAPI]"
+description = "Get value of [${type}] of ${object} with ${attributeName}"
+comment = "Attribute name can be found in the item editor after fress Ctrl + D, it include data like Abilities，Buffs/Effects ，Units，Items，Upgrades，Doodads，Destructibles. "
+category = TC_UNIT
+use_in_event = 0
+returns = integer
+[[.args]]
+type = objecttype
+default = "objecttype00_abilcode"
+[[.args]]
+type = Null
+default = "AHhb"
+[[.args]]
+type = string
+default = "\"levels\""
+
+[YDWEGetObjectPropertyReal]
+title = "YDWE Object Attribute (Real) [JAPI]"
+description = "Get value of [${type}] of ${object} with ${attributeName}"
+comment = "Attribute name can be found in the item editor after fress Ctrl + D, it include data like Abilities，Buffs/Effects ，Units，Items，Upgrades，Doodads，Destructibles. "
+category = TC_UNIT
+use_in_event = 0
+returns = real
+[[.args]]
+type = objecttype
+default = "objecttype00_abilcode"
+[[.args]]
+type = Null
+default = "AHhb"
+[[.args]]
+type = string
+default = "\"Rng1\""
+
+[YDWEGetObjectPropertyString]
+title = "YDWE Object Attribute (String) [JAPI]"
+description = "Get value of [${type}] of ${object} with ${attributeName}"
+comment = "Attribute name can be found in the item editor after fress Ctrl + D, it include data like Abilities，Buffs/Effects ，Units，Items，Upgrades，Doodads，Destructibles. "
+category = TC_UNIT
+use_in_event = 0
+returns = string
+[[.args]]
+type = objecttype
+default = "objecttype00_abilcode"
+[[.args]]
+type = Null
+default = "AHhb"
+[[.args]]
+type = string
+default = "\"Name\""
+
+[YDWEGetUnitAbilityState]
+title = "YDWE Get Ability Attribute [JAPI]"
+description = "Get value from ${unit} in ${ability} with ${state}"
+comment = ""
+category = TC_UNIT
+use_in_event = 0
+returns = real
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = AbilityState
+default = "ABILITY_STATE_COOLDOWN"
+
+[YDWEGetUnitAbilityDataInteger]
+title = "YDWE Get Ability Data (Integer) [JAPI]"
+description = "Get value from ${unit} in ${ability} in level ${level} with ${dataColumn}"
+comment = ""
+category = TC_UNIT
+use_in_event = 0
+returns = integer
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = integer
+default = "1"
+min = 1
+[[.args]]
+type = AbilityDataInteger
+default = "ABILITY_DATA_COST"
+
+[YDWEGetUnitAbilityDataReal]
+title = "YDWE Get Ability Data (Real) [JAPI]"
+description = "Get value from ${unit} in ${ability} in level ${level} with ${dataColumn}"
+comment = "Data Name (after press Ctrl + D): Cast, Dur, HeroDur, Cool, Area, Rng, DataA, DataB, DataC, DataD, DataE, DataF, DataG, DataH, DataI."
+category = TC_UNIT
+use_in_event = 0
+returns = real
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = integer
+default = "1"
+min = 1
+[[.args]]
+type = AbilityDataReal
+default = "ABILITY_DATA_COOL"
+
+[YDWEGetUnitAbilityDataString]
+title = "YDWE Get Ability Data (String) [JAPI]"
+description = "Get value from ${unit} in ${ability} in level ${level} with ${dataColumn}"
+comment = ""
+category = TC_UNIT
+use_in_event = 0
+returns = string
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = integer
+default = "1"
+min = 1
+[[.args]]
+type = AbilityDataString
+default = "ABILITY_DATA_TIP"
+
+[YDWEGetItemDataString]
+title = "YDWE Get Item Data (String) [JAPI]"
+description = "Get ${Object} in ${data}"
+comment = ""
+category = TC_ITEM
+use_in_event = 0
+returns = string
+[[.args]]
+type = itemcode
+default = "ches"
+[[.args]]
+type = ItemDataString
+default = "ITEM_DATA_TIP"
+
+[EXGetEffectX]
+title = "YDWE Get Effect X [JAPI]"
+description = "Get ${effect} X axis value"
+comment = ""
+category = TC_SPECIALEFFECT
+use_in_event = 0
+returns = real
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+
+[EXGetEffectY]
+title = "YDWE Get Effect Y [JAPI]"
+description = "Get ${effect} Y axis value"
+comment = ""
+category = TC_SPECIALEFFECT
+use_in_event = 0
+returns = real
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+
+[EXGetEffectZ]
+title = "YDWE Get Effect Z [JAPI]"
+description = "Get ${effect} Z axis value"
+comment = ""
+category = TC_SPECIALEFFECT
+use_in_event = 0
+returns = real
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+
+[EXGetEffectSize]
+title = "YDWE Get Effect Size [JAPI]"
+description = "Get ${effect} size"
+comment = ""
+category = TC_SPECIALEFFECT
+use_in_event = 0
+returns = real
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"

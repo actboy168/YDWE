@@ -1,0 +1,320 @@
+[YDWESetUnitAbilityState]
+title = "YDWE Set Unit Ability State [JAPI]"
+description = "Set unit ${Unit} ,its ability ${Ability} in state ${State} is ${Value}"
+comment = ""
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = AbilityState
+default = "ABILITY_STATE_COOLDOWN"
+[[.args]]
+type = real
+
+[YDWESetUnitAbilityDataInteger]
+title = "YDWE Set Unit Ability Data Integer (Integer) [JAPI]"
+description = "Set unit ${Unit} ,its ability ${Ability} in Level ${Level} with data column ${Data} is ${Value}"
+comment = ""
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = integer
+default = "1"
+min = 1
+[[.args]]
+type = AbilityDataInteger
+default = "ABILITY_DATA_COST"
+[[.args]]
+type = integer
+
+[YDWESetUnitAbilityDataReal]
+title = "YDWE Set Unit Ability Data Real (Real) [JAPI]"
+description = "Set unit ${Unit} ,its ability ${Ability} in Level ${Level} with data column ${Data} is ${Value}"
+comment = "Data A~ means the data column you can see in Object manager as DataA~DataI if you pause Ctrl+D"
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = integer
+default = "1"
+min = 1
+[[.args]]
+type = AbilityDataReal
+default = "ABILITY_DATA_COOL"
+[[.args]]
+type = real
+
+[YDWESetUnitAbilityDataString]
+title = "YDWE Set Unit Ability Data String (String) [JAPI]"
+description = "Set unit ${Unit} ,its ability ${Ability} in Level ${Level} with data column ${Data} is ${Value}"
+comment = ""
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+[[.args]]
+type = integer
+default = "1"
+min = 1
+[[.args]]
+type = AbilityDataString
+default = "ABILITY_DATA_TIP"
+[[.args]]
+type = string
+
+[YDWEUnitTransform]
+title = "YDWE UnitTransform [JAPI]"
+description = "Transform ${Unit} with ${Ability} to ${TargetUnit}"
+comment = "The ability you use need Metamorphosis <AEme> or its copy"
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = abilcode
+default = "AEme"
+[[.args]]
+type = unitcode
+default = "hfoo"
+
+[YDWEUnitAddStun]
+title = "YDWE Add Stun to unit [JAPI]"
+description = "Add stun to ${Unit}"
+comment = ""
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+
+[YDWEUnitRemoveStun]
+title = "YDWE Remove Stun from unit [JAPI]"
+description = "Remove stun from ${unit}"
+comment = "Do not use stun of Storm Bolt, because it just remove stun but keep buff of stun exist."
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+
+[YDWESetEventDamage]
+title = "YDWE Set Damage [JAPI]"
+description = "Set Damage Of Unit ${DamageValue}"
+comment = "Modify damage value in Damage Event, do not use after Wait."
+category = TC_UNIT
+[[.args]]
+type = real
+default = "0."
+
+[YDWERHSetGameWinner]
+title = "YDWE Set Alliance Victory [JAPI]"
+description = "Set force (${Ingeger}) victory"
+comment = "队伍1的ID为0，队伍2的ID为1。"
+category = TC_YDHIDE
+[[.args]]
+type = integer
+default = "0"
+min = 0
+max = 15
+
+[YDWEDisplayChat]
+title = "YDWE Player Chat Simulation [JAPI]"
+description = "Simulation of ${Player} in ${channel} send: ${msg}"
+comment = ""
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = ChatRecipient
+default = "CHAT_RECIPIENT_ALL"
+[[.args]]
+type = StringExt
+
+[YDWESetItemDataString]
+title = "YDWE Set Item Data (String) [JAPI]"
+description = "Set ${Item} in ${DataColumn} to ${Value}"
+comment = ""
+category = TC_ITEM
+[[.args]]
+type = itemcode
+default = "ches"
+[[.args]]
+type = ItemDataString
+default = "ITEM_DATA_TIP"
+[[.args]]
+type = string
+
+[YDWESetEffectLoc]
+title = "YDWE Move Effect To Location [JAPI]"
+description = "Move ${effect} to ${location}"
+comment = ""
+category = TC_SPECIALEFFECT
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+[[.args]]
+type = location
+
+[EXSetEffectXY]
+title = "YDWE Set Effect XY[JAPI]"
+description = "Move ${effect} to ( ${X}, ${Y} )"
+comment = ""
+category = TC_SPECIALEFFECT
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+
+[EXSetEffectZ]
+title = "YDWE Set Effect Z [JAPI]"
+description = "Set ${effect} height to ${height}"
+comment = ""
+category = TC_SPECIALEFFECT
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+[[.args]]
+type = real
+default = "0"
+
+[EXSetEffectSize]
+title = "YDWE Set Effect Size [JAPI]"
+description = "Set ${effect} size to ${size}"
+comment = ""
+category = TC_SPECIALEFFECT
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+[[.args]]
+type = real
+default = "1"
+
+[EXSetEffectSpeed]
+title = "YDWE Set Effect Animation Speed [JAPI]"
+description = "Set ${effect} animation speed to ${speed}"
+comment = ""
+category = TC_SPECIALEFFECT
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+[[.args]]
+type = real
+default = "1"
+
+[EXEffectMatReset]
+title = "YDWE Reset Effect mat [JAPI]"
+description = "Reset ${effect}"
+comment = "Clear all rotation and scale, reset to init"
+category = TC_SPECIALEFFECT
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+
+[EXEffectMatRotateX]
+title = "YDWE Rotate Around X Axis  [JAPI]"
+description = "Set ${effect} rotate around X axis ${degree} degree"
+comment = "Multiple calls, the effect will be superimposed, do not want to overlay the need to first reset to the initial state."
+category = TC_SPECIALEFFECT
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+[[.args]]
+type = degree
+default = "0"
+
+[EXEffectMatRotateY]
+title = "YDWE Rotate Around Y Axis  [JAPI]"
+description = "Set ${effect} rotate around Y axis ${degree} degree"
+comment = "Multiple calls, the effect will be superimposed, do not want to overlay the need to first reset to the initial state."
+category = TC_SPECIALEFFECT
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+[[.args]]
+type = degree
+default = "0"
+
+[EXEffectMatRotateZ]
+title = "YDWE Rotate Around Z Axis  [JAPI]"
+description = "Set ${effect} rotate around Z axis ${degree} degree"
+comment = "Multiple calls, the effect will be superimposed, do not want to overlay the need to first reset to the initial state."
+category = TC_SPECIALEFFECT
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+[[.args]]
+type = degree
+default = "0"
+
+[EXEffectMatScale]
+title = "YDWE Scale Effect [JAPI]"
+description = "Set ${effect} size in X axis to [ ${scale} ], in Y axis to[ ${scale} ],in Y axis to[ ${scale} ]。"
+comment = "Multiple calls, the effect will be superimposed, do not want to overlay the need to first reset to the initial state.When set to 2,2,2, the size is 2 times the size. When the negative number is set, it is the mirror image flipping."
+category = TC_SPECIALEFFECT
+[[.args]]
+type = effect
+default = "bj_lastCreatedEffect"
+[[.args]]
+type = real
+default = "1"
+[[.args]]
+type = real
+default = "1"
+[[.args]]
+type = real
+default = "1"
+
+[EXSetUnitFacing]
+title = "YDWE Set Unit Facing [JAPI]"
+description = "Set ${unit} facing angle to ${Angle} degree"
+comment = "Change immediately"
+category = TC_UNIT
+[[.args]]
+type = unit
+[[.args]]
+type = degree
+default = "RealUnitFacing"
+
+[EXSetUnitMoveType]
+title = "YDWE Set Move Type [JAPI]"
+description = "Set move type of ${unit} to ${Value}"
+comment = ""
+category = TC_UNIT
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = MoveType
+default = "MoveType06"
+
+[EXSetUnitCollisionType]
+title = "YDWE Set Unit Collision Type [JAPI]"
+description = "${Enable/Disable} collision from ${unit} to ${collision}"
+comment = ""
+category = TC_UNIT
+[[.args]]
+type = onoffoption
+default = "OnOffOff"
+[[.args]]
+type = unit
+default = "GetTriggerUnit"
+[[.args]]
+type = CollisionType
+default = "CollisionType01"
+

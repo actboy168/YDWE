@@ -1,0 +1,66 @@
+[YDWECustomScriptCode]
+title = "YDWE Custom Script"
+description = "${Jass Script}"
+comment = "You can inject one line of code anywhere that get a return value. e.g. Kill (Custom Script: GetTriggerUnit())."
+category = TC_YDBF
+returns = AnyReturnType
+[[.args]]
+type = scriptcode
+
+[YDWEGetAnyTypeLocalVariable]
+title = "YDWE Variable -- Read"
+description = "loc_${variableName}"
+comment = "Get local variable value by any type."
+category = TC_YDBF
+returns = AnyReturnType
+[[.args]]
+type = scriptcode
+
+[YDWEGetAnyTypeLocalArray]
+title = "YDWE Variable -- Read Array"
+description = "loc_${variableName}[${index}]"
+comment = "Get local variable value in array by any type."
+category = TC_YDBF
+returns = AnyReturnType
+[[.args]]
+type = scriptcode
+[[.args]]
+type = integer
+default = 0
+
+[YDWEForLoopLocVarIndex]
+title = "YDWE Loop -- Read(LoopVariable)"
+description = "loop_${variable}"
+comment = "It is a local variable, use in a loop script as a loop integer."
+category = TC_YDBF
+returns = integer
+[[.args]]
+type = scriptcode
+
+[YDWELoadAnyTypeDataByUserData]
+title = "YDWE User Data -- Read"
+description = "[${type}] ${null} 的 ${Attribute}"
+comment = "Get User Data from a Game Data, e.g. [Unit] Demon Hunter's Hit rate."
+category = TC_YDBF
+returns = AnyReturnType
+[[.args]]
+type = typename
+[[.args]]
+type = Null
+[[.args]]
+type = scriptcode
+
+[YDWEHaveSavedAnyTypeDataByUserData]
+title = "YDWE User Data -- Is Exist"
+description = "[${type}] ${null} contains [${type}] ${Attribute}"
+comment = "Judge if a User Data is exist, e.g. [Unit] Demon Hunter has [Item] swords."
+category = TC_YDBF
+returns = boolean
+[[.args]]
+type = typename
+[[.args]]
+type = Null
+[[.args]]
+type = typename
+[[.args]]
+type = scriptcode

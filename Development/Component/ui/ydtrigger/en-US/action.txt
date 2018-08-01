@@ -1,0 +1,176 @@
+[YDWERegionMultiple]
+title = "YDWE Storage Box"
+description = "-------- ${Note Text} --------"
+comment = ""
+category = TC_COMMENT
+[[.args]]
+type = scriptcode
+
+[YDWESetAnyTypeLocalVariable]
+title = "YDWE Variable -- Set"
+description = "[${variable}] loc_${name} = ${null}"
+comment = "Set local variable, you can special variable type. can not set value to null in 1.24."
+category = TC_YDBF
+[[.args]]
+type = typename
+[[.args]]
+type = scriptcode
+[[.args]]
+type = Null
+
+[YDWESetAnyTypeLocalArray]
+title = "YDWE Variable -- SetArray"
+description = "[${Variable}] loc_${name}[${index}] = ${null}"
+comment = "Set local variable array. Notice it can not use through YD Timer and YD Trigger"
+category = TC_YDBF
+[[.args]]
+type = typename
+[[.args]]
+type = scriptcode
+[[.args]]
+type = integer
+default = 0
+[[.args]]
+type = Null
+
+[YDWEForLoopLocVarMultiple]
+title = "YDWE Loop"
+description = "Loop loop_${variableName} from ${start} to ${end}"
+comment = ""
+category = TC_YDBF
+[[.args]]
+type = scriptcode
+[[.args]]
+type = integer
+default = "1"
+[[.args]]
+type = integer
+default = "10"
+
+[YDWETimerStartMultiple]
+title = "YDWE Timer -- Run"
+description = "Run ${timer}, period: ${time} seconds, mode: ${mode}"
+comment = "Use timer to run several action. Can not use Wait in timer scripts"
+category = TC_YDBF
+[[.args]]
+type = timer
+default = "CreateTimer"
+[[.args]]
+type = real
+default = "0.03"
+min = 0
+[[.args]]
+type = periodicoption
+default = "PeriodicOptionOneTime"
+
+[YDWETimerStartFlush]
+title = "YDWE Timer -- Remove"
+description = "Clear current timer"
+comment = "Remove the current YD Timer, flush Game Cache or Hashtable."
+category = TC_YDBF
+[[.args]]
+type = nothing
+
+[YDWERegisterTriggerMultiple]
+title = "YDWE Trigger -- Register"
+description = "Register ${trigger}"
+comment = "Can not use Wait in the Trigger"
+category = TC_YDBF
+[[.args]]
+type = trigger
+default = "CreateTrigger"
+
+[YDWERegisterTriggerFlush]
+title = "YDWE Trigger -- Remove"
+description = "Remove current YD Trigger"
+comment = "Remove current YD Trigger, flush the Game Cache or Hashtable."
+category = TC_YDBF
+[[.args]]
+type = nothing
+
+[YDWEExecuteTriggerMultiple]
+title = "YDWE Trigger -- Execute"
+description = "Execute ${trigger} with ${condition}"
+comment = ""
+category = TC_YDBF
+[[.args]]
+type = trigger
+[[.args]]
+type = tirggerexecute
+default = "tirggerexecute_notcondition"
+
+[YDWEEnumUnitsInRangeMultiple]
+title = "YDWE Select Unit -- Circular Range"
+description = "Set units in region (center (${AxisX}, ${AxisY}), radius ${radius}) do action."
+comment = "Select units in region do something"
+category = TC_YDBF
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = real
+default = "512"
+
+[YDWESaveAnyTypeDataByUserData]
+title = "YDWE UserData -- Set"
+description = "Set [${type}] ${null}'s ${attribute} to [${type}]${null}"
+comment = "Set user data of a game data, in 1.24 you can not set it to null directly, it can be clear"
+category = TC_YDBF
+[[.args]]
+type = typename
+[[.args]]
+type = Null
+[[.args]]
+type = scriptcode
+[[.args]]
+type = typename
+[[.args]]
+type = Null
+
+[YDWEFlushAllByUserData]
+title = "YDWE User Data -- Clear All"
+description = "Clear all user data of [${type}] ${null}."
+comment = "Clear all user data of a game data"
+category = TC_YDBF
+[[.args]]
+type = typename
+[[.args]]
+type = Null
+
+[YDWEFlushAnyTypeDataByUserData]
+title = "YDWE User Data -- Clear"
+description = "Clear user date in [${type}] ${null} of [${type}] ${attribute}"
+comment = "Clear some user data of a game data"
+category = TC_YDBF
+[[.args]]
+type = typename
+[[.args]]
+type = Null
+[[.args]]
+type = typename
+[[.args]]
+type = scriptcode
+
+[YDWEActivateTrigger]
+title = "YDWE Activate Trigger"
+description = "Activate ${Trigger} ( ${On/Off} Compatibility Mode )"
+comment = "Do not activate a trigger many times. Do not activate the trigger that is not open to sleep. Opening compatibility mode slightly affects efficiency. If you close compatibility mode, make sure that the action is followed by a trigger that needs activation, otherwise there will be a syntax error."
+category = TC_TRIGGER
+[[.args]]
+type = trigger
+[[.args]]
+type = onoffoption
+default = "OnOffOn"
+
+[YDWEWaitForLocalVariable]
+title = "YDWE Wait (For Local Variable)[YDWE]"
+description = "Wait ${Time} seconds(For Local Variable)"
+comment = "If use YD Trigger, you have no need to use this."
+category = TC_YDHIDE
+[[.args]]
+type = real
+default = "2"
+min = 0

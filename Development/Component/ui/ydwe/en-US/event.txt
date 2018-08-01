@@ -1,0 +1,431 @@
+[MapInitializationEvent]
+title = "Map Initialization"
+description = "Map initialization"
+comment =""
+category = TC_NOTHING
+[[.args]]
+type = nothing
+
+[YDWESyStemAnyUnitDamagedRegistTrigger]
+title = "YDWE Any Unit Damaged Event"
+description = "Anu Unit "
+comment = "If the trigger action causes damage to the unit, it will cause a dead cycle. It is better to add conditional judgement or close the current trigger before injury. It is not recommended for novice."
+category = TC_YDET
+
+[YDWESyStemItemUnmovableRegistTrigger]
+title = "YDWE Move Item In Slots Event"
+description = "Any unit move item in slots."
+comment = "If the action of a moving item in a trigger action will cause a dead cycle, it is best to close the current trigger before moving items into other triggers or moving items."
+category = TC_YDET
+
+[YDWESyStemItemCombineRegistTrigger]
+title = "YDWE Any Unit Combine Item Event"
+description = "Any unit combine a item."
+comment = "It is used to respond to an item combine system. When an item is combined, a 'Last Combine item' can be captured; the unit that combine the item can be captured by a 'Trigger Unit'."
+category = TC_YDET
+
+[YDWESyStemAbilityCastingOverRegistTrigger]
+title = "YDWE Any Casting Over Special Ability Event"
+description = "Any unit spell a special ability ${ability} over."
+comment = "Use for repond to a YD Ability casting event e.g. Jump, Around, Hook and other YD Abilities, use 'Last Casting Special Ability Unit' to capture the unit who the cast ability."
+category = TC_YDET
+[[.args]]
+type = abilevent
+default = "abileventA"
+
+[TriggerRegisterUnitEvent]
+title = "Specific Unit Event"
+description = "${Unit} ${Event}"
+comment =""
+category = TC_UNIT
+[[.args]]
+type = unit
+[[.args]]
+type = unitevent
+default = "UnitEventDeath"
+
+[TriggerRegisterPlayerUnitEventSimple]
+title = "Player-Owned Unit Event"
+description = "A unit owned by ${Player} ${Event}"
+comment =""
+category = TC_UNIT
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = playerunitevent
+default = "PlayerUnitEventDeath"
+
+[TriggerRegisterAnyUnitEventBJ]
+title = "Generic Unit Event"
+description = "A unit ${Event}"
+comment =""
+category = TC_UNIT
+[[.args]]
+type = playerunitevent
+default = "PlayerUnitEventDeath"
+
+[TriggerRegisterEnterRectSimple]
+title = "Unit Enters Region"
+description = "A unit enters ${Region}"
+comment = "Use 'Event Response - Entering Unit' to refer to the unit entering the region."
+category = TC_UNIT
+[[.args]]
+type = rect
+
+[TriggerRegisterLeaveRectSimple]
+title = "Unit Leaves Region"
+description = "A unit leaves ${Region}"
+comment = "Use 'Event Response - Leaving Unit' to refer to the unit leaving the region."
+category = TC_UNIT
+[[.args]]
+type = rect
+
+[TriggerRegisterEnterRegionSimple]
+title = "Unit Enter Irregular Region [R]"
+description = "Any unit enter ${region}"
+comment = "Use 'Event Response - Entering Unit' to refer to the unit entering the region."
+category = TC_UNIT
+[[.args]]
+type = region
+
+[TriggerRegisterLeaveRegionSimple]
+title = "Unit Leave Irregular Region [R]"
+description = "Any unit leave ${region}"
+comment = "Use 'Event Response - Leaving Unit' to refer to the unit leaving the region."
+category = TC_UNIT
+[[.args]]
+type = region
+
+[TriggerRegisterEnterRegion]
+title = "Unit Enter Irregular Region (Condition) [R]"
+description = "Any unit enter ${region} and match the condition of ${condition}"
+comment = "Use 'Event Response - Entering Unit' to refer to the unit entering the region. This event need add in other Trigger."
+category = TC_UNIT
+[[.args]]
+type = region
+[[.args]]
+type = boolexpr
+default = "BoolExprNull"
+
+[TriggerRegisterLeaveRegion]
+title = "Unit Leave Irregular Region (Condition) [R]"
+description = "Any unit leave ${region} and match the condition of ${condition}"
+comment = "se 'Event Response - Leaving Unit' to refer to the unit leaving the region. This event need add in other Trigger."
+category = TC_UNIT
+[[.args]]
+type = region
+[[.args]]
+type = boolexpr
+default = "BoolExprNull"
+
+[TriggerRegisterUnitInRangeSimple]
+title = "Unit Within Range"
+description = "A unit comes within ${Range} of ${Unit}"
+comment = "Use 'Event Response - Triggering Unit' to refer to the unit that is entering within range."
+category = TC_UNIT
+[[.args]]
+type = real
+default = "0"
+[[.args]]
+type = unit
+
+[TriggerRegisterUnitLifeEvent]
+title = "Life"
+description = "${Unit}'s life becomes ${Operation} ${Value}"
+comment =""
+category = TC_UNIT
+[[.args]]
+type = unit
+[[.args]]
+type = limitop
+default = "LimitOpLessThan"
+[[.args]]
+type = real
+default = "50"
+
+[TriggerRegisterUnitManaEvent]
+title = "Mana"
+description = "${Unit}'s mana becomes ${Operation} ${Value}"
+comment =""
+category = TC_UNIT
+[[.args]]
+type = unit
+[[.args]]
+type = limitop
+default = "LimitOpLessThan"
+[[.args]]
+type = real
+default = "50"
+
+[TriggerRegisterDialogEventBJ]
+title = "Dialog Button Click"
+description = "A dialog button is clicked for ${Dialog}"
+comment =""
+script_name = TriggerRegisterDialogEvent
+category = TC_DIALOG
+[[.args]]
+type = dialog
+
+[TriggerRegisterDialogButtonEvent]
+title = "Dialog Button Click [R]"
+description = "${Dialog button} button is clicked."
+comment = "The specified dialog button is clicked, and this event generally needs to be added to other triggers."
+category = TC_DIALOG
+[[.args]]
+type = button
+
+[TriggerRegisterDeathEvent]
+title = "Destructible Dies"
+description = "${Destructible} dies"
+comment = "Use 'Event Response - Dying Destructible' to refer to the destructible that is dying."
+category = TC_DESTRUCT
+[[.args]]
+type = destructable
+
+[TriggerRegisterDestDeathInRegionEvent]
+title = "Destructible Within Region Dies"
+description = "A destructible within ${Region} dies"
+comment = "Only the first 64 destructibles within the region when this event is registered are monitored for death.  It is best to use this event for regions containing only a few destructibles."
+category = TC_DESTRUCT
+[[.args]]
+type = rect
+
+[TriggerRegisterTrackableHitEvent]
+title = "Mouse Click Trackable Event [R]"
+description = "Click ${trackable} by mouse."
+comment = ""
+category = TC_TRACKABLE
+[[.args]]
+type = trackable
+
+[TriggerRegisterTrackableTrackEvent]
+title = "Mouse Move To Trackable Event [R]"
+description = "Move to ${trackable} by mouse"
+comment = ""
+category = TC_TRACKABLE
+[[.args]]
+type = trackable
+
+[TriggerRegisterTimerEventSingle]
+title = "Time Elapsed"
+description = "Elapsed game time is ${Time} seconds"
+comment =""
+category = TC_TIME
+[[.args]]
+type = real
+default = "5"
+min = 0
+
+[TriggerRegisterTimerEventPeriodic]
+title = "Periodic Event"
+description = "Every ${Time} seconds of game time"
+comment =""
+category = TC_TIME
+[[.args]]
+type = real
+default = "2"
+min = 0
+
+[TriggerRegisterTimerExpireEventBJ]
+title = "Timer Expires"
+description = "${Timer} expires"
+comment = "A timer expires when it reaches 0.  Repeating timers expire every time they reach 0.  Use 'Event Response - Expiring Timer' to refer to the timer that is expiring."
+script_name = TriggerRegisterTimerExpireEvent
+category = TC_TIME
+[[.args]]
+type = timer
+
+[TriggerRegisterPlayerChatEvent]
+title = "Chat Message"
+description = "${Player} types a chat message containing ${Text} as ${Match Type}"
+comment = "Use 'Event Response - Entered/Matched Chat Message' to refer to the chat message that was entered/matched.  Use 'Event Response - Triggering Player' to refer to the player who typed the message."
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = string
+[[.args]]
+type = chatmatchtype
+default = "ChatMatchTypeExact"
+
+[TriggerRegisterPlayerEventEndCinematic]
+title = "Cinematic Skipped"
+description = "${Player} skips a cinematic sequence"
+comment = "This event occurs whenever the player presses the 'Escape' key (regardless of whether or not they are viewing a cinematic)."
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+
+[TriggerRegisterPlayerSelectionEventBJ]
+title = "Selection Event"
+description = "${Player} ${Selects/Deselects} a unit"
+comment = "Use 'Event Response - Triggering Unit' to refer to the unit being selected or deselected."
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = seldeseloption
+default = "SelDeselOptionSel"
+
+[TriggerRegisterPlayerKeyEventBJ]
+title = "Keyboard Event"
+description = "${Player} ${Presses/Releases} the ${Key} key"
+comment =""
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = keyeventtype
+default = "KeyEventTypeDepress"
+[[.args]]
+type = keyeventkey
+default = "KeyEventKeyLeft"
+
+[TriggerRegisterPlayerStateEvent]
+title = "Properties"
+description = "${Player}'s ${Property} becomes ${Operation} ${Value}"
+comment =""
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = playerstate
+default = "PlayerStateGold"
+[[.args]]
+type = limitop
+default = "LimitOpGreaterThanOrEqual"
+[[.args]]
+type = real
+default = "1000"
+
+[TriggerRegisterPlayerEventAllianceChanged]
+title = "Alliance Change (Any)"
+description = "${Player} changes alliance settings"
+comment =""
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+
+[TriggerRegisterPlayerAllianceChange]
+title = "Alliance Change (Specific)"
+description = "${Player} changes ${Alliance Type} settings"
+comment =""
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+[[.args]]
+type = alliancetype
+default = "AllianceTypePassive"
+
+[TriggerRegisterPlayerEventVictory]
+title = "Victory"
+description = "${Player} leaves the game with a victory"
+comment =""
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+
+[TriggerRegisterPlayerEventDefeat]
+title = "Defeat"
+description = "${Player} leaves the game with a defeat"
+comment =""
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+
+[TriggerRegisterPlayerEventLeave]
+title = "Leaves Game"
+description = "${Player} leaves the game"
+comment = "This event occurs regardless of how the player left the game."
+category = TC_PLAYER
+[[.args]]
+type = player
+default = "Player00"
+
+[TriggerRegisterItemDeathEvent]
+title = "Item Destroy Event [R]"
+description = "${Item} is destroyed."
+comment = ""
+script_name = TriggerRegisterDeathEvent
+category = TC_ITEM
+[[.args]]
+type = item
+
+[TriggerRegisterGameStateEventTimeOfDay]
+title = "Time Of Day"
+description = "The in-game time of day becomes ${Operation} ${Time}"
+comment = "A game day is 24 hours long.  Six a.m. is 6.00, and six p.m. is 18.00."
+category = TC_GAME
+[[.args]]
+type = limitop
+default = "LimitOpEqual"
+[[.args]]
+type = real
+default = "12"
+min = 0
+max = 24
+
+[TriggerRegisterVariableEvent]
+title = "Value Of Real Variable"
+description = "${Variable} becomes ${Operation} ${Value}"
+comment = "This only works for non-array variables of type 'Real'."
+category = TC_GAME
+[[.args]]
+type = VarAsString_Real
+[[.args]]
+type = limitop
+default = "LimitOpEqual"
+[[.args]]
+type = real
+default = "0"
+
+[TriggerRegisterGameLoadedEventBJ]
+title = "Game Load"
+description = "A saved game is loaded"
+comment = "This fires immediately after the saved game is finished loading."
+category = TC_GAME
+[[.args]]
+type = nothing
+
+[TriggerRegisterGameSavedEventBJ]
+title = "Game Save"
+description = "The game is about to be saved"
+comment = "This fires immediately before the game is saved."
+category = TC_GAME
+[[.args]]
+type = nothing
+
+[TriggerRegisterShowSkillEventBJ]
+title = "Hero Abilities Button Clicked"
+description = "The 'Hero Abilities' button is clicked"
+comment = "This event should only be used in single-player maps."
+category = TC_GAME
+[[.args]]
+type = nothing
+
+[TriggerRegisterBuildSubmenuEventBJ]
+title = "Build Structure Button Clicked"
+description = "The 'Build Structure' button is clicked"
+comment = "This event should only be used in single-player maps."
+category = TC_GAME
+[[.args]]
+type = nothing
+
+[TriggerRegisterGameEvent]
+title = "Tournament Event"
+description = "The tournament game must end ${Event Type}"
+comment = "This event only occurs during automated tournament games on Battle.net."
+category = TC_GAME
+[[.args]]
+type = gameevent
+default = "GameEventTourneyNow"

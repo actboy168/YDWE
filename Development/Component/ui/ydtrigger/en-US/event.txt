@@ -1,0 +1,7 @@
+[YDWEDisableRegister]
+title = "YDWE Disable Register [YDWE]"
+description = "Sleep Trigger"
+comment = "After sleep, the current trigger does not register when reading the map, and needs to be activated manually."
+category = TC_NOTHING
+[[.args]]
+type = nothing
