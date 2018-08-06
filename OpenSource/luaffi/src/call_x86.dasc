@@ -334,11 +334,6 @@ void compile_globals(struct jit* jit, lua_State* L)
     | jmp ->lua_return_arg
 
 #if LUA_VERSION_NUM == 503
-    |.if X64WIN
-    |.elif X64
-    |.else
-    |.endif
-
     |->lua_return_long:
     | mov [rsp+32], rax
     | get_errno
