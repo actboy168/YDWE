@@ -576,7 +576,11 @@ static void add_int(Dst_DECL, const struct ctype* ct, struct reg_alloc* reg, int
             reg->off += 8;
         } else {
             | mov [rsp+reg->off], eax
+#if defined _WIN64 || defined __amd64__
+            reg->off += 8;
+#else
             reg->off += 4;
+#endif
         }
     }
 }
@@ -660,7 +664,7 @@ static void add_float(Dst_DECL, const struct ctype* ct, struct reg_alloc* reg, i
     } else {
         | cvtsd2ss xmm0, xmm0
         | movd dword [rsp + reg->off], xmm0
-        reg->off += 4;
+        reg->off += 8;
     }
 #endif
 }
