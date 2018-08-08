@@ -85,3 +85,22 @@ unsigned long __stdcall utf8_GetModuleFileNameA(void* module, char* filename, un
 	return ret;
 }
 
+unsigned long __stdcall utf8_FormatMessageA(
+  unsigned long dwFlags,
+  const void*   lpSource,
+  unsigned long dwMessageId,
+  unsigned long dwLanguageId,
+  char*         lpBuffer,
+  unsigned long nSize,
+  va_list*      Arguments
+)
+{
+	wchar_t* tmp = calloc(nSize, sizeof(wchar_t));
+	int res = FormatMessageW(dwFlags, lpSource, dwMessageId, dwLanguageId, tmp, nSize, Arguments);
+	if (!res) {
+		return res;
+	}
+	WideCharToMultiByte(CP_UTF8, 0, tmp, -1, lpBuffer, nSize, NULL, NULL);
+	return res;
+}
+
