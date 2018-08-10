@@ -11,26 +11,29 @@ local ffi = require 'ffi'
 local dlls = {}
 local HAVE_COMPLEX = false
 
-local function loadlib(lib)
-    for pattern in package.cpath:gmatch('[^;]+') do
-        local path = pattern:gsub('?', lib)
-        local ok, lib = pcall(ffi.load, path)
-        if ok then
-            return lib
-        end
-    end
-    error("Unable to load", lib)
-end
+local loadlib
 
 if _VERSION == 'Lua 5.1' then
-    dlls.__cdecl = loadlib('ffi/libtest')
+    function loadlib(lib)
+        for pattern in package.cpath:gmatch('[^;]+') do
+            local path = pattern:gsub('?', lib)
+            local ok, lib = pcall(ffi.load, path)
+            if ok then
+                return lib
+            end
+        end
+        error("Unable to load", lib)
+    end
 else
-    dlls.__cdecl = ffi.load(package.searchpath('ffi.libtest', package.cpath))
+    function loadlib(lib)
+        return ffi.load(package.searchpath(lib, package.cpath))
+    end
 end
 
+dlls.__cdecl = loadlib('test_cdecl')
 if ffi.arch == 'x86' and ffi.os == 'Windows' then
-    --dlls.__stdcall = ffi.load('test_stdcall')
-    --dlls.__fastcall = ffi.load('test_fastcall')
+    dlls.__stdcall = loadlib('test_stdcall')
+    dlls.__fastcall = loadlib('test_fastcall')
 end
 
 local function check(a, b, msg)
