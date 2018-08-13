@@ -12,6 +12,7 @@
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
 #endif
+#define _XOPEN_SOURCE 600
 
 #include <stdint.h>
 #include <stdbool.h>
