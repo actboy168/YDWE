@@ -93,9 +93,6 @@
     <ClCompile Include="..\lstring.c">
       <Filter>core\source</Filter>
     </ClCompile>
-    <ClCompile Include="..\lstrlib.c">
-      <Filter>core\source</Filter>
-    </ClCompile>
     <ClCompile Include="..\ltable.c">
       <Filter>core\source</Filter>
     </ClCompile>
@@ -117,6 +114,9 @@
     <ClCompile Include="utf8\unicode.c" />
     <ClCompile Include="utf8\utf8_crt.c" />
     <ClCompile Include="..\linit.c">
+      <Filter>standard-library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lstrlib.c">
       <Filter>standard-library</Filter>
     </ClCompile>
   </ItemGroup>
