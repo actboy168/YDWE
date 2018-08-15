@@ -46,7 +46,7 @@ static const wchar_t* getCurrentAppID()
 
 bool JumpListAddRecentTask(JumpList& jumpList, fs::path const& ydweDirectory, fs::path const& filePath)
 {
-	HRESULT hr = jumpList.AddTask(filePath.filename().c_str(), [&](CComPtr<IShellLinkW>& shellLinkPtr)
+	HRESULT hr = jumpList.AddTask(filePath.filename().c_str(), [&](base::com::unique_ptr<IShellLinkW>& shellLinkPtr)
 	{
 		shellLinkPtr->SetPath((ydweDirectory / L"YDWE.exe").c_str());
 		shellLinkPtr->SetArguments((L" -loadfile \"" + filePath.wstring() + L"\"").c_str());
@@ -80,7 +80,7 @@ void Initialize()
 
 		jumpList.AddTaskSeparator();
 
-		jumpList.AddTask(L"YDWE≈‰÷√", [&](CComPtr<IShellLinkW>& shellLinkPtr)
+		jumpList.AddTask(L"YDWE≈‰÷√", [&](base::com::unique_ptr<IShellLinkW>& shellLinkPtr)
 		{
 			shellLinkPtr->SetPath((ydweDirectory / L"bin" / L"YDWEConfig.exe").c_str());
 			shellLinkPtr->SetDescription(L"¥Úø™YDWE≈‰÷√≥Ã–Ú°£");

@@ -33,8 +33,8 @@ JumpList::~JumpList()
 void JumpList::ClearAll()
 {
 	ClearAllDestinations();
-	ReleaseObjectArray(m_tasksPtr.Detach());
-	ReleaseObjectArray(m_removedItemsPtr.Detach());
+	ReleaseObjectArray(m_tasksPtr.release());
+	ReleaseObjectArray(m_removedItemsPtr.release());
 
 	m_bInitialized = FALSE;
 }
@@ -55,7 +55,7 @@ BOOL JumpList::InitializeList()
 	HRESULT hr = S_OK;
 	if (m_destListPtr == NULL)
 	{
-		hr = m_destListPtr.CoCreateInstance(CLSID_DestinationList, NULL, CLSCTX_INPROC_SERVER);
+		hr = m_destListPtr.CreateInstance(CLSID_DestinationList, NULL, CLSCTX_INPROC_SERVER);
 		if (FAILED(hr))
 		{
 			return FALSE;
@@ -64,7 +64,7 @@ BOOL JumpList::InitializeList()
 
 	if (m_tasksPtr == NULL)
 	{
-		hr = m_tasksPtr.CoCreateInstance(CLSID_EnumerableObjectCollection, NULL, CLSCTX_INPROC_SERVER);
+		hr = m_tasksPtr.CreateInstance(CLSID_EnumerableObjectCollection, NULL, CLSCTX_INPROC_SERVER);
 		if (FAILED(hr))
 		{
 			return FALSE;
@@ -116,24 +116,23 @@ BOOL JumpList::AddKnownCategory(KNOWNDESTCATEGORY category)
 	return TRUE;
 }
 
-BOOL JumpList::AddTask(LPCWSTR strTitle, std::function<void(CComPtr<IShellLinkW>&)> callback)
+BOOL JumpList::AddTask(LPCWSTR strTitle, std::function<void(base::com::unique_ptr<IShellLinkW>&)> callback)
 {
 	if (!InitializeList()) // always returns FALSE if OS < Win7 
 	{
 		return FALSE;
 	}
 
-	CComPtr<IShellLinkW> shellLinkPtr;
-	if (FAILED(shellLinkPtr.CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER)))
+	base::com::unique_ptr<IShellLinkW> shellLinkPtr;
+	if (FAILED(shellLinkPtr.CreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER)))
 	{
 		return FALSE;
 	}
 
 	callback(shellLinkPtr);
 
-	CComQIPtr<IPropertyStore> propPtr = shellLinkPtr;
-
-	if (propPtr != NULL)
+	base::com::unique_ptr<IPropertyStore> propPtr;
+	if (SUCCEEDED(shellLinkPtr.QueryInterface(propPtr)))
 	{
 		PROPVARIANT var;
 		if (FAILED(InitPropVariantFromString(strTitle, &var)))
@@ -155,7 +154,7 @@ BOOL JumpList::AddTask(LPCWSTR strTitle, std::function<void(CComPtr<IShellLinkW>
 		}
 	}
 
-	return (SUCCEEDED(m_tasksPtr->AddObject(shellLinkPtr.Detach())));
+	return (SUCCEEDED(m_tasksPtr->AddObject(shellLinkPtr.release())));
 }
 
 BOOL JumpList::AddTask(LPCWSTR strTargetExecutablePath, LPCWSTR strCommandLineArgs, 
@@ -171,8 +170,8 @@ BOOL JumpList::AddTask(LPCWSTR strTargetExecutablePath, LPCWSTR strCommandLineAr
 		return FALSE;
 	}
 
-	CComPtr<IShellLinkW> shellLinkPtr;
-	if (FAILED(shellLinkPtr.CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER)))
+	base::com::unique_ptr<IShellLinkW> shellLinkPtr;
+	if (FAILED(shellLinkPtr.CreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER)))
 	{
 		return FALSE;
 	}
@@ -181,9 +180,8 @@ BOOL JumpList::AddTask(LPCWSTR strTargetExecutablePath, LPCWSTR strCommandLineAr
 	shellLinkPtr->SetArguments(strCommandLineArgs);
 	shellLinkPtr->SetIconLocation(strIconPath, iIconIndex);
 
-	CComQIPtr<IPropertyStore> propPtr = shellLinkPtr;
-
-	if (propPtr != NULL)
+	base::com::unique_ptr<IPropertyStore> propPtr;
+	if (SUCCEEDED(shellLinkPtr.QueryInterface(propPtr)))
 	{
 		PROPVARIANT var;
 		if (FAILED(InitPropVariantFromString(strTitle, &var)))
@@ -205,7 +203,7 @@ BOOL JumpList::AddTask(LPCWSTR strTargetExecutablePath, LPCWSTR strCommandLineAr
 		}
 	}
 
-	return (SUCCEEDED(m_tasksPtr->AddObject(shellLinkPtr.Detach())));
+	return (SUCCEEDED(m_tasksPtr->AddObject(shellLinkPtr.release())));
 }
 
 BOOL JumpList::AddTaskSeparator()
@@ -215,16 +213,22 @@ BOOL JumpList::AddTaskSeparator()
 		return FALSE;
 	}
 
-	CComPtr<IShellLinkW> shellLinkPtr;
-	if (FAILED(shellLinkPtr.CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER)))
+	base::com::unique_ptr<IShellLinkW> shellLinkPtr;
+	if (FAILED(shellLinkPtr.CreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER)))
 	{
 		return FALSE;
 	}
 
-	CComQIPtr<IPropertyStore> propPtr = shellLinkPtr;
 	PROPVARIANT var;
 	var.vt = VT_BOOL;
 	var.boolVal = VARIANT_TRUE;
+
+	base::com::unique_ptr<IPropertyStore> propPtr;
+	if (FAILED(shellLinkPtr.QueryInterface(propPtr))) 
+	{
+		PropVariantClear(&var);
+		return FALSE;
+	}
 
 	if (FAILED(propPtr->SetValue(PKEY_AppUserModel_IsDestListSeparator, var)))
 	{
@@ -239,7 +243,7 @@ BOOL JumpList::AddTaskSeparator()
 		return FALSE;
 	}
 
-	return (SUCCEEDED(m_tasksPtr->AddObject(shellLinkPtr.Detach())));
+	return (SUCCEEDED(m_tasksPtr->AddObject(shellLinkPtr.release())));
 }
 
 BOOL JumpList::AddTask(IShellLinkW* pShellLink)
@@ -440,11 +444,11 @@ BOOL JumpList::CommitList()
 
 	if (nTaskCount > 0)
 	{
-		HRESULT hr = m_destListPtr->AddUserTasks(m_tasksPtr);
+		HRESULT hr = m_destListPtr->AddUserTasks(m_tasksPtr.get());
 		if (FAILED(hr))
 		{
 		}
-		IObjectCollection* pTaskColl = m_tasksPtr.Detach();
+		IObjectCollection* pTaskColl = m_tasksPtr.release();
 		ReleaseObjectArray(pTaskColl);
 	}
 
