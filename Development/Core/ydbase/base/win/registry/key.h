@@ -106,7 +106,7 @@ namespace base { namespace registry {
 
 		class_type sub_key(const string_type& sub_key_name) const
 		{
-			static const char_type s_separator[] = { '\\' };
+			static const char_type s_separator[] = { '\\', '\0' };
 			if (!m_keypath.empty())
 			{
 				return class_type(m_keybase, m_keypath + s_separator + m_keyname, sub_key_name, m_accessfix);
@@ -228,7 +228,7 @@ namespace base { namespace registry {
 
 		string_type key_name_()
 		{
-			static const char_type s_separator[] = { '\\' };
+			static const char_type s_separator[] = { '\\', '\0' };
 			return m_keypath.empty() ? m_keyname : m_keypath + s_separator + m_keyname;
 		}
 
