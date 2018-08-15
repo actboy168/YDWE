@@ -163,7 +163,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdthunk.h" />
     <ClInclude Include="Control\UICheckBox.h" />
     <ClInclude Include="Core\UIImage.h" />
     <ClInclude Include="Core\UIImageInfo.h" />

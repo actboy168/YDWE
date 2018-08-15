@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include "../stdthunk.h"
-
 namespace DuiLib {
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -66,6 +64,7 @@ class UILIB_API CWindowWnd
 {
 public:
     CWindowWnd();
+	virtual ~CWindowWnd();
 
     HWND GetHWND() const;
     operator HWND() const;
@@ -93,12 +92,15 @@ protected:
     virtual void OnFinalMessage(HWND hWnd);
 
     static LRESULT CALLBACK StartWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	static LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg,  WPARAM wParam, LPARAM lParam);
+	static LRESULT __fastcall WindowProc(CWindowWnd* pThis, int Edx, HWND hWnd, UINT uMsg,  WPARAM wParam, LPARAM lParam);
+
+	WNDPROC ThunkCreate();
+
 protected:
 	HWND m_hWnd;
 #pragma warning(push)
 #pragma warning(disable:4251)
-	ATL::CStdCallThunk m_thunk;
+	void* m_thunk;
 #pragma warning(pop)
 };
 

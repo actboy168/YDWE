@@ -284,9 +284,6 @@
     <ClInclude Include="zip\png_utils.h">
       <Filter>zip</Filter>
     </ClInclude>
-    <ClInclude Include="stdthunk.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">
