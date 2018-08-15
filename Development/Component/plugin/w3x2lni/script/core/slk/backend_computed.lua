@@ -75,6 +75,13 @@ local function split(str)
     return r
 end
 
+local function around_integer(value)
+    if math.type(value) ~= 'float' then
+        return value
+    end
+    return math.floor(value + 0.00005)
+end
+
 local function computed_value(slk, str, name, field)
     -- TODO: 魔兽计算这个太特殊了，我想我放弃完全模拟了
     local id, key, per = table.unpack(split(str))
@@ -112,7 +119,7 @@ local function computed_value(slk, str, name, field)
         if per == '%' then
             res = res * 100
         end
-        return math.floor(res)
+        return around_integer(res)
     end
     w2l.messager.report(lang.report.COMPUTED_TEXT_FAILED, 5, ('%s %s %s'):format(get_displayname_by_id(slk, id)), ('%s: <%s>'):format(field, str))
     return res

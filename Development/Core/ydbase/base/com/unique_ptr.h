@@ -69,6 +69,18 @@ public:
 		return mybase::get()->QueryInterface(p);
 	}
 
+	template <class Query>
+	HRESULT QueryInterface(unique_ptr<Query>& p)
+	{
+		Query* ptr = nullptr;
+		HRESULT hr = mybase::get()->QueryInterface(&ptr);
+		if (FAILED(hr)) {
+			return hr;
+		}
+		p.reset(ptr);
+		return hr;
+	}
+
 	HRESULT QueryInterface(const IID& iid, void** obj) 
 	{
 		return mybase::get()->QueryInterface(iid, obj);

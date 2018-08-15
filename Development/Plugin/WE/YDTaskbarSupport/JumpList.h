@@ -1,10 +1,10 @@
 #pragma once
 #include <Windows.h>
-#include <atlcomcli.h>
 #include <Shobjidl.h>
 #include <string>
 #include <map>
 #include <functional>
+#include <base/com/unique_ptr.h>
 
 class JumpList
 {
@@ -17,19 +17,19 @@ public:
 	UINT GetMaxSlots() const;
 	ICustomDestinationList* GetDestinationList()
 	{
-		return m_destListPtr;
+		return m_destListPtr.get();
 	}
 
 	IObjectArray* GetRemovedItems()
 	{
-		return m_removedItemsPtr;
+		return m_removedItemsPtr.get();
 	}
 	void AbortList();
 	BOOL AddDestination(LPCWSTR lpcszCategoryName, LPCWSTR strDestinationPath);
 	BOOL AddDestination(LPCWSTR strCategoryName, IShellItem* pShellItem);
 	BOOL AddDestination(LPCWSTR strCategoryName, IShellLinkW* pShellLink);
 	BOOL AddKnownCategory(KNOWNDESTCATEGORY category);
-	BOOL AddTask(LPCWSTR strTitle, std::function<void(CComPtr<IShellLinkW>&)> callback);
+	BOOL AddTask(LPCWSTR strTitle, std::function<void(base::com::unique_ptr<IShellLinkW>&)> callback);
 	BOOL AddTask(LPCWSTR strTargetExecutablePath, LPCWSTR strCommandLineArgs, LPCWSTR strTitle, LPCWSTR strIconLocation, int iIconIndex);
 	BOOL AddTask(IShellLinkW* pShellLink);
 	BOOL AddTasks(IObjectArray* pObjectCollection);
@@ -49,9 +49,9 @@ protected:
 	UINT		 m_nMaxSlots;
 	BOOL		 m_bAutoCommit; // Automatically call commit in destructor
 
-	::ATL::CComPtr<IObjectArray>           m_removedItemsPtr;
-	::ATL::CComPtr<ICustomDestinationList> m_destListPtr;
-	::ATL::CComPtr<IObjectCollection>      m_tasksPtr;
+	base::com::unique_ptr<IObjectArray>           m_removedItemsPtr;
+	base::com::unique_ptr<ICustomDestinationList> m_destListPtr;
+	base::com::unique_ptr<IObjectCollection>      m_tasksPtr;
 
 	std::map<std::wstring, IObjectCollection*>  m_mapDestinations;
 };

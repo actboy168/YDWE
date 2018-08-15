@@ -171,7 +171,7 @@
 |.endmacro
 |.macro call_rrR, func, arg0, arg1, arg2
 | mov rax, arg2
-| cbq
+| cdq
 | mov dword [rsp+12], rdx
 | mov dword [rsp+8], rax
 | mov dword [rsp+4], arg1
@@ -333,19 +333,31 @@ void compile_globals(struct jit* jit, lua_State* L)
     | call_rr extern push_uint, L_ARG, rax
     | jmp ->lua_return_arg
 
-#if LUA_VERSION_NUM == 503
+#if LUA_VERSION_NUM >= 503
     |->lua_return_long:
     | mov [rsp+32], rax
     | get_errno
     | mov rax, [rsp+32]
+    |.if X64WIN
     | call_rr extern lua_pushinteger, L_ARG, rax
+    |.elif X64
+    | call_rr extern lua_pushinteger, L_ARG, rax
+    |.else
+    | call_rrr extern lua_pushinteger, L_ARG, rax, rdx
+    |.endif
     | jmp ->lua_return_arg
 
     |->lua_return_ulong:
     | mov [rsp+32], rax
     | get_errno
     | mov rax, [rsp+32]
+    |.if X64WIN
     | call_rr extern lua_pushinteger, L_ARG, rax
+    |.elif X64
+    | call_rr extern lua_pushinteger, L_ARG, rax
+    |.else
+    | call_rrr extern lua_pushinteger, L_ARG, rax, rdx
+    |.endif
     | jmp ->lua_return_arg
 #endif
 
@@ -564,7 +576,11 @@ static void add_int(Dst_DECL, const struct ctype* ct, struct reg_alloc* reg, int
             reg->off += 8;
         } else {
             | mov [rsp+reg->off], eax
+#if defined _WIN64 || defined __amd64__
+            reg->off += 8;
+#else
             reg->off += 4;
+#endif
         }
     }
 }
@@ -648,7 +664,7 @@ static void add_float(Dst_DECL, const struct ctype* ct, struct reg_alloc* reg, i
     } else {
         | cvtsd2ss xmm0, xmm0
         | movd dword [rsp + reg->off], xmm0
-        reg->off += 4;
+        reg->off += 8;
     }
 #endif
 }
@@ -1489,7 +1505,7 @@ void compile_function(lua_State* L, cfunction func, int ct_usr, const struct cty
             break;
 
         case INT64_TYPE:
-#if LUA_VERSION_NUM == 503
+#if LUA_VERSION_NUM >= 503
             lua_pop(L, 1);
             if (mbr_ct->is_unsigned) {
                 | jmp ->lua_return_ulong

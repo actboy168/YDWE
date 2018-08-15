@@ -5,28 +5,53 @@
 #pragma comment(lib, "shlwapi.lib")
 #endif
 
-namespace ATL
-{
-	void * __stdcall __AllocStdCallThunk()
-	{
-		void* ptr = ::HeapAlloc(::GetProcessHeap(), 0, sizeof(_stdcallthunk));		
-		if (!ptr)
-			throw std::domain_error("HeapAlloc failed.");
-		DWORD dwOldProtect;
-		if (!::VirtualProtect(ptr, sizeof(_stdcallthunk), PAGE_EXECUTE_READWRITE, &dwOldProtect)) 
-			throw std::domain_error("VirtualProtect failed.");
-		return ptr;
-
-	} 
-	
-	void __stdcall __FreeStdCallThunk(void *p)
-	{
-		//::VirtualFree(p, sizeof(_stdcallthunk), 0);
-		::HeapFree(::GetProcessHeap(), 0, p);
-	}
-};
-
 namespace DuiLib {
+
+namespace thunk {
+	bool write(void* data, size_t size, void* buf) {
+		SIZE_T written = 0;
+		BOOL ok = WriteProcessMemory(GetCurrentProcess(), data, buf, size, &written);
+		if (!ok || written != size) {
+			return false;
+		}
+		return true;
+	}
+
+	void* create(void* proc, void* self) {
+		// LRESULT __stdcall thunk_proc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+		// {
+		//     return `proc`(`self`, hWnd, uMsg, wParam, lParam);
+		// }
+		static unsigned char sc[] = {
+			0x51,                         // push ecx
+			0xff, 0x74, 0x24, 0x14,       // push [esp+14h]
+			0xff, 0x74, 0x24, 0x14,       // push [esp+14h]
+			0xff, 0x74, 0x24, 0x14,       // push [esp+14h]
+			0xff, 0x74, 0x24, 0x14,       // push [esp+14h]
+			0xb9, 0x00, 0x00, 0x00, 0x00, // mov ecx, self
+			0xe8, 0x00, 0x00, 0x00, 0x00, // call proc
+			0x59,                         // pop ecx
+			0xc2, 0x10, 0x00              // ret 10h
+		};
+		void* data = VirtualAllocEx(GetCurrentProcess(), NULL, sizeof(sc), MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+		if (!data) {
+			return 0;
+		}
+		memcpy(sc + 18, &self, sizeof(self));
+		proc = (void*)((intptr_t)proc - ((intptr_t)data + 27));
+		memcpy(sc + 23, &proc, sizeof(proc));
+		if (!write(data, sizeof(sc), &sc)) {
+			return 0;
+		}
+		return data;
+	}
+
+	void destory(void* data) {
+		if (!data) return;
+		VirtualFreeEx(GetCurrentProcess(), data, 0, MEM_RELEASE);
+	}
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -355,10 +380,8 @@ bool CWindowWnd::RegisterWindowClass()
     return ret != NULL || ::GetLastError() == ERROR_CLASS_ALREADY_EXISTS;
 }
 
-LRESULT CALLBACK CWindowWnd::WindowProc(HWND hWnd, UINT uMsg,  WPARAM wParam, LPARAM lParam)
+LRESULT __fastcall CWindowWnd::WindowProc(CWindowWnd* pThis, int Edx, HWND hWnd, UINT uMsg,  WPARAM wParam, LPARAM lParam)
 {
-	CWindowWnd* pThis = reinterpret_cast<CWindowWnd*>(hWnd);
-
 	ASSERT(pThis);
 	if (!pThis) { return 0; }
 
@@ -384,10 +407,20 @@ LRESULT CALLBACK CWindowWnd::StartWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
 	LPCREATESTRUCT lpcs = reinterpret_cast<LPCREATESTRUCT>(lParam);
 	CWindowWnd* pThis = static_cast<CWindowWnd*>(lpcs->lpCreateParams);
 	pThis->m_hWnd = hWnd;
-	pThis->m_thunk.Init((DWORD_PTR)CWindowWnd::WindowProc, pThis);
-	WNDPROC pProc = (WNDPROC)pThis->m_thunk.GetCodeAddress();
+	WNDPROC pProc = (WNDPROC)pThis->ThunkCreate();
 	::SetWindowLongPtr(hWnd, GWLP_WNDPROC, (LONG_PTR)pProc);
 	return pProc(hWnd, uMsg, wParam, lParam);
+}
+
+WNDPROC CWindowWnd::ThunkCreate()
+{
+	m_thunk = thunk::create((void*)CWindowWnd::WindowProc, this);
+	return (WNDPROC)m_thunk;
+}
+
+CWindowWnd::~CWindowWnd()
+{
+	thunk::destory(m_thunk);
 }
 
 LRESULT CWindowWnd::SendMessage(UINT uMsg, WPARAM wParam /*= 0*/, LPARAM lParam /*= 0*/)

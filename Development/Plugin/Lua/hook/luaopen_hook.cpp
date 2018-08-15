@@ -22,25 +22,38 @@ struct hook_t {
 };
 
 static int push_funcdef(lua_State* L, int idx) {
-	if (LUA_TSTRING == lua_type(L, idx)) {
-		lua_pushvalue(L, idx);
-		return 1;
+	switch (lua_type(L, idx)) {
+		case LUA_TSTRING:
+			lua_pushvalue(L, idx);
+			return 1;
+		case LUA_TFUNCTION: {
+			if (!lua_getupvalue(L, idx, 1)) {
+				return luaL_argerror(L, idx, "has no upvalue");
+			}
+			if (lua_type(L, -1) != LUA_TUSERDATA) {
+				return luaL_argerror(L, idx, lua_pushfstring(L, "bad upvalue #1, userdata expected, got %s", luaL_typename(L, -1)));
+			}
+			size_t fdef_len = 0;
+			const char* fdef = luaL_tolstring(L, -1, &fdef_len);
+			if (!fdef || fdef_len <= 7) {
+				return luaL_argerror(L, idx, lua_pushfstring(L, "bad upvalue #1, userdata expected, got %s", luaL_typename(L, -1)));
+			}
+			lua_pushlstring(L, fdef + 6, fdef_len - 7);
+			lua_remove(L, -2);
+			return 1;
+		}
+		case LUA_TUSERDATA: {
+			size_t fdef_len = 0;
+			const char* fdef = luaL_tolstring(L, idx, &fdef_len);
+			if (!fdef || fdef_len <= 7) {
+				return luaL_argerror(L, idx, lua_pushfstring(L, "bad userdata #%d, can't get define", idx));
+			}
+			lua_pushlstring(L, fdef + 6, fdef_len - 7);
+			return 1;
+		}
+		default:
+			return luaL_argerror(L, idx, lua_pushfstring(L, "bad function def #%d, got %s", idx, luaL_typename(L, -1)));
 	}
-	luaL_checktype(L, idx, LUA_TFUNCTION);
-	if (!lua_getupvalue(L, idx, 1)) {
-		return luaL_argerror(L, idx, "has no upvalue");
-	}
-	if (lua_type(L, -1) != LUA_TUSERDATA) {
-		return luaL_argerror(L, idx, lua_pushfstring(L, "bad upvalue #1, userdata expected, got %s", luaL_typename(L, -1)));
-	}
-	size_t fdef_len = 0;
-	const char* fdef = luaL_tolstring(L, -1, &fdef_len);
-	if (!fdef || fdef_len <= 7) {
-		return luaL_argerror(L, idx, "bad upvalue #1, can't get define");
-	}
-	lua_pushlstring(L, fdef + 6, fdef_len - 7);
-	lua_remove(L, -2);
-	return 1;
 }
 
 static int hook_call(lua_State* L) {
