@@ -8,11 +8,6 @@
 namespace DuiLib {
 
 namespace thunk {
-
-	void* alloc(size_t s) {
-		return VirtualAllocEx(GetCurrentProcess(), NULL, s, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
-	}
-
 	bool write(void* data, size_t size, void* buf) {
 		SIZE_T written = 0;
 		BOOL ok = WriteProcessMemory(GetCurrentProcess(), data, buf, size, &written);
