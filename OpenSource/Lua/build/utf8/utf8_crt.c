@@ -98,9 +98,11 @@ unsigned long __stdcall utf8_FormatMessageA(
 	wchar_t* tmp = calloc(nSize, sizeof(wchar_t));
 	int res = FormatMessageW(dwFlags, lpSource, dwMessageId, dwLanguageId, tmp, nSize, Arguments);
 	if (!res) {
+		free(tmp);
 		return res;
 	}
-	WideCharToMultiByte(CP_UTF8, 0, tmp, -1, lpBuffer, nSize, NULL, NULL);
-	return res;
+	int ret = WideCharToMultiByte(CP_UTF8, 0, tmp, -1, lpBuffer, nSize, NULL, NULL);
+	free(tmp);
+	return ret;
 }
 
