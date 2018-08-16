@@ -190,7 +190,6 @@
     <ClInclude Include="base\i18n-2\lng.h" />
     <ClInclude Include="base\i18n\libintl.h" />
     <ClInclude Include="base\i18n\mofile.h" />
-    <ClInclude Include="base\lockfree\queue.h" />
     <ClInclude Include="base\lua\guard.h" />
     <ClInclude Include="base\lua\make_range.h" />
     <ClInclude Include="base\lua\object.h" />

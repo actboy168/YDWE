@@ -1,8 +1,9 @@
 #include <base/util/console.h>
 #include <windows.h>
-#include <cstdio>	
-#include <base/lockfree/queue.h> 
+#include <cstdio>
 #include <base/thread/lock/spin.h>
+#include <queue>
+#include <mutex>
 
 namespace base { namespace console {
 
@@ -47,8 +48,9 @@ namespace base { namespace console {
 	}
 
 
-	lockfree::queue<read_req_t*> queue;
-	lock::spin<> reading;
+	static std::queue<read_req_t*> queue;
+	static lock::spin<> mtx_queue;
+	static lock::spin<> mtx_reading;
 
 	DWORD CALLBACK async_read_thread(void* data)
 	{
@@ -64,28 +66,37 @@ namespace base { namespace console {
 		{
 			req->overlapped.Internal = (ULONG_PTR)::GetLastError();
 		}
-		queue.push(req);
-		reading.unlock();
+		{
+			std::unique_lock<lock::spin<>> lock(mtx_queue);
+			queue.push(req);
+		}
+		mtx_reading.unlock();
 		return 0;
 	}
 
 	bool read_post()
 	{
-		if (!reading.try_lock()) return false;
+		if (!mtx_reading.try_lock()) return false;
 		console::read_req_t* req = new console::read_req_t;
 		req->handle = ::GetStdHandle(STD_INPUT_HANDLE);
 		bool suc = !!QueueUserWorkItem(async_read_thread, (void*)req, WT_EXECUTELONGFUNCTION);
 		if (!suc)
 		{
 			delete req;
-			reading.unlock();
+			mtx_reading.unlock();
 		}
 		return suc;
 	}
 
 	bool read_try(read_req_t*& req)
 	{
-		return queue.try_pop(req);
+		std::unique_lock<lock::spin<>> lock(mtx_queue);
+		if (queue.empty()) {
+			return false;
+		}
+		req = queue.front();
+		queue.pop();
+		return true;
 	}
 
 	void read_release(read_req_t* req)
