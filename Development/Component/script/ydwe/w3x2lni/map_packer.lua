@@ -5,7 +5,7 @@ local dev = fs.ydwe_devpath()
 return function (mode, map_path, target_path)
     local current_dir = dev / 'plugin' / 'w3x2lni' / 'script'
     local command_line = ([=[
-"%s" -e"package.cpath=[[%s]];package.path=[[%s;%s]]" "%s" "%s" "%s" "%s"]=]
+"%s" -E -e"package.cpath=[[%s]];package.path=[[%s;%s]]" "%s" "%s" "%s" "%s"]=]
     ):format(
         (root / 'bin' / 'lua.exe'):string(),
         (root / 'bin' / 'modules' / '?.dll'):string(),
