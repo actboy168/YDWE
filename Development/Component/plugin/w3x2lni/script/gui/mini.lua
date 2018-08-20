@@ -85,10 +85,19 @@ function mini:event_close(f)
     self._window.onclose = f
 end
 
+local function trans_command(cmd)
+    local str = cmd:gsub([[(\\?)$]], function (str)
+        if str == [[\]] then
+            return [[\\]]
+        end
+    end)
+    return '"' .. str .. '"'
+end
+
 local function pack_arg()
     local buf = {}
     for i, command in ipairs(arg) do
-        buf[i] = '"' .. command .. '"'
+        buf[i] = trans_command(command)
     end
     return table.concat(buf, ' ')
 end

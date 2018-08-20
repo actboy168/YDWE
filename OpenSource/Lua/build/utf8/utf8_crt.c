@@ -101,8 +101,8 @@ unsigned long __stdcall utf8_FormatMessageA(
 		free(tmp);
 		return res;
 	}
-	WideCharToMultiByte(CP_UTF8, 0, tmp, -1, lpBuffer, nSize, NULL, NULL);
+	int ret = WideCharToMultiByte(CP_UTF8, 0, tmp, -1, lpBuffer, nSize, NULL, NULL);
 	free(tmp);
-	return res;
+	return ret;
 }
 

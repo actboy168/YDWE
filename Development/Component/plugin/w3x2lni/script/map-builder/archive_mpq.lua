@@ -110,6 +110,9 @@ function mt:number_of_files()
     return self.handle:number_of_files()
 end
 
+function mt:flush()
+end
+
 return function (input, read)
     local handle
     if type(input) == 'number' then

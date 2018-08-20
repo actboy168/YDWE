@@ -65,6 +65,10 @@ function mt:number_of_files()
     return self.handle:number_of_files()
 end
 
+function mt:flush()
+    self.handle:flush()
+end
+
 function mt:has(name)
     if not self.handle then
         return false
@@ -161,7 +165,7 @@ return function (pathorhandle, tp)
         end
         if read_only then
             if fs.is_directory(pathorhandle) then
-                ar.handle, err = dir(pathorhandle)
+                ar.handle, err = dir(pathorhandle, true)
                 ar._type = 'dir'
             else
                 ar.handle, err = mpq(pathorhandle, true)

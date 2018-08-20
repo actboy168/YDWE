@@ -25,7 +25,7 @@ local function load_file(path)
 end
 
 function mt:parse_lni(buf, filename, ...)
-    return lni(buf, filename, ...)
+    return lni.classics(buf, filename, ...)
 end
 
 function mt:parse_lml(buf)
@@ -46,7 +46,7 @@ end
 
 function mt:metadata()
     if not self.cache_metadata then
-        self.cache_metadata = lni(load_file 'defined\\metadata.ini')
+        self.cache_metadata = lni.classics(load_file 'defined\\metadata.ini')
     end
     return self.cache_metadata
 end
@@ -56,7 +56,7 @@ function mt:we_metadata()
         if self.setting.data_meta == '${DEFAULT}' then
             self.cache_we_metadata = self.cache_metadata
         else
-            self.cache_we_metadata = lni(self:data_load('prebuilt\\metadata.ini'))
+            self.cache_we_metadata = lni.classics(self:data_load('prebuilt\\metadata.ini'))
         end
     end
     return self.cache_we_metadata
@@ -64,7 +64,7 @@ end
 
 function mt:keydata()
     if not keydata then
-        keydata = lni(self:data_load('prebuilt\\keydata.ini'))
+        keydata = lni.classics(self:data_load('prebuilt\\keydata.ini'))
     end
     return keydata
 end
@@ -119,7 +119,7 @@ local function create_default(w2l)
     for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'txt', 'misc'} do
         local str = w2l:data_load(('prebuilt\\%s\\%s.ini'):format(w2l.setting.version, name))
         if str then
-            default[name] = lni(str)
+            default[name] = lni.classics(str)
         else
             need_build = true
             break

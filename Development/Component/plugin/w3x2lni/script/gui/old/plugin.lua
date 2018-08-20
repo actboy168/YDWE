@@ -1,6 +1,5 @@
 require 'filesystem'
 require 'utility'
-local lni = require 'lni'
 local root = fs.current_path():remove_filename()
 local plugin_path = root / 'plugin'
 

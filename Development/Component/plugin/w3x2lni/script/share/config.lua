@@ -2,8 +2,8 @@ require 'filesystem'
 local lni = require 'lni'
 local define = require 'share.config_define'
 local root = require 'backend.w2l_path'
-local default_config = lni(io.load(root / 'script' / 'share' / 'config.ini'), 'script\\share\\config.ini')
-local global_config  = lni(io.load(root / 'config.ini'), 'config.ini')
+local default_config = lni.classics(io.load(root / 'script' / 'share' / 'config.ini'), 'script\\share\\config.ini')
+local global_config  = lni.classics(io.load(root / 'config.ini'), 'config.ini')
 local map_config = {}
 
 local config = {}
@@ -81,7 +81,7 @@ function config:open_map(path)
     local builder = require 'map-builder'
     local map = builder.load(path)
     if map then
-        lni(map:get 'w3x2lni\\config.ini' or '', 'w3x2lni\\config.ini', { map_config })
+        lni.classics(map:get 'w3x2lni\\config.ini' or '', 'w3x2lni\\config.ini', { map_config })
         map:close()
     end
 end

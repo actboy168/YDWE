@@ -169,8 +169,9 @@ local Real = P{
 local Int = P{
     'Def',
     Def    = Ct(keyvalue('type', 'integer') * Cg(V'Int', 'value')),
-    Int    = V'Neg' * (V'Int16' + V'Int10' + V'Int256') / function(neg, n) return neg and -n or n end,
+    Int    = V'Neg' * (V'Int16' + V'Int8' + V'Int10' + V'Int256') / function(neg, n) return neg and -n or n end,
     Neg    = Cc(true) * P'-' * sp + Cc(false),
+    Int8   = (P'0' * R'07'^1) / function (n) return tonumber(n, 8) end,
     Int10  = (P'0' + R'19' * R'09'^0) / tonumber,
     Int16  = (P'$' + P'0' * S'xX') * expect(R('af', 'AF', '09')^1 / function(n) return tonumber('0x'..n) end, lang.parser.ERROR_INT16),
     Int256 = "'" * expect((V'C4' + V'C1') * "'", lang.parser.ERROR_INT256_COUNT),
