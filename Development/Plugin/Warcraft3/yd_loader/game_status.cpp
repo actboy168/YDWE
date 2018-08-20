@@ -1,7 +1,6 @@
 #include <Winsock2.h>
 #include "DllModule.h"
 #include <base/hook/fp_call.h>
-#include <base/hook/inline.h>
 #include <base/hook/iat.h>
 #include <base/util/buffer.h>
 #include <base/util/unicode.h>

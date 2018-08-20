@@ -3,7 +3,6 @@
 #include <base/warcraft3/version.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/warcraft3/jass.h>
-#include <base/hook/inline.h>
 #include <base/hook/replace_pointer.h>
 #include <base/hook/fp_call.h>
 #include <deque>

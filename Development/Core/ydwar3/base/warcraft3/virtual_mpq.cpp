@@ -2,7 +2,6 @@
 #include <base/hook/fp_call.h>
 #include <base/file/stream.h>
 #include <base/hook/iat.h>
-#include <base/hook/inline.h>
 #include <base/util/foreach.h>	  	  		
 #include <base/filesystem.h>   
 #include <base/util/optional.h>

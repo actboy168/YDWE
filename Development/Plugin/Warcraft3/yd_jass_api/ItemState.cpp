@@ -5,7 +5,6 @@
 #include <base/warcraft3/version.h>
 #include <base/warcraft3/war3_searcher.h>	
 #include <base/warcraft3/hashtable.h>
-#include <base/hook/inline.h>
 #include <array>
 #include <string>
 #include "StringPool.h"
