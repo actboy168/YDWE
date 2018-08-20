@@ -1,6 +1,6 @@
 #include <lua.hpp> 
 #include <fstream>
-#include <filesystem>
+#include <base/filesystem.h>
 #include "crc32.h"
 #include "sha1.h"
 #include "rolc.h"
@@ -12,8 +12,6 @@
 
 #define __STORMLIB_SELF__
 #include <StormLib.h>
-
-namespace fs = std::experimental::filesystem;
 
 int file_error(lua_State* L, fs::path const& path)
 {
