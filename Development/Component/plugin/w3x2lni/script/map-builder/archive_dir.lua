@@ -77,12 +77,14 @@ end
 function mt:flush()
     local reserved = path_filter {'/table/', '/trigger/', '/w3x2lni/', '/map/war3map.*'}
     local len = #self.path:string()
-    scan_dir(self.path, function (path)
-        local name = path:string():sub(len+2):gsub('/', '\\')
-        if not self.read and reserved(name) then
-            fs.remove(path)
-        end
-    end)
+    for _, dir in ipairs {'table', 'trigger', 'w3x2lni', 'map'} do
+        scan_dir(self.path / dir, function (path)
+            local name = path:string():sub(len+2):gsub('/', '\\')
+            if not self.read and reserved(name) then
+                fs.remove(path)
+            end
+        end)
+    end
 end
 
 function mt:extract(name, path)
