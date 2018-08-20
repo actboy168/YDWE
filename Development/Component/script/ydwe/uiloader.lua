@@ -3,7 +3,6 @@ local stringify_slk = require 'stringify_slk'
 local txt = (require 'w3xparser').txt
 local ini = (require 'w3xparser').ini
 local slk = (require 'w3xparser').slk
-local lni = require 'lni'
 local mpqloader = require 'mpqloader'
 local load_triggerdata = require 'triggerdata'
 local ydwe = fs.ydwe_devpath()

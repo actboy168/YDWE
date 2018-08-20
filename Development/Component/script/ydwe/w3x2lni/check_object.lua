@@ -1,7 +1,6 @@
 local root = fs.ydwe_devpath()
 
 local w3xparser = require 'w3xparser'
-local lni       = require 'lni'
 local mpq      = root / 'share' / 'zh-CN' / 'mpq'
 
 local info       = load(io.load(root / 'plugin' / 'w3x2lni' / 'script' / 'core' / 'info.lua'))()
