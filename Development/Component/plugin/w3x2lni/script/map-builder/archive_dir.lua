@@ -1,3 +1,5 @@
+local path_filter = require 'map-builder.path_filter'
+
 local ignore = {}
 for _, name in ipairs {'.git', '.svn', '.vscode', '.gitignore'} do
     ignore[name] = true
@@ -72,6 +74,17 @@ function mt:number_of_files()
     return #self:list_file()
 end
 
+function mt:flush()
+    local reserved = path_filter {'/table/', '/trigger/', '/w3x2lni/', '/map/war3map.*'}
+    local len = #self.path:string()
+    scan_dir(self.path, function (path)
+        local name = path:string():sub(len+2):gsub('/', '\\')
+        if not self.read and reserved(name) then
+            fs.remove(path)
+        end
+    end)
+end
+
 function mt:extract(name, path)
     return fs.copy_file(self.path / esced_name(name), path, true)
 end
@@ -105,6 +118,6 @@ function mt:save_file(name, buf, filetime)
     return true
 end
 
-return function (input)
-    return setmetatable({ path = input }, mt)
+return function (input, read)
+    return setmetatable({ path = input, read = read }, mt)
 end

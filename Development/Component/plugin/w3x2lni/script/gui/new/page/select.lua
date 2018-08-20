@@ -3,10 +3,10 @@ local ui = require 'gui.new.template'
 local ev = require 'gui.event'
 
 local template = ui.container {
-    style = { FlexGrow = 1, Padding = 1 },
+    style = { FlexGrow = 1, Padding = 4 },
     ui.container{
         font = { size = 18 },
-        style = { Padding = 4, JustifyContent = 'flex-start' },
+        style = { JustifyContent = 'flex-start' },
         ui.button {
             style = { Height = 36, MarginTop = 4 },
             bind = {
@@ -17,7 +17,7 @@ local template = ui.container {
     },
     ui.container {
         font = { size = 20 },
-        style =  { Padding = 4, FlexGrow = 1, JustifyContent = 'flex-end' },
+        style =  { FlexGrow = 1, JustifyContent = 'flex-end' },
         ui.button {
             title = lang.ui.CONVERT_TO..'Lni',
             color = '#00ADD9',

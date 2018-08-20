@@ -257,6 +257,15 @@ local function checkbox_simple(canvas, text, tip, data)
     end
 end
 
+local function trans_command(cmd)
+    local str = cmd:gsub([[(\\?)$]], function (str)
+        if str == [[\]] then
+            return [[\\]]
+        end
+    end)
+    return '"' .. str .. '"'
+end
+
 local function window_convert(canvas)
     current_tip = nil
     local height = button_mapname(canvas, 290)
@@ -350,7 +359,7 @@ local function window_convert(canvas)
     else
         if canvas:button(lang.ui.START) then
             canvas:progress(0, 100)
-            worker = backend:open(root / 'script' / 'backend' / 'init.lua', ('%s "%s"'):format(fmt, mappath:string()))
+            worker = backend:open(root / 'script' / 'backend' / 'init.lua', ('%s %s'):format(fmt, trans_command(mappath:string())))
             backend.message = lang.ui.INIT
         end
     end

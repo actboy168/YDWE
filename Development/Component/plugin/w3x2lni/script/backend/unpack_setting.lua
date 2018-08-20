@@ -1,5 +1,4 @@
 local command = require 'backend.command'
-local lni = require 'lni'
 local get_lni_map = require 'backend.get_lni_map'
 local config = require 'share.config'
 local lang = require 'share.lang'

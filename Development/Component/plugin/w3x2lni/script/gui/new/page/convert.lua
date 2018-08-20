@@ -23,10 +23,19 @@ local function getexe()
     return fs.path(arg[i + 1])
 end
 
+local function trans_command(cmd)
+    local str = cmd:gsub([[(\\?)$]], function (str)
+        if str == [[\]] then
+            return [[\\]]
+        end
+    end)
+    return '"' .. str .. '"'
+end
+
 local function pack_arg()
     local buf = {}
     buf[1] = window._mode
-    buf[2] = '"' .. window._filename:string() .. '"'
+    buf[2] = trans_command(window._filename:string())
     return table.concat(buf, ' ')
 end
 
