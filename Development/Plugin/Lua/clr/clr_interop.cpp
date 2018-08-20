@@ -33,7 +33,7 @@ namespace clr {
 	uintptr_t FuncCorBindToRuntimeEx = 0;
 	uintptr_t FuncCorBindToRuntime = 0;
 
-	void enumerate(ICLRMetaHost* meta_host, std::function<bool(ICLRRuntimeInfo*)> Func)
+	void enumerate(CComPtr<ICLRMetaHost>& meta_host, std::function<bool(CComPtr<ICLRRuntimeInfo>&)> Func)
 	{
 		CComPtr<IEnumUnknown> runtime_enumerator;
 		HRESULT hr = meta_host->EnumerateInstalledRuntimes(&runtime_enumerator);
@@ -42,7 +42,7 @@ namespace clr {
 			return;
 		}
 
-		for (CComPtr<IUnknown> it = nullptr; runtime_enumerator->Next(1, &it, NULL) == S_OK; it.Release())
+		for (CComPtr<IUnknown> it; runtime_enumerator->Next(1, &it, NULL) == S_OK; it.Release())
 		{
 			CComPtr<ICLRRuntimeInfo> runtime_info;
 			if (SUCCEEDED(it.QueryInterface(&runtime_info)))
@@ -57,7 +57,7 @@ namespace clr {
 		return;
 	}
 
-	bool is_loadable(ICLRRuntimeInfo* ptr)
+	bool is_loadable(CComPtr<ICLRRuntimeInfo>& ptr)
 	{
 		BOOL loadable = FALSE;
 		if (!SUCCEEDED(ptr->IsLoadable(&loadable)))
@@ -80,13 +80,13 @@ namespace clr {
 		return true;
 	}
 
-	ICLRRuntimeInfo* get_latest(ICLRMetaHost* meta_host)
+	ICLRRuntimeInfo* get_latest(CComPtr<ICLRMetaHost>& meta_host)
 	{
 		ICLRRuntimeInfo* latest_ptr = nullptr;
 		std::wstring latest_runtime_version;
 		std::wstring current_runtime_version;
 
-		enumerate(meta_host, [&](ICLRRuntimeInfo* rt_ptr)->bool
+		enumerate(meta_host, [&](CComPtr<ICLRRuntimeInfo>& rt_ptr)->bool
 		{
 			if (!is_loadable(rt_ptr))
 			{
@@ -102,7 +102,7 @@ namespace clr {
 			}
 			else
 			{
-				if (read_version_string(rt_ptr, current_runtime_version))
+				if (read_version_string(rt_ptr.Get(), current_runtime_version))
 				{
 					if (latest_runtime_version < current_runtime_version)
 					{
@@ -136,7 +136,7 @@ namespace clr {
 
 		if (version)
 		{
-			CComPtr<ICLRRuntimeInfo> runtime_info = nullptr;
+			CComPtr<ICLRRuntimeInfo> runtime_info;
 			hr = meta_host->GetRuntime(version, IID_PPV_ARGS(&runtime_info));
 			if (!SUCCEEDED(hr))
 			{
@@ -244,11 +244,11 @@ namespace clr {
 		{ }
 
 		operator bool() const {
-			return appdomain_;
+			return !!appdomain_.Get();
 		}
 
 		mscorlib::_AppDomain* get() const {
-			return appdomain_;
+			return appdomain_.Get();
 		}
 
 	private:

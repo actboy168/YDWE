@@ -4,7 +4,7 @@
 #include <base/filesystem.h>
 #include <base/util/unicode.h>
 #include <windows.h>
-#include "clr_interop/clr_interop.h"
+#include "clr_interop.h"
 
 namespace clr {
 
