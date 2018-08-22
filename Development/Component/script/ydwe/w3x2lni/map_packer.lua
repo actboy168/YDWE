@@ -12,19 +12,22 @@ local function trans_command(cmd)
     return '"' .. str .. '"'
 end
 
-return function (mode, map_path, target_path)
+
+local function do_command(script, ...)
+    local cmds = {...}
+    for i, str in ipairs(cmds) do
+        cmds[i] = trans_command(str)
+    end
     local current_dir = dev / 'plugin' / 'w3x2lni' / 'script'
     local command_line = ([=[
-"%s" -E -e"package.cpath=[[%s]];package.path=[[%s;%s]]" "%s" "%s" %s %s]=]
+"%s" -E -e"package.cpath=[[%s]];package.path=[[%s;%s]]" "%s" %s]=]
     ):format(
         (root / 'bin' / 'lua.exe'):string(),
         (root / 'bin' / 'modules' / '?.dll'):string(),
         (current_dir / '?.lua'):string(),
         (current_dir / '?' / 'init.lua'):string(),
-        (current_dir / 'gui' / 'mini.lua'):string(),
-        mode,
-        trans_command(map_path:string()),
-        trans_command(target_path:string())
+        (current_dir / script):string(),
+        table.concat(cmds, ' ')
     )
     local p = process()
     p:set_console 'disable'

@@ -244,15 +244,15 @@ end
 
 local function add_special(meta, type)
     if type == 'unit' then
-        meta['missilespeed_1'].default = '{1500,1500}'
-        meta['missilespeed_2'].default = '{1500,1500}'
+        meta['missilespeed_1'].default = "{'1500','1500'}"
+        meta['missilespeed_2'].default = "{'1500','1500'}"
     end
 end
 
 local function create_metadata(w2l, type, metadata, loader)
     metadata[type] = {}
     local has_level = w2l.info.key.max_level[type]
-    local tbl = slk(loader('units\\' .. w2l.info.metadata[type]) or loader('doodads\\' .. w2l.info.metadata[type]))
+    local tbl = slk(loader('units\\' .. w2l.info.metadata[type]) or loader('doodads\\' .. w2l.info.metadata[type]), w2l.info.metadata[type], true)
     tbl.Ytip = nil
     local has_index = {}
     for k, v in pairs(tbl) do

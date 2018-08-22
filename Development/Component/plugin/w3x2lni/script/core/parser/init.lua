@@ -8,10 +8,15 @@ local messager
 local parse_exp
 local parse_lines
 
+local reserved = {}
+for _, key in ipairs {'globals', 'endglobals', 'constant', 'native', 'array', 'and', 'or', 'not', 'type', 'extends', 'function', 'endfunction', 'nothing', 'takes', 'returns', 'call', 'set', 'return', 'if', 'then', 'endif', 'elseif', 'else', 'loop', 'endloop', 'exitwhen', 'local', 'true', 'false'} do
+    reserved[key] = true
+end
+
 local function parser_error(str)
     local line = ast.current_line
     local start = 1
-    while true do
+    while line > 1 do
         start = jass:find('[\r\n]', start)
         if not start then
             start = 1
@@ -23,12 +28,20 @@ local function parser_error(str)
             start = start + 1
         end
         line = line - 1
-        if line <= 1 then
-            break
-        end
     end
-    local finish = jass:find('%f[\r\n]', start) or #jass
+    local finish = jass:find('%f[\r\n]', start)
+    if finish then
+        finish = finish - 1
+    else
+        finish = #jass
+    end
     error(lang.parser.ERROR_POS:format(str, ast.file, ast.current_line, jass:sub(start, finish)))
+end
+
+local function valid_name(name)
+    if reserved[name] then
+        parser_error(lang.parser.ERROR_KEY_WORD:format(name))
+    end
 end
 
 local function base_type(type)
@@ -39,6 +52,7 @@ local function base_type(type)
 end
 
 local function get_var(name)
+    valid_name(name)
     if ast.current_function then
         if ast.current_function.locals[name] then
             return ast.current_function.locals[name]
@@ -55,6 +69,7 @@ local function get_var(name)
 end
 
 local function get_function(name)
+    valid_name(name)
     return ast.functions[name]
 end
 
@@ -257,6 +272,7 @@ end
 
 local function parse_global(data)
     ast.current_line = data.line
+    valid_name(data.name)
     if ast.globals[data.name] then
         parser_error(lang.parser.ERROR_REDEFINE_GLOBAL:format(data.name, ast.globals[data.name].file, ast.globals[data.name].line))
     end
@@ -319,6 +335,9 @@ local function parse_local(data, locals, args)
 end
 
 local function parse_locals(chunk)
+    if not chunk.locals then
+        chunk.locals = {}
+    end
     for _, data in ipairs(chunk.locals) do
         parse_local(data, chunk.locals, chunk.args)
     end
@@ -406,6 +425,8 @@ function parse_lines(chunk)
 end
 
 local function parse_function(chunk)
+    ast.current_line = chunk.line
+    valid_name(chunk.name)
     table.insert(ast.functions, chunk)
     ast.functions[chunk.name] = chunk
     
@@ -437,9 +458,8 @@ local function parser_gram(gram)
     end
 end
 
-return function (jass_, file, _ast, _messager)
+return function (jass_, file, _ast)
     jass = jass_
-    messager = _messager or print
     if _ast then
         ast = _ast
 
@@ -466,7 +486,7 @@ return function (jass_, file, _ast, _messager)
 
     ast.file = file
 
-    local gram, comments = grammar(jass, file, messager)
+    local gram, comments = grammar(jass, file, 'Jass')
 
     parser_gram(gram)
 

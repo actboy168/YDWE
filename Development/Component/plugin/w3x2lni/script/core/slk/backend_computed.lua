@@ -115,10 +115,8 @@ local function computed_value(slk, str, name, field)
             return get_value(o, key)
         end
     }
-    if type(res) == 'number' then
-        if per == '%' then
-            res = res * 100
-        end
+    if per == '%' and tonumber(res) then
+        res = tonumber(res) * 100
         return around_integer(res)
     end
     w2l.messager.report(lang.report.COMPUTED_TEXT_FAILED, 5, ('%s %s %s'):format(get_displayname_by_id(slk, id)), ('%s: <%s>'):format(field, str))

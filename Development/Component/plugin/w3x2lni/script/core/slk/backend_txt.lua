@@ -8,7 +8,6 @@ local pairs = pairs
 local table_sort = table.sort
 local table_insert = table.insert
 local math_floor = math.floor
-local wtonumber = w3xparser.tonumber
 local select = select
 local table_unpack = table.unpack
 local os_clock = os.clock
@@ -24,15 +23,29 @@ local object
 
 local function to_type(tp, value)
     if tp == 0 then
-        if not value or value == 0 then
+        if not value then
+            return nil
+        end
+        local value = tostring(math_floor(value))
+        if value == '0' then
             return nil
         end
         return value
     elseif tp == 1 or tp == 2 then
-        if not value or value == 0 then
+        if not value then
             return nil
         end
-        return ('%.4f'):format(value):gsub('[0]+$', ''):gsub('%.$', '')
+        if type(value) == 'number' then
+            value = tostring(value)
+        end
+        if value:find('.', 1, true) then
+            value = value:gsub('0+$', '')
+        end
+        value = value:gsub('%.$', '')
+        if value == '' or value == '0' then
+            return nil
+        end
+        return value
     elseif tp == 3 then
         if not value then
             return

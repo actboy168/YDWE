@@ -1,83 +1,70 @@
-local lpeg = require 'lpeg'
+local re = require 'parser.relabel'
+local m = require 'lpeglabel'
 local lang = require 'lang'
 
 local tonumber = tonumber
-local table_concat = table.concat
-local messager
+local tointeger = math.tointeger
+local stringByte = string.byte
+local stringUnpack = string.unpack
 
-lpeg.locale(lpeg)
-
-local S = lpeg.S
-local P = lpeg.P
-local R = lpeg.R
-local C = lpeg.C
-local V = lpeg.V
-local Cg = lpeg.Cg
-local Ct = lpeg.Ct
-local Cc = lpeg.Cc
-local Cs = lpeg.Cs
-local Cp = lpeg.Cp
-local Cmt = lpeg.Cmt
-
-local jass
+local scriptBuf = ''
+local compiled = {}
+local defs = {}
 local file
+local linecount
 local comments
-local line_count
-local line_pos
 
-local function errorpos(pos, str)
-    local endpos = jass:find('[\r\n]', pos) or (#jass+1)
-    local sp = (' '):rep(pos-line_pos)
-    local line = ('%s\r\n%s^'):format(jass:sub(line_pos, endpos-1), sp)
-    error(lang.parser.ERROR_POS:format(str, file, line_count, line))
+defs.nl = (m.P'\r\n' + m.S'\r\n') / function ()
+    linecount = linecount + 1
 end
-
-local function err(str)
-    return Cp() / function(pos)
-        errorpos(pos, str)
-    end
+defs.s  = m.S' \t' + m.P'\xEF\xBB\xBF'
+defs.S  = - defs.s
+defs.eb = '\b'
+defs.et = '\t'
+defs.er = '\r'
+defs.en = '\n'
+defs.ef = '\f'
+function defs.File()
+    return file
 end
-
-local function newline(pos)
-    line_count = line_count + 1
-    line_pos = pos
+function defs.Line()
+    return linecount
 end
-
-local function comment(str)
-    if comments[line_count] then
-        messager(lang.parser.CONFLICT_COMMENT_LINE .. line_count)
-        messager(comments[line_count])
-        messager(str)
-    end
-    comments[line_count] = str
+function defs.Comment(str)
+    comments[linecount] = str
 end
-
-local w = (1-S' \t\r\n()[]')^0
-
-local function expect(p, ...)
-    if select('#', ...) == 1 then
-        local str = ...
-        return p + w * err(str)
+defs.True = m.Cc(true)
+defs.False = m.Cc(false)
+function defs.Integer10(neg, str)
+    local int = tointeger(str)
+    if neg == '' then
+        return int
     else
-        local m, str = ...
-        return p + m * err(str)
+        return - int
     end
 end
-
-local function keyvalue(key, value)
-    return Cg(Cc(value), key)
+function defs.Integer16(neg, str)
+    local int = tointeger('0x'..str)
+    if neg == '' then
+        return int
+    else
+        return - int
+    end
 end
-
-local function currentline()
-    return Cg(P(true) / function() return file end,       'file')
-         * Cg(P(true) / function() return line_count end, 'line')
+function defs.Integer256(neg, str)
+    local int
+    if #str == 1 then
+        int = stringByte(str)
+    elseif #str == 4 then
+        int = stringUnpack('>I4', str)
+    end
+    if neg == '' then
+        return int
+    else
+        return - int
+    end
 end
-
-local function endline()
-    return Cg(P(true) / function() return line_count end, 'endline')
-end
-
-local function binary(...)
+function defs.Binary(...)
     local e1, op = ...
     if not op then
         return e1
@@ -94,8 +81,7 @@ local function binary(...)
     end
     return e1
 end
-
-local function unary(...)
+function defs.Unary(...)
     local e1, op = ...
     if not op then
         return e1
@@ -112,217 +98,397 @@ local function unary(...)
     return e1
 end
 
-local nl  = (P'\r\n' + S'\r\n') * Cp() / newline
-local com = P'//' * C((1-nl)^0) / comment
-local sp  = (S' \t' + P'\xEF\xBB\xBF' + com)^0
-local sps = (S' \t' + P'\xEF\xBB\xBF' + com)^1
-local cl  = com^0 * nl
-local spl = sp * cl
-local finish = P'\0' * P(1)^0
+local eof = re.compile '!. / %{SYNTAX_ERROR}'
 
-local Keys = {'globals', 'endglobals', 'constant', 'native', 'array', 'and', 'or', 'not', 'type', 'extends', 'function', 'endfunction', 'nothing', 'takes', 'returns', 'call', 'set', 'return', 'if', 'endif', 'elseif', 'else', 'loop', 'endloop', 'exitwhen'}
-for _, key in ipairs(Keys) do
-    Keys[key] = true
+local function grammar(tag)
+    return function (script)
+        scriptBuf = script .. '\r\n' .. scriptBuf
+        compiled[tag] = re.compile(scriptBuf, defs) * eof
+    end
 end
 
-local Id = P{
-    'Def',
-    Def  = C(V'Id') * Cp() / function(id, pos) if Keys[id] then errorpos(pos-#id, lang.parser.ERROR_KEY_WORD:format(id)) end end,
-    Id   = R('az', 'AZ') * R('az', 'AZ', '09', '__')^0,
-}
+grammar 'Comment' [[
+Comment     <-  '//' [^%nl]* -> Comment
+]]
 
-local Cut = #(1-R('az', 'AZ', '09', '__')) + (-P(1))
-local function Whole(word)
-    return P(word) * Cut
-end
+grammar 'Sp' [[
+Sp          <-  (Comment / %s)*
+]]
 
-local Null = Ct(keyvalue('type', 'null') * P'null')
+grammar 'Nl' [[
+Nl          <-  (Sp %nl)+
+]]
 
-local Bool = P{
-    'Def',
-    Def   = Ct(keyvalue('type', 'boolean') * Cg(V'True' + V'False', 'value')),
-    True  = Whole'true' * Cc(true),
-    False = Whole'false' * Cc(false),
-}
+grammar 'Common' [[
+Cut         <-  ![a-zA-Z0-9_]
+COMMA       <-  Sp ','
+ASSIGN      <-  Sp '='
+GLOBALS     <-  Sp 'globals' Cut
+ENDGLOBALS  <-  Sp 'endglobals' Cut
+CONSTANT    <-  Sp 'constant' Cut
+NATIVE      <-  Sp 'native' Cut
+ARRAY       <-  Sp 'array' Cut
+AND         <-  Sp 'and' Cut
+OR          <-  Sp 'or' Cut
+NOT         <-  Sp 'not' Cut
+TYPE        <-  Sp 'type' Cut
+EXTENDS     <-  Sp 'extends' Cut
+FUNCTION    <-  Sp 'function' Cut
+ENDFUNCTION <-  Sp 'endfunction' Cut
+NOTHING     <-  Sp 'nothing' Cut
+TAKES       <-  Sp 'takes' Cut
+RETURNS     <-  Sp 'returns' Cut
+CALL        <-  Sp 'call' Cut
+SET         <-  Sp 'set' Cut
+RETURN      <-  Sp 'return' Cut
+IF          <-  Sp 'if' Cut
+THEN        <-  Sp 'then' Cut
+ENDIF       <-  Sp 'endif' Cut
+ELSEIF      <-  Sp 'elseif' Cut
+ELSE        <-  Sp 'else' Cut
+LOOP        <-  Sp 'loop' Cut
+ENDLOOP     <-  Sp 'endloop' Cut
+EXITWHEN    <-  Sp 'exitwhen' Cut
+LOCAL       <-  Sp 'local' Cut
+TRUE        <-  Sp 'true' Cut
+FALSE       <-  Sp 'false' Cut
+]]
 
-local Str = P{
-    'Def',
-    Def  = Ct(keyvalue('type', 'string') * Cg(V'Str', 'value')),
-    Str  = '"' * Cs((nl + V'Char')^0) * '"',
-    Char = V'Esc' + '\\' * err(lang.parser.ERROR_ESC) + (1-P'"'),
-    Esc  = P'\\b'
-         + P'\\t'
-         + P'\\r'
-         + P'\\n'
-         + P'\\f'
-         + P'\\"'
-         + P'\\\\',
-}
+grammar 'Esc' [[
+Esc         <-  '\' {EChar}
+EChar       <-  'b' -> eb
+            /   't' -> et
+            /   'r' -> er
+            /   'n' -> en
+            /   'f' -> ef
+            /   '"'
+            /   '\'
+            /   %{ERROR_ESC}
+]]
 
-local Real = P{
-    'Def',
-    Def  = Ct(keyvalue('type', 'real') * Cg(V'Real', 'value')),
-    Real = P'-'^-1 * sp * V'Char',
-    Char  = (P'.' * expect(R'09'^1, lang.parser.ERROR_REAL) + R'09'^1 * P'.' * R'09'^0),
-}
+grammar 'Value' [[
+Value       <-  {| NULL / Boolean / String / Real / Integer |}
+NULL        <-  Sp 'null' Cut
+                {:type: '' -> 'null' :}
 
-local Int = P{
-    'Def',
-    Def    = Ct(keyvalue('type', 'integer') * Cg(V'Int', 'value')),
-    Int    = V'Neg' * (V'Int16' + V'Int8' + V'Int10' + V'Int256') / function(neg, n) return neg and -n or n end,
-    Neg    = Cc(true) * P'-' * sp + Cc(false),
-    Int8   = (P'0' * R'07'^1) / function (n) return tonumber(n, 8) end,
-    Int10  = (P'0' + R'19' * R'09'^0) / tonumber,
-    Int16  = (P'$' + P'0' * S'xX') * expect(R('af', 'AF', '09')^1 / function(n) return tonumber('0x'..n) end, lang.parser.ERROR_INT16),
-    Int256 = "'" * expect((V'C4' + V'C1') * "'", lang.parser.ERROR_INT256_COUNT),
-    C4     = V'C4W' * V'C4W' * V'C4W' * V'C4W' / function(n) return ('>I4'):unpack(n) end,
-    C4W    = expect(1-P"'"-P'\\', '\\' * P(1), lang.parser.ERROR_INT256_ESC),
-    C1     = ('\\' * expect(V'Esc', P(1), lang.parser.ERROR_ESC) + C(1-P"'")) / function(n) return ('I1'):unpack(n) end,
-    Esc    = P'b' / function() return '\b' end 
-           + P't' / function() return '\t' end
-           + P'r' / function() return '\r' end
-           + P'n' / function() return '\n' end
-           + P'f' / function() return '\f' end
-           + P'"' / function() return '\"' end
-           + P'\\' / function() return '\\' end,
-}
+Boolean     <-  {:value: TRUE %True / FALSE %False :}
+                {:type: '' -> 'boolean' :}
 
-local Value = sp * (Null + Bool + Str + Real + Int) * sp
+String      <-  {:value: Sp '"' {(Esc / [^"])*} '"' :}
+                {:type: '' -> 'string' :}
 
-local Exp = P{
-    'Def',
-    
-    -- 由低优先级向高优先级递归
-    Def      = V'And',
+Real        <-  {:value: Sp {'-'? Sp ('.' [0-9]+^ERROR_REAL / [0-9]+ '.' [0-9]*)} :}
+                {:type: '' -> 'real' :}
 
-    And      = V'Or'      * (C(Whole'and')             * sp    * V'Or')^0      / binary,
-    Or       = V'Compare' * (C(Whole'or')              * sp    * V'Compare')^0 / binary,
-    Compare  = V'Not'     * (C(S'><=!' * P'=' + S'><') * sp    * V'Not')^0     / binary,
-    Not      = sp         * (C(Whole'not')             * sp)^0 * V'AddSub'     / unary,
-    AddSub   = V'MulDiv'  * (C(S'+-')                  * sp    * V'MulDiv')^0  / binary,
-    MulDiv   = V'Exp'     * (C(S'*/')                  * sp    * V'Exp')^0     / binary,
+Integer10   <-  Sp ({'-'?} Sp {'0' / ([1-9] [0-9]*)})
+            ->  Integer10
+Integer16   <-  Sp ({'-'?} Sp ('$' / '0x' / '0X') {Char16})
+            ->  Integer16
+Char16      <-  [a-fA-F0-9]+^ERROR_INT16
+Integer256  <-  Sp ({'-'?} Sp C256)
+            ->  Integer256
+C256        <-  "'" {C256_1} "'"
+            /   "'" {C256_4 C256_4 C256_4 C256_4} "'"
+            /   "'" %{ERROR_INT256_COUNT}
+C256_1      <-  Esc
+            /   !"'" .
+C256_4      <-  Esc %{ERROR_INT256_ESC}
+            /   !"'" .
+Integer     <-  {:value: Integer16 / Integer10 / Integer256 :}
+                {:type: '' -> 'integer' :}
+]]
 
-    Exp   = V'Paren' + V'Code' + V'Call' + Value + V'Neg' + V'Vari' + V'Var',
-    Paren = sp * '(' * V'Def' * ')' * sp,
+grammar 'Name' [[
+Name        <-  Sp {[a-zA-Z] [a-zA-Z0-9_]*}
+]]
 
-    Code  = Ct(keyvalue('type', 'code')  * sp * Whole'function' * sps * Cg(Id, 'name') * sp),
-    Call  = Ct(keyvalue('type', 'call')  * sp * Cg(Id, 'name') * sp * '(' * V'Args' * ')' * sp),
-    Vari  = Ct(keyvalue('type', 'vari')  * sp * Cg(Id, 'name') * sp * '[' * Cg(V'Def', 1) * ']' * sp),
-    Var   = Ct(keyvalue('type', 'var')   * sp * Cg(Id, 'name') * sp),
-    Neg   = Ct(keyvalue('type', 'neg')   * sp * '-' * sp * Cg(V'Exp', 1)),
+grammar 'Compare' [[
+GT          <-  Sp '>'
+GE          <-  Sp '>='
+LT          <-  Sp '<'
+LE          <-  Sp '<='
+EQ          <-  Sp '=='
+UE          <-  Sp '!='
+]]
 
-    Args  = V'Def' * (',' * V'Def')^0 + sp,
-}
+grammar 'Operator' [[
+ADD         <-  Sp '+'
+SUB         <-  Sp '-'
+MUL         <-  Sp '*'
+DIV         <-  Sp '/'
+NEG         <-  Sp '-'
+]]
 
-local Type = P{
-    'Def',
-    Def  = Ct(sp * Whole'type' * keyvalue('type', 'type') * currentline() * expect(sps * Cg(Id, 'name'), lang.parser.ERROR_VAR_TYPE) * expect(V'Ext', lang.parser.ERROR_EXTENDS_TYPE)),
-    Ext  = sps * Whole'extends' * sps * Cg(Id, 'extends'),
-}
+grammar 'Paren' [[
+PL          <-  Sp '('
+PR          <-  Sp ')'
+BL          <-  Sp '['
+BR          <-  Sp ']'
+]]
 
-local Global = P{
-    'Global',
-    Global = Ct(sp * Whole'globals' * keyvalue('type', 'globals') * currentline() * V'Vals' * V'End'),
-    Vals   = (spl + V'Def' * spl)^0,
-    Def    = Ct(currentline() * sp
-        * (Whole'constant' * sps * keyvalue('constant', true) + P(true))
-        * Cg(Id, 'type') * sps
-        * (Whole'array' * sps * keyvalue('array', true) + P(true))
-        * Cg(Id, 'name')
-        * (sp * '=' * Cg(Exp) + P(true))
-        ),
-    End    = expect(sp * Whole'endglobals', lang.parser.ERROR_ENDGLOBALS),
-}
+grammar 'Exp' [[
+Exp         <-  ECheckAnd
+ECheckAnd   <-  (ECheckOr   (ESAnd    ECheckOr  )*) -> Binary
+ECheckOr    <-  (ECheckComp (ESOr     ECheckComp)*) -> Binary
+ECheckComp  <-  (ECheckNot  (ESComp   ECheckNot )*) -> Binary
+ECheckNot   <-  (            ESNot+   ECheckAdd   ) -> Unary / ECheckAdd
+ECheckAdd   <-  (ECheckMul  (ESAddSub ECheckMul )*) -> Binary
+ECheckMul   <-  (EUnit      (ESMulDiv EUnit     )*) -> Binary
 
-local Local = P{
-    'Def',
-    Def = Ct(currentline() * sp
-        * Whole'local' * sps
-        * Cg(Id, 'type') * sps
-        * (Whole'array' * sps * keyvalue('array', true) + P(true))
-        * Cg(Id, 'name')
-        * (sp * '=' * Cg(Exp) + P(true))
-        ),
-}
+ESAnd       <-  AND -> 'and'
+ESOr        <-  OR  -> 'or'
+ESComp      <-  UE  -> '!='
+            /   EQ  -> '=='
+            /   LE  -> '<='
+            /   LT  -> '<' 
+            /   GE  -> '>='
+            /   GT  -> '>'
+ESNot       <-  NOT -> 'not'
+ESAddSub    <-  ADD -> '+'
+            /   SUB -> '-'
+ESMulDiv    <-  MUL -> '*'
+            /   DIV -> '/'
 
-local Line = P{
-    'Def',
-    Def    = sp * (V'Call' + V'Set' + V'Seti' + V'Return' + V'Exit'),
-    Call   = Ct(keyvalue('type', 'call') * currentline() * Whole'call' * sps * Cg(Id, 'name') * sp * '(' * V'Args' * ')' * sp),
-    Args   = Exp * (',' * Exp)^0 + sp,
-    Set    = Ct(keyvalue('type', 'set')  * currentline() * Whole'set'  * sps * Cg(Id, 'name') * sp * '=' * Exp),
-    Seti   = Ct(keyvalue('type', 'seti') * currentline() * Whole'set'  * sps * Cg(Id, 'name') * sp * '[' * Cg(Exp, 1) * ']' * sp * '=' * Cg(Exp, 2)),
+EUnit       <-  EParen / ECode / ECall / EValue / ENeg
 
-    Return = Ct(keyvalue('type', 'return') * currentline() * Whole'return'   * (Cg(Exp, 1) + P(true))),
-    Exit   = Ct(keyvalue('type', 'exit')   * currentline() * Whole'exitwhen' * Cg(Exp, 1)),
-}
+EParen      <-  PL Exp PR
 
-local Logic = P{
-    'Def',
-    Def      = V'If' + V'Loop',
+ECode       <-  {|
+                    {:type: '' -> 'code' :}
+                    FUNCTION ECodeFunc
+                |}
+ECodeFunc   <-  {:name: Name :}
 
-    If       = Ct(keyvalue('type', 'if') * currentline() * sp
-            * V'Ifif'
-            * V'Ifelseif'^0 
-            * V'Ifelse'^-1
-            * sp * 'endif' * endline()
-            ),
-    Ifif     = Ct(keyvalue('type', 'if')     * currentline() * sp * Whole'if'     * Cg(Exp, 'condition') * Whole'then' * spl * V'Ifdo'),
-    Ifelseif = Ct(keyvalue('type', 'elseif') * currentline() * sp * Whole'elseif' * Cg(Exp, 'condition') * Whole'then' * spl * V'Ifdo'),
-    Ifelse   = Ct(keyvalue('type', 'else')   * currentline() * sp * Whole'else'   * spl * V'Ifdo'),
-    Ifdo     = (spl + V'Def' + Line * spl)^0,
+ECall       <-  {|
+                    {:type: '' -> 'call' :}
+                    ECallFunc PL ECallArgs? PR
+                |}
+ECallFunc   <-  {:name: Name :}
+ECallArgs   <-  {: Exp :} (COMMA {: Exp :})*
 
-    Loop     = Ct(keyvalue('type', 'loop') * currentline() * sp
-            * Whole'loop' * spl
-            * (spl + V'Def' + Line * spl)^0
-            * sp * Whole'endloop' * endline()
-            ),
-}
+EValue      <-  Value / EVari / EVar
 
-local Function = P{
-    'Def',
-    Def      = Ct(keyvalue('type', 'function') * currentline() * (V'Common' + V'Native')),
-    Native   = sp * (Whole'constant' * keyvalue('constant', true) + P(true)) * sp * Whole'native' * keyvalue('native', true) * V'Head',
-    Common   = sp * (Whole'constant' * keyvalue('constant', true) + P(true)) * sp * Whole'function' * V'Head' * spl * V'Content' * V'End',
-    Head     = sps * Cg(Id, 'name') * sps * Whole'takes' * sps * V'Takes' * sps * Whole'returns' * sps * V'Returns',
-    Takes    = (Whole'nothing' + Cg(V'Args', 'args')),
-    Args     = Ct(sp * V'Arg' * (sp * ',' * sp * V'Arg')^0),
-    Arg      = Ct(Cg(Id, 'type') * sps * Cg(Id, 'name')),
-    Returns  = Whole'nothing' + Cg(Id, 'returns'),
-    Content  = sp * Cg(V'Locals', 'locals') * V'Lines',
-    Locals   = Ct((spl + Local * spl)^0),
-    Lines    = (spl + Logic * spl + Line * spl)^0,
-    End      = expect(sp * Whole'endfunction', lang.parser.ERROR_ENDFUNCTION) * endline(),
-}
+EVari       <-  {|
+                    {:type: '' -> 'vari' :}
+                    EVarName BL EVarIndex BR
+                |}
+EVarIndex   <-  {: Exp :}
 
-local pjass = expect(sps + cl + finish + Type + Function + Global, P(1), lang.parser.SYNTAX_ERROR)^0
+EVar        <-  {|
+                    {:type: '' -> 'var' :}
+                    EVarName
+                |}
+EVarName    <-  {:name: Name :}
+
+ENeg        <-  {|
+                    {:type: '' -> 'neg' :}
+                    NEG EUnit
+                |}
+]]
+
+grammar 'Type' [[
+Type        <-  {|
+                    {:type: '' -> 'type' :}
+                    {:file: '' ->  File  :}
+                    {:line: '' ->  Line  :}
+                    TYPE TChild TExtends TParent
+                |}
+TChild      <-  {:name:    Name :}^ERROR_VAR_TYPE
+TExtends    <-  EXTENDS           ^ERROR_EXTENDS_TYPE
+TParent     <-  {:extends: Name :}^ERROR_EXTENDS_TYPE
+]]
+
+grammar 'Globals' [[
+Globals     <-  {|
+                    {:type: '' -> 'globals' :}
+                    {:file: '' ->  File     :}
+                    {:line: '' ->  Line     :}
+                    GGlobals
+                        Global*
+                    GEnd
+                |}
+Global      <-  {|
+                    {:file: '' ->  File :}
+                    {:line: '' ->  Line :}
+                    (GConstant? GType GArray? GName GExp?)? Nl
+                |}
+GConstant   <-  {:constant: CONSTANT %True :}
+GArray      <-  {:array:    ARRAY    %True :}
+GType       <-  {:type: Name :}
+GName       <-  {:name: Name :}
+GExp        <-  ASSIGN {: Exp :}
+GGlobals    <-  GLOBALS Nl
+GEnd        <-  ENDGLOBALS^ERROR_ENDGLOBALS
+]]
+
+grammar 'Local' [[
+Local       <-  {|
+                    {:file: '' ->  File :}
+                    {:line: '' ->  Line :}
+                    LOCAL LType LArray? LName LExp?
+                |}
+Locals      <-  (Local? Nl)+
+
+LType       <-  {:type: Name :}
+LName       <-  {:name: Name :}
+LArray      <-  {:array: ARRAY %True :}
+LExp        <-  ASSIGN {: Exp :}
+]]
+
+grammar 'Action' [[
+Action      <-  {|
+                    {:file: '' ->  File :}
+                    {:line: '' ->  Line :}
+                    (ACall / ASet / ASeti / AReturn / AExit / ALogic / ALoop)
+                |}
+Actions     <-  (Action? Nl)+
+
+ACall       <-  CALL ACallFunc PL ACallArgs? PR
+                {:type: '' -> 'call' :}
+                
+ACallFunc   <-  {:name: Name :}
+ACallArgs   <-  {: Exp :} (COMMA {: Exp :})*
+
+ASet        <-  SET ASetName ASSIGN ASetValue
+                {:type: '' -> 'set' :}
+ASetName    <-  {:name: Name :}
+ASetValue   <-  {: Exp :}
+
+ASeti       <-  SET ASetiName BL ASetiIndex BR ASSIGN ASetiValue
+                {:type: '' -> 'seti' :}
+ASetiName   <-  {:name: Name :}
+ASetiIndex  <-  {: Exp :}
+ASetiValue  <-  {: Exp :}
+
+AReturn     <-  RETURN AReturnExp?
+                {:type: '' -> 'return' :}
+AReturnExp  <-  {: Exp :}
+
+AExit       <-  EXITWHEN AExitExp
+                {:type: '' -> 'exit' :}
+AExitExp    <-  {: Exp :}
+
+ALogic      <-  LIf
+                LElseif*
+                LElse?
+                LEnd
+                {:type:    '' -> 'if'  :}
+                {:endline: '' ->  Line :}
+LIf         <-  {|
+                    {:type: '' -> 'if'  :}
+                    {:file: '' ->  File :}
+                    {:line: '' ->  Line :}
+                    IF LCondition THEN Nl
+                        Actions?
+                |}
+LElseif     <-  {|
+                    {:type: '' -> 'elseif' :}
+                    {:file: '' ->  File    :}
+                    {:line: '' ->  Line    :}
+                    ELSEIF LCondition THEN Nl
+                        Actions?
+                |}
+LElse       <-  {|
+                    {:type: '' -> 'else' :}
+                    {:file: '' ->  File  :}
+                    {:line: '' ->  Line  :}
+                    ELSE            Nl
+                        Actions?
+                |}
+LEnd        <-  ENDIF
+LCondition  <-  {:condition: Exp :}
+
+ALoop       <-  LOOP Nl
+                    Actions?
+                LoopEnd
+                {:type:    '' -> 'loop' :}
+                {:endline: '' ->  Line  :}
+LoopEnd     <-  ENDLOOP
+]]
+
+grammar 'Native' [[
+Native      <-  {|
+                    {:type:   '' -> 'function' :}
+                    {:native: '' %True      :}
+                    {:file:   '' ->  File      :}
+                    {:line:   '' ->  Line      :}
+                    NConstant? NATIVE NName NTakes NReturns
+                |}
+NConstant   <-  {:constant: CONSTANT %True :}
+NName       <-  {:name: Name :}
+NTakes      <-  TAKES (NOTHING / {:args: NArgs :})
+NArgs       <-  {| NArg (COMMA NArg)* |}
+NArg        <-  {|
+                    {:type: Name :}
+                    {:name: Name :}
+                |}
+NReturns    <-  RETURNS (NOTHING / {:returns: Name :})
+]]
+
+grammar 'Function' [[
+Function    <-  {|
+                    {:type:    '' -> 'function' :}
+                    {:file:    '' ->  File      :}
+                    {:line:    '' ->  Line      :}
+                    FConstant? FUNCTION FName FTakes FReturns
+                        FLocals?
+                        Actions?
+                    FEnd
+                    {:endline: '' ->  Line      :}
+                |}
+FConstant   <-  {:constant: CONSTANT %True :}
+FName       <-  {:name: Name :}
+FTakes      <-  TAKES (NOTHING / {:args: FArgs :})
+FArgs       <-  {| FArg (COMMA FArg)* |}
+FArg        <-  {|
+                    {:type: Name :}
+                    {:name: Name :}
+                |}
+FReturns    <-  RETURNS (NOTHING / {:returns: Name :}) Nl
+FLocals     <-  {:locals: {| Locals |} :}
+FEnd        <-  ENDFUNCTION^ERROR_ENDFUNCTION
+]]
+
+grammar 'Jass' [[
+Jass        <-  {| Nl? Chunk? (Nl Chunk)* Nl? Sp |}
+Chunk       <-  Type / Globals / Native / Function
+]]
 
 local mt = {}
 setmetatable(mt, mt)
 
-mt.Value  = Value
-mt.Id     = Id
-mt.Exp    = Exp
-mt.Global = Global
-mt.Local  = Local
-mt.Line   = Line
-mt.Logic  = Logic
-mt.Function = Function
-
-function mt:__call(_jass, _file, _messager, mode)
-    jass = _jass
-    file = _file
-    messager = _messager
-    comments = {}
-    line_count = 1
-    line_pos = 1
-    lpeg.setmaxstack(1000)
-    
-    if mode then
-        return Ct(expect(mt[mode] + spl, P(1), lang.parser.SYNTAX_ERROR)^0):match(_jass)
-    else
-        return Ct(pjass):match(_jass), comments
+local function errorpos(jass, file, pos, err)
+    local nl
+    if jass:sub(pos, pos):find '[\r\n]' and jass:sub(pos-1, pos-1):find '[^\r\n]' then
+        pos = pos - 1
+        nl = true
     end
+    local line, col = re.calcline(jass, pos)
+    local sp = col - 1
+    if nl then
+        sp = sp + 1
+    end
+    local start  = jass:find('[^\r\n]', pos-sp) or pos
+    local finish = jass:find('[\r\n]', pos+1)
+    if finish then
+        finish = finish - 1
+    else
+        finish = #jass
+    end
+    local text = ('%s\r\n%s^'):format(jass:sub(start, finish), (' '):rep(sp))
+    error(lang.parser.ERROR_POS:format(err, file, line, text))
+end
+
+function mt:__call(jass, file_, mode)
+    file = file_
+    linecount = 1
+    comments = {}
+    local r, e, pos = compiled[mode]:match(jass)
+    if not r then
+        errorpos(jass, file, pos, lang.PARSER[e])
+    end
+
+    return r, comments
 end
 
 return mt

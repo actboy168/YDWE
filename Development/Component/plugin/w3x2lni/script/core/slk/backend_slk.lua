@@ -9,7 +9,6 @@ local type = type
 local table_sort = table.sort
 local table_insert = table.insert
 local math_floor = math.floor
-local wtonumber = w3xparser.tonumber
 local math_type = math.type
 local os_clock = os.clock
 local tonumber = tonumber
@@ -161,11 +160,6 @@ local function add(x, y, k)
         cy = y
         strs[#strs+1] = 'Y' .. y
     end
-    if type(k) == 'string' then
-        k = ('"%s"'):format(k:gsub('\r\n', '|n'):gsub('[\r\n]', '|n'))
-    elseif math_type(k) == 'float' then
-        k = ('%.4f'):format(k):gsub('[0]+$', ''):gsub('%.$', '.0')
-    end
     strs[#strs+1] = 'K' .. k
     lines[#lines+1] = table_concat(strs, ';')
 end
@@ -184,9 +178,9 @@ local function add_values(names, skeys, slk_name)
                 or slk_name == 'units\\destructabledata.slk' and key == 'texFile'
                 or slk_name == 'units\\abilitydata.slk' and (key == 'targs1' or key == 'targs2' or key == 'targs3' or key == 'targs4')
             then
-                add(x, y+1, '_')
+                add(x, y+1, '"_"')
             elseif slk_name == 'units\\upgradedata.slk' and key == 'used' then
-                add(x, y+1, 1)
+                add(x, y+1, '1')
             end
         end
         if os_clock() - clock > 0.1 then
@@ -199,7 +193,7 @@ end
 
 local function add_title(names)
     for x, name in ipairs(names) do
-        add(x, 1, name)
+        add(x, 1, ('"%s"'):format(name))
     end
 end
 
@@ -236,15 +230,29 @@ end
 
 local function to_type(tp, value)
     if tp == 0 then
-        if not value or value == 0 then
+        if not value then
             return nil
         end
-        return math_floor(wtonumber(value))
+        local value = tostring(math_floor(value))
+        if value == '0' then
+            return nil
+        end
+        return value
     elseif tp == 1 or tp == 2 then
-        if not value or value == 0 then
+        if not value then
             return nil
         end
-        return wtonumber(value) + 0.0
+        if type(value) == 'number' then
+            value = tostring(value)
+        end
+        if value:find('.', 1, true) then
+            value = value:gsub('0+$', '')
+        end
+        value = value:gsub('%.$', '')
+        if value == '-' or value == '' or value == '0' then
+            return nil
+        end
+        return value
     elseif tp == 3 then
         if not value then
             return nil
@@ -259,7 +267,7 @@ local function to_type(tp, value)
         if value:match '^%.[mM][dD][lLxX]$' then
             return nil
         end
-        return value
+        return ('"%s"'):format(value:gsub('\r\n', '|n'):gsub('[\r\n]', '|n'))
     end
 end
 
@@ -357,13 +365,13 @@ local function load_obj(id, obj, slk_name)
         end
     end
     local slk_data = {}
-    slk_data[slk_keys[slk_name][1]] = obj._slk_id or obj._id
-    slk_data['code'] = obj._code
+    slk_data[slk_keys[slk_name][1]] = ('"%s"'):format(obj._slk_id or obj._id)
+    slk_data['code'] = ('"%s"'):format(obj._code)
     if obj._name then
         if obj._id == obj._parent then
-            slk_data['name'] = obj._name
+            slk_data['name'] = ('"%s"'):format(obj._name)
         else
-            slk_data['name'] = 'custom_' .. obj._id
+            slk_data['name'] = ('"%s"'):format('custom_' .. obj._id)
         end
     end
     obj._slk = true

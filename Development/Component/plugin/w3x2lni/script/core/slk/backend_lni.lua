@@ -30,7 +30,10 @@ local function format_value(tp, value)
     if tp == 0 then
         return ('%d'):format(math.floor(value))
     elseif tp == 1 or tp == 2 then
-        return ('%.4f'):format(value)
+        if type(value) == 'number' then
+            return ('%.4f'):format(value)
+        end
+        return value
     elseif tp == 3 then
         value = w2l:get_editstring(value)
         if value:match '[\n\r]' then

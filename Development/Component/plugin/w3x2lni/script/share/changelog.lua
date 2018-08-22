@@ -7,6 +7,8 @@ return {
 },
 {
     version = '2.4.2',
+    { 'CHG', '更换 Lua5.3 为 Lua5.4'},
+    { 'CHG', '更换 lpeg 为 lpeglabel'},
     { 'FIX', '修正lni转obj后数组变量识别为常量的问题' },
     { 'FIX', '修正slk时公式计算的误差问题' },
 },

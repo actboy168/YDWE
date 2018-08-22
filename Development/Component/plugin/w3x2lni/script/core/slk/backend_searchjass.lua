@@ -1,4 +1,4 @@
-local lpeg = require 'lpeg'
+local lpeg = require 'lpeglabel'
 local w3xparser = require 'w3xparser'
 local lang = require 'lang'
 local wtonumber = w3xparser.tonumber

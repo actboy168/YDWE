@@ -3,7 +3,7 @@ local w2l
 local wts
 
 -- TODO 使用更严谨的匹配规则
-local lpeg = require 'lpeg'
+local lpeg = require 'lpeglabel'
 
 local function fwts(str)
     return w2l:load_wts(wts, str, 299, lang.script.TEXT_TOO_LONG_IN_WTG, function(str)
