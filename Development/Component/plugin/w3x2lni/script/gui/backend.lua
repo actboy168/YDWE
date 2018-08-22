@@ -150,6 +150,9 @@ function backend:open(entry, commandline)
         return
     end
     self:clean()
+    local filemode = require 'ffi.filemode'
+    filemode(stdout, 'b')
+    filemode(stderr, 'b')
     return setmetatable({
         process = p,
         out_rd = stdout, 
