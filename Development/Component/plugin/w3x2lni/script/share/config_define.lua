@@ -23,11 +23,17 @@ local raw = setmetatable({}, {
     end,
 })
 
+local escmap = {
+    ['"']  = '\\"',
+    ['\r'] = '\\r',
+    ['\n'] = '\\n',
+    ['\\'] = '\\\\',
+}
 local function string(v)
     v = tostring(v)
     local r = v
     if r:find '%c' or r:find '^[%-%d%.]' or r == 'nil' or r == 'true' or r == 'false' or r == '' then
-        r = '"' .. r:gsub('"', '\\"'):gsub('\r', '\\r'):gsub('\n', '\\n') .. '"'
+        r = '"' .. r:gsub('["\r\n\\]', escmap) .. '"'
     end
     return true, v, r
 end
