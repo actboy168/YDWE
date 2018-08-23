@@ -3,7 +3,7 @@
 
 //===========================================================================  
 //===========================================================================  
-//×Ô¶¨ÒåÊÂ¼ş 
+//è‡ªå®šä¹‰äº‹ä»¶ 
 //===========================================================================
 //===========================================================================   
 
@@ -15,8 +15,8 @@ globals
     trigger yd_DamageEventTrigger = null
     trigger yd_DamageEventTriggerToDestory = null
 #endif
-    private constant integer DAMAGE_EVENT_SWAP_TIMEOUT = 600  // Ã¿¸ôÕâ¸öÊ±¼ä(Ãë), yd_DamageEventTrigger »á±»ÒÆÈëÏú»Ù¶ÓÁĞ
-    private constant boolean DAMAGE_EVENT_SWAP_ENABLE = true  // ÈôÎª false Ôò²»ÆôÓÃÏú»Ù»úÖÆ
+    private constant integer DAMAGE_EVENT_SWAP_TIMEOUT = 600  // æ¯éš”è¿™ä¸ªæ—¶é—´(ç§’), yd_DamageEventTrigger ä¼šè¢«ç§»å…¥é”€æ¯é˜Ÿåˆ—
+    private constant boolean DAMAGE_EVENT_SWAP_ENABLE = true  // è‹¥ä¸º false åˆ™ä¸å¯ç”¨é”€æ¯æœºåˆ¶
 
     private trigger array DamageEventQueue
     private integer DamageEventNumber = 0
@@ -29,7 +29,7 @@ globals
 endglobals
 	
 //===========================================================================  
-//ÈÎÒâµ¥Î»ÉËº¦ÊÂ¼ş 
+//ä»»æ„å•ä½ä¼¤å®³äº‹ä»¶ 
 //===========================================================================
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
     local integer i = 0
@@ -50,11 +50,14 @@ function YDWEAnyUnitDamagedFilter takes nothing returns boolean
     return false
 endfunction
 
-function YDWEAnyUnitDamagedEnumUnit takes nothing returns nothing   
+function YDWEAnyUnitDamagedEnumUnit takes nothing returns nothing
     local group g = CreateGroup()
-    call GroupEnumUnitsInRect(g, GetWorldBounds(), Condition(function YDWEAnyUnitDamagedFilter))
+    local rect world = GetWorldBounds()
+    call GroupEnumUnitsInRect(g, world, Condition(function YDWEAnyUnitDamagedFilter))
     call DestroyGroup(g)
+    call RemoveRect(world)
     set g = null
+    set world = null
 endfunction
 
 function YDWEAnyUnitDamagedRegistTriggerUnitEnter takes nothing returns nothing
@@ -66,7 +69,7 @@ function YDWEAnyUnitDamagedRegistTriggerUnitEnter takes nothing returns nothing
     set t = null
 endfunction
 
-// ½« yd_DamageEventTrigger ÒÆÈëÏú»Ù¶ÓÁĞ, ´Ó¶øÅÅĞ¹´¥·¢Æ÷ÊÂ¼ş
+// å°† yd_DamageEventTrigger ç§»å…¥é”€æ¯é˜Ÿåˆ—, ä»è€Œæ’æ³„è§¦å‘å™¨äº‹ä»¶
 function YDWESyStemAnyUnitDamagedSwap takes nothing returns nothing
     local boolean isEnabled = IsTriggerEnabled(yd_DamageEventTrigger)
     local group g =CreateGroup()
@@ -97,7 +100,7 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
         call YDWEAnyUnitDamagedEnumUnit()
         call YDWEAnyUnitDamagedRegistTriggerUnitEnter()
         if DAMAGE_EVENT_SWAP_ENABLE then
-            // Ã¿¸ô DAMAGE_EVENT_SWAP_TIMEOUT Ãë, ½«ÕıÔÚÊ¹ÓÃµÄ yd_DamageEventTrigger ÒÆÈëÏú»Ù¶ÓÁĞ
+            // æ¯éš” DAMAGE_EVENT_SWAP_TIMEOUT ç§’, å°†æ­£åœ¨ä½¿ç”¨çš„ yd_DamageEventTrigger ç§»å…¥é”€æ¯é˜Ÿåˆ—
             call TimerStart(CreateTimer(), DAMAGE_EVENT_SWAP_TIMEOUT, true, function YDWESyStemAnyUnitDamagedSwap)
         endif
     endif   
@@ -107,7 +110,7 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 endfunction
 
 //===========================================================================  
-//ÒÆ¶¯ÎïÆ·ÊÂ¼ş 
+//ç§»åŠ¨ç‰©å“äº‹ä»¶ 
 //===========================================================================  
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
     local integer i = 0
