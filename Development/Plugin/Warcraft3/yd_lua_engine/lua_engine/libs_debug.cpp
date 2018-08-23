@@ -94,7 +94,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 	{
 		jass::opcode* current_op = (jass::opcode *)base::warcraft3::get_current_jass_pos();
 		jass::opcode* op;
-		for (op = current_op; op->opcode_type != jass::OPTYPE_FUNCTION; --op)
+		for (op = current_op; op->op != jass::OPTYPE_FUNCTION; --op)
 		{
 		}
 

@@ -1,4 +1,4 @@
-#include <windows.h>
+ï»¿#include <windows.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/hook/inline.h>
 #include <base/hook/fp_call.h>
@@ -76,7 +76,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 	struct jass::opcode* show_pos(struct jass::opcode* current_op)
 	{
 		struct jass::opcode *op;
-		for (op = current_op; op->opcode_type != jass::OPTYPE_FUNCTION; --op)
+		for (op = current_op; op->op != jass::OPTYPE_FUNCTION; --op)
 		{ }
 
 		std::cout << "    [" << jass::from_stringid(op->arg) << ":" << current_op  - op << "]" << std::endl;
@@ -87,7 +87,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 	{
 		base::console::enable();
 		std::cout << "---------------------------------------" << std::endl;
-		std::cout << "               Jass´íÎó                " << std::endl;
+		std::cout << "               Jassé”™è¯¯                " << std::endl;
 		std::cout << "---------------------------------------" << std::endl;
 		std::cout << msg << std::endl;
 		std::cout << std::endl;
@@ -120,27 +120,27 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		case 4:
 			break;
 		case 2:
-			show_error(vm, "³¬¹ýÁË×Ö½ÚÂëÏÞÖÆ");
+			show_error(vm, "è¶…è¿‡äº†å­—èŠ‚ç é™åˆ¶");
 			break;
 		case 6:
 		{
 			jass::opcode* op = current_opcode(vm);
-			if (op->opcode_type == jass::OPTYPE_PUSH)
+			if (op->op == jass::OPTYPE_PUSH)
 			{
-				show_error(vm, base::format("Õ» [0x02X] Ã»ÓÐ³õÊ¼»¯¾ÍÊ¹ÓÃ", op->r3));
+				show_error(vm, base::format("æ ˆ [0x02X] æ²¡æœ‰åˆå§‹åŒ–å°±ä½¿ç”¨", op->r3));
 			}
 			else
 			{
-				assert(op->opcode_type == jass::OPTYPE_GETVAR);
-				show_error(vm, base::format("±äÁ¿ '%s' Ã»ÓÐ³õÊ¼»¯¾ÍÊ¹ÓÃ", jass::from_stringid(op->arg)));
+				assert(op->op == jass::OPTYPE_MOVRV);
+				show_error(vm, base::format("å˜é‡ '%s' æ²¡æœ‰åˆå§‹åŒ–å°±ä½¿ç”¨", jass::from_stringid(op->arg)));
 			}
 			break;
 		}
 		case 7:
-			show_error(vm, "Ê¹ÓÃÁã×÷Îª³ýÊý");
+			show_error(vm, "ä½¿ç”¨é›¶ä½œä¸ºé™¤æ•°");
 			break;
 		default:
-			show_error(vm, base::format("Î´Öª´íÎó (%d).", result));
+			show_error(vm, base::format("æœªçŸ¥é”™è¯¯ (%d).", result));
 			break;
 		}
 		return result;

@@ -348,7 +348,7 @@ void create_report(std::fstream& fs)
 		{
 			jass::opcode *current_op = (jass::opcode *)h.pos;
 			jass::opcode *op;
-			for (op = current_op; op->opcode_type != jass::OPTYPE_FUNCTION; --op)
+			for (op = current_op; op->op != jass::OPTYPE_FUNCTION; --op)
 			{ }
 
 			fs << base::format("  创建位置: %s, %d", jass::from_stringid(op->arg), current_op - op) << std::endl;
