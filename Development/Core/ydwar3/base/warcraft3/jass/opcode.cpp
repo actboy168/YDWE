@@ -39,10 +39,10 @@ namespace base { namespace warcraft3 { namespace jass {
 		}
 	}
 
-	void dump_opcode(opcode* op, const wchar_t* filename) {
+	bool dump_opcode(opcode* op, const wchar_t* filename) {
 		FILE* f = _wfopen(filename, L"w");
 		if (!f) {
-			return;
+			return false;
 		}
 		for (; op->op != OPTYPE_ENDPROGRAM; ++op) {
 			switch (op->op) {
@@ -202,5 +202,6 @@ namespace base { namespace warcraft3 { namespace jass {
 			}
 		}
 		fclose(f);
+		return true;
 	}
 }}}

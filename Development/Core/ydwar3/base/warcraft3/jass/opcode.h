@@ -151,5 +151,5 @@ namespace base { namespace warcraft3 { namespace jass {
 		size_t cur_;
 	};
 
-	_WAR3_API void dump_opcode(opcode* op, const wchar_t* filename);
+	_WAR3_API bool dump_opcode(opcode* op, const wchar_t* filename);
 }}}

@@ -5,6 +5,7 @@
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/opcode.h>
+#include <base/warcraft3/jass/hook.h>
 #include <base/util/console.h>
 #include <base/util/format.h>
 #include <iostream>
@@ -146,8 +147,20 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		return result;
 	}
 
+	jass::jboolean_t __cdecl EXDumpOpcode(jass::jstring_t filename) 
+	{
+		jass::opcode* op = (jass::opcode *)base::warcraft3::get_current_jass_pos();
+		if (op) {
+			for (; op->op > jass::OPTYPE_MINLIMIT && op->op < jass::OPTYPE_MAXLIMIT; --op) {
+			}
+			return jass::dump_opcode(op, base::u2w(jass::from_string(filename), base::conv_method::skip | '?').c_str());
+		}
+		return false;
+	}
+
 	bool initialize()
 	{
+		base::warcraft3::jass::japi_add((uintptr_t)EXDumpOpcode, "EXDumpOpcode", "(S)B");
 		real_jass_vmmain = search_jass_vmmain();
 		return base::hook::install(&real_jass_vmmain, (uintptr_t)fake_jass_vmmain);
 	}
