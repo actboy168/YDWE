@@ -89,6 +89,9 @@
     <ClCompile Include="base\warcraft3\udis86\udis86_itab.c">
       <Filter>base\warcraft3\udis86</Filter>
     </ClCompile>
+    <ClCompile Include="base\warcraft3\jass\opcode.cpp">
+      <Filter>base\warcraft3\jass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\warcraft3\detail\string_hash.h">

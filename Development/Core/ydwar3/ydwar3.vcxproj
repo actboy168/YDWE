@@ -113,6 +113,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base\warcraft3\command_line.cpp" />
+    <ClCompile Include="base\warcraft3\jass\opcode.cpp" />
     <ClCompile Include="base\warcraft3\message_dispatch.cpp" />
     <ClCompile Include="base\warcraft3\player.cpp" />
     <ClCompile Include="base\warcraft3\udis86\udis86.c" />

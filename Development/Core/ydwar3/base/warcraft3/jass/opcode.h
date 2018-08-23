@@ -1,11 +1,11 @@
 #pragma once
 
+#include <base/warcraft3/config.h>
 #include <array>
 #include <cassert>
 #include <cstdint>
 
-namespace base { 
-namespace warcraft3 { namespace jass {
+namespace base { namespace warcraft3 { namespace jass {
 
 	struct opcode 
 	{
@@ -150,6 +150,6 @@ namespace warcraft3 { namespace jass {
 	private:
 		size_t cur_;
 	};
-}}
 
-}
+	_WAR3_API void dump_opcode(opcode* op, const wchar_t* filename);
+}}}
