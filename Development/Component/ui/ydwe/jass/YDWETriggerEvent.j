@@ -13,10 +13,10 @@ globals
 #ifndef YDWE_DamageEventTrigger
 #define YDWE_DamageEventTrigger
     trigger yd_DamageEventTrigger = null
-    trigger yd_DamageEventTriggerToDestory = null
 #endif
     private constant integer DAMAGE_EVENT_SWAP_TIMEOUT = 600  // 每隔这个时间(秒), yd_DamageEventTrigger 会被移入销毁队列
     private constant boolean DAMAGE_EVENT_SWAP_ENABLE = true  // 若为 false 则不启用销毁机制
+    private trigger yd_DamageEventTriggerToDestory = null
 
     private trigger array DamageEventQueue
     private integer DamageEventNumber = 0
