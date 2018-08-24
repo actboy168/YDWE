@@ -123,6 +123,7 @@
     <ClCompile Include="base\path\ydwe.cpp" />
     <ClCompile Include="base\thread\thread.cpp" />
     <ClCompile Include="base\thread\thread_exception.cpp" />
+    <ClCompile Include="base\util\pinyin.cpp" />
     <ClCompile Include="base\win\font\file.cpp" />
     <ClCompile Include="base\win\font\utility.cpp" />
     <ClCompile Include="base\win\get_tick_count.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="base\util\ini.h" />
     <ClInclude Include="base\util\list_of.h" />
     <ClInclude Include="base\util\optional.h" />
+    <ClInclude Include="base\util\pinyin.h" />
     <ClInclude Include="base\util\signal.h" />
     <ClInclude Include="base\util\singleton.h" />
     <ClInclude Include="base\util\string_algorithm.h" />

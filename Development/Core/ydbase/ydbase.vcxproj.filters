@@ -185,6 +185,9 @@
     <ClCompile Include="base\hook\replace_pointer.cpp">
       <Filter>base\hook</Filter>
     </ClCompile>
+    <ClCompile Include="base\util\pinyin.cpp">
+      <Filter>base\util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\util\detail\codecvt.h">
@@ -436,6 +439,9 @@
     </ClInclude>
     <ClInclude Include="base\hook\replace_pointer.h">
       <Filter>base\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="base\util\pinyin.h">
+      <Filter>base\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

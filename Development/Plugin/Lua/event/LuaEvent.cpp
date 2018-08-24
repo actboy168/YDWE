@@ -10,6 +10,7 @@
 #include <base/hook/iat.h>
 #include <base/hook/fp_call.h>	  
 #include <base/com/guard.h>	 
+#include <base/util/pinyin.h>
 #include <lua.hpp>
 
 #include "YDWEEvent.h"
@@ -257,6 +258,9 @@ namespace NYDWE {
 	uintptr_t pgTrueCreateWindowExA;
 	HWND WINAPI DetourWeCreateWindowExA(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName, DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu, HINSTANCE hInstance, LPVOID lpParam)
 	{
+		if (strcmp(lpClassName, "LISTBOX") == 0) {
+			dwStyle |= LBS_WANTKEYBOARDINPUT;
+		}
 		HWND result = base::std_call<HWND>(pgTrueCreateWindowExA,
 			dwExStyle,
 			lpClassName,
@@ -306,9 +310,80 @@ namespace NYDWE {
 		return base::std_call<BOOL>(pgTrueSetMenu, hWnd, hMenu);
 	}
 
+	std::string ListBoxItem(HWND listbox, size_t idx) {
+		size_t len = (size_t)SendMessageA(listbox, LB_GETTEXTLEN, (WPARAM)idx, NULL);
+		std::string text; text.resize(len);
+		SendMessageA(listbox, LB_GETTEXT, (WPARAM)idx, (LPARAM)text.data());
+		std::transform(text.begin(), text.end(), text.begin(), ::tolower);
+		return base::chinese2pinyin(text);
+	}
+
+	bool ListBoxFind(HWND listbox, int i, int j, int& r, char vk) {
+		if (i > j) {
+			return false;
+		}
+		int m = (i + j) / 2;
+		std::string item = ListBoxItem(listbox, m);
+		if (vk == item[0]) {
+			for (int k = m - 1; k >= i; --k) {
+				std::string item = ListBoxItem(listbox, k);
+				if (vk != item[0]) {
+					r = k + 1;
+					return true;
+				}
+			}
+			r = i;
+			return true;
+		}
+		else if (vk < item[0]) {
+			return ListBoxFind(listbox, i, m - 1, r, vk);
+		}
+		else {
+			return ListBoxFind(listbox, m + 1, j, r, vk);
+		}
+	}
+
 	uintptr_t pgTrueWeDialogProc;
 	INT_PTR CALLBACK DetourWeDialogProc(HWND dialogHandle, UINT message, WPARAM wParam, LPARAM lParam)
 	{
+		if (message == WM_VKEYTOITEM) {
+			int current = wParam >> 16;
+			if (((wParam & 0xFFFF) < 'A') || ((wParam & 0xFFFF) > 'Z')) {
+				return current;
+			}
+			HWND listbox = (HWND)lParam;
+			char vk = tolower(wParam & 0xFF);
+			int n = (int)SendMessageA(listbox, LB_GETCOUNT, NULL, NULL);
+			if (current >= n) {
+				current = n - 1;
+			}
+
+			std::string item = ListBoxItem(listbox, current);
+			if (vk == item[0]) {
+				if (current == n - 1) {
+					return current;
+				}
+				std::string next = ListBoxItem(listbox, current + 1);
+				if (next[0] == vk) {
+					return current + 1;
+				}
+				return current;
+			}
+
+			int ret = 0;
+			if (vk < item[0]) {
+				if (!ListBoxFind(listbox, 0, current - 1, ret, vk)) {
+					return current;
+				}
+			}
+			else {
+				if (!ListBoxFind(listbox, current + 1, n -1, ret, vk)) {
+					return current;
+				}
+			}
+			return ret;
+		}
+
 		INT_PTR ret = base::std_call<INT_PTR>(pgTrueWeDialogProc, dialogHandle, message, wParam, lParam);
 
 		if (message == WM_SETTEXT)
