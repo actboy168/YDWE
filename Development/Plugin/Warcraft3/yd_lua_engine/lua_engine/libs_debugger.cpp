@@ -164,7 +164,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger
 		DWORD pid = 0;
 		QueryProcess([&](const SYSTEM_PROCESS_INFORMATION* info)->bool {
 			std::wstring pname(info->ImageName.Buffer, info->ImageName.Length / sizeof(wchar_t));
-			std::transform(pname.begin(), pname.end(), pname.begin(), ::tolower);
+			std::transform(pname.begin(), pname.end(), pname.begin(), ::towlower);
 			if (pname == name) {
 				pid = (DWORD)info->ProcessId;
 				return true;

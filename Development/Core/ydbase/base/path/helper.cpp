@@ -89,7 +89,7 @@ namespace base { namespace path {
 		fs::path rpath = normalize(rhs);
 		const fs::path::value_type* l(lpath.c_str());
 		const fs::path::value_type* r(rpath.c_str());
-		while ((tolower(*l) == tolower(*r) || (*l == L'\\' && *r == L'/') || (*l == L'/' && *r == L'\\')) && *l) 
+		while ((towlower(*l) == towlower(*r) || (*l == L'\\' && *r == L'/') || (*l == L'/' && *r == L'\\')) && *l)
 		{ 
 			++l; ++r; 
 		}
