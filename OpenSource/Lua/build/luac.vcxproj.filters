@@ -4,7 +4,6 @@
     <ClCompile Include="..\lapi.c" />
     <ClCompile Include="..\lauxlib.c" />
     <ClCompile Include="..\lbaselib.c" />
-    <ClCompile Include="..\lbitlib.c" />
     <ClCompile Include="..\lcode.c" />
     <ClCompile Include="..\lcorolib.c" />
     <ClCompile Include="..\lctype.c" />
@@ -21,7 +20,6 @@
     <ClCompile Include="..\lmem.c" />
     <ClCompile Include="..\loadlib.c" />
     <ClCompile Include="..\lobject.c" />
-    <ClCompile Include="..\lopcodes.c" />
     <ClCompile Include="..\loslib.c" />
     <ClCompile Include="..\lparser.c" />
     <ClCompile Include="..\lstate.c" />
@@ -35,6 +33,8 @@
     <ClCompile Include="..\lutf8lib.c" />
     <ClCompile Include="..\lvm.c" />
     <ClCompile Include="..\lzio.c" />
+    <ClCompile Include="utf8\unicode.c" />
+    <ClCompile Include="utf8\utf8_crt.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lapi.h" />
