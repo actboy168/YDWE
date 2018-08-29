@@ -26,9 +26,6 @@
     <ClCompile Include="base\warcraft3\detail\string_hash.cpp">
       <Filter>base\warcraft3\detail</Filter>
     </ClCompile>
-    <ClCompile Include="base\warcraft3\detail\memory_search.cpp">
-      <Filter>base\warcraft3\detail</Filter>
-    </ClCompile>
     <ClCompile Include="base\warcraft3\war3_searcher.cpp">
       <Filter>base\warcraft3</Filter>
     </ClCompile>
@@ -95,9 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\warcraft3\detail\string_hash.h">
-      <Filter>base\warcraft3\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="base\warcraft3\detail\memory_search.h">
       <Filter>base\warcraft3\detail</Filter>
     </ClInclude>
     <ClInclude Include="base\warcraft3\war3_searcher.h">

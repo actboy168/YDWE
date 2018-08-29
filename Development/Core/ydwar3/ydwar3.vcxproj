@@ -125,7 +125,6 @@
       <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Strict</FloatingPointModel>
       <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Strict</FloatingPointModel>
     </ClCompile>
-    <ClCompile Include="base\warcraft3\detail\memory_search.cpp" />
     <ClCompile Include="base\warcraft3\detail\string_hash.cpp" />
     <ClCompile Include="base\warcraft3\basic_searcher.cpp" />
     <ClCompile Include="base\warcraft3\event.cpp" />
@@ -143,7 +142,6 @@
   <ItemGroup>
     <ClInclude Include="base\warcraft3\command_line.h" />
     <ClInclude Include="base\warcraft3\config.h" />
-    <ClInclude Include="base\warcraft3\detail\memory_search.h" />
     <ClInclude Include="base\warcraft3\detail\string_hash.h" />
     <ClInclude Include="base\warcraft3\event.h" />
     <ClInclude Include="base\warcraft3\hashtable.h" />
