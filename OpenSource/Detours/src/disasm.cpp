@@ -205,46 +205,45 @@ class CDetourDis
         ULONG       nFixedSize16    : 4;    // Fixed size when 16 bit operand
         ULONG       nModOffset      : 4;    // Offset to mod/rm byte (0=none)
         ULONG       nRelOffset      : 4;    // Offset to relative target.
-        ULONG       nTargetBack     : 4;    // Offset back to absolute or rip target
         ULONG       nFlagBits       : 4;    // Flags for DYNAMIC, etc.
         COPYFUNC    pfCopy;                 // Function pointer.
     };
 
   protected:
-    // These macros define common uses of nFixedSize..pfCopy.
-#define ENTRY_DataIgnored           0, 0, 0, 0, 0, 0,
-#define ENTRY_CopyBytes1            1, 1, 0, 0, 0, 0, &CDetourDis::CopyBytes
+// These macros define common uses of nFixedSize, nFixedSize16, nModOffset, nRelOffset, nFlagBits, pfCopy.
+#define ENTRY_DataIgnored           0, 0, 0, 0, 0,
+#define ENTRY_CopyBytes1            1, 1, 0, 0, 0, &CDetourDis::CopyBytes
 #ifdef DETOURS_X64
-#define ENTRY_CopyBytes1Address     9, 5, 0, 0, 0, ADDRESS, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes1Address     9, 5, 0, 0, ADDRESS, &CDetourDis::CopyBytes
 #else
-#define ENTRY_CopyBytes1Address     5, 3, 0, 0, 0, ADDRESS, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes1Address     5, 3, 0, 0, ADDRESS, &CDetourDis::CopyBytes
 #endif
-#define ENTRY_CopyBytes1Dynamic     1, 1, 0, 0, 0, DYNAMIC, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes2            2, 2, 0, 0, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes1Dynamic     1, 1, 0, 0, DYNAMIC, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes2            2, 2, 0, 0, 0, &CDetourDis::CopyBytes
 #define ENTRY_CopyBytes2Jump        ENTRY_DataIgnored &CDetourDis::CopyBytesJump
-#define ENTRY_CopyBytes2CantJump    2, 2, 0, 1, 0, NOENLARGE, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes2Dynamic     2, 2, 0, 0, 0, DYNAMIC, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes3            3, 3, 0, 0, 0, 0, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes3Dynamic     3, 3, 0, 0, 0, DYNAMIC, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes3Or5         5, 3, 0, 0, 0, 0, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes3Or5Dynamic  5, 3, 0, 0, 0, DYNAMIC, &CDetourDis::CopyBytes // x86 only
+#define ENTRY_CopyBytes2CantJump    2, 2, 0, 1, NOENLARGE, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes2Dynamic     2, 2, 0, 0, DYNAMIC, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes3            3, 3, 0, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes3Dynamic     3, 3, 0, 0, DYNAMIC, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes3Or5         5, 3, 0, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes3Or5Dynamic  5, 3, 0, 0, DYNAMIC, &CDetourDis::CopyBytes // x86 only
 #ifdef DETOURS_X64
-#define ENTRY_CopyBytes3Or5Rax      5, 3, 0, 0, 0, RAX, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes3Or5Target   5, 5, 0, 1, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes3Or5Rax      5, 3, 0, 0, RAX, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes3Or5Target   5, 5, 0, 1, 0, &CDetourDis::CopyBytes
 #else
-#define ENTRY_CopyBytes3Or5Rax      5, 3, 0, 0, 0, 0, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes3Or5Target   5, 3, 0, 1, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes3Or5Rax      5, 3, 0, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes3Or5Target   5, 3, 0, 1, 0, &CDetourDis::CopyBytes
 #endif
-#define ENTRY_CopyBytes4            4, 4, 0, 0, 0, 0, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes5            5, 5, 0, 0, 0, 0, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes5Or7Dynamic  7, 5, 0, 0, 0, DYNAMIC, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes7            7, 7, 0, 0, 0, 0, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes2Mod         2, 2, 1, 0, 0, 0, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes2ModDynamic  2, 2, 1, 0, 0, DYNAMIC, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes2Mod1        3, 3, 1, 0, 1, 0, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes2ModOperand  6, 4, 1, 0, 4, 0, &CDetourDis::CopyBytes
-#define ENTRY_CopyBytes3Mod         3, 3, 2, 0, 0, 0, &CDetourDis::CopyBytes // SSE3 0F 38 opcode modrm
-#define ENTRY_CopyBytes3Mod1        4, 4, 2, 0, 1, 0, &CDetourDis::CopyBytes // SSE3 0F 3A opcode modrm .. imm8
+#define ENTRY_CopyBytes4            4, 4, 0, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes5            5, 5, 0, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes5Or7Dynamic  7, 5, 0, 0, DYNAMIC, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes7            7, 7, 0, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes2Mod         2, 2, 1, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes2ModDynamic  2, 2, 1, 0, DYNAMIC, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes2Mod1        3, 3, 1, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes2ModOperand  6, 4, 1, 0, 0, &CDetourDis::CopyBytes
+#define ENTRY_CopyBytes3Mod         3, 3, 2, 0, 0, &CDetourDis::CopyBytes // SSE3 0F 38 opcode modrm
+#define ENTRY_CopyBytes3Mod1        4, 4, 2, 0, 0, &CDetourDis::CopyBytes // SSE3 0F 3A opcode modrm .. imm8
 #define ENTRY_CopyBytesPrefix       ENTRY_DataIgnored &CDetourDis::CopyBytesPrefix
 #define ENTRY_CopyBytesSegment      ENTRY_DataIgnored &CDetourDis::CopyBytesSegment
 #define ENTRY_CopyBytesRax          ENTRY_DataIgnored &CDetourDis::CopyBytesRax
@@ -313,7 +312,7 @@ class CDetourDis
 
     LONG                m_lScratchExtra;
     PBYTE               m_pbScratchTarget;
-    BYTE                m_rbScratchDst[64];
+    BYTE                m_rbScratchDst[64]; // matches or exceeds rbCode
 };
 
 PVOID WINAPI DetourCopyInstruction(_In_opt_ PVOID pDst,
@@ -418,15 +417,7 @@ PBYTE CDetourDis::CopyBytes(REFCOPYENTRY pEntry, PBYTE pbDst, PBYTE pbSrc)
         }
 #ifdef DETOURS_X64
         else if (bFlags & RIP) {
-            UINT nTargetBack = pEntry->nTargetBack;
-            // nTargetBack describes immediate bytes at the end: 1, 2, or 4.
-            // 2 vs. 4 is selected via 66 operand size override.
-            ASSERT(nTargetBack == 0 || nTargetBack == 1 || nTargetBack == 4);
-            if (nTargetBack == 4 && m_bOperandOverride && !m_bRaxOverride) {
-                nTargetBack = 2;
-            }
-
-            nRelOffset = nBytes - (4 + nTargetBack);
+            nRelOffset = nModOffset + 1;
             cbTarget = 4;
         }
 #endif
@@ -2547,7 +2538,7 @@ class CDetourDis
     PBYTE   m_pbPool;
     LONG    m_lExtra;
 
-    BYTE    m_rbScratchDst[64];
+    BYTE    m_rbScratchDst[64]; // matches or exceeds rbCode
 
     static const COPYENTRY s_rceCopyTable[33];
 };
@@ -3695,15 +3686,26 @@ class CDetourDis
         {
             DWORD Opcode1 : 5;      // Must be 00000 == 0
             DWORD Rn : 5;           // Register number
-            DWORD Opcode2 : 22;     // Must be 1101011000011111000000 == 0x3587c0
+            DWORD Opcode2 : 22;     // Must be 1101011000011111000000 == 0x3587c0 for Br
+                                    //                                   0x358fc0 for Brl
         } s;
-        static DWORD AssembleBr(DWORD rn)
+        static DWORD Assemble(DWORD rn, bool link)
         {
             Br temp;
             temp.s.Opcode1 = 0;
             temp.s.Rn = rn;
             temp.s.Opcode2 = 0x3587c0;
+            if (link)
+                temp.Assembled |= 0x00200000;
             return temp.Assembled;
+        }
+        static DWORD AssembleBr(DWORD rn)
+        {
+            return Assemble(rn, false);
+        }
+        static DWORD AssembleBrl(DWORD rn)
+        {
+            return Assemble(rn, true);
         }
     };
 
@@ -3848,6 +3850,8 @@ class CDetourDis
     BYTE    CopyAdr(BYTE* pSource, BYTE* pDest, ULONG instruction);
     BYTE    CopyBcc(BYTE* pSource, BYTE* pDest, ULONG instruction);
     BYTE    CopyB(BYTE* pSource, BYTE* pDest, ULONG instruction);
+    BYTE    CopyBl(BYTE* pSource, BYTE* pDest, ULONG instruction);
+    BYTE    CopyB_or_Bl(BYTE* pSource, BYTE* pDest, ULONG instruction, bool link);
     BYTE    CopyCbz(BYTE* pSource, BYTE* pDest, ULONG instruction);
     BYTE    CopyTbz(BYTE* pSource, BYTE* pDest, ULONG instruction);
     BYTE    CopyLdrLiteral(BYTE* pSource, BYTE* pDest, ULONG instruction);
@@ -3866,7 +3870,7 @@ class CDetourDis
 
   protected:
     PBYTE   m_pbTarget;
-    BYTE    m_rbScratchDst[64];
+    BYTE    m_rbScratchDst[128]; // matches or exceeds rbCode
 };
 
 BYTE CDetourDis::PureCopy32(BYTE* pSource, BYTE* pDest)
@@ -3899,7 +3903,7 @@ PBYTE CDetourDis::CopyInstruction(PBYTE pDst,
     } else if ((Instruction & 0xff000010) == 0x54000000) {
         CopiedSize = CopyBcc(pSrc, pDst, Instruction);
     } else if ((Instruction & 0x7c000000) == 0x14000000) {
-        CopiedSize = CopyB(pSrc, pDst, Instruction);
+        CopiedSize = CopyB_or_Bl(pSrc, pDst, Instruction, (Instruction & 0x80000000) != 0);
     } else if ((Instruction & 0x7e000000) == 0x34000000) {
         CopiedSize = CopyCbz(pSrc, pDst, Instruction);
     } else if ((Instruction & 0x7e000000) == 0x36000000) {
@@ -4060,7 +4064,7 @@ BYTE CDetourDis::CopyBcc(BYTE* pSource, BYTE* pDest, ULONG instruction)
     return (BYTE)((BYTE*)pDstInst - pDest);
 }
 
-BYTE CDetourDis::CopyB(BYTE* pSource, BYTE* pDest, ULONG instruction)
+BYTE CDetourDis::CopyB_or_Bl(BYTE* pSource, BYTE* pDest, ULONG instruction, bool link)
 {
     Branch26& decoded = (Branch26&)(instruction);
     PULONG pDstInst = (PULONG)(pDest);
@@ -4069,20 +4073,30 @@ BYTE CDetourDis::CopyB(BYTE* pSource, BYTE* pDest, ULONG instruction)
     m_pbTarget = pTarget;
     LONG64 delta = pTarget - pDest;
 
-    // output as B
+    // output as B or BRL
     if (delta >= -(1 << 27) && (delta < (1 << 27)))
     {
-        EmitInstruction(pDstInst, Branch26::AssembleB((LONG)delta));
+        EmitInstruction(pDstInst, Branch26::Assemble(link, (LONG)delta));
     }
 
-    // output as MOV x17, Target; BR x17 (BIG assumption that x17 isn't being used for anything!!)
+    // output as MOV x17, Target; BR or BRL x17 (BIG assumption that x17 isn't being used for anything!!)
     else
     {
         EmitMovImmediate(pDstInst, 17, (ULONG_PTR)pTarget);
-        EmitInstruction(pDstInst, Br::AssembleBr(17));
+        EmitInstruction(pDstInst, Br::Assemble(17, link));
     }
 
     return (BYTE)((BYTE*)pDstInst - pDest);
+}
+
+BYTE CDetourDis::CopyB(BYTE* pSource, BYTE* pDest, ULONG instruction)
+{
+    return CopyB_or_Bl(pSource, pDest, instruction, false);
+}
+
+BYTE CDetourDis::CopyBl(BYTE* pSource, BYTE* pDest, ULONG instruction)
+{
+    return CopyB_or_Bl(pSource, pDest, instruction, true);
 }
 
 BYTE CDetourDis::CopyCbz(BYTE* pSource, BYTE* pDest, ULONG instruction)
