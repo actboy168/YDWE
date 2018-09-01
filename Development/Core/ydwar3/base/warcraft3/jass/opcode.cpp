@@ -113,7 +113,7 @@ namespace base { namespace warcraft3 { namespace jass {
 				fprintf(f, "mov r%02X, %s: %s\n", op->r1, get_typename(op->r2), from_stringid(op->arg));
 				break;
 			case OPTYPE_MOVRCODE:
-				fprintf(f, "mov r%02X, %s: %s\n", op->r1, get_typename(op->r2), from_stringid(op->arg));
+				fprintf(f, "mov r%02X, function %s\n", op->r1, from_stringid(op->arg));
 				break;
 			case OPTYPE_MOVRA:
 				fprintf(f, "mov r%02X, %s: %s[r%02X]\n", op->r1, get_typename(op->r3), from_stringid(op->arg), op->r2);
@@ -196,6 +196,7 @@ namespace base { namespace warcraft3 { namespace jass {
 			case OPTYPE_JUMPIFFALSE:
 				fprintf(f, "jf r%02X, %08x\n", op->r1, op->arg);
 				break;
+			case OPTYPE_OLDJUMP:
 			case OPTYPE_JUMP:
 				fprintf(f, "jmp %08x\n", op->arg);
 				break;

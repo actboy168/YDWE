@@ -20,7 +20,7 @@ namespace base { namespace warcraft3 { namespace jass {
 	{
 		OPTYPE_MINLIMIT     = 0x00,
 		OPTYPE_ENDPROGRAM   = 0x01,
-		OPTYPE_UNKNOWN_02   = 0x02,
+		OPTYPE_OLDJUMP      = 0x02,
 		OPTYPE_FUNCTION     = 0x03,
 		OPTYPE_ENDFUNCTION  = 0x04,
 		OPTYPE_LOCAL        = 0x05,
