@@ -75,7 +75,7 @@ end
 
 local function unpack_data(name)
     local id, type = unpack 'c4l'
-    local id = string_unpack('z', id)
+    local id = id:match '%Z+'
     local except
     local meta = metadata[id]
     if meta then
