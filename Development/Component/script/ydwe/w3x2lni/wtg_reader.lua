@@ -15,6 +15,7 @@ local var_map
 local unknowtypes
 local unknowindex
 local max_guess_arg
+local max_child_id
 
 local function assert_then_retry(b, info)
     if b then
@@ -86,6 +87,26 @@ local function new_unknow()
     table.insert(unknowtypes, name)
     return name
 end
+
+local multiple = {
+    YDWERegionMultiple                  = 1,
+    YDWEEnumUnitsInRangeMultiple        = 1,
+    YDWEForLoopLocVarMultiple           = 1,
+    YDWETimerStartMultiple              = 2,
+    YDWERegisterTriggerMultiple         = 3,
+    YDWEExecuteTriggerMultiple          = 1,
+    IfThenElseMultiple                  = 3,
+    ForLoopAMultiple                    = 1,
+    ForLoopBMultiple                    = 1,
+    ForLoopVarMultiple                  = 1,
+    ForGroupMultiple                    = 1,
+    EnumDestructablesInRectAllMultiple  = 1,
+    EnumDestructablesInCircleBJMultiple = 1,
+    ForForceMultiple                    = 1,
+    EnumItemsInRectBJMultiple           = 1,
+    AndMultiple                         = 1,
+    OrMultiple                          = 1,
+}
 
 local type_map = {
     [0] = 'event',
@@ -335,7 +356,8 @@ function read_eca(is_child)
     eca.type = unpack 'l'
     if is_child then
         eca.child_id = unpack 'l'
-        assert_then_retry(eca.child_id < 256, 'eca.child_id 错误')
+        assert_then_retry(max_child_id, 'eca.child_id 错误')
+        assert_then_retry(eca.child_id < max_child_id and eca.child_id >= 0, 'eca.child_id 错误')
     end
     eca.name   = unpack 'z'
     eca.enable = unpack 'l'
@@ -343,6 +365,8 @@ function read_eca(is_child)
     assert_then_retry(type_map[eca.type], 'eca.type 错误')
     assert_then_retry(eca.name:match '^[%g%s]*$', ('eca.name 错误：[%s]'):format(eca.name))
     assert_then_retry(eca.enable == 0 or eca.enable == 1, 'eca.enable 错误')
+
+    max_child_id = multiple[eca.name] or max_child_id
 
     local args
     local ui = get_ui_define(type_map[eca.type], eca.name)
