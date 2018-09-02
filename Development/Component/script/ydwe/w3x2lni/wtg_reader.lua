@@ -335,6 +335,7 @@ function read_eca(is_child)
     eca.type = unpack 'l'
     if is_child then
         eca.child_id = unpack 'l'
+        assert_then_retry(eca.child_id < 256, 'eca.child_id 错误')
     end
     eca.name   = unpack 'z'
     eca.enable = unpack 'l'
