@@ -200,7 +200,7 @@ function event.EVENT_WE_START(event_data)
 	log.debug("********************* on startup start *********************")
 
 	-- 读取版本
-	ydwe_version = sys.version { file = fs.ydwe_path() / "ydwe.exe" }
+	ydwe_version = sys.version { file = fs.ydwe_path() / "bin" / "ydbase.dll" }
 	war3_version = sys.war3_version { file = fs.war3_path() / "game.dll" }
 
 	log.debug("ydwe version " .. tostring(ydwe_version))
