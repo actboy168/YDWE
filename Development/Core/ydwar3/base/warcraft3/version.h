@@ -6,7 +6,6 @@ namespace base { namespace warcraft3 {
 		version_100  = 4448,
 		version_101  = 4482,
 		version_101b = 4483,
-		//version_101c = (?),
 		version_102  = 4531,
 		version_102a = 4563,
 		version_103  = 4653,
