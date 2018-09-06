@@ -41,7 +41,8 @@ local function do_command(script, ...)
     local err = stderr:read 'a'
     local exit_code = p:wait()
     p:close()
-    if err == '' then
+    log.debug('exit_code', exit_code)
+    if exit_code == 0 then
         return true
     else
         log.error(err)
