@@ -52,21 +52,26 @@ endfunction
 
 function YDWEAnyUnitDamagedEnumUnit takes nothing returns nothing
     local group g = CreateGroup()
-    local rect world = GetWorldBounds()
-    call GroupEnumUnitsInRect(g, world, Condition(function YDWEAnyUnitDamagedFilter))
+    local integer i = 0
+    loop
+        call GroupEnumUnitsOfPlayer(g, Player(i), Condition(function YDWEAnyUnitDamagedFilter))
+        set i = i + 1
+        exitwhen i >= bj_MAX_PLAYER_SLOTS
+    endloop
     call DestroyGroup(g)
-    call RemoveRect(world)
     set g = null
-    set world = null
 endfunction
 
 function YDWEAnyUnitDamagedRegistTriggerUnitEnter takes nothing returns nothing
     local trigger t = CreateTrigger()
     local region  r = CreateRegion()
-    call RegionAddRect(r, GetWorldBounds())
+    local rect world = GetWorldBounds()
+    call RegionAddRect(r, world)
     call TriggerRegisterEnterRegion(t, r, Condition(function YDWEAnyUnitDamagedFilter))
-    set r = null
+    call RemoveRect(world)
     set t = null
+    set r = null
+    set world = null
 endfunction
 
 // 将 yd_DamageEventTrigger 移入销毁队列, 从而排泄触发器事件
