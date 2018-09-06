@@ -50,11 +50,14 @@ function YDWEAnyUnitDamagedFilter takes nothing returns boolean
     return false
 endfunction
 
-function YDWEAnyUnitDamagedEnumUnit takes nothing returns nothing   
+function YDWEAnyUnitDamagedEnumUnit takes nothing returns nothing
     local group g = CreateGroup()
-    call GroupEnumUnitsInRect(g, GetWorldBounds(), Condition(function YDWEAnyUnitDamagedFilter))
+    local rect world = GetWorldBounds()
+    call GroupEnumUnitsInRect(g, world, Condition(function YDWEAnyUnitDamagedFilter))
     call DestroyGroup(g)
+    call RemoveRect(world)
     set g = null
+    set world = null
 endfunction
 
 function YDWEAnyUnitDamagedRegistTriggerUnitEnter takes nothing returns nothing
