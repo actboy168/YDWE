@@ -2,8 +2,8 @@ require 'filesystem'
 local lni = require 'lni'
 local define = require 'share.config_define'
 local root = require 'backend.w2l_path'
-local default_config = lni.classics(io.load(root / 'script' / 'share' / 'config.ini'), 'script\\share\\config.ini')
-local global_config  = lni.classics(io.load(root / 'config.ini'), 'config.ini')
+local default_config = lni.classics(assert(io.load(root / 'script' / 'share' / 'config.ini')), 'script\\share\\config.ini')
+local global_config  = lni.classics(assert(io.load(root / 'config.ini')), 'config.ini')
 local map_config = {}
 
 local config = {}
