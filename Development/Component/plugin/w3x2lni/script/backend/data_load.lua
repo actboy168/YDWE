@@ -1,5 +1,6 @@
 require 'utility'
 local root = require 'backend.w2l_path'
+local lang = require 'share.lang'
 
 local function ydwe_ui(w2l)
     local ydwe_path = require 'backend.ydwe_path'
