@@ -393,7 +393,7 @@ LRESULT __fastcall CWindowWnd::WindowProc(CWindowWnd* pThis, int Edx, HWND hWnd,
 		LRESULT lRes = ::DefWindowProcW(pThis->m_hWnd, uMsg, wParam, lParam);
 		pThis->m_hWnd = NULL;
 		pThis->OnFinalMessage(hWnd);
-		thunk::destory(m_thunk);
+		thunk::destory(pThis->m_thunk);
 		return lRes;
 	}
 	else
