@@ -1,9 +1,9 @@
 local ffi = require 'ffi'
 local uni = require 'ffi.unicode'
+local getmodule = require 'ffi.getmodule'
 
 ffi.cdef[[
     int LoadLibraryW(const wchar_t* libname);
-    int GetModuleHandleW(const wchar_t* libname);
 ]]
 
 local function getfullpath(name)
@@ -24,8 +24,7 @@ local function getfullpath(name)
 end
 
 return function(name)
-	local wpath = uni.u2w(name)
-    local h = ffi.C.GetModuleHandleW(wpath)
+    local h = getmodule(name)
     if h ~= 0 then
         return h
     end

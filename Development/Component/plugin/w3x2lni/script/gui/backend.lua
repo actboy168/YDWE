@@ -145,9 +145,6 @@ function backend:open(entry, commandline)
     local p = process()
     local stdout = p:std_output()
     local stderr = p:std_error()
-    local filemode = require 'ffi.filemode'
-    filemode(stdout, 'b')
-    filemode(stderr, 'b')
     p:set_console('disable')
     if not p:create(self.application, ('"%s" -E -e "package.cpath=[[%s]]" "%s" %s'):format(self.application:string(), package.cpath, entry, commandline), self.currentdir) then
         return
