@@ -32,7 +32,6 @@ enum GUIID_User_Defined
   CC_GUIID_YDWEGetObjectPropertyString,
   CC_GUIID_YDWERegionMultiple,
   CC_GUIID_YDWEExecuteTriggerMultiple,
-  CC_GUIID_YDWEMoverMultiple,
 };
 //--------------------------------------------------------
 //  WE_Defined_ID
