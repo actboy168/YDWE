@@ -446,7 +446,7 @@ LUA_API lua_Hook (lua_gethook) (lua_State *L);
 LUA_API int (lua_gethookmask) (lua_State *L);
 LUA_API int (lua_gethookcount) (lua_State *L);
 
-LUA_API const void* (lua_getproto)(lua_State *L, int idx);
+LUA_API lua_Integer (lua_getprotohash)(lua_State *L, int idx);
 
 
 struct lua_Debug {

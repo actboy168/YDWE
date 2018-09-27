@@ -39,9 +39,9 @@
 #define _CRT_SECURE_NO_WARNINGS  /* avoid warnings about ISO C functions */
 #endif
 
-#ifndef lua_c
+#if !defined(lua_c) && !defined(luac_c)
 #include "build/utf8/utf8_crt.h"
-#ifndef lundump_c
+#if !defined(lundump_c)
 #include <Windows.h>
 #endif
 #define fopen(...) utf8_fopen(__VA_ARGS__)
