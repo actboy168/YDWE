@@ -25,7 +25,7 @@ namespace logging {
 #else
 		sprintf(str,
 #endif
-			"%04d-%02d-%02d %02d:%02d:%02d.%3ld", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec, usec / 1000);
+			"%04d-%02d-%02d %02d:%02d:%02d.%03ld", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec, usec / 1000);
 
 		return str;
 	}
@@ -134,14 +134,14 @@ namespace logging {
 			, stream_(new std::stringstream)
 		{
 			static const char* s_lvlstring[] = {
-				"trace",
-				"debug",
-				"info ",
-				"warn ",
-				"error",
-				"fatal"
+				"[info] ",
+				"[info] ",
+				"[info] ",
+				"[warn] ",
+				"[error]",
+				"[fatal]"
 			};
-			*stream_ << time_now_string() << " " << "[" << logger.name() << "]-[" << s_lvlstring[lvl] << "] ";
+			*stream_ << time_now_string() << " " << s_lvlstring[lvl] << " [" << logger.name() << "] ";
 		}
 	
 		record_pump(record_pump&& that)

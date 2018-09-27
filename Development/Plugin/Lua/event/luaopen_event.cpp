@@ -114,7 +114,7 @@ static int import_customdata(lua_State* L)
 
 int luaopen_event(lua_State* L)
 {
-	NYDWE::lg = logging::get_logger(L, "event");
+	NYDWE::lg = logging::get_logger(L, "events");
 	NYDWE::SetupEvent();
 
 	lua_newtable(L);

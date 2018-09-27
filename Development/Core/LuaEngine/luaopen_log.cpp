@@ -40,7 +40,7 @@ int llog_print(lua_State *L)
 
 int luaopen_log(lua_State* L)
 {
-	logging::logger* lg = logging::get_logger(L, "lua");
+	logging::logger* lg = logging::get_logger(L, "script");
 
 	struct llog_Reg {
 		const char *name;
