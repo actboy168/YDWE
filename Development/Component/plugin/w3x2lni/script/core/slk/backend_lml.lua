@@ -39,7 +39,7 @@ end
 
 local function lml_key(str)
     if type(str) == 'string' then
-        if find(str, "[%s%:%'%c]") then
+        if find(str:match '^%s*(.-)%s*$', "[%s%:%'%c]") then
             str = format("'%s'", gsub(str, "'", "''"))
         end
     end
@@ -67,6 +67,7 @@ end
 
 local function get_path(path, used, index,  max)
     local fmt = ('%%0%dd-%%s'):format(#tostring(max))
+    path = path:match '^%s*(.-)%s*$'
     path = path:gsub('[$\\$/$:$*$?$"$<$>$|]', '_')
     path = fmt:format(index, path)
     while used[path:lower()] do
@@ -121,13 +122,13 @@ local function read_dirs(map)
     local lml = { '', false }
     for i, dir in ipairs(wtg.categories) do
         local filename = map[dir.id][1]
-        local dir_data = { dir.name, filename }
+        local dir_data = { filename, dir.name }
         if dir.comment == 1 then
             dir_data[#dir_data+1] = { lang.lml.COMMENT, false }
         end
 
         for i, trg in ipairs(dirs[dir.id]) do
-            local trg_data = { trg.name, map[dir.id][trg.name] }
+            local trg_data = { map[dir.id][trg.name], trg.name }
             if trg.type == 1 then
                 trg_data[#trg_data+1] = { lang.lml.COMMENT }
             end

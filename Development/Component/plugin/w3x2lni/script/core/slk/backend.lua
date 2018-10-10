@@ -74,6 +74,8 @@ local function convert_wtg(w2l)
         local version = w2l:file_load('w3x2lni', 'version\\lml')
         if version == nil then
             w2l.frontend_lml = w2l.frontend_lml_v0
+        elseif version == '1' then
+            w2l.frontend_lml = w2l.frontend_lml_v1
         end
         wtg_data, wct_data = w2l:frontend_lml(function (filename)
             local buf = w2l:file_load('trigger', filename)
@@ -89,7 +91,7 @@ local function convert_wtg(w2l)
     local need_convert_wtg = true
     if wtg_data and wct_data and not w2l.setting.remove_we_only then
         if w2l.setting.mode == 'lni' then
-            w2l:file_save('w3x2lni', 'version\\lml', '1')
+            w2l:file_save('w3x2lni', 'version\\lml', '2')
             local files = w2l:backend_lml(wtg_data, wct_data, w2l.slk.wts)
             for filename, buf in pairs(files) do
                 w2l:file_save('trigger', filename, buf)
