@@ -482,7 +482,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		return false;
 	}
 	
-	uint32_t  __cdecl EXGetAbilityDataReal(uint32_t ability_handle, uint32_t level, uint32_t state_type)
+	jass::jreal_t    __cdecl EXGetAbilityDataReal(jass::jhandle_t ability_handle, jass::jinteger_t level, jass::jinteger_t state_type)
 	{
 		switch (state_type)
 		{
@@ -516,7 +516,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		return jass::to_real(0.f);
 	}
 
-	bool      __cdecl EXSetAbilityDataReal(uint32_t ability_handle, uint32_t level, uint32_t state_type, uint32_t* value_ptr)
+	jass::jboolean_t __cdecl EXSetAbilityDataReal(jass::jhandle_t ability_handle, jass::jinteger_t level, jass::jinteger_t state_type, jass::jreal_t* value_ptr)
 	{
 		switch (state_type)
 		{
@@ -551,7 +551,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		return false;
 	}
 
-	uint32_t  __cdecl EXGetAbilityDataInteger(uint32_t ability_handle, uint32_t level, uint32_t state_type)
+	jass::jinteger_t __cdecl EXGetAbilityDataInteger(jass::jhandle_t ability_handle, jass::jinteger_t level, jass::jinteger_t state_type)
 	{
 		switch (state_type)
 		{
@@ -588,7 +588,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		return 0;
 	}
 
-	bool      __cdecl EXSetAbilityDataInteger(uint32_t ability_handle, uint32_t level, uint32_t state_type, uint32_t value)
+	jass::jboolean_t __cdecl EXSetAbilityDataInteger(jass::jhandle_t ability_handle, jass::jinteger_t level, jass::jinteger_t state_type, jass::jinteger_t value)
 	{
 		switch (state_type)
 		{
