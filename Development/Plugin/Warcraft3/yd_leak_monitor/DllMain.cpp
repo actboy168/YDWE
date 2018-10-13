@@ -223,18 +223,34 @@ public:
 		insert(std::make_pair(handle, hi));
 	}
 
-	void add_reference(e_type type, base::warcraft3::hashtable::variable_node& var)
+	void add_global_reference(base::warcraft3::hashtable::variable_node& var)
 	{
 		base::warcraft3::jass::global_variable gv(&var);
 		if (base::warcraft3::jass::OPCODE_VARIABLE_HANDLE == gv.type())
 		{
-			add_reference(type, (uint32_t)gv, gv.name());
+			add_reference(handle_table::e_type::global, (uint32_t)gv, gv.name());
 		}
 		else if (base::warcraft3::jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type())
 		{
 			for (uint32_t i = 0; i < gv.array_size(); ++i)
 			{
-				add_reference(type, gv[i], base::format("%s[%d]", gv.name(), i));
+				add_reference(handle_table::e_type::global, gv[i], base::format("%s[%d]", gv.name(), i));
+			}
+		}
+	}
+
+	void add_local_reference(base::warcraft3::hashtable::variable_node& var, const std::string& funcname)
+	{
+		base::warcraft3::jass::global_variable gv(&var);
+		if (base::warcraft3::jass::OPCODE_VARIABLE_HANDLE == gv.type())
+		{
+			add_reference(handle_table::e_type::local, (uint32_t)gv, base::format("%s!%s", funcname, gv.name()));
+		}
+		else if (base::warcraft3::jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type())
+		{
+			for (uint32_t i = 0; i < gv.array_size(); ++i)
+			{
+				add_reference(handle_table::e_type::local, gv[i], base::format("%s!%s[%d]", funcname, gv.name(), i));
 			}
 		}
 	}
@@ -288,16 +304,23 @@ void create_report(std::fstream& fs)
 			break;
 		}
 		stackframe_t* frame = vm->stackframe;
+		jass::opcode* op = vm->opcode - 1;
 		while (frame) {
+			struct jass::opcode *func;
+			for (func = op; func->op != jass::OPTYPE_FUNCTION; --func)
+			{ }
+			std::string funcname = jass::from_stringid(func->arg);
+
 			hashtable::variable_table* vt = &(frame->local_table);
 			if (vt) {
 				for (auto it = vt->begin(); it != vt->end(); ++it) {
-					ht.add_reference(handle_table::e_type::local, *it);
+					ht.add_local_reference(*it, funcname);
 				}
 			}
 			frame = frame->next;
 			uintptr_t code = frame->codes[frame->index]->code;
-			if (!(jass::opcode*)(vm->symbol_table->unk0 + code * 4)) {
+			op = (jass::opcode*)(vm->symbol_table->unk0 + code * 4);
+			if (!op) {
 				break;
 			}
 		}
@@ -306,7 +329,7 @@ void create_report(std::fstream& fs)
 	hashtable::variable_table* vt = get_jass_vm()->global_table;
 	for (auto it = vt->begin(); it != vt->end(); ++it)
 	{
-		ht.add_reference(handle_table::e_type::global, *it);
+		ht.add_global_reference(*it);
 	}
 
 	ht.update_pos(commonj::location, monitor::handle_manager<commonj::location>::instance());
@@ -353,10 +376,14 @@ void create_report(std::fstream& fs)
 
 			fs << base::format("  创建位置: %s, %d", jass::from_stringid(op->arg), current_op - op) << std::endl;
 		}
-		if (!h.global_reference.empty())
+		if (!h.global_reference.empty() || !h.local_reference.empty())
 		{
-			fs << base::format("  引用它的全局变量:") << std::endl;
+			fs << base::format("  引用它的变量:") << std::endl;
 			for (auto gv = h.global_reference.begin(); gv != h.global_reference.end(); ++gv)
+			{
+				fs << base::format("    | %s", gv->c_str()) << std::endl;
+			}
+			for (auto gv = h.local_reference.begin(); gv != h.local_reference.end(); ++gv)
 			{
 				fs << base::format("    | %s", gv->c_str()) << std::endl;
 			}

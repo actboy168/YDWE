@@ -71,7 +71,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 
 	struct jass::opcode* current_opcode(base::warcraft3::jass_vm_t* vm)
 	{
-		return *(struct jass::opcode**)((int)vm + 0x20) - 1;
+		return vm->opcode - 1;
 	}
 
 	struct jass::opcode* show_pos(struct jass::opcode* current_op)

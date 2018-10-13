@@ -6,7 +6,9 @@
 #include <cstring>
 
 namespace base { namespace warcraft3 {
-
+	namespace jass {
+		struct opcode;
+	}
 	namespace hashtable
 	{
 		struct node;
@@ -362,7 +364,9 @@ namespace base { namespace warcraft3 {
 
 	struct jass_vm_t
 	{
-		char                         unk0[0x2850];
+		char                         unk[0x20];
+		jass::opcode*                opcode;
+		char                         unk0[0x282C];
 		uint32_t                     index;                 //0x2850
 		uint32_t                     unk1;
 		symbol_table_t*              symbol_table;          //0x2858
