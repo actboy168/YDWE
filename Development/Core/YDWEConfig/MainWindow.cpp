@@ -270,7 +270,7 @@ void CMainWindow::ConfigToUI(base::ini::table& table)
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
 			if (m_comboboxs[name]) {
-				std::wstring font_name = base::u2w(table[attribute.Section()][name]);
+				std::wstring font_name = base::u2w(table[attribute.Section()][name], base::conv_method::replace | '?');
 				for (int i = 0; i < m_comboboxs[name]->GetCount(); ++i)
 				{
 					if (font_name == ((DuiLib::CListLabelElementUI*)m_comboboxs[name]->GetItemAt(i))->GetText())
