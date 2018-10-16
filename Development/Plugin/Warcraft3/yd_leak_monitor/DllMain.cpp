@@ -7,10 +7,12 @@
 #include <base/warcraft3/jass/hook.h>
 #include <base/warcraft3/jass/opcode.h>
 #include <base/warcraft3/war3_searcher.h>
+#include <base/warcraft3/version.h>
 #include <base/util/format.h>
 #include <base/util/unicode.h>
 #include <map>
 #include <fstream>
+#include "hashtable.h"
 
 #pragma execution_character_set("utf-8")
 
@@ -183,6 +185,7 @@ struct handle_info
 	const char* type;
 	std::vector<std::string> global_reference;
 	std::vector<std::string> local_reference;
+	std::vector<std::string> hashtable_reference;
 
 	handle_info()
 		: handle(0)
@@ -209,13 +212,21 @@ class handle_table
 	: public std::map<uint32_t, handle_info>
 {
 public:
+	std::map<uint32_t, uint32_t> htmgr;
+
 	enum e_type {
 		local,
 		global,
+		hashtable,
 	};
 
 	void add_handle(uint32_t handle, uint32_t object, uint32_t reference)
 	{
+		if (object && base::warcraft3::get_object_type(object) == 'ghth') {
+			uint32_t id = *(uint32_t*)(object + 0x24);
+			htmgr[id] = handle;
+		}
+
 		handle_info hi;
 		hi.handle = handle;
 		hi.object = object;
@@ -255,6 +266,16 @@ public:
 		}
 	}
 
+	void add_hashtable_reference(uint32_t ht, uint32_t t, uint32_t k, uint32_t handle)
+	{
+		auto it = htmgr.find(ht);
+		if (it == htmgr.end()) {
+			add_reference(handle_table::e_type::hashtable, handle, base::format("handle: unknown [%d][%d]", t, k));
+			return;
+		}
+		add_reference(handle_table::e_type::hashtable, handle, base::format("handle: 0x%08x [%d][%d]", it->second, t, k));
+	}
+
 	void add_reference(e_type type, uint32_t handle, const std::string& name)
 	{
 		auto it = find(handle);
@@ -267,6 +288,9 @@ public:
 			break;
 		case e_type::global:
 			it->second.global_reference.push_back(name);
+			break;
+		case e_type::hashtable:
+			it->second.hashtable_reference.push_back(name);
 			break;
 		}
 	}
@@ -332,6 +356,14 @@ void create_report(std::fstream& fs)
 		ht.add_global_reference(*it);
 	}
 
+	if (base::warcraft3::get_war3_searcher().get_version() >= base::warcraft3::version_124b) {
+		ht::hashtableEachHandle([&](uint32_t hashtable, uint32_t t, uint32_t k, uint32_t v)
+		{
+			ht.add_hashtable_reference(hashtable, t, k, v);
+		});
+
+	}
+
 	ht.update_pos(commonj::location, monitor::handle_manager<commonj::location>::instance());
 	ht.update_pos(commonj::effect,   monitor::handle_manager<commonj::effect>::instance());
 	ht.update_pos(commonj::group,    monitor::handle_manager<commonj::group>::instance());
@@ -384,6 +416,14 @@ void create_report(std::fstream& fs)
 				fs << base::format("    | %s", gv->c_str()) << std::endl;
 			}
 			for (auto gv = h.local_reference.begin(); gv != h.local_reference.end(); ++gv)
+			{
+				fs << base::format("    | %s", gv->c_str()) << std::endl;
+			}
+		}
+		if (!h.hashtable_reference.empty())
+		{
+			fs << base::format("  引用它的hashtable:") << std::endl;
+			for (auto gv = h.hashtable_reference.begin(); gv != h.hashtable_reference.end(); ++gv)
 			{
 				fs << base::format("    | %s", gv->c_str()) << std::endl;
 			}
@@ -453,6 +493,7 @@ uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 
 	return base::c_call<uint32_t>(RealGetLocalizedHotkey, s);
 }
+
 
 void Initialize()
 {
