@@ -12,7 +12,6 @@
 #include <base/util/unicode.h>
 #include <map>
 #include <fstream>
-#include "hashtable.h"
 
 #pragma execution_character_set("utf-8")
 
@@ -354,14 +353,6 @@ void create_report(std::fstream& fs)
 	for (auto it = vt->begin(); it != vt->end(); ++it)
 	{
 		ht.add_global_reference(*it);
-	}
-
-	if (base::warcraft3::get_war3_searcher().get_version() >= base::warcraft3::version_124b) {
-		ht::hashtableEachHandle([&](uint32_t hashtable, uint32_t t, uint32_t k, uint32_t v)
-		{
-			ht.add_hashtable_reference(hashtable, t, k, v);
-		});
-
 	}
 
 	ht.update_pos(commonj::location, monitor::handle_manager<commonj::location>::instance());

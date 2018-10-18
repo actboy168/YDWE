@@ -81,6 +81,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="handle_scanner.cpp" />
+    <ClCompile Include="hashtable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="yd_jass_debug.def" />
@@ -95,6 +97,10 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="handle_scanner.h" />
+    <ClInclude Include="hashtable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
