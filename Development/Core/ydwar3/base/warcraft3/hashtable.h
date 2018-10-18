@@ -149,6 +149,11 @@ namespace base { namespace warcraft3 {
 				, index_(0)
 				, current_(nullptr)
 			{
+				if (!ptr_->entry_)
+				{
+					ptr_ = nullptr;
+					return;
+				}
 				operator++();
 			}
 
