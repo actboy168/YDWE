@@ -105,23 +105,33 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 
 	static int handlemax(lua_State* L)
 	{
-		hashtable::reverse_table* table = &((*get_jass_vm()->handle_table)->table);
-		lua_pushinteger(L, table->size);
+		handle_table_t** hts = get_jass_vm()->handle_table;
+		if (hts) {
+			hashtable::reverse_table& table = (*hts)->table;
+			lua_pushinteger(L, table.size);
+			return 1;
+		}
+		lua_pushinteger(L, 0);
 		return 1;
 	}
 
 	static int handlecount(lua_State* L)
 	{
-		hashtable::reverse_table* table = &((*get_jass_vm()->handle_table)->table);
-		uint32_t n = 0;
-		for (uint32_t i = 1; i < table->size * 3; i += 3)
-		{
-			if (0 != (uintptr_t)table->at(i))
+		handle_table_t** hts = get_jass_vm()->handle_table;
+		if (hts) {
+			hashtable::reverse_table& table = (*hts)->table;
+			uint32_t n = 0;
+			for (uint32_t i = 1; i < table.size * 3; i += 3)
 			{
-				n++;
+				if (0 != (uintptr_t)table.at(i))
+				{
+					n++;
+				}
 			}
+			lua_pushinteger(L, n);
+			return 1;
 		}
-		lua_pushinteger(L, n);
+		lua_pushinteger(L, 0);
 		return 1;
 	}
 
