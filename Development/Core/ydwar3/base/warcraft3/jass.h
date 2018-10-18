@@ -64,6 +64,7 @@ namespace base { namespace warcraft3 { namespace jass {
 	_WAR3_API jstring_t   create_string  (const char* val);
 	_WAR3_API const char* from_trigstring(const char* val);
 	_WAR3_API const char* from_stringid  (uint32_t strid);
+	_WAR3_API uint32_t    to_stringid    (const char* str);
 
 	_WAR3_API void        handle_ref     (jhandle_t h);
 	_WAR3_API void        handle_unref   (jhandle_t h);

@@ -3,6 +3,7 @@
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/jass/trampoline.h>
 #include <base/warcraft3/jass/hook.h>
+#include <base/warcraft3/jass.h>
 #include <base/util/singleton.h>
 #include <base/util/do_once.h>
 #include <base/hook/fp_call.h>
@@ -42,7 +43,7 @@ namespace base { namespace warcraft3 { namespace jass {
 			if (!initialized)
 			{
 				initialized = true;
-				jump_function_id = get_jass_vm()->symbol_table->string_table->get("IsUnitInRangeXY")->index_;
+				jump_function_id = jass::to_stringid("IsUnitInRangeXY");
 				table_hook("IsUnitInRangeXY", (uintptr_t*)&detail::RealIsUnitInRangeXY, (uintptr_t)detail::FakeIsUnitInRangeXY);
 			}
 		}

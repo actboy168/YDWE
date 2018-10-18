@@ -187,6 +187,11 @@ namespace base { namespace warcraft3 { namespace jass {
 		return get_jass_vm()->symbol_table->string_table->at(strid)->str_;
 	}
 
+	uint32_t to_stringid(const char* str)
+	{
+		return get_jass_vm()->symbol_table->string_table->get(str)->index_;
+	}
+
 	void handle_set_ref(jass::jhandle_t h, bool dec)
 	{
 		jass_vm_t* vm = get_jass_vm();
