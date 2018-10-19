@@ -9,6 +9,7 @@
 #include <base/util/console.h>
 #include <base/util/format.h>
 #include <iostream>
+#include "handle_scanner.h"
 
 namespace base { namespace warcraft3 { namespace jdebug {
 	
@@ -110,9 +111,9 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		std::cout << "---------------------------------------" << std::endl;
 	}
 
-	uint32_t __fastcall fake_jass_vmmain(base::warcraft3::jass_vm_t* vm, uint32_t edx, uint32_t unk1, uint32_t unk2, uint32_t limit, uint32_t unk4)
+	uint32_t __fastcall fake_jass_vmain(base::warcraft3::jass_vm_t* vm, uint32_t edx, uint32_t opcode, uint32_t unk2, uint32_t limit, uint32_t unk4)
 	{
-		uint32_t result = base::fast_call<uint32_t>(real_jass_vmmain, vm, edx, unk1, unk2, limit, unk4);
+		uint32_t result = base::fast_call<uint32_t>(real_jass_vmmain, vm, edx, opcode, unk2, limit, unk4);
 
 		switch (result)
 		{
