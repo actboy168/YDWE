@@ -128,7 +128,11 @@ function config:define_comment(k1, k2)
 end
 
 function config:define_visible(k1, k2)
-    return define[k1][k2][2] ~= nil
+    local definer = define[k1][k2]
+    if not definer then
+        return false
+    end
+    return definer[2] ~= nil
 end
 
 return proxy(default_config, global_config, map_config, define, config)
