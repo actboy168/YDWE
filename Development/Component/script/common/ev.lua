@@ -30,7 +30,7 @@ end
 function trg:remove()
 	if self._removed then
 		return
-	end	
+	end
     local event = self[2]
     self._removed = true
 	self[1] = nil
@@ -51,7 +51,7 @@ function ev.emit(name, ...)
 		return
     end
     local res
-    event.lock = (event.lock) or 0 + 1
+    event.lock = (event.lock or 0) + 1
 	for i = 1, #event do
 		res = event[i](...)
         if res ~= nil then
