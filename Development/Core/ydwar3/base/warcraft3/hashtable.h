@@ -36,7 +36,7 @@ namespace base { namespace warcraft3 {
 			node*       prev_; 
 			node_2*     lft_;
 			node*       rht_;
-			const char* str_;
+			uint32_t    key;
 
 			bool is_vaild() const
 			{
@@ -47,40 +47,41 @@ namespace base { namespace warcraft3 {
 		template <class Node = node>
 		struct entry
 		{
-			uint32_t step_;
-			node_1*  beg_;
-			Node*    end_;
+			uint32_t step;
+			node_1*  tail;
+			Node*    head;
 
 			node* convert(Node* ptr) const
 			{
-				return (node*)((uintptr_t)ptr + step_ - 4);
+				return (node*)((uintptr_t)ptr + step - 4);
 			}
 		};
 
 		template <class Node = node>
 		struct table
 		{
-			uint32_t     unk0_;
-			uint32_t     unk1_;
-			uint32_t     unk2_;
-			uint32_t     unk3_;
-			uint32_t     unk4_;
-			uint32_t     unk5_;
-			uint32_t     unk6_;
-			entry<Node>* entry_;
-			uint32_t     unk8_;
-			uint32_t     mask_;
+			uint32_t     unk0;
+			uint32_t     step;
+			uint32_t     tail;
+			Node*        head;
+			uint32_t     unk4;
+			uint32_t     unk5;
+			uint32_t     unk6;
+			entry<Node>* buckets;
+			uint32_t     unk8;
+			uint32_t     mask;
 
 			class iterator;
+			class iterator_v1;
 
-			Node* get(uint32_t hash)
+			Node* find(uint32_t hash)
 			{
 				Node* fnode_ptr = nullptr;
 
-				if (this->mask_ == 0xFFFFFFFF)
+				if (mask == 0xFFFFFFFF)
 					return nullptr;
 
-				fnode_ptr = this->entry_[hash & this->mask_].end_;
+				fnode_ptr = buckets[hash & mask].head;
 
 				if (!fnode_ptr->is_vaild())
 					return nullptr;
@@ -96,17 +97,17 @@ namespace base { namespace warcraft3 {
 				}
 			}
 
-			Node* get(const char* str)
+			Node* find(const char* str)
 			{
 				uint32_t hash;
 				Node* fnode_ptr = nullptr;
 
-				if (this->mask_ == 0xFFFFFFFF) 
+				if (mask == 0xFFFFFFFF) 
 					return nullptr;
 
 				hash = detail::string_hash(str);
 
-				fnode_ptr = this->entry_[hash & this->mask_].end_;
+				fnode_ptr = buckets[hash & mask].head;
 
 				if (!fnode_ptr->is_vaild()) 
 					return nullptr;
@@ -115,10 +116,10 @@ namespace base { namespace warcraft3 {
 				{
 					if (fnode_ptr->hash_ == hash)
 					{
-						if (fnode_ptr->str_ == str) 
+						if ((const char*)fnode_ptr->key == str)
 							return fnode_ptr;
 
-						if (0 == strcmp(fnode_ptr->str_, str)) 
+						if (0 == strcmp((const char*)fnode_ptr->key, str)) 
 							return fnode_ptr;
 					}
 					fnode_ptr = (Node*)(uintptr_t)(fnode_ptr->prev_);
@@ -126,6 +127,17 @@ namespace base { namespace warcraft3 {
 					if (!fnode_ptr->is_vaild()) 
 						return nullptr;
 				}
+			}
+
+
+			iterator begin() const
+			{
+				return iterator(this);
+			}
+
+			iterator end() const
+			{
+				return iterator();
 			}
 		};
 
@@ -140,21 +152,16 @@ namespace base { namespace warcraft3 {
 		public:
 			iterator()
 				: ptr_(nullptr)
-				, index_(0)
 				, current_(nullptr)
 			{ }
 
 			explicit iterator(const table<Node>* ptr)
 				: ptr_(ptr)
-				, index_(0)
-				, current_(nullptr)
+				, current_(ptr->head)
 			{
-				if (!ptr_->entry_)
-				{
-					ptr_ = nullptr;
-					return;
+				if (!current_->is_vaild()) {
+					current_ = nullptr;
 				}
-				operator++();
 			}
 
 			~iterator()
@@ -179,14 +186,86 @@ namespace base { namespace warcraft3 {
 
 			iterator& operator++()
 			{
+				current_ = (Node*)((uint32_t*)current_)[ptr_->step / 4 + 1];
+				if (!current_->is_vaild()) {
+					current_ = nullptr;
+				}
+				return *this;
+			}
+
+			bool operator==(const iterator& other) const
+			{
+				return current_ == other.current_;
+			}
+
+			bool operator!=(const iterator& other) const
+			{
+				return !operator==(other);
+			}
+
+		private:
+			const table<Node>* ptr_;
+			Node*              current_;
+		};
+
+		template <class Node>
+		class table<Node>::iterator_v1
+		{
+		public:
+			typedef Node value_type;
+			typedef value_type& reference;
+			typedef value_type* pointer;
+
+		public:
+			iterator_v1()
+				: ptr_(nullptr)
+				, index_(0)
+				, current_(nullptr)
+			{ }
+
+			explicit iterator_v1(const table<Node>* ptr)
+				: ptr_(ptr)
+				, index_(0)
+				, current_(nullptr)
+			{
+				if (!ptr_->buckets)
+				{
+					ptr_ = nullptr;
+					return;
+				}
+				operator++();
+			}
+
+			~iterator_v1()
+			{ }
+
+			reference operator*() const
+			{
+				return *current_;
+			}
+
+			pointer operator->() const
+			{
+				return current_;
+			}
+
+			iterator_v1 operator++(int)
+			{
+				auto result = *this;
+				++(*this);
+				return result;
+			}
+
+			iterator_v1& operator++()
+			{
 				if (!current_)
 				{
-					if (index_ > ptr_->mask_)
+					if (index_ > ptr_->mask)
 					{
 						return *this;
 					}
 
-					current_ = ptr_->entry_[index_].end_;
+					current_ = ptr_->buckets[index_].head;
 				}
 				else
 				{
@@ -202,12 +281,12 @@ namespace base { namespace warcraft3 {
 				return *this;
 			}
 
-			bool operator==(const iterator& other) const
+			bool operator==(const iterator_v1& other) const
 			{
 				return current_ == other.current_;
 			}
 
-			bool operator!=(const iterator& other) const
+			bool operator!=(const iterator_v1& other) const
 			{
 				return !operator==(other);
 			}
@@ -241,9 +320,9 @@ namespace base { namespace warcraft3 {
 				return iterator();
 			}
 
-			variable_node* get(const char* str)
+			variable_node* find(const char* str)
 			{
-				return table_.get(str);
+				return table_.find(str);
 			}
 		};
 
@@ -263,15 +342,15 @@ namespace base { namespace warcraft3 {
 		{
 			table<native_func_node> table_;
 
-			native_func_node* get(const char* str)
+			native_func_node* find(const char* str)
 			{
-				return table_.get(str);
+				return table_.find(str);
 			}
 		};
 
 		struct reverse_node : public node
 		{
-			uint32_t     index_;
+			uint32_t     value;
 		};
 
 		struct reverse_table
@@ -300,14 +379,14 @@ namespace base { namespace warcraft3 {
 				return node_array_[index];
 			}
 
-			reverse_node* get(uint32_t hash)
+			reverse_node* find(uint32_t hash)
 			{
-				return table_.get(hash);
+				return table_.find(hash);
 			}
 
-			reverse_node* get(const char* str)
+			reverse_node* find(const char* str)
 			{
-				return table_.get(str);
+				return table_.find(str);
 			}
 		};
 

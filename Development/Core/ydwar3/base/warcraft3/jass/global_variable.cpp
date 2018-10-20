@@ -4,7 +4,7 @@
 namespace base { namespace warcraft3 { namespace jass {
 
 	global_variable::global_variable(const char* name)
-		: ptr_(get_jass_vm()->global_table->get(name))
+		: ptr_(get_jass_vm()->global_table->find(name))
 	{ }
 
 	global_variable::global_variable(hashtable::variable_node* ptr)
@@ -24,7 +24,7 @@ namespace base { namespace warcraft3 { namespace jass {
 
 	const char* global_variable::name() const
 	{
-		return ptr_->str_;
+		return (const char*)ptr_->key;
 	}
 
 	bool global_variable::is_array() const

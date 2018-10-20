@@ -99,7 +99,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		if (!table) {
 			return jass::create_string("");
 		}
-		item_ui_node* ptr = table->get(hashid(code));
+		item_ui_node* ptr = table->find(hashid(code));
 		if (!ptr) {
 			return jass::create_string("");
 		}
@@ -134,7 +134,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		if (!table) {
 			return false;
 		}
-		item_ui_node* ptr = table->get(hashid(code));
+		item_ui_node* ptr = table->find(hashid(code));
 		if (!ptr) {
 			return false;
 		}

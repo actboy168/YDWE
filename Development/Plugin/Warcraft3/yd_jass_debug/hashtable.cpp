@@ -3,6 +3,7 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/hook.h>
+#include <base/warcraft3/hashtable.h>
 
 namespace ht {
 	struct bucket {
@@ -34,33 +35,47 @@ namespace ht {
 		return ptr;
 	}
 
-	void tableEach(table* table, std::function<void(uint32_t*)> cb)
+	static uint32_t* getGlobalData()
 	{
-		uint32_t* node = table->head;
-		if ((int32_t)node <= 0) {
+		static uint32_t gd = searchGlobalData();
+		return (uint32_t*)*(uint32_t*)gd;
+	}
+
+	void hashtableEachHandle(std::function<void(uint32_t, uint32_t, uint32_t, uint32_t)> cb) {
+		uint32_t g = getGlobalData()[257];
+		if (!g) {
 			return;
 		}
-		for (;;) {
-			cb(node);
-			node = (uint32_t*)node[table->step / 4 + 1];
-			if ((int32_t)node <= 0) {
-				return;
+		typedef base::warcraft3::hashtable::table<base::warcraft3::hashtable::reverse_node> Table;
+
+		for (auto& t : *(Table*)(g + 0x04)) {
+			for (auto& k : *(Table*)((uint8_t*)&t + 0x1C)) {
+				for (auto& h : *(Table*)((uint8_t*)&k + 0xCC)) {
+					cb(t.value, k.value, h.key, h.value);
+				}
 			}
 		}
 	}
 
-	void hashtableEachHandle(std::function<void(uint32_t, uint32_t, uint32_t, uint32_t)> cb) {
-		static uint32_t gd = searchGlobalData();
-		uint32_t g = ((uint32_t*)*(uint32_t*)gd)[257];
-		if (!g) {
-			return;
+	uint32_t objectToHandle(uintptr_t object) {
+		if (!object) {
+			return 0;
 		}
-		tableEach((table *)(g + 0x04), [&](uint32_t* t) {
-			tableEach((table *)((uint32_t)t + 0x1C), [&](uint32_t* k) {
-				tableEach((table *)((uint32_t)k + 0xCC), [&](uint32_t* h) {
-					cb(t[6], k[6], h[5], h[6]);
-				});
-			});
-		});
+		uintptr_t ptr = base::warcraft3::find_objectid_64(*(base::warcraft3::objectid_64*)(object + 0x0C));
+		if (!ptr || (*(uintptr_t*)(ptr + 0x0C) != '+agl') || *(uintptr_t*)(ptr + 0x20)) {
+			return 0;
+		}
+		base::warcraft3::handle_table_t* hts = (base::warcraft3::handle_table_t*)getGlobalData()[7];
+		if (!hts) {
+			return 0;
+		}
+		auto node = hts->table.find(*(uint32_t*)(object + 0x10));
+		if (!node) {
+			return 0;
+		}
+		if (object != (uintptr_t)hts->table.at(3 * (node->value - 0x100000) + 1)) {
+			return 0;
+		}
+		return node->value;
 	}
 }

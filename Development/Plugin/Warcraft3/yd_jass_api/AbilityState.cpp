@@ -784,7 +784,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		if (!table) {
 			return jass::create_string("");
 		}
-		hashtable::node* ptr = table->get(code);
+		hashtable::node* ptr = table->find(code);
 		if (!ptr) {
 			return jass::create_string("");
 		}
@@ -814,7 +814,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		if (!table) {
 			return false;
 		}
-		hashtable::node* ptr = table->get(code);
+		hashtable::node* ptr = table->find(code);
 		if (!ptr) {
 			return false;
 		}

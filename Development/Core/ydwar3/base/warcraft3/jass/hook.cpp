@@ -25,7 +25,7 @@ namespace warcraft3 { namespace jass {
 		if (!old_proc_ptr)
 			return false;
 
-		hashtable::native_func_node* node_ptr = get_native_function_hashtable()->get(proc_name);
+		hashtable::native_func_node* node_ptr = get_native_function_hashtable()->find(proc_name);
 
 		if (!node_ptr)
 			return false;
@@ -41,7 +41,7 @@ namespace warcraft3 { namespace jass {
 		if (!old_proc_ptr)
 			return false;
 
-		hashtable::native_func_node* node_ptr = get_native_function_hashtable()->get(proc_name);
+		hashtable::native_func_node* node_ptr = get_native_function_hashtable()->find(proc_name);
 
 		if (!node_ptr)
 			return false;
