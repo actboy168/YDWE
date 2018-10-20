@@ -4,6 +4,9 @@
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/warcraft3/hashtable.h>
+#include <base/hook/inline.h>
+#include <base/hook/fp_call.h>
+#include <map>
 
 namespace ht {
 	struct bucket {
@@ -26,7 +29,7 @@ namespace ht {
 	};
 
 
-	static int searchGlobalData()
+	static uintptr_t searchGlobalData()
 	{
 		uintptr_t ptr = base::warcraft3::get_war3_searcher().search_string("SaveInteger");
 		ptr = *(uintptr_t*)(ptr + 0x05);
@@ -57,16 +60,12 @@ namespace ht {
 		}
 	}
 
-	uint32_t objectToHandle(uintptr_t object) {
+	uint32_t objectToHandle(base::warcraft3::handle_table_t* hts, uintptr_t object) {
 		if (!object) {
 			return 0;
 		}
 		uintptr_t ptr = base::warcraft3::find_objectid_64(*(base::warcraft3::objectid_64*)(object + 0x0C));
 		if (!ptr || (*(uintptr_t*)(ptr + 0x0C) != '+agl') || *(uintptr_t*)(ptr + 0x20)) {
-			return 0;
-		}
-		base::warcraft3::handle_table_t* hts = (base::warcraft3::handle_table_t*)getGlobalData()[7];
-		if (!hts) {
 			return 0;
 		}
 		auto node = hts->table.find(*(uint32_t*)(object + 0x10));
@@ -77,5 +76,50 @@ namespace ht {
 			return 0;
 		}
 		return node->value;
+	}
+
+	uint32_t objectToHandle(uintptr_t object) {
+		base::warcraft3::handle_table_t* hts = (base::warcraft3::handle_table_t*)getGlobalData()[7];
+		if (!hts) {
+			return 0;
+		}
+		return objectToHandle(hts, object);
+	}
+
+	static uintptr_t searchCreateHandle() {
+		uintptr_t ptr = base::warcraft3::get_war3_searcher().search_string("Player");
+		ptr = *(uintptr_t*)(ptr + 0x05);
+		ptr = base::warcraft3::next_opcode(ptr, 0xE8, 5);
+		ptr += 5;
+		ptr = base::warcraft3::next_opcode(ptr, 0xE8, 5);
+		ptr += 5;
+		ptr = base::warcraft3::next_opcode(ptr, 0xE8, 5);
+		return base::warcraft3::convert_function(ptr);
+	}
+
+	std::map<uint32_t, uint32_t> handlepos;
+
+	uintptr_t realCreateHandle = 0;
+	static uint32_t __fastcall fakeCreateHandle(base::warcraft3::handle_table_t* hts, uint32_t edx, uint32_t object, uint32_t unk) {
+		uint32_t handle = objectToHandle(object);
+		if (handle) {
+			return handle;
+		}
+		handle = base::fast_call<uint32_t>(realCreateHandle, hts, edx, object, unk);
+		handlepos[handle] = base::warcraft3::get_current_jass_pos();
+		return handle;
+	}
+
+	uint32_t getHandlePos(uint32_t handle) {
+		auto it = handlepos.find(handle);
+		if (it == handlepos.end()) {
+			return 0;
+		}
+		return it->second;
+	}
+
+	void initialize() {
+		realCreateHandle = searchCreateHandle();
+		base::hook::install(&realCreateHandle, (uintptr_t)fakeCreateHandle);
 	}
 }

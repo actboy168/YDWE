@@ -15,7 +15,11 @@ namespace base { namespace warcraft3 {
 	uintptr_t get_jass_thread()
 	{
 		uintptr_t ptr = get_war3_searcher().get_instance(5);
-		return *(uintptr_t*)(*(uintptr_t*)(ptr + 0x0C) + 4 * *(uintptr_t*)(ptr + 0x14) - 4);
+		uint32_t index = *(uintptr_t*)(ptr + 0x14);
+		if (index == 0) {
+			return 0;
+		}
+		return *(uintptr_t*)(*(uintptr_t*)(ptr + 0x0C) + 4 * index - 4);
 	}
 
 	hashtable::native_func_table* get_native_function_hashtable()
@@ -26,6 +30,13 @@ namespace base { namespace warcraft3 {
 	uintptr_t get_current_jass_pos()
 	{
 		uintptr_t thread = get_jass_thread();
-		return (uintptr_t)(*(jass::opcode**)(thread + 0x20) - 1);
+		if (!thread) {
+			return 0;
+		}
+		jass::opcode* op = *(jass::opcode**)(thread + 0x20);
+		if (!op) {
+			return 0;
+		}
+		return (uintptr_t)(op - 1);
 	}
 }}

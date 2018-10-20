@@ -160,6 +160,14 @@ namespace handles {
 			node& h = *it;
 
 			fs << base::format("handle: 0x%08X", h.handle) << std::endl;
+			uint32_t pos = ht::getHandlePos(h.handle);
+			if (pos) {
+				jass::opcode *current_op = (jass::opcode *)pos;
+				jass::opcode *op;
+				for (op = current_op; op->op != jass::OPTYPE_FUNCTION; --op)
+				{ }
+				fs << base::format("  创建位置: %s, %d", jass::from_stringid(op->arg), current_op - op) << std::endl;
+			}
 			fs << base::format("  引用: %d", h.reference) << std::endl;
 			if (h.object)
 			{
