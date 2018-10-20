@@ -64,9 +64,15 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 			lua_pushnil(L);
 			return 1;
 		}
-		hashtable::reverse_table* table = &((*get_jass_vm()->handle_table)->table);
-		uint32_t object = (uint32_t)table->at(3 * (h - 0x100000) + 1);
-		uint32_t reference = (uint32_t)table->at(3 * (h - 0x100000));
+		handle_table_t** hts = get_jass_vm()->handle_table;
+		if (!hts) 
+		{
+			lua_pushnil(L);
+			return 1;
+		}
+		hashtable::reverse_table& table = (*hts)->table;
+		uint32_t object = (uint32_t)table.at(3 * (h - 0x100000) + 1);
+		uint32_t reference = (uint32_t)table.at(3 * (h - 0x100000));
 	
 		lua_newtable(L);
 		{

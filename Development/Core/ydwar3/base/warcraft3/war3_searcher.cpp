@@ -312,7 +312,13 @@ namespace base { namespace warcraft3 {
 			return 0;
 		}
 
-		uintptr_t object = (uintptr_t)(*get_jass_vm()->handle_table)->table.at(3 * (handle - 0x100000) + 1);
+		handle_table_t** hts = get_jass_vm()->handle_table;
+		if (!hts)
+		{
+			return 0;
+		}
+
+		uintptr_t object = (uintptr_t)(*hts)->table.at(3 * (handle - 0x100000) + 1);
 
 		if (!object)
 		{
@@ -330,7 +336,13 @@ namespace base { namespace warcraft3 {
 
 	uint32_t object_to_handle(uintptr_t obj)
 	{
-		hashtable::reverse_table& table = (*get_jass_vm()->handle_table)->table;
+		handle_table_t** hts = get_jass_vm()->handle_table;
+		if (!hts)
+		{
+			return 0;
+		}
+
+		hashtable::reverse_table& table = (*hts)->table;
 		for (uint32_t i = 1; i < table.size*3; i += 3)
 		{
 			if (obj == (uintptr_t)table.at(i))
