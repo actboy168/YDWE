@@ -26,13 +26,4 @@ namespace base { namespace warcraft3 {
 	{
 		return (hashtable::native_func_table*)(get_war3_searcher().get_instance(5)+0x18);
 	}
-
-	jass::opcode* get_current_jass_pos()
-	{
-		jass_vm_t* thread = get_jass_thread();
-		if (!thread || !thread->opcode) {
-			return 0;
-		}
-		return thread->opcode - 1;
-	}
 }}

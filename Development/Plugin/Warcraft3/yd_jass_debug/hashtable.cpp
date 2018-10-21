@@ -97,7 +97,7 @@ namespace ht {
 		return base::warcraft3::convert_function(ptr);
 	}
 
-	std::map<uint32_t, base::warcraft3::jass::opcode*> handlepos;
+	std::map<uint32_t, std::vector<base::warcraft3::jass::opcode*>> handlepos;
 
 	uintptr_t realCreateHandle = 0;
 	static uint32_t __fastcall fakeCreateHandle(base::warcraft3::handle_table_t* hts, uint32_t edx, uint32_t object, uint32_t unk) {
@@ -106,14 +106,14 @@ namespace ht {
 			return handle;
 		}
 		handle = base::fast_call<uint32_t>(realCreateHandle, hts, edx, object, unk);
-		handlepos[handle] = base::warcraft3::get_current_jass_pos();
+		handlepos[handle] = base::warcraft3::jass::stackwalker();
 		return handle;
 	}
 
-	base::warcraft3::jass::opcode* getHandlePos(uint32_t handle) {
+	std::vector<base::warcraft3::jass::opcode*> getHandlePos(uint32_t handle) {
 		auto it = handlepos.find(handle);
 		if (it == handlepos.end()) {
-			return 0;
+			return std::vector<base::warcraft3::jass::opcode*>();
 		}
 		return it->second;
 	}

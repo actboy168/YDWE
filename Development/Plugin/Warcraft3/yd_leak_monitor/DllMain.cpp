@@ -86,7 +86,7 @@ namespace monitor
 	static uintptr_t __cdecl fake_proc(BOOST_PP_ENUM_PARAMS(n, uint32_t p)) \
 	{ \
 			uintptr_t retval = base::c_call<uintptr_t>(real_proc BOOST_PP_COMMA_IF(n) BOOST_PP_ENUM_PARAMS(n, p)); \
-			handle_manager<type_name>::instance()[retval] = base::warcraft3::get_current_jass_pos();  \
+			handle_manager<type_name>::instance()[retval] = base::warcraft3::jass::currentpos();  \
 			return retval; \
 		} \
 	}; \
@@ -104,7 +104,7 @@ namespace monitor
 		static uintptr_t __cdecl fake()
 		{
 			uintptr_t retval = base::c_call<uintptr_t>(real);
-			handle_manager<type_name>::instance()[retval] = base::warcraft3::get_current_jass_pos();
+			handle_manager<type_name>::instance()[retval] = base::warcraft3::jass::currentpos();
 			return retval;
 		}
 	};
@@ -114,7 +114,7 @@ namespace monitor
 		static uintptr_t __cdecl fake(intptr_t a1)
 		{
 			uintptr_t retval = base::c_call<uintptr_t>(real, a1);
-			handle_manager<type_name>::instance()[retval] = base::warcraft3::get_current_jass_pos();
+			handle_manager<type_name>::instance()[retval] = base::warcraft3::jass::currentpos();
 			return retval;
 		}
 	};
@@ -124,7 +124,7 @@ namespace monitor
 		static uintptr_t __cdecl fake(intptr_t a1, intptr_t a2)
 		{
 			uintptr_t retval = base::c_call<uintptr_t>(real, a1, a2);
-			handle_manager<type_name>::instance()[retval] = base::warcraft3::get_current_jass_pos();
+			handle_manager<type_name>::instance()[retval] = base::warcraft3::jass::currentpos();
 			return retval;
 		}
 	};
@@ -134,7 +134,7 @@ namespace monitor
 		static uintptr_t __cdecl fake(intptr_t a1, intptr_t a2, intptr_t a3)
 		{
 			uintptr_t retval = base::c_call<uintptr_t>(real, a1, a2, a3);
-			handle_manager<type_name>::instance()[retval] = base::warcraft3::get_current_jass_pos();
+			handle_manager<type_name>::instance()[retval] = base::warcraft3::jass::currentpos();
 			return retval;
 		}
 	};
@@ -144,7 +144,7 @@ namespace monitor
 		static uintptr_t __cdecl fake(intptr_t a1, intptr_t a2, intptr_t a3, intptr_t a4)
 		{
 			uintptr_t retval = base::c_call<uintptr_t>(real, a1, a2, a3, a4);
-			handle_manager<type_name>::instance()[retval] = base::warcraft3::get_current_jass_pos();
+			handle_manager<type_name>::instance()[retval] = base::warcraft3::jass::currentpos();
 			return retval;
 		}
 	};

@@ -4,7 +4,11 @@
 #include <vector>
 #include <cstdint>
 
-namespace base { namespace warcraft3 { namespace jass {
+namespace base { namespace warcraft3 {
+
+	struct jass_vm_t;
+namespace jass {
+	struct opcode;
 
 	typedef void     jnothing_t;
 	typedef uint32_t jboolean_t;
@@ -71,4 +75,7 @@ namespace base { namespace warcraft3 { namespace jass {
 
 	_WAR3_API uintptr_t   call           (const char* name, ...);
 	_WAR3_API uintptr_t   call           (uintptr_t func_address, const uintptr_t* param_list, size_t param_list_size);
+
+	_WAR3_API jass::opcode*              currentpos();
+	_WAR3_API std::vector<jass::opcode*> stackwalker(jass_vm_t* vm = nullptr);
 }}}

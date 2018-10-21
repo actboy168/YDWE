@@ -126,7 +126,7 @@ namespace handles {
 			}
 		}
 
-		for (int i = 2;; ++i) {
+		for (int i = 1;; ++i) {
 			jass_vm_t* vm = get_jass_vm(i);
 			if (!vm) {
 				break;
@@ -134,9 +134,10 @@ namespace handles {
 			if (!vm->opcode) {
 				continue;
 			}
-			stackframe_t* frame = vm->stackframe;
+
 			jass::opcode* op = vm->opcode - 1;
-			while (frame) {
+			stackframe_t* frame = vm->stackframe;
+			while ((intptr_t)frame > 0) {
 				struct jass::opcode *func;
 				for (func = op; func->op != jass::OPTYPE_FUNCTION; --func)
 				{
@@ -150,6 +151,9 @@ namespace handles {
 					}
 				}
 				frame = frame->next;
+				if ((intptr_t)frame <= 0) {
+					break;
+				}
 				uintptr_t code = frame->codes[frame->index]->code;
 				op = (jass::opcode*)(vm->symbol_table->unk0 + code * 4);
 				if (!op) {
@@ -208,19 +212,20 @@ namespace handles {
 					fs << "  类型: 未知" << std::endl;
 				}
 			}
-			jass::opcode* pos = ht::getHandlePos(h.handle);
-			if (pos) {
-				jass::opcode *current_op = pos;
+			auto pos = ht::getHandlePos(h.handle);
+			if (!pos.empty()) {
+				jass::opcode *current_op = pos[0];
 				assert(current_op->op == jass::OPTYPE_CALLNATIVE);
-				jass::opcode *op;
-				for (op = current_op; op->op != jass::OPTYPE_FUNCTION; --op)
-				{
+				fs << base::format("  创建位置: %s", jass::from_stringid(current_op->arg)) << std::endl;
+				for (auto& cur : pos) {
+					jass::opcode* op;
+					for (op = cur; op->op != jass::OPTYPE_FUNCTION; --op)
+					{ }
+					fs << base::format("    | %s+%d", jass::from_stringid(op->arg), cur - op) << std::endl;
 				}
-				fs << base::format("  创建位置: %s, %d", jass::from_stringid(op->arg), current_op - op) << std::endl;
-				fs << base::format("  创建函数: %s", jass::from_stringid(current_op->arg)) << std::endl;
 			}
 			if (!h.global_reference.empty() || !h.local_reference.empty()) {
-				fs << base::format("  引用它的变量:") << std::endl;
+				fs << "  引用它的变量:" << std::endl;
 				for (auto gv = h.global_reference.begin(); gv != h.global_reference.end(); ++gv) {
 					fs << base::format("    | %s", gv->c_str()) << std::endl;
 				}
@@ -229,7 +234,7 @@ namespace handles {
 				}
 			}
 			if (!h.hashtable_reference.empty()) {
-				fs << base::format("  引用它的hashtable:") << std::endl;
+				fs << "  引用它的hashtable:" << std::endl;
 				for (auto gv = h.hashtable_reference.begin(); gv != h.hashtable_reference.end(); ++gv) {
 					fs << base::format("    | %s", gv->c_str()) << std::endl;
 				}

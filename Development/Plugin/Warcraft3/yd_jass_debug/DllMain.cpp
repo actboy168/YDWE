@@ -98,19 +98,9 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		std::cout << std::endl;
 		std::cout << "stack traceback:" << std::endl;
 
-		base::warcraft3::stackframe_t* frame = vm->stackframe;
-		jass::opcode* op = current_opcode(vm);
-		while (op)
-		{
-			op = show_pos(op);
-			if (op->arg == 1) {
-				break;
-			}
-			frame = frame->next;
-			uintptr_t code = frame->codes[frame->index]->code;
-			op = (jass::opcode*)(vm->symbol_table->unk0 + code * 4);
+		for (auto& cur : jass::stackwalker(vm)) {
+			show_pos(cur);
 		}
-
 		std::cout << "---------------------------------------" << std::endl;
 	}
 
@@ -175,7 +165,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 	
 	void EXDebugOpcode(const char* filename) 
 	{
-		jass::opcode* op = base::warcraft3::get_current_jass_pos();
+		jass::opcode* op = base::warcraft3::jass::currentpos();
 		if (op) {
 			for (; op->op > jass::OPTYPE_MINLIMIT && op->op < jass::OPTYPE_MAXLIMIT; --op) {
 			}

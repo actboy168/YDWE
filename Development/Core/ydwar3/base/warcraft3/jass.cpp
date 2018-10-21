@@ -2,6 +2,7 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/hashtable.h>
 #include <base/warcraft3/jass/func_value.h>
+#include <base/warcraft3/jass/opcode.h>
 #include <base/hook/fp_call.h>
 #include <cassert>
 #include <memory>
@@ -302,5 +303,44 @@ namespace base { namespace warcraft3 { namespace jass {
 		}
 
 		return retval;
+	}
+
+	jass::opcode* currentpos()
+	{
+		jass_vm_t* thread = get_jass_thread();
+		if (!thread || !thread->opcode) {
+			return 0;
+		}
+		return thread->opcode - 1;
+	}
+
+	std::vector<jass::opcode*> stackwalker(jass_vm_t* vm)
+	{
+		std::vector<jass::opcode*> ret;
+
+		if (!vm) {
+			vm = get_jass_thread();
+		}
+		if (!vm || !vm->opcode) {
+			return ret;
+		}
+
+		jass::opcode* op = vm->opcode - 1;
+		ret.push_back(op);
+
+		stackframe_t* frame = vm->stackframe;
+		while ((intptr_t)frame > 0) {
+			frame = frame->next;
+			if ((intptr_t)frame <= 0) {
+				break;
+			}
+			uintptr_t code = frame->codes[frame->index]->code;
+			op = (jass::opcode*)(vm->symbol_table->unk0 + code * 4);
+			if (!op) {
+				break;
+			}
+			ret.push_back(op);
+		}
+		return ret;
 	}
 }}}
