@@ -61,9 +61,9 @@ namespace monitor
 	class handle_manager 
 	{
 	public:
-		static std::map<uintptr_t, uintptr_t>& instance()
+		static std::map<uintptr_t, base::warcraft3::jass::opcode*>& instance()
 		{
-			static std::map<uintptr_t, uintptr_t> s;
+			static std::map<uintptr_t, base::warcraft3::jass::opcode*> s;
 			return s;
 		}
 	};
@@ -180,7 +180,7 @@ struct handle_info
 	uint32_t handle;
 	uint32_t object;
 	uint32_t reference;
-	uint32_t pos;
+	base::warcraft3::jass::opcode* pos;
 	const char* type;
 	std::vector<std::string> global_reference;
 	std::vector<std::string> local_reference;
@@ -294,7 +294,7 @@ public:
 		}
 	}
 
-	void update_pos(const char* type, std::map<uintptr_t, uintptr_t> m)
+	void update_pos(const char* type, std::map<uintptr_t, base::warcraft3::jass::opcode*> m)
 	{
 		for (auto it = m.begin(); it != m.end(); ++it)
 		{

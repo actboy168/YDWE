@@ -12,14 +12,14 @@ namespace base { namespace warcraft3 {
 		return vm ? (jass_vm_t*)(vm - ((get_war3_searcher().get_version() > version_120e) ? 0 : 4)) : nullptr;
 	}
 
-	uintptr_t get_jass_thread()
+	jass_vm_t* get_jass_thread()
 	{
 		uintptr_t ptr = get_war3_searcher().get_instance(5);
 		uint32_t index = *(uintptr_t*)(ptr + 0x14);
 		if (index == 0) {
 			return 0;
 		}
-		return *(uintptr_t*)(*(uintptr_t*)(ptr + 0x0C) + 4 * index - 4);
+		return *(jass_vm_t**)(*(uintptr_t*)(ptr + 0x0C) + 4 * index - 4);
 	}
 
 	hashtable::native_func_table* get_native_function_hashtable()
@@ -27,16 +27,12 @@ namespace base { namespace warcraft3 {
 		return (hashtable::native_func_table*)(get_war3_searcher().get_instance(5)+0x18);
 	}
 
-	uintptr_t get_current_jass_pos()
+	jass::opcode* get_current_jass_pos()
 	{
-		uintptr_t thread = get_jass_thread();
-		if (!thread) {
+		jass_vm_t* thread = get_jass_thread();
+		if (!thread || !thread->opcode) {
 			return 0;
 		}
-		jass::opcode* op = *(jass::opcode**)(thread + 0x20);
-		if (!op) {
-			return 0;
-		}
-		return (uintptr_t)(op - 1);
+		return thread->opcode - 1;
 	}
 }}

@@ -448,28 +448,30 @@ namespace base { namespace warcraft3 {
 
 	struct jass_vm_t
 	{
-		char                         unk[0x20];
-		jass::opcode*                opcode;
-		char                         unk0[0x282C];
+		char                         unk0[0x20];
+		jass::opcode*                opcode;                // 0x20
+		char                         unk1[0x10];
+		uint32_t                     has_sleep;             // 0x34
+		char                         unk2[0x2818];
 		uint32_t                     index;                 //0x2850
-		uint32_t                     unk1;
+		uint32_t                     unk3;
 		symbol_table_t*              symbol_table;          //0x2858
 		hashtable::variable_table*   global_table;          //0x285C
-		uint32_t                     unk2;
-		uint32_t                     unk3;
-		stackframe_t*                stackframe;            //0x2868
 		uint32_t                     unk4;
 		uint32_t                     unk5;
+		stackframe_t*                stackframe;            //0x2868
+		uint32_t                     unk6;
+		uint32_t                     unk7;
 		hashtable::string_fasttable* string_table;		    //0x2874
-		char                         unk6[0x10];
+		char                         unk8[0x10];
 		code_table_t*                code_table;		    //0x2888
-		char                         unk7[0x14];
+		char                         unk9[0x14];
 		uintptr_t                    set_handle_reference;	//0x28A0
 		handle_table_t**             handle_table;	        //0x28A4
 	};
 
 	_WAR3_API jass_vm_t*                    get_jass_vm(int index = 1);
-	_WAR3_API uintptr_t                     get_jass_thread();
+	_WAR3_API jass_vm_t*                    get_jass_thread();
 	_WAR3_API hashtable::native_func_table* get_native_function_hashtable();
-	_WAR3_API uintptr_t                     get_current_jass_pos();
+	_WAR3_API jass::opcode*                 get_current_jass_pos();
 }}

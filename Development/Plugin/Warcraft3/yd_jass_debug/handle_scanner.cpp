@@ -72,18 +72,39 @@ namespace handles {
 	}
 
 	std::map<uint32_t, std::string_view> ot2ht = {
+		{ '+dlb', "button" },
+		{ '+dlg', "dialog" },
+		{ '+w3d', "destructable" },
+		{ '+rev', "event" },
+		{ 'alvt', "event" },
+		{ 'bevt', "event" },
+		{ 'devt', "event" },
+		{ 'gevt', "event" },
 		{ 'gfvt', "event" },
+		{ 'pcvt', "event" },
 		{ 'pevt', "event" },
+		{ 'psvt', "event" },
 		{ 'tmet', "event" },
+		{ 'tmvt', "event" },
+		{ 'uevt', "event" },
 		{ '+flt', "filter" },
+		{ '+fgm', "fogmodifier" },
 		{ '+frc', "force" },
 		{ '+grp', "group" },
+		{ 'ghth', "hashtable" },
+		{ 'item', "item" },
+		{ '+loc', "location" },
+		{ '+mdb', "multiboard" },
 		{ '+ply', "player" },
 		{ '+rct', "rect" },
+		{ '+agr', "region" },
 		{ '+snd', "sound" },
 		{ '+tmr', "timer" },
+		{ '+tid', "timerdialog" },
 		{ '+trg', "trigger" },
 		{ '+tac', "triggeraction" },
+		{ 'tcnd', "triggercondition" },
+		{ '+w3u', "unit" },
 	};
 	const char* ObjectTypeToHandleType(uint32_t type) {
 		auto it = ot2ht.find(type);
@@ -187,9 +208,9 @@ namespace handles {
 					fs << "  ÀàÐÍ: Î´Öª" << std::endl;
 				}
 			}
-			uint32_t pos = ht::getHandlePos(h.handle);
+			jass::opcode* pos = ht::getHandlePos(h.handle);
 			if (pos) {
-				jass::opcode *current_op = (jass::opcode *)pos;
+				jass::opcode *current_op = pos;
 				assert(current_op->op == jass::OPTYPE_CALLNATIVE);
 				jass::opcode *op;
 				for (op = current_op; op->op != jass::OPTYPE_FUNCTION; --op)

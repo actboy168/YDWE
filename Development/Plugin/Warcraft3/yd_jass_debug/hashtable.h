@@ -1,9 +1,10 @@
 #pragma once
 
 #include <functional>
+#include <base/warcraft3/jass/opcode.h>
 
 namespace ht {
 	void hashtableEachHandle(std::function<void(uint32_t, uint32_t, uint32_t, uint32_t)> cb);
-	uint32_t getHandlePos(uint32_t handle);
+	base::warcraft3::jass::opcode* getHandlePos(uint32_t handle);
 	void initialize();
 }

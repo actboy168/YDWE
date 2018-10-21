@@ -179,10 +179,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		int result = jass_call_native_function(L, (const jass::func_value*)lua_tointeger(L, lua_upvalueindex(1)));
 		if (lua_isyieldable(L))
 		{
-			uintptr_t thread = get_jass_thread();
-			if (thread && *(uintptr_t*)(thread + 0x34))
+			jass_vm_t* thread = get_jass_thread();
+			if (thread && thread->has_sleep)
 			{
-				*(uintptr_t*)(thread + 0x20) -= jass::trampoline_size();
+				thread->opcode -= jass::trampoline_size() / sizeof(jass::opcode);
 				return lua_yield(L, 0);
 			}
 		}
