@@ -75,6 +75,8 @@ namespace handles {
 		{ '+dlb', "button" },
 		{ '+dlg', "dialog" },
 		{ '+w3d', "destructable" },
+		{ '+EIP', "effect" },
+		{ '+EIm', "effect" },
 		{ '+rev', "event" },
 		{ 'alvt', "event" },
 		{ 'bevt', "event" },
@@ -114,7 +116,58 @@ namespace handles {
 		return it->second.data();
 	}
 
-	void scanner(std::fstream& fs) {
+	void scanner_display(std::fstream& fs, node& h) {
+		using namespace base::warcraft3;
+
+		uint32_t ref = (h.object)? 1 : 0;
+		ref += h.global_reference.size();
+		ref += h.local_reference.size();
+		ref += h.hashtable_reference.size();
+
+		fs << base::format("handle: 0x%08X", h.handle) << std::endl;
+		fs << base::format("  引用: %d/%d", ref, h.reference) << std::endl;
+		if (h.object) {
+			uint32_t type = get_object_type(h.object);
+			const char* handletype = ObjectTypeToHandleType(type);
+			if (handletype) {
+				fs << base::format("  类型: %s", handletype) << std::endl;
+			}
+			else {
+				fs << "  类型: 未知" << std::endl;
+			}
+			fs << base::format("  对象: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
+		}
+		auto pos = ht::getHandlePos(h.handle);
+		if (!pos.empty()) {
+			jass::opcode *current_op = pos[0];
+			assert(current_op->op == jass::OPTYPE_CALLNATIVE);
+			fs << base::format("  创建位置: %s", jass::from_stringid(current_op->arg)) << std::endl;
+			for (auto& cur : pos) {
+				jass::opcode* op;
+				for (op = cur; op->op != jass::OPTYPE_FUNCTION; --op)
+				{
+				}
+				fs << base::format("    | %s+%d", jass::from_stringid(op->arg), cur - op) << std::endl;
+			}
+		}
+		if (!h.global_reference.empty() || !h.local_reference.empty()) {
+			fs << "  引用它的变量:" << std::endl;
+			for (auto gv = h.global_reference.begin(); gv != h.global_reference.end(); ++gv) {
+				fs << base::format("    | %s", gv->c_str()) << std::endl;
+			}
+			for (auto gv = h.local_reference.begin(); gv != h.local_reference.end(); ++gv) {
+				fs << base::format("    | %s", gv->c_str()) << std::endl;
+			}
+		}
+		if (!h.hashtable_reference.empty()) {
+			fs << "  引用它的哈希表:" << std::endl;
+			for (auto gv = h.hashtable_reference.begin(); gv != h.hashtable_reference.end(); ++gv) {
+				fs << base::format("    | %s", gv->c_str()) << std::endl;
+			}
+		}
+	}
+
+	void scanner(std::fstream& fs, bool all) {
 		using namespace base::warcraft3;
 
 		table ht;
@@ -173,69 +226,62 @@ namespace handles {
 			});
 		}
 
-		std::vector<node> leaks;
-		for (auto it = ht.begin(); it != ht.end(); ++it) {
-			node& h = it->second;
-			uint32_t ref = 0;
-			if (h.object) ref++;
-			ref += h.global_reference.size();
-			ref += h.local_reference.size();
-			ref += h.hashtable_reference.size();
-			if (ref < h.reference) {
-				leaks.push_back(h);
+		if (all) {
+			fs << "---------------------------------------" << std::endl;
+			fs << "              泄漏检测报告             " << std::endl;
+			fs << "---------------------------------------" << std::endl;
+			fs << "最大: " << (hts ? (*hts)->table.size : 0) << std::endl;
+			fs << "总数: " << ht.size() << std::endl;
+			fs << "---------------------------------------" << std::endl;
+			for (auto& it : ht) { 
+				node& h = it.second;
+				scanner_display(fs, h);
 			}
 		}
-
-		fs << "---------------------------------------" << std::endl;
-		fs << "              泄漏检测报告             " << std::endl;
-		fs << "---------------------------------------" << std::endl;
-		fs << "handle最大: " << (hts ? (*hts)->table.size : 0) << std::endl;
-		fs << "handle总数: " << ht.size() << std::endl;
-		fs << "handle泄漏: " << leaks.size() << std::endl;
-		fs << "---------------------------------------" << std::endl;
-
-		//for (auto& it : ht) { node& h = it.second;
-		for (node& h : leaks) {
-
-			fs << base::format("handle: 0x%08X", h.handle) << std::endl;
-			fs << base::format("  引用: %d", h.reference) << std::endl;
-			if (h.object) {
-				uint32_t type = get_object_type(h.object);
-				const char* handletype = ObjectTypeToHandleType(type);
-				if (handletype) {
-					fs << base::format("  类型: %s", handletype) << std::endl;
+		else {
+			std::vector<node> leaks;
+			for (auto it = ht.begin(); it != ht.end(); ++it) {
+				node& h = it->second;
+				uint32_t type = 0;
+				if (h.object) {
+					type = get_object_type(h.object);
+					if (type == '+ply') {
+						continue;
+					}
 				}
-				else {
-					fs << "  类型: 未知" << std::endl;
+				uint32_t ref = 0;
+				ref += h.global_reference.size();
+				ref += h.local_reference.size();
+				ref += h.hashtable_reference.size();
+				if (h.object && ref == 0) {
+					switch (type) {
+					case '+loc': // location
+					case '+grp': // group
+					case '+agr': // region
+					case '+rct': // rect
+					case '+frc': // force
+					case '+EIP': // effect
+					case '+EIm':
+						leaks.push_back(h);
+						break;
+					default:
+						break;
+					}
 				}
-				fs << base::format("  对象: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
-			}
-			auto pos = ht::getHandlePos(h.handle);
-			if (!pos.empty()) {
-				jass::opcode *current_op = pos[0];
-				assert(current_op->op == jass::OPTYPE_CALLNATIVE);
-				fs << base::format("  创建位置: %s", jass::from_stringid(current_op->arg)) << std::endl;
-				for (auto& cur : pos) {
-					jass::opcode* op;
-					for (op = cur; op->op != jass::OPTYPE_FUNCTION; --op)
-					{ }
-					fs << base::format("    | %s+%d", jass::from_stringid(op->arg), cur - op) << std::endl;
+				else if (ref + (h.object ? 1 : 0) < h.reference) {
+					leaks.push_back(h);
 				}
 			}
-			if (!h.global_reference.empty() || !h.local_reference.empty()) {
-				fs << "  引用它的变量:" << std::endl;
-				for (auto gv = h.global_reference.begin(); gv != h.global_reference.end(); ++gv) {
-					fs << base::format("    | %s", gv->c_str()) << std::endl;
-				}
-				for (auto gv = h.local_reference.begin(); gv != h.local_reference.end(); ++gv) {
-					fs << base::format("    | %s", gv->c_str()) << std::endl;
-				}
-			}
-			if (!h.hashtable_reference.empty()) {
-				fs << "  引用它的hashtable:" << std::endl;
-				for (auto gv = h.hashtable_reference.begin(); gv != h.hashtable_reference.end(); ++gv) {
-					fs << base::format("    | %s", gv->c_str()) << std::endl;
-				}
+
+			fs << "---------------------------------------" << std::endl;
+			fs << "              泄漏检测报告             " << std::endl;
+			fs << "---------------------------------------" << std::endl;
+			fs << "最大: " << (hts ? (*hts)->table.size : 0) << std::endl;
+			fs << "总数: " << ht.size() << std::endl;
+			fs << "泄漏: " << leaks.size() << std::endl;
+			fs << "---------------------------------------" << std::endl;
+			for (node& h : leaks) {
+				scanner_display(fs, h);
 			}
 		}
 	}

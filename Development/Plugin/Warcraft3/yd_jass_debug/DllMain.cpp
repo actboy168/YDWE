@@ -156,22 +156,27 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		return fs::path();
 	}
 	
-	void EXDebugOpcode(const char* filename) 
-	{
+	void EXDebugOpcode(const char* filename) {
 		jass::opcode* op = base::warcraft3::jass::currentpos();
 		if (op) {
-			for (; op->op > jass::OPTYPE_MINLIMIT && op->op < jass::OPTYPE_MAXLIMIT; --op) {
-			}
+			for (; op->op > jass::OPTYPE_MINLIMIT && op->op < jass::OPTYPE_MAXLIMIT; --op)
+			{ }
 			jass::dump_opcode(op, getPath(filename).c_str());
 		}
 	}
 
-	void EXDebugHandle(const char* filename)
-	{
+	void EXDebugHandle(const char* filename) {
 		std::fstream fs(getPath(filename), std::ios::out);
-		if (!fs) {
+		if (fs) {
+			handles::scanner(fs, true);
 		}
-		handles::scanner(fs);
+	}
+
+	void EXDebugLeak(const char* filename) {
+		std::fstream fs(getPath(filename), std::ios::out);
+		if (fs) {
+			handles::scanner(fs, false);
+		}
 	}
 
 	static uintptr_t RealGetLocalizedHotkey = 0;
@@ -184,6 +189,9 @@ namespace base { namespace warcraft3 { namespace jdebug {
 			}
 			else if (strncmp(str + 6, "handle:", 7) == 0) {
 				EXDebugHandle(str + 6 + 7);
+			}
+			else if (strncmp(str + 6, "leak:", 5) == 0) {
+				EXDebugLeak(str + 6 + 5);
 			}
 		}
 		return base::c_call<uint32_t>(RealGetLocalizedHotkey, s);

@@ -5,8 +5,7 @@
 #include <base/warcraft3/jass/global_variable.h>
 
 namespace handles {
-	struct node
-	{
+	struct node {
 		uint32_t handle = 0;
 		uint32_t object = 0;
 		uint32_t reference = 0;
@@ -15,16 +14,13 @@ namespace handles {
 		std::vector<std::string> hashtable_reference;
 	};
 
-	struct table
-		: public std::map<uint32_t, node>
-	{
-		std::map<uint32_t, uint32_t> htmgr;
-
+	struct table : public std::map<uint32_t, node> {
 		enum e_type {
 			local,
 			global,
 			hashtable,
 		};
+		std::map<uint32_t, uint32_t> htmgr;
 
 		void add_handle(uint32_t handle, uint32_t object, uint32_t reference);
 		void add_global_reference(base::warcraft3::hashtable::variable_node& var);
@@ -33,6 +29,6 @@ namespace handles {
 		void add_reference(e_type type, uint32_t handle, const std::string& name);
 	};
 
-	void scanner(std::fstream& fs);
+	void scanner(std::fstream& fs, bool all);
 }
 
