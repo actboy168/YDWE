@@ -523,7 +523,7 @@ void Initialize()
 	monitor::creater  <commonj::force,    0, commonj::CreateForce>();
 	monitor::destroyer<commonj::force, commonj::DestroyForce>();
 
-	base::warcraft3::jass::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
+	//base::warcraft3::jass::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID /*pReserved*/)

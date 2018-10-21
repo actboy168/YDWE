@@ -10,6 +10,7 @@
 #include <base/util/format.h>
 #include <base/path/ydwe.h>
 #include <iostream>
+#include <ctype.h>
 #include "handle_scanner.h"
 #include "hashtable.h"
 
@@ -150,9 +151,11 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		return result;
 	}
 
-	static fs::path getPath(jass::jstring_t filename) {
+	static fs::path getPath(const char* filename) {
 		try {
-			fs::path path = base::u2w(jass::from_string(filename));
+			for (;*filename && isspace((unsigned char)*filename) ;++filename)
+			{ }
+			fs::path path = base::u2w(filename);
 			if (path.is_absolute()) {
 				return path;
 			}
@@ -162,32 +165,44 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		}
 		return fs::path();
 	}
-	jass::jboolean_t __cdecl EXDebugOpcode(jass::jstring_t filename) 
+	
+	void EXDebugOpcode(const char* filename) 
 	{
 		jass::opcode* op = (jass::opcode *)base::warcraft3::get_current_jass_pos();
 		if (op) {
 			for (; op->op > jass::OPTYPE_MINLIMIT && op->op < jass::OPTYPE_MAXLIMIT; --op) {
 			}
-			return jass::dump_opcode(op, getPath(filename).c_str());
+			jass::dump_opcode(op, getPath(filename).c_str());
 		}
-		return false;
 	}
 
-	jass::jboolean_t __cdecl EXDebugHandleScanner(jass::jstring_t filename)
+	void EXDebugHandle(const char* filename)
 	{
 		std::fstream fs(getPath(filename), std::ios::out);
 		if (!fs) {
-			return false;
 		}
 		handles::scanner(fs);
-		return true;
+	}
+
+	static uintptr_t RealGetLocalizedHotkey = 0;
+	uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
+	{
+		const char* str = base::warcraft3::jass::from_string(s);
+		if (str && strncmp(str, "ydwe::", 6) == 0) {
+			if (strncmp(str + 6, "opcode:", 7) == 0) {
+				EXDebugOpcode(str + 6 + 7);
+			}
+			else if (strncmp(str + 6, "handle:", 7) == 0) {
+				EXDebugHandle(str + 6 + 7);
+			}
+		}
+		return base::c_call<uint32_t>(RealGetLocalizedHotkey, s);
 	}
 
 	bool initialize()
 	{
-		base::warcraft3::jass::japi_add((uintptr_t)EXDebugOpcode, "EXDebugOpcode", "(S)B");
-		base::warcraft3::jass::japi_add((uintptr_t)EXDebugHandleScanner, "EXDebugHandleScanner", "(S)B");
 		ht::initialize();
+		base::warcraft3::jass::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
 		real_jass_vmmain = search_jass_vmmain();
 		return base::hook::install(&real_jass_vmmain, (uintptr_t)fake_jass_vmmain);
 	}
