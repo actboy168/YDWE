@@ -187,23 +187,20 @@ namespace handles {
 		}
 
 		fs << "---------------------------------------" << std::endl;
-		fs << "            泄漏检测详细报告           " << std::endl;
+		fs << "              泄漏检测报告             " << std::endl;
 		fs << "---------------------------------------" << std::endl;
 		fs << "handle最大: " << (hts ? (*hts)->table.size : 0) << std::endl;
 		fs << "handle总数: " << ht.size() << std::endl;
 		fs << "handle泄漏: " << leaks.size() << std::endl;
 		fs << "---------------------------------------" << std::endl;
 
-		for (auto& it : ht) {
-			node& h = it.second;
-		//for (node& h : leaks) {
+		//for (auto& it : ht) { node& h = it.second;
+		for (node& h : leaks) {
 
 			fs << base::format("handle: 0x%08X", h.handle) << std::endl;
 			fs << base::format("  引用: %d", h.reference) << std::endl;
 			if (h.object) {
 				uint32_t type = get_object_type(h.object);
-				fs << base::format("  对象: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
-
 				const char* handletype = ObjectTypeToHandleType(type);
 				if (handletype) {
 					fs << base::format("  类型: %s", handletype) << std::endl;
@@ -211,6 +208,7 @@ namespace handles {
 				else {
 					fs << "  类型: 未知" << std::endl;
 				}
+				fs << base::format("  对象: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
 			}
 			auto pos = ht::getHandlePos(h.handle);
 			if (!pos.empty()) {
