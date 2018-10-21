@@ -5,9 +5,6 @@
 #include <base/util/format.h>
 
 #pragma execution_character_set("utf-8")
-#include <fstream>
-#include <base/filesystem.h>
-#include <base/path/ydwe.h>
 
 namespace handles {
 	void table::add_handle(uint32_t handle, uint32_t object, uint32_t reference) {
@@ -53,7 +50,7 @@ namespace handles {
 			add_reference(table::e_type::hashtable, handle, base::format("handle: unknown [%d][%d]", t, k));
 			return;
 		}
-		add_reference(table::e_type::hashtable, handle, base::format("handle: 0x%08x [%d][%d]", it->second, t, k));
+		add_reference(table::e_type::hashtable, handle, base::format("handle: 0x%08X [%d][%d]", it->second, t, k));
 	}
 
 	void table::add_reference(e_type type, uint32_t handle, const std::string& name) {
@@ -74,7 +71,29 @@ namespace handles {
 		}
 	}
 
-	void scanner() {
+	std::map<uint32_t, std::string_view> ot2ht = {
+		{ 'gfvt', "event" },
+		{ 'pevt', "event" },
+		{ 'tmet', "event" },
+		{ '+flt', "filter" },
+		{ '+frc', "force" },
+		{ '+grp', "group" },
+		{ '+ply', "player" },
+		{ '+rct', "rect" },
+		{ '+snd', "sound" },
+		{ '+tmr', "timer" },
+		{ '+trg', "trigger" },
+		{ '+tac', "triggeraction" },
+	};
+	const char* ObjectTypeToHandleType(uint32_t type) {
+		auto it = ot2ht.find(type);
+		if (it == ot2ht.end()) {
+			return 0;
+		}
+		return it->second.data();
+	}
+
+	void scanner(std::fstream& fs) {
 		using namespace base::warcraft3;
 
 		table ht;
@@ -142,12 +161,6 @@ namespace handles {
 			}
 		}
 
-		fs::path report = base::path::ydwe(false) / L"logs" / L"leak_moniter_report2.txt";
-		std::fstream fs(report.c_str(), std::ios::out);
-		if (!fs) {
-			return;
-		}
-
 		fs << "---------------------------------------" << std::endl;
 		fs << "            泄漏检测详细报告           " << std::endl;
 		fs << "---------------------------------------" << std::endl;
@@ -156,41 +169,47 @@ namespace handles {
 		fs << "handle泄漏: " << leaks.size() << std::endl;
 		fs << "---------------------------------------" << std::endl;
 
-		for (auto it = leaks.begin(); it != leaks.end(); ++it) {
-			node& h = *it;
+		for (auto& it : ht) {
+			node& h = it.second;
+		//for (node& h : leaks) {
 
 			fs << base::format("handle: 0x%08X", h.handle) << std::endl;
+			fs << base::format("  引用: %d", h.reference) << std::endl;
+			if (h.object) {
+				uint32_t type = get_object_type(h.object);
+				fs << base::format("  对象: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
+
+				const char* handletype = ObjectTypeToHandleType(type);
+				if (handletype) {
+					fs << base::format("  类型: %s", handletype) << std::endl;
+				}
+				else {
+					fs << "  类型: 未知" << std::endl;
+				}
+			}
 			uint32_t pos = ht::getHandlePos(h.handle);
 			if (pos) {
 				jass::opcode *current_op = (jass::opcode *)pos;
+				assert(current_op->op == jass::OPTYPE_CALLNATIVE);
 				jass::opcode *op;
 				for (op = current_op; op->op != jass::OPTYPE_FUNCTION; --op)
-				{ }
+				{
+				}
 				fs << base::format("  创建位置: %s, %d", jass::from_stringid(op->arg), current_op - op) << std::endl;
+				fs << base::format("  创建函数: %s", jass::from_stringid(current_op->arg)) << std::endl;
 			}
-			fs << base::format("  引用: %d", h.reference) << std::endl;
-			if (h.object)
-			{
-				uint32_t type = get_object_type(h.object);
-				fs << base::format("  对象: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
-			}
-			if (!h.global_reference.empty() || !h.local_reference.empty())
-			{
+			if (!h.global_reference.empty() || !h.local_reference.empty()) {
 				fs << base::format("  引用它的变量:") << std::endl;
-				for (auto gv = h.global_reference.begin(); gv != h.global_reference.end(); ++gv)
-				{
+				for (auto gv = h.global_reference.begin(); gv != h.global_reference.end(); ++gv) {
 					fs << base::format("    | %s", gv->c_str()) << std::endl;
 				}
-				for (auto gv = h.local_reference.begin(); gv != h.local_reference.end(); ++gv)
-				{
+				for (auto gv = h.local_reference.begin(); gv != h.local_reference.end(); ++gv) {
 					fs << base::format("    | %s", gv->c_str()) << std::endl;
 				}
 			}
-			if (!h.hashtable_reference.empty())
-			{
+			if (!h.hashtable_reference.empty()) {
 				fs << base::format("  引用它的hashtable:") << std::endl;
-				for (auto gv = h.hashtable_reference.begin(); gv != h.hashtable_reference.end(); ++gv)
-				{
+				for (auto gv = h.hashtable_reference.begin(); gv != h.hashtable_reference.end(); ++gv) {
 					fs << base::format("    | %s", gv->c_str()) << std::endl;
 				}
 			}

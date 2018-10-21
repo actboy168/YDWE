@@ -1,5 +1,6 @@
 #pragma once
 
+#include <fstream>
 #include <map>
 #include <base/warcraft3/jass/global_variable.h>
 
@@ -32,6 +33,6 @@ namespace handles {
 		void add_reference(e_type type, uint32_t handle, const std::string& name);
 	};
 
-	void scanner();
+	void scanner(std::fstream& fs);
 }
 

@@ -8,8 +8,10 @@
 #include <base/warcraft3/jass/hook.h>
 #include <base/util/console.h>
 #include <base/util/format.h>
+#include <base/path/ydwe.h>
 #include <iostream>
 #include "handle_scanner.h"
+#include "hashtable.h"
 
 namespace base { namespace warcraft3 { namespace jdebug {
 	
@@ -111,7 +113,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		std::cout << "---------------------------------------" << std::endl;
 	}
 
-	uint32_t __fastcall fake_jass_vmain(base::warcraft3::jass_vm_t* vm, uint32_t edx, uint32_t opcode, uint32_t unk2, uint32_t limit, uint32_t unk4)
+	uint32_t __fastcall fake_jass_vmmain(base::warcraft3::jass_vm_t* vm, uint32_t edx, uint32_t opcode, uint32_t unk2, uint32_t limit, uint32_t unk4)
 	{
 		uint32_t result = base::fast_call<uint32_t>(real_jass_vmmain, vm, edx, opcode, unk2, limit, unk4);
 
@@ -148,20 +150,44 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		return result;
 	}
 
-	jass::jboolean_t __cdecl EXDumpOpcode(jass::jstring_t filename) 
+	static fs::path getPath(jass::jstring_t filename) {
+		try {
+			fs::path path = base::u2w(jass::from_string(filename));
+			if (path.is_absolute()) {
+				return path;
+			}
+			return base::path::ydwe(false) / "logs" / path;
+		}
+		catch (...) {
+		}
+		return fs::path();
+	}
+	jass::jboolean_t __cdecl EXDebugOpcode(jass::jstring_t filename) 
 	{
 		jass::opcode* op = (jass::opcode *)base::warcraft3::get_current_jass_pos();
 		if (op) {
 			for (; op->op > jass::OPTYPE_MINLIMIT && op->op < jass::OPTYPE_MAXLIMIT; --op) {
 			}
-			return jass::dump_opcode(op, base::u2w(jass::from_string(filename), base::conv_method::skip | '?').c_str());
+			return jass::dump_opcode(op, getPath(filename).c_str());
 		}
 		return false;
 	}
 
+	jass::jboolean_t __cdecl EXDebugHandleScanner(jass::jstring_t filename)
+	{
+		std::fstream fs(getPath(filename), std::ios::out);
+		if (!fs) {
+			return false;
+		}
+		handles::scanner(fs);
+		return true;
+	}
+
 	bool initialize()
 	{
-		base::warcraft3::jass::japi_add((uintptr_t)EXDumpOpcode, "EXDumpOpcode", "(S)B");
+		base::warcraft3::jass::japi_add((uintptr_t)EXDebugOpcode, "EXDebugOpcode", "(S)B");
+		base::warcraft3::jass::japi_add((uintptr_t)EXDebugHandleScanner, "EXDebugHandleScanner", "(S)B");
+		ht::initialize();
 		real_jass_vmmain = search_jass_vmmain();
 		return base::hook::install(&real_jass_vmmain, (uintptr_t)fake_jass_vmmain);
 	}
