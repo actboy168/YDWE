@@ -1,6 +1,5 @@
 #pragma once
 
-#include <base/config.h>
 #include <cassert>
 #include <exception>
 #include <limits>
@@ -67,10 +66,18 @@ namespace std {
 			try { 
 				uninitialized_copy(d.begin(), d.end(), begin());
 			}
-			catch (...) { 
-				delete[] store_; 
+			catch (...) {
+				delete[] reinterpret_cast<char*>(store_);
 				throw; 
 			} 
+		}
+
+		dynarray(dynarray&& d)
+			: store_(d.store_)
+			, count_(d.count_)
+		{
+			d.store_ = nullptr;
+			d.count_ = 0;
 		}
 
 		~dynarray()
@@ -79,7 +86,7 @@ namespace std {
 			{
 				(store_+i)->~T();
 			}
-			delete[] store_;
+			delete[] reinterpret_cast<char*>(store_);
 		}
 
 		iterator               begin()                       { return store_; }
