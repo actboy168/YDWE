@@ -1,4 +1,4 @@
-#include "handle_scanner.h"
+ï»¿#include "handle_scanner.h"
 #include "hashtable.h"
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/version.h>
@@ -125,23 +125,23 @@ namespace handles {
 		ref += h.hashtable_reference.size();
 
 		fs << base::format("handle: 0x%08X", h.handle) << std::endl;
-		fs << base::format("  ÒýÓÃ: %d/%d", ref, h.reference) << std::endl;
+		fs << base::format("  å¼•ç”¨: %d/%d", ref, h.reference) << std::endl;
 		if (h.object) {
 			uint32_t type = get_object_type(h.object);
 			const char* handletype = ObjectTypeToHandleType(type);
 			if (handletype) {
-				fs << base::format("  ÀàÐÍ: %s", handletype) << std::endl;
+				fs << base::format("  ç±»åž‹: %s", handletype) << std::endl;
 			}
 			else {
-				fs << "  ÀàÐÍ: Î´Öª" << std::endl;
+				fs << "  ç±»åž‹: æœªçŸ¥" << std::endl;
 			}
-			fs << base::format("  ¶ÔÏó: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
+			fs << base::format("  å¯¹è±¡: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
 		}
 		auto pos = ht::getHandlePos(h.handle);
 		if (!pos.empty()) {
 			jass::opcode *current_op = pos[0];
 			assert(current_op->op == jass::OPTYPE_CALLNATIVE);
-			fs << base::format("  ´´½¨Î»ÖÃ: %s", jass::from_stringid(current_op->arg)) << std::endl;
+			fs << base::format("  åˆ›å»ºä½ç½®: %s", jass::from_stringid(current_op->arg)) << std::endl;
 			for (auto& cur : pos) {
 				jass::opcode* op;
 				for (op = cur; op->op != jass::OPTYPE_FUNCTION; --op)
@@ -151,7 +151,7 @@ namespace handles {
 			}
 		}
 		if (!h.global_reference.empty() || !h.local_reference.empty()) {
-			fs << "  ÒýÓÃËüµÄ±äÁ¿:" << std::endl;
+			fs << "  å¼•ç”¨å®ƒçš„å˜é‡:" << std::endl;
 			for (auto gv = h.global_reference.begin(); gv != h.global_reference.end(); ++gv) {
 				fs << base::format("    | %s", gv->c_str()) << std::endl;
 			}
@@ -160,7 +160,7 @@ namespace handles {
 			}
 		}
 		if (!h.hashtable_reference.empty()) {
-			fs << "  ÒýÓÃËüµÄ¹þÏ£±í:" << std::endl;
+			fs << "  å¼•ç”¨å®ƒçš„å“ˆå¸Œè¡¨:" << std::endl;
 			for (auto gv = h.hashtable_reference.begin(); gv != h.hashtable_reference.end(); ++gv) {
 				fs << base::format("    | %s", gv->c_str()) << std::endl;
 			}
@@ -226,13 +226,14 @@ namespace handles {
 			});
 		}
 
+		fs << "---------------------------------------" << std::endl;
+		fs << "              æ³„æ¼æ£€æµ‹æŠ¥å‘Š             " << std::endl;
+		fs << "---------------------------------------" << std::endl;
+		fs << "æœ€å¤§: " << (hts ? (*hts)->table.size : 0) << std::endl;
+		fs << "æ€»æ•°: " << ht.size() << std::endl;
+		fs << "---------------------------------------" << std::endl;
+
 		if (all) {
-			fs << "---------------------------------------" << std::endl;
-			fs << "              Ð¹Â©¼ì²â±¨¸æ             " << std::endl;
-			fs << "---------------------------------------" << std::endl;
-			fs << "×î´ó: " << (hts ? (*hts)->table.size : 0) << std::endl;
-			fs << "×ÜÊý: " << ht.size() << std::endl;
-			fs << "---------------------------------------" << std::endl;
 			for (auto& it : ht) { 
 				node& h = it.second;
 				scanner_display(fs, h);
@@ -252,8 +253,11 @@ namespace handles {
 				uint32_t ref = 0;
 				ref += h.global_reference.size();
 				ref += h.local_reference.size();
-				ref += h.hashtable_reference.size();
-				if (h.object && ref == 0) {
+				ref += h.hashtable_reference.size(); 
+				if (ref + (h.object ? 1 : 0) < h.reference) {
+					leaks.push_back(h);
+				}
+				else if (h.object && ref == 0) {
 					switch (type) {
 					case '+loc': // location
 					case '+grp': // group
@@ -268,18 +272,8 @@ namespace handles {
 						break;
 					}
 				}
-				else if (ref + (h.object ? 1 : 0) < h.reference) {
-					leaks.push_back(h);
-				}
 			}
 
-			fs << "---------------------------------------" << std::endl;
-			fs << "              Ð¹Â©¼ì²â±¨¸æ             " << std::endl;
-			fs << "---------------------------------------" << std::endl;
-			fs << "×î´ó: " << (hts ? (*hts)->table.size : 0) << std::endl;
-			fs << "×ÜÊý: " << ht.size() << std::endl;
-			fs << "Ð¹Â©: " << leaks.size() << std::endl;
-			fs << "---------------------------------------" << std::endl;
 			for (node& h : leaks) {
 				scanner_display(fs, h);
 			}
