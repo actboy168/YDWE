@@ -19,7 +19,7 @@ namespace base { namespace hook {
 		return !is_x64;
 	}
 
-	bool injectdll_x64(const PROCESS_INFORMATION& pi, const fs::path& dll) {
+	bool injectdll_x64(const PROCESS_INFORMATION& pi, const std::wstring& dll) {
 		static unsigned char sc[] = {
 			0x9c,                                                                   // pushfq
 			0x50,                                                                   // push rax
@@ -76,7 +76,7 @@ namespace base { namespace hook {
 			USHORT    MaximumLength;
 			DWORD64   Buffer;
 		};
-		SIZE_T memsize = sizeof(DWORD64) + sizeof(UNICODE_STRING) + (dll.wstring().size() + 1) * sizeof(wchar_t);
+		SIZE_T memsize = sizeof(DWORD64) + sizeof(UNICODE_STRING) + (dll.size() + 1) * sizeof(wchar_t);
 		DWORD64 memory = VirtualAllocEx64(pi.hProcess, NULL, memsize, MEM_COMMIT, PAGE_READWRITE);
 		if (!memory) {
 			return false;
@@ -87,7 +87,7 @@ namespace base { namespace hook {
 		}
 
 		UNICODE_STRING us;
-		us.Length = (USHORT)(dll.wstring().size() * sizeof(wchar_t));
+		us.Length = (USHORT)(dll.size() * sizeof(wchar_t));
 		us.MaximumLength = us.Length + sizeof(wchar_t);
 		us.Buffer = memory + sizeof(UNICODE_STRING);
 
@@ -97,7 +97,7 @@ namespace base { namespace hook {
 		if (!ok || written != sizeof(UNICODE_STRING)) {
 			return false;
 		}
-		ok = WriteProcessMemory64(pi.hProcess, us.Buffer, dll.wstring().data(), us.MaximumLength, &written);
+		ok = WriteProcessMemory64(pi.hProcess, us.Buffer, (void*)dll.data(), us.MaximumLength, &written);
 		if (!ok || written != us.MaximumLength) {
 			return false;
 		}
@@ -126,7 +126,7 @@ namespace base { namespace hook {
 		return true;
 	}
 
-	bool injectdll_x86(const PROCESS_INFORMATION& pi, const fs::path& dll) {
+	bool injectdll_x86(const PROCESS_INFORMATION& pi, const std::wstring& dll) {
 		static unsigned char sc[] = {
 			0x68, 0x00, 0x00, 0x00, 0x00,	// push eip
 			0x9C,							// pushfd
@@ -144,7 +144,7 @@ namespace base { namespace hook {
 			return false;
 		}
 
-		SIZE_T memsize = (dll.wstring().size() + 1) * sizeof(wchar_t);
+		SIZE_T memsize = (dll.size() + 1) * sizeof(wchar_t);
 		LPVOID memory = VirtualAllocEx(pi.hProcess, NULL, memsize, MEM_COMMIT, PAGE_READWRITE);
 		if (!memory) {
 			return false;
@@ -155,7 +155,7 @@ namespace base { namespace hook {
 		}
 		SIZE_T written = 0;
 		BOOL ok = FALSE;
-		ok = WriteProcessMemory(pi.hProcess, memory, dll.wstring().data(), memsize, &written);
+		ok = WriteProcessMemory(pi.hProcess, memory, dll.data(), memsize, &written);
 		if (!ok || written != memsize) {
 			return false;
 		}
@@ -180,12 +180,12 @@ namespace base { namespace hook {
 		return true;
 	}
 
-	bool injectdll(const PROCESS_INFORMATION& pi, const fs::path& x86dll, const fs::path& x64dll) {
+	bool injectdll(const PROCESS_INFORMATION& pi, const std::wstring& x86dll, const std::wstring& x64dll) {
 		if (is_process64(pi.hProcess)) {
-			return injectdll_x64(pi, x64dll);
+			return !x64dll.empty() && injectdll_x64(pi, x64dll);
 		}
 		else {
-			return injectdll_x86(pi, x86dll);
+			return !x86dll.empty() && injectdll_x86(pi, x86dll);
 		}
 	}
 
@@ -258,7 +258,7 @@ namespace base { namespace hook {
 		return true;
 	}
 
-	bool injectdll(DWORD pid, const fs::path& x86dll, const fs::path& x64dll) {
+	bool injectdll(DWORD pid, const std::wstring& x86dll, const std::wstring& x64dll) {
 		PROCESS_INFORMATION pi = { 0 };
 		if (!openprocess(pid, pi)) {
 			return false;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <base/config.h>
-#include <base/util/dynarray.h>
 
 #if defined(_WIN32)
 #pragma warning(push)

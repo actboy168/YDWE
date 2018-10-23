@@ -113,7 +113,7 @@ namespace base { namespace win { namespace subprocess {
         return target;
     }
 
-    static wchar_t* make_args(const std::dynarray<std::wstring>& args) {
+    static wchar_t* make_args(const std::vector<std::wstring>& args) {
         strbuilder res; 
         for (size_t i = 0; i < args.size() - 1; ++i) {
             res += quote_arg(args[i]);
@@ -235,7 +235,7 @@ namespace base { namespace win { namespace subprocess {
         }
     }
 
-    bool spawn::exec(const std::dynarray<std::wstring>& args, const wchar_t* cwd) {
+    bool spawn::exec(const std::vector<std::wstring>& args, const wchar_t* cwd) {
         std::unique_ptr<wchar_t[]> environment;
         if (!set_env_.empty() || !del_env_.empty()) {
             environment.reset(make_env(set_env_, del_env_));

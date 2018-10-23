@@ -49,35 +49,33 @@ function jasshelper:compile(op)
     local common_j_path = self:prepare_common_j(op.map_path, op.option.runtime_version)
     local blizzard_j_path = self:prepare_blizzard_j(op.map_path, op.option.runtime_version)
     
-	local parameter = ""
+	local parameter = {}
 	
 	-- 需要做vJass编译？
 	if op.option.enable_jasshelper then
 		-- debug选项（--debug）
 		if op.option.enable_jasshelper_debug then
-			parameter = parameter .. " --debug"
+			parameter[#parameter + 1] = "--debug"
 		end
 		-- （关闭）优化选项（--nooptimize）
 		if not op.option.enable_jasshelper_optimization then
-			parameter = parameter .. " --nooptimize"
+			parameter[#parameter + 1] = "--nooptimize"
 		end
 	else
 		-- 不编译vJass选项（--nopreprocessor）
-		parameter = parameter .. " --nopreprocessor"
+		parameter[#parameter + 1] = "--nopreprocessor"
 	end
 
-    local command_line = string.format('"%s"%s --scriptonly "%s" "%s" "%s" "%s"',
+    local ok = not not sys.spawn_wait {
         (self.path / "jasshelper.exe"):string(),
         parameter,
+        "--scriptonly"
         common_j_path:string(),
         blizzard_j_path:string(),
         op.input:string(),
-        op.output:string()
-    )
-    local ok = true
-    if not sys.spawn(command_line, fs.ydwe_path(), true) then
-        ok = false
-    end
+        op.output:string(),
+        cwd = fs.ydwe_path(),
+    }
     fs.remove(fs.ydwe_path() / 'jasshelper.conf')
     return ok
 end

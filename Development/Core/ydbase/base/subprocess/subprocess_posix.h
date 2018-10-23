@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <map>
 #include <set>
+#include <vector>
 
 namespace base { namespace posix { namespace subprocess {
     enum class stdio {
@@ -33,7 +34,7 @@ namespace base { namespace posix { namespace subprocess {
         void redirect(stdio type, FILE* f);
         void env_set(const std::string& key, const std::string& value);
         void env_del(const std::string& key);
-        bool exec(const std::dynarray<char*>& args, const char* cwd);
+        bool exec(const std::vector<char*>& args, const char* cwd);
 
     private:
         std::map<std::string, std::string> set_env_;

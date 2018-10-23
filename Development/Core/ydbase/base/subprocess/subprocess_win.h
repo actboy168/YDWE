@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <map>
 #include <set>
+#include <vector>
 
 namespace base { namespace win { namespace subprocess {
     namespace ignore_case {
@@ -57,7 +58,7 @@ namespace base { namespace win { namespace subprocess {
         void redirect(stdio type, FILE* f);
         void env_set(const std::wstring& key, const std::wstring& value);
         void env_del(const std::wstring& key);
-        bool exec(const std::dynarray<std::wstring>& args, const wchar_t* cwd);
+        bool exec(const std::vector<std::wstring>& args, const wchar_t* cwd);
         PROCESS_INFORMATION& pi();
 
     private:

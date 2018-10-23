@@ -130,7 +130,7 @@ namespace base { namespace posix { namespace subprocess {
         del_env_.insert(key);
     }
 
-    bool spawn::exec(const std::dynarray<char*>& args, const char* cwd) {
+    bool spawn::exec(const std::vector<char*>& args, const char* cwd) {
         pid_t pid = fork();
         if (pid == -1) {
             return false;

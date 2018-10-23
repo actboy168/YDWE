@@ -213,7 +213,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		}
 		if (fs::exists(inject_dll))
 		{
-			base::hook::injectdll(process, inject_dll, fs::path());	
+			base::hook::injectdll(process, inject_dll.wstring(), std::wstring());	
 		}
 		process.resume();
 		return true;

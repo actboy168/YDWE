@@ -1,6 +1,7 @@
 #include <base/subprocess.h>
 #include <lua.hpp>
 #include <optional>
+#include <vector>
 #include <errno.h>
 #include <string.h>
 
@@ -13,7 +14,7 @@ std::wstring u2w(const char* str, size_t len) {
 	if (wlen <= 0) {
 		return L"";
 	}
-	std::dynarray<wchar_t> result(wlen);
+	std::vector<wchar_t> result(wlen);
 	::MultiByteToWideChar(CP_UTF8, 0, str, len, result.data(), wlen);
 	return std::wstring(result.data(), result.size());
 }
@@ -37,48 +38,48 @@ std::string luaL_checknativestring(lua_State* L, int idx) {
 #endif
 
 namespace process {
-    static int constructor(lua_State* L, base::subprocess::spawn& spawn) {
-        void* storage = lua_newuserdata(L, sizeof(base::subprocess::process));
-        luaL_getmetatable(L, "subprocess");
-        lua_setmetatable(L, -2);
-        new (storage)base::subprocess::process(spawn);
-        return 1;
-    }
+	static int constructor(lua_State* L, base::subprocess::spawn& spawn) {
+		void* storage = lua_newuserdata(L, sizeof(base::subprocess::process));
+		luaL_getmetatable(L, "subprocess");
+		lua_setmetatable(L, -2);
+		new (storage)base::subprocess::process(spawn);
+		return 1;
+	}
 
-    static base::subprocess::process& to(lua_State* L, int idx) {
-        return *(base::subprocess::process*)luaL_checkudata(L, idx, "subprocess");
-    }
+	static base::subprocess::process& to(lua_State* L, int idx) {
+		return *(base::subprocess::process*)luaL_checkudata(L, idx, "subprocess");
+	}
 
-    static int destructor(lua_State* L) {
-        base::subprocess::process& self = to(L, 1);
-        self.~process();
-        return 0;
-    }
+	static int destructor(lua_State* L) {
+		base::subprocess::process& self = to(L, 1);
+		self.~process();
+		return 0;
+	}
 
-    static int wait(lua_State* L) {
-        base::subprocess::process& self = to(L, 1);
-        lua_pushinteger(L, (lua_Integer)self.wait());
-        return 1;
-    }
+	static int wait(lua_State* L) {
+		base::subprocess::process& self = to(L, 1);
+		lua_pushinteger(L, (lua_Integer)self.wait());
+		return 1;
+	}
 
-    static int kill(lua_State* L) {
-        base::subprocess::process& self = to(L, 1);
-        bool ok = self.kill(5000);
-        lua_pushboolean(L, ok);
-        return 1;
-    }
+	static int kill(lua_State* L) {
+		base::subprocess::process& self = to(L, 1);
+		bool ok = self.kill(5000);
+		lua_pushboolean(L, ok);
+		return 1;
+	}
 
-    static int get_id(lua_State* L) {
-        base::subprocess::process& self = to(L, 1);
-        lua_pushinteger(L, (lua_Integer)self.get_id());
-        return 1;
-    }
+	static int get_id(lua_State* L) {
+		base::subprocess::process& self = to(L, 1);
+		lua_pushinteger(L, (lua_Integer)self.get_id());
+		return 1;
+	}
 
-    static int is_running(lua_State* L) {
-        base::subprocess::process& self = to(L, 1);
-        lua_pushboolean(L, self.is_running());
-        return 1;
-    }
+	static int is_running(lua_State* L) {
+		base::subprocess::process& self = to(L, 1);
+		lua_pushboolean(L, self.is_running());
+		return 1;
+	}
 
 	static int resume(lua_State* L) {
 		base::subprocess::process& self = to(L, 1);
@@ -123,21 +124,31 @@ namespace spawn {
     }
 
 #if defined(_WIN32)
-    typedef std::dynarray<nativestring> native_args;
+    typedef std::vector<nativestring> native_args;
 #   define LOAD_ARGS(L, idx) luaL_checknativestring((L), (idx))
 #else
-    typedef std::dynarray<char*> native_args;
+    typedef std::vector<char*> native_args;
 #   define LOAD_ARGS(L, idx) (char*)luaL_checkstring((L), (idx))
 #endif
+	static void cast_args(lua_State* L, int idx, native_args& args) {
+		lua_Integer n = luaL_len(L, idx);
+		for (lua_Integer i = 1; i <= n; ++i) {
+			switch (lua_geti(L, idx, i)) {
+			case LUA_TSTRING:
+				args.push_back(LOAD_ARGS(L, -1));
+				break;
+			case LUA_TTABLE:
+				cast_args(L, lua_absindex(L, -1), args);
+				break;
+			}
+			lua_pop(L, 1);
+		}
+	}
+
     static native_args cast_args(lua_State* L) {
-        size_t n = (size_t)luaL_len(L, 1);
-        native_args args(n + 1);
-        for (size_t i = 0; i < n; ++i) {
-            lua_geti(L, 1, i + 1);
-            args[i] = LOAD_ARGS(L, -1);
-            lua_pop(L, 1);
-        }
-        args[n] = native_args::value_type();
+        native_args args;
+		cast_args(L, 1, args);
+        args.push_back(native_args::value_type());
         return args;
     }
 
@@ -268,6 +279,17 @@ static int peek(lua_State* L) {
     return 1;
 }
 
+#if defined(_WIN32)
+#include <base/hook/injectdll.h>
+namespace process {
+	static int inject(lua_State* L) {
+		base::subprocess::process& self = to(L, 1);
+		lua_pushboolean(L, base::hook::injectdll(self, luaL_checknativestring(L, 2), nativestring()));
+		return 1;
+	}
+}
+#endif
+
 extern "C"
 #if defined(_WIN32)
 __declspec(dllexport)
@@ -275,11 +297,14 @@ __declspec(dllexport)
 int luaopen_subprocess(lua_State* L)
 {
     static luaL_Reg mt[] = {
+#if defined(_WIN32)
         { "wait", process::wait },
         { "kill", process::kill },
         { "get_id", process::get_id },
         { "is_running", process::is_running },
 		{ "resume", process::resume },
+		{ "inject", process::inject },
+#endif
         { "__gc", process::destructor },
         { NULL, NULL }
     };
