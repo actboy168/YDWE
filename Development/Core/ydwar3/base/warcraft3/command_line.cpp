@@ -97,6 +97,33 @@ namespace base { namespace warcraft3 {
 		return result + unknown;
 	}
 
+	std::vector<std::wstring> command_line::args() const
+	{
+		std::vector<std::wstring> args;
+		args.push_back(app_);
+		foreach(auto item, *this)
+		{
+			if (knowns.find(item.first) != knowns.end())
+			{
+				args.push_back(L"-" + item.first);
+				if (!item.second.empty()) {
+					args.push_back(item.second);
+				}
+			}
+		}
+		foreach(auto item, *this)
+		{
+			if (knowns.find(item.first) == knowns.end())
+			{
+				args.push_back(L"-" + item.first);
+				if (!item.second.empty()) {
+					args.push_back(item.second);
+				}
+			}
+		}
+		return args;
+	}
+
 	bool command_line::app(const std::wstring& v)
 	{
 		app_ = v;

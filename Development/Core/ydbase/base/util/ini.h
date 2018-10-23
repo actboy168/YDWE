@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <string>
 #include <vector>
+#include <map>
 #include <base/exception/exception.h>
 #include <base/util/foreach.h>
 

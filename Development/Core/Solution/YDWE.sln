@@ -89,6 +89,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua54", "..\..\..\OpenSourc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "filewatch", "..\..\Plugin\Lua\filewatch\filewatch.vcxproj", "{4DA07921-80F3-4862-993B-E7844CDFE195}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "subprocess", "..\..\Plugin\Lua\subprocess\subprocess.vcxproj", "{36ABF6F1-BDF0-4B19-9331-84E27D736703}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -309,6 +311,12 @@ Global
 		{4DA07921-80F3-4862-993B-E7844CDFE195}.Release|Win32.ActiveCfg = Release|Win32
 		{4DA07921-80F3-4862-993B-E7844CDFE195}.Release|Win32.Build.0 = Release|Win32
 		{4DA07921-80F3-4862-993B-E7844CDFE195}.Release|x64.ActiveCfg = Release|Win32
+		{36ABF6F1-BDF0-4B19-9331-84E27D736703}.Debug|Win32.ActiveCfg = Debug|Win32
+		{36ABF6F1-BDF0-4B19-9331-84E27D736703}.Debug|Win32.Build.0 = Debug|Win32
+		{36ABF6F1-BDF0-4B19-9331-84E27D736703}.Debug|x64.ActiveCfg = Debug|Win32
+		{36ABF6F1-BDF0-4B19-9331-84E27D736703}.Release|Win32.ActiveCfg = Release|Win32
+		{36ABF6F1-BDF0-4B19-9331-84E27D736703}.Release|Win32.Build.0 = Release|Win32
+		{36ABF6F1-BDF0-4B19-9331-84E27D736703}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -346,6 +354,7 @@ Global
 		{198D08D6-92BA-46E3-B430-8351244FB61C} = {918168E0-1677-4614-AEC7-B9CAD7DA3DEC}
 		{316B33ED-1056-48B0-ABF0-CE3CE55F7A17} = {918168E0-1677-4614-AEC7-B9CAD7DA3DEC}
 		{4DA07921-80F3-4862-993B-E7844CDFE195} = {ABD67588-6A9A-4ACF-8AF7-D941793740E1}
+		{36ABF6F1-BDF0-4B19-9331-84E27D736703} = {ABD67588-6A9A-4ACF-8AF7-D941793740E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2384391F-A0A4-4E20-8F5C-E7AD0F7A9720}

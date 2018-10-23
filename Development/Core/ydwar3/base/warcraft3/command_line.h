@@ -15,6 +15,7 @@ namespace base { namespace warcraft3 {
 	public:
 		command_line(); 
 		std::wstring str() const;
+		std::vector<std::wstring> args() const;
 		bool         app(const std::wstring& v);
 		bool         has(const std::wstring& key) const;
 		bool         del(const std::wstring& key);

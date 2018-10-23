@@ -1,7 +1,8 @@
 #pragma once
 
+#include <base/config.h>
 #include <Windows.h>	
 
 namespace base { namespace hook {
-	bool replacedll(HANDLE hProcess, const char* oldDll, const char* newDll);
+	_BASE_API bool replacedll(const PROCESS_INFORMATION& pi, const char* oldDll, const char* newDll);
 }}

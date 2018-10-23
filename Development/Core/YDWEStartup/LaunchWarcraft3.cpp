@@ -3,11 +3,13 @@
 #include <base/path/ydwe.h>
 #include <base/path/helper.h>
 #include <base/win/env_variable.h>
-#include <base/win/process.h>
 #include <base/util/ini.h>
 #include <base/util/format.h>
 #include <base/win/registry/key.h> 
 #include <base/hook/fp_call.h>
+#include <base/subprocess.h>
+#include <base/hook/injectdll.h>
+#include <base/hook/replacedll.h>
 
 #define YDWE_WAR3_INLINE
 #include <base/warcraft3/directory.h>
@@ -57,23 +59,24 @@ static bool map_convert(const fs::path& ydwe, const fs::path& from, const fs::pa
 {
 	fs::path ydwedev = base::path::ydwe(true);
 	fs::path app = ydwe / L"bin" / L"lua.exe";
-	base::win::process process;
-	process.set_console(base::win::process::CONSOLE_DISABLE);
-	process.set_env(L"PATH", (ydwe / L"bin").wstring());
-	if (!process.create(
-		app,
-		base::format(LR"("%s" -e "package.cpath = [[%s]]" gui\mini.lua %s "%s" "%s")", 
+	base::subprocess::spawn spawn;
+	spawn.set_console(base::subprocess::console::eDisable);
+	spawn.env_set(L"PATH", (ydwe / L"bin").wstring());
+	if (!spawn.exec(
+		{
 			app.wstring(),
-			(ydwe / L"bin" / L"modules" / L"?.dll").wstring(),
-			mode,
+			L"-e",
+			base::format(L"package.cpath = [[%s]]", (ydwe / L"bin" / L"modules" / L"?.dll").wstring()),
+			L"gui\\mini.lua",
+			base::u2w(mode),
 			from.wstring(),
-			to.wstring()
-		),
-		ydwedev / L"plugin" / L"w3x2lni" / L"script"
+			to.wstring(),
+		},
+		(ydwedev / L"plugin" / L"w3x2lni" / L"script").c_str()
 	)) {
 		return false;
 	}
-	return process.wait() == 0;
+	return base::subprocess::process(spawn).wait() == 0;
 }
 
 static void map_build(const fs::path& ydwe, const fs::path& from, const fs::path& to, bool slk)
@@ -181,31 +184,40 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 
 		SetEnvironmentVariableW(L"ydwe-process-name", L"war3");
 
-		base::win::process warcraft3_process;
+		base::subprocess::spawn spawn;
+		spawn.suspended();
 
+		if (fs::exists(inject_dll))
+		{
+			cmd.add(L"ydwe", ydwe.wstring());
+		}
+		cmd.app(war3_path.wstring());
+		cmd.del(L"war3");
+		cmd.del(L"closew2l");
+		if (!spawn.exec(cmd.args(), 0)) {
+			return false;
+		}
+
+		base::subprocess::process process(spawn);
 		try {
 			if (table["War3Patch"]["Option"] == "2")
 			{
 				fs::path stormdll = ydwe / L"share" / L"patch" / table["War3Patch"]["DirName"] / L"Storm.dll";
 				if (fs::exists(stormdll))
 				{
-					warcraft3_process.replace(stormdll, "Storm.dll");
+					base::hook::replacedll(process, "Storm.dll", stormdll.string().c_str());
 				}
 			}
 		}
 		catch (...) {
 		}
-
 		if (fs::exists(inject_dll))
 		{
-			cmd.add(L"ydwe", ydwe.wstring());
-			warcraft3_process.inject_x86(inject_dll);			
+			base::hook::injectdll(process, inject_dll, fs::path());	
 		}
-
-		cmd.app(war3_path.wstring());
-		cmd.del(L"war3");
-		cmd.del(L"closew2l");
-		return warcraft3_process.create(war3_path, cmd.str());
+		process.resume();
+		return true;
+		
 	}
 	catch (...) {
 	}

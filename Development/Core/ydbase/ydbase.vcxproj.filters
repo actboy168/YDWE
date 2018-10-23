@@ -62,6 +62,9 @@
     <Filter Include="base\i18n-2">
       <UniqueIdentifier>{84787b93-89af-4757-b2f5-8507c8e7cc78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\subprocess">
+      <UniqueIdentifier>{1521888c-d106-4fde-948d-ca0a4d0cdc3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -187,6 +190,12 @@
     </ClCompile>
     <ClCompile Include="base\util\pinyin.cpp">
       <Filter>base\util</Filter>
+    </ClCompile>
+    <ClCompile Include="base\subprocess\subprocess_posix.cpp">
+      <Filter>base\subprocess</Filter>
+    </ClCompile>
+    <ClCompile Include="base\subprocess\subprocess_win.cpp">
+      <Filter>base\subprocess</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -442,6 +451,15 @@
     </ClInclude>
     <ClInclude Include="base\util\pinyin.h">
       <Filter>base\util</Filter>
+    </ClInclude>
+    <ClInclude Include="base\subprocess\subprocess_posix.h">
+      <Filter>base\subprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="base\subprocess\subprocess_win.h">
+      <Filter>base\subprocess</Filter>
+    </ClInclude>
+    <ClInclude Include="base\subprocess.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

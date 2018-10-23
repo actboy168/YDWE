@@ -121,6 +121,11 @@
     <ClCompile Include="base\hook\replace_pointer.cpp" />
     <ClCompile Include="base\i18n-2\gettext.cpp" />
     <ClCompile Include="base\path\ydwe.cpp" />
+    <ClCompile Include="base\subprocess\subprocess_posix.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="base\subprocess\subprocess_win.cpp" />
     <ClCompile Include="base\thread\thread.cpp" />
     <ClCompile Include="base\thread\thread_exception.cpp" />
     <ClCompile Include="base\util\pinyin.cpp" />
@@ -198,6 +203,12 @@
     <ClInclude Include="base\path\self.h" />
     <ClInclude Include="base\path\get_path.h" />
     <ClInclude Include="base\path\ydwe.h" />
+    <ClInclude Include="base\subprocess.h" />
+    <ClInclude Include="base\subprocess\subprocess_posix.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="base\subprocess\subprocess_win.h" />
     <ClInclude Include="base\thread\intrusive_ptr.h" />
     <ClInclude Include="base\thread\lock\backoff.h" />
     <ClInclude Include="base\thread\lock\guard.h" />

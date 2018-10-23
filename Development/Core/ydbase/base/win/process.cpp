@@ -70,7 +70,7 @@ namespace base { namespace win {
 			{
 				for (auto it = replacedll.begin(); it != replacedll.end(); ++it)
 				{
-					hook::replacedll(process_information->hProcess, it->first.c_str(), it->second.string().c_str());
+					hook::replacedll(*process_information, it->first.c_str(), it->second.string().c_str());
 				}
 			}
 

@@ -80,6 +80,33 @@ namespace std {
 			d.count_ = 0;
 		}
 
+		dynarray(std::initializer_list<T> l)
+			: store_(alloc(l.size()))
+			, count_(l.size())
+		{
+			try {
+				uninitialized_copy(l.begin(), l.end(), begin());
+			}
+			catch (...) {
+				delete[] reinterpret_cast<char*>(store_);
+				throw;
+			}
+		}
+
+		template <class Vec>
+		dynarray(const Vec& v, typename std::enable_if<std::is_same<typename Vec::value_type, T>::value>::type* =0)
+			: store_(alloc(v.size()))
+			, count_(v.size())
+		{
+			try {
+				uninitialized_copy(v.begin(), v.end(), begin());
+			}
+			catch (...) {
+				delete[] reinterpret_cast<char*>(store_);
+				throw;
+			}
+		}
+
 		~dynarray()
 		{
 			for (size_type i = 0; i < size(); ++i)

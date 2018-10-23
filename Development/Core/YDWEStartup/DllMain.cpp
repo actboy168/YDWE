@@ -12,9 +12,9 @@
 #include <base/path/ydwe.h>
 #include <base/util/unicode.h>
 #include <base/win/file_version.h>
-#include <base/win/process.h>
 #include <base/util/format.h>	 
 #include <base/util/ini.h>
+#include <base/subprocess.h>
 #include "Splash.h"
 
 #define YDWE_WAR3_INLINE
@@ -194,14 +194,19 @@ static void DoTask()
 	CreateDotNetConfig(gWarcraftDirectory / L"worldeditydwe.exe.config");
 
 	SetEnvironmentVariableW(L"ydwe-process-name", L"ydwe");
-	base::win::process worldedit_process;
-	bool result = worldedit_process.create(worldeditPreferredPath, std::wstring(::GetCommandLineW()));
+	base::subprocess::spawn worldedit_process;
 
-	if (!result)
-	{
+	int argc = 0;
+	wchar_t** argv = ::CommandLineToArgvW(::GetCommandLineW(), &argc);
+	std::dynarray<std::wstring> args(argc+1);
+	for (int i = 0; i < argc; ++i) {
+		args[i] = argv[i];
+	}
+	args[0] = worldeditPreferredPath.wstring();
+
+	if (!worldedit_process.exec(args, 0)) {
 		throw base::windows_exception(_("ERROR_LAUNCH_WE"));
 	}
-
 	ShowSplash(gExecutableDirectory);
 }
 
