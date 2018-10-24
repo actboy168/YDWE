@@ -5,14 +5,12 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 extern char **environ;
 
 namespace base { namespace posix { namespace subprocess {
-
-    process::process(spawn& spawn)
-    { }
 
     template <class T>
     struct allocarray {
@@ -152,12 +150,37 @@ namespace base { namespace posix { namespace subprocess {
             execvp(args[0], args.data());
             _exit(127);
         }
+        pid_ = pid;
         for (int i = 0; i < 3; ++i) {
             if (fds_[i] > 0) {
                 close(fds_[i]);
             }
         }
         return true;
+    }
+
+    process::process(spawn& spawn)
+    : pid(spawn.pid_)
+    { }
+
+    bool     process::is_running() {
+        return (0 == ::waitpid(pid, 0, WNOHANG));
+    }
+
+    bool     process::kill(int signum) {
+        return ::kill(pid, signum);
+    }
+
+    uint32_t process::wait() {
+        int status = 0;
+        if (-1 == ::waitpid(pid, &status, 0)) {
+            return 0;
+        }
+        return WIFEXITED(status)? WEXITSTATUS(status): 0;
+    }
+
+    uint32_t process::get_id() const {
+        return pid;
     }
 
     namespace pipe {

@@ -40,12 +40,14 @@ namespace base { namespace win { namespace subprocess {
         process(process& pi);
         ~process();
         bool     is_running();
-        bool     kill(uint32_t timeout);
-        uint32_t exit_code();
+        bool     kill(int signum);
         uint32_t wait();
-        bool     wait(uint32_t timeout);
         uint32_t get_id() const;
-		bool     resume();
+        bool     resume();
+
+    private:
+        bool     wait(uint32_t timeout);
+        uint32_t exit_code();
     };
 
     class _BASE_API spawn {
@@ -54,7 +56,7 @@ namespace base { namespace win { namespace subprocess {
         ~spawn();
         bool set_console(console type);
         bool hide_window();
-		void suspended();
+        void suspended();
         void redirect(stdio type, FILE* f);
         void env_set(const std::wstring& key, const std::wstring& value);
         void env_del(const std::wstring& key);

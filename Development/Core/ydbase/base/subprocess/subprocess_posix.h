@@ -18,16 +18,16 @@ namespace base { namespace posix { namespace subprocess {
     class process {
     public:
         process(spawn& spawn);
-        bool     is_running() { return false; }
-        bool     kill(uint32_t timeout) { return false; }
-        uint32_t exit_code() { return -1; }
-        uint32_t wait() { return -1; }
-        bool     wait(uint32_t timeout) { return false; }
-        uint32_t get_id() const { return -1; }
-		bool     resume() { return false; }
+        bool     is_running();
+        bool     kill(int signum);
+        uint32_t wait();
+        uint32_t get_id() const;
+
+        int pid;
     };
 
     class spawn {
+        friend class process;
     public:
         spawn();
         ~spawn();
@@ -39,11 +39,12 @@ namespace base { namespace posix { namespace subprocess {
     private:
         std::map<std::string, std::string> set_env_;
         std::set<std::string>              del_env_;
-		int                                fds_[3];
+        int                                fds_[3];
+        int                                pid_;
     };
 
     namespace pipe {
         std::pair<FILE*, FILE*> open();
         int                     peek(FILE* f);
-	}
+    }
 }}}

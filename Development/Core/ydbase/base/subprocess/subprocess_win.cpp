@@ -5,6 +5,9 @@
 #include <assert.h>
 #include <fcntl.h>
 #include <io.h>
+#include <signal.h>
+
+#define SIGKILL 9
 
 namespace base { namespace win { namespace subprocess {
 
@@ -191,7 +194,7 @@ namespace base { namespace win { namespace subprocess {
     }
 
     bool spawn::set_console(console type) {
-		flags_ &= ~(CREATE_NO_WINDOW | CREATE_NEW_CONSOLE);
+        flags_ &= ~(CREATE_NO_WINDOW | CREATE_NEW_CONSOLE);
         switch (type) {
         case console::eInherit:
             break;
@@ -201,8 +204,8 @@ namespace base { namespace win { namespace subprocess {
         case console::eNew:
             flags_ |= CREATE_NEW_CONSOLE;
             break;
-		default:
-			return false;
+        default:
+            return false;
         }
         return true;
     }
@@ -213,10 +216,10 @@ namespace base { namespace win { namespace subprocess {
         return true;
     }
 
-	void spawn::suspended() {
-		flags_ |= CREATE_SUSPENDED;
-	}
-	
+    void spawn::suspended() {
+        flags_ |= CREATE_SUSPENDED;
+    }
+    
     void spawn::redirect(stdio type, FILE* f) {
         si_.dwFlags |= STARTF_USESTDHANDLES;
         inherit_handle_ = true;
@@ -271,9 +274,9 @@ namespace base { namespace win { namespace subprocess {
     }
 
     PROCESS_INFORMATION spawn::release() {
-		PROCESS_INFORMATION r = pi_;
-		memset(&pi_, 0, sizeof(PROCESS_INFORMATION));
-		return r;
+        PROCESS_INFORMATION r = pi_;
+        memset(&pi_, 0, sizeof(PROCESS_INFORMATION));
+        return r;
     }
 
     process::process(spawn& spawn)
@@ -307,17 +310,25 @@ namespace base { namespace win { namespace subprocess {
         return false;
     }
 
-    bool process::kill(uint32_t timeout) {
-        bool result = (::TerminateProcess(hProcess, 0) != FALSE);
-        if (result && timeout) {
-            return wait(timeout);
-        }
-        return result;
+    bool process::kill(int signum) {
+		switch (signum) {
+		case SIGTERM:
+		case SIGKILL:
+		case SIGINT:
+			if (TerminateProcess(hProcess, 1)) {
+				return wait(5000);
+			}
+			return false;
+		case 0:
+			return is_running();
+		default:
+			return false;
+		}
     }
 
-	bool process::resume() {
-		return (DWORD)-1 != ::ResumeThread(hThread);
-	}
+    bool process::resume() {
+        return (DWORD)-1 != ::ResumeThread(hThread);
+    }
 
     uint32_t process::exit_code() {
         DWORD ret = 0;
