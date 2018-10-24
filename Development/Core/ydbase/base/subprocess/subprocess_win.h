@@ -59,7 +59,7 @@ namespace base { namespace win { namespace subprocess {
         void env_set(const std::wstring& key, const std::wstring& value);
         void env_del(const std::wstring& key);
         bool exec(const std::vector<std::wstring>& args, const wchar_t* cwd);
-        PROCESS_INFORMATION& pi();
+        PROCESS_INFORMATION release();
 
     private:
         std::map<std::wstring, std::wstring, ignore_case::less<std::wstring>> set_env_;

@@ -270,12 +270,14 @@ namespace base { namespace win { namespace subprocess {
         del_env_.insert(key);
     }
 
-    PROCESS_INFORMATION& spawn::pi() {
-        return pi_;
+    PROCESS_INFORMATION spawn::release() {
+		PROCESS_INFORMATION r = pi_;
+		memset(&pi_, 0, sizeof(PROCESS_INFORMATION));
+		return r;
     }
 
     process::process(spawn& spawn)
-        : PROCESS_INFORMATION(spawn.pi())
+        : PROCESS_INFORMATION(spawn.release())
     { }
 
     process::process(process& pi)

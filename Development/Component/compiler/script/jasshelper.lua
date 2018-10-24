@@ -69,12 +69,12 @@ function jasshelper:compile(op)
     local ok = not not sys.spawn_wait {
         (self.path / "jasshelper.exe"):string(),
         parameter,
-        "--scriptonly"
+        "--scriptonly",
         common_j_path:string(),
         blizzard_j_path:string(),
         op.input:string(),
         op.output:string(),
-        cwd = fs.ydwe_path(),
+        cwd = fs.ydwe_path():string(),
     }
     fs.remove(fs.ydwe_path() / 'jasshelper.conf')
     return ok

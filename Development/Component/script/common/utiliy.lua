@@ -91,8 +91,20 @@ function sys.spawn (args)
 	return false
 end
 
+function sys.tbl_concat(t, sep)
+	local nt = {}
+	for i, v in ipairs(t) do
+		if type(v) == 'table' then
+			nt[i] = sys.tbl_concat(v, sep)
+		else
+			nt[i] = v
+		end
+	end
+	return table.concat(nt, sep)
+end
+
 function sys.spawn_wait (args)
-	local command_line = table.concat(args, ' ')
+	local command_line = sys.tbl_concat(args, ' ')
 	local process = subprocess.spawn(args)
 	if not process then
 		log.error(string.format("Executed %s failed", command_line))
