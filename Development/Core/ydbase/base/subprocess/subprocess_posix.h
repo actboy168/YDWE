@@ -18,10 +18,12 @@ namespace base { namespace posix { namespace subprocess {
     class process {
     public:
         process(spawn& spawn);
-        bool     is_running();
-        bool     kill(int signum);
-        uint32_t wait();
-        uint32_t get_id() const;
+        bool      is_running();
+        bool      kill(int signum);
+        uint32_t  wait();
+        uint32_t  get_id() const;
+        bool      resume();
+        uintptr_t native_handle();
 
         int pid;
     };
@@ -31,6 +33,7 @@ namespace base { namespace posix { namespace subprocess {
     public:
         spawn();
         ~spawn();
+        void suspended();
         void redirect(stdio type, FILE* f);
         void env_set(const std::string& key, const std::string& value);
         void env_del(const std::string& key);
@@ -41,6 +44,7 @@ namespace base { namespace posix { namespace subprocess {
         std::set<std::string>              del_env_;
         int                                fds_[3];
         int                                pid_;
+        bool                               suspended_;
     };
 
     namespace pipe {

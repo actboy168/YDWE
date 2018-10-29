@@ -81,13 +81,17 @@ namespace process {
         return 1;
     }
 
-#if defined(_WIN32)
     static int resume(lua_State* L) {
         base::subprocess::process& self = to(L, 1);
         lua_pushboolean(L, self.resume());
         return 1;
     }
-#endif
+
+    static int native_handle(lua_State* L) {
+        base::subprocess::process& self = to(L, 1);
+        lua_pushinteger(L, self.native_handle());
+        return 1;
+    }
 }
 
 namespace spawn {
@@ -201,6 +205,15 @@ namespace spawn {
         lua_pop(L, 1);
     }
 
+    static void cast_suspended(lua_State* L, base::subprocess::spawn& self) {
+        if (LUA_TBOOLEAN == lua_getfield(L, 1, "suspended")) {
+            if (lua_toboolean(L, -1)) {
+                self.suspended();
+            }
+        }
+        lua_pop(L, 1);
+    }
+
 #if defined(_WIN32)
     static void cast_option(lua_State* L, base::subprocess::spawn& self)
     {
@@ -224,13 +237,6 @@ namespace spawn {
             }
         }
         lua_pop(L, 1);
-
-        if (LUA_TBOOLEAN == lua_getfield(L, 1, "suspended")) {
-            if (lua_toboolean(L, -1)) {
-                self.suspended();
-            }
-        }
-        lua_pop(L, 1);
     }
 #else
     static void cast_option(lua_State* , base::subprocess::spawn&)
@@ -248,6 +254,7 @@ namespace spawn {
 
         std::optional<nativestring> cwd = cast_cwd(L);
         cast_env(L, spawn);
+        cast_suspended(L, spawn);
         cast_option(L, spawn);
 
         FILE* f_stdin = cast_stdio(L, "stdin");
@@ -281,17 +288,6 @@ static int peek(lua_State* L) {
     return 1;
 }
 
-#if defined(_WIN32)
-#include <base/hook/injectdll.h>
-namespace process {
-	static int inject(lua_State* L) {
-		base::subprocess::process& self = to(L, 1);
-		lua_pushboolean(L, base::hook::injectdll(self, luaL_checknativestring(L, 2), nativestring()));
-		return 1;
-	}
-}
-#endif
-
 extern "C"
 #if defined(_WIN32)
 __declspec(dllexport)
@@ -303,10 +299,8 @@ int luaopen_subprocess(lua_State* L)
         { "kill", process::kill },
         { "get_id", process::get_id },
         { "is_running", process::is_running },
-#if defined(_WIN32)
         { "resume", process::resume },
-		{ "inject", process::inject },
-#endif
+        { "native_handle", process::native_handle },
         { "__gc", process::destructor },
         { NULL, NULL }
     };

@@ -39,11 +39,12 @@ namespace base { namespace win { namespace subprocess {
         process(spawn& spawn);
         process(process& pi);
         ~process();
-        bool     is_running();
-        bool     kill(int signum);
-        uint32_t wait();
-        uint32_t get_id() const;
-        bool     resume();
+        bool      is_running();
+        bool      kill(int signum);
+        uint32_t  wait();
+        uint32_t  get_id() const;
+        bool      resume();
+        uintptr_t native_handle();
 
     private:
         bool     wait(uint32_t timeout);
@@ -73,7 +74,7 @@ namespace base { namespace win { namespace subprocess {
     };
 
     namespace pipe {
-		_BASE_API std::pair<FILE*, FILE*> open();
-		_BASE_API int                     peek(FILE* f);
+        _BASE_API std::pair<FILE*, FILE*> open();
+        _BASE_API int                     peek(FILE* f);
     }
 }}}

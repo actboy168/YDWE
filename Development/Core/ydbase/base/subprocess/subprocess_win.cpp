@@ -311,19 +311,19 @@ namespace base { namespace win { namespace subprocess {
     }
 
     bool process::kill(int signum) {
-		switch (signum) {
-		case SIGTERM:
-		case SIGKILL:
-		case SIGINT:
-			if (TerminateProcess(hProcess, 1)) {
-				return wait(5000);
-			}
-			return false;
-		case 0:
-			return is_running();
-		default:
-			return false;
-		}
+        switch (signum) {
+        case SIGTERM:
+        case SIGKILL:
+        case SIGINT:
+            if (TerminateProcess(hProcess, 1)) {
+                return wait(5000);
+            }
+            return false;
+        case 0:
+            return is_running();
+        default:
+            return false;
+        }
     }
 
     bool process::resume() {
@@ -340,6 +340,10 @@ namespace base { namespace win { namespace subprocess {
 
     uint32_t process::get_id() const {
         return (uint32_t)dwProcessId;
+    }
+
+    uintptr_t process::native_handle() {
+        return (uintptr_t)hProcess;
     }
 
     namespace pipe {
