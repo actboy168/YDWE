@@ -232,7 +232,7 @@ namespace base { namespace hook {
 		pi = { 0 };
 	}
 
-	bool openprocess(DWORD pid, PROCESS_INFORMATION& pi) {
+	bool openprocess(DWORD pid, DWORD process_access, DWORD thread_access, PROCESS_INFORMATION& pi) {
 		closeprocess(pi);
 
 		static bool ok = setdebugprivilege();
@@ -240,7 +240,7 @@ namespace base { namespace hook {
 			return false;
 		}
 		pi.dwProcessId = pid;
-		pi.hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pi.dwProcessId);
+		pi.hProcess = OpenProcess(process_access, FALSE, pi.dwProcessId);
 		if (!pi.hProcess) {
 			closeprocess(pi);
 			return false;
@@ -250,7 +250,7 @@ namespace base { namespace hook {
 			closeprocess(pi);
 			return false;
 		}
-		pi.hThread = OpenThread(THREAD_GET_CONTEXT | THREAD_SET_CONTEXT | THREAD_SUSPEND_RESUME, FALSE, pi.dwThreadId);
+		pi.hThread = OpenThread(thread_access, FALSE, pi.dwThreadId);
 		if (!pi.hThread) {
 			closeprocess(pi);
 			return false;
@@ -260,7 +260,7 @@ namespace base { namespace hook {
 
 	bool injectdll(DWORD pid, const std::wstring& x86dll, const std::wstring& x64dll) {
 		PROCESS_INFORMATION pi = { 0 };
-		if (!openprocess(pid, pi)) {
+		if (!openprocess(pid, PROCESS_ALL_ACCESS, THREAD_GET_CONTEXT | THREAD_SET_CONTEXT | THREAD_SUSPEND_RESUME, pi)) {
 			return false;
 		}
 		SuspendThread(pi.hThread);
