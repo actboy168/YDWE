@@ -289,6 +289,12 @@ namespace base { namespace win { namespace subprocess {
         memset(&pi, 0, sizeof(PROCESS_INFORMATION));
     }
 
+	process::process(PROCESS_INFORMATION& pi)
+		: PROCESS_INFORMATION(pi)
+	{
+		memset(&pi, 0, sizeof(PROCESS_INFORMATION));
+	}
+
     process::~process() {
         ::CloseHandle(hThread);
         ::CloseHandle(hProcess);

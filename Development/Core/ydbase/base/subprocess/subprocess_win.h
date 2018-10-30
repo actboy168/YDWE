@@ -38,6 +38,7 @@ namespace base { namespace win { namespace subprocess {
     public:
         process(spawn& spawn);
         process(process& pi);
+		process(PROCESS_INFORMATION& pi);
         ~process();
         bool      is_running();
         bool      kill(int signum);
