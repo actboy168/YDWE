@@ -154,7 +154,6 @@ namespace spawn {
     static native_args cast_args(lua_State* L) {
         native_args args;
         cast_args(L, 1, args);
-        args.push_back(native_args::value_type());
         return args;
     }
 

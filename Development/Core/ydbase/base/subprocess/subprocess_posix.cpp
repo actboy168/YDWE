@@ -156,6 +156,7 @@ namespace base { namespace posix { namespace subprocess {
             if (suspended_) {
                 ::kill(getpid(), SIGSTOP);
             }
+			args.push_back(nullptr);
             execvp(args[0], args.data());
             _exit(127);
         }

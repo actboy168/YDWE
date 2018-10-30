@@ -118,9 +118,9 @@ namespace base { namespace win { namespace subprocess {
 
     static wchar_t* make_args(const std::vector<std::wstring>& args) {
         strbuilder res; 
-        for (size_t i = 0; i < args.size() - 1; ++i) {
+        for (size_t i = 0; i < args.size(); ++i) {
             res += quote_arg(args[i]);
-            if (i + 2 != args.size()) {
+            if (i + 1 != args.size()) {
                 res += L" ";
             }
         }

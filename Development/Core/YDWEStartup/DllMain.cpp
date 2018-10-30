@@ -198,7 +198,7 @@ static void DoTask()
 
 	int argc = 0;
 	wchar_t** argv = ::CommandLineToArgvW(::GetCommandLineW(), &argc);
-	std::vector<std::wstring> args(argc+1);
+	std::vector<std::wstring> args(argc);
 	for (int i = 0; i < argc; ++i) {
 		args[i] = argv[i];
 	}
