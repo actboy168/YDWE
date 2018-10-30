@@ -36,10 +36,13 @@ namespace base { namespace win { namespace subprocess {
     class spawn;
     class _BASE_API process : public PROCESS_INFORMATION {
     public:
-        process(spawn& spawn);
-        process(process& pi);
+		process(spawn& spawn);
+		process(process& pi);
+		process(process&& pi);
 		process(PROCESS_INFORMATION& pi);
-        ~process();
+		~process();
+		process& operator=(process& pi);
+		process& operator=(process&& pi);
         bool      is_running();
         bool      kill(int signum);
         uint32_t  wait();

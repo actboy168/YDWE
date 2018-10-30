@@ -289,6 +289,12 @@ namespace base { namespace win { namespace subprocess {
         memset(&pi, 0, sizeof(PROCESS_INFORMATION));
     }
 
+	process::process(process&& pi)
+		: PROCESS_INFORMATION(pi)
+	{
+		memset(&pi, 0, sizeof(PROCESS_INFORMATION));
+	}
+
 	process::process(PROCESS_INFORMATION& pi)
 		: PROCESS_INFORMATION(pi)
 	{
@@ -299,6 +305,22 @@ namespace base { namespace win { namespace subprocess {
         ::CloseHandle(hThread);
         ::CloseHandle(hProcess);
     }
+
+	process& process::operator=(process& pi) {
+		if (this != &pi) {
+			memcpy(this, &pi, sizeof(PROCESS_INFORMATION));
+			memset(&pi, 0, sizeof(PROCESS_INFORMATION));
+		}
+		return *this;
+	}
+
+	process& process::operator=(process&& pi) {
+		if (this != &pi) {
+			memcpy(this, &pi, sizeof(PROCESS_INFORMATION));
+			memset(&pi, 0, sizeof(PROCESS_INFORMATION));
+		}
+		return *this;
+	}
 
     uint32_t process::wait() {
         wait(INFINITE);

@@ -18,6 +18,10 @@ namespace base { namespace posix { namespace subprocess {
     class process {
     public:
         process(spawn& spawn);
+		process(process&) = delete;
+		process(process&&) = delete;
+		process& operator=(process&) = delete;
+		process& operator=(process&&) = delete;
         bool      is_running();
         bool      kill(int signum);
         uint32_t  wait();
