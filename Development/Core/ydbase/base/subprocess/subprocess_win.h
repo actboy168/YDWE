@@ -36,13 +36,13 @@ namespace base { namespace win { namespace subprocess {
     class spawn;
     class _BASE_API process : public PROCESS_INFORMATION {
     public:
-		process(spawn& spawn);
-		process(process& pi);
-		process(process&& pi);
-		process(PROCESS_INFORMATION& pi);
-		~process();
-		process& operator=(process& pi);
-		process& operator=(process&& pi);
+        process(spawn& spawn);
+        process(process& pi);
+        process(process&& pi);
+        process(PROCESS_INFORMATION& pi);
+        ~process();
+        process& operator=(process& pi);
+        process& operator=(process&& pi);
         bool      is_running();
         bool      kill(int signum);
         uint32_t  wait();
@@ -66,6 +66,7 @@ namespace base { namespace win { namespace subprocess {
         void env_set(const std::wstring& key, const std::wstring& value);
         void env_del(const std::wstring& key);
         bool exec(const std::vector<std::wstring>& args, const wchar_t* cwd);
+        bool exec(const std::wstring& app, const std::wstring& cmd, const wchar_t* cwd);
         PROCESS_INFORMATION release();
 
     private:

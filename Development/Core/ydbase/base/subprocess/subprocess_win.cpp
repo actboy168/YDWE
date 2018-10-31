@@ -127,6 +127,14 @@ namespace base { namespace win { namespace subprocess {
         return res.string();
     }
 
+	static wchar_t* make_args(const std::wstring& app, const std::wstring& cmd) {
+		strbuilder res;
+		res += quote_arg(app);
+		res += L" ";
+		res += cmd;
+		return res.string();
+	}
+
     static wchar_t* make_env(std::map<std::wstring, std::wstring, ignore_case::less<std::wstring>>& set, std::set<std::wstring, ignore_case::less<std::wstring>>& del)
     {
         wchar_t* es = GetEnvironmentStringsW();
@@ -264,6 +272,33 @@ namespace base { namespace win { namespace subprocess {
         ::CloseHandle(si_.hStdError);
         return true;
     }
+
+	bool spawn::exec(const std::wstring& app, const std::wstring& cmd, const wchar_t* cwd) {
+		std::unique_ptr<wchar_t[]> environment;
+		if (!set_env_.empty() || !del_env_.empty()) {
+			environment.reset(make_env(set_env_, del_env_));
+			flags_ |= CREATE_UNICODE_ENVIRONMENT;
+		}
+
+		std::unique_ptr<wchar_t[]> command_line(make_args(app, cmd));
+		if (!::CreateProcessW(
+			app.c_str(),
+			command_line.get(),
+			NULL, NULL,
+			inherit_handle_,
+			flags_ | NORMAL_PRIORITY_CLASS,
+			environment.get(),
+			cwd,
+			&si_, &pi_
+		))
+		{
+			return false;
+		}
+		::CloseHandle(si_.hStdInput);
+		::CloseHandle(si_.hStdOutput);
+		::CloseHandle(si_.hStdError);
+		return true;
+	}
 
     void spawn::env_set(const std::wstring& key, const std::wstring& value) {
         set_env_[key] = value;
