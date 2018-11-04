@@ -160,7 +160,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		try {
 			fs::path rootpath = path::module().parent_path();
 			fs::path filepath = rootpath / u2w(filename);
-			filepath = path::normalize(filepath);
+			filepath = fs::absolute(filepath);
 
 			std::wstring ext = filepath.extension().wstring().substr(1, 4);
 			std::transform(ext.begin(), ext.end(), ext.begin(), ::towlower);
