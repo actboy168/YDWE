@@ -134,9 +134,6 @@
     <ClCompile Include="base\file\stream.cpp">
       <Filter>base\file</Filter>
     </ClCompile>
-    <ClCompile Include="base\win\get_tick_count.cpp">
-      <Filter>base\win</Filter>
-    </ClCompile>
     <ClCompile Include="base\win\font\file.cpp">
       <Filter>base\win\font</Filter>
     </ClCompile>
@@ -320,9 +317,6 @@
       <Filter>base\lua</Filter>
     </ClInclude>
     <ClInclude Include="base\config.h" />
-    <ClInclude Include="base\win\get_tick_count.h">
-      <Filter>base\win</Filter>
-    </ClInclude>
     <ClInclude Include="base\win\registry\exception.h">
       <Filter>base\win\registry</Filter>
     </ClInclude>

@@ -129,7 +129,6 @@
     <ClCompile Include="base\util\pinyin.cpp" />
     <ClCompile Include="base\win\font\file.cpp" />
     <ClCompile Include="base\win\font\utility.cpp" />
-    <ClCompile Include="base\win\get_tick_count.cpp" />
     <ClCompile Include="base\win\windows_category.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="base\exception\exception.cpp" />
@@ -234,7 +233,6 @@
     <ClInclude Include="base\win\file_version.h" />
     <ClInclude Include="base\win\font\file.h" />
     <ClInclude Include="base\win\font\utility.h" />
-    <ClInclude Include="base\win\get_tick_count.h" />
     <ClInclude Include="base\win\pe_reader.h" />
     <ClInclude Include="base\win\process.h" />
     <ClInclude Include="base\win\registry\exception.h" />
