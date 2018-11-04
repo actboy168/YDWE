@@ -6,8 +6,8 @@ sys = {}
 
 local uni = require 'ffi.unicode'
 
-fs.__ydwe_path = fs.ydwe(false)
-fs.__ydwe_devpath = fs.ydwe(true)
+fs.__ydwe_path = we.ydwe(false)
+fs.__ydwe_devpath = we.ydwe(true)
 log.debug('ydwe path ' .. fs.__ydwe_path:string())
 if fs.__ydwe_path ~= fs.__ydwe_devpath then
     log.debug('ydwe dev path ' .. fs.__ydwe_devpath:string())
