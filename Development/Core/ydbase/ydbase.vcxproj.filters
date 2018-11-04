@@ -44,9 +44,6 @@
     <Filter Include="base\lua">
       <UniqueIdentifier>{b74a47f0-eb1f-4c6c-9b1c-210bcabbb9d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\i18n">
-      <UniqueIdentifier>{5337e579-9ee0-4e9b-807d-3339cda61c96}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\thread">
       <UniqueIdentifier>{9ca77287-10cc-4b02-bc03-1ed154a1e30e}</UniqueIdentifier>
     </Filter>
@@ -127,12 +124,6 @@
     </ClCompile>
     <ClCompile Include="base\util\is_utf8.cpp">
       <Filter>base\util</Filter>
-    </ClCompile>
-    <ClCompile Include="base\i18n\mofile.cpp">
-      <Filter>base\i18n</Filter>
-    </ClCompile>
-    <ClCompile Include="base\i18n\libintl.cpp">
-      <Filter>base\i18n</Filter>
     </ClCompile>
     <ClCompile Include="base\exception\exception.cpp">
       <Filter>base\exception</Filter>
@@ -276,12 +267,6 @@
     </ClInclude>
     <ClInclude Include="base\win\process.h">
       <Filter>base\win</Filter>
-    </ClInclude>
-    <ClInclude Include="base\i18n\mofile.h">
-      <Filter>base\i18n</Filter>
-    </ClInclude>
-    <ClInclude Include="base\i18n\libintl.h">
-      <Filter>base\i18n</Filter>
     </ClInclude>
     <ClInclude Include="base\util\buffer.h">
       <Filter>base\util</Filter>
