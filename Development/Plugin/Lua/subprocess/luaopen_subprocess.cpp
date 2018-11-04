@@ -288,6 +288,7 @@ static int peek(lua_State* L) {
 }
 
 #if defined(_WIN32)
+#include <io.h>
 #include <fcntl.h>
 
 static int filemode(lua_State* L) {
