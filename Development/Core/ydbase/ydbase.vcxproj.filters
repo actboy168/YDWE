@@ -146,12 +146,6 @@
     <ClCompile Include="base\win\get_tick_count.cpp">
       <Filter>base\win</Filter>
     </ClCompile>
-    <ClCompile Include="base\thread\thread.cpp">
-      <Filter>base\thread</Filter>
-    </ClCompile>
-    <ClCompile Include="base\thread\thread_exception.cpp">
-      <Filter>base\thread</Filter>
-    </ClCompile>
     <ClCompile Include="base\win\font\file.cpp">
       <Filter>base\win\font</Filter>
     </ClCompile>
@@ -344,12 +338,6 @@
     <ClInclude Include="base\win\get_tick_count.h">
       <Filter>base\win</Filter>
     </ClInclude>
-    <ClInclude Include="base\thread\thread.h">
-      <Filter>base\thread</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\thread_exception.h">
-      <Filter>base\thread</Filter>
-    </ClInclude>
     <ClInclude Include="base\win\registry\exception.h">
       <Filter>base\win\registry</Filter>
     </ClInclude>
@@ -385,9 +373,6 @@
     </ClInclude>
     <ClInclude Include="base\path\helper.h">
       <Filter>base\path</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\intrusive_ptr.h">
-      <Filter>base\thread</Filter>
     </ClInclude>
     <ClInclude Include="base\hook\dyn_iat.h">
       <Filter>base\hook</Filter>

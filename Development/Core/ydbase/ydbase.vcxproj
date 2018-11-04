@@ -126,8 +126,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="base\subprocess\subprocess_win.cpp" />
-    <ClCompile Include="base\thread\thread.cpp" />
-    <ClCompile Include="base\thread\thread_exception.cpp" />
     <ClCompile Include="base\util\pinyin.cpp" />
     <ClCompile Include="base\win\font\file.cpp" />
     <ClCompile Include="base\win\font\utility.cpp" />
@@ -209,14 +207,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="base\subprocess\subprocess_win.h" />
-    <ClInclude Include="base\thread\intrusive_ptr.h" />
     <ClInclude Include="base\thread\lock\backoff.h" />
     <ClInclude Include="base\thread\lock\guard.h" />
     <ClInclude Include="base\thread\lock\os_linux.h" />
     <ClInclude Include="base\thread\lock\os_win32.h" />
     <ClInclude Include="base\thread\lock\spin.h" />
-    <ClInclude Include="base\thread\thread.h" />
-    <ClInclude Include="base\thread\thread_exception.h" />
     <ClInclude Include="base\util\buffer.h" />
     <ClInclude Include="base\util\console.h" />
     <ClInclude Include="base\util\detail\ansi_codecvt.h" />
