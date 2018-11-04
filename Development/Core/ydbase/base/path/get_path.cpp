@@ -3,16 +3,6 @@
 #include <base/util/dynarray.h>
 #include <base/win/env_variable.h>
 #include <Windows.h>
-#include <assert.h>
-#pragma warning(push)
-#pragma warning(disable:6387)
-#include <Shlobj.h>
-#pragma warning(pop)
-
-// http://blogs.msdn.com/oldnewthing/archive/2004/10/25/247180.aspx
-extern "C" IMAGE_DOS_HEADER __ImageBase;
-
-#define ENSURE(cond) if (FAILED(cond)) throw windows_exception(#cond " failed.");
 
 namespace base { namespace path {
 
