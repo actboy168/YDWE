@@ -35,9 +35,6 @@
     <Filter Include="base\exception">
       <UniqueIdentifier>{8cfb2827-1c18-4e68-9be9-9a17e657b774}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\exception\detail">
-      <UniqueIdentifier>{d4af3999-4995-4947-b2c4-fc1a2b79f862}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\file">
       <UniqueIdentifier>{98c0be1b-e82d-4a6a-8179-8d6e11315c17}</UniqueIdentifier>
     </Filter>
@@ -116,9 +113,6 @@
     <ClCompile Include="base\util\console.cpp">
       <Filter>base\util</Filter>
     </ClCompile>
-    <ClCompile Include="base\exception\seh_exception.cpp">
-      <Filter>base\exception</Filter>
-    </ClCompile>
     <ClCompile Include="base\win\process.cpp">
       <Filter>base\win</Filter>
     </ClCompile>
@@ -126,9 +120,6 @@
       <Filter>base\util</Filter>
     </ClCompile>
     <ClCompile Include="base\exception\exception.cpp">
-      <Filter>base\exception</Filter>
-    </ClCompile>
-    <ClCompile Include="base\exception\system_exception.cpp">
       <Filter>base\exception</Filter>
     </ClCompile>
     <ClCompile Include="base\file\stream.cpp">
@@ -145,9 +136,6 @@
     </ClCompile>
     <ClCompile Include="base\hook\dyn_iat.cpp">
       <Filter>base\hook</Filter>
-    </ClCompile>
-    <ClCompile Include="base\win\windows_category.cpp">
-      <Filter>base\win</Filter>
     </ClCompile>
     <ClCompile Include="base\hook\patch.cpp">
       <Filter>base\hook</Filter>
@@ -259,9 +247,6 @@
     <ClInclude Include="base\util\console.h">
       <Filter>base\util</Filter>
     </ClInclude>
-    <ClInclude Include="base\exception\seh_exception.h">
-      <Filter>base\exception</Filter>
-    </ClInclude>
     <ClInclude Include="base\win\process.h">
       <Filter>base\win</Filter>
     </ClInclude>
@@ -273,9 +258,6 @@
     </ClInclude>
     <ClInclude Include="base\exception\exception.h">
       <Filter>base\exception</Filter>
-    </ClInclude>
-    <ClInclude Include="base\exception\detail\error_msg.h">
-      <Filter>base\exception\detail</Filter>
     </ClInclude>
     <ClInclude Include="base\hook\assembler\operand.h">
       <Filter>base\hook\assembler</Filter>
@@ -297,9 +279,6 @@
     </ClInclude>
     <ClInclude Include="base\util\dynarray.h">
       <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\exception\system_exception.h">
-      <Filter>base\exception</Filter>
     </ClInclude>
     <ClInclude Include="base\file\stream.h">
       <Filter>base\file</Filter>
@@ -355,9 +334,6 @@
     </ClInclude>
     <ClInclude Include="base\hook\dyn_iat.h">
       <Filter>base\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\windows_category.h">
-      <Filter>base\win</Filter>
     </ClInclude>
     <ClInclude Include="base\filesystem.h">
       <Filter>base</Filter>

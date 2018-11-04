@@ -4,7 +4,6 @@
 #include <windows.h>
 #include <base/filesystem.h>
 #include <base/file/memory_mapped_file.h>
-#include <base/exception/system_exception.h>
 #include <base/exception/windows_exception.h>
 #include <base/file/stream.h>
 #include <base/i18n-2/gettext.h>
@@ -42,7 +41,7 @@ static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSeco
 		return ((size = mapperFirst.size()) == mapperSecond.size()) 
 			&& (memcmp(mapperFirst.memory(), mapperSecond.memory(), size) == 0);
 	}
-	catch (base::system_exception const& e)
+	catch (base::windows_exception const& e)
 	{
 		if (pErrorCode)
 		{

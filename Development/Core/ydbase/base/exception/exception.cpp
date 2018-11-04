@@ -1,9 +1,8 @@
 #include <base/exception/exception.h>
 #include <base/util/unicode.h>
-#include <Windows.h>
-#include <cstdio>
-#include <cassert>
-#include <cstdint>
+#include <stdio.h>
+#include <assert.h>
+#include <stdint.h>
 
 namespace base { 
 
@@ -20,15 +19,11 @@ namespace base {
 	exception::exception(const wchar_t* fmt, ...)
 		: what_()
 	{
-		error_wmsg what = get_format_string(fmt, YD_VA_START(fmt));
-		if (what)
-		{
+		werrormsg what = get_format_string(fmt, YD_VA_START(fmt));
+		if (what) {
 			std::string temp_string = w2u(what.c_str(), conv_method::replace | '?');
-
-			what_.alloc(temp_string.size() + 1);
-			if (what_)
-			{
-				what_.copy_str(temp_string.c_str(), temp_string.size() + 1);
+			if (what_) {
+				what_.reset(temp_string.c_str(), temp_string.size() + 1);
 			}
 		}
 	}
@@ -36,57 +31,41 @@ namespace base {
 	exception::~exception()
 	{ }
 
-	exception::error_msg exception::get_format_string(const char* fmt, ...) const
-	{
+	exception::errormsg exception::get_format_string(const char* fmt, ...) const {
 		return get_format_string(fmt,  YD_VA_START(fmt));
 	}
 
-	exception::error_msg exception::get_format_string(const char* fmt, va_list argsList) const
-	{
+	exception::errormsg exception::get_format_string(const char* fmt, va_list argsList) const {
 		size_t buffer_size = ::_vscprintf(fmt, argsList) + 1;
-
-		error_msg buffer(buffer_size);
-
-		if (buffer)
-		{
+		errormsg buffer(buffer_size);
+		if (buffer) {
 			int n = ::_vsnprintf_s(buffer.c_str(), buffer_size, buffer_size-1, fmt, argsList);
-			if (n > 0)
-			{
+			if (n > 0) {
 				return buffer;
 			}
 		}
-
-		return error_msg();
+		return errormsg();
 	}
 
-	exception::error_wmsg exception::get_format_string(const wchar_t* fmt, ...) const
-	{
+	exception::werrormsg exception::get_format_string(const wchar_t* fmt, ...) const {
 		return get_format_string(fmt,  YD_VA_START(fmt));
 	}
 
-	exception::error_wmsg exception::get_format_string(const wchar_t* fmt, va_list argsList) const
-	{
+	exception::werrormsg exception::get_format_string(const wchar_t* fmt, va_list argsList) const {
 		size_t buffer_size = ::_vscwprintf(fmt, argsList) + 1;
-
-		error_wmsg buffer(buffer_size);
-
-		if (buffer)
-		{
+		werrormsg buffer(buffer_size);
+		if (buffer) {
 			int n = ::_vsnwprintf_s(buffer.c_str(), buffer_size, buffer_size-1, fmt, argsList);
-			if (n > 0)
-			{
+			if (n > 0) {
 				return buffer;
 			}
 		}
-
-		return error_wmsg();
+		return werrormsg();
 	}
 
-	const char* exception::what() const
-	{
+	const char* exception::what() const {
 		return what_ ? what_.c_str() : "unknown base::exception";
 	}
 
 #undef YD_VA_START
-
 }
