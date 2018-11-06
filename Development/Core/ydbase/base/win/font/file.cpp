@@ -132,7 +132,7 @@ namespace base { namespace font {
 		try
 		{
 			base::file::memory_mapped_file mmap(fil_path.c_str());
-			const char* memory_ptr = static_cast<const char*>(mmap.memory());
+			const char* memory_ptr = static_cast<const char*>(mmap.data());
 			if (memory_ptr)
 			{
 				return get_name(memory_ptr);

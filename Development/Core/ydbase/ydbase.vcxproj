@@ -133,7 +133,6 @@
     <ClCompile Include="base\exception\exception.cpp" />
     <ClCompile Include="base\exception\windows_exception.cpp" />
     <ClCompile Include="base\file\file_handle.cpp" />
-    <ClCompile Include="base\file\file_mapping_handle.cpp" />
     <ClCompile Include="base\file\memory_mapped_file.cpp" />
     <ClCompile Include="base\file\stream.cpp" />
     <ClCompile Include="base\hook\detail\import_address_table.cpp" />
@@ -163,7 +162,6 @@
     <ClInclude Include="base\filesystem.h" />
     <ClInclude Include="base\file\memory_mapped_file.h" />
     <ClInclude Include="base\file\file_handle.h" />
-    <ClInclude Include="base\file\file_mapping_handle.h" />
     <ClInclude Include="base\file\stream.h" />
     <ClInclude Include="base\hook\assembler\operand.h" />
     <ClInclude Include="base\hook\assembler\writer.h" />

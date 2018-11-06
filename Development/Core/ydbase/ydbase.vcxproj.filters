@@ -101,9 +101,6 @@
     <ClCompile Include="base\file\file_handle.cpp">
       <Filter>base\file</Filter>
     </ClCompile>
-    <ClCompile Include="base\file\file_mapping_handle.cpp">
-      <Filter>base\file</Filter>
-    </ClCompile>
     <ClCompile Include="base\file\memory_mapped_file.cpp">
       <Filter>base\file</Filter>
     </ClCompile>
@@ -230,9 +227,6 @@
       <Filter>base\file</Filter>
     </ClInclude>
     <ClInclude Include="base\file\file_handle.h">
-      <Filter>base\file</Filter>
-    </ClInclude>
-    <ClInclude Include="base\file\file_mapping_handle.h">
       <Filter>base\file</Filter>
     </ClInclude>
     <ClInclude Include="base\util\noncopyable.h">

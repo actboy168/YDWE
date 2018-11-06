@@ -38,8 +38,8 @@ static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSeco
 		base::file::memory_mapped_file mapperSecond(fileSecond.c_str());
 
 		size_t size;
-		return ((size = mapperFirst.size()) == mapperSecond.size()) 
-			&& (memcmp(mapperFirst.memory(), mapperSecond.memory(), size) == 0);
+		return ((size = mapperFirst.size()) == mapperSecond.size())
+			&& (memcmp(mapperFirst.data(), mapperSecond.data(), size) == 0);
 	}
 	catch (base::windows_exception const& e)
 	{

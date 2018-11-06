@@ -14,19 +14,13 @@ namespace file {
 	{
 	public:
 		memory_mapped_file(const wchar_t* file_name);
-		memory_mapped_file(const wchar_t* file_name, uint64_t offset, size_t request_size);
-		memory_mapped_file(void* file, uint64_t offset, size_t request_size);
 		~memory_mapped_file();
-		void const* memory() const;
+		void const* data() const;
 		size_t size() const;
 
 	private:
-		void open(const wchar_t* file_name, uint64_t offset, size_t request_size);
-		void open(void* file, uint64_t offset, size_t request_size);
-
-	private:
-		size_t           cb_;
-		void*            memory_;
+		void*  data_;
+		size_t size_;
 	};
 #pragma warning(pop)
 }
