@@ -6,6 +6,7 @@
 //#define YDWE_BASE_INLINE
 #include <base/path/get_path.h>
 #include <base/path/helper.h>
+#include <base/path/self.h>
 #include <base/util/unicode.h>	
 #include <base/lua/make_range.h>
 
@@ -449,6 +450,13 @@ namespace luafs {
 		return path::constructor_(L, std::move(base::path::module().parent_path()));
 		FS_TRY_END;
 	}
+
+	static int module_path(lua_State* L)
+	{
+		FS_TRY;
+		return path::constructor_(L, std::move(base::path::self().parent_path()));
+		FS_TRY_END;
+	}
 }
  
 namespace base { namespace lua {
@@ -504,6 +512,7 @@ int luaopen_filesystem(lua_State* L)
 		{ "relative", luafs::relative },
 		{ "last_write_time", luafs::last_write_time },
 		{ "procedure_path", luafs::procedure_path },
+		{ "module_path", luafs::module_path },
 		{ NULL, NULL }
 	};	
 	lua_newtable(L);

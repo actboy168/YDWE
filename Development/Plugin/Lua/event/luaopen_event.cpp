@@ -9,7 +9,6 @@
 #include <base/exception/exception.h>
 #include <base/lua/object.h>
 #include <base/lua/guard.h>
-#include <base/path/ydwe.h>
 
 namespace NYDWE {
 
@@ -113,21 +112,6 @@ static int import_customdata(lua_State* L)
 	return 0;
 }
 
-static int ydwe(lua_State* L)
-{
-	try {
-		void* storage = lua_newuserdata(L, sizeof(fs::path));
-		luaL_getmetatable(L, "filesystem");
-		lua_setmetatable(L, -2);
-		new (storage)fs::path(std::move(base::path::ydwe(lua_toboolean(L, 1))));
-		return 1;
-	}
-	catch (const std::exception& e) {
-		lua_pushstring(L, base::a2u(e.what()).c_str());
-		return lua_error(L);
-	}
-}
-
 int luaopen_event(lua_State* L)
 {
 	NYDWE::lg = logging::get_logger(L, "events");
@@ -177,7 +161,6 @@ int luaopen_event(lua_State* L)
 		{ "message_show", NYDWE::LuaWeMessageShow },
 		{ "set_font", set_font },
 		{ "import_customdata", import_customdata },
-		{ "ydwe", ydwe },
 		{ NULL, NULL },
 	};
 	luaL_newlib(L, lib);

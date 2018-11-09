@@ -6,8 +6,19 @@ sys = {}
 
 local uni = require 'ffi.unicode'
 
-fs.__ydwe_path = we.ydwe(false)
-fs.__ydwe_devpath = we.ydwe(true)
+local function ydwePath(support_dev)
+    local ydwe = fs.module_path():parent_path():parent_path()
+    if support_dev then
+        local ydwedev = ydwe:parent_path():parent_path():parent_path()
+        if fs.exists(ydwedev / "build.root") then
+            return ydwedev / "Component"
+        end
+    end
+    return ydwe
+end
+
+fs.__ydwe_path = ydwePath(false)
+fs.__ydwe_devpath = ydwePath(true)
 log.debug('ydwe path ' .. fs.__ydwe_path:string())
 if fs.__ydwe_path ~= fs.__ydwe_devpath then
     log.debug('ydwe dev path ' .. fs.__ydwe_devpath:string())
