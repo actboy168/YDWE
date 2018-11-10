@@ -125,7 +125,7 @@ local function check_war3_version()
 	log.trace("check_war3_version")
 
     if war3_version.major ~= 1 or war3_version.minor < 20 or war3_version.minor > 27 then
-        log.error("Unsupported War3 %d.%d", war3_version.major, war3_version.minor)
+        log.error("Unsupported War3", war3_version.major, war3_version.minor)
         gui.error_message(nil, LNG.UNSUPPORTED_WAR3_VERSION, war3_version.major, war3_version.minor)
         os.exit(true, -1)
     end
