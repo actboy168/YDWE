@@ -58,7 +58,7 @@ static int loadlib(lua_State* L)
 		size_t len = 0;
 		const char* str = luaL_checklstring(L, 1, &len);
 		std::string name(str, len);
-		fs::path path = path::ydwe(false) / "bin" / "modules" / (name + ".dll");
+		fs::path path = path::ydwe(false) / "bin" / (name + ".dll");
 		HMODULE m = LoadLibraryW(path.c_str());
 		if (!m) {
 			return 0;

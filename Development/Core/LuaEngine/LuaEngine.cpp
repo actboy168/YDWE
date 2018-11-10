@@ -89,7 +89,7 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 		lua_pop(L, 1);
 		LOGGING_DEBUG(lg) << "Initialize LuaEngine successfully.";
 
-		fs::path cp = ydwe / L"bin" / L"modules" / L"?.dll";
+		fs::path cp = ydwe / L"bin" / L"?.dll";
 		lua_getglobal(L, "package");
 		lua_pushwstring(L, cp.wstring());
 		lua_setfield(L, -2, "cpath");

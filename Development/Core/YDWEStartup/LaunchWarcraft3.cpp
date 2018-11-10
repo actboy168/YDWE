@@ -66,7 +66,7 @@ static bool map_convert(const fs::path& ydwe, const fs::path& from, const fs::pa
 		{
 			app.wstring(),
 			L"-e",
-			base::format(L"package.cpath = [[%s]]", (ydwe / L"bin" / L"modules" / L"?.dll").wstring()),
+			base::format(L"package.cpath = [[%s]]", (ydwe / L"bin" / L"?.dll").wstring()),
 			L"gui\\mini.lua",
 			bee::u2w(mode),
 			from.wstring(),

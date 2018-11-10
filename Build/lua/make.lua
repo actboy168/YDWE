@@ -86,13 +86,19 @@ local gitlog = require 'gitlog'
 gitlog((path.Development / 'Component' / 'script' / 'common' / 'gitlog.lua'):string())
 
 -- Step.4 编译
-local property = {
+msvc:compile('rebuild', path.OpenSource / 'bee.lua' / 'project' / 'bee.sln', {
+    Configuration = configuration,
+    Platform = 'x86'
+})
+msvc:compile('rebuild', path.OpenSource / 'all.sln', {
     Configuration = configuration,
     Platform = 'Win32'
-}
-msvc:compile('rebuild', path.OpenSource / 'all.sln', property)
+})
 if not dev then
-    msvc:compile('rebuild', path.Development / 'Core' / 'Solution' / 'YDWE.sln', property)
+    msvc:compile('rebuild', path.Development / 'Core' / 'Solution' / 'YDWE.sln', {
+        Configuration = configuration,
+        Platform = 'Win32'
+    })
 end
 
 -- Step.5 复制
@@ -111,17 +117,17 @@ local function copy_directory(from, to, filter)
 	end
 end
 
-fs.create_directories(path.Result / 'bin' / 'modules')
 fs.create_directories(path.Result / 'compiler' / 'jasshelper' / 'bin')
 if configuration == 'Release' then
     msvc:copy_crt_dll('x86', path.Result / 'bin')
 end
-fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / 'x86' / configuration / 'lua54.dll', path.Result / 'bin' / 'lua54.dll', true)
-fs.copy_file(path.OpenSource / 'Lua' / 'build' / 'bin' / 'x86' / configuration / 'lua.exe', path.Result / 'bin' / 'lua.exe', true)
+fs.copy_file(path.OpenSource / 'bee.lua' / 'bin' / 'x86' / configuration / 'lua54.dll', path.Result / 'bin' / 'lua54.dll', true)
+fs.copy_file(path.OpenSource / 'bee.lua' / 'bin' / 'x86' / configuration / 'lua.exe', path.Result / 'bin' / 'lua.exe', true)
+fs.copy_file(path.OpenSource / 'bee.lua' / 'bin' / 'x86' / configuration / 'ffi.dll', path.Result / 'bin' / 'ffi.dll', true)
+fs.copy_file(path.OpenSource / 'bee.lua' / 'bin' / 'x86' / configuration / 'bee.dll', path.Result / 'bin' / 'bee.dll', true)
 fs.copy_file(path.OpenSource / 'StormLib' / 'bin' / 'Win32' / configuration / 'StormLib.dll', path.Result / 'bin' / 'StormLib.dll', true)
 fs.copy_file(path.OpenSource / 'minizip' / 'bin' / configuration / 'minizip.dll', path.Result / 'bin' / 'minizip.dll', true)
-fs.copy_file(path.OpenSource / 'luaffi' / 'bin' / 'x86' / configuration / 'ffi.dll', path.Result / 'bin' / 'modules' / 'ffi.dll', true)
-fs.copy_file(path.OpenSource / 'lpeglabel' / 'bin' / configuration / 'lpeglabel.dll', path.Result / 'bin' / 'modules' / 'lpeglabel.dll', true)
+fs.copy_file(path.OpenSource / 'lpeglabel' / 'bin' / configuration / 'lpeglabel.dll', path.Result / 'bin' / 'lpeglabel.dll', true)
 fs.copy_file(path.OpenSource / 'sfmpq' / 'bin' / configuration / 'sfmpq.dll', path.Result / 'compiler' / 'jasshelper' / 'sfmpq.dll', true)
 fs.copy_file(path.OpenSource / 'sfmpq' / 'bin' / configuration / 'sfmpq.dll', path.Result / 'compiler' / 'jasshelper' / 'bin' / 'sfmpq.dll', true)
 copy_directory(path.Development / 'Component', path.Result)

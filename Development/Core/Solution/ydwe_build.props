@@ -10,7 +10,7 @@
     <BuildBinDir>$(BuildDir)bin\$(Configuration)\</BuildBinDir>
     <CoreBin>$(BuildBinDir)bin\</CoreBin>
     <CoreObj>$(BuildObjDir)Core\$(ProjectName)\</CoreObj>
-    <LuaPluginBin>$(BuildBinDir)bin\modules\</LuaPluginBin>
+    <LuaPluginBin>$(BuildBinDir)bin\</LuaPluginBin>
     <LuaPluginObj>$(BuildObjDir)Lua\$(ProjectName)\</LuaPluginObj>
     <Warcraft3PluginBin>$(BuildBinDir)plugin\warcraft3\</Warcraft3PluginBin>
     <Warcraft3PluginObj>$(BuildObjDir)Warcraft3\$(ProjectName)\</Warcraft3PluginObj>
