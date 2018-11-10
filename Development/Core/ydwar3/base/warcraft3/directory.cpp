@@ -1,7 +1,7 @@
 #include <base/warcraft3/directory.h>	  	  		
 #include <base/filesystem.h>
-#include <base/win/registry/key.h>
-#include <base/win/registry/value.h> 
+#include <bee/registry/key.h>
+#include <bee/registry/value.h> 
 #include <base/util/foreach.h>
 
 namespace base { namespace warcraft3 { namespace directory {
@@ -9,7 +9,7 @@ namespace base { namespace warcraft3 { namespace directory {
 	bool read_current_user(fs::path& result)
 	{
 		try {
-			registry::key_w warkey = registry::current_user() / L"Software\\Blizzard Entertainment\\Warcraft III";
+			bee::registry::key_w warkey = bee::registry::current_user() / L"Software\\Blizzard Entertainment\\Warcraft III";
 			result = warkey[L"InstallPath"].get_string();
 			return true;
 		}
@@ -24,7 +24,7 @@ namespace base { namespace warcraft3 { namespace directory {
 	{
 		try {
 			
-			registry::key_w warkey = registry::local_machine() / L"Software\\Blizzard Entertainment\\Warcraft III";
+			bee::registry::key_w warkey = bee::registry::local_machine() / L"Software\\Blizzard Entertainment\\Warcraft III";
 			result = warkey[L"InstallPath"].get_string();
 			return true;
 		}
@@ -52,7 +52,7 @@ namespace base { namespace warcraft3 { namespace directory {
 		}
 
 		try {
-			registry::key_w warkey = registry::current_user() / L"Software\\Blizzard Entertainment\\Warcraft III";
+			bee::registry::key_w warkey = bee::registry::current_user() / L"Software\\Blizzard Entertainment\\Warcraft III";
 			warkey[L"InstallPath"] = p.wstring();
 			return true;
 		}

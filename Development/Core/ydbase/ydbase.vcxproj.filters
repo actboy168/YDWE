@@ -38,9 +38,6 @@
     <Filter Include="base\thread">
       <UniqueIdentifier>{9ca77287-10cc-4b02-bc03-1ed154a1e30e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\win\registry">
-      <UniqueIdentifier>{306f1d0f-9d0f-4f74-a119-6bdbeb6a31f7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\thread\lock">
       <UniqueIdentifier>{3beaa0e4-1378-4d7e-8d51-a8869869b7f7}</UniqueIdentifier>
     </Filter>
@@ -242,18 +239,6 @@
       <Filter>base\lua</Filter>
     </ClInclude>
     <ClInclude Include="base\config.h" />
-    <ClInclude Include="base\win\registry\exception.h">
-      <Filter>base\win\registry</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\registry\key.h">
-      <Filter>base\win\registry</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\registry\traits.h">
-      <Filter>base\win\registry</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\registry\value.h">
-      <Filter>base\win\registry</Filter>
-    </ClInclude>
     <ClInclude Include="base\hook\fp_call.h">
       <Filter>base\hook</Filter>
     </ClInclude>
@@ -262,9 +247,6 @@
     </ClInclude>
     <ClInclude Include="base\thread\lock\guard.h">
       <Filter>base\thread\lock</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\registry\predefined_keys.h">
-      <Filter>base\win\registry</Filter>
     </ClInclude>
     <ClInclude Include="base\util\string_view.h">
       <Filter>base\util</Filter>

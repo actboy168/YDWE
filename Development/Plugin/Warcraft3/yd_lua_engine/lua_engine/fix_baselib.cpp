@@ -3,7 +3,7 @@
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
-#include <base/win/registry/key.h>
+#include <bee/registry/key.h>
 #include <bee/utility/unicode.h>
 #include <base/path/get_path.h>
 #include <base/path/helper.h>
@@ -124,9 +124,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	static bool allow_local_files()
 	{
 		try {
-			return !!registry::key_w(HKEY_CURRENT_USER, L"", L"Software\\Blizzard Entertainment\\Warcraft III")[L"Allow Local Files"].get<uint32_t>();
+			return !!bee::registry::key_w(HKEY_CURRENT_USER, L"", L"Software\\Blizzard Entertainment\\Warcraft III")[L"Allow Local Files"].get<uint32_t>();
 		}
-		catch (registry::registry_exception const&) {}
+		catch (bee::registry::registry_exception const&) {}
 		return false;
 	}
 
