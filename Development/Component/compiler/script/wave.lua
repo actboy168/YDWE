@@ -1,5 +1,5 @@
-require "filesystem"
-local subprocess = require 'subprocess'
+fs = require 'bee.filesystem'
+local subprocess = require 'bee.subprocess'
 
 local root = fs.ydwe_devpath()
 

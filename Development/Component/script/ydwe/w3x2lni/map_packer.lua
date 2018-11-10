@@ -1,4 +1,4 @@
-local subprocess = require 'subprocess'
+local subprocess = require 'bee.subprocess'
 local root = fs.ydwe_path()
 local dev = fs.ydwe_devpath()
 local i18n = require 'i18n'

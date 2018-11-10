@@ -1,6 +1,6 @@
 require "log"
-require "filesystem"
-local subprocess = require 'subprocess'
+fs = require 'bee.filesystem'
+local subprocess = require 'bee.subprocess'
 
 sys = {}
 

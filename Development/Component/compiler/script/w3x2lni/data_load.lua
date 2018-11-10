@@ -1,4 +1,4 @@
-require 'filesystem'
+fs = require 'bee.filesystem'
 
 local function ydwePath(support_dev)
     local ydwe = fs.module_path():parent_path():parent_path()

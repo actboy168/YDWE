@@ -1,4 +1,4 @@
-require 'filesystem'
+fs = require 'bee.filesystem'
 local process = require 'process'
 local root = fs.current_path()
 

@@ -1,4 +1,4 @@
-require 'filesystem'
+fs = require 'bee.filesystem'
 require 'utility'
 local root = require 'backend.w2l_path'
 local cache = {}

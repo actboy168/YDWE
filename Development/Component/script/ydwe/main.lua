@@ -37,7 +37,7 @@ local function compiler_searcher(name)
 end
 table.insert(package.searchers, compiler_searcher)
 
-require "filesystem"
+fs = require 'bee.filesystem'
 require "event"
 require "virtual_mpq"
 require "version"

@@ -1,4 +1,4 @@
-require 'filesystem'
+fs = require 'bee.filesystem'
 local root = require 'backend.w2l_path'
 
 local function string_proxy(key, concat)

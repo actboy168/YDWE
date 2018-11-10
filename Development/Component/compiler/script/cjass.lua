@@ -1,4 +1,4 @@
-require "filesystem"
+fs = require 'bee.filesystem'
 
 local cjass = {}
 

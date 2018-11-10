@@ -1,4 +1,4 @@
-require 'filesystem'
+fs = require 'bee.filesystem'
 
 if _W2L_DIR then
     return fs.path(_W2L_DIR)

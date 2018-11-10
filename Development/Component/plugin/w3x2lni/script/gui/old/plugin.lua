@@ -1,4 +1,4 @@
-require 'filesystem'
+fs = require 'bee.filesystem'
 require 'utility'
 local root = fs.current_path():remove_filename()
 local plugin_path = root / 'plugin'

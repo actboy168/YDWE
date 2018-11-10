@@ -4,7 +4,7 @@ local backend = require 'gui.backend'
 local messagebox = require 'ffi.messagebox'
 local timer = require 'gui.timer'
 local lang = require 'share.lang'
-require 'filesystem'
+fs = require 'bee.filesystem'
 
 ext.on_timer = timer.update
 

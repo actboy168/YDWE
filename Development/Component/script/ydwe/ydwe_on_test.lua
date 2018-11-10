@@ -4,7 +4,7 @@ local ev = require 'ev'
 local map_packer = require 'w3x2lni.map_packer'
 
 local mapdump = require 'mapdump'
-local subprocess = require 'subprocess'
+local subprocess = require 'bee.subprocess'
 
 local mt = {}
 mt.__index = mt

@@ -1,4 +1,4 @@
-require 'filesystem'
+fs = require 'bee.filesystem'
 require 'utility'
 local messagebox = require 'ffi.messagebox'
 local process = require 'process'
