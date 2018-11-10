@@ -1,6 +1,6 @@
 #include <lua.hpp>
 #include <string.h>	  
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <base/path/get_path.h>
 #include <base/path/helper.h>
 #include <base/file/stream.h>
@@ -25,7 +25,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 	static int readable(const char *filename, bool is_local) {
 		if (is_local) {
 			try {
-				std::wstring wfilename = base::u2w(filename);
+				std::wstring wfilename = bee::u2w(filename);
 				std::ifstream fs(wfilename.c_str(), std::ios::binary | std::ios::in);
 				if (fs)
 				{
@@ -95,7 +95,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		int stat = 0;
 
 		try {
-			std::wstring wfilename = base::u2w(filename);
+			std::wstring wfilename = bee::u2w(filename);
 			std::ifstream fs(wfilename.c_str(), std::ios::binary | std::ios::in);
 			if (fs)
 			{

@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <base/path/ydwe.h>
 #include <base/util/console.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace slk {
 
@@ -105,7 +105,7 @@ static int io_open(lua_State *L) {
 	luaL_Stream *p = (luaL_Stream *)lua_newuserdata(L, sizeof(luaL_Stream));
 	luaL_setmetatable(L, LUA_FILEHANDLE);
 	p->closef = &io_fclose;
-	p->f = _wfopen(base::u2w(filename, base::conv_method::replace | '?').c_str(), L"r");
+	p->f = _wfopen(bee::u2w(filename).c_str(), L"r");
 	return (p->f == NULL) ? luaL_fileresult(L, 0, filename) : 1;
 }
 
@@ -118,7 +118,7 @@ static int io_open(lua_State *L) {
 int open(lua_State* L)
 {
 	fs::path ydwe = base::path::ydwe(true);
-	lua_pushstring(L, base::w2u(ydwe.wstring(), base::conv_method::replace | '?').c_str());
+	lua_pushstring(L, bee::w2u(ydwe.wstring()).c_str());
 	lua_pushcfunction(L, loadlua);
 	lua_pushcfunction(L, loadlib);
 	lua_pushcfunction(L, io_open);

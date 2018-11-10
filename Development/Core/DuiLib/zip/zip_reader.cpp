@@ -3,7 +3,7 @@
 
 #include <fstream>
 #include <base/exception/windows_exception.h>	   
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <unzip.h>
 #include <iowin32.h>
 
@@ -149,7 +149,7 @@ namespace zip {
 	{
 		// Use of "Unsafe" function does not look good, but there is no way to do
 		// this safely on Linux. See file_util.h for details.
-		zip_file_ = internal::OpenForUnzipping(base::w2u(zip_file_path.wstring()));
+		zip_file_ = internal::OpenForUnzipping(bee::w2u(zip_file_path.wstring()));
 		if (!zip_file_)
 		{
 			return false;

@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 #include <base/util/format.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <base/filesystem.h>
 #include <Windows.h>
 
@@ -59,7 +59,7 @@ namespace base { namespace i18n { namespace v2 {
 	static std::wstring get_default_language()
 	{
 		try {
-			auto w = u2w(file::read_stream(workpath / L"default").read<std::string>());
+			auto w = bee::u2w(file::read_stream(workpath / L"default").read<std::string>());
 			trim(w);
 			return w;
 		} catch(...) {
@@ -99,7 +99,7 @@ namespace base { namespace i18n { namespace v2 {
 		cache_domain = nullptr;
 		if (refresh) {
 			try {
-				file::write_stream(workpath / L"default").write<std::string>(w2u(l));
+				file::write_stream(workpath / L"default").write<std::string>(bee::w2u(l));
 			}
 			catch (...) {
 			}

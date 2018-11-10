@@ -145,7 +145,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		try {
 			for (;*filename && isspace((unsigned char)*filename) ;++filename)
 			{ }
-			fs::path path = base::u2w(filename);
+			fs::path path = bee::u2w(filename);
 			if (path.is_absolute()) {
 				return path;
 			}

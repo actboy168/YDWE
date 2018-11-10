@@ -1,5 +1,5 @@
 #include <base/exception/windows_exception.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <Windows.h>
 #include <string_view>
 #include <sstream>	
@@ -32,7 +32,7 @@ namespace base {
 			while (str.size() && ((str.back() == L'\n') || (str.back() == L'\r'))) {
 				str.remove_suffix(1);
 			}
-			return std::move(w2u(str, conv_method::replace | '?'));
+			return std::move(bee::w2u(str));
 		}
 		virtual std::error_condition default_error_condition(int error_code) const noexcept {
 			const std::error_condition err_condition = std::system_category().default_error_condition(error_code);

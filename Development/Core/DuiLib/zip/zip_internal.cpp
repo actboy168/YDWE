@@ -2,7 +2,7 @@
 
 #include <algorithm>			
 #include <base/filesystem.h>								 
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 
 #include <unzip.h>
 #include <zip.h>
@@ -48,7 +48,7 @@ namespace
 
 		if ((filename != NULL) && (desired_access != 0)) 
 		{
-			file = ::CreateFileW(base::u2w(filename).c_str(), desired_access, share_mode,
+			file = ::CreateFileW(bee::u2w(filename).c_str(), desired_access, share_mode,
 				NULL, creation_disposition, flags_and_attributes, NULL);
 		}
 

@@ -2,19 +2,19 @@
 #include <lua.hpp>
 #pragma warning(pop)
 #include <base/i18n-2/gettext.h>	
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 
 namespace i18n {
 	static std::wstring luaL_checkwstring(lua_State* L, int idx)
 	{
 		size_t len = 0;
 		const char* buf = luaL_checklstring(L, idx, &len);
-		return base::u2w(std::string_view(buf, len), base::conv_method::replace | '?');
+		return bee::u2w(std::string_view(buf, len));
 	}
 
 	static void luaL_pushwstring(lua_State* L, const std::wstring& str)
 	{
-		std::string utf8 = base::w2u(str, base::conv_method::replace | '?');
+		std::string utf8 = bee::w2u(str);
 		lua_pushlstring(L, utf8.data(), utf8.size());
 	}
 

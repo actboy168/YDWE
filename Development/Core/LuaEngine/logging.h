@@ -2,7 +2,7 @@
 
 #include "logging_backend.h"
 #include "logging_logger.h"	 
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <map>
 
 struct lua_State;
@@ -23,7 +23,7 @@ struct lua_State;
 
 inline std::ostream& operator <<(std::ostream& os, const std::wstring& val)
 {
-	os << base::w2u(val);
+	os << bee::w2u(val);
 	return os;
 }
 

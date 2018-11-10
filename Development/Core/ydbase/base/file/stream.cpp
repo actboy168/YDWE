@@ -1,6 +1,6 @@
 #include <base/file/stream.h>
 #include <base/exception/exception.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 
 namespace base { namespace file {
 
@@ -14,7 +14,7 @@ namespace base { namespace file {
 #if defined(_MSC_VER)
 		file_.open(filename, std::ios::binary | mode);
 #else
-		file_.open(base::w2u(filename), std::ios::binary | mode);
+		file_.open(bee::w2u(filename), std::ios::binary | mode);
 #endif
 	}
 

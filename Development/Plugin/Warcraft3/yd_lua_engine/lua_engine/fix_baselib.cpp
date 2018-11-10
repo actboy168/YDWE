@@ -4,7 +4,7 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
 #include <base/win/registry/key.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <base/path/get_path.h>
 #include <base/path/helper.h>
 #include <base/util/list_of.h>
@@ -135,7 +135,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		{
 			const char *filename = luaL_checkstring(L, 1);
 			try {
-				fs::path filepath = u2w(filename);
+				fs::path filepath = bee::u2w(filename);
 				if (!filepath.is_absolute()) {
 					filepath = path::module().parent_path() / filepath;
 				}
@@ -159,7 +159,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		static std::set<std::wstring> s_blacklist = list_of(L"mix")(L"asi")(L"m3d")(L"flt")(L"flt")(L"exe")(L"dll");
 		try {
 			fs::path rootpath = path::module().parent_path();
-			fs::path filepath = rootpath / u2w(filename);
+			fs::path filepath = rootpath / bee::u2w(filename);
 			filepath = fs::absolute(filepath);
 
 			std::wstring ext = filepath.extension().wstring().substr(1, 4);

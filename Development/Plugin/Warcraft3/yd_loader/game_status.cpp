@@ -3,7 +3,7 @@
 #include <base/hook/fp_call.h>
 #include <base/hook/iat.h>
 #include <base/util/buffer.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <base/path/helper.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/version.h>
@@ -93,7 +93,7 @@ namespace auto_enter { namespace game_status {
 			reader2.read<uint16_t>();
 			reader2.read<uint16_t>();
 			reader2.read<uint32_t>();
-			map_path = u2w(reader2.read<std::string>());
+			map_path = bee::u2w(reader2.read<std::string>());
 		}
 		catch (...)
 		{

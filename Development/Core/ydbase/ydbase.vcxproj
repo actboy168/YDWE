@@ -121,11 +121,6 @@
     <ClCompile Include="base\hook\replace_pointer.cpp" />
     <ClCompile Include="base\i18n-2\gettext.cpp" />
     <ClCompile Include="base\path\ydwe.cpp" />
-    <ClCompile Include="base\subprocess\subprocess_posix.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="base\subprocess\subprocess_win.cpp" />
     <ClCompile Include="base\util\pinyin.cpp" />
     <ClCompile Include="base\win\font\file.cpp" />
     <ClCompile Include="base\win\font\utility.cpp" />
@@ -146,11 +141,9 @@
     <ClCompile Include="base\path\get_path.cpp" />
     <ClCompile Include="base\util\console.cpp" />
     <ClCompile Include="base\util\is_utf8.cpp" />
-    <ClCompile Include="base\util\unicode.cpp" />
     <ClCompile Include="base\win\env_variable.cpp" />
     <ClCompile Include="base\win\file_version.cpp" />
     <ClCompile Include="base\win\pe_reader.cpp" />
-    <ClCompile Include="base\win\process.cpp" />
     <ClCompile Include="base\win\version.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,12 +181,6 @@
     <ClInclude Include="base\path\self.h" />
     <ClInclude Include="base\path\get_path.h" />
     <ClInclude Include="base\path\ydwe.h" />
-    <ClInclude Include="base\subprocess.h" />
-    <ClInclude Include="base\subprocess\subprocess_posix.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="base\subprocess\subprocess_win.h" />
     <ClInclude Include="base\thread\lock\backoff.h" />
     <ClInclude Include="base\thread\lock\guard.h" />
     <ClInclude Include="base\thread\lock\os_linux.h" />
@@ -201,15 +188,13 @@
     <ClInclude Include="base\thread\lock\spin.h" />
     <ClInclude Include="base\util\buffer.h" />
     <ClInclude Include="base\util\console.h" />
-    <ClInclude Include="base\util\detail\ansi_codecvt.h" />
-    <ClInclude Include="base\util\detail\codecvt.h" />
-    <ClInclude Include="base\util\detail\utf8_codecvt.h" />
     <ClInclude Include="base\util\dynarray.h" />
     <ClInclude Include="base\util\foreach.h" />
     <ClInclude Include="base\util\horrible_cast.h" />
     <ClInclude Include="base\util\do_once.h" />
     <ClInclude Include="base\util\hybrid_array.h" />
     <ClInclude Include="base\util\ini.h" />
+    <ClInclude Include="base\util\is_utf8.h" />
     <ClInclude Include="base\util\list_of.h" />
     <ClInclude Include="base\util\optional.h" />
     <ClInclude Include="base\util\pinyin.h" />
@@ -217,7 +202,6 @@
     <ClInclude Include="base\util\singleton.h" />
     <ClInclude Include="base\util\string_algorithm.h" />
     <ClInclude Include="base\util\string_view.h" />
-    <ClInclude Include="base\util\unicode.h" />
     <ClInclude Include="base\util\noncopyable.h" />
     <ClInclude Include="base\util\format.h" />
     <ClInclude Include="base\win\env_variable.h" />
@@ -226,7 +210,6 @@
     <ClInclude Include="base\win\font\file.h" />
     <ClInclude Include="base\win\font\utility.h" />
     <ClInclude Include="base\win\pe_reader.h" />
-    <ClInclude Include="base\win\process.h" />
     <ClInclude Include="base\win\registry\exception.h" />
     <ClInclude Include="base\win\registry\key.h" />
     <ClInclude Include="base\win\registry\predefined_keys.h" />
@@ -239,11 +222,9 @@
     <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="base\util\detail\ansi_codecvt.inl" />
-    <None Include="base\util\detail\codecvt.inl" />
-    <None Include="base\util\detail\utf8_codecvt.inl" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\OpenSource\bee.lua\project\bee.vcxproj">
+      <Project>{355c2493-0a78-490b-971a-bbdb0e2819ef}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\OpenSource\Detours\project\Detours.vcxproj">
       <Project>{198d08d6-92ba-46e3-b430-8351244fb61c}</Project>
     </ProjectReference>

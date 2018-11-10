@@ -11,9 +11,6 @@
     <Filter Include="base\util">
       <UniqueIdentifier>{8793b407-2f96-464c-bcdb-628edcf75f6c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\util\detail">
-      <UniqueIdentifier>{f9399aac-9f1d-4984-b60e-751840a5ff9f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\path">
       <UniqueIdentifier>{f0deea76-7b22-453d-a30a-bdc29ab84d64}</UniqueIdentifier>
     </Filter>
@@ -56,15 +53,9 @@
     <Filter Include="base\i18n-2">
       <UniqueIdentifier>{84787b93-89af-4757-b2f5-8507c8e7cc78}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\subprocess">
-      <UniqueIdentifier>{1521888c-d106-4fde-948d-ca0a4d0cdc3f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="base\util\unicode.cpp">
-      <Filter>base\util</Filter>
-    </ClCompile>
     <ClCompile Include="base\win\version.cpp">
       <Filter>base\win</Filter>
     </ClCompile>
@@ -109,9 +100,6 @@
     </ClCompile>
     <ClCompile Include="base\util\console.cpp">
       <Filter>base\util</Filter>
-    </ClCompile>
-    <ClCompile Include="base\win\process.cpp">
-      <Filter>base\win</Filter>
     </ClCompile>
     <ClCompile Include="base\util\is_utf8.cpp">
       <Filter>base\util</Filter>
@@ -158,20 +146,8 @@
     <ClCompile Include="base\util\pinyin.cpp">
       <Filter>base\util</Filter>
     </ClCompile>
-    <ClCompile Include="base\subprocess\subprocess_posix.cpp">
-      <Filter>base\subprocess</Filter>
-    </ClCompile>
-    <ClCompile Include="base\subprocess\subprocess_win.cpp">
-      <Filter>base\subprocess</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="base\util\detail\codecvt.h">
-      <Filter>base\util\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="base\util\unicode.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
     <ClInclude Include="base\com\unique_ptr.h">
       <Filter>base\com</Filter>
     </ClInclude>
@@ -241,9 +217,6 @@
     <ClInclude Include="base\util\console.h">
       <Filter>base\util</Filter>
     </ClInclude>
-    <ClInclude Include="base\win\process.h">
-      <Filter>base\win</Filter>
-    </ClInclude>
     <ClInclude Include="base\util\buffer.h">
       <Filter>base\util</Filter>
     </ClInclude>
@@ -258,12 +231,6 @@
     </ClInclude>
     <ClInclude Include="base\util\horrible_cast.h">
       <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\util\detail\ansi_codecvt.h">
-      <Filter>base\util\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="base\util\detail\utf8_codecvt.h">
-      <Filter>base\util\detail</Filter>
     </ClInclude>
     <ClInclude Include="base\util\signal.h">
       <Filter>base\util</Filter>
@@ -386,30 +353,13 @@
     <ClInclude Include="base\util\pinyin.h">
       <Filter>base\util</Filter>
     </ClInclude>
-    <ClInclude Include="base\subprocess\subprocess_posix.h">
-      <Filter>base\subprocess</Filter>
-    </ClInclude>
-    <ClInclude Include="base\subprocess\subprocess_win.h">
-      <Filter>base\subprocess</Filter>
-    </ClInclude>
-    <ClInclude Include="base\subprocess.h">
-      <Filter>base</Filter>
+    <ClInclude Include="base\util\is_utf8.h">
+      <Filter>base\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="base\util\detail\ansi_codecvt.inl">
-      <Filter>base\util\detail</Filter>
-    </None>
-    <None Include="base\util\detail\codecvt.inl">
-      <Filter>base\util\detail</Filter>
-    </None>
-    <None Include="base\util\detail\utf8_codecvt.inl">
-      <Filter>base\util\detail</Filter>
-    </None>
   </ItemGroup>
 </Project>

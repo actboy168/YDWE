@@ -1,7 +1,7 @@
 #include <windows.h>
 #include "MainWindow.h"
 #include <base/com/guard.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <base/i18n-2/gettext.h>
 #include <base/path/ydwe.h>
 
@@ -25,7 +25,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR l
 	}
 	catch (std::exception const& e)
 	{
-		::MessageBoxW(NULL, base::u2w(e.what(), base::conv_method::replace | '?').c_str(), L"ERROR", MB_ICONERROR | MB_OK);
+		::MessageBoxW(NULL, bee::u2w(e.what()).c_str(), L"ERROR", MB_ICONERROR | MB_OK);
 	}
 	catch (...)
 	{

@@ -9,7 +9,7 @@
 #include <base/i18n-2/gettext.h>
 #include <base/path/get_path.h>
 #include <base/path/ydwe.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <base/win/file_version.h>
 #include <base/util/format.h>	 
 #include <base/util/ini.h>
@@ -23,7 +23,7 @@
 #include <base/warcraft3/command_line.cpp>
 
 #define _(str)  base::i18n::v2::get_text(str).data()
-#define __(str) base::u2w(base::i18n::v2::get_text(str)).c_str()
+#define __(str) bee::u2w(base::i18n::v2::get_text(str)).c_str()
 
 static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSecond, std::error_code *pErrorCode = nullptr)
 {
@@ -229,11 +229,11 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 	}
 	catch (base::exception const& e)
 	{
-		MessageBoxW(NULL, base::u2w(e.what(), base::conv_method::replace | '?').c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, bee::u2w(e.what()).c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
 	}
 	catch (std::exception const& e)
 	{
-		MessageBoxW(NULL, base::a2w(e.what(), base::conv_method::replace | '?').c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, bee::a2w(e.what()).c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
 	}
 	catch (...)
 	{

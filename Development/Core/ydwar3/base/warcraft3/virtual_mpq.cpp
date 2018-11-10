@@ -5,7 +5,7 @@
 #include <base/util/foreach.h>	  	  		
 #include <base/filesystem.h>   
 #include <optional>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <cstdint>
 #include <array>   
 #include <map>
@@ -262,7 +262,7 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 				{
 					filesystem::top_mpq = *mpq_handle_ptr;
 					try {
-						filesystem::dispatch_event("open map", base::a2u(mpqname).c_str());
+						filesystem::dispatch_event("open map", bee::a2u(mpqname).c_str());
 					}
 					catch (...) {
 					}

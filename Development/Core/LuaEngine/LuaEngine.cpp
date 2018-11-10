@@ -14,7 +14,7 @@ int luaopen_log(lua_State* L);
 
 void lua_pushwstring(lua_State* L, const std::wstring& str)
 {
-	std::string ustr = base::w2u(str, base::conv_method::replace | '?');
+	std::string ustr = bee::w2u(str);
 	lua_pushlstring(L, ustr.data(), ustr.size());
 }
 

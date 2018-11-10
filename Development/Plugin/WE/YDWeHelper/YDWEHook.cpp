@@ -4,7 +4,8 @@
 #include <algorithm>
 #include <functional>
 #include <regex>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
+#include <base/util/is_utf8.h>
 #include <base/hook/inline.h>
 #include <base/hook/replace_pointer.h>
 #include <base/hook/iat_manager.h>
@@ -63,7 +64,7 @@ uint32_t __fastcall DetourWeSetMenuItem(uint32_t this_, uint32_t edx_, uint32_t 
 	{
 		if ((str) && !base::is_utf8(str))
 		{
-			std::string tmp = base::a2u(str);
+			std::string tmp = bee::a2u(str);
 			return base::this_call<uint32_t>(pgTrueWeSetMenuItem, this_, item, tmp.c_str(), hotkey);
 		}
 	}
@@ -128,7 +129,7 @@ int __fastcall DetourWeStringCompare(const char* a, const char* b, bool ignore_c
 			std::transform(b_str.begin(), b_str.end(), b_str.begin(), tolower);
 		}
 
-		return g_deflocale.compare(base::u2w(a_str), base::u2w(b_str));
+		return g_deflocale.compare(bee::u2w(a_str), bee::u2w(b_str));
 	}
 	catch (...)
 	{
@@ -183,7 +184,7 @@ BOOL __fastcall DetourWeTriggerEditorEditboxCopy(const char *source)
 	if (source)
 	{
 		try {
-			return WriteText(base::u2w(source));
+			return WriteText(bee::u2w(source));
 		}
 		catch (...) {			
 		}
@@ -382,7 +383,7 @@ PIDLIST_ABSOLUTE WINAPI DetourWeSHBrowseForFolderA(LPBROWSEINFOA lpbi)
 {
 	if (lpbi->lpszTitle && base::is_utf8(lpbi->lpszTitle))
 	{
-		std::string tmp =  base::u2a(lpbi->lpszTitle);
+		std::string tmp =  bee::u2a(lpbi->lpszTitle);
 		lpbi->lpszTitle = tmp.c_str();
 		return base::std_call<PIDLIST_ABSOLUTE>(pgTrueSHBrowseForFolderA, lpbi);
 	}
@@ -396,7 +397,7 @@ BOOL WINAPI DetourWeGetOpenFileNameA(LPOPENFILENAMEA lpofn)
 {
 	if (lpofn->lpstrTitle && base::is_utf8(lpofn->lpstrTitle))
 	{
-		std::string tmp =  base::u2a(lpofn->lpstrTitle);
+		std::string tmp =  bee::u2a(lpofn->lpstrTitle);
 		lpofn->lpstrTitle = tmp.c_str();
 		return base::std_call<BOOL>(pgTrueGetOpenFileNameA, lpofn);
 	}
@@ -409,7 +410,7 @@ BOOL WINAPI DetourWeGetSaveFileNameA(LPOPENFILENAMEA lpofn)
 {
 	if (lpofn->lpstrTitle && base::is_utf8(lpofn->lpstrTitle))
 	{
-		std::string tmp =  base::u2a(lpofn->lpstrTitle);
+		std::string tmp =  bee::u2a(lpofn->lpstrTitle);
 		lpofn->lpstrTitle = tmp.c_str();
 		return base::std_call<BOOL>(pgTrueGetSaveFileNameA, lpofn);
 	}

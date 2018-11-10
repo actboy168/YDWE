@@ -5,17 +5,17 @@
 #include "sha1.h"
 #include "rolc.h"
 
-#define YDWE_BASE_INLINE
+#define BEE_INLINE
 #define BASE_UNICODE_DISABLE_ANSI
-#include <base/util/unicode.h>
-#include <base/util/unicode.cpp>
+#include <bee/utility/unicode.h>
+#include <bee/utility/unicode.cpp>
 
 #define __STORMLIB_SELF__
 #include <StormLib.h>
 
 int file_error(lua_State* L, fs::path const& path)
 {
-	return luaL_error(L, "%s: %s", base::w2u(path.wstring()).c_str(), strerror(ENOENT));
+	return luaL_error(L, "%s: %s", bee::w2u(path.wstring()).c_str(), strerror(ENOENT));
 }
 
 size_t sfsize(HANDLE file)

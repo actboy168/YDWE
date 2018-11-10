@@ -5,7 +5,7 @@
 #include <functional>
 #include <regex>
 #include <base/path/get_path.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <base/hook/inline.h>
 #include <base/hook/iat.h>
 #include <base/hook/fp_call.h>	  
@@ -24,13 +24,13 @@ namespace NYDWE {
 
 	void lua_pushwstring(lua_State* L, const std::wstring& str)
 	{
-		std::string ustr = base::w2u(str, base::conv_method::replace | '?');
+		std::string ustr = bee::w2u(str);
 		lua_pushlstring(L, ustr.data(), ustr.size());
 	}
 
 	void lua_pushastring(lua_State* L, const char* str)
 	{
-		std::string ustr = base::a2u(str, base::conv_method::replace | '?');
+		std::string ustr = bee::a2u(str);
 		lua_pushlstring(L, ustr.data(), ustr.size());
 	}
 	
@@ -90,7 +90,7 @@ namespace NYDWE {
 		if (pos == -1) {
 			return base::c_call<FILE*>(pgTrueFopen, filename, mode);
 		}
-		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
+		sFilename = sFilename.substr(0, pos) + bee::u2a(sFilename.substr(pos));
 		return base::c_call<FILE*>(pgTrueFopen, sFilename.c_str(), mode);
 	} 
 
@@ -102,7 +102,7 @@ namespace NYDWE {
 		if (pos == -1) {
 			return base::std_call<DWORD>(pgTrueGetFileAttributesA, lpPathName);
 		}
-		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
+		sFilename = sFilename.substr(0, pos) + bee::u2a(sFilename.substr(pos));
 		return base::std_call<DWORD>(pgTrueGetFileAttributesA, sFilename.c_str());
 	}
 
@@ -114,7 +114,7 @@ namespace NYDWE {
 		if (pos == -1) {
 			return base::std_call<BOOL>(pgTrueCreateDirectoryA, lpPathName, lpSecurityAttributes);
 		}
-		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
+		sFilename = sFilename.substr(0, pos) + bee::u2a(sFilename.substr(pos));
 		BOOL ok = base::std_call<BOOL>(pgTrueCreateDirectoryA, sFilename.c_str(), lpSecurityAttributes);
 		return ok;
 	}
@@ -162,7 +162,7 @@ namespace NYDWE {
 		saveMap = true;
 		int results = event_array[EVENT_NEW_SAVE_MAP]([&](lua_State* L, int idx) {
 			lua_pushstring(L, "map_path");
-			lua_pushwstring(L, base::a2w(mappath));
+			lua_pushwstring(L, bee::a2w(mappath));
 			lua_rawset(L, idx);
 
 			lua_pushstring(L, "test");

@@ -5,7 +5,7 @@
 #include <base/path/self.h>
 #include <base/path/ydwe.h>
 #include <base/path/helper.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <base/win/version.h>
 #include <base/win/file_version.h>
 #include <base/win/font/utility.h>
@@ -147,16 +147,16 @@ void CMainWindow::InitWindow()
 			for (uint8_t i = 0; i < attribute.Count(); ++i)
 			{
 				std::string radioname = name + "_" + std::to_string((long long)i);
-				m_controls[radioname] = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(base::u2w(radioname).c_str()));
+				m_controls[radioname] = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(bee::u2w(radioname).c_str()));
 			}
 		}
 		else if (attribute.Type() == Attribute::e_CheckBox)
 		{
-			m_controls[name] = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(base::u2w(name).c_str()));
+			m_controls[name] = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(bee::u2w(name).c_str()));
 		}
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
-			m_comboboxs[name] = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(base::u2w(name).c_str()));
+			m_comboboxs[name] = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(bee::u2w(name).c_str()));
 		}
 	}
 
@@ -270,7 +270,7 @@ void CMainWindow::ConfigToUI(base::ini::table& table)
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
 			if (m_comboboxs[name]) {
-				std::wstring font_name = base::u2w(table[attribute.Section()][name], base::conv_method::replace | '?');
+				std::wstring font_name = bee::u2w(table[attribute.Section()][name]);
 				for (int i = 0; i < m_comboboxs[name]->GetCount(); ++i)
 				{
 					if (font_name == ((DuiLib::CListLabelElementUI*)m_comboboxs[name]->GetItemAt(i))->GetText())
@@ -315,7 +315,7 @@ void CMainWindow::UIToConfig(base::ini::table& table)
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
 			if (m_comboboxs[name]) {
-				table[attribute.Section()][name] = base::w2u(CComboUI_GetSelectText(m_comboboxs[name]));
+				table[attribute.Section()][name] = bee::w2u(CComboUI_GetSelectText(m_comboboxs[name]));
 			}
 		}
 	}
@@ -499,7 +499,7 @@ void CMainWindow::InitPluginUI()
 						node->SetAttribute(L"class", L"CheckBox");
 						node->SetAttribute(L"text", fv[L"FileDescription"]);
 						node->SetAttribute(L"tooltip", itr->path().filename().c_str());
-						node->Selected("0" != table["Enable"][base::w2u(itr->path().filename().wstring())]);
+						node->Selected("0" != table["Enable"][bee::w2u(itr->path().filename().wstring())]);
 					}
 				}
 			}
@@ -526,7 +526,7 @@ void CMainWindow::DonePluginUI()
 			if (pCheckBox)
 			{
 				
-				table["Enable"][base::w2u(pCheckBox->GetToolTip())] = pCheckBox->IsSelected()? "1": "0";
+				table["Enable"][bee::w2u(pCheckBox->GetToolTip())] = pCheckBox->IsSelected()? "1": "0";
 			}
 		}
 
@@ -597,7 +597,7 @@ void CMainWindow::DonePatchUI(base::ini::table& table)
 			DuiLib::CRadioButtonUI* pRadioButton = dynamic_cast<DuiLib::CRadioButtonUI*>(pControl);
 			if (pRadioButton && pRadioButton->IsSelected())
 			{
-				table["War3Patch"]["DirName"] = base::w2u(fs::path(pRadioButton->GetToolTip()).filename().wstring());
+				table["War3Patch"]["DirName"] = bee::w2u(fs::path(pRadioButton->GetToolTip()).filename().wstring());
 				return false;
 			}
 			return true;

@@ -1,5 +1,5 @@
 #include <base/exception/exception.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <stdio.h>
 #include <assert.h>
 #include <stdint.h>
@@ -21,7 +21,7 @@ namespace base {
 	{
 		werrormsg what = get_format_string(fmt, YD_VA_START(fmt));
 		if (what) {
-			std::string temp_string = w2u(what.c_str(), conv_method::replace | '?');
+			std::string temp_string = bee::w2u(what.c_str());
 			if (what_) {
 				what_.reset(temp_string.c_str(), temp_string.size() + 1);
 			}

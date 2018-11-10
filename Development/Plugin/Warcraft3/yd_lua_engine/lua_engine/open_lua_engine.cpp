@@ -5,7 +5,7 @@
 #include "class_array.h"
 #include "class_handle.h"
 #include <base/util/console.h> 
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include <base/warcraft3/command_line.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
