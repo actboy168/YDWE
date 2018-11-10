@@ -56,6 +56,9 @@ local function check_conflicting_units()
 	local units_dir = fs.war3_path() / 'Units'
 	local found = false
 	
+	if not fs.exists(units_dir) then
+		return
+	end
 	for file in units_dir:list_directory() do	
 		if not fs.is_directory(file) then
 			found = true
