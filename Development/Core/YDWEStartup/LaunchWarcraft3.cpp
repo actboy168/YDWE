@@ -7,7 +7,7 @@
 #include <base/util/format.h>
 #include <base/win/registry/key.h> 
 #include <base/hook/fp_call.h>
-#include <base/subprocess.h>
+#include <bee/subprocess.h>
 #include <base/hook/injectdll.h>
 #include <base/hook/replacedll.h>
 
@@ -59,8 +59,8 @@ static bool map_convert(const fs::path& ydwe, const fs::path& from, const fs::pa
 {
 	fs::path ydwedev = base::path::ydwe(true);
 	fs::path app = ydwe / L"bin" / L"lua.exe";
-	base::subprocess::spawn spawn;
-	spawn.set_console(base::subprocess::console::eDisable);
+	bee::subprocess::spawn spawn;
+	spawn.set_console(bee::subprocess::console::eDisable);
 	spawn.env_set(L"PATH", (ydwe / L"bin").wstring());
 	if (!spawn.exec(
 		{
@@ -76,7 +76,7 @@ static bool map_convert(const fs::path& ydwe, const fs::path& from, const fs::pa
 	)) {
 		return false;
 	}
-	return base::subprocess::process(spawn).wait() == 0;
+	return bee::subprocess::process(spawn).wait() == 0;
 }
 
 static void map_build(const fs::path& ydwe, const fs::path& from, const fs::path& to, bool slk)
@@ -184,7 +184,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 
 		SetEnvironmentVariableW(L"ydwe-process-name", L"war3");
 
-		base::subprocess::spawn spawn;
+		bee::subprocess::spawn spawn;
 		spawn.suspended();
 
 		if (fs::exists(inject_dll))
@@ -198,7 +198,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 			return false;
 		}
 
-		base::subprocess::process process(spawn);
+		bee::subprocess::process process(spawn);
 		try {
 			if (table["War3Patch"]["Option"] == "2")
 			{

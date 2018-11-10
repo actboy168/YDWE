@@ -88,11 +88,11 @@
     <None Include="clr.def" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\OpenSource\bee.lua\project\bee.vcxproj">
+      <Project>{355c2493-0a78-490b-971a-bbdb0e2819ef}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\OpenSource\bee.lua\project\lua54.vcxproj">
       <Project>{316b33ed-1056-48b0-abf0-ce3ce55f7a17}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">
-      <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

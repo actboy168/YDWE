@@ -1,7 +1,7 @@
 #pragma once
 
 #include <base/config.h>
-#include <base/util/optional.h>
+#include <optional>
 #include <string>
 
 namespace base { namespace win {

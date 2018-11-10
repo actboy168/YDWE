@@ -93,6 +93,9 @@
     <ClInclude Include="Splash.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\OpenSource\bee.lua\project\bee.vcxproj">
+      <Project>{355c2493-0a78-490b-971a-bbdb0e2819ef}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\BLPConv\BLPConv.vcxproj">
       <Project>{5a6944d1-71b9-4b21-952a-e2e78c1ebf52}</Project>
     </ProjectReference>

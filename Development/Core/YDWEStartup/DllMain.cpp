@@ -13,7 +13,7 @@
 #include <base/win/file_version.h>
 #include <base/util/format.h>	 
 #include <base/util/ini.h>
-#include <base/subprocess.h>
+#include <bee/subprocess.h>
 #include "Splash.h"
 
 #define YDWE_WAR3_INLINE
@@ -193,7 +193,7 @@ static void DoTask()
 	CreateDotNetConfig(gWarcraftDirectory / L"worldeditydwe.exe.config");
 
 	SetEnvironmentVariableW(L"ydwe-process-name", L"ydwe");
-	base::subprocess::spawn worldedit_process;
+	bee::subprocess::spawn worldedit_process;
 
 	int argc = 0;
 	wchar_t** argv = ::CommandLineToArgvW(::GetCommandLineW(), &argc);

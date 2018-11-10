@@ -5,7 +5,7 @@
 #include <queue>
 #include <mutex>
 #include <process.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode.h>
 #include "LuaEngine/LuaEngine.h"
 
 extern "C" {
@@ -24,7 +24,7 @@ namespace thread {
 		{
 			size_t len = 0;
 			const char* str = luaL_checklstring(L, 1, &len);
-			m_name = base::u2w(std::string_view(str, len), base::conv_method::replace | '?');
+			m_name = bee::u2w(std::string_view(str, len));
 
 			lua_replace(L, 1);
 			lua_pushcfunction(L, seri_pack);

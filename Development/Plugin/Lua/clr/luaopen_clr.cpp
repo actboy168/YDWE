@@ -1,8 +1,8 @@
 #pragma warning(push, 3)
 #include <lua.hpp>
 #pragma warning(pop)
-#include <base/filesystem.h>
-#include <base/util/unicode.h>
+#include <filesystem>
+#include <bee/utility/unicode.h>
 #include <windows.h>
 #include "clr_interop.h"
 
@@ -14,7 +14,7 @@ namespace clr {
 	{
 		size_t len = 0;
 		const char* str = luaL_checklstring(L, idx, &len);
-		return base::u2w(std::string_view(str, len), base::conv_method::replace | '?');
+		return bee::u2w(std::string_view(str, len));
 	}
 
 	clr::object& to(lua_State* L, int idx)
@@ -24,7 +24,7 @@ namespace clr {
 
 	int constructor(lua_State* L)
 	{
-		fs::path& assembly = *(fs::path*)luaL_checkudata(L, 1, "filesystem");
+		std::filesystem::path& assembly = *(std::filesystem::path*)luaL_checkudata(L, 1, "filesystem");
 		std::wstring type = luaL_checkwstring(L, 2);
 		void* storage = lua_newuserdata(L, sizeof(clr::object));
 		luaL_getmetatable(L, "clr-object");
