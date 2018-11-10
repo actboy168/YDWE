@@ -125,8 +125,6 @@
     <ClCompile Include="base\win\font\file.cpp" />
     <ClCompile Include="base\win\font\utility.cpp" />
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="base\exception\exception.cpp" />
-    <ClCompile Include="base\exception\windows_exception.cpp" />
     <ClCompile Include="base\file\file_handle.cpp" />
     <ClCompile Include="base\file\memory_mapped_file.cpp" />
     <ClCompile Include="base\file\stream.cpp" />
@@ -150,8 +148,6 @@
     <ClInclude Include="base\com\guard.h" />
     <ClInclude Include="base\com\unique_ptr.h" />
     <ClInclude Include="base\config.h" />
-    <ClInclude Include="base\exception\exception.h" />
-    <ClInclude Include="base\exception\windows_exception.h" />
     <ClInclude Include="base\filesystem.h" />
     <ClInclude Include="base\file\memory_mapped_file.h" />
     <ClInclude Include="base\file\file_handle.h" />

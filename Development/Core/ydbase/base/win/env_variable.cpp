@@ -1,5 +1,5 @@
 #include <base/win/env_variable.h>
-#include <base/exception/windows_exception.h>
+#include <bee/exception/windows_exception.h>
 #include <Windows.h>
 #include <array>
 
@@ -31,7 +31,7 @@ namespace win {
 		DWORD retval = ::GetEnvironmentVariableW(name_.c_str(), buffer.data(), buffer.size());
 		if (retval == 0 || retval > buffer.size())
 		{
-			throw windows_exception("GetEnvironmentVariable failed.");
+			throw bee::windows_exception("GetEnvironmentVariable failed.");
 		}
 
 		return std::move(std::wstring(buffer.begin(), buffer.end()));

@@ -2,7 +2,7 @@
 #include "zip_internal.h"
 
 #include <fstream>
-#include <base/exception/windows_exception.h>	   
+#include <bee/exception/windows_exception.h>	   
 #include <bee/utility/unicode.h>
 #include <unzip.h>
 #include <iowin32.h>
@@ -17,7 +17,7 @@ namespace zip {
 			{
 				it.impl_.reset();
 
-				base::windows_exception ex(nullptr, ERROR_FILE_NOT_FOUND);
+				bee::windows_exception ex(nullptr, ERROR_FILE_NOT_FOUND);
 				if (!ec) {
 					throw ex;
 				}

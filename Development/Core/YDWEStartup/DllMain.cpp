@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <base/filesystem.h>
 #include <base/file/memory_mapped_file.h>
-#include <base/exception/windows_exception.h>
+#include <bee/exception/windows_exception.h>
 #include <base/file/stream.h>
 #include <base/i18n-2/gettext.h>
 #include <base/path/get_path.h>
@@ -41,7 +41,7 @@ static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSeco
 		return ((size = mapperFirst.size()) == mapperSecond.size())
 			&& (memcmp(mapperFirst.data(), mapperSecond.data(), size) == 0);
 	}
-	catch (base::windows_exception const& e)
+	catch (bee::windows_exception const& e)
 	{
 		if (pErrorCode)
 		{
@@ -204,7 +204,7 @@ static void DoTask()
 	args[0] = worldeditPreferredPath.wstring();
 
 	if (!worldedit_process.exec(args, 0)) {
-		throw base::windows_exception(_("ERROR_LAUNCH_WE"));
+		throw bee::windows_exception(_("ERROR_LAUNCH_WE"));
 	}
 	ShowSplash(gExecutableDirectory);
 }
@@ -227,7 +227,7 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 		DoTask();
 		exitCode = 0;
 	}
-	catch (base::exception const& e)
+	catch (bee::exception const& e)
 	{
 		MessageBoxW(NULL, bee::u2w(e.what()).c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
 	}

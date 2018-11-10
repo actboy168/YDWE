@@ -1,5 +1,5 @@
 #include <base/path/get_path.h>
-#include <base/exception/windows_exception.h>
+#include <bee/exception/windows_exception.h>
 #include <base/util/dynarray.h>
 #include <base/win/env_variable.h>
 #include <Windows.h>
@@ -28,13 +28,13 @@ namespace base { namespace path {
 		std::dynarray<wchar_t> buffer(::GetTempPathW(0, nullptr));
 		if (buffer.empty() || ::GetTempPathW(buffer.size(), &buffer[0]) == 0)
 		{
-			throw windows_exception("::GetTempPathW failed.");
+			throw bee::windows_exception("::GetTempPathW failed.");
 		}
 
 		fs::path p(buffer.begin(), buffer.begin() + buffer.size() - 1);
 		if (!fs::is_directory(p))
 		{
-			throw windows_exception("::GetTempPathW failed.");
+			throw bee::windows_exception("::GetTempPathW failed.");
 		}
 		return std::move(p);
 	}
@@ -45,7 +45,7 @@ namespace base { namespace path {
 		DWORD path_len = ::GetModuleFileNameW(module_handle, buffer, _countof(buffer));
 		if (path_len == 0)
 		{
-			throw windows_exception("::GetModuleFileNameW failed.");
+			throw bee::windows_exception("::GetModuleFileNameW failed.");
 		}
 
 		if (path_len < _countof(buffer))
@@ -59,7 +59,7 @@ namespace base { namespace path {
 			path_len = ::GetModuleFileNameW(module_handle, buf.data(), buf.size());
 			if (path_len == 0)
 			{
-				throw windows_exception("::GetModuleFileNameW failed.");
+				throw bee::windows_exception("::GetModuleFileNameW failed.");
 			}
 
 			if (path_len < _countof(buffer))
@@ -68,6 +68,6 @@ namespace base { namespace path {
 			}
 		}
 
-		throw windows_exception("::GetModuleFileNameW failed.");
+		throw bee::windows_exception("::GetModuleFileNameW failed.");
 	}
 }}

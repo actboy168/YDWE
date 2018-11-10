@@ -1,7 +1,7 @@
 #pragma once
 
 #include <base/config.h>
-#include <base/exception/windows_exception.h>
+#include <bee/exception/windows_exception.h>
 #include <base/util/noncopyable.h>
 #include <base/win/scoped_handle.h>
 #include <cstdint>

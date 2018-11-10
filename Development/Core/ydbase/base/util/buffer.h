@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/exception/exception.h>
+#include <bee/exception/exception.h>
 #include <base/util/noncopyable.h>
 #include <string>
 #include <system_error>
@@ -105,7 +105,7 @@ namespace base {
 		{
 			if (size_ < n)
 			{
-				throw exception("buffer overflow.");
+				throw bee::exception("buffer overflow.");
 			}
 
 			const value_type* ret = &*next_;
@@ -183,7 +183,7 @@ namespace base {
 				{
 					if (max_size_ < offset)
 					{
-						throw exception("buffer overflow.");
+						throw bee::exception("buffer overflow.");
 					}
 					next_ = first_ + offset;
 				}
@@ -192,7 +192,7 @@ namespace base {
 				{
 					if (size_ < offset)
 					{
-						throw exception("buffer overflow.");
+						throw bee::exception("buffer overflow.");
 					}
 					next_ = next_ + offset;
 				}
@@ -201,7 +201,7 @@ namespace base {
 				{
 					if (max_size_ < offset)
 					{
-						throw exception("buffer overflow.");
+						throw bee::exception("buffer overflow.");
 					}
 					next_ = first_ + (max_size_ - offset);
 				}

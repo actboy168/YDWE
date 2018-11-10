@@ -29,9 +29,6 @@
     <Filter Include="base\hook\assembler">
       <UniqueIdentifier>{f9143e63-84b2-464b-875e-a05d101a2f49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\exception">
-      <UniqueIdentifier>{8cfb2827-1c18-4e68-9be9-9a17e657b774}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\file">
       <UniqueIdentifier>{98c0be1b-e82d-4a6a-8179-8d6e11315c17}</UniqueIdentifier>
     </Filter>
@@ -86,9 +83,6 @@
     <ClCompile Include="base\win\pe_reader.cpp">
       <Filter>base\win</Filter>
     </ClCompile>
-    <ClCompile Include="base\exception\windows_exception.cpp">
-      <Filter>base\exception</Filter>
-    </ClCompile>
     <ClCompile Include="base\file\file_handle.cpp">
       <Filter>base\file</Filter>
     </ClCompile>
@@ -103,9 +97,6 @@
     </ClCompile>
     <ClCompile Include="base\util\is_utf8.cpp">
       <Filter>base\util</Filter>
-    </ClCompile>
-    <ClCompile Include="base\exception\exception.cpp">
-      <Filter>base\exception</Filter>
     </ClCompile>
     <ClCompile Include="base\file\stream.cpp">
       <Filter>base\file</Filter>
@@ -193,9 +184,6 @@
     <ClInclude Include="base\hook\assembler\writer.h">
       <Filter>base\hook\assembler</Filter>
     </ClInclude>
-    <ClInclude Include="base\exception\windows_exception.h">
-      <Filter>base\exception</Filter>
-    </ClInclude>
     <ClInclude Include="base\win\scoped_handle.h">
       <Filter>base\win</Filter>
     </ClInclude>
@@ -222,9 +210,6 @@
     </ClInclude>
     <ClInclude Include="base\path\self.h">
       <Filter>base\path</Filter>
-    </ClInclude>
-    <ClInclude Include="base\exception\exception.h">
-      <Filter>base\exception</Filter>
     </ClInclude>
     <ClInclude Include="base\hook\assembler\operand.h">
       <Filter>base\hook\assembler</Filter>

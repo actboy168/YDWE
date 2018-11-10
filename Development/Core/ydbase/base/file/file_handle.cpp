@@ -1,5 +1,5 @@
 #include <base/file/file_handle.h>
-#include <base/exception/windows_exception.h>
+#include <bee/exception/windows_exception.h>
 
 namespace base { namespace file {
 
@@ -8,7 +8,7 @@ namespace base { namespace file {
 	{
 		if (!mybase::operator bool())
 		{
-			throw windows_exception("failed to open file");
+			throw bee::windows_exception("failed to open file");
 		}
 	}
 
@@ -16,7 +16,7 @@ namespace base { namespace file {
 	{
 		LARGE_INTEGER file_size;
 		if (!::GetFileSizeEx(mybase::get(), &file_size)) {
-			throw windows_exception("failed to determine file size");
+			throw bee::windows_exception("failed to determine file size");
 		}
 		return file_size.QuadPart;
 	}

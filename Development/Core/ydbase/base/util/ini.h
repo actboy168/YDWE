@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <base/exception/exception.h>
+#include <bee/exception/exception.h>
 #include <base/util/foreach.h>
 
 namespace base { namespace ini {
@@ -95,7 +95,7 @@ namespace base { namespace ini {
 		template <class ... Args>
 		bool error(const char* fmt, const Args& ... args)
 		{
-			throw exception(fmt, args...);
+			throw bee::exception(fmt, args...);
 		}
 
 		bool parse_comment()

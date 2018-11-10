@@ -1,6 +1,6 @@
 #include "logging_backend.h"
 #include <base/util/format.h>
-#include <base/exception/exception.h>
+#include <bee/exception/exception.h>
 #include <fstream>
 
 namespace logging
@@ -54,7 +54,7 @@ namespace logging
 			impl_->file_.open((impl_->root_ / (impl_->name_ + L".log")).c_str(), std::ios_base::app | std::ios_base::out);
 			if (!impl_->file_.is_open())
 			{
-				throw base::exception("Failed to open file '%s' for writing.", (impl_->root_ / (impl_->name_ + L".log")).string().c_str());
+				throw bee::exception("Failed to open file '%s' for writing.", (impl_->root_ / (impl_->name_ + L".log")).string().c_str());
 			}
 
 			impl_->written_ = static_cast<std::streamoff>(impl_->file_.tellp());
