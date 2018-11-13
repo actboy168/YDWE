@@ -1,15 +1,21 @@
 fs = require 'bee.filesystem'
-local process = require 'process'
+local process = require 'bee.subprocess'
 local root = fs.current_path()
 
 return function (err)
-    local p = process()
-    local stdin = p:std_input()
     local app = root:parent_path() / 'bin' / 'w3x2lni-lua.exe'
     local script = root / 'crashreport' / 'init.lua'
-    local command = ('"%s" -E -e "package.cpath=[[%s]];package.path=[[%s]]" "%s"'):format(app:string(), package.cpath, package.path, script:string())
-    p:set_console('disable')
-    if not p:create(app, command, root) then
+    local p, stdin = process.spawn {
+        app:string(),
+        '-E',
+        '-e', ('package.cpath=[[%s]]'):format(package.cpath),
+        '-e', ('package.path=[[%s]]'):format(package.path),
+        script:string(),
+        console = 'disable',
+        stdin = true,
+        cwd = root:string()
+    }
+    if not p then
         return
     end
     stdin:write(err)

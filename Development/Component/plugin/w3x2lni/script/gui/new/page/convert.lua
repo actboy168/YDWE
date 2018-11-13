@@ -23,22 +23,6 @@ local function getexe()
     return fs.path(arg[i + 1])
 end
 
-local function trans_command(cmd)
-    local str = cmd:gsub([[(\\?)$]], function (str)
-        if str == [[\]] then
-            return [[\\]]
-        end
-    end)
-    return '"' .. str .. '"'
-end
-
-local function pack_arg()
-    local buf = {}
-    buf[1] = window._mode
-    buf[2] = trans_command(window._filename:string())
-    return table.concat(buf, ' ')
-end
-
 local function update_show()
     data.report.visible = not not backend.lastword
     data.progress.visible = (not not worker) and not data.report.visible
@@ -149,7 +133,7 @@ local template = ui.container {
                         return
                     end
                     backend:init(getexe(), fs.current_path())
-                    worker = backend:open('backend\\init.lua', pack_arg())
+                    worker = backend:open('backend\\init.lua', {window._mode, window._filename:string()})
                     backend.message = lang.ui.INIT
                     backend.progress = 0
                     data.progress.value = backend.progress / 100
@@ -320,7 +304,7 @@ ev.on('update theme', function(color, title)
     backend.lastword = nil
     data.message = ''
     worker = nil
-    
+
     configData.proxy.theme = color
 
     if current_page then

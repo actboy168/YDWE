@@ -1,7 +1,6 @@
 fs = require 'bee.filesystem'
 require 'utility'
 local messagebox = require 'ffi.messagebox'
-local process = require 'process'
 local nk = require 'nuklear'
 local backend = require 'gui.backend'
 local show_version = require 'gui.old.show_version'
@@ -88,7 +87,7 @@ local function button_mapname(canvas, height)
     canvas:layout_row_dynamic(10, 1)
     canvas:layout_row_dynamic(40, 1)
     local ok, state = canvas:button(mapname)
-    if ok then 
+    if ok then
         showmappath = not showmappath
     end
     if state & NK_WIDGET_STATE_LEFT ~= 0 then
@@ -160,7 +159,7 @@ local function window_about(canvas)
     canvas:button(lang.ui.AUTHOR)
     canvas:layout_row_dynamic(5, 1)
     canvas:layout_row_dynamic(20, 4)
-    canvas:text(lang.ui.FRONTEND, NK_TEXT_RIGHT) canvas:text('actboy168', NK_TEXT_CENTERED) 
+    canvas:text(lang.ui.FRONTEND, NK_TEXT_RIGHT) canvas:text('actboy168', NK_TEXT_CENTERED)
     canvas:layout_row_dynamic(20, 4)
     canvas:text(lang.ui.BACKEND, NK_TEXT_RIGHT) canvas:text(lang.ui.SUMNEKO, NK_TEXT_CENTERED)
     canvas:layout_row_dynamic(5, 1)
@@ -388,7 +387,7 @@ local treecache = {n=2}
 local function get_tree(name)
     if not treecache[name] then
         treecache.n = treecache.n + 1
-        treecache[name] = treecache.n 
+        treecache[name] = treecache.n
     end
     return treecache[name]
 end

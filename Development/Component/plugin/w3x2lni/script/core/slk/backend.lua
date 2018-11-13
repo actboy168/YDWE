@@ -61,21 +61,20 @@ local function convert_wtg(w2l)
     w2l.progress:start(0.5)
     if wtg and wct then
         if w2l.setting.mode == 'lni' then
-            xpcall(function ()
+            local ok, err = xpcall(function ()
                 wtg_data = w2l:frontend_wtg(wtg)
                 wct_data = w2l:frontend_wct(wct)
                 w2l:file_remove('map', 'war3map.wtg')
                 w2l:file_remove('map', 'war3map.wct')
-            end, function (msg)
-                w2l.messager.report(lang.report.WARN, 2, lang.report.NO_CONVERT_WTG, msg:match('%.lua:%d+: (.*)'))
-            end)
+            end, debug.traceback)
+            if not ok then
+                w2l.messager.report(lang.report.WARN, 2, lang.report.NO_CONVERT_WTG, err:match('%.lua:%d+: (.*)'))
+            end
         end
     else
         local version = w2l:file_load('w3x2lni', 'version\\lml')
         if version == nil then
             w2l.frontend_lml = w2l.frontend_lml_v0
-        elseif version == '1' then
-            w2l.frontend_lml = w2l.frontend_lml_v1
         end
         wtg_data, wct_data = w2l:frontend_lml(function (filename)
             local buf = w2l:file_load('trigger', filename)
@@ -91,17 +90,17 @@ local function convert_wtg(w2l)
     local need_convert_wtg = true
     if wtg_data and wct_data and not w2l.setting.remove_we_only then
         if w2l.setting.mode == 'lni' then
-            w2l:file_save('w3x2lni', 'version\\lml', '2')
+            w2l:file_save('w3x2lni', 'version\\lml', '1')
             local files = w2l:backend_lml(wtg_data, wct_data, w2l.slk.wts)
             for filename, buf in pairs(files) do
                 w2l:file_save('trigger', filename, buf)
             end
         else
             local wtg_buf, wct_buf
-            local suc, err = pcall(function ()
+            local suc, err = xpcall(function ()
                 wtg_buf = w2l:backend_wtg(wtg_data, w2l.slk.wts)
                 wct_buf = w2l:backend_wct(wct_data)
-            end)
+            end, debug.traceback)
             if suc then
                 w2l:file_save('map', 'war3map.wtg', wtg_buf)
                 w2l:file_save('map', 'war3map.wct', wct_buf)

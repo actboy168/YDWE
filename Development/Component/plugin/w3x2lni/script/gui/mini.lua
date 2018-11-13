@@ -17,7 +17,7 @@ function mini:init()
     local win = gui.Window.create  { frame = false }
     win:settitle('w3x2lni-mini')
     ext.register_window('w3x2lni-mini')
-    
+
     local view = gui.Container.create()
     view:setstyle { FlexGrow = 1 }
     view:setmousedowncanmovewindow(true)
@@ -35,17 +35,17 @@ function mini:init()
     title_label:setfont(gui.Font.create('宋体', 16, "bold", "normal"))
     title_label:setmousedowncanmovewindow(true)
     title:addchildview(title_label)
-    
+
     local label = gui.Label.create('')
     label:setstyle { Margin = 5, Height = 20 }
     label:setalign 'start'
     label:setmousedowncanmovewindow(true)
     view:addchildview(label)
-    
+
     local pb = gui.ProgressBar.create()
     pb:setstyle { Margin = 5, Height = 40 }
     view:addchildview(pb)
-    
+
     win:setcontentview(view)
     win:sethasshadow(true)
     win:setresizable(false)
@@ -83,23 +83,6 @@ end
 
 function mini:event_close(f)
     self._window.onclose = f
-end
-
-local function trans_command(cmd)
-    local str = cmd:gsub([[(\\?)$]], function (str)
-        if str == [[\]] then
-            return [[\\]]
-        end
-    end)
-    return '"' .. str .. '"'
-end
-
-local function pack_arg()
-    local buf = {}
-    for i, command in ipairs(arg) do
-        buf[i] = trans_command(command)
-    end
-    return table.concat(buf, ' ')
 end
 
 local function need_select()
@@ -193,7 +176,7 @@ function mini:backend()
     mini:init()
     mini:event_close(gui.MessageLoop.quit)
     backend:init(getexe(), fs.current_path())
-    worker = backend:open('backend\\init.lua', pack_arg())
+    worker = backend:open('backend\\init.lua', arg)
     backend.message = lang.ui.INIT
     backend.progress = 0
     timer.loop(100, delayedtask)

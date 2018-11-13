@@ -46,13 +46,13 @@ return function (w2l)
         w2l.messager.report(lang.report.OPTIMIZE_JASS, 8, table.concat(t, '\t'))
     end
     local buf, report
-    local suc, err = pcall(function ()
+    local suc, err = xpcall(function ()
         local ast
         ast = parser(common,   'common.j',   ast, messager)
         ast = parser(blizzard, 'blizzard.j', ast, messager)
         ast = parser(war3map,  'war3map.j',  ast, messager)
         buf, report = optimizer(ast, w2l.setting, messager)
-    end)
+    end, debug.traceback)
     if not suc then
         w2l.messager.report(lang.report.ERROR, 1, lang.report.SYNTAX_ERROR, err:match('%.lua:%d+: (.*)'))
         return

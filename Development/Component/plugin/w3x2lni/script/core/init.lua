@@ -231,7 +231,7 @@ end
 function mt:call_plugin(event, ...)
     for _, plugin in ipairs(self.plugins) do
         if plugin[event] then
-            local ok, res = pcall(plugin[event], plugin, self, ...)
+            local ok, res = xpcall(plugin[event], debug.traceback, plugin, self, ...)
             if ok then
                 if res ~= nil then
                     return res
@@ -250,14 +250,14 @@ function mt:init_proxy()
     self.inited_proxy = true
     self.input_proxy = proxy(self, self.input_ar, self.input_mode, 'input')
     self.output_proxy = proxy(self, self.output_ar, self.setting.mode, 'output')
-    
+
     if self:file_load('w3x2lni', 'locale\\w3i.lng') then
         lang:set_lng_file('w3i', self:file_load('w3x2lni', 'locale\\w3i.lng'))
     end
     if self:file_load('w3x2lni', 'locale\\lml.lng') then
         lang:set_lng_file('lml', self:file_load('w3x2lni', 'locale\\lml.lng'))
     end
-    
+
     if self.setting.mode == 'lni' then
         self:file_save('w3x2lni', 'locale\\w3i.lng', lang:get_lng_file 'w3i')
         self:file_save('w3x2lni', 'locale\\lml.lng', lang:get_lng_file 'lml')
@@ -355,9 +355,9 @@ function mt:set_setting(setting)
     choose('target_storage')
     choose('computed_text', toboolean)
     choose('export_lua', toboolean)
-    
+
     self.setting = setting
-    
+
     self.mpq_path = mpq_path()
     if self.setting.version == 'Custom' then
         self.mpq_path:open 'Custom_V1'

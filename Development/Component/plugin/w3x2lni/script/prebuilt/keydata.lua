@@ -41,14 +41,14 @@ end
 
 local function is_enable(meta, type)
     if type == 'unit' then
-        if meta.useHero == 1 or meta.useUnit == 1 or meta.useBuilding == 1 or meta.useCreep == 1 then
+        if meta.useHero == '1' or meta.useUnit == '1' or meta.useBuilding == '1' or meta.useCreep == '1' then
             return true
         else
             return false
         end
     end
     if type == 'item' then
-        if meta.useItem == 1 then
+        if meta.useItem == '1' then
             return true
         else
             return false
