@@ -1,10 +1,28 @@
 #include <base/path/get_path.h>
 #include <bee/exception/windows_exception.h>
 #include <bee/utility/dynarray.h>
-#include <base/win/env_variable.h>
 #include <Windows.h>
+#include <array>
 
 namespace base { namespace path {
+
+	//
+	// see the
+	// http://msdn.microsoft.com/en-us/library/windows/desktop/ms683188.aspx
+	//
+	static std::wstring get_env_variable(const wchar_t* name) throw()
+	{
+		std::array<wchar_t, 32767> buffer;
+		buffer[0] = L'\0';
+
+		DWORD retval = ::GetEnvironmentVariableW(name, buffer.data(), buffer.size());
+		if (retval == 0 || retval > buffer.size())
+		{
+			return std::wstring();
+		}
+
+		return std::wstring(buffer.begin(), buffer.begin() + retval);
+	}
 
 	// 
 	// https://blogs.msdn.com/b/larryosterman/archive/2010/10/19/because-if-you-do_2c00_-stuff-doesn_2700_t-work-the-way-you-intended_2e00_.aspx
@@ -13,13 +31,13 @@ namespace base { namespace path {
 	fs::path temp()
 	{
 		std::wstring result;
-		result = win::env_variable(L"TMP").get_nothrow();
+		result = get_env_variable(L"TMP");
 		if (!result.empty())
 		{
 			return std::move(fs::path(result));
 		}
 
-		result = win::env_variable(L"TEMP").get_nothrow();
+		result = get_env_variable(L"TEMP");
 		if (!result.empty())
 		{
 			return std::move(fs::path(result));

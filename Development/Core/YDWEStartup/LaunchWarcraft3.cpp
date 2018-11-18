@@ -2,7 +2,6 @@
 #include <base/file/stream.h>
 #include <base/path/ydwe.h>
 #include <base/path/helper.h>
-#include <base/win/env_variable.h>
 #include <base/util/ini.h>
 #include <base/util/format.h>
 #include <bee/registry/key.h> 

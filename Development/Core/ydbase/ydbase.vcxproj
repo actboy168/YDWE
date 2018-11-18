@@ -139,7 +139,6 @@
     <ClCompile Include="base\path\get_path.cpp" />
     <ClCompile Include="base\util\console.cpp" />
     <ClCompile Include="base\util\is_utf8.cpp" />
-    <ClCompile Include="base\win\env_variable.cpp" />
     <ClCompile Include="base\win\file_version.cpp" />
     <ClCompile Include="base\win\pe_reader.cpp" />
     <ClCompile Include="base\win\version.cpp" />
@@ -196,7 +195,6 @@
     <ClInclude Include="base\util\string_algorithm.h" />
     <ClInclude Include="base\util\noncopyable.h" />
     <ClInclude Include="base\util\format.h" />
-    <ClInclude Include="base\win\env_variable.h" />
     <ClInclude Include="base\win\event.h" />
     <ClInclude Include="base\win\file_version.h" />
     <ClInclude Include="base\win\font\file.h" />

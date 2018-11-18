@@ -86,9 +86,6 @@
     <ClCompile Include="base\file\memory_mapped_file.cpp">
       <Filter>base\file</Filter>
     </ClCompile>
-    <ClCompile Include="base\win\env_variable.cpp">
-      <Filter>base\win</Filter>
-    </ClCompile>
     <ClCompile Include="base\util\console.cpp">
       <Filter>base\util</Filter>
     </ClCompile>
@@ -195,9 +192,6 @@
     </ClInclude>
     <ClInclude Include="base\util\singleton.h">
       <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\env_variable.h">
-      <Filter>base\win</Filter>
     </ClInclude>
     <ClInclude Include="base\util\console.h">
       <Filter>base\util</Filter>
