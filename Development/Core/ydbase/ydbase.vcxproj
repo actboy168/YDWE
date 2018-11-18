@@ -195,7 +195,6 @@
     <ClInclude Include="base\util\string_algorithm.h" />
     <ClInclude Include="base\util\noncopyable.h" />
     <ClInclude Include="base\util\format.h" />
-    <ClInclude Include="base\win\event.h" />
     <ClInclude Include="base\win\file_version.h" />
     <ClInclude Include="base\win\font\file.h" />
     <ClInclude Include="base\win\font\utility.h" />
