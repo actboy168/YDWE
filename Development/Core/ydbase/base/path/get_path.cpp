@@ -1,6 +1,6 @@
 #include <base/path/get_path.h>
 #include <bee/exception/windows_exception.h>
-#include <base/util/dynarray.h>
+#include <bee/utility/dynarray.h>
 #include <base/win/env_variable.h>
 #include <Windows.h>
 

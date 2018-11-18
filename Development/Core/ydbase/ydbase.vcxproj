@@ -184,7 +184,6 @@
     <ClInclude Include="base\thread\lock\spin.h" />
     <ClInclude Include="base\util\buffer.h" />
     <ClInclude Include="base\util\console.h" />
-    <ClInclude Include="base\util\dynarray.h" />
     <ClInclude Include="base\util\foreach.h" />
     <ClInclude Include="base\util\horrible_cast.h" />
     <ClInclude Include="base\util\do_once.h" />
@@ -192,7 +191,6 @@
     <ClInclude Include="base\util\ini.h" />
     <ClInclude Include="base\util\is_utf8.h" />
     <ClInclude Include="base\util\list_of.h" />
-    <ClInclude Include="base\util\optional.h" />
     <ClInclude Include="base\util\pinyin.h" />
     <ClInclude Include="base\util\signal.h" />
     <ClInclude Include="base\util\singleton.h" />

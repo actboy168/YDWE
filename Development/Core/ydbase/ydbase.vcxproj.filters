@@ -220,9 +220,6 @@
     <ClInclude Include="base\util\do_once.h">
       <Filter>base\util</Filter>
     </ClInclude>
-    <ClInclude Include="base\util\dynarray.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
     <ClInclude Include="base\file\stream.h">
       <Filter>base\file</Filter>
     </ClInclude>
@@ -270,9 +267,6 @@
       <Filter>base\util</Filter>
     </ClInclude>
     <ClInclude Include="base\util\list_of.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\util\optional.h">
       <Filter>base\util</Filter>
     </ClInclude>
     <ClInclude Include="base\lua\object.h">
