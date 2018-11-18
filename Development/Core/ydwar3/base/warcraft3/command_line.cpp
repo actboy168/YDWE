@@ -1,6 +1,5 @@
 #include <base/warcraft3/command_line.h>
 #include <base/util/foreach.h>
-#include <base/util/list_of.h>
 #include <Windows.h>
 #include <set>
 
@@ -68,14 +67,9 @@ namespace base { namespace warcraft3 {
 		return r;
 	}
 
-	static std::set<std::wstring> knowns =
-#if _MSC_VER < 1800
-		base::list_of(L"window")(L"opengl")(L"loadfile")
-#else
-	{
+	static std::set<std::wstring> knowns = {
 		L"window", L"opengl", L"loadfile"
 	}
-#endif
 	;
 
 	std::wstring command_line::str() const

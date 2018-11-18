@@ -190,7 +190,6 @@
     <ClInclude Include="base\util\hybrid_array.h" />
     <ClInclude Include="base\util\ini.h" />
     <ClInclude Include="base\util\is_utf8.h" />
-    <ClInclude Include="base\util\list_of.h" />
     <ClInclude Include="base\util\pinyin.h" />
     <ClInclude Include="base\util\signal.h" />
     <ClInclude Include="base\util\singleton.h" />

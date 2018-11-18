@@ -9,7 +9,6 @@
 #include <base/win/version.h>
 #include <base/win/file_version.h>
 #include <base/win/font/utility.h>
-#include <base/util/list_of.h>
 #include <base/util/ini.h>
 #include <base/i18n-2/gettext.h>
 
@@ -71,31 +70,31 @@ namespace
 		uint8_t     m_count;
 	};
 
-	std::map<std::string, Attribute> configAttribute = base::list_of
-		("MapSave",                                 Attribute(4))
-		("War3Patch",                               Attribute(3))
-		("ScriptInjection",                         Attribute(2)) 
-		("HostTest",                                Attribute(2))
-		("EnableJassHelper",                        Attribute("ScriptCompiler"))
-		("EnableJassHelperDebug",                   Attribute("ScriptCompiler"))
-		("EnableJassHelperOptimization",            Attribute("ScriptCompiler"))
-		("PJass",                                   Attribute(2))
-		("LaunchRenderingEngine",                   Attribute("MapTest", Attribute::e_ComboBox))
-		("LaunchWindowed",                          Attribute("MapTest"))
-		("LaunchFullWindowed",                      Attribute("MapTest"))
-		("LaunchLockingMouse",                      Attribute("MapTest"))
-		("LaunchFixedRatioWindowed",                Attribute("MapTest"))
-		("LaunchWideScreenSupport",                 Attribute("MapTest"))
-		("LaunchDisableSecurityAccess",             Attribute("MapTest"))
-		("EnableHost",                              Attribute("MapTest"))
-		("EnableMapSlk",                            Attribute("MapTest"))
-		("EnableDotNetSupport",                     Attribute("ThirdPartyPlugin"))
-		("EnableTesh",                              Attribute("ThirdPartyPlugin"))
-		("EnableManualNewId",                       Attribute("FeatureToggle"))
-		("FontEnable",                              Attribute("Font"))
-		("FontName",                                Attribute("Font", Attribute::e_ComboBox))
-		("FontSize",                                Attribute("Font", Attribute::e_ComboBox))
-		;
+	std::map<std::string, Attribute> configAttribute = {
+		{ "MapSave",                                 Attribute(4) },
+		{ "War3Patch",                               Attribute(3) },
+		{ "ScriptInjection",                         Attribute(2) },
+		{ "HostTest",                                Attribute(2) },
+		{ "EnableJassHelper",                        Attribute("ScriptCompiler") },
+		{ "EnableJassHelperDebug",                   Attribute("ScriptCompiler") },
+		{ "EnableJassHelperOptimization",            Attribute("ScriptCompiler") },
+		{ "PJass",                                   Attribute(2) },
+		{ "LaunchRenderingEngine",                   Attribute("MapTest", Attribute::e_ComboBox) },
+		{ "LaunchWindowed",                          Attribute("MapTest") },
+		{ "LaunchFullWindowed",                      Attribute("MapTest") },
+		{ "LaunchLockingMouse",                      Attribute("MapTest") },
+		{ "LaunchFixedRatioWindowed",                Attribute("MapTest") },
+		{ "LaunchWideScreenSupport",                 Attribute("MapTest") },
+		{ "LaunchDisableSecurityAccess",             Attribute("MapTest") },
+		{ "EnableHost",                              Attribute("MapTest") },
+		{ "EnableMapSlk",                            Attribute("MapTest") },
+		{ "EnableDotNetSupport",                     Attribute("ThirdPartyPlugin") },
+		{ "EnableTesh",                              Attribute("ThirdPartyPlugin") },
+		{ "EnableManualNewId",                       Attribute("FeatureToggle") },
+		{ "FontEnable",                              Attribute("Font") },
+		{ "FontName",                                Attribute("Font", Attribute::e_ComboBox) },
+		{ "FontSize",                                Attribute("Font", Attribute::e_ComboBox) },
+	};
 }
 
 CMainWindow::CMainWindow() 

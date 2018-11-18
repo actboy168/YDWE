@@ -7,7 +7,6 @@
 #include <bee/utility/unicode.h>
 #include <base/path/get_path.h>
 #include <base/path/helper.h>
-#include <base/util/list_of.h>
 #include <set>
 #include <Windows.h>
 #include <io.h>
@@ -156,7 +155,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	static bool can_write(const char* filename, luaL_Stream* p, const char* mode)
 	{
-		static std::set<std::wstring> s_blacklist = list_of(L"mix")(L"asi")(L"m3d")(L"flt")(L"flt")(L"exe")(L"dll");
+		static std::set<std::wstring> s_blacklist = { L"mix", L"asi", L"m3d", L"flt", L"flt", L"exe", L"dll" };
 		try {
 			fs::path rootpath = path::module().parent_path();
 			fs::path filepath = rootpath / bee::u2w(filename);
