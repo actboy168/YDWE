@@ -16,14 +16,12 @@ namespace win {
 	public:
 		file_version();
 		file_version(const wchar_t* module_path);
-		file_version(HMODULE module_handle);
 		const wchar_t* operator[] (const wchar_t* key) const;
 		VS_FIXEDFILEINFO* fixed_file_info() const;
 		bool select_language(WORD langid);
 
 	protected:
 		bool create(const wchar_t* module_path);
-		bool create(HMODULE module_handle);
 		bool get_value(WORD language, WORD code_page, const wchar_t* key, const wchar_t** value_ptr) const;
 
 	protected:
@@ -48,7 +46,6 @@ namespace win {
 	public:
 		simple_file_version();
 		simple_file_version(const wchar_t* module_path, const wchar_t* key = L"FileVersion", const wchar_t pred = L',');
-		simple_file_version(HMODULE module_handle, const wchar_t* key = L"FileVersion", const wchar_t pred = L',');
 
 		uint32_t major;
 		uint32_t minor;

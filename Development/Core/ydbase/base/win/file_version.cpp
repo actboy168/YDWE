@@ -22,13 +22,6 @@ namespace base { namespace win {
 		, translation_size_(0)
 	{ }
 
-	file_version::file_version(HMODULE module_handle)
-		: version_info_()
-		, vaild_(create(module_handle))
-		, current_(0)
-		, translation_size_(0)
-	{ }
-
 	const wchar_t* file_version::operator[] (const wchar_t* key) const
 	{
 		if (!vaild_)
@@ -61,11 +54,6 @@ namespace base { namespace win {
 			}
 		}
 		return false;
-	}
-
-	bool file_version::create(HMODULE module_handle)
-	{
-		return create(base::path::module(module_handle).c_str());
 	}
 
 	bool file_version::create(const wchar_t* module_path)
@@ -146,10 +134,5 @@ namespace base { namespace win {
 	simple_file_version::simple_file_version(const wchar_t* module_path, const wchar_t* key, const wchar_t pred)
 	{
 		create_simple_file_version(*this, file_version(module_path)[key], pred);
-	}
-
-	simple_file_version::simple_file_version(HMODULE module_handle, const wchar_t* key, const wchar_t pred)
-	{
-		create_simple_file_version(*this, file_version(module_handle)[key], pred);
 	}
 }}
