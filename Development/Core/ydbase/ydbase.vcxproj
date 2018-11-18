@@ -194,7 +194,6 @@
     <ClInclude Include="base\util\signal.h" />
     <ClInclude Include="base\util\singleton.h" />
     <ClInclude Include="base\util\string_algorithm.h" />
-    <ClInclude Include="base\util\string_view.h" />
     <ClInclude Include="base\util\noncopyable.h" />
     <ClInclude Include="base\util\format.h" />
     <ClInclude Include="base\win\env_variable.h" />

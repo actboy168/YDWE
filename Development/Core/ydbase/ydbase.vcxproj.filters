@@ -245,9 +245,6 @@
     <ClInclude Include="base\thread\lock\guard.h">
       <Filter>base\thread\lock</Filter>
     </ClInclude>
-    <ClInclude Include="base\util\string_view.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
     <ClInclude Include="base\win\font\file.h">
       <Filter>base\win\font</Filter>
     </ClInclude>

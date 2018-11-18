@@ -12,7 +12,7 @@
 #include <base/util/singleton.h>
 #include <base/util/format.h>
 #include <base/hook/fp_call.h>
-#include <base/util/string_view.h>	
+#include <string_view>
 #include <base/util/string_algorithm.h>
 #include <base/warcraft3/virtual_mpq.h>
 
