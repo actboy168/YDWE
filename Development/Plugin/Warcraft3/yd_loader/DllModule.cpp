@@ -6,7 +6,6 @@
 #include <base/path/helper.h>
 #include <bee/utility/unicode.h>
 #include <base/warcraft3/command_line.h>
-#include <base/win/file_version.h>
 #include <base/win/pe_reader.h>
 #include <base/util/ini.h>
 #include <map>
