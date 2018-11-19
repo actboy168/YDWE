@@ -75,7 +75,6 @@
       <BrowseInformation>true</BrowseInformation>
       <CompileAs>CompileAsC</CompileAs>
       <StringPooling>true</StringPooling>
-      <MinimalRebuild>false</MinimalRebuild>
       <DisableSpecificWarnings>4996;4127</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(ProjectDir)..\include\;$(ProjectDir)..\..\zlib\include\</AdditionalIncludeDirectories>
       <TreatWarningAsError>false</TreatWarningAsError>
