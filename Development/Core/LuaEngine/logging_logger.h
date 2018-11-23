@@ -10,7 +10,7 @@ namespace logging {
 		trace = 0,
 		debug,
 		info,
-		warning,
+		warn,
 		error,
 		fatal
 	};

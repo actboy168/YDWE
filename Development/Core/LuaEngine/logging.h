@@ -11,7 +11,7 @@ struct lua_State;
 #define LOGGING_TRACE(lg)   LOGGING_STREAM(*(lg), logging::trace)
 #define LOGGING_DEBUG(lg)   LOGGING_STREAM(*(lg), logging::debug)
 #define LOGGING_INFO(lg)    LOGGING_STREAM(*(lg), logging::info)
-#define LOGGING_WARNING(lg) LOGGING_STREAM(*(lg), logging::warning)
+#define LOGGING_WARNING(lg) LOGGING_STREAM(*(lg), logging::warn)
 #define LOGGING_ERROR(lg)   LOGGING_STREAM(*(lg), logging::error)
 #define LOGGING_FATAL(lg)   LOGGING_STREAM(*(lg), logging::fatal)
 

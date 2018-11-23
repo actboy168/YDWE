@@ -7,17 +7,14 @@
 
 #define buffonstack(B)	((B)->b != (B)->init.b)
 
-int llog_print(lua_State *L)
-{
-	logging::logger* lg = (logging::logger*)lua_touserdata(L, lua_upvalueindex(1));
-	logging::level lv = (logging::level)lua_tointeger(L, lua_upvalueindex(2));
+static int llog_print(lua_State *L, logging::level lv) {
+	logging::logger* lg = logging::get_logger(L);
 	int n = lua_gettop(L);
 
 	luaL_Buffer b;
 	luaL_buffinit(L, &b);
 	lua_getglobal(L, "tostring");
-	for (int i = 1; i <= n; i++)
-	{
+	for (int i = 1; i <= n; i++) {
 		const char *s;
 		size_t l;
 		lua_pushvalue(L, n + 1);
@@ -38,32 +35,23 @@ int llog_print(lua_State *L)
 	return 0;
 }
 
-int luaopen_log(lua_State* L)
-{
-	logging::logger* lg = logging::get_logger(L);
+static int llog_trace(lua_State *L) { return llog_print(L, logging::level::trace); }
+static int llog_debug(lua_State *L) { return llog_print(L, logging::level::debug); }
+static int llog_info (lua_State *L) { return llog_print(L, logging::level::info); }
+static int llog_warn (lua_State *L) { return llog_print(L, logging::level::warn); }
+static int llog_error(lua_State *L) { return llog_print(L, logging::level::error); }
+static int llog_fatal(lua_State *L) { return llog_print(L, logging::level::fatal); }
 
-	struct llog_Reg {
-		const char *name;
-		lua_Integer upvalue;
-	};
-
-	static llog_Reg func[] = {
-		{ "trace", logging::level::trace },
-		{ "debug", logging::level::debug },
-		{ "info",  logging::level::info },
-		{ "warn",  logging::level::warning },
-		{ "error", logging::level::error },
-		{ "fatal", logging::level::fatal },
+int luaopen_log(lua_State* L) {
+	static luaL_Reg func[] = {
+		{ "trace",  llog_trace },
+		{ "debug",  llog_debug },
+		{ "info",   llog_info },
+		{ "warn",   llog_warn },
+		{ "error",  llog_error },
+		{ "fatal",  llog_fatal },
 		{ NULL, NULL }
 	};
-
-	luaL_newlibtable(L, func);
-	for (const llog_Reg* l = func; l->name != NULL; l++)
-	{
-		lua_pushlightuserdata(L, lg);
-		lua_pushinteger(L, l->upvalue);
-		lua_pushcclosure(L, llog_print, 2);
-		lua_setfield(L, -2, l->name);
-	}
+	luaL_newlib(L, func);
 	return 1;
 }
