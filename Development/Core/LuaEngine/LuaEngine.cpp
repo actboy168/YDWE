@@ -60,9 +60,8 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 	fs::path ydwe = base::path::ydwe(false);
 	fs::path ydwedev = base::path::ydwe(true);
 
-	std::unique_ptr<logging::manager> mgr = std::make_unique<logging::manager>((ydwe / L"logs").c_str(), name);
+	std::unique_ptr<logging::logger> lg = std::make_unique<logging::logger>((ydwe / L"logs").c_str(), name);
 
-	logging::logger* lg = mgr->get_logger();
 	LOGGING_INFO(lg) << "------------------------------------------------------";
 
 	base::win::version_number vn = base::win::get_version_number();
@@ -82,7 +81,7 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 
 	try
 	{
-		logging::set_manager(L, mgr.release());
+		logging::set_logger(L, lg.release());
 
 		luaL_openlibs(L);
 		luaL_requiref(L, "log", luaopen_log, 1);
@@ -119,12 +118,12 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 
 void LuaEngineDestory(lua_State* L)
 {
-	logging::manager* mgr = logging::get_manager(L);
+	logging::logger* lg = logging::get_logger(L);
 	lua_close(L);
 	L = nullptr;
-	if (mgr) {
-		LOGGING_INFO(mgr->get_logger()) << "LuaEngine has been shut down.";
-		delete mgr;
+	if (lg) {
+		LOGGING_INFO(lg) << "LuaEngine has been shut down.";
+		delete lg;
 	}
 }
 
@@ -135,8 +134,7 @@ bool LuaEngineStart(lua_State* L)
 	lua_pushstring(L, "main");
 	if (LUA_OK != lua_pcall(L, 1, 0, -3))
 	{
-		logging::manager* mgr = logging::get_manager(L);
-		LOGGING_ERROR(mgr->get_logger()) << "exception: " << lua_tostring(L, -1);
+		LOGGING_ERROR(logging::get_logger(L)) << "exception: " << lua_tostring(L, -1);
 		lua_pop(L, 2);
 		return false;
 	}

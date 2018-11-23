@@ -29,28 +29,13 @@ inline std::ostream& operator <<(std::ostream& os, const std::wstring& val)
 
 namespace logging
 {
-	typedef logger_t<sync_frontend<backend>>  logger;
-
-	struct manager {
-		manager(const fs::path& root, const std::wstring& name)
-			: m_root(root)
-			, m_name(name)
+	struct logger : public logger_t<sync_frontend<backend>> {
+		logger(const fs::path& root, const std::wstring& name)
+			: logger_t<sync_frontend<backend>>(backend(root, name))
 		{ }
-
-		logger* get_logger(){
-			if (!m_logger) {
-				m_logger = new logger(backend(m_root, m_name));
-			}
-			return m_logger;
-		}
-
-		logger*                        m_logger;
-		fs::path                       m_root;
-		std::wstring                   m_name;
 	};
 
-	LUAENGINE_API void     set_manager(lua_State* L, manager* mgr);
-	LUAENGINE_API manager* get_manager(lua_State* L);
+	LUAENGINE_API void     set_logger(lua_State* L, logger* lg);
 	LUAENGINE_API logger*  get_logger(lua_State* L);
 	LUAENGINE_API logger*  get_logger();
 }

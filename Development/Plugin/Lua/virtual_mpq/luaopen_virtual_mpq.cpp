@@ -19,7 +19,7 @@ static bool VirtualMpqWatchCB(const base::lua::object& func, const std::string& 
 			throw std::exception(lua_tostring(L, -1));
 		}
 	} catch (const std::exception& e) {
-		LOGGING_ERROR(logging::get_logger()) << e.what();
+		LOGGING_ERROR(logging::get_logger(L)) << e.what();
 		return false;
 	}
 
@@ -71,7 +71,7 @@ static void VirtualMpqEventCB(const base::lua::object& func, const std::string& 
 		}
 	}
 	catch (const std::exception& e) {
-		LOGGING_ERROR(logging::get_logger()) << e.what();
+		LOGGING_ERROR(logging::get_logger(L)) << e.what();
 	}
 }
 
@@ -93,7 +93,7 @@ static bool VirtualMpqMapHasCB(const base::lua::object& func, const std::string&
 		}
 	}
 	catch (const std::exception& e) {
-		LOGGING_ERROR(logging::get_logger()) << e.what();
+		LOGGING_ERROR(logging::get_logger(L)) << e.what();
 		return false;
 	}
 	if (LUA_TBOOLEAN != lua_type(L, -1)) {
