@@ -39,7 +39,7 @@ namespace i18n {
 
 	static int initialize(lua_State* L)
 	{
-		base::i18n::v2::initialize(*(fs::path*)luaL_checkudata(L, 1, "filesystem"));
+		base::i18n::v2::initialize(*(fs::path*)luaL_checkudata(L, 1, "bee::filesystem"));
 		return 0;
 	}
 }

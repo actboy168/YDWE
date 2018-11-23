@@ -45,7 +45,7 @@ static bool VirtualMpqWatchCB(const base::lua::object& func, const std::string& 
 
 static int VirtualMpqOpenPath(lua_State* L)
 {
-	base::warcraft3::virtual_mpq::open_path(*(fs::path*)luaL_checkudata(L, 1, "filesystem"), (uint32_t)luaL_checkinteger(L, 2));
+	base::warcraft3::virtual_mpq::open_path(*(fs::path*)luaL_checkudata(L, 1, "bee::filesystem"), (uint32_t)luaL_checkinteger(L, 2));
 	return 0;
 }
 

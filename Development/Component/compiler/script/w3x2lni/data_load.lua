@@ -1,7 +1,7 @@
 fs = require 'bee.filesystem'
 
 local function ydwePath(support_dev)
-    local ydwe = fs.module_path():parent_path()
+    local ydwe = fs.module_path():parent_path():parent_path()
     if support_dev then
         local ydwedev = ydwe:parent_path():parent_path():parent_path()
         if fs.exists(ydwedev / "build.root") then

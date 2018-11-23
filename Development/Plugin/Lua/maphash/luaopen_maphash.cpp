@@ -80,8 +80,8 @@ bool readall(HANDLE handle, const char* filename, std::string& buf)
 
 int maphash(lua_State* L)
 {
-	fs::path& path = *(fs::path*)luaL_checkudata(L, 1, "filesystem");
-	fs::path& jass = *(fs::path*)luaL_checkudata(L, 2, "filesystem");
+	fs::path& path = *(fs::path*)luaL_checkudata(L, 1, "bee::filesystem");
+	fs::path& jass = *(fs::path*)luaL_checkudata(L, 2, "bee::filesystem");
 	{
 		std::string buf;
 		if (!readall(path, buf))

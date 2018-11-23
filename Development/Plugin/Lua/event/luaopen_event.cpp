@@ -105,7 +105,7 @@ static int import_customdata(lua_State* L)
 	}
 	int32_t CObjectPane = *(int32_t*)(NYDWE::CObjectEditor + 4 * (8 + type));
 	int32_t CCustomData = *(int32_t*)(*(int32_t*)(CObjectPane + 4) + type * 4 + 4);
-	fs::path& path = *(fs::path*)luaL_checkudata(L, 2, "filesystem");
+	fs::path& path = *(fs::path*)luaL_checkudata(L, 2, "bee::filesystem");
 	std::string asciipath = bee::w2a(path.c_str());
 	base::fast_call<int32_t>(0x005B7270, CCustomData, 0, asciipath.c_str());
 	base::fast_call<int32_t>(0x0064D4E0, CObjectPane);

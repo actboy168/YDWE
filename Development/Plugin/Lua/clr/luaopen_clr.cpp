@@ -24,7 +24,7 @@ namespace clr {
 
 	int constructor(lua_State* L)
 	{
-		std::filesystem::path& assembly = *(std::filesystem::path*)luaL_checkudata(L, 1, "filesystem");
+		std::filesystem::path& assembly = *(std::filesystem::path*)luaL_checkudata(L, 1, "bee::filesystem");
 		std::wstring type = luaL_checkwstring(L, 2);
 		void* storage = lua_newuserdata(L, sizeof(clr::object));
 		luaL_getmetatable(L, "clr-object");

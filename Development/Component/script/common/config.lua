@@ -97,7 +97,7 @@ function global_config_reload()
 	global_config = tbl
 
 	-- 根据ydweworldedit.exe的路径计算
-	fs.__war3_path = fs.procedure_path()
+	fs.__war3_path = fs.procedure_path():parent_path()
 	log.debug('war3 path ' .. fs.__war3_path:string())
 end
 global_config_reload()
