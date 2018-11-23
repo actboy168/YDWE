@@ -1,6 +1,6 @@
 #pragma once
 
-#include <LuaEngine/logging.h>
+#include "../log/logging.h"
 
 namespace NYDWE
 {

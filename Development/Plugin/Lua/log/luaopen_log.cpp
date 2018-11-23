@@ -42,6 +42,10 @@ static int llog_warn (lua_State *L) { return llog_print(L, logging::level::warn)
 static int llog_error(lua_State *L) { return llog_print(L, logging::level::error); }
 static int llog_fatal(lua_State *L) { return llog_print(L, logging::level::fatal); }
 
+extern "C"
+#if defined(_WIN32)
+__declspec(dllexport)
+#endif
 int luaopen_log(lua_State* L) {
 	static luaL_Reg func[] = {
 		{ "trace",  llog_trace },

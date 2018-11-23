@@ -100,11 +100,11 @@
     <ProjectReference Include="..\..\..\..\OpenSource\bee.lua\project\lua54.vcxproj">
       <Project>{316b33ed-1056-48b0-abf0-ce3ce55f7a17}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Core\LuaEngine\LuaEngine.vcxproj">
-      <Project>{42def9a2-d658-4984-aa00-073b9cc03552}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">
       <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\log\log.vcxproj">
+      <Project>{de0c5f1e-2e29-4781-bc0a-1f78f66543c9}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -89,6 +89,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffi", "..\..\..\OpenSource\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wehelper", "..\..\Plugin\Lua\wehelper\wehelper.vcxproj", "{980A7A33-CC57-4E0E-8F2C-3285C8CAED84}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "log", "..\..\Plugin\Lua\log\log.vcxproj", "{DE0C5F1E-2E29-4781-BC0A-1F78F66543C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -311,6 +313,12 @@ Global
 		{980A7A33-CC57-4E0E-8F2C-3285C8CAED84}.Release|Win32.ActiveCfg = Release|Win32
 		{980A7A33-CC57-4E0E-8F2C-3285C8CAED84}.Release|Win32.Build.0 = Release|Win32
 		{980A7A33-CC57-4E0E-8F2C-3285C8CAED84}.Release|x64.ActiveCfg = Release|Win32
+		{DE0C5F1E-2E29-4781-BC0A-1F78F66543C9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DE0C5F1E-2E29-4781-BC0A-1F78F66543C9}.Debug|Win32.Build.0 = Debug|Win32
+		{DE0C5F1E-2E29-4781-BC0A-1F78F66543C9}.Debug|x64.ActiveCfg = Debug|Win32
+		{DE0C5F1E-2E29-4781-BC0A-1F78F66543C9}.Release|Win32.ActiveCfg = Release|Win32
+		{DE0C5F1E-2E29-4781-BC0A-1F78F66543C9}.Release|Win32.Build.0 = Release|Win32
+		{DE0C5F1E-2E29-4781-BC0A-1F78F66543C9}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -347,6 +355,7 @@ Global
 		{316B33ED-1056-48B0-ABF0-CE3CE55F7A17} = {5EAEB25D-7F28-4226-BA47-EAB24EBB7439}
 		{076A366B-6B75-4D35-A6A9-CA680F0771E3} = {5EAEB25D-7F28-4226-BA47-EAB24EBB7439}
 		{980A7A33-CC57-4E0E-8F2C-3285C8CAED84} = {ABD67588-6A9A-4ACF-8AF7-D941793740E1}
+		{DE0C5F1E-2E29-4781-BC0A-1F78F66543C9} = {ABD67588-6A9A-4ACF-8AF7-D941793740E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2384391F-A0A4-4E20-8F5C-E7AD0F7A9720}

@@ -9,8 +9,7 @@
 #include <base/win/file_version.h>
 #include <base/util/format.h>
 #include <base/win/version.h>
-
-int luaopen_log(lua_State* L);
+#include "../../Plugin/Lua/log/logging.h"
 
 void lua_pushwstring(lua_State* L, const std::wstring& str)
 {
@@ -78,8 +77,6 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 		LOGGING_INFO(lg) << base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
 
 		luaL_openlibs(L);
-		luaL_requiref(L, "log", luaopen_log, 1);
-		lua_pop(L, 1);
 		LOGGING_DEBUG(lg) << "Initialize LuaEngine successfully.";
 
 		fs::path cp = ydwe / L"bin" / L"?.dll";

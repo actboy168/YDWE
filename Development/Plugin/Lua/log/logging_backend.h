@@ -2,15 +2,15 @@
 
 #include <base/filesystem.h>
 
-#if defined(LUAENGINE_EXPORTS)
-#	define LUAENGINE_API __declspec(dllexport)
+#if defined(LOG_EXPORTS)
+#	define LOG_API __declspec(dllexport)
 #else
-#	define LUAENGINE_API __declspec(dllimport)
+#	define LOG_API __declspec(dllimport)
 #endif
 
 namespace logging
 {
-	class LUAENGINE_API backend
+	class LOG_API backend
 	{
 	public:
 		typedef char                          char_type;

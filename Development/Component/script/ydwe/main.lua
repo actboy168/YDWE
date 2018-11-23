@@ -1,4 +1,4 @@
-require "log"
+log = require "log"
 
 log.debug("********************* ydwe initialize start *********************")
 

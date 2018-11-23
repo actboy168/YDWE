@@ -93,6 +93,9 @@
     <ProjectReference Include="..\..\..\Core\LuaEngine\LuaEngine.vcxproj">
       <Project>{42def9a2-d658-4984-aa00-073b9cc03552}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\log\log.vcxproj">
+      <Project>{de0c5f1e-2e29-4781-bc0a-1f78f66543c9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

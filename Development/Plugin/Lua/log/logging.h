@@ -14,10 +14,10 @@ struct lua_State;
 #define LOGGING_ERROR(lg)   LOGGING_STREAM(*(lg), logging::error)
 #define LOGGING_FATAL(lg)   LOGGING_STREAM(*(lg), logging::fatal)
 
-#if defined(LUAENGINE_EXPORTS)
-#	define LUAENGINE_API __declspec(dllexport)
+#if defined(LOG_EXPORTS)
+#	define LOG_API __declspec(dllexport)
 #else
-#	define LUAENGINE_API __declspec(dllimport)
+#	define LOG_API __declspec(dllimport)
 #endif
 
 inline std::ostream& operator <<(std::ostream& os, const std::wstring& val)
@@ -30,6 +30,6 @@ namespace logging
 {
 	typedef logger_t<sync_frontend<backend>> logger;
 
-	LUAENGINE_API logger* create(lua_State* L, const fs::path& root, const std::wstring& name);
-	LUAENGINE_API logger* get(lua_State* L);
+	LOG_API logger* create(lua_State* L, const fs::path& root, const std::wstring& name);
+	LOG_API logger* get(lua_State* L);
 }

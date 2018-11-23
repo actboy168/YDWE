@@ -1,7 +1,7 @@
 #include <lua.hpp>
 #include <base/lua/object.h>
 #include <base/lua/guard.h>
-#include <LuaEngine/logging.h>
+#include "../log/logging.h"
 
 #define YDWE_WAR3_INLINE
 #include <base/warcraft3/virtual_mpq.h>

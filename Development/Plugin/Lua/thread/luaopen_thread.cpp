@@ -7,6 +7,7 @@
 #include <process.h>
 #include <map>
 #include <bee/utility/unicode.h>
+#include "../log/logging.h"
 #include "LuaEngine/LuaEngine.h"
 
 extern "C" {
