@@ -1,9 +1,8 @@
 #pragma once
 
 #include "logging_backend.h"
-#include "logging_logger.h"	 
+#include "logging_logger.h"
 #include <bee/utility/unicode.h>
-#include <map>
 
 struct lua_State;
 
@@ -29,12 +28,8 @@ inline std::ostream& operator <<(std::ostream& os, const std::wstring& val)
 
 namespace logging
 {
-	struct logger : public logger_t<sync_frontend<backend>> {
-		logger(const fs::path& root, const std::wstring& name)
-			: logger_t<sync_frontend<backend>>(backend(root, name))
-		{ }
-	};
+	typedef logger_t<sync_frontend<backend>> logger;
 
-	LUAENGINE_API void     set_logger(lua_State* L, logger* lg);
-	LUAENGINE_API logger*  get_logger(lua_State* L);
+	LUAENGINE_API logger* create(lua_State* L, const fs::path& root, const std::wstring& name);
+	LUAENGINE_API logger* get(lua_State* L);
 }

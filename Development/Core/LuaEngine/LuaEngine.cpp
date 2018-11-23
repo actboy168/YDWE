@@ -59,29 +59,23 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 {
 	fs::path ydwe = base::path::ydwe(false);
 	fs::path ydwedev = base::path::ydwe(true);
-
-	std::unique_ptr<logging::logger> lg = std::make_unique<logging::logger>((ydwe / L"logs").c_str(), name);
-
-	LOGGING_INFO(lg) << "------------------------------------------------------";
-
-	base::win::version_number vn = base::win::get_version_number();
-	LOGGING_INFO(lg) << base::format("LuaEngine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]);
-	LOGGING_INFO(lg) << "Compiled at " __TIME__ ", " __DATE__;
-	LOGGING_INFO(lg) << base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
-
 #ifndef _DEBUG
 	base::hook::install(&RealLuaPcall, (uintptr_t)FakeLuaPcall);
 #endif
 	lua_State* L = luaL_newstate();
-	if (!L)
-	{
-		LOGGING_FATAL(lg) << "Could not initialize LuaEngine. Program may not work correctly!";
+	if (!L) {
 		return nullptr;
 	}
 
+	logging::logger* lg = logging::create(L, (ydwe / L"logs").wstring(), name);
 	try
 	{
-		logging::set_logger(L, lg.release());
+		LOGGING_INFO(lg) << "------------------------------------------------------";
+
+		base::win::version_number vn = base::win::get_version_number();
+		LOGGING_INFO(lg) << base::format("LuaEngine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]);
+		LOGGING_INFO(lg) << "Compiled at " __TIME__ ", " __DATE__;
+		LOGGING_INFO(lg) << base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
 
 		luaL_openlibs(L);
 		luaL_requiref(L, "log", luaopen_log, 1);
@@ -118,13 +112,11 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 
 void LuaEngineDestory(lua_State* L)
 {
-	logging::logger* lg = logging::get_logger(L);
-	lua_close(L);
-	L = nullptr;
+	logging::logger* lg = logging::get(L);
 	if (lg) {
 		LOGGING_INFO(lg) << "LuaEngine has been shut down.";
-		delete lg;
 	}
+	lua_close(L);
 }
 
 bool LuaEngineStart(lua_State* L)
@@ -134,7 +126,7 @@ bool LuaEngineStart(lua_State* L)
 	lua_pushstring(L, "main");
 	if (LUA_OK != lua_pcall(L, 1, 0, -3))
 	{
-		LOGGING_ERROR(logging::get_logger(L)) << "exception: " << lua_tostring(L, -1);
+		LOGGING_ERROR(logging::get(L)) << "exception: " << lua_tostring(L, -1);
 		lua_pop(L, 2);
 		return false;
 	}

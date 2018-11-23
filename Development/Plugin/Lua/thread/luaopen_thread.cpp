@@ -5,6 +5,7 @@
 #include <queue>
 #include <mutex>
 #include <process.h>
+#include <map>
 #include <bee/utility/unicode.h>
 #include "LuaEngine/LuaEngine.h"
 
@@ -57,7 +58,7 @@ namespace thread {
 				lua_pushlightuserdata(L, self->m_param);
 				if (LUA_OK != lua_pcall(L, 1, 0, 0))
 				{
-					LOGGING_ERROR(logging::get_logger(L)) << "exception: " << lua_tostring(L, -1);
+					LOGGING_ERROR(logging::get(L)) << "exception: " << lua_tostring(L, -1);
 					lua_pop(L, 1);
 					LuaEngineDestory(L);
 					return;

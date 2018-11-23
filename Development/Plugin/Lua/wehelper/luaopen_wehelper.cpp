@@ -12,7 +12,7 @@ extern "C"
 __declspec(dllexport)
 #endif
 int luaopen_wehelper(lua_State* L) {
-	NYDWE::lg = logging::get_logger(L);
+	NYDWE::lg = logging::get(L);
 	NYDWE::InstallHooks();
 	LOGGING_INFO(NYDWE::lg) << "YDWE startup complete.";
 	return 0;

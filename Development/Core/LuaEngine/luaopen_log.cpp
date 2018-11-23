@@ -8,7 +8,7 @@
 #define buffonstack(B)	((B)->b != (B)->init.b)
 
 static int llog_print(lua_State *L, logging::level lv) {
-	logging::logger* lg = logging::get_logger(L);
+	logging::logger* lg = logging::get(L);
 	int n = lua_gettop(L);
 
 	luaL_Buffer b;
