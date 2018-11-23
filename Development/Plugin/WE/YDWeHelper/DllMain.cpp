@@ -13,7 +13,7 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)
 	{
 		DisableThreadLibraryCalls(module);
 
-		NYDWE::lg = logging::get_logger("inject");
+		NYDWE::lg = logging::get_logger();
 		NYDWE::InstallHooks();
 		LOGGING_INFO(NYDWE::lg) << "YDWE startup complete.";
 	}

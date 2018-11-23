@@ -76,16 +76,14 @@ namespace logging {
 		typedef FrontendT frontend_type;
 		typedef typename frontend_type::backend_type backend_type;
 		
-		logger_t(const std::string& name)
+		logger_t()
 			: backend_()
 			, frontend_(backend_)
-			, name_(name)
 		{ }
 
-		logger_t(const std::string& name, backend_type&& backend)
+		logger_t(backend_type&& backend)
 			: backend_(std::move(backend))
 			, frontend_(backend_)
-			, name_(name)
 		{ }
 
 		void set_frontend(frontend_type&& frontend)
@@ -105,11 +103,6 @@ namespace logging {
 			frontend_.consume(message);
 		}
 
-		const std::string& name()	const
-		{
-			return name_;
-		}
-
 		void flush()
 		{
 			frontend_.flush();
@@ -118,7 +111,6 @@ namespace logging {
 	protected:
 		backend_type  backend_;
 		frontend_type frontend_;
-		std::string   name_;
 	};
 
 	typedef sync_frontend<stdio_backend> stdio_frontend;
@@ -141,7 +133,7 @@ namespace logging {
 				"[error]",
 				"[fatal]"
 			};
-			*stream_ << time_now_string() << " " << s_lvlstring[lvl] << " [" << logger.name() << "] ";
+			*stream_ << time_now_string() << " " << s_lvlstring[lvl] << " ";
 		}
 	
 		record_pump(record_pump&& that)

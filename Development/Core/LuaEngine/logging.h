@@ -37,25 +37,20 @@ namespace logging
 			, m_name(name)
 		{ }
 
-		logger* get_logger(const char* name)
-		{
-			auto it = m_loggers.find(name);
-			if (it != m_loggers.end())
-			{
-				return it->second;
+		logger* get_logger(){
+			if (!m_logger) {
+				m_logger = new logger(backend(m_root, m_name));
 			}
-
-			m_loggers[name] = new logger(name, backend(m_root, m_name));
-			return m_loggers[name];
+			return m_logger;
 		}
 
-		std::map<std::string, logger*> m_loggers;
+		logger*                        m_logger;
 		fs::path                       m_root;
 		std::wstring                   m_name;
 	};
 
 	LUAENGINE_API void     set_manager(lua_State* L, manager* mgr);
 	LUAENGINE_API manager* get_manager(lua_State* L);
-	LUAENGINE_API logger*  get_logger(lua_State* L, const char* name);
-	LUAENGINE_API logger*  get_logger(const char* name);
+	LUAENGINE_API logger*  get_logger(lua_State* L);
+	LUAENGINE_API logger*  get_logger();
 }

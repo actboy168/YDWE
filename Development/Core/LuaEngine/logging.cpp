@@ -27,20 +27,20 @@ namespace logging
 		return res;
 	}
 
-	logger* get_logger(lua_State* L, const char* name)
+	logger* get_logger(lua_State* L)
 	{
 		manager* mgr = get_manager(L);
 		if (mgr) {
-			return mgr->get_logger(name);
+			return mgr->get_logger();
 		}
 		return nullptr;
 	}
 
-	logger* get_logger(const char* name)
+	logger* get_logger()
 	{
 		if (!lastL) {
 			return nullptr;
 		}
-		return get_logger(lastL, name);
+		return get_logger(lastL);
 	}
 }

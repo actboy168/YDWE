@@ -58,7 +58,7 @@ namespace thread {
 				if (LUA_OK != lua_pcall(L, 1, 0, 0))
 				{
 					logging::manager* mgr = logging::get_manager(L);
-					LOGGING_ERROR(mgr->get_logger("launch")) << "exception: " << lua_tostring(L, -1);
+					LOGGING_ERROR(mgr->get_logger()) << "exception: " << lua_tostring(L, -1);
 					lua_pop(L, 1);
 					LuaEngineDestory(L);
 					return;
