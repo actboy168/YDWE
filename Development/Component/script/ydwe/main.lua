@@ -39,6 +39,7 @@ table.insert(package.searchers, compiler_searcher)
 
 fs = require 'bee.filesystem'
 require "event"
+require "wehelper"
 require "virtual_mpq"
 require "version"
 require "localization"
