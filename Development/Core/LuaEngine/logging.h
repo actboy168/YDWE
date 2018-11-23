@@ -37,5 +37,4 @@ namespace logging
 
 	LUAENGINE_API void     set_logger(lua_State* L, logger* lg);
 	LUAENGINE_API logger*  get_logger(lua_State* L);
-	LUAENGINE_API logger*  get_logger();
 }
