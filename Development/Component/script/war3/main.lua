@@ -94,14 +94,48 @@ if 'Direct3D 9' == global_config.MapTest.LaunchRenderingEngine then
     end)
 end
 
+local thread = require 'bee.thread'
+
+local function errorThread()
+    thread.thread(([=[
+--errlog
+package.path=[[%s]]
+package.cpath=[[%s]]
+local thread = require "bee.thread"
+local fs = require "bee.filesystem"
+local errlog = thread.channel "errlog"
+local log = require "log"
+local ydwe = fs.module_path():parent_path():parent_path()
+log.init(ydwe / "logs", "thread_error")
+while true do
+    log.error(errlog:bpop())
+end]=]):format(package.path, package.cpath))
+end
+
+local errThread = false
+
+local function createThread(script)
+    if not errThread then
+        errThread = true
+        errorThread()
+    end
+    return thread.thread(([=[
+--%s
+package.path=[[%s]]
+package.cpath=[[%s]]
+require %q]=]):format(
+        script, package.path, package.cpath, script
+    ))
+end
+
 if '0' ~= global_config.MapTest.LaunchLockingMouse then
     local cmd = getCommandLine()
     if cmd.window then
         event.on('窗口初始化', function(window)
-            local thd = require 'thread'
-            local channel = require 'channel'
-            local c = channel()
-            thd.thread('war3.window', c, window)
+            thread.newchannel 'window'
+            local channel = thread.channel 'window'
+            channel:push(window)
+            createThread('window.main', window)
         end)
     end
 end

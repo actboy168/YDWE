@@ -1,4 +1,4 @@
-require "log"
+log = require 'log'
 fs = require 'bee.filesystem'
 local subprocess = require 'bee.subprocess'
 

@@ -9,7 +9,7 @@ ydwe_version = sys.version {}
 war3_version = sys.war3_version {}
 
 local function initialize_reg()
-    local registry = require "registry"
+    local registry = require "bee.registry"
 	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\WorldEdit]]
 	-- 不弹用户协议
 	reg["Has Been Run"] = { registry.REG_DWORD, 1 }

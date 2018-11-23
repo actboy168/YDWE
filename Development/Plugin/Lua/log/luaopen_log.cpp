@@ -4,11 +4,15 @@
 
 #include <windows.h>
 #include "logging.h"
+#include <bee/lua/binding.h>
 
 #define buffonstack(B)	((B)->b != (B)->init.b)
 
 static int llog_print(lua_State *L, logging::level lv) {
 	logging::logger* lg = logging::get(L);
+	if (!lg) {
+		return 0;
+	}
 	int n = lua_gettop(L);
 
 	luaL_Buffer b;
@@ -42,12 +46,18 @@ static int llog_warn (lua_State *L) { return llog_print(L, logging::level::warn)
 static int llog_error(lua_State *L) { return llog_print(L, logging::level::error); }
 static int llog_fatal(lua_State *L) { return llog_print(L, logging::level::fatal); }
 
+static int llog_init(lua_State *L) {
+	logging::create(L, *(fs::path*)luaL_checkudata(L, 1, "bee::filesystem"), bee::lua::to_string(L, 2));
+	return 0;
+}
+
 extern "C"
 #if defined(_WIN32)
 __declspec(dllexport)
 #endif
 int luaopen_log(lua_State* L) {
 	static luaL_Reg func[] = {
+		{ "init",   llog_init },
 		{ "trace",  llog_trace },
 		{ "debug",  llog_debug },
 		{ "info",   llog_info },

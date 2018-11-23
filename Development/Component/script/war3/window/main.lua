@@ -1,5 +1,8 @@
-require 'log'
-local channel = require 'channel'
+log = require 'log'
+local fs = require 'bee.filesystem'
+local ydwe = fs.module_path():parent_path():parent_path()
+log.init(ydwe / "logs", "lock_mouse")
+
 local ffi = require 'ffi'
 ffi.cdef[[
     void __stdcall Sleep(unsigned long dwMilliseconds);
@@ -24,8 +27,9 @@ ffi.cdef[[
     int __stdcall ClipCursor(const struct RECT* lpRect);
 ]]
 
-local c = channel(arg[1])
-local war3window = arg[2]
+local thread = require 'bee.thread'
+local channel = thread.channel 'window'
+local war3window = channel:bpop(window)
 local enable = false
 
 local function IsForegroundWindow()
@@ -71,11 +75,10 @@ local function lock_mouse()
 end
 
 while true do
-    local ok, msg = c:recv()
+    local ok, msg = channel:pop()
     if ok and msg == 'exit' then
-        c:close()
         return
     end
     lock_mouse()
-    ffi.C.Sleep(10)
+    thread.sleep(0.01)
 end
