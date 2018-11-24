@@ -117,8 +117,8 @@ FileWatch::FileWatch()
 { }
 
 FileWatch::~FileWatch() {
+	stop();
     assert(m_tasks.empty());
-    stop();
 }
 
 void FileWatch::removeTask(Task* task) {
