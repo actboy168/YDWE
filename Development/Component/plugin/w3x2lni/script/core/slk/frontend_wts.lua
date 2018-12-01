@@ -25,7 +25,7 @@ local function search_string(buf)
     local nl     = (P'\r\n' + S'\r\n') / newline
     local char   = nl + P(1)
     local com    = P'//' * (1-nl)^0 * nl^-1
-    local int    = P'0' + R'19' * R'09'^0
+    local int    = R'09'^1
     local define = P
     {
         'define',

@@ -83,7 +83,7 @@ return function (w2l)
             w2l:file_save('table', 'imp', imp)
         end
     else
-        if not w2l.setting.remove_we_only and imp then
+        if not w2l.setting.remove_we_only then
             w2l:file_save('map', 'war3map.imp', build_imp(w2l, w2l.output_ar, imp))
         end
     end
