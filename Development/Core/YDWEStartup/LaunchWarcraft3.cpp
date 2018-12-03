@@ -3,7 +3,7 @@
 #include <base/path/ydwe.h>
 #include <base/path/helper.h>
 #include <base/util/ini.h>
-#include <base/util/format.h>
+#include <bee/utility/format.h>
 #include <bee/registry/key.h> 
 #include <base/hook/fp_call.h>
 #include <bee/subprocess.h>
@@ -65,7 +65,7 @@ static bool map_convert(const fs::path& ydwe, const fs::path& from, const fs::pa
 		{
 			app.wstring(),
 			L"-e",
-			base::format(L"package.cpath = [[%s]]", (ydwe / L"bin" / L"?.dll").wstring()),
+			bee::format(L"package.cpath = [[%s]]", (ydwe / L"bin" / L"?.dll").wstring()),
 			L"gui\\mini.lua",
 			bee::u2w(mode),
 			from.wstring(),

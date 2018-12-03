@@ -30,6 +30,11 @@
     <ClInclude Include="..\src\detours.h" />
     <ClInclude Include="..\src\detver.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\bee.lua\project\bee.vcxproj">
+      <Project>{355c2493-0a78-490b-971a-bbdb0e2819ef}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{198D08D6-92BA-46E3-B430-8351244FB61C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

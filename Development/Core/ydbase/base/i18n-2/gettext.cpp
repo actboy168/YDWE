@@ -3,7 +3,7 @@
 #include <base/file/stream.h>
 #include <map>
 #include <string>
-#include <base/util/format.h>
+#include <bee/utility/format.h>
 #include <bee/utility/unicode.h>
 #include <base/filesystem.h>
 #include <Windows.h>
@@ -36,8 +36,8 @@ namespace base { namespace i18n { namespace v2 {
 		}
 		template <class ... Args>
 		void accept_error(int line, const char* fmt, const Args& ... args) {
-			errormsg = format("%s:%d: ", file, line);
-			errormsg += format(fmt, args ...);
+			errormsg = bee::format("%s:%d: ", file, line);
+			errormsg += bee::format(fmt, args ...);
 		}
 		std::string         key;
 		const std::wstring& file;

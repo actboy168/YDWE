@@ -1,6 +1,6 @@
 #include <base/file/memory_mapped_file.h>
 #include <base/file/file_handle.h>
-#include <bee/exception/windows_exception.h>
+#include <bee/error.h>
 
 namespace base { namespace file {
 	memory_mapped_file::memory_mapped_file(const wchar_t* file_name)
@@ -16,17 +16,17 @@ namespace base { namespace file {
 		size_ = file_size;
 #else
 		if ((file_size >> 32) > 0) {
-			throw bee::windows_exception("region size too large", ERROR_NOT_ENOUGH_MEMORY);
+			throw bee::make_error(ERROR_NOT_ENOUGH_MEMORY, "region size too large");
 		}
 		size_ = file_size & 0xFFFFFFFF;
 #endif
 		win::scoped_handle<NULL> map_(::CreateFileMappingW(file_.get(), NULL, PAGE_READONLY, file_size >> 32, file_size & 0xFFFFFFFF, NULL));
 		if (!map_) {
-			throw bee::windows_exception("failed to open file mapping");
+			throw bee::make_syserror("failed to open file mapping");
 		}
 		data_ = ::MapViewOfFile(map_.get(), FILE_MAP_READ, 0, 0, size_);
 		if (!data_) {
-			throw bee::windows_exception("failed to map view of file");
+			throw bee::make_syserror("failed to map view of file");
 		}
 	}
 

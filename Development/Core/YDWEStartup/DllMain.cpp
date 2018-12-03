@@ -4,14 +4,14 @@
 #include <windows.h>
 #include <base/filesystem.h>
 #include <base/file/memory_mapped_file.h>
-#include <bee/exception/windows_exception.h>
+#include <bee/error.h>
 #include <base/file/stream.h>
 #include <base/i18n-2/gettext.h>
 #include <base/path/get_path.h>
 #include <base/path/ydwe.h>
 #include <bee/utility/unicode.h>
 #include <base/win/file_version.h>
-#include <base/util/format.h>	 
+#include <bee/utility/format.h>	 
 #include <base/util/ini.h>
 #include <bee/subprocess.h>
 #include "Splash.h"
@@ -41,7 +41,7 @@ static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSeco
 		return ((size = mapperFirst.size()) == mapperSecond.size())
 			&& (memcmp(mapperFirst.data(), mapperSecond.data(), size) == 0);
 	}
-	catch (bee::windows_exception const& e)
+	catch (std::system_error const& e)
 	{
 		if (pErrorCode)
 		{
@@ -84,7 +84,7 @@ static void ShowSplash(fs::path const& ydwe_path)
 		CSplash display;
 		display.SetBitmap(bmp.wstring().c_str());
 		display.SetTransparentColor(RGB(128, 128, 128));
-		display.SetText(base::format(L"%d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 8, 16);
+		display.SetText(bee::format(L"%d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 8, 16);
 		display.Show();
 		Sleep(5000);
 		display.Close();
@@ -204,7 +204,7 @@ static void DoTask()
 	args[0] = worldeditPreferredPath.wstring();
 
 	if (!worldedit_process.exec(args, 0)) {
-		throw bee::windows_exception(_("ERROR_LAUNCH_WE"));
+		throw bee::make_syserror(_("ERROR_LAUNCH_WE"));
 	}
 	ShowSplash(gExecutableDirectory);
 }
@@ -227,7 +227,7 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 		DoTask();
 		exitCode = 0;
 	}
-	catch (bee::exception const& e)
+	catch (std::system_error const& e)
 	{
 		MessageBoxW(NULL, bee::u2w(e.what()).c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
 	}

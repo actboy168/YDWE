@@ -2,7 +2,7 @@
 #include <base/warcraft3/jass/func_value.h>	   
 #include <base/warcraft3/jass/global_variable.h>
 #include <base/warcraft3/war3_searcher.h>	  
-#include <base/util/format.h>
+#include <bee/utility/format.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Windows.h>
-#include <bee/exception/windows_exception.h>
+#include <bee/error.h>
 
 namespace base { namespace com {
 	class guard
@@ -16,7 +16,7 @@ namespace base { namespace com {
 			{
 				if (FAILED(com_init_))
 				{
-					throw bee::windows_exception("com initialize failed", com_init_);
+					throw bee::make_error(com_init_, "com initialize failed");
 				}
 			}
 		}

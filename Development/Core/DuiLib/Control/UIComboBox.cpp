@@ -3,7 +3,7 @@
 #ifdef DUI_USE_COMBOBOX
 
 #include "UIComboBox.h"
-#include <base/util/format.h>
+#include <bee/utility/format.h>
 
 namespace DuiLib
 {
@@ -58,7 +58,7 @@ namespace DuiLib
 			rcDest.left = rcDest.right - m_nArrowWidth;
 
 			// draw image
-			if (!DrawImage(hDC, *m_sArrowImage.get(), base::format(L"dest='%d,%d,%d,%d'", rcDest.left, rcDest.top, rcDest.right, rcDest.bottom).c_str()))
+			if (!DrawImage(hDC, *m_sArrowImage.get(), bee::format(L"dest='%d,%d,%d,%d'", rcDest.left, rcDest.top, rcDest.right, rcDest.bottom).c_str()))
 				m_sNormalImage.reset();
 		}
 	}

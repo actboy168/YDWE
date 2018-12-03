@@ -5,13 +5,13 @@
 #include <base/path/get_path.h>
 #include <base/path/helper.h>
 #include <base/com/unique_ptr.h>
-#include <bee/exception/windows_exception.h>
+#include <bee/error.h>
 
 namespace Shortcuts
 {
 	namespace detail
 	{
-#define ENSURE(cond) if (FAILED(cond)) throw bee::windows_exception(#cond " failed.");
+#define ENSURE(cond) if (FAILED(cond)) throw bee::make_syserror(#cond " failed.");
 
 		fs::path quick_launch_path()
 		{

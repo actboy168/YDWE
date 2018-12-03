@@ -1,6 +1,6 @@
 #include "logging_backend.h"
-#include <base/util/format.h>
-#include <bee/exception/exception.h>
+#include <bee/utility/format.h>
+#include <bee/error/exception.h>
 #include <fstream>
 
 namespace logging
@@ -85,16 +85,16 @@ namespace logging
 		size_t i = 1;
 		for (; i < 10; ++i)
 		{
-			fs::path p = impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i);
+			fs::path p = impl_->root_ / bee::format(L"%s%03d.log", impl_->name_, i);
 			if (!fs::exists(p))
 			{
 				break;
 			}
 		}
 		if (i == 10) i = 1;
-		fs::rename(impl_->root_ / (impl_->name_ + L".log"), impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i));
+		fs::rename(impl_->root_ / (impl_->name_ + L".log"), impl_->root_ / bee::format(L"%s%03d.log", impl_->name_, i));
 
 		++i; if (i == 10) i = 1;
-		fs::remove(impl_->root_ / base::format(L"%s%03d.log", impl_->name_, i));
+		fs::remove(impl_->root_ / bee::format(L"%s%03d.log", impl_->name_, i));
 	}
 }

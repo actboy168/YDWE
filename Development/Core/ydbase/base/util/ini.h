@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <bee/exception/exception.h>
+#include <bee/error/exception.h>
 #include <base/util/foreach.h>
 
 namespace base { namespace ini {

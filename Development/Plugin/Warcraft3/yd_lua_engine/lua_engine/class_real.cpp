@@ -1,6 +1,6 @@
 #include "class_real.h"
 #include "jassbind.h"
-#include <base/util/format.h>
+#include <bee/utility/format.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace jreal {
 

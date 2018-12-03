@@ -1,5 +1,5 @@
 #include <base/file/stream.h>
-#include <bee/exception/exception.h>
+#include <bee/error/exception.h>
 #include <bee/utility/unicode.h>
 
 namespace base { namespace file {

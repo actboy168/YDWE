@@ -7,7 +7,7 @@
 #include <base/path/self.h>
 #include <base/path/ydwe.h>
 #include <base/win/file_version.h>
-#include <base/util/format.h>
+#include <bee/utility/format.h>
 #include <base/win/version.h>
 #include "../../Plugin/Lua/log/logging.h"
 
@@ -72,9 +72,9 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 		LOGGING_INFO(lg) << "------------------------------------------------------";
 
 		base::win::version_number vn = base::win::get_version_number();
-		LOGGING_INFO(lg) << base::format("LuaEngine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]);
+		LOGGING_INFO(lg) << bee::format("LuaEngine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]);
 		LOGGING_INFO(lg) << "Compiled at " __TIME__ ", " __DATE__;
-		LOGGING_INFO(lg) << base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
+		LOGGING_INFO(lg) << bee::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
 
 		luaL_openlibs(L);
 		LOGGING_DEBUG(lg) << "Initialize LuaEngine successfully.";

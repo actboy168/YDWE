@@ -7,7 +7,7 @@
 #include <base/warcraft3/jass/opcode.h>
 #include <base/warcraft3/jass/hook.h>
 #include <base/util/console.h>
-#include <base/util/format.h>
+#include <bee/utility/format.h>
 #include <base/path/ydwe.h>
 #include <iostream>
 #include <ctype.h>
@@ -122,12 +122,12 @@ namespace base { namespace warcraft3 { namespace jdebug {
 			jass::opcode* op = current_opcode(vm);
 			if (op->op == jass::OPTYPE_PUSH)
 			{
-				show_error(vm, base::format("栈 [0x02X] 没有初始化就使用", op->r3));
+				show_error(vm, bee::format("栈 [0x02X] 没有初始化就使用", op->r3));
 			}
 			else
 			{
 				assert(op->op == jass::OPTYPE_MOVRV);
-				show_error(vm, base::format("变量 '%s' 没有初始化就使用", jass::from_stringid(op->arg)));
+				show_error(vm, bee::format("变量 '%s' 没有初始化就使用", jass::from_stringid(op->arg)));
 			}
 			break;
 		}
@@ -135,7 +135,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 			show_error(vm, "使用零作为除数");
 			break;
 		default:
-			show_error(vm, base::format("未知错误 (%d).", result));
+			show_error(vm, bee::format("未知错误 (%d).", result));
 			break;
 		}
 		return result;

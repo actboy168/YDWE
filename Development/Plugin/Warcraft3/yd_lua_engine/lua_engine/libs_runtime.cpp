@@ -1,6 +1,6 @@
 #include <lua.hpp>
 #include <base/util/console.h>	
-#include <base/util/format.h>	  
+#include <bee/utility/format.h>	  
 #include <array>
 #include <cstring>
 #include "libs_runtime.h"
@@ -318,7 +318,7 @@ namespace runtime	{
 			double total_time = (time::get_counter() - start) / frequency;
 			double call_time = time[kJassCall] / frequency;
 			double event_time = time[kJassEvent] / frequency;
-			std::string result = base::format("total time[%.03fms], call count[%d] time[%.03fms], event count[%d] time[%.03fms]"
+			std::string result = bee::format("total time[%.03fms], call count[%d] time[%.03fms], event count[%d] time[%.03fms]"
 				, total_time
 				, count[kJassCall]
 				, call_time
