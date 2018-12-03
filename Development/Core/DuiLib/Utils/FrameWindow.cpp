@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include <base/i18n-2/gettext.h>
+#include <base/i18n/gettext.h>
 #include <bee/utility/unicode.h>
 
 namespace DuiLib
@@ -25,7 +25,7 @@ namespace DuiLib
 		CControlUI* pRoot = builder.Create(GetSkinXml(), NULL, &m_pm);
 		if (!pRoot) 
 		{
-			::MessageBoxW(NULL, bee::u2w(base::i18n::v2::get_text("ERROR_LOAD_SKINS")).c_str(), L"YDWEConfig", MB_OK|MB_ICONERROR);
+			::MessageBoxW(NULL, bee::u2w(base::i18n::get_text("ERROR_LOAD_SKINS")).c_str(), L"YDWEConfig", MB_OK|MB_ICONERROR);
 			::PostQuitMessage(0L);
 			return 0;
 		}

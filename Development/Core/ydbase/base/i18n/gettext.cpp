@@ -1,5 +1,5 @@
-#include <base/i18n-2/lng.h>
-#include <base/i18n-2/gettext.h>
+#include <base/i18n/lng.h>
+#include <base/i18n/gettext.h>
 #include <base/file/stream.h>
 #include <map>
 #include <string>
@@ -8,7 +8,7 @@
 #include <base/filesystem.h>
 #include <Windows.h>
 
-namespace base { namespace i18n { namespace v2 {
+namespace base { namespace i18n {
 
 	typedef std::map<std::string, std::string> domain_t;
 	typedef std::map<std::wstring, domain_t>   language_t;
@@ -159,4 +159,4 @@ namespace base { namespace i18n { namespace v2 {
 			return;
 		}
 	}
-}}}
+}}

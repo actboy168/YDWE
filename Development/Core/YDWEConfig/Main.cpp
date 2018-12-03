@@ -2,7 +2,7 @@
 #include "MainWindow.h"
 #include <base/com/guard.h>
 #include <bee/utility/unicode.h>
-#include <base/i18n-2/gettext.h>
+#include <base/i18n/gettext.h>
 #include <base/path/ydwe.h>
 
 int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR lpCmdLine, int nCmdShow)
@@ -11,11 +11,11 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPWSTR l
 	{
 		base::com::guard com;
 
-		base::i18n::v2::initialize(base::path::ydwe(true) / "share" / "locale");
-		base::i18n::v2::set_domain(L"config");
+		base::i18n::initialize(base::path::ydwe(true) / "share" / "locale");
+		base::i18n::set_domain(L"config");
 
 		DuiLib::CPaintManagerUI::SetInstance(hInstance);
-		DuiLib::CPaintManagerUI::SetLanguage(base::i18n::v2::get_language());
+		DuiLib::CPaintManagerUI::SetLanguage(base::i18n::get_language());
 		
 		CMainWindow* pFrame = new CMainWindow();
 		pFrame->Create(NULL, L"YDWE≈‰÷√≥Ã–Ú", UI_WNDSTYLE_DIALOG, 0);

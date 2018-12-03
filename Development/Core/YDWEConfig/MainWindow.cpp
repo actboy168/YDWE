@@ -10,7 +10,7 @@
 #include <base/win/file_version.h>
 #include <base/win/font/utility.h>
 #include <base/util/ini.h>
-#include <base/i18n-2/gettext.h>
+#include <base/i18n/gettext.h>
 
 #define YDWE_WAR3_INLINE
 #include <base/warcraft3/directory.h>
@@ -401,7 +401,7 @@ void CMainWindow::InitOSHelpUI()
 			m_pShortcuts_taskbar->SetEnabled(false);
 	}
 
-	DuiLib::CRadioButtonUI* ui_lang = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(L"Language-" + base::i18n::v2::get_language()));
+	DuiLib::CRadioButtonUI* ui_lang = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(L"Language-" + base::i18n::get_language()));
 	if (ui_lang) {
 		ui_lang->Selected(true);
 	}
@@ -457,8 +457,8 @@ void CMainWindow::DoneOSHelpUI()
 		if (control && control->IsSelected() && control->GetName().substr(0, 9) == L"Language-")
 		{
 			auto newlang = control->GetName().substr(9);
-			if (newlang != base::i18n::v2::get_language()) {
-				base::i18n::v2::set_language(newlang, true);
+			if (newlang != base::i18n::get_language()) {
+				base::i18n::set_language(newlang, true);
 			}
 		}
 	}
@@ -490,7 +490,7 @@ void CMainWindow::InitPluginUI()
 						&& (!bee::path_helper::equal(itr->path().filename(), L"yd_loader.dll")))
 					{
 						base::win::file_version fv(itr->path().c_str());
-						fv.select_language(base::i18n::v2::get_languageid());
+						fv.select_language(base::i18n::get_languageid());
 
 						DuiLib::CCheckBoxUI* node = new DuiLib::CCheckBoxUI;
 						m_pWar3PluginList->Add(node);

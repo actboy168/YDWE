@@ -1,7 +1,7 @@
 #pragma warning(push, 3)
 #include <lua.hpp>
 #pragma warning(pop)
-#include <base/i18n-2/gettext.h>	
+#include <base/i18n/gettext.h>	
 #include <bee/utility/unicode.h>
 
 namespace i18n {
@@ -20,26 +20,26 @@ namespace i18n {
 
 	static int get_text(lua_State* L)
 	{
-		auto str = base::i18n::v2::get_text(luaL_checkstring(L, 1));
+		auto str = base::i18n::get_text(luaL_checkstring(L, 1));
 		lua_pushlstring(L, str.data(), str.size());
 		return 1;
 	}
 
 	static int set_domain(lua_State* L)
 	{
-		base::i18n::v2::set_domain(luaL_checkwstring(L, 1));
+		base::i18n::set_domain(luaL_checkwstring(L, 1));
 		return 0;
 	}
 
 	static int get_language(lua_State* L)
 	{
-		luaL_pushwstring(L, base::i18n::v2::get_language());
+		luaL_pushwstring(L, base::i18n::get_language());
 		return 1;
 	}
 
 	static int initialize(lua_State* L)
 	{
-		base::i18n::v2::initialize(*(fs::path*)luaL_checkudata(L, 1, "bee::filesystem"));
+		base::i18n::initialize(*(fs::path*)luaL_checkudata(L, 1, "bee::filesystem"));
 		return 0;
 	}
 }

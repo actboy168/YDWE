@@ -6,7 +6,7 @@
 #include <base/file/memory_mapped_file.h>
 #include <bee/error.h>
 #include <base/file/stream.h>
-#include <base/i18n-2/gettext.h>
+#include <base/i18n/gettext.h>
 #include <base/path/get_path.h>
 #include <base/path/ydwe.h>
 #include <bee/utility/unicode.h>
@@ -22,8 +22,8 @@
 #include <base/warcraft3/command_line.h>
 #include <base/warcraft3/command_line.cpp>
 
-#define _(str)  base::i18n::v2::get_text(str).data()
-#define __(str) bee::u2w(base::i18n::v2::get_text(str)).c_str()
+#define _(str)  base::i18n::get_text(str).data()
+#define __(str) bee::u2w(base::i18n::get_text(str)).c_str()
 
 static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSecond, std::error_code *pErrorCode = nullptr)
 {
@@ -141,8 +141,8 @@ static void DoTask()
 {
 	fs::path gExecutableDirectory = base::path::ydwe(false);
 
-	base::i18n::v2::initialize(base::path::ydwe(true) / L"share" / L"locale");
-	base::i18n::v2::set_domain(L"startup");
+	base::i18n::initialize(base::path::ydwe(true) / L"share" / L"locale");
+	base::i18n::set_domain(L"startup");
 
 	if (gExecutableDirectory != fs::path(gExecutableDirectory.string()))
 	{

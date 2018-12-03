@@ -44,7 +44,7 @@
     <Filter Include="base\win\font">
       <UniqueIdentifier>{d3bb681c-bfad-45b8-b53a-094ab9bbc6bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\i18n-2">
+    <Filter Include="base\i18n">
       <UniqueIdentifier>{84787b93-89af-4757-b2f5-8507c8e7cc78}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -107,9 +107,6 @@
     <ClCompile Include="base\hook\patch.cpp">
       <Filter>base\hook</Filter>
     </ClCompile>
-    <ClCompile Include="base\i18n-2\gettext.cpp">
-      <Filter>base\i18n-2</Filter>
-    </ClCompile>
     <ClCompile Include="base\hook\injectdll.cpp">
       <Filter>base\hook</Filter>
     </ClCompile>
@@ -127,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="base\util\pinyin.cpp">
       <Filter>base\util</Filter>
+    </ClCompile>
+    <ClCompile Include="base\i18n\gettext.cpp">
+      <Filter>base\i18n</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,12 +266,6 @@
     <ClInclude Include="base\hook\patch.h">
       <Filter>base\hook</Filter>
     </ClInclude>
-    <ClInclude Include="base\i18n-2\lng.h">
-      <Filter>base\i18n-2</Filter>
-    </ClInclude>
-    <ClInclude Include="base\i18n-2\gettext.h">
-      <Filter>base\i18n-2</Filter>
-    </ClInclude>
     <ClInclude Include="base\hook\injectdll.h">
       <Filter>base\hook</Filter>
     </ClInclude>
@@ -292,6 +286,12 @@
     </ClInclude>
     <ClInclude Include="base\util\is_utf8.h">
       <Filter>base\util</Filter>
+    </ClInclude>
+    <ClInclude Include="base\i18n\gettext.h">
+      <Filter>base\i18n</Filter>
+    </ClInclude>
+    <ClInclude Include="base\i18n\lng.h">
+      <Filter>base\i18n</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

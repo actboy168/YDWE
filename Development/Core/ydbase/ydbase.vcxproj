@@ -116,7 +116,7 @@
     <ClCompile Include="base\hook\patch.cpp" />
     <ClCompile Include="base\hook\replacedll.cpp" />
     <ClCompile Include="base\hook\replace_pointer.cpp" />
-    <ClCompile Include="base\i18n-2\gettext.cpp" />
+    <ClCompile Include="base\i18n\gettext.cpp" />
     <ClCompile Include="base\path\ydwe.cpp" />
     <ClCompile Include="base\util\pinyin.cpp" />
     <ClCompile Include="base\win\font\file.cpp" />
@@ -163,8 +163,8 @@
     <ClInclude Include="base\hook\patch.h" />
     <ClInclude Include="base\hook\replacedll.h" />
     <ClInclude Include="base\hook\replace_pointer.h" />
-    <ClInclude Include="base\i18n-2\gettext.h" />
-    <ClInclude Include="base\i18n-2\lng.h" />
+    <ClInclude Include="base\i18n\gettext.h" />
+    <ClInclude Include="base\i18n\lng.h" />
     <ClInclude Include="base\lua\guard.h" />
     <ClInclude Include="base\lua\make_range.h" />
     <ClInclude Include="base\lua\object.h" />
