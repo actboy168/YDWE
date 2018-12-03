@@ -5,14 +5,14 @@
 #include <base/hook/fp_call.h>
 #include <bee/registry/key.h>
 #include <bee/utility/unicode.h>
-#include <base/path/get_path.h>
-#include <base/path/helper.h>
+#include <bee/utility/path_helper.h>
 #include <set>
 #include <Windows.h>
 #include <io.h>
 #include "storm.h"
 #include "lua_memfile.h"
 
+namespace fs = std::filesystem;
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 
@@ -136,7 +136,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			try {
 				fs::path filepath = bee::u2w(filename);
 				if (!filepath.is_absolute()) {
-					filepath = path::module().parent_path() / filepath;
+					filepath = bee::path_helper::exe_path().value().parent_path() / filepath;
 				}
 				if (fs::exists(filepath))
 				{
@@ -157,7 +157,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	{
 		static std::set<std::wstring> s_blacklist = { L"mix", L"asi", L"m3d", L"flt", L"flt", L"exe", L"dll" };
 		try {
-			fs::path rootpath = path::module().parent_path();
+			fs::path rootpath = bee::path_helper::exe_path().value().parent_path();
 			fs::path filepath = rootpath / bee::u2w(filename);
 			filepath = fs::absolute(filepath);
 
@@ -169,7 +169,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			}
 			for (fs::path path = filepath.parent_path(); !path.empty(); path = path.parent_path())
 			{
-				if (path::equal(path, rootpath))
+				if (bee::path_helper::equal(path, rootpath))
 				{
 					fs::create_directories(filepath.parent_path());
 					p->f = fopen(filepath.string().c_str(), mode);

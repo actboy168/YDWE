@@ -4,7 +4,7 @@
 #include <base/file/stream.h>
 #include <base/path/self.h>
 #include <base/path/ydwe.h>
-#include <base/path/helper.h>
+#include <bee/utility/path_helper.h>
 #include <bee/utility/unicode.h>
 #include <base/win/version.h>
 #include <base/win/file_version.h>
@@ -486,8 +486,8 @@ void CMainWindow::InitPluginUI()
 			try {
 				if (!fs::is_directory(*itr))
 				{
-					if (base::path::equal(itr->path().extension(), L".dll") 
-						&& (!base::path::equal(itr->path().filename(), L"yd_loader.dll")))
+					if (bee::path_helper::equal(itr->path().extension(), L".dll") 
+						&& (!bee::path_helper::equal(itr->path().filename(), L"yd_loader.dll")))
 					{
 						base::win::file_version fv(itr->path().c_str());
 						fv.select_language(base::i18n::v2::get_languageid());
@@ -566,7 +566,7 @@ void CMainWindow::InitPatchUI(base::ini::table& table)
 					node->SetAttribute(L"group", L"War3PatchItem");
 					node->SetAttribute(L"text", (std::wstring(L"[") + versionInfo[L"FileVersion"] + L"]" + patch.filename().wstring()).c_str());
 					node->SetAttribute(L"tooltip", patch.c_str());
-					node->Selected(base::path::equal(patch.filename(), table["War3Patch"]["DirName"]));
+					node->Selected(bee::path_helper::equal(patch.filename(), table["War3Patch"]["DirName"]));
 					empty = false;
 				}
 			}

@@ -3,7 +3,7 @@
 #include <memory>
 #include <base/win/version.h>
 #include <base/path/get_path.h>
-#include <base/path/helper.h>
+#include <bee/utility/path_helper.h>
 #include <base/com/unique_ptr.h>
 #include <bee/error.h>
 
@@ -160,7 +160,7 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (base::path::equal(read_target, target_path))
+					if (bee::path_helper::equal(read_target, target_path))
 					{
 						fs::remove(shortcut_path);
 						return true;
@@ -198,7 +198,7 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (base::path::equal(read_target, target_path))
+					if (bee::path_helper::equal(read_target, target_path))
 					{
 						return true;
 					}
@@ -282,7 +282,7 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (base::path::equal(read_target, target_path))
+					if (bee::path_helper::equal(read_target, target_path))
 					{
 						if (base::win::get_version() >= base::win::VERSION_WIN7)
 						{
@@ -336,7 +336,7 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (base::path::equal(read_target, target_path))
+					if (bee::path_helper::equal(read_target, target_path))
 					{
 						return true;
 					}

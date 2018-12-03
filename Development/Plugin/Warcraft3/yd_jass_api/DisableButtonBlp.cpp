@@ -1,7 +1,7 @@
 #include <base/hook/iat.h>
 #include <base/hook/fp_call.h> 	 	  		
 #include <base/filesystem.h>
-#include <base/path/helper.h>	
+#include <bee/utility/path_helper.h>
 #include <base/file/stream.h> 
 #include <base/warcraft3/virtual_mpq.h>  
 #include <base/warcraft3/jass/hook.h>	

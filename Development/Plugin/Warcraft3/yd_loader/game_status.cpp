@@ -4,7 +4,7 @@
 #include <base/hook/iat.h>
 #include <base/util/buffer.h>
 #include <bee/utility/unicode.h>
-#include <base/path/helper.h>
+#include <bee/utility/path_helper.h>
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/version.h>
 #include <deque>	
@@ -187,7 +187,7 @@ namespace auto_enter { namespace game_status {
 		if (!open_map_flag && archive_name && !map_path.empty())
 		{
 			try {
-				if (base::path::equal(fs::path(map_path).filename(), fs::path(archive_name).filename()))
+				if (bee::path_helper::equal(std::filesystem::path(map_path).filename(), std::filesystem::path(archive_name).filename()))
 				{
 					open_map_flag = true;
 				}

@@ -101,9 +101,6 @@
     <ClCompile Include="base\win\font\utility.cpp">
       <Filter>base\win\font</Filter>
     </ClCompile>
-    <ClCompile Include="base\path\helper.cpp">
-      <Filter>base\path</Filter>
-    </ClCompile>
     <ClCompile Include="base\hook\dyn_iat.cpp">
       <Filter>base\hook</Filter>
     </ClCompile>
@@ -238,9 +235,6 @@
     </ClInclude>
     <ClInclude Include="base\win\font\utility.h">
       <Filter>base\win\font</Filter>
-    </ClInclude>
-    <ClInclude Include="base\path\helper.h">
-      <Filter>base\path</Filter>
     </ClInclude>
     <ClInclude Include="base\hook\dyn_iat.h">
       <Filter>base\hook</Filter>

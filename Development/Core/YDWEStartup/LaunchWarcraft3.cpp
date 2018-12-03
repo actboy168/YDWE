@@ -1,7 +1,7 @@
 ﻿#include <base/filesystem.h>
 #include <base/file/stream.h>
 #include <base/path/ydwe.h>
-#include <base/path/helper.h>
+#include <bee/utility/path_helper.h>
 #include <base/util/ini.h>
 #include <bee/utility/format.h>
 #include <bee/registry/key.h> 
@@ -140,7 +140,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 			fs::path loadfile = cmd[L"loadfile"];
 
 			// war3将非.w3g后缀名的文件当地图处理
-			if (!base::path::equal(loadfile.extension(), L".w3g"))
+			if (!bee::path_helper::equal(loadfile.extension(), L".w3g"))
 			{
 				fs::path test_map_path = get_test_map_path() + L".w3x";
 				try {

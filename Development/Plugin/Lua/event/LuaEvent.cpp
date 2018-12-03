@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <functional>
 #include <regex>
-#include <base/path/get_path.h>
+#include <bee/utility/path_helper.h>
 #include <bee/utility/unicode.h>
 #include <base/hook/inline.h>
 #include <base/hook/iat.h>
@@ -181,7 +181,7 @@ namespace NYDWE {
 		std::cmatch matcher;
 		if (lpCommandLine && std::regex_match(lpCommandLine, matcher, gRegexCommandLine))
 		{
-			fs::path currentWarcraftMap = base::path::module().parent_path() / matcher.str(1);
+			fs::path currentWarcraftMap = bee::path_helper::exe_path().value().parent_path() / matcher.str(1);
 			LOGGING_TRACE(lg) << "Executing map " << currentWarcraftMap.wstring();
 
 			int results = event_array[EVENT_TEST_MAP]([&](lua_State* L, int idx){

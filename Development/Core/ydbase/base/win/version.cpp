@@ -1,7 +1,7 @@
 #include <base/win/version.h>
 #include <Windows.h>
 #include <base/win/file_version.h>
-#include <base/path/get_path.h>
+#include <bee/utility/path_helper.h>
 
 namespace base { namespace win {
 
@@ -22,7 +22,7 @@ namespace base { namespace win {
 			// see
 			//   http://msdn.microsoft.com/en-us/library/windows/desktop/ms724451(v=vs.85).aspx
 			//   http://msdn.microsoft.com/en-us/library/windows/desktop/ms724429(v=vs.85).aspx
-			simple_file_version sfv(path::module(::GetModuleHandleW(L"kernel32.dll")).c_str(), L"ProductVersion", L'.');
+			simple_file_version sfv(bee::path_helper::dll_path(::GetModuleHandleW(L"kernel32.dll")).value().c_str(), L"ProductVersion", L'.');
 
 			vn.major = sfv.major;
 			vn.minor = sfv.minor;
