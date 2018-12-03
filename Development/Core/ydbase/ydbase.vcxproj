@@ -171,11 +171,6 @@
     <ClInclude Include="base\path\self.h" />
     <ClInclude Include="base\path\get_path.h" />
     <ClInclude Include="base\path\ydwe.h" />
-    <ClInclude Include="base\thread\lock\backoff.h" />
-    <ClInclude Include="base\thread\lock\guard.h" />
-    <ClInclude Include="base\thread\lock\os_linux.h" />
-    <ClInclude Include="base\thread\lock\os_win32.h" />
-    <ClInclude Include="base\thread\lock\spin.h" />
     <ClInclude Include="base\util\buffer.h" />
     <ClInclude Include="base\util\console.h" />
     <ClInclude Include="base\util\foreach.h" />

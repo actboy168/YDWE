@@ -1,9 +1,9 @@
 #include <base/util/console.h>
 #include <windows.h>
 #include <cstdio>
-#include <base/thread/lock/spin.h>
 #include <queue>
 #include <mutex>
+#include <bee/utility/lockqueue.h>
 
 namespace base { namespace console {
 
@@ -48,9 +48,8 @@ namespace base { namespace console {
 	}
 
 
-	static std::queue<read_req_t*> queue;
-	static lock::spin<> mtx_queue;
-	static lock::spin<> mtx_reading;
+	static bee::lockqueue<read_req_t*> queue;
+	static std::mutex mtx_reading;
 
 	DWORD CALLBACK async_read_thread(void* data)
 	{
@@ -66,10 +65,7 @@ namespace base { namespace console {
 		{
 			req->overlapped.Internal = (ULONG_PTR)::GetLastError();
 		}
-		{
-			std::unique_lock<lock::spin<>> lock(mtx_queue);
-			queue.push(req);
-		}
+		queue.push(req);
 		mtx_reading.unlock();
 		return 0;
 	}
@@ -90,13 +86,7 @@ namespace base { namespace console {
 
 	bool read_try(read_req_t*& req)
 	{
-		std::unique_lock<lock::spin<>> lock(mtx_queue);
-		if (queue.empty()) {
-			return false;
-		}
-		req = queue.front();
-		queue.pop();
-		return true;
+		return queue.pop(req);
 	}
 
 	void read_release(read_req_t* req)

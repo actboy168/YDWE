@@ -35,12 +35,6 @@
     <Filter Include="base\lua">
       <UniqueIdentifier>{b74a47f0-eb1f-4c6c-9b1c-210bcabbb9d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\thread">
-      <UniqueIdentifier>{9ca77287-10cc-4b02-bc03-1ed154a1e30e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="base\thread\lock">
-      <UniqueIdentifier>{3beaa0e4-1378-4d7e-8d51-a8869869b7f7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\win\font">
       <UniqueIdentifier>{d3bb681c-bfad-45b8-b53a-094ab9bbc6bf}</UniqueIdentifier>
     </Filter>
@@ -224,12 +218,6 @@
     <ClInclude Include="base\hook\fp_call.h">
       <Filter>base\hook</Filter>
     </ClInclude>
-    <ClInclude Include="base\thread\lock\spin.h">
-      <Filter>base\thread\lock</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\lock\guard.h">
-      <Filter>base\thread\lock</Filter>
-    </ClInclude>
     <ClInclude Include="base\win\font\file.h">
       <Filter>base\win\font</Filter>
     </ClInclude>
@@ -253,15 +241,6 @@
     </ClInclude>
     <ClInclude Include="base\util\ini.h">
       <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\lock\backoff.h">
-      <Filter>base\thread\lock</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\lock\os_linux.h">
-      <Filter>base\thread\lock</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\lock\os_win32.h">
-      <Filter>base\thread\lock</Filter>
     </ClInclude>
     <ClInclude Include="base\hook\patch.h">
       <Filter>base\hook</Filter>
