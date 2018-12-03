@@ -105,7 +105,7 @@ local thread = require "bee.thread"
 local fs = require "bee.filesystem"
 local errlog = thread.channel "errlog"
 local log = require "log"
-local ydwe = fs.module_path():parent_path():parent_path()
+local ydwe = fs.dll_path():parent_path():parent_path()
 log.init(ydwe / "logs", "thread_error")
 while true do
     log.error(errlog:bpop())

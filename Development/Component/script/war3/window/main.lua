@@ -1,6 +1,6 @@
 log = require 'log'
 local fs = require 'bee.filesystem'
-local ydwe = fs.module_path():parent_path():parent_path()
+local ydwe = fs.dll_path():parent_path():parent_path()
 log.init(ydwe / "logs", "lock_mouse")
 
 local ffi = require 'ffi'
