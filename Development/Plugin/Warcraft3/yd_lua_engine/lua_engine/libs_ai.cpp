@@ -6,9 +6,7 @@
 #include <bee/lua/range.h>
 #include <base/util/do_once.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { 
-
-	namespace ai {
+namespace warcraft3::lua_engine::ai {
 
 	jass::func_mapping function;
 
@@ -72,4 +70,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		return 1;
 	}
-}}}}
+}

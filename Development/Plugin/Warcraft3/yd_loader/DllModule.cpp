@@ -61,7 +61,7 @@ void DllModule::SetWindow(HWND hwnd)
 
 void DllModule::Attach()
 {
-	base::warcraft3::command_line::parse([&](std::wstring const& key, std::wstring const&){
+	warcraft3::command_line::parse([&](std::wstring const& key, std::wstring const&){
 		if (key == L"auto")
 		{
 			IsAuto = true;

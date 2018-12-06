@@ -4,7 +4,7 @@
 #include <base/util/singleton.h>
 #include <base/hook/fp_call.h>
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
 
 	war3_searcher::war3_searcher()
 		: _Mybase(::GetModuleHandleW(L"Game.dll"))
@@ -168,7 +168,7 @@ namespace base { namespace warcraft3 {
 
 	war3_searcher& get_war3_searcher()
 	{
-		return singleton_nonthreadsafe<war3_searcher>::instance();
+		return base::singleton_nonthreadsafe<war3_searcher>::instance();
 	}
 
 	struct mapping_objectid
@@ -302,7 +302,7 @@ namespace base { namespace warcraft3 {
 
 	uint32_t get_object_type(uintptr_t ptr)
 	{
-		return this_call<uint32_t>(*(uintptr_t*)(*(uintptr_t*)ptr + 0x1C), ptr);
+		return base::this_call<uint32_t>(*(uintptr_t*)(*(uintptr_t*)ptr + 0x1C), ptr);
 	}
 
 	uintptr_t handle_to_object(uint32_t handle)
@@ -352,4 +352,4 @@ namespace base { namespace warcraft3 {
 		}
 		return 0;
 	}
-}}
+}

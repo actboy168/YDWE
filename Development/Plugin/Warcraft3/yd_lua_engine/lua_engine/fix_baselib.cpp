@@ -14,7 +14,7 @@
 
 namespace fs = std::filesystem;
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace warcraft3::lua_engine {
 
 	int IFileCreate(const char* filename, unsigned char** data, size_t* size)
 	{
@@ -288,4 +288,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		putenv("LUA_SEED=");
 		return L;
 	}
-}}}
+}

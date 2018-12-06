@@ -14,7 +14,7 @@
 #include "handle_scanner.h"
 #include "hashtable.h"
 
-namespace base { namespace warcraft3 { namespace jdebug {
+namespace warcraft3::jdebug {
 	
 	uintptr_t search_jass_vmmain()
 	{
@@ -73,7 +73,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 
 	uintptr_t real_jass_vmmain = 0;
 
-	struct jass::opcode* current_opcode(base::warcraft3::jass_vm_t* vm)
+	struct jass::opcode* current_opcode(warcraft3::jass_vm_t* vm)
 	{
 		return vm->opcode - 1;
 	}
@@ -88,7 +88,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		return op;
 	}
 
-	void show_error(base::warcraft3::jass_vm_t* vm, const std::string& msg)
+	void show_error(warcraft3::jass_vm_t* vm, const std::string& msg)
 	{
 		base::console::enable();
 		std::cout << "---------------------------------------" << std::endl;
@@ -104,7 +104,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		std::cout << "---------------------------------------" << std::endl;
 	}
 
-	uint32_t __fastcall fake_jass_vmmain(base::warcraft3::jass_vm_t* vm, uint32_t edx, uint32_t opcode, uint32_t unk2, uint32_t limit, uint32_t unk4)
+	uint32_t __fastcall fake_jass_vmmain(warcraft3::jass_vm_t* vm, uint32_t edx, uint32_t opcode, uint32_t unk2, uint32_t limit, uint32_t unk4)
 	{
 		uint32_t result = base::fast_call<uint32_t>(real_jass_vmmain, vm, edx, opcode, unk2, limit, unk4);
 
@@ -157,7 +157,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 	}
 	
 	void EXDebugOpcode(const char* filename) {
-		jass::opcode* op = base::warcraft3::jass::currentpos();
+		jass::opcode* op = warcraft3::jass::currentpos();
 		if (op) {
 			for (; op->op > jass::OPTYPE_MINLIMIT && op->op < jass::OPTYPE_MAXLIMIT; --op)
 			{ }
@@ -182,7 +182,7 @@ namespace base { namespace warcraft3 { namespace jdebug {
 	static uintptr_t RealGetLocalizedHotkey = 0;
 	uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
 	{
-		const char* str = base::warcraft3::jass::from_string(s);
+		const char* str = warcraft3::jass::from_string(s);
 		if (str && strncmp(str, "ydwe::", 6) == 0) {
 			if (strncmp(str + 6, "opcode:", 7) == 0) {
 				EXDebugOpcode(str + 6 + 7);
@@ -200,15 +200,15 @@ namespace base { namespace warcraft3 { namespace jdebug {
 	bool initialize()
 	{
 		ht::initialize();
-		base::warcraft3::jass::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
+		warcraft3::jass::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
 		real_jass_vmmain = search_jass_vmmain();
 		return base::hook::install(&real_jass_vmmain, (uintptr_t)fake_jass_vmmain);
 	}
-}}}
+}
 
 void Initialize()
 {
-	base::warcraft3::jdebug::initialize();
+	warcraft3::jdebug::initialize();
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)

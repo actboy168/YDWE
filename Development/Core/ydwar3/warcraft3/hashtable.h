@@ -5,7 +5,7 @@
 #include <warcraft3/detail/string_hash.h>
 #include <cstring>
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
 	namespace jass {
 		struct opcode;
 	}
@@ -473,4 +473,4 @@ namespace base { namespace warcraft3 {
 	_WAR3_API jass_vm_t*                    get_jass_vm(int index = 1);
 	_WAR3_API jass_vm_t*                    get_jass_thread();
 	_WAR3_API hashtable::native_func_table* get_native_function_hashtable();
-}}
+}

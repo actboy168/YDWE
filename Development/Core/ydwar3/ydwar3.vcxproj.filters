@@ -5,10 +5,7 @@
       <UniqueIdentifier>{38c49da3-b1a5-4e9f-a1c4-3468d0853336}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
     </Filter>
-    <Filter Include="base">
-      <UniqueIdentifier>{ad765d3c-3e90-42b8-af7f-a4d9fef394fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="base\warcraft3">
+    <Filter Include="warcraft3">
       <UniqueIdentifier>{7e4a1c7a-d9c5-407e-acf1-72627542f7a0}</UniqueIdentifier>
     </Filter>
     <Filter Include="warcraft3\detail">
@@ -22,21 +19,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="warcraft3\detail\string_hash.cpp">
       <Filter>warcraft3\detail</Filter>
-    </ClCompile>
-    <ClCompile Include="warcraft3\war3_searcher.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="warcraft3\basic_searcher.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="warcraft3\hashtable.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="warcraft3\jass.cpp">
-      <Filter>base\warcraft3</Filter>
     </ClCompile>
     <ClCompile Include="warcraft3\detail\convert_real.cpp">
       <Filter>warcraft3\detail</Filter>
@@ -59,24 +43,6 @@
     <ClCompile Include="warcraft3\jass\func_value.cpp">
       <Filter>warcraft3\jass</Filter>
     </ClCompile>
-    <ClCompile Include="warcraft3\event.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="warcraft3\directory.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="warcraft3\command_line.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="warcraft3\virtual_mpq.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="warcraft3\player.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
-    <ClCompile Include="warcraft3\message_dispatch.cpp">
-      <Filter>base\warcraft3</Filter>
-    </ClCompile>
     <ClCompile Include="warcraft3\udis86\udis86.c">
       <Filter>warcraft3\udis86</Filter>
     </ClCompile>
@@ -89,25 +55,41 @@
     <ClCompile Include="warcraft3\jass\opcode.cpp">
       <Filter>warcraft3\jass</Filter>
     </ClCompile>
+    <ClCompile Include="warcraft3\basic_searcher.cpp">
+      <Filter>warcraft3</Filter>
+    </ClCompile>
+    <ClCompile Include="warcraft3\command_line.cpp">
+      <Filter>warcraft3</Filter>
+    </ClCompile>
+    <ClCompile Include="warcraft3\directory.cpp">
+      <Filter>warcraft3</Filter>
+    </ClCompile>
+    <ClCompile Include="warcraft3\event.cpp">
+      <Filter>warcraft3</Filter>
+    </ClCompile>
+    <ClCompile Include="warcraft3\hashtable.cpp">
+      <Filter>warcraft3</Filter>
+    </ClCompile>
+    <ClCompile Include="warcraft3\jass.cpp">
+      <Filter>warcraft3</Filter>
+    </ClCompile>
+    <ClCompile Include="warcraft3\message_dispatch.cpp">
+      <Filter>warcraft3</Filter>
+    </ClCompile>
+    <ClCompile Include="warcraft3\player.cpp">
+      <Filter>warcraft3</Filter>
+    </ClCompile>
+    <ClCompile Include="warcraft3\virtual_mpq.cpp">
+      <Filter>warcraft3</Filter>
+    </ClCompile>
+    <ClCompile Include="warcraft3\war3_searcher.cpp">
+      <Filter>warcraft3</Filter>
+    </ClCompile>
+    <ClCompile Include="DllMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="warcraft3\detail\string_hash.h">
       <Filter>warcraft3\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="warcraft3\war3_searcher.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="warcraft3\basic_searcher.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="warcraft3\hashtable.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="warcraft3\version.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="warcraft3\jass.h">
-      <Filter>base\warcraft3</Filter>
     </ClInclude>
     <ClInclude Include="warcraft3\jass\trampoline.h">
       <Filter>warcraft3\jass</Filter>
@@ -130,27 +112,6 @@
     <ClInclude Include="warcraft3\jass\func_value.h">
       <Filter>warcraft3\jass</Filter>
     </ClInclude>
-    <ClInclude Include="warcraft3\event.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="warcraft3\directory.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="warcraft3\command_line.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="warcraft3\virtual_mpq.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="warcraft3\keyboard_code.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="warcraft3\player.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
-    <ClInclude Include="warcraft3\message_dispatch.h">
-      <Filter>base\warcraft3</Filter>
-    </ClInclude>
     <ClInclude Include="warcraft3\udis86\udis86.h">
       <Filter>warcraft3\udis86</Filter>
     </ClInclude>
@@ -166,8 +127,44 @@
     <ClInclude Include="warcraft3\udis86\udis86_udint.h">
       <Filter>warcraft3\udis86</Filter>
     </ClInclude>
+    <ClInclude Include="warcraft3\basic_searcher.h">
+      <Filter>warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="warcraft3\command_line.h">
+      <Filter>warcraft3</Filter>
+    </ClInclude>
     <ClInclude Include="warcraft3\config.h">
-      <Filter>base\warcraft3</Filter>
+      <Filter>warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="warcraft3\directory.h">
+      <Filter>warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="warcraft3\event.h">
+      <Filter>warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="warcraft3\hashtable.h">
+      <Filter>warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="warcraft3\jass.h">
+      <Filter>warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="warcraft3\keyboard_code.h">
+      <Filter>warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="warcraft3\message_dispatch.h">
+      <Filter>warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="warcraft3\player.h">
+      <Filter>warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="warcraft3\version.h">
+      <Filter>warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="warcraft3\virtual_mpq.h">
+      <Filter>warcraft3</Filter>
+    </ClInclude>
+    <ClInclude Include="warcraft3\war3_searcher.h">
+      <Filter>warcraft3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

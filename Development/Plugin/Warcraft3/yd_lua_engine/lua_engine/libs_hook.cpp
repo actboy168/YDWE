@@ -14,7 +14,7 @@
 #include "common.h"
 #include "lua_to_nativefunction.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace hook {
+namespace warcraft3::lua_engine::hook {
 
 	class jhook_t
 	{
@@ -172,4 +172,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace hook {
 		lua_setmetatable(L, -2);
 		return 1;
 	}
-}}}}
+}

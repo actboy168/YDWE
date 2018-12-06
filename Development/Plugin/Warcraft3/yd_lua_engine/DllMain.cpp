@@ -15,5 +15,5 @@ BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID /*pReserved*/)
 
 void Initialize()
 {
-	base::warcraft3::lua_engine::lua_loader::initialize();
+	warcraft3::lua_engine::lua_loader::initialize();
 }

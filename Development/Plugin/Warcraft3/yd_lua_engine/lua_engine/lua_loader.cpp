@@ -16,7 +16,7 @@
 #include <base/util/string_algorithm.h>
 #include <warcraft3/virtual_mpq.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
+namespace warcraft3::lua_engine::lua_loader {
 
 	static char tmpMapName[1024] = { 0 };
 	static char curMapName[1024] = { 0 };
@@ -43,7 +43,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 
 		if (!cheat)
 		{
-			c_call<uint32_t>(RealCheat, cheat_str);
+            base::c_call<uint32_t>(RealCheat, cheat_str);
 			return ;
 		}
 
@@ -52,7 +52,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		if (cheat_s.substr(0, 9) == "exec-lua:")
 		{
 			cheat_s = cheat_s.substr(9);
-			algorithm::trim(cheat_s);
+            base::algorithm::trim(cheat_s);
 			if (cheat_s.size() >= 2 && cheat_s[0] == '"' && cheat_s[cheat_s.size() - 1] == '"')
 			{
 				cheat_s = cheat_s.substr(1, cheat_s.size() - 2);
@@ -63,7 +63,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			safe_call(L, 1, 1, true);
 		}
 
-		c_call<uint32_t>(RealCheat, cheat_str);
+        base::c_call<uint32_t>(RealCheat, cheat_str);
 	}
 
 	jass::jstring_t __cdecl EXExecuteScript(jass::jstring_t script)
@@ -139,4 +139,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			curMapName[0] = 0;
 		});
 	}
-}}}}
+}

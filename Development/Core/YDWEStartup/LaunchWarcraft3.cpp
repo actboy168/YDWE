@@ -106,14 +106,14 @@ static void map_build(const fs::path& ydwe, const fs::path& from, const fs::path
 	}
 }
 
-bool launch_warcraft3(base::warcraft3::command_line& cmd)
+bool launch_warcraft3(warcraft3::command_line& cmd)
 {
 	try {
 		fs::path ydwe = base::path::ydwe(false);
 		launch_taskbar_support(ydwe);
 
 		fs::path war3_path;
-		if (!base::warcraft3::directory::get(nullptr, war3_path))
+		if (!warcraft3::directory::get(nullptr, war3_path))
 		{
 			return false;
 		}

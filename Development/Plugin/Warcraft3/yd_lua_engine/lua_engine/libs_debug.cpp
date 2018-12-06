@@ -4,7 +4,7 @@
 #include <warcraft3/war3_searcher.h>	  
 #include <bee/utility/format.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
+namespace warcraft3::lua_engine::debug {
 
 	static int functiondef(lua_State* L)
 	{
@@ -98,7 +98,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 
 	static int currentpos(lua_State* L)
 	{
-		jass::opcode* current_op = base::warcraft3::jass::currentpos();
+		jass::opcode* current_op = warcraft3::jass::currentpos();
 		jass::opcode* op;
 		for (op = current_op; op->op != jass::OPTYPE_FUNCTION; --op)
 		{
@@ -193,4 +193,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 		}
 		return 1;
 	}
-}}}}
+}

@@ -23,7 +23,7 @@ namespace WideScreen
 
 	static uintptr_t search()
 	{
-		using namespace base::warcraft3;
+		using namespace warcraft3;
 
 		war3_searcher& s = get_war3_searcher();
 		uintptr_t ptr = 0;

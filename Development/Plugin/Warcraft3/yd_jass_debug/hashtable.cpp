@@ -31,9 +31,9 @@ namespace ht {
 
 	static uintptr_t searchGlobalData()
 	{
-		uintptr_t ptr = base::warcraft3::get_war3_searcher().search_string("SaveInteger");
+		uintptr_t ptr = warcraft3::get_war3_searcher().search_string("SaveInteger");
 		ptr = *(uintptr_t*)(ptr + 0x05);
-		ptr = base::warcraft3::next_opcode(ptr, 0x8B, 6);
+		ptr = warcraft3::next_opcode(ptr, 0x8B, 6);
 		ptr = *(uintptr_t*)(ptr + 0x02);
 		return ptr;
 	}
@@ -49,7 +49,7 @@ namespace ht {
 		if (!g) {
 			return;
 		}
-		typedef base::warcraft3::hashtable::table<base::warcraft3::hashtable::reverse_node> Table;
+		typedef warcraft3::hashtable::table<warcraft3::hashtable::reverse_node> Table;
 
 		for (auto& t : *(Table*)(g + 0x04)) {
 			for (auto& k : *(Table*)((uint8_t*)&t + 0x1C)) {
@@ -60,11 +60,11 @@ namespace ht {
 		}
 	}
 
-	uint32_t objectToHandle(base::warcraft3::handle_table_t* hts, uintptr_t object) {
+	uint32_t objectToHandle(warcraft3::handle_table_t* hts, uintptr_t object) {
 		if (!object) {
 			return 0;
 		}
-		uintptr_t ptr = base::warcraft3::find_objectid_64(*(base::warcraft3::objectid_64*)(object + 0x0C));
+		uintptr_t ptr = warcraft3::find_objectid_64(*(warcraft3::objectid_64*)(object + 0x0C));
 		if (!ptr || (*(uintptr_t*)(ptr + 0x0C) != '+agl') || *(uintptr_t*)(ptr + 0x20)) {
 			return 0;
 		}
@@ -79,7 +79,7 @@ namespace ht {
 	}
 
 	uint32_t objectToHandle(uintptr_t object) {
-		base::warcraft3::handle_table_t* hts = (base::warcraft3::handle_table_t*)getGlobalData()[7];
+		warcraft3::handle_table_t* hts = (warcraft3::handle_table_t*)getGlobalData()[7];
 		if (!hts) {
 			return 0;
 		}
@@ -87,33 +87,33 @@ namespace ht {
 	}
 
 	static uintptr_t searchCreateHandle() {
-		uintptr_t ptr = base::warcraft3::get_war3_searcher().search_string("Player");
+		uintptr_t ptr = warcraft3::get_war3_searcher().search_string("Player");
 		ptr = *(uintptr_t*)(ptr + 0x05);
-		ptr = base::warcraft3::next_opcode(ptr, 0xE8, 5);
+		ptr = warcraft3::next_opcode(ptr, 0xE8, 5);
 		ptr += 5;
-		ptr = base::warcraft3::next_opcode(ptr, 0xE8, 5);
+		ptr = warcraft3::next_opcode(ptr, 0xE8, 5);
 		ptr += 5;
-		ptr = base::warcraft3::next_opcode(ptr, 0xE8, 5);
-		return base::warcraft3::convert_function(ptr);
+		ptr = warcraft3::next_opcode(ptr, 0xE8, 5);
+		return warcraft3::convert_function(ptr);
 	}
 
-	std::map<uint32_t, std::vector<base::warcraft3::jass::opcode*>> handlepos;
+	std::map<uint32_t, std::vector<warcraft3::jass::opcode*>> handlepos;
 
 	uintptr_t realCreateHandle = 0;
-	static uint32_t __fastcall fakeCreateHandle(base::warcraft3::handle_table_t* hts, uint32_t edx, uint32_t object, uint32_t unk) {
+	static uint32_t __fastcall fakeCreateHandle(warcraft3::handle_table_t* hts, uint32_t edx, uint32_t object, uint32_t unk) {
 		uint32_t handle = objectToHandle(object);
 		if (handle) {
 			return handle;
 		}
 		handle = base::fast_call<uint32_t>(realCreateHandle, hts, edx, object, unk);
-		handlepos[handle] = base::warcraft3::jass::stackwalker();
+		handlepos[handle] = warcraft3::jass::stackwalker();
 		return handle;
 	}
 
-	std::vector<base::warcraft3::jass::opcode*> getHandlePos(uint32_t handle) {
+	std::vector<warcraft3::jass::opcode*> getHandlePos(uint32_t handle) {
 		auto it = handlepos.find(handle);
 		if (it == handlepos.end()) {
-			return std::vector<base::warcraft3::jass::opcode*>();
+			return std::vector<warcraft3::jass::opcode*>();
 		}
 		return it->second;
 	}

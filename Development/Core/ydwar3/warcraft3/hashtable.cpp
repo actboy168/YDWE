@@ -3,7 +3,7 @@
 #include <warcraft3/version.h>		   
 #include <warcraft3/jass/opcode.h>
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
 
 	jass_vm_t* get_jass_vm(int index)
 	{
@@ -26,4 +26,4 @@ namespace base { namespace warcraft3 {
 	{
 		return (hashtable::native_func_table*)(get_war3_searcher().get_instance(5)+0x18);
 	}
-}}
+}

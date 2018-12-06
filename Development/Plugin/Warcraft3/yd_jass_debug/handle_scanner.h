@@ -23,8 +23,8 @@ namespace handles {
 		std::map<uint32_t, uint32_t> htmgr;
 
 		void add_handle(uint32_t handle, uint32_t object, uint32_t reference);
-		void add_global_reference(base::warcraft3::hashtable::variable_node& var);
-		void add_local_reference(base::warcraft3::hashtable::variable_node& var, const std::string& funcname);
+		void add_global_reference(warcraft3::hashtable::variable_node& var);
+		void add_local_reference(warcraft3::hashtable::variable_node& var, const std::string& funcname);
 		void add_hashtable_reference(uint32_t ht, uint32_t t, uint32_t k, uint32_t handle);
 		void add_reference(e_type type, uint32_t handle, const std::string& name);
 	};

@@ -5,7 +5,7 @@
 #include <queue>
 #include <base/util/foreach.h>
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace warcraft3::japi {
 
 	class string_pool_t
 	{
@@ -160,4 +160,4 @@ namespace base { namespace warcraft3 { namespace japi {
 		std::queue<uintptr_t> fl_200_;
 		std::queue<uintptr_t> fl_400_;
 	};
-}}}
+}

@@ -3,7 +3,7 @@
 #include <base/hook/fp_call.h>
 #include <assert.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace bignum {
+namespace warcraft3::lua_engine::bignum {
 
 #include "sha_1.h"	 
 #include "sha_1.inl"
@@ -12,31 +12,31 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace bignum {
 		static void Del(HANDLE big)
 		{
 			static uintptr_t func = storm_s::instance().get_proc(606);
-			std_call<void>(func, big);
+            base::std_call<void>(func, big);
 		}
 
 		static void FromBinary(HANDLE big, const char* buf, size_t len)
 		{
 			static uintptr_t func = storm_s::instance().get_proc(609);
-			std_call<void>(func, big, buf, len);
+            base::std_call<void>(func, big, buf, len);
 		}
 
 		static void New(HANDLE* big)
 		{
 			static uintptr_t func = storm_s::instance().get_proc(624);
-			std_call<void>(func, big);
+            base::std_call<void>(func, big);
 		}
 
 		static void PowMod(HANDLE dst, HANDLE src, HANDLE pow, HANDLE mod)
 		{
 			static uintptr_t func = storm_s::instance().get_proc(628);
-			std_call<void>(func, dst, src, pow, mod);
+            base::std_call<void>(func, dst, src, pow, mod);
 		}
 
 		static void ToBinaryBuffer(HANDLE big, char* buf, size_t len, size_t* wlen)
 		{
 			static uintptr_t func = storm_s::instance().get_proc(638);
-			std_call<void>(func, big, buf, len, wlen);
+            base::std_call<void>(func, big, buf, len, wlen);
 		}
 	}
 
@@ -269,4 +269,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace bignum {
 		((const char*)sha1out, SHA1HashSize);
 		return sha1out;
 	}
-}}}}
+}

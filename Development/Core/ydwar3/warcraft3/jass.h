@@ -4,10 +4,11 @@
 #include <vector>
 #include <cstdint>
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
+    struct jass_vm_t;
+}
 
-	struct jass_vm_t;
-namespace jass {
+namespace warcraft3::jass {
 	struct opcode;
 
 	typedef void     jnothing_t;
@@ -78,4 +79,4 @@ namespace jass {
 
 	_WAR3_API jass::opcode*              currentpos();
 	_WAR3_API std::vector<jass::opcode*> stackwalker(jass_vm_t* vm = nullptr);
-}}}
+}

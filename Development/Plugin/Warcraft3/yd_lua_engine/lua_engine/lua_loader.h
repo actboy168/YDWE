@@ -3,6 +3,6 @@
 #include <cstdint>
 #include <warcraft3/jass.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
+namespace warcraft3::lua_engine::lua_loader {
 	void initialize();
-}}}}
+}

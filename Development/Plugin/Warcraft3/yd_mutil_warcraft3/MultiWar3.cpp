@@ -99,7 +99,7 @@ void InitializeMutilWar3()
 {
 	try { 
 		HMODULE h = NULL;
-		if (base::warcraft3::get_war3_searcher().get_version() > base::warcraft3::version_121b)
+		if (warcraft3::get_war3_searcher().get_version() > warcraft3::version_121b)
 		{
 			h = ::GetModuleHandleW(L"Game.dll");
 		}
@@ -112,7 +112,7 @@ void InitializeMutilWar3()
 		{
 			if (g_iat.open_module(h))
 			{
-				if (base::warcraft3::get_war3_searcher().get_version() >= base::warcraft3::version_127a)
+				if (warcraft3::get_war3_searcher().get_version() >= warcraft3::version_127a)
 				{
 					if (g_iat.open_dll("ws2_32.dll"))
 					{

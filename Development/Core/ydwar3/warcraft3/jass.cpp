@@ -7,7 +7,7 @@
 #include <cassert>
 #include <memory>
 
-namespace base { namespace warcraft3 { namespace jass {
+namespace warcraft3::jass {
 
 	string_fake::string_fake() 
 	{
@@ -198,7 +198,7 @@ namespace base { namespace warcraft3 { namespace jass {
 		jass_vm_t* vm = get_jass_vm();
 		if (vm && vm->set_handle_reference)
 		{
-			fast_call<void>(vm->set_handle_reference, h, dec ? 1 : 0, vm->handle_table);
+            base::fast_call<void>(vm->set_handle_reference, h, dec ? 1 : 0, vm->handle_table);
 		}
 	}
 
@@ -343,4 +343,4 @@ namespace base { namespace warcraft3 { namespace jass {
 		}
 		return ret;
 	}
-}}}
+}

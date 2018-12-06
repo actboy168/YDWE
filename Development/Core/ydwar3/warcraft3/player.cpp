@@ -1,7 +1,7 @@
 #include <warcraft3/player.h>
 #include <warcraft3/war3_searcher.h>
 
-namespace base { namespace warcraft3 { namespace player {
+namespace warcraft3::player {
 
 	static uintptr_t game_war3()
 	{
@@ -31,4 +31,4 @@ namespace base { namespace warcraft3 { namespace player {
 	{
 		return (selection_t*)*(uintptr_t*)(player + 0x34);
 	}
-}}}
+}

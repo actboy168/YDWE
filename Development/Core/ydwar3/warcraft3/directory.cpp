@@ -4,7 +4,7 @@
 #include <bee/registry/value.h> 
 #include <base/util/foreach.h>
 
-namespace base { namespace warcraft3 { namespace directory {
+namespace warcraft3::directory {
 
 	bool read_current_user(fs::path& result)
 	{
@@ -146,4 +146,4 @@ namespace base { namespace warcraft3 { namespace directory {
 
 		return true;
 	}
-}}}
+}

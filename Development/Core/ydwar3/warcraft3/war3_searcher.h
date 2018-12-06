@@ -3,7 +3,7 @@
 #include <warcraft3/config.h>
 #include <warcraft3/basic_searcher.h>
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
 
 	class _WAR3_API war3_searcher : public basic_searcher
 	{
@@ -52,4 +52,4 @@ namespace base { namespace warcraft3 {
 	_WAR3_API uint32_t    get_object_type(uintptr_t ptr);
 	_WAR3_API uintptr_t   handle_to_object(uint32_t handle);
 	_WAR3_API uint32_t    object_to_handle(uintptr_t obj);
-}}
+}

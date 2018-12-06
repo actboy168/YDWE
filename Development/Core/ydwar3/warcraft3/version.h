@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
 	enum VERSION
 	{
 		version_100  = 4448,
@@ -54,4 +54,4 @@ namespace base { namespace warcraft3 {
 		version_128e = 7608,
 		version_128f = 7680,
 	};
-}}
+}

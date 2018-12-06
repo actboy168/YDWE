@@ -2,7 +2,7 @@
 #include "jassbind.h"
 #include <bee/utility/format.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace jreal {
+namespace warcraft3::lua_engine::jreal {
 
 #define LUA_JASS_REAL "jreal_t"
 
@@ -215,4 +215,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace jreal {
 		luaL_setfuncs(L, lib, 0);
 		lua_pop(L, 1);
 	}
-}}}}
+}

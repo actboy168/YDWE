@@ -1,6 +1,6 @@
 #include <warcraft3/detail/string_hash.h>
 
-namespace base { namespace warcraft3 { namespace detail {
+namespace warcraft3::detail {
 
 #define STRING_TO_LONG(s) (*((s) + 0) + ((*((s) + 1) + ((*((s) + 2) + (*((s) + 3) << 8)) << 8)) << 8))
 
@@ -101,5 +101,5 @@ namespace base { namespace warcraft3 { namespace detail {
 
 		return string_hash_ex(buffer, len, 0);
 	}
-}}}
+}
 

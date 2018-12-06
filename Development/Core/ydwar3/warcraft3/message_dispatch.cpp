@@ -5,7 +5,7 @@
 #include <base/hook/fp_call.h>
 #include <vector>
 
-namespace base { namespace warcraft3 { namespace message_dispatch {
+namespace warcraft3::message_dispatch {
 
 	static uintptr_t fn_real = 0;
 	std::vector<uintptr_t> filters;
@@ -38,12 +38,12 @@ namespace base { namespace warcraft3 { namespace message_dispatch {
 	{
 		for (auto it = filters.begin(); it != filters.end(); ++it)
 		{
-			if (!this_call<bool>(*it, cgameui, msg))
+			if (!base::this_call<bool>(*it, cgameui, msg))
 			{
 				return false;
 			}
 		}
-		return this_call<bool>(fn_real, cgameui, msg);
+		return base::this_call<bool>(fn_real, cgameui, msg);
 	}
 
 	void add_filter(uintptr_t filter)
@@ -52,7 +52,7 @@ namespace base { namespace warcraft3 { namespace message_dispatch {
 		filters.push_back(filter);
 		if (!fn_real)
 		{
-			fn_real = hook::replace_pointer(get(), (uintptr_t)fn_fake);
+			fn_real = base::hook::replace_pointer(get(), (uintptr_t)fn_fake);
 		}
 	}
 
@@ -67,4 +67,4 @@ namespace base { namespace warcraft3 { namespace message_dispatch {
 			}
 		}
 	}
-}}}
+}

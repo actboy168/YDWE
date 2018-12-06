@@ -5,7 +5,7 @@
 #include <functional>
 #include <Windows.h>
 
-namespace base { namespace warcraft3 { namespace virtual_mpq {
+namespace warcraft3::virtual_mpq {
 
 	typedef std::function<bool(const std::string&, const void**, uint32_t*, uint32_t)> watch_cb;
 	typedef std::function<void(const std::string&, const std::string&)> event_cb;
@@ -20,4 +20,4 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 	_WAR3_API void  map_load(watch_cb callback);
 	_WAR3_API void  map_has(has_cb callback);
 	_WAR3_API void  event(event_cb callback);
-}}}
+}

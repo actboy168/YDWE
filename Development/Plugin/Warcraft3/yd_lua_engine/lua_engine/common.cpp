@@ -9,7 +9,7 @@
 #include <warcraft3/jass/trampoline_function.h>
 #include <base/util/singleton.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace warcraft3::lua_engine {
 
 	bool is_gaming()
 	{
@@ -196,4 +196,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		lua_pop(thread, 1);
 		return ml;
 	}
-}}}
+}

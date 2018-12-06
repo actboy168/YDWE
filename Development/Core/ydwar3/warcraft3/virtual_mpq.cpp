@@ -10,7 +10,7 @@
 #include <array>   
 #include <map>
 
-namespace base { namespace warcraft3 { namespace virtual_mpq {
+namespace warcraft3::virtual_mpq {
 
 	namespace real
 	{
@@ -448,4 +448,4 @@ namespace base { namespace warcraft3 { namespace virtual_mpq {
 	{
 		filesystem::event = callback;
 	}
-}}}
+}

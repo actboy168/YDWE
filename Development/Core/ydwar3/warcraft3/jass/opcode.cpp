@@ -2,7 +2,7 @@
 #include <warcraft3/jass/opcode.h>
 #include <warcraft3/jass.h>
 
-namespace base { namespace warcraft3 { namespace jass {
+namespace warcraft3::jass {
 
 	const char* get_typename(uint8_t t) {
 		switch (t) {
@@ -205,4 +205,4 @@ namespace base { namespace warcraft3 { namespace jass {
 		fclose(f);
 		return true;
 	}
-}}}
+}

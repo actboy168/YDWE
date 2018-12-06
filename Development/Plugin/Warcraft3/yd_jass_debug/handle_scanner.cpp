@@ -8,7 +8,7 @@
 
 namespace handles {
 	void table::add_handle(uint32_t handle, uint32_t object, uint32_t reference) {
-		if (object && base::warcraft3::get_object_type(object) == 'ghth') {
+		if (object && warcraft3::get_object_type(object) == 'ghth') {
 			uint32_t id = *(uint32_t*)(object + 0x24);
 			htmgr[id] = handle;
 		}
@@ -20,24 +20,24 @@ namespace handles {
 		insert(std::make_pair(handle, hi));
 	}
 
-	void table::add_global_reference(base::warcraft3::hashtable::variable_node& var) {
-		base::warcraft3::jass::global_variable gv(&var);
-		if (base::warcraft3::jass::OPCODE_VARIABLE_HANDLE == gv.type()) {
+	void table::add_global_reference(warcraft3::hashtable::variable_node& var) {
+		warcraft3::jass::global_variable gv(&var);
+		if (warcraft3::jass::OPCODE_VARIABLE_HANDLE == gv.type()) {
 			add_reference(table::e_type::global, (uint32_t)gv, gv.name());
 		}
-		else if (base::warcraft3::jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type()) {
+		else if (warcraft3::jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type()) {
 			for (uint32_t i = 0; i < gv.array_size(); ++i) {
 				add_reference(table::e_type::global, gv[i], bee::format("%s[%d]", gv.name(), i));
 			}
 		}
 	}
 
-	void table::add_local_reference(base::warcraft3::hashtable::variable_node& var, const std::string& funcname) {
-		base::warcraft3::jass::global_variable gv(&var);
-		if (base::warcraft3::jass::OPCODE_VARIABLE_HANDLE == gv.type()) {
+	void table::add_local_reference(warcraft3::hashtable::variable_node& var, const std::string& funcname) {
+		warcraft3::jass::global_variable gv(&var);
+		if (warcraft3::jass::OPCODE_VARIABLE_HANDLE == gv.type()) {
 			add_reference(table::e_type::local, (uint32_t)gv, bee::format("%s!%s", funcname, gv.name()));
 		}
-		else if (base::warcraft3::jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type()) {
+		else if (warcraft3::jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type()) {
 			for (uint32_t i = 0; i < gv.array_size(); ++i) {
 				add_reference(table::e_type::local, gv[i], bee::format("%s!%s[%d]", funcname, gv.name(), i));
 			}
@@ -117,7 +117,7 @@ namespace handles {
 	}
 
 	void scanner_display(std::fstream& fs, node& h) {
-		using namespace base::warcraft3;
+		using namespace warcraft3;
 
 		uint32_t ref = (h.object)? 1 : 0;
 		ref += h.global_reference.size();
@@ -168,7 +168,7 @@ namespace handles {
 	}
 
 	void scanner(std::fstream& fs, bool all) {
-		using namespace base::warcraft3;
+		using namespace warcraft3;
 
 		table ht;
 		handle_table_t** hts = get_jass_vm()->handle_table;
@@ -220,7 +220,7 @@ namespace handles {
 			ht.add_global_reference(*it);
 		}
 
-		if (base::warcraft3::get_war3_searcher().get_version() >= base::warcraft3::version_124b) {
+		if (warcraft3::get_war3_searcher().get_version() >= warcraft3::version_124b) {
 			ht::hashtableEachHandle([&](uint32_t hashtable, uint32_t t, uint32_t k, uint32_t v) {
 				ht.add_hashtable_reference(hashtable, t, k, v);
 			});

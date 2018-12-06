@@ -8,7 +8,7 @@
 #include <bee/utility/unicode.h>
 #include <warcraft3/command_line.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace warcraft3::lua_engine {
 
 	namespace common { int open(lua_State* L); }
 	namespace globals { int open(lua_State* L); }
@@ -44,7 +44,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int doCommandLine(lua_State* L)
 	{
-		base::warcraft3::command_line cmd;
+		warcraft3::command_line cmd;
 		if (cmd.has(L"debugger")) {
 			lua_pushinteger(L, stoi(cmd[L"debugger"], 4278));
 			DoString(L, "(require 'jass.runtime').debugger = ...", 1);
@@ -81,4 +81,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		doCommandLine(L);
 		return 0;
 	}
-}}}
+}

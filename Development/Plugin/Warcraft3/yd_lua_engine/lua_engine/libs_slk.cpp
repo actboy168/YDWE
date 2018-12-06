@@ -4,7 +4,7 @@
 #include <base/util/console.h>
 #include <bee/utility/unicode.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace slk {
+namespace warcraft3::lua_engine::slk {
 
 static const char slk[] = R"=(
 local ydwePath, loadlua, loadlib, io_open = ...
@@ -58,7 +58,7 @@ static int loadlib(lua_State* L)
 		size_t len = 0;
 		const char* str = luaL_checklstring(L, 1, &len);
 		std::string name(str, len);
-		fs::path path = path::ydwe(false) / "bin" / (name + ".dll");
+		fs::path path = base::path::ydwe(false) / "bin" / (name + ".dll");
 		HMODULE m = LoadLibraryW(path.c_str());
 		if (!m) {
 			return 0;
@@ -128,4 +128,4 @@ int open(lua_State* L)
 	}
 	return 1;
 }
-}}}}
+}

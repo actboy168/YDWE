@@ -12,7 +12,7 @@ namespace WideScreen
 }
 
 static int version(lua_State* L) {
-	lua_pushinteger(L, base::warcraft3::get_war3_searcher().get_version());
+	lua_pushinteger(L, warcraft3::get_war3_searcher().get_version());
 	return 1;
 }
 
@@ -24,7 +24,7 @@ static int support_widescreen(lua_State* L) {
 template <size_t n>
 void patch_all(const char(&from)[n], const char(&to)[n])
 {
-	auto& s = base::warcraft3::get_war3_searcher();
+	auto& s = warcraft3::get_war3_searcher();
 	auto[frist, last] = s.text();
 	for (uintptr_t ptr = frist; ptr < last - (n - 1); ++ptr)
 	{
@@ -37,11 +37,11 @@ void patch_all(const char(&from)[n], const char(&to)[n])
 }
 
 static int remove_sizelimit(lua_State* L) {
-	if (base::warcraft3::get_war3_searcher().get_version() >= base::warcraft3::version_127a)
+	if (warcraft3::get_war3_searcher().get_version() >= warcraft3::version_127a)
 	{
 		return 0;
 	}
-	else if (base::warcraft3::get_war3_searcher().get_version() >= base::warcraft3::version_124b)
+	else if (warcraft3::get_war3_searcher().get_version() >= warcraft3::version_124b)
 	{
 		patch_all("\x3D\x00\x00\x80\x00", "\x3D\xFF\xFF\xFF\xFF");
 	}

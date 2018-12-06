@@ -3,7 +3,7 @@ extern "C" {
 #include <warcraft3/udis86/udis86.h>
 }
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
 	namespace detail {
 		static uintptr_t search_str_no_zero(uintptr_t beg, uintptr_t end, const char* str, uintptr_t len)
 		{
@@ -190,4 +190,4 @@ namespace base { namespace warcraft3 {
 
 		return address;
 	}
-}}
+}

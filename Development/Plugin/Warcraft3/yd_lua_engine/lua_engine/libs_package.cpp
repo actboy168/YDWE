@@ -8,7 +8,7 @@
 #include "storm.h"
 #include "common.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace package {
+namespace warcraft3::lua_engine::package {
 
 #if !defined (LUA_IGMARK)
 #define LUA_IGMARK		"-"
@@ -268,4 +268,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			lua_pushfstring(L, "\n\tno field package.preload['%s']", name);
 		return 1;
 	}
-}}}}
+}

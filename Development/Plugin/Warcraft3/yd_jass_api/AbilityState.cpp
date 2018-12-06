@@ -9,7 +9,7 @@
 #include <string>
 #include "StringPool.h"
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace warcraft3::japi {
 
 	string_pool_t string_pool;
 
@@ -233,7 +233,7 @@ namespace base { namespace warcraft3 { namespace japi {
 				if (rf_is_valid(rf))
 				{
 					jass::jreal_t cooldown = jass::to_real(value);
-					this_call<void>(*(uintptr_t*)(*(uintptr_t*)(this) + 0x08), this, *(uintptr_t*)((uintptr_t)this + 0x08), &cooldown, 0xD01BEu, 0, 0);
+					base::this_call<void>(*(uintptr_t*)(*(uintptr_t*)(this) + 0x08), this, *(uintptr_t*)((uintptr_t)this + 0x08), &cooldown, 0xD01BEu, 0, 0);
 
 					return true;
 				}
@@ -290,10 +290,10 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			uintptr_t ability = (uintptr_t)(this) - 0xD0;
 			jass::jreal_t cooldown = jass::to_real(0.f);
-			this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x2EC), ability, &cooldown, *(uintptr_t*)(ability + 0x50));
+            base::this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x2EC), ability, &cooldown, *(uintptr_t*)(ability + 0x50));
 			if (jass::from_real(cooldown) > 0.f)
 			{
-				this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x3A4), ability, &cooldown);
+                base::this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x3A4), ability, &cooldown);
 			}
 		}
 	};
@@ -363,7 +363,7 @@ namespace base { namespace warcraft3 { namespace japi {
 	static ability_ui* GetAbilityUITableById(uintptr_t abilcode)
 	{
 		static uintptr_t get_ability_ui_table = search_get_ability_ui_table();
-		return this_call<ability_ui*>(get_ability_ui_table, abilcode);
+		return base::this_call<ability_ui*>(get_ability_ui_table, abilcode);
 	}
 
 	uintptr_t GetUnitAbilityByIndex(uint32_t unit_handle, uint32_t index)
@@ -866,4 +866,4 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXGetAbilityString,      "EXGetAbilityString",      "(III)S");
 		jass::japi_add((uintptr_t)EXSetAbilityString,      "EXSetAbilityString",      "(IIIS)B");	
 	}
-}}}
+}

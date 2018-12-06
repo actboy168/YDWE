@@ -150,7 +150,7 @@ static void DoTask()
 	}
 
 	fs::path gWarcraftDirectory;
-	if (!base::warcraft3::directory::get(__("CHOOSE_WAR3_DIR"), gWarcraftDirectory))
+	if (!warcraft3::directory::get(__("CHOOSE_WAR3_DIR"), gWarcraftDirectory))
 	{
 		return ;
 	}
@@ -211,11 +211,11 @@ static void DoTask()
 
 INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine, INT showType)
 {
-	base::warcraft3::command_line cmd;
+	warcraft3::command_line cmd;
 
 	if (cmd.has(L"war3"))
 	{
-		bool launch_warcraft3(base::warcraft3::command_line&);
+		bool launch_warcraft3(warcraft3::command_line&);
 		launch_warcraft3(cmd);
 		return 0;
 	}

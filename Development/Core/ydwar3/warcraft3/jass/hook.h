@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace base { namespace warcraft3 { namespace jass {
+namespace warcraft3::jass {
 
 	enum hook_type
 	{
@@ -28,4 +28,4 @@ namespace base { namespace warcraft3 { namespace jass {
 	_WAR3_API bool     japi_table_add    (uintptr_t func, const char* name, const char* param);
 	_WAR3_API uint32_t hook              (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc, uint32_t flag);
 	_WAR3_API uint32_t unhook            (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc, uint32_t flag);
-}}}
+}

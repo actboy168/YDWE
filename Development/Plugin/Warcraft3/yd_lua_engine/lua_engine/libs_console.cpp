@@ -4,7 +4,7 @@
 #include "libs_runtime.h"
 #include "callback.h"
 
-namespace base {  namespace warcraft3 { namespace lua_engine { namespace console {
+namespace warcraft3::lua_engine::console {
 
 	int jass_console_set(lua_State* L)
 	{
@@ -117,4 +117,4 @@ namespace base {  namespace warcraft3 { namespace lua_engine { namespace console
 		}
 		return 1;
 	}
-}}}}
+}

@@ -4,7 +4,7 @@
 #include <base/win/pe_reader.h>
 #include <utility>
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
 
 	class _WAR3_API basic_searcher
 	{
@@ -30,7 +30,7 @@ namespace base { namespace warcraft3 {
 		void initialize();
 
 	private:
-		win::pe_reader module_;
+		base::win::pe_reader module_;
 		uintptr_t rdata_beg_;
 		uintptr_t rdata_end_;
 		uintptr_t data_beg_;
@@ -42,4 +42,4 @@ namespace base { namespace warcraft3 {
 	_WAR3_API uintptr_t convert_function(uintptr_t address);
 	_WAR3_API uintptr_t next_opcode(uintptr_t address);
 	_WAR3_API uintptr_t next_opcode(uintptr_t address, uint8_t opcode, size_t length);
-}}
+}

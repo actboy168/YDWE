@@ -5,22 +5,22 @@
 #include <warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
 
-namespace base { namespace warcraft3 { namespace jass { 
-	void nfunction_add();
-	void nfunction_hook();
+namespace warcraft3::jass {
+    void nfunction_add();
+    void nfunction_hook();
+}
 
-	namespace nf_register {
-
-	signal<void, void>      event_hook;
-	signal<void, void>      event_add;
-	uintptr_t               thread_id          = 0;
-	uintptr_t               stat               = 0;
-	uintptr_t               real_storm_alloc   = 0;
-	uintptr_t               real_tls_get_value = 0;
+namespace warcraft3::jass::nf_register {
+    base::signal<void, void> event_hook;
+    base::signal<void, void> event_add;
+	uintptr_t                thread_id          = 0;
+	uintptr_t                stat               = 0;
+	uintptr_t                real_storm_alloc   = 0;
+	uintptr_t                real_tls_get_value = 0;
 
 	uintptr_t __stdcall fake_storm_alloc(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
 	{
-		uintptr_t retval = std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+		uintptr_t retval = base::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
 
 		if ((amount == 176)
 			&& (log_line == 668)
@@ -51,7 +51,7 @@ namespace base { namespace warcraft3 { namespace jass {
 
 	uintptr_t __stdcall fake_storm_alloc_126(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
 	{
-		uintptr_t retval = std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+		uintptr_t retval = base::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
 
 		if ((amount == 176) 
 			&& (log_line == 668)
@@ -82,7 +82,7 @@ namespace base { namespace warcraft3 { namespace jass {
 
 	uintptr_t __stdcall fake_storm_alloc_122(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
 	{
-		uintptr_t retval = std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+		uintptr_t retval = base::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
 
 		if ((amount == 176) 
 			&& (log_line == 667)
@@ -113,7 +113,7 @@ namespace base { namespace warcraft3 { namespace jass {
 
 	uintptr_t __stdcall fake_storm_alloc_120(uint32_t amount, const char* log_filename, uint32_t log_line, uint32_t default_value)
 	{
-		uintptr_t retval = std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
+		uintptr_t retval = base::std_call<uintptr_t>(real_storm_alloc, amount, log_filename, log_line, default_value);
 		if ((amount == 176) 
 			&& (log_line == 667)
 			&& (default_value == 0)
@@ -157,7 +157,7 @@ namespace base { namespace warcraft3 { namespace jass {
 			}
 		}
 
-		return std_call<uintptr_t>(real_tls_get_value, tls_index);
+		return base::std_call<uintptr_t>(real_tls_get_value, tls_index);
 	}
 
 	bool initialize()
@@ -166,28 +166,27 @@ namespace base { namespace warcraft3 { namespace jass {
 		{
 			if (get_war3_searcher().get_version() > version_126)
 			{
-				real_storm_alloc = hook::iat(L"Game.dll", "Storm.dll", (const char*)401, (uintptr_t)fake_storm_alloc);
-				real_tls_get_value = hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue", (uintptr_t)fake_tls_get_value);
+				real_storm_alloc = base::hook::iat(L"Game.dll", "Storm.dll", (const char*)401, (uintptr_t)fake_storm_alloc);
+				real_tls_get_value = base::hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue", (uintptr_t)fake_tls_get_value);
 			}
 			else if (get_war3_searcher().get_version() > version_123)
 			{
-				real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_126);
-				real_tls_get_value = hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
+				real_storm_alloc   = base::hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_126);
+				real_tls_get_value = base::hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
 			}
 			else if (get_war3_searcher().get_version() > version_121b)
 			{
-				real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_122);
-				real_tls_get_value = hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
+				real_storm_alloc   = base::hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_122);
+				real_tls_get_value = base::hook::iat(L"Game.dll", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
 			}
 			else
 			{
-				real_storm_alloc   = hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_120);
-				real_tls_get_value = hook::iat(L"War3.exe", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
+				real_storm_alloc   = base::hook::iat(L"Game.dll", "Storm.dll",    (const char*)401, (uintptr_t)fake_storm_alloc_120);
+				real_tls_get_value = base::hook::iat(L"War3.exe", "Kernel32.dll", "TlsGetValue",    (uintptr_t)fake_tls_get_value);
 			}
 			return true;
 		}
 
 		return false;
 	}
-
-}}}} 
+}

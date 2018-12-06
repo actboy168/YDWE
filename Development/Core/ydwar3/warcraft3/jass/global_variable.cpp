@@ -1,7 +1,7 @@
 #include <warcraft3/jass/global_variable.h>
 #include <cassert>
 
-namespace base { namespace warcraft3 { namespace jass {
+namespace warcraft3::jass {
 
 	global_variable::global_variable(const char* name)
 		: ptr_(get_jass_vm()->global_table->find(name))
@@ -109,4 +109,4 @@ namespace base { namespace warcraft3 { namespace jass {
 		assert(array_vaild(index));
 		return entry()->data[index];
 	}
-}}} 
+}

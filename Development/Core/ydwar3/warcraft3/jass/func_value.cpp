@@ -7,7 +7,7 @@
 #include <string>  
 #include <assert.h>
 
-namespace base { namespace warcraft3 { namespace jass {
+namespace warcraft3::jass {
 
 	namespace detail {
 
@@ -225,4 +225,4 @@ namespace base { namespace warcraft3 { namespace jass {
 		japi_function.clear();
 		return true;
 	}
-}}}
+}

@@ -3,7 +3,7 @@
 #include <warcraft3/config.h>
 #include <stdint.h>
 
-namespace base { namespace warcraft3 { namespace player {
+namespace warcraft3::player {
 
 	struct selection_node_t
 	{
@@ -56,4 +56,4 @@ namespace base { namespace warcraft3 { namespace player {
 	_WAR3_API uint32_t  local_pid();
 	_WAR3_API uintptr_t local();
 	_WAR3_API selection_t* selection(uintptr_t player);
-}}}
+}

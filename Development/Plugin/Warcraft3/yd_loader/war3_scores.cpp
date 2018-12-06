@@ -9,7 +9,7 @@
 #include <Windows.h>
 
 namespace scores {
-	using namespace base::warcraft3;
+	using namespace warcraft3;
 	namespace rpg {
 		jass::jhandle_t g_gc = 0;
 		uint16_t g_dict = 0;

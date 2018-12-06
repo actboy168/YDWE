@@ -25,7 +25,7 @@ namespace bee::lua {
 	}
 }
 
-namespace base { namespace warcraft3 { namespace lua_engine { 
+namespace warcraft3::lua_engine { 
 
 	namespace globals {
 		void jass_get_global_variable(lua_State* L, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value);
@@ -156,4 +156,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		return 1;
 	}
-}}}}
+}}

@@ -9,16 +9,16 @@
 
 namespace bee::lua {
 	template <>
-	inline int convert_to_lua(lua_State* L, const base::warcraft3::jass::func_value& v)
+	inline int convert_to_lua(lua_State* L, const warcraft3::jass::func_value& v)
 	{
 		lua_pushinteger(L, (uint32_t)(uintptr_t)&v);
-		lua_pushcclosure(L, base::warcraft3::lua_engine::jass_call_closure, 1);
+		lua_pushcclosure(L, warcraft3::lua_engine::jass_call_closure, 1);
 		return 1;
 	}
 }
 
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace japi {
+namespace warcraft3::lua_engine::japi {
 
 	int empty_function(lua_State*, void*)
 	{
@@ -136,4 +136,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace japi {
 		}
 		return 1;
 	}
-}}}}
+}

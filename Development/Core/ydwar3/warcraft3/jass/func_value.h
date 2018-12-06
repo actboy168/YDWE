@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <string>
 
-namespace base { namespace warcraft3 { namespace jass {
+namespace warcraft3::jass {
 
 	class call_param;
 
@@ -66,4 +66,4 @@ namespace base { namespace warcraft3 { namespace jass {
 	/*_WAR3_API*/ bool japi_func_add(const char* proc_name, uintptr_t new_proc, const char* param);
 	/*_WAR3_API*/ bool japi_func_clean();
 	_WAR3_API func_mapping initialize_mapping(const char* startfunc);
-}}}
+}

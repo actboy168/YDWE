@@ -14,8 +14,7 @@
 #include <string>
 #include <algorithm>
 
-namespace base { 
-namespace warcraft3 { namespace jass {
+namespace warcraft3::jass {
 
 	bool table_hook     (const char* proc_name, uintptr_t* old_proc_ptr, uintptr_t new_proc)
 	{
@@ -60,7 +59,7 @@ namespace warcraft3 { namespace jass {
 		if (!hook_address)
 			return false;
 
-		uintptr_t old_proc = hook::replace_pointer(hook_address + 0x05, new_proc);
+		uintptr_t old_proc = base::hook::replace_pointer(hook_address + 0x05, new_proc);
 		if (!old_proc)
 			return false;
 
@@ -77,7 +76,7 @@ namespace warcraft3 { namespace jass {
 		if (!hook_address)
 			return false;
 
-		hook::replace_pointer(hook_address + 0x05, *old_proc_ptr);
+        base::hook::replace_pointer(hook_address + 0x05, *old_proc_ptr);
 		return true;
 	}
 
@@ -165,7 +164,7 @@ namespace warcraft3 { namespace jass {
 	bool japi_table_add(uintptr_t func, const char* name, const char* param)
 	{
 		static uintptr_t register_func = detail::search_register_func();
-		fast_call<void>(register_func, func, name, param);
+        base::fast_call<void>(register_func, func, name, param);
 		japi_func_add(name, func, param);
 		return true;
 	}
@@ -344,5 +343,4 @@ namespace warcraft3 { namespace jass {
 		detail::async_add(func, name, param);
 		return true;
 	}
-}}
 }

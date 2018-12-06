@@ -623,7 +623,7 @@ void CMainWindow::UpdateWarcraft3Directory()
 	if (m_pWarcraft3Directory)
 	{
 		fs::path result;
-		if (base::warcraft3::directory::read(result))
+		if (warcraft3::directory::read(result))
 		{
 			m_pWarcraft3Directory->SetText(result.c_str());
 		}
@@ -732,7 +732,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 			}
 			else if (name == L"choose_war3_dir")
 			{
-				if (base::warcraft3::directory::choose(nullptr))
+				if (warcraft3::directory::choose(nullptr))
 				{
 					UpdateWarcraft3Directory();
 				}

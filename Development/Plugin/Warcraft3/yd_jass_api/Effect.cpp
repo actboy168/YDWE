@@ -60,7 +60,7 @@ private:
 	T* data_;
 };
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace warcraft3::japi {
 
 	jass::jnothing_t __cdecl EXSetEffectXY(jass::jhandle_t effect, jass::jreal_t* px, jass::jreal_t* py)
 	{
@@ -215,7 +215,7 @@ namespace base { namespace warcraft3 { namespace japi {
 			return;
 		}
 		uintptr_t eff = *(uintptr_t*)(obj + 0x28);
-		this_call<void>(*(uintptr_t*)(*(uintptr_t*)eff+0x28), eff, jass::from_real(*pspeed));
+        base::this_call<void>(*(uintptr_t*)(*(uintptr_t*)eff+0x28), eff, jass::from_real(*pspeed));
 	}
 
 	void InitializeEffect()
@@ -234,4 +234,4 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXEffectMatReset,   "EXEffectMatReset",   "(Heffect;)V");
 		jass::japi_add((uintptr_t)EXSetEffectSpeed,   "EXSetEffectSpeed",   "(Heffect;R)V");
 	}
-}}}
+}

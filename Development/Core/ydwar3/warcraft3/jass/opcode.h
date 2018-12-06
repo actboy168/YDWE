@@ -5,7 +5,7 @@
 #include <cassert>
 #include <cstdint>
 
-namespace base { namespace warcraft3 { namespace jass {
+namespace warcraft3::jass {
 
 	struct opcode 
 	{
@@ -152,4 +152,4 @@ namespace base { namespace warcraft3 { namespace jass {
 	};
 
 	_WAR3_API bool dump_opcode(opcode* op, const wchar_t* filename);
-}}}
+}

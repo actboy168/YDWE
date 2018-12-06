@@ -16,7 +16,7 @@
 #	include <sys/time.h>
 #endif
 			
-namespace base { namespace warcraft3 { namespace lua_engine { namespace log {
+namespace warcraft3::lua_engine::log {
 
 enum loglevel {	 
 	trace = 0,
@@ -275,4 +275,4 @@ int open(lua_State* L)
 	return 1;
 }
 
-}}}}
+}

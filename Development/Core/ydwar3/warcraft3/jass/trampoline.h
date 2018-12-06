@@ -3,8 +3,7 @@
 #include <warcraft3/config.h>
 #include <warcraft3/jass/opcode.h>
 
-namespace base { 
-namespace warcraft3 { namespace jass {
+namespace warcraft3::jass {
 
 	struct trampoline : public opcode_writer<16>
 	{
@@ -19,5 +18,5 @@ namespace warcraft3 { namespace jass {
 		uint64_t                trampoline_;
 		uintptr_t               code_;
 	};
-}}
 }
+

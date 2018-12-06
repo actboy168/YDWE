@@ -12,7 +12,7 @@
 #include <map>
 #include <stdint.h>
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace warcraft3::japi {
 
 	uint32_t kPasButton[] = {
 #include "PasButton.h"
@@ -366,4 +366,4 @@ namespace base { namespace warcraft3 { namespace japi {
 			fake::g_history.clear();
 		});
 	}
-}}}
+}

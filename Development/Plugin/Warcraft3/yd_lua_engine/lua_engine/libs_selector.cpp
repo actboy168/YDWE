@@ -4,7 +4,7 @@
 #include <assert.h>
 #include "jassbind.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace selector {
+namespace warcraft3::lua_engine::selector {
 
 	template <typename T>
 	class array_view {
@@ -120,4 +120,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace selector
 		luaL_newlib(L, f);
 		return 1;
 	}
-}}}}
+}

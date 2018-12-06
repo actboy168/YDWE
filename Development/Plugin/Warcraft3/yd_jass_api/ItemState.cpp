@@ -9,7 +9,7 @@
 #include <string>
 #include "StringPool.h"
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace warcraft3::japi {
 	extern string_pool_t string_pool;
 
 	enum ITEM_DATA_TYPE
@@ -185,4 +185,4 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXGetItemDataString, "EXGetItemDataString", "(II)S");
 		jass::japi_add((uintptr_t)EXSetItemDataString, "EXSetItemDataString", "(IIS)B");
 	}
-}}}
+}

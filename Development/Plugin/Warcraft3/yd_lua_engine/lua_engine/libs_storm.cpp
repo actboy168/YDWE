@@ -1,6 +1,6 @@
 #include <lua.hpp>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace storm {
+namespace warcraft3::lua_engine::storm {
 
 	int open(lua_State* L)
 	{
@@ -33,4 +33,4 @@ return mt                             \
 		lua_call(L, 0, 1);
 		return 1;
 	}
-}}}}
+}

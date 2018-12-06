@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <set>
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
 
 	std::wstring command_line::parse(std::function<void(std::wstring const&, std::wstring const&)> proc)
 	{
@@ -144,4 +144,4 @@ namespace base { namespace warcraft3 {
 	{
 		return this->insert(std::make_pair(key, val)).second;
 	}
-}}
+}

@@ -4,7 +4,7 @@
 #include <functional>
 #include <base/filesystem.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger {
+namespace warcraft3::lua_engine::debugger {
 
 #define STATUS_INFO_LENGTH_MISMATCH      ((NTSTATUS)0xC0000004L)
 
@@ -219,4 +219,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger
 		}
 		return 1;
 	}
-}}}}
+}

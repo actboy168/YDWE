@@ -7,7 +7,7 @@
 
 void Initialize()
 {
-	base::warcraft3::virtual_mpq::initialize(::GetModuleHandleW(L"Game.dll"));
+	warcraft3::virtual_mpq::initialize(::GetModuleHandleW(L"Game.dll"));
 	fs::path ydwe_path = base::path::self().parent_path().parent_path().parent_path();
 	base::ini::table table;
 	table["MapTest"]["VirtualMpq"] = "share/mpq/war3";
@@ -17,7 +17,7 @@ void Initialize()
 	}
 	catch (...) {
 	}
-	base::warcraft3::virtual_mpq::open_path(ydwe_path / table["MapTest"]["VirtualMpq"], 15);
+	warcraft3::virtual_mpq::open_path(ydwe_path / table["MapTest"]["VirtualMpq"], 15);
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)

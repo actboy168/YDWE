@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
 
 #pragma warning (push)
 #pragma warning (disable:4251)
@@ -30,5 +30,5 @@ namespace base { namespace warcraft3 {
 	};
 #pragma warning (pop)
 
-}}
+}
 

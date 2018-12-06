@@ -4,8 +4,8 @@
 #include <base/util/signal.h>
 #include <cstdint>
 
-namespace base { namespace warcraft3 { namespace jass { namespace nf_register {
-	extern signal<void, void> event_hook;
-	extern signal<void, void>      event_add;
+namespace warcraft3::jass::nf_register {
+	extern base::signal<void, void> event_hook;
+	extern base::signal<void, void> event_add;
 	bool initialize();
-}}}} 
+}

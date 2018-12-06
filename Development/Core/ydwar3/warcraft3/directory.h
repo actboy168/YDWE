@@ -3,8 +3,7 @@
 #include <warcraft3/config.h>			  		
 #include <base/filesystem.h>
 
-namespace base { namespace warcraft3 { namespace directory {
-
+namespace warcraft3::directory {
 	_WAR3_API bool read_current_user(fs::path& result);
 	_WAR3_API bool read_all_users(fs::path& result);
 	_WAR3_API bool validate(fs::path const& p);
@@ -13,4 +12,4 @@ namespace base { namespace warcraft3 { namespace directory {
 	_WAR3_API bool choose(const wchar_t* title, fs::path& result);
 	_WAR3_API bool choose(const wchar_t* title);
 	_WAR3_API bool get(const wchar_t* title, fs::path& war3_path);
-}}}
+}

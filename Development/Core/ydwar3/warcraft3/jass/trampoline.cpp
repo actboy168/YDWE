@@ -1,8 +1,7 @@
 #include <warcraft3/jass/trampoline.h>
 #include <warcraft3/hashtable.h>
 
-namespace base { 
-namespace warcraft3 { namespace jass {
+namespace warcraft3::jass {
 
 	trampoline::trampoline()
 		: mybase()
@@ -30,5 +29,4 @@ namespace warcraft3 { namespace jass {
 	{
 		return code_;
 	}
-}}
 }

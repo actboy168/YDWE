@@ -6,11 +6,10 @@
 #include "libs_runtime.h"
 #include "YDWEVersion.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine { 
-namespace debugger {
+namespace warcraft3::lua_engine::debugger {
 	int open(lua_State* L, int port);
 }
-namespace runtime	{
+namespace warcraft3::lua_engine::runtime {
 	int  version = 3;
 	int  handle_level = 2;
 	bool enable_console = false;
@@ -206,12 +205,12 @@ namespace runtime	{
 			enable_console = !!lua_toboolean(L, 3);
 			if (enable_console)
 			{
-				console::enable();
-				console::disable_close_button();
+                base::console::enable();
+                base::console::disable_close_button();
 			}
 			else
 			{
-				console::disable();
+                base::console::disable();
 			}
 		}
 		else if (strcmp("debugger", name) == 0)
@@ -358,4 +357,4 @@ namespace runtime	{
 		return 1;
 	}
 
-}}}}
+}
