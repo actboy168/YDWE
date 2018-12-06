@@ -1,7 +1,6 @@
 #include <base/win/file_version.h>
 #include <base/util/string_algorithm.h>
 #include <bee/utility/format.h>
-#include <base/path/get_path.h>
 #include <vector>
 
 #pragma comment(lib, "version.lib")

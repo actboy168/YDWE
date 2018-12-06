@@ -136,9 +136,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		float angle = jass::from_real(*pangle) * float(M_PI / 180.);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
 		qmatrix<float>::value_type m = {
-			{ 1, 0, 0 },
-			{ 0, cos(angle), sin(angle) },
-			{ 0, -sin(angle), cos(angle) },
+			{ 1.f, 0.f, 0.f },
+			{ 0.f, cosf(angle), sinf(angle) },
+			{ 0.f, -sinf(angle), cosf(angle) },
 		};
 		mat *= m;
 	}
@@ -152,9 +152,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		float angle = jass::from_real(*pangle) * float(M_PI / 180.);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
 		qmatrix<float>::value_type m = {
-			{ cos(angle), 0, -sin(angle) },
-			{ 0, 1, 0 },
-			{ sin(angle), 0, cos(angle) },
+			{ cosf(angle), 0.f, -sinf(angle) },
+			{ 0.f, 1.f, 0.f },
+			{ sinf(angle), 0.f, cosf(angle) },
 		};
 		mat *= m;
 	}
@@ -168,9 +168,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		float angle = jass::from_real(*pangle) * float(M_PI / 180.);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
 		qmatrix<float>::value_type m = {
-			{ cos(angle), sin(angle), 0 },
-			{ -sin(angle), cos(angle), 0 },
-			{ 0, 0, 1 },
+			{ cosf(angle), sinf(angle), 0.f },
+			{ -sinf(angle), cosf(angle), 0.f },
+			{ 0.f, 0.f, 1.f },
 		};
 		mat *= m;
 	}
@@ -186,9 +186,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		float z = jass::from_real(*pz);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
 		qmatrix<float>::value_type m = {
-			{ x, 0, 0 },
-			{ 0, y, 0 },
-			{ 0, 0, z },
+			{ x, 0.f, 0.f },
+			{ 0.f, y, 0.f },
+			{ 0.f, 0.f, z },
 		};
 		mat *= m;
 	}
@@ -201,9 +201,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		}
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
 		qmatrix<float>::value_type m = {
-			{ 1, 0, 0 },
-			{ 0, 1, 0 },
-			{ 0, 0, 1 },
+			{ 1.f, 0.f, 0.f },
+			{ 0.f, 1.f, 0.f },
+			{ 0.f, 0.f, 1.f },
 		};
 		mat = m;
 	}

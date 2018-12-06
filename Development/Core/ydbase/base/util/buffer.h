@@ -5,6 +5,7 @@
 #include <system_error>
 #include <vector>
 #include <streambuf>
+#include <iostream>
 
 namespace base { 
 
