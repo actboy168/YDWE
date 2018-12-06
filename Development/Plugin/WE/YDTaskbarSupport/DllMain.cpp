@@ -2,7 +2,7 @@
 #include <random>
 #include <string>				 	  		
 #include <base/filesystem.h>
-#include <base/win/version.h>
+#include <bee/platform/version.h>
 #include <base/path/ydwe.h>
 #include "Windows7.h"
 #include "JumpList.h"
@@ -59,7 +59,7 @@ bool JumpListAddRecentTask(JumpList& jumpList, fs::path const& ydweDirectory, fs
 
 void Initialize()
 {
-	if (base::win::get_version() < base::win::VERSION_WIN7)
+	if (bee::platform::get_version().ver < +bee::platform::WinVer::Win7)
 	{
 		return ;
 	}

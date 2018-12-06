@@ -35,24 +35,5 @@ namespace base { namespace  algorithm {
 	{
 		str.remove_prefix(std::distance(str.begin(), detail::find_begin(str.begin(), str.end())));
 		str.remove_suffix(std::distance(detail::find_end(str.begin(), str.end()), str.end()));
-	}	      
-	
-	template <typename ResultT, typename StrT>
-	inline void split(ResultT& Result, StrT& input, typename StrT::value_type c)
-	{
-		for (size_t pos = 0;;)
-		{
-			size_t next = input.find(c, pos);
-			if (next != StrT::npos)
-			{
-				Result.push_back(input.substr(pos, next - pos));
-				pos = next + 1;
-			}
-			else
-			{
-				Result.push_back(input.substr(pos));
-				break;
-			}
-		}
 	}
 }}

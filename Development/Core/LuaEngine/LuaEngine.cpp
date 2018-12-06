@@ -6,9 +6,9 @@
 #include <base/hook/inline.h>
 #include <base/path/self.h>
 #include <base/path/ydwe.h>
-#include <base/win/file_version.h>
+#include <bee/utility/file_version.h>
 #include <bee/utility/format.h>
-#include <base/win/version.h>
+#include <bee/platform/version.h>
 #include "../../Plugin/Lua/log/logging.h"
 
 void lua_pushwstring(lua_State* L, const std::wstring& str)
@@ -71,10 +71,10 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 	{
 		LOGGING_INFO(lg) << "------------------------------------------------------";
 
-		base::win::version_number vn = base::win::get_version_number();
-		LOGGING_INFO(lg) << bee::format("LuaEngine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]);
+        auto vn = bee::platform::get_version();
+		LOGGING_INFO(lg) << bee::format("LuaEngine %s started.", bee::file_version(base::path::self().c_str())[L"FileVersion"]);
 		LOGGING_INFO(lg) << "Compiled at " __TIME__ ", " __DATE__;
-		LOGGING_INFO(lg) << bee::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
+		LOGGING_INFO(lg) << bee::format("Windows version: %s.%d", vn.ver._to_string(), vn.build);
 
 		luaL_openlibs(L);
 		LOGGING_DEBUG(lg) << "Initialize LuaEngine successfully.";

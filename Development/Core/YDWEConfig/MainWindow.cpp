@@ -6,8 +6,8 @@
 #include <base/path/ydwe.h>
 #include <bee/utility/path_helper.h>
 #include <bee/utility/unicode.h>
-#include <base/win/version.h>
-#include <base/win/file_version.h>
+#include <bee/platform/version.h>
+#include <bee/utility/file_version.h>
 #include <base/win/font/utility.h>
 #include <base/util/ini.h>
 #include <base/i18n/gettext.h>
@@ -395,7 +395,7 @@ void CMainWindow::InitOSHelpUI()
 		}
 	}
 
-	if (base::win::get_version() >= base::win::VERSION_WIN10)
+	if (bee::platform::get_version().ver >= +bee::platform::WinVer::Win7)
 	{
 		if (m_pShortcuts_taskbar)
 			m_pShortcuts_taskbar->SetEnabled(false);
@@ -489,7 +489,7 @@ void CMainWindow::InitPluginUI()
 					if (bee::path_helper::equal(itr->path().extension(), L".dll") 
 						&& (!bee::path_helper::equal(itr->path().filename(), L"yd_loader.dll")))
 					{
-						base::win::file_version fv(itr->path().c_str());
+                        bee::file_version fv(itr->path().c_str());
 						fv.select_language(base::i18n::get_languageid());
 
 						DuiLib::CCheckBoxUI* node = new DuiLib::CCheckBoxUI;
@@ -557,7 +557,7 @@ void CMainWindow::InitPatchUI(base::ini::table& table)
 				if (fs::exists(game_dll) && fs::exists(patch_mpq))
 				{
 					patch = fs::absolute(patch);
-					base::win::file_version versionInfo(game_dll.c_str());
+					bee::file_version versionInfo(game_dll.c_str());
 
 					DuiLib::CRadioButtonUI* node = new DuiLib::CRadioButtonUI;
 					m_pWar3PatchList->Add(node);

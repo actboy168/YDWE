@@ -44,9 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="base\win\version.cpp">
-      <Filter>base\win</Filter>
-    </ClCompile>
     <ClCompile Include="base\hook\detail\memory_protect.cpp">
       <Filter>base\hook\detail</Filter>
     </ClCompile>
@@ -64,9 +61,6 @@
     </ClCompile>
     <ClCompile Include="base\hook\iat_manager.cpp">
       <Filter>base\hook</Filter>
-    </ClCompile>
-    <ClCompile Include="base\win\file_version.cpp">
-      <Filter>base\win</Filter>
     </ClCompile>
     <ClCompile Include="base\hook\inline.cpp">
       <Filter>base\hook</Filter>
@@ -130,9 +124,6 @@
     <ClInclude Include="base\com\guard.h">
       <Filter>base\com</Filter>
     </ClInclude>
-    <ClInclude Include="base\win\version.h">
-      <Filter>base\win</Filter>
-    </ClInclude>
     <ClInclude Include="base\hook\detail\memory_protect.h">
       <Filter>base\hook\detail</Filter>
     </ClInclude>
@@ -153,9 +144,6 @@
     </ClInclude>
     <ClInclude Include="base\hook\iat_manager.h">
       <Filter>base\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\file_version.h">
-      <Filter>base\win</Filter>
     </ClInclude>
     <ClInclude Include="base\hook\inline.h">
       <Filter>base\hook</Filter>
