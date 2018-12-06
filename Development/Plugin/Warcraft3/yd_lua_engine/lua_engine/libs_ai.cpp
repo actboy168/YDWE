@@ -3,7 +3,7 @@
 #include <base/warcraft3/war3_searcher.h>
 #include <base/warcraft3/jass/func_value.h>
 #include <base/warcraft3/jass.h>
-#include <base/lua/make_range.h>
+#include <bee/lua/range.h>
 #include <base/util/do_once.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { 
@@ -42,7 +42,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int pairs(lua_State* L)
 	{
-		return lua::make_range(L, function);
+		return bee::lua::make_range(L, function);
 	}
 
 	int open(lua_State* L)

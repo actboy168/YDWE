@@ -7,9 +7,9 @@
 #include <base/warcraft3/jass/func_value.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/global_variable.h>
-#include <base/lua/make_range.h>
+#include <bee/lua/range.h>
 
-namespace base { namespace lua {
+namespace bee::lua {
 	template <>
 	int convert_to_lua(lua_State* L, const std::string& v)
 	{
@@ -23,7 +23,7 @@ namespace base { namespace lua {
 		lua_pushlstring(L, v.data(), v.size());
 		return 1;
 	}
-}}
+}
 
 namespace base { namespace warcraft3 { namespace lua_engine { 
 
@@ -116,7 +116,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int jass_pairs(lua_State* L)
 	{
-		return lua::make_range(L, jass::jass_function);
+		return bee::lua::make_range(L, jass::jass_function);
 	}
 
 	static void init_sleep_function(const char* name)

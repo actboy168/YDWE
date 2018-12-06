@@ -7,7 +7,7 @@
 #include <base/warcraft3/jass/func_value.h>
 #include <base/warcraft3/jass.h>
 #include <base/warcraft3/jass/global_variable.h>
-#include <base/lua/make_range.h>
+#include <bee/lua/range.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace globals {
 
@@ -74,15 +74,15 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace globals 
 	}
 }}}}
 
-namespace base { namespace lua {
+namespace bee::lua {
 	template <>
-	inline int convert_to_lua(lua_State* L, const warcraft3::hashtable::variable_node& v)
+	inline int convert_to_lua(lua_State* L, const base::warcraft3::hashtable::variable_node& v)
 	{
-		warcraft3::jass::global_variable gv(const_cast<warcraft3::hashtable::variable_node*>(&v));
+		base::warcraft3::jass::global_variable gv(const_cast<base::warcraft3::hashtable::variable_node*>(&v));
 		lua_pushstring(L, gv.name());
-		return 1 + warcraft3::lua_engine::globals::jass_get_global_variable(L, gv);
+		return 1 + base::warcraft3::lua_engine::globals::jass_get_global_variable(L, gv);
 	}
-}}
+}
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace globals {
 
@@ -136,7 +136,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace globals 
 	int jglobals_pairs(lua_State* L)
 	{
 		const hashtable::variable_table& vt = *(get_jass_vm()->global_table);
-		return lua::make_range(L, vt);
+		return bee::lua::make_range(L, vt);
 	}
 
 	int open(lua_State* L)

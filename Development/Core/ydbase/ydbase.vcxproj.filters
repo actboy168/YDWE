@@ -196,12 +196,6 @@
     <ClInclude Include="base\file\stream.h">
       <Filter>base\file</Filter>
     </ClInclude>
-    <ClInclude Include="base\util\hybrid_array.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\lua\make_range.h">
-      <Filter>base\lua</Filter>
-    </ClInclude>
     <ClInclude Include="base\config.h" />
     <ClInclude Include="base\hook\fp_call.h">
       <Filter>base\hook</Filter>

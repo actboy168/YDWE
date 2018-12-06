@@ -164,7 +164,6 @@
     <ClInclude Include="base\i18n\gettext.h" />
     <ClInclude Include="base\i18n\lng.h" />
     <ClInclude Include="base\lua\guard.h" />
-    <ClInclude Include="base\lua\make_range.h" />
     <ClInclude Include="base\lua\object.h" />
     <ClInclude Include="base\path\self.h" />
     <ClInclude Include="base\path\get_path.h" />
@@ -174,7 +173,6 @@
     <ClInclude Include="base\util\foreach.h" />
     <ClInclude Include="base\util\horrible_cast.h" />
     <ClInclude Include="base\util\do_once.h" />
-    <ClInclude Include="base\util\hybrid_array.h" />
     <ClInclude Include="base\util\ini.h" />
     <ClInclude Include="base\util\is_utf8.h" />
     <ClInclude Include="base\util\pinyin.h" />
