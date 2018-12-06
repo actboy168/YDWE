@@ -1,6 +1,6 @@
-#include <base/warcraft3/jass/hook.h> 	
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/event.h>
+#include <warcraft3/jass/hook.h> 	
+#include <warcraft3/jass.h>
+#include <warcraft3/event.h>
 #include <base/hook/fp_call.h>
 #include <stdint.h>	
 #include <map>

@@ -2,7 +2,7 @@
 
 #include <lua.hpp>
 #include "jassbind.h"
-#include <base/warcraft3/jass/func_value.h>
+#include <warcraft3/jass/func_value.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 	bool      is_gaming();

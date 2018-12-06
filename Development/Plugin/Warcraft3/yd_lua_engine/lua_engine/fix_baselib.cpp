@@ -1,7 +1,7 @@
 #include "callback.h"
 #include "common.h"
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/war3_searcher.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
 #include <bee/registry/key.h>
 #include <bee/utility/unicode.h>

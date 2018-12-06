@@ -1,5 +1,5 @@
 #include <lua.hpp>
-#include <base/warcraft3/war3_searcher.h>
+#include <warcraft3/war3_searcher.h>
 #include <base/util/foreach.h>
 #include <assert.h>
 #include "jassbind.h"

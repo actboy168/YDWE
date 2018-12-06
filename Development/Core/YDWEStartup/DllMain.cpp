@@ -17,10 +17,10 @@
 #include "Splash.h"
 
 #define YDWE_WAR3_INLINE
-#include <base/warcraft3/directory.h>
-#include <base/warcraft3/directory.cpp>
-#include <base/warcraft3/command_line.h>
-#include <base/warcraft3/command_line.cpp>
+#include <warcraft3/directory.h>
+#include <warcraft3/directory.cpp>
+#include <warcraft3/command_line.h>
+#include <warcraft3/command_line.cpp>
 
 #define _(str)  base::i18n::get_text(str).data()
 #define __(str) bee::u2w(base::i18n::get_text(str)).c_str()

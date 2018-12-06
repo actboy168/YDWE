@@ -2,7 +2,7 @@
 
 #include <fstream>
 #include <map>
-#include <base/warcraft3/jass/global_variable.h>
+#include <warcraft3/jass/global_variable.h>
 
 namespace handles {
 	struct node {

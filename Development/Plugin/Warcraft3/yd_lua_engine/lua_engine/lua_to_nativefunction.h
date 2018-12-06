@@ -6,10 +6,10 @@
 #include <base/hook/assembler/writer.h>
 #include <base/util/noncopyable.h>
 #include <base/util/horrible_cast.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/func_value.h>
-#include <base/warcraft3/jass/hook.h>
-#include <base/warcraft3/war3_searcher.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/func_value.h>
+#include <warcraft3/jass/hook.h>
+#include <warcraft3/war3_searcher.h>
 #include "jassbind.h"
 #include "callback.h"
 #include "libs_runtime.h"

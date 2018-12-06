@@ -1,7 +1,7 @@
 #include "jassbind.h"
 #include "class_real.h"
 #include "callback.h"
-#include <base/warcraft3/hashtable.h>
+#include <warcraft3/hashtable.h>
 #include <cstdint>
 
 namespace base { namespace warcraft3 { namespace lua_engine {

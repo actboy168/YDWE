@@ -6,7 +6,7 @@
 #include "class_handle.h"
 #include <base/util/console.h> 
 #include <bee/utility/unicode.h>
-#include <base/warcraft3/command_line.h>
+#include <warcraft3/command_line.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 

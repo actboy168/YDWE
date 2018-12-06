@@ -2,11 +2,11 @@
 #include "class_array.h"
 #include "libs_runtime.h"
 #include "common.h"
-#include <base/warcraft3/hashtable.h>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/jass/func_value.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/global_variable.h>
+#include <warcraft3/hashtable.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/jass/func_value.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/global_variable.h>
 #include <bee/lua/range.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace globals {

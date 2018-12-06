@@ -1,8 +1,8 @@
 #include <WinSock.h>
 #include <base/hook/iat_manager.h>
 #include <base/util/foreach.h>
-#include <base/warcraft3/version.h>
-#include <base/warcraft3/war3_searcher.h>
+#include <warcraft3/version.h>
+#include <warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
 #include <functional>  
 

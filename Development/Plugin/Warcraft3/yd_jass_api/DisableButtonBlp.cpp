@@ -3,10 +3,10 @@
 #include <base/filesystem.h>
 #include <bee/utility/path_helper.h>
 #include <base/file/stream.h> 
-#include <base/warcraft3/virtual_mpq.h>  
-#include <base/warcraft3/jass/hook.h>	
-#include <base/warcraft3/jass.h>	
-#include <base/warcraft3/event.h>
+#include <warcraft3/virtual_mpq.h>  
+#include <warcraft3/jass/hook.h>	
+#include <warcraft3/jass.h>	
+#include <warcraft3/event.h>
 #include <BlpConv/BlpConv.h>
 #include <algorithm>
 #include <map>

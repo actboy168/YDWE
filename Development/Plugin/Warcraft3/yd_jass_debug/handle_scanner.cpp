@@ -1,7 +1,7 @@
 ﻿#include "handle_scanner.h"
 #include "hashtable.h"
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/version.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/version.h>
 #include <bee/utility/format.h>
 
 #pragma execution_character_set("utf-8")

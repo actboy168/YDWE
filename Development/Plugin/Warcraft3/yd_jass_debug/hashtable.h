@@ -1,7 +1,7 @@
 #pragma once
 
 #include <functional>
-#include <base/warcraft3/jass/opcode.h>
+#include <warcraft3/jass/opcode.h>
 
 namespace ht {
 	void hashtableEachHandle(std::function<void(uint32_t, uint32_t, uint32_t, uint32_t)> cb);

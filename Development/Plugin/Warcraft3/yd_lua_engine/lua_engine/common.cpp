@@ -3,10 +3,10 @@
 #include "class_handle.h"
 #include "class_array.h"
 #include "libs_runtime.h"
-#include <base/warcraft3/hashtable.h>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/trampoline_function.h>
+#include <warcraft3/hashtable.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/trampoline_function.h>
 #include <base/util/singleton.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {

@@ -1,7 +1,7 @@
 #include "class_array.h"
 #include "jassbind.h"
 #include "common.h"
-#include <base/warcraft3/jass/global_variable.h>
+#include <warcraft3/jass/global_variable.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine {
 	namespace globals {

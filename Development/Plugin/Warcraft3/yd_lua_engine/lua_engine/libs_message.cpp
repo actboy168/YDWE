@@ -1,9 +1,9 @@
 #include <lua.hpp>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/version.h>
-#include <base/warcraft3/keyboard_code.h>	
-#include <base/warcraft3/player.h>	  
-#include <base/warcraft3/message_dispatch.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/version.h>
+#include <warcraft3/keyboard_code.h>	
+#include <warcraft3/player.h>	  
+#include <warcraft3/message_dispatch.h>
 #include <base/hook/inline.h>
 #include <base/hook/fp_call.h>
 #include "common.h"

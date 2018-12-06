@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <map>
 #include <base/path/self.h>
-#include <base/warcraft3/virtual_mpq.h>	 
+#include <warcraft3/virtual_mpq.h>	 
 #include <base/util/ini.h>
 #include <base/file/stream.h>
 

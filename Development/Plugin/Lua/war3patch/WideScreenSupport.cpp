@@ -1,5 +1,5 @@
-#include <base/warcraft3/version.h>
-#include <base/warcraft3/war3_searcher.h>
+#include <warcraft3/version.h>
+#include <warcraft3/war3_searcher.h>
 #include <base/hook/inline.h>
 #include <base/hook/fp_call.h>
 #include <stdint.h>

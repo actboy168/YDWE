@@ -107,60 +107,60 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="base\warcraft3\command_line.cpp" />
-    <ClCompile Include="base\warcraft3\jass\opcode.cpp" />
-    <ClCompile Include="base\warcraft3\message_dispatch.cpp" />
-    <ClCompile Include="base\warcraft3\player.cpp" />
-    <ClCompile Include="base\warcraft3\udis86\udis86.c" />
-    <ClCompile Include="base\warcraft3\udis86\udis86_decode.c" />
-    <ClCompile Include="base\warcraft3\udis86\udis86_itab.c" />
-    <ClCompile Include="base\warcraft3\virtual_mpq.cpp" />
+    <ClCompile Include="warcraft3\command_line.cpp" />
+    <ClCompile Include="warcraft3\jass\opcode.cpp" />
+    <ClCompile Include="warcraft3\message_dispatch.cpp" />
+    <ClCompile Include="warcraft3\player.cpp" />
+    <ClCompile Include="warcraft3\udis86\udis86.c" />
+    <ClCompile Include="warcraft3\udis86\udis86_decode.c" />
+    <ClCompile Include="warcraft3\udis86\udis86_itab.c" />
+    <ClCompile Include="warcraft3\virtual_mpq.cpp" />
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="base\warcraft3\detail\convert_real.cpp">
+    <ClCompile Include="warcraft3\detail\convert_real.cpp">
       <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Strict</FloatingPointModel>
       <FloatingPointModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Strict</FloatingPointModel>
     </ClCompile>
-    <ClCompile Include="base\warcraft3\detail\string_hash.cpp" />
-    <ClCompile Include="base\warcraft3\basic_searcher.cpp" />
-    <ClCompile Include="base\warcraft3\event.cpp" />
-    <ClCompile Include="base\warcraft3\hashtable.cpp" />
-    <ClCompile Include="base\warcraft3\jass.cpp" />
-    <ClCompile Include="base\warcraft3\jass\func_value.cpp" />
-    <ClCompile Include="base\warcraft3\jass\global_variable.cpp" />
-    <ClCompile Include="base\warcraft3\jass\hook.cpp" />
-    <ClCompile Include="base\warcraft3\jass\nf_register.cpp" />
-    <ClCompile Include="base\warcraft3\jass\trampoline_function.cpp" />
-    <ClCompile Include="base\warcraft3\jass\trampoline.cpp" />
-    <ClCompile Include="base\warcraft3\war3_searcher.cpp" />
-    <ClCompile Include="base\warcraft3\directory.cpp" />
+    <ClCompile Include="warcraft3\detail\string_hash.cpp" />
+    <ClCompile Include="warcraft3\basic_searcher.cpp" />
+    <ClCompile Include="warcraft3\event.cpp" />
+    <ClCompile Include="warcraft3\hashtable.cpp" />
+    <ClCompile Include="warcraft3\jass.cpp" />
+    <ClCompile Include="warcraft3\jass\func_value.cpp" />
+    <ClCompile Include="warcraft3\jass\global_variable.cpp" />
+    <ClCompile Include="warcraft3\jass\hook.cpp" />
+    <ClCompile Include="warcraft3\jass\nf_register.cpp" />
+    <ClCompile Include="warcraft3\jass\trampoline_function.cpp" />
+    <ClCompile Include="warcraft3\jass\trampoline.cpp" />
+    <ClCompile Include="warcraft3\war3_searcher.cpp" />
+    <ClCompile Include="warcraft3\directory.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="base\warcraft3\command_line.h" />
-    <ClInclude Include="base\warcraft3\config.h" />
-    <ClInclude Include="base\warcraft3\detail\string_hash.h" />
-    <ClInclude Include="base\warcraft3\event.h" />
-    <ClInclude Include="base\warcraft3\hashtable.h" />
-    <ClInclude Include="base\warcraft3\basic_searcher.h" />
-    <ClInclude Include="base\warcraft3\jass.h" />
-    <ClInclude Include="base\warcraft3\jass\func_value.h" />
-    <ClInclude Include="base\warcraft3\jass\global_variable.h" />
-    <ClInclude Include="base\warcraft3\jass\hook.h" />
-    <ClInclude Include="base\warcraft3\jass\nf_register.h" />
-    <ClInclude Include="base\warcraft3\jass\trampoline_function.h" />
-    <ClInclude Include="base\warcraft3\jass\opcode.h" />
-    <ClInclude Include="base\warcraft3\jass\trampoline.h" />
-    <ClInclude Include="base\warcraft3\message_dispatch.h" />
-    <ClInclude Include="base\warcraft3\player.h" />
-    <ClInclude Include="base\warcraft3\udis86\udis86.h" />
-    <ClInclude Include="base\warcraft3\udis86\udis86_decode.h" />
-    <ClInclude Include="base\warcraft3\udis86\udis86_itab.h" />
-    <ClInclude Include="base\warcraft3\udis86\udis86_types.h" />
-    <ClInclude Include="base\warcraft3\udis86\udis86_udint.h" />
-    <ClInclude Include="base\warcraft3\version.h" />
-    <ClInclude Include="base\warcraft3\virtual_mpq.h" />
-    <ClInclude Include="base\warcraft3\war3_searcher.h" />
-    <ClInclude Include="base\warcraft3\directory.h" />
-    <ClInclude Include="base\warcraft3\keyboard_code.h" />
+    <ClInclude Include="warcraft3\command_line.h" />
+    <ClInclude Include="warcraft3\config.h" />
+    <ClInclude Include="warcraft3\detail\string_hash.h" />
+    <ClInclude Include="warcraft3\event.h" />
+    <ClInclude Include="warcraft3\hashtable.h" />
+    <ClInclude Include="warcraft3\basic_searcher.h" />
+    <ClInclude Include="warcraft3\jass.h" />
+    <ClInclude Include="warcraft3\jass\func_value.h" />
+    <ClInclude Include="warcraft3\jass\global_variable.h" />
+    <ClInclude Include="warcraft3\jass\hook.h" />
+    <ClInclude Include="warcraft3\jass\nf_register.h" />
+    <ClInclude Include="warcraft3\jass\trampoline_function.h" />
+    <ClInclude Include="warcraft3\jass\opcode.h" />
+    <ClInclude Include="warcraft3\jass\trampoline.h" />
+    <ClInclude Include="warcraft3\message_dispatch.h" />
+    <ClInclude Include="warcraft3\player.h" />
+    <ClInclude Include="warcraft3\udis86\udis86.h" />
+    <ClInclude Include="warcraft3\udis86\udis86_decode.h" />
+    <ClInclude Include="warcraft3\udis86\udis86_itab.h" />
+    <ClInclude Include="warcraft3\udis86\udis86_types.h" />
+    <ClInclude Include="warcraft3\udis86\udis86_udint.h" />
+    <ClInclude Include="warcraft3\version.h" />
+    <ClInclude Include="warcraft3\virtual_mpq.h" />
+    <ClInclude Include="warcraft3\war3_searcher.h" />
+    <ClInclude Include="warcraft3\directory.h" />
+    <ClInclude Include="warcraft3\keyboard_code.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc" />

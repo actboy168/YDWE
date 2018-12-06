@@ -1,7 +1,7 @@
 #pragma once
 
 #include <lua.hpp>
-#include <base/warcraft3/jass.h>
+#include <warcraft3/jass.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace jreal {
 	template <class T>

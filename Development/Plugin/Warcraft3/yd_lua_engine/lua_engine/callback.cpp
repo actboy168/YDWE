@@ -2,8 +2,8 @@
 #include "jassbind.h"
 #include "libs_runtime.h"
 #include "common.h"
-#include <base/warcraft3/jass/trampoline_function.h>
-#include <base/warcraft3/hashtable.h>
+#include <warcraft3/jass/trampoline_function.h>
+#include <warcraft3/hashtable.h>
 #include <Windows.h>
 #include <cassert>
 

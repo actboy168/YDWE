@@ -1,8 +1,8 @@
 #include "common.h"
-#include <base/warcraft3/hashtable.h>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/jass/func_value.h>
-#include <base/warcraft3/jass.h>
+#include <warcraft3/hashtable.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/jass/func_value.h>
+#include <warcraft3/jass.h>
 #include <bee/lua/range.h>
 #include <base/util/do_once.h>
 

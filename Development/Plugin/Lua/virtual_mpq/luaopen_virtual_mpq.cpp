@@ -4,8 +4,8 @@
 #include "../log/logging.h"
 
 #define YDWE_WAR3_INLINE
-#include <base/warcraft3/virtual_mpq.h>
-#include <base/warcraft3/virtual_mpq.cpp>
+#include <warcraft3/virtual_mpq.h>
+#include <warcraft3/virtual_mpq.cpp>
 
 static bool VirtualMpqWatchCB(const base::lua::object& func, const std::string& filename, const void** pbuf, uint32_t* plen, uint32_t reserve_size)
 {

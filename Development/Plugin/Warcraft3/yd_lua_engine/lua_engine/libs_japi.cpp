@@ -1,10 +1,10 @@
 #include "jassbind.h"
 #include "common.h"
-#include <base/warcraft3/jass/func_value.h>
+#include <warcraft3/jass/func_value.h>
 #include <bee/lua/range.h>
 #include <map>
 #include <string>
-#include <base/warcraft3/jass/hook.h>
+#include <warcraft3/jass/hook.h>
 #include "lua_to_nativefunction.h"
 
 namespace bee::lua {

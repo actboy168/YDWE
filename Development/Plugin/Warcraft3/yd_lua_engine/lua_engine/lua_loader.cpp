@@ -5,16 +5,16 @@
 #include "open_lua_engine.h"
 #include "libs_runtime.h"
 #include <lua.hpp>
-#include <base/warcraft3/event.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/func_value.h>
-#include <base/warcraft3/jass/hook.h>
+#include <warcraft3/event.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/func_value.h>
+#include <warcraft3/jass/hook.h>
 #include <base/util/singleton.h>
 #include <bee/utility/format.h>
 #include <base/hook/fp_call.h>
 #include <string_view>
 #include <base/util/string_algorithm.h>
-#include <base/warcraft3/virtual_mpq.h>
+#include <warcraft3/virtual_mpq.h>
 
 namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
 

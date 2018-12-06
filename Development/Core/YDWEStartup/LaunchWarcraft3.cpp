@@ -11,8 +11,8 @@
 #include <base/hook/replacedll.h>
 
 #define YDWE_WAR3_INLINE
-#include <base/warcraft3/directory.h>
-#include <base/warcraft3/command_line.h>
+#include <warcraft3/directory.h>
+#include <warcraft3/command_line.h>
 
 static std::wstring get_test_map_path()
 {

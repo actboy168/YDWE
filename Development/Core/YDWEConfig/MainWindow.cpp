@@ -13,8 +13,8 @@
 #include <base/i18n/gettext.h>
 
 #define YDWE_WAR3_INLINE
-#include <base/warcraft3/directory.h>
-#include <base/warcraft3/directory.cpp>
+#include <warcraft3/directory.h>
+#include <warcraft3/directory.cpp>
 
 std::wstring CComboUI_GetSelectText(DuiLib::CComboUI* pui)
 {

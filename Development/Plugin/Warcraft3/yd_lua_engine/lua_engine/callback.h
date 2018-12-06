@@ -1,6 +1,6 @@
 #pragma once
 
-#include <base/warcraft3/jass/func_value.h>
+#include <warcraft3/jass/func_value.h>
 #include <lua.hpp>
 #include <cstdint>
 

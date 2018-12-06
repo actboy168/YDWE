@@ -3,8 +3,8 @@
 #pragma warning(pop)
 #include <Windows.h>
 #include <base/hook/patch.h>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/version.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/version.h>
 
 namespace WideScreen
 {

@@ -5,8 +5,8 @@
 #include <base/util/buffer.h>
 #include <bee/utility/unicode.h>
 #include <bee/utility/path_helper.h>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/version.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/version.h>
 #include <deque>	
 #include "game_status.h"
 #include "war3_packet.h"
