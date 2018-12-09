@@ -12,7 +12,7 @@ std::wstring const& FileAssociation::Classes::name() const
 bool FileAssociation::Classes::has(bee::registry::key_w& root, std::wstring const& command) const
 {
 	try {
-		return command == (root / name_ / L"shell\\open\\command")[L""].get<std::wstring>();
+		return command == (root / name_ / L"shell\\open\\command")[L""].get_string();
 	} catch (bee::registry::registry_exception const& ) { }
 
 	return false;
@@ -158,7 +158,7 @@ bool FileAssociation::set_classes()
 bool Registry::has(HKEY hkey, std::wstring const& name, std::wstring const& key)
 {
 	try {
-		return !!bee::registry::key_w(hkey, L"", name)[key].get<uint32_t>();
+		return !!bee::registry::key_w(hkey, L"", name)[key].get_uint32_t();
 	} catch (bee::registry::registry_exception const& ) { }
 
 	return false;

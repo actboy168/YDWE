@@ -123,7 +123,7 @@ namespace warcraft3::lua_engine {
 	static bool allow_local_files()
 	{
 		try {
-			return !!bee::registry::key_w(HKEY_CURRENT_USER, L"", L"Software\\Blizzard Entertainment\\Warcraft III")[L"Allow Local Files"].get<uint32_t>();
+			return !!bee::registry::key_w(HKEY_CURRENT_USER, L"", L"Software\\Blizzard Entertainment\\Warcraft III")[L"Allow Local Files"].get_uint32_t();
 		}
 		catch (bee::registry::registry_exception const&) {}
 		return false;
