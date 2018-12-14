@@ -455,7 +455,7 @@ function mt:create_object(objt, ttype, name)
                 id = tostring(id)
             end
         end
-        if #id == 4 and not id:find('%W') then
+        if type(id) == 'string' and #id == 4 and not id:find('%W') then
             w2lobject = 'static'
             if session.default[ttype][id] or session.slk[ttype][id] then
                 report_error('新建对象的ID重复', ('[%s]'):format(id))
