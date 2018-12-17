@@ -1,7 +1,6 @@
 #include <lua.hpp>
 #include <string.h>	  
 #include <bee/utility/unicode.h>
-#include <base/path/get_path.h>
 #include <bee/utility/path_helper.h>
 #include <base/file/stream.h>
 #include <bee/utility/format.h>
@@ -164,7 +163,7 @@ namespace warcraft3::lua_engine::package {
 	}
 
 	static HMODULE loaddll_frommemory(const char* filename, const char* str, size_t len) {
-		fs::path dir = base::path::temp();
+		fs::path dir = fs::temp_directory_path();
 		fs::path file = dir / filename;
 		FILE* f = fopen(file.string().c_str(), "wb");
 		if (!f) {

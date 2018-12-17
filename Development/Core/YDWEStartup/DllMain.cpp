@@ -7,7 +7,6 @@
 #include <bee/error.h>
 #include <base/file/stream.h>
 #include <base/i18n/gettext.h>
-#include <base/path/get_path.h>
 #include <base/path/ydwe.h>
 #include <bee/utility/unicode.h>
 #include <bee/utility/file_version.h>

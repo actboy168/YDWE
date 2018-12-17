@@ -2,7 +2,6 @@
 #include <Shobjidl.h>
 #include <memory>
 #include <bee/platform/version.h>
-#include <base/path/get_path.h>
 #include <bee/utility/path_helper.h>
 #include <base/com/unique_ptr.h>
 #include <bee/error.h>
@@ -221,7 +220,7 @@ namespace Shortcuts
 			}
 			else if (bee::platform::get_version().ver >= +bee::platform::WinVer::Win7)
 			{
-				fs::path shortcut_path = base::path::temp() / target_path.filename().replace_extension(L".lnk");
+				fs::path shortcut_path = fs::temp_directory_path() / target_path.filename().replace_extension(L".lnk");
 
 				if (!detail::CreateOrUpdateShortcutLink(shortcut_path, target_path))
 				{
