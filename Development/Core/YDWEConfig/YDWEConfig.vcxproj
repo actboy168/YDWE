@@ -77,7 +77,7 @@
     <ClCompile Include="Shortcuts.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\OpenSource\bee.lua\project\bee.vcxproj">
+    <ProjectReference Include="..\..\..\OpenSource\bee.lua\project\msvc\bee.vcxproj">
       <Project>{355c2493-0a78-490b-971a-bbdb0e2819ef}</Project>
     </ProjectReference>
     <ProjectReference Include="..\DuiLib\DuiLib.vcxproj">

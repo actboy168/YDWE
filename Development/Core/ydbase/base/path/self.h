@@ -2,6 +2,7 @@
 
 #include <base/filesystem.h>
 #include <bee/utility/path_helper.h>
+#include <Windows.h>
 
 // http://blogs.msdn.com/oldnewthing/archive/2004/10/25/247180.aspx
 extern "C" IMAGE_DOS_HEADER __ImageBase;

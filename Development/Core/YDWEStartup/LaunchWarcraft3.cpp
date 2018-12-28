@@ -61,8 +61,9 @@ static bool map_convert(const fs::path& ydwe, const fs::path& from, const fs::pa
 	bee::subprocess::spawn spawn;
 	spawn.set_console(bee::subprocess::console::eDisable);
 	spawn.env_set(L"PATH", (ydwe / L"bin").wstring());
+    bee::subprocess::args_t agrs;
 	if (!spawn.exec(
-		{
+		std::vector<std::wstring> {
 			app.wstring(),
 			L"-e",
 			bee::format(L"package.cpath = [[%s]]", (ydwe / L"bin" / L"?.dll").wstring()),
@@ -204,7 +205,7 @@ bool launch_warcraft3(warcraft3::command_line& cmd)
 				fs::path stormdll = ydwe / L"share" / L"patch" / table["War3Patch"]["DirName"] / L"Storm.dll";
 				if (fs::exists(stormdll))
 				{
-					base::hook::replacedll(process, "Storm.dll", stormdll.string().c_str());
+					base::hook::replacedll(process.info(), "Storm.dll", stormdll.string().c_str());
 				}
 			}
 		}
@@ -212,7 +213,7 @@ bool launch_warcraft3(warcraft3::command_line& cmd)
 		}
 		if (fs::exists(inject_dll))
 		{
-			base::hook::injectdll(process, inject_dll.wstring(), std::wstring());	
+			base::hook::injectdll(process.info(), inject_dll.wstring(), std::wstring());
 		}
 		process.resume();
 		return true;

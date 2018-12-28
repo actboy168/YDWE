@@ -88,7 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\OpenSource\bee.lua\project\lua54.vcxproj">
+    <ProjectReference Include="..\..\..\..\OpenSource\bee.lua\project\msvc\lua54.vcxproj">
       <Project>{316b33ed-1056-48b0-abf0-ce3ce55f7a17}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">
