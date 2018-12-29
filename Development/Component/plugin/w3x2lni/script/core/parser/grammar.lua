@@ -136,7 +136,7 @@ local function Whole(word)
     return P(word) * Cut
 end
 
-local Null = Ct(keyvalue('type', 'null') * P'null')
+local Null = Ct(keyvalue('type', 'null') * Whole'null')
 
 local Bool = P{
     'Def',

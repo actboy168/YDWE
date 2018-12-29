@@ -267,14 +267,14 @@ local function to_slk(w2l, slk)
     if w2l.setting.slk_doodad then
         slk_list[#slk_list+1] = 'doodad'
     end
-    for id, obj in pairs(slk.ability) do
-        if obj._keep_obj and not slk.ability[obj._parent]._mark then
-            slk.ability[obj._parent]._mark = obj._mark
-        end
-    end
     for _, type in ipairs(slk_list) do
         local data = slk[type]
         object[type] = {}
+        for id, obj in pairs(data) do
+            if obj._keep_obj and not data[obj._parent]._mark then
+                data[obj._parent]._mark = obj._mark
+            end
+        end
         for _, name in ipairs(w2l.info.slk[type]) do
             w2l:file_save('map', name, w2l:backend_slk(type, name, data, report, object[type], slk))
         end

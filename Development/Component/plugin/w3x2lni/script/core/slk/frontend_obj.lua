@@ -38,14 +38,20 @@ local function read_data(obj)
         value = unpack 'l'
     elseif value_type == 1 or value_type == 2 then
         value = unpack 'f'
-    else
+    elseif value_type == 3 then
         local str = unpack 'z'
         value = w2l:load_wts(wts, str)
+    else
+        -- 什么都不是，扔掉4个字节
+        unpack 'c4'
     end
-    
-    -- 扔掉一个整数
-    unpack 'l'
-    
+
+    -- 检查结束标记，如果不正确，则忽略掉这个数据
+    local mask = unpack 'c4'
+    if mask ~= '\0\0\0\0' and mask ~= obj._id and mask ~= obj._parent then
+        return
+    end
+
     if level == 0 then
         level = 1
     end

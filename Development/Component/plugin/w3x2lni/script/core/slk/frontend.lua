@@ -126,19 +126,34 @@ local function get_displayname(o)
     return (name:sub(1, 100):gsub('\r\n', ' '))
 end
 
-local function mark_keep_obj(type, objs)
-    if type ~= 'ability' then
-        return
-    end
-    for id, obj in pairs(objs) do
-        for k in pairs(obj) do
-            if k:sub(1, 1) ~= '_' then
-                goto CONTINUE
+local function mark_keep_obj_before_merge(type, objs)
+    if type == 'ability' then
+        for id, obj in pairs(objs) do
+            for k in pairs(obj) do
+                if k:sub(1, 1) ~= '_' then
+                    goto CONTINUE
+                end
             end
+            obj._keep_obj = true
+            w2l.messager.report(lang.report.INVALID_OBJECT, 6, lang.report.ABILITY_REMOVED:format(id), lang.report.ABILITY_REMOVED_HINT)
+            ::CONTINUE::
         end
-        obj._keep_obj = true
-        w2l.messager.report(lang.report.INVALID_OBJECT, 6, lang.report.ABILITY_REMOVED:format(id), lang.report.ABILITY_REMOVED_HINT)
-        ::CONTINUE::
+    end
+end
+
+local function mark_keep_obj_after_merge(type, objs)
+    local used = {}
+    for id, obj in pairs(objs) do
+        local lid = id:lower()
+        if used[lid] then
+            obj._keep_obj = true
+            objs[used[lid]]._keep_obj = true
+            local name1 = get_displayname(obj)
+            local name2 = get_displayname(objs[used[lid]])
+            w2l.messager.report(lang.report.WARN, 2, (lang.report.OBJECT_ID_CONFLICT):format(id), ('`%s`[%s] --> `%s`[%s]'):format(id, name1, used[lid], name2))
+        else
+            used[lid] = id
+        end
     end
 end
 
@@ -161,9 +176,12 @@ local function update_then_merge(w2l, slks, objs, lnis, slk)
             end
         end
         if w2l.setting.mode == 'slk' then
-            mark_keep_obj(type, obj)
+            mark_keep_obj_before_merge(type, obj)
         end
         slk[type] = w2l:frontend_merge(type, data, obj)
+        if w2l.setting.mode == 'slk' then
+            mark_keep_obj_after_merge(type, slk[type])
+        end
         if report then
             for i = 1, 10 do
                 local data = report[i]
