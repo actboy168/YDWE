@@ -795,10 +795,12 @@ return function (w2l_, read_only, safe_mode)
     slk_proxy = {}
     for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
         slk_proxy[name] = session:create_proxy(name)
-        session.dynamics[name] = {}
-        session:mark_obj(name, session.slk[name])
     end
     if not read_only then
+        for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
+            session.dynamics[name] = {}
+            session:mark_obj(name, session.slk[name])
+        end
         function slk_proxy:refresh()
             return session:refresh()
         end
