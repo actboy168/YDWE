@@ -213,6 +213,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger
 			dbg:config [[
 				{ "sourceCoding": "utf8" }
 			]]
+			dbg:start()
 			return dbg
 		)", 2)) {
 			return 0;
