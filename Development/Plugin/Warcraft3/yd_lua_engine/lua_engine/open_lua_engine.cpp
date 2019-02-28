@@ -5,7 +5,7 @@
 #include "class_array.h"
 #include "class_handle.h"
 #include <base/util/console.h> 
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <warcraft3/command_line.h>
 
 namespace warcraft3::lua_engine {

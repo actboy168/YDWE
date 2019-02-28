@@ -2,7 +2,7 @@
 #include <lua.hpp>
 #pragma warning(pop)
 #include <base/i18n/gettext.h>	
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 
 namespace i18n {
 	static std::wstring luaL_checkwstring(lua_State* L, int idx)

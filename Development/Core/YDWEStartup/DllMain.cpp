@@ -8,8 +8,8 @@
 #include <base/file/stream.h>
 #include <base/i18n/gettext.h>
 #include <base/path/ydwe.h>
-#include <bee/utility/unicode.h>
-#include <bee/utility/file_version.h>
+#include <bee/utility/unicode_win.h>
+#include <bee/utility/module_version_win.h>
 #include <bee/utility/format.h>	 
 #include <base/util/ini.h>
 #include <bee/subprocess.h>
@@ -79,7 +79,7 @@ static void ShowSplash(fs::path const& ydwe_path)
 	}
 
 	try {
-        bee::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
+        bee::simple_module_version fv((ydwe_path / "YDWE.exe").c_str());
 		CSplash display;
 		display.SetBitmap(bmp.wstring().c_str());
 		display.SetTransparentColor(RGB(128, 128, 128));

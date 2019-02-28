@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include <locale>
 #include <array>
-#include <bee/utility/dynarray.h>
+#include <bee/nonstd/dynarray.h>
 #include "LuaEngine.h"
 
 lua_State* L = nullptr;

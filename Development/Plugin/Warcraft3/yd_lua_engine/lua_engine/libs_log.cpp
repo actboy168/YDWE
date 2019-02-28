@@ -3,7 +3,7 @@
 #include <time.h>
 #include <assert.h>
 #include <base/filesystem.h>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 
 #ifdef WIN32
 #	pragma warning(disable:4996)

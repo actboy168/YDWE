@@ -5,7 +5,7 @@
 #include <functional>
 #include <regex>
 #include <bee/utility/path_helper.h>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <base/hook/inline.h>
 #include <base/hook/iat.h>
 #include <base/hook/fp_call.h>	  

@@ -4,7 +4,7 @@
 #include <warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
 #include <bee/registry/key.h>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <bee/utility/path_helper.h>
 #include <set>
 #include <Windows.h>

@@ -3,7 +3,7 @@
 #include <base/hook/fp_call.h>
 #include <base/hook/iat.h>
 #include <base/util/buffer.h>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <bee/utility/path_helper.h>
 #include <warcraft3/war3_searcher.h>
 #include <warcraft3/version.h>

@@ -2,7 +2,7 @@
 #include <lua.hpp>
 #pragma warning(pop)
 #include <filesystem>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <windows.h>
 #include "clr_interop.h"
 

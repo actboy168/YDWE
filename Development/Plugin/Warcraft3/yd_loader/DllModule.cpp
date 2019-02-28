@@ -4,7 +4,7 @@
 #include <base/hook/iat.h>
 #include <base/hook/dyn_iat.h>
 #include <bee/utility/path_helper.h>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <warcraft3/command_line.h>
 #include <base/win/pe_reader.h>
 #include <base/util/ini.h>

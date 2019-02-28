@@ -1,6 +1,6 @@
 #include <lua.hpp>
 #include <string.h>	  
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <bee/utility/path_helper.h>
 #include <base/file/stream.h>
 #include <bee/utility/format.h>

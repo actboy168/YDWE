@@ -1,6 +1,6 @@
 #include <base/file/stream.h>
 #include <bee/error/exception.h>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 
 namespace base { namespace file {
 

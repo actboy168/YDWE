@@ -7,8 +7,8 @@
 
 #define BEE_INLINE
 #define BASE_UNICODE_DISABLE_ANSI
-#include <bee/utility/unicode.h>
-#include <bee/utility/unicode.cpp>
+#include <bee/utility/unicode_win.h>
+#include <bee/utility/unicode_win.cpp>
 
 #define __STORMLIB_SELF__
 #include <StormLib.h>

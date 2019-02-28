@@ -1,7 +1,7 @@
 #include <windows.h>
 #include "MainWindow.h"
 #include <base/com/guard.h>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <base/i18n/gettext.h>
 #include <base/path/ydwe.h>
 

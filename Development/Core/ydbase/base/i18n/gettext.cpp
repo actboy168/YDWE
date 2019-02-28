@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 #include <bee/utility/format.h>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <base/filesystem.h>
 #include <Windows.h>
 

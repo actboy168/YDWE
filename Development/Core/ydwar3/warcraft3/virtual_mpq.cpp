@@ -5,7 +5,7 @@
 #include <base/util/foreach.h>	  	  		
 #include <base/filesystem.h>   
 #include <optional>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <cstdint>
 #include <array>   
 #include <map>

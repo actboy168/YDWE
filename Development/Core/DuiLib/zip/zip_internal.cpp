@@ -2,7 +2,7 @@
 
 #include <algorithm>			
 #include <base/filesystem.h>								 
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 
 #include <unzip.h>
 #include <zip.h>

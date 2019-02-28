@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <base/path/ydwe.h>
 #include <base/util/console.h>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 
 namespace warcraft3::lua_engine::slk {
 

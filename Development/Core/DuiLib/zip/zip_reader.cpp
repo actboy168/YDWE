@@ -3,7 +3,7 @@
 
 #include <fstream>
 #include <bee/error.h>   
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <unzip.h>
 #include <iowin32.h>
 

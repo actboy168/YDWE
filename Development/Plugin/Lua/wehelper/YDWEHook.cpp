@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <functional>
 #include <regex>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 #include <base/util/is_utf8.h>
 #include <base/hook/inline.h>
 #include <base/hook/replace_pointer.h>

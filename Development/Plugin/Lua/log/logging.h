@@ -2,7 +2,7 @@
 
 #include "logging_backend.h"
 #include "logging_logger.h"
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 
 struct lua_State;
 

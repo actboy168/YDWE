@@ -1,7 +1,7 @@
 #include <lua.hpp>
 #include <base/hook/inline.h>
 #include <base/hook/iat.h>
-#include <bee/utility/unicode.h>	
+#include <bee/utility/unicode_win.h>	
 
 static std::wstring lua_towstring(lua_State* L, int idx)
 {
