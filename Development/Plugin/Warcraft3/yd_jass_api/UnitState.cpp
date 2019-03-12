@@ -824,10 +824,10 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			type = (1 << type) & 0xFFFFFF;
 			if (enable) {
-				*(uint32_t *)(obj + 0x34) &= type;
+				*(uint32_t *)(obj + 0x34) |= type;
 			}
 			else {
-				*(uint32_t *)(obj + 0x34) |= ~type;
+				*(uint32_t *)(obj + 0x34) &= ~type;
 			}
 		}
 	}
