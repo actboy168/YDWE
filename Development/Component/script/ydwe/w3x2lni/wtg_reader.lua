@@ -485,8 +485,11 @@ local function fill_fix()
     end)
 end
 
-local function remove_event_returns()
+local function remove_event_and_condition_returns()
     for _, ui in pairs(fix.ui.event) do
+        ui.returns = nil
+    end
+    for _, ui in pairs(fix.ui.condition) do
         ui.returns = nil
     end
 end
@@ -549,7 +552,7 @@ return function (wtg_, state_)
     read_triggers()
     
     fill_fix()
-    remove_event_returns()
+    remove_event_and_condition_returns()
     
     return chunk, fix
 end
