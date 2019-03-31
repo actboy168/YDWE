@@ -84,7 +84,7 @@ end
 
 local function copy_obj(a, b)
     local c = {}
-    local lv = b._max_level or a._max_level
+    local lv = tonumber(b._max_level or a._max_level)
     if b._code and a._code ~= b._code then
         w2l.messager.report(lang.report.INVALID_OBJECT_DATA, 6, lang.report.ABILITY_CODE_ERROR:format(b._id, b._code), lang.report.DEFAULT_IS:format(a._code))
         return nil

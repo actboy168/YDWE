@@ -19,6 +19,7 @@ ffi.cdef[[
     
     bool SFileCreateArchive2(const wchar_t* szMpqName, struct SFILE_CREATE_MPQ* pCreateInfo, uint32_t* phMpq);
     bool SFileOpenArchive(const wchar_t* szMpqName, unsigned long dwPriority, unsigned long dwFlags, uint32_t* phMpq);
+    bool SFileCompactArchive(uint32_t hMpq, const wchar_t* szListFile, bool bReserved);
     bool SFileCloseArchive(uint32_t hMpq);
     bool SFileAddFileEx(uint32_t hMpq, const wchar_t* szFileName, const char* szArchivedName, unsigned long dwFlags, unsigned long dwCompression, unsigned long dwCompressionNext);
     bool SFileExtractFile(uint32_t hMpq, const char* szToExtract, const wchar_t* szExtracted, unsigned long dwSearchScope);
@@ -62,7 +63,7 @@ ffi.cdef[[
 local SFileMpqNumberOfFiles = 36
 
 loaddll 'stormlib'
-require 'filesystem'
+fs = require 'bee.filesystem'
 local uni = require 'ffi.unicode'
 local stormlib = ffi.load('stormlib')
 
@@ -137,6 +138,7 @@ function archive:close()
     if self.handle == 0 then
         return
     end
+    stormlib.SFileCompactArchive(self.handle, nil, false)
     stormlib.SFileCloseArchive(self.handle)
     self.handle = 0
 end

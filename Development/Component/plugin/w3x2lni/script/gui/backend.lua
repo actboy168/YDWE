@@ -1,4 +1,4 @@
-local process = require 'process'
+local process = require 'bee.subprocess'
 local proto = require 'share.protocol'
 local lang = require 'share.lang'
 
@@ -26,8 +26,13 @@ function mt:update_out()
     if not self.out_rd then
         return
     end
-    local n = self.process:peek(self.out_rd)
-    if n == 0 then
+    local n = process.peek(self.out_rd)
+    if n == nil then
+        self.out_rd:close()
+        self.out_rd = nil
+        return
+    end
+    if n == 0 or n == nil then
         return
     end
     local r = self.out_rd:read(n)
@@ -43,7 +48,12 @@ function mt:update_err()
     if not self.err_rd then
         return
     end
-    local n = self.process:peek(self.err_rd)
+    local n = process.peek(self.err_rd)
+    if n == nil then
+        self.err_rd:close()
+        self.err_rd = nil
+        return
+    end
     if n == 0 then
         return
     end
@@ -61,9 +71,11 @@ function mt:update_pipe()
     self:update_err()
     if not self.process:is_running() then
         self:unpack_out()
-        self.error = self.error .. self.err_rd:read 'a'
+        if self.err_rd then
+            self.error = self.error .. self.err_rd:read 'a'
+        end
         self.exit_code = self.process:wait()
-        self.process:close()
+        self.process:kill()
         return true
     end
     return false
@@ -142,18 +154,25 @@ function backend:clean()
 end
 
 function backend:open(entry, commandline)
-    local p = process()
-    local stdout = p:std_output()
-    local stderr = p:std_error()
-    p:set_console('disable')
-    if not p:create(self.application, ('"%s" -E -e "package.cpath=[[%s]]" "%s" %s'):format(self.application:string(), package.cpath, entry, commandline), self.currentdir) then
+    local p = process.spawn {
+        self.application:string(),
+        '-E',
+        '-e', ('package.cpath=[[%s]]'):format(package.cpath),
+        entry,
+        commandline,
+        console = 'disable',
+        stdout = true,
+        stderr = true,
+        cwd = self.currentdir:string(),
+    }
+    if not p then
         return
     end
     self:clean()
     return setmetatable({
         process = p,
-        out_rd = stdout, 
-        err_rd = stderr,
+        out_rd = p.stdout,
+        err_rd = p.stderr,
         output = {},
         error = '',
         proto_s = {},

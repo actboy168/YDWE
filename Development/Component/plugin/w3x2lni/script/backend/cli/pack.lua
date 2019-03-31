@@ -82,6 +82,7 @@ return function()
 
     local input = absolute_path(command[2])
     local output = absolute_path(command[3])
+    local as_mpq = command['mpq']
 
     if not input then
         w2l:failed(lang.script.OPEN_FAILED_NO_EXISTS)
@@ -121,7 +122,10 @@ return function()
 
     messager.text(lang.script.SAVE_FILE)
     w2l.progress:start(1.0)
-    builder.save(w2l, w3i, w3f, input_ar, output_ar)
+    builder.save(w2l, w3i, w3f, input_ar, output_ar, {
+        clear_time = true,
+        as_mpq = as_mpq,
+    })
     w2l.progress:finish()
     
     local clock = os.clock()

@@ -1,3 +1,4 @@
+local convertreal = require 'convertreal'
 local w2l
 
 local table_concat = table.concat
@@ -7,12 +8,34 @@ local pairs = pairs
 
 local metadata
 
+local function to_type(tp, value)
+    if tp == 0 then
+        if not value or value == 0 then
+            return nil
+        end
+        return value
+    elseif tp == 1 or tp == 2 then
+        if not value then
+            return nil
+        end
+        if type(value) ~= 'string' then
+            value = convertreal(value)
+        end
+        if value:find('.', 1, true) then
+            value = value:gsub('0+$', '')
+        end
+        return value:gsub('%.$', '')
+    elseif tp == 3 then
+        return value
+    end
+end
+
 local function add_data(name, lkey, meta, obj, data)
     if not obj[lkey] then
         return
     end
     local key = meta.field
-    data[key] = obj[lkey]
+    data[key] = to_type(meta.type, obj[lkey])
 end
 
 local function add_obj(name, obj, data)

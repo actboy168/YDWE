@@ -1,4 +1,4 @@
-local lpeg = require 'lpeg'
+local lpeg = require 'lpeglabel'
 local lang = require 'lang'
 
 local function search_string(buf)
@@ -57,7 +57,7 @@ return function (w2l, buf)
     if not buf then
         return tbl
     end
-    local suc, result = pcall(search_string, buf)
+    local suc, result = xpcall(search_string, debug.traceback, buf)
     if not suc then
         w2l.messager.report(lang.report.ERROR, 1, lang.report.WTS_SYNTAX_ERROR, result:match '[\r\n]+(.+)$')
         return tbl

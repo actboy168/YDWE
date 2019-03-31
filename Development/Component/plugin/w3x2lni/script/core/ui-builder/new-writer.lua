@@ -45,7 +45,7 @@ function mt:stringify_ui(t)
                 table.insert(str, ('script_name = %s'):format(u.script_name))
             end
             table.insert(str, ('category = %s'):format(u.category))
-            if u.use_in_event and u.use_in_event ~= '1' then
+            if u.use_in_event and u.use_in_event ~= 1 then
                 table.insert(str, ('use_in_event = %s'):format(u.use_in_event))
             end
             if u.returns then

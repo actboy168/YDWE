@@ -49,7 +49,7 @@
 [REMOVE_WE_ONLY_HINT]
 编辑器和本工具都将无法打开此地图
 [SLK_DOODAD]
-优化装饰物
+优化装饰物与可破坏物
 [SLK_DOODAD_HINT]
 地形变化不会卡顿，但之后需要重启魔兽
 [EXPORT_LUA]
@@ -64,6 +64,10 @@
 混淆脚本
 [CONFUSION_HINT]
 重命名变量与函数
+[EXTRA_CHECK]
+额外检查
+[EXTRA_CHECK_HINT]
+检查地图数据的合理性
 [REPORT]
 详情
 [PROCESSING]

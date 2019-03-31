@@ -23,8 +23,7 @@ function messager.wait()
     proto.send('wait', '""')
 end
 
-local ext = require 'process.ext'
-ext.set_filemode(io.stdout, 'b')
+(require 'ffi.filemode')(io.stdout, 'b')
 io.stdout:setvbuf 'no'
 
 return messager
