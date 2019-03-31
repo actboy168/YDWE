@@ -2,14 +2,14 @@ local w2l
 
 local abilitybuffdata = {
     {'alias',   'code', 'comments', 'isEffect', 'version', 'useInEditor', 'sort', 'race' , 'InBeta'},
-    ['Bdbl'] = {'Bdbl', 'YDWE'    , '0'       , '1'      , '1'          , 'hero', 'human', '1'     },
-    ['Bdbm'] = {'Bdbm', 'YDWE'    , '0'       , '1'      , '1'          , 'hero', 'human', '1'     },
-    ['BHtb'] = {'BHtb', 'YDWE'    , '0'       , '1'      , '1'          , 'unit', 'other', '1'     },
-    ['Bsta'] = {'Bsta', 'YDWE'    , '0'       , '1'      , '1'          , 'unit', 'orc'  , '1'     },
-    ['Bdbb'] = {'Bdbb', 'YDWE'    , '0'       , '1'      , '1'          , 'hero', 'human', '1'     },
-    ['BIpb'] = {'BIpb', 'YDWE'    , '0'       , '1'      , '1'          , 'item', 'other', '1'     },
-    ['BIpd'] = {'BIpd', 'YDWE'    , '0'       , '1'      , '1'          , 'item', 'other', '1'     },
-    ['Btlf'] = {'Btlf', 'YDWE'    , '0'       , '1'      , '1'          , 'unit', 'other', '1'     },
+    ['Bdbl'] = {'Bdbl', 'YDWE'    ,  0        ,  1       ,  1           , 'hero', 'human',  1      },
+    ['Bdbm'] = {'Bdbm', 'YDWE'    ,  0        ,  1       ,  1           , 'hero', 'human',  1      },
+    ['BHtb'] = {'BHtb', 'YDWE'    ,  0        ,  1       ,  1           , 'unit', 'other',  1      },
+    ['Bsta'] = {'Bsta', 'YDWE'    ,  0        ,  1       ,  1           , 'unit', 'orc'  ,  1      },
+    ['Bdbb'] = {'Bdbb', 'YDWE'    ,  0        ,  1       ,  1           , 'hero', 'human',  1      },
+    ['BIpb'] = {'BIpb', 'YDWE'    ,  0        ,  1       ,  1           , 'item', 'other',  1      },
+    ['BIpd'] = {'BIpd', 'YDWE'    ,  0        ,  1       ,  1           , 'item', 'other',  1      },
+    ['Btlf'] = {'Btlf', 'YDWE'    ,  0        ,  1       ,  1           , 'unit', 'other',  1      },
 }
 
 local function merge_slk(t, fix)

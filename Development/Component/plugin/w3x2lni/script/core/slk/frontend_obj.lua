@@ -35,8 +35,8 @@ local function read_data(obj)
     if has_level then
         local this_level = unpack 'l'
         level = this_level
-        -- 扔掉一个整数
-        unpack 'l'
+        -- 扔掉4个字节
+        unpack 'c4'
     end
 
     local value
@@ -44,14 +44,19 @@ local function read_data(obj)
         value = unpack 'l'
     elseif value_type == 1 or value_type == 2 then
         value = bin2float()
-    else
+    elseif value_type == 3 then
         local str = unpack 'z'
         value = w2l:load_wts(wts, str)
     end
-    
-    -- 扔掉一个整数
-    unpack 'l'
-    
+
+    -- 扔掉4个字节
+    unpack 'c4'
+
+    -- 没有取到值说明是垃圾，忽略掉
+    if not value then
+        return
+    end
+
     if level == 0 then
         level = 1
     end

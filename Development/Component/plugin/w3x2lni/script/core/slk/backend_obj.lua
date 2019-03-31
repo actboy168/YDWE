@@ -251,8 +251,13 @@ local function sort_chunk(chunk, remove_unuse_object)
             end
         end
     end
-    table_sort(origin)
-    table_sort(user)
+    -- 大写ID的对象必须在小写ID的对象前面，否则同ID单位时，英雄的数据会出错
+    table_sort(origin, function (id1, id2)
+        return id1 > id2
+    end)
+    table_sort(user, function (id1, id2)
+        return id1 > id2
+    end)
     return origin, user
 end
 

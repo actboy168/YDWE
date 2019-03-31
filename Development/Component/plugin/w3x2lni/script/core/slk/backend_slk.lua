@@ -1,5 +1,6 @@
 local w3xparser = require 'w3xparser'
 local lang = require 'lang'
+local convertreal = require 'convertreal'
 
 local table_concat = table.concat
 local ipairs = ipairs
@@ -243,14 +244,7 @@ local function to_type(tp, value)
             return nil
         end
         if type(value) == 'number' then
-            value = tostring(value)
-        end
-        if value:find('.', 1, true) then
-            value = value:gsub('0+$', '')
-        end
-        value = value:gsub('%.$', '')
-        if value == '-' or value == '' or value == '0' then
-            return nil
+            return convertreal(value)
         end
         return value
     elseif tp == 3 then
@@ -339,6 +333,10 @@ local function load_obj(id, obj, slk_name)
     if remove_unuse_object and not obj._mark then
         return nil
     end
+    if obj._keep_obj then
+        object[id] = obj
+        return nil
+    end
     local obj_data = object[id]
     if not obj_data then
         obj_data = {}
@@ -349,9 +347,6 @@ local function load_obj(id, obj, slk_name)
         obj_data._mark   = obj._mark
         obj_data._parent = obj._parent
         obj_data._keep_obj = obj._keep_obj
-    end
-    if obj._keep_obj then
-        return nil
     end
     if not obj._slk_id and not is_usable_string(obj._id) then
         obj._slk_id = find_unused_id()

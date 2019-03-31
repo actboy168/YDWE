@@ -154,3 +154,5 @@ w3i里的文本长度超过1023字符
 %s.%s 的数据版本不匹配
 [NO_LNI]
 没有找到所在的Lni目录
+[NEED_LIST_FILE]
+需要完整的(listfile)

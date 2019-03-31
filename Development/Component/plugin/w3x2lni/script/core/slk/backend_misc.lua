@@ -1,3 +1,4 @@
+local convertreal = require 'convertreal'
 local w2l
 
 local table_concat = table.concat
@@ -18,7 +19,7 @@ local function to_type(tp, value)
             return nil
         end
         if type(value) ~= 'string' then
-            value = tostring(n)
+            value = convertreal(value)
         end
         if value:find('.', 1, true) then
             value = value:gsub('0+$', '')

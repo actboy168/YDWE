@@ -26,23 +26,29 @@ function mt:close()
     return self.handle:close()
 end
 
-function mt:save(w3i, w3f, w2l)
+function mt:save(w3i, w3f, w2l, args)
     if self:is_readonly() then
         return false
     end
+    args = args or {}
+    args.encrypt = w2l.setting.remove_we_only
     local progress = w2l.progress
     local max = 0
     for _ in pairs(self) do
         max = max + 1
     end
-    local suc, res = self.handle:save(self.path, w3i, w3f, max, w2l.setting.remove_we_only)
+    local suc, res = self.handle:save(self.path, w3i, w3f, max, args)
     if not suc then
         return false, res
     end
     local clock = os_clock()
     local count = 0
     for name, buf in pairs(self) do
-        self.handle:save_file(name, buf)
+        if args.clear_time then
+            self.handle:save_file(name, buf, 0)
+        else
+            self.handle:save_file(name, buf)
+        end
         count = count + 1
         if os_clock() - clock > 0.1 then
             clock = os_clock()
@@ -130,12 +136,20 @@ end
 function mt:__pairs()
     local case = self.case
     local tbl = {}
+    local keys = {}
     for k, v in pairs(self.cache) do
         if v then
             tbl[case[k]] = v
+            keys[#keys+1] = case[k]
         end
     end
-    return next, tbl
+    table.sort(keys)
+    local i = 0
+    return function ()
+        i = i + 1
+        local k = keys[i]
+        return k, tbl[k]
+    end
 end
 
 return function (pathorhandle, tp)

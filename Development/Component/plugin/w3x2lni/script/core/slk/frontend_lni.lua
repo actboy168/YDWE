@@ -23,7 +23,7 @@ end
 return function (w2l_, type, buf, filename)
     w2l = w2l_
     default = w2l:get_default()[type]
-    local tbl = lni.no_convert(buf, filename)
+    local tbl = lni(buf, filename)
     local metadata = w2l:metadata()[type]
     local level_key = w2l.info.key.max_level[type]
     if level_key then

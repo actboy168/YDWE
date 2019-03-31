@@ -18,6 +18,9 @@ return function (t, data)
     if t.align then
         label:setalign(t.align)
     end
+    if t.valign then
+        label:setvalign(t.valign)
+    end
     local bind = {}
     if t.bind and t.bind.text_color then
         bind.text_color = data:bind(t.bind.text_color, function()

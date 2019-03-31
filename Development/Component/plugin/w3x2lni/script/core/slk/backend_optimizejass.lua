@@ -30,6 +30,14 @@ local function count_report(report)
     return n
 end
 
+local function format_error(err)
+    return lang.parser.ERROR_POS:format(
+        err.err,
+        err.file, err.line,
+        err.code
+    )
+end
+
 return function (w2l)
     local common   = w2l:file_load('map', 'common.j')   or w2l:file_load('scripts', 'common.j')   or w2l:mpq_load('scripts\\common.j')
     local blizzard = w2l:file_load('map', 'blizzard.j') or w2l:file_load('scripts', 'blizzard.j') or w2l:mpq_load('scripts\\blizzard.j')
@@ -46,17 +54,27 @@ return function (w2l)
         w2l.messager.report(lang.report.OPTIMIZE_JASS, 8, table.concat(t, '\t'))
     end
     local buf, report
+    local option = {}
     local suc, err = xpcall(function ()
-        local ast
-        ast = parser(common,   'common.j',   ast, messager)
-        ast = parser(blizzard, 'blizzard.j', ast, messager)
-        ast = parser(war3map,  'war3map.j',  ast, messager)
-        buf, report = optimizer(ast, w2l.setting, messager)
+        parser.parser(common,   'common.j',   option)
+        parser.parser(blizzard, 'blizzard.j', option)
+        local ast, _, errors = parser.parser(war3map, 'war3map.j', option)
+        if errors then
+            for _, err in ipairs(errors) do
+                if err.level == 'error' then
+                    w2l.messager.report(lang.report.ERROR, 1, lang.report.SYNTAX_ERROR, format_error(err))
+                elseif err.level == 'warning' then
+                    w2l.messager.report(lang.report.WARN, 2, lang.report.SYNTAX_ERROR, format_error(err))
+                end
+            end
+        end
+        buf, report = optimizer(ast, option.state, w2l.setting, messager)
     end, debug.traceback)
     if not suc then
-        w2l.messager.report(lang.report.ERROR, 1, lang.report.SYNTAX_ERROR, err:match('%.lua:%d+: (.*)'))
+        w2l.messager.report(lang.report.ERROR, 1, lang.report.SYNTAX_ERROR, err)
         return
     end
+
 
     if w2l:file_load('map', 'war3map.j') then
         w2l:file_save('map', 'war3map.j', buf)

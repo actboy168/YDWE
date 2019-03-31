@@ -1,22 +1,35 @@
 local re = require 'parser.relabel'
 local m = require 'lpeglabel'
 local lang = require 'lang'
-
-local tonumber = tonumber
-local tointeger = math.tointeger
-local stringByte = string.byte
-local stringUnpack = string.unpack
+local calcline = require 'parser.calcline'
 
 local scriptBuf = ''
 local compiled = {}
-local defs = {}
+local parser
 local file
-local linecount
-local comments
+
+local defs = setmetatable({}, {__index = function (self, key)
+    self[key] = function (...)
+        if parser[key] then
+            return parser[key](...)
+        end
+    end
+    return self[key]
+end})
 
 defs.nl = (m.P'\r\n' + m.S'\r\n') / function ()
-    linecount = linecount + 1
+    if parser.nl then
+        return parser.nl()
+    end
 end
+function defs.Nil()
+    return nil
+end
+function defs.Fail()
+    return false
+end
+defs.True = m.Cc(true)
+defs.False = m.Cc(false)
 defs.s  = m.S' \t' + m.P'\xEF\xBB\xBF'
 defs.S  = - defs.s
 defs.eb = '\b'
@@ -24,80 +37,7 @@ defs.et = '\t'
 defs.er = '\r'
 defs.en = '\n'
 defs.ef = '\f'
-function defs.File()
-    return file
-end
-function defs.Line()
-    return linecount
-end
-function defs.Comment(str)
-    comments[linecount] = str
-end
-defs.True = m.Cc(true)
-defs.False = m.Cc(false)
-function defs.Integer10(neg, str)
-    local int = tointeger(str)
-    if neg == '' then
-        return int
-    else
-        return - int
-    end
-end
-function defs.Integer16(neg, str)
-    local int = tointeger('0x'..str)
-    if neg == '' then
-        return int
-    else
-        return - int
-    end
-end
-function defs.Integer256(neg, str)
-    local int
-    if #str == 1 then
-        int = stringByte(str)
-    elseif #str == 4 then
-        int = stringUnpack('>I4', str)
-    end
-    if neg == '' then
-        return int
-    else
-        return - int
-    end
-end
-function defs.Binary(...)
-    local e1, op = ...
-    if not op then
-        return e1
-    end
-    local args = {...}
-    local e1 = args[1]
-    for i = 2, #args, 2 do
-        op, e2 = args[i], args[i+1]
-        e1 = {
-            type = op,
-            [1]  = e1,
-            [2]  = e2,
-        }
-    end
-    return e1
-end
-function defs.Unary(...)
-    local e1, op = ...
-    if not op then
-        return e1
-    end
-    local args = {...}
-    local e1 = args[#args]
-    for i = #args - 1, 1, -1 do
-        op = args[i]
-        e1 = {
-            type = op,
-            [1]  = e1,
-        }
-    end
-    return e1
-end
-
+defs.ExChar = m.R'\0\8' + m.R'\11\12' + m.R'\14\31' + m.R'\127\255'
 local eof = re.compile '!. / %{SYNTAX_ERROR}'
 
 local function grammar(tag)
@@ -112,15 +52,18 @@ Comment     <-  '//' [^%nl]* -> Comment
 ]]
 
 grammar 'Sp' [[
-Sp          <-  (Comment / %s)*
+Sp          <-  (Comment / %s)* ExChar?
+ExChar      <-  &%ExChar %{EXCEPTION_CHAR}
 ]]
 
 grammar 'Nl' [[
 Nl          <-  (Sp %nl)+
+Ignore      <-  [^%nl]*
 ]]
 
 grammar 'Common' [[
 Cut         <-  ![a-zA-Z0-9_]
+Ed          <-  Sp (&Nl / !.)
 COMMA       <-  Sp ','
 ASSIGN      <-  Sp '='
 GLOBALS     <-  Sp 'globals' Cut
@@ -137,9 +80,9 @@ FUNCTION    <-  Sp 'function' Cut
 ENDFUNCTION <-  Sp 'endfunction' Cut
 NOTHING     <-  Sp 'nothing' Cut
 TAKES       <-  Sp 'takes' Cut
-RETURNS     <-  Sp 'returns' Cut
-CALL        <-  Sp 'call' Cut
-SET         <-  Sp 'set' Cut
+RETURNS     <-  Sp ('returns' / 'return' -> returnAsReturns) Cut
+CALL        <-  Sp ('call' / 'set' -> setAsCall) Cut
+SET         <-  Sp ('set' / 'call' -> callAsSet) Cut
 RETURN      <-  Sp 'return' Cut
 IF          <-  Sp 'if' Cut
 THEN        <-  Sp 'then' Cut
@@ -167,19 +110,21 @@ EChar       <-  'b' -> eb
 ]]
 
 grammar 'Value' [[
-Value       <-  {| NULL / Boolean / String / Real / Integer |}
+Value       <-  NULL / Boolean / String / Real / Integer
 NULL        <-  Sp 'null' Cut
-                {:type: '' -> 'null' :}
+            ->  NULL
 
-Boolean     <-  {:value: TRUE %True / FALSE %False :}
-                {:type: '' -> 'boolean' :}
+Boolean     <-  TRUE  -> TRUE
+            /   FALSE -> FALSE
 
-String      <-  {:value: Sp '"' {(Esc / [^"])*} '"' :}
-                {:type: '' -> 'string' :}
+String      <-  Sp '"' {(Esc / %nl / [^"])*} -> String '"'
 
-Real        <-  {:value: Sp {'-'? Sp ('.' [0-9]+^ERROR_REAL / [0-9]+ '.' [0-9]*)} :}
-                {:type: '' -> 'real' :}
+Real        <-  Sp ('-'? Sp ('.' [0-9]+^ERROR_REAL / [0-9]+ '.' [0-9]*))
+            ->  Real
 
+Integer     <-  Integer16 / Integer8 / Integer10 / Integer256
+Integer8    <-  Sp ({'-'?} Sp {'0' [0-7]*})
+            ->  Integer8
 Integer10   <-  Sp ({'-'?} Sp {'0' / ([1-9] [0-9]*)})
             ->  Integer10
 Integer16   <-  Sp ({'-'?} Sp ('$' / '0x' / '0X') {Char16})
@@ -190,12 +135,8 @@ Integer256  <-  Sp ({'-'?} Sp C256)
 C256        <-  "'" {C256_1} "'"
             /   "'" {C256_4 C256_4 C256_4 C256_4} "'"
             /   "'" %{ERROR_INT256_COUNT}
-C256_1      <-  Esc
-            /   !"'" .
-C256_4      <-  Esc %{ERROR_INT256_ESC}
-            /   !"'" .
-Integer     <-  {:value: Integer16 / Integer10 / Integer256 :}
-                {:type: '' -> 'integer' :}
+C256_1      <-  Esc / %nl / [^']
+C256_4      <-  %nl / [^']
 ]]
 
 grammar 'Name' [[
@@ -203,20 +144,20 @@ Name        <-  Sp {[a-zA-Z] [a-zA-Z0-9_]*}
 ]]
 
 grammar 'Compare' [[
-GT          <-  Sp '>'
-GE          <-  Sp '>='
-LT          <-  Sp '<'
-LE          <-  Sp '<='
-EQ          <-  Sp '=='
-UE          <-  Sp '!='
+GT          <-  '>'
+GE          <-  '>='
+LT          <-  '<'
+LE          <-  '<='
+EQ          <-  '=='
+UE          <-  '!='
 ]]
 
 grammar 'Operator' [[
-ADD         <-  Sp '+'
-SUB         <-  Sp '-'
-MUL         <-  Sp '*'
-DIV         <-  Sp '/'
-NEG         <-  Sp '-'
+ADD         <-  '+'
+SUB         <-  '-'
+MUL         <-  '*'
+DIV         <-  '/'
+MOD         <-  '%'
 ]]
 
 grammar 'Paren' [[
@@ -228,12 +169,12 @@ BR          <-  Sp ']'
 
 grammar 'Exp' [[
 Exp         <-  ECheckAnd
-ECheckAnd   <-  (ECheckOr   (ESAnd    ECheckOr  )*) -> Binary
-ECheckOr    <-  (ECheckComp (ESOr     ECheckComp)*) -> Binary
-ECheckComp  <-  (ECheckNot  (ESComp   ECheckNot )*) -> Binary
-ECheckNot   <-  (            ESNot+   ECheckAdd   ) -> Unary / ECheckAdd
-ECheckAdd   <-  (ECheckMul  (ESAddSub ECheckMul )*) -> Binary
-ECheckMul   <-  (EUnit      (ESMulDiv EUnit     )*) -> Binary
+ECheckAnd   <-  (ECheckOr   (Sp ESAnd    ECheckOr  ^ERROR_MISS_EXP)*) -> Binary
+ECheckOr    <-  (ECheckComp (Sp ESOr     ECheckComp^ERROR_MISS_EXP)*) -> Binary
+ECheckComp  <-  (ECheckNot  (Sp ESComp   ECheckNot ^ERROR_MISS_EXP)*) -> Binary
+ECheckNot   <-  (            Sp ESNot+   ECheckAdd ^ERROR_MISS_EXP  ) -> Unary / ECheckAdd
+ECheckAdd   <-  (ECheckMul  (Sp ESAddSub ECheckMul ^ERROR_MISS_EXP)*) -> Binary
+ECheckMul   <-  (EUnit      (Sp ESMulDiv EUnit     ^ERROR_MISS_EXP)*) -> Binary
 
 ESAnd       <-  AND -> 'and'
 ESOr        <-  OR  -> 'or'
@@ -243,252 +184,198 @@ ESComp      <-  UE  -> '!='
             /   LT  -> '<' 
             /   GE  -> '>='
             /   GT  -> '>'
+            -- 收集错误
+            /   Sp '=' -> '='
 ESNot       <-  NOT -> 'not'
 ESAddSub    <-  ADD -> '+'
             /   SUB -> '-'
 ESMulDiv    <-  MUL -> '*'
             /   DIV -> '/'
+            /   MOD -> '%%'
 
 EUnit       <-  EParen / ECode / ECall / EValue / ENeg
 
-EParen      <-  PL Exp PR
+EParen      <-  PL Exp PR^ERROR_MISS_PR
 
-ECode       <-  {|
-                    {:type: '' -> 'code' :}
-                    FUNCTION ECodeFunc
-                |}
-ECodeFunc   <-  {:name: Name :}
+ECode       <-  (FUNCTION Name ({PL} ECallArgs? PR^ERROR_MISS_PR)?)
+            ->  Code
 
-ECall       <-  {|
-                    {:type: '' -> 'call' :}
-                    ECallFunc PL ECallArgs? PR
-                |}
-ECallFunc   <-  {:name: Name :}
-ECallArgs   <-  {: Exp :} (COMMA {: Exp :})*
+ECall       <-  (Name PL ECallArgs? PR^ERROR_MISS_PR)
+            ->  ECall
+ECallArgs   <-  Exp (COMMA Exp)*
 
 EValue      <-  Value / EVari / EVar
 
-EVari       <-  {|
-                    {:type: '' -> 'vari' :}
-                    EVarName BL EVarIndex BR
-                |}
-EVarIndex   <-  {: Exp :}
+EVari       <-  (Name BL Exp BR)
+            ->  Vari
 
-EVar        <-  {|
-                    {:type: '' -> 'var' :}
-                    EVarName
-                |}
-EVarName    <-  {:name: Name :}
+EVar        <-  Name
+            ->  Var
 
-ENeg        <-  {|
-                    {:type: '' -> 'neg' :}
-                    NEG EUnit
-                |}
+ENeg        <-  Sp SUB EUnit
+            ->  Neg
 ]]
 
 grammar 'Type' [[
-Type        <-  {|
-                    {:type: '' -> 'type' :}
-                    {:file: '' ->  File  :}
-                    {:line: '' ->  Line  :}
-                    TYPE TChild TExtends TParent
-                |}
-TChild      <-  {:name:    Name :}^ERROR_VAR_TYPE
-TExtends    <-  EXTENDS           ^ERROR_EXTENDS_TYPE
-TParent     <-  {:extends: Name :}^ERROR_EXTENDS_TYPE
+Type        <-  (TYPE TChild TExtends TParent)
+            ->  Type
+TChild      <-  Name   ^ERROR_VAR_TYPE
+TExtends    <-  EXTENDS^ERROR_EXTENDS_TYPE
+TParent     <-  Name   ^ERROR_EXTENDS_TYPE
 ]]
 
 grammar 'Globals' [[
-Globals     <-  {|
-                    {:type: '' -> 'globals' :}
-                    {:file: '' ->  File     :}
-                    {:line: '' ->  Line     :}
-                    GGlobals
-                        Global*
-                    GEnd
-                |}
-Global      <-  {|
-                    {:file: '' ->  File :}
-                    {:line: '' ->  Line :}
-                    (GConstant? GType GArray? GName GExp?)? Nl
-                |}
-GConstant   <-  {:constant: CONSTANT %True :}
-GArray      <-  {:array:    ARRAY    %True :}
-GType       <-  {:type: Name :}
-GName       <-  {:name: Name :}
-GExp        <-  ASSIGN {: Exp :}
-GGlobals    <-  GLOBALS Nl
-GEnd        <-  ENDGLOBALS^ERROR_ENDGLOBALS
+Globals     <-  GLOBALS -> GlobalsStart Nl^MISS_NL
+                    {| (Nl / Global)* |} -> Globals
+                {(ENDGLOBALS Ed^MISS_NL)?} -> GlobalsEnd
+Global      <-  !GLOBALS !FUNCTION !NATIVE
+                ({CONSTANT?} Name {ARRAY?} Name (ASSIGN Exp)?)
+            ->  Global
 ]]
 
 grammar 'Local' [[
-Local       <-  {|
-                    {:file: '' ->  File :}
-                    {:line: '' ->  Line :}
-                    LOCAL LType LArray? LName LExp?
-                |}
+Local       <-  (LocalDef LocalExp?)
+            ->  Local
+            /   TYPE Ignore
+            ->  typeInFunction
+LocalDef    <-  ((CONSTANT -> constantLocal)? LOCAL Name {ARRAY?} Name)
+            ->  LocalDef
+LocalExp    <-  ASSIGN Exp
 Locals      <-  (Local? Nl)+
-
-LType       <-  {:type: Name :}
-LName       <-  {:name: Name :}
-LArray      <-  {:array: ARRAY %True :}
-LExp        <-  ASSIGN {: Exp :}
 ]]
 
 grammar 'Action' [[
-Action      <-  {|
-                    {:file: '' ->  File :}
-                    {:line: '' ->  Line :}
-                    (ACall / ASet / ASeti / AReturn / AExit / ALogic / ALoop)
+Action      <-  (
+                    {} -> Point
+                    (ACall / ASet / AReturn / AExit / ALogic / ALoop / AError)
+                )
+            ->  Action
+Actions     <-  (Nl / Action)*
+
+ACall       <-  (CALL Name^SYNTAX_ERROR PL ACallArgs? PR^ERROR_MISS_PR)
+            ->  ACall
+ACallArgs   <-  Exp (COMMA Exp)*
+
+ASet        <-  (SET Name^SYNTAX_ERROR (BL Exp^ERROR_MISS_EXP BR^ERROR_MISS_BR)? ASSIGN^SYNTAX_ERROR Exp^ERROR_MISS_EXP)
+            ->  Set
+
+AReturn     <-  RETURN (ARExp Ed / Sp %{SYNTAX_ERROR})
+ARExp       <-  Ed  -> Return
+            /   Exp -> ReturnExp Ed
+
+AExit       <-  EXITWHEN Exp
+            ->  Exit
+
+ALogic      <-  ({|
+                    LIf
+                    LElseif*
+                    LElse?
                 |}
-Actions     <-  (Action? Nl)+
+                LEnd)
+            ->  Logic
+LIf         <-  (
+                    {} -> IfStart
+                    IF (Exp THEN)^ERROR_MISS_THEN Nl^MISS_NL
+                        (Actions)
+                )
+            ->  If
+LElseif     <-  (
+                    {} -> ElseifStart
+                    ELSEIF (Exp THEN)^ERROR_MISS_THEN Nl^MISS_NL
+                        (Actions)
+                )
+            ->  Elseif
+LElse       <-  (
+                    {} -> ElseStart
+                    ELSE Nl^MISS_NL
+                        (Actions)
+                )
+            ->  Else
+LEnd        <-  ({ENDIF} Ed^MISS_NL)?
 
-ACall       <-  CALL ACallFunc PL ACallArgs? PR
-                {:type: '' -> 'call' :}
-                
-ACallFunc   <-  {:name: Name :}
-ACallArgs   <-  {: Exp :} (COMMA {: Exp :})*
+ALoop       <-  (
+                    LOOP -> LoopStart Nl^MISS_NL
+                        {|Actions|}
+                    ({ENDLOOP} Ed^MISS_NL)?
+                )
+            ->  Loop
 
-ASet        <-  SET ASetName ASSIGN ASetValue
-                {:type: '' -> 'set' :}
-ASetName    <-  {:name: Name :}
-ASetValue   <-  {: Exp :}
-
-ASeti       <-  SET ASetiName BL ASetiIndex BR ASSIGN ASetiValue
-                {:type: '' -> 'seti' :}
-ASetiName   <-  {:name: Name :}
-ASetiIndex  <-  {: Exp :}
-ASetiValue  <-  {: Exp :}
-
-AReturn     <-  RETURN AReturnExp?
-                {:type: '' -> 'return' :}
-AReturnExp  <-  {: Exp :}
-
-AExit       <-  EXITWHEN AExitExp
-                {:type: '' -> 'exit' :}
-AExitExp    <-  {: Exp :}
-
-ALogic      <-  LIf
-                LElseif*
-                LElse?
-                LEnd
-                {:type:    '' -> 'if'  :}
-                {:endline: '' ->  Line :}
-LIf         <-  {|
-                    {:type: '' -> 'if'  :}
-                    {:file: '' ->  File :}
-                    {:line: '' ->  Line :}
-                    IF LCondition THEN Nl
-                        Actions?
-                |}
-LElseif     <-  {|
-                    {:type: '' -> 'elseif' :}
-                    {:file: '' ->  File    :}
-                    {:line: '' ->  Line    :}
-                    ELSEIF LCondition THEN Nl
-                        Actions?
-                |}
-LElse       <-  {|
-                    {:type: '' -> 'else' :}
-                    {:file: '' ->  File  :}
-                    {:line: '' ->  Line  :}
-                    ELSE            Nl
-                        Actions?
-                |}
-LEnd        <-  ENDIF
-LCondition  <-  {:condition: Exp :}
-
-ALoop       <-  LOOP Nl
-                    Actions?
-                LoopEnd
-                {:type:    '' -> 'loop' :}
-                {:endline: '' ->  Line  :}
-LoopEnd     <-  ENDLOOP
+AError      <-  LOCAL Ignore
+            ->  localInFunction
+            /   TYPE Ignore
+            ->  typeInFunction
 ]]
 
 grammar 'Native' [[
-Native      <-  {|
-                    {:type:   '' -> 'function' :}
-                    {:native: '' %True      :}
-                    {:file:   '' ->  File      :}
-                    {:line:   '' ->  Line      :}
-                    NConstant? NATIVE NName NTakes NReturns
-                |}
-NConstant   <-  {:constant: CONSTANT %True :}
-NName       <-  {:name: Name :}
-NTakes      <-  TAKES (NOTHING / {:args: NArgs :})
-NArgs       <-  {| NArg (COMMA NArg)* |}
-NArg        <-  {|
-                    {:type: Name :}
-                    {:name: Name :}
-                |}
-NReturns    <-  RETURNS (NOTHING / {:returns: Name :})
+Native      <-  (
+                    {} -> Point
+                    {CONSTANT?} NATIVE Name NTakes NReturns
+                )
+            ->  Native
+NTakes      <-  TAKES
+                (
+                    NOTHING -> Nil
+                /   {|NArg (COMMA NArg)*|} -> NArgs
+                )
+NArg        <-  Name Name
+NReturns    <-  RETURNS^SYNTAX_ERROR (NOTHING -> Nil / Name)
 ]]
 
 grammar 'Function' [[
-Function    <-  {|
-                    {:type:    '' -> 'function' :}
-                    {:file:    '' ->  File      :}
-                    {:line:    '' ->  Line      :}
-                    FConstant? FUNCTION FName FTakes FReturns
-                        FLocals?
-                        Actions?
-                    FEnd
-                    {:endline: '' ->  Line      :}
-                |}
-FConstant   <-  {:constant: CONSTANT %True :}
-FName       <-  {:name: Name :}
-FTakes      <-  TAKES (NOTHING / {:args: FArgs :})
-FArgs       <-  {| FArg (COMMA FArg)* |}
-FArg        <-  {|
-                    {:type: Name :}
-                    {:name: Name :}
-                |}
-FReturns    <-  RETURNS (NOTHING / {:returns: Name :}) Nl
-FLocals     <-  {:locals: {| Locals |} :}
-FEnd        <-  ENDFUNCTION^ERROR_ENDFUNCTION
+Function    <-  FDef -> FunctionStart Nl^MISS_NL
+                (
+                    FLocals
+                    {|Actions|}
+                ) -> FunctionBody
+                FEnd -> FunctionEnd
+FDef        <-  {CONSTANT?} FUNCTION (Name FTakes FReturns)^SYNTAX_ERROR
+FTakes      <-  TAKES^SYNTAX_ERROR 
+                (
+                    NOTHING -> Nil
+                /   {|NArg (COMMA NArg)*|} -> FArgs
+                /   Sp %{SYNTAX_ERROR}
+                )
+FArg        <-  Name Name
+FReturns    <-  RETURNS^SYNTAX_ERROR (NOTHING -> Nil / Name)
+FLocals     <-  {|Locals|} / {} -> Nil
+FEnd        <-  (ENDFUNCTION Ed^MISS_NL)?
 ]]
 
 grammar 'Jass' [[
-Jass        <-  {| Nl? Chunk? (Nl Chunk)* Nl? Sp |}
-Chunk       <-  Type / Globals / Native / Function
+Jass        <-  {| (Nl / Chunk)* |} Sp
+Chunk       <-  (   Type
+                /   Globals
+                /   Native
+                /   Function
+                -- 错误收集
+                /   Action %{ERROR_ACTION_IN_CHUNK}
+                )
+            ->  Chunk
 ]]
 
-local mt = {}
-setmetatable(mt, mt)
-
 local function errorpos(jass, file, pos, err)
-    local nl
-    if jass:sub(pos, pos):find '[\r\n]' and jass:sub(pos-1, pos-1):find '[^\r\n]' then
-        pos = pos - 1
-        nl = true
-    end
-    local line, col = re.calcline(jass, pos)
-    local sp = col - 1
-    if nl then
-        sp = sp + 1
-    end
-    local start  = jass:find('[^\r\n]', pos-sp) or pos
-    local finish = jass:find('[\r\n]', pos+1)
-    if finish then
-        finish = finish - 1
-    else
-        finish = #jass
-    end
-    local text = ('%s\r\n%s^'):format(jass:sub(start, finish), (' '):rep(sp))
-    error(lang.parser.ERROR_POS:format(err, file, line, text))
+    local row, col = calcline.rowcol(jass, pos)
+    local str = calcline.line(jass, row)
+    return {
+        jass = jass,
+        file = file,
+        line = row,
+        pos = col,
+        err = err,
+        code = str,
+        level = 'error',
+    }
 end
 
-function mt:__call(jass, file_, mode)
+return function (jass, file_, mode, parser_)
     file = file_
-    linecount = 1
-    comments = {}
+    parser = parser_ or {}
+    mode = mode or 'Jass'
     local r, e, pos = compiled[mode]:match(jass)
     if not r then
-        errorpos(jass, file, pos, lang.PARSER[e])
+        local err = errorpos(jass, file, pos, lang.parser[e])
+        return nil, err
     end
 
-    return r, comments
+    return r
 end
-
-return mt

@@ -41,14 +41,14 @@ end
 
 local function is_enable(meta, type)
     if type == 'unit' then
-        if meta.useHero == '1' or meta.useUnit == '1' or meta.useBuilding == '1' or meta.useCreep == '1' then
+        if meta.useHero == 1 or meta.useUnit == 1 or meta.useBuilding == 1 or meta.useCreep == 1 then
             return true
         else
             return false
         end
     end
     if type == 'item' then
-        if meta.useItem == '1' then
+        if meta.useItem == 1 then
             return true
         else
             return false
@@ -100,7 +100,6 @@ return function(w2l, loader_)
         create_keydata(w2l, type, keydata)
     end
     local f = {}
-    f[#f+1] = '[root]'
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
         stringify(f, type, keydata[type])
         keydata[type] = nil

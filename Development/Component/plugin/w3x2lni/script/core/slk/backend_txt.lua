@@ -1,5 +1,6 @@
 local w3xparser = require 'w3xparser'
 local lang = require 'lang'
+local convertreal = require 'convertreal'
 
 local table_concat = table.concat
 local ipairs = ipairs
@@ -36,7 +37,7 @@ local function to_type(tp, value)
             return nil
         end
         if type(value) == 'number' then
-            value = tostring(value)
+            value = convertreal(value)
         end
         if value:find('.', 1, true) then
             value = value:gsub('0+$', '')
@@ -282,6 +283,9 @@ end
 
 local function prebuild_obj(name, obj)
     if remove_unuse_object and not obj._mark then
+        return
+    end
+    if obj._keep_obj then
         return
     end
     local r = {}

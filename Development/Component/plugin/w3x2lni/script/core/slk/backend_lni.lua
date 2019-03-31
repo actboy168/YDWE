@@ -1,4 +1,5 @@
 local lang = require 'lang'
+local convertreal = require 'convertreal'
 local table_insert = table.insert
 local table_sort = table.sort
 local math_type = math.type
@@ -31,7 +32,7 @@ local function format_value(tp, value)
         return ('%d'):format(math.floor(value))
     elseif tp == 1 or tp == 2 then
         if type(value) == 'number' then
-            return ('%.4f'):format(value)
+            return convertreal(value)
         end
         return value
     elseif tp == 3 then

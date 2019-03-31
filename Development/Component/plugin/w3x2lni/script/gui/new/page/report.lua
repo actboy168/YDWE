@@ -31,6 +31,7 @@ local template = ui.container {
                 style = { FlexGrow = 1 },
                 text_color = '#CCC',
                 align = 'start',
+                valign = 'start',
                 bind = {
                     text = 'report.text'
                 },

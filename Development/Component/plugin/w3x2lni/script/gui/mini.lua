@@ -17,6 +17,7 @@ function mini:init()
     local win = gui.Window.create  { frame = false }
     win:settitle('w3x2lni-mini')
     ext.register_window('w3x2lni-mini')
+    ext.set_icon((fs.exe_path():parent_path() / 'w3x2lni.ico'):string())
 
     local view = gui.Container.create()
     view:setstyle { FlexGrow = 1 }

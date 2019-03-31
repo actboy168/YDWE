@@ -115,7 +115,7 @@ local function remove_same_as_txt(meta, key, data, default, obj, ttype)
     end
 end
 
-local function clean_obj(name, obj, type, default)
+local function clean_obj(obj, type, default)
     local parent = obj._parent
     local default = default[parent]
     if not default then
@@ -141,12 +141,14 @@ local function clean_obj(name, obj, type, default)
     end
 end
 
-local function clean_objs(type, t)
+local function clean_objs(type, t, check_keep)
     if not t then
         return
     end
     for id, obj in sortpairs(t) do
-        clean_obj(id, obj, type, default[type])
+        if not check_keep or obj._keep_obj then
+            clean_obj(obj, type, default[type])
+        end
     end
 end
 
@@ -170,7 +172,7 @@ local function clean_misc(type, t)
     end
     for name in pairs(default[type]) do
         if t[name] and (t[name]._source ~= 'slk' or w2l.setting.mode ~= 'slk') then
-            clean_obj(id, t[name], type, default[type])
+            clean_obj(t[name], type, default[type])
         end
     end
 end
@@ -182,14 +184,13 @@ return function (w2l_, slk)
     is_remove_same = w2l.setting.remove_same
     metadata = w2l:metadata()
     if w2l.setting.mode == 'slk' then
-        if not w2l.setting.slk_doodad then
-            local type = 'doodad'
-            clean_objs(type, slk[type])
-            w2l.progress(0.5)
+        for i, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
+            clean_objs(type, slk[type], true)
+            w2l.progress(i / 8)
         end
     else
         for i, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
-            clean_objs(type, slk[type])
+            clean_objs(type, slk[type], false)
             w2l.progress(i / 8)
         end
         local type = 'txt'
