@@ -1,4 +1,4 @@
-local lpeg = require 'lpeglabel'
+local lpeg = require 'lpeg'
 local lang = require 'lang'
 local w2l
 local wts

@@ -1,8 +1,6 @@
 local lang = require 'share.lang'
 local config = require 'share.config'
 local root = require 'backend.w2l_path'
-local convertreal = require 'core.convertreal'
-local math_type = math.type
 
 local function sortpairs(t)
     local sort = {}
@@ -29,11 +27,7 @@ local function format_value(value)
         return tostring(value)
     end
     if tp == 'number' then
-        if math_type(value) == 'integer' then
-            return tostring(value)
-        else
-            return convertreal(value)
-        end
+        return tostring(value)
     end
     if tp == 'string' then
         return ('%q'):format(value)

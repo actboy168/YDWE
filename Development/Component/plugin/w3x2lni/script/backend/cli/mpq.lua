@@ -1,4 +1,4 @@
-fs = require 'bee.filesystem'
+require 'filesystem'
 require 'utility'
 local stormlib = require 'ffi.stormlib'
 local sleep = require 'ffi.sleep'

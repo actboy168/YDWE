@@ -1,4 +1,4 @@
-fs = require 'bee.filesystem'
+require 'filesystem'
 local gui = require 'yue.gui'
 local backend = require 'gui.backend'
 local lang = require 'share.lang'
@@ -31,7 +31,6 @@ local template = ui.container {
                 style = { FlexGrow = 1 },
                 text_color = '#CCC',
                 align = 'start',
-                valign = 'start',
                 bind = {
                     text = 'report.text'
                 },

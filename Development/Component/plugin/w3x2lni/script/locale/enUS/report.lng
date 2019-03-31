@@ -184,9 +184,3 @@ Output mode:
 Result: 
 [TAKES_TIME]
 Takes: %.3f sec
-[ERROR_ORDER_IN_ANcl]
-Channel '%s' [%s] can't cast
-[ERROR_ORDER_IN_Aspb]
-Spell Book '%s' [%s] will be merged
-[ERROR_ORDER]
-Base order ID '%s' invalid

@@ -184,9 +184,3 @@
 结果：
 [TAKES_TIME]
 用时：%.3f 秒
-[ERROR_ORDER_IN_ANcl]
-通魔 '%s' [%s] 无法使用
-[ERROR_ORDER_IN_Aspb]
-魔法书 '%s' [%s] 会被合并
-[ERROR_ORDER]
-基础命令ID '%s' 不存在

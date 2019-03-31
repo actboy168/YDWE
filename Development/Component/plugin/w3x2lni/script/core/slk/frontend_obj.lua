@@ -2,7 +2,6 @@ local select = select
 local string_lower = string.lower
 local string_unpack = string.unpack
 local string_match = string.match
-local w3xparser = require 'w3xparser'
 
 local w2l
 local wts
@@ -20,11 +19,6 @@ local function unpack(str)
     return set_pos(string_unpack(str, unpack_buf, unpack_pos))
 end
 
-local function bin2float()
-    local bin = unpack 'c4'
-    return w3xparser.bin2float(bin)
-end
-
 local function read_data(obj)
     local data = {}
     local id = string_match(unpack 'c4', '^[^\0]+')
@@ -35,25 +29,26 @@ local function read_data(obj)
     if has_level then
         local this_level = unpack 'l'
         level = this_level
-        -- 扔掉4个字节
-        unpack 'c4'
+        -- 扔掉一个整数
+        unpack 'l'
     end
 
     local value
     if value_type == 0 then
         value = unpack 'l'
     elseif value_type == 1 or value_type == 2 then
-        value = bin2float()
+        value = unpack 'f'
     elseif value_type == 3 then
         local str = unpack 'z'
         value = w2l:load_wts(wts, str)
+    else
+        -- 什么都不是，扔掉4个字节
+        unpack 'c4'
     end
 
-    -- 扔掉4个字节
-    unpack 'c4'
-
-    -- 没有取到值说明是垃圾，忽略掉
-    if not value then
+    -- 检查结束标记，如果不正确，则忽略掉这个数据
+    local mask = unpack 'c4'
+    if mask ~= '\0\0\0\0' and mask ~= obj._id and mask ~= obj._parent then
         return
     end
 

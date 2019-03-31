@@ -49,7 +49,7 @@ View and modify the config
 [HELP_CONFIG_DESC]
 usage:
     w2l config                view all configurations
-    w2l config <key>          view this configuration
+    w2l config <key>          view this configuration 
     w2l config <key>=<value>  modify this configuration
 
 E.g:
@@ -145,40 +145,34 @@ When converting to Lni, convert imported slk files. Should be boolean.
 When converting to Lni, limit times to search the optimal template, 0 means unlimited. Should be integer.
 [CONFIG_LNI_EXPORT_LUA]
 When converting to Lni, export lua files. Should be boolean.
-[CONFIG_LNI_EXTRA_CHECK]
-When converting to Lni, check the rationality of data.
 [CONFIG_SLK_REMOVE_UNUSE_OBJECT]
-When converting to Slk, remove unreferenced objects. Should be boolean.
+When converting to slk, remove unreferenced objects. Should be boolean.
 [CONFIG_SLK_OPTIMIZE_JASS]
-When converting to Slk, optimize jass. Should be boolean.
+When converting to slk, optimize jass. Should be boolean.
 [CONFIG_SLK_MDX_SQUF]
-When converting to Slk, compress mdx files (lossy). Should be boolean.
+When converting to slk, compress mdx files (lossy). Should be boolean.
 [CONFIG_SLK_REMOVE_WE_ONLY]
-When converting to Slk, remove WE-only files. Should be boolean.
+When converting to slk, remove WE-only files. Should be boolean.
 
 This will prevent WE and W3x2lni from opening the converted map.
 [CONFIG_SLK_SLK_DOODAD]
-When converting to slk, optimize doodads and destructables. Should be boolean.
+When converting to slk, optimize doodads. Should be boolean.
 
 This allows terrain changes to no longer frame off, but it also contains potential risks: if the player does not restart the wc3 before play another map, he will miss doodad models and may desync.
 [CONFIG_SLK_FIND_ID_TIMES]
-When converting to Slk, limit times to search the optimal template, 0 means unlimited. Should be integer.
+When converting to slk, limit times to search the optimal template, 0 means unlimited. Should be integer.
 [CONFIG_SLK_CONFUSED]
-When converting to Slk, confuse jass. Should be boolean.
+When converting to slk, confuse jass. Should be boolean.
 [CONFIG_SLK_CONFUSION]
-When converting to Slk, used characters by confusing jass. The following need to be met:
+When converting to slk, used characters by confusing jass. The following need to be met:
 
     1. Only alphanumeric underline
     2. At least 3 different characters
     3. At least 2 letters
-[CONFIG_SLK_EXTRA_CHECK]
-When converting to Slk, check the rationality of data.
 [CONFIG_OBJ_READ_SLK]
-When converting to Obj, convert imported slk files. Should be boolean.
+When converting to obj, convert imported slk files. Should be boolean.
 [CONFIG_OBJ_FIND_ID_TIMES]
-When converting to Obj, limit times to search the optimal template, 0 means unlimited. Should be integer.
-[CONFIG_OBJ_EXTRA_CHECK]
-When converting to Obj, check the rationality of data.
+When converting to obj, limit times to search the optimal template, 0 means unlimited. Should be integer.
 [CONFIG_MUST_BOOLEAN]
 Must be boolean
 [CONFIG_MUST_INTEGER]

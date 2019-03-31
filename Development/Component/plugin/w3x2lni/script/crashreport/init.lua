@@ -30,7 +30,4 @@ if f then
     f:write(errorlog)
     f:close()
 end
-
-if arg[1] ~= '-s' then
-    messagebox(lang.ui.ERROR, '%s', errorlog)
-end
+messagebox(lang.ui.ERROR, '%s', errorlog)

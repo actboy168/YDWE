@@ -33,7 +33,7 @@ return function (command)
     end
 
     local request = command[2]
-    local section, k = request:match '^(%a+)%.([%w_]+)$'
+    local section, k = request:match '(%a+)%.([%w_]+)$'
     if section and config:define_visible(section, k) then
         local v = config:define_comment(section, k)
         if v then
@@ -47,7 +47,7 @@ return function (command)
         end
         return
     end
-    local section, k, v = request:match '^(%a+)%.([%w_]+)%=(.*)$'
+    local section, k, v = request:match '(%a+)%.([%w_]+)%=(.*)$'
     if section and config:define_visible(section, k) then
         local suc, msg = config:define_check(section, k, v)
         if not suc then

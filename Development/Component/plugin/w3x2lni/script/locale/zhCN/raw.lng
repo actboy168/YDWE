@@ -144,8 +144,6 @@
 输出目标是Lni时，限制搜索最优模板的次数，0表示无限。必须是整数。
 [CONFIG_LNI_EXPORT_LUA]
 输出目标是Lni时，导出地图内的lua文件。必须是布尔。
-[CONFIG_LNI_EXTRA_CHECK]
-输出目标是Lni时，检查地图数据的合理性。
 [CONFIG_SLK_REMOVE_UNUSE_OBJECT]
 输出目标是Slk时，移除没有引用的物体对象。必须是布尔。
 [CONFIG_SLK_OPTIMIZE_JASS]
@@ -157,7 +155,7 @@
 
 这将使WE与W3x2lni无法打开转换后的地图。
 [CONFIG_SLK_SLK_DOODAD]
-输出目标是Slk时，对装饰物与可破坏物进行Slk优化。必须是布尔。
+输出目标是Slk时，对装饰物进行Slk优化。必须是布尔。
 
 这可以使地形变化不再卡顿，但同时包含了潜在的风险：如果玩家没有重启魔兽就去玩另一张地图，那么他将看不到装饰物模型并且有可能掉线。
 [CONFIG_SLK_FIND_ID_TIMES]
@@ -170,14 +168,10 @@
     1.只能是字母数字下划线
     2.至少要有3个不同的字符
     3.至少要有2个字母
-[CONFIG_SLK_EXTRA_CHECK]
-输出目标是Slk时，检查地图数据的合理性。
 [CONFIG_OBJ_READ_SLK]
 输出目标是Obj时，转换地图内的slk文件。必须是布尔。
 [CONFIG_OBJ_FIND_ID_TIMES]
 输出目标是Obj时，限制搜索最优模板的次数，0表示无限。必须是整数。
-[CONFIG_OBJ_EXTRA_CHECK]
-输出目标是Obj时，检查地图数据的合理性。
 [CONFIG_MUST_BOOLEAN]
 必须是布尔
 [CONFIG_MUST_INTEGER]

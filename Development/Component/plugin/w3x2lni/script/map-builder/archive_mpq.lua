@@ -43,30 +43,27 @@ end
 local mt = {}
 mt.__index = mt
 
-function mt:save(path, w3i, w3f, filecount, args)
+function mt:save(path, w3i, w3f, filecount, encrypt)
     if self.handle then
         self.handle:close()
         self.handle = nil
     end
-    args = args or {}
     local hexs = {}
-    if not args.as_mpq then
-        if path:extension():string() == '.w3n' then
-            hexs[#hexs+1] = ('c4'):pack('HM3W')
-            hexs[#hexs+1] = ('c4'):pack('\0\0\0\0')
-            hexs[#hexs+1] = ('z'):pack(w3f and w3f.campaign_name or '未命名战役')
-            hexs[#hexs+1] = ('l'):pack(0)
-            hexs[#hexs+1] = ('l'):pack(1)
-        else
-            hexs[#hexs+1] = ('c4'):pack('HM3W')
-            hexs[#hexs+1] = ('c4'):pack('\0\0\0\0')
-            hexs[#hexs+1] = ('z'):pack(w3i and w3i[lang.w3i.MAP][lang.w3i.MAP_NAME] or '未命名地图')
-            hexs[#hexs+1] = ('l'):pack(get_map_flag(w3i))
-            hexs[#hexs+1] = ('l'):pack(w3i and get_player_count(w3i) or 233)
-        end
+    if path:extension():string() == '.w3n' then
+        hexs[#hexs+1] = ('c4'):pack('HM3W')
+        hexs[#hexs+1] = ('c4'):pack('\0\0\0\0')
+        hexs[#hexs+1] = ('z'):pack(w3f and w3f.campaign_name or '未命名战役')
+        hexs[#hexs+1] = ('l'):pack(0)
+        hexs[#hexs+1] = ('l'):pack(1)
+    else
+        hexs[#hexs+1] = ('c4'):pack('HM3W')
+        hexs[#hexs+1] = ('c4'):pack('\0\0\0\0')
+        hexs[#hexs+1] = ('z'):pack(w3i and w3i[lang.w3i.MAP][lang.w3i.MAP_NAME] or '未命名地图')
+        hexs[#hexs+1] = ('l'):pack(get_map_flag(w3i))
+        hexs[#hexs+1] = ('l'):pack(w3i and get_player_count(w3i) or 233)
     end
     io.save(path, table.concat(hexs))
-    self.handle = stormlib.create(path, filecount+3, args.encrypt)
+    self.handle = stormlib.create(path, filecount+3, encrypt)
     if not self.handle then
         return false, lang.script.CREATE_MAP_FAILED
     end

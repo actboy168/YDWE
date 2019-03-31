@@ -1,5 +1,5 @@
 
-fs = require 'bee.filesystem'
+require 'filesystem'
 local check_lni_mark = require 'share.check_lni_mark'
 local base = require 'backend.base_path'
 

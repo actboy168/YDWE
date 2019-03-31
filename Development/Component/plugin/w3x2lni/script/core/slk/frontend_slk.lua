@@ -7,7 +7,6 @@ local ipairs = ipairs
 local tostring = tostring
 local wtonumber = w3xparser.tonumber
 local next = next
-local type = type
 local table_concat = table.concat
 local string_lower = string.lower
 
@@ -25,9 +24,6 @@ local function slk_to_type(tp, value)
     elseif tp == 1 or tp == 2 then
         if not value then
             return 0.0
-        end
-        if type(value) == 'number' then
-            return value + 0.0
         end
         return wtonumber(value) + 0.0
     elseif tp == 3 then
@@ -115,13 +111,10 @@ local function txt_to_type(tp, value)
         if not value then
             return 0
         end
-        return math_floor(wtonumber(value)) -- txt中的整数支持256进制、16进制和8进制表达方式，因此要使用wtonumber
+        return math_floor(wtonumber(value))
     elseif tp == 1 or tp == 2 then
         if not value then
             return 0.0
-        end
-        if type(value) == 'number' then
-            return value + 0.0
         end
         return wtonumber(value) + 0.0
     elseif tp == 3 then

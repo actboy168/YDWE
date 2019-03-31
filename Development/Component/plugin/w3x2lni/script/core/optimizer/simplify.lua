@@ -4,26 +4,18 @@ local lang = require 'lang'
 local ipairs = ipairs
 local pairs = pairs
 
-local jass, state, report, confuse1, confuse2
+local jass, report, confuse1, confuse2
 local current_function, current_line, has_call
 local executes, executed_any, global_variable_any
 local mark_exp, mark_lines, mark_function
 
 local function get_function(name)
-    return state.functions[name]
+    return jass.functions[name]
 end
 
 local function get_arg(name)
-    if current_function then
-        local args = current_function.args
-        if args then
-            for i = #args, 1, -1 do
-                local arg = args[i]
-                if arg.name == name then
-                    return arg
-                end
-            end
-        end
+    if current_function and current_function.args then
+        return current_function.args[name]
     end
 end
 
@@ -42,7 +34,7 @@ local function get_local(name)
 end
 
 local function get_global(name)
-    return state.globals[name]
+    return jass.globals[name]
 end
 
 local function get_var(name)
@@ -90,9 +82,6 @@ function mark_exp(exp)
 end
 
 local function mark_locals(locals)
-    if not locals then
-        return
-    end
     for _, loc in ipairs(locals) do
         if loc[1] then
             current_line = loc.line
@@ -417,12 +406,11 @@ local function init_confuser(confused, confusion)
     end
 end
 
-return function (ast, _state, config, _report)
+return function (ast, setting, _report)
     jass = ast
     report = _report
-    state = _state
 
-    init_confuser(config.confused, config.confusion)
+    init_confuser(setting.confused, setting.confusion)
     mark_globals()
     mark_function(get_function 'config')
     mark_function(get_function 'main')

@@ -100,6 +100,7 @@ return function(w2l, loader_)
         create_keydata(w2l, type, keydata)
     end
     local f = {}
+    f[#f+1] = '[root]'
     for _, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
         stringify(f, type, keydata[type])
         keydata[type] = nil

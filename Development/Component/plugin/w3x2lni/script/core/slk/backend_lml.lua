@@ -105,7 +105,7 @@ local function compute_path()
         local max = #dirs[dir.id]
         local used = {}
         for index, trg in ipairs(dirs[dir.id]) do
-            trg.path = get_path(trg.name, used, index, max)
+            map[dir.id][trg.name] = get_path(trg.name, used, index, max)
         end
     end
     return map
@@ -128,7 +128,7 @@ local function read_dirs(map)
         end
 
         for i, trg in ipairs(dirs[dir.id]) do
-            local trg_data = { trg.path, trg.name }
+            local trg_data = { map[dir.id][trg.name], trg.name }
             if trg.type == 1 then
                 trg_data[#trg_data+1] = { lang.lml.COMMENT }
             end
@@ -155,7 +155,7 @@ local function read_triggers(files, map)
     local triggers = {}
     for i, trg in ipairs(wtg.triggers) do
         local dir = map[trg.category]
-        local path = dir[1] .. '\\' .. trg.path
+        local path = dir[1] .. '\\' .. dir[trg.name]
         if trg.wct == 0 and trg.type == 0 then
             files[path..'.lml'] = convert_lml(trg.trg)
         end

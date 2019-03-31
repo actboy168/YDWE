@@ -1,5 +1,4 @@
 local pairs = pairs
-local wtonumber = require 'w3xparser'.tonumber
 
 local keydata
 local is_remove_same
@@ -30,18 +29,10 @@ local function default_value(tp)
     if tp == 0 then
         return 0
     elseif tp == 1 or tp == 2 then
-        return 0
+        return 0.0
     elseif tp == 3 then
         return ''
     end
-end
-
-local function is_same(a, b, meta)
-    if meta and meta.type ~= 3 then
-        a = wtonumber(a)
-        b = wtonumber(b)
-    end
-    return a == b
 end
 
 local function remove_same_as_slk(meta, key, data, default, obj, ttype)
@@ -55,7 +46,7 @@ local function remove_same_as_slk(meta, key, data, default, obj, ttype)
             else
                 default = dest[i]
             end
-            if not is_same(data[i], default, meta) then
+            if data[i] ~= default then
                 new_data[i] = data[i]
             end
         end
@@ -81,7 +72,7 @@ local function remove_same_as_txt(meta, key, data, default, obj, ttype)
         local new_data = {}
         if meta and meta.appendindex then
             for i = 1, #data do
-                if not is_same(data[i], dest[i] or '', meta) then
+                if data[i] ~= (dest[i] or '') then
                     new_data[i] = data[i]
                 end
             end
@@ -89,11 +80,11 @@ local function remove_same_as_txt(meta, key, data, default, obj, ttype)
             local valued
             for i = #data, 1, -1 do
                 if dest[i] == nil then
-                    if valued or (not is_same(data[i], data[i-1], meta)) then
+                    if valued or (data[i] ~= data[i-1]) then
                         new_data[i] = data[i]
                         valued = true
                     end
-                elseif not is_same(data[i], dest[i], meta) then
+                elseif data[i] ~= dest[i] then
                     new_data[i] = data[i]
                     valued = true
                 end
@@ -107,7 +98,7 @@ local function remove_same_as_txt(meta, key, data, default, obj, ttype)
             obj[key] = new_data
         end
     else
-        if is_same(data, dest, meta) then
+        if data == dest then
             obj[key] = nil
         elseif data == nil and meta then
             obj[key] = default_value(meta.type)
@@ -115,7 +106,7 @@ local function remove_same_as_txt(meta, key, data, default, obj, ttype)
     end
 end
 
-local function clean_obj(obj, type, default)
+local function clean_obj(name, obj, type, default)
     local parent = obj._parent
     local default = default[parent]
     if not default then
@@ -141,14 +132,12 @@ local function clean_obj(obj, type, default)
     end
 end
 
-local function clean_objs(type, t, check_keep)
+local function clean_objs(type, t)
     if not t then
         return
     end
     for id, obj in sortpairs(t) do
-        if not check_keep or obj._keep_obj then
-            clean_obj(obj, type, default[type])
-        end
+        clean_obj(id, obj, type, default[type])
     end
 end
 
@@ -172,7 +161,7 @@ local function clean_misc(type, t)
     end
     for name in pairs(default[type]) do
         if t[name] and (t[name]._source ~= 'slk' or w2l.setting.mode ~= 'slk') then
-            clean_obj(t[name], type, default[type])
+            clean_obj(id, t[name], type, default[type])
         end
     end
 end
@@ -184,13 +173,14 @@ return function (w2l_, slk)
     is_remove_same = w2l.setting.remove_same
     metadata = w2l:metadata()
     if w2l.setting.mode == 'slk' then
-        for i, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
-            clean_objs(type, slk[type], true)
-            w2l.progress(i / 8)
+        if not w2l.setting.slk_doodad then
+            local type = 'doodad'
+            clean_objs(type, slk[type])
+            w2l.progress(0.5)
         end
     else
         for i, type in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable'} do
-            clean_objs(type, slk[type], false)
+            clean_objs(type, slk[type])
             w2l.progress(i / 8)
         end
         local type = 'txt'

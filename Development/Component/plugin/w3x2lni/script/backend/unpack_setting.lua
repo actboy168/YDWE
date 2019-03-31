@@ -7,7 +7,7 @@ local base = require 'backend.base_path'
 local root = require 'backend.w2l_path'
 
 require 'utility'
-fs = require 'bee.filesystem'
+require 'filesystem'
 
 local function output_path(path)
     if not path then

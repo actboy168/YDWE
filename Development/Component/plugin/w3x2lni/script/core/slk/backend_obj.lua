@@ -8,7 +8,6 @@ local string_char  = string.char
 local math_type    = math.type
 local math_floor   = math.floor
 local wtonumber = w3xparser.tonumber
-local float2bin = w3xparser.float2bin
 local type = type
 local pairs = pairs
 local setmetatable = setmetatable
@@ -82,7 +81,10 @@ local function write_value(meta, level, obj, value)
         end
         write('l', value)
     elseif tp == 1 or tp == 2 then
-        write('c4', float2bin(value)) -- obj 的浮点数用api转换为二进制
+        if type(value) ~= 'number' then
+            value = wtonumber(value)
+        end
+        write('f', value)
     else
         if type(value) ~= 'string' then
             value = ''
@@ -251,13 +253,8 @@ local function sort_chunk(chunk, remove_unuse_object)
             end
         end
     end
-    -- 大写ID的对象必须在小写ID的对象前面，否则同ID单位时，英雄的数据会出错
-    table_sort(origin, function (id1, id2)
-        return id1 > id2
-    end)
-    table_sort(user, function (id1, id2)
-        return id1 > id2
-    end)
+    table_sort(origin)
+    table_sort(user)
     return origin, user
 end
 

@@ -3,7 +3,6 @@ local ext = require 'yue-ext'
 local timer = require 'gui.timer'
 local ev = require 'gui.event'
 local ui = require 'gui.new.template'
-fs = require 'bee.filesystem'
 
 window = {}
 
@@ -107,7 +106,6 @@ function window:create(t)
     end
     win:settitle('w3x2lni')
     ext.register_window('w3x2lni')
-    ext.set_icon((fs.exe_path():parent_path() / 'w3x2lni.ico'):string())
     win:sethasshadow(true)
     win:setresizable(false)
     win:setmaximizable(false)

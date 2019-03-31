@@ -1,4 +1,4 @@
-local lpeg = require 'lpeglabel'
+local lpeg = require 'lpeg'
 local w3xparser = require 'w3xparser'
 local lang = require 'lang'
 local wtonumber = w3xparser.tonumber
@@ -132,7 +132,7 @@ return function (w2l_)
     ids = {}
     marks = {}
     line_count = 0
-    local suc, err = xpcall(pjass.match, debug.traceback, pjass, buf)
+    local suc, err = pcall(pjass.match, pjass, buf)
     if not suc then
         w2l.messager.report(lang.report.ERROR, 1, lang.report.SYNTAX_ERROR, err:match('%.lua:%d+: (.*)'))
         return

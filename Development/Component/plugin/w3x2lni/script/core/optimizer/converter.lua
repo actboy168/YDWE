@@ -1,12 +1,10 @@
 local lang = require 'lang'
 local lines
 local jass
-local state
 local report
 local messager
 
 local current_function
-local current_line
 local get_exp
 local add_lines
 
@@ -50,20 +48,12 @@ local function get_confused_name(obj)
 end
 
 local function get_function(name)
-    return state.functions[name]
+    return jass.functions[name]
 end
 
 local function get_arg(name)
-    if current_function then
-        local args = current_function.args
-        if args then
-            for i = #args, 1, -1 do
-                local arg = args[i]
-                if arg.name == name then
-                    return arg
-                end
-            end
-        end
+    if current_function and current_function.args then
+        return current_function.args[name]
     end
 end
 
@@ -82,7 +72,7 @@ local function get_local(name)
 end
 
 local function get_global(name)
-    return state.globals[name]
+    return jass.globals[name]
 end
 
 local function get_var(name)
@@ -310,23 +300,17 @@ local function add_global(global)
         report(lang.report.UNREFERENCE_GLOBAL, global.name, lang.report.JASS_LINE:format(global.line))
         return
     end
-    local chars = {}
     current_line = global.line
-    if global.constant then
-        chars[#chars+1] = 'constant '
-    end
-    chars[#chars+1] = global.type
-    chars[#chars+1] = ' '
     if global.array then
-        chars[#chars+1] = 'array '
+        insert_line(([[%s array %s]]):format(global.type, get_confused_name(global)))
+    else
+        local value = get_exp(global[1])
+        if value then
+            insert_line(([[%s %s=%s]]):format(global.type, get_confused_name(global), value))
+        else
+            insert_line(([[%s %s]]):format(global.type, get_confused_name(global)))
+        end
     end
-    chars[#chars+1] = get_confused_name(global)
-    local value = get_exp(global[1])
-    if value then
-        chars[#chars+1] = '='
-        chars[#chars+1] = value
-    end
-    insert_line(table.concat(chars))
 end
 
 local function add_globals()
@@ -356,7 +340,7 @@ local function add_local(loc)
 end
 
 local function add_locals(locals)
-    if not locals or #locals == 0 then
+    if #locals == 0 then
         return
     end
     for _, loc in ipairs(locals) do
@@ -448,7 +432,7 @@ local function add_ifs(chunk)
         elseif data.type == 'else' then
             add_else(data)
         else
-            messager(lang.report.UNEXPECT_LOGIC, chunk.type)
+            messager(lang.report.UNEXPECT_LOGIC, line.type)
         end
     end
     insert_line('endif')
@@ -534,11 +518,10 @@ local function add_functions()
     end
 end
 
-return function (ast, _state, _report, _messager)
+return function (ast, _report, _messager)
     lines = {}
     jass = ast
     report = _report
-    state = _state
     messager = _messager
     
     add_globals()

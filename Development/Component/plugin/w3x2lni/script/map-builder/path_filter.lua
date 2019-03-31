@@ -1,4 +1,4 @@
-local m = require 'lpeglabel'
+local m = require 'lpeg'
 
 local m_cut  = m.S'/\\'
 local m_path = (1-m_cut)^1

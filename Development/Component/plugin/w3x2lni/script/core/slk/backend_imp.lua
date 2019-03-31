@@ -18,7 +18,8 @@ end
 
 local function convert_imp(list)
     local lines = {}
-    lines[1] = 'import = {'
+    lines[1] = '[root]'
+    lines[2] = 'import = {'
     for _, name in ipairs(list) do
         lines[#lines+1] = ('%q'):format(name) .. ','
     end

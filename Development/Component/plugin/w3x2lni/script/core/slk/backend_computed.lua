@@ -85,10 +85,6 @@ end
 local function computed_value(slk, str, name, field)
     -- TODO: 魔兽计算这个太特殊了，我想我放弃完全模拟了
     local id, key, per = table.unpack(split(str))
-    if not id then
-        w2l.messager.report(lang.report.COMPUTED_TEXT_FAILED, 5, ('%s %s %s'):format(get_displayname_by_id(slk, name)), ('%s: <%s>'):format(field, str))
-        return
-    end
     id = id:sub(1, 4)
     local o = slk.ability[id]
            or slk.unit[id]
@@ -119,9 +115,8 @@ local function computed_value(slk, str, name, field)
             return get_value(o, key)
         end
     }
-    res = tonumber(res)
-    if res then
-        if per == '%'then
+    if type(res) == 'number' then
+        if per == '%' then
             res = res * 100
         end
         return around_integer(res)

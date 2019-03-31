@@ -28,7 +28,7 @@ end
 
 function mt:get(key)
     local value = self.data[self._current][key]
-    if type(value) == 'string' and #value > 255 then
+    if type(value) == 'string' and #value > 1023 then
         value = self.self:save_wts(self.wts, value, lang.script.TEXT_TOO_LONG_IN_W3I)
     end
     return value

@@ -47,7 +47,7 @@ function mt:accept_ui(type, name, key, value)
         args = function ()
             local r = str_split(value, ',')
             if type == 'call' then
-                ui.use_in_event = tonumber(r[2])
+                ui.use_in_event = r[2]
                 ui.returns = r[3]
                 table.remove(r, 1)
                 table.remove(r, 1)
