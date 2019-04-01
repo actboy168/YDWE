@@ -1,4 +1,4 @@
-require 'filesystem'
+local fs = require 'bee.filesystem'
 
 --和[MSBuild]::GetDirectoryNameOfFileAbove效果相同
 local function GetDirectoryNameOfFileAbove(p, f)

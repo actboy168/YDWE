@@ -1,4 +1,4 @@
-require 'filesystem'
+fs = require 'bee.filesystem'
 local minizip = require 'minizip'
 
 local function for_directory(path, func, leaf)

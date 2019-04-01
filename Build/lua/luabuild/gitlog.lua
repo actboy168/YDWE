@@ -1,7 +1,7 @@
 return function(path)
-    local f = io.popen('git log -n 1', 'r')
+    local out = io.popen('git log -n 1', 'r')
     local lines = {}
-    for l in f:lines() do
+    for l in out:lines() do
         lines[#lines+1] = l
     end
     local commit = lines[1]:match 'commit[ ]+([0-9|a-f]*)'
@@ -13,7 +13,7 @@ return function(path)
         end
     end
 
-    local f = io.open(path, 'w')
+    local f = assert(io.open(path, 'w'))
     f:write(([[
 return {
     commit = '%s',

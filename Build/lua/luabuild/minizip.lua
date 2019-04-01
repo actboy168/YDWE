@@ -64,6 +64,7 @@ ffi.cdef[[
     int zipClose(zipFile file, const char* global_comment);
 ]]
 
+assert(package.loadlib(assert(package.searchpath('minizip', package.cpath)), 'zipOpen64'))
 local minizip = ffi.load('minizip')
 
 local errors = {

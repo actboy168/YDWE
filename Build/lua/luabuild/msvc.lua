@@ -1,13 +1,33 @@
-require 'filesystem'
-require 'registry'
-local uni = require 'unicode'
+local fs = require 'bee.filesystem'
+local sp = require 'bee.subprocess'
+local registry = require 'bee.registry'
+local uni = require 'bee.unicode'
 local ffi = require 'ffi'
 ffi.cdef[[
     int SetEnvironmentVariableA(const char* name, const char* value);
 ]]
 
+local vswhere = fs.path(os.getenv('ProgramFiles(x86)')) / 'Microsoft Visual Studio' / 'Installer' / 'vswhere.exe'
+
+
 local function strtrim(str) 
     return str:gsub("^%s*(.-)%s*$", "%1")
+end
+
+local function installpath()
+    local process = assert(sp.spawn {
+        vswhere,
+        '-latest',
+        '-products', '*',
+        '-requires', 'Microsoft.VisualStudio.Component.VC.Tools.x86.x64',
+        '-property', 'installationPath',
+        stdout = true,
+    })
+    local result = strtrim(process.stdout:read 'a')
+    process.stdout:close()
+    process:wait()
+    assert(result ~= "", "can't find msvc.")
+    return fs.path(result)
 end
 
 local function parse_env(str)
@@ -26,20 +46,12 @@ local function addenv(name, newvalue)
     ffi.C.SetEnvironmentVariableA(name, newvalue)
 end
 
-local function msvc_path(version)
-    local reg = registry.local_machine() / [[SOFTWARE\Microsoft\VisualStudio\SxS\VS7]]
-    local path = reg[("%d.0"):format(math.ceil(version / 10))]
-    if path then
-        return fs.path(path)
-    end
-end
-
 local mt = {}
 
 local need = { LIB = true, LIBPATH = true, PATH = true, INCLUDE = true }
 
 function mt:initialize(version, coding)
-    self.__path = msvc_path(version)
+    self.__path = installpath()
     if not self.__path then
         return false
     end
