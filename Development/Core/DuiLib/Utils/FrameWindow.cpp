@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include <base/i18n/gettext.h>
-#include <bee/utility/unicode.h>
+#include <bee/utility/unicode_win.h>
 
 namespace DuiLib
 {

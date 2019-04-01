@@ -215,10 +215,10 @@ namespace Shortcuts
 	{
 		try
 		{
-			if (bee::platform::get_version().ver >= +bee::platform::WinVer::Win10)
+			if (bee::platform::get_version().ver >= bee::platform::WinVer::Win10)
 			{
 			}
-			else if (bee::platform::get_version().ver >= +bee::platform::WinVer::Win7)
+			else if (bee::platform::get_version().ver >= bee::platform::WinVer::Win7)
 			{
 				fs::path shortcut_path = fs::temp_directory_path() / target_path.filename().replace_extension(L".lnk");
 
@@ -250,11 +250,11 @@ namespace Shortcuts
 		try
 		{
 			fs::path taskbar_path;
-			if (bee::platform::get_version().ver >= +bee::platform::WinVer::Win10)
+			if (bee::platform::get_version().ver >= bee::platform::WinVer::Win10)
 			{
 				return false;
 			}
-			else if (bee::platform::get_version().ver >= +bee::platform::WinVer::Win7)
+			else if (bee::platform::get_version().ver >= bee::platform::WinVer::Win7)
 			{
 				taskbar_path = detail::quick_launch_path() / L"User Pinned" / L"TaskBar";
 			}
@@ -283,7 +283,7 @@ namespace Shortcuts
 
 					if (bee::path_helper::equal(read_target, target_path))
 					{
-						if (bee::platform::get_version().ver >= +bee::platform::WinVer::Win7)
+						if (bee::platform::get_version().ver >= bee::platform::WinVer::Win7)
 						{
 							return detail::TaskbarUnpinShortcutLink(shortcut_path);
 						}
@@ -308,7 +308,7 @@ namespace Shortcuts
 		try
 		{
 			fs::path taskbar_path;
-			if (bee::platform::get_version().ver >= +bee::platform::WinVer::Win7)
+			if (bee::platform::get_version().ver >= bee::platform::WinVer::Win7)
 			{
 				taskbar_path = detail::quick_launch_path() / L"User Pinned" / L"TaskBar";
 			}

@@ -10,6 +10,7 @@
 #include <bee/utility/format.h>
 #include <bee/platform/version.h>
 #include "../../Plugin/Lua/log/logging.h"
+#include "nameof.hpp"
 
 void lua_pushwstring(lua_State* L, const std::wstring& str)
 {
@@ -74,7 +75,7 @@ lua_State* LuaEngineCreate(const wchar_t* name)
         auto vn = bee::platform::get_version();
 		LOGGING_INFO(lg) << bee::format("LuaEngine %s started.", bee::module_version(base::path::self().c_str())[L"FileVersion"]);
 		LOGGING_INFO(lg) << "Compiled at " __TIME__ ", " __DATE__;
-		LOGGING_INFO(lg) << bee::format("Windows version: %s.%d", vn.ver._to_string(), vn.build);
+		LOGGING_INFO(lg) << bee::format("Windows version: %s.%d", NAMEOF_ENUM(vn.ver), vn.build);
 
 		luaL_openlibs(L);
 		LOGGING_DEBUG(lg) << "Initialize LuaEngine successfully.";

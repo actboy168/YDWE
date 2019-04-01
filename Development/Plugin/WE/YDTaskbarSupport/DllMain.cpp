@@ -59,7 +59,7 @@ bool JumpListAddRecentTask(JumpList& jumpList, fs::path const& ydweDirectory, fs
 
 void Initialize()
 {
-	if (bee::platform::get_version().ver < +bee::platform::WinVer::Win7)
+	if (bee::platform::get_version().ver < bee::platform::WinVer::Win7)
 	{
 		return ;
 	}

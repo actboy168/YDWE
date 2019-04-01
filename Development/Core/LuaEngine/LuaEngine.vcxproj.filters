@@ -17,6 +17,9 @@
     <ClInclude Include="LuaEngine.h">
       <Filter>lua</Filter>
     </ClInclude>
+    <ClInclude Include="nameof.hpp">
+      <Filter>lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc" />

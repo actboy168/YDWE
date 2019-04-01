@@ -395,7 +395,7 @@ void CMainWindow::InitOSHelpUI()
 		}
 	}
 
-	if (bee::platform::get_version().ver >= +bee::platform::WinVer::Win7)
+	if (bee::platform::get_version().ver >= bee::platform::WinVer::Win7)
 	{
 		if (m_pShortcuts_taskbar)
 			m_pShortcuts_taskbar->SetEnabled(false);

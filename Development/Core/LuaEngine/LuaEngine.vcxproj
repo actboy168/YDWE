@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LuaEngine.h" />
+    <ClInclude Include="nameof.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\OpenSource\bee.lua\project\msvc\bee.vcxproj">
