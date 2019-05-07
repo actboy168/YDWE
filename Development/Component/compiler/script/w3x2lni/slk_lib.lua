@@ -614,7 +614,9 @@ function mt:create_report()
                 lines[#lines+1] = err
                 buf[#buf+1] = '+ ' .. err
             end
-            log.error(table.concat(buf, '\n'))
+            if log then
+                log.error(table.concat(buf, '\n'))
+            end
         end
     end
 	if #lold > 0 then
@@ -674,7 +676,9 @@ end
 
 function mt:listen_error(w2l)
     function w2l.messager.report(type, level, content, tip)
-        log.info(type, content, tip)
+        if log then
+            log.info(type, content, tip)
+        end
         if type == 'INVALID_OBJECT_DATA' then
             if not content or not tip then
                 return
