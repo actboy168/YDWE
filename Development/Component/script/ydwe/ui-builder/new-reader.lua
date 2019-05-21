@@ -1,5 +1,19 @@
 local lni = require 'lni'
 
+local function load_old_lni(buf, ...)
+    local isFirstArray = true
+    buf = buf:gsub('%[(%C+)%]', function (str)
+        if str:sub(1, 1) ~= '[' then
+            isFirstArray = true
+        elseif isFirstArray then
+            isFirstArray = false
+        else
+            return '````````'
+        end
+    end)
+    return lni(buf, ...)
+end
+
 local mt = {}
 mt.__index = mt
 
@@ -18,7 +32,7 @@ local function get_lang_ui(loader, type, lang)
     local filename = lang .. '\\' .. type .. '.txt'
     local buf = loader(filename)
     if buf then
-        return lni.classics(buf, filename)
+        return load_old_lni(buf, filename)
     end
 end
 
@@ -51,7 +65,7 @@ function mt:read_ui(loader, lang, type)
         last.name = lastkey
         if type == 'call' then
             if not last.use_in_event then
-                last.use_in_event = '1'
+                last.use_in_event = 1
             end
         end
         if not self.categories[type][last.category] then
@@ -68,7 +82,7 @@ function mt:read_ui(loader, lang, type)
             last = value
         end,
     })
-    lni.classics(buf, type .. '.txt', {t})
+    load_old_lni(buf, type .. '.txt', {t})
     savelast()
 end
 
