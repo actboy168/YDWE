@@ -15,16 +15,24 @@ namespace NYDWE {
 
 	logging::logger* lg;
 
+	static int errorfunc(lua_State* L)
+	{
+		luaL_traceback(L, L, lua_tostring(L, 1), 0);
+		return 1;
+	}
+
 	static int LuaOnSignal(lua_State* L, TEventData eventData, const base::lua::object& func)
 	{
 		base::lua::guard guard(L);
 
 		try {
+			lua_pushcfunction(L, errorfunc);
 			func.push();
 			lua_newtable(L);
 			eventData(L, lua_absindex(L, -1));
-			if (LUA_OK != lua_pcall(L, 1, 1, 0)) {
-				throw std::exception(lua_tostring(L, -1));
+			if (LUA_OK != lua_pcall(L, 1, 1, -3)) {
+				LOGGING_ERROR(lg) << "exception: \"" << lua_tostring(L, -1) << "\"";
+				return -1;
 			}
 			return (int)lua_tointeger(L, -1);
 		}
