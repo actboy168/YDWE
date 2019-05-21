@@ -2,8 +2,7 @@
 
 #include <windows.h>
 
-#include <bee/registry/key.h>
-#include <bee/registry/value.h>
+#include <bee/registry.h>
 #include <base/filesystem.h>
 
 class FileAssociation

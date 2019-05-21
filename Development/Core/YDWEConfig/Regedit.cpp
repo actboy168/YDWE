@@ -94,8 +94,8 @@ bool FileAssociation::Ext::set_owl(bee::registry::key_w& root)
 }
 
 FileAssociation::FileAssociation(fs::path const& ydwe_path)
-	: root_(HKEY_CURRENT_USER, L"Software", L"Classes")
-	, root2_(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Explorer", L"FileExts")
+	: root_(L"HKEY_CURRENT_USER\\Software\\Classes")
+	, root2_(L"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts")
 	, classes_(L"YDWEMap")
 	, ext_w3x_(L".w3x")
 	, ext_w3m_(L".w3m")
@@ -158,7 +158,7 @@ bool FileAssociation::set_classes()
 bool Registry::has(HKEY hkey, std::wstring const& name, std::wstring const& key)
 {
 	try {
-		return !!bee::registry::key_w(hkey, L"", name)[key].get_uint32_t();
+		return !!bee::registry::key_w(hkey, name)[key].get_uint32_t();
 	} catch (bee::registry::registry_exception const& ) { }
 
 	return false;
@@ -167,7 +167,7 @@ bool Registry::has(HKEY hkey, std::wstring const& name, std::wstring const& key)
 bool Registry::set(HKEY hkey, std::wstring const& name, std::wstring const& key, bool value)
 {
 	try {
-		bee::registry::key_w(hkey, L"", name)[key] = uint32_t(value);
+		bee::registry::key_w(hkey, name)[key] = uint32_t(value);
 		return true;
 	} catch (bee::registry::registry_exception const& ) { }
 
