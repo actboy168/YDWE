@@ -135,7 +135,7 @@ if '0' ~= global_config.MapTest.LaunchLockingMouse then
             thread.newchannel 'window'
             local channel = thread.channel 'window'
             channel:push(window)
-            createThread('window.main', window)
+            createThread('window.main')
         end)
     end
 end

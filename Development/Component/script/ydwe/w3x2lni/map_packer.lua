@@ -22,10 +22,10 @@ local function do_command(script, ...)
         stderr = true,
         cwd = current_dir:string(),
     }
-    local process, stdout, stderr = subprocess.spawn(args)
+    local process = subprocess.spawn(args)
     log.trace(string.format('Executed %s.', sys.tbl_concat(args, ' ')))
-    local out = stdout:read 'a'
-    local err = stderr:read 'a'
+    local out = process.stdout:read 'a'
+    local err = process.stderr:read 'a'
     local exit_code = process:wait()
     log.debug('exit_code', exit_code)
     if exit_code == 0 then

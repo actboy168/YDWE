@@ -41,7 +41,7 @@ function wave:do_compile(op)
 	args[#args+1] = "--line=0"
 	args[#args+1] = op.input:string()
 
-	local process, stdout, stderr = subprocess.spawn {
+	local process = subprocess.spawn {
 		args,
 		stdout = true,
 		stderr = true,
@@ -52,8 +52,8 @@ function wave:do_compile(op)
 		return -1, nil, nil
 	end
 	log.trace(string.format("Executed %s.", table.concat(args, " ")))
-    local out = stdout:read 'a'
-    local err = stderr:read 'a'
+    local out = process.stdout:read 'a'
+    local err = process.stderr:read 'a'
     local exit_code = process:wait()
     return exit_code, out, err
 end

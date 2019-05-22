@@ -3,7 +3,7 @@
 #include <warcraft3/jass.h>
 #include <warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
-#include <bee/registry/key.h>
+#include <bee/registry.h>
 #include <bee/utility/unicode_win.h>
 #include <bee/utility/path_helper.h>
 #include <set>
@@ -123,7 +123,7 @@ namespace warcraft3::lua_engine {
 	static bool allow_local_files()
 	{
 		try {
-			return !!bee::registry::key_w(HKEY_CURRENT_USER, L"", L"Software\\Blizzard Entertainment\\Warcraft III")[L"Allow Local Files"].get_uint32_t();
+			return !!bee::registry::key_w(L"HKEY_CURRENT_USER\\Software\\Blizzard Entertainment\\Warcraft III")[L"Allow Local Files"].get_uint32_t();
 		}
 		catch (bee::registry::registry_exception const&) {}
 		return false;

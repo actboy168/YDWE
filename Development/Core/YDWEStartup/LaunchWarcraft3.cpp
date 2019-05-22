@@ -4,7 +4,7 @@
 #include <bee/utility/path_helper.h>
 #include <base/util/ini.h>
 #include <bee/utility/format.h>
-#include <bee/registry/key.h> 
+#include <bee/registry.h> 
 #include <base/hook/fp_call.h>
 #include <bee/subprocess.h>
 #include <base/hook/injectdll.h>
@@ -18,7 +18,7 @@ static std::wstring get_test_map_path()
 {
 	std::wstring result = L"Maps\\Test\\WorldEditTestMap";
 	try {
-		result = (bee::registry::current_user() / L"Software\\Blizzard Entertainment\\WorldEdit")[L"Test Map - Copy Location"].get_string();
+		result = bee::registry::key_w(L"HKEY_CURRENT_USER\\Software\\Blizzard Entertainment\\WorldEdit")[L"Test Map - Copy Location"].get_string();
 	}
 	catch (bee::registry::registry_exception const&) {}
 	return std::move(result);
@@ -167,7 +167,7 @@ bool launch_warcraft3(warcraft3::command_line& cmd)
 		std::string name = table["MapTest"]["UserName"];
 		if (name != "")
 		{
-			bee::registry::key_a key(HKEY_CURRENT_USER, "Software\\Blizzard Entertainment\\Warcraft III", "String");
+			bee::registry::key_a key("HKEY_CURRENT_USER\\Software\\Blizzard Entertainment\\Warcraft III\\String");
 			key["userlocal"].set((const void*)name.c_str(), name.size());
 		}
 
