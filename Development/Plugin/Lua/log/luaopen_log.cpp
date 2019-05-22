@@ -17,20 +17,13 @@ static int llog_print(lua_State *L, logging::level lv) {
 
 	luaL_Buffer b;
 	luaL_buffinit(L, &b);
-	lua_getglobal(L, "tostring");
 	for (int i = 1; i <= n; i++) {
-		const char *s;
 		size_t l;
-		lua_pushvalue(L, n + 1);
-		lua_pushvalue(L, i);
-		lua_call(L, 1, 1);
-		s = lua_tolstring(L, -1, &l);
-		if (buffonstack(&b)) lua_insert(L, -2);
+		const char* s = lua_tolstring(L, i, &l);
 		if (s == NULL)
 			return luaL_error(L, "'tostring' must return a string to 'print'");
 		if (i>1) luaL_addchar(&b, '\t');
 		luaL_addlstring(&b, s, l);
-		lua_remove(L, n + 2);
 	}
 	luaL_pushresult(&b);
 	size_t l;
