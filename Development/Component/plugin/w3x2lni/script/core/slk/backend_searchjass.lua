@@ -5,6 +5,7 @@ local wtonumber = w3xparser.tonumber
 local ids
 local marks
 local line_count
+local w2l
 local min = ('>I4'):unpack 'A000'
 
 local extra_func = {

@@ -57,7 +57,7 @@ local plugins
 local last_clock
 local current_plugin
 local check_plugins
-local enbale_list
+local enable_list
 
 local function checkbox_plugin(canvas, text, plugin, active)
     canvas:layout_space_push(0, 0, 320, 25)

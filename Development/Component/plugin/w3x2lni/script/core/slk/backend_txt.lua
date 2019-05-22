@@ -190,7 +190,7 @@ local function stringify_obj(str, obj)
         return a[1]:lower() < b[1]:lower()
     end)
     local empty = true
-    str[#str+1] = ('[%s]'):format(obj._slk_id or obj._id)
+    str[#str+1] = ('[%s]'):format(obj._id)
     for _, kv in ipairs(keyval) do
         local key, val = kv[1], kv[2]
         if val ~= '' then
@@ -294,7 +294,6 @@ local function prebuild_obj(name, obj)
     end
     if next(r) then
         r._id = obj._id
-        r._slk_id = obj._slk_id
         return r
     end
 end
@@ -306,7 +305,7 @@ local function prebuild_merge(obj, a, b)
         w2l.messager.report(lang.report.WARN, 2, (lang.report.OBJECT_ID_CONFLICT):format(obj._id), ('[%s]%s --> [%s]%s'):format(tp1, name1, tp2, name2))
     end
     for k, v in pairs(b) do
-        if k == '_id' or k == '_type' or k == '_slk_id' then
+        if k == '_id' or k == '_type' then
             goto CONTINUE
         end
         local id = b._id

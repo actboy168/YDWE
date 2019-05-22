@@ -1,3 +1,5 @@
+local lang = require 'share.lang'
+
 return function (w2l, w3i, w3f, input_ar, output_ar, args)
     input_ar:close()
     if w2l.setting.mode == 'lni' then

@@ -5,7 +5,7 @@ local root = fs.current_path()
 return function (err)
     local app = root:parent_path() / 'bin' / 'w3x2lni-lua.exe'
     local script = root / 'crashreport' / 'init.lua'
-    local p, stdin = process.spawn {
+    local p = process.spawn {
         app:string(),
         '-E',
         '-e', ('package.cpath=[[%s]]'):format(package.cpath),
@@ -18,7 +18,7 @@ return function (err)
     if not p then
         return
     end
-    stdin:write(err)
-    stdin:close()
+    p.stdin:write(err)
+    p.stdin:close()
     p:wait()
 end

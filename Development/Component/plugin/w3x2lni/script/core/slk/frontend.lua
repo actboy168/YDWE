@@ -129,6 +129,13 @@ local function get_displayname(o)
     return (name:sub(1, 100):gsub('\r\n', ' '))
 end
 
+local function is_usable_id(str)
+    if str:find '[^%w_]' then
+        return false
+    end
+    return true
+end
+
 local function mark_keep_obj_before_merge(type, objs)
     if type == 'ability' then
         for id, obj in pairs(objs) do
@@ -154,6 +161,10 @@ local function mark_keep_obj_after_merge(type, objs)
             local name1 = get_displayname(obj)
             local name2 = get_displayname(objs[used[lid]])
             w2l.messager.report(lang.report.WARN, 2, (lang.report.OBJECT_ID_CONFLICT):format(id), ('`%s`[%s] --> `%s`[%s]'):format(id, name1, used[lid], name2))
+        elseif not is_usable_id(id) then
+            obj._keep_obj = true
+            local name = get_displayname(obj)
+            w2l.messager.report(lang.report.WARN, 2, ("%s %s %s"):format(type, id, name), ('%s %s'):format(lang.report.OBJECT_ID_CAN_CONVERT_NUMBER, ''))
         else
             used[lid] = id
         end

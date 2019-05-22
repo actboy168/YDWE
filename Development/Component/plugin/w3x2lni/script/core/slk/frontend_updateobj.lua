@@ -70,7 +70,7 @@ local function update_obj(name, type, obj, data)
         if string_sub(k, 1, 1) == '_' then
             new_obj[k] = v
         else
-            reports[#reports+1] = {name, k, concat(v, ','):sub(1, 1000):gsub('\r\n', ' ')}
+            reports[#reports+1] = {name, k, concat(v):sub(1, 1000):gsub('\r\n', ' ')}
         end
     end
     if has_level then

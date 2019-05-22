@@ -63,7 +63,7 @@ local function write_data(f, k, v)
     end
 end
 
-function writer(t)
+local function writer(t)
     local f = {}
     for i, o in sortpairs(t) do
         f[#f+1] = ('[%s]'):format(i)

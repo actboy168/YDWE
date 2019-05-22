@@ -104,48 +104,6 @@ local slk_keys = {
     },
 }
 
-local index = {1, 1, 1, 1}
-local strs1 = {}
-for c in ('!@#$%^&*()_=+\\|/?><,`~'):gmatch '.' do
-    strs1[#strs1+1] = c
-end
-local strs2 = {}
-for c in ('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'):gmatch '.' do
-    strs2[#strs2+1] = c
-end
-local function find_unused_id()
-    if not used then
-        used = {}
-        for _, data in pairs(all_slk) do
-            for id in pairs(data) do
-                used[id] = true
-            end
-        end
-    end
-    while true do
-        local id = strs1[index[1]] .. strs2[index[2]] .. strs2[index[3]] .. strs2[index[4]]
-        if not used[id] then
-            used[id] = true
-            return id
-        end
-        for i = 4, 1, -1 do
-            if i > 1 then
-                index[i] = index[i] + 1
-                if index[i] > #strs2 then
-                    index[i] = 1
-                else
-                    break
-                end
-            else
-                index[i] = index[i] + 1
-                if index[i] > #strs1 then
-                    return nil
-                end
-            end
-        end
-    end
-end
-
 local function add_end()
     lines[#lines+1] = 'E'
 end
@@ -348,19 +306,8 @@ local function load_obj(id, obj, slk_name)
         obj_data._parent = obj._parent
         obj_data._keep_obj = obj._keep_obj
     end
-    if not obj._slk_id and not is_usable_string(obj._id) then
-        obj._slk_id = find_unused_id()
-        obj_data._slk_id = obj._slk_id
-        if slk_type == 'ability' then
-            obj_data.name = obj.name
-        end
-        report_failed(obj, 'id', lang.report.OBJECT_ID_CAN_CONVERT_NUMBER, '')
-        if not obj._slk_id then
-            return nil
-        end
-    end
     local slk_data = {}
-    slk_data[slk_keys[slk_name][1]] = ('"%s"'):format(obj._slk_id or obj._id)
+    slk_data[slk_keys[slk_name][1]] = ('"%s"'):format(obj._id)
     slk_data['code'] = ('"%s"'):format(obj._code)
     if obj._name then
         if obj._id == obj._parent then

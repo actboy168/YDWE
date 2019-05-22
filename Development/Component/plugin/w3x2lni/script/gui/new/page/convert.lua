@@ -14,6 +14,7 @@ local root = fs.current_path()
 local worker
 local view
 local data
+local element
 
 local function getexe()
     local i = 0

@@ -122,7 +122,7 @@ function mt:update()
     end
     if #self.error > 0 then
         while #self.output > 0 do
-            self:update_message(pos)
+            self:update_message()
         end
         self.output = {}
         if self.out_rd then
@@ -133,7 +133,7 @@ function mt:update()
     end
     if self.closed then
         while #self.output > 0 do
-            self:update_message(pos)
+            self:update_message()
         end
         self.exited = true
         return true
