@@ -9,7 +9,7 @@ local function do_command(script, ...)
         (root / 'bin' / 'lua.exe'):string(),
         '-E', 
         '-e', ('package.cpath=[[%s]]'):format(
-            (root / 'bin' / 'modules' / '?.dll'):string()
+            (root / 'bin' / '?.dll'):string()
         ),
         '-e', ('package.path=[[%s;%s]]'):format(
             (current_dir / '?.lua'):string(),
