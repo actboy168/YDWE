@@ -2,15 +2,15 @@
 #include "auto_enter.h"
 #include "game_status.h"
 #include <cstdint>
-#include <base/thread/thread.h>
+#include <thread>
 
 namespace auto_enter {
 
 	void initialize()
 	{
-		base::thread([]()
+		std::thread([]()
 		{
-			for (; game_status::enable_auto_enter; base::this_thread::sleep_for(300))
+			for (; game_status::enable_auto_enter; std::this_thread::sleep_for(std::chrono::milliseconds(300)))
 			{
 				if (game_status::status == game_status::WARCRAFT3_NONE_STATUS)
 				{

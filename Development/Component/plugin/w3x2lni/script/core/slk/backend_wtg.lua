@@ -2,7 +2,8 @@ local lang = require 'lang'
 local w2l
 local wtg
 local wts
-local state1
+local state
+local hex
 
 local pack_eca
 

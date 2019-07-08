@@ -1,4 +1,4 @@
-require "log"
+log = require "log"
 
 log.debug("********************* ydwe initialize start *********************")
 
@@ -37,8 +37,9 @@ local function compiler_searcher(name)
 end
 table.insert(package.searchers, compiler_searcher)
 
-require "filesystem"
+fs = require 'bee.filesystem'
 require "event"
+require "wehelper"
 require "virtual_mpq"
 require "version"
 require "localization"

@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "../zip/zip_reader.h"
-#include <base/path/helper.h>
+#include <bee/utility/path_helper.h>
 
 namespace DuiLib
 {
@@ -66,7 +66,7 @@ namespace DuiLib
 				zip::reader::entry& current_entry_info = *it;
 				if (current_entry_info.is_vaild()
 					&& (!current_entry_info.is_directory())
-					&& (base::path::equal(current_entry_info.file_path(), name)))
+					&& (bee::path_helper::equal(current_entry_info.file_path(), name)))
 				{
 					CUIBuffer buf;
 					buf.reset((size_t)current_entry_info.original_size());

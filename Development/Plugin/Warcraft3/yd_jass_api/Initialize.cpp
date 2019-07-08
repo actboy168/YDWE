@@ -1,7 +1,7 @@
 #include <windows.h>
 
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace warcraft3::japi {
 	void InitializeUnitState();
 	void InitializeAbilityState();
 	void InitializeItemState();
@@ -20,4 +20,4 @@ namespace base { namespace warcraft3 { namespace japi {
 		InitializeDisableButtonBlp();
 		InitializeEffect();
 	}
-}}}
+}

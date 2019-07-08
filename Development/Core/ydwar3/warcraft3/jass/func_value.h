@@ -1,0 +1,69 @@
+#pragma once
+
+#include <warcraft3/config.h>
+#include <stdint.h>
+#include <vector>
+#include <unordered_map>
+#include <string>
+
+namespace warcraft3::jass {
+
+	class call_param;
+
+	enum variable_type
+	{
+		TYPE_NONE    = 0,
+		TYPE_BOOLEAN = 'B',
+		TYPE_CODE    = 'C',
+		TYPE_HANDLE  = 'H',
+		TYPE_INTEGER = 'I',
+		TYPE_REAL    = 'R',
+		TYPE_STRING  = 'S',
+		TYPE_NOTHING = 'V',
+	};
+
+	class _WAR3_API func_value
+	{
+	public:
+		func_value();
+		func_value(const char* param, uintptr_t address);
+		func_value(func_value const& that, uintptr_t address);
+		bool                              is_valid()    const;
+		std::vector<variable_type> const& get_param()   const;
+		variable_type const&              get_return()  const;
+		uintptr_t                         get_address() const;
+		bool                              has_sleep() const;
+		void                              set_sleep(bool v);
+
+		template <class R>
+		void call_assert(size_t param_count) const
+		{
+			assert(is_valid());
+			assert((return_ != 'V') || ((return_ == 'V') && (std::is_void<R>::value)));
+			assert(param_.size() == param_count);
+		}
+
+		uintptr_t call(const uintptr_t* param) const;
+		uintptr_t call(const call_param& param) const;
+		
+	private:
+		variable_type              return_;
+#pragma warning(push)
+#pragma warning(disable:4251)
+		std::vector<variable_type> param_;
+#pragma warning(pop)
+		uintptr_t                  address_;
+		bool                       has_sleep_;
+	};
+
+	typedef std::unordered_map<std::string, func_value> func_mapping;
+	_WAR3_API extern func_mapping jass_function;
+	_WAR3_API extern func_mapping japi_function;
+
+	_WAR3_API func_value const* jass_func(const char* proc_name);
+	_WAR3_API func_value const* japi_func(const char* proc_name);
+	/*_WAR3_API*/ bool japi_func_add(const char* proc_name, uintptr_t new_proc);
+	/*_WAR3_API*/ bool japi_func_add(const char* proc_name, uintptr_t new_proc, const char* param);
+	/*_WAR3_API*/ bool japi_func_clean();
+	_WAR3_API func_mapping initialize_mapping(const char* startfunc);
+}

@@ -8,12 +8,13 @@ local push_error = require 'gui.push_error'
 local ui = require 'gui.new.template'
 local databinding = require 'gui.new.databinding'
 local ev = require 'gui.event'
-require 'filesystem'
+fs = require 'bee.filesystem'
 
 local root = fs.current_path()
 local worker
 local view
 local data
+local element
 
 local function getexe()
     local i = 0
@@ -21,22 +22,6 @@ local function getexe()
         i = i - 1
     end
     return fs.path(arg[i + 1])
-end
-
-local function trans_command(cmd)
-    local str = cmd:gsub([[(\\?)$]], function (str)
-        if str == [[\]] then
-            return [[\\]]
-        end
-    end)
-    return '"' .. str .. '"'
-end
-
-local function pack_arg()
-    local buf = {}
-    buf[1] = window._mode
-    buf[2] = trans_command(window._filename:string())
-    return table.concat(buf, ' ')
 end
 
 local function update_show()
@@ -149,7 +134,7 @@ local template = ui.container {
                         return
                     end
                     backend:init(getexe(), fs.current_path())
-                    worker = backend:open('backend\\init.lua', pack_arg())
+                    worker = backend:open('backend\\init.lua', {window._mode, window._filename:string()})
                     backend.message = lang.ui.INIT
                     backend.progress = 0
                     data.progress.value = backend.progress / 100
@@ -234,6 +219,13 @@ local function lni()
                 bind = {
                     value = 'config.lni.export_lua'
                 }
+            },
+            checkbox {
+                text = lang.ui.EXTRA_CHECK,
+                tip = lang.ui.EXTRA_CHECK_HINT,
+                bind = {
+                    value = 'config.slk.extra_check'
+                }
             }
         }
     }
@@ -290,6 +282,13 @@ local function slk()
                 bind = {
                     value = 'config.slk.confused'
                 }
+            },
+            checkbox {
+                text = lang.ui.EXTRA_CHECK,
+                tip = lang.ui.EXTRA_CHECK_HINT,
+                bind = {
+                    value = 'config.slk.extra_check'
+                }
             }
         }
     }
@@ -302,6 +301,20 @@ local function obj()
         checkbox {
             text = lang.ui.READ_SLK,
             tip = lang.ui.READ_SLK_HINT
+        },
+        ui.tree {
+            text = lang.ui.ADVANCED,
+            style = { MarginTop = 4, MarginBottom = 4 },
+            bind = {
+                color = 'theme'
+            },
+            checkbox {
+                text = lang.ui.EXTRA_CHECK,
+                tip = lang.ui.EXTRA_CHECK_HINT,
+                bind = {
+                    value = 'config.slk.extra_check'
+                }
+            }
         }
     }
     return ui.createEx(template, configData)
@@ -320,7 +333,7 @@ ev.on('update theme', function(color, title)
     backend.lastword = nil
     data.message = ''
     worker = nil
-    
+
     configData.proxy.theme = color
 
     if current_page then

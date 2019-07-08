@@ -1,17 +1,16 @@
 #include "Shortcuts.h"
 #include <Shobjidl.h>
 #include <memory>
-#include <base/win/version.h>
-#include <base/path/get_path.h>
-#include <base/path/helper.h>
+#include <bee/platform/version.h>
+#include <bee/utility/path_helper.h>
 #include <base/com/unique_ptr.h>
-#include <base/exception/windows_exception.h>
+#include <bee/error.h>
 
 namespace Shortcuts
 {
 	namespace detail
 	{
-#define ENSURE(cond) if (FAILED(cond)) throw base::windows_exception(#cond " failed.");
+#define ENSURE(cond) if (FAILED(cond)) throw bee::make_syserror(#cond " failed.");
 
 		fs::path quick_launch_path()
 		{
@@ -160,7 +159,7 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (base::path::equal(read_target, target_path))
+					if (bee::path_helper::equal(read_target, target_path))
 					{
 						fs::remove(shortcut_path);
 						return true;
@@ -198,7 +197,7 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (base::path::equal(read_target, target_path))
+					if (bee::path_helper::equal(read_target, target_path))
 					{
 						return true;
 					}
@@ -216,12 +215,12 @@ namespace Shortcuts
 	{
 		try
 		{
-			if (base::win::get_version() >= base::win::VERSION_WIN10)
+			if (bee::platform::get_version().ver >= bee::platform::WinVer::Win10)
 			{
 			}
-			else if (base::win::get_version() >= base::win::VERSION_WIN7)
+			else if (bee::platform::get_version().ver >= bee::platform::WinVer::Win7)
 			{
-				fs::path shortcut_path = base::path::temp() / target_path.filename().replace_extension(L".lnk");
+				fs::path shortcut_path = fs::temp_directory_path() / target_path.filename().replace_extension(L".lnk");
 
 				if (!detail::CreateOrUpdateShortcutLink(shortcut_path, target_path))
 				{
@@ -251,11 +250,11 @@ namespace Shortcuts
 		try
 		{
 			fs::path taskbar_path;
-			if (base::win::get_version() >= base::win::VERSION_WIN10)
+			if (bee::platform::get_version().ver >= bee::platform::WinVer::Win10)
 			{
 				return false;
 			}
-			else if (base::win::get_version() >= base::win::VERSION_WIN7)
+			else if (bee::platform::get_version().ver >= bee::platform::WinVer::Win7)
 			{
 				taskbar_path = detail::quick_launch_path() / L"User Pinned" / L"TaskBar";
 			}
@@ -282,9 +281,9 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (base::path::equal(read_target, target_path))
+					if (bee::path_helper::equal(read_target, target_path))
 					{
-						if (base::win::get_version() >= base::win::VERSION_WIN7)
+						if (bee::platform::get_version().ver >= bee::platform::WinVer::Win7)
 						{
 							return detail::TaskbarUnpinShortcutLink(shortcut_path);
 						}
@@ -309,7 +308,7 @@ namespace Shortcuts
 		try
 		{
 			fs::path taskbar_path;
-			if (base::win::get_version() >= base::win::VERSION_WIN7)
+			if (bee::platform::get_version().ver >= bee::platform::WinVer::Win7)
 			{
 				taskbar_path = detail::quick_launch_path() / L"User Pinned" / L"TaskBar";
 			}
@@ -336,7 +335,7 @@ namespace Shortcuts
 						continue;
 					}
 
-					if (base::path::equal(read_target, target_path))
+					if (bee::path_helper::equal(read_target, target_path))
 					{
 						return true;
 					}

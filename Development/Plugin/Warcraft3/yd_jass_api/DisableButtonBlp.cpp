@@ -1,18 +1,18 @@
 #include <base/hook/iat.h>
 #include <base/hook/fp_call.h> 	 	  		
 #include <base/filesystem.h>
-#include <base/path/helper.h>	
+#include <bee/utility/path_helper.h>
 #include <base/file/stream.h> 
-#include <base/warcraft3/virtual_mpq.h>  
-#include <base/warcraft3/jass/hook.h>	
-#include <base/warcraft3/jass.h>	
-#include <base/warcraft3/event.h>
+#include <warcraft3/virtual_mpq.h>  
+#include <warcraft3/jass/hook.h>	
+#include <warcraft3/jass.h>	
+#include <warcraft3/event.h>
 #include <BlpConv/BlpConv.h>
 #include <algorithm>
 #include <map>
 #include <stdint.h>
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace warcraft3::japi {
 
 	uint32_t kPasButton[] = {
 #include "PasButton.h"
@@ -366,4 +366,4 @@ namespace base { namespace warcraft3 { namespace japi {
 			fake::g_history.clear();
 		});
 	}
-}}}
+}

@@ -3,10 +3,9 @@
 #include <base/file/stream.h>
 #include <base/hook/iat.h>
 #include <base/hook/dyn_iat.h>
-#include <base/path/helper.h>
-#include <base/util/unicode.h>
-#include <base/warcraft3/command_line.h>
-#include <base/win/file_version.h>
+#include <bee/utility/path_helper.h>
+#include <bee/utility/unicode_win.h>
+#include <warcraft3/command_line.h>
 #include <base/win/pe_reader.h>
 #include <base/util/ini.h>
 #include <map>
@@ -62,7 +61,7 @@ void DllModule::SetWindow(HWND hwnd)
 
 void DllModule::Attach()
 {
-	base::warcraft3::command_line::parse([&](std::wstring const& key, std::wstring const&){
+	warcraft3::command_line::parse([&](std::wstring const& key, std::wstring const&){
 		if (key == L"auto")
 		{
 			IsAuto = true;

@@ -1,13 +1,13 @@
 #include <lua.hpp>
 #include <base/hook/inline.h>
 #include <base/hook/iat.h>
-#include <base/util/unicode.h>	
+#include <bee/utility/unicode_win.h>	
 
 static std::wstring lua_towstring(lua_State* L, int idx)
 {
 	size_t len = 0;
 	const char* buf = luaL_checklstring(L, idx, &len);
-	return base::u2w(std::string_view(buf, len), base::conv_method::replace | '?');
+	return bee::u2w(std::string_view(buf, len));
 }
 
 struct hook_t {

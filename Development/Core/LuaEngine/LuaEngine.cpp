@@ -6,15 +6,15 @@
 #include <base/hook/inline.h>
 #include <base/path/self.h>
 #include <base/path/ydwe.h>
-#include <base/win/file_version.h>
-#include <base/util/format.h>
-#include <base/win/version.h>
-
-int luaopen_log(lua_State* L);
+#include <bee/utility/module_version_win.h>
+#include <bee/utility/format.h>
+#include <bee/platform/version.h>
+#include "../../Plugin/Lua/log/logging.h"
+#include "nameof.hpp"
 
 void lua_pushwstring(lua_State* L, const std::wstring& str)
 {
-	std::string ustr = base::w2u(str, base::conv_method::replace | '?');
+	std::string ustr = bee::w2u(str);
 	lua_pushlstring(L, ustr.data(), ustr.size());
 }
 
@@ -59,37 +59,28 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 {
 	fs::path ydwe = base::path::ydwe(false);
 	fs::path ydwedev = base::path::ydwe(true);
-
-	std::unique_ptr<logging::manager> mgr = std::make_unique<logging::manager>((ydwe / L"logs").c_str(), name);
-
-	logging::logger* lg = mgr->get_logger("root");
-	LOGGING_INFO(lg) << "------------------------------------------------------";
-
-	base::win::version_number vn = base::win::get_version_number();
-	LOGGING_INFO(lg) << base::format("LuaEngine %s started.", base::win::file_version(base::path::self().c_str())[L"FileVersion"]);
-	LOGGING_INFO(lg) << "Compiled at " __TIME__ ", " __DATE__;
-	LOGGING_INFO(lg) << base::format("Windows version: %d.%d.%d", vn.major, vn.minor, vn.build);
-
 #ifndef _DEBUG
 	base::hook::install(&RealLuaPcall, (uintptr_t)FakeLuaPcall);
 #endif
 	lua_State* L = luaL_newstate();
-	if (!L)
-	{
-		LOGGING_FATAL(lg) << "Could not initialize LuaEngine. Program may not work correctly!";
+	if (!L) {
 		return nullptr;
 	}
 
+	logging::logger* lg = logging::create(L, (ydwe / L"logs").wstring(), name);
 	try
 	{
-		logging::set_manager(L, mgr.release());
+		LOGGING_INFO(lg) << "------------------------------------------------------";
+
+        auto vn = bee::platform::get_version();
+		LOGGING_INFO(lg) << bee::format("LuaEngine %s started.", bee::module_version(base::path::self().c_str())[L"FileVersion"]);
+		LOGGING_INFO(lg) << "Compiled at " __TIME__ ", " __DATE__;
+		LOGGING_INFO(lg) << bee::format("Windows version: %s.%d", NAMEOF_ENUM(vn.ver), vn.build);
 
 		luaL_openlibs(L);
-		luaL_requiref(L, "log", luaopen_log, 1);
-		lua_pop(L, 1);
 		LOGGING_DEBUG(lg) << "Initialize LuaEngine successfully.";
 
-		fs::path cp = ydwe / L"bin" / L"modules" / L"?.dll";
+		fs::path cp = ydwe / L"bin" / L"?.dll";
 		lua_getglobal(L, "package");
 		lua_pushwstring(L, cp.wstring());
 		lua_setfield(L, -2, "cpath");
@@ -119,13 +110,11 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 
 void LuaEngineDestory(lua_State* L)
 {
-	logging::manager* mgr = logging::get_manager(L);
-	lua_close(L);
-	L = nullptr;
-	if (mgr) {
-		LOGGING_INFO(mgr->get_logger("root")) << "LuaEngine has been shut down.";
-		delete mgr;
+	logging::logger* lg = logging::get(L);
+	if (lg) {
+		LOGGING_INFO(lg) << "LuaEngine has been shut down.";
 	}
+	lua_close(L);
 }
 
 bool LuaEngineStart(lua_State* L)
@@ -135,8 +124,7 @@ bool LuaEngineStart(lua_State* L)
 	lua_pushstring(L, "main");
 	if (LUA_OK != lua_pcall(L, 1, 0, -3))
 	{
-		logging::manager* mgr = logging::get_manager(L);
-		LOGGING_ERROR(mgr->get_logger("root")) << "exception: " << lua_tostring(L, -1);
+		LOGGING_ERROR(logging::get(L)) << "exception: " << lua_tostring(L, -1);
 		lua_pop(L, 2);
 		return false;
 	}

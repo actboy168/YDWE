@@ -1,13 +1,24 @@
-require "log"
-require "filesystem"
-local process = require "process"
+log = require 'log'
+fs = require 'bee.filesystem'
+local subprocess = require 'bee.subprocess'
 
 sys = {}
 
 local uni = require 'ffi.unicode'
 
-fs.__ydwe_path = fs.ydwe(false)
-fs.__ydwe_devpath = fs.ydwe(true)
+local function ydwePath(support_dev)
+    local ydwe = fs.dll_path():parent_path():parent_path()
+    if support_dev then
+        local ydwedev = ydwe:parent_path():parent_path():parent_path()
+        if fs.exists(ydwedev / "build.root") then
+            return ydwedev / "Component"
+        end
+    end
+    return ydwe
+end
+
+fs.__ydwe_path = ydwePath(false)
+fs.__ydwe_devpath = ydwePath(true)
 log.debug('ydwe path ' .. fs.__ydwe_path:string())
 if fs.__ydwe_path ~= fs.__ydwe_devpath then
     log.debug('ydwe dev path ' .. fs.__ydwe_devpath:string())
@@ -80,25 +91,39 @@ local function trim(str)
 	return str:gsub("^%s*(.-)%s*$", "%1")
 end
 
-function sys.spawn (command_line, current_dir, wait)
-	local p = process()
-	if not p:create(nil, command_line, current_dir) then
+function sys.spawn (args)
+	local command_line = table.concat(args, ' ')
+	local process = subprocess.spawn(args)
+	if not process then
 		log.error(string.format("Executed %s failed", command_line))
 		return false
 	end
-
-	if wait then
-		local exit_code = p:wait()
-		p:close()
-		p = nil
-		log.trace(string.format("Executed %s, returned %d", command_line, exit_code))
-		return exit_code == 0
-	end
-	
-	p:close()
-	p = nil	
 	log.trace(string.format("Executed %s.", command_line))
 	return false
+end
+
+function sys.tbl_concat(t, sep)
+	local nt = {}
+	for i, v in ipairs(t) do
+		if type(v) == 'table' then
+			nt[i] = sys.tbl_concat(v, sep)
+		else
+			nt[i] = v
+		end
+	end
+	return table.concat(nt, sep)
+end
+
+function sys.spawn_wait (args)
+	local command_line = sys.tbl_concat(args, ' ')
+	local process = subprocess.spawn(args)
+	if not process then
+		log.error(string.format("Executed %s failed", command_line))
+		return false
+	end
+	local exit_code = process:wait()
+	log.trace(string.format("Executed %s, returned %d", command_line, exit_code))
+	return exit_code == 0
 end
 
 function sys.ini_load (path)
@@ -132,16 +157,16 @@ ffi.cdef[[
 ]]
 
 function sys.reboot(map)
-    local p = process()
     local ydwe = fs.ydwe_path() / 'ydwe.exe'
-    local cmd = '"'.. ydwe:string() .. '"'
     if map then
-        cmd = cmd .. ' -loadfile "' .. map .. '"'
+		if not subprocess.spawn { ydwe:string(), "-loadfile", map, cwd = fs.current_path() } then
+			return
+		end
+	else
+		if not subprocess.spawn { ydwe:string(), cwd = fs.current_path() } then
+			return
+		end
     end
-	if not p:create(ydwe, cmd, fs.current_path()) then
-		return
-	end
-    p:close()
     ffi.C.TerminateProcess(ffi.C.GetCurrentProcess(), 0)
 	return
 end

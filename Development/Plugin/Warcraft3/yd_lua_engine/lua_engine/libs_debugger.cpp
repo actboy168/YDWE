@@ -4,7 +4,7 @@
 #include <functional>
 #include <base/filesystem.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger {
+namespace warcraft3::lua_engine::debugger {
 
 #define STATUS_INFO_LENGTH_MISMATCH      ((NTSTATUS)0xC0000004L)
 
@@ -164,7 +164,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger
 		DWORD pid = 0;
 		QueryProcess([&](const SYSTEM_PROCESS_INFORMATION* info)->bool {
 			std::wstring pname(info->ImageName.Buffer, info->ImageName.Length / sizeof(wchar_t));
-			std::transform(pname.begin(), pname.end(), pname.begin(), ::tolower);
+			std::transform(pname.begin(), pname.end(), pname.begin(), ::towlower);
 			if (pname == name) {
 				pid = (DWORD)info->ProcessId;
 				return true;
@@ -219,4 +219,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debugger
 		}
 		return 1;
 	}
-}}}}
+}

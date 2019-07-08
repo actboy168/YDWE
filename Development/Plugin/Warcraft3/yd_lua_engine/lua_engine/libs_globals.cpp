@@ -2,14 +2,14 @@
 #include "class_array.h"
 #include "libs_runtime.h"
 #include "common.h"
-#include <base/warcraft3/hashtable.h>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/jass/func_value.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/global_variable.h>
-#include <base/lua/make_range.h>
+#include <warcraft3/hashtable.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/jass/func_value.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/global_variable.h>
+#include <bee/lua/range.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace globals {
+namespace warcraft3::lua_engine::globals {
 
 	void jass_get_global_variable(lua_State* L, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value)
 	{
@@ -72,9 +72,9 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace globals 
 		lua_pushnil(L);
 		return 1;
 	}
-}}}}
+}
 
-namespace base { namespace lua {
+namespace bee::lua {
 	template <>
 	inline int convert_to_lua(lua_State* L, const warcraft3::hashtable::variable_node& v)
 	{
@@ -82,9 +82,9 @@ namespace base { namespace lua {
 		lua_pushstring(L, gv.name());
 		return 1 + warcraft3::lua_engine::globals::jass_get_global_variable(L, gv);
 	}
-}}
+}
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace globals {
+namespace warcraft3::lua_engine::globals {
 
 	int jglobals_get(lua_State* L)
 	{
@@ -136,7 +136,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace globals 
 	int jglobals_pairs(lua_State* L)
 	{
 		const hashtable::variable_table& vt = *(get_jass_vm()->global_table);
-		return lua::make_range(L, vt);
+		return bee::lua::make_range(L, vt);
 	}
 
 	int open(lua_State* L)
@@ -161,4 +161,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace globals 
 		}
 		return 1;
 	}
-}}}}
+}

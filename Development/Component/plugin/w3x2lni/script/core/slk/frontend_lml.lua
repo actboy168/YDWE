@@ -25,8 +25,8 @@ local function load_trigger(trg, id, filename)
         run = 0,
         wct = 0,
     }
-    local name = trg[2] or trg[1]
-    trigger.name = trg[1]
+    local name = trg[1] or trg[2]
+    trigger.name = trg[2]
     for i = 3, #trg do
         local line = trg[i]
         local k, v = line[1], line[2]
@@ -62,8 +62,8 @@ local function load_category(dir)
     local category = {
         comment = 0,
     }
-    local dir_name = dir[2] or dir[1]
-    category.name = dir[1]
+    local dir_name = dir[1] or dir[2]
+    category.name = dir[2]
     category_id = category_id + 1
     category.id = category_id
 

@@ -5,16 +5,19 @@ local main_window_handle = nil
 
 -- 启动配置对话框
 local function launch_config()
-	local config_program = fs.ydwe_path() / "bin" / "YDWEConfig.exe"
-	local command_line = string.format('"%s"', config_program:string())
-	sys.spawn(command_line, fs.ydwe_path())
+	sys.spawn { 
+		(fs.ydwe_path() / "bin" / "YDWEConfig.exe"):string(),
+		cwd = fs.ydwe_path(),
+	}
 end
 
 -- 启动魔兽
 local function launch_warcraft3()
-	local config_program = fs.ydwe_path() / "ydwe.exe"
-	local command_line = string.format('"%s" -war3', config_program:string())
-	sys.spawn(command_line, fs.ydwe_path())
+	sys.spawn { 
+		(fs.ydwe_path() / "ydwe.exe"):string(),
+		"-war3",
+		cwd = fs.ydwe_path(),
+	}
 end
 
 -- 打开官网

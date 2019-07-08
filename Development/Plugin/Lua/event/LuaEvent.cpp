@@ -4,12 +4,13 @@
 #include <algorithm>
 #include <functional>
 #include <regex>
-#include <base/path/get_path.h>
-#include <base/util/unicode.h>
+#include <bee/utility/path_helper.h>
+#include <bee/utility/unicode_win.h>
 #include <base/hook/inline.h>
 #include <base/hook/iat.h>
 #include <base/hook/fp_call.h>	  
 #include <base/com/guard.h>	 
+#include <base/util/pinyin.h>
 #include <lua.hpp>
 
 #include "YDWEEvent.h"
@@ -23,13 +24,13 @@ namespace NYDWE {
 
 	void lua_pushwstring(lua_State* L, const std::wstring& str)
 	{
-		std::string ustr = base::w2u(str, base::conv_method::replace | '?');
+		std::string ustr = bee::w2u(str);
 		lua_pushlstring(L, ustr.data(), ustr.size());
 	}
 
 	void lua_pushastring(lua_State* L, const char* str)
 	{
-		std::string ustr = base::a2u(str, base::conv_method::replace | '?');
+		std::string ustr = bee::a2u(str);
 		lua_pushlstring(L, ustr.data(), ustr.size());
 	}
 	
@@ -89,7 +90,7 @@ namespace NYDWE {
 		if (pos == -1) {
 			return base::c_call<FILE*>(pgTrueFopen, filename, mode);
 		}
-		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
+		sFilename = sFilename.substr(0, pos) + bee::u2a(sFilename.substr(pos));
 		return base::c_call<FILE*>(pgTrueFopen, sFilename.c_str(), mode);
 	} 
 
@@ -101,7 +102,7 @@ namespace NYDWE {
 		if (pos == -1) {
 			return base::std_call<DWORD>(pgTrueGetFileAttributesA, lpPathName);
 		}
-		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
+		sFilename = sFilename.substr(0, pos) + bee::u2a(sFilename.substr(pos));
 		return base::std_call<DWORD>(pgTrueGetFileAttributesA, sFilename.c_str());
 	}
 
@@ -113,7 +114,7 @@ namespace NYDWE {
 		if (pos == -1) {
 			return base::std_call<BOOL>(pgTrueCreateDirectoryA, lpPathName, lpSecurityAttributes);
 		}
-		sFilename = sFilename.substr(0, pos) + base::u2a(sFilename.substr(pos));
+		sFilename = sFilename.substr(0, pos) + bee::u2a(sFilename.substr(pos));
 		BOOL ok = base::std_call<BOOL>(pgTrueCreateDirectoryA, sFilename.c_str(), lpSecurityAttributes);
 		return ok;
 	}
@@ -161,7 +162,7 @@ namespace NYDWE {
 		saveMap = true;
 		int results = event_array[EVENT_NEW_SAVE_MAP]([&](lua_State* L, int idx) {
 			lua_pushstring(L, "map_path");
-			lua_pushwstring(L, base::a2w(mappath));
+			lua_pushwstring(L, bee::a2w(mappath));
 			lua_rawset(L, idx);
 
 			lua_pushstring(L, "test");
@@ -180,7 +181,7 @@ namespace NYDWE {
 		std::cmatch matcher;
 		if (lpCommandLine && std::regex_match(lpCommandLine, matcher, gRegexCommandLine))
 		{
-			fs::path currentWarcraftMap = base::path::module().parent_path() / matcher.str(1);
+			fs::path currentWarcraftMap = bee::path_helper::exe_path().value().parent_path() / matcher.str(1);
 			LOGGING_TRACE(lg) << "Executing map " << currentWarcraftMap.wstring();
 
 			int results = event_array[EVENT_TEST_MAP]([&](lua_State* L, int idx){
@@ -257,6 +258,9 @@ namespace NYDWE {
 	uintptr_t pgTrueCreateWindowExA;
 	HWND WINAPI DetourWeCreateWindowExA(DWORD dwExStyle, LPCSTR lpClassName, LPCSTR lpWindowName, DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu, HINSTANCE hInstance, LPVOID lpParam)
 	{
+		if (strcmp(lpClassName, "LISTBOX") == 0) {
+			dwStyle |= LBS_WANTKEYBOARDINPUT;
+		}
 		HWND result = base::std_call<HWND>(pgTrueCreateWindowExA,
 			dwExStyle,
 			lpClassName,
@@ -306,9 +310,80 @@ namespace NYDWE {
 		return base::std_call<BOOL>(pgTrueSetMenu, hWnd, hMenu);
 	}
 
+	std::string ListBoxItem(HWND listbox, size_t idx) {
+		size_t len = (size_t)SendMessageA(listbox, LB_GETTEXTLEN, (WPARAM)idx, NULL);
+		std::string text; text.resize(len);
+		SendMessageA(listbox, LB_GETTEXT, (WPARAM)idx, (LPARAM)text.data());
+		std::transform(text.begin(), text.end(), text.begin(), ::tolower);
+		return base::chinese2pinyin(text);
+	}
+
+	bool ListBoxFind(HWND listbox, int i, int j, int& r, char vk) {
+		if (i > j) {
+			return false;
+		}
+		int m = (i + j) / 2;
+		std::string item = ListBoxItem(listbox, m);
+		if (vk == item[0]) {
+			for (int k = m - 1; k >= i; --k) {
+				std::string item = ListBoxItem(listbox, k);
+				if (vk != item[0]) {
+					r = k + 1;
+					return true;
+				}
+			}
+			r = i;
+			return true;
+		}
+		else if (vk < item[0]) {
+			return ListBoxFind(listbox, i, m - 1, r, vk);
+		}
+		else {
+			return ListBoxFind(listbox, m + 1, j, r, vk);
+		}
+	}
+
 	uintptr_t pgTrueWeDialogProc;
 	INT_PTR CALLBACK DetourWeDialogProc(HWND dialogHandle, UINT message, WPARAM wParam, LPARAM lParam)
 	{
+		if (message == WM_VKEYTOITEM) {
+			int current = wParam >> 16;
+			if (((wParam & 0xFFFF) < 'A') || ((wParam & 0xFFFF) > 'Z')) {
+				return current;
+			}
+			HWND listbox = (HWND)lParam;
+			char vk = tolower(wParam & 0xFF);
+			int n = (int)SendMessageA(listbox, LB_GETCOUNT, NULL, NULL);
+			if (current >= n) {
+				current = n - 1;
+			}
+
+			std::string item = ListBoxItem(listbox, current);
+			if (vk == item[0]) {
+				if (current == n - 1) {
+					return current;
+				}
+				std::string next = ListBoxItem(listbox, current + 1);
+				if (next[0] == vk) {
+					return current + 1;
+				}
+				return current;
+			}
+
+			int ret = 0;
+			if (vk < item[0]) {
+				if (!ListBoxFind(listbox, 0, current - 1, ret, vk)) {
+					return current;
+				}
+			}
+			else {
+				if (!ListBoxFind(listbox, current + 1, n -1, ret, vk)) {
+					return current;
+				}
+			}
+			return ret;
+		}
+
 		INT_PTR ret = base::std_call<INT_PTR>(pgTrueWeDialogProc, dialogHandle, message, wParam, lParam);
 
 		if (message == WM_SETTEXT)

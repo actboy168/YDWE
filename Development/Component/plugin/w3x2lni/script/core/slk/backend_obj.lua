@@ -8,6 +8,7 @@ local string_char  = string.char
 local math_type    = math.type
 local math_floor   = math.floor
 local wtonumber = w3xparser.tonumber
+local float2bin = w3xparser.float2bin
 local type = type
 local pairs = pairs
 local setmetatable = setmetatable
@@ -81,10 +82,7 @@ local function write_value(meta, level, obj, value)
         end
         write('l', value)
     elseif tp == 1 or tp == 2 then
-        if type(value) ~= 'number' then
-            value = wtonumber(value)
-        end
-        write('f', value)
+        write('c4', float2bin(value)) -- obj 的浮点数用api转换为二进制
     else
         if type(value) ~= 'string' then
             value = ''
@@ -169,8 +167,8 @@ local function write_object(chunk, name, obj)
         end
     end
     
-    local parent = obj._slk_id or obj._parent
-    if (name == parent or obj._slk) and not obj._slk_id then
+    local parent = obj._parent
+    if name == parent or obj._slk then
         write('c4', name)
         write('c4', '\0\0\0\0')
     else
@@ -220,9 +218,6 @@ local function is_enable_obj(name, obj, remove_unuse_object)
     if not obj._slk and obj._id ~= obj._parent then
         return true
     end
-    if obj._slk_id then
-        return true
-    end
     if obj._keep_obj then
         return true
     end
@@ -245,16 +240,21 @@ local function sort_chunk(chunk, remove_unuse_object)
     local user = {}
     for name, obj in pairs(chunk) do
         if is_enable_obj(name, obj, remove_unuse_object) then
-            local parent = obj._slk_id or obj._parent
-            if (name == parent or obj._slk) and not obj._slk_id then
+            local parent = obj._parent
+            if name == parent or obj._slk then
                 origin[#origin+1] = name
             else
                 user[#user+1] = name
             end
         end
     end
-    table_sort(origin)
-    table_sort(user)
+    -- 大写ID的对象必须在小写ID的对象前面，否则同ID单位时，英雄的数据会出错
+    table_sort(origin, function (id1, id2)
+        return id1 > id2
+    end)
+    table_sort(user, function (id1, id2)
+        return id1 > id2
+    end)
     return origin, user
 end
 

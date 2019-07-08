@@ -3,13 +3,13 @@
 #include "class_handle.h"
 #include "class_array.h"
 #include "libs_runtime.h"
-#include <base/warcraft3/hashtable.h>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/trampoline_function.h>
+#include <warcraft3/hashtable.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/trampoline_function.h>
 #include <base/util/singleton.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace warcraft3::lua_engine {
 
 	bool is_gaming()
 	{
@@ -179,10 +179,10 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		int result = jass_call_native_function(L, (const jass::func_value*)lua_tointeger(L, lua_upvalueindex(1)));
 		if (lua_isyieldable(L))
 		{
-			uintptr_t thread = get_jass_thread();
-			if (thread && *(uintptr_t*)(thread + 0x34))
+			jass_vm_t* thread = get_jass_thread();
+			if (thread && thread->has_sleep)
 			{
-				*(uintptr_t*)(thread + 0x20) -= jass::trampoline_size();
+				thread->opcode -= jass::trampoline_size() / sizeof(jass::opcode);
 				return lua_yield(L, 0);
 			}
 		}
@@ -196,4 +196,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		lua_pop(thread, 1);
 		return ml;
 	}
-}}}
+}

@@ -5,18 +5,18 @@
 #include "open_lua_engine.h"
 #include "libs_runtime.h"
 #include <lua.hpp>
-#include <base/warcraft3/event.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/func_value.h>
-#include <base/warcraft3/jass/hook.h>
+#include <warcraft3/event.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/func_value.h>
+#include <warcraft3/jass/hook.h>
 #include <base/util/singleton.h>
-#include <base/util/format.h>
+#include <bee/utility/format.h>
 #include <base/hook/fp_call.h>
-#include <base/util/string_view.h>	
+#include <string_view>
 #include <base/util/string_algorithm.h>
-#include <base/warcraft3/virtual_mpq.h>
+#include <warcraft3/virtual_mpq.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_loader {
+namespace warcraft3::lua_engine::lua_loader {
 
 	static char tmpMapName[1024] = { 0 };
 	static char curMapName[1024] = { 0 };
@@ -43,7 +43,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 
 		if (!cheat)
 		{
-			c_call<uint32_t>(RealCheat, cheat_str);
+            base::c_call<uint32_t>(RealCheat, cheat_str);
 			return ;
 		}
 
@@ -52,7 +52,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 		if (cheat_s.substr(0, 9) == "exec-lua:")
 		{
 			cheat_s = cheat_s.substr(9);
-			algorithm::trim(cheat_s);
+            base::algorithm::trim(cheat_s);
 			if (cheat_s.size() >= 2 && cheat_s[0] == '"' && cheat_s[cheat_s.size() - 1] == '"')
 			{
 				cheat_s = cheat_s.substr(1, cheat_s.size() - 2);
@@ -63,14 +63,14 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			safe_call(L, 1, 1, true);
 		}
 
-		c_call<uint32_t>(RealCheat, cheat_str);
+        base::c_call<uint32_t>(RealCheat, cheat_str);
 	}
 
 	jass::jstring_t __cdecl EXExecuteScript(jass::jstring_t script)
 	{
 		lua_State* L = getMainL();
 
-		std::string str_script = format("return (%s)", jass::from_trigstring(jass::from_string(script)));
+		std::string str_script = bee::format("return (%s)", jass::from_trigstring(jass::from_string(script)));
 		if (luaL_loadbuffer(L, str_script.c_str(), str_script.size(), str_script.c_str()) != LUA_OK)
 		{
 			printf("%s\n", lua_tostring(L, -1));
@@ -139,4 +139,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace lua_load
 			curMapName[0] = 0;
 		});
 	}
-}}}}
+}

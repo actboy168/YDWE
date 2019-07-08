@@ -14,21 +14,21 @@
     <ProjectGuid>{9B311390-F190-11E2-ACA6-E3865C23FF03}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>clr</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -57,11 +57,10 @@
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)/sdk/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>clr.def</ModuleDefinitionFile>
-      <AdditionalDependencies>clr_interop.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\clr_interop\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -71,17 +70,17 @@
       <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)/sdk/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>clr.def</ModuleDefinitionFile>
-      <AdditionalDependencies>clr_interop.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\clr_interop\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="clr_interop.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="luaopen_clr.cpp" />
   </ItemGroup>
@@ -89,12 +88,21 @@
     <None Include="clr.def" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\OpenSource\Lua\build\lua54.vcxproj">
-      <Project>{b84f7231-16ce-41d8-8c08-7b523ff4225b}</Project>
+    <ProjectReference Include="..\..\..\..\OpenSource\bee.lua\project\msvc\bee.vcxproj">
+      <Project>{355c2493-0a78-490b-971a-bbdb0e2819ef}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Core\ydbase\ydbase.vcxproj">
-      <Project>{75b04c07-94d9-41e7-bbfd-e67f79bff41a}</Project>
+    <ProjectReference Include="..\..\..\..\OpenSource\bee.lua\project\msvc\lua54.vcxproj">
+      <Project>{316b33ed-1056-48b0-abf0-ce3ce55f7a17}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="clr_interop.h" />
+    <ClInclude Include="sdk\atlcomcli.h" />
+    <ClInclude Include="sdk\gchost.h" />
+    <ClInclude Include="sdk\ivalidator.h" />
+    <ClInclude Include="sdk\ivehandler.h" />
+    <ClInclude Include="sdk\metahost.h" />
+    <ClInclude Include="sdk\mscoree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

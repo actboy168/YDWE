@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <base/util/singleton.h>
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
 
 	class storm_dll
 	{
@@ -32,5 +32,5 @@ namespace base { namespace warcraft3 {
 		uintptr_t fn_sfile_get_archive_name_;
 	};
 
-	typedef singleton_nonthreadsafe<storm_dll> storm_s;
-}}
+	typedef base::singleton_nonthreadsafe<storm_dll> storm_s;
+}

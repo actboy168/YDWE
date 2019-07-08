@@ -1,4 +1,4 @@
-require 'filesystem'
+fs = require 'bee.filesystem'
 local messager = require 'share.messager'
 local maketemplate = require 'prebuilt.maketemplate'
 local core = require 'backend.sandbox_core'

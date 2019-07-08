@@ -288,7 +288,6 @@ local function mark_marketplace(slk, flag)
     for _, obj in pairs(slk.unit) do
         -- 是否使用了市场
         if obj._mark and obj._name == 'marketplace' then
-            search_marketplace = true
             report_cache[#report_cache+1] = {lang.report.RETAIN_MARKET, lang.report.RETAIN_MARKET_HINT:format(obj.name, obj._id)}
             for _, obj in pairs(slk.item) do
                 if obj.pickrandom == 1 and obj.sellable == 1 then

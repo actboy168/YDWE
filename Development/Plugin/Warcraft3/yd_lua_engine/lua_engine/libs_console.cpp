@@ -1,10 +1,10 @@
 #include <lua.hpp>
 #include <base/util/console.h>
-#include <base/util/unicode.h> 	  
+#include <bee/utility/unicode_win.h> 	  
 #include "libs_runtime.h"
 #include "callback.h"
 
-namespace base {  namespace warcraft3 { namespace lua_engine { namespace console {
+namespace warcraft3::lua_engine::console {
 
 	int jass_console_set(lua_State* L)
 	{
@@ -51,7 +51,7 @@ namespace base {  namespace warcraft3 { namespace lua_engine { namespace console
 			{
 				if (lua_isfunction(L, 1))
 				{
-					std::string temp_string = w2u(std::wstring_view(req->buffer, req->overlapped.InternalHigh), conv_method::skip);
+					std::string temp_string = bee::w2u(std::wstring_view(req->buffer, req->overlapped.InternalHigh));
 					lua_pushvalue(L, 1);
 					lua_pushlstring(L, temp_string.c_str(), temp_string.size());
 					safe_call(L, 1, 0, true);
@@ -64,7 +64,7 @@ namespace base {  namespace warcraft3 { namespace lua_engine { namespace console
 
 	void jass_console_write_string(const char* str, size_t len)
 	{
-		std::wstring temp_string = u2w(std::string_view(str, len), conv_method::skip);
+		std::wstring temp_string = bee::u2w(std::string_view(str, len));
 		DWORD written_size;
 		WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), temp_string.c_str(), temp_string.size(), &written_size, 0);
 	}
@@ -117,4 +117,4 @@ namespace base {  namespace warcraft3 { namespace lua_engine { namespace console
 		}
 		return 1;
 	}
-}}}}
+}

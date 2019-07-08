@@ -1,15 +1,15 @@
 #include <base/hook/fp_call.h>
 #include <base/hook/iat.h>
-#include <base/warcraft3/jass/hook.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/version.h>
-#include <base/warcraft3/war3_searcher.h>	
-#include <base/warcraft3/hashtable.h>
+#include <warcraft3/jass/hook.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/version.h>
+#include <warcraft3/war3_searcher.h>	
+#include <warcraft3/hashtable.h>
 #include <array>
 #include <string>
 #include "StringPool.h"
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace warcraft3::japi {
 	extern string_pool_t string_pool;
 
 	enum ITEM_DATA_TYPE
@@ -99,7 +99,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		if (!table) {
 			return jass::create_string("");
 		}
-		item_ui_node* ptr = table->get(hashid(code));
+		item_ui_node* ptr = table->find(hashid(code));
 		if (!ptr) {
 			return jass::create_string("");
 		}
@@ -134,7 +134,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		if (!table) {
 			return false;
 		}
-		item_ui_node* ptr = table->get(hashid(code));
+		item_ui_node* ptr = table->find(hashid(code));
 		if (!ptr) {
 			return false;
 		}
@@ -185,4 +185,4 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXGetItemDataString, "EXGetItemDataString", "(II)S");
 		jass::japi_add((uintptr_t)EXSetItemDataString, "EXSetItemDataString", "(IIS)B");
 	}
-}}}
+}

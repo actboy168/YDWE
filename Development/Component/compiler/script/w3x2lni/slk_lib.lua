@@ -455,7 +455,7 @@ function mt:create_object(objt, ttype, name)
                 id = tostring(id)
             end
         end
-        if #id == 4 and not id:find('%W') then
+        if type(id) == 'string' and #id == 4 and not id:find('%W') then
             w2lobject = 'static'
             if session.default[ttype][id] or session.slk[ttype][id] then
                 report_error('新建对象的ID重复', ('[%s]'):format(id))
@@ -614,7 +614,9 @@ function mt:create_report()
                 lines[#lines+1] = err
                 buf[#buf+1] = '+ ' .. err
             end
-            log.error(table.concat(buf, '\n'))
+            if log then
+                log.error(table.concat(buf, '\n'))
+            end
         end
     end
 	if #lold > 0 then
@@ -674,7 +676,9 @@ end
 
 function mt:listen_error(w2l)
     function w2l.messager.report(type, level, content, tip)
-        log.info(type, content, tip)
+        if log then
+            log.info(type, content, tip)
+        end
         if type == 'INVALID_OBJECT_DATA' then
             if not content or not tip then
                 return
@@ -795,10 +799,12 @@ return function (w2l_, read_only, safe_mode)
     slk_proxy = {}
     for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
         slk_proxy[name] = session:create_proxy(name)
-        session.dynamics[name] = {}
-        session:mark_obj(name, session.slk[name])
     end
     if not read_only then
+        for _, name in ipairs {'ability', 'buff', 'unit', 'item', 'upgrade', 'doodad', 'destructable', 'misc'} do
+            session.dynamics[name] = {}
+            session:mark_obj(name, session.slk[name])
+        end
         function slk_proxy:refresh()
             return session:refresh()
         end

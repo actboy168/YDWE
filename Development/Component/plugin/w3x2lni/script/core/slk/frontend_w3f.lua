@@ -4,7 +4,7 @@ local unpack_pos
 local wts
 local w3f
 
-function set_index(...)
+local function set_index(...)
     unpack_pos = select(-1, ...)
     return ...
 end

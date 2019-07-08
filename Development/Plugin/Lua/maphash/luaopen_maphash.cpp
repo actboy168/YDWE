@@ -1,23 +1,21 @@
 #include <lua.hpp> 
 #include <fstream>
-#include <filesystem>
+#include <base/filesystem.h>
 #include "crc32.h"
 #include "sha1.h"
 #include "rolc.h"
 
-#define YDWE_BASE_INLINE
+#define BEE_INLINE
 #define BASE_UNICODE_DISABLE_ANSI
-#include <base/util/unicode.h>
-#include <base/util/unicode.cpp>
+#include <bee/utility/unicode_win.h>
+#include <bee/utility/unicode_win.cpp>
 
 #define __STORMLIB_SELF__
 #include <StormLib.h>
 
-namespace fs = std::experimental::filesystem;
-
 int file_error(lua_State* L, fs::path const& path)
 {
-	return luaL_error(L, "%s: %s", base::w2u(path.wstring()).c_str(), strerror(ENOENT));
+	return luaL_error(L, "%s: %s", bee::w2u(path.wstring()).c_str(), strerror(ENOENT));
 }
 
 size_t sfsize(HANDLE file)
@@ -82,8 +80,8 @@ bool readall(HANDLE handle, const char* filename, std::string& buf)
 
 int maphash(lua_State* L)
 {
-	fs::path& path = *(fs::path*)luaL_checkudata(L, 1, "filesystem");
-	fs::path& jass = *(fs::path*)luaL_checkudata(L, 2, "filesystem");
+	fs::path& path = *(fs::path*)luaL_checkudata(L, 1, "bee::filesystem");
+	fs::path& jass = *(fs::path*)luaL_checkudata(L, 2, "bee::filesystem");
 	{
 		std::string buf;
 		if (!readall(path, buf))

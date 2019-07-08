@@ -1,5 +1,5 @@
 #include <base/file/file_handle.h>
-#include <base/exception/windows_exception.h>
+#include <bee/error.h>
 
 namespace base { namespace file {
 
@@ -8,21 +8,16 @@ namespace base { namespace file {
 	{
 		if (!mybase::operator bool())
 		{
-			throw windows_exception("failed to open file");
+			throw bee::make_syserror("failed to open file");
 		}
 	}
 
 	uint64_t file_handle::get_size()
 	{
-		DWORD   size_high;
-		DWORD   size_low   = ::GetFileSize(mybase::get(), &size_high);
-		DWORD   error_code = ::GetLastError();
-
-		if (INVALID_FILE_SIZE == size_low && ERROR_SUCCESS != error_code)
-		{
-			throw windows_exception("failed to determine file size", error_code);
+		LARGE_INTEGER file_size;
+		if (!::GetFileSizeEx(mybase::get(), &file_size)) {
+			throw bee::make_syserror("failed to determine file size");
 		}
-
-		return (static_cast<uint64_t>(size_high) << 32) | size_low;
+		return file_size.QuadPart;
 	}
 }}

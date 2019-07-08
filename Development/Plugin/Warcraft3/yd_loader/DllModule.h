@@ -2,11 +2,6 @@
 
 #include <windows.h>
 
-#include <base/filesystem.h>
-#include <base/thread/thread.h>
-#include <atomic>
-#include <map>	 
-
 class DllModule
 {
 public:

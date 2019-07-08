@@ -1,9 +1,9 @@
 #include "class_handle.h"
 #include "libs_runtime.h"
 #include "jassbind.h"
-#include <base/warcraft3/jass.h>
+#include <warcraft3/jass.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace warcraft3::lua_engine {
 
 	int jhandle_tostring(lua_State *L, jass::jhandle_t h)
 	{
@@ -196,4 +196,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			}
 		}
 	}
-}}}
+}

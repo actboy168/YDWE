@@ -9324,8 +9324,3 @@ WESTRING_ERROR_YDTRIGGER_TIMER_FLUSH=YDTrigger Error: 不要在逆天计时器�
 WESTRING_ERROR_YDTRIGGER_TRIGGER_FLUSH=YDTrigger Error: 不要在逆天触发器的动作外使用<清除逆天触发器>
 WESTRING_ERROR_YDTRIGGER_YDWEEnumUnitsInRangeMultiple=YDTrigger Error: 不要嵌套使用<逆天--选取单位>
 WESTRING_ERROR_YDTRIGGER_ForForceMultiple=YDTrigger Error: 不要嵌套使用<选取玩家组>
-
-WESTRING_MOVERFUNC_HIT="事件 - 击中单位"
-WESTRING_MOVERFUNC_BLOCK="事件 - 击中地形"
-WESTRING_MOVERFUNC_MOVE="事件 - 移动"
-WESTRING_MOVERFUNC_REMOVE="事件 - 结束"

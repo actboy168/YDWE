@@ -1,25 +1,26 @@
 ﻿#include <base/filesystem.h>
 #include <base/file/stream.h>
 #include <base/path/ydwe.h>
-#include <base/path/helper.h>
-#include <base/win/env_variable.h>
-#include <base/win/process.h>
+#include <bee/utility/path_helper.h>
 #include <base/util/ini.h>
-#include <base/util/format.h>
-#include <base/win/registry/key.h> 
+#include <bee/utility/format.h>
+#include <bee/registry.h> 
 #include <base/hook/fp_call.h>
+#include <bee/subprocess.h>
+#include <base/hook/injectdll.h>
+#include <base/hook/replacedll.h>
 
 #define YDWE_WAR3_INLINE
-#include <base/warcraft3/directory.h>
-#include <base/warcraft3/command_line.h>
+#include <warcraft3/directory.h>
+#include <warcraft3/command_line.h>
 
 static std::wstring get_test_map_path()
 {
 	std::wstring result = L"Maps\\Test\\WorldEditTestMap";
 	try {
-		result = (base::registry::current_user() / L"Software\\Blizzard Entertainment\\WorldEdit")[L"Test Map - Copy Location"].get_string();
+		result = bee::registry::key_w(L"HKEY_CURRENT_USER\\Software\\Blizzard Entertainment\\WorldEdit")[L"Test Map - Copy Location"].get_string();
 	}
-	catch (base::registry::registry_exception const&) {}
+	catch (bee::registry::registry_exception const&) {}
 	return std::move(result);
 }
 
@@ -57,23 +58,25 @@ static bool map_convert(const fs::path& ydwe, const fs::path& from, const fs::pa
 {
 	fs::path ydwedev = base::path::ydwe(true);
 	fs::path app = ydwe / L"bin" / L"lua.exe";
-	base::win::process process;
-	process.set_console(base::win::process::CONSOLE_DISABLE);
-	process.set_env(L"PATH", (ydwe / L"bin").wstring());
-	if (!process.create(
-		app,
-		base::format(LR"("%s" -e "package.cpath = [[%s]]" gui\mini.lua %s "%s" "%s")", 
+	bee::subprocess::spawn spawn;
+	spawn.set_console(bee::subprocess::console::eDisable);
+	spawn.env_set(L"PATH", (ydwe / L"bin").wstring());
+    bee::subprocess::args_t agrs;
+	if (!spawn.exec(
+		std::vector<std::wstring> {
 			app.wstring(),
-			(ydwe / L"bin" / L"modules" / L"?.dll").wstring(),
-			mode,
+			L"-e",
+			bee::format(L"package.cpath = [[%s]]", (ydwe / L"bin" / L"?.dll").wstring()),
+			L"gui\\mini.lua",
+			bee::u2w(mode),
 			from.wstring(),
-			to.wstring()
-		),
-		ydwedev / L"plugin" / L"w3x2lni" / L"script"
+			to.wstring(),
+		},
+		(ydwedev / L"plugin" / L"w3x2lni" / L"script").c_str()
 	)) {
 		return false;
 	}
-	return process.wait() == 0;
+	return bee::subprocess::process(spawn).wait() == 0;
 }
 
 static void map_build(const fs::path& ydwe, const fs::path& from, const fs::path& to, bool slk)
@@ -104,14 +107,14 @@ static void map_build(const fs::path& ydwe, const fs::path& from, const fs::path
 	}
 }
 
-bool launch_warcraft3(base::warcraft3::command_line& cmd)
+bool launch_warcraft3(warcraft3::command_line& cmd)
 {
 	try {
 		fs::path ydwe = base::path::ydwe(false);
 		launch_taskbar_support(ydwe);
 
 		fs::path war3_path;
-		if (!base::warcraft3::directory::get(nullptr, war3_path))
+		if (!warcraft3::directory::get(nullptr, war3_path))
 		{
 			return false;
 		}
@@ -138,7 +141,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 			fs::path loadfile = cmd[L"loadfile"];
 
 			// war3将非.w3g后缀名的文件当地图处理
-			if (!base::path::equal(loadfile.extension(), L".w3g"))
+			if (!bee::path_helper::equal(loadfile.extension(), L".w3g"))
 			{
 				fs::path test_map_path = get_test_map_path() + L".w3x";
 				try {
@@ -164,7 +167,7 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 		std::string name = table["MapTest"]["UserName"];
 		if (name != "")
 		{
-			base::registry::key_a key(HKEY_CURRENT_USER, "Software\\Blizzard Entertainment\\Warcraft III", "String");
+			bee::registry::key_a key("HKEY_CURRENT_USER\\Software\\Blizzard Entertainment\\Warcraft III\\String");
 			key["userlocal"].set((const void*)name.c_str(), name.size());
 		}
 
@@ -181,31 +184,40 @@ bool launch_warcraft3(base::warcraft3::command_line& cmd)
 
 		SetEnvironmentVariableW(L"ydwe-process-name", L"war3");
 
-		base::win::process warcraft3_process;
+		bee::subprocess::spawn spawn;
+		spawn.suspended();
 
+		if (fs::exists(inject_dll))
+		{
+			cmd.add(L"ydwe", ydwe.wstring());
+		}
+		cmd.app(war3_path.wstring());
+		cmd.del(L"war3");
+		cmd.del(L"closew2l");
+		if (!spawn.exec(cmd.args(), 0)) {
+			return false;
+		}
+
+		bee::subprocess::process process(spawn);
 		try {
 			if (table["War3Patch"]["Option"] == "2")
 			{
 				fs::path stormdll = ydwe / L"share" / L"patch" / table["War3Patch"]["DirName"] / L"Storm.dll";
 				if (fs::exists(stormdll))
 				{
-					warcraft3_process.replace(stormdll, "Storm.dll");
+					base::hook::replacedll(process.info(), "Storm.dll", stormdll.string().c_str());
 				}
 			}
 		}
 		catch (...) {
 		}
-
 		if (fs::exists(inject_dll))
 		{
-			cmd.add(L"ydwe", ydwe.wstring());
-			warcraft3_process.inject_x86(inject_dll);			
+			base::hook::injectdll(process.info(), inject_dll.wstring(), std::wstring());
 		}
-
-		cmd.app(war3_path.wstring());
-		cmd.del(L"war3");
-		cmd.del(L"closew2l");
-		return warcraft3_process.create(war3_path, cmd.str());
+		process.resume();
+		return true;
+		
 	}
 	catch (...) {
 	}

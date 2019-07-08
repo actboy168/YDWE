@@ -1,4 +1,0 @@
-call_*.h
-*.dSYM
-bin/
-obj/

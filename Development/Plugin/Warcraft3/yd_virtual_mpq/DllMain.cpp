@@ -1,13 +1,13 @@
 #include <windows.h>
 #include <map>
 #include <base/path/self.h>
-#include <base/warcraft3/virtual_mpq.h>	 
+#include <warcraft3/virtual_mpq.h>	 
 #include <base/util/ini.h>
 #include <base/file/stream.h>
 
 void Initialize()
 {
-	base::warcraft3::virtual_mpq::initialize(::GetModuleHandleW(L"Game.dll"));
+	warcraft3::virtual_mpq::initialize(::GetModuleHandleW(L"Game.dll"));
 	fs::path ydwe_path = base::path::self().parent_path().parent_path().parent_path();
 	base::ini::table table;
 	table["MapTest"]["VirtualMpq"] = "share/mpq/war3";
@@ -17,7 +17,7 @@ void Initialize()
 	}
 	catch (...) {
 	}
-	base::warcraft3::virtual_mpq::open_path(ydwe_path / table["MapTest"]["VirtualMpq"], 15);
+	warcraft3::virtual_mpq::open_path(ydwe_path / table["MapTest"]["VirtualMpq"], 15);
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)

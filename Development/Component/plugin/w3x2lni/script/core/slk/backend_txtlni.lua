@@ -21,7 +21,7 @@ end
 local function format_value(value)
     if tonumber(value) then
         return tostring(value)
-    else
+    elseif type(value) == 'string' then
         if value:match '[\n\r]' then
             return ('[=[\r\n%s]=]'):format(value)
         else

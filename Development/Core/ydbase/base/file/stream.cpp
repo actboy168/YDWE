@@ -1,6 +1,6 @@
 #include <base/file/stream.h>
-#include <base/exception/exception.h>
-#include <base/util/unicode.h>
+#include <bee/error/exception.h>
+#include <bee/utility/unicode_win.h>
 
 namespace base { namespace file {
 
@@ -14,7 +14,7 @@ namespace base { namespace file {
 #if defined(_MSC_VER)
 		file_.open(filename, std::ios::binary | mode);
 #else
-		file_.open(base::w2u(filename), std::ios::binary | mode);
+		file_.open(bee::w2u(filename), std::ios::binary | mode);
 #endif
 	}
 
@@ -33,7 +33,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception("Can not open the file %s.", filename);
+			throw bee::exception("Can not open the file %s.", filename);
 		}
 	}
 
@@ -42,7 +42,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception("Can not open the file %s.", filename.c_str());
+			throw bee::exception("Can not open the file %s.", filename.c_str());
 		}
 	}
 
@@ -51,7 +51,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception(L"Can not open the file %s.", filename);
+			throw bee::exception(L"Can not open the file %s.", filename);
 		}
 	}
 
@@ -60,7 +60,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception(L"Can not open the file %s.", filename.c_str());
+			throw bee::exception(L"Can not open the file %s.", filename.c_str());
 		}
 	}
 
@@ -69,7 +69,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception(L"Can not open the file %s.", filename.c_str());
+			throw bee::exception(L"Can not open the file %s.", filename.c_str());
 		}
 	}
 
@@ -78,7 +78,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception("Can not open the file %s.", filename);
+			throw bee::exception("Can not open the file %s.", filename);
 		}
 	}
 
@@ -87,7 +87,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception("Can not open the file %s.", filename.c_str());
+			throw bee::exception("Can not open the file %s.", filename.c_str());
 		}
 	}
 
@@ -96,7 +96,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception(L"Can not open the file %s.", filename);
+			throw bee::exception(L"Can not open the file %s.", filename);
 		}
 	}
 
@@ -105,7 +105,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception(L"Can not open the file %s.", filename.c_str());
+			throw bee::exception(L"Can not open the file %s.", filename.c_str());
 		}
 	}
 
@@ -114,7 +114,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw exception(L"Can not open the file %s.", filename.c_str());
+			throw bee::exception(L"Can not open the file %s.", filename.c_str());
 		}
 	}
 }}

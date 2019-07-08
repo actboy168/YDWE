@@ -6,7 +6,7 @@ local data_load = assert(load(io.load(data_load_path), '@'..data_load_path:strin
 return (require 'backend.sandbox')('.\\core\\', io.open, {
     ['w3xparser'] = require 'w3xparser',
     ['lni']       = require 'lni',
-    ['lpeg']      = require 'lpeg',
+    ['lpeglabel'] = require 'lpeglabel',
     ['lml']       = require 'lml',
     ['lang']      = require 'share.lang',
     ['data_load'] = data_load,

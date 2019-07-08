@@ -1,13 +1,101 @@
-require 'filesystem'
-require 'registry'
-local uni = require 'unicode'
+local fs = require 'bee.filesystem'
+local sp = require 'bee.subprocess'
+local registry = require 'bee.registry'
+local uni = require 'bee.unicode'
 local ffi = require 'ffi'
 ffi.cdef[[
     int SetEnvironmentVariableA(const char* name, const char* value);
 ]]
 
+local vswhere = fs.path(os.getenv('ProgramFiles(x86)')) / 'Microsoft Visual Studio' / 'Installer' / 'vswhere.exe'
+
+
 local function strtrim(str) 
     return str:gsub("^%s*(.-)%s*$", "%1")
+end
+
+local function installpath()
+    local process = assert(sp.spawn {
+        vswhere,
+        '-latest',
+        '-products', '*',
+        '-requires', 'Microsoft.VisualStudio.Component.VC.Tools.x86.x64',
+        '-property', 'installationPath',
+        stdout = true,
+    })
+    local result = strtrim(process.stdout:read 'a')
+    process.stdout:close()
+    process:wait()
+    assert(result ~= "", "can't find msvc.")
+    return fs.path(result)
+end
+
+
+local function crtpath(platform)
+    local RedistVersion = (function ()
+        local verfile = installpath() / 'VC' / 'Auxiliary' / 'Build' / 'Microsoft.VCRedistVersion.default.txt'
+        local f = assert(io.open(verfile:string(), 'r'))
+        local r = f:read 'a'
+        f:close()
+        return strtrim(r)
+    end)()
+    local ToolVersion = (function ()
+        local verfile = installpath() / 'VC' / 'Auxiliary' / 'Build' / 'Microsoft.VCToolsVersion.default.txt'
+        local f = assert(io.open(verfile:string(), 'r'))
+        local r = f:read 'a'
+        f:close()
+        return strtrim(r)
+    end)()
+    local ToolsetVersion = (function ()
+        local verfile = installpath() / 'VC' / 'Tools' / 'MSVC' / ToolVersion / 'include' / 'yvals_core.h'
+        local f = assert(io.open(verfile:string(), 'r'))
+        local r = f:read 'a'
+        f:close()
+        return r:match '#define%s+_MSVC_STL_VERSION%s+(%d+)'
+    end)()
+    return installpath() / 'VC' / 'Redist' / 'MSVC' / RedistVersion / platform / ('Microsoft.VC'..ToolsetVersion..'.CRT')
+end
+
+local function ucrtpath(platform)
+    local registry = require 'bee.registry'
+    local reg = registry.open [[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots]]
+    local path = fs.path(reg.KitsRoot10) / 'Redist'
+    local res, ver
+    local function accept(p)
+        if not fs.is_directory(p) then
+            return
+        end
+        local ucrt = p / 'ucrt' / 'DLLs' / platform
+        if fs.exists(ucrt) then
+            local version = 0
+            if p ~= path then
+                version = p:filename():string():gsub('10%.0%.([0-9]+)%.0', '%1')
+                version = tonumber(version)
+            end
+            if not ver or ver < version then
+                res, ver = ucrt, version
+            end
+        end
+    end
+    accept(path)
+    for p in path:list_directory() do
+        accept(p)
+    end
+    if res then
+        return res
+    end
+end
+
+local function copy_crtdll(platform, target)
+    fs.create_directories(target)
+    for dll in crtpath(platform):list_directory() do
+        if dll:filename() ~= fs.path "vccorlib140.dll" then
+            fs.copy_file(dll, target / dll:filename(), true)
+        end
+    end
+    for dll in ucrtpath(platform):list_directory() do
+        fs.copy_file(dll, target / dll:filename(), true)
+    end
 end
 
 local function parse_env(str)
@@ -26,20 +114,12 @@ local function addenv(name, newvalue)
     ffi.C.SetEnvironmentVariableA(name, newvalue)
 end
 
-local function msvc_path(version)
-    local reg = registry.local_machine() / [[SOFTWARE\Microsoft\VisualStudio\SxS\VS7]]
-    local path = reg[("%d.0"):format(math.ceil(version / 10))]
-    if path then
-        return fs.path(path)
-    end
-end
-
 local mt = {}
 
 local need = { LIB = true, LIBPATH = true, PATH = true, INCLUDE = true }
 
 function mt:initialize(version, coding)
-    self.__path = msvc_path(version)
+    self.__path = installpath()
     if not self.__path then
         return false
     end
@@ -60,34 +140,8 @@ function mt:initialize(version, coding)
     return true
 end
 
-function mt:redistversion()
-    local verfile = self.__path / 'VC' / 'Auxiliary' / 'Build' / 'Microsoft.VCRedistVersion.default.txt'
-    local f = assert(io.open(verfile:string(), 'r'))
-    local r = f:read 'a'
-    f:close()
-    return strtrim(r)
-end
-
-function mt:crtpath(platform)
-    return self.__path / 'VC' / 'Redist' / 'MSVC' / self:redistversion() / platform / ('Microsoft.VC' .. self.version .. '.CRT')
-end
-
-function mt:sdkpath()
-    local reg = registry.open [[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots]]
-    return fs.path(reg.KitsRoot10)
-end
-
-function mt:ucrtpath(platform)
-    return self:sdkpath() / 'Redist' / 'ucrt' / 'DLLs' / platform
-end
-
 function mt:copy_crt_dll(platform, target)
-    fs.create_directories(target)
-    fs.copy_file(self:crtpath(platform) / 'msvcp140.dll', target / 'msvcp140.dll', true)
-    fs.copy_file(self:crtpath(platform) / 'vcruntime140.dll', target / 'vcruntime140.dll', true)
-    for dll in self:ucrtpath(platform):list_directory() do
-        fs.copy_file(dll, target / dll:filename(), true)
-    end
+    copy_crtdll(platform, target)
 end
 
 function mt:compile(target, solution, property)

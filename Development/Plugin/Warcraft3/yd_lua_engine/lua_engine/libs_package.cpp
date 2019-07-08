@@ -1,14 +1,13 @@
 #include <lua.hpp>
 #include <string.h>	  
-#include <base/util/unicode.h>
-#include <base/path/get_path.h>
-#include <base/path/helper.h>
+#include <bee/utility/unicode_win.h>
+#include <bee/utility/path_helper.h>
 #include <base/file/stream.h>
-#include <base/util/format.h>
+#include <bee/utility/format.h>
 #include "storm.h"
 #include "common.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace package {
+namespace warcraft3::lua_engine::package {
 
 #if !defined (LUA_IGMARK)
 #define LUA_IGMARK		"-"
@@ -25,7 +24,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 	static int readable(const char *filename, bool is_local) {
 		if (is_local) {
 			try {
-				std::wstring wfilename = base::u2w(filename);
+				std::wstring wfilename = bee::u2w(filename);
 				std::ifstream fs(wfilename.c_str(), std::ios::binary | std::ios::in);
 				if (fs)
 				{
@@ -95,7 +94,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 		int stat = 0;
 
 		try {
-			std::wstring wfilename = base::u2w(filename);
+			std::wstring wfilename = bee::u2w(filename);
 			std::ifstream fs(wfilename.c_str(), std::ios::binary | std::ios::in);
 			if (fs)
 			{
@@ -164,7 +163,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 	}
 
 	static HMODULE loaddll_frommemory(const char* filename, const char* str, size_t len) {
-		fs::path dir = base::path::temp();
+		fs::path dir = fs::temp_directory_path();
 		fs::path file = dir / filename;
 		FILE* f = fopen(file.string().c_str(), "wb");
 		if (!f) {
@@ -268,4 +267,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace package 
 			lua_pushfstring(L, "\n\tno field package.preload['%s']", name);
 		return 1;
 	}
-}}}}
+}

@@ -1,16 +1,15 @@
 #include <lua.hpp>
 #include <base/util/console.h>	
-#include <base/util/format.h>	  
+#include <bee/utility/format.h>	  
 #include <array>
 #include <cstring>
 #include "libs_runtime.h"
 #include "YDWEVersion.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine { 
-namespace debugger {
+namespace warcraft3::lua_engine::debugger {
 	int open(lua_State* L, int port);
 }
-namespace runtime	{
+namespace warcraft3::lua_engine::runtime {
 	int  version = 3;
 	int  handle_level = 2;
 	bool enable_console = false;
@@ -206,12 +205,12 @@ namespace runtime	{
 			enable_console = !!lua_toboolean(L, 3);
 			if (enable_console)
 			{
-				console::enable();
-				console::disable_close_button();
+                base::console::enable();
+                base::console::disable_close_button();
 			}
 			else
 			{
-				console::disable();
+                base::console::disable();
 			}
 		}
 		else if (strcmp("debugger", name) == 0)
@@ -318,7 +317,7 @@ namespace runtime	{
 			double total_time = (time::get_counter() - start) / frequency;
 			double call_time = time[kJassCall] / frequency;
 			double event_time = time[kJassEvent] / frequency;
-			std::string result = base::format("total time[%.03fms], call count[%d] time[%.03fms], event count[%d] time[%.03fms]"
+			std::string result = bee::format("total time[%.03fms], call count[%d] time[%.03fms], event count[%d] time[%.03fms]"
 				, total_time
 				, count[kJassCall]
 				, call_time
@@ -358,4 +357,4 @@ namespace runtime	{
 		return 1;
 	}
 
-}}}}
+}

@@ -3,10 +3,10 @@
 #include <base/hook/fp_call.h>
 #include <base/hook/iat.h>
 #include <base/util/buffer.h>
-#include <base/util/unicode.h>
-#include <base/path/helper.h>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/version.h>
+#include <bee/utility/unicode_win.h>
+#include <bee/utility/path_helper.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/version.h>
 #include <deque>	
 #include "game_status.h"
 #include "war3_packet.h"
@@ -93,7 +93,7 @@ namespace auto_enter { namespace game_status {
 			reader2.read<uint16_t>();
 			reader2.read<uint16_t>();
 			reader2.read<uint32_t>();
-			map_path = u2w(reader2.read<std::string>());
+			map_path = bee::u2w(reader2.read<std::string>());
 		}
 		catch (...)
 		{
@@ -187,7 +187,7 @@ namespace auto_enter { namespace game_status {
 		if (!open_map_flag && archive_name && !map_path.empty())
 		{
 			try {
-				if (base::path::equal(fs::path(map_path).filename(), fs::path(archive_name).filename()))
+				if (bee::path_helper::equal(std::filesystem::path(map_path).filename(), std::filesystem::path(archive_name).filename()))
 				{
 					open_map_flag = true;
 				}
@@ -221,8 +221,8 @@ namespace auto_enter { namespace game_status {
 
 	void initialize(HMODULE gamedll)
 	{
-		auto& s = base::warcraft3::get_war3_searcher();
-		const char* dllname = s.get_version() >= base::warcraft3::version_127a? "ws2_32.dll" : "wsock32.dll";
+		auto& s = warcraft3::get_war3_searcher();
+		const char* dllname = s.get_version() >= warcraft3::version_127a? "ws2_32.dll" : "wsock32.dll";
 		real_connect = base::hook::iat(gamedll, dllname, (const char*)4 /*"connect"*/, (uintptr_t)fake_connect);
 		real_recvfrom = base::hook::iat(gamedll, dllname, (const char*)17/*"recvfrom"*/, (uintptr_t)fake_recvfrom);
 		real_sendto = base::hook::iat(gamedll, dllname, (const char*)20/*"sendto"*/, (uintptr_t)fake_sendto);

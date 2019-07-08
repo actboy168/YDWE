@@ -6,19 +6,19 @@
 #include <base/hook/assembler/writer.h>
 #include <base/util/noncopyable.h>
 #include <base/util/horrible_cast.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/func_value.h>
-#include <base/warcraft3/jass/hook.h>
-#include <base/warcraft3/war3_searcher.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/func_value.h>
+#include <warcraft3/jass/hook.h>
+#include <warcraft3/war3_searcher.h>
 #include "jassbind.h"
 #include "callback.h"
 #include "libs_runtime.h"
 #include "common.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace warcraft3::lua_engine {
 
 	template <int(extFunc)(lua_State*, void*)>
-	struct lua_to_nativefunction : noncopyable
+	struct lua_to_nativefunction : base::noncopyable
 	{
 		lua_to_nativefunction(lua_State* L, int luaobj, const jass::func_value* funcdef, void* userdata)
 			: L(get_mainthread(L))
@@ -33,7 +33,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			code.add(operand(esi), 8);
 			code.push(esi);
 			code.mov(ecx, (uintptr_t)this);
-			code.call(horrible_cast<uintptr_t>(&lua_to_nativefunction::lua_function), funcentry + code.size());
+			code.call(base::horrible_cast<uintptr_t>(&lua_to_nativefunction::lua_function), funcentry + code.size());
 			code.pop(esi);
 			code.ret();
 			if (!code.executable()) {
@@ -80,4 +80,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		uintptr_t               funcentry;
 		void*                   userdata;
 	};
-}}}
+}

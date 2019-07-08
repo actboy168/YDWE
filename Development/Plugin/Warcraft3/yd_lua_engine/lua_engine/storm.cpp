@@ -1,7 +1,7 @@
 #include "storm.h"
 #include <base/hook/fp_call.h>
 
-namespace base { namespace warcraft3 {
+namespace warcraft3 {
 
 	storm_dll::storm_dll()
 		: mod_(::LoadLibraryW(L"Storm.dll"))
@@ -44,19 +44,19 @@ namespace base { namespace warcraft3 {
 	bool storm_dll::load_file(HANDLE archive_handle, const char* file_name, const void** buffer_ptr, size_t* size_ptr, size_t reserve_size, uint32_t search_scope, OVERLAPPED* overlapped_ptr)
 	{
 		if (!valid()) return false;
-		return !!std_call<BOOL>(fn_sfile_load_file_, archive_handle, file_name, buffer_ptr, size_ptr, reserve_size, search_scope, overlapped_ptr);
+		return !!base::std_call<BOOL>(fn_sfile_load_file_, archive_handle, file_name, buffer_ptr, size_ptr, reserve_size, search_scope, overlapped_ptr);
 	}
 
 	bool storm_dll::unload_file(const void* buffer)
 	{
 		if (!valid()) return false;
-		return !!std_call<BOOL>(fn_sfile_unload_file_, buffer);
+		return !!base::std_call<BOOL>(fn_sfile_unload_file_, buffer);
 	}
 
 	bool storm_dll::has_file(const char* file_name)
 	{
 		if (!valid()) return false;
-		return !!std_call<BOOL>(fn_sfile_exists_, file_name);
+		return !!base::std_call<BOOL>(fn_sfile_exists_, file_name);
 	}
 
 	uintptr_t storm_dll::get_proc(uint32_t ord)
@@ -68,18 +68,18 @@ namespace base { namespace warcraft3 {
 	{
 		HANDLE filehandle = 0;
 		HANDLE mpqhandle = 0;
-		if (!std_call<BOOL>(fn_sfile_open_file_, "war3map.j", &filehandle)) {
-			if (!std_call<BOOL>(fn_sfile_open_file_, "script\\war3map.j", &filehandle)) {
+		if (!base::std_call<BOOL>(fn_sfile_open_file_, "war3map.j", &filehandle)) {
+			if (!base::std_call<BOOL>(fn_sfile_open_file_, "script\\war3map.j", &filehandle)) {
 				return false;
 			}
 		}
 		bool ok = false;
-		if (std_call<BOOL>(fn_sfile_get_file_archive_, filehandle, &mpqhandle)) {
-			if (std_call<BOOL>(fn_sfile_get_archive_name_, mpqhandle, buf, len)) {
+		if (base::std_call<BOOL>(fn_sfile_get_file_archive_, filehandle, &mpqhandle)) {
+			if (base::std_call<BOOL>(fn_sfile_get_archive_name_, mpqhandle, buf, len)) {
 				ok = true;
 			}
 		}
-		std_call<BOOL>(fn_sfile_close_file_, filehandle);
+        base::std_call<BOOL>(fn_sfile_close_file_, filehandle);
 		return ok;
 	}
-}}
+}

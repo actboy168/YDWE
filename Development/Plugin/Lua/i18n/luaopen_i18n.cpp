@@ -1,45 +1,45 @@
 #pragma warning(push, 3)
 #include <lua.hpp>
 #pragma warning(pop)
-#include <base/i18n-2/gettext.h>	
-#include <base/util/unicode.h>
+#include <base/i18n/gettext.h>	
+#include <bee/utility/unicode_win.h>
 
 namespace i18n {
 	static std::wstring luaL_checkwstring(lua_State* L, int idx)
 	{
 		size_t len = 0;
 		const char* buf = luaL_checklstring(L, idx, &len);
-		return base::u2w(std::string_view(buf, len), base::conv_method::replace | '?');
+		return bee::u2w(std::string_view(buf, len));
 	}
 
 	static void luaL_pushwstring(lua_State* L, const std::wstring& str)
 	{
-		std::string utf8 = base::w2u(str, base::conv_method::replace | '?');
+		std::string utf8 = bee::w2u(str);
 		lua_pushlstring(L, utf8.data(), utf8.size());
 	}
 
 	static int get_text(lua_State* L)
 	{
-		auto str = base::i18n::v2::get_text(luaL_checkstring(L, 1));
+		auto str = base::i18n::get_text(luaL_checkstring(L, 1));
 		lua_pushlstring(L, str.data(), str.size());
 		return 1;
 	}
 
 	static int set_domain(lua_State* L)
 	{
-		base::i18n::v2::set_domain(luaL_checkwstring(L, 1));
+		base::i18n::set_domain(luaL_checkwstring(L, 1));
 		return 0;
 	}
 
 	static int get_language(lua_State* L)
 	{
-		luaL_pushwstring(L, base::i18n::v2::get_language());
+		luaL_pushwstring(L, base::i18n::get_language());
 		return 1;
 	}
 
 	static int initialize(lua_State* L)
 	{
-		base::i18n::v2::initialize(*(fs::path*)luaL_checkudata(L, 1, "filesystem"));
+		base::i18n::initialize(*(fs::path*)luaL_checkudata(L, 1, "bee::filesystem"));
 		return 0;
 	}
 }

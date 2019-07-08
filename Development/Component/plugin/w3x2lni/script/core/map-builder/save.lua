@@ -27,7 +27,14 @@ local function build_imp(w2l, output_ar, imp_buf)
         end
     end
     if imp_buf then
-        local imp_lni = w2l:parse_lni(imp_buf, filename)
+        local imp_lni = w2l:parse_lni(imp_buf)
+        -- 兼容旧版lni
+        if imp_lni.root then
+            for k, v in pairs(imp_lni.root) do
+                imp_lni[k] = v
+            end
+            imp_lni.root = nil
+        end
         for _, name in ipairs(imp_lni.import) do
             if impignore[name:lower()] then
                 imp[#imp+1] = name
@@ -83,7 +90,7 @@ return function (w2l)
             w2l:file_save('table', 'imp', imp)
         end
     else
-        if not w2l.setting.remove_we_only and imp then
+        if not w2l.setting.remove_we_only then
             w2l:file_save('map', 'war3map.imp', build_imp(w2l, w2l.output_ar, imp))
         end
     end

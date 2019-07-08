@@ -4,18 +4,17 @@
 #include <base/file/stream.h>
 #include <base/path/self.h>
 #include <base/path/ydwe.h>
-#include <base/path/helper.h>
-#include <base/util/unicode.h>
-#include <base/win/version.h>
-#include <base/win/file_version.h>
+#include <bee/utility/path_helper.h>
+#include <bee/utility/unicode_win.h>
+#include <bee/platform/version.h>
+#include <bee/utility/module_version_win.h>
 #include <base/win/font/utility.h>
-#include <base/util/list_of.h>
 #include <base/util/ini.h>
-#include <base/i18n-2/gettext.h>
+#include <base/i18n/gettext.h>
 
 #define YDWE_WAR3_INLINE
-#include <base/warcraft3/directory.h>
-#include <base/warcraft3/directory.cpp>
+#include <warcraft3/directory.h>
+#include <warcraft3/directory.cpp>
 
 std::wstring CComboUI_GetSelectText(DuiLib::CComboUI* pui)
 {
@@ -71,31 +70,31 @@ namespace
 		uint8_t     m_count;
 	};
 
-	std::map<std::string, Attribute> configAttribute = base::list_of
-		("MapSave",                                 Attribute(4))
-		("War3Patch",                               Attribute(3))
-		("ScriptInjection",                         Attribute(2)) 
-		("HostTest",                                Attribute(2))
-		("EnableJassHelper",                        Attribute("ScriptCompiler"))
-		("EnableJassHelperDebug",                   Attribute("ScriptCompiler"))
-		("EnableJassHelperOptimization",            Attribute("ScriptCompiler"))
-		("PJass",                                   Attribute(2))
-		("LaunchRenderingEngine",                   Attribute("MapTest", Attribute::e_ComboBox))
-		("LaunchWindowed",                          Attribute("MapTest"))
-		("LaunchFullWindowed",                      Attribute("MapTest"))
-		("LaunchLockingMouse",                      Attribute("MapTest"))
-		("LaunchFixedRatioWindowed",                Attribute("MapTest"))
-		("LaunchWideScreenSupport",                 Attribute("MapTest"))
-		("LaunchDisableSecurityAccess",             Attribute("MapTest"))
-		("EnableHost",                              Attribute("MapTest"))
-		("EnableMapSlk",                            Attribute("MapTest"))
-		("EnableDotNetSupport",                     Attribute("ThirdPartyPlugin"))
-		("EnableTesh",                              Attribute("ThirdPartyPlugin"))
-		("EnableManualNewId",                       Attribute("FeatureToggle"))
-		("FontEnable",                              Attribute("Font"))
-		("FontName",                                Attribute("Font", Attribute::e_ComboBox))
-		("FontSize",                                Attribute("Font", Attribute::e_ComboBox))
-		;
+	std::map<std::string, Attribute> configAttribute = {
+		{ "MapSave",                                 Attribute(4) },
+		{ "War3Patch",                               Attribute(3) },
+		{ "ScriptInjection",                         Attribute(2) },
+		{ "HostTest",                                Attribute(2) },
+		{ "EnableJassHelper",                        Attribute("ScriptCompiler") },
+		{ "EnableJassHelperDebug",                   Attribute("ScriptCompiler") },
+		{ "EnableJassHelperOptimization",            Attribute("ScriptCompiler") },
+		{ "PJass",                                   Attribute(2) },
+		{ "LaunchRenderingEngine",                   Attribute("MapTest", Attribute::e_ComboBox) },
+		{ "LaunchWindowed",                          Attribute("MapTest") },
+		{ "LaunchFullWindowed",                      Attribute("MapTest") },
+		{ "LaunchLockingMouse",                      Attribute("MapTest") },
+		{ "LaunchFixedRatioWindowed",                Attribute("MapTest") },
+		{ "LaunchWideScreenSupport",                 Attribute("MapTest") },
+		{ "LaunchDisableSecurityAccess",             Attribute("MapTest") },
+		{ "EnableHost",                              Attribute("MapTest") },
+		{ "EnableMapSlk",                            Attribute("MapTest") },
+		{ "EnableDotNetSupport",                     Attribute("ThirdPartyPlugin") },
+		{ "EnableTesh",                              Attribute("ThirdPartyPlugin") },
+		{ "EnableManualNewId",                       Attribute("FeatureToggle") },
+		{ "FontEnable",                              Attribute("Font") },
+		{ "FontName",                                Attribute("Font", Attribute::e_ComboBox) },
+		{ "FontSize",                                Attribute("Font", Attribute::e_ComboBox) },
+	};
 }
 
 CMainWindow::CMainWindow() 
@@ -147,16 +146,16 @@ void CMainWindow::InitWindow()
 			for (uint8_t i = 0; i < attribute.Count(); ++i)
 			{
 				std::string radioname = name + "_" + std::to_string((long long)i);
-				m_controls[radioname] = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(base::u2w(radioname).c_str()));
+				m_controls[radioname] = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(bee::u2w(radioname).c_str()));
 			}
 		}
 		else if (attribute.Type() == Attribute::e_CheckBox)
 		{
-			m_controls[name] = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(base::u2w(name).c_str()));
+			m_controls[name] = dynamic_cast<DuiLib::CCheckBoxUI*>(m_pm.FindControl(bee::u2w(name).c_str()));
 		}
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
-			m_comboboxs[name] = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(base::u2w(name).c_str()));
+			m_comboboxs[name] = dynamic_cast<DuiLib::CComboUI*>(m_pm.FindControl(bee::u2w(name).c_str()));
 		}
 	}
 
@@ -270,7 +269,7 @@ void CMainWindow::ConfigToUI(base::ini::table& table)
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
 			if (m_comboboxs[name]) {
-				std::wstring font_name = base::u2w(table[attribute.Section()][name]);
+				std::wstring font_name = bee::u2w(table[attribute.Section()][name]);
 				for (int i = 0; i < m_comboboxs[name]->GetCount(); ++i)
 				{
 					if (font_name == ((DuiLib::CListLabelElementUI*)m_comboboxs[name]->GetItemAt(i))->GetText())
@@ -315,7 +314,7 @@ void CMainWindow::UIToConfig(base::ini::table& table)
 		else if (attribute.Type() == Attribute::e_ComboBox)
 		{
 			if (m_comboboxs[name]) {
-				table[attribute.Section()][name] = base::w2u(CComboUI_GetSelectText(m_comboboxs[name]));
+				table[attribute.Section()][name] = bee::w2u(CComboUI_GetSelectText(m_comboboxs[name]));
 			}
 		}
 	}
@@ -396,13 +395,13 @@ void CMainWindow::InitOSHelpUI()
 		}
 	}
 
-	if (base::win::get_version() >= base::win::VERSION_WIN10)
+	if (bee::platform::get_version().ver >= bee::platform::WinVer::Win7)
 	{
 		if (m_pShortcuts_taskbar)
 			m_pShortcuts_taskbar->SetEnabled(false);
 	}
 
-	DuiLib::CRadioButtonUI* ui_lang = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(L"Language-" + base::i18n::v2::get_language()));
+	DuiLib::CRadioButtonUI* ui_lang = dynamic_cast<DuiLib::CRadioButtonUI*>(m_pm.FindControl(L"Language-" + base::i18n::get_language()));
 	if (ui_lang) {
 		ui_lang->Selected(true);
 	}
@@ -458,8 +457,8 @@ void CMainWindow::DoneOSHelpUI()
 		if (control && control->IsSelected() && control->GetName().substr(0, 9) == L"Language-")
 		{
 			auto newlang = control->GetName().substr(9);
-			if (newlang != base::i18n::v2::get_language()) {
-				base::i18n::v2::set_language(newlang, true);
+			if (newlang != base::i18n::get_language()) {
+				base::i18n::set_language(newlang, true);
 			}
 		}
 	}
@@ -487,11 +486,11 @@ void CMainWindow::InitPluginUI()
 			try {
 				if (!fs::is_directory(*itr))
 				{
-					if (base::path::equal(itr->path().extension(), L".dll") 
-						&& (!base::path::equal(itr->path().filename(), L"yd_loader.dll")))
+					if (bee::path_helper::equal(itr->path().extension(), L".dll") 
+						&& (!bee::path_helper::equal(itr->path().filename(), L"yd_loader.dll")))
 					{
-						base::win::file_version fv(itr->path().c_str());
-						fv.select_language(base::i18n::v2::get_languageid());
+                        bee::module_version fv(itr->path().c_str());
+						fv.select_language(base::i18n::get_languageid());
 
 						DuiLib::CCheckBoxUI* node = new DuiLib::CCheckBoxUI;
 						m_pWar3PluginList->Add(node);
@@ -499,7 +498,7 @@ void CMainWindow::InitPluginUI()
 						node->SetAttribute(L"class", L"CheckBox");
 						node->SetAttribute(L"text", fv[L"FileDescription"]);
 						node->SetAttribute(L"tooltip", itr->path().filename().c_str());
-						node->Selected("0" != table["Enable"][base::w2u(itr->path().filename().wstring())]);
+						node->Selected("0" != table["Enable"][bee::w2u(itr->path().filename().wstring())]);
 					}
 				}
 			}
@@ -526,7 +525,7 @@ void CMainWindow::DonePluginUI()
 			if (pCheckBox)
 			{
 				
-				table["Enable"][base::w2u(pCheckBox->GetToolTip())] = pCheckBox->IsSelected()? "1": "0";
+				table["Enable"][bee::w2u(pCheckBox->GetToolTip())] = pCheckBox->IsSelected()? "1": "0";
 			}
 		}
 
@@ -557,8 +556,8 @@ void CMainWindow::InitPatchUI(base::ini::table& table)
 				fs::path patch_mpq = patch / L"Patch.mpq";
 				if (fs::exists(game_dll) && fs::exists(patch_mpq))
 				{
-					patch = base::path::normalize(patch);
-					base::win::file_version versionInfo(game_dll.c_str());
+					patch = fs::absolute(patch);
+					bee::module_version versionInfo(game_dll.c_str());
 
 					DuiLib::CRadioButtonUI* node = new DuiLib::CRadioButtonUI;
 					m_pWar3PatchList->Add(node);
@@ -567,7 +566,7 @@ void CMainWindow::InitPatchUI(base::ini::table& table)
 					node->SetAttribute(L"group", L"War3PatchItem");
 					node->SetAttribute(L"text", (std::wstring(L"[") + versionInfo[L"FileVersion"] + L"]" + patch.filename().wstring()).c_str());
 					node->SetAttribute(L"tooltip", patch.c_str());
-					node->Selected(base::path::equal(patch.filename(), table["War3Patch"]["DirName"]));
+					node->Selected(bee::path_helper::equal(patch.filename(), table["War3Patch"]["DirName"]));
 					empty = false;
 				}
 			}
@@ -597,7 +596,7 @@ void CMainWindow::DonePatchUI(base::ini::table& table)
 			DuiLib::CRadioButtonUI* pRadioButton = dynamic_cast<DuiLib::CRadioButtonUI*>(pControl);
 			if (pRadioButton && pRadioButton->IsSelected())
 			{
-				table["War3Patch"]["DirName"] = base::w2u(fs::path(pRadioButton->GetToolTip()).filename().wstring());
+				table["War3Patch"]["DirName"] = bee::w2u(fs::path(pRadioButton->GetToolTip()).filename().wstring());
 				return false;
 			}
 			return true;
@@ -624,7 +623,7 @@ void CMainWindow::UpdateWarcraft3Directory()
 	if (m_pWarcraft3Directory)
 	{
 		fs::path result;
-		if (base::warcraft3::directory::read(result))
+		if (warcraft3::directory::read(result))
 		{
 			m_pWarcraft3Directory->SetText(result.c_str());
 		}
@@ -733,7 +732,7 @@ void CMainWindow::Notify(DuiLib::TNotifyUI& msg)
 			}
 			else if (name == L"choose_war3_dir")
 			{
-				if (base::warcraft3::directory::choose(nullptr))
+				if (warcraft3::directory::choose(nullptr))
 				{
 					UpdateWarcraft3Directory();
 				}

@@ -1,25 +1,24 @@
 #include "jassbind.h"
 #include "common.h"
-#include <base/warcraft3/jass/func_value.h>
-#include <base/lua/make_range.h>
+#include <warcraft3/jass/func_value.h>
+#include <bee/lua/range.h>
 #include <map>
 #include <string>
-#include <base/warcraft3/jass/hook.h>
+#include <warcraft3/jass/hook.h>
 #include "lua_to_nativefunction.h"
 
-namespace base {
-	namespace lua {
-		template <>
-		inline int convert_to_lua(lua_State* L, const warcraft3::jass::func_value& v)
-		{
-			lua_pushinteger(L, (uint32_t)(uintptr_t)&v);
-			lua_pushcclosure(L, warcraft3::lua_engine::jass_call_closure, 1);
-			return 1;
-		}
+namespace bee::lua {
+	template <>
+	inline int convert_to_lua(lua_State* L, const warcraft3::jass::func_value& v)
+	{
+		lua_pushinteger(L, (uint32_t)(uintptr_t)&v);
+		lua_pushcclosure(L, warcraft3::lua_engine::jass_call_closure, 1);
+		return 1;
 	}
 }
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace japi {
+
+namespace warcraft3::lua_engine::japi {
 
 	int empty_function(lua_State*, void*)
 	{
@@ -90,7 +89,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace japi {
 
 	int japi_pairs(lua_State* L)
 	{
-		return lua::make_range(L, jass::japi_function);
+		return bee::lua::make_range(L, jass::japi_function);
 	}
 
 	static int mt_gc(lua_State *L)
@@ -137,4 +136,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace japi {
 		}
 		return 1;
 	}
-}}}}
+}

@@ -2,9 +2,9 @@
 #include <Windows.h>
 #include <base/path/ydwe.h>
 #include <base/util/console.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode_win.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace slk {
+namespace warcraft3::lua_engine::slk {
 
 static const char slk[] = R"=(
 local ydwePath, loadlua, loadlib, io_open = ...
@@ -58,7 +58,7 @@ static int loadlib(lua_State* L)
 		size_t len = 0;
 		const char* str = luaL_checklstring(L, 1, &len);
 		std::string name(str, len);
-		fs::path path = path::ydwe(false) / "bin" / "modules" / (name + ".dll");
+		fs::path path = base::path::ydwe(false) / "bin" / (name + ".dll");
 		HMODULE m = LoadLibraryW(path.c_str());
 		if (!m) {
 			return 0;
@@ -105,7 +105,7 @@ static int io_open(lua_State *L) {
 	luaL_Stream *p = (luaL_Stream *)lua_newuserdata(L, sizeof(luaL_Stream));
 	luaL_setmetatable(L, LUA_FILEHANDLE);
 	p->closef = &io_fclose;
-	p->f = _wfopen(base::u2w(filename, base::conv_method::replace | '?').c_str(), L"r");
+	p->f = _wfopen(bee::u2w(filename).c_str(), L"r");
 	return (p->f == NULL) ? luaL_fileresult(L, 0, filename) : 1;
 }
 
@@ -118,7 +118,7 @@ static int io_open(lua_State *L) {
 int open(lua_State* L)
 {
 	fs::path ydwe = base::path::ydwe(true);
-	lua_pushstring(L, base::w2u(ydwe.wstring(), base::conv_method::replace | '?').c_str());
+	lua_pushstring(L, bee::w2u(ydwe.wstring()).c_str());
 	lua_pushcfunction(L, loadlua);
 	lua_pushcfunction(L, loadlib);
 	lua_pushcfunction(L, io_open);
@@ -128,4 +128,4 @@ int open(lua_State* L)
 	}
 	return 1;
 }
-}}}}
+}

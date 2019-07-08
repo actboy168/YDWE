@@ -1,11 +1,11 @@
 #include <lua.hpp>
 #include <base/lua/object.h>
 #include <base/lua/guard.h>
-#include <LuaEngine/logging.h>
+#include "../log/logging.h"
 
 #define YDWE_WAR3_INLINE
-#include <base/warcraft3/virtual_mpq.h>
-#include <base/warcraft3/virtual_mpq.cpp>
+#include <warcraft3/virtual_mpq.h>
+#include <warcraft3/virtual_mpq.cpp>
 
 static bool VirtualMpqWatchCB(const base::lua::object& func, const std::string& filename, const void** pbuf, uint32_t* plen, uint32_t reserve_size)
 {
@@ -19,7 +19,7 @@ static bool VirtualMpqWatchCB(const base::lua::object& func, const std::string& 
 			throw std::exception(lua_tostring(L, -1));
 		}
 	} catch (const std::exception& e) {
-		LOGGING_ERROR(logging::get_logger("lua")) << e.what();
+		LOGGING_ERROR(logging::get(L)) << e.what();
 		return false;
 	}
 
@@ -30,7 +30,7 @@ static bool VirtualMpqWatchCB(const base::lua::object& func, const std::string& 
 
 	size_t len = 0;
 	const char* buf = lua_tolstring(L, -1, &len);
-	void* tmpbuf = base::warcraft3::virtual_mpq::storm_alloc(len + reserve_size);
+	void* tmpbuf = warcraft3::virtual_mpq::storm_alloc(len + reserve_size);
 	if (!tmpbuf)
 	{
 		return false;
@@ -45,7 +45,7 @@ static bool VirtualMpqWatchCB(const base::lua::object& func, const std::string& 
 
 static int VirtualMpqOpenPath(lua_State* L)
 {
-	base::warcraft3::virtual_mpq::open_path(*(fs::path*)luaL_checkudata(L, 1, "filesystem"), (uint32_t)luaL_checkinteger(L, 2));
+	warcraft3::virtual_mpq::open_path(*(fs::path*)luaL_checkudata(L, 1, "bee::filesystem"), (uint32_t)luaL_checkinteger(L, 2));
 	return 0;
 }
 
@@ -53,7 +53,7 @@ static int VirtualMpqWatch(lua_State* L)
 {
 	size_t len = 0;
 	const char* str = luaL_checklstring(L, 1, &len);
-	base::warcraft3::virtual_mpq::watch(std::string(str, len), std::bind(VirtualMpqWatchCB, base::lua::object(L, 2), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	warcraft3::virtual_mpq::watch(std::string(str, len), std::bind(VirtualMpqWatchCB, base::lua::object(L, 2), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 	return 0;
 }
 
@@ -71,13 +71,13 @@ static void VirtualMpqEventCB(const base::lua::object& func, const std::string& 
 		}
 	}
 	catch (const std::exception& e) {
-		LOGGING_ERROR(logging::get_logger("lua")) << e.what();
+		LOGGING_ERROR(logging::get(L)) << e.what();
 	}
 }
 
 static int VirtualMpqEvent(lua_State* L)
 {
-	base::warcraft3::virtual_mpq::event(std::bind(VirtualMpqEventCB, base::lua::object(L, 1), std::placeholders::_1, std::placeholders::_2));
+	warcraft3::virtual_mpq::event(std::bind(VirtualMpqEventCB, base::lua::object(L, 1), std::placeholders::_1, std::placeholders::_2));
 	return 0;
 }
 
@@ -93,7 +93,7 @@ static bool VirtualMpqMapHasCB(const base::lua::object& func, const std::string&
 		}
 	}
 	catch (const std::exception& e) {
-		LOGGING_ERROR(logging::get_logger("lua")) << e.what();
+		LOGGING_ERROR(logging::get(L)) << e.what();
 		return false;
 	}
 	if (LUA_TBOOLEAN != lua_type(L, -1)) {
@@ -106,7 +106,7 @@ static bool VirtualMpqMapHasCB(const base::lua::object& func, const std::string&
 
 static int VirtualMpqMapHas(lua_State* L)
 {
-	base::warcraft3::virtual_mpq::map_has(std::bind(VirtualMpqMapHasCB, base::lua::object(L, 1), std::placeholders::_1));
+	warcraft3::virtual_mpq::map_has(std::bind(VirtualMpqMapHasCB, base::lua::object(L, 1), std::placeholders::_1));
 	return 0;
 }
 
@@ -114,19 +114,19 @@ static int VirtualMpqForceWatch(lua_State* L)
 {
 	size_t len = 0;
 	const char* str = luaL_checklstring(L, 1, &len);
-	base::warcraft3::virtual_mpq::force_watch(std::string(str, len), std::bind(VirtualMpqWatchCB, base::lua::object(L, 2), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	warcraft3::virtual_mpq::force_watch(std::string(str, len), std::bind(VirtualMpqWatchCB, base::lua::object(L, 2), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 	return 0;
 }
 
 static int VirtualMpqMapLoad(lua_State* L)
 {
-	base::warcraft3::virtual_mpq::map_load(std::bind(VirtualMpqWatchCB, base::lua::object(L, 1), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+	warcraft3::virtual_mpq::map_load(std::bind(VirtualMpqWatchCB, base::lua::object(L, 1), std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 	return 0;
 }
 
 int luaopen_virtual_mpq(lua_State* L)
 {
-	base::warcraft3::virtual_mpq::initialize(::GetModuleHandleW(NULL));
+	warcraft3::virtual_mpq::initialize(::GetModuleHandleW(NULL));
 
 	luaL_Reg l[] = {
 		{ "open_path", VirtualMpqOpenPath },

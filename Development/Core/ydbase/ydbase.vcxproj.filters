@@ -11,9 +11,6 @@
     <Filter Include="base\util">
       <UniqueIdentifier>{8793b407-2f96-464c-bcdb-628edcf75f6c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\util\detail">
-      <UniqueIdentifier>{f9399aac-9f1d-4984-b60e-751840a5ff9f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\path">
       <UniqueIdentifier>{f0deea76-7b22-453d-a30a-bdc29ab84d64}</UniqueIdentifier>
     </Filter>
@@ -32,45 +29,21 @@
     <Filter Include="base\hook\assembler">
       <UniqueIdentifier>{f9143e63-84b2-464b-875e-a05d101a2f49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\exception">
-      <UniqueIdentifier>{8cfb2827-1c18-4e68-9be9-9a17e657b774}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="base\exception\detail">
-      <UniqueIdentifier>{d4af3999-4995-4947-b2c4-fc1a2b79f862}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\file">
       <UniqueIdentifier>{98c0be1b-e82d-4a6a-8179-8d6e11315c17}</UniqueIdentifier>
     </Filter>
     <Filter Include="base\lua">
       <UniqueIdentifier>{b74a47f0-eb1f-4c6c-9b1c-210bcabbb9d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\i18n">
-      <UniqueIdentifier>{5337e579-9ee0-4e9b-807d-3339cda61c96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="base\thread">
-      <UniqueIdentifier>{9ca77287-10cc-4b02-bc03-1ed154a1e30e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="base\win\registry">
-      <UniqueIdentifier>{306f1d0f-9d0f-4f74-a119-6bdbeb6a31f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="base\thread\lock">
-      <UniqueIdentifier>{3beaa0e4-1378-4d7e-8d51-a8869869b7f7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="base\win\font">
       <UniqueIdentifier>{d3bb681c-bfad-45b8-b53a-094ab9bbc6bf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="base\i18n-2">
+    <Filter Include="base\i18n">
       <UniqueIdentifier>{84787b93-89af-4757-b2f5-8507c8e7cc78}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="base\util\unicode.cpp">
-      <Filter>base\util</Filter>
-    </ClCompile>
-    <ClCompile Include="base\win\version.cpp">
-      <Filter>base\win</Filter>
-    </ClCompile>
     <ClCompile Include="base\hook\detail\memory_protect.cpp">
       <Filter>base\hook\detail</Filter>
     </ClCompile>
@@ -89,65 +62,26 @@
     <ClCompile Include="base\hook\iat_manager.cpp">
       <Filter>base\hook</Filter>
     </ClCompile>
-    <ClCompile Include="base\win\file_version.cpp">
-      <Filter>base\win</Filter>
-    </ClCompile>
     <ClCompile Include="base\hook\inline.cpp">
       <Filter>base\hook</Filter>
     </ClCompile>
     <ClCompile Include="base\win\pe_reader.cpp">
       <Filter>base\win</Filter>
     </ClCompile>
-    <ClCompile Include="base\exception\windows_exception.cpp">
-      <Filter>base\exception</Filter>
-    </ClCompile>
     <ClCompile Include="base\file\file_handle.cpp">
-      <Filter>base\file</Filter>
-    </ClCompile>
-    <ClCompile Include="base\file\file_mapping_handle.cpp">
       <Filter>base\file</Filter>
     </ClCompile>
     <ClCompile Include="base\file\memory_mapped_file.cpp">
       <Filter>base\file</Filter>
     </ClCompile>
-    <ClCompile Include="base\win\env_variable.cpp">
-      <Filter>base\win</Filter>
-    </ClCompile>
     <ClCompile Include="base\util\console.cpp">
       <Filter>base\util</Filter>
-    </ClCompile>
-    <ClCompile Include="base\exception\seh_exception.cpp">
-      <Filter>base\exception</Filter>
-    </ClCompile>
-    <ClCompile Include="base\win\process.cpp">
-      <Filter>base\win</Filter>
     </ClCompile>
     <ClCompile Include="base\util\is_utf8.cpp">
       <Filter>base\util</Filter>
     </ClCompile>
-    <ClCompile Include="base\i18n\mofile.cpp">
-      <Filter>base\i18n</Filter>
-    </ClCompile>
-    <ClCompile Include="base\i18n\libintl.cpp">
-      <Filter>base\i18n</Filter>
-    </ClCompile>
-    <ClCompile Include="base\exception\exception.cpp">
-      <Filter>base\exception</Filter>
-    </ClCompile>
-    <ClCompile Include="base\exception\system_exception.cpp">
-      <Filter>base\exception</Filter>
-    </ClCompile>
     <ClCompile Include="base\file\stream.cpp">
       <Filter>base\file</Filter>
-    </ClCompile>
-    <ClCompile Include="base\win\get_tick_count.cpp">
-      <Filter>base\win</Filter>
-    </ClCompile>
-    <ClCompile Include="base\thread\thread.cpp">
-      <Filter>base\thread</Filter>
-    </ClCompile>
-    <ClCompile Include="base\thread\thread_exception.cpp">
-      <Filter>base\thread</Filter>
     </ClCompile>
     <ClCompile Include="base\win\font\file.cpp">
       <Filter>base\win\font</Filter>
@@ -155,26 +89,14 @@
     <ClCompile Include="base\win\font\utility.cpp">
       <Filter>base\win\font</Filter>
     </ClCompile>
-    <ClCompile Include="base\path\helper.cpp">
-      <Filter>base\path</Filter>
-    </ClCompile>
     <ClCompile Include="base\hook\dyn_iat.cpp">
       <Filter>base\hook</Filter>
-    </ClCompile>
-    <ClCompile Include="base\win\windows_category.cpp">
-      <Filter>base\win</Filter>
     </ClCompile>
     <ClCompile Include="base\hook\patch.cpp">
       <Filter>base\hook</Filter>
     </ClCompile>
-    <ClCompile Include="base\i18n-2\gettext.cpp">
-      <Filter>base\i18n-2</Filter>
-    </ClCompile>
     <ClCompile Include="base\hook\injectdll.cpp">
       <Filter>base\hook</Filter>
-    </ClCompile>
-    <ClCompile Include="base\path\get_path.cpp">
-      <Filter>base\path</Filter>
     </ClCompile>
     <ClCompile Include="base\path\ydwe.cpp">
       <Filter>base\path</Filter>
@@ -185,22 +107,19 @@
     <ClCompile Include="base\hook\replace_pointer.cpp">
       <Filter>base\hook</Filter>
     </ClCompile>
+    <ClCompile Include="base\util\pinyin.cpp">
+      <Filter>base\util</Filter>
+    </ClCompile>
+    <ClCompile Include="base\i18n\gettext.cpp">
+      <Filter>base\i18n</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="base\util\detail\codecvt.h">
-      <Filter>base\util\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="base\util\unicode.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
     <ClInclude Include="base\com\unique_ptr.h">
       <Filter>base\com</Filter>
     </ClInclude>
     <ClInclude Include="base\com\guard.h">
       <Filter>base\com</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\version.h">
-      <Filter>base\win</Filter>
     </ClInclude>
     <ClInclude Include="base\hook\detail\memory_protect.h">
       <Filter>base\hook\detail</Filter>
@@ -223,9 +142,6 @@
     <ClInclude Include="base\hook\iat_manager.h">
       <Filter>base\hook</Filter>
     </ClInclude>
-    <ClInclude Include="base\win\file_version.h">
-      <Filter>base\win</Filter>
-    </ClInclude>
     <ClInclude Include="base\hook\inline.h">
       <Filter>base\hook</Filter>
     </ClInclude>
@@ -238,9 +154,6 @@
     <ClInclude Include="base\hook\assembler\writer.h">
       <Filter>base\hook\assembler</Filter>
     </ClInclude>
-    <ClInclude Include="base\exception\windows_exception.h">
-      <Filter>base\exception</Filter>
-    </ClInclude>
     <ClInclude Include="base\win\scoped_handle.h">
       <Filter>base\win</Filter>
     </ClInclude>
@@ -250,32 +163,14 @@
     <ClInclude Include="base\file\file_handle.h">
       <Filter>base\file</Filter>
     </ClInclude>
-    <ClInclude Include="base\file\file_mapping_handle.h">
-      <Filter>base\file</Filter>
-    </ClInclude>
     <ClInclude Include="base\util\noncopyable.h">
       <Filter>base\util</Filter>
     </ClInclude>
     <ClInclude Include="base\util\singleton.h">
       <Filter>base\util</Filter>
     </ClInclude>
-    <ClInclude Include="base\win\env_variable.h">
-      <Filter>base\win</Filter>
-    </ClInclude>
     <ClInclude Include="base\util\console.h">
       <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\exception\seh_exception.h">
-      <Filter>base\exception</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\process.h">
-      <Filter>base\win</Filter>
-    </ClInclude>
-    <ClInclude Include="base\i18n\mofile.h">
-      <Filter>base\i18n</Filter>
-    </ClInclude>
-    <ClInclude Include="base\i18n\libintl.h">
-      <Filter>base\i18n</Filter>
     </ClInclude>
     <ClInclude Include="base\util\buffer.h">
       <Filter>base\util</Filter>
@@ -283,23 +178,11 @@
     <ClInclude Include="base\path\self.h">
       <Filter>base\path</Filter>
     </ClInclude>
-    <ClInclude Include="base\exception\exception.h">
-      <Filter>base\exception</Filter>
-    </ClInclude>
-    <ClInclude Include="base\exception\detail\error_msg.h">
-      <Filter>base\exception\detail</Filter>
-    </ClInclude>
     <ClInclude Include="base\hook\assembler\operand.h">
       <Filter>base\hook\assembler</Filter>
     </ClInclude>
     <ClInclude Include="base\util\horrible_cast.h">
       <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\util\detail\ansi_codecvt.h">
-      <Filter>base\util\detail</Filter>
-    </ClInclude>
-    <ClInclude Include="base\util\detail\utf8_codecvt.h">
-      <Filter>base\util\detail</Filter>
     </ClInclude>
     <ClInclude Include="base\util\signal.h">
       <Filter>base\util</Filter>
@@ -307,63 +190,12 @@
     <ClInclude Include="base\util\do_once.h">
       <Filter>base\util</Filter>
     </ClInclude>
-    <ClInclude Include="base\util\dynarray.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\exception\system_exception.h">
-      <Filter>base\exception</Filter>
-    </ClInclude>
     <ClInclude Include="base\file\stream.h">
       <Filter>base\file</Filter>
     </ClInclude>
-    <ClInclude Include="base\util\hybrid_array.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\util\format.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\event.h">
-      <Filter>base\win</Filter>
-    </ClInclude>
-    <ClInclude Include="base\lua\make_range.h">
-      <Filter>base\lua</Filter>
-    </ClInclude>
     <ClInclude Include="base\config.h" />
-    <ClInclude Include="base\win\get_tick_count.h">
-      <Filter>base\win</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\thread.h">
-      <Filter>base\thread</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\thread_exception.h">
-      <Filter>base\thread</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\registry\exception.h">
-      <Filter>base\win\registry</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\registry\key.h">
-      <Filter>base\win\registry</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\registry\traits.h">
-      <Filter>base\win\registry</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\registry\value.h">
-      <Filter>base\win\registry</Filter>
-    </ClInclude>
     <ClInclude Include="base\hook\fp_call.h">
       <Filter>base\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\lock\spin.h">
-      <Filter>base\thread\lock</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\lock\guard.h">
-      <Filter>base\thread\lock</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\registry\predefined_keys.h">
-      <Filter>base\win\registry</Filter>
-    </ClInclude>
-    <ClInclude Include="base\util\string_view.h">
-      <Filter>base\util</Filter>
     </ClInclude>
     <ClInclude Include="base\win\font\file.h">
       <Filter>base\win\font</Filter>
@@ -371,28 +203,13 @@
     <ClInclude Include="base\win\font\utility.h">
       <Filter>base\win\font</Filter>
     </ClInclude>
-    <ClInclude Include="base\path\helper.h">
-      <Filter>base\path</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\intrusive_ptr.h">
-      <Filter>base\thread</Filter>
-    </ClInclude>
     <ClInclude Include="base\hook\dyn_iat.h">
       <Filter>base\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="base\win\windows_category.h">
-      <Filter>base\win</Filter>
     </ClInclude>
     <ClInclude Include="base\filesystem.h">
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="base\util\string_algorithm.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\util\list_of.h">
-      <Filter>base\util</Filter>
-    </ClInclude>
-    <ClInclude Include="base\util\optional.h">
       <Filter>base\util</Filter>
     </ClInclude>
     <ClInclude Include="base\lua\object.h">
@@ -404,29 +221,11 @@
     <ClInclude Include="base\util\ini.h">
       <Filter>base\util</Filter>
     </ClInclude>
-    <ClInclude Include="base\thread\lock\backoff.h">
-      <Filter>base\thread\lock</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\lock\os_linux.h">
-      <Filter>base\thread\lock</Filter>
-    </ClInclude>
-    <ClInclude Include="base\thread\lock\os_win32.h">
-      <Filter>base\thread\lock</Filter>
-    </ClInclude>
     <ClInclude Include="base\hook\patch.h">
       <Filter>base\hook</Filter>
     </ClInclude>
-    <ClInclude Include="base\i18n-2\lng.h">
-      <Filter>base\i18n-2</Filter>
-    </ClInclude>
-    <ClInclude Include="base\i18n-2\gettext.h">
-      <Filter>base\i18n-2</Filter>
-    </ClInclude>
     <ClInclude Include="base\hook\injectdll.h">
       <Filter>base\hook</Filter>
-    </ClInclude>
-    <ClInclude Include="base\path\get_path.h">
-      <Filter>base\path</Filter>
     </ClInclude>
     <ClInclude Include="base\path\ydwe.h">
       <Filter>base\path</Filter>
@@ -437,21 +236,22 @@
     <ClInclude Include="base\hook\replace_pointer.h">
       <Filter>base\hook</Filter>
     </ClInclude>
+    <ClInclude Include="base\util\pinyin.h">
+      <Filter>base\util</Filter>
+    </ClInclude>
+    <ClInclude Include="base\util\is_utf8.h">
+      <Filter>base\util</Filter>
+    </ClInclude>
+    <ClInclude Include="base\i18n\gettext.h">
+      <Filter>base\i18n</Filter>
+    </ClInclude>
+    <ClInclude Include="base\i18n\lng.h">
+      <Filter>base\i18n</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="base\util\detail\ansi_codecvt.inl">
-      <Filter>base\util\detail</Filter>
-    </None>
-    <None Include="base\util\detail\codecvt.inl">
-      <Filter>base\util\detail</Filter>
-    </None>
-    <None Include="base\util\detail\utf8_codecvt.inl">
-      <Filter>base\util\detail</Filter>
-    </None>
   </ItemGroup>
 </Project>

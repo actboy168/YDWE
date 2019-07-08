@@ -6,6 +6,7 @@ local builder = require 'map-builder'
 local core = require 'backend.sandbox_core'
 local w2l = core()
 local root = require 'backend.w2l_path'
+local base = require 'backend.base_path'
 
 local report = {}
 local messager_report = messager.report
@@ -81,11 +82,16 @@ return function()
 
     local input = absolute_path(command[2])
     local output = absolute_path(command[3])
+    local as_mpq = command['mpq']
+
+    if not input then
+        w2l:failed(lang.script.OPEN_FAILED_NO_EXISTS)
+    end
 
     messager.text(lang.script.OPEN_MAP)
     local input_ar, err = builder.load(input)
     if not input_ar then
-        w2l:failed(err)
+        w2l:failed(lang.script.NEED_FILE_PATH)
     end
     
     local output = output or default_output(input)
@@ -116,7 +122,10 @@ return function()
 
     messager.text(lang.script.SAVE_FILE)
     w2l.progress:start(1.0)
-    builder.save(w2l, w3i, w3f, input_ar, output_ar)
+    builder.save(w2l, w3i, w3f, input_ar, output_ar, {
+        clear_time = true,
+        as_mpq = as_mpq,
+    })
     w2l.progress:finish()
     
     local clock = os.clock()

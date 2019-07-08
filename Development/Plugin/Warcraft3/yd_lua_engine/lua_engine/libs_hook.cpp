@@ -4,17 +4,17 @@
 #include <base/hook/assembler/writer.h>
 #include <base/util/noncopyable.h>
 #include <base/util/horrible_cast.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/func_value.h>
-#include <base/warcraft3/jass/hook.h>
-#include <base/warcraft3/war3_searcher.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/func_value.h>
+#include <warcraft3/jass/hook.h>
+#include <warcraft3/war3_searcher.h>
 #include "jassbind.h"
 #include "callback.h"
 #include "libs_runtime.h"
 #include "common.h"
 #include "lua_to_nativefunction.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace hook {
+namespace warcraft3::lua_engine::hook {
 
 	class jhook_t
 	{
@@ -172,4 +172,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace hook {
 		lua_setmetatable(L, -2);
 		return 1;
 	}
-}}}}
+}

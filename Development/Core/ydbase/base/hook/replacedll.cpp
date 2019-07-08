@@ -97,11 +97,11 @@ namespace base { namespace hook {
 		return (dw + 7) & ~7u;
 	}
 
-	bool replacedll(HANDLE hProcess, const char* oldDll, const char* newDll)
+	bool replacedll(const PROCESS_INFORMATION& pi, const char* oldDll, const char* newDll)
 	{
-		PBYTE pbModule = (PBYTE)FindExe(hProcess);
+		PBYTE pbModule = (PBYTE)FindExe(pi.hProcess);
 		IMAGE_DOS_HEADER idh = { 0 };
-		if (!ReadProcessMemory(hProcess, pbModule, &idh, sizeof(idh), NULL)) {
+		if (!ReadProcessMemory(pi.hProcess, pbModule, &idh, sizeof(idh), NULL)) {
 			return false;
 		}
 		if (idh.e_magic != IMAGE_DOS_SIGNATURE) {
@@ -109,7 +109,7 @@ namespace base { namespace hook {
 		}
 
 		IMAGE_NT_HEADERS inh = { 0 };
-		if (!ReadProcessMemory(hProcess, pbModule + idh.e_lfanew, &inh, sizeof(inh), NULL)) {
+		if (!ReadProcessMemory(pi.hProcess, pbModule + idh.e_lfanew, &inh, sizeof(inh), NULL)) {
 			return false;
 		}
 		if (inh.Signature != IMAGE_NT_SIGNATURE) {
@@ -126,7 +126,7 @@ namespace base { namespace hook {
 
 		for (DWORD i = 0; i < inh.FileHeader.NumberOfSections; i++) {
 			IMAGE_SECTION_HEADER ish = { 0 };
-			if (!ReadProcessMemory(hProcess, pbModule + dwSec + sizeof(ish) * i, &ish, sizeof(ish), NULL)) {
+			if (!ReadProcessMemory(pi.hProcess, pbModule + dwSec + sizeof(ish) * i, &ish, sizeof(ish), NULL)) {
 				return false;
 			}
 			if (inh.IAT_DIRECTORY.VirtualAddress == 0 && inh.IMPORT_DIRECTORY.VirtualAddress >= ish.VirtualAddress && inh.IMPORT_DIRECTORY.VirtualAddress < ish.VirtualAddress + ish.SizeOfRawData) {
@@ -154,16 +154,16 @@ namespace base { namespace hook {
 			pbBase = pbNext;
 		}
 
-		PBYTE pbNewIid = FindAndAllocateNearBase(hProcess, pbBase, cbNew);
+		PBYTE pbNewIid = FindAndAllocateNearBase(pi.hProcess, pbBase, cbNew);
 		if (pbNewIid == NULL) {
 			return false;
 		}
 		DWORD dwProtect = 0;
-		if (!VirtualProtectEx(hProcess, pbModule + inh.IMPORT_DIRECTORY.VirtualAddress, inh.IMPORT_DIRECTORY.Size, PAGE_EXECUTE_READWRITE, &dwProtect)) {
+		if (!VirtualProtectEx(pi.hProcess, pbModule + inh.IMPORT_DIRECTORY.VirtualAddress, inh.IMPORT_DIRECTORY.Size, PAGE_EXECUTE_READWRITE, &dwProtect)) {
 			return false;
 		}
 		DWORD obBase = (DWORD)(pbNewIid - pbModule);
-		if (!ReadProcessMemory(hProcess, pbModule + inh.IMPORT_DIRECTORY.VirtualAddress, pbNew.get(), inh.IMPORT_DIRECTORY.Size, NULL)) {
+		if (!ReadProcessMemory(pi.hProcess, pbModule + inh.IMPORT_DIRECTORY.VirtualAddress, pbNew.get(), inh.IMPORT_DIRECTORY.Size, NULL)) {
 			return false;
 		}
 		PIMAGE_IMPORT_DESCRIPTOR piid = (PIMAGE_IMPORT_DESCRIPTOR)pbNew.get();
@@ -173,7 +173,7 @@ namespace base { namespace hook {
 		}
 		CHAR szTemp[MAX_PATH];
 		for (DWORD i = 0; i < inh.IMPORT_DIRECTORY.Size / sizeof(*piid); i++) {
-			if (!ReadProcessMemory(hProcess, pbModule + piid[i].Name, szTemp, MAX_PATH, NULL)) {
+			if (!ReadProcessMemory(pi.hProcess, pbModule + piid[i].Name, szTemp, MAX_PATH, NULL)) {
 				return false;
 			}
 			if (_stricmp(szTemp, oldDll) == 0) {
@@ -183,23 +183,23 @@ namespace base { namespace hook {
 				break;
 			}
 		}
-		if (!WriteProcessMemory(hProcess, pbNewIid, pbNew.get(), cbNew, NULL)) {
+		if (!WriteProcessMemory(pi.hProcess, pbNewIid, pbNew.get(), cbNew, NULL)) {
 			return false;
 		}
 
 		inh.IMPORT_DIRECTORY.VirtualAddress = obBase;
 		inh.IMPORT_DIRECTORY.Size = cbNew;
-		if (!VirtualProtectEx(hProcess, pbModule, inh.OptionalHeader.SizeOfHeaders, PAGE_EXECUTE_READWRITE, &dwProtect)) {
+		if (!VirtualProtectEx(pi.hProcess, pbModule, inh.OptionalHeader.SizeOfHeaders, PAGE_EXECUTE_READWRITE, &dwProtect)) {
 			return false;
 		}
 		idh.e_res[0] = 0;
-		if (!WriteProcessMemory(hProcess, pbModule, &idh, sizeof(idh), NULL)) {
+		if (!WriteProcessMemory(pi.hProcess, pbModule, &idh, sizeof(idh), NULL)) {
 			return false;
 		}
-		if (!WriteProcessMemory(hProcess, pbModule + idh.e_lfanew, &inh, sizeof(inh), NULL)) {
+		if (!WriteProcessMemory(pi.hProcess, pbModule + idh.e_lfanew, &inh, sizeof(inh), NULL)) {
 			return false;
 		}
-		if (!VirtualProtectEx(hProcess, pbModule, inh.OptionalHeader.SizeOfHeaders, dwProtect, &dwProtect)) {
+		if (!VirtualProtectEx(pi.hProcess, pbModule, inh.OptionalHeader.SizeOfHeaders, dwProtect, &dwProtect)) {
 			return false;
 		}
 		return true;

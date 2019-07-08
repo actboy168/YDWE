@@ -1,3 +1,0 @@
-LIBRARY "lpeglabel"
-EXPORTS
-	luaopen_lpeglabel

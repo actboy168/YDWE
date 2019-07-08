@@ -2,12 +2,12 @@
 #include "jassbind.h"
 #include "libs_runtime.h"
 #include "common.h"
-#include <base/warcraft3/jass/trampoline_function.h>
-#include <base/warcraft3/hashtable.h>
+#include <warcraft3/jass/trampoline_function.h>
+#include <warcraft3/hashtable.h>
 #include <Windows.h>
 #include <cassert>
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace warcraft3::lua_engine {
 
 	void error_function(lua_State* L, bool err_func)
 	{
@@ -196,4 +196,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			return jass::trampoline_create(jass_callback, (uintptr_t)L, runtime::callback_push(L, index));
 		}
 	}
-}}}
+}

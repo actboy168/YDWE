@@ -61,19 +61,22 @@ local function convert_wtg(w2l)
     w2l.progress:start(0.5)
     if wtg and wct then
         if w2l.setting.mode == 'lni' then
-            xpcall(function ()
+            local ok, err = xpcall(function ()
                 wtg_data = w2l:frontend_wtg(wtg)
                 wct_data = w2l:frontend_wct(wct)
                 w2l:file_remove('map', 'war3map.wtg')
                 w2l:file_remove('map', 'war3map.wct')
-            end, function (msg)
-                w2l.messager.report(lang.report.WARN, 2, lang.report.NO_CONVERT_WTG, msg:match('%.lua:%d+: (.*)'))
-            end)
+            end, debug.traceback)
+            if not ok then
+                w2l.messager.report(lang.report.WARN, 2, lang.report.NO_CONVERT_WTG, err:match('%.lua:%d+: (.*)'))
+            end
         end
     else
         local version = w2l:file_load('w3x2lni', 'version\\lml')
         if version == nil then
             w2l.frontend_lml = w2l.frontend_lml_v0
+        elseif version == '1' then
+            w2l.frontend_lml = w2l.frontend_lml_v1
         end
         wtg_data, wct_data = w2l:frontend_lml(function (filename)
             local buf = w2l:file_load('trigger', filename)
@@ -86,33 +89,29 @@ local function convert_wtg(w2l)
     end
     w2l.progress:finish()
     w2l.progress:start(1)
-    local need_convert_wtg = true
     if wtg_data and wct_data and not w2l.setting.remove_we_only then
         if w2l.setting.mode == 'lni' then
-            w2l:file_save('w3x2lni', 'version\\lml', '1')
+            w2l:file_save('w3x2lni', 'version\\lml', '2')
             local files = w2l:backend_lml(wtg_data, wct_data, w2l.slk.wts)
             for filename, buf in pairs(files) do
                 w2l:file_save('trigger', filename, buf)
             end
         else
             local wtg_buf, wct_buf
-            local suc, err = pcall(function ()
+            local suc, err = xpcall(function ()
                 wtg_buf = w2l:backend_wtg(wtg_data, w2l.slk.wts)
                 wct_buf = w2l:backend_wct(wct_data)
-            end)
+            end, debug.traceback)
             if suc then
                 w2l:file_save('map', 'war3map.wtg', wtg_buf)
                 w2l:file_save('map', 'war3map.wct', wct_buf)
-                need_convert_wtg = false
             else
                 w2l.messager.report(lang.report.ERROR, 1, lang.report.SAVE_WTG_FAILED, err:match('%.lua:%d+: (.*)'))
             end
         end
     end
     w2l.progress:finish()
-    if need_convert_wtg then
-        w2l:backend_convertwtg(w2l.slk.wts)
-    end
+    w2l:backend_convertwtg(w2l.slk.wts)
 end
 
 local displaytype = {
@@ -261,18 +260,25 @@ end
 local function to_slk(w2l, slk)
     local report = { n = 0 }
     local object = {}
-    local slk_list = {'ability', 'buff', 'unit', 'item', 'upgrade', 'destructable'}
+    local slk_list = {'ability', 'buff', 'unit', 'item', 'upgrade'}
     if w2l.setting.slk_doodad then
         slk_list[#slk_list+1] = 'doodad'
-    end
-    for id, obj in pairs(slk.ability) do
-        if obj._keep_obj and not slk.ability[obj._parent]._mark then
-            slk.ability[obj._parent]._mark = obj._mark
+        slk_list[#slk_list+1] = 'destructable'
+    else
+        for _, type in ipairs {'doodad', 'destructable'} do
+            for _, obj in pairs(slk[type]) do
+                obj._keep_obj = true
+            end
         end
     end
     for _, type in ipairs(slk_list) do
         local data = slk[type]
         object[type] = {}
+        for id, obj in pairs(data) do
+            if obj._keep_obj and not data[obj._parent]._mark then
+                data[obj._parent]._mark = obj._mark
+            end
+        end
         for _, name in ipairs(w2l.info.slk[type]) do
             w2l:file_save('map', name, w2l:backend_slk(type, name, data, report, object[type], slk))
         end

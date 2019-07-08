@@ -1,13 +1,13 @@
 
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/version.h>
-#include <base/warcraft3/jass/hook.h>
-#include <base/warcraft3/jass.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/version.h>
+#include <warcraft3/jass/hook.h>
+#include <warcraft3/jass.h>
 #include <base/hook/replace_pointer.h>
 #include <base/hook/fp_call.h>
 #include <deque>
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace warcraft3::japi {
 
 uintptr_t searchUnitDamageFunc()
 {
@@ -104,7 +104,7 @@ uint32_t __cdecl FakeGetEventDamage()
 		}
 	}
 
-	return fast_call<uint32_t>(RealGetEventDamage);
+	return base::fast_call<uint32_t>(RealGetEventDamage);
 }
 
 uintptr_t RealUnitDamageDoneFunc = 0;
@@ -119,11 +119,11 @@ uint32_t __fastcall FakeUnitDamageDoneFunc(uint32_t _this, uint32_t _edx, uint32
 			float d = jass::from_real(edd.new_amount);
 			uint32_t new_damage1 = jass::to_real(d);
 			uint32_t new_damage2 = jass::to_real(-d);
-			return fast_call<uint32_t>(RealUnitDamageDoneFunc, _this, _edx, &new_damage1, &new_damage2);
+			return base::fast_call<uint32_t>(RealUnitDamageDoneFunc, _this, _edx, &new_damage1, &new_damage2);
 		}
 	}
 
-	return fast_call<uint32_t>(RealUnitDamageDoneFunc, _this, _edx, damage1, damage2);
+	return base::fast_call<uint32_t>(RealUnitDamageDoneFunc, _this, _edx, damage1, damage2);
 }
 
 uintptr_t RealUnitDamageFunc = 0;
@@ -131,11 +131,11 @@ uint32_t __fastcall FakeUnitDamageFunc(uint32_t _this, uint32_t _edx, uint32_t a
 {
 	if ((uintptr_t)FakeUnitDamageDoneFunc != *(uintptr_t*)(*(uint32_t*)_this + 296))
 	{
-		RealUnitDamageDoneFunc = hook::replace_pointer(*(uint32_t*)_this + 296, (uintptr_t)FakeUnitDamageDoneFunc);
+		RealUnitDamageDoneFunc = base::hook::replace_pointer(*(uint32_t*)_this + 296, (uintptr_t)FakeUnitDamageDoneFunc);
 	}
 
 	g_edd.push_back(event_damage_data(is_physical, ptr));
-	uint32_t retval = fast_call<uint32_t>(RealUnitDamageFunc, _this, _edx, a2, ptr, is_physical, source_unit);
+	uint32_t retval = base::fast_call<uint32_t>(RealUnitDamageFunc, _this, _edx, a2, ptr, is_physical, source_unit);
 	g_edd.pop_back();
 	return retval;
 }
@@ -202,9 +202,9 @@ bool __cdecl EXSetEventDamage(uint32_t value)
 
 void InitializeEventDamageData()
 {
-	RealUnitDamageFunc = hook::replace_pointer(getUnitDamageFunc(), (uintptr_t)FakeUnitDamageFunc);
+	RealUnitDamageFunc = base::hook::replace_pointer(getUnitDamageFunc(), (uintptr_t)FakeUnitDamageFunc);
 	jass::japi_hook("GetEventDamage", &RealGetEventDamage, (uintptr_t)FakeGetEventDamage);
 	jass::japi_add((uintptr_t)EXGetEventDamageData, "EXGetEventDamageData", "(I)I");
 	jass::japi_add((uintptr_t)EXSetEventDamage,     "EXSetEventDamage",     "(R)B");
 }
-}}}
+}

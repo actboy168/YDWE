@@ -3,7 +3,7 @@
 #include <time.h>
 #include <assert.h>
 #include <base/filesystem.h>
-#include <base/util/unicode.h>
+#include <bee/utility/unicode_win.h>
 
 #ifdef WIN32
 #	pragma warning(disable:4996)
@@ -16,7 +16,7 @@
 #	include <sys/time.h>
 #endif
 			
-namespace base { namespace warcraft3 { namespace lua_engine { namespace log {
+namespace warcraft3::lua_engine::log {
 
 enum loglevel {	 
 	trace = 0,
@@ -187,7 +187,7 @@ static int l__index(lua_State* L)
 			lua_rawget(L, lua_upvalueindex(1));
 			size_t len = 0;
 			const char* str = lua_tolstring(L, -1, &len);
-			std::string utf8_str = base::w2u(std::wstring_view((const wchar_t*)str, len / sizeof(wchar_t)));
+			std::string utf8_str = bee::w2u(std::wstring_view((const wchar_t*)str, len / sizeof(wchar_t)));
 			lua_pushlstring(L, utf8_str.c_str(), utf8_str.size());
 			return 1;
 		}
@@ -216,7 +216,7 @@ static int l__newindex(lua_State* L)
 		{
 			size_t pathlen = 0;
 			const char* path = lua_tolstring(L, 3, &pathlen);
-			std::wstring utf16_str = base::u2w(std::string_view(path, pathlen));
+			std::wstring utf16_str = bee::u2w(std::string_view(path, pathlen));
 			fs::create_directories(fs::path(utf16_str).parent_path());
 			lua_pushstring(L, "__path");
 			lua_pushlstring(L, (const char*)utf16_str.c_str(), (utf16_str.size() + 1) * sizeof(wchar_t));
@@ -275,4 +275,4 @@ int open(lua_State* L)
 	return 1;
 }
 
-}}}}
+}

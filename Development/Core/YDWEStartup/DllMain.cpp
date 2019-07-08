@@ -4,27 +4,25 @@
 #include <windows.h>
 #include <base/filesystem.h>
 #include <base/file/memory_mapped_file.h>
-#include <base/exception/system_exception.h>
-#include <base/exception/windows_exception.h>
+#include <bee/error.h>
 #include <base/file/stream.h>
-#include <base/i18n-2/gettext.h>
-#include <base/path/get_path.h>
+#include <base/i18n/gettext.h>
 #include <base/path/ydwe.h>
-#include <base/util/unicode.h>
-#include <base/win/file_version.h>
-#include <base/win/process.h>
-#include <base/util/format.h>	 
+#include <bee/utility/unicode_win.h>
+#include <bee/utility/module_version_win.h>
+#include <bee/utility/format.h>	 
 #include <base/util/ini.h>
+#include <bee/subprocess.h>
 #include "Splash.h"
 
 #define YDWE_WAR3_INLINE
-#include <base/warcraft3/directory.h>
-#include <base/warcraft3/directory.cpp>
-#include <base/warcraft3/command_line.h>
-#include <base/warcraft3/command_line.cpp>
+#include <warcraft3/directory.h>
+#include <warcraft3/directory.cpp>
+#include <warcraft3/command_line.h>
+#include <warcraft3/command_line.cpp>
 
-#define _(str)  base::i18n::v2::get_text(str).data()
-#define __(str) base::u2w(base::i18n::v2::get_text(str)).c_str()
+#define _(str)  base::i18n::get_text(str).data()
+#define __(str) bee::u2w(base::i18n::get_text(str)).c_str()
 
 static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSecond, std::error_code *pErrorCode = nullptr)
 {
@@ -39,10 +37,10 @@ static bool FileContentEqual(const fs::path &fileFirst, const fs::path &fileSeco
 		base::file::memory_mapped_file mapperSecond(fileSecond.c_str());
 
 		size_t size;
-		return ((size = mapperFirst.size()) == mapperSecond.size()) 
-			&& (memcmp(mapperFirst.memory(), mapperSecond.memory(), size) == 0);
+		return ((size = mapperFirst.size()) == mapperSecond.size())
+			&& (memcmp(mapperFirst.data(), mapperSecond.data(), size) == 0);
 	}
-	catch (base::system_exception const& e)
+	catch (std::system_error const& e)
 	{
 		if (pErrorCode)
 		{
@@ -81,11 +79,11 @@ static void ShowSplash(fs::path const& ydwe_path)
 	}
 
 	try {
-		base::win::simple_file_version fv((ydwe_path / "YDWE.exe").c_str());
+        bee::simple_module_version fv((ydwe_path / "YDWE.exe").c_str());
 		CSplash display;
 		display.SetBitmap(bmp.wstring().c_str());
 		display.SetTransparentColor(RGB(128, 128, 128));
-		display.SetText(base::format(L"%d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 8, 16);
+		display.SetText(bee::format(L"%d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 8, 16);
 		display.Show();
 		Sleep(5000);
 		display.Close();
@@ -142,8 +140,8 @@ static void DoTask()
 {
 	fs::path gExecutableDirectory = base::path::ydwe(false);
 
-	base::i18n::v2::initialize(base::path::ydwe(true) / L"share" / L"locale");
-	base::i18n::v2::set_domain(L"startup");
+	base::i18n::initialize(base::path::ydwe(true) / L"share" / L"locale");
+	base::i18n::set_domain(L"startup");
 
 	if (gExecutableDirectory != fs::path(gExecutableDirectory.string()))
 	{
@@ -151,7 +149,7 @@ static void DoTask()
 	}
 
 	fs::path gWarcraftDirectory;
-	if (!base::warcraft3::directory::get(__("CHOOSE_WAR3_DIR"), gWarcraftDirectory))
+	if (!warcraft3::directory::get(__("CHOOSE_WAR3_DIR"), gWarcraftDirectory))
 	{
 		return ;
 	}
@@ -194,24 +192,30 @@ static void DoTask()
 	CreateDotNetConfig(gWarcraftDirectory / L"worldeditydwe.exe.config");
 
 	SetEnvironmentVariableW(L"ydwe-process-name", L"ydwe");
-	base::win::process worldedit_process;
-	bool result = worldedit_process.create(worldeditPreferredPath, std::wstring(::GetCommandLineW()));
+	bee::subprocess::spawn worldedit_process;
 
-	if (!result)
-	{
-		throw base::windows_exception(_("ERROR_LAUNCH_WE"));
+	int argc = 0;
+	wchar_t** argv = ::CommandLineToArgvW(::GetCommandLineW(), &argc);
+    bee::subprocess::args_t args;
+    args.resize(argc);
+	for (int i = 0; i < argc; ++i) {
+		args[i] = argv[i];
 	}
+	args[0] = worldeditPreferredPath.wstring();
 
+	if (!worldedit_process.exec(args, 0)) {
+		throw bee::make_syserror(_("ERROR_LAUNCH_WE"));
+	}
 	ShowSplash(gExecutableDirectory);
 }
 
 INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine, INT showType)
 {
-	base::warcraft3::command_line cmd;
+	warcraft3::command_line cmd;
 
 	if (cmd.has(L"war3"))
 	{
-		bool launch_warcraft3(base::warcraft3::command_line&);
+		bool launch_warcraft3(warcraft3::command_line&);
 		launch_warcraft3(cmd);
 		return 0;
 	}
@@ -223,13 +227,13 @@ INT WINAPI YDWEStartup(HINSTANCE current, HINSTANCE previous, LPSTR pCommandLine
 		DoTask();
 		exitCode = 0;
 	}
-	catch (base::exception const& e)
+	catch (std::system_error const& e)
 	{
-		MessageBoxW(NULL, base::u2w(e.what(), base::conv_method::replace | '?').c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, bee::u2w(e.what()).c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
 	}
 	catch (std::exception const& e)
 	{
-		MessageBoxW(NULL, base::a2w(e.what(), base::conv_method::replace | '?').c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
+		MessageBoxW(NULL, bee::a2w(e.what()).c_str(), __("ERROR"), MB_OK | MB_ICONERROR);
 	}
 	catch (...)
 	{

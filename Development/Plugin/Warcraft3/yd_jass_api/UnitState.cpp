@@ -1,16 +1,16 @@
 #include <base/hook/fp_call.h>
 #include <base/hook/iat.h>
-#include <base/warcraft3/jass/hook.h>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/version.h>
-#include <base/warcraft3/jass.h>
+#include <warcraft3/jass/hook.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/version.h>
+#include <warcraft3/jass.h>
 #include <cassert>	 
-#include <base/warcraft3/hashtable.h>  
+#include <warcraft3/hashtable.h>  
 #include "StringPool.h"
 
 #define M_PI       3.14159265358979323846   // pi
 
-namespace base { namespace warcraft3 { namespace japi {	  
+namespace warcraft3::japi {	  
 
 	enum UNIT_STATE
 	{
@@ -194,7 +194,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_TYPE:
 			break;
 		default:
-			return c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
+			return base::c_call<uint32_t>(RealGetUnitState, unit_handle, state_type);
 		}
 
 		uintptr_t unit_object = handle_to_object(unit_handle);
@@ -420,7 +420,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		case UNIT_STATE_MAX_MANA:
 			break;
 		default:
-			c_call<void>(RealSetUnitState, unit_handle, state_type, value_ptr);
+            base::c_call<void>(RealSetUnitState, unit_handle, state_type, value_ptr);
 			return;
 		}
 
@@ -655,11 +655,11 @@ namespace base { namespace warcraft3 { namespace japi {
 		static int f = searchPauseUnit();
 		if (flag)
 		{
-			this_call<void>(add_stun, object, 0);
+            base::this_call<void>(add_stun, object, 0);
 		}
 		else
 		{
-			this_call<void>(remove_stun, object);
+            base::this_call<void>(remove_stun, object);
 		}
 	}
 
@@ -679,7 +679,7 @@ namespace base { namespace warcraft3 { namespace japi {
 	static uintptr_t GetUnitData(jass::jinteger_t unitcode)
 	{
 		static uintptr_t get_unit_data = search_get_unit_data();
-		return fast_call<uintptr_t>(get_unit_data, unitcode);
+		return base::fast_call<uintptr_t>(get_unit_data, unitcode);
 	}
 
 	extern string_pool_t string_pool;
@@ -824,10 +824,10 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			type = (1 << type) & 0xFFFFFF;
 			if (enable) {
-				*(uint32_t *)(obj + 0x34) &= type;
+				*(uint32_t *)(obj + 0x34) |= type;
 			}
 			else {
-				*(uint32_t *)(obj + 0x34) |= ~type;
+				*(uint32_t *)(obj + 0x34) &= ~type;
 			}
 		}
 	}
@@ -866,4 +866,4 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXSetUnitFacing,        "EXSetUnitFacing",        "(Hunit;R)V");
 		//jass::japi_add((uintptr_t)EXGetObject, "EXGetObject", "(Hhandle;)I");
 	}
-}}}
+}

@@ -391,6 +391,7 @@ LRESULT __fastcall CWindowWnd::WindowProc(CWindowWnd* pThis, int Edx, HWND hWnd,
 	if (uMsg == WM_NCDESTROY)
 	{
 		LRESULT lRes = ::DefWindowProcW(pThis->m_hWnd, uMsg, wParam, lParam);
+		//thunk::destory(pThis->m_thunk);
 		pThis->m_hWnd = NULL;
 		pThis->OnFinalMessage(hWnd);
 		return lRes;
@@ -420,7 +421,6 @@ WNDPROC CWindowWnd::ThunkCreate()
 
 CWindowWnd::~CWindowWnd()
 {
-	thunk::destory(m_thunk);
 }
 
 LRESULT CWindowWnd::SendMessage(UINT uMsg, WPARAM wParam /*= 0*/, LPARAM lParam /*= 0*/)

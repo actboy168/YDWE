@@ -1,6 +1,6 @@
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/hook.h>
-#include <base/warcraft3/war3_searcher.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/hook.h>
+#include <warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
 
 #define M_PI       3.14159265358979323846   // pi
@@ -60,7 +60,7 @@ private:
 	T* data_;
 };
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace warcraft3::japi {
 
 	jass::jnothing_t __cdecl EXSetEffectXY(jass::jhandle_t effect, jass::jreal_t* px, jass::jreal_t* py)
 	{
@@ -136,9 +136,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		float angle = jass::from_real(*pangle) * float(M_PI / 180.);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
 		qmatrix<float>::value_type m = {
-			{ 1, 0, 0 },
-			{ 0, cos(angle), sin(angle) },
-			{ 0, -sin(angle), cos(angle) },
+			{ 1.f, 0.f, 0.f },
+			{ 0.f, cosf(angle), sinf(angle) },
+			{ 0.f, -sinf(angle), cosf(angle) },
 		};
 		mat *= m;
 	}
@@ -152,9 +152,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		float angle = jass::from_real(*pangle) * float(M_PI / 180.);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
 		qmatrix<float>::value_type m = {
-			{ cos(angle), 0, -sin(angle) },
-			{ 0, 1, 0 },
-			{ sin(angle), 0, cos(angle) },
+			{ cosf(angle), 0.f, -sinf(angle) },
+			{ 0.f, 1.f, 0.f },
+			{ sinf(angle), 0.f, cosf(angle) },
 		};
 		mat *= m;
 	}
@@ -168,9 +168,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		float angle = jass::from_real(*pangle) * float(M_PI / 180.);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
 		qmatrix<float>::value_type m = {
-			{ cos(angle), sin(angle), 0 },
-			{ -sin(angle), cos(angle), 0 },
-			{ 0, 0, 1 },
+			{ cosf(angle), sinf(angle), 0.f },
+			{ -sinf(angle), cosf(angle), 0.f },
+			{ 0.f, 0.f, 1.f },
 		};
 		mat *= m;
 	}
@@ -186,9 +186,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		float z = jass::from_real(*pz);
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
 		qmatrix<float>::value_type m = {
-			{ x, 0, 0 },
-			{ 0, y, 0 },
-			{ 0, 0, z },
+			{ x, 0.f, 0.f },
+			{ 0.f, y, 0.f },
+			{ 0.f, 0.f, z },
 		};
 		mat *= m;
 	}
@@ -201,9 +201,9 @@ namespace base { namespace warcraft3 { namespace japi {
 		}
 		qmatrix<float> mat((float*)(*(uintptr_t*)(obj + 0x28) + 0x108));
 		qmatrix<float>::value_type m = {
-			{ 1, 0, 0 },
-			{ 0, 1, 0 },
-			{ 0, 0, 1 },
+			{ 1.f, 0.f, 0.f },
+			{ 0.f, 1.f, 0.f },
+			{ 0.f, 0.f, 1.f },
 		};
 		mat = m;
 	}
@@ -215,7 +215,7 @@ namespace base { namespace warcraft3 { namespace japi {
 			return;
 		}
 		uintptr_t eff = *(uintptr_t*)(obj + 0x28);
-		this_call<void>(*(uintptr_t*)(*(uintptr_t*)eff+0x28), eff, jass::from_real(*pspeed));
+        base::this_call<void>(*(uintptr_t*)(*(uintptr_t*)eff+0x28), eff, jass::from_real(*pspeed));
 	}
 
 	void InitializeEffect()
@@ -234,4 +234,4 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXEffectMatReset,   "EXEffectMatReset",   "(Heffect;)V");
 		jass::japi_add((uintptr_t)EXSetEffectSpeed,   "EXSetEffectSpeed",   "(Heffect;R)V");
 	}
-}}}
+}

@@ -1,5 +1,6 @@
 local w3xparser = require 'w3xparser'
 local lang = require 'lang'
+local convertreal = require 'convertreal'
 
 local table_concat = table.concat
 local ipairs = ipairs
@@ -8,7 +9,6 @@ local pairs = pairs
 local table_sort = table.sort
 local table_insert = table.insert
 local math_floor = math.floor
-local wtonumber = w3xparser.tonumber
 local select = select
 local table_unpack = table.unpack
 local os_clock = os.clock
@@ -24,15 +24,29 @@ local object
 
 local function to_type(tp, value)
     if tp == 0 then
-        if not value or value == 0 then
+        if not value then
+            return nil
+        end
+        local value = tostring(math_floor(value))
+        if value == '0' then
             return nil
         end
         return value
     elseif tp == 1 or tp == 2 then
-        if not value or value == 0 then
+        if not value then
             return nil
         end
-        return ('%.4f'):format(value):gsub('[0]+$', ''):gsub('%.$', '')
+        if type(value) == 'number' then
+            value = convertreal(value)
+        end
+        if value:find('.', 1, true) then
+            value = value:gsub('0+$', '')
+        end
+        value = value:gsub('%.$', '')
+        if value == '' or value == '0' then
+            return nil
+        end
+        return value
     elseif tp == 3 then
         if not value then
             return
@@ -176,7 +190,7 @@ local function stringify_obj(str, obj)
         return a[1]:lower() < b[1]:lower()
     end)
     local empty = true
-    str[#str+1] = ('[%s]'):format(obj._slk_id or obj._id)
+    str[#str+1] = ('[%s]'):format(obj._id)
     for _, kv in ipairs(keyval) do
         local key, val = kv[1], kv[2]
         if val ~= '' then
@@ -271,13 +285,15 @@ local function prebuild_obj(name, obj)
     if remove_unuse_object and not obj._mark then
         return
     end
+    if obj._keep_obj then
+        return
+    end
     local r = {}
     for _, key in ipairs(keys) do
         prebuild_data(obj, key, r)
     end
     if next(r) then
         r._id = obj._id
-        r._slk_id = obj._slk_id
         return r
     end
 end
@@ -289,7 +305,7 @@ local function prebuild_merge(obj, a, b)
         w2l.messager.report(lang.report.WARN, 2, (lang.report.OBJECT_ID_CONFLICT):format(obj._id), ('[%s]%s --> [%s]%s'):format(tp1, name1, tp2, name2))
     end
     for k, v in pairs(b) do
-        if k == '_id' or k == '_type' or k == '_slk_id' then
+        if k == '_id' or k == '_type' then
             goto CONTINUE
         end
         local id = b._id

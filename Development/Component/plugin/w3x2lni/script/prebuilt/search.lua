@@ -138,7 +138,7 @@ local function create_search(w2l, type, search)
                     local key = get_key2(w2l, type, code, id)
                     local vtype = enable_type[meta.type]
                     if search[code][key] and search[code][key] ~= vtype then
-                        messager.text(lang.raw.TYPE_CONFLICT, 'skill', name, 'code', code)
+                        messager.text(table.concat({lang.raw.TYPE_CONFLICT, 'skill', name, 'code', code}, ' '))
                     end
                     if key then
                         search[code][key] = vtype

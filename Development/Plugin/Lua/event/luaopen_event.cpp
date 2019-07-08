@@ -6,24 +6,33 @@
 #include "YDWELogger.h"
 #include <base/hook/fp_call.h>	
 #include <base/hook/inline.h>
-#include <base/exception/exception.h>
+#include <bee/error/exception.h>
 #include <base/lua/object.h>
 #include <base/lua/guard.h>
+#include <Windows.h>
 
 namespace NYDWE {
 
 	logging::logger* lg;
+
+	static int errorfunc(lua_State* L)
+	{
+		luaL_traceback(L, L, lua_tostring(L, 1), 0);
+		return 1;
+	}
 
 	static int LuaOnSignal(lua_State* L, TEventData eventData, const base::lua::object& func)
 	{
 		base::lua::guard guard(L);
 
 		try {
+			lua_pushcfunction(L, errorfunc);
 			func.push();
 			lua_newtable(L);
 			eventData(L, lua_absindex(L, -1));
-			if (LUA_OK != lua_pcall(L, 1, 1, 0)) {
-				throw std::exception(lua_tostring(L, -1));
+			if (LUA_OK != lua_pcall(L, 1, 1, -3)) {
+				LOGGING_ERROR(lg) << "exception: \"" << lua_tostring(L, -1) << "\"";
+				return -1;
 			}
 			return (int)lua_tointeger(L, -1);
 		}
@@ -105,8 +114,8 @@ static int import_customdata(lua_State* L)
 	}
 	int32_t CObjectPane = *(int32_t*)(NYDWE::CObjectEditor + 4 * (8 + type));
 	int32_t CCustomData = *(int32_t*)(*(int32_t*)(CObjectPane + 4) + type * 4 + 4);
-	fs::path& path = *(fs::path*)luaL_checkudata(L, 2, "filesystem");
-	std::string asciipath = base::w2a(path.c_str(), base::conv_method::replace | '?');
+	fs::path& path = *(fs::path*)luaL_checkudata(L, 2, "bee::filesystem");
+	std::string asciipath = bee::w2a(path.c_str());
 	base::fast_call<int32_t>(0x005B7270, CCustomData, 0, asciipath.c_str());
 	base::fast_call<int32_t>(0x0064D4E0, CObjectPane);
 	return 0;
@@ -114,7 +123,7 @@ static int import_customdata(lua_State* L)
 
 int luaopen_event(lua_State* L)
 {
-	NYDWE::lg = logging::get_logger(L, "event");
+	NYDWE::lg = logging::get(L);
 	NYDWE::SetupEvent();
 
 	lua_newtable(L);

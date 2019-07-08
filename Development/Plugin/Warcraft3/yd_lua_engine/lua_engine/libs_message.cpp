@@ -1,15 +1,15 @@
 #include <lua.hpp>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/version.h>
-#include <base/warcraft3/keyboard_code.h>	
-#include <base/warcraft3/player.h>	  
-#include <base/warcraft3/message_dispatch.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/version.h>
+#include <warcraft3/keyboard_code.h>	
+#include <warcraft3/player.h>	  
+#include <warcraft3/message_dispatch.h>
 #include <base/hook/inline.h>
 #include <base/hook/fp_call.h>
 #include "common.h"
 #include "callback.h"
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace message {
+namespace warcraft3::lua_engine::message {
 
 	static HWND FindWar3Window()
 	{
@@ -140,7 +140,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 		uint32_t cgameui = s.get_gameui(0, 0);
 		float buf[0x10] = { 0 };
 		uintptr_t cworldframe = (s.get_version() <= version_120e) ? *(uintptr_t*)(cgameui + 0x3B0) : *(uintptr_t*)(cgameui + 0x3BC);
-		int result = this_call<int>(s_convert_xy, cworldframe, rx, ry, buf, 1, 1);
+		int result = base::this_call<int>(s_convert_xy, cworldframe, rx, ry, buf, 1, 1);
 		wx = buf[4];
 		wy = buf[5];
 		return result;
@@ -232,7 +232,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 				{
 					printf("immediate_order, %X, %X, %X\n", order, unk, flags);
 				}
-				return fast_call<int>(real::immediate_order, order, unk, flags);
+				return base::fast_call<int>(real::immediate_order, order, unk, flags);
 			}
 
 			int __fastcall point_order(uint32_t order, uint32_t unk, float* x, float* y, uint32_t flags)
@@ -245,7 +245,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 				{
 					printf("point_order, %X, %X, %f, %f, %X\n", order, unk, *x, *y, flags);
 				}
-				return fast_call<int>(real::point_order, order, unk, x, y, flags);
+				return base::fast_call<int>(real::point_order, order, unk, x, y, flags);
 			}
 
 			int __fastcall target_order(uint32_t order, uint32_t unk, float* x, float* y, uint32_t target, uint32_t flags)
@@ -258,7 +258,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 				{
 					printf("target_order, %X, %X, %f, %f, %X, %X\n", order, unk, *x, *y, target, flags);
 				}
-				return fast_call<int>(real::target_order, order, unk, x, y, target, flags);
+				return base::fast_call<int>(real::target_order, order, unk, x, y, target, flags);
 			}
 		}
 
@@ -307,7 +307,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			search();
 			uint32_t order = lua_tointeger(L, 1);
 			uint32_t flags = lua_tointeger(L, 2);
-			fast_call<int>(real::immediate_order, order, 0, flags);
+            base::fast_call<int>(real::immediate_order, order, 0, flags);
 			lua_pushboolean(L, 1);
 			return 1;
 		}
@@ -323,7 +323,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			float x = (float)lua_tonumber(L, 2);
 			float y = (float)lua_tonumber(L, 3);
 			uint32_t flags = lua_tointeger(L, 4);
-			fast_call<int>(real::point_order, order, 0, &x, &y, flags);
+            base::fast_call<int>(real::point_order, order, 0, &x, &y, flags);
 			lua_pushboolean(L, 1);
 			return 1;
 		}
@@ -344,7 +344,7 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			{
 				target = handle_to_object(target);
 			}
-			fast_call<int>(real::target_order, order, 0, &x, &y, target, flags);
+            base::fast_call<int>(real::target_order, order, 0, &x, &y, target, flags);
 			lua_pushboolean(L, 1);
 			return 1;
 		}
@@ -357,9 +357,9 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 			b_hook = true;
 			search();
 
-			hook::install(&real::immediate_order, (uintptr_t)fake::immediate_order);
-			hook::install(&real::point_order, (uintptr_t)fake::point_order);
-			hook::install(&real::target_order, (uintptr_t)fake::target_order);
+            base::hook::install(&real::immediate_order, (uintptr_t)fake::immediate_order);
+            base::hook::install(&real::point_order, (uintptr_t)fake::point_order);
+            base::hook::install(&real::target_order, (uintptr_t)fake::target_order);
 			return 0;
 		}
 	}
@@ -591,4 +591,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace message 
 		}
 		return 1;
 	}
-}}}}
+}

@@ -187,7 +187,7 @@ function read_eca(is_child, is_arg)
     if ui.args then
         for _, arg in ipairs(ui.args) do
             if arg.type ~= 'nothing' then
-                local arg = read_arg(ui)
+                local arg = read_arg()
                 if not args then
                     args = {}
                 end

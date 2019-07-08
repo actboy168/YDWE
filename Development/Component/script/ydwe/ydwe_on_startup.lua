@@ -9,7 +9,7 @@ ydwe_version = sys.version {}
 war3_version = sys.war3_version {}
 
 local function initialize_reg()
-    local registry = require "registry"
+    local registry = require "bee.registry"
 	local reg = registry.open [[HKEY_CURRENT_USER\Software\Blizzard Entertainment\WorldEdit]]
 	-- 不弹用户协议
 	reg["Has Been Run"] = { registry.REG_DWORD, 1 }
@@ -56,6 +56,9 @@ local function check_conflicting_units()
 	local units_dir = fs.war3_path() / 'Units'
 	local found = false
 	
+	if not fs.exists(units_dir) then
+		return
+	end
 	for file in units_dir:list_directory() do	
 		if not fs.is_directory(file) then
 			found = true
@@ -125,7 +128,7 @@ local function check_war3_version()
 	log.trace("check_war3_version")
 
     if war3_version.major ~= 1 or war3_version.minor < 20 or war3_version.minor > 27 then
-        log.error("Unsupported War3 %d.%d", war3_version.major, war3_version.minor)
+        log.error("Unsupported War3", war3_version.major, war3_version.minor)
         gui.error_message(nil, LNG.UNSUPPORTED_WAR3_VERSION, war3_version.major, war3_version.minor)
         os.exit(true, -1)
     end
@@ -200,7 +203,7 @@ function event.EVENT_WE_START(event_data)
 	log.debug("********************* on startup start *********************")
 
 	-- 读取版本
-	ydwe_version = sys.version { file = fs.ydwe_path() / "ydwe.exe" }
+	ydwe_version = sys.version { file = fs.ydwe_path() / "bin" / "ydbase.dll" }
 	war3_version = sys.war3_version { file = fs.war3_path() / "game.dll" }
 
 	log.debug("ydwe version " .. tostring(ydwe_version))

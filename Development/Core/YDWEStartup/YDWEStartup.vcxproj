@@ -14,21 +14,21 @@
     <ProjectGuid>{DF7D1CF5-CD15-4EDE-A580-D8DCE78EC508}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>YDWEStartup</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -93,6 +93,9 @@
     <ClInclude Include="Splash.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\OpenSource\bee.lua\project\msvc\bee.vcxproj">
+      <Project>{355c2493-0a78-490b-971a-bbdb0e2819ef}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\BLPConv\BLPConv.vcxproj">
       <Project>{5a6944d1-71b9-4b21-952a-e2e78c1ebf52}</Project>
     </ProjectReference>

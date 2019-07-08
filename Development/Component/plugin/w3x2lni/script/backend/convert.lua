@@ -102,7 +102,7 @@ return function (mode)
     w2l:set_setting(setting)
     
     w2l.input_ar = input_ar
-    output = setting.output or default_output(setting.input)
+    local output = setting.output or default_output(setting.input)
     setting.output = output
     if w2l.setting.target_storage == 'dir' then
         if not fs.exists(output) then

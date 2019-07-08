@@ -154,3 +154,5 @@ Dir specified by %s.%s not exsits
 Data version of %s.%s not matched
 [NO_LNI]
 No Lni dir
+[NEED_LIST_FILE]
+Need complete `(listfile)`

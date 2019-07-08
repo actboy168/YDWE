@@ -1,9 +1,9 @@
-require 'filesystem'
+fs = require 'bee.filesystem'
 local lni = require 'lni'
 local define = require 'share.config_define'
 local root = require 'backend.w2l_path'
-local default_config = lni.classics(io.load(root / 'script' / 'share' / 'config.ini'), 'script\\share\\config.ini')
-local global_config  = lni.classics(io.load(root / 'config.ini'), 'config.ini')
+local default_config = lni(assert(io.load(root / 'script' / 'share' / 'config.ini')), 'script\\share\\config.ini')
+local global_config  = lni(assert(io.load(root / 'config.ini')), 'config.ini')
 local map_config = {}
 
 local config = {}
@@ -13,14 +13,17 @@ local function save()
     for name, t in pairs(config) do
         lines[#lines+1] = ('[%s]'):format(name)
         for k, v in pairs(t) do
-            if define[name][k][2] ~= nil then
-                local value = global_config[name][k]
-                if value == nil then
+            local value = global_config[name][k]
+            if value == nil then
+                if define[name][k][2] == nil then
+                    goto CONTINUE
+                else
                     value = default_config[name][k]
                 end
-                local _, _, fmt = define[name][k][1](value)
-                lines[#lines+1] = ('%s = %s'):format(k, fmt)
             end
+            local _, _, fmt = define[name][k][1](value)
+            lines[#lines+1] = ('%s = %s'):format(k, fmt)
+            ::CONTINUE::
         end
         lines[#lines+1] = ''
     end
@@ -81,7 +84,7 @@ function config:open_map(path)
     local builder = require 'map-builder'
     local map = builder.load(path)
     if map then
-        lni.classics(map:get 'w3x2lni\\config.ini' or '', 'w3x2lni\\config.ini', { map_config })
+        lni(map:get 'w3x2lni\\config.ini' or '', 'w3x2lni\\config.ini', { map_config })
         map:close()
     end
 end
@@ -128,7 +131,11 @@ function config:define_comment(k1, k2)
 end
 
 function config:define_visible(k1, k2)
-    return define[k1][k2][2] ~= nil
+    local definer = define[k1][k2]
+    if not definer then
+        return false
+    end
+    return definer[2] ~= nil
 end
 
 return proxy(default_config, global_config, map_config, define, config)

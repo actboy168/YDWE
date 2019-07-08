@@ -62,8 +62,7 @@ std::map<std::string_view, unsigned int> g_guid_table = {
 	GUIID_Table_Put(YDWEEnumUnitsInRangeMultiple),
 	GUIID_Table_Put(YDWERegionMultiple),
 	GUIID_Table_Put(YDWEExecuteTriggerMultiple),
-	GUIID_Table_Put(YDWEMoverMultiple),
-	
+
 	GUIID_Table_Put(YDWEActivateTrigger),
 	GUIID_Table_Put(GetEnumUnit),
 	GUIID_Table_Put(GetFilterUnit),

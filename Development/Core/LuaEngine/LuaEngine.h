@@ -2,8 +2,7 @@
 
 #include <base/filesystem.h>
 #include <lua.hpp>
-#include "logging.h"
 
-LUAENGINE_API lua_State* LuaEngineCreate(const wchar_t* name);
-LUAENGINE_API void       LuaEngineDestory(lua_State* L);
-LUAENGINE_API bool       LuaEngineStart(lua_State* L);
+lua_State* LuaEngineCreate(const wchar_t* name);
+void       LuaEngineDestory(lua_State* L);
+bool       LuaEngineStart(lua_State* L);

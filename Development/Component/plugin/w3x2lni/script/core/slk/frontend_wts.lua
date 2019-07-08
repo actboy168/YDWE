@@ -1,4 +1,4 @@
-local lpeg = require 'lpeg'
+local lpeg = require 'lpeglabel'
 local lang = require 'lang'
 
 local function search_string(buf)
@@ -25,7 +25,7 @@ local function search_string(buf)
     local nl     = (P'\r\n' + S'\r\n') / newline
     local char   = nl + P(1)
     local com    = P'//' * (1-nl)^0 * nl^-1
-    local int    = P'0' + R'19' * R'09'^0
+    local int    = R'09'^1
     local define = P
     {
         'define',
@@ -57,7 +57,7 @@ return function (w2l, buf)
     if not buf then
         return tbl
     end
-    local suc, result = pcall(search_string, buf)
+    local suc, result = xpcall(search_string, debug.traceback, buf)
     if not suc then
         w2l.messager.report(lang.report.ERROR, 1, lang.report.WTS_SYNTAX_ERROR, result:match '[\r\n]+(.+)$')
         return tbl

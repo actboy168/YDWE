@@ -1,4 +1,4 @@
-require 'filesystem'
+fs = require 'bee.filesystem'
 local root = require 'backend.w2l_path'
 
 local function string_proxy(key, concat)
@@ -23,11 +23,17 @@ local raw = setmetatable({}, {
     end,
 })
 
+local escmap = {
+    ['"']  = '\\"',
+    ['\r'] = '\\r',
+    ['\n'] = '\\n',
+    ['\\'] = '\\\\',
+}
 local function string(v)
     v = tostring(v)
     local r = v
     if r:find '%c' or r:find '^[%-%d%.]' or r == 'nil' or r == 'true' or r == 'false' or r == '' then
-        r = '"' .. r:gsub('"', '\\"'):gsub('\r', '\\r'):gsub('\n', '\\n') .. '"'
+        r = '"' .. r:gsub('["\r\n\\]', escmap) .. '"'
     end
     return true, v, r
 end
@@ -61,7 +67,7 @@ local function confusion(confusion)
     if confusion:find '[^%w_]' then
         return false, raw.CONFIG_CONFUSION_1
     end
-    
+
     local chars = {}
     for char in confusion:gmatch '[%w_]' do
         if not chars[char] then
@@ -72,7 +78,7 @@ local function confusion(confusion)
     if #chars < 3 then
         return false, raw.CONFIG_CONFUSION_2
     end
-    
+
     confusion = table.concat(chars)
 
     local count = 0
@@ -241,13 +247,14 @@ local define = {
         data_load           = {string},
     },
     lni = {
-        'read_slk', 'find_id_times', 'export_lua',
+        'read_slk', 'find_id_times', 'export_lua', 'extra_check',
         read_slk            = {boolean,   raw.CONFIG_LNI_READ_SLK},
         find_id_times       = {integer,   raw.CONFIG_LNI_FIND_ID_TIMES},
         export_lua          = {boolean,   raw.CONFIG_LNI_EXPORT_LUA},
+        extra_check         = {boolean,   raw.CONFIG_LNI_EXTRA_CHECK},
     },
     slk = {
-        'remove_unuse_object', 'optimize_jass', 'mdx_squf', 'remove_we_only', 'slk_doodad', 'find_id_times', 'confused', 'confusion',
+        'remove_unuse_object', 'optimize_jass', 'mdx_squf', 'remove_we_only', 'slk_doodad', 'find_id_times', 'confused', 'confusion', 'extra_check',
         remove_unuse_object = {boolean,   raw.CONFIG_LNI_REMOVE_UNUSE_OBJECT},
         optimize_jass       = {boolean,   raw.CONFIG_SLK_OPTIMIZE_JASS},
         mdx_squf            = {boolean,   raw.CONFIG_SLK_MDX_SQUF},
@@ -256,11 +263,13 @@ local define = {
         find_id_times       = {integer,   raw.CONFIG_SLK_FIND_ID_TIMES},
         confused            = {boolean,   raw.CONFIG_SLK_CONFUSED},
         confusion           = {confusion, raw.CONFIG_SLK_CONFUSION},
+        extra_check         = {boolean,   raw.CONFIG_SLK_EXTRA_CHECK},
     },
     obj = {
-        'read_slk', 'find_id_times',
+        'read_slk', 'find_id_times', 'extra_check',
         read_slk            = {boolean,   raw.CONFIG_OBJ_READ_SLK},
         find_id_times       = {integer,   raw.CONFIG_OBJ_FIND_ID_TIMES},
+        extra_check         = {boolean,   raw.CONFIG_OBJ_EXTRA_CHECK},
     }
 }
 

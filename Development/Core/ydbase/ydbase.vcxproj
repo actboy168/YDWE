@@ -13,22 +13,24 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{75B04C07-94D9-41E7-BBFD-E67F79BFF41A}</ProjectGuid>
     <RootNamespace>ydbase</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfAtl>false</UseOfAtl>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -44,15 +46,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateManifest>
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -86,12 +88,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <MinimalRebuild>true</MinimalRebuild>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <WarningLevel>Level4</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(OpenSource)\detours\src\;$(OpenSource)\wow64ext\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -119,21 +116,13 @@
     <ClCompile Include="base\hook\patch.cpp" />
     <ClCompile Include="base\hook\replacedll.cpp" />
     <ClCompile Include="base\hook\replace_pointer.cpp" />
-    <ClCompile Include="base\i18n-2\gettext.cpp" />
+    <ClCompile Include="base\i18n\gettext.cpp" />
     <ClCompile Include="base\path\ydwe.cpp" />
-    <ClCompile Include="base\thread\thread.cpp" />
-    <ClCompile Include="base\thread\thread_exception.cpp" />
+    <ClCompile Include="base\util\pinyin.cpp" />
     <ClCompile Include="base\win\font\file.cpp" />
     <ClCompile Include="base\win\font\utility.cpp" />
-    <ClCompile Include="base\win\get_tick_count.cpp" />
-    <ClCompile Include="base\win\windows_category.cpp" />
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="base\exception\exception.cpp" />
-    <ClCompile Include="base\exception\seh_exception.cpp" />
-    <ClCompile Include="base\exception\system_exception.cpp" />
-    <ClCompile Include="base\exception\windows_exception.cpp" />
     <ClCompile Include="base\file\file_handle.cpp" />
-    <ClCompile Include="base\file\file_mapping_handle.cpp" />
     <ClCompile Include="base\file\memory_mapped_file.cpp" />
     <ClCompile Include="base\file\stream.cpp" />
     <ClCompile Include="base\hook\detail\import_address_table.cpp" />
@@ -143,32 +132,17 @@
     <ClCompile Include="base\hook\iat.cpp" />
     <ClCompile Include="base\hook\iat_manager.cpp" />
     <ClCompile Include="base\hook\inline.cpp" />
-    <ClCompile Include="base\i18n\libintl.cpp" />
-    <ClCompile Include="base\i18n\mofile.cpp" />
-    <ClCompile Include="base\path\helper.cpp" />
-    <ClCompile Include="base\path\get_path.cpp" />
     <ClCompile Include="base\util\console.cpp" />
     <ClCompile Include="base\util\is_utf8.cpp" />
-    <ClCompile Include="base\util\unicode.cpp" />
-    <ClCompile Include="base\win\env_variable.cpp" />
-    <ClCompile Include="base\win\file_version.cpp" />
     <ClCompile Include="base\win\pe_reader.cpp" />
-    <ClCompile Include="base\win\process.cpp" />
-    <ClCompile Include="base\win\version.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\com\guard.h" />
     <ClInclude Include="base\com\unique_ptr.h" />
     <ClInclude Include="base\config.h" />
-    <ClInclude Include="base\exception\detail\error_msg.h" />
-    <ClInclude Include="base\exception\exception.h" />
-    <ClInclude Include="base\exception\seh_exception.h" />
-    <ClInclude Include="base\exception\system_exception.h" />
-    <ClInclude Include="base\exception\windows_exception.h" />
     <ClInclude Include="base\filesystem.h" />
     <ClInclude Include="base\file\memory_mapped_file.h" />
     <ClInclude Include="base\file\file_handle.h" />
-    <ClInclude Include="base\file\file_mapping_handle.h" />
     <ClInclude Include="base\file\stream.h" />
     <ClInclude Include="base\hook\assembler\operand.h" />
     <ClInclude Include="base\hook\assembler\writer.h" />
@@ -186,71 +160,36 @@
     <ClInclude Include="base\hook\patch.h" />
     <ClInclude Include="base\hook\replacedll.h" />
     <ClInclude Include="base\hook\replace_pointer.h" />
-    <ClInclude Include="base\i18n-2\gettext.h" />
-    <ClInclude Include="base\i18n-2\lng.h" />
-    <ClInclude Include="base\i18n\libintl.h" />
-    <ClInclude Include="base\i18n\mofile.h" />
+    <ClInclude Include="base\i18n\gettext.h" />
+    <ClInclude Include="base\i18n\lng.h" />
     <ClInclude Include="base\lua\guard.h" />
-    <ClInclude Include="base\lua\make_range.h" />
     <ClInclude Include="base\lua\object.h" />
-    <ClInclude Include="base\path\helper.h" />
     <ClInclude Include="base\path\self.h" />
-    <ClInclude Include="base\path\get_path.h" />
     <ClInclude Include="base\path\ydwe.h" />
-    <ClInclude Include="base\thread\intrusive_ptr.h" />
-    <ClInclude Include="base\thread\lock\backoff.h" />
-    <ClInclude Include="base\thread\lock\guard.h" />
-    <ClInclude Include="base\thread\lock\os_linux.h" />
-    <ClInclude Include="base\thread\lock\os_win32.h" />
-    <ClInclude Include="base\thread\lock\spin.h" />
-    <ClInclude Include="base\thread\thread.h" />
-    <ClInclude Include="base\thread\thread_exception.h" />
     <ClInclude Include="base\util\buffer.h" />
     <ClInclude Include="base\util\console.h" />
-    <ClInclude Include="base\util\detail\ansi_codecvt.h" />
-    <ClInclude Include="base\util\detail\codecvt.h" />
-    <ClInclude Include="base\util\detail\utf8_codecvt.h" />
-    <ClInclude Include="base\util\dynarray.h" />
     <ClInclude Include="base\util\foreach.h" />
     <ClInclude Include="base\util\horrible_cast.h" />
     <ClInclude Include="base\util\do_once.h" />
-    <ClInclude Include="base\util\hybrid_array.h" />
     <ClInclude Include="base\util\ini.h" />
-    <ClInclude Include="base\util\list_of.h" />
-    <ClInclude Include="base\util\optional.h" />
+    <ClInclude Include="base\util\is_utf8.h" />
+    <ClInclude Include="base\util\pinyin.h" />
     <ClInclude Include="base\util\signal.h" />
     <ClInclude Include="base\util\singleton.h" />
     <ClInclude Include="base\util\string_algorithm.h" />
-    <ClInclude Include="base\util\string_view.h" />
-    <ClInclude Include="base\util\unicode.h" />
     <ClInclude Include="base\util\noncopyable.h" />
-    <ClInclude Include="base\util\format.h" />
-    <ClInclude Include="base\win\env_variable.h" />
-    <ClInclude Include="base\win\event.h" />
-    <ClInclude Include="base\win\file_version.h" />
     <ClInclude Include="base\win\font\file.h" />
     <ClInclude Include="base\win\font\utility.h" />
-    <ClInclude Include="base\win\get_tick_count.h" />
     <ClInclude Include="base\win\pe_reader.h" />
-    <ClInclude Include="base\win\process.h" />
-    <ClInclude Include="base\win\registry\exception.h" />
-    <ClInclude Include="base\win\registry\key.h" />
-    <ClInclude Include="base\win\registry\predefined_keys.h" />
-    <ClInclude Include="base\win\registry\traits.h" />
-    <ClInclude Include="base\win\registry\value.h" />
     <ClInclude Include="base\win\scoped_handle.h" />
-    <ClInclude Include="base\win\version.h" />
-    <ClInclude Include="base\win\windows_category.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="base\util\detail\ansi_codecvt.inl" />
-    <None Include="base\util\detail\codecvt.inl" />
-    <None Include="base\util\detail\utf8_codecvt.inl" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\OpenSource\bee.lua\project\msvc\bee.vcxproj">
+      <Project>{355c2493-0a78-490b-971a-bbdb0e2819ef}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\OpenSource\Detours\project\Detours.vcxproj">
       <Project>{198d08d6-92ba-46e3-b430-8351244fb61c}</Project>
     </ProjectReference>

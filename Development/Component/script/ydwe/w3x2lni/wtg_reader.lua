@@ -335,6 +335,7 @@ function read_eca(is_child)
     eca.type = unpack 'l'
     if is_child then
         eca.child_id = unpack 'l'
+        assert_then_retry(eca.child_id < 256, 'eca.child_id 错误')
     end
     eca.name   = unpack 'z'
     eca.enable = unpack 'l'
@@ -484,8 +485,11 @@ local function fill_fix()
     end)
 end
 
-local function remove_event_returns()
+local function remove_event_and_condition_returns()
     for _, ui in pairs(fix.ui.event) do
+        ui.returns = nil
+    end
+    for _, ui in pairs(fix.ui.condition) do
         ui.returns = nil
     end
 end
@@ -548,7 +552,7 @@ return function (wtg_, state_)
     read_triggers()
     
     fill_fix()
-    remove_event_returns()
+    remove_event_and_condition_returns()
     
     return chunk, fix
 end

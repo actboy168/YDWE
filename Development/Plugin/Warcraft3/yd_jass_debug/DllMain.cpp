@@ -1,15 +1,20 @@
 #include <windows.h>
-#include <base/warcraft3/war3_searcher.h>
+#include <warcraft3/war3_searcher.h>
 #include <base/hook/inline.h>
 #include <base/hook/fp_call.h>
-#include <base/warcraft3/hashtable.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/opcode.h>
+#include <warcraft3/hashtable.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/opcode.h>
+#include <warcraft3/jass/hook.h>
 #include <base/util/console.h>
-#include <base/util/format.h>
+#include <bee/utility/format.h>
+#include <base/path/ydwe.h>
 #include <iostream>
+#include <ctype.h>
+#include "handle_scanner.h"
+#include "hashtable.h"
 
-namespace base { namespace warcraft3 { namespace jdebug {
+namespace warcraft3::jdebug {
 	
 	uintptr_t search_jass_vmmain()
 	{
@@ -68,22 +73,22 @@ namespace base { namespace warcraft3 { namespace jdebug {
 
 	uintptr_t real_jass_vmmain = 0;
 
-	struct jass::opcode* current_opcode(base::warcraft3::jass_vm_t* vm)
+	struct jass::opcode* current_opcode(warcraft3::jass_vm_t* vm)
 	{
-		return *(struct jass::opcode**)((int)vm + 0x20) - 1;
+		return vm->opcode - 1;
 	}
 
 	struct jass::opcode* show_pos(struct jass::opcode* current_op)
 	{
 		struct jass::opcode *op;
-		for (op = current_op; op->opcode_type != jass::OPTYPE_FUNCTION; --op)
+		for (op = current_op; op->op != jass::OPTYPE_FUNCTION; --op)
 		{ }
 
 		std::cout << "    [" << jass::from_stringid(op->arg) << ":" << current_op  - op << "]" << std::endl;
 		return op;
 	}
 
-	void show_error(base::warcraft3::jass_vm_t* vm, const std::string& msg)
+	void show_error(warcraft3::jass_vm_t* vm, const std::string& msg)
 	{
 		base::console::enable();
 		std::cout << "---------------------------------------" << std::endl;
@@ -93,25 +98,15 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		std::cout << std::endl;
 		std::cout << "stack traceback:" << std::endl;
 
-		base::warcraft3::stackframe_t* frame = vm->stackframe;
-		jass::opcode* op = current_opcode(vm);
-		while (op)
-		{
-			op = show_pos(op);
-			if (op->arg == 1) {
-				break;
-			}
-			frame = frame->next;
-			uintptr_t code = frame->codes[frame->index]->code;
-			op = (jass::opcode*)(vm->symbol_table->unk0 + code * 4);
+		for (auto& cur : jass::stackwalker(vm)) {
+			show_pos(cur);
 		}
-
 		std::cout << "---------------------------------------" << std::endl;
 	}
 
-	uint32_t __fastcall fake_jass_vmmain(base::warcraft3::jass_vm_t* vm, uint32_t edx, uint32_t unk1, uint32_t unk2, uint32_t limit, uint32_t unk4)
+	uint32_t __fastcall fake_jass_vmmain(warcraft3::jass_vm_t* vm, uint32_t edx, uint32_t opcode, uint32_t unk2, uint32_t limit, uint32_t unk4)
 	{
-		uint32_t result = base::fast_call<uint32_t>(real_jass_vmmain, vm, edx, unk1, unk2, limit, unk4);
+		uint32_t result = base::fast_call<uint32_t>(real_jass_vmmain, vm, edx, opcode, unk2, limit, unk4);
 
 		switch (result)
 		{
@@ -125,14 +120,14 @@ namespace base { namespace warcraft3 { namespace jdebug {
 		case 6:
 		{
 			jass::opcode* op = current_opcode(vm);
-			if (op->opcode_type == jass::OPTYPE_PUSH)
+			if (op->op == jass::OPTYPE_PUSH)
 			{
-				show_error(vm, base::format("栈 [0x02X] 没有初始化就使用", op->r3));
+				show_error(vm, bee::format("栈 [0x02X] 没有初始化就使用", op->r3));
 			}
 			else
 			{
-				assert(op->opcode_type == jass::OPTYPE_GETVAR);
-				show_error(vm, base::format("变量 '%s' 没有初始化就使用", jass::from_stringid(op->arg)));
+				assert(op->op == jass::OPTYPE_MOVRV);
+				show_error(vm, bee::format("变量 '%s' 没有初始化就使用", jass::from_stringid(op->arg)));
 			}
 			break;
 		}
@@ -140,22 +135,80 @@ namespace base { namespace warcraft3 { namespace jdebug {
 			show_error(vm, "使用零作为除数");
 			break;
 		default:
-			show_error(vm, base::format("未知错误 (%d).", result));
+			show_error(vm, bee::format("未知错误 (%d).", result));
 			break;
 		}
 		return result;
 	}
 
+	static fs::path getPath(const char* filename) {
+		try {
+			for (;*filename && isspace((unsigned char)*filename) ;++filename)
+			{ }
+			fs::path path = bee::u2w(filename);
+			if (path.is_absolute()) {
+				return path;
+			}
+			return base::path::ydwe(false) / "logs" / path;
+		}
+		catch (...) {
+		}
+		return fs::path();
+	}
+	
+	void EXDebugOpcode(const char* filename) {
+		jass::opcode* op = warcraft3::jass::currentpos();
+		if (op) {
+			for (; op->op > jass::OPTYPE_MINLIMIT && op->op < jass::OPTYPE_MAXLIMIT; --op)
+			{ }
+			jass::dump_opcode(op, getPath(filename).c_str());
+		}
+	}
+
+	void EXDebugHandle(const char* filename) {
+		std::fstream fs(getPath(filename), std::ios::out);
+		if (fs) {
+			handles::scanner(fs, true);
+		}
+	}
+
+	void EXDebugLeak(const char* filename) {
+		std::fstream fs(getPath(filename), std::ios::out);
+		if (fs) {
+			handles::scanner(fs, false);
+		}
+	}
+
+	static uintptr_t RealGetLocalizedHotkey = 0;
+	uint32_t __cdecl FakeGetLocalizedHotkey(uint32_t s)
+	{
+		const char* str = warcraft3::jass::from_string(s);
+		if (str && strncmp(str, "ydwe::", 6) == 0) {
+			if (strncmp(str + 6, "opcode:", 7) == 0) {
+				EXDebugOpcode(str + 6 + 7);
+			}
+			else if (strncmp(str + 6, "handle:", 7) == 0) {
+				EXDebugHandle(str + 6 + 7);
+			}
+			else if (strncmp(str + 6, "leak:", 5) == 0) {
+				EXDebugLeak(str + 6 + 5);
+			}
+		}
+		return base::c_call<uint32_t>(RealGetLocalizedHotkey, s);
+	}
+
 	bool initialize()
 	{
+		ht::initialize();
+		warcraft3::jass::async_hook("GetLocalizedHotkey", &RealGetLocalizedHotkey, (uintptr_t)FakeGetLocalizedHotkey);
 		real_jass_vmmain = search_jass_vmmain();
 		return base::hook::install(&real_jass_vmmain, (uintptr_t)fake_jass_vmmain);
 	}
-}}}
+}
 
 void Initialize()
 {
-	base::warcraft3::jdebug::initialize();
+	warcraft3::jdebug::initialize();
 }
 
 BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID pReserved)

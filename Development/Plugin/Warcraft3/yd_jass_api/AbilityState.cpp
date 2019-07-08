@@ -1,15 +1,15 @@
 #include <base/hook/fp_call.h>
 #include <base/hook/iat.h>
-#include <base/warcraft3/jass/hook.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/version.h>
-#include <base/warcraft3/war3_searcher.h>	
-#include <base/warcraft3/hashtable.h>
+#include <warcraft3/jass/hook.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/version.h>
+#include <warcraft3/war3_searcher.h>	
+#include <warcraft3/hashtable.h>
 #include <array>
 #include <string>
 #include "StringPool.h"
 
-namespace base { namespace warcraft3 { namespace japi {
+namespace warcraft3::japi {
 
 	string_pool_t string_pool;
 
@@ -233,7 +233,7 @@ namespace base { namespace warcraft3 { namespace japi {
 				if (rf_is_valid(rf))
 				{
 					jass::jreal_t cooldown = jass::to_real(value);
-					this_call<void>(*(uintptr_t*)(*(uintptr_t*)(this) + 0x08), this, *(uintptr_t*)((uintptr_t)this + 0x08), &cooldown, 0xD01BEu, 0, 0);
+					base::this_call<void>(*(uintptr_t*)(*(uintptr_t*)(this) + 0x08), this, *(uintptr_t*)((uintptr_t)this + 0x08), &cooldown, 0xD01BEu, 0, 0);
 
 					return true;
 				}
@@ -290,10 +290,10 @@ namespace base { namespace warcraft3 { namespace japi {
 		{
 			uintptr_t ability = (uintptr_t)(this) - 0xD0;
 			jass::jreal_t cooldown = jass::to_real(0.f);
-			this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x2EC), ability, &cooldown, *(uintptr_t*)(ability + 0x50));
+            base::this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x2EC), ability, &cooldown, *(uintptr_t*)(ability + 0x50));
 			if (jass::from_real(cooldown) > 0.f)
 			{
-				this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x3A4), ability, &cooldown);
+                base::this_call<void>(*(uintptr_t*)(*(uintptr_t*)ability + 0x3A4), ability, &cooldown);
 			}
 		}
 	};
@@ -363,7 +363,7 @@ namespace base { namespace warcraft3 { namespace japi {
 	static ability_ui* GetAbilityUITableById(uintptr_t abilcode)
 	{
 		static uintptr_t get_ability_ui_table = search_get_ability_ui_table();
-		return this_call<ability_ui*>(get_ability_ui_table, abilcode);
+		return base::this_call<ability_ui*>(get_ability_ui_table, abilcode);
 	}
 
 	uintptr_t GetUnitAbilityByIndex(uint32_t unit_handle, uint32_t index)
@@ -482,7 +482,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		return false;
 	}
 	
-	uint32_t  __cdecl EXGetAbilityDataReal(uint32_t ability_handle, uint32_t level, uint32_t state_type)
+	jass::jreal_t    __cdecl EXGetAbilityDataReal(jass::jhandle_t ability_handle, jass::jinteger_t level, jass::jinteger_t state_type)
 	{
 		switch (state_type)
 		{
@@ -516,7 +516,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		return jass::to_real(0.f);
 	}
 
-	bool      __cdecl EXSetAbilityDataReal(uint32_t ability_handle, uint32_t level, uint32_t state_type, uint32_t* value_ptr)
+	jass::jboolean_t __cdecl EXSetAbilityDataReal(jass::jhandle_t ability_handle, jass::jinteger_t level, jass::jinteger_t state_type, jass::jreal_t* value_ptr)
 	{
 		switch (state_type)
 		{
@@ -551,7 +551,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		return false;
 	}
 
-	uint32_t  __cdecl EXGetAbilityDataInteger(uint32_t ability_handle, uint32_t level, uint32_t state_type)
+	jass::jinteger_t __cdecl EXGetAbilityDataInteger(jass::jhandle_t ability_handle, jass::jinteger_t level, jass::jinteger_t state_type)
 	{
 		switch (state_type)
 		{
@@ -588,7 +588,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		return 0;
 	}
 
-	bool      __cdecl EXSetAbilityDataInteger(uint32_t ability_handle, uint32_t level, uint32_t state_type, uint32_t value)
+	jass::jboolean_t __cdecl EXSetAbilityDataInteger(jass::jhandle_t ability_handle, jass::jinteger_t level, jass::jinteger_t state_type, jass::jinteger_t value)
 	{
 		switch (state_type)
 		{
@@ -716,6 +716,16 @@ namespace base { namespace warcraft3 { namespace japi {
 		return SetAbilityString(GetAbilityUITable(ability_pool.at(ability_handle)), level, type, value);
 	}
 
+	jass::jstring_t  __cdecl EXGetAbilityString(jass::jinteger_t abilcode, jass::jinteger_t level, jass::jinteger_t type)
+	{
+		return GetAbilityString(GetAbilityUITableById(abilcode), level, type);
+	}
+
+	jass::jboolean_t  __cdecl EXSetAbilityString(jass::jinteger_t abilcode, jass::jinteger_t level, jass::jinteger_t type, jass::jstring_t value)
+	{
+		return SetAbilityString(GetAbilityUITableById(abilcode), level, type, value);
+	}
+
 	bool __cdecl EXSetAbilityAEmeDataA(uint32_t ability_handle, uint32_t value)
 	{
 		ability_data* ability_ptr = (ability_data*)ability_pool.at(ability_handle);
@@ -774,7 +784,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		if (!table) {
 			return jass::create_string("");
 		}
-		hashtable::node* ptr = table->get(code);
+		hashtable::node* ptr = table->find(code);
 		if (!ptr) {
 			return jass::create_string("");
 		}
@@ -804,7 +814,7 @@ namespace base { namespace warcraft3 { namespace japi {
 		if (!table) {
 			return false;
 		}
-		hashtable::node* ptr = table->get(code);
+		hashtable::node* ptr = table->find(code);
 		if (!ptr) {
 			return false;
 		}
@@ -837,16 +847,6 @@ namespace base { namespace warcraft3 { namespace japi {
 		return true;
 	}
 
-	jass::jstring_t  __cdecl EXGetAbilityString(jass::jinteger_t abilcode, jass::jinteger_t level, jass::jinteger_t type)
-	{
-		return GetAbilityString(GetAbilityUITableById(abilcode), level, type);
-	}
-	
-	jass::jboolean_t  __cdecl EXSetAbilityString(jass::jinteger_t abilcode, jass::jinteger_t level, jass::jinteger_t type, jass::jstring_t value)
-	{
-		return SetAbilityString(GetAbilityUITableById(abilcode), level, type, value);
-	}
-
 	void InitializeAbilityState()
 	{
 		jass::japi_add((uintptr_t)EXGetUnitAbilityById,    "EXGetUnitAbility",        "(Hunit;I)Hability;");
@@ -866,4 +866,4 @@ namespace base { namespace warcraft3 { namespace japi {
 		jass::japi_add((uintptr_t)EXGetAbilityString,      "EXGetAbilityString",      "(III)S");
 		jass::japi_add((uintptr_t)EXSetAbilityString,      "EXSetAbilityString",      "(IIIS)B");	
 	}
-}}}
+}

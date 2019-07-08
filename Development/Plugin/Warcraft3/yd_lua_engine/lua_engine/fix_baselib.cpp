@@ -1,21 +1,20 @@
 #include "callback.h"
 #include "common.h"
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/war3_searcher.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/war3_searcher.h>
 #include <base/hook/fp_call.h>
-#include <base/win/registry/key.h>
-#include <base/util/unicode.h>
-#include <base/path/get_path.h>
-#include <base/path/helper.h>
-#include <base/util/list_of.h>
+#include <bee/registry.h>
+#include <bee/utility/unicode_win.h>
+#include <bee/utility/path_helper.h>
 #include <set>
 #include <Windows.h>
 #include <io.h>
 #include "storm.h"
 #include "lua_memfile.h"
 
+namespace fs = std::filesystem;
 
-namespace base { namespace warcraft3 { namespace lua_engine {
+namespace warcraft3::lua_engine {
 
 	int IFileCreate(const char* filename, unsigned char** data, size_t* size)
 	{
@@ -124,9 +123,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 	static bool allow_local_files()
 	{
 		try {
-			return !!registry::key_w(HKEY_CURRENT_USER, L"", L"Software\\Blizzard Entertainment\\Warcraft III")[L"Allow Local Files"].get<uint32_t>();
+			return !!bee::registry::key_w(L"HKEY_CURRENT_USER\\Software\\Blizzard Entertainment\\Warcraft III")[L"Allow Local Files"].get_uint32_t();
 		}
-		catch (registry::registry_exception const&) {}
+		catch (bee::registry::registry_exception const&) {}
 		return false;
 	}
 
@@ -135,9 +134,9 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		{
 			const char *filename = luaL_checkstring(L, 1);
 			try {
-				fs::path filepath = u2w(filename);
+				fs::path filepath = bee::u2w(filename);
 				if (!filepath.is_absolute()) {
-					filepath = path::module().parent_path() / filepath;
+					filepath = bee::path_helper::exe_path().value().parent_path() / filepath;
 				}
 				if (fs::exists(filepath))
 				{
@@ -156,11 +155,11 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	static bool can_write(const char* filename, luaL_Stream* p, const char* mode)
 	{
-		static std::set<std::wstring> s_blacklist = list_of(L"mix")(L"asi")(L"m3d")(L"flt")(L"flt")(L"exe")(L"dll");
+		static std::set<std::wstring> s_blacklist = { L"mix", L"asi", L"m3d", L"flt", L"flt", L"exe", L"dll" };
 		try {
-			fs::path rootpath = path::module().parent_path();
-			fs::path filepath = rootpath / u2w(filename);
-			filepath = path::normalize(filepath);
+			fs::path rootpath = bee::path_helper::exe_path().value().parent_path();
+			fs::path filepath = rootpath / bee::u2w(filename);
+			filepath = fs::absolute(filepath);
 
 			std::wstring ext = filepath.extension().wstring().substr(1, 4);
 			std::transform(ext.begin(), ext.end(), ext.begin(), ::towlower);
@@ -170,7 +169,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 			}
 			for (fs::path path = filepath.parent_path(); !path.empty(); path = path.parent_path())
 			{
-				if (path::equal(path, rootpath))
+				if (bee::path_helper::equal(path, rootpath))
 				{
 					fs::create_directories(filepath.parent_path());
 					p->f = fopen(filepath.string().c_str(), mode);
@@ -289,4 +288,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		putenv("LUA_SEED=");
 		return L;
 	}
-}}}
+}

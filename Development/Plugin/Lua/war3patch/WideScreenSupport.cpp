@@ -1,5 +1,5 @@
-#include <base/warcraft3/version.h>
-#include <base/warcraft3/war3_searcher.h>
+#include <warcraft3/version.h>
+#include <warcraft3/war3_searcher.h>
 #include <base/hook/inline.h>
 #include <base/hook/fp_call.h>
 #include <stdint.h>
@@ -23,7 +23,7 @@ namespace WideScreen
 
 	static uintptr_t search()
 	{
-		using namespace base::warcraft3;
+		using namespace warcraft3;
 
 		war3_searcher& s = get_war3_searcher();
 		uintptr_t ptr = 0;

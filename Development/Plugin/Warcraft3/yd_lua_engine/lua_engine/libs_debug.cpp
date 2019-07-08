@@ -1,10 +1,10 @@
 #include "jassbind.h" 
-#include <base/warcraft3/jass/func_value.h>	   
-#include <base/warcraft3/jass/global_variable.h>
-#include <base/warcraft3/war3_searcher.h>	  
-#include <base/util/format.h>
+#include <warcraft3/jass/func_value.h>	   
+#include <warcraft3/jass/global_variable.h>
+#include <warcraft3/war3_searcher.h>	  
+#include <bee/utility/format.h>
 
-namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
+namespace warcraft3::lua_engine::debug {
 
 	static int functiondef(lua_State* L)
 	{
@@ -64,9 +64,15 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 			lua_pushnil(L);
 			return 1;
 		}
-		hashtable::reverse_table* table = &((*get_jass_vm()->handle_table)->table);
-		uint32_t object = (uint32_t)table->at(3 * (h - 0x100000) + 1);
-		uint32_t reference = (uint32_t)table->at(3 * (h - 0x100000));
+		handle_table_t** hts = get_jass_vm()->handle_table;
+		if (!hts) 
+		{
+			lua_pushnil(L);
+			return 1;
+		}
+		hashtable::reverse_table& table = (*hts)->table;
+		uint32_t object = (uint32_t)table.at(3 * (h - 0x100000) + 1);
+		uint32_t reference = (uint32_t)table.at(3 * (h - 0x100000));
 	
 		lua_newtable(L);
 		{
@@ -92,9 +98,9 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 
 	static int currentpos(lua_State* L)
 	{
-		jass::opcode* current_op = (jass::opcode *)base::warcraft3::get_current_jass_pos();
+		jass::opcode* current_op = warcraft3::jass::currentpos();
 		jass::opcode* op;
-		for (op = current_op; op->opcode_type != jass::OPTYPE_FUNCTION; --op)
+		for (op = current_op; op->op != jass::OPTYPE_FUNCTION; --op)
 		{
 		}
 
@@ -105,23 +111,33 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 
 	static int handlemax(lua_State* L)
 	{
-		hashtable::reverse_table* table = &((*get_jass_vm()->handle_table)->table);
-		lua_pushinteger(L, table->size);
+		handle_table_t** hts = get_jass_vm()->handle_table;
+		if (hts) {
+			hashtable::reverse_table& table = (*hts)->table;
+			lua_pushinteger(L, table.size);
+			return 1;
+		}
+		lua_pushinteger(L, 0);
 		return 1;
 	}
 
 	static int handlecount(lua_State* L)
 	{
-		hashtable::reverse_table* table = &((*get_jass_vm()->handle_table)->table);
-		uint32_t n = 0;
-		for (uint32_t i = 1; i < table->size * 3; i += 3)
-		{
-			if (0 != (uintptr_t)table->at(i))
+		handle_table_t** hts = get_jass_vm()->handle_table;
+		if (hts) {
+			hashtable::reverse_table& table = (*hts)->table;
+			uint32_t n = 0;
+			for (uint32_t i = 1; i < table.size * 3; i += 3)
 			{
-				n++;
+				if (0 != (uintptr_t)table.at(i))
+				{
+					n++;
+				}
 			}
+			lua_pushinteger(L, n);
+			return 1;
 		}
-		lua_pushinteger(L, n);
+		lua_pushinteger(L, 0);
 		return 1;
 	}
 
@@ -177,4 +193,4 @@ namespace base { namespace warcraft3 { namespace lua_engine { namespace debug {
 		}
 		return 1;
 	}
-}}}}
+}

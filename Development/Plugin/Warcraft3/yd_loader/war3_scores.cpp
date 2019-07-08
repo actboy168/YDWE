@@ -1,6 +1,6 @@
-#include <base/warcraft3/jass/hook.h> 	
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/event.h>
+#include <warcraft3/jass/hook.h> 	
+#include <warcraft3/jass.h>
+#include <warcraft3/event.h>
 #include <base/hook/fp_call.h>
 #include <stdint.h>	
 #include <map>
@@ -9,7 +9,7 @@
 #include <Windows.h>
 
 namespace scores {
-	using namespace base::warcraft3;
+	using namespace warcraft3;
 	namespace rpg {
 		jass::jhandle_t g_gc = 0;
 		uint16_t g_dict = 0;

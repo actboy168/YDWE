@@ -1,7 +1,6 @@
 local inject_code = require "compiler.inject_code"
 local wave = require "compiler.wave"
 local template = require "compiler.template"
-local cjass = require "compiler.cjass"
 local jasshelper = require "compiler.jasshelper"
 local ev = require 'ev'
 
@@ -27,12 +26,7 @@ local function make_option(config, war3ver)
 	-- pjass的版本
 	option.pjass = config.PJass.Option
 	-- 代码注入选项
-	-- cjass和脚本注入不能共存
-	if option.enable_cjass then
-		option.script_injection = false
-	else
-		option.script_injection = tonumber(config.ScriptInjection.Option)
-	end
+    option.script_injection = tonumber(config.ScriptInjection.Option)
 	-- 目标魔兽版本
 	local save_type = tonumber(config.MapSave.Option)
 	if save_type == 1 then

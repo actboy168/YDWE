@@ -99,14 +99,6 @@ type = trigger
 type = tirggerexecute
 default = "tirggerexecute_notcondition"
 
-[YDWEMoverMultiple]
-title = "运动器   -- 运行"
-description = "运行 ${运动器}"
-category = TC_YDBF
-[[.args]]
-type = mover
-default = "YDWECreateMover"
-
 [YDWEEnumUnitsInRangeMultiple]
 title = "选取单位 -- 圆形范围"
 description = "选取以(${坐标X}, ${坐标Y})为圆心,${半径}为半径的圆范围内的单位做动作"

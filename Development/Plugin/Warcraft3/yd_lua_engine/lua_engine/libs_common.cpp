@@ -2,14 +2,14 @@
 #include "class_array.h"
 #include "libs_runtime.h"
 #include "common.h"
-#include <base/warcraft3/hashtable.h>
-#include <base/warcraft3/war3_searcher.h>
-#include <base/warcraft3/jass/func_value.h>
-#include <base/warcraft3/jass.h>
-#include <base/warcraft3/jass/global_variable.h>
-#include <base/lua/make_range.h>
+#include <warcraft3/hashtable.h>
+#include <warcraft3/war3_searcher.h>
+#include <warcraft3/jass/func_value.h>
+#include <warcraft3/jass.h>
+#include <warcraft3/jass/global_variable.h>
+#include <bee/lua/range.h>
 
-namespace base { namespace lua {
+namespace bee::lua {
 	template <>
 	int convert_to_lua(lua_State* L, const std::string& v)
 	{
@@ -23,9 +23,9 @@ namespace base { namespace lua {
 		lua_pushlstring(L, v.data(), v.size());
 		return 1;
 	}
-}}
+}
 
-namespace base { namespace warcraft3 { namespace lua_engine { 
+namespace warcraft3::lua_engine { 
 
 	namespace globals {
 		void jass_get_global_variable(lua_State* L, jass::OPCODE_VARIABLE_TYPE opt, uint32_t value);
@@ -116,7 +116,7 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 
 	int jass_pairs(lua_State* L)
 	{
-		return lua::make_range(L, jass::jass_function);
+		return bee::lua::make_range(L, jass::jass_function);
 	}
 
 	static void init_sleep_function(const char* name)
@@ -156,4 +156,4 @@ namespace base { namespace warcraft3 { namespace lua_engine {
 		}
 		return 1;
 	}
-}}}}
+}}
