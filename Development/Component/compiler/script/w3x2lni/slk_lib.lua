@@ -709,6 +709,12 @@ local function eq_obj(a, b)
             goto CONTINUE
         end
         if type(v) ~= type(b[k]) then
+            if v == nil then
+                return b[k] == 0 or b[k] == ''
+            end
+            if b[k] == nil then
+                return v == 0 or v == ''
+            end
             return false
         end
         if type(v) == 'table' then
