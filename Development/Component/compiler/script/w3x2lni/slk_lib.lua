@@ -585,7 +585,7 @@ local function get_displayname(o1, o2)
     if not name then
         name = '<未知>'
     end
-    return name:sub(1, 100):gsub('\r\n', ' ')
+    return (tostring(name):sub(1, 100):gsub('\r\n', ' '))
 end
 
 local displaytype = {
