@@ -65,8 +65,6 @@ void All_Hook()
   base::hook::install((uintptr_t*)&CC_Main, (uintptr_t)CC_Main_Hook);
   base::hook::install((uintptr_t*)&CC_Put_globals, (uintptr_t)CC_Put_globals_Hook);
   base::hook::install((uintptr_t*)&CC_Put_endglobals, (uintptr_t)CC_Put_endglobals_Hook);
-  //base::hook::install((uintptr_t*)&ConvertTriggerName, (uintptr_t)ConvertTriggerName_Hook);
-  //base::hook::install((uintptr_t*)&GetGlobalVarName, (uintptr_t)GetGlobalVarName_Hook);
   base::hook::install((uintptr_t*)&ChangeGUIType, (uintptr_t)ChangeGUIType_Hook);
   
   TriggerParameterDialog_FuncList_Hook();
@@ -84,8 +82,6 @@ void All_Unhook()
     //base::hook::inline_uninstall((uintptr_t*)&CC_Main, (uintptr_t)CC_Main_Hook);
     //base::hook::inline_uninstall((uintptr_t*)&CC_Put_globals, (uintptr_t)CC_Put_globals_Hook);
     //base::hook::inline_uninstall((uintptr_t*)&CC_Put_endglobals, (uintptr_t)CC_Put_endglobals_Hook);
-    //base::hook::inline_uninstall((uintptr_t*)ConvertTriggerName, (uintptr_t)ConvertTriggerName_Hook);
-    //base::hook::inline_install((uintptr_t*)&GetGlobalVarName, (uintptr_t)GetGlobalVarName_Hook);
     //base::hook::inline_uninstall((uintptr_t*)&ChangeGUIType, (uintptr_t)ChangeGUIType_Hook);
 
     //TriggerParameterDialog_FuncList_Unhook();

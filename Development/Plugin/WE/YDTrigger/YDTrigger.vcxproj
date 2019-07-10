@@ -113,7 +113,6 @@
     <ClCompile Include="Core\trigger_data_ui.cpp" />
     <ClCompile Include="CreateYDTriggerImportFile.cpp" />
     <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="GetGlobalVarName_Hook.cpp" />
     <ClCompile Include="Hook.cpp" />
     <ClCompile Include="SetGUIId_Hook.cpp" />
     <ClCompile Include="SetGUI_Hook.cpp" />
