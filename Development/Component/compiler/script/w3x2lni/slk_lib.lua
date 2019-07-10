@@ -585,7 +585,7 @@ local function get_displayname(o1, o2)
     if not name then
         name = '<未知>'
     end
-    return name:sub(1, 100):gsub('\r\n', ' ')
+    return (tostring(name):sub(1, 100):gsub('\r\n', ' '))
 end
 
 local displaytype = {
@@ -709,6 +709,12 @@ local function eq_obj(a, b)
             goto CONTINUE
         end
         if type(v) ~= type(b[k]) then
+            if v == nil then
+                return b[k] == 0 or b[k] == ''
+            end
+            if b[k] == nil then
+                return v == 0 or v == ''
+            end
             return false
         end
         if type(v) == 'table' then

@@ -54,14 +54,14 @@ trg = event.on('编译地图', function (success)
         return
     end
     import_files = {}
-    log.trace('Refresh object start', map_path)
+    log.trace('Refresh object start', map_path:string())
     local report = slk:refresh()
     log.trace('Refresh object finish')
     if #report > 0 then
         gui.message(nil, report)
         for filename, buf in pairs(import_files) do
             local file_path = map_path / filename
-            log.info('Import customdata', filename, type_map[filename], file_path)
+            log.info('Import customdata', filename, type_map[filename], file_path:string())
             io.save(file_path, buf)
             we.import_customdata(type_map[filename], file_path)
         end

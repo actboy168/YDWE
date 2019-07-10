@@ -39,9 +39,6 @@
     <ClCompile Include="CreateYDTriggerImportFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GetGlobalVarName_Hook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Hook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

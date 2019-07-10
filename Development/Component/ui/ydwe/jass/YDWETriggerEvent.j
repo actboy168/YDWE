@@ -77,7 +77,6 @@ endfunction
 // 将 yd_DamageEventTrigger 移入销毁队列, 从而排泄触发器事件
 function YDWESyStemAnyUnitDamagedSwap takes nothing returns nothing
     local boolean isEnabled = IsTriggerEnabled(yd_DamageEventTrigger)
-    local group g =CreateGroup()
 
     call DisableTrigger(yd_DamageEventTrigger)
     if yd_DamageEventTriggerToDestory != null then

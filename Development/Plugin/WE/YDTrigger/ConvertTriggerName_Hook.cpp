@@ -4,12 +4,6 @@
 #include "Common.h"
 
 void _fastcall 
-ConvertTriggerName_Hook(char* src, char* dst, int len)
-{
-  ConvertString(src, dst, len);
-}
-
-void _fastcall 
 GetTriggerName_Trig(DWORD This, char* dst, int len)
 {
   char buff[260];
