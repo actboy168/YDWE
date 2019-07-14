@@ -25,7 +25,7 @@ function wave:do_compile(op)
         end
     end
 	args[#args+1] = string.format('--define=WARCRAFT_VERSION=%d', 100 + op.option.runtime_version)
-	args[#args+1] = string.format('--define=YDWE_VERSION_STRING=\\"%s\\"', tostring(ydwe_version))
+	args[#args+1] = string.format('--define=YDWE_VERSION_STRING=\"%s\"', tostring(ydwe_version))
 	if op.option.enable_jasshelper_debug then
 		args[#args+1] = '--define=DEBUG=1'
 	end
