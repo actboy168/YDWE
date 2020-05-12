@@ -27,7 +27,7 @@ namespace base {
 		inline uintptr_t cast(const Argument input, typename std::enable_if<std::is_function<typename std::remove_reference<Argument>::type>::value, void>::type* = 0)
 		{
 			cast_union<uintptr_t, Argument> u;
-			static_assert(std::is_pod<Argument>::value, "Argument is not a pod.");
+			static_assert(std::is_trivially_copyable<Argument>::value, "Argument is not trivially copyable.");
 			static_assert((sizeof(Argument) == sizeof(u)) && (sizeof(Argument) == sizeof(uintptr_t)), "Argument and uintptr_t are not the same size.");
 			u.in = input;
 			return u.out;
@@ -37,7 +37,7 @@ namespace base {
 		inline uintptr_t cast(const Argument input, typename std::enable_if<!std::is_function<typename std::remove_reference<Argument>::type>::value && same_size<uintptr_t, Argument>::value, void>::type* = 0)
 		{
 			cast_union<uintptr_t, Argument> u;
-			static_assert(std::is_pod<Argument>::value, "Argument is not a pod.");
+			static_assert(std::is_trivially_copyable<Argument>::value, "Argument is not trivially copyable.");
 			u.in = input;
 			return u.out;
 		}
@@ -45,7 +45,7 @@ namespace base {
 		template <class Argument>
 		inline uintptr_t cast(const Argument input, typename std::enable_if<!std::is_function<typename std::remove_reference<Argument>::type>::value && !same_size<uintptr_t, Argument>::value, void>::type* = 0)
 		{
-			static_assert(std::is_pod<Argument>::value, "Argument is not a pod.");
+			static_assert(std::is_trivially_copyable<Argument>::value, "Argument is not trivially copyable.");
 			static_assert(sizeof(Argument) < sizeof(uintptr_t), "Argument can not be converted to uintptr_t.");
 			return static_cast<uintptr_t>(input);
 		}
