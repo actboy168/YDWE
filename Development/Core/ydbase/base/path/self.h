@@ -10,6 +10,6 @@ extern "C" IMAGE_DOS_HEADER __ImageBase;
 namespace base { namespace path {
 	inline fs::path self()
 	{
-		return std::move(bee::path_helper::dll_path(reinterpret_cast<HMODULE>(&__ImageBase)).value());
+		return std::move(bee::path_helper::dll_path(reinterpret_cast<HMODULE>(&__ImageBase)));
 	}
 }}

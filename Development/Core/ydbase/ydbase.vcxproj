@@ -164,6 +164,7 @@
     <ClInclude Include="base\i18n\lng.h" />
     <ClInclude Include="base\lua\guard.h" />
     <ClInclude Include="base\lua\object.h" />
+    <ClInclude Include="base\lua\range.h" />
     <ClInclude Include="base\path\self.h" />
     <ClInclude Include="base\path\ydwe.h" />
     <ClInclude Include="base\util\buffer.h" />

@@ -248,6 +248,9 @@
     <ClInclude Include="base\i18n\lng.h">
       <Filter>base\i18n</Filter>
     </ClInclude>
+    <ClInclude Include="base\lua\range.h">
+      <Filter>base\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="version.rc">

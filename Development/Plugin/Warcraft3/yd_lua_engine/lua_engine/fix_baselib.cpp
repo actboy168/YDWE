@@ -136,7 +136,7 @@ namespace warcraft3::lua_engine {
 			try {
 				fs::path filepath = bee::u2w(filename);
 				if (!filepath.is_absolute()) {
-					filepath = bee::path_helper::exe_path().value().parent_path() / filepath;
+					filepath = bee::path_helper::exe_path().parent_path() / filepath;
 				}
 				if (fs::exists(filepath))
 				{
@@ -157,7 +157,7 @@ namespace warcraft3::lua_engine {
 	{
 		static std::set<std::wstring> s_blacklist = { L"mix", L"asi", L"m3d", L"flt", L"flt", L"exe", L"dll" };
 		try {
-			fs::path rootpath = bee::path_helper::exe_path().value().parent_path();
+			fs::path rootpath = bee::path_helper::exe_path().parent_path();
 			fs::path filepath = rootpath / bee::u2w(filename);
 			filepath = fs::absolute(filepath);
 

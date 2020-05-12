@@ -7,7 +7,7 @@
 #include <warcraft3/jass/func_value.h>
 #include <warcraft3/jass.h>
 #include <warcraft3/jass/global_variable.h>
-#include <bee/lua/range.h>
+#include <base/lua/range.h>
 
 namespace warcraft3::lua_engine::globals {
 
@@ -74,7 +74,7 @@ namespace warcraft3::lua_engine::globals {
 	}
 }
 
-namespace bee::lua {
+namespace base::lua {
 	template <>
 	inline int convert_to_lua(lua_State* L, const warcraft3::hashtable::variable_node& v)
 	{
@@ -136,7 +136,7 @@ namespace warcraft3::lua_engine::globals {
 	int jglobals_pairs(lua_State* L)
 	{
 		const hashtable::variable_table& vt = *(get_jass_vm()->global_table);
-		return bee::lua::make_range(L, vt);
+		return base::lua::make_range(L, vt);
 	}
 
 	int open(lua_State* L)

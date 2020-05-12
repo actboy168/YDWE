@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include <locale>
 #include <array>
-#include <bee/nonstd/dynarray.h>
+#include <bee/utility/dynarray.h>
 #include "LuaEngine.h"
 
 lua_State* L = nullptr;
@@ -13,7 +13,7 @@ std::wstring getenv(const wchar_t* varname)
 	if (r <= sbuf.size()) {
 		return std::wstring(sbuf.data(), r);
 	}
-	std::dynarray<wchar_t> dbuf(r);
+	bee::dynarray<wchar_t> dbuf(r);
 	r = GetEnvironmentVariableW(varname, dbuf.data(), dbuf.size());
 	if (r) {
 		return std::wstring(dbuf.data(), r);
