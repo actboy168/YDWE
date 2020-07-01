@@ -748,26 +748,44 @@ namespace warcraft3::japi {
 	static uintptr_t search_buff_table()
 	{
 		war3_searcher& s = get_war3_searcher();
-		uintptr_t str = s.search_string_ptr("|cff00ff00", sizeof("|cff00ff00"));
-		if (s.get_version() <= version_121b)
+		if (s.get_version() >= version_127a)
 		{
-			str = s.search_int_in_rdata(str);
-		}
-		uintptr_t ptr = s.search_int_in_text(str);
-		uintptr_t prev = ptr;
-		for (; ptr; prev = ptr, ptr = s.search_int_in_text(str, prev + 1))
-			;
-		ptr = prev;
-		ptr = s.current_function(ptr);
-		if (s.get_version() > version_121b)
-		{
+			uintptr_t str = s.search_string_ptr("RegisterBuffOnce", sizeof("RegisterBuffOnce"));
+			uintptr_t ptr = s.search_int_in_text(str);
+			uintptr_t prev = ptr;
+			for (; ptr; prev = ptr, ptr = s.search_int_in_text(str, prev + 1))
+				;
+			ptr = prev;
+			ptr = next_opcode(ptr, 0xE8, 5); // ?GetAbilityUIDef@CUnitUIManager@@SIPAUAbilityUIDef@@HPBD@Z
+			ptr = next_opcode(ptr + 5, 0xE8, 5); // ?RegisterBuff@CBuffBar@@SIXIPBD00@Z
+			auto offset = (int)*(uintptr_t*)(ptr + 1);
+			ptr = ptr + 5 + offset;
 			ptr = next_opcode(ptr, 0xB9, 5);
-			return *(uintptr_t*)(ptr + 1);
+			return *(uintptr_t*)(ptr + 1); // s_buffTable
 		}
 		else
 		{
-			ptr = next_opcode(ptr, 0xA1, 5);
-			return *(uintptr_t*)(ptr + 1) - 0x24;
+			uintptr_t str = s.search_string_ptr("|cff00ff00", sizeof("|cff00ff00"));
+			if (s.get_version() <= version_121b)
+			{
+				str = s.search_int_in_rdata(str);
+			}
+			uintptr_t ptr = s.search_int_in_text(str);
+			uintptr_t prev = ptr;
+			for (; ptr; prev = ptr, ptr = s.search_int_in_text(str, prev + 1))
+				;
+			ptr = prev;
+			ptr = s.current_function(ptr);
+			if (s.get_version() > version_121b)
+			{
+				ptr = next_opcode(ptr, 0xB9, 5);
+				return *(uintptr_t*)(ptr + 1);
+			}
+			else
+			{
+				ptr = next_opcode(ptr, 0xA1, 5);
+				return *(uintptr_t*)(ptr + 1) - 0x24;
+			}
 		}
 	}
 
