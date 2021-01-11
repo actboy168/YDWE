@@ -6,7 +6,6 @@
 #include "YDWELogger.h"
 #include <base/hook/fp_call.h>	
 #include <base/hook/inline.h>
-#include <bee/error/exception.h>
 #include <base/lua/object.h>
 #include <base/lua/guard.h>
 #include <Windows.h>

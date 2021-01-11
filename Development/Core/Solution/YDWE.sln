@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YDWE", "..\YDWE\YDWE.vcxproj", "{E25E1A38-134A-4727-A6A1-FF3A0A97A4C5}"
 EndProject
@@ -83,7 +83,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bee", "..\..\..\OpenSource\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua54", "..\..\..\OpenSource\bee.lua\project\msvc\lua54.vcxproj", "{316B33ED-1056-48B0-ABF0-CE3CE55F7A17}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffi", "..\..\..\OpenSource\bee.lua\project\msvc\ffi.vcxproj", "{076A366B-6B75-4D35-A6A9-CA680F0771E3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffi", "..\..\Plugin\Lua\ffi\ffi.vcxproj", "{8FA3AA79-C280-4DDE-B59E-8E073F907D5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -285,14 +285,12 @@ Global
 		{316B33ED-1056-48B0-ABF0-CE3CE55F7A17}.Release|Win32.Build.0 = Release|Win32
 		{316B33ED-1056-48B0-ABF0-CE3CE55F7A17}.Release|x64.ActiveCfg = Release|x64
 		{316B33ED-1056-48B0-ABF0-CE3CE55F7A17}.Release|x64.Build.0 = Release|x64
-		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Debug|Win32.ActiveCfg = Debug|Win32
-		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Debug|Win32.Build.0 = Debug|Win32
-		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Debug|x64.ActiveCfg = Debug|x64
-		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Debug|x64.Build.0 = Debug|x64
-		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Release|Win32.ActiveCfg = Release|Win32
-		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Release|Win32.Build.0 = Release|Win32
-		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Release|x64.ActiveCfg = Release|x64
-		{076A366B-6B75-4D35-A6A9-CA680F0771E3}.Release|x64.Build.0 = Release|x64
+		{8FA3AA79-C280-4DDE-B59E-8E073F907D5A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8FA3AA79-C280-4DDE-B59E-8E073F907D5A}.Debug|Win32.Build.0 = Debug|Win32
+		{8FA3AA79-C280-4DDE-B59E-8E073F907D5A}.Debug|x64.ActiveCfg = Debug|Win32
+		{8FA3AA79-C280-4DDE-B59E-8E073F907D5A}.Release|Win32.ActiveCfg = Release|Win32
+		{8FA3AA79-C280-4DDE-B59E-8E073F907D5A}.Release|Win32.Build.0 = Release|Win32
+		{8FA3AA79-C280-4DDE-B59E-8E073F907D5A}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -326,7 +324,7 @@ Global
 		{DE0C5F1E-2E29-4781-BC0A-1F78F66543C9} = {ABD67588-6A9A-4ACF-8AF7-D941793740E1}
 		{355C2493-0A78-490B-971A-BBDB0E2819EF} = {5EAEB25D-7F28-4226-BA47-EAB24EBB7439}
 		{316B33ED-1056-48B0-ABF0-CE3CE55F7A17} = {5EAEB25D-7F28-4226-BA47-EAB24EBB7439}
-		{076A366B-6B75-4D35-A6A9-CA680F0771E3} = {5EAEB25D-7F28-4226-BA47-EAB24EBB7439}
+		{8FA3AA79-C280-4DDE-B59E-8E073F907D5A} = {ABD67588-6A9A-4ACF-8AF7-D941793740E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2384391F-A0A4-4E20-8F5C-E7AD0F7A9720}

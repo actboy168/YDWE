@@ -40,7 +40,7 @@ static int llog_error(lua_State *L) { return llog_print(L, logging::level::error
 static int llog_fatal(lua_State *L) { return llog_print(L, logging::level::fatal); }
 
 static int llog_init(lua_State *L) {
-	logging::create(L, *(fs::path*)luaL_checkudata(L, 1, "bee::filesystem"), bee::lua::to_string(L, 2));
+	logging::create(L, *(fs::path*)luaL_checkudata(L, 1, "bee::filesystem"), bee::lua::checkstring(L, 2));
 	return 0;
 }
 

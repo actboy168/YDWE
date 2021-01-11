@@ -10,7 +10,7 @@
 #include <warcraft3/jass/func_value.h>
 #include <warcraft3/jass/hook.h>
 #include <base/util/singleton.h>
-#include <bee/utility/format.h>
+#include <fmt/format.h>
 #include <base/hook/fp_call.h>
 #include <string_view>
 #include <base/util/string_algorithm.h>
@@ -70,7 +70,7 @@ namespace warcraft3::lua_engine::lua_loader {
 	{
 		lua_State* L = getMainL();
 
-		std::string str_script = bee::format("return (%s)", jass::from_trigstring(jass::from_string(script)));
+		std::string str_script = fmt::format("return ({})", jass::from_trigstring(jass::from_string(script)));
 		if (luaL_loadbuffer(L, str_script.c_str(), str_script.size(), str_script.c_str()) != LUA_OK)
 		{
 			printf("%s\n", lua_tostring(L, -1));

@@ -139,7 +139,7 @@ namespace warcraft3::japi {
 		{
 			bool operator()(const T& lft, const T& rht) const
 			{
-				return (lft < _Right);
+				return (lft < rht);
 			}
 		};
 

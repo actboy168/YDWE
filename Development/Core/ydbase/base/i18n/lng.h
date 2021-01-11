@@ -136,7 +136,7 @@ namespace lng {
 		bool parse_keyvalue(Handler& h)
 		{
 			if (*z != '[') {
-				return error(h, "'[' expected near '%c'", *z);
+				return error(h, "'[' expected near '{}'", *z);
 			}
 			if (!parse_key(h)) {
 				return false;

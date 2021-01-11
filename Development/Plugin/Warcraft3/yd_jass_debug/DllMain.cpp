@@ -7,8 +7,9 @@
 #include <warcraft3/jass/opcode.h>
 #include <warcraft3/jass/hook.h>
 #include <base/util/console.h>
-#include <bee/utility/format.h>
+#include <fmt/format.h>
 #include <base/path/ydwe.h>
+#include <bee/utility/unicode_win.h>
 #include <iostream>
 #include <ctype.h>
 #include "handle_scanner.h"
@@ -92,7 +93,7 @@ namespace warcraft3::jdebug {
 	{
 		base::console::enable();
 		std::cout << "---------------------------------------" << std::endl;
-		std::cout << "               Jass´íÎó                " << std::endl;
+		std::cout << "               Jassï¿½ï¿½ï¿½ï¿½                " << std::endl;
 		std::cout << "---------------------------------------" << std::endl;
 		std::cout << msg << std::endl;
 		std::cout << std::endl;
@@ -115,27 +116,27 @@ namespace warcraft3::jdebug {
 		case 4:
 			break;
 		case 2:
-			show_error(vm, "³¬¹ýÁË×Ö½ÚÂëÏÞÖÆ");
+			show_error(vm, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			break;
 		case 6:
 		{
 			jass::opcode* op = current_opcode(vm);
 			if (op->op == jass::OPTYPE_PUSH)
 			{
-				show_error(vm, bee::format("Õ» [0x02X] Ã»ÓÐ³õÊ¼»¯¾ÍÊ¹ÓÃ", op->r3));
+				show_error(vm, fmt::format("Õ» [0x{:02X}] Ã»ï¿½Ð³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½", op->r3));
 			}
 			else
 			{
 				assert(op->op == jass::OPTYPE_MOVRV);
-				show_error(vm, bee::format("±äÁ¿ '%s' Ã»ÓÐ³õÊ¼»¯¾ÍÊ¹ÓÃ", jass::from_stringid(op->arg)));
+				show_error(vm, fmt::format("ï¿½ï¿½ï¿½ï¿½ '{}' Ã»ï¿½Ð³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½", jass::from_stringid(op->arg)));
 			}
 			break;
 		}
 		case 7:
-			show_error(vm, "Ê¹ÓÃÁã×÷Îª³ýÊý");
+			show_error(vm, "Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½");
 			break;
 		default:
-			show_error(vm, bee::format("Î´Öª´íÎó (%d).", result));
+			show_error(vm, fmt::format("Î´Öªï¿½ï¿½ï¿½ï¿½ ({}).", result));
 			break;
 		}
 		return result;

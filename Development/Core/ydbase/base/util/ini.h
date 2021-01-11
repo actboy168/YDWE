@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <bee/error/exception.h>
 #include <base/util/foreach.h>
+#include <fmt/format.h>
 
 namespace base { namespace ini {
 	template <typename Table, typename String = Table::key_type>
@@ -95,7 +95,7 @@ namespace base { namespace ini {
 		template <class ... Args>
 		bool error(const char* fmt, const Args& ... args)
 		{
-			throw bee::exception(fmt, args...);
+			throw std::runtime_error(fmt::format(fmt, args...));
 		}
 
 		bool parse_comment()
@@ -126,7 +126,7 @@ namespace base { namespace ini {
 				case '\n':
 				case '\r':
 				case '\0':
-					return error("']' expected near '%c'", *z);
+					return error("']' expected near '{}'", *z);
 				}
 			}
 		}
@@ -218,7 +218,7 @@ namespace base { namespace ini {
 					incline();
 					break;
 				default:
-					return error("'\\n' expected near '%c'", *z);
+					return error("'\\n' expected near '{}'", *z);
 				}
 			}
 		}

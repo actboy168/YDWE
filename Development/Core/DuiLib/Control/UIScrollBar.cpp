@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "UIScrollBar.h"
-#include <bee/utility/format.h>
+#include <fmt/format.h>
 
 namespace DuiLib
 {
@@ -567,7 +567,7 @@ namespace DuiLib
 		else m_uThumbState &= ~ UISTATE_DISABLED;
 
 		if( !m_bHorizontal ) {
-			m_sImageModify = bee::format(L"corner='%d,%d,%d,%d' dest='%d,%d,%d,%d'", 
+			m_sImageModify = fmt::format(L"corner='{},{},{},{}' dest='{},{},{},{}'", 
 				0,
 				m_cxyFixed.cx / 2, 
 				0, 
@@ -615,7 +615,7 @@ namespace DuiLib
 		if( !IsEnabled() ) m_uButton1State |= UISTATE_DISABLED;
 		else m_uButton1State &= ~ UISTATE_DISABLED;
 
-		m_sImageModify = bee::format(L"dest='%d,%d,%d,%d'", m_rcButton1.left - m_rcItem.left, m_rcButton1.top - m_rcItem.top, m_rcButton1.right - m_rcItem.left, m_rcButton1.bottom - m_rcItem.top);
+		m_sImageModify = fmt::format(L"dest='{},{},{},{}'", m_rcButton1.left - m_rcItem.left, m_rcButton1.top - m_rcItem.top, m_rcButton1.right - m_rcItem.left, m_rcButton1.bottom - m_rcItem.top);
 
 		if( (m_uButton1State & UISTATE_DISABLED) != 0 ) {
 			if( m_sButton1DisabledImage ) {
@@ -655,7 +655,7 @@ namespace DuiLib
 		if( !IsEnabled() ) m_uButton2State |= UISTATE_DISABLED;
 		else m_uButton2State &= ~ UISTATE_DISABLED;
 
-		m_sImageModify = bee::format(L"dest='%d,%d,%d,%d'", m_rcButton2.left - m_rcItem.left, m_rcButton2.top - m_rcItem.top, m_rcButton2.right - m_rcItem.left, m_rcButton2.bottom - m_rcItem.top);
+		m_sImageModify = fmt::format(L"dest='{},{},{},{}'", m_rcButton2.left - m_rcItem.left, m_rcButton2.top - m_rcItem.top, m_rcButton2.right - m_rcItem.left, m_rcButton2.bottom - m_rcItem.top);
 
 		if( (m_uButton2State & UISTATE_DISABLED) != 0 ) {
 			if( m_sButton2DisabledImage ) {
@@ -693,7 +693,7 @@ namespace DuiLib
 		else m_uThumbState &= ~ UISTATE_DISABLED;
 
 		if( !m_bHorizontal ) {
-			m_sImageModify = bee::format(L"corner='%d,%d,%d,%d' dest='%d,%d,%d,%d'", 
+			m_sImageModify = fmt::format(L"corner='{},{},{},{}' dest='{},{},{},{}'", 
 				0,
 				m_cxyFixed.cx / 2, 
 				0, 

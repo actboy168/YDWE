@@ -3,7 +3,7 @@
 #include <base/file/stream.h>
 #include <map>
 #include <string>
-#include <bee/utility/format.h>
+#include <fmt/format.h>
 #include <bee/utility/unicode_win.h>
 #include <base/filesystem.h>
 #include <Windows.h>
@@ -36,8 +36,8 @@ namespace base { namespace i18n {
 		}
 		template <class ... Args>
 		void accept_error(int line, const char* fmt, const Args& ... args) {
-			errormsg = bee::format("%s:%d: ", file, line);
-			errormsg += bee::format(fmt, args ...);
+			errormsg = fmt::format("{}:{}: ", bee::w2u(file), line);
+			errormsg += fmt::format(fmt, args ...);
 		}
 		std::string         key;
 		const std::wstring& file;
@@ -50,7 +50,7 @@ namespace base { namespace i18n {
 		if (s.empty()) {
 			return s;
 		}
-		std::basic_string<T>::iterator c;
+		typename std::basic_string<T>::iterator c;
 		for (c = s.begin(); c != s.end() && iswspace(*c++);); s.erase(s.begin(), --c);
 		for (c = s.end(); c != s.begin() && iswspace(*--c);); s.erase(++c, s.end());
 		return s;

@@ -367,8 +367,8 @@ extern "C"
 	WOW_EXPORT VOID __cdecl InitWow64ext();
 #endif
 	WOW_EXPORT DWORD64 __cdecl X64Call(DWORD64 func, int argC, ...);
-	WOW_EXPORT DWORD64 __cdecl GetModuleHandle64(wchar_t* lpModuleName);
-	WOW_EXPORT DWORD64 __cdecl GetProcAddress64(DWORD64 hModule, char* funcName);
+	WOW_EXPORT DWORD64 __cdecl GetModuleHandle64(const wchar_t* lpModuleName);
+	WOW_EXPORT DWORD64 __cdecl GetProcAddress64(DWORD64 hModule, const char* funcName);
 	WOW_EXPORT SIZE_T __cdecl VirtualQueryEx64(HANDLE hProcess, DWORD64 lpAddress, MEMORY_BASIC_INFORMATION64* lpBuffer, SIZE_T dwLength);
 	WOW_EXPORT DWORD64 __cdecl VirtualAllocEx64(HANDLE hProcess, DWORD64 lpAddress, SIZE_T dwSize, DWORD flAllocationType, DWORD flProtect);
 	WOW_EXPORT BOOL __cdecl VirtualFreeEx64(HANDLE hProcess, DWORD64 lpAddress, SIZE_T dwSize, DWORD dwFreeType);

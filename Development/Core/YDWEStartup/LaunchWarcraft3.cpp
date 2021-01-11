@@ -3,10 +3,11 @@
 #include <base/path/ydwe.h>
 #include <bee/utility/path_helper.h>
 #include <base/util/ini.h>
-#include <bee/utility/format.h>
+#include <fmt/format.h>
 #include <bee/registry.h> 
 #include <base/hook/fp_call.h>
 #include <bee/subprocess.h>
+#include <bee/utility/unicode_win.h>
 #include <base/hook/injectdll.h>
 #include <base/hook/replacedll.h>
 
@@ -66,7 +67,7 @@ static bool map_convert(const fs::path& ydwe, const fs::path& from, const fs::pa
 		std::vector<std::wstring> {
 			app.wstring(),
 			L"-e",
-			bee::format(L"package.cpath = [[%s]]", (ydwe / L"bin" / L"?.dll").wstring()),
+			fmt::format(L"package.cpath = [[{}]]", (ydwe / L"bin" / L"?.dll").wstring()),
 			L"gui\\mini.lua",
 			bee::u2w(mode),
 			from.wstring(),

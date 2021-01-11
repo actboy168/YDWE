@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "UIProgress.h"
-#include <bee/utility/format.h>
+#include <fmt/format.h>
 
 #ifdef DUI_USE_PROGRESS
 

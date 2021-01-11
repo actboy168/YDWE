@@ -10,7 +10,7 @@
 #include <base/path/ydwe.h>
 #include <bee/utility/unicode_win.h>
 #include <bee/utility/module_version_win.h>
-#include <bee/utility/format.h>	 
+#include <fmt/format.h>	 
 #include <base/util/ini.h>
 #include <bee/subprocess.h>
 #include "Splash.h"
@@ -83,7 +83,7 @@ static void ShowSplash(fs::path const& ydwe_path)
 		CSplash display;
 		display.SetBitmap(bmp.wstring().c_str());
 		display.SetTransparentColor(RGB(128, 128, 128));
-		display.SetText(bee::format(L"%d.%d.%d.%d", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 8, 16);
+		display.SetText(fmt::format(L"{}.{}.{}.{}", fv.major, fv.minor, fv.revision, fv.build).c_str(), 10, 10, 8, 16);
 		display.Show();
 		Sleep(5000);
 		display.Close();

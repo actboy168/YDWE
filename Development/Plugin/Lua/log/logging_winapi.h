@@ -42,13 +42,6 @@ extern "C" {
 		long    tv_sec;         /* seconds */
 		long    tv_usec;        /* and microseconds */
 	};
-
-    __declspec(dllimport) HMODULE WINAPI LoadLibraryW(LPCWSTR lpFileName);
-    __declspec(dllimport) BOOL    WINAPI FreeLibrary(HMODULE hModule);
-    __declspec(dllimport) FARPROC WINAPI GetProcAddress(HMODULE hModule, LPCSTR lpProcName);
-	__declspec(dllimport) DWORD   WINAPI GetTickCount(void);
-	__declspec(dllimport) void    WINAPI GetSystemTimeAsFileTime(LPFILETIME lpSystemTimeAsFileTime);
-
 }
 
 }}

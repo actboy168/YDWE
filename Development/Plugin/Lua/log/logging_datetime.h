@@ -1,18 +1,12 @@
 #pragma once
 
-#if defined WIN32
-#	include "logging_winapi.h"
-#else
-#	include <sys/time.h>
-#endif
-
+#include <Windows.h>
 #include <stdint.h>
 #include <time.h>
 
 namespace logging { namespace datetime {
 #if defined WIN32
-	using winapi::timeval;
-	inline uint64_t filetime_to_unix_epoch(const winapi::FILETIME *ft)
+	inline uint64_t filetime_to_unix_epoch(const FILETIME *ft)
 	{
 		uint64_t res = (uint64_t)ft->dwHighDateTime << 32;
 		res |= ft->dwLowDateTime;
@@ -26,8 +20,8 @@ namespace logging { namespace datetime {
 			//errno = EINVAL;
 			return (-1);
 		}
-		winapi::FILETIME ft;
-		winapi::GetSystemTimeAsFileTime(&ft);
+		FILETIME ft;
+		::GetSystemTimeAsFileTime(&ft);
 		uint64_t tim = filetime_to_unix_epoch(&ft);
 		tv->tv_sec = (long)(tim / 1000000L);
 		tv->tv_usec = (long)(tim % 1000000L);

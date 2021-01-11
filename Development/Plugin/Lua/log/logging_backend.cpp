@@ -1,7 +1,7 @@
 #include "logging_backend.h"
-#include <bee/utility/format.h>
-#include <bee/error/exception.h>
+#include <fmt/format.h>
 #include <fstream>
+#include <bee/utility/unicode_win.h>
 
 namespace logging
 {
@@ -54,7 +54,7 @@ namespace logging
 			impl_->file_.open((impl_->root_ / (impl_->name_ + L".log")).c_str(), std::ios_base::app | std::ios_base::out);
 			if (!impl_->file_.is_open())
 			{
-				throw bee::exception("Failed to open file '%s' for writing.", (impl_->root_ / (impl_->name_ + L".log")).string().c_str());
+				throw std::runtime_error(fmt::format("Failed to open file '{}' for writing.", (impl_->root_ / (impl_->name_ + L".log")).string()));
 			}
 
 			impl_->written_ = static_cast<std::streamoff>(impl_->file_.tellp());
@@ -85,16 +85,16 @@ namespace logging
 		size_t i = 1;
 		for (; i < 10; ++i)
 		{
-			fs::path p = impl_->root_ / bee::format(L"%s%03d.log", impl_->name_, i);
+			fs::path p = impl_->root_ / fmt::format("{}{:03d}.log", bee::w2u(impl_->name_), i);
 			if (!fs::exists(p))
 			{
 				break;
 			}
 		}
 		if (i == 10) i = 1;
-		fs::rename(impl_->root_ / (impl_->name_ + L".log"), impl_->root_ / bee::format(L"%s%03d.log", impl_->name_, i));
+		fs::rename(impl_->root_ / (impl_->name_ + L".log"), impl_->root_ / fmt::format("{}{:03d}.log", bee::w2u(impl_->name_), i));
 
 		++i; if (i == 10) i = 1;
-		fs::remove(impl_->root_ / bee::format(L"%s%03d.log", impl_->name_, i));
+		fs::remove(impl_->root_ / fmt::format("{}{:03d}.log", bee::w2u(impl_->name_), i));
 	}
 }

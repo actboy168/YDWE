@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9B311390-F190-11E2-ACA6-E3865C23FF03}</ProjectGuid>
+    <ProjectGuid>{8FA3AA79-C280-4DDE-B59E-8E073F907D5A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>clr</RootNamespace>
+    <RootNamespace>war3patch</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -57,11 +57,19 @@
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)/sdk/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(OpenSource)\luaffi\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <ModuleDefinitionFile>clr.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
     </Link>
+    <PreBuildEvent>
+      <Command>$(YDWE)\..\Build\lua\luabuild\lua.exe $(OpenSource)/luaffi/src/dynasm/dynasm.lua -LNE -o $(OpenSource)/luaffi/src/call_arm.h $(OpenSource)/luaffi/src/call_arm.dasc
+$(YDWE)\..\Build\lua\luabuild\lua.exe $(OpenSource)/luaffi/src/dynasm/dynasm.lua -LNE -D X32WIN -o $(OpenSource)/luaffi/src/call_x86.h $(OpenSource)/luaffi/src/call_x86.dasc
+$(YDWE)\..\Build\lua\luabuild\lua.exe $(OpenSource)/luaffi/src/dynasm/dynasm.lua -LNE -D X64 -o $(OpenSource)/luaffi/src/call_x64.h $(OpenSource)/luaffi/src/call_x86.dasc
+$(YDWE)\..\Build\lua\luabuild\lua.exe $(OpenSource)/luaffi/src/dynasm/dynasm.lua -LNE -D X64 -D X64WIN -o $(OpenSource)/luaffi/src/call_x64win.h $(OpenSource)/luaffi/src/call_x86.dasc</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -70,39 +78,36 @@
       <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)/sdk/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(OpenSource)\luaffi\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ModuleDefinitionFile>clr.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
     </Link>
+    <PreBuildEvent>
+      <Command>$(YDWE)\..\Build\lua\luabuild\lua.exe $(OpenSource)/luaffi/src/dynasm/dynasm.lua -LNE -o $(OpenSource)/luaffi/src/call_arm.h $(OpenSource)/luaffi/src/call_arm.dasc
+$(YDWE)\..\Build\lua\luabuild\lua.exe $(OpenSource)/luaffi/src/dynasm/dynasm.lua -LNE -D X32WIN -o $(OpenSource)/luaffi/src/call_x86.h $(OpenSource)/luaffi/src/call_x86.dasc
+$(YDWE)\..\Build\lua\luabuild\lua.exe $(OpenSource)/luaffi/src/dynasm/dynasm.lua -LNE -D X64 -o $(OpenSource)/luaffi/src/call_x64.h $(OpenSource)/luaffi/src/call_x86.dasc
+$(YDWE)\..\Build\lua\luabuild\lua.exe $(OpenSource)/luaffi/src/dynasm/dynasm.lua -LNE -D X64 -D X64WIN -o $(OpenSource)/luaffi/src/call_x64win.h $(OpenSource)/luaffi/src/call_x86.dasc</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="clr_interop.cpp" />
-    <ClCompile Include="DllMain.cpp" />
-    <ClCompile Include="luaopen_clr.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="clr.def" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\OpenSource\bee.lua\project\msvc\bee.vcxproj">
-      <Project>{355c2493-0a78-490b-971a-bbdb0e2819ef}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\OpenSource\bee.lua\project\msvc\lua54.vcxproj">
       <Project>{316b33ed-1056-48b0-abf0-ce3ce55f7a17}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="clr_interop.h" />
-    <ClInclude Include="sdk\atlcomcli.h" />
-    <ClInclude Include="sdk\gchost.h" />
-    <ClInclude Include="sdk\ivalidator.h" />
-    <ClInclude Include="sdk\ivehandler.h" />
-    <ClInclude Include="sdk\metahost.h" />
-    <ClInclude Include="sdk\mscoree.h" />
+    <ClCompile Include="..\..\..\..\OpenSource\luaffi\src\call.c" />
+    <ClCompile Include="..\..\..\..\OpenSource\luaffi\src\ctype.c" />
+    <ClCompile Include="..\..\..\..\OpenSource\luaffi\src\ffi.c" />
+    <ClCompile Include="..\..\..\..\OpenSource\luaffi\src\parser.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\OpenSource\luaffi\src\ffi.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

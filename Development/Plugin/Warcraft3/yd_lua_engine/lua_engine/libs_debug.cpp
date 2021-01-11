@@ -1,8 +1,8 @@
 #include "jassbind.h" 
 #include <warcraft3/jass/func_value.h>	   
 #include <warcraft3/jass/global_variable.h>
-#include <warcraft3/war3_searcher.h>	  
-#include <bee/utility/format.h>
+#include <warcraft3/war3_searcher.h>
+#include <fmt/format.h>
 
 namespace warcraft3::lua_engine::debug {
 

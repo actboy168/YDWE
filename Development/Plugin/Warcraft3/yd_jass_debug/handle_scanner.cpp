@@ -2,7 +2,7 @@
 #include "hashtable.h"
 #include <warcraft3/war3_searcher.h>
 #include <warcraft3/version.h>
-#include <bee/utility/format.h>
+#include <fmt/format.h>
 
 #pragma execution_character_set("utf-8")
 
@@ -27,7 +27,7 @@ namespace handles {
 		}
 		else if (warcraft3::jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type()) {
 			for (uint32_t i = 0; i < gv.array_size(); ++i) {
-				add_reference(table::e_type::global, gv[i], bee::format("%s[%d]", gv.name(), i));
+				add_reference(table::e_type::global, gv[i], fmt::format("{}[{}]", gv.name(), i));
 			}
 		}
 	}
@@ -35,11 +35,11 @@ namespace handles {
 	void table::add_local_reference(warcraft3::hashtable::variable_node& var, const std::string& funcname) {
 		warcraft3::jass::global_variable gv(&var);
 		if (warcraft3::jass::OPCODE_VARIABLE_HANDLE == gv.type()) {
-			add_reference(table::e_type::local, (uint32_t)gv, bee::format("%s!%s", funcname, gv.name()));
+			add_reference(table::e_type::local, (uint32_t)gv, fmt::format("{}!{}", funcname, gv.name()));
 		}
 		else if (warcraft3::jass::OPCODE_VARIABLE_HANDLE_ARRAY == gv.type()) {
 			for (uint32_t i = 0; i < gv.array_size(); ++i) {
-				add_reference(table::e_type::local, gv[i], bee::format("%s!%s[%d]", funcname, gv.name(), i));
+				add_reference(table::e_type::local, gv[i], fmt::format("{}!{}[{}]", funcname, gv.name(), i));
 			}
 		}
 	}
@@ -47,10 +47,10 @@ namespace handles {
 	void table::add_hashtable_reference(uint32_t ht, uint32_t t, uint32_t k, uint32_t handle) {
 		auto it = htmgr.find(ht);
 		if (it == htmgr.end()) {
-			add_reference(table::e_type::hashtable, handle, bee::format("handle: unknown [%d][%d]", t, k));
+			add_reference(table::e_type::hashtable, handle, fmt::format("handle: unknown [{}][{}]", t, k));
 			return;
 		}
-		add_reference(table::e_type::hashtable, handle, bee::format("handle: 0x%08X [%d][%d]", it->second, t, k));
+		add_reference(table::e_type::hashtable, handle, fmt::format("handle: 0x{:08X} [{}][{}]", it->second, t, k));
 	}
 
 	void table::add_reference(e_type type, uint32_t handle, const std::string& name) {
@@ -124,45 +124,45 @@ namespace handles {
 		ref += h.local_reference.size();
 		ref += h.hashtable_reference.size();
 
-		fs << bee::format("handle: 0x%08X", h.handle) << std::endl;
-		fs << bee::format("  引用: %d/%d", ref, h.reference) << std::endl;
+		fs << fmt::format("handle: 0x{:08X}", h.handle) << std::endl;
+		fs << fmt::format("  引用: {}/{}", ref, h.reference) << std::endl;
 		if (h.object) {
 			uint32_t type = get_object_type(h.object);
 			const char* handletype = ObjectTypeToHandleType(type);
 			if (handletype) {
-				fs << bee::format("  类型: %s", handletype) << std::endl;
+				fs << fmt::format("  类型: {}", handletype) << std::endl;
 			}
 			else {
 				fs << "  类型: 未知" << std::endl;
 			}
-			fs << bee::format("  对象: %c%c%c%c", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
+			fs << fmt::format("  对象: {}{}{}{}", ((const char*)&type)[3], ((const char*)&type)[2], ((const char*)&type)[1], ((const char*)&type)[0]) << std::endl;
 		}
 		auto pos = ht::getHandlePos(h.handle);
 		if (!pos.empty()) {
 			jass::opcode *current_op = pos[0];
 			assert(current_op->op == jass::OPTYPE_CALLNATIVE);
-			fs << bee::format("  创建位置: %s", jass::from_stringid(current_op->arg)) << std::endl;
+			fs << fmt::format("  创建位置: {}", jass::from_stringid(current_op->arg)) << std::endl;
 			for (auto& cur : pos) {
 				jass::opcode* op;
 				for (op = cur; op->op != jass::OPTYPE_FUNCTION; --op)
 				{
 				}
-				fs << bee::format("    | %s+%d", jass::from_stringid(op->arg), cur - op) << std::endl;
+				fs << fmt::format("    | {}+{}", jass::from_stringid(op->arg), cur - op) << std::endl;
 			}
 		}
 		if (!h.global_reference.empty() || !h.local_reference.empty()) {
 			fs << "  引用它的变量:" << std::endl;
 			for (auto gv = h.global_reference.begin(); gv != h.global_reference.end(); ++gv) {
-				fs << bee::format("    | %s", gv->c_str()) << std::endl;
+				fs << fmt::format("    | {}", gv->c_str()) << std::endl;
 			}
 			for (auto gv = h.local_reference.begin(); gv != h.local_reference.end(); ++gv) {
-				fs << bee::format("    | %s", gv->c_str()) << std::endl;
+				fs << fmt::format("    | {}", gv->c_str()) << std::endl;
 			}
 		}
 		if (!h.hashtable_reference.empty()) {
 			fs << "  引用它的哈希表:" << std::endl;
 			for (auto gv = h.hashtable_reference.begin(); gv != h.hashtable_reference.end(); ++gv) {
-				fs << bee::format("    | %s", gv->c_str()) << std::endl;
+				fs << fmt::format("    | {}", gv->c_str()) << std::endl;
 			}
 		}
 	}

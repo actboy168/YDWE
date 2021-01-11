@@ -1,6 +1,7 @@
 #include <base/file/stream.h>
-#include <bee/error/exception.h>
 #include <bee/utility/unicode_win.h>
+#include <fmt/format.h>
+#include <exception>
 
 namespace base { namespace file {
 
@@ -33,7 +34,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw bee::exception("Can not open the file %s.", filename);
+			throw std::runtime_error(fmt::format("Can not open the file {}.", filename));
 		}
 	}
 
@@ -42,7 +43,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw bee::exception("Can not open the file %s.", filename.c_str());
+			throw std::runtime_error(fmt::format("Can not open the file {}.", filename));
 		}
 	}
 
@@ -51,7 +52,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw bee::exception(L"Can not open the file %s.", filename);
+			throw std::runtime_error(bee::w2u(fmt::format(L"Can not open the file {}.", filename)));
 		}
 	}
 
@@ -60,7 +61,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw bee::exception(L"Can not open the file %s.", filename.c_str());
+			throw std::runtime_error(bee::w2u(fmt::format(L"Can not open the file {}.", filename)));
 		}
 	}
 
@@ -69,7 +70,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw bee::exception(L"Can not open the file %s.", filename.c_str());
+			throw std::runtime_error(fmt::format("Can not open the file {}.", filename.string()));
 		}
 	}
 
@@ -78,7 +79,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw bee::exception("Can not open the file %s.", filename);
+			throw std::runtime_error(fmt::format("Can not open the file {}.", filename));
 		}
 	}
 
@@ -87,7 +88,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw bee::exception("Can not open the file %s.", filename.c_str());
+			throw std::runtime_error(fmt::format("Can not open the file {}.", filename));
 		}
 	}
 
@@ -96,7 +97,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw bee::exception(L"Can not open the file %s.", filename);
+			throw std::runtime_error(bee::w2u(fmt::format(L"Can not open the file {}.", filename)));
 		}
 	}
 
@@ -105,7 +106,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw bee::exception(L"Can not open the file %s.", filename.c_str());
+			throw std::runtime_error(bee::w2u(fmt::format(L"Can not open the file {}.", filename)));
 		}
 	}
 
@@ -114,7 +115,7 @@ namespace base { namespace file {
 	{
 		if (!file_.is_open())
 		{
-			throw bee::exception(L"Can not open the file %s.", filename.c_str());
+			throw std::runtime_error(fmt::format("Can not open the file {}.", filename.string()));
 		}
 	}
 }}

@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <mscoree.h>
 #include <metahost.h>
-#import "mscorlib.tlb" raw_interfaces_only, rename("ReportEvent","ReportCLREvent")
+#import "mscorlib.tlb" raw_interfaces_only, rename("ReportEvent","ReportCLREvent") rename("or","oref")
 #include <atlcomcli.h>
 #include <functional>
 

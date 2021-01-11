@@ -20,7 +20,7 @@ namespace base { namespace file {
 		}
 		size_ = file_size & 0xFFFFFFFF;
 #endif
-		win::scoped_handle<NULL> map_(::CreateFileMappingW(file_.get(), NULL, PAGE_READONLY, file_size >> 32, file_size & 0xFFFFFFFF, NULL));
+		win::scoped_handle<(HANDLE)NULL> map_(::CreateFileMappingW(file_.get(), NULL, PAGE_READONLY, file_size >> 32, file_size & 0xFFFFFFFF, NULL));
 		if (!map_) {
 			throw bee::make_syserror("failed to open file mapping");
 		}

@@ -5,6 +5,8 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include <assert.h>
+
 
 namespace warcraft3::jass {
 

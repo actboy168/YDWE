@@ -1,6 +1,6 @@
 #include <lua.hpp>
-#include <base/util/console.h>	
-#include <bee/utility/format.h>	  
+#include <base/util/console.h>
+#include <fmt/format.h> 
 #include <array>
 #include <cstring>
 #include "libs_runtime.h"
@@ -317,7 +317,7 @@ namespace warcraft3::lua_engine::runtime {
 			double total_time = (time::get_counter() - start) / frequency;
 			double call_time = time[kJassCall] / frequency;
 			double event_time = time[kJassEvent] / frequency;
-			std::string result = bee::format("total time[%.03fms], call count[%d] time[%.03fms], event count[%d] time[%.03fms]"
+			std::string result = fmt::format("total time[{:.03f}ms], call count[{}] time[{:.03f}ms], event count[{}] time[{:.03f}ms]"
 				, total_time
 				, count[kJassCall]
 				, call_time

@@ -1,13 +1,13 @@
 #include "LuaEngine.h"
 #include <Windows.h>
 #include <stdint.h>
-#include <base/hook/fp_call.h>	  		
+#include <base/hook/fp_call.h>
 #include <base/filesystem.h>
 #include <base/hook/inline.h>
 #include <base/path/self.h>
 #include <base/path/ydwe.h>
 #include <bee/utility/module_version_win.h>
-#include <bee/utility/format.h>
+#include <fmt/format.h>
 #include <bee/platform/version.h>
 #include "../../Plugin/Lua/log/logging.h"
 #include "nameof.hpp"
@@ -73,9 +73,9 @@ lua_State* LuaEngineCreate(const wchar_t* name)
 		LOGGING_INFO(lg) << "------------------------------------------------------";
 
         auto vn = bee::platform::get_version();
-		LOGGING_INFO(lg) << bee::format("LuaEngine %s started.", bee::module_version(base::path::self().c_str())[L"FileVersion"]);
+		LOGGING_INFO(lg) << fmt::format("LuaEngine {} started.", bee::w2u(bee::module_version(base::path::self().c_str())[L"FileVersion"]));
 		LOGGING_INFO(lg) << "Compiled at " __TIME__ ", " __DATE__;
-		LOGGING_INFO(lg) << bee::format("Windows version: %s.%d", NAMEOF_ENUM(vn.ver), vn.build);
+		LOGGING_INFO(lg) << fmt::format("Windows version: {}.{}", NAMEOF_ENUM(vn.ver), vn.build);
 
 		luaL_openlibs(L);
 		LOGGING_DEBUG(lg) << "Initialize LuaEngine successfully.";

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <base/config.h>
+#include <string>
 #include <cassert>
 #include <cstdint>
 

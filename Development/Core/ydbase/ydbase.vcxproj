@@ -59,7 +59,6 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <WarningLevel>Level4</WarningLevel>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <Optimization>MinSpace</Optimization>
       <DisableSpecificWarnings>
@@ -88,7 +87,6 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
       <AdditionalIncludeDirectories>$(OpenSource)\detours\src\;$(OpenSource)\wow64ext\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

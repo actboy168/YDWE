@@ -1,5 +1,5 @@
 #include "StdAfx.h"
-#include <bee/utility/format.h>
+#include <fmt/format.h>
 
 namespace DuiLib {
 
@@ -1320,7 +1320,7 @@ void CListHeaderItemUI::PaintStatusImage(HDC hDC)
         rcThumb.bottom -= m_rcItem.top;
 
         if (!DrawImage(hDC, *m_sSepImage.get(), 
-			bee::format(L"dest='%d,%d,%d,%d'", rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom).c_str()))
+			fmt::format(L"dest='{},{},{},{}'", rcThumb.left, rcThumb.top, rcThumb.right, rcThumb.bottom).c_str()))
 		{
 			m_sSepImage.reset();
 		}

@@ -1,3 +1,6 @@
 [submodule "OpenSource/bee.lua"]
 	path = OpenSource/bee.lua
 	url = https://github.com/actboy168/bee.lua.git
+[submodule "OpenSource/luaffi"]
+	path = OpenSource/luaffi
+	url = https://github.com/actboy168/luaffi

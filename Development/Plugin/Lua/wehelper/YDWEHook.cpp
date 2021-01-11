@@ -10,7 +10,7 @@
 #include <base/hook/replace_pointer.h>
 #include <base/hook/iat_manager.h>
 #include <base/hook/fp_call.h>
-#include <bee/utility/format.h>
+#include <fmt/format.h>
 #include <base/win/pe_reader.h>
 
 #include <objbase.h>
@@ -32,11 +32,11 @@ static bool InstallPatch(const char* name, uintptr_t address, uint8_t *patch, ui
 	bool ok = MemoryPatchAndVerify((void*)address, patch, patchLength);
 	if (ok)
 	{
-		LOGGING_TRACE(lg) << bee::format("Patch %s in 0x%08X success.", name, address);
+		LOGGING_TRACE(lg) << fmt::format("Patch {} in 0x{:08X} success.", name, address);
 	}
 	else
 	{
-		LOGGING_ERROR(lg) << bee::format("Patch %s in 0x%08X failed.", name, address);
+		LOGGING_ERROR(lg) << fmt::format("Patch {} in 0x{:08X} failed.", name, address);
 	}
 	return ok;
 }
@@ -301,24 +301,24 @@ static void InitInlineHook()
 	LOGGING_DEBUG(lg) << "Start installing inline hooks.";
 
 	pgTrueWeGetSystemParameter = (uintptr_t)0x004D1DB0;
-	LOGGING_TRACE(lg) << bee::format("Found WeGetSystemParameter at 0x%08X.", pgTrueWeGetSystemParameter);
+	LOGGING_TRACE(lg) << fmt::format("Found WeGetSystemParameter at 0x{:08X}.", pgTrueWeGetSystemParameter);
 	INSTALL_INLINE_HOOK(WeGetSystemParameter);
 
 	pgTrueWeVerifyMapCellsLimit =  (uintptr_t)0x004E1EF0;
-	LOGGING_TRACE(lg) << bee::format("Found WeVerifyMapCellsLimit at 0x%08X.", pgTrueWeVerifyMapCellsLimit);
+	LOGGING_TRACE(lg) << fmt::format("Found WeVerifyMapCellsLimit at 0x{:08X}.", pgTrueWeVerifyMapCellsLimit);
 	uint32_t callOffset = *(uint32_t*)(pgTrueWeVerifyMapCellsLimit + 6);
 	pgMapCellsGetUnknownGlobalFlag = pgTrueWeVerifyMapCellsLimit + callOffset + 10;
-	LOGGING_TRACE(lg) << bee::format("Found GetUnkownFlag at 0x%08X.", pgMapCellsGetUnknownGlobalFlag);
+	LOGGING_TRACE(lg) << fmt::format("Found GetUnkownFlag at 0x{:08X}.", pgMapCellsGetUnknownGlobalFlag);
 	pgWeVerifyMapCellsLimitPatcher.reset(new CMemoryPatch((void*)(pgTrueWeVerifyMapCellsLimit + 3), "\x90\x90", 2));
 	pgWeVerifyMapCellsLimitPatcher->patch();
 	INSTALL_INLINE_HOOK(WeVerifyMapCellsLimit);
 
 	pgTrueWeTriggerNameCheck = (uintptr_t)0x005A4B40;
-	LOGGING_TRACE(lg) << bee::format("Found WeTriggerNameCheck at 0x%08X.", pgTrueWeTriggerNameCheck);
+	LOGGING_TRACE(lg) << fmt::format("Found WeTriggerNameCheck at 0x{:08X}.", pgTrueWeTriggerNameCheck);
 	INSTALL_INLINE_HOOK(WeTriggerNameCheck)
 
 	pgTrueWeTriggerNameInputCharCheck = (uintptr_t)0x0042E390;
-	LOGGING_TRACE(lg) << bee::format("Found WeTriggerNameInputCharCheck at 0x%08X.", pgTrueWeTriggerNameInputCharCheck);
+	LOGGING_TRACE(lg) << fmt::format("Found WeTriggerNameInputCharCheck at 0x{:08X}.", pgTrueWeTriggerNameInputCharCheck);
 	pgWeTriggerNameInputCharCheckPatcher.reset(new CMemoryPatch(
 		(void*)(pgTrueWeTriggerNameInputCharCheck + 3),
 		"\x90\x90", 2)
@@ -327,23 +327,23 @@ static void InitInlineHook()
 	INSTALL_INLINE_HOOK(WeTriggerNameInputCharCheck);
 
 	pgTrueWeSetWindowCaption = (uintptr_t)0x00433A00;
-	LOGGING_TRACE(lg) << bee::format("Found WeSetWindowCaption at 0x%08X.", pgTrueWeSetWindowCaption);
+	LOGGING_TRACE(lg) << fmt::format("Found WeSetWindowCaption at 0x{:08X}.", pgTrueWeSetWindowCaption);
 	INSTALL_INLINE_HOOK(WeSetWindowCaption);
 
 	pgTrueWeSetMenuItem = (uintptr_t)0x0042AA10;
-	LOGGING_TRACE(lg) << bee::format("Found WeSetMenuItem at 0x%08X.", pgTrueWeSetMenuItem);
+	LOGGING_TRACE(lg) << fmt::format("Found WeSetMenuItem at 0x{:08X}.", pgTrueWeSetMenuItem);
 	INSTALL_INLINE_HOOK(WeSetMenuItem);
 
 	pgTrueWeStringCompare = (uintptr_t)0x004D2D90;
-	LOGGING_TRACE(lg) << bee::format("Found WeStringCompare at 0x%08X.", pgTrueWeStringCompare);
+	LOGGING_TRACE(lg) << fmt::format("Found WeStringCompare at 0x{:08X}.", pgTrueWeStringCompare);
 	INSTALL_INLINE_HOOK(WeStringCompare);
 
 	pgTrueWeTriggerEditorEditboxCopy = (uintptr_t)0x0071FE90;
-	LOGGING_TRACE(lg) << bee::format("Found TriggerEditorEditboxCopy at 0x%08X.", pgTrueWeTriggerEditorEditboxCopy);
+	LOGGING_TRACE(lg) << fmt::format("Found TriggerEditorEditboxCopy at 0x{:08X}.", pgTrueWeTriggerEditorEditboxCopy);
 	INSTALL_INLINE_HOOK(WeTriggerEditorEditboxCopy);
 
 	pgTrueWeUtf8ToAnsi = (uintptr_t)0x00429CD0;
-	LOGGING_TRACE(lg) << bee::format("Found WeUtf8ToAnsi at 0x%08X.", pgTrueWeUtf8ToAnsi);
+	LOGGING_TRACE(lg) << fmt::format("Found WeUtf8ToAnsi at 0x{:08X}.", pgTrueWeUtf8ToAnsi);
 	INSTALL_INLINE_HOOK(WeUtf8ToAnsi);
 
 	LOGGING_DEBUG(lg) << "Installing inline hooks complete.";
