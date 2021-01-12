@@ -123,7 +123,6 @@ if configuration == 'Release' then
 end
 fs.copy_file(path.OpenSource / 'bee.lua' / 'build' / 'msbuild' / 'bin' / ('x86_' .. configuration) / 'lua54.dll', path.Result / 'bin' / 'lua54.dll', true)
 fs.copy_file(path.OpenSource / 'bee.lua' / 'build' / 'msbuild' / 'bin' / ('x86_' .. configuration) / 'lua.exe', path.Result / 'bin' / 'lua.exe', true)
-fs.copy_file(path.OpenSource / 'bee.lua' / 'build' / 'msbuild' / 'bin' / ('x86_' .. configuration) / 'ffi.dll', path.Result / 'bin' / 'ffi.dll', true)
 fs.copy_file(path.OpenSource / 'bee.lua' / 'build' / 'msbuild' / 'bin' / ('x86_' .. configuration) / 'bee.dll', path.Result / 'bin' / 'bee.dll', true)
 fs.copy_file(path.OpenSource / 'StormLib' / 'bin' / 'Win32' / configuration / 'StormLib.dll', path.Result / 'bin' / 'StormLib.dll', true)
 fs.copy_file(path.OpenSource / 'minizip' / 'bin' / configuration / 'minizip.dll', path.Result / 'bin' / 'minizip.dll', true)
