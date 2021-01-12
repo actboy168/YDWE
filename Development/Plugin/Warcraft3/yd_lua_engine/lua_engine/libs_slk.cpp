@@ -33,7 +33,7 @@ local w3x2lni = sandbox(('%s/script/core/'):format(w2lPath), io_open, {
     ['w3xparser'] = (loadlib 'w3xparser')(),
     ['lni']       = (loadlib 'lni')(),
     ['lml']       = (loadlib 'lml')(),
-    ['lpeg']      = (loadlib 'lpeg')(),
+    ['lpeglabel'] = (loadlib 'lpeglabel')(),
     ['data_load'] = data_load,
 })
 local function load_mpq(filename)
