@@ -3,7 +3,6 @@
 #include <string>
 #include <algorithm>
 #include <functional>
-#include <regex>
 #include <bee/utility/unicode_win.h>
 #include <base/util/is_utf8.h>
 #include <base/hook/inline.h>
@@ -108,7 +107,7 @@ private:
 locale_helper<wchar_t> g_deflocale;
 
 // 0x004D2D90
-// ½«WEµÄ×Ö·û´®±È½Ï¸ÄÎª¸ù¾ÝlocaleÀ´±È½Ï(ÖÐÎÄ»·¾³ÏÂÊÇ¸ù¾ÝÆ´Òô±È½Ï)
+// ï¿½ï¿½WEï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½È½Ï¸ï¿½Îªï¿½ï¿½ï¿½ï¿½localeï¿½ï¿½ï¿½È½ï¿½(ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½È½ï¿½)
 static uintptr_t pgTrueWeStringCompare;
 static base::hook::hook_t isWeStringCompareHookInstalled;
 int __fastcall DetourWeStringCompare(const char* a, const char* b, bool ignore_case)
