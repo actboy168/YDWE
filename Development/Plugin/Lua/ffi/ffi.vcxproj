@@ -59,6 +59,7 @@
       <Optimization>Disabled</Optimization>
       <TreatWarningAsError>false</TreatWarningAsError>
       <AdditionalIncludeDirectories>$(OpenSource)\luaffi\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LUA_FFI_BUILD_AS_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>
@@ -80,6 +81,7 @@ $(YDWE)\..\Build\lua\luabuild\lua.exe $(OpenSource)/luaffi/src/dynasm/dynasm.lua
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <TreatWarningAsError>false</TreatWarningAsError>
       <AdditionalIncludeDirectories>$(OpenSource)\luaffi\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LUA_FFI_BUILD_AS_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
