@@ -100,7 +100,7 @@
     </ClCompile>
     <Link>
       <OutputFile>$(ProjectDir)/bin/$(Platform)/$(Configuration)/StormLib$(TargetExt)</OutputFile>
-      <ModuleDefinitionFile>.\StormLib_dll\StormLib.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>.\src\DllMain.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -123,7 +123,7 @@
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)StormLib.dll</OutputFile>
-      <ModuleDefinitionFile>.\StormLib_dll\StormLib.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>.\src\DllMain.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -141,7 +141,7 @@
     </ClCompile>
     <Link>
       <OutputFile>$(ProjectDir)/bin/$(Platform)/$(Configuration)/StormLib$(TargetExt)</OutputFile>
-      <ModuleDefinitionFile>.\StormLib_dll\StormLib.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>.\src\DllMain.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -164,7 +164,7 @@
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)StormLib.dll</OutputFile>
-      <ModuleDefinitionFile>.\StormLib_dll\StormLib.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>.\src\DllMain.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -190,6 +190,7 @@
     <ClInclude Include="src\jenkins\lookup.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\DllMain.c" />
     <ClCompile Include="src\libtomcrypt\src\pk\asn1\der_encode_bit_string.c" />
     <ClCompile Include="src\libtomcrypt\src\pk\asn1\der_encode_boolean.c" />
     <ClCompile Include="src\libtomcrypt\src\pk\asn1\der_encode_ia5_string.c" />
@@ -208,12 +209,6 @@
     <ClCompile Include="src\libtomcrypt\src\pk\pkcs1\pkcs_1_v1_5_encode.c" />
     <ClCompile Include="src\libtomcrypt\src\pk\rsa\rsa_sign_hash.c" />
     <ClCompile Include="src\SBaseSubTypes.cpp" />
-    <ClCompile Include="stormlib_dll\DllMain.c">
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level4</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Level4</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Level4</WarningLevel>
-      <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Level4</WarningLevel>
-    </ClCompile>
     <ClCompile Include="src\FileStream.cpp">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Level4</WarningLevel>
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Level4</WarningLevel>

@@ -103,9 +103,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stormlib_dll\DllMain.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\FileStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -829,6 +826,7 @@
     <ClCompile Include="src\libtomcrypt\src\pk\asn1\der_encode_utf8_string.c">
       <Filter>Source Files\libtomcrypt\pk\asn1</Filter>
     </ClCompile>
+    <ClCompile Include="src\DllMain.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="stormlib_dll\StormLib.def">

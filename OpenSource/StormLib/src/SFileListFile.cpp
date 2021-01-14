@@ -17,7 +17,7 @@
 // Listfile entry structure
 
 #define CACHE_BUFFER_SIZE  0x1000       // Size of the cache buffer
-#define MAX_LISTFILE_SIZE  0x04000000   // Maximum accepted listfile size is about 68 MB
+#define MAX_LISTFILE_SIZE  0x8000000    // Maximum accepted listfile size is 128 MB
 
 union TListFileHandle
 {
@@ -41,6 +41,9 @@ typedef bool (*LOAD_LISTFILE)(TListFileHandle * pHandle, void * pvBuffer, DWORD 
 
 //-----------------------------------------------------------------------------
 // Local functions (cache)
+
+// In SFileFindFile.cll
+bool SFileCheckWildCard(const char * szString, const char * szWildCard);
 
 static char * CopyListLine(char * szListLine, const char * szFileName)
 {
@@ -112,7 +115,7 @@ static TListFileCache * CreateListFileCache(
             pCache->szWildCard = (char *)(pCache + 1);
             memcpy(pCache->szWildCard, szWildCard, cchWildCard);
         }
-                          
+
         // Fill-in the rest of the cache pointers
         pCache->pBegin = (LPBYTE)(pCache + 1) + cchWildCard;
 
@@ -144,6 +147,10 @@ static TListFileCache * CreateListFileCache(
 {
     TListFileCache * pCache = NULL;
     TListFileHandle ListHandle = {NULL};
+
+    // Put default value to dwMaxSize
+    if(dwMaxSize == 0)
+        dwMaxSize = MAX_LISTFILE_SIZE;
 
     // Internal listfile: hMPQ must be non NULL and szListFile must be NULL.
     // We load the MPQ::(listfile) file
@@ -178,7 +185,7 @@ static TListFileCache * CreateListFileCache(
         {
             // Verify the file size
             FileStream_GetSize(ListHandle.pStream, &FileSize);
-            if(0 < FileSize && FileSize < MAX_LISTFILE_SIZE)
+            if(0 < FileSize && FileSize < dwMaxSize)
             {
                 pCache = CreateListFileCache(LoadListFile_Stream, &ListHandle, szWildCard, (DWORD)FileSize, dwMaxSize, dwFlags);
             }
@@ -265,11 +272,11 @@ static char * ReadListFileLine(TListFileCache * pCache, size_t * PtrLength)
 {
     LPBYTE pbLineBegin;
     LPBYTE pbLineEnd;
-    
+
     // Skip newlines. Keep spaces and tabs, as they can be a legal part of the file name
     while(pCache->pPos < pCache->pEnd && (pCache->pPos[0] == 0x0A || pCache->pPos[0] == 0x0D))
         pCache->pPos++;
-    
+
     // Set the line begin and end
     if(pCache->pPos >= pCache->pEnd)
         return NULL;
@@ -289,7 +296,7 @@ static char * ReadListFileLine(TListFileCache * pCache, size_t * PtrLength)
     return (char *)pbLineBegin;
 }
 
-static int CompareFileNodes(const void * p1, const void * p2) 
+static int STORMLIB_CDECL CompareFileNodes(const void * p1, const void * p2)
 {
     char * szFileName1 = *(char **)p1;
     char * szFileName2 = *(char **)p2;
@@ -519,7 +526,7 @@ static int SFileAddArbitraryListFile(
         // Delete the cache
         FreeListFileCache(pCache);
     }
-    
+
     return (pCache != NULL) ? ERROR_SUCCESS : ERROR_FILE_CORRUPT;
 }
 
@@ -529,7 +536,7 @@ static int SFileAddInternalListFile(
 {
     TMPQHash * pFirstHash;
     TMPQHash * pHash;
-    LCID lcSaveLocale = lcFileLocale;
+    LCID lcSaveLocale = g_lcFileLocale;
     DWORD dwMaxSize = MAX_LISTFILE_SIZE;
     int nError = ERROR_SUCCESS;
 
@@ -543,7 +550,7 @@ static int SFileAddInternalListFile(
 
         pFirstHash = pHash = GetFirstHashEntry(ha, LISTFILE_NAME);
         while(nError == ERROR_SUCCESS && pHash != NULL)
-        {                                
+        {
             // Set the prefered locale to that from list file
             SFileSetLocale(pHash->lcLocale);
 
@@ -579,7 +586,7 @@ static bool DoListFileSearch(TListFileCache * pCache, SFILE_FIND_DATA * lpFindFi
         while((szFileName = ReadListFileLine(pCache, &nLength)) != NULL)
         {
             // Check search mask
-            if(nLength != 0 && CheckWildCard(szFileName, pCache->szWildCard))
+            if(nLength != 0 && SFileCheckWildCard(szFileName, pCache->szWildCard))
             {
                 if(nLength >= sizeof(lpFindFileData->cFileName))
                     nLength = sizeof(lpFindFileData->cFileName) - 1;

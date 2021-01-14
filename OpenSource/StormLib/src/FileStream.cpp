@@ -33,7 +33,7 @@
 //-----------------------------------------------------------------------------
 // Local functions - platform-specific functions
 
-#ifndef PLATFORM_WINDOWS
+#ifndef STORMLIB_WINDOWS
 static DWORD nLastError = ERROR_SUCCESS;
 
 DWORD GetLastError()
@@ -41,9 +41,9 @@ DWORD GetLastError()
     return nLastError;
 }
 
-void SetLastError(DWORD nError)
+void SetLastError(DWORD dwErrCode)
 {
-    nLastError = nError;
+    nLastError = dwErrCode;
 }
 #endif
 
@@ -53,11 +53,27 @@ static DWORD StringToInt(const char * szString)
 
     while('0' <= szString[0] && szString[0] <= '9')
     {
-        dwValue = (dwValue * 10) + (szString[0] - '9');
+        dwValue = (dwValue * 10) + (szString[0] - '0');
         szString++;
     }
 
     return dwValue;
+}
+
+static void CreateNameWithSuffix(LPTSTR szBuffer, size_t cchMaxChars, LPCTSTR szName, unsigned int nValue)
+{
+    LPTSTR szBufferEnd = szBuffer + cchMaxChars - 1;
+
+    // Copy the name
+    while(szBuffer < szBufferEnd && szName[0] != 0)
+        *szBuffer++ = *szName++;
+
+    // Append "."
+    if(szBuffer < szBufferEnd)
+        *szBuffer++ = '.';
+
+    // Append the number
+    IntToString(szBuffer, szBufferEnd - szBuffer + 1, nValue);
 }
 
 //-----------------------------------------------------------------------------
@@ -73,7 +89,7 @@ static void BaseNone_Init(TFileStream *)
 
 static bool BaseFile_Create(TFileStream * pStream)
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
     {
         DWORD dwWriteShare = (pStream->dwFlags & STREAM_FLAG_WRITE_SHARE) ? FILE_SHARE_WRITE : 0;
 
@@ -89,17 +105,17 @@ static bool BaseFile_Create(TFileStream * pStream)
     }
 #endif
 
-#if defined(PLATFORM_MAC) || defined(PLATFORM_LINUX)
+#if defined(STORMLIB_MAC) || defined(STORMLIB_LINUX) || defined(STORMLIB_HAIKU)
     {
         intptr_t handle;
-        
+
         handle = open(pStream->szFileName, O_RDWR | O_CREAT | O_TRUNC | O_LARGEFILE, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
         if(handle == -1)
         {
             nLastError = errno;
             return false;
         }
-        
+
         pStream->Base.File.hFile = (HANDLE)handle;
     }
 #endif
@@ -112,7 +128,7 @@ static bool BaseFile_Create(TFileStream * pStream)
 
 static bool BaseFile_Open(TFileStream * pStream, const TCHAR * szFileName, DWORD dwStreamFlags)
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
     {
         ULARGE_INTEGER FileSize;
         DWORD dwWriteAccess = (dwStreamFlags & STREAM_FLAG_READ_ONLY) ? 0 : FILE_WRITE_DATA | FILE_APPEND_DATA | FILE_WRITE_ATTRIBUTES;
@@ -138,7 +154,7 @@ static bool BaseFile_Open(TFileStream * pStream, const TCHAR * szFileName, DWORD
     }
 #endif
 
-#if defined(PLATFORM_MAC) || defined(PLATFORM_LINUX)
+#if defined(STORMLIB_MAC) || defined(STORMLIB_LINUX) || defined(STORMLIB_HAIKU)
     {
         struct stat64 fileinfo;
         int oflag = (dwStreamFlags & STREAM_FLAG_READ_ONLY) ? O_RDONLY : O_RDWR;
@@ -183,7 +199,7 @@ static bool BaseFile_Read(
     ULONGLONG ByteOffset = (pByteOffset != NULL) ? *pByteOffset : pStream->Base.File.FilePos;
     DWORD dwBytesRead = 0;                  // Must be set by platform-specific code
 
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
     {
         // Note: StormLib no longer supports Windows 9x.
         // Thus, we can use the OVERLAPPED structure to specify
@@ -207,7 +223,7 @@ static bool BaseFile_Read(
     }
 #endif
 
-#if defined(PLATFORM_MAC) || defined(PLATFORM_LINUX)
+#if defined(STORMLIB_MAC) || defined(STORMLIB_LINUX) || defined(STORMLIB_HAIKU)
     {
         ssize_t bytes_read;
 
@@ -228,7 +244,7 @@ static bool BaseFile_Read(
                 nLastError = errno;
                 return false;
             }
-            
+
             dwBytesRead = (DWORD)(size_t)bytes_read;
         }
     }
@@ -254,7 +270,7 @@ static bool BaseFile_Write(TFileStream * pStream, ULONGLONG * pByteOffset, const
     ULONGLONG ByteOffset = (pByteOffset != NULL) ? *pByteOffset : pStream->Base.File.FilePos;
     DWORD dwBytesWritten = 0;               // Must be set by platform-specific code
 
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
     {
         // Note: StormLib no longer supports Windows 9x.
         // Thus, we can use the OVERLAPPED structure to specify
@@ -278,7 +294,7 @@ static bool BaseFile_Write(TFileStream * pStream, ULONGLONG * pByteOffset, const
     }
 #endif
 
-#if defined(PLATFORM_MAC) || defined(PLATFORM_LINUX)
+#if defined(STORMLIB_MAC) || defined(STORMLIB_LINUX) || defined(STORMLIB_HAIKU)
     {
         ssize_t bytes_written;
 
@@ -297,7 +313,7 @@ static bool BaseFile_Write(TFileStream * pStream, ULONGLONG * pByteOffset, const
             nLastError = errno;
             return false;
         }
-        
+
         dwBytesWritten = (DWORD)(size_t)bytes_written;
     }
 #endif
@@ -320,7 +336,7 @@ static bool BaseFile_Write(TFileStream * pStream, ULONGLONG * pByteOffset, const
  */
 static bool BaseFile_Resize(TFileStream * pStream, ULONGLONG NewFileSize)
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
     {
         LONG FileSizeHi = (LONG)(NewFileSize >> 32);
         LONG FileSizeLo;
@@ -344,15 +360,15 @@ static bool BaseFile_Resize(TFileStream * pStream, ULONGLONG NewFileSize)
         return bResult;
     }
 #endif
-    
-#if defined(PLATFORM_MAC) || defined(PLATFORM_LINUX)
+
+#if defined(STORMLIB_MAC) || defined(STORMLIB_LINUX) || defined(STORMLIB_HAIKU)
     {
         if(ftruncate64((intptr_t)pStream->Base.File.hFile, (off64_t)NewFileSize) == -1)
         {
             nLastError = errno;
             return false;
         }
-        
+
         pStream->Base.File.FileSize = NewFileSize;
         return true;
     }
@@ -380,7 +396,7 @@ static bool BaseFile_GetPos(TFileStream * pStream, ULONGLONG * pByteOffset)
 // Renames the file pointed by pStream so that it contains data from pNewStream
 static bool BaseFile_Replace(TFileStream * pStream, TFileStream * pNewStream)
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
     // Delete the original stream file. Don't check the result value,
     // because if the file doesn't exist, it would fail
     DeleteFile(pStream->szFileName);
@@ -389,14 +405,14 @@ static bool BaseFile_Replace(TFileStream * pStream, TFileStream * pNewStream)
     return (bool)MoveFile(pNewStream->szFileName, pStream->szFileName);
 #endif
 
-#if defined(PLATFORM_MAC) || defined(PLATFORM_LINUX)
+#if defined(STORMLIB_MAC) || defined(STORMLIB_LINUX) || defined(STORMLIB_HAIKU)
     // "rename" on Linux also works if the target file exists
     if(rename(pNewStream->szFileName, pStream->szFileName) == -1)
     {
         nLastError = errno;
         return false;
     }
-    
+
     return true;
 #endif
 }
@@ -405,11 +421,11 @@ static void BaseFile_Close(TFileStream * pStream)
 {
     if(pStream->Base.File.hFile != INVALID_HANDLE_VALUE)
     {
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
         CloseHandle(pStream->Base.File.hFile);
 #endif
 
-#if defined(PLATFORM_MAC) || defined(PLATFORM_LINUX)
+#if defined(STORMLIB_MAC) || defined(STORMLIB_LINUX) || defined(STORMLIB_HAIKU)
         close((intptr_t)pStream->Base.File.hFile);
 #endif
     }
@@ -434,53 +450,113 @@ static void BaseFile_Init(TFileStream * pStream)
 //-----------------------------------------------------------------------------
 // Local functions - base memory-mapped file support
 
-static bool BaseMap_Open(TFileStream * pStream, const TCHAR * szFileName, DWORD dwStreamFlags)
-{
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
 
-    ULARGE_INTEGER FileSize;
-    HANDLE hFile;
-    HANDLE hMap;
+typedef struct _SECTION_BASIC_INFORMATION
+{
+    PVOID BaseAddress;
+    ULONG Attributes;
+    LARGE_INTEGER Size;
+} SECTION_BASIC_INFORMATION, *PSECTION_BASIC_INFORMATION;
+
+typedef ULONG (WINAPI * NTQUERYSECTION)(
+    IN  HANDLE SectionHandle,
+    IN  ULONG SectionInformationClass,
+    OUT PVOID SectionInformation,
+    IN  SIZE_T Length,
+    OUT PSIZE_T ResultLength);
+
+static bool RetrieveFileMappingSize(HANDLE hSection, ULARGE_INTEGER & RefFileSize)
+{
+    SECTION_BASIC_INFORMATION BasicInfo = {0};
+    NTQUERYSECTION PfnQuerySection;
+    HMODULE hNtdll;
+    SIZE_T ReturnLength = 0;
+
+    if((hNtdll = GetModuleHandle(_T("ntdll.dll"))) != NULL)
+    {
+        PfnQuerySection = (NTQUERYSECTION)GetProcAddress(hNtdll, "NtQuerySection");
+        if(PfnQuerySection != NULL)
+        {
+            if(PfnQuerySection(hSection, 0, &BasicInfo, sizeof(SECTION_BASIC_INFORMATION), &ReturnLength) == 0)
+            {
+                RefFileSize.HighPart = BasicInfo.Size.HighPart;
+                RefFileSize.LowPart = BasicInfo.Size.LowPart;
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+#endif
+
+static bool BaseMap_Open(TFileStream * pStream, LPCTSTR szFileName, DWORD dwStreamFlags)
+{
+#ifdef STORMLIB_WINDOWS
+
+    ULARGE_INTEGER FileSize = {0};
+    HANDLE hFile = INVALID_HANDLE_VALUE;
+    HANDLE hMap = NULL;
     bool bResult = false;
 
     // Keep compiler happy
     dwStreamFlags = dwStreamFlags;
 
-    // Open the file for read access
-    hFile = CreateFile(szFileName, FILE_READ_DATA, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
-    if(hFile != INVALID_HANDLE_VALUE)
+    // 1) Try to treat "szFileName" as a section name
+    hMap = OpenFileMapping(SECTION_QUERY | FILE_MAP_READ, FALSE, szFileName);
+    if(hMap != NULL)
     {
-        // Retrieve file size. Don't allow mapping file of a zero size.
-        FileSize.LowPart = GetFileSize(hFile, &FileSize.HighPart);
-        if(FileSize.QuadPart != 0)
+        // Try to retrieve the size of the mapping
+        if(!RetrieveFileMappingSize(hMap, FileSize))
         {
-            // Now create mapping object
-            hMap = CreateFileMapping(hFile, NULL, PAGE_READONLY, 0, 0, NULL);
-            if(hMap != NULL)
+            CloseHandle(hMap);
+            hMap = NULL;
+        }
+    }
+
+    // 2) Treat the name as file name
+    else
+    {
+        hFile = CreateFile(szFileName, FILE_READ_DATA, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+        if(hFile != INVALID_HANDLE_VALUE)
+        {
+            // Retrieve file size. Don't allow mapping file of a zero size.
+            FileSize.LowPart = GetFileSize(hFile, &FileSize.HighPart);
+            if(FileSize.QuadPart != 0)
             {
-                // Map the entire view into memory
-                // Note that this operation will fail if the file can't fit
-                // into usermode address space
-                pStream->Base.Map.pbFile = (LPBYTE)MapViewOfFile(hMap, FILE_MAP_READ, 0, 0, 0);
-                if(pStream->Base.Map.pbFile != NULL)
-                {
-                    // Retrieve file time
-                    GetFileTime(hFile, NULL, NULL, (LPFILETIME)&pStream->Base.Map.FileTime);
-
-                    // Retrieve file size and position
-                    pStream->Base.Map.FileSize = FileSize.QuadPart;
-                    pStream->Base.Map.FilePos = 0;
-                    bResult = true;
-                }
-
-                // Close the map handle
-                CloseHandle(hMap);
+                // Now create file mapping over the file
+                hMap = CreateFileMapping(hFile, NULL, PAGE_READONLY, 0, 0, NULL);
             }
         }
-
-        // Close the file handle
-        CloseHandle(hFile);
     }
+
+    // Did it succeed?
+    if(hMap != NULL)
+    {
+        // Map the entire view into memory
+        // Note that this operation will fail if the file can't fit
+        // into usermode address space
+        pStream->Base.Map.pbFile = (LPBYTE)MapViewOfFile(hMap, FILE_MAP_READ, 0, 0, 0);
+        if(pStream->Base.Map.pbFile != NULL)
+        {
+            // Retrieve file time. If it's named section, put 0
+            if(hFile != INVALID_HANDLE_VALUE)
+                GetFileTime(hFile, NULL, NULL, (LPFILETIME)&pStream->Base.Map.FileTime);
+
+            // Retrieve file size and position
+            pStream->Base.Map.FileSize = FileSize.QuadPart;
+            pStream->Base.Map.FilePos = 0;
+            bResult = true;
+        }
+
+        // Close the map handle
+        CloseHandle(hMap);
+    }
+
+    // Close the file handle
+    if(hFile != INVALID_HANDLE_VALUE)
+        CloseHandle(hFile);
 
     // If the file is not there and is not available for random access,
     // report error
@@ -488,7 +564,7 @@ static bool BaseMap_Open(TFileStream * pStream, const TCHAR * szFileName, DWORD 
         return false;
 #endif
 
-#if defined(PLATFORM_MAC) || defined(PLATFORM_LINUX)
+#if defined(STORMLIB_MAC) || defined(STORMLIB_LINUX) || defined(STORMLIB_HAIKU)
     struct stat64 fileinfo;
     intptr_t handle;
     bool bResult = false;
@@ -552,12 +628,12 @@ static bool BaseMap_Read(
 
 static void BaseMap_Close(TFileStream * pStream)
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
     if(pStream->Base.Map.pbFile != NULL)
         UnmapViewOfFile(pStream->Base.Map.pbFile);
 #endif
 
-#if defined(PLATFORM_MAC) || defined(PLATFORM_LINUX)
+#if defined(STORMLIB_MAC) || defined(STORMLIB_LINUX) || defined(STORMLIB_HAIKU)
     if(pStream->Base.Map.pbFile != NULL)
         munmap(pStream->Base.Map.pbFile, (size_t )pStream->Base.Map.FileSize);
 #endif
@@ -607,7 +683,7 @@ static const TCHAR * BaseHttp_ExtractServerName(const TCHAR * szFileName, TCHAR 
 
 static bool BaseHttp_Open(TFileStream * pStream, const TCHAR * szFileName, DWORD dwStreamFlags)
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
 
     HINTERNET hRequest;
     DWORD dwTemp = 0;
@@ -652,6 +728,19 @@ static bool BaseHttp_Open(TFileStream * pStream, const TCHAR * szFileName, DWORD
                     DWORD dwFileSize = 0;
                     DWORD dwDataSize;
                     DWORD dwIndex = 0;
+                    TCHAR StatusCode[0x08];
+
+                    // Check if the file succeeded to open
+                    dwDataSize = sizeof(StatusCode);
+                    if(HttpQueryInfo(hRequest, HTTP_QUERY_STATUS_CODE, StatusCode, &dwDataSize, &dwIndex))
+                    {
+                        if(_tcscmp(StatusCode, _T("200")))
+                        {
+                            InternetCloseHandle(hRequest);
+                            SetLastError(ERROR_FILE_NOT_FOUND);
+                            return false;
+                        }
+                    }
 
                     // Check if the MPQ has Last Modified field
                     dwDataSize = sizeof(ULONGLONG);
@@ -706,7 +795,7 @@ static bool BaseHttp_Read(
     void * pvBuffer,                        // Pointer to data to be read
     DWORD dwBytesToRead)                    // Number of bytes to read from the file
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
     ULONGLONG ByteOffset = (pByteOffset != NULL) ? *pByteOffset : pStream->Base.Http.FilePos;
     DWORD dwTotalBytesRead = 0;
 
@@ -727,8 +816,8 @@ static bool BaseHttp_Read(
         {
             // Add range request to the HTTP headers
             // http://www.clevercomponents.com/articles/article015/resuming.asp
-            _stprintf(szRangeRequest, _T("Range: bytes=%u-%u"), (unsigned int)dwStartOffset, (unsigned int)dwEndOffset);
-            HttpAddRequestHeaders(hRequest, szRangeRequest, 0xFFFFFFFF, HTTP_ADDREQ_FLAG_ADD_IF_NEW); 
+            wsprintf(szRangeRequest, _T("Range: bytes=%u-%u"), (unsigned int)dwStartOffset, (unsigned int)dwEndOffset);
+            HttpAddRequestHeaders(hRequest, szRangeRequest, 0xFFFFFFFF, HTTP_ADDREQ_FLAG_ADD_IF_NEW);
 
             // Send the request to the server
             if(HttpSendRequest(hRequest, NULL, 0, NULL, 0))
@@ -779,7 +868,7 @@ static bool BaseHttp_Read(
 
 static void BaseHttp_Close(TFileStream * pStream)
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef STORMLIB_WINDOWS
     if(pStream->Base.Http.hConnect != NULL)
         InternetCloseHandle(pStream->Base.Http.hConnect);
     pStream->Base.Http.hConnect = NULL;
@@ -981,7 +1070,7 @@ static void BlockStream_Close(TBlockStream * pStream)
 static STREAM_INIT StreamBaseInit[4] =
 {
     BaseFile_Init,
-    BaseMap_Init, 
+    BaseMap_Init,
     BaseHttp_Init,
     BaseNone_Init
 };
@@ -1020,7 +1109,7 @@ static TFileStream * AllocateFileStream(
             SetLastError(ERROR_INVALID_PARAMETER);
             return NULL;
         }
-        
+
         // Open the master file
         pMaster = FileStream_OpenFile(szNextFile + 1, STREAM_FLAG_READ_ONLY);
     }
@@ -1078,7 +1167,7 @@ static DWORD FlatStream_CheckFile(TBlockStream * pStream)
 static bool FlatStream_LoadBitmap(TBlockStream * pStream)
 {
     FILE_BITMAP_FOOTER Footer;
-    ULONGLONG ByteOffset; 
+    ULONGLONG ByteOffset;
     LPBYTE FileBitmap;
     DWORD BlockCount;
     DWORD BitmapSize;
@@ -1186,7 +1275,7 @@ static bool FlatStream_BlockCheck(
     // Sanity checks
     assert((BlockOffset & (pStream->BlockSize - 1)) == 0);
     assert(FileBitmap != NULL);
-    
+
     // Calculate the index of the block
     BlockIndex = (DWORD)(BlockOffset / pStream->BlockSize);
     BitMask = (BYTE)(1 << (BlockIndex & 0x07));
@@ -1247,7 +1336,7 @@ static void FlatStream_Close(TBlockStream * pStream)
     {
         // Write the file bitmap
         pStream->BaseWrite(pStream, &pStream->StreamSize, pStream->FileBitmap, pStream->BitmapSize);
-        
+
         // Prepare and write the file footer
         Footer.Signature   = ID_FILE_BITMAP_FOOTER;
         Footer.Version     = 3;
@@ -1342,7 +1431,7 @@ static bool FlatStream_CreateMirror(TBlockStream * pStream)
 
 static TFileStream * FlatStream_Open(const TCHAR * szFileName, DWORD dwStreamFlags)
 {
-    TBlockStream * pStream;    
+    TBlockStream * pStream;
     ULONGLONG ByteOffset = 0;
 
     // Create new empty stream
@@ -1566,7 +1655,7 @@ static bool PartStream_BlockCheck(
     // Sanity checks
     assert((BlockOffset & (pStream->BlockSize - 1)) == 0);
     assert(pStream->FileBitmap != NULL);
-    
+
     // Calculate the block map entry
     FileBitmap = (PPART_FILE_MAP_ENTRY)pStream->FileBitmap + (BlockOffset / pStream->BlockSize);
 
@@ -1662,10 +1751,10 @@ static void PartStream_Close(TBlockStream * pStream)
         PartHeader.FileSizeHi     = (DWORD)(pStream->StreamSize >> 0x20);
         PartHeader.FileSizeLo     = (DWORD)(pStream->StreamSize & 0xFFFFFFFF);
         PartHeader.BlockSize      = pStream->BlockSize;
-        
+
         // Make sure that the header is properly BSWAPed
         BSWAP_ARRAY32_UNSIGNED(&PartHeader, sizeof(PART_FILE_HEADER));
-        sprintf(PartHeader.GameBuildNumber, "%u", (unsigned int)pStream->BuildNumber);
+        IntToString(PartHeader.GameBuildNumber, _countof(PartHeader.GameBuildNumber), pStream->BuildNumber);
 
         // Write the part header
         pStream->BaseWrite(pStream, &ByteOffset, &PartHeader, sizeof(PART_FILE_HEADER));
@@ -1827,7 +1916,7 @@ static const char * AuthCodeArray[] =
     "S48B6CDTN5XEQAKQDJNDLJBJ73FDFM3U",         // SC2 Heart of the Swarm-all : "expand 32-byte kQAKQ0000FM3UN5XE000073FD6CDT0000LJBJS48B0000DJND"
 
     // Diablo III: Agent.exe (1.0.0.954)
-    // Address of decryption routine: 00502b00                             
+    // Address of decryption routine: 00502b00
     // Pointer to decryptor object: ECX
     // Pointer to key: ECX+0x5C
     // Authentication code URL: http://dist.blizzard.com/mediakey/d3-authenticationcode-enGB.txt
@@ -1933,7 +2022,7 @@ static void DecryptFileChunk(
         KeyShuffled[0x04] = KeyMirror[0x0D];
         KeyShuffled[0x01] = KeyMirror[0x0E];
         KeyShuffled[0x00] = KeyMirror[0x0F];
-        
+
         // Shuffle the key - part 2
         for(DWORD i = 0; i < RoundCount; i += 2)
         {
@@ -2024,7 +2113,7 @@ static bool MpqeStream_DetectFileKey(TEncryptedStream * pStream)
             // Prepare they decryption key from game serial number
             CreateKeyFromAuthCode(pStream->Key, AuthCodeArray[i]);
 
-            // Try to decrypt with the given key 
+            // Try to decrypt with the given key
             memcpy(FileHeader, EncryptedHeader, MPQE_CHUNK_SIZE);
             DecryptFileChunk((LPDWORD)FileHeader, pStream->Key, ByteOffset, MPQE_CHUNK_SIZE);
 
@@ -2250,7 +2339,7 @@ static TFileStream * Block4Stream_Open(const TCHAR * szFileName, DWORD dwStreamF
         for(int nSuffix = 0; nSuffix < 30; nSuffix++)
         {
             // Open the n-th file
-            _stprintf(szNameBuff, _T("%s.%u"), pStream->szFileName, nSuffix);
+            CreateNameWithSuffix(szNameBuff, nNameLength + 4, pStream->szFileName, nSuffix);
             if(!pStream->BaseOpen(pStream, szNameBuff, dwBaseFlags))
                 break;
 
@@ -2279,8 +2368,8 @@ static TFileStream * Block4Stream_Open(const TCHAR * szFileName, DWORD dwStreamF
             assert(FileSize <= BLOCK4_MAX_FSIZE);
             RemainderBlock = FileSize % (BLOCK4_BLOCK_SIZE + BLOCK4_HASH_SIZE);
             BlockCount = FileSize / (BLOCK4_BLOCK_SIZE + BLOCK4_HASH_SIZE);
-            
-            // Increment the stream size and number of blocks            
+
+            // Increment the stream size and number of blocks
             pStream->StreamSize += (BlockCount * BLOCK4_BLOCK_SIZE);
             pStream->BlockCount += (DWORD)BlockCount;
 
@@ -2497,7 +2586,7 @@ size_t FileStream_Prefix(const TCHAR * szFileName, DWORD * pdwProvider)
             dwProvider |= BASE_PROVIDER_MAP;
             nPrefixLength2 = 4;
         }
-        
+
         else if(!_tcsnicmp(szFileName+nPrefixLength1, _T("http:"), 5))
         {
             dwProvider |= BASE_PROVIDER_HTTP;
@@ -2705,7 +2794,7 @@ bool FileStream_GetSize(TFileStream * pStream, ULONGLONG * pFileSize)
  * \a NewFileSize File size to set
  */
 bool FileStream_SetSize(TFileStream * pStream, ULONGLONG NewFileSize)
-{                                 
+{
     if(pStream->dwFlags & STREAM_FLAG_READ_ONLY)
     {
         SetLastError(ERROR_ACCESS_DENIED);
@@ -2814,10 +2903,10 @@ void FileStream_Close(TFileStream * pStream)
             FileStream_Close(pStream->pMaster);
         pStream->pMaster = NULL;
 
-        // Close the stream provider ...
+        // Close the stream provider
         if(pStream->StreamClose != NULL)
             pStream->StreamClose(pStream);
-        
+
         // ... or close base stream, if any
         else if(pStream->BaseClose != NULL)
             pStream->BaseClose(pStream);

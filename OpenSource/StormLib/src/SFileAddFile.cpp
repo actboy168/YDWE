@@ -36,8 +36,8 @@ typedef struct _WAVE_FILE_HEADER
     DWORD dwChunkId;                        // 0x52494646 ("RIFF")
     DWORD dwChunkSize;                      // Size of that chunk, in bytes
     DWORD dwFormat;                         // Must be 0x57415645 ("WAVE")
-   
-    // Format sub-chunk 
+
+    // Format sub-chunk
     DWORD dwSubChunk1Id;                    // 0x666d7420 ("fmt ")
     DWORD dwSubChunk1Size;                  // 0x16 for PCM
     USHORT wAudioFormat;                    // 1 = PCM. Other value means some sort of compression
@@ -150,11 +150,11 @@ static int WriteDataToMpqFile(
         DWORD dwSectorIndex = hf->dwFilePos / hf->dwSectorSize;
         DWORD dwBytesToCopy;
 
-        // Process all data. 
+        // Process all data.
         while(dwDataSize != 0)
         {
             dwBytesToCopy = dwDataSize;
-                
+
             // Check for sector overflow
             if(dwBytesToCopy > (hf->dwSectorSize - dwBytesInSector))
                 dwBytesToCopy = (hf->dwSectorSize - dwBytesInSector);
@@ -214,7 +214,7 @@ static int WriteDataToMpqFile(
                         // by the first sector compression. This is because the entire sector must
                         // be compressed by the same compression.
                         //
-                        // Test case:                        
+                        // Test case:
                         //
                         // WRITE_FILE(hFile, pvBuffer, 0x10, MPQ_COMPRESSION_PKWARE)       // Write 0x10 bytes (sector 0)
                         // WRITE_FILE(hFile, pvBuffer, 0x10, MPQ_COMPRESSION_ADPCM_MONO)   // Write 0x10 bytes (still sector 0)
@@ -236,7 +236,7 @@ static int WriteDataToMpqFile(
                     // We have to calculate sector CRC, if enabled
                     if(hf->SectorChksums != NULL)
                         hf->SectorChksums[dwSectorIndex] = adler32(0, pbCompressed, nOutBuffer);
-                }                 
+                }
 
                 // Encrypt the sector, if necessary
                 if(pFileEntry->dwFlags & MPQ_FILE_ENCRYPTED)
@@ -370,7 +370,7 @@ static int RecryptFileData(
             }
 
             // If necessary, re-encrypt the sector
-            // Note: Recompression is not necessary here. Unlike encryption, 
+            // Note: Recompression is not necessary here. Unlike encryption,
             // the compression does not depend on the position of the file in MPQ.
             BSWAP_ARRAY32_UNSIGNED(hf->pbFileSector, dwRawDataInSector);
             DecryptMpqBlock(hf->pbFileSector, dwRawDataInSector, dwOldKey + dwSector);
@@ -422,7 +422,7 @@ int SFileAddFile_Init(
     // Sector CRC is not allowed if the file is not compressed
     if(!(dwFlags & MPQ_FILE_COMPRESS_MASK))
         dwFlags &= ~MPQ_FILE_SECTOR_CRC;
-    
+
     // Fix Key is not allowed if the file is not enrypted
     if(!(dwFlags & MPQ_FILE_ENCRYPTED))
         dwFlags &= ~MPQ_FILE_FIX_KEY;
@@ -456,7 +456,7 @@ int SFileAddFile_Init(
             if(pFileEntry != NULL)
                 InvalidateInternalFiles(ha);
             else
-                nError = ERROR_DISK_FULL;   
+                nError = ERROR_DISK_FULL;
         }
 
         // Set the file entry to the file structure
@@ -592,7 +592,7 @@ int SFileAddFile_Write(TMPQFile * hf, const void * pvData, DWORD dwSize, DWORD d
         if(hf->pPatchInfo == NULL && IsIncrementalPatchFile(pvData, dwSize, &hf->dwPatchedFileSize))
         {
             // Set the MPQ_FILE_PATCH_FILE flag
-            hf->pFileEntry->dwFlags |= MPQ_FILE_PATCH_FILE;
+            pFileEntry->dwFlags |= MPQ_FILE_PATCH_FILE;
 
             // Allocate the patch info
             hf->nAddFileError = nError = AllocatePatchInfo(hf, false);
@@ -621,7 +621,7 @@ int SFileAddFile_Write(TMPQFile * hf, const void * pvData, DWORD dwSize, DWORD d
         {
             if(!FileStream_Write(ha->pStream, &RawFilePos, hf->pPatchInfo, hf->pPatchInfo->dwLength))
                 nError = GetLastError();
-  
+
             pFileEntry->dwCmpSize += hf->pPatchInfo->dwLength;
             RawFilePos += hf->pPatchInfo->dwLength;
         }
@@ -659,10 +659,10 @@ int SFileAddFile_Write(TMPQFile * hf, const void * pvData, DWORD dwSize, DWORD d
         if(hf->dwFilePos >= pFileEntry->dwFileSize)
         {
             // Finish calculating CRC32
-            hf->pFileEntry->dwCrc32 = hf->dwCrc32;
+            pFileEntry->dwCrc32 = hf->dwCrc32;
 
             // Finish calculating MD5
-            md5_done((hash_state *)hf->hctx, hf->pFileEntry->md5);
+            md5_done((hash_state *)hf->hctx, pFileEntry->md5);
 
             // If we also have sector checksums, write them to the file
             if(hf->SectorChksums != NULL)
@@ -673,9 +673,9 @@ int SFileAddFile_Write(TMPQFile * hf, const void * pvData, DWORD dwSize, DWORD d
             // Now write patch info
             if(hf->pPatchInfo != NULL)
             {
-                memcpy(hf->pPatchInfo->md5, hf->pFileEntry->md5, MD5_DIGEST_SIZE);
-                hf->pPatchInfo->dwDataSize  = hf->pFileEntry->dwFileSize;
-                hf->pFileEntry->dwFileSize = hf->dwPatchedFileSize;
+                memcpy(hf->pPatchInfo->md5, pFileEntry->md5, MD5_DIGEST_SIZE);
+                hf->pPatchInfo->dwDataSize  = pFileEntry->dwFileSize;
+                pFileEntry->dwFileSize = hf->dwPatchedFileSize;
                 nError = WritePatchInfo(hf);
             }
 
@@ -689,12 +689,16 @@ int SFileAddFile_Write(TMPQFile * hf, const void * pvData, DWORD dwSize, DWORD d
             if(ha->pHeader->dwRawChunkSize != 0)
             {
                 nError = WriteMpqDataMD5(ha->pStream,
-                                         ha->MpqPos + hf->pFileEntry->ByteOffset,
+                                         ha->MpqPos + pFileEntry->ByteOffset,
                                          hf->pFileEntry->dwCmpSize,
                                          ha->pHeader->dwRawChunkSize);
             }
         }
     }
+
+    // Update the archive size
+    if((ha->MpqPos + pFileEntry->ByteOffset + pFileEntry->dwCmpSize) > ha->FileSize)
+        ha->FileSize = ha->MpqPos + pFileEntry->ByteOffset + pFileEntry->dwCmpSize;
 
     // Store the error code from the Write File operation
     hf->nAddFileError = nError;
@@ -750,7 +754,7 @@ int SFileAddFile_Finish(TMPQFile * hf)
 }
 
 //-----------------------------------------------------------------------------
-// Adds data as file to the archive 
+// Adds data as file to the archive
 
 bool WINAPI SFileCreateFile(
     HANDLE hMpq,
@@ -771,7 +775,7 @@ bool WINAPI SFileCreateFile(
         nError = ERROR_INVALID_PARAMETER;
     if(phFile == NULL)
         nError = ERROR_INVALID_PARAMETER;
-    
+
     // Don't allow to add file if the MPQ is open for read only
     if(nError == ERROR_SUCCESS)
     {
@@ -837,7 +841,7 @@ bool WINAPI SFileWriteFile(
 //
 //      if(dwFlags & MPQ_FILE_ENCRYPTED)
 //          nError = ERROR_INVALID_PARAMETER;
-        
+
         // Lossy compression is not allowed on single unit files
         if(dwCompression & MPQ_LOSSY_COMPRESSION_MASK)
             nError = ERROR_INVALID_PARAMETER;
@@ -847,7 +851,7 @@ bool WINAPI SFileWriteFile(
     // Write the data to the file
     if(nError == ERROR_SUCCESS)
         nError = SFileAddFile_Write(hf, pvData, dwSize, dwCompression);
-    
+
     // Deal with errors
     if(nError != ERROR_SUCCESS)
         SetLastError(nError);
@@ -868,7 +872,7 @@ bool WINAPI SFileFinishFile(HANDLE hFile)
     // Finish the file
     if(nError == ERROR_SUCCESS)
         nError = SFileAddFile_Finish(hf);
-    
+
     // Deal with errors
     if(nError != ERROR_SUCCESS)
         SetLastError(nError);
@@ -876,7 +880,7 @@ bool WINAPI SFileFinishFile(HANDLE hFile)
 }
 
 //-----------------------------------------------------------------------------
-// Adds a file to the archive 
+// Adds a file to the archive
 
 bool WINAPI SFileAddFileEx(
     HANDLE hMpq,
@@ -933,7 +937,7 @@ bool WINAPI SFileAddFileEx(
         // we will copy the compression for the first sector
         if(dwCompressionNext == MPQ_COMPRESSION_NEXT_SAME)
             dwCompressionNext = dwCompression;
-        
+
         // If the caller wants ADPCM compression, we make sure
         // that the first sector is not compressed with lossy compression
         if(dwCompressionNext & (MPQ_COMPRESSION_ADPCM_MONO | MPQ_COMPRESSION_ADPCM_STEREO))
@@ -942,7 +946,7 @@ bool WINAPI SFileAddFileEx(
             // in order not to corrupt the headers
             if(dwCompression & (MPQ_COMPRESSION_ADPCM_MONO | MPQ_COMPRESSION_ADPCM_STEREO))
                 dwCompression = MPQ_COMPRESSION_PKWARE;
-            
+
             // Remove both flag mono and stereo flags.
             // They will be re-added according to WAVE type
             dwCompressionNext &= ~(MPQ_COMPRESSION_ADPCM_MONO | MPQ_COMPRESSION_ADPCM_STEREO);
@@ -950,7 +954,7 @@ bool WINAPI SFileAddFileEx(
         }
 
         // Initiate adding file to the MPQ
-        if(!SFileCreateFile(hMpq, szArchivedName, FileTime, (DWORD)FileSize, lcFileLocale, dwFlags, &hMpqFile))
+        if(!SFileCreateFile(hMpq, szArchivedName, FileTime, (DWORD)FileSize, g_lcFileLocale, dwFlags, &hMpqFile))
             nError = GetLastError();
     }
 
@@ -1016,7 +1020,7 @@ bool WINAPI SFileAddFileEx(
         SetLastError(nError);
     return (nError == ERROR_SUCCESS);
 }
-                                                                                                                                 
+
 // Adds a data file into the archive
 bool WINAPI SFileAddFile(HANDLE hMpq, const TCHAR * szFileName, const char * szArchivedName, DWORD dwFlags)
 {
@@ -1043,7 +1047,7 @@ bool WINAPI SFileAddWave(HANDLE hMpq, const TCHAR * szFileName, const char * szA
     // Starcraft files are packed as Mono (0x41) on medium quality.
     // Because this compression is not used anymore, our compression functions
     // will default to WaveCompressionLevel = 4 when using ADPCM compression
-    // 
+    //
 
     // Convert quality to data compression
     switch(dwQuality)
@@ -1161,7 +1165,7 @@ bool WINAPI SFileRenameFile(HANDLE hMpq, const char * szFileName, const char * s
     // Open the new file. If exists, we don't allow rename operation
     if(nError == ERROR_SUCCESS)
     {
-        if(GetFileEntryLocale(ha, szNewFileName, lcFileLocale) != NULL)
+        if(GetFileEntryLocale(ha, szNewFileName, g_lcFileLocale) != NULL)
             nError = ERROR_ALREADY_EXISTS;
     }
 
@@ -1186,7 +1190,7 @@ bool WINAPI SFileRenameFile(HANDLE hMpq, const char * szFileName, const char * s
             {
                 // Recrypt the file data in the MPQ
                 nError = RecryptFileData(ha, hf, szFileName, szNewFileName);
-                
+
                 // Update the MD5 of the raw block
                 if(nError == ERROR_SUCCESS && ha->pHeader->dwRawChunkSize != 0)
                 {

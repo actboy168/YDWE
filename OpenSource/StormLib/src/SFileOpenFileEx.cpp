@@ -124,36 +124,37 @@ bool OpenPatchedFile(HANDLE hMpq, const char * szFileName, HANDLE * PtrFile)
     }
 
     // If we couldn't find the base file in any of the patches, it doesn't exist
-    if((ha = haBase) == NULL)
+    if((ha = haBase) != NULL)
     {
-        SetLastError(ERROR_FILE_NOT_FOUND);
-        return false;
-    }
-
-    // Now open the base file
-    if(SFileOpenFileEx((HANDLE)ha, GetPatchFileName(ha, szFileName, szNameBuffer), SFILE_OPEN_BASE_FILE, (HANDLE *)&hfBase))
-    {
-        // The file must be a base file, i.e. without MPQ_FILE_PATCH_FILE
-        assert((hfBase->pFileEntry->dwFlags & MPQ_FILE_PATCH_FILE) == 0);
-        hf = hfBase;
-
-        // Now open all patches and attach them on top of the base file
-        for(ha = ha->haPatch; ha != NULL; ha = ha->haPatch)
+        // Now open the base file
+        if(SFileOpenFileEx((HANDLE)ha, GetPatchFileName(ha, szFileName, szNameBuffer), SFILE_OPEN_BASE_FILE, (HANDLE *)&hfBase))
         {
-            // Prepare the file name with a correct prefix
-            if(SFileOpenFileEx((HANDLE)ha, GetPatchFileName(ha, szFileName, szNameBuffer), SFILE_OPEN_BASE_FILE, &hPatchFile))
+            // The file must be a base file, i.e. without MPQ_FILE_PATCH_FILE
+            assert((hfBase->pFileEntry->dwFlags & MPQ_FILE_PATCH_FILE) == 0);
+            hf = hfBase;
+
+            // Now open all patches and attach them on top of the base file
+            for(ha = ha->haPatch; ha != NULL; ha = ha->haPatch)
             {
-                // Remember the new version
-                hfPatch = (TMPQFile *)hPatchFile;
+                // Prepare the file name with a correct prefix
+                if(SFileOpenFileEx((HANDLE)ha, GetPatchFileName(ha, szFileName, szNameBuffer), SFILE_OPEN_BASE_FILE, &hPatchFile))
+                {
+                    // Remember the new version
+                    hfPatch = (TMPQFile *)hPatchFile;
 
-                // We should not find patch file
-                assert((hfPatch->pFileEntry->dwFlags & MPQ_FILE_PATCH_FILE) != 0);
+                    // We should not find patch file
+                    assert((hfPatch->pFileEntry->dwFlags & MPQ_FILE_PATCH_FILE) != 0);
 
-                // Attach the patch to the base file
-                hf->hfPatch = hfPatch;
-                hf = hfPatch;
+                    // Attach the patch to the base file
+                    hf->hfPatch = hfPatch;
+                    hf = hfPatch;
+                }
             }
         }
+    }
+    else
+    {
+        SetLastError(ERROR_FILE_NOT_FOUND);
     }
 
     // Give the updated base MPQ
@@ -167,7 +168,7 @@ bool OpenPatchedFile(HANDLE hMpq, const char * szFileName, HANDLE * PtrFile)
 /*****************************************************************************/
 
 //-----------------------------------------------------------------------------
-// SFileEnumLocales enums all locale versions within MPQ. 
+// SFileEnumLocales enums all locale versions within MPQ.
 // Functions fills all available language identifiers on a file into the buffer
 // pointed by plcLocales. There must be enough entries to copy the localed,
 // otherwise the function returns ERROR_INSUFFICIENT_BUFFER.
@@ -197,7 +198,7 @@ int WINAPI SFileEnumLocales(
         return ERROR_INVALID_PARAMETER;
     if(IsPseudoFileName(szFileName, &dwFileIndex))
         return ERROR_INVALID_PARAMETER;
-    
+
     // Keep compiler happy
     dwMaxLocales = PtrMaxLocales[0];
     dwSearchScope = dwSearchScope;
@@ -258,11 +259,11 @@ bool WINAPI SFileOpenFileEx(HANDLE hMpq, const char * szFileName, DWORD dwSearch
             case SFILE_OPEN_FROM_MPQ:
             case SFILE_OPEN_BASE_FILE:
             case SFILE_OPEN_CHECK_EXISTS:
-                
+
                 // If this MPQ has no patches, open the file from this MPQ directly
                 if(ha->haPatch == NULL || dwSearchScope == SFILE_OPEN_BASE_FILE)
                 {
-                    pFileEntry = GetFileEntryLocale2(ha, szFileName, lcFileLocale, &dwHashIndex);
+                    pFileEntry = GetFileEntryLocale2(ha, szFileName, g_lcFileLocale, &dwHashIndex);
                 }
 
                 // If this MPQ is a patched archive, open the file as patched
@@ -283,7 +284,7 @@ bool WINAPI SFileOpenFileEx(HANDLE hMpq, const char * szFileName, DWORD dwSearch
             case SFILE_OPEN_LOCAL_FILE:
 
                 // Open a local file
-                return OpenLocalFile(szFileName, PtrFile); 
+                return OpenLocalFile(szFileName, PtrFile);
 
             default:
 
@@ -296,24 +297,45 @@ bool WINAPI SFileOpenFileEx(HANDLE hMpq, const char * szFileName, DWORD dwSearch
     // Check whether the file really exists in the MPQ
     if(nError == ERROR_SUCCESS)
     {
-        if(pFileEntry == NULL || (pFileEntry->dwFlags & MPQ_FILE_EXISTS) == 0)
+        // If we didn't find the file, try to open it using pseudo file name ("File
+        if (pFileEntry == NULL || (pFileEntry->dwFlags & MPQ_FILE_EXISTS) == 0)
         {
-            // Check the pseudo-file name
-            if((bOpenByIndex = IsPseudoFileName(szFileName, &dwFileIndex)) == true)
+            // Check the pseudo-file name ("File00000001.ext")
+            if ((bOpenByIndex = IsPseudoFileName(szFileName, &dwFileIndex)) == true)
             {
                 // Get the file entry for the file
-                if(dwFileIndex < ha->dwFileTableSize)
+                if (dwFileIndex < ha->dwFileTableSize)
                 {
                     pFileEntry = ha->pFileTable + dwFileIndex;
                 }
             }
 
-            nError = ERROR_FILE_NOT_FOUND;
+            // Still not found?
+            if (pFileEntry == NULL)
+            {
+                nError = ERROR_FILE_NOT_FOUND;
+            }
         }
 
-        // Ignore unknown loading flags (example: MPQ_2016_v1_WME4_4.w3x)
-//      if(pFileEntry != NULL && pFileEntry->dwFlags & ~MPQ_FILE_VALID_FLAGS)
-//          nError = ERROR_NOT_SUPPORTED;
+        // Perform some checks of invalid files
+        if (pFileEntry != NULL)
+        {
+            // MPQ protectors use insanely amount of fake files, often with very high size.
+            // We won't open any files whose compressed size is bigger than archive size
+            // If the file is not compressed, its size cannot be bigger than archive size
+            if ((pFileEntry->dwFlags & MPQ_FILE_COMPRESS_MASK) == 0 && (pFileEntry->dwFileSize > ha->FileSize))
+            {
+                nError = ERROR_FILE_CORRUPT;
+                pFileEntry = NULL;
+            }
+
+            // Ignore unknown loading flags (example: MPQ_2016_v1_WME4_4.w3x)
+//          if(pFileEntry->dwFlags & ~MPQ_FILE_VALID_FLAGS)
+//          {
+//              nError = ERROR_NOT_SUPPORTED;
+//              pFileEntry = NULL;
+//          }
+        }
     }
 
     // Did the caller just wanted to know if the file exists?
@@ -383,7 +405,7 @@ bool WINAPI SFileHasFile(HANDLE hMpq, const char * szFileName)
 bool WINAPI SFileCloseFile(HANDLE hFile)
 {
     TMPQFile * hf = (TMPQFile *)hFile;
-    
+
     if(!IsValidFileHandle(hFile))
     {
         SetLastError(ERROR_INVALID_HANDLE);

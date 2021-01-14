@@ -216,7 +216,7 @@ static bool CalculateMpqHashMd5(
         if(dwToRead == 0)
             break;
 
-        // Read the next chunk 
+        // Read the next chunk
         if(!FileStream_Read(ha->pStream, &BeginBuffer, pbDigestBuffer, dwToRead))
         {
             STORM_FREE(pbDigestBuffer);
@@ -312,7 +312,7 @@ static bool CalculateMpqHashSha1(
         if(dwToRead == 0)
             break;
 
-        // Read the next chunk 
+        // Read the next chunk
         if(!FileStream_Read(ha->pStream, &BeginBuffer, pbDigestBuffer, dwToRead))
         {
             STORM_FREE(pbDigestBuffer);
@@ -482,7 +482,7 @@ static DWORD VerifyStrongSignatureWithKey(
     // Verify the signature
     if(rsa_verify_simple(reversed_signature, MPQ_STRONG_SIGNATURE_SIZE, padded_digest, MPQ_STRONG_SIGNATURE_SIZE, &result, &key) != CRYPT_OK)
         return ERROR_VERIFY_FAILED;
-    
+
     // Free the key and return result
     rsa_free(&key);
     return result ? ERROR_STRONG_SIGNATURE_OK : ERROR_STRONG_SIGNATURE_ERROR;
@@ -592,7 +592,7 @@ static DWORD VerifyFile(
                 dwVerifyResult |= VERIFY_FILE_HAS_RAW_MD5;
 
                 // Find file entry for the file
-                pFileEntry = GetFileEntryLocale(ha, szFileName, lcFileLocale);
+                pFileEntry = GetFileEntryLocale(ha, szFileName, g_lcFileLocale);
                 if(pFileEntry != NULL)
                 {
                     // If the file's raw MD5 doesn't match, don't bother with more checks
@@ -639,7 +639,7 @@ static DWORD VerifyFile(
             // Update CRC32 value
             if(dwFlags & SFILE_VERIFY_FILE_CRC)
                 dwCrc32 = crc32(dwCrc32, Buffer, dwBytesRead);
-            
+
             // Update MD5 value
             if(dwFlags & SFILE_VERIFY_FILE_MD5)
                 md5_process(&md5_state, Buffer, dwBytesRead);
@@ -714,7 +714,7 @@ static DWORD VerifyFile(
     if(pdwCrc32 != NULL)
         *pdwCrc32 = dwCrc32;
     if(pMD5 != NULL)
-        memcpy(pMD5, md5, MD5_DIGEST_SIZE); 
+        memcpy(pMD5, md5, MD5_DIGEST_SIZE);
 
     return dwVerifyResult;
 }
@@ -767,7 +767,7 @@ bool QueryMpqSignatureInfo(
 
         // Check the signature header "NGIS"
         if(pSI->Signature[0] != 'N' || pSI->Signature[1] != 'G' || pSI->Signature[2] != 'I' || pSI->Signature[3] != 'S')
-            return false;
+            return true; //Not a valid signature, but another filetype could've been appended so not always an error.
 
         pSI->SignatureTypes |= SIGNATURE_TYPE_STRONG;
         return true;
@@ -853,7 +853,7 @@ int SSignFileFinish(TMPQArchive * ha)
     // Sign the hash
     memset(WeakSignature, 0, sizeof(WeakSignature));
     rsa_sign_hash_ex(Md5Digest, sizeof(Md5Digest), WeakSignature + 8, &signature_len, LTC_LTC_PKCS_1_V1_5, 0, 0, hash_idx, 0, &key);
-	memrev(WeakSignature + 8, MPQ_WEAK_SIGNATURE_SIZE); 
+	memrev(WeakSignature + 8, MPQ_WEAK_SIGNATURE_SIZE);
     rsa_free(&key);
 
     // Write the signature to the MPQ. Don't use SFile* functions, but write the hash directly
@@ -922,7 +922,7 @@ int WINAPI SFileVerifyRawData(HANDLE hMpq, DWORD dwWhatToVerify, const char * sz
     switch(dwWhatToVerify)
     {
         case SFILE_VERIFY_MPQ_HEADER:
-            
+
             // Only if the header is of version 4 or newer
             if(pHeader->dwHeaderSize >= (MPQ_HEADER_SIZE_V4 - MD5_DIGEST_SIZE))
                 return VerifyRawMpqData(ha, 0, MPQ_HEADER_SIZE_V4 - MD5_DIGEST_SIZE);
@@ -964,7 +964,7 @@ int WINAPI SFileVerifyRawData(HANDLE hMpq, DWORD dwWhatToVerify, const char * sz
                 return ERROR_INVALID_PARAMETER;
 
             // Get the offset of a file
-            pFileEntry = GetFileEntryLocale(ha, szFileName, lcFileLocale);
+            pFileEntry = GetFileEntryLocale(ha, szFileName, g_lcFileLocale);
             if(pFileEntry == NULL)
                 return ERROR_FILE_NOT_FOUND;
 
