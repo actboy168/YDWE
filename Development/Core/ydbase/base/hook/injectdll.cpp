@@ -16,7 +16,17 @@ namespace base { namespace hook {
 		if (!IsWow64Process(hProcess, &is_x64)) {
 			return false;
 		}
-		return !is_x64;
+		if (is_x64) {
+			// 64位系统运行32位程序
+			return false;// return !is_x64
+		}
+		SYSTEM_INFO systemInfo = { 0 };
+		GetNativeSystemInfo(&systemInfo);
+		if (systemInfo.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_INTEL /* && !is_x64 */) {
+			// 32位系统运行32位程序
+			return false;
+		}
+		return true;// return !is_x64
 	}
 
 	bool injectdll_x64(const PROCESS_INFORMATION& pi, const std::wstring& dll) {
